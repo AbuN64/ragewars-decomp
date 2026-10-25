@@ -70,8 +70,8 @@ extern s32 Pak_SaveNote(s32, s32, void *, char *, char *, char *);
 extern void Frontend_RefreshPlayerPanel(s32);
 /* The save view of the menu block: the four player records staged at 0x2E28, then the profile and
  * checksum stored behind them, written to the pak as one 0x648-byte note. */
-static __inline__ struct Block_func_804347CC_de *pakRecordSave(void) {
-    return (struct Block_func_804347CC_de *)D_800E54A4;
+static __inline__ PakMenuController *pakRecordSave(void) {
+    return D_800E54A4;
 }
 /* The note's game code is read through the settings view in the PAL releases. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -88,7 +88,7 @@ s32 Frontend_SavePlayerRecords(s32 channel)
     char name[16];
     struct { s32 note, fits, freePages, freeNotes; } space;
     s32 status, required;
-    struct Record_func_804347CC_de *staged, *data;
+    Profile *staged, *data;
     s32 i;
     u32 checksum;
     s32 success = 0;
@@ -113,12 +113,12 @@ s32 Frontend_SavePlayerRecords(s32 channel)
     if (success == 1) {
         success = 0;
         if (Ovlgame_FindFreeNoteExtension(channel, extension) == 0) {
-            staged = pakRecordSave()->saved;
+            staged = pakRecordSave()->packet.saved;
             Resmgr_CopyBytes(staged, pakRecordSave()->players[channel].records, 0x640);
-            pakRecordSave()->savedProfile = pakRecordSave()->players[channel].profile;
+            pakRecordSave()->packet.savedProfile = pakRecordSave()->players[channel].profile;
             checksum = Ovlgame_Crc32(staged, 0x640, 7);
-            pakRecordSave()->checksum = checksum;
-            data = pakRecordSave()->saved;
+            pakRecordSave()->packet.checksum = checksum;
+            data = pakRecordSave()->packet.saved;
             for (i = 0; i < 16; i++) name[i] = 0;
             Resmgr_CopyString(name, RW_PAK_RECORD_TITLE);
             if (Pak_SaveNote(channel, 0x648, data, name, extension, RECORDS_NOTE_CODE) == 0) success = 1;

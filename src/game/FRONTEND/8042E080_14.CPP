@@ -1,11 +1,11 @@
 #include "include_asm.h"
+#include "FRONTEND/PAKMENU.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "FRONTEND/8042E080_53.H"
 
-extern PakState *D_800E54A4;
 extern char *D_800D3758;
 
 extern char D_800DDEC0[];
@@ -88,8 +88,8 @@ void func_80433EA0_de(s32 player)
                     Resmgr_CopyString(name, (D_800D3758));
 #endif
                 }
-                Resmgr_CopyString(D_800E54A4->slots[player].notes[i].name, name);
-                func_802A0C08_de(D_800E54A4->slots[player].notes[i].size,
+                Resmgr_CopyString(D_800E54A4->players[player].noteTexts[i].name, name);
+                func_802A0C08_de(D_800E54A4->players[player].noteTexts[i].size,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800DDEC0,
 #else
@@ -97,14 +97,14 @@ D_800DDEB0_de,
 #endif
  size);
                 if (ext[0] != 0) {
-                    func_802A0C08_de(D_800E54A4->slots[player].notes[i].label,
+                    func_802A0C08_de(D_800E54A4->players[player].noteTexts[i].label,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800EE534,
 #else
 controller_pak_note_label_format,
 #endif
  i + 1,
-                                  D_800E54A4->slots[player].notes[i].name, ext);
+                                  D_800E54A4->players[player].noteTexts[i].name, ext);
                     continue;
                 }
                 goto numbered;
@@ -113,13 +113,13 @@ controller_pak_note_label_format,
             failed = 1;
         }
 #if defined(VERSION_EU)
-        Resmgr_CopyString(D_800E54A4->slots[player].notes[i].name, ((D_800E1394)[settings->language]));
+        Resmgr_CopyString(D_800E54A4->players[player].noteTexts[i].name, ((D_800E1394)[settings->language]));
 #elif defined(VERSION_EU_X)
-        Resmgr_CopyString(D_800E54A4->slots[player].notes[i].name, ((D_800DD124)[settings->language]));
+        Resmgr_CopyString(D_800E54A4->players[player].noteTexts[i].name, ((D_800DD124)[settings->language]));
 #else
-        Resmgr_CopyString(D_800E54A4->slots[player].notes[i].name, ((char *)D_800D3250[0]));
+        Resmgr_CopyString(D_800E54A4->players[player].noteTexts[i].name, ((char *)D_800D3250[0]));
 #endif
-        func_802A0C08_de(D_800E54A4->slots[player].notes[i].size,
+        func_802A0C08_de(D_800E54A4->players[player].noteTexts[i].size,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800DDEC0,
 #else
@@ -127,51 +127,51 @@ D_800DDEB0_de,
 #endif
  0);
     numbered:
-        func_802A0C08_de(D_800E54A4->slots[player].notes[i].label,
+        func_802A0C08_de(D_800E54A4->players[player].noteTexts[i].label,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800EE540,
 #else
 D_800DDEC0,
 #endif
  i + 1,
-                      D_800E54A4->slots[player].notes[i].name);
+                      D_800E54A4->players[player].noteTexts[i].name);
     }
     if (failed == 0) {
         /* the hub EC30 returns the item view; Label is this unit's text-bearing view of it */
-        item = (Label *)func_8040EC30_de(D_800E54A4->slots[player].menu, PAK_RESOURCE_2D8);
+        item = (Label *)func_8040EC30_de(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2D8);
         if (Pak_GetFreePages(player, &size) == 0) {
-            func_802A0C08_de(D_800E54A4->slots[player].free,
+            func_802A0C08_de(D_800E54A4->players[player].freeText,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800DDEC0,
 #else
 D_800DDEB0_de,
 #endif
  size);
-            item->text = D_800E54A4->slots[player].free;
-            item = (Label *)func_8040EC30_de(D_800E54A4->slots[player].menu, PAK_RESOURCE_2D7);
+            item->text = D_800E54A4->players[player].freeText;
+            item = (Label *)func_8040EC30_de(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2D7);
             size = Frontend_GetRecordsNoteSize();
-            func_802A0C08_de(D_800E54A4->slots[player].used,
+            func_802A0C08_de(D_800E54A4->players[player].usedText,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800DDEC0,
 #else
 D_800DDEB0_de,
 #endif
  Ovlgame_BytesToPakPages(size));
-            item->text = D_800E54A4->slots[player].used;
+            item->text = D_800E54A4->players[player].usedText;
         } else {
             failed = 1;
         }
     }
     if (failed == 1) {
-        D_800E54A4->slots[player].state = failed;
+        D_800E54A4->players[player].state = failed;
         Frontend_RefreshPlayerPanel(player, PAK_RESOURCE_2DB);
         return;
     }
-    D_800E54A4->slots[player].cursor = -1;
-    D_800E54A4->slots[player].scroll = 0;
-    D_800E54A4->slots[player].items[0] = func_8040EC30_de(D_800E54A4->slots[player].menu, PAK_RESOURCE_2DB);
-    D_800E54A4->slots[player].items[1] = func_8040EC30_de(D_800E54A4->slots[player].menu, PAK_RESOURCE_2DC);
-    D_800E54A4->slots[player].items[2] = func_8040EC30_de(D_800E54A4->slots[player].menu, PAK_RESOURCE_2DD);
+    D_800E54A4->players[player].slot = -1;
+    D_800E54A4->players[player].scroll = 0;
+    D_800E54A4->players[player].labels[0] = func_8040EC30_de(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2DB);
+    D_800E54A4->players[player].labels[1] = func_8040EC30_de(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2DC);
+    D_800E54A4->players[player].labels[2] = func_8040EC30_de(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2DD);
     func_80434250_de(player, 1);
 }
 

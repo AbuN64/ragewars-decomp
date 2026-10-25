@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "FRONTEND/PAKMENU.H"
 #if defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_DE) || defined(VERSION_EU_X)
 #if defined(VERSION_EU)
 #define func_8042F130_us_rev1 func_8042FBF0_eu
@@ -127,65 +128,6 @@
 /* Creates the match setup block D_800E54A4 for screen arg0: allocates and clears it, loads its sprites and centres the two banner rows, links every player slot, shows the header for the game mode, resets each player's menu state, records and name entries, then starts each player in the state the mode needs (team handoff for mode 5, memory-card check for mode 6, the host for mode 7) and starts the menu music. Returns zero. */
 
 
-typedef struct PakSetupRecord {
-    char pad0[0x190];
-} PakSetupRecord;
-
-typedef struct PakSetupName {
-    char pad0[0x28];
-    u8 code[0x14];
-    u8 text[0xA];
-} PakSetupName;
-
-typedef struct PakSetupPlayer {
-    s32 state;
-    s32 sub;
-    s32 next;
-    s32 menu;
-    MenuWidget *sprite;
-    s32 back;
-    PakSetupRecord records[4];
-    PakSetupName names[16];
-    u8 codes[3][0xA];
-    char padAD6[0xAD8 - 0xAD6];
-    s32 slot;
-    char padADC[0xAEC - 0xADC];
-    s32 choice;
-    s32 used[4];
-    s32 notes[4];
-    char padB10[0xB28 - 0xB10];
-    s32 port;
-    s32 record;
-    s32 host;
-    char padB34[0xB64 - 0xB34];
-    s32 profile;
-} PakSetupPlayer;
-
-typedef struct PakSetupLink {
-    s32 player;
-    s32 slot;
-    s32 state;
-} PakSetupLink;
-
-typedef struct PakSetupState {
-    void *screen;
-    void *menu;
-    char setup[0x24 - 0x8];
-    void *music;
-    MenuWidget *title;
-    s32 counts[4];
-    MenuWidget *top;
-    s32 topStep;
-    MenuWidget *bottom;
-    s32 bottomStep;
-    s32 ready;
-    s32 slots;
-    s32 mode;
-    PakSetupPlayer players[4];
-    PakSetupLink links[4];
-    char pad2E28[0x3470 - 0x2E28];
-    s32 focus;
-} PakSetupState;
 
 typedef struct PakSetupProfile {
     char pad0[0xD];
@@ -195,7 +137,6 @@ typedef struct PakSetupProfile {
 } PakSetupProfile;
 
 
-extern PakSetupState *D_800E54A4;
 extern s32 D_800E54A0;
 extern s32 D_800DF4C0;
 extern s32 D_800DF4C4;
@@ -211,7 +152,7 @@ extern void *func_80419E54_de(s32, s32);
 extern void func_80433BCC_de(s32);
 extern void Frontend_RefreshPlayerPanel(s32);
 extern void func_80264770_de(s32);
-extern void func_8022EF30_de(PakSetupRecord *);
+extern void func_8022EF30_de(Profile *);
 extern void func_80404E28_de(s32);
 extern s32 Pak_GetStatus(s32);
 extern void func_8040C428_de(s32);
@@ -219,7 +160,7 @@ extern void func_802A2394_de(void);
 extern void func_802A2418_de(s32);
 
 s32 func_8042F130_us_rev1(void *screen) {
-    PakSetupState *block;
+    PakMenuController *block;
     Shared_Game *globals;
     MenuWidget *sprite;
     MenuWidget *row;
@@ -227,20 +168,20 @@ s32 func_8042F130_us_rev1(void *screen) {
     s32 i;
     s32 j;
 
-    block = Scene_AllocateMemory(sizeof(PakSetupState));
+    block = Scene_AllocateMemory(sizeof(PakMenuController));
     D_800E54A4 = block;
-    block->screen = screen;
-    func_8043C210_de(block->setup, 0x67, 0, 0, 0);
-    D_800E54A4->menu = func_8041B610_de(screen, 4);
+    block->window = screen;
+    func_8043C210_de(block->menu, 0x67, 0, 0, 0);
+    D_800E54A4->list = func_8041B610_de(screen, 4);
     func_8041B6E8_de(screen, 0, SPRITE_285);
     func_8041B6E8_de(screen, 1, SPRITE_285);
     func_8041B6E8_de(screen, 2, SPRITE_285);
     func_8041B6E8_de(screen, 3, SPRITE_285);
     for (i = 0; i < 4; i++) {
-        D_800E54A4->counts[i] = 0;
+        D_800E54A4->selected[i] = 0;
     }
     D_800E54A4->ready = 1;
-    D_800E54A4->slots = 4;
+    D_800E54A4->timer = 4;
     D_800E54A4->top = func_8040EC30_de(screen, SPRITE_2FB);
     D_800E54A4->top->x -= D_800E54A4->top->w;
     D_800E54A4->topStep = D_800E54A4->top->w / 4;
@@ -259,13 +200,13 @@ s32 func_8042F130_us_rev1(void *screen) {
     D_800E54A4->players[1].sprite = func_8040EC30_de(screen, SPRITE_2A3);
     D_800E54A4->players[2].sprite = func_8040EC30_de(screen, SPRITE_2FD);
     D_800E54A4->players[3].sprite = func_8040EC30_de(screen, SPRITE_2FA);
-    D_800E54A4->mode = D_800E54A0;
+    D_800E54A4->phase = D_800E54A0;
     for (i = 0; i < 4; i++) {
         D_800E54A4->links[i].player = -1;
-        D_800E54A4->links[i].slot = 0;
+        D_800E54A4->links[i].entry = 0;
         D_800E54A4->links[i].state = 2;
     }
-    switch (D_800E54A4->mode) {
+    switch (D_800E54A4->phase) {
     case 5:
         sprite = func_8040EC30_de(screen, SPRITE_293);
         func_8040E8D8_de(sprite, 1);
@@ -303,7 +244,7 @@ s32 func_8042F130_us_rev1(void *screen) {
                 }
                 if (D_80102B00[i].owner >= 0) {
                     D_800E54A4->links[i].player = 0;
-                    D_800E54A4->links[i].slot = i;
+                    D_800E54A4->links[i].entry = i;
                     D_800E54A4->links[i].state = 1;
                 }
             }
@@ -328,8 +269,8 @@ s32 func_8042F130_us_rev1(void *screen) {
             func_8022EF30_de(&D_800E54A4->players[i].records[j]);
         }
         for (j = 0; j < 16; j++) {
-            Resmgr_FillMemory(D_800E54A4->players[i].names[j].code, 0, 0x14);
-            Resmgr_FillMemory(D_800E54A4->players[i].names[j].text, 0, 0xA);
+            Resmgr_FillMemory(D_800E54A4->players[i].noteTexts[j].name, 0, 0x14);
+            Resmgr_FillMemory(D_800E54A4->players[i].noteTexts[j].size, 0, 0xA);
         }
         Resmgr_FillMemory(D_800E54A4->players[i].codes[2], 0, 0xA);
         Resmgr_FillMemory(D_800E54A4->players[i].codes[1], 0, 0xA);
@@ -348,7 +289,7 @@ s32 func_8042F130_us_rev1(void *screen) {
         D_800E54A4->players[i].port = -1;
     }
     D_800E54A4->focus = -1;
-    switch (D_800E54A4->mode) {
+    switch (D_800E54A4->phase) {
     case 5:
         for (i = 0; i < 4; i++) {
             D_800E54A4->players[i].state = 0xE;

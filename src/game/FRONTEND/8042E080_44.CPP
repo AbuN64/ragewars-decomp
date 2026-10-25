@@ -1,4 +1,5 @@
 #include "COMMON/ENTRYRECAT6C.H"
+#include "FRONTEND/PAKMENU.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "TYPES.H"
 #include "FRONTEND/8042E080_44.H"
@@ -7,13 +8,12 @@
    of entry i of the 2920-byte records D_800E54A4 points to to 2. */
 
 
-extern struct EntryRecAt6C *D_800E54A4;
 
 void func_804350CC_de(s32 index) {
     struct EntryRecAt6C *entry;
 
     D_801462C8.playerSettings[index].enabled = 1;
-    entry = &D_800E54A4[index];
+    entry = (struct EntryRecAt6C *)((char *)D_800E54A4 + index * 0xB68);
     entry->second = 2;
     entry->first = 2;
 }

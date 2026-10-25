@@ -16,11 +16,6 @@ struct EntryRecAt6C {
     char pad70[2920 - 0x70];
 };
 
-struct Player_func_8043590C_de;
-struct Player_func_8043590C_de {
-    char a[0xB64];
-    s32 value;
-};
 
 struct ObjectState71;
 struct ObjectState71 {
@@ -28,28 +23,11 @@ struct ObjectState71 {
     char unk_70;
 };
 
-struct EntryCode8042E080;
-typedef struct EntryCode8042E080 EntryCode8042E080;
 
 
-struct PlayerSlotTable;
-struct Player_func_804356BC_de;
 struct Triple;
-struct PlayerSlotTable {
-    char pad0[0x58];
-    struct Player_func_804356BC_de players[4];
-    struct Triple places[4];
-};
-typedef struct PlayerSlotTable PlayerSlotTable;
 
-struct Player_func_8043590C_de;
-typedef struct Player_func_8043590C_de Player_func_8043590C_de;
 
-struct State_func_8043590C_de;
-struct State_func_8043590C_de {
-    char a[0x58];
-    Player_func_8043590C_de players[1];
-};
 
 struct IntegerState346C;
 typedef struct IntegerState346C IntegerState346C;
@@ -86,29 +64,15 @@ struct PlayerRecAtBA4 {
     int timer;
 };
 
-struct Table_func_804352C8_de;
 struct Triple;
-struct Table_func_804352C8_de {
-    char pad[0x2DF8];
-    struct Triple slots[1];
-};
 
-struct Game_func_80435128_de;
-typedef struct Game_func_80435128_de Game_func_80435128_de;
 
 struct IntegerStateBC0;
 typedef struct IntegerStateBC0 IntegerStateBC0;
 
-struct Base;
-typedef struct Base Base;
 
 
 
-struct Base;
-struct Base {
-    char pad[0x2DF0];
-    Triple slots[4];
-};
 
 
 struct func_80435898_S1;
@@ -121,40 +85,14 @@ struct func_80435898_S1 {
 
 extern int D_800E54A0;
 
-struct EntryCode8042E08080435128;
-typedef struct EntryCode8042E08080435128 EntryCode8042E08080435128;
-
-
-struct EntryCode8042E080;
-struct EntryCode8042E080 {
-    u8 pad0[0xB4C];
-    InventorySlot name[8];
-    s32 cursor;
-    u8 padB60[0x8];
-};
 
 
 
-struct PlayerCode8042E08080435128;
-typedef struct PlayerCode8042E08080435128 PlayerCode8042E08080435128;
 
-struct EntryCode8042E08080435128;
-struct EntryCode8042E08080435128 {
-    char pad[0x7D];
-    signed char state;
-    char pad7E[0x190 - 0x7E];
-};
 
-struct PlayerCode8042E08080435128;
-struct PlayerCode8042E08080435128 {
-    EntryCode8042E08080435128 entries[4];
-    char pad[0xB68 - 0x640];
-};
 
-struct Game_func_80435128_de;
-struct Game_func_80435128_de {
-    PlayerCode8042E08080435128 players[4];
-};
+
+
 
 
 struct IntegerState346C;
@@ -163,8 +101,6 @@ struct IntegerState346C {
     s32 unk_3468;
 };
 
-struct State_func_8043590C_de;
-typedef struct State_func_8043590C_de State_func_8043590C_de;
 
 
 struct IntegerStateBC0;
@@ -175,7 +111,6 @@ struct IntegerStateBC0 {
 
 extern float D_800DDED0;
 
-struct PlayerSlotTable;
 struct Triple;
 
 
@@ -217,20 +152,10 @@ typedef struct State_func_80434D70_de State_func_80434D70_de;
 
 
 
-struct NameEntryMenu;
-struct NameEntryMenu {
-    s32 unk0;
-    s32 unk4;
-    u8 pad8[0x24];
-    s32 flags[5];
-    EntryCode8042E080 entries[1];
-};
 
 struct ObjectState71;
 typedef struct ObjectState71 ObjectState71;
 
-struct NameEntryMenu;
-typedef struct NameEntryMenu NameEntryMenu;
 
 
 
