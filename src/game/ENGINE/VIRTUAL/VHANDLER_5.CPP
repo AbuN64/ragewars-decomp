@@ -136,7 +136,6 @@ void func_8023CDD4_de(RegionDesc *desc)
 
 #include "SCHED/RESOURCE_PAGE_WORKER.H"
 
-extern PagerState D_800FF230;
 extern char D_800FFCD0[];
 extern void func_802BCF70_de(u32, s32);
 extern void func_802BD010_de(u32, s32);

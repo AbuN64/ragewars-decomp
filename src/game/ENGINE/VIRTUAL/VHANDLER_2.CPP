@@ -32,7 +32,6 @@
 
 
 
-extern PagerState D_800FF230;
 extern char D_801011B8[];
 
 extern void func_8023CB60_de(Field_void_4 *base, Slot_func_8023B9C0_eu *slot);
@@ -311,7 +310,6 @@ INCLUDE_ASM("span_1000", func_8023B9B0_de);
 /* Array views share measured storage: FF F2A - FF B5B = 0x3CF;
  * the two four-byte-stride index streams occupy adjacent bytes. */
 
-extern PagerState D_800FF230;
 
 extern ResourcePageMapping *D_800FFE20;
 

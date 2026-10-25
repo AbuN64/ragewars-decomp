@@ -29,7 +29,6 @@ void **func_8025343C_de(s32 arg0, s32 arg1, s32 arg2, void *arg3);
 
 
 
-extern PagerState D_800FF230;
 
 void func_8023C6BC_de(void) {
     u32 var_a2;
@@ -110,7 +109,7 @@ void *func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2)
     temp_v1->model = temp_v0;
   }
   ((Draw *)blk.f30)->allocationMode = arg2;
-  func_802BB420_de(&D_800FF254, &blk.f28, 1);
+  func_802BB420_de(&D_800FF230.completion, &blk.f28, 1);
   func_802BB2A0_de(sp10, &sp3C, 1);
   return sp3C;
 }
@@ -125,7 +124,7 @@ void func_8023C85C_de(s32 arg0) {
     block.type = 2;
     block.value = arg0;
     block.data = sp10;
-    func_802BB420_de(&D_800FF254, &block, 1);
+    func_802BB420_de(&D_800FF230.completion, &block, 1);
     func_802BB2A0_de(sp10, &sp3C, 1);
     func_80253838_de(0, ((Draw *)(sp3C))->model);
 }
@@ -138,7 +137,6 @@ void func_8023C8D4_de(struct PagerCounters *arg0) {
  * thread object at D_80103720 (entry D_0023CA24, stack top D_800FFB50), then forever receives request
  * messages and dispatches on the request type to Virtual_HandleResourcePageRequest, Sched_FinishPageJob, func_8023CCD4_de or
  * func_8023CDD4_de. */
-extern char D_800FF950[];
 extern char D_0023CA24[];
 extern void func_802BAC90_de(void *, s32, void *, void *, void *, s32);
 extern void func_802BB750_de(void *);
@@ -147,11 +145,11 @@ extern void Sched_FinishPageJob(struct ResourcePageJob *job);
 void func_8023C924_de(void) {
     OSMesg request;
 
-    func_802A001C_de(D_800FF950, 0x62, 0x200);
-    func_802BAC90_de(D_800FF950 - 0x230, 0x62, D_0023CA24, 0, D_800FF950 + 0x200, 0x94);
-    func_802BB750_de(D_800FF950 - 0x230);
+    func_802A001C_de(D_800FF230.pool2, 0x62, sizeof(D_800FF230.pool2));
+    func_802BAC90_de(D_800FF230.queueData, 0x62, D_0023CA24, 0, D_800FF230.pool2 + sizeof(D_800FF230.pool2), 0x94);
+    func_802BB750_de(D_800FF230.queueData);
     for (;;) {
-        func_802BB2A0_de(&D_800FF254, &request, 1);
+        func_802BB2A0_de(&D_800FF230.completion, &request, 1);
         switch (((Request *)request)->type) {
         case 0:
             Virtual_HandleResourcePageRequest();

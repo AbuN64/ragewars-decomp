@@ -22,7 +22,6 @@
 
 
 
-extern PagerState D_800FF230;
 extern char D_801011B8[];
 
 extern void func_8023CB60_de(Field_void_4 *base, Slot_func_8023B9C0_eu *slot);

@@ -63,9 +63,10 @@ struct PagerState {
     char pad22[2];
     OSMesgQueue completion; /* pager completion queue, 0x18 bytes at +0x24 (D_800FF254) */
     char list0Data[0xC0 - 0x3C];
-    char queue[0x2F0 - 0xC0];
-    char pool[0x4F0 - 0x2F0];
-    char queueData[0x920 - 0x4F0];
+    char queue[0x2F0 - 0xC0]; /* thread 1 (osCreateThread) */
+    char pool[0x4F0 - 0x2F0]; /* its stack */
+    char queueData[0x720 - 0x4F0]; /* thread 2 (func_8023C924_de); its address is also thread 1's stack top */
+    char pool2[0x920 - 0x720]; /* thread 2's stack */
     Slot_func_8023B9C0_eu slots[24];
     OSMesgQueue jobs;
     char list1Data[0xAD8 - 0xAB8];
@@ -81,6 +82,7 @@ struct PagerState {
     s16 fD72;
     char padD74[4];
 };
+extern struct PagerState D_800FF230;
 struct Block10 {
     s16 f28;
     s16 pad;
