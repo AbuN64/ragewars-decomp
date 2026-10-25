@@ -6593,9 +6593,10 @@ struct SlotCC {
     s32 index;
     s32 state;
     s32 used;
-    char pad0[4];
+    s32 serial;
     s32 key;
-    char pad1[0x26];
+    char pad1[0x24];
+    s16 priority; /* 0x38: a voice of priority 100 is never taken over */
     s16 id;
     char pad1b[0x14];
     s32 flag;

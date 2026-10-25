@@ -249,6 +249,14 @@ extern float D_800C3F68_de;
 struct Slots;
 typedef struct Slots Slots;
 
+/* A voice waiting in the context queue; the queue head is a sentinel node inside the context. */
+typedef struct VoiceQueueNode {
+    struct VoiceQueueNode *prev;
+    struct VoiceQueueNode *next;
+    char pad8[0x38];
+    s16 priority;
+} VoiceQueueNode;
+
 struct ContextCode8025A3EC;
 struct ContextCode8025A3EC {
     char pad0[0x7C];
@@ -257,7 +265,9 @@ struct ContextCode8025A3EC {
     s32 frame;
     char pad108[0x134 - 0x108];
     s32 track;
-    char pad138[0x2B98 - 0x138];
+    char pad138[0x13C - 0x138];
+    VoiceQueueNode queue; /* 0x13C: sentinel of the queue of voices waiting for a slot */
+    char pad180[0x2B98 - 0x180];
     s32 result;
 };
 

@@ -149,7 +149,7 @@ void func_80259440_de(Cache *cache) {
             append(&cache->done, entry);
             continue;
         }
-        slot = Audio_SelectVoiceSlot(cache->context->cells, entry->style, entry->font, entry->glyph, 0);
+        slot = Audio_SelectVoiceSlot((struct RecordD90 *)cache->context->cells, entry->style, entry->font, entry->glyph, 0);
         if (slot == -1 || slot == 16) {
             break;
         }

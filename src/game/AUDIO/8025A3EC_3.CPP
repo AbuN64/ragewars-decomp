@@ -100,79 +100,52 @@ void func_8025AE1C_de(View_func_8025AE1C_de *view) {
     func_8025AB94_de(view);
 }
 
-#ifdef NON_MATCHING
-#include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/RESIDENT_EVENT_HANDLER.H"
-#include "AUDIO/EXTERNS.H"
-#include "COMMON/SHAREDRECV4.H"
-#include "TYPES.H"
-typedef struct ListNode_8025B034 {
-    char pad0[4];
-    struct ListNode_8025B034 *next;
-    char pad8[0x38];
-    s16 priority;
-} ListNode_8025B034;
-s16 Audio_SelectVoiceSlot(char *arg0, s32 unusedVariant, s32 unusedCount, s16 priority, s32 unused) {
+/* Picks the voice slot for a new sound of the given priority: the first of the sixteen slots with no sound, else the
+ * lowest-priority voice below the new priority (priority 100 voices are never taken). A taken voice is released and the
+ * call returns 16 (the spare voice) when that one is free, else -1. -1 also when no voice is low enough. */
+s16 Audio_SelectVoiceSlot(RecordD90 *record, s32 variant, s32 count, s16 priority, s32 unused) {
     ContextCode8025A3EC *context;
-    ContextCode8025A3EC *viewContext;
-    View_func_8025AE1C_de *view;
-    View_func_8025AE1C_de *voices;
-    s32 slotPriority;
     Slots *slots;
-    ListNode_8025B034 *node;
-    char *channel;
-    s32 bestPriority;
-    s32 selectedSlot;
-    s32 priorityLimit;
-    s32 slotIndex;
-    voices = (View_func_8025AE1C_de *)(arg0 + 4);
-    context = *(ContextCode8025A3EC **)arg0;
+    SlotCC *voice;
+    VoiceQueueNode *waiting;
+    s32 voicePriority;
+    s32 best;
+    s32 selected;
+    s32 i;
+
+    context = (ContextCode8025A3EC *)record->header;
     slots = &context->slots;
-    bestPriority = priority;
-    selectedSlot = -1;
-    priorityLimit = bestPriority;
-    for (slotIndex = 0; slotIndex < 16; slotIndex++) {
-        if (slots->ids[slotIndex] == -1) {
-            return slotIndex;
+    best = priority;
+    selected = -1;
+    voice = record->slots;
+    for (i = 0; i < 16; i++) {
+        if (slots->ids[i] == -1) {
+            return i;
         }
-        slotPriority = voices[slotIndex].field38;
-        if (slotPriority < priorityLimit && bestPriority >= slotPriority && slotPriority != 100) {
-            bestPriority = slotPriority;
-            selectedSlot = slotIndex;
+        voicePriority = voice->priority;
+        if (voicePriority < priority && best >= voicePriority && voicePriority != 100) {
+            best = voicePriority;
+            selected = i;
         }
+        voice++;
     }
-    if (selectedSlot == -1) {
+    if (selected == -1) {
         return -1;
     }
-    if (slots->ids[selectedSlot] == -1) {
-        node = *(ListNode_8025B034 **)((char *)context + 0x140);
-        if (node != (ListNode_8025B034 *)((char *)context + 0x13C) && node->priority > priority) {
+    if (slots->ids[selected] == -1) {
+        waiting = context->queue.next;
+        if (waiting != &context->queue && waiting->priority > priority) {
             return -1;
         }
-        return selectedSlot;
+        return selected;
     }
-    view = &((View_func_8025AE1C_de *)(arg0 + 4))[(s16)selectedSlot];
-    view->done = 1;
-    view->tracked = 0;
-    viewContext = view->context;
-    channel = ((OwnerCode8025A3EC *)viewContext)->sound;
-    if (view->frame != viewContext->frame) {
-        func_802B2F00_de(channel, viewContext->slots.ids[view->slot]);
-        if (func_802B2620_de(channel) != 0) {
-            alSndpStop(channel);
-        }
-        view->handle = -1;
-    }
-    if (*(s32 *)(arg0 + 0xCD0) != -1) {
+    release(&record->slots[(s16)selected]);
+    if (record->slots[16].serial != -1) {
         return -1;
     }
-    return 0x10;
+    return 16;
 }
-#else
-INCLUDE_ASM("span_1000", Audio_SelectVoiceSlot);
-#endif
 
-extern s16 Audio_SelectVoiceSlot(char *, s32, s32, s16, s32);
 
 typedef struct SoundBankState {
     ALBank_s *bank;
@@ -282,7 +255,7 @@ SoundVoice *Audio_StartNoteVoice(SoundPlayer *player, ControllerCode802591C0 *no
             goto fail;
         }
     }
-    index = Audio_SelectVoiceSlot((s8 *)player, (s16)variant, count, priority, (s16)func_8025E578_de(note));
+    index = Audio_SelectVoiceSlot((RecordD90 *)player, (s16)variant, count, priority, (s16)func_8025E578_de(note));
     if (index == -1) {
         goto fail;
     }
