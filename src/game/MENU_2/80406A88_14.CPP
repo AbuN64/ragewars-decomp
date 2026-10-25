@@ -2,7 +2,7 @@
 
 #if defined(VERSION_EU_X)
 #include "TYPES.H"
-typedef struct { void *list; s32 unk4; void *unk8; s32 unkC; s32 unk10; char text14[12]; s32 unk20; } SliderPopupEu;
+typedef struct { void *list; s32 resourceWidget; void *item; s32 unkC; s32 unk10; char text14[12]; s32 unk20; } SliderPopupEu;
 typedef struct { u8 pad0[0x10]; u8 alpha; u8 pad11[0x27]; void *text; } SliderItemEu;
 extern SliderPopupEu *D_800E5430;
 extern char D_800E1B60[];
@@ -27,9 +27,9 @@ s32 func_8042E790_eu_x(void *window) {
     func_8041A47C_de(title);
     func_8041B110_de(0x3A0);
     item = func_8040EC30_de(window, 0x39E);
-    D_800E5430->unk8 = item;
+    D_800E5430->item = item;
     item->alpha = 0xF;
-    D_800E5430->unk4 = func_80419E54_de(0x39F, 0x6E);
+    D_800E5430->resourceWidget = func_80419E54_de(0x39F, 0x6E);
     D_800E5430->unkC = 3;
     item = func_8040EC30_de(window, 0x3A1);
     item->text = D_800E5430->text14;

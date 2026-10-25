@@ -2,12 +2,12 @@
 
 #if defined(VERSION_DE)
 typedef struct Func_8042D9F0_State {
-    void *unk0;
-    void *unk4;
-    void *unk8;
+    void *list;
+    void *resourceWidget;
+    void *item;
     s32 unkC;
     char pad10[4];
-    char unk14[0xC];
+    char text14[0xC];
     s32 unk20;
 } Func_8042D9F0_State;
 typedef struct { char pad0[0x10]; u8 unk10; char pad11[0x27]; void *unk38; } Func_8042D9F0_Part;
@@ -26,18 +26,18 @@ s32 func_8042D9F0_de(s32 arg0) {
     Func_8042D9F0_Part *part;
     D_800E5430 = (Func_8042D9F0_State *)Scene_AllocateMemory(0x24);
     func_802A2360_de();
-    D_800E5430->unk0 = func_8041A280_de(0x392, 0x393);
-    func_8041A47C_de(D_800E5430->unk0);
+    D_800E5430->list = func_8041A280_de(0x392, 0x393);
+    func_8041A47C_de(D_800E5430->list);
     func_8041B110_de(0x396);
     part = (Func_8042D9F0_Part *)func_8040EC30_de(arg0, 0x394);
-    D_800E5430->unk8 = part;
+    D_800E5430->item = part;
     part->unk10 = 0xF;
-    D_800E5430->unk4 = func_80419E54_de(0x395, 0x6E);
+    D_800E5430->resourceWidget = func_80419E54_de(0x395, 0x6E);
     D_800E5430->unkC = 3;
     part = (Func_8042D9F0_Part *)func_8040EC30_de(arg0, 0x397);
-    part->unk38 = D_800E5430->unk14;
+    part->unk38 = D_800E5430->text14;
     D_800E5430->unk20 = 1;
-    func_802A0C08_de(D_800E5430->unk14, D_800E1B60, 1);
+    func_802A0C08_de(D_800E5430->text14, D_800E1B60, 1);
     return 0;
 }
 #endif
