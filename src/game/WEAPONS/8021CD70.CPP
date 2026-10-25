@@ -86,7 +86,7 @@ struct func_8021CD70_S2;
 extern s32 Weapons_CanLockTarget(func_8021CD70_S1 *, func_8021CD70_S2 *);
 extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 extern CQuatern func_8024796C_de(char *);
-extern void func_80274098_de(void *, void *, void *);
+extern void MultiplyQuaternions(void *, void *, void *);
 
 CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **target,
                             CVector3 *targetPosition)
@@ -197,7 +197,7 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
         D_80115DEC = amount;
         correction.w = func_802B6560_de(threshold);
         facing = func_8024796C_de((char *)player);
-        func_80274098_de(&result, &facing, &correction);
+        MultiplyQuaternions(&result, &facing, &correction);
     }
     return result;
 }

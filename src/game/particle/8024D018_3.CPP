@@ -24,7 +24,7 @@ extern f32 D_80115DEC;
 
 extern CQuatern func_8024796C_de(char *);
 
-extern void func_80274244_de(CQuatern *, f32 *);
+extern void MatrixFromQuaternion(CQuatern *, f32 *);
 
 
 extern char *Weapons_FindNearestPlayer(void *, CVector3);
@@ -36,7 +36,7 @@ extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern void func_80274098_de(CQuatern *, CQuatern *, CQuatern *);
+extern void MultiplyQuaternions(CQuatern *, CQuatern *, CQuatern *);
 
 extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
@@ -60,7 +60,7 @@ CQuatern func_8024D4AC_de(char *actor, CVector3 point) {
     if (actor != 0 && *(u8 *)actor == 1) {
         target = ((LevelActor *)(actor))->lockOn;
         aim = func_8024796C_de(actor);
-        func_80274244_de(&aim, matrix);
+        MatrixFromQuaternion(&aim, matrix);
         local.x = 0.0f;
         local.y = 0.0f;
         local.z = 1.0f;
@@ -96,7 +96,7 @@ CQuatern func_8024D4AC_de(char *actor, CVector3 point) {
     D_80115DEC = scale;
     turn.w = func_802B6560_de(angle);
     if (actor != 0 && *(u8 *)actor == 1) {
-        func_80274098_de(&result, &aim, &turn);
+        MultiplyQuaternions(&result, &aim, &turn);
     } else {
         result = turn;
     }

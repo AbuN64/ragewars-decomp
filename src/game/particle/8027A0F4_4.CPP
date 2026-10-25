@@ -16,8 +16,8 @@ extern void func_80273198_de(void *arg0, void *arg1);
 extern f32 func_80275DD4_de(Node75 *node, f32 x, f32 z);
 extern void func_80275410_de(void *arg0, s32 arg1);
 extern void func_80275688_de(void *arg0, s32 arg1);
-extern void func_80274244_de(void *arg0, void *arg1);
-extern void func_8026F620_de(void *arg0, void *arg1, void *arg2);
+extern void MatrixFromQuaternion(void *arg0, void *arg1);
+extern void Rsp_MultiplyAffineMatrices(void *arg0, void *arg1, void *arg2);
 extern f32 func_802760BC_de(s32 arg0, s32 arg1);
 
 
@@ -74,18 +74,18 @@ void *Particle_ParentTransform(EffectActor *arg0, Shared_ActorView *camera) {
             arg0->pos.z);
         if (arg0->pos.y - value <= 0.01f) {
             func_80275410_de(state, 0);
-            func_80274244_de(state, output);
+            MatrixFromQuaternion(state, output);
             shared = &D_8011AD70;
-            func_8026F620_de(shared, &D_8011AF38, output);
+            Rsp_MultiplyAffineMatrices(shared, &D_8011AF38, output);
             return shared;
         }
     sw_state_neg_5:
         return &D_8011AF38;
     sw_state_neg_2:
         func_80275688_de(state, 0);
-        func_80274244_de(state, output);
+        MatrixFromQuaternion(state, output);
         shared = &D_8011AD70;
-        func_8026F620_de(shared, &D_8011AF38, output);
+        Rsp_MultiplyAffineMatrices(shared, &D_8011AF38, output);
         return shared;
     sw_state_0:
     sw_state_1:
@@ -199,7 +199,7 @@ s32 func_8027254C_de(f32 *vector, f32 limit);
 void func_8027347C_de(void *matrix, f32 sx, f32 sy, f32 sz);
 void func_80273D6C_de(void *matrix);
 void func_8027302C(f32 *dst, f32 *src);
-void func_80272C60_de(void *matrix, f32 x, f32 y, f32 z);
+void Particle_BuildTranslationMatrix(void *matrix, f32 x, f32 y, f32 z);
 void func_80273A98_de(void *matrix, f32 angle);
 void func_802738C0_de(void *matrix, f32 angle);
 void func_80272828_de(f32 *matrix);
@@ -349,7 +349,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
             basis[8] = axisZ.x;
             basis[9] = axisZ.y;
             basis[10] = axisZ.z;
-            func_8026F620_de(local, rotation, basis);
+            Rsp_MultiplyAffineMatrices(local, rotation, basis);
         } else {
             func_80272E3C_de(local, particle->rot.x, particle->rot.y + RW_PI_F6, particle->rot.z);
         }
@@ -432,7 +432,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     }
     parent = Particle_ParentTransform((EffectActor *)particle, (Shared_ActorView *)camera);
     if (parent != 0) {
-        func_8026F620_de(world, local, parent);
+        Rsp_MultiplyAffineMatrices(world, local, parent);
     } else {
         func_8027302C(world, local);
     }
@@ -441,11 +441,11 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         jolt = (f32)shake * (1.0f / 127.0f);
         joltSq = jolt * jolt;
         angle = joltSq * (RW_PI_F6 * 5 / 180);
-        func_80272C60_de(shakeMtx, 0.0f, 0.0f, -66.56f);
+        Particle_BuildTranslationMatrix(shakeMtx, 0.0f, 0.0f, -66.56f);
         func_80273A98_de(shakeMtx, angle * (func_802B7130_de(joltSq * (6 * RW_PI_F6)) * 0.25f));
         func_802738C0_de(shakeMtx, angle * func_802B7130_de(joltSq * (14 * RW_PI_F6)));
         func_80273448_de(shakeMtx, 0.0f, 0.0f, 66.56f);
-        func_8026F620_de(rotation, shakeMtx, world);
+        Rsp_MultiplyAffineMatrices(rotation, shakeMtx, world);
         func_80272828_de(rotation);
         final = rotation;
     } else {

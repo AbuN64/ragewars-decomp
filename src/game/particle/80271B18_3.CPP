@@ -278,7 +278,7 @@ void func_80272BCC_de(void *matrix, void *arg1, void *arg2) {
                        + (m->m[10] * v->z);
 }
 
-void func_80272C60_de(void *matrix, f32 arg1, f32 arg2, f32 arg3) {
+void Particle_BuildTranslationMatrix(void *matrix, f32 arg1, f32 arg2, f32 arg3) {
     Matrix *o = matrix;
     f32 val = D_800C48D0_de;
     f32 zero = 0.0f;

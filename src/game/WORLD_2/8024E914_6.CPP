@@ -39,7 +39,7 @@ extern CQuatern func_8024D870_de(void *);
 
 extern void func_8027254C_de(CVector3 *, f32);
 
-extern void func_80274244_de(f32 *, f32 *);
+extern void MatrixFromQuaternion(f32 *, f32 *);
 
 extern void func_8027347C_de(f32 *, f32, f32, f32);
 
@@ -113,7 +113,7 @@ void func_8024EF28_de(void *actor) {
     position.z = ((Shared_Func80243A80Actor *)actor)->z;
     position.y = ground;
     func_8027254C_de(&position, 20000.0f);
-    func_80274244_de(&rotation.x, matrix);
+    MatrixFromQuaternion(&rotation.x, matrix);
     func_8027347C_de(matrix, size, 1.0f, size);
     func_80273448_de(matrix, position.x, position.y, position.z);
     func_8027027C_de(matrix, (char *)actor + ((D_800D297C << 6) + 0xE8));

@@ -16,7 +16,7 @@
 #include "ANIM/802412C0_7.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern void func_8026F620_de(void *, void *, void *);
+extern void Rsp_MultiplyAffineMatrices(void *, void *, void *);
 
 
 extern void *func_8028B2F8_de(Shared_World *, u16 *);
@@ -50,7 +50,7 @@ void func_80243874_de(void *contextAddress) {
     temp_a1 = ((ContextB0 *)contextAddress)->element;
     temp_s0 = ((ElementE8 *)temp_a1)->resource;
     if (temp_s0 != 0) {
-        func_8026F620_de(&((ContextB0 *)contextAddress)->transform, &((ElementE8 *)temp_a1)->transform, (char *) contextAddress + 0xC);
+        Rsp_MultiplyAffineMatrices(&((ContextB0 *)contextAddress)->transform, &((ElementE8 *)temp_a1)->transform, (char *) contextAddress + 0xC);
         temp_s0_2 = *temp_s0;
         ((ContextB0 *)contextAddress)->vertices = Render_GetPackSection(temp_s0_2, 0);
         temp_v0 = Render_GetPackSection(temp_s0_2, 2);

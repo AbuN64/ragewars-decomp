@@ -31,7 +31,7 @@ extern float D_800DDF58;
 extern float D_800DDF50_de;
 extern float D_800DDF58;
 #endif
-extern void func_80272C60_de(void *, f32, f32, f32);
+extern void Particle_BuildTranslationMatrix(void *, f32, f32, f32);
 extern void func_802737F0_de(Matrix *,f32); extern void func_802739C4_de(Matrix *,f32); extern void func_80273B98_de(Matrix *,f32);
 extern void func_8027347C_de(Matrix *,f32,f32,f32); extern void func_80273D6C_de(Matrix *);
 extern s32 func_802A1934_de(void); extern void func_8027027C_de(Matrix *,void *);
@@ -54,7 +54,7 @@ void func_804399D0(MenuModelItem *item) {
   {Gfx *g=D_80110634++; char *address=(char *)(u32)(D_800D297C<<6); address+=0x380; address+=(u32)D_80141008; gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);}
   position=item->position;
   Particle_TransformPoint(&D_80141008[0].camera,&position,&transformed);
-  func_80272C60_de(&matrix, transformed.x, transformed.y, transformed.z);
+  Particle_BuildTranslationMatrix(&matrix, transformed.x, transformed.y, transformed.z);
   time=func_802A1934_de();
   if(item->speed.x!=0.0f)func_802737F0_de(&matrix,time*item->speed.x*D_800DDF50_de);
 #if defined(VERSION_DE)

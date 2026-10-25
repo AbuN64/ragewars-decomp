@@ -14,7 +14,7 @@ extern s32 D_800D2978;
 extern void func_8024DD10_de(PlacedProp *, PlacedPropRecord *, s32, char *);
 extern PropGeometry *func_8028CF6C_de(void *, s32);
 
-extern void func_80274244_de(f32 *, char *);
+extern void MatrixFromQuaternion(f32 *, char *);
 extern void func_8027347C_de(char *, f32, f32, f32);
 extern void func_80273448_de(char *, f32, f32, f32);
 extern void func_80273D6C_de(char *);
@@ -57,7 +57,7 @@ void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner,
     rotation[2] = record->rotation[2] * 0.007874016f;
     rotation[3] = record->rotation[3] * 0.007874016f;
     func_802741A4_de(rotation);
-    func_80274244_de(rotation, matrix);
+    MatrixFromQuaternion(rotation, matrix);
     func_8027347C_de(matrix, record->scale.x, record->scale.y, record->scale.z);
     func_80273448_de(matrix, record->position.x, record->position.y, record->position.z);
     func_80273D6C_de(matrix);

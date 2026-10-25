@@ -16,7 +16,7 @@
 
 extern f32 D_800D2988[];
 extern CQuatern func_8024796C_de(Actor_func_802238E0_de *);
-extern void func_80274244_de(CQuatern *,MatrixF *),func_80271F34_de(CVector3 *,CVector3 *,CVector3 *),func_8025DE54_de(s16,CVector3,s32,s32),func_80274870_de(f32 *,f32,f32);
+extern void MatrixFromQuaternion(CQuatern *,MatrixF *),func_80271F34_de(CVector3 *,CVector3 *,CVector3 *),func_8025DE54_de(s16,CVector3,s32,s32),func_80274870_de(f32 *,f32,f32);
 extern f32 func_802B72B0_de(f32);
 void func_802238E0_de(SharedPlayer *player, Actor_func_802238E0_de *body, SharedMovement *arg2) {
     CVector3 v18,v28,v38,v48,v58;
@@ -112,7 +112,7 @@ block_31:
     v28.y = 0;
     v28.z = 0;
     spA8 = func_8024796C_de(body);
-    func_80274244_de(&spA8, &sp68);
+    MatrixFromQuaternion(&spA8, &sp68);
     Particle_TransformPoint(&sp68, &v18, &v38);
     Particle_TransformPoint(&sp68, &v28, &v48);
     player->views5E8.view6E8_63.unk6E8 = (f32) (player->views5E8.view6E8_63.unk6E8 + ((v38.x + v48.x) * player->views5E8.view66C_29.unk66C));

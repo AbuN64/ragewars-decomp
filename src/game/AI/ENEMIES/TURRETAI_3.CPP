@@ -116,7 +116,7 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
         work.aim.v.z = riderState->nav.aim.z;
         /* SN64 struct-return ABI writes directly to the caller-supplied CQuatern. */
         navRotation(&work.rotation,&work.aim.v);
-        func_80274244_de(&work.rotation.x,work.matrix);
+        MatrixFromQuaternion(&work.rotation.x,work.matrix);
         navProject(work.matrix,&work.local.v,&work.destination.v,&work.destination.v,&work.origin.v);
         func_80271F34_de(&work.destination.v, &work.destination.v, &work.origin.v);
         Particle_SubtractVectors(&work.relative.v, &work.destination.v, &work.origin.v);

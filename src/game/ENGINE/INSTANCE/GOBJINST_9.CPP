@@ -28,9 +28,9 @@ extern void func_8027310C_de(f32 *, CVector3 *, f32);
 extern void func_80273448_de(void *, f32, f32, f32);
 extern void func_802735A8_de(f32 *, f32, f32, f32);
 #ifndef NON_MATCHING
-extern void func_80274244_de(f32 *, f32 *);
+extern void MatrixFromQuaternion(f32 *, f32 *);
 #endif
-extern void func_8026F620_de(void *, f32 *, f32 *);
+extern void Rsp_MultiplyAffineMatrices(void *, f32 *, f32 *);
 extern void func_8024BA7C_de(char *, char *, void *, u8);
 extern void Instance_DrawBlobShadow(struct LevelActor *, CVector3 *, s32);
 void func_8024AA18_de(char *obj, s32 unused, char *info) {
@@ -91,8 +91,8 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
             func_80273448_de(projection, -((struct LevelActor *)(obj))->position0.x, -plane, -((struct LevelActor *)(obj))->position0.z);
             scale = height * 0.003f + 1.0f;
             func_802735A8_de(projection, scale, scale, scale);
-            func_80274244_de((f32 *)(obj + 0x5C), turn);
-            func_8026F620_de(((struct LevelActor *)(obj))->shadow, projection, turn);
+            MatrixFromQuaternion((f32 *)(obj + 0x5C), turn);
+            Rsp_MultiplyAffineMatrices(((struct LevelActor *)(obj))->shadow, projection, turn);
             func_80273448_de(((struct LevelActor *)(obj))->shadow, ((struct LevelActor *)(obj))->position0.x, ground, ((struct LevelActor *)(obj))->position0.z);
             if (((struct LevelActor *)(obj))->shadow == 0) {
                 return;
@@ -162,7 +162,7 @@ void Instance_DrawBlobShadow(struct LevelActor *actor, CVector3 *offset, s32 rai
         position.z = actor->position0.z + offset->z;
         position.y = groundHeight + lift + offset->y;
         func_8027254C_de((f32 *)&position, 20000.0f);
-        func_80274244_de(&actor->rotation, matrix);
+        MatrixFromQuaternion(&actor->rotation, matrix);
         func_8027347C_de(matrix, scale, 1.0f, scale);
         func_80273448_de((s8 *) matrix, position.x, position.y, position.z);
         func_8027027C_de(matrix, (PackedMatrixWords *) packed);

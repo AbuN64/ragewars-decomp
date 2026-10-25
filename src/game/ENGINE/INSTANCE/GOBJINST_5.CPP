@@ -83,7 +83,7 @@ extern void System_PrepareAnimationFrames();
 extern void func_802624A8_de(Shared_AnimState *);
 extern s32 func_802624D8_de(Shared_AnimState *);
 extern void Fx_DispatchAttachmentEffects(u8 *, s32, PoseMatrix *, Shared_PoseActor *, void *);
-extern void func_8026F620_de(PoseMatrix, PoseMatrix, PoseMatrix);
+extern void Rsp_MultiplyAffineMatrices(PoseMatrix, PoseMatrix, PoseMatrix);
 extern void Rsp_ConvertMatrixToFloat(PoseMatrix, u8 *);
 extern void func_80270AAC_de(CQuatern *, f32, CQuatern *, CQuatern *);
 extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
@@ -126,7 +126,7 @@ static inline void twistPart(Shared_PosePart *part, PoseMatrix cur, s32 n, s32 i
         Particle_ScaleVector(&turn, &turn, -1.0f);
         func_80273448_de(inv, turn.x, turn.y, turn.z);
         func_80272D00_de(rotm, angle, axis.x, axis.y, axis.z);
-        func_8026F620_de(cur, inv, rotm);
+        Rsp_MultiplyAffineMatrices(cur, inv, rotm);
         Particle_ScaleVector(&turn, &turn, -1.0f);
         func_80273448_de(cur, turn.x, turn.y, turn.z);
         if (part->unk_14[0] == i) {
@@ -440,7 +440,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
                 if (actor->callback != 0) {
                     ((PoseCallback)actor->callback)(m, &ctx);
                 }
-                func_8026F620_de(*cur, m, *parent);
+                Rsp_MultiplyAffineMatrices(*cur, m, *parent);
                 if (actor->part.unk_12) {
                     s32 n = 0;
                     if (actor->part.unk_14[0] == i) {

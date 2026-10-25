@@ -14,8 +14,8 @@ extern s32 func_80245798_de(void);
 extern CQuatern func_8024D728_de(void *arg1);
 
 
-extern void func_80274098_de(CQuatern *arg0, CQuatern *arg1, CQuatern *arg2);
-extern void func_80274244_de(void *, void *);
+extern void MultiplyQuaternions(CQuatern *arg0, CQuatern *arg1, CQuatern *arg2);
+extern void MatrixFromQuaternion(void *, void *);
 extern void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
 extern s32 func_8027254C_de(f32 *arg0, f32 arg1);
 extern void func_80273448_de(char *, f32, f32, f32);
@@ -51,9 +51,9 @@ void func_8024B53C_de(void *levelActor) {
     trig.w = func_802B6560_de(angle);
 
     product_ptr = &product;
-    func_80274098_de(product_ptr, &trig, copy_ptr);
+    MultiplyQuaternions(product_ptr, &trig, copy_ptr);
     transform = &((struct LevelActor *)(levelActor))->transform[0];
-    func_80274244_de(product_ptr, transform);
+    MatrixFromQuaternion(product_ptr, transform);
     func_8027347C_de(transform, ((struct LevelActor *)(levelActor))->scale.x,
                     ((struct LevelActor *)(levelActor))->scale.y,
                     ((struct LevelActor *)(levelActor))->scale.z);

@@ -641,7 +641,7 @@ void func_80274020_de(f32 *value)
     }
 }
 
-void func_80274098_de(void *arg0, void *arg1, void *arg2) {
+void MultiplyQuaternions(void *arg0, void *arg1, void *arg2) {
     f32 *out = (f32 *)arg0;
     f32 *a = (f32 *)arg1;
     f32 *b = (f32 *)arg2;
@@ -673,7 +673,7 @@ void func_802741A4_de(f32 *rotation) {
 /* Builds a rotation matrix from a quaternion with zero translation and a unit homogeneous corner. */
 
 
-void func_80274244_de(f32 *q, f32 *m)
+void MatrixFromQuaternion(f32 *q, f32 *m)
 {
   f32 x = q[0];
   f32 xx = x * x;

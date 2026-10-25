@@ -26,11 +26,11 @@ extern s32 func_80243A90_de(Shared_ParticleInstance *, CVector3, void *);
 
 extern CQuatern func_80271818_de(CVector3 *);
 
-extern void func_80274098_de(CQuatern *out, CQuatern *a, CQuatern *b);
+extern void MultiplyQuaternions(CQuatern *out, CQuatern *a, CQuatern *b);
 
 extern s32 func_8027254C_de(CVector3 *, f32);
 
-extern void func_80274244_de(CQuatern *, f32 *);
+extern void MatrixFromQuaternion(CQuatern *, f32 *);
 
 extern void func_8027347C_de(f32 *, f32, f32, f32);
 
@@ -108,7 +108,7 @@ void func_8027E784_de(Shared_Particle *actor, struct Shared_ParticleView *view) 
     roll.y = 0.0f;
     roll.z = 0.0f;
     roll.w = func_802B6560_de(angle);
-    func_80274098_de(&rotation, &roll, &tilt);
+    MultiplyQuaternions(&rotation, &roll, &tilt);
     floor = ground->height;
     height = actor->inst.pos.y - floor;
     alpha = ((RW_MIN(200.0f - height * 0.30517578f, 255.0f)) < (0.0f) ? (0.0f) : (RW_MIN(200.0f - height * 0.30517578f, 255.0f)));
@@ -129,7 +129,7 @@ void func_8027E784_de(Shared_Particle *actor, struct Shared_ParticleView *view) 
     point.z = actor->inst.pos.z;
     point.y = floor;
     func_8027254C_de(&point, 20000.0f);
-    func_80274244_de(&rotation, matrix);
+    MatrixFromQuaternion(&rotation, matrix);
     func_8027347C_de(matrix, size, 1.0f, size);
     func_80273448_de(matrix, point.x, point.y, point.z);
     func_8027027C_de(matrix, model);

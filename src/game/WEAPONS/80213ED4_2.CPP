@@ -19,7 +19,7 @@
 extern f32 Particle_GetActorHeight(Actor_func_80214310_de *);
 extern f32 func_802B72B0_de(f32);
 extern CQuatern func_8024796C_de(Actor_func_80214310_de *);
-extern void func_80274244_de(CQuatern *, Matrix *);
+extern void MatrixFromQuaternion(CQuatern *, Matrix *);
 
 s32 func_80214310_de(Actor_func_80214310_de *viewer, Actor_func_80214310_de *target, f32 range, f32 across, f32 up)
 {
@@ -52,7 +52,7 @@ s32 func_80214310_de(Actor_func_80214310_de *viewer, Actor_func_80214310_de *tar
     return 0;
   }
   rotation = func_8024796C_de(viewer);
-  func_80274244_de(&rotation, &matrix);
+  MatrixFromQuaternion(&rotation, &matrix);
   ahead.x = 0.0f;
   ahead.y = 0.0f;
   ahead.z = distance;

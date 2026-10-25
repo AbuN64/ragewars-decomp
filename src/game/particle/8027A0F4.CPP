@@ -79,7 +79,7 @@ block_7:
             amount = func_802B72B0_de((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
             if (amount < D_800C4B50_de) {
                 sp68 = func_80271818_de(&sp28);
-                func_80274244_de(&sp68.x, sp78.m);
+                MatrixFromQuaternion(&sp68.x, sp78.m);
                 sp38.x = 0;
                 sp38.y = 0;
                 sp38.z = D_800C4B54_de;
@@ -108,7 +108,7 @@ block_7:
             func_802741A4_de(&sp58.x);
             func_802741A4_de(&sp48.x);
             func_80270CD0_de(&sp68, amount, &sp48, &sp58);
-            func_80274244_de(&sp68.x, sp78.m);
+            MatrixFromQuaternion(&sp68.x, sp78.m);
             temp_s0_2 = &arg0->direction;
             sp38.x = 0;
             sp38.y = 0;
@@ -233,7 +233,7 @@ create_sound:
         }
     }
     func_80270CD0_de(&q98, rate, &q78, &q88);
-    func_80274244_de(&q98, mA8.m);
+    MatrixFromQuaternion(&q98, mA8.m);
     direction = &arg0->direction;
     v48.x = 0;
     v48.y = 0;
@@ -307,7 +307,7 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
         blend = 0.04f;
     }
     func_80270CD0_de(&turned, blend, &current, &wanted);
-    func_80274244_de(&turned.x, rotation);
+    MatrixFromQuaternion(&turned.x, rotation);
     forward.x = 0.0f;
     forward.y = 0.0f;
     forward.z = 1.0f;

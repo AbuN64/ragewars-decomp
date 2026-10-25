@@ -12,10 +12,10 @@
 #include "particle/80271B18_3.H"
 
 extern s32 D_80141008;
-extern void func_80274098_de(void*,void*,void*);
-extern void func_80272C60_de(void *, f32, f32, f32);
+extern void MultiplyQuaternions(void*,void*,void*);
+extern void Particle_BuildTranslationMatrix(void *, f32, f32, f32);
 extern u32 func_802337D0_de(StateRecAt10*);
-extern void func_8026F620_de(f32*,f32*,f32*);
+extern void Rsp_MultiplyAffineMatrices(f32*,f32*,f32*);
 /* The camera position is passed as a three-word CVector3 value. */
 
 /* Actor transform and camera-effect subobjects. */
@@ -94,14 +94,14 @@ void func_802349C0_de(void *arg0) {
             D_80115DEC = temp_fv0_3;
             temp_s3 = actor->base.f;
             q28.f[3] = func_802B6560_de(cosineInput);
-            func_80274098_de(q48.f, q18.f, q28.f);
-            func_80274098_de(temp_s0, q48.f, temp_s3);
-            func_80274098_de(actor->rotation.f, q38.f, temp_s0);
-            func_80274098_de(q58.f, q38.f, q48.f);
-            func_80274244_de(q58.f, m68);
+            MultiplyQuaternions(q48.f, q18.f, q28.f);
+            MultiplyQuaternions(temp_s0, q48.f, temp_s3);
+            MultiplyQuaternions(actor->rotation.f, q38.f, temp_s0);
+            MultiplyQuaternions(q58.f, q38.f, q48.f);
+            MatrixFromQuaternion(q58.f, m68);
             zero=0.0f;
-            func_80272C60_de(mA8, zero, actor->height, zero);
-            func_80274244_de(temp_s3, mE8);
+            Particle_BuildTranslationMatrix(mA8, zero, actor->height, zero);
+            MatrixFromQuaternion(temp_s3, mE8);
             result.x = zero;
             result.y = zero;
             result.z = zero;
@@ -118,16 +118,16 @@ void func_802349C0_de(void *arg0) {
                     } while (effect != 0);
                 }
             }
-            func_8026F620_de(m168, m68, mE8);
+            Rsp_MultiplyAffineMatrices(m168, m68, mE8);
             Particle_TransformPoint(m168, &result, &transformed);
-            func_8026F620_de(m168, m68, mA8);
+            Rsp_MultiplyAffineMatrices(m168, m68, mA8);
             matrix = m1A8;
-            func_8026F620_de(matrix, m168, mE8);
-            func_80272C60_de(m128,
+            Rsp_MultiplyAffineMatrices(matrix, m168, mE8);
+            Particle_BuildTranslationMatrix(m128,
                 actor->position.value.x + transformed.x,
                 actor->position.value.y + sp1E8.y + transformed.y,
                 actor->position.value.z + transformed.z);
-            func_8026F620_de(actor->matrix, matrix, m128);
+            Rsp_MultiplyAffineMatrices(actor->matrix, matrix, m128);
         } else {
             cosineInput = actor->roll;
             temp_fs0_3 = D_800C31FC_de;
@@ -152,12 +152,12 @@ void func_802349C0_de(void *arg0) {
             cosineInput = ((actor->yaw + actor->extraYaw) * temp_fs0_3);
             D_80115DEC = temp_fv0_6;
             q28.f[3] = func_802B6560_de(cosineInput);
-            func_80274098_de(q48.f, q18.f, q28.f);
+            MultiplyQuaternions(q48.f, q18.f, q28.f);
             actor->combined=q48;
-            func_80274098_de(actor->rotation.f, q38.f, actor->combined.f);
-            func_80274244_de(q48.f, m68);
-            func_80272C60_de(m128,actor->position.value.x,actor->position.value.y,actor->position.value.z);
-            func_8026F620_de(actor->matrix, m68, m128);
+            MultiplyQuaternions(actor->rotation.f, q38.f, actor->combined.f);
+            MatrixFromQuaternion(q48.f, m68);
+            Particle_BuildTranslationMatrix(m128,actor->position.value.x,actor->position.value.y,actor->position.value.z);
+            Rsp_MultiplyAffineMatrices(actor->matrix, m68, m128);
         }
 
         actor->cached.x = var_fs1;

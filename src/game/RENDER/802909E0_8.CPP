@@ -52,7 +52,7 @@ extern f32 D_auto_800C5678[2];
 extern s32 func_8028B21C_de(void *, s32);
 extern s32 func_8028C198_de(void *, s32);
 extern void Camera_SetupViewportAndFog(void *);
-extern void func_80272C60_de(void *, f32, f32, f32);
+extern void Particle_BuildTranslationMatrix(void *, f32, f32, f32);
 extern void func_802739C4_de(void *, f32);
 extern void func_80273D6C_de(void *);
 extern void func_8027027C_de(void *, void *);
@@ -80,7 +80,7 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
     D_800D15E4[3] = D_800CA4B0;
     if (handle != -1) {
         Camera_SetupViewportAndFog(&D_80141008);
-        func_80272C60_de(matrix, 0.0f, -100.0f, -500.0f);
+        Particle_BuildTranslationMatrix(matrix, 0.0f, -100.0f, -500.0f);
         func_802739C4_de(matrix, state->unk26DB0 * D_800CA4B4);
         func_80273D6C_de(matrix);
         func_8027027C_de(matrix, VIEW_MATRICES + D_800D297C * 64);

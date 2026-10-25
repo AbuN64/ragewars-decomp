@@ -177,7 +177,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
 #else
 INCLUDE_ASM("span_1000", func_8026F368_de);
 #endif
-void func_8026F620_de(f32 *out, f32 *left, f32 *right)
+void Rsp_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right)
 {
     out[0] = (left[0] * right[0]) + (left[1] * right[4]) + (left[2] * right[8]);
     out[1] = (left[0] * right[1]) + (left[1] * right[5]) + (left[2] * right[9]);
@@ -896,7 +896,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
 }
 
 /** Multiply two affine 4x4 matrices into the output matrix. */
-void func_8026F620_de(f32 *out, f32 *left, f32 *right)
+void Rsp_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right)
 {
     out[(0) * 4 + (0)] = (left[(0) * 4] * right[(0)]) + (left[(0) * 4 + 1] * right[4 + (0)]) + (left[(0) * 4 + 2] * right[8 + (0)]);
     out[(0) * 4 + (1)] = (left[(0) * 4] * right[(1)]) + (left[(0) * 4 + 1] * right[4 + (1)]) + (left[(0) * 4 + 2] * right[8 + (1)]);

@@ -20,13 +20,13 @@ extern void Weapons_BuildPlayerViewTransform(char *, Matrix *);
 
 extern void Weapons_BuildPlayerOrientation(char *object, CQuatern *output);
 
-extern void func_80274244_de(void *, void *);
+extern void MatrixFromQuaternion(void *, void *);
 
 extern void func_80273448_de(char *, f32, f32, f32);
 
 extern void func_80273D6C_de(void *);
 
-extern void func_8026F620_de(void *, void *, void *);
+extern void Rsp_MultiplyAffineMatrices(void *, void *, void *);
 
 extern s32 func_80265650_de(void *, s32);
 extern void func_80265688_de(u8 *, s32, s32);
@@ -130,17 +130,17 @@ void func_8022F5E0_de(char *arg0) {
     Particle_ScaleVector(&sp70, &sp70, -10.24f);
     if (((ObjectState630 *)(object))->unk_5DC.v0 != 0) {
         func_802732D0_de(((ObjectState630 *)(object))->unk_5DC.v1 + 0x160, &position);
-        func_80274244_de((CQuatern *)(((ObjectState630 *)(object))->unk_5DC.v1 + 0x140),
+        MatrixFromQuaternion((CQuatern *)(((ObjectState630 *)(object))->unk_5DC.v1 + 0x140),
                       &sp20);
     } else {
         Weapons_BuildPlayerViewTransform(object, &spC0);
         Weapons_BuildPlayerOrientation(object, &sp100);
         func_802732D0_de((char *)&spC0, &position);
-        func_80274244_de(&sp100, &sp20);
+        MatrixFromQuaternion(&sp100, &sp20);
     }
     orientation = arg0 + 0x74;
     func_80273448_de(&sp80, sp70.x, sp70.y, sp70.z);
     func_80273D6C_de(&sp80);
-    func_8026F620_de((Matrix *)orientation, &sp80, &sp20);
+    Rsp_MultiplyAffineMatrices((Matrix *)orientation, &sp80, &sp20);
     func_80273448_de((Matrix *)orientation, position.x, position.y, position.z);
 }

@@ -332,7 +332,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                         func_80272CB0_de(&mtx, -1.0f, 1.0f, -1.0f);
                         break;
                     default:
-                        func_80272C60_de(&mtx, source->pos.x, source->pos.y, source->pos.z);
+                        Particle_BuildTranslationMatrix(&mtx, source->pos.x, source->pos.y, source->pos.z);
                         break;
                 }
             } else if (entry->flags & 0x1000000) {
@@ -343,7 +343,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 } else {
                     quat = rotation;
                 }
-                func_80274244_de(&quat.x, &mtx.m[0][0]);
+                MatrixFromQuaternion(&quat.x, &mtx.m[0][0]);
             }
             n = entry->params->countBase + effect_spawn_random_count(entry->params->countRange);
             for (j = 0; j < n; j++) {

@@ -82,7 +82,7 @@ Particle *func_802A5BE4_de(SceneRecAt95A8 *scene, CVector3 position, CVector3 no
     func_80255D14_de(list, node);
     if (node != 0) {
         node->owner = owner;
-        func_80274244_de(&rotation.x, matrix);
+        MatrixFromQuaternion(&rotation.x, matrix);
         func_802737F0_de(matrix, 1.5707965f);
         func_8027207C_de(&normal);
         Particle_ScaleVector(&normal, &normal, 2.048f);

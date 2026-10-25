@@ -14,7 +14,7 @@ void func_80245864_de(void *);
 f32 func_802459A0_de(void *);
 float func_80245AD8_de(void);
 void func_8026EF58_de(f32 *, f32 *);
-void func_8026F620_de(f32 *, f32 *, f32 *);
+void Rsp_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 void func_8026F898_de(f32 *, f32 *, f32 *);
 void func_8026FC9C_de(f32 *, void *);
 void func_802727D8_de(void *);
@@ -25,7 +25,7 @@ void func_802732D0_de(char *, float *);
 void func_802736D4_de(void *, f32);
 void func_802738C0_de(void *, f32);
 void func_80273A98_de(void *, f32);
-void func_80274244_de(f32 *, f32 *);
+void MatrixFromQuaternion(f32 *, f32 *);
 
 extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 f32 func_80275DD4_de(void *, f32, f32);
@@ -161,9 +161,9 @@ actor_found:
     func_802732D0_de(var_s1, &camera->position.x);
     func_8026EF58_de(&camera->unk1A0, (f32 *) var_s1);
     func_802736D4_de(spA8, 3.1415927f);
-    func_8026F620_de(sp68, spA8, (f32 *) var_s1);
+    Rsp_MultiplyAffineMatrices(sp68, spA8, (f32 *) var_s1);
     func_8026EF58_de(spE8, sp68);
-    func_8026F620_de(sp128, spE8, sp28);
+    Rsp_MultiplyAffineMatrices(sp128, spE8, sp28);
     func_8027302C(&camera->unk220, sp128);
     if ((var_s5 != 0) && (var_s5->unk664 & 0x40) && (camera->unk24 == 0) && (func_80245798_de() == 0)) {
         f32 temp_f20; 
@@ -310,7 +310,7 @@ actor_found:
     temp_s4->unk16 = 0;
     temp_s4->unk17 = 0;
     func_80234DE0_de(camera);
-    func_80274244_de(&camera->unk150, &camera->unkE54);
+    MatrixFromQuaternion(&camera->unk150, &camera->unkE54);
     func_802736D4_de(&camera->unkE94, camera->unk138);
     if (D_80140FF8.unk8 != 0) {
         func_802B6F9C_de(right, &camera->unk440, 47.5f, (f32) ((s32) D_800E28D0 / D_800E28D4), 16.0f, 7168.0f, 1.0f);

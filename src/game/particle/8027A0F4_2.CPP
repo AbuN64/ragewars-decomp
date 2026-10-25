@@ -334,7 +334,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
       var_f2 = temp_f1_4 / temp_f0_8;
     }
     func_80270CD0_de(&sp80, var_f2, &sp60, &sp70);
-    func_80274244_de(&sp80, &sp90);
+    MatrixFromQuaternion(&sp80, &sp90);
     sp50.x = 0;
     sp50.y = 0;
     sp50.z = D_800C4BF4_de;

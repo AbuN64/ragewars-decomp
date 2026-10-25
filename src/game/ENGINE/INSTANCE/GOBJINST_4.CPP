@@ -67,13 +67,13 @@ extern void func_80265E10_de(char *, char *, u16, s32, CVector3, struct IntPair)
  * weapon's orientation at 0x140, or from the player's own orientation from Weapons_BuildPlayerOrientation when unarmed; an
  * actor of kind 4 composes a pitch from 0x294 with a yaw from its heading 0x6C and applies them to its body
  * orientation from Turret_BuildPlaneRot; any other actor turns its orientation at 0x5C by its heading. Quaternions
- * are composed through func_80274098_de, keeping the latest sine in D_80115DEC. */
+ * are composed through MultiplyQuaternions, keeping the latest sine in D_80115DEC. */
 
 
 
 extern f32 D_80115DEC;
 
-extern void func_80274098_de(CQuatern *, CQuatern *, CQuatern *);
+extern void MultiplyQuaternions(CQuatern *, CQuatern *, CQuatern *);
 
 extern void Weapons_BuildPlayerOrientation(void *, CQuatern *);
 
@@ -94,7 +94,7 @@ extern char *D_8011CA18[];
 
 extern CQuatern func_8024796C_de(char *);
 
-extern void func_80274244_de(CQuatern *, f32 *);
+extern void MatrixFromQuaternion(CQuatern *, f32 *);
 
 extern f32 Particle_GetActorHeight(char *);
 
@@ -136,7 +136,7 @@ extern void func_80273448_de(f32 *, f32, f32, f32);
 
 extern void func_80272D00_de(f32 *, f32, f32, f32, f32);
 
-extern void func_8026F620_de(f32 *, f32 *, f32 *);
+extern void Rsp_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 
 void func_802472F0_de(void *actor) {
     CVector3 first;
@@ -326,7 +326,7 @@ CQuatern func_8024796C_de(char *actor) {
             yaw.y = D_80115DEC;
             yaw.z = 0.0f;
             yaw.w = func_802B6560_de(angle);
-            func_80274098_de(&result, &yaw, &((SharedRecAt564V1 *)weapon)->orientation);
+            MultiplyQuaternions(&result, &yaw, &((SharedRecAt564V1 *)weapon)->orientation);
         } else {
             angle = 1.5707964f;
             Weapons_BuildPlayerOrientation(player, &own);
@@ -335,7 +335,7 @@ CQuatern func_8024796C_de(char *actor) {
             yaw.y = D_80115DEC;
             yaw.z = 0.0f;
             yaw.w = func_802B6560_de(angle);
-            func_80274098_de(&result, &yaw, &own);
+            MultiplyQuaternions(&result, &yaw, &own);
         }
     } else if (((LevelActor *)actor)->definition->kind == 4) {
         sine = func_802B7130_de(((LevelActor *)actor)->pitch * 0.5f);
@@ -352,9 +352,9 @@ CQuatern func_8024796C_de(char *actor) {
         angle = (((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f;
         D_80115DEC = sine;
         yaw.w = func_802B6560_de(angle);
-        func_80274098_de(&both, &pitch, &yaw);
+        MultiplyQuaternions(&both, &pitch, &yaw);
         Turret_BuildPlaneRot(&base, actor, (char *)actor + 0x170);
-        func_80274098_de(&result, &both, &base);
+        MultiplyQuaternions(&result, &both, &base);
     } else {
         sine = func_802B7130_de((((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f);
         yaw.x = 0.0f;
@@ -363,7 +363,7 @@ CQuatern func_8024796C_de(char *actor) {
         angle = (((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f;
         D_80115DEC = sine;
         yaw.w = func_802B6560_de(angle);
-        func_80274098_de(&result, &yaw, &((LevelActor *)actor)->rotation);
+        MultiplyQuaternions(&result, &yaw, &((LevelActor *)actor)->rotation);
     }
     return result;
 }
@@ -398,7 +398,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
         }
         return base;
     }
-    func_80274244_de(&base, matrix);
+    MatrixFromQuaternion(&base, matrix);
     Particle_TransformPoint(matrix, &local, &aim);
     i = 0;
     target = 0;
@@ -432,7 +432,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
         turn.y = axis.y * D_80115DEC;
         turn.z = axis.z * D_80115DEC;
         turn.w = func_802B6560_de(angle);
-        func_80274098_de(&result, &base, &turn);
+        MultiplyQuaternions(&result, &base, &turn);
         if (assist != 0) {
             *assist = turn;
         }
@@ -549,7 +549,7 @@ void func_802480F0_de(s32 time, s32 flags, f32 *matrix) {
     Particle_ScaleVector(&origin, &origin, flip);
     func_80273448_de(inverse, origin.x, origin.y, origin.z);
     func_80272D00_de(rotation, angle, axis.x, axis.y, axis.z);
-    func_8026F620_de(matrix, inverse, rotation);
+    Rsp_MultiplyAffineMatrices(matrix, inverse, rotation);
     Particle_ScaleVector(&origin, &origin, flip);
     func_80273448_de(matrix, origin.x, origin.y, origin.z);
 }

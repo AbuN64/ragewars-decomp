@@ -11,7 +11,7 @@
 
 extern CQuatern func_8024796C_de(void *actor);
 
-extern void func_80274244_de(void *arg0, void *arg1);
+extern void MatrixFromQuaternion(void *arg0, void *arg1);
 
 
 
@@ -28,7 +28,7 @@ void *func_8024BC94_de(void *arg0, void *actor, struct IntPair arg2) {
     Triple sp60;
 
     sp10 = func_8024796C_de(actor);
-    func_80274244_de(&sp10, sp20);
+    MatrixFromQuaternion(&sp10, sp20);
     Particle_TransformPoint(sp20, &arg2, &sp60);
     *(Triple *)arg0 = sp60;
     return arg0;

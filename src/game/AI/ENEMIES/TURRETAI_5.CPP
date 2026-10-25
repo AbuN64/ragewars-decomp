@@ -16,7 +16,7 @@ extern s32 func_80285F58_de(void *arg0, void *arg1);
 extern void Turret_LinkEffect_MakeVisible(void *arg0, void *arg1, s32 arg2);
 
 extern CQuatern CVector3_GetDirectionRotation2(f32 *);
-extern void func_80274244_de(f32 *, f32 *);
+extern void MatrixFromQuaternion(f32 *, f32 *);
 
 extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
@@ -32,7 +32,7 @@ static inline void build_rotation(struct RotationObject *object, f32 *matrix) {
     angles[1] = object->angleY;
     angles[2] = object->angleZ;
     rotation = CVector3_GetDirectionRotation2(angles);
-    func_80274244_de(&rotation.x, matrix);
+    MatrixFromQuaternion(&rotation.x, matrix);
 }
 
 extern void func_80273C68_de(void *arg0, f32 arg1);
@@ -79,7 +79,7 @@ void Turret_BuildPlaneOrient(void *unused0, struct RotationObject *object, f32 *
     angles[1] = object->angleY;
     angles[2] = object->angleZ;
     orientation = CVector3_GetDirectionRotation2(angles);
-    func_80274244_de(&orientation.x, out);
+    MatrixFromQuaternion(&orientation.x, out);
 }
 
 void Turret_MoveTargetIntoTurretSpace(void *unused, struct RotationObject *object, CVector3 *pivot, CVector3 *point) {

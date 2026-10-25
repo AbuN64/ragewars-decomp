@@ -24,9 +24,9 @@ extern f32 func_8024E420_de(s32);
 
 
 extern void func_80273648_de(f32 *, f32);
-extern void func_80274098_de(CQuatern *, CQuatern *, CQuatern *);
-extern void func_80274244_de(CQuatern *, f32 *);
-extern void func_8026F620_de(f32 *, f32 *, f32 *);
+extern void MultiplyQuaternions(CQuatern *, CQuatern *, CQuatern *);
+extern void MatrixFromQuaternion(CQuatern *, f32 *);
+extern void Rsp_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 extern void func_80273448_de(f32 *, f32, f32, f32);
 extern void func_80272944_de(f32 *, CVector3 *, CVector3 *, s32);
 
@@ -120,9 +120,9 @@ void func_80241950_de(char *obj, CVector3 *corners, char *floor, s32 attachment)
     angle = ((LevelActor *)obj)->yaw * 0.5f;
     D_80115DEC = sine;
     yaw.w = func_802B6560_de(angle);
-    func_80274098_de(&orient, &yaw, &((LevelActor *)obj)->rotation);
-    func_80274244_de(&orient, turn);
-    func_8026F620_de(matrix, rest, turn);
+    MultiplyQuaternions(&orient, &yaw, &((LevelActor *)obj)->rotation);
+    MatrixFromQuaternion(&orient, turn);
+    Rsp_MultiplyAffineMatrices(matrix, rest, turn);
     func_80273448_de(matrix, ((LevelActor *)obj)->position0.x, ((LevelActor *)obj)->position0.y, ((LevelActor *)obj)->position0.z);
     func_80272944_de(matrix, corners, corners, 8);
     if (shape->flags & 1) {
