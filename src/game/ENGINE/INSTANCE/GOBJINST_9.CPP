@@ -25,7 +25,7 @@ extern void *func_802799C0_de(void *, s32);
 extern f32 func_802B72B0_de(f32);
 extern void func_80268A40_de(void *, CVector3, CVector3 *, f32 *);
 extern void func_8027310C_de(f32 *, CVector3 *, f32);
-extern void func_80273448_de(void *, f32, f32, f32);
+extern void TranslateMatrix(void *, f32, f32, f32);
 extern void func_802735A8_de(f32 *, f32, f32, f32);
 #ifndef NON_MATCHING
 extern void MatrixFromQuaternion(f32 *, f32 *);
@@ -88,12 +88,12 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
             }
             plane = ground + height * 0.9f;
             func_8027310C_de(projection, &dir, plane);
-            func_80273448_de(projection, -((struct LevelActor *)(obj))->position0.x, -plane, -((struct LevelActor *)(obj))->position0.z);
+            TranslateMatrix(projection, -((struct LevelActor *)(obj))->position0.x, -plane, -((struct LevelActor *)(obj))->position0.z);
             scale = height * 0.003f + 1.0f;
             func_802735A8_de(projection, scale, scale, scale);
             MatrixFromQuaternion((f32 *)(obj + 0x5C), turn);
             Rsp_MultiplyAffineMatrices(((struct LevelActor *)(obj))->shadow, projection, turn);
-            func_80273448_de(((struct LevelActor *)(obj))->shadow, ((struct LevelActor *)(obj))->position0.x, ground, ((struct LevelActor *)(obj))->position0.z);
+            TranslateMatrix(((struct LevelActor *)(obj))->shadow, ((struct LevelActor *)(obj))->position0.x, ground, ((struct LevelActor *)(obj))->position0.z);
             if (((struct LevelActor *)(obj))->shadow == 0) {
                 return;
             }
@@ -114,7 +114,7 @@ f32 func_8024E2FC_de(Actor_u1 *arg0);
 s32 func_8027254C_de(f32 *arg0, f32 arg1);
 void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
 
-void func_8027027C_de(f32 *src, PackedMatrixWords *dst);
+void Rsp_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst);
 void func_8026992C_de(void *matrix, s32 pass, u32 alpha);
 void Instance_DrawBlobShadow(struct LevelActor *actor, CVector3 *offset, s32 raised) {
     f32 matrix[16];
@@ -164,8 +164,8 @@ void Instance_DrawBlobShadow(struct LevelActor *actor, CVector3 *offset, s32 rai
         func_8027254C_de((f32 *)&position, 20000.0f);
         MatrixFromQuaternion(&actor->rotation, matrix);
         func_8027347C_de(matrix, scale, 1.0f, scale);
-        func_80273448_de((s8 *) matrix, position.x, position.y, position.z);
-        func_8027027C_de(matrix, (PackedMatrixWords *) packed);
+        TranslateMatrix((s8 *) matrix, position.x, position.y, position.z);
+        Rsp_ConvertMatrixToFixed(matrix, (PackedMatrixWords *) packed);
         opacity = 200.0f - (height * 1.2207031f);
         targetAlpha = 0xFF;
         if (!(255.0f < opacity)) {

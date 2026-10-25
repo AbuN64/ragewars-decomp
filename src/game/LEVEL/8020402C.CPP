@@ -77,7 +77,7 @@ void LV_FN(u8 *self, u8 *hit) {
                     LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x90) = 1;
                     LV_FIELD(table, s32, 0x74) = 1;
                     LV_FIELD(hit, s32, 0x12C) = 1;
-                    func_8025DF34_de(0xE0D);
+                    Render_PlayFlatSound(0xE0D);
                 }
             }
         }
@@ -107,19 +107,19 @@ void LV_FN(u8 *self, u8 *hit) {
             LV_FIELD(table2, s32, 0x80) = 0;
             switch (LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x92)) {
             case 0:
-                func_8025DF34_de(0x2E6);
+                Render_PlayFlatSound(0x2E6);
                 break;
             case 1:
-                func_8025DF34_de(0x2E4);
+                Render_PlayFlatSound(0x2E4);
                 break;
             case 2:
-                func_8025DF34_de(0x2E8);
+                Render_PlayFlatSound(0x2E8);
                 break;
             case 3:
-                func_8025DF34_de(0x2EC);
+                Render_PlayFlatSound(0x2EC);
                 break;
             case 4:
-                func_8025DF34_de(0x2EA);
+                Render_PlayFlatSound(0x2EA);
                 break;
             }
             for (node = *(u8 **)&D_80145060; node != 0; node = LV_FIELD(node, u8 *, 0x16E0)) {

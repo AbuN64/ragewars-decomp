@@ -17,7 +17,7 @@ extern u8 D_auto_800C9233[][4];
 extern char D_0044FA6C[];
 extern s32 func_8026437C_de(struct ControllerProfile *object);
 extern void func_8044A0C4_de(void *rec, s32 choice);
-extern void func_8025DF34_de(s32 id);
+extern void Render_PlayFlatSound(s32 id);
 extern void func_804427C4_de(s32 a, void *obj, void *res);
 extern s32 func_80442488_de(void *obj, s32 value, s32 a, s32 b, s32 c, s32 d);
 extern void func_8044214C_de(s32 a, s32 b, s32 c);
@@ -27,7 +27,7 @@ s32 func_8043DB50_de(s32 arg0, Func_8043DB50_Obj *arg1, s32 arg2) {
     Func_8043DB50_Slot *slot = rec->slot;
     if (func_8026437C_de(arg1->player) != 0) {
         func_8044A0C4_de(rec, slot->choice);
-        func_8025DF34_de(D_auto_800E1DAA[rec->style][0]);
+        Render_PlayFlatSound(D_auto_800E1DAA[rec->style][0]);
         func_804427C4_de(arg2, arg1, D_0044FA6C);
         return 1;
     }

@@ -57,7 +57,7 @@ s32 Menu_ApplyCheatCode(void)
             hasSound = D_0044FB90[i].sound != 0;
             D_80154030 = i;
             if (hasSound) {
-                func_8025DF34_de((s16)D_0044FB90[i].sound);
+                Render_PlayFlatSound((s16)D_0044FB90[i].sound);
             }
         }
     }

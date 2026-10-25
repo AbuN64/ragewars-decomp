@@ -47,7 +47,7 @@ s32 func_8041F6C8_de(s32 arg0,s32 arg1,s32 arg2) {
         temp_v0_2 = D_800E42D0->timer - 1;
         D_800E42D0->timer = temp_v0_2;
         if (temp_v0_2 <= 0) {
-            func_8025DF34_de(0xE79);
+            Render_PlayFlatSound(0xE79);
             func_8040E8D8_de(D_800E42D0->promptItem, 1);
             func_80419F58_de(D_800E42D0->prompt, 4);
             D_800E42D0->phase = 4;
@@ -82,7 +82,7 @@ s32 func_8041F6C8_de(s32 arg0,s32 arg1,s32 arg2) {
         }
         break;
     case 5:
-        func_8025DF34_de(0xE78);
+        Render_PlayFlatSound(0xE78);
         D_800E42D0->phase = 2;
         D_800E42D0->timer = 4;
         func_8040E8D8_de(D_800E42D0->promptItem, 0);
@@ -114,7 +114,7 @@ s32 func_8041F6C8_de(s32 arg0,s32 arg1,s32 arg2) {
                     widgetNode = func_8041B7FC_de(D_800E42D0->unk4, i);
                     temp_a0_3 = D_800E42D0->players[i].highlight;
                     if ((temp_a0_3->x != (widgetNode->x - 2)) || (temp_a0_3->y != (widgetNode->y - 2))) {
-                        func_8025DF34_de(0xE7F);
+                        Render_PlayFlatSound(0xE7F);
                         if (func_8040EBD0_de(widgetNode) == 0) {
                             resource = widgetNode->resource;
                             if (resource != empty_slot) {

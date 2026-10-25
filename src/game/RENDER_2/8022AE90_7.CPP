@@ -62,7 +62,7 @@ void func_8022B7F8_de(void *actor, void *arg1) {
         return;
     }
 
-    func_8025DF34_de(0xB45);
+    Render_PlayFlatSound(0xB45);
     state->pending = D_800C2D1C_de;
     state->parent = source;
     owner = state->message;

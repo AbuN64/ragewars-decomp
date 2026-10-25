@@ -18,8 +18,8 @@ extern void MultiplyQuaternions(CQuatern *arg0, CQuatern *arg1, CQuatern *arg2);
 extern void MatrixFromQuaternion(void *, void *);
 extern void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
 extern s32 func_8027254C_de(f32 *arg0, f32 arg1);
-extern void func_80273448_de(char *, f32, f32, f32);
-extern void func_80273D6C_de(void *);
+extern void TranslateMatrix(char *, f32, f32, f32);
+extern void SwapMatrixUpForward(void *);
 
 extern f32 D_80115DEC;
 
@@ -58,10 +58,10 @@ void func_8024B53C_de(void *levelActor) {
                     ((struct LevelActor *)(levelActor))->scale.y,
                     ((struct LevelActor *)(levelActor))->scale.z);
     func_8027254C_de(&((struct LevelActor *)(levelActor))->position0.x, 20000.0f);
-    func_80273448_de(transform, ((struct LevelActor *)(levelActor))->position0.x,
+    TranslateMatrix(transform, ((struct LevelActor *)(levelActor))->position0.x,
                    ((struct LevelActor *)(levelActor))->position0.y,
                    ((struct LevelActor *)(levelActor))->position0.z);
-    func_80273D6C_de(transform);
+    SwapMatrixUpForward(transform);
 }
 
 void func_8024B654_de(void) {

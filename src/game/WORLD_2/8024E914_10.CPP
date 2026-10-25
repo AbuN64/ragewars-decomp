@@ -36,10 +36,10 @@ extern s32 D_800CD8D0[];
 extern void func_8024DD10_de(PlacedProp *, RecordRecAt1A *, s32, char *);
 extern PropGeometry *Engine_GetActorDefinition(void *, s32);
 extern void func_8027347C_de(char *, f32, f32, f32);
-extern void func_80273448_de(char *, f32, f32, f32);
-extern void func_80273D6C_de(char *);
+extern void TranslateMatrix(char *, f32, f32, f32);
+extern void SwapMatrixUpForward(char *);
 extern void func_8027302C(char *, char *);
-extern void func_8027027C_de(char *, char *);
+extern void Rsp_ConvertMatrixToFixed(char *, char *);
 
 static inline s32 advancePropKey(void) {
     s32 next;
@@ -102,8 +102,8 @@ void func_8024F960_eu(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *
     prop->flags = record->flags;
     func_802736D4_de(matrix, turn);
     func_8027347C_de(matrix, record->scale, record->scale, record->scale);
-    func_80273448_de(matrix, position.x, position.y, position.z);
-    func_80273D6C_de(matrix);
+    TranslateMatrix(matrix, position.x, position.y, position.z);
+    SwapMatrixUpForward(matrix);
     if (prop->flags & 0x40) {
         prop->min.x = position.x - 102.3999939f;
         prop->min.y = position.y - 102.3999939f;
@@ -122,7 +122,7 @@ void func_8024F960_eu(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *
         prop->fieldD4 = record->value;
     }
     func_8027302C(prop->matrix, matrix);
-    func_8027027C_de(matrix, prop->transform);
+    Rsp_ConvertMatrixToFixed(matrix, prop->transform);
     prop->position = position;
     if (record->segment == 0xFFFF) {
         prop->segment = 0;

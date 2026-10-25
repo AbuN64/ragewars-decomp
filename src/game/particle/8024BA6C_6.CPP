@@ -43,7 +43,7 @@ extern void func_8027302C(f32 *, Body_func_8024C6E8_de *);
 
 extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 
-extern void func_80273448_de(void *, f32, f32, f32);
+extern void TranslateMatrix(void *, f32, f32, f32);
 
 extern void func_80272D00_de(f32 *, f32, f32, f32, f32);
 
@@ -157,11 +157,11 @@ void func_8024C6E8_de(s32 unused, SourceRecAt18 *source, Body_func_8024C6E8_de *
     func_8027302C(transform, body);
     reverse = -1.0f;
     Particle_ScaleVector(&velocity, &velocity, reverse);
-    func_80273448_de(transform, velocity.x, velocity.y, velocity.z);
+    TranslateMatrix(transform, velocity.x, velocity.y, velocity.z);
     func_80272D00_de(impulse, strength, position.x, position.y, position.z);
     Rsp_MultiplyAffineMatrices(body, transform, impulse);
     Particle_ScaleVector(&velocity, &velocity, reverse);
-    func_80273448_de(body, velocity.x, velocity.y, velocity.z);
+    TranslateMatrix(body, velocity.x, velocity.y, velocity.z);
     if (source->owner == owner) {
         source->charges--;
     }
@@ -272,7 +272,7 @@ void func_8024CB4C_de(ObjectLinks24_2 *arg0, s32 arg1, CQuatern *arg2) {
                     (char *)base + o->unk_14 * 4);
 }
 
-/* Converts the twelve used entries of a 4x4 float matrix to unsigned integers, splitting each pair into the high and low halfword arrays of a packed matrix and setting the final high word's low bit. Adapted from func_8027027C_de with the per-entry scale multiplies removed, the converted value scoped to each conversion block, and the D_800C8C70 thresholds changed. */
+/* Converts the twelve used entries of a 4x4 float matrix to unsigned integers, splitting each pair into the high and low halfword arrays of a packed matrix and setting the final high word's low bit. Adapted from Rsp_ConvertMatrixToFixed with the per-entry scale multiplies removed, the converted value scoped to each conversion block, and the D_800C8C70 thresholds changed. */
 void func_8024CC30_de(f32 *src, PackedMatrixWords *dst) {
     u32 *upper = dst->upper;
     u32 *lower = dst->lower;

@@ -90,7 +90,7 @@ extern void func_80270AAC_de(CQuatern *, f32, CQuatern *, CQuatern *);
 extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void func_80272D00_de(PoseMatrix, f32, f32, f32, f32);
 extern void func_8027302C(PoseMatrix, PoseMatrix);
-extern void func_80273448_de(PoseMatrix, f32, f32, f32);
+extern void TranslateMatrix(PoseMatrix, f32, f32, f32);
 extern void func_8027347C_de(PoseMatrix, f32, f32, f32);
 extern s32 Nav_NextRandom(void);
 extern f32 func_8027525C_de(StateFlags *, f32, f32);
@@ -125,11 +125,11 @@ static inline void twistPart(Shared_PosePart *part, PoseMatrix cur, s32 n, s32 i
         angle *= (n == 5 ? -2.0f : (f32)n);
         func_8027302C(inv, cur);
         Particle_ScaleVector(&turn, &turn, -1.0f);
-        func_80273448_de(inv, turn.x, turn.y, turn.z);
+        TranslateMatrix(inv, turn.x, turn.y, turn.z);
         func_80272D00_de(rotm, angle, axis.x, axis.y, axis.z);
         Rsp_MultiplyAffineMatrices(cur, inv, rotm);
         Particle_ScaleVector(&turn, &turn, -1.0f);
-        func_80273448_de(cur, turn.x, turn.y, turn.z);
+        TranslateMatrix(cur, turn.x, turn.y, turn.z);
         if (part->unk_14[0] == i) {
             part->unk_12--;
         }

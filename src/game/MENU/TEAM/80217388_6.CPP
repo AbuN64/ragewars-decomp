@@ -76,7 +76,7 @@ void func_80217D74_de(s32 *menu, void *player, s32 unused2) {
         entry = (Entry34 *)&((Block24 *)menu)[slot];
         weapon = entry->weapon;
         if (entry->owned == 0) {
-            func_8025DF34_de(0xD4D);
+            Render_PlayFlatSound(0xD4D);
             return;
         }
         if (weapon < 0) {

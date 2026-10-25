@@ -27,7 +27,7 @@ s32 Menu_UpdateFlicker(func_80419D04_S1 *flicker) {
    if(timer<=0 && Nav_NextRandom()%100<2) {
     widgetOwner->unk44=1;
     widgetOwner->unk78->value=widgetOwner->unk4C[widgetOwner->unk74];
-    func_8025DF34_de(0xe75);
+    Render_PlayFlatSound(0xe75);
    }
   } else {
    flicker->unk78->value=flicker->unk80;
@@ -41,7 +41,7 @@ s32 Menu_UpdateFlicker(func_80419D04_S1 *flicker) {
      flicker->unk7C=50;
     } else {
      widgetOwner->unk78->value=widgetOwner->unk4C[next];
-     func_8025DF34_de(0xe75);
+     Render_PlayFlatSound(0xe75);
     }
    }
   }

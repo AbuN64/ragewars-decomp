@@ -53,9 +53,9 @@ extern void func_802732D0_de(Matrix *, CVector3 *);
 
 extern void func_802727D8_de(Matrix *);
 
-extern void func_80273448_de(Matrix *, float, float, float);
+extern void TranslateMatrix(Matrix *, float, float, float);
 
-extern void func_8027027C_de(Matrix *, void *);
+extern void Rsp_ConvertMatrixToFixed(Matrix *, void *);
 
 static inline void getEye(Player1680 *player, CVector3 *pos) {
     Matrix frame;
@@ -233,8 +233,8 @@ void func_8022C490_de(Player1680 *player) {
     getEye(player, &pos);
     func_802727D8_de(&mtx);
     func_802736D4_de(&mtx, getYaw());
-    func_80273448_de(&mtx, pos.x, pos.y + D_800C2D40_de.second, pos.z);
-    func_8027027C_de(&mtx, &player->views[D_800D297C]);
+    TranslateMatrix(&mtx, pos.x, pos.y + D_800C2D40_de.second, pos.z);
+    Rsp_ConvertMatrixToFixed(&mtx, &player->views[D_800D297C]);
 }
 
 void *func_8022C55C_de(void *arg0, u32 arg1) {

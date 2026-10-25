@@ -101,7 +101,7 @@ static inline s32 can_fire(char *player) {
     }
     ammo = func_8022F55C_de(&D_80102B00[((AttackTriggerPlayer *)(player))->unk5D4], ((AttackTriggerPlayer *)(player))->unk62E);
     if (ammo == 0) {
-        func_8025DF34_de(0xD4D);
+        Render_PlayFlatSound(0xD4D);
         if (((AttackTriggerPlayer *)(player))->unk5DC != 0) {
             Camera_PostTargetedScreenMessage(&D_80145088, ((AttackTriggerPlayer *)(player))->unk5DC, D_800D30BC[0], Weapons_GetPlayerIndex(&D_80145040, player),
                           D_800C2EE4_de);
@@ -161,7 +161,7 @@ static inline s32 can_toggle_mode(Player *player) {
     if (D_801462C8.controllerMode != 1) return 1;
     allowed = func_8022F55C_de(&D_80102B00[player->slot], player->selectedAction);
     if (allowed == 0) {
-        func_8025DF34_de(0xD4D);
+        Render_PlayFlatSound(0xD4D);
         if (player->owner) {
             Camera_PostTargetedScreenMessage(&D_80145088, player->owner, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80152789),
                                              Weapons_GetPlayerIndex(&D_80145040, player), 1.0f);
@@ -189,7 +189,7 @@ void Weapons_UpdateAlternateFire(void *actor, void *attack) {
         if (((AttackTriggerAction *)attack)->unk13C == 1) {
             ((AttackTriggerAction *)attack)->unk13C = 2;
             if (!Weapons_HasAmmoForMode(player, player->selectedAction)) {
-                func_8025DF34_de(0xD4D);
+                Render_PlayFlatSound(0xD4D);
                 if (player->owner) {
                     Camera_PostTargetedScreenMessage((char *)&D_80145040 + 0x48, player->owner,
                                                      RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80145040.game.language),

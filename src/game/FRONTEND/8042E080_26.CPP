@@ -39,7 +39,7 @@ s32 func_8042FF40_de(s32 unusedA, s32 unusedB, s32 index, s32 mode)
         }
       }
       ((struct Shape_typemap_21 *)(handle))->field_10 = 0xFF;
-      func_8025DF34_de(0xE74);
+      Render_PlayFlatSound(0xE74);
     }
   }
  do { return 0; } while (0);

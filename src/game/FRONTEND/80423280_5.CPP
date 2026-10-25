@@ -96,7 +96,7 @@ s32 func_80426918_de(void *unused0, void *unused1, s32 delta) {
         if (--D_800E4690->timer > 0) {
             break;
         }
-        func_8025DF34_de(0xE79);
+        Render_PlayFlatSound(0xE79);
         func_8040E8D8_de(D_800E4690->button, 1);
         func_80419F58_de(D_800E4690->prompt, 4);
         D_800E4690->state = 4;
@@ -130,7 +130,7 @@ s32 func_80426918_de(void *unused0, void *unused1, s32 delta) {
         }
         break;
     case 5:
-        func_8025DF34_de(0xE78);
+        Render_PlayFlatSound(0xE78);
         func_8040E8D8_de(D_800E4690->button, 0);
         switch (D_801462C8.controllerMode) {
         case 1:

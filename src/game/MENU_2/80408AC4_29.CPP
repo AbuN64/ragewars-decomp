@@ -305,7 +305,7 @@ void func_80426310_de(void) {
         "jal        func_80427B08_de\n"
         "nop\n"
         ".Lauto_80426768:\n"
-        "jal        func_8025DF34_de\n"
+        "jal        Render_PlayFlatSound\n"
         "addiu     $a0, $zero, 0xE78\n"
         "lw         $ra, 0x20($sp)\n"
         "lw         $s1, 0x1C($sp)\n"

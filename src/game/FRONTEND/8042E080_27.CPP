@@ -10,7 +10,7 @@
    sets the word at 0xBA0 to 2, clears 0xBA4, drops one from the count at 0xB9C, stamps 0x41 on
    that count's two-byte slot at 0xB8C when the slot is free, silences the sound handle taken from
    the player's entry of the slot array at 4 of the block, and reports the cancel through
-   func_8025DF34_de. Records 13 and above are left alone; the function always returns zero. */
+   Render_PlayFlatSound. Records 13 and above are left alone; the function always returns zero. */
 
 
 
@@ -57,7 +57,7 @@ s32 func_80430028_de(s32 unused0, s32 unused1, s32 arg2, s32 arg3) {
             *mark = 0x41;
         }
         sound->value = 0xFF;
-        func_8025DF34_de(0xE74);
+        Render_PlayFlatSound(0xE74);
     }
     return 0;
 }
@@ -94,7 +94,7 @@ s32 func_80430118_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
             MarkMenuEventHandled();
             func_80434EF4_de(temp_s1);
             D_800E54A4->players[temp_s1].namePhase = 0;
-            func_8025DF34_de(0xE81);
+            Render_PlayFlatSound(0xE81);
             return 0;
         }
         return 0;
@@ -103,7 +103,7 @@ s32 func_80430118_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
             MarkMenuEventHandled();
             func_80434250_de(temp_s1, 1);
             D_800E54A4->selected[temp_s1] = 0;
-            func_8025DF34_de(0xE74);
+            Render_PlayFlatSound(0xE74);
             return 0;
         }
         return 0;
@@ -117,7 +117,7 @@ loop_11:
                 goto loop_11;
             }
             func_8041B8DC_de((D_800E54A4->root), temp_s1, var_s0);
-            func_8025DF34_de(0xE74);
+            Render_PlayFlatSound(0xE74);
             return 0;
         }
         return 0;
@@ -176,7 +176,7 @@ s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, 
             MarkMenuEventHandled();
             D_800E54A4->players[player].namePhase = arg3;
             func_80434E34_de(player);
-            func_8025DF34_de(0xE81);
+            Render_PlayFlatSound(0xE81);
         }
         return 0;
     case 4:
@@ -184,7 +184,7 @@ s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, 
             MarkMenuEventHandled();
             func_80434250_de(player, 0);
             D_800E54A4->selected[player] = 0;
-            func_8025DF34_de(0xE74);
+            Render_PlayFlatSound(0xE74);
         }
         return 0;
     case 13:
@@ -196,7 +196,7 @@ s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, 
                 node = node->ref2C;
             }
             func_8041B8DC_de(D_800E54A4->root, player, node);
-            func_8025DF34_de(0xE74);
+            Render_PlayFlatSound(0xE74);
         }
         return 0;
     case 22:

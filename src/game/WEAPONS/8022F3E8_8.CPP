@@ -48,7 +48,7 @@ static inline s32 can_fire(char *player) {
     }
     ammo = func_8022F55C_de(&D_80102B00[((SharedPlayer *)(player))->views1C.view5D4_45.unk5D4 * 0x190], ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E);
     if (ammo == 0) {
-        func_8025DF34_de(0xD4D);
+        Render_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
             Camera_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC, D_800E0D44, D_800DCC68, D_80152789), Weapons_GetPlayerIndex(D_80145040, player),
                           1.0f);
@@ -77,7 +77,7 @@ void func_80230DA4_de(Shared_Actor *actor, WeaponFireState *weapon) {
     }
     if ((((SharedPlayer *)(player))->views5E8.view6AC_45.unk6AC & 0x4000) && can_fire(player) && ((SharedPlayer *)(player))->views5E8.chargeView.charge > 0) {
         if (!(((SharedPlayer *)(player))->views122C.view122C_2.options & 0x18400)) {
-            func_8025DF34_de(0x7BC);
+            Render_PlayFlatSound(0x7BC);
         }
         ((SharedPlayer *)(player))->views122C.view122C_2.options |= 0x18400;
         ((SharedPlayer *)(player))->fxTime = 25.0f;

@@ -32,10 +32,10 @@ extern f32 D_800CD6B0;
 extern void func_80272B38_de(MatrixF *, CVector3 *, CVector3 *);
 extern void func_802727D8_de(MatrixF *);
 extern CQuatern func_8024D4AC_de(EffectActor *, CVector3);
-extern void func_80273198_de(MatrixF *, CVector3 *);
+extern void BuildDirectionMatrix(MatrixF *, CVector3 *);
 extern void Rsp_ConvertMatrixToFloat(MatrixF *, MatrixF *);
 extern void func_8027347C_de(MatrixF *, f32, f32, f32);
-extern void func_80273448_de(MatrixF *, f32, f32, f32);
+extern void TranslateMatrix(MatrixF *, f32, f32, f32);
 extern void Particle_BuildMatrix(EffectActor *, MatrixF *, void *, f32);
 extern s32 Nav_NextRandom(void);
 extern void Particle_Release(EffectSystem *, ParticleEffect *);
@@ -325,7 +325,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                         }
                         func_8027347C_de(&mtx, scale, scale, scale);
                         if (source->model->flags & 8) {
-                            func_80273448_de(&mtx, 0.0f, -source->unk154 * source->unk158, 0.0f);
+                            TranslateMatrix(&mtx, 0.0f, -source->unk154 * source->unk158, 0.0f);
                         }
                         break;
                     case 1:
@@ -470,7 +470,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 if (aim != 0) {
                     Particle_SubtractVectors(&aimDelta, aim, &effect->pos);
                     Particle_NormalizeVec3(&aimDelta.x);
-                    func_80273198_de(&mtx, &aimDelta);
+                    BuildDirectionMatrix(&mtx, &aimDelta);
                     if (mode == -8) {
                         effect->direction = D_801002E0;
                         Particle_NormalizeVec3(&effect->direction.x);

@@ -43,7 +43,7 @@ s32 func_8025DEC0_de(s32 arg0, CVector3 arg1, s32 arg4, s32 arg5, f32 arg6) {
     return func_80258A7C_de(&D_8010C080, (s16)arg0, arg1, arg4, arg5, arg6);
 }
 
-s32 func_8025DF34_de(s32 track) {
+s32 Render_PlayFlatSound(s32 track) {
     s32 temp_s0;
     s32 temp_s1;
 

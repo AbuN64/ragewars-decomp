@@ -78,25 +78,25 @@ extern void func_802A2360_de();
 extern void MarkMenuEventHandled();
 
 
-/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects has a nonzero word at 0x4D4 (four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through func_8025DF34_de and calls func_8043ACF0_de with the entry index and 1, returning zero. */
+/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects has a nonzero word at 0x4D4 (four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through Render_PlayFlatSound and calls func_8043ACF0_de with the entry index and 1, returning zero. */
 
 
 
 
 
-/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects has a nonzero word at 0x4D4 (four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through func_8025DF34_de and calls func_8043ACF0_de with the entry index and -1, returning zero. Adapted from func_8043BCC0_de with the second func_8043ACF0_de argument changed from 1 to -1. */
+/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects has a nonzero word at 0x4D4 (four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through Render_PlayFlatSound and calls func_8043ACF0_de with the entry index and -1, returning zero. Adapted from func_8043BCC0_de with the second func_8043ACF0_de argument changed from 1 to -1. */
 
 
 
 
 
-/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects is in mode two (the word at 0x4D4, four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through func_8025DF34_de and calls func_8043AE5C_de with the entry index and -1, returning zero. */
+/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects is in mode two (the word at 0x4D4, four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through Render_PlayFlatSound and calls func_8043AE5C_de with the entry index and -1, returning zero. */
 
 
 
 
 
-/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects is in mode two (the word at 0x4D4, four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through func_8025DF34_de and calls func_8043AE5C_de with the entry index and 1, returning zero. Adapted from func_8043BDF0_de with the second func_8043AE5C_de argument changed from -1 to 1. */
+/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects is in mode two (the word at 0x4D4, four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through Render_PlayFlatSound and calls func_8043AE5C_de with the entry index and 1, returning zero. Adapted from func_8043BDF0_de with the second func_8043AE5C_de argument changed from -1 to 1. */
 
 
 
@@ -202,7 +202,7 @@ s32 func_8043BBB0_de(void *first, void *second, u32 event, s32 held) {
     }
     Frontend_ShowEquipChoice(index, D_800E59E0->panels[index].selection,
                   D_800E59E0->panels[index].values[D_800E59E0->panels[index].selection]);
-    func_8025DF34_de(0xE7C);
+    Render_PlayFlatSound(0xE7C);
     return 0;
 }
 
@@ -213,7 +213,7 @@ s32 func_8043BCC0_de(void *first, void *second, s32 slot, s32 active) {
     if (active == 1) {
         index = slot;
         if (D_800E59E0->panels[index].mode != 0 && D_800E59E0->panels[index].state == active) {
-            func_8025DF34_de(0xE7B);
+            Render_PlayFlatSound(0xE7B);
             func_8043ACF0_de(index, 1);
             return 0;
         }
@@ -228,7 +228,7 @@ s32 func_8043BD58_de(void *first, void *second, s32 slot, s32 active) {
     if (active == 1) {
         index = slot;
         if (D_800E59E0->panels[index].mode != 0 && D_800E59E0->panels[index].state == active) {
-            func_8025DF34_de(0xE7B);
+            Render_PlayFlatSound(0xE7B);
             func_8043ACF0_de(index, -1);
             return 0;
         }
@@ -243,7 +243,7 @@ s32 func_8043BDF0_de(void *first, void *second, s32 slot, s32 active) {
     if (active == 1) {
         index = slot;
         if (D_800E59E0->panels[index].mode == 2 && D_800E59E0->panels[index].state == active) {
-            func_8025DF34_de(0xE7B);
+            Render_PlayFlatSound(0xE7B);
             func_8043AE5C_de(index, -1);
             return 0;
         }
@@ -258,7 +258,7 @@ s32 func_8043BE8C_de(void *first, void *second, s32 slot, s32 active) {
     if (active == 1) {
         index = slot;
         if (D_800E59E0->panels[index].mode == 2 && D_800E59E0->panels[index].state == active) {
-            func_8025DF34_de(0xE7B);
+            Render_PlayFlatSound(0xE7B);
             func_8043AE5C_de(index, 1);
             return 0;
         }

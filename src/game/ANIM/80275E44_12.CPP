@@ -15,7 +15,7 @@ extern void func_80273A98_de(void *, f32);
 extern void Particle_ProjectPoint(void *, void *, void *);
 extern void func_802735A8_de(void *, f32, f32, f32);
 extern void func_802738C0_de(void *, f32);
-extern void func_80273448_de(void *, f32, f32, f32);
+extern void TranslateMatrix(void *, f32, f32, f32);
 extern void func_8026EF58_de(void *, void *);
 extern void func_80275954_de(void *, s32, void *);
 void Anim_DecodeBoxTransform(u8 *self, u8 *src) {
@@ -93,7 +93,7 @@ void Anim_DecodeBoxTransform(u8 *self, u8 *src) {
     func_80273C68_de(matrix, rotation.z);
     func_80273A98_de(matrix, rotation.y);
     func_802738C0_de(matrix, rotation.x);
-    func_80273448_de(matrix, translation.x, translation.y, translation.z);
+    TranslateMatrix(matrix, translation.x, translation.y, translation.z);
     func_8026EF58_de(self + 0x20, matrix);
     for (i = 0; i < 8; i++) {
         x = 1.0f;

@@ -88,23 +88,23 @@ void func_8022B190_de(s32 actor) {
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/CHANNEL.H"
 extern u8 *D_800D311C, *D_800D3120, *D_800D3124;
-extern void func_80273198_de(Matrix *, CVector3 *);
+extern void BuildDirectionMatrix(Matrix *, CVector3 *);
 extern void Particle_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 extern void Particle_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
-extern void func_80273448_de(Matrix *, f32 x, f32 y, f32 z);
-extern void func_80273D6C_de(Matrix *);
-extern void func_8027027C_de(Matrix *src, void *dst);
-/* Copy of func_8022B3D0_de: orients the marker matrix along the aim normal, moves it to the marker origin
+extern void TranslateMatrix(Matrix *, f32 x, f32 y, f32 z);
+extern void SwapMatrixUpForward(Matrix *);
+extern void Rsp_ConvertMatrixToFixed(Matrix *src, void *dst);
+/* Copy of Render_BuildForceMarkerTransform: orients the marker matrix along the aim normal, moves it to the marker origin
  * pushed 5.12 units off the surface and packs it into the player's marker transform. */
 static inline void buildForceMarkerTransform(Shared_ActorView *player, s32 attract, CVector3 *normal) {
     Matrix matrix;
     CVector3 offset;
-    func_80273198_de(&matrix, normal);
+    BuildDirectionMatrix(&matrix, normal);
     Particle_ScaleVector(&offset, normal, 5.12f);
     Particle_AddVec3(&offset, &offset, &player->targetPosition);
-    func_80273448_de(&matrix, offset.x, offset.y, offset.z);
-    func_80273D6C_de(&matrix);
-    func_8027027C_de(&matrix, player->transform1600);
+    TranslateMatrix(&matrix, offset.x, offset.y, offset.z);
+    SwapMatrixUpForward(&matrix);
+    Rsp_ConvertMatrixToFixed(&matrix, player->transform1600);
 }
 /* Toggles the player's attract/repulse marker while the aim ray hits something: a live marker is removed
  * ("ATTRACT REMOVED"); otherwise a new one is placed at the aim point for 150 frames, pulling when
@@ -115,7 +115,7 @@ void Render_ToggleForceMarker(Shared_ActorView *player, s32 attract) {
     if (player->aimTarget != 0) {
         if (player->field11FC > 0.0f) {
             player->field11FC = 0;
-            func_8025DF34_de(0x578);
+            Render_PlayFlatSound(0x578);
             screen = player->message;
             if (screen == 0) return;
             text = D_800D311C;
@@ -124,7 +124,7 @@ void Render_ToggleForceMarker(Shared_ActorView *player, s32 attract) {
             player->attract = attract;
             player->field11FC = 150.0f;
             buildForceMarkerTransform(player, attract, &player->aimNormal);
-            func_8025DF34_de(0x578);
+            Render_PlayFlatSound(0x578);
             screen = player->message;
             if (screen == 0) return;
             if (attract != 0) text = D_800D3120;

@@ -15,13 +15,13 @@ void func_8043C210_de(s32 *record, s32 first, s32 second, s32 third, s32 fourth)
 }
 
 /* Sets the words at offsets 0x10, 0x14 and 0x18 of a record to one, zero and one, then calls
-   func_8025DF34_de with 0xE83. */
+   Render_PlayFlatSound with 0xE83. */
 
 void func_8043C278_de(s32 *record) {
     record[4] = 1;
     record[5] = 0;
     record[6] = 1;
-    func_8025DF34_de(0xE83);
+    Render_PlayFlatSound(0xE83);
 }
 
 /* Advances the counter at offset 0x14 of a record by the step at 0x10; once it reaches 0xD both

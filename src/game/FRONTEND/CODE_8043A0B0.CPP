@@ -207,7 +207,7 @@ s32 Frontend_StartFourPlayerResults(void) {
             }
         }
     }
-    func_8025DF34_de(0xE78);
+    Render_PlayFlatSound(0xE78);
     return 0;
 }
 #else
@@ -227,7 +227,7 @@ s32 Frontend_UpdateFourPlayerResults(void) {
         D_800E59E0->rightArrow->x = (u16)D_800E59E0->rightArrow->x - (u16)D_800E59E0->rightStep;
         D_800E59E0->timer--;
         if (D_800E59E0->timer <= 0) {
-            func_8025DF34_de(0xE79);
+            Render_PlayFlatSound(0xE79);
             func_8040E8D8_de(D_800E59E0->message, 1);
             func_80419F58_de(D_800E59E0->resource, 4);
             D_800E59E0->state = 4;
@@ -266,7 +266,7 @@ s32 Frontend_UpdateFourPlayerResults(void) {
         }
         return 0;
     case 5:
-        func_8025DF34_de(0xE78);
+        Render_PlayFlatSound(0xE78);
         D_800E59E0->state = 2;
         D_800E59E0->timer = 4;
         func_8040E8D8_de(D_800E59E0->message, 0);

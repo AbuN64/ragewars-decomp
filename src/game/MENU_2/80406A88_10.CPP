@@ -199,7 +199,7 @@ loop_7:
     if (D_801462C8.controllerMode != 2) {
         func_80427B08_de();
     }
-    func_8025DF34_de(0xE78);
+    Render_PlayFlatSound(0xE78);
     return 0;
 }
 #undef D_800E4690

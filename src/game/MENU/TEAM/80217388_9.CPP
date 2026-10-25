@@ -111,7 +111,7 @@ run:
 #else
             Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800D3168);
 #endif
-            func_8025DF34_de(0x2E6);
+            Render_PlayFlatSound(0x2E6);
             break;
         case 1:
 #ifdef VERSION_EU
@@ -121,7 +121,7 @@ run:
 #else
             Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800D316C);
 #endif
-            func_8025DF34_de(0x2E4);
+            Render_PlayFlatSound(0x2E4);
             break;
         case 2:
 #ifdef VERSION_EU
@@ -131,7 +131,7 @@ run:
 #else
             Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800D3170);
 #endif
-            func_8025DF34_de(0x2E8);
+            Render_PlayFlatSound(0x2E8);
             break;
         case 3:
 #ifdef VERSION_EU
@@ -141,7 +141,7 @@ run:
 #else
             Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800D3174);
 #endif
-            func_8025DF34_de(0x2EC);
+            Render_PlayFlatSound(0x2EC);
             break;
         }
         /* fall through */

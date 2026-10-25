@@ -89,7 +89,7 @@ s32 func_8041E170_us(void *sender, void *context, void *argument, s32 event) {
                     *D_800E381C[variant][id].text);
     D_80153F80[D_800E39C0->selection].variantC = variant;
     func_8041E408_de(D_800E39C0->selection);
-    func_8025DF34_de(0xE81);
+    Render_PlayFlatSound(0xE81);
     return 0;
 }
 #endif
@@ -194,7 +194,7 @@ void func_8041E2F0_us(void) {
         "lw         $a0, 0x14($a0)\n"
         "jal        func_8041E408_de\n"
         "nop\n"
-        "jal        func_8025DF34_de\n"
+        "jal        Render_PlayFlatSound\n"
         "addiu     $a0, $zero, 0xE81\n"
         ".Lauto_8041E464:\n"
         "addu       $v0, $zero, $zero\n"

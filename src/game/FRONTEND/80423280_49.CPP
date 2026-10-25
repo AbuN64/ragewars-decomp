@@ -11,7 +11,7 @@ extern void func_8042B080_de(void);
    items of the window with their alpha and visibility, resets the selection and the counters at
    D_80154024, clears the pending flag at 0x91 of the eight D_80146398 records, places the four
    character models (ids 0xEA6 to 0xEA9, x 0, -6, -13, -19) and a fifth model 0xEA6, then issues
-   request 0xE78 through func_8025DF34_de and calls func_80422170_de; returns zero. */
+   request 0xE78 through Render_PlayFlatSound and calls func_80422170_de; returns zero. */
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 
@@ -226,7 +226,7 @@ s32 func_80429A24_de(void *window) {
     func_80439B5C_de(&D_800E4F60->models[4].initial, 0xEA6, scale.words, position.words);
     func_80439BE0_de(&D_800E4F60->models[4].rotation, rotation.words);
     func_80439C30_de(&D_800E4F60->models[4].offset, offset.words);
-    func_8025DF34_de(0xE78);
+    Render_PlayFlatSound(0xE78);
     func_80422170_de();
     return 0;
 }

@@ -42,7 +42,7 @@ extern void func_802A2360_de();
 
 /* On event 3 with value 0, calls MarkMenuEventHandled, sets the word at offset 0x988 of the object
    D_800E4690 points to to 8 and the byte at 0x10 of its item at 0xA50 to 0x5A, and plays sound
-   0xE7C through func_8025DF34_de. Returns zero. */
+   0xE7C through Render_PlayFlatSound. Returns zero. */
 
 
 
@@ -180,7 +180,7 @@ s32 func_804287F8_de(void *first, void *second, u32 event, s32 value) {
         state = D_800E4690;
         state->state = 8;
         state->item->alpha = 0x5A;
-        func_8025DF34_de(0xE7C);
+        Render_PlayFlatSound(0xE7C);
     }
     return 0;
 }
@@ -202,7 +202,7 @@ s32 func_80428850_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     if (set != 1) {
         return 0;
     }
-    func_8025DF34_de(0xE7D);
+    Render_PlayFlatSound(0xE7D);
     if (func_80265650_de(D_800E4690->pending, D_800E4690->selection) == set) {
         D_800E4690->window->alpha = 0x46;
     } else {
@@ -240,7 +240,7 @@ s32 func_804289B4_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     if (set != 1) {
         return 0;
     }
-    func_8025DF34_de(0xE7D);
+    Render_PlayFlatSound(0xE7D);
     if (func_80265650_de(D_800E4690->pending, D_800E4690->selection) == set) {
         D_800E4690->window->alpha = 0x46;
     } else {
@@ -278,7 +278,7 @@ s32 func_80428B18_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     if (set != 1) {
         return 0;
     }
-    func_8025DF34_de(0xE7D);
+    Render_PlayFlatSound(0xE7D);
     if (func_80265650_de(D_800E4690->pending, D_800E4690->selection) == set) {
         D_800E4690->window->alpha = 0x46;
     } else {
@@ -316,7 +316,7 @@ s32 func_80428C7C_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     if (set != 1) {
         return 0;
     }
-    func_8025DF34_de(0xE7D);
+    Render_PlayFlatSound(0xE7D);
     if (func_80265650_de(D_800E4690->pending, D_800E4690->selection) == set) {
         D_800E4690->window->alpha = 0x46;
     } else {

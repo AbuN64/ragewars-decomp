@@ -98,9 +98,9 @@ void func_8024F618_de(StaticObject *staticObject) {
 
 extern void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
 extern s32 func_8027254C_de(f32 *arg0, f32 arg1);
-extern void func_80273448_de(char *object, float x, float y, float z);
-extern void func_80273D6C_de(void *object);
-extern void func_8027027C_de(void *arg0, void *arg1);
+extern void TranslateMatrix(char *object, float x, float y, float z);
+extern void SwapMatrixUpForward(void *object);
+extern void Rsp_ConvertMatrixToFixed(void *arg0, void *arg1);
 
 
 void func_8024F634_de(void *arg0) {
@@ -117,11 +117,11 @@ void func_8024F634_de(void *arg0) {
 
     func_8027254C_de(&((StaticObject *)(o))->position.x, 20000.0f);
 
-    func_80273448_de((char *) matrix, ((StaticObject *)(o))->position.x, ((StaticObject *)(o))->position.y + ((StaticObject *)(o))->height, ((StaticObject *)(o))->position.z);
+    TranslateMatrix((char *) matrix, ((StaticObject *)(o))->position.x, ((StaticObject *)(o))->position.y + ((StaticObject *)(o))->height, ((StaticObject *)(o))->position.z);
 
-    func_80273D6C_de(matrix);
+    SwapMatrixUpForward(matrix);
 
-    func_8027027C_de(matrix, (D_800D297C << 6) + 0x68 + o);
+    Rsp_ConvertMatrixToFixed(matrix, (D_800D297C << 6) + 0x68 + o);
 }
 
 extern s32 func_802540F4_de(s32, void **, s32, void *, s32);

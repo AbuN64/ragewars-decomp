@@ -16,7 +16,7 @@
 #include "LISTS/80279520.H"
 
 /* Detaches an entity from linked effects while preserving their transforms and lifetimes; the unsigned offset-to-pointer cast preserves matrix-address scheduling and addition operand order. */
-extern void func_8027027C_de(void *,void *),Rsp_ConvertMatrixToFloat(void *,void *),func_80272828_de(void *),func_802732D0_de(void *,void *),func_802732EC_de(void *,void *),func_8027347C_de(void *,f32,f32,f32),func_802A25D0_de(void *,Node44 *,void *);
+extern void Rsp_ConvertMatrixToFixed(void *,void *),Rsp_ConvertMatrixToFloat(void *,void *),func_80272828_de(void *),func_802732D0_de(void *,void *),func_802732EC_de(void *,void *),func_8027347C_de(void *,f32,f32,f32),func_802A25D0_de(void *,Node44 *,void *);
 
 void func_802A3DD4_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *camera) {
     Morph storage;
@@ -163,7 +163,7 @@ loop_4:
                                 if (var_s1->unk_3C & 4) {
                                     func_802732EC_de(&sp10, var_s0->rot);
                                 } else {
-                                    func_8027027C_de(&sp10, (char *)var_s0 + ((D_800D297C << 6) + 0x28));
+                                    Rsp_ConvertMatrixToFixed(&sp10, (char *)var_s0 + ((D_800D297C << 6) + 0x28));
                                 }
                             }
                             var_s0->unk_8 = (f32) var_s1->unk_8->unk_8;

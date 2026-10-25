@@ -190,7 +190,7 @@ s32 func_8022FAF8_de(Object_func_8022FAF8_de *player) {
         }
         number++;
     }
-    func_8025DF34_de(0xD4D);
+    Render_PlayFlatSound(0xD4D);
     result = player->selected;
     return result;
 }

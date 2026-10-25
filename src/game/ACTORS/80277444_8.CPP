@@ -9,7 +9,7 @@
 #include "TYPES.H"
 #include "ACTORS/80277444_8.H"
 #include "COMMON/EXTERNS_10.H"
-extern s32 func_8025DF34_de(s32 arg0);
+extern s32 Render_PlayFlatSound(s32 arg0);
 
 #if defined(VERSION_US_REV1) || defined(NON_MATCHING)
 #include "COMMON/GAMEPLAY_SOUND_TABLE.H"
@@ -196,7 +196,7 @@ void func_802790C0_de(struct Shared_Actor *actor, s32 *stateFlags) {
 
 void func_80279138_de(int unused0, int unused1, void *arg2) {
     ObjRecAt6V2 *arg2_record = arg2;
-    func_8025DF34_de(arg2_record->unk6);
+    Render_PlayFlatSound(arg2_record->unk6);
 }
 
 void func_80279158_de(void *arg0) {
@@ -204,5 +204,5 @@ void func_80279158_de(void *arg0) {
 }
 
 void func_80279178_de(void *arg0) {
-    func_8025DF34_de((((struct ObjRecAt6V2 *) ((s8 *) arg0))->unk6));
+    Render_PlayFlatSound((((struct ObjRecAt6V2 *) ((s8 *) arg0))->unk6));
 }

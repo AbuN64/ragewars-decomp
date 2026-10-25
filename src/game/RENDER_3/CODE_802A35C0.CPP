@@ -96,7 +96,7 @@ extern void func_80272CB0_de(void *, f32, f32, f32);
 
 extern void func_802A31E8_de(Node438C *, Node438C *, struct GameplayCamera *, void *);
 extern void Particle_ScaleVector(void *, void *, f32);
-extern void func_8027027C_de(void *, f32 *);
+extern void Rsp_ConvertMatrixToFixed(void *, f32 *);
 
 void *func_802A25D0_de(void *arg0, void *arg1, void *local) {
     CVector3 sp10;
@@ -117,8 +117,8 @@ void *func_802A25D0_de(void *arg0, void *arg1, void *local) {
         if (((ObjectLinks54 *)(arg1))->unk_3C & 4) {
             func_802732EC_de(local, &((ObjectLinksB4 *)(var_s0))->unk_1C);
         } else {
-            func_8027027C_de(local, &((ObjectLinksB4 *)(var_s0))->unk_28);
-            func_8027027C_de(local, &((ObjectLinksB4 *)(var_s0))->unk_68);
+            Rsp_ConvertMatrixToFixed(local, &((ObjectLinksB4 *)(var_s0))->unk_28);
+            Rsp_ConvertMatrixToFixed(local, &((ObjectLinksB4 *)(var_s0))->unk_68);
         }
         temp_s1 = *(void **)var_s0;
         ((ObjectLinksB4 *)(var_s0))->unk_AC.v0 = 0;
@@ -441,7 +441,7 @@ no_pair:
             matrix[14] = first->position.z;
         }
 apply:
-        func_8027027C_de(matrix, first->matrices[D_800D297C]);
+        Rsp_ConvertMatrixToFixed(matrix, first->matrices[D_800D297C]);
         first = next;
         next = first->next;
     }
@@ -449,7 +449,7 @@ apply:
     matrix[12] = first->position.x;
     matrix[13] = first->position.y;
     matrix[14] = first->position.z;
-    func_8027027C_de(matrix, first->matrices[D_800D297C]);
+    Rsp_ConvertMatrixToFixed(matrix, first->matrices[D_800D297C]);
 }
 
 extern f32 D_800C5DF0_de, D_800C5DF4_de;
@@ -493,7 +493,7 @@ static inline void Render_UpdateLinkedSource(LinkOwner802A *owner, LinkNode802A 
     if (owner->flags & 4) {
         func_802732EC_de(matrix, (f32 *)((char *)node + 0x1C));
     } else {
-        func_8027027C_de(matrix, node->matrices[D_800D297C].m);
+        Rsp_ConvertMatrixToFixed(matrix, node->matrices[D_800D297C].m);
     }
 }
 void Render_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {

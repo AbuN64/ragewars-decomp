@@ -26,11 +26,11 @@ extern void func_8022B144_de(SharedPlayer_func_8021D408_de *, CVector3 *);
 extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern void func_802727D8_de(Matrix *);
 extern void func_80272E3C_de(Matrix *, f32, f32, f32);
-extern void func_80273198_de(Matrix *, CVector3 *);
-extern void func_80273448_de(Matrix *, CVector3);
+extern void BuildDirectionMatrix(Matrix *, CVector3 *);
+extern void TranslateMatrix(Matrix *, CVector3);
 extern void func_8027347C_de(Matrix *, f32, f32, f32);
 extern f32 Particle_GetPointDistance(CVector3 *, CVector3 *);
-extern void func_8027027C_de(Matrix *, Matrix *);
+extern void Rsp_ConvertMatrixToFixed(Matrix *, Matrix *);
 extern CQuatern func_80271818_de(CVector3 *);
 extern void MatrixFromQuaternion(CQuatern *, Matrix *);
 extern void func_802737F0_de(Matrix *, f32);
@@ -65,12 +65,12 @@ void func_8021D408_de(SharedPlayer_func_8021D408_de *player, CVector3 *target, C
     } else if (direction.y <= -0.99999899f) {
         func_80272E3C_de(&matrix, 1.57079649f, player->views1C.view6C_5.heading, 0.0f);
     } else {
-        func_80273198_de(&matrix, &direction);
+        BuildDirectionMatrix(&matrix, &direction);
     }
-    func_80273448_de(&matrix, eye);
+    TranslateMatrix(&matrix, eye);
     func_802733B4_de(&matrix, 0.0f, 0.0f, D_800C9F70_de);
     func_8027347C_de(&matrix, 0.05f, 1.0f, D_800C9F70_de - Particle_GetPointDistance(&eye, &to));
-    func_8027027C_de(&matrix, &player->views1480.view1480_1.beams[D_800D297C]);
+    Rsp_ConvertMatrixToFixed(&matrix, &player->views1480.view1480_1.beams[D_800D297C]);
 
     aim = player->views1464.view1464_1.aim;
     if (player->views5DC.view5DC_2.view != 0) {
@@ -82,11 +82,11 @@ void func_8021D408_de(SharedPlayer_func_8021D408_de *player, CVector3 *target, C
     Particle_SubtractVectors(&direction, &aim, &player->views1C.view260_26.muzzle);
     Particle_NormalizeVec3(&direction);
     func_802727D8_de(&matrix);
-    func_80273198_de(&matrix, &direction);
-    func_80273448_de(&matrix, player->views1C.view260_26.muzzle);
+    BuildDirectionMatrix(&matrix, &direction);
+    TranslateMatrix(&matrix, player->views1C.view260_26.muzzle);
     scale = 1.0f;
     func_8027347C_de(&matrix, scale, scale, -Particle_GetPointDistance(&origin, &player->views1464.view1464_1.aim));
-    func_8027027C_de(&matrix, &player->views1500.view1500_1.lasers[D_800D297C]);
+    Rsp_ConvertMatrixToFixed(&matrix, &player->views1500.view1500_1.lasers[D_800D297C]);
 
     if (normal != 0) {
         lift = *normal;
@@ -96,9 +96,9 @@ void func_8021D408_de(SharedPlayer_func_8021D408_de *player, CVector3 *target, C
         Particle_NormalizeVec3(&lift);
         Particle_ScaleVector(&lift, &lift, 2.048f);
         Particle_AddVec3(&eye, &eye, &lift);
-        func_80273448_de(&matrix, to);
+        TranslateMatrix(&matrix, to);
         func_8027347C_de(&matrix, 1.536f, scale, 1.536f);
-        func_8027027C_de(&matrix, &player->views1580.view1580_1.dots[D_800D297C]);
+        Rsp_ConvertMatrixToFixed(&matrix, &player->views1580.view1580_1.dots[D_800D297C]);
     }
     player->views5E8.view1214_155.marker = 1;
 }

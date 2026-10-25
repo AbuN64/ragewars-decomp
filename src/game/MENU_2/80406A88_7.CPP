@@ -112,7 +112,7 @@ block_11:
             }
             break;
         case 5:
-            func_8025DF34_de(0xE78);
+            Render_PlayFlatSound(0xE78);
             func_8040E8D8_de((((Shared_OptionsScreen *)(D_800E4518))->marker), 0);
             func_8040E8D8_de((((Shared_OptionsScreen *)(D_800E4518))->pakIcon), 0);
             func_8040E8D8_de((((Shared_OptionsScreen *)(D_800E4518))->footer), 1);

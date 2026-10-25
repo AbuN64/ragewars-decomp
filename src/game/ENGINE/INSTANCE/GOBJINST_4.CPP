@@ -132,7 +132,7 @@ extern void func_8027302C(f32 *, f32 *);
 
 extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 
-extern void func_80273448_de(f32 *, f32, f32, f32);
+extern void TranslateMatrix(f32 *, f32, f32, f32);
 
 extern void func_80272D00_de(f32 *, f32, f32, f32, f32);
 
@@ -547,9 +547,9 @@ void func_802480F0_de(s32 time, s32 flags, f32 *matrix) {
     func_8027302C(inverse, matrix);
     flip = -1.0f;
     Particle_ScaleVector(&origin, &origin, flip);
-    func_80273448_de(inverse, origin.x, origin.y, origin.z);
+    TranslateMatrix(inverse, origin.x, origin.y, origin.z);
     func_80272D00_de(rotation, angle, axis.x, axis.y, axis.z);
     Rsp_MultiplyAffineMatrices(matrix, inverse, rotation);
     Particle_ScaleVector(&origin, &origin, flip);
-    func_80273448_de(matrix, origin.x, origin.y, origin.z);
+    TranslateMatrix(matrix, origin.x, origin.y, origin.z);
 }

@@ -68,7 +68,7 @@ s32 func_8041E100_de(void *unused0, void *unused1, void *unused2, s32 event) {
     );
     D_80153F80[D_800E39C0->unk14].variantC = variant;
     func_8041E408_de(D_800E39C0->unk14);
-    func_8025DF34_de(0xE81);
+    Render_PlayFlatSound(0xE81);
     return 0;
 }
 
@@ -135,7 +135,7 @@ s32 func_8041E280_de(void *unused0, void *unused1, void *unused2, s32 event) {
     D_80153F80[D_800E39C0->unk14].variantC = variant;
     id = D_800E39C0->unk14;
     func_8041E408_de(id);
-    func_8025DF34_de(0xE81);
+    Render_PlayFlatSound(0xE81);
     return 0;
 }
 #endif

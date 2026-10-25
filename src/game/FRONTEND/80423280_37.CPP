@@ -143,7 +143,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     if (D_801462D0.mode != 2) {
         func_80427B08_de();
     }
-    func_8025DF34_de(0xE78);
+    Render_PlayFlatSound(0xE78);
     return 0;
 }
 #endif

@@ -354,7 +354,7 @@ case 7:
                     Weapons_RequestActorState(D_800F3D08, ((struct Shared_SpecialObjectView *)D_800F3D08)->segment, 1);
                     ((struct Shared_SpecialObjectView *)D_800F3D08)->reset = 0;
                     laterFlow->reset = 0;
-                    func_8025DF34_de(0x2D0);
+                    Render_PlayFlatSound(0x2D0);
                     var_s0 = D_80145060.actorList;
                     if (var_s0 != 0) {
                         messageContext = &D_80145060.messageContext;
@@ -407,7 +407,7 @@ case 7:
         } else {
             Render_PlaySoundAtPosition(0x9FB, player->position.vector, (s32)&player->position.vector, -1);
         }
-        func_8025DF34_de(0x212);
+        Render_PlayFlatSound(0x212);
         if ((((struct Shared_ActorView *)player)->special != 0) || (temp_v1_5 = ((struct Shared_ActorView *)player)->kind, (temp_v1_5 == D_800C9228_de[0])) || (temp_v1_5 == D_800C9228_de[1])) {
             spawnVector.x = player->position.vector.x;
             spawnVector.y = player->position.vector.y + D_800C2608_eu.projectile;

@@ -54,8 +54,8 @@ extern s32 func_8028C198_de(void *, s32);
 extern void Camera_SetupViewportAndFog(void *);
 extern void Particle_BuildTranslationMatrix(void *, f32, f32, f32);
 extern void func_802739C4_de(void *, f32);
-extern void func_80273D6C_de(void *);
-extern void func_8027027C_de(void *, void *);
+extern void SwapMatrixUpForward(void *);
+extern void Rsp_ConvertMatrixToFixed(void *, void *);
 extern void func_8026DF30_de(s32, void *, void *, s32, s32);
 #undef LOAD_SETUP
 #if defined(VERSION_EU)
@@ -82,8 +82,8 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
         Camera_SetupViewportAndFog(&D_80141008);
         Particle_BuildTranslationMatrix(matrix, 0.0f, -100.0f, -500.0f);
         func_802739C4_de(matrix, state->unk26DB0 * D_800CA4B4);
-        func_80273D6C_de(matrix);
-        func_8027027C_de(matrix, VIEW_MATRICES + D_800D297C * 64);
+        SwapMatrixUpForward(matrix);
+        Rsp_ConvertMatrixToFixed(matrix, VIEW_MATRICES + D_800D297C * 64);
         h2 = func_8028C198_de(&D_8011FE88, handle);
         Render_BeginModelBatch();
         func_8026DF30_de(h2, VIEW_MATRICES + D_800D297C * 64, &D_800D0EF8, 0, -1);

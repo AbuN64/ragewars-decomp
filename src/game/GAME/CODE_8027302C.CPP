@@ -138,7 +138,7 @@ void func_8027310C_de(void *projection, void *arg1, f32 plane) {
     o->m[14] = plane * temp_f1;
 }
 
-void func_80273198_de(Mtx *m, CVector3 *direction) {
+void BuildDirectionMatrix(Mtx *m, CVector3 *direction) {
     CVector3 up;
     CVector3 *upVector = (void *)&D_800C46C0_de[0].y;
 
@@ -196,7 +196,7 @@ void func_802733B4_de(void *matrix, f32 tiltX, f32 lift, f32 arg3) {
 }
 
 /** Add three floating arguments to the vector at offset 0x30. */
-void func_80273448_de(char *object, float x, float y, float z) {
+void TranslateMatrix(char *object, float x, float y, float z) {
     Matrix *matrix = (void *)object;
     matrix->m[12] += x;
     matrix->m[13] += y;
@@ -497,7 +497,7 @@ void func_80273C68_de(void *arg0, f32 arg1) {
 }
 
 /** Swap the two float-groups at offsets 0x10 and 0x20 (three floats each). */
-void func_80273D6C_de(struct Mtx *object) {
+void SwapMatrixUpForward(struct Mtx *object) {
     float t;
     t = object->up.x;
     object->up.x = object->forward.x;

@@ -34,7 +34,7 @@ extern void func_802732D0_de(char *object, float *output);
 
 extern void func_802732EC_de(void *arg0, f32 *arg1);
 
-extern void func_8027027C_de(void *arg0, s32 arg1);
+extern void Rsp_ConvertMatrixToFixed(void *arg0, s32 arg1);
 
 extern void Render_UpdateLinkedNodeTransforms(void *arg0);
 
@@ -246,7 +246,7 @@ void func_802A6174_de(Node44 *arg0, void *arg1) {
             if (arg0->unk_3C & 4) {
                 func_802732EC_de(local, &((ChildB4 *)arg1)->rot[0]);
             } else {
-                func_8027027C_de(local, arg1 + ((D_800D297C << 6) + 0x28));
+                Rsp_ConvertMatrixToFixed(local, arg1 + ((D_800D297C << 6) + 0x28));
             }
         }
         ((ChildB4 *)arg1)->unk_8 = arg0->unk_8->unk_8;

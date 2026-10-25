@@ -72,7 +72,7 @@ s32 func_80439018_de(void) {
     options = &D_801462C8.volume[1];
     if (value != options[0]) {
         options[0] = value;
-        func_8025DF34_de(0x460);
+        Render_PlayFlatSound(0x460);
     }
     value = func_8041A6E0_de(D_800E58A0->music);
     if (value != options[-1]) {

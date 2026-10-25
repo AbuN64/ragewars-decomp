@@ -12,7 +12,7 @@
 #include "particle/8027A0F4_4.H"
 
 extern char D_8011AD70;
-extern void func_80273198_de(void *arg0, void *arg1);
+extern void BuildDirectionMatrix(void *arg0, void *arg1);
 extern f32 Anim_GetPolygonHeight(Node75 *node, f32 x, f32 z);
 extern void func_80275410_de(void *arg0, s32 arg1);
 extern void func_80275688_de(void *arg0, s32 arg1);
@@ -56,7 +56,7 @@ void *Particle_ParentTransform(EffectActor *arg0, Shared_ActorView *camera) {
     do {
     sw_state_neg_8:
         shared = &D_8011AD70;
-        func_80273198_de(shared, (char *)arg0 + 0x174);
+        BuildDirectionMatrix(shared, (char *)arg0 + 0x174);
         return shared;
     sw_state_neg_6:
         if (camera == 0) {
@@ -193,17 +193,17 @@ void func_80272E3C_de(f32 *m, f32 x, f32 y, f32 z);
 void func_802727D8_de(void *matrix);
 void func_8028C6D4_de(Shared_World *world, CVector3 *pos, struct Shared_ParticleLighting *out);
 void func_80273760_de(void *matrix, f32 angle);
-void func_80273448_de(void *matrix, f32 x, f32 y, f32 z);
+void TranslateMatrix(void *matrix, f32 x, f32 y, f32 z);
 f32 func_8027525C_de(void *node, f32 x, f32 z);
 s32 func_8027254C_de(f32 *vector, f32 limit);
 void func_8027347C_de(void *matrix, f32 sx, f32 sy, f32 sz);
-void func_80273D6C_de(void *matrix);
+void SwapMatrixUpForward(void *matrix);
 void func_8027302C(f32 *dst, f32 *src);
 void Particle_BuildTranslationMatrix(void *matrix, f32 x, f32 y, f32 z);
 void func_80273A98_de(void *matrix, f32 angle);
 void func_802738C0_de(void *matrix, f32 angle);
 void func_80272828_de(f32 *matrix);
-void func_8027027C_de(f32 *src, PackedMatrixWords *dst);
+void Rsp_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst);
 
 
 
@@ -372,7 +372,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     }
     if (lift != 0.0f) {
         func_802733B4_de(local, 0.0f, lift, 0.0f);
-        func_80273448_de(local, 0.0f, -lift, 0.0f);
+        TranslateMatrix(local, 0.0f, -lift, 0.0f);
     }
     particle->flags &= ~0x800000;
     switch (particle->space) {
@@ -425,7 +425,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
             func_8027347C_de(local, -1.0f, -1.0f, -1.0f);
         }
         func_8027347C_de(local, particle->size.x * extent, particle->size.y * extent, extent * 10.24f);
-        func_80273D6C_de(local);
+        SwapMatrixUpForward(local);
     } else {
         extent = scale * particle->size.z;
         func_8027347C_de(local, particle->size.x * extent, particle->size.y * extent, extent * 10.24f);
@@ -436,7 +436,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     } else {
         func_8027302C(world, local);
     }
-    func_80273448_de(world, position.x, position.y, position.z);
+    TranslateMatrix(world, position.x, position.y, position.z);
     if ((particle->flags & 0x20000) && (shake = particle->shake) != 0) {
         jolt = (f32)shake * (1.0f / 127.0f);
         joltSq = jolt * jolt;
@@ -444,7 +444,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         Particle_BuildTranslationMatrix(shakeMtx, 0.0f, 0.0f, -66.56f);
         func_80273A98_de(shakeMtx, angle * (func_802B7130_de(joltSq * (6 * RW_PI_F6)) * 0.25f));
         func_802738C0_de(shakeMtx, angle * func_802B7130_de(joltSq * (14 * RW_PI_F6)));
-        func_80273448_de(shakeMtx, 0.0f, 0.0f, 66.56f);
+        TranslateMatrix(shakeMtx, 0.0f, 0.0f, 66.56f);
         Rsp_MultiplyAffineMatrices(rotation, shakeMtx, world);
         func_80272828_de(rotation);
         final = rotation;
@@ -452,5 +452,5 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         func_80272828_de(world);
         final = world;
     }
-    func_8027027C_de(final, out);
+    Rsp_ConvertMatrixToFixed(final, out);
 }

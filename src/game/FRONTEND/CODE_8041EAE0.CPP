@@ -256,7 +256,7 @@ s32 func_8041EE08_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
         temp_v0_3->alpha = 0xFF;
         func_8040E8D8_de(temp_v0_3, 1);
         D_800E39C0->timer = 0;
-        func_8025DF34_de(0xE80);
+        Render_PlayFlatSound(0xE80);
         return 0;
     }
     return 0;
@@ -282,7 +282,7 @@ s32 func_8041EED0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
         temp_v0_3->alpha = 0xFF;
         func_8040E8D8_de(temp_v0_3, 1);
         D_800E39C0->timer = 0;
-        func_8025DF34_de(0xE80);
+        Render_PlayFlatSound(0xE80);
         return 0;
     }
     return 0;

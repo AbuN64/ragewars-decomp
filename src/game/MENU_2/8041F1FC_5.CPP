@@ -18,12 +18,12 @@ s32 func_80420B10_de(void) {
     return 0;
 }
 
-/* Calls func_802A23C4_de with 1 and func_8025DF34_de with 0xE78, and returns zero. */
+/* Calls func_802A23C4_de with 1 and Render_PlayFlatSound with 0xE78, and returns zero. */
 
 
 s32 func_80420B50_de(void) {
     func_802A23C4_de(1);
-    func_8025DF34_de(0xE78);
+    Render_PlayFlatSound(0xE78);
     return 0;
 }
 #endif

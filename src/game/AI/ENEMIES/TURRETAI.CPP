@@ -20,11 +20,11 @@ void func_8027347C_de(void *, f32, f32, f32);
 
 s32 func_8027254C_de(f32 *, f32);
 
-void func_80273448_de(char *, f32, f32, f32);
+void TranslateMatrix(char *, f32, f32, f32);
 
 void Rsp_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 
-void func_80273D6C_de(struct Mtx *);
+void SwapMatrixUpForward(struct Mtx *);
 
 static inline void alignment_from_rider(f32 *matrix, RiderRecAt130V1 *rider) {
     CQuatern q;
@@ -101,7 +101,7 @@ void Turret_CalcOrientMtx(struct Owner *owner, RiderRecAt130V1 *rider) {
     MatrixFromQuaternion(&combined, model);
     func_8027347C_de(model, owner->scale.x, owner->scale.y, owner->scale.z);
     func_8027254C_de(&owner->position.x, 20000.0f);
-    func_80273448_de((char *)model, owner->position.x, owner->position.y, owner->position.z);
+    TranslateMatrix((char *)model, owner->position.x, owner->position.y, owner->position.z);
     Rsp_MultiplyAffineMatrices(&owner->transform.right.x, alignment, model);
-    func_80273D6C_de(&owner->transform);
+    SwapMatrixUpForward(&owner->transform);
 }

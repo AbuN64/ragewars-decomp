@@ -145,7 +145,7 @@ int func_80439308_de(void) {
  int sound;
  value=func_8041A6E0_de(D_800E58A4[1]);
  options=D_801462E1;
- if(value!=options[0]){options[0]=value;func_8025DF34_de(0x460);}
+ if(value!=options[0]){options[0]=value;Render_PlayFlatSound(0x460);}
  value=func_8041A6E0_de(D_800E58A4[0]);
  if(value!=options[-1]){
   options[-1]=value;

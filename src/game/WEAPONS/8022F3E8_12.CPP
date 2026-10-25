@@ -46,7 +46,7 @@ static inline s32 can_fire(char *player) {
     }
     ammo = func_8022F55C_de(&D_80102B00[((SharedPlayer *)(player))->views1C.view5D4_45.unk5D4], ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E);
     if (ammo == 0) {
-        func_8025DF34_de(0xD4D);
+        Render_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
 #if defined(VERSION_EU)
             Camera_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800E0D44)[D_80152789]), Weapons_GetPlayerIndex(&D_80145040, player),

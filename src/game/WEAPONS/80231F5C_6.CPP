@@ -32,7 +32,7 @@ int func_802327F4_de(PlayerRecAt1450V1 *player) {
     }
     result = func_8022F55C_de(D_80102B00[player->character], player->weapon);
     if (result == 0) {
-        func_8025DF34_de(0xD4D);
+        Render_PlayFlatSound(0xD4D);
         if (player->hud != 0) {
             Camera_PostTargetedScreenMessage((char *)rules - 0x1240, player->hud, D_800D30BC,
                           Weapons_GetPlayerIndex((char *)rules - 0x1288, player), D_800C8100);

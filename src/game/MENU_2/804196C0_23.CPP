@@ -100,7 +100,7 @@ extern s32 D_800E3464;
 
 extern Handler802A2B50 D_800E3468;
 
-/* Calls func_8025DF34_de with 0xE74 and sets the byte at 0x10 of every child in the list at 0x8 of arg0 whose halfword at 0xE is not 8 to 100, returning zero. Adapted from func_802A1E5C_de with both stores to 0x5C and 0x48 removed. */
+/* Calls Render_PlayFlatSound with 0xE74 and sets the byte at 0x10 of every child in the list at 0x8 of arg0 whose halfword at 0xE is not 8 to 100, returning zero. Adapted from func_802A1E5C_de with both stores to 0x5C and 0x48 removed. */
 
 
 
@@ -240,7 +240,7 @@ s32 func_8041AF70_de(struct MenuRecAt54 *menu) {
 s32 func_8041AFA0_de(struct MenuRecAt54 *arg0) {
     struct ItemRecAt10 *p;
 
-    func_8025DF34_de(0xE74);
+    Render_PlayFlatSound(0xE74);
     p = arg0->items;
     if (p != 0) {
         do {
@@ -262,7 +262,7 @@ s32 func_8041AFF8_de(struct MenuRecAt114 *menu, void *second, void *third, s32 a
             menu->index = 0;
         }
         owner->selected = &menu->entries[menu->index];
-        func_8025DF34_de(0xE81);
+        Render_PlayFlatSound(0xE81);
         return 0;
     }
     return 0;
@@ -277,7 +277,7 @@ s32 func_8041B05C_de(struct MenuRecAt114 *menu, void *second, void *third, s32 a
             menu->index = menu->count - 1;
         }
         owner->selected = &menu->entries[menu->index];
-        func_8025DF34_de(0xE81);
+        Render_PlayFlatSound(0xE81);
         return 0;
     }
     return 0;
@@ -414,7 +414,7 @@ s32 func_8041B534_de(struct MenuRecAt54 *menu) {
 s32 func_8041B564_de(OwnerRecAt44 *arg0) {
     void *p;
 
-    func_8025DF34_de(0xE74);
+    Render_PlayFlatSound(0xE74);
     p = arg0->root;
     if (p != 0) {
         do {

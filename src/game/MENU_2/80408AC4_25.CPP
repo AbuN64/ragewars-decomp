@@ -228,7 +228,7 @@ void func_80422B94_de(void) {
         "addiu      $v0, $zero, 0x3\n"
         "j          .Lauto_80422F70\n"
         "sw        $v0, 0x30($v1)\n"
-        "jal        func_8025DF34_de\n"
+        "jal        Render_PlayFlatSound\n"
         "addiu     $a0, $zero, 0xE78\n"
         "lui        $v0, %hi(D_800E4518)\n"
         "lw         $v0, %lo(D_800E4518)($v0)\n"

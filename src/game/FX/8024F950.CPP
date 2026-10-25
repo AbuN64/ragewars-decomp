@@ -149,9 +149,9 @@ void func_8024F960_eu(void) {
         "lw         $a1, 0x50($sp)\n"
         "lw         $a2, 0x54($sp)\n"
         "lw         $a3, 0x58($sp)\n"
-        "jal        func_80273448_de\n"
+        "jal        TranslateMatrix\n"
         "addiu     $a0, $sp, 0x10\n"
-        "jal        func_80273D6C_de\n"
+        "jal        SwapMatrixUpForward\n"
         "addiu     $a0, $sp, 0x10\n"
         "lhu        $v0, 0xD8($s1)\n"
         "andi       $v0, $v0, 0x40\n"
@@ -241,7 +241,7 @@ void func_8024F960_eu(void) {
         "jal        func_8027302C\n"
         "addiu     $a1, $sp, 0x10\n"
         "addiu      $a0, $sp, 0x10\n"
-        "jal        func_8027027C_de\n"
+        "jal        Rsp_ConvertMatrixToFixed\n"
         "addiu     $a1, $s1, 0x28\n"
         "lw         $t0, 0x50($sp)\n"
         "lw         $t1, 0x54($sp)\n"
@@ -318,10 +318,10 @@ extern void func_8024DD10_de(PlacedProp *, PlacedPropRecord *, s32, char *);
 extern PropGeometry *Engine_GetActorDefinition(void *, s32);
 extern void MatrixFromQuaternion(f32 *, char *);
 extern void func_8027347C_de(char *, f32, f32, f32);
-extern void func_80273448_de(char *, f32, f32, f32);
-extern void func_80273D6C_de(char *);
+extern void TranslateMatrix(char *, f32, f32, f32);
+extern void SwapMatrixUpForward(char *);
 extern void func_8027302C(char *, char *);
-extern void func_8027027C_de(char *, char *);
+extern void Rsp_ConvertMatrixToFixed(char *, char *);
 static inline s32 func_80250BF0_de(void) {
     s32 next;
     next = D_800D0910 + 1;
@@ -356,8 +356,8 @@ void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner,
     func_802741A4_de(rotation);
     MatrixFromQuaternion(rotation, matrix);
     func_8027347C_de(matrix, record->scale.x, record->scale.y, record->scale.z);
-    func_80273448_de(matrix, record->position.x, record->position.y, record->position.z);
-    func_80273D6C_de(matrix);
+    TranslateMatrix(matrix, record->position.x, record->position.y, record->position.z);
+    SwapMatrixUpForward(matrix);
     if (prop->flags & 0x40) {
         do { (prop->min).x = (record->position).x - (102.399994f); (prop->min).y = (record->position).y - (102.399994f); (prop->min).z = (record->position).z - (102.399994f); } while (0);
         do { (prop->max).x = (record->position).x + (102.399994f); (prop->max).y = (record->position).y + (102.399994f); (prop->max).z = (record->position).z + (102.399994f); } while (0);
@@ -372,7 +372,7 @@ void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner,
         prop->fieldD4 = record->value;
     }
     func_8027302C(prop->matrix, matrix);
-    func_8027027C_de(matrix, prop->transform);
+    Rsp_ConvertMatrixToFixed(matrix, prop->transform);
     prop->position = record->position;
     if (record->segment == 0xFFFF) {
         prop->segment = 0;

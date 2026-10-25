@@ -236,7 +236,7 @@ void func_8026FC9C_de(f32 *src, PackedMatrixWords *dst) {
 INCLUDE_ASM("span_1000", func_8026FC9C_de);
 #endif
 #ifdef NON_MATCHING
-void func_8027027C_de(f32 *src, PackedMatrixWords *dst) {
+void Rsp_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst) {
     u32 *upper = dst->upper;
     u32 *lower = dst->lower;
     f32 value;
@@ -293,7 +293,7 @@ void func_8027027C_de(f32 *src, PackedMatrixWords *dst) {
     *lower = a << 16;
 }
 #else
-INCLUDE_ASM("span_1000", func_8027027C_de);
+INCLUDE_ASM("span_1000", Rsp_ConvertMatrixToFixed);
 #endif
 void func_80270700_de(f32 *dst, PackedMatrixWords *src) {
     u32 upper;
@@ -953,7 +953,7 @@ void func_8026FC9C_de(f32 *src, PackedMatrixWords *dst) {
     value = (src[(7) * 2]) * (D_800C4760_de); if (!(*(&(D_800C4760_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C4760_de) + 1)); (a) |= 0x80000000; }; value = (src[(7) * 2 + 1]) * (D_800C4768_de); if (!(*(&(D_800C4768_de) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(D_800C4768_de) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
 }
 
-void func_8027027C_de(f32 *src, PackedMatrixWords *dst) {
+void Rsp_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst) {
     u32 *upper = dst->upper;
     u32 *lower = dst->lower;
     f32 value;

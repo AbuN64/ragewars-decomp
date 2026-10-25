@@ -43,9 +43,9 @@ extern void MatrixFromQuaternion(f32 *, f32 *);
 
 extern void func_8027347C_de(f32 *, f32, f32, f32);
 
-extern void func_80273448_de(f32 *, f32, f32, f32);
+extern void TranslateMatrix(f32 *, f32, f32, f32);
 
-extern void func_8027027C_de(f32 *, void *);
+extern void Rsp_ConvertMatrixToFixed(f32 *, void *);
 
 extern void func_8026992C_de(void *, s32, s32);
 
@@ -115,8 +115,8 @@ void func_8024EF28_de(void *actor) {
     func_8027254C_de(&position, 20000.0f);
     MatrixFromQuaternion(&rotation.x, matrix);
     func_8027347C_de(matrix, size, 1.0f, size);
-    func_80273448_de(matrix, position.x, position.y, position.z);
-    func_8027027C_de(matrix, (char *)actor + ((D_800D297C << 6) + 0xE8));
+    TranslateMatrix(matrix, position.x, position.y, position.z);
+    Rsp_ConvertMatrixToFixed(matrix, (char *)actor + ((D_800D297C << 6) + 0xE8));
     func_8026992C_de((char *)actor + ((D_800D297C << 6) + 0xE8), 1, 0x96);
 }
 

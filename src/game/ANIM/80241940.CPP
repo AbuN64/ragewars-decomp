@@ -27,7 +27,7 @@ extern void func_80273648_de(f32 *, f32);
 extern void MultiplyQuaternions(CQuatern *, CQuatern *, CQuatern *);
 extern void MatrixFromQuaternion(CQuatern *, f32 *);
 extern void Rsp_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
-extern void func_80273448_de(f32 *, f32, f32, f32);
+extern void TranslateMatrix(f32 *, f32, f32, f32);
 extern void func_80272944_de(f32 *, CVector3 *, CVector3 *, s32);
 
 
@@ -123,7 +123,7 @@ void func_80241950_de(char *obj, CVector3 *corners, char *floor, s32 attachment)
     MultiplyQuaternions(&orient, &yaw, &((LevelActor *)obj)->rotation);
     MatrixFromQuaternion(&orient, turn);
     Rsp_MultiplyAffineMatrices(matrix, rest, turn);
-    func_80273448_de(matrix, ((LevelActor *)obj)->position0.x, ((LevelActor *)obj)->position0.y, ((LevelActor *)obj)->position0.z);
+    TranslateMatrix(matrix, ((LevelActor *)obj)->position0.x, ((LevelActor *)obj)->position0.y, ((LevelActor *)obj)->position0.z);
     func_80272944_de(matrix, corners, corners, 8);
     if (shape->flags & 1) {
         bottom = ((ActorMotion *)floor)->end.y - ((ActorMotion *)floor)->height;

@@ -11,7 +11,7 @@
 #include "RENDER_2/8025DE50_5.H"
 #include "SCENE/802508E0_13.H"
 
-/* Sets the word at 0x54 of arg0 to 2, calls func_8025DF34_de with 0xE74, and sets the byte at 0x10 of every child in the list at 0x8 whose halfword at 0xE is not 8 to 100, returning zero. Adapted from func_802A1E5C_de with the two stores to 0x5C and 0x48 replaced by a single store of 2 to 0x54. */
+/* Sets the word at 0x54 of arg0 to 2, calls Render_PlayFlatSound with 0xE74, and sets the byte at 0x10 of every child in the list at 0x8 whose halfword at 0xE is not 8 to 100, returning zero. Adapted from func_802A1E5C_de with the two stores to 0x5C and 0x48 replaced by a single store of 2 to 0x54. */
 
 
 /* Marks a menu's state word at offset 0x54 as 2 when func_8029DB58_de's value for the fifth argument
@@ -40,7 +40,7 @@ s32 func_8041A9B0_de(struct CommandListMenu *commandListMenu) {
     struct LinkedCommandEntry *p;
 
     commandListMenu->state = 2;
-    func_8025DF34_de(0xE74);
+    Render_PlayFlatSound(0xE74);
     p = commandListMenu->entries;
     if (p != 0) {
         do {

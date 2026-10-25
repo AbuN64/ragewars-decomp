@@ -34,9 +34,9 @@ extern void MatrixFromQuaternion(CQuatern *, f32 *);
 
 extern void func_8027347C_de(f32 *, f32, f32, f32);
 
-extern void func_80273448_de(f32 *, f32, f32, f32);
+extern void TranslateMatrix(f32 *, f32, f32, f32);
 
-extern void func_8027027C_de(f32 *, void *);
+extern void Rsp_ConvertMatrixToFixed(f32 *, void *);
 
 extern void func_8026992C_de(void *model, s32 pass, u8 alpha);
 
@@ -131,8 +131,8 @@ void func_8027E784_de(Shared_Particle *actor, struct Shared_ParticleView *view) 
     func_8027254C_de(&point, 20000.0f);
     MatrixFromQuaternion(&rotation, matrix);
     func_8027347C_de(matrix, size, 1.0f, size);
-    func_80273448_de(matrix, point.x, point.y, point.z);
-    func_8027027C_de(matrix, model);
+    TranslateMatrix(matrix, point.x, point.y, point.z);
+    Rsp_ConvertMatrixToFixed(matrix, model);
     {
         Gfx *cmd = D_80110634++;
         gDPPipeSync(cmd);

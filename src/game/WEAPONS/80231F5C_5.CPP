@@ -96,7 +96,7 @@ s32 func_80232790_eu(PlayerRecAt1450V1 *pThis) {
     }
     result = func_8022F55C_de(&D_80102B00[pThis->character], pThis->weapon);
     if (result == 0) {
-        func_8025DF34_de(0xD4D);
+        Render_PlayFlatSound(0xD4D);
         if (pThis->hud != 0) {
             s32 player = Weapons_GetPlayerIndex(&D_80145040, pThis);
             Camera_PostTargetedScreenMessage(&D_80145040.object, pThis->hud,

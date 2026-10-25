@@ -99,7 +99,7 @@ block_7:
         temp_v0_2 = D_800E4F60->unk_3E0 - 1;
         D_800E4F60->unk_3E0 = temp_v0_2;
         if (temp_v0_2 <= 0) {
-            func_8025DF34_de(0xE79);
+            Render_PlayFlatSound(0xE79);
             func_8040E8D8_de(D_800E4F60->unk_3E8, 1);
             func_80419F58_de(D_800E4F60->text3E4, 4);
             D_800E4F60->unk_3DC = 4;
@@ -154,7 +154,7 @@ block_7:
         D_800E4F60->unk_3DC = 2;
         D_800E4F60->unk_3E0 = 4;
         func_8040E8D8_de(D_800E4F60->unk_448, 0);
-        func_8025DF34_de(0xE78);
+        Render_PlayFlatSound(0xE78);
         break;
     case 8:
         temp_v0 = ((ListScreenItem *)func_8040EC30_de(arg0, 0x316U))->alpha;

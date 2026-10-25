@@ -408,7 +408,7 @@ s32 func_8042F130_us_rev1(void *screen) {
     func_8040C428_de(0);
     func_802A2394_de();
     func_802A2418_de(0);
-    func_8025DF34_de(0xE78);
+    Render_PlayFlatSound(0xE78);
     return 0;
 }
 #endif

@@ -148,7 +148,7 @@ s32 Frontend_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
     func_8040E8D8_de(D_800E4F60->unk3F0, 0);
 
     D_800E4F60->unk44C->alpha = 0x5A;
-    func_8025DF34_de(0xE7C);
+    Render_PlayFlatSound(0xE7C);
 
     return 0;
 }
@@ -183,7 +183,7 @@ s32 func_8042B4D4_de(void *unused0, void *unused1, void *unused2, s32 event) {
     if (changed != 1) {
         return 0;
     }
-    func_8025DF34_de(0xE7D);
+    Render_PlayFlatSound(0xE7D);
     func_8042B2E4_de();
     SCR4D4->word45C = 0;
     SCR4D4->word464 = 0;
@@ -247,7 +247,7 @@ moved:
     if (changed != 1) {
         return 0;
     }
-    func_8025DF34_de(0xE7D);
+    Render_PlayFlatSound(0xE7D);
     func_8042B2E4_de();
     D_800E4F60->unk45C = 0;
     D_800E4F60->unk464 = 0;
@@ -284,7 +284,7 @@ s32 func_8042B78C_de(void *unused0, void *unused1, void *unused2, s32 event) {
     if (changed != 1) {
         return 0;
     }
-    func_8025DF34_de(0xE7D);
+    Render_PlayFlatSound(0xE7D);
     func_8042B2E4_de();
     SCR78C->word45C = 0;
     SCR78C->word464 = 0;
@@ -330,7 +330,7 @@ s32 func_8042B904_de(void *unused0, void *unused1, void *unused2, s32 event) {
     if (changed != 1) {
         return 0;
     }
-    func_8025DF34_de(0xE7D);
+    Render_PlayFlatSound(0xE7D);
     func_8042B2E4_de();
     SCR904->word45C = 0;
     SCR904->word464 = 0;

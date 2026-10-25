@@ -22,9 +22,9 @@ extern void Weapons_BuildPlayerOrientation(char *object, CQuatern *output);
 
 extern void MatrixFromQuaternion(void *, void *);
 
-extern void func_80273448_de(char *, f32, f32, f32);
+extern void TranslateMatrix(char *, f32, f32, f32);
 
-extern void func_80273D6C_de(void *);
+extern void SwapMatrixUpForward(void *);
 
 extern void Rsp_MultiplyAffineMatrices(void *, void *, void *);
 
@@ -139,8 +139,8 @@ void func_8022F5E0_de(char *arg0) {
         MatrixFromQuaternion(&sp100, &sp20);
     }
     orientation = arg0 + 0x74;
-    func_80273448_de(&sp80, sp70.x, sp70.y, sp70.z);
-    func_80273D6C_de(&sp80);
+    TranslateMatrix(&sp80, sp70.x, sp70.y, sp70.z);
+    SwapMatrixUpForward(&sp80);
     Rsp_MultiplyAffineMatrices((Matrix *)orientation, &sp80, &sp20);
-    func_80273448_de((Matrix *)orientation, position.x, position.y, position.z);
+    TranslateMatrix((Matrix *)orientation, position.x, position.y, position.z);
 }

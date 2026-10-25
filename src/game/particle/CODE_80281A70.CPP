@@ -493,8 +493,8 @@ void Particle_ReleaseOwnerEmitters(DraftWorld827C8 *world, s32 owner)
 
   if (count)
   {
-    func_8025DF34_de(0x91A);
-    func_8025DF34_de(0x91A);
+    Render_PlayFlatSound(0x91A);
+    Render_PlayFlatSound(0x91A);
   }
 }
 

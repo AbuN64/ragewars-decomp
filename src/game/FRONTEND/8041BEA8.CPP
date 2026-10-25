@@ -33,7 +33,7 @@ s32 func_8041D134_de(s32 unused0, s32 unused1, s32 arg2) {
         ((MenuRecAt108 *) D_800E3590)->left->x += ((MenuRecAt108 *) D_800E3590)->leftStep;
         ((MenuRecAt108 *) D_800E3590)->right->x -= ((MenuRecAt108 *) D_800E3590)->rightStep;
         if (--((MenuRecAt108 *) D_800E3590)->timer <= 0) {
-            func_8025DF34_de(0xE79);
+            Render_PlayFlatSound(0xE79);
             /* Node_func_8041D134_de is the hub Item view's twin (style at 0x10, x/y at 0x14/0x16);
                E8D8 speaks Item, so the node slots cast to it here. */
             func_8040E8D8_de((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupA, 1);
@@ -62,7 +62,7 @@ s32 func_8041D134_de(s32 unused0, s32 unused1, s32 arg2) {
         }
         break;
     case 5:
-        func_8025DF34_de(0xE78);
+        Render_PlayFlatSound(0xE78);
         ((MenuRecAt108 *) D_800E3590)->state = 2;
         ((MenuRecAt108 *) D_800E3590)->timer = 4;
         func_8040E8D8_de((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupB, 0);
@@ -89,7 +89,7 @@ s32 func_8041D134_de(s32 unused0, s32 unused1, s32 arg2) {
         ((MenuRecAt108 *) D_800E3590)->cursor->style = func_802B6560_de((f32) ((MenuRecAt108 *) D_800E3590)->clock * 0.0033333334f) * 30.0f + 220.0f;
         node = func_8041B7FC_de(((MenuRecAt108 *) D_800E3590)->handle, 0);
         if (node != ((MenuRecAt108 *) D_800E3590)->focus) {
-            func_8025DF34_de(0xE7E);
+            Render_PlayFlatSound(0xE7E);
             if (((MenuRecAt108 *) D_800E3590)->focus != 0) {
                 ((MenuRecAt108 *) D_800E3590)->focus->style = 0x6E;
             }

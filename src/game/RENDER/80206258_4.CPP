@@ -20,9 +20,9 @@ extern void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
 
 extern s32 func_8027254C_de(f32 *arg0, f32 arg1);
 
-extern void func_80273448_de(f32 *, f32, f32, f32);
+extern void TranslateMatrix(f32 *, f32, f32, f32);
 
-extern void func_80273D6C_de(void *);
+extern void SwapMatrixUpForward(void *);
 
 s32 func_80285F58_de(void *, void *);
 
@@ -43,8 +43,8 @@ void func_80207910_de(void *object, void *state) {
     func_8027302C(matrix, sp10);
     func_8027347C_de(matrix, player->scale.x, player->scale.y, player->scale.z);
     func_8027254C_de(&player->pos.x, 20000.0f);
-    func_80273448_de(matrix, player->pos.x, player->pos.y, player->pos.z);
-    func_80273D6C_de(matrix);
+    TranslateMatrix(matrix, player->pos.x, player->pos.y, player->pos.z);
+    SwapMatrixUpForward(matrix);
 }
 
 void func_802079B0_de(Player *mover, ActorMotionState *rider) {

@@ -17,7 +17,7 @@
 #include "FRONTEND/8040B45C_33.H"
 
 /* Stores a mode at offset 0x58 of an object and plays sound 0xE77 for mode 1 or 0xE76 for mode 2
-   through func_8025DF34_de. */
+   through Render_PlayFlatSound. */
 
 
 
@@ -90,10 +90,10 @@ void func_8041A430_de(struct func_8022FD9C_S4 *object, s32 mode) {
     object->unk58 = mode;
     switch (mode) {
     case 1:
-        func_8025DF34_de(0xE77);
+        Render_PlayFlatSound(0xE77);
         break;
     case 2:
-        func_8025DF34_de(0xE76);
+        Render_PlayFlatSound(0xE76);
         break;
     }
 }

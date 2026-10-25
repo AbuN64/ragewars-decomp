@@ -10,17 +10,17 @@
 
 extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern void func_80273198_de(Matrix *, CVector3 *);
+extern void BuildDirectionMatrix(Matrix *, CVector3 *);
 
 extern void Particle_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
 extern void Particle_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 
-extern void func_80273448_de(Matrix *object, f32 x, f32 y, f32 z);
+extern void TranslateMatrix(Matrix *object, f32 x, f32 y, f32 z);
 
-extern void func_80273D6C_de(Matrix *object);
+extern void SwapMatrixUpForward(Matrix *object);
 
-extern void func_8027027C_de(Matrix *src, void *dst);
+extern void Rsp_ConvertMatrixToFixed(Matrix *src, void *dst);
 
 extern s32 func_8028B21C_de(struct Shared_World *arg0, s32 arg1);
 
@@ -55,17 +55,17 @@ void *func_8022B304_de(ForcePlayerList *forcePlayerList, void *arg1) {
     return bestNode;
 }
 
-void func_8022B3D0_de(char *actorView, s32 unused1, CVector3 *arg2) {
+void Render_BuildForceMarkerTransform(char *actorView, s32 unused1, CVector3 *arg2) {
     Shared_ActorView *actor = (Shared_ActorView *)actorView;
     Matrix matrix;
     CVector3 offset;
 
-    func_80273198_de(&matrix, arg2);
+    BuildDirectionMatrix(&matrix, arg2);
     Particle_ScaleVector(&offset, arg2, 5.12f);
     Particle_AddVec3(&offset, &offset, &actor->targetPosition);
-    func_80273448_de(&matrix, offset.x, offset.y, offset.z);
-    func_80273D6C_de(&matrix);
-    func_8027027C_de(&matrix, actor->transform1600);
+    TranslateMatrix(&matrix, offset.x, offset.y, offset.z);
+    SwapMatrixUpForward(&matrix);
+    Rsp_ConvertMatrixToFixed(&matrix, actor->transform1600);
 }
 
 /** Report whether the floating field at offset 0x11FC is positive. */

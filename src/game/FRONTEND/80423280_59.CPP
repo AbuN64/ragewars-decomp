@@ -61,7 +61,7 @@ extern void MarkMenuEventHandled(void);
 
 
 
-/* When the fourth argument is one, calls MarkMenuEventHandled, advances the word at 0x20 of the object D_800E5430 holds while func_80264614_de reports one for it and it is below func_80264690_de's limit, formats that word into the object's text at 0x14 through func_802A0C08_de with D_800E1B60, and plays sound 0xE81 through func_8025DF34_de; returns zero.
+/* When the fourth argument is one, calls MarkMenuEventHandled, advances the word at 0x20 of the object D_800E5430 holds while func_80264614_de reports one for it and it is below func_80264690_de's limit, formats that word into the object's text at 0x14 through func_802A0C08_de with D_800E1B60, and plays sound 0xE81 through Render_PlayFlatSound; returns zero.
    Adapted from func_80422340_de with the object chain changed to a guarded counter increment, text format and sound call. */
 
 
@@ -169,7 +169,7 @@ s32 func_8042DD00_de(void *a0, void *a1, void *a2, s32 press) {
         }
     }
     func_802A0C08_de(D_800E5430->text, D_800E1B60, D_800E5430->count);
-    func_8025DF34_de(0xE81);
+    Render_PlayFlatSound(0xE81);
     return 0;
 }
 
@@ -185,7 +185,7 @@ s32 func_8042DDA8_de(void *first, void *second, void *third, s32 fourth) {
         D_800E5430->count = value - 1;
     }
     func_802A0C08_de(D_800E5430->text, D_800E1B60, D_800E5430->count);
-    func_8025DF34_de(0xE81);
+    Render_PlayFlatSound(0xE81);
     return 0;
 }
 

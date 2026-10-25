@@ -12,7 +12,7 @@ void func_8044D528_de(State_func_8044D528_de *state,int selection,int mode) {
  state->active=1;
  state->mode=mode;
  state->selection=selection;
- if(mode==2 && selection!=999)func_8025DF34_de(0x21C);
+ if(mode==2 && selection!=999)Render_PlayFlatSound(0x21C);
 }
 void func_8044D580_de(State_func_8044D528_de *state) {
  func_8044BE04_de();

@@ -123,11 +123,11 @@ extern char D_800CBC90;
 extern void Render_ClearDepthRect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);
 extern void func_80272CB0_de(void *arg0, f32 arg1, f32 arg2, f32 arg3);
-extern void func_80273448_de(char *object, f32 x, f32 y, f32 z);
-extern void func_80273D6C_de(void *object);
+extern void TranslateMatrix(char *object, f32 x, f32 y, f32 z);
+extern void SwapMatrixUpForward(void *object);
 extern void func_8027302C(f32 *arg0, f32 *arg1);
 extern void func_802735A8_de(void *arg0, s32 arg1, f32 arg2, f32 arg3);
-extern void func_8027027C_de(void *arg0, void *arg1);
+extern void Rsp_ConvertMatrixToFixed(void *arg0, void *arg1);
 extern void func_8026DF30_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 
@@ -171,9 +171,9 @@ void func_80219490_de(char *object, char *camera) {
                    ((AnimationSprite *)(object))->scaleY, ((AnimationSprite *)(object))->scaleZ);
     func_80273A98_de(first, ((AnimationSprite *)(object))->yaw);
     func_802738C0_de(first, ((AnimationSprite *)(object))->pitch);
-    func_80273448_de((char *)first, ((AnimationSprite *)(object))->position.x,
+    TranslateMatrix((char *)first, ((AnimationSprite *)(object))->position.x,
                    ((AnimationSprite *)(object))->position.y, ((AnimationSprite *)(object))->position.z);
-    func_80273D6C_de(first);
+    SwapMatrixUpForward(first);
 
     matrix = (char *)second;
     func_8027302C(second, first);
@@ -182,7 +182,7 @@ void func_80219490_de(char *object, char *camera) {
     }
     {
         s32 offset = (D_800D297C << 6) + 0x10;
-        func_8027027C_de(matrix, object + offset);
+        Rsp_ConvertMatrixToFixed(matrix, object + offset);
     }
     Particle_TransformPoint(first, object + 0xA8, output);
     {

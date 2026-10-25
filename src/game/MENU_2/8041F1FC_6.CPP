@@ -80,7 +80,7 @@ int func_80420B78_de(int unused0, int unused1, unsigned int message, int extra) 
         e = &((EntryRecAt14V1 *)D_800E42D0)[index];
         if (e->active == 1 && e->target != -1) {
             func_804201A4_de(index, e);
-            func_8025DF34_de(0xE7C);
+            Render_PlayFlatSound(0xE7C);
         }
     }
     return 0;

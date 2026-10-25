@@ -57,9 +57,9 @@ void func_802A5B84_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4) {
 }
 
 void func_802737F0_de(void *, f32);
-void func_80273448_de(char *, f32, f32, f32);
+void TranslateMatrix(char *, f32, f32, f32);
 void func_8027347C_de(void *, f32, f32, f32);
-void func_8027027C_de(f32 *, PackedMatrixWords *);
+void Rsp_ConvertMatrixToFixed(f32 *, PackedMatrixWords *);
 
 Particle *System_SpawnImpactMark(SceneRecAt95A8 *scene, CVector3 position, CVector3 normal, s32 surface, s32 owner) {
     f32 matrix[16];
@@ -87,9 +87,9 @@ Particle *System_SpawnImpactMark(SceneRecAt95A8 *scene, CVector3 position, CVect
         Particle_NormalizeVec3(&normal);
         Particle_ScaleVector(&normal, &normal, 2.048f);
         Particle_AddVec3(&position, &position, &normal);
-        func_80273448_de((char *)matrix, position.x, position.y, position.z);
+        TranslateMatrix((char *)matrix, position.x, position.y, position.z);
         func_8027347C_de(matrix, D_800C5EA8_de, 1.0f, D_800C5EA8_de);
-        func_8027027C_de(matrix, &node->transform.matrix);
+        Rsp_ConvertMatrixToFixed(matrix, &node->transform.matrix);
     }
 done:
     return node;
