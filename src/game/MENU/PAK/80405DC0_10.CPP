@@ -18,9 +18,9 @@ s32 func_8040458C_de(s32, s32, s32 *, u8 *, u8 *, s32 *, u8 *, u8 *);
 s32 func_802A0238_de(u8 *);
 s32 func_802A037C_de(const void *, const void *);
 s32 func_80404F58_de(s32, s32, s32, s32);
-u32 func_804057F8_de(u8 *, u32, u32);
+u32 Ovlgame_Crc32(u8 *, u32, u32);
 s32 func_804057BC_de(u8 *, s32);
-u8 *func_802A025C_de(u8 *, u8 *);
+u8 *Resmgr_CopyString(u8 *, u8 *);
 void *Pak_OpenDialog(struct func_8025E5B0_S1 *, struct Dialog *, s32, s32, s32);
 s32 func_80406178_de(void *, s32, s32);
 static __inline__ s32 pak_note_has_game_id(u8 *company, u8 *code) { if ((func_802A0238_de(code) == 4) && (func_802A0238_de(company) == 2) && (func_802A037C_de(code, rw_pak_game_code(&D_80145040.game)) == 0) && (func_802A037C_de(company, rw_pak_company(&D_80145040.game)) == 0)) return 1; return 0; }
@@ -90,7 +90,7 @@ s32 func_80407748_de(s32 *selection, Shared_PakMenu *menu) {
                     profileMatches=0;
                     goto profile_failed;
                 }
-                if (func_804057F8_de((u8 *)&D_80153738,0x14,4)!=D_80153738.checksum) {
+                if (Ovlgame_Crc32((u8 *)&D_80153738,0x14,4)!=D_80153738.checksum) {
                     profileMatches=0;
                     goto profile_failed;
                 }
@@ -118,7 +118,7 @@ profile_failed:
                 Resmgr_FillMemory(payload, 0, (u32) blockState);
                 if (func_80404F58_de(channel, noteIndex, (s32)D_800E28BC, pages << 8)==0 &&
                     pak_block_has_size(D_800E28BC,expectedSize) &&
-                    func_804057F8_de(D_800E28BC,*(s32 *)D_800E28BC-4,11)==*(s32 *)(D_800E28BC+(*(s32 *)D_800E28BC-4)) &&
+                    Ovlgame_Crc32(D_800E28BC,*(s32 *)D_800E28BC-4,11)==*(s32 *)(D_800E28BC+(*(s32 *)D_800E28BC-4)) &&
                     D_8011FECC==((s32 *)D_800E28BC)[1]) {
                     D_8014D4FC=noteIndex;
                     Pak_OpenDialog(&D_80145040.dialogOwner, rw_pak_selected_block_dialog(), (s32)menu->player, (s32)menu->slot, (s32)menu->dialogData);
@@ -134,7 +134,7 @@ profile_failed:
                     text = rw_pak_note_text(settings);
                     D_8014D4FC = noteIndex;
                     if (func_804057BC_de(name, 0x10) != 0) {
-                        func_802A025C_de(name, (u8 *)rw_pak_invalid_name(settings));
+                        Resmgr_CopyString(name, (u8 *)rw_pak_invalid_name(settings));
                     }
                     copying = 1;
                     i = 0;
@@ -183,7 +183,7 @@ profile_failed:
                     readError=1;
                     goto done;
                 }
-                if (func_804057F8_de((u8 *)&D_80153738,0x14,4)!=D_80153738.checksum) {
+                if (Ovlgame_Crc32((u8 *)&D_80153738,0x14,4)!=D_80153738.checksum) {
                     readError=1;
                     goto done;
                 }
@@ -214,7 +214,7 @@ profile_failed:
                     Resmgr_FillMemory(payload2, 0, (u32) allocationSize);
                     if (func_80404F58_de(channel, noteIndex, (s32)D_800E28BC, pages << 8) == 0) {
                         length = *(s32 *)D_800E28BC;
-                        if ((length == expectedSize) && (func_804057F8_de(D_800E28BC, length - 4, 0xBU) == *(s32 *)(D_800E28BC+(*(s32 *)D_800E28BC-4))) && (D_8011FECC == ((s32 *)D_800E28BC)[1])) {
+                        if ((length == expectedSize) && (Ovlgame_Crc32(D_800E28BC, length - 4, 0xBU) == *(s32 *)(D_800E28BC+(*(s32 *)D_800E28BC-4))) && (D_8011FECC == ((s32 *)D_800E28BC)[1])) {
                             Pak_OpenDialog(&D_80145040.dialogOwner, rw_pak_loaded_block_dialog(), (s32)menu->player, (s32)menu->slot, 0);
                         return 1;
                         }

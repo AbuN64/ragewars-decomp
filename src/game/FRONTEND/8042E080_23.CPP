@@ -12,7 +12,7 @@
 #include "FRONTEND/8042E080_23.H"
 #include "FRONTEND/8042E080_25.H"
 
-extern u8 *func_802A025C_de(u8 *dst, u8 *name);
+extern u8 *Resmgr_CopyString(u8 *dst, u8 *name);
 
 /* Seats a joining player (request: kind+1, team, rank) in the highest free player slot, filling its index, kind (random for 20), team (random for 3, at most 2), rank and name (per language on the European cartridges); returns the slot or -1 when all are taken. */
 s32 func_8042E460_de(u8 *request) {
@@ -64,7 +64,7 @@ s32 func_8042E460_de(u8 *request) {
             name = joinTeamName((u8)player->team * 17 + func_8041F140_de(player->character));
             break;
         }
-        func_802A025C_de(player->name, name);
+        Resmgr_CopyString(player->name, name);
         result = i;
     }
     return result;
@@ -117,7 +117,7 @@ void Frontend_SetupRandomTeams(void) {
         player->locked = 0;
         player->team = 2;
         player->variant = Nav_NextRandom() % 3;
-        func_802A025C_de(player->name, joinTeamName((s8)player->variant * 17 + func_8041F140_de(player->character)));
+        Resmgr_CopyString(player->name, joinTeamName((s8)player->variant * 17 + func_8041F140_de(player->character)));
     }
     for (i = 0; i < playerCount - unlockedCount; i++) {
         player = &game->playerSettings[4 + unlockedCount + i];
@@ -126,7 +126,7 @@ void Frontend_SetupRandomTeams(void) {
         player->locked = 1;
         player->team = 2;
         player->variant = Nav_NextRandom() % 3;
-        func_802A025C_de(player->name, joinTeamName((s8)player->variant * 17 + func_8041F140_de(player->character)));
+        Resmgr_CopyString(player->name, joinTeamName((s8)player->variant * 17 + func_8041F140_de(player->character)));
     }
     for (i = 0; i < 8; i++) {
         player = &game->playerSettings[i];

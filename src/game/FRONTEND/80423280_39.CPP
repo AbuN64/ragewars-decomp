@@ -53,7 +53,7 @@ extern struct ResultsHeadingScreen *D_800E4690;
 extern struct ResultsHeadingRecord D_80102B00[];
 extern struct ResultsHeadingCharacter D_800DFA6C[];
 
-extern void func_802A025C_de(char *, char *);
+extern void Resmgr_CopyString(char *, char *);
 extern s32 func_8041F140_de(s32);
 extern void func_802A0C08_de(char *, char *, ...);
 
@@ -69,12 +69,12 @@ void func_80427B08_de(void) {
     settings = &D_801462C8;
     switch (settings->controllerMode) {
     case 1:
-        func_802A025C_de(D_800E4690->heading, func_80411D78_de(NAME_PHRASE));
+        Resmgr_CopyString(D_800E4690->heading, func_80411D78_de(NAME_PHRASE));
         func_8042E9B4_de(D_800E4690->heading, D_800DD9BC,
                       RES_NAME(func_8041F140_de(settings->playerSettings[D_800E4690->record].character)));
         break;
     case 3:
-        func_802A025C_de(D_800E4690->time, func_80411D78_de(TIME_PHRASE));
+        Resmgr_CopyString(D_800E4690->time, func_80411D78_de(TIME_PHRASE));
         item = (struct Label *) func_8040EC30_de(D_800E4690->window, TIME_ITEM);
         func_8040E8D8_de(item, 1);
         item->text = D_800E4690->time;
@@ -86,10 +86,10 @@ void func_80427B08_de(void) {
             func_802A0C08_de(buffer, RES_TIMEFMT, (u8)(best / 60), (u8)(best % 60));
         }
         func_8042E9B4_de(D_800E4690->time, RES_TIMEPOST, buffer);
-        func_802A025C_de(D_800E4690->heading, RES_HEAD3);
+        Resmgr_CopyString(D_800E4690->heading, RES_HEAD3);
         break;
     case 4:
-        func_802A025C_de(D_800E4690->heading, RES_HEAD4);
+        Resmgr_CopyString(D_800E4690->heading, RES_HEAD4);
         break;
     }
 }

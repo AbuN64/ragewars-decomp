@@ -17,7 +17,7 @@ extern s32 func_80435128_de(s32);
 extern s32 func_80435184_de(s32);
 extern s32 func_8043590C_de(s32);
 extern s32 Nav_NextRandom(void);
-extern void func_804322AC_de(s32);
+extern void Frontend_RefreshPlayerPanel(s32);
 void func_80433610_de(s32 player)
 {
   s32 random;
@@ -136,5 +136,5 @@ void func_80433610_de(s32 player)
 
   }
   while (done == 0);
-  func_804322AC_de(player);
+  Frontend_RefreshPlayerPanel(player);
 }

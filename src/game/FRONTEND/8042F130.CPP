@@ -209,7 +209,7 @@ extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void func_8040E8D8_de(MenuWidget *, s32);
 extern void *func_80419E54_de(s32, s32);
 extern void func_80433BCC_de(s32);
-extern void func_804322AC_de(s32);
+extern void Frontend_RefreshPlayerPanel(s32);
 extern void func_80264770_de(s32);
 extern void func_8022EF30_de(PakSetupRecord *);
 extern void func_80404E28_de(s32);
@@ -322,7 +322,7 @@ s32 func_8042F130_us_rev1(void *screen) {
         D_800E54A4->players[i].state = 0;
         D_800E54A4->players[i].menu = 0;
         D_800E54A4->players[i].back = -1;
-        func_804322AC_de(i);
+        Frontend_RefreshPlayerPanel(i);
         func_80264770_de(i);
         for (j = 0; j < 4; j++) {
             func_8022EF30_de(&D_800E54A4->players[i].records[j]);
@@ -363,7 +363,7 @@ s32 func_8042F130_us_rev1(void *screen) {
             }
         }
         for (i = 0; i < 4; i++) {
-            func_804322AC_de(i);
+            Frontend_RefreshPlayerPanel(i);
         }
         break;
     case 6:
@@ -378,7 +378,7 @@ s32 func_8042F130_us_rev1(void *screen) {
                     D_800E54A4->players[i].back = 2;
                     D_800E54A4->players[i].state = 2;
                     D_800E54A4->players[i].next = 4;
-                    func_804322AC_de(i);
+                    Frontend_RefreshPlayerPanel(i);
                     break;
                 }
             }
@@ -392,7 +392,7 @@ s32 func_8042F130_us_rev1(void *screen) {
                 D_800E54A4->players[D_800DF4C0].back = 2;
                 D_800E54A4->players[D_800DF4C0].state = 2;
                 D_800E54A4->players[D_800DF4C0].next = 4;
-                func_804322AC_de(D_800DF4C0);
+                Frontend_RefreshPlayerPanel(D_800DF4C0);
                 break;
             }
         }
@@ -402,7 +402,7 @@ s32 func_8042F130_us_rev1(void *screen) {
         D_800E54A4->players[0].state = 2;
         D_800E54A4->players[0].next = 0xD;
         D_800E54A4->players[0].sub = 6;
-        func_804322AC_de(0);
+        Frontend_RefreshPlayerPanel(0);
         break;
     }
     func_8040C428_de(0);

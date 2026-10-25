@@ -24,7 +24,7 @@ extern void func_8043577C_de(s32);
 extern s32 func_804355B4_de();
 extern void func_80433BCC_de(s32);
 extern void func_80433D38_de(s32);
-extern void func_804322AC_de(s32);
+extern void Frontend_RefreshPlayerPanel(s32);
 
 s32 func_80432158_de(void *unused0, void *unused1, u16 player) {
     MarkMenuEventHandled();
@@ -48,13 +48,13 @@ s32 func_80432158_de(void *unused0, void *unused1, u16 player) {
         MarkMenuEventHandled();
         func_80433BCC_de(-1);
         D_800E54A4->players[player].state = 0xD;
-        func_804322AC_de(player);
+        Frontend_RefreshPlayerPanel(player);
         break;
     case 0x1B:
         MarkMenuEventHandled();
         func_80433D38_de(-1);
         D_800E54A4->players[player].state = 0xD;
-        func_804322AC_de(player);
+        Frontend_RefreshPlayerPanel(player);
         break;
     default:
         return 0;

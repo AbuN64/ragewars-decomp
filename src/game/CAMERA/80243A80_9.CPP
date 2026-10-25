@@ -42,7 +42,7 @@ extern f32 func_8040184C_de(f32 arg0);
 extern s32 D_800E28D0;
 
 
-extern void func_802A025C_de(void *arg0, int arg1);
+extern void Resmgr_CopyString(void *arg0, int arg1);
 
 /* Returns the globally selected record's float at 0xA0 scaled by D_800C88CC. */
 
@@ -190,7 +190,7 @@ void func_80245A5C_de(int arg0, int arg1, int arg2, int arg3) {
 void func_80245A78_de(int goal) {
     Shared_MenuContext *record = D_800E2830;
     int idx = record->messageCount;
-    func_802A025C_de(record->messages[idx], goal);
+    Resmgr_CopyString(record->messages[idx], goal);
     record = D_800E2830;
     record->messageCount = record->messageCount + 1;
 }

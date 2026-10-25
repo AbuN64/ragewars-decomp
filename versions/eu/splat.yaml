@@ -4610,7 +4610,7 @@ segments:
       - [0xEEF10, rodata, data_800C/literals_func_804306D8_de]
       - [0xEF048, rodata, data_800C/D_804322AC_E29F8]
       - [0xEF04F, data, data_800C/rodata_unresolved_800EE44F]
-      - [0xEF050, rodata, data_800C/literals_func_804322AC_de]
+      - [0xEF050, rodata, data_800C/literals_Frontend_RefreshPlayerPanel]
       - [0xEF0E8, rodata, data_800C/literals_func_80433398_de]
       - [0xEF0F8, rodata, data_800C/literals_func_80433610_de]
       - [0xEF130, rodata, data_800C/D_80433EA0_E2AF0]

@@ -55,7 +55,7 @@ extern void func_8028D380_de(Shared_World *, s32, char *, s32);
 
 extern char *func_802A0494_de(char *);
 
-extern void func_802A025C_de(char *, char *);
+extern void Resmgr_CopyString(char *, char *);
 
 
 /* Resets the selection screen: maps the menu mode at 0x434 to a category (0 to 2, 1 to 3, 2 to 1,
@@ -178,15 +178,15 @@ void func_8042A990_de(void) {
     D_800E4F60->item = func_8040EC30_de(D_800E4F60->window, (u16)table[D_800E4F60->selection]);
     if (D_800E4F60->selection == 0) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        func_802A025C_de(D_800E4F60->text, D_800D34D4_de[0]);
+        Resmgr_CopyString(D_800E4F60->text, D_800D34D4_de[0]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        func_802A025C_de(D_800E4F60->text, D_800E1DA4[D_80152789]);
+        Resmgr_CopyString(D_800E4F60->text, D_800E1DA4[D_80152789]);
 #endif
     } else {
         func_8028D380_de(&D_8011FE88,
                       func_8042B1B8_de(Frontend_CategoryToList(D_800E4F60->category), D_800E4F60->selection),
                       buffer, 0x3F);
-        func_802A025C_de(D_800E4F60->text, func_802A0494_de(buffer));
+        Resmgr_CopyString(D_800E4F60->text, func_802A0494_de(buffer));
     }
     D_800E4F60->label->text = D_800E4F60->text;
     func_80245B28_de();

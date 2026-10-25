@@ -172,7 +172,7 @@ u32 Ovlgame_BytesToPakPages(u32 bytes) {
 
 /* Computes the CRC-32 with polynomial 0xEDB88320 of arg1 bytes at arg0, continuing from the running value arg2, from a 256-entry table built on the stack. Adapted from func_802A08B8_de. */
 
-u32 func_804057F8_de(u8 *arg0, u32 arg1, u32 arg2) {
+u32 Ovlgame_Crc32(u8 *arg0, u32 arg1, u32 arg2) {
     u32 table[256];
     u32 i;
     u32 j;

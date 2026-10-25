@@ -17,7 +17,7 @@ INCLUDE_ASM("ovl_80400000", func_8041E408_de);
 extern void *D_800E39C0;
 extern struct RequestRecAt10 D_80153F80[];
 extern struct TextEntry D_800E381C[][17];
-extern u8 *func_802A025C_de(u8 *, u8 *);
+extern u8 *Resmgr_CopyString(u8 *, u8 *);
 #if defined(VERSION_DE)
 enum { DRAW_ICON=903, DRAW_NAME=905, DRAW_VARIANT=904, DRAW_FIRST=906, DRAW_SECOND=907 };
 #else
@@ -47,7 +47,7 @@ void func_8041E408_de(s32 index) {
         widget->alpha = 125;
         model = func_8041EC44_de(D_80153F80[index].variant, D_80153F80[index].id);
     name = D_80153F80[index].name;
-        func_802A025C_de((u8 *)name,
+        Resmgr_CopyString((u8 *)name,
           (u8 *)*D_800E381C[D_80153F80[index].variant][model].text
         );
         widget->text = name;
@@ -72,7 +72,7 @@ void func_8041E408_de(s32 index) {
 #ifdef NON_MATCHING
 /* Takes the first free player settings slot from the top for each of the three requests; the loop shape is closer to the ROM than the earlier draft (49 edits vs 71). */
 extern struct RequestRecAt10 D_80153F80[];
-extern u8 *func_802A025C_de(u8 *, u8 *);
+extern u8 *Resmgr_CopyString(u8 *, u8 *);
 void func_8041E5F8_de(void) {
     Shared_PlayerSettingsRecord *player;
     s32 slot = 7;
@@ -95,7 +95,7 @@ void func_8041E5F8_de(void) {
                 player->team = D_80153F80[i].variant;
                 player->rank = D_80153F80[i].word8;
                 player->variant = D_80153F80[i].variantC;
-                func_802A025C_de(player->name, (u8 *)D_80153F80[i].name);
+                Resmgr_CopyString(player->name, (u8 *)D_80153F80[i].name);
                 player--;
             }
         }

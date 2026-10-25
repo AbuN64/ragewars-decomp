@@ -34,7 +34,7 @@ extern void func_8028D380_de(Shared_World *, char *, char *, s32);
 
 extern char *func_802A0494_de(char *);
 
-extern void func_802A025C_de(char *, char *);
+extern void Resmgr_CopyString(char *, char *);
 
 /* Calls Frontend_HideArenaCatalogueWidgets and then func_8042A7B4_de with 0. */
 
@@ -70,7 +70,7 @@ void func_8042AFE0_de(void) {
     char buffer[0x40];
 
     if (D_800E4F60->entry == 0) {
-        func_802A025C_de(D_800E4F60->label,
+        Resmgr_CopyString(D_800E4F60->label,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800D34D4_de[D_801462C8.language]
 #else
@@ -80,7 +80,7 @@ D_800D34D4_de[0]
     } else {
         func_8028D380_de(&D_8011FE88, func_8042B1B8_de(Frontend_CategoryToList(D_800E4F60->list), D_800E4F60->entry),
                       buffer, 0x3F);
-        func_802A025C_de(D_800E4F60->label, func_802A0494_de(buffer));
+        Resmgr_CopyString(D_800E4F60->label, func_802A0494_de(buffer));
     }
     D_800E4F60->widget->text = D_800E4F60->label;
 }

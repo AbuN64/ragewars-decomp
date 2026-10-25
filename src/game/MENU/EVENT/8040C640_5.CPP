@@ -61,7 +61,7 @@ extern struct RequestRecAt10 D_80153F80[];
 extern void MarkMenuEventHandled(void);
 extern s32 func_802999A0_de(s32);
 extern s32 func_8041EC44_de(s32, s32);
-extern void func_802A025C_de(char *, char *);
+extern void Resmgr_CopyString(char *, char *);
 extern void func_8041E408_de(s32);
 
 s32 func_8041E170_us(void *sender, void *context, void *argument, s32 event) {
@@ -85,7 +85,7 @@ s32 func_8041E170_us(void *sender, void *context, void *argument, s32 event) {
     } while (id == -1);
     D_80153F80[D_800E39C0->selection].variant = variant;
     D_80153F80[D_800E39C0->selection].id = id;
-    func_802A025C_de(D_80153F80[D_800E39C0->selection].name,
+    Resmgr_CopyString(D_80153F80[D_800E39C0->selection].name,
                     *D_800E381C[variant][id].text);
     D_80153F80[D_800E39C0->selection].variantC = variant;
     func_8041E408_de(D_800E39C0->selection);
@@ -180,7 +180,7 @@ void func_8041E2F0_us(void) {
         "lw         $a1, 0x0($v0)\n"
         "lui        $v0, %hi(D_8014DD00)\n"
         "addiu      $v0, $v0, %lo(D_8014DD00)\n"
-        "jal        func_802A025C_de\n"
+        "jal        Resmgr_CopyString\n"
         "addu      $a0, $a0, $v0\n"
         "lui        $a0, %hi(D_800E39C0)\n"
         "lw         $a0, %lo(D_800E39C0)($a0)\n"

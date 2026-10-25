@@ -7,7 +7,7 @@
 
 extern State_func_80434D70_de *D_800E54A4;
 extern void func_8041B7B4_de(s32, s32, s32);
-extern void func_804322AC_de(s32);
+extern void Frontend_RefreshPlayerPanel(s32);
 extern void func_80433D38_de(s32);
 void func_80434D70_de(s32 player)
 {
@@ -24,6 +24,6 @@ void func_80434D70_de(s32 player)
   slot->state = 2;
   slot->next = 13;
   slot->step = 3;
-  func_804322AC_de(selected);
+  Frontend_RefreshPlayerPanel(selected);
   func_80433D38_de(-1);
 }

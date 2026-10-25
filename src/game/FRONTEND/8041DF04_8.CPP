@@ -56,9 +56,9 @@ void func_8041E81C_de(s32 count, s32 level) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
             name = D_80153F80[i].name;
             game = &D_801462C8;
-            func_802A025C_de(name, ((char **)D_800E381C[tier][pick].field_4)[game->language]);
+            Resmgr_CopyString(name, ((char **)D_800E381C[tier][pick].field_4)[game->language]);
 #else
-            func_802A025C_de(D_80153F80[i].name, *(char **)D_800E381C[tier][pick].field_4);
+            Resmgr_CopyString(D_80153F80[i].name, *(char **)D_800E381C[tier][pick].field_4);
 #endif
         } while (D_80153F80[i].id == -1);
     }
@@ -91,7 +91,7 @@ extern Prize D_800E381C[][17];
 extern Reward D_80153F80[];
 
 extern s32 Nav_NextRandom(void);
-extern void func_802A025C_de(char *dst, char *src);
+extern void Resmgr_CopyString(char *dst, char *src);
 
 void func_8041E81C_de(s32 count, s32 level) {
     s32 points[3];
@@ -140,7 +140,7 @@ void func_8041E81C_de(s32 count, s32 level) {
         do {
             pick = Nav_NextRandom() % 17;
             D_80153F80[i].id = D_800E381C[tier][pick].id;
-            func_802A025C_de(D_80153F80[i].name, *D_800E381C[tier][pick].name);
+            Resmgr_CopyString(D_80153F80[i].name, *D_800E381C[tier][pick].name);
         } while (D_80153F80[i].id == -1);
     }
 }

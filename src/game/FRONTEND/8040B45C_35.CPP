@@ -531,7 +531,7 @@ void func_8040F6DC_de(UiWidget *widget, s32 base, s32 old) {
 #include "FRONTEND/ARCHIVEDATA.H"
 #include "FRONTEND/LAYOUT.H"
 void *Scene_AllocateMemory(s32 size);
-u8 *func_802A025C_de(u8 *dst, u8 *src);
+u8 *Resmgr_CopyString(u8 *dst, u8 *src);
 void Resmgr_CloseStream(s32 handle);
 void Frontend_LoadLanguageStrings(s32 index);
 extern char D_800DD0B0;
@@ -689,7 +689,7 @@ void Frontend_OpenResourceArchive(u8 *name) {
         D_801539B0.NFonts = 0;
     }
     D_801539B0.Init = 1;
-    func_802A025C_de(D_801539B0.Name, name);
+    Resmgr_CopyString(D_801539B0.Name, name);
     D_801539B0.NeverFreeResources = 0;
     Resmgr_CloseStream(D_801539B0.In);
     D_801539B0.In = 0;

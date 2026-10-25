@@ -38,7 +38,7 @@ extern void *Scene_AllocateMemory(s32 size);
 
 
 
-extern u8 *func_802A025C_de(u8 *, u8 *);
+extern u8 *Resmgr_CopyString(u8 *, u8 *);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3400, an actor kind at D_800E3404 and a handler at D_800E3408: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
 
@@ -149,7 +149,7 @@ void func_8041AD10_de(struct MenuListWidget *menu, s32 index) {
 }
 
 void func_8041AD34_de(struct MenuListWidget *menu, u8 *text) {
-    func_802A025C_de(menu->entries[menu->count].text, text);
+    Resmgr_CopyString(menu->entries[menu->count].text, text);
     menu->count++;
 }
 

@@ -39,7 +39,7 @@ extern void func_802A230C_de(void);
 
 
 
-extern void func_802A025C_de(char *, char *);
+extern void Resmgr_CopyString(char *, char *);
 extern void func_8040C428_de(s32);
 extern s32 Nav_NextRandom(void);
 
@@ -113,7 +113,7 @@ void func_8042DEA0_de(void) {
     for (i = 0; i < 4; i++) {
         status = (struct StatusRecAt95 *)(settings + 0xD0 + i * 0x96);
         if (status->joined == 1 && status->computer == 0) {
-            func_802A025C_de(status->name, D_80102B00[i].name);
+            Resmgr_CopyString(status->name, D_80102B00[i].name);
             if (settings[0xD] != 0) {
                 status->team = 0;
             } else {

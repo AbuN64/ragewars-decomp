@@ -199,7 +199,7 @@ typedef struct {
 
 
 int func_80264614_de(int);
-u8 * func_802A025C_de(u8 *, u8 *);
+u8 * Resmgr_CopyString(u8 *, u8 *);
 char * func_80411D78_de(s32);
 void func_8041B7B4_de(void *, s32, s32);
 s32 func_8041B7FC_de(void *, s32);
@@ -241,7 +241,7 @@ extern SetupPanelRoot *D_800E54A4;
 
 
 
-void func_804322AC_de(s32 arg0) {
+void Frontend_RefreshPlayerPanel(s32 arg0) {
 
 
 
@@ -350,7 +350,7 @@ void func_804322AC_de(s32 arg0) {
         }
 
 
-        func_802A025C_de((&D_800E54A4->v.panelView.players[arg0])->textB50, temp_copy_source);
+        Resmgr_CopyString((&D_800E54A4->v.panelView.players[arg0])->textB50, temp_copy_source);
         func_8042E9B4_de((&D_800E54A4->v.panelView.players[arg0])->textB50, D_800DDDC8, temp_s1);
         var_v0 = arg0 * 8;
         if (D_800E54A4->v.f.unk54 == 6) {

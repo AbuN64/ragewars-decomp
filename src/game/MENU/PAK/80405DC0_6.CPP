@@ -228,7 +228,7 @@ extern void func_80404E28_de(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
 extern s32 func_80404F3C_de(s32 ch);
 extern s32 func_80405598_de(s32 ch);
-extern u32 func_804057F8_de(void *data, u32 size, u32 seed);
+extern u32 Ovlgame_Crc32(void *data, u32 size, u32 seed);
 
 
 /* Enters pak menu mode 1 on the selected channel: shows the pending message (D_800E28C0) with the channel's
@@ -276,7 +276,7 @@ void Pak_BeginProfileSave(Shared_PakMenu *menu) {
         for (i = 0; i < 8; i++) {
             D_8014D4B4[i] = profile->name[i];
         }
-        D_80153738.checksum = func_804057F8_de(&D_80153738, 0x14, 4);
+        D_80153738.checksum = Ovlgame_Crc32(&D_80153738, 0x14, 4);
         func_80405F48_de(menu);
         return;
     }

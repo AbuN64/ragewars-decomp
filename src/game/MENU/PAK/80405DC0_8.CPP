@@ -274,7 +274,7 @@ extern s32 Pak_GetStatus(s32 ch);
 extern s32 func_80404F3C_de(s32 ch);
 extern s32 func_80405598_de(s32 ch);
 extern void Pak_CreateSaveSnapshot(ObjRecAt5DC *);
-extern u32 func_804057F8_de(void *data, u32 size, u32 seed);
+extern u32 Ovlgame_Crc32(void *data, u32 size, u32 seed);
 void *Pak_OpenDialog(void *, void *, s32, s32, s32);
 /* The channel the pak menu works on: the scanned channel D_800E28C8 while D_8015375C is set, else the slot's. */
 static __inline__ void pakGetChannel(Shared_PakMenu *menu, s32 *channel) {
@@ -316,7 +316,7 @@ void Pak_BeginSnapshotSave(Shared_PakMenu *menu) {
     }
     if (!Pak_GetStatus(channel)) {
         Pak_CreateSaveSnapshot(player);
-        pakSetChecksum((s32)D_800DE868, func_804057F8_de(D_800DE868, D_8011FECC + 0x60C, 11));
+        pakSetChecksum((s32)D_800DE868, Ovlgame_Crc32(D_800DE868, D_8011FECC + 0x60C, 11));
         func_80405F48_de(menu);
         return;
     }

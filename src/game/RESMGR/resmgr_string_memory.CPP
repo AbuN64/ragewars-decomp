@@ -38,7 +38,7 @@ s32 func_802A0238_de(u8 *string) {
     return (cursor - string) - 1;
 }
 
-u8 *func_802A025C_de(u8 *destination, u8 *source) {
+u8 *Resmgr_CopyString(u8 *destination, u8 *source) {
     u8 *destCursor;
     u8 c;
 

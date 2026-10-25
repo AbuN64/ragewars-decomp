@@ -428,7 +428,7 @@ extern s32 func_8042AF28_de(void);
 extern s32 func_8042AFB8_de(void);
 extern void func_8028D380_de(Shared_World *, s32, void *, s32);
 extern char *func_802A0494_de(char *);
-extern char *func_802A025C_de(char *, char *);
+extern char *Resmgr_CopyString(char *, char *);
 
 s32 Frontend_OpenResultsScreen(void *root) {
     char buffer[64];
@@ -530,7 +530,7 @@ s32 Frontend_OpenResultsScreen(void *root) {
     }
     item = func_8040EC30_de(root, 0x235 + RESULTS_MENU_SHIFT);
     func_8028D380_de(&D_8011FE88, D_8015402C, buffer, 63);
-    func_802A025C_de(D_800E53C0->name, func_802A0494_de(buffer));
+    Resmgr_CopyString(D_800E53C0->name, func_802A0494_de(buffer));
     item->text = D_800E53C0->name;
     D_800E53C0->buttonAddress = (s32)func_8040EC30_de(root, 0x23D + RESULTS_MENU_SHIFT);
     D_800E53C0->dirty = 1;
@@ -550,7 +550,7 @@ extern struct RowRecAt54 D_800E3A58[];
 extern s32 D_800E01B0_de[],D_800FF140_de[],D_800FEAE0[];
 extern s32 func_8041F140_de(s32);
 extern char *func_802A0494_de(char *);
-extern char *func_802A025C_de(char *,char *);
+extern char *Resmgr_CopyString(char *,char *);
 extern char *func_80424DE8_de(s32);
 extern s32 func_802A0C08_de(void *,const char *,...);
 extern void func_8042D304_de(s32,s32,u16);
@@ -584,7 +584,7 @@ void Frontend_FillResultRows(void) {
             widget->text = D_80102B00[player].name;
         } else {
             name = record->name;
-            func_802A025C_de(name, func_802A0494_de(name));
+            Resmgr_CopyString(name, func_802A0494_de(name));
             widget->text = name;
         }
 

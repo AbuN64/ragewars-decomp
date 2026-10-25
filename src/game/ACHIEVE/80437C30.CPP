@@ -37,7 +37,7 @@ extern void func_804259E0_de(s32);
 extern s32 func_80425674_de(s32);
 extern s32 func_8041F140_de(s32);
 extern void func_802A0C08_de(char *, char *, ...);
-extern void func_802A025C_de(char *, char *);
+extern void Resmgr_CopyString(char *, char *);
 extern void func_8040E950_de(MenuWidget *, s32);
 extern void func_8041B110_de(s32);
 extern void func_8028D380_de(Shared_World *, s32, char *, s32);
@@ -142,7 +142,7 @@ done:
                 }
             }
         } else {
-            func_802A025C_de(D_800E5830->resultText, D_800D357C);
+            Resmgr_CopyString(D_800E5830->resultText, D_800D357C);
             item = func_8040EC30_de(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             func_8040E8D8_de(item, 1);
@@ -168,7 +168,7 @@ done:
                 item->text = D_800D3598;
             }
         } else {
-            func_802A025C_de(D_800E5830->resultText, D_800D357C);
+            Resmgr_CopyString(D_800E5830->resultText, D_800D357C);
             item = func_8040EC30_de(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             func_8040E8D8_de(item, 1);
@@ -185,7 +185,7 @@ done:
                 item->text = D_800D3594;
             }
         } else {
-            func_802A025C_de(D_800E5830->resultText, D_800D357C);
+            Resmgr_CopyString(D_800E5830->resultText, D_800D357C);
             item = func_8040EC30_de(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             func_8040E8D8_de(item, 1);
@@ -214,7 +214,7 @@ done:
     }
     item = func_8040EC30_de(menu, 0x26C + PREVIEW_ID_SHIFT);
     func_8028D380_de(&D_8011FE88, D_8015402C, levelName, 0x3F);
-    func_802A025C_de(D_800E5830->nameText, func_802A0494_de(levelName));
+    Resmgr_CopyString(D_800E5830->nameText, func_802A0494_de(levelName));
     item->text = D_800E5830->nameText;
     D_800E5830->item24 = func_8040EC30_de(menu, 0x274 + PREVIEW_ID_SHIFT);
     D_800E5830->ready = 1;

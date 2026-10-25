@@ -61,13 +61,13 @@ void func_80434250_de(s32 player, s32 direction) {
 extern s32 Pak_DeleteNote(s32, s32);
 extern s32 Pak_GetFreePages(s32, s32 *);
 extern s32 Pak_CountFreeNotes(s32, s32 *);
-extern s32 func_80435424_de(void);
+extern s32 Frontend_GetRecordsNoteSize(void);
 extern s32 Ovlgame_BytesToPakPages(s32);
 extern s32 Ovlgame_FindFreeNoteExtension(s32, char *);
-extern u32 func_804057F8_de(void *, u32, u32);
-extern char *func_802A025C_de(char *, char *);
+extern u32 Ovlgame_Crc32(void *, u32, u32);
+extern char *Resmgr_CopyString(char *, char *);
 extern s32 Pak_SaveNote(s32, s32, void *, char *, char *, char *);
-extern void func_804322AC_de(s32);
+extern void Frontend_RefreshPlayerPanel(s32);
 /* The save view of the menu block: the four player records staged at 0x2E28, then the profile and
  * checksum stored behind them, written to the pak as one 0x648-byte note. */
 static __inline__ struct Block_func_804347CC_de *pakRecordSave(void) {
@@ -100,7 +100,7 @@ s32 Frontend_SavePlayerRecords(s32 channel)
         if (status == 0) {
             status = Pak_CountFreeNotes(channel, &space.freeNotes);
             if (status == 0) {
-                required = Ovlgame_BytesToPakPages(func_80435424_de());
+                required = Ovlgame_BytesToPakPages(Frontend_GetRecordsNoteSize());
                 if (space.freeNotes == 0 || space.freePages < required) space.fits = 0;
                 else space.fits = 1;
             }
@@ -116,18 +116,18 @@ s32 Frontend_SavePlayerRecords(s32 channel)
             staged = pakRecordSave()->saved;
             Resmgr_CopyBytes(staged, pakRecordSave()->players[channel].records, 0x640);
             pakRecordSave()->savedProfile = pakRecordSave()->players[channel].profile;
-            checksum = func_804057F8_de(staged, 0x640, 7);
+            checksum = Ovlgame_Crc32(staged, 0x640, 7);
             pakRecordSave()->checksum = checksum;
             data = pakRecordSave()->saved;
             for (i = 0; i < 16; i++) name[i] = 0;
-            func_802A025C_de(name, RW_PAK_RECORD_TITLE);
+            Resmgr_CopyString(name, RW_PAK_RECORD_TITLE);
             if (Pak_SaveNote(channel, 0x648, data, name, extension, RECORDS_NOTE_CODE) == 0) success = 1;
         }
     }
     if (!success) {
         pakRecordSave()->players[channel].back = 2;
         pakRecordSave()->players[channel].state = 2;
-        func_804322AC_de(channel);
+        Frontend_RefreshPlayerPanel(channel);
     }
     return success;
 }

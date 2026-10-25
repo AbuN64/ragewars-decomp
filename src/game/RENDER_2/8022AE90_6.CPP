@@ -2,7 +2,7 @@
 #include "COMMON/INTEGERSTATE1250.H"
 #include "TYPES.H"
 
-extern u8 *func_802A025C_de(u8 *, u8 *);
+extern u8 *Resmgr_CopyString(u8 *, u8 *);
 extern void Camera_PostScaledScreenMessage(void *, s32, void *, f32);
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
@@ -18,7 +18,7 @@ void func_8022B75C_de(void *player, u8 *message, f32 size) {
     if (count == 5) {
         ((Shared_ActorView *)player)->messageIndex = 0;
     }
-    func_802A025C_de(((Shared_ActorView *)player)->messageHistory[((Shared_ActorView *)player)->messageIndex], message);
+    Resmgr_CopyString(((Shared_ActorView *)player)->messageHistory[((Shared_ActorView *)player)->messageIndex], message);
     temp = (s32)((Shared_ActorView *)player)->message;
     if (temp != 0) {
         Camera_PostScaledScreenMessage(&D_80145088, temp,

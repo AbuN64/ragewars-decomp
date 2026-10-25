@@ -4,6 +4,6 @@
 
 /* Returns 0x648, the byte size func_80435384_de passes on to Ovlgame_BytesToPakPages for the object it
    creates when it has none. */
-s32 func_80435424_de(void) {
+s32 Frontend_GetRecordsNoteSize(void) {
     return 0x648;
 }

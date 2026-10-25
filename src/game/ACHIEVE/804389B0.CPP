@@ -18,7 +18,7 @@ extern s32 D_8010EB94[], D_80146894;
 extern void *Scene_AllocateMemory(), *func_8040EC30_de(), *func_80425C70_de(), *Achieve_GetResultText();
 extern s32 func_80265650_de(), func_80425014_de(), func_80425674_de(), func_8041F140_de();
 extern void func_8040E8D8_de(), func_8040E950_de(), func_8043C210_de(), func_8043C278_de(), func_80438A88_de(), func_80425D14_de();
-extern void func_80265688_de(), Resmgr_FillMemory(), func_804259E0_de(), func_802A0C08_de(), func_802A025C_de(), Achieve_UpdatePlayerPreviewStats(), func_80438614_de();
+extern void func_80265688_de(), Resmgr_FillMemory(), func_804259E0_de(), func_802A0C08_de(), Resmgr_CopyString(), Achieve_UpdatePlayerPreviewStats(), func_80438614_de();
 extern void func_8041B110_de(), func_8028D380_de(), func_802A2394_de();
 extern char *func_802A0494_de();
 extern u8 D_800F00DC_raw[];
@@ -125,7 +125,7 @@ s32 func_804389B0_eu_x(void *root) {
         func_8040E950_de(func_8040EC30_de(root, CS(0x273)), 0);
         goto tail;
     }
-    func_802A025C_de(g + 0x18C, D_800E2044_eu[lang]);
+    Resmgr_CopyString(g + 0x18C, D_800E2044_eu[lang]);
     it = func_8040EC30_de(SG(g, void *, 0x20), CS(0x283));
     func_8040E8D8_de(it, 1);
     SG(it, u8, 0x10) = 0xAF;
@@ -153,7 +153,7 @@ tail:
     }
     it = func_8040EC30_de(root, CS(0x270));
     func_8028D380_de(D_8011FE88, D_8015402C, buf, 0x3F);
-    func_802A025C_de(g + 0x50, func_802A0494_de(buf));
+    Resmgr_CopyString(g + 0x50, func_802A0494_de(buf));
     SG(it, u8 *, 0x38) = g + 0x50;
     SG(g, void *, 0x24) = func_8040EC30_de(root, CS(0x278));
     SG(g, s32, 0x1C0) = 1;

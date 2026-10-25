@@ -4619,7 +4619,7 @@ segments:
       - [0xDE890, rodata, data_800C/literals_func_804306D8_de]
       - [0xDE9C8, rodata, data_800C/D_804322AC_E29F8]
       - [0xDE9CF, data, data_800C/rodata_unresolved_800DDDCF]
-      - [0xDE9D0, rodata, data_800C/literals_func_804322AC_de]
+      - [0xDE9D0, rodata, data_800C/literals_Frontend_RefreshPlayerPanel]
       - [0xDEA68, rodata, data_800C/literals_func_80433398_de]
       - [0xDEA78, rodata, data_800C/literals_func_80433610_de]
       - [0xDEAB0, rodata, data_800C/D_80433EA0_E2AE0]

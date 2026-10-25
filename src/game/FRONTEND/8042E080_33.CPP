@@ -18,7 +18,7 @@
 
 extern struct Block_func_80434638_de *D_800E54A4;
 extern s32 func_80404F58_de(s32, s32, struct Packet *, s32);
-extern s32 func_804057F8_de(struct Packet *, s32, s32);
+extern s32 Ovlgame_Crc32(struct Packet *, s32, s32);
 extern void Pak_DeleteNote(s32, s32);
 
 s32 func_80434638_de(s32 player, s32 channel) {
@@ -28,7 +28,7 @@ s32 func_80434638_de(s32 player, s32 channel) {
     received = 0;
     packet = &D_800E54A4->packet;
     if (func_80404F58_de(player, channel, packet, 0x648) == 0) {
-        if (func_804057F8_de(packet, 0x640, 7) == packet->checksum) {
+        if (Ovlgame_Crc32(packet, 0x640, 7) == packet->checksum) {
             Resmgr_CopyBytes(D_800E54A4->players[player].data, &D_800E54A4->packet, 0x640);
             received = 1;
             D_800E54A4->players[player].tail = D_800E54A4->packet.tail;

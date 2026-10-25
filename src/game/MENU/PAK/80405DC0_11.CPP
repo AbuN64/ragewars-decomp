@@ -57,7 +57,7 @@ extern s32 func_8040458C_de(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s
 
 extern s32 func_804057BC_de(u8 *name, s32 size);
 
-extern void func_802A025C_de(u8 *dst, char *src);
+extern void Resmgr_CopyString(u8 *dst, char *src);
 
 /* Native resident constant storage; absolute access symbols retain their addresses. */
 #if defined(VERSION_US)
@@ -175,19 +175,19 @@ s32 func_80407F6C_de(PakNoteTextEntry *entry, PakNotesMenu *menu) {
     if (exists != 0 && result == 0) {
         if (func_804057BC_de(name, 16) != 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-            func_802A025C_de(name, D_800E27B4[D_80152789]);
+            Resmgr_CopyString(name, D_800E27B4[D_80152789]);
 #else
-            func_802A025C_de(name, D_800D3758);
+            Resmgr_CopyString(name, D_800D3758);
 #endif
         }
     } else {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        func_802A025C_de(name, D_800E27C4_eu[D_801462C8.language]);
-        func_802A025C_de(ext, D_800E27C4_eu[D_801462C8.language]);
+        Resmgr_CopyString(name, D_800E27C4_eu[D_801462C8.language]);
+        Resmgr_CopyString(ext, D_800E27C4_eu[D_801462C8.language]);
 #else
         placeholder = &D_800D375C;
-        func_802A025C_de(name, *placeholder);
-        func_802A025C_de(ext, *placeholder);
+        Resmgr_CopyString(name, *placeholder);
+        Resmgr_CopyString(ext, *placeholder);
 #endif
         size = 0;
     }
