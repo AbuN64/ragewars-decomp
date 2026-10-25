@@ -8,7 +8,6 @@
 
 
 
-extern struct EntryRecAt8V1 D_80153F80[];
 extern InstanceHdr D_800E37B8[];
 
 static inline s32 entryScore(void) {
@@ -19,8 +18,8 @@ static inline s32 entryScore(void) {
     score = 0;
     points = 0;
     for (i = 0; i < 3; i++) {
-        if (D_80153F80[i].unused >= 0) {
-            switch (D_80153F80[i].flags) {
+        if (D_80153F80[i].id >= 0) {
+            switch (D_80153F80[i].variant) {
             case 0:
                 points = 5;
                 break;
@@ -44,7 +43,7 @@ static inline s32 activeCount(void) {
 
     count = 0;
     for (i = 0; i < 3; i++) {
-        if (D_80153F80[i].unused >= 0) {
+        if (D_80153F80[i].id >= 0) {
             count++;
         }
     }

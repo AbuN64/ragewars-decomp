@@ -15,7 +15,6 @@ INCLUDE_ASM("ovl_80400000", func_8041E408_de);
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
 /* Fuzzy draft in EU and EU-X: their body differs (134 words). */
 extern void *D_800E39C0;
-extern struct RequestRecAt10 D_80153F80[];
 extern struct TextEntry D_800E381C[][17];
 extern u8 *Resmgr_CopyString(u8 *, u8 *);
 #if defined(VERSION_DE)
@@ -70,7 +69,6 @@ void func_8041E408_de(s32 index) {
 #endif
 
 /* Seats the three join requests in free player settings slots, searching down from slot 7. */
-extern struct RequestRecAt10 D_80153F80[];
 extern u8 *Resmgr_CopyString(u8 *, u8 *);
 void Frontend_SeatJoinRequests(void) {
     Shared_PlayerSettingsRecord *player;

@@ -57,7 +57,6 @@ s32 func_8041DFC0_us(void *arg0) {
 #if defined(VERSION_US)
 #include "COMMON/ITEMRECAT20V1.H"
 extern struct TextEntry D_800E381C[][17];
-extern struct RequestRecAt10 D_80153F80[];
 extern void MarkMenuEventHandled(void);
 extern s32 func_802999A0_de(s32);
 extern s32 func_8041EC44_de(s32, s32);

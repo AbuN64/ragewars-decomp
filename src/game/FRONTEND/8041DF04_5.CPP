@@ -25,7 +25,6 @@
 
 extern struct func_80204468_S3 *D_800E39C0;
 extern struct TextEntry D_800E381C[][17];
-extern struct RequestRecAt10 D_80153F80[];
 extern void MarkMenuEventHandled();
 extern s32 func_802999A0_de(s32);
 extern s32 func_8041EC44_de(s32, s32);
@@ -91,7 +90,6 @@ s32 func_8041E100_de(void *unused0, void *unused1, void *unused2, s32 event) {
 
 extern struct func_80204468_S3 *D_800E39C0;
 extern struct TextEntry D_800E381C[][17];
-extern struct RequestRecAt10 D_80153F80[];
 extern void MarkMenuEventHandled();
 extern s32 func_802999A0_de(s32);
 extern s32 func_8041EC44_de(s32, s32);

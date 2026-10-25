@@ -88,7 +88,6 @@ extern s32 D_8014DCF8[];
 extern unsigned char D_8014DCFB[];
 
 extern void MarkMenuEventHandled(void),func_8041E408_de(s32);
-extern struct RequestRecAt10 D_80153F80[];
 extern struct CourseOptionsScreen *D_800E39C0;
 extern MenuWidget *func_8040EC30_de(void *, s32);
 

@@ -33,6 +33,8 @@ struct RequestRecAt10 {
     s32 variantC;
     char name[28 - 0x10];
 };
+/* D_80153F80: the three join requests the request menus edit and Frontend_SeatJoinRequests seats. */
+extern struct RequestRecAt10 D_80153F80[3];
 
 
 struct Menu_func_8041EE08_de;
