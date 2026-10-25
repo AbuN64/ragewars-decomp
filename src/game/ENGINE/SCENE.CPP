@@ -460,7 +460,7 @@ scene_size_done:
         func_80255CA0_de(&((struct SharedRecAt1B92C *)table)->address1B500, 0xC, 0x10);
         temp_v0_16 = (((struct SharedRecAt1B92C *)(table))->unk1B4E0);
         if (temp_v0_16 > 0) {
-            record = func_8025305C_de(temp_v0_16 * 0x50);
+            record = Scene_AllocateMemory(temp_v0_16 * 0x50);
             
             var_s2 = 0;
             if ((((struct SharedRecAt1B92C *)(table))->unk1B4E0) > 0) {

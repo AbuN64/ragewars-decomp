@@ -3,7 +3,7 @@
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 extern char *D_800E3590;
-extern void *func_8025305C_de(s32);
+extern void *Scene_AllocateMemory(s32);
 extern void *func_8041B610_de(s32, s32);
 extern void func_8041B6E8_de(s32, s32, s32);
 extern void func_8041B968_de(void *, s32);
@@ -19,7 +19,7 @@ extern void Frontend_ShowUnlockedEntries(s32);
 /* Opens the 0x210-byte screen state D_800E3590 for owner arg0: a four-row list, the side widgets 0x1E8, 0x1E7 and 0x1E4 pushed out by their width quarter, plus the labels 0x1E2, 0x22F, 0x1EC, 0x1ED, 0x1FC, 0x1FB, 0x1FA and 0x1E9; returns zero. */
 s32 func_8041CE40_de(s32 owner) {
     u8 *w;
-    D_800E3590 = (char *)func_8025305C_de(0x210);
+    D_800E3590 = (char *)Scene_AllocateMemory(0x210);
     ST_W(0) = owner;
     ST_W(4) = (s32)func_8041B610_de(owner, 4);
     func_8041B6E8_de(owner, 0, 0x1FD);

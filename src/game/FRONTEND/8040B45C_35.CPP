@@ -530,13 +530,13 @@ void func_8040F6DC_de(UiWidget *widget, s32 base, s32 old) {
 
 #include "FRONTEND/ARCHIVEDATA.H"
 #include "FRONTEND/LAYOUT.H"
-void *func_8025305C_de(s32 size);
+void *Scene_AllocateMemory(s32 size);
 u8 *func_802A025C_de(u8 *dst, u8 *src);
 void Resmgr_CloseStream(s32 handle);
 void Frontend_LoadLanguageStrings(s32 index);
 extern char D_800DD0B0;
 extern s32 D_800E2AC4;
-void func_802547E4_de(void *arg0);
+void Scene_FreeMemory(void *arg0);
 
 /* Loads the string table of resource archive section index: frees the previous string buffer and
  * pointer table, reads the section's bytes from the archive file into a fresh buffer (its size is the
@@ -552,11 +552,11 @@ void Frontend_LoadLanguageStrings(s32 languageIndex) {
     closeArchive = 0;
     stringCount = D_801539B0.LangTable[languageIndex].count;
     if (D_801539B0.StringBuffer != 0) {
-        func_802547E4_de(D_801539B0.StringBuffer);
+        Scene_FreeMemory(D_801539B0.StringBuffer);
     }
     D_801539B0.StringBuffer = 0;
     if (D_801539B0.StringTable != 0) {
-        func_802547E4_de(D_801539B0.StringTable);
+        Scene_FreeMemory(D_801539B0.StringTable);
     }
     D_801539B0.StringTable = 0;
     if (languageIndex < D_801539B0.NLanguages - 1) {
@@ -564,14 +564,14 @@ void Frontend_LoadLanguageStrings(s32 languageIndex) {
     } else {
         bufferSize = D_801539B0.Header.StringTableLen - D_801539B0.LangTable[languageIndex].start;
     }
-    D_801539B0.StringBuffer = func_8025305C_de(bufferSize);
+    D_801539B0.StringBuffer = Scene_AllocateMemory(bufferSize);
     Resmgr_SeekStream(D_801539B0.In, D_801539B0.LangTable[languageIndex].start + D_801539B0.Header.StringTable, 0);
     Resmgr_ReadStream(D_801539B0.StringBuffer, bufferSize, 1, D_801539B0.In);
     if (closeArchive) {
         Resmgr_CloseStream(D_801539B0.In);
         D_801539B0.In = 0;
     }
-    D_801539B0.StringTable = func_8025305C_de(stringCount << 2);
+    D_801539B0.StringTable = Scene_AllocateMemory(stringCount << 2);
     D_801539B0.StringTable[0] = D_801539B0.StringBuffer;
     stringIndex = 1;
     for (character = (u8 *)D_801539B0.StringBuffer + 1; character < (u8 *)D_801539B0.StringBuffer + bufferSize && stringIndex < stringCount; character++) {
@@ -605,10 +605,10 @@ void Frontend_OpenResourceArchive(u8 *name) {
     Resmgr_ReadStream(&D_801539B0.Header, sizeof(t_res_header), 1, handle);
     D_801539B0.NTextures = D_801539B0.Header.TextureTableLen / sizeof(_sm_texture_element);
     if (D_801539B0.NTextures > 0) {
-        D_801539B0.VramPool = func_8025305C_de(D_801539B0.NTextures * sizeof(struct OwnedImage));
-        D_801539B0.TexTimer = func_8025305C_de(D_801539B0.NTextures * sizeof(struct ResourceRecAt6));
-        D_801539B0.ChromaKey = func_8025305C_de(D_801539B0.NTextures * sizeof(void *));
-        texture = D_801539B0.Texture = func_8025305C_de(D_801539B0.Header.TextureTableLen);
+        D_801539B0.VramPool = Scene_AllocateMemory(D_801539B0.NTextures * sizeof(struct OwnedImage));
+        D_801539B0.TexTimer = Scene_AllocateMemory(D_801539B0.NTextures * sizeof(struct ResourceRecAt6));
+        D_801539B0.ChromaKey = Scene_AllocateMemory(D_801539B0.NTextures * sizeof(void *));
+        texture = D_801539B0.Texture = Scene_AllocateMemory(D_801539B0.Header.TextureTableLen);
         Resmgr_SeekStream(res->In, D_801539B0.Header.TextureTable, 0);
         Resmgr_ReadStream(texture, sizeof(_sm_texture_element), D_801539B0.NTextures, res->In);
         for (i = 0; i < D_801539B0.NTextures; i++, texture++) {
@@ -622,16 +622,16 @@ void Frontend_OpenResourceArchive(u8 *name) {
     }
     D_801539B0.NLanguages = D_801539B0.Header.LanguageTableLen / sizeof(ArchiveTextIndexEntry);
     if (D_801539B0.NLanguages > 0) {
-        D_801539B0.LangTable = func_8025305C_de(D_801539B0.Header.LanguageTableLen);
+        D_801539B0.LangTable = Scene_AllocateMemory(D_801539B0.Header.LanguageTableLen);
         Resmgr_SeekStream(res->In, D_801539B0.Header.LanguageTable, 0);
         Resmgr_ReadStream(D_801539B0.LangTable, D_801539B0.Header.LanguageTableLen, 1, res->In);
         Frontend_LoadLanguageStrings(0);
     }
     D_801539B0.NScreens = D_801539B0.Header.ScreenTableLen / sizeof(ArchiveMapEntry);
     if (D_801539B0.NScreens > 0) {
-        D_801539B0.Screen = func_8025305C_de(D_801539B0.Header.ScreenTableLen);
+        D_801539B0.Screen = Scene_AllocateMemory(D_801539B0.Header.ScreenTableLen);
         if (D_800E2AC4 != 0) {
-            D_801539B0.ScreenOriginal = func_8025305C_de(D_801539B0.Header.ScreenTableLen);
+            D_801539B0.ScreenOriginal = Scene_AllocateMemory(D_801539B0.Header.ScreenTableLen);
             Resmgr_FillBytes(D_801539B0.ScreenOriginal, 0, D_801539B0.Header.ScreenTableLen);
         }
         Resmgr_SeekStream(res->In, D_801539B0.Header.ScreenTable, 0);
@@ -639,20 +639,20 @@ void Frontend_OpenResourceArchive(u8 *name) {
         for (i = 0; i < D_801539B0.NScreens; i++) {
             D_801539B0.Screen[i].data = 0;
         }
-        D_801539B0.RefCount = func_8025305C_de(D_801539B0.NScreens * sizeof(s16));
+        D_801539B0.RefCount = Scene_AllocateMemory(D_801539B0.NScreens * sizeof(s16));
         Resmgr_FillBytes(D_801539B0.RefCount, 0, D_801539B0.NScreens * sizeof(s16));
-        D_801539B0.ScreenFlags = func_8025305C_de(D_801539B0.NScreens * sizeof(s16));
+        D_801539B0.ScreenFlags = Scene_AllocateMemory(D_801539B0.NScreens * sizeof(s16));
         Resmgr_FillBytes(D_801539B0.ScreenFlags, 0, D_801539B0.NScreens * sizeof(s16));
     }
     if (D_801539B0.Header.FontTableLen > 0) {
-        clutOffsets = func_8025305C_de(D_801539B0.Header.FontClutTableLen);
+        clutOffsets = Scene_AllocateMemory(D_801539B0.Header.FontClutTableLen);
         Resmgr_SeekStream(res->In, D_801539B0.Header.FontClutTable, 0);
         Resmgr_ReadStream(clutOffsets, D_801539B0.Header.FontClutTableLen, 1, res->In);
-        D_801539B0.FontTable = func_8025305C_de(D_801539B0.Header.FontTableLen);
+        D_801539B0.FontTable = Scene_AllocateMemory(D_801539B0.Header.FontTableLen);
         Resmgr_SeekStream(res->In, D_801539B0.Header.FontTable, 0);
         Resmgr_ReadStream(D_801539B0.FontTable, D_801539B0.Header.FontTableLen, 1, res->In);
         D_801539B0.NFonts = D_801539B0.Header.FontTableLen / sizeof(ArchiveFontRecord);
-        D_801539B0.Font = func_8025305C_de(D_801539B0.NFonts * sizeof(_sm_font));
+        D_801539B0.Font = Scene_AllocateMemory(D_801539B0.NFonts * sizeof(_sm_font));
         Resmgr_FillBytes(D_801539B0.Font, 0, D_801539B0.NFonts * sizeof(_sm_font));
         for (i = 0; i < D_801539B0.NFonts; i++) {
             D_801539B0.Font[i].TableEntry = &D_801539B0.FontTable[i];
@@ -663,16 +663,16 @@ void Frontend_OpenResourceArchive(u8 *name) {
             font = &D_801539B0.Font[n];
             Resmgr_SeekStream(res->In, D_801539B0.Header.FontData + entry->glyphTableOffset, 0);
             Resmgr_ReadStream(font->CharInfo, 8, 0x60, res->In);
-            font->Char = func_8025305C_de(entry->bitmapCount * sizeof(t_char *));
-            font->Char[0] = func_8025305C_de(entry->bitmapCount * 96 * sizeof(t_char));
+            font->Char = Scene_AllocateMemory(entry->bitmapCount * sizeof(t_char *));
+            font->Char[0] = Scene_AllocateMemory(entry->bitmapCount * 96 * sizeof(t_char));
             Resmgr_FillBytes(font->Char[0], 0, entry->bitmapCount * 96 * sizeof(t_char));
             for (j = 0; j < entry->bitmapCount; j++) {
                 font->Char[j] = font->Char[0] + j * 96;
             }
             if (entry->bitmapCount > 0) {
                 stride = (entry->glyphWidth * 2 + 7) & ~7;
-                font->Clut = func_8025305C_de(entry->bitmapCount * sizeof(t_char *));
-                font->Clut[0] = func_8025305C_de(entry->bitmapCount * stride);
+                font->Clut = Scene_AllocateMemory(entry->bitmapCount * sizeof(t_char *));
+                font->Clut[0] = Scene_AllocateMemory(entry->bitmapCount * stride);
                 Resmgr_SeekStream(res->In, D_801539B0.Header.CharData + clutOffsets[clut], 0);
                 Resmgr_ReadStream(font->Clut[0], entry->bitmapCount * stride, 1, res->In);
                 for (j = 0; j < entry->bitmapCount; j++) {
@@ -681,7 +681,7 @@ void Frontend_OpenResourceArchive(u8 *name) {
                 clut += entry->bitmapCount + n - n; /* FAKEMATCH: the extra n terms give the font counter the allocation priority the ROM shows. */
             }
         }
-        func_802547E4_de(clutOffsets);
+        Scene_FreeMemory(clutOffsets);
     } else {
         D_801539B0.NFonts = 0;
     }

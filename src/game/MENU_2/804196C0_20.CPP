@@ -23,7 +23,7 @@
 
 extern s32 GetMenuScreenOwner(void);
 extern void *Frontend_GetScreenData(s32 index);
-extern MenuFadeWidget *func_8025305C_de(s32);
+extern MenuFadeWidget *Scene_AllocateMemory(s32);
 extern void func_8041A47C_de(MenuFadeWidget *);
 extern void func_8041A430_de(MenuFadeWidget *, s32);
 extern void func_8040EDE4_de(MenuFadeWidget *, MenuFadeWidget *);
@@ -35,7 +35,7 @@ MenuFadeWidget *func_8041A280_de(s32 frameId, s32 itemId) {
 
     frame = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), frameId & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());
-    result = func_8025305C_de(0x7C);
+    result = Scene_AllocateMemory(0x7C);
     Resmgr_FillBytes(result, 0, 0x7C);
     result->field_0E = 0xB60;
     result->field_12 = 8;

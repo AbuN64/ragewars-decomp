@@ -31,7 +31,7 @@ extern s32 D_800E3364;
 
 extern Handler802A2B50 D_800E3368;
 
-/* Calls func_802547E4_de with the arguments it was given and returns zero. */
+/* Calls Scene_FreeMemory with the arguments it was given and returns zero. */
 
 /* Allocates and zeroes a 0x58-byte record, copies the header and five-word block of the record func_8040EC30_de finds for the low half of the first argument, links the record func_8040EC30_de finds for the second into it with its halfword at 0x18, stores the third argument, and registers it through func_8040EEA4_de and func_8040EF84_de.
    Adapted from func_802A1990_de with the record size, tag 0xB63, the tail fields and the dropped func_802A1B24_de call changed. */
@@ -49,7 +49,7 @@ extern s32 GetMenuScreenOwner(void);
 extern void *Frontend_GetScreenData(s32 index);
 
 
-extern MenuSliderWidget *func_8025305C_de(s32);
+extern MenuSliderWidget *Scene_AllocateMemory(s32);
 
 
 
@@ -158,7 +158,7 @@ void func_8041A520_de(void *target, const char *format, ...)
 }
 
 s32 func_8041A530_de(void *arg0) {
-    func_802547E4_de(arg0);
+    Scene_FreeMemory(arg0);
     return 0;
 }
 
@@ -174,7 +174,7 @@ MenuSliderWidget *func_8041A580_de(s32 arg0, s32 arg1, s32 arg2) {
 
     source = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());
-    result = func_8025305C_de(0x58);
+    result = Scene_AllocateMemory(0x58);
     Resmgr_FillBytes(result, 0, 0x58);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB63;

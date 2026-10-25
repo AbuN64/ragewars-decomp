@@ -21,7 +21,7 @@ s32 func_804396C0_us_rev1(MenuWidget *tree) {
     Shared_PlayerSettingsRecord *record;
     Shared_MenuObject *object;
 
-    D_800E5950 = func_8025305C_de(sizeof(*D_800E5950));
+    D_800E5950 = Scene_AllocateMemory(sizeof(*D_800E5950));
     object = &D_80145040.object;
     Items_ResetActorPools(object, 0);
     func_804499B0_de(&D_80145040, 0, 0);

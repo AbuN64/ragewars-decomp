@@ -22,7 +22,7 @@
 
 
 
-/* Releases the object D_800E5830 holds through func_802547E4_de, clears D_800E5830 and returns zero. */
+/* Releases the object D_800E5830 holds through Scene_FreeMemory, clears D_800E5830 and returns zero. */
 
 
 
@@ -91,7 +91,7 @@ void func_80438A88_de(void) {
 }
 
 s32 func_80438AA4_de(void) {
-    func_802547E4_de(D_800E5830);
+    Scene_FreeMemory(D_800E5830);
     D_800E5830 = 0;
     return 0;
 }

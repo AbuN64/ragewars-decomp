@@ -55,7 +55,7 @@ s32 func_802744D4_de(void);
 
 
 
-extern MenuResourceWidget *func_8025305C_de(int);
+extern MenuResourceWidget *Scene_AllocateMemory(int);
 
 extern int GetMenuScreenOwner(void);
 
@@ -100,7 +100,7 @@ MenuResourceWidget *func_80419E54_de(int arg0, int arg1)
   int kind;
   r = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 65535);
   Frontend_GetScreenData(GetMenuScreenOwner());
-  p = func_8025305C_de(0x88);
+  p = Scene_AllocateMemory(0x88);
   Resmgr_FillBytes(p, 0, 0x88);
   p->b = (kind = 0xB62);
   p->resource = r;

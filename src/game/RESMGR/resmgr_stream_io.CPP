@@ -21,7 +21,7 @@ extern s32 D_800D2B84;
 
 extern struct CartridgeReadWorker D_801011B8;
 
-extern Record *func_8025305C_de(s32 arg0);
+extern Record *Scene_AllocateMemory(s32 arg0);
 
 extern void func_8025637C_de(struct CartridgeReadWorker *worker, u32 source, s32 bytes, void *destination);
 
@@ -138,7 +138,7 @@ void Resmgr_InitializeStreams(void) {
 #else
         D_800CD940_de.size = 0x8B245;
 #endif
-        v0 = func_8025305C_de(read_resource_word(&D_800CD940_de.size));
+        v0 = Scene_AllocateMemory(read_resource_word(&D_800CD940_de.size));
         write_resource_buffer(&D_800CD940_de.data, v0);
         func_8025637C_de(&D_801011B8, 0x200000, read_resource_word(&D_800CD940_de.size), v0);
         write_resource_word(&D_800CD940_de.opened,0);
@@ -150,7 +150,7 @@ void Resmgr_InitializeStreams(void) {
 void Resmgr_ShutdownStreams(void) {
     D_800D2B80--;
     if (D_800CD940_de.data != 0) {
-        func_802547E4_de(D_800CD940_de.data);
+        Scene_FreeMemory(D_800CD940_de.data);
     }
     clear_resource_state();
 }

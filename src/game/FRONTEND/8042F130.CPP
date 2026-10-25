@@ -201,7 +201,7 @@ extern s32 D_800DF4C0;
 extern s32 D_800DF4C4;
 extern PakSetupProfile D_80102B00[];
 
-extern void *func_8025305C_de(s32);
+extern void *Scene_AllocateMemory(s32);
 extern void func_8043C210_de(void *, s32, s32, s32, s32);
 extern void *func_8041B610_de(void *, s32);
 extern void func_8041B6E8_de(void *, s32, s32);
@@ -227,7 +227,7 @@ s32 func_8042F130_us_rev1(void *screen) {
     s32 i;
     s32 j;
 
-    block = func_8025305C_de(sizeof(PakSetupState));
+    block = Scene_AllocateMemory(sizeof(PakSetupState));
     D_800E54A4 = block;
     block->screen = screen;
     func_8043C210_de(block->setup, 0x67, 0, 0, 0);

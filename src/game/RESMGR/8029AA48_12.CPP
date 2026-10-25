@@ -8,18 +8,18 @@
 /** Store a word through the global pointer at D_8014D0B0. */
 
 
-void *func_8025305C_de(s32);
+void *Scene_AllocateMemory(s32);
 
 
 
 void func_8029AA78_de(void) {
     Callback *callback;
-    callback = func_8025305C_de(0xC44);
+    callback = Scene_AllocateMemory(0xC44);
     D_8014D0B0 = callback;
     Resmgr_FillBytes(callback, 0, 0xC44);
 }
 
 void func_8029AAAC_de(void) {
-    func_802547E4_de(D_8014D0B0);
+    Scene_FreeMemory(D_8014D0B0);
     D_8014D0B0 = 0;
 }

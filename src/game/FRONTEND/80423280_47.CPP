@@ -35,7 +35,7 @@ enum { OPTIONS_TEXT = 0x35F };
 
 extern struct MatchOptionsScreen *D_800E4EF0;
 extern char *D_800D3494, *D_800D3498, *D_800D349C, *D_800D34A0, *D_800D34A4, *D_800D34A8, *D_800D34AC;
-extern void *func_8025305C_de(s32 size);
+extern void *Scene_AllocateMemory(s32 size);
 extern void func_8043C210_de(void *, s32, s32, s32, s32);
 extern s32 func_8041EAC4_de(void);
 extern void *func_8040EC30_de(void *root, s32 identifier);
@@ -50,7 +50,7 @@ s32 Frontend_CreateMatchOptions(void *root) {
     void *widget;
     void **slot;
 
-    screen = func_8025305C_de(0x40);
+    screen = Scene_AllocateMemory(0x40);
     D_800E4EF0 = screen;
     func_8043C210_de(screen->transition, 0x67, 0, 0, 0);
     D_800E4EF0->countCap = func_8041EAC4_de();

@@ -6,7 +6,7 @@
 #ifdef NON_MATCHING
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#define func_8025305C_de fz_func_8025305C_de
+#define Scene_AllocateMemory fz_func_8025305C_de
 #define func_8041A280_de fz_func_8041A280_de
 #define func_8041B110_de fz_func_8041B110_de
 #define func_8041ABC0_de fz_func_8041ABC0_de
@@ -20,7 +20,7 @@
 typedef struct EuOptsPage_eu { void *title; void *list; void *bar; void *rowC; void *row10; void *row14; s32 pad18, pad1C, sel, count; } EuOptsPage_eu;
 extern EuOptsPage_eu *g_optionsPage;
 extern char *D_800E1C14[], *D_800E1C34[], *D_800E1C44[], *D_auto_800E1C54[], *D_auto_800E1C64[], *D_800D2134[], *D_800D2138[], *D_800D213C[];
-extern void *func_8025305C_de(); extern void *func_8041A280_de(); extern void func_8041B110_de(); extern void *func_8041ABC0_de();
+extern void *Scene_AllocateMemory(); extern void *func_8041A280_de(); extern void func_8041B110_de(); extern void *func_8041ABC0_de();
 extern void func_8041AD34_de(); extern void func_8041AD10_de(); extern u32 System_GetMemorySize(); extern void *func_8041A580_de();
 extern void func_8041A6EC_de(); extern void *func_80419E54_de(); extern void *func_8040EC30_de();
 extern char *D_auto_800DDB08[];
@@ -28,7 +28,7 @@ extern char *D_auto_800DDB08[];
    current language and set from the option bytes 0x1B, 0x1F and 0x580 of D_801462C8, the volume bar 0x53 and its list. Returns 0. */
 s32 func_804229E0_eu(void) {
     u8 lang = D_801462C8.language;
-    g_optionsPage = func_8025305C_de(0x28);
+    g_optionsPage = Scene_AllocateMemory(0x28);
     g_optionsPage->title = func_8041A280_de(0x4D, 0x4E);
     func_8041B110_de(0x57);
     func_8041B110_de(0x58);
@@ -56,7 +56,7 @@ s32 func_804229E0_eu(void) {
     g_optionsPage->sel = -1;
     return 0;
 }
-#undef func_8025305C_de
+#undef Scene_AllocateMemory
 #undef func_8041A280_de
 #undef func_8041B110_de
 #undef func_8041ABC0_de
@@ -93,7 +93,7 @@ s32 func_80422C58_eu(void) {
     void *scroll;
     void *temp_v0;
 
-    D_800E4514 = func_8025305C_de(0x10);
+    D_800E4514 = Scene_AllocateMemory(0x10);
     func_8041B110_de(0x1BD);
     func_8041B110_de(0x1C2);
     temp_v0 = func_8041ABC0_de(0x1BB, 0x1BC);
@@ -214,7 +214,7 @@ s32 func_80422E34_eu(void *node) {
     s32 i;
     s32 rem;
 
-    { void *memory = func_8025305C_de(0x6C); D_800E4518 = memory; }
+    { void *memory = Scene_AllocateMemory(0x6C); D_800E4518 = memory; }
     D_800E4518->sound = func_8025E2C4_de();
     func_8025E2D4_de(0x34);
     func_8025E384_de();

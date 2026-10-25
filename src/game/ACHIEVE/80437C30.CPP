@@ -61,7 +61,7 @@ s32 func_80437C30_us_rev1(MenuWidget *menu) {
     s32 *level;
     s32 i;
 
-    D_800E5830 = (ModelPreviewScreen *)func_8025305C_de(sizeof(ModelPreviewScreen));
+    D_800E5830 = (ModelPreviewScreen *)Scene_AllocateMemory(sizeof(ModelPreviewScreen));
     D_800E5830->window = menu;
     func_8040E8D8_de(menu, 0);
     func_8043C210_de(D_800E5830, 0x67, 0, 0, 0);

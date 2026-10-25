@@ -39,7 +39,7 @@ extern s32 D_800E37B8[];
 
 extern struct IntPair D_800E381C[][17];
 
-/* Releases the object D_800E39C0 holds through func_802547E4_de, clears D_800E39C0 and returns zero. */
+/* Releases the object D_800E39C0 holds through Scene_FreeMemory, clears D_800E39C0 and returns zero. */
 
 
 
@@ -189,7 +189,7 @@ s32 func_8041EC44_de(s32 row, s32 id) {
 }
 
 s32 func_8041EC84_de(void) {
-    func_802547E4_de(D_800E39C0);
+    Scene_FreeMemory(D_800E39C0);
     D_800E39C0 = 0;
     return 0;
 }

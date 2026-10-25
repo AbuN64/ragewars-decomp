@@ -13,7 +13,7 @@ s32 func_8041DFC0_us_rev1(void *arg0) {
     func_8041F2A0_Item *item;
     s32 row;
 
-    { void *memory = func_8025305C_de(0x20); D_800E39C0 = memory; }
+    { void *memory = Scene_AllocateMemory(0x20); D_800E39C0 = memory; }
     D_800E39C0->handle = arg0;
     D_800E39C0->mode = func_8041B610_de((s32) arg0, 4);
     func_8041B6E8_de((s32) arg0, 0, 0x389);

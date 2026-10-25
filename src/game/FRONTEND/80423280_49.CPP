@@ -102,7 +102,7 @@ s32 func_80429A24_de(void *window) {
     s32 x;
     s32 id;
 
-    D_800E4F60 = func_8025305C_de(sizeof(SetupScreen));
+    D_800E4F60 = Scene_AllocateMemory(sizeof(SetupScreen));
     D_800E4F60->window = window;
     D_800E4F60->list = func_8041B610_de(window, 4);
     func_8041B6E8_de(window, 0, ID_2FF);

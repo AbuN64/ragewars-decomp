@@ -7,7 +7,7 @@ extern struct SoundOptionsScreen *D_800E58A0;
 #include "RENDER_2/8025DE50_5.H"
 #include "SCENE/802508E0_13.H"
 
-/* Releases the object D_800E58A0 holds through func_802547E4_de, clears D_800E58A0 and returns zero. */
+/* Releases the object D_800E58A0 holds through Scene_FreeMemory, clears D_800E58A0 and returns zero. */
 
 
 
@@ -40,7 +40,7 @@ extern void func_80298368_de(s32);
 
 
 s32 func_80438FE0_de(void) {
-    func_802547E4_de(D_800E58A0);
+    Scene_FreeMemory(D_800E58A0);
     D_800E58A0 = 0;
     return 0;
 }

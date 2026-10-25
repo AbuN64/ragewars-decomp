@@ -24,7 +24,7 @@ extern void func_8041B8DC_de(struct sm_dlmultiuser_t *, s32, void *);
 extern void MarkMenuEventHandled(void);
 
 
-/* Calls func_802547E4_de with the arguments it was given and returns zero. */
+/* Calls Scene_FreeMemory with the arguments it was given and returns zero. */
 
 s32 func_8041BB3C_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind) {
     struct Child *child;
@@ -138,6 +138,6 @@ int func_8041BD8C_de(Mixer *mixer, int unused, int channel, int value, int extra
 }
 
 s32 func_8041BE08_de(void *arg0) {
-    func_802547E4_de(arg0);
+    Scene_FreeMemory(arg0);
     return 0;
 }

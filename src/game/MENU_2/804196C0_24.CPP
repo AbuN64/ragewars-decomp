@@ -22,7 +22,7 @@
 
 
 
-extern Node_func_8041B610_de *func_8025305C_de(s32 size);
+extern Node_func_8041B610_de *Scene_AllocateMemory(s32 size);
 
 
 extern void func_8040EDE4_de(Node_func_8041B610_de *parent, Node_func_8041B610_de *node);
@@ -87,7 +87,7 @@ void func_8041B5E0_de(void) {
 Node_func_8041B610_de *func_8041B610_de(OwnerRecAt44 *owner, s32 value) {
     Node_func_8041B610_de *node;
 
-    node = func_8025305C_de(0x70);
+    node = Scene_AllocateMemory(0x70);
     Resmgr_FillBytes(node, 0, 0x70);
     *(Header44 *)node = *(Header44 *)owner->root;
     node->kind = 0x7D5;

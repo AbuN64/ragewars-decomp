@@ -102,7 +102,7 @@ void func_8044BF90_de(func_8044CBE0_S1 *arg0) {
             var_a1 = temp_s0;
         } while (var_a1 != NULL);
     }
-    func_802547E4_de(temp_s1);
+    Scene_FreeMemory(temp_s1);
 }
 /* Binds a loaded collision mesh to the world: records the vertex, face and edge lists from the
    node's four chunks with their counts, resets the two bucket lists and files the 48 buckets into

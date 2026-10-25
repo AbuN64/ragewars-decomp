@@ -9,7 +9,7 @@
    Adapted from func_8041C2AC_de with the window openings changed to the list, panel and window calls of this screen and the list entry words declared as arrays. */
 
 extern MenuListScreen *D_800E5694;
-extern MenuListScreen *func_8025305C_de(s32);
+extern MenuListScreen *Scene_AllocateMemory(s32);
 
 extern void *func_8041ABC0_de(s32, s32);
 extern void func_8041AD34_de(void *, s32);
@@ -25,7 +25,7 @@ enum { MENU_80437074_454 = 454, MENU_80437074_455 = 455, MENU_80437074_456 = 456
 s32 func_80436E94_de(void *parent) {
     void *list;
 
-    D_800E5694 = func_8025305C_de(0x50);
+    D_800E5694 = Scene_AllocateMemory(0x50);
     func_8041B110_de(MENU_80437074_454);
     list = func_8041ABC0_de(MENU_80437074_457, MENU_80437074_458);
     D_800E5694->listA = list;

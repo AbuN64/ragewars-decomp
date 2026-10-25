@@ -5,7 +5,7 @@
 extern s32 *g_optionsPage;
 extern u8 D_801462C8[];
 extern s32 D_auto_800D3480, D_auto_800D3484, D_auto_800D3488, D_auto_800D348C, D_auto_800D3490;
-extern void *func_8025305C_de(s32);
+extern void *Scene_AllocateMemory(s32);
 extern void *func_8041A280_de(s32, s32);
 extern void func_8041B110_de(s32);
 extern void *func_8041ABC0_de(s32, s32);
@@ -17,7 +17,7 @@ extern void func_8041A6EC_de(void *, s32);
 extern void *func_80419E54_de(s32, s32);
 /* Builds the options page g_optionsPage (0x28 bytes) from resources 0x4D to 0x58 and wires its widgets to the settings in D_801462C8; returns zero. */
 s32 func_804230E0_de(void) {
-    g_optionsPage = (s32 *)func_8025305C_de(0x28);
+    g_optionsPage = (s32 *)Scene_AllocateMemory(0x28);
     g_optionsPage[0] = (s32)func_8041A280_de(0x4D, 0x4E);
     func_8041B110_de(0x57);
     func_8041B110_de(0x58);

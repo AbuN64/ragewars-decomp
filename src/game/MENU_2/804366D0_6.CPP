@@ -65,7 +65,7 @@ extern StyleNextState *D_800E5694;
 #include "MENU_2/804366D0_6.H"
 #include "SCENE/802508E0_13.H"
 
-/* Releases the object D_800E5694 holds through func_802547E4_de, clears D_800E5694 and returns zero. */
+/* Releases the object D_800E5694 holds through Scene_FreeMemory, clears D_800E5694 and returns zero. */
 
 
 
@@ -106,7 +106,7 @@ typedef s32 (*Handler80437454)(void *, s32, s32, s32, s32);
 extern Handler80437454 D_800E5718;
 
 s32 func_8043701C_de(void) {
-    func_802547E4_de(D_800E5694);
+    Scene_FreeMemory(D_800E5694);
     D_800E5694 = 0;
     return 0;
 }

@@ -35,7 +35,7 @@ extern s32 func_8041AD04_de(void *);
 
 extern s32 func_8041A6E0_de(void *);
 
-/* Releases the object D_800E5690 holds through func_802547E4_de, clears D_800E5690 and returns zero. */
+/* Releases the object D_800E5690 holds through Scene_FreeMemory, clears D_800E5690 and returns zero. */
 
 
 
@@ -88,7 +88,7 @@ void func_804369E8_de(s32 arg0) {
 }
 
 s32 func_80436B38_de(void) {
-    func_802547E4_de(D_800E5690);
+    Scene_FreeMemory(D_800E5690);
     D_800E5690 = 0;
     return 0;
 }

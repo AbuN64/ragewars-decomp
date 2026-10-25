@@ -34,7 +34,7 @@ extern void func_8041A8E8_de(struct func_8022FD9C_Record *menu);
 
 extern void func_8041A910_de(struct func_8022FD9C_Record *menu);
 
-/* Calls func_802547E4_de with the arguments it was given and returns zero. */
+/* Calls Scene_FreeMemory with the arguments it was given and returns zero. */
 
 s32 func_8041A9B0_de(struct CommandListMenu *commandListMenu) {
     struct LinkedCommandEntry *p;
@@ -106,7 +106,7 @@ s32 func_8041AB1C_de(struct func_8022FD9C_Record *menu)
 }
 
 s32 func_8041AB70_de(void *arg0) {
-    func_802547E4_de(arg0);
+    Scene_FreeMemory(arg0);
     return 0;
 }
 

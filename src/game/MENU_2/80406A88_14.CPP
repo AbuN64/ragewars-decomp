@@ -6,7 +6,7 @@ typedef struct { void *list; s32 unk4; void *unk8; s32 unkC; s32 unk10; char tex
 typedef struct { u8 pad0[0x10]; u8 alpha; u8 pad11[0x27]; void *text; } SliderItemEu;
 extern SliderPopupEu *D_800E5430;
 extern char D_800E1B60[];
-extern void *func_8025305C_de(s32);
+extern void *Scene_AllocateMemory(s32);
 extern void func_802A2360_de(void);
 extern void *func_8041A280_de(s32, s32);
 extern void func_8041A47C_de(void *);
@@ -20,7 +20,7 @@ s32 func_8042E790_eu_x(void *window) {
     SliderItemEu *item;
     void *title;
 
-    D_800E5430 = func_8025305C_de(0x24);
+    D_800E5430 = Scene_AllocateMemory(0x24);
     func_802A2360_de();
     title = func_8041A280_de(0x39C, 0x39D);
     D_800E5430->list = title;

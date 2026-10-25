@@ -101,10 +101,10 @@ void Frontend_ClearFlagBits(void) {
 
 extern void func_80422020_de(void);
 
-/* Closes the setup screen D_800E4F60: releases it through func_802547E4_de, runs func_802A2360_de and
+/* Closes the setup screen D_800E4F60: releases it through Scene_FreeMemory, runs func_802A2360_de and
    func_80422020_de, then clears the pointer. Returns zero. */
 s32 Frontend_CloseSetupScreen(void) {
-    func_802547E4_de(D_800E4F60);
+    Scene_FreeMemory(D_800E4F60);
     func_802A2360_de();
     func_80422020_de();
     D_800E4F60 = 0;
@@ -439,7 +439,7 @@ s32 Frontend_OpenResultsScreen(void *root) {
     Shared_PlayerSettingsRecord *config;
     s32 i, offset;
 
-    D_800E53C0 = (void *)func_8025305C_de(0x330);
+    D_800E53C0 = (void *)Scene_AllocateMemory(0x330);
     D_800E53C0->unkE0 = root;
     func_8040E8D8_de(root, 0);
     func_8043C210_de(D_800E53C0->transition, 0x67, 0, 0, 0);
@@ -809,7 +809,7 @@ extern s32 D_800E5240[];
 
 extern void func_80265688_de(void *, s32, s32);
 
-/* Releases the object D_800E4F60 holds through func_802547E4_de, calls func_802A2360_de and
+/* Releases the object D_800E4F60 holds through Scene_FreeMemory, calls func_802A2360_de and
    func_80422020_de, clears D_800E4F60 and returns zero. */
 
 

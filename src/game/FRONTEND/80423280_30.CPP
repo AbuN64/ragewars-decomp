@@ -66,7 +66,7 @@ struct SliderScreen {
 extern struct SliderScreen *D_800E4514;
 typedef struct SliderSettings { char pad0[0x10]; s32 value; char pad14[7]; u8 first; char pad1C[0x564]; u8 second; } SliderSettings;
 extern SliderSettings D_801462C8;
-extern struct SliderScreen *func_8025305C_de(s32);
+extern struct SliderScreen *Scene_AllocateMemory(s32);
 extern void func_8041B110_de(s32);
 extern s32 func_8041ABC0_de(s32, s32);
 extern void func_8041AD34_de(s32, char *);
@@ -88,7 +88,7 @@ s32 func_804234CC_de(void) {
     s32 list;
     s32 slider;
 
-    D_800E4514 = func_8025305C_de(0x10);
+    D_800E4514 = Scene_AllocateMemory(0x10);
     func_8041B110_de((0x1BD - OPTIONS_RESOURCE_SHIFT));
     func_8041B110_de((0x1C2 - OPTIONS_RESOURCE_SHIFT));
     if (OPTIONS_HAS_FIRST_LIST) {

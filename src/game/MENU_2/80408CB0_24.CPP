@@ -3,7 +3,7 @@
 #if defined(VERSION_EU)
 #include "COMMON/REQUESTRECAT10.H"
 extern struct CourseOptionsScreen *D_800E39C0;
-extern void *func_8025305C_de(s32);
+extern void *Scene_AllocateMemory(s32);
 extern s32 func_8041B610_de(void *, s32);
 extern void func_8041B6E8_de(void *, s32, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
@@ -13,7 +13,7 @@ extern void func_802A2360_de(void);
 s32 func_8041E3A0_eu(void *handle) {
     MenuWidget *widget;
     s32 i;
-    D_800E39C0 = func_8025305C_de(0x20);
+    D_800E39C0 = Scene_AllocateMemory(0x20);
     D_800E39C0->handle = handle;
     D_800E39C0->mode = func_8041B610_de(handle, 4);
     func_8041B6E8_de(handle, 0, 0x389);

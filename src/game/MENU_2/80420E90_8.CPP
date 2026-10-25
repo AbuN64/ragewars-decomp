@@ -35,7 +35,7 @@ s32 func_80420E20_de(void *window) {
     struct OptionsOpenScreen *screen;
     void *button;
 
-    screen = (struct OptionsOpenScreen *) func_8025305C_de(0x3C);
+    screen = (struct OptionsOpenScreen *) Scene_AllocateMemory(0x3C);
     D_800E4400 = screen;
     screen->window = window;
     screen->full = 0;

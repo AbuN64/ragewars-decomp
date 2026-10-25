@@ -58,7 +58,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *owner) {
     s32 k;
     u8 temp_v1_3;
 
-    screen = func_8025305C_de(0xA80);
+    screen = Scene_AllocateMemory(0xA80);
     (*(ResultsOptionsScreen **)&D_800E4690) = screen;
     screen->root = owner;
     i = 0;

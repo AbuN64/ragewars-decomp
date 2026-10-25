@@ -139,7 +139,7 @@ extern void func_80293334_de(void *, s32, s32);
 
 extern void func_80286AA8_de(void *, s32, s32);
 
-/* Releases the object D_800E3518 holds through func_802547E4_de, clears D_800E3518 and returns zero. */
+/* Releases the object D_800E3518 holds through Scene_FreeMemory, clears D_800E3518 and returns zero. */
 
 
 
@@ -341,7 +341,7 @@ void func_8041C244_de(void) {
 s32 func_8041C2AC_de(void *parent) {
     void *window;
     char *resources;
-    D_800E3518 = func_8025305C_de(0x2C);
+    D_800E3518 = Scene_AllocateMemory(0x2C);
     D_800E3518->root = parent;
 #if defined(VERSION_DE)
     window = func_8040EC30_de(parent, 0x3BE);
@@ -393,7 +393,7 @@ s32 func_8041C2AC_de(void *parent) {
 }
 
 s32 func_8041C3DC_de(void) {
-    func_802547E4_de(D_800E3518);
+    Scene_FreeMemory(D_800E3518);
     D_800E3518 = 0;
     return 0;
 }

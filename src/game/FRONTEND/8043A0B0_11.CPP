@@ -55,7 +55,7 @@ extern struct Resource_func_80419E54_de *func_8040EC30_de(void *, s32);
 extern void func_8040E8D8_de(struct Resource_func_80419E54_de *, s32);
 
 
-/* Releases the object D_800E59E0 holds through func_802547E4_de, clears D_800E59E0, calls
+/* Releases the object D_800E59E0 holds through Scene_FreeMemory, clears D_800E59E0, calls
    func_802A2360_de and func_802A23C4_de with 2, and returns zero. */
 
 
@@ -174,7 +174,7 @@ void func_8043BA5C_de(s32 player, s32 column) {
 }
 
 s32 func_8043BB70_de(void) {
-    func_802547E4_de(D_800E59E0);
+    Scene_FreeMemory(D_800E59E0);
     D_800E59E0 = 0;
     func_802A2360_de();
     func_802A23C4_de(2);

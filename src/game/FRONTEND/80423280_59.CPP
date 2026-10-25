@@ -12,7 +12,7 @@
 extern SettingsScreenState *D_800E5430;
 extern void func_8041A430_de(void *, s32);
 
-/* Releases the object D_800E5430 holds through func_802547E4_de, clears D_800E5430 and returns zero. */
+/* Releases the object D_800E5430 holds through Scene_FreeMemory, clears D_800E5430 and returns zero. */
 
 
 
@@ -90,7 +90,7 @@ typedef s32 (*Handler8042DFF0)(void *, s32, s32, s32, s32);
 extern Handler8042DFF0 D_800E543C;
 
 s32 func_8042DAC8_de(void) {
-    func_802547E4_de(D_800E5430);
+    Scene_FreeMemory(D_800E5430);
     D_800E5430 = 0;
     return 0;
 }

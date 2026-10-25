@@ -15,7 +15,7 @@ extern s8 D_80102B0D[], D_800FEB0E[];
 extern char *D_auto_800E2054[], *D_auto_800E20B4[], *D_auto_800E20A4[], *D_800E2044_eu[], *D_800E2074_eu[], *D_800E2094_eu[], *D_800E2084[], *D_auto_800E2034[];
 extern u8 D_800FEB0F[], D_800FEB17[], D_800FEB4A[], D_800FEB54[], D_80102C24[], D_8010EB7D[], D_80142358[];
 extern s32 D_8010EB94[], D_80146894;
-extern void *func_8025305C_de(), *func_8040EC30_de(), *func_80425C70_de(), *Achieve_GetResultText();
+extern void *Scene_AllocateMemory(), *func_8040EC30_de(), *func_80425C70_de(), *Achieve_GetResultText();
 extern s32 func_80265650_de(), func_80425014_de(), func_80425674_de(), func_8041F140_de();
 extern void func_8040E8D8_de(), func_8040E950_de(), func_8043C210_de(), func_8043C278_de(), func_80438A88_de(), func_80425D14_de();
 extern void func_80265688_de(), Resmgr_FillMemory(), func_804259E0_de(), func_802A0C08_de(), func_802A025C_de(), Achieve_UpdatePlayerPreviewStats(), func_80438614_de();
@@ -34,7 +34,7 @@ s32 func_804389B0_eu_x(void *root) {
     u8 mode;
     u8 buf[0x40];
 
-    g = func_8025305C_de(0x1C8);
+    g = Scene_AllocateMemory(0x1C8);
     D_800E5830 = g;
     SG(g, void *, 0x20) = root;
     func_8040E8D8_de(root, 0);

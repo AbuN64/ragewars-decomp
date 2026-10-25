@@ -5,7 +5,7 @@
 typedef struct EuxDrawScreen { void *window; s32 unk4; void *roots[3]; s32 unk14; s32 unk18; s32 count; } EuxDrawScreen;
 typedef struct { u8 pad0[0x10]; u8 alpha; } EuxDrawItem;
 extern EuxDrawScreen *D_800E39C0;
-extern void *func_8025305C_de(s32);
+extern void *Scene_AllocateMemory(s32);
 extern s32 func_8041B610_de(void *, s32);
 extern void func_8041B6E8_de(void *, s32, s32);
 extern void *func_8040EC30_de(void *, s32);
@@ -22,7 +22,7 @@ s32 func_8041E3A0_eu_x(void *window) {
     EuxDrawItem *item;
     s32 i;
 
-    screen = func_8025305C_de(0x20);
+    screen = Scene_AllocateMemory(0x20);
     D_800E39C0 = screen;
     screen->window = window;
     D_800E39C0->unk4 = func_8041B610_de(window, 4);

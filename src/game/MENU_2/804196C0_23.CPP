@@ -30,7 +30,7 @@ extern s32 GetMenuScreenOwner(void);
 extern void *Frontend_GetScreenData(s32 index);
 extern void func_8040EF84_de(NodeRecAt44 *node, void *from, void *to);
 extern MenuWidget *func_8040EC30_de(void *root, s32 id);
-extern void *func_8025305C_de(s32 size);
+extern void *Scene_AllocateMemory(s32 size);
 
 /* Appends to a menu: passes the next free 20-byte entry at offset 0x48, selected by the count at
    0x114, to func_802A025C_de and increments the count. func_8041AD10_de selects an entry. */
@@ -87,7 +87,7 @@ extern void func_8040E7FC_de(void *, Args);
 
 
 
-/* Calls func_802547E4_de with the arguments it was given and returns zero. */
+/* Calls Scene_FreeMemory with the arguments it was given and returns zero. */
 
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3460, an actor kind at D_800E3464 and a handler at D_800E3468: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
@@ -104,7 +104,7 @@ extern Handler802A2B50 D_800E3468;
 
 
 
-/* Releases the supplied object through func_802547E4_de and returns zero. */
+/* Releases the supplied object through Scene_FreeMemory and returns zero. */
 
 
 MenuListWidget *func_8041ABC0_de(s32 arg0, s32 arg1) {
@@ -115,7 +115,7 @@ MenuListWidget *func_8041ABC0_de(s32 arg0, s32 arg1) {
 
     source = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());
-    result = func_8025305C_de(0x118);
+    result = Scene_AllocateMemory(0x118);
     Resmgr_FillBytes(result, 0, 0x118);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB64;
@@ -284,7 +284,7 @@ s32 func_8041B05C_de(struct MenuRecAt114 *menu, void *second, void *third, s32 a
 }
 
 s32 func_8041B0C0_de(void *arg0) {
-    func_802547E4_de(arg0);
+    Scene_FreeMemory(arg0);
     return 0;
 }
 
@@ -299,7 +299,7 @@ void func_8041B110_de(s32 arg0) {
 
     source = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());
-    result = func_8025305C_de(0x44);
+    result = Scene_AllocateMemory(0x44);
     Resmgr_FillBytes(result, 0, 0x44);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB61;
@@ -317,7 +317,7 @@ void func_8041B22C_de(Record_func_8041B22C_de *source) {
         return;
     }
     context = Frontend_GetScreenData(GetMenuScreenOwner());
-    result = func_8025305C_de(0x44);
+    result = Scene_AllocateMemory(0x44);
     Resmgr_FillBytes(result, 0, 0x44);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB61;
@@ -429,7 +429,7 @@ s32 func_8041B564_de(OwnerRecAt44 *arg0) {
 
 int func_8041B5BC_de(void *object)
 {
-    func_802547E4_de(object);
+    Scene_FreeMemory(object);
     return 0;
 }
 

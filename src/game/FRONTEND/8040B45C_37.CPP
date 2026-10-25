@@ -92,7 +92,7 @@ typedef struct {
 } File;
 extern File D_801539B0;
 extern s32 D_800DD0B0;
-extern s32 func_8025305C_de(s32 size);
+extern s32 Scene_AllocateMemory(s32 size);
 extern void Resmgr_CloseStream(s32 handle);
 extern s32 func_802A1934_de(void);
 extern void func_804133E4_de(Texture *texture);
@@ -174,7 +174,7 @@ void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
         D_801539B0.handle = Resmgr_OpenStream(&D_801539B0.name, &D_800DD0B0);
         size = bank->image->size;
         i = 0;
-        bank->offsets[0] = func_8025305C_de(size);
+        bank->offsets[0] = Scene_AllocateMemory(size);
         Resmgr_SeekStream(D_801539B0.handle, D_801539B0.tables.base + bank->image->base, 0);
         Resmgr_ReadStream(D_801539B0.tables.banks[group].offsets[0], size, 1, D_801539B0.handle);
         do {

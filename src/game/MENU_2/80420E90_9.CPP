@@ -25,7 +25,7 @@ void func_80421568_de(void *, void *);
  /* extern */
 
 
-/* Releases the object D_800E4400 holds through func_802547E4_de, clears D_800E4400 and returns zero. */
+/* Releases the object D_800E4400 holds through Scene_FreeMemory, clears D_800E4400 and returns zero. */
 
 
 
@@ -83,7 +83,7 @@ void func_804217D4_de(void) {
 }
 
 s32 func_80421854_de(void) {
-    func_802547E4_de(D_800E4400);
+    Scene_FreeMemory(D_800E4400);
     D_800E4400 = 0;
     return 0;
 }

@@ -20,7 +20,7 @@ s32 func_8041F6E0_eu(void *screen)
   func_8041F2A0_Config *config;
   func_8041F2A0_Item *item;
   s32 rest;
-  D_800E42D0 = func_8025305C_de(0x1358);
+  D_800E42D0 = Scene_AllocateMemory(0x1358);
   D_800E42D0->screen = screen;
   D_800E42D0->unk4 = func_8041B610_de((s32) screen, 4);
   func_8041B6E8_de((s32) screen, 0, 0x7a);

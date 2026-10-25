@@ -30,7 +30,7 @@ s32 TickSelectionRepeat(void *arg0) {
 }
 
 s32 func_802A206C_de(void *arg0) {
-    func_802547E4_de(arg0);
+    Scene_FreeMemory(arg0);
     return 0;
 }
 

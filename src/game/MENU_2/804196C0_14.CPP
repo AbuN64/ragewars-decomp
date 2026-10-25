@@ -17,7 +17,7 @@ extern s32 D_800E3304;
 
 extern Handler802A2B50 D_800E3308;
 
-/* Calls func_802547E4_de with the arguments it was given and returns zero. */
+/* Calls Scene_FreeMemory with the arguments it was given and returns zero. */
 
 /* func_804196D8_de advances a frame sequence: it adds elapsed time into offset 0x54 and, once that
    exceeds the duration at 0x58, moves the frame index at 0x4C through the -1 terminated array at
@@ -123,7 +123,7 @@ void func_80419ADC_de(s32 unused0, struct Triple unused1) {
 }
 
 s32 func_80419AEC_de(void *arg0) {
-    func_802547E4_de(arg0);
+    Scene_FreeMemory(arg0);
     return 0;
 }
 

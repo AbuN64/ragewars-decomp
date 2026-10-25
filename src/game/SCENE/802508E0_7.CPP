@@ -18,7 +18,9 @@ extern void func_802511AC_de(s32);
 extern s32 func_80254B58_de(s32, s32, s32);
 extern void func_802515F0_de(s32, s32);
 
-Record *func_8025305C_de(s32 size) {
+/* Allocates size bytes (plus a 16-byte heap header) from the scene heap under the heap lock; when the
+   heap is full it purges unused resources and retries. The game uses it as its malloc. */
+Record *Scene_AllocateMemory(s32 size) {
     struct Shape_func_802BC570_de *node;
     struct Shape_func_802BC570_de *current;
     s32 allocation_size;

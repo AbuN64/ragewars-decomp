@@ -121,7 +121,7 @@ enum { ITEM0 = 625, ITEM1 = 624, ITEM2 = 623, ITEM3 = 622 };
 enum { ITEM0 = 621, ITEM1 = 620, ITEM2 = 619, ITEM3 = 618 };
 #endif
 
-/* Releases the object D_800E53C0 holds through func_802547E4_de, clears D_800E53C0 and returns zero. */
+/* Releases the object D_800E53C0 holds through Scene_FreeMemory, clears D_800E53C0 and returns zero. */
 
 
 
@@ -410,7 +410,7 @@ void func_8042D418_de(s32 arg0) {
 }
 
 s32 func_8042D4CC_de(void) {
-    func_802547E4_de(D_800E53C0);
+    Scene_FreeMemory(D_800E53C0);
     D_800E53C0 = 0;
     return 0;
 }

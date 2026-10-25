@@ -8,7 +8,7 @@
 #include "FRONTEND/80423280_3.H"
 #include "SCENE/802508E0_13.H"
 
-/* Releases the object D_800E4514 holds through func_802547E4_de, calls func_802A2360_de, clears
+/* Releases the object D_800E4514 holds through Scene_FreeMemory, calls func_802A2360_de, clears
    D_800E4514 and returns zero. */
 
 
@@ -45,7 +45,7 @@ extern FieldRow D_800E4568[];
 
 extern Handler80423930 D_800E456C;
 
-/* Releases the object D_800E4518 holds through func_802547E4_de, calls func_802A2360_de, clears D_800E4518, calls
+/* Releases the object D_800E4518 holds through Scene_FreeMemory, calls func_802A2360_de, clears D_800E4518, calls
    func_80245B28_de and returns zero. */
 
 
@@ -85,7 +85,7 @@ extern FieldRow D_800E45B0[];
 extern Handler80423B88 D_800E45B4;
 
 s32 func_804235E8_de(void) {
-    func_802547E4_de(D_800E4514);
+    Scene_FreeMemory(D_800E4514);
     func_802A2360_de();
     D_800E4514 = 0;
     return 0;
@@ -190,7 +190,7 @@ s32 func_80423758_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 s32 func_804237E8_de(void) {
-    func_802547E4_de(D_800E4518);
+    Scene_FreeMemory(D_800E4518);
     func_802A2360_de();
     D_800E4518 = 0;
     func_80245B28_de();

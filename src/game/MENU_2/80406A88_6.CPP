@@ -7,7 +7,7 @@
 typedef struct EuOptsPage_eux { void *title; void *list; void *bar; void *rowC; void *row10; void *row14; s32 pad18, pad1C, sel, count; } EuOptsPage_eux;
 extern EuOptsPage_eux *g_optionsPage;
 extern char *D_800E1C14[], *D_800E1C34[], *D_800E1C44[], *D_auto_800E1C54[], *D_auto_800E1C64[], *D_800D2134[], *D_800D2138[], *D_800D213C[];
-extern void *func_8025305C_de(); extern void *func_8041A280_de(); extern void func_8041B110_de(); extern void *func_8041ABC0_de();
+extern void *Scene_AllocateMemory(); extern void *func_8041A280_de(); extern void func_8041B110_de(); extern void *func_8041ABC0_de();
 extern void func_8041AD34_de(); extern void func_8041AD10_de(); extern u32 System_GetMemorySize(); extern void *func_8041A580_de();
 extern void func_8041A6EC_de(); extern void *func_80419E54_de(); extern void *func_8040EC30_de();
 extern char *D_auto_800DDB08[];
@@ -15,7 +15,7 @@ extern char *D_auto_800DDB08[];
    current language and set from the option bytes 0x1B, 0x1F and 0x580 of D_801462C8, the volume bar 0x5A and its list. Returns 0. */
 s32 func_804229E0_eu_x(void *window) {
     u8 lang = D_801462C8.language;
-    g_optionsPage = func_8025305C_de(0x28);
+    g_optionsPage = Scene_AllocateMemory(0x28);
     g_optionsPage->title = func_8041A280_de(0x4F, 0x50);
     func_8041B110_de(0x52);
     func_8041B110_de(0x55);

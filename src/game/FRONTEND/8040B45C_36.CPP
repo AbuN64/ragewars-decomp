@@ -14,7 +14,7 @@ extern struct ResourceRecAt6 *D_8014D988;
 extern EntryRecAt18V1 *D_80153C10;
 extern FileState D_801539B0;
 extern void Resmgr_CloseStream(s32 file);
-extern void *func_8025305C_de(s32 size);
+extern void *Scene_AllocateMemory(s32 size);
 extern void func_80413720_de(s32 id, s32 format, s16 width, s16 height, s32 stride, s32 rows, s32 a6, s32 size, void *pixels, s32 a9, s32 paletteBytes, void *palette, s32 colors);
 
 /* Tears down the UI resource set: releases eligible entries, closes active
@@ -146,7 +146,7 @@ void func_804101BC_de(void) {
     if (state->unk0) Resmgr_CloseStream(state->unk0);
     func_804118E4_de(1);
     func_80410E1C_de(1);
-    if (state->entries) func_802547E4_de(state->entries);
+    if (state->entries) Scene_FreeMemory(state->entries);
     i_chunks = 0;
     func_80411D18_de();
     offset_chunks = 0;
@@ -154,31 +154,31 @@ void func_804101BC_de(void) {
         do {
             block = ((struct ChunkRecAt48C *)(offset_chunks + (s32)D_80153C28))->optional;
             if (block) {
-                func_802547E4_de(*block);
-                func_802547E4_de(((struct ChunkRecAt48C *)(offset_chunks + (s32)D_80153C28))->optional);
+                Scene_FreeMemory(*block);
+                Scene_FreeMemory(((struct ChunkRecAt48C *)(offset_chunks + (s32)D_80153C28))->optional);
             }
             i_chunks++;
-            func_802547E4_de(*((struct ChunkRecAt48C *)(offset_chunks + (s32)D_80153C28))->primary);
+            Scene_FreeMemory(*((struct ChunkRecAt48C *)(offset_chunks + (s32)D_80153C28))->primary);
             block = ((struct ChunkRecAt48C *)(offset_chunks + (s32)D_80153C28))->primary;
             offset_chunks += 0x49C;
-            func_802547E4_de(block);
+            Scene_FreeMemory(block);
         } while (i_chunks < D_80153C20);
     }
     tables = D_8014D98C;
-    if (tables[0]) func_802547E4_de(tables[0]);
+    if (tables[0]) Scene_FreeMemory(tables[0]);
     first = tables + 3;
-    if (tables[3]) func_802547E4_de(tables[3]);
+    if (tables[3]) Scene_FreeMemory(tables[3]);
     second = tables + 2;
-    if (tables[2]) func_802547E4_de(tables[2]);
-    if (tables[13]) func_802547E4_de(tables[13]);
-    if (tables[-1]) func_802547E4_de(tables[-1]);
-    if (tables[10]) func_802547E4_de(tables[10]);
-    if (tables[11]) func_802547E4_de(tables[11]);
-    if (tables[-2]) func_802547E4_de(tables[-2]);
-    if (tables[12]) func_802547E4_de(tables[12]);
-    if (tables[7]) func_802547E4_de(tables[7]);
-    if (first[5]) func_802547E4_de(first[5]);
-    if (second[3]) func_802547E4_de(second[3]);
+    if (tables[2]) Scene_FreeMemory(tables[2]);
+    if (tables[13]) Scene_FreeMemory(tables[13]);
+    if (tables[-1]) Scene_FreeMemory(tables[-1]);
+    if (tables[10]) Scene_FreeMemory(tables[10]);
+    if (tables[11]) Scene_FreeMemory(tables[11]);
+    if (tables[-2]) Scene_FreeMemory(tables[-2]);
+    if (tables[12]) Scene_FreeMemory(tables[12]);
+    if (tables[7]) Scene_FreeMemory(tables[7]);
+    if (first[5]) Scene_FreeMemory(first[5]);
+    if (second[3]) Scene_FreeMemory(second[3]);
     Resmgr_FillBytes((char *)tables - 0x26C, 0, 0x2A8);
 }
 
@@ -264,12 +264,12 @@ s32 func_80410674_de(s32 index, s32 mode) {
     func_804133E4_de(id);
     texture = id;
     size = stride * entry->unkC * entry->unk8 / 8;
-    pixels = func_8025305C_de(size);
+    pixels = Scene_AllocateMemory(size);
     Resmgr_SeekStream(D_801539B0.unk0, D_801539B0.unk248 + entry->unk14, 0);
     Resmgr_ReadStream(pixels, size, 1, D_801539B0.unk0);
     if (entry->unkE > 0) {
         paletteBytes = entry->unkE * 2;
-        palette = func_8025305C_de(paletteBytes);
+        palette = Scene_AllocateMemory(paletteBytes);
         Resmgr_SeekStream(D_801539B0.unk0, D_801539B0.unk248 + entry->unk18, 0);
         Resmgr_ReadStream(palette, paletteBytes, 1, D_801539B0.unk0);
         for (i = 0; i < entry->unkE; i++) {
@@ -344,12 +344,12 @@ void func_80410B14_de(s32 index, s32 output) {
         stride = (entry->unkA + 3) & -4;
     }
     size = stride * entry->unkC * entry->unk8 / 8;
-    pixels = func_8025305C_de(size);
+    pixels = Scene_AllocateMemory(size);
     Resmgr_SeekStream(D_801539B0.unk0, D_801539B0.unk248 + entry->unk14, 0);
     Resmgr_ReadStream(pixels, size, 1, D_801539B0.unk0);
     if (entry->unkE > 0) {
         paletteBytes = entry->unkE * 2;
-        palette = func_8025305C_de(paletteBytes);
+        palette = Scene_AllocateMemory(paletteBytes);
         Resmgr_SeekStream(D_801539B0.unk0, D_801539B0.unk248 + entry->unk18, 0);
         Resmgr_ReadStream(palette, paletteBytes, 1, D_801539B0.unk0);
         for (i = 0; i < entry->unkE; i++) {

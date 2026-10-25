@@ -27,7 +27,7 @@ extern s32 D_800CD928_de;
 /* Allocates the resource once and marks its five-word state ready. */
 extern struct CartridgeReadWorker D_801011B8;
 
-extern Record *func_8025305C_de(s32 arg0);
+extern Record *Scene_AllocateMemory(s32 arg0);
 
 extern void func_8025637C_de(struct CartridgeReadWorker *worker, u32 source, s32 bytes, void *destination);
 
@@ -94,13 +94,13 @@ void Resmgr_LoadMemoryStream(void) {
     if (D_800CD940_de.ready != 1) {
 #if defined(VERSION_DE)
         D_800CD940_de.size = 0x8BB01;
-        buffer = func_8025305C_de(0x8BB01);
+        buffer = Scene_AllocateMemory(0x8BB01);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
         D_800CD940_de.size = 0x8B245;
-        buffer = func_8025305C_de(0x8B245);
+        buffer = Scene_AllocateMemory(0x8B245);
 #elif defined(VERSION_EU_X)
         D_800CD940_de.size = 0x90385;
-        buffer = func_8025305C_de(0x90385);
+        buffer = Scene_AllocateMemory(0x90385);
 #endif
         D_800CD940_de.data = buffer;
         func_8025637C_de(&D_801011B8, 0x200000, D_800CD940_de.size, buffer);
@@ -112,7 +112,7 @@ void Resmgr_LoadMemoryStream(void) {
 
 void Resmgr_FreeMemoryStream(void) {
     if (D_800CD940_de.data != 0) {
-        func_802547E4_de(D_800CD940_de.data);
+        Scene_FreeMemory(D_800CD940_de.data);
     }
     D_800CD940_de.data = 0;
     D_800CD940_de.opened = 0;

@@ -51,7 +51,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     MenuWidget *wRight;
     MenuWidget *wHead;
     MenuWidget *wItem;
-    screen = func_8025305C_de(0xA80);
+    screen = Scene_AllocateMemory(0xA80);
     D_800E4690 = screen;
     screen->root = arg0;
     D_800E4690->nodes = func_8041B610_de(arg0, 4);

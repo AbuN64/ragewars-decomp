@@ -3,7 +3,7 @@
 #if defined(VERSION_DE)
 typedef struct { s32 owner; void *list; void *w8[3]; void *w14; s32 sel; s32 unk1C; } Func_8041DF50_State;
 extern Func_8041DF50_State *D_800E39C0;
-extern void *func_8025305C_de(s32);
+extern void *Scene_AllocateMemory(s32);
 extern void *func_8041B610_de(s32, s32);
 extern void func_8041B6E8_de(s32, s32, s32);
 extern u8 *func_8040EC30_de(s32, s32);
@@ -16,7 +16,7 @@ extern void func_8041E408_de(s32);
 s32 func_8041DF50_de(s32 owner) {
     u8 *widget;
     s32 i;
-    D_800E39C0 = (Func_8041DF50_State *)func_8025305C_de(0x20);
+    D_800E39C0 = (Func_8041DF50_State *)Scene_AllocateMemory(0x20);
     D_800E39C0->owner = owner;
     D_800E39C0->list = func_8041B610_de(owner, 4);
     func_8041B6E8_de(owner, 0, 0x383);

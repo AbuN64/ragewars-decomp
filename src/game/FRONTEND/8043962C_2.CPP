@@ -6,7 +6,7 @@
 #include "FRONTEND/8043962C_2.H"
 #include "SCENE/802508E0_13.H"
 
-/* Releases the object D_800E5950 holds through func_802547E4_de, clears D_800E5950 and returns zero. */
+/* Releases the object D_800E5950 holds through Scene_FreeMemory, clears D_800E5950 and returns zero. */
 
 
 
@@ -21,7 +21,7 @@ extern void func_80298368_de(s32);
 
 s32 func_804395F8_de(void) {
     extern Pulse *D_800E5950;
-    func_802547E4_de(D_800E5950);
+    Scene_FreeMemory(D_800E5950);
     D_800E5950 = 0;
     return 0;
 }

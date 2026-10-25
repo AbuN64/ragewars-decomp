@@ -8,11 +8,11 @@
 #include "SCENE/802508E0_13.H"
 extern s32 *D_800E44A0;
 extern s32 func_8043C308_de(s32 *record);
-extern void *func_8025305C_de(s32 size);
+extern void *Scene_AllocateMemory(s32 size);
 extern void func_8043C210_de(s32 *, s32, s32, s32, s32);
 
 s32 func_80422228_de(void) {
-    s32 *record = func_8025305C_de(0x24);
+    s32 *record = Scene_AllocateMemory(0x24);
     D_800E44A0 = record;
     record[7] = 0;
     record[8] = 0;
@@ -20,7 +20,7 @@ s32 func_80422228_de(void) {
     return 0;
 }
 
-/* Releases the object D_800E44A0 holds through func_802547E4_de, clears D_800E44A0 and returns zero. */
+/* Releases the object D_800E44A0 holds through Scene_FreeMemory, clears D_800E44A0 and returns zero. */
 
 
 
@@ -88,7 +88,7 @@ extern s32 D_800E44A8;
 extern Handler802A2B50 D_800E44AC;
 
 s32 func_80422278_de(void) {
-    func_802547E4_de(D_800E44A0);
+    Scene_FreeMemory(D_800E44A0);
     D_800E44A0 = 0;
     return 0;
 }

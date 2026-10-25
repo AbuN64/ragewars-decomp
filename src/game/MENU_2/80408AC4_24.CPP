@@ -96,7 +96,7 @@ s32 func_804224E0_de(void *node) {
     s32 i;
     s32 rem;
 
-    { void *memory = func_8025305C_de(0x6C); D_800E4518 = memory; }
+    { void *memory = Scene_AllocateMemory(0x6C); D_800E4518 = memory; }
     D_800E4518->sound = func_8025E2C4_de();
     func_8025E2D4_de(0x34);
     func_8025E384_de();

@@ -25,7 +25,7 @@ extern s32 D_800E3334;
 
 extern Handler802A2B50 D_800E3338;
 
-/* Calls func_802547E4_de with the arguments it was given and returns zero. */
+/* Calls Scene_FreeMemory with the arguments it was given and returns zero. */
 
 /* Sets the word at offset 0x84 of an object to one. */
 
@@ -99,6 +99,6 @@ void func_8041A02C_de(s32 unused0, struct Triple unused1) {
 }
 
 s32 func_8041A03C_de(void *arg0) {
-    func_802547E4_de(arg0);
+    Scene_FreeMemory(arg0);
     return 0;
 }

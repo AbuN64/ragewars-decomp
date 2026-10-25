@@ -23,7 +23,7 @@ s32 func_8042DBD0_us_rev1(s32 arg0) {
     void *text;
 
     /* the hub's allocation helper returns its SelectionScreenState view; this unit keeps its own state type */
-    D_800E5430 = (struct State_func_8042D9E8_de *) func_8025305C_de(0x24);
+    D_800E5430 = (struct State_func_8042D9E8_de *) Scene_AllocateMemory(0x24);
     func_802A2360_de();
     handle = func_8041A280_de(0x398, 0x399);
     state = D_800E5430;

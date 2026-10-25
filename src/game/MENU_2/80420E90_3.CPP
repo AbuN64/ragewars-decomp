@@ -11,7 +11,7 @@
 extern StateCode80420E90 *D_800E4450;
 extern void func_8041A430_de(void *, s32);
 
-/* Releases the object D_800E4450 holds through func_802547E4_de, clears D_800E4450 and returns zero. */
+/* Releases the object D_800E4450 holds through Scene_FreeMemory, clears D_800E4450 and returns zero. */
 
 
 
@@ -88,7 +88,7 @@ extern void func_802A2360_de();
 extern void func_802A2394_de();
 
 s32 func_80421BBC_de(void) {
-    func_802547E4_de(D_800E4450);
+    Scene_FreeMemory(D_800E4450);
     D_800E4450 = 0;
     return 0;
 }

@@ -13,7 +13,7 @@ void func_80437A50_de(void) {
         "addiu      $a0, $zero, 0x1C8\n"
         "sw         $ra, 0x64($sp)\n"
         "sw         $s1, 0x5C($sp)\n"
-        "jal        func_8025305C_de\n"
+        "jal        Scene_AllocateMemory\n"
         "sw        $s0, 0x58($sp)\n"
         "addu       $a0, $s2, $zero\n"
         "addu       $a1, $zero, $zero\n"

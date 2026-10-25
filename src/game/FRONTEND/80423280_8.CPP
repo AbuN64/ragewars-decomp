@@ -33,7 +33,7 @@ enum { RESULTS_OPTION_329 = 333, RESULTS_OPTION_331 = 335, RESULTS_OPTION_332 = 
 enum { RESULTS_OPTION_329 = 329, RESULTS_OPTION_331 = 331, RESULTS_OPTION_332 = 332, RESULTS_OPTION_333 = 333, RESULTS_OPTION_334 = 334, RESULTS_OPTION_335 = 335 };
 #endif
 
-/* Releases the object D_800E4690 holds through func_802547E4_de, calls func_802A2360_de, clears D_800E4690, calls
+/* Releases the object D_800E4690 holds through Scene_FreeMemory, calls func_802A2360_de, clears D_800E4690, calls
    func_80245B28_de and returns zero. */
 
 
@@ -165,7 +165,7 @@ void func_80428700_de(void) {
 }
 
 s32 func_804287B8_de(void) {
-    func_802547E4_de(D_800E4690);
+    Scene_FreeMemory(D_800E4690);
     func_802A2360_de();
     D_800E4690 = 0;
     func_80245B28_de();

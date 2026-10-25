@@ -30,7 +30,7 @@ s32 func_8041CEB0_us_rev1(void *owner) {
     s32 shift;
     s32 adjust;
 
-    D_800E3590 = (func_8041F2A0_MenuBlock *) func_8025305C_de(528);
+    D_800E3590 = (func_8041F2A0_MenuBlock *) Scene_AllocateMemory(528);
     D_800E3590->root = owner;
     D_800E3590->list = func_8041B610_de((s32) owner, 4);
     func_8041B6E8_de((s32) owner, 0, 513);

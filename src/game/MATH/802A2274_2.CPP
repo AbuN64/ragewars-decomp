@@ -3,7 +3,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/RECORD.H"
 
-extern s32 func_8025305C_de(s32 arg0);
+extern s32 Scene_AllocateMemory(s32 arg0);
 
 
 s32 func_802A15E4_de(s32 arg0) {

@@ -24,7 +24,7 @@ struct MenuResourceWidget;
 extern struct MenuResourceWidget *func_80419E54_de(s32, s32);
 #include "COMMON/SHARED_GAMESLOT.H"
 
-/* Builds the options-commit state: allocates its 0x28 bytes through func_8025305C_de and keeps the
+/* Builds the options-commit state: allocates its 0x28 bytes through Scene_AllocateMemory and keeps the
    record at g_optionsPage, creates the fade widget 0x4D/0x4E and the title object 0x4F/0x6E, then builds
    the three option lists 0x59/0x5A, 0x55/0x56 and 0x51/0x52, appends their localized labels, and
    selects the entry named by the game settings D_801462C8 bytes 0x1B, 0x1F and 0x580 - the third list
@@ -45,7 +45,7 @@ extern u8 *D_800D2138;
 extern u8 *D_800D213C;
 extern u8 *D_auto_800D74B0;
 
-extern void *func_8025305C_de(s32);
+extern void *Scene_AllocateMemory(s32);
 extern struct MenuFadeWidget *func_8041A280_de(s32, s32);
 
 extern s32 System_GetMemorySize(void);
@@ -63,7 +63,7 @@ s32 Menu_CreateOptionsPage(void) {
     void *title;
     void *slider;
 
-    g_optionsPage = func_8025305C_de(0x28);
+    g_optionsPage = Scene_AllocateMemory(0x28);
     g_optionsPage->menu = func_8041A280_de(0x4D, 0x4E);
     func_8041B110_de(0x57);
     func_8041B110_de(0x58);
@@ -129,7 +129,7 @@ s32 Menu_OpenOptionsScreen(void *node) {
     s32 i;
     s32 rem;
 
-    D_800E4518 = func_8025305C_de(0x6C);
+    D_800E4518 = Scene_AllocateMemory(0x6C);
     D_800E4518->sound = func_8025E2C4_de();
     func_8025E2D4_de(0x34);
     func_8025E384_de();

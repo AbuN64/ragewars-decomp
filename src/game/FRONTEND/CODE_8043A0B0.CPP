@@ -14,7 +14,7 @@ extern Shared_PlayerSettingsRecord D_80146398[];
 extern struct RowRecAt54 D_800E3A58[];
 extern struct StateFlags D_800E59E6[][19];
 extern f32 D_800DDF90_de;
-extern void *func_8025305C_de(s32);
+extern void *Scene_AllocateMemory(s32);
 extern void *func_8041B610_de(void *, s32);
 extern void func_8041B6E8_de(void *, s32, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
@@ -53,7 +53,7 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
     CVector3 scale;
     Shared_PlayerSettingsRecord *config;
 
-    D_800E59E0 = func_8025305C_de(sizeof(struct FourPlayerResultsScreen));
+    D_800E59E0 = Scene_AllocateMemory(sizeof(struct FourPlayerResultsScreen));
     D_800E59E0->window = window;
     D_800E59E0->menu = func_8041B610_de(window, 4);
     func_8041B6E8_de(window, 0, slotResource);

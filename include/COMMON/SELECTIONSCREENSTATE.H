@@ -134,7 +134,7 @@ extern func_8041F2A0_Layout D_800E42D4[];
 extern func_8041F2A0_MenuBlock *D_800E3590;
 extern void func_8041DB30_de(int *cursor);
 extern func_8041F2A0_Config D_80146398[];
-extern SelectionScreenState *func_8025305C_de(s32);
+extern SelectionScreenState *Scene_AllocateMemory(s32);
 extern Node_func_8041B610_de *func_8041B610_de(OwnerRecAt44 *, s32);
 extern void func_8041B6E8_de(OwnerRecAt8V1 *, s32, s32);
 extern void func_8042E9A0_de(s32, s32);

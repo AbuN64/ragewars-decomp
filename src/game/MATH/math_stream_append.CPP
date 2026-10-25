@@ -6,12 +6,12 @@
 #include "COMMON/CALLBACK.H"
 
 struct Record;
-extern struct Record *func_8025305C_de(s32 arg0);
+extern struct Record *Scene_AllocateMemory(s32 arg0);
 
 
 void StreamBufferAppend(StreamBuffer *streamBuffer, const void *arg1, s32 arg2) {
     if ((streamBuffer->data) == 0) {
-        void *allocation = func_8025305C_de(arg2);
+        void *allocation = Scene_AllocateMemory(arg2);
         streamBuffer->data = allocation;
         streamBuffer->writePosition = 0;
         streamBuffer->capacity = arg2;
