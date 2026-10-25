@@ -54,9 +54,19 @@ void func_802106E0_de(Vehicle *vehicle, s32 wheel) {
 }
 
 #ifdef NON_MATCHING
-/* 12/172 aligned edits left: loop.c hoists &surface and the clearance address out of the probe loop; the ROM keeps both in it. */
+/* 4/172 aligned edits left: loop.c still hoists wheel * 4 + 0x1F0 out of the probe loop (the ROM adds the
+ * clearance offset in the store). The three early outs are separate (jump2 cross-jumps them), which keeps
+ * &surface in the loop like the ROM. */
 #include "COMMON/MOTION_STEP.H"
 extern f32 D_800C1F98_de, D_800C1F9C_de, D_800C1FA0_de, D_800C1FA4_de, D_800C1FA8_de, D_800C1FAC_de;
+static inline void storeClearance(Vehicle *vehicle, s32 wheel, s32 i, f32 reach) {
+    f32 *out = &vehicle->wheels->clearance[wheel];
+    s32 last = i - 1;
+    if (last < 0) {
+        last = 0;
+    }
+    *out = last * reach;
+}
 /* Walks wheel ray WHEEL outward from the vehicle in steps of 2.25 x its reach, probing the ground under
  * each step (func_8024491C_de), and stores in the clearance table the distance covered before a probe
  * misses, lands on a kind 5/6 surface or drops more than 100; it stays 100 when the ray is shorter
@@ -73,8 +83,6 @@ void Nav_MeasureWheelClearance(Vehicle *vehicle, s32 wheel) {
     f32 base;
     s32 steps;
     s32 i;
-    s32 last;
-    f32 *out;
     vehicle->wheels->clearance[wheel] = D_800C1F98_de;
     reach = Sound_GetActorReach(vehicle);
     length = vehicle->wheels->clearance[wheel];
@@ -105,15 +113,16 @@ void Nav_MeasureWheelClearance(Vehicle *vehicle, s32 wheel) {
         position.z += step.z;
         below = position;
         below.y -= D_800C1FA8_de;
-        if (!func_8024491C_de(vehicle, position, below, &surface, reach, radius, height, base)
-            || (u32)(D_80103FCC->kind - 5) < 2
-            || D_80103FCC->pos.y <= below.y - D_800C1FAC_de) {
-            out = &vehicle->wheels->clearance[wheel];
-            last = i - 1;
-            if (last < 0) {
-                last = 0;
-            }
-            *out = last * reach;
+        if (!func_8024491C_de(vehicle, position, below, &surface, reach, radius, height, base)) {
+            storeClearance(vehicle, wheel, i, reach);
+            return;
+        }
+        if ((u32)(D_80103FCC->kind - 5) < 2) {
+            storeClearance(vehicle, wheel, i, reach);
+            return;
+        }
+        if (D_80103FCC->pos.y <= below.y - D_800C1FAC_de) {
+            storeClearance(vehicle, wheel, i, reach);
             return;
         }
     }
