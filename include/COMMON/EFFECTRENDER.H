@@ -184,7 +184,6 @@ extern int D_8010C080_de;
 extern void * D_8010C084;
 extern int D_801102A0;
 extern int D_801102B4;
-extern int D_8012D4E4;
 extern void * D_80137078;
 extern int D_801370C8;
 extern int D_801370CC;
