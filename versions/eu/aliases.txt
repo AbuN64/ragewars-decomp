@@ -2575,3 +2575,4 @@ literals_DispatchElementEvent = 0x800C57C0; // rom:0xC63C0 size:0x80
 literals_DispatchCurrentScreenEvent = 0x800C5840; // rom:0xC6440 size:0x40
 rodata_func_8029764C_de_800CA770 = 0x800C5880;
 literals_Fx_BuildControllerState = 0x800C4540; // rom:0xC5140 size:0x5C
+literals_Render_RunGameLoop = 0x800C56D0; // rom:0xC62D0 size:0x8

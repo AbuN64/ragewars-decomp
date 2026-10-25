@@ -2510,3 +2510,4 @@ literals_Texture_PlaySoundAtPosition = 0x800C3EDC; // rom:0xC4ADC size:0x4
 literals_DispatchElementEvent = 0x800C5520; // rom:0xC6120 size:0x80
 literals_DispatchCurrentScreenEvent = 0x800C55A0; // rom:0xC61A0 size:0x40
 literals_Fx_BuildControllerState = 0x800C4290; // rom:0xC4E90 size:0x5C
+literals_Render_RunGameLoop = 0x800C5420; // rom:0xC6020 size:0x8

@@ -4032,7 +4032,7 @@ segments:
       - [0xC62B6, data, data_800C/rodata_unresolved_800C56B6]
       - [0xC62B8, rodata, data_800C/D_80293534_CB0F8]
       - [0xC62CD, data, data_800C/rodata_unresolved_800C56CD]
-      - [0xC62D0, rodata, data_800C/rodata_func_80291424_de_800C5420]
+      - [0xC62D0, rodata, data_800C/literals_Render_RunGameLoop]
       - [0xC62D8, rodata, data_800C/D_802917D8_CB118]
       - [0xC62DC, rodata, data_800C/literals_Render_DrawTextLines]
       - [0xC62F8, rodata, data_800C/D_80292308_CB138]

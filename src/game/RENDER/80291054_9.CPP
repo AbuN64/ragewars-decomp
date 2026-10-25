@@ -98,7 +98,7 @@ void func_8029350C_de(s32 arg0) {
 void func_80293534_de(void) {
     func_802BD320_de(D_80146CE8, D_800C5400_de, D_800C5408_de, D_800C5414_de);
     func_802BD160_de(func_802BCF10_de() | 0x400);
-    func_80291404(&D_8011FAC0);
+    Render_RunGameLoop(&D_8011FAC0);
 }
 
 /** Reset three large-offset fields and mark the record active. */

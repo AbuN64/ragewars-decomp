@@ -71,156 +71,15 @@ void func_80291208_de(RenderState *state) {
     func_8025DE30_de();
 }
 
-#if defined(VERSION_US_REV1) && defined(NON_MATCHING)
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/DISPLAY.H"
 #include "COMMON/MENURECAT24.H"
-
-extern s32 D_80000300; /* TV type: 0 PAL, 1 NTSC, 2 MPAL */
-extern char D_auto_801536C8[];
-extern char D_auto_002953FC[];
-extern char D_auto_801053E8[];
-extern f32 D_800CA510;
-extern f32 D_800CA514;
-extern s16 *D_auto_8014AD7C;
-extern s32 D_80142920;
-extern s32 D_80146CC8;
-extern s32 D_80146CCC;
-extern s32 D_80146CD0;
-extern s32 D_8011B9F4;
-extern s32 D_80142C30;
-extern s32 D_auto_80146998;
-extern void func_802567D0_de(void);
-extern void func_802BA350_de(s32 pri);
-extern void osViBlack(s32 active);
-extern void func_80405CA8_de(void *record);
-extern s32 Ovlgame_AllocateRenderBuffers(void *record);
-extern void func_802B155C_us_rev1(void *segment);
-extern void func_8044A62C_de(void *players);
-extern void func_80449DB0_de(void *menu);
-extern void func_8023EE00_de(void);
-extern s32 func_80265964_de(s32 size);
-extern void Items_ResetActorPools(void *players, s32 arg1);
-extern void func_804499B0_de(void *menu, s32 arg1, s32 arg2);
-extern void func_8044B7C0_de(Shared_World *world, s32 resource);
-extern void func_8044AE70_de(void);
-extern void Ovlgame_ResetHudCharTables(void *hud);
-extern void func_80404D84_de(void);
-extern void func_802A21F4_de(void);
-extern void func_80298368_de(s32 arg0);
-extern void func_8026479C_de(void);
-extern void func_80293790_de(GameSession *session, s32 arg1);
-extern void func_80293848_de(void *session);
-extern void Render_UpdateFrameTiming(void *session);
-extern void func_8026480C_de(void);
-
-/* Main game thread: brings up video and the overlays, clears the frame buffers, starts the menu and
-   player state, then serves the scheduler's messages forever. */
-void func_80291404(void *gameSession) {
-    GameSession *session = gameSession;
-    u32 i;
-    s16 *msg;
-
-    func_802567D0_de();
-    func_802BA350_de(0xFE);
-    osViBlack(1);
-    if (D_80000300 != 1 && D_80000300 != 2) {
-        for (;;) {
-        }
-    }
-    func_80405CA8_de(D_auto_801536C8);
-    Ovlgame_AllocateRenderBuffers(D_auto_801536C8);
-    osViSwapBuffer((s32)D_8014D468_de[0]);
-    osViBlack(0);
-    if (D_80000300 == 0) {
-        D_80142C38[1] = D_800CA510;
-    } else {
-        D_80142C38[1] = D_800CA514;
-    }
-    D_auto_8014AD7C = 0;
-    D_80142CA8 = 2;
-    D_80142920 = 0;
-    D_80142CA4 = 0;
-    D_8011B9F8 = 0;
-    D_801428AC = 0;
-    D_80142C34 = 0;
-    D_80146CC8 = 0;
-    D_80146CCC = 0;
-    D_80146CD0 = 0;
-    D_8011B9F4 = 0;
-    D_80142C38[0] = 0.0f;
-    D_80142C30 = 0;
-    func_80291208_de((RenderState *)session);
-    func_802B155C_us_rev1(D_auto_002953FC);
-    func_802BB420_de(D_auto_801053E8, (void *)0xBEEFDEAD, 0);
-    for (i = 0; i < D_800DE850; i++) {
-        func_802A001C_de(D_8014D468_de[i], 0, D_800E28D0 * D_800E28D4 * 2);
-    }
-    func_8044A62C_de(session->players);
-    func_80449DB0_de(session->menu);
-    func_8023EE00_de();
-    session->resource = func_80265964_de(0x18) & 0x3FFFFFFF;
-    Items_ResetActorPools(session->players, 0);
-    func_804499B0_de(session->menu, 0, 0);
-    func_8044B7C0_de(&D_8011FE88, session->resource);
-    if (D_800CBC11[0] == 0) {
-        func_8044AE70_de();
-    }
-    Ovlgame_ResetHudCharTables(&session->hud);
-    func_80404D84_de();
-    func_802A21F4_de();
-    func_80298368_de(2);
-    D_auto_80146998 = 3;
-    D_8014AD94 = 0;
-    D_8014ADA0 = 0;
-    D_80146D60 = 0;
-    D_8014AD9C = 1;
-    D_80142CAC = 0;
-    func_8026479C_de();
-    D_801462C8.counters.transitionActive = 0;
-    func_80293790_de(session, 0);
-    for (;;) {
-        func_802BB2A0_de(&D_801428C0, (void **)&D_auto_8014AD7C, 1);
-        msg = D_auto_8014AD7C;
-        switch (*msg) {
-        case 1:
-            func_80293848_de(session);
-            break;
-        case 2:
-            if (msg == &session->ring.frames[0].done.type) {
-                D_80146CD8 = &session->ring.frames[0];
-            } else if (msg == &session->ring.frames[1].done.type) {
-                D_80146CD8 = &session->ring.frames[1];
-            } else if (msg == &session->ring.frames[2].done.type) {
-                D_80146CD8 = &session->ring.frames[2];
-            }
-            if (session->mode == 0x14) {
-                D_80142CA8++;
-            } else {
-                Render_UpdateFrameTiming(session);
-            }
-            break;
-        case 4:
-            D_800CDD10 = 0;
-            func_8026480C_de();
-            func_80264854_de(0);
-            session->pad26DC0 = 1;
-            session->transitionBlocked = 1;
-            func_80293824_de(session, 0x14);
-            break;
-        }
-    }
-}
-/* 231/237 words; remaining: target keeps s0=&D_801468A0 and s1=1 across the loop, we fold the address and hold s1=2 */
-#elif defined(VERSION_DE) && defined(NON_MATCHING)
-#include "COMMON/GAME_SESSION.H"
-#include "COMMON/DISPLAY.H"
-#include "COMMON/MENURECAT24.H"
-
-extern s32 D_80000300; /* TV type: 0 PAL, 1 NTSC, 2 MPAL */
+#include "COMMON/EXTERNS_3.H"
+#include "SYSTEM/802BA5F0_22.H"
+#if defined(VERSION_EU)
+extern void func_802BA5F0_eu(s32 pri);
+#endif
 extern char D_8014D438[];
-extern f32 D_800C5420_de;
-extern f32 D_800C5424_de;
 extern s16 *D_80146CBC;
 extern s32 D_80142920;
 extern s32 D_80146CC8;
@@ -229,8 +88,12 @@ extern s32 D_80146CD0;
 extern s32 D_8011B9F4;
 extern s32 D_80142C30;
 extern s32 D_801428D8;
+#if defined(VERSION_US_REV1)
+extern char D_002953FC_us_rev1[];
+extern char D_801053E8_us_rev1[];
+extern void func_802B155C_us_rev1(void *segment);
+#endif
 extern void func_802567D0_de(void);
-extern void func_802BA350_de(s32 pri);
 extern void osViBlack(s32 active);
 extern void func_80405CA8_de(void *record);
 extern s32 Ovlgame_AllocateRenderBuffers(void *record);
@@ -251,18 +114,30 @@ extern void func_80293790_de(GameSession *session, s32 arg1);
 extern void func_80293848_de(void *session);
 extern void Render_UpdateFrameTiming(void *session);
 extern void func_8026480C_de(void);
-
+/* The game settings record and its round counters. */
+static inline Shared_Game *currentGame(void) {
+    return &D_801462C8;
+}
+static inline CGameStatus *gameStatus(void) {
+    return &D_801462C8.counters;
+}
 /* Main game thread: brings up video and the overlays, clears the frame buffers, starts the menu and
    player state, then serves the scheduler's messages forever. */
-void func_80291404(void *arg0) {
-    GameSession *session = arg0;
+void Render_RunGameLoop(GameSession *session) {
     u32 i;
     s16 *msg;
-
     func_802567D0_de();
+#if defined(VERSION_EU)
+    func_802BA5F0_eu(0xFE);
+#else
     func_802BA350_de(0xFE);
+#endif
     osViBlack(1);
+#if defined(VERSION_US) || defined(VERSION_US_REV1)
+    if (D_80000300 != 1 && D_80000300 != 2) {
+#else
     if (D_80000300 != 0) {
+#endif
         for (;;) {
         }
     }
@@ -271,9 +146,9 @@ void func_80291404(void *arg0) {
     osViSwapBuffer((s32)D_8014D468_de[0]);
     osViBlack(0);
     if (D_80000300 == 0) {
-        D_80142C38[1] = D_800C5420_de;
+        D_80142C38[1] = 50.0f;
     } else {
-        D_80142C38[1] = D_800C5424_de;
+        D_80142C38[1] = 60.0f;
     }
     D_80146CBC = 0;
     D_80142CA8 = 2;
@@ -289,6 +164,10 @@ void func_80291404(void *arg0) {
     D_80142C38[0] = 0.0f;
     D_80142C30 = 0;
     func_80291208_de((RenderState *)session);
+#if defined(VERSION_US_REV1)
+    func_802B155C_us_rev1(D_002953FC_us_rev1);
+    func_802BB420_de((OSMesgQueue *)D_801053E8_us_rev1, (OSMesg)0xBEEFDEAD, 0);
+#endif
     for (i = 0; i < D_800DE850; i++) {
         func_802A001C_de(D_8014D468_de[i], 0, D_800E28D0 * D_800E28D4 * 2);
     }
@@ -313,10 +192,11 @@ void func_80291404(void *arg0) {
     D_8014AD9C = 1;
     D_80142CAC = 0;
     func_8026479C_de();
-    D_801462C8.counters.transitionActive = 0;
+    gameStatus()->transitionActive = 0;
     func_80293790_de(session, 0);
     for (;;) {
-        func_802BB2A0_de(&D_801428C0, (void **)&D_80146CBC, 1);
+        Shared_Game *game = currentGame();
+        func_802BB2A0_de(&D_801428C0, (OSMesg *)&D_80146CBC, 1);
         msg = D_80146CBC;
         switch (*msg) {
         case 1:
@@ -335,6 +215,10 @@ void func_80291404(void *arg0) {
             } else {
                 Render_UpdateFrameTiming(session);
             }
+            /* The ROM keeps only the hoisted &D_801462C8 of this test: the store is dead (the next receive overwrites msg). */
+            if (game->flags) {
+                msg = 0;
+            }
             break;
         case 4:
             D_800CDD10 = 0;
@@ -347,9 +231,6 @@ void func_80291404(void *arg0) {
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_80291404);
-#endif
 
 #ifdef NON_MATCHING
 #include "abi.h"
