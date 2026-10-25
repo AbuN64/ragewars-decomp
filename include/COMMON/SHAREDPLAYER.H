@@ -67,6 +67,8 @@ struct Model {
     u32 flags; /* +0x14: func_802251DC_de */
     char pad18[0x34];
     s32 slots[8];
+    char pad6C[0xF4 - 0x6C];
+    f32 height; /* 0xF4: weapon height source */
 };
 
 struct Shared_Quad;

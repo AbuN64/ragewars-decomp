@@ -20,7 +20,7 @@ extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
 
 
 
-void func_80223E34_de(SharedPlayer_func_80223E34_de *player, func_80203908_S4 *camera) {
+void func_80223E34_de(SharedPlayer *player, func_80203908_S4 *camera) {
     f32 step;
     f32 phase;
     f32 height;
