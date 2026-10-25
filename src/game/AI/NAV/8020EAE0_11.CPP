@@ -15,8 +15,8 @@ s32 func_8020EA10_de(void *);
 s32 func_8020F5A4_de(void *);
 s32 Weapons_GetWeaponClassId(void *, s16);
 s32 func_8022AB20_de(void *, s16);
-s32 func_8022AC00_de(void *);
-s32 func_8022ACB8_de(void *, s32, s32);
+s32 Weapons_GetMaxHealth(void *);
+s32 Weapons_GetAmmoCapacity(void *, s32, s32);
 extern CGameStatus D_801468A0;
 
 /* Choose the next AI state from game objectives, supplies and the current target. */
@@ -38,11 +38,11 @@ s32 Nav_SelectPlayerState(AiController *controller) {
     CGameStatus *gameStatus;
 
     health = controller->player->health >> 8;
-    maxHealth = func_8022AC00_de(controller->player) >> 8;
+    maxHealth = Weapons_GetMaxHealth(controller->player) >> 8;
     healthPercent = (f32)health / (f32)maxHealth * 100.0f;
     ammoCount = func_8022AB20_de(controller->player, controller->player->selectedAction);
     ammoType = Weapons_GetWeaponClassId(controller->player, controller->player->selectedAction);
-    capacity = func_8022ACB8_de(controller->player, ammoType, 1);
+    capacity = Weapons_GetAmmoCapacity(controller->player, ammoType, 1);
     if (capacity != 0 && ammoCount != -1) {
         ammoPercent = (f32)ammoCount / (f32)capacity * 100.0f;
     } else {

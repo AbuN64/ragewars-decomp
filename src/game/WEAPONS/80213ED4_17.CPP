@@ -12,7 +12,7 @@ extern void func_80215410_de(void *, void *, s32, void *);
 
 
 
-void func_80216D3C_de(Input80216D3C *actor, void *arg1, Output80216D3C *arg2, s32 arg3, s32 arg4) {
+void Weapons_UpdateTrackGoals(Input80216D3C *actor, void *arg1, Output80216D3C *arg2, s32 arg3, s32 arg4) {
     Tracker *tracker = arg1;
     Triple first;
     Triple second;

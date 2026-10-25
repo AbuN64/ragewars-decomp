@@ -6,7 +6,7 @@
 #include "particle/8024D018_4.H"
 #include "WEAPONS/80213ED4_23.H"
 
-void func_802170A0_de(Player *actor, s32 *arg1, s32 arg2, s32 arg3, s32 arg4) {
+void Weapons_SpawnFlaggedEffects(Player *actor, s32 *arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 *entry;
 
     if ((arg1[0] & arg2) != 0) {

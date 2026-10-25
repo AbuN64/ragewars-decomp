@@ -41,7 +41,7 @@ void func_802054E0_de(Obj54E0 *arg0, void *arg1) {
         if (rec->unk30 != -1) {
             func_80216288_de(arg0, rec->unk30, arg0->pos.t, 0);
         }
-        func_802170A0_de(arg0, arg1, 8, rec->unk38, rec->unk3C);
+        Weapons_SpawnFlaggedEffects(arg0, arg1, 8, rec->unk38, rec->unk3C);
     }
 }
 

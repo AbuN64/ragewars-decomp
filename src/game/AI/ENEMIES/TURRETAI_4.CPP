@@ -10,7 +10,7 @@
 extern s32 Turret_TrackTarget(void *arg0);
 
 
-extern s32 func_802170A0_de(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 Weapons_SpawnFlaggedEffects(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4);
 
 extern void func_80285DB0_de(Shared_World *, void *, s32);
 
@@ -40,7 +40,7 @@ void Turret_Setup_DEATH(void *actor, void *state) {
     Shared_World *world;
 
     motion = &((ActorMotionResource *)actorView->definition)->motion;
-    func_802170A0_de(actor, state, 4, motion->eventMask, motion->secondaryEventMask);
+    Weapons_SpawnFlaggedEffects(actor, state, 4, motion->eventMask, motion->secondaryEventMask);
     world = &D_8011FE88;
     stateView->event = 0;
     func_80285DB0_de(world, actor, 1);

@@ -25,10 +25,10 @@
 
 /* Reaction thresholds are loaded from the cartridge's shared float table. */
 void * Nav_FindSearchNode(char *, s32);
-void func_80229814_de(void *, f32);
+void Weapons_ApplyStun(void *, f32);
 void func_80229FA0_de(void *, void *);
 s32 Weapons_GetPlayerIndex(void *, unsigned int);
-s32 func_8022AC00_de(void *);
+s32 Weapons_GetMaxHealth(void *);
 int func_8022B178_de(void *);
 int Camera_IsSequenceActive(void);
 void func_802830CC_de(void *, s32);
@@ -183,7 +183,7 @@ flag_done:
                 goto block_47;
 block_early_return:
                 if (temp_s1->unk5E4 > 0) {
-                    func_80229814_de(temp_s1, 2.5f);
+                    Weapons_ApplyStun(temp_s1, 2.5f);
                 }
                 return;
 block_33:
@@ -201,7 +201,7 @@ block_38:
                         packet->unk4 = 0;
                     } else {
                         temp_s0 = temp_v1_2 + packet->unk4;
-                        var_v1_2 = func_8022AC00_de(temp_s1);
+                        var_v1_2 = Weapons_GetMaxHealth(temp_s1);
                         if (temp_s0 < var_v1_2) {
                             var_v1_2 = temp_s0;
                         }
@@ -458,7 +458,7 @@ extern Shared_MatchRules D_801468A0[];
 extern s32 D_800CE47C, D_800C9228_de, D_800D297C;
 extern const f32 D_800C22E4_de, D_800C22E8_de, D_800C22EC_de, D_800C22F0_de;
 extern WeaponInfo *D_800D052C[];
-extern void func_80228FB8_de(LevelActor *, s32, Draw *);
+extern void Weapons_DrawTintedPlayer(LevelActor *, s32, Draw *);
 extern void **func_8024BFD4_de(LevelActor *, s32);
 extern void Scene_UnlockResource(s32, void *);
 void Render_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
@@ -506,7 +506,7 @@ void Render_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
             if (D_80145088.settings.local && (player->hidden || player->kind == D_800C9228_de) &&
                 player->health == 0) return;
         }
-        if (player->flags & 0x20) func_80228FB8_de(actor, arg1, context);
+        if (player->flags & 0x20) Weapons_DrawTintedPlayer(actor, arg1, context);
         else {
             if (D_801468A0->countRule && player->controls->unk8F) actor->team = D_801468A0->teamColour;
             else actor->team = (u8)actor->definition->first;

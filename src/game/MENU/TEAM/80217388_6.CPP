@@ -132,7 +132,7 @@ void Team_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *player, s32
     state->mode = player->config->mode == 1;
     if (player->type == 14) {
         if (!player->enabled) return;
-        if (player->input->pressed & 0x8000) player->choice = func_80232ABC_de(player);
+        if (player->input->pressed & 0x8000) player->choice = Weapons_PickRandomArmedWeapon(player);
     } else if ((player->input->held & 0x8000) && player->config->mode) {
         player->choice = func_8022FAF8_de(player);
     } else if (player->config->mode != 1 || (player->selection != -1 && state->selection != 8)) {

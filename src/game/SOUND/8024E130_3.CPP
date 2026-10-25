@@ -11,7 +11,7 @@ extern void func_8024E79C_de(void *arg0, TripleRecAt8 t, void *arg4, s32 *arg5, 
 
 extern f32 Anim_GetPolygonHeight(struct Node75 *node, f32 x, f32 z);
 
-extern void func_802165F8_de(void *arg0, void *arg1, void *arg2);
+extern void Weapons_ComputeTargetOffset(void *arg0, void *arg1, void *arg2);
 
 /** Return a nested float field when the nested record type is one, else zero. */
 float func_8024E544_de(void *object) {
@@ -100,7 +100,7 @@ void func_8024E6D8_de(u8 *arg0, void *vector) {
     char pad[0x30];
 
     if (*arg0 == 1) {
-        func_802165F8_de(arg0, arg0 + 0x170, &buf);
+        Weapons_ComputeTargetOffset(arg0, arg0 + 0x170, &buf);
         *(Triple *)vector = buf;
         return;
     }
@@ -112,7 +112,7 @@ void func_8024E6D8_de(u8 *arg0, void *vector) {
 f32 func_8024E73C_de(u8 *arg0) {
     char buf[0x40];
     if (*arg0 == 1) {
-        func_802165F8_de(arg0, arg0 + 0x170, buf);
+        Weapons_ComputeTargetOffset(arg0, arg0 + 0x170, buf);
         return ((struct FloatState3C *) buf)->unk_38;
     }
     return 0.0f;

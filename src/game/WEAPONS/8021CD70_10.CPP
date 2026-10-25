@@ -29,7 +29,7 @@ extern s32 D_800CE3E8[];
 
 
 
-s32 func_80222BE8_de(void *player, s32 slot, s32 amount) {
+s32 Weapons_AddAmmo(void *player, s32 slot, s32 amount) {
     s16 *count;
     s32 cap;
     s32 room;

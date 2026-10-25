@@ -229,7 +229,7 @@ extern f32 Particle_GetPointDistance(CVector3 *, CVector3 *);
 extern f32 func_802672D0_de(u8 *);
 extern f32 Math_Sqrtf(f32);
 extern void Weapons_FillDamagePacket(CDamageInfo *, void *, s32, f32, s32, Shield *);
-extern s32 func_8022AC00_de(void *);
+extern s32 Weapons_GetMaxHealth(void *);
 struct CallbackState114;
 extern void Weapons_RunDamageHook(void *, struct CallbackState114 *, CDamageInfo *);
 extern s32 func_80282C8C_de(Shared_ReactionObjectKind *);
@@ -420,7 +420,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
                         if (attacker != NULL) {
                             if (ownerPlayer->unk122C & 0x40) {
                                 restored = ownerPlayer->unk5E4 + (s32) (damage * D_800C43E0_de[8]);
-                                maximum = func_8022AC00_de(ownerPlayer);
+                                maximum = Weapons_GetMaxHealth(ownerPlayer);
                                 if (restored < maximum) {
                                     maximum = restored;
                                 }
@@ -434,7 +434,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
                                 }
                                 if ((attacker != NULL) && (attacker->unk122C & 0x1000) && (func_80282C8C_de(projectile) != 0)) {
                                     restored2 = attacker->unk5E4 + (s32) damage;
-                                    maximum2 = func_8022AC00_de(ownerPlayer);
+                                    maximum2 = Weapons_GetMaxHealth(ownerPlayer);
                                     if (restored2 < maximum2) {
                                         maximum2 = restored2;
                                     }
@@ -476,7 +476,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
                     if (attacker != NULL) {
                         if (victim->unk122C & 0x40) {
                             restored3 = victim->unk5E4 + (s32) (damage * D_800C43E0_de[12]);
-                            maximum3 = func_8022AC00_de(victim);
+                            maximum3 = Weapons_GetMaxHealth(victim);
                             if (restored3 < maximum3) {
                                 maximum3 = restored3;
                             }

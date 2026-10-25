@@ -13,7 +13,7 @@ extern u8 D_0021A2D4_us_rev1[], D_0022F5D0_us_rev1[];
 extern void func_8024B3A8_de(void *, void *, void *, s32);
 extern void Weapons_RequestActorState(void *, void *, s32);
 extern void func_802325FC_de(void *, void *);
-extern void func_80220A80_de(void *, void *);
+extern void Weapons_UpdatePlayerCamera(void *, void *);
 extern void func_80245864_de(void *);
 typedef struct InitView { char pad0[4]; u32 flags; char pad8[0xF4]; f32 x, y, z; } InitView;
 /* Initialises an actor and its embedded part at 0x2E8: sets the shared table pointers and flag bits (one flag
@@ -72,7 +72,7 @@ void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s
     record->part[1].flags &= 0xFFFEFFFF;
     Weapons_RequestActorState((actor + 0x2E8), (actor + 0x458), 0);
     func_802325FC_de((actor + 0x2E8), (actor + 0x458));
-    func_80220A80_de(actor, actor);
+    Weapons_UpdatePlayerCamera(actor, actor);
     if (record->auxiliary != 0) {
         func_80245864_de(record->auxiliary);
     }

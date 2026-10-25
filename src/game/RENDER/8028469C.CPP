@@ -211,7 +211,7 @@ void func_802849F0_de(ParticleEffect *effect)
     f32 x, y, z;
     CVector3 *velocity;
 
-    func_80228DC4_de(&D_80145040, effect);
+    Weapons_ApplyPlayerForces(&D_80145040, effect);
     acceleration = func_802B2350(effect->entry->motion->acceleration);
     if (acceleration != 0.0f) {
         direction = effect->direction;

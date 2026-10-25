@@ -714,7 +714,7 @@ typedef struct PowerupEntry {
 } PowerupEntry;
 /* Team ids that may always pick up items (func_802AB400_de reads the same pair). */
 extern s32 D_800CE474[2];
-extern void func_80222BE8_de(void *, s16, s16);
+extern void Weapons_AddAmmo(void *, s16, s16);
 /* Pickup feedback: flash the player's view, post the entry's message in the current language,
    play its sound at the player and raise its event. */
 static inline void announcePowerup(struct Player *player, PowerupEntry *entry)
@@ -756,7 +756,7 @@ s32 Menu_HandlePowerWeaponPickup(struct Player *player, PowerupEntry *entry)
             return 0;
         }
         announcePowerup(player, entry);
-        if (!skipAmmo) func_80222BE8_de(player, entry->ammoSlot, entry->ammoCount);
+        if (!skipAmmo) Weapons_AddAmmo(player, entry->ammoSlot, entry->ammoCount);
     }
     return 1;
 }

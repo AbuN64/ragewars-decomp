@@ -14,7 +14,7 @@
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 
-extern void func_80222BE8_de(void *, s16, s16);
+extern void Weapons_AddAmmo(void *, s16, s16);
 
 
 
@@ -25,9 +25,9 @@ s32 func_802ACFB0_de(Actor_func_802AB400_de *arg0, MultiChannelItemEffect *arg1)
     s32 sound;
     s32 callback;
 
-    func_80222BE8_de(arg0, 0, arg1->effect.index);
-    func_80222BE8_de(arg0, 1, arg1->effect.argument);
-    func_80222BE8_de(arg0, 2, arg1->third);
+    Weapons_AddAmmo(arg0, 0, arg1->effect.index);
+    Weapons_AddAmmo(arg0, 1, arg1->effect.argument);
+    Weapons_AddAmmo(arg0, 2, arg1->third);
 
     resource = arg1->effect.resource;
     sound = arg1->effect.sound;

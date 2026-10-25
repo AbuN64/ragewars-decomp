@@ -262,7 +262,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
 
   return;
   block_26:
-  func_80228DC4_de(&D_80145040, arg0);
+  Weapons_ApplyPlayerForces(&D_80145040, arg0);
 
 #if defined(VERSION_EU)
   temp_f0_3 = func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk10);

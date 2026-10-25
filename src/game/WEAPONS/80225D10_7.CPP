@@ -26,12 +26,12 @@
    yellow starting at alpha 128, and mode 3 draws through func_8024A3B0_de with an alpha rising with the
    time; the override is switched off afterwards. */
 extern Gfx *D_80110634;
-extern Rules_func_80228FB8_de D_801468A0[];
+extern RulesWeaponsDrawTintedPlayer D_801468A0[];
 extern s32 D_800D297C;
 extern void Render_SetCombineMode(s32);
 extern void func_8024A3B0_de(LevelActor *, PlayerCode80225D10 *, s32, Draw *);
 
-void func_80228FB8_de(LevelActor *actor, s32 arg1, Draw *draw) {
+void Weapons_DrawTintedPlayer(LevelActor *actor, s32 arg1, Draw *draw) {
     PlayerCode80225D10 *player;
     Gfx *gfx;
 
@@ -205,7 +205,7 @@ static inline s32 max_ammo(SharedPlayerRecV1 *player, s32 type) {
     return max;
 }
 
-void func_80229554_de(SharedPlayerRecV1 *player, s32 type, s32 amount) {
+void Weapons_GiveAmmoWithMessage(SharedPlayerRecV1 *player, s32 type, s32 amount) {
     char number[8];
     char message[32];
 

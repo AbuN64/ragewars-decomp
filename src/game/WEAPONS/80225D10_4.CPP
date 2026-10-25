@@ -64,7 +64,7 @@ void func_80218464_de(void *);
 
 void Weapons_InitializePlayerHealth(void *);
 
-s32 func_802281F0_de(void *);
+s32 Weapons_CheckTotalScoreWin(void *);
 
 void * Weapons_GetPlayerByIndex(void *, u32);
 
@@ -104,7 +104,7 @@ void * func_8022C55C_de(void *, u32);
 
 
 
-s32 func_802282EC_de(Round *arg0);
+s32 Weapons_CheckTeamPointWin(Round *arg0);
 
 
 
@@ -184,7 +184,7 @@ void func_80227038_de(s8 *world) {
     func_80227014_S22 *temp_v1_4;
 
     if ((Camera_IsSequenceActive() == 0) && (Camera_IsSequenceInWindow() == 0) && ((initial_rules = &D_801462C8.counters)->m_bFragTagOn != 0)) {
-        if ((func_802281F0_de(world) != 0) && (initial_rules->elapsed == 0)) {
+        if ((Weapons_CheckTotalScoreWin(world) != 0) && (initial_rules->elapsed == 0)) {
             Weapons_EndRound(world);
             return;
         }
@@ -626,7 +626,7 @@ void Weapons_ReleaseWaitingPlayer(Round *round) {
             case 3:
                 break;
             }
-            if ((func_802282EC_de(round) != 0) && (D_801462C8.counters.elapsed == 0)) {
+            if ((Weapons_CheckTeamPointWin(round) != 0) && (D_801462C8.counters.elapsed == 0)) {
                 Weapons_EndRound(round);
             }
         }

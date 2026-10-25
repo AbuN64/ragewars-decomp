@@ -90,7 +90,7 @@ extern s32 World_PlayerHasAmmoForWeapon(void *arg0, s32 arg1);
 
 
 
-s32 func_80232ABC_de(void *player) {
+s32 Weapons_PickRandomArmedWeapon(void *player) {
     s32 weapon;
     s32 var_s0;
 

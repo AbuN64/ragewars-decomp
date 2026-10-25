@@ -26,7 +26,7 @@ void func_80272BCC_de(void *arg0, void *arg1, void *arg2);
 
 void Turret_Move(struct Owner *owner, Rider *rider, s32 mode, SharedPlayer *target);
 
-void func_802172D0_de(void *arg0, void *arg1, s32 arg2);
+void Weapons_SetLoopingSound(void *arg0, void *arg1, s32 arg2);
 
 void func_80217388_de(void *arg0, void *arg1);
 
@@ -96,7 +96,7 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
     actorKind = actor->player.views1C.viewE4_6.unkE4;
     switch (actorKind) {                              /* irregular */
     case 0x40B:
-        func_80216D3C_de(&actor->input, riderState, &work.result.output, 0, 1);
+        Weapons_UpdateTrackGoals(&actor->input, riderState, &work.result.output, 0, 1);
         break;
     case 0x40C:
         AI_DynTurretGetTargetInfo(&actor->player,&riderState->target,&work.result.result);
@@ -162,10 +162,10 @@ block_12:
     } else if(D_800C1A38_de < aimError) goto changed;
     if(riderState->nav.speed != desiredSpeed) {
 changed:
-        func_802172D0_de(actor,riderState,0xC3F);
+        Weapons_SetLoopingSound(actor,riderState,0xC3F);
     } else func_80217388_de(actor,riderState);
     /* The second ABI word is the actual rider pointer, used as such by this callee. */
-    ((void (*)(void *,void *,f32,f32))func_80216808_de)(actor,riderState, turret->rate, aimError);
+    ((void (*)(void *,void *,f32,f32))Weapons_ApplyClampedTurn)(actor,riderState, turret->rate, aimError);
     riderState->nav.speed = func_80274808_de(riderState->nav.speed, desiredSpeed, turret->rate);
     return inFireCone;
 }

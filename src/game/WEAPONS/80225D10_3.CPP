@@ -13,7 +13,7 @@
 /** Allocate and clear the player array and its per-player state blocks, linking each player to its block. */
 extern void **Scene_AllocateResource(int, int, int, char *);
 
-void func_80226950_de(PlayerList *list, int count) {
+void Weapons_AllocPlayerList(PlayerList *list, int count) {
     int playerSize = count * sizeof(Players);
     int stateSize = count * 0x330;
     char *states;
@@ -58,25 +58,25 @@ void func_80226950_de(PlayerList *list, int count) {
 
 
 extern f32 D_800D2988;
-extern Menu_func_80226A34_de D_8014561C;
+extern MenuWeaponsUpdateWorldPlayers D_8014561C;
 extern Game D_8014687C;
 extern void func_8022C490_de(SharedPlayer *);
 extern void func_80220ED4_de(SharedPlayer *);
-extern void func_80220A80_de(SharedPlayer *, SharedPlayer *);
+extern void Weapons_UpdatePlayerCamera(SharedPlayer *, SharedPlayer *);
 
 extern s32 func_8026435C_de(Shared_Effect *);
 
 extern s32 func_802A23B4_de(void);
-extern s32 Pak_CountLiveNodes(Menu_func_80226A34_de *);
+extern s32 Pak_CountLiveNodes(MenuWeaponsUpdateWorldPlayers *);
 extern void func_8025E360_de(void);
 extern void func_8025E3A8_de(void);
 extern void func_80218464_de(char *);
 
-extern void func_802283B8_de(World_func_80226A34_de *);
-extern void func_80227038_de(World_func_80226A34_de *);
-extern void Weapons_ReleaseWaitingPlayer(World_func_80226A34_de *);
+extern void func_802283B8_de(WorldWeaponsUpdateWorldPlayers *);
+extern void func_80227038_de(WorldWeaponsUpdateWorldPlayers *);
+extern void Weapons_ReleaseWaitingPlayer(WorldWeaponsUpdateWorldPlayers *);
 
-void func_80226A34_de(World_func_80226A34_de *world) {
+void Weapons_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
     f32 frameTime;
     SharedPlayer *player;
     Rules *rules;
@@ -97,7 +97,7 @@ void func_80226A34_de(World_func_80226A34_de *world) {
             if (D_8011FAC0.clockPaused == 0) {
                 func_80220ED4_de(player);
             }
-            func_80220A80_de(player, player);
+            Weapons_UpdatePlayerCamera(player, player);
         }
         for (player = world->players; player != 0; player = player->views16E0.view16E0_2.next) {
             if (Camera_IsSequenceActive() != 0 && (player->views5E8.view6B0_48.state & 0x8000)) {

@@ -26,7 +26,7 @@ extern char D_801468A0[];
 extern void func_80253908_de(s32);
 
 
-extern void func_80226950_de(CPlayerPool *, s32);
+extern void Weapons_AllocPlayerList(CPlayerPool *, s32);
 extern s32 D_800C9684[];
 extern void Ovlgame_ResetPlayerForRound(void *actor, s32 character, s32 active);
 
@@ -40,7 +40,7 @@ extern void Ovlgame_ResetPlayerForRound(void *actor, s32 character, s32 active);
 
 
 
-void func_80220A80_de(Shared_ActorView *, Shared_ActorView *);
+void Weapons_UpdatePlayerCamera(Shared_ActorView *, Shared_ActorView *);
 
                  /* extern */
 void func_80245864_de(void *);
@@ -99,7 +99,7 @@ void func_804499B0_de(CPlayerPool *pool, s32 count, s32 force_active) {
         return;
     }
 
-    func_80226950_de(pool, count);
+    Weapons_AllocPlayerList(pool, count);
     for (i = 0; i < pool->count; i++) {
         func_80255D14_de(&pool->m_FreeList, pool->m_Players + i * 0x16E8);
     }
@@ -264,7 +264,7 @@ void func_80449E18_de(CPlayerPool *pool) {
             temp_v0 = Scene_FindFloorPolygon(&D_8011FE88, &actor->position);
             actor->weapon.model = temp_v0;
             actor->modelId = temp_v0;
-            func_80220A80_de(actor, actor);
+            Weapons_UpdatePlayerCamera(actor, actor);
             message = actor->message;
             if (message != 0) {
                 func_80245864_de(message);

@@ -183,7 +183,7 @@ void *func_8022A634_de(struct Context *context, u32 arg1) {
     return result;
 }
 
-int func_8022A68C_de(char *forcePlayerList) {
+int Weapons_BeginRoundEnd(char *forcePlayerList) {
     Shared_ActorView *p;
     int count;
     CGameStatus *s;
@@ -428,7 +428,7 @@ s32 func_8022AB9C_de(void *player) {
     return -1;
 }
 
-s32 func_8022AC00_de(void *arg0) {
+s32 Weapons_GetMaxHealth(void *arg0) {
     char *o = (char *)arg0;
     s32 value;
     s8 type;
@@ -455,7 +455,7 @@ s32 func_8022AC00_de(void *arg0) {
     return value;
 }
 
-int func_8022ACB8_de(Player_func_8022ACB8_de *player, int slot) {
+int Weapons_GetAmmoCapacity(PlayerWeaponsGetAmmoCapacity *player, int slot) {
     int value;
 
     if (slot == -1) {

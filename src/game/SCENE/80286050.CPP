@@ -85,8 +85,8 @@ void func_80286080_de(void *arg0) {
 extern void func_8024BE3C_de(void *arg0);
 extern void func_80246E44_de(char *);
 extern s32 func_802934F8_de(void);
-extern void func_80226A34_de(void *arg0);
-extern s32 func_8022A68C_de(void *arg0);
+extern void Weapons_UpdateWorldPlayers(void *arg0);
+extern s32 Weapons_BeginRoundEnd(void *arg0);
 
 
 
@@ -147,9 +147,9 @@ void func_80286284_de(void *arg0) {
 
 first_pass_done:
     if (func_802934F8_de()) {
-        func_80226A34_de(&D_80145040);
+        Weapons_UpdateWorldPlayers(&D_80145040);
     }
-    if (func_8022A68C_de(&D_80145040)) {
+    if (Weapons_BeginRoundEnd(&D_80145040)) {
         func_8025E2D4_de(0x34);
         {
         s32 sw_mode_value = ((GlobalMode *)&D_80145040)->mode;

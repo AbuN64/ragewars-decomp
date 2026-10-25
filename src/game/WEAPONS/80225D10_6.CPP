@@ -7,7 +7,7 @@
 #include "FX_2/80271B18.H"
 
 static inline s32 playerHasForce(ForcePlayer *player, f32 zero) { s32 value = 0; if (zero < player->strength) value = 1; return value; }
-void func_80228DC4_de(void *listObject, void *bodyObject) {
+void Weapons_ApplyPlayerForces(void *listObject, void *bodyObject) {
     ForcePlayerList *list = listObject;
     ForceBody *body = bodyObject;
     ForcePlayer *player;

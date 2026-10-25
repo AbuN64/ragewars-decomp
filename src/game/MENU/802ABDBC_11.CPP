@@ -169,7 +169,7 @@ block_4:
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
-extern void func_80222BE8_de(void *, s16, s16);
+extern void Weapons_AddAmmo(void *, s16, s16);
 extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
@@ -179,7 +179,7 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
     s32 sound;
     s32 callback;
     if (((struct EntryRecAtE *)(arg1))->index != -1) {
-        func_80222BE8_de(arg0, ((struct EntryRecAtE *)(arg1))->index,
+        Weapons_AddAmmo(arg0, ((struct EntryRecAtE *)(arg1))->index,
                       ((struct EntryRecAtE *)(arg1))->argument);
     }
 
@@ -211,7 +211,7 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
-extern s32 func_8022AC00_de(void *arg0);
+extern s32 Weapons_GetMaxHealth(void *arg0);
 extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
@@ -228,7 +228,7 @@ s32 func_802ACC04_de(void *arg0, void *arg1) {
 
         ((struct Actor_func_802AB400_de *)(arg0))->count +=
             ((struct TimedItemEffect *)(arg1))->amount << 8;
-        limit = func_8022AC00_de(arg0);
+        limit = Weapons_GetMaxHealth(arg0);
         if (((struct Actor_func_802AB400_de *)(arg0))->count < limit) {
             limit = ((struct Actor_func_802AB400_de *)(arg0))->count;
         }

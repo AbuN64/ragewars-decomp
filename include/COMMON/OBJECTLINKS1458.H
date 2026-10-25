@@ -266,5 +266,5 @@ typedef struct func_8020EEA4_S3 func_8020EEA4_S3;
 
 extern int func_8020EF60_us(void * arg0);
 
-extern s32 func_80232ABC_de(void *arg0);
+extern s32 Weapons_PickRandomArmedWeapon(void *arg0);
 #endif

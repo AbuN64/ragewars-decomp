@@ -24,7 +24,7 @@ extern char D_801376F8[];
 
 
 extern void func_802095F8_de(Brain *);
-extern s32 func_8022AC00_de(SharedPlayer_func_80208158_de *);
+extern s32 Weapons_GetMaxHealth(SharedPlayer_func_80208158_de *);
 extern void func_802AA79C_de(char *, s32);
 extern void Fx_ClearControllerInput(char *);
 extern void Weapons_SetPlayerState(SharedPlayer_func_80208158_de *, SharedPlayer_func_80208158_de *, s32);
@@ -63,7 +63,7 @@ void func_80208158_de(Brain *brain) {
         } else if (kind == 13) {
             maximum = 300;
         } else {
-            maximum = func_8022AC00_de(brain->player) >> 8;
+            maximum = Weapons_GetMaxHealth(brain->player) >> 8;
         }
         meter = (f32)health / (f32)maximum * 100.0f;
         if (brain->player->views5D8.view5D8_1.record->kind == 14) {

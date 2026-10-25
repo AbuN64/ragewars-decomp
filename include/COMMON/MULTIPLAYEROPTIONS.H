@@ -3098,8 +3098,8 @@ struct Tuning {
     s16 strokeSound;
 };
 
-struct Player_func_80220A80_de;
-typedef struct Player_func_80220A80_de Player_func_80220A80_de;
+struct PlayerWeaponsUpdatePlayerCamera;
+typedef struct PlayerWeaponsUpdatePlayerCamera PlayerWeaponsUpdatePlayerCamera;
 
 extern float D_800C299C_de;
 
@@ -3125,8 +3125,8 @@ struct MovementDescriptor {
     u8 level;
 };
 
-struct Player_func_80220A80_de;
-struct Player_func_80220A80_de {
+struct PlayerWeaponsUpdatePlayerCamera;
+struct PlayerWeaponsUpdatePlayerCamera {
     char pad0[0x5D0];
     s32 cameraMode;
     char pad5D4[0x5DC - 0x5D4];
@@ -3148,8 +3148,8 @@ struct Player_func_80220A80_de {
     f32 zoom;
 };
 
-struct Body_func_80220A80_de;
-struct Body_func_80220A80_de {
+struct BodyWeaponsUpdatePlayerCamera;
+struct BodyWeaponsUpdatePlayerCamera {
     char pad0[8];
     f32 x;
     f32 y;
@@ -4864,8 +4864,8 @@ extern float D_800C298C_de;
 
 struct View;
 
-struct Body_func_80220A80_de;
-typedef struct Body_func_80220A80_de Body_func_80220A80_de;
+struct BodyWeaponsUpdatePlayerCamera;
+typedef struct BodyWeaponsUpdatePlayerCamera BodyWeaponsUpdatePlayerCamera;
 
 struct SharedMovement;
 struct SharedMovement {

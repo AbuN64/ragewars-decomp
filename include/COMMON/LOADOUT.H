@@ -10,8 +10,8 @@ struct Loadout {
     int capacity[1];
 };
 struct Loadout;
-struct Player_func_8022ACB8_de;
-struct Player_func_8022ACB8_de {
+struct PlayerWeaponsGetAmmoCapacity;
+struct PlayerWeaponsGetAmmoCapacity {
     char pad0[0x18];
     struct Loadout *loadout;
     char pad1C[0x5D4 - 0x1C];
@@ -157,8 +157,8 @@ struct func_8022AE18_S1 {
 
 extern float D_800C2D04_de;
 
-struct Player_func_8022ACB8_de;
-typedef struct Player_func_8022ACB8_de Player_func_8022ACB8_de;
+struct PlayerWeaponsGetAmmoCapacity;
+typedef struct PlayerWeaponsGetAmmoCapacity PlayerWeaponsGetAmmoCapacity;
 
 struct func_8022A82C_S3;
 typedef struct func_8022A82C_S3 func_8022A82C_S3;

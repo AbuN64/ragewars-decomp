@@ -23,7 +23,7 @@ extern void Weapons_UpdateViewAngles(void *, void *, void *);
    picks the animation from the stick at 0x6C0 and 0x6C4: 0xA64 at rest, 0xA67 or 0xA66 when the
    second axis dominates and 0xA65 or 0xA68 otherwise, by the sign of the dominant axis. */
 
-extern void func_8022404C_de(void *, void *);
+extern void Weapons_EaseOwnerHeightEffect(void *, void *);
 
 
 
@@ -67,7 +67,7 @@ void func_8022C8FC_de(struct SharedPlayer *player, void *arg1) {
     f32 y;
     f32 zero;
 
-    func_8022404C_de(player, arg1);
+    Weapons_EaseOwnerHeightEffect(player, arg1);
     zero = 0.0f;
     Nav_EaseValueToward(&player->views5E8.view72C_75.unk72C, zero, 0.25f);
     Weapons_UpdateViewAngles(player, arg1, &D_800CE7FC);

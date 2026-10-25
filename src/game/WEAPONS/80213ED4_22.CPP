@@ -71,7 +71,7 @@ extern s32 func_8025CA24_de(void *, void *);
 
 
 
-void func_802172D0_de(void *actor, void *arg1, s32 sixth) {
+void Weapons_SetLoopingSound(void *actor, void *arg1, s32 sixth) {
     CLoopingSoundData *node;
     void *fallback;
     s32 kind;

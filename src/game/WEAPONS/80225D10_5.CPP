@@ -141,7 +141,7 @@ extern s32 D_80140FF8;
 
 
 
-s32 func_802281F0_de(Root *root) {
+s32 Weapons_CheckTotalScoreWin(Root *root) {
     GameRules *initial=D_801468A0; GameRules *state;
  ObjRecAt16E0V1 *node; int i,sum,skip; unsigned char *settings;
  if(initial->totalScoreTarget==0) return 0;
@@ -167,7 +167,7 @@ s32 func_802281F0_de(Root *root) {
  return 0;
 }
 
-s32 func_802282EC_de(struct World *world) {
+s32 Weapons_CheckTeamPointWin(struct World *world) {
     GameRules *target;
     GameRules *rules;
     Settings580 *settings;

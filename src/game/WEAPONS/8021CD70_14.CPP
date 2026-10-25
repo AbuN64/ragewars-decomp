@@ -14,7 +14,7 @@ extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
 
 
 
-void func_8022404C_de(struct Object *object) {
+void Weapons_EaseOwnerHeightEffect(struct Object *object) {
     f32 level;
 
     if (object->owner != 0) {

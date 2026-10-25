@@ -5,7 +5,7 @@
 #include "COMMON/UNUSED.H"
 
 /* Published implementations use these concrete actor and tuning records. */
-void func_8022404C_de(struct Object *object);
+void Weapons_EaseOwnerHeightEffect(struct Object *object);
 void func_802233F0_de(SharedPlayer *player,
                      func_802165F8_S1 *body, SharedMovement *tuning);
 s32 Weapons_SetPlayerState(SharedPlayer *player, void *body, s32 state);

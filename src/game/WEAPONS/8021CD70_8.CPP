@@ -46,7 +46,7 @@ extern void func_80222908_de(void *, void *, ObjectState54 *);
 extern void func_80222EA4_de(void *, void *);
 extern void func_80222FE0_de(void *, void *, s32 *);
 extern void func_802292B8_de(void *);
-extern s32 func_8022ACB8_de(void *, s32, s32);
+extern s32 Weapons_GetAmmoCapacity(void *, s32, s32);
 extern void func_8022B5C0_de(void *);
 extern void func_8022B8E0_de(void *);
 extern void func_8022BD94_de(void *, void *, void *);
@@ -685,9 +685,9 @@ void func_80220ED4_de(SharedPlayer *player)
   player->views5E8.view774_115.unk774 = player->views0.view8_3.pos;
   if ((D_801462C8.flags & 8) || ((D_801462C8.counters.enabled != 0) && (player->views5D8.view5D8_9.profile->counts != 0)))
   {
-    player->views5E8.view5F4_13.ammo[0] = func_8022ACB8_de(player, 0, 0);
-    player->views5E8.view5F4_13.ammo[1] = func_8022ACB8_de(player, 1, 0);
-    player->views5E8.view5F4_13.ammo[2] = func_8022ACB8_de(player, 2, 0);
+    player->views5E8.view5F4_13.ammo[0] = Weapons_GetAmmoCapacity(player, 0, 0);
+    player->views5E8.view5F4_13.ammo[1] = Weapons_GetAmmoCapacity(player, 1, 0);
+    player->views5E8.view5F4_13.ammo[2] = Weapons_GetAmmoCapacity(player, 2, 0);
   }
   if (D_801462C8.flags & 4)
   {

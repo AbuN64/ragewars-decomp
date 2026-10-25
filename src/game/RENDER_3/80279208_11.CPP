@@ -10,7 +10,7 @@ typedef struct Owner Owner;
 
 extern void *func_802833D0_de(void *arg0);
 extern s32 func_8022B178_de(void *arg0);
-extern void func_80229554_de(void *arg0, s32 arg1, s32 arg2);
+extern void Weapons_GiveAmmoWithMessage(void *arg0, s32 arg1, s32 arg2);
 extern void Weapons_SetPlayerState(void *, void *, s32);
 
 
@@ -33,7 +33,7 @@ void func_80279A00_de(void *arg0) {
         if (((ObjectLinks1BC *)(actor))->unk_4 == 0x42D) {
             state = func_802833D0_de(actor);
             if (((IntegerState5AC *)(state))->unk_5A8 != 0 && func_8022B178_de(state) == 0) {
-                func_80229554_de(state, ((IntegerState5AC *)(state))->unk_5A4,
+                Weapons_GiveAmmoWithMessage(state, ((IntegerState5AC *)(state))->unk_5A4,
                                ((IntegerState5AC *)(state))->unk_5A8);
             }
             goto reset_state;

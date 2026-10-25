@@ -6,7 +6,7 @@
 #include "WEAPONS/80213ED4.H"
 
 #if (defined(VERSION_DE) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_ASM("span_1000", func_80229814_de);
+INCLUDE_ASM("span_1000", Weapons_ApplyStun);
 #endif
 
 #if (defined(VERSION_DE) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
@@ -36,7 +36,7 @@ extern void Weapons_SetPlayerState(SharedPlayer *, SharedPlayer *, s32);
 
 extern void func_802391AC_de(ViewRecAt54D *, s32, s32, s32, s32, s32, s32, s32);
 
-void func_80229814_de(SharedPlayer *player, f32 amount) {
+void Weapons_ApplyStun(SharedPlayer *player, f32 amount) {
     f32 stun;
 
     if (amount != 0.0f && !(75.0f <= player->views5E8.view11D8_149.stun) && !(player->views5E8.view670_31.shield > 0.0f)

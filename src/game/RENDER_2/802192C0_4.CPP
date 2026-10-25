@@ -510,7 +510,7 @@ extern f32 D_800C22A8_us, D_800C22AC_us, D_800C22B0_us;
 extern s32 D_800D2A90;
 extern char D_801468A0[];
 extern s32 func_8022C460_de(void *);
-extern s32 func_8022AC00_de(void *);
+extern s32 Weapons_GetMaxHealth(void *);
 extern void func_8028CE94_de(void *, void *, s32, CVector3, f32, f32);
 extern void func_80239194_de(void *, s32, s32);
 extern void func_8022B11C_de(void *, u16);
@@ -555,7 +555,7 @@ void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
         if (health < 0) {
             health = 0;
         }
-        step = func_8022AC00_de(player);
+        step = Weapons_GetMaxHealth(player);
         found = 0;
         for (threshold = 2; threshold < 5; threshold++) {
             step = step - step / 2;

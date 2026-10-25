@@ -153,8 +153,8 @@ struct func_80229A54_S1 {
 
 extern float D_800C2B58_de;
 
-struct World_func_80226A34_de;
-struct World_func_80226A34_de {
+struct WorldWeaponsUpdateWorldPlayers;
+struct WorldWeaponsUpdateWorldPlayers {
     char pad0[0x20];
     SharedPlayer *players;
     char pad24[0x40 - 0x24];
@@ -1814,8 +1814,8 @@ struct ViewCode80225D10;
 struct Game;
 typedef struct Game Game;
 
-struct Menu_func_80226A34_de;
-struct Menu_func_80226A34_de {
+struct MenuWeaponsUpdateWorldPlayers;
+struct MenuWeaponsUpdateWorldPlayers {
     char pad0[0xCC9];
     u8 allowed;
     char padCCA[0x1278 - 0xCCA];
@@ -1831,8 +1831,8 @@ struct Damage_func_80229FA0_de {
     int unk4;
 };
 
-struct World_func_80226A34_de;
-typedef struct World_func_80226A34_de World_func_80226A34_de;
+struct WorldWeaponsUpdateWorldPlayers;
+typedef struct WorldWeaponsUpdateWorldPlayers WorldWeaponsUpdateWorldPlayers;
 
 struct State;
 struct State {
@@ -3352,11 +3352,11 @@ typedef struct ViewState ViewState;
 struct Root;
 typedef struct Root Root;
 
-struct Menu_func_80226A34_de;
-typedef struct Menu_func_80226A34_de Menu_func_80226A34_de;
+struct MenuWeaponsUpdateWorldPlayers;
+typedef struct MenuWeaponsUpdateWorldPlayers MenuWeaponsUpdateWorldPlayers;
 
-struct Rules_func_80228FB8_de;
-typedef struct Rules_func_80228FB8_de Rules_func_80228FB8_de;
+struct RulesWeaponsDrawTintedPlayer;
+typedef struct RulesWeaponsDrawTintedPlayer RulesWeaponsDrawTintedPlayer;
 
 struct Obj_func_80229FA0_de;
 typedef struct Obj_func_80229FA0_de Obj_func_80229FA0_de;
@@ -3448,8 +3448,8 @@ struct IntegerState1230 {
     s32 unk_122C;
 };
 
-struct Rules_func_80228FB8_de;
-struct Rules_func_80228FB8_de {
+struct RulesWeaponsDrawTintedPlayer;
+struct RulesWeaponsDrawTintedPlayer {
     char pad0[0x54];
     s32 teams;
     char pad58[0x73 - 0x58];

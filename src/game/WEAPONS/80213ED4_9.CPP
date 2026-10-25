@@ -14,7 +14,7 @@ extern f32 Math_Sqrtf(f32);
 
 
 
-void func_802165F8_de(Player *player, ActorMotionState *motionState, OffsetResult *result) {
+void Weapons_ComputeTargetOffset(Player *player, ActorMotionState *motionState, OffsetResult *result) {
     Particle_SubtractVectors(&result->first, &player->pos,
                   &motionState->position);
     result->first_normalized = result->first;

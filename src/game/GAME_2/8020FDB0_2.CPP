@@ -12,7 +12,7 @@ void func_802100E0_de(void *brain) {
 
     if ((Nav_NextRandom() % 100) < 0x15) {
         do {
-            temp_v0 = func_80232ABC_de(controller->player);
+            temp_v0 = Weapons_PickRandomArmedWeapon(controller->player);
         } while (temp_v0 >= 0x10);
         ((Shared_ActorView *)controller->player)->nextWeapon = temp_v0;
         if (temp_v0 != ((Shared_ActorView *)controller->player)->selectedAction) {

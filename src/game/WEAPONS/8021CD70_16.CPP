@@ -29,7 +29,7 @@ void func_8022470C_de(void *playerContext, void *bodyContext) {
     u16 kind;
     s32 nextAnimation;
 
-    func_8022404C_de(playerContext);
+    Weapons_EaseOwnerHeightEffect(playerContext);
     Nav_EaseValueToward(&player->views5E8.view72C_75.unk72C, 0.0f, 0.25f);
     var_v0 = 1;
     if (!(player->views5E8.view718_70.crouch > D_800C29C0_de)) {

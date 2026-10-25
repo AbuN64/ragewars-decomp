@@ -60,9 +60,9 @@ extern Game_func_8042D060_de D_8014561C;
 
 extern s32 Weapons_CheckScoreLimit(World *world);
 
-extern s32 func_802281F0_de(World *world);
+extern s32 Weapons_CheckTotalScoreWin(World *world);
 
-extern s32 func_802282EC_de(World *world);
+extern s32 Weapons_CheckTeamPointWin(World *world);
 
 /* For each of the 8 occupied slots without the pending-remove flag, runs its two release callbacks. */
 
@@ -234,12 +234,12 @@ s32 Frontend_GetMatchEndReason(void) {
     }
     switch (D_8014DD98.kind) {
     case 0:
-        if (func_802282EC_de((World *)&D_80145040) != 0) {
+        if (Weapons_CheckTeamPointWin((World *)&D_80145040) != 0) {
             return MATCH_END_POINT_TARGET;
         }
         break;
     case 1:
-        if (func_802281F0_de((World *)&D_80145040) != 0) {
+        if (Weapons_CheckTotalScoreWin((World *)&D_80145040) != 0) {
             return MATCH_END_TAG_LIMIT;
         }
         break;

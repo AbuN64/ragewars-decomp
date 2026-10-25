@@ -49,7 +49,7 @@ extern void func_802761EC_de(s32, f32);
  * 0x800C6C70 = 0.017453294 (float, D_800C6C70 in this cartridge's tables)
  * 0x800C6C74 = 0.1 (float, unnamed in this cartridge's tables)
  */
-void func_80216808_de(void *, s32, f32, f32);
+void Weapons_ApplyClampedTurn(void *, s32, f32, f32);
 
 void func_802192C0_de(void *);
 
@@ -289,7 +289,7 @@ void func_802070D0_de(func_802070D0_S3 *arg0, func_802070D0_S1 *arg1) {
             arg0->unk6C = (f32) (temp_f1_6 + (temp_s2->unk10 * 0.017453294f - temp_f1_6) * 0.1f);
         }
     } else {
-        func_80216808_de(arg0, (s32) arg1, 10.0f, Weapons_GetSignedAngleToPoint(arg0, *(CVector3 *) &arg1->unk54));
+        Weapons_ApplyClampedTurn(arg0, (s32) arg1, 10.0f, Weapons_GetSignedAngleToPoint(arg0, *(CVector3 *) &arg1->unk54));
     }
     if (temp_s2->unk14.half & 4) {
         if ((temp_s2->unk14.word & 0x220000) == 0x220000) {

@@ -7,7 +7,7 @@
 #define EUP(p, t, o) (*(t *)((u8 *)(p) + (o)))
 extern char D_0024B54C_eu[], D_0022E1A8_eu[], D_00219AD8_eu[], D_0022E358_eu[], D_0021A36C_eu[], D_0022F6E0_eu[];
 extern f32 D_800C73E4;
-extern void func_8024B3A8_de(), Weapons_RequestActorState(), func_802325FC_de(), func_80220A80_de(), func_80245864_de();
+extern void func_8024B3A8_de(), Weapons_RequestActorState(), func_802325FC_de(), Weapons_UpdatePlayerCamera(), func_80245864_de();
 /* Initialises a player record: links it to itself, sets the base flags (and the extra flag when D_801462E5 is clear), fills the
    callback slots and builds the attached sub-record at 0x2E8 and the body record at 0x458, then copies the start position. */
 void Ovlgame_InitActorParts(u8 *p, void *a1, void *a2) {
@@ -46,7 +46,7 @@ void Ovlgame_InitActorParts(u8 *p, void *a1, void *a2) {
     EUP(p, u32, 0x3E8) = flags & 0xFFFEFFFF;
     Weapons_RequestActorState(sub, body, 0);
     func_802325FC_de(sub, body);
-    func_80220A80_de(p, p);
+    Weapons_UpdatePlayerCamera(p, p);
     if (EUP(p, void *, 0x5DC) != 0) {
         func_80245864_de(EUP(p, void *, 0x5DC));
     }
