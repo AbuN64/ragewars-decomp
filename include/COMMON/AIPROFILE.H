@@ -117,14 +117,12 @@ struct Player {
     s32 forceCrouch; /* 0x71C */
     f32 eyeOffset; /* 0x720 */
     f32 pitchOffset; /* 0x724 */
-    f32 state728;
-    f32 lean; /* 0x72C */
-    f32 state730;
-    f32 state734;
-    f32 state738;
-    s32 state73C;
+    f32 kickYaw; /* 0x728: Weapons_BuildPlayerViewTransform adds it to the heading */
+    f32 lean; /* 0x72C: kick roll */
+    f32 sway[3]; /* 0x730: pitch, yaw, roll sway angles */
+    f32 sideOffset; /* 0x73C: weapon side offset (x) */
     f32 baseHeight; /* 0x740 */
-    f32 verticalOffset; /* 0x744 */
+    f32 forwardOffset; /* 0x744: weapon forward offset (z) */
     CVector3 velocity; /* 0x748 */
     f32 velocityScale; /* 0x754 */
     s32 state758;

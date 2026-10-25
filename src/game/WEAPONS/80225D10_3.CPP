@@ -136,7 +136,7 @@ void func_80226A34_de(World_func_80226A34_de *world) {
 
 extern float D_800C2B70_de;
 extern f32 D_80115DEC;
-extern void func_80274098_de(void *arg0, void *arg1, void *arg2);
+extern void func_80274098_de(CQuatern *out, CQuatern *a, CQuatern *b);
 
 void Weapons_BuildPlayerOrientation(void *object, CQuatern *output)
 {
@@ -154,12 +154,12 @@ void Weapons_BuildPlayerOrientation(void *object, CQuatern *output)
     float scale;
 
     heading = player->heading;
-    roll = player->lean + player->state738;
-    pitch = player->pitchOffset + player->state730;
+    roll = player->lean + player->sway[2];
+    pitch = player->pitchOffset + player->sway[0];
     pitch -= player->state708;
     orientation = player->orientation;
     scale = D_800C2B70_de;
-    yaw = player->state728 + player->state734;
+    yaw = player->kickYaw + player->sway[1];
     roll *= scale;
 
     D_80115DEC = func_802B7130_de(roll);
@@ -190,52 +190,71 @@ void Weapons_BuildPlayerOrientation(void *object, CQuatern *output)
 INCLUDE_ASM("span_1000", Weapons_BuildPlayerOrientation);
 #endif
 
-#ifdef NON_MATCHING
 #include "TYPES.H"
+#include "COMMON/AIPROFILE.H"
 #include "COMMON/VECTOR4F.H"
-#include "FX/EXTERNS.H"
-extern f32 D_800C2B74_de, D_800C2B78_de, D_80115DEC;
-extern void func_80274098_de(void *, void *, void *), func_80274244_de(void *, void *), func_80272C60_de(void *, f32, f32, f32), func_8026F620_de(void *, void *, void *);
-void Weapons_BuildPlayerViewTransform(SharedPlayer *player, f32 out[4][4])
+extern f32 D_80115DEC;
+extern void func_80274098_de(CQuatern *out, CQuatern *a, CQuatern *b);
+extern void func_80274244_de(CQuatern *rotation, f32 matrix[4][4]);
+extern void func_80272C60_de(f32 matrix[4][4], f32 x, f32 y, f32 z);
+extern void func_8026F620_de(f32 out[4][4], f32 a[4][4], f32 b[4][4]);
+/* Builds a player view matrix: the eye height (base height plus camera offset less the crouch depth,
+   at least 40.96) and the view pitch, yaw and roll (each with its kick and sway, the pitch less the
+   head bob) become one half-angle quaternion per axis, combined roll * (pitch * yaw), then the
+   matrix is rotation * eye-height lift * body orientation * translation to the player position plus
+   its side and forward weapon offsets. */
+void Weapons_BuildPlayerViewTransform(Player *player, f32 out[4][4])
 {
-    f32 qx[4], qy[4], qz[4];
-    Shared_Quad rotation;
-    f32 q1[4], q2[4];
-    f32 m1[4][4], m2[4][4], m3[4][4], m4[4][4], m5[4][4], m6[4][4];
-    f32 height, pitch, yaw, roll, x, y, z, scale, baseYaw, angle;
-    height = player->views5E8.view740_83.unk740 + player->views5E8.view780_116.unk780 - player->views5E8.view718_70.crouch;
-    pitch = player->views5E8.view724_72.pitch + player->views5E8.view730_78.unk730[0] - player->views5E8.view704_67.viewPitch;
-    yaw = player->views5E8.view728_73.unk728 + player->views5E8.view730_78.unk730[1];
-    roll = player->views5E8.view72C_75.unk72C + player->views5E8.view730_78.unk730[2];
-    x = player->views0.view8_4.position.x + player->views5E8.view73C_80.unk73C;
-    z = player->views0.view8_4.position.z + player->views5E8.view744_85.unk744;
-    y = player->views0.view8_4.position.y;
-    baseYaw = player->views1C.view6C_5.heading;
-    if (height < D_800C2B74_de) height = D_800C2B74_de;
-    scale = D_800C2B78_de;
-    angle = roll * scale;
-    rotation = player->views1C.view5C_6.unk5C;
-    D_80115DEC = func_802B7130_de(angle);
-    qz[0] = 0; qz[1] = 0; qz[2] = D_80115DEC;
-    qz[3] = func_802B6560_de(angle);
-    angle = pitch * scale;
-    D_80115DEC = func_802B7130_de(angle);
-    qx[0] = D_80115DEC; qx[1] = 0; qx[2] = 0;
-    qx[3] = func_802B6560_de(angle);
-    angle = (baseYaw + yaw) * scale;
-    D_80115DEC = func_802B7130_de(angle);
-    qy[0] = 0; qy[1] = D_80115DEC; qy[2] = 0;
-    qy[3] = func_802B6560_de(angle);
-    func_80274098_de(q1, qx, qy);
-    func_80274098_de(q2, qz, q1);
-    func_80274244_de(q2, m1);
-    func_80272C60_de(m2, 0.0f, height, 0.0f);
-    func_80274244_de(rotation.f, m3);
-    func_8026F620_de(m5, m1, m2);
-    func_8026F620_de(m6, m5, m3);
-    func_80272C60_de(m4, x, y, z);
-    func_8026F620_de(out, m6, m4);
+    CQuatern pitchRotation;
+    CQuatern yawRotation;
+    CQuatern rollRotation;
+    CQuatern orientation;
+    CQuatern pitchYaw;
+    CQuatern rotation;
+    f32 viewRotation[4][4];
+    f32 lift[4][4];
+    f32 bodyRotation[4][4];
+    f32 placement[4][4];
+    f32 lifted[4][4];
+    f32 oriented[4][4];
+    f32 eyeHeight, height, pitch, yaw, roll, x, y, z, scale, heading;
+    f32 rollAngle, pitchAngle, yawAngle;
+    eyeHeight = player->baseHeight + player->cameraOffset - player->crouchDepth;
+    pitch = player->pitchOffset + player->sway[0] - player->state708;
+    yaw = player->kickYaw + player->sway[1];
+    roll = player->lean + player->sway[2];
+    x = player->pos.x + player->sideOffset;
+    z = player->pos.z + player->forwardOffset;
+    heading = player->heading;
+    y = player->pos.y;
+    height = (eyeHeight < 40.96f) ? 40.96f : eyeHeight;
+    scale = 0.5f;
+    rollAngle = roll * scale;
+    orientation = player->orientation;
+    D_80115DEC = func_802B7130_de(rollAngle);
+    rollRotation.x = 0.0f;
+    rollRotation.y = 0.0f;
+    rollRotation.z = D_80115DEC;
+    rollRotation.w = func_802B6560_de(rollAngle);
+    pitchAngle = pitch * scale;
+    D_80115DEC = func_802B7130_de(pitchAngle);
+    pitchRotation.x = D_80115DEC;
+    pitchRotation.y = 0.0f;
+    pitchRotation.z = 0.0f;
+    pitchRotation.w = func_802B6560_de(pitchAngle);
+    yawAngle = (heading + yaw) * scale;
+    D_80115DEC = func_802B7130_de(yawAngle);
+    yawRotation.x = 0.0f;
+    yawRotation.y = D_80115DEC;
+    yawRotation.z = 0.0f;
+    yawRotation.w = func_802B6560_de(yawAngle);
+    func_80274098_de(&pitchYaw, &pitchRotation, &yawRotation);
+    func_80274098_de(&rotation, &rollRotation, &pitchYaw);
+    func_80274244_de(&rotation, viewRotation);
+    func_80272C60_de(lift, 0.0f, height, 0.0f);
+    func_80274244_de(&orientation, bodyRotation);
+    func_8026F620_de(lifted, viewRotation, lift);
+    func_8026F620_de(oriented, lifted, bodyRotation);
+    func_80272C60_de(placement, x, y, z);
+    func_8026F620_de(out, oriented, placement);
 }
-#else
-INCLUDE_ASM("span_1000", Weapons_BuildPlayerViewTransform);
-#endif

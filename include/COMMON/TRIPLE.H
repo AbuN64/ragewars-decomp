@@ -668,8 +668,6 @@ extern float D_800C2B40_de;
 extern float D_800C2B44_de;
 extern float D_800C2B4C_de;
 extern float D_800C2B70_de;
-extern float D_800C2B74_de;
-extern float D_800C2B78_de;
 extern float D_800C2BE4_de;
 extern float D_800C2BFC_de;
 extern float D_800C2C04_de;
