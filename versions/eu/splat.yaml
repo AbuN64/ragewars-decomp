@@ -3434,7 +3434,7 @@ segments:
       - [0xC3BB8, rodata, data_800C/D_8022B5C0_C8A04]
       - [0xC3BBC, rodata, data_800C/D_8022B730_C8A08]
       - [0xC3BC0, rodata, data_800C/D_8022B7F8_C8A0C]
-      - [0xC3BC4, rodata, data_800C/D_8022BE20_C8A10]
+      - [0xC3BC4, rodata, data_800C/literals_Text_ApplyDamageOverTime]
       - [0xC3BCC, rodata, data_800C/D_8022C080_C8A18]
       - [0xC3BD0, rodata, data_800C/D_8022C1E8_C8A1C]
       - [0xC3BD4, rodata, data_800C/D_8022C2B4_C8A20]

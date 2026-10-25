@@ -2982,3 +2982,4 @@ literals_Math_ResetFrameHeap = 0x800CAF00; // rom:0xCBB00 size:0x8
 literals_Team_UpdateDraftPanel = 0x800C7324; // rom:0xC7F24 size:0x14
 literals_Menu_GetTrackStartAngles = 0x800E0CA8; // rom:0xE18A8 size:0x4
 literals_NaturalLogDouble = 0x800CA868; // rom:0xCB468 size:0x68
+literals_Text_ApplyDamageOverTime = 0x800C7E10; // rom:0xC8A10 size:0x8

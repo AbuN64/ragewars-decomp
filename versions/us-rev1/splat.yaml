@@ -3519,7 +3519,7 @@ segments:
       - [0xC8A04, rodata, data_800C/D_blob_3079741d53ff9d166c3c]
       - [0xC8A08, rodata, data_800C/D_blob_5060bef3450c0be951da]
       - [0xC8A0C, rodata, data_800C/D_blob_c770e7e451ac7575ce70]
-      - [0xC8A10, rodata, data_800C/D_blob_23ce3c0757038cb68c21]
+      - [0xC8A10, rodata, data_800C/literals_Text_ApplyDamageOverTime]
       - [0xC8A18, rodata, data_800C/D_blob_f5834a9747c6329a6a24]
       - [0xC8A1C, rodata, data_800C/D_blob_a869e2639354d8294ed4]
       - [0xC8A20, rodata, data_800C/D_blob_1fb957a80f87511d0237]

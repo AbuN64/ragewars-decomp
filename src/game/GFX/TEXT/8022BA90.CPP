@@ -165,23 +165,28 @@ void func_8022BD94_de(void *arg0, void *source, s32 arg2) {
     }
 }
 
-#ifdef NON_MATCHING
 extern f32 D_800D2988;
 extern void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3, s32 kind);
-
 /* Damage over time while the source's effect flag 0x1000 is set (func_8022BD94_de): advances the player's
  * effect timer by the frame step; past 300 it marks the player and deals max(1, (150 - health / 256) / 15)
  * points (8.8 fixed) of kind 0x1F, then winds the timer back by 22.5 so the next tick follows sooner.
- * 43/47 words: only the float registers differ. The ROM keeps the sum in $f2 (untied from the timer load,
- * limit in $f0); cc1 ties it to the load ($f0, limit $f1). Probes show $f2 needs a third float value live
- * in this block when the sum is born (an earlier live set of `elapsed`, or the frame step still live) that
- * the final code no longer holds; no honest shape found (REV1-ONE-65 RESULT.md). */
+ * HONEST-FORM-OPEN: the step check stores the same value in both arms. jump2 cross-jumps the arms and
+ * deletes the test, but its reads of `previous` and `step` keep both live past the sum, which puts the
+ * sum in $f2 as in the ROM (REV1-ONE-65B RESULT.md). */
 void Text_ApplyDamageOverTime(Shared_ActorView *player, void *source) {
-    f32 elapsed = player->recoveryTime + D_800D2988;
     s32 missing;
     s32 amount;
-
-    player->recoveryTime = elapsed;
+    f32 elapsed;
+    f32 previous;
+    f32 step;
+    previous = player->recoveryTime;
+    step = D_800D2988;
+    elapsed = previous + step;
+    if (elapsed - previous != step) {
+        player->recoveryTime = elapsed;
+    } else {
+        player->recoveryTime = elapsed;
+    }
     if (300.0f < elapsed) {
         missing = 150 - (player->health >> 8);
         amount = 1;
@@ -196,6 +201,3 @@ void Text_ApplyDamageOverTime(Shared_ActorView *player, void *source) {
         player->recoveryTime -= 22.5f;
     }
 }
-#else
-INCLUDE_ASM("span_1000", Text_ApplyDamageOverTime);
-#endif
