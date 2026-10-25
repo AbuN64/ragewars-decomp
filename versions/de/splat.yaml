@@ -4705,7 +4705,7 @@ segments:
       - [0xDF0F1, data, data_800C/rodata_unresolved_800DE4F1]
       - [0xDF0F4, rodata, data_800C/literals_func_80441EB0_de]
       - [0xDF0F8, rodata, data_800C/literals_func_80442214_de]
-      - [0xDF28C, rodata, data_800C/literals_func_80442A58_de]
+      - [0xDF28C, rodata, data_800C/literals_Items_GetListContext]
       - [0xDF294, data, data_800C/rodata_unresolved_800DE694]
       - [0xDF298, rodata, data_800C/literals_func_80442EC0_de]
       - [0xDF2C8, rodata, data_800C/literals_func_80442FB0_de]

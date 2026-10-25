@@ -66,7 +66,7 @@ extern char D_800E1E24_de[];
 
 /* Steps a pointer back 0x554 bytes: callers pass the pointer held at offset 0x44 of an object and
    get back the start of the structure whose member at offset 0x554 it addresses. */
-void *func_80442A58_de(s8 *member) {
+void *Items_GetListContext(s8 *member) {
     return member - 0x554;
 }
 
@@ -107,7 +107,7 @@ func_8043F114_de
    tests the word at 0x1CC. */
 
 
-void func_80442B34_de(struct Object1C8 *object) {
+void Items_StopMenuPulse(struct Object1C8 *object) {
     object->second = 0;
     object->first = 0;
 }
@@ -116,7 +116,7 @@ void func_80442B34_de(struct Object1C8 *object) {
    at 0x1C8; func_80442B34_de clears both. */
 
 
-void func_80442B40_de(struct Object1C8 *object) {
+void Items_StartMenuPulse(struct Object1C8 *object) {
     if (object->second == 0) {
         object->second = 1;
         object->first = 0;

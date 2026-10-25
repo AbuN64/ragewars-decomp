@@ -221,7 +221,7 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
 }
 
 
-extern void *func_80442A58_de(s8 *);
+extern void *Items_GetListContext(s8 *);
 extern void Pak_MeasureMenuText(TextBoundsText *, CItemInfo *);
 extern u32 D_800CD730;
 extern s32 D_800E1E20;
@@ -235,7 +235,7 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
     s32 i;
     f32 centerX, centerY, top, bottom, alpha;
 
-    data = func_80442A58_de(member);
+    data = Items_GetListContext(member);
     bounds.left = 1024;
     bounds.right = -1024;
     bounds.m_Top = 1024;

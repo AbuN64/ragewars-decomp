@@ -242,15 +242,14 @@ void Pak_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unused
     Render_FlushModelBatch();
 }
 
-#ifdef NON_MATCHING
-#define MP_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
-extern u16 D_800E1F22[], D_800E1F26[], D_800E1F2A[];
-extern u8 D_800E1F2F[], D_800E1F33[], D_800E1F37[];
-extern void *func_80442A58_de(void *);
-extern void func_80442B34_de(void *);
-extern void func_80442B40_de(void *);
+#include "MENU/OBJECT1C8.H"
+#include "MENU/MENU_BOX.H"
+extern void *Items_GetListContext(s8 *member);
+extern void Items_StopMenuPulse(struct Object1C8 *object);
+extern void Items_StartMenuPulse(struct Object1C8 *object);
 typedef struct MenuBuildState MenuBuildState;
 typedef struct MenuBuildEntry MenuBuildEntry;
+/* One row of a menu definition's item table (0x24 bytes). */
 typedef struct MenuBuildItem {
     s16 type;
     u16 reserved02;
@@ -259,19 +258,22 @@ typedef struct MenuBuildItem {
     u8 red, green, blue, alpha;
     s32 resource;
     u8 reserved14[8];
-    void (*initialize)(MenuBuildEntry *, MenuBuildState *, struct func_8025E5B0_S1 *);
+    void (*initialize)(MenuBuildEntry *, MenuBuildState *, MessageList *);
     u8 reserved20[4];
 } MenuBuildItem;
+/* The definition a menu is built from: its item table and count, an optional setup callback and its
+   screen position (unit view of struct Dialog). */
 typedef struct MenuBuildDefinition {
     MenuBuildItem *items;
     s16 count;
     u16 reserved06;
-    void (*initialize)(MenuBuildState *, struct func_8025E5B0_S1 *);
+    void (*initialize)(MenuBuildState *, MessageList *);
     u8 reserved0C[12];
     s16 x, y, kind;
     u16 reserved1E;
     s32 value;
 } MenuBuildDefinition;
+/* A live menu entry built from one item (0x28 bytes); `extra` points at its private block. */
 struct MenuBuildEntry {
     s32 index;
     s16 type;
@@ -285,11 +287,8 @@ struct MenuBuildEntry {
     u8 *extra;
     MenuBuildState *menu;
 };
-typedef struct MenuBuildStyle {
-    u16 first, second, third, reserved06;
-    u16 offsetX, offsetY;
-    u8 red, green, blue, alpha;
-} MenuBuildStyle;
+/* The menu block: this header, then `count` entries, then the private blocks of the entries that
+   need one. */
 struct MenuBuildState {
     s16 x, y, kind;
     u16 reserved06;
@@ -298,20 +297,23 @@ struct MenuBuildState {
     s32 count;
     MenuBuildDefinition *definition;
     s32 value18, value1C;
-    u8 *input;
+    StateRecAtBCV1 *input;
     s32 value24;
     u16 state, ownerSlot;
     s32 value2C, value30, value34, value38, value3C;
     void *context;
-    struct func_8025E5B0_S1 *owner;
-    MenuBuildStyle styles[2][8];
+    MessageList *owner;
+    Vtx_t vertices[2][8];
     u8 reserved148[0x90];
 };
+/* Private block size of an item: type 3 items own 0x480 bytes (inline copy of func_80442CD8_de). */
 static inline s32 menuItemExtraSize(MenuBuildItem *definition) {
     s32 size = 0;
     if (definition->type == 3) size = 0x480;
     return size;
 }
+/* Fills one entry from its item and hands it the next private block (inline copy of
+   func_80442D10_de). */
 static inline void initializeMenuEntry(MenuBuildEntry *entry, MenuBuildItem *definition, s32 index, MenuBuildState *menu, u8 **extra) {
     entry->index = index;
     entry->type = definition->type;
@@ -328,30 +330,31 @@ static inline void initializeMenuEntry(MenuBuildEntry *entry, MenuBuildItem *def
     entry->menu = menu;
     if (menuItemExtraSize(definition) != 0) {
         entry->extra = *extra;
-        if (definition->type == 3) MP_FIELD(*extra, s32, 0x478) = 1;
+        if (definition->type == 3) ((struct ObjectRecAt478 *)*extra)->flag = 1;
         *extra += menuItemExtraSize(definition);
     }
 }
-static inline void prepareMenuEntryStorage(u8 **extra, MenuBuildState *menu, MenuBuildDefinition *definition) {
-    *extra = (u8 *)(menu + 1);
-    *extra += definition->count * sizeof(MenuBuildEntry);
-}
-/* 3/195 aligned edits; remaining: entry-loop index and cursor-address scheduling. */
-void Pak_InitializeMenu(u8 *memory, void **allocation, MenuBuildDefinition *definition, s32 value18, s32 value1C, u8 *input, s32 value24, struct func_8025E5B0_S1 *owner) {
+/* Builds a menu in MENU's block from DEFINITION: copies the header, builds one entry per item with
+   the private blocks packed after the entry array, stores the arguments, resets the eight highlight
+   vertices of both banks from the default corner table, clears the input words, runs the definition's setup
+   callback and then the setup callback of every entry whose item asks for one (flag 0x4000000). */
+void Pak_InitializeMenu(MenuBuildState *menu, void **allocation, MenuBuildDefinition *definition, s32 value18, s32 value1C, StateRecAtBCV1 *input, s32 value24, MessageList *owner) {
     u8 *extra;
-    MenuBuildState *menu = (MenuBuildState *)memory;
     MenuBuildEntry *entry;
     s32 i, bank;
-    u8 *styleRecord;
     menu->x = definition->x;
     menu->y = definition->y;
     menu->kind = definition->kind;
     menu->allocation = allocation;
     menu->entries = (MenuBuildEntry *)(menu + 1);
     menu->count = definition->count;
-    prepareMenuEntryStorage(&extra, menu, definition);
-    for (i = 0; i < definition->count; i++) {
-        initializeMenuEntry(&menu->entries[i], &definition->items[i], i, menu, &extra);
+    extra = (u8 *)(menu + 1);
+    extra += definition->count * sizeof(MenuBuildEntry);
+    i = 0;
+    if (definition->count > 0) {
+        do {
+            initializeMenuEntry(&menu->entries[i], &definition->items[i], i, menu, &extra);
+        } while (++i < definition->count);
     }
     menu->definition = definition;
     menu->value18 = value18;
@@ -359,33 +362,32 @@ void Pak_InitializeMenu(u8 *memory, void **allocation, MenuBuildDefinition *defi
     menu->input = input;
     menu->value24 = value24;
     menu->state = 0;
-    menu->ownerSlot = owner->unk14;
+    menu->ownerSlot = owner->rotation;
     menu->value2C = 0;
     menu->value30 = 0;
     menu->value34 = 0;
     menu->value38 = 1;
     menu->value3C = 0;
-    menu->context = func_80442A58_de(owner);
+    menu->context = Items_GetListContext((s8 *)owner);
     menu->owner = owner;
     for (bank = 0; bank < 2; bank++) {
         for (i = 0; i < 8; i++) {
-            styleRecord = (u8 *)menu + (bank * 0x80 + i * 0x10);
-            MP_FIELD(styleRecord, u16, 0x48) = D_800E1F22[i * 12];
-            MP_FIELD(styleRecord, u16, 0x4A) = D_800E1F26[i * 12];
-            MP_FIELD(styleRecord, u16, 0x4C) = D_800E1F2A[i * 12];
-            MP_FIELD(styleRecord, u8, 0x54) = D_800E1F2F[i * 0x18];
-            MP_FIELD(styleRecord, u8, 0x55) = D_800E1F33[i * 0x18];
-            MP_FIELD(styleRecord, u8, 0x56) = D_800E1F37[i * 0x18];
-            MP_FIELD(styleRecord, u8, 0x57) = 0xFF;
-            MP_FIELD(styleRecord, u16, 0x50) = 0;
-            MP_FIELD(styleRecord, u16, 0x52) = 0;
+            menu->vertices[bank][i].ob[0] = D_800E1F20[i].x;
+            menu->vertices[bank][i].ob[1] = D_800E1F20[i].y;
+            menu->vertices[bank][i].ob[2] = D_800E1F20[i].z;
+            menu->vertices[bank][i].cn[0] = D_800E1F20[i].red;
+            menu->vertices[bank][i].cn[1] = D_800E1F20[i].green;
+            menu->vertices[bank][i].cn[2] = D_800E1F20[i].blue;
+            menu->vertices[bank][i].cn[3] = 0xFF;
+            menu->vertices[bank][i].tc[0] = 0;
+            menu->vertices[bank][i].tc[1] = 0;
         }
     }
-    MP_FIELD(input, s32, 0xB0) = 0;
-    MP_FIELD(input, s32, 0xB4) = 0;
-    MP_FIELD(input, s32, 0xBC) = 0;
-    func_80442B34_de(menu);
-    func_80442B40_de(menu);
+    input->field_B0 = 0;
+    input->field_B4 = 0;
+    input->field_BC = 0;
+    Items_StopMenuPulse((struct Object1C8 *)menu);
+    Items_StartMenuPulse((struct Object1C8 *)menu);
     if (definition->initialize != 0) definition->initialize(menu, owner);
     i = menu->count;
     entry = menu->entries;
@@ -396,7 +398,3 @@ void Pak_InitializeMenu(u8 *memory, void **allocation, MenuBuildDefinition *defi
         entry++;
     }
 }
-
-#else
-INCLUDE_ASM("ovl_80400000", Pak_InitializeMenu);
-#endif

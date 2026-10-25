@@ -26,7 +26,7 @@ u32 func_80265350_de(void);
 int func_802934F8_de(void);
 u8 *func_8043F290(TextBoundsText *);
 f32 Pak_MeasureLine(u8 *, f32, f32);
-void *func_80442A58_de(s8 *);
+void *Items_GetListContext(s8 *);
 extern s32 D_800E28D0;
 extern f32 D_800DE448;
 extern f32 D_800E247C;
@@ -65,7 +65,7 @@ void Pak_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
     s32 count, width;
     f32 size, w, boxW, boxH, sx, sy, x, y;
 
-    data = func_80442A58_de(text->descriptor->unk_44);
+    data = Items_GetListContext(text->descriptor->unk_44);
     metrics->m_ScaleY = D_800DE428;
     metrics->m_ScaleX = D_800DE428;
     switch (text->mode) {
