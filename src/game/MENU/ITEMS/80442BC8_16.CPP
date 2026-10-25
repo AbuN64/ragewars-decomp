@@ -16,7 +16,7 @@ extern char D_80145040[];
 extern void Weapons_GetPlayerIndex(void *, struct OwnerRecAt698 *);
 extern void Pak_OpenDialog(void *, void *, struct OwnerRecAt698 *, s32, s32);
 
-s32 func_80443694_de(void *unused, struct HolderRecAt1CV1 *holder) {
+s32 Items_OpenPlayerDialog(void *unused, struct HolderRecAt1CV1 *holder) {
     struct OwnerRecAt698 *owner = holder->owner;
 
     Weapons_GetPlayerIndex(D_80145040, owner);
