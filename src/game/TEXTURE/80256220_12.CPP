@@ -67,7 +67,7 @@ extern AudioWork *D_80107E28[3];
 extern s16 *D_80107E20[2];
 extern u32 D_801076D0[10], D_801076A8[10], D_80107EA8[60];
 extern u8 D_801076F8[], D_800E5400[0x2800];
-extern u8 D_800D8C10[0xD0], D_800DB200[0x1000], D_800DC830_de[0x800];
+extern u8 rspbootTextStart[0xD0], D_800DB200[0x1000], D_800DC830_de[0x800];
 extern u8 D_800D8CE0[];
 extern char D_00256E6C, D_00256C90;
 s32 *func_80256E6C_de(s32 **);
@@ -106,7 +106,7 @@ void Texture_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioIniti
         D_80107E28[i]->queue = &D_80107E80;
         D_80107E28[i]->message = D_80107E28[i];
         D_80107E28[i]->task.type = 2;
-        D_80107E28[i]->task.boot = D_800D8C10; D_80107E28[i]->task.bootSize = (u32)D_800D8CE0 - (u32)D_800D8C10;
+        D_80107E28[i]->task.boot = rspbootTextStart; D_80107E28[i]->task.bootSize = (u32)D_800D8CE0 - (u32)rspbootTextStart;
         D_80107E28[i]->task.flags = 0;
         D_80107E28[i]->task.code = D_800DB200; D_80107E28[i]->task.codeSize = sizeof(D_800DB200);
         D_80107E28[i]->task.codeData = D_800DC830_de; D_80107E28[i]->task.codeDataSize = sizeof(D_800DC830_de);

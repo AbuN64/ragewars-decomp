@@ -41,7 +41,7 @@ extern void func_80256FC0_de(Work56EC8 *arg0);
 
 extern void *func_802B3A44_de(void *arg0, s32 *arg1, s32 arg2, s16 arg3);
 
-extern void func_8028FD4C_de(void *arg0, void *arg1);
+extern void Render_SendSchedulerTask(void *arg0, void *arg1);
 
 extern void func_802B7400_de(void *arg0, s32 arg1);
 
@@ -110,7 +110,7 @@ s32 func_80256EA8_de(Work56EC8 *arg0, u32 unused)
     arg0->base = D_80107E20[D_800CB708];
     arg0->offset = ((((s32) item) - ((s32) D_80107E20[D_800CB708])) >> 3) << 3;
     osWritebackDCacheAll();
-    func_8028FD4C_de(&D_80142928, arg0->payload);
+    Render_SendSchedulerTask(&D_80142928, arg0->payload);
     D_800CB708 ^= 1;
     func_8025E23C_de();
     func_802BB2A0_de(&D_80107E80, &event, 1);

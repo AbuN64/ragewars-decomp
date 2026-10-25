@@ -283,12 +283,12 @@ f32 Render_BeginFrameDisplayList(void *world) {
 INCLUDE_ASM("span_1000", Render_BeginFrameDisplayList);
 #endif
 
-/* rspboot text (D_800D8C10, 0xD0 bytes): it ends where the first graphics microcode's text starts (D_800D8CE0). */
-extern u64 D_800D8C10[], rspbootTextEnd[], D_800D8CE0[], D_800DC020_de[], D_800DA070[], D_800DC440[], D_800E4000[];
+/* rspboot text is 0xD0 bytes: it ends where the first graphics microcode text (D_800D8CE0) starts. */
+extern u64 rspbootTextStart[], rspbootTextEnd[], D_800D8CE0[], D_800DC020_de[], D_800DA070[], D_800DC440[], D_800E4000[];
 extern u32 D_800D2978, D_800CD730;
 extern s32 D_800D297C;
 extern void osWritebackDCacheAll(void);
-extern void func_8028FD4C_de(void *, OSScTask_s *);
+extern void Render_SendSchedulerTask(void *, OSScTask_s *);
 /* Fills the frame's graphics task (and the second one when the frame is dual), hands them to the scheduler,
    then advances the ring and gives the next frame the other pair of command buffers. */
 void Render_SubmitFrameTasks(Display *display, Frame *frame)
@@ -302,9 +302,9 @@ void Render_SubmitFrameTasks(Display *display, Frame *frame)
         bytes = frame->commandBytes;
         size = D_8014D424;
         task->list.type = 1;
-        task->list.ucode_boot = D_800D8C10;
+        task->list.ucode_boot = rspbootTextStart;
         base = D_8014D428;
-        task->list.ucode_boot_size = (u8 *)rspbootTextEnd - (u8 *)D_800D8C10;
+        task->list.ucode_boot_size = (u8 *)rspbootTextEnd - (u8 *)rspbootTextStart;
         task->list.ucode_size = 0x1000;
         task->list.ucode_data_size = 0x800;
         task->list.yield_data_ptr = D_800E4000;
@@ -331,9 +331,9 @@ void Render_SubmitFrameTasks(Display *display, Frame *frame)
         bytes = frame->secondCommandBytes;
         size = D_8014D424;
         task->list.type = 1;
-        task->list.ucode_boot = D_800D8C10;
+        task->list.ucode_boot = rspbootTextStart;
         base = D_8014D428;
-        task->list.ucode_boot_size = (u8 *)rspbootTextEnd - (u8 *)D_800D8C10;
+        task->list.ucode_boot_size = (u8 *)rspbootTextEnd - (u8 *)rspbootTextStart;
         task->list.ucode_size = 0x1000;
         task->list.ucode_data_size = 0x800;
         task->list.yield_data_ptr = D_800E4000;
@@ -353,8 +353,8 @@ void Render_SubmitFrameTasks(Display *display, Frame *frame)
         task->framebuffer = frame->colorImage;
     }
     osWritebackDCacheAll();
-    func_8028FD4C_de(&D_80142928, &frame->task);
-    if (frame->dual) func_8028FD4C_de(&D_80142928, &frame->secondTask);
+    Render_SendSchedulerTask(&D_80142928, &frame->task);
+    if (frame->dual) Render_SendSchedulerTask(&D_80142928, &frame->secondTask);
     D_800D2978++;
     D_800CD730++;
     D_800D297C ^= 1;
