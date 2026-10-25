@@ -14,6 +14,9 @@ struct Packed {
 
 struct Packed;
 typedef struct Packed Packed;
+/* Cached path-node plane normals (func_80272018_de edge cross products). */
+extern CVector3 D_80115E10;
+extern CVector3 D_80115E20;
 
 struct CGameRegion_t;
 struct CGameRegion_t {

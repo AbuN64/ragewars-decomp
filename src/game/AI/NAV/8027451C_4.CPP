@@ -19,13 +19,11 @@ extern float D_800C49F4_de;
 
 extern float D_800C49F8_de;
 
-extern int D_80115E20;
 
 extern int D_800CD3E8;
 
 extern int D_800CD3EC;
 extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
-extern CVector3 D_80115E10;
 
 
 static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
@@ -126,14 +124,14 @@ CVector3 *func_80275BC8_de(CVector3 *out, Node75 *node) {
 
 CVector3 *func_80275C94_de(CVector3 *out, Node75 *node) {
     if (node == 0) {
-        ((CVector3 *)&D_80115E20)->x = 0;
-        ((CVector3 *)&D_80115E20)->z = 0;
-        ((CVector3 *)&D_80115E20)->y = D_800C49F4_de;
+        D_80115E20.x = 0;
+        D_80115E20.z = 0;
+        D_80115E20.y = D_800C49F4_de;
     } else if ((int)node != D_800CD3EC) {
-        cross_edges((CVector3 *)&D_80115E20, node);
-        func_8027207C_de((CVector3 *)&D_80115E20);
+        cross_edges(&D_80115E20, node);
+        func_8027207C_de(&D_80115E20);
     }
-    *out = *(CVector3 *)&D_80115E20;
+    *out = D_80115E20;
     D_800CD3EC = (int)node;
     return out;
 }
