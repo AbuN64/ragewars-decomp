@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LEVEL_GOAL.H"
 #include "FRONTEND/JOIN_PLAYER_NAMES.H"
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -76,7 +77,7 @@ s32 func_8042E460_de(u8 *request) {
 void Frontend_SetupRandomTeams(void) {
     s32 characters[4];
     s32 arenas[4];
-    s32 *gameMode;
+    LevelGoal *levelGoal;
     s32 i, firstIndex, secondIndex, swappedCharacter;
     s32 playerCount, unlockedCount;
     Shared_PlayerSettingsRecord *player;
@@ -139,7 +140,7 @@ void Frontend_SetupRandomTeams(void) {
     game->controllerMode = 0;
     game->laps = 0;
     game->players = 0;
-    gameMode = &D_8014DD98;
-    gameMode[0] = 2;
-    gameMode[1] = arenas[func_802744D4_de() % 4];
+    levelGoal = &D_8014DD98;
+    levelGoal->kind = 2;
+    levelGoal->goal = arenas[func_802744D4_de() % 4];
 }

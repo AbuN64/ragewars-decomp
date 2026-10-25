@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LEVEL_GOAL.H"
 #include "RENDER_2/8025DE50_5.H"
 #include "SCENE/802508E0_13.H"
 #include "COMMON/MENU_SCREEN_SETUP.H"
@@ -410,7 +411,7 @@ s32 func_8042BAD0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 #include "FRONTEND/RESULTS_SETUP_TEXT.H"
 #include "COMMON/SETTINGSRECAT24.H"
 extern func_8042CE54_S1 *D_800E53C0;
-extern s32 D_8015402C, D_8014DD98;
+extern s32 D_8015402C;
 extern s8 D_80102B0D[], D_800FEB0E[];
 extern void func_8043C210_de(s32 *, s32, s32, s32, s32);
 extern void func_8043C278_de(s32 *);
@@ -518,10 +519,10 @@ s32 Frontend_OpenResultsScreen(void *root) {
         func_8040E950_de(func_8040EC30_de(root, 0x238 + RESULTS_MENU_SHIFT), 1);
     }
     item = func_8040EC30_de(D_800E53C0->unkE0, RESULTS_HEADING1);
-    if (D_8014DD98 == 0) item->text = resultsFirstHeading();
+    if (D_8014DD98.kind == 0) item->text = resultsFirstHeading();
     else item->text = resultsSecondHeading();
     item = func_8040EC30_de(D_800E53C0->unkE0, RESULTS_HEADING2);
-    switch (D_8014DD98) {
+    switch (D_8014DD98.kind) {
     case 3: item->text = resultsFirstHeading(); break;
     case 0: item->text = resultsFourthHeading(); break;
     case 1:
@@ -546,7 +547,7 @@ s32 Frontend_OpenResultsScreen(void *root) {
 extern func_8042CE54_S1 *D_800E53C0;
 extern ResourceBank D_800E12D2[];
 extern struct RowRecAt54 D_800E3A58[];
-extern s32 D_800E01B0_de[],D_800FF140_de[],D_800FEAE0[],D_8014DD98;
+extern s32 D_800E01B0_de[],D_800FF140_de[],D_800FEAE0[];
 extern s32 func_8041F140_de(s32);
 extern char *func_802A0494_de(char *);
 extern char *func_802A025C_de(char *,char *);
@@ -605,7 +606,7 @@ void Frontend_FillResultRows(void) {
         func_802A0C08_de(D_800E53C0->scoreText[row], resultsNumberFormat(), record->score + record->total);
         *&widget->text = D_800E53C0->scoreText[row];
 
-        if (D_8014DD98 == 0) {
+        if (D_8014DD98.kind == 0) {
             func_8040E8D8_de(func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[12]), 0);
             func_8042D304_de(player, row, RESULTS_RANK_GROUP);
         } else {
@@ -619,7 +620,7 @@ void Frontend_FillResultRows(void) {
             widget->text = D_800E53C0->ratioText[row];
         }
 
-        if (D_8014DD98 == 3) {
+        if (D_8014DD98.kind == 3) {
             func_8040E8D8_de(func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[14]), 0);
             func_8042D304_de(player, row, RESULTS_SECONDARY_GROUP);
         } else {
@@ -627,7 +628,7 @@ void Frontend_FillResultRows(void) {
             widget->alpha = 0xAF;
             func_8040E8D8_de(widget, 1);
             pending = widget;
-            switch (D_8014DD98) {
+            switch (D_8014DD98.kind) {
             case 0:
                 func_802A0C08_de(D_800E53C0->valueText[row], resultsNumberFormat(), record->other);
                 break;
@@ -666,14 +667,12 @@ void Frontend_FillResultRows(void) {
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 
-extern s32 D_8014DD98;
 extern s32 func_8042D060_de(void);
 
 /* The game settings record. */
 static inline Shared_Game *resultsGame(void) { return &D_801462C8; }
 
-typedef struct { s32 kind; s32 goal; } LevelGoalT;
-static inline LevelGoalT *levelGoal(void) { return (LevelGoalT *)&D_8014DD98; }
+static inline LevelGoal *levelGoal(void) { return &D_8014DD98; }
 static inline CGameStatus *gameStatus(void) { return &resultsGame()->counters; }
 static inline s32 resultsTeamTotal(s32 group) {
     if (levelGoal()->kind == 0) return gameStatus()->counts[group];
@@ -704,14 +703,14 @@ void Frontend_SortResultsPlayers(void) {
     }
     mode = func_8042D060_de();
     if (mode == 0) {
-        switch (D_8014DD98) {
+        switch (D_8014DD98.kind) {
         case 2: mode = 1; break;
         case 1: mode = 2; break;
         case 0: mode = 3; break;
         default: mode = 1; break;
         }
     }
-    if (D_8014DD98 == 3 || D_8014DD98 == 0) {
+    if (D_8014DD98.kind == 3 || D_8014DD98.kind == 0) {
         for (i = 4; i >= 0; i--) groups[i] = i;
         for (i = 0; i < 5; i++) {
             for (j = 0; j < 4; j++) {

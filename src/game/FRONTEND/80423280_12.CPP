@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LEVEL_GOAL.H"
 #include "RENDER_4/8026AC38.H"
 #include "COMMON/RECRECAT4.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
@@ -231,7 +232,7 @@ s32 func_8042D060_de(void) {
     if (Weapons_CheckScoreLimit((World *)&D_80145040) != 0) {
         return MATCH_END_SCORE_LIMIT;
     }
-    switch (D_8014DD98) {
+    switch (D_8014DD98.kind) {
     case 0:
         if (func_802282EC_de((World *)&D_80145040) != 0) {
             return MATCH_END_POINT_TARGET;

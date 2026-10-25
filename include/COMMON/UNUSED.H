@@ -2630,7 +2630,6 @@ extern s32 D_800E3304;
 
 extern char D_389E;
 
-extern s32 D_8014DD98;
 
 extern EntryRecAt3 D_80103F28[];
 

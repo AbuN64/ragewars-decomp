@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LEVEL_GOAL.H"
 #include "TYPES.H"
 #include "FRONTEND/OPTIONS.H"
 #include "FRONTEND/80423280_9.H"
@@ -33,7 +34,6 @@ enum { OPTIONS_TEXT = 0x35F };
 #endif
 
 extern struct MatchOptionsScreen *D_800E4EF0;
-extern s32 D_8014DD98;
 extern char *D_800D3494, *D_800D3498, *D_800D349C, *D_800D34A0, *D_800D34A4, *D_800D34A8, *D_800D34AC;
 extern void *func_8025305C_de(s32 size);
 extern void func_8043C210_de(void *, s32, s32, s32, s32);
@@ -54,7 +54,7 @@ s32 Frontend_CreateMatchOptions(void *root) {
     D_800E4EF0 = screen;
     func_8043C210_de(screen->transition, 0x67, 0, 0, 0);
     D_800E4EF0->countCap = func_8041EAC4_de();
-    switch (D_8014DD98) {
+    switch (D_8014DD98.kind) {
     case 1:
         func_8040E950_de(func_8040EC30_de(root, OPTIONS_TEXT + 0), 1);
         func_8040E950_de(func_8040EC30_de(root, OPTIONS_TEXT + 4), 1);

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LEVEL_GOAL.H"
 #include "COMMON/ACTIVE.H"
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -29,7 +30,6 @@ struct Stage {
 extern struct Stage *D_800E4680;
 extern s32 D_8015402C;
 extern s32 D_80146948;
-extern s32 D_8014DD98;
 
 extern void MarkMenuEventHandled(void);
 extern void func_80298368_de(s32);
@@ -96,7 +96,7 @@ void func_8042DEA0_de(void) {
         D_80146948 = 0;
         Frontend_PlaceStageOpponents();
     }
-    switch (D_8014DD98) {
+    switch (D_8014DD98.kind) {
     case 0:
         func_8042EBA4_de();
         break;

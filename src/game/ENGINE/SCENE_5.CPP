@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LEVEL_GOAL.H"
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/EXTERNS_14.H"
@@ -597,7 +598,7 @@ missing:
 void Scene_ShowResultsGoal(void) {
     char name[40];
     char goal[40];
-    s32 *levelGoal;
+    LevelGoal *levelGoal;
     u8 mode;
     u8 minutes;
     s32 seconds;
@@ -612,7 +613,7 @@ void Scene_ShowResultsGoal(void) {
         return;
     }
     levelGoal = &D_8014DD98; /* kind (0 rounds, 1 laps, 2 single laps, 3 targets), then the target goal */
-    switch (levelGoal[0]) {
+    switch (levelGoal->kind) {
     case 0:
         if (currentGame()->controllerMode == 2) {
             func_802A0C08_de(goal, RESULTS_TEXT(D_800D3354, D_800E17A4), D_800E4680->rounds);
@@ -639,7 +640,7 @@ void Scene_ShowResultsGoal(void) {
         }
         break;
     case 3:
-        switch (levelGoal[1]) {
+        switch (levelGoal->goal) {
         case 4:
             func_802A0C08_de(goal, RESULTS_TEXT(D_800D3390_de, D_800E1894), RESULTS_TEXT(D_800D3334, D_800E1724));
             break;
@@ -716,7 +717,7 @@ void Scene_ShowResultsGoal(void) {
         break;
     case 2:
         func_80245A78_de(goal);
-        switch (D_8014DD98) {
+        switch (D_8014DD98.kind) {
         case 0:
             break;
         case 1:

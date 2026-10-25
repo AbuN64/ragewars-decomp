@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LEVEL_GOAL.H"
 
 #if defined(VERSION_EU)
 #ifdef NON_MATCHING
@@ -8,7 +9,7 @@
 extern u8 *D_800E5830;
 extern u8 D_801462C8_raw[], D_80146398[];
 extern u8 *D_800E4680;
-extern s32 D_8015402C, D_8014DD98;
+extern s32 D_8015402C;
 extern s8 D_80102B0D[], D_800FEB0E[];
 extern u8 D_80152789;
 extern char *D_auto_800E2054[], *D_auto_800E20B4[], *D_auto_800E20A4[], *D_800E2044_eu[], *D_800E2074_eu[], *D_800E2094_eu[], *D_800E2084[], *D_auto_800E2034[];
@@ -145,9 +146,9 @@ tail:
     it = func_8040EC30_de(SG(g, void *, 0x20), CS(0x275));
     SG(it, char *, 0x38) = D_800E2074_eu[lang];
     it = func_8040EC30_de(SG(g, void *, 0x20), CS(0x276));
-    if (D_8014DD98 == 0) {
+    if (D_8014DD98.kind == 0) {
         SG(it, char *, 0x38) = D_800E2094_eu[lang];
-    } else if (D_8014DD98 == 1) {
+    } else if (D_8014DD98.kind == 1) {
         SG(it, char *, 0x38) = D_800E2084[D_80152789];
     }
     it = func_8040EC30_de(root, CS(0x270));
