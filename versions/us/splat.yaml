@@ -4603,7 +4603,7 @@ segments:
       - [0xDD3E0, rodata, data_800C/D_blob_phase2_d8cba5f9791df715fbae]
       - [0xDD3E4, rodata, data_800C/rodata_unresolved_800DC7E4]
       - [0xDD3F0, rodata, data_800C/literals_Frontend_PlaceStageOpponents]
-      - [0xDD404, rodata, data_800C/literals_func_8042ED70_de]
+      - [0xDD404, rodata, data_800C/literals_Frontend_InitGameStatus]
       - [0xDD410, data, data_800C/D_auto_rodata_unresolved_800DC810]
       - [0xDD430, rodata, data_800C/literals_func_8042F7A8_de]
       - [0xDD444, data, data_800C/rodata_unresolved_800DC844]

@@ -92,13 +92,13 @@ void func_8042E9B4_de(char *text, char *find, char *replacement) {
 
 extern Active *D_800E4680;
 #include "COMMON/GAME_SESSION.H"
-extern void func_8042ED70_de(f32,s32,s32,s32,s32,s32,s32);
+extern void Frontend_InitGameStatus(f32,s32,s32,s32,s32,s32,s32);
 extern s32 func_8042EE34_de(void);
 extern void func_8044DE7C_de(void *,s32);
 void func_8042EB10_de(void) {
  Shared_Game *g=&D_801462C8;
- if(g->controllerMode != 0) func_8042ED70_de((f32)D_800E4680->time,0,D_800E4680->score,D_800E4680->other,1,0,0);
- else func_8042ED70_de((f32)g->laps,0,g->trialScore,g->trialOther,1,0,0);
+ if(g->controllerMode != 0) Frontend_InitGameStatus((f32)D_800E4680->time,0,D_800E4680->score,D_800E4680->other,1,0,0);
+ else Frontend_InitGameStatus((f32)g->laps,0,g->trialScore,g->trialOther,1,0,0);
  func_8044DE7C_de(&D_8011FAC0,func_8042EE34_de());
 }
 
@@ -106,13 +106,13 @@ void func_8042EB10_de(void) {
 
 
 extern Active *D_800E4680;
-extern void func_8042ED70_de(f32,s32,s32,s32,s32,s32,s32);
+extern void Frontend_InitGameStatus(f32,s32,s32,s32,s32,s32,s32);
 extern s32 func_8042EE34_de(void);
 extern void func_8044DE7C_de(void *,s32);
 void func_8042EBA4_de(void) {
  Shared_Game *g=&D_801462C8;
- if(g->controllerMode != 0) func_8042ED70_de((f32)D_800E4680->time,0,D_800E4680->score,D_800E4680->other,0,1,1);
- else func_8042ED70_de((f32)g->laps,0,g->trialScore,g->trialOther,0,1,1);
+ if(g->controllerMode != 0) Frontend_InitGameStatus((f32)D_800E4680->time,0,D_800E4680->score,D_800E4680->other,0,1,1);
+ else Frontend_InitGameStatus((f32)g->laps,0,g->trialScore,g->trialOther,0,1,1);
  func_8044DE7C_de(&D_8011FAC0,func_8042EE34_de());
 }
 
@@ -120,13 +120,13 @@ void func_8042EBA4_de(void) {
 
 
 extern Active *D_800E4680;
-extern void func_8042ED70_de(f32,s32,s32,s32,s32,s32,s32);
+extern void Frontend_InitGameStatus(f32,s32,s32,s32,s32,s32,s32);
 extern s32 func_8042EE34_de(void);
 extern void func_8044DE7C_de(void *,s32);
 void func_8042EC38_de(void) {
  Shared_Game *g=&D_801462C8;
- if(g->controllerMode != 0) func_8042ED70_de((f32)D_800E4680->time,D_800E4680->limit,D_800E4680->score,D_800E4680->other,0,1,0);
- else func_8042ED70_de((f32)g->laps,D_801462C8.players,g->trialScore,g->trialOther,0,1,0);
+ if(g->controllerMode != 0) Frontend_InitGameStatus((f32)D_800E4680->time,D_800E4680->limit,D_800E4680->score,D_800E4680->other,0,1,0);
+ else Frontend_InitGameStatus((f32)g->laps,D_801462C8.players,g->trialScore,g->trialOther,0,1,0);
  func_8044DE7C_de(&D_8011FAC0,func_8042EE34_de());
 }
 
@@ -134,13 +134,13 @@ void func_8042EC38_de(void) {
 
 
 extern Active *D_800E4680;
-extern void func_8042ED70_de(f32,s32,s32,s32,s32,s32,s32);
+extern void Frontend_InitGameStatus(f32,s32,s32,s32,s32,s32,s32);
 extern s32 func_8042EE34_de(void);
 extern void func_8044DE7C_de(void *,s32);
 void func_8042ECD8_de(void) {
  Shared_Game *g=&D_801462C8;
- if(g->controllerMode != 0) func_8042ED70_de((f32)D_800E4680->time,D_800E4680->score,D_800E4680->score,D_800E4680->other,0,0,0);
- else func_8042ED70_de((f32)g->laps,D_801462C8.players,g->trialScore,g->trialOther,0,0,0);
+ if(g->controllerMode != 0) Frontend_InitGameStatus((f32)D_800E4680->time,D_800E4680->score,D_800E4680->score,D_800E4680->other,0,0,0);
+ else Frontend_InitGameStatus((f32)g->laps,D_801462C8.players,g->trialScore,g->trialOther,0,0,0);
  func_8044DE7C_de(&D_8011FAC0,func_8042EE34_de());
 }
 
@@ -148,7 +148,7 @@ void func_8042ECD8_de(void) {
  * capture-the-flag switches and the mode, the time limit scaled by 900 (15 in controller modes 2 and 3,
  * -1 when there is no limit), then clears the score and count rows. */
 static inline CGameStatus *GameCounters(void) { return &D_801462C8.counters; }
-void func_8042ED70_de(f32 duration, s32 mode, s32 fragTagLimit, s32 otherLimit,
+void Frontend_InitGameStatus(f32 duration, s32 mode, s32 fragTagLimit, s32 otherLimit,
                      s32 fragTagOn, s32 teams, s32 ctfOn) {
     s32 i;
     GameCounters()->m_FragTagLimit = fragTagLimit;
