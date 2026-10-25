@@ -2,8 +2,9 @@
 #define FRONTEND_8041BEA8_6_H
 #include "COMMON/LABEL.H"
 extern void func_8041CDDC_de(ObjRecAt48C *arg0, CVector3 v);
-extern void func_8041CE18_de(Unk8041CE88 *arg0, s32 id, s32 extra, s32 expected);
-extern void Frontend_SelectMatchingPreviewModel(struct Unk8041CE88 *arg0, s32 id, s32 extra, s32 expected);
+struct Obj8041CAD8;
+extern void func_8041CE18_de(struct Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected);
+extern void Frontend_SelectMatchingPreviewModel(struct Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected);
 extern void func_8041CE08_de(ObjRecAt498 *arg0, s32 arg1);
 extern void func_8041CDB0_de(ObjRecAt480 *arg0, CVector3 v);
 typedef struct Ret8028CFA0 {
@@ -24,7 +25,7 @@ typedef struct Obj8041CAD8At190 {
     s8 unk1;
     s8 unk2;
     s8 unk3;
-    u16 unk4;
+    u16 modelIndex; /* 0x4: LevelActor modelIndex */
     char pad6[0x8 - 0x6];
     CVector3 unk8;
     s32 unk14;
@@ -62,7 +63,7 @@ typedef struct Obj8041CAD8At190 {
     s32 unkD8;
     s32 unkDC;
     s32 unkE0;
-    s16 unkE4;
+    u16 type; /* 0xE4: LevelActor type */
     s8 unkE6;
     s8 unkE7;
     char padE8[0x100 - 0xE8];

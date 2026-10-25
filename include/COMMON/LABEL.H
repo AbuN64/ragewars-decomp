@@ -77,14 +77,7 @@ struct NodeRecAt10 {
     s8 style;
 };
 
-struct Unk8041CE88;
-typedef struct Unk8041CE88 Unk8041CE88;
 
-struct Unk8041CE88;
-struct Unk8041CE88 {
-    char pad0[0x274];
-    u16 unk274;
-};
 
 
 struct ObjRecAt498;
@@ -101,7 +94,6 @@ struct MenuRecAt10C {
     s32 player;
 };
 
-struct Unk8041CE88;
 
 struct ObjRecAt498;
 typedef struct ObjRecAt498 ObjRecAt498;

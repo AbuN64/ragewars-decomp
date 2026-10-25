@@ -9,7 +9,6 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/SCENERECAT10C0.H"
 #include "COMMON/ACTOR_DEFINITION.H"
-extern u8 D_800DD460_de[], D_800DD474[];
 extern void *Render_GetDirectoryEntry(void *, void *, s32);
 extern void *Render_LocatePackSection(void *, void *, s32, s32 *);
 extern void *func_8028CF6C_de(void *, u16);
@@ -21,8 +20,8 @@ typedef struct FrontendModelHeader {
 /* Scans the world's preview model id table for entries equal to id. For each one it loads the model's index and info
  * resources; when the model's actor definition has the expected character and the preview's kind, it binds model i to
  * the preview (func_80246BE8_de with extra) and stops. */
-void Frontend_SelectMatchingPreviewModel(struct Unk8041CE88 *preview, s32 id, s32 extra, s32 expected) {
-    Obj8041CAD8At190 *previewState = &((Obj8041CAD8 *)preview)->sub190;
+void Frontend_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected) {
+    Obj8041CAD8At190 *previewState = &preview->sub190;
     Shared_World *scene = &D_8011FE88;
     struct TableRecAt8 *list = scene->modelIds;
     s32 count = list->count;
@@ -41,15 +40,15 @@ void Frontend_SelectMatchingPreviewModel(struct Unk8041CE88 *preview, s32 id, s3
 
         if (entries[i] == id) {
             modelName = Render_GetDirectoryEntry(world->indexedDirectory, (void *)world->indexedBank, i);
-            indexResource = Scene_RequestResource(0, (u32)modelName, (u32)modelName, 0x18, 0, 0, 0, (const char *)D_800DD460_de, 1);
+            indexResource = Scene_RequestResource(0, (u32)modelName, (u32)modelName, 0x18, 0, 0, 0, "anim object index", 1);
             if (indexResource != 0) {
                 modelData = Render_LocatePackSection(*indexResource, modelName, 0, &modelSize);
-                modelResource = Scene_RequestResource(0, (u32)modelData, (u32)modelData, modelSize, 0, 0, 0, (const char *)D_800DD474, 1);
+                modelResource = Scene_RequestResource(0, (u32)modelData, (u32)modelData, modelSize, 0, 0, 0, "anim object info", 1);
                 if (modelResource != 0) {
                     definition = func_8028CF6C_de(world, ((FrontendModelHeader *)Render_GetPackSection(*modelResource, 0))->definitionIndex);
-                    if (definition->character == expected && definition->kind == ((Obj8041CAD8 *)preview)->unk0) {
-                        previewState->unk4 = i;
-                        previewState->unkE4 = id;
+                    if (definition->character == expected && definition->kind == preview->unk0) {
+                        previewState->modelIndex = i;
+                        previewState->type = id;
                         func_80246BE8_de(previewState, world->indexedDirectory, (void *)world->indexedBank, extra);
                         found = 1;
                     }
@@ -149,10 +148,10 @@ void func_8041C7F4_de(Obj8041CAD8 *self) {
         if (self->unk49C != 0 || draw->unk10E == 0) {
             func_80246E44_de(draw);
             if (self->unk4A0 != 0) {
-                func_802737F0_de(&draw->unk74, (f32)self->unk4A0 * D_800DD488);
+                func_802737F0_de(&draw->unk74, (f32)self->unk4A0 * 0.017453294f);
             }
         }
-        draw->unk6C = self->unk498 * *(&D_800DD488 + 1);
+        draw->unk6C = self->unk498 * 0.017453294f;
         draw->unk8 = local20;
         draw->unk1C4 = local20;
         Render_BeginModelBatch();
@@ -206,7 +205,7 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s
     self->copy4.unk14 = 0;
     self->copy4.unk18 = 0;
     self->copy4.unk1C = 0;
-    self->copy4.unk8 = D_800DD490_de;
+    self->copy4.unk8 = 10240.0f;
     ratio = view->width / (f32)D_800E28D0;
     scales.x = self->unk480.x * ratio;
     scales.z = self->unk480.z * ratio;
@@ -214,7 +213,7 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s
     draw->unk50 = scales;
     local70 = self->unk48C;
     Particle_TransformPoint(&view->camera, &local70, &local80);
-    func_802466A0_de(draw, -1, arg3, D_800CD8D0, &self->copy4, -1, 0, self->unk498 * *(&D_800DD490_de + 1), local80, 0,
+    func_802466A0_de(draw, -1, arg3, D_800CD8D0, &self->copy4, -1, 0, self->unk498 * 0.017453294f, local80, 0,
                      self->unk480, local60, 0);
     func_8024B2D0_de(draw);
     if (self->unk0 == 9) {
@@ -259,10 +258,10 @@ void func_8041CE10_de(struct Object49C *object, s32 value) {
     object->value = value;
 }
 
-/* Sets field 0x274 of arg0 to 0xFFFF and then calls Frontend_SelectMatchingPreviewModel on it, passing its other three arguments through. */
-void func_8041CE18_de(Unk8041CE88 *arg0, s32 id, s32 extra, s32 expected) {
-    arg0->unk274 = 0xFFFF;
-    Frontend_SelectMatchingPreviewModel(arg0, id, extra, expected);
+/* Clears the preview model type (sub190.type = 0xFFFF), then selects the matching preview model. */
+void func_8041CE18_de(Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected) {
+    preview->sub190.type = 0xFFFF;
+    Frontend_SelectMatchingPreviewModel(preview, id, extra, expected);
 }
 
 #if defined(VERSION_US)
