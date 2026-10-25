@@ -146,33 +146,33 @@ void func_804037E8_de(int event) {
 }
 
 CVector3 Menu_GetTrackStartEye(void) {
-    CVector3 sp10;
-    CVector3 sp20;
+    CVector3 splinePoint;
+    CVector3 fallback;
     StridedTable *table;
     if (D_800E2830->active == 0) {
-        sp20.x = 0;
-        sp20.y = 0;
-        sp20.z = 0;
-        return sp20;
+        fallback.x = 0;
+        fallback.y = 0;
+        fallback.z = 0;
+        return fallback;
     }
     table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(D_800E2830->resource, 0), 0), 0);
-    sp10 = Menu_EvaluateCameraSpline((SplineNode *)table->data, table->count, 0.0f);
-    return sp10;
+    splinePoint = Menu_EvaluateCameraSpline((SplineNode *)table->data, table->count, 0.0f);
+    return splinePoint;
 }
 
 CVector3 Menu_GetTrackStartTarget(void) {
-    CVector3 sp10;
-    CVector3 sp20;
+    CVector3 splinePoint;
+    CVector3 fallback;
     StridedTable *table;
     if (D_800E2830->active == 0) {
-        sp20.y = 0;
-        sp20.z = 0;
-        sp20.x = D_800DCC7C_de;
-        return sp20;
+        fallback.y = 0;
+        fallback.z = 0;
+        fallback.x = D_800DCC7C_de;
+        return fallback;
     }
     table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(D_800E2830->resource, 0), 0), 1);
-    sp10 = Menu_EvaluateCameraSpline((SplineNode *)table->data, table->count, 0.0f);
-    return sp10;
+    splinePoint = Menu_EvaluateCameraSpline((SplineNode *)table->data, table->count, 0.0f);
+    return splinePoint;
 }
 
 f32 func_804039C4_de(void) {
