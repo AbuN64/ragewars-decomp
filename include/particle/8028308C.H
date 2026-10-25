@@ -6,5 +6,7 @@ extern void func_80283BCC_de(void *arg0);
 extern s32 func_802833DC_de(void *arg0);
 extern s32 func_80283D38_de(s32 arg0);
 extern void func_80283424_de(void *arg0);
-extern float func_80284090_de(void * arg0, float arg1, void * arg2);
+struct Shared_Particle;
+struct GameplayCamera;
+extern float Particle_CameraScale(struct Shared_Particle *particle, float depth, struct GameplayCamera *camera);
 #endif

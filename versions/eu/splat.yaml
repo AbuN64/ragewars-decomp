@@ -3900,7 +3900,7 @@ segments:
       - [0xC5CFC, rodata, data_800C/D_80281CA0_CAB3C]
       - [0xC5D04, rodata, data_800C/D_80282330_CAB44]
       - [0xC5D0C, rodata, data_800C/D_80282E98_CAB4C]
-      - [0xC5D18, rodata, data_800C/D_80284090_CAB58]
+      - [0xC5D18, rodata, data_800C/literals_Particle_CameraScale]
       - [0xC5D3C, rodata, data_800C/D_8028422C_CAB7C]
       - [0xC5D40, rodata, data_800C/D_80284B20_CAB80]
       - [0xC5D48, rodata, data_800C/literals_func_80284B20_de]

@@ -4005,7 +4005,7 @@ segments:
       - [0xCAB3C, rodata, data_800C/D_blob_8a15e496b3bb6fc89def]
       - [0xCAB44, rodata, data_800C/D_blob_0cb742a2b7666234b58a]
       - [0xCAB4C, rodata, data_800C/D_blob_5346875e5072455f2c7e]
-      - [0xCAB58, rodata, data_800C/D_auto_src_rw_pool_80284090_CAB58_us_rev1]
+      - [0xCAB58, rodata, data_800C/literals_Particle_CameraScale]
       - [0xCAB7C, rodata, data_800C/D_blob_455a5b951e8aa0d90173]
       - [0xCAB80, rodata, data_800C/D_blob_35af2254633920324f03]
       - [0xCAB88, rodata, data_800C/literals_func_80284B20_de]

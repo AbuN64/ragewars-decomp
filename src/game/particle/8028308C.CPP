@@ -17,6 +17,8 @@
 #include "SYSTEM/80255C40_7.H"
 #include "particle/80271B18_3.H"
 #include "particle/8027A0F4_4.H"
+#include "COMMON/GAMEPLAY_CAMERA.H"
+#include "COMMON/MATH_HELPERS.H"
 extern void func_80284178_de(void *);
 
 extern void func_80279A00_de(void *arg0);
@@ -541,35 +543,38 @@ int func_80284080_de(void) {
     return 0;
 }
 
-#ifdef NON_MATCHING
-extern f32 D_800C4E68_de, D_800C4E6C_de, D_800C4E70_de, D_800C4E74_de, D_800C4E78_de;
-extern f32 D_800C4E7C_de, D_800C4E80_de, D_800C4E84_de, D_800C4E88_de;
-typedef struct SpeedCurve { char pad0[0x1C]; f32 low; f32 high; } SpeedCurve;
-typedef struct SpeedParams { u32 flags; char pad4[0x20]; SpeedCurve *curve; } SpeedParams;
-/* Scales a speed value: when flag 4 of the parameter block is set the speed is mapped through a clamped ramp
- * between the curve's low and high values, then the result is blended with the field at 0x6C of the third argument. */
-f32 func_80284090_de(void *arg0, f32 speed, void *arg2) {
-    SpeedParams *params = *(SpeedParams **)((char *)arg0 + 0x118);
-    f32 over;
-    f32 ramp;
-    f32 mix;
-    f32 scaled;
-    if (params->flags & 4) {
-        over = speed - D_800C4E68_de;
-        if (!(over < 0.0f)) {
-            scaled = over * D_800C4E6C_de;
-            if (!(scaled > D_800C4E70_de)) {
-                if (!(over < 0.0f)) ramp = over * D_800C4E74_de;
-                else ramp = 0.0f;
-            } else ramp = D_800C4E70_de;
-        } else ramp = 0.0f;
-        speed = speed * (params->curve->low + (params->curve->high - params->curve->low) * ramp) * D_800C4E78_de;
+/* Size scale for a particle seen through a camera. A descriptor with flag 4 scales with depth: from 16 to 2048
+ * units the scale ramps from the distance range's minimum to its maximum (in thousandths of the depth); others
+ * use 1. The result is then corrected for the camera's vertical field of view against the 47.5 degree default.
+ * Particle_BuildMatrix inlines the same body. */
+f32 Particle_CameraScale(Shared_Particle *particle, f32 depth, GameplayCamera *camera) {
+    struct Shared_ParticleDesc *desc = particle->desc;
+    f32 near;
+    f32 farness;
+    f32 scale;
+    f32 fov;
+    f32 low;
+    f32 high;
+    if (desc->flags & 4) {
+        scale = depth;
+        near = scale - 16.0f;
+        /* FAKEMATCH: three dead clamps (each result is overwritten before any use; jump2 deletes their compares
+         * after allocation) keep high/low and then depth/near live in the RTL, which gives the ROM's float
+         * registers (depth $f5, the range ramp in $f2/$f3). */
+        farness = RW_MAX_GT(high, near);
+        farness = RW_MAX_GT(low, near);
+        farness = RW_MIN_LT(1.0f, RW_MAX_GT(0.0f, near) * (1.0f / 2032.0f));
+        high = RW_MAX_GT(depth, near);
+        high = desc->distanceRange->maximum;
+        low = desc->distanceRange->minimum;
+        high -= low;
+        high *= farness;
+        low += high;
+        scale *= low;
+        scale *= 0.001f;
     } else {
-        speed = D_800C4E7C_de;
+        scale = 1.0f;
     }
-    mix = *(f32 *)((char *)arg2 + 0x6C);
-    return speed * D_800C4E88_de * (mix + (D_800C4E80_de - mix) * D_800C4E84_de);
+    fov = camera->fovY;
+    return scale * (1.0f / 47.5f) * (fov + (47.5f - fov) * 0.25f);
 }
-#else
-INCLUDE_ASM("span_1000", func_80284090_de);
-#endif
