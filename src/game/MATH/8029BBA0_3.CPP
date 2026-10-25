@@ -83,26 +83,26 @@ void MatrixFromAngles(MatrixF *matrix, f32 *angles) {
     if (angles[2] != 0.0f) mask |= 1;
     switch (mask) {
     case 0:
-        func_802A0748_de(matrix, 0, 64);
+        Resmgr_FillBytes(matrix, 0, 64);
         one = D_800C5A90_de;
         matrix->m[0][0] = one; matrix->m[1][1] = one; matrix->m[2][2] = one; matrix->m[3][3] = one;
         return;
     case 2:
-        func_802A0748_de(matrix, 0, 64);
+        Resmgr_FillBytes(matrix, 0, 64);
         one = D_800C5A94;
         matrix->m[0][0] = one; matrix->m[1][1] = one; matrix->m[2][2] = one; matrix->m[3][3] = one;
         func_8029BBB0_de(angles[1], &sy, &cy);
         matrix->m[2][0] = sy; matrix->m[0][0] = cy; matrix->m[0][2] = -sy; matrix->m[2][2] = cy;
         return;
     case 4:
-        func_802A0748_de(matrix, 0, 64);
+        Resmgr_FillBytes(matrix, 0, 64);
         one = D_800C5A98_de;
         matrix->m[0][0] = one; matrix->m[1][1] = one; matrix->m[2][2] = one; matrix->m[3][3] = one;
         func_8029BBB0_de(angles[0], &sx, &cx);
         matrix->m[1][1] = cx; matrix->m[2][1] = -sx; matrix->m[1][2] = sx; matrix->m[2][2] = cx;
         return;
     case 1:
-        func_802A0748_de(matrix, 0, 64);
+        Resmgr_FillBytes(matrix, 0, 64);
         one = D_800C5A9C;
         matrix->m[0][0] = one; matrix->m[1][1] = one; matrix->m[2][2] = one; matrix->m[3][3] = one;
         func_8029BBB0_de(angles[2], &sz, &cz);

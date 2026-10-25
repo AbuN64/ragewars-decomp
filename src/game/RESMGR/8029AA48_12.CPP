@@ -16,7 +16,7 @@ void func_8029AA78_de(void) {
     Callback *callback;
     callback = func_8025305C_de(0xC44);
     D_8014D0B0 = callback;
-    func_802A0748_de(callback, 0, 0xC44);
+    Resmgr_FillBytes(callback, 0, 0xC44);
 }
 
 void func_8029AAAC_de(void) {

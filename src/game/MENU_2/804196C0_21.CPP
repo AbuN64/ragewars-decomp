@@ -175,7 +175,7 @@ MenuSliderWidget *func_8041A580_de(s32 arg0, s32 arg1, s32 arg2) {
     source = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());
     result = func_8025305C_de(0x58);
-    func_802A0748_de(result, 0, 0x58);
+    Resmgr_FillBytes(result, 0, 0x58);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB63;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;

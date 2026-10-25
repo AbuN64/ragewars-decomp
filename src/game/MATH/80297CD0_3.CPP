@@ -113,7 +113,7 @@ void func_80297FA0_de(s32 screenCount, s32 value) {
     func_8029AA78_de();
     g_menuEventCount = 0;
     D_8014D080 = func_8025305C_de(0x544);
-    func_802A0748_de(D_8014D080, 0, 0x544);
+    Resmgr_FillBytes(D_8014D080, 0, 0x544);
     D_8014D080->callback2 = (s32 (*)(s32))value;
     D_8014D080->limit = 4000;
     {
@@ -127,13 +127,13 @@ void func_80297FA0_de(s32 screenCount, s32 value) {
         }
     }
     D_8014D080->cache = func_8025305C_de(0x384);
-    func_802A0748_de(D_8014D080->cache, 0, 0x384);
+    Resmgr_FillBytes(D_8014D080->cache, 0, 0x384);
     D_8014D080->cacheCount = 0;
     frames = func_802A18CC_de() * D_800C5668_de;
     D_8014D080->screenCount = screenCount;
     D_8014D080->frames = frames;
     D_8014D080->screens = func_8025305C_de(screenCount * 28);
-    func_802A0748_de(D_8014D080->screens, 0, screenCount * 28);
+    Resmgr_FillBytes(D_8014D080->screens, 0, screenCount * 28);
     D_80146E14 = 0;
     D_8014D080->current = -1;
     D_8014D080->focus = -1;

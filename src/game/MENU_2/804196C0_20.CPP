@@ -36,7 +36,7 @@ MenuFadeWidget *func_8041A280_de(s32 frameId, s32 itemId) {
     frame = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), frameId & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());
     result = func_8025305C_de(0x7C);
-    func_802A0748_de(result, 0, 0x7C);
+    Resmgr_FillBytes(result, 0, 0x7C);
     result->field_0E = 0xB60;
     result->field_12 = 8;
     result->field_0C = 0xB60;

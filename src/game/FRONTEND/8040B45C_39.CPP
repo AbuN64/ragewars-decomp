@@ -107,7 +107,7 @@ extern void Frontend_LoadLanguageStrings(s32);
 
 
 
-/* Clears the 0x2A8-byte block D_801539B0 through func_802A0748_de, sets D_800E2AC0 and clears
+/* Clears the 0x2A8-byte block D_801539B0 through Resmgr_FillBytes, sets D_800E2AC0 and clears
    D_800E2AC4. */
 
 extern s32 D_800E2AC0;
@@ -313,7 +313,7 @@ void func_80411E18_de(s32 i) {
 }
 
 void func_80411EEC_de(void) {
-    func_802A0748_de(&D_801539B0, 0, sizeof(D_801539B0));
+    Resmgr_FillBytes(&D_801539B0, 0, sizeof(D_801539B0));
     D_800E2AC0 = 1;
     D_800E2AC4 = 0;
 }

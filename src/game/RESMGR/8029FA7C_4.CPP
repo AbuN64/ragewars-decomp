@@ -32,12 +32,12 @@ void func_8029EA7C_de(MatrixRecord *arg0, float arg1, float arg2, float arg3,
 }
 
 void func_8029EAF4_de(s32 arg0) {
-    func_802A0748_de(arg0, 0, 0x40);
+    Resmgr_FillBytes(arg0, 0, 0x40);
 }
 
 void func_8029EB14_de(s32 arg0)
 {
-  func_802A0748_de(arg0, 0, 0x40);
+  Resmgr_FillBytes(arg0, 0, 0x40);
   ((Matrix *)(arg0))->m[15] = (((Matrix *)(arg0))->m[10] = (((Matrix *)(arg0))->m[5] = (((Matrix *)(arg0))->m[0] = (f32) D_800C5CB8_de)));
 }
 
@@ -143,7 +143,7 @@ void func_8029EDD8_de(s32 arg0, f32 arg1) {
     if (arg1 != 0.0f) {
         func_8029BBB0_de(arg1, &sp50, &sp54);
         p = &matrix;
-        func_802A0748_de(p, 0, 0x40);
+        Resmgr_FillBytes(p, 0, 0x40);
         ((Matrix *)(p))->m[0] = D_800C5CC0_de;
         {
             f32 t54 = sp54;
@@ -169,7 +169,7 @@ void func_8029EE78_de(s32 arg0, f32 arg1) {
     if (arg1 != 0.0f) {
         func_8029BBB0_de(arg1, &sp50, &sp54);
         p = &matrix;
-        func_802A0748_de(p, 0, 0x40);
+        Resmgr_FillBytes(p, 0, 0x40);
         ((Matrix *)(p))->m[0] = D_800C5CC4_de;
         {
             f32 t54 = sp54;
@@ -197,7 +197,7 @@ void func_8029EF18_de(s32 arg0, f32 arg1) {
     if (arg1 != 0.0f) {
         func_8029BBB0_de(arg1, &sp50, &sp54);
         p = &matrix;
-        func_802A0748_de(p, 0, 0x40);
+        Resmgr_FillBytes(p, 0, 0x40);
         ((Matrix *)(p))->m[0] = D_800C5CC8_de;
         {
             f32 t54 = sp54;

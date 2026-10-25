@@ -179,7 +179,7 @@ void func_804101BC_de(void) {
     if (tables[7]) func_802547E4_de(tables[7]);
     if (first[5]) func_802547E4_de(first[5]);
     if (second[3]) func_802547E4_de(second[3]);
-    func_802A0748_de((char *)tables - 0x26C, 0, 0x2A8);
+    Resmgr_FillBytes((char *)tables - 0x26C, 0, 0x2A8);
 }
 
 void func_80410448_de(void) {

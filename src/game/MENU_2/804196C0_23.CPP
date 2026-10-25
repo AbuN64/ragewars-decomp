@@ -116,7 +116,7 @@ MenuListWidget *func_8041ABC0_de(s32 arg0, s32 arg1) {
     source = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());
     result = func_8025305C_de(0x118);
-    func_802A0748_de(result, 0, 0x118);
+    Resmgr_FillBytes(result, 0, 0x118);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB64;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
@@ -300,7 +300,7 @@ void func_8041B110_de(s32 arg0) {
     source = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());
     result = func_8025305C_de(0x44);
-    func_802A0748_de(result, 0, 0x44);
+    Resmgr_FillBytes(result, 0, 0x44);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB61;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
@@ -318,7 +318,7 @@ void func_8041B22C_de(Record_func_8041B22C_de *source) {
     }
     context = Frontend_GetScreenData(GetMenuScreenOwner());
     result = func_8025305C_de(0x44);
-    func_802A0748_de(result, 0, 0x44);
+    Resmgr_FillBytes(result, 0, 0x44);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB61;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;

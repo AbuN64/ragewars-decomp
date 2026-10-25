@@ -101,7 +101,7 @@ MenuResourceWidget *func_80419E54_de(int arg0, int arg1)
   r = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 65535);
   Frontend_GetScreenData(GetMenuScreenOwner());
   p = func_8025305C_de(0x88);
-  func_802A0748_de(p, 0, 0x88);
+  Resmgr_FillBytes(p, 0, 0x88);
   p->b = (kind = 0xB62);
   p->resource = r;
   p->owner.value = arg1;

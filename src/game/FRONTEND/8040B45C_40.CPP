@@ -81,7 +81,7 @@ s32 func_80412710_de(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 a
     source = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());
     result = func_8025305C_de(0x60);
-    func_802A0748_de(result, 0, 0x60);
+    Resmgr_FillBytes(result, 0, 0x60);
     *(Header44 *)result = *(Header44 *)source;
     result->kind = 0xB;
     result->field_4B = arg4;
@@ -97,7 +97,7 @@ s32 func_80412710_de(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 a
     size = arg3 * arg4 * 8;
     cells = func_8025305C_de(size);
     result->field_44 = cells;
-    func_802A0748_de(cells, 0, size);
+    Resmgr_FillBytes(cells, 0, size);
     func_8040ED38_de(context, 0, source, result);
     return 1;
 }

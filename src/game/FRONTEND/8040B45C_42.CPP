@@ -195,7 +195,7 @@ void func_80412F54_de(ImageDescriptor *destination, ImageDescriptor *source) {
 }
 
 void func_804133E4_de(int value) {
-    func_802A0748_de(value, 0, 0x20);
+    Resmgr_FillBytes(value, 0, 0x20);
 }
 
 void func_80413404_de(OwnedImage *res) {
@@ -205,7 +205,7 @@ void func_80413404_de(OwnedImage *res) {
     if ((res->flags & 2) && res->paletteCount > 0) {
         func_802547E4_de(res->palette);
     }
-    func_802A0748_de(res, 0, 32);
+    Resmgr_FillBytes(res, 0, 32);
 }
 
 /** Report false. */
@@ -222,7 +222,7 @@ s32 func_80413480_de(OwnedImage *dst, OwnedImage *src) {
     if ((dst->flags & 2) && dst->paletteCount > 0) {
         func_802547E4_de(dst->palette);
     }
-    func_802A0748_de(dst, 0, 0x20);
+    Resmgr_FillBytes(dst, 0, 0x20);
     *dst = *src;
     if (dst->paletteCount == 0) {
         dst->palette = 0;
@@ -240,7 +240,7 @@ s32 func_80413480_de(OwnedImage *dst, OwnedImage *src) {
         size = func_8041369C_de(src);
         if ((dst->palette = func_8025305C_de(size)) == 0) {
             func_802547E4_de(dst->pixels);
-            func_802A0748_de(dst, 0, 0x20);
+            Resmgr_FillBytes(dst, 0, 0x20);
             return 1;
         }
         Resmgr_CopyBytes(dst->palette, src->palette, size);

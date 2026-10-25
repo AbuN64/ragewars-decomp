@@ -641,7 +641,7 @@ void Frontend_OpenResourceArchive(u8 *name) {
         D_801539B0.Screen = func_8025305C_de(D_801539B0.Header.ScreenTableLen);
         if (D_800E2AC4 != 0) {
             D_801539B0.ScreenOriginal = func_8025305C_de(D_801539B0.Header.ScreenTableLen);
-            func_802A0748_de(D_801539B0.ScreenOriginal, 0, D_801539B0.Header.ScreenTableLen);
+            Resmgr_FillBytes(D_801539B0.ScreenOriginal, 0, D_801539B0.Header.ScreenTableLen);
         }
         Resmgr_SeekStream(res->In, D_801539B0.Header.ScreenTable, 0);
         Resmgr_ReadStream(D_801539B0.Screen, D_801539B0.Header.ScreenTableLen, 1, res->In);
@@ -649,9 +649,9 @@ void Frontend_OpenResourceArchive(u8 *name) {
             D_801539B0.Screen[i].data = 0;
         }
         D_801539B0.RefCount = func_8025305C_de(D_801539B0.NScreens * sizeof(s16));
-        func_802A0748_de(D_801539B0.RefCount, 0, D_801539B0.NScreens * sizeof(s16));
+        Resmgr_FillBytes(D_801539B0.RefCount, 0, D_801539B0.NScreens * sizeof(s16));
         D_801539B0.ScreenFlags = func_8025305C_de(D_801539B0.NScreens * sizeof(s16));
-        func_802A0748_de(D_801539B0.ScreenFlags, 0, D_801539B0.NScreens * sizeof(s16));
+        Resmgr_FillBytes(D_801539B0.ScreenFlags, 0, D_801539B0.NScreens * sizeof(s16));
     }
     if (D_801539B0.Header.FontTableLen > 0) {
         clutOffsets = func_8025305C_de(D_801539B0.Header.FontClutTableLen);
@@ -662,7 +662,7 @@ void Frontend_OpenResourceArchive(u8 *name) {
         Resmgr_ReadStream(D_801539B0.FontTable, D_801539B0.Header.FontTableLen, 1, res->In);
         D_801539B0.NFonts = D_801539B0.Header.FontTableLen / sizeof(ArchiveFontRecord);
         D_801539B0.Font = func_8025305C_de(D_801539B0.NFonts * sizeof(_sm_font));
-        func_802A0748_de(D_801539B0.Font, 0, D_801539B0.NFonts * sizeof(_sm_font));
+        Resmgr_FillBytes(D_801539B0.Font, 0, D_801539B0.NFonts * sizeof(_sm_font));
         for (i = 0; i < D_801539B0.NFonts; i++) {
             D_801539B0.Font[i].TableEntry = &D_801539B0.FontTable[i];
         }
@@ -674,7 +674,7 @@ void Frontend_OpenResourceArchive(u8 *name) {
             Resmgr_ReadStream(font->CharInfo, 8, 0x60, res->In);
             font->Char = func_8025305C_de(entry->bitmapCount * sizeof(t_char *));
             font->Char[0] = func_8025305C_de(entry->bitmapCount * 96 * sizeof(t_char));
-            func_802A0748_de(font->Char[0], 0, entry->bitmapCount * 96 * sizeof(t_char));
+            Resmgr_FillBytes(font->Char[0], 0, entry->bitmapCount * 96 * sizeof(t_char));
             for (j = 0; j < entry->bitmapCount; j++) {
                 font->Char[j] = font->Char[0] + j * 96;
             }
