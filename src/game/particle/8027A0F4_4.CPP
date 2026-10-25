@@ -187,6 +187,7 @@ void Particle_Attach(Actor_func_8027DAD0_de *actor, CVector3 *outPosition, CVect
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/OBJECTLINKS14C.H"
 #include "COMMON/MATH_HELPERS.H"
+#include "particle/DEPTH_SCALE.H"
 
 void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 void func_80272E3C_de(f32 *m, f32 x, f32 y, f32 z);
@@ -206,38 +207,6 @@ void func_80272828_de(f32 *matrix);
 void Rsp_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst);
 
 
-
-/* Depth part of the particle size scale (Particle_CameraScale carries the same body with the camera correction): a
- * descriptor with flag 4 scales with depth, ramping from the distance range's minimum to its maximum (in
- * thousandths of the depth) between 16 and 2048 units; others use 1. */
-static inline f32 particleDepthScale(struct Shared_ParticleDesc *desc, f32 depth) {
-    f32 near;
-    f32 farness;
-    f32 scale;
-    f32 low;
-    f32 high;
-    if (desc->flags & 4) {
-        scale = depth;
-        near = scale - 16.0f;
-        /* FAKEMATCH: three dead clamps (each result is overwritten before any use; jump2 deletes their compares
-         * after allocation) keep high/low and then depth/near live in the RTL, which gives the ROM's float
-         * registers (depth $f5, the range ramp in $f2/$f3). */
-        farness = RW_MAX_GT(high, near);
-        farness = RW_MAX_GT(low, near);
-        farness = RW_MIN_LT(1.0f, RW_MAX_GT(0.0f, near) * (1.0f / 2032.0f));
-        high = RW_MAX_GT(depth, near);
-        high = desc->distanceRange->maximum;
-        low = desc->distanceRange->minimum;
-        high -= low;
-        high *= farness;
-        low += high;
-        scale *= low;
-        scale *= 0.001f;
-    } else {
-        scale = 1.0f;
-    }
-    return scale;
-}
 
 /* Builds a particle's display matrix: its size scaled for camera depth and field of view, its wobble, its
  * orientation (model particles) or roll (sprites), its placement for the space it lives in, and an optional

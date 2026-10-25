@@ -20,6 +20,7 @@
 #include "particle/8027A0F4_4.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/MATH_HELPERS.H"
+#include "particle/DEPTH_SCALE.H"
 extern void Particle_UpdateMatrix(void *);
 
 extern void func_80279A00_de(void *arg0);
@@ -543,38 +544,12 @@ int func_80284080_de(void) {
     return 0;
 }
 
-/* Size scale for a particle seen through a camera. A descriptor with flag 4 scales with depth: from 16 to 2048
- * units the scale ramps from the distance range's minimum to its maximum (in thousandths of the depth); others
- * use 1. The result is then corrected for the camera's vertical field of view against the 47.5 degree default.
- * Particle_BuildMatrix inlines the same body. */
+/* Size scale for a particle seen through a camera: the depth scale (particleDepthScale), corrected for the camera's
+ * vertical field of view against the 47.5 degree default. Particle_BuildMatrix inlines the same body. */
 f32 Particle_CameraScale(Shared_Particle *particle, f32 depth, GameplayCamera *camera) {
-    struct Shared_ParticleDesc *desc = particle->desc;
-    f32 near;
-    f32 farness;
-    f32 scale;
+    f32 depthScale;
     f32 fov;
-    f32 low;
-    f32 high;
-    if (desc->flags & 4) {
-        scale = depth;
-        near = scale - 16.0f;
-        /* FAKEMATCH: three dead clamps (each result is overwritten before any use; jump2 deletes their compares
-         * after allocation) keep high/low and then depth/near live in the RTL, which gives the ROM's float
-         * registers (depth $f5, the range ramp in $f2/$f3). */
-        farness = RW_MAX_GT(high, near);
-        farness = RW_MAX_GT(low, near);
-        farness = RW_MIN_LT(1.0f, RW_MAX_GT(0.0f, near) * (1.0f / 2032.0f));
-        high = RW_MAX_GT(depth, near);
-        high = desc->distanceRange->maximum;
-        low = desc->distanceRange->minimum;
-        high -= low;
-        high *= farness;
-        low += high;
-        scale *= low;
-        scale *= 0.001f;
-    } else {
-        scale = 1.0f;
-    }
+    depthScale = particleDepthScale(particle->desc, depth);
     fov = camera->fovY;
-    return scale * (1.0f / 47.5f) * (fov + (47.5f - fov) * 0.25f);
+    return depthScale * (1.0f / 47.5f) * (fov + (47.5f - fov) * 0.25f);
 }
