@@ -2529,3 +2529,4 @@ literals_Camera_DrawObjectFlares = 0x800C3514; // rom:0xC4114 size:0x4
 literals_Frontend_SelectMatchingPreviewModel = 0x800DD460; // rom:0xDE060 size:0x24
 literals_func_8041C7F4_de = 0x800DD488; // rom:0xDE088 size:0x8
 literals_Frontend_InitModelPreview = 0x800DD490; // rom:0xDE090 size:0x8
+literals_Actors_ApplyVertexColors = 0x800C4AF8; // rom:0xC56F8 size:0x24

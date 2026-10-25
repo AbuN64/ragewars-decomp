@@ -3886,7 +3886,7 @@ segments:
       - [0xC59C8, rodata, data_800C/literals_Actors_EvaluateLightVolume]
       - [0xC59CC, rodata, data_800C/literals_Actors_AccumulateVertexLighting]
       - [0xC59DC, rodata, data_800C/literals_Actors_AccumulateDirectionalLighting]
-      - [0xC59E8, rodata, data_800C/D_80278274_CA7E8]
+      - [0xC59E8, rodata, data_800C/literals_Actors_ApplyVertexColors]
       - [0xC5A0C, rodata, data_800C/D_802784C0_CA80C]
       - [0xC5A19, data, data_800C/rodata_unresolved_800C4E19]
       - [0xC5A20, rodata, data_800C/rodata_func_80278C10_de_800C4DE0]
