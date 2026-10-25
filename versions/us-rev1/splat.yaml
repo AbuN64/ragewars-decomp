@@ -3663,7 +3663,7 @@ segments:
       - [0xC93E0, rodata, data_800C/literals_func_8023F750_de]
       - [0xC93F8, rodata, data_800C/literals_func_8023FD18_de]
       - [0xC9414, data, data_800C/D_d1_7d2feb9a11d5ac5e]
-      - [0xC9420, rodata, data_800C/D_blob_eaa625739fe2f074a1f0]
+      - [0xC9420, rodata, data_800C/literals_Anim_TestPointNearPolygon]
       - [0xC9424, rodata, data_800C/literals_func_80240A98_de]
       - [0xC942C, rodata, data_800C/D_blob_9fabb12b4d9c02426ef9]
       - [0xC9430, rodata, data_800C/D_blob_20bbdad142670bb714dd]

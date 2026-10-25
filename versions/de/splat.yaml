@@ -3567,7 +3567,7 @@ segments:
       - [0xC42F0, rodata, data_800C/literals_func_8023F750_de]
       - [0xC4308, rodata, data_800C/literals_func_8023FD18_de]
       - [0xC4324, data, data_800C/rodata_unresolved_800C3724]
-      - [0xC4330, rodata, data_800C/D_802406D0_C9420]
+      - [0xC4330, rodata, data_800C/literals_Anim_TestPointNearPolygon]
       - [0xC4334, rodata, data_800C/literals_func_80240A98_de]
       - [0xC433C, rodata, data_800C/D_80240C8C_C942C]
       - [0xC4348, data, data_800C/rodata_unresolved_800C3748]

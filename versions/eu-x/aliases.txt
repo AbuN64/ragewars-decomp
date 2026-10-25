@@ -2574,3 +2574,4 @@ literals_DispatchElementEvent = 0x800C5800; // rom:0xC6400 size:0x80
 literals_DispatchCurrentScreenEvent = 0x800C5880; // rom:0xC6480 size:0x40
 literals_Fx_BuildControllerState = 0x800C4580; // rom:0xC5180 size:0x5C
 literals_Render_RunGameLoop = 0x800C5710; // rom:0xC6310 size:0x8
+literals_Anim_TestPointNearPolygon = 0x800C3A20; // rom:0xC4620 size:0x4
