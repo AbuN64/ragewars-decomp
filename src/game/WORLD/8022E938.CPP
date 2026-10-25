@@ -24,7 +24,7 @@ extern s32 func_80283228_de(void *, s32);
 
 extern s32 func_8024E62C_de(void *arg0);
 
-extern void func_802227F4_de(void *, void *, s32);
+extern void Weapons_SetPlayerState(void *, void *, s32);
 
 extern s32 D_800C9FE4;
 
@@ -214,7 +214,7 @@ int func_8022EBC4_de(void) {
 
 s32 func_8022EBD4_de(void *player, LevelActor *actor) {
     if (actor->position1.y <= 0.0f && func_8024E62C_de(actor) != 0) {
-        func_802227F4_de(player, actor, 2);
+        Weapons_SetPlayerState(player, actor, 2);
         return 1;
     }
     return 0;
@@ -261,7 +261,7 @@ void func_8022ECCC_de(void) {
     if (D_800FE9F0->unk5EA == 1) {
         Ovlgame_UpdateRunEndPlayer((s32)D_800FE9F0);
     } else {
-        func_802227F4_de(D_800FE9F0, D_800FE9F0, 0x22);
+        Weapons_SetPlayerState(D_800FE9F0, D_800FE9F0, 0x22);
     }
     D_800CD6E0_de = 1;
     D_800C9FE4 = 0;

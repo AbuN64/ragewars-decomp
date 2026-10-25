@@ -6,7 +6,7 @@
 #include "COMMON/WORLD.H"
 #include "TYPES.H"
 #include "COMMON/CHANNEL.H"
-extern s32 func_802227F4_de(void *, void *, s32);
+extern s32 Weapons_SetPlayerState(void *, void *, s32);
 
 extern f32 D_800D2988;
 
@@ -49,7 +49,7 @@ extern void Weapons_UpdateViewAngles(SharedPlayer_func_80224408_de *, Body_func_
 static inline s32 try_jump(SharedPlayer_func_80224408_de *player, Body_func_80224408_de *body) {
     if (player->views5E8.view7E8_106.zoomed == 0 && !(11.25f < player->views5E8.view6E4_62.depth) && !(body->flags & 0xC0000)
         && (body->surface->unk14 & 2) && (player->views5E8.view6B0_47.input & 0x10) && player->views5E8.view11D8_149.stun <= 0.0f) {
-        func_802227F4_de(player, body, 5);
+        Weapons_SetPlayerState(player, body, 5);
         return 1;
     }
     return 0;
@@ -151,7 +151,7 @@ void func_8022409C_de(void *player, void *arg1) {
     if (((func_80224078_Arg0 *)player)->unk650 == 1 &&
         (((func_80224078_Arg0 *)player)->unk6AC & 0xE000) == 0xE000 &&
         (((func_80224078_Arg0 *)player)->unk6B0 & 0xE000)) {
-        func_802227F4_de(player, arg1, 2);
+        Weapons_SetPlayerState(player, arg1, 2);
         data = ((func_80224078_Arg0 *)player)->unk5DC;
         if (data != 0) {
             Camera_PostScreenMessage(&D_80145088, data, &D_800C2950_de);
@@ -177,7 +177,7 @@ void func_80224408_de(SharedPlayer_func_80224408_de *player, Body_func_80224408_
         return;
     }
     if (player->views5E8.view6A4_42.strafe != 0.0f || (player->views5E8.view7E8_106.zoomed != 2 && player->views5E8.view6A8_44.lift != 0.0f)) {
-        func_802227F4_de(player, body, 3);
+        Weapons_SetPlayerState(player, body, 3);
     }
     animate = 1;
     if ((player->views5E8.view86C_127.animation == 0x1130 || player->views5E8.view86C_127.animation == 0x1135) && player->views1C.view10E_13.idle == 0) {

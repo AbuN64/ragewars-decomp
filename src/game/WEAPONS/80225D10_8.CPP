@@ -32,7 +32,7 @@ typedef struct {
 } StunProtectionRules;
 
 extern StunProtectionRules D_801468A0[];
-extern void func_802227F4_de(SharedPlayer *, SharedPlayer *, s32);
+extern void Weapons_SetPlayerState(SharedPlayer *, SharedPlayer *, s32);
 
 extern void func_802391AC_de(ViewRecAt54D *, s32, s32, s32, s32, s32, s32, s32);
 
@@ -50,7 +50,7 @@ void func_80229814_de(SharedPlayer *player, f32 amount) {
         Weapons_RequestActorState(player->views1C.view2E8_28.weapon, player->views1C.view458_30.ammo, 2);
         if (player->views5E8.view1210_153.marker != 0) {
             if (player->views5E4.view5E4_4.holding != 0) {
-                func_802227F4_de(player, player, 2);
+                Weapons_SetPlayerState(player, player, 2);
             }
             player->views5E8.view1210_153.marker = 0;
             player->views5E8.view1214_156.markerShown = 0;

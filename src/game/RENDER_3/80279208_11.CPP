@@ -11,7 +11,7 @@ typedef struct Owner Owner;
 extern void *func_802833D0_de(void *arg0);
 extern s32 func_8022B178_de(void *arg0);
 extern void func_80229554_de(void *arg0, s32 arg1, s32 arg2);
-extern void func_802227F4_de(void *, void *, s32);
+extern void Weapons_SetPlayerState(void *, void *, s32);
 
 
 
@@ -53,7 +53,7 @@ reset_state:
         resource = ((ObjectLinks1BC *)(actor))->unk_12C;
         if (resource != 0 && *(u8 *)resource == 1 &&
             (((Shared_Actor *)(resource))->weaponFlags & 0x300000) != 0) {
-            func_802227F4_de(((Shared_Actor *)(resource))->entity, resource, 2);
+            Weapons_SetPlayerState(((Shared_Actor *)(resource))->entity, resource, 2);
         }
     }
 

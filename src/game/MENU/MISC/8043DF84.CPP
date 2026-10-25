@@ -27,13 +27,13 @@ extern s32 func_8026437C_de(ControllerProfile *slot);
 
 /* Advances the frame timer D_8015404C by D_800D2988 and, once it reaches
    threshold D_800E2358, clears a flag at D_801468A0+0x24 and reports the
-   round over through func_8022A748_de on the world 0x1860 bytes before it. */
+   round over through Weapons_EndRound on the world 0x1860 bytes before it. */
 
 
 
 extern f32 D_800D2988;
 
-void func_8022A748_de(void *arg0);
+void Weapons_EndRound(void *arg0);
 
 /* Sets arg0's unk14 field to the address of D_800D76C8 and returns 0. */
 
@@ -151,7 +151,7 @@ s32 func_8043E134_de(void) {
     if ((120.0f) <= time) {
         base = &D_801462C8.counters;
         base->teams = 0;
-        func_8022A748_de((void *) ((char *) base - 0x1860));
+        Weapons_EndRound((void *) ((char *) base - 0x1860));
         return 1;
     }
     return 0;

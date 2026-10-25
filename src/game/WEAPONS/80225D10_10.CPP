@@ -29,7 +29,7 @@ extern int Camera_IsSequenceActive(void);
 
 extern struct Shape_func_8021A2D4_de_2 D_801427FC;
 
-extern void func_802227F4_de(Node_func_8022A748_de *arg0, Node_func_8022A748_de *arg1, s32 arg2);
+extern void Weapons_SetPlayerState(Node_Weapons_EndRound *arg0, Node_Weapons_EndRound *arg1, s32 arg2);
 
 extern void func_80285D30_de(s32 *);
 
@@ -211,10 +211,10 @@ int func_8022A68C_de(char *forcePlayerList) {
     return 1;
 }
 
-void func_8022A748_de(void *arg0) {
+void Weapons_EndRound(void *arg0) {
     CGameStatus *state;
     Round *round = arg0;
-    Node_func_8022A748_de *node;
+    Node_Weapons_EndRound *node;
 
     state = &D_801462C8.counters;
     if ((state->elapsed != 0) || (state->state != 0)) {
@@ -225,23 +225,23 @@ void func_8022A748_de(void *arg0) {
     if (state->teams != 0) {
         if (state->round == 0) {
             state->round = 1;
-            node = (Node_func_8022A748_de *)round->players;
+            node = (Node_Weapons_EndRound *)round->players;
             while (node != 0) {
-                func_802227F4_de(node, node, 0x15);
+                Weapons_SetPlayerState(node, node, 0x15);
                 node = node->next;
             }
         }
     } else {
         state->elapsed = 1;
-        node = (Node_func_8022A748_de *)round->players;
+        node = (Node_Weapons_EndRound *)round->players;
         while (node != 0) {
-            func_802227F4_de(node, node, 0x15);
+            Weapons_SetPlayerState(node, node, 0x15);
             node = node->next;
         }
     }
 
     D_801427FC.field_0 = 1;
-    node = (Node_func_8022A748_de *)round->players;
+    node = (Node_Weapons_EndRound *)round->players;
     while (node != 0) {
         node->field85C = 0;
         node->state[0x8E] = 1;

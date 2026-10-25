@@ -9,7 +9,7 @@
 #include "TYPES.H"
 #include "GFX/TEXT/8022BA90_4.H"
 
-extern void func_802227F4_de(void *, void *, s32);
+extern void Weapons_SetPlayerState(void *, void *, s32);
 
 /* Initialises an object: clears the words at 0x8, 0x9C, 0xA4, 0xA8, 0xB4 and 0xB8, sets the words at
    0x0 and 0x4 to -1, writes the two constants at D_800C2D48_de into the floats at 0xAC and 0xB0, the two
@@ -60,7 +60,7 @@ s32 func_8022C6E4_de(void *player, void *arg1) {
         if (((Actor_func_8022D290_de *)player)->unk_0x0650 == 0xE) {
             return 0;
         }
-        func_802227F4_de(player, arg1, 0xD);
+        Weapons_SetPlayerState(player, arg1, 0xD);
         return 1;
     }
     return 0;
@@ -94,7 +94,7 @@ s32 func_8022C760_de(void *player, void *arg1) {
     return 0;
 fire:
     ((LevelActor *)arg1)->motionState = flags | 0x100;
-    func_802227F4_de(player, arg1, 0xF);
+    Weapons_SetPlayerState(player, arg1, 0xF);
     return 1;
 }
 
@@ -107,7 +107,7 @@ s32 func_8022C7F8_de(void *player, LevelActor *actor) {
             if (!(actor->motionState & 0xC0000)) {
                 if (((MovementDescriptor *)actor->definition)->body.header.flags & 2) {
                     if ((((Actor_func_8022D290_de *)player)->unk_0x06B0 & 0x10) && (((Actor_func_8022D290_de *)player)->unk_0x11D8 <= 0.0f)) {
-                        func_802227F4_de(player, actor, 5);
+                        Weapons_SetPlayerState(player, actor, 5);
                         return 1;
                     }
                 }

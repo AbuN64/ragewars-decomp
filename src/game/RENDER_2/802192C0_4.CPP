@@ -41,7 +41,7 @@ extern s32 D_800C9228_de[2];
 
 void *Nav_GetGraphPoint(void *, s32);
 s32 func_8020CB3C_de(void *, void *);
-s32 func_802227F4_de(void *, void *, s32);
+s32 Weapons_SetPlayerState(void *, void *, s32);
 #ifndef NON_MATCHING
 void *Camera_PostScreenMessage(void *, void *, u8 *);
 #endif
@@ -155,7 +155,7 @@ void func_8021B468_de(struct Shared_ActorView *player, void *attacker, s32 arg2,
 
     func_802647E8_de(((struct Shared_ActorView *)player)->controller, 0);
     if (((struct Shared_ActorView *)player)->action == 0x27) {
-        func_802227F4_de(player, attacker, 2);
+        Weapons_SetPlayerState(player, attacker, 2);
     }
     ((struct Shared_ActorView *)player)->field1218 = 0;
     func_80278D78_de(attacker, 1, attacker);
@@ -205,7 +205,7 @@ block_13:
         }
         if (D_8014693C < 3) {
             ((struct Shared_ActorView *)player)->special = 0;
-            func_802227F4_de(player, attacker, 0x2E);
+            Weapons_SetPlayerState(player, attacker, 0x2E);
             return;
         } else {
             goto block_17;
@@ -439,16 +439,16 @@ case 7:
             func_802800C0_de(&D_8011D8D0, player, player, 0, temp_s0_6, 0x64, motionVector, motionOutput, spawnVector, 0, -1, var_s1_3);
         }
         if (state != -1) {
-            func_802227F4_de(player, attacker, state);
+            Weapons_SetPlayerState(player, attacker, state);
             return;
         }
         if (((struct Shared_ActorView *)player)->state != 0x11) {
             if (((struct Shared_ActorView *)player)->action == 0xA && (arg2 & 0x4000)) {
-                func_802227F4_de(player, attacker, 0x2A);
+                Weapons_SetPlayerState(player, attacker, 0x2A);
                 return;
             }
             if (arg2 & 0x4000) {
-                func_802227F4_de(player, attacker, 0x29);
+                Weapons_SetPlayerState(player, attacker, 0x29);
                 return;
             }
         }
@@ -457,47 +457,47 @@ case 7:
             var_v0_4 = 0;
         }
         if (var_v0_4 != 0) {
-            func_802227F4_de(player, attacker, 0x1C);
+            Weapons_SetPlayerState(player, attacker, 0x1C);
             return;
         }
         temp_v1_9 = ((struct Shared_ActorView *)player)->action;
         if ((temp_v1_9 ^ 0xF) == 0) {
-            func_802227F4_de(player, attacker, 0x21);
+            Weapons_SetPlayerState(player, attacker, 0x21);
             return;
         }
         if (temp_v1_9 == 9) {
-            func_802227F4_de(player, attacker, 0x1F);
+            Weapons_SetPlayerState(player, attacker, 0x1F);
             return;
         }
         if (temp_v1_9 == 10) {
-            func_802227F4_de(player, attacker, 0x1F);
+            Weapons_SetPlayerState(player, attacker, 0x1F);
             return;
         }
         if (temp_v1_9 == 11) {
-            func_802227F4_de(player, attacker, 0x1F);
+            Weapons_SetPlayerState(player, attacker, 0x1F);
             return;
         }
         if (temp_v1_9 == 12) {
-            func_802227F4_de(player, attacker, 0x1F);
+            Weapons_SetPlayerState(player, attacker, 0x1F);
             return;
         }
         if (arg2 & 0x1000) {
-            func_802227F4_de(player, attacker, 0x1F);
+            Weapons_SetPlayerState(player, attacker, 0x1F);
             return;
         }
         if (arg2 & 0x200) {
-            func_802227F4_de(player, attacker, 0x19);
+            Weapons_SetPlayerState(player, attacker, 0x19);
             return;
         }
         if ((((struct Shared_ActorView *)player)->state != 0x11) && (((struct Shared_ActorView *)player)->specialState == 1)) {
-            func_802227F4_de(player, attacker, 0x1E);
+            Weapons_SetPlayerState(player, attacker, 0x1E);
             return;
         }
         if (((struct Shared_ActorView *)player)->specialState == 2) {
-            func_802227F4_de(player, attacker, 0x1D);
+            Weapons_SetPlayerState(player, attacker, 0x1D);
             return;
         }
-        func_802227F4_de(player, attacker, 0x16);
+        Weapons_SetPlayerState(player, attacker, 0x16);
         return;
     }
 }
@@ -584,7 +584,7 @@ void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
                 FIELD(s32, state, 0xA4) = 0x3C;
                 break;
             }
-            func_802227F4_de(player, player, 0x2D);
+            Weapons_SetPlayerState(player, player, 0x2D);
         }
         amount = 0;
     }
@@ -725,7 +725,7 @@ void func_8021C45C_de(void *arg0, void *unused1, s32 unused2, void *arg3) {
             if (actor->reactionOwner == 0) {
                 actor->reactionOwner = event->owner;
             }
-            func_802227F4_de(actor, actor, 0x26);
+            Weapons_SetPlayerState(actor, actor, 0x26);
         }
         return;
     }

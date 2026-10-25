@@ -11,7 +11,7 @@
 #include "COMMON/PROBE.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-extern s32 func_802227F4_de(void *, void *, s32);
+extern s32 Weapons_SetPlayerState(void *, void *, s32);
 extern void func_802233F0_de(void *, void *, void *);
 extern void Weapons_UpdateViewAngles(void *, void *, void *);
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -52,7 +52,7 @@ extern int D_80104418;
 
 void func_8022C8A4_de(struct SharedPlayer *player, void *arg1) {
     if ((player->views5E8.view6C0_51.unk6C0 != 0.0f) || (player->views5E8.view6C4_54.unk6C4 != 0.0f)) {
-        func_802227F4_de(player, arg1, 3);
+        Weapons_SetPlayerState(player, arg1, 3);
     }
 }
 
@@ -73,7 +73,7 @@ void func_8022C8FC_de(struct SharedPlayer *player, void *arg1) {
     Weapons_UpdateViewAngles(player, arg1, &D_800CE7FC);
     func_802233F0_de(player, arg1, &D_800CE7C0);
     if (!(player->views5E8.view6AC_45.unk6AC & 0x10)) {
-        func_802227F4_de(player, arg1, 2);
+        Weapons_SetPlayerState(player, arg1, 2);
         if (player->views13B4.view13B4_3.character == &D_800CED30) {
             player->views5E8.view86C_125.unk86C = 0x5E24;
         } else {
@@ -174,7 +174,7 @@ void func_8022CB5C_de(void *player, LevelActor *actor) {
         }
     }
 transition:
-    func_802227F4_de(player, actor, 6);
+    Weapons_SetPlayerState(player, actor, 6);
     goto finish;
 scale_value:
     actor->position1.y =
@@ -193,7 +193,7 @@ void func_8022CC34_de(void *player, void *body) {
     }
     if (((LevelActor *)body)->position1.y <= 0.0f) {
         if (func_8024E62C_de(body) != 0) {
-            func_802227F4_de(player, body, 2);
+            Weapons_SetPlayerState(player, body, 2);
         }
     }
     if (((LevelActor *)body)->position1.y <= 0.0f) {
@@ -228,7 +228,7 @@ void func_8022CDBC_de(void *player, LevelActor *actor) {
     if ((temp_f2 < 0.0f && ((Shared_ActorView *)player)->lateralInput >= 0.0f) ||
         (temp_f2 > 0.0f && ((Shared_ActorView *)player)->lateralInput <= 0.0f) ||
         (((Shared_ActorView *)player)->actionTimer >= D_800C2D8C_de)) {
-        func_802227F4_de(player, actor, 8);
+        Weapons_SetPlayerState(player, actor, 8);
     } else {
         actor->position1.y = D_800C2D90_de;
     }
@@ -241,7 +241,7 @@ void func_8022CE78_de(s32 player, s32 body) {
     func_802233F0_de((void *)player, (void *)body, &D_800C9558_de);
     if (((LevelActor *)body)->position1.y <= 0.0f) {
         if (func_8024E62C_de((void *) body) != 0) {
-            func_802227F4_de((void *) player, (void *) body, 2);
+            Weapons_SetPlayerState((void *) player, (void *) body, 2);
         }
     }
 }

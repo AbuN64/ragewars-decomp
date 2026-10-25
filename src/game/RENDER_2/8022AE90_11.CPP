@@ -2,12 +2,12 @@
 #include "RENDER_2/8022AE90.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
-extern s32 func_802227F4_de(SharedPlayer *player, void *target, s32 state);
+extern s32 Weapons_SetPlayerState(SharedPlayer *player, void *target, s32 state);
 
 void func_8022B9C4_de(void *actor) {
     if ((((struct IntegerState1218 *) ((s8 *) actor))->unk_1210) != 0) {
         if ((((struct IntegerState1218 *) ((s8 *) actor))->unk_5E4) != 0) {
-            func_802227F4_de(actor, actor, 2);
+            Weapons_SetPlayerState(actor, actor, 2);
         }
         (((struct IntegerState1218 *) ((s8 *) actor))->unk_1210) = 0;
         (((struct IntegerState1218 *) ((s8 *) actor))->unk_1214) = 0;

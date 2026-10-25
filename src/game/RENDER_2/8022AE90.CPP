@@ -6,7 +6,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "TYPES.H"
-extern s32 func_802227F4_de(SharedPlayer *player, void *target, s32 state);
+extern s32 Weapons_SetPlayerState(SharedPlayer *player, void *target, s32 state);
 
 extern void *func_8025C95C_de(void *, s32, CVector3 *, void *, s32);
 
@@ -57,5 +57,5 @@ void func_8022B00C_de(void *player) {
 
 void func_8022B040_de(void *player, s32 arg1) {
     (((struct IntegerState16D4 *) ((s8 *) player))->unk_16D0) = arg1;
-    func_802227F4_de(player, player, 0x10);
+    Weapons_SetPlayerState(player, player, 0x10);
 }

@@ -8,7 +8,7 @@
 #include "COMMON/LOADOUT.H"
 #include "TYPES.H"
 #include "GFX/TEXT/802A8A94_5.H"
-extern void func_8022A748_de(void *);
+extern void Weapons_EndRound(void *);
 #include "COMMON/RENDERCOUNTERS.H"
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
@@ -97,7 +97,7 @@ void * func_8022C55C_de(void *, u32);
 /* Advances an elimination round when rule D_80146918 is on and not paused (Camera_IsSequenceActive,
    Camera_IsSequenceInWindow): counts the players still in, clears D_800F7D10 while one is waiting, then by the
    round state at 0x84 of D_801468A0 revives the first waiting player (crediting a point in state 1,
-   scheduling D_80146924 = 3 otherwise) or moves to state 2, and ends the round through func_8022A748_de
+   scheduling D_80146924 = 3 otherwise) or moves to state 2, and ends the round through Weapons_EndRound
    when func_802282EC_de reports it over. */
 
 
@@ -181,7 +181,7 @@ void func_80227038_de(s8 *world) {
 
     if ((Camera_IsSequenceActive() == 0) && (Camera_IsSequenceInWindow() == 0) && ((initial_rules = &D_801462C8.counters)->m_bFragTagOn != 0)) {
         if ((func_802281F0_de(world) != 0) && (initial_rules->elapsed == 0)) {
-            func_8022A748_de(world);
+            Weapons_EndRound(world);
             return;
         }
         temp_v0 = func_8022C620_de(world);
@@ -623,7 +623,7 @@ void Weapons_ReleaseWaitingPlayer(Round *round) {
                 break;
             }
             if ((func_802282EC_de(round) != 0) && (D_801427FC == 0)) {
-                func_8022A748_de(round);
+                Weapons_EndRound(round);
             }
         }
     }

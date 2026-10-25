@@ -7,7 +7,7 @@
    D_800CE874, sways the weapon on three sine waves of the state time at 0x658, moves the body through
    func_802238E0_de with tuning D_800CE850, and once the state time passes 2 without the body's flag
    0x1000 it ends the state: clears the strokes at 0x938 and the body's 0x20, plays sound 0x2DE, clears
-   0x840 and hands the player to func_802227F4_de (mode 2 when body flags 3 are set, else 10); it then
+   0x840 and hands the player to Weapons_SetPlayerState (mode 2 when body flags 3 are set, else 10); it then
    picks the animation at 0x86C from the vertical speed at 0x6C0 (kept while idle animation 0x1144
    plays) and, while moving faster than 5.12, plays the tuning's stroke sound and sound 0x2E0 whenever
    the sound timer at 0x11C4 passes 45, restarting it at a random value below 15. */
@@ -27,7 +27,7 @@ extern void Weapons_UpdateViewAngles(SharedPlayer_func_80224F5C_de *, Body_func_
 extern void func_802238E0_de(SharedPlayer_func_80224F5C_de *, Body_func_80224F5C_de *, Tuning *);
 extern void func_80218464_de(char *);
 extern s32 Render_PlaySoundAtPosition(s16, s32, s32, s32, s32, s32);
-extern void func_802227F4_de(SharedPlayer_func_80224F5C_de *, Body_func_80224F5C_de *, s32);
+extern void Weapons_SetPlayerState(SharedPlayer_func_80224F5C_de *, Body_func_80224F5C_de *, s32);
 
 
 void func_80224F5C_de(SharedPlayer_func_80224F5C_de *player, Body_func_80224F5C_de *body) {
@@ -49,9 +49,9 @@ void func_80224F5C_de(SharedPlayer_func_80224F5C_de *player, Body_func_80224F5C_
         Render_PlaySoundAtPosition(0x2DE, body->x, body->y, body->z, 0, -1);
         player->views5E8.view840_118.surfaced = 0;
         if (body->flags & 3) {
-            func_802227F4_de(player, body, 2);
+            Weapons_SetPlayerState(player, body, 2);
         } else {
-            func_802227F4_de(player, body, 0xA);
+            Weapons_SetPlayerState(player, body, 0xA);
         }
     }
     idle = 0;

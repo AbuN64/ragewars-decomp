@@ -138,7 +138,7 @@ s32 func_80222D64_de(void *context, s32 arg1) {
    enters state 0xA. Returns whether a state was entered. */
 
 extern f32 D_800C7948[];
-extern s32 func_802227F4_de(void *, void *, s32);
+extern s32 Weapons_SetPlayerState(void *, void *, s32);
 
 
 
@@ -165,7 +165,7 @@ s32 func_80222EA4_de(void *player, void *arg1) {
                                 ((Actor_func_8022D290_de *)(player))->unk_0x0038 |= 0x1000;
                                 return 0;
                             }
-                            func_802227F4_de(player, arg1, 0xC);
+                            Weapons_SetPlayerState(player, arg1, 0xC);
                             return 1;
                         }
                     }
@@ -207,7 +207,7 @@ s32 func_80222EA4_de(void *player, void *arg1) {
     if (state == 0x26) {
         return 0;
     }
-    func_802227F4_de(player, arg1, 0xA);
+    Weapons_SetPlayerState(player, arg1, 0xA);
     return 1;
 }
 

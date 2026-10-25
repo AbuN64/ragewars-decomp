@@ -25,7 +25,7 @@ extern struct Shape_func_8020AF9C_de_2 D_80140FF8;
 
 
 
-extern void func_802227F4_de(void *, void *, s32);
+extern void Weapons_SetPlayerState(void *, void *, s32);
 
 
 extern s16 func_8022F96C_de(void *arg0);
@@ -56,7 +56,7 @@ void func_802331FC_de(Shared_ActorView *arg0, WeaponFireState *fireState) {
 
     player = arg0->self;
     if (fireState->mode == 2) {
-        func_802227F4_de(player, player, 2);
+        Weapons_SetPlayerState(player, player, 2);
     } else {
         fireState->cueTimer = D_800C3048_de[0];
         if ((((Shared_ActorView *)player)->remote == 0) &&

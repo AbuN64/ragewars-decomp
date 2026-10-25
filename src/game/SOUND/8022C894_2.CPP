@@ -27,7 +27,7 @@ extern void Weapons_UpdateViewAngles(void *, void *, void *);
 
 extern void func_802238E0_de(void *, void *, void *);
 
-extern s32 func_802227F4_de(void *, void *, s32);
+extern s32 Weapons_SetPlayerState(void *, void *, s32);
 
 
 
@@ -113,7 +113,7 @@ void func_8022D040_de(void *arg0, LevelActor *actor) {
         }
     }
     if (!(actor->motionState & 0x20000) && player->poseTimer > D_800C7E9C) {
-        func_802227F4_de(player, actor, 3);
+        Weapons_SetPlayerState(player, actor, 3);
     }
 }
 

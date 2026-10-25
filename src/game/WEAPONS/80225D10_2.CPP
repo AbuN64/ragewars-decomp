@@ -14,7 +14,7 @@
    on average it tints the view through func_802391AC_de with a random alpha below 7.5 and plays effect
    D_80145088 at the view's position; the hold time at 0x1D4 counts down by the frame time D_800D2988,
    and once it runs out or the hold flag at 0x5E4 is clear the player drops flag 0x800000, is released
-   through func_802227F4_de, and lets go of the object at 0x13D8 through func_80216488_de (flags 0x30200 when
+   through Weapons_SetPlayerState, and lets go of the object at 0x13D8 through func_80216488_de (flags 0x30200 when
    the object is a carried actor with option 0x200, 0x4600 otherwise) before forgetting it and applying
    the result through func_80219A40_de. */
 
@@ -32,7 +32,7 @@
 #include "DATA/OVLDAT6/800CF230.H"
 
 extern void func_802394BC_de(char *, f32, f32, f32, f32, s32, Triple);
-extern void func_802227F4_de(SharedPlayer *, SharedPlayer *, s32);
+extern void Weapons_SetPlayerState(SharedPlayer *, SharedPlayer *, s32);
 extern void func_80216488_de(Slot *, Held *, s32, f32, s32, s32);
 extern void func_80219A40_de(SharedPlayer *, char *, Slot *);
 
@@ -57,7 +57,7 @@ void func_80226340_de(SharedPlayer *player) {
             owner = player->views13D8.view13D8_1.held;
         }
         player->views1C.view100_9.flags &= ~0x800000;
-        func_802227F4_de(player, player, 2);
+        Weapons_SetPlayerState(player, player, 2);
         if (owner->options & 0x200) {
             func_80216488_de(&hit, player->views13D8.view13D8_1.held, 0x30200, 25.599998f, 0x80, 0);
         } else {

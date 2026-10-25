@@ -41,7 +41,7 @@ extern void func_80219480_de(void *, void *);
 extern void func_80219A40_de(void *, void *, void *);
 extern void Weapons_UpdatePlayerEffectLights(void *, void *);
 extern void func_80220D44_de(void *);
-extern s32 func_802227F4_de(void *, void *, s32);
+extern s32 Weapons_SetPlayerState(void *, void *, s32);
 extern void func_80222908_de(void *, void *, ObjectState54 *);
 extern void func_80222EA4_de(void *, void *);
 extern void func_80222FE0_de(void *, void *, s32 *);
@@ -354,7 +354,7 @@ void func_80220ED4_de(SharedPlayer *player)
       func_80245D30_de(actor, material, &player->views5E8.view6E8_79.unk6E8, 1);
       if ((material->flags & 0x4000) && (player->views5E4.view5E4_2.health > 0))
       {
-        func_802227F4_de(player, player, 32);
+        Weapons_SetPlayerState(player, player, 32);
         func_80216488_de(scratch.views0.view0_0.damage, 0, 0x3E700, 0x41CCCCCC, 128, 0);
         func_80219A40_de(player, &player->views1C.view170_23.unk170, scratch.views0.view0_0.damage);
       }
@@ -381,7 +381,7 @@ void func_80220ED4_de(SharedPlayer *player)
       flag = 1;
       if (player->views5E8.view650_16.state != 4)
       {
-        func_802227F4_de(player, actor, 4);
+        Weapons_SetPlayerState(player, actor, 4);
       }
     }
     goal = 0.0f;

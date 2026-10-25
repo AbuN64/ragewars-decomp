@@ -27,7 +27,7 @@ extern void func_802095F8_de(Brain *);
 extern s32 func_8022AC00_de(SharedPlayer_func_80208158_de *);
 extern void func_802AA79C_de(char *, s32);
 extern void func_802636B0_de(char *);
-extern void func_802227F4_de(SharedPlayer_func_80208158_de *, SharedPlayer_func_80208158_de *, s32);
+extern void Weapons_SetPlayerState(SharedPlayer_func_80208158_de *, SharedPlayer_func_80208158_de *, s32);
 extern void func_80209CD8_de(Brain *, SharedPlayer_func_80208158_de *);
 
 void func_80208158_de(Brain *brain) {
@@ -90,7 +90,7 @@ void func_80208158_de(Brain *brain) {
                 if (tutorial->cooldown == 0 && brain->player->views5E4.view5E4_2.health > 0) {
                     tutorial->timer = 100;
                     tutorial->cooldown = -1;
-                    func_802227F4_de(brain->player, brain->player, 2);
+                    Weapons_SetPlayerState(brain->player, brain->player, 2);
                 }
             }
             if (brain->player->views5D8.view5D8_1.record->display == 1) {

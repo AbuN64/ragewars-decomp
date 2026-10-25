@@ -22,7 +22,7 @@ extern void func_80218464_de();
 
 extern void func_80225F44_de(void *, void *);
 
-extern void func_802227F4_de(void *arg0, void *arg1, int arg2);
+extern void Weapons_SetPlayerState(void *arg0, void *arg1, int arg2);
 
 void func_8022D60C_de(void *arg0) { func_8022D57C_de(arg0); }
 
@@ -142,7 +142,7 @@ void func_8022DA30_de(void *player, void *body) {
 
     func_80225F44_de(player, body);
     if (a0->views5E8.view6C0_51.unk6C0 != 0.0f) {
-        func_802227F4_de(a0, a1, 0x25);
+        Weapons_SetPlayerState(a0, a1, 0x25);
     }
 }
 
@@ -158,7 +158,7 @@ void func_8022DAB0_de(void *player, void *body) {
 
     func_80225F44_de(player, body);
     if (a0->views5E8.view6C0_51.unk6C0 == 0.0f) {
-        func_802227F4_de(a0, a1, 0x24);
+        Weapons_SetPlayerState(a0, a1, 0x24);
     }
 }
 

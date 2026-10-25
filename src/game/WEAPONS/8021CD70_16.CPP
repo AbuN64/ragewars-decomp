@@ -49,10 +49,10 @@ void func_8022470C_de(void *playerContext, void *bodyContext) {
     } else {
         func_802233F0_de(player, body, &D_800C94EC_de);
     }
-    if ((player->views5E8.view7E8_105.unk7E8 == 0) && !(player->views5E8.view6E4_61.unk6E4 > D_800C29C8_de) && !(body->flags & 0xC0000) && (body->model->flags & 2) && (player->views5E8.view6B0_46.unk6B0 & 0x10) && (player->views5E8.view11D8_147.unk11D8 <= 0.0f)) { func_802227F4_de(player, body, 5); var_v0_3 = 1; } else var_v0_3 = 0;
+    if ((player->views5E8.view7E8_105.unk7E8 == 0) && !(player->views5E8.view6E4_61.unk6E4 > D_800C29C8_de) && !(body->flags & 0xC0000) && (body->model->flags & 2) && (player->views5E8.view6B0_46.unk6B0 & 0x10) && (player->views5E8.view11D8_147.unk11D8 <= 0.0f)) { Weapons_SetPlayerState(player, body, 5); var_v0_3 = 1; } else var_v0_3 = 0;
     if (var_v0_3 == 0) {
         if ((player->views5E8.view6C0_51.unk6C0 == 0.0f) && (player->views5E8.view6C4_54.unk6C4 == 0.0f)) {
-            func_802227F4_de(player, body, 2);
+            Weapons_SetPlayerState(player, body, 2);
         }
         if (((body->flags & 0x5000) == 0x4000) && (player->views5E8.view6D0_71.onGround != 0)) {
             temp_fv1 = player->views5E8.view11C4_144.soundTime + D_800D2988;

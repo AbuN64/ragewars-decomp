@@ -17,7 +17,7 @@
 #include "FX/802631D0.H"
 
 extern char D_8010F328[];
-extern void func_802227F4_de(void *, void *, s32);
+extern void Weapons_SetPlayerState(void *, void *, s32);
 void func_8021A78C_de(void *arg0) {
     char *object = arg0;
     void *attributes;
@@ -111,7 +111,7 @@ void func_8021A78C_de(void *arg0) {
     ((ObjectLinks16D8 *)(object))->unk_7CC = zero;
     ((ObjectLinks16D8 *)(object))->unk_7D0 = zero;
     ((ObjectLinks16D8 *)(object))->unk_7D4 = zero;
-    func_802227F4_de(object, object, type);
+    Weapons_SetPlayerState(object, object, type);
     ((ObjectLinks16D8 *)(object))->unk_80C = 0;
     ((ObjectLinks16D8 *)(object))->unk_838 = zero;
     ((ObjectLinks16D8 *)(object))->unk_83C = zero;

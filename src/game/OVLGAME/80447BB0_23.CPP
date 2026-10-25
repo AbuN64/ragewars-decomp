@@ -97,7 +97,7 @@ extern void func_8021836C_de(void *);
 extern void func_80218E98_de(void *);
 extern u32 func_8022F454_de(void *, s32);
 extern void Render_ResetPlayerWeapons(struct RespawnPlayer *);
-extern void func_8044952C_de(struct RespawnPlayer *);
+extern void Ovlgame_ResetRespawnedPlayer(struct RespawnPlayer *);
 extern void Pak_OpenDialog(void *, void *, void *, s32, s32);
 /* Resets a player/actor record for a new run: marks it active, stores the character, picks up the HUD
  * object, clears the per-slot counters and weapon tables, selects the start mode from the multiplayer setting
@@ -184,7 +184,7 @@ void Ovlgame_ResetPlayerForRound(void *actor, s32 character) {
     FIELD(s32, actor, 0x63C) = 1;
     FIELD(s32, actor, 0x640) = 0;
     FIELD(s32, actor, 0x868) = 1;
-    func_8044952C_de((struct RespawnPlayer *)actor);
+    Ovlgame_ResetRespawnedPlayer((struct RespawnPlayer *)actor);
     globals = (char *)&D_801462C8;
     if (FIELD(u8, globals, 0x1D) != 0) {
         FIELD(s32, actor, 0x13E8) = 0;
@@ -409,7 +409,7 @@ static inline void releaseState(LevelActor *carried, s32 *state) {
     }
 }
 
-void func_8044952C_de(struct RespawnPlayer *player) {
+void Ovlgame_ResetRespawnedPlayer(struct RespawnPlayer *player) {
     int i;
     LevelActor *carried;
 

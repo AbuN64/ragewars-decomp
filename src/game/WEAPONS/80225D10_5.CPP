@@ -60,7 +60,7 @@ extern s32 func_80442A28_de(GameSession *);
 
 extern s32 func_8022C650_de(World_func_802283B8_de *);
 
-extern void func_8022A748_de(World_func_802283B8_de *);
+extern void Weapons_EndRound(World_func_802283B8_de *);
 
 extern s32 Weapons_CheckScoreLimit(World_func_802283B8_de *);
 
@@ -230,14 +230,14 @@ void func_802283B8_de(World_func_802283B8_de *world) {
                 if (D_8014561C.settings.trialKind == 3) {
                     rules->humanWon = 0;
                 }
-                func_8022A748_de(world);
+                Weapons_EndRound(world);
             }
         }
         game = &D_8014561C;
         if (func_80442A28_de(game) == 0 && Weapons_CheckScoreLimit(world) != 0) {
             limits = &game->rules;
             if (limits->locked == 0 && game->paused == 0 && limits->scoreLimit > 0 && limits->sudden == 0) {
-                func_8022A748_de(world);
+                Weapons_EndRound(world);
             }
         }
         if (D_80146938 != 0) {
@@ -261,11 +261,11 @@ void func_802283B8_de(World_func_802283B8_de *world) {
                     limits = &D_8014561C.rules;
                     if (limits->rounds >= 3) {
                         limits->humanWon = 1;
-                        func_8022A748_de(world);
+                        Weapons_EndRound(world);
                     }
                 } else {
                     D_80146948 = 1;
-                    func_8022A748_de(world);
+                    Weapons_EndRound(world);
                 }
             }
         }

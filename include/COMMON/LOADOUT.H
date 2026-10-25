@@ -163,14 +163,14 @@ typedef struct Player_func_8022ACB8_de Player_func_8022ACB8_de;
 struct func_8022A82C_S3;
 typedef struct func_8022A82C_S3 func_8022A82C_S3;
 
-struct Node_func_8022A748_de;
-struct Node_func_8022A748_de {
+struct Node_Weapons_EndRound;
+struct Node_Weapons_EndRound {
     u8 pad0[0x5D8];
     u8 *state;
     u8 pad5DC[0x280];
     s32 field85C;
     u8 pad860[0xE80];
-    struct Node_func_8022A748_de *next;
+    struct Node_Weapons_EndRound *next;
 };
 
 struct func_8022AA8C_S1;
@@ -305,8 +305,8 @@ typedef struct func_8022A5B0_S2 func_8022A5B0_S2;
 struct func_8022AB10_S1;
 typedef struct func_8022AB10_S1 func_8022AB10_S1;
 
-struct Node_func_8022A748_de;
-typedef struct Node_func_8022A748_de Node_func_8022A748_de;
+struct Node_Weapons_EndRound;
+typedef struct Node_Weapons_EndRound Node_Weapons_EndRound;
 
 struct GlobalState;
 typedef struct GlobalState GlobalState;
@@ -381,11 +381,11 @@ struct GlobalState {
     s32 restrictionActive; /* 0x68 */
 };
 
-struct Node_func_8022A748_de;
+struct Node_Weapons_EndRound;
 struct func_8022A738_S1;
 struct func_8022A738_S1 {
     char pad0[0x20];
-    struct Node_func_8022A748_de * unk20;
+    struct Node_Weapons_EndRound * unk20;
 };
 
 struct func_8022A8B8_S2;

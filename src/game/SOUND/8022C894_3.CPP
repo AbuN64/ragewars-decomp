@@ -17,7 +17,7 @@ extern s32 D_800CED30;
 
 
 
-extern void func_802227F4_de(Actor_func_8022D290_de *, Actor_func_8022D290_de *, s32);
+extern void Weapons_SetPlayerState(Actor_func_8022D290_de *, Actor_func_8022D290_de *, s32);
 
 extern f32 D_800C2DB0_de[];
 
@@ -82,9 +82,9 @@ void func_8022D308_de(Actor_func_8022D290_de *player) {
     if ((mode = &D_801462C8.counters)->round != 0 && mode->elapsed != 0) {
         fire:
         if ((mode = &D_801462C8.counters)->round != 0 && 0 == mode->elapsed) {
-            func_802227F4_de(player, player, 0x14);
+            Weapons_SetPlayerState(player, player, 0x14);
         } else {
-            func_802227F4_de(player, player, 0x13);
+            Weapons_SetPlayerState(player, player, 0x13);
         }
 
     }

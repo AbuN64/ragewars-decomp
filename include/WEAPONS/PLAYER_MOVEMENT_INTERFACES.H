@@ -8,7 +8,7 @@
 void func_8022404C_de(struct Object *object);
 void func_802233F0_de(SharedPlayer *player,
                      func_802165F8_S1 *body, SharedMovement *tuning);
-s32 func_802227F4_de(SharedPlayer *player, void *body, s32 state);
+s32 Weapons_SetPlayerState(SharedPlayer *player, void *body, s32 state);
 /* Turn-rate limits shared by player movement. */
 extern const f32 D_800C2A64_de;
 extern const f32 D_800C2A68_de;

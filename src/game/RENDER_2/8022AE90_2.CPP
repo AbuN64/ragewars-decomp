@@ -10,7 +10,7 @@
 #include "RENDER_2/8025DE50_5.H"
 #include "particle/80271B18_3.H"
 
-extern unsigned int func_802227F4_de(void *arg0, void *arg1, s32 arg2);
+extern unsigned int Weapons_SetPlayerState(void *arg0, void *arg1, s32 arg2);
 
 
 extern void func_802732D0_de(char *, f32 *);
@@ -25,7 +25,7 @@ void Render_SetPlayerResetPosition(void *arg0, CVector3 *arg1)
   void *new_var;
   player->resetPosition = *arg1;
   new_var = arg0;
-  func_802227F4_de(new_var, new_var, 0x11);
+  Weapons_SetPlayerState(new_var, new_var, 0x11);
 }
 
 extern void Weapons_BuildPlayerViewTransform(void *, MatrixF *);

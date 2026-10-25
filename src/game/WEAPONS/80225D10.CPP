@@ -25,7 +25,7 @@ extern f32 D_800D2988;
 extern f32 D_800C2AE0_de, D_800C2AE4_de, D_800C2AE8_de, D_800C2AEC_de, D_800C2AF0_de;
 
 extern void Weapons_UpdateViewAngles(void *, void *, void *);
-extern void func_802227F4_de(void *, void *, s32);
+extern void Weapons_SetPlayerState(void *, void *, s32);
 
 void func_80225D34_de(TravelPlayer *player, void *body) {
     f32 yaw, targetYaw, distance, otherDistance, alternate, duration, t;
@@ -66,7 +66,7 @@ void func_80225D34_de(TravelPlayer *player, void *body) {
             return;
         }
     }
-    func_802227F4_de(player, body, 2);
+    Weapons_SetPlayerState(player, body, 2);
 }
 #else
 INCLUDE_ASM("span_1000", func_80225D34_de);

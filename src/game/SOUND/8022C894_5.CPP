@@ -22,7 +22,7 @@
 
 
 
-extern s32 func_802227F4_de(void *, void *, s32);
+extern s32 Weapons_SetPlayerState(void *, void *, s32);
 
 
 
@@ -121,7 +121,7 @@ void func_8022DC44_de(Player *player, LevelActor *actor, s32 unused, s32 *flags)
     if (player->forceCrouch != 0) {
         crouch = 1;
         if (player->pose != 4) {
-            func_802227F4_de(player, actor, 4);
+            Weapons_SetPlayerState(player, actor, 4);
         }
     }
     target = 0.0f;
