@@ -17,7 +17,7 @@ extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 extern s32 func_80251F6C_de(s32, s32, void *, s32, s32, void *, void *, void *, s32);
 extern void func_8027892C_de(void *object, void *colors);
 
-extern void func_80253754_de(s32, s32);
+extern void Scene_UnlockResource(s32, s32);
 extern s32 func_8026E340_de(void);
 #include "particle/8027A0F4_8.H"
 extern EffectRecAt154 *func_802830B8_de(void *system);
@@ -63,9 +63,9 @@ void func_8024A7A0_de(LevelActor *actor, s32 arg1, Lookup *params) {
     }
     func_8026DA4C_de(params->value, actor->fieldB4, 1, 0, data, actor->field3);
     if (func_8026E340_de() != 0) {
-        node = func_8028FDB4_de(*params->value, 2);
+        node = Render_GetPackSection(*params->value, 2);
         if ((*node != 0) &&
-            (*((s32 *)func_8028FDB4_de(func_8028FDB4_de(node, 0), 0)) & 0x8000)) {
+            (*((s32 *)Render_GetPackSection(Render_GetPackSection(node, 0), 0)) & 0x8000)) {
             spawn(actor);
             effect = func_802830B8_de(&D_8011D8D0);
             if (effect != 0) {
@@ -75,5 +75,5 @@ void func_8024A7A0_de(LevelActor *actor, s32 arg1, Lookup *params) {
             }
         }
     }
-    func_80253754_de(0, resource);
+    Scene_UnlockResource(0, resource);
 }

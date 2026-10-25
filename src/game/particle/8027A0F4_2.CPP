@@ -339,7 +339,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
     sp50.y = 0;
     sp50.z = D_800C4BF4_de;
     new_var = temp_s2_2;
-    func_80272898_de(&sp90, &sp50, new_var);
+    Particle_TransformPoint(&sp90, &sp50, new_var);
     func_80271F9C_de(&arg0->inst.velocity.x, new_var, temp_f20_3);
   }
   if (!(arg0->flags & 0x70000))

@@ -170,7 +170,7 @@ void func_80416ECC_de(s32 mode) {
         point.x = 0.0f;
         point.y = 0.0f;
         point.z = D_800DD3FC;
-        func_80272898_de(&D_80141168, &point, &projected);
+        Particle_TransformPoint(&D_80141168, &point, &projected);
         count = 4;
         vertices = func_802A15E4_de(0x40);
         for (i = 0; i < count; i++) {

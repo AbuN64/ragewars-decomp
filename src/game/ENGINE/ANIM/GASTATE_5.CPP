@@ -12,7 +12,7 @@
 
 extern f32 func_80273EE4_de(f32, f32, f32);
 
-extern s32 func_8028FE3C_de(s32 arg0, s32 arg1, s32 arg2, s32 *arg3);
+extern s32 Render_LocatePackSection(s32 arg0, s32 arg1, s32 arg2, s32 *arg3);
 
 
 extern s32 func_802624D8_de(void *arg0);
@@ -28,7 +28,7 @@ void func_802625F0_de(AnimRef *arg0, f32 arg1) {
     f32 b_term;
     f32 e_term;
 
-    base = (s16 *)((ResidentDataChunk *)func_8028FDB4_de(func_8026049C_de(arg0), 0))->data;
+    base = (s16 *)((ResidentDataChunk *)Render_GetPackSection(func_8026049C_de(arg0), 0))->data;
     count = (s16)arg0->count;
     var_v1 = count - 1;
     temp_f2 = (s32) arg1;
@@ -54,8 +54,8 @@ s32 func_8026269C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
         return 0;
     }
 
-    key = func_8028FE3C_de(arg1, arg2, arg3, &sp28);
-    resource = func_8025193C_de(0, key, key, sp28, 4, arg0,
+    key = Render_LocatePackSection(arg1, arg2, arg3, &sp28);
+    resource = Scene_RequestResource(0, key, key, sp28, 4, arg0,
                             &D_0025F56C, D_800C41B0_de, 0);
     out->data = resource;
     if (!func_802624D8_de(arg0)) {
@@ -63,12 +63,12 @@ s32 func_8026269C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
 
     resource = func_8026049C_de(arg0);
-    entry = func_8028FDB4_de(resource, 0);
+    entry = Render_GetPackSection(resource, 0);
     value = entry->unk6;
     out->id = arg3;
     out->count = value;
-    resource = func_8028FDB4_de(resource, 3);
-    out->span = ((ResourceEntry *)func_8028FDB4_de(resource, 0))->unk2;
+    resource = Render_GetPackSection(resource, 3);
+    out->span = ((ResourceEntry *)Render_GetPackSection(resource, 0))->unk2;
     return 1;
 }
 

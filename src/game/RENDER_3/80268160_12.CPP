@@ -337,7 +337,7 @@ void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
 void func_80268CE0_de(u32);
 s32 Render_SetModePreset(s32);
-void func_80253754_de(s32, void *);
+void Scene_UnlockResource(s32, void *);
 s32 func_802744D4_de(void);
 
 s32 func_80269A80_de(struct Shared_GfxMaterial *mat, s32 pass) {
@@ -451,7 +451,7 @@ a = func_802744D4_de() % info.count;
             } else {
                 func_80268CE0_de(3);
             }
-            func_80253754_de(0, node);
+            Scene_UnlockResource(0, node);
         } else if (flags & 2) {
             if (flags & 0x2000) {
                 switch (info.frame->unk5) {
@@ -491,7 +491,7 @@ a = func_802744D4_de() % info.count;
                         break;
                 }
             }
-            func_80253754_de(0, node);
+            Scene_UnlockResource(0, node);
         } else {
             if (flags & 0x2000) {
                 switch (info.frame->unk5) {
@@ -534,7 +534,7 @@ a = func_802744D4_de() % info.count;
                         break;
                 }
             }
-            func_80253754_de(0, node);
+            Scene_UnlockResource(0, node);
         }
     } else {
         gDPPipeSync(D_80110634++);

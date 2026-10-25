@@ -7,7 +7,7 @@
 extern s32 func_8028B21C_de(struct Shared_World *, s32);
 extern s32 func_8028C198_de(void *, s32);
 extern s32 func_8028FE28_de(s32 *, s32, s32);
-extern s32 func_8028FE3C_de(void *, s32, s32, s32 *);
+extern s32 Render_LocatePackSection(void *, s32, s32, s32 *);
 extern char D_0026D7F4;
 typedef struct { u32 w[7]; } Blk28;
 void func_8044B600_de(void *level, void *buffer, s32 name) {
@@ -27,17 +27,17 @@ void func_8044B600_de(void *level, void *buffer, s32 name) {
         ((u32 *)buffer)[2] = 0;
     } else {
         size = func_8028C198_de(level, index);
-        header = func_8025193C_de(0, size, size, 0x18, 0, 0, 0, D_800C4EE0_de, 1);
+        header = Scene_RequestResource(0, size, size, 0x18, 0, 0, 0, D_800C4EE0_de, 1);
         if (header != 0) {
             key = func_8028FE28_de(*header, size, 1);
             resource = func_802540F4_de(0, &table, key, D_800C4F04_de, 1);
             if (resource != 0) {
-                shapeKey = func_8028FE3C_de(table, key, 0, &bytes);
-                shape = func_8025193C_de(0, shapeKey, shapeKey, bytes, 0, 0, &D_0026D7F4, D_800C4F2C_de, 1);
+                shapeKey = Render_LocatePackSection(table, key, 0, &bytes);
+                shape = Scene_RequestResource(0, shapeKey, shapeKey, bytes, 0, 0, &D_0026D7F4, D_800C4F2C_de, 1);
                 if (shape != 0) {
-                    first = func_8028FDB4_de(*shape, 2);
-                    first = func_8028FDB4_de(first, 0);
-                    source = func_8028FDB4_de(first, 0);
+                    first = Render_GetPackSection(*shape, 2);
+                    first = Render_GetPackSection(first, 0);
+                    source = Render_GetPackSection(first, 0);
                     *(Blk28 *)buffer = *(Blk28 *)source;
                     func_80253838_de(0, shape);
                 }

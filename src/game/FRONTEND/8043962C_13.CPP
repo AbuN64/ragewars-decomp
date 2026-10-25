@@ -53,7 +53,7 @@ void func_804399D0(MenuModelItem *item) {
   func_8026D844_de();
   {Gfx *g=D_80110634++; char *address=(char *)(u32)(D_800D297C<<6); address+=0x380; address+=(u32)D_80141008; gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);}
   position=item->position;
-  func_80272898_de(&D_80141008[0].camera,&position,&transformed);
+  Particle_TransformPoint(&D_80141008[0].camera,&position,&transformed);
   func_80272C60_de(&matrix, transformed.x, transformed.y, transformed.z);
   time=func_802A1934_de();
   if(item->speed.x!=0.0f)func_802737F0_de(&matrix,time*item->speed.x*D_800DDF50_de);
@@ -78,9 +78,9 @@ void func_804399D0(MenuModelItem *item) {
   scale.y=item->scale.y*(D_80141008[0].height/(f32)*(&D_800E28D0+1));
   func_8027347C_de(&matrix,scale.x,scale.y,scale.z);func_80273D6C_de(&matrix);
   func_8027027C_de(&matrix,(char *)item+((D_800D297C<<6)+0x38));
-  model=func_8028C198_de(&D_8011FE88,item->model);func_8026D980_de();
+  model=func_8028C198_de(&D_8011FE88,item->model);Render_BeginModelBatch();
   func_8026DF30_de(model,(char *)item+((D_800D297C<<6)+0x38),&D_800D0EF8,0,item->flags);
-  func_8026D9D0_de();
+  Render_FlushModelBatch();
  }
  D_800CC380=saved;
 }

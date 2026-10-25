@@ -18,7 +18,7 @@ extern Gfx *D_80110634;
 
 extern s32 Render_StartWorldEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 extern void func_802AA8EC_de(s32 arg0, s32 arg1, void **arg2, s32 *arg3);
-extern void func_80253754_de(s32 arg0, s32 arg1);
+extern void Scene_UnlockResource(s32 arg0, s32 arg1);
 extern void Render_SetModePreset(u32);
 extern void func_80268CE0_de(u32);
 
@@ -38,7 +38,7 @@ void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
       imageData = sp10;
       *arg2 = ((ImageSet *)sp10)->width;
       *arg3 = ((ImageSet *)imageData)->height;
-      func_80253754_de(0, temp_v0);
+      Scene_UnlockResource(0, temp_v0);
     }
   }
 }
@@ -71,7 +71,7 @@ void func_802AAA54_de(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
 #include "COMMON/AIPROFILE.H"
 extern s32 Render_StartWorldEffect(void *,s32,s32,s32);
 extern void func_802AA8EC_de(s32,s32,void **,s32 *);
-extern void func_80253754_de(s32,s32);
+extern void Scene_UnlockResource(s32,s32);
 
 void func_802AAB3C_de(int arg0, int arg1, int arg2, int alpha, int arg4, int arg5) {
     D_801376F8.envR = arg0;
@@ -111,7 +111,7 @@ s32 func_802AAC28_de(s32 icon, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5,
         return 0;
     }
     Text_DrawTileGrid(temp_v0, arg1, arg2, arg3, arg4, arg5, which);
-    func_80253754_de(0, temp_v0);
+    Scene_UnlockResource(0, temp_v0);
     return 1;
 }
 #else
@@ -147,7 +147,7 @@ void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
       new_var = sp10;
       *arg2 = ((ImageSet *)sp10)->width;
       *arg3 = ((ImageSet *)new_var)->height;
-      func_80253754_de(0, temp_v0);
+      Scene_UnlockResource(0, temp_v0);
     }
   }
 }
@@ -203,7 +203,7 @@ s32 func_802AAC28_de(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5,
         return 0;
     }
     Text_DrawTileGrid(temp_v0, arg1, arg2, arg3, arg4, arg5, arg6);
-    func_80253754_de(0, temp_v0);
+    Scene_UnlockResource(0, temp_v0);
     return 1;
 }
 #endif
@@ -241,7 +241,7 @@ void func_802AAD14_de(void) {
             view.data += 0x10;
         }
         func_802BD3A0_de(D_801470C0_de, view.data, 0x90);
-        func_80253754_de(0, handle);
+        Scene_UnlockResource(0, handle);
         D_800D2F90 = D_801470C0_de;
     }
 }

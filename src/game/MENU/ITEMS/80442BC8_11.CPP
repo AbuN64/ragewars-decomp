@@ -29,14 +29,14 @@ void func_804431E4_de(struct ObjectRecAt20 *object) {
     state->c = 0;
 }
 
-/* Allocates a block sized for the entries of a list through func_8025343C_de, builds it with Pak_InitializeMenu from four arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_804427C4_de with the list and all four values passed as arguments instead of read from a parameter block changed. */
+/* Allocates a block sized for the entries of a list through Scene_AllocateResource, builds it with Pak_InitializeMenu from four arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_804427C4_de with the list and all four values passed as arguments instead of read from a parameter block changed. */
 
 
 
 
 
 
-extern void **func_8025343C_de(s32, s32, s32, char *);
+extern void **Scene_AllocateResource(s32, s32, s32, char *);
 
 void *func_8044322C_de(struct func_8025E5B0_S1 *owner, struct Dialog *list, s32 a, s32 b, s32 c, s32 d) {
     s32 size = list->count * 40 + 0x1D8;
@@ -51,7 +51,7 @@ void *func_8044322C_de(struct func_8025E5B0_S1 *owner, struct Dialog *list, s32 
         }
         size += extra;
     }
-    block = func_8025343C_de(0, size, 0x3B, D_800DE4E8 + 4);
+    block = Scene_AllocateResource(0, size, 0x3B, D_800DE4E8 + 4);
     if (block == 0) {
         return 0;
     }

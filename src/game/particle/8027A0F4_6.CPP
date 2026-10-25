@@ -52,7 +52,7 @@ void Particle_BuildMatrix(Shared_Particle *, void *, void *, f32);
 void *func_802799C0_de(void *, s32);
 void func_80268CE0_de(s32);
 void Render_SetModePreset(s32);
-void func_80253754_de(s32, void *);
+void Scene_UnlockResource(s32, void *);
 s32 func_802744D4_de(void);
 
 static inline s32 func_8027ED6C_de_occluded(Shared_Particle *particle, struct Shared_ParticleView *view) {
@@ -147,7 +147,7 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
         }
         particle->opacity = alpha;
         if (alpha == 0.0f) {
-            func_80253754_de(0, model);
+            Scene_UnlockResource(0, model);
             return;
         }
     }
@@ -225,7 +225,7 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
             struct Shared_ParticleView *camera = D_80140FE8_de;
             CVector3 local;
             f32 depth;
-            func_80272898_de(&camera->viewMtx, &particle->inst.pos, &local);
+            Particle_TransformPoint(&camera->viewMtx, &particle->inst.pos, &local);
             depth = local.z;
             if (depth < 0.0f) {
                 depth = -depth;
@@ -237,7 +237,7 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
         particle->unk14E = frame;
         particle->flags |= 0x100000;
     }
-    func_80272898_de(&view->viewMtx, &particle->inst.pos, &viewPos);
+    Particle_TransformPoint(&view->viewMtx, &particle->inst.pos, &viewPos);
     dist = viewPos.z;
     if (dist < 0.0f) {
         dist = -dist;
@@ -247,7 +247,7 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
     } else {
         mtx = func_802799C0_de(&D_8011FFB0, 1);
         if (mtx == 0) {
-            func_80253754_de(0, model);
+            Scene_UnlockResource(0, model);
             return;
         }
         Particle_BuildMatrix(particle, mtx, view, dist);
@@ -351,5 +351,5 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
             break;
     }
     gSP2Triangles(D_80110634++, 0, 1, 2, 0, 2, 3, 0, 0);
-    func_80253754_de(0, model);
+    Scene_UnlockResource(0, model);
 }

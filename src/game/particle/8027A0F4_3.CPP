@@ -711,7 +711,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "lw         $a1, 0x0($s0)\n"
         "lw         $v0, 0xB8($s1)\n"
         "sll        $a1, $a1, 6\n"
-        "jal        func_80270910_de\n"
+        "jal        Rsp_ConvertMatrixToFloat\n"
         "addu      $a1, $v0, $a1\n"
         "lw         $v0, 0x100($s1)\n"
         "lui        $v1, (0x1000000 >> 16)\n"
@@ -788,7 +788,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "addiu      $a0, $sp, 0xB8\n"
         "lui        $a1, %hi(D_801001F8)\n"
         "addiu      $a1, $a1, %lo(D_801001F8)\n"
-        "jal        func_80272898_de\n"
+        "jal        Particle_TransformPoint\n"
         "addiu     $a2, $s2, 0x50\n"
         "lui        $t3, %hi(D_801042C8)\n"
         "addiu      $t3, $t3, %lo(D_801042C8)\n"
@@ -1118,7 +1118,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "lw         $a1, %lo(D_80100204)($a1)\n"
         "lw         $v0, 0xB8($s1)\n"
         "sll        $a1, $a1, 6\n"
-        "jal        func_80270910_de\n"
+        "jal        Rsp_ConvertMatrixToFloat\n"
         "addu      $a1, $v0, $a1\n"
         "addiu      $s0, $sp, 0x38\n"
         ".Lauto_8027D2FC:\n"
@@ -1141,7 +1141,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "lw         $a1, %lo(D_80100204)($a1)\n"
         "lw         $v0, 0xB8($s1)\n"
         "sll        $a1, $a1, 6\n"
-        "jal        func_80270910_de\n"
+        "jal        Rsp_ConvertMatrixToFloat\n"
         "addu      $a1, $v0, $a1\n"
         ".Lauto_8027D350:\n"
         "lui        $v0, %hi(D_80103FCC)\n"
@@ -1168,7 +1168,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "addiu      $a0, $sp, 0xB8\n"
         "lui        $a1, %hi(D_801001F8)\n"
         "addiu      $a1, $a1, %lo(D_801001F8)\n"
-        "jal        func_80272898_de\n"
+        "jal        Particle_TransformPoint\n"
         "addiu     $a2, $s1, 0x50\n"
         "lui        $t1, %hi(D_801042C8)\n"
         "addiu      $t1, $t1, %lo(D_801042C8)\n"
@@ -1255,7 +1255,7 @@ extern LiveParticle *D_8013D538;
 extern u8 D_8011026D;
 
 s32 func_8024E2C4_de(void *);
-void func_80270910_de(f32 *, void *);
+void Rsp_ConvertMatrixToFloat(f32 *, void *);
 void func_80247F18_de(void *, void *, void *, CVector3, CVector3, s32);
 void func_8026EF58_de(f32 *, f32 *);
 void func_80272B38_de(f32 *, CVector3 *, CVector3 *);
@@ -1270,11 +1270,11 @@ static __inline__ void attachParticle(Shared_Particle *particle, f32 *transform,
     attached=D_801041F0.current;
     if (transform) func_8026EF58_de(inverse, transform);
     else {
-        func_80270910_de(localTransform, &attached->drawMatrices[D_801041F0.frame]);
+        Rsp_ConvertMatrixToFloat(localTransform, &attached->drawMatrices[D_801041F0.frame]);
         func_8026EF58_de(inverse, localTransform);
     }
     scene=&D_801041F0;
-    func_80272898_de(inverse, &scene->origin, &particle->attachmentPosition);
+    Particle_TransformPoint(inverse, &scene->origin, &particle->attachmentPosition);
     direction=scene->direction;
     func_8027207C_de(&direction);
     func_80272B38_de(inverse, &direction, &particle->inst.velocity);
@@ -1311,7 +1311,7 @@ void Particle_HitTarget(void *particle) {
             if (actor->particle.inst.type==13) action=4;
             owner=D_801041F0.current;
             if (owner->flags&0x3000000) {
-                func_80270910_de(boneMatrix, &owner->bones[D_801041F0.frame]);
+                Rsp_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
                 hasMatrix=1;
                 if (owner->flags&0x1000000) {
                     func_80247F18_de(owner, &owner->unk170, boneMatrix, D_801041F0.origin, D_801041F0.direction, D_801041F0.frame);
@@ -1382,10 +1382,10 @@ void Particle_HitTarget(void *particle) {
     if (!(actor->particle.flags&0x30000)) {
         if (actor->particle.inst.type==0x3ef && D_8013D538 && owner->bones && D_8013D538->particle.inst.type==0x41e && action!=9) {
             D_8013D538->particle.rot=D_80103FCC->point;
-            if (!hasMatrix) func_80270910_de(boneMatrix, &owner->bones[D_801041F0.frame]);
+            if (!hasMatrix) Rsp_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
             func_802737F0_de(boneMatrix, 3.141593f);
             if (D_80103FCC->current->kind==1) {
-                if (*D_80103FCC->current->category==2) func_80270910_de(boneMatrix, &owner->bones[D_801041F0.frame]);
+                if (*D_80103FCC->current->category==2) Rsp_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
                 hit=D_80103FCC->current;
                 if (hit->kind==1 && (hit->flags&0x300000 || *hit->category==2)) {
                     attachParticle(&D_8013D538->particle, boneMatrix, action);

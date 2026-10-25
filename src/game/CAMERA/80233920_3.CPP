@@ -32,7 +32,7 @@ void func_802343C8_de(View *self) {
         if (&D_8011FE88 == 0 || D_8011FE88.mode == 0) {
             return;
         }
-        rec = (void *)(func_8028FDB4_de(D_8011FE88.modelSections, 0) + 8);
+        rec = (void *)(Render_GetPackSection(D_8011FE88.modelSections, 0) + 8);
     } else {
         rec = func_8028B2F8_de(&D_8011FE88, key);
         if (rec == 0) {

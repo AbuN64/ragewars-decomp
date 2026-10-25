@@ -453,7 +453,7 @@ apply:
 }
 
 extern f32 D_800C5DF0_de, D_800C5DF4_de;
-extern void func_80270910_de(void *, void *);
+extern void Rsp_ConvertMatrixToFloat(void *, void *);
 extern void func_8027347C_de(void *, f32, f32, f32);
 extern void func_80272828_de(void *);
 typedef struct LinkNode802A {
@@ -482,7 +482,7 @@ typedef struct LinkOwner802A {
 static inline void Render_UpdateLinkedSource(LinkOwner802A *owner, LinkNode802A *node, void *source) {
     f32 matrix[16];
     f32 scale;
-    func_80270910_de(matrix, (char *)source + (D_800D297C * 64 + 0x60));
+    Rsp_ConvertMatrixToFloat(matrix, (char *)source + (D_800D297C * 64 + 0x60));
     scale = D_800C5DF0_de;
     if (*(s32 *)(*(char **)((char *)source + 0x118) + 0x14) != 0) {
         scale = D_800C5DF4_de;
@@ -543,7 +543,7 @@ void func_80295FB4_us_rev1(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #else
 void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
-void func_80253754_de(s32, void *);
+void Scene_UnlockResource(s32, void *);
 s32 func_802A4134_de(AnimationFrameState *state, AnimationFrameDefinition *definition, s32 *frame_count);
 /* Draws a textured ribbon: spaces the texture along the tail by length, picks the animation frame, sets the
  * combiner and colours (greyscale on a monochrome camera), then emits two vertex rows per clock node and the
@@ -647,5 +647,5 @@ void func_802A3718_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *cam
         clock = next;
         next = clock->next;
     }
-    func_80253754_de(0, model);
+    Scene_UnlockResource(0, model);
 }

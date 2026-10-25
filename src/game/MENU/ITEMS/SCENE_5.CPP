@@ -27,7 +27,7 @@ extern void *func_8028CF6C_de(void *world, s32 id);
 extern s32 func_8044D3E8_de(World *world, void *data, s32 group, void *buf);
 
 /* Loads every still-empty cell of the level's tile grid: for each row and column whose cell
-   record has no resource, fetches the cell's block through func_8028FE3C_de and func_8025193C_de,
+   record has no resource, fetches the cell's block through Render_LocatePackSection and Scene_RequestResource,
    binds and spawns each object of its two object lists (0xE8- and 0x1C8-byte records) and
    releases the spawned handles and the block. */
 
@@ -51,15 +51,15 @@ extern void *func_8024F6EC_de(ObjB *obj, s32 type);
 
 extern void func_802509A8_de(ObjA *obj, s32 arg1);
 
-extern void *func_802507AC_de(ResourceOwner *owner,s32 index);
+extern void *Instance_AcquireGeometry(ResourceOwner *owner,s32 index);
 
 
-extern void func_80253754_de(s32, void *);
+extern void Scene_UnlockResource(s32, void *);
 
 extern void func_8026E158_de(void *handle);
 
 
-extern s32 func_8028FE3C_de(s32, s32, s32, s32 *);
+extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
 
 /* Runs func_8044D054_de and func_8044D0F0_de on a large state block, then clears its word at offset
    0x1B444, sets the word at 0x1B448 to 0x15 and copies D_801462CC into the word at 0x1B44C. */
@@ -249,10 +249,10 @@ void Items_LoadGridCells(Level_func_8044CD8C_de *level) {
     ObjB *b;
     void *handle;
 
-    width = ((ResourceManagerState *) func_8028FDB4_de(level->grid, 0))->count;
+    width = ((ResourceManagerState *) Render_GetPackSection(level->grid, 0))->count;
     row = 0;
-    rows = ((ResourceManagerState *) func_8028FDB4_de(level->grid, 2))->count;
-    cells = (DraftStreamCell *) ((ResourceManagerState *) func_8028FDB4_de(level->grid, 4) + 1);
+    rows = ((ResourceManagerState *) Render_GetPackSection(level->grid, 2))->count;
+    cells = (DraftStreamCell *) ((ResourceManagerState *) Render_GetPackSection(level->grid, 4) + 1);
     lastRow = rows - 1;
     lastCol = width - 1;
     /* scan every cell: columns firstCol..lastCol of each row */
@@ -263,27 +263,27 @@ void Items_LoadGridCells(Level_func_8044CD8C_de *level) {
             if (cell->occupied != 0) {
                 continue;
             }
-            key = func_8028FE3C_de(level->file, level->key, col + row * width, &size);
-            block = func_8025193C_de(0, key, key, size, 4, level, D_0028798C, D_800C5210_de, 1);
+            key = Render_LocatePackSection(level->file, level->key, col + row * width, &size);
+            block = Scene_RequestResource(0, key, key, size, 4, level, D_0028798C, D_800C5210_de, 1);
             if (block == 0) {
                 continue;
             }
             node = *block;
             if (*(s32 *) node != 0) {
-                list = func_8028FDB4_de(node, 0);
+                list = Render_GetPackSection(node, 0);
                 n = list->count;
                 objsA = (ObjA *) (list + 1);
                 for (i = 0; i < n; i++) {
                     a = &objsA[i];
                     a->block = block;
                     func_802509A8_de(a, 0);
-                    handle = func_802507AC_de(a, a->type);
+                    handle = Instance_AcquireGeometry(a, a->type);
                     if (handle != 0) {
                         func_8026E158_de(handle);
-                        func_80253754_de(0, handle);
+                        Scene_UnlockResource(0, handle);
                     }
                 }
-                list = func_8028FDB4_de(node, 1);
+                list = Render_GetPackSection(node, 1);
                 m = list->count;
                 objsB = (ObjB *) (list + 1);
                 for (i = 0; i < m; i++) {
@@ -293,11 +293,11 @@ void Items_LoadGridCells(Level_func_8044CD8C_de *level) {
                     handle = func_8024F6EC_de(b, b->type);
                     if (handle != 0) {
                         func_8026E158_de(handle);
-                        func_80253754_de(0, handle);
+                        Scene_UnlockResource(0, handle);
                     }
                 }
             }
-            func_80253754_de(0, block);
+            Scene_UnlockResource(0, block);
         }
     }
 }

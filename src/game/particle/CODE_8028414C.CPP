@@ -28,7 +28,7 @@ void func_80284178_de(void *particle) {
     state = D_80140FF8;
     if (state[0] == 1) {
         camera = (void *)state[-4];
-        func_80272898_de(&((struct Shared_ParticleView *)camera)->viewMtx, &((Shared_Particle *)particle)->inst.pos, &delta);
+        Particle_TransformPoint(&((struct Shared_ParticleView *)camera)->viewMtx, &((Shared_Particle *)particle)->inst.pos, &delta);
         amount = delta.z;
         if (amount < 0.0f) {
             amount = -amount;

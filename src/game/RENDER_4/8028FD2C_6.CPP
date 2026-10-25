@@ -6,7 +6,7 @@
 #include "RENDER_4/8028FD2C_6.H"
 
 /** Return the byte address named by an indexed word offset from the base. */
-void *func_8028FDB4_de(void *table, s32 index) {
+void *Render_GetPackSection(void *table, s32 index) {
     s32 *entry = (s32 *)table + index;
     return (char *)table + entry[1];
 }

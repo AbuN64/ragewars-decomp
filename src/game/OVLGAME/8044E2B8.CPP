@@ -70,11 +70,11 @@ void func_8044D804_de(s32 arg0, void ***arg1) {
 
     if (func_80285180_de(arg1, 0) != 0) {
         obj = **arg1;
-        group = func_8028FDB4_de(obj, 2);
+        group = Render_GetPackSection(obj, 2);
         count = group->count;
         piece = group->pieces;
         i = 0;
-        base = (s32) func_8028FDB4_de(obj, i);
+        base = (s32) Render_GetPackSection(obj, i);
         if (count > 0) {
             do {
                 if (piece[i].tag == -1) {
@@ -109,7 +109,7 @@ void func_8044D934_de(s32 unused0, void ***arg1) {
         obj = **arg1;
         count = *(s32 *) obj;
         for (i = 0; i < count; i++) {
-            ent = func_8028FDB4_de(obj, i);
+            ent = Render_GetPackSection(obj, i);
             switch (ent->kind) {
             case 1:
                 ent->unk28 = ent->unk28 * scale;
@@ -156,7 +156,7 @@ void func_8044DA54_de(OwnerCode8044E2B8 *arg0, void ***arg1) {
         obj = **arg1;
         count = *(s32 *) obj;
         for (i = 0; i < count; i++) {
-            frame = func_8028FDB4_de(func_8028FDB4_de(obj, i), 1);
+            frame = Render_GetPackSection(Render_GetPackSection(obj, i), 1);
             inner = frame->count;
             j = 0;
             if (j < inner) {
@@ -164,7 +164,7 @@ void func_8044DA54_de(OwnerCode8044E2B8 *arg0, void ***arg1) {
                 do {
                     index = slot->item;
                     if (index != -1) {
-                        bank = func_8028FDB4_de(arg0->unk6C, 2);
+                        bank = Render_GetPackSection(arg0->unk6C, 2);
                         items = bank->items;
                         if ((index < 0) || (index >= bank->count)) {
                             item = 0;

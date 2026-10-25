@@ -321,9 +321,9 @@ int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
     }
     func_802A001C_de(D_801536E8, 0, bufferBytes);
 
-    ((void **)record)[1] = func_8025343C_de(0, (D_800E28A4 + D_800DE858) * 0x10, 0x23, D_800DCD3C);
-    ((void **)record)[2] = func_8025343C_de(0, 0x8000, 0x23, &D_800DCD4C);
-    ((void **)record)[7] = func_8025343C_de(0, 0x22000, 0x23, D_800DCD54);
+    ((void **)record)[1] = Scene_AllocateResource(0, (D_800E28A4 + D_800DE858) * 0x10, 0x23, D_800DCD3C);
+    ((void **)record)[2] = Scene_AllocateResource(0, 0x8000, 0x23, &D_800DCD4C);
+    ((void **)record)[7] = Scene_AllocateResource(0, 0x22000, 0x23, D_800DCD54);
     graphicsCount = D_800E28A4;
     overlayCount = D_800DE858;
     finalCount = D_800DE850;

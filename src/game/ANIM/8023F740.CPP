@@ -20,13 +20,13 @@ s32 func_8023DAA0_de(Ray *ray, Box *box, f32 *out);
 
 void **func_8024BFD4_de(MenuPanelRoot *arg0, s32 arg1);
 
-void func_80270910_de(f32 *dst, PackedMatrixWords *src);
+void Rsp_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
 
 void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
 
 void func_80272944_de(f32 *m, f32 *in, f32 *out, u32 count);
 
-void func_80253754_de(void *arg0, Node80253610 *arg1);
+void Scene_UnlockResource(void *arg0, Node80253610 *arg1);
 
 void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *origin, Box *bounds) {
     CVector3 vertices[8];
@@ -73,7 +73,7 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
         if (!(big <= size)) {
             size = big;
         }
-        table = func_8028FDB4_de(*resource, 5);
+        table = Render_GetPackSection(*resource, 5);
         count = table->count;
         for (i = 0; i < count; i++) {
             part = (BoxContactTransform *)((char *)table + (i * table->stride + 8));
@@ -104,7 +104,7 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
             if (bounds->min.x < box.max.x && box.min.x < bounds->max.x && bounds->min.z < box.max.z &&
                 box.min.z < bounds->max.z && bounds->min.y < box.max.y && box.min.y < bounds->max.y &&
                 func_8023DAA0_de(ray, &box, &t)) {
-                func_80270910_de(matrix, &actor->bones[i]);
+                Rsp_ConvertMatrixToFloat(matrix, &actor->bones[i]);
                 if (soft) {
                     func_8027347C_de(matrix, 1.5f, 1.5f, 1.5f);
                 }
@@ -112,12 +112,12 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
                 func_8023F750_de(ray, bounds, actor, origin, vertices, part, i);
             }
         }
-        func_80253754_de(0, resource);
+        Scene_UnlockResource(0, resource);
         return;
     }
-    shape = func_8025193C_de(0, actor->shapeId, actor->shapeId, actor->shapeBank, 4, 0, 0, "anim object info", 1);
+    shape = Scene_RequestResource(0, actor->shapeId, actor->shapeId, actor->shapeBank, 4, 0, 0, "anim object info", 1);
     if (shape != 0) {
-        extent = func_8028FDB4_de(*shape, 0);
+        extent = Render_GetPackSection(*shape, 0);
         corners[0].x = extent[0];
         corners[0].y = extent[1];
         corners[0].z = extent[2];
@@ -143,7 +143,7 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
         corners[7].y = extent[4];
         corners[7].z = extent[5];
         func_80272944_de(actor->transform, corners, vertices, 8);
-        func_80253754_de(0, shape);
+        Scene_UnlockResource(0, shape);
     } else {
         own = &actor->box;
         corner = vertices;

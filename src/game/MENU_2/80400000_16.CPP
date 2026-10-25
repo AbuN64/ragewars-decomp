@@ -18,7 +18,7 @@ f32 func_8040184C_de(f32 t) {
     s32 count;
     s32 i;
     f32 u;
-    track = func_8028FDB4_de(D_800E2830->resource, 3);
+    track = Render_GetPackSection(D_800E2830->resource, 3);
     key = (D_800C7470_Pair *)(track + 2);
     count = track[1];
     for (i = 0; i < count; i++) {
@@ -50,7 +50,7 @@ extern CVector3 Menu_GetTrackTargetPosition(f32);
 extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
 extern void func_802727D8_de(void *);
 extern void func_80272E3C_de(void *, f32, f32, f32);
-extern void func_80272898_de(void *, CVector3 *, CVector3 *);
+extern void Particle_TransformPoint(void *, CVector3 *, CVector3 *);
 extern void func_80288470_de(void *);
 extern s32 func_80243A90_de(SharedTrackObject *, f32, f32, f32, void *);
 extern void func_8028D888_de(void *);
@@ -108,9 +108,9 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
         }
         func_802727D8_de(matrix);
         func_80272E3C_de(matrix, 0.0f, D_800E2830->yaw, 0.0f);
-        func_80272898_de(matrix, &target, &rotated);
+        Particle_TransformPoint(matrix, &target, &rotated);
         target = rotated;
-        func_80272898_de(matrix, &eye, &rotated);
+        Particle_TransformPoint(matrix, &eye, &rotated);
         eye = rotated;
         func_80271F34_de(&target, &target, &D_800E2830->position);
         func_80271F34_de(&eye, &eye, &D_800E2830->position);

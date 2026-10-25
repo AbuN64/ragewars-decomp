@@ -29,10 +29,10 @@ void func_8028DAB4_de(struct World_func_8028787C_de *arg0, s32 arg1, s32 index, 
     } else {
         base = arg0->secondaryLevels;
     }
-    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(base, 0), arg3), index);
-    func_8028FDB4_de(table, 0);
+    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(base, 0), arg3), index);
+    Render_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    func_8028FDB4_de(table, 1);
+    Render_GetPackSection(table, 1);
 }
 
 void func_8028DB3C_de(struct World_func_8028787C_de *arg0, s32 arg1, s32 index, s32 arg3, s32 arg4, s32 arg5) {
@@ -49,10 +49,10 @@ void func_8028DB3C_de(struct World_func_8028787C_de *arg0, s32 arg1, s32 index, 
     } else {
         base = arg0->secondaryLevels;
     }
-    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(base, 0), arg3), index);
-    func_8028FDB4_de(table, 0);
+    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(base, 0), arg3), index);
+    Render_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    base1 = (u8 *) func_8028FDB4_de(table, 1);
+    base1 = (u8 *) Render_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (arg4 & 7);
     if (arg5 != 0) {
@@ -82,10 +82,10 @@ s32 func_8028DC3C_de(struct World_func_8028787C_de *arg0, s32 arg1, s32 index, s
     } else {
         base = arg0->secondaryLevels;
     }
-    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(base, 0), arg3), index);
-    func_8028FDB4_de(table, 0);
+    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(base, 0), arg3), index);
+    Render_GetPackSection(table, 0);
     func_8028FDF8_de((s32)table, 1);
-    temp_a0 = (u8 *)func_8028FDB4_de(table, 1);
+    temp_a0 = (u8 *)Render_GetPackSection(table, 1);
     mask = 1 << (arg4 & 7);
     i = arg4;
     if (i < 0) {
@@ -101,10 +101,10 @@ s32 func_8028DD00_de(void *arg0, s32 index, s32 arg2) {
     s32 mask;
     s32 i;
 
-    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(world->secondaryLevels, 0), index), 0);
-    func_8028FDB4_de(table, 0);
+    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(world->secondaryLevels, 0), index), 0);
+    Render_GetPackSection(table, 0);
     func_8028FDF8_de((s32)table, 1);
-    temp_a0 = (u8 *)func_8028FDB4_de(table, 1);
+    temp_a0 = (u8 *)Render_GetPackSection(table, 1);
     mask = 1 << (arg2 & 7);
     i = arg2;
     if (i < 0) {
@@ -119,10 +119,10 @@ s32 func_8028DDA4_de(Field_void_80 *arg0, s32 index, s32 arg2) {
     s32 mask;
     s32 i;
 
-    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(arg0->value, 0), index), 0);
-    func_8028FDB4_de(table, 0);
+    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(arg0->value, 0), index), 0);
+    Render_GetPackSection(table, 0);
     func_8028FDF8_de((s32)table, 1);
-    temp_a0 = (u8 *)func_8028FDB4_de(table, 1);
+    temp_a0 = (u8 *)Render_GetPackSection(table, 1);
     mask = 1 << (arg2 & 7);
     i = arg2;
     if (i < 0) {
@@ -137,10 +137,10 @@ s32 func_8028DE48_de(Field_void_80 *arg0, s32 index, s32 arg2) {
     s32 mask;
     s32 i;
 
-    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(arg0->value, 0), index), 1);
-    func_8028FDB4_de(table, 0);
+    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(arg0->value, 0), index), 1);
+    Render_GetPackSection(table, 0);
     func_8028FDF8_de((s32)table, 1);
-    temp_a0 = (u8 *)func_8028FDB4_de(table, 1);
+    temp_a0 = (u8 *)Render_GetPackSection(table, 1);
     mask = 1 << (arg2 & 7);
     i = arg2;
     if (i < 0) {
@@ -155,10 +155,10 @@ s32 func_8028DEEC_de(Field_void_80 *arg0, s32 index, s32 arg2) {
     s32 mask;
     s32 i;
 
-    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(arg0->value, 0), index), 2);
-    func_8028FDB4_de(table, 0);
+    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(arg0->value, 0), index), 2);
+    Render_GetPackSection(table, 0);
     func_8028FDF8_de((s32)table, 1);
-    temp_a0 = (u8 *)func_8028FDB4_de(table, 1);
+    temp_a0 = (u8 *)Render_GetPackSection(table, 1);
     mask = 1 << (arg2 & 7);
     i = arg2;
     if (i < 0) {

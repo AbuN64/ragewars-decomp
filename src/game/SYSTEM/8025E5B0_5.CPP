@@ -43,14 +43,14 @@ void System_SampleVectorTrack(AnimRef *anim, s32 index, f32 time, CVector3 *out)
     s32 i;
 
     root = *anim->data;
-    tracks = func_8028FDB4_de(root, 5);
-    track = func_8028FDB4_de(tracks, 0);
-    { AnimKeyTable *keys=func_8028FDB4_de(root,1); key=keys->entries[index].position; }
+    tracks = Render_GetPackSection(root, 5);
+    track = Render_GetPackSection(tracks, 0);
+    { AnimKeyTable *keys=Render_GetPackSection(root,1); key=keys->entries[index].position; }
     rate = track->rate;
     length = track->length;
     position = time * rate;
     if (key == -1) {
-        u8 *table = func_8028FDB4_de(root, 2);
+        u8 *table = Render_GetPackSection(root, 2);
 
         s32 offset = index * *(s32 *)table + 8;
         void *sample=table+offset;
@@ -58,7 +58,7 @@ void System_SampleVectorTrack(AnimRef *anim, s32 index, f32 time, CVector3 *out)
 
         *out=*vec;
     } else {
-        frames = func_8028FDB4_de(func_8028FDB4_de(tracks, 1), key);
+        frames = Render_GetPackSection(Render_GetPackSection(tracks, 1), key);
         frac = (position >= 0.0f) ? position-(s32)position : (f32)(s32)position==position ? position-(s32)position : position-((s32)position-1);
         dest=&out->x;
         span = anim->span;
@@ -128,14 +128,14 @@ void func_8025EA1C_de(AnimRef *anim, s32 index, f32 time, CQuatern *out) {
     PoseTable *pose;
 
     root = *anim->data;
-    tracks = func_8028FDB4_de((s32 *)root, 5);
-    track = (AnimTrack *)func_8028FDB4_de((s32 *)tracks, 0);
-     { u8 *keys = (u8 *)func_8028FDB4_de((s32 *)root, 1); base = index * 4; keys += base; key = ((KeyIndex *)keys)->rotation; }
+    tracks = Render_GetPackSection((s32 *)root, 5);
+    track = (AnimTrack *)Render_GetPackSection((s32 *)tracks, 0);
+     { u8 *keys = (u8 *)Render_GetPackSection((s32 *)root, 1); base = index * 4; keys += base; key = ((KeyIndex *)keys)->rotation; }
     rate = track->rate;
     length = track->length;
     time *= rate;
     if (key == -1) {
-        u8 *table = (u8 *)func_8028FDB4_de((s32 *)root, 2);
+        u8 *table = (u8 *)Render_GetPackSection((s32 *)root, 2);
         s32 offset = index * *(s32 *)table + 8;
         s16 *entry = (s16 *)(table + offset);
         f32 scale = D_800C4094_de;
@@ -145,7 +145,7 @@ void func_8025EA1C_de(AnimRef *anim, s32 index, f32 time, CQuatern *out) {
         out->z = entry[8] * scale;
         out->w = entry[9] * scale;
     } else {
-        frames = (CQuatern *)func_8028FDB4_de((s32 *)func_8028FDB4_de((s32 *)tracks, 2), key);
+        frames = (CQuatern *)Render_GetPackSection((s32 *)Render_GetPackSection((s32 *)tracks, 2), key);
         if (anim->span == 0xFFFF) {
             first = (time >= 0.0f ? (s32)time : (s32)time - ((f32)(s32)time != time));
             if (length <= (f32)first) {
@@ -269,7 +269,7 @@ void func_8025F074_us(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 
     }
     state[0] = func_80260664_de(0);
     for (i = 0; i < arg2; i++) {
-        row = (f32 *)func_8028FDB4_de(arg1, i);
+        row = (f32 *)Render_GetPackSection(arg1, i);
         for (j = 0; j < arg3; j++) {
             func_802607B8_de((u32 *)state, 0x1F);
             callback(state, row, D_8010AC84);
@@ -277,7 +277,7 @@ void func_8025F074_us(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 
         }
     }
     for (i = 0; i < arg2; i++) {
-        row = (f32 *)func_8028FDB4_de(arg1, i);
+        row = (f32 *)Render_GetPackSection(arg1, i);
         if (arg3 == 4 && arg4 != 0) {
             for (j = 0; j < arg3; j++) {
                 for (k = 0; k < D_8010AC88; k++) {
@@ -294,7 +294,7 @@ void func_8025F074_us(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 
     }
     if (arg3 == 4) {
         for (i = 0; i < arg2; i++) {
-            row = (f32 *)func_8028FDB4_de(arg1, i);
+            row = (f32 *)Render_GetPackSection(arg1, i);
             for (k = 0; k < D_8010AC88; k++) {
                 func_802741A4_de(row);
                 row += 4;
@@ -361,7 +361,7 @@ void func_8025F0D4_de(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 
     }
     state[0] = func_80260664_de(0);
     for (i = 0; i < arg2; i++) {
-        row = (f32 *)func_8028FDB4_de(arg1, i);
+        row = (f32 *)Render_GetPackSection(arg1, i);
         for (j = 0; j < arg3; j++) {
             func_802607B8_de((u32 *)state, 0x1F);
             callback(state, row, D_8010AC84);
@@ -369,7 +369,7 @@ void func_8025F0D4_de(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 
         }
     }
     for (i = 0; i < arg2; i++) {
-        row = (f32 *)func_8028FDB4_de(arg1, i);
+        row = (f32 *)Render_GetPackSection(arg1, i);
         if (arg3 == 4 && arg4 != 0) {
             for (j = 0; j < arg3; j++) {
                 for (k = 0; k < D_8010AC88; k++) {
@@ -386,7 +386,7 @@ void func_8025F0D4_de(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 
     }
     if (arg3 == 4) {
         for (i = 0; i < arg2; i++) {
-            row = (f32 *)func_8028FDB4_de(arg1, i);
+            row = (f32 *)Render_GetPackSection(arg1, i);
             for (k = 0; k < D_8010AC88; k++) {
                 func_802741A4_de(row);
                 row += 4;
@@ -449,7 +449,7 @@ s32 System_ExpandAnimationTracks(s32 source, AnimationSampleTable *buffer, s32 t
     if (tracks > 0) {
         cursor = stream;
         do {
-            f32 *values = (f32 *)func_8028FDB4_de(buffer, i);
+            f32 *values = (f32 *)Render_GetPackSection(buffer, i);
             j = 0;
             if (channels > 0) {
                 out = values;
@@ -466,7 +466,7 @@ s32 System_ExpandAnimationTracks(s32 source, AnimationSampleTable *buffer, s32 t
     for (i = 0; i < tracks; i++) {
         s32 component;
         f32 *values;
-        values = (f32 *)func_8028FDB4_de(buffer, i);
+        values = (f32 *)Render_GetPackSection(buffer, i);
         if (channels == 4 && radius != 0) {
             for (component = 0; component < channels; component++) {
                 frames = D_8010AC88;
@@ -484,7 +484,7 @@ s32 System_ExpandAnimationTracks(s32 source, AnimationSampleTable *buffer, s32 t
     }
     if (channels == 4) {
         for (j = 0; j < tracks; j++) {
-            f32 *values = (f32 *)func_8028FDB4_de(buffer, j);
+            f32 *values = (f32 *)Render_GetPackSection(buffer, j);
             i = 0;
             if (D_8010AC88 > 0) {
                 out = values;

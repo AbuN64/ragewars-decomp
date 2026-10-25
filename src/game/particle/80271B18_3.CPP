@@ -181,7 +181,7 @@ void func_80272828_de(f32 *arg0) {
     } while (j < 4);
 }
 
-void func_80272898_de(void *matrix, void *arg1, void *arg2) {
+void Particle_TransformPoint(void *matrix, void *arg1, void *arg2) {
     Matrix *m = matrix;
     CVector3 *v = arg1;
     CVector3 *out = arg2;

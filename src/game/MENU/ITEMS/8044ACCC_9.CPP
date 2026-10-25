@@ -140,7 +140,7 @@ extern f32 D_800C32EC_de;
 extern char D_800C32D4_de[], D_800C32DC_de[];
 extern void func_8025E3F0_de(void *);
 extern void func_80253908_de(s32), func_80253838_de(s32, void *);
-extern void *func_8025343C_de(s32, s32, s32, char *);
+extern void *Scene_AllocateResource(s32, s32, s32, char *);
 static inline void resetDraftList(DraftListA370 *list) {
     list->tail = 0;
     list->count = 0;
@@ -190,7 +190,7 @@ void Items_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
     }
     if (actorCount) {
         owner->count = actorCount;
-        owner->handle = func_8025343C_de(0, actorCount * 0xED8, 0x23, D_800C32D4_de);
+        owner->handle = Scene_AllocateResource(0, actorCount * 0xED8, 0x23, D_800C32D4_de);
         owner->actors = *owner->handle;
         func_802A001C_de(owner->actors, 0, actorCount * 0xED8);
         for (i = 0; i < owner->count; i++) {
@@ -201,7 +201,7 @@ void Items_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
         owner->empty = 0;
     }
     owner->smallCount = 16;
-    owner->smallHandle = func_8025343C_de(0, 0x400, 0x23, D_800C32DC_de);
+    owner->smallHandle = Scene_AllocateResource(0, 0x400, 0x23, D_800C32DC_de);
     owner->small = *owner->smallHandle;
     func_802A001C_de(owner->small, 0, 0x400);
     for (i = 0; i < owner->smallCount; i++) {

@@ -32,7 +32,7 @@ extern void func_80272B38_de(MatrixF *, CVector3 *, CVector3 *);
 extern void func_802727D8_de(MatrixF *);
 extern CQuatern func_8024D4AC_de(EffectActor *, CVector3);
 extern void func_80273198_de(MatrixF *, CVector3 *);
-extern void func_80270910_de(MatrixF *, MatrixF *);
+extern void Rsp_ConvertMatrixToFloat(MatrixF *, MatrixF *);
 extern void func_8027347C_de(MatrixF *, f32, f32, f32);
 extern void func_80273448_de(MatrixF *, f32, f32, f32);
 extern void Particle_BuildMatrix(EffectActor *, MatrixF *, void *, f32);
@@ -120,9 +120,9 @@ static inline void effect_spawn_aim(ParticleEffect *effect, EffectTarget *aimTar
         effect->mode = -4;
         targetActor = D_801041F0.actor;
         targetTeam = aimTarget->unk7E;
-        func_80270910_de(&targetMtx, &targetActor->u60.link.matrixArray[D_801041F0.matrixIndex]);
+        Rsp_ConvertMatrixToFloat(&targetMtx, &targetActor->u60.link.matrixArray[D_801041F0.matrixIndex]);
         func_8026EF58_de(targetInv.m[0], targetMtx.m[0]);
-        func_80272898_de(&targetInv, &aimTarget->pos, &effect->unk50);
+        Particle_TransformPoint(&targetInv, &aimTarget->pos, &effect->unk50);
         up = D_801042C8;
         func_8027207C_de(&up.x);
         func_80272B38_de(&targetInv, &up, vel);
@@ -192,10 +192,10 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
     resource = sys->resource;
     D_80103FCC = &target;
     sys->last = 0;
-    block = func_8028FDB4_de(resource, 1);
+    block = Render_GetPackSection(resource, 1);
     numEntries = block->count;
     if (func_80265550_de(block->entries, numEntries, kind, &first, &last) != 0) {
-        entries = ((EffectBlock *)func_8028FDB4_de(resource, 2))->entries;
+        entries = ((EffectBlock *)Render_GetPackSection(resource, 2))->entries;
         anchor = 0;
         if (D_80145060.actorList != 0) {
             anchor = D_80145060.actorList;
@@ -306,7 +306,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                         if (!(source->flags & 0x100000)) {
                             if (D_80140FF8 == 1) {
                                 camera = D_80140FE8_de.object;
-                                func_80272898_de(&camera->particleViewMatrix, &source->pos, &aimDelta);
+                                Particle_TransformPoint(&camera->particleViewMatrix, &source->pos, &aimDelta);
                                 depth = aimDelta.z;
                                 if (depth < 0.0f) {
                                     depth = -depth;
@@ -317,7 +317,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                             }
                             source->flags |= 0x100000;
                         }
-                        func_80270910_de(&mtx, &source->u60.matrices[D_800D297C]);
+                        Rsp_ConvertMatrixToFloat(&mtx, &source->u60.matrices[D_800D297C]);
                         scale = 0.09765625f;
                         if (source->model->unk14 != 0) {
                             scale = 2.857143f;
@@ -415,7 +415,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     dir.z = func_80285630_de(entry->direction[2]);
                     func_8027207C_de(&dir.x);
                     if (dir.x != 0.0f || dir.y != 0.0f || dir.z != 0.0f) {
-                        func_80272898_de(&mtx, &dir, &dirOut);
+                        Particle_TransformPoint(&mtx, &dir, &dirOut);
                     } else {
                         dirOut = dir;
                     }
@@ -460,7 +460,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 offset.y = func_80285630_de(entry->offset[1]);
                 offset.z = func_80285630_de(entry->offset[2]);
                 if (offset.x != 0.0f || offset.y != 0.0f || offset.z != 0.0f) {
-                    func_80272898_de(&mtx, &offset, &offsetOut);
+                    Particle_TransformPoint(&mtx, &offset, &offsetOut);
                     if (!(entry->flags & 0x8000)) {
                         func_80271F34_de(&offsetOut, &pos, &offsetOut);
                     }
@@ -479,7 +479,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                         dir.z = func_80285630_de(entry->direction[2]);
                         func_8027207C_de(&dir.x);
                         if (dir.x != 0.0f || dir.y != 0.0f || dir.z != 0.0f) {
-                            func_80272898_de(&mtx, &dir, &dirOut);
+                            Particle_TransformPoint(&mtx, &dir, &dirOut);
                         } else {
                             dirOut = dir;
                         }

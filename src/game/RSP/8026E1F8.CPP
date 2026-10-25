@@ -19,10 +19,10 @@ void func_8026E1F8_de(void **resource) {
     s32 i;
     void *rec;
 
-    temp_v0 = func_8028FDB4_de(*resource, 2);
+    temp_v0 = Render_GetPackSection(*resource, 2);
     count = *(s32 *)temp_v0;
     for (i = 0; i < count; i++) {
-        rec = func_8028FDB4_de(func_8028FDB4_de(temp_v0, i), 0);
+        rec = Render_GetPackSection(Render_GetPackSection(temp_v0, i), 0);
         if (((struct ResourceSectionReference *)(rec))->resource == 0) {
             continue;
         }
@@ -45,10 +45,10 @@ s32 *func_8026E27C_de(void **arg0, s32 variation, s32 *arg2) {
     s32 result;
 
     out = arg2;
-    temp_v0 = func_8028FDB4_de(*arg0, 2);
+    temp_v0 = Render_GetPackSection(*arg0, 2);
     count = *(s32 *)temp_v0;
     for (i = 0; i < count; i++) {
-        rec = func_8028FDB4_de(func_8028FDB4_de(temp_v0, i), 0);
+        rec = Render_GetPackSection(Render_GetPackSection(temp_v0, i), 0);
         if (((struct ResourceSectionReference *)(rec))->resource == 0) {
             continue;
         }

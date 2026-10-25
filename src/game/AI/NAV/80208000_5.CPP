@@ -311,7 +311,7 @@ void func_8020A604_de(void *arg0) {
         base2 = s2 * 2;
         s1 = s4;
         do {
-            src = func_8028FDB4_de(arg0, base2 + s0);
+            src = Render_GetPackSection(arg0, base2 + s0);
             dst = (char *)(s1 + (s32)tbl);
             *(CollisionInfo8020CD74 *)dst = *src;
             s0 += 1;

@@ -31,9 +31,9 @@ static inline s32 splineRecordSize(s32 left,s32 right) { s32 a=left*9,b=right*9;
 
 extern char D_800E0B2C[];
 
-extern s32 func_8028FE3C_de(void *,s32,s32,s32 *);
+extern s32 Render_LocatePackSection(void *,s32,s32,s32 *);
 
-extern void func_80253754_de(void *,Node80253610 *);
+extern void Scene_UnlockResource(void *,Node80253610 *);
 
 static inline void minTime(f32 *dest,f32 *src) {
     if(*dest>*src)*dest=*src;
@@ -60,19 +60,19 @@ void func_8040067C_de(s32 unused, struct Shape_typemap_165 **handle) {
     void *dp, *dr;
     if (!func_80285180_de((void **)handle, 1)) return;
     source = (*handle)->pack;
-    parts = func_8028FDB4_de(source, 0);
-    a = func_8028FDB4_de(source, 1);
-    b = func_8028FDB4_de(source, 2);
-    c = func_8028FDB4_de(source, 3);
+    parts = Render_GetPackSection(source, 0);
+    a = Render_GetPackSection(source, 1);
+    b = Render_GetPackSection(source, 2);
+    c = Render_GetPackSection(source, 3);
     count = parts->count;
     size = (count * 4 + 15) & ~7;
     for (i = 0; i < parts->count; i++) {
         SplineSource *firstP,*firstR;
         void *firstPart;
         s32 byteP,byteR;
-        firstPart = func_8028FDB4_de(parts, i);
-        firstP = func_8028FDB4_de(firstPart, 0);
-        firstR = func_8028FDB4_de(firstPart, 2);
+        firstPart = Render_GetPackSection(parts, i);
+        firstP = Render_GetPackSection(firstPart, 0);
+        firstR = Render_GetPackSection(firstPart, 2);
         size += splineRecordSize(firstP->count,firstR->count);
     }
     sc = func_8028FEB8_de(c);
@@ -90,18 +90,18 @@ void func_8040067C_de(s32 unused, struct Shape_typemap_165 **handle) {
     for (i = 0; i < count; i++) {
         s32 byteP,byteR;
         SplineSource *sizeP,*sizeR;
-        part = func_8028FDB4_de(parts, i);
-        sizeP = func_8028FDB4_de(part, 0);
-        sizeR = func_8028FDB4_de(part, 2);
+        part = Render_GetPackSection(parts, i);
+        sizeP = Render_GetPackSection(part, 0);
+        sizeR = Render_GetPackSection(part, 2);
         byteP = sizeP->count * 9;
         byteR = sizeR->count * 9;
         dest = (void *)packAppend(table, 0, (byteR + byteP)*4 + 48);
         func_802610A8_de(dest, 3);
-        p.header = func_8028FDB4_de(part, 0);
-        q.header = func_8028FDB4_de(part, 1);
-        r.header = func_8028FDB4_de(part, 2);
-        s.header = func_8028FDB4_de(part, 3);
-        extra = func_8028FDB4_de(part, 4);
+        p.header = Render_GetPackSection(part, 0);
+        q.header = Render_GetPackSection(part, 1);
+        r.header = Render_GetPackSection(part, 2);
+        s.header = Render_GetPackSection(part, 3);
+        extra = Render_GetPackSection(part, 4);
         np = p.header->count;
         nr = r.header->count;
         { s32 pointBytes,otherBytes;
@@ -140,8 +140,8 @@ s32 func_804009F4_de(s32 index) {
     }
     else {
         if(D_800E2830->active!=0)func_80245B28_de();
-        loaded=func_8028FE3C_de(resources->trackBundle,resources->trackLookup,index+1,&size);
-        owner=func_8025193C_de(0,loaded,loaded,size,0x33,0,D_0040067C,D_800DCB10,1);
+        loaded=Render_LocatePackSection(resources->trackBundle,resources->trackLookup,index+1,&size);
+        owner=Scene_RequestResource(0,loaded,loaded,size,0x33,0,D_0040067C,D_800DCB10,1);
         if(owner==0)goto failed;
         D_800E2830->owner=owner;
         D_800E2830->resource=*owner;
@@ -176,9 +176,9 @@ s32 func_804009F4_de(s32 index) {
         }
         setTimes(&D_800E2830->time,&D_800E2830->time20,&D_800E2830->time24,&D_800E2830->clipStart);
         previous=D_800E2830->spec.id8;
-        loaded=func_8028FE3C_de(D_8011FEFC,D_8011BDFC,0,&size2);
+        loaded=Render_LocatePackSection(D_8011FEFC,D_8011BDFC,0,&size2);
         if(loaded==0)table=0;
-        else table=func_8025193C_de(0,loaded,loaded,size2,0x33,0,0,D_800E0B2C,1);
+        else table=Scene_RequestResource(0,loaded,loaded,size2,0x33,0,0,D_800E0B2C,1);
          {
             Shared_TrackTable *entries=*table;
             EntryRecAt48 *base=entries->entries;
@@ -207,7 +207,7 @@ s32 func_804009F4_de(s32 index) {
                 D_800E2830->yaw=0.0f;
             }
         }
-        func_80253754_de(0,(void *)table);
+        Scene_UnlockResource(0,(void *)table);
         if(pending) {
             void (*first)();
             Shared_MenuVoidCallback second;

@@ -53,9 +53,9 @@ void func_8024A5A8_de(Actor_func_8024A3B0_de *actor, s32 arg1, s32 arg2, Lookup 
     if (params->unk0 != 0) {
         func_8026DD50_de(params->value, arg1, actor->fieldB4, 1, &actor->blocks[D_800D297C], 0, actor->field3);
         if (func_8026E340_de() != 0) {
-            node = func_8028FDB4_de(*params->value, 2);
+            node = Render_GetPackSection(*params->value, 2);
             if ((*node != 0) &&
-                (*((s32 *)func_8028FDB4_de(func_8028FDB4_de(node, 0), 0)) & 0x8000)) {
+                (*((s32 *)Render_GetPackSection(Render_GetPackSection(node, 0), 0)) & 0x8000)) {
                 spawn(actor);
                 effect = func_802830B8_de(&D_8011D8D0);
                 if (effect != 0) {

@@ -131,7 +131,7 @@ struct WeightSource;
 typedef struct WeightSource WeightSource;
 
 
-/* Resource sections returned by func_8028FDB4_de, selectors 1 and 2. */
+/* Resource sections returned by Render_GetPackSection, selectors 1 and 2. */
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 typedef struct BallisticResourceKeys {

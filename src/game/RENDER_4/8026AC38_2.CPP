@@ -37,14 +37,14 @@ void func_8026B9EC_de(void **resource, struct Owner104 *owner, s32 matrix, s32 s
     else { gSPMatrix(D_80110634++, matrix, G_MTX_LOAD); }
     base = textures;
     if (base == 0) {
-        base = func_8028FDB4_de(header, 0);
+        base = Render_GetPackSection(header, 0);
     }
     gSPSegment(D_80110634++, 2, (unsigned int)base);
-    parts = func_8028FDB4_de(header, 2);
+    parts = Render_GetPackSection(header, 2);
     count = *(s32 *)parts;
     for (i = 0; i < count; i++) {
-        part = func_8028FDB4_de(parts, i);
-        material = func_8028FDB4_de(part, 0);
+        part = Render_GetPackSection(parts, i);
+        material = Render_GetPackSection(part, 0);
         if (i == 0) {
             func_8026B504_de(matrix, lights, material);
         }
@@ -80,7 +80,7 @@ void func_8026B9EC_de(void **resource, struct Owner104 *owner, s32 matrix, s32 s
         }
         if (visible && func_80269A80_de(material, pass) != 0) {
             Gfx *cmd;
-            void *list = func_8028FDB4_de(part, 1);
+            void *list = Render_GetPackSection(part, 1);
 
             cmd = D_80110634++;
             gSPDisplayList(cmd, (unsigned int)list);
@@ -137,11 +137,11 @@ void func_8026BC60_de(void) {
     struct Shape_typemap_165 *param;
 
     if (D_80110640 != 0) {
-        list = func_8028FDB4_de(*D_8011064C, 2);
+        list = Render_GetPackSection(*D_8011064C, 2);
         count = *list;
         for (i = 0; i < count; i++) {
-            entry = func_8028FDB4_de(list, i);
-            source = func_8028FDB4_de(entry, 0);
+            entry = Render_GetPackSection(list, i);
+            source = Render_GetPackSection(entry, 0);
             key = (source->id << 8) | (u8)D_8010C564;
             if (source->flags & 0x700) {
                 parent = find_node(D_8010C57C, key);
@@ -229,7 +229,7 @@ void func_8026BC60_de(void) {
                     }
                 }
             }
-            data = func_8028FDB4_de(entry, 1);
+            data = Render_GetPackSection(entry, 1);
             for (j = 0; j < D_80110640; j++) {
                 param = &D_801157D8[j];
                 if (D_8010C570 != 500) {

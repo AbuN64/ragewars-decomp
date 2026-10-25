@@ -32,11 +32,11 @@ extern f32 func_80275DD4_de(s32 arg0, f32 arg1, f32 arg2);
 
 extern s32 D_800CD8D0;
 
-extern void *func_8025343C_de(int a, int b, int c, void *d);
+extern void *Scene_AllocateResource(int a, int b, int c, void *d);
 
 extern int D_800C32D0_de;
 
-void *func_8025343C_de(int a, int b, int c, void *d);
+void *Scene_AllocateResource(int a, int b, int c, void *d);
 
 extern int D_800C32DC_de;
 
@@ -125,7 +125,7 @@ void func_8023A114_de(void *messageBuffer, s32 count) {
 
     bytes = count * 0xED8;
     buffer->count = count;
-    allocation = func_8025343C_de(0, bytes, 0x23, (char *)&D_800C32D0_de + 4);
+    allocation = Scene_AllocateResource(0, bytes, 0x23, (char *)&D_800C32D0_de + 4);
     buffer->allocation = allocation;
     firstBlock = *allocation;
     buffer->first = firstBlock;
@@ -139,7 +139,7 @@ void func_8023A190_de(void *screenMessageOwner, int count) {
     int firstBlock;
     bytes = count << 6;
     owner->storage.count = count;
-    allocation = func_8025343C_de(0, bytes, 0x23, &D_800C32DC_de);
+    allocation = Scene_AllocateResource(0, bytes, 0x23, &D_800C32DC_de);
     owner->storage.allocation = allocation;
     firstBlock = *allocation;
     owner->storage.first = firstBlock;

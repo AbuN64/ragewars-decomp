@@ -16,7 +16,7 @@ extern void func_80253908_de(s32 a);
 
 extern void func_80253838_de(void *arg0, void *arg1);
 
-extern void **func_8025343C_de(s32, s32, s32, char *);
+extern void **Scene_AllocateResource(s32, s32, s32, char *);
 
 
 /* Releases the two active resources and clears their associated state. */
@@ -74,7 +74,7 @@ void func_804098CC_de(void ***handle, void **data, s32 units) {
     } else {
         units = (s32)(D_8011FECC + 0x610);
     }
-    block = func_8025343C_de(0, units, 0x33, D_800DCD60);
+    block = Scene_AllocateResource(0, units, 0x33, D_800DCD60);
     *handle = block;
     first = *block;
     *data = first;

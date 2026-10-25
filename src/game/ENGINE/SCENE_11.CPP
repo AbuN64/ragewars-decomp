@@ -150,7 +150,7 @@ static inline s32 has_active(Owner_func_8028C6D4_de *owner) {
     s32 i;
 
     for (i = 0; i < owner->count; i++) {
-        if (((struct IntPair *)func_8028FDB4_de(*owner->tracks[i].nodes, 2))->field_4 != 0) {
+        if (((struct IntPair *)Render_GetPackSection(*owner->tracks[i].nodes, 2))->field_4 != 0) {
             return 1;
         }
     }

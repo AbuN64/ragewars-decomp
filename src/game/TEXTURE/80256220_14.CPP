@@ -309,29 +309,29 @@ void func_8025768C_de(ContextRecAt2BC0 *ctx) {
 
     total = func_80265964_de(0x14) - func_80265964_de(0x10);
     ctx->soundData = func_8023C78C_de(total, 0, func_80265964_de(0x10));
-    section = func_8028FDB4_de(ctx->soundData, 0);
-    func_8028FDB4_de(ctx->soundData, 1);
-    tables = func_8028FDB4_de(section, 0);
-    names = func_8028FDB4_de(section, 1);
-    index = func_8028FDB4_de(section, 2);
+    section = Render_GetPackSection(ctx->soundData, 0);
+    Render_GetPackSection(ctx->soundData, 1);
+    tables = Render_GetPackSection(section, 0);
+    names = Render_GetPackSection(section, 1);
+    index = Render_GetPackSection(section, 2);
     ctx->instrumentIndex = index;
     ctx->instrumentCount = *index;
     ctx->instrumentData = tables + 2;
     ctx->envelopeData = names + 2;
-    rest = func_8028FDB4_de(section, 3);
-    refs = func_8028FDB4_de(section, 4);
-    sounds = func_8028FDB4_de(section, 5);
+    rest = Render_GetPackSection(section, 3);
+    refs = Render_GetPackSection(section, 4);
+    sounds = Render_GetPackSection(section, 5);
     ctx->tableCount2B7C = rest[1];
     ctx->table2B70 = rest + 2;
     ctx->tableCount2B80 = refs[1];
     ctx->table2B74 = refs + 2;
     ctx->tableCount2B84 = sounds[1];
     ctx->table2B78 = sounds + 2;
-    group = func_8028FDB4_de(ctx->soundData, 1);
-    seq = func_8028FDB4_de(group, 0);
+    group = Render_GetPackSection(ctx->soundData, 1);
+    seq = Render_GetPackSection(group, 0);
     ctx->sequenceData = seq + 2;
     ctx->sequenceCount = seq[1];
-    ctx->sequenceIndex = func_8028FDB4_de(group, 1);
+    ctx->sequenceIndex = Render_GetPackSection(group, 1);
 }
 
 #ifdef NON_MATCHING

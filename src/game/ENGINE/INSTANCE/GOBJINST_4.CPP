@@ -59,7 +59,7 @@ extern s32 func_802625C4_de(void *);
 
 extern s32 *func_8024BFD4_de(char *, s8);
 
-extern void func_80270910_de(f32 *, char *);
+extern void Rsp_ConvertMatrixToFloat(f32 *, char *);
 
 extern void func_80265E10_de(char *, char *, u16, s32, CVector3, struct IntPair);
 
@@ -163,7 +163,7 @@ void func_802472F0_de(void *actor) {
             return;
     }
 
-    resource = func_8025193C_de(0, ((Actor36 *)actor)->animationKey, ((Actor36 *)actor)->animationKey,
+    resource = Scene_RequestResource(0, ((Actor36 *)actor)->animationKey, ((Actor36 *)actor)->animationKey,
         ((((Actor36 *)actor)->animationCount * 4) + 0xF) & ~7, 4, 0, 0,
         &D_800C3930_de + 4, 0);
     if (resource == 0)
@@ -223,7 +223,7 @@ void func_802472F0_de(void *actor) {
             saved.z = saved.y;
             saved.y = 0.0f;
             func_802736D4_de(&matrix, ((Actor36 *)actor)->heading);
-            func_80272898_de(&matrix, &saved, &moved);
+            Particle_TransformPoint(&matrix, &saved, &moved);
             ((Actor36 *)actor)->position.x += moved.x * ((Actor36 *)actor)->scaleX;
             ((Actor36 *)actor)->position.z += moved.z * ((Actor36 *)actor)->scaleZ;
         } else if (!(((Actor36 *)actor)->flags & 0x300000) && ((Actor36 *)actor)->ownerId == 0x137) {
@@ -231,7 +231,7 @@ void func_802472F0_de(void *actor) {
             func_80274020_de(&((Actor36 *)(actor))->heading);
         }
     }
-    func_80253754_de(0, resource);
+    Scene_UnlockResource(0, resource);
 }
 
 void func_802476C8_de(char *obj, void *anim, f32 from, f32 to) {
@@ -270,7 +270,7 @@ void func_802476C8_de(char *obj, void *anim, f32 from, f32 to) {
                 local.x = events[i].local.x;
                 local.y = events[i].local.z;
                 local.z = events[i].local.y;
-                func_80272898_de(obj + 0x74, &local, &pos);
+                Particle_TransformPoint(obj + 0x74, &local, &pos);
             } else {
                 if (checkMask && (D_800CC134[events[i].effect].offset & 4)) {
                     if (resource == 0) {
@@ -278,7 +278,7 @@ void func_802476C8_de(char *obj, void *anim, f32 from, f32 to) {
                         if (resource == 0) {
                             goto masked;
                         }
-                        table = func_8028FDB4_de(*resource, 5);
+                        table = Render_GetPackSection(*resource, 5);
                     }
                     fire = ((struct Shape_typemap_3 *) (((char *) table) + ((events[i].bone * table->field_0) + 0x74)))->field_0 & ((struct ObjectLinks180 *) obj)->unk_17C;
                 }
@@ -287,8 +287,8 @@ void func_802476C8_de(char *obj, void *anim, f32 from, f32 to) {
                     continue;
                 }
                 if (((struct ObjectLinks180 *) obj)->unk_B8 != 0) {
-                    func_80270910_de(matrix, ((struct ObjectLinks180 *) obj)->unk_B8 + (events[i].bone << 6));
-                    func_80272898_de(matrix, &events[i].local, &pos);
+                    Rsp_ConvertMatrixToFloat(matrix, ((struct ObjectLinks180 *) obj)->unk_B8 + (events[i].bone << 6));
+                    Particle_TransformPoint(matrix, &events[i].local, &pos);
                 } else {
                     pos = ((struct ObjectLinks180 *) obj)->unk_8;
                 }
@@ -300,7 +300,7 @@ void func_802476C8_de(char *obj, void *anim, f32 from, f32 to) {
         }
     }
     if (resource != 0) {
-        func_80253754_de(0, resource);
+        Scene_UnlockResource(0, resource);
     }
 }
 
@@ -399,7 +399,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
         return base;
     }
     func_80274244_de(&base, matrix);
-    func_80272898_de(matrix, &local, &aim);
+    Particle_TransformPoint(matrix, &local, &aim);
     i = 0;
     target = 0;
     bestDot = func_802B6560_de(cone * 0.008726647f);
@@ -460,11 +460,11 @@ void func_80247F18_de(char *arg0, char *arg1, char *arg2, CVector3 arg3,
       if (arg1[0x12] < 0x17) {
        temp_v0 = func_8024BFD4_de(arg0, arg0[1]);
        if (temp_v0 != 0) {
-        temp_v0_2 = func_8028FDB4_de((void *)*temp_v0, 5);
+        temp_v0_2 = Render_GetPackSection((void *)*temp_v0, 5);
         var_a1 = (char *)temp_v0_2 + ((arg9 * *temp_v0_2) + 8);
         var_a0 = arg9;
         if ((((u8 *)var_a1)[0x65] & 3) == 3) {
-            func_80253754_de(0, temp_v0);
+            Scene_UnlockResource(0, temp_v0);
             return;
         }
         var_v1 = 0;
@@ -476,7 +476,7 @@ void func_80247F18_de(char *arg0, char *arg1, char *arg2, CVector3 arg3,
                 var_a1 = (char *)temp_v0_2 + ((var_a0 * *temp_v0_2) + 8);
             }
         } while (var_v1 < 4);
-        func_80253754_de(0, temp_v0);
+        Scene_UnlockResource(0, temp_v0);
         arg1[0x12] = 0x19;
         sp20.x = ((Matrix *)arg2)->m[12];
         sp20.y = ((Matrix *)arg2)->m[13];

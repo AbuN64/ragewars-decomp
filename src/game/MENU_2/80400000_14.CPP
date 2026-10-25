@@ -34,9 +34,9 @@ CVector3 Menu_GetTrackTargetPosition(f32 t) {
     idx = 0;
     i = 0;
     end = start;
-    while (i < *((s32 *)func_8028FDB4_de((s32 *)D_800E2830->unk4, 0))) {
+    while (i < *((s32 *)Render_GetPackSection((s32 *)D_800E2830->unk4, 0))) {
         idx = i;
-        clip = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de((s32 *)D_800E2830->unk4, 0), idx), 1);
+        clip = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection((s32 *)D_800E2830->unk4, 0), idx), 1);
         count = clip[1];
         keys = (KeyRecAt1C *)(clip + 2);
         start = end;
@@ -44,7 +44,7 @@ CVector3 Menu_GetTrackTargetPosition(f32 t) {
         if (idx == 0 && t <= start) {
             break;
         }
-        if (idx == *((s32 *)func_8028FDB4_de((s32 *)D_800E2830->unk4, 0)) - 1 && end < t) {
+        if (idx == *((s32 *)Render_GetPackSection((s32 *)D_800E2830->unk4, 0)) - 1 && end < t) {
             break;
         }
         i = idx + 1;
@@ -52,7 +52,7 @@ CVector3 Menu_GetTrackTargetPosition(f32 t) {
             break;
         }
     }
-    if (((s32 *)func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de((s32 *)D_800E2830->unk4, 0), idx), 2))[1] != 0) {
+    if (((s32 *)Render_GetPackSection(Render_GetPackSection(Render_GetPackSection((s32 *)D_800E2830->unk4, 0), idx), 2))[1] != 0) {
         t = start;
     }
     return Menu_EvaluateCameraSpline(keys, count, t - start);

@@ -110,7 +110,7 @@ profile_failed:
                 else {
                     blockState = D_8011FECC + 0x610;
                 }
-                handle = func_8025343C_de(0, blockState, 0x33U, D_800DCD60);
+                handle = Scene_AllocateResource(0, blockState, 0x33U, D_800DCD60);
                 payload = handle->data;
                 D_800DE864_de = handle;
                 D_800E28BC = payload;
@@ -206,7 +206,7 @@ profile_failed:
                     else {
                         allocationSize = D_8011FECC + 0x610;
                     }
-                    handle2 = func_8025343C_de(0, allocationSize, 0x33U, D_800DCD60);
+                    handle2 = Scene_AllocateResource(0, allocationSize, 0x33U, D_800DCD60);
                     payload2 = handle2->data;
                     D_800DE864_de = handle2;
                     D_800E28BC = payload2;

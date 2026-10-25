@@ -263,7 +263,7 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
         entries[i].distance = x * x + y * y + z * z;
     }
     func_802852C0_de(entries, count, 8, D_0028E044, D_0028DFE4);
-    func_8026D980_de();
+    Render_BeginModelBatch();
     for (i = 0; i < count; i++) {
         object = entries[i].object;
         switch (object->kind) {
@@ -278,7 +278,7 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
             break;
         }
     }
-    func_8026D9D0_de();
+    Render_FlushModelBatch();
 }
 
 
@@ -312,13 +312,13 @@ s32 Scene_FindFloorPolygon(Shared_World *world, CVector3 *pos) {
     if (D_800CD764_de == 0) {
         return 0;
     }
-    polygonTable = func_8028FDB4_de(world->modelSections, 2);
+    polygonTable = Render_GetPackSection(world->modelSections, 2);
     polys = polygonTable->polygons;
     index = 0;
     i = 0;
     bestDist = 0.0f;
     best = NULL;
-    grid = func_8028FDB4_de(world->modelSections, 3);
+    grid = Render_GetPackSection(world->modelSections, 3);
     cellCount = grid->cellCount;
     cells = grid->cells;
     if (cellCount > 0) {

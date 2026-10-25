@@ -32,7 +32,7 @@ void func_802897B4_de(World37 *world, CVector3 *point, Item37 **output, s32 *tot
     if (region == 0) {
         *total = 0;
     } else {
-        items = func_8028FDB4_de(region->resource->data, 2);
+        items = Render_GetPackSection(region->resource->data, 2);
         itemCount = items->count;
         base = items->items;
         for (i = 0; i < itemCount; i++) {
@@ -131,7 +131,7 @@ void func_80289970_de(ObjectRecAtBC **volumes, s32 count, CVector3 *position, Sh
         do {
             sampleDirection = directions + sampleIndex * 3;
             volume = volumes[sampleIndex];
-            func_80272898_de(volume->inverse, position, &transformed);
+            Particle_TransformPoint(volume->inverse, position, &transformed);
             if (func_80277128_de(volume, transformed.x, transformed.y, transformed.z, &localDirection, &weights[sampleIndex]) != 0) {
                 func_80271F34_de(&translatedDirection, &localDirection, &transformed);
                 func_80272A10_de(volume->transform, &translatedDirection, &localDirection);
@@ -567,8 +567,8 @@ extern void func_80253838_de(s32, void *);
 extern s32 func_802A0C08_de(char *, const char *, ...);
 extern u8 func_8022F454_de(Profile *, s32);
 extern void func_8028DA74_de(Shared_World *);
-extern void *func_8025193C_de(s32, u32, u32, u32, u32, s32, void *, const char *, u32);
-extern s32 func_8028FE3C_de(s32, s32, s32, s32 *);
+extern void *Scene_RequestResource(s32, u32, u32, u32, u32, s32, void *, const char *, u32);
+extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
 extern s32 func_8041F140_de(s32);
 static inline void copyLevelName(Shared_World *world, s32 level, char *out, s32 limit) {
     void *handle;
@@ -602,13 +602,13 @@ static inline LevelChallenge *findLevelChallenge(Shared_World *world, s32 level)
         if (world->challengeFile != 0) {
             mode = 0x10;
             direct = 1;
-            index = func_8025193C_de(0, world->challengeFile, world->challengeFile, world->challengeFileSize, mode,
+            index = Scene_RequestResource(0, world->challengeFile, world->challengeFile, world->challengeFileSize, mode,
                                      0, 0, D_800C5290_de, direct);
             if (index != 0) {
-                file = func_8028FE3C_de((s32)*index, world->challengeFile, level, &size);
+                file = Render_LocatePackSection((s32)*index, world->challengeFile, level, &size);
                 func_80253838_de(0, index);
                 if ((world->resourceHandle =
-                         func_8025193C_de(0, file, file, size, mode, 0, D_00285160, D_800C52BC, direct)) == 0) {
+                         Scene_RequestResource(0, file, file, size, mode, 0, D_00285160, D_800C52BC, direct)) == 0) {
                     goto missing;
                 }
                 world->resourceKey = level;

@@ -113,8 +113,8 @@ block_31:
     v28.z = 0;
     spA8 = func_8024796C_de(body);
     func_80274244_de(&spA8, &sp68);
-    func_80272898_de(&sp68, &v18, &v38);
-    func_80272898_de(&sp68, &v28, &v48);
+    Particle_TransformPoint(&sp68, &v18, &v38);
+    Particle_TransformPoint(&sp68, &v28, &v48);
     player->views5E8.view6E8_63.unk6E8 = (f32) (player->views5E8.view6E8_63.unk6E8 + ((v38.x + v48.x) * player->views5E8.view66C_29.unk66C));
     player->views5E8.view6EC_64.unk6EC = (f32) (player->views5E8.view6EC_64.unk6EC + ((v38.y + v48.y) * player->views5E8.view66C_29.unk66C));
     player->views5E8.view6F0_66.unk6F0 = (f32) (player->views5E8.view6F0_66.unk6F0 + ((v38.z + v48.z) * player->views5E8.view66C_29.unk66C));

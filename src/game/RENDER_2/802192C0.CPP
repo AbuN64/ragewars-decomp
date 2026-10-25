@@ -159,7 +159,7 @@ void func_80219490_de(char *object, char *camera) {
     gDPSetTexturePersp(command, G_TP_PERSP);
     command = D_80110634++;
     gDPSetTextureFilter(command, G_TF_BILERP);
-    func_8026D980_de();
+    Render_BeginModelBatch();
 
     x = ((GameplayCamera *)(camera))->unk2A4;
     y = ((GameplayCamera *)(camera))->unk2A8;
@@ -184,13 +184,13 @@ void func_80219490_de(char *object, char *camera) {
         s32 offset = (D_800D297C << 6) + 0x10;
         func_8027027C_de(matrix, object + offset);
     }
-    func_80272898_de(first, object + 0xA8, output);
+    Particle_TransformPoint(first, object + 0xA8, output);
     {
         s32 offset = (D_800D297C << 6) + 0x10;
         func_8026DF30_de(((AnimationSprite *)(object))->model, (s32)(object + offset),
                        (s32)&D_800CBC90, 0, -1);
     }
-    func_8026D9D0_de();
+    Render_FlushModelBatch();
     Render_SetColorDither(0);
     func_8026E378_de(0, 0x20);
 }

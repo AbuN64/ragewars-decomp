@@ -37,7 +37,7 @@ s32 Actors_EvaluateLightVolume(ObjectRecAtBC *arg0, CVector3 arg1, CVector3 arg4
         second.y = arg4.y * arg7[5];
         second.z = arg4.z * arg7[10];
     } else {
-        func_80272898_de(arg7, &arg1.x, &first);
+        Particle_TransformPoint(arg7, &arg1.x, &first);
         func_80272B38_de(arg7, &arg4.x, &second);
     }
     func_8027207C_de(&second.x);
@@ -69,7 +69,7 @@ s32 Actors_EvaluateLightVolume(ObjectRecAtBC *arg0, CVector3 arg1, CVector3 arg4
     return 1;
 }
 
-extern void func_80270910_de(f32 *, PackedMatrixWords *);
+extern void Rsp_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
 extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
 void Actors_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, Vertices38 *mesh,
                      PackedMatrixWords *matrices, CVector3 *output, s32 multiple)
@@ -85,7 +85,7 @@ void Actors_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, Ver
 
     count = mesh->count;
     base = mesh->vertices;
-    func_80270910_de(matrix, matrices);
+    Rsp_ConvertMatrixToFloat(matrix, matrices);
     drawn = 0;
     for (i = 0; i < count; i++) {
         vertex = &base[i];
@@ -97,12 +97,12 @@ void Actors_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, Ver
             continue;
         }
         if (multiple) {
-            func_80270910_de(matrix, &matrices[vertex->flags >> 8]);
+            Rsp_ConvertMatrixToFloat(matrix, &matrices[vertex->flags >> 8]);
         }
         position.x = vertex->px;
         position.y = vertex->py;
         position.z = vertex->pz;
-        func_80272898_de(matrix, &position, &worldPosition);
+        Particle_TransformPoint(matrix, &position, &worldPosition);
         normal.x = vertex->x;
         normal.y = vertex->y;
         normal.z = vertex->z;

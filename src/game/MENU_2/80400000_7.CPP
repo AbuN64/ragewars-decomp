@@ -44,7 +44,7 @@ void func_80403458_de(void) {
     if (D_800E2830->active == 0) {
         return;
     }
-    track = func_8028FDB4_de(D_800E2830->resource, 2);
+    track = Render_GetPackSection(D_800E2830->resource, 2);
     n = track[1];
     entry = (EntryRecAt8V4 *)(track + 2);
     if (n == 0) {

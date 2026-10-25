@@ -255,7 +255,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                 }
                 if (res != NULL) {
                     frames = (*res != NULL) ? **res : 1;
-                    func_80253754_de(0, res);
+                    Scene_UnlockResource(0, res);
                 }
                 x = player->scoreX * scaleX + view->x + view->width;
                 y = player->scoreY * scaleY + view->y;
@@ -367,7 +367,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                         if (*res != NULL) {
                             n = **res;
                         }
-                        func_80253754_de(0, res);
+                        Scene_UnlockResource(0, res);
                     }
                     x = player->countX * scaleX + view->x + view->width;
                     y = player->countY * scaleY + view->y;
@@ -412,7 +412,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                         if (*res != NULL) {
                             frames = **res;
                         }
-                        func_80253754_de(0, res);
+                        Scene_UnlockResource(0, res);
                     }
                     x = player->squadX * scaleX + view->x + view->width;
                     y = player->squadY * scaleY + view->y;

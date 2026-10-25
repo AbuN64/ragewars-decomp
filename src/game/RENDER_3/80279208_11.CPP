@@ -123,10 +123,10 @@ void func_80279B40_de(Actor_func_80279B40_de *actor, s32 model, s32 arg2, s32 fl
         offset.y = -offset_y(actor);
         offset.z = 0.0f;
         func_80273760_de(matrix, actor->angle);
-        func_80272898_de(matrix, &offset, &turned);
+        Particle_TransformPoint(matrix, &offset, &turned);
         parent = Particle_ParentTransform((struct EffectActor *)actor, 0);
         if (parent != 0) {
-            func_80272898_de(parent, &turned, &carried);
+            Particle_TransformPoint(parent, &turned, &carried);
         } else {
             carried = turned;
         }

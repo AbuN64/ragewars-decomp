@@ -119,7 +119,7 @@ void func_802349C0_de(void *arg0) {
                 }
             }
             func_8026F620_de(m168, m68, mE8);
-            func_80272898_de(m168, &result, &transformed);
+            Particle_TransformPoint(m168, &result, &transformed);
             func_8026F620_de(m168, m68, mA8);
             matrix = m1A8;
             func_8026F620_de(matrix, m168, mE8);

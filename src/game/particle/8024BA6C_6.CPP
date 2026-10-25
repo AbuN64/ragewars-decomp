@@ -58,9 +58,9 @@ void func_8024C454_de(Actor_func_8024A1D0_de *actor, LookupRecAtC *lookup) {
     s32 *node;
 
     if (func_8026E340_de() != 0) {
-        node = func_8028FDB4_de(*lookup->value, 2);
+        node = Render_GetPackSection(*lookup->value, 2);
         if ((*node != 0) &&
-            (*((s32 *)func_8028FDB4_de(func_8028FDB4_de(node, 0), 0)) & 0x8000)) {
+            (*((s32 *)Render_GetPackSection(Render_GetPackSection(node, 0), 0)) & 0x8000)) {
             position = actor->position0;
             position.y += Particle_GetActorHeight(actor) * D_800C3B60_de;
             func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
@@ -84,12 +84,12 @@ void func_8024C5D4_de(void *arg0, void *arg1, s32 arg2, s32 arg3)
   char *new_var;
   if ((object->unk17C) & mask)
   {
-    temp_v0 = func_8028FDB4_de(arg1, 3);
+    temp_v0 = Render_GetPackSection(arg1, 3);
     temp_s1 = temp_v0->unk4;
     if (temp_s1 != 0)
     {
       new_var = &temp_v0->unk8;
-      Fx_DispatchAttachmentEffects(new_var, temp_s1, arg3, arg0, func_8028FDB4_de(arg1, 5));
+      Fx_DispatchAttachmentEffects(new_var, temp_s1, arg3, arg0, Render_GetPackSection(arg1, 5));
     }
   }
 }
@@ -205,7 +205,7 @@ void func_8024C92C_de(void *arg0, s32 arg1, void *arg2) {
         *out = recs[arg1].position;
         return;
     }
-    base = func_8028FDB4_de(o->translationFrames, (s32) idx);
+    base = Render_GetPackSection(o->translationFrames, (s32) idx);
     a = base + o->translationFirst;
     base = base + o->translationNext;
 
@@ -234,7 +234,7 @@ void func_8024CA10_de(void *arg0, s32 arg1, CQuatern *arg2) {
         arg2->w = (f32)(((CROMInitialOrientation_t *)(rec))->unk_12) * scale;
         return;
     }
-    base = func_8028FDB4_de(((ObjectLinks24 *)(o))->unk_C, (s32)idx);
+    base = Render_GetPackSection(((ObjectLinks24 *)(o))->unk_C, (s32)idx);
     a = (char *)base + (((ObjectLinks24 *)(o))->unk_10) * 4;
     base = (char *)base + (((ObjectLinks24 *)(o))->unk_14) * 4;
     {
@@ -266,7 +266,7 @@ void func_8024CB4C_de(ObjectLinks24_2 *arg0, s32 arg1, CQuatern *arg2) {
         arg2->w = (f32)rec->unk_12 * scale;
         return;
     }
-    base = func_8028FDB4_de(o->unk_C, (s32)idx);
+    base = Render_GetPackSection(o->unk_C, (s32)idx);
     func_80270AAC_de(arg2, o->unk_20,
                     (char *)base + o->unk_10 * 4,
                     (char *)base + o->unk_14 * 4);

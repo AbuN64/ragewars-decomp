@@ -16,7 +16,7 @@
 #include "LISTS/80279520.H"
 
 /* Detaches an entity from linked effects while preserving their transforms and lifetimes; the unsigned offset-to-pointer cast preserves matrix-address scheduling and addition operand order. */
-extern void func_8027027C_de(void *,void *),func_80270910_de(void *,void *),func_80272828_de(void *),func_802732D0_de(void *,void *),func_802732EC_de(void *,void *),func_8027347C_de(void *,f32,f32,f32),func_802A25D0_de(void *,Node44 *,void *);
+extern void func_8027027C_de(void *,void *),Rsp_ConvertMatrixToFloat(void *,void *),func_80272828_de(void *),func_802732D0_de(void *,void *),func_802732EC_de(void *,void *),func_8027347C_de(void *,f32,f32,f32),func_802A25D0_de(void *,Node44 *,void *);
 
 void func_802A3DD4_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *camera) {
     Morph storage;
@@ -152,7 +152,7 @@ loop_4:
                                 ((struct ObjectState68 *) (((char *) var_s0) + (D_800D297C << 6)))->unk_28=((struct ObjectState68 *) (((char *) var_s0) + ((D_800D297C ^ 1) << 6)))->unk_28;
                                 var_s0->unk_B0 = 0;
                             } else {
-                                func_80270910_de(&sp10, (char *)arg1 + ((D_800D297C << 6) + 0x60));
+                                Rsp_ConvertMatrixToFloat(&sp10, (char *)arg1 + ((D_800D297C << 6) + 0x60));
                                 scale = D_800C5E28_de;
                                 if (arg1->unk_118->unk14 != 0) {
                                     scale = D_800C5E2C_de;
@@ -182,7 +182,7 @@ loop_4:
                     matrix += (unsigned int)arg1;
                     matrix += 0x60;
                     if (var_s1->unk_24 > 0.0f) {
-                    func_80270910_de(&sp10, matrix);
+                    Rsp_ConvertMatrixToFloat(&sp10, matrix);
                     var_f0_2 = D_800C5E30_de;
                     if (arg1->unk_118->unk14 != 0) {
                         var_f0_2 = D_800C5E34_de;

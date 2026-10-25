@@ -110,7 +110,7 @@ void *Particle_ParentTransform(EffectActor *arg0, Shared_ActorView *camera) {
 
 
 
-extern void func_80270910_de(f32 *out, void *in);
+extern void Rsp_ConvertMatrixToFloat(f32 *out, void *in);
 extern void func_80272B38_de(void *matrix, CVector3 *in, CVector3 *out);
 extern void Weapons_BuildPlayerViewTransform(func_80228774_S5 *model, f32 *out);
 
@@ -144,8 +144,8 @@ void Particle_Attach(Actor_func_8027DAD0_de *actor, CVector3 *outPosition, CVect
             case 0x41E:
                 skeleton = parent->skeleton;
                 if (skeleton != 0) {
-                    func_80270910_de(matrix, (char *)skeleton + actor->bone * 64);
-                    func_80272898_de(matrix, &actor->offset, &position);
+                    Rsp_ConvertMatrixToFloat(matrix, (char *)skeleton + actor->bone * 64);
+                    Particle_TransformPoint(matrix, &actor->offset, &position);
                     func_80272B38_de(matrix, &actor->heading, &heading);
                     actor->position = position;
                     actor->facing = heading;
@@ -169,7 +169,7 @@ void Particle_Attach(Actor_func_8027DAD0_de *actor, CVector3 *outPosition, CVect
         } else {
             transform = owner->transform;
         }
-        func_80272898_de(transform, &actor->offset, &position);
+        Particle_TransformPoint(transform, &actor->offset, &position);
         actor->position = position;
     }
     if (outPosition != 0) {

@@ -234,7 +234,7 @@ void func_802A822C_de(s32 value, f32 x, f32 y, f32 size, f32 scaleY, s32 arg5, s
         }
     }
 release:
-    func_80253754_de(0, (struct Node80253610 *)sprites);
+    Scene_UnlockResource(0, (struct Node80253610 *)sprites);
 }
 
 void func_802A84F8_de(void) {

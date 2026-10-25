@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-/* Draws a scene through cached display lists: loads the scene if needed (returning if that fails), calls the model's base list, and on first use records two lists in the frame's command stream, one for objects without flag 4 and one for objects with it, each drawn through func_802504B0_de inside a func_8026D980_de pass and preceded by a branch past its end; finally calls the first cached list. */
+/* Draws a scene through cached display lists: loads the scene if needed (returning if that fails), calls the model's base list, and on first use records two lists in the frame's command stream, one for objects without flag 4 and one for objects with it, each drawn through Instance_DrawModel inside a Render_BeginModelBatch pass and preceded by a branch past its end; finally calls the first cached list. */
 
 
 
@@ -18,7 +18,7 @@ extern void func_80253908_de(s32 heap);
 extern void Scene_BuildCachedGeometry(Scene_func_80288EA8_de *scene);
 
 
-extern void func_802504B0_de(Object_func_80288EA8_de *object, void *camera);
+extern void Instance_DrawModel(Object_func_80288EA8_de *object, void *camera);
 
 void func_80288EA8_de(Scene_func_80288EA8_de *scene, void *camera) {
     Object_func_80288EA8_de **objects;
@@ -33,29 +33,29 @@ void func_80288EA8_de(Scene_func_80288EA8_de *scene, void *camera) {
             return;
         }
     }
-    gSPDisplayList(D_80110634++, (unsigned int)func_8028FDB4_de(scene->model, 2));
+    gSPDisplayList(D_80110634++, (unsigned int)Render_GetPackSection(scene->model, 2));
     if (scene->lists[0] == 0) {
         for (pass = 0; pass < 2; pass++) {
             scene->lists[pass] = D_80110634;
             gSPBranchList(D_80110634++, 0);
-            func_8026D980_de();
-            objects = func_8028FDB4_de(scene->model, 1);
+            Render_BeginModelBatch();
+            objects = Render_GetPackSection(scene->model, 1);
             while (*objects != 0) {
                 object = *objects++;
                 switch (pass) {
                 case 0:
                     if (!(object->flags & 4)) {
-                        func_802504B0_de(object, camera);
+                        Instance_DrawModel(object, camera);
                     }
                     break;
                 case 1:
                     if (object->flags & 4) {
-                        func_802504B0_de(object, camera);
+                        Instance_DrawModel(object, camera);
                     }
                     break;
                 }
             }
-            func_8026D9D0_de();
+            Render_FlushModelBatch();
             gSPEndDisplayList(D_80110634++);
             gSPBranchList(scene->lists[pass]++, (unsigned int)D_80110634);
         }
@@ -149,7 +149,7 @@ extern s32 D_800D2AE0;
 extern s32 D_800CD730;
 extern Shared_func_80234FDC_S1 *func_802392EC_de(GameplayCamera *camera);
 extern void func_80253BBC_de(s32 heap, struct Node80253610 *resource);
-extern void func_80253754_de(void *heap, struct Node80253610 *resource);
+extern void Scene_UnlockResource(void *heap, struct Node80253610 *resource);
 extern void func_80253838_de(void *arg0, void *arg1);
 extern s32 func_80296390_de(void *grid, s32 x, s32 z, s32 index);
 extern s32 func_80296B74_de(void *planes, void *bounds);
@@ -212,7 +212,7 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
     gDPPipeSync(D_80110634++);
     gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
     scene = world;
-    func_8026D980_de();
+    Render_BeginModelBatch();
     scene->m_nTransparentInstances = 0;
     if (player != NULL && (player->unk664 & 0x100)) {
         gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_1);
@@ -235,7 +235,7 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
         }
         func_80253BBC_de(0, sector->m_pmeGridSection);
         model = sector->m_pmeGridSection->field0;
-        propSection = func_8028FDB4_de(model, 0);
+        propSection = Render_GetPackSection(model, 0);
         propCount = propSection->count;
         props = propSection->props;
         for (i = 0; i < propCount; i++) {
@@ -286,7 +286,7 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
                 prop->m_wFlags |= 0x200;
             }
         }
-        staticSection = func_8028FDB4_de(model, 1);
+        staticSection = Render_GetPackSection(model, 1);
         staticCount = staticSection->count;
         statics = staticSection->statics;
         for (i = 0; i < staticCount; i++) {
@@ -309,9 +309,9 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
             }
         }
     }
-    func_8026D9D0_de();
+    Render_FlushModelBatch();
     if (scene->m_bVisibilityValid != 0) {
-        func_80253754_de(NULL, scene->m_pmeVisibilityData);
+        Scene_UnlockResource(NULL, scene->m_pmeVisibilityData);
         func_80253838_de(NULL, scene->m_pmeVisibilityData);
     }
 }

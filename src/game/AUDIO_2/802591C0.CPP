@@ -489,11 +489,11 @@ s32 func_80259038_de(SceneRecAt2B5C *scene, s16 id, s16 avoid) {
 }
 
 void func_802591A0_de(void *arg0, s16 index) {
-    func_8028FDB4_de(func_8028FDB4_de((((struct ObjectLinks2B50 *) ((s8 *) arg0))->unk_2B4C), (s32) index), 0);
+    Render_GetPackSection(Render_GetPackSection((((struct ObjectLinks2B50 *) ((s8 *) arg0))->unk_2B4C), (s32) index), 0);
 }
 
 void func_802591D0_de(void *arg0, s16 index) {
-    func_8028FDB4_de(func_8028FDB4_de((((struct ObjectLinks2B50 *) ((s8 *) arg0))->unk_2B4C), (s32) index), 1);
+    Render_GetPackSection(Render_GetPackSection((((struct ObjectLinks2B50 *) ((s8 *) arg0))->unk_2B4C), (s32) index), 1);
 }
 
 /* Returns 1 when the object's owner at 0x102 is set, or when the id is below 256 and at least six of

@@ -44,18 +44,18 @@ void System_PrepareAnimationFrames(SharedRecAt10V1 *state, SharedRecAt20 *frames
     }
     if (var_v0 != 0) {
         resource = *state->unk10;
-        positions = func_8028FDB4_de(resource, 1);
-        channels = func_8028FDB4_de(resource, 5);
-        func_8028FDB4_de(channels, 0);
+        positions = Render_GetPackSection(resource, 1);
+        channels = Render_GetPackSection(resource, 5);
+        Render_GetPackSection(channels, 0);
         loopStart = state->unkC;
         framePosition = state->unk0;
         frameCount = (f32) state->unk8;
         frames->unk0 = positions->data;
-        section = func_8028FDB4_de(resource, 2);
+        section = Render_GetPackSection(resource, 2);
         frames->unk4 = section->data;
-        frames->unk8 = func_8028FDB4_de(channels, 1);
+        frames->unk8 = Render_GetPackSection(channels, 1);
         frameScale = 1.0f;
-        frames->unkC = func_8028FDB4_de(channels, 2);
+        frames->unkC = Render_GetPackSection(channels, 2);
         if (framePosition >= 0.0f) {
             var_v0_2 = (s32) framePosition;
             goto block_8;

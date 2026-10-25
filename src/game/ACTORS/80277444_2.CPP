@@ -12,7 +12,7 @@
 #include "FX_2/80271B18.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern void func_80270910_de(f32 *, PackedMatrixWords *);
+extern void Rsp_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
 extern void func_80272B38_de(void *, void *, void *);
 void func_80277A98_de(Vertices38 *data, PackedMatrixWords *matrices, CVector3 *output, s32 skin) {
     CVector3 light;
@@ -26,7 +26,7 @@ void func_80277A98_de(Vertices38 *data, PackedMatrixWords *matrices, CVector3 *o
     f32 dot, intensity;
     count = data->count;
     base = data->vertices;
-    func_80270910_de(matrix, matrices);
+    Rsp_ConvertMatrixToFloat(matrix, matrices);
     source = D_80137078;
     light.x = source->x;
     light.y = source->y;
@@ -38,7 +38,7 @@ void func_80277A98_de(Vertices38 *data, PackedMatrixWords *matrices, CVector3 *o
         dest = &output[drawn];
         if (!(vertex->flags & 0x80)) {
             f32 red, green, blue;
-            if (skin) func_80270910_de(matrix, &matrices[vertex->flags >> 8]);
+            if (skin) Rsp_ConvertMatrixToFloat(matrix, &matrices[vertex->flags >> 8]);
             normal.x = vertex->x;
             normal.y = vertex->y;
             normal.z = vertex->z;
@@ -89,7 +89,7 @@ typedef struct HitBoxTable {
 } HitBoxTable;
 
 #ifdef NON_MATCHING
-extern void *func_8028FDB4_de(void *, s32);
+extern void *Render_GetPackSection(void *, s32);
 /* NON_MATCHING: 7 aligned edits / 243 ROM words; remaining: sector address registers. */
 s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
     u32 keys[0x40];
@@ -119,7 +119,7 @@ s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
         }
     }
     if (matches == 1) {
-        table = func_8028FDB4_de(*(void **)items[0]->resource, 2);
+        table = Render_GetPackSection(*(void **)items[0]->resource, 2);
         n = table->count;
         n--;
         entry = table->boxes;
@@ -142,7 +142,7 @@ s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
         return flag;
     } else {
         for (i = 0; i < matches; i++) {
-            table = func_8028FDB4_de(*(void **)items[i]->resource, 2);
+            table = Render_GetPackSection(*(void **)items[i]->resource, 2);
             n = table->count;
             n--;
             entry = table->boxes;
@@ -227,7 +227,7 @@ s32 func_80278020_de(Bounds *bounds, void *table, void **out, s32 *countOut, u8 
     if (table == NULL) {
         return Actors_QueryWorldLightVolumes(bounds, out, countOut);
     }
-    boxTable = func_8028FDB4_de(table, 2);
+    boxTable = Render_GetPackSection(table, 2);
     idx = boxTable->count;
     idx--;
     box = boxTable->boxes;
@@ -240,9 +240,9 @@ s32 func_80278020_de(Bounds *bounds, void *table, void **out, s32 *countOut, u8 
                 if (*wanted == 1) {
                     found = 1;
                 } else {
-                    idTable = func_8028FDB4_de(table, 3);
+                    idTable = Render_GetPackSection(table, 3);
                     if (*idTable > 0) {
-                        list = func_8028FDB4_de(idTable, idx);
+                        list = Render_GetPackSection(idTable, idx);
                         ids = (s16 *)list;
                         len = list->count;
                         ids++;
@@ -350,7 +350,7 @@ extern u8 D_800C4B1C_de[];
 extern f32 D_80111D70[], D_80111D74[], D_80111D78[];
 extern s32 D_800D2850;
 extern u8 *func_8028FDC8_de();
-extern u8 **func_8025343C_de();
+extern u8 **Scene_AllocateResource();
 extern void func_802BD3A0_de();
 extern void Actors_AccumulateVertexLighting();
 typedef struct LitVertex {
@@ -397,7 +397,7 @@ s32 Actors_BuildLitModel(s32 modelResource, s32 lightResource, void *bounds, voi
         D_80111D78[clearIndex * 3] = 0;
     }
     if (needsColors != 0) {
-        allocation = func_8025343C_de(0, modelBytes + sizeof(LitModelAllocation) + model->count * 4, 0, D_800C4B1C_de);
+        allocation = Scene_AllocateResource(0, modelBytes + sizeof(LitModelAllocation) + model->count * 4, 0, D_800C4B1C_de);
         if (allocation == 0) {
             return 0;
         }
@@ -409,7 +409,7 @@ s32 Actors_BuildLitModel(s32 modelResource, s32 lightResource, void *bounds, voi
         copiedModel = *allocation + header->modelOffset;
         colors = *allocation + header->colorsOffset;
     } else {
-        allocation = func_8025343C_de(0, modelBytes + 8, 0, D_800C4B1C_de);
+        allocation = Scene_AllocateResource(0, modelBytes + 8, 0, D_800C4B1C_de);
         if (allocation == 0) {
             return 0;
         }
@@ -417,7 +417,7 @@ s32 Actors_BuildLitModel(s32 modelResource, s32 lightResource, void *bounds, voi
         copiedModel = *allocation + 8;
     }
     func_802BD3A0_de(copiedModel, model, modelBytes);
-    table = func_8028FDB4_de(modelResource, 1);
+    table = Render_GetPackSection(modelResource, 1);
     if (*(s32 *)(table + 4) != 0) {
         s32 *packed = (s32 *)(table + 8);
         for (colorIndex = 0; colorIndex < modelVertexCount; colorIndex++) {
@@ -438,7 +438,7 @@ s32 Actors_BuildLitModel(s32 modelResource, s32 lightResource, void *bounds, voi
         Shared_World *world = &D_8011FE88;
         worldLightCount = 0;
         for (sectorIndex = 0; sectorIndex < world->sectorEntryCount; sectorIndex++) {
-            worldLightCount += ((HitBoxTable *)func_8028FDB4_de(*(void **)world->sectors[sectorIndex].resource, 2))->count;
+            worldLightCount += ((HitBoxTable *)Render_GetPackSection(*(void **)world->sectors[sectorIndex].resource, 2))->count;
         }
         if (worldLightCount == 0) {
             func_80277A98_de((void *)copiedModel, (void *)matrices, (void *)D_80111D70, skinned);

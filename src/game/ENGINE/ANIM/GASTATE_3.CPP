@@ -23,7 +23,7 @@ void func_80262480_de(void *record) {
 }
 
 void func_802624A8_de(void *arg0) {
-    func_80253754_de(0, (struct Node80253610 *)(((struct func_8022BC04_S3 *) ((s8 *) arg0))->unk10));
+    Scene_UnlockResource(0, (struct Node80253610 *)(((struct func_8022BC04_S3 *) ((s8 *) arg0))->unk10));
     (((struct func_8022BC04_S3 *) ((s8 *) arg0))->unk10) = 0;
 }
 
@@ -37,7 +37,7 @@ s32 func_802624D8_de(void *arg0) {
 }
 
 void func_80262504_de(void *arg0, Six *arg1) {
-    Six *result = (Six *)func_8028FDB4_de((void *)func_8026049C_de(arg0), 6);
+    Six *result = (Six *)Render_GetPackSection((void *)func_8026049C_de(arg0), 6);
 
     *arg1 = *result;
 }

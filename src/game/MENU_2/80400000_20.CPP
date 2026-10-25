@@ -26,7 +26,7 @@ static inline CVector3 TrackStart(void) {
         sp20.z = 0;
         return sp20;
     }
-    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 0);
+    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(D_800E2830->resource, 0), 0), 0);
     sp10 = Menu_EvaluateCameraSpline(table->data, table->count, 0);
     return sp10;
 }
@@ -40,7 +40,7 @@ static inline CVector3 TrackEnd(void) {
         sp20.x = D_800DCC78;
         return sp20;
     }
-    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 1);
+    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(D_800E2830->resource, 0), 0), 1);
     sp10 = Menu_EvaluateCameraSpline(table->data, table->count, 0);
     return sp10;
 }
@@ -108,25 +108,25 @@ CVector3 Menu_EvaluateCameraSpline(void *, s32, s32);
 
 
 
-/* Returns the first word of what func_8028FDB4_de gives for the object at offset 4 of the structure
+/* Returns the first word of what Render_GetPackSection gives for the object at offset 4 of the structure
    D_800E2830 points to, asked with zero. */
 
 
 
 
-/* Walks three lookups through func_8028FDB4_de from the object at offset 4 of the structure
+/* Walks three lookups through Render_GetPackSection from the object at offset 4 of the structure
    D_800E2830 points to: first with zero, then with the argument, and returns the third lookup, with 0. */
 
 
 
 
-/* Calls func_8028FDB4_de on the object at offset 4 of the structure D_800E2830 points to, with 1. */
+/* Calls Render_GetPackSection on the object at offset 4 of the structure D_800E2830 points to, with 1. */
 
 
 
 
 /* Returns the byte size of a block holding a 0x30-byte header and a 36-byte record for every entry
-   counted at offset 4 of the two lists func_8028FDB4_de returns for an object with zero and with
+   counted at offset 4 of the two lists Render_GetPackSection returns for an object with zero and with
    two. */
 
 
@@ -159,7 +159,7 @@ CVector3 func_8040385C_de(void) {
         sp20.z = 0;
         return sp20;
     }
-    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 0);
+    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(D_800E2830->resource, 0), 0), 0);
     sp10 = Menu_EvaluateCameraSpline(table->data, table->count, 0);
     return sp10;
 }
@@ -174,7 +174,7 @@ CVector3 func_8040390C_de(void) {
         sp20.x = D_800DCC7C_de;
         return sp20;
     }
-    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 1);
+    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(D_800E2830->resource, 0), 0), 1);
     sp10 = Menu_EvaluateCameraSpline(table->data, table->count, 0);
     return sp10;
 }
@@ -188,8 +188,8 @@ f32 func_804039C4_de(void) {
     result = 0.0f;
     index = 0;
 loop_1:
-    if (index < *((s32 *)func_8028FDB4_de(D_800E2830->resource, 0))) {
-        temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), index), 0);
+    if (index < *((s32 *)Render_GetPackSection(D_800E2830->resource, 0))) {
+        temp_v0 = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(D_800E2830->resource, 0), index), 0);
         temp_v0 = (s32 *)((char *)temp_v0 + temp_v0[1] * 0x24);
         temp_f0 = *(f32 *)temp_v0;
         index += 1;
@@ -200,15 +200,15 @@ loop_1:
 }
 
 s32 func_80403A64_de(void) {
-    return *((s32 *)func_8028FDB4_de(D_800E2830->resource, 0));
+    return *((s32 *)Render_GetPackSection(D_800E2830->resource, 0));
 }
 
 void *func_80403A90_de(s32 key) {
-    return func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), key), 0);
+    return Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(D_800E2830->resource, 0), key), 0);
 }
 
 void *func_80403ADC_de(void) {
-    return func_8028FDB4_de(D_800E2830->resource, 1);
+    return Render_GetPackSection(D_800E2830->resource, 1);
 }
 
 /** Advance a byte pointer by eight bytes. */
@@ -242,8 +242,8 @@ void func_80403B2C_de(u8 *bits, s32 n, s32 set) {
 }
 
 s32 func_80403B70_de(void *object) {
-    struct IntPair *first = func_8028FDB4_de(object, 0);
-    struct IntPair *second = func_8028FDB4_de(object, 2);
+    struct IntPair *first = Render_GetPackSection(object, 0);
+    struct IntPair *second = Render_GetPackSection(object, 2);
     s32 size = first->field_4 * 36;
 
     return size + second->field_4 * 36 + 0x30;

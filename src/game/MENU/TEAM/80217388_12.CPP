@@ -39,7 +39,7 @@ void func_80218F9C_de(Menu_func_80218F9C_de *menu, s32 unused1, void *player) {
             slot->scale = func_80274808_de(slot->scale, target, *(&D_800C9178_de + 1) * 0.1f);
             func_802727D8_de(&matrix);
             func_80273C68_de(&matrix, slot->angle);
-            func_80272898_de(&matrix, &offset, &position);
+            Particle_TransformPoint(&matrix, &offset, &position);
             item->slot = i;
             item->position = position;
             item->icon = i + 0xC1C;

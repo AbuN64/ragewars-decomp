@@ -66,7 +66,7 @@ void func_80271F9C_de(CVector3 *,CVector3 *,f32);
 /* Transform the measured attachment position and direction into the target frame. */
 extern ParticleAttachmentState D_801041F0;
 
-extern void func_80270910_de(f32 *out, void *in);
+extern void Rsp_ConvertMatrixToFloat(f32 *out, void *in);
 
 extern void func_8026EF58_de(f32 *out, f32 *m);
 
@@ -386,13 +386,13 @@ void func_80283C1C_de(void *arg0, f32 *arg1, s32 arg2) {
     if (arg1 != 0) {
         func_8026EF58_de(matrix, arg1);
     } else {
-        func_80270910_de(source,
+        Rsp_ConvertMatrixToFloat(source,
             &current->drawMatrices[D_801041F0.frame]);
         func_8026EF58_de(matrix, source);
     }
     matrix_ptr = matrix;
     scene = &D_801001F8;
-    func_80272898_de(matrix_ptr, scene, &((Shared_Particle *)actor)->attachmentPosition);
+    Particle_TransformPoint(matrix_ptr, scene, &((Shared_Particle *)actor)->attachmentPosition);
     direction_ptr = &direction;
     direction = scene->direction;
     func_8027207C_de((f32 *)direction_ptr);

@@ -35,7 +35,7 @@ void func_80404D84_de(void) {
     struct Shape_typemap_165 *temp_v0;
     s32 temp_a0;
 
-    temp_v0 = func_8025343C_de(0, 0x810, 0x23, &D_800DCCC0);
+    temp_v0 = Scene_AllocateResource(0, 0x810, 0x23, &D_800DCCC0);
     temp_a0 = temp_v0->field_0;
     D_800DE808 = (s32 *)temp_v0;
     D_800E2854 = temp_a0;

@@ -23,7 +23,7 @@ extern f32 D_801468A0[];
 extern u8 D_800F91F0[];
 extern void func_80253908_de(s32);
 extern void func_80253838_de(s32, void *);
-extern SaveSnapshot **func_8025343C_de(s32, s32, s32, void *);
+extern SaveSnapshot **Scene_AllocateResource(s32, s32, s32, void *);
 extern void func_802A001C_de(void *, s32, s32);
 extern void func_802BD3A0_de(void *, void *, s32);
 /* eu-x splits this function one word late (its leading lui sits in the
@@ -39,7 +39,7 @@ void Pak_CreateSaveSnapshot(u8 *player) {
         func_80253838_de(0, D_800DE860_de);
     }
     allocationSize = D_8011FECC + 0x610;
-    snapshotHandle = func_8025343C_de(0, allocationSize, 0x33, D_800DCD60);
+    snapshotHandle = Scene_AllocateResource(0, allocationSize, 0x33, D_800DCD60);
     D_800DE868 = *snapshotHandle;
     D_800DE860_de = snapshotHandle;
     func_802A001C_de(D_800DE868, 0, allocationSize);

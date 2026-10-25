@@ -121,10 +121,10 @@ void func_8022BC94_de(void *actorIn, s32 arg1) {
     ObjectLinks1DC_3 *object = actorIn;
 
     if (object->unk_100 & 0x40000) {
-        temp_s1 = func_8025193C_de(0, object->resource, object->resource, object->resourceFlags, 4, 0, 0, D_800C2BC0_de, 1);
+        temp_s1 = Scene_RequestResource(0, object->resource, object->resource, object->resourceFlags, 4, 0, 0, D_800C2BC0_de, 1);
         if (temp_s1 != 0) {
             actor = object->unk_1D8;
-            func_8024B4F4_de(actorIn, (s32)func_8028FDB4_de(*(void **)temp_s1, 0));
+            func_8024B4F4_de(actorIn, (s32)Render_GetPackSection(*(void **)temp_s1, 0));
             if (arg1 != 0) {
                 message = actor->message;
                 if (message != 0) {
@@ -134,7 +134,7 @@ void func_8022BC94_de(void *actorIn, s32 arg1) {
                     Instance_DrawBlobShadow(actorIn, &sp28, arg1);
                 }
             }
-            func_80253754_de(0, temp_s1);
+            Scene_UnlockResource(0, temp_s1);
         }
     }
 }

@@ -61,7 +61,7 @@ s32 func_80444FA0_us_rev1(OptionEditState *arg0, OptionEditState *arg1, s32 arg2
                 length-=6;
                 func_802BD320_de(temp_s0_2 + length, &D_800E27D0, (s32) ((f32) var_s1 / arg7));
                 if (D_800E63AC != 0) {
-                    temp_v0_2 = func_8028FDB4_de(D_8011FEF4, 0);
+                    temp_v0_2 = Render_GetPackSection(D_8011FEF4, 0);
                     var_v1 = 0;
                     temp_a1_3 = temp_v0_2->count;
                     temp_v0_2=&((OptionEditContext *)(temp_v0_2))->unk_8;

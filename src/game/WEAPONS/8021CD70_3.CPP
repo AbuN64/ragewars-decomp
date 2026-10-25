@@ -76,7 +76,7 @@ void func_8021D774_de(AimPlayer *player) {
     sp30.x = 0.0f;
     sp30.y = 0;
     sp30.z = D_800C23BC_de;
-    func_80272898_de(matrix, &sp30, &desired);
+    Particle_TransformPoint(matrix, &sp30, &desired);
     if (func_802444A4_de((char *)player, current, desired, (s32) &D_80103FD0) != 0) {
         player->aim = D_80103FCC->point;
         player->normal = D_80103FCC->normal;
@@ -88,7 +88,7 @@ void func_8021D774_de(AimPlayer *player) {
     sp30.x = 0.0f;
     sp30.y = 0;
     sp30.z = D_800C23C0_de;
-    func_80272898_de(matrix, &sp30, &desired);
+    Particle_TransformPoint(matrix, &sp30, &desired);
     if (player->enabled != 0) {
         if ((func_802444A4_de((char *)player, current, desired, (s32) &D_801000F0) != 0) && (temp_a1 = D_80103FCC->actor, (temp_a1 != NULL))) {
             if (temp_a1->kind == 1) {
@@ -98,7 +98,7 @@ void func_8021D774_de(AimPlayer *player) {
                     spE0 = sp30;
                     func_8027207C_de(&spE0);
                     func_80271F9C_de(&spC0.xyz, &spE0, temp_fv0);
-                    func_80272898_de(matrix, &spC0.xyz, (CVector3 *)&spD0);
+                    Particle_TransformPoint(matrix, &spC0.xyz, (CVector3 *)&spD0);
                     player->aim2 = (*(CVector3 *)&spD0);
                     func_8021D408_de((void *)player, (CVector3 *)&spD0, &D_80103FCC->normal);
                 } else {

@@ -22,7 +22,7 @@ extern char D_0025F56C;
 
 extern char D_800C41B0_de;
 
-extern s32 func_8028FE3C_de(s32, s32, s32, s32 *);
+extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
 
 
 extern s32 func_802624D8_de(Anim *);
@@ -37,15 +37,15 @@ static inline s32 load(Anim *anim, s32 table, s32 key, s32 id) {
         anim->resource = 0;
         return 0;
     }
-    clip = func_8028FE3C_de(table, key, id, &size);
-    anim->resource = func_8025193C_de(0, clip, clip, size, 4, anim, &D_0025F56C, &D_800C41B0_de, 0);
+    clip = Render_LocatePackSection(table, key, id, &size);
+    anim->resource = Scene_RequestResource(0, clip, clip, size, 4, anim, &D_0025F56C, &D_800C41B0_de, 0);
     if (func_802624D8_de(anim) == 0) {
         return 0;
     }
     header = func_8026049C_de(anim);
-    anim->frames = ((u16 *)func_8028FDB4_de(header, 0))[3];
+    anim->frames = ((u16 *)Render_GetPackSection(header, 0))[3];
     anim->current = id;
-    anim->length = ((u16 *)func_8028FDB4_de(func_8028FDB4_de(header, 3), 0))[1];
+    anim->length = ((u16 *)Render_GetPackSection(Render_GetPackSection(header, 3), 0))[1];
     return 1;
 }
 
@@ -70,7 +70,7 @@ static __inline__ f64 unsignedDouble(u32 value,const f64 *bias) {
 static __inline__ f32 wrapAngle(AnimChannel *anim,f32 time) {
     s16 *keys;
     s32 first,next,last;
-    keys=((AngleKeys *)func_8028FDB4_de(func_8026049C_de(anim),0))->keys;
+    keys=((AngleKeys *)Render_GetPackSection(func_8026049C_de(anim),0))->keys;
     first=(s32)time;
     next=first+1;
     last=anim->frames-1;
@@ -165,11 +165,11 @@ void func_8026193C_de(AnimChannel *arg0, CVector3 *arg1, f32 *arg2, RootActor *a
         func_802476C8_de((char *)arg3, arg0, 0.0f, temp_fv0);
         arg3->flags = (s32) (arg3->flags & 0xF7FFFFFF);
     }
-    temp_s2 = func_8028FDB4_de(header,3);
-    temp_s2 = func_8028FDB4_de(temp_s2,0);
+    temp_s2 = Render_GetPackSection(header,3);
+    temp_s2 = Render_GetPackSection(temp_s2,0);
     System_SampleVectorTrack(arg0, 0, arg0->time, &sp10);
     temp_fs0 = arg0->time;
-    temp_a2 = ((AngleKeys *)func_8028FDB4_de(func_8026049C_de(arg0), 0))->keys;
+    temp_a2 = ((AngleKeys *)Render_GetPackSection(func_8026049C_de(arg0), 0))->keys;
     var_v1 = arg0->frames - 1;
     temp_fv1f = (s32) temp_fs0;
     temp_a0 = temp_fv1f + 1;
@@ -187,7 +187,7 @@ void func_8026193C_de(AnimChannel *arg0, CVector3 *arg1, f32 *arg2, RootActor *a
     temp_fs0f = (f32) temp_s5;
     if (temp_fs0f < arg0->time) {
         System_SampleVectorTrack(arg0, 0, temp_fs0f, &sp20);
-        temp_a2_2 = ((AngleKeys *)func_8028FDB4_de(func_8026049C_de(arg0), 0))->keys;
+        temp_a2_2 = ((AngleKeys *)Render_GetPackSection(func_8026049C_de(arg0), 0))->keys;
         temp_fv1f_2 = (s32) temp_fs0f;
         temp_a0_2 = temp_fv1f_2 + 1;
         var_v1_2 = arg0->frames - 1;
@@ -222,7 +222,7 @@ void func_8026193C_de(AnimChannel *arg0, CVector3 *arg1, f32 *arg2, RootActor *a
     }
     System_SampleVectorTrack(arg0, 0, arg0->time, &sp20);
     temp_fs0 = arg0->time;
-    temp_a2_4 = ((AngleKeys *)func_8028FDB4_de(func_8026049C_de(arg0), 0))->keys;
+    temp_a2_4 = ((AngleKeys *)Render_GetPackSection(func_8026049C_de(arg0), 0))->keys;
     var_v1_4 = arg0->frames - 1;
     temp_fv1f_4 = (s32) temp_fs0;
     temp_a0_4 = temp_fv1f_4 + 1;

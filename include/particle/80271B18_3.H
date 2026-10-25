@@ -3,5 +3,5 @@
 #include "COMMON/S1_3.H"
 extern void func_80272FA4_de(void);
 extern void func_802725F4_de(void);
-extern void func_80272898_de(void *arg0, void *arg1, void *arg2);
+extern void Particle_TransformPoint(void *arg0, void *arg1, void *arg2);
 #endif

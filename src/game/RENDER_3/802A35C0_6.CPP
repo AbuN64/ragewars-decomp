@@ -66,7 +66,7 @@ extern void func_80272828_de(f32 *arg0);
 
 extern void func_802A25D0_de(void *arg0, void *arg1, f32 *arg2);
 
-extern void func_80270910_de(f32 *, PackedMatrixWords *);
+extern void Rsp_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
 
 extern f32 D_800C5EA0_de;
 
@@ -290,7 +290,7 @@ void func_802A58B0_de(ObjRecAt7528 *arg0, Shared_Particle *particle, PackedMatri
             if (node->unk1C == particle &&
                 node->unk24 > zero &&
                 node->unk24 > zero) {
-                func_80270910_de(local, packedMatrixWords);
+                Rsp_ConvertMatrixToFloat(local, packedMatrixWords);
                 scale = D_800C5E98_de;
                 if (particle->desc->renderModel != 0) {
                     scale = D_800C5E9C_de;

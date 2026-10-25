@@ -170,7 +170,7 @@ void func_8025D350_de(void *arg0, s32 songIndex) {
     s32 tempo;
     SongHeader *song;
 
-    song = func_8028FDB4_de(player->bank->songs, songIndex * 2);
+    song = Render_GetPackSection(player->bank->songs, songIndex * 2);
     tempo = song->tempo;
     tempoValue = (f64) tempo;
     if (tempo < 0) {
@@ -178,7 +178,7 @@ void func_8025D350_de(void *arg0, s32 songIndex) {
     }
     player->tempoScale = (f32) tempoValue * D_800C3FC0_de;
     player->volume = (f32) song->volume;
-    func_8028FDB4_de(player->bank->songs, (songIndex * 2) | 1);
+    Render_GetPackSection(player->bank->songs, (songIndex * 2) | 1);
 }
 
 void func_8025D3E4_de(void *arg0) {

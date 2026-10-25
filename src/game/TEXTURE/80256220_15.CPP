@@ -288,10 +288,10 @@ s32 Texture_PlaySoundAtPosition(ContextRecAt2BC0 *context, s32 sound, CVector3 p
         index = selectSoundVariant(context, sound, 0);
     }
     if (index != -1) {
-        context->selectedEntry = func_8028FDB4_de(func_8028FDB4_de(context->instrumentIndex, (s16)index), 0);
+        context->selectedEntry = Render_GetPackSection(Render_GetPackSection(context->instrumentIndex, (s16)index), 0);
         context->selectedSound = sound;
         context->selectedOwner = owner;
-        group = func_8028FDB4_de(func_8028FDB4_de(context->instrumentIndex, (s16)index), 1);
+        group = Render_GetPackSection(Render_GetPackSection(context->instrumentIndex, (s16)index), 1);
         count = group->count;
         if (count != 0) {
             soundAcquireLock(&context->lock);
@@ -325,10 +325,10 @@ s32 Texture_PlayInstrumentAtPosition(ContextRecAt2BC0 *self, s32 index, CVector3
     if (index >= self->instrumentCount) {
         return -1;
     }
-    self->selectedEntry = func_8028FDB4_de(func_8028FDB4_de(self->instrumentIndex, (s16)index), 0);
+    self->selectedEntry = Render_GetPackSection(Render_GetPackSection(self->instrumentIndex, (s16)index), 0);
     self->selectedSound = 0x100;
     self->selectedOwner = -1;
-    group = func_8028FDB4_de(func_8028FDB4_de(self->instrumentIndex, (s16)index), 1);
+    group = Render_GetPackSection(Render_GetPackSection(self->instrumentIndex, (s16)index), 1);
     count = group->count;
     if (count != 0) {
         soundAcquireLock(&self->lock);

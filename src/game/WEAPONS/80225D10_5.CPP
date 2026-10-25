@@ -101,9 +101,9 @@ extern void func_80246E44_de(char *);
 
 extern void Instance_DrawBlobShadow(void *arg0, CVector3 *arg1, s32 arg2);
 
-extern void func_80253754_de(s32 arg0, s32 arg1);
+extern void Scene_UnlockResource(s32 arg0, s32 arg1);
 
-/* Draws the per-player overlays for one view between func_8026D980_de and func_8026D9D0_de: for each player
+/* Draws the per-player overlays for one view between Render_BeginModelBatch and Render_FlushModelBatch: for each player
    in the list from 0x20 it draws the scope model 0xC84 or 0xC85 (by the zoom mode at 0x120C) at the
    player's view matrix while zoomed in at 0x11FC, the player's display through func_8022F770_de when it
    belongs to this view and is enabled at 0x1210, and in team games (0x24 or 0x78 of D_801468A0) a
@@ -348,7 +348,7 @@ void func_80228798_de(void *arg0, void *view) {
                         if (((ObjRecAt1D8V3 *)(actor))->unk100 & 0x40000) {
                             void *resource;
 
-                            resource = func_8025193C_de(
+                            resource = Scene_RequestResource(
                                 0, ((ObjRecAt1D8V3 *)(actor))->unkC4,
                                 ((ObjRecAt1D8V3 *)(actor))->unkC4,
                                 ((ObjRecAt1D8V3 *)(actor))->unkD0,
@@ -358,7 +358,7 @@ void func_80228798_de(void *arg0, void *view) {
                                 void *temp;
 
                                 linked = ((ObjRecAt1D8V3 *)(actor))->unk1D8;
-                                func_8024B4F4_de(actor, (s32)func_8028FDB4_de(*(void **)resource, 0));
+                                func_8024B4F4_de(actor, (s32)Render_GetPackSection(*(void **)resource, 0));
                                 temp = ((func_80228774_S5 *)(linked))->unk5DC;
                                 if (temp != 0) {
                                     CVector3 delta;
@@ -370,7 +370,7 @@ void func_80228798_de(void *arg0, void *view) {
                                               ((ObjRecAt1D8V3 *)(actor))->unk10;
                                     Instance_DrawBlobShadow(actor, &delta, 1);
                                 }
-                                func_80253754_de(0, (s32)resource);
+                                Scene_UnlockResource(0, (s32)resource);
                             }
                         }
                     } else {
@@ -381,14 +381,14 @@ generic:
                     if (((ObjRecAt16E0V2 *)(node))->unk100 & 0x40000) {
                         void *resource;
 
-                        resource = func_8025193C_de(
+                        resource = Scene_RequestResource(
                             0, ((ObjRecAt16E0V2 *)(node))->unkC4,
                             ((ObjRecAt16E0V2 *)(node))->unkC4,
                             ((ObjRecAt16E0V2 *)(node))->unkD0,
                             4, 0, 0, D_800C2BC0_de, 1);
                         if (resource != 0) {
-                            func_8024B4F4_de(node, (s32)func_8028FDB4_de(*(void **)resource, 0));
-                            func_80253754_de(0, (s32)resource);
+                            func_8024B4F4_de(node, (s32)Render_GetPackSection(*(void **)resource, 0));
+                            Scene_UnlockResource(0, (s32)resource);
                         }
                     }
                 }
@@ -410,7 +410,7 @@ void func_80228958_de(ObjRecAt20V2 *game, s32 view) {
     if (match->teams != 0 || match->teamRule != 0) {
         team = ((struct Record *) ((struct OwnerRecAt5D8V2 *) func_802392EC_de(view))->settings)->team;
     }
-    func_8026D980_de();
+    Render_BeginModelBatch();
     for (player = game->unk20; player != 0; player = ((ObjectLinks16E4 *)(player))->unk_16E0) {
         zoomed = 0;
         if (((ObjectLinks16E4 *)(player))->unk_11FC > 0.0f) {
@@ -434,7 +434,7 @@ void func_80228958_de(ObjRecAt20V2 *game, s32 view) {
             func_80229D28_de(player);
         }
     }
-    func_8026D9D0_de();
+    Render_FlushModelBatch();
 }
 
 void func_80228AF4_de(void *arg0, ViewState *viewState) {

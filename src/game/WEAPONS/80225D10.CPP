@@ -11,7 +11,7 @@
 #include "GAME/CODE_8027302C.H"
 extern void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMovement *tuning);
 extern s32 func_80214178_de(void *arg0, void *arg1, s32 arg2);
-extern void func_80272898_de(void *arg0, void *arg1, void *arg2);
+extern void Particle_TransformPoint(void *arg0, void *arg1, void *arg2);
 
 #if defined(VERSION_US_REV1) || defined(NON_MATCHING)
 #include "TYPES.H"
@@ -139,7 +139,7 @@ void func_80225F44_de(SharedPlayer *player,func_802165F8_S1 *body) {
     }
     if(offset) {
         func_802736D4_de(&rotation,body->unk6C);
-        func_80272898_de(&rotation,offset,&player->views5E8.view73C_82.weapon);
+        Particle_TransformPoint(&rotation,offset,&player->views5E8.view73C_82.weapon);
         func_80271F9C_de(&player->views5E8.view73C_82.weapon,&player->views5E8.view73C_82.weapon,10.24f);
     }
 }

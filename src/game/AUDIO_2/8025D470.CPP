@@ -68,8 +68,8 @@ void func_8025D450_de(Track *queue) {
             temp_s0 = temp_v0_3;
             if (temp_s0 != -1) {
                 temp_s0 *= 2;
-                temp_s0_2 = func_8028FDB4_de(queue->unk0->unk2B50, temp_s0 | 1);
-                temp_v0_4 = func_8028FDB4_de(queue->unk0->unk2B50, temp_s0);
+                temp_s0_2 = Render_GetPackSection(queue->unk0->unk2B50, temp_s0 | 1);
+                temp_v0_4 = Render_GetPackSection(queue->unk0->unk2B50, temp_s0);
                 queue->unk24 = (s32) temp_v0_4->unk0;
                 temp_f0 = func_802B2350(temp_v0_4->unk4);
                 queue->unk30 = temp_f0;

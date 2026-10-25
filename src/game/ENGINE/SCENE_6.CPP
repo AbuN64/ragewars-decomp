@@ -12,7 +12,7 @@
 #include "RENDER_4/8028FD2C_6.H"
 
 char *func_8028AFEC_de(void *arg0, s32 resourceId) {
-    return func_8028FDB4_de((((struct ObjectLinks74 *) ((s8 *) arg0))->unk_70), resourceId);
+    return Render_GetPackSection((((struct ObjectLinks74 *) ((s8 *) arg0))->unk_70), resourceId);
 }
 
 /** Return an indexed record from the table at object offset 0xA0. */
@@ -22,7 +22,7 @@ void *func_8028B00C_de(struct Shared_World *object, int index) {
     return base + (index * stride + 8);
 }
 
-/* Draws a scene's object list inside a func_8026D980_de and func_8026D9D0_de pass: writes four G_MOVEWORD commands setting the words at 4, 0xC, 0x14 and 0x1C to 5, 5, 0xFFFB and 0xFFFB, then draws each object through func_80249E28_de unless its flag 4 is set, in which case it is deferred to the scene's 64-entry late list. */
+/* Draws a scene's object list inside a Render_BeginModelBatch and Render_FlushModelBatch pass: writes four G_MOVEWORD commands setting the words at 4, 0xC, 0x14 and 0x1C to 5, 5, 0xFFFB and 0xFFFB, then draws each object through func_80249E28_de unless its flag 4 is set, in which case it is deferred to the scene's 64-entry late list. */
 
 
 
@@ -41,7 +41,7 @@ void func_8028B028_de(SceneRecAt10C0 *scene, void *camera) {
     s32 late;
     LevelActor **objects;
 
-    func_8026D980_de();
+    Render_BeginModelBatch();
     count = scene->count;
     gSPMoveWord(D_80110634++, G_MW_CLIP, 4, 5);
     gSPMoveWord(D_80110634++, G_MW_CLIP, 12, 5);
@@ -60,7 +60,7 @@ void func_8028B028_de(SceneRecAt10C0 *scene, void *camera) {
             func_80249E28_de(object, camera);
         }
     }
-    func_8026D9D0_de();
+    Render_FlushModelBatch();
 }
 
 extern Gfx *D_80110634;
@@ -79,9 +79,9 @@ void func_8028B160_de(s32 world, s32 view) {
     gSPMoveWord(cmd, G_MW_CLIP, 20, 0xFFFF);
     cmd = D_80110634++;
     gSPMoveWord(cmd, G_MW_CLIP, 28, 0xFFFF);
-    func_8026D980_de();
+    Render_BeginModelBatch();
     Particle_DrawRenderList(world + 0x1B08, view);
-    func_8026D9D0_de();
+    Render_FlushModelBatch();
 }
 
 s32 func_8028B21C_de(struct Shared_World *arg0, s32 arg1)
@@ -148,7 +148,7 @@ void *func_8028B2F8_de(Shared_World *world, u16 *arg1) {
     if (arg1 == 0) {
         return 0;
     }
-    base = ((char *)func_8028FDB4_de(world->modelSections, 0)) + 8;
+    base = ((char *)Render_GetPackSection(world->modelSections, 0)) + 8;
     idx = *arg1;
     return (void *)(base + idx * 0x64);
 }
@@ -161,7 +161,7 @@ u32 func_8028B350_de(Shared_World *world, s32 arg1) {
     if (arg1 == 0) {
         return -1;
     }
-    offset = ((char *)func_8028FDB4_de(world->modelSections, 2)) + 8;
+    offset = ((char *)Render_GetPackSection(world->modelSections, 2)) + 8;
     result = arg1 - offset;
     return (u32)result >> 5;
 }
@@ -176,7 +176,7 @@ s32 func_8028B394_de(void *world, s32 arg1) {
     s32 raw;
     s32 base;
 
-    raw = func_8028FDB4_de(((Shared_World *)world)->modelSections, 2);
+    raw = Render_GetPackSection(((Shared_World *)world)->modelSections, 2);
     base = raw + 8;
     if (arg1 < 0 || arg1 >= ((StridedTable *)raw)->count) {
         return 0;
@@ -197,10 +197,10 @@ void func_8028B3E4_de(struct Shared_World *world, s32 index, s32 arg2, s32 arg3)
     s32 idx;
     s32 idx2;
 
-    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(world->secondaryLevels, 0), index), 0);
-    func_8028FDB4_de(table, 0);
+    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(world->secondaryLevels, 0), index), 0);
+    Render_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    base1 = (u8 *) func_8028FDB4_de(table, 1);
+    base1 = (u8 *) Render_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (arg2 & 7);
     if (arg3 != 0) {
@@ -238,10 +238,10 @@ void func_8028B4D0_de(struct Shared_World *world, s32 arg1, s32 arg2) {
 
     field84 = world->secondaryLevels;
     field1B40C = world->level;
-    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field84, 0), field1B40C), 0);
-    func_8028FDB4_de(table, 0);
+    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(field84, 0), field1B40C), 0);
+    Render_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    base1 = (u8 *) func_8028FDB4_de(table, 1);
+    base1 = (u8 *) Render_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (arg1 & 7);
     if (arg2 != 0) {
@@ -274,10 +274,10 @@ s32 func_8028B5C0_de(struct Shared_World *world, s32 arg1) {
 
     field84 = world->secondaryLevels;
     field1B40C = world->level;
-    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field84, 0), field1B40C), 0);
-    func_8028FDB4_de(table, 0);
+    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(field84, 0), field1B40C), 0);
+    Render_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    temp_a0 = (u8 *) func_8028FDB4_de(table, 1);
+    temp_a0 = (u8 *) Render_GetPackSection(table, 1);
     mask = 1 << (arg1 & 7);
     i = arg1;
     if (i < 0) {

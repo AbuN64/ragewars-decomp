@@ -48,14 +48,14 @@ void func_80294C8C_de(s32 arg0, Resource *handle) {
     if (*obj == 0) {
         return;
     }
-    list2 = func_8028FDB4_de(obj, 2);
+    list2 = Render_GetPackSection(obj, 2);
     count = *list2;
     if (count != 0) {
         rem2 = arg0 % count;
     } else {
         rem2 = 0;
     }
-    list1 = func_8028FDB4_de(obj, 1);
+    list1 = Render_GetPackSection(obj, 1);
     rem1 = arg0 % *list1;
     if (D_800CD894_de != 0) {
         mode = 4;
@@ -63,7 +63,7 @@ void func_80294C8C_de(s32 arg0, Resource *handle) {
         mode = handle->flags >> 30;
     }
     if (mode != 0) {
-        kind = *(u8 *)func_8028FDB4_de(obj, 0);
+        kind = *(u8 *)Render_GetPackSection(obj, 0);
         if (kind < 2) if (kind >= 0) {
             for (i = 0; i < count; i++) {
                 u16 *data = func_8028FDC8_de(list2, i, &size);
@@ -113,16 +113,16 @@ void func_80294C8C_de(s32 arg0, Resource *handle) {
         hdr[1] = 0x18;
         hdr[2] = off1;
         hdr[3] = off2;
-        func_802BD3A0_de(func_8028FDB4_de(hdr, 0), func_8028FDB4_de(obj, 0), func_8028FDF8_de(obj, 0));
-        entry = func_8028FDB4_de(hdr, 1);
+        func_802BD3A0_de(Render_GetPackSection(hdr, 0), Render_GetPackSection(obj, 0), func_8028FDF8_de(obj, 0));
+        entry = Render_GetPackSection(hdr, 1);
         entry[0] = 1;
         entry[1] = 0x10;
-        func_802BD3A0_de(func_8028FDB4_de(entry, 0), func_8028FDB4_de(list1, rem1), func_8028FDF8_de(list1, rem1));
-        entry = func_8028FDB4_de(hdr, 2);
+        func_802BD3A0_de(Render_GetPackSection(entry, 0), Render_GetPackSection(list1, rem1), func_8028FDF8_de(list1, rem1));
+        entry = Render_GetPackSection(hdr, 2);
         if (count != 0) {
             entry[0] = 1;
             entry[1] = 0x10;
-            func_802BD3A0_de(func_8028FDB4_de(entry, 0), func_8028FDB4_de(list2, rem2), func_8028FDF8_de(list2, rem2));
+            func_802BD3A0_de(Render_GetPackSection(entry, 0), Render_GetPackSection(list2, rem2), func_8028FDF8_de(list2, rem2));
         } else {
             entry[0] = 0;
         }
@@ -135,7 +135,7 @@ void func_80294C8C_de(s32 arg0, Resource *handle) {
 extern s32 D_800CD890, D_80146DF0, D_80146DF4, D_80146DF8, D_80146DFC;
 extern u32 *D_80110634;
 extern void func_80253BBC_de(s32);
-extern void *func_8028FDB4_de(void *, s32);
+extern void *Render_GetPackSection(void *, s32);
 extern u8 D_800CBE50[], D_800CBEE8[], D_800CBD50_de[], D_800CBDD0[], D_auto_800CCB60[];
 #define DLW(a, b) do { D_80110634[0] = (u32)(a); D_80110634[1] = (u32)(b); D_80110634 += 2; } while (0)
 /* Texture state setter (the gDP texture-load sequence of a texture-header object): looks up the header, bitmap and palette
@@ -154,11 +154,11 @@ void func_802950B4_de(s32 unused, void **obj, s32 frame, s32 tile, u32 wrap, u32
     u32 t3 = 0, t0 = 0;
 
     func_80253BBC_de(0);
-    hdr = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(obj[0], 0), 1), frame);
-    bits = func_8028FDB4_de(obj[0], 2);
+    hdr = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(obj[0], 0), 1), frame);
+    bits = Render_GetPackSection(obj[0], 2);
     palette = 0;
     if (*(s32 *)bits != 0) {
-        palette = func_8028FDB4_de(bits, tile);
+        palette = Render_GetPackSection(bits, tile);
     }
     needLoad = (D_800CD890 != (s32)obj || D_80146DF0 != frame || D_80146DF8 != (s32)wrap || D_80146DFC != (s32)maskS ||
                 D_80146DF4 != tile);

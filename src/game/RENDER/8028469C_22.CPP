@@ -54,10 +54,10 @@ void func_80285DB0_de(Shared_World *world, void *actor, s32 arg2) {
         }
     }
     field80 = world->bitSections;
-    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field80, 0), field1B40C), 0);
-    func_8028FDB4_de(table, 0);
+    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(field80, 0), field1B40C), 0);
+    Render_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    base1 = (u8 *) func_8028FDB4_de(table, 1);
+    base1 = (u8 *) Render_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (index & 7);
     if (arg2 != 0) {
@@ -106,10 +106,10 @@ s32 func_80285F58_de(void *arg0, void *arg1) {
     }
     field80 = world->bitSections;
     field1B40C = world->level;
-    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field80, 0), field1B40C), 0);
-    func_8028FDB4_de(table, 0);
+    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(field80, 0), field1B40C), 0);
+    Render_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    base = (u8 *) func_8028FDB4_de(table, 1);
+    base = (u8 *) Render_GetPackSection(table, 1);
     mask = 1 << (index & 7);
     i = index;
     if (i < 0) {

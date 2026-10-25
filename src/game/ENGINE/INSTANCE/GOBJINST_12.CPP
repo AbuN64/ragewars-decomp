@@ -77,7 +77,7 @@ void func_8024BBB4_de(char *actor, CVector3 offset, void *arg4, s32 *arg5)
         offset.z = -offset.z;
         parent = ((struct ObjRecAt5DC *) ((ObjectLinks1DC_3 *) actor)->unk_1D8)->unk5DC;
         if (parent != 0) {
-            func_80272898_de(parent + 0x160, &offset, &target);
+            Particle_TransformPoint(parent + 0x160, &offset, &target);
         } else {
             func_8024BC94_de(&turned, actor, offset);
             func_80271F34_de(&target, &((ObjectLinks1DC_3 *)(actor))->unk_8, &turned);

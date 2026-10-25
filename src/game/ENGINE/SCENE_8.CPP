@@ -7,8 +7,8 @@
 void func_8028BD4C_de(void *world, s32 arg1) {
     u8 *temp_v0_2;
     void *temp_v0;
-    temp_v0 = func_8028FDB4_de((((struct Field_void_80 *) ((s8 *) world))->value), 1);
-    func_8028FDB4_de(temp_v0, 0);
-    temp_v0_2 = func_8028FDB4_de(temp_v0, 1) + arg1;
+    temp_v0 = Render_GetPackSection((((struct Field_void_80 *) ((s8 *) world))->value), 1);
+    Render_GetPackSection(temp_v0, 0);
+    temp_v0_2 = Render_GetPackSection(temp_v0, 1) + arg1;
     *temp_v0_2 -= 1;
 }

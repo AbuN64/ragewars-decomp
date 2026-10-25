@@ -13,7 +13,7 @@
 extern s32 D_800CD764_de;
 extern s32 D_800CD8D0;
 extern s32 func_8028FE28_de(s32, s32, s32);
-extern s32 func_8028FE3C_de(void *, s32, s32, s32 *);
+extern s32 Render_LocatePackSection(void *, s32, s32, s32 *);
 extern s32 func_8028CF6C_de(void *, s32);
 extern f32 func_802B2350(s32);
 extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
@@ -79,18 +79,18 @@ SceneEffect *func_802627A0_de(struct SceneEffectPool *scene, s32 variant, s32 ow
     id = func_8028B21C_de(&D_8011FE88, variant);
     if (id != -1) {
         key = func_8028FE28_de((s32)D_8011FE88.indexedDirectory, D_8011FE88.indexedBank, id);
-        descriptor = func_8025193C_de(0, key, key, 0x18, 0, 0, 0, &D_800C4260_de, 1);
+        descriptor = Scene_RequestResource(0, key, key, 0x18, 0, 0, 0, &D_800C4260_de, 1);
         if (descriptor != 0) {
-            clip = func_8028FE3C_de(*descriptor, key, 0, &size);
-            resource = func_8025193C_de(0, clip, clip, size, 0, 0, 0, &D_800C4274_de, 1);
+            clip = Render_LocatePackSection(*descriptor, key, 0, &size);
+            resource = Scene_RequestResource(0, clip, clip, size, 0, 0, 0, &D_800C4274_de, 1);
             if (resource != 0) {
-                record = func_8028FDB4_de(*resource, 0);
+                record = Render_GetPackSection(*resource, 0);
                 count = func_8028CF6C_de(&D_8011FE88, record->count);
                 func_80271F9C_de(&color, &color, func_802B2350(record->angle));
                 effect = spawn_effect(scene, id, variant, count, owner, position, scale, direction, color, ref);
-                func_80253754_de(0, resource);
+                Scene_UnlockResource(0, resource);
             }
-            func_80253754_de(0, descriptor);
+            Scene_UnlockResource(0, descriptor);
         }
     }
     return effect;

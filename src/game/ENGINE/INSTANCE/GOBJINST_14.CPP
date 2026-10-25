@@ -13,7 +13,7 @@
 
 
 
-extern s32 func_8028FE3C_de(s32, s32, s32, s32 *);
+extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
 
 
 
@@ -31,10 +31,10 @@ f32 func_8024BF24_de(void *arg0) {
 
     result = D_800C3B5C;
     if (((LevelActor *)arg0)->flags & 0x40000) {
-        temp_s0 = func_8025193C_de(0, ((LevelActor *)arg0)->resource, ((LevelActor *)arg0)->resource, ((LevelActor *)arg0)->resourceFlags, 4, 0, 0, &D_800C3AE8_de, 1);
+        temp_s0 = Scene_RequestResource(0, ((LevelActor *)arg0)->resource, ((LevelActor *)arg0)->resource, ((LevelActor *)arg0)->resourceFlags, 4, 0, 0, &D_800C3AE8_de, 1);
         if (temp_s0 != 0) {
-            result = RW_BITS_TO_FLOAT((s32) ((ActorResourceHeader *)func_8028FDB4_de(*temp_s0, 0))->particleScale);
-            func_80253754_de(0, temp_s0);
+            result = RW_BITS_TO_FLOAT((s32) ((ActorResourceHeader *)Render_GetPackSection(*temp_s0, 0))->particleScale);
+            Scene_UnlockResource(0, temp_s0);
         }
     }
     return result;
@@ -47,20 +47,20 @@ void **func_8024BFD4_de(MenuPanelRoot *actor, s32 arg1) {
         return 0;
     }
     if (arg1 != actor->selected) {
-        resource = func_8025193C_de(0, actor->resource,
+        resource = Scene_RequestResource(0, actor->resource,
                                  actor->resource, actor->resourceSize,
                                  0, 0, 0, &D_800C3B28, 1);
         if (resource != 0) {
-            actor->selectedResource = func_8028FE3C_de((s32)*resource,
+            actor->selectedResource = Render_LocatePackSection((s32)*resource,
                                                 actor->resource,
                                                 arg1 % *(s32 *)*resource,
                                                 &actor->window);
             actor->selected = arg1;
-            func_80253754_de(0, resource);
+            Scene_UnlockResource(0, resource);
         }
     }
     if (actor->selectedResource != 0) {
-        return func_8025193C_de(0, actor->selectedResource,
+        return Scene_RequestResource(0, actor->selectedResource,
                              actor->selectedResource, actor->window,
                              0, 0, &D_0026D814, &D_800C3B3C, 0);
     }

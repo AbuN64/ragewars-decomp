@@ -114,15 +114,15 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
         size += len0;
         func_8028FDC8_de(old, 1, &len1);
         size += len1;
-        oldList = func_8028FDB4_de(old, 2);
+        oldList = Render_GetPackSection(old, 2);
         count = oldList->count;
         i = 0;
         size += (count * 4 + 15) & ~7;
         if (count > 0) do {
-            srcEntry = func_8028FDB4_de(oldList, i);
+            srcEntry = Render_GetPackSection(oldList, i);
             size += 16;
             size += materialBytes;
-            input = func_8028FDB4_de(srcEntry, 1);
+            input = Render_GetPackSection(srcEntry, 1);
             {
                 s32 countTag;
                 commandSize = 0;
@@ -163,17 +163,17 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
             dst->offsets[0] = offset;
             copySource0 = func_8028FDC8_de(old, 0, &len0);
             vertexCount = 0;
-            vertices = func_8028FDB4_de(dst, 0);
+            vertices = Render_GetPackSection(dst, 0);
             func_802BD3A0_de(vertices, copySource0, len0);
             offset += len0;
             dst->offsets[1] = offset;
             copySource1 = func_8028FDC8_de(old, 1, &len1);
-            dstData = func_8028FDB4_de(dst, 1);
+            dstData = Render_GetPackSection(dst, 1);
             func_802BD3A0_de(dstData, copySource1, len1);
             offset += len1;
             dst->offsets[2] = offset;
-            oldList = func_8028FDB4_de(old, 2);
-            newList = func_8028FDB4_de(dst, 2);
+            oldList = Render_GetPackSection(old, 2);
+            newList = Render_GetPackSection(dst, 2);
             count = oldList->count;
             i = 0;
             newList->count = count;
@@ -182,18 +182,18 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
             if (count > 0) {
                 vertexData = vertices + 8;
                 do {
-                    srcEntry = func_8028FDB4_de(oldList, i);
-                    dstEntry = func_8028FDB4_de(newList, i);
+                    srcEntry = Render_GetPackSection(oldList, i);
+                    dstEntry = Render_GetPackSection(newList, i);
                     block = (srcEntry->count * 4 + 15) & ~7;
                     dstEntry->count = srcEntry->count;
                     dstEntry->offsets[0] = block;
-                    copySource2 = func_8028FDB4_de(srcEntry, 0);
-                    dstData = func_8028FDB4_de(dstEntry, 0);
+                    copySource2 = Render_GetPackSection(srcEntry, 0);
+                    dstData = Render_GetPackSection(dstEntry, 0);
                     func_80285570_de(dstData, copySource2);
                     block += materialBytes;
                     dstEntry->offsets[1] = block;
-                    input = func_8028FDB4_de(srcEntry, 1);
-                    output = func_8028FDB4_de(dstEntry, 1);
+                    input = Render_GetPackSection(srcEntry, 1);
+                    output = Render_GetPackSection(dstEntry, 1);
                     if ((tag = *input) != 0) {
                         do {
                             commandSize = tag & 0x60;
@@ -258,7 +258,7 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
                         } while (tag != 0);
                     }
                     gSPEndDisplayList(output++);
-                    dstData = func_8028FDB4_de(dstEntry, 1);
+                    dstData = Render_GetPackSection(dstEntry, 1);
                     commandSize = (u8 *)output - (u8 *)dstData;
                     block += (commandSize + 7) & ~7;
                     total += block;
@@ -271,23 +271,23 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
             dst->offsets[3] = offset;
             if (extra != 0) {
                 copySource3 = func_8028FDC8_de(old, 3, &len3);
-                dstData = func_8028FDB4_de(dst, 3);
+                dstData = Render_GetPackSection(dst, 3);
                 func_802BD3A0_de(dstData, copySource3, len3);
                 offset += len3;
                 dst->offsets[4] = offset;
                 copySource4 = func_8028FDC8_de(old, 4, &len4);
-                dstData = func_8028FDB4_de(dst, 4);
+                dstData = Render_GetPackSection(dst, 4);
                 func_802BD3A0_de(dstData, copySource4, len4);
                 offset += len4;
                 dst->offsets[5] = offset;
                 copySource5 = func_8028FDC8_de(old, 5, &len5);
-                dstData = func_8028FDB4_de(dst, 5);
+                dstData = Render_GetPackSection(dst, 5);
                 func_802BD3A0_de(dstData, copySource5, len5);
                 offset += len5;
                 dst->offsets[6] = offset;
             }
             if (sentinel != 0) {
-                Gfx *sentinelData = func_8028FDB4_de(dst, 3);
+                Gfx *sentinelData = Render_GetPackSection(dst, 3);
                 offset += 8;
                 sentinelData->words.w0 = -1;
                 sentinelData->words.w1 = 0;
@@ -387,16 +387,16 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
     }
     base = textures;
     if (base == 0) {
-        base = func_8028FDB4_de(header, 0);
+        base = Render_GetPackSection(header, 0);
     }
     gSPSegment(D_80110634++, 2, (unsigned int)base);
-    parts = func_8028FDB4_de(header, 2);
+    parts = Render_GetPackSection(header, 2);
     count = *(s32 *)parts;
     for (i = 0; i < count; i++) {
         AiProfile *state;
         u32 bits;
-        part = func_8028FDB4_de(parts, i);
-        material = func_8028FDB4_de(part, 0);
+        part = Render_GetPackSection(parts, i);
+        material = Render_GetPackSection(part, 0);
         if (i == 0) {
             func_8026B504_de(matrix, lights, material);
         }
@@ -420,7 +420,7 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
             if (bits == 0x10 && glow == 0) continue;
         }
         if (func_80269A80_de(material, pass) != 0) {
-            void *list = func_8028FDB4_de(part, 1);
+            void *list = Render_GetPackSection(part, 1);
             Gfx *cmd = D_80110634++;
             gSPDisplayList(cmd, (unsigned int)list);
         }

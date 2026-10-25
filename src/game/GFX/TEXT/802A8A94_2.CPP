@@ -13,7 +13,7 @@
 
 extern Node80253610 *Render_StartWorldEffect(Shared_World *, s32, s32, s32);
 extern void Text_DrawTileGrid(Node80253610 *, s32, s16, s16, f32, f32, s32);
-extern void func_80253754_de(void *, Node80253610 *);
+extern void Scene_UnlockResource(void *, Node80253610 *);
 
 /* The advance and kerning scale follow the currently selected font. */
 static inline f32 fontGlyphWidth(void)
@@ -107,7 +107,7 @@ void func_802A88F0_de(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow,
             x += advance * sx;
             text++;
         }
-        func_80253754_de(0, font);
+        Scene_UnlockResource(0, font);
     }
 }
 

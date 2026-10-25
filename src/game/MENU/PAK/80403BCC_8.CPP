@@ -16,7 +16,7 @@ extern s8 D_8010BBB8;
 
 extern char D_800DCCD0[];
 
-extern s32 *func_8025343C_de(s32, s32, s32, void *);
+extern s32 *Scene_AllocateResource(s32, s32, s32, void *);
 
 extern void func_80253838_de(void *arg0, void *arg1);
 
@@ -107,7 +107,7 @@ s32 func_80404F58_de(s32 slot, s32 arg1, s32 arg2, s32 length)
   {
     func_8025476C_de(one);
   }
-  buf = func_8025343C_de(0, size, 0x23, D_800DCCD0);
+  buf = Scene_AllocateResource(0, size, 0x23, D_800DCCD0);
   addr = *buf;
   ((void (*)(s32))func_802644FC_de)(1);
   Render_ReadControllerStates();

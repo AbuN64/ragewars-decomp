@@ -131,7 +131,7 @@ s16 func_8024B738_de(void *arg0, s16 *callback, s32 arg2) {
 extern char D_800C39E0_de;
 extern s32 *func_8024BFD4_de(void *arg0, s8 arg1);
 extern s32 func_802484B0_de(void *arg0, s32 arg1, void *arg2);
-extern void func_80253754_de(s32 arg0, s32 arg1);
+extern void Scene_UnlockResource(s32 arg0, s32 arg1);
 
 s32 func_8024B7E4_de(void *arg0, s32 arg1)
 {
@@ -144,11 +144,11 @@ s32 func_8024B7E4_de(void *arg0, s32 arg1)
   {
     if (resource)
     {
-      resource = func_8025193C_de(0, ((struct LevelActor *)(arg0))->resource, ((struct LevelActor *)(arg0))->resource, ((struct LevelActor *)(arg0))->resourceFlags, 0, 0, 0, (&D_800C39E0_de) + 4, arg1);
+      resource = Scene_RequestResource(0, ((struct LevelActor *)(arg0))->resource, ((struct LevelActor *)(arg0))->resource, ((struct LevelActor *)(arg0))->resourceFlags, 0, 0, 0, (&D_800C39E0_de) + 4, arg1);
     }
     else
     {
-      resource = func_8025193C_de(0, ((struct LevelActor *)(arg0))->resource, ((struct LevelActor *)(arg0))->resource, ((struct LevelActor *)(arg0))->resourceFlags, 0, 0, 0, (&D_800C39E0_de) + 4, arg1);
+      resource = Scene_RequestResource(0, ((struct LevelActor *)(arg0))->resource, ((struct LevelActor *)(arg0))->resource, ((struct LevelActor *)(arg0))->resourceFlags, 0, 0, 0, (&D_800C39E0_de) + 4, arg1);
     }
     if (resource == 0)
     {
@@ -158,10 +158,10 @@ s32 func_8024B7E4_de(void *arg0, s32 arg1)
     if (entry != 0)
     {
       value = *entry;
-      result = func_802484B0_de(arg0, value, func_8028FDB4_de(*((void **) resource), 0));
-      func_80253754_de(0, (s32) entry);
+      result = func_802484B0_de(arg0, value, Render_GetPackSection(*((void **) resource), 0));
+      Scene_UnlockResource(0, (s32) entry);
     }
-    func_80253754_de(0, (s32) resource);
+    Scene_UnlockResource(0, (s32) resource);
   }
   return result;
 }

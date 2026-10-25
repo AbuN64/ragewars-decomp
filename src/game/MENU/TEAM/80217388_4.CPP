@@ -10,7 +10,7 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "gbi.h"
-extern void func_80272898_de(void *arg0, void *arg1, void *arg2);
+extern void Particle_TransformPoint(void *arg0, void *arg1, void *arg2);
 
 extern Gfx *D_80110634;
 extern s32 func_8022EB0C_de(Player *player, s32 weapon);
@@ -123,7 +123,7 @@ void func_80217928_de(Menu *menu, s32 arg1, s32 arg2) {
                 slot->scale = func_80274808_de(slot->scale, target, *(&D_800C9138_de + 1) * 0.1f);
                 func_802727D8_de(&matrix);
                 func_80273C68_de(&matrix, slot->angle);
-                func_80272898_de(&matrix, &offset, &position);
+                Particle_TransformPoint(&matrix, &offset, &position);
                 weapon = menu->slots[i].weapon;
                 if (weapon < 0) {
                     goto no_icon;

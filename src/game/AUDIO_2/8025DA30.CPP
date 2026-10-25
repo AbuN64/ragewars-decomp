@@ -34,8 +34,8 @@ s32 func_8025DA10_de(Track *state, s32 index) {
     selection = func_802654E8_de(state->unk0->unk2B60, state->unk0->unk2B64, index);
     if (selection != -1) {
         selection *= 2;
-        selected = func_8028FDB4_de(state->unk0->unk2B50, selection | 1);
-        command = func_8028FDB4_de(state->unk0->unk2B50, selection);
+        selected = Render_GetPackSection(state->unk0->unk2B50, selection | 1);
+        command = Render_GetPackSection(state->unk0->unk2B50, selection);
         state->unk24 = command->unk0;
         #if defined(VERSION_EU)
         duration = func_802AD520_eu(command->unk4);

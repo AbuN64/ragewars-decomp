@@ -42,7 +42,7 @@ void Fx_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct Matri
                 temp_a0 = var_s3->unk4;
                 node = arg4->bytes + temp_a0 * arg4->stride;
                 temp_s0 = (*node == 5) * 2;
-                func_80272898_de(&arg2[temp_a0], arg0, &pos);
+                Particle_TransformPoint(&arg2[temp_a0], arg0, &pos);
                 func_80271F9C_de(&pos, &pos, 0.000015258789f);
                 var_s2 = 0;
                 temp_v1 = var_s3->unk0;

@@ -90,11 +90,11 @@ s32 func_802612A8_de(void *arg0, void *arg1) {
     void *d;
     s32 one;
 
-    first = func_8028FDB4_de(arg0, 0);
-    a = func_8028FDB4_de(arg0, 1);
-    b = func_8028FDB4_de(arg0, 2);
-    c = func_8028FDB4_de(arg1, 1);
-    d = func_8028FDB4_de(arg1, 2);
+    first = Render_GetPackSection(arg0, 0);
+    a = Render_GetPackSection(arg0, 1);
+    b = Render_GetPackSection(arg0, 2);
+    c = Render_GetPackSection(arg1, 1);
+    d = Render_GetPackSection(arg1, 2);
 
     one = 1;
     D_8010AC78 = one;

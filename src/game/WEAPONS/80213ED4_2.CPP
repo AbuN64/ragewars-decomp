@@ -56,7 +56,7 @@ s32 func_80214310_de(Actor_func_80214310_de *viewer, Actor_func_80214310_de *tar
   ahead.x = 0.0f;
   ahead.y = 0.0f;
   ahead.z = distance;
-  func_80272898_de(&matrix, &ahead, &forward);
+  Particle_TransformPoint(&matrix, &ahead, &forward);
   across *= 0.5f;
   up *= 0.5f;
   flatDir.x = dir.x;

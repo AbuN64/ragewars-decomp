@@ -12,7 +12,7 @@ INCLUDE_ASM("ovl_80400000", func_8041C614);
 #include "COMMON/WORLD.H"
 extern u8 D_800DD460_de[], D_800DD474[];
 extern void *func_8028FE28_de(void *, void *, s32);
-extern void *func_8028FE3C_de(void *, void *, s32, s32 *);
+extern void *Render_LocatePackSection(void *, void *, s32, s32 *);
 extern void *func_8028CF6C_de(void *, u16);
 extern void func_80246BE8_de(void *, void *, void *, s32);
 #include "COMMON/SCENERECAT10C0.H"
@@ -49,21 +49,21 @@ void Frontend_SelectMatchingPreviewModel(struct Unk8041CE88 *preview, s32 id, s3
     do {
         if (*entry == id) {
             modelName = func_8028FE28_de(world->indexedDirectory, (void *)world->indexedBank, i);
-            indexResource = func_8025193C_de(0, (u32)modelName, (u32)modelName, 0x18, 0, 0, 0, (const char *)D_800DD460_de, 1);
+            indexResource = Scene_RequestResource(0, (u32)modelName, (u32)modelName, 0x18, 0, 0, 0, (const char *)D_800DD460_de, 1);
             if (indexResource != 0) {
-                modelData = func_8028FE3C_de(*indexResource, modelName, 0, &modelSize);
-                modelResource = func_8025193C_de(0, (u32)modelData, (u32)modelData, modelSize, 0, 0, 0, (const char *)D_800DD474, 1);
+                modelData = Render_LocatePackSection(*indexResource, modelName, 0, &modelSize);
+                modelResource = Scene_RequestResource(0, (u32)modelData, (u32)modelData, modelSize, 0, 0, 0, (const char *)D_800DD474, 1);
                 if (modelResource != 0) {
-                    definition = func_8028CF6C_de(world, ((FrontendModelHeader *)func_8028FDB4_de(*modelResource, 0))->definitionIndex);
+                    definition = func_8028CF6C_de(world, ((FrontendModelHeader *)Render_GetPackSection(*modelResource, 0))->definitionIndex);
                     if (definition->character == expected && definition->kind == ((Obj8041CAD8 *)preview)->unk0) {
                         previewState->unk4 = i;
                         previewState->unkE4 = id;
                         func_80246BE8_de(previewState, world->indexedDirectory, (void *)world->indexedBank, extra);
                         found = 1;
                     }
-                    func_80253754_de(0, (struct Node80253610 *)modelResource);
+                    Scene_UnlockResource(0, (struct Node80253610 *)modelResource);
                 }
-                func_80253754_de(0, (struct Node80253610 *)indexResource);
+                Scene_UnlockResource(0, (struct Node80253610 *)indexResource);
             }
         }
         i++;
@@ -145,7 +145,7 @@ void func_8041C7F4_de(Obj8041CAD8 *self) {
             gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);
         }
         local10 = self->unk48C;
-        func_80272898_de(&view->camera, &local10, &local20);
+        Particle_TransformPoint(&view->camera, &local10, &local20);
         if (func_8025477C_de() == 0) {
             func_8025476C_de(1);
         }
@@ -169,11 +169,11 @@ void func_8041C7F4_de(Obj8041CAD8 *self) {
         draw->unk6C = self->unk498 * *(&D_800DD488 + 1);
         draw->unk8 = local20;
         draw->unk1C4 = local20;
-        func_8026D980_de();
+        Render_BeginModelBatch();
         func_80249E28_de(draw, view);
         draw->unk140 = D_800DF520;
         draw->unk158 = D_800DF520;
-        func_8026D9D0_de();
+        Render_FlushModelBatch();
         D_800CC380 = saved;
     }
 }
@@ -228,7 +228,7 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s
     scales.y = self->unk480.y * (view->height / (f32)D_800E28D4);
     draw->unk50 = scales;
     local70 = self->unk48C;
-    func_80272898_de(&view->camera, &local70, &local80);
+    Particle_TransformPoint(&view->camera, &local70, &local80);
     func_802466A0_de(draw, -1, arg3, D_800CD8D0, &self->copy4, -1, 0, self->unk498 * *(&D_800DD490_de + 1), local80, 0,
                      self->unk480, local60, 0);
     func_8024B2D0_de(draw);

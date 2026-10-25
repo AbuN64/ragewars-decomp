@@ -459,7 +459,7 @@ extern const f32 D_800C22E4_de, D_800C22E8_de, D_800C22EC_de, D_800C22F0_de;
 extern WeaponInfo *D_800D052C[];
 extern void func_80228FB8_de(LevelActor *, s32, Draw *);
 extern void **func_8024BFD4_de(LevelActor *, s32);
-extern void func_80253754_de(s32, void *);
+extern void Scene_UnlockResource(s32, void *);
 void Render_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
 {
     PlayerCode80225D10 *player;
@@ -533,7 +533,7 @@ weapon:
         if (resource) {
             func_8026DA4C_de(resource, actor->fieldB4, 1,
                             &actor->lighting[D_800D297C], 0, actor->field3);
-            func_80253754_de(0, resource);
+            Scene_UnlockResource(0, resource);
         }
     }
 }

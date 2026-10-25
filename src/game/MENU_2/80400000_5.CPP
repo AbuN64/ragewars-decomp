@@ -31,7 +31,7 @@ CVector3 func_80401564_de(f32 t) {
     CVector3 a;
     CVector3 b;
 
-    track = func_8028FDB4_de(D_800E2830->unk4, 1);
+    track = Render_GetPackSection(D_800E2830->unk4, 1);
     count = track[1];
     key = (PositionKey *)(track + 2);
     if (count == 0) {

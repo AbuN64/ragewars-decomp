@@ -84,7 +84,7 @@ extern void func_802624A8_de(Shared_AnimState *);
 extern s32 func_802624D8_de(Shared_AnimState *);
 extern void Fx_DispatchAttachmentEffects(u8 *, s32, PoseMatrix *, Shared_PoseActor *, void *);
 extern void func_8026F620_de(PoseMatrix, PoseMatrix, PoseMatrix);
-extern void func_80270910_de(PoseMatrix, u8 *);
+extern void Rsp_ConvertMatrixToFloat(PoseMatrix, u8 *);
 extern void func_80270AAC_de(CQuatern *, f32, CQuatern *, CQuatern *);
 extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
 extern void func_80272D00_de(PoseMatrix, f32, f32, f32, f32);
@@ -139,7 +139,7 @@ static inline void trackPos(Shared_PoseTrack *t, s32 i, CVector3 *out) {
     if (t->joints[i].pos == -1) {
         *out = t->frames[i].pos;
     } else {
-        f32 *data = func_8028FDB4_de(t->posTable, t->joints[i].pos);
+        f32 *data = Render_GetPackSection(t->posTable, t->joints[i].pos);
         f32 *a = &data[t->posFrame0];
         f32 *b = &data[t->posFrame1];
 
@@ -161,7 +161,7 @@ static inline void trackRot(Shared_PoseTrack *t, s32 i, CQuatern *out, s32 slerp
             z = frame->rot[2] * (1.0f / 32767.0f);
             goto default_frame;
         } else {
-            f32 *data = func_8028FDB4_de(t->rotTable, t->joints[i].rot);
+            f32 *data = Render_GetPackSection(t->rotTable, t->joints[i].rot);
 
             func_80270AAC_de(out, t->blend, (CQuatern *)&data[t->rotFrame0], (CQuatern *)&data[t->rotFrame1]);
         }
@@ -176,7 +176,7 @@ static inline void trackRot(Shared_PoseTrack *t, s32 i, CQuatern *out, s32 slerp
         out->z = z;
         out->w = frame->rot[3] * (1.0f / 32767.0f);
     } else {
-        f32 *data = func_8028FDB4_de(t->rotTable, t->joints[i].rot);
+        f32 *data = Render_GetPackSection(t->rotTable, t->joints[i].rot);
         f32 *a = &data[t->rotFrame0];
         f32 *b = &data[t->rotFrame1];
 
@@ -296,7 +296,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
     u32 dt;
 
     world = 0;
-    ctx.parts = func_8028FDB4_de(arg1, 5);
+    ctx.parts = Render_GetPackSection(arg1, 5);
     count = ctx.parts->count;
     actor->handle = func_802799C0_de(&D_8011FFB0, count);
     if (actor->handle == 0) {
@@ -305,7 +305,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
     ret = 0;
     isRoot = actor->flags & 1;
     isKind9 = actor->model->kind == 9;
-    mem = func_8025193C_de(0, actor->unk_C8, actor->unk_C8, ((actor->unk_E6 * 4) + 0xF) & ~7, 4, 0, 0, &D_800C3930_de + 4, 0);
+    mem = Scene_RequestResource(0, actor->unk_C8, actor->unk_C8, ((actor->unk_E6 * 4) + 0xF) & ~7, 4, 0, 0, &D_800C3930_de + 4, 0);
     skip = ret;
     if (mem != 0) {
         animA = &actor->animA;
@@ -464,7 +464,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
                         PoseMatrix bone;
                         CVector3 r = randVec();
 
-                        func_80270910_de(bone, actor->unk_B8 + i * 64);
+                        Rsp_ConvertMatrixToFloat(bone, actor->unk_B8 + i * 64);
                         func_80247F18_de(actor, &actor->part, bone, actor->pos, r, i);
                     }
                     world->unk_1218 = 0;
@@ -547,13 +547,13 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
                 s32 bit = 1 << actor->unk_1;
 
                 if (actor->part.unk_C & bit) {
-                    Shared_PosePartTable *table = func_8028FDB4_de(arg1, 3);
+                    Shared_PosePartTable *table = Render_GetPackSection(arg1, 3);
                     s32 n = table->count;
 
                     if (n != 0) {
                         u8 *data = table->data;
 
-                        Fx_DispatchAttachmentEffects(data, n, &mtx[1], actor, func_8028FDB4_de(arg1, 5));
+                        Fx_DispatchAttachmentEffects(data, n, &mtx[1], actor, Render_GetPackSection(arg1, 5));
                     }
                 }
             }
@@ -569,7 +569,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
             ret = 1;
             actor->flags |= 0x200;
         }
-        func_80253754_de(0, mem);
+        Scene_UnlockResource(0, mem);
     }
     if (!ret) {
         actor->handle = 0;
@@ -645,11 +645,11 @@ void func_80249E28_de(SceneObject *object, struct Racer *camera) {
         object->flags &= ~0x200;
         return;
     }
-    mem = func_8025193C_de(0, object->resource, object->resource, object->resourceFlags, 0, 0, 0, D_800C3A20_de, 1);
+    mem = Scene_RequestResource(0, object->resource, object->resource, object->resourceFlags, 0, 0, 0, D_800C3A20_de, 1);
     if (mem == 0) {
         return;
     }
-    model = func_8028FDB4_de(*mem, 0);
+    model = Render_GetPackSection(*mem, 0);
     if (D_80146894 != 0) {
         object->update(object, &object->behaviorFlags);
         func_8026EE20_de(object->transform, (s32)model, &object->bounds);
@@ -673,24 +673,24 @@ void func_80249E28_de(SceneObject *object, struct Racer *camera) {
         second_needed = visible;
     }
     if (visible == 0 && second_needed == 0) {
-        func_80253754_de(0, mem);
+        Scene_UnlockResource(0, mem);
         return;
     }
     func_8026D8F8_de();
     System_ResetTextureCache();
     if (object->cached != 0) {
         gSPDisplayList(D_80110634++, (unsigned int)object->cached);
-        func_80253754_de(0, mem);
+        Scene_UnlockResource(0, mem);
         return;
     }
     first = func_8024BFD4_de(object, object->firstKey);
     if (first == 0) {
-        func_80253754_de(0, mem);
+        Scene_UnlockResource(0, mem);
         return;
     }
     if ((object->flags & 0x200) == 0 && func_802484B0_de(object, *(void **)first, (s32)model) == 0) {
-        func_80253754_de(0, first);
-        func_80253754_de(0, mem);
+        Scene_UnlockResource(0, first);
+        Scene_UnlockResource(0, mem);
         return;
     }
     offset[0] = offset[1] = offset[2] = 0.0f;
@@ -713,9 +713,9 @@ void func_80249E28_de(SceneObject *object, struct Racer *camera) {
     gSPEndDisplayList(D_80110634++);
     gSPBranchList(object->cached++, (unsigned int)D_80110634);
     gSPDisplayList(D_80110634++, (unsigned int)object->cached);
-    func_80253754_de(0, first);
+    Scene_UnlockResource(0, first);
     if (second != 0) {
-        func_80253754_de(0, second);
+        Scene_UnlockResource(0, second);
     }
-    func_80253754_de(0, mem);
+    Scene_UnlockResource(0, mem);
 }

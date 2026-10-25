@@ -43,7 +43,7 @@ typedef long long M2C_UNK64;
 #include "sdk/AUDIO/802BD1A8_19.H"
 #include "TYPES.H"
 #include "stddef.h"
-u32 func_8028FE3C_de(s32, s32, s32, u32 *);
+u32 Render_LocatePackSection(s32, s32, s32, u32 *);
 s32 func_802BD400_de(void *);
 extern s32 D_00295B90_us_rev1;
 extern s32 D_8014AEC0;
@@ -75,18 +75,18 @@ void func_80294CA0_us_rev1(void) {
     s32 i;
     w = &D_8011FE88;
     if (D_8014AECC != NULL) {
-        func_80253754_de(NULL, D_8014AECC);
+        Scene_UnlockResource(NULL, D_8014AECC);
     }
     sel = (s32 *)&D_8014AEBC;
     D_8014AECC = NULL;
     D_8014AED4 = 0;
     D_8014AED8 = 0;
     D_8014AED0 = 0;
-    key = func_8028FE3C_de(w->unk50, w->unk20, sel[0], &sp28);
-    res = func_8025193C_de(0, key - 1, key, sp28, 9, -1, &D_00295B90_us_rev1, &D_auto_src_ragewars_resident_strings_CB1D0_us_rev1, 1);
+    key = Render_LocatePackSection(w->unk50, w->unk20, sel[0], &sp28);
+    res = Scene_RequestResource(0, key - 1, key, sp28, 9, -1, &D_00295B90_us_rev1, &D_auto_src_ragewars_resident_strings_CB1D0_us_rev1, 1);
     s3 = *res;
-    s2 = func_8028FDB4_de(s3, 1);
-    s5 = func_8028FDB4_de(s3, 2);
+    s2 = Render_GetPackSection(s3, 1);
+    s5 = Render_GetPackSection(s3, 2);
     if (sel[1] < 0) {
         s32 *p = &sel[1];
         do {
@@ -98,9 +98,9 @@ void func_80294CA0_us_rev1(void) {
     hi = *(s32 *)s1 % *s2;
     lo = *(s32 *)s1 % *s5;
     *(s32 ***)(s1 + 0xC) = res;
-    *(void **)(s1 + 0x14) = func_8028FDB4_de(s2, hi);
-    *(void **)(s1 + 0x18) = func_8028FDB4_de(s5, lo);
-    v = func_8028FDB4_de(s3, 0);
+    *(void **)(s1 + 0x14) = Render_GetPackSection(s2, hi);
+    *(void **)(s1 + 0x18) = Render_GetPackSection(s5, lo);
+    v = Render_GetPackSection(s3, 0);
     *(s32 **)(s1 + 0x2124) = s5;
     *(void **)(s1 + 0x10) = v;
     *(s32 *)(s1 + 8) = 0;
@@ -108,7 +108,7 @@ void func_80294CA0_us_rev1(void) {
     *(s32 **)(s1 + 0x2120) = s2;
     if (*s3 == 4) {
         s5 = (s32 *)hi;
-        name = func_8028FDB4_de(s3, 3);
+        name = Render_GetPackSection(s3, 3);
         for (i = 0; i < func_802BD400_de(name); i++) {
             if (name[i] == 0x2E) {
                 name[i] = 0;

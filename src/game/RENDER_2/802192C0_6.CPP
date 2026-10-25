@@ -112,8 +112,8 @@ void func_8021CBD0_de(void *arg0, WeaponMenuView *camera) {
         gSPMoveWord(D_80110634++, G_MW_CLIP, 12, 1);
         gSPMoveWord(D_80110634++, G_MW_CLIP, 20, 0xFFFF);
         gSPMoveWord(D_80110634++, G_MW_CLIP, 28, 0xFFFF);
-        func_8026D980_de();
+        Render_BeginModelBatch();
         func_80249E28_de(&((Shared_ActorView *)arg0)->weapon, camera);
-        func_8026D9D0_de();
+        Render_FlushModelBatch();
     }
 }

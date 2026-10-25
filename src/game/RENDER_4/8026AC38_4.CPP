@@ -52,17 +52,17 @@ void func_8026C978_de(void **resource, s32 matrix, s32 segment, s32 lights, void
     header = *resource;
     base = textures;
     if (base == 0) {
-        base = func_8028FDB4_de(header, 0);
+        base = Render_GetPackSection(header, 0);
     }
     gSPSegment(D_80110634++, 2, (unsigned int)base);
-    parts = func_8028FDB4_de(header, 2);
+    parts = Render_GetPackSection(header, 2);
     count = *(s32 *)parts;
     for (i = 0; i < count; i++) {
-        part = func_8028FDB4_de(parts, i);
-        func_8028FDB4_de(part, 0);
+        part = Render_GetPackSection(parts, i);
+        Render_GetPackSection(part, 0);
         {
             Gfx *cmd;
-            void *list = func_8028FDB4_de(part, 1);
+            void *list = Render_GetPackSection(part, 1);
 
             cmd = D_80110634++;
             gSPDisplayList(cmd, (unsigned int)list);
@@ -126,17 +126,17 @@ void func_8026CBA4_de(void **resource, void *owner, void *matrix, s32 segment, S
     header = *resource;
     base = textures;
     if (base == 0) {
-        base = func_8028FDB4_de(header, 0);
+        base = Render_GetPackSection(header, 0);
     }
     gSPSegment(D_80110634++, 2, (unsigned int)base);
-    parts = func_8028FDB4_de(header, 2);
+    parts = Render_GetPackSection(header, 2);
     count = *(s32 *)parts;
     for (i = 0; i < count; i++) {
-        part = func_8028FDB4_de(parts, i);
-        material = func_8028FDB4_de(part, 0);
+        part = Render_GetPackSection(parts, i);
+        material = Render_GetPackSection(part, 0);
         if ((((Material *)material)->flags & 0x38) != 0x38 || (((PlayerRecAt122C *)(owner))->flags & 0x400)) {
             Gfx *cmd;
-            void *list = func_8028FDB4_de(part, 1);
+            void *list = Render_GetPackSection(part, 1);
 
             cmd = D_80110634++;
             gSPDisplayList(cmd, (unsigned int)list);
@@ -217,16 +217,16 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
         header = *resource;
         base = textures;
         if (base == 0) {
-            base = func_8028FDB4_de(header, 0);
+            base = Render_GetPackSection(header, 0);
         }
         gSPSegment(D_80110634++, 2, (unsigned int)base);
-        parts = func_8028FDB4_de(header, 2);
+        parts = Render_GetPackSection(header, 2);
         count = *(s32 *)parts;
         for (i = 0; i < count; i++) {
             AiProfile *state;
             u32 bits;
-            part = func_8028FDB4_de(parts, i);
-            material = func_8028FDB4_de(part, 0);
+            part = Render_GetPackSection(parts, i);
+            material = Render_GetPackSection(part, 0);
             if (i == 0) {
                 func_8026B504_de(matrix, lights, material);
             }
@@ -236,7 +236,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
                 case 0:
                     if ((material->mode & 0x38) == 0x28) {
                         if (func_80269A80_de(material, pass) != 0) {
-                            void *list = func_8028FDB4_de(part, 1);
+                            void *list = Render_GetPackSection(part, 1);
                             Gfx *cmd = D_80110634++;
                             gSPDisplayList(cmd, (unsigned int)list);
                         }
@@ -245,7 +245,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
                 case 1:
                     if ((material->mode & 0x38) == 0x20) {
                         if (func_80269A80_de(material, pass) != 0) {
-                            void *list = func_8028FDB4_de(part, 1);
+                            void *list = Render_GetPackSection(part, 1);
                             Gfx *cmd = D_80110634++;
                             gSPDisplayList(cmd, (unsigned int)list);
                         }
@@ -254,7 +254,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
                 case 2:
                     if ((material->mode & 0x38) == 0x18) {
                         if (func_80269A80_de(material, pass) != 0) {
-                            void *list = func_8028FDB4_de(part, 1);
+                            void *list = Render_GetPackSection(part, 1);
                             Gfx *cmd = D_80110634++;
                             gSPDisplayList(cmd, (unsigned int)list);
                         }
@@ -267,7 +267,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
                 if (bits == 0x30 && bonus == 0) continue;
                 if (bits == 0x10 && glow == 0) continue;
                 if (func_80269A80_de(material, pass) != 0) {
-                    void *list = func_8028FDB4_de(part, 1);
+                    void *list = Render_GetPackSection(part, 1);
                     Gfx *cmd = D_80110634++;
                     gSPDisplayList(cmd, (unsigned int)list);
                 }
@@ -324,20 +324,20 @@ void Render_DrawModelWithSharedMaterial(void **resource, void *matrix, s32 segme
     header = *resource;
     base = textures;
     if (base == 0) {
-        base = func_8028FDB4_de(header, 0);
+        base = Render_GetPackSection(header, 0);
     }
     gSPSegment(D_80110634++, 2, (unsigned int)base);
-    parts = func_8028FDB4_de(header, 2);
+    parts = Render_GetPackSection(header, 2);
     count = *(s32 *)parts;
     for (i = 0; i < count; i++) {
-        part = func_8028FDB4_de(parts, i);
-        material = func_8028FDB4_de(part, 0);
+        part = Render_GetPackSection(parts, i);
+        material = Render_GetPackSection(part, 0);
         if (i == 0) {
             func_8026B504_de(matrix, lights, material);
         }
         {
             Gfx *cmd;
-            void *list = func_8028FDB4_de(part, 1);
+            void *list = Render_GetPackSection(part, 1);
             cmd = D_80110634++;
             gSPDisplayList(cmd, (unsigned int)list);
         }

@@ -74,7 +74,7 @@ void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **han
         node = (*handle)->payload.data;
         first = ((void *(*)(int *,s32,s32 *))func_8028FDC8_de)(node, 0, &size0);
         vlist = ((void *(*)(int *,s32,s32 *))func_8028FDC8_de)(node, 1, &size1);
-        flist = (void*)func_8028FDB4_de(node, 2);
+        flist = (void*)Render_GetPackSection(node, 2);
         ntris = flist->count;
         chunk = ((void *(*)(int *,s32,s32 *))func_8028FDC8_de)(node, 3, &size3);
         tableSize = (ntris << 5) | 8;
@@ -120,10 +120,10 @@ void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **han
                     world->minY = y;
                 }
                 index = world->group;
-                group = (void*)func_8028FDB4_de((void*)func_8028FDB4_de((void*)func_8028FDB4_de(world->tree, 0), index), 0);
-                func_8028FDB4_de(group, 0);
+                group = (void*)Render_GetPackSection((void*)Render_GetPackSection((void*)Render_GetPackSection(world->tree, 0), index), 0);
+                Render_GetPackSection(group, 0);
                 func_8028FDF8_de(group, 1);
-                bits = (void*)func_8028FDB4_de(group, 1);
+                bits = (void*)Render_GetPackSection(group, 1);
                 if (testBit(j, bits)) {
                     tri->fields.flags |= 0x400;
                 }

@@ -309,7 +309,7 @@ void func_80270700_de(f32 *dst, PackedMatrixWords *src) {
     upper = src->upper[6]; lower = src->lower[6]; dst[(6) * 2] = (f32)(s32)((upper & 0xFFFF0000) | (lower >> 16)) * scale; dst[(6) * 2 + 1] = (f32)(s32)((upper << 16) | (lower & 0xFFFF)) * scale;
     upper = src->upper[7]; lower = src->lower[7]; dst[(7) * 2] = (f32)(s32)((upper & 0xFFFF0000) | (lower >> 16)) * scale; dst[(7) * 2 + 1] = (f32)(s32)((upper << 16) | (lower & 0xFFFF)) * scale;
 }
-void func_80270910_de(f32 *dst, PackedMatrixWords *src) {
+void Rsp_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src) {
     u32 upper;
     u32 lower;
     f32 scale = D_800C98C4;
@@ -1027,7 +1027,7 @@ void func_80270700_de(f32 *dst, PackedMatrixWords *src) {
 
 /* Unpacks a fixed-point 4x4 matrix held as separate integer and fraction halves into floats scaled by D_800C98C4, zeroing the fourth column and setting the last element to D_800C98C8. Adapted from func_80270700_de with the fourth column replaced by zeros and the constant at D_800C98C8, the third-column integer word used unmasked in the first three rows, the scale constant changed, and the last row computed into a local before the corner store. */
 
-void func_80270910_de(f32 *dst, PackedMatrixWords *src) {
+void Rsp_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src) {
     u32 upper;
     u32 lower;
     f32 scale = D_800C98C4;

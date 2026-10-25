@@ -360,7 +360,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, struct Shared_ParticleVie
                     if (!built) {
                         if (D_80140FF8 == 1) {
                             camera = D_80140FE8_de.object;
-                            func_80272898_de(&camera->particleViewMatrix, &node->particle.inst.pos, &transformed);
+                            Particle_TransformPoint(&camera->particleViewMatrix, &node->particle.inst.pos, &transformed);
                             depth = transformed.z;
                             if (depth < 0.0f) depth = -depth;
                             Particle_BuildMatrix(&node->particle, &node->particle.mtx[D_800D297C], camera, depth);
@@ -380,7 +380,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, struct Shared_ParticleVie
                     if (!node->particle.drawWhenHidden || built) break;
                     if (D_80140FF8 == 1) {
                         camera = D_80140FE8_de.object;
-                        func_80272898_de(&camera->particleViewMatrix, &node->particle.inst.pos, &transformed);
+                        Particle_TransformPoint(&camera->particleViewMatrix, &node->particle.inst.pos, &transformed);
                         depth = transformed.z;
                         if (depth < 0.0f) depth = -depth;
                         Particle_BuildMatrix(&node->particle, &node->particle.mtx[D_800D297C], camera, depth);

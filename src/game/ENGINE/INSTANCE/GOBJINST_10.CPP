@@ -31,7 +31,7 @@ extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
 
 extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
 
-extern void func_80270910_de(f32 *, char *);
+extern void Rsp_ConvertMatrixToFloat(f32 *, char *);
 
 
 extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
@@ -77,7 +77,7 @@ s32 func_8024B06C_de(char *obj, CVector3 point, Box70 *out) {
     if (resource == 0) {
         return 0;
     }
-    table = func_8028FDB4_de(*resource, 5);
+    table = Render_GetPackSection(*resource, 5);
     count = table->field_4;
     bestDist = 3.4028235e38f;
     best = 0;
@@ -89,8 +89,8 @@ s32 func_8024B06C_de(char *obj, CVector3 point, Box70 *out) {
                 func_80271F34_de(&center, &center, &box->corners[j]);
             }
             func_80271F9C_de(&center, &center, 0.125f);
-            func_80270910_de(matrix, bones + i * 0x40);
-            func_80272898_de(matrix, &center, &diff);
+            Rsp_ConvertMatrixToFloat(matrix, bones + i * 0x40);
+            Particle_TransformPoint(matrix, &center, &diff);
             func_80271F68_de(&diff, &diff, &point);
             dist = diff.x * diff.x + diff.y * diff.y + diff.z * diff.z;
             if (dist < bestDist) {
@@ -105,7 +105,7 @@ s32 func_8024B06C_de(char *obj, CVector3 point, Box70 *out) {
             ((struct Shield *) ((char *) out))->factor = 1.0f;
         }
     }
-    func_80253754_de(0, resource);
+    Scene_UnlockResource(0, resource);
     return best != 0;
 }
 

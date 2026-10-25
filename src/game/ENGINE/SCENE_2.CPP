@@ -26,17 +26,17 @@ void func_8028787C_de(World_func_8028787C_de *world, Entity *entity) {
 
     index = entity->index;
     level = world->level;
-    mask = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(world->levels, 0), level), 2);
-    func_8028FDB4_de(mask, 0);
+    mask = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(world->levels, 0), level), 2);
+    Render_GetPackSection(mask, 0);
     func_8028FDF8_de(mask, 1);
-    bits = func_8028FDB4_de(mask, 1);
+    bits = Render_GetPackSection(mask, 1);
     bit = 1 << (index & 7);
     if (bits[index / 8] & bit) {
         if (entity->flag != 0) {
             flag = entity->flag;
-            flags = func_8028FDB4_de(D_8011FE88.bitSections, 1);
-            func_8028FDB4_de(flags, 0);
-            if (((unsigned char *)func_8028FDB4_de(flags, 1))[flag] != 0) {
+            flags = Render_GetPackSection(D_8011FE88.bitSections, 1);
+            Render_GetPackSection(flags, 0);
+            if (((unsigned char *)Render_GetPackSection(flags, 1))[flag] != 0) {
                 return;
             }
         }
@@ -123,10 +123,10 @@ static inline s32 Engine_TestInstanceBit(Shared_World *world, SimpleInstance *in
     index = instance->id;
     sections = world->bitSections;
     level = world->level;
-    mask = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(sections, 0), level), 1);
-    func_8028FDB4_de(mask, 0);
+    mask = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(sections, 0), level), 1);
+    Render_GetPackSection(mask, 0);
     func_8028FDF8_de(mask, 1);
-    bits = func_8028FDB4_de(mask, 1);
+    bits = Render_GetPackSection(mask, 1);
     bit = 1 << (index & 7);
     return (bits[index / 8] & bit) != 0;
 }
@@ -172,18 +172,18 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
 
     if (func_80285180_de(handle, 1) != 0) {
         source = **handle;
-        efficientSet = func_8028FDB4_de(source, 0);
+        efficientSet = Render_GetPackSection(source, 0);
         efficientCount = efficientSet->count;
-        staticSet = func_8028FDB4_de(source, 1);
+        staticSet = Render_GetPackSection(source, 1);
         staticCount = staticSet->count;
         staticSize = ALIGN8((efficientCount + staticCount) * sizeof(PlacedProp) + sizeof(RecordSet));
-        simpleSet = func_8028FDB4_de(source, 2);
+        simpleSet = Render_GetPackSection(source, 2);
         simpleCount = simpleSet->count;
         simpleSize = ALIGN8(simpleCount * sizeof(SimpleInstance) + sizeof(RecordSet));
-        volumeSet = func_8028FDB4_de(source, 3);
+        volumeSet = Render_GetPackSection(source, 3);
         volumeCount = volumeSet->count;
         volumeSize = ALIGN8(volumeCount * sizeof(ObjectRecAtBC) + sizeof(RecordSet));
-        bitSet = func_8028FDB4_de(source, 4);
+        bitSet = Render_GetPackSection(source, 4);
         bitSize = ALIGN8(bitSet->count * sizeof(s32) + sizeof(RecordSet));
         block = func_80254480_de(0, handle, staticSize + 0x18 + simpleSize + volumeSize + bitSize);
         if (block != 0) {
@@ -198,7 +198,7 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
             ((RecordSet *)dst)->size = sizeof(PlacedProp);
             ((RecordSet *)dst)->count = efficientCount + staticCount;
             efficient = (RecordRecAt1A *)(efficientSet + 1);
-            objects = func_8028FDB4_de(world->modelSections, 2);
+            objects = Render_GetPackSection(world->modelSections, 2);
             statics = (PlacedPropRecord *)(staticSet + 1);
             props = (PlacedProp *)(dst + 8);
             base = (char *)blocks;

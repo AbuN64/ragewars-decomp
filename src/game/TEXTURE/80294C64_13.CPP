@@ -30,11 +30,11 @@ void func_80295FB4_us_rev1(s32 *output, void **resource, s32 frame, s32 secondar
 
     func_80253BBC_de(0, resource);
     header = *resource;
-    info = func_8028FDB4_de(header, 0);
-    texture = func_8028FDB4_de(func_8028FDB4_de(header, 1), frame);
-    entries = func_8028FDB4_de(header, 2);
+    info = Render_GetPackSection(header, 0);
+    texture = Render_GetPackSection(Render_GetPackSection(header, 1), frame);
+    entries = Render_GetPackSection(header, 2);
     if (*(s32 *)entries != 0) {
-        palette = func_8028FDB4_de(entries, secondary);
+        palette = Render_GetPackSection(entries, secondary);
         paletteChanged = 0;
         if (D_800CD890 != (s32)resource || D_8014D074 != secondary) paletteChanged = 1;
     } else {

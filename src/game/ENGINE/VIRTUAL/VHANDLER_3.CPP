@@ -23,7 +23,7 @@ extern void func_802AD370_de(int a0, int a1, int a2, int a3, int a4, int a5);
 
 
 
-void **func_8025343C_de(s32 arg0, s32 arg1, s32 arg2, void *arg3);
+void **Scene_AllocateResource(s32 arg0, s32 arg1, s32 arg2, void *arg3);
 
 
 
@@ -103,7 +103,7 @@ void *func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2)
     blk.f34 = (void **) sp10;
     new_var2 = temp_s1 * 4;
     rounded = new_var + 0x18;
-    temp_v0 = func_8025343C_de(0, new_var2 + rounded, 3, &D_800C3600_de);
+    temp_v0 = Scene_AllocateResource(0, new_var2 + rounded, 3, &D_800C3600_de);
     temp_v1 = *temp_v0;
     blk.f30 = temp_v1;
     temp_v1->model = temp_v0;

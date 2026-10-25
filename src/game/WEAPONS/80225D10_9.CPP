@@ -423,7 +423,7 @@ void func_8022A2A0_de(void *arg0, void *view) {
     func_80207B5C_S2 *argument;
     func_8022A274_S2 *cur;
 
-    func_8026D980_de();
+    Render_BeginModelBatch();
     object = arg0;
     cur = object->unk20;
     if (cur != 0) {
@@ -437,7 +437,7 @@ void func_8022A2A0_de(void *arg0, void *view) {
             cur = cur->unk16E0;
         } while (cur != 0);
     }
-    func_8026D9D0_de();
+    Render_FlushModelBatch();
 }
 
 /* Removes entity from list if owned by specific owner, with version-specific check. */

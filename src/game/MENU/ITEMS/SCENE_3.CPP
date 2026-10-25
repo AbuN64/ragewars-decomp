@@ -116,10 +116,10 @@ static inline s32 groupHas(WorldRecAt1B40C *world, s32 n) {
     u8 *bits;
     s32 mask;
     index = world->group;
-    g = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(world->tree, 0), index), 2);
-    func_8028FDB4_de(g, 0);
+    g = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(world->tree, 0), index), 2);
+    Render_GetPackSection(g, 0);
     func_8028FDF8_de(g, 1);
-    bits = func_8028FDB4_de(g, 1);
+    bits = Render_GetPackSection(g, 1);
     mask = 1 << (n & 7);
     return bits[n / 8] & mask;
 }
@@ -136,10 +136,10 @@ void func_8044C108_de(WorldRecAt1B40C *world, void ***handle) {
     Face *face;
     if (func_80285180_de(handle, 0) != 0) {
         node = **handle;
-        l0 = func_8028FDB4_de(node, 0);
-        l1 = func_8028FDB4_de(node, 1);
-        l2 = func_8028FDB4_de(node, 2);
-        l3 = func_8028FDB4_de(node, 3);
+        l0 = Render_GetPackSection(node, 0);
+        l1 = Render_GetPackSection(node, 1);
+        l2 = Render_GetPackSection(node, 2);
+        l3 = Render_GetPackSection(node, 3);
         count = l0->field_4;
         world->verts = &((ResidentDataChunk *)(l0))->data[0];
         world->faces = (Face *)&((ResidentDataChunk *)(l1))->data[0];

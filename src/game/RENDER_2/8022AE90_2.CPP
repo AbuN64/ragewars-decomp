@@ -49,7 +49,7 @@ void func_8022B09C_de(void *arg0, CVector3 *arg1) {
         Weapons_BuildPlayerViewTransform(arg0, &matrix);
         matrix_ptr = &matrix;
     }
-    func_80272898_de(matrix_ptr, input_ptr, arg1);
+    Particle_TransformPoint(matrix_ptr, input_ptr, arg1);
 }
 
 void func_8022B11C_de(void *arg0, s32 arg1) {

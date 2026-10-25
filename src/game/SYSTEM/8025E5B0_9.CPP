@@ -33,7 +33,7 @@ void func_802604AC_de(void *arg0, s32 arg1, void *arg2) {
         __builtin_memcpy(out, &recs[arg1], sizeof(*out));
         return;
     }
-    base = func_8028FDB4_de(o->unk_8, (s32) idx);
+    base = Render_GetPackSection(o->unk_8, (s32) idx);
     func_80271FC8_de(arg2, o->unk_20,
                   (char *)base + (o->unk_18) * 4,
                   (char *)base + (o->unk_1C) * 4);
@@ -58,7 +58,7 @@ void func_80260550_de(void *arg0, s32 arg1, void *cQuatern) {
         out->w = (f32)(rec->unk_12) * scale;
         return;
     }
-    base = func_8028FDB4_de(o->unk_C, (s32) idx);
+    base = Render_GetPackSection(o->unk_C, (s32) idx);
     func_80270AAC_de(cQuatern, o->unk_20,
                   (char *)base + (o->unk_10) * 4,
                   (char *)base + (o->unk_14) * 4);

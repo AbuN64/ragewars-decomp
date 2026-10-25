@@ -16,14 +16,14 @@ static __inline__ void *rw_request_texture(s32 *resource, s32 variation, s32 wai
 {
 #if defined(VERSION_US_REV1)
     if (D_800D2AE0 == 0) {
-        return func_8025193C_de(0, resource[0] + variation + D_800CD894_de * 128,
+        return Scene_RequestResource(0, resource[0] + variation + D_800CD894_de * 128,
                               resource[0], resource[1], 0, variation,
                               &D_auto_00295B90, D_auto_800CA680, wait);
     }
-    return func_8025193C_de(0, resource[0] - 1, resource[0], resource[1],
+    return Scene_RequestResource(0, resource[0] - 1, resource[0], resource[1],
                           0, -1, &D_auto_00295B90, D_auto_800CA680, wait);
 #else
-    return func_8025193C_de(0, resource[0] + variation + D_800CD894_de * 128,
+    return Scene_RequestResource(0, resource[0] + variation + D_800CD894_de * 128,
                           resource[0], resource[1], 0, variation,
                           &D_00294C90, D_800C54F0_de, wait);
 #endif
@@ -34,14 +34,14 @@ static __inline__ void **rw_request_texture_sync(s32 *resource, s32 variation)
 {
 #if defined(VERSION_US_REV1)
     if (D_800D2AE0 == 0) {
-        return func_8025193C_de(0, resource[0] + variation + D_800CD894_de * 128,
+        return Scene_RequestResource(0, resource[0] + variation + D_800CD894_de * 128,
                               resource[0], resource[1], 0, variation,
                               &D_auto_00295B90, D_auto_800CA680, 1);
     }
-    return func_8025193C_de(0, resource[0] - 1, resource[0], resource[1],
+    return Scene_RequestResource(0, resource[0] - 1, resource[0], resource[1],
                           0, -1, &D_auto_00295B90, D_auto_800CA680, 1);
 #else
-    return func_8025193C_de(0, resource[0] + variation + D_800CD894_de * 128,
+    return Scene_RequestResource(0, resource[0] + variation + D_800CD894_de * 128,
                           resource[0], resource[1], 0, variation,
                           &D_00294C90, D_800C54F0_de, 1);
 #endif

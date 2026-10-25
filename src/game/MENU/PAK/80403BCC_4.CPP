@@ -11,15 +11,15 @@
 /* Returns one less than the word D_8011FEFC points to. */
 extern s32 *D_8011FEFC;
 
-/* Looks up the current menu resource through func_8028FE3C_de from the fields at 0x74 and 0x34 of
-   D_8011FE88 and, when found, opens it through func_8025193C_de as widget 0x33 with the handler table
+/* Looks up the current menu resource through Render_LocatePackSection from the fields at 0x74 and 0x34 of
+   D_8011FE88 and, when found, opens it through Scene_RequestResource as widget 0x33 with the handler table
    D_800E0B2C; returns the result, or 0 when there is no resource. Matched through a local pointer to the menu. */
 
 
 
 extern char D_800E0B2C[];
 
-extern void *func_8028FE3C_de(int, int, int, int *);
+extern void *Render_LocatePackSection(int, int, int, int *);
 
 
 /* Blends two values with cubic weights: with u the pooled constant D_800E0CB0[0] less t, from is
@@ -27,7 +27,7 @@ extern void *func_8028FE3C_de(int, int, int, int *);
    pool outside this object, so it is read by name. */
 extern f32 D_800E0CB0[];
 
-/* Looks up the object at offset 4 of the structure D_800E2830 points to through func_8028FDB4_de
+/* Looks up the object at offset 4 of the structure D_800E2830 points to through Render_GetPackSection
    with zero, then looks up the result again with the argument, and returns that. */
 
 
@@ -42,11 +42,11 @@ int func_80403BE0_de(void) {
     void *res;
     Shared_World *menu = &D_8011FE88;
 
-    res = func_8028FE3C_de((int)menu->trackBundle, menu->trackLookup, 0, &size);
+    res = Render_LocatePackSection((int)menu->trackBundle, menu->trackLookup, 0, &size);
     if (res == 0) {
         return 0;
     }
-    return func_8025193C_de(0, res, res, size, 0x33, 0, 0, D_800E0B2C, 1);
+    return Scene_RequestResource(0, res, res, size, 0x33, 0, 0, D_800E0B2C, 1);
 }
 
 f32 func_80403C58_de(f32 from, f32 to, f32 t) {
@@ -60,23 +60,23 @@ f32 func_80403C98_de(f32 from, f32 to, f32 weight) {
 }
 
 void *func_80403CBC_de(s32 key) {
-    return func_8028FDB4_de(func_8028FDB4_de(D_800E2830->value, 0), key);
+    return Render_GetPackSection(Render_GetPackSection(D_800E2830->value, 0), key);
 }
 
 s32 func_80403CFC_de(s32 key) {
-    return ((s32 *) func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->value, 0), key), 2))[0];
+    return ((s32 *) Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(D_800E2830->value, 0), key), 2))[0];
 }
 
 s32 func_80403D4C_de(s32 key) {
-    return ((s32 *) func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->value, 0), key), 2))[1];
+    return ((s32 *) Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(D_800E2830->value, 0), key), 2))[1];
 }
 
 void *func_80403D9C_de(s32 key) {
-    return func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->value, 0), key), 1);
+    return Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(D_800E2830->value, 0), key), 1);
 }
 
 void func_80403DE8_de(void) {
-    func_8028FDB4_de(D_800E2830->value, 3);
+    Render_GetPackSection(D_800E2830->value, 3);
 }
 
 /* Returns whether a record's subtype at 0x12 is the one its kind at 0x11 requires: 5 for kind 1, 4 for

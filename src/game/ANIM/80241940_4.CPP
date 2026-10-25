@@ -148,7 +148,7 @@ void func_80242BF0_de(Ray180 *ray) {
         rect.w = table[i].rect->w + ray->radius;
         if (ray->rect.x < rect.z && rect.x < ray->rect.z && ray->rect.y < rect.w &&
             rect.y < ray->rect.w && func_8023DDC4_de(ray, &rect, &t) != 0) {
-            model = func_8028FDB4_de(*table[i].resource, 0);
+            model = Render_GetPackSection(*table[i].resource, 0);
             remaining = model->count;
             element = model->elements;
             while (--remaining != -1) {

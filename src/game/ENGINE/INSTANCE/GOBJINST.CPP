@@ -276,13 +276,13 @@ s32 func_80246A08_de(LevelActor *owner, s32 arg1, s32 arg2) {
     if (!(owner->flags & 0x40000)) {
         goto fail;
     }
-    resource = func_8025193C_de(0, ((struct Access_s32_C4 *)(owner))->field,
+    resource = Scene_RequestResource(0, ((struct Access_s32_C4 *)(owner))->field,
                              ((struct Access_s32_C4 *)(owner))->field, ((struct Access_s32_D0 *)(owner))->field,
                              0, 0, 0, D_800C3864_de, 1);
     if (resource == 0) {
         goto fail;
     }
-    data = func_8028FDB4_de(*resource, 1);
+    data = Render_GetPackSection(*resource, 1);
     entries = &((struct func_80254D70_S2 *)(data))->unk8;
     total = ((struct func_80203E78_S1 *)(data))->unk4;
     count = func_802654E8_de(entries, ((struct Access_s8_E6 *)(owner))->field, arg1);
@@ -313,7 +313,7 @@ s32 func_80246A08_de(LevelActor *owner, s32 arg1, s32 arg2) {
         }
         count = func_802798A8_de(&table);
     }
-    func_80253754_de(0, resource);
+    Scene_UnlockResource(0, resource);
     return count;
 
 fail:

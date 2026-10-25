@@ -87,7 +87,7 @@ static inline CachedResource *allocate(u32 size, u32 flags) {
     }
     return node;
 }
-void *func_8025193C_de(s32 unused, u32 key, u32 source, u32 size,
+void *Scene_RequestResource(s32 unused, u32 key, u32 source, u32 size,
                           u32 mode, s32 owner, void *tag, const char *spare, u32 direct) {
     ResourceLoadRequest *request;
     ResourceLoadRequest *scan;

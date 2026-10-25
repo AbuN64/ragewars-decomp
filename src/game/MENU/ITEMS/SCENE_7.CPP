@@ -22,7 +22,7 @@ void func_8044D0F0_de(State_func_8044D0F0_de *state) {
  int *resource;
  int id;
  if(func_80264B6C_de()==0) {
-  resource=func_8025193C_de(0,state->resource,state->resource,state->bank,0,0,D_00285160,D_800C50CC_de,1);
+  resource=Scene_RequestResource(0,state->resource,state->resource,state->bank,0,0,D_00285160,D_800C50CC_de,1);
   func_802BD3A0_de(D_800F41F0,*resource,0x5000);
   func_80253838_de(0,resource);
  }
@@ -84,9 +84,9 @@ s32 func_8044D220_de(void *world, s32 kind, s32 key, Shared_Placed *out, s32 max
     s32 count;
 
     found = 0;
-    count = (keys = func_8028FDB4_de(track->placedObjectTable, 0))[1];
+    count = (keys = Render_GetPackSection(track->placedObjectTable, 0))[1];
     keys += 2;
-    objectTable = func_8028FDB4_de(track->placedObjectTable, 1);
+    objectTable = Render_GetPackSection(track->placedObjectTable, 1);
     objects = (Shared_Placed *)(objectTable + 2);
     if (func_80265550_de(keys, count, key, &first, &last) != 0) {
         func_80255CA0_de(&list, 4, 8);
@@ -156,10 +156,10 @@ s32 func_8044D3E8_de(SearchOwner *owner, void *position, s32 type, SearchPoint *
     f32 distance;
     f32 minimum;
 
-    values = func_8028FDB4_de(owner->resource, 0);
+    values = Render_GetPackSection(owner->resource, 0);
     count = values->count;
     results = values->values;
-    list = func_8028FDB4_de(owner->resource, 1);
+    list = Render_GetPackSection(owner->resource, 1);
     minimum = D_800C52FC_de;
     points = list->points;
     best = 0;

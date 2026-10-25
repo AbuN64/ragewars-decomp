@@ -172,7 +172,7 @@ s32 func_8020DDF4_eu(ActorRec *actor) {
 block_43:
                 if (actor->field268 < 0x15) {
                     temp_s0_2 = D_8013D534;
-                    temp_v0_2 = (void *)func_8028FDB4_de(temp_s0_2, 1);
+                    temp_v0_2 = (void *)Render_GetPackSection(temp_s0_2, 1);
                     keyCount = temp_v0_2->count;
                     if (func_80265550_de(temp_v0_2->keys, keyCount, var_s2, &first, &last) == 0) {
                         actor->field270 = 0;
@@ -181,7 +181,7 @@ block_43:
                         return 1;
                     }
                     {
-                        BallisticResourceRecords *records = (void *)func_8028FDB4_de(temp_s0_2, 2);
+                        BallisticResourceRecords *records = (void *)Render_GetPackSection(temp_s0_2, 2);
                         temp_s0_3 = records->records;
                         temp_s0_3 += first;
                     }

@@ -58,7 +58,7 @@ extern int func_80245784_de();
 extern void func_80246E44_de();
 extern void func_8024B2D0_de();
 extern void func_8024BE3C_de();
-extern struct Shape_typemap_165 * func_8025343C_de();
+extern struct Shape_typemap_165 * Scene_AllocateResource();
 extern void func_80253838_de(void *arg0, void *arg1);
 extern void func_80253908_de();
 extern s32 func_80254284_de();
@@ -408,7 +408,7 @@ scene_size_done:
         count += 0x200;
     }
     func_80253908_de(0);
-    temp_v0_4 = func_8025343C_de(0, count << 6, 3, &D_800C5104_de);
+    temp_v0_4 = Scene_AllocateResource(0, count << 6, 3, &D_800C5104_de);
     (((struct SharedRecAt1B92C *)(table))->unkE8) = (void *)temp_v0_4;
     Items_InitEntryBatch(&((struct SharedRecAt1B92C *)table)->address128, temp_v0_4->field_0, count);
     resourceKey = func_8028FE28_de((((struct SharedRecAt1B92C *)(table))->unk4C), (((struct SharedRecAt1B92C *)(table))->unk1C), var_s6);

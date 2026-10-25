@@ -123,7 +123,7 @@ void *func_8028CF6C_de(void *world, s32 index) {
     if (index == -1) {
         goto ret_null;
     }
-    result = func_8028FDB4_de(((struct ObjRecAt78V1 *) ((s8 *) world))->unk78, index);
+    result = Render_GetPackSection(((struct ObjRecAt78V1 *) ((s8 *) world))->unk78, index);
     goto end;
 ret_null:
     result = 0;
@@ -140,7 +140,7 @@ void *func_8028CFA0_de(Shared_World *world, s32 selection, s32 modelKind) {
     descriptor = world->actorDefinitions;
     count = *descriptor;
     for (i = 0; i < count; i++) {
-        entry = func_8028FDB4_de(world->actorDefinitions, i);
+        entry = Render_GetPackSection(world->actorDefinitions, i);
         if (selection != -1 && entry->kind != selection) {
             continue;
         }

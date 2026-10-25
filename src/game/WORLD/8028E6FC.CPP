@@ -36,7 +36,7 @@ s32 func_8028E6FC_de(Shared_World *arg0)
   do
   {
     field = arg0->sectors[i].resource;
-    ret = func_8028FDB4_de(*((s32 *) field), 2);
+    ret = Render_GetPackSection(*((s32 *) field), 2);
     if ((((struct IntPair *)ret)->field_4) != 0)
     {
       if (arg0 || i)

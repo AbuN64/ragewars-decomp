@@ -20,7 +20,7 @@ extern void func_802164A8_de(void *a, void *b);
 extern void **func_8024BFD4_de(void *arg0, s32 arg1);
 
 
-extern void func_80253754_de(void *arg0, void *arg1);
+extern void Scene_UnlockResource(void *arg0, void *arg1);
 
 void *func_8024BC94_de(void *arg0, void *actor, struct IntPair arg2) {
     CQuatern sp10;
@@ -29,7 +29,7 @@ void *func_8024BC94_de(void *arg0, void *actor, struct IntPair arg2) {
 
     sp10 = func_8024796C_de(actor);
     func_80274244_de(&sp10, sp20);
-    func_80272898_de(sp20, &arg2, &sp60);
+    Particle_TransformPoint(sp20, &arg2, &sp60);
     *(Triple *)arg0 = sp60;
     return arg0;
 }
@@ -113,9 +113,9 @@ s32 func_8024BE80_de(void *typedActor) {
     result = -1;
     temp_s0 = func_8024BFD4_de(typedActor, ((LevelActor *)typedActor)->team);
     if (temp_s0 != 0) {
-        temp_v0 = func_8028FDB4_de((int *)*temp_s0, 5);
+        temp_v0 = Render_GetPackSection((int *)*temp_s0, 5);
         result = ((struct ActorFrameMetadata *)temp_v0)->renderMode;
-        func_80253754_de(0, temp_s0);
+        Scene_UnlockResource(0, temp_s0);
     }
     return result;
 }

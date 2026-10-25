@@ -17,7 +17,7 @@
 extern void func_80247004_de(Obj_func_80247004_de *);
 
 
-extern void func_80253754_de(void *, Node80253610 *);
+extern void Scene_UnlockResource(void *, Node80253610 *);
 
 /* Update or blend object rotation when the movement state permits it. */
 CQuatern func_8024D870_de(void *);
@@ -70,12 +70,12 @@ void func_80246E44_de(Actor36 *actor) {
         }
     }
     func_80247004_de((void *)actor);
-    resource = func_8025193C_de(0, actor->size, actor->size, actor->alignment, 0, 0, 0, D_800C38F4_de, 1);
+    resource = Scene_RequestResource(0, actor->size, actor->size, actor->alignment, 0, 0, 0, D_800C38F4_de, 1);
     if (resource != 0) {
-        box = func_8028FDB4_de(*resource, 0);
+        box = Render_GetPackSection(*resource, 0);
         actor->update(actor, actor->state);
         func_8026EE20_de(actor->matrix, box, &actor->box);
-        func_80253754_de(0, (void *)resource);
+        Scene_UnlockResource(0, (void *)resource);
     }
 }
 

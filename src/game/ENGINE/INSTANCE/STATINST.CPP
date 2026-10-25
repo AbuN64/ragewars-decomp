@@ -28,7 +28,7 @@ extern f32 D_800C3E50_de[];
 
 
 
-extern void *func_802507AC_de(ResourceOwner *owner,s32 index);
+extern void *Instance_AcquireGeometry(ResourceOwner *owner,s32 index);
 
 
 
@@ -65,7 +65,7 @@ extern char D_800C8F60[];
 #endif
 
 
-extern s32 func_8028FE3C_de(s32 *, s32, s32, s32 *);
+extern s32 Render_LocatePackSection(s32 *, s32, s32, s32 *);
 
 
 extern void func_80265E10_de(void *, void *, s32, s32, Triple, ResourceManagerState);
@@ -173,7 +173,7 @@ void func_80250274_de(Owner_func_80250274_de *owner) {
         }
         D_800D15E4[3] = alpha;
     }
-    instance = func_802507AC_de(owner, key);
+    instance = Instance_AcquireGeometry(owner, key);
     if (instance != 0) {
         resource = func_80251F6C_de(0, owner->flagsD0 | D_800CD3F0, instance, (CachedResource *)owner->field20, 8, owner, &D_00250C2C,
                                  D_800C3E40_de, 0);
@@ -196,16 +196,16 @@ void func_80250274_de(Owner_func_80250274_de *owner) {
             } else {
                 Render_QueueModelInstance(instance, owner->transform, 0, 0, data, remaining);
             }
-            func_80253754_de(0, resource);
+            Scene_UnlockResource(0, resource);
         }
-        func_80253754_de(0, instance);
+        Scene_UnlockResource(0, instance);
         owner->colorFrame = (u8)D_800D2978;
     }
     D_800D15E0 = 0;
     D_800D15E4[3] = D_800C3E58_de;
 }
 
-void func_802504B0_de(ModelOwner *owner) {
+void Instance_DrawModel(ModelOwner *owner) {
     s32 remaining;
     void *instance;
     CachedResource *resource;
@@ -216,7 +216,7 @@ void func_802504B0_de(ModelOwner *owner) {
         return;
     }
     remaining = owner->descriptor->argument;
-    instance = func_802507AC_de(owner, owner->descriptor->key);
+    instance = Instance_AcquireGeometry(owner, owner->descriptor->key);
     if (instance == 0) {
         return;
     }
@@ -241,9 +241,9 @@ void func_802504B0_de(ModelOwner *owner) {
         } else {
             Render_QueueModelInstance(instance, owner->transform, 0, 0, data, remaining);
         }
-        func_80253754_de(0, resource);
+        Scene_UnlockResource(0, resource);
     }
-    func_80253754_de(0, instance);
+    Scene_UnlockResource(0, instance);
     owner->colorFrame = (u8)D_800D2978;
 }
 
@@ -259,22 +259,22 @@ void func_80250624_de(void *object, s32 all) {
     s32 count;
     s32 i;
 
-    model = func_8025193C_de(0, ((PlacedProp *)object)->owner, ((PlacedProp *)object)->owner, 0x18, 4, 0, 0,
+    model = Scene_RequestResource(0, ((PlacedProp *)object)->owner, ((PlacedProp *)object)->owner, 0x18, 4, 0, 0,
                           &D_800C3E5C_de, 0);
     if (model == 0) {
         return;
     }
-    name = func_8028FE3C_de(*model, ((PlacedProp *)object)->owner, 3, &size);
+    name = Render_LocatePackSection(*model, ((PlacedProp *)object)->owner, 3, &size);
 #if defined(VERSION_DE)
-    table = func_8025193C_de(0, name, name, size, 0, 0, 0, D_800C3E70, 0);
+    table = Scene_RequestResource(0, name, name, size, 0, 0, 0, D_800C3E70, 0);
 #elif defined(VERSION_EU)
-    table = func_8025193C_de(0, name, name, size, 0, 0, 0, D_800C4120, 0);
+    table = Scene_RequestResource(0, name, name, size, 0, 0, 0, D_800C4120, 0);
 #elif defined(VERSION_EU_X)
-    table = func_8025193C_de(0, name, name, size, 0, 0, 0, D_800C4160, 0);
+    table = Scene_RequestResource(0, name, name, size, 0, 0, 0, D_800C4160, 0);
 #elif defined(VERSION_US)
-    table = func_8025193C_de(0, name, name, size, 0, 0, 0, D_800C3DA0, 0);
+    table = Scene_RequestResource(0, name, name, size, 0, 0, 0, D_800C3DA0, 0);
 #else
-    table = func_8025193C_de(0, name, name, size, 0, 0, 0, D_800C8F60, 0);
+    table = Scene_RequestResource(0, name, name, size, 0, 0, 0, D_800C8F60, 0);
 #endif
     if (table != 0) {
         header = *table;
@@ -283,11 +283,11 @@ void func_80250624_de(void *object, s32 all) {
         for (i = 0; i < count; i++) {
             attachment = &entries[i];
             if (all != 0 || attachment->type == 8) {
-                func_80272898_de(((PlacedProp *)object)->matrix, &attachment->offset, &position);
+                Particle_TransformPoint(((PlacedProp *)object)->matrix, &attachment->offset, &position);
                 func_80265E10_de(object, object, attachment->type, -1, position, attachment->params);
             }
         }
-        func_80253754_de(0, table);
+        Scene_UnlockResource(0, table);
     }
-    func_80253754_de(0, model);
+    Scene_UnlockResource(0, model);
 }

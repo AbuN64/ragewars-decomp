@@ -159,5 +159,5 @@ void func_8024EB90_de(StaticObject *obj) {
     gSPEndDisplayList(D_80110634++);
     gSPBranchList(obj->cached++, (unsigned int)D_80110634);
     gSPDisplayList(D_80110634++, (unsigned int)obj->cached);
-    func_80253754_de(0, resource);
+    Scene_UnlockResource(0, resource);
 }

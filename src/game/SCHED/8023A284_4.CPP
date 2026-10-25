@@ -16,7 +16,7 @@
 #include "TEXTURE/80294C64_15.H"
 #include "COMMON/WORLD.H"
 
-extern void func_80253754_de(void *, Node80253610 *);
+extern void Scene_UnlockResource(void *, Node80253610 *);
 extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
 
 /* Clip and draw a textured translucent fan at the object's depth. */
@@ -181,7 +181,7 @@ draw_face:
                 }
             }
         }
-        func_80253754_de(0, resource);
+        Scene_UnlockResource(0, resource);
     }
 }
 

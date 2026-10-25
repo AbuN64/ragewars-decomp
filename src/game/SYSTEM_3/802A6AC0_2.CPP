@@ -24,7 +24,7 @@ typedef struct Image Image;
 
 extern s32 D_800D297C;
 
-extern void func_80270910_de(f32 *, s32);
+extern void Rsp_ConvertMatrixToFloat(f32 *, s32);
 
 extern void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
 
@@ -235,7 +235,7 @@ void func_802A6174_de(Node44 *arg0, void *arg1) {
             ((ChildB4 *)arg1)->mat[D_800D297C] = ((ChildB4 *)arg1)->mat[D_800D297C ^ 1];
             ((ChildB4 *)arg1)->unk_B0 = 0;
         } else {
-            func_80270910_de(local, entry + ((D_800D297C << 6) + 0x60));
+            Rsp_ConvertMatrixToFloat(local, entry + ((D_800D297C << 6) + 0x60));
             scale = D_800C5EB8_de;
             if (((ParticleEffect *)entry)->entry->unk14 != 0) {
                 scale = D_800C5EBC_de;
@@ -298,7 +298,7 @@ void func_802A63A4_de(void *arg0, void *arg1, void *arg2, s32 arg3) {
 
     entry = state->object;
     if (entry == arg2 && state->value > 0.0f) {
-        func_80270910_de(local, arg3);
+        Rsp_ConvertMatrixToFloat(local, arg3);
         scale = D_800C5EC0_de;
         if (entry->desc->renderModel != 0) {
             scale = D_800C5EC4_de;

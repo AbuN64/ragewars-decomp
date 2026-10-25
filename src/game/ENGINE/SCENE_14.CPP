@@ -35,13 +35,13 @@ extern void func_80253838_de(void *arg0, void *arg1);
 extern void func_8028DA74_de(void *arg0);
 
 
-extern s32 func_8028FE3C_de(s32, s32, s32, s32 *);
+extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
 
 extern s32 D_00285160;
 
 
 
-extern void func_80253754_de(s32 arg0, s32 arg1);
+extern void Scene_UnlockResource(s32 arg0, s32 arg1);
 
 s32 func_8029076C_de(s32, s32);
 
@@ -51,13 +51,13 @@ s32 func_8029076C_de(s32, s32);
 extern void func_80250624_de(s32, s32);
 
 
-/* Releases the resource of each of the owner's listed entries through func_80253754_de, then clears the counters at 0x944, 0xC4C and 0x10BC, and moves the entry count to 0x1500 and zeroes it. */
+/* Releases the resource of each of the owner's listed entries through Scene_UnlockResource, then clears the counters at 0x944, 0xC4C and 0x10BC, and moves the entry count to 0x1500 and zeroes it. */
 
 
 
 
 
-extern void func_80253754_de(s32, s32);
+extern void Scene_UnlockResource(s32, s32);
 
 
 
@@ -66,8 +66,8 @@ void *func_8028D244_de(void *a, s32 b, s32 c) {
     ResidentDataChunk *r2;
     s32 field;
 
-    r1 = func_8028FDB4_de(((Shared_World *)a)->routeCount, b);
-    r2 = func_8028FDB4_de(r1, 1);
+    r1 = Render_GetPackSection(((Shared_World *)a)->routeCount, b);
+    r2 = Render_GetPackSection(r1, 1);
     field = r2->width;
     return r2->data + (c * field);
 }
@@ -86,7 +86,7 @@ s32 func_8028D28C_de(void *arg0, s32 arg1, void *arg2) {
     bestIndex = D_800C5300_de;
     bestDist = 0.0f;
     index = 0;
-    list = func_8028FDB4_de(func_8028FDB4_de(world->routeCount, arg1), 1);
+    list = Render_GetPackSection(Render_GetPackSection(world->routeCount, arg1), 1);
     count = list->count;
     item = list->frames;
     if (count > 0) {
@@ -139,16 +139,16 @@ void *func_8028D474_de(void *world, s32 record) {
         if (((struct MeasuredRecAtCV4 *)(world))->value != 0) {
             size = 0x10;
             one = 1;
-            resource = func_8025193C_de(0, ((struct MeasuredRecAtCV4 *)(world))->value,
+            resource = Scene_RequestResource(0, ((struct MeasuredRecAtCV4 *)(world))->value,
                                      ((struct MeasuredRecAtCV4 *)(world))->value,
                                      ((struct MeasuredRecAt10V1 *)(world))->value, size, 0, 0,
                                      D_800C5290_de, one);
             if (resource != 0) {
-                key = func_8028FE3C_de((s32)*resource, ((struct MeasuredRecAtCV4 *)(world))->value,
+                key = Render_LocatePackSection((s32)*resource, ((struct MeasuredRecAtCV4 *)(world))->value,
                                     record, &sp28);
                 func_80253838_de(0, resource);
                 if ((((struct MeasuredRecAt14V1 *)(world))->value =
-                     func_8025193C_de(0, key, key, sp28, size, 0,
+                     Scene_RequestResource(0, key, key, sp28, size, 0,
                                    &D_00285160, D_800C52BC, one)) != 0) {
                     ((struct MeasuredCode8028B64C *)(world))->value = record;
                 } else {
@@ -169,12 +169,12 @@ void func_8028D59C_de(void *arg0) {
     s32 val;
 
     if (object->loaded != 0) {
-        list = (s32 *) func_8028FDB4_de(object->model, 0);
+        list = (s32 *) Render_GetPackSection(object->model, 0);
         if (*list != 0) {
             do {
                 val = *list;
                 list += 1;
-                func_80253754_de(0, val);
+                Scene_UnlockResource(0, val);
             } while (*list != 0);
         }
         func_80253838_de(0, object->loaded);
@@ -293,7 +293,7 @@ void func_8028D888_de(Owner_func_8028D888_de *owner) {
     n = owner->count;
     entries = owner->entries;
     for (i = 0; i < n; i++) {
-        func_80253754_de(0, entries[i].x);
+        Scene_UnlockResource(0, entries[i].x);
     }
     count = owner->count;
     owner->unk944 = 0;
@@ -331,16 +331,16 @@ void func_8028D964_de(void *world, s32 arg1) {
         if (((struct MeasuredRecAtCV3 *)(world))->value != 0) {
             size = 0x10;
             one = 1;
-            resource = func_8025193C_de(0, ((struct MeasuredRecAtCV3 *)(world))->value,
+            resource = Scene_RequestResource(0, ((struct MeasuredRecAtCV3 *)(world))->value,
                                      ((struct MeasuredRecAtCV3 *)(world))->value,
                                      ((struct MeasuredRecAt10V2 *)(world))->value, size, 0, 0,
                                      D_800C5290_de, one);
             if (resource != 0) {
-                key = func_8028FE3C_de((s32)*resource, ((struct MeasuredRecAtCV3 *)(world))->value,
+                key = Render_LocatePackSection((s32)*resource, ((struct MeasuredRecAtCV3 *)(world))->value,
                                     arg1, &sp28);
                 func_80253838_de(0, resource);
                 if ((((struct MeasuredRecAt14V6 *)(world))->value =
-                     func_8025193C_de(0, key, key, sp28, size, 0,
+                     Scene_RequestResource(0, key, key, sp28, size, 0,
                                    &D_00285160, D_800C52BC, one)) != 0) {
                     ((struct MeasuredCode8028B64C *)(world))->value = arg1;
                 }

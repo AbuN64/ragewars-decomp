@@ -31,7 +31,7 @@ void System_DecodeRegionGrid(ResourceBitGrid *grid, s32 originX, s32 originZ,
     streamCount = *streamTable;
     streamIndex = 1;
     while (streamIndex < streamCount) {
-        func_802630E0_de(&grid->reader, func_8028FDB4_de(streamTable, streamIndex));
+        func_802630E0_de(&grid->reader, Render_GetPackSection(streamTable, streamIndex));
         *(s32 *)&minimum.x = func_80263154_de(&grid->reader, 32);
         *(s32 *)&minimum.y = func_80263154_de(&grid->reader, 32);
         *(s32 *)&minimum.z = func_80263154_de(&grid->reader, 32);
@@ -44,7 +44,7 @@ void System_DecodeRegionGrid(ResourceBitGrid *grid, s32 originX, s32 originZ,
         streamIndex++;
     }
     if (streamIndex == streamCount) {
-        func_802630E0_de(&grid->reader, func_8028FDB4_de(streamTable, 0));
+        func_802630E0_de(&grid->reader, Render_GetPackSection(streamTable, 0));
     }
     for (index = row = 0; row < 17; row++) {
         for (column = 0; column < 17; column++, index++) {

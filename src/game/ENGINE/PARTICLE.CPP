@@ -61,11 +61,11 @@ extern void func_80253838_de(void *arg0, void *arg1);
 
 extern s32 func_802540F4_de(s32, void **, s32, void *, s32);
 
-extern s32 func_8028FE3C_de(s32, s32, s32, s32 *);
+extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
 
 extern void Render_QueueModelInstance(void **, void *, s32, void *, void *, s32);
 
-extern void func_80253754_de(s32, void *);
+extern void Scene_UnlockResource(s32, void *);
 extern void *func_802799C0_de(void *, s32);
 
 void func_8027E784_de(Shared_Particle *actor, struct Shared_ParticleView *view) {
@@ -166,7 +166,7 @@ void Particle_DrawModel(void *particle, struct Shared_ParticleView *view) {
         if (matrix == 0) {
             return;
         }
-        func_80272898_de(&view->viewMtx, &((Shared_Particle *)particle)->inst.pos, &delta);
+        Particle_TransformPoint(&view->viewMtx, &((Shared_Particle *)particle)->inst.pos, &delta);
         amount = delta.z;
         if (amount < 0.0f) {
             amount = -amount;
@@ -175,7 +175,7 @@ void Particle_DrawModel(void *particle, struct Shared_ParticleView *view) {
     }
 
     if (((Shared_Particle *)particle)->resource == 0) {
-        resource = func_8025193C_de(0, ((Shared_Particle *)particle)->desc->renderModel,
+        resource = Scene_RequestResource(0, ((Shared_Particle *)particle)->desc->renderModel,
                                 ((Shared_Particle *)particle)->desc->renderModel, 0x18,
                                 0, 0, 0, &D_800C4D38_de, 1);
         if (resource != 0) {
@@ -184,7 +184,7 @@ void Particle_DrawModel(void *particle, struct Shared_ParticleView *view) {
             func_80253838_de(0, resource);
             found = func_802540F4_de(0, &modelTable, key, &D_800C4D50_de, 1);
             if (found != 0) {
-                ((Shared_Particle *)particle)->resource = func_8028FE3C_de(
+                ((Shared_Particle *)particle)->resource = Render_LocatePackSection(
                     (s32)modelTable, key, index % *(s32 *)modelTable,
                     &((Shared_Particle *)particle)->resourceSize);
                 func_80253838_de(0, (void *)found);
@@ -195,12 +195,12 @@ void Particle_DrawModel(void *particle, struct Shared_ParticleView *view) {
         }
     }
 
-    resource = func_8025193C_de(0, ((Shared_Particle *)particle)->resource,
+    resource = Scene_RequestResource(0, ((Shared_Particle *)particle)->resource,
                             ((Shared_Particle *)particle)->resource, ((Shared_Particle *)particle)->resourceSize,
                             0, 0, &D_0026D7F4, &D_800C4D68_de, 1);
     if (resource != 0) {
         Render_QueueModelInstance(resource, matrix, 0,
                       (char *)particle + (((D_800D297C * 3) << 3) + 0xE0), 0, -1);
-        func_80253754_de(0, resource);
+        Scene_UnlockResource(0, resource);
     }
 }

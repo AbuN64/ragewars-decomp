@@ -23,7 +23,7 @@ void Anim_TraceMeshDisplayList(void *contextAddress, void *resource) {
     s16 *source;
     Ray180 *ray;
 
-    flags = func_8028FDB4_de(commands, 0);
+    flags = Render_GetPackSection(commands, 0);
     context = contextAddress;
     ray = context->ray;
     context->flags = *flags;
@@ -35,7 +35,7 @@ void Anim_TraceMeshDisplayList(void *contextAddress, void *resource) {
         reverse = 1;
         break;
     }
-    commands = func_8028FDB4_de(commands, 1);
+    commands = Render_GetPackSection(commands, 1);
     second = commands + 1;
     do {
         opcode = ((u8 *)commands)[COMMAND_HIGH];

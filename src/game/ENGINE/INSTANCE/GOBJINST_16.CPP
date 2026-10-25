@@ -28,7 +28,7 @@ extern void func_80265E10_de(char *, char *, u16, s32, CVector3, struct IntPair)
 
 
 
-extern void func_80253754_de(s32 arg0, s32 arg1);
+extern void Scene_UnlockResource(s32 arg0, s32 arg1);
 extern void System_SampleVectorTrack(AnimChannel *, s32, f32, f32 *);
 
 void *func_8024C104_de(Triple *arg0, void *arg1, AnimChannel *anim) {
@@ -43,7 +43,7 @@ void *func_8024C104_de(Triple *arg0, void *arg1, AnimChannel *anim) {
     inVec[1] = spVec[2];
     inVec[2] = spVec[1];
     func_802736D4_de(mtx, ((LevelActor *)o1)->yaw);
-    func_80272898_de(mtx, inVec, outVec);
+    Particle_TransformPoint(mtx, inVec, outVec);
     outVec[0] *= ((LevelActor *)o1)->scale.x;
     outVec[1] *= ((LevelActor *)o1)->scale.y;
     outVec[2] *= ((LevelActor *)o1)->scale.z;
@@ -64,7 +64,7 @@ void func_8024C1C4_de(char *obj, void *anim)
         switch (e[i].effect) {
         case 6:
         case 7:
-            func_80272898_de(obj + 0x74, &e[i].local, &pos);
+            Particle_TransformPoint(obj + 0x74, &e[i].local, &pos);
             func_80265E10_de(obj, obj, e[i].effect, -1, pos, e[i].params);
         }
     }
@@ -76,11 +76,11 @@ s32 func_8024C294_de(LevelActor *actor, s32 arg1) {
     s32 temp_s0;
 
     if (actor->flags & 0x40000) {
-        temp_v0 = func_8025193C_de(0, actor->resource, actor->resource, actor->resourceFlags, 4, 0, 0, &D_800C3830_de, 1);
+        temp_v0 = Scene_RequestResource(0, actor->resource, actor->resource, actor->resourceFlags, 4, 0, 0, &D_800C3830_de, 1);
         if (temp_v0 != 0) {
-            temp_v1 = func_8028FDB4_de(*(void **) temp_v0, 1);
+            temp_v1 = Render_GetPackSection(*(void **) temp_v0, 1);
             temp_s0 = temp_v1->deltas[arg1];
-            func_80253754_de(0, (s32) temp_v0);
+            Scene_UnlockResource(0, (s32) temp_v0);
             return temp_s0;
         }
     }
@@ -102,7 +102,7 @@ void func_8024C34C_de(LevelActor *actor, AnimChannel *arg1) {
     scratch.in[1] = zero;
     scratch.in[2] = scratch.second[1] - scratch.first[1];
     func_802736D4_de(scratch.matrix, actor->yaw);
-    func_80272898_de(scratch.matrix, scratch.in, scratch.out);
+    Particle_TransformPoint(scratch.matrix, scratch.in, scratch.out);
     scratch.position.x = actor->position0.x +
                           (scratch.out[0] * actor->scale.x);
     scratch.position.y = actor->position0.y;

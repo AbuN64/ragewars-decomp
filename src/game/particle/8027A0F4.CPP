@@ -83,7 +83,7 @@ block_7:
                 sp38.x = 0;
                 sp38.y = 0;
                 sp38.z = D_800C4B54_de;
-                func_80272898_de(&sp78, &sp38, temp_s2);
+                Particle_TransformPoint(&sp78, &sp38, temp_s2);
                 func_80271F9C_de(&arg0->velocity, temp_s2, temp_fv0_2);
                 return;
             }
@@ -113,7 +113,7 @@ block_7:
             sp38.x = 0;
             sp38.y = 0;
             sp38.z = D_800C4B74_de;
-            func_80272898_de(&sp78, &sp38, temp_s0_2);
+            Particle_TransformPoint(&sp78, &sp38, temp_s0_2);
             func_80271F9C_de(&arg0->velocity, temp_s0_2, temp_fv0_2);
             goto block_21;
         }
@@ -238,7 +238,7 @@ create_sound:
     v48.x = 0;
     v48.y = 0;
     v48.z = D_800C4BA0_de;
-    func_80272898_de(&mA8, &v48, direction);
+    Particle_TransformPoint(&mA8, &v48, direction);
     velocity = &arg0->velocity;
     func_80271F9C_de(velocity, direction, speed);
     if (arg0->time >= D_800C4BA4_de) {
@@ -311,7 +311,7 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
     forward.x = 0.0f;
     forward.y = 0.0f;
     forward.z = 1.0f;
-    func_80272898_de(rotation, &forward, &particle->direction);
+    Particle_TransformPoint(rotation, &forward, &particle->direction);
     func_80271F9C_de(&particle->velocity, &particle->direction, speed);
     acceleration = func_802B2350(particle->link->params->accel);
     vel = &particle->velocity;

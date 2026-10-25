@@ -92,7 +92,7 @@ extern char D_800DCCD0[];
 
 extern char D_800DCCE8_de[];
 
-extern void **func_8025343C_de(s32, s32, s32, char *);
+extern void **Scene_AllocateResource(s32, s32, s32, char *);
 
 extern void func_80253908_de(s32);
 
@@ -122,7 +122,7 @@ static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
     if (func_8025477C_de() == 0) {
         func_8025476C_de(1);
     }
-    handle = func_8025343C_de(0, blocks, 0x23, D_800DCCD0);
+    handle = Scene_AllocateResource(0, blocks, 0x23, D_800DCCD0);
     buf = *handle;
     ((void (*)(s32))func_802644FC_de)(1);
     Render_ReadControllerStates();
@@ -204,7 +204,7 @@ s32 Pak_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
     if (D_801534F0[ch] != 3) {
         return -2;
     }
-    handle = func_8025343C_de(0, blocks, 0x23, D_800DCCE8_de);
+    handle = Scene_AllocateResource(0, blocks, 0x23, D_800DCCE8_de);
     buf = *handle;
     for (tries = 0; tries < 4; tries++) {
         result = func_804042F0_de(ch, size, data, name, &file_no, ext, RW_LOCALIZED_TEXT(D_800D36DC, D_800E25C4, D_800E25C4, D_80152789), code);

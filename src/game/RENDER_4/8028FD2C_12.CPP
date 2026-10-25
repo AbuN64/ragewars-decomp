@@ -68,7 +68,7 @@ void func_802905F4_de(char *arg0, char *view) {
     f32 scale;
     f32 zero;
 
-    func_8026D980_de();
+    Render_BeginModelBatch();
     entry = world->head;
     if (entry != 0) {
         zero = 0.0f;
@@ -94,7 +94,7 @@ void func_802905F4_de(char *arg0, char *view) {
             entry = entry->next;
         } while (entry != 0);
     }
-    func_8026D9D0_de();
+    Render_FlushModelBatch();
 }
 
 void func_8029076C_de(ContainerRecAt3C04 *arg0, Results *results) {

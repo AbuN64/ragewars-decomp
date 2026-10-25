@@ -78,7 +78,7 @@ struct Node_func_8026BC60_de {
     struct Node_func_8026BC60_de *right;
 };
 
-extern void func_8026D980_de();
+extern void Render_BeginModelBatch();
 
 struct Material;
 typedef struct Material Material;
@@ -120,7 +120,7 @@ extern void func_8026D83C_de(void);
 
 extern void func_8026D844_de();
 
-extern void func_8026D9D0_de();
+extern void Render_FlushModelBatch();
 
 struct ObjectState18;
 

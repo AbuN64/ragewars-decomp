@@ -45,9 +45,9 @@ static inline void func_8024A1C0_spawn(Actor_func_8024A1D0_de *actor, Lookup *lo
     s32 *node;
 
     if (func_8026E340_de() != 0) {
-        node = func_8028FDB4_de(*lookup->value, 2);
+        node = Render_GetPackSection(*lookup->value, 2);
         if ((*node != 0) &&
-            (*((s32 *)func_8028FDB4_de(func_8028FDB4_de(node, 0), 0)) & 0x8000)) {
+            (*((s32 *)Render_GetPackSection(Render_GetPackSection(node, 0), 0)) & 0x8000)) {
             position = actor->position0;
             position.y += Particle_GetActorHeight(actor) * D_800C8B38[1];
             func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
@@ -98,9 +98,9 @@ void func_8024A3B0_de(LevelActor *actor, PlayerCode80225D10 *player, s32 arg2, D
     if (params->drawModel != 0) {
         Render_DrawActorModelParts(params->model, player, actor->fieldB4, 1, &actor->lighting[D_800D297C], 0, actor->field3);
         if (func_8026E340_de() != 0) {
-            node = func_8028FDB4_de(*params->model, 2);
+            node = Render_GetPackSection(*params->model, 2);
             if ((*node != 0) &&
-                (*((s32 *)func_8028FDB4_de(func_8028FDB4_de(node, 0), 0)) & 0x8000)) {
+                (*((s32 *)Render_GetPackSection(Render_GetPackSection(node, 0), 0)) & 0x8000)) {
                 spawn(actor);
                 effect = func_802830B8_de(&D_8011D8D0);
                 if (effect != 0) {

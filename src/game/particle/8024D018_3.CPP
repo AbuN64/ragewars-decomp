@@ -64,7 +64,7 @@ CQuatern func_8024D4AC_de(char *actor, CVector3 point) {
         local.x = 0.0f;
         local.y = 0.0f;
         local.z = 1.0f;
-        func_80272898_de(matrix, &local, &forward);
+        Particle_TransformPoint(matrix, &local, &forward);
     } else {
         forward.x = 0.0f;
         forward.y = 0.0f;

@@ -125,7 +125,7 @@ extern s32 D_800CE430[];
 extern u8 D_00443128[], D_00443104[];
 extern void func_802A001C_de(void *, s32, s32);
 extern u8 *func_8028CFA0_de(void *, s32, s32);
-extern void func_80272898_de(void *, CVector3 *, CVector3 *);
+extern void Particle_TransformPoint(void *, CVector3 *, CVector3 *);
 extern void func_802466A0_de(u8 *, s32, s32, s32, u8 *, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
 extern void func_8024B2D0_de(u8 *);
 extern s32 func_8025477C_de(void);
@@ -133,9 +133,9 @@ extern void func_8025476C_de(s32);
 extern void func_8028B274_de(void *, u8 *, s32, s32);
 extern void func_8024B8C4_de(u8 *);
 extern void func_80246E44_de(u8 *);
-extern void func_8026D980_de(void);
+extern void Render_BeginModelBatch(void);
 extern void func_80249E28_de(void *object, void *camera);
-extern void func_8026D9D0_de(void);
+extern void Render_FlushModelBatch(void);
 static inline PreviewWidget *pakLoadModel(PakModelEntry *entry, s32 id, s32 variant) {
     StateRecAt47C *owner = entry->state;
     PreviewWidget *source = (PreviewWidget *)func_8028CFA0_de(&D_8011FE88, id, variant);
@@ -195,7 +195,7 @@ void Pak_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unused
     }
     offset = def->offset;
     offset.y = offset.y - widget->size * scaled.y * 0.8f;
-    func_80272898_de(&context->screen->camera, &offset, &placed);
+    Particle_TransformPoint(&context->screen->camera, &offset, &placed);
     if (link != 0 && !(entry->flags & 0x2000000)) {
         func_802466A0_de(draw, -1, def->kind, D_800CD8D0, link, -1, 0,
                          context->screen->heading + RW_PI_F6, placed, 0,
@@ -234,9 +234,9 @@ void Pak_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unused
     draw->yaw = draw->yaw + def->rotationSpeed * literals_func_8028D244_de;
     draw->position0 = placed;
     draw->referencePosition = placed;
-    func_8026D980_de();
+    Render_BeginModelBatch();
     func_80249E28_de(draw, context->screen);
-    func_8026D9D0_de();
+    Render_FlushModelBatch();
 }
 
 #ifdef NON_MATCHING

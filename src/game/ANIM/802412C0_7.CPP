@@ -52,13 +52,13 @@ void func_80243874_de(void *contextAddress) {
     if (temp_s0 != 0) {
         func_8026F620_de(&((ContextB0 *)contextAddress)->transform, &((ElementE8 *)temp_a1)->transform, (char *) contextAddress + 0xC);
         temp_s0_2 = *temp_s0;
-        ((ContextB0 *)contextAddress)->vertices = func_8028FDB4_de(temp_s0_2, 0);
-        temp_v0 = func_8028FDB4_de(temp_s0_2, 2);
+        ((ContextB0 *)contextAddress)->vertices = Render_GetPackSection(temp_s0_2, 0);
+        temp_v0 = Render_GetPackSection(temp_s0_2, 2);
         temp_s1 = *temp_v0;
         index = 0;
         if (temp_s1 > 0) {
             do {
-                Anim_TraceMeshDisplayList(contextAddress, func_8028FDB4_de((void *) temp_v0, index));
+                Anim_TraceMeshDisplayList(contextAddress, Render_GetPackSection((void *) temp_v0, index));
                 index += 1;
             } while (index < temp_s1);
         }

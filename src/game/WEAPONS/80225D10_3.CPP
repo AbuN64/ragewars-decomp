@@ -10,7 +10,7 @@
 #include "RESMGR/802A0888.H"
 
 /** Allocate and clear the player array and its per-player state blocks, linking each player to its block. */
-extern void **func_8025343C_de(int, int, int, char *);
+extern void **Scene_AllocateResource(int, int, int, char *);
 
 void func_80226950_de(PlayerList *list, int count) {
     int playerSize = count * sizeof(Players);
@@ -19,7 +19,7 @@ void func_80226950_de(PlayerList *list, int count) {
     void **handle;
     int i;
 
-    handle = func_8025343C_de(0, playerSize + stateSize, 0x23, D_800C2B68_de);
+    handle = Scene_AllocateResource(0, playerSize + stateSize, 0x23, D_800C2B68_de);
     list->handle = handle;
     list->count = count;
     list->players = *handle;
