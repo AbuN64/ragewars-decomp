@@ -8,9 +8,21 @@
 struct Shared_Pickup;
 struct Record14;
 struct LevelActor;
+/* A world sector's model: its first word is the pack table Render_GetPackSection reads
+   (section 2 holds the sector's light volumes). */
+typedef struct WorldSectorModel {
+    void *pack;
+} WorldSectorModel;
+/* A world sector's x/z extent. */
+typedef struct WorldSectorExtent {
+    f32 minX;
+    f32 minZ;
+    f32 maxX;
+    f32 maxZ;
+} WorldSectorExtent;
 typedef struct WorldSector {
-    void *resource;
-    f32 *bounds; /* x/z extent */
+    WorldSectorModel *resource;
+    WorldSectorExtent *bounds;
     u16 ids[2];
 } WorldSector;
 typedef struct Shared_World {

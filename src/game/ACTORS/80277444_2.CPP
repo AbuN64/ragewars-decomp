@@ -107,7 +107,7 @@ s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
     WorldSector *sector;
     HitBoxTable *table;
     HitBox *entry;
-    f32 *extent;
+    WorldSectorExtent *extent;
     Shared_World *world = &D_8011FE88;
     count = 0;
     matches = 0;
@@ -115,13 +115,13 @@ s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
     for (i = 0; i < world->sectorEntryCount; i++) {
         sector = &world->sectors[i];
         extent = sector->bounds;
-        if (extent[2] > box->minX && extent[0] < box->maxX && extent[3] > box->minZ && extent[1] < box->maxZ) {
+        if (extent->maxX > box->minX && extent->minX < box->maxX && extent->maxZ > box->minZ && extent->minZ < box->maxZ) {
             sectors[matches++] = sector;
         }
     }
     if (matches == 1) {
         sector = sectors[0];
-        table = Render_GetPackSection(*(void **)sector->resource, 2);
+        table = Render_GetPackSection(sector->resource->pack, 2);
         n = table->count;
         n--;
         entry = table->boxes;
@@ -145,7 +145,7 @@ s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
     } else {
         for (i = 0; i < matches; i++) {
             sector = sectors[i];
-            table = Render_GetPackSection(*(void **)sector->resource, 2);
+            table = Render_GetPackSection(sector->resource->pack, 2);
             n = table->count;
             n--;
             entry = table->boxes;
