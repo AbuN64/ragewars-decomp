@@ -71,9 +71,9 @@ CVector3 *func_80275F28_de(CVector3 *out, Node75 *node) {
     CollisionBuildVertex *q;
 
     if (node == 0) {
-        ((CVector3 *)&D_80111D30)->x = 0;
-        ((CVector3 *)&D_80111D30)->z = 0;
-        ((CVector3 *)&D_80111D30)->y = D_800C4A04_de;
+        D_80111D30.x = 0;
+        D_80111D30.z = 0;
+        D_80111D30.y = D_800C4A04_de;
     } else if ((int)node != D_800CD3E0) {
         p = node->cur;
         q = node->prev;
@@ -93,9 +93,9 @@ CVector3 *func_80275F28_de(CVector3 *out, Node75 *node) {
         p = node->next;
         q = node->cur;
         b.z = p->z - q->z;
-        func_80272018_de((CVector3 *)&D_80111D30, &b, &a);
+        func_80272018_de(&D_80111D30, &b, &a);
     }
-    *out = *(CVector3 *)&D_80111D30;
+    *out = D_80111D30;
     D_800CD3E0 = (int)node;
     return out;
 }

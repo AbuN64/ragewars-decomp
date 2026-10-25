@@ -37,7 +37,6 @@ extern float func_802B72B0_de(float);
 /* Returns the normalised cross product of a path node's two edge vectors, cached in D_80115E00 for the last node seen, with a default up vector for a null node. Adapted from func_80275F28_de, which it inlines to compute the raw cross product, with the result normalised through func_8027207C_de and cached by a second last-node word; the inlined copy records its last node before copying its result. */
 
 
-extern int D_80111D30;
 
 extern int D_80115E00;
 
@@ -55,9 +54,9 @@ static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
     char *q;
 
     if (node == 0) {
-        ((CVector3 *)&D_80111D30)->x = 0;
-        ((CVector3 *)&D_80111D30)->z = 0;
-        ((CVector3 *)&D_80111D30)->y = D_800C49C4_de;
+        D_80111D30.x = 0;
+        D_80111D30.z = 0;
+        D_80111D30.y = D_800C49C4_de;
     } else if ((int)node != D_800CD3E0) {
         p = node->cur;
         q = node->prev;
@@ -77,10 +76,10 @@ static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
         p = node->next;
         q = node->cur;
         b.z = ((CollisionBuildVertex *)p)->z - ((CollisionBuildVertex *)q)->z;
-        func_80272018_de((CVector3 *)&D_80111D30, &b, &a);
+        func_80272018_de(&D_80111D30, &b, &a);
     }
     D_800CD3E0 = (int)node;
-    *out = *(CVector3 *)&D_80111D30;
+    *out = D_80111D30;
     return out;
 }
 
@@ -568,9 +567,9 @@ f32 func_8027525C_de(Node75 *node, f32 x, f32 z) {
         p = node->next;
         q = node->cur;
         b.z = ((CollisionBuildVertex *)p)->z - ((CollisionBuildVertex *)q)->z;
-        func_80272018_de((CVector3 *)&D_80111D30, &b, &a);
+        func_80272018_de(&D_80111D30, &b, &a);
     }
-    normal = *(CVector3 *)&D_80111D30;
+    normal = D_80111D30;
     D_800CD3E0 = (int)node;
     if (normal.y == 0.0f) {
         return (((CollisionBuildVertex *)node->prev)->ceiling +

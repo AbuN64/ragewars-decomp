@@ -334,7 +334,6 @@ extern s32 D_002B3E00;
 
 extern char D_800D3B60[];
 
-extern int D_80111D30;
 
 extern char D_800D390C[];
 
