@@ -28,7 +28,7 @@ extern s32 D_800E28D0;
 
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x10, 0x14, 0x20, 0x24], gap at: 0x18. */
-void func_8044A170_de(State_func_8044A170_de *arg0) {
+void func_8044A170_de(GameplayCamera *arg0) {
     f32 temp_f21;
     f32 zero;
     s16 temp_a0;
@@ -47,14 +47,14 @@ void func_8044A170_de(State_func_8044A170_de *arg0) {
     temp_v0 = ((void *)&((GameplayCamera *)arg0)->orientation);
     temp_v0->unk8 = zero;
     temp_v0->unk4 = zero;
-    arg0->unk140 = zero;
-    arg0->unk14C = temp_f21;
+    arg0->orientation.x = zero;
+    arg0->orientation.w = temp_f21;
     Particle_IdentityMatrix(((GameplayCamera *)arg0)->inverseViewOrient);
-    arg0->unk29C = (f32) D_800E28D0;
-    arg0->unk2A0 = (f32) D_800E28D4;
+    arg0->viewWidth = (f32) D_800E28D0;
+    arg0->viewHeight = (f32) D_800E28D4;
     arg0->unk518 = -1;
-    arg0->unk2A4 = zero;
-    arg0->unk2A8 = zero;
+    arg0->viewLeft = zero;
+    arg0->viewTop = zero;
     arg0->unk520 = 0;
     arg0->unk524 = 0;
     arg0->unk521 = 0;
@@ -67,17 +67,17 @@ void func_8044A170_de(State_func_8044A170_de *arg0) {
     arg0->fogNear = 0x3E3;
     arg0->unk540 = 0x3E3;
     arg0->unk548 = 0;
-    arg0->unk7C = 0;
-    arg0->unkC = temp_f21;
-    arg0->unk10 = temp_f21;
-    arg0->unk528 = (f32) 1024.0f;
+    arg0->dirty = 0;
+    arg0->pixelXScale = temp_f21;
+    arg0->pixelYScale = temp_f21;
+    arg0->farPlane = (f32) 1024.0f;
     arg0->unk52C = (f32) 1024.0f;
     arg0->unk530 = (f32) 47.5f;
     arg0->unk534 = (f32) 47.5f;
     func_802393D8_de(arg0);
     temp_v0_2 = ((void *)&((GameplayCamera *)arg0)->padA0);
-    arg0->unkF4 = zero;
-    arg0->unkF8 = zero;
+    arg0->shakeHorizontal = zero;
+    arg0->shakeVertical = zero;
     temp_v0_2->unk8 = zero;
     temp_v0_2->unkC = zero;
     temp_v0_2->unk10 = zero;
@@ -112,9 +112,9 @@ void func_8044A170_de(State_func_8044A170_de *arg0) {
     func_80442544_de(((void *)&((GameplayCamera *)arg0)->messageList));
     Particle_IdentityMatrix(((GameplayCamera *)arg0)->faceScreen);
     Particle_IdentityMatrix(((GameplayCamera *)arg0)->faceScreenUpright);
-    arg0->unk544 = 0;
-    arg0->unk120 = 0;
-    arg0->unk124 = 0x32;
+    arg0->fadeEnabled = 0;
+    arg0->monochrome = 0;
+    arg0->kickStep = 0x32;
     arg0->unk126 = 0;
     D_800FF224_de = 0;
     func_80255CA0_de(&((GameplayCamera *)arg0)->objects, 0, 4);

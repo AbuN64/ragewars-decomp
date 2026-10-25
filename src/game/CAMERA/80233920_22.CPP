@@ -1,5 +1,5 @@
 #include "COMMON/VIEWFLAGS.H"
-#include "COMMON/OBJB.H"
+#include "COMMON/GAMEPLAY_CAMERA.H"
 
 extern float D_800C8630;
 
@@ -7,7 +7,7 @@ extern float D_800C8630;
 
 /** Reset the object fields from 0xFC through 0x118. */
 void func_802393D8_de(void *arg0) {
-    State_func_8044A170_de *state = arg0;
+    GameplayCamera *state = arg0;
     float value = D_800C8630;
     state->unkFC = 0;
     state->unk100 = 0;

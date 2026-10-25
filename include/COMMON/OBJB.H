@@ -43,67 +43,6 @@ struct func_8044B27C_S1;
 typedef struct func_8044B27C_S1 func_8044B27C_S1;
 
 
-struct State_func_8044A170_de;
-struct State_func_8044A170_de {
-    char pad0[12];
-    f32 unkC;
-    f32 unk10;
-    char pad14[104];
-    s32 unk7C;
-    char pad80[116];
-    f32 unkF4;
-    f32 unkF8;
-    s32 unkFC;
-    s32 unk100;
-    s32 unk104;
-    s32 unk108;
-    s32 unk10C;
-    f32 unk110;
-    f32 unk114;
-    s32 unk118;
-    char pad11C[4];
-    s32 unk120;
-    s16 unk124;
-    s16 unk126;
-    char pad128[24];
-    f32 unk140;
-    char pad144[8];
-    f32 unk14C;
-    char pad150[332];
-    f32 unk29C;
-    f32 unk2A0;
-    f32 unk2A4;
-    f32 unk2A8;
-    char pad2AC[4];
-    s16 unk2B0;
-    s16 unk2B2;
-    s16 unk2B4;
-    s16 unk2B6;
-    s16 unk2B8;
-    s16 unk2BA;
-    s16 unk2BC;
-    s16 unk2BE;
-    char pad2C0[600];
-    s32 unk518;
-    f32 unk51C;
-    u8 unk520;
-    u8 unk521;
-    u8 unk522;
-    u8 unk523;
-    u8 unk524;
-    u8 unk525;
-    u8 unk526;
-    u8 unk527;
-    f32 unk528;
-    f32 unk52C;
-    f32 unk530;
-    f32 unk534;
-    char pad538[4];
-    s32 fogNear;
-    s32 unk540;
-    s32 unk544;
-    u8 unk548;
-};
 
 struct Bucket;
 typedef struct Bucket Bucket;
@@ -166,8 +105,6 @@ typedef struct Node_Items_FindPlacedObjectsByKey Node_Items_FindPlacedObjectsByK
 struct ItemsPreviewStateB;
 typedef struct ItemsPreviewStateB ItemsPreviewStateB;
 
-struct State_func_8044A170_de;
-typedef struct State_func_8044A170_de State_func_8044A170_de;
 
 
 

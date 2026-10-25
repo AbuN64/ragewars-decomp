@@ -101,10 +101,18 @@ struct GameplayCamera {
     char unkE0[20]; /* 0xE0: third CShakeAxis */
     f32 shakeHorizontal; /* 0xF4 */
     f32 shakeVertical; /* 0xF8 */
-    char padFC[0x120 - 0xFC];
+    s32 unkFC;
+    s32 unk100;
+    s32 unk104;
+    s32 unk108;
+    s32 unk10C;
+    f32 unk110;
+    f32 unk114;
+    s32 unk118;
+    char pad11C[4];
     s32 monochrome; /* 0x120: ribbons draw grey while set */
     u16 kickStep; /* +0x124: src/func_80234FDC.c */
-    char pad126[0x2];
+    s16 unk126;
     CVector3 position; /* +0x128: camera position */
     char pad134[0x4];
     f32 roll; /* +0x138: src/func_80234FDC.c */
@@ -130,15 +138,27 @@ struct GameplayCamera {
     u16 hudPerspNorm; /* +0x440: src/func_80234FDC.c */
     char pad442[0x6];
     char hudProjection[3][64]; /* +0x448: src/func_80234FDC.c */
-    char pad508[0x20];
+    char pad508[0x10];
+    s32 unk518;
+    f32 unk51C;
+    u8 unk520;
+    u8 unk521;
+    u8 unk522;
+    u8 unk523;
+    u8 unk524;
+    u8 unk525;
+    u8 unk526;
+    u8 unk527;
     f32 farPlane; /* +0x528: src/func_80234FDC.c */
     f32 unk52C;
     f32 unk530;
-    u8 pad534[4];
+    f32 unk534;
     s32 fadeCounter; /* 0x538 */
-    u8 pad53C[8];
+    s32 fogNear; /* 0x53C */
+    s32 unk540;
     s32 fadeEnabled; /* 0x544 */
-    u8 pad548[2];
+    u8 unk548;
+    u8 pad549;
     s8 fadeMode; /* 0x54A */
     s8 fadeRed, fadeGreen, fadeBlue;
     s8 fadeStart, fadeEnd, fadeStep, fadeState;
