@@ -119,70 +119,48 @@ void Nav_MeasureWheelClearance(Vehicle *vehicle, s32 wheel) {
     }
 }
 
-#ifdef NON_MATCHING
-#include "COMMON/AUDIO_CALLBACKS.H"
-#include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/RESIDENT_EVENT_HANDLER.H"
-#include "TYPES.H"
-extern float D_800C1FB0_de;
-extern float D_800C1FB4_de;
-extern float D_800C1FB8_de;
-extern float D_800C1FBC_de;
-extern float D_800C1FC0_de;
-extern float D_800C1FC4_de;
-extern float D_800C1FC8_de;
-extern float D_800C1FCC_de;
-extern float D_800C1FD0_de;
-extern float D_800C1FD4_de;
-void *func_8020993C_de(void *arg0);
-extern f32 D_800C88A8_de[];
 #include "COMMON/AIPROFILE.H"
+extern CVector3 *func_8020993C_de(void *controller);
 typedef struct NavProbeController {
     Player *player;
     u8 pad4[0x1CC];
     f32 reach[8];
     f32 clearance[8];
 } NavProbeController;
-/* Prepares radial probe segments at two heights from the player position.
- * The original keeps these vectors only on the stack; no draw call remains.
- * 3/157 aligned edits: the last clamp is a loop that re-sets zero (cyclic, so flow keeps the dead
- * tail like the ROM); left: the 8.0 load register (f0 vs f2) and the clamp branch (back edge vs bc1tl). */
+/* Builds the eight radial probe segments around the player at two heights (reach at 180, clearance at
+ * 140) from its position through func_8020993C_de, after turning its heading into a sector in [0, 8].
+ * The segments stay on the stack: the debug draw that used them (and the sector) is compiled out. */
 void Nav_PrepareProbeSegments(NavProbeController *controller) {
     CVector3 a, b;
     f32 angle, zero, yA, yB;
     s32 i;
     angle = controller->player->heading;
-    angle -= D_800C1FB0_de;
-    angle += D_800C1FB4_de;
-    while (D_800C1FB8_de <= angle) angle -= D_800C1FB8_de;
+    angle -= 3.1415927f;
+    angle += 0.3926991f;
+    while (6.2831855f <= angle) angle -= 6.2831855f;
     zero = 0.0f;
-    while (angle < zero) angle += D_800C1FBC_de;
-    if (D_800C1FC0_de < angle) angle = D_800C1FC0_de;
-    if (angle < D_800C1FC4_de) angle = D_800C1FC4_de;
-    angle *= D_800C1FC8_de;
-    angle *= D_800C1FCC_de;
+    while (angle < zero) angle += 6.2831855f;
+    if (6.1831856f < angle) angle = 6.1831856f;
+    if (angle < 0.1f) angle = 0.1f;
+    angle *= 0.15915494f;
+    angle *= 8.0f;
     zero = 0.0f;
-    while (angle < zero) {
-        angle = zero;
-        zero = 0.0f;
-    }
-    yA = D_800C1FD0_de;
-    yB = D_800C1FD4_de;
+    if (angle < zero) angle = zero;
+    if (8.0f < angle) angle = 8.0f;
+    yA = 180.0f;
+    yB = 140.0f;
     for (i = 0; i < 8; i++) {
-        a = *(CVector3 *)func_8020993C_de(controller);
-        b = *(CVector3 *)func_8020993C_de(controller);
+        a = *func_8020993C_de(controller);
+        b = *func_8020993C_de(controller);
         a.x += D_800C88A0_de[i].x * controller->reach[i];
         a.z += D_800C88A0_de[i].z * controller->reach[i];
         a.y += yA;
         b.y += yA;
-        a = *(CVector3 *)func_8020993C_de(controller);
-        b = *(CVector3 *)func_8020993C_de(controller);
+        a = *func_8020993C_de(controller);
+        b = *func_8020993C_de(controller);
         a.x += D_800C88A0_de[i].x * controller->clearance[i];
         a.z += D_800C88A0_de[i].z * controller->clearance[i];
         a.y += yB;
         b.y += yB;
     }
 }
-#else
-INCLUDE_ASM("span_1000", Nav_PrepareProbeSegments);
-#endif
