@@ -94,8 +94,8 @@ void * func_8022C55C_de(void *, u32);
 
 
 
-/* Advances an elimination round when rule D_80146918 is on and not paused (func_80245784_de,
-   func_80245798_de): counts the players still in, clears D_800F7D10 while one is waiting, then by the
+/* Advances an elimination round when rule D_80146918 is on and not paused (Camera_IsSequenceActive,
+   Camera_IsSequenceInWindow): counts the players still in, clears D_800F7D10 while one is waiting, then by the
    round state at 0x84 of D_801468A0 revives the first waiting player (crediting a point in state 1,
    scheduling D_80146924 = 3 otherwise) or moves to state 2, and ends the round through func_8022A748_de
    when func_802282EC_de reports it over. */
@@ -179,7 +179,7 @@ void func_80227038_de(s8 *world) {
     func_80227014_S19 *temp_v1_3;
     func_80227014_S22 *temp_v1_4;
 
-    if ((func_80245784_de() == 0) && (func_80245798_de() == 0) && ((initial_rules = &D_801462C8.counters)->m_bFragTagOn != 0)) {
+    if ((Camera_IsSequenceActive() == 0) && (Camera_IsSequenceInWindow() == 0) && ((initial_rules = &D_801462C8.counters)->m_bFragTagOn != 0)) {
         if ((func_802281F0_de(world) != 0) && (initial_rules->elapsed == 0)) {
             func_8022A748_de(world);
             return;
@@ -588,7 +588,7 @@ void Weapons_ReleaseWaitingPlayer(Round *round) {
     ActorNode *node;
     CGameStatus *state;
     s32 waiting;
-    if ((D_80146918 != 0) && (func_80245784_de() == 0) && (func_80245798_de() == 0)) {
+    if ((D_80146918 != 0) && (Camera_IsSequenceActive() == 0) && (Camera_IsSequenceInWindow() == 0)) {
         count = Weapons_CountPlayersIn(round);
         if (count > 0) {
             waiting = Weapons_FindWaitingPlayer(round) != 0;
@@ -645,7 +645,7 @@ s32 Weapons_CheckScoreLimit(Round *round) {
     u32 team, i;
     u32 slot;
     u8 mode;
-    if (func_80245784_de() || func_80245798_de()
+    if (Camera_IsSequenceActive() || Camera_IsSequenceInWindow()
 #if !defined(VERSION_US)
         || gameStatus()->mode == 0
 #endif

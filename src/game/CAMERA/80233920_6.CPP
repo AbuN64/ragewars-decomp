@@ -9,7 +9,7 @@ struct StateRecAt10;
 extern u32 func_802337D0_de(struct StateRecAt10 *state);
 
 void func_80234DE0_de(char *);
-int func_80245798_de(void);
+int Camera_IsSequenceInWindow(void);
 void func_80245864_de(void *);
 f32 func_802459A0_de(void *);
 float func_80245AD8_de(void);
@@ -138,7 +138,7 @@ actor_found:
     camera->unk18 = (f32) (camera->unk18 + D_800D2988);
     func_802343C8_de(camera);
     camera->unk7C = 1;
-    if (func_80245798_de() == 0) {
+    if (Camera_IsSequenceInWindow() == 0) {
         temp_v0 = D_800CB384_de[camera->unk14].fn;
         if (temp_v0 != 0) {
             temp_v0(camera);
@@ -146,13 +146,13 @@ actor_found:
     }
     temp_s4 = &camera->lights[D_800D297C];
     func_802B6900_de(sp28, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f);
-    if ((func_80245798_de() != 0) && (camera != &D_80141008)) {
+    if ((Camera_IsSequenceInWindow() != 0) && (camera != &D_80141008)) {
         func_80245864_de(camera);
     }
     temp_f24 = camera->unk5C;
     initial_zoom = camera->unk60;
     func_802349C0_de(camera);
-    if (func_80245798_de() == 0) {
+    if (Camera_IsSequenceInWindow() == 0) {
         func_802337D0_de(camera->unkB8);
         func_802337D0_de(camera->unkCC);
         func_802337D0_de(camera->unkE0);
@@ -165,7 +165,7 @@ actor_found:
     func_8026EF58_de(spE8, sp68);
     Rsp_MultiplyAffineMatrices(sp128, spE8, sp28);
     func_8027302C(&camera->unk220, sp128);
-    if ((var_s5 != 0) && (var_s5->unk664 & 0x40) && (camera->unk24 == 0) && (func_80245798_de() == 0)) {
+    if ((var_s5 != 0) && (var_s5->unk664 & 0x40) && (camera->unk24 == 0) && (Camera_IsSequenceInWindow() == 0)) {
         f32 temp_f20; 
         var_f1 = (((camera->unk88 * 0.5f * (func_802B7130_de(camera->unk90) + 1.0f)) + 0.8f) > 1.0f) ? 1.0f : ((camera->unk88 * 0.5f * (func_802B7130_de(camera->unk90) + 1.0f)) + 0.8f);
         camera->unk80 = var_f1;
@@ -205,7 +205,7 @@ actor_found:
         }
         camera->unk124 = var_v1_3;
     }
-    if (func_80245798_de() != 0) {
+    if (Camera_IsSequenceInWindow() != 0) {
         fovy = func_802459A0_de(camera);
     } else {
         temp_v0_4 = func_802A23B4_de();
@@ -217,7 +217,7 @@ actor_found:
             fovy = 75.0f;
         }
     }
-    if ((func_80245798_de() != 0) && (camera != &D_80141008)) {
+    if ((Camera_IsSequenceInWindow() != 0) && (camera != &D_80141008)) {
         aspect = camera->unk29C / camera->unk2A0;
     } else if (D_80140FF8.unk0 == 2) {
         aspect = 0.6666667f;
@@ -243,7 +243,7 @@ actor_found:
     camera->fovY = fovy;
     camera->unk74 = (f32) (temp_f0 * temp_f20_3);
     camera->unk78 = (f32) (temp_f0 * temp_f21_3);
-    if (func_80245798_de() != 0) {
+    if (Camera_IsSequenceInWindow() != 0) {
         temp_f5 = (s32) func_80245AD8_de();
         if (temp_f5 > 0) {
             camera->unk528 = (f32) temp_f5;
@@ -323,7 +323,7 @@ actor_found:
     }
     Sched_UpdateSceneEffects(&camera->unk570, camera);
     func_804428F8_de(&camera->messageList);
-    if (func_80245798_de() != 0) {
+    if (Camera_IsSequenceInWindow() != 0) {
         camera->unk58 = ((void *(*)())Scene_FindFloorPolygon)(&D_8011FE88, &camera->unk38);
     }
     captured_state = D_800CD8D0;
@@ -333,13 +333,13 @@ actor_found:
     temp_f23_3 = camera->unk3C;
     temp_f20_4 = camera->unk40;
     temp_f22_3 = camera->unk44;
-    if ((temp_s0_2 != 0) && (func_80245798_de() == 0)) {
+    if ((temp_s0_2 != 0) && (Camera_IsSequenceInWindow() == 0)) {
         temp_f1 = ((temp_f23_3 + temp_f22_3) - func_80275DD4_de(temp_s0_2, ground_x, temp_f20_4)) * 0.09765625f;
         if ((temp_f1 < 11.0f) && (temp_f1 > 5.0f)) {
             camera->unk64 = (s32) temp_s0_2->unk1C;
         }
     }
-    if (func_80245798_de() != 0) {
+    if (Camera_IsSequenceInWindow() != 0) {
         camera->unk64 = (s32) D_800CD8D0;
     }
     if (camera->unk5C > 0.0f) {
@@ -366,7 +366,7 @@ extern void System_ResetTextureCache(void);
 extern s32 func_802A23B4_de(void), GetMenuScreenOwner(void);
 extern s32 Render_SetModePreset(s32);
 extern void Render_ClearDepthRect(void *, s32, s32, s32, s32, s32);
-extern s32 func_80245798_de(void);
+extern s32 Camera_IsSequenceInWindow(void);
 extern u32 func_80245AF8_de(void);
 extern void Render_SetColorDither(s32);
 extern void System_SetupPointLights(void *);
@@ -458,7 +458,7 @@ void Camera_SetupViewportAndFog(Racer *view) {
             green = view->boost & 0xF8;
             blue = view->spin & 0xF8;
         }
-        if (func_80245798_de() != 0) {
+        if (Camera_IsSequenceInWindow() != 0) {
             color = func_80245AF8_de();
             if (color != 0xFF00) {
                 Camera_UnpackColor(color, &red, &green, &blue);

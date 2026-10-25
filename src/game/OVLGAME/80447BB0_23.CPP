@@ -224,7 +224,7 @@ extern void func_8022BB80_de(void *);
 extern void func_80426090_de(void *);
 extern void func_802AA6D0_de(void *, s32, s32);
 extern void func_8021A78C_de(void *);
-extern s32 func_80245784_de(void);
+extern s32 Camera_IsSequenceActive(void);
 extern void func_802458D8_de(void);
 extern void func_802458C4_de(void);
 extern void func_80278E04_de(void *, s32, void *);
@@ -304,7 +304,7 @@ void Ovlgame_InitActorHudState(void *actor) {
     }
     func_8021A78C_de(actor);
     enabled = 0;
-    if (func_80245784_de() == 0) {
+    if (Camera_IsSequenceActive() == 0) {
         enabled = enabled < (u32)(D_8013B2BC ^ 0x3E7);
     }
     if (D_8011FE88.visibilityEnabled != 0) {

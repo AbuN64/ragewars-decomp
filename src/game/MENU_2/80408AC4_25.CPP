@@ -36,7 +36,7 @@ void func_80422B94_de(void) {
         "addiu      $v0, $zero, 0x1\n"
         "bne        $s0, $v0, .Lauto_80422C5C\n"
         "nop\n"
-        "jal        func_80245798_de\n"
+        "jal        Camera_IsSequenceInWindow\n"
         "nop\n"
         "bne        $v0, $s0, .Lauto_80422C5C\n"
         "nop\n"

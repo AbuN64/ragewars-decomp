@@ -16,7 +16,7 @@
 #include "COMMON/SHAREDRECV4.H"
 #include "COMMON/TRIPLE.H"
 #include "stddef.h"
-int func_80245784_de(void);
+int Camera_IsSequenceActive(void);
 f32 func_80274808_de(f32 arg0, f32 arg1, f32 arg2);
 void func_802B2F10_de(void *arg0, s16 arg1);
 /* Spatial mix and runtime envelope controls embedded in a sound voice. */
@@ -136,7 +136,7 @@ void Audio_UpdateVoiceVolume(AudioVolumeVoice *voice) {
             level = 0.0f;
             break;
         }
-        if (func_80245784_de() != 0) {
+        if (Camera_IsSequenceActive() != 0) {
             mix->attenuation = func_80274808_de(mix->attenuation, level, 0.017f);
         } else {
             mix->attenuation = level;

@@ -9,7 +9,7 @@
 #include "COMMON/GLOBALS.H"
 #include "COMMON/ANIMATION.H"
 
-int func_80245798_de(void);
+int Camera_IsSequenceInWindow(void);
 void func_8025476C_de(unsigned int);
 void func_802991D4_de(s32);
 void func_802A2360_de(void);

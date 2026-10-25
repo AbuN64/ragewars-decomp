@@ -130,7 +130,7 @@ void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **han
                 if (!(tri->fields.mask & D_800CD8D0)) {
                     tri->fields.mask = D_800CD8D0;
                 }
-                if (func_80245798_de() != 0) {
+                if (Camera_IsSequenceInWindow() != 0) {
                     tri->fields.mask = D_800CD8D0;
                 }
                 if (tri->fields.flags & 0x2000) {

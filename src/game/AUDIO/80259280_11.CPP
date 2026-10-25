@@ -189,7 +189,7 @@ void Audio_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s32
             }
         }
     }
-    if (func_80245798_de()) {
+    if (Camera_IsSequenceInWindow()) {
         voice->volumeScale = voice->volumeScale * D_800C3F24_de;
     }
     envelope = (SoundEnvelopeControl *)voice->envelope;

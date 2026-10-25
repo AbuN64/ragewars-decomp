@@ -10,7 +10,7 @@ extern float D_800D2988[];
 
 
 
-extern s32 func_80245784_de(void);
+extern s32 Camera_IsSequenceActive(void);
 extern void Render_PlaySoundAtPosition(s16,CVector3,s32,s32),Particle_AddVec3(CVector3 *,CVector3 *,CVector3 *),Particle_ScaleVector(CVector3 *,CVector3 *,f32),func_80272748_de(CVector3 *,f32);
 
 void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMovement *arg2) {
@@ -40,7 +40,7 @@ void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMoveme
     s32 var_s4;
     CVector3 *temp_a0;
 
-    if (func_80245784_de() == 0) {
+    if (Camera_IsSequenceActive() == 0) {
         var_s3 = 0;
         if (player->views5E8.view11B8_137.unk11B8 == 0) {
             temp_f1 = player->views5E8.view6DC_60.unk6DC;

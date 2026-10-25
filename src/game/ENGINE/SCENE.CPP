@@ -55,7 +55,7 @@ extern void Nav_AssignPlatformEndpoints();
 extern s32 func_8020CB3C_de();
 extern void * func_8022A5F4_de();
 extern void func_80236874_de();
-extern int func_80245784_de();
+extern int Camera_IsSequenceActive();
 extern void func_80246E44_de();
 extern void func_8024B2D0_de();
 extern void func_8024BE3C_de();
@@ -255,7 +255,7 @@ void func_80286AA8_de(void *table, s32 target, s32 arg2) {
         func_8044D794_de(table);
     }
     (((struct SharedRecAt1B92C *)(table))->unk1B6AC) = 0;
-    if ((func_80245784_de() == 0) && (var_s5 != 0) && ((((struct SharedRecAt1B92C *)(table))->unk1B41C) != 0) && (D_8014288C == 0)) {
+    if ((Camera_IsSequenceActive() == 0) && (var_s5 != 0) && ((((struct SharedRecAt1B92C *)(table))->unk1B41C) != 0) && (D_8014288C == 0)) {
         func_8028D90C_de();
         temp_v0 = (((struct SharedRecAt1B92C *)(table))->unk1B434);
         if ((u32) (temp_v0 - 0xBC2) < 0x15FU) {

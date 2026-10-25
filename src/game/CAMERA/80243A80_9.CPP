@@ -22,9 +22,9 @@ extern void func_80402BA0_de(void);
 /** Clear the global word at VRAM 0x800E2838. */
 
 
-/* Reports whether func_80245798_de accepts the globally selected record and bit 2 of its word at 0x74
+/* Reports whether Camera_IsSequenceInWindow accepts the globally selected record and bit 2 of its word at 0x74
    is set. */
-extern int func_80245798_de(void);
+extern int Camera_IsSequenceInWindow(void);
 
 /* Returns the globally selected record's word at 0xAC while its word at 0x38 is non-zero, and 0
    otherwise. */
@@ -56,7 +56,7 @@ extern void Resmgr_CopyString(void *arg0, int arg1);
 s32 func_80245814_de(void) {
     s32 result;
     result = 0;
-    if (func_80245784_de() == 0) {
+    if (Camera_IsSequenceActive() == 0) {
         result = func_8024576C_de() == 0;
     }
     return result;
@@ -101,7 +101,7 @@ void func_802458F8_de(void) {
 
 int func_80245908_de(void) {
     Shared_MenuContext *record;
-    if (func_80245798_de() == 0) {
+    if (Camera_IsSequenceInWindow() == 0) {
         return 0;
     }
     record = D_800E2830;

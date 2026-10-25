@@ -5,7 +5,7 @@
 #include "TYPES.H"
 extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
-extern int func_80245784_de(void);
+extern int Camera_IsSequenceActive(void);
 
 extern void func_80245BC0_de(void);
 
@@ -20,7 +20,7 @@ extern f32 D_800C37D0_de;
 
 
 void func_802456A0_de(void) {
-    if (func_80245784_de() != 0) {
+    if (Camera_IsSequenceActive() != 0) {
         s32 owner;
         Shared_MenuContext *record;
 
@@ -40,7 +40,7 @@ void func_802456A0_de(void) {
 }
 
 void func_8024570C_de(void) {
-    if (func_80245784_de() != 0 && func_80245764_de() != 0 && D_800E2830->unknown60 == 0) {
+    if (Camera_IsSequenceActive() != 0 && func_80245764_de() != 0 && D_800E2830->unknown60 == 0) {
         f32 temp = D_800C37D0_de;
         D_800E2830->unknown60 = 1;
         D_800E2830->fade = temp;
@@ -56,12 +56,12 @@ int func_8024576C_de(void) {
     return D_800E2830->resourceDC != -1;
 }
 
-int func_80245784_de(void) {
+int Camera_IsSequenceActive(void) {
     Shared_MenuContext *record = D_800E2830;
     return record->active;
 }
 
-int func_80245798_de(void) {
+int Camera_IsSequenceInWindow(void) {
     Shared_MenuContext *record = D_800E2830;
     float time;
     int var_a0 = 0;

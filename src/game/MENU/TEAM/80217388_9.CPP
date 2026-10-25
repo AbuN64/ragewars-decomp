@@ -4,7 +4,7 @@
 #include "COMMON/EXTERNS_6.H"
 #include "RENDER_2/8025DE50_5.H"
 
-/* Runs a player's team selection menu each frame unless a menu is paused (func_80245784_de): while the
+/* Runs a player's team selection menu each frame unless a menu is paused (Camera_IsSequenceActive): while the
    game is ending (D_8014561C) an open menu is closed through func_80218F84_de; a closed menu opens through
    func_80219124_de when team selection D_801468C4 is on and the player has no team yet (0xFF at 0x92 of its
    controls); while it is open the player is held (0x11B4, 0x11B8) and shielded for 2, and the team slot
@@ -49,7 +49,7 @@ void func_80218B84_de(TeamMenu *menu, SharedPlayer_func_80218B84_de *player) {
     Entry *entry;
     u16 team;
 
-    if (func_80245784_de() != 0) {
+    if (Camera_IsSequenceActive() != 0) {
         return;
     }
     if (D_8014561C != 0 && menu->state != 0) {

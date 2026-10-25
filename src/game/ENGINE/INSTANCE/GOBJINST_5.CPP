@@ -74,7 +74,7 @@ extern Shared_FrameProfile D_80100530;
 
 extern s32 D_801462C8;
 
-extern s32 func_80245798_de(void);
+extern s32 Camera_IsSequenceInWindow(void);
 extern void func_80247F18_de(Shared_PoseActor *, Shared_PosePart *, PoseMatrix, CVector3, CVector3, s32);
 extern void func_802480F0_de(Shared_PoseActor *, s32, PoseMatrix);
 extern f32 Particle_GetActorHeight(Shared_PoseActor *);
@@ -352,11 +352,11 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
                 } else {
                     f.frame = 0;
                 }
-                if (func_80245798_de()) {
+                if (Camera_IsSequenceInWindow()) {
                     f.frame = 0;
                 }
             }
-            if (!func_80245798_de() && ((animA->unk_B == 0 && animB->unk_B == 0) || kind == 1)) {
+            if (!Camera_IsSequenceInWindow() && ((animA->unk_B == 0 && animB->unk_B == 0) || kind == 1)) {
                 f.mode = 0;
             } else {
                 f.mode = 1;

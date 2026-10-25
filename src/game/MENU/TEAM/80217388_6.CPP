@@ -126,7 +126,7 @@ void Team_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *player, s32
     if ((u32)(player->type - 17) < 2) return;
     if (player->blocked) return;
     if (player->delay > 0.0f) return;
-    if (func_80245784_de()) return;
+    if (Camera_IsSequenceActive()) return;
     state->mode = player->config->mode == 1;
     if (player->type == 14) {
         if (!player->enabled) return;

@@ -66,7 +66,7 @@ void func_802349C0_de(void *arg0) {
     if (actor->enabled != 0) {
         var_fs1 = actor->pitch;
         var_fs1f = actor->roll;
-        if (func_80245798_de() == 0) {
+        if (Camera_IsSequenceInWindow() == 0) {
             func_80239EA4_de(arg0, &sp1E8);
             var_fs1f += sp1E8.z;
             temp_fs0f = D_800C31F8_de;

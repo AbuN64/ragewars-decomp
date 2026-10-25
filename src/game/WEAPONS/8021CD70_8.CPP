@@ -160,7 +160,7 @@ void func_80220ED4_de(SharedPlayer *player)
   }
   human = player->views1C.view5D0_43.unk5D0 == 2;
   actor = player;
-  if (func_80245798_de() != 0)
+  if (Camera_IsSequenceInWindow() != 0)
   {
     human = 1;
   }
@@ -340,7 +340,7 @@ void func_80220ED4_de(SharedPlayer *player)
         player->views5E8.view7EC_132.unk7EC = 0.0f;
       }
     }
-    if ((func_80245798_de() == 0) || (((u32) (((u16) player->views5E8.view650_16.state) - 22)) < 12))
+    if ((Camera_IsSequenceInWindow() == 0) || (((u32) (((u16) player->views5E8.view650_16.state) - 22)) < 12))
     {
       update = player->views13B4.view13B4_5.states[player->views5E8.view650_16.state].update;
       if (update != 0)
@@ -639,7 +639,7 @@ void func_80220ED4_de(SharedPlayer *player)
     ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&D_8011FE88, player, sound, player->views5E8.view86C_125.unk86C);
     if (player->views5E8.view870_157.unk870 != player->views5E8.view86C_125.unk86C)
     {
-      if ((func_8024B6A0_de(actor, player->views5E8.view86C_125.unk86C, 0) == 0) && (func_80245798_de() != 0))
+      if ((func_8024B6A0_de(actor, player->views5E8.view86C_125.unk86C, 0) == 0) && (Camera_IsSequenceInWindow() != 0))
       {
         func_8024B6A0_de(actor, 7000, 0);
       }

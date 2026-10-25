@@ -23,9 +23,9 @@
 extern f32 D_800C2CE0_de[2];
 
 /** Start the round-end sequence once no menu or transition is active and any player is flagged. */
-extern int func_80245798_de(void);
+extern int Camera_IsSequenceInWindow(void);
 
-extern int func_80245784_de(void);
+extern int Camera_IsSequenceActive(void);
 
 extern struct Shape_func_8021A2D4_de_2 D_801427FC;
 
@@ -189,7 +189,7 @@ int func_8022A68C_de(char *forcePlayerList) {
     CGameStatus *s;
     CGameStatus *t;
 
-    if (func_80245798_de() != 0 || func_80245784_de() != 0 || D_8011FE88.frozen != 0) {
+    if (Camera_IsSequenceInWindow() != 0 || Camera_IsSequenceActive() != 0 || D_8011FE88.frozen != 0) {
         return 0;
     }
     t = &D_801462C8.counters;

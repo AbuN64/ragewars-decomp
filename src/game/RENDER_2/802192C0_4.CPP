@@ -534,7 +534,7 @@ void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
     s32 shifted;
     char *state;
     s32 remaining;
-    if (func_80245784_de() != 0 || func_8022C460_de(player) != 0 || D_8011FE88.frozen != 0) {
+    if (Camera_IsSequenceActive() != 0 || func_8022C460_de(player) != 0 || D_8011FE88.frozen != 0) {
         return;
     }
     if ((FIELD(u32, &D_801462C8, 0) & 1) && kind != 0x20) {

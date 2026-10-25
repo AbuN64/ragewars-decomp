@@ -32,10 +32,10 @@ extern void func_80233C88_de(Racer *);
 extern void func_80238314_de(Race *, Racer *);
 extern void func_804429D4_de(void *);
 extern void func_802372D4_de(Racer *);
-extern s32 func_80245784_de(void);
-extern s32 func_80245798_de(void);
+extern s32 Camera_IsSequenceActive(void);
+extern s32 Camera_IsSequenceInWindow(void);
 extern void func_8022A3F8_de(World_func_80236F1C_de *, Racer *);
-/* Per-frame race update: clears three per-frame flags of the race's own racer, passes the race's first word to Scene_MarkResourceInUse, runs the 30-frame flash timer (restarted while D_80146894 is set or in mode 3) and while it runs clears the screen with a full-screen viewport, scissor and fill before func_8026D8F8_de, then updates every racer in the list until it ends or func_80245784_de or func_80245798_de reports, updates the race's own racer, hands the list to func_8022A3F8_de when the replay flag of D_80145040 is set, and passes the own racer's block at 0x554 to func_804429D4_de. */
+/* Per-frame race update: clears three per-frame flags of the race's own racer, passes the race's first word to Scene_MarkResourceInUse, runs the 30-frame flash timer (restarted while D_80146894 is set or in mode 3) and while it runs clears the screen with a full-screen viewport, scissor and fill before func_8026D8F8_de, then updates every racer in the list until it ends or Camera_IsSequenceActive or Camera_IsSequenceInWindow reports, updates the race's own racer, hands the list to func_8022A3F8_de when the replay flag of D_80145040 is set, and passes the own racer's block at 0x554 to func_804429D4_de. */
 void func_80236F1C_de(Race *race, s32 arg1)
 {
     Racer *racer;
@@ -85,7 +85,7 @@ void func_80236F1C_de(Race *race, s32 arg1)
         func_80238314_de(race, racer);
         func_804429D4_de(racer->sound);
         func_802372D4_de(racer);
-        if (func_80245784_de() != 0 || func_80245798_de() != 0) {
+        if (Camera_IsSequenceActive() != 0 || Camera_IsSequenceInWindow() != 0) {
             racer = 0;
         } else {
             racer = racer->next;
@@ -144,7 +144,7 @@ void func_802372D4_de(Racer *racer) {
                     x + width, (y + height) - 1.0f);
 }
 
-/* Posts a text as on-screen messages, one per line: when func_80245784_de reports it, the messages already in
+/* Posts a text as on-screen messages, one per line: when Camera_IsSequenceActive reports it, the messages already in
  * the pool's list at 0xE40 are flagged kind 4 and the new ones get kind 1, otherwise kind 2; the text (or
  * D_800D7028 when given D_800D7034) is split at newlines and for each non-empty line the oldest message node
  * of the owner's list at 0xF24 is recycled and set up centred horizontally 80 pixels above the bottom of the
@@ -159,7 +159,7 @@ extern func_80237E70_G1 D_800D7034;
 
 extern s32 D_800E28D0;
 extern void func_80239CE0_de(void *arg0);
-extern s32 func_80245784_de(void);
+extern s32 Camera_IsSequenceActive(void);
 
 
 
@@ -235,7 +235,7 @@ Message *Camera_PostScreenMessage(struct ScreenMessageOwner *owner, struct Scree
     if (pool == 0) {
         return 0;
     }
-    if (func_80245784_de() != 0) {
+    if (Camera_IsSequenceActive() != 0) {
         pending = pool->freeMessages.head;
         if (pending != 0) {
             kind = 1;
@@ -345,7 +345,7 @@ void func_80238314_de(Race *race, Racer *racer) {
     f32 left;
     s32 centered;
 
-    if (func_80245798_de() != 0) {
+    if (Camera_IsSequenceInWindow() != 0) {
         Camera_UpdateScreenMessages((struct ScreenMessageOwner *)race, (struct ScreenMessagePool *)racer);
         return;
     }

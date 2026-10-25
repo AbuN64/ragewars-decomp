@@ -361,5 +361,5 @@ extern f32 D_800D05D0;
 
 extern Box D_800FF208;
 
-extern s32 func_80245784_de(void);
+extern s32 Camera_IsSequenceActive(void);
 #endif

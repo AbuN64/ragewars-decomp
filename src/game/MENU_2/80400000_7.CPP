@@ -20,7 +20,7 @@
 
 extern Record_func_80403458_de *D_800E2830;
 
-extern s32 func_80245784_de(void);
+extern s32 Camera_IsSequenceActive(void);
 extern void func_80402FB4_de(s32 mode, ItemRecAt12 *item);
 extern void func_80278E7C_de(ItemRecAt12 *item);
 extern void func_8028BB1C_de(Shared_World *world, ItemRecAt12 *item, s32 mode);
@@ -38,7 +38,7 @@ void func_80403458_de(void) {
 
     time = D_800E2830->time;
     late = 0;
-    if (func_80245784_de() == 0) {
+    if (Camera_IsSequenceActive() == 0) {
         return;
     }
     if (D_800E2830->active == 0) {

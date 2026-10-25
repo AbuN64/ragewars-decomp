@@ -29,8 +29,8 @@ extern int Weapons_GetPlayerIndex(Root *,ObjRecAt16E0V1 *);
    in humanWon whether that team is the human side's and, when it is not, keeps looking. */
 
 
-/* Ends a match when its conditions are met, unless a menu or pause is up (func_80245784_de,
-   func_80245798_de), the match is locked at 0x1C of the rules D_801468A0 or the game D_8014561C disallows
+/* Ends a match when its conditions are met, unless a menu or pause is up (Camera_IsSequenceActive,
+   Camera_IsSequenceInWindow), the match is locked at 0x1C of the rules D_801468A0 or the game D_8014561C disallows
    it at 0xCC9: outside a cutscene (func_80442A28_de) the time limit at 0x14 of the rules counts down by
    the frame time while func_8022C650_de says the clock runs and ends the match when it expires (clearing
    humanWon at 0xA8 of the rules in trial kind 3); outside a cutscene a score limit reached through Weapons_CheckScoreLimit
@@ -54,7 +54,7 @@ extern int Weapons_GetPlayerIndex(Root *,ObjRecAt16E0V1 *);
 
 
 
-extern s32 func_80245798_de(void);
+extern s32 Camera_IsSequenceInWindow(void);
 
 extern s32 func_80442A28_de(GameSession *);
 
@@ -216,7 +216,7 @@ void func_802283B8_de(World_func_802283B8_de *world) {
     s32 out;
     s32 special;
 
-    if (func_80245784_de() == 0 && func_80245798_de() == 0) {
+    if (Camera_IsSequenceActive() == 0 && Camera_IsSequenceInWindow() == 0) {
         rules = &D_8014561C.rules;
         if (rules->locked != 0 || D_8014561C.settings.allowed == 0) {
             return;
@@ -280,7 +280,7 @@ void func_802285E8_de(char *arg0) {
     }
     actor = ((ObjRecAt20V2 *)(arg0))->unk20;
     while (actor != 0) {
-        if (func_80245798_de() != 0 || ((ObjRecV5 *)(actor))->unk5EA == 0) {
+        if (Camera_IsSequenceInWindow() != 0 || ((ObjRecV5 *)(actor))->unk5EA == 0) {
             void *work;
 
             work = func_8025CC6C_de();
@@ -447,10 +447,10 @@ void func_80228AF4_de(void *arg0, ViewState *viewState) {
     f32 position;
     HudGlobals *hud;
 
-    if (func_80245784_de() != 0) {
+    if (Camera_IsSequenceActive() != 0) {
         return;
     }
-    if (func_80245798_de() != 0) {
+    if (Camera_IsSequenceInWindow() != 0) {
         return;
     }
     hud = &D_801462DE;

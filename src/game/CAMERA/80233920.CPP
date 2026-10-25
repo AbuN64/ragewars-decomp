@@ -110,7 +110,7 @@ void func_80233B14_de(Overlay *overlay) {
 /* Finishes an entity for the frame: when a player in the D_80145060 list owns it, draws its rectangle
  * through func_8029311C_de if that player shows outlines (flag 0x1000), using the entity's colour (or the
  * override colour D_800FEAD8 when D_800C9FE4 is set, darkened when option 0x4000 is set); it then
- * notifies the player list through func_8022A398_de when func_80245798_de is clear and func_802934F8_de is set,
+ * notifies the player list through func_8022A398_de when Camera_IsSequenceInWindow is clear and func_802934F8_de is set,
  * and finishes the entity through func_80245894_de. */
 
 
@@ -124,7 +124,7 @@ extern s32 D_801462C8;
 #include "COMMON/GAME_SESSION.H"
 extern char D_80145040;
 extern void func_8029311C_de(void *, u8 *, s32, s32, s32, s32);
-extern s32 func_80245798_de(void);
+extern s32 Camera_IsSequenceInWindow(void);
 extern s32 func_802934F8_de(void);
 extern void func_8022A398_de(void *, View *);
 extern void func_80245894_de(View *);
@@ -167,7 +167,7 @@ void func_80233C88_de(View *entity) {
         func_8029311C_de(&D_8011FAC0, color, entity->viewport[2], entity->viewport[3], entity->viewport[2] + entity->viewport[0],
                       entity->viewport[3] + entity->viewport[1]);
     }
-    if (func_80245798_de() == 0 && func_802934F8_de() != 0) {
+    if (Camera_IsSequenceInWindow() == 0 && func_802934F8_de() != 0) {
         func_8022A398_de(&D_80145040, entity);
     }
     func_80245894_de(entity);

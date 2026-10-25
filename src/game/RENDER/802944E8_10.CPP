@@ -7,7 +7,7 @@
 /* Opens the idle-time prompt when allowed and reports whether the pause input remains active. */
 
 
-s32 func_80245798_de();                                /* extern */
+s32 Camera_IsSequenceInWindow();                                /* extern */
 s32 func_80245850_de();                                /* extern */
 s32 func_80245B0C_de();                                /* extern */
 void func_804037D4_de(void *);                            /* extern */
@@ -21,7 +21,7 @@ s32 func_80294B9C_de(ObjRecAt26DD4 *arg0) {
     s32 var_v0;
     Prompt *prompt;
 
-    if ((func_80442A28_de(&D_8014561C) == 0) && (func_80245798_de() != 0)) {
+    if ((func_80442A28_de(&D_8014561C) == 0) && (Camera_IsSequenceInWindow() != 0)) {
         if (func_80245B0C_de() == 0x78) {
             prompt = &D_8014561C.unk1284;
             if (prompt->unk88 == 0) {

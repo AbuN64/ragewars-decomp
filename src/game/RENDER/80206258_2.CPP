@@ -15,7 +15,7 @@
 
 extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
 
-extern int func_80245798_de(void);
+extern int Camera_IsSequenceInWindow(void);
 
 /** For each of the object's child slots, attach the child to the record and spawn its effect. */
 extern int D_800D297C;
@@ -51,7 +51,7 @@ void func_802067FC_de(Trigger *trigger) {
 void func_8020682C_de(Shared_Actor *actor, s32 *arg1) {
     extern void func_80285DB0_de(Shared_World *, void *, s32);
     actor->weaponFlags |= 0x2100;
-    if (func_80245798_de() != 0) {
+    if (Camera_IsSequenceInWindow() != 0) {
         *arg1 |= 0x200;
     }
     func_802472F0_de(actor);

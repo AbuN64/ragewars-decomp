@@ -43,7 +43,7 @@ f32 func_8040184C_de(f32 t) {
 #include "COMMON/WORLD.H"
 extern f32 D_800DCB40[];
 extern u8 D_80100030[];
-extern s32 func_80245798_de(void);
+extern s32 Camera_IsSequenceInWindow(void);
 extern void func_802453D4_de(void);
 extern CVector3 Menu_GetTrackEyePosition(f32);
 extern CVector3 Menu_GetTrackTargetPosition(f32);
@@ -73,7 +73,7 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
     if (D_800E2830->active == 0) {
         return;
     }
-    if (func_80245798_de() == 0) {
+    if (Camera_IsSequenceInWindow() == 0) {
         return;
     }
     if (D_800E2830->time < D_800E2830->start || D_800E2830->end < D_800E2830->time) {

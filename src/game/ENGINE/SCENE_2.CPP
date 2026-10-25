@@ -278,7 +278,7 @@ extern Box D_800FF208;
 extern Box D_801031F0;
 extern s32 D_800CD6E0_de;
 extern f32 D_800C520C;
-extern s32 func_80245798_de(void);
+extern s32 Camera_IsSequenceInWindow(void);
 extern void func_8022A1FC_de(void *pool, void *world);
 extern s32 func_8024D160_de(void *actor);
 extern s32 func_8024E1B4_de(void *actor);
@@ -330,7 +330,7 @@ void Engine_UpdateActorVisibility(Shared_World *world) {
         camera = *(GameplayCamera **)((u8 *)settings - 0x1228);
     }
     cull = 0;
-    if (func_80245798_de() == 0) {
+    if (Camera_IsSequenceInWindow() == 0) {
         cull = world->visibilityEnabled == 0;
     }
     i = world->actorCapacity;
@@ -372,7 +372,7 @@ void Engine_UpdateActorVisibility(Shared_World *world) {
             }
         }
     visibility_ready:
-        if (func_80245798_de() && D_800CD6E0_de) {
+        if (Camera_IsSequenceInWindow() && D_800CD6E0_de) {
             if (!(definition->gate & 0x200)) {
                 visible = 0;
             }

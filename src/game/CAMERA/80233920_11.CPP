@@ -10,7 +10,7 @@
 
 
 
-extern s32 func_80245798_de(void);
+extern s32 Camera_IsSequenceInWindow(void);
 
 extern f32 func_80275DD4_de(s32 arg0, f32 arg1, f32 arg2);
 
@@ -46,7 +46,7 @@ void func_80238F24_de(GameplayCamera *arg0, s32 arg1, f32 arg2, f32 arg3, f32 ar
     arg0->unk58 = (void *)arg11;
     arg0->unk5C = arg12;
     arg0->unk60 = arg13;
-    if (func_80245798_de() != 0) {
+    if (Camera_IsSequenceInWindow() != 0) {
         arg0->unk58 = (void *)Scene_FindFloorPolygon(&D_8011FE88, &arg0->unk38);
     }
     object = (s32)arg0->unk58;
@@ -55,13 +55,13 @@ void func_80238F24_de(GameplayCamera *arg0, s32 arg1, f32 arg2, f32 arg3, f32 ar
     z = arg0->unk40;
     w = arg0->unk44;
     arg0->unk64 = D_800CD8D0;
-    if (object != 0 && func_80245798_de() == 0) {
+    if (object != 0 && Camera_IsSequenceInWindow() == 0) {
         value = ((y + w) - func_80275DD4_de(object, x, z)) * D_800C8610;
         if (value < D_800C3524_de && D_800C3528_de < value) {
             arg0->unk64 = ((MenuRules *)(object))->locked;
         }
     }
-    if (func_80245798_de() != 0) {
+    if (Camera_IsSequenceInWindow() != 0) {
         arg0->unk64 = D_800CD8D0;
     }
     if (arg0->unk5C > 0.0f) {

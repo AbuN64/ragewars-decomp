@@ -30,7 +30,7 @@ s32 func_804235A8_eu(void) {
             return 0;
         }
         temp_s0 = D_800E2830->state3C;
-        if ((temp_s0 == 1) && (func_80245798_de() == temp_s0)) {
+        if ((temp_s0 == 1) && (Camera_IsSequenceInWindow() == temp_s0)) {
             func_8040E8D8_de((((Shared_OptionsScreen *)(D_800E4518))->prompt), 0);
             func_8040E8D8_de((((Shared_OptionsScreen *)(D_800E4518))->footer), 0);
             func_8040E8D8_de((((Shared_OptionsScreen *)(D_800E4518))->rumbleIcon), 0);

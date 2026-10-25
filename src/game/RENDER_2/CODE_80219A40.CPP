@@ -30,7 +30,7 @@ void func_80229FA0_de(void *, void *);
 s32 Weapons_GetPlayerIndex(void *, unsigned int);
 s32 func_8022AC00_de(void *);
 int func_8022B178_de(void *);
-int func_80245784_de(void);
+int Camera_IsSequenceActive(void);
 void func_802830CC_de(void *, s32);
 void * func_8028B2F8_de(Shared_World *, u16 *);
 s32 func_802A01E8_de(void);
@@ -110,7 +110,7 @@ void func_80219A40_de(struct Shared_ReactionActor *attacker, void *arg1, struct 
 
     var_s2 = 0;
     kind = -1;
-    if ((func_80245798_de() == 0) && (func_80245784_de() == 0) && !(D_801462C8.flags & 1)) {
+    if ((Camera_IsSequenceInWindow() == 0) && (Camera_IsSequenceActive() == 0) && !(D_801462C8.flags & 1)) {
         temp_s1 = attacker->unk1D8;
         temp_a1 = temp_s1->unk14;
         temp_s6 = temp_s1->unk5E4 > 0;

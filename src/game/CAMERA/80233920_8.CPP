@@ -99,7 +99,7 @@ void func_80236874_de(RaceViewportState *state) {
     view->unk2A0 = (f32) D_800E28D4;
     view->unk2A4 = 0;
     view->unk2A8 = 0;
-    if ((func_80245798_de() == 0) && (func_80245784_de() == 0)) {
+    if ((Camera_IsSequenceInWindow() == 0) && (Camera_IsSequenceActive() == 0)) {
         mode = (u32) state->header.views.count;
         view = state->header.views.head;
         switch (mode) {
@@ -222,7 +222,7 @@ void func_80236874_de(RaceViewportState *state) {
         if ((D_80145088.status[7] != 0) || (func_80245850_de() != 0)) {
             func_80234FEC_de(view);
         }
-        if ((func_80245798_de() != 0) || (func_80245784_de() != 0)) {
+        if ((Camera_IsSequenceInWindow() != 0) || (Camera_IsSequenceActive() != 0)) {
             func_80234FEC_de(view);
         }
         memcpy(&D_800FF208, view->clipBounds, sizeof(D_800FF208));

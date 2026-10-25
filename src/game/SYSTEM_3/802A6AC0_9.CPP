@@ -21,7 +21,7 @@ extern void func_802A9234_de(s32 color);
 
 extern s32 D_800E28D0;
 
-extern s32 func_80245798_de(void);
+extern s32 Camera_IsSequenceInWindow(void);
 extern s32 func_802934F8_de(void);
 extern s32 func_8040C474_de(void);
 
@@ -49,7 +49,7 @@ void func_802A7660_de(Hud *hud, s32 which) {
     u8 *fade;
     s32 value;
 
-    if (func_80245798_de() != 0) {
+    if (Camera_IsSequenceInWindow() != 0) {
         return;
     }
     if (func_802934F8_de() == 0) {

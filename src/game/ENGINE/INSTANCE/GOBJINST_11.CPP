@@ -10,7 +10,7 @@
 #include "RENDER_4/8028FD2C_6.H"
 #include "LISTS/80279520.H"
 
-extern s32 func_80245798_de(void);
+extern s32 Camera_IsSequenceInWindow(void);
 extern CQuatern func_8024D728_de(void *arg1);
 
 
@@ -36,7 +36,7 @@ void func_8024B53C_de(void *levelActor) {
 
     copy = ((struct LevelActor *)(levelActor))->rotation;
     copy_ptr = &copy;
-    if (func_80245798_de() != 0) {
+    if (Camera_IsSequenceInWindow() != 0) {
         copy = func_8024D728_de(levelActor);
     }
 

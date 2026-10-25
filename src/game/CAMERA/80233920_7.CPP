@@ -11,7 +11,7 @@
 
 /* Draws one view of the game world: after the per-frame setup (func_802909F0_de) it runs the world, player,
  * effect, particle, object and translucent passes for the view in order, skipping the player and effect
- * passes in the alternate HUD mode (func_80245798_de) and running the extra passes only when func_802934F8_de
+ * passes in the alternate HUD mode (Camera_IsSequenceInWindow) and running the extra passes only when func_802934F8_de
  * allows; when debug flag 0x200 is set it then clears the view's rectangle at 0x29C..0x2A8 to the far
  * depth with a fill-rectangle command. */
 
@@ -22,7 +22,7 @@ extern char D_801379C0;
 extern s32 D_801462C8;
 
 extern void func_80289084_de(char *, char *);
-extern s32 func_80245798_de(void);
+extern s32 Camera_IsSequenceInWindow(void);
 extern void func_80228798_de(void *, char *);
 extern s32 func_802934F8_de(void);
 extern void func_8022A2A0_de(void *, char *);
@@ -49,7 +49,7 @@ void func_802362E8_de(char *view, char *world) {
 
     func_802909F0_de();
     func_80289084_de(world, view);
-    if (func_80245798_de() == 0) {
+    if (Camera_IsSequenceInWindow() == 0) {
         func_80228798_de(&D_80145040, view);
     }
     if (func_802934F8_de() != 0) {
@@ -57,7 +57,7 @@ void func_802362E8_de(char *view, char *world) {
     }
     func_8028B028_de(world, view);
     func_802A5180_de(&D_801379C0, view);
-    if (func_80245798_de() == 0) {
+    if (Camera_IsSequenceInWindow() == 0) {
         func_802905F4_de(world + 0x11778, view);
     }
     Scene_DrawTransparentObjects(world, view);
@@ -66,7 +66,7 @@ void func_802362E8_de(char *view, char *world) {
     func_8028B160_de(world, view);
     Render_DrawLinkedGeometry(&D_801379C0, view);
     Camera_DrawObjectFlares(view);
-    if (func_80245798_de() == 0 && func_802934F8_de() != 0) {
+    if (Camera_IsSequenceInWindow() == 0 && func_802934F8_de() != 0) {
         func_8022A328_de(&D_80145040, view);
     }
     if (D_801462C8 & 0x200) {

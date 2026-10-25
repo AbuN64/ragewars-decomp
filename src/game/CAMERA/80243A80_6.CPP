@@ -56,7 +56,7 @@ extern void func_80286AA8_de(void *, s32, s32);
 
 extern s32 func_8040332C_de(void);
 
-extern s32 func_80245784_de(void);
+extern s32 Camera_IsSequenceActive(void);
 
 extern u32 func_80245850_de(void);
 
@@ -142,7 +142,7 @@ s32 func_80244FB4_de(void) {
     }
     func_804009F4_de(D_800E2830->resourceDC);
     D_800E2830->resourceDC = none;
-    if (func_80245784_de() != 0) {
+    if (Camera_IsSequenceActive() != 0) {
         if (func_80245850_de() != 0) {
             D_800E2830->time20 = D_800E2830->time;
         } else {
@@ -181,7 +181,7 @@ void func_802450CC_de(void) {
     }
     D_800CB420_de = D_800D2978;
     if (func_80244FB4_de() == 0) {
-        if (func_80245784_de() != 0) {
+        if (Camera_IsSequenceActive() != 0) {
             if (func_80245850_de() != 0) {
                 D_800E2830->time20 = D_800E2830->time;
             } else {
@@ -212,7 +212,7 @@ void func_802450CC_de(void) {
     if (D_800E2830->unknown60 != 0 && (D_800E2830->fade -= 2.0f * (D_800D2988 * 0.06666667f)) < -0.5f) {
         D_800E2830->unknown60 = 0;
         D_800E2830->fade = 0.0f;
-        if (func_80245784_de() != 0) {
+        if (Camera_IsSequenceActive() != 0) {
             func_80245B74_de(1);
             func_80245BC0_de();
             if (D_800E2830->owner != 0) {
@@ -227,7 +227,7 @@ void func_802450CC_de(void) {
         return;
     }
     func_80244FB4_de();
-    if (func_80245784_de() != 0 && func_80245850_de() == 0 && D_80140FB4.busy == 0 && D_80140FB4.paused == 0 &&
+    if (Camera_IsSequenceActive() != 0 && func_80245850_de() == 0 && D_80140FB4.busy == 0 && D_80140FB4.paused == 0 &&
         D_800E2830->unknown104[0] == 0) {
         if (D_800E2830->time >= D_800E2830->end && D_800E2830->initialized44 == 0) {
             FuncPtr cue = D_800E2830->callback10;

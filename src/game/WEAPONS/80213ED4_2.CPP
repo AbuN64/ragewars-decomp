@@ -192,7 +192,7 @@ extern f32 D_800C2168_de;
 extern CollisionInfo D_80100030;
 extern Instance8020CD74 *D_801041F0;
 extern char D_80145040[];
-extern s32 func_80245798_de(void);
+extern s32 Camera_IsSequenceInWindow(void);
 extern s32 func_80245B0C_de(void);
 extern Actor_func_80214DD4_de *Weapons_FindNearestLivePlayer(void *players, CVector3 point, void *exclude);
 extern Actor_func_80214DD4_de *Weapons_FindNearestPlayer(void *players, CVector3 point);
@@ -240,7 +240,7 @@ Actor_func_80214DD4_de *Weapons_SelectCombatTarget(Actor_func_80214DD4_de *actor
     count = 0;
     best = 0;
     ok = 1;
-    if (func_80245798_de() != 0) {
+    if (Camera_IsSequenceInWindow() != 0) {
         ok = 0;
         if (func_80245B0C_de() >= 10) {
             ok = func_80245B0C_de() < 61;
