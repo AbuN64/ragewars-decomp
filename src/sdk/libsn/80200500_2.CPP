@@ -1,13 +1,11 @@
-#include "include_asm.h"
 #include "TYPES.H"
 #include "IO/DEBUG_MEMORY.H"
 
-#ifdef NON_MATCHING
 /* Rebuild the debugger memory map: entries 16-47 describe the valid pages of the 32 TLB entries
  * (snapshot taken by Libgultra_TrwReadTlbEntry), entries 0-15 copy the static region table from
  * KSEG0 (0x80000000) up to the end marker (last == 0xFFFFFFFF); unused entries get first = -1. */
 void Libsn_EnumerateMemoryRanges(void) {
-    u32 addressSpaceId, pageMask, entryHi, entryLo0, entryLo1, pageSize, first, last, flags, rangeCount, supportedMask, i;
+    u32 addressSpaceId, pageMask, entryHi, entryLo0, entryLo1, pageSize, first, rangeCount, supportedMask, i;
     u32 *entry;
     u32 *boundary;
     u32 *supportedMasks;
@@ -54,11 +52,9 @@ void Libsn_EnumerateMemoryRanges(void) {
     rangeCount = 0;
     do {
         D_800F2D00[rangeCount].first = first;
-        last = *boundary++;
-        flags = *boundary++;
-        D_800F2D00[rangeCount].last = last;
-        D_800F2D00[rangeCount].flags = flags;
-        first = last + 1;
+        D_800F2D00[rangeCount].last = *boundary++;
+        D_800F2D00[rangeCount].flags = *boundary++;
+        first = D_800F2D00[rangeCount].last + 1;
         rangeCount++;
     } while (first != 0);
     for (; rangeCount < 16; rangeCount++) {
@@ -66,6 +62,3 @@ void Libsn_EnumerateMemoryRanges(void) {
         D_800F2D00[rangeCount].flags = 0;
     }
 }
-#else
-INCLUDE_ASM("span_1000", Libsn_EnumerateMemoryRanges);
-#endif
