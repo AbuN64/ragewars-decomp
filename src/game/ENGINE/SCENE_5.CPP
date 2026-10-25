@@ -260,16 +260,12 @@ void func_80289970_de(ObjectRecAtBC **volumes, s32 count, CVector3 *position, Sh
     lighting->direction[2] = (s32)(combinedDirection.z * 127.0f);
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-#include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/OBJECTLINKS180_2.H"
-#include "TYPES.H"
-s32 func_80204308_de(void *, void *, void *);
 #include "COMMON/WORLD.H"
 #include "COMMON/LEVEL_ACTOR.H"
+s32 func_80204308_de(void *, void *, void *);
 typedef struct SceneTriggerDefinition {
     ActorDefinitionHeader header;
     char pad18[8];
@@ -277,190 +273,165 @@ typedef struct SceneTriggerDefinition {
     f32 exitRadius;
     f32 touchRadius;
 } SceneTriggerDefinition;
-/* 12/263 aligned edits; remaining: scalar load scheduling and loop join. */
-void Scene_UpdateMovementTriggers(void *arg0, void *actor, CVector3 *before, CVector3 *arg3) {
-    s32 sp10;
-    s32 sp14;
-    f32 temp_fs0f;
-    f32 temp_fs1f;
-    f32 temp_fs2;
-    f32 temp_ft0;
-    f32 temp_fv0;
-    f32 temp_fv0_2;
-    f32 temp_fv0_3;
-    f32 temp_fv0_4;
-    f32 temp_fv0_5;
-    f32 temp_fv0f;
-    f32 temp_fv1;
-    f32 temp_fv1f;
-    f32 var_fs0;
-    f32 var_ft0f;
-    s32 temp_v0;
-    s32 flags;
-    s32 temp_v0_3;
-    s32 temp_v0_4;
+/* Fires the movement triggers an actor crosses between two positions. Only kinds 0xB and 1 trip triggers. Kind 6
+ * triggers are rings (enter when moving inside enterRadius from outside it, exit when moving outside exitRadius
+ * from inside it); kinds 10 and 7 fire their enter event inside their radius while the two actors overlap in height,
+ * and a kind 10 trigger first asks func_80204308_de. Distances are measured in the xz plane. */
+void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVector3 *before, CVector3 *after) {
+    s32 isKindB;
+    s32 isKind1;
+    f32 bottom;
+    f32 top;
+    f32 triggerBottom;
+    f32 triggerTop;
+    f32 beforeDistance;
+    f32 afterDistance;
+    f32 enterRadius;
+    f32 exitRadius;
+    f32 radius;
     s32 kind;
-    s32 var_a0;
-    s32 var_a1;
-    s32 var_a2;
-    s32 var_s1;
-    s32 var_s1_2;
-    s32 var_s2;
-    s32 var_s3;
-    s32 var_s4;
+    s32 flags;
+    s32 enterOnB;
+    s32 enterOn1;
+    s32 exitOnB;
+    s32 exitOn1;
+    s32 entering;
+    s32 exiting;
+    s32 hit;
+    s32 enterMode;
+    s32 exitMode;
+    s32 ring;
+    s32 checkHeight;
     s32 i;
-    s32 var_v0;
-    s32 var_v1;
-    s32 var_v1_2;
     SceneTriggerDefinition *definition;
-    LevelActor *temp_s0;
+    LevelActor *trigger;
 
-    if ((before->x != arg3->x) || (before->y != arg3->y) || (before->z != arg3->z)) {
-        temp_v0 = ((LevelActor *)actor)->definition->kind;
-        sp10 = temp_v0 == 0xB;
-        sp14 = temp_v0 == 1;
-        temp_fs1f = ((LevelActor *)actor)->position0.y + func_8024E420_de(actor);
-        i = 0;
-        temp_fs2 = temp_fs1f + Particle_GetActorHeight(actor);
-        if (((Shared_World *)arg0)->flaggedCount > 0) {
-            do {
-                temp_s0 = ((Shared_World *)arg0)->flagged[i];
-                var_s4 = 0;
-                if (temp_s0 != actor) {
-                    var_s1 = 0;
-                    temp_fs0f = temp_s0->position0.y + func_8024E420_de(temp_s0);
-                    temp_fv0 = temp_fs0f + Particle_GetActorHeight(temp_s0);
-                    definition = (SceneTriggerDefinition *)temp_s0->definition;
-                    kind = definition->header.kind;
-                    switch (kind) {
-                    case 6:
-                        var_s2 = 0;
-                        var_s4 = 1;
-                        var_s3 = 1;
-                        flags = definition->header.flags;
-                        var_ft0f = definition->enterRadius;
-                        var_fs0 = definition->exitRadius;
-                        var_a0 = flags & 4;
-                        var_v1 = flags & 8;
-                        var_a2 = flags & 0x10;
-                        var_a1 = flags & 0x20;
-                        break;
-                    case 10:
-                        var_s2 = 1;
-                        var_s3 = 0;
-                        var_a2 = 0;
-                        var_a1 = 0;
-                        var_s1 = 1;
-                        temp_v0_3 = definition->header.flags;
-                        var_ft0f = definition->exitRadius;
-                        var_fs0 = 0.0f;
-                        var_a0 = temp_v0_3 & 4;
-                        var_v1 = temp_v0_3 & 8;
-                        break;
-                    case 7:
-                        var_s2 = 1;
-                        var_s3 = 0;
-                        var_a2 = 0;
-                        var_a1 = 0;
-                        var_s1 = 1;
-                        temp_v0_4 = definition->header.flags;
-                        var_ft0f = definition->touchRadius;
-                        var_fs0 = 0.0f;
-                        var_a0 = temp_v0_4 & 8;
-                        var_v1 = temp_v0_4 & 0x10;
-                        break;
-                    default:
-                        var_s2 = 0;
-                        var_ft0f = 0.0f;
-                        var_a0 = 0;
-                        var_v1 = 0;
-                        var_s3 = 0;
-                        var_a2 = 0;
-                        var_a1 = 0;
-                        var_fs0 = 0.0f;
-                        break;
+    if (before->x == after->x && before->y == after->y && before->z == after->z) {
+        return;
+    }
+    kind = actor->definition->kind;
+    isKindB = kind == 0xB;
+    isKind1 = kind == 1;
+    bottom = actor->position0.y + func_8024E420_de(actor);
+    top = bottom + Particle_GetActorHeight(actor);
+    for (i = 0; i < world->flaggedCount; i++) {
+        trigger = world->flagged[i];
+        if (trigger == actor) {
+            continue;
+        }
+        ring = 0;
+        checkHeight = 0;
+        triggerBottom = trigger->position0.y + func_8024E420_de(trigger);
+        triggerTop = triggerBottom + Particle_GetActorHeight(trigger);
+        definition = (SceneTriggerDefinition *)trigger->definition;
+        switch (definition->header.kind) {
+        case 6:
+            enterMode = 0;
+            ring = 1;
+            exitMode = 1;
+            flags = definition->header.flags;
+            enterRadius = definition->enterRadius;
+            exitRadius = definition->exitRadius;
+            enterOnB = flags & 4;
+            enterOn1 = flags & 8;
+            exitOnB = flags & 0x10;
+            exitOn1 = flags & 0x20;
+            break;
+        case 10:
+            enterMode = 1;
+            exitMode = 0;
+            exitOnB = 0;
+            exitOn1 = 0;
+            checkHeight = 1;
+            flags = definition->header.flags;
+            enterRadius = definition->exitRadius;
+            exitRadius = 0.0f;
+            enterOnB = flags & 4;
+            enterOn1 = flags & 8;
+            break;
+        case 7:
+            enterMode = 1;
+            exitMode = 0;
+            exitOnB = 0;
+            exitOn1 = 0;
+            checkHeight = 1;
+            flags = definition->header.flags;
+            enterRadius = definition->touchRadius;
+            exitRadius = 0.0f;
+            enterOnB = flags & 8;
+            enterOn1 = flags & 0x10;
+            break;
+        default:
+            enterMode = 0;
+            enterRadius = 0.0f;
+            enterOnB = 0;
+            enterOn1 = 0;
+            exitMode = 0;
+            exitOnB = 0;
+            exitOn1 = 0;
+            exitRadius = 0.0f;
+            break;
+        }
+        if (checkHeight && (top < triggerBottom || triggerTop < bottom)) {
+            entering = 0;
+            exiting = 0;
+        } else {
+            entering = 0;
+            if ((isKindB && enterOnB) || (isKind1 && enterOn1)) {
+                entering = 1;
+            }
+            exiting = 0;
+            if ((isKindB && exitOnB) || (isKind1 && exitOn1)) {
+                exiting = 1;
+            }
+        }
+        if (entering || exiting) {
+            beforeDistance = (before->x - trigger->position0.x) * (before->x - trigger->position0.x) +
+                             (before->z - trigger->position0.z) * (before->z - trigger->position0.z);
+            afterDistance = (after->x - trigger->position0.x) * (after->x - trigger->position0.x) +
+                            (after->z - trigger->position0.z) * (after->z - trigger->position0.z);
+            if (entering) {
+                if (ring) {
+                    radius = enterRadius * enterRadius;
+                    hit = 0;
+                    if (radius < beforeDistance && afterDistance <= radius) {
+                        hit = 1;
                     }
-                    if ((var_s1 != 0) && ((var_v0 = 0, (temp_fs2 < temp_fs0f)) || (temp_fv0 < temp_fs1f))) {
-                        var_s1_2 = var_v0;
-                    } else {
-                        var_v0 = 0;
-                        if (sp10 != 0) {
-                            if (var_a0 != 0) {
-                                var_v0 = 1;
-                            } else {
-                                goto block_23;
-                            }
-                        } else {
-block_23:
-                            if ((sp14 != 0) && (var_v1 != 0)) {
-                                var_v0 = 1;
-                            }
-                        }
-                        var_s1_2 = 0;
-                        if (((sp10 != 0) && (var_a2 != 0)) || ((sp14 != 0) && (var_a1 != 0))) {
-                            var_s1_2 = 1;
-                        }
-                    }
-                    if ((var_v0 != 0) || (var_s1_2 != 0)) {
-                        temp_fv1f = before->x - temp_s0->position0.x;
-                        temp_fv1 = before->z - temp_s0->position0.z;
-                        temp_fv0f = arg3->x - temp_s0->position0.x;
-                        temp_fv0_3 = arg3->z - temp_s0->position0.z;
-                        temp_fv0 = (temp_fv1f * temp_fv1f) + (temp_fv1 * temp_fv1);
-                        temp_fs0f = (temp_fv0f * temp_fv0f) + (temp_fv0_3 * temp_fv0_3);
-                        if (var_v0 != 0) {
-                            if (var_s4 != 0) {
-                                temp_fv0_4 = var_ft0f * var_ft0f;
-                                var_v1_2 = 0;
-                                if (temp_fv0_4 < temp_fv0) {
-                                    if (temp_fs0f <= temp_fv0_4) {
-                                        var_v1_2 = 1;
-                                    }
-                                }
-                            } else {
-                                var_v1_2 = 1;
-                                if (!(temp_fs0f <= (var_ft0f * var_ft0f))) {
-                                    var_v1_2 = 0;
-                                }
-                            }
-                            if (var_v1_2 != 0) {
-                                if ((temp_s0->definition->kind == 0xA) && (var_s2 == 1)) {
-                                    var_v1_2 = func_80204308_de(temp_s0, &temp_s0->behaviorFlags, actor);
-                                }
-                                if (var_v1_2 != 0) {
-                                    func_80214178_de(temp_s0, &temp_s0->behaviorFlags, var_s2);
-                                }
-                            }
-                        }
-                        if (var_s1_2 != 0) {
-                            if (var_s4 != 0) {
-                                temp_fv0_5 = var_fs0 * var_fs0;
-                                var_v1_2 = 0;
-                                if (temp_fv0 <= temp_fv0_5) {
-                                    if (temp_fv0_5 < temp_fs0f) {
-                                        var_v1_2 = 1;
-                                    }
-                                }
-                            } else {
-                                var_v1_2 = 1;
-                                if (!((var_fs0 * var_fs0) < temp_fs0f)) {
-                                    var_v1_2 = 0;
-                                }
-                            }
-                            if (var_v1_2 != 0) {
-                                func_80214178_de(temp_s0, &temp_s0->behaviorFlags, var_s3);
-                            }
-                        }
+                } else {
+                    hit = 1;
+                    if (!(afterDistance <= enterRadius * enterRadius)) {
+                        hit = 0;
                     }
                 }
-                i += 1;
-            } while (i < ((Shared_World *)arg0)->flaggedCount);
+                if (hit) {
+                    if (trigger->definition->kind == 10 && enterMode == 1) {
+                        hit = func_80204308_de(trigger, &trigger->behaviorFlags, actor);
+                    }
+                    if (hit) {
+                        func_80214178_de(trigger, &trigger->behaviorFlags, enterMode);
+                    }
+                }
+            }
+            if (exiting) {
+                if (ring) {
+                    radius = exitRadius * exitRadius;
+                    hit = 0;
+                    if (beforeDistance <= radius && radius < afterDistance) {
+                        hit = 1;
+                    }
+                } else {
+                    hit = 1;
+                    if (!(exitRadius * exitRadius < afterDistance)) {
+                        hit = 0;
+                    }
+                }
+                if (hit) {
+                    func_80214178_de(trigger, &trigger->behaviorFlags, exitMode);
+                }
+            }
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", Scene_UpdateMovementTriggers);
-#endif
 
 #include "TYPES.H"
 #include "COMMON/COLORENTRY.H"

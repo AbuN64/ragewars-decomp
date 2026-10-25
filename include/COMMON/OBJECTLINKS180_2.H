@@ -478,7 +478,7 @@ struct func_8024B4E4_S1 {
 };
 
 extern void func_802472F0_de(void *);
-extern void Scene_UpdateMovementTriggers(void *, void *, CVector3 *, CVector3 *);
+extern void Scene_UpdateMovementTriggers(struct Shared_World *, struct LevelActor *, CVector3 *, CVector3 *);
 extern u8 D_800C38F4_de[];
 typedef struct Actor36 {
     u8 pad0[8];
