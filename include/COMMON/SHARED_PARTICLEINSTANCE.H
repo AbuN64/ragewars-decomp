@@ -23,15 +23,6 @@ struct Shared_ParticleInstance {
     char pad3C[0x14];
 };
 
-struct func_8027EB00_S2;
-struct func_8027EB00_S2 {
-    char pad0[0x8];
-    char unk8;
-    char pad8[0x110 - 0x8 - sizeof(char)];
-    s32 unk110;
-    s32 unk114;
-    void *unk118;
-};
 
 struct Actor_func_8027B428_de;
 typedef struct Actor_func_8027B428_de Actor_func_8027B428_de;
@@ -74,24 +65,7 @@ union func_8027C5A0_S1_U118 {
 union func_8027C5A0_S1_U118;
 typedef union func_8027C5A0_S1_U118 func_8027C5A0_S1_U118;
 
-struct func_8027C5A0_S1;
-struct func_8027C5A0_S1 {
-    char pad0[0x1C];
-    Triple unk1C;
-    char pad1C[0x5C - 0x1C - sizeof(Triple)];
-    s32 unk5C;
-    char pad5C[0x118 - 0x5C - sizeof(s32)];
-    func_8027C5A0_S1_U118 unk118;
-    char pad118[0x12C - 0x118 - sizeof(func_8027C5A0_S1_U118)];
-    void * unk12C;
-    char pad12C[0x130 - 0x12C - sizeof(void*)];
-    s32 unk130;
-    char pad130[0x134 - 0x130 - sizeof(s32)];
-    s32 unk134;
-};
 
-struct func_8027D950_S1;
-typedef struct func_8027D950_S1 func_8027D950_S1;
 
 struct Shared_ParticleInstance;
 typedef struct Shared_ParticleInstance Shared_ParticleInstance;
@@ -109,19 +83,13 @@ struct RecordRecAt2C {
     EntryRecAt4V4 *second[3];
 };
 
-struct NodeCode8027A0F4;
-typedef struct NodeCode8027A0F4 NodeCode8027A0F4;
 
-struct func_8027EB00_S2;
-typedef struct func_8027EB00_S2 func_8027EB00_S2;
 
 extern int D_801042C4;
 
 struct Actor_func_8027DAD0_de;
 typedef struct Actor_func_8027DAD0_de Actor_func_8027DAD0_de;
 
-struct ActorCode8027A0F4;
-typedef struct ActorCode8027A0F4 ActorCode8027A0F4;
 
 struct Shared_ParticleInstance;
 
@@ -136,18 +104,6 @@ struct ActorDef {
     ObjRecAt18V3 *size;
 };
 struct ActorDef;
-struct ActorCode8027A0F4;
-struct ActorCode8027A0F4 {
-    Shared_ParticleInstance instance;
-    char pad50[0xC8];
-    struct ActorDef *def;
-    char pad11C[0x24];
-    f32 damage;
-    char pad144[8];
-    s16 health;
-    char pad14E[0xA];
-    f32 radius;
-};
 
 struct Shared_Particle;
 
@@ -172,11 +128,6 @@ struct Shared_ParticleTarget {
     s32 extraUses;
 };
 
-struct func_80282E6C_Table;
-struct func_80282E6C_Table {
-    char pad[0xA8];
-    u16 unkA8;
-};
 
 extern float D_800C4E60_de;
 
@@ -191,18 +142,10 @@ struct Object_func_80281A9C_de {
     s32 count;
 };
 
-struct World_func_80281A9C_de;
-struct World_func_80281A9C_de {
-    char pad0[0xE54];
-    Object_func_80281A9C_de *objects[64];
-    s32 objectCount;
-};
 
 struct Shared_Particle;
 typedef struct Shared_Particle Shared_Particle;
 
-struct func_8027C324_S1;
-typedef struct func_8027C324_S1 func_8027C324_S1;
 
 union func_8027C324_S1_U118;
 union func_8027C324_S1_U118 {
@@ -210,8 +153,6 @@ union func_8027C324_S1_U118 {
     void * v1;
 };
 
-struct func_80282E6C_S1;
-typedef struct func_80282E6C_S1 func_80282E6C_S1;
 
 struct Ground;
 struct Ground {
@@ -224,20 +165,7 @@ struct Ground {
 
 extern int D_8010029C;
 
-struct func_80282E6C_Table;
-typedef struct func_80282E6C_Table func_80282E6C_Table;
 
-struct func_8027D950_S1;
-struct func_8027D950_S1 {
-    char pad0[0x8];
-    s32 unk8;
-    char pad8[0xC - 0x8 - sizeof(s32)];
-    f32 unkC;
-    char padC[0x10 - 0xC - sizeof(f32)];
-    s32 unk10;
-    char pad10[0x1D0 - 0x10 - sizeof(s32)];
-    func_80209DAC_S2_U93 unk1D0;
-};
 
 struct Parent;
 struct Parent {
@@ -275,43 +203,13 @@ struct Actor_func_8027DAD0_de {
     s8 bone;
 };
 
-struct func_8027DAA4_S1;
-struct func_8027DAA4_S1 {
-    char pad0[0x160];
-    char unk160;
-};
 
 
-struct func_80282E6C_S3;
-struct func_80282E6C_S3 {
-    char pad0[0x140];
-    char unk140;
-};
 
 union func_80282E6C_S1_U8;
 typedef union func_80282E6C_S1_U8 func_80282E6C_S1_U8;
 
-struct func_80282E6C_S1;
-struct func_80282E6C_S1 {
-    char pad0[0x4];
-    u16 unk4;
-    char pad4[0x8 - 0x4 - sizeof(u16)];
-    func_80282E6C_S1_U8 unk8;
-    char pad8[0x118 - 0x8 - sizeof(func_80282E6C_S1_U8)];
-    void * unk118;
-    char pad118[0x12C - 0x118 - sizeof(void*)];
-    void * unk12C;
-    char pad12C[0x1D0 - 0x12C - sizeof(void*)];
-    s8 unk1D0;
-};
 
-struct func_80282E6C_S5;
-struct func_80282E6C_S5 {
-    char pad0[0x70];
-    u16 unk70;
-    char pad70[0x8C - 0x70 - sizeof(u16)];
-    u16 unk8C;
-};
 
 union func_8027C324_S1_U118;
 typedef union func_8027C324_S1_U118 func_8027C324_S1_U118;
@@ -462,110 +360,23 @@ struct Shared_Particle {
     u8 reserved1DA[2];
 };
 
-struct func_8027C808_S1;
-typedef struct func_8027C808_S1 func_8027C808_S1;
 
-struct func_80282E6C_S3;
-typedef struct func_80282E6C_S3 func_80282E6C_S3;
 
-struct func_8027C808_S1;
-struct func_8027C808_S1 {
-    char pad0[0x1C];
-    Triple unk1C;
-    char pad1C[0x5C - 0x1C - sizeof(Triple)];
-    s32 unk5C;
-    char pad5C[0x118 - 0x5C - sizeof(s32)];
-    func_8027C5A0_S1_U118 unk118;
-    char pad118[0x12C - 0x118 - sizeof(func_8027C5A0_S1_U118)];
-    void * unk12C;
-    char pad12C[0x130 - 0x12C - sizeof(void*)];
-    s32 unk130;
-    char pad130[0x134 - 0x130 - sizeof(s32)];
-    s32 unk134;
-    char pad134[0x18C - 0x134 - sizeof(s32)];
-    char unk18C;
-    char pad18C[0x1BA - 0x18C - sizeof(char)];
-    s8 unk1BA;
-    char pad1BA[0x1C4 - 0x1BA - sizeof(s8)];
-    s32 unk1C4;
-};
 
-struct func_8027D950_S2;
-typedef struct func_8027D950_S2 func_8027D950_S2;
 
-struct func_80282E6C_S5;
-typedef struct func_80282E6C_S5 func_80282E6C_S5;
 
-struct func_80282E6C_S2;
-typedef struct func_80282E6C_S2 func_80282E6C_S2;
 
-struct NodeCode8027A0F4;
-struct NodeCode8027A0F4 {
-    char pad0[0x5C];
-    s32 flags;
-    char pad60[0xD0];
-    s32 *counter;
-    char pad134[4];
-    s32 resource;
-    char pad13C[0x9D];
-    u8 marker;
-    char pad1DA[0xA];
-    void *handle;
-    char pad1E8[4];
-    struct NodeCode8027A0F4 *next;
-};
 
 struct Shared_ParticleTarget;
 typedef struct Shared_ParticleTarget Shared_ParticleTarget;
 
-struct func_8027D950_S2;
-struct func_8027D950_S2 {
-    char pad0[0xE54];
-    char unkE54;
-    char padE54[0xE94 - 0xE54 - sizeof(char)];
-    char unkE94;
-};
 
 struct RecordRecAt2C;
 typedef struct RecordRecAt2C RecordRecAt2C;
 
-struct func_8027C5A0_S1;
-typedef struct func_8027C5A0_S1 func_8027C5A0_S1;
 
-struct func_8027C324_S1;
-struct func_8027C324_S1 {
-    char pad0[0x1C];
-    Triple unk1C;
-    char pad1C[0x5C - 0x1C - sizeof(Triple)];
-    s32 unk5C;
-    char pad5C[0x118 - 0x5C - sizeof(s32)];
-    func_8027C324_S1_U118 unk118;
-    char pad118[0x12C - 0x118 - sizeof(func_8027C324_S1_U118)];
-    void * unk12C;
-    char pad12C[0x130 - 0x12C - sizeof(void*)];
-    s32 unk130;
-    char pad130[0x134 - 0x130 - sizeof(s32)];
-    s32 unk134;
-    char pad134[0x18C - 0x134 - sizeof(s32)];
-    char unk18C;
-    char pad18C[0x1B9 - 0x18C - sizeof(char)];
-    s8 unk1B9;
-    char pad1B9[0x1C4 - 0x1B9 - sizeof(s8)];
-    s32 unk1C4;
-};
 
-struct func_80282E6C_S2;
-struct func_80282E6C_S2 {
-    char pad0[0x8];
-    CVector3 unk8;
-    char pad8[0x698 - 0x8 - sizeof(CVector3)];
-    void * unk698;
-    char pad698[0x11EC - 0x698 - sizeof(void*)];
-    f32 unk11EC;
-};
 
-struct func_8027DAA4_S1;
-typedef struct func_8027DAA4_S1 func_8027DAA4_S1;
 
 struct Ground;
 typedef struct Ground Ground;
@@ -582,8 +393,6 @@ struct Actor_func_80281A9C_de {
     s16 crowded;
 };
 
-struct World_func_80281A9C_de;
-typedef struct World_func_80281A9C_de World_func_80281A9C_de;
 
 typedef struct SteeringSound {u32 header[2];s32 handle,id;} SteeringSound;
 typedef struct SteeringTarget {u8 pad0[0x248];CVector3 position;} SteeringTarget;

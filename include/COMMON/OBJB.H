@@ -9,14 +9,10 @@
 #include "COMMON/PACKED.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/LEVEL_INPUT.H"
-struct func_8044B388_S1;
-typedef struct func_8044B388_S1 func_8044B388_S1;
 
 struct Shared_Placed;
 
 
-struct func_8044CD58_S2;
-typedef struct func_8044CD58_S2 func_8044CD58_S2;
 
 struct ItemsPendingState;
 
@@ -46,35 +42,6 @@ typedef struct func_8044CBE0_S1 func_8044CBE0_S1;
 struct func_8044B27C_S1;
 typedef struct func_8044B27C_S1 func_8044B27C_S1;
 
-struct func_8044ADC0_S1;
-struct func_8044ADC0_S1 {
-    char pad0[0x24];
-    u8 unk24;
-    char pad24[0xA0 - 0x24 - sizeof(u8)];
-    u8 unkA0;
-    char padA0[0xB8 - 0xA0 - sizeof(u8)];
-    u8 unkB8;
-    char padB8[0xCC - 0xB8 - sizeof(u8)];
-    u8 unkCC;
-    char padCC[0xE0 - 0xCC - sizeof(u8)];
-    u8 unkE0;
-    char padE0[0x140 - 0xE0 - sizeof(u8)];
-    u8 unk140;
-    char pad140[0x160 - 0x140 - sizeof(u8)];
-    u8 unk160;
-    char pad160[0x1A0 - 0x160 - sizeof(u8)];
-    u8 unk1A0;
-    char pad1A0[0x1E0 - 0x1A0 - sizeof(u8)];
-    u8 unk1E0;
-    char pad1E0[0x554 - 0x1E0 - sizeof(u8)];
-    u8 unk554;
-    char pad554[0xE40 - 0x554 - sizeof(u8)];
-    IntrusiveList unkE40;
-    char padE40[0xE54 - 0xE40 - sizeof(IntrusiveList)];
-    u8 unkE54;
-    char padE54[0xE94 - 0xE54 - sizeof(u8)];
-    u8 unkE94;
-};
 
 struct State_func_8044A170_de;
 struct State_func_8044A170_de {
@@ -170,8 +137,6 @@ struct Node_Items_FindPlacedObjectsByKey;
 struct ObjA;
 typedef struct ObjA ObjA;
 
-struct func_8044AD14_S1;
-typedef struct func_8044AD14_S1 func_8044AD14_S1;
 
 struct Face;
 struct Face {
@@ -185,20 +150,8 @@ struct Face {
 struct Face;
 typedef struct Face Face;
 
-struct func_8044CD58_S2;
-struct func_8044CD58_S2 {
-    char pad0[0x8];
-    Face unk8;
-};
 
-union func_8044CBE0_S1_U1B500;
-union func_8044CBE0_S1_U1B500 {
-    void * v0;
-    s8 v1;
-};
 
-union func_8044CBE0_S1_U1B500;
-typedef union func_8044CBE0_S1_U1B500 func_8044CBE0_S1_U1B500;
 
 struct func_8044CBE0_S1;
 
@@ -216,31 +169,7 @@ typedef struct ItemsPreviewStateB ItemsPreviewStateB;
 struct State_func_8044A170_de;
 typedef struct State_func_8044A170_de State_func_8044A170_de;
 
-struct func_8044ADC0_S2;
-struct func_8044ADC0_S2 {
-    char pad0[0x10];
-    State_func_8044A170_de unk10;
-};
 
-struct func_8044DE04_S1;
-struct func_8044DE04_S1 {
-    char pad0[0x1B410];
-    s32 unk1B410;
-    char pad1B410[0x1B414 - 0x1B410 - sizeof(s32)];
-    s32 unk1B414;
-    char pad1B414[0x1B418 - 0x1B414 - sizeof(s32)];
-    s32 unk1B418;
-    char pad1B418[0x1B41C - 0x1B418 - sizeof(s32)];
-    s32 unk1B41C;
-    char pad1B41C[0x1B434 - 0x1B41C - sizeof(s32)];
-    s32 unk1B434;
-    char pad1B434[0x1B438 - 0x1B434 - sizeof(s32)];
-    s32 unk1B438;
-    char pad1B438[0x1B43C - 0x1B438 - sizeof(s32)];
-    s32 unk1B43C;
-    char pad1B43C[0x1B440 - 0x1B43C - sizeof(s32)];
-    s32 unk1B440;
-};
 
 struct CDLight_t;
 /* One of the dynamic-light pool's eight 0x18-byte records, threaded through its lists by m_pPrev (+0) and m_pNext (+4). */
@@ -262,19 +191,6 @@ struct Level_func_8044CD8C_de;
 typedef struct Level_func_8044CD8C_de Level_func_8044CD8C_de;
 
 
-struct func_8044AD14_S1;
-struct func_8044AD14_S1 {
-    char pad0[0x3];
-    u8 unk3;
-    char pad3[0x18 - 0x3 - sizeof(u8)];
-    void * unk18;
-    char pad18[0x5D8 - 0x18 - sizeof(void*)];
-    void * unk5D8;
-    char pad5D8[0x5E0 - 0x5D8 - sizeof(void*)];
-    s32 unk5E0;
-    char pad5E0[0x86C - 0x5E0 - sizeof(s32)];
-    s32 unk86C;
-};
 
 struct Face;
 struct WorldRecAt1B40C;
@@ -295,18 +211,7 @@ struct WorldRecAt1B40C {
     s32 group;
 };
 
-struct func_8044DC48_S1;
-struct func_8044DC48_S1 {
-    char pad0[0x1B444];
-    s32 unk1B444;
-    char pad1B444[0x1B448 - 0x1B444 - sizeof(s32)];
-    s32 unk1B448;
-    char pad1B448[0x1B44C - 0x1B448 - sizeof(s32)];
-    s32 unk1B44C;
-};
 
-struct func_8044ADC0_S1;
-typedef struct func_8044ADC0_S1 func_8044ADC0_S1;
 
 struct Shared_Placed;
 
@@ -315,11 +220,7 @@ extern short D_8010F320;
 
 struct ItemsSelectionState;
 
-struct func_8044D9DC_S1;
-typedef struct func_8044D9DC_S1 func_8044D9DC_S1;
 
-struct func_8044DE04_S1;
-typedef struct func_8044DE04_S1 func_8044DE04_S1;
 
 struct ObjRecAt8C8;
 struct EntryCode8044ACCC {
@@ -327,16 +228,7 @@ struct EntryCode8044ACCC {
 };
 
 
-struct func_8044B388_S1;
-struct func_8044B388_S1 {
-    char pad0[0xC];
-    char unkC;
-    char padC[0x20 - 0xC - sizeof(char)];
-    IntrusiveList unk20;
-};
 
-struct func_8044ADC0_S2;
-typedef struct func_8044ADC0_S2 func_8044ADC0_S2;
 
 struct ItemsPendingState;
 typedef struct ItemsPendingState ItemsPendingState;
@@ -355,14 +247,7 @@ struct Floats {
     f32 unk14;
 };
 
-struct func_8044DC48_S1;
-typedef struct func_8044DC48_S1 func_8044DC48_S1;
 
-struct func_8044D9DC_S1;
-struct func_8044D9DC_S1 {
-    char pad0[0x8];
-    func_8022BC04_S3 unk8;
-};
 
 struct ItemsHandleOwner;
 struct ItemsHandleOwner {
@@ -409,8 +294,6 @@ extern char g_linkGroupTypes;
 extern char g_constructBlLevelDataIndex;
 extern char g_bloodlustWeaponData;
 
-typedef struct Shape33 { u32 words[7]; } Shape33;
-typedef void (*ResourceCallback33)(s32, s32);
 extern void func_8026D7F4_de(s32, s32);
 extern u8 g_constructMapObjectIndex[];
 extern u8 g_constructMapSimpModelsIndex[];

@@ -28,32 +28,11 @@ typedef struct AnimationTriggerResource {
     AnimationTriggerDefinition trigger;
 } AnimationTriggerResource;
 
-struct func_8020612C_S3;
-struct func_8020612C_S3 {
-    s32 unk0;
-    char pad0[0x4 - 0x0 - sizeof(s32)];
-    s32 unk4;
-    char pad4[0xA - 0x4 - sizeof(s32)];
-    s16 unkA;
-    char padA[0x14 - 0xA - sizeof(s16)];
-    s16 unk14;
-    char pad14[0x16 - 0x14 - sizeof(s16)];
-    s16 unk16;
-};
 
 extern unsigned int func_80205700_de(void *object);
 
 extern void func_80206080_de(void *arg0, void *arg1);
 
-struct func_80206080_S2;
-struct func_80206080_S2 {
-    char pad0[0xC];
-    f32 unkC;
-    char padC[0x10 - 0xC - sizeof(f32)];
-    f32 unk10;
-    char pad10[0x14 - 0x10 - sizeof(f32)];
-    char unk14;
-};
 
 struct ActionInfo;
 struct ActionInfo {
@@ -71,11 +50,7 @@ typedef struct Damage Damage;
 struct Cell;
 typedef struct Cell Cell;
 
-struct RecCode80204E78;
-typedef struct RecCode80204E78 RecCode80204E78;
 
-struct func_80206080_S2;
-typedef struct func_80206080_S2 func_80206080_S2;
 
 struct Damage;
 struct Damage {
@@ -133,8 +108,6 @@ struct ActorRecAt134 {
     float altRange;
 };
 
-struct func_8020520C_S2;
-typedef struct func_8020520C_S2 func_8020520C_S2;
 
 struct Damageable;
 typedef struct Damageable Damageable;
@@ -146,27 +119,9 @@ struct BreakableHitContext;
 struct ObjectStateCC;
 extern void func_80205494_de(struct BreakableHitContext *arg0, struct ObjectStateCC *arg1);
 
-struct RecCode80204E7880205494;
-struct RecCode80204E7880205494 {
-    char pad0[0x18];
-    char * unk18;
-    char pad18[0x100 - 0x18 - sizeof(char*)];
-    unsigned int unk100;
-};
 
-struct func_80205628_S2;
-typedef struct func_80205628_S2 func_80205628_S2;
 
-struct func_8020612C_S3;
-typedef struct func_8020612C_S3 func_8020612C_S3;
 
-struct func_80204F78_S1;
-struct func_80204F78_S1 {
-    char pad0[0x40];
-    float unk40;
-    char pad40[0x64 - 0x40 - sizeof(float)];
-    float unk64;
-};
 
 extern float D_800C1ACC_de;
 
@@ -179,40 +134,13 @@ extern float D_800C1AD0_de;
 struct Health;
 typedef struct Health Health;
 
-struct func_8020612C_S4;
-struct func_8020612C_S4 {
-    char pad0[0x40];
-    f32 unk40;
-    char pad40[0x64 - 0x40 - sizeof(f32)];
-    f32 unk64;
-    char pad64[0x124 - 0x64 - sizeof(f32)];
-    s32 unk124;
-    char pad124[0x128 - 0x124 - sizeof(s32)];
-    s32 unk128;
-};
 
-struct func_80205628_S2;
-struct func_80205628_S2 {
-    char pad0[0x124];
-    s32 unk124;
-    char pad124[0x128 - 0x124 - sizeof(s32)];
-    s32 unk128;
-};
 
-struct func_8020520C_S2;
-struct func_8020520C_S2 {
-    char pad0[0x3];
-    signed char unk3;
-};
 
 struct Action;
 typedef struct Action Action;
 
-struct func_80205628_S1;
-typedef struct func_80205628_S1 func_80205628_S1;
 
-struct func_80204F78_S1;
-typedef struct func_80204F78_S1 func_80204F78_S1;
 
 struct Action;
 struct Action {
@@ -238,8 +166,6 @@ struct EventRecAt30 {
     struct CallbackHolder *holder;
 };
 
-struct func_8020612C_S4;
-typedef struct func_8020612C_S4 func_8020612C_S4;
 
 struct Descriptor;
 struct Descriptor {
@@ -277,24 +203,7 @@ typedef struct Hit Hit;
 
 extern int func_802054D0_de(void *object);
 
-struct RecCode80204E7880205494;
-typedef struct RecCode80204E7880205494 RecCode80204E7880205494;
 
-struct RecCode80204E78;
-struct RecCode80204E78 {
-    char pad0[0x2C];
-    void * unk2C;
-    char pad2C[0x108 - 0x2C - sizeof(void*)];
-    void * unk108;
-    char pad108[0x10C - 0x108 - sizeof(void*)];
-    void * unk10C;
-    char pad10C[0x110 - 0x10C - sizeof(void*)];
-    void * unk110;
-    char pad110[0x124 - 0x110 - sizeof(void*)];
-    int unk124;
-    char pad124[0x128 - 0x124 - sizeof(int)];
-    int unk128;
-};
 
 struct Actor_func_80205F18_de;
 typedef struct Actor_func_80205F18_de Actor_func_80205F18_de;
@@ -320,13 +229,6 @@ struct Actor_func_80205F18_de {
     s32 flags;
 };
 
-struct func_80205628_S1;
-struct func_80205628_S1 {
-    char pad0[0xB4];
-    s32 unkB4;
-    char padB4[0x17C - 0xB4 - sizeof(s32)];
-    s32 unk17C;
-};
 
 typedef struct {
     s16 hi;

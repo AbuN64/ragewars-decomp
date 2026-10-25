@@ -190,8 +190,6 @@ struct Player {
 };
 
 
-struct func_8020A028_S4;
-typedef struct func_8020A028_S4 func_8020A028_S4;
 
 struct ObjRecAt1D8V2;
 typedef struct ObjRecAt1D8V2 ObjRecAt1D8V2;
@@ -203,14 +201,10 @@ struct func_80237E70_G1 {
     u8 * unk0;
 };
 
-struct func_8022C070_S1;
-typedef struct func_8022C070_S1 func_8022C070_S1;
 
 struct Player;
 typedef struct Player Player;
 
-union func_80237E70_S1_UF24;
-typedef union func_80237E70_S1_UF24 func_80237E70_S1_UF24;
 
 struct Course;
 struct Course {
@@ -221,8 +215,6 @@ struct Course {
 struct CollisionInfo8020CD74;
 typedef struct CollisionInfo8020CD74 CollisionInfo8020CD74;
 
-struct func_8021C9B4_S2;
-typedef struct func_8021C9B4_S2 func_8021C9B4_S2;
 
 struct ObjRecAtCV1;
 typedef struct ObjRecAtCV1 ObjRecAtCV1;
@@ -257,17 +249,8 @@ struct CCameraText_t {
 };
 
 struct CCameraText_t;
-union func_80237E70_S1_UF24;
-union func_80237E70_S1_UF24 {
-    struct CCameraText_t * v0;
-    char v1;
-};
 
-struct func_8022C884_S1;
-typedef struct func_8022C884_S1 func_8022C884_S1;
 
-struct func_80237E70_S2;
-typedef struct func_80237E70_S2 func_80237E70_S2;
 
 struct func_80209B64_S2;
 struct func_80209B64_S2 {
@@ -306,13 +289,6 @@ struct ObjRecAt18V5 {
 
 extern int D_800CE47C;
 
-struct func_80229A54_S2;
-struct func_80229A54_S2 {
-    char pad0[0x5D8];
-    char * unk5D8;
-    char pad5D8[0x16E0 - 0x5D8 - sizeof(char*)];
-    char * unk16E0;
-};
 
 struct CCameraText_t;
 typedef struct CCameraText_t CCameraText;
@@ -324,26 +300,12 @@ union func_80234DD0_S1_U260 {
 };
 
 struct CCameraText_t;
-union func_80237E70_S2_UE40;
-union func_80237E70_S2_UE40 {
-    char v0;
-    struct CCameraText_t * v1;
-};
 
-union func_80237E70_S2_UE40;
-typedef union func_80237E70_S2_UE40 func_80237E70_S2_UE40;
 
-struct func_80237E70_S2;
-struct func_80237E70_S2 {
-    char pad0[0xE40];
-    IntrusiveList unkE40;
-};
 
 struct ObjectLinks3C;
 typedef struct ObjectLinks3C ObjectLinks3C;
 
-struct func_80237E70_S4;
-typedef struct func_80237E70_S4 func_80237E70_S4;
 
 struct ObjRecAt5D8;
 typedef struct ObjRecAt5D8 ObjRecAt5D8;
@@ -387,11 +349,6 @@ struct ObjRecAt20V2 {
 union func_80209DAC_S2_U93;
 typedef union func_80209DAC_S2_U93 func_80209DAC_S2_U93;
 
-struct func_80216BF4_S1;
-struct func_80216BF4_S1 {
-    char pad0[0xC];
-    f32 unkC;
-};
 
 union func_80209DAC_S2_U93;
 union func_80209DAC_S2_U93 {
@@ -399,20 +356,8 @@ union func_80209DAC_S2_U93 {
     s8 v1;
 };
 
-struct func_8021C9B4_S2;
-struct func_8021C9B4_S2 {
-    char pad0[0x81];
-    u8 unk81;
-    char pad81[0x8F - 0x81 - sizeof(u8)];
-    u8 unk8F;
-};
 
 struct CCameraText_t;
-struct func_80237E70_S4;
-struct func_80237E70_S4 {
-    char pad0[0x4];
-    struct CCameraText_t * unk4;
-};
 
 struct func_8020D1FC_S1;
 struct func_8020D1FC_S1 {
@@ -424,14 +369,7 @@ struct func_8020D1FC_S1;
 typedef struct func_8020D1FC_S1 func_8020D1FC_S1;
 
 
-struct func_80207ABC_S1;
-typedef struct func_80207ABC_S1 func_80207ABC_S1;
 
-struct func_80237E70_S1;
-struct func_80237E70_S1 {
-    char pad0[0xF24];
-    IntrusiveList unkF24;
-};
 
 struct ModelBlend;
 typedef struct ModelBlend ModelBlend;
@@ -454,13 +392,6 @@ struct func_80204620_S2 {
     s16 unk28;
 };
 
-struct func_80207ABC_S1;
-struct func_80207ABC_S1 {
-    char pad0[0x18];
-    void * unk18;
-    char pad18[0x38 - 0x18 - sizeof(void*)];
-    s32 unk38;
-};
 
 struct ObjRecAt1D8V2;
 struct ObjRecAt1D8V2 {
@@ -474,24 +405,8 @@ struct func_80203E78_S1 {
     s32 unk4;
 };
 
-struct func_8022C070_S1;
-struct func_8022C070_S1 {
-    char pad0[0x2C];
-    f32 unk2C;
-};
 
-struct func_80216BF4_S1;
-typedef struct func_80216BF4_S1 func_80216BF4_S1;
 
-struct func_8020A028_S4;
-struct func_8020A028_S4 {
-    char pad0[0x8];
-    s32 unk8;
-    char pad8[0xC - 0x8 - sizeof(s32)];
-    s32 unkC;
-    char padC[0x10 - 0xC - sizeof(s32)];
-    s32 unk10;
-};
 
 struct func_80228774_S1;
 struct func_80228774_S1 {
@@ -502,15 +417,6 @@ struct func_80228774_S1 {
 struct ObjRecAt20V2;
 typedef struct ObjRecAt20V2 ObjRecAt20V2;
 
-struct func_8022C884_S1;
-struct func_8022C884_S1 {
-    char pad0[0x1C];
-    int unk1C;
-    char pad1C[0x20 - 0x1C - sizeof(int)];
-    int unk20;
-    char pad20[0x24 - 0x20 - sizeof(int)];
-    int unk24;
-};
 
 
 extern int D_800CE430[];
@@ -521,8 +427,6 @@ typedef struct func_8022A404_S1 func_8022A404_S1;
 struct RecordRecAt94;
 typedef struct RecordRecAt94 RecordRecAt94;
 
-struct func_80237E70_S1;
-typedef struct func_80237E70_S1 func_80237E70_S1;
 
 struct func_80209B64_S2;
 typedef struct func_80209B64_S2 func_80209B64_S2;
@@ -535,8 +439,6 @@ struct CollisionInfo8020CD74 {
     s32 w[7];
 };
 
-struct func_80229A54_S2;
-typedef struct func_80229A54_S2 func_80229A54_S2;
 
 struct func_80203E78_S1;
 typedef struct func_80203E78_S1 func_80203E78_S1;

@@ -30,8 +30,6 @@ struct Scene_func_80288EA8_de {
 };
 
 
-struct func_80286254_S1;
-typedef struct func_80286254_S1 func_80286254_S1;
 
 struct ObjectLinks74;
 typedef struct ObjectLinks74 ObjectLinks74;
@@ -51,8 +49,6 @@ struct TableRecAt8 {
     u16 entries[1];
 };
 
-struct func_8028B4AC_S1;
-typedef struct func_8028B4AC_S1 func_8028B4AC_S1;
 
 struct DescriptorRecAt20;
 struct DescriptorRecAt20 {
@@ -78,25 +74,11 @@ typedef struct ObjectRecAt18 ObjectRecAt18;
 struct ObjectRecAt18;
 struct WorldRecAt1B660;
 
-struct func_8028B370_S0;
-struct func_8028B370_S0 {
-    char pad0[0x6C];
-    void *unk6C;
-};
 
-struct func_8028B238_S1;
-typedef struct func_8028B238_S1 func_8028B238_S1;
 
 struct Entity;
 
-struct func_8028AFE8_S1;
-struct func_8028AFE8_S1 {
-    char pad0[0xA0];
-    char * unkA0;
-};
 
-struct func_8028AFE8_S1;
-typedef struct func_8028AFE8_S1 func_8028AFE8_S1;
 
 struct GlobalMode;
 
@@ -105,8 +87,6 @@ typedef struct Object_func_80288EA8_de Object_func_80288EA8_de;
 
 struct ObjectLinks74;
 
-struct func_8028B1F8_S2;
-typedef struct func_8028B1F8_S2 func_8028B1F8_S2;
 
 struct SceneRecAt10C0;
 struct SceneRecAt10C0 {
@@ -129,47 +109,16 @@ struct BankRecAt94 {
     struct TableRecAt8 *table;
 };
 
-struct func_8028B1F8_S2;
-struct func_8028B1F8_S2 {
-    char pad0[0x4];
-    s32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(s32)];
-    u16 unk8;
-};
 
 struct WorldRecAt1B660;
 typedef struct WorldRecAt1B660 WorldRecAt1B660;
 
-struct func_8028B4AC_S1;
-struct func_8028B4AC_S1 {
-    char pad0[0x84];
-    void * unk84;
-    char pad84[0x1B40C - 0x84 - sizeof(void*)];
-    s32 unk1B40C;
-};
 
-struct func_8028B238_S1;
-struct func_8028B238_S1 {
-    char pad0[0x94];
-    char * unk94;
-};
 
-struct func_80286254_S1;
-struct func_80286254_S1 {
-    char pad0[0xC50];
-    s32 unkC50;
-    char padC54[0xE50-0xC54];
-    s32 unkE50;
-};
 
 struct GlobalMode;
 typedef struct GlobalMode GlobalMode;
 
-struct func_8028B1F8_S1;
-struct func_8028B1F8_S1 {
-    char pad0[0x94];
-    void * unk94;
-};
 
 struct Object_func_8028B274_de;
 #include "COMMON/MODEL_INSTANCE.H"
@@ -177,14 +126,10 @@ struct Object_func_8028B274_de;
 struct Scene_func_80288EA8_de;
 typedef struct Scene_func_80288EA8_de Scene_func_80288EA8_de;
 
-struct func_8028B370_S0;
-typedef struct func_8028B370_S0 func_8028B370_S0;
 
 struct Object_func_8028B274_de;
 typedef struct Object_func_8028B274_de Object_func_8028B274_de;
 
-struct func_8028B1F8_S1;
-typedef struct func_8028B1F8_S1 func_8028B1F8_S1;
 
 typedef struct Bounds2D37 { f32 minX,minZ,maxX,maxZ; } Bounds2D37;
 
@@ -201,7 +146,6 @@ typedef struct DraftStreamViewer {
 } DraftStreamViewer;
 typedef struct DraftStreamPair { f32 first, second; } DraftStreamPair;
 extern DraftStreamPair D_800FF200;
-extern char D_800C5220_de[];
 struct ResourceBitGrid;
 extern void System_DecodeRegionGrid(struct ResourceBitGrid *, s32, s32, DraftStreamData *, CVector3 *);
 #endif

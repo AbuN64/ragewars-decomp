@@ -7,15 +7,6 @@
 
 extern float D_800C1C88_de;
 
-struct func_80209988_S1;
-struct func_80209988_S1 {
-    char pad0[0x2F4];
-    int unk2F4;
-    char pad2F4[0x2F8 - 0x2F4 - sizeof(int)];
-    int unk2F8;
-    char pad2F8[0x2FC - 0x2F8 - sizeof(int)];
-    int unk2FC;
-};
 
 struct Player_func_80209308_de;
 typedef struct Player_func_80209308_de Player_func_80209308_de;
@@ -25,24 +16,8 @@ typedef struct SharedPlayer_func_80208158_de SharedPlayer_func_80208158_de;
 
 typedef void ( *SharedCallback5)(void *, signed int);
 
-struct CallbackState8;
-struct CallbackState8 {
-    unsigned char padding_0[4];
-    SharedCallback5 callback;
-};
 
-struct func_80209A94_S1;
-typedef struct func_80209A94_S1 func_80209A94_S1;
 
-struct ObjectLinks220;
-struct ObjectLinks220 {
-    char pad0[0x214];
-    void * unk_214;
-    char pad214[0x218 - 0x214 - sizeof(void*)];
-    s32 * unk_218;
-    char pad218[0x21C - 0x218 - sizeof(s32*)];
-    s32 unk_21C;
-};
 
 struct Player_func_80209308_de;
 struct Player_func_80209308_de {
@@ -52,29 +27,10 @@ struct Player_func_80209308_de {
     f32 steer;
 };
 
-struct Tutorial;
-struct Tutorial {
-    char pad0[0x98];
-    s32 active;
-    char pad9C[4];
-    s32 timer;
-    s32 refills;
-};
 
-struct func_80209988_S1;
-typedef struct func_80209988_S1 func_80209988_S1;
 
-struct Tutorial;
-typedef struct Tutorial Tutorial;
 
-struct func_80209910_S1;
-typedef struct func_80209910_S1 func_80209910_S1;
 
-struct RecCode80208000;
-struct RecCode80208000 {
-    char pad0[0x214];
-    int unk214;
-};
 
 struct Brain_func_80209308_de;
 typedef struct Brain_func_80209308_de Brain_func_80209308_de;
@@ -87,40 +43,14 @@ struct Brain_func_80209308_de {
     f32 speed[4];
 };
 
-struct RecCode80208000;
-typedef struct RecCode80208000 RecCode80208000;
 
-struct func_80209910_S1;
-struct func_80209910_S1 {
-    char pad0[0x6A0];
-    float unk6A0;
-};
 
-struct TargetPositionRef;
-typedef struct TargetPositionRef TargetPositionRef;
 
-struct func_8020999C_S1;
-struct func_8020999C_S1 {
-    char pad0[0x300];
-    int unk300;
-    char pad300[0x304 - 0x300 - sizeof(int)];
-    int unk304;
-    char pad304[0x308 - 0x304 - sizeof(int)];
-    int unk308;
-    char pad308[0x30C - 0x308 - sizeof(int)];
-    int unk30C;
-    char pad30C[0x310 - 0x30C - sizeof(int)];
-    int unk310;
-};
 
-struct CallbackState8;
-typedef struct CallbackState8 CallbackState8;
 
 struct Brain;
 typedef struct Brain Brain;
 
-struct ObjectLinks220;
-typedef struct ObjectLinks220 ObjectLinks220;
 
 struct Body;
 struct Character;
@@ -1593,19 +1523,8 @@ struct TargetPosition {
     f32 position[3];
 };
 struct TargetPosition;
-struct TargetPositionRef;
-struct TargetPositionRef {
-    struct TargetPosition *target;
-};
 
-struct func_80209A94_S1;
-struct func_80209A94_S1 {
-    char pad0[0x21C];
-    s32 unk21C;
-};
 
-struct func_8020999C_S1;
-typedef struct func_8020999C_S1 func_8020999C_S1;
 
 extern float D_800C1C8C_de;
 

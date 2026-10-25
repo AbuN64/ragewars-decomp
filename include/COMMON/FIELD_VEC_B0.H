@@ -4,55 +4,17 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct Field_Vec_B0;
-typedef struct Field_Vec_B0 Field_Vec_B0;
 
-struct Field_void_68;
-struct Field_void_68 {
-    char pad[0x68];
-    void * value;
-};
 
-struct func_802169AC_S4;
-typedef struct func_802169AC_S4 func_802169AC_S4;
 
-struct func_80216F44_S1;
-typedef struct func_80216F44_S1 func_80216F44_S1;
 
-struct Field_s32_788;
-typedef struct Field_s32_788 Field_s32_788;
 
-struct func_802169AC_S3;
-typedef struct func_802169AC_S3 func_802169AC_S3;
 
 struct s_CTargetInfo;
 typedef struct s_CTargetInfo CTargetInfo;
 
-struct func_80216F44_S1;
-struct func_80216F44_S1 {
-    char pad0[0x8];
-    f32 unk8;
-    char pad8[0x10 - 0x8 - sizeof(f32)];
-    f32 unk10;
-    char pad10[0x6C - 0x10 - sizeof(f32)];
-    f32 unk6C;
-};
 
-struct func_802172D0_S3;
-struct func_802172D0_S3 {
-    char pad0[0x8];
-    char unk8;
-    char pad8[0xD0 - 0x8 - sizeof(char)];
-    void * unkD0;
-};
 
-struct func_802169AC_S4;
-struct func_802169AC_S4 {
-    char pad0[0xE4];
-    u16 unkE4;
-    char padE4[0x2E0 - 0xE4 - sizeof(u16)];
-    s32 unk2E0;
-};
 
 extern float D_800C21DC_de;
 
@@ -60,13 +22,6 @@ struct Actor_func_80214DD4_de;
 typedef struct Actor_func_80214DD4_de Actor_func_80214DD4_de;
 
 
-struct AudioStateA4;
-struct AudioStateA4 {
-    char pad0[0x98];
-    s32 field98;
-    char pad9C[4];
-    s32 fieldA0;
-};
 
 struct Source_func_802164A8_de;
 struct Source_func_802164A8_de {
@@ -99,29 +54,11 @@ struct s_CTargetInfo {
     f32 m_XZDistFrom;
 };
 
-struct Field_Vec_34;
-struct Field_Vec_34 {
-    char pad[0x34];
-    CVector3 value;
-};
 
-struct Field_f32_9C;
-struct Field_f32_9C {
-    char pad[0x9C];
-    f32 value;
-};
 
-struct Field_void_68;
-typedef struct Field_void_68 Field_void_68;
 
-struct Field_Vec_C;
-typedef struct Field_Vec_C Field_Vec_C;
 
-struct Field_f32_24;
-typedef struct Field_f32_24 Field_f32_24;
 
-struct AudioStateA4;
-typedef struct AudioStateA4 AudioStateA4;
 
 struct OffsetResult;
 struct OffsetResult {
@@ -157,28 +94,11 @@ struct CTeamSelectTeam_t {
     f32 z;
 };
 
-struct Field_Vec_34;
-typedef struct Field_Vec_34 Field_Vec_34;
 
-struct func_802169AC_S1;
-struct func_802169AC_S1 {
-    char pad0[0x4];
-    s32 unk4;
-    char pad4[0x68 - 0x4 - sizeof(s32)];
-    void * unk68;
-    char pad68[0x94 - 0x68 - sizeof(void*)];
-    s8 unk94;
-};
 
 extern float D_800C21C8_de;
 
-struct func_80216A6C_S1;
-typedef struct func_80216A6C_S1 func_80216A6C_S1;
 
-struct Field_Vec_0;
-struct Field_Vec_0 {
-    CVector3 value;
-};
 
 
 struct Dest_func_802164A8_de;
@@ -198,11 +118,6 @@ struct CActor_t {
 };
 
 
-struct Field_f32_24;
-struct Field_f32_24 {
-    char pad[0x24];
-    f32 value;
-};
 
 struct Func802172C4Value;
 struct Func802172C4Value {
@@ -212,17 +127,8 @@ struct Func802172C4Value {
 struct Source_func_802164A8_de;
 typedef struct Source_func_802164A8_de Source_func_802164A8_de;
 
-struct func_80216D3C_S2;
-struct func_80216D3C_S2 {
-    char pad0[0x44];
-    Output80216D3C unk44;
-};
 
-struct Field_f32_9C;
-typedef struct Field_f32_9C Field_f32_9C;
 
-struct RecCode80213ED4;
-typedef struct RecCode80213ED4 RecCode80213ED4;
 
 struct Location;
 struct Location {
@@ -232,64 +138,22 @@ struct Location {
     u16 flags; /* 0x14 */
 };
 
-struct func_80216D3C_S2;
-typedef struct func_80216D3C_S2 func_80216D3C_S2;
 
-struct func_80216D30_S1;
-struct func_80216D30_S1 {
-    char pad0[0x78];
-    int unk78;
-    char pad78[0x7C - 0x78 - sizeof(int)];
-    int unk7C;
-};
 
-struct func_802169AC_S3;
-struct func_802169AC_S3 {
-    char pad0[0x788];
-    s32 unk788;
-    char pad788[0x794 - 0x788 - sizeof(s32)];
-    void * unk794;
-};
 
-struct Field_Vec_28;
-typedef struct Field_Vec_28 Field_Vec_28;
 
 extern void func_802172C4_de(void *arg0, void *arg1, Func802172C4Value arg2);
 
-struct Field_s32_788;
-struct Field_s32_788 {
-    char pad[0x788];
-    s32 value;
-};
 
 struct Tracker;
 typedef struct Tracker Tracker;
 
-struct func_80216D30_S1;
-typedef struct func_80216D30_S1 func_80216D30_S1;
 
-struct Field_Vec_28;
-struct Field_Vec_28 {
-    char pad[0x28];
-    CVector3 value;
-};
 
-struct Field_void_794;
-typedef struct Field_void_794 Field_void_794;
 
 extern float D_800C21CC_de;
 
-struct Field_void_88;
-struct Field_void_88 {
-    char pad[0x88];
-    void * value;
-};
 
-struct func_802172D0_S1;
-struct func_802172D0_S1 {
-    char pad0[0xFC];
-    void * unkFC;
-};
 
 struct Cursor802171C8;
 typedef struct Cursor802171C8 Cursor802171C8;
@@ -303,8 +167,6 @@ struct Cursor802171C8 {
 extern s16 func_802171C8_de(Cursor802171C8 *arg0);
 
 
-struct func_802169AC_S1;
-typedef struct func_802169AC_S1 func_802169AC_S1;
 
 extern float D_800C21E4_de;
 
@@ -314,28 +176,12 @@ typedef struct Location Location;
 struct LevelActor;
 struct RouteChaseBot;
 
-struct func_802172D0_S1;
-typedef struct func_802172D0_S1 func_802172D0_S1;
 
-struct Field_Vec_B0;
-struct Field_Vec_B0 {
-    char pad[0xB0];
-    CVector3 value;
-};
 
-struct func_802169AC_S2;
-typedef struct func_802169AC_S2 func_802169AC_S2;
 
 struct CTeamSelectTeam_t;
 typedef struct CTeamSelectTeam_t CTeamSelectTeam;
 
-struct func_80216A6C_S1;
-struct func_80216A6C_S1 {
-    char pad0[0xC];
-    f32 unkC;
-    char padC[0x70 - 0xC - sizeof(f32)];
-    f32 unk70;
-};
 
 struct Actor_func_80214DD4_de;
 struct Tracker;
@@ -368,38 +214,13 @@ struct Tracker {
 
 
 
-struct Field_void_88;
-typedef struct Field_void_88 Field_void_88;
 
 
-struct Field_void_794;
-struct Field_void_794 {
-    char pad[0x794];
-    void * value;
-};
 
-struct RecCode80213ED4;
-struct RecCode80213ED4 {
-    char pad0[0x48];
-    CVector3 unk48;
-    char pad48[0x60 - 0x48 - sizeof(CVector3)];
-    f32 unk60;
-};
 
-struct Field_s8_94;
-struct Field_s8_94 {
-    char pad[0x94];
-    s8 value;
-};
 
-struct Field_s8_94;
-typedef struct Field_s8_94 Field_s8_94;
 
-struct func_80216D3C_S1;
-typedef struct func_80216D3C_S1 func_80216D3C_S1;
 
-struct func_802172D0_S3;
-typedef struct func_802172D0_S3 func_802172D0_S3;
 
 struct Dest_func_802164A8_de;
 struct Dest_func_802164A8_de {
@@ -417,29 +238,8 @@ struct Dest_func_802164A8_de {
     void (*callback)(Source_func_802164A8_de *, struct Dest_func_802164A8_de *);
 };
 
-struct Field_s8_CE;
-struct Field_s8_CE {
-    char pad[0xCE];
-    s8 value;
-};
 
-struct func_802169AC_S2;
-struct func_802169AC_S2 {
-    char pad0[0x18];
-    s32 * unk18;
-    char pad18[0xE4 - 0x18 - sizeof(s32*)];
-    u16 unkE4;
-    char padE4[0x100 - 0xE4 - sizeof(u16)];
-    s32 unk100;
-    char pad100[0x1D8 - 0x100 - sizeof(s32)];
-    void * unk1D8;
-};
 
-struct Field_Vec_C;
-struct Field_Vec_C {
-    char pad[0xC];
-    CVector3 value;
-};
 
 struct ObjectLinks1230;
 typedef struct ObjectLinks1230 ObjectLinks1230;
@@ -447,21 +247,6 @@ typedef struct ObjectLinks1230 ObjectLinks1230;
 struct OffsetResult;
 typedef struct OffsetResult OffsetResult;
 
-struct Field_Vec_0;
-typedef struct Field_Vec_0 Field_Vec_0;
 
-struct Field_s8_CE;
-typedef struct Field_s8_CE Field_s8_CE;
 
-struct func_80216D3C_S1;
-struct func_80216D3C_S1 {
-    char pad0[0x78];
-    struct Actor_func_80214DD4_de *lockedTarget; /* 0x78 */
-    char pad78[0x7C - 0x78 - sizeof(s32)];
-    f32 unk7C;
-    char pad7C[0x80 - 0x7C - sizeof(f32)];
-    s32 unk80;
-    char pad80[0x88 - 0x80 - sizeof(s32)];
-    s32 unk88;
-};
 #endif

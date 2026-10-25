@@ -25,16 +25,7 @@ struct Obj_func_80283920_de {
     u8 active1D9;
 };
 
-struct func_8028438C_S1;
-struct func_8028438C_S1 {
-    char pad0[0x8];
-    char unk8;
-    char pad8[0x1DC - 0x8 - sizeof(char)];
-    void * unk1DC;
-};
 
-struct RecCode8028308C;
-typedef struct RecCode8028308C RecCode8028308C;
 
 struct D801041F8_Layout;
 struct D801041F8_Layout {
@@ -62,23 +53,7 @@ struct ObjectLinks1E8 {
 struct TrailActor;
 typedef struct TrailActor TrailActor;
 
-struct RecCode8028308C;
-struct RecCode8028308C {
-    char pad0[0x8];
-    Triple unk8;
-    char pad8[0x1C - 0x8 - sizeof(Triple)];
-    Triple unk1C;
-    char pad1C[0x5C - 0x1C - sizeof(Triple)];
-    int unk5C;
-};
 
-struct func_802839F0_S1;
-struct func_802839F0_S1 {
-    char pad0[0x138];
-    s32 unk138;
-    char pad138[0x1D9 - 0x138 - sizeof(s32)];
-    u8 unk1D9;
-};
 
 
 struct Params_func_80283920_de;
@@ -90,11 +65,7 @@ struct Params_func_80283920_de {
     s16 unkC;
 };
 
-struct func_80283454_S1;
-typedef struct func_80283454_S1 func_80283454_S1;
 
-struct func_802831FC_S2;
-typedef struct func_802831FC_S2 func_802831FC_S2;
 
 struct ObjectState60;
 struct ObjectState60 {
@@ -108,68 +79,21 @@ struct Obj_func_80283920_de;
 typedef struct Obj_func_80283920_de Obj_func_80283920_de;
 
 
-struct func_8028324C_S1;
-typedef struct func_8028324C_S1 func_8028324C_S1;
 
-struct func_8028438C_S1;
-typedef struct func_8028438C_S1 func_8028438C_S1;
 
-struct func_8028324C_S1;
-struct func_8028324C_S1 {
-    char pad0[0xFC00];
-    char unkFC00;
-    char padFC00[0xFC14 - 0xFC00 - sizeof(char)];
-    char unkFC14;
-};
 
 union func_80283D24_S1_U8;
 typedef union func_80283D24_S1_U8 func_80283D24_S1_U8;
 
-struct func_80283454_S1;
-struct func_80283454_S1 {
-    char pad0[0x1C];
-    Triple unk1C;
-    char pad1C[0x5C - 0x1C - sizeof(Triple)];
-    s32 unk5C;
-    char pad5C[0x118 - 0x5C - sizeof(s32)];
-    s32 * unk118;
-    char pad118[0x12C - 0x118 - sizeof(s32*)];
-    void * unk12C;
-    char pad12C[0x130 - 0x12C - sizeof(void*)];
-    s32 unk130;
-    char pad130[0x134 - 0x130 - sizeof(s32)];
-    s32 unk134;
-};
 
-struct func_80283D24_S1;
-typedef struct func_80283D24_S1 func_80283D24_S1;
 
 
 struct ObjectLinks1E8;
 typedef struct ObjectLinks1E8 ObjectLinks1E8;
 
-struct func_8028357C_S1;
-typedef struct func_8028357C_S1 func_8028357C_S1;
-
-struct func_8028357C_S1;
-struct func_8028357C_S1 {
-    char pad0[0x1C];
-    CVector3 unk1C;
-    char pad1C[0x5C - 0x1C - sizeof(CVector3)];
-    s32 unk5C;
-    char pad5C[0x118 - 0x5C - sizeof(s32)];
-    s32 * unk118;
-    char pad118[0x12C - 0x118 - sizeof(s32*)];
-    void * unk12C;
-    char pad12C[0x130 - 0x12C - sizeof(void*)];
-    void * unk130;
-    char pad130[0x134 - 0x130 - sizeof(void*)];
-    s32 unk134;
-};
 
 
-struct func_8028403C_S1;
-typedef struct func_8028403C_S1 func_8028403C_S1;
+
 
 struct Params_func_80283920_de;
 typedef struct Params_func_80283920_de Params_func_80283920_de;
@@ -206,8 +130,6 @@ struct TrailActor {
 
 extern float D_800C4E88_de;
 
-struct IntegerState1E0;
-typedef struct IntegerState1E0 IntegerState1E0;
 
 struct EntryRecAt4V1;
 struct EntryRecAt4V1 {
@@ -216,48 +138,12 @@ struct EntryRecAt4V1 {
     char pad8[0xC];
 };
 
-struct func_802836A4_S1;
-struct func_802836A4_S1 {
-    char pad0[0x1C];
-    CVector3 unk1C;
-    char pad1C[0x5C - 0x1C - sizeof(CVector3)];
-    s32 unk5C;
-    char pad5C[0x118 - 0x5C - sizeof(s32)];
-    s32 * unk118;
-    char pad118[0x12C - 0x118 - sizeof(s32*)];
-    void * unk12C;
-    char pad12C[0x130 - 0x12C - sizeof(void*)];
-    s32 unk130;
-    char pad130[0x134 - 0x130 - sizeof(s32)];
-    s32 unk134;
-};
 
 
-struct func_802839F0_S1;
-typedef struct func_802839F0_S1 func_802839F0_S1;
 
-struct func_8028414C_S2;
-struct func_8028414C_S2 {
-    char pad0[0x8];
-    char unk8;
-    char pad8[0x5C - 0x8 - sizeof(char)];
-    s32 unk5C;
-};
 
-struct func_8028308C_S1;
-struct func_8028308C_S1 {
-    char pad0[0xFC68];
-    int unkFC68;
-};
 
-struct func_8028403C_S1;
-struct func_8028403C_S1 {
-    char pad0[0x5C];
-    unsigned int unk5C;
-};
 
-struct func_8028308C_S1;
-typedef struct func_8028308C_S1 func_8028308C_S1;
 
 struct EntryRecAt4V1;
 typedef struct EntryRecAt4V1 EntryRecAt4V1;
@@ -268,38 +154,11 @@ union func_80283D24_S1_U8 {
     s32 v1;
 };
 
-struct IntegerState1E0;
-struct IntegerState1E0 {
-    unsigned char padding_0[476];
-    s32 unk_1DC;
-};
 
-struct func_802836A4_S1;
-typedef struct func_802836A4_S1 func_802836A4_S1;
 
-struct func_8028414C_S2;
-typedef struct func_8028414C_S2 func_8028414C_S2;
 
 struct ObjectState60;
 typedef struct ObjectState60 ObjectState60;
 
-struct func_80283D24_S1;
-struct func_80283D24_S1 {
-    char pad0[0x8];
-    func_80283D24_S1_U8 unk8;
-    char pad8[0x118 - 0x8 - sizeof(func_80283D24_S1_U8)];
-    void * unk118;
-    char pad118[0x1D0 - 0x118 - sizeof(void*)];
-    s8 unk1D0;
-};
 
-struct func_802831FC_S2;
-struct func_802831FC_S2 {
-    char pad0[0x4];
-    u16 unk4;
-    char pad4[0x12C - 0x4 - sizeof(u16)];
-    s32 unk12C;
-    char pad12C[0x1EC - 0x12C - sizeof(s32)];
-    s8 * unk1EC;
-};
 #endif

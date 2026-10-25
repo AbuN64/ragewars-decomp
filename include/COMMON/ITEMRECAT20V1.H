@@ -68,8 +68,6 @@ struct ObjRecAt2CV2 {
 
 extern int D_80142CA8;
 
-struct func_8025C598_S1;
-typedef struct func_8025C598_S1 func_8025C598_S1;
 
 struct ObjRecAt4V1;
 struct ObjRecAt4V1 {
@@ -157,8 +155,6 @@ struct GlyphBuffer {
     sm_font_char glyphs[147];
 };
 
-struct func_8029A73C_S1;
-typedef struct func_8029A73C_S1 func_8029A73C_S1;
 
 struct Block70;
 struct Block70 {
@@ -294,8 +290,6 @@ struct Output80216D3C {
 struct Output80216D3C;
 typedef struct Output80216D3C Output80216D3C;
 
-struct func_8022ED94_S1;
-typedef struct func_8022ED94_S1 func_8022ED94_S1;
 
 struct MatrixF;
 struct MatrixF {
@@ -346,8 +340,6 @@ struct func_8020CA10_G1 {
     f32 unk0;
 };
 
-struct func_8020EA10_S1;
-typedef struct func_8020EA10_S1 func_8020EA10_S1;
 
 struct ALVoice_s;
 typedef struct ALVoice_s ALVoice_s;
@@ -367,14 +359,6 @@ struct ALVoice_s {
 struct ALSynth_func_802B3000_de;
 typedef struct ALSynth_func_802B3000_de ALSynth_func_802B3000_de;
 
-struct func_80275120_S1;
-struct func_80275120_S1 {
-    float unk0;
-    char pad0[0x8 - 0x0 - sizeof(float)];
-    float unk8;
-    char pad8[0xC - 0x8 - sizeof(float)];
-    float unkC;
-};
 
 
 typedef signed int ( *Handler802A2B50)(void *, signed int, signed int, signed int, signed int);
@@ -453,8 +437,6 @@ struct UnitMtx {
     s32 m[16];
 };
 
-struct func_8024C864_S1;
-typedef struct func_8024C864_S1 func_8024C864_S1;
 
 struct __OSInode;
 typedef struct __OSInode __OSInode;
@@ -482,13 +464,6 @@ typedef struct TextLayerRect TextLayerRect;
 struct ObjRecAt2V1;
 typedef struct ObjRecAt2V1 ObjRecAt2V1;
 
-struct func_802044C8_S1;
-struct func_802044C8_S1 {
-    char pad0[0xE4];
-    u16 unkE4;
-    char padE4[0x100 - 0xE4 - sizeof(u16)];
-    s32 unk100;
-};
 
 struct Node75;
 typedef struct Node75 Node75;
@@ -525,8 +500,6 @@ struct Arg1Struct {
     s32 unk20;
 };
 
-struct func_80206930_S3;
-typedef struct func_80206930_S3 func_80206930_S3;
 
 union ObjectLinks4_3;
 typedef union ObjectLinks4_3 ObjectLinks4_3;
@@ -552,10 +525,6 @@ struct ObjRecAtB0 {
     s32 unkB0;
 };
 
-struct NodeEvent;
-struct NodeEvent {
-    s32 words[10];
-};
 
 struct Resource_func_80419E54_de;
 typedef struct Resource_func_80419E54_de Resource_func_80419E54_de;
@@ -606,11 +575,6 @@ struct Shape_typemap_110 {
     int field_1C;
 };
 
-struct func_80258BB4_S1;
-struct func_80258BB4_S1 {
-    char pad0[0x2BA4];
-    float unk2BA4;
-};
 
 struct ALFilter_s14;
 typedef struct ALFilter_s14 ALFilter_s14;
@@ -625,11 +589,6 @@ struct ALFilter_s14 {
     s32 type;
 };
 
-struct func_8025BD20_S1;
-struct func_8025BD20_S1 {
-    char pad0[0x4];
-    char unk4;
-};
 
 extern int D_801005A8;
 
@@ -664,11 +623,6 @@ struct Shape_typemap_21 {
 struct ObjRecAt1454V2;
 typedef struct ObjRecAt1454V2 ObjRecAt1454V2;
 
-struct func_8029A73C_S1;
-struct func_8029A73C_S1 {
-    char pad0[0x520];
-    int unk520;
-};
 
 struct Field_u16_14;
 struct Field_u16_14 {
@@ -685,8 +639,6 @@ struct func_8028469C_S2 {
 struct Block24;
 typedef struct Block24 Block24;
 
-struct func_8028B3C0_S1;
-typedef struct func_8028B3C0_S1 func_8028B3C0_S1;
 
 struct PlaneEquation;
 struct PlaneEquation {
@@ -721,33 +673,13 @@ struct Vec3Words {
     s32 w[3];
 };
 
-struct func_8022D418_S1;
-struct func_8022D418_S1 {
-    char pad0[0x658];
-    f32 unk658;
-    char pad658[0x664 - 0x658 - sizeof(f32)];
-    s32 unk664;
-    char pad664[0x72C - 0x664 - sizeof(s32)];
-    f32 unk72C;
-    char pad72C[0x850 - 0x72C - sizeof(f32)];
-    s32 unk850;
-};
 
-struct RecCode80291054;
-typedef struct RecCode80291054 RecCode80291054;
 
 struct func_80207B5C_S2;
 typedef struct func_80207B5C_S2 func_80207B5C_S2;
 
 extern int D_8010515C;
 
-struct Player_func_804356BC_de;
-struct Player_func_804356BC_de {
-    s32 state;
-    char pad4[0x14];
-    char slots[4][400];
-    char pad658[0xB68 - 0x658];
-};
 
 struct StateFlags;
 typedef struct StateFlags StateFlags;
@@ -758,14 +690,6 @@ struct StateFlags {
     u16 flags;
 };
 
-struct func_8024C864_S1;
-struct func_8024C864_S1 {
-    f32 unk0;
-    char pad0[0x4 - 0x0 - sizeof(f32)];
-    f32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(f32)];
-    f32 unk8;
-};
 
 struct OSMesgQueue;
 
@@ -782,14 +706,8 @@ struct OwnerRecAt5D8V2 {
     struct PlayerOptions *settings; /* its name text comes first */
 };
 
-struct func_8025CA44_S1;
-typedef struct func_8025CA44_S1 func_8025CA44_S1;
 
-struct func_802B4ECC_S1;
-typedef struct func_802B4ECC_S1 func_802B4ECC_S1;
 
-struct func_80207BB8_S4;
-typedef struct func_80207BB8_S4 func_80207BB8_S4;
 
 struct func_8022BC04_S3;
 typedef struct func_8022BC04_S3 func_8022BC04_S3;
@@ -806,13 +724,6 @@ struct Rec_func_8024C92C_de {
     s32 pad1;
 };
 
-struct func_80204468_S2;
-struct func_80204468_S2 {
-    char pad0[0x18];
-    void * unk18;
-    char pad18[0x100 - 0x18 - sizeof(void*)];
-    int unk100;
-};
 
 struct State_func_804232AC_de;
 struct State_func_804232AC_de {
@@ -844,13 +755,6 @@ typedef struct Field_s32_2E0 Field_s32_2E0;
 
 extern int D_8014693C;
 
-struct func_8028DA50_S1;
-struct func_8028DA50_S1 {
-    char pad0[0x14];
-    s32 unk14;
-    char pad14[0x18 - 0x14 - sizeof(s32)];
-    s32 unk18;
-};
 
 struct InventorySlot;
 struct InventorySlot {
@@ -873,11 +777,6 @@ struct func_8024DED0_S2 {
 struct ObjRecAt40V1;
 typedef struct ObjRecAt40V1 ObjRecAt40V1;
 
-struct func_80242278_S2;
-struct func_80242278_S2 {
-    char pad0[0x8];
-    u8 unk8;
-};
 
 struct func_8023945C_S1;
 struct func_8023945C_S1 {
@@ -885,40 +784,6 @@ struct func_8023945C_S1 {
     CVector3 unk128;
 };
 
-struct func_80272848_S1;
-struct func_80272848_S1 {
-    f32 unk0;
-    char pad0[0x4 - 0x0 - sizeof(f32)];
-    f32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(f32)];
-    f32 unk8;
-    char pad8[0xC - 0x8 - sizeof(f32)];
-    f32 unkC;
-    char padC[0x10 - 0xC - sizeof(f32)];
-    f32 unk10;
-    char pad10[0x14 - 0x10 - sizeof(f32)];
-    f32 unk14;
-    char pad14[0x18 - 0x14 - sizeof(f32)];
-    f32 unk18;
-    char pad18[0x1C - 0x18 - sizeof(f32)];
-    f32 unk1C;
-    char pad1C[0x20 - 0x1C - sizeof(f32)];
-    f32 unk20;
-    char pad20[0x24 - 0x20 - sizeof(f32)];
-    f32 unk24;
-    char pad24[0x28 - 0x24 - sizeof(f32)];
-    f32 unk28;
-    char pad28[0x2C - 0x28 - sizeof(f32)];
-    f32 unk2C;
-    char pad2C[0x30 - 0x2C - sizeof(f32)];
-    f32 unk30;
-    char pad30[0x34 - 0x30 - sizeof(f32)];
-    f32 unk34;
-    char pad34[0x38 - 0x34 - sizeof(f32)];
-    f32 unk38;
-    char pad38[0x3C - 0x38 - sizeof(f32)];
-    f32 unk3C;
-};
 
 struct ListScreenRecord;
 typedef struct ListScreenRecord ListScreenRecord;
@@ -948,16 +813,9 @@ struct func_80204EA8_S1 {
 
 extern IntrusiveList D_80137064;
 
-struct func_802A68A0_S3;
-typedef struct func_802A68A0_S3 func_802A68A0_S3;
 
 extern float D_8010AC7C;
 
-struct func_80258D60_S1;
-struct func_80258D60_S1 {
-    char pad0[0x84];
-    char unk84;
-};
 
 struct ObjRecAt1CV1;
 struct ObjRecAt1CV1 {
@@ -979,11 +837,6 @@ struct CROMInitialOrientation_t {
     s16 unk_12;
 };
 
-struct func_8020CA10_S2;
-struct func_8020CA10_S2 {
-    char pad0[0xC];
-    u16 unkC;
-};
 
 
 struct Object6C;
@@ -1014,11 +867,6 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 
-union func_80239C2C_S1_UF24;
-union func_80239C2C_S1_UF24 {
-    void * v0;
-    char v1;
-};
 
 struct ALHeap;
 struct ALHeap {
@@ -1083,17 +931,7 @@ struct ObjRecAt18V1 {
     s16 field18;
 };
 
-struct func_8022ED94_S1;
-struct func_8022ED94_S1 {
-    s32 unk0;
-    char pad0[0x4 - 0x0 - sizeof(s32)];
-    s32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(s32)];
-    s32 unk8;
-};
 
-union func_80239C2C_S1_UF24;
-typedef union func_80239C2C_S1_UF24 func_80239C2C_S1_UF24;
 
 struct MenuMarker;
 struct MenuMarker {
@@ -1109,8 +947,6 @@ typedef struct ObjRecAt2V2 ObjRecAt2V2;
 struct Draw;
 typedef struct Draw Draw;
 
-struct func_80258614_S1;
-typedef struct func_80258614_S1 func_80258614_S1;
 
 struct State_func_8042D8C4_de;
 
@@ -1160,16 +996,9 @@ struct func_80254D70_S2;
 typedef struct func_80254D70_S2 func_80254D70_S2;
 
 
-struct func_80207F90_S1;
-struct func_80207F90_S1 {
-    char pad0[0x100];
-    unsigned int unk100;
-};
 
 extern int D_80145048;
 
-struct func_802A2E5C_S2;
-typedef struct func_802A2E5C_S2 func_802A2E5C_S2;
 
 struct EntryRecAt0V1;
 struct EntryRecAt0V1 {
@@ -1180,24 +1009,10 @@ struct EntryRecAt0V1 {
 struct ObjRecAt80;
 typedef struct ObjRecAt80 ObjRecAt80;
 
-struct func_8022D418_S1;
-typedef struct func_8022D418_S1 func_8022D418_S1;
 
 struct ObjectLinks24_2;
 typedef struct ObjectLinks24_2 ObjectLinks24_2;
 
-struct func_80245690_S1;
-struct func_80245690_S1 {
-    s32 unk0;
-    char pad0[0x4 - 0x0 - sizeof(s32)];
-    s32 unk4;
-    char pad4[0x38 - 0x4 - sizeof(s32)];
-    s32 unk38;
-    char pad38[0x3C - 0x38 - sizeof(s32)];
-    s32 unk3C;
-    char pad3C[0x60 - 0x3C - sizeof(s32)];
-    s32 unk60;
-};
 
 struct ResourceRecAt6;
 struct ResourceRecAt6 {
@@ -1220,14 +1035,8 @@ struct ObjRecAt2V2 {
 
 extern int D_80111D24;
 
-struct func_80205700_S1;
-typedef struct func_80205700_S1 func_80205700_S1;
 
-struct func_8024E58C_S1;
-typedef struct func_8024E58C_S1 func_8024E58C_S1;
 
-struct PlayerRecAt58;
-typedef struct PlayerRecAt58 PlayerRecAt58;
 
 struct CROMInitialOrientation_t;
 typedef struct CROMInitialOrientation_t CROMInitialOrientation_t;
@@ -1256,8 +1065,6 @@ struct Owner_func_8043E494_de {
 struct Menu_func_8043E494_de;
 struct Owner_func_8043E494_de;
 
-struct func_8025C8F8_S1;
-typedef struct func_8025C8F8_S1 func_8025C8F8_S1;
 
 struct CellRecAt1A;
 struct CellRecAt1A {
@@ -1302,14 +1109,10 @@ struct ObjectState1E_2 {
     u8 unk_1D;
 };
 
-struct func_80258BB4_S1;
-typedef struct func_80258BB4_S1 func_80258BB4_S1;
 
 struct func_80255BEC_S1;
 typedef struct func_80255BEC_S1 func_80255BEC_S1;
 
-struct TutorialProgress;
-typedef struct TutorialProgress TutorialProgress;
 
 struct func_80204EA8_S1;
 typedef struct func_80204EA8_S1 func_80204EA8_S1;
@@ -1382,32 +1185,6 @@ struct __OSContRequesFormat {
     u8 dummy1;
 };
 
-struct func_80272908_S2;
-struct func_80272908_S2 {
-    f32 unk0;
-    char pad0[0x4 - 0x0 - sizeof(f32)];
-    f32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(f32)];
-    f32 unk8;
-    char pad8[0x10 - 0x8 - sizeof(f32)];
-    f32 unk10;
-    char pad10[0x14 - 0x10 - sizeof(f32)];
-    f32 unk14;
-    char pad14[0x18 - 0x14 - sizeof(f32)];
-    f32 unk18;
-    char pad18[0x20 - 0x18 - sizeof(f32)];
-    f32 unk20;
-    char pad20[0x24 - 0x20 - sizeof(f32)];
-    f32 unk24;
-    char pad24[0x28 - 0x24 - sizeof(f32)];
-    f32 unk28;
-    char pad28[0x30 - 0x28 - sizeof(f32)];
-    f32 unk30;
-    char pad30[0x34 - 0x30 - sizeof(f32)];
-    f32 unk34;
-    char pad34[0x38 - 0x34 - sizeof(f32)];
-    f32 unk38;
-};
 
 struct WeaponInfo;
 struct WeaponInfo {
@@ -1459,8 +1236,6 @@ struct InstanceHdr {
     };
 };
 
-struct func_8023EBEC_S1;
-typedef struct func_8023EBEC_S1 func_8023EBEC_S1;
 
 extern int D_800CB720;
 
@@ -1482,8 +1257,6 @@ struct __OSDir {
 struct GlyphBuffer;
 typedef struct GlyphBuffer GlyphBuffer;
 
-struct func_80207F90_S1;
-typedef struct func_80207F90_S1 func_80207F90_S1;
 
 struct Part;
 struct Part {
@@ -1533,11 +1306,6 @@ typedef struct Shape Shape;
 struct UnitVtx;
 typedef struct UnitVtx UnitVtx;
 
-struct Access_u8_3;
-struct Access_u8_3 {
-    char pad[0x3];
-    u8 field;
-};
 
 struct Actor_func_80214310_de;
 typedef struct Actor_func_80214310_de Actor_func_80214310_de;
@@ -1565,20 +1333,8 @@ union func_8028472C_S2_U118 {
 union func_8028472C_S2_U118;
 typedef union func_8028472C_S2_U118 func_8028472C_S2_U118;
 
-struct func_8020D0CC_S1;
-struct func_8020D0CC_S1 {
-    char pad0[0x24];
-    void * unk24;
-};
 
-struct func_8022CA04_S4;
-typedef struct func_8022CA04_S4 func_8022CA04_S4;
 
-struct func_8020EA10_S1;
-struct func_8020EA10_S1 {
-    char pad0[0x78];
-    s32 unk78;
-};
 
 struct Triple_func_802683E0_de;
 typedef struct Triple_func_802683E0_de Triple_func_802683E0_de;
@@ -1600,23 +1356,8 @@ struct Shared_HudView {
 struct ALEventListItem;
 typedef struct ALEventListItem ALEventListItem;
 
-struct func_80207BB8_S4;
-struct func_80207BB8_S4 {
-    char pad0[0x64];
-    f32 unk64;
-};
 
-struct func_8022CA04_S4;
-struct func_8022CA04_S4 {
-    char pad0[0x1C];
-    CVector3 unk1C;
-};
 
-struct func_80435010_S4;
-struct func_80435010_S4 {
-    char pad0[0xB9C];
-    s32 unkB9C;
-};
 
 
 struct PackedMatrixWords;
@@ -1625,20 +1366,7 @@ struct PackedMatrixWords {
     u32 lower[8];
 };
 
-struct func_8024575C_S1;
-typedef struct func_8024575C_S1 func_8024575C_S1;
 
-struct func_80239CDC_S1;
-struct func_80239CDC_S1 {
-    char pad0[0x4];
-    int unk4;
-    char pad4[0x8 - 0x4 - sizeof(int)];
-    int unk8;
-    char pad8[0xC - 0x8 - sizeof(int)];
-    int unkC;
-    char padC[0x10 - 0xC - sizeof(int)];
-    int unk10;
-};
 
 struct ObjRecAt128;
 struct ObjRecAt128 {
@@ -1674,11 +1402,6 @@ struct Record_func_80439C80_de {
 struct Shared_PakMenu;
 struct PakMenuSlot;
 
-struct func_8022A5E4_S2;
-struct func_8022A5E4_S2 {
-    char pad0[0x16E0];
-    void * unk16E0;
-};
 
 struct MenuPanelRoot;
 struct MenuPanelRoot {
@@ -1697,8 +1420,6 @@ struct ReadWord {
     u8 byte;
 };
 
-struct func_802044C8_S1;
-typedef struct func_802044C8_S1 func_802044C8_S1;
 
 struct MatchMenuObjects;
 struct MatchMenuObjects {
@@ -1706,8 +1427,6 @@ struct MatchMenuObjects {
     s32 transition;
 };
 
-struct RecCode802080008020E674;
-typedef struct RecCode802080008020E674 RecCode802080008020E674;
 
 struct Shape_typemap_13;
 struct Shape_typemap_13 {
@@ -1715,11 +1434,6 @@ struct Shape_typemap_13 {
     int field_4;
 };
 
-struct func_8028B3C0_S1;
-struct func_8028B3C0_S1 {
-    char pad0[0x84];
-    void * unk84;
-};
 
 struct ObjRecAt4V1;
 typedef struct ObjRecAt4V1 ObjRecAt4V1;
@@ -1756,14 +1470,7 @@ struct HashNode {
 struct InstanceHdr;
 typedef struct InstanceHdr InstanceHdr;
 
-struct func_8024C8B4_S1;
-typedef struct func_8024C8B4_S1 func_8024C8B4_S1;
 
-struct func_8020C9B0_S1;
-struct func_8020C9B0_S1 {
-    char pad0[0x8];
-    char * unk8;
-};
 
 struct func_80245A10_S1;
 typedef struct func_80245A10_S1 func_80245A10_S1;
@@ -1772,16 +1479,10 @@ typedef struct func_80245A10_S1 func_80245A10_S1;
 struct Params;
 typedef struct Params Params;
 
-struct func_802077F4_S4;
-typedef struct func_802077F4_S4 func_802077F4_S4;
 
-struct func_80204BB4_S1;
-typedef struct func_80204BB4_S1 func_80204BB4_S1;
 
 struct OSMesgQueue;
 
-struct func_802B7EB0_S1;
-typedef struct func_802B7EB0_S1 func_802B7EB0_S1;
 
 struct MenuRules;
 struct MenuRules {
@@ -1798,15 +1499,11 @@ struct func_80207B5C_S2 {
 struct TextEntry;
 typedef struct TextEntry TextEntry;
 
-struct func_802428C0_S2;
-typedef struct func_802428C0_S2 func_802428C0_S2;
 
 struct ObjRecAt28V2;
 typedef struct ObjRecAt28V2 ObjRecAt28V2;
 
 
-struct func_80272908_S2;
-typedef struct func_80272908_S2 func_80272908_S2;
 
 struct Quad_func_802A1BE0_de;
 typedef struct Quad_func_802A1BE0_de Quad_func_802A1BE0_de;
@@ -1828,14 +1525,10 @@ struct Params {
 struct Node80253610;
 typedef struct Node80253610 Node80253610;
 
-struct func_8023ECAC_S2;
-typedef struct func_8023ECAC_S2 func_8023ECAC_S2;
 
 struct ObjRecAt14V3;
 typedef struct ObjRecAt14V3 ObjRecAt14V3;
 
-struct func_80251448_S1;
-typedef struct func_80251448_S1 func_80251448_S1;
 
 struct Instance8020CD74;
 typedef struct Instance8020CD74 Instance8020CD74;
@@ -1869,24 +1562,8 @@ struct UnitVtx {
 
 extern int D_800D0910;
 
-struct func_80250DBC_S2;
-typedef struct func_80250DBC_S2 func_80250DBC_S2;
 
-struct func_8025C8F8_S1;
-struct func_8025C8F8_S1 {
-    char pad0[0x14];
-    IntrusiveList unk14;
-    char pad14[0x28 - 0x14 - sizeof(IntrusiveList)];
-    s32 unk28;
-};
 
-struct func_8024B8DC_S2;
-struct func_8024B8DC_S2 {
-    char pad0[0x4];
-    s32 unk4;
-    char pad4[0xC - 0x4 - sizeof(s32)];
-    s32 unkC;
-};
 
 
 extern unsigned char D_800D297B;
@@ -1903,11 +1580,6 @@ typedef struct ObjRecAt26DD4 ObjRecAt26DD4;
 
 struct ObjRecAt26DD4;
 
-struct func_80435010_S3;
-struct func_80435010_S3 {
-    char pad0[0xB8C];
-    u8 unkB8C;
-};
 
 struct func_802A2BE0_S1;
 typedef struct func_802A2BE0_S1 func_802A2BE0_S1;
@@ -1965,22 +1637,6 @@ struct World {
 };
 typedef struct World World;
 
-struct func_80251448_S1;
-struct func_80251448_S1 {
-    s32 unk0;
-    char pad0[0x8 - 0x0 - sizeof(s32)];
-    s32 unk8;
-    char pad8[0xC - 0x8 - sizeof(s32)];
-    s32 unkC;
-    char padC[0x10 - 0xC - sizeof(s32)];
-    s32 unk10;
-    char pad10[0x14 - 0x10 - sizeof(s32)];
-    s32 unk14;
-    char pad14[0x20 - 0x14 - sizeof(s32)];
-    s32 unk20;
-    char pad20[0x24 - 0x20 - sizeof(s32)];
-    s32 unk24;
-};
 
 struct Field;
 struct Field {
@@ -2004,11 +1660,6 @@ struct func_802165F8_S1 {
 
 struct Field_void_80;
 
-struct func_802558C0_S1;
-struct func_802558C0_S1 {
-    char pad0[0x20];
-    char unk20;
-};
 
 struct ObjectState1E_2;
 typedef struct ObjectState1E_2 ObjectState1E_2;
@@ -2047,23 +1698,13 @@ struct Header {
     u8 data[0xCC];
 };
 
-struct Access_u8_3;
-typedef struct Access_u8_3 Access_u8_3;
 
 struct Vec3Words;
 typedef struct Vec3Words Vec3Words;
 
-struct func_80258D60_S1;
-typedef struct func_80258D60_S1 func_80258D60_S1;
 
-struct func_8022A5E4_S2;
-typedef struct func_8022A5E4_S2 func_8022A5E4_S2;
 
-struct func_80245690_S1;
-typedef struct func_80245690_S1 func_80245690_S1;
 
-struct ObjRecAtA;
-typedef struct ObjRecAtA ObjRecAtA;
 
 struct State_func_80421D94_de;
 struct State_func_80421D94_de {
@@ -2125,8 +1766,6 @@ extern int D_800D3650;
 struct Buf16;
 typedef struct Buf16 Buf16;
 
-struct func_80272BA8_S2;
-typedef struct func_80272BA8_S2 func_80272BA8_S2;
 
 struct func_8020D0CC_S2;
 typedef struct func_8020D0CC_S2 func_8020D0CC_S2;
@@ -2155,11 +1794,6 @@ struct Request {
     s16 type;
 };
 
-struct func_802428C0_S2;
-struct func_802428C0_S2 {
-    char pad0[0x38];
-    unsigned int unk38;
-};
 
 struct ControllerRecAtC7;
 typedef struct ControllerRecAtC7 ControllerRecAtC7;
@@ -2171,7 +1805,6 @@ struct ALFilter_s_func_802B3000_de {
     ALSetParam setParam;
 };
 
-extern int D_801427D0;
 
 struct Field_u16_14;
 typedef struct Field_u16_14 Field_u16_14;
@@ -2244,24 +1877,12 @@ extern float D_800C4458_de;
 struct ObjRecAt6V1;
 typedef struct ObjRecAt6V1 ObjRecAt6V1;
 
-struct func_8028DA50_S1;
-typedef struct func_8028DA50_S1 func_8028DA50_S1;
 
 extern int D_800D5258;
 
-struct func_802A68A0_S3;
-struct func_802A68A0_S3 {
-    char pad0[0x118];
-    void * unk118;
-};
 
 struct ObjRecAtDC;
 
-struct ModelDef;
-struct ModelDef {
-    char pad0[0xE];
-    u8 colour;
-};
 
 struct func_80284AF4_G2;
 typedef struct func_80284AF4_G2 func_80284AF4_G2;
@@ -2304,30 +1925,10 @@ union func_8026E158_S1_U8 {
     char v1;
 };
 
-struct func_8020C9B0_S1;
-typedef struct func_8020C9B0_S1 func_8020C9B0_S1;
 
-struct func_80275120_S1;
-typedef struct func_80275120_S1 func_80275120_S1;
 
-struct func_80239760_S2;
-struct func_80239760_S2 {
-    char pad0[0xE40];
-    IntrusiveList unkE40;
-};
 
-struct func_802A2E5C_S2;
-struct func_802A2E5C_S2 {
-    char pad0[0x4];
-    void * unk4;
-    char pad4[0xE - 0x4 - sizeof(void*)];
-    u16 unkE;
-    char padE[0x10 - 0xE - sizeof(u16)];
-    s8 unk10;
-};
 
-struct func_80242278_S2;
-typedef struct func_80242278_S2 func_80242278_S2;
 
 struct ObjRecAt1CV3;
 typedef struct ObjRecAt1CV3 ObjRecAt1CV3;
@@ -2345,13 +1946,6 @@ struct Work56EC8 {
 struct MenuSettings;
 typedef struct MenuSettings MenuSettings;
 
-struct func_8023ECAC_S2;
-struct func_8023ECAC_S2 {
-    char pad0[0x44];
-    s32 unk44;
-    char pad44[0x52 - 0x44 - sizeof(s32)];
-    u16 unk52;
-};
 
 struct PackedMatrixWords;
 typedef struct PackedMatrixWords PackedMatrixWords;
@@ -2359,8 +1953,6 @@ typedef struct PackedMatrixWords PackedMatrixWords;
 struct ObjRecAt2CV2;
 typedef struct ObjRecAt2CV2 ObjRecAt2CV2;
 
-struct func_8020CA10_S2;
-typedef struct func_8020CA10_S2 func_8020CA10_S2;
 
 struct func_80254D70_S2;
 struct func_80254D70_S2 {
@@ -2368,8 +1960,6 @@ struct func_80254D70_S2 {
     s32 unk8;
 };
 
-struct func_8025BD20_S1;
-typedef struct func_8025BD20_S1 func_8025BD20_S1;
 
 struct func_8020D0CC_S2;
 struct func_8020D0CC_S2 {
@@ -2419,43 +2009,21 @@ struct Field_f32_10 {
     f32 value;
 };
 
-struct func_80435010_S4;
-typedef struct func_80435010_S4 func_80435010_S4;
 
-struct PlayerRecAt58;
-struct PlayerRecAt58 {
-    char pad[0x58];
-    int state;
-    char pad5C[0xB68 - 0x5C];
-};
 
-struct func_8025CA44_S1;
-struct func_8025CA44_S1 {
-    char pad0[0x14];
-    IntrusiveList unk14;
-};
 
 extern int D_801534F0[];
 
 struct HashNode;
 typedef struct HashNode HashNode;
 
-struct ObjRecAtA;
-struct ObjRecAtA {
-    char pad0[0xA];
-    short unkA;
-};
 
-struct func_8029A838_S1;
-typedef struct func_8029A838_S1 func_8029A838_S1;
 
 struct Record;
 typedef struct Record Record;
 
 extern float D_80146CB8;
 
-struct func_802558C0_S1;
-typedef struct func_802558C0_S1 func_802558C0_S1;
 
 struct Shape_typemap_71;
 struct Shape_typemap_71 {
@@ -2463,12 +2031,6 @@ struct Shape_typemap_71 {
     int field_1C;
 };
 
-struct func_8024E58C_S1;
-struct func_8024E58C_S1 {
-    f32 unk0;
-    char pad0[0x8 - 0x0 - sizeof(f32)];
-    f32 unk8;
-};
 
 struct BufferPool;
 typedef struct BufferPool BufferPool;
@@ -2544,26 +2106,11 @@ struct ObjRecAt6V1 {
     unsigned short unk6;
 };
 
-struct func_80206930_S3;
-struct func_80206930_S3 {
-    char pad0[0x7];
-    unsigned char unk7;
-};
 
-struct func_8029A9E0_S1;
-typedef struct func_8029A9E0_S1 func_8029A9E0_S1;
 
 struct Shared_HudView;
 typedef struct Shared_HudView Shared_HudView;
 
-struct TutorialProgress;
-struct TutorialProgress {
-    char pad0[0x1C];
-    s32 unk1C;
-    s32 unk20;
-    char pad24[4];
-    s32 unk28;
-};
 
 struct StateRecAt14;
 typedef struct StateRecAt14 StateRecAt14;
@@ -2584,11 +2131,7 @@ struct ObjectLinks24_2 {
     s32 unk_20;
 };
 
-struct func_8020F2A8_S3;
-typedef struct func_8020F2A8_S3 func_8020F2A8_S3;
 
-struct func_802831FC_S1;
-typedef struct func_802831FC_S1 func_802831FC_S1;
 
 struct Link;
 struct Link {
@@ -2611,29 +2154,11 @@ struct ObjRecAt14V1 {
 struct OSPifRam;
 typedef struct OSPifRam OSPifRam;
 
-struct RecCode8026AC38;
-struct RecCode8026AC38 {
-    char pad0[0x8];
-    func_8026E158_S1_U8 unk8;
-};
 
 struct ObjRecAt1454V1;
 typedef struct ObjRecAt1454V1 ObjRecAt1454V1;
 
-struct RecCode80291054;
-struct RecCode80291054 {
-    char pad0[0x26DBC];
-    s32 unk26DBC;
-    char pad26DBC[0x26DC1 - 0x26DBC - sizeof(s32)];
-    s8 unk26DC1;
-    char pad26DC1[0x26DD8 - 0x26DC1 - sizeof(s8)];
-    s32 unk26DD8;
-    char pad26DD8[0x26DDC - 0x26DD8 - sizeof(s32)];
-    s32 unk26DDC;
-};
 
-struct func_80435010_S3;
-typedef struct func_80435010_S3 func_80435010_S3;
 
 struct SlotsCode804196C0;
 struct SlotsCode804196C0 {
@@ -2650,16 +2175,6 @@ struct D_800C7470_Pair {
     f32 second;
 };
 
-struct func_8024C8B4_S1;
-struct func_8024C8B4_S1 {
-    f32 unk0;
-    char pad0[0x4 - 0x0 - sizeof(f32)];
-    f32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(f32)];
-    f32 unk8;
-    char pad8[0xC - 0x8 - sizeof(f32)];
-    f32 unkC;
-};
 
 struct Pair14;
 struct Pair14 {
@@ -2674,43 +2189,11 @@ struct ObjRecAt40V1 {
     s32 unk40;
 };
 
-struct RecCode802080008020E674;
-struct RecCode802080008020E674 {
-    char pad0[0x8];
-    func_8020E674_S1_U8 unk8;
-};
 
-struct func_80272BA8_S2;
-struct func_80272BA8_S2 {
-    f32 unk0;
-    char pad0[0x4 - 0x0 - sizeof(f32)];
-    f32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(f32)];
-    f32 unk8;
-    char pad8[0x10 - 0x8 - sizeof(f32)];
-    f32 unk10;
-    char pad10[0x14 - 0x10 - sizeof(f32)];
-    f32 unk14;
-    char pad14[0x18 - 0x14 - sizeof(f32)];
-    f32 unk18;
-    char pad18[0x20 - 0x18 - sizeof(f32)];
-    f32 unk20;
-    char pad20[0x24 - 0x20 - sizeof(f32)];
-    f32 unk24;
-    char pad24[0x28 - 0x24 - sizeof(f32)];
-    f32 unk28;
-};
 
 struct func_804360F4_S2;
 typedef struct func_804360F4_S2 func_804360F4_S2;
 
-struct func_802B4ECC_S1;
-struct func_802B4ECC_S1 {
-    char pad0[0x18];
-    void * unk18;
-    char pad18[0x24 - 0x18 - sizeof(void*)];
-    s32 unk24;
-};
 
 struct SlotRecAt0V1;
 struct SlotRecAt0V1 {
@@ -2718,11 +2201,6 @@ struct SlotRecAt0V1 {
     char pad[0x70 - 4];
 };
 
-struct Shape_typemap_30;
-struct Shape_typemap_30 {
-    unsigned char padding_0[32];
-    int field_20;
-};
 
 struct Block24;
 struct Block24 {
@@ -2739,11 +2217,6 @@ struct ALVoiceConfig_s {
 struct IntegerStateDC_2;
 typedef struct IntegerStateDC_2 IntegerStateDC_2;
 
-struct func_802077F4_S4;
-struct func_802077F4_S4 {
-    char pad0[0x40];
-    f32 unk40;
-};
 
 struct List;
 struct List {
@@ -2766,25 +2239,10 @@ struct ObjRecAt7528 {
     void * unk7528;
 };
 
-struct func_8025C598_S1;
-struct func_8025C598_S1 {
-    s32 unk0;
-    char pad0[0xB0 - 0x0 - sizeof(s32)];
-    s32 unkB0;
-};
 
 struct MatchMenuObjects;
 typedef struct MatchMenuObjects MatchMenuObjects;
 
-struct func_80247F08_S1;
-struct func_80247F08_S1 {
-    char pad0[0x30];
-    f32 unk30;
-    char pad30[0x34 - 0x30 - sizeof(f32)];
-    f32 unk34;
-    char pad34[0x38 - 0x34 - sizeof(f32)];
-    f32 unk38;
-};
 
 /* Per-button tap, age, repeat and hold counters consumed by the input update. */
 typedef struct ControllerButtonHistory {
@@ -2832,8 +2290,6 @@ typedef struct Args Args;
 struct ObjRecAt8V2;
 typedef struct ObjRecAt8V2 ObjRecAt8V2;
 
-struct func_80272848_S1;
-typedef struct func_80272848_S1 func_80272848_S1;
 
 struct Actor_func_80214310_de;
 struct Actor_func_80214310_de {
@@ -2870,8 +2326,6 @@ struct Draw {
 struct Field_void_4;
 typedef struct Field_void_4 Field_void_4;
 
-struct func_80293268_S1;
-typedef struct func_80293268_S1 func_80293268_S1;
 
 struct func_80250BD4_S1;
 typedef struct func_80250BD4_S1 func_80250BD4_S1;
@@ -2907,11 +2361,6 @@ struct World_func_8028787C_de {
     s32 level; /* 0x1B40C */
 };
 
-struct func_80250DBC_S2;
-struct func_80250DBC_S2 {
-    char pad0[0xE];
-    s8 unkE;
-};
 
 struct Field_void_80;
 typedef struct Field_void_80 Field_void_80;
@@ -2927,35 +2376,17 @@ struct Node80253610 {
 struct ObjRecAt14V2;
 typedef struct ObjRecAt14V2 ObjRecAt14V2;
 
-struct func_80247F08_S1;
-typedef struct func_80247F08_S1 func_80247F08_S1;
 
 struct HudStatusShared_Settings;
 typedef struct HudStatusShared_Settings HudStatusShared_Settings;
 
-struct func_80204BB4_S1;
-struct func_80204BB4_S1 {
-    char pad0[0x2C];
-    void * unk2C;
-    char pad2C[0x108 - 0x2C - sizeof(void*)];
-    void * unk108;
-};
 
-struct func_80239760_S2;
-typedef struct func_80239760_S2 func_80239760_S2;
 
-struct func_8023EBEC_S1;
-struct func_8023EBEC_S1 {
-    char pad0[0x3C];
-    s32 unk3C;
-};
 
 
 struct func_8022CA04_S3;
 typedef struct func_8022CA04_S3 func_8022CA04_S3;
 
-struct NodeEvent;
-typedef struct NodeEvent NodeEvent;
 
 struct MenuStyle;
 typedef struct MenuStyle MenuStyle;
@@ -2966,18 +2397,6 @@ typedef struct Access_s32_5C Access_s32_5C;
 struct ObjRecAt130;
 typedef struct ObjRecAt130 ObjRecAt130;
 
-struct func_80293268_S1;
-struct func_80293268_S1 {
-    s32 unk0;
-    char pad0[0x4 - 0x0 - sizeof(s32)];
-    s32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(s32)];
-    s32 unk8;
-    char pad8[0xC - 0x8 - sizeof(s32)];
-    s32 unkC;
-    char padC[0x88 - 0xC - sizeof(s32)];
-    s32 unk88;
-};
 
 struct Work56EC8;
 typedef struct Work56EC8 Work56EC8;
@@ -2987,12 +2406,6 @@ typedef struct Table Table;
 
 extern int D_80153500[];
 
-struct func_8029A838_S1;
-struct func_8029A838_S1 {
-    s32 unk0;
-    char pad0[0x10 - 0x0 - sizeof(s32)];
-    s32 unk10;
-};
 
 struct RecordRecAt14;
 struct RecordRecAt14 {
@@ -3018,8 +2431,6 @@ typedef struct ObjRecAtB0 ObjRecAtB0;
 struct ControllerProfile;
 typedef struct ControllerProfile ControllerProfile;
 
-struct func_8024B8DC_S2;
-typedef struct func_8024B8DC_S2 func_8024B8DC_S2;
 
 struct func_80205494_S3;
 
@@ -3074,8 +2485,6 @@ extern int D_80100598[];
 
 struct ObjRecAt3CV1;
 
-struct func_80204468_S2;
-typedef struct func_80204468_S2 func_80204468_S2;
 
 struct func_80203908_S4;
 struct func_80203908_S4 {
@@ -3090,8 +2499,6 @@ typedef struct ObjRecAtDC ObjRecAtDC;
 struct func_8020D9C0_S1;
 typedef struct func_8020D9C0_S1 func_8020D9C0_S1;
 
-struct func_802045CC_S1;
-typedef struct func_802045CC_S1 func_802045CC_S1;
 
 struct ALFilter_s_func_802B3000_de;
 typedef struct ALFilter_s_func_802B3000_de ALFilter_s_func_802B3000_de;
@@ -3099,11 +2506,7 @@ typedef struct ALFilter_s_func_802B3000_de ALFilter_s_func_802B3000_de;
 struct ObjectStateC_2;
 typedef struct ObjectStateC_2 ObjectStateC_2;
 
-struct RecCode8026AC38;
-typedef struct RecCode8026AC38 RecCode8026AC38;
 
-struct PixelFormat;
-typedef struct PixelFormat PixelFormat;
 
 struct Input80216D3C;
 struct Input80216D3C {
@@ -3118,11 +2521,6 @@ struct CallbackStateC_4 {
     void (*callback)(void *, s32, void *);
 };
 
-struct func_8029A9E0_S1;
-struct func_8029A9E0_S1 {
-    char pad0[0x4];
-    unsigned int unk4;
-};
 
 struct StateCode80420E90;
 typedef struct StateCode80420E90 StateCode80420E90;
@@ -3144,14 +2542,7 @@ struct Status {
 struct Model;
 typedef struct Model Model;
 
-struct func_802428C0_S1;
-typedef struct func_802428C0_S1 func_802428C0_S1;
 
-struct func_802045CC_S1;
-struct func_802045CC_S1 {
-    char pad0[0x12C];
-    s32 unk12C;
-};
 
 struct EntryRecAt8V1;
 struct EntryRecAt8V1 {
@@ -3182,22 +2573,12 @@ struct HudStatusShared_Settings {
     s32 humanWon;
 };
 
-struct func_80205700_S1;
-struct func_80205700_S1 {
-    char pad0[0xC];
-    unsigned int unkC;
-};
 
 extern int D_8010BBF0[];
 
 struct WeaponInfo;
 typedef struct WeaponInfo WeaponInfo;
 
-struct func_8024575C_S1;
-struct func_8024575C_S1 {
-    char pad0[0xDC];
-    int unkDC;
-};
 
 struct func_8020D9C0_S1;
 struct func_8020D9C0_S1 {
@@ -3230,8 +2611,6 @@ struct func_802A2BE0_S1 {
     u16 unk12;
 };
 
-struct ObjRecAt4V3;
-typedef struct ObjRecAt4V3 ObjRecAt4V3;
 
 struct MenuSettings;
 struct MenuSettings {
@@ -3243,21 +2622,7 @@ struct MenuSettings {
     u8 language;
 };
 
-struct func_802B7EB0_S1;
-struct func_802B7EB0_S1 {
-    char pad0[0x14];
-    char unk14;
-    char pad14[0x3C - 0x14 - sizeof(char)];
-    s32 unk3C;
-    char pad3C[0x40 - 0x3C - sizeof(s32)];
-    s32 unk40;
-};
 
-struct func_802831FC_S1;
-struct func_802831FC_S1 {
-    char pad0[0xFC3C];
-    s8 * unkFC3C;
-};
 
 struct IntegerStateDC_2;
 struct IntegerStateDC_2 {
@@ -3268,14 +2633,7 @@ struct IntegerStateDC_2 {
 struct func_8022E3B4_S3;
 typedef struct func_8022E3B4_S3 func_8022E3B4_S3;
 
-struct func_80239CDC_S1;
-typedef struct func_80239CDC_S1 func_80239CDC_S1;
 
-struct func_8020F2A8_S3;
-struct func_8020F2A8_S3 {
-    char pad0[0x34];
-    s32 unk34;
-};
 
 struct NodeCode8028469C;
 typedef struct NodeCode8028469C NodeCode8028469C;
@@ -3288,21 +2646,10 @@ struct func_8024C5C4_S2 {
     char unk8;
 };
 
-struct func_80258614_S1;
-struct func_80258614_S1 {
-    char pad0[0x110];
-    s32 unk110;
-    char pad110[0x138 - 0x110 - sizeof(s32)];
-    char unk138;
-    char pad138[0x1DB8 - 0x138 - sizeof(char)];
-    char unk1DB8;
-};
 
 struct Obj_func_802B3EDC_de;
 typedef struct Obj_func_802B3EDC_de Obj_func_802B3EDC_de;
 
-struct func_8020D0CC_S1;
-typedef struct func_8020D0CC_S1 func_8020D0CC_S1;
 
 struct ParamsRecAt8V1;
 struct ParamsRecAt8V1 {
@@ -3311,11 +2658,6 @@ struct ParamsRecAt8V1 {
     s16 f8;
 };
 
-struct func_802428C0_S1;
-struct func_802428C0_S1 {
-    char pad0[0x3C];
-    unsigned int unk3C;
-};
 
 extern int D_80145070;
 
@@ -3324,12 +2666,6 @@ struct PlayerRecord {
     char data[0x190];
 };
 
-struct ObjRecAt4V3;
-struct ObjRecAt4V3 {
-    void * unk0;
-    char pad0[0x4 - 0x0 - sizeof(void*)];
-    s32 unk4;
-};
 
 struct func_8025E5B0_S1;
 typedef struct func_8025E5B0_S1 func_8025E5B0_S1;

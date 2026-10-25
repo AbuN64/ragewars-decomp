@@ -9,25 +9,7 @@ struct SharedPlayer;
 struct IntegerState244;
 typedef struct IntegerState244 IntegerState244;
 
-struct func_8022CDAC_S1;
-struct func_8022CDAC_S1 {
-    char pad0[0x658];
-    f32 unk658;
-    char pad658[0x6A4 - 0x658 - sizeof(f32)];
-    f32 unk6A4;
-    char pad6A4[0x6C4 - 0x6A4 - sizeof(f32)];
-    f32 unk6C4;
-};
 
-struct func_8022CC24_S1;
-struct func_8022CC24_S1 {
-    char pad0[0x660];
-    s32 unk660;
-    char pad660[0x86C - 0x660 - sizeof(s32)];
-    s32 unk86C;
-    char pad86C[0x13B4 - 0x86C - sizeof(s32)];
-    void * unk13B4;
-};
 
 extern void func_8022D420_de(void);
 
@@ -40,33 +22,9 @@ extern void func_8022D1A8_de(void *arg0);
 
 extern void func_8022D254_de(void);
 
-struct func_8022D030_S1;
-struct func_8022D030_S1 {
-    char pad0[0xE4];
-    u16 unkE4;
-    char padE4[0x10E - 0xE4 - sizeof(u16)];
-    s8 unk10E;
-    char pad10E[0x650 - 0x10E - sizeof(s8)];
-    s16 unk650;
-    char pad650[0x658 - 0x650 - sizeof(s16)];
-    f32 unk658;
-    char pad658[0x6C0 - 0x658 - sizeof(f32)];
-    f32 unk6C0;
-    char pad6C0[0x6C8 - 0x6C0 - sizeof(f32)];
-    f32 unk6C8;
-    char pad6C8[0x86C - 0x6C8 - sizeof(f32)];
-    s32 unk86C;
-};
 
 extern float D_800C2D90_de;
 
-struct func_8022D154_S2;
-struct func_8022D154_S2 {
-    char pad0[0x6C4];
-    s32 unk6C4;
-    char pad6C4[0x6E0 - 0x6C4 - sizeof(s32)];
-    f32 unk6E0;
-};
 
 struct Actor_func_8022D290_de;
 struct Actor_func_8022D290_de {
@@ -465,8 +423,6 @@ struct Actor_func_8022D290_de {
 
 extern float D_800C2DBC_de;
 
-struct func_8022C894_S1;
-typedef struct func_8022C894_S1 func_8022C894_S1;
 
 extern void func_8022D49C_de(void);
 
@@ -474,19 +430,10 @@ extern float D_800C2DB8_de;
 
 extern float D_800C7E9C;
 
-struct func_8022D154_S1;
-struct func_8022D154_S1 {
-    char pad0[0x6C0];
-    s32 unk6C0;
-};
 
 
 
-struct func_8022D154_S2;
-typedef struct func_8022D154_S2 func_8022D154_S2;
 
-struct func_8022D154_S1;
-typedef struct func_8022D154_S1 func_8022D154_S1;
 
 extern float D_800C7E90;
 
@@ -496,16 +443,7 @@ extern float D_800C7E94;
 
 extern float D_800C2D8C_de;
 
-struct func_8022CDAC_S1;
-typedef struct func_8022CDAC_S1 func_8022CDAC_S1;
 
-struct func_8022CA04_S2;
-struct func_8022CA04_S2 {
-    char pad0[0x18];
-    void * unk18;
-    char pad18[0x20 - 0x18 - sizeof(void*)];
-    f32 unk20;
-};
 
 
 
@@ -520,18 +458,9 @@ extern float D_800C2D80_de;
 
 extern void func_8022CF18_de(void);
 
-struct func_8022C894_S1;
-struct func_8022C894_S1 {
-    char pad0[0x6C0];
-    f32 unk6C0;
-    char pad6C0[0x6C4 - 0x6C0 - sizeof(f32)];
-    f32 unk6C4;
-};
 
 extern void func_8022D20C_de(void);
 
-struct func_8022CC24_S1;
-typedef struct func_8022CC24_S1 func_8022CC24_S1;
 
 extern void func_8022D3F4_de(void);
 
@@ -540,61 +469,26 @@ typedef struct Actor_func_8022D290_de Actor_func_8022D290_de;
 
 extern float D_800C2DC0_de;
 
-struct func_8022D030_S1;
-typedef struct func_8022D030_S1 func_8022D030_S1;
 
 extern void func_8022D288_de(void);
 
 extern void func_8022D4A4_de(void);
 
-struct func_8022D198_S1;
-typedef struct func_8022D198_S1 func_8022D198_S1;
 
-struct func_8022D204_S1;
-typedef struct func_8022D204_S1 func_8022D204_S1;
 
 extern void func_8022C8EC_de(void);
 
-struct func_8022CA04_S5;
-struct func_8022CA04_S5 {
-    char pad0[0x8];
-    s32 unk8;
-    char pad8[0xC - 0x8 - sizeof(s32)];
-    s32 unkC;
-    char padC[0x10 - 0xC - sizeof(s32)];
-    s32 unk10;
-    char pad10[0x5D8 - 0x10 - sizeof(s32)];
-    void * unk5D8;
-};
 
 extern float D_800C2D84_de;
 
 struct FloatState6C8;
 typedef struct FloatState6C8 FloatState6C8;
 
-struct func_8022CF28_S2;
-struct func_8022CF28_S2 {
-    char pad0[0x8];
-    CVector3 unk8;
-    char pad8[0x20 - 0x8 - sizeof(CVector3)];
-    f32 unk20;
-    char pad20[0x38 - 0x20 - sizeof(f32)];
-    s32 unk38;
-};
 
 extern void func_8022C8F4_de(void);
 
 extern void func_8022D25C_de(void *arg0);
 
-struct func_8022D198_S1;
-struct func_8022D198_S1 {
-    char pad0[0x4A0];
-    CVector3 unk4A0;
-    char pad4A0[0x6E8 - 0x4A0 - sizeof(CVector3)];
-    CVector3 unk6E8;
-    char pad6E8[0x16C4 - 0x6E8 - sizeof(CVector3)];
-    CVector3 unk16C4;
-};
 
 
 
@@ -622,13 +516,9 @@ struct ObjectLinks1458_2 {
     void * unk_1454;
 };
 
-struct func_8022CF28_S2;
-typedef struct func_8022CF28_S2 func_8022CF28_S2;
 
 extern float D_800C7E98;
 
-struct func_8022CA04_S2;
-typedef struct func_8022CA04_S2 func_8022CA04_S2;
 
 struct FloatState6C8;
 struct FloatState6C8 {
@@ -640,37 +530,11 @@ struct FloatState6C8 {
 
 
 
-struct func_8022D204_S1;
-struct func_8022D204_S1 {
-    char pad0[0x100];
-    s32 unk100;
-    char pad100[0x11D8 - 0x100 - sizeof(s32)];
-    s32 unk11D8;
-    char pad11D8[0x11FC - 0x11D8 - sizeof(s32)];
-    s32 unk11FC;
-};
-
-struct func_8022CA04_S5;
-typedef struct func_8022CA04_S5 func_8022CA04_S5;
-
-struct func_8022CF28_S1;
-struct func_8022CF28_S1 {
-    char pad0[0x5DC];
-    void * unk5DC;
-    char pad5DC[0x6C0 - 0x5DC - sizeof(void*)];
-    f32 unk6C0;
-    char pad6C0[0x6C4 - 0x6C0 - sizeof(f32)];
-    f32 unk6C4;
-    char pad6C4[0x848 - 0x6C4 - sizeof(f32)];
-    s32 unk848;
-    char pad84C[0x938 - 0x84C];
-    char unk938;
-};
 
 
 
-struct func_8022CF28_S1;
-typedef struct func_8022CF28_S1 func_8022CF28_S1;
+
+
 
 extern float D_800C2D60_de;
 

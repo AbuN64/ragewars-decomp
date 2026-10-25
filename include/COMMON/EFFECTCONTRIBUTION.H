@@ -19,11 +19,7 @@ typedef struct EffectContribution {
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
-struct func_802A6A44_S1;
-typedef struct func_802A6A44_S1 func_802A6A44_S1;
 
-struct func_802A67D0_S2;
-typedef struct func_802A67D0_S2 func_802A67D0_S2;
 
 struct Node438C;
 typedef struct Node438C Node438C;
@@ -47,39 +43,12 @@ struct Node438C {
 };
 
 struct Node438C;
-struct func_802A438C_S1;
-struct func_802A438C_S1 {
-    char pad0[0x40];
-    struct Node438C * unk40;
-    char pad40[0x48 - 0x40 - sizeof(Node438C*)];
-    s32 unk48;
-};
 
 struct ObjectLinks54;
 
 struct State_func_802A2FA4_de;
 typedef struct State_func_802A2FA4_de State_func_802A2FA4_de;
 
-struct func_802A6A14_S1;
-struct func_802A6A14_S1 {
-    s32 unk0;
-    char pad0[0x4 - 0x0 - sizeof(s32)];
-    s32 unk4;
-    char pad4[0xC - 0x4 - sizeof(s32)];
-    s32 unkC;
-    char padC[0x10 - 0xC - sizeof(s32)];
-    s32 unk10;
-    char pad10[0x14 - 0x10 - sizeof(s32)];
-    f32 unk14;
-    char pad14[0x24 - 0x14 - sizeof(f32)];
-    s32 unk24;
-    char pad24[0x34 - 0x24 - sizeof(s32)];
-    s32 unk34;
-    char pad34[0x38 - 0x34 - sizeof(s32)];
-    s32 unk38;
-    char pad38[0x3C - 0x38 - sizeof(s32)];
-    s32 unk3C;
-};
 
 struct func_802A6A54_S2;
 typedef struct func_802A6A54_S2 func_802A6A54_S2;
@@ -131,8 +100,6 @@ extern void func_802A57D8_de(void);
 
 extern void func_802A5A24_de(EffectContribution *arg0, s32 arg1);
 
-struct func_802A6A14_S1;
-typedef struct func_802A6A14_S1 func_802A6A14_S1;
 
 struct Entity1DC;
 struct Entity1DC {
@@ -198,8 +165,6 @@ struct Root752C;
 
 extern float D_800C5DC0_de;
 
-struct func_802A41D8_S1;
-typedef struct func_802A41D8_S1 func_802A41D8_S1;
 
 struct RibbonActor;
 typedef struct RibbonActor RibbonActor;
@@ -220,8 +185,6 @@ extern float D_800C5E98_de;
 struct Morph;
 typedef struct Morph Morph;
 
-struct func_802A438C_S1;
-typedef struct func_802A438C_S1 func_802A438C_S1;
 
 struct Shade;
 struct Shade {
@@ -239,33 +202,12 @@ struct Blend {
     u16 second;
 };
 
-struct func_802A41D8_S3;
-struct func_802A41D8_S3 {
-    char pad0[0x1A0];
-    char unk1A0;
-};
 
 struct ObjectStateB0;
 
-struct func_802A697C_S3;
-struct func_802A697C_S3 {
-    char pad0[0x1D9];
-    char unk1D9;
-};
 
 struct func_802A6A54_S3;
 
-struct func_802A41D8_S1;
-struct func_802A41D8_S1 {
-    char pad0[0x10];
-    func_80234DD0_S1_U260 unk10;
-    char pad10[0x1C - 0x10 - sizeof(func_80234DD0_S1_U260)];
-    f32 unk1C;
-    char pad1C[0x20 - 0x1C - sizeof(f32)];
-    f32 unk20;
-    char pad20[0x24 - 0x20 - sizeof(f32)];
-    f32 unk24;
-};
 
 struct CROMSwoosh_t;
 struct CROMSwoosh_t {
@@ -308,32 +250,10 @@ typedef struct FloatStateB0 FloatStateB0;
 struct VertexArena;
 typedef struct VertexArena VertexArena;
 
-struct ParticleList;
-typedef struct ParticleList ParticleList;
-
-struct func_802A697C_S1;
-struct func_802A697C_S1 {
-    char pad0[0x4];
-    void * unk4;
-    char pad4[0x8 - 0x4 - sizeof(void*)];
-    void * unk8;
-    char pad8[0x1C - 0x8 - sizeof(void*)];
-    void * unk1C;
-    char pad1C[0x24 - 0x1C - sizeof(void*)];
-    float unk24;
-    char pad24[0x3C - 0x24 - sizeof(float)];
-    int unk3C;
-};
 
 
-struct func_802A41D8_S3;
-typedef struct func_802A41D8_S3 func_802A41D8_S3;
 
-struct func_802A41D8_S2;
-struct func_802A41D8_S2 {
-    char pad0[0x10];
-    CVector3 unk10;
-};
+
 
 struct Nodes;
 struct Nodes {
@@ -342,32 +262,9 @@ struct Nodes {
     f32 value;
 };
 
-struct func_802A41D8_S5;
-struct func_802A41D8_S5 {
-    char pad0[0x14];
-    f32 unk14;
-    char pad14[0x18 - 0x14 - sizeof(f32)];
-    f32 unk18;
-};
 
-struct func_802A67D0_S2;
-struct func_802A67D0_S2 {
-    char pad0[0x4];
-    void * unk4;
-    char pad4[0x8 - 0x4 - sizeof(void*)];
-    void * unk8;
-    char pad8[0x1C - 0x8 - sizeof(void*)];
-    s32 unk1C;
-    char pad1C[0x24 - 0x1C - sizeof(s32)];
-    f32 unk24;
-};
 
 struct Particle;
-struct ParticleList;
-struct ParticleList {
-    struct Particle *active;
-    char pad4[0x10];
-};
 
 struct Particle;
 struct SceneRecAt95A8;
@@ -378,15 +275,6 @@ struct SceneRecAt95A8 {
     IntrusiveList free;
 };
 
-struct func_802A6A44_S1;
-struct func_802A6A44_S1 {
-    char pad0[0x4];
-    int unk4;
-    char pad4[0xC - 0x4 - sizeof(int)];
-    int unkC;
-    char padC[0x10 - 0xC - sizeof(int)];
-    int unk10;
-};
 
 struct func_802A68A0_S2;
 typedef struct func_802A68A0_S2 func_802A68A0_S2;
@@ -394,17 +282,8 @@ typedef struct func_802A68A0_S2 func_802A68A0_S2;
 struct FloatState50;
 typedef struct FloatState50 FloatState50;
 
-struct func_802A697C_S2;
-struct func_802A697C_S2 {
-    char pad0[0x13B];
-    char unk13B;
-};
 
-struct func_802A697C_S2;
-typedef struct func_802A697C_S2 func_802A697C_S2;
 
-struct func_802A66EC_S1;
-typedef struct func_802A66EC_S1 func_802A66EC_S1;
 
 struct Owner802A697C;
 typedef struct Owner802A697C Owner802A697C;
@@ -430,8 +309,6 @@ struct State_func_802A2FA4_de {
     s32 retries;
 };
 
-struct func_802A697C_S3;
-typedef struct func_802A697C_S3 func_802A697C_S3;
 
 struct ObjectStateB0;
 typedef struct ObjectStateB0 ObjectStateB0;
@@ -459,17 +336,7 @@ struct func_802A6A54_S2;
 struct ObjectLinksB4;
 typedef struct ObjectLinksB4 ObjectLinksB4;
 
-struct func_802A41D8_S5;
-typedef struct func_802A41D8_S5 func_802A41D8_S5;
 
-struct func_802A66EC_S1;
-struct func_802A66EC_S1 {
-    int unk0;
-    char pad0[0x2588 - 0x0 - sizeof(int)];
-    int unk2588;
-    char pad2588[0x258C - 0x2588 - sizeof(int)];
-    void * unk258C;
-};
 
 struct Vtx;
 struct Vtx {
@@ -492,8 +359,6 @@ typedef struct func_802A6A54_S3 func_802A6A54_S3;
 struct Nodes;
 typedef struct Nodes Nodes;
 
-struct func_802A41D8_S2;
-typedef struct func_802A41D8_S2 func_802A41D8_S2;
 
 extern float D_800C5E88_de;
 
@@ -507,8 +372,6 @@ typedef struct ObjectState20 ObjectState20;
 
 extern CQuatern *func_802A5020_de(CQuatern *out, u32 bx, u32 by, u32 bz);
 
-struct func_802A697C_S1;
-typedef struct func_802A697C_S1 func_802A697C_S1;
 
 extern f32 D_800C5E28_de;
 extern f32 D_800C5E2C_de;

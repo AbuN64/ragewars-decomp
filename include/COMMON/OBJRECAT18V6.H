@@ -49,16 +49,10 @@ struct Lists802A6DF8 {
     List802A6DF8 inactive;
 };
 
-struct func_802A7164_S4;
-typedef struct func_802A7164_S4 func_802A7164_S4;
 
 struct Node44;
 
-struct func_802A72F4_S1;
-typedef struct func_802A72F4_S1 func_802A72F4_S1;
 
-struct func_802A72AC_S2;
-typedef struct func_802A72AC_S2 func_802A72AC_S2;
 
 struct ObjRecAt18V6;
 
@@ -89,11 +83,6 @@ struct ToggleMenu;
 typedef struct ToggleMenu ToggleMenu;
 
 
-struct Frame_func_802A7660_de;
-struct Frame_func_802A7660_de {
-    char pad0[0x2A0];
-    f32 height;
-};
 
 struct EntryRecAt34;
 
@@ -106,15 +95,6 @@ struct Owner802A6DF8 {
     Lists802A6DF8 lists;
 };
 
-struct func_802A72AC_S2;
-struct func_802A72AC_S2 {
-    char pad0[0x4];
-    void * unk4;
-    char pad4[0xA8 - 0x4 - sizeof(void*)];
-    f32 unkA8;
-    char padA8[0xAC - 0xA8 - sizeof(f32)];
-    f32 unkAC;
-};
 
 
 struct func_802A6AC0_S2;
@@ -127,21 +107,15 @@ typedef struct State802A6DF8 State802A6DF8;
 
 struct Input_func_802A65E0_de;
 
-struct func_802A7FA8_S4;
-typedef struct func_802A7FA8_S4 func_802A7FA8_S4;
 
 struct ObjectState30_2;
 typedef struct ObjectState30_2 ObjectState30_2;
 
-struct func_802A7440_S2;
-typedef struct func_802A7440_S2 func_802A7440_S2;
 
 struct Sprite;
 
 extern float D_800C5EB0_de;
 
-struct func_802A7164_S1;
-typedef struct func_802A7164_S1 func_802A7164_S1;
 
 struct Owner802A6DF8;
 typedef struct Owner802A6DF8 Owner802A6DF8;
@@ -166,58 +140,13 @@ struct EntryRecAt34 {
     s32 unk34;
 };
 
-struct func_802A7FA8_S4;
-struct func_802A7FA8_S4 {
-    s32 unk0;
-    char pad0[0x8 - 0x0 - sizeof(s32)];
-    s32 unk8;
-    char pad8[0xC - 0x8 - sizeof(s32)];
-    u8 unkC;
-    char padC[0xD - 0xC - sizeof(u8)];
-    u8 unkD;
-    char padD[0x10 - 0xD - sizeof(u8)];
-    s32 unk10;
-    char pad10[0x14 - 0x10 - sizeof(s32)];
-    s32 unk14;
-    char pad14[0x28 - 0x14 - sizeof(s32)];
-    f32 unk28;
-    char pad28[0x2C - 0x28 - sizeof(f32)];
-    s32 unk2C;
-    char pad2C[0x30 - 0x2C - sizeof(s32)];
-    s32 unk30;
-    char pad30[0x34 - 0x30 - sizeof(s32)];
-    s32 unk34;
-};
 
-struct func_802A7FA8_S3;
-typedef struct func_802A7FA8_S3 func_802A7FA8_S3;
 
-struct func_802A8158_S1;
-typedef struct func_802A8158_S1 func_802A8158_S1;
 
-struct func_802A8158_S1;
-struct func_802A8158_S1 {
-    int unk0;
-    char pad0[0x4 - 0x0 - sizeof(int)];
-    int unk4;
-    char pad4[0xD - 0x4 - sizeof(int)];
-    char unkD;
-    char padD[0x18 - 0xD - sizeof(char)];
-    short unk18;
-    char pad18[0x1C - 0x18 - sizeof(short)];
-    int unk1C;
-};
 
 struct CallbackState1C;
 typedef struct CallbackState1C CallbackState1C;
 
-struct func_802A7164_S4;
-struct func_802A7164_S4 {
-    char pad0[0x8];
-    void * unk8;
-    char pad8[0x3C - 0x8 - sizeof(void*)];
-    u32 unk3C;
-};
 
 struct ObjectLinks14_2;
 typedef struct ObjectLinks14_2 ObjectLinks14_2;
@@ -225,46 +154,10 @@ typedef struct ObjectLinks14_2 ObjectLinks14_2;
 struct ObjRecAt18V6;
 typedef struct ObjRecAt18V6 ObjRecAt18V6;
 
-struct func_802A7480_S2;
-struct func_802A7480_S2 {
-    char pad0[0x4];
-    char * unk4;
-    char pad4[0x34 - 0x4 - sizeof(char*)];
-    s32 unk34;
-    char pad34[0x3C - 0x34 - sizeof(s32)];
-    s32 unk3C;
-    char pad3C[0x48 - 0x3C - sizeof(s32)];
-    s32 unk48;
-};
 
-struct func_802A7FA8_S1;
-typedef struct func_802A7FA8_S1 func_802A7FA8_S1;
 
-struct func_802A72AC_S1;
-struct func_802A72AC_S1 {
-    char pad0[0x40];
-    void * unk40;
-    char pad40[0x4C - 0x40 - sizeof(void*)];
-    f32 unk4C;
-};
 
-struct func_802A72F4_S1;
-struct func_802A72F4_S1 {
-    char pad0[0x34];
-    s32 unk34;
-    char pad34[0x3C - 0x34 - sizeof(s32)];
-    s32 unk3C;
-    char pad3C[0x48 - 0x3C - sizeof(s32)];
-    s32 unk48;
-};
 
-struct func_802A6D28_S2;
-struct func_802A6D28_S2 {
-    char pad0[0x4];
-    void * unk4;
-    char pad4[0x48 - 0x4 - sizeof(void*)];
-    s32 unk48;
-};
 
 struct MenuItem;
 typedef struct MenuItem MenuItem;
@@ -295,13 +188,6 @@ extern float D_800C5EA8_de;
 
 struct ObjectLinks7598;
 
-struct func_802A7FA8_S1;
-struct func_802A7FA8_S1 {
-    char pad0[0x4];
-    s32 unk4;
-    char pad4[0x10 - 0x4 - sizeof(s32)];
-    u8 unk10;
-};
 
 struct ObjectState30_2;
 
@@ -315,29 +201,10 @@ typedef struct Sprite Sprite;
 
 struct Image;
 
-struct func_802A6D28_S1;
-struct func_802A6D28_S1 {
-    char pad0[0x94E0];
-    IntrusiveList slots[10];
-    IntrusiveList free;
-};
 
-struct func_802A6F8C_S1;
-struct func_802A6F8C_S1 {
-    char pad0[0x14];
-    s32 unk14;
-    char pad14[0x34 - 0x14 - sizeof(s32)];
-    s32 unk34;
-};
 
-struct func_802A6D28_S1;
-typedef struct func_802A6D28_S1 func_802A6D28_S1;
 
-struct func_802A6F8C_S1;
-typedef struct func_802A6F8C_S1 func_802A6F8C_S1;
 
-struct Frame_func_802A7660_de;
-typedef struct Frame_func_802A7660_de Frame_func_802A7660_de;
 
 struct func_802A6AC0_S2;
 typedef struct func_802A6AC0_S2 func_802A6AC0_S2;
@@ -345,16 +212,7 @@ typedef struct func_802A6AC0_S2 func_802A6AC0_S2;
 struct State802A6FE0;
 typedef struct State802A6FE0 State802A6FE0;
 
-struct func_802A7394_S1;
-struct func_802A7394_S1 {
-    char pad0[0x1C];
-    void * unk1C;
-    char pad1C[0x24 - 0x1C - sizeof(void*)];
-    f32 unk24;
-};
 
-struct func_802A7394_S1;
-typedef struct func_802A7394_S1 func_802A7394_S1;
 
 struct Entry_func_802A70D4_de;
 struct Entry_func_802A70D4_de {
@@ -368,15 +226,6 @@ typedef struct Entry_func_802A70D4_de Entry_func_802A70D4_de;
 
 struct MenuCode802A6AC0;
 
-struct func_802A7440_S2;
-struct func_802A7440_S2 {
-    char pad0[0x4];
-    void * unk4;
-    char pad4[0x1C - 0x4 - sizeof(void*)];
-    s32 unk1C;
-    char pad1C[0x20 - 0x1C - sizeof(s32)];
-    s32 unk20;
-};
 
 extern float D_800C5EC4_de;
 
@@ -388,17 +237,11 @@ typedef struct CItemMenu_t CItemMenu;
 struct State802A6FE0;
 
 
-struct func_802A7480_S2;
-typedef struct func_802A7480_S2 func_802A7480_S2;
 
-struct func_802A6D28_S2;
-typedef struct func_802A6D28_S2 func_802A6D28_S2;
 
 
 extern float D_800C5EB8_de;
 
-struct func_802A72AC_S1;
-typedef struct func_802A72AC_S1 func_802A72AC_S1;
 
 struct CallbackState1C;
 
@@ -414,38 +257,15 @@ struct CItemMenu_t {
     int m_FrameCount;
 };
 
-struct func_802A7164_S1;
-struct func_802A7164_S1 {
-    char pad0[0x8];
-    f32 unk8;
-    char pad8[0x10 - 0x8 - sizeof(f32)];
-    f32 unk10;
-    char pad10[0x1C - 0x10 - sizeof(f32)];
-    f32 unk1C;
-    char pad1C[0xB0 - 0x1C - sizeof(f32)];
-    void * unkB0;
-};
 
 
 extern float D_800C5EC0_de;
 
-struct func_802A7480_S1;
-struct func_802A7480_S1 {
-    char pad0[0x7528];
-    char * unk7528;
-};
 
 struct MenuCode802A6AC0;
 typedef struct MenuCode802A6AC0 MenuCode802A6AC0;
 
-struct func_802A7480_S1;
-typedef struct func_802A7480_S1 func_802A7480_S1;
 
-struct func_802A7FA8_S3;
-struct func_802A7FA8_S3 {
-    char pad0[0xE4];
-    s16 unkE4;
-};
 
 struct Input_func_802A65E0_de;
 typedef struct Input_func_802A65E0_de Input_func_802A65E0_de;

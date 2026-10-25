@@ -7,19 +7,10 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 typedef signed int ( *func_802995D4_de_Callback)(signed int, signed int, signed int, signed int);
 
-struct func_8029A9F4_S1;
-struct func_8029A9F4_S1 {
-    char pad0[0x528];
-    unsigned int unk528;
-};
 
-struct IntegerState530;
-typedef struct IntegerState530 IntegerState530;
 
 extern void func_802998A8_de();
 
-struct State_func_80297EA4_de;
-typedef struct State_func_80297EA4_de State_func_80297EA4_de;
 
 typedef s32 (*MenuElementHandler)(void *element, s32 event, s32 arg2, s32 arg3, s32 arg4);
 
@@ -52,22 +43,10 @@ struct Entries {
 struct Entries;
 typedef struct Entries Entries;
 
-struct Manager_func_80298FE8_de;
-struct Manager_func_80298FE8_de {
-    s32 field0;
-    s32 index;
-    s32 lowIndex;
-    Entries *entries;
-    s8 pad10[0x524];
-    s32 field534;
-    s32 field538;
-};
 
 struct Element;
 typedef struct Element Element;
 
-struct func_8029A9F4_S1;
-typedef struct func_8029A9F4_S1 func_8029A9F4_S1;
 
 
 struct Entry_func_80297EA4_de;
@@ -77,17 +56,6 @@ struct Entry_func_80297EA4_de {
     char rest[16];
 };
 struct Entry_func_80297EA4_de;
-struct State_func_80297EA4_de;
-struct State_func_80297EA4_de {
-    int (*unk0)(int,int,int,int);
-    int unk4;
-    int unk8;
-    struct Entry_func_80297EA4_de *unkC;
-    char pad[0x510];
-    int unk520;
-    char pad2[12];
-    int unk530;
-};
 
 extern void func_80298ECC_de();
 
@@ -103,11 +71,6 @@ struct MenuHandlerEntry {
     s32 flags;
 };
 
-struct MenuHandlerTable;
-struct MenuHandlerTable {
-    u8 pad0[0x1C];
-    struct MenuHandlerEntry handlers[64];
-};
 
 extern void func_80299778_de(s32 id, s32 mode, MenuElementHandler handler);
 
@@ -120,13 +83,7 @@ struct Entry_func_80298170_de {
     struct Element *object;
     s32 context;
 };
-struct CacheRecAt540;
 struct Entry_func_80298170_de;
-struct CacheRecAt540 {
-    char pad0[0x53C];
-    struct Entry_func_80298170_de *entries;
-    s32 count;
-};
 
 extern void func_80299468_de();
 
@@ -154,45 +111,17 @@ struct Screen {
     char padC[0x1C - 0xC];
 };
 struct Screen;
-struct Ui;
-struct Ui {
-    s32 pad0;
-    s32 current;
-    s32 pad8;
-    struct Screen *screens;
-};
 
 extern int D_80146E08;
 
-struct Ui;
-typedef struct Ui Ui;
 
-struct Manager_func_802995D4_de;
-struct Manager_func_802995D4_de {
-    func_802995D4_de_Callback callback;
-    s32 index;
-    s32 lowIndex;
-    Entries *entries;
-    char pad10[0x510];
-    s32 dispatching;
-    s32 pad524;
-    s32 blockedValue;
-};
 
 extern double D_800C5680_de;
 
-typedef void ( *func_80299468_de_Callback)(signed int, signed int, signed int, signed int);
 
 struct ScreenManager;
 
-struct IntegerState530;
-struct IntegerState530 {
-    unsigned char padding_0[1324];
-    s32 unk_52C;
-};
 
-struct CacheRecAt540;
-typedef struct CacheRecAt540 CacheRecAt540;
 
 struct ScreenManager;
 
@@ -202,14 +131,7 @@ extern unsigned int func_802999E0_de(void);
 
 extern int D_80146E0C;
 
-struct Manager_func_80298FE8_de;
-typedef struct Manager_func_80298FE8_de Manager_func_80298FE8_de;
 
-struct func_8029A8E0_S1;
-struct func_8029A8E0_S1 {
-    char pad0[0xE];
-    u16 unkE;
-};
 
 extern void func_8029958C_de(s32 arg0);
 
@@ -229,17 +151,7 @@ struct EntryCode80296014 {
     StreamBuffer unkC;
 };
 struct EntryCode80296014;
-struct State_func_80297DBC_de;
-struct State_func_80297DBC_de {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    struct EntryCode80296014 *unkC;
-    s32 (*unk10)(s32);
-};
 
-struct MenuHandlerTable;
-typedef struct MenuHandlerTable MenuHandlerTable;
 
 extern MenuElementHandler FindKindHandler(s32 kind);
 
@@ -248,13 +160,6 @@ struct ArgsCode80296014;
 extern int D_800CD8E0;
 
 struct Entries;
-struct Manager_func_80298ECC_de;
-struct Manager_func_80298ECC_de {
-    s32 field0;
-    s32 index;
-    s32 lowIndex;
-    struct Entries *entries;
-};
 
 struct Element;
 struct Entry_func_802991D4_de;
@@ -268,23 +173,12 @@ typedef struct Entry_func_802991D4_de ScreenEntry;
 struct Entry_func_802991D4_de;
 struct ScreenManager;
 
-struct Manager_func_80298ECC_de;
-typedef struct Manager_func_80298ECC_de Manager_func_80298ECC_de;
 
-struct State_func_80297DBC_de;
-typedef struct State_func_80297DBC_de State_func_80297DBC_de;
 
 extern int D_8014D09C;
 
 extern void func_80299874_de(s32 arg0, s32 arg1);
 
-struct func_8029A7E4_S1;
-struct func_8029A7E4_S1 {
-    char pad0[0x1C];
-    int unk1C;
-    char pad1C[0x20 - 0x1C - sizeof(int)];
-    Rec_func_8024C92C_de unk20;
-};
 
 extern void func_80298FE8_de();
 
@@ -314,17 +208,11 @@ extern ScreenManager *D_8014D080;
 struct ArgsCode80296014;
 typedef struct ArgsCode80296014 ArgsCode80296014;
 
-struct Manager_func_802995D4_de;
-typedef struct Manager_func_802995D4_de Manager_func_802995D4_de;
 
 struct Widget;
 typedef struct Widget Widget;
 
-struct func_8029A8E0_S1;
-typedef struct func_8029A8E0_S1 func_8029A8E0_S1;
 
-struct func_8029A7E4_S1;
-typedef struct func_8029A7E4_S1 func_8029A7E4_S1;
 
 /* Callable low-address aliases of the native code providers. The cartridge
  * registers these entry addresses, not overlay file ranges or data objects. */

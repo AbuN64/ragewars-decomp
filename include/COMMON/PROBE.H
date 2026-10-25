@@ -3,55 +3,19 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-struct func_8024DEF8_S1;
-struct func_8024DEF8_S1 {
-    char pad0[0x18];
-    void * unk18;
-    char pad18[0x174 - 0x18 - sizeof(void*)];
-    s32 unk174;
-};
 
-struct func_8024D860_S1;
-struct func_8024D860_S1 {
-    char pad0[0x8];
-    f32 unk8;
-    char pad8[0x10 - 0x8 - sizeof(f32)];
-    f32 unk10;
-    char pad10[0x14 - 0x10 - sizeof(f32)];
-    s32 unk14;
-    char pad14[0x38 - 0x14 - sizeof(s32)];
-    s32 unk38;
-    char pad38[0x100 - 0x38 - sizeof(s32)];
-    s32 unk100;
-};
 
-struct func_8024DD48_S1;
-struct func_8024DD48_S1 {
-    s32 unk0;
-    char pad0[0x14 - 0x0 - sizeof(s32)];
-    char unk14;
-};
 
 extern float D_800C3C98_de;
 
 extern float D_800C3CA0_de;
 
-struct func_8024D0F8_S1;
-typedef struct func_8024D0F8_S1 func_8024D0F8_S1;
 
-struct func_8024E090_S2;
-typedef struct func_8024E090_S2 func_8024E090_S2;
 
-struct func_8024D860_S2;
-typedef struct func_8024D860_S2 func_8024D860_S2;
 
-struct func_8024DD48_S1;
-typedef struct func_8024DD48_S1 func_8024DD48_S1;
 
 extern float D_800C8CA0;
 
-struct func_8024DEF8_S1;
-typedef struct func_8024DEF8_S1 func_8024DEF8_S1;
 
 struct Probe;
 typedef struct Probe Probe;
@@ -67,33 +31,11 @@ struct SoundRequest {
 
 extern float D_800C3C9C_de;
 
-struct func_8024D860_S1;
-typedef struct func_8024D860_S1 func_8024D860_S1;
-
-struct func_8024D49C_S1;
-typedef struct func_8024D49C_S1 func_8024D49C_S1;
-
-struct func_8024E090_S2;
-struct func_8024E090_S2 {
-    s32 unk0;
-    char pad0[0x4C - 0x0 - sizeof(s32)];
-    s32 unk4C;
-};
 
 
-struct func_8024D49C_S1;
-struct func_8024D49C_S1 {
-    char pad0[0x1F0];
-    char * unk1F0;
-};
 
-struct func_8024D0F8_S1;
-struct func_8024D0F8_S1 {
-    char pad0[0xB4];
-    int unkB4;
-    char padB4[0xE8 - 0xB4 - sizeof(int)];
-    char unkE8;
-};
+
+
 
 struct InputRecAt44;
 typedef struct InputRecAt44 InputRecAt44;
@@ -105,19 +47,6 @@ struct InputRecAt44 {
     CVector3 direction;
 };
 
-struct func_8024D860_S2;
-struct func_8024D860_S2 {
-    char pad0[0x8];
-    f32 unk8;
-    char pad8[0x10 - 0x8 - sizeof(f32)];
-    f32 unk10;
-    char pad10[0x40 - 0x10 - sizeof(f32)];
-    f32 unk40;
-    char pad40[0x44 - 0x40 - sizeof(f32)];
-    CVector3 unk44;
-    char pad44[0x6C - 0x44 - sizeof(CVector3)];
-    f32 unk6C;
-};
 
 struct Probe;
 struct Probe {
@@ -131,7 +60,6 @@ struct Probe {
 struct SoundRequest;
 typedef struct SoundRequest SoundRequest;
 
-extern int func_8024D264_de(void * arg0);
 
 typedef struct {
     s32 kind;

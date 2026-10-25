@@ -37,8 +37,6 @@ struct NodeRecAtAC {
 
 struct Lists;
 
-struct func_80259AD8_S1;
-typedef struct func_80259AD8_S1 func_80259AD8_S1;
 
 struct VoiceRecAt8;
 typedef struct VoiceRecAt8 VoiceRecAt8;
@@ -48,8 +46,6 @@ extern void func_802591D0_de(void *arg0, s16 arg1);
 struct ManagerRecAtD8V2;
 typedef struct ManagerRecAtD8V2 ManagerRecAtD8V2;
 
-struct func_802598D4_S1;
-typedef struct func_802598D4_S1 func_802598D4_S1;
 
 struct ObjectLinks8;
 typedef struct ObjectLinks8 ObjectLinks8;
@@ -104,17 +100,6 @@ struct SceneCode802591C0 {
 struct ManagerRecAtD8V2;
 struct SceneCode802591C0;
 
-struct func_802597A4_S2;
-struct func_802597A4_S2 {
-    char pad0[0x2A84];
-    s32 unk2A84;
-    char pad2A84[0x2A88 - 0x2A84 - sizeof(s32)];
-    s32 unk2A88;
-    char pad2A88[0x2AB4 - 0x2A88 - sizeof(s32)];
-    s16 unk2AB4;
-    char pad2AB4[0x2AB6 - 0x2AB4 - sizeof(s16)];
-    s16 unk2AB6;
-};
 
 struct ObjectLinks8;
 
@@ -199,8 +184,6 @@ struct ObjRecAt1E64 {
     Slot_func_80259200_de slots[17];
 };
 
-struct func_80259B30_S1;
-typedef struct func_80259B30_S1 func_80259B30_S1;
 
 struct ObjectLinks2B50;
 typedef struct ObjectLinks2B50 ObjectLinks2B50;
@@ -217,13 +200,6 @@ union func_802598D4_S1_UD8 {
     struct Node_func_802598B4_de * v1;
 };
 
-struct func_802598D4_S1;
-struct func_802598D4_S1 {
-    char pad0[0x4];
-    union { Node_func_802598B4_de node; struct { void *first; Node_func_802598B4_de *second; } links; } at4;
-    char pad14[0xD8 - 0x4 - sizeof(Node_func_802598B4_de)];
-    func_802598D4_S1_UD8 unkD8;
-};
 
 struct Entry_func_80259440_de;
 struct Entry_func_80259440_de {
@@ -281,11 +257,7 @@ struct Link_func_80259260_de {
     struct NodeRecAtC8 *next;
 };
 
-struct func_80259280_S1;
-typedef struct func_80259280_S1 func_80259280_S1;
 
-struct func_80259AD8_S2;
-typedef struct func_80259AD8_S2 func_80259AD8_S2;
 
 struct CellCode802591C0;
 typedef struct CellCode802591C0 CellCode802591C0;
@@ -294,13 +266,6 @@ struct ObjRecAt1E64;
 typedef struct ObjRecAt1E64 ObjRecAt1E64;
 
 
-struct func_80259AD8_S1;
-struct func_80259AD8_S1 {
-    char pad0[0x4];
-    char unk4;
-    char pad4[0x8 - 0x4 - sizeof(char)];
-    void * unk8;
-};
 
 struct Link_func_80259260_de;
 typedef struct Link_func_80259260_de Link_func_80259260_de;
@@ -329,11 +294,6 @@ struct ChannelSet {
     VoiceRecAt8 voices[32];
 };
 
-struct func_80259280_S1;
-struct func_80259280_S1 {
-    char pad0[0x2B8C];
-    s16 unk2B8C;
-};
 
 
 struct NodeRecAtC8;
@@ -358,44 +318,19 @@ struct Cache {
     ListHead done;
 };
 
-struct func_80259AD8_S2;
-struct func_80259AD8_S2 {
-    char pad0[0x4];
-    void * unk4;
-    char pad4[0xB0 - 0x4 - sizeof(void*)];
-    int unkB0;
-};
 
-struct func_80259B30_S1;
-struct func_80259B30_S1 {
-    char pad0[0x128];
-    CVector3 unk128;
-    char pad128[0x160 - 0x128 - sizeof(CVector3)];
-    char unk160;
-};
 
 struct OwnerRecAtD8;
 typedef struct OwnerRecAtD8 OwnerRecAtD8;
 
-struct func_802597A4_S2;
-typedef struct func_802597A4_S2 func_802597A4_S2;
 
 struct Entry_func_80259440_de;
 typedef struct Entry_func_80259440_de Entry_func_80259440_de;
 
-struct func_80259A0C_S1;
-typedef struct func_80259A0C_S1 func_80259A0C_S1;
 
 struct NodeRecAt4C;
 typedef struct NodeRecAt4C NodeRecAt4C;
 
-struct func_80259A0C_S1;
-struct func_80259A0C_S1 {
-    char pad0[0x4];
-    union { ListNode node; struct { void *first; ListNode *second; } links; } at4;
-    char padC4[0xD8 - 0x4 - sizeof(ListNode)];
-    func_80259A0C_S1_UD8 unkD8;
-};
 
 struct LinkPair;
 typedef struct LinkPair LinkPair;

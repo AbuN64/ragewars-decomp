@@ -20,12 +20,6 @@ struct Actor_func_802238E0_de {
 
 extern float D_800C78BC;
 
-struct MultiplayerOptions;
-struct MultiplayerOptions {
-    u8 enabled;
-    u8 reserved[2];
-    u8 session;
-};
 
 struct Body_func_80224408_de;
 struct Body_func_80224408_de {
@@ -1580,8 +1574,6 @@ struct func_8021CD70_S1 {
     s16 unk62E;
 };
 
-struct func_80222D40_S2;
-typedef struct func_80222D40_S2 func_80222D40_S2;
 
 struct MovementDescriptor;
 typedef struct MovementDescriptor MovementDescriptor;
@@ -3068,17 +3060,6 @@ struct SharedPlayer_func_80224F5C_de {
     } views16E0;
 };
 
-struct ObjectLinks1454;
-struct ObjectLinks1454 {
-    char pad0[0x5D8];
-    char * unk_5D8;
-    char pad5D8[0x650 - 0x5D8 - sizeof(char*)];
-    u16 unk_650;
-    char pad650[0x784 - 0x650 - sizeof(u16)];
-    f32 unk_784;
-    char pad784[0x1450 - 0x784 - sizeof(f32)];
-    s32 unk_1450;
-};
 
 struct ObjectState54;
 struct ObjectState54 {
@@ -3103,8 +3084,6 @@ typedef struct PlayerWeaponsUpdatePlayerCamera PlayerWeaponsUpdatePlayerCamera;
 
 extern float D_800C299C_de;
 
-struct ObjectLinks1454;
-typedef struct ObjectLinks1454 ObjectLinks1454;
 
 struct MovementDescriptor;
 /* The definition kind selects the word-health or halfword-health payload. */
@@ -3163,8 +3142,6 @@ struct BodyWeaponsUpdatePlayerCamera {
 struct BodyRecAt1C;
 typedef struct BodyRecAt1C BodyRecAt1C;
 
-struct MultiplayerOptions;
-typedef struct MultiplayerOptions MultiplayerOptions;
 
 struct SharedMovement;
 typedef struct SharedMovement SharedMovement;
@@ -3174,8 +3151,6 @@ extern float D_800C2960_de;
 struct func_80224078_Arg1;
 typedef struct func_80224078_Arg1 func_80224078_Arg1;
 
-struct SessionState;
-typedef struct SessionState SessionState;
 
 struct Tuning;
 typedef struct Tuning Tuning;
@@ -3184,11 +3159,6 @@ typedef struct Tuning Tuning;
 struct func_80224078_Arg0;
 typedef struct func_80224078_Arg0 func_80224078_Arg0;
 
-struct func_80224028_S1;
-struct func_80224028_S1 {
-    char pad0[0x740];
-    char unk740;
-};
 
 extern float D_800C2988_de;
 
@@ -3204,20 +3174,7 @@ struct ObjectState521 {
 struct Desc;
 typedef struct Desc Desc;
 
-struct func_80222D40_S2;
-struct func_80222D40_S2 {
-    char pad0[0x18];
-    Desc * unk18;
-    char pad18[0x5D4 - 0x18 - sizeof(Desc*)];
-    s32 unk5D4;
-    char pad5D4[0x5F4 - 0x5D4 - sizeof(s32)];
-    char unk5F4;
-    char pad5F4[0x1450 - 0x5F4 - sizeof(char)];
-    s32 unk1450;
-};
 
-struct func_80224028_S1;
-typedef struct func_80224028_S1 func_80224028_S1;
 
 struct ObjectState108;
 struct ObjectState108 {
@@ -3241,19 +3198,6 @@ struct ObjectState54;
 typedef struct ObjectState54 ObjectState54;
 
 struct Desc;
-struct func_80222BC4_S1;
-struct func_80222BC4_S1 {
-    char pad0[0x18];
-    struct Desc * unk18;
-    char pad18[0x5D4 - 0x18 - sizeof(Desc*)];
-    s32 unk5D4;
-    char pad5D4[0x5F4 - 0x5D4 - sizeof(s32)];
-    char unk5F4;
-    char pad5F4[0xCC0 - 0x5F4 - sizeof(char)];
-    s32 unkCC0;
-    char padCC0[0x1450 - 0xCC0 - sizeof(s32)];
-    s32 unk1450;
-};
 
 extern float D_800C2998_de;
 
@@ -3261,8 +3205,6 @@ extern float D_800C2980_de;
 
 extern float D_800C78B8;
 
-struct func_80222BC4_S1;
-typedef struct func_80222BC4_S1 func_80222BC4_S1;
 
 struct func_8021CD70_S2;
 typedef struct func_8021CD70_S2 func_8021CD70_S2;
@@ -6382,11 +6324,7 @@ struct func_80224078_Arg0 {
     s32 unk72C;
 };
 
-struct func_80222E80_S1;
-typedef struct func_80222E80_S1 func_80222E80_S1;
 
-struct func_80222E80_S2;
-typedef struct func_80222E80_S2 func_80222E80_S2;
 
 struct SharedPlayer_func_80224C4C_de;
 typedef struct SharedPlayer_func_80224C4C_de SharedPlayer_func_80224C4C_de;
@@ -6425,32 +6363,13 @@ extern float D_800C2974_de;
 struct ObjectState521;
 typedef struct ObjectState521 ObjectState521;
 
-struct SessionState;
-struct SessionState {
-    u8 reserved[0x60C];
-    s32 paused;
-};
 
 struct SharedPlayer;
 
-struct func_80222E80_S2;
-struct func_80222E80_S2 {
-    char pad0[0x38];
-    s32 unk38;
-    char pad38[0x650 - 0x38 - sizeof(s32)];
-    s16 unk650;
-};
 
 struct SharedPlayer_func_80223E34_de;
 typedef struct SharedPlayer_func_80223E34_de SharedPlayer_func_80223E34_de;
 
-struct func_80222E80_S1;
-struct func_80222E80_S1 {
-    char pad0[0x20];
-    f32 unk20;
-    char pad20[0x38 - 0x20 - sizeof(f32)];
-    s32 unk38;
-};
 
 struct Actor_func_802238E0_de;
 typedef struct Actor_func_802238E0_de Actor_func_802238E0_de;

@@ -5,13 +5,6 @@
 #include "COMMON/OBJECTLINKS14.H"
 extern float D_800C1FD8_de;
 
-struct RecCode802106E0;
-struct RecCode802106E0 {
-    char pad0[0x21C];
-    s32 unk21C;
-    char pad21C[0x220 - 0x21C - sizeof(s32)];
-    s32 unk220;
-};
 
 
 struct Self;
@@ -56,31 +49,13 @@ struct Brain_func_802120A8_eu {
     s32 visible;
 };
 
-struct func_8021290C_S3;
-struct func_8021290C_S3 {
-    char pad0[0xC];
-    int unkC;
-    char padC[0x220 - 0xC - sizeof(int)];
-    int unk220;
-    char pad220[0x2FC - 0x220 - sizeof(int)];
-    int unk2FC;
-};
 
 struct CloseAttackActor;
 
-struct ObjectState3C;
-struct ObjectState3C {
-    char pad0[0x8];
-    f32 unk_8;
-    char pad8[0x38 - 0x8 - sizeof(f32)];
-    u32 unk_38;
-};
 
 struct CloseAttackBrain;
 typedef struct CloseAttackBrain CloseAttackBrain;
 
-struct func_802123DC_S3;
-typedef struct func_802123DC_S3 func_802123DC_S3;
 
 extern float D_800C1FE8_de;
 
@@ -143,17 +118,8 @@ struct CloseAttackBrain {
 struct Brain_func_802120A8_eu;
 typedef struct Brain_func_802120A8_eu Brain_func_802120A8_eu;
 
-struct IntegerState1C;
-struct IntegerState1C {
-    char pad0[0x4];
-    s32 unk_4;
-    char pad4[0x18 - 0x4 - sizeof(s32)];
-    s32 unk_18;
-};
 
 
-struct IntegerState1C;
-typedef struct IntegerState1C IntegerState1C;
 
 struct PlayerRecAt288;
 struct PlayerRecAt288 {
@@ -190,74 +156,23 @@ typedef struct PlayerRecAt1CC PlayerRecAt1CC;
 
 extern float D_800C1FF0_de;
 
-struct func_80212828_S3;
-typedef struct func_80212828_S3 func_80212828_S3;
 
 extern float D_800C1FDC_de;
 
 extern float D_800C1FE4_de;
 
-struct func_80212450_S3;
-struct func_80212450_S3 {
-    char pad0[0x220];
-    s32 unk220;
-    char pad220[0x2D8 - 0x220 - sizeof(s32)];
-    s32 unk2D8;
-    char pad2D8[0x2DC - 0x2D8 - sizeof(s32)];
-    s32 unk2DC;
-    char pad2DC[0x2E0 - 0x2DC - sizeof(s32)];
-    s32 unk2E0;
-    char pad2E0[0x318 - 0x2E0 - sizeof(s32)];
-    s32 unk318;
-    char pad318[0x31C - 0x318 - sizeof(s32)];
-    s32 unk31C;
-    char pad31C[0x320 - 0x31C - sizeof(s32)];
-    s32 unk320;
-};
 
 struct Shared_Actor;
 
 
-struct RecCode802106E0;
-typedef struct RecCode802106E0 RecCode802106E0;
 
-struct func_80212948_S3;
-typedef struct func_80212948_S3 func_80212948_S3;
 
-struct func_80212828_S3;
-struct func_80212828_S3 {
-    char pad0[0x4];
-    s32 unk4;
-    char pad4[0xC - 0x4 - sizeof(s32)];
-    s32 unkC;
-    char padC[0x10 - 0xC - sizeof(s32)];
-    s32 unk10;
-    char pad10[0x64 - 0x10 - sizeof(s32)];
-    void * unk64;
-    char pad64[0x230 - 0x64 - sizeof(void*)];
-    s32 unk230;
-};
 
-struct ObjectState2C;
-typedef struct ObjectState2C ObjectState2C;
 
-struct func_80212948_S3;
-struct func_80212948_S3 {
-    char pad0[0x4];
-    s32 unk4;
-    char pad4[0xC - 0x4 - sizeof(s32)];
-    s32 unkC;
-    char padC[0x64 - 0xC - sizeof(s32)];
-    void * unk64;
-    char pad64[0x230 - 0x64 - sizeof(void*)];
-    s32 unk230;
-};
 
 struct SweepHit;
 typedef struct SweepHit SweepHit;
 
-struct ObjectState3C;
-typedef struct ObjectState3C ObjectState3C;
 
 
 
@@ -272,74 +187,22 @@ extern float D_800C1FE0_de;
 
 struct LevelActor;
 
-struct func_80212828_S5;
-struct func_80212828_S5 {
-    char pad0[0x8];
-    f32 unk8;
-    char pad8[0x1454 - 0x8 - sizeof(f32)];
-    void * unk1454;
-};
 
 
-struct func_8021290C_S3;
-typedef struct func_8021290C_S3 func_8021290C_S3;
 
 
-struct ObjectState2C;
-struct ObjectState2C {
-    char pad0[0x4];
-    s32 unk_4;
-    char pad4[0xC - 0x4 - sizeof(s32)];
-    s32 unk_C;
-    char padC[0x14 - 0xC - sizeof(s32)];
-    char unk_14;
-    char pad14[0x28 - 0x14 - sizeof(char)];
-    s32 unk_28;
-};
 
-struct func_80212450_S3;
-typedef struct func_80212450_S3 func_80212450_S3;
 
 extern float D_800C70F4;
 
 extern float D_800C70F0;
 
-struct func_80212828_S5;
-typedef struct func_80212828_S5 func_80212828_S5;
 
 
-struct func_802123DC_S3;
-struct func_802123DC_S3 {
-    char pad0[0x220];
-    s32 unk220;
-    char pad220[0x2D8 - 0x220 - sizeof(s32)];
-    s32 unk2D8;
-    char pad2D8[0x2DC - 0x2D8 - sizeof(s32)];
-    s32 unk2DC;
-};
 
 
 
 extern s32 Nav_NextRandom(void);
-typedef struct func_802125F0_S1 func_802125F0_S1;
-typedef struct func_802125F0_S2 func_802125F0_S2;
-typedef struct func_802125F0_S3 func_802125F0_S3;
-struct func_802125F0_S1 {
-    char pad0[0x1D8];
-    void* unk1D8;
-};
-struct func_802125F0_S2 {
-    char pad0[0x1454];
-    void* unk1454;
-};
-struct func_802125F0_S3 {
-    char pad0[0x220];
-    s32 unk220;
-    char pad220[0x2D8 - 0x220 - sizeof(s32)];
-    s32 unk2D8;
-    char pad2D8[0x2DC - 0x2D8 - sizeof(s32)];
-    s32 unk2DC;
-};
 
 extern s32 func_8020CCE8_de(EntryList8020CCE8 *, s32, s32 *, s32 *);
 #endif

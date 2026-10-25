@@ -59,11 +59,7 @@
 #include "COMMON/MEASUREDRECAT14V2.H"
 #include "COMMON/MEASUREDRECAT62EV1.H"
 #include "COMMON/OBJECTLINKS14.H"
-struct func_8020F93C_S1;
-typedef struct func_8020F93C_S1 func_8020F93C_S1;
 
-struct func_8020F444_S3;
-typedef struct func_8020F444_S3 func_8020F444_S3;
 
 
 
@@ -75,77 +71,23 @@ struct ObjectLinks1458 {
     char * unk_1454;
 };
 
-struct func_8020F444_S2;
-typedef struct func_8020F444_S2 func_8020F444_S2;
 
 struct ObjectLinks1458;
 typedef struct ObjectLinks1458 ObjectLinks1458;
 
 
-struct func_8020F150_S1;
-struct func_8020F150_S1 {
-    char pad0[0x24];
-    struct Node8020BC50 * unk24;
-};
 
 struct Actor1DC;
 typedef struct Actor1DC Actor1DC;
 
-struct func_8020F93C_S1;
-struct func_8020F93C_S1 {
-    char pad0[0x38];
-    s32 unk38;
-    char pad38[0x3C - 0x38 - sizeof(s32)];
-    s32 unk3C;
-    char pad3C[0x6C - 0x3C - sizeof(s32)];
-    s32 unk6C;
-};
 
-struct RecCode8020EAE0;
-struct RecCode8020EAE0 {
-    char pad0[0x4];
-    s32 unk4;
-    char pad4[0xC - 0x4 - sizeof(s32)];
-    s32 unkC;
-    char padC[0x14 - 0xC - sizeof(s32)];
-    s32 unk14;
-    char pad14[0x18 - 0x14 - sizeof(s32)];
-    s32 unk18;
-    char pad18[0x28 - 0x18 - sizeof(s32)];
-    s32 unk28;
-    char pad28[0x1BC - 0x28 - sizeof(s32)];
-    s32 unk1BC;
-    char pad1BC[0x1C0 - 0x1BC - sizeof(s32)];
-    s32 unk1C0;
-    char pad1C0[0x2F4 - 0x1C0 - sizeof(s32)];
-    s32 unk2F4;
-    char pad2F4[0x2F8 - 0x2F4 - sizeof(s32)];
-    s32 unk2F8;
-    char pad2F8[0x2FC - 0x2F8 - sizeof(s32)];
-    s32 unk2FC;
-};
 
-struct func_8020EE50_S1;
-typedef struct func_8020EE50_S1 func_8020EE50_S1;
 
 struct ObjectLinks40;
 typedef struct ObjectLinks40 ObjectLinks40;
 
-struct func_8020EEA4_S2;
-struct func_8020EEA4_S2 {
-    char pad0[0xC];
-    u16 unkC;
-    char padC[0xE - 0xC - sizeof(u16)];
-    u16 unkE;
-};
 
-struct func_8020F444_S3;
-struct func_8020F444_S3 {
-    char pad0[0x1A4];
-    s8 unk1A4;
-};
 
-struct ObjRecAt28C;
 
 struct Actor1DC;
 struct Actor1DC {
@@ -153,8 +95,6 @@ struct Actor1DC {
     char **info;
 };
 
-struct RecCode8020EAE0;
-typedef struct RecCode8020EAE0 RecCode8020EAE0;
 
 
 
@@ -177,73 +117,23 @@ struct Func8020ED50Arg {
 };
 
 
-struct func_8020EE50_S1;
-struct func_8020EE50_S1 {
-    char pad0[0x10];
-    void * unk10;
-    char pad10[0x18 - 0x10 - sizeof(void*)];
-    f32 unk18;
-    char pad18[0x38 - 0x18 - sizeof(f32)];
-    s32 unk38;
-};
 
 struct Func8020ED50Arg;
 typedef struct Func8020ED50Arg Func8020ED50Arg;
 
 
 
-struct func_8020F2A8_S1;
-struct func_8020F2A8_S1 {
-    char pad0[0x4];
-    s32 unk4;
-    char pad4[0xC - 0x4 - sizeof(s32)];
-    s32 unkC;
-    char padC[0x14 - 0xC - sizeof(s32)];
-    char unk14;
-    char pad14[0x68 - 0x14 - sizeof(char)];
-    s32 unk68;
-    char pad68[0xBC - 0x68 - sizeof(s32)];
-    s32 unkBC;
-};
 
-struct func_8020F150_S1;
-typedef struct func_8020F150_S1 func_8020F150_S1;
 
-struct func_8020F984_S2;
-struct func_8020F984_S2 {
-    char pad0[0x38];
-    s32 unk38;
-    char pad38[0x3C - 0x38 - sizeof(s32)];
-    void * unk3C;
-    char pad3C[0x6C - 0x3C - sizeof(void*)];
-    s32 unk6C;
-    char pad6C[0x94 - 0x6C - sizeof(s32)];
-    s32 unk94;
-};
 
-struct ObjRecAt28C;
-typedef struct ObjRecAt28C ObjRecAt28C;
 
 extern float D_800C1EE0_de;
 
 
 
-struct func_8020F984_S2;
-typedef struct func_8020F984_S2 func_8020F984_S2;
 
-struct func_8020EEA4_S3;
-struct func_8020EEA4_S3 {
-    char pad0[0x10];
-    void * unk10;
-    char pad10[0x18 - 0x10 - sizeof(void*)];
-    f32 unk18;
-};
 
-struct func_8020EEA4_S2;
-typedef struct func_8020EEA4_S2 func_8020EEA4_S2;
 
-struct func_8020F2A8_S1;
-typedef struct func_8020F2A8_S1 func_8020F2A8_S1;
 
 extern float D_800C1EDC_de;
 
@@ -253,18 +143,8 @@ struct ObjectLinks40 {
     Actor1DC *unk_3C;
 };
 
-struct func_8020F444_S2;
-struct func_8020F444_S2 {
-    char pad0[0x10];
-    void * unk10;
-    char pad10[0x34 - 0x10 - sizeof(void*)];
-    void * unk34;
-};
 
-struct func_8020EEA4_S3;
-typedef struct func_8020EEA4_S3 func_8020EEA4_S3;
 
-extern int func_8020EF60_us(void * arg0);
 
 extern s32 Weapons_PickRandomArmedWeapon(void *arg0);
 #endif

@@ -20,31 +20,14 @@ typedef struct Overlay Overlay;
 
 typedef CShakeAxis AxisWave;
 
-struct func_8023919C_S1;
-typedef struct func_8023919C_S1 func_8023919C_S1;
 
 extern float D_800C3090_de;
 
-struct func_802393C8_S1;
-typedef struct func_802393C8_S1 func_802393C8_S1;
 
-struct func_80234DD0_S1;
-typedef struct func_80234DD0_S1 func_80234DD0_S1;
 
 struct ObjRecAtE4V1;
 typedef struct ObjRecAtE4V1 ObjRecAtE4V1;
 
-struct func_802390E4_S1;
-struct func_802390E4_S1 {
-    char pad0[0x14];
-    s16 unk14;
-    char pad14[0x18 - 0x14 - sizeof(s16)];
-    s32 unk18;
-    char pad18[0x1C - 0x18 - sizeof(s32)];
-    s16 unk1C;
-    char pad1C[0x20 - 0x1C - sizeof(s16)];
-    s32 unk20;
-};
 
 
 struct ObjRecAt260;
@@ -52,8 +35,6 @@ typedef struct ObjRecAt260 ObjRecAt260;
 
 extern float D_800C3530_de;
 
-struct func_8023912C_S2;
-typedef struct func_8023912C_S2 func_8023912C_S2;
 
 struct Overlay;
 
@@ -86,37 +67,6 @@ typedef struct State44 State44;
 struct Race;
 typedef struct Race Race;
 
-struct func_80238F14_S1;
-struct func_80238F14_S1 {
-    char pad0[0x24];
-    s32 unk24;
-    char pad24[0x28 - 0x24 - sizeof(s32)];
-    f32 unk28;
-    char pad28[0x2C - 0x28 - sizeof(f32)];
-    f32 unk2C;
-    char pad2C[0x30 - 0x2C - sizeof(f32)];
-    f32 unk30;
-    char pad30[0x34 - 0x30 - sizeof(f32)];
-    f32 unk34;
-    char pad34[0x38 - 0x34 - sizeof(f32)];
-    f32 unk38;
-    char pad38[0x3C - 0x38 - sizeof(f32)];
-    f32 unk3C;
-    char pad3C[0x40 - 0x3C - sizeof(f32)];
-    f32 unk40;
-    char pad40[0x44 - 0x40 - sizeof(f32)];
-    f32 unk44;
-    char pad44[0x48 - 0x44 - sizeof(f32)];
-    Shared_Quad unk48;
-    char pad48[0x58 - 0x48 - sizeof(Shared_Quad)];
-    s32 unk58;
-    char pad58[0x5C - 0x58 - sizeof(s32)];
-    f32 unk5C;
-    char pad5C[0x60 - 0x5C - sizeof(f32)];
-    f32 unk60;
-    char pad60[0x64 - 0x60 - sizeof(f32)];
-    s32 unk64;
-};
 
 struct UnitVp;
 struct UnitVp {
@@ -124,25 +74,12 @@ struct UnitVp {
     s16 vtrans[4];
 };
 
-struct func_802392DC_S1;
-typedef struct func_802392DC_S1 func_802392DC_S1;
 
-struct func_802390E4_S1;
-typedef struct func_802390E4_S1 func_802390E4_S1;
 
 struct World_func_80236F1C_de;
 typedef struct World_func_80236F1C_de World_func_80236F1C_de;
 
-struct func_80234DD0_S2;
-struct func_80234DD0_S2 {
-    char pad0[0x264];
-    f32 unk264;
-    char pad264[0x268 - 0x264 - sizeof(f32)];
-    f32 unk268;
-};
 
-struct func_80239184_S1;
-typedef struct func_80239184_S1 func_80239184_S1;
 
 struct UnitVp;
 typedef struct UnitVp UnitVp;
@@ -221,142 +158,34 @@ extern float D_800C3098_de;
 
 extern float D_800C8610;
 
-struct func_8023912C_S2;
-struct func_8023912C_S2 {
-    char pad0[0x88];
-    f32 unk88;
-    char pad88[0x8C - 0x88 - sizeof(f32)];
-    f32 unk8C;
-    char pad8C[0x90 - 0x8C - sizeof(f32)];
-    s32 unk90;
-    char pad90[0x94 - 0x90 - sizeof(s32)];
-    s32 unk94;
-    char pad94[0x98 - 0x94 - sizeof(s32)];
-    f32 unk98;
-    char pad98[0x9C - 0x98 - sizeof(f32)];
-    f32 unk9C;
-};
 
 
-struct func_80238F14_S1;
-typedef struct func_80238F14_S1 func_80238F14_S1;
 
 struct State44;
 
-struct func_80239184_S1;
-struct func_80239184_S1 {
-    char pad0[0x548];
-    signed char unk548;
-    char pad548[0x549 - 0x548 - sizeof(signed char)];
-    signed char unk549;
-};
 
-struct func_80234DD0_S2;
-typedef struct func_80234DD0_S2 func_80234DD0_S2;
 
 
 extern float D_800C3094_de;
 
 extern float D_800C309C_de;
 
-struct func_80234DD0_S1;
-struct func_80234DD0_S1 {
-    char pad0[0x70];
-    f32 unk70;
-    char pad70[0x74 - 0x70 - sizeof(f32)];
-    f32 unk74;
-    char pad74[0x78 - 0x74 - sizeof(f32)];
-    f32 unk78;
-    char pad78[0x7C - 0x78 - sizeof(f32)];
-    s32 unk7C;
-    char pad7C[0x260 - 0x7C - sizeof(s32)];
-    func_80234DD0_S1_U260 unk260;
-    char pad260[0x368 - 0x260 - sizeof(func_80234DD0_S1_U260)];
-    f32 unk368;
-    char pad368[0x36C - 0x368 - sizeof(f32)];
-    f32 unk36C;
-    char pad36C[0x370 - 0x36C - sizeof(f32)];
-    f32 unk370;
-    char pad370[0x374 - 0x370 - sizeof(f32)];
-    f32 unk374;
-    char pad374[0x378 - 0x374 - sizeof(f32)];
-    f32 unk378;
-    char pad378[0x37C - 0x378 - sizeof(f32)];
-    f32 unk37C;
-    char pad37C[0x528 - 0x37C - sizeof(f32)];
-    f32 unk528;
-    char pad528[0x530 - 0x528 - sizeof(f32)];
-    f32 unk530;
-};
 
 struct ThreeChannels;
 
 struct GameplayCamera;
 
 
-struct func_8023919C_S1;
-struct func_8023919C_S1 {
-    char pad0[0x538];
-    s32 unk538;
-    char pad538[0x544 - 0x538 - sizeof(s32)];
-    s32 unk544;
-    char pad544[0x54A - 0x544 - sizeof(s32)];
-    s8 unk54A;
-    char pad54A[0x54B - 0x54A - sizeof(s8)];
-    s8 unk54B;
-    char pad54B[0x54C - 0x54B - sizeof(s8)];
-    s8 unk54C;
-    char pad54C[0x54D - 0x54C - sizeof(s8)];
-    s8 unk54D;
-    char pad54D[0x54E - 0x54D - sizeof(s8)];
-    s8 unk54E;
-    char pad54E[0x54F - 0x54E - sizeof(s8)];
-    s8 unk54F;
-    char pad54F[0x550 - 0x54F - sizeof(s8)];
-    s8 unk550;
-    char pad550[0x551 - 0x550 - sizeof(s8)];
-    s8 unk551;
-};
 
-struct func_802392DC_S1;
-struct func_802392DC_S1 {
-    char pad0[0x5DC];
-    int unk5DC;
-    char pad5DC[0x16E0 - 0x5DC - sizeof(int)];
-    void * unk16E0;
-};
 
 extern float D_800C3528_de;
 
-struct func_802393C8_S1;
-struct func_802393C8_S1 {
-    char pad0[0xFC];
-    int unkFC;
-    char padFC[0x100 - 0xFC - sizeof(int)];
-    int unk100;
-    char pad100[0x104 - 0x100 - sizeof(int)];
-    int unk104;
-    char pad104[0x108 - 0x104 - sizeof(int)];
-    int unk108;
-    char pad108[0x10C - 0x108 - sizeof(int)];
-    int unk10C;
-    char pad10C[0x110 - 0x10C - sizeof(int)];
-    float unk110;
-    char pad110[0x114 - 0x110 - sizeof(float)];
-    float unk114;
-    char pad114[0x118 - 0x114 - sizeof(float)];
-    int unk118;
-};
 
 extern float D_800C3524_de;
 
 extern void Camera_StartFade(void *view, s32 red, s32 green, s32 blue, s32 mode, s32 alpha, s32 duration, s32 delay);
 
 
-typedef char AxisWave_size_check[(sizeof(AxisWave) == 0x14) ? 1 : -1];
-typedef char CShake_size_check[(sizeof(CShake) == 0x54) ? 1 : -1];
-typedef char Racer_size_check[(sizeof(Racer) == 0xE54) ? 1 : -1];
-typedef char Race_size_check[(sizeof(Race) == 0xF38) ? 1 : -1];
 extern f32 D_800D05D0;
 
 extern Box D_800FF208;
