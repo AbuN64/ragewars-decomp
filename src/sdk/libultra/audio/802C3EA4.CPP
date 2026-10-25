@@ -148,9 +148,6 @@ s32 Audio_DecodeHuffmanSamples(DecodeBlock *blocks, u16 *samples, s16 sampleCoun
     return (s16)output;
 }
 
-#ifdef NON_MATCHING
-/* 4/99 words left: a1/a2 swap between the history-table address and `previous` (local-alloc
-   priority tie, see lanes/REV1-ONE-18/RESULT.md). */
 extern DecodeBlock D_800D5564[];
 extern s16 D_800D54BE;
 extern u16 D_8014AE10[16];
@@ -173,14 +170,16 @@ s32 Audio_DecodeFrame(DecodeState *stream) {
             block++;
         }
     } else {
+        s16 value;
         count = (s16)Audio_DecodeHuffmanSamples(block, stream->frame, 16, &done, stream);
         if (count != 16) {
             return -1;
         }
-        block += done;
+        value = done;
+        block += value;
         for (i = 0; i < 16; i++) {
-            u16 previous = D_8014AE10[i];
-            stream->frame[i] += previous;
+            value = D_8014AE10[i];
+            stream->frame[i] += value;
             D_8014AE10[i] = stream->frame[i];
         }
     }
@@ -191,6 +190,3 @@ s32 Audio_DecodeFrame(DecodeState *stream) {
     }
     return -1;
 }
-#else
-INCLUDE_ASM("span_1000", Audio_DecodeFrame);
-#endif
