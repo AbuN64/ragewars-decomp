@@ -42,11 +42,11 @@ extern char D_800CE7FC;
 
 extern char D_800CED30;
 
-extern void func_80223E34_de(SharedPlayer_func_80224408_de *, Body_func_80224408_de *);
+extern void func_80223E34_de(SharedPlayer *, Body_func_80224408_de *);
 
-extern void Weapons_UpdateViewAngles(SharedPlayer_func_80224408_de *, Body_func_80224408_de *, char *);
+extern void Weapons_UpdateViewAngles(SharedPlayer *, Body_func_80224408_de *, char *);
 
-static inline s32 try_jump(SharedPlayer_func_80224408_de *player, Body_func_80224408_de *body) {
+static inline s32 try_jump(SharedPlayer *player, Body_func_80224408_de *body) {
     if (player->views5E8.view7E8_106.zoomed == 0 && !(11.25f < player->views5E8.view6E4_62.depth) && !(body->flags & 0xC0000)
         && (body->surface->unk14 & 2) && (player->views5E8.view6B0_47.input & 0x10) && player->views5E8.view11D8_149.stun <= 0.0f) {
         Weapons_SetPlayerState(player, body, 5);
@@ -159,7 +159,7 @@ void func_8022409C_de(void *player, void *arg1) {
     }
 }
 
-void func_80224408_de(SharedPlayer_func_80224408_de *player, Body_func_80224408_de *body) {
+void func_80224408_de(SharedPlayer *player, Body_func_80224408_de *body) {
     f32 heading;
     s32 crouching;
     s32 animate;

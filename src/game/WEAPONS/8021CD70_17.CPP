@@ -27,14 +27,14 @@ extern Tuning D_800CE82C;
 extern s32 D_80104418[];
 extern f32 D_800D2988;
 extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
-extern void Weapons_UpdateViewAngles(SharedPlayer_func_80224C4C_de *, Body_func_80224C4C_de *, char *);
-extern void func_802233F0_de(SharedPlayer_func_80224C4C_de *, Body_func_80224C4C_de *, Tuning *);
+extern void Weapons_UpdateViewAngles(SharedPlayer *, Body_func_80224C4C_de *, char *);
+extern void func_802233F0_de(SharedPlayer *, Body_func_80224C4C_de *, Tuning *);
 
 extern void func_80218464_de(char *);
 extern s32 Render_PlaySoundAtPosition(s16, s32, s32, s32, s32, s32);
-extern void Weapons_SetPlayerState(SharedPlayer_func_80224C4C_de *, Body_func_80224C4C_de *, s32);
+extern void Weapons_SetPlayerState(SharedPlayer *, Body_func_80224C4C_de *, s32);
 
-static inline s32 try_jump(SharedPlayer_func_80224C4C_de *player, Body_func_80224C4C_de *body) {
+static inline s32 try_jump(SharedPlayer *player, Body_func_80224C4C_de *body) {
     if (player->views5E8.view7E8_106.zoomed == 0 && !(11.25f < player->views5E8.view6E4_62.depth) && !(body->flags & 0xC0000)
         && (body->surface->unk14 & 2) && (player->views5E8.view6B0_47.input & 0x10) && player->views5E8.view11D8_149.stun <= 0.0f) {
         Weapons_SetPlayerState(player, body, 5);
@@ -43,7 +43,7 @@ static inline s32 try_jump(SharedPlayer_func_80224C4C_de *player, Body_func_8022
     return 0;
 }
 
-void func_80224C4C_de(SharedPlayer_func_80224C4C_de *player, Body_func_80224C4C_de *body) {
+void func_80224C4C_de(SharedPlayer *player, Body_func_80224C4C_de *body) {
     s32 idle;
 
     if (player->views5E8.view6C8_57.speed == 0.0f) {

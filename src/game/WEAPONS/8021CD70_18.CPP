@@ -22,15 +22,15 @@
 extern Tuning D_800CE850;
 extern char D_800CE874;
 extern f32 D_800D2988;
-extern void Weapons_UpdateViewAngles(SharedPlayer_func_80224F5C_de *, Body_func_80224F5C_de *, char *);
+extern void Weapons_UpdateViewAngles(SharedPlayer *, Body_func_80224F5C_de *, char *);
 
-extern void func_802238E0_de(SharedPlayer_func_80224F5C_de *, Body_func_80224F5C_de *, Tuning *);
+extern void func_802238E0_de(SharedPlayer *, Body_func_80224F5C_de *, Tuning *);
 extern void func_80218464_de(char *);
 extern s32 Render_PlaySoundAtPosition(s16, s32, s32, s32, s32, s32);
-extern void Weapons_SetPlayerState(SharedPlayer_func_80224F5C_de *, Body_func_80224F5C_de *, s32);
+extern void Weapons_SetPlayerState(SharedPlayer *, Body_func_80224F5C_de *, s32);
 
 
-void func_80224F5C_de(SharedPlayer_func_80224F5C_de *player, Body_func_80224F5C_de *body) {
+void func_80224F5C_de(SharedPlayer *player, Body_func_80224F5C_de *body) {
     s32 idle;
 
     if (player->views5E8.view6C8_57.speed == 0.0f) {
