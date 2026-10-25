@@ -424,16 +424,16 @@ void Camera_SetupViewportAndFog(Racer *view) {
     buffer = D_8011FAC0.ring.current;
     frame = D_800D297C;
     gSPMatrix((*gfx)++, view->projectionMatrices[frame], G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH);
-    gSPMoveWord((*gfx)++, G_MW_PERSPNORM, 0, view->perspectiveNorm);
+    gSPPerspNormalize((*gfx)++, view->perspectiveNorm);
     view->viewports[frame].vscale[0] = vx;
     view->viewports[frame].vscale[1] = vy;
     view->viewports[frame].vtrans[0] = (vx * 0.25f + view->viewportX) * 4.0f;
     view->viewports[frame].vtrans[1] = (vy * 0.25f + view->viewportY) * 4.0f;
-    gSPMoveMem((*gfx)++, G_MV_VIEWPORT, 0, 16, &view->viewports[frame]);
+    gSPViewport((*gfx)++, &view->viewports[frame]);
     gDPSetScissorFrac((*gfx)++, G_SC_NON_INTERLACE, (s32)(ulx * 4.0f), (s32)(uly * 4.0f), (s32)(lrx * 4.0f),
                       (s32)(lry * 4.0f));
-    gSPMoveMem((*gfx)++, G_MV_LIGHT, G_MVO_LOOKATX, 16, &view->lights[frame][0]);
-    gSPMoveMem((*gfx)++, G_MV_LIGHT, G_MVO_LOOKATY, 16, &view->lights[frame][4]);
+    gSPLookAtX((*gfx)++, &view->lights[frame][0]);
+    gSPLookAtY((*gfx)++, &view->lights[frame][4]);
     func_8026E330_de(view->effect);
     if (view != &D_80140FF8.view) {
         func_80296004_de(view->effect);

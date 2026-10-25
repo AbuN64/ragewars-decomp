@@ -1392,6 +1392,10 @@
     _GBI_CMD(pkt, _SHIFTL(G_MOVEMEM, 24, 8) | _SHIFTL(((size) - 1) / 8, 19, 5) | _SHIFTL((offset) / 8, 8, 8) | _SHIFTL(index, 0, 8), (unsigned int)(data))
 #define gsSPMoveMem(index, offset, size, data) \
     { { _SHIFTL(G_MOVEMEM, 24, 8) | _SHIFTL(((size) - 1) / 8, 19, 5) | _SHIFTL((offset) / 8, 8, 8) | _SHIFTL(index, 0, 8), (unsigned int)(data) } }
+#define gSPViewport(pkt, v) gSPMoveMem(pkt, G_MV_VIEWPORT, 0, 16, v)
+#define gSPPerspNormalize(pkt, s) gSPMoveWord(pkt, G_MW_PERSPNORM, 0, (s))
+#define gSPLookAtX(pkt, l) gSPMoveMem(pkt, G_MV_LIGHT, G_MVO_LOOKATX, 16, l)
+#define gSPLookAtY(pkt, l) gSPMoveMem(pkt, G_MV_LIGHT, G_MVO_LOOKATY, 16, l)
 #define gSPGeometryMode(pkt, clear, set) \
     _GBI_CMD(pkt, _SHIFTL(G_GEOMETRYMODE, 24, 8) | _SHIFTL(~(clear), 0, 24), (unsigned int)(set))
 #define gsSPGeometryMode(clear, set) \
