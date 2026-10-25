@@ -15,7 +15,7 @@
 
 extern void func_802991D4_de(s32 id, Widget **links, s32 direction);
 
-void func_80296CD0_de(s32 direction) {
+void MoveMenuFocus(s32 direction) {
     Widget *widget;
     Widget **links;
     s32 id;
@@ -72,15 +72,9 @@ void func_80296CD0_de(s32 direction) {
     }
 }
 
-#ifdef NON_MATCHING
-#include "COMMON/INTEGERSTATE530.H"
-#include "TYPES.H"
-
-extern s32 D_80146E04;
-extern s32 GetMenuScreenOwner(void);
-extern void *func_80411DCC_de(s32 index);
-extern Element *func_80298170_de(s32);
-extern void func_8029973C_de(void);
+extern void *Frontend_GetScreenData(s32 index);
+extern Element *FindMenuElement(s32);
+extern void MarkMenuEventHandled(void);
 extern void func_80298368_de(s32);
 
 static inline s32 eventCategory(u32 event) {
@@ -92,7 +86,7 @@ static inline s32 eventCategory(u32 event) {
 }
 
 /* Unhandled default events return zero, regardless of earlier callback results. */
-static inline s32 defaultElementEvent(Element *element, s32 event, s32 arg3) {
+static inline s32 defaultElementEvent(Element *element, s32 event, s32 argument) {
     s32 result;
     s32 fallbackCategory;
     result = 0;
@@ -101,11 +95,11 @@ static inline s32 defaultElementEvent(Element *element, s32 event, s32 arg3) {
     case 0:
         switch (event) {
         case 5: case 6: case 7: case 8:
-            if (arg3 == 1) func_80296CD0_de(event);
+            if (argument == 1) MoveMenuFocus(event);
             break;
         case 1:
             if ((element->flags & 0x10) && element->linked_id) {
-                func_8029973C_de();
+                MarkMenuEventHandled();
                 func_80298368_de(element->linked_id);
             }
             break;
@@ -131,10 +125,11 @@ static inline s32 defaultElementEvent(Element *element, s32 event, s32 arg3) {
     }    return result;
 }
 
-/* 18/309 aligned edits; remaining: gcc cross-jumps the first default site's case 15/16 calls into one (the ROM keeps two arms), which shifts the later branch targets. */
-s32 DispatchElementEvent(s32 id, s32 event, s32 arg2, s32 arg3, s32 arg4)
+/* Sends an event to element id (-1: the screen owner itself) through the owner, the element and its kind handler;
+ * the first that sets the handled flag wins, otherwise the default actions run. */
+s32 DispatchElementEvent(s32 id, s32 event, s32 value, s32 argument, s32 context)
 {
-    Element *element, *context, *current;
+    Element *element, *owner, *current;
     MenuElementHandler kindHandler, handler;
     s32 result, category, previous;
     s32 direct;
@@ -144,60 +139,84 @@ s32 DispatchElementEvent(s32 id, s32 event, s32 arg2, s32 arg3, s32 arg4)
     element = 0;
     kindHandler = 0;
     direct = 0;
-    if (event != 0xE09) D_80146E04++;
+    if (event != 0xE09) g_menuEventCount++;
     handled = &D_8014D080->handled;
     category = eventCategory(event);
-    context = func_80411DCC_de(GetMenuScreenOwner());
+    owner = Frontend_GetScreenData(GetMenuScreenOwner());
     if (id == -1) {
         direct = 1;
-        element = context;
+        element = owner;
     }
     if (!direct) {
-        element = func_80298170_de(id);
+        element = FindMenuElement(id);
         if (!element) return 0;
-        kindHandler = func_802997E4_de(element->kind);
+        kindHandler = FindKindHandler(element->kind);
         if (!kindHandler) {
-            defaultElementEvent(element, event, arg3);
+            switch (eventCategory(event)) {
+            case 0:
+                switch (event) {
+                case 5: case 6: case 7: case 8:
+                    if (argument == 1) MoveMenuFocus(event);
+                    break;
+                case 1:
+                    if ((element->flags & 0x10) && element->linked_id) {
+                        MarkMenuEventHandled();
+                        func_80298368_de(element->linked_id);
+                    }
+                    break;
+                case 2:
+                    if (D_8014D080->current > 0) func_802998A8_de();
+                    break;
+                case 15:
+                    func_8040E928_de(element, 1);
+                    break;
+                case 16:
+                    func_8040E928_de(element, 0);
+                    break;
+                default:
+                    return 0;
+                }
+                break;
+            case 1:
+                return 0;
+            case 2:
+                return 0;
+            case 3:
+                return 0;
+            }
             return 0;
         }
     }
 
     previous = *handled;
     *handled = 0;
-    if (context->handler) result = context->handler(element, event, arg2, arg3, arg4);
+    if (owner->handler) result = owner->handler(element, event, value, argument, context);
     if (*handled == 1) { *handled = previous; return result; }
     if (!direct) {
         if (category != 2) {
-            if (context->handler) result = context->handler(context, event, arg2, arg3, arg4);
+            if (owner->handler) result = owner->handler(owner, event, value, argument, context);
             if (*handled == 1) { *handled = previous; return result; }
         }
-        current = func_80298170_de(id);
+        current = FindMenuElement(id);
         handler = 0;
         if (current) handler = current->handler;
-        if (handler) result = handler(element, event, arg2, arg3, arg4);
+        if (handler) result = handler(element, event, value, argument, context);
         if (*handled == 1) { *handled = previous; return result; }
-        if (kindHandler) result = kindHandler(element, event, arg2, arg3, arg4);
+        if (kindHandler) result = kindHandler(element, event, value, argument, context);
         if (*handled == 1) { *handled = previous; return result; }
     }
-    result = defaultElementEvent(element, event, arg3);
+    result = defaultElementEvent(element, event, argument);
 
     *handled = previous;
     return result;
 }
-#else
-INCLUDE_ASM("span_1000", DispatchElementEvent);
-#endif
 
-#ifdef NON_MATCHING
 #include "COMMON/INTEGERSTATE530.H"
 #include "COMMON/CALLBACK.H"
 #include "COMMON/UNUSED.H"
 extern void func_80299CF0_de(NodeRecAt12 *, s32, s32, s32, s32, s32);
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 extern void func_80298368_de(s32);
-/* Send an event through the menu, selected element and its child trees,
- * restoring each dispatcher's handled flag before applying default actions. */
-/* 34/207 aligned edits; remaining: saved flag/result registers and return sharing. */
 static inline s32 Menu_GetDispatchCategory(u32 code) {
     if (code < 0xE00) return 0;
     if (code - 0x1000 < 0x1000) return 1;
@@ -211,12 +230,12 @@ static inline s32 Menu_DispatchDefaultEvent(Element *element, s32 event, s32 arg
     case 0:
         switch (event) {
         case 5: case 6: case 7: case 8:
-            if (argument == 1) func_80296CD0_de(event);
+            if (argument == 1) MoveMenuFocus(event);
             break;
 
         case 1:
             if ((element->flags & 0x10) && element->linked_id != 0) {
-                func_8029973C_de();
+                MarkMenuEventHandled();
                 func_80298368_de(element->linked_id);
             }
             break;
@@ -225,6 +244,7 @@ static inline s32 Menu_DispatchDefaultEvent(Element *element, s32 event, s32 arg
             break;
         case 15: result = 0; func_8040E928_de(element, 1); break;
         case 16: result = 0; func_8040E928_de(element, 0); break;
+        default: result = 0; break;
         }
         break;
     case 1:
@@ -253,6 +273,8 @@ static inline void Menu_DispatchChildEvents(Element *element, s32 event, s32 val
         *treeHandled = treeSaved;
     }
 }
+/* Sends an event through the menu callback, the current screen's primary element and (recurse) its child
+ * trees, restoring each dispatcher's handled flag; unhandled events get the default actions. */
 s32 DispatchCurrentScreenEvent(s32 recurse, s32 event, s32 value, s32 argument, s32 context)
 {
     ScreenManager *table = D_8014D080;
@@ -274,23 +296,25 @@ s32 DispatchCurrentScreenEvent(s32 recurse, s32 event, s32 value, s32 argument, 
         saved = *handledFlag;
         *handledFlag = 0;
         result = handler(element, event, value, argument, context);
-        handled = *handledFlag;
+        if (*handledFlag == 1) {
+            *handledFlag = saved;
+            return result;
+        }
         *handledFlag = saved;
-        if (handled == 1) return result;
     }
     if (recurse != 0) {
         saved = *handledFlag;
         *handledFlag = 0;
         Menu_DispatchChildEvents(element, event, value, argument, context);
-        handled = *handledFlag;
+        if (*handledFlag == 1) {
+            *handledFlag = saved;
+            return result;
+        }
         *handledFlag = saved;
-        if (handled == 1) return result;
     }
-    return Menu_DispatchDefaultEvent(element, event, argument);
+    result = Menu_DispatchDefaultEvent(element, event, argument);
+    return result;
 }
-#else
-INCLUDE_ASM("span_1000", DispatchCurrentScreenEvent);
-#endif
 
 #ifdef NON_MATCHING
 #include "TYPES.H"
@@ -301,7 +325,7 @@ INCLUDE_ASM("span_1000", DispatchCurrentScreenEvent);
 
 void func_80299CF0_de(struct NodeRecAt12 *, s32, s32, s32, s32, s32);
 #include "COMMON/CALLBACK.H"
-void func_8029973C_de(void);
+void MarkMenuEventHandled(void);
 void func_80298368_de(s32);
 
 /* 113/250 aligned edits; remaining: event-loop scheduling and register allocation. */
@@ -345,12 +369,12 @@ static inline s32 Screen_DispatchStandardEvent(Element *element, s32 event, s32 
     case 0:
         switch (event) {
         case 5: case 6: case 7: case 8:
-            if (argument == 1) func_80296CD0_de(event);
+            if (argument == 1) MoveMenuFocus(event);
             break;
         case 1:
             if (element->flags & 0x10) {
                 if (element->linked_id != 0) {
-                    func_8029973C_de();
+                    MarkMenuEventHandled();
                     func_80298368_de(element->linked_id);
                 }
             }

@@ -4,14 +4,14 @@
 #include "TYPES.H"
 #include "SYSTEM_2/8025E280.H"
 
-/* Handles the menu message func_80299A08_de reports after func_8029973C_de: 0x3D5 waits 1 through
+/* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled: 0x3D5 waits 1 through
    func_80298368_de; 0x3D3 plays cue 0x34 through func_8025E2D4_de when func_8025E2C4_de reports sound on,
    resets through func_802A2394_de, sets the timer at 0x1C of screen D_800E5554 by setting
    D_801462D5 through jtbl_800DDEF0 (10, 15 or 10, and 20 for any other setting) and shows the
    screen through func_8043C278_de. Returns zero. */
 extern MenuRules *D_800E5554;
 extern u8 D_801462D5;
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 extern s32 func_80299A08_de(void);
 extern void func_80298368_de(s32);
 
@@ -27,7 +27,7 @@ enum { MENU_80436224_979 = 979, MENU_80436224_981 = 981 };
 #endif
 
 s32 Frontend_UpdateTimedScreen(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     switch (func_80299A08_de()) {
     case MENU_80436224_981:
         func_80298368_de(1);

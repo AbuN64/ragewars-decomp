@@ -18,7 +18,7 @@ s32 func_8042A2B0_de(void *root, s32 unused, s32 delta) {
         D_80154020.ready = 0;
         if (D_80154020.value != -1) {
             D_800E4F60->unk44C->alpha = 0x5A;
-            func_8029973C_de();
+            MarkMenuEventHandled();
             func_80298368_de(D_80154020.value);
             return 0;
         }
@@ -49,7 +49,7 @@ s32 func_8042A2B0_de(void *root, s32 unused, s32 delta) {
         D_800E4F60->right->x += (u16)D_800E4F60->rightCount;
         if (--D_800E4F60->unk3E0 <= 0) {
             D_800E4F60->unk3DC = 3;
-            func_8029973C_de();
+            MarkMenuEventHandled();
             func_80298368_de(8);
             return 0;
         }

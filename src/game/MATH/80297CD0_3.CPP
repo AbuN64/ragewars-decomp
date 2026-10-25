@@ -111,7 +111,7 @@ void func_80297FA0_de(s32 screenCount, s32 value) {
     func_80411EEC_de();
     func_8040F534_de(D_80146E08, D_80146E0C);
     func_8029AA78_de();
-    D_80146E04 = 0;
+    g_menuEventCount = 0;
     D_8014D080 = func_8025305C_de(0x544);
     func_802A0748_de(D_8014D080, 0, 0x544);
     D_8014D080->callback2 = (s32 (*)(s32))value;
@@ -144,12 +144,12 @@ void func_80297FA0_de(s32 screenCount, s32 value) {
     func_802982C4_de(11, D_004125A4, D_00412634, 1);
 }
 
-Element *func_80298170_de(s32 id) {
+Element *FindMenuElement(s32 id) {
     Element *object;
     s32 context;
     s32 i;
 
-    context = (s32)func_80411DCC_de(GetMenuScreenOwner());
+    context = (s32)Frontend_GetScreenData(GetMenuScreenOwner());
     for (i = 0; i < D_8014D080->cacheCount; i++) {
         if (D_8014D080->cache[i].context == context && D_8014D080->cache[i].id == id
             && D_8014D080->cache[i].object != 0 && D_8014D080->cache[i].object->id == id) {

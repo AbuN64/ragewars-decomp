@@ -10,7 +10,7 @@ extern u8 D_80152789;
 #endif
 
 /* Steps the model of the join request the screen D_800E39C0 edits (index at 0x14) back on event 1
-   unless func_802999A0_de reports 0x16: calls func_8029973C_de, finds the request's place in the 3 by 17
+   unless func_802999A0_de reports 0x16: calls MarkMenuEventHandled, finds the request's place in the 3 by 17
    model table D_800E381C through func_8041EC44_de, walks back through its variants and, before the
    first, to the last variant of the previous model (wrapping to the last), skipping entries whose
    id is -1, then stores the variant at 0x4 and 0xC and the id at 0x0 of the 28-byte request in
@@ -26,7 +26,7 @@ extern u8 D_80152789;
 extern struct func_80204468_S3 *D_800E39C0;
 extern struct TextEntry D_800E381C[][17];
 extern struct RequestRecAt10 D_80153F80[];
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 extern s32 func_802999A0_de(s32);
 extern s32 func_8041EC44_de(s32, s32);
 extern void func_802A025C_de(char *, char *);
@@ -40,7 +40,7 @@ s32 func_8041E100_de(void *unused0, void *unused1, void *unused2, s32 event) {
     if (event != 1) {
         return 0;
     }
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (func_802999A0_de(0) == 0x16) {
         return 0;
     }
@@ -77,7 +77,7 @@ extern u8 D_80152789;
 #endif
 
 /* Steps the model of the join request the screen D_800E39C0 edits (index at 0x14) forward on event 1
-   unless func_802999A0_de reports 0x16: calls func_8029973C_de, finds the request's place in the 3 by 17
+   unless func_802999A0_de reports 0x16: calls MarkMenuEventHandled, finds the request's place in the 3 by 17
    model table D_800E381C through func_8041EC44_de, walks forward through its variants and, past the
    last, to the first variant of the next model (wrapping to the first), skipping entries whose
    id is -1, then stores the variant at 0x4 and 0xC and the id at 0x0 of the 28-byte request in
@@ -93,7 +93,7 @@ extern u8 D_80152789;
 extern struct func_80204468_S3 *D_800E39C0;
 extern struct TextEntry D_800E381C[][17];
 extern struct RequestRecAt10 D_80153F80[];
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 extern s32 func_802999A0_de(s32);
 extern s32 func_8041EC44_de(s32, s32);
 extern void func_802A025C_de(char *, char *);
@@ -107,7 +107,7 @@ s32 func_8041E280_de(void *unused0, void *unused1, void *unused2, s32 event) {
     if (event != 1) {
         return 0;
     }
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (func_802999A0_de(0) == 0x16) {
         return 0;
     }

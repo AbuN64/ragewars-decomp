@@ -12,7 +12,7 @@ extern struct SoundOptionsScreen *D_800E58A0;
 
 
 /* Runs the sound options screen D_800E58A0 each frame: when its menu reports 4 it calls
-   func_8029973C_de and leaves through func_80298368_de with the stored target or func_802998A8_de when
+   MarkMenuEventHandled and leaves through func_80298368_de with the stored target or func_802998A8_de when
    that is -1; otherwise it copies the effects slider into option byte D_801462E1, playing sound
    0x460 when it changed, and the music slider into D_801462E0, stopping the music through
    func_8025E2D4_de(0) below 5 or starting track 0x34 when func_8025E2C4_de reports none playing.
@@ -28,14 +28,14 @@ extern s32 func_8041A470_de(void *);
 
 extern s32 func_8041A6E0_de(void *);
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 extern void func_80298368_de(s32);
 
 
 
 
-/* Calls func_8029973C_de; when func_80299A08_de reports 0x73, sets the word at offset 0x14 of the object
+/* Calls MarkMenuEventHandled; when func_80299A08_de reports 0x73, sets the word at offset 0x14 of the object
    D_800E58A0 points to to -1 and calls func_8041A430_de on its first word with 2. Returns zero. */
 
 
@@ -60,7 +60,7 @@ s32 func_80439018_de(void) {
     case 3:
         break;
     case 4:
-        func_8029973C_de();
+        MarkMenuEventHandled();
         if (D_800E58A0->target != -1) {
             func_80298368_de(D_800E58A0->target);
             return 0;
@@ -91,7 +91,7 @@ s32 func_80439018_de(void) {
 
 s32 func_80439128_de(void) {
     struct SoundOptionsScreen *state;
-    func_8029973C_de();
+    MarkMenuEventHandled();
 #if defined(VERSION_DE)
     if (func_80299A08_de() == 0x71) {
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)

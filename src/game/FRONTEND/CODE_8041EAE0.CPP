@@ -46,9 +46,9 @@ extern struct IntPair D_800E381C[][17];
 /* Advances the join screen's pulse timer by delta and sets byte 0x10 of node 0x392 under the edited request's root to 150 plus 100 times the sine of the timer over 300; returns zero. */
 
 
-/* Calls func_8029973C_de, then passes -1 to func_8042E988_de when func_802999A0_de reports 0x16 for zero
+/* Calls MarkMenuEventHandled, then passes -1 to func_8042E988_de when func_802999A0_de reports 0x16 for zero
    and 0x15 otherwise, then calls func_802998A8_de. Returns zero. */
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 extern s32 func_802999A0_de(s32);
 
@@ -59,7 +59,7 @@ extern void func_802998A8_de();
 /* Steps the selected menu item backwards and updates its display state. */
 
 
-extern void func_8029973C_de(void),func_8040E8D8_de(MenuWidget *,int);
+extern void MarkMenuEventHandled(void),func_8040E8D8_de(MenuWidget *,int);
 
 #if defined(VERSION_DE)
 enum { MENU_RESOURCE = 0x38c };
@@ -86,7 +86,7 @@ extern s32 D_8014DCF8[];
 
 extern unsigned char D_8014DCFB[],D_8014236A[];
 
-extern void func_8029973C_de(void),func_8041E408_de(s32);
+extern void MarkMenuEventHandled(void),func_8041E408_de(s32);
 extern struct RequestRecAt10 D_80153F80[];
 extern struct CourseOptionsScreen *D_800E39C0;
 extern MenuWidget *func_8040EC30_de(void *, s32);
@@ -209,14 +209,14 @@ s32 func_8041ECB4_de(void *unused0, void *unused1, s32 delta) {
 }
 
 s32 func_8041ED78_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     func_8042E988_de(func_802999A0_de(0) == 0x16 ? -1 : 0x15);
     func_802998A8_de();
     return 0;
 }
 
 s32 func_8041EDC0_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     func_8042E988_de(func_802999A0_de(0) == 0x16 ? -1 : 0x15);
     func_802998A8_de();
     return 0;
@@ -228,7 +228,7 @@ s32 func_8041EE08_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
     MenuWidget *temp_v0;
     MenuWidget *temp_v0_3;
     if (arg3 == 1) {
-        func_8029973C_de();
+        MarkMenuEventHandled();
         idx = D_800E39C0->selection;
 #if defined(VERSION_DE)
         temp_v0 = func_8040EC30_de(D_800E39C0->rows[idx], 0x38C);
@@ -269,7 +269,7 @@ s32 func_8041EED0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     MenuWidget *temp_v0_3;
 
     if (arg3 == 1) {
-        func_8029973C_de();
+        MarkMenuEventHandled();
         temp_v0 = func_8040EC30_de(D_800E39C0->rows[D_800E39C0->selection], MENU_RESOURCE);
         temp_v0->alpha = 0xFF;
         func_8040E8D8_de(temp_v0, 0);
@@ -294,7 +294,7 @@ s32 func_8041EFAC_de(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
 
     temp_a2 = arg2 >> 0x10;
     if ((temp_a2 == 3) && (arg3 == 0)) {
-        func_8029973C_de();
+        MarkMenuEventHandled();
         temp_a1 = D_800E39C0->selection * 0x1C;
         *(s32 *)((char *)D_8014DCF8 + temp_a1) = (*(s32 *)((char *)D_8014DCF8 + temp_a1) + 1) % 5;
         func_8041E408_de(D_800E39C0->selection);

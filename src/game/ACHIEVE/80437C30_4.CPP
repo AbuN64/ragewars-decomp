@@ -11,11 +11,11 @@
 #include "TYPES.H"
 #include "ACHIEVE/80437C30_4.H"
 
-/* Calls func_8029973C_de with the arguments it was given and returns zero. */
-extern void func_8029973C_de();
+/* Calls MarkMenuEventHandled with the arguments it was given and returns zero. */
+extern void MarkMenuEventHandled();
 
 s32 func_80438E5C_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     return 0;
 }
 

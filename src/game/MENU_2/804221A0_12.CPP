@@ -30,7 +30,7 @@ extern void func_8043C2A4_de(struct Screen_func_80422960_de *);
 extern void func_8040C428_de(s32);
 extern void func_8040E8D8_de(void *, s32);
 extern void func_804030E0_de(s32);
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 extern s32 func_802744D4_de(void);
 
 extern void func_802A230C_de(void);
@@ -70,7 +70,7 @@ s32 func_80422960_de(void *item, s32 unused1, s32 event) {
             D_800E2830->resourceHandle = -1;
             D_800E2830->motionIndex = state;
         } else {
-            func_8029973C_de();
+            MarkMenuEventHandled();
             if (D_800E4518->arena == 0 && func_8025E2C4_de() != 0) {
                 func_8025E2D4_de(func_802744D4_de() % 4 + 0x38);
             } else {

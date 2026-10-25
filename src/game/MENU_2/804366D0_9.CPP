@@ -24,7 +24,7 @@ enum { MENU_RESOURCE = 0x13b };
    word at 0x14 and, unless bit 0 of the flag set at 0x7E of the first 400-byte record of
    D_80102B00 is set, passes 0x13B to func_802991D4_de; while the menu reports 3 it counts the delay
    at 0xC down and on expiry scrolls the list at 0x8 back one row, wrapping to the menu's own row
-   count, and restarts the delay at 3; when the menu reports 4 it calls func_8029973C_de and leaves
+   count, and restarts the delay at 3; when the menu reports 4 it calls MarkMenuEventHandled and leaves
    through func_80298368_de with the target at 0x10, or 3 when that is -1. Returns zero. Adapted from
    func_8042DAF8_de with the stage test removed, case 1 added and the -1 target mapped to 3. */
 
@@ -34,18 +34,18 @@ extern s32 func_8041A470_de(struct Menu_func_804241BC_de *);
 
 extern void func_802991D4_de(s32);
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 extern void func_80298368_de(s32);
 
-/* Calls func_8029973C_de, then sets the word at offset 0x10 of the object D_800E5780 points to to -1 and
+/* Calls MarkMenuEventHandled, then sets the word at offset 0x10 of the object D_800E5780 points to to -1 and
    calls func_8041A430_de on the object's first word with 2, returning zero. */
 
 /* Handles menu selection and updates the active menu state. */
 
  extern u8 D_800FEB0F, D_80102B7E, D_80142358;
 
- void func_8029973C_de(void);
+ void MarkMenuEventHandled(void);
 
  s32 func_80299A08_de(void);
 
@@ -102,7 +102,7 @@ s32 func_80437444_de(void) {
         }
         break;
     case 4:
-        func_8029973C_de();
+        MarkMenuEventHandled();
         target = D_800E5780->target;
         if (target == -1) {
             target = 3;
@@ -118,7 +118,7 @@ s32 func_80437444_de(void) {
 s32 func_80437574_de(void) {
     struct State_func_80437444_de *state;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     state = D_800E5780;
     state->target = -1;
     func_8041A430_de(state->menu, 2);
@@ -128,7 +128,7 @@ s32 func_80437574_de(void) {
 s32 func_804375B0_de(void) {
     s32 temp_v0;
     s32 var_v0;
-    func_8029973C_de();
+    MarkMenuEventHandled();
     temp_v0 = func_80299A08_de();
     switch (temp_v0) { /* irregular */
 #if defined(VERSION_DE)

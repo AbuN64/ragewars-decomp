@@ -16,7 +16,7 @@
 
 extern s32 GetMenuScreenOwner(void);
 
-extern void *func_80411DCC_de(s32 index);
+extern void *Frontend_GetScreenData(s32 index);
 
 
 extern Animation *func_8025305C_de(s32 size);
@@ -40,8 +40,8 @@ Animation *func_804198CC_de(s32 id, s32 *frames) {
     s32 widget;
     Animation *anim;
 
-    widget = (s32)func_8040EC30_de(func_80411DCC_de(GetMenuScreenOwner()), (u16)id);
-    func_80411DCC_de(GetMenuScreenOwner());
+    widget = (s32)func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), (u16)id);
+    Frontend_GetScreenData(GetMenuScreenOwner());
     anim = func_8025305C_de(0x64);
     func_802A0748_de(anim, 0, 0x64);
     anim->kindB = 0xB5F;

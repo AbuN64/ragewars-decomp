@@ -29,7 +29,7 @@ extern void func_80419F24_de(void *);
 extern void func_80419F58_de(void *, int);
 extern void func_80298368_de(s32);
 extern void func_802A2360_de(void);
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 
 /* Construct the four-player results/loadout menu and animate its panels into view. */
 s32 Frontend_CreateFourPlayerResults(void *window) {
@@ -238,7 +238,7 @@ s32 Frontend_UpdateFourPlayerResults(void) {
         D_800E59E0->timer--;
         if (D_800E59E0->timer <= 0) {
             D_800E59E0->state = 3;
-            func_8029973C_de();
+            MarkMenuEventHandled();
             func_80298368_de(D_800E59E0->next);
             return 0;
         }

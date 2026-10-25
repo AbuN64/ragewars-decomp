@@ -4,7 +4,7 @@
 
 #if !(defined(VERSION_DE) || defined(VERSION_EU_X))
 s32 func_80421E70_eu(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (D_800E4400->open == 0) {
         func_8042177C_de();
     } else {

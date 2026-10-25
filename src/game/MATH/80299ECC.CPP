@@ -41,7 +41,7 @@ extern s32 Frontend_ComputeWidgetBounds(Quad_func_802A1BE0_de *, Quad_func_802A1
 
 
 
-extern Element *func_80298170_de(s32 id);
+extern Element *FindMenuElement(s32 id);
 static inline s32 send_event(s32 value, s32 event, s32 arg2, s32 amount, s32 context) {
     ScreenManager *manager;
     s32 locked;
@@ -140,7 +140,7 @@ void func_80298FE8_de(void) {
     args.wordC = D_800C5678_de;
     args.word10 = D_800C5678_de;
     args.word18 = D_8014D080->field534;
-    D_80146E04 = 0;
+    g_menuEventCount = 0;
     args.word20 = D_8014D080->field538;
     args.word1C = D_80146E08 - 1;
     args.word24 = D_80146E0C - 1;
@@ -174,14 +174,14 @@ void func_80298FE8_de(void) {
 void func_802991D4_de(s32 id) {
     Element *previous;
 
-    if (func_802997E4_de(func_80298170_de(id)->kind) == 0) {
+    if (FindKindHandler(FindMenuElement(id)->kind) == 0) {
         return;
     }
     previous = D_8014D080->screens[D_8014D080->current].focus;
     if (previous != 0) {
         send_event(previous->id, 0x10,0,0,0);
     }
-    D_8014D080->screens[D_8014D080->current].focus = func_80298170_de(id);
+    D_8014D080->screens[D_8014D080->current].focus = FindMenuElement(id);
     send_event(id, 0xF,0,0,0);
 }
 
@@ -273,13 +273,13 @@ s32 func_802995D4_de(s32 value, s32 arg1, s32 arg2, s32 control, s32 extra) {
     return result;
 }
 
-void func_8029973C_de(void) {
+void MarkMenuEventHandled(void) {
     ScreenManager *object = D_8014D080;
     object->handled = 1;
 }
 
 void func_80299750_de(s32 arg0, s32 arg1) {
-    ((ObjRecAt40V1 *)func_80298170_de(arg0))->unk40 = arg1;
+    ((ObjRecAt40V1 *)FindMenuElement(arg0))->unk40 = arg1;
 }
 
 void func_80299778_de(s32 id, s32 mode, MenuElementHandler handler)
@@ -305,7 +305,7 @@ void func_80299778_de(s32 id, s32 mode, MenuElementHandler handler)
 
 /* The twenty-byte table owns callable values at +4 and +8. The override
  * takes precedence; an absent identifier yields no handler. */
-MenuElementHandler func_802997E4_de(s32 id)
+MenuElementHandler FindKindHandler(s32 id)
 {
     s32 i;
     s32 *key;
@@ -382,7 +382,7 @@ s32 func_802998E0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     Element *element = arg0;
     MenuElementHandler handler;
 
-    handler = func_802997E4_de(element->kind);
+    handler = FindKindHandler(element->kind);
     if (handler != 0) {
         return handler(arg0, arg1, arg2, arg3, arg4);
     }

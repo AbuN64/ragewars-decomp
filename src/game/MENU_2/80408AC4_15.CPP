@@ -166,7 +166,7 @@ void func_8040C700_de(void) {
         "lw         $a3, 0x50($s0)\n"
         "jal        func_802995D4_de\n"
         "addiu     $a1, $zero, 0x100A\n"
-        "jal        func_8029973C_de\n"
+        "jal        MarkMenuEventHandled\n"
         "nop\n"
         "addu       $v0, $zero, $zero\n"
         ".Lauto_8040C934:\n"

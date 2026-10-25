@@ -9,7 +9,7 @@ extern StateCode80420E90 *D_800E5784;
 void func_80298368_de(s32);
 
  /* extern */
-void func_8029973C_de();
+void MarkMenuEventHandled();
 
  /* extern */
 void func_802998A8_de(void);
@@ -20,17 +20,17 @@ s32 func_8041A470_de(void *);
  /* extern */
 
 
-/* Calls func_8029973C_de, then sets the word at offset 0x10 of the object D_800E5784 points to to -1 and
+/* Calls MarkMenuEventHandled, then sets the word at offset 0x10 of the object D_800E5784 points to to -1 and
    calls func_8041A430_de on the object's first word with 2, returning zero. */
 
 
 
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 extern void func_8041A430_de(void *, s32);
 
-/* Calls func_8029973C_de; when func_80299A08_de reports 0x3D0 it sets the word at 0x10 of the menu block
+/* Calls MarkMenuEventHandled; when func_80299A08_de reports 0x3D0 it sets the word at 0x10 of the menu block
    D_800E5784 points to to 7 and clears five bytes at D_80102B7E through func_802A001C_de, for 0x3D1 it
    sets that word to -1; then it calls func_8041A430_de on the block's first word with 2. Returns
    zero. */
@@ -73,7 +73,7 @@ s32 func_80437810_de(void) {
 block_10:
         return 0;
     case 4:
-        func_8029973C_de();
+        MarkMenuEventHandled();
         temp_a0_2 = D_800E5784->unk10;
         if (temp_a0_2 == -1) {
             func_802998A8_de();
@@ -89,7 +89,7 @@ block_10:
 s32 func_804378F4_de(void) {
     StateCode80420E90 *state;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     state = D_800E5784;
     state->unk10 = -1;
     func_8041A430_de(state->unk0, 2);
@@ -99,7 +99,7 @@ s32 func_804378F4_de(void) {
 s32 func_80437930_de(void) {
     s32 choice;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     choice = func_80299A08_de();
     switch (choice) {
     case MENU_80437B10_977:

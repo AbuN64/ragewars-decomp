@@ -20,7 +20,7 @@ extern s32 D_80146894;
 
 extern s32 D_801468F4;
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 extern s32 func_8043C308_de(void *);
 
@@ -32,14 +32,14 @@ extern void func_8043C278_de(void *);
 
 extern void func_80298368_de(s32);
 
-/* When the fourth argument is one, calls func_8029973C_de and, while the counter at offset 0xE8 of
+/* When the fourth argument is one, calls MarkMenuEventHandled and, while the counter at offset 0xE8 of
    the object D_800E53C0 points to is positive, decrements it and calls Frontend_FillResultRows. Returns zero. */
 
 
 
 
 
-/* When the fourth argument is one, calls func_8029973C_de and, while the position at offset 0xE8 of
+/* When the fourth argument is one, calls MarkMenuEventHandled and, while the position at offset 0xE8 of
    the object D_800E53C0 points to is more than four below the limit at 0xEC, advances it and calls
    Frontend_FillResultRows. Returns zero. */
 
@@ -56,7 +56,7 @@ extern Handler8042DB38 D_800E53CC;
 
 s32 func_8042D788_de(void) {
     s32 *paused;
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (func_8043C308_de(D_800E53C0) == 1) {
         return 0;
     }
@@ -113,7 +113,7 @@ s32 func_8042D788_de(void) {
 }
 
 s32 func_8042D8A4_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     return 0;
 }
 
@@ -121,7 +121,7 @@ s32 func_8042D8C4_de(void *first, void *second, void *third, s32 fourth) {
     MatchScoreScreen *state;
 
     if (fourth == 1) {
-        func_8029973C_de();
+        MarkMenuEventHandled();
         state = D_800E53C0;
         if (state->first > 0) {
             state->first--;
@@ -137,7 +137,7 @@ s32 func_8042D908_de(void *first, void *second, void *third, s32 fourth) {
     s32 position;
 
     if (fourth == 1) {
-        func_8029973C_de();
+        MarkMenuEventHandled();
         state = D_800E53C0;
         position = state->first;
         if (position + 4 < state->count) {

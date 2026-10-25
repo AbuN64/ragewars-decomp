@@ -58,7 +58,7 @@ s32 func_8041DFC0_us(void *arg0) {
 #include "COMMON/ITEMRECAT20V1.H"
 extern struct TextEntry D_800E381C[][17];
 extern struct RequestRecAt10 D_80153F80[];
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 extern s32 func_802999A0_de(s32);
 extern s32 func_8041EC44_de(s32, s32);
 extern void func_802A025C_de(char *, char *);
@@ -70,7 +70,7 @@ s32 func_8041E170_us(void *sender, void *context, void *argument, s32 event) {
     s32 id;
 
     if (event != 1) return 0;
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (func_802999A0_de(0) == 0x16) return 0;
     variant = D_80153F80[D_800E39C0->selection].variant;
     model = func_8041EC44_de(variant, D_80153F80[D_800E39C0->selection].id);
@@ -106,7 +106,7 @@ void func_8041E2F0_us(void) {
         "sw         $ra, 0x14($sp)\n"
         "bne        $a3, $v0, .Lauto_8041E464\n"
         "sw        $s0, 0x10($sp)\n"
-        "jal        func_8029973C_de\n"
+        "jal        MarkMenuEventHandled\n"
         "nop\n"
         "jal        func_802999A0_de\n"
         "addu      $a0, $zero, $zero\n"

@@ -71,7 +71,7 @@ s32 func_8042AE60_eu(void *arg0, s32 arg1, s32 arg2) {
         D_80154020.trigger = 0;
         if (D_80154020.selection != -1) {
             D_800E4F60->unk_44C->alpha = 0x5A;
-            func_8029973C_de();
+            MarkMenuEventHandled();
             func_80298368_de(D_80154020.selection);
             return 0;
         }
@@ -115,7 +115,7 @@ block_7:
         D_800E4F60->unk_3E0 = temp_v0_3;
         if (temp_v0_3 <= 0) {
             D_800E4F60->unk_3DC = 3;
-            func_8029973C_de();
+            MarkMenuEventHandled();
             func_80298368_de(8);
             return 0;
         }

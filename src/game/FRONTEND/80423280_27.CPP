@@ -4,7 +4,7 @@
 #include "TYPES.H"
 
 /* Acts on the mode of the menu held first in the block g_optionsPage points to: in mode 4 it calls
-   func_8029973C_de and then either func_80298368_de with the block's word at 0x20, when that is not -1,
+   MarkMenuEventHandled and then either func_80298368_de with the block's word at 0x20, when that is not -1,
    or func_802998A8_de. Returns zero. */
 
 
@@ -14,7 +14,7 @@ extern struct State_func_804232AC_de *g_optionsPage;
 
 extern s32 func_8041A470_de(void *);
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 extern void func_80298368_de(s32);
 
@@ -29,7 +29,7 @@ enum { SHORTCUT_RESET = 0x5C, SHORTCUT_SIX = 0x52, SHORTCUT_FIVE = 0x55 };
 /* Handles the menu shortcut codes by selecting an entry and refreshing the screen. */
 
 
-extern void func_8029973C_de(void),func_80422FC0_de(void),func_8041A430_de(void *,s32);
+extern void MarkMenuEventHandled(void),func_80422FC0_de(void),func_8041A430_de(void *,s32);
 
 extern s32 func_80299A08_de(void);
 
@@ -38,7 +38,7 @@ s32 func_804232AC_de(void) {
     case 3:
         break;
     case 4:
-        func_8029973C_de();
+        MarkMenuEventHandled();
         if (g_optionsPage->value != -1) {
             func_80298368_de(g_optionsPage->value);
         } else {
@@ -52,7 +52,7 @@ s32 func_804232AC_de(void) {
 s32 func_80423328_de(void) {
     s32 temp_v0;
     s32 var_s0;
-    func_8029973C_de();
+    MarkMenuEventHandled();
     var_s0 = 1;
     temp_v0 = func_80299A08_de();
     switch(temp_v0) {

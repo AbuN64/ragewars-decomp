@@ -6,11 +6,11 @@
 #include "TYPES.H"
 #include "FRONTEND/8041DF04_3.H"
 
-/* Calls func_8029973C_de with the arguments it was given and returns zero. */
-extern void func_8029973C_de();
+/* Calls MarkMenuEventHandled with the arguments it was given and returns zero. */
+extern void MarkMenuEventHandled();
 
 s32 func_8041DE94_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     return 0;
 }
 

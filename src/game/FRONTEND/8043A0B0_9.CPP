@@ -20,7 +20,7 @@ s32 func_8043AB40_de(void *unused0, void *unused1, s32 arg2) {
     u8 *settings;
     struct Screen42 *screen;
     player = arg2 & 0xFFFF;
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (D_800E59E0->entries[player].state != 1) return 0;
     if (D_800E59E0->entries[player].selection != 5) return 0;
     {

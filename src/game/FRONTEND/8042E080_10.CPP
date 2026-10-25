@@ -24,7 +24,7 @@ extern PakMenuController *D_800E54A4;
 extern u8 D_80102B00[];
 extern u8 D_80146398[];
 
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 extern s32 func_8041B810_de(s32, s32);
 extern void func_8041B7B4_de(s32, s32, s32);
 extern void func_804322AC_de(s32);
@@ -64,7 +64,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
     s32 sub;
     s32 mode;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     i = 0;
     p = arg2 & 0xFFFF;
     event = func_8041B810_de(D_800E54A4->root, p);
@@ -243,7 +243,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 case 7:
                     func_8043599C_de(p, 0, 0);
                     func_804356BC_de(0);
-                    func_8029973C_de();
+                    MarkMenuEventHandled();
                     func_8043577C_de(9);
                     return 0;
                 default:
@@ -665,7 +665,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 if (D_800E54A4->players[p].used[i] == 1) {
                     func_8043599C_de(p, i, 0);
                     func_804356BC_de(0);
-                    func_8029973C_de();
+                    MarkMenuEventHandled();
                     func_8043577C_de(9);
                     return 0;
                 }
@@ -970,7 +970,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         case 0x2A8:
 #endif
             func_8022F204_de(0);
-            func_8029973C_de();
+            MarkMenuEventHandled();
             func_8043577C_de(9);
             return 0;
         }

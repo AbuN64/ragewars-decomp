@@ -68,7 +68,7 @@ extern StyleNextState *D_800E5694;
 
 
 
-/* Calls func_8029973C_de; when func_80299A08_de reports 0x1C8, passes the word at offset 0x14 of the
+/* Calls MarkMenuEventHandled; when func_80299A08_de reports 0x1C8, passes the word at offset 0x14 of the
    object D_800E5694 points to to func_804369E8_de, then passes -1 to func_8042E988_de if func_802999A0_de
    reports 0x16 for zero and 0xB otherwise, and calls func_802998A8_de. Returns zero. */
 
@@ -76,12 +76,12 @@ extern StyleNextState *D_800E5694;
 
 
 
-/* Calls func_8029973C_de, then passes -1 to func_8042E988_de when func_802999A0_de reports 0x16 for zero
+/* Calls MarkMenuEventHandled, then passes -1 to func_8042E988_de when func_802999A0_de reports 0x16 for zero
    and 0xB otherwise, then calls func_802998A8_de. Returns zero. */
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 
-void func_8029973C_de();
+void MarkMenuEventHandled();
 
                                   /* extern */
 s32 func_802A0C08_de(void *, s32, ...);
@@ -124,7 +124,7 @@ s32 func_80437054_de(void) {
 }
 
 s32 func_8043705C_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
 #if defined(VERSION_DE)
     if (func_80299A08_de() == 0x1C4) {
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -140,7 +140,7 @@ s32 func_8043705C_de(void) {
 }
 
 s32 func_804370CC_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     func_8042E988_de(func_802999A0_de(0) == 0x16 ? -1 : 0xB);
     func_802998A8_de();
     return 0;
@@ -149,7 +149,7 @@ s32 func_804370CC_de(void) {
 s32 func_80437114_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
     s32 temp_v0;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (arg3 == 1) {
         func_804369E8_de(D_800E5694->item);
         temp_v0 = D_800E5694->item + 1;
@@ -168,7 +168,7 @@ s32 func_80437114_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
 s32 func_804371C4_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
     s32 temp_v0;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (arg3 == 1) {
         func_804369E8_de(D_800E5694->item);
         temp_v0 = D_800E5694->item - 1;

@@ -64,7 +64,7 @@ extern void func_802A2360_de();
 
 /* Handles an input event for the 0x4D0-byte entry of D_800E59E0 the low half of the third argument
    selects: when that entry is active, the high half is 3 and the fourth argument is zero, it calls
-   func_8029973C_de, resets the entry through func_8043B6E8_de, redraws its six columns and then its
+   MarkMenuEventHandled, resets the entry through func_8043B6E8_de, redraws its six columns and then its
    selected column through Frontend_ShowEquipChoice, and plays sound 0xE7C; it always returns zero. Written
    from the assembly; the entries are an array member of the screen so each column offset is
    summed before the base is added. */
@@ -75,28 +75,28 @@ extern void func_802A2360_de();
 
 
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 
-/* Calls func_8029973C_de and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects has a nonzero word at 0x4D4 (four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through func_8025DF34_de and calls func_8043ACF0_de with the entry index and 1, returning zero. */
-
-
-
-
-
-/* Calls func_8029973C_de and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects has a nonzero word at 0x4D4 (four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through func_8025DF34_de and calls func_8043ACF0_de with the entry index and -1, returning zero. Adapted from func_8043BCC0_de with the second func_8043ACF0_de argument changed from 1 to -1. */
+/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects has a nonzero word at 0x4D4 (four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through func_8025DF34_de and calls func_8043ACF0_de with the entry index and 1, returning zero. */
 
 
 
 
 
-/* Calls func_8029973C_de and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects is in mode two (the word at 0x4D4, four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through func_8025DF34_de and calls func_8043AE5C_de with the entry index and -1, returning zero. */
+/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects has a nonzero word at 0x4D4 (four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through func_8025DF34_de and calls func_8043ACF0_de with the entry index and -1, returning zero. Adapted from func_8043BCC0_de with the second func_8043ACF0_de argument changed from 1 to -1. */
 
 
 
 
 
-/* Calls func_8029973C_de and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects is in mode two (the word at 0x4D4, four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through func_8025DF34_de and calls func_8043AE5C_de with the entry index and 1, returning zero. Adapted from func_8043BDF0_de with the second func_8043AE5C_de argument changed from -1 to 1. */
+/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects is in mode two (the word at 0x4D4, four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through func_8025DF34_de and calls func_8043AE5C_de with the entry index and -1, returning zero. */
+
+
+
+
+
+/* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects is in mode two (the word at 0x4D4, four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through func_8025DF34_de and calls func_8043AE5C_de with the entry index and 1, returning zero. Adapted from func_8043BDF0_de with the second func_8043AE5C_de argument changed from -1 to 1. */
 
 
 
@@ -195,7 +195,7 @@ s32 func_8043BBB0_de(void *first, void *second, u32 event, s32 held) {
     if (held != 0) {
         return 0;
     }
-    func_8029973C_de();
+    MarkMenuEventHandled();
     func_8043B6E8_de(index);
     for (i = 0; i < 6; i++) {
         Frontend_ShowEquipChoice(index, i, D_800E59E0->panels[index].values[i]);
@@ -209,7 +209,7 @@ s32 func_8043BBB0_de(void *first, void *second, u32 event, s32 held) {
 s32 func_8043BCC0_de(void *first, void *second, s32 slot, s32 active) {
     u16 index;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (active == 1) {
         index = slot;
         if (D_800E59E0->panels[index].mode != 0 && D_800E59E0->panels[index].state == active) {
@@ -224,7 +224,7 @@ s32 func_8043BCC0_de(void *first, void *second, s32 slot, s32 active) {
 s32 func_8043BD58_de(void *first, void *second, s32 slot, s32 active) {
     u16 index;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (active == 1) {
         index = slot;
         if (D_800E59E0->panels[index].mode != 0 && D_800E59E0->panels[index].state == active) {
@@ -239,7 +239,7 @@ s32 func_8043BD58_de(void *first, void *second, s32 slot, s32 active) {
 s32 func_8043BDF0_de(void *first, void *second, s32 slot, s32 active) {
     u16 index;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (active == 1) {
         index = slot;
         if (D_800E59E0->panels[index].mode == 2 && D_800E59E0->panels[index].state == active) {
@@ -254,7 +254,7 @@ s32 func_8043BDF0_de(void *first, void *second, s32 slot, s32 active) {
 s32 func_8043BE8C_de(void *first, void *second, s32 slot, s32 active) {
     u16 index;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (active == 1) {
         index = slot;
         if (D_800E59E0->panels[index].mode == 2 && D_800E59E0->panels[index].state == active) {
@@ -267,7 +267,7 @@ s32 func_8043BE8C_de(void *first, void *second, s32 slot, s32 active) {
 }
 
 int func_8043BF28_de(int a,int b,unsigned int player) {
- func_8029973C_de();player &= 0xFFFF;
+ MarkMenuEventHandled();player &= 0xFFFF;
  switch(D_800E59E0->panels[player].state) {
  case 1:D_800E59E0->state=5;D_800E59E0->timer=4;D_800E59E0->next=7;break;
  case 2:D_800E59E0->panels[player].state=0;func_8041B7B4_de(D_800E59E0->menu,player,0);func_8041CE10_de(D_800E59E0->panels[player].pad0,1);func_8043B0CC_de(player);break;

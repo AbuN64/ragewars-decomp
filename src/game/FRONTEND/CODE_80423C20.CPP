@@ -25,7 +25,7 @@ extern s32 D_800E4680;
 /* D_80146398 is the hub's func_8041F2A0_Config array: eight 0x96-byte records at Game+0xD0.
    This unit reaches them only as settings->playerSettings and declares nothing here. */
 
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 
 extern s32 func_80299A08_de(void);
 
@@ -197,7 +197,7 @@ s32 Frontend_ApplyModeChoice(void) {
 
     s32 i;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     switch (func_80299A08_de()) {
     #if defined(VERSION_EU_X)
     case 0x47:

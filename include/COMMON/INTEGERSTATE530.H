@@ -241,7 +241,7 @@ struct State_func_80297DBC_de {
 struct MenuHandlerTable;
 typedef struct MenuHandlerTable MenuHandlerTable;
 
-extern MenuElementHandler func_802997E4_de(s32 kind);
+extern MenuElementHandler FindKindHandler(s32 kind);
 
 struct ArgsCode80296014;
 

@@ -3,7 +3,7 @@
 #include "FRONTEND/8042E080_34.H"
 
 extern PakMenuController *D_800E54A4;
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 extern void func_804322AC_de(s32 player);
 
 /* Dispatch player-slot events using the current shared menu controller and
@@ -17,7 +17,7 @@ s32 func_8042FB48_de(s32 a,s32 b,u32 event,s32 key){
                 s32 state;
                 state=D_800E54A4->players[index].state;
                 if(state==4){
-                    func_8029973C_de();
+                    MarkMenuEventHandled();
                     D_800E54A4->players[index].back=2;
                     D_800E54A4->players[index].state=2;
                     D_800E54A4->players[index].next=state;
@@ -30,7 +30,7 @@ s32 func_8042FB48_de(s32 a,s32 b,u32 event,s32 key){
                 case 11:
                 case 13:
                 if(D_800E54A4->players[index].state==0){
-                    func_8029973C_de();
+                    MarkMenuEventHandled();
                     D_800E54A4->players[index].back=2;
                     D_800E54A4->players[index].state=2;
                     D_800E54A4->players[index].next=4;
@@ -42,7 +42,7 @@ s32 func_8042FB48_de(s32 a,s32 b,u32 event,s32 key){
                     s32 state;
                     state=D_800E54A4->players[index].state;
                     if(state==4){
-                        func_8029973C_de();
+                        MarkMenuEventHandled();
                         D_800E54A4->players[index].back=2;
                         D_800E54A4->players[index].state=2;
                         D_800E54A4->players[index].next=state;
@@ -55,7 +55,7 @@ s32 func_8042FB48_de(s32 a,s32 b,u32 event,s32 key){
             case 0:
             if(key==11||key==13){
                 if(D_800E54A4->players[index].state==0){
-                    func_8029973C_de();
+                    MarkMenuEventHandled();
                     D_800E54A4->players[index].back=2;
                     D_800E54A4->players[index].state=2;
                     D_800E54A4->players[index].next=12;
@@ -66,7 +66,7 @@ s32 func_8042FB48_de(s32 a,s32 b,u32 event,s32 key){
             case 3:
             if(key==11||key==13){
                 if(D_800E54A4->players[index].state==0){
-                    func_8029973C_de();
+                    MarkMenuEventHandled();
                     D_800E54A4->players[index].back=2;
                     D_800E54A4->players[index].state=2;
                     D_800E54A4->players[index].next=13;
@@ -78,7 +78,7 @@ s32 func_8042FB48_de(s32 a,s32 b,u32 event,s32 key){
             case 1:
             if(key==11||key==13){
                 if(D_800E54A4->players[index].state==0){
-                    func_8029973C_de();
+                    MarkMenuEventHandled();
                     D_800E54A4->players[index].state=14;
                     if(func_80434750_de()>=0){
                         D_800E54A4->players[index].back=2;
@@ -93,7 +93,7 @@ s32 func_8042FB48_de(s32 a,s32 b,u32 event,s32 key){
             case 2:
             if(key==11||key==13){
                 if(D_800E54A4->players[index].state==0){
-                    func_8029973C_de();
+                    MarkMenuEventHandled();
                     D_800E54A4->players[index].state=14;
                     if(func_80434750_de()>=0){
                         D_800E54A4->players[index].back=2;

@@ -15,7 +15,7 @@
 /* The hub spells D_800E3590 as the padded menu block; this unit's view of it is the published
    MenuRecAt108 struct, so each member use casts D_800E3590 to that view. */
 
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 extern void func_802998A8_de(void);
 
 extern void func_80419F24_de(s32 fade);
@@ -47,7 +47,7 @@ s32 func_8041D134_de(s32 unused0, s32 unused1, s32 arg2) {
         ((MenuRecAt108 *) D_800E3590)->right->x += ((MenuRecAt108 *) D_800E3590)->rightStep;
         if (--((MenuRecAt108 *) D_800E3590)->timer <= 0) {
             ((MenuRecAt108 *) D_800E3590)->state = 3;
-            func_8029973C_de();
+            MarkMenuEventHandled();
             func_802998A8_de();
             return 0;
         }

@@ -51,7 +51,7 @@ extern void func_80298368_de(s32);
 
 extern void func_802991D4_de(s32);
 
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 
 extern void func_802A2360_de(void);
 
@@ -94,13 +94,13 @@ extern s32 D_800E3514;
 
 #endif
 
-/* Calls func_802A2394_de and func_8029973C_de, then func_80298368_de with 2, sets D_8014ADA0 and returns
+/* Calls func_802A2394_de and MarkMenuEventHandled, then func_80298368_de with 2, sets D_8014ADA0 and returns
    one. */
 extern s32 D_8014ADA0;
 
 extern void func_802A2394_de();
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 /* Refreshes each of the four ports through func_80404E28_de and sets field 0x1C of D_800E3518 as soon as one reports status 0, -1, -3 or -4 through Pak_GetStatus, clearing it otherwise. */
 
@@ -244,7 +244,7 @@ void func_8041BE90_de(void) {
         goto block_24;
     }
     if ((var_s2 == 1) || (D_8010B0E0.buttons & 0x1000)) {
-        func_8029973C_de();
+        MarkMenuEventHandled();
         D_80146D60 = 1;
         D_800E28CC = 1;
         D_8014AD94 = 0;
@@ -301,7 +301,7 @@ block_25:
 
 s32 func_8041C164_de(void) {
     func_802A2394_de();
-    func_8029973C_de();
+    MarkMenuEventHandled();
     func_80298368_de(2);
     D_8014ADA0 = 1;
     return 1;
@@ -330,7 +330,7 @@ void func_8041C244_de(void) {
     D_800DF4C0++;
     if (D_800DF4C0 >= 4) {
         func_802A2394_de();
-        func_8029973C_de();
+        MarkMenuEventHandled();
         func_80298368_de(2);
         D_8014ADA0 = 1;
     } else {
@@ -419,7 +419,7 @@ s32 func_8041C46C_de(void) {
 }
 
 s32 func_8041C474_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     return 0;
 }
 
@@ -427,7 +427,7 @@ s32 func_8041C474_de(void) {
    eu-x cart numbers them 0x3C9..0x3CF, the de cart 0x3C1..0x3C5, and eu/us/us-rev1 0x3C6..0x3CB.
    Each case below carries the same work in every family, only its label changes. */
 s32 func_8041C494_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     switch (func_80299A08_de()) {
 #if defined(VERSION_EU_X)
     case 0x3CF:

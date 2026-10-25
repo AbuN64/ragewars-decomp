@@ -19,7 +19,7 @@ extern void func_8041A430_de(void *, s32);
 /* Runs the screen D_800E5430 each frame: past stage 1 of D_800E28E0 it only calls func_802A2394_de;
    otherwise it calls func_802A2360_de and, while its menu reports 3, counts the delay at 0xC down and
    on expiry scrolls the list at 0x8 back one row, wrapping to the menu's own row count, and
-   restarts the delay at 3; when the menu reports 4 it calls func_8029973C_de and leaves through
+   restarts the delay at 3; when the menu reports 4 it calls MarkMenuEventHandled and leaves through
    func_80298368_de with the stored target or func_802998A8_de when that is -1. Returns zero. Written
    from the assembly as a switch on the menu result, matching on the first trial. */
 
@@ -36,7 +36,7 @@ extern void func_802A2360_de();
 
 extern s32 func_8041A470_de(struct Menu_func_804241BC_de *);
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 extern void func_80298368_de(s32);
 
@@ -53,15 +53,15 @@ extern SlotRecAt7F D_80146398[];
 
 extern s8 D_80102B0D[];
 
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 
-/* Calls func_8029973C_de, then sets the word at offset 0x10 of the object D_800E5430 points to to -1 and
+/* Calls MarkMenuEventHandled, then sets the word at offset 0x10 of the object D_800E5430 points to to -1 and
    calls func_8041A430_de on the object's first word with 2, returning zero. */
 
 
 
 
-/* When the fourth argument is one, calls func_8029973C_de, advances the word at 0x20 of the object D_800E5430 holds while func_80264614_de reports one for it and it is below func_80264690_de's limit, formats that word into the object's text at 0x14 through func_802A0C08_de with D_800E1B60, and plays sound 0xE81 through func_8025DF34_de; returns zero.
+/* When the fourth argument is one, calls MarkMenuEventHandled, advances the word at 0x20 of the object D_800E5430 holds while func_80264614_de reports one for it and it is below func_80264690_de's limit, formats that word into the object's text at 0x14 through func_802A0C08_de with D_800E1B60, and plays sound 0xE81 through func_8025DF34_de; returns zero.
    Adapted from func_80422340_de with the object chain changed to a guarded counter increment, text format and sound call. */
 
 
@@ -74,7 +74,7 @@ extern void func_8029973C_de(void);
 extern void func_802A0C08_de(char *, char *, s32);
 
 
-/* Slider-down handler: when the fourth argument is one, calls func_8029973C_de, lowers the value at
+/* Slider-down handler: when the fourth argument is one, calls MarkMenuEventHandled, lowers the value at
    offset 0x20 of the object D_800E5430 points to by one while it is at least 2, formats it into the
    text at offset 0x14 with D_800E1B60 through func_802A0C08_de and plays sound 0xE81. Returns zero. */
 
@@ -114,7 +114,7 @@ s32 func_8042DAF8_de(void) {
         }
         break;
     case 4:
-        func_8029973C_de();
+        MarkMenuEventHandled();
         if (D_800E5430->head.target != -1) {
             func_80298368_de(D_800E5430->head.target);
             return 0;
@@ -131,7 +131,7 @@ int func_8042DC04_de(void) {
     int i;
     SlotRecAt7F *slot;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     D_800E5430->head.target = 7;
     func_8041A430_de(D_800E5430->head.menu, 2);
     for (i = 0; i < D_800E5430->count; i++) {
@@ -148,7 +148,7 @@ int func_8042DC04_de(void) {
 s32 func_8042DCC4_de(void) {
     SettingsScreenState *state;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     state = D_800E5430;
     state->head.target = -1;
     func_8041A430_de(state->head.menu, 2);
@@ -161,7 +161,7 @@ s32 func_8042DD00_de(void *a0, void *a1, void *a2, s32 press) {
     if (press != 1) {
         return 0;
     }
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (func_80264614_de(D_800E5430->count) == press) {
         object = D_800E5430;
         if (object->count < func_80264690_de()) {
@@ -179,7 +179,7 @@ s32 func_8042DDA8_de(void *first, void *second, void *third, s32 fourth) {
     if (fourth != 1) {
         return 0;
     }
-    func_8029973C_de();
+    MarkMenuEventHandled();
     value = D_800E5430->count;
     if (value >= 2) {
         D_800E5430->count = value - 1;

@@ -138,7 +138,7 @@ void func_8040E978_de(struct Pair14 *record, s16 first, s16 second) {
 /* Hit-tests a widget tree at point (px, py): unless a hit is already recorded it searches the
    node's later siblings first, then offsets the origin by the node's position and searches its
    children, and finally records the node itself when it has an id, its rectangle contains the
-   point and func_802997E4_de accepts its selector. */
+   point and FindKindHandler accepts its selector. */
 
 
 
@@ -172,7 +172,7 @@ void func_8040E984_de(WidgetRecAt1A **hit, WidgetRecAt1A *node, DrawArgs_func_80
         args.y + node->height < py) {
         return;
     }
-    if (func_802997E4_de(node->selector) != 0) {
+    if (FindKindHandler(node->selector) != 0) {
         *hit = node;
     }
 }

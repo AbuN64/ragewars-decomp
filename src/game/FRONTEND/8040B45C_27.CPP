@@ -15,7 +15,7 @@
 
 
 extern s32 GetMenuScreenOwner(void);
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 
 s32 func_8040CB40_eu_x(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
     s32 result;
@@ -110,7 +110,7 @@ s32 func_8040CB40_eu_x(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
 post:
     func_8040C950_de((Slider *)widget);
     func_802995D4_de(GetMenuScreenOwner(), 0x100A, slider->parentId, widget->value, 0);
-    func_8029973C_de();
+    MarkMenuEventHandled();
     result = 0;
 
 end:

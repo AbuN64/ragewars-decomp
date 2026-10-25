@@ -66,14 +66,14 @@ s32 func_80297A34_de(s32 event,s32 value,s32 amount,s32 context) {
             case 0:
                 switch(event) {
                 case 5: case 6: case 7: case 8:
-                    if(amount==1) func_80296CD0_de(event);
+                    if(amount==1) MoveMenuFocus(event);
                     result=value;
                     break;
                 case 1:
                     result=value;
                     if(element->flags & 0x10) {
                         if(element->linked_id) {
-                            func_8029973C_de();
+                            MarkMenuEventHandled();
                             func_80298368_de(element->linked_id);
                         }
                     }

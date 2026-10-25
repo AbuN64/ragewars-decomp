@@ -64,7 +64,7 @@ extern void func_8041EA70_de(void);
 
 
 
-/* Handles the menu message func_80299A08_de reports after func_8029973C_de unless func_8043C308_de reports
+/* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled unless func_8043C308_de reports
    screen D_800E4EF0 busy: 0x36B closes the menu through func_804294C4_de, sends code -1 to
    func_8042E988_de and calls func_802998A8_de; 0x369 does the same with page reset func_80429654_de(0)
    and code 0x17 when func_802A1B18_de reports the screen's list at 0x34 non-empty; 0x36A always does
@@ -78,11 +78,11 @@ extern void func_802998A8_de(void);
 extern void func_8041E5F8_de(void);
 
 
-/* Calls func_8029973C_de and, unless func_8043C308_de reports one for the object D_800E4EF0 holds, calls
+/* Calls MarkMenuEventHandled and, unless func_8043C308_de reports one for the object D_800E4EF0 holds, calls
    func_804294C4_de, func_8042E988_de with -1 and func_802998A8_de. Returns zero. */
 
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4EF4, an actor kind at D_800E4EF8 and a handler at D_800E4EFC: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
@@ -164,7 +164,7 @@ s32 func_8042972C_de(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
 
     kind = arg2 >> 0x10;
     if ((kind == 3) && (arg3 == 2)) {
-        func_8029973C_de();
+        MarkMenuEventHandled();
         switch (func_80299A08_de()) {
 #if defined(VERSION_DE)
         case 0x35F:
@@ -227,7 +227,7 @@ s32 func_8042972C_de(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
 }
 
 s32 func_804297F8_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (func_8043C308_de(D_800E4EF0) == 1) {
         return 0;
     }
@@ -276,7 +276,7 @@ s32 func_804297F8_de(void) {
 }
 
 s32 func_804298F8_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (func_8043C308_de(D_800E4EF0) == 1) {
         return 0;
     }

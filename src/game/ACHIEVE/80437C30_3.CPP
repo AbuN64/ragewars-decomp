@@ -28,7 +28,7 @@
 
 /* Handles event 1 on the screen D_800E5830: unless func_8043C308_de reports its menu in state 1 it
    calls func_80438828_de; otherwise it advances the menu with Frontend_DrawMenuImage and func_8043C2A4_de and,
-   once func_8043C308_de reports 2, acts on the choice at 0x1C: choice 0 calls func_8029973C_de, clears
+   once func_8043C308_de reports 2, acts on the choice at 0x1C: choice 0 calls MarkMenuEventHandled, clears
    D_80146918 and D_801468F4 and leaves through func_80298368_de for screen 0xA unless D_80146948 is 1
    and D_8015402C is at least 35, in which case it leaves for screen 7 when option D_801462D5 is 1
    and screen 3 otherwise; choice 1 calls func_8040C428_de(0), shows the window argument, stops the
@@ -61,7 +61,7 @@ extern void func_804499B0_de(void *, s32, s32);
 
 extern void func_80286AA8_de(void *, s32, s32);
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 extern void func_80298368_de(s32);
 
@@ -69,7 +69,7 @@ extern void func_80298368_de(s32);
    the word at 0x90, passes 0x272 to func_802991D4_de, or 0x273 when func_8040EBD0_de
    reports zero for item 0x273 of the window argument, also 0x272 when D_80146948 is clear, and calls func_802A2360_de; then, once the
    reply pair ending at D_80154024 is marked, it clears the mark and either hides the item at 0x24,
-   clears the word at 0x1C0, calls func_8029973C_de and leaves through func_80298368_de with the reply,
+   clears the word at 0x1C0, calls MarkMenuEventHandled and leaves through func_80298368_de with the reply,
    or for a reply of -1 shows the item again and sets 0x1C0 to one. Returns zero. Written from the
    assembly; the conditional tests the zero case first. */
 
@@ -129,7 +129,7 @@ s32 func_80438ADC_de(void *window, void *unused1, s32 event) {
             func_80286AA8_de(&D_8011FE88, 0, 0);
             ((MatchMenuObjects *)(object))->transition = 8;
         } else {
-            func_8029973C_de();
+            MarkMenuEventHandled();
             D_80146918 = 0;
             D_801468F4 = 0;
             if (D_80146948 == state && D_8015402C >= 35) {
@@ -192,7 +192,7 @@ s32 func_80438C84_de(void *window) {
         if (pair[-1] != -1) {
             func_8040E8D8_de(D_800E5830->item, 0);
             D_800E5830->busy = 0;
-            func_8029973C_de();
+            MarkMenuEventHandled();
             func_80298368_de(pair[-1]);
             return 0;
         }
@@ -215,7 +215,7 @@ extern s32 func_80299A08_de(void);
 extern void func_8043C278_de(void *);
 
 s32 func_80438D94_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (func_8043C308_de((Shared_OptionsScreen *)&D_800E5830->rules) != 1) {
         D_80146894 = 0;
         switch (func_80299A08_de()) {

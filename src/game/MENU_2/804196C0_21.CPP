@@ -46,7 +46,7 @@ extern Handler802A2B50 D_800E3368;
 
 extern s32 GetMenuScreenOwner(void);
 
-extern void *func_80411DCC_de(s32 index);
+extern void *Frontend_GetScreenData(s32 index);
 
 
 extern MenuSliderWidget *func_8025305C_de(s32);
@@ -172,8 +172,8 @@ MenuSliderWidget *func_8041A580_de(s32 arg0, s32 arg1, s32 arg2) {
     MenuSliderWidget *result;
     MenuSliderWidget *child;
 
-    source = func_8040EC30_de(func_80411DCC_de(GetMenuScreenOwner()), arg0 & 0xFFFF);
-    context = func_80411DCC_de(GetMenuScreenOwner());
+    source = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
+    context = Frontend_GetScreenData(GetMenuScreenOwner());
     result = func_8025305C_de(0x58);
     func_802A0748_de(result, 0, 0x58);
     *(Header44 *)result = *(Header44 *)source;

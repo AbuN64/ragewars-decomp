@@ -42,7 +42,7 @@ s32 func_804235A8_eu(void) {
             if (D_80154020.value != -1) {
                 func_8040E8D8_de((((Shared_OptionsScreen *)(D_800E4518))->pakIcon), 0);
                 func_8040E8D8_de((((Shared_OptionsScreen *)(D_800E4518))->header), 0);
-                func_8029973C_de();
+                MarkMenuEventHandled();
                 func_80298368_de(D_80154020.value);
                 return 0;
             }
@@ -89,7 +89,7 @@ block_11:
                     func_8025476C_de(1U);
                 }
                 D_80145040.stage = 8;
-                func_8029973C_de();
+                MarkMenuEventHandled();
                 func_80298368_de((((Shared_OptionsScreen *)(D_800E4518))->selection));
                 return 0;
             }

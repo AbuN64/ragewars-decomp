@@ -5,12 +5,12 @@
 #include "TYPES.H"
 #include "FRONTEND/8043962C_3.H"
 
-/* Handles the menu message func_80299A08_de reports after func_8029973C_de: 0x3DA waits through
+/* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled: 0x3DA waits through
    func_80298368_de for a time chosen by setting D_801462D5 through jtbl_800DDF70 (20, 15 or 10, and
    3 for any other setting); 0x3DB sends code -1 to func_8042E988_de and calls func_802998A8_de.
    Returns zero. */
 extern u8 D_801462D5;
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 extern s32 func_80299A08_de(void);
 extern void func_80298368_de(s32);
 extern void func_8042E988_de(s32);
@@ -27,7 +27,7 @@ enum { MENU_80439F38_986 = 986, MENU_80439F38_987 = 987 };
 s32 Frontend_UpdateTimedTransition(void) {
     s32 time;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     switch (func_80299A08_de()) {
     case MENU_80439F38_986:
         switch (D_801462D5) {
@@ -56,13 +56,13 @@ s32 Frontend_UpdateTimedTransition(void) {
     return 0;
 }
 
-/* Calls func_8029973C_de, then func_8042E988_de with -1, then func_802998A8_de, and returns zero. */
-extern void func_8029973C_de();
+/* Calls MarkMenuEventHandled, then func_8042E988_de with -1, then func_802998A8_de, and returns zero. */
+extern void MarkMenuEventHandled();
 extern void func_8042E988_de(s32);
 extern void func_802998A8_de();
 
 s32 func_80439E04_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     func_8042E988_de(-1);
     func_802998A8_de();
     return 0;

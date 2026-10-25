@@ -22,6 +22,6 @@ void func_802A230C_de(void) {
 
 void func_802A2320_de(void) {
     if (D_800E28D8 == 1) {
-        func_802A2480_de(func_80411DCC_de(GetMenuScreenOwner()), 0);
+        func_802A2480_de(Frontend_GetScreenData(GetMenuScreenOwner()), 0);
     }
 }

@@ -81,7 +81,7 @@ s32 func_80426918_de(void *unused0, void *unused1, s32 delta) {
         D_80154020[1] = 0;
         if (D_80154020[0] != -1) {
             D_800E4690->banner->alpha = 0x5A;
-            func_8029973C_de();
+            MarkMenuEventHandled();
             func_80298368_de(D_80154020[0]);
             return 0;
         }
@@ -108,7 +108,7 @@ s32 func_80426918_de(void *unused0, void *unused1, s32 delta) {
             break;
         }
         D_800E4690->state = 3;
-        func_8029973C_de();
+        MarkMenuEventHandled();
         if (D_801462D5 == 4) {
             func_80298368_de(3);
         } else {

@@ -11,12 +11,12 @@ extern void **D_800E58A4;
 #include "RENDER_2/8025DE50_5.H"
 #include "SCENE/802508E0_13.H"
 
-/* Calls func_8029973C_de, then sets the word at offset 0x14 of the object D_800E58A0 points to to -1 and
+/* Calls MarkMenuEventHandled, then sets the word at offset 0x14 of the object D_800E58A0 points to to -1 and
    calls func_8041A430_de on the object's first word with 2, returning zero. */
 
 
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 extern void func_8041A430_de(void *, s32);
 
@@ -58,7 +58,7 @@ extern int func_8041A6E0_de(void *slider);
 s32 func_80439174_de(void) {
     struct SoundOptionsScreen *state;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     state = D_800E58A0;
     state->target = -1;
     func_8041A430_de(state->menu, 2);

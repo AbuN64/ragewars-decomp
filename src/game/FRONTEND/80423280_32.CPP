@@ -9,7 +9,7 @@
    calls func_8041A47C_de on its menu when it expires; after that, while the menu reports 3, it counts
    the scroll delay at 0x14 down and on expiry scrolls the list at 0x8 back one row, wrapping to
    the menu's own row count, and restarts the delay at 3, and when the menu reports 4 it calls
-   func_8029973C_de and leaves through func_80298368_de with the target at 0x18. Returns zero. Adapted
+   MarkMenuEventHandled and leaves through func_80298368_de with the target at 0x18. Returns zero. Adapted
    from func_8042DAF8_de with the opening delay added, the scroll delay and target moved and the -1
    target test removed. */
 
@@ -24,7 +24,7 @@ extern void func_802A2394_de();
 extern void func_802A2360_de();
 extern s32 func_8041A470_de(struct Menu_func_804241BC_de *);
 extern void func_8041A47C_de(struct Menu_func_804241BC_de *);
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 s32 func_804241BC_de(void) {
     s32 result;
@@ -52,7 +52,7 @@ s32 func_804241BC_de(void) {
         }
         break;
     case 4:
-        func_8029973C_de();
+        MarkMenuEventHandled();
         func_80298368_de(D_800E4600->target);
         break;
     default:

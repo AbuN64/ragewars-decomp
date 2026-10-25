@@ -2594,3 +2594,6 @@ literals_Libsn_ServiceHostCommands = 0x800C18F0; // rom:0xC24F0 size:0x28
 literals_Frontend_ComputeWidgetBounds = 0x800DBD50; // rom:0xDC950 size:0x10
 literals_Engine_BuildPlacedInstances = 0x800C5138; // rom:0xC5D38 size:0x4
 literals_Texture_PlaySoundAtPosition = 0x800C3E0C; // rom:0xC4A0C size:0x4
+literals_DispatchElementEvent = 0x800C5450; // rom:0xC6050 size:0x80
+literals_DispatchCurrentScreenEvent = 0x800C54D0; // rom:0xC60D0 size:0x40
+rodata_func_8029764C_de_800CA770 = 0x800C5510;

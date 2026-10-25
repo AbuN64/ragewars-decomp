@@ -11,7 +11,7 @@
 
 extern State_func_8042F91C_de *D_800E54A4;
 extern void func_80298368_de(s32);
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 extern void func_802A2360_de(void);
 extern void func_80419F24_de(s32);
 extern void func_80419F58_de(s32,s32);
@@ -57,7 +57,7 @@ s32 func_8042F91C_de(s32 unused0, s32 unused1, s32 arg2) {
             D_800E54A4->unk50 = temp_v0_3;
             if (temp_v0_3 <= 0) {
                 D_800E54A4->unk4C = 3;
-                func_8029973C_de();
+                MarkMenuEventHandled();
                 func_80298368_de(D_800E54A4->unk3470);
                 return 0;
             }

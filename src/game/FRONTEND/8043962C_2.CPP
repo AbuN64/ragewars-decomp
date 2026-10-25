@@ -14,8 +14,8 @@ extern s32 D_800E28E0;
 
 extern void func_802A2360_de(void);
 
-/* On event 3 with value 0xD, calls func_8029973C_de and func_80298368_de with 3. Returns zero. */
-extern void func_8029973C_de();
+/* On event 3 with value 0xD, calls MarkMenuEventHandled and func_80298368_de with 3. Returns zero. */
+extern void MarkMenuEventHandled();
 
 extern void func_80298368_de(s32);
 
@@ -43,14 +43,14 @@ s32 func_804396F0_de(void *first, void *second, u32 event, s32 value) {
         if (value != 0xD) {
             return 0;
         }
-        func_8029973C_de();
+        MarkMenuEventHandled();
         func_80298368_de(3);
     }
     return 0;
 }
 
 s32 func_80439730_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     return 0;
 }
 

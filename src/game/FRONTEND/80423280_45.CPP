@@ -10,7 +10,7 @@
 #include "FRONTEND/MATCH_MENU_MESSAGE_IDS.H"
 #include "TYPES.H"
 
-/* Handles the menu message func_80299A08_de reports after func_8029973C_de. 0x1D9: when
+/* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled. 0x1D9: when
    func_802999A0_de(0) reports 0x16 it stops the menu object and the menu data D_80145040, releases
    D_8011FE88, restarts func_8025476C_de when func_8025477C_de reports it idle, sets the menu stage to 8
    and sends func_8042E988_de 20, 10, 15 or 10 by the controller mode (3 for any other mode); otherwise
@@ -18,7 +18,7 @@
    func_802998A8_de. Returns zero. */
 #include "MENU/PAK_LOAD.H"
 
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 extern s32 func_80299A08_de(void);
 extern s32 func_802999A0_de(s32);
 extern void Items_ResetActorPools(void *, s32);
@@ -33,7 +33,7 @@ extern void func_802998A8_de(void);
 
 
 s32 Frontend_HandleMatchMenuMessage(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     switch (func_80299A08_de()) {
     default:
         return 0;
@@ -81,12 +81,12 @@ s32 Frontend_HandleMatchMenuMessage(void) {
 }
 #endif
 
-/* Calls func_8029973C_de, then passes 0xB to func_8042E988_de when func_802999A0_de reports 0xB for zero
+/* Calls MarkMenuEventHandled, then passes 0xB to func_8042E988_de when func_802999A0_de reports 0xB for zero
    and -1 otherwise, then calls func_802998A8_de. Returns zero. */
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 s32 func_804290F4_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     func_8042E988_de(func_802999A0_de(0) == 0xB ? 0xB : -1);
     func_802998A8_de();
     return 0;

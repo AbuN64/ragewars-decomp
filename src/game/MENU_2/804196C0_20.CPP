@@ -7,7 +7,7 @@
 #include "FRONTEND/8040B45C_33.H"
 
 /* Creates a 0x7C-byte fading widget: finds the frame the low half of the first argument names and
-   the item the second names in the current context through GetMenuScreenOwner, func_80411DCC_de and
+   the item the second names in the current context through GetMenuScreenOwner, Frontend_GetScreenData and
    func_8040EC30_de, allocates and zeroes the widget, tags it 0xB60 with kind 8, links the frame at
    0x44 (clearing its word at 0x20 and setting 0x24 to D_800E1474) and the item at 0x48, sets both
    scales at 0x4C and 0x50 to D_800E1470, copies the item's two colours at 0x2C and 0x30 to 0x60,
@@ -22,7 +22,7 @@
 
 
 extern s32 GetMenuScreenOwner(void);
-extern void *func_80411DCC_de(s32 index);
+extern void *Frontend_GetScreenData(s32 index);
 extern MenuFadeWidget *func_8025305C_de(s32);
 extern void func_8041A47C_de(MenuFadeWidget *);
 extern void func_8041A430_de(MenuFadeWidget *, s32);
@@ -33,8 +33,8 @@ MenuFadeWidget *func_8041A280_de(s32 frameId, s32 itemId) {
     s32 context;
     MenuFadeWidget *result;
 
-    frame = func_8040EC30_de(func_80411DCC_de(GetMenuScreenOwner()), frameId & 0xFFFF);
-    context = func_80411DCC_de(GetMenuScreenOwner());
+    frame = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), frameId & 0xFFFF);
+    context = Frontend_GetScreenData(GetMenuScreenOwner());
     result = func_8025305C_de(0x7C);
     func_802A0748_de(result, 0, 0x7C);
     result->field_0E = 0xB60;

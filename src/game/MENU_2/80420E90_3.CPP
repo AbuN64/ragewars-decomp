@@ -22,7 +22,7 @@ extern void func_8041A430_de(void *, s32);
 void func_80298368_de(s32);
 
                                /* extern */
-void func_8029973C_de();
+void MarkMenuEventHandled();
 
                                   /* extern */
 void func_802A2360_de();
@@ -39,23 +39,23 @@ extern s32 D_800E28E0;
                           
 
 
-/* Handles the menu message func_80299A08_de reports after func_8029973C_de, for messages 0x3A2 to 0x3A7
+/* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled, for messages 0x3A2 to 0x3A7
    through jtbl_800E1610: five pick option 0, 1, 3, 4 or 2, pass it to func_80434FB4_de and set the
    result word at offset 0x10 of the screen D_800E4450 to 0x13; the sixth sets it to -1. Both then
    close the screen's first word through func_8041A430_de with 2. Returns zero. */
 
 
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 
 extern s32 func_80299A08_de(void);
 
-/* Calls func_8029973C_de, then sets the word at offset 0x10 of the object D_800E4450 points to to -1 and
+/* Calls MarkMenuEventHandled, then sets the word at offset 0x10 of the object D_800E4450 points to to -1 and
    calls func_8041A430_de on the object's first word with 2, returning zero. */
 
 
 
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4454, an actor kind at D_800E4458 and a handler at D_800E445C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
 
@@ -124,7 +124,7 @@ s32 func_80421BEC_de(void) {
 block_12:
         return 0;
     case 4:
-        func_8029973C_de();
+        MarkMenuEventHandled();
         var_a0 = D_800E4450->unk10;
         if (var_a0 == -1) {
             var_a0 = 3;
@@ -139,7 +139,7 @@ block_12:
 s32 func_80421CE8_de(void) {
     s32 option;
     u32 message;
-    func_8029973C_de();
+    MarkMenuEventHandled();
 #if defined(VERSION_DE)
     message = func_80299A08_de() - 0x39C;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -196,7 +196,7 @@ done:
 s32 func_80421D94_de(void) {
     StateCode80420E90 *state;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     state = D_800E4450;
     state->unk10 = -1;
     func_8041A430_de(state->unk0, 2);

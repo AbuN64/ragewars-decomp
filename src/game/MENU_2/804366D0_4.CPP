@@ -9,19 +9,19 @@ extern struct MenuStepState *D_800E5690;
 #include "MENU_2/804366D0_4.H"
 #include "RENDER_2/8025DE50_5.H"
 
-/* Calls func_8029973C_de, then sets the word at offset 0x20 of the object D_800E5690 points to to -1 and
+/* Calls MarkMenuEventHandled, then sets the word at offset 0x20 of the object D_800E5690 points to to -1 and
    calls func_8041A430_de on the object's first word with 2, returning zero. */
 
 
 
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 extern void func_8041A430_de(void *, s32);
 
 
                                  /* extern */
-void func_8029973C_de();
+void MarkMenuEventHandled();
 
                                   /* extern */
 s32 func_802A0C08_de(void *, s32, ...);
@@ -57,7 +57,7 @@ extern Handler80436FE4 D_800E56A0;
 s32 func_80436C58_de(void) {
     struct MenuStepState *state;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     state = D_800E5690;
     state->value = -1;
     func_8041A430_de(state->menu, 2);
@@ -67,7 +67,7 @@ s32 func_80436C58_de(void) {
 s32 func_80436C94_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
     s32 temp_v0;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (arg3 == 1) {
         func_804367A8_de(D_800E5690->item);
         temp_v0 = D_800E5690->item + 1;
@@ -87,7 +87,7 @@ s32 func_80436C94_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
 s32 func_80436D4C_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
     s32 temp_v0;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (arg3 == 1) {
         func_804367A8_de(D_800E5690->item);
         temp_v0 = D_800E5690->item - 1;

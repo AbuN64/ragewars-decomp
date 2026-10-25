@@ -127,7 +127,7 @@ extern s16 D_80153C0C;
 
 extern u16 *D_80153C4C;
 
-extern void *func_80411DCC_de(s32 index);
+extern void *Frontend_GetScreenData(s32 index);
 
 extern void Frontend_AcquireArchiveEntry(u32 index);
 
@@ -141,10 +141,10 @@ static inline void func_8040F75C_resolve(UiWidget *widget) {
     index = (u32)(w->words[0] & 0xFFFF0000) >> 16;
     offset = w->words[0] & 0xFFFF;
     if (index != 0 || offset != 0) {
-        data = func_80411DCC_de(index);
+        data = Frontend_GetScreenData(index);
         if (data == 0) {
             Frontend_AcquireArchiveEntry(index);
-            data = func_80411DCC_de(index);
+            data = Frontend_GetScreenData(index);
             D_80153C4C[index] |= 1;
         }
         w->words[0] = data + offset;
@@ -152,10 +152,10 @@ static inline void func_8040F75C_resolve(UiWidget *widget) {
     index = (u32)(w->words[1] & 0xFFFF0000) >> 16;
     offset = w->words[1] & 0xFFFF;
     if (index != 0 || offset != 0) {
-        data = func_80411DCC_de(index);
+        data = Frontend_GetScreenData(index);
         if (data == 0) {
             Frontend_AcquireArchiveEntry(index);
-            data = func_80411DCC_de(index);
+            data = Frontend_GetScreenData(index);
             D_80153C4C[index] |= 1;
         }
         w->words[1] = data + offset;
@@ -163,10 +163,10 @@ static inline void func_8040F75C_resolve(UiWidget *widget) {
     index = (u32)(w->words[2] & 0xFFFF0000) >> 16;
     offset = w->words[2] & 0xFFFF;
     if (index != 0 || offset != 0) {
-        data = func_80411DCC_de(index);
+        data = Frontend_GetScreenData(index);
         if (data == 0) {
             Frontend_AcquireArchiveEntry(index);
-            data = func_80411DCC_de(index);
+            data = Frontend_GetScreenData(index);
             D_80153C4C[index] |= 1;
         }
         w->words[2] = data + offset;

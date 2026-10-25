@@ -127,7 +127,7 @@ enum { ITEM0 = 621, ITEM1 = 620, ITEM2 = 619, ITEM3 = 618 };
 /* Handles event 1 on the screen D_800E53C0: unless func_8043C308_de reports its menu in state 1 it
    calls func_8042D28C_de; otherwise it advances the menu with Frontend_DrawMenuImage and func_8043C2A4_de and,
    once func_8043C308_de reports 2, acts on the choice at 0x1C: choice 0 hides the window argument,
-   calls func_8029973C_de, clears D_80146918 and D_801468F4 and leaves for screen 0xF when option
+   calls MarkMenuEventHandled, clears D_80146918 and D_801468F4 and leaves for screen 0xF when option
    D_801462D5 is set, otherwise through func_8042DEA0_de when func_8042AF28_de and func_8042ACD8_de both
    agree or for screen 0x14; choice 1 calls func_8040C428_de(0), shows the window, stops the objects
    at D_80145088 and 0x48 before it, releases D_8011FE88 through func_80286AA8_de and sets the word at
@@ -155,14 +155,14 @@ extern void func_804499B0_de(void *, s32, s32);
 
 extern void func_80286AA8_de(void *, s32, s32);
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 /* Runs one frame of the screen D_800E53C0's confirmation prompt while D_800E28E0 is not positive:
    on the first frame it marks the prompt open at 0x320 and asks func_802991D4_de for message 0x238,
    or 0x237 when func_8040EBD0_de rejects the object loaded for 0x238, then calls func_802A2360_de. Once
    the choice word D_80154020[1] reads one it clears it and either enables the prompt's object at
    0xE4 and records the choice at 0x328, when the pending action D_80154020[0] is -1, or disables
-   the object, clears 0x328 and hands the pending action to func_80298368_de through func_8029973C_de.
+   the object, clears 0x328 and hands the pending action to func_80298368_de through MarkMenuEventHandled.
    Returns zero. On eu-x both message ids are renumbered 5 higher. */
 
 
@@ -442,7 +442,7 @@ s32 func_8042D4FC_de(void *window, void *unused1, s32 event) {
             ((MatchMenuObjects *)(object))->transition = 8;
         } else {
             func_8040E8D8_de(window, 0);
-            func_8029973C_de();
+            MarkMenuEventHandled();
             if (D_801462D5 == 0) {
                 D_80146918 = 0;
                 D_801468F4 = 0;
@@ -488,7 +488,7 @@ s32 func_8042D690_de(s32 context) {
             if (choice[-1] != -1) {
                 func_8040E8D8_de(D_800E53C0->buttonAddress, 0);
                 D_800E53C0->dirty = 0;
-                func_8029973C_de();
+                MarkMenuEventHandled();
                 func_80298368_de(choice[-1]);
                 return 0;
             }

@@ -40,7 +40,7 @@ extern s32 func_8041A6E0_de(void *);
 
 
 /* Acts on the mode of the menu held first in the block D_800E5690 points to: in mode 4 it calls
-   func_8029973C_de and then either func_80298368_de with the block's word at 0x20, when that is not -1,
+   MarkMenuEventHandled and then either func_80298368_de with the block's word at 0x20, when that is not -1,
    or func_802998A8_de. Returns zero. */
 
 
@@ -48,11 +48,11 @@ extern s32 func_8041A6E0_de(void *);
 
 extern s32 func_8041A470_de(void *);
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 
 
-/* Calls func_8029973C_de; when func_80299A08_de reports 0x60, passes the word at offset 0x28 of the object
+/* Calls MarkMenuEventHandled; when func_80299A08_de reports 0x60, passes the word at offset 0x28 of the object
    D_800E5690 points to to func_804367A8_de, then sets its word at 0x20 to -1 and calls func_8041A430_de
    on its first word with 2. Returns zero. */
 
@@ -104,7 +104,7 @@ s32 func_80436B70_de(void) {
     case 3:
         break;
     case 4:
-        func_8029973C_de();
+        MarkMenuEventHandled();
         if (D_800E5690->value != -1) {
             func_80298368_de(D_800E5690->value);
         } else {
@@ -123,7 +123,7 @@ s32 func_80436BEC_de(void) {
 
 s32 func_80436BF4_de(void) {
     struct MenuStepState *state;
-    func_8029973C_de();
+    MarkMenuEventHandled();
 #if defined(VERSION_DE)
     if (func_80299A08_de() == 0x5E) {
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)

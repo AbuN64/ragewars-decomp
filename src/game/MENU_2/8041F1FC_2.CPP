@@ -63,7 +63,7 @@ s32 func_8041F6C8_de(s32 arg0,s32 arg1,s32 arg2) {
         D_800E42D0->timer = temp_v0_4;
         if (temp_v0_4 <= 0) {
             D_800E42D0->phase = 3;
-            func_8029973C_de();
+            MarkMenuEventHandled();
             func_80298368_de(D_800E42D0->result);
             return 0;
         }

@@ -64,13 +64,13 @@ extern void func_8042B2E4_de();
 
 extern void func_8043C278_de(s32 *record);
 
-/* On event 3 with value 0xB, calls func_8029973C_de and sets the word at offset 0x20 of the object
+/* On event 3 with value 0xB, calls MarkMenuEventHandled and sets the word at offset 0x20 of the object
    D_800E44A0 points to. Returns zero. */
 
 
 
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 /* Sets the word at offset 0x20 of the object D_800E44A0 points to and returns zero. */
 
@@ -141,7 +141,7 @@ s32 func_80422340_de(void) {
 
 s32 func_804223CC_de(void *first, void *second, u32 event, s32 value) {
     if ((event >> 16) == 3 && value == 0xB) {
-        func_8029973C_de();
+        MarkMenuEventHandled();
         D_800E44A0[8] = 1;
     }
     return 0;
@@ -153,7 +153,7 @@ s32 func_80422414_de(void) {
 }
 
 s32 func_8042242C_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     return 0;
 }
 

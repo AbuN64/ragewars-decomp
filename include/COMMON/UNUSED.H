@@ -2217,7 +2217,7 @@ extern char D_800D3880[];
 
 extern char D_00451D18[];
 
-extern s32 D_80146E04;
+extern s32 g_menuEventCount;
 
 extern int D_800D3620;
 

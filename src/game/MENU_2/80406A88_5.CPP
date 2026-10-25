@@ -5,7 +5,7 @@
 
 s32 func_80421E70_eu_x(void) {
     s32 message;
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (D_800E4400->open == 0) {
         func_8042177C_de();
     } else {

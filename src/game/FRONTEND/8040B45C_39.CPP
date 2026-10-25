@@ -289,7 +289,7 @@ void func_80411DA4_de(s32 arg0) {
     }
 }
 
-void *func_80411DCC_de(s32 index) {
+void *Frontend_GetScreenData(s32 index) {
     return D_801539B0.Screen[index].data;
 }
 

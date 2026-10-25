@@ -21,10 +21,10 @@ extern void func_802A2360_de();
 
 
 
-/* Handles the menu message func_80299A08_de reports after func_8029973C_de: 0x1C3, 0x1BD, 0x1C2 and
+/* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled: 0x1C3, 0x1BD, 0x1C2 and
    0x1C4 send codes -1, 13, 12 and 14 to func_8042E988_de; a handled message then runs func_8042302C_de
    and func_802998A8_de. Returns zero. */
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 
 extern s32 func_80299A08_de(void);
 
@@ -32,8 +32,8 @@ extern void func_8042E988_de(s32);
 
 extern void func_802998A8_de(void);
 
-/* Calls func_8029973C_de, func_8042E988_de with -1, func_8042302C_de and func_802998A8_de, and returns zero. */
-extern void func_8029973C_de();
+/* Calls MarkMenuEventHandled, func_8042E988_de with -1, func_8042302C_de and func_802998A8_de, and returns zero. */
+extern void MarkMenuEventHandled();
 
 extern void func_802998A8_de();
 
@@ -51,7 +51,7 @@ extern Handler80423930 D_800E456C;
 
 extern void func_80245B28_de();
 
-/* Handles the menu message func_80299A08_de reports after func_8029973C_de, for its MESSAGE_COUNT messages from
+/* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled, for its MESSAGE_COUNT messages from
    FIRST_MESSAGE (0x377 to 0x380 on us) through jtbl_800E1668: one reopens screen D_800E4518 (marking it shown with timer -1 and
    refreshing its two windows at 0x44 and 0x4C) and calls func_80245B28_de; one tries func_8042ACD8_de
    and on failure sets the screen's modes 5 and 4 with timer 20, else reopens it with timer 0; the
@@ -103,7 +103,7 @@ s32 func_80423620_de(void) {
 
 s32 func_80423654_de(void) {
     s32 handled;
-    func_8029973C_de();
+    MarkMenuEventHandled();
     handled = 1;
     switch (func_80299A08_de()) {
 #if defined(VERSION_DE)
@@ -154,7 +154,7 @@ s32 func_80423654_de(void) {
 }
 
 s32 func_80423720_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     func_8042E988_de(-1);
     func_8042302C_de();
     func_802998A8_de();
@@ -200,7 +200,7 @@ s32 func_804237E8_de(void) {
 s32 func_80423828_de(void) {
     s32 handled;
     u32 message;
-    func_8029973C_de();
+    MarkMenuEventHandled();
     handled = 1;
     message = func_80299A08_de() -
 #if defined(VERSION_DE)
@@ -285,7 +285,7 @@ done:
 }
 
 s32 func_80423990_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     return 0;
 }
 

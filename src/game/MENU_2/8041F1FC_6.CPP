@@ -24,7 +24,7 @@ extern void func_804201A4_de(int, EntryRecAt14V1 *);
 
 extern u8 D_801462D5;
 
-void func_8029973C_de(void);
+void MarkMenuEventHandled(void);
 
                            /* extern */
 void func_8041B7B4_de(s32, s32, s32, State_func_80420C10_de *);
@@ -37,7 +37,7 @@ void func_80420438_de(s32);
 
 /* Applies the chosen character when the active player panel is ready. */
 
-void func_8029973C_de();
+void MarkMenuEventHandled();
 
                                   /* extern */
 s32 func_8040EBD0_de(s32);
@@ -121,7 +121,7 @@ s32 func_80420C10_de(s32 unused0, s32 unused1, s32 arg2) {
     s32 temp_s1;
     State_func_80420C10_de *temp_a3;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     temp_s0 = arg2 & 0xFFFF;
     temp_s1 = temp_s0 * 0x4C8;
     temp_a3 = (State_func_80420C10_de *)&((PanelRecord *)D_800E42D0)[temp_s0];
@@ -152,7 +152,7 @@ s32 func_80420CDC_de(s32 arg0, s32 arg1, s32 arg2) {
 
     temp_s0 = arg2 & 0xFFFF;
     choice = func_8041B810_de(D_800E42D0->unk4, temp_s0);
-    func_8029973C_de();
+    MarkMenuEventHandled();
     characterSelectionRoot = (CharacterSelectionRoot *)((char *)D_800E42D0 + (temp_s0 * 0x4C8));
     if (characterSelectionRoot->phase == 1) {
         if (choice == SPECIAL_CHAR) func_80420618_de(temp_s0,characterSelectionRoot->choice);

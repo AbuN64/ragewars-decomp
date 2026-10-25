@@ -136,7 +136,7 @@ s32 Frontend_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
         return 0;
     }
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     D_800E4F60->unk3DC = 8;
     func_8042A7B4_de(0x41);
 
@@ -153,13 +153,13 @@ s32 Frontend_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
 }
 
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 extern void func_80439C80_de(void *, s32);
 #define SCR4D4 ((struct Screen_func_8042B4D4_de *)D_800E4F60)
 s32 func_8042B4D4_de(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 changed;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (event != 1) {
         return 0;
     }
@@ -211,7 +211,7 @@ s32 Frontend_SelectNextSetupItem(void *unused0, void *unused1, void *unused2, s3
     s32 next;
     s32 limit;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (event != 1) {
         return 0;
     }
@@ -265,7 +265,7 @@ s32 func_8042B78C_de(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 count;
     s32 mirror;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (event != 1) {
         return 0;
     }
@@ -307,7 +307,7 @@ s32 func_8042B904_de(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 changed;
     s32 count;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (event != 1) {
         return 0;
     }
@@ -349,7 +349,7 @@ s32 func_8042B904_de(void *unused0, void *unused1, void *unused2, s32 event) {
 #undef SCR904
 
 s32 Frontend_EndSetupInput(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (D_800E4F60->unk3DC == 3) {
         D_800E4F60->unk3DC = 5;
         D_800E4F60->unk3E0 = 4;
@@ -836,7 +836,7 @@ extern void func_80422020_de();
 extern void func_8042A7B4_de(s32 a0);
 
 
-/* Moves the selection of the screen D_800E4F60 back on event 1: calls func_8029973C_de and steps the
+/* Moves the selection of the screen D_800E4F60 back on event 1: calls MarkMenuEventHandled and steps the
    selection at 0x438 back while it is above 0; in category 0 the second page (11 and up) instead
    steps forward while below the count func_8042B154_de gives for list 0. When it moved it plays sound
    0xE7D, calls func_8042B2E4_de, clears the words at 0x45C and 0x464, dims the item at 0x43C to alpha
@@ -851,7 +851,7 @@ extern void func_8042A7B4_de(s32 a0);
 
 
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 
 
@@ -859,7 +859,7 @@ extern s32 func_8042B154_de(s32);
 
 extern void func_80439C80_de(void *, s32);
 
-/* Moves the selection of the screen D_800E4F60 on event 1: calls func_8029973C_de and steps the
+/* Moves the selection of the screen D_800E4F60 on event 1: calls MarkMenuEventHandled and steps the
    selection at 0x438 forward while it stays below the count func_8042B154_de gives for the category's
    list; in category 0 the first page (below 11) steps forward unless it would reach the count of
    list 0 or 11, and the second page steps back unless it would reach 10. When it moved it plays
@@ -873,7 +873,7 @@ extern void func_80439C80_de(void *, s32);
 
 
 
-/* Moves the screen D_800E4F60 to its previous category on event 1: calls func_8029973C_de and steps
+/* Moves the screen D_800E4F60 to its previous category on event 1: calls MarkMenuEventHandled and steps
    the category at 0x434 back unless it is 0; in category 0 a selection at 0x438 from 5 to 10 is
    mirrored to 21 minus it when that stays below the count func_8042B154_de gives for list 0. When
    anything changed it plays sound 0xE7D, calls func_8042B2E4_de, clears the words at 0x45C and 0x464,
@@ -888,7 +888,7 @@ extern void func_80439C80_de(void *, s32);
 
 
 
-/* Moves the screen D_800E4F60 to its next category on event 1: calls func_8029973C_de and, unless the
+/* Moves the screen D_800E4F60 to its next category on event 1: calls MarkMenuEventHandled and, unless the
    category at 0x434 is already 3, advances it (from category 0 only while the selection at 0x438
    is below 11, otherwise mirroring the selection to 21 minus it), then plays sound 0xE7D, calls
    func_8042B2E4_de, clears the words at 0x45C and 0x464, dims the item at 0x43C to alpha 0x41, clamps
@@ -907,7 +907,7 @@ extern void func_80439C80_de(void *, s32);
 
 
 
-/* Calls func_8029973C_de; when the mode word at offset 0x3DC of the object D_800E4F60 points to is 3,
+/* Calls MarkMenuEventHandled; when the mode word at offset 0x3DC of the object D_800E4F60 points to is 3,
    sets it to 5 and the word at 0x3E0 to 4. Returns zero. */
 
 

@@ -91,7 +91,7 @@ s32 func_80430118_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
             D_800E54A4->players[temp_s1].namePhase = 2;
         }
         if (arg3 == 1) {
-            func_8029973C_de();
+            MarkMenuEventHandled();
             func_80434EF4_de(temp_s1);
             D_800E54A4->players[temp_s1].namePhase = 0;
             func_8025DF34_de(0xE81);
@@ -100,7 +100,7 @@ s32 func_80430118_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         return 0;
     case 4:
         if (arg3 == 1) {
-            func_8029973C_de();
+            MarkMenuEventHandled();
             func_80434250_de(temp_s1, 1);
             D_800E54A4->selected[temp_s1] = 0;
             func_8025DF34_de(0xE74);
@@ -109,7 +109,7 @@ s32 func_80430118_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         return 0;
     case 13:
         if ((D_800E54A4->players[temp_s1].sub == 6) && (arg3 == 1)) {
-            func_8029973C_de();
+            MarkMenuEventHandled();
             var_s0 = ((MenuWidget *)func_8041B7FC_de(D_800E54A4->root, temp_s1))->next;
 loop_11:
             if (func_8040EBD0_de(var_s0) != 0) {
@@ -145,7 +145,7 @@ loop_21:
             func_80433D38_de(temp_s1);
         }
 block_24:
-        func_8029973C_de();
+        MarkMenuEventHandled();
         break;
     }
     return 0;
@@ -154,7 +154,7 @@ block_24:
 /* Handles Controller Pak menu confirmations and returns focus to an enabled widget for the active channel. */
 extern s32 func_80299B4C_de(void);
 extern s32 func_8029DB58_de(s32);
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 extern s32 func_8040EBD0_de(void *);
 extern void func_8041B8DC_de(s32, s32, void *);
 extern void func_80433BCC_de(s32);
@@ -173,7 +173,7 @@ s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, 
             D_800E54A4->players[player].namePhase = 2;
         }
         if (arg3 == 1) {
-            func_8029973C_de();
+            MarkMenuEventHandled();
             D_800E54A4->players[player].namePhase = arg3;
             func_80434E34_de(player);
             func_8025DF34_de(0xE81);
@@ -181,7 +181,7 @@ s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, 
         return 0;
     case 4:
         if (arg3 == 1) {
-            func_8029973C_de();
+            MarkMenuEventHandled();
             func_80434250_de(player, 0);
             D_800E54A4->selected[player] = 0;
             func_8025DF34_de(0xE74);
@@ -189,7 +189,7 @@ s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, 
         return 0;
     case 13:
         if (D_800E54A4->players[player].sub == 6 && arg3 == 1) {
-            func_8029973C_de();
+            MarkMenuEventHandled();
             node = func_8041B7FC_de(D_800E54A4->root, player);
             node = node->ref2C;
             while (func_8040EBD0_de(node) != 0) {
@@ -209,7 +209,7 @@ s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, 
             func_8041B8DC_de(D_800E54A4->root, player, node);
             func_80433BCC_de(player);
         }
-        func_8029973C_de();
+        MarkMenuEventHandled();
         break;
     case 27:
         if (arg3 == 1) {
@@ -221,7 +221,7 @@ s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, 
             func_8041B8DC_de(D_800E54A4->root, player, node);
             func_80433D38_de(player);
         }
-        func_8029973C_de();
+        MarkMenuEventHandled();
         break;
     }
     return 0;

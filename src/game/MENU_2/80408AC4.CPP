@@ -21,13 +21,13 @@ s32 func_80428FA0_de(void) {
 #include "MENU/PAK_LOAD.H"
 #include "COMMON/GAME_SESSION.H"
 
-/* Handles the menu message func_80299A08_de reports after func_8029973C_de. 0x1D5: when
+/* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled. 0x1D5: when
    func_802999A0_de(0) reports 0x16 it stops the menu object and the menu data D_80145040, releases
    D_8011FE88, restarts func_8025476C_de when func_8025477C_de reports it idle, sets the menu stage to 8
    and sends func_8042E988_de 20, 10, 15 or 10 by the controller mode (3 for any other mode); otherwise
    it sends 3. 0x1D6 sends 11 when func_802999A0_de(0) reports 11 and -1 otherwise. Either then calls
    func_802998A8_de. Returns zero. */
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 extern s32 func_80299A08_de(void);
 extern s32 func_802999A0_de(s32);
 extern void Items_ResetActorPools(void *, s32);
@@ -39,7 +39,7 @@ extern void func_8042E988_de(s32);
 extern void func_802998A8_de(void);
 
 s32 Menu_HandleMatchMessage(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     switch (func_80299A08_de()) {
     default:
         return 0;

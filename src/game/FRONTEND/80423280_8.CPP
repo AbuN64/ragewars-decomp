@@ -40,7 +40,7 @@ enum { RESULTS_OPTION_329 = 329, RESULTS_OPTION_331 = 331, RESULTS_OPTION_332 = 
 
 extern void func_802A2360_de();
 
-/* On event 3 with value 0, calls func_8029973C_de, sets the word at offset 0x988 of the object
+/* On event 3 with value 0, calls MarkMenuEventHandled, sets the word at offset 0x988 of the object
    D_800E4690 points to to 8 and the byte at 0x10 of its item at 0xA50 to 0x5A, and plays sound
    0xE7C through func_8025DF34_de. Returns zero. */
 
@@ -49,7 +49,7 @@ extern void func_802A2360_de();
 
 
 
-extern void func_8029973C_de();
+extern void MarkMenuEventHandled();
 
 
 /* Moves the menu cursor on event 1: when the current slot's successor in the 28-byte slot table
@@ -110,7 +110,7 @@ extern s32 func_80265650_de(u8 *, s32);
 
 
 
-/* Calls func_8029973C_de and Frontend_HideTrialCatalogueWidgets, passes the two words after the identifier in the
+/* Calls MarkMenuEventHandled and Frontend_HideTrialCatalogueWidgets, passes the two words after the identifier in the
    28-byte entry D_800E4690's selection at 0xA44 picks from D_800E4694 to func_8042E9A0_de, then
    calls func_8042E988_de with 0x19. Returns zero. */
 
@@ -176,7 +176,7 @@ s32 func_804287F8_de(void *first, void *second, u32 event, s32 value) {
     ResultsOptionsScreen *state;
 
     if ((event >> 16) == 3 && value == 0) {
-        func_8029973C_de();
+        MarkMenuEventHandled();
         state = D_800E4690;
         state->state = 8;
         state->item->alpha = 0x5A;
@@ -190,7 +190,7 @@ s32 func_80428850_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     s32 set;
     u8 *options;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (event != 1) {
         return 0;
     }
@@ -228,7 +228,7 @@ s32 func_804289B4_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     s32 set;
     u8 *options;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (event != 1) {
         return 0;
     }
@@ -266,7 +266,7 @@ s32 func_80428B18_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     s32 set;
     u8 *options;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (event != 1) {
         return 0;
     }
@@ -304,7 +304,7 @@ s32 func_80428C7C_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     s32 set;
     u8 *options;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     if (event != 1) {
         return 0;
     }
@@ -338,7 +338,7 @@ s32 func_80428C7C_de(void *parent, s32 unused1, s32 unused2, s32 event) {
 }
 
 s32 func_80428DE0_de(void) {
-    func_8029973C_de();
+    MarkMenuEventHandled();
     Frontend_HideTrialCatalogueWidgets();
     func_8042E988_de(0xE);
     return 0;
@@ -347,7 +347,7 @@ s32 func_80428DE0_de(void) {
 s32 func_80428E10_de(void) {
     s32 selection;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     Frontend_HideTrialCatalogueWidgets();
     selection = D_800E4690->selection;
     func_8042E9A0_de(D_800E4694[selection].first, D_800E4694[selection].second);

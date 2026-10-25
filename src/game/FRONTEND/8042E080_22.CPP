@@ -31,7 +31,7 @@ extern s32 D_8015402C;
 extern s32 D_80146948;
 extern s32 D_8014DD98;
 
-extern void func_8029973C_de(void);
+extern void MarkMenuEventHandled(void);
 extern void func_80298368_de(s32);
 extern void func_802A230C_de(void);
 
@@ -53,7 +53,7 @@ void func_8042DEA0_de(void) {
     s32 first;
     CGameStatus *match;
 
-    func_8029973C_de();
+    MarkMenuEventHandled();
     func_80298368_de(2);
     func_802A230C_de();
     humans = 0;
