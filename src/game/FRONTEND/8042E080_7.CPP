@@ -1,8 +1,8 @@
 #include "COMMON/NAME.H"
+#include "FRONTEND/PAKMENU.H"
 #include "TYPES.H"
 #include "FRONTEND/8042E080_34.H"
 
-extern PakMenuController *D_800E54A4;
 extern void MarkMenuEventHandled(void);
 extern void Frontend_RefreshPlayerPanel(s32 player);
 

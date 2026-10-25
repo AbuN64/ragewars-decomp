@@ -1,4 +1,5 @@
 #include "RESMGR/resmgr_string_memory.H"
+#include "FRONTEND/PAKMENU.H"
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ENTRYRECAT6C.H"
@@ -9,7 +10,6 @@
    offset 0x58. */
 
 
-extern struct PlayerSlotTable *D_800E54A4;
 
 s32 func_804355B4_de(void) {
     s32 count = 0;
@@ -30,8 +30,8 @@ extern void *Resmgr_CopyBytes(void *destination, const void *source, s32 bytes);
 void func_804355E8_de(void) {
     s32 i = 0; s32 none = -1;
     do {
-        s32 player = D_800E54A4->places[i].x;
-        s32 entry = D_800E54A4->places[i].y;
+        s32 player = D_800E54A4->links[i].player;
+        s32 entry = D_800E54A4->links[i].entry;
         MatchProfile58 *dst = &D_80102B00[i];
         if (player != none) { Resmgr_CopyBytes(dst, D_800E54A4->players[player].slots[entry], 0x190); dst->unkC = entry; }
         else { dst->unkD = player; }

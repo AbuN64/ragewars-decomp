@@ -1,4 +1,5 @@
 #include "COMMON/NAME.H"
+#include "FRONTEND/PAKMENU.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/MENURECAT24.H"
 #include "TYPES.H"
@@ -8,7 +9,6 @@
 
 /* Updates a player menu state from controller status, available saves, and the current menu phase. */
 
-extern PakMenuController *D_800E54A4;
 
 extern s32 Pak_GetStatus(s32);
 extern s32 Pak_FindNoteByName(void *, s32, s32 *);

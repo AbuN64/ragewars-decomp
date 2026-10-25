@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "FRONTEND/PAKMENU.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
@@ -15,7 +16,6 @@
 
 
 
-extern struct Data800E54A4Ptr *D_800E54A4;
 extern void func_802A2394_de();
 extern void func_802A2360_de();
 extern void func_80404E28_de(s32);
@@ -35,10 +35,10 @@ s32 func_8042F7A8_de(void *unused0, void *unused1, s32 event) {
     if (event != 1) {
         return 0;
     }
-    if (D_800E54A4->phase4C == 3) {
+    if (D_800E54A4->ready == 3) {
         for (i = 0; i < 4; i++) {
-            if (D_800E54A4->players[i].timer > 0 && --D_800E54A4->players[i].timer == 0) {
-                D_800E54A4->players[i].timer = -1;
+            if (D_800E54A4->players[i].back > 0 && --D_800E54A4->players[i].back == 0) {
+                D_800E54A4->players[i].back = -1;
                 func_802A2394_de();
                 func_80404E28_de(i);
                 func_80433610_de(i);
@@ -54,7 +54,7 @@ s32 func_8042F7A8_de(void *unused0, void *unused1, s32 event) {
     if (func_8043C308_de(D_800E54A4->menu) != 2) {
         return 0;
     }
-    if (D_800E54A4->phase54 != 5) {
+    if (D_800E54A4->phase != 5) {
         return 0;
     }
     MarkMenuEventHandled();

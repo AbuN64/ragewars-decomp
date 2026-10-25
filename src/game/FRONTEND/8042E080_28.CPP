@@ -1,4 +1,5 @@
 #include "COMMON/NAME.H"
+#include "FRONTEND/PAKMENU.H"
 #include "TYPES.H"
 #include "FRONTEND/8042E080_15.H"
 #include "FRONTEND/8042E080_58.H"
@@ -18,7 +19,6 @@
 
 
 
-extern struct Block_func_80432158_de *D_800E54A4;
 extern void MarkMenuEventHandled();
 extern void func_8043577C_de(s32);
 extern s32 func_804355B4_de();
@@ -42,7 +42,7 @@ s32 func_80432158_de(void *unused0, void *unused1, u16 player) {
         return 0;
     case 0xC:
         MarkMenuEventHandled();
-        D_800E54A4->players[player].name[D_800E54A4->players[player].cursor].c = ' ';
+        D_800E54A4->players[player].name[D_800E54A4->players[player].nameCursor].available = ' ';
         break;
     case 0x16:
         MarkMenuEventHandled();

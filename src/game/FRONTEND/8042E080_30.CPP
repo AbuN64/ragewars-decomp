@@ -1,4 +1,5 @@
 #include "TYPES.H"
+#include "FRONTEND/PAKMENU.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/NAME.H"
 
@@ -10,7 +11,6 @@
    when its owner byte 0xD is not negative, or at nothing. */
 /* The first row item's id: eu-x numbers its items 9 higher and de 1 higher, as each cartridge's
    own bytes show; us, us-rev1 and eu share 0x28B. */
-extern struct Block_func_80433BCC_de *D_800E54A4;
 extern char D_80102B00[];
 extern s8 D_80102B0D[];
 extern struct Item_func_80433BCC_de *func_8040EC30_de(void *, s32);

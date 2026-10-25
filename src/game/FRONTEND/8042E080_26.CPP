@@ -1,4 +1,5 @@
 #include "COMMON/ENTRYRECAT6C.H"
+#include "FRONTEND/PAKMENU.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/NAME.H"
@@ -7,7 +8,6 @@
 
 /* Marks a player's record as ready for the next round: clears its pending counters, and on mode 1 advances its tier, gives the newly reached tier its default entry and flags the acquired handle for the notice sent to 0xE74. */
 
-extern Shared_Block *D_800E54A4;
 extern void *func_8041B7FC_de(s32, s32);
 
 

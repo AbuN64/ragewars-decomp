@@ -69,15 +69,51 @@ struct Shared_Player_func_80433F14;
 typedef struct Shared_Player_func_80433F14 Shared_Player_func_80433F14;
 
 struct PakMenuController;
+/* One pak transfer link: a player's record slot picked as a copy source and its state. */
+typedef struct PakMenuLink {
+    s32 player;
+    s32 entry;
+    s32 state;
+} PakMenuLink;
+/* The 0x648-byte save packet: four profile records, the chosen profile and a CRC over the records. */
+typedef struct PakSavePacket {
+    Profile saved[4];
+    s32 savedProfile; /* 0x640 */
+    u32 checksum; /* 0x644 */
+} PakSavePacket;
+/* The pak and name-entry menu block (Scene memory) D_800E54A4 points to. */
 struct PakMenuController {
-    s32 field0;
-    s32 root;
-    char pad8[0x2C - 8];
-    s32 selected[4]; /* 0x2C */
-    char pad3C[0x54 - 0x3C];
-    s32 phase;
-    Shared_Player_func_80433F14 players[4];
+    union {
+        s32 field0;
+        void *window;
+    };
+    union {
+        s32 root;
+        void *list;
+    };
+    union {
+        u8 menu[0x4C - 0x8]; /* 0x08: the menu panel, passed by address */
+        struct {
+            char pad8[0x24 - 0x8];
+            void *music; /* 0x24 */
+            MenuWidget *title; /* 0x28 */
+            s32 selected[4]; /* 0x2C */
+            MenuWidget *top; /* 0x3C */
+            s32 topStep;
+            MenuWidget *bottom;
+            s32 bottomStep; /* 0x48 */
+        };
+    };
+    s32 ready; /* 0x4C */
+    s32 timer; /* 0x50 */
+    s32 phase; /* 0x54 */
+    Shared_Player_func_80433F14 players[4]; /* 0x58 */
+    PakMenuLink links[4]; /* 0x2DF8 */
+    PakSavePacket packet; /* 0x2E28 */
+    s32 focus; /* 0x3470 */
 };
+typedef char PakMenuController_links_check[(((u32)&((struct PakMenuController *)0)->links) == 0x2DF8) ? 1 : -1];
+typedef char PakMenuController_size_check[(sizeof(struct PakMenuController) == 0x3474) ? 1 : -1];
 
 struct Char;
 struct Char {
@@ -333,11 +369,4 @@ struct Block_func_8043497C_de {
     struct Triple places[4];
 };
 
-struct PakMenuTail;
-struct Triple;
-struct PakMenuTail {
-    s32 source;
-    s32 sourceRecord;
-    struct Triple ports[4];
-};
 #endif

@@ -1,4 +1,5 @@
 #include "COMMON/ENTRYRECAT6C.H"
+#include "FRONTEND/PAKMENU.H"
 #include "TYPES.H"
 #include "FRONTEND/8042E080_64.H"
 
@@ -8,10 +9,9 @@
 
 
 
-extern struct Table_func_804352C8_de *D_800E54A4;
 
 void func_8043599C_de(s32 first, s32 second, s32 index) {
-    D_800E54A4->slots[index].x = first;
-    D_800E54A4->slots[index].y = second;
-    D_800E54A4->slots[index].z = 1;
+    D_800E54A4->links[index].player = first;
+    D_800E54A4->links[index].entry = second;
+    D_800E54A4->links[index].state = 1;
 }

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "FRONTEND/PAKMENU.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
@@ -19,7 +20,6 @@
 
 
 
-extern PakMenuController *D_800E54A4;
 extern void *func_8041B7FC_de(s32 root, s32 player);
 
 s32 func_80430028_de(s32 unused0, s32 unused1, s32 arg2, s32 arg3) {

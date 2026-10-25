@@ -1,4 +1,5 @@
 #include "COMMON/NAME.H"
+#include "FRONTEND/PAKMENU.H"
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "COMMON/ENTRYRECAT6C.H"
 #include "COMMON/MESSAGESEMAPHORE.H"
@@ -20,7 +21,6 @@
    on the event func_8041B810_de reports: each state accepts its events, moves to the next state (by the game
    mode at 0x54 where it matters), updates the player's name records, and refreshes the player through
    func_804322AC_de. Returns zero. */
-extern PakMenuController *D_800E54A4;
 extern u8 D_80102B00[];
 extern u8 D_80146398[];
 
@@ -505,7 +505,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             slot = func_80435128_de(p);
             if (slot >= 0) {
                 Resmgr_CopyBytes(&D_800E54A4->players[p].records[slot],
-                                 &D_800E54A4->players[((struct PakMenuTail *) ((u8 *) D_800E54A4 + sizeof(PakMenuController)))->source].records[((struct PakMenuTail *) ((u8 *) D_800E54A4 + sizeof(PakMenuController)))->sourceRecord],
+                                 &D_800E54A4->players[D_800E54A4->links[0].player].records[D_800E54A4->links[0].entry],
                                  0x190);
                 D_800E54A4->players[p].record = slot;
                 D_800E54A4->players[p].records[slot].owner = slot;
@@ -745,7 +745,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         func_8040E8D8_de(func_8040EC30_de((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2B1), 1);
 #endif
         D_800E54A4->players[p].used[D_800E54A4->players[p].choice] = 0;
-        ((struct PakMenuTail *) ((u8 *) D_800E54A4 + sizeof(PakMenuController)))->ports[i].x = 0;
+        D_800E54A4->links[i].state = 0;
         D_800E54A4->players[p].port = i;
         func_80433BCC_de(p);
         D_800E54A4->players[p].state = 0xD;

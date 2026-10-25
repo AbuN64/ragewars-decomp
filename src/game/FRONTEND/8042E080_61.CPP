@@ -1,4 +1,5 @@
 #include "COMMON/ITEMRECAT20V1.H"
+#include "FRONTEND/PAKMENU.H"
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
 #include "FRONTEND/8042E080_61.H"
@@ -12,15 +13,14 @@
 
 
 
-extern struct Table_func_804352C8_de *D_800E54A4;
 extern struct PlayerRecord D_80102B00[];
 extern void func_8022EF30_de(struct PlayerRecord *);
 extern void func_80433BCC_de(s32);
 
 void func_80435844_de(s32 index) {
-    if (D_800E54A4->slots[index].z == 1) {
+    if (D_800E54A4->links[index].state == 1) {
         func_8022EF30_de(&D_80102B00[index]);
-        D_800E54A4->slots[index].z = 2;
+        D_800E54A4->links[index].state = 2;
         func_80433BCC_de(-1);
     }
 }

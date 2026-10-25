@@ -1,4 +1,5 @@
 #include "TYPES.H" /* the draft_fields struct headers below spell s32/u16/u8; types.h must precede them */
+#include "FRONTEND/PAKMENU.H"
 #include "COMMON/MEASUREDRECAT0V1.H"
 #include "COMMON/MEASURED.H"
 #include "COMMON/MEASUREDRECAT14V4.H"
@@ -75,7 +76,6 @@ extern void *D_800E1394[], *D_800DD124[];
 enum { PAK_SLOT_RESOURCE_688 = 688, PAK_SLOT_RESOURCE_689 = 689, PAK_SLOT_RESOURCE_690 = 690, PAK_SLOT_RESOURCE_691 = 691, PAK_SLOT_RESOURCE_692 = 692, PAK_SLOT_RESOURCE_694 = 694 };
 
 #endif
-extern PakMenuController *D_800E54A4;
 extern void func_8040E950_de(MenuWidget *record, int enable);
 extern void func_8041B8DC_de(s32,s32,MenuWidget *);
 extern MenuWidget *func_8041B7FC_de(s32,s32);

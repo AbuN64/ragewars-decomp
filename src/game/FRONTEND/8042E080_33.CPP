@@ -1,4 +1,5 @@
 #include "RESMGR/resmgr_string_memory.H"
+#include "FRONTEND/PAKMENU.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
 
@@ -16,22 +17,21 @@
 
 
 
-extern struct Block_func_80434638_de *D_800E54A4;
-extern s32 func_80404F58_de(s32, s32, struct Packet *, s32);
-extern s32 Ovlgame_Crc32(struct Packet *, s32, s32);
+extern s32 func_80404F58_de(s32, s32, PakSavePacket *, s32);
+extern s32 Ovlgame_Crc32(PakSavePacket *, s32, s32);
 extern void Pak_DeleteNote(s32, s32);
 
 s32 func_80434638_de(s32 player, s32 channel) {
-    struct Packet *packet;
+    PakSavePacket *packet;
     s32 received;
 
     received = 0;
     packet = &D_800E54A4->packet;
     if (func_80404F58_de(player, channel, packet, 0x648) == 0) {
         if (Ovlgame_Crc32(packet, 0x640, 7) == packet->checksum) {
-            Resmgr_CopyBytes(D_800E54A4->players[player].data, &D_800E54A4->packet, 0x640);
+            Resmgr_CopyBytes(D_800E54A4->players[player].slots, &D_800E54A4->packet, 0x640);
             received = 1;
-            D_800E54A4->players[player].tail = D_800E54A4->packet.tail;
+            D_800E54A4->players[player].profile = D_800E54A4->packet.savedProfile;
         } else {
             Pak_DeleteNote(player, channel);
         }
@@ -39,8 +39,8 @@ s32 func_80434638_de(s32 player, s32 channel) {
         Pak_DeleteNote(player, channel);
     }
     if (received == 0) {
-        D_800E54A4->players[player].second = 2;
-        D_800E54A4->players[player].first = 2;
+        D_800E54A4->players[player].back = 2;
+        D_800E54A4->players[player].state = 2;
     }
     return received;
 }

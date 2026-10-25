@@ -1,4 +1,5 @@
 #include "COMMON/ENTRYRECAT6C.H"
+#include "FRONTEND/PAKMENU.H"
 #include "FRONTEND/8042E080_46.H"
 
 /* Returns 1 when all four of a player's 400-byte entries in the game D_800E54A4 have state byte -1 at
@@ -8,14 +9,13 @@
 
 
 
-extern Game_func_80435128_de *D_800E54A4;
 int func_80435184_de(int player) {
     int result;
     int i;
 
     result = 1;
     for (i = 0; i < 4 && result == 1; i++) {
-        if (D_800E54A4->players[player].entries[i].state != -1) {
+        if (D_800E54A4->players[player].records[i].player != -1) {
             result = 0;
         }
     }

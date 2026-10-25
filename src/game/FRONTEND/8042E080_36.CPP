@@ -1,4 +1,5 @@
 #include "RESMGR/resmgr_string_memory.H"
+#include "FRONTEND/PAKMENU.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
 #include "FRONTEND/8042E080_36.H"
@@ -20,7 +21,6 @@
 
 
 
-extern struct Block_func_8043497C_de *D_800E54A4;
 extern struct Record_func_804347CC_de D_80102B00[];
 extern s32 func_804351E4_de();
 extern void func_80433BCC_de(s32);
@@ -36,10 +36,10 @@ s32 func_8043497C_de(s32 player) {
 
     chosen = D_800E54A4->players[player].chosen;
     result = 0;
-    if (D_800E54A4->players[player].flags[chosen] == 1) {
+    if (D_800E54A4->players[player].used[chosen] == 1) {
         found = -1;
         for (i = 0; i < 4 && found == -1; i++) {
-            if (D_800E54A4->places[i].x == -1) {
+            if (D_800E54A4->links[i].player == -1) {
                 found = i;
             }
         }
@@ -47,14 +47,14 @@ s32 func_8043497C_de(s32 player) {
         if (place >= 0) {
             entry = func_804351E4_de();
             if (entry >= 0) {
-                D_800E54A4->places[entry].x = 0;
-                D_800E54A4->places[entry].y = place;
-                D_800E54A4->places[entry].z = 1;
+                D_800E54A4->links[entry].player = 0;
+                D_800E54A4->links[entry].entry = place;
+                D_800E54A4->links[entry].state = 1;
             }
             record = &D_80102B00[found];
             Resmgr_CopyBytes(record, D_800E54A4->players[player].slots[chosen], 400);
             record->owner = player;
-            D_800E54A4->players[player].word4 = 0;
+            D_800E54A4->players[player].sub = 0;
             place = -1;
             func_80433BCC_de(place);
             result = 1;

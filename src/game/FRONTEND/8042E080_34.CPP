@@ -1,4 +1,5 @@
 #include "COMMON/ITEMRECAT20V1.H"
+#include "FRONTEND/PAKMENU.H"
 #include "COMMON/NAME.H"
 #include "FRONTEND/8042E080_34.H"
 
@@ -6,20 +7,19 @@
    is idle (0), finished (17) or in state 14; otherwise, or when none is in state 14, returns -1. */
 
 
-extern PlayerRecAt58 *D_800E54A4;
 
 int func_80434750_de(void) {
     int i;
     int state;
 
     for (i = 0; i < 4; i++) {
-        state = D_800E54A4[i].state;
+        state = D_800E54A4->players[i].state;
         if (state != 0 && state != 17 && state != 14) {
             return -1;
         }
     }
     for (i = 0; i < 4; i++) {
-        if (D_800E54A4[i].state == 14) {
+        if (D_800E54A4->players[i].state == 14) {
             return i;
         }
     }

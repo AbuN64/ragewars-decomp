@@ -1,4 +1,5 @@
 #include "COMMON/NAME.H"
+#include "FRONTEND/PAKMENU.H"
 #include "TYPES.H"
 #include "FRONTEND/8042E080_38.H"
 
@@ -8,7 +9,6 @@
    row item (0x2BA, 0x2E5, 0x2E6, then 0x2E7) of the window at 0xC of p's 2920-byte record at 0x58
    of the block D_800E54A4 points to at that record. Adapted from func_80434B08_de with the copy
    replaced by the row label. */
-extern struct Block_func_80434C2C_de *D_800E54A4;
 extern u8 D_80102B00[];
 extern s8 D_80102B0D[];
 extern s8 D_800FEB0E[];
@@ -62,7 +62,7 @@ void func_80434C2C_de(s32 player) {
         }
         if (D_800FEB0E[i * 400] == 0 && D_80102B0D[i * 400] == player &&
             globals->status[i].active == 1 && globals->status[i].m_IsBot == 0) {
-            func_8040EC30_de(D_800E54A4->players[player].window, id)->text = &D_80102B00[i * 400];
+            func_8040EC30_de(D_800E54A4->players[player].menuWidget, id)->text = &D_80102B00[i * 400];
             row++;
         }
     }

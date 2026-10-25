@@ -1,4 +1,5 @@
 #include "COMMON/ENTRYRECAT6C.H"
+#include "FRONTEND/PAKMENU.H"
 #include "FRONTEND/8042E080_48.H"
 
 /* Returns the index of the first of the four twelve-byte slots at offset 0x2DF8 of D_800E54A4 whose
@@ -6,7 +7,6 @@
 
 
 
-extern struct PlayerSlotTable *D_800E54A4;
 
 int func_80435224_de(int id, int value) {
     int result;
@@ -14,7 +14,7 @@ int func_80435224_de(int id, int value) {
 
     result = -1;
     for (i = 0; i < 4 && result == -1; i++) {
-        if (D_800E54A4->places[i].x == id && D_800E54A4->places[i].y == value) {
+        if (D_800E54A4->links[i].player == id && D_800E54A4->links[i].entry == value) {
             result = i;
         }
     }

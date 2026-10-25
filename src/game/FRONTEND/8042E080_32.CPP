@@ -1,4 +1,5 @@
 #include "RESMGR/resmgr_string_memory.H"
+#include "FRONTEND/PAKMENU.H"
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/NAME.H"
@@ -20,7 +21,6 @@ enum { PAK_LIST_FIELD = 726 };
    70-byte name entries at 0x658 from the scroll position, and points item PAK_LIST_FIELD of the player's
    window at 0xC at the code at 0x3C of the entry under the cursor. */
 
-extern PakMenuController *D_800E54A4;
 extern MenuWidget *func_8040EC30_de(void *, s32);
 
 void func_80434250_de(s32 player, s32 direction) {

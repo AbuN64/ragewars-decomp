@@ -1,4 +1,5 @@
 #include "RESMGR/resmgr_string_memory.H"
+#include "FRONTEND/PAKMENU.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
 #include "FRONTEND/8042E080_37.H"
@@ -13,7 +14,6 @@
 
 
 
-extern struct PlayerSlotTable *D_800E54A4;
 extern u8 D_80102B00[];
 extern s8 D_800FEB0C[];
 extern s8 D_80102B0D[];

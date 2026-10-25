@@ -1,10 +1,10 @@
 #include "COMMON/ENTRYRECAT6C.H"
+#include "FRONTEND/PAKMENU.H"
 #include "TYPES.H"
 #include "SCENE/802508E0_13.H"
 
 /* Releases the object D_800E54A4 holds through Scene_FreeMemory, clears D_800E54A4, calls
    func_802A2360_de and func_802A2418_de with 1, and returns zero. */
-extern void *D_800E54A4;
 extern void func_802A2360_de();
 extern void func_802A2418_de(s32);
 
