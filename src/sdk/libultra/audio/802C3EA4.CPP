@@ -75,7 +75,6 @@ s32 func_802BEF84_de(DecodeBlock *arg0, u16 *arg1, s16 arg2,
     s16 j;
     s32 dictOffset;
     u16 next;
-    u16 *bits, *available;
     DecodePhrase *phrase;
     u16 *out;
 
@@ -86,13 +85,11 @@ s32 func_802BEF84_de(DecodeBlock *arg0, u16 *arg1, s16 arg2,
     tree = table->tree;
     output = 0;
     if (arg2 > 0) {
-        available = &D_800D54BC;
-        bits = &D_800D54BA;
         do {
-            if (*available != 0) {
-                (*available)--;
-                topbit = *bits & 0x8000;
-                *bits <<= 1;
+            if (D_800D54BC != 0) {
+                D_800D54BC--;
+                topbit = D_800D54BA & 0x8000;
+                D_800D54BA <<= 1;
                 if (topbit) {
                     mask = tree[(s16)node].second;
                 } else {
@@ -106,22 +103,21 @@ s32 func_802BEF84_de(DecodeBlock *arg0, u16 *arg1, s16 arg2,
                         arg1[(s16)output] = value;
                         output++;
                     } else if ((s16)value == 0x900) {
-                        value = *bits;
-                        if (Audio_ReadPackedSamples(bits, table->width, 1, 0, arg4) == 0) {
+                        value = D_800D54BA;
+                        if (Audio_ReadPackedSamples(&D_800D54BA, table->width, 1, 0, arg4) == 0) {
                             return -1;
                         }
                         mask = (s16)output;
                         output++;
-                        high = *bits;
+                        high = D_800D54BA;
                         next = D_800D54BC;
-                        *bits = high << (16 - next);
+                        D_800D54BA = high << (16 - next);
                         arg1[(s16)mask] = value | (high >> next);
                     } else if (mask == 0xA00) {
                         j = 0;
                         dictOffset = (value & 0xFF) * sizeof(DecodePhrase);
-                        out = (arg1 + ((s16)output + 1)) - 1;
-                        phrase = (DecodePhrase *)(dictOffset +
-                                   (u8 *)(table->phrases + 1)) - 1;
+                        out = (u16 *)((s16)output * sizeof(u16) + (s32)arg1);
+                        phrase = (DecodePhrase *)(dictOffset + (s32)table->phrases);
                         while ((s16)j < phrase->count) {
                             out[(s16)j] = phrase->samples[(s16)j].value;
                             j++;
@@ -152,7 +148,7 @@ s32 func_802BEF84_de(DecodeBlock *arg0, u16 *arg1, s16 arg2,
                 if (Audio_ReadPackedSamples(&D_800D54BA, 16, 1, 0, arg4) == 0) {
                     return -1;
                 }
-                *available += 16;
+                D_800D54BC += 16;
             }
         } while ((s16)output < arg2);
     }
@@ -160,50 +156,44 @@ s32 func_802BEF84_de(DecodeBlock *arg0, u16 *arg1, s16 arg2,
 }
 
 #ifdef NON_MATCHING
-/* 12/99 aligned word edits remain: early error return and temporary register allocation. */
-#include "TYPES.H"
+/* 4/99 words left: a1/a2 swap between the history-table address and `previous` (local-alloc
+   priority tie, see lanes/REV1-ONE-18/RESULT.md). */
 extern DecodeBlock D_800D5564[];
 extern s16 D_800D54BE;
 extern u16 D_8014AE10[16];
 s32 Audio_DecodeFrame(DecodeState *stream) {
     DecodeBlock *block = D_800D5564;
-    s16 *flag = &D_800D54BE;
-    s16 done[4];
+    s16 done;
     s16 i;
-    s32 result;
-    if (*flag == 0) {
-        u16 *table;
-        *flag = 1;
+    s32 count;
+
+    if (D_800D54BE == 0) {
+        D_800D54BE = 1;
         if ((s16)Audio_ReadPackedSamples(stream->frame, 6, 16, 0, stream) <= 0) {
             return -1;
         }
-        i = 0;
-        table = D_8014AE10;
         block->offset += 0x60;
-        for (; i < 16; i++) {
-            table[i] = stream->frame[i];
+        for (i = 0; i < 16; i++) {
+            D_8014AE10[i] = stream->frame[i];
         }
         while (block->kind != 0) {
             block++;
         }
     } else {
-        u16 *table;
-        result = (s16)func_802BEF84_de(block, stream->frame, 16, done, stream);
-        if (result != 16) {
+        count = (s16)func_802BEF84_de(block, stream->frame, 16, &done, stream);
+        if (count != 16) {
             return -1;
         }
-        i = 0;
-        block += done[0];
-        table = D_8014AE10;
-        for (; i < 16; i++) {
-            u16 *entry = i + table;
-            u16 previous = *entry;
+        block += done;
+        for (i = 0; i < 16; i++) {
+            u16 previous = D_8014AE10[i];
             stream->frame[i] += previous;
-            *entry = stream->frame[i];
+            D_8014AE10[i] = stream->frame[i];
         }
     }
-    result = (s16)func_802BEF84_de(block, stream->frame + 80, 256, done, stream);
-    if (result == 256) {
+    count = (s16)func_802BEF84_de(block, stream->frame + 80, 256, &done, stream);
+    if (count == 256) {
+        block += done;
         return 1;
     }
     return -1;
