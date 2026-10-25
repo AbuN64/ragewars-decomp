@@ -88,13 +88,14 @@ typedef struct HitBoxTable {
     HitBox boxes[1];
 } HitBoxTable;
 
-#ifdef NON_MATCHING
-extern void *Render_GetPackSection(void *, s32);
-/* NON_MATCHING: 7 aligned edits / 243 ROM words; remaining: sector address registers. */
+/* Collects the light volumes of the world sectors whose x/z extent overlaps box: the hit boxes in
+   pack section 2 of each such sector whose bounds intersect box go to out (at most 64, with
+   duplicates across sectors dropped by their summed signature words). Writes their number to
+   outCount and returns 1 when any accepted box has flagBA set. */
 s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
     u32 keys[0x40];
     /* A query may intersect every world sector; accepted volumes are capped at 64. */
-    WorldSector *items[128];
+    WorldSector *sectors[128];
     s32 flag;
     s32 matches;
     s32 count;
@@ -103,23 +104,24 @@ s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
     s32 j;
     u32 sum;
     s32 dup;
-    WorldSector *item;
+    WorldSector *sector;
     HitBoxTable *table;
     HitBox *entry;
-    f32 *other;
+    f32 *extent;
     Shared_World *world = &D_8011FE88;
     count = 0;
     matches = 0;
     flag = 0;
     for (i = 0; i < world->sectorEntryCount; i++) {
-        item = &world->sectors[i];
-        other = item->bounds;
-        if (other[2] > box->minX && other[0] < box->maxX && other[3] > box->minZ && other[1] < box->maxZ) {
-            items[matches++] = item;
+        sector = &world->sectors[i];
+        extent = sector->bounds;
+        if (extent[2] > box->minX && extent[0] < box->maxX && extent[3] > box->minZ && extent[1] < box->maxZ) {
+            sectors[matches++] = sector;
         }
     }
     if (matches == 1) {
-        table = Render_GetPackSection(*(void **)items[0]->resource, 2);
+        sector = sectors[0];
+        table = Render_GetPackSection(*(void **)sector->resource, 2);
         n = table->count;
         n--;
         entry = table->boxes;
@@ -142,7 +144,8 @@ s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
         return flag;
     } else {
         for (i = 0; i < matches; i++) {
-            table = Render_GetPackSection(*(void **)items[i]->resource, 2);
+            sector = sectors[i];
+            table = Render_GetPackSection(*(void **)sector->resource, 2);
             n = table->count;
             n--;
             entry = table->boxes;
@@ -150,10 +153,10 @@ s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
                 if (box->maxX > entry->minX && box->minX < entry->maxX &&
                     box->maxZ > entry->minZ && box->minZ < entry->maxZ &&
                     box->maxY > entry->minY && box->minY < entry->maxY) {
-                    u32 *signatureWords = entry->signature;
+                    u32 *signature = entry->signature;
                     sum = 0;
                     for (j = 0; j < 16; j++) {
-                        sum += signatureWords[j];
+                        sum += signature[j];
                     }
                     dup = 0;
                     if (i != 0) {
@@ -184,9 +187,6 @@ s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
     *outCount = count;
     return flag;
 }
-#else
-INCLUDE_ASM("span_1000", Actors_QueryWorldLightVolumes);
-#endif
 
 #include "TYPES.H"
 #include "stddef.h"
