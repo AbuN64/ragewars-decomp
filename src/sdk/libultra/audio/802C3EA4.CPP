@@ -14,45 +14,47 @@ extern u16 D_800D5350[];
 extern u16 D_800D5374[];
 extern u16 D_8014AE00;
 
-/* NON_MATCHING: 28 aligned edits / 117 ROM words; remaining: the refill keeps &D_8014AE00 in a register for its store,
-   and the loop word/mask-table pointers swap t3/t4. */
+/* NON_MATCHING: 4 aligned edits / 117 ROM words; remaining: the ROM keeps the first refill's store
+   address in a register (la + sh) where this build folds it into a direct store. */
 u16 Audio_ReadPackedSamples(u16 *out, u16 width, u16 count, s16 signExtend, DecodeState *stream) {
     s16 i;
     u16 need;
-    u16 *bitsLeft = &D_800D54B8;
-    if (*bitsLeft == 0) {
+    u16 *word;
+    if (D_800D54B8 == 0) {
         u16 *cursor = stream->cursor;
-        u16 v = *cursor;
+        u16 next = *cursor;
         stream->cursor = cursor + 1;
-        *bitsLeft = 16;
-        D_8014AE00 = v;
+        D_800D54B8 = 16;
+        word = &D_8014AE00;
+        *word = next;
     }
     for (i = 0; i < count; i++) {
         u16 *left = &D_800D54B8;
-        u16 *word = &D_8014AE00;
-        u16 *masks = D_800D5350;
-        u16 *signs = D_800D5374;
+        word = &D_8014AE00;
         if (*left < width) {
             need = width - *left;
-            out[i] = (*word & masks[*left]) << need;
+            {
+                u16 high = *word & D_800D5350[*left];
+                out[i] = high << need;
+            }
             {
                 u16 *cursor = stream->cursor;
                 *word = *cursor;
                 stream->cursor = cursor + 1;
             }
             {
-                s32 low = (*word >> (16 - need)) & masks[need];
+                s32 low = (*word >> (16 - need)) & D_800D5350[need];
                 out[i] |= low;
             }
-            if (signExtend && ((s16)out[i] & signs[width])) {
-                out[i] |= ~masks[width];
+            if (signExtend && ((s16)out[i] & D_800D5374[width])) {
+                out[i] |= ~D_800D5350[width];
             }
             *left = 16 - need;
         } else {
-            s32 low = (*word >> (*left - width)) & masks[width];
+            s32 low = (*word >> (*left - width)) & D_800D5350[width];
             out[i] = low;
-            if (signExtend && ((s16)out[i] & signs[width])) {
-                out[i] |= ~masks[width];
+            if (signExtend && ((s16)out[i] & D_800D5374[width])) {
+                out[i] |= ~D_800D5350[width];
             }
             *left -= width;
         }
