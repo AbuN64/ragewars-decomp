@@ -335,8 +335,9 @@ void func_8025768C_de(ContextRecAt2BC0 *ctx) {
 }
 
 #ifdef NON_MATCHING
-/* 18/136 words differ: the index == -1 branch delay slot (ROM takes the -1 return from the target), the
- * list-pointer setup slot and the volume registers. The fourth parameter is passed through to the slot-16 call. */
+/* 7/136 words differ, all at the index == -1 test: the ROM branches straight to the epilogue with the -1
+ * return value in the delay slot where this keeps an inline return block. The fourth parameter is passed
+ * through to the slot-16 call. */
 /* The voice mix block at +0x10 of each Voice (Audio_InitializeVoiceMix views it the same way). */
 typedef struct VoiceMix {
     s32 frame, reserved4;
@@ -368,50 +369,44 @@ s32 Texture_UpdateSoundSlot(ContextRecAt2BC0 *context, s32 id, s32 unused, CVect
     s16 index;
     VoiceMix *mix;
     ALSndPlayer *player;
-    u8 volume;
     f32 gain;
     if (id == -1) {
         return -1;
     }
     index = findVoiceById(context, id);
-    if (index != -1) {
-        if (index == 16) {
-            func_80259784_de((ManagerRecAtD8V2 *)context->view, index, id, position);
+    if (index == -1) {
+        return -1;
+    }
+    if (index == 16) {
+        func_80259784_de((ManagerRecAtD8V2 *)context->view, index, id, position);
+        return -1;
+    }
+    mix = (VoiceMix *)context->voices[index].reserved10;
+    player = context->list;
+    if (mix->left == 0 && !(context->voices[index].flags & 4)) {
+        context->voices[index].flags |= 8;
+        context->selectedHandle = -1;
+        return 0;
+    }
+    if (!func_8025B854_de((SlotRecAtB8 *)context->menu, index)) {
+        alSndpSetPitch(player, mix->pitch);
+        func_802B2DE0_de(player, (mix->volume + context->field2B9C < 128) ? (u8)mix->volume + (u8)context->field2B9C : 127);
+        alSndpSetPan(player, mix->pan);
+        if (context->voices[index].flags & 0x200) {
+            gain = context->blue;
         } else {
-            mix = (VoiceMix *)context->voices[index].reserved10;
-            if (mix->left == 0 && !(context->voices[index].flags & 4)) {
-                context->voices[index].flags |= 8;
-                context->selectedHandle = -1;
-                return 0;
+            gain = context->red;
+            if (context->voices[index].fieldC4 && context->field2BB8) {
+                gain *= D_800C3ED8_de;
             }
-            player = context->list;
-            if (!func_8025B854_de((SlotRecAtB8 *)context->menu, index)) {
-                alSndpSetPitch(player, mix->pitch);
-                if (mix->volume + context->field2B9C < 128) {
-                    volume = (u8)mix->volume + (u8)context->field2B9C;
-                } else {
-                    volume = 127;
-                }
-                func_802B2DE0_de(player, volume);
-                alSndpSetPan(player, mix->pan);
-                if (context->voices[index].flags & 0x200) {
-                    gain = context->blue;
-                } else {
-                    gain = context->red;
-                    if (context->voices[index].fieldC4 && context->field2BB8) {
-                        gain *= D_800C3ED8_de;
-                    }
-                }
-                func_802B2F10_de(player, (s16)(s32)((f32)mix->left * gain * mix->attenuation));
-                if (!context->voices[index].pending) {
-                    func_8025B8BC_de((SlotRecAtB8 *)context->menu, index);
-                }
-            }
-            context->selectedHandle = -1;
-            return 0;
+        }
+        func_802B2F10_de(player, (s16)(s32)((f32)mix->left * gain * mix->attenuation));
+        if (!context->voices[index].pending) {
+            func_8025B8BC_de((SlotRecAtB8 *)context->menu, index);
         }
     }
-    return -1;
+    context->selectedHandle = -1;
+    return 0;
 }
 #else
 INCLUDE_ASM("span_1000", Texture_UpdateSoundSlot);
