@@ -1,5 +1,4 @@
 #include "include_asm.h"
-#include "RENDER_4/8026AC38.H"
 #include "COMMON/EFFECTCONTRIBUTION.H"
 #include "COMMON/UNUSED.H"
 #include "RENDER_3/802A35C0.H"
@@ -127,46 +126,46 @@ void func_802A4A60_de(Animator *a) {
     }
 }
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
+/* Fill colour state (RENDER_4/8026AC38.H names it f32 D_800D15E4[5]). This unit's original declared the five floats as
+ * separate globals: the ROM gives every clamp access its own lui, which only a scalar declaration produces (an array
+ * element, struct member or pointer view keeps the address in a register). Q042 MIXED by unit. */
+extern s32 D_800D15E0;
+extern f32 D_800D15E4; /* MIXED D_800D15E4 red */
+extern f32 D_800CC398; /* MIXED D_800CC398 green */
+extern f32 D_800D15EC; /* MIXED D_800D15EC blue */
+extern f32 D_800D15F0; /* MIXED D_800D15F0 alpha */
+extern f32 D_800D15F4; /* MIXED D_800D15F4 fade target alpha */
+typedef struct FillFade {
+    f32 alpha;
+    f32 target;
+} FillFade;
+#define FILL_FADE ((FillFade *)&D_800D15F0)
 
-extern f32 D_800C5E64_de, D_800C5E68_de, D_800C5E6C_de, D_800C5E70_de, D_800C5E74_de;
-extern f32 D_800C5E78_de, D_800C5E7C_de, D_800C5E80_de, D_800C5E84_de;
-typedef struct { f32 current, target; } FadeAlpha;
+void Render_UpdateFillMode(void) {
+    f32 target;
+    f32 alpha;
 
-void func_802A4DE8_de(void) {
-    FadeAlpha *p;
-    f32 tgt, cur, c;
-    s32 equal;
-    c = D_800D15E4[0];
-    if (c < 0.0f) D_800D15E4[0] = 0.0f; else if (D_800C5E64_de < c) D_800D15E4[0] = D_800C5E64_de;
-    c = D_800D15E4[1];
-    if (c < 0.0f) D_800D15E4[1] = 0.0f; else if (D_800C5E68_de < c) D_800D15E4[1] = D_800C5E68_de;
-    c = D_800D15E4[2];
-    if (c < 0.0f) D_800D15E4[2] = 0.0f; else if (D_800C5E6C_de < c) D_800D15E4[2] = D_800C5E6C_de;
-    c = D_800D15E4[3];
-    if (c < 0.0f) D_800D15E4[3] = 0.0f; else if (D_800C5E70_de < c) D_800D15E4[3] = D_800C5E70_de;
-    c = D_800D15E4[4];
-    if (c < 0.0f) D_800D15E4[4] = 0.0f; else if (D_800C5E74_de < c) D_800D15E4[4] = D_800C5E74_de;
-    p = (FadeAlpha *)&D_800D15E4[3];
-    tgt = p->target;
-    cur = p->current;
-    if (tgt == D_800C5E78_de) {
-        if (cur == 0.0f) { D_800D15E0 = 0; return; }
-        if (tgt == D_800C5E7C_de) goto n1;
-    }
-    if (cur == 0.0f) {
-        D_800D15E0 = 1;
-        D_800D15E4[3] = D_800D15E4[4];
+    if (D_800D15E4 < 0.0f) D_800D15E4 = 0.0f; else if (D_800D15E4 > 255.0f) D_800D15E4 = 255.0f;
+    if (D_800CC398 < 0.0f) D_800CC398 = 0.0f; else if (D_800CC398 > 255.0f) D_800CC398 = 255.0f;
+    if (D_800D15EC < 0.0f) D_800D15EC = 0.0f; else if (D_800D15EC > 255.0f) D_800D15EC = 255.0f;
+    if (D_800D15F0 < 0.0f) D_800D15F0 = 0.0f; else if (D_800D15F0 > 255.0f) D_800D15F0 = 255.0f;
+    if (D_800D15F4 < 0.0f) D_800D15F4 = 0.0f; else if (D_800D15F4 > 255.0f) D_800D15F4 = 255.0f;
+    target = FILL_FADE->target;
+    alpha = FILL_FADE->alpha;
+    if (target == 255.0f && alpha == 0.0f) {
+        D_800D15E0 = 0;
         return;
     }
-n1:
-    if (tgt == D_800C5E80_de) {
-        if (cur != 0.0f) { D_800D15E0 = 3; return; }
-        if (tgt == D_800C5E84_de) return;
+    if (target != 255.0f && alpha == 0.0f) {
+        D_800D15E0 = 1;
+        FILL_FADE->alpha = FILL_FADE->target;
+        return;
     }
-    if (cur != 0.0f) D_800D15E0 = 6;
+    if (target == 255.0f && alpha != 0.0f) {
+        D_800D15E0 = 3;
+        return;
+    }
+    if (target != 255.0f && alpha != 0.0f) {
+        D_800D15E0 = 6;
+    }
 }
-#else
-INCLUDE_ASM("span_1000", func_802A4DE8_de);
-#endif

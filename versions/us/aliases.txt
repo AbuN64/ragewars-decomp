@@ -2614,3 +2614,4 @@ literals_Weapons_UpdateViewAngles = 0x800C27AC; // rom:0xC33AC size:0x38
 literals_Render_BeginFrameDisplayList = 0x800C5358; // rom:0xC5F58 size:0x4
 literals_VectorAngle = 0x800C5988; // rom:0xC6588 size:0x2C
 literals_Nav_MeasureWheelClearance = 0x800C1EC8; // rom:0xC2AC8 size:0x18
+literals_Render_UpdateFillMode = 0x800C5D94; // rom:0xC6994 size:0x24
