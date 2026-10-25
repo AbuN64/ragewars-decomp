@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/RECTANGLE_DRAW.H"
 #include "COMMON/TEXTURE.H"
 #include "abi.h"
 #include "gbi.h"
@@ -28,12 +29,11 @@ static inline void beginFrame(void) {
    the last one set, D_800DF28C: appends 0xFB (environment, alpha zero) and 0xFA (primitive, with
    alpha) commands to the display list D_80110634 points into. */
 
-extern u32 D_800DF28C;
 
 extern Texture *D_800DF254;
 
 void Gfx_SetTextureMode(s32 mode) {
-    if (D_80153F68 == 0) {
+    if (D_80153F60.z == 0) {
         mode = 14;
     }
     if (mode != D_800DF280) {
