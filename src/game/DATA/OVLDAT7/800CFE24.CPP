@@ -5,7 +5,8 @@
 #endif
 
 #if defined(VERSION_US_REV1)
-unsigned int D_d0_42770f28fe2a5344[3] = {
-    0xFFFF02F8, 0x02F90000, 0x00000003,
-};
+struct {
+    unsigned short h0[4];
+    unsigned int w1;
+} D_d0_42770f28fe2a5344 = { { 0xFFFF, 0x02F8, 0x02F9, 0x0000 }, 0x00000003 };
 #endif

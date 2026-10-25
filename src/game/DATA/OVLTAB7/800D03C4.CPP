@@ -6,7 +6,8 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: data/unresolved/800D03B8 */
-unsigned int D_blob_phase2_9f58cd0a4b51cef79126[3] = {
-    0xFFFF02C6, 0x02C70000, 0x00000003,
-};
+struct {
+    unsigned short h0[4];
+    unsigned int w1;
+} D_blob_phase2_9f58cd0a4b51cef79126 = { { 0xFFFF, 0x02C6, 0x02C7, 0x0000 }, 0x00000003 };
 #endif
