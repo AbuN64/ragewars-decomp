@@ -27,7 +27,7 @@ void func_8024E79C_de(void *levelActor, Triple t, void *arg4, s32 *arg5, s32 unu
     *arg5 = ((LevelActor *)levelActor)->model;
 }
 
-int func_8024E7DC_de(void *arg0) {
+int Sound_FindActorModelEntry(void *arg0) {
     int temp_a1 = ((LevelActor *)arg0)->model;
     int result = 0;
     if (temp_a1 != 0) {

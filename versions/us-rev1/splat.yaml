@@ -3511,7 +3511,7 @@ segments:
       - [0xC89B4, rodata, data_800C/D_auto_src_rw_pool_80229FA0_C89B4_us_rev1]
       - [0xC89D4, rodata, data_800C/D_blob_70a93395631e971d68b4]
       - [0xC89D8, rodata, data_800C/D_blob_ed3c78adc252205318d6]
-      - [0xC89DC, rodata, data_800C/literals_func_8022A480_de]
+      - [0xC89DC, rodata, data_800C/literals_Weapons_FindNearestPlayer]
       - [0xC89F0, rodata, data_800C/D_blob_18138ba2f134216bc015]
       - [0xC89F8, rodata, data_800C/D_blob_e4bbe7b56bd80c146b75]
       - [0xC89FC, rodata, data_800C/D_blob_5109882bda7a333d06a4]

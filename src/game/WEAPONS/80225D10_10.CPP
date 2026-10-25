@@ -56,7 +56,7 @@ extern void func_80246E44_de(char *);
 extern f32 Particle_GetActorHeight(void);
 
 
-void *func_8022A480_de(void *arg0, s32 point, s32 arg2, s32 arg3) {
+void *Weapons_FindNearestPlayer(void *arg0, s32 point, s32 arg2, s32 arg3) {
     f32 var_f3;
     func_8022A470_S2 *var_v1;
     void *result;
@@ -87,7 +87,7 @@ void *func_8022A480_de(void *arg0, s32 point, s32 arg2, s32 arg3) {
     return result;
 }
 
-void *func_8022A504_de(struct Context *context, CVector3 position, void *arg4) {
+void *Weapons_FindNearestLivePlayer(struct Context *context, CVector3 position, void *arg4) {
     f32 var_f3;
     Shared_ActorView *actor;
     void *var_a1;

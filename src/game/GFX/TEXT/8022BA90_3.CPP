@@ -15,7 +15,7 @@
 
 extern void func_8022BF04_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 
-extern s32 func_8024E7DC_de(void *);
+extern s32 Sound_FindActorModelEntry(void *);
 
 extern f32 D_800D2988;
 
@@ -83,7 +83,7 @@ void func_8022C080_de(void *actorView, void *arg1) {
     f32 t0;
     f32 t1;
 
-    result = (void *)func_8024E7DC_de(arg1);
+    result = (void *)Sound_FindActorModelEntry(arg1);
     if (result != 0) {
         t0 = ((ModelBlend *)result)->blend;
         t1 = ((Shared_ActorView *)actorView)->modelBlend;

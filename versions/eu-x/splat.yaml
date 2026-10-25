@@ -3432,7 +3432,7 @@ segments:
       - [0xC3BAC, rodata, data_800C/D_80229FA0_C89B4]
       - [0xC3BCC, rodata, data_800C/D_8022A480_C89D4]
       - [0xC3BD0, rodata, data_800C/D_8022A504_C89D8]
-      - [0xC3BD4, rodata, data_800C/literals_func_8022A480_de]
+      - [0xC3BD4, rodata, data_800C/literals_Weapons_FindNearestPlayer]
       - [0xC3BE8, rodata, data_800C/D_8022ADBC_C89F0]
       - [0xC3BF0, rodata, data_800C/D_8022ADF0_C89F8]
       - [0xC3BF4, rodata, data_800C/D_8022B550_C8A00]

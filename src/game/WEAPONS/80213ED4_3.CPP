@@ -6,7 +6,7 @@
 #include "WEAPONS/80213ED4_27.H"
 #include "FX_2/80271B18.H"
 
-extern s32 func_80214624_de(Actor_func_80214DD4_de *arg0, Tracker *arg1, Actor_func_80214DD4_de *target);
+extern s32 Weapons_UpdateTrackerAim(Actor_func_80214DD4_de *arg0, Tracker *arg1, Actor_func_80214DD4_de *target);
 extern Actor_func_80214DD4_de *Weapons_SelectCombatTarget(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 arg2, s32 arg3);
 extern f32 Weapons_FindClearAimAngle(Actor_func_80214DD4_de *arg0, CVector3 pos, Actor_func_80214DD4_de *target, f32 arg3);
 extern f32 Weapons_GetSignedAngleToPoint(Actor_func_80214DD4_de *arg0, CVector3 pos);
@@ -63,8 +63,8 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
         mode = -1;
     }
     if (tracker->team == D_8011FE88.kind1Cursor) {
-        if ((tracker->flags & 0x40000) && tracker->unk78 == 0) {
-            if (func_80214624_de(actor, tracker, tracker->target) == 0) {
+        if ((tracker->flags & 0x40000) && tracker->lockedTarget == 0) {
+            if (Weapons_UpdateTrackerAim(actor, tracker, tracker->target) == 0) {
                 tracker->flags &= ~0x40000;
             }
         } else {

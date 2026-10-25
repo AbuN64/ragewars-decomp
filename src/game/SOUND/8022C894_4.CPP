@@ -12,7 +12,7 @@
 extern void func_8022D57C_de(void *);
 
 
-extern s32 func_8024E7DC_de(void *);
+extern s32 Sound_FindActorModelEntry(void *);
 
 extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
@@ -114,7 +114,7 @@ void func_8022D970_de(void *arg0, void *arg1) {
     CVector3 sp10;
     CVector3 sp20;
 
-    temp_v0 = func_8024E7DC_de(arg1);
+    temp_v0 = Sound_FindActorModelEntry(arg1);
     ((Shared_ActorView *)o)->effectModel = (void *)temp_v0;
     if (temp_v0 != 0) {
         ((Shared_ActorView *)o)->modelState = 0;

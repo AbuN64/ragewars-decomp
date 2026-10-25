@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "RENDER_2/802192C0_3.H"
 
-extern s32 func_8024E7DC_de(void *);
+extern s32 Sound_FindActorModelEntry(void *);
 extern s32 func_8024E62C_de(void *arg0);
 extern f32 D_800C7F08;
 
@@ -23,7 +23,7 @@ extern f32 D_800C7F08;
 void func_8022E6A4_de(Shared_ActorView *player, LevelActor *actor) {
     void *temp_v0;
 
-    temp_v0 = func_8024E7DC_de(actor);
+    temp_v0 = Sound_FindActorModelEntry(actor);
     if ((temp_v0 != 0) && (((Shared_Surface *)temp_v0)->flags & 0x4000)) {
         actor->position1.y = 0;
     } else if (actor->position0.y < (D_801370C4 - D_800C7F08)) {

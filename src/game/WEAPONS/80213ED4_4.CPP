@@ -49,7 +49,7 @@ void func_80215410_de(Actor_func_80214DD4_de *arg0, Tracker *tracker, s32 unused
     s32 kind;
     Actor_func_80214DD4_de *target;
     Location *point;
-    if ((tracker->team == D_8011FE88.kind1Cursor) && !(arg0->kind[1] & 0x400) && (!(tracker->flags & 0x80000) || (tracker->unk78 != 0))) {
+    if ((tracker->team == D_8011FE88.kind1Cursor) && !(arg0->kind[1] & 0x400) && (!(tracker->flags & 0x80000) || (tracker->lockedTarget != 0))) {
         tracker->anchor = Weapons_SelectCombatTarget(arg0, tracker, 1, 0);
     }
     if ((*arg0->kind == 1) && (tracker->mode == 0xB)

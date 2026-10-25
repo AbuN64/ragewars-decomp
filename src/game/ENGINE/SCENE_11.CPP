@@ -343,7 +343,7 @@ ObjectRecAt1A4 *func_8028CAE0_de(World_func_8028CAE0_de *world, ObjectRecAt1A4 *
     return best;
 }
 
-/* Returns the entry in an object's pointer list at 0x1024, counted at 0x10A4, whose position lies nearest a given position, or null when none lies closer than D_800CA3E0. Adapted from func_8022A480_de with the linked list walk replaced by a do-while loop, guarded by the zero index against the count, over a counted array of entry pointers read before the guard, the position read from a record at offset 8, and the differences taken from the position. */
+/* Returns the entry in an object's pointer list at 0x1024, counted at 0x10A4, whose position lies nearest a given position, or null when none lies closer than D_800CA3E0. Adapted from Weapons_FindNearestPlayer with the linked list walk replaced by a do-while loop, guarded by the zero index against the count, over a counted array of entry pointers read before the guard, the position read from a record at offset 8, and the differences taken from the position. */
 
 
 

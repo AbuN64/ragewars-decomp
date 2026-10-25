@@ -111,7 +111,7 @@ s32 func_80214310_de(Actor_func_80214310_de *viewer, Actor_func_80214310_de *tar
   return 1;
 }
 
-s32 func_80214624_de(Actor_func_80214624_de *actor, Plan *tracker, Actor_func_80214624_de *candidate) {
+s32 Weapons_UpdateTrackerAim(Actor_func_80214624_de *actor, Plan *tracker, Actor_func_80214624_de *candidate) {
     CVector3 pos,hit;
     s32 room;
     f32 temp_f20;
@@ -187,47 +187,55 @@ s32 func_80214624_de(Actor_func_80214624_de *actor, Plan *tracker, Actor_func_80
     return 0;
 }
 
-#ifndef FIELD
-#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
-#endif
+typedef struct CollisionInfo CollisionInfo;
 extern f32 D_800C2168_de;
-extern void *D_801041F0;
-extern char D_80100030[];
+extern CollisionInfo D_80100030;
+extern Instance8020CD74 *D_801041F0;
+extern char D_80145040[];
 extern s32 func_80245798_de(void);
 extern s32 func_80245B0C_de(void);
-extern void *func_8022A504_de(void *, f32, f32, f32, void *);
-extern void *func_8022A480_de(void *, f32, f32, f32);
-extern s32 func_8024E7DC_de(void *);
-extern f32 func_80217224_de(void *, f32, f32, f32);
-extern f32 func_80217290_de(void *, f32, f32, f32);
-extern s32 func_8024DE6C_de(void *);
-extern f32 func_8024E570_de(void *);
-extern char D_80145040[];
-extern s32 func_802444A4_de(void *, f32, f32, f32, CVector3, void *);
-/* Picks the best target for an actor: returns the state's fixed target (0x78) if it has one, otherwise
- * gathers up to two candidates (the state's remembered one at 0x68 and the nearest player found around the
- * actor), keeps the nearest within D_800C2168_de that passes the range/visibility tests (func_80214624_de and
- * a line-of-sight probe through func_802444A4_de when requested), and remembers the actor's position when
- * nothing qualified. */
-typedef struct Copy50_802149C0 { s32 words[20]; } Copy50_802149C0;
-void *Weapons_SelectCombatTarget(void *actor, void *state, s32 lineOfSight, s32 combat) {
-    void *candidates[3];
-    u8 spare[0x1F0];
-    Copy50_802149C0 saved;
+extern Actor_func_80214DD4_de *Weapons_FindNearestLivePlayer(void *players, CVector3 point, void *exclude);
+extern Actor_func_80214DD4_de *Weapons_FindNearestPlayer(void *players, CVector3 point);
+extern s32 Sound_FindActorModelEntry(void *actor);
+extern f32 Weapons_GetEyeDistanceSquared(void *candidate, CVector3 point);
+extern f32 Weapons_GetFlatDistanceSquared(void *candidate, CVector3 point);
+extern s32 Particle_HasActorTerritory(void *actor);
+extern f32 Sound_GetActorTerritoryRadius(void *actor);
+extern s32 func_802444A4_de(void *actor, CVector3 from, CVector3 to, CollisionInfo *info);
+
+/* The two player-record fields the picker reads from a found player (lives 0x5EA, state 0x650). */
+typedef struct CombatPlayerView {
+    u8 pad0[0x5EA];
+    s16 lives;
+    u8 pad5EC[0x650 - 0x5EC];
+    s16 state;
+} CombatPlayerView;
+
+/* Picks the best target for an actor: the tracker's locked target (0x78) if it has one, otherwise
+ * gathers up to two candidates (the tracker's own entry at 0x68 and the nearest player found around the
+ * actor), keeps the nearest within D_800C2168_de that passes the territory/visibility tests
+ * (func_80214624_de and a line-of-sight probe through func_802444A4_de when requested), and remembers the
+ * actor's position as the tracker's home when nothing qualified. */
+Actor_func_80214DD4_de *Weapons_SelectCombatTarget(Actor_func_80214DD4_de *actor, Tracker *tracker, s32 lineOfSight,
+                                                   s32 combat) {
+    Actor_func_80214DD4_de *candidates[128];
+    Instance8020CD74 saved;
     CVector3 target;
-    void *best;
-    void *candidate;
+    Actor_func_80214DD4_de *best;
+    Actor_func_80214DD4_de *candidate;
     f32 bestDistance;
     f32 distance;
     s32 count;
     s32 ok;
     s32 i;
     s32 blocked;
-    if (FIELD(void *, state, 0x78) != 0) {
+
+    if (tracker->lockedTarget != 0) {
         if (combat != 0) {
-            func_80214624_de(actor, state, FIELD(void *, state, 0x78));
+            Weapons_UpdateTrackerAim((Actor_func_80214624_de *)actor, (Plan *)tracker,
+                             (Actor_func_80214624_de *)tracker->lockedTarget);
         }
-        return FIELD(void *, state, 0x78);
+        return tracker->lockedTarget;
     }
     count = 0;
     best = 0;
@@ -235,27 +243,27 @@ void *Weapons_SelectCombatTarget(void *actor, void *state, s32 lineOfSight, s32 
     if (func_80245798_de() != 0) {
         ok = 0;
         if (func_80245B0C_de() >= 10) {
-            ok = func_80245B0C_de() < 0x3D;
+            ok = func_80245B0C_de() < 61;
         }
     }
     if (ok != 0) {
         if (combat != 0) {
-            candidate = FIELD(void *, state, 0x68);
+            candidate = tracker->self;
             if (candidate != 0) {
                 candidates[count++] = candidate;
             }
         }
-        if ((FIELD(u32, FIELD(void *, actor, 0x18), 4) & 0x400) == 0) {
-            if ((FIELD(u32, actor, 0x100) & 0x300000) != 0) {
-                candidate = func_8022A504_de(&D_80145040, FIELD(f32, actor, 0x8), FIELD(f32, actor, 0xC), FIELD(f32, actor, 0x10),
-                                             FIELD(void *, actor, 0x1D8));
+        if ((actor->kind[1] & 0x400) == 0) {
+            if ((actor->flags100 & 0x300000) != 0) {
+                candidate = Weapons_FindNearestLivePlayer(D_80145040, actor->pos, actor->controller);
             } else {
-                candidate = func_8022A480_de(&D_80145040, FIELD(f32, actor, 0x8), FIELD(f32, actor, 0xC), FIELD(f32, actor, 0x10));
+                candidate = Weapons_FindNearestPlayer(D_80145040, actor->pos);
             }
             if (candidate != 0) {
+                /* i and best are both reset again before the loop */
                 i = 1;
-                if (FIELD(s16, candidate, 0x5EA) != 0 && FIELD(s16, candidate, 0x650) != 1) {
-                    if (func_8024E7DC_de(candidate) != 0) {
+                if (((CombatPlayerView *)candidate)->lives != 0 && ((CombatPlayerView *)candidate)->state != 1) {
+                    if (Sound_FindActorModelEntry(candidate) != 0) {
                         best = candidate;
                     } else {
                         i = 0;
@@ -270,37 +278,38 @@ void *Weapons_SelectCombatTarget(void *actor, void *state, s32 lineOfSight, s32 
         best = 0;
         for (i = 0; i < count; i++) {
             candidate = candidates[i];
-            distance = func_80217224_de(candidate, FIELD(f32, actor, 0x8), FIELD(f32, actor, 0xC), FIELD(f32, actor, 0x10));
+            distance = Weapons_GetEyeDistanceSquared(candidate, actor->pos);
             if (!(distance < bestDistance)) {
                 continue;
             }
             if (combat != 0) {
-                if (FIELD(s32, FIELD(void *, actor, 0x18), 0) == 1 && FIELD(s8, state, 0x37) == 0) {
+                if (actor->kind[0] == 1 && tracker->unk37 == 0) {
                     continue;
                 }
-                if (func_8024DE6C_de(actor) != 0) {
-                    f32 reach = func_80217290_de(candidate, FIELD(f32, state, 0xB0), FIELD(f32, state, 0xB4), FIELD(f32, state, 0xB8));
-                    f32 range = func_8024E570_de(actor);
-                    if (range * func_8024E570_de(actor) <= reach) {
+                if (Particle_HasActorTerritory(actor) != 0) {
+                    f32 reach = Weapons_GetFlatDistanceSquared(candidate, tracker->homePos);
+                    f32 range = Sound_GetActorTerritoryRadius(actor);
+                    if (range * Sound_GetActorTerritoryRadius(actor) <= reach) {
                         continue;
                     }
                 }
-                if (func_80214624_de(actor, state, candidate) == 0) {
+                if (Weapons_UpdateTrackerAim((Actor_func_80214624_de *)actor, (Plan *)tracker,
+                                     (Actor_func_80214624_de *)candidate) == 0) {
                     continue;
                 }
             }
             if (lineOfSight != 0) {
-                saved = *(Copy50_802149C0 *)actor;
-                FIELD(f32, actor, 0xC) += Particle_GetActorHeight((Actor_func_80214310_de *)actor);
-                FIELD(f32, actor, 0xC) += FIELD(f32, candidate, 0x70);
-                target = FIELD(CVector3, candidate, 0x8);
+                saved = *(Instance8020CD74 *)actor;
+                actor->pos.y += Particle_GetActorHeight((Actor_func_80214310_de *)actor);
+                actor->pos.y += candidate->height;
+                target = candidate->pos;
                 target.y += Particle_GetActorHeight((Actor_func_80214310_de *)candidate);
-                target.y += FIELD(f32, candidate, 0x70);
-                blocked = func_802444A4_de(actor, FIELD(f32, actor, 0x8), FIELD(f32, actor, 0xC), FIELD(f32, actor, 0x10), target, D_80100030);
-                if (D_801041F0 == candidate) {
+                target.y += candidate->height;
+                blocked = func_802444A4_de(actor, actor->pos, target, &D_80100030);
+                if (D_801041F0 == (Instance8020CD74 *)candidate) {
                     blocked = 0;
                 }
-                *(Copy50_802149C0 *)actor = saved;
+                *(Instance8020CD74 *)actor = saved;
                 if (blocked != 0) {
                     continue;
                 }
@@ -309,9 +318,10 @@ void *Weapons_SelectCombatTarget(void *actor, void *state, s32 lineOfSight, s32 
             best = candidate;
         }
     }
-    if (combat != 0 && best == 0 && func_80214624_de(actor, state, 0) == 0) {
-        FIELD(CVector3, state, 0xB0) = FIELD(CVector3, actor, 0x8);
-        FIELD(s32, state, 0xBC) = FIELD(s32, actor, 0x14);
+    if (combat != 0 && best == 0 &&
+        Weapons_UpdateTrackerAim((Actor_func_80214624_de *)actor, (Plan *)tracker, 0) == 0) {
+        tracker->homePos = actor->pos;
+        tracker->homeRoom = actor->room;
     }
     return best;
 }

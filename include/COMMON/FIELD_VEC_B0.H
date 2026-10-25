@@ -344,10 +344,12 @@ struct Tracker {
     s32 active;
     u8 pad8[0x2C];
     s8 mode; /* 0x34 */
-    u8 pad35[0x33];
+    u8 pad35[2];
+    s8 unk37;
+    u8 pad38[0x30];
     struct Actor_func_80214DD4_de *self;
     CVector3 offset;
-    s32 unk78;
+    struct Actor_func_80214DD4_de *lockedTarget; /* 0x78 */
     f32 targetTimer; /* 0x7C */
     struct Actor_func_80214DD4_de *anchor;
     u8 pad84[4];
@@ -454,7 +456,7 @@ typedef struct Field_s8_CE Field_s8_CE;
 struct func_80216D3C_S1;
 struct func_80216D3C_S1 {
     char pad0[0x78];
-    s32 unk78;
+    struct Actor_func_80214DD4_de *lockedTarget; /* 0x78 */
     char pad78[0x7C - 0x78 - sizeof(s32)];
     f32 unk7C;
     char pad7C[0x80 - 0x7C - sizeof(f32)];

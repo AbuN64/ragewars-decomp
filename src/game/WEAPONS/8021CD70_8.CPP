@@ -64,7 +64,7 @@ extern s32 func_8024B6A0_de(void *, s32, s32);
 
 extern f32 Sound_GetActorReach(void *);
 extern s32 func_8024E62C_de(void *);
-extern struct Shared_Surface *func_8024E7DC_de(void *);
+extern struct Shared_Surface *Sound_FindActorModelEntry(void *);
 extern s32 func_8025DE54_de(s16, CVector3, s32, s32);
 extern void func_8025E418_de(s32);
 
@@ -260,7 +260,7 @@ void func_80220ED4_de(SharedPlayer *player)
     player->views5E8.view654_25.prevState = (u16) player->views5E8.view650_16.state;
     player->views5E8.view65C_32.unk65C = player->views5E8.view664_27.unk664;
     model = actor->views0.view14_6.model;
-    func_80222908_de(player, actor, func_8024E7DC_de(actor));
+    func_80222908_de(player, actor, Sound_FindActorModelEntry(actor));
     if (D_801462E5 == 0)
     {
       pos = &player->views0.view8_3.pos;
@@ -347,7 +347,7 @@ void func_80220ED4_de(SharedPlayer *player)
         update(player, actor);
       }
     }
-    material = func_8024E7DC_de(actor);
+    material = Sound_FindActorModelEntry(actor);
     if (material != 0)
     {
       func_80245D30_de(actor, material, &player->views5E8.view6E8_79.unk6E8, 1);
@@ -477,7 +477,7 @@ void func_80220ED4_de(SharedPlayer *player)
     Weapons_UpdatePlayerEffectLights(player, actor);
     oldModel = actor->views0.view14_6.model;
     prev = actor->views0.view8_3.pos;
-    before = func_8024E7DC_de(actor);
+    before = Sound_FindActorModelEntry(actor);
     if (player->views5E8.view5EA_2.unk5EA != 0)
     {
       actor->views1C.view100_8.unk100 |= 0x10000;
@@ -493,7 +493,7 @@ void func_80220ED4_de(SharedPlayer *player)
       hit = 0;
     }
     newModel = actor->views0.view14_6.model;
-    after = func_8024E7DC_de(actor);
+    after = Sound_FindActorModelEntry(actor);
     if (before != after)
     {
       func_80278E04_de(oldModel, linkFlags | 2, actor);
@@ -606,7 +606,7 @@ void func_80220ED4_de(SharedPlayer *player)
       player->views5E8.view11E0_186.unk11E0 = fade;
     }
   }
-  under = func_8024E7DC_de(actor);
+  under = Sound_FindActorModelEntry(actor);
   if ((under != 0) && (under->flags & 0x4000))
   {
     actor->views1C.view20_2.velY = 0.0f;

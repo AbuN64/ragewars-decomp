@@ -41,7 +41,7 @@ extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 /** Subtract obj->y from arg2 in-place via Particle_SubtractVectors, then return the squared length of (arg1, arg2', arg3). */
-f32 func_80217224_de(void *candidate, CVector3 v) {
+f32 Weapons_GetEyeDistanceSquared(void *candidate, CVector3 v) {
     f32 temp_f1;
 
     Particle_SubtractVectors(&v, &v, &((Actor_func_80214310_de *)(candidate))->position);
@@ -51,7 +51,7 @@ f32 func_80217224_de(void *candidate, CVector3 v) {
 }
 
 /* Squared XZ distance to a point using the existing by-value vector ABI. */
-f32 func_80217290_de(LevelActor *arg0, CVector3 point)
+f32 Weapons_GetFlatDistanceSquared(LevelActor *arg0, CVector3 point)
 {
     f32 dx = point.x - arg0->position0.x;
     f32 dz = point.z - arg0->position0.z;

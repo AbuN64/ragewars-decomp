@@ -254,7 +254,7 @@ invalid:
 typedef struct { u8 pad0[0x79]; u8 yaw, pitch; s8 pitchMode; u8 pad7C; u8 freePitch; } ControlSettings;
 typedef struct { u8 pad0[0x50]; u32 flags; } Surface;
 typedef struct { f32 enableYaw, yawRate, pitchRate, pitchScale, downScale, upScale; } ControlTuning;
-extern void *func_8024E7DC_de(void *);
+extern void *Sound_FindActorModelEntry(void *);
 extern void func_80274870_de(f32 *, f32, f32);
 extern f32 D_800C287C_de;
 extern f32 D_800C2880_de;
@@ -292,7 +292,7 @@ void Weapons_UpdateViewAngles(Player *player, Player *body, ControlTuning *tunin
     if (settings->pitchMode != 0) {
         if (settings->pitchMode == 1) pitchRate = D_800C2888_de;
     } else if (settings->freePitch == 0) pitchRate = D_800C2898_de;
-    surface = func_8024E7DC_de(body);
+    surface = Sound_FindActorModelEntry(body);
     if (surface == 0 || (surface->flags & 0x6000) != 0x2000) {
         if (tuning->enableYaw != 0.0f) {
             yawDelta = player->steer;

@@ -24,7 +24,7 @@ float func_8024E544_de(void *object) {
 }
 
 /** Return a nested float field when the nested record type is one, else zero. */
-float func_8024E570_de(void *object) {
+float Sound_GetActorTerritoryRadius(void *object) {
     Actor_u1 *actor = object;
     Resource_u1 *nested = actor->resource;
     if (nested->kind == 1) {

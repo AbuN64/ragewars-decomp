@@ -24,7 +24,7 @@ void func_80216D3C_de(Input80216D3C *actor, void *arg1, Output80216D3C *arg2, s3
         temp_f0 = targetTimer - D_800D2988;
         tracker->targetTimer = temp_f0;
         if (temp_f0 <= 0.0f) {
-            tracker->unk78 = 0;
+            tracker->lockedTarget = 0;
             tracker->targetTimer = 0.0f;
         }
     }

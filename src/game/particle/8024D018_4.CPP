@@ -271,7 +271,7 @@ int func_8024DE44_de(void *arg0) {
     }
 }
 
-s32 func_8024DE6C_de(void *arg0)
+s32 Particle_HasActorTerritory(void *arg0)
 {
     struct Object *object = arg0;
     struct Model *model;

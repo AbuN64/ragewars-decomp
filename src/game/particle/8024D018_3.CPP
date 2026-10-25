@@ -9,7 +9,7 @@
 
 /* Returns the rotation that turns an actor's aim toward a target point: a player's forward axis is its
  * aiming orientation from func_8024796C_de applied to +z, anyone else looks along +z; the target is the
- * player's lock-on at 0x1F0 or else whatever func_8022A480_de finds at the point, and with no target the
+ * player's lock-on at 0x1F0 or else whatever Weapons_FindNearestPlayer finds at the point, and with no target the
  * identity is returned. Otherwise the forward axis turns about its cross product with the direction from
  * the point up to three quarters of the target's height, by half the angle between them, composed with the
  * player's aiming orientation; the sine is kept in D_80115DEC. */
@@ -27,7 +27,7 @@ extern CQuatern func_8024796C_de(char *);
 extern void func_80274244_de(CQuatern *, f32 *);
 
 
-extern char *func_8022A480_de(void *, CVector3);
+extern char *Weapons_FindNearestPlayer(void *, CVector3);
 
 extern f32 Particle_GetActorHeight(char *);
 
@@ -71,7 +71,7 @@ CQuatern func_8024D4AC_de(char *actor, CVector3 point) {
         forward.z = 1.0f;
     }
     if (target == 0) {
-        found = func_8022A480_de(&D_80145040, point);
+        found = Weapons_FindNearestPlayer(&D_80145040, point);
         if (found != 0) {
             target = found;
         }
