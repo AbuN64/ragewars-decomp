@@ -81,7 +81,7 @@ typedef struct ObjRecV6 ObjRecV6;
 struct SubActor;
 struct SubActor {
     char pad0[4];
-    u16 unk4;
+    s16 score; /* +0x04: Weapons_CheckScoreLimit tests it against the score limit */
     char pad6[0x8F - 6];
     u8 unk8F;
     u8 unk90;
@@ -1698,10 +1698,11 @@ typedef struct ViewCode80225D10 ViewCode80225D10;
 struct ActorNode;
 struct SubActor;
 struct ActorNode {
-    char pad0[0x5D8];
-    struct SubActor *unk5D8;
+    char pad0[0x5D4];
+    s32 kind; /* +0x5D4: below 4 for the human players */
+    struct SubActor *scores;
     char pad1[0x16E0 - 0x5D8 - 4];
-    struct ActorNode *unk16E0;
+    struct ActorNode *next;
 };
 
 struct Receiver;

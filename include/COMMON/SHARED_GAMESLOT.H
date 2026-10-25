@@ -12,7 +12,7 @@ struct Shared_GameSlot {
     s8 kind;
     u8 unknown09[0x10];
     u8 controller;
-    u8 unknown1A[2];
+    u8 team; u8 unknown1B;
     u8 role;
     u8 escort;
     u8 secondListMode;

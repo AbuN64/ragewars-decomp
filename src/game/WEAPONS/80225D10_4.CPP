@@ -561,14 +561,14 @@ state_end:;
     }
 }
 
-static inline void Weapons_CountRelease(u16 *counter) {
+static inline void Weapons_CountRelease(s16 *counter) {
     (*counter)++;
 }
 static inline s32 Weapons_CountPlayersIn(Round *round) {
     ActorNode *node;
     s32 count = 0;
-    for (node = round->players; node != 0; node = node->unk16E0) {
-        if (node->unk5D8->unk90 == 0) {
+    for (node = round->players; node != 0; node = node->next) {
+        if (node->scores->unk90 == 0) {
             count += 1;
         }
     }
@@ -576,8 +576,8 @@ static inline s32 Weapons_CountPlayersIn(Round *round) {
 }
 static inline ActorNode *Weapons_FindWaitingPlayer(Round *round) {
     ActorNode *node;
-    for (node = round->players; node != 0; node = node->unk16E0) {
-        if ((node->unk5D8->unk8F == 1) || (node->unk5D8->unk90 == 1)) {
+    for (node = round->players; node != 0; node = node->next) {
+        if ((node->scores->unk8F == 1) || (node->scores->unk90 == 1)) {
             break;
         }
     }
@@ -602,7 +602,7 @@ void Weapons_ReleaseWaitingPlayer(Round *round) {
                 if (count > 0) {
                     node = Weapons_FindWaitingPlayer(round);
                     if (node != 0) {
-                        node->unk5D8->unk90 = 0;
+                        node->scores->unk90 = 0;
                         D_80146924 = 3;
                     }
                 } else {
@@ -613,8 +613,8 @@ void Weapons_ReleaseWaitingPlayer(Round *round) {
                 state->unk84 = 2;
                 node = Weapons_FindWaitingPlayer(round);
                 if (node != 0) {
-                    node->unk5D8->unk90 = 0;
-                    Weapons_CountRelease(&node->unk5D8->unk4);
+                    node->scores->unk90 = 0;
+                    Weapons_CountRelease(&node->scores->score);
                     D_800F7D10 = 0;
                 }
                 break;
@@ -629,47 +629,77 @@ void Weapons_ReleaseWaitingPlayer(Round *round) {
     }
 }
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-#include "COMMON/SHARED_GAMESLOT.H"
-typedef struct WinScore { u8 pad0[4]; s16 score; } WinScore;
-typedef struct WinPlayer WinPlayer;
-struct WinPlayer { u8 pad0[0x5d4]; s32 kind; WinScore *stats; u8 pad5dc[0x1104]; WinPlayer *next; };
-typedef struct WinWorld { u8 pad0[0x20]; WinPlayer *players; } WinWorld;
-extern Shared_Game D_801462C8;
-extern s32 func_80245784_de(void),func_80245798_de(void);
-s32 Weapons_CheckScoreLimit(WinWorld *world) {
-    WinPlayer *player;
+/* The round settings and counters, read through fresh getters so each block rebuilds the address. */
+static inline Shared_Game *currentGame(void) {
+    return &D_801462C8;
+}
+static inline CGameStatus *gameStatus(void) {
+    return &D_801462C8.counters;
+}
+/* Returns 1 when a team (team rounds) or a player has reached the score limit. With a controller
+   mode set, humanWon records whether the human team or a human player got there; in mode 1 a
+   computer winner does not end the round. */
+s32 Weapons_CheckScoreLimit(Round *round) {
+    Shared_Game *game;
+    ActorNode *player;
     u32 team, i;
-    CGameStatus *c;
-    if (func_80245784_de() || func_80245798_de() || (c = &D_801462C8.counters)->mode == 0) return 0;
-    if (c->teams != 0) {
-        team = 0xff;
-        if (D_801462C8.controllerMode != 0) {
-            i = 0;
-            while (D_801462C8.slots[i].enabled == 0) i++;
-            team = D_801462C8.slots[i].slot;
+    u32 slot;
+    u8 mode;
+    if (func_80245784_de() || func_80245798_de()
+#if !defined(VERSION_US)
+        || gameStatus()->mode == 0
+#endif
+    ) {
+        return 0;
+    }
+    if (gameStatus()->teams != 0) {
+#if defined(VERSION_US)
+        if (gameStatus()->mode == 0) {
+            return 0;
+        }
+#endif
+        team = 0xFF;
+        game = currentGame();
+        if (game->controllerMode != 0) {
+            slot = 0;
+            while (game->slots[slot].enabled == 0) {
+                slot++;
+            }
+            team = D_801462C8.slots[slot].team;
         }
         for (i = 0; (s32)i < 5; i++) {
-            if (c->mode <= c->scores[i]) {
-                if (D_801462C8.controllerMode == 0) return 1;
-                if (i == team) { c->humanWon = 1; return 1; }
-                c->humanWon = 0;
-                if (D_801462C8.controllerMode != 1) return 1;
+            if (gameStatus()->mode <= gameStatus()->scores[i]) {
+                mode = currentGame()->controllerMode;
+                if (mode == 0) {
+                    return 1;
+                }
+                if (i == team) {
+                    gameStatus()->humanWon = 1;
+                    return 1;
+                }
+                gameStatus()->humanWon = 0;
+                if (mode != 1) {
+                    return 1;
+                }
             }
         }
     } else {
-        for (player = world->players; player != 0; player = player->next) {
-            if (c->mode <= player->stats->score) {
-                if (D_801462C8.controllerMode == 0) return 1;
-                if (player->kind < 4) { c->humanWon = 1; return 1; }
-                c->humanWon = 0;
-                if (D_801462C8.controllerMode != 1) return 1;
+        for (player = round->players; player != 0; player = player->next) {
+            if (gameStatus()->mode <= player->scores->score) {
+                mode = currentGame()->controllerMode;
+                if (mode != 0) {
+                    if (player->kind < 4) {
+                        gameStatus()->humanWon = 1;
+                        return 1;
+                    }
+                    gameStatus()->humanWon = 0;
+                    if (mode == 1) {
+                        continue;
+                    }
+                }
+                return 1;
             }
         }
     }
     return 0;
 }
-#else
-INCLUDE_ASM("span_1000", Weapons_CheckScoreLimit);
-#endif
