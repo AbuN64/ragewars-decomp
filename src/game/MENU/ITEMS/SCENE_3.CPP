@@ -42,7 +42,7 @@ void Items_LoadSceneLight(SceneRecAt1B2B4 *scene) {
     v[2] = scene->light->m_Direction[2];
     length = Math_Sqrtf(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
     if (length != 0.0f) {
-        Particle_ScaleVector(v, v, D_800CA1F0 / length);
+        Particle_ScaleVector(v, v, g_lightDirectionLength / length);
         scene->dir[0] = v[0];
         scene->dir[1] = v[1];
         scene->dir[2] = v[2];

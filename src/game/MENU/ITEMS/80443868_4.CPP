@@ -31,7 +31,7 @@ s32 func_80443A24_de(LayeredText *field, struct MenuRules *holder) {
    format D_800DE700 four bytes before the length func_80441FE8_de reports. Returns zero. */
 
 extern char D_80145040[];
-extern char D_800DE700[];
+extern char g_fmtDec4Pad[];
 extern s32 Weapons_GetPlayerIndex(void *, unsigned int);
 extern s32 func_80441FE8_de(LayeredText *);
 
@@ -40,7 +40,7 @@ s32 func_80443A24_de(LayeredText *field, struct Holder *holder) {
     s32 value = D_801462C8.playerSettings[player].score;
     char *text = (char *)*field->text;
 
-    func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800DE700, value);
+    func_802658E4_de(text + (func_80441FE8_de(field) - 4), g_fmtDec4Pad, value);
     return 0;
 }
 #endif

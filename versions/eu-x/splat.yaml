@@ -3951,7 +3951,7 @@ segments:
       - [0xC5EFF, data, data_800C/rodata_unresolved_800C52FF]
       - [0xC5F00, rodata, data_800C/D_8044B7C0_CAD00]
       - [0xC5F15, data, data_800C/rodata_unresolved_800C5315]
-      - [0xC5F18, rodata, data_800C/D_auto_src_ragewars_resident_strings_CAD18_us_rev1]
+      - [0xC5F18, rodata, data_800C/g_graphicsetType]
       - [0xC5F28, rodata, data_800C/rodata_unresolved_800C5328]
       - [0xC5F39, data, data_800C/rodata_unresolved_800C5339]
       - [0xC5F3C, rodata, data_800C/D_8044B7C0_CAD3C]

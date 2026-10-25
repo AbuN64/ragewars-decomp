@@ -30,7 +30,7 @@ unsigned char rodata_unresolved_800C5275[3] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-const unsigned char D_auto_src_rw_text_8044B7C0_CACA4_us_rev1[17] = {
+const unsigned char g_particleEffects[17] = {
     0x70, 0x61, 0x72, 0x74, 0x69, 0x63, 0x6C, 0x65, 0x20, 0x65, 0x66, 0x66, 0x65, 0x63, 0x74, 0x73,
     0x00,
 };

@@ -13,7 +13,7 @@ extern void func_802658E4_de(char *buffer, const char *format, s32 value);
 #include "SYSTEM_3/80265370.H"
 extern u8 *D_800D35EC[];
 extern u8 *D_800D35F0[];
-extern char D_800DE750_de[];
+extern char g_fmtDec2Pad[];
 
 s32 func_8044488C_de(LayeredText *field) {
     char *text;
@@ -26,7 +26,7 @@ s32 func_8044488C_de(LayeredText *field) {
     } else {
         field->text = (u8 **)&D_800D35F4;
         text = (char *)field->text[D_801462C8.language];
-        func_802658E4_de(text + (func_80441FE8_de(field) - 2), D_800DE750_de, value);
+        func_802658E4_de(text + (func_80441FE8_de(field) - 2), g_fmtDec2Pad, value);
     }
     return 0;
 }
@@ -52,7 +52,7 @@ s32 func_8044488C_de(LayeredText *field) {
     } else {
         field->text = (u8 **)&D_800D35F4;
         text = (char *)*(u8 **)&D_800D35F4;
-        func_802658E4_de(text + (func_80441FE8_de(field) - 2), D_800DE750_de, value);
+        func_802658E4_de(text + (func_80441FE8_de(field) - 2), g_fmtDec2Pad, value);
     }
     return 0;
 }

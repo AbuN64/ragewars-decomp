@@ -23,7 +23,7 @@ extern struct LocalizedInputState D_80145040;
 extern char D_80145040[];
 #endif
 
-extern char D_800DE700[];
+extern char g_fmtDec4Pad[];
 extern s32 Weapons_GetPlayerIndex(void *, unsigned int);
 extern s32 func_80441FE8_de(LayeredText *);
 
@@ -48,7 +48,7 @@ s32 func_80443AB0_de(LayeredText *field, struct MenuRules *holder) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800EED80, value);
 #else
-    func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800DE700, value);
+    func_802658E4_de(text + (func_80441FE8_de(field) - 4), g_fmtDec4Pad, value);
 #endif
     return 0;
 }

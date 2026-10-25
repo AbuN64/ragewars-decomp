@@ -30,7 +30,7 @@ unsigned short rodata_unresolved_800C4FEA[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-const char D_auto_src_rw_text_8044B7C0_CACC8_us_rev1[18] = "particle swooshes";
+const char g_particleSwooshes[18] = "particle swooshes";
 #endif
 
 #if defined(VERSION_US_REV1)

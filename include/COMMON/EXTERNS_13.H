@@ -30,7 +30,7 @@ struct PlayerRankInner;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern char D_800EED80[];
 #else
-extern char D_800DE700[];
+extern char g_fmtDec4Pad[];
 #endif
 extern s32 Weapons_GetPlayerIndex(void *, void *);
 extern s32 func_80441FE8_de(Shared_DebugWidget *);

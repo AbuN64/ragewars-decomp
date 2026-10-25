@@ -30,7 +30,7 @@ unsigned short rodata_unresolved_800C50AE[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-const char D_auto_src_rw_text_8044B7C0_CAD88_us_rev1[22] = "Bloodlust Weapon Data";
+const char g_bloodlustWeaponData[22] = "Bloodlust Weapon Data";
 #endif
 
 #if defined(VERSION_US_REV1)

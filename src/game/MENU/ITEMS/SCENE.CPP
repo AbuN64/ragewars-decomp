@@ -27,13 +27,13 @@ void func_8044B600_de(void *level, void *buffer, s32 name) {
         ((u32 *)buffer)[2] = 0;
     } else {
         size = func_8028C198_de(level, index);
-        header = Scene_RequestResource(0, size, size, 0x18, 0, 0, 0, D_800C4EE0_de, 1);
+        header = Scene_RequestResource(0, size, size, 0x18, 0, 0, 0, g_constructMapObjectIndex, 1);
         if (header != 0) {
             key = Render_GetDirectoryEntry(*header, size, 1);
-            resource = func_802540F4_de(0, &table, key, D_800C4F04_de, 1);
+            resource = func_802540F4_de(0, &table, key, g_constructMapSimpModelsIndex, 1);
             if (resource != 0) {
                 shapeKey = Render_LocatePackSection(table, key, 0, &bytes);
-                shape = Scene_RequestResource(0, shapeKey, shapeKey, bytes, 0, 0, &D_0026D7F4, D_800C4F2C_de, 1);
+                shape = Scene_RequestResource(0, shapeKey, shapeKey, bytes, 0, 0, &D_0026D7F4, g_constructMapSimpleModel, 1);
                 if (shape != 0) {
                     first = Render_GetPackSection(*shape, 2);
                     first = Render_GetPackSection(first, 0);

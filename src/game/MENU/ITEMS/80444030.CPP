@@ -173,7 +173,7 @@ field->text[D_801462C8.language]
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800EEDE0, step);
 #else
-        func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800DE760, step);
+        func_802658E4_de(text + (func_80441FE8_de(field) - 4), g_fmtSpaceDec3, step);
 #endif
     }
     return 0;
@@ -234,7 +234,7 @@ field->text[D_801462C8.language]
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800EEDE0, step);
 #else
-        func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800DE760, step);
+        func_802658E4_de(text + (func_80441FE8_de(field) - 4), g_fmtSpaceDec3, step);
 #endif
     }
     return 0;

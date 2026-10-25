@@ -254,7 +254,7 @@ struct CDLight_t {
 };
 struct CGameDynamicLight_t;
 
-extern float D_800CA1F0;
+extern float g_lightDirectionLength;
 
 struct ObjA;
 
@@ -388,33 +388,33 @@ struct Shared_World;
 extern void **func_802540F4_de(s32,void **,s32,void *,s32);
 extern s32 D_0044D804;
 extern s32 D_0044D934;
-extern char D_800C4F50_de;
+extern char g_cartridgeIndex;
 extern char D_800C4F60_de;
-extern char D_800C4F70_de;
+extern char g_textureSetsIndex;
 extern char D_800C4F84_de;
-extern char D_800C4F94_de;
+extern char g_objectsIndex;
 extern char D_800C4FA4_de;
-extern char D_800C4FB4_de;
+extern char g_particleEffects;
 extern char D_800C4FC8_de;
-extern char D_800C4FD8_de;
+extern char g_particleSwooshes;
 extern char D_800C4FEC_de;
-extern char D_800C4FFC_de;
-extern char D_800C5008_de;
-extern char D_800C5010_de;
+extern char g_warpDests;
+extern char g_curves;
+extern char g_rumbleLabels;
 extern char D_800C5018_de;
-extern char D_800C5028_de;
-extern char D_800C5038_de;
+extern char g_graphicsetType;
+extern char g_graphicsetIndex;
 extern char D_800C504C_de;
-extern char D_800C505C_de;
-extern char D_800C5070_de;
-extern char D_800C5098_de;
+extern char g_linkGroupTypes;
+extern char g_constructBlLevelDataIndex;
+extern char g_bloodlustWeaponData;
 
 typedef struct Shape33 { u32 words[7]; } Shape33;
 typedef void (*ResourceCallback33)(s32, s32);
 extern void func_8026D7F4_de(s32, s32);
-extern u8 D_800C4EE0_de[];
-extern u8 D_800C4F04_de[];
-extern u8 D_800C4F2C_de[];
+extern u8 g_constructMapObjectIndex[];
+extern u8 g_constructMapSimpModelsIndex[];
+extern u8 g_constructMapSimpleModel[];
 
 typedef struct CollisionBuildVertex {
     f32 x;

@@ -8,7 +8,7 @@ const unsigned int D_8044BE04_CADF0[1] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_pool_8044BE04_CADF0_us_rev1.c */
-const unsigned int D_blob_d65eceaaaa414f568800[1] = {
+const unsigned int g_lightDirectionLength[1] = {
     0x42FE0000,
 };
 #endif

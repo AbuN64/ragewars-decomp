@@ -30,7 +30,7 @@ unsigned short rodata_unresolved_800C50CA[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-const char D_auto_src_rw_text_8044D054_CADA0_us_rev1[26] = "load save persistent data";
+const char g_loadSavePersistentData[26] = "load save persistent data";
 #endif
 
 #if defined(VERSION_US_REV1)

@@ -218,7 +218,7 @@ extern char *D_800D354C;
 
 extern f32 D_800C3D6C_de;
 
-extern char D_800DE760[];
+extern char g_fmtSpaceDec3[];
 
 extern s32 D_800D34B4[];
 

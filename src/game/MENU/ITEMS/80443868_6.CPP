@@ -31,7 +31,7 @@ s32 func_80443B3C_de(Shared_DebugWidget *field, Shared_MenuHandle *holder) {
     func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800EED80, value);
 #else
     text = *field->inner->text;
-    func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800DE700, value);
+    func_802658E4_de(text + (func_80441FE8_de(field) - 4), g_fmtDec4Pad, value);
 #endif
     return 0;
 }

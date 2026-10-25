@@ -14,14 +14,14 @@
 
 /* Loads the preview resource into the sound buffer when idle, while the adjacent helper resets a changed selection. */
 
-extern char D_00285160[],D_800C50CC_de[],D_800F41F0[];
+extern char D_00285160[],g_gamePersistentData[],D_800F41F0[];
 extern int func_80264B6C_de(void);
 extern void func_802BD3A0_de(void *,int,int),Items_SetSelection(ItemsPreviewStateB *,int,int);
 void Items_LoadPreviewBufferB(ItemsPreviewStateB *state) {
  int *resource;
  int id;
  if(func_80264B6C_de()==0) {
-  resource=Scene_RequestResource(0,state->resource,state->resource,state->bank,0,0,D_00285160,D_800C50CC_de,1);
+  resource=Scene_RequestResource(0,state->resource,state->resource,state->bank,0,0,D_00285160,g_gamePersistentData,1);
   func_802BD3A0_de(D_800F41F0,*resource,0x5000);
   Scene_ReleaseResource(0,resource);
  }
@@ -29,7 +29,7 @@ void Items_LoadPreviewBufferB(ItemsPreviewStateB *state) {
 
 /* Loads the preview resource into the sound buffer when idle, while the adjacent helper resets a changed selection. */
 
-extern char D_00285160[],D_800C50CC_de[],D_800F41F0[];
+extern char D_00285160[],g_gamePersistentData[],D_800F41F0[];
 extern int func_80264B6C_de(void);
 extern void func_802BD3A0_de(void *,int,int);
 extern void Items_SetSelection(ItemsPreviewStateB *,int,int);

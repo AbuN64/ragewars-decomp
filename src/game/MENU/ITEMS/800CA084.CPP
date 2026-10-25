@@ -31,7 +31,7 @@ unsigned short rodata_unresolved_800C4FA2[1] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_8044B7C0_CAC84_us_rev1.c */
-const char D_blob_9ce7fa918ff63550ec6b[14] = "objects index";
+const char g_objectsIndex[14] = "objects index";
 #endif
 
 #if defined(VERSION_US_REV1)
