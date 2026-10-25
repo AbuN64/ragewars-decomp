@@ -25,8 +25,6 @@ extern void alSynStopVoice(struct Shape_typemap_71 *arg0, void *arg1);
 struct ALResampler;
 typedef struct ALResampler ALResampler;
 
-struct func_802B8CC8_S1;
-
 struct ALParam_s1C;
 typedef struct ALParam_s1C ALParam_s1C;
 
@@ -85,9 +83,6 @@ struct ALResampler;
 struct ALResampler {
     char pad[0x34];
 };
-
-struct func_802B8CC8_S1;
-typedef struct func_802B8CC8_S1 func_802B8CC8_S1;
 
 struct ALSynConfig;
 typedef struct ALSynConfig ALSynConfig;

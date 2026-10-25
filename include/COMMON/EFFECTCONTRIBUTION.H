@@ -50,9 +50,6 @@ struct State_func_802A2FA4_de;
 typedef struct State_func_802A2FA4_de State_func_802A2FA4_de;
 
 
-struct func_802A6A54_S2;
-typedef struct func_802A6A54_S2 func_802A6A54_S2;
-
 struct ObjectState68;
 
 struct Shade;
@@ -206,8 +203,6 @@ struct Blend {
 struct ObjectStateB0;
 
 
-struct func_802A6A54_S3;
-
 
 struct CROMSwoosh_t;
 struct CROMSwoosh_t {
@@ -331,8 +326,6 @@ struct ObjectState20;
 extern void func_802A598C_de(Owner802A697C *owner, int object);
 
 
-struct func_802A6A54_S2;
-
 struct ObjectLinksB4;
 typedef struct ObjectLinksB4 ObjectLinksB4;
 
@@ -352,9 +345,6 @@ struct Vtx {
     u8 a;
 };
 
-
-struct func_802A6A54_S3;
-typedef struct func_802A6A54_S3 func_802A6A54_S3;
 
 struct Nodes;
 typedef struct Nodes Nodes;

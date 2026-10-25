@@ -43,11 +43,6 @@ struct func_802A68A0_S2 {
     char pad1C[0x24 - 0x1C - sizeof(void*)];
     f32 unk24;
 };
-struct func_802A6A54_S3 {
-    f32 unk0;
-    char pad0[0x4 - 0x0 - sizeof(f32)];
-    f32 unk4;
-};
 struct RibbonActor {
     char pad0[4];
     struct RibbonActor *next; /* 0x4 */
@@ -77,14 +72,6 @@ struct Morph {
     f32 textureScaleS;
     f32 textureScaleT;
     f32 step;
-};
-struct func_802A6A54_S2 {
-    char pad0[0x4];
-    f32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(f32)];
-    f32 unk8;
-    char pad8[0xC - 0x8 - sizeof(f32)];
-    f32 unkC;
 };
 /* Double-buffered vertex storage shared by the ribbon allocator and reset. */
 struct RibbonVertexPool {

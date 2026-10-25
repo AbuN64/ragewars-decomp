@@ -29,7 +29,6 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-struct func_80209B64_S2;
 
 
 struct BrainCode8020EAE0;

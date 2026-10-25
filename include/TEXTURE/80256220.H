@@ -2,11 +2,6 @@
 #define TEXTURE_80256220_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-typedef struct AudioInitializeConfig {
-    u8 reserved0[0x10]; s32 *(*callback)(s32 **);
-    ALHeap *heap;
-    s32 frequency;
-} AudioInitializeConfig;
 typedef struct AudioInitializeTiming { u32 frequency, frameTime, samples; } AudioInitializeTiming;
 struct Chunk {
     u32 source; /* cartridge device address */

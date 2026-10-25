@@ -2580,9 +2580,6 @@ struct ALEvent;
 struct ALFxCode802BAC64;
 typedef struct ALFxCode802BAC64 ALFxCode802BAC64;
 
-struct ALGlobals_func_802B5B94_de;
-typedef struct ALGlobals_func_802B5B94_de ALGlobals_func_802B5B94_de;
-
 struct ALLoadFilter48;
 typedef struct ALLoadFilter48 ALLoadFilter48;
 
@@ -3430,7 +3427,6 @@ struct ALEnvMixer_s {
 };
 struct ALDelay_func_802B5B94_de;
 struct ALFxCode802BAC64;
-struct ALGlobals_func_802B5B94_de;
 struct ALRAWWaveInfo;
 struct ALRAWWaveInfo {
     ALRawLoop *loop;

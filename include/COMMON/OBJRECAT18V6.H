@@ -97,8 +97,6 @@ struct Owner802A6DF8 {
 
 
 
-struct func_802A6AC0_S2;
-
 struct EntryRecAt34;
 typedef struct EntryRecAt34 EntryRecAt34;
 
@@ -205,9 +203,6 @@ struct Image;
 
 
 
-
-struct func_802A6AC0_S2;
-typedef struct func_802A6AC0_S2 func_802A6AC0_S2;
 
 struct State802A6FE0;
 typedef struct State802A6FE0 State802A6FE0;

@@ -7,7 +7,6 @@ typedef struct ResourcePageThread {
     u8 reserved14[3]; u8 slot;
     u8 reserved18[0x108]; u32 message, address;
 } ResourcePageThread;
-typedef struct Region ResourcePageRegion;
 typedef struct ResourcePageJob {
     u32 reserved0; u8 *source; u32 size;
     u16 page; u8 reservedE[2];

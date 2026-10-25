@@ -33,17 +33,6 @@ struct Ray180 {
 struct EntryC;
 typedef struct EntryC EntryC;
 
-struct func_80243864_S2;
-struct func_80243864_S2 {
-    char pad0[0x68];
-    char unk68;
-    char pad68[0xB4 - 0x68 - sizeof(char)];
-    void ** unkB4;
-};
-
-struct func_80241940_S1;
-typedef struct func_80241940_S1 func_80241940_S1;
-
 struct ElementE8;
 struct ElementE8 {
     char pad0[0x68];
@@ -64,9 +53,6 @@ struct Hit8 {
     ElementE8 *element;
     f32 t;
 };
-
-struct ObjectState7;
-typedef struct ObjectState7 ObjectState7;
 
 extern float D_800C3744_de;
 
@@ -159,9 +145,6 @@ struct FloatState20 {
     f32 unk_1C;
 };
 
-struct func_802414E4_S1;
-typedef struct func_802414E4_S1 func_802414E4_S1;
-
 struct ModelF0;
 typedef struct ModelF0 ModelF0;
 
@@ -172,18 +155,6 @@ struct Footprint {
     f32 pad48;
     f32 winding;
 };
-
-struct func_80241940_S2;
-typedef struct func_80241940_S2 func_80241940_S2;
-
-struct func_80241940_S2;
-struct func_80241940_S2 {
-    char pad0[0x134];
-    s32 unk134;
-};
-
-struct func_80243864_S2;
-typedef struct func_80243864_S2 func_80243864_S2;
 
 
 struct ActorB0;
@@ -205,22 +176,6 @@ struct FloatState68_2 {
     f32 unk_5C;
     f32 unk_60;
     f32 unk_64;
-};
-
-struct func_80241940_S1;
-struct func_80241940_S1 {
-    char pad0[0x8];
-    s32 unk8;
-    char pad8[0xC - 0x8 - sizeof(s32)];
-    s32 unkC;
-    char padC[0x10 - 0xC - sizeof(s32)];
-    s32 unk10;
-    char pad10[0x18 - 0x10 - sizeof(s32)];
-    char * unk18;
-    char pad18[0x5C - 0x18 - sizeof(char*)];
-    CQuatern unk5C;
-    char pad5C[0x6C - 0x5C - sizeof(CQuatern)];
-    f32 unk6C;
 };
 
 struct QueryRecAt58;
@@ -256,14 +211,6 @@ struct EntryBlock;
 struct EntryBlock {
     u8 pad[0x14];
     EntryRecAt8V5 entry;
-};
-
-struct func_80241718_S1;
-struct func_80241718_S1 {
-    char pad0[0x1C];
-    f32 unk1C;
-    char pad1C[0x48 - 0x1C - sizeof(f32)];
-    CVector3 unk48;
 };
 
 struct SurfaceHit;
@@ -327,14 +274,6 @@ struct ContextB0 {
 struct FloatState68_2;
 typedef struct FloatState68_2 FloatState68_2;
 
-struct func_802414E4_S1;
-struct func_802414E4_S1 {
-    char pad0[0x18];
-    char unk18;
-    char pad18[0x48 - 0x18 - sizeof(char)];
-    char unk48;
-};
-
 
 struct CollisionProbe;
 struct OwnerRecAt18;
@@ -351,23 +290,6 @@ struct CollisionProbe {
     s32 flags38;
     u8 pad3C[0xC4];
     s32 flags100;
-};
-
-struct func_80241940_S3;
-struct func_80241940_S3 {
-    char pad0[0x10];
-    f32 unk10;
-    char pad10[0x54 - 0x10 - sizeof(f32)];
-    f32 unk54;
-};
-
-struct func_80243864_S1;
-typedef struct func_80243864_S1 func_80243864_S1;
-
-struct ObjectState7;
-struct ObjectState7 {
-    char pad0[0x6];
-    s8 unk_6;
 };
 
 struct EntryRecAt4V3;
@@ -440,24 +362,11 @@ struct Input_func_802426CC_de {
     s32 flags100;
 };
 
-struct func_80241940_S3;
-typedef struct func_80241940_S3 func_80241940_S3;
-
 struct FloatState20;
 typedef struct FloatState20 FloatState20;
 
 struct Actor_func_80241BAC_de;
 typedef struct Actor_func_80241BAC_de Actor_func_80241BAC_de;
-
-struct func_80243864_S1;
-struct func_80243864_S1 {
-    char pad0[0x58];
-    void * unk58;
-    char pad58[0x64 - 0x58 - sizeof(void*)];
-    char unk64;
-    char pad64[0xA4 - 0x64 - sizeof(char)];
-    void * unkA4;
-};
 
 
 struct Bounds;
@@ -475,20 +384,6 @@ struct ModelF0 {
 
 struct Hit8;
 typedef struct Hit8 Hit8;
-
-struct func_80241718_S1;
-typedef struct func_80241718_S1 func_80241718_S1;
-
-struct func_802428DC_S2;
-typedef struct func_802428DC_S2 func_802428DC_S2;
-
-struct func_802428DC_S2;
-struct func_802428DC_S2 {
-    char pad0[0x3C];
-    int unk3C;
-    char pad3C[0x5C - 0x3C - sizeof(int)];
-    CVector3 unk5C;
-};
 
 typedef struct CollisionVertex {
     f32 x, y, z;

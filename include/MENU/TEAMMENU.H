@@ -47,15 +47,6 @@ typedef struct Item Item;
 struct SlotRecAt10;
 typedef struct SlotRecAt10 SlotRecAt10;
 
-struct func_80218F84_S1;
-typedef struct func_80218F84_S1 func_80218F84_S1;
-
-struct func_80217388_S1;
-struct func_80217388_S1 {
-    char pad0[0xD0];
-    void * unkD0;
-};
-
 
 struct Entry;
 typedef struct Entry Entry;
@@ -73,9 +64,6 @@ struct PlayerRecAt698 {
     struct ControllerRecAtC7 *controller;
 };
 
-struct func_80217388_S2;
-typedef struct func_80217388_S2 func_80217388_S2;
-
 struct ObjectLinks11BC;
 struct ObjectLinks11BC {
     char pad0[0x5D8];
@@ -90,25 +78,8 @@ struct ObjectLinks11BC {
     s32 unk_11B8;
 };
 
-struct func_80218F84_S1;
-struct func_80218F84_S1 {
-    unsigned int unk0;
-    char pad0[0x4 - 0x0 - sizeof(unsigned int)];
-    unsigned int unk4;
-    char pad4[0x8 - 0x4 - sizeof(unsigned int)];
-    unsigned int unk8;
-    char pad8[0x6C - 0x8 - sizeof(unsigned int)];
-    int unk6C;
-};
-
 struct ItemRecAt18V1;
 typedef struct ItemRecAt18V1 ItemRecAt18V1;
-
-struct func_80217388_S2;
-struct func_80217388_S2 {
-    char pad0[0xFC];
-    s32 unkFC;
-};
 
 
 struct Item;
@@ -172,9 +143,6 @@ typedef struct IntegerState74 IntegerState74;
 
 struct ObjectLinks69C;
 typedef struct ObjectLinks69C ObjectLinks69C;
-
-struct func_80217388_S1;
-typedef struct func_80217388_S1 func_80217388_S1;
 
 struct Entry;
 struct Entry {

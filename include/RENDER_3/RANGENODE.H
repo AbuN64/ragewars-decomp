@@ -39,12 +39,6 @@ struct ActorRecAt1D8V3 {
 struct Limit;
 typedef struct Limit Limit;
 
-struct RecCode80268160;
-struct RecCode80268160 {
-    char pad0[0xF];
-    char unkF;
-};
-
 extern void func_80268264_de(int arg0, int arg1, int arg2, int arg3, ...);
 
 struct ParamsRecAt4;
@@ -73,23 +67,14 @@ struct Params_func_802681A8_de {
 struct ObjectRecAt17C;
 typedef struct ObjectRecAt17C ObjectRecAt17C;
 
-struct RecCode80268160802689BC;
-typedef struct RecCode80268160802689BC RecCode80268160802689BC;
-
 struct OwnerRecAt16D4;
 typedef struct OwnerRecAt16D4 OwnerRecAt16D4;
-
-struct func_80268C1C_S2;
-typedef struct func_80268C1C_S2 func_80268C1C_S2;
 
 extern float D_800C9564;
 
 extern float D_800C9560;
 
 extern float D_800C446C_de;
-
-struct func_802689CC_S1;
-typedef struct func_802689CC_S1 func_802689CC_S1;
 
 struct RangeNode;
 struct RangeNode {
@@ -133,30 +118,11 @@ struct ObjectRecAt17C {
     u32 mask;
 };
 
-struct func_802689CC_S1;
-struct func_802689CC_S1 {
-    char pad0[0x100];
-    s32 unk100;
-    char pad100[0x170 - 0x100 - sizeof(s32)];
-    s32 unk170;
-};
-
 struct Filter;
 struct Filter {
     u8 type;
     u8 pad[0x17B];
     s32 mask;
-};
-
-struct RecCode80268160;
-typedef struct RecCode80268160 RecCode80268160;
-
-struct func_80268C1C_S2;
-struct func_80268C1C_S2 {
-    char pad0[0x8];
-    void * unk8;
-    char pad8[0x16 - 0x8 - sizeof(void*)];
-    s16 unk16;
 };
 
 extern float D_800C4490_de;
@@ -184,12 +150,6 @@ extern float D_800C4494_de;
 extern void func_802684E8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 
 extern void func_802689BC_de(LevelActor *arg0, int arg1, int arg2, Blast blast);
-
-struct RecCode80268160802689BC;
-struct RecCode80268160802689BC {
-    char pad0[0x270];
-    char unk270;
-};
 
 typedef CVector3 Vec3f;
 extern struct SceneEffect *func_802627A0_de(struct SceneEffectPool *scene, s32 variant, s32 owner, CVector3 position, f32 scale, CVector3 direction,

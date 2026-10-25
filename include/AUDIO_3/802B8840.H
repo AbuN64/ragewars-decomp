@@ -3,10 +3,6 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ALAUXBUS_S.H"
-struct func_802B8CC8_S1 {
-    char pad0[0x2C];
-    void * unk2C;
-};
 struct ALEnvMixer4C {
     char pad[0x4C];
 };

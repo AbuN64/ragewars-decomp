@@ -30,16 +30,6 @@ struct ObjRecAt18V6 {
     char pad14[0x18 - 0x14 - sizeof(s32)];
     s32 unk18;
 };
-struct func_802A6AC0_S2 {
-    char pad0[0x4];
-    f32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(f32)];
-    f32 unk8;
-    char pad8[0xC - 0x8 - sizeof(f32)];
-    f32 unkC;
-    char padC[0x10 - 0xC - sizeof(f32)];
-    f32 unk10;
-};
 struct Input_func_802A65E0_de {
     char pad0[0x5DC];
     struct View *view; /* 0x5DC: viewport owner used by the toggle-menu renderer */

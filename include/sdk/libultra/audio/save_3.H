@@ -11,7 +11,4 @@ struct ALFxCode802BAC64 {
     u8 section_count;
     void *paramHdl;
 };
-struct ALGlobals_func_802B5B94_de {
-    func_8022E694_S1 drvr;
-};
 #endif

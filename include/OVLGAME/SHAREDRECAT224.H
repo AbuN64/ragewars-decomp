@@ -4,11 +4,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "OVLGAME/8043D54C.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-struct SharedRecAt224;
-struct SharedRecAt224 {
-    char pad0[0x224];
-    s32 unk224;
-};
 
 struct Holder;
 
@@ -19,9 +14,6 @@ struct Shared_func_8043DEDC_S3;
 typedef struct Shared_func_8043DEDC_S3 Shared_func_8043DEDC_S3;
 
 extern void Ovlgame_SelectConfirmingController(func_80250BD4_S1 *arg0);
-
-struct SharedRecAt224;
-typedef struct SharedRecAt224 SharedRecAt224;
 
 struct SharedRecAt148;
 struct SharedRecAt148 {

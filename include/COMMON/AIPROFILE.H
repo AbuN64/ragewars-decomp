@@ -250,12 +250,6 @@ struct CCameraText_t;
 
 
 
-struct func_80209B64_S2;
-struct func_80209B64_S2 {
-    char pad0[0x93];
-    u8 unk93;
-};
-
 struct Body;
 struct Character;
 struct Controller;
@@ -413,9 +407,6 @@ typedef struct func_8022A404_S1 func_8022A404_S1;
 struct RecordRecAt94;
 typedef struct RecordRecAt94 RecordRecAt94;
 
-
-struct func_80209B64_S2;
-typedef struct func_80209B64_S2 func_80209B64_S2;
 
 struct ObjRecAt18V5;
 typedef struct ObjRecAt18V5 ObjRecAt18V5;

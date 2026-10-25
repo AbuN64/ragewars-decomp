@@ -104,22 +104,9 @@ struct Shared_PakMenu;
 struct PlayerSettings;
 typedef struct PlayerSettings PlayerSettings;
 
-struct func_8043E5BC_S1;
-struct func_8043E5BC_S1 {
-    char pad0[0x1C];
-    s32 unk1C;
-    char pad1C[0x20 - 0x1C - sizeof(s32)];
-    s32 unk20;
-    char pad20[0x28 - 0x20 - sizeof(s32)];
-    s32 unk28;
-};
-
 struct StatusView;
 typedef struct StatusView StatusView;
 
-
-struct func_8043E5BC_S1;
-typedef struct func_8043E5BC_S1 func_8043E5BC_S1;
 
 struct Target8043E458;
 struct Target8043E458 {
@@ -148,12 +135,6 @@ struct StatusStep {
     char pad[150];
 };
 
-struct func_8043E318_S2;
-struct func_8043E318_S2 {
-    char pad0[0x5D8];
-    u8 * unk5D8;
-};
-
 struct Obj1C;
 typedef struct Obj1C Obj1C;
 
@@ -179,6 +160,4 @@ typedef struct Menu_func_8043F37C_eu Menu_func_8043F37C_eu;
 struct Target8043E458;
 typedef struct Target8043E458 Target8043E458;
 
-struct func_8043E318_S2;
-typedef struct func_8043E318_S2 func_8043E318_S2;
 #endif

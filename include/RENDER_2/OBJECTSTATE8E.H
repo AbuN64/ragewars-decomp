@@ -4,42 +4,6 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct func_80219490_S1;
-struct func_80219490_S1 {
-    char pad0[0x8];
-    s32 unk8;
-    char pad8[0x90 - 0x8 - sizeof(s32)];
-    s32 unk90;
-    char pad90[0x94 - 0x90 - sizeof(s32)];
-    s32 unk94;
-    char pad94[0x98 - 0x94 - sizeof(s32)];
-    s32 unk98;
-    char pad98[0x9C - 0x98 - sizeof(s32)];
-    f32 unk9C;
-    char pad9C[0xA0 - 0x9C - sizeof(f32)];
-    f32 unkA0;
-    char padA0[0xA8 - 0xA0 - sizeof(f32)];
-    f32 unkA8;
-    char padA8[0xAC - 0xA8 - sizeof(f32)];
-    f32 unkAC;
-    char padAC[0xB0 - 0xAC - sizeof(f32)];
-    f32 unkB0;
-    char padB0[0xB4 - 0xB0 - sizeof(f32)];
-    s32 unkB4;
-};
-
-struct func_8021CBAC_S1;
-struct func_8021CBAC_S1 {
-    char pad0[0x2E8];
-    char unk2E8;
-    char pad2E8[0x5EA - 0x2E8 - sizeof(char)];
-    s16 unk5EA;
-    char pad5EA[0x62E - 0x5EA - sizeof(s16)];
-    s16 unk62E;
-};
-
-struct func_80219434_S1;
-typedef struct func_80219434_S1 func_80219434_S1;
 
 struct ObjectState8E;
 typedef struct ObjectState8E ObjectState8E;
@@ -55,39 +19,7 @@ struct PlayerCode802192C0 {
     UnitMtx markers[2];
 };
 
-struct func_8021C9B4_Records;
-typedef struct func_8021C9B4_Records func_8021C9B4_Records;
-
-struct func_8021C9B4_S1;
-struct func_8021C9B4_S1 {
-    char pad0[0x3];
-    u8 unk3;
-    char pad3[0x8 - 0x3 - sizeof(u8)];
-    Triple unk8;
-    char pad8[0x18 - 0x8 - sizeof(Triple)];
-    void * unk18;
-    char pad18[0x70 - 0x18 - sizeof(void*)];
-    f32 unk70;
-    char pad70[0x5D8 - 0x70 - sizeof(f32)];
-    void * unk5D8;
-    char pad5D8[0x86C - 0x5D8 - sizeof(void*)];
-    s32 unk86C;
-    char pad86C[0x1210 - 0x86C - sizeof(s32)];
-    s32 unk1210;
-};
-
-struct func_8021C9B4_S1;
-typedef struct func_8021C9B4_S1 func_8021C9B4_S1;
-
 extern float D_800C22FC_de;
-
-struct RecCode802192C0;
-struct RecCode802192C0 {
-    char pad0[0x1];
-    char unk1;
-    char pad1[0x2 - 0x1 - sizeof(char)];
-    short unk2;
-};
 
 struct ObjectLinks16D8;
 struct ObjectLinks16D8 {
@@ -246,21 +178,6 @@ struct ObjectLinks16D8 {
 struct Struct802193C8;
 typedef struct Struct802193C8 Struct802193C8;
 
-struct func_8021CBAC_S3;
-typedef struct func_8021CBAC_S3 func_8021CBAC_S3;
-
-struct func_80219460_S1;
-struct func_80219460_S1 {
-    char pad0[0x4];
-    int unk4;
-    char pad4[0xC - 0x4 - sizeof(int)];
-    short unkC;
-    char padC[0xE - 0xC - sizeof(short)];
-    char unkE;
-    char padE[0x12 - 0xE - sizeof(char)];
-    char unk12;
-};
-
 extern float D_800C22B0_us;
 
 extern float D_800C22D0_de;
@@ -273,33 +190,7 @@ struct Cursor {
     s16 previous;
 };
 
-struct func_8021CBAC_S2;
-struct func_8021CBAC_S2 {
-    char pad0[0x120];
-    s32 unk120;
-    char pad120[0x29C - 0x120 - sizeof(s32)];
-    f32 unk29C;
-};
-
-struct func_8021CBAC_S3;
-struct func_8021CBAC_S3 {
-    char pad0[0x44];
-    f32 unk44;
-    char pad44[0x48 - 0x44 - sizeof(f32)];
-    f32 unk48;
-    char pad48[0x4C - 0x48 - sizeof(f32)];
-    f32 unk4C;
-    char pad4C[0x50 - 0x4C - sizeof(f32)];
-    f32 unk50;
-};
-
-struct func_80219460_S1;
-typedef struct func_80219460_S1 func_80219460_S1;
-
 extern float D_800C22F8_de;
-
-struct RecCode802192C0;
-typedef struct RecCode802192C0 RecCode802192C0;
 
 struct ObjectState8E;
 struct ObjectState8E {
@@ -318,34 +209,11 @@ struct Struct802193C8 {
     s16 field4;
 };
 
-struct func_8021C9B4_Records;
-struct func_8021C9B4_Records {
-    char pad[0x140];
-    Slot records[16];
-};
-
-struct func_8021CBAC_S2;
-typedef struct func_8021CBAC_S2 func_8021CBAC_S2;
-
-struct func_8021CBAC_S1;
-typedef struct func_8021CBAC_S1 func_8021CBAC_S1;
-
-struct func_80219490_S1;
-typedef struct func_80219490_S1 func_80219490_S1;
-
 struct PlayerCode802192C0;
 typedef struct PlayerCode802192C0 PlayerCode802192C0;
 
 struct ObjectLinks16D8;
 typedef struct ObjectLinks16D8 ObjectLinks16D8;
-
-struct func_80219434_S1;
-struct func_80219434_S1 {
-    char pad0[0x1];
-    char unk1;
-    char pad1[0x4 - 0x1 - sizeof(char)];
-    short unk4;
-};
 
 typedef struct CompactAnimationState {
     s32 state;

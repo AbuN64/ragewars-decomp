@@ -68,8 +68,6 @@ typedef struct IntegerState90 IntegerState90;
 
 struct Table802AB8DC;
 
-extern float D_800C6228_de;
-
 struct ObjectLinksC_2;
 typedef struct ObjectLinksC_2 ObjectLinksC_2;
 
