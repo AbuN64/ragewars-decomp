@@ -145,7 +145,8 @@ typedef struct NavProbeController {
 } NavProbeController;
 /* Prepares radial probe segments at two heights from the player position.
  * The original keeps these vectors only on the stack; no draw call remains.
- * 7/157 aligned edits: final sector float register and clamp loop differ. */
+ * 3/157 aligned edits: the last clamp is a loop that re-sets zero (cyclic, so flow keeps the dead
+ * tail like the ROM); left: the 8.0 load register (f0 vs f2) and the clamp branch (back edge vs bc1tl). */
 void Nav_PrepareProbeSegments(NavProbeController *controller) {
     CVector3 a, b;
     f32 angle, zero, yA, yB;
@@ -161,7 +162,10 @@ void Nav_PrepareProbeSegments(NavProbeController *controller) {
     angle *= D_800C1FC8_de;
     angle *= D_800C1FCC_de;
     zero = 0.0f;
-    while (angle < zero) angle = zero;
+    while (angle < zero) {
+        angle = zero;
+        zero = 0.0f;
+    }
     yA = D_800C1FD0_de;
     yB = D_800C1FD4_de;
     for (i = 0; i < 8; i++) {
