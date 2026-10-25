@@ -333,8 +333,6 @@ s32 func_8026B504_de(void *model, void *lights, ModelMaterial *material) {
     return 0;
 }
 
-#ifdef NON_MATCHING
-/* 56/211 aligned edits; remaining: callee-saved register order (segment/i, hide, count/parts) and the 0xDE000000 constant kept in fp. */
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/PACKEDMESHMATERIAL.H"
@@ -347,10 +345,10 @@ extern s32 func_80269A80_de(void *material, s32 pass);
  * character 0x12 the part must equal the bits for its variant (or be a fade/bonus part whose flag is set),
  * otherwise the 0x38/0x30/0x10 groups are drawn only when the matching flag (fade, bonus, glow) is set. */
 void Render_DrawActorModelParts(void **resource, struct Player *owner, void *matrix, s32 segment, Shared_ParticleLighting *lights, void *textures, s32 pass) {
-    void *header;
+    struct Pack *header;
     void *base;
-    void **parts;
-    void *part;
+    struct Pack *parts;
+    struct Pack *part;
     MeshMaterial *material;
     s32 count;
     s32 i;
@@ -391,10 +389,9 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
     }
     gSPSegment(D_80110634++, 2, (unsigned int)base);
     parts = Render_GetPackSection(header, 2);
-    count = *(s32 *)parts;
+    count = parts->count;
     for (i = 0; i < count; i++) {
         AiProfile *state;
-        u32 bits;
         part = Render_GetPackSection(parts, i);
         material = Render_GetPackSection(part, 0);
         if (i == 0) {
@@ -402,30 +399,31 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
         }
         state = owner->profile;
         if (state->character == 0x12 && (D_801468A0.m_bFragTagOn == 0 || state->bonus == 0)) {
-            u32 wanted = 0x28;
-            if (state->variant != 0) {
+            u32 bits;
+            u32 wanted;
+            if (state->variant == 0) {
+                wanted = 0x28;
+            } else if (state->variant == 1) {
+                wanted = 0x20;
+            } else {
                 wanted = 0x18;
-                if (state->variant == 1) {
-                    wanted = 0x20;
+            }
+            bits = material->mode & 0x38;
+            if (bits == wanted || (bits == 0x38 && hide != 0) || (bits == 0x30 && bonus != 0)) {
+                if (func_80269A80_de(material, pass) != 0) {
+                    void *list = Render_GetPackSection(part, 1);
+                    gSPDisplayList(D_80110634++, list);
                 }
             }
-            bits = material->mode & 0x38;
-            if (bits != wanted && !(bits == 0x38 && hide != 0) && !(bits == 0x30 && bonus != 0)) {
-                continue;
-            }
         } else {
-            bits = material->mode & 0x38;
+            u32 bits = material->mode & 0x38;
             if (bits == 0x38 && hide == 0) continue;
             if (bits == 0x30 && bonus == 0) continue;
             if (bits == 0x10 && glow == 0) continue;
-        }
-        if (func_80269A80_de(material, pass) != 0) {
-            void *list = Render_GetPackSection(part, 1);
-            Gfx *cmd = D_80110634++;
-            gSPDisplayList(cmd, (unsigned int)list);
+            if (func_80269A80_de(material, pass) != 0) {
+                void *list = Render_GetPackSection(part, 1);
+                gSPDisplayList(D_80110634++, list);
+            }
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", Render_DrawActorModelParts);
-#endif
