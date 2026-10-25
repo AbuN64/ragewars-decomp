@@ -3961,7 +3961,7 @@ segments:
       - [0xCA6A4, data, data_800C/D_d0_8959759877b4f9f3]
       - [0xCA6B0, rodata, data_800C/D_blob_f4ccad18b3cd42ad098c]
       - [0xCA6B8, rodata, data_800C/D_blob_d5e61f0f08d6a89b3f35]
-      - [0xCA6BC, rodata, data_800C/literals_func_80275410_de]
+      - [0xCA6BC, rodata, data_800C/literals_Nav_GetPolygonUpQuat]
       - [0xCA6CC, rodata, data_800C/D_blob_6ed6742ca7aeefaa44c7]
       - [0xCA6D4, rodata, data_800C/D_blob_704ee15b1ec28a1ee6e6]
       - [0xCA6DC, rodata, data_800C/D_blob_1dd2bb61dda88f70e062]

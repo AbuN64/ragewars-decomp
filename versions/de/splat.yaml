@@ -3860,7 +3860,7 @@ segments:
       - [0xC55B4, data, data_800C/rodata_unresolved_800C49B4]
       - [0xC55C0, rodata, data_800C/D_802750B0_CA6B0]
       - [0xC55C8, rodata, data_800C/D_8027525C_CA6B8]
-      - [0xC55CC, rodata, data_800C/literals_func_80275410_de]
+      - [0xC55CC, rodata, data_800C/literals_Nav_GetPolygonUpQuat]
       - [0xC55DC, rodata, data_800C/D_80275688_CA6CC]
       - [0xC55E4, rodata, data_800C/D_802757E4_CA6D4]
       - [0xC55EC, rodata, data_800C/D_80275A58_CA6DC]

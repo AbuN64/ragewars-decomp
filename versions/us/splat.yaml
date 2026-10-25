@@ -3856,7 +3856,7 @@ segments:
       - [0xC54E4, data, data_800C/rodata_unresolved_800C48E4]
       - [0xC54F0, rodata, data_800C/D_802750B0_CA6B0]
       - [0xC54F8, rodata, data_800C/D_8027525C_CA6B8]
-      - [0xC54FC, rodata, data_800C/literals_func_80275410_de]
+      - [0xC54FC, rodata, data_800C/literals_Nav_GetPolygonUpQuat]
       - [0xC550C, rodata, data_800C/D_80275688_CA6CC]
       - [0xC5514, rodata, data_800C/D_802757E4_CA6D4]
       - [0xC551C, rodata, data_800C/D_80275A58_CA6DC]

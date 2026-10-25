@@ -58,7 +58,7 @@ extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void Particle_ScaleVector(CVector3 *, CVector3 *, float);
 
-CQuatern *func_80275410_de(CQuatern *out, Triangle *polygon) {
+CQuatern *Nav_GetPolygonUpQuat(CQuatern *out, Triangle *polygon) {
     CVector3 normal;
     CVector3 up;
     CVector3 axis;
@@ -115,7 +115,7 @@ CQuatern *func_80275410_de(CQuatern *out, Triangle *polygon) {
     return out;
 }
 
-CQuatern *func_80275688_de(CQuatern *out) {
+CQuatern *Nav_GetCachedUpQuat(CQuatern *out) {
     CVector3 a;
     CVector3 up;
     CVector3 axis;

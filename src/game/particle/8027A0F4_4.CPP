@@ -14,8 +14,8 @@
 extern char D_8011AD70;
 extern void BuildDirectionMatrix(void *arg0, void *arg1);
 extern f32 Anim_GetPolygonHeight(Node75 *node, f32 x, f32 z);
-extern void func_80275410_de(void *arg0, s32 arg1);
-extern void func_80275688_de(void *arg0, s32 arg1);
+extern void Nav_GetPolygonUpQuat(void *arg0, s32 arg1);
+extern void Nav_GetCachedUpQuat(void *arg0, s32 arg1);
 extern void MatrixFromQuaternion(void *arg0, void *arg1);
 extern void Rsp_MultiplyAffineMatrices(void *arg0, void *arg1, void *arg2);
 extern f32 func_802760BC_de(s32 arg0, s32 arg1);
@@ -73,7 +73,7 @@ void *Particle_ParentTransform(EffectActor *arg0, Shared_ActorView *camera) {
         value = Anim_GetPolygonHeight(0, arg0->pos.x,
             arg0->pos.z);
         if (arg0->pos.y - value <= 0.01f) {
-            func_80275410_de(state, 0);
+            Nav_GetPolygonUpQuat(state, 0);
             MatrixFromQuaternion(state, output);
             shared = &D_8011AD70;
             Rsp_MultiplyAffineMatrices(shared, &D_8011AF38, output);
@@ -82,7 +82,7 @@ void *Particle_ParentTransform(EffectActor *arg0, Shared_ActorView *camera) {
     sw_state_neg_5:
         return &D_8011AF38;
     sw_state_neg_2:
-        func_80275688_de(state, 0);
+        Nav_GetCachedUpQuat(state, 0);
         MatrixFromQuaternion(state, output);
         shared = &D_8011AD70;
         Rsp_MultiplyAffineMatrices(shared, &D_8011AF38, output);
