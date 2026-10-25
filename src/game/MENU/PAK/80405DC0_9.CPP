@@ -115,8 +115,6 @@ static inline char *pakRecordChannelLabel(s32 channel) {
     }
 }
 
-#ifdef NON_MATCHING
-/* us-rev1: 2/186 aligned edits remain: channel-argument load scheduling. */
 s32 Pak_SaveControllerRecord(s32 unused, struct Shared_PakMenu *menu, s32 unusedEvent)
 {
     ObjRecAt5DC *player, *selectedPlayer;
@@ -138,7 +136,7 @@ s32 Pak_SaveControllerRecord(s32 unused, struct Shared_PakMenu *menu, s32 unused
                     if (status == 0) {
                         attempted = 1;
                         status = Pak_SaveNote(channel, 0x18, D_80153738,
-                                                 rw_pak_save_name(), extension, rw_pak_save_code());
+                                              RW_PAK_RECORD_TITLE, extension, RW_PAK_GAME_CODE);
                     }
                 }
             }
@@ -166,25 +164,14 @@ s32 Pak_SaveControllerRecord(s32 unused, struct Shared_PakMenu *menu, s32 unused
     }
     return 1;
 }
-#else
-INCLUDE_ASM("ovl_80400000", Pak_SaveControllerRecord);
-#endif
 
-#ifdef NON_MATCHING
-extern char *D_800D36E0;
 extern u32 D_8011FECC;
 extern char D_0044FAFC[];
-extern char *D_800D36D8;
-/* Snapshot titles and the capacity prompt use the active release language. */
+/* The capacity prompt is per release. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern s32 D_800E25B4[];
 extern char D_0045017C[];
-static inline char *pakSnapshotName(void) {
-    return (char *)D_800E25B4[D_801462C8.language];
-}
 static inline char *pakSnapshotCapacityPrompt(void) { return D_0045017C; }
 #else
-static inline char *pakSnapshotName(void) { return D_800D36D8; }
 #if defined(VERSION_US_REV1)
 static inline char *pakSnapshotCapacityPrompt(void) { return D_0044FAFC; }
 #elif defined(VERSION_US)
@@ -195,7 +182,6 @@ extern char D_0044EEAC[];
 static inline char *pakSnapshotCapacityPrompt(void) { return D_0044EEAC; }
 #endif
 #endif
-/* us-rev1: 4/116 aligned edits remain: snapshot title load scheduling. */
 /* Save the snapshot only when both page and note capacity are available;
  * retain pending resources while showing the insufficient-capacity prompt. */
 s32 Pak_SaveSnapshotAndClose(void *unused, Shared_PakMenu *menu) {
@@ -216,7 +202,7 @@ s32 Pak_SaveSnapshotAndClose(void *unused, Shared_PakMenu *menu) {
                     showPrompt = 0;
                     if (func_80405454_de(channel, extension) == 0) {
                         Pak_SaveNote(channel, snapshotBytes, (void *)D_800DE868,
-                                     pakSnapshotName(), extension, rw_pak_save_code());
+                                     RW_PAK_SNAPSHOT_TITLE, extension, RW_PAK_GAME_CODE);
                     }
                 }
             }
@@ -236,6 +222,3 @@ s32 Pak_SaveSnapshotAndClose(void *unused, Shared_PakMenu *menu) {
     D_800E28BC = 0;
     return 1;
 }
-#else
-INCLUDE_ASM("ovl_80400000", Pak_SaveSnapshotAndClose);
-#endif
