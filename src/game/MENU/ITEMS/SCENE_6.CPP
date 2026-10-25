@@ -7,7 +7,7 @@ extern void Scene_ReleaseResource(void *, void *); /* extern */
 
 /* Loads a selected resource into the shared buffer and releases the temporary allocation. */
 
-struct State_func_8044D054_de;
+struct ItemsPreviewStateA;
 
 /* extern */
 extern s32 func_80264B6C_de(void); /* extern */
@@ -15,7 +15,7 @@ extern void *func_802BD3A0_de(void *, const void *, int); /* extern */
 extern char D_00285160;
 extern char D_800C50B0_de;
 
-void func_8044D054_de(State_func_8044D054_de *arg0) {
+void Items_LoadPreviewBufferA(ItemsPreviewStateA *arg0) {
     s32 *temp_v0;
     s32 temp_a1;
 

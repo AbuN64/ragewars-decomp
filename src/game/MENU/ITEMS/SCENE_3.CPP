@@ -21,7 +21,7 @@ extern u8 D_800CBC9C[];
 extern u8 D_800CBCA0[];
 extern f32 Math_Sqrtf(f32);
 extern void Particle_ScaleVector(f32 *, f32 *, f32);
-void func_8044BE04_de(SceneRecAt1B2B4 *scene) {
+void Items_LoadSceneLight(SceneRecAt1B2B4 *scene) {
     s32 i;
     u8 c;
     f32 v[3];
@@ -52,9 +52,9 @@ int func_8022A414_de(void *);
 void func_8025CBEC_de(void *);
 s32 * func_8025CC6C_de(void);
 void func_8028D59C_de(void *);
-void func_8044A07C_de(void *);
+void Items_ReleaseObjectHandles(void *);
 /* Shut down the subsystem, free its owned resources, and unlink its list. */
-void func_8044BF90_de(func_8044CBE0_S1 *arg0) {
+void Items_FreeSceneResources(func_8044CBE0_S1 *arg0) {
     s32 temp_v0;
     void *temp_a1;
     void *temp_a1_2;
@@ -64,7 +64,7 @@ void func_8044BF90_de(func_8044CBE0_S1 *arg0) {
     func_8020D0CC_S2 *var_a1;
     temp_v0 = func_8022A414_de(&D_80145040);
     if (temp_v0 != 0) {
-        func_8044A07C_de((void *) temp_v0);
+        Items_ReleaseObjectHandles((void *) temp_v0);
     }
     func_8025CBEC_de(func_8025CC6C_de());
     func_8025E468_de();

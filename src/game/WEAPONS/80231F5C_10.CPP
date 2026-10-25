@@ -14,7 +14,7 @@ extern s32 func_802301F4_de(void *, void *);
 #include "WEAPONS/80213ED4.H"
 
 
-s32 func_8044A07C_de(s32);
+s32 Items_ReleaseObjectHandles(s32);
 
 
 extern void func_8022AF74_de(Shared_ActorView *arg0, s32 arg1);
@@ -61,7 +61,7 @@ s32 func_80232BD0_de(LevelActor *actor, void *arg1, Shared_ActorView *arg2) {
 }
 
 void func_80232C68_de(void *arg0) {
-    func_8044A07C_de((((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link));
+    Items_ReleaseObjectHandles((((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link));
 }
 
 void func_80232C88_de(Shared_ActorView *arg0, WeaponFireState *fireState) {

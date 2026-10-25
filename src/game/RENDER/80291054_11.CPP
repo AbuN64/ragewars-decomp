@@ -6,9 +6,9 @@
 extern void Items_ResetActorPools(void *arg0, s32 arg1);
 extern void func_804499B0_de(void *arg0, void *arg1, void *arg2);
 extern s32 func_804030E0_de(s32);
-extern void func_8044D528_de(void *arg0, s32 arg1, s32 arg2);
-extern void func_8044D054_de(void *arg0);
-extern void func_8044D0F0_de(void *arg0);
+extern void Items_SetSelection(void *arg0, s32 arg1, s32 arg2);
+extern void Items_LoadPreviewBufferA(void *arg0);
+extern void Items_LoadPreviewBufferB(void *arg0);
 
 
 
@@ -18,7 +18,7 @@ void func_80293998_de(s32 arg0, s32 arg1) {
     ObjRecAt255C8 *object = (void *)arg0;
     Items_ResetActorPools(&object->unk255C8, 1);
     func_804499B0_de(&object->unk25580, (void *)1, 0);
-    func_8044D528_de(&D_8011FE88, ~func_804030E0_de(arg1), 0);
-    func_8044D054_de(&D_8011FE88);
-    func_8044D0F0_de(&D_8011FE88);
+    Items_SetSelection(&D_8011FE88, ~func_804030E0_de(arg1), 0);
+    Items_LoadPreviewBufferA(&D_8011FE88);
+    Items_LoadPreviewBufferB(&D_8011FE88);
 }

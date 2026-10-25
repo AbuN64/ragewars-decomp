@@ -21,5 +21,4 @@ extern Globals_func_804220A8_de D_80140FE8_de;
 
 
 extern int func_8025477C_de(void);
-extern void func_8044D528_de(void *, int, int);
 #endif

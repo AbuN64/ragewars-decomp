@@ -40,7 +40,7 @@ extern void Particle_ScaleVector(void *, void *, f32);
 
 extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
-extern void func_8044A07C_de(s32 arg0);
+extern void Items_ReleaseObjectHandles(s32 arg0);
 
 void func_8022CF38_de(void *arg0, LevelActor *actor) {
     f32 value;
@@ -169,7 +169,7 @@ void func_8022D214_de(void *widget) {
     player->stun = 0;
     player->markerTime = 0.0f;
     actor->flags |= 0x01000000;
-    func_8044A07C_de((s32) widget);
+    Items_ReleaseObjectHandles((s32) widget);
 }
 
 void func_8022D254_de(void) {

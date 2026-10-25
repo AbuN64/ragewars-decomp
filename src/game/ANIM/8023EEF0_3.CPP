@@ -11,7 +11,7 @@
 #include "RENDER_2/8022AE90_5.H"
 
 s32 func_8023E8D4_de(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly, s32 keep);
-void func_8044A07C_de(struct Object_func_8044A07C_de *);
+void Items_ReleaseObjectHandles(struct ItemsHandleOwner *);
 void func_80271FC8_de(CVector3 *, f32, void *, void *);
 void System_DeliverContactEffect(void *, void *, s32, s32, CVector3, ContactEffectStyle);
 s32 func_802833D0_de(void *);
@@ -86,7 +86,7 @@ s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, C
         projectile = ray->projectile;
         if (projectile->type != 2 || (projectile->kind != 0x414 && projectile->kind != 0x42D)) continue;
         if (projectile->owner == actor) {
-            func_8044A07C_de(actor->widget);
+            Items_ReleaseObjectHandles(actor->widget);
             ray->projectile->contactState = found;
             return 0;
         }

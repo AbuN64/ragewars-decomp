@@ -2,7 +2,7 @@
 #define COMMON_BOX_CONTACT_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-struct Object_func_8044A07C_de;
+struct ItemsHandleOwner;
 /* A fixed point bone matrix: integer halves, then fraction halves. */
 typedef struct BoxContactBone {
     s16 whole[4][4];
@@ -28,7 +28,7 @@ typedef struct BoxContactActor {
     u8 reserved100[0x7C];
     u32 partMask;
     u8 reserved180[0x58];
-    struct Object_func_8044A07C_de *widget;
+    struct ItemsHandleOwner *widget;
 } BoxContactActor;
 typedef struct ContactProjectile {
     u8 type;

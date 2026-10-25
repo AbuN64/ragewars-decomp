@@ -24,7 +24,7 @@ extern int Render_GetDirectoryEntry(int *,int,int);
 extern s32 Render_LocatePackSection(s32,s32,s32,s32 *);
 extern s32 D_00285160;
 extern char D_800F41F0;
-void func_8044B7C0_de(LevelCode8044ACCC *arg0, s32 arg1) {
+void Items_LoadSceneResources(LevelCode8044ACCC *arg0, s32 arg1) {
     s32 *sp20;
     s32 *sp24;
     void **temp_v0_10;
@@ -117,7 +117,7 @@ void func_8044B7C0_de(LevelCode8044ACCC *arg0, s32 arg1) {
         func_8020A604_de(*temp_v0_10);
         Scene_ReleaseResource(0, temp_v0_10);
     }
-    func_8044CFF8_de((Shared_World *)arg0, arg1);
+    Items_InitPreview((Shared_World *)arg0, arg1);
     D_800CD764_de = 1;
     func_8044B600_de(arg0, arg0->pad1B410 + 0x40, 0xDAC);
     func_8044B600_de(arg0, arg0->pad1B410 + 0x5C, 0xDAD);

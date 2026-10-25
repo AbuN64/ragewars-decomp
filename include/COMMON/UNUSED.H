@@ -3685,8 +3685,8 @@ typedef struct State_func_8042F91C_de State_func_8042F91C_de;
 struct State_func_8043577C_de;
 typedef struct State_func_8043577C_de State_func_8043577C_de;
 
-struct State_func_8044D054_de;
-typedef struct State_func_8044D054_de State_func_8044D054_de;
+struct ItemsPreviewStateA;
+typedef struct ItemsPreviewStateA ItemsPreviewStateA;
 
 struct StyleNextState;
 typedef struct StyleNextState StyleNextState;
@@ -17228,7 +17228,7 @@ struct State_func_8043577C_de {
     char pad54[0x341C];
     s32 unk3470;
 };
-struct State_func_8044D054_de;
+struct ItemsPreviewStateA;
 struct StyleNextState;
 struct StyleNextState {
     char a[0x14];

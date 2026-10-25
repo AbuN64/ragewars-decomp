@@ -7,15 +7,15 @@
 
 
 extern int D_800CC380;
-extern void func_8044BE04_de(void);
-void func_8044D528_de(State_func_8044D528_de *state,int selection,int mode) {
+extern void Items_LoadSceneLight(void);
+void Items_SetSelection(ItemsSelectionState *state,int selection,int mode) {
  state->active=1;
  state->mode=mode;
  state->selection=selection;
  if(mode==2 && selection!=999)Render_PlayFlatSound(0x21C);
 }
-void func_8044D580_de(State_func_8044D528_de *state) {
- func_8044BE04_de();
+void func_8044D580_de(ItemsSelectionState *state) {
+ Items_LoadSceneLight();
  D_800CC380=(state->input->value>>2)&1;
 }
 
@@ -25,7 +25,7 @@ void func_802458C4_de();                                  /* extern */
 void func_802458D8_de();                                  /* extern */
 void func_8028787C_de(void *, s32);                       /* extern */
 
-void func_8044D5C4_de(State_func_8044D5C4_de *arg0) {
+void Items_UpdatePendingObjects(ItemsPendingState *arg0) {
  s32 i,n;
  func_802458D8_de();
  n=arg0->unk11C0;

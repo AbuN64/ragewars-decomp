@@ -18,7 +18,7 @@ extern void func_80234FEC_de(void *);
    the block at 0x570 of each, then the group's own block at 0x5B0, all with func_8044A7D0_de. */
 
 
-extern void func_8044A7D0_de(char *);
+extern void Items_InitEntryPool(char *);
 
 void Items_ResetPlayers(func_8044B27C_S1 *actor) {
     char *parts;
@@ -40,11 +40,11 @@ void Items_ResetPlayers(func_8044B27C_S1 *actor) {
     func_80234FEC_de(parts);
 }
 
-void func_8044A6CC_de(Triple *group) {
+void Items_InitGroupPools(Triple *group) {
     int i;
 
     for (i = 0; i < group->z; i++) {
-        func_8044A7D0_de((char *)(i * 0xED8 + group->y + 0x570));
+        Items_InitEntryPool((char *)(i * 0xED8 + group->y + 0x570));
     }
-    func_8044A7D0_de((char *)group + 0x5B0);
+    Items_InitEntryPool((char *)group + 0x5B0);
 }

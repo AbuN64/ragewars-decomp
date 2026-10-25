@@ -83,7 +83,7 @@ static inline Message *post_lines(void *owner, void *pool, u8 *text, s32 kind, f
 
 extern void *D_80140FE8_de;
 
-extern void func_8044A7D0_de(int a);
+extern void Items_InitEntryPool(int a);
 
 extern u32 func_802337D0_de(s32);
 
@@ -165,7 +165,7 @@ void func_80239B64_de(s32 arg0) {
 
 /** Thin wrapper forwarding an offset argument to func_8044A7D0_de. */
 void func_80239C20_de(int arg0) {
-    func_8044A7D0_de(arg0 + 0x570);
+    Items_InitEntryPool(arg0 + 0x570);
 }
 
 void *func_80239C3C_de(void *screenMessageOwner, struct ScreenMessagePool *screenMessagePool) {

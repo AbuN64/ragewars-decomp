@@ -10,7 +10,7 @@
 
 
 
-void func_8044A7D0_de(ObjRecAt8C8 *pool) {
+void Items_InitEntryPool(ObjRecAt8C8 *pool) {
     s32 i;
     struct EntryCode8044ACCC *entry;
 

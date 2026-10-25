@@ -15,7 +15,7 @@ extern void func_8044A170_de(void *);
 
 
 
-void *func_8044A738_de(struct Draw *owner) {
+void *Items_RecycleModel(struct Draw *owner) {
     void *object = owner->model;
 
     if (object != 0) {

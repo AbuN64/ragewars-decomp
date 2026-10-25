@@ -16,8 +16,8 @@
 
 extern char D_00285160[],D_800C50CC_de[],D_800F41F0[];
 extern int func_80264B6C_de(void);
-extern void func_802BD3A0_de(void *,int,int),func_8044D528_de(State_func_8044D0F0_de *,int,int);
-void func_8044D0F0_de(State_func_8044D0F0_de *state) {
+extern void func_802BD3A0_de(void *,int,int),Items_SetSelection(ItemsPreviewStateB *,int,int);
+void Items_LoadPreviewBufferB(ItemsPreviewStateB *state) {
  int *resource;
  int id;
  if(func_80264B6C_de()==0) {
@@ -32,13 +32,13 @@ void func_8044D0F0_de(State_func_8044D0F0_de *state) {
 extern char D_00285160[],D_800C50CC_de[],D_800F41F0[];
 extern int func_80264B6C_de(void);
 extern void func_802BD3A0_de(void *,int,int);
-extern void func_8044D528_de(State_func_8044D0F0_de *,int,int);
+extern void Items_SetSelection(ItemsPreviewStateB *,int,int);
 
 
-void func_8044D178_de(State_func_8044D0F0_de *state,int selection) {
+void func_8044D178_de(ItemsPreviewStateB *state,int selection) {
  if(selection!=state->selection) {
   state->changed=0;
-  func_8044D528_de(state,~selection,0);
+  Items_SetSelection(state,~selection,0);
  }
 }
 

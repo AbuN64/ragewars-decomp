@@ -347,8 +347,8 @@ void Render_ResetPlayerWeapons(struct Player *player) {
 extern f32 D_800C2340_de;
 extern s32 D_801371D4;
 extern char D_8013B364[];
-extern void func_8044A07C_de(void *);
-extern void func_8044D528_de(void *, s32, s32);
+extern void Items_ReleaseObjectHandles(void *);
+extern void Items_SetSelection(void *, s32, s32);
 extern f32 Particle_GetPointDistance(void *, void *);
 extern s32 func_8020CB3C_de(void *, void *);
 extern void func_802647E8_de(void *, s32);
@@ -370,7 +370,7 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
     Shared_ActorView *other;
     s32 floor;
     s32 cell;
-    func_8044A07C_de(player);
+    Items_ReleaseObjectHandles(player);
     func_802647E8_de(((Shared_ActorView *)player)->controller, 0);
     world = &D_8011FE88;
     if (reset) {
@@ -405,7 +405,7 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
             goto fallback;
         }
         if (single.kind != D_801371D4) {
-            func_8044D528_de(world, model, scale);
+            Items_SetSelection(world, model, scale);
             goto done;
         }
         ((Shared_ActorView *)player)->weapon.position0 = single.pos;
@@ -418,7 +418,7 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
     Ovlgame_InitActorHudState(player);
     goto done;
 fallback:
-    func_8044D528_de(&D_8011FE88, model, scale);
+    Items_SetSelection(&D_8011FE88, model, scale);
 done:
     cell = func_8020CB3C_de(D_8013B364, &((Shared_ActorView *)player)->position.vector);
     ((AiController *)((Shared_ActorView *)player)->owner)->current = cell;

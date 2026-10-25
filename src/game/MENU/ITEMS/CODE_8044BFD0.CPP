@@ -65,7 +65,7 @@ void Items_InitEntryBatch(EntryBlock *batch, s32 *entries, s32 count) {
  * cleared words; the free list takes all slots, then the live list and the three group lists are emptied. Sets
  * the unit quad D_8011AF78 (corner signs and texture corners per vertex, white), builds the matrix D_8011AF38
  * for a quarter turn and records the owner word. */
-void func_8044B400_de(SlotPool *pool, s32 owner) {
+void Items_InitSlotPool(SlotPool *pool, s32 owner) {
     s32 i;
     s32 corner;
 

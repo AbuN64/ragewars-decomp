@@ -66,9 +66,9 @@ extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
 
 extern struct Shape_func_8021A2D4_de_2 D_801462CC;
 
-extern void func_8044D054_de(char *);
+extern void Items_LoadPreviewBufferA(char *);
 
-extern void func_8044D0F0_de(char *);
+extern void Items_LoadPreviewBufferB(char *);
 
 void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
     Shared_Placed spawns[8];
@@ -302,9 +302,9 @@ void Items_LoadGridCells(Level_func_8044CD8C_de *level) {
     }
 }
 
-void func_8044CFF8_de(Shared_World *world, s32 level) {
-    func_8044D054_de((char *)world);
-    func_8044D0F0_de((char *)world);
+void Items_InitPreview(Shared_World *world, s32 level) {
+    Items_LoadPreviewBufferA((char *)world);
+    Items_LoadPreviewBufferB((char *)world);
     world->previewState = 0;
     world->previewTimer = 0x15;
     world->previewStart = D_801462CC.field_0;

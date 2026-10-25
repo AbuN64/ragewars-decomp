@@ -51,7 +51,7 @@ extern char D_8014561C[];
 
 extern SharedPlayer *func_8022A5C0_de(char *pool, PakMenuSlot *slot);
 
-extern void func_8044A0C4_de(SharedPlayer *player, s32 team);
+extern void Items_StartPlayerAnimation(SharedPlayer *player, s32 team);
 
 extern void func_804427C4_de(char *text, Menu_func_80408C4C_de *menu, char *format);
 
@@ -94,7 +94,7 @@ extern void func_802647E8_de(PakMenuSlot *slot, s32 mode);
 
 extern void func_80264788_de(s32 ch);
 
-extern void func_8044D528_de(char *, s32, s32);
+extern void Items_SetSelection(char *, s32, s32);
 
 struct GameSession;
 extern void func_8044DDD4_de(struct GameSession *);
@@ -145,7 +145,7 @@ s32 func_80408C4C_de(void *unused, Menu_func_80408C4C_de *menu) {
         for (i = 0; i < 8; i++) {
             profile->name[i] = D_8014D4B4[i];
         }
-        func_8044A0C4_de(player, D_8014D490);
+        Items_StartPlayerAnimation(player, D_8014D490);
         func_804427C4_de(player->views5DC.view5DC_7.messages + 0x554, menu, D_0044FA6C);
         return 1;
     }
@@ -178,7 +178,7 @@ s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu) {
                 ch = menu->slot->unk4;
             }
             func_80264788_de(ch);
-            func_8044D528_de(&D_8011FE88, menu->player->menu, 2);
+            Items_SetSelection(&D_8011FE88, menu->player->menu, 2);
             return 1;
         }
         func_8044DDD4_de(&D_8011FAC0);
@@ -191,7 +191,7 @@ s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu) {
     }
     if (D_80153788 == 5) {
         func_80264788_de(ch);
-        func_8044D528_de(&D_8011FE88, D_8011FE88.selectionValues[3], 2);
+        Items_SetSelection(&D_8011FE88, D_8011FE88.selectionValues[3], 2);
     }
     if (D_8015375C != 0 && D_80153788 == 6) {
         D_8014ADA0 = 1;

@@ -13,7 +13,7 @@ extern s32 D_800E28D0;
 
 extern s32 D_800E1E20;
 
-extern func_802077F4_S2 *func_80442DDC_de(void *, s32);
+extern func_802077F4_S2 *Items_GetWidgetStyle(void *, s32);
 
 
 extern void func_8044208C_de(void *, ItemRecAt20V1 *, void *, MenuStyle *);
@@ -55,7 +55,7 @@ void func_8043C9AC_de(void *menu, ItemRecAt20V1 *item, void *third, MenuStyle *s
     unsigned int bits;
 
     if (D_800E5CA0.timer <= (6.0f)) {
-        width = func_80442DDC_de(menu, 0)->unk4 * (f32)D_800E28D0 * (0.0035211266949772835f);
+        width = Items_GetWidgetStyle(menu, 0)->unk4 * (f32)D_800E28D0 * (0.0035211266949772835f);
         x = (f32)item->x + (f32)D_800E5CA0.value * width;
         D_800E1E20 = -1;
         alpha = style->alpha * (style->fade * (128.0f));

@@ -105,7 +105,7 @@ extern void func_8023EE00_de(void);
 extern s32 func_80265964_de(s32 size);
 extern void Items_ResetActorPools(void *players, s32 arg1);
 extern void func_804499B0_de(void *menu, s32 arg1, s32 arg2);
-extern void func_8044B7C0_de(Shared_World *world, s32 resource);
+extern void Items_LoadSceneResources(Shared_World *world, s32 resource);
 extern void func_8044AE70_de(void);
 extern void Ovlgame_ResetHudCharTables(void *hud);
 extern void Pak_AllocateScratchBuffer(void);
@@ -177,7 +177,7 @@ void Render_RunGameLoop(GameSession *session) {
     session->resource = func_80265964_de(0x18) & 0x3FFFFFFF;
     Items_ResetActorPools(session->players, 0);
     func_804499B0_de(session->menu, 0, 0);
-    func_8044B7C0_de(&D_8011FE88, session->resource);
+    Items_LoadSceneResources(&D_8011FE88, session->resource);
     if (D_800CBC11[0] == 0) {
         func_8044AE70_de();
     }

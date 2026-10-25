@@ -12,7 +12,7 @@ typedef struct LevelBlock {
     s32 count;
     LevelActor objects[1];
 } LevelBlock;
-struct State_func_8044D5C4_de {
+struct ItemsPendingState {
     char p[0x11C0];
     s32 unk11C0;
     s32 unk11C4;
@@ -81,7 +81,7 @@ struct func_8044CBE0_S1 {
     char pad100[0x1B3FC];
     IntrusiveList unk1B500;
 };
-struct State_func_8044D0F0_de {
+struct ItemsPreviewStateB {
     char pad[0x3C];
     int resource;
     char pad40[8];
@@ -98,7 +98,7 @@ struct ObjA {
     void **block;
     char pad24[0xE8 - 0x24];
 };
-struct State_func_8044D528_de {
+struct ItemsSelectionState {
     char pad[0x1B2B0];
     Resource_func_80419E54_de *input;
     char pad1b2b4[0x15C];
@@ -199,7 +199,7 @@ struct LevelCode8044ACCC {
     char pad1B6A8[4];
     s32 unk1B6AC;
 };
-struct State_func_8044D054_de {
+struct ItemsPreviewStateA {
     char pad0[4];
     s32 unk4;
     char pad8[48];

@@ -18,7 +18,7 @@ struct Shared_Placed;
 struct func_8044CD58_S2;
 typedef struct func_8044CD58_S2 func_8044CD58_S2;
 
-struct State_func_8044D5C4_de;
+struct ItemsPendingState;
 
 struct ObjB;
 typedef struct ObjB ObjB;
@@ -162,8 +162,8 @@ struct Bucket {
 struct Floats;
 typedef struct Floats Floats;
 
-struct State_func_8044D528_de;
-typedef struct State_func_8044D528_de State_func_8044D528_de;
+struct ItemsSelectionState;
+typedef struct ItemsSelectionState ItemsSelectionState;
 
 struct Node_Items_FindPlacedObjectsByKey;
 
@@ -202,7 +202,7 @@ typedef union func_8044CBE0_S1_U1B500 func_8044CBE0_S1_U1B500;
 
 struct func_8044CBE0_S1;
 
-struct State_func_8044D0F0_de;
+struct ItemsPreviewStateB;
 
 struct World;
 
@@ -210,8 +210,8 @@ struct World;
 struct Node_Items_FindPlacedObjectsByKey;
 typedef struct Node_Items_FindPlacedObjectsByKey Node_Items_FindPlacedObjectsByKey;
 
-struct State_func_8044D0F0_de;
-typedef struct State_func_8044D0F0_de State_func_8044D0F0_de;
+struct ItemsPreviewStateB;
+typedef struct ItemsPreviewStateB ItemsPreviewStateB;
 
 struct State_func_8044A170_de;
 typedef struct State_func_8044A170_de State_func_8044A170_de;
@@ -313,7 +313,7 @@ struct Shared_Placed;
 
 extern short D_8010F320;
 
-struct State_func_8044D528_de;
+struct ItemsSelectionState;
 
 struct func_8044D9DC_S1;
 typedef struct func_8044D9DC_S1 func_8044D9DC_S1;
@@ -338,8 +338,8 @@ struct func_8044B388_S1 {
 struct func_8044ADC0_S2;
 typedef struct func_8044ADC0_S2 func_8044ADC0_S2;
 
-struct State_func_8044D5C4_de;
-typedef struct State_func_8044D5C4_de State_func_8044D5C4_de;
+struct ItemsPendingState;
+typedef struct ItemsPendingState ItemsPendingState;
 
 struct ObjRecAt8C8;
 typedef struct ObjRecAt8C8 ObjRecAt8C8;
@@ -364,13 +364,13 @@ struct func_8044D9DC_S1 {
     func_8022BC04_S3 unk8;
 };
 
-struct Object_func_8044A07C_de;
-struct Object_func_8044A07C_de {
+struct ItemsHandleOwner;
+struct ItemsHandleOwner {
     char pad[0x11BC];
     s32 first;
     s32 second;
 };
-typedef struct Object_func_8044A07C_de ResourceHandleOwner;
+typedef struct ItemsHandleOwner ResourceHandleOwner;
 
 struct WorldRecAt1B40C;
 typedef struct WorldRecAt1B40C WorldRecAt1B40C;
@@ -385,7 +385,6 @@ struct ObjB {
 };
 
 struct Shared_World;
-extern void func_8044CFF8_de(struct Shared_World *world, s32 level);
 extern void **func_802540F4_de(s32,void **,s32,void *,s32);
 extern s32 D_0044D804;
 extern s32 D_0044D934;

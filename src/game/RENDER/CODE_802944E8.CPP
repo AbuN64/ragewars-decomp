@@ -27,7 +27,7 @@ extern void func_8023EE00_de(void);
 
 extern void func_802954E0_us_rev1(void);
 
-extern void func_8044D528_de(void *arg0, s32 arg1, s32 arg2);
+extern void Items_SetSelection(void *arg0, s32 arg1, s32 arg2);
 
 extern s32 D_800D2970;
 
@@ -94,7 +94,7 @@ void func_80294614_de(GameSession *arg0) {
     D_800CD744_de = f;
     D_800D298C = f;
     D_800CD740_de = f;
-    func_8044D528_de(dst, field, 0);
+    Items_SetSelection(dst, field, 0);
     arg0->mode = 0xD;
     D_80154048 = 0;
 }
@@ -125,8 +125,8 @@ void Render_StartRound(GameSession *session) {
     D_800CD744_de = roundTimerConstant();
     D_800D298C = roundTimerConstant();
     D_800CD740_de = roundTimerConstant();
-    func_8044CFF8_de(&D_8011FE88, session->resource);
-    func_8044D528_de(&D_8011FE88, session->selector, 0);
+    Items_InitPreview(&D_8011FE88, session->resource);
+    Items_SetSelection(&D_8011FE88, session->selector, 0);
 }
 
 #if !(defined(VERSION_US_REV1))

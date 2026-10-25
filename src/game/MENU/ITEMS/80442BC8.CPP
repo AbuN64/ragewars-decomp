@@ -213,7 +213,7 @@ void func_80442D10_de(CMenuItem *w, WidgetDescriptor *d, char **arena, int id, i
  }
 }
 
-void *func_80442DDC_de(ObjRecAt8V4 *arg0) {
+void *Items_GetWidgetStyle(ObjRecAt8V4 *arg0) {
  s32 index=0;
  switch(arg0->flags & 0x3fe0) {
  case 0x20: break;

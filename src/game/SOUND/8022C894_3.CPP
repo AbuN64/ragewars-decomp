@@ -9,7 +9,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/OBJB.H"
-extern void func_8044A07C_de(ResourceHandleOwner *object);
+extern void Items_ReleaseObjectHandles(ResourceHandleOwner *object);
 
 extern s32 D_800CED30;
 
@@ -39,7 +39,7 @@ void func_8022D290_de(Actor_func_8022D290_de *widget) {
     s32 temp_v0;
 
     widget->unk_0x0860 = 0;
-    func_8044A07C_de((s32) widget);
+    Items_ReleaseObjectHandles((s32) widget);
     temp_v0 = widget->flags & 0xFF7FFFFF;
     widget->flags = temp_v0;
     widget->unk_0x001C = 0;

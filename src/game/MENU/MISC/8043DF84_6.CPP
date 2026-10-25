@@ -16,7 +16,7 @@ extern char D_0044FA6C[];
 
 extern s32 func_8026437C_de(s32);
 extern s8 func_80442488_de(Menu_func_8043F37C_eu *, s32, s32, s32, s32, s32);
-extern void func_8044A0C4_de(SharedPlayer *, s32);
+extern void Items_StartPlayerAnimation(SharedPlayer *, s32);
 extern void func_8044214C_de(void *, s32, s32);
 extern void func_804427C4_de(void *, Menu_func_8043F37C_eu *, char *);
 
@@ -25,13 +25,13 @@ s32 func_8043F37C_eu(void *arg0, Menu_func_8043F37C_eu *menu, void *arg2) {
     ObjRecAt80 *settings = player->views5D8.view5D8_7.settings;
 
     if (func_8026437C_de(menu->input) != 0) {
-        func_8044A0C4_de(player, settings->unk80);
+        Items_StartPlayerAnimation(player, settings->unk80);
         Render_PlayFlatSound(D_800E5DFA[player->views5DC.view5E0_10.slot].mode);
         func_804427C4_de(arg2, menu, D_0044FA6C);
         return 1;
     }
     settings->unk80 = func_80442488_de(menu, settings->unk80, 1, 0, 18, 1);
-    func_8044A0C4_de(player, settings->unk80);
+    Items_StartPlayerAnimation(player, settings->unk80);
     func_8044214C_de(arg0, 11, settings->unk80);
     return 0;
 }

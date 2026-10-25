@@ -62,7 +62,7 @@ void func_80290548_de(struct ListNode80290528 *);
 s32 func_802A01E8_de(void);
 s32 Ovlgame_ResetPlayerForRound(void *, s8, s32);         /* extern */
 void func_8044972C_de(void *);
-void func_8044A07C_de(void *);
+void Items_ReleaseObjectHandles(void *);
 
 
 extern s32 D_8011D8D0;
@@ -159,7 +159,7 @@ void func_8021B468_de(struct Shared_ActorView *player, void *attacker, s32 arg2,
     }
     ((struct Shared_ActorView *)player)->field1218 = 0;
     func_80278D78_de(attacker, 1, attacker);
-    func_8044A07C_de(player);
+    Items_ReleaseObjectHandles(player);
     func_8022B530_de((s32)player);
     ((struct Shared_ActorView *)player)->stun = 0;
     ((struct Shared_ActorView *)player)->markerTime = 0;

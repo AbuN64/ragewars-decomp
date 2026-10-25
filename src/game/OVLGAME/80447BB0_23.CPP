@@ -92,7 +92,7 @@ extern void *D_800E4680;
 extern char D_0044FC04[], D_0044FB2C[], D_0044FF80[];
 struct RespawnPlayer;
 extern s32 func_80264B6C_de(void);
-extern void *func_8044A738_de(void *);
+extern void *Items_RecycleModel(void *);
 extern void func_8021836C_de(void *);
 extern void func_80218E98_de(void *);
 extern u32 func_8022F454_de(void *, s32);
@@ -124,7 +124,7 @@ void Ovlgame_ResetPlayerForRound(void *actor, s32 character) {
     FIELD(s32, actor, 0x5D0) = 1;
     FIELD(s32, actor, 0x5E0) = character;
     if (FIELD(s32, actor, 0x1450) == 0) {
-        FIELD(void *, actor, 0x5DC) = func_8044A738_de(&D_80145088);
+        FIELD(void *, actor, 0x5DC) = Items_RecycleModel(&D_80145088);
         if (FIELD(s32, &D_80145088, 0x18C4) != 0) {
             FIELD(s32, actor, 0x1450) = 1;
         }

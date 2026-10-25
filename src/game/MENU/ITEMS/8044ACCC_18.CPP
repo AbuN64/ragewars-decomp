@@ -14,7 +14,7 @@
 extern void *func_8025CC6C_de();
 extern void func_8025CA24_de(void *, s32);
 
-void func_8044A07C_de(struct Object_func_8044A07C_de *object) {
+void Items_ReleaseObjectHandles(struct ItemsHandleOwner *object) {
     func_8025CA24_de(func_8025CC6C_de(), object->first);
     object->first = 0;
     func_8025CA24_de(func_8025CC6C_de(), object->second);
@@ -39,7 +39,7 @@ extern s32 D_801468F4;
 
 
 
-void func_8044A0C4_de(Player *arg0, s32 arg1) {
+void Items_StartPlayerAnimation(Player *arg0, s32 arg1) {
     s32 var_a2;
 
     arg0->state = arg1;

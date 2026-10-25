@@ -343,7 +343,7 @@ void func_8043C688_de(void) {
         "addu      $a1, $s0, $zero\n"
         "lui        $a0, %hi(D_8011FE88)\n"
         "addiu      $a0, $a0, %lo(D_8011FE88)\n"
-        "jal        func_8044D528_de\n"
+        "jal        Items_SetSelection\n"
         "addiu     $a2, $zero, 0x2\n"
         "j          .Lauto_8043C984\n"
         "addu      $v0, $zero, $zero\n"
@@ -538,7 +538,7 @@ struct GameSession;
 extern void func_80293284_de(struct GameSession *menu, s32 target);
 extern s32 func_802934F8_de(void);
 
-extern void func_8044D528_de(void *menu, s32 target, s32 arg2);
+extern void Items_SetSelection(void *menu, s32 target, s32 arg2);
 
 static inline s32 levelBit(s32 level) {
     s32 bit;
@@ -648,7 +648,7 @@ s32 func_8043C688_de(s32 arg0, Shared_MenuInput *pad) {
             return 1;
         }
         if (func_802934F8_de() != 0) {
-            func_8044D528_de(&D_8011FE88, target, 2);
+            Items_SetSelection(&D_8011FE88, target, 2);
             return 0;
         }
         rules = &D_801462C8;

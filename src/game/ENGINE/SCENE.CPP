@@ -81,14 +81,14 @@ extern s32 func_802AA730_de();
 extern void func_802AA760_de();
 extern void func_804037E8_de();
 extern void func_80449E18_de();
-extern void func_8044A6CC_de();
+extern void Items_InitGroupPools();
 extern void func_8044ADF0_de();
 extern void func_8044B0E0_de();
 extern void Items_InitEntryBatch();
-extern void func_8044B400_de();
-extern void func_8044BE04_de();
-extern void func_8044BF90_de();
-extern void func_8044D5C4_de();
+extern void Items_InitSlotPool();
+extern void Items_LoadSceneLight();
+extern void Items_FreeSceneResources();
+extern void Items_UpdatePendingObjects();
 extern void func_8044D668_de();
 extern void Ovlgame_InitEffectPool();
 extern void func_8044DF60_de();
@@ -270,13 +270,13 @@ void func_80286AA8_de(void *table, s32 target, s32 arg2) {
     func_8028DA74_de(table);
     func_80253908_de(0);
     if ((((struct SharedRecAt1B92C *)(table))->unk1B40C) != -1) {
-        func_8044BF90_de(table);
+        Items_FreeSceneResources(table);
     }
     func_80253908_de(0);
     D_800CD730 = 0;
     func_8025476C_de(8);
     func_8028D64C_de(table);
-    func_8044B400_de(&((struct SharedRecAt1B92C *)table)->address1B08, *(((struct SharedRecAt1B92C *)(table))->unkB4));
+    Items_InitSlotPool(&((struct SharedRecAt1B92C *)table)->address1B08, *(((struct SharedRecAt1B92C *)(table))->unkB4));
     var_s2 = 0;
     Ovlgame_InitEffectPool(&((struct SharedRecAt1B92C *)table)->address11778);
     func_8044ADF0_de(&((struct SharedRecAt1B92C *)table)->address15388);
@@ -444,7 +444,7 @@ scene_size_done:
     temp_v0_11 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 0, resourceKey, table, 0, &D_800C5174_de);
     (((struct SharedRecAt1B92C *)(table))->unkC8) = temp_v0_11;
     (((struct SharedRecAt1B92C *)(table))->unk1B2B0) = (void *) *temp_v0_11;
-    func_8044BE04_de(table);
+    Items_LoadSceneLight(table);
     resource_count = *(((struct SharedRecAt1B92C *)(table))->unk60);
     D_800CC380 = ((u8) (((struct SharedRecAt10V2 *)(((struct SharedRecAt1B92C *)(table))->unk1B2B0))->unk10) >> 2) & 1;
     if (resource_count >= 9) {
@@ -648,7 +648,7 @@ block_122:
         D_801462C8.counters.teamColour = func_802A01E8_de(var_a0_3) % 3;
     }
     (((struct SharedRecAt1B92C *)(table))->unk0) = 2;
-    func_8044D5C4_de(table);
+    Items_UpdatePendingObjects(table);
     temp_s4 = (((struct SharedRecAt1B92C *)(table))->unk140);
     var_s1_3 = (((struct SharedRecAt1B92C *)(table))->unk13C);
     (((struct SharedRecAt1B92C *)(table))->unk0) = 3;
@@ -698,7 +698,7 @@ block_122:
     (((struct SharedRecAt1B92C *)(table))->unk0) = 4;
     func_80449E18_de(&D_80145040);
     group = &D_80145040.object;
-    func_8044A6CC_de(group);
+    Items_InitGroupPools(group);
     func_80236874_de(group);
 }
 
