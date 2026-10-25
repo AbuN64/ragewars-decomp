@@ -11,7 +11,7 @@
 #include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "FRONTEND/8041BEA8_6.H"
 extern struct FourPlayerResultsScreen *D_800E59E0;
-extern Shared_PlayerSettingsRecord D_80146398[];
+extern Shared_PlayerSettingsRecord g_playerSettings[];
 extern struct RowRecAt54 D_800E3A58[];
 extern struct StateFlags D_800E59E6[][19];
 extern f32 D_800DDF90_de;
@@ -74,7 +74,7 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
         Frontend_SetWidgetFlag08(bar, 0);
         widget = func_8040EC30_de(D_800E59E0->window, D_800E59E6[player][0].value);
         widget->alpha = 0x6E;
-        config = &D_80146398[player];
+        config = &g_playerSettings[player];
         if (config->enabled == 1) {
             row = Frontend_FindKeyIndex(config->character);
             scale.x = D_800E3A58[row].scale[player];
@@ -102,7 +102,7 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
     Frontend_SetWidgetFlag08(widget, 0);
     screen = D_800E59E0;
     for (player = 0; player < 4; player++) {
-        config = &D_80146398[player];
+        config = &g_playerSettings[player];
         if (config->enabled == 1) {
             switch (config->character) {
             case 14:
@@ -118,7 +118,7 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
     }
     func_8043B96C_de();
     for (player = 0; player < 4; player++) {
-        config = &D_80146398[player];
+        config = &g_playerSettings[player];
         if (config->enabled == 1) {
             func_8043B0CC_de(player);
         }
@@ -186,7 +186,7 @@ s32 Frontend_StartFourPlayerResults(void) {
         badgeOffset += sizeof(D_800E59E0->badges[0]);
     }
     for (i = 0; i < 4; i++) {
-        config = &D_80146398[i];
+        config = &g_playerSettings[i];
         if (config->enabled == 1) {
             widget = func_8040EC30_de(D_800E59E0->window, D_800E19DE[i * 0x26]);
             Frontend_SetWidgetFlag40(widget, 0);
@@ -285,7 +285,7 @@ s32 Frontend_UpdateFourPlayerResults(void) {
 }
 
 #include "gbi.h"
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern s32 D_800E28D0;
 extern void func_8041C7F4_de(struct ResultsPlayerPanel *);
 extern s32 Frontend_GetModelRecordCount(char *);
@@ -309,11 +309,11 @@ s32 Frontend_DrawFourPlayerResults(void *window, void *item, s32 event) {
         D_800D15E4[3] = 255.0f;
         for (i = 0; i < 4; i++) {
             if (D_800E59E0->panels[i].state == 1 || D_800E59E0->panels[i].state == 2) {
-                gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, D_800E41C0[i].field_0, D_800E41C0[i].field_4, D_800E41C0[i].field_8, D_800E41C0[i].field_C);
+                gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, D_800E41C0[i].field_0, D_800E41C0[i].field_4, D_800E41C0[i].field_8, D_800E41C0[i].field_C);
                 func_8041C7F4_de(&D_800E59E0->panels[i]);
             }
         }
-        gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
+        gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
         for (i = 0; i < 4; i++) {
             if (D_800E59E0->panels[i].state == 1 && Frontend_GetModelRecordCount(D_800E59E0->badges[i]) != 0) {
                 D_800D15E0 = 1;

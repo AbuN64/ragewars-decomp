@@ -34,7 +34,7 @@ void Weapons_ApplyWeaponSwitch(void *part, void *body) {
     state = ((Shared_ActorView *)part)->self;
     index = ((Shared_ActorView *)state)->nextWeapon;
     unsigned_index = (u16)((Shared_ActorView *)state)->nextWeapon;
-    if ((((Shared_ActorView *)state)->selectedAction != index) || (D_8011FE88.mode != 4)) {
+    if ((((Shared_ActorView *)state)->selectedAction != index) || (g_world.mode != 4)) {
         if (func_80232780_de(index) != 0) {
             ((Shared_ActorView *)state)->weaponChanged = 1;
         } else if (func_802327A0_de(index) != 0) {

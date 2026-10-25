@@ -118,9 +118,9 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
         if (actor != 0) {
             saved = actor->prefix;
             actor->prefix.position = target;
-            func_80288470_de(&D_8011FE88);
+            func_80288470_de(&g_world);
             collisionHit = Camera_MoveActorWithCollision(actor, eye.x, eye.y, eye.z, D_80100030);
-            func_8028D888_de(&D_8011FE88);
+            func_8028D888_de(&g_world);
             actor->prefix = saved;
             if (collisionHit != 0) {
                 eye = *(CVector3 *)&D_801001F8;

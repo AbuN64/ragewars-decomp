@@ -31,7 +31,7 @@ void func_80281A9C_de(s32 unused, Actor_func_80281A9C_de *actor, Actor_func_8028
     s32 i;
     s32 objectCount;
 
-    world = &D_8011FE88;
+    world = &g_world;
     objectCount = world->kind1Count;
     for (i = 0; i < objectCount; i++) {
         if (world->kind1[i]->active > 0) {
@@ -182,7 +182,7 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
             stepped[count++] = node;
         }
     }
-    if (D_80145088.status[7] != 0 || D_8011FE88.frozen != 0) {
+    if (D_80145088.status[7] != 0 || g_world.frozen != 0) {
         return;
     }
     D_800D2988 = savedStep;
@@ -296,7 +296,7 @@ typedef struct ParticleDrawWorld {
     IntrusiveList render;
 } ParticleDrawWorld;
 struct Shared_ParticleView;
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern Globals_func_804220A8_de D_80140FE8_de;
 extern s32 D_80140FF8, D_800D297C;
 extern float D_800C4E54_de;
@@ -317,11 +317,11 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, struct Shared_ParticleVie
     ParticleView *camera;
     u32 skipAttached;
     if (world->render.head != 0) {
-        gDPPipeSync(D_80110634++);
-        gDPSetAlphaDither(D_80110634++, G_AD_NOISE);
+        gDPPipeSync(g_displayListCursor++);
+        gDPSetAlphaDither(g_displayListCursor++, G_AD_NOISE);
         Render_SetColorDither(0x80);
-        gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
-        gSPGeometryMode(D_80110634++, 0x60400, 0);
+        gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
+        gSPGeometryMode(g_displayListCursor++, 0x60400, 0);
         for (node = world->render.head; node != 0; node = node->next) {
             visible = 0;
             built = node->particle.flags & 0x100000;
@@ -395,10 +395,10 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, struct Shared_ParticleVie
                 }
             } while (0);
         }
-        gDPPipeSync(D_80110634++);
-        gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
+        gDPPipeSync(g_displayListCursor++);
+        gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
         Render_SetColorDither(0);
-        gDPSetAlphaDither(D_80110634++, G_AD_NOTPATTERN);
+        gDPSetAlphaDither(g_displayListCursor++, G_AD_NOTPATTERN);
     }
 }
 

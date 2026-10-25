@@ -27,7 +27,7 @@ void func_8020520C_de(LevelActor *source, void *dest) {
 }
 
 void func_8020524C_de(LevelActor *actor, void *arg1) {
-    if (Render_TestActorStateBit(&D_8011FE88, actor) == 1) {
+    if (Render_TestActorStateBit(&g_world, actor) == 1) {
         Weapons_RequestActorState(actor, arg1, 1);
     } else {
         Weapons_RequestActorState(actor, arg1, 0);
@@ -64,7 +64,7 @@ void func_80205324_de(Obj5324 *arg0, s32 *arg1) {
     Shared_World *pFlag;
 
     rec = &arg0->holder->r;
-    pFlag = &D_8011FE88;
+    pFlag = &g_world;
     Render_SetActorStateBit(pFlag, arg0, 1);
     func_80278D78_de(arg0, 0x40000, arg0);
     if (arg1[1] == 0) {

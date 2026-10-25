@@ -60,7 +60,7 @@ s32 func_8041E100_de(void *unused0, void *unused1, void *unused2, s32 event) {
     D_80153F80[D_800E39C0->unk14].id = id;
     Resmgr_CopyString(D_80153F80[D_800E39C0->unk14].name, 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        D_800E381C[variant][id].text[D_80152789]
+        D_800E381C[variant][id].text[g_languageIndex]
 #else
         *D_800E381C[variant][id].text
 #endif
@@ -125,7 +125,7 @@ s32 func_8041E280_de(void *unused0, void *unused1, void *unused2, s32 event) {
     D_80153F80[D_800E39C0->unk14].id = id;
     Resmgr_CopyString(D_80153F80[D_800E39C0->unk14].name, 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        D_800E381C[variant][id].text[D_80152789]
+        D_800E381C[variant][id].text[g_languageIndex]
 #else
         *D_800E381C[variant][id].text
 #endif

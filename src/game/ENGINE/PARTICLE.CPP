@@ -20,7 +20,7 @@ extern Ground D_801041F0;
 
 extern f32 D_80115DEC;
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 
 extern s32 Camera_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, void *);
 
@@ -134,16 +134,16 @@ void func_8027E784_de(Shared_Particle *actor, struct Shared_ParticleView *view) 
     TranslateMatrix(matrix, point.x, point.y, point.z);
     Rsp_ConvertMatrixToFixed(matrix, model);
     {
-        Gfx *cmd = D_80110634++;
+        Gfx *cmd = g_displayListCursor++;
         gDPPipeSync(cmd);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetCycleType(cmd, G_CYC_2CYCLE);
     }
     func_8026992C_de(model, 1, (u32)alpha);
     {
-        Gfx *cmd = D_80110634++;
+        Gfx *cmd = g_displayListCursor++;
         gDPPipeSync(cmd);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetCycleType(cmd, G_CYC_1CYCLE);
     }
 }

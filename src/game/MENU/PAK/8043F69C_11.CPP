@@ -51,7 +51,7 @@ void func_804404A8_de(LayeredText *source, MenuOptionBox *position, MenuOptionBo
         position->left = center - first.width / 2;
     }
     draw = &current;
-    func_8043FE3C_de(draw, position, bounds, flags, RW_LOCALIZED_TEXT(*draw->text, draw->text, draw->text, D_80152789), 0);
+    func_8043FE3C_de(draw, position, bounds, flags, RW_LOCALIZED_TEXT(*draw->text, draw->text, draw->text, g_languageIndex), 0);
 }
 #endif
 
@@ -92,7 +92,7 @@ void func_804404A8_de(LayeredText *source, MenuOptionBox *position, MenuOptionBo
         position->left = center - first.width / 2;
     }
     draw = &current;
-    func_8043FE3C_de(draw, position, bounds, flags, RW_LOCALIZED_TEXT(*draw->text, draw->text, draw->text, D_80152789), 0);
+    func_8043FE3C_de(draw, position, bounds, flags, RW_LOCALIZED_TEXT(*draw->text, draw->text, draw->text, g_languageIndex), 0);
 }
 #endif
 
@@ -121,7 +121,7 @@ typedef struct PakModelContext {
     u8 reserved38[8];
     MenuModelScreen *screen;
 } PakModelContext;
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern s32 D_800D297C, D_800E28D0, D_800E1E20, D_800CD730;
 extern f32 literals_Engine_GetPlatformRoutePoint;
 extern s32 D_800CE430[];
@@ -141,7 +141,7 @@ extern void func_80249E28_de(void *object, void *camera);
 extern void Render_FlushModelBatch(void);
 static inline PreviewWidget *pakLoadModel(PakModelEntry *entry, s32 id, s32 variant) {
     StateRecAt47C *owner = entry->state;
-    PreviewWidget *source = (PreviewWidget *)func_8028CFA0_de(&D_8011FE88, id, variant);
+    PreviewWidget *source = (PreviewWidget *)func_8028CFA0_de(&g_world, id, variant);
     if (source == 0) {
         owner->active = 0;
         return 0;
@@ -181,7 +181,7 @@ void Pak_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unused
     def = entry->definition;
     draw = &widget->actor;
     if (widget->active == 0) return;
-    gSPMatrix(D_80110634++, &context->screen->matrices[D_800D297C], G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPMatrix(g_displayListCursor++, &context->screen->matrices[D_800D297C], G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH);
     {
         MenuModelScreen *screen = context->screen;
         ratioX = screen->width / (f32)D_800E28D0;
@@ -218,14 +218,14 @@ void Pak_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unused
         func_8025476C_de(1);
     }
     if (widget->selection == 0xB) {
-        func_8028B274_de(&D_8011FE88, draw, D_800CE430[draw->definition->character], 1);
+        func_8028B274_de(&g_world, draw, D_800CE430[draw->definition->character], 1);
     }
     if (D_800E1E20 != 4) {
         D_800E1E20 = 4;
-        gDPPipeSync(D_80110634++);
-        gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
-        gDPSetTexturePersp(D_80110634++, G_TP_PERSP);
-        gDPSetTextureFilter(D_80110634++, G_TF_BILERP);
+        gDPPipeSync(g_displayListCursor++);
+        gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
+        gDPSetTexturePersp(g_displayListCursor++, G_TP_PERSP);
+        gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
     }
     draw->scale = scaled;
     draw->position0 = placed;

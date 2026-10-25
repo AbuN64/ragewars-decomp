@@ -54,7 +54,7 @@ void func_80403458_de(void) {
         late = 1;
     }
     for (i = 0; i < n; i++) {
-        tables = &D_8011FE88;
+        tables = &g_world;
         if (entry[i].time <= -10000.0f) {
             continue;
         }
@@ -95,6 +95,6 @@ void func_80403458_de(void) {
         }
         entry[i].time = -20000.0f;
         item->flags = (item->flags | 1) & 0xEF;
-        func_8028BB1C_de(&D_8011FE88, item, 0);
+        func_8028BB1C_de(&g_world, item, 0);
     }
 }

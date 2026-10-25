@@ -22,7 +22,7 @@ typedef struct FrontendModelHeader {
  * the preview (Instance_LoadModel with extra) and stops. */
 void Frontend_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected) {
     Obj8041CAD8At190 *previewState = &preview->sub190;
-    Shared_World *scene = &D_8011FE88;
+    Shared_World *scene = &g_world;
     struct TableRecAt8 *list = scene->modelIds;
     s32 count = list->count;
     u16 *entries = list->entries;
@@ -36,7 +36,7 @@ void Frontend_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra
     s32 modelSize;
 
     for (i = 0; i < count && !found; i++) {
-        Shared_World *world = &D_8011FE88;
+        Shared_World *world = &g_world;
 
         if (entries[i] == id) {
             modelName = Render_GetDirectoryEntry(world->indexedDirectory, (void *)world->indexedBank, i);
@@ -123,7 +123,7 @@ void func_8041C7F4_de(Obj8041CAD8 *self) {
         saved = D_800CC380;
         D_800CC380 = 0;
         {
-            Gfx *g = D_80110634++;
+            Gfx *g = g_displayListCursor++;
             char *address = (char *)(u32)(D_800D297C << 6);
             address += 0x380;
             address += (u32)view;
@@ -135,10 +135,10 @@ void func_8041C7F4_de(Obj8041CAD8 *self) {
             func_8025476C_de(1);
         }
         func_80417138_de(0x33335);
-        gDPPipeSync(D_80110634++);
-        gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
-        gDPSetTexturePersp(D_80110634++, G_TP_PERSP);
-        gDPSetTextureFilter(D_80110634++, G_TF_BILERP);
+        gDPPipeSync(g_displayListCursor++);
+        gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
+        gDPSetTexturePersp(g_displayListCursor++, G_TP_PERSP);
+        gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
         func_8026D844_de();
         draw->unk8 = local20;
         draw->unk1C4 = local20;
@@ -183,13 +183,13 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s
     f32 ratio;
     Ret8028CFA0 *source;
     Resmgr_FillMemory(&local60, 0, sizeof(local60));
-    g = D_80110634++;
+    g = g_displayListCursor++;
     view = D_80141008;
     gSPMatrix(g, &view->matrices[D_800D297C], G_MTX_LOAD | G_MTX_PROJECTION);
     self->unk49C = 1;
     self->unk4A0 = arg8;
     draw = &self->sub190;
-    source = func_8028CFA0_de(&D_8011FE88, id, arg2, g);
+    source = func_8028CFA0_de(&g_world, id, arg2, g);
     if (source == 0) {
         self->unk478 = 0;
         return 0;

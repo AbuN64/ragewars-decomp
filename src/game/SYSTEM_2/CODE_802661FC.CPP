@@ -42,7 +42,7 @@ static inline s32 canDamage(DamageActor *source, DamageActor *actor) {
     if (!(source->flags & 0x310000)) {
         return 0;
     }
-    if (D_8011FE88.visibilityEnabled && !(actor->flags & 0x300000) && !(source->flags & 0x300000)) {
+    if (g_world.visibilityEnabled && !(actor->flags & 0x300000) && !(source->flags & 0x300000)) {
         return 0;
     }
     switch (source->definition->kind) {
@@ -170,7 +170,7 @@ static inline void applyShieldReaction(ReactionActor *target, ReactionPlayer *pl
                          0, 0, 0xE9, zero, rotation, effectPosition, 0, -1,
                          effectKind == 5 ? 3 : 1);
         effectPosition.x = 0.0f; effectPosition.y = 0.0f; effectPosition.z = 0.0f;
-        func_8028CE94_de(&D_8011FE88, player->sound + 0x140, 3,
+        func_8028CE94_de(&g_world, player->sound + 0x140, 3,
                          effectPosition, D_800C43D4_de, D_800C43D8_de);
     }
 }
@@ -649,7 +649,7 @@ s32 func_80267528_de(char *actor, char *target)
     if (!(flags & 0x310000)) {
         return 0;
     }
-    if (D_8011FE88.visibilityEnabled != 0 && !(source->flags & 0x300000) && !(flags & 0x300000)) {
+    if (g_world.visibilityEnabled != 0 && !(source->flags & 0x300000) && !(flags & 0x300000)) {
         return 0;
     }
     switch (destination->definition->kind) {

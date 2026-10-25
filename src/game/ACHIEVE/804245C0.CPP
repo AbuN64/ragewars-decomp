@@ -35,7 +35,7 @@ void func_804243E0_de(s32 player, s32 *awarded) {
     if (Achieve_MatchQualifies() == 0) {
         return;
     }
-    status = &D_80146398[player];
+    status = &g_playerSettings[player];
     if (status->active != 1) {
         return;
     }

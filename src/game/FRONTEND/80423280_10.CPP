@@ -52,7 +52,7 @@ s32 func_80429FF0_de(void *unused0, void *unused1, s32 event) {
         D_800D15E4[1] = 255.0f;
         D_800D15E4[2] = 255.0f;
         D_800D15E4[3] = 255.0f;
-        gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, 0, 0, D_800E28D0 - 1, D_800E28D4 - 1);
+        gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, D_800E28D0 - 1, D_800E28D4 - 1);
         D_800D15E4[3] = 210.0f;
         if (GetMenuScreenOwner() == 0x14 && D_80154020.ready == 0) {
             for (i = 0; i < 4; i++) {

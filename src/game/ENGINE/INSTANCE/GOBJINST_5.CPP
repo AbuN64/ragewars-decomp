@@ -565,7 +565,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
                 pos = actor->pos;
                 pos.y += actor->unk_70;
                 pos.y += Particle_GetActorHeight(actor) * 0.5f;
-                func_8028C6D4_de(&D_8011FE88, &pos, actor->unk_140[D_800D297C]);
+                func_8028C6D4_de(&g_world, &pos, actor->unk_140[D_800D297C]);
             }
             ret = 1;
             actor->flags |= 0x200;
@@ -581,7 +581,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
 #include "COMMON/VIEWFLAGS.H"
 #include "gbi.h"
 extern char D_800C3A20_de[];
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 typedef struct SceneModelRef {
     u8 pad0[0x1C];
     u32 viewMask; /* 0x1C */
@@ -679,7 +679,7 @@ void func_80249E28_de(SceneObject *object, struct Racer *camera) {
     func_8026D8F8_de();
     System_ResetTextureCache();
     if (object->cached != 0) {
-        gSPDisplayList(D_80110634++, (unsigned int)object->cached);
+        gSPDisplayList(g_displayListCursor++, (unsigned int)object->cached);
         Scene_UnlockResource(0, mem);
         return;
     }
@@ -707,12 +707,12 @@ void func_80249E28_de(SceneObject *object, struct Racer *camera) {
     context.second = second;
     context.offset = offset;
     context.pad = 0;
-    object->cached = D_80110634;
-    gSPBranchList(D_80110634++, 0);
+    object->cached = g_displayListCursor;
+    gSPBranchList(g_displayListCursor++, 0);
     object->draw(object, &object->behaviorFlags, &context);
-    gSPEndDisplayList(D_80110634++);
-    gSPBranchList(object->cached++, (unsigned int)D_80110634);
-    gSPDisplayList(D_80110634++, (unsigned int)object->cached);
+    gSPEndDisplayList(g_displayListCursor++);
+    gSPBranchList(object->cached++, (unsigned int)g_displayListCursor);
+    gSPDisplayList(g_displayListCursor++, (unsigned int)object->cached);
     Scene_UnlockResource(0, first);
     if (second != 0) {
         Scene_UnlockResource(0, second);

@@ -64,7 +64,7 @@ void func_802681A8_de(func_8024E8F0_S1 *arg0, Context_func_802681A8_de *arg1, s3
         resource = &D_8010EC90;
     }
 
-    func_8028CE94_de(&D_8011FE88, resource, arg6.value, arg3,
+    func_8028CE94_de(&g_world, resource, arg6.value, arg3,
                   arg6.angle * *(&D_800C4458_de + 1), arg6.scale * D_800C4460_de);
 }
 

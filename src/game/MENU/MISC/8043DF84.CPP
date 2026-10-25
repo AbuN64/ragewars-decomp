@@ -11,7 +11,7 @@
 /* Clears eight player active flags, then marks the first settings slot whose controller profile is active. */
 extern StatusStep D_80142622[];
 
-extern PlayerSettings D_80146398[];
+extern PlayerSettings g_playerSettings[];
 
 extern s32 Render_IsAButtonPressed(ControllerProfile *);
 
@@ -83,7 +83,7 @@ void func_8043DFC8_de(void) {
     }
     i = 0;
     active = 1;
-    settings = D_80146398;
+    settings = g_playerSettings;
     for (; i < 4; i++) {
         if (Render_IsAButtonPressed(&D_8010F328[i]) != 0) {
             settings[i].active = active;

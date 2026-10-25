@@ -14,7 +14,7 @@ extern s8 D_800FEC8A[];
 extern s8 D_800FEC8B[];
 extern s8 D_800FEC8C[];
 extern s8 D_800FEC8D[];
-extern u8 D_80146398[];
+extern u8 g_playerSettings[];
 extern s32 D_800D34E0;
 
 extern void func_8022EF30_de(void *arg0);
@@ -33,7 +33,7 @@ void func_8022F204_de(s32 arg0) {
     D_800FEB0C[offset] = 0;
     D_800FEB0E[offset] = 1;
     func_802A0C08_de(entry, D_800D34E0, arg0 + 1);
-    config = D_80146398 + arg0 * 0x96;
+    config = g_playerSettings + arg0 * 0x96;
     D_80102C89[offset] = config[0x7B];
     D_800FEC8A[offset] = config[0x7D];
     D_800FEC8B[offset] = config[0x79];

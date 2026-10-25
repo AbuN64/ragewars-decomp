@@ -17,13 +17,13 @@ void func_804499B0_de(void *pool, s32 count, s32 force_active);
 
 void func_8029311C_de(void *unused, u8 *color, s32 left, s32 top, s32 right, s32 bottom) {
     if (color[3] != 0) {
-        gDPPipeSync(D_80110634++);
-        gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
+        gDPPipeSync(g_displayListCursor++);
+        gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
         Render_SetModePreset(0x13);
         Render_SetCombineMode(0x19);
-        gDPSetPrimColor(D_80110634++, 255, 255, color[0], color[1], color[2], color[3]);
+        gDPSetPrimColor(g_displayListCursor++, 255, 255, color[0], color[1], color[2], color[3]);
         {
-            Gfx *cmd = D_80110634++;
+            Gfx *cmd = g_displayListCursor++;
             s32 x, y, x0, y0;
             u32 high, low, high0;
             x = right;
@@ -53,7 +53,7 @@ void func_80293284_de(GameSession *gameSession, s32 target) {
     s32 selectionValues;
 
     selectionValues = target;
-    if (Items_FindPlacedObjectsByKey(&D_8011FE88, -1, selectionValues, &spawn, 1) == 0) {
+    if (Items_FindPlacedObjectsByKey(&g_world, -1, selectionValues, &spawn, 1) == 0) {
         selectionValues = 0;
     }
     D_801462C8.counters.m_GameTimeFifteenth = 0;

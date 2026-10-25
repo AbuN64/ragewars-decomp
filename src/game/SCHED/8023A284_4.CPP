@@ -51,7 +51,7 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
             scale = descriptor->textureScale * (object->textureScale * 768.0f);
             scaleS = (s32)((1 << frame[2]) * scale);
             scaleT = (s32)((1 << frame[3]) * scale);
-            gDPPipeSync(D_80110634++);
+            gDPPipeSync(g_displayListCursor++);
             frameIndex = (s32)phase % animation.unk0;
 #if defined(VERSION_US_REV1)
             func_80295FB4_us_rev1(object->texture, resource,
@@ -68,7 +68,7 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
             case 2:
             default:
                 Render_SetCombineMode(32);
-                gDPSetEnvColor(D_80110634++, descriptor->envRed, descriptor->envGreen, descriptor->envBlue, 255);
+                gDPSetEnvColor(g_displayListCursor++, descriptor->envRed, descriptor->envGreen, descriptor->envBlue, 255);
                 center[0] = descriptor->red;
                 center[1] = descriptor->green;
                 center[2] = descriptor->blue;
@@ -175,8 +175,8 @@ draw_face:
                             vertex->b = (u32)triBlue[i];
                             vertex->a = (u32)triAlpha[i];
                         }
-                        gSPVertex(D_80110634++, &object->vertices[D_800D297C][face * 3], 3, 0);
-                        gSP1Triangle(D_80110634++, 0, 1, 2, 0);
+                        gSPVertex(g_displayListCursor++, &object->vertices[D_800D297C][face * 3], 3, 0);
+                        gSP1Triangle(g_displayListCursor++, 0, 1, 2, 0);
                     }
                 }
             }
@@ -278,14 +278,14 @@ void Sched_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
     u16 mask;
     u32 bit;
 
-    if (D_8011FE88.frozen != 0) {
+    if (g_world.frozen != 0) {
         return;
     }
     resource = host->resource;
     if (resource == 0) {
         return;
     }
-    entry = func_8028B2F8_de(&D_8011FE88, resource);
+    entry = func_8028B2F8_de(&g_world, resource);
     if (entry == 0) {
         return;
     }

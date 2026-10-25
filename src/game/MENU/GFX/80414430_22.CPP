@@ -15,13 +15,13 @@ extern s32 D_800DF280;
 
 extern s32 D_800E32E4;
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 
 static inline void beginFrame(void) {
     Gfx *g;
 
     D_800E32E4 = 1;
-    g = D_80110634++;
+    g = g_displayListCursor++;
     gDPPipeSync(g);
 }
 
@@ -41,7 +41,7 @@ void Gfx_SetTextureMode(s32 mode) {
         if (D_800E32E4 == 0) {
             beginFrame();
         }
-        if (mode == 13) gSPTexture(D_80110634++, 32768, 32768, 0, 0, G_ON) else if (mode == 14) gSPTexture(D_80110634++, 32768, 32768, 0, 0, G_OFF);
+        if (mode == 13) gSPTexture(g_displayListCursor++, 32768, 32768, 0, 0, G_ON) else if (mode == 14) gSPTexture(g_displayListCursor++, 32768, 32768, 0, 0, G_OFF);
     }
 }
 
@@ -50,7 +50,7 @@ void Gfx_SyncPipeline(void) {
 
     if (D_800E32E4 == 0) {
         D_800E32E4 = 1;
-        gDPPipeSync(D_80110634++);
+        gDPPipeSync(g_displayListCursor++);
     }
 }
 
@@ -65,9 +65,9 @@ void Gfx_SetPackedColor(u32 color) {
         return;
     }
     D_800DF28C = color;
-    gfx = D_80110634++;
+    gfx = g_displayListCursor++;
     gDPSetEnvColor(gfx, color >> 16, (color & 0xFF00) >> 8, color, 0);
-    gfx = D_80110634++;
+    gfx = g_displayListCursor++;
     
     gDPSetPrimColor(gfx, 0, 0, color >> 16, (color & 0xFF00) >> 8, color, color >> 24);
 }
@@ -88,13 +88,13 @@ void Gfx_EmitTextureRect(s32 left, s32 top, s32 right, s32 bottom, f32 u0, f32 v
     scaleV = D_800DF254->height << 10;
     dtdy = (s32)((v1 - v0) * scaleV) / (bottom - top + 1);
     {
-        Gfx *cmd = D_80110634++;
+        Gfx *cmd = g_displayListCursor++;
         gDPTexRect(cmd, left * 4, top * 4, (right + 1) * 4, (bottom + 1) * 4, 0);
     }
     startS = u0 * scaleU;
     startT = v0 * scaleV;
-    gDPHalf1(D_80110634++, ((startS >> 5) << 16) | ((startT >> 5) & 0xFFFF));
-    gDPHalf2(D_80110634++, (dsdx << 16) | (dtdy & 0xFFFF));
+    gDPHalf1(g_displayListCursor++, ((startS >> 5) << 16) | ((startT >> 5) & 0xFFFF));
+    gDPHalf2(g_displayListCursor++, (dsdx << 16) | (dtdy & 0xFFFF));
 }
 
 #if defined(VERSION_US)

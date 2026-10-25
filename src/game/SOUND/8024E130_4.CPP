@@ -31,7 +31,7 @@ int Sound_FindActorModelEntry(void *arg0) {
     int temp_a1 = ((LevelActor *)arg0)->model;
     int result = 0;
     if (temp_a1 != 0) {
-        result = (int)func_8028B2F8_de(&D_8011FE88, (void *)temp_a1);
+        result = (int)func_8028B2F8_de(&g_world, (void *)temp_a1);
     }
     return result;
 }
@@ -40,7 +40,7 @@ f32 func_8024E80C_de(struct Object_func_8024E80C_de *object) {
     struct func_8022CA04_S3 *entry;
 
     if (object->key != 0 && (object->key->flags & 1)) {
-        entry = func_8028B2F8_de(&D_8011FE88, object->key);
+        entry = func_8028B2F8_de(&g_world, object->key);
         if (entry != 0) {
             return entry->unk20;
         }

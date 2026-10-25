@@ -9,7 +9,7 @@
 #define SG(p, t, o) (*(t *)((u8 *)(p) + (o)))
 #define CS(n) ((n) + 0)
 extern u8 *D_800E5830;
-extern u8 D_801462C8_raw[], D_80146398[];
+extern u8 D_801462C8_raw[], g_playerSettings[];
 extern s32 D_8015402C;
 extern s8 D_80102B0D[], D_800FEB0E[];
 extern char *D_auto_800E2054[], *D_auto_800E20B4[], *D_auto_800E20A4[], *D_800E2044_eu[], *D_800E2074_eu[], *D_800E2094_eu[], *D_800E2084[], *D_auto_800E2034[];
@@ -22,7 +22,7 @@ extern void func_80265688_de(), Resmgr_FillMemory(), func_804259E0_de(), func_80
 extern void func_8041B110_de(), func_8028D380_de(), func_802A2394_de();
 extern char *func_802A0494_de();
 extern u8 D_800F00DC_raw[];
-extern char D_8011FE88[];
+extern char g_world[];
 /* Builds the results screen (0x1C8-byte state D_800E5830): window items, the first active profile, then per screen mode
    (1 single, 3 time trial, 4 team) the stage entry, its time/records and the heading texts in the current language.
    Returns 0. */
@@ -47,7 +47,7 @@ s32 func_80438880_eu(void *root) {
     SG(func_8040EC30_de(root, CS(0x284)), u8, 0x10) = 0x19;
     SG(g, s32, 0x94) = 0;
     for (i = 0; i < 4; i++) {
-        if (D_80146398[0x78 + 0x96 * i] == 1) {
+        if (g_playerSettings[0x78 + 0x96 * i] == 1) {
             SG(g, s32, 0x94) = i;
             break;
         }
@@ -108,7 +108,7 @@ s32 func_80438880_eu(void *root) {
                 it = func_8040EC30_de(SG(g, void *, 0x20), CS(0x283));
                 Frontend_SetWidgetFlag08(it, 1);
                 SG(it, u8, 0x10) = 0xAF;
-                SG(it, char *, 0x38) = D_auto_800E20B4[D_80152789];
+                SG(it, char *, 0x38) = D_auto_800E20B4[g_languageIndex];
             }
         }
     } else if (mode == 4) {
@@ -149,10 +149,10 @@ tail:
     if (D_8014DD98.kind == 0) {
         SG(it, char *, 0x38) = D_800E2094_eu[lang];
     } else if (D_8014DD98.kind == 1) {
-        SG(it, char *, 0x38) = D_800E2084[D_80152789];
+        SG(it, char *, 0x38) = D_800E2084[g_languageIndex];
     }
     it = func_8040EC30_de(root, CS(0x270));
-    func_8028D380_de(D_8011FE88, D_8015402C, buf, 0x3F);
+    func_8028D380_de(g_world, D_8015402C, buf, 0x3F);
     Resmgr_CopyString(g + 0x50, func_802A0494_de(buf));
     SG(it, u8 *, 0x38) = g + 0x50;
     SG(g, void *, 0x24) = func_8040EC30_de(root, CS(0x278));

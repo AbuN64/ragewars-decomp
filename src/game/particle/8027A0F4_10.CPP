@@ -145,7 +145,7 @@ void func_80282E98_de(void *particle, void *player) {
                       (s32)&((Shared_ActorView *)player)->position.vector, -1);
         func_8022B550_de(player, 30.0f, 3.0f,
                      ((Shared_Particle *)particle)->owner, 0);
-        func_8028CE94_de(&D_8011FE88,
+        func_8028CE94_de(&g_world,
                       (char *)((Shared_ActorView *)player)->controller + 0x140,
                       0x14, scratch, D_800C4E58_de[1], D_800C4E60_de);
         ((Shared_ActorView *)player)->impactTimer = (&D_800C4E60_de)[1];

@@ -13,7 +13,7 @@
 #include "TYPES.H"
 #include "GFX/TEXT/802A8A94_5.H"
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
 
 extern s32 Render_StartWorldEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3);
@@ -31,7 +31,7 @@ void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
   s32 temp_v0;
   if (D_800CD764_de != 0)
   {
-    temp_v0 = Render_StartWorldEffect(&D_8011FE88, arg0, 0, 1);
+    temp_v0 = Render_StartWorldEffect(&g_world, arg0, 0, 1);
     if (temp_v0 != 0)
     {
       func_802AA8EC_de(temp_v0, arg1, &sp10, &sp14);
@@ -49,9 +49,9 @@ void Text_SetupFillMode(void) {
 
     Gfx *gfx;
 
-    gfx = D_80110634++;
+    gfx = g_displayListCursor++;
     gDPPipeSync(gfx);
-    gfx = D_80110634++;
+    gfx = g_displayListCursor++;
     gDPSetCycleType(gfx, G_CYC_1CYCLE);
     Render_SetModePreset(0x15);
     Render_SetCombineMode(0x19);
@@ -61,9 +61,9 @@ void Text_SetupFillMode(void) {
 #if defined(VERSION_EU_X)
 void func_802AAA54_de(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
 
- gDPPipeSync(D_80110634++);
- gDPSetPrimColor(D_80110634++, 255, 255, r, g, b, a);
- gDPFillRectangle(D_80110634++, ((x0))>((0))?((x0)):((0)), ((y0))>((0))?((y0)):((0)), ((x1))>((0))?((x1)):((0)), ((y1))>((0))?((y1)):((0)));
+ gDPPipeSync(g_displayListCursor++);
+ gDPSetPrimColor(g_displayListCursor++, 255, 255, r, g, b, a);
+ gDPFillRectangle(g_displayListCursor++, ((x0))>((0))?((x0)):((0)), ((y0))>((0))?((y0)):((0)), ((x1))>((0))?((x1)):((0)), ((y1))>((0))?((y1)):((0)));
 }
 #endif
 
@@ -105,9 +105,9 @@ s32 func_802AAC28_de(s32 icon, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5,
 
     s32 temp_v0;
 
-    if ((u32)(D_800E28A4 - (((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) >> 3)) < 0x3E8
+    if ((u32)(D_800E28A4 - (((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) >> 3)) < 0x3E8
         || D_800CD764_de == 0
-        || (temp_v0 = Render_StartWorldEffect(&D_8011FE88, icon, 0, 1), temp_v0 == 0)) {
+        || (temp_v0 = Render_StartWorldEffect(&g_world, icon, 0, 1), temp_v0 == 0)) {
         return 0;
     }
     Text_DrawTileGrid(temp_v0, arg1, arg2, arg3, arg4, arg5, which);
@@ -140,7 +140,7 @@ void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
   s32 temp_v0;
   if (D_800CD764_de != 0)
   {
-    temp_v0 = Render_StartWorldEffect(&D_8011FE88, arg0, 0, 1);
+    temp_v0 = Render_StartWorldEffect(&g_world, arg0, 0, 1);
     if (temp_v0 != 0)
     {
       func_802AA8EC_de(temp_v0, arg1, &sp10, &sp14);
@@ -156,9 +156,9 @@ void Text_SetupFillMode(void) {
 
     Gfx *gfx;
 
-    gfx = D_80110634++;
+    gfx = g_displayListCursor++;
     gDPPipeSync(gfx);
-    gfx = D_80110634++;
+    gfx = g_displayListCursor++;
     gDPSetCycleType(gfx, G_CYC_1CYCLE);
     Render_SetModePreset(0x15);
     Render_SetCombineMode(0x19);
@@ -166,9 +166,9 @@ void Text_SetupFillMode(void) {
 
 void func_802AAA54_de(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
 
- gDPPipeSync(D_80110634++);
- gDPSetPrimColor(D_80110634++, 255, 255, r, g, b, a);
- gDPFillRectangle(D_80110634++, ((x0))>((0))?((x0)):((0)), ((y0))>((0))?((y0)):((0)), ((x1))>((0))?((x1)):((0)), ((y1))>((0))?((y1)):((0)));
+ gDPPipeSync(g_displayListCursor++);
+ gDPSetPrimColor(g_displayListCursor++, 255, 255, r, g, b, a);
+ gDPFillRectangle(g_displayListCursor++, ((x0))>((0))?((x0)):((0)), ((y0))>((0))?((y0)):((0)), ((x1))>((0))?((x1)):((0)), ((y1))>((0))?((y1)):((0)));
 }
 
 /** Store six words into the global record. */
@@ -197,9 +197,9 @@ s32 func_802AAC28_de(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5,
 
     s32 temp_v0;
 
-    if ((u32)(D_800E28A4 - (((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) >> 3)) < 0x3E8
+    if ((u32)(D_800E28A4 - (((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) >> 3)) < 0x3E8
         || D_800CD764_de == 0
-        || (temp_v0 = Render_StartWorldEffect(&D_8011FE88, arg0, 0, 1), temp_v0 == 0)) {
+        || (temp_v0 = Render_StartWorldEffect(&g_world, arg0, 0, 1), temp_v0 == 0)) {
         return 0;
     }
     Text_DrawTileGrid(temp_v0, arg1, arg2, arg3, arg4, arg5, arg6);
@@ -225,7 +225,7 @@ void func_802AAD14_de(void) {
     void *result;
     void *base;
     D_800D2F90 = 0;
-    handle = Render_StartWorldEffect(&D_8011FE88, 2, 0, 1);
+    handle = Render_StartWorldEffect(&g_world, 2, 0, 1);
     if (handle != 0) {
         table = *handle;
         view.data = 0;

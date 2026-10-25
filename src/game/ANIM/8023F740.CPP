@@ -226,7 +226,7 @@ void Anim_ProcessEntityContacts(HitSelf *self) {
     count = i = 0;
     owner = self->owner;
     ownerPosition = (u8 *)owner + 8;
-    world = &D_8011FE88;
+    world = &g_world;
     total = world->moverCount;
     for (; i < total; i++) {
         if (count >= 0x20) break;

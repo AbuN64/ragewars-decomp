@@ -31,7 +31,7 @@ extern u32 System_GetMemorySize(void);
 
 
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 
 #include "COMMON/DISPLAY.H"
 
@@ -81,7 +81,7 @@ void func_80293EB8_de(void *arg0) {
     p1[0x1D] = 0;
     p1[0x1E] = 1;
     func_80293334_de(arg0, 0, 0);
-    func_80286AA8_de(&D_8011FE88, 0, 0);
+    func_80286AA8_de(&g_world, 0, 0);
     p2 = ((s8 *)(&D_801468A0)) - 0x1818;
     Items_ResetActorPools(p2, 1);
     ((IntegerState164 *)(p2))->unk_160 = 0;
@@ -120,7 +120,7 @@ void func_80293FF0_de(void) {
 
     width = 0;
     height = 0;
-    gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)D_8011BDC0->colorImage);
+    gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)D_8011BDC0->colorImage);
     func_802AA950_de(0x388, 0, &width, &height);
     if ((width != 0) && (height != 0)) {
         Text_SetupSpriteMode(0xFA);

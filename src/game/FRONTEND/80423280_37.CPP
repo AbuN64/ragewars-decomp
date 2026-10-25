@@ -85,15 +85,15 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     D_800E4690->item155 = func_8040EC30_de(arg0, 0x155);
     D_800E4690->player = 0;
     for (i = 0; i < 4; i++) {
-        if (((struct Status *)D_80146398)[i].active == 1) {
+        if (((struct Status *)g_playerSettings)[i].active == 1) {
             D_800E4690->player = i;
             break;
         }
     }
     for (i = 0; i < 8; i++) {
-        if (((struct Status *)D_80146398)[i].pendingClear == 1) {
-            ((struct Status *)D_80146398)[i].active = 0;
-            ((struct Status *)D_80146398)[i].pendingClear = 0;
+        if (((struct Status *)g_playerSettings)[i].pendingClear == 1) {
+            ((struct Status *)g_playerSettings)[i].active = 0;
+            ((struct Status *)g_playerSettings)[i].pendingClear = 0;
         }
     }
     func_80427008_de();
@@ -186,7 +186,7 @@ s32 Frontend_ShowResultsPlayerModels(void) {
     view = 0x20;
     D_800E4690->wordA58 = 0;
 next:
-    status = (struct Status *)((char *)D_80146398 + offset);
+    status = (struct Status *)((char *)g_playerSettings + offset);
     if (status->active == 1) {
         shown++;
         row = Frontend_FindKeyIndex(status->kind);

@@ -78,7 +78,7 @@ s32 func_8041F6E0_eu_x(void *screen)
   D_800E42D0->pulse->alpha = 0;
   D_800E42D0->pulseStep = 0x32;
   Menu_RefreshCharacterUnlocks();
-  config = D_80146398;
+  config = g_playerSettings;
   for (i = 0; i < 4; i++)
   {
     if (config[i].active == 1)

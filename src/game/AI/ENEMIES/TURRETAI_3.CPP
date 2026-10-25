@@ -209,7 +209,7 @@ void Turret_Setup(LevelActor *actor, struct RecordRecAt13C *turret) {
     turret->pad128 = 0;
     turret->threshold = record->eventThreshold;
 
-    if (Render_TestActorStateBit(&D_8011FE88, actor) == 0) {
+    if (Render_TestActorStateBit(&g_world, actor) == 0) {
         if (record->flags & 0x1000) {
             flags = actor->flags & ~0x2000;
             flags = flags & ~0x100;

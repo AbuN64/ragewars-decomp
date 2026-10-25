@@ -41,7 +41,7 @@ void func_804261DC_de(WeaponPlayer *player) {
     s32 active;
 
     if (status->out != 1 && status->active != 0) {
-        void *table = func_8028D474_de(&D_8011FE88, D_8015402C);
+        void *table = func_8028D474_de(&g_world, D_8015402C);
         i = 0;
         active = 1;
         entries = table;

@@ -24,7 +24,7 @@ extern void func_802466A0_de(SceneEffect *, s32, s32, s32, s32, s32, s32, f32, C
 extern void func_8024B2D0_de(SceneEffect *);
 static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref) {
     SceneEffect *effect;
-    if (D_8011FE88.visibilityEnabled == 0 && (unsigned int)scene->UsedList.count >= 3) {
+    if (g_world.visibilityEnabled == 0 && (unsigned int)scene->UsedList.count >= 3) {
         return 0;
     }
     effect = scene->FreeList.head;
@@ -48,13 +48,13 @@ static inline SceneEffect *spawn_effect(struct SceneEffectPool *scene, s32 id, s
         return 0;
     }
     if (id == -1) {
-        id = func_8028B21C_de(&D_8011FE88, variant);
+        id = func_8028B21C_de(&g_world, variant);
         if (id == -1) {
             return 0;
         }
     }
     if ((unsigned int)(variant + 1) < 2) {
-        variant = func_8028B25C_de(&D_8011FE88, id);
+        variant = func_8028B25C_de(&g_world, id);
     }
     effect = take_effect(scene, ref);
     if (effect == 0) {
@@ -76,16 +76,16 @@ SceneEffect *func_802627A0_de(struct SceneEffectPool *scene, s32 variant, s32 ow
     s32 size;
     s32 clip;
     effect = 0;
-    id = func_8028B21C_de(&D_8011FE88, variant);
+    id = func_8028B21C_de(&g_world, variant);
     if (id != -1) {
-        key = Render_GetDirectoryEntry((s32)D_8011FE88.indexedDirectory, D_8011FE88.indexedBank, id);
+        key = Render_GetDirectoryEntry((s32)g_world.indexedDirectory, g_world.indexedBank, id);
         descriptor = Scene_RequestResource(0, key, key, 0x18, 0, 0, 0, &D_800C4260_de, 1);
         if (descriptor != 0) {
             clip = Render_LocatePackSection(*descriptor, key, 0, &size);
             resource = Scene_RequestResource(0, clip, clip, size, 0, 0, 0, &D_800C4274_de, 1);
             if (resource != 0) {
                 record = Render_GetPackSection(*resource, 0);
-                count = Engine_GetActorDefinition(&D_8011FE88, record->count);
+                count = Engine_GetActorDefinition(&g_world, record->count);
                 Particle_ScaleVector(&color, &color, func_802B2350(record->angle));
                 effect = spawn_effect(scene, id, variant, count, owner, position, scale, direction, color, ref);
                 Scene_UnlockResource(0, resource);

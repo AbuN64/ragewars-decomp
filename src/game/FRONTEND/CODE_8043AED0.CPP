@@ -283,7 +283,7 @@ void Frontend_ShowEquipChoice(s32 player, s32 category, s32 choice)
         } while (!found);
         func_80439C80_de(D_800E59E0->badges[player], table[choice].resource);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        D_800E59E0->panels[player].item->word38 = table[choice].label[D_80152789];
+        D_800E59E0->panels[player].item->word38 = table[choice].label[g_languageIndex];
 #else
         D_800E59E0->panels[player].item->word38 = *table[choice].label;
 #endif

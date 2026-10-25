@@ -419,12 +419,12 @@ void func_80228958_de(ObjRecAt20V2 *game, s32 view) {
         }
         if (zoomed) {
             if (((ObjectLinks16E4 *)(player))->unk_120C != 0) {
-                model = func_8028B21C_de(&D_8011FE88, 0xC84);
+                model = func_8028B21C_de(&g_world, 0xC84);
             } else {
-                model = func_8028B21C_de(&D_8011FE88, 0xC85);
+                model = func_8028B21C_de(&g_world, 0xC85);
             }
             if (model != -1) {
-                func_8026DF30_de(func_8028C198_de(&D_8011FE88, model), player + 0x1600, &D_800D0EF8, 0, -1);
+                func_8026DF30_de(func_8028C198_de(&g_world, model), player + 0x1600, &D_800D0EF8, 0, -1);
             }
         }
         if (((ObjectLinks16E4 *)(player))->unk_5DC != 0 && ((ObjectLinks16E4 *)(player))->unk_1210 != 0 && ((ObjectLinks16E4 *)(player))->unk_5DC == view) {

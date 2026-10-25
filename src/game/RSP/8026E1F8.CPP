@@ -94,7 +94,7 @@ void func_8026E378_de(int arg0, int arg1) {
     D_800CC3AD = (unsigned char)arg1;
 }
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern char D_E0470;
 extern char D_DE0A0;
 extern char D_800CBCC0;
@@ -103,19 +103,19 @@ extern char D_800CBCF0_de;
 void func_8026E390_de(void) {
     Gfx *cmd;
 
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPFullSync(cmd);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPHalf1(cmd, (u32) &D_E0470);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gLoadUcode(cmd, &D_DE0A0, 0x800);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPDisplayList(cmd, (u32) &D_800CBCC0);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPDisplayList(cmd, (u32) &D_800CBCF0_de);
 }
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern char D_E0050;
 extern char D_DCD10;
 extern char D_800CBCC0;
@@ -124,15 +124,15 @@ extern char D_800CBCF0_de;
 void func_8026E428_de(void) {
     Gfx *cmd;
 
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPFullSync(cmd);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPHalf1(cmd, (u32) &D_E0050);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gLoadUcode(cmd, &D_DCD10, 0x800);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPDisplayList(cmd, (u32) &D_800CBCC0);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPDisplayList(cmd, (u32) &D_800CBCF0_de);
 }
 

@@ -186,7 +186,7 @@ static inline s32 can_fire(Player *player) {
     if (ammo == 0) {
         Render_PlayFlatSound(0xD4D);
         if (player->owner != 0) {
-            Camera_PostTargetedScreenMessage(&D_80145088, player->owner, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80152789), Weapons_GetPlayerIndex(&D_80145040, player),
+            Camera_PostTargetedScreenMessage(&D_80145088, player->owner, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Weapons_GetPlayerIndex(&D_80145040, player),
                           1.0f);
         }
     }

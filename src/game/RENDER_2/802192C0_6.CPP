@@ -42,7 +42,7 @@ void func_8021C9D8_de(void *player, void *camera) {
     pos = ((LevelActor *)player)->position0;
     pos.y += ((LevelActor *)player)->eyeHeight;
     pos.y += Particle_GetActorHeight(player) * ((D_800C7470_Pair *)&D_800C22B0_us)->second;
-    func_8028C6D4_de(&D_8011FE88, &pos,
+    func_8028C6D4_de(&g_world, &pos,
                   &((LevelActor *)player)->lighting[D_800D297C]);
 
     value = 0x66;
@@ -56,22 +56,22 @@ void func_8021C9D8_de(void *player, void *camera) {
                 ((Shared_ActorView *)player)->controls->playerId;
         }
     }
-    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&D_8011FE88, player, value,
+    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&g_world, player, value,
                   ((Actor_func_8022D290_de *)player)->unk_0x086C);
 
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPPipeSync(cmd);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPSetCycleType(cmd, G_CYC_2CYCLE);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPGeometryMode(cmd, 0, G_FOG);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPMoveWord(cmd, G_MW_CLIP, 4, 2);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPMoveWord(cmd, G_MW_CLIP, 12, 2);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPMoveWord(cmd, G_MW_CLIP, 20, 0xFFFE);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPMoveWord(cmd, G_MW_CLIP, 28, 0xFFFE);
 
     func_80249E28_de(player, camera);
@@ -92,8 +92,8 @@ void func_8021CBD0_de(void *arg0, WeaponMenuView *camera) {
 
     if ((((Shared_ActorView *)arg0)->selectedAction != -1) &&
         (((Shared_ActorView *)arg0)->lives != 0)) {
-        gDPSetTextureFilter(D_80110634++, G_TF_BILERP);
-        gDPSetTexturePersp(D_80110634++, G_TP_PERSP);
+        gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
+        gDPSetTexturePersp(g_displayListCursor++, G_TP_PERSP);
         func_8026D8F8_de();
 
         entry = D_800D052C[((Shared_ActorView *)arg0)->selectedAction];
@@ -107,11 +107,11 @@ void func_8021CBD0_de(void *arg0, WeaponMenuView *camera) {
         Render_ClearDepthRect(&D_8011FAC0, (s32)left, (s32)right, (s32)top,
                       (s32)bottom, camera->clipMode);
 
-        gSPGeometryMode(D_80110634++, 0, G_FOG);
-        gSPMoveWord(D_80110634++, G_MW_CLIP, 4, 1);
-        gSPMoveWord(D_80110634++, G_MW_CLIP, 12, 1);
-        gSPMoveWord(D_80110634++, G_MW_CLIP, 20, 0xFFFF);
-        gSPMoveWord(D_80110634++, G_MW_CLIP, 28, 0xFFFF);
+        gSPGeometryMode(g_displayListCursor++, 0, G_FOG);
+        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 4, 1);
+        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 12, 1);
+        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 20, 0xFFFF);
+        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 28, 0xFFFF);
         Render_BeginModelBatch();
         func_80249E28_de(&((Shared_ActorView *)arg0)->weapon, camera);
         Render_FlushModelBatch();

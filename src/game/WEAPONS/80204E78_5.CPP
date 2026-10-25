@@ -34,7 +34,7 @@ void func_802054E0_de(Obj54E0 *arg0, void *arg1) {
         arg0->flags &= ~0x2000;
         arg0->flags &= ~0x100;
     }
-    if (D_8011FE88.mode == 4) {
+    if (g_world.mode == 4) {
         if (rec->unk34.whole != -1) {
             Render_PlaySoundAtPosition(rec->unk34.half.id, arg0->pos.v, 0, -1);
         }
@@ -75,11 +75,11 @@ void func_80205628_de(void *levelActor, void *spawnDispatchOwner, void *arg2) {
 
 void func_80205694_de(void *arg0, void *arg1) {
     Weapons_RequestActorState(arg0, arg1, 1);
-    Render_SetActorStateBit(&D_8011FE88, arg0, 1);
+    Render_SetActorStateBit(&g_world, arg0, 1);
 }
 
 void func_802056D0_de(Trigger *trigger) {
-    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 1);
+    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 1);
 }
 
 /** Return the object's 0x200 status bit. */

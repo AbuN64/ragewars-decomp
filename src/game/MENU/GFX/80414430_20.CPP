@@ -20,7 +20,7 @@
    16-bit textures turns the lookup table off; returns 0. */
 
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 
 extern void *D_800E32D8;
 
@@ -31,7 +31,7 @@ static inline void sync(void) {
 
     if (D_800E32E4 == 0) {
         D_800E32E4 = 1;
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPPipeSync(cmd);
     }
 }
@@ -62,11 +62,11 @@ static inline u32 blockWord4(void) {
  return _SHIFTL(G_TX_LOADTILE,24,3) | _SHIFTL(count,12,12) | _SHIFTL(D_800DF254->stride/4>0 ? num/(D_800DF254->stride/4):num,0,12);
 }
 
-static __inline__ void rectangleEmit(u32 w0, u32 w1) { Gfx *cmd = D_80110634++; cmd->words.w0 = w0; cmd->words.w1 = w1; }
+static __inline__ void rectangleEmit(u32 w0, u32 w1) { Gfx *cmd = g_displayListCursor++; cmd->words.w0 = w0; cmd->words.w1 = w1; }
 
 static __inline__ void rectangleSync(void) {
  Gfx *cmd;
- if (D_800E32E4 == 0) { D_800E32E4 = 1; cmd = D_80110634++; gDPPipeSync(cmd); }
+ if (D_800E32E4 == 0) { D_800E32E4 = 1; cmd = g_displayListCursor++; gDPPipeSync(cmd); }
 }
 
 static inline f32 scaleClip(f32 delta, f32 ratio) { return ratio * delta; }
@@ -79,22 +79,22 @@ s32 Gfx_LoadPalette(s32 bits, void *palette) {
         D_800E32D8 = palette;
         sync();
         if (bits == 4) {
-            gDPSetTextureLUT(D_80110634++, G_TT_RGBA16);
-            gDPSetTextureImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, (unsigned int)palette);
-            gDPTileSync(D_80110634++);
-            gDPSetTile(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_4b, 0, 256, G_TX_LOADTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0);
-            gDPLoadSync(D_80110634++);
-            gDPLoadTLUTCmd(D_80110634++, G_TX_LOADTILE, 15);
-            gDPPipeSync(D_80110634++);
+            gDPSetTextureLUT(g_displayListCursor++, G_TT_RGBA16);
+            gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, (unsigned int)palette);
+            gDPTileSync(g_displayListCursor++);
+            gDPSetTile(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_4b, 0, 256, G_TX_LOADTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0);
+            gDPLoadSync(g_displayListCursor++);
+            gDPLoadTLUTCmd(g_displayListCursor++, G_TX_LOADTILE, 15);
+            gDPPipeSync(g_displayListCursor++);
         } else if (bits == 8) {
-            gDPSetTextureLUT(D_80110634++, G_TT_RGBA16);
-            gDPSetTextureImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, (unsigned int)palette);
-            gDPTileSync(D_80110634++);
-            gDPSetTile(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_4b, 0, 256, G_TX_LOADTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0);
-            gDPLoadSync(D_80110634++);
-            gDPLoadTLUTCmd(D_80110634++, G_TX_LOADTILE, 255);
-            gDPPipeSync(D_80110634++);
-        } else if (bits == 16) gDPSetTextureLUT(D_80110634++, G_TT_NONE);
+            gDPSetTextureLUT(g_displayListCursor++, G_TT_RGBA16);
+            gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, (unsigned int)palette);
+            gDPTileSync(g_displayListCursor++);
+            gDPSetTile(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_4b, 0, 256, G_TX_LOADTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0);
+            gDPLoadSync(g_displayListCursor++);
+            gDPLoadTLUTCmd(g_displayListCursor++, G_TX_LOADTILE, 255);
+            gDPPipeSync(g_displayListCursor++);
+        } else if (bits == 16) gDPSetTextureLUT(g_displayListCursor++, G_TT_NONE);
         result = 0;
     }
     return result;
@@ -118,33 +118,33 @@ void func_804174F4_de(Texture *arg0) {
  paletteSame=Gfx_LoadPalette(D_800DF268_de,D_800DF254->palette);
  if(D_800DF260_de==0) {
   if(D_800DF268_de==4) {
-   gDPSetTextureImage(D_80110634++,G_IM_FMT_CI,G_IM_SIZ_16b,1,D_800DF254->data);
-   gDPSetTile(D_80110634++,G_IM_FMT_CI,G_IM_SIZ_16b,0,0,7,0,2,0,0,2,0,0);
-   gDPLoadSync(D_80110634++);
-   _GBI_CMD(D_80110634++, _SHIFTL(G_LOADBLOCK,24,8), blockWord16());
-   gDPPipeSync(D_80110634++);
-   gDPSetTile(D_80110634++,G_IM_FMT_CI,G_IM_SIZ_4b,(((s16)(u16)D_800DF254->stride >> 1)+7)>>3,0,0,0,2,0,0,2,0,0);
-   gDPSetTileSize(D_80110634++,0,0,0,(D_800DF254->stride-1)*4,(D_800DF254->rows-1)*4);
+   gDPSetTextureImage(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_16b,1,D_800DF254->data);
+   gDPSetTile(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_16b,0,0,7,0,2,0,0,2,0,0);
+   gDPLoadSync(g_displayListCursor++);
+   _GBI_CMD(g_displayListCursor++, _SHIFTL(G_LOADBLOCK,24,8), blockWord16());
+   gDPPipeSync(g_displayListCursor++);
+   gDPSetTile(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_4b,(((s16)(u16)D_800DF254->stride >> 1)+7)>>3,0,0,0,2,0,0,2,0,0);
+   gDPSetTileSize(g_displayListCursor++,0,0,0,(D_800DF254->stride-1)*4,(D_800DF254->rows-1)*4);
   }
   else if(D_800DF268_de==8) {
    if(paletteSame==0) {
-    gDPSetTile(D_80110634++,G_IM_FMT_CI,G_IM_SIZ_16b,0,0,7,0,2,0,0,2,0,0);
-    gDPPipeSync(D_80110634++);
+    gDPSetTile(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_16b,0,0,7,0,2,0,0,2,0,0);
+    gDPPipeSync(g_displayListCursor++);
    }
-   gDPLoadSync(D_80110634++);
-   gDPSetTile(D_80110634++,G_IM_FMT_CI,G_IM_SIZ_8b,(D_800DF254->stride+7)>>3,0,0,0,2,0,0,2,0,0);
-   gDPSetTileSize(D_80110634++,0,0,0,(D_800DF254->stride-1)*4,(D_800DF254->rows-1)*4);
-   gDPSetTextureImage(D_80110634++,G_IM_FMT_CI,G_IM_SIZ_16b,1,D_800DF254->data);
-   _GBI_CMD(D_80110634++, _SHIFTL(G_LOADBLOCK,24,8), blockWord8());
+   gDPLoadSync(g_displayListCursor++);
+   gDPSetTile(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_8b,(D_800DF254->stride+7)>>3,0,0,0,2,0,0,2,0,0);
+   gDPSetTileSize(g_displayListCursor++,0,0,0,(D_800DF254->stride-1)*4,(D_800DF254->rows-1)*4);
+   gDPSetTextureImage(g_displayListCursor++,G_IM_FMT_CI,G_IM_SIZ_16b,1,D_800DF254->data);
+   _GBI_CMD(g_displayListCursor++, _SHIFTL(G_LOADBLOCK,24,8), blockWord8());
   }
   else if(D_800DF268_de==16) {
-   gDPSetTextureImage(D_80110634++,G_IM_FMT_RGBA,G_IM_SIZ_16b,1,D_800DF254->data);
-   gDPSetTile(D_80110634++,G_IM_FMT_RGBA,G_IM_SIZ_16b,0,0,7,0,2,0,0,2,0,0);
-   gDPLoadSync(D_80110634++);
-   _GBI_CMD(D_80110634++, _SHIFTL(G_LOADBLOCK,24,8), blockWord4());
-   gDPPipeSync(D_80110634++);
-   gDPSetTile(D_80110634++,G_IM_FMT_RGBA,G_IM_SIZ_16b,(D_800DF254->stride*2+7)>>3,0,0,0,2,0,0,2,0,0);
-   gDPSetTileSize(D_80110634++,0,0,0,(D_800DF254->stride-1)*4,(D_800DF254->rows-1)*4);
+   gDPSetTextureImage(g_displayListCursor++,G_IM_FMT_RGBA,G_IM_SIZ_16b,1,D_800DF254->data);
+   gDPSetTile(g_displayListCursor++,G_IM_FMT_RGBA,G_IM_SIZ_16b,0,0,7,0,2,0,0,2,0,0);
+   gDPLoadSync(g_displayListCursor++);
+   _GBI_CMD(g_displayListCursor++, _SHIFTL(G_LOADBLOCK,24,8), blockWord4());
+   gDPPipeSync(g_displayListCursor++);
+   gDPSetTile(g_displayListCursor++,G_IM_FMT_RGBA,G_IM_SIZ_16b,(D_800DF254->stride*2+7)>>3,0,0,0,2,0,0,2,0,0);
+   gDPSetTileSize(g_displayListCursor++,0,0,0,(D_800DF254->stride-1)*4,(D_800DF254->rows-1)*4);
   }
  }
  }
@@ -425,68 +425,68 @@ void func_804181A4_de(s32 x0, s32 y0, s32 x1, s32 y1, f32 u0, f32 v0, f32 u1, f3
                 if (D_800DF260_de == 0) {
                     switch (bpp) {
                     case 4:
-                        gDPSetTextureImage(D_80110634++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, data);
-                        gDPSetTile(D_80110634++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
-                        gDPLoadSync(D_80110634++);
-                        gDPLoadBlock(D_80110634++, G_TX_LOADTILE, 0, 0, ((((stride * chunk + 3) >> 2) - 1) < 2047 ? (((stride * chunk + 3) >> 2) - 1) : 2047), ((1 << 11) + (1 > stride / 16 ? 1 : stride / 16) - 1) / (1 > stride / 16 ? 1 : stride / 16));
-                        gDPPipeSync(D_80110634++);
-                        gDPSetTile(D_80110634++, G_IM_FMT_CI, G_IM_SIZ_4b, ((stride >> 1) + 7) >> 3, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
-                        gDPSetTileSize(D_80110634++, G_TX_RENDERTILE, 0, 0, (stride - 1) * 4, (chunk - 1) * 4);
+                        gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, data);
+                        gDPSetTile(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
+                        gDPLoadSync(g_displayListCursor++);
+                        gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, ((((stride * chunk + 3) >> 2) - 1) < 2047 ? (((stride * chunk + 3) >> 2) - 1) : 2047), ((1 << 11) + (1 > stride / 16 ? 1 : stride / 16) - 1) / (1 > stride / 16 ? 1 : stride / 16));
+                        gDPPipeSync(g_displayListCursor++);
+                        gDPSetTile(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_4b, ((stride >> 1) + 7) >> 3, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
+                        gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, (stride - 1) * 4, (chunk - 1) * 4);
                         break;
                     case 8:
-                        gDPSetTextureImage(D_80110634++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, data);
-                        gDPSetTile(D_80110634++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
-                        gDPLoadSync(D_80110634++);
-                        gDPLoadBlock(D_80110634++, G_TX_LOADTILE, 0, 0, ((((stride * chunk + 1) >> 1) - 1) < 2047 ? (((stride * chunk + 1) >> 1) - 1) : 2047), ((1 << 11) + (1 > stride / 8 ? 1 : stride / 8) - 1) / (1 > stride / 8 ? 1 : stride / 8));
-                        gDPPipeSync(D_80110634++);
-                        gDPSetTile(D_80110634++, G_IM_FMT_CI, G_IM_SIZ_8b, (stride + 7) >> 3, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
-                        gDPSetTileSize(D_80110634++, G_TX_RENDERTILE, 0, 0, (stride - 1) * 4, (chunk - 1) * 4);
+                        gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, data);
+                        gDPSetTile(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
+                        gDPLoadSync(g_displayListCursor++);
+                        gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, ((((stride * chunk + 1) >> 1) - 1) < 2047 ? (((stride * chunk + 1) >> 1) - 1) : 2047), ((1 << 11) + (1 > stride / 8 ? 1 : stride / 8) - 1) / (1 > stride / 8 ? 1 : stride / 8));
+                        gDPPipeSync(g_displayListCursor++);
+                        gDPSetTile(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_8b, (stride + 7) >> 3, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
+                        gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, (stride - 1) * 4, (chunk - 1) * 4);
                         break;
                     case 16:
-                        gDPSetTextureImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, data);
-                        gDPSetTile(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
-                        gDPLoadSync(D_80110634++);
-                        gDPLoadBlock(D_80110634++, G_TX_LOADTILE, 0, 0, ((stride * chunk - 1) < 2047 ? (stride * chunk - 1) : 2047), ((1 << 11) + (1 > stride / 4 ? 1 : stride / 4) - 1) / (1 > stride / 4 ? 1 : stride / 4));
-                        gDPPipeSync(D_80110634++);
-                        gDPSetTile(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, (stride * 2 + 7) >> 3, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
-                        gDPSetTileSize(D_80110634++, G_TX_RENDERTILE, 0, 0, (stride - 1) * 4, (chunk - 1) * 4);
+                        gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, data);
+                        gDPSetTile(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
+                        gDPLoadSync(g_displayListCursor++);
+                        gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, ((stride * chunk - 1) < 2047 ? (stride * chunk - 1) : 2047), ((1 << 11) + (1 > stride / 4 ? 1 : stride / 4) - 1) / (1 > stride / 4 ? 1 : stride / 4));
+                        gDPPipeSync(g_displayListCursor++);
+                        gDPSetTile(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, (stride * 2 + 7) >> 3, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
+                        gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, (stride - 1) * 4, (chunk - 1) * 4);
                         break;
                     }
                 } else {
                     switch (bpp) {
                     case 4:
-                        gDPSetTextureImage(D_80110634++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, data);
-                        gDPSetTile(D_80110634++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
-                        gDPLoadSync(D_80110634++);
-                        gDPLoadBlock(D_80110634++, G_TX_LOADTILE, 0, 0, ((((stride * chunk + 3) >> 2) - 1) < 2047 ? (((stride * chunk + 3) >> 2) - 1) : 2047), 0);
-                        gDPPipeSync(D_80110634++);
-                        gDPSetTile(D_80110634++, G_IM_FMT_CI, G_IM_SIZ_4b, ((stride >> 1) + 7) >> 3, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
-                        gDPSetTileSize(D_80110634++, G_TX_RENDERTILE, 0, 0, (stride - 1) * 4, (chunk - 1) * 4);
+                        gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, data);
+                        gDPSetTile(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
+                        gDPLoadSync(g_displayListCursor++);
+                        gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, ((((stride * chunk + 3) >> 2) - 1) < 2047 ? (((stride * chunk + 3) >> 2) - 1) : 2047), 0);
+                        gDPPipeSync(g_displayListCursor++);
+                        gDPSetTile(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_4b, ((stride >> 1) + 7) >> 3, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
+                        gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, (stride - 1) * 4, (chunk - 1) * 4);
                         break;
                     case 8:
                         if (!started) {
                             started = 1;
-                            gDPSetTile(D_80110634++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
-                            gDPSetTile(D_80110634++, G_IM_FMT_CI, G_IM_SIZ_8b, (stride + 7) >> 3, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
-                            gDPSetTileSize(D_80110634++, G_TX_RENDERTILE, 0, 0, (stride - 1) * 4, (chunk - 1) * 4);
-                            gDPPipeSync(D_80110634++);
+                            gDPSetTile(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
+                            gDPSetTile(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_8b, (stride + 7) >> 3, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
+                            gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, (stride - 1) * 4, (chunk - 1) * 4);
+                            gDPPipeSync(g_displayListCursor++);
                         }
-                        gDPLoadSync(D_80110634++);
-                        gDPSetTextureImage(D_80110634++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, data);
-                        gDPLoadBlock(D_80110634++, G_TX_LOADTILE, 0, 0, ((((stride * chunk + 1) >> 1) - 1) < 2047 ? (((stride * chunk + 1) >> 1) - 1) : 2047), 0);
+                        gDPLoadSync(g_displayListCursor++);
+                        gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, data);
+                        gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, ((((stride * chunk + 1) >> 1) - 1) < 2047 ? (((stride * chunk + 1) >> 1) - 1) : 2047), 0);
                         break;
                     case 16:
-                        gDPSetTextureImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, data);
-                        gDPSetTile(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
-                        gDPLoadSync(D_80110634++);
-                        gDPLoadBlock(D_80110634++, G_TX_LOADTILE, 0, 0, ((stride * chunk - 1) < 2047 ? (stride * chunk - 1) : 2047), 0);
-                        gDPPipeSync(D_80110634++);
-                        gDPSetTile(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, (stride * 2 + 7) >> 3, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
-                        gDPSetTileSize(D_80110634++, G_TX_RENDERTILE, 0, 0, (stride - 1) * 4, (chunk - 1) * 4);
+                        gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, data);
+                        gDPSetTile(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
+                        gDPLoadSync(g_displayListCursor++);
+                        gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, ((stride * chunk - 1) < 2047 ? (stride * chunk - 1) : 2047), 0);
+                        gDPPipeSync(g_displayListCursor++);
+                        gDPSetTile(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, (stride * 2 + 7) >> 3, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
+                        gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, (stride - 1) * 4, (chunk - 1) * 4);
                         break;
                     }
                 }
-                gSPTextureRectangle(D_80110634++, x0 >> 8, yTop >> 8, (x1 >> 8) + 4, (yBot >> 8) + 4, 0, sStart >> 5, tOff >> 5, dsdx, dtdy);
+                gSPTextureRectangle(g_displayListCursor++, x0 >> 8, yTop >> 8, (x1 >> 8) + 4, (yBot >> 8) + 4, 0, sStart >> 5, tOff >> 5, dsdx, dtdy);
             }
         } while (y <= rows);
     }

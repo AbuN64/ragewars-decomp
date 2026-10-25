@@ -37,7 +37,7 @@ void Render_InitFrameRing(RenderState *state) {
     osScAddClient(&D_80142928, &D_80146CC0, &D_801428C0);
     state->handle = -1;
     func_80293590_de(state);
-    D_80110634 = 0;
+    g_displayListCursor = 0;
     func_802B6B80_de((void *)&D_80142C60);
     if (D_801470B0) {
         func_80264B44_de();
@@ -177,7 +177,7 @@ void Render_RunGameLoop(GameSession *session) {
     session->resource = func_80265964_de(0x18) & 0x3FFFFFFF;
     Items_ResetActorPools(session->players, 0);
     func_804499B0_de(session->menu, 0, 0);
-    Items_LoadSceneResources(&D_8011FE88, session->resource);
+    Items_LoadSceneResources(&g_world, session->resource);
     if (D_800CBC11[0] == 0) {
         func_8044AE70_de();
     }
@@ -241,7 +241,7 @@ void Render_RunGameLoop(GameSession *session) {
 #include "gbi.h"
 
 #include "COMMON/DISPLAY.H"
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern char D_800CBCC0;
 extern char D_800CBCF0_de;
 extern void *D_801536E8;
@@ -254,12 +254,12 @@ extern s32 D_800E28D0;
  * full-screen viewport (SCREEN_WD x SCREEN_HT) in D_80142C40[D_800D297C] and a full-screen scissor. */
 void Render_BeginFrameDisplayList(void *world) {
     UnitVp *viewport;
-    D_80110634 = D_8011FAC0.ring.current->commands;
-    gSPSegment(D_80110634++, 0, 0);
-    gSPDisplayList(D_80110634++, &D_800CBCC0);
-    gSPDisplayList(D_80110634++, &D_800CBCF0_de);
+    g_displayListCursor = D_8011FAC0.ring.current->commands;
+    gSPSegment(g_displayListCursor++, 0, 0);
+    gSPDisplayList(g_displayListCursor++, &D_800CBCC0);
+    gSPDisplayList(g_displayListCursor++, &D_800CBCF0_de);
     viewport = &D_80142C40[D_800D297C];
-    gDPSetDepthImage(D_80110634++, D_801536E8);
+    gDPSetDepthImage(g_displayListCursor++, D_801536E8);
     viewport->vscale[0] = SCREEN_WD * 2;
     viewport->vscale[1] = SCREEN_HT * 2;
     viewport->vscale[2] = 0x3FF;
@@ -268,8 +268,8 @@ void Render_BeginFrameDisplayList(void *world) {
     viewport->vtrans[1] = SCREEN_HT * 2;
     viewport->vtrans[2] = 0;
     viewport->vtrans[3] = 0;
-    gSPViewport(D_80110634++, viewport);
-    gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
+    gSPViewport(g_displayListCursor++, viewport);
+    gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
 }
 
 /* rspboot text is 0xD0 bytes: it ends where the first graphics microcode text (D_800D8CE0) starts. */

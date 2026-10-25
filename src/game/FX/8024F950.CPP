@@ -40,8 +40,8 @@ void func_8024F960_eu(void) {
         "sw         $zero, 0xB4($s1)\n"
         "sh         $v1, 0x4($s1)\n"
         "lhu        $a1, 0xE($s2)\n"
-        "lui        $a0, %hi(D_8011FE88)\n"
-        "addiu      $a0, $a0, %lo(D_8011FE88)\n"
+        "lui        $a0, %hi(g_world)\n"
+        "addiu      $a0, $a0, %lo(g_world)\n"
         "jal        Engine_GetActorDefinition\n"
         "nop\n"
         "sw         $v0, 0x18($s1)\n"
@@ -343,7 +343,7 @@ void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner,
     prop->fieldAC = 0;
     prop->fieldB0 = 0;
     prop->fieldB4 = 0;
-    prop->model = Engine_GetActorDefinition(&D_8011FE88, record->model);
+    prop->model = Engine_GetActorDefinition(&g_world, record->model);
     prop->fade = 16;
     prop->fieldDC = 0;
     model = prop->model;

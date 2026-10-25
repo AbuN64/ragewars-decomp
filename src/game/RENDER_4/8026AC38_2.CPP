@@ -11,7 +11,7 @@
 
 /* Draws the parts of a model resource that the owner has enabled, when the frame command buffer still has 3000 commands free: each part material's low two bits of byte 6 pick an owner flag at 0x102 (0x100, 0x8 or 0x2, 0x80 or 0x20 by bit 4) that must be set before Render_SetupMaterial accepts the material and its display list is emitted. Adapted from func_8026DA4C_de with the owner argument and the per-material flag switch added. */
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
 extern u32 D_800E28A4;
 extern void Scene_MarkResourceInUse(s32 heap, void **resource);
@@ -28,18 +28,18 @@ void func_8026B9EC_de(void **resource, struct Owner104 *owner, s32 matrix, s32 s
     s32 i;
     s32 visible;
 
-    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (D_800E28A4 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     header = *resource;
     Scene_MarkResourceInUse(0, resource);
-    if (segment != 0) { gSPSegment(D_80110634++, 1, matrix); }
-    else { gSPMatrix(D_80110634++, matrix, G_MTX_LOAD); }
+    if (segment != 0) { gSPSegment(g_displayListCursor++, 1, matrix); }
+    else { gSPMatrix(g_displayListCursor++, matrix, G_MTX_LOAD); }
     base = textures;
     if (base == 0) {
         base = Render_GetPackSection(header, 0);
     }
-    gSPSegment(D_80110634++, 2, (unsigned int)base);
+    gSPSegment(g_displayListCursor++, 2, (unsigned int)base);
     parts = Render_GetPackSection(header, 2);
     count = *(s32 *)parts;
     for (i = 0; i < count; i++) {
@@ -82,7 +82,7 @@ void func_8026B9EC_de(void **resource, struct Owner104 *owner, s32 matrix, s32 s
             Gfx *cmd;
             void *list = Render_GetPackSection(part, 1);
 
-            cmd = D_80110634++;
+            cmd = g_displayListCursor++;
             gSPDisplayList(cmd, (unsigned int)list);
         }
     }

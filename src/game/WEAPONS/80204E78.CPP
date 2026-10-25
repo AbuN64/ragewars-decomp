@@ -13,7 +13,7 @@ extern void func_80267198_de(void *, void *, s32, CVector3, ResourceManagerState
 
 
 int func_80204E78_de(int arg0) {
-    return Render_TestActorStateBit(&D_8011FE88, arg0) == 1;
+    return Render_TestActorStateBit(&g_world, arg0) == 1;
 }
 
 /** Submit an object's three-word record, then attach it in mode one. */
@@ -22,7 +22,7 @@ void func_80204EA8_de(LevelActor *actor) {
 
     pair.active = 0;
     func_80267198_de(actor, actor, 6, actor->position0, pair);
-    Render_SetActorStateBit(&D_8011FE88, actor, 1);
+    Render_SetActorStateBit(&g_world, actor, 1);
 }
 
 /** Submit an object's three-word record, then attach it to the global owner. */
@@ -31,7 +31,7 @@ void func_80204F10_de(LevelActor *actor) {
 
     pair.active = 0;
     func_80267198_de(actor, actor, 7, actor->position0, pair);
-    Render_SetActorStateBit(&D_8011FE88, actor, 0);
+    Render_SetActorStateBit(&g_world, actor, 0);
 }
 
 /** Update the floating state at offsets 0x40 and 0x64 under its range rules. */

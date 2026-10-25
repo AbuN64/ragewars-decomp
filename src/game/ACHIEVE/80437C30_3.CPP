@@ -130,7 +130,7 @@ s32 func_80438ADC_de(void *window, void *unused1, s32 event) {
             object = &D_80145088;
             Items_ResetActorPools(object, 0);
             func_804499B0_de(object - 0x48, 0, 0);
-            func_80286AA8_de(&D_8011FE88, 0, 0);
+            func_80286AA8_de(&g_world, 0, 0);
             ((MatchMenuObjects *)(object))->transition = 8;
         } else {
             MarkMenuEventHandled();

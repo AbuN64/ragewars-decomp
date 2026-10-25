@@ -72,15 +72,15 @@ extern func_80206604_G1 D_801462E5;
 extern s32 Render_TestActorStateBit(void *, void *);
 
 void func_80206258_de(Trigger *trigger) {
-    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 1);
+    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 1);
 }
 
 void func_80206288_de(void *arg0) {
-    Render_SetActorStateBit(&D_8011FE88, arg0, 0);
+    Render_SetActorStateBit(&g_world, arg0, 0);
 }
 
 void func_802062B0_de(Trigger *trigger) {
-    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 0);
+    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 0);
 }
 
 void func_802062E0_de(LevelActor *actor, ActorMotionState *owner, Params params, s32 kind) {
@@ -179,7 +179,7 @@ void func_802066A4_de(LevelActor *actor, Dest *arg1) {
     Weapons_RequestActorState(actor, arg1, 0);
     arg1->charge = D_800C1AE0_de;
     arg1->field12C = D_800C1AE0_de;
-    if (Render_TestActorStateBit(&D_8011FE88, actor) == 1) {
+    if (Render_TestActorStateBit(&g_world, actor) == 1) {
         actor->flags &= ~0x2000;
         actor->flags &= ~0x100;
     }

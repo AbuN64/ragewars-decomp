@@ -259,7 +259,7 @@ s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
     HitBoxTable *table;
     HitBox *entry;
     WorldSectorExtent *extent;
-    Shared_World *world = &D_8011FE88;
+    Shared_World *world = &g_world;
     count = 0;
     matches = 0;
     flag = 0;
@@ -589,7 +589,7 @@ s32 Actors_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bounds,
     if (D_800D2850 == 0) {
         Actors_AccumulateDirectionalLighting(copiedModel, matrices, D_80111D70, skinned);
     } else if (lightCount == 0) {
-        Shared_World *world = &D_8011FE88;
+        Shared_World *world = &g_world;
         worldLightCount = 0;
         for (sectorIndex = 0; sectorIndex < world->sectorEntryCount; sectorIndex++) {
             worldLightCount += ((HitBoxTable *)Render_GetPackSection(*(void **)world->sectors[sectorIndex].resource, 2))->count;

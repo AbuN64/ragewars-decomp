@@ -143,7 +143,7 @@ void func_8022409C_de(void *player, void *arg1) {
     Particle_ScaleVector(&direction, &direction, D_800D2988);
     Particle_AddVec3(&((func_80224078_Arg0 *)(player))->unk6E8,
                   &((func_80224078_Arg0 *)(player))->unk6E8, &direction);
-    result = Scene_FindFloorPolygon(&D_8011FE88, &((func_80224078_Arg1 *)arg1)->unk8);
+    result = Scene_FindFloorPolygon(&g_world, &((func_80224078_Arg1 *)arg1)->unk8);
     if (result != 0) {
         ((func_80224078_Arg1 *)arg1)->unk14 = result;
     }

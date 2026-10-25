@@ -12,7 +12,7 @@ extern int func_80299A08_de(void), func_802999A0_de(s32);
 extern void MarkMenuEventHandled(void), Items_ResetActorPools(void *, s32), func_804499B0_de(void *, s32, s32);
 extern void func_80286AA8_de(void *, s32, s32), func_8025476C_de(s32), func_8042E988_de(s32), func_802998A8_de(void);
 extern int func_8025477C_de(void);
-extern u8 D_80145088[], D_8011FE88[];
+extern u8 D_80145088[], g_world[];
 /* Result handler of the main-menu pop-up: for event 0x1DD with answer 0x16 resets the session record D_80145088 and picks a
    next-state id from its mode byte at 0x124D; for 0x1DE passes 0xB when answered 0xB, else -1. Returns 0. */
 s32 func_80429C78_eu_x(void) {
@@ -24,7 +24,7 @@ s32 func_80429C78_eu_x(void) {
         if (func_802999A0_de(0) == 0x16) {
             Items_ResetActorPools(D_80145088, 0);
             func_804499B0_de(D_80145088 - 0x48, 0, 0);
-            func_80286AA8_de(D_8011FE88, 0, 0);
+            func_80286AA8_de(g_world, 0, 0);
             if (func_8025477C_de() == 0) {
                 func_8025476C_de(1);
             }

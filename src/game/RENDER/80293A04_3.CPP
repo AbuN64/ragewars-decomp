@@ -8,7 +8,7 @@
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern void *D_800E0B34[];
 /* The EU builds pick the text for the current menu language. */
-#define LINES_TEXT D_800E0B34[D_80152789]
+#define LINES_TEXT D_800E0B34[g_languageIndex]
 #else
 #define LINES_TEXT D_800D3038
 #endif

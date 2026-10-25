@@ -28,7 +28,7 @@ void func_802192C0_de(Cursor *cursor) {
     s32 frames;
     s32 state;
 
-    clip = Engine_GetPlatformRoute(&D_8011FE88, cursor->clip);
+    clip = Engine_GetPlatformRoute(&g_world, cursor->clip);
     frames = clip->frames;
     state = cursor->state;
     cursor->previous = cursor->frame;
@@ -75,7 +75,7 @@ extern s16 func_8028D28C_de(char *arg0);
 void func_802193C8_de(Struct802193C8 *arg0, s8 arg1) {
     arg0->field0 = 1;
     arg0->field1 = arg1;
-    arg0->field2 = func_8028D28C_de(&D_8011FE88);
+    arg0->field2 = func_8028D28C_de(&g_world);
     arg0->field4 = 0;
 }
 
@@ -86,7 +86,7 @@ extern void *Engine_GetPlatformRoutePoint(char *a, unsigned char b, short c);
 
 
 void *func_80219408_de(Cursor *cursor) {
-    return Engine_GetPlatformRoutePoint(&D_8011FE88, cursor->clip, cursor->frame);
+    return Engine_GetPlatformRoutePoint(&g_world, cursor->clip, cursor->frame);
 }
 
 extern void *Engine_GetPlatformRoutePoint(char *a, unsigned char b, short c);
@@ -96,7 +96,7 @@ extern void *Engine_GetPlatformRoutePoint(char *a, unsigned char b, short c);
 
 
 void func_80219434_de(Cursor *cursor) {
-    Engine_GetPlatformRoutePoint(&D_8011FE88, cursor->clip, cursor->previous);
+    Engine_GetPlatformRoutePoint(&g_world, cursor->clip, cursor->previous);
 }
 
 /** Initialize the compact state record to its default values. */
@@ -155,9 +155,9 @@ void func_80219490_de(char *object, char *camera) {
     Render_SetColorDither(0xC0);
     func_8026E378_de(1, 0x20);
 
-    command = D_80110634++;
+    command = g_displayListCursor++;
     gDPSetTexturePersp(command, G_TP_PERSP);
-    command = D_80110634++;
+    command = g_displayListCursor++;
     gDPSetTextureFilter(command, G_TF_BILERP);
     Render_BeginModelBatch();
 

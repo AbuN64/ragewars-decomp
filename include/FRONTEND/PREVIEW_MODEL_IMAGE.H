@@ -8,7 +8,7 @@
 #endif
 static inline s32 previewModelImage(void) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-return (s32)D_800E1E54[D_80152789];
+return (s32)D_800E1E54[g_languageIndex];
 #else
 return D_800D3500;
 #endif

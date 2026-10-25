@@ -30,7 +30,7 @@ extern void Menu_SelectListEntry(void *, s32);
 
 extern void func_8041A6EC_de(void *, s32);
 
-extern u8 D_80146398[];
+extern u8 g_playerSettings[];
 
 extern s32 func_8041AD04_de(void *);
 
@@ -73,7 +73,7 @@ void func_804368F8_de(s32 entryIndex) {
 void func_804369E8_de(s32 arg0) {
     u8 *config;
 
-    config = D_80146398 + arg0 * 0x96;
+    config = g_playerSettings + arg0 * 0x96;
     D_80102C89[arg0 * 0x190] = func_8041AD04_de(D_800E5694->a);
     do {
         D_800FEC8A[arg0 * 0x190] = func_8041AD04_de(D_800E5694->b);

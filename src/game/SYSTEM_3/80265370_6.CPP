@@ -28,7 +28,7 @@ void System_DeliverContactEffect(void *target, void *source, s32 effect, s32 unu
     LevelActor *objects;
     void *other;
     ContactNode *node;
-    Shared_World *world = &D_8011FE88;
+    Shared_World *world = &g_world;
     if (world->mode != 4 && (D_800CC130[effect].flags & 0x10) == 0) {
         return;
     }

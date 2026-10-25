@@ -55,10 +55,10 @@ void func_8024BA7C_de(void *actor, Camera *camera, f32 *transform, u8 layer) {
             func_8026F898_de(mf, transform, (f32 *)(matrices + 0x1E0));
             func_80272828_de(mf);
             func_8026FC9C_de(mf, mtx);
-            gSPMatrix(D_80110634++, mtx, G_MTX_LOAD | G_MTX_PROJECTION);
+            gSPMatrix(g_displayListCursor++, mtx, G_MTX_LOAD | G_MTX_PROJECTION);
             Render_DrawResourceModel(layer, camera->style, object->fieldB4, 1,
                           &object->lighting[D_800D297C], 0, object->field3);
-            restore = D_80110634++;
+            restore = g_displayListCursor++;
             offset = (D_800D297C << 6) + 0x380;
             gSPMatrix(restore, matrices + offset, G_MTX_LOAD | G_MTX_PROJECTION);
         }

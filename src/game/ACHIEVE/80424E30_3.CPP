@@ -63,7 +63,7 @@ extern u8 D_80102B7E[];
    record in D_80102B00 lacks bit 0x31 while the set at 0x124 has bits 0 to 3, it sets bit 0x31
    through func_80265688_de and stores 0x31 through the second argument. */
 
-extern u8 D_80146398[];
+extern u8 g_playerSettings[];
 
 /* Counts the enabled entries in a fifty-entry player table. */
 extern unsigned char D_800FEB4A[];
@@ -253,7 +253,7 @@ void func_804259E0_de(s32 index) {
 Preset *func_80425C70_de(s32 key, s32 row, s32 column) {
     PresetTable *table;
 
-    table = func_8028D474_de(&D_8011FE88, key);
+    table = func_8028D474_de(&g_world, key);
     if (table == 0) {
         return 0;
     }
@@ -316,7 +316,7 @@ void func_80425EE4_de(s32 player, s32 *award) {
     s32 all;
     s32 i;
 
-    record = &D_80146398[player * 150];
+    record = &g_playerSettings[player * 150];
     all = 1;
     if (record[0x78] == 1 && record[0x91] == 0) {
         if (func_80265650_de(&D_80102B00->name[player * 400] + 0x4A, 0x31) == 0) {

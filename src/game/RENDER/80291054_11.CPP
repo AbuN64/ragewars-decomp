@@ -18,7 +18,7 @@ void Render_ResetPlayerItems(s32 arg0, s32 arg1) {
     ObjRecAt255C8 *object = (void *)arg0;
     Items_ResetActorPools(&object->unk255C8, 1);
     func_804499B0_de(&object->unk25580, (void *)1, 0);
-    Items_SetSelection(&D_8011FE88, ~func_804030E0_de(arg1), 0);
-    Items_LoadPreviewBufferA(&D_8011FE88);
-    Items_LoadPreviewBufferB(&D_8011FE88);
+    Items_SetSelection(&g_world, ~func_804030E0_de(arg1), 0);
+    Items_LoadPreviewBufferA(&g_world);
+    Items_LoadPreviewBufferB(&g_world);
 }

@@ -99,10 +99,10 @@ s32 Weapons_RequestActorState(void *arg0, void *arg1, s32 action) {
     StateEntry *scan;
     s32 flags;
 
-    if (D_8011FE88.mode == 2) {
+    if (g_world.mode == 2) {
         return 1;
     }
-    if (D_8011FE88.mode == 4) {
+    if (g_world.mode == 4) {
         ((Source110 *)arg0)->flags |= 0x100;
     }
 

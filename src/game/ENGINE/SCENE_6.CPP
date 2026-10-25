@@ -29,7 +29,7 @@ void *func_8028B00C_de(struct Shared_World *object, int index) {
 
 
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 
 
 extern void func_80249E28_de(LevelActor *object, void *camera);
@@ -43,10 +43,10 @@ void func_8028B028_de(SceneRecAt10C0 *scene, void *camera) {
 
     Render_BeginModelBatch();
     count = scene->count;
-    gSPMoveWord(D_80110634++, G_MW_CLIP, 4, 5);
-    gSPMoveWord(D_80110634++, G_MW_CLIP, 12, 5);
-    gSPMoveWord(D_80110634++, G_MW_CLIP, 20, 0xFFFB);
-    gSPMoveWord(D_80110634++, G_MW_CLIP, 28, 0xFFFB);
+    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 4, 5);
+    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 12, 5);
+    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 20, 0xFFFB);
+    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 28, 0xFFFB);
     objects = scene->objects;
     for (i = 0; i < count; i++) {
         object = objects[i];
@@ -63,7 +63,7 @@ void func_8028B028_de(SceneRecAt10C0 *scene, void *camera) {
     Render_FlushModelBatch();
 }
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 
 extern void Particle_DrawRenderList(s32 arg0, s32 arg1);
 
@@ -71,13 +71,13 @@ extern void Particle_DrawRenderList(s32 arg0, s32 arg1);
 void func_8028B160_de(s32 world, s32 view) {
     Gfx *cmd;
 
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPMoveWord(cmd, G_MW_CLIP, 4, 1);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPMoveWord(cmd, G_MW_CLIP, 12, 1);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPMoveWord(cmd, G_MW_CLIP, 20, 0xFFFF);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPMoveWord(cmd, G_MW_CLIP, 28, 0xFFFF);
     Render_BeginModelBatch();
     Particle_DrawRenderList(world + 0x1B08, view);

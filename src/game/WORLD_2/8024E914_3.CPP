@@ -85,7 +85,7 @@ void World_InitSimpleInstance(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 
     if (rec->variation == 0xFFFF) {
         inst->variation = &D_8011B388;
     } else {
-        inst->variation = Engine_GetActorDefinition(&D_8011FE88, rec->variation);
+        inst->variation = Engine_GetActorDefinition(&g_world, rec->variation);
     }
     if (rec->region == 0xFFFF) {
         inst->region = 0;
@@ -133,17 +133,17 @@ void func_8024EB90_de(StaticObject *obj) {
     func_8026D8F8_de();
     System_ResetTextureCache();
     if (obj->cached != 0) {
-        gSPDisplayList(D_80110634++, (unsigned int)obj->cached);
+        gSPDisplayList(g_displayListCursor++, (unsigned int)obj->cached);
         return;
     }
     resource = func_8024F6EC_de(obj, obj->model);
     if (resource == 0) {
         return;
     }
-    obj->cached = D_80110634;
-    gSPBranchList(D_80110634++, 0);
+    obj->cached = g_displayListCursor;
+    gSPBranchList(g_displayListCursor++, 0);
     if (*obj->type == 8) {
-        func_802736D4_de(&matrix, D_8011FE88.elapsed);
+        func_802736D4_de(&matrix, g_world.elapsed);
     } else {
         func_802736D4_de(&matrix, obj->angle);
     }
@@ -156,8 +156,8 @@ void func_8024EB90_de(StaticObject *obj) {
         func_8026DA4C_de(resource, obj->matrices[D_800D297C], 0, obj->lights, 0, obj->material);
         func_8024ED90_de(obj, resource);
     }
-    gSPEndDisplayList(D_80110634++);
-    gSPBranchList(obj->cached++, (unsigned int)D_80110634);
-    gSPDisplayList(D_80110634++, (unsigned int)obj->cached);
+    gSPEndDisplayList(g_displayListCursor++);
+    gSPBranchList(obj->cached++, (unsigned int)g_displayListCursor);
+    gSPDisplayList(g_displayListCursor++, (unsigned int)obj->cached);
     Scene_UnlockResource(0, resource);
 }

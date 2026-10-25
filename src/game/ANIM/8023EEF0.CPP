@@ -195,7 +195,7 @@ void func_8023F43C_de(char *obj) {
     if (shape->enabled == 0 || shape == (void *)&D_80100170) {
         return;
     }
-    table = &D_8011FE88;
+    table = &g_world;
     q = &query;
     radius = ((ActorMotion *)obj)->radius;
     self = ((ActorMotion *)obj)->actor;

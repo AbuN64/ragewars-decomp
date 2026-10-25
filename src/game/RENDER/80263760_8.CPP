@@ -181,7 +181,7 @@ void func_80264A20_de(void) {
     if (D_80145070 == 0) {
         enabled = 0;
     }
-    if (&D_8011FE88.mode == 0) {
+    if (&g_world.mode == 0) {
         enabled = 0;
     }
     if (enabled) {
@@ -255,7 +255,7 @@ void func_80264B8C_de(void) {
         if (snapshot->mode == 1) {
             actor->position = snapshot->positions[i];
             actor->field6C = snapshot->values[i];
-            actor->id = func_8028B394_de(&D_8011FE88, snapshot->handles[i]);
+            actor->id = func_8028B394_de(&g_world, snapshot->handles[i]);
         }
     }
 }
@@ -285,7 +285,7 @@ void func_80264CE0_de(void) {
         snapshot->blocks[i] = actor->block;
         snapshot->positions[i] = actor->position;
         snapshot->values[i] = actor->field6C;
-        snapshot->handles[i] = func_8028B350_de(&D_8011FE88, actor->id);
+        snapshot->handles[i] = func_8028B350_de(&g_world, actor->id);
         list = (ActorList *)&D_80145040;
     }
 }

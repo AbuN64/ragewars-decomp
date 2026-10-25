@@ -158,7 +158,7 @@ s32 func_80437114_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
             D_800E5694->item = 0;
         }
         func_804368F8_de(D_800E5694->item);
-        func_802A0C08_de(D_800E5694->text, RW_LOCALIZED_TEXT(D_800D34C0_de, D_800E1D54, D_800E1D54, D_80152789), D_800E5694->item + 1);
+        func_802A0C08_de(D_800E5694->text, RW_LOCALIZED_TEXT(D_800D34C0_de, D_800E1D54, D_800E1D54, g_languageIndex), D_800E5694->item + 1);
         D_800E5694->label->text = (void *) (D_800E5694->text);
         return 0;
     }
@@ -177,7 +177,7 @@ s32 func_804371C4_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
             D_800E5694->item = 3;
         }
         func_804368F8_de(D_800E5694->item);
-        func_802A0C08_de(D_800E5694->text, RW_LOCALIZED_TEXT(D_800D34C0_de, D_800E1D54, D_800E1D54, D_80152789), D_800E5694->item + 1);
+        func_802A0C08_de(D_800E5694->text, RW_LOCALIZED_TEXT(D_800D34C0_de, D_800E1D54, D_800E1D54, g_languageIndex), D_800E5694->item + 1);
         D_800E5694->label->text = (void *) (D_800E5694->text);
         return 0;
     }

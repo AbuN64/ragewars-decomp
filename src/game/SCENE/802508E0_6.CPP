@@ -105,7 +105,7 @@ ResourceLoadRequest *func_80252774_de(s32 unused, ResourceLoadRequest *request, 
 #include "UTIL/802555D0.H"
 #include "SCENE/802508E0.H"
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern struct Shape_func_8021A2D4_de_2 D_80105180;
 extern Manager D_801047E0;
 extern u32 __osDisableInt(void);
@@ -165,15 +165,15 @@ void Scene_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom)
     s32 b;
     u32 base;
 
-    gDPPipeSync(D_80110634++);
-    gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
+    gDPPipeSync(g_displayListCursor++);
+    gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
     Render_SetCombineMode(0x19);
     Render_SetModePreset(0x15);
-    gDPSetPrimColor(D_80110634++, 0, 0, 0xA0, 0xA0, 0xA0, 0x00);
-    gDPFillRectangle(D_80110634++, left - 1, top - 1, right + 1, bottom + 1);
+    gDPSetPrimColor(g_displayListCursor++, 0, 0, 0xA0, 0xA0, 0xA0, 0x00);
+    gDPFillRectangle(g_displayListCursor++, left - 1, top - 1, right + 1, bottom + 1);
     Render_SetModePreset(0x1B);
-    gDPSetPrimColor(D_80110634++, 0, 0, 0xA0, 0xA0, 0xA0, 0xFF);
-    gDPFillRectangle(D_80110634++, left, top, right, bottom);
+    gDPSetPrimColor(g_displayListCursor++, 0, 0, 0xA0, 0xA0, 0xA0, 0xFF);
+    gDPFillRectangle(g_displayListCursor++, left, top, right, bottom);
 
     lock();
 
@@ -184,9 +184,9 @@ void Scene_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom)
         total += span->size + span->free;
     }
 
-    gDPSetPrimColor(D_80110634++, 0, 0, 0x64, 0x64, 0x00, 0xFF);
+    gDPSetPrimColor(g_displayListCursor++, 0, 0, 0x64, 0x64, 0x00, 0xFF);
     hi = bottom - ((u32)(((u32)mainHeap()->first - base) * (bottom - top)) / total) - 1;
-    gDPFillRectangle(D_80110634++, left, hi, right, bottom + 1);
+    gDPFillRectangle(g_displayListCursor++, left, hi, right, bottom + 1);
 
     for (pass = 0; pass < 2; pass++) {
         for (node = D_80100584.head; node != 0; node = node->next) {
@@ -204,24 +204,24 @@ void Scene_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom)
             else if (node->flags & 0x600) { r = 0; g = 0; b = 255; }
             else { r = 0; g = 255; b = 0; }
 
-            gDPSetPrimColor(D_80110634++, 0, 0, r, g, b, 0xFF);
+            gDPSetPrimColor(g_displayListCursor++, 0, 0, r, g, b, 0xFF);
             hi = bottom - ((u32)(((node->start + node->end) - base) * (bottom - top)) / total) - 1;
             lo = bottom - ((u32)(((node->start - base) - 0x20) * (bottom - top)) / total) - 1;
             if (hi < lo) {
-                gDPFillRectangle(D_80110634++, left, hi, right, lo);
+                gDPFillRectangle(g_displayListCursor++, left, hi, right, lo);
             }
-            gDPSetPrimColor(D_80110634++, 0, 0, DARKEN(r), DARKEN(g), DARKEN(b), 0xFF);
-            gDPFillRectangle(D_80110634++, left, lo - 1, right, lo);
+            gDPSetPrimColor(g_displayListCursor++, 0, 0, DARKEN(r), DARKEN(g), DARKEN(b), 0xFF);
+            gDPFillRectangle(g_displayListCursor++, left, lo - 1, right, lo);
 
             if (!(node->flags & 0x702)) {
                 r = g = b = 0xFF;
                 if ((u32)(D_80105180.field_0 - node->stamp) >= 5U) {
-                gDPSetPrimColor(D_80110634++, 0, 0, r, g, b, 255);
+                gDPSetPrimColor(g_displayListCursor++, 0, 0, r, g, b, 255);
                 if (hi < lo) {
-                    gDPFillRectangle(D_80110634++, left + 8, hi, right, lo);
+                    gDPFillRectangle(g_displayListCursor++, left + 8, hi, right, lo);
                 }
-                gDPSetPrimColor(D_80110634++, 0, 0, BRIGHTEN(r), BRIGHTEN(g), BRIGHTEN(b), 255);
-                gDPFillRectangle(D_80110634++, left + 8, lo - 1, right, lo);
+                gDPSetPrimColor(g_displayListCursor++, 0, 0, BRIGHTEN(r), BRIGHTEN(g), BRIGHTEN(b), 255);
+                gDPFillRectangle(g_displayListCursor++, left + 8, lo - 1, right, lo);
                 }
             }
         }

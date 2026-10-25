@@ -77,7 +77,7 @@ void func_80243920_de(ActorB0 *actor) {
     data = actor->data;
     flags = actor->flags;
     if (data != 0) {
-        resource = func_8028B2F8_de(&D_8011FE88, (u16 *)data);
+        resource = func_8028B2F8_de(&g_world, (u16 *)data);
         if (resource != 0) {
           if ((*flags & 8) != 0) {
            if ((*flags & 0x100000) == 0) {

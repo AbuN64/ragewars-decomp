@@ -201,7 +201,7 @@ void func_802466A0_de(char *obj, s32 model, s32 kind, s32 unused, void *info, s3
 
     ((LevelActor *)obj)->flags &= ~0x40000;
     if (model == -1) {
-        model = func_8028B21C_de(&D_8011FE88, kind);
+        model = func_8028B21C_de(&g_world, kind);
         if (model == -1) {
             return;
         }
@@ -250,7 +250,7 @@ Nav_InitSpawnedActor
     if (effect != -1) {
         func_802193C8_de(obj + 0x204, effect, (char *)obj + 0x8);
     }
-    world = &D_8011FE88;
+    world = &g_world;
     Instance_LoadModel(obj, (s32)world->indexedDirectory, world->indexedBank, lean);
     if (delay != 0) {
         ((LevelActor *)obj)->animationTime = delay;

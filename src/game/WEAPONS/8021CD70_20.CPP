@@ -130,19 +130,19 @@ void func_80225B98_de(ObjectLinks854 *arg0, void *arg1, s32 arg2)
     resource_flags = 0;
 
     if (arg0->unk_14 != 0) {
-        resource = func_8028B2F8_de(&D_8011FE88, arg0->unk_14);
+        resource = func_8028B2F8_de(&g_world, arg0->unk_14);
         if (resource != 0) {
             resource_flags = ((ObjectState108 *)(resource))->resourceFlagBits;
         }
     }
 
-    if (D_8011FE88.visibilityEnabled != 0) {
+    if (g_world.visibilityEnabled != 0) {
         enabled = 0;
     }
     if (arg0->unk_664 & 0x8000) {
         enabled = 0;
     }
-    if (D_8011FE88.visibilityEnabled != 0) {
+    if (g_world.visibilityEnabled != 0) {
         enabled = 0;
     }
     if (D_80145048 >= 2) {
@@ -180,7 +180,7 @@ void func_80225B98_de(ObjectLinks854 *arg0, void *arg1, s32 arg2)
         func_80245618_de(arg2, 0, (VoidCallback)&D_0022ECCC);
     }
 
-    resource = func_8028CFA0_de(&D_8011FE88, -1, 0xC45);
+    resource = func_8028CFA0_de(&g_world, -1, 0xC45);
     if (resource != 0) {
         arg0->unk_50 = ((ObjectState108 *)(resource))->unk_FC;
         arg0->unk_54 = ((ObjectState108 *)(resource))->unk_100;

@@ -14,9 +14,9 @@ extern s32 D_800E28D0;
 
 
 static inline void rectangle(s32 x0,s32 y0,s32 x1,s32 y1,s32 r,s32 g,s32 b,s32 a) {
-    gDPPipeSync(D_80110634++);
-    gDPSetPrimColor(D_80110634++,255,255,r,g,b,a);
-    gDPFillRectangle(D_80110634++, x0>0?x0:0,y0>0?y0:0,x1>0?x1:0,y1>0?y1:0);
+    gDPPipeSync(g_displayListCursor++);
+    gDPSetPrimColor(g_displayListCursor++,255,255,r,g,b,a);
+    gDPFillRectangle(g_displayListCursor++, x0>0?x0:0,y0>0?y0:0,x1>0?x1:0,y1>0?y1:0);
 }
 
 /* Draws a signed integer of up to four digits with the font sprite set from Render_StartWorldEffect: splits the magnitude into thousands, hundreds, tens and ones, draws a leading minus sign through func_802AAC28_de when negative, then draws at least minDigits digits through Text_DrawTileGrid, advancing 13 units per digit (0.7 of that for a one) scaled by the size, laid out right to left when rightAlign is set, and releases the sprite set. */
@@ -28,7 +28,7 @@ extern s32 Render_StartWorldEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 extern void Text_DrawTileGrid(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
 
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 
 
 #include "GFX/TEXT/802A8A94_6.H"
@@ -166,7 +166,7 @@ void func_802A822C_de(s32 value, f32 x, f32 y, f32 size, f32 scaleY, s32 arg5, s
     f32 width;
     f32 scale;
 
-    sprites = Render_StartWorldEffect(&D_8011FE88, 4, 0x10, 1);
+    sprites = Render_StartWorldEffect(&g_world, 4, 0x10, 1);
     if (sprites == 0) {
         return;
     }
@@ -245,9 +245,9 @@ void func_802A84F8_de(void) {
 
         {
             Gfx *cmd;
-            cmd = D_80110634++;
+            cmd = g_displayListCursor++;
             gDPPipeSync(cmd);
-            cmd = D_80110634++;
+            cmd = g_displayListCursor++;
             gDPSetCycleType(cmd, G_CYC_2CYCLE);
         }
 
@@ -257,31 +257,31 @@ void func_802A84F8_de(void) {
         D_80147150 = 0;
         {
         Gfx *cmd;
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gSPTexture(cmd, 32768, 32768, 0, 0, G_ON);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetTextureLUT(cmd, G_TT_NONE);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetTexturePersp(cmd, G_TP_NONE);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetTextureFilter(cmd, G_TF_BILERP);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, texture);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPLoadSync(cmd);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPLoadBlock(cmd, G_TX_LOADTILE, 0, 0, 143, 2048);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPPipeSync(cmd);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_4b, 2, 0, G_TX_RENDERTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetTileSize(cmd, G_TX_RENDERTILE, 0, 0, 92, 92);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_4b, 0, 0, 1, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetTileSize(cmd, 1, 0, 0, 60, 60);
         }
 
@@ -299,19 +299,19 @@ void func_802A8710_de(void) {
     v0 = func_802AADBC_de();
     if (v0 != 0) {
         D_80147150 = 1;
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, v0);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 0, 256, G_TX_LOADTILE, 0, G_TX_WRAP, 3, 0, G_TX_WRAP, 4, 0);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPLoadSync(cmd);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPLoadBlock(cmd, G_TX_LOADTILE, 0, 0, 31, 2048);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPPipeSync(cmd);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_4b, 1, 256, G_TX_RENDERTILE, 0, G_TX_WRAP, 3, 0, G_TX_WRAP, 4, 0);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetTileSize(cmd, G_TX_RENDERTILE, 0, 0, 60, 28);
     }
 }
@@ -323,19 +323,19 @@ void func_802A8800_de(void) {
     v0 = func_802AADBC_de();
     if (v0 != 0) {
         D_80147150 = 2;
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, v0);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 0, 256, G_TX_LOADTILE, 0, G_TX_WRAP, 3, 0, G_TX_WRAP, 4, 0);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPLoadSync(cmd);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPLoadBlock(cmd, G_TX_LOADTILE, 0, 0, 31, 2048);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPPipeSync(cmd);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_4b, 1, 256, G_TX_RENDERTILE, 0, G_TX_WRAP, 3, 0, G_TX_WRAP, 4, 0);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPSetTileSize(cmd, G_TX_RENDERTILE, 0, 0, 60, 28);
     }
 }

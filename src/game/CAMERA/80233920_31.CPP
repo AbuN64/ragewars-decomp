@@ -56,7 +56,7 @@ void func_80239EA4_de(void *gameplayCamera, CVector3 *out) {
 
     targetY = 0.0f;
     targetX = targetY;
-    entry = func_8028B2F8_de(&D_8011FE88, (u16 *)o->floorPoly);
+    entry = func_8028B2F8_de(&g_world, (u16 *)o->floorPoly);
     if (entry == 0) {
         out->x = targetY;
         out->y = targetY;
@@ -94,7 +94,7 @@ void func_80239FDC_de(void *gameplayCamera) {
     f32 w;
 
     if (Camera_IsSequenceInWindow() != 0) {
-        camera->floorPoly = (Shared_func_80234FDC_S8 *)Scene_FindFloorPolygon(&D_8011FE88, &camera->unk38);
+        camera->floorPoly = (Shared_func_80234FDC_S8 *)Scene_FindFloorPolygon(&g_world, &camera->unk38);
     }
     object = (s32)camera->floorPoly;
     x = camera->unk38;

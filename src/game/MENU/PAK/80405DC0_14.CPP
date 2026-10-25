@@ -82,7 +82,7 @@ s32 Pak_RestoreSaveBlock(void *unused, MenuRecAt24 *menu) {
     }
     if (D_80153780 != 0) {
         owner = Weapons_FindPlayerByController(D_80145040, menu->slot);
-        world = &D_8011FE88;
+        world = &g_world;
         kept = D_80146848[0];
         owner->block = D_800E28BC->block18;
         *(PakSavedOptions *)&D_801462C8 = D_800E28BC->options;

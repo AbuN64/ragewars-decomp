@@ -218,7 +218,7 @@ void func_804279B8_de(void) {
         record = (*(ResultsOptionsScreen **)&D_800E4690)->selection;
         entry = &((PreviewSettings *)&D_801462C8)->entries[(*(ResultsOptionsScreen **)&D_800E4690)->player];
         func_804284C0_de(record, settings);
-        kind = func_8028D474_de(&D_8011FE88, record)->kind;
+        kind = func_8028D474_de(&g_world, record)->kind;
         entry->kind = kind;
         index = Frontend_FindKeyIndex((s8)kind);
         scale.x = D_800E3A58[index].scale[0];

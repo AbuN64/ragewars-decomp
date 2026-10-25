@@ -60,7 +60,7 @@ void Level_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *h
         if (triggerResponse) {
             eventState.active = 0;
             func_80267198_de(ctx, ctx, 6, ctx->unk_8, eventState);
-            Render_SetActorStateBit(&D_8011FE88, ctx, 1);
+            Render_SetActorStateBit(&g_world, ctx, 1);
         }
     }
     if ((rule->flags & 1) && hit->active != 0) {
@@ -136,7 +136,7 @@ void func_80204A68_de(void *breakableHitContext, ObjectStateCC *arg1) {
     if (destroy) {
         local.active = 0;
         func_80267198_de(breakableHitContext, breakableHitContext, 7, ((BreakableHitContext *)(breakableHitContext))->unk_8, local);
-        Render_SetActorStateBit(&D_8011FE88, breakableHitContext, 0);
+        Render_SetActorStateBit(&g_world, breakableHitContext, 0);
     }
 }
 
@@ -146,7 +146,7 @@ void func_80204BB4_de(void *unused0, Dest *arg1) {
 }
 
 void func_80204BD0_de(void *arg0, void *arg1) {
-    s32 different = Render_TestActorStateBit(&D_8011FE88, arg0) != 1;
+    s32 different = Render_TestActorStateBit(&g_world, arg0) != 1;
 
     if (different == 0) {
         Weapons_RequestActorState(arg0, arg1, 0);
@@ -171,7 +171,7 @@ void func_80204C68_de(void *arg0, ActorMotionState *motionState) {
     Shared_World *flag;
 
     local.active = 0;
-    flag = &D_8011FE88;
+    flag = &g_world;
     Render_SetActorStateBit(flag, arg0, 1);
     func_80278D78_de(arg0, 0x4000, arg0);
     motionState->speed = 0;
@@ -188,7 +188,7 @@ void func_80204D2C_de(BreakableHitContext *breakableHitContext) {
     Shared_World *flag;
 
     local.active = 0;
-    flag = &D_8011FE88;
+    flag = &g_world;
     Render_SetActorStateBit(flag, breakableHitContext, 0);
     func_80278D78_de(breakableHitContext, 0x8000, breakableHitContext);
     func_802A5D38_de(&D_801379C0, (s32)breakableHitContext);
@@ -203,12 +203,12 @@ void func_80204DE0_de(void *a, void *b) {
     Weapons_RequestActorState(a, b, 0x0); }
 
 void func_80204DFC_de(Trigger *trigger) {
-    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 1);
+    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 1);
 }
 
 void func_80204E2C_de(void *a, void *b) {
     Weapons_RequestActorState(a, b, 0x1); }
 
 void func_80204E48_de(Trigger *trigger) {
-    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 0);
+    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 0);
 }

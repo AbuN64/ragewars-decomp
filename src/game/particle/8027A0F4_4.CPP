@@ -353,7 +353,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         } else {
             func_80272E3C_de(local, particle->rot.x, particle->rot.y + RW_PI_F6, particle->rot.z);
         }
-        func_8028C6D4_de(&D_8011FE88, &particle->inst.pos, &particle->lighting[D_800D297C]);
+        func_8028C6D4_de(&g_world, &particle->inst.pos, &particle->lighting[D_800D297C]);
     } else if ((particle->rot.x == 0.0f) && (particle->rot.y == 0.0f)) {
         func_80273760_de(local, particle->rot.z);
     } else {

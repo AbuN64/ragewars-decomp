@@ -17,7 +17,7 @@
 
 
 
-extern Player_func_8041EAC4_de D_80146398[];
+extern Player_func_8041EAC4_de g_playerSettings[];
 
 /* Counts how many of the three 28-byte entries of D_80153F80 hold a non-negative first word. */
 
@@ -109,7 +109,7 @@ s32 func_8041EAC4_de(void) {
     Player_func_8041EAC4_de *player;
 
     count = 0;
-    player = D_80146398;
+    player = g_playerSettings;
     for (i = 0; i < 4; i++) {
         if (player[i].active == 1) {
             count++;

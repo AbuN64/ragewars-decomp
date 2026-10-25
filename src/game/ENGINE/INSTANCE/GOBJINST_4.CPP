@@ -152,7 +152,7 @@ void func_802472F0_de(void *actor) {
     void *track1;
     f32 value;
 
-    if (D_8011FE88.mode == 4) {
+    if (g_world.mode == 4) {
         if ((s8)((Actor36 *)actor)->currentTrack.active == 0)
             ((Actor36 *)actor)->currentTrack.blending = 1;
         if ((s8)((Actor36 *)actor)->previousTrack.active == 0)
@@ -403,7 +403,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
     i = 0;
     target = 0;
     bestDot = Math_Cosf(cone * 0.008726647f);
-    count = D_8011FE88.registeredCount;
+    count = g_world.registeredCount;
     for (; i < count; i++) {
         entity = D_8011CA18[i];
         if (entity == actor || (((LevelActor *)(entity))->flags & 1) || ((LevelActor *)(entity))->active == 0) {

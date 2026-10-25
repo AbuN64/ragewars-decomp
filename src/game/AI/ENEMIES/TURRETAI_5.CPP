@@ -64,7 +64,7 @@ extern f32 Particle_GetActorHeight(Player *);
 extern s32 func_802444A4_de(Player *, CVector3, CVector3, char *);
 
 void Turret_LinkEffect_Activate(void *actor, WeaponFireState *state, s32 unusedArg) {
-    if ((Render_TestActorStateBit(&D_8011FE88, actor) == 0) &&
+    if ((Render_TestActorStateBit(&g_world, actor) == 0) &&
         (state->variant == 0)) {
         Turret_LinkEffect_MakeVisible(actor, state, unusedArg);
         Weapons_RequestActorState(actor, state, 1);

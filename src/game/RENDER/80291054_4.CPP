@@ -96,19 +96,19 @@ void func_80292308_de(TimingWorld *world) {
             func_8040C09C_de();
         }
         Render_ClearDepthRect(world, 0, 0x1E0, 0, 0x168, 0);
-        gDPSetScissorFrac(D_80110634++,0,0,0,0x77C,0x59C);
-        gDPSetColorImage(D_80110634++,G_IM_FMT_RGBA,G_IM_SIZ_16b,480,D_80146CD8->colorImage);
-        gDPSetCycleType(D_80110634++,G_CYC_FILL);
-        gDPSetCombineLERP(D_80110634++,0,0,0,SHADE,0,0,0,SHADE,0,0,0,SHADE,0,0,0,SHADE);
-        gDPSetRenderMode(D_80110634++,G_RM_NOOP,G_RM_NOOP2);
-        gDPSetFillColor(D_80110634++,0x10001);
-        gDPFillRectangle(D_80110634++,0,0,480,360);
+        gDPSetScissorFrac(g_displayListCursor++,0,0,0,0x77C,0x59C);
+        gDPSetColorImage(g_displayListCursor++,G_IM_FMT_RGBA,G_IM_SIZ_16b,480,D_80146CD8->colorImage);
+        gDPSetCycleType(g_displayListCursor++,G_CYC_FILL);
+        gDPSetCombineLERP(g_displayListCursor++,0,0,0,SHADE,0,0,0,SHADE,0,0,0,SHADE,0,0,0,SHADE);
+        gDPSetRenderMode(g_displayListCursor++,G_RM_NOOP,G_RM_NOOP2);
+        gDPSetFillColor(g_displayListCursor++,0x10001);
+        gDPFillRectangle(g_displayListCursor++,0,0,480,360);
         D_800E28E0--;
     }
-    gDPFullSync(D_80110634++);
-    gSPEndDisplayList(D_80110634++);
+    gDPFullSync(g_displayListCursor++);
+    gSPEndDisplayList(g_displayListCursor++);
     maxListBytes = D_800CD884;
-    listBytes = (u8 *)D_80110634 - (u8 *)D_80146CD8->commands;
+    listBytes = (u8 *)g_displayListCursor - (u8 *)D_80146CD8->commands;
     D_80146CD8->commandBytes = listBytes;
     if (maxListBytes < listBytes) {
         maxListBytes = listBytes;

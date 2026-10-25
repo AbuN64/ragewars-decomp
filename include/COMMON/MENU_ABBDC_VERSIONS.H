@@ -6,7 +6,7 @@
 #elif defined(VERSION_EU_X)
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-#define MENU_LANGUAGE D_80152789
+#define MENU_LANGUAGE g_languageIndex
 #else
 #define MENU_LANGUAGE 0
 #endif

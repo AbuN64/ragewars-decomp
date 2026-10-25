@@ -34,7 +34,7 @@ extern void func_8024B2D0_de(SceneEffect *);
 static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref) {
     SceneEffect *effect;
 
-    if (D_8011FE88.visibilityEnabled == 0 && (unsigned int)scene->UsedList.count >= 3) {
+    if (g_world.visibilityEnabled == 0 && (unsigned int)scene->UsedList.count >= 3) {
         return 0;
     }
     effect = scene->FreeList.head;
@@ -76,13 +76,13 @@ SceneEffect *func_80262CE0_de(struct SceneEffectPool *scene, s32 id, s32 variant
         return 0;
     }
     if (id == -1) {
-        id = func_8028B21C_de(&D_8011FE88, variant);
+        id = func_8028B21C_de(&g_world, variant);
         if (id == -1) {
             return 0;
         }
     }
     if ((unsigned int)(variant + 1) < 2) {
-        variant = func_8028B25C_de(&D_8011FE88, id);
+        variant = func_8028B25C_de(&g_world, id);
     }
     effect = take_effect(scene, ref);
     if (effect == 0) {
@@ -131,7 +131,7 @@ void func_80262E88_de(struct SceneEffectPool *scene, s32 arg1) {
 void *func_80262FF8_de(s32 arg0, s32 *arg1) {
     void *temp_s0;
 
-    if ((D_8011FE88.visibilityEnabled != 0) || ((u32)((struct ObjectLinks5F28 *) arg0)->unk_5F24 < 3)) {
+    if ((g_world.visibilityEnabled != 0) || ((u32)((struct ObjectLinks5F28 *) arg0)->unk_5F24 < 3)) {
         temp_s0 = ((struct ObjectLinks5F28 *) arg0)->unk_5F00;
         if (temp_s0 != 0) {
             func_80255ED8_de((void *)(arg0 + 0x5F00), temp_s0);

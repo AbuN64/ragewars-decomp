@@ -17,7 +17,7 @@ s32 func_80439C80_de(struct Record_func_80439C80_de *record, s32 count) {
     record->count = count;
     record->handle = -1;
     if (count > 0) {
-        record->handle = func_8028B21C_de(&D_8011FE88, count);
+        record->handle = func_8028B21C_de(&g_world, count);
     }
     return record->handle;
 }

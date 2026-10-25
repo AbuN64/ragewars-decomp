@@ -101,7 +101,7 @@ CVector3 *func_80275F28_de(CVector3 *out, Node75 *node) {
 }
 
 u8 func_80276054_de(s32 modelId) {
-    ModelBlend *blend = func_8028B2F8_de(&D_8011FE88, modelId);
+    ModelBlend *blend = func_8028B2F8_de(&g_world, modelId);
     if (blend == 0) {
         return 0;
     }
@@ -109,7 +109,7 @@ u8 func_80276054_de(s32 modelId) {
 }
 
 u8 func_80276088_de(s32 modelId) {
-    ModelBlend *blend = func_8028B2F8_de(&D_8011FE88, modelId);
+    ModelBlend *blend = func_8028B2F8_de(&g_world, modelId);
     if (blend == 0) {
         return 0;
     }

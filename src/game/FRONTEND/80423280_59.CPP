@@ -49,7 +49,7 @@ extern void func_80298368_de(s32);
 
 
 
-extern SlotRecAt7F D_80146398[];
+extern SlotRecAt7F g_playerSettings[];
 
 extern s8 D_80102B0D[];
 
@@ -135,7 +135,7 @@ int func_8042DC04_de(void) {
     D_800E5430->head.target = 7;
     func_8041A430_de(D_800E5430->head.menu, 2);
     for (i = 0; i < D_800E5430->count; i++) {
-        slot = &D_80146398[i];
+        slot = &g_playerSettings[i];
         slot->active = 1;
         slot->index = i;
         if (D_80102B0D[i * 400] < 0) {

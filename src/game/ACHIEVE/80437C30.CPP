@@ -71,7 +71,7 @@ s32 func_80437C30_us_rev1(MenuWidget *menu) {
     func_8040EC30_de(menu, 0x270 + PREVIEW_ID_SHIFT)->alpha = 0x14;
     func_8040EC30_de(menu, 0x26D + PREVIEW_ID_SHIFT)->alpha = 0x14;
     func_8040EC30_de(menu, 0x280 + PREVIEW_ID_SHIFT)->alpha = 0x19;
-    config = D_80146398;
+    config = g_playerSettings;
     D_800E5830->player = 0;
     for (i = 0; i < 4; i++) {
         if (config[i].active == 1) {
@@ -130,7 +130,7 @@ done:
                 func_80265688_de(&D_80102B00[D_800E5830->player].groupFlags, 2, 1);
             }
             if (D_8015402C >= 0x23) {
-                func_80265688_de(D_80102B00[D_800E5830->player].kindFlags, D_80146398[D_800E5830->player].kind, 1);
+                func_80265688_de(D_80102B00[D_800E5830->player].kindFlags, g_playerSettings[D_800E5830->player].kind, 1);
                 Resmgr_FillMemory(D_80102B00[D_800E5830->player].levelFlags[0], 0, 5);
                 character = func_80425674_de(D_800E5830->player);
                 if (character >= 0) {
@@ -213,7 +213,7 @@ done:
         item->text = D_800D358C;
     }
     item = func_8040EC30_de(menu, 0x26C + PREVIEW_ID_SHIFT);
-    func_8028D380_de(&D_8011FE88, D_8015402C, levelName, 0x3F);
+    func_8028D380_de(&g_world, D_8015402C, levelName, 0x3F);
     Resmgr_CopyString(D_800E5830->nameText, func_802A0494_de(levelName));
     item->text = D_800E5830->nameText;
     D_800E5830->item24 = func_8040EC30_de(menu, 0x274 + PREVIEW_ID_SHIFT);
@@ -265,7 +265,7 @@ void Achieve_UpdatePlayerPreviewStats(void) {
 
     player = D_800E5830->player;
     statIndex = player;
-    record = &D_80146398[player];
+    record = &g_playerSettings[player];
     item = func_8040EC30_de(D_800E5830->window, (0x275 + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0x96;

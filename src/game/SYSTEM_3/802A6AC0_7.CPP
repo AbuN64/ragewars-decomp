@@ -162,7 +162,7 @@ void func_802A6900_de(ToggleMenu *panel, Input_func_802A65E0_de *player) {
                 row >>= 2;
                 x = view[2] + view[0]*unit + ((origin - (f32)(n-row*4)*grid)+spacing)*unit*view[0];
                 y = view[3] + view[1]*unit + (origin - (f32)(row))*unit*view[1];
-                gDPSetEnvColor(D_80110634++, r, g, b, opacity*colorScale);
+                gDPSetEnvColor(g_displayListCursor++, r, g, b, opacity*colorScale);
                 func_802AAC28_de(slot->image, slot->imageFrame,
                 (s16)(s32)(x-(f32)width*sx*unit),
                 (s16)(s32)(y-(f32)height*sy*unit), sx, sy, 1);
@@ -206,7 +206,7 @@ void func_802A6900_de(ToggleMenu *panel, Input_func_802A65E0_de *player) {
                         b = 128;
                         opacity = unit;
                     }
-                    gDPSetEnvColor(D_80110634++, r, g, b, opacity*colorScale);
+                    gDPSetEnvColor(g_displayListCursor++, r, g, b, opacity*colorScale);
                     n++;
                     func_802AAC28_de(slot->image, slot->imageFrame,
                     (s16)(s32)(x-(f32)width*sx*unit),

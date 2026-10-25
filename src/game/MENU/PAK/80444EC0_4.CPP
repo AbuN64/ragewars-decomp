@@ -37,7 +37,7 @@ s32 func_80444FA0_us_rev1(OptionEditState *arg0, OptionEditState *arg1, s32 arg2
         if (temp_a1 != NULL) {
             temp_a1_2 = temp_a1->unk_58;
             if (temp_a1_2 != 0) {
-                temp_s0 = func_8028B2F8_de(&D_8011FE88, temp_a1_2) + arg4;
+                temp_s0 = func_8028B2F8_de(&g_world, temp_a1_2) + arg4;
                 switch (arg3) { /* irregular */
                 case 0:
                     var_s1 = *temp_s0;

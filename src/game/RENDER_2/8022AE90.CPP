@@ -23,7 +23,7 @@ void func_8022AEA0_de(Shared_ActorView *actor, s32 arg1) {
     } else {
         var_s1 = &actor->position;
     }
-    if (D_8011FE88.frozen == 0 && D_8011FAC0.clockPaused == 0) {
+    if (g_world.frozen == 0 && D_8011FAC0.clockPaused == 0) {
         func_8025CA24_de(func_8025CC6C_de(), (void *)actor->field11BC);
         actor->field11BC = (s32)func_8025C95C_de((void *)func_8025CC6C_de(), arg1, var_s1, var_s1, (s32)actor);
     }
@@ -38,7 +38,7 @@ void func_8022AF74_de(Shared_ActorView *actor, s32 arg1) {
     s32 field5DC;
     void *var_s1;
 
-    if (D_8011FE88.frozen == 0 && D_8011FAC0.clockPaused == 0) {
+    if (g_world.frozen == 0 && D_8011FAC0.clockPaused == 0) {
         field5DC = (s32) actor->message;
         if (field5DC != 0) {
             var_s1 = (void *)(field5DC + 0x128);

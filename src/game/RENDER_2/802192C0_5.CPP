@@ -31,16 +31,16 @@ void func_8021C698_de(PlayerCode802192C0 *player) {
     s32 high;
 
     if (player->marker != 0) {
-        gSPMatrix(D_80110634++, &player->views[D_800D297C], G_MTX_LOAD);
-        gDPPipeSync(D_80110634++);
+        gSPMatrix(g_displayListCursor++, &player->views[D_800D297C], G_MTX_LOAD);
+        gDPPipeSync(g_displayListCursor++);
         func_8026D8F8_de();
         Render_SetModePreset(0xE);
         Render_SetCombineMode(0x1C);
         red = 200;
         low = 100;
         high = 150;
-        gSPGeometryMode(D_80110634++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);
-        gSPGeometryMode(D_80110634++, 0, G_SHADE | G_SHADING_SMOOTH);
+        gSPGeometryMode(g_displayListCursor++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);
+        gSPGeometryMode(g_displayListCursor++, 0, G_SHADE | G_SHADING_SMOOTH);
         D_80102A58[0].x = 0;
         D_80102A58[0].y = 1;
         D_80102A58[0].z = 0;
@@ -121,15 +121,15 @@ void func_8021C698_de(PlayerCode802192C0 *player) {
         D_80102A58[7].g = 0;
         D_80102A58[7].b = 0;
         D_80102A58[7].a = low;
-        gSPVertex(D_80110634++, (u32) D_80102A58, 8, 0);
-        gSP1Triangle(D_80110634++, 0, 1, 4, 0);
-        gSP1Triangle(D_80110634++, 1, 4, 5, 0);
-        gSP1Triangle(D_80110634++, 1, 2, 5, 0);
-        gSP1Triangle(D_80110634++, 2, 5, 6, 0);
-        gSP1Triangle(D_80110634++, 2, 3, 6, 0);
-        gSP1Triangle(D_80110634++, 3, 6, 7, 0);
-        gSP1Triangle(D_80110634++, 3, 0, 7, 0);
-        gSP1Triangle(D_80110634++, 0, 7, 4, 0);
+        gSPVertex(g_displayListCursor++, (u32) D_80102A58, 8, 0);
+        gSP1Triangle(g_displayListCursor++, 0, 1, 4, 0);
+        gSP1Triangle(g_displayListCursor++, 1, 4, 5, 0);
+        gSP1Triangle(g_displayListCursor++, 1, 2, 5, 0);
+        gSP1Triangle(g_displayListCursor++, 2, 5, 6, 0);
+        gSP1Triangle(g_displayListCursor++, 2, 3, 6, 0);
+        gSP1Triangle(g_displayListCursor++, 3, 6, 7, 0);
+        gSP1Triangle(g_displayListCursor++, 3, 0, 7, 0);
+        gSP1Triangle(g_displayListCursor++, 0, 7, 4, 0);
         if (player->second != 0) {
             func_802A5498_de(&player->markers[D_800D297C], red, low, high);
         }

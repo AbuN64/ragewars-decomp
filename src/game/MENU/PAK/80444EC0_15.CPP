@@ -14,7 +14,7 @@ extern s32 Pak_CountLineChars(LayeredText *);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 /* The menu language byte; read as an array element, which keeps the read after the text store. */
-extern u8 D_80152789[];
+extern u8 g_languageIndex[];
 extern char D_800EEE20[];
 #define VALUE_TEXT D_800E4154
 #define VALUE_FORMAT D_800EEE20
@@ -30,7 +30,7 @@ s32 func_80445ECC(LayeredText *field) {
     } else {
         field->text = VALUE_TEXT;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = (char *)field->text[D_80152789[0]];
+        text = (char *)field->text[g_languageIndex[0]];
 #else
         text = (char *)*VALUE_TEXT;
 #endif

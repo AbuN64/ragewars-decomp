@@ -23,7 +23,7 @@
 extern s32 D_800D297C;
 
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 
 extern s32 func_802A23B4_de(void);
 
@@ -229,18 +229,18 @@ void func_80229D28_de(Player16C0 *player) {
 
     if (player->alive != 0) {
         if (func_802A23B4_de() != 0) {
-            gSPMatrix(D_80110634++, (u32) &player->markers[0], G_MTX_LOAD);
+            gSPMatrix(g_displayListCursor++, (u32) &player->markers[0], G_MTX_LOAD);
         } else {
-            gSPMatrix(D_80110634++, (u32) &player->markers[D_800D297C], G_MTX_LOAD);
+            gSPMatrix(g_displayListCursor++, (u32) &player->markers[D_800D297C], G_MTX_LOAD);
         }
-        gDPPipeSync(D_80110634++);
+        gDPPipeSync(g_displayListCursor++);
         func_8026D8F8_de();
         Render_SetModePreset(0xE);
         Render_SetCombineMode(0x1C);
         green = 200;
         alpha = 150;
-        gSPGeometryMode(D_80110634++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);
-        gSPGeometryMode(D_80110634++, 0, G_SHADE | G_SHADING_SMOOTH);
+        gSPGeometryMode(g_displayListCursor++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);
+        gSPGeometryMode(g_displayListCursor++, 0, G_SHADE | G_SHADING_SMOOTH);
         D_800FE9F8[0].x = 0;
         D_800FE9F8[0].y = 0;
         D_800FE9F8[0].z = 0;
@@ -291,11 +291,11 @@ void func_80229D28_de(Player16C0 *player) {
         D_800FE9F8[4].g = green;
         D_800FE9F8[4].b = 0;
         D_800FE9F8[4].a = alpha;
-        gSPVertex(D_80110634++, (u32) D_800FE9F8, 5, 0);
-        gSP1Triangle(D_80110634++, 0, 1, 2, 0);
-        gSP1Triangle(D_80110634++, 0, 1, 4, 0);
-        gSP1Triangle(D_80110634++, 0, 2, 3, 0);
-        gSP1Triangle(D_80110634++, 0, 3, 4, 0);
+        gSPVertex(g_displayListCursor++, (u32) D_800FE9F8, 5, 0);
+        gSP1Triangle(g_displayListCursor++, 0, 1, 2, 0);
+        gSP1Triangle(g_displayListCursor++, 0, 1, 4, 0);
+        gSP1Triangle(g_displayListCursor++, 0, 2, 3, 0);
+        gSP1Triangle(g_displayListCursor++, 0, 3, 4, 0);
     }
 }
 

@@ -17,7 +17,6 @@
 #include "FRONTEND/CODE_80426EC4.H"
 #include "FRONTEND/8041BEA8_6.H"
 #define D_800E4690 fz_D_800E4690
-#define D_80146398 fz_D_80146398
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
@@ -29,7 +28,7 @@
 #include "TYPES.H"
 #include "RENDER_2/8025DE50_5.H"
 extern struct Screen_func_80426788_de *D_800E4690;
-extern struct Status D_80146398[];
+extern struct Status g_playerSettings[];
 extern MenuWidget *func_8040EC30_de(void *, s32);
 void func_80265688_de(u8 *arg0, s32 arg1, s32 arg2);
 void func_80427F10_de(void);
@@ -121,7 +120,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *owner) {
     Frontend_SetWidgetFlag08(temp_v0_4, 0);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2456))) = func_8040EC30_de(owner, 0x154);
-    var_a0 = D_80146398;
+    var_a0 = g_playerSettings;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2460))) = func_8040EC30_de(owner, 0x155);
     (*(ResultsOptionsScreen **)&D_800E4690)->player = 0;
@@ -136,7 +135,7 @@ loop_7:
         (*(ResultsOptionsScreen **)&D_800E4690)->player = j;
     }
     k = 0;
-    var_v1_3 = D_80146398;
+    var_v1_3 = g_playerSettings;
     do {
         k += 1;
         if (var_v1_3[0x91] == 1) {
@@ -203,7 +202,6 @@ loop_7:
     return 0;
 }
 #undef D_800E4690
-#undef D_80146398
 #else
 INCLUDE_ASM("ovl_80400000", func_80426FA0_eu_x);
 #endif

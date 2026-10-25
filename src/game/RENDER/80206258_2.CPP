@@ -32,7 +32,7 @@ void func_8020676C_de(void *arg0, void *arg1, Trigger *trigger) {
     func_802065C0_de(arg0, arg1, trigger->unk6);
     ((LevelActor *)arg0)->flags = ((LevelActor *)arg0)->flags | 0x2100;
     func_802472F0_de(arg0);
-    Render_SetActorStateBit(&D_8011FE88, arg0, 0);
+    Render_SetActorStateBit(&g_world, arg0, 0);
 }
 
 void func_802067BC_de(Shared_Actor *actor) {
@@ -41,11 +41,11 @@ void func_802067BC_de(Shared_Actor *actor) {
     v &= ~0x2000;
     v &= ~0x100;
     actor->weaponFlags = v;
-    Render_SetActorStateBit(&D_8011FE88, actor, 1);
+    Render_SetActorStateBit(&g_world, actor, 1);
 }
 
 void func_802067FC_de(Trigger *trigger) {
-    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 1);
+    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 1);
 }
 
 void func_8020682C_de(Shared_Actor *actor, s32 *arg1) {
@@ -55,18 +55,18 @@ void func_8020682C_de(Shared_Actor *actor, s32 *arg1) {
         *arg1 |= 0x200;
     }
     func_802472F0_de(actor);
-    Render_SetActorStateBit(&D_8011FE88, actor, 0);
+    Render_SetActorStateBit(&g_world, actor, 0);
 }
 
 void func_80206898_de(Trigger *trigger) {
-    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 0);
+    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 0);
 }
 
 void func_802068C8_de(struct Shared_Actor *actor, s32 arg1, s32 arg2) {
     extern void Render_SetActorStateBit(Shared_World *, void *, s32);
     Menu_RequestTrackByIds((s32)actor, (void *)arg2);
     actor->weaponFlags |= 0x2100;
-    Render_SetActorStateBit(&D_8011FE88, actor, 0);
+    Render_SetActorStateBit(&g_world, actor, 0);
 }
 
 void func_80206910_de(s32 arg0) {

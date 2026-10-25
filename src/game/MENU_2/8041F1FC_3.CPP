@@ -19,7 +19,7 @@ extern struct Shape_typemap_165 D_800E41C0[];
 extern s32 D_800E28D0;
 
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 
 extern void func_8041C7F4_de(void *);
 extern u8 D_800FEB57[][0x190];
@@ -167,7 +167,7 @@ s32 func_8041FC50_de(void *arg0, void *arg1, s32 event)
         for (i = 0; i < 4; i++) {
             if (D_800E42D0->players[i].unkC == 1 || D_800E42D0->players[i].unkC == 3) {
                 if (D_800E42D0->players[i].kind != -1) {
-                    gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, D_800E41C0[i].field_0, D_800E41C0[i].field_4, D_800E41C0[i].field_8, D_800E41C0[i].field_C);
+                    gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, D_800E41C0[i].field_0, D_800E41C0[i].field_4, D_800E41C0[i].field_8, D_800E41C0[i].field_C);
                     if (D_800E42D0->players[i].unk4C0 > 0) {
                         D_800D15E4[0] = 150.0f;
                         D_800D15E4[1] = 0.0f;
@@ -188,7 +188,7 @@ s32 func_8041FC50_de(void *arg0, void *arg1, s32 event)
             }
         }
         D_800D15E0 = 0;
-        gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
+        gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
         D_800D15E4[0] = 255.0f;
         D_800D15E4[1] = 255.0f;
         D_800D15E4[2] = 255.0f;

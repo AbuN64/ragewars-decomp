@@ -504,7 +504,7 @@ void func_80220ED4_de(SharedPlayer *player)
         player->views5E8.view854_147.unk854 = after->timer;
       }
     }
-    Scene_UpdateMovementTriggers(&D_8011FE88, actor, &prev, &actor->views0.view8_3.pos);
+    Scene_UpdateMovementTriggers(&g_world, actor, &prev, &actor->views0.view8_3.pos);
     if (hit != 0)
     {
       if ((D_801041F0 != 0) && ((*D_801041F0) == 1))
@@ -545,10 +545,10 @@ void func_80220ED4_de(SharedPlayer *player)
       {
         player->views5E8.view5EC_5.unk5EC = after->item;
         player->views5E8.view5F0_9.unk5F0 = after->item;
-        D_8011FE88.selectionValues[3] = after->item;
+        g_world.selectionValues[3] = after->item;
       }
     }
-    world = &D_8011FE88;
+    world = &g_world;
     for (i = 0; i < world->count; i++)
     {
       entry = world->objects[i];
@@ -561,7 +561,7 @@ void func_80220ED4_de(SharedPlayer *player)
           diff.z = player->views0.view8_3.pos.z - entry->pos.z;
           if (((f32) ((s32) Math_Sqrtf(((diff.x * diff.x) + (diff.y * diff.y)) + (diff.z * diff.z)))) < def->radius)
           {
-            if (Items_FindPlacedObjectsByKey(&D_8011FE88, -1, def->item, &found, 1) != 0)
+            if (Items_FindPlacedObjectsByKey(&g_world, -1, def->item, &found, 1) != 0)
             {
               world->offset.x = player->views0.view8_3.pos.x - found.pos.x;
               world->offset.y = player->views0.view8_3.pos.y - found.pos.y;
@@ -636,7 +636,7 @@ void func_80220ED4_de(SharedPlayer *player)
         player->views0.view3_2.team = player->views5D8.view5D8_9.profile->team;
       }
     }
-    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&D_8011FE88, player, sound, player->views5E8.view86C_125.unk86C);
+    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&g_world, player, sound, player->views5E8.view86C_125.unk86C);
     if (player->views5E8.view870_157.unk870 != player->views5E8.view86C_125.unk86C)
     {
       if ((func_8024B6A0_de(actor, player->views5E8.view86C_125.unk86C, 0) == 0) && (Camera_IsSequenceInWindow() != 0))
@@ -769,7 +769,7 @@ void func_80220ED4_de(SharedPlayer *player)
       offset = 23;
     }
   }
-  ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&D_8011FE88, &player->views1C.view2E8_37.emitter, D_800D052C[player->views5E8.view62E_17.character]->sound + offset, player->views1C.view484_44.voice->bank);
+  ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&g_world, &player->views1C.view2E8_37.emitter, D_800D052C[player->views5E8.view62E_17.character]->sound + offset, player->views1C.view484_44.voice->bank);
   if (!(player->views1C.view100_8.unk100 & 0x400))
   {
     player->views5E8.view870_157.unk870 = player->views5E8.view86C_125.unk86C;

@@ -133,7 +133,7 @@ s32 func_804009F4_de(s32 index) {
     f32 total;
     captured=D_80145060.actorList;
     pending=D_800E2830->field58;
-    resources=&D_8011FE88;
+    resources=&g_world;
     if(resources->trackLookup==0 || resources->trackBundle==0) {
         failed:
         return 0;

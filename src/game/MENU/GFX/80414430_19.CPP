@@ -11,7 +11,7 @@
 
 
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern s32 D_800DF250;
 extern s32 D_800E32CC;
 extern s32 D_800E32E4;
@@ -22,7 +22,7 @@ static inline void sync(void) {
     Gfx *cmd;
 
     if (D_800E32E4 == 0) {
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         D_800E32E4 = 1;
         gDPPipeSync(cmd);
     }
@@ -45,10 +45,10 @@ void func_80417138_de(s32 flags) {
     sync();
     plain = groups.y == 0;
     D_800E32CC = plain ? 11 : 12;
-    gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
-    gSPGeometryMode(D_80110634++, G_ZBUFFER | G_SHADE | G_CULL_FRONT | G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_SHADING_SMOOTH, 0);
-    gSPGeometryMode(D_80110634++, 0, G_SHADE | G_CULL_BACK | G_SHADING_SMOOTH);
-    if (groups.pad1) gSPGeometryMode(D_80110634++, 0, G_ZBUFFER);
+    gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
+    gSPGeometryMode(g_displayListCursor++, G_ZBUFFER | G_SHADE | G_CULL_FRONT | G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_SHADING_SMOOTH, 0);
+    gSPGeometryMode(g_displayListCursor++, 0, G_SHADE | G_CULL_BACK | G_SHADING_SMOOTH);
+    if (groups.pad1) gSPGeometryMode(g_displayListCursor++, 0, G_ZBUFFER);
     cycle1 = 0;
     cycle2 = 0;
     mode = groups.pad0 != 0;
@@ -74,6 +74,6 @@ void func_80417138_de(s32 flags) {
             break;
     }
     D_800DF250 = 1;
-    gDPSetRenderMode(D_80110634++, cycle1, cycle2);
+    gDPSetRenderMode(g_displayListCursor++, cycle1, cycle2);
     D_80153F60 = groups;
 }

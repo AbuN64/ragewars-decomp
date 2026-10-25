@@ -22,7 +22,7 @@ void func_8044DDD4_de(GameSession *gameSession) {
     s32 var_s0;
 
     var_s0 = -1;
-    if (Items_FindPlacedObjectsByKey(&D_8011FE88, var_s0, var_s0, &spawn, 1) == 0) {
+    if (Items_FindPlacedObjectsByKey(&g_world, var_s0, var_s0, &spawn, 1) == 0) {
         var_s0 = 0;
     }
     D_801462C8.counters.m_GameTimeFifteenth = 0;
@@ -41,7 +41,7 @@ void func_8044DDD4_de(GameSession *gameSession) {
    when the local player has a transition pending, otherwise mode 12. */
 void Ovlgame_StartMatchTransition(GameSession *session, s32 key) {
     Shared_Placed spawn;
-    if (Items_FindPlacedObjectsByKey(&D_8011FE88, -1, key, &spawn, 1) == 0) {
+    if (Items_FindPlacedObjectsByKey(&g_world, -1, key, &spawn, 1) == 0) {
         key = 0;
     }
     D_801462C8.counters.m_GameTimeFifteenth = 0;

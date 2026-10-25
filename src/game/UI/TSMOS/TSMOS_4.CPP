@@ -34,7 +34,7 @@ void func_802A2374_eu_x(void) {
     func_802A2360_de();
     D_800D2C90 = 0;
     func_802A23C4_de(2);
-    Frontend_LoadLanguageStringsIfAny(D_80152789);
+    Frontend_LoadLanguageStringsIfAny(g_languageIndex);
 }
 #else
 INCLUDE_ASM("span_1000", func_802A2374_eu_x);

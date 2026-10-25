@@ -114,7 +114,7 @@ s32 Pak_EvaluateSaveChannel(void *unused, s32 ch, s32 *bestCh, s32 *bestScore) {
     char *wanted;
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    wanted = D_800E25A4[D_80152789];
+    wanted = D_800E25A4[g_languageIndex];
 #else
     wanted = D_800D36D4;
 #endif
@@ -129,7 +129,7 @@ s32 Pak_EvaluateSaveChannel(void *unused, s32 ch, s32 *bestCh, s32 *bestScore) {
     found0 = 0;
 search1:
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    wanted = D_800E25B4[D_80152789];
+    wanted = D_800E25B4[g_languageIndex];
 #else
     wanted = D_800D36D8;
 #endif

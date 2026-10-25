@@ -24,7 +24,7 @@ extern char D_800ED400[];
 s32 func_8040A58C_de(struct Field *field) {
     s32 value = D_800E28BC->value;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    char *text = field->text[D_80152789];
+    char *text = field->text[g_languageIndex];
 #else
     char *text = *field->text;
 #endif

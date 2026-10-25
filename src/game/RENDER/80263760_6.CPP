@@ -43,7 +43,7 @@ void func_80264104_de(Obj80264124 *arg0) {
             goto reset;
         }
         global = &D_8011FAC0.clockPaused;
-        if ((*global != 0) || (D_8011FE88.frozen != 0) || (global[-6] != 13)) {
+        if ((*global != 0) || (g_world.frozen != 0) || (global[-6] != 13)) {
 reset:
             arg0->amount = 0.0f;
             Render_FreeAllPoolNodes(arg0->object);

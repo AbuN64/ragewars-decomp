@@ -588,18 +588,18 @@ void func_802A3718_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *cam
     }
     period = D_800C5E04_de;
     while (actor->phase >= period) actor->phase -= period;
-    gDPPipeSync(D_80110634++);
+    gDPPipeSync(g_displayListCursor++);
     switch (info.frame->kind) {
     case 3:
         Render_SetCombineMode(0x29);
         if (camera->monochrome) {
             grey = track->env[0] + track->env[1] + track->env[2];
-            gDPSetEnvColor(D_80110634++, 0, 0, grey / 3, 255);
+            gDPSetEnvColor(g_displayListCursor++, 0, 0, grey / 3, 255);
             grey = track->prim[0] + track->prim[1] + track->prim[2];
-            gDPSetPrimColor(D_80110634++, 0, 0, 0, 0, grey / 3, 255);
+            gDPSetPrimColor(g_displayListCursor++, 0, 0, 0, 0, grey / 3, 255);
         } else {
-            gDPSetEnvColor(D_80110634++, track->env[0], track->env[1], track->env[2], 255);
-            gDPSetPrimColor(D_80110634++, 0, 0, track->prim[0], track->prim[1], track->prim[2], 255);
+            gDPSetEnvColor(g_displayListCursor++, track->env[0], track->env[1], track->env[2], 255);
+            gDPSetPrimColor(g_displayListCursor++, 0, 0, track->prim[0], track->prim[1], track->prim[2], 255);
         }
         break;
     case 0:
@@ -618,29 +618,29 @@ void func_802A3718_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *cam
     func_802950B4_de(&actor->model, model, frame, 0, 0xFFFF, 0xFFFF, 0, 0, 0);
 #endif
     edges = count - 1;
-    gSPMatrix(D_80110634++, &clock->matrix[D_800D297C], G_MTX_LOAD);
+    gSPMatrix(g_displayListCursor++, &clock->matrix[D_800D297C], G_MTX_LOAD);
     while (clock != 0 && next != 0 && 0.0f < clock->unk8 && 0.0f < next->unk8 && used + count * 2 < 32) {
         f32 scale;
         vertices = func_802A56C4_de(pool, count);
         if (vertices == 0) break;
         func_802A2B58_de(actor, clock, vertices, clock->offset, &storage);
         used += count;
-        gSPVertex(D_80110634++, vertices, count, 0);
-        gSPMatrix(D_80110634++, &next->matrix[D_800D297C], G_MTX_LOAD);
+        gSPVertex(g_displayListCursor++, vertices, count, 0);
+        gSPMatrix(g_displayListCursor++, &next->matrix[D_800D297C], G_MTX_LOAD);
         vertices = func_802A56C4_de(pool, count);
         if (vertices == 0) break;
         scale = next->offset;
         while (clock->offset < scale) scale -= period;
         func_802A2B58_de(actor, next, vertices, scale, &storage);
         used += count;
-        gSPVertex(D_80110634++, vertices, count, count);
+        gSPVertex(g_displayListCursor++, vertices, count, count);
         for (i = 0; i < edges; i++) {
-            Gfx *cmd = D_80110634++;
+            Gfx *cmd = g_displayListCursor++;
             cmd->words.w0 = (((i * 2 & 255) << 16) | (((count + i) * 2 & 255) << 8) | ((count + i + 1) * 2 & 255)) | (G_TRI2 << 24);
             cmd->words.w1 = ((i * 2 & 255) << 16) | (((count + i + 1) * 2 & 255) << 8) | ((i + 1) * 2 & 255);
         }
         if (actor->track->closed) {
-            Gfx *cmd = D_80110634++;
+            Gfx *cmd = g_displayListCursor++;
             cmd->words.w0 = (((i * 2 & 255) << 16) | (((count + i) * 2 & 255) << 8) | (count * 2 & 255)) | (G_TRI2 << 24);
             cmd->words.w1 = ((i * 2 & 255) << 16) | ((count * 2 & 255) << 8);
         }

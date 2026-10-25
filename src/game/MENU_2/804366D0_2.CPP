@@ -85,14 +85,14 @@ extern u8 D_800FEC8A[];
 extern u8 D_800FEC8B[];
 extern u8 D_800FEC8C[];
 extern u8 D_800FEC8D[];
-extern u8 D_80146398[];
+extern u8 g_playerSettings[];
 extern s32 func_8041AD04_de(void *);
 extern s32 func_8041A6E0_de(void *);
 
 void func_804367A8_de(s32 arg0) {
     u8 *config;
 
-    config = D_80146398 + arg0 * 0x96;
+    config = g_playerSettings + arg0 * 0x96;
     D_80102C89[arg0 * 0x190] = func_8041AD04_de(D_800E5690->a);
     do {
         D_800FEC8A[arg0 * 0x190] = func_8041AD04_de(D_800E5690->b);

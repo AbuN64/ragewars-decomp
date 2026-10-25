@@ -16,7 +16,7 @@
 #include "FX_2/80271B18.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 
 extern char D_0044B180;
 
@@ -52,25 +52,25 @@ void func_8026AC38_de(void) {
 
     System_ResetTextureCache();
 
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, &D_0044B180);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP, 5, 0, G_TX_WRAP, 5, 0);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPLoadSync(cmd);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPLoadBlock(cmd, G_TX_LOADTILE, 0, 0, 255, 1024);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPPipeSync(cmd);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_4b, 2, 0, G_TX_RENDERTILE, 0, G_TX_WRAP, 5, 0, G_TX_WRAP, 5, 0);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPSetTileSize(cmd, G_TX_RENDERTILE, 0, 0, 124, 124);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPTexture(cmd, 2048, 2048, 0, 0, G_ON);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPSetTextureLUT(cmd, G_TT_NONE);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPGeometryMode(cmd, 0, D_800CC384 | 0x00260404);
 
     Render_SetModePreset(0x1D);
@@ -318,17 +318,17 @@ s32 Render_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *mater
             D_800D1610[0] = direction.x * D_800C4668_de;
             D_800D1610[1] = direction.y * D_800C4668_de;
             D_800D1610[2] = direction.z * D_800C4668_de;
-            cmd = D_80110634++;
+            cmd = g_displayListCursor++;
             gSPMoveWord(cmd, G_MW_NUMLIGHT, 0, 0x18);
-            gSPMoveMem(D_80110634++, G_MV_LIGHT, 48, 16, (unsigned int)(D_800D1610 - 8));
-            gSPMoveMem(D_80110634++, G_MV_LIGHT, 72, 16, (unsigned int)(D_800D1610 - 0x10));
+            gSPMoveMem(g_displayListCursor++, G_MV_LIGHT, 48, 16, (unsigned int)(D_800D1610 - 8));
+            gSPMoveMem(g_displayListCursor++, G_MV_LIGHT, 72, 16, (unsigned int)(D_800D1610 - 0x10));
         }
         return 1;
     }
     if (lights != 0) {
-        gSPMoveWord(D_80110634++, G_MW_NUMLIGHT, 0, 0x18);
-        gSPMoveMem(D_80110634++, G_MV_LIGHT, 48, 16, (unsigned int)((char *)lights + 8));
-        gSPMoveMem(D_80110634++, G_MV_LIGHT, 72, 16, (unsigned int)lights);
+        gSPMoveWord(g_displayListCursor++, G_MW_NUMLIGHT, 0, 0x18);
+        gSPMoveMem(g_displayListCursor++, G_MV_LIGHT, 48, 16, (unsigned int)((char *)lights + 8));
+        gSPMoveMem(g_displayListCursor++, G_MV_LIGHT, 72, 16, (unsigned int)lights);
     }
     return 0;
 }
@@ -357,7 +357,7 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
     s32 glow = 0;
     CGameStatus *settings;
 
-    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (D_800E28A4 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     settings = &D_801468A0;
@@ -379,15 +379,15 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
     header = *resource;
     Scene_MarkResourceInUse(0, resource);
     if (segment != 0) {
-        gSPSegment(D_80110634++, 1, matrix);
+        gSPSegment(g_displayListCursor++, 1, matrix);
     } else {
-        gSPMatrix(D_80110634++, matrix, G_MTX_LOAD);
+        gSPMatrix(g_displayListCursor++, matrix, G_MTX_LOAD);
     }
     base = textures;
     if (base == 0) {
         base = Render_GetPackSection(header, 0);
     }
-    gSPSegment(D_80110634++, 2, (unsigned int)base);
+    gSPSegment(g_displayListCursor++, 2, (unsigned int)base);
     parts = Render_GetPackSection(header, 2);
     count = parts->count;
     for (i = 0; i < count; i++) {
@@ -412,7 +412,7 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
             if (bits == wanted || (bits == 0x38 && hide != 0) || (bits == 0x30 && bonus != 0)) {
                 if (Render_SetupMaterial(material, pass) != 0) {
                     void *list = Render_GetPackSection(part, 1);
-                    gSPDisplayList(D_80110634++, list);
+                    gSPDisplayList(g_displayListCursor++, list);
                 }
             }
         } else {
@@ -422,7 +422,7 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
             if (bits == 0x10 && glow == 0) continue;
             if (Render_SetupMaterial(material, pass) != 0) {
                 void *list = Render_GetPackSection(part, 1);
-                gSPDisplayList(D_80110634++, list);
+                gSPDisplayList(g_displayListCursor++, list);
             }
         }
     }

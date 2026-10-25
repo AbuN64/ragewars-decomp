@@ -372,7 +372,7 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
     s32 cell;
     Items_ReleaseObjectHandles(player);
     Render_SetProfileMode(((Shared_ActorView *)player)->controller, 0);
-    world = &D_8011FE88;
+    world = &g_world;
     if (reset) {
         ((Shared_ActorView *)player)->field864 = 0;
         ((Shared_ActorView *)player)->field868 = 0;
@@ -396,7 +396,7 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
         ((Shared_ActorView *)player)->weapon.position0 = points[best].pos;
         ((Shared_ActorView *)player)->position.vector = ((Shared_ActorView *)player)->weapon.position0;
         ((LevelActor *)player)->yaw = ((Shared_ActorView *)player)->weapon.yaw = points[best].unkC;
-        floor = Scene_FindFloorPolygon(&D_8011FE88, &((Shared_ActorView *)player)->position.vector);
+        floor = Scene_FindFloorPolygon(&g_world, &((Shared_ActorView *)player)->position.vector);
     } else {
         if (model != 0 && player != 0) {
             floor = 0;
@@ -418,7 +418,7 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
     Ovlgame_InitActorHudState(player);
     goto done;
 fallback:
-    Items_SetSelection(&D_8011FE88, model, scale);
+    Items_SetSelection(&g_world, model, scale);
 done:
     cell = Nav_FindNearestPointIndex(D_8013B364, &((Shared_ActorView *)player)->position.vector);
     ((AiController *)((Shared_ActorView *)player)->owner)->current = cell;

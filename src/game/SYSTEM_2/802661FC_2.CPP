@@ -184,7 +184,7 @@ void func_80267958_de(SharedPlayerCode802661FC *target, Actor_func_80267958_de *
     point.x = 0;
     point.y = 0;
     point.z = 0;
-    func_8028CE94_de(&D_8011FE88, player->views5E8.view698_37.emitter + 0x140, 3, point, *(&D_800C9538 + 1), D_800C4450_de);
+    func_8028CE94_de(&g_world, player->views5E8.view698_37.emitter + 0x140, 3, point, *(&D_800C9538 + 1), D_800C4450_de);
 }
 
 void func_80267B68_de(unsigned char *source, s32 target, s32 kind, Triple position, struct IntPair arg6) {

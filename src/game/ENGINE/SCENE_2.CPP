@@ -34,7 +34,7 @@ void func_8028787C_de(World_func_8028787C_de *world, Entity *entity) {
     if (bits[index / 8] & bit) {
         if (entity->flag != 0) {
             flag = entity->flag;
-            flags = Render_GetPackSection(D_8011FE88.bitSections, 1);
+            flags = Render_GetPackSection(g_world.bitSections, 1);
             Render_GetPackSection(flags, 0);
             if (((unsigned char *)Render_GetPackSection(flags, 1))[flag] != 0) {
                 return;

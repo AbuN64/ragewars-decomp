@@ -167,7 +167,7 @@ static inline s32 func_80409BDC_de(struct Shared_PakMenu *record) {
 s32 func_8040A9A0_de(LayeredText *field) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     s32 value = D_8015D48C;
-    char *text = (char *)field->text[D_80152789];
+    char *text = (char *)field->text[g_languageIndex];
 
     func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800ED414, value);
 #else

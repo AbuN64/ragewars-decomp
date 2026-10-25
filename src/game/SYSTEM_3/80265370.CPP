@@ -43,7 +43,7 @@ extern char D_800C4388_de;
 extern void Scene_UnlockResource(s32, void *);
 
 /* Loads the scene's point lights into the display list: with no light in D_8013B1A8 it clears geometry mode bit 0x80, otherwise it sets it and fills eight light slots from the light list, transforming each active light's position into the view, storing its negated view direction, its colour scaled by its intensity, its falloff and a fixed range, marking unused slots off, and emits the light-move command for each slot, then advances the light buffer. The first direction component is truncated into a local before negating. */
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 
 extern s32 D_8010C4A0;
 
@@ -391,12 +391,12 @@ void System_SetupPointLights(char *view) {
 
     node = func_80268CBC_de(&D_8013B1A8);
     if (node == 0) {
-        Gfx *g = D_80110634++;
+        Gfx *g = g_displayListCursor++;
         gSPGeometryMode(g, 0x80, 0);
         D_8010C4A0 += 8;
         return;
     }
-    gSPGeometryMode(D_80110634++, 0, 0x80);
+    gSPGeometryMode(g_displayListCursor++, 0, 0x80);
     for (i = 0; i < 8; i++) {
         if (node != 0 && node->active != 0) {
             data = node->data;
@@ -422,7 +422,7 @@ void System_SetupPointLights(char *view) {
             node = func_80268CC8_de(&D_8013B1A8, node);
         }
         {
-            Gfx *g = D_80110634++;
+            Gfx *g = g_displayListCursor++;
             gSPMoveMem(g, 10, ((i + 1) * 2 + 10) * 8, 16, &D_8010C0A0[i + D_8010C4A0]);
         }
     }

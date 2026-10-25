@@ -161,7 +161,7 @@ static inline s32 optionEnabled(GameOption *option) {
     return option->enabled;
 }
 static inline ActorTemplate *findModel(s32 kind, s32 id) {
-    return func_8028CFA0_de(&D_8011FE88, kind, id);
+    return func_8028CFA0_de(&g_world, kind, id);
 }
 static inline s32 startHealth(BonusPlayer *player) {
     s32 health;

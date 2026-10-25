@@ -150,7 +150,7 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
                             } while ((other = other->next) != 0);
             }
         }
-        count = D_8011FE88.registeredCount;
+        count = g_world.registeredCount;
         i = 0;
         if (i < count) {
             secondSpecial = 0x12;

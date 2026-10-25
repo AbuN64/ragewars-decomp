@@ -53,5 +53,5 @@ void Items_StartPlayerAnimation(Player *arg0, s32 arg1) {
         var_a2 = D_800CE430[((Shared_struct_D_800D34C0_0x18 *)arg0->definition)->unkC];
         arg0->playerId = ((Shared_ControlView *)arg0->profile)->playerId;
     }
-    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&D_8011FE88, arg0, var_a2, arg0->animation);
+    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&g_world, arg0, var_a2, arg0->animation);
 }

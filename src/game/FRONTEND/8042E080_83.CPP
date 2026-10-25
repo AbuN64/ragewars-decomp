@@ -39,7 +39,7 @@ s32 func_80435F14_de(s32 unused0, s32 unused1, s32 event) {
         *pause = 0;
         Items_ResetActorPools((char *)pause - 0x180C, 0);
         func_804499B0_de((char *)pause - 0x1854, 0, 0);
-        func_80286AA8_de(&D_8011FE88, 0x24, 0);
+        func_80286AA8_de(&g_world, 0x24, 0);
         if (func_8025477C_de() == 0) {
             func_8025476C_de(1);
         }

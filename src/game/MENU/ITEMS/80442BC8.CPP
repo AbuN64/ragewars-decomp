@@ -95,7 +95,7 @@ func_8043F114_de
     } else {
         
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        target = object->target[D_80152789];
+        target = object->target[g_languageIndex];
 #else
         target = *object->target;
 #endif
@@ -164,11 +164,11 @@ void func_80442BA8_de(MenuSpriteElement *e) {
         func_802A84F8_de();
         Render_SetModePreset(0x15);
         o = e->owner;
-        gfx = D_80110634++;
+        gfx = g_displayListCursor++;
         w = o->width;
         h = o->height;
         gDPSetEnvColor(gfx, 255, 0, 0, 255);
-        gfx = D_80110634++;
+        gfx = g_displayListCursor++;
         gDPSetPrimColor(gfx, 0, 0, 224, 0, 0, 255);
         func_802AAC28_de(0x67, frame, e->owner->x, e->owner->y,
                       w / (f32)D_800E28D0 * 5.0f, h / (f32)D_800E28D4 * 4.0f, 1);

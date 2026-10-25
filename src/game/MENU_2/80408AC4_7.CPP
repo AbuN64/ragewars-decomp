@@ -112,7 +112,7 @@ s32 func_8043CC10_de(ObjRecAt14V2 *arg0) {
     }
     D_800E5CA0.text[D_800E5CA0.value] =
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        *arg0->unk14[D_80152789];
+        *arg0->unk14[g_languageIndex];
 #else
         **arg0->unk14;
 #endif

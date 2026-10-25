@@ -104,7 +104,7 @@ block_5:
     default: var_a0 = 0; break;
     }
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    var_a0 += D_80152789 * 9;
+    var_a0 += g_languageIndex * 9;
 #endif
     temp_s1 = &D_800E1E24_de[var_a0];
     var_s0 = temp_s1->unk0;

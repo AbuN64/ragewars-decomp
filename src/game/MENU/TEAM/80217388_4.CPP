@@ -12,7 +12,7 @@
 #include "gbi.h"
 extern void Particle_TransformPoint(void *arg0, void *arg1, void *arg2);
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern s32 World_PlayerHasAmmoForWeapon(Player *player, s32 weapon);
 void Team_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *player) {
     s32 width;
@@ -54,7 +54,7 @@ void Team_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *player)
                 green = red;
                 blue = red;
             }
-            gDPSetEnvColor(D_80110634++, red, green, blue, (u32)(alpha * fade));
+            gDPSetEnvColor(g_displayListCursor++, red, green, blue, (u32)(alpha * fade));
             func_802AAC28_de(item->icon, 0, x - width * item->height * scaleX * 0.5f,
                              y - height * item->height * scaleY * 0.5f,
                              scaleX * item->height, scaleY * item->height, 1);

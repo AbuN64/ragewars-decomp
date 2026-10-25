@@ -14,7 +14,7 @@
 
 
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
 #if defined(VERSION_DE)
 extern u32 D_800DE854;
@@ -58,29 +58,29 @@ void func_8026D4F0_de(void **resource, void *unused, void *matrix, s32 segment, 
     shared->fog[3] = a;
     pass = (pass + 1) % 18;
 #if defined(VERSION_DE)
-    if (D_800DE854 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (D_800DE854 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
 #elif defined(VERSION_EU)
-    if (D_800EEEC4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (D_800EEEC4 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
 #elif defined(VERSION_EU_X)
-    if (D_800EA084 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (D_800EA084 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
 #elif defined(VERSION_US)
-    if (D_800DD504 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (D_800DD504 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
 #elif defined(VERSION_US_REV1)
-    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (D_800E28A4 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
 #endif
         return;
     }
     if (Render_SetupMaterial(shared, pass) != 0) {
-        gDPSetRenderMode(D_80110634++, 0x0C184DD8, 0);
+        gDPSetRenderMode(g_displayListCursor++, 0x0C184DD8, 0);
         Render_SetCombineMode(1);
         header = *resource;
         Scene_MarkResourceInUse(0, resource);
-        if (segment != 0) gSPSegment(D_80110634++, 1, matrix) else gSPMatrix(D_80110634++, matrix, G_MTX_LOAD);
+        if (segment != 0) gSPSegment(g_displayListCursor++, 1, matrix) else gSPMatrix(g_displayListCursor++, matrix, G_MTX_LOAD);
         base = textures;
         if (base == 0) {
             base = Render_GetPackSection(header, 0);
         }
-        gSPSegment(D_80110634++, 2, (unsigned int)base);
+        gSPSegment(g_displayListCursor++, 2, (unsigned int)base);
         parts = Render_GetPackSection(header, 2);
         count = *(s32 *)parts;
         for (i = 0; i < count; i++) {
@@ -93,7 +93,7 @@ void func_8026D4F0_de(void **resource, void *unused, void *matrix, s32 segment, 
                 Gfx *cmd;
                 void *list = Render_GetPackSection(part, 1);
 
-                cmd = D_80110634++;
+                cmd = g_displayListCursor++;
                 gSPDisplayList(cmd, (unsigned int)list);
             }
         }

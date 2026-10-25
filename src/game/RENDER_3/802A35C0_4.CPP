@@ -35,27 +35,27 @@ void func_802A3DD4_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *cam
     next = clock->next;
     count = actor->track->count;
     edges = count - 1;
-    gSPMatrix(D_80110634++, &clock->matrix[D_800D297C], G_MTX_LOAD);
+    gSPMatrix(g_displayListCursor++, &clock->matrix[D_800D297C], G_MTX_LOAD);
     while (clock != 0 && next != 0 && 0.0f < clock->unk8 && 0.0f < next->unk8) {
         vertices = func_802A56C4_de(pool, count);
         if (vertices == 0) break;
         func_802A274C_de(actor, clock, vertices, &storage);
-        gSPVertex(D_80110634++, vertices, count, 0);
-        gSPMatrix(D_80110634++, &next->matrix[D_800D297C], G_MTX_LOAD);
+        gSPVertex(g_displayListCursor++, vertices, count, 0);
+        gSPMatrix(g_displayListCursor++, &next->matrix[D_800D297C], G_MTX_LOAD);
         vertices = func_802A56C4_de(pool, count);
         if (vertices == 0) return;
         func_802A274C_de(actor, next, vertices, &storage);
-        gSPVertex(D_80110634++, vertices, count, count);
+        gSPVertex(g_displayListCursor++, vertices, count, count);
         i = 0;
         while ((s32)i < edges) {
-            { Gfx *cmd = D_80110634++;
+            { Gfx *cmd = g_displayListCursor++;
               cmd->words.w0 = (((i * 2 & 255) << 16) | (((count + i) * 2 & 255) << 8) | ((count + i + 1) * 2 & 255)) | (G_TRI2 << 24);
               cmd->words.w1 = ((i * 2 & 255) << 16) | (((count + i + 1) * 2 & 255) << 8) | ((i + 1) * 2 & 255);
             }
             i++;
         }
         if (actor->track->closed) {
-            { Gfx *cmd = D_80110634++;
+            { Gfx *cmd = g_displayListCursor++;
               cmd->words.w0 = (((i * 2 & 255) << 16) | (((count + i) * 2 & 255) << 8) | (count * 2 & 255)) | (G_TRI2 << 24);
               cmd->words.w1 = ((i * 2 & 255) << 16) | ((count * 2 & 255) << 8);
             }
@@ -268,7 +268,7 @@ void func_802A4598_de(EffectWorld *world, FxActor *actor, s32 resourceId) {
     if (!node) {
         node = func_8027963C_de(&world->pool);
         if (node) {
-        resource = func_8028AFEC_de(&D_8011FE88, resourceId);
+        resource = func_8028AFEC_de(&g_world, resourceId);
         first = ((void **)D_800CDBD0)[resource->first];
         second = ((void **)D_800CDBD0)[resource->second];
         Lists_ClearHeader(&node->children);
@@ -347,27 +347,27 @@ void Render_DrawLinkedGeometry(VertexArena *pool, GameplayCamera *camera) {
     func_8026D8F8_de();
     System_ResetTextureCache();
     if (pool->displayList != 0) {
-        gSPDisplayList(D_80110634++, pool->displayList);
+        gSPDisplayList(g_displayListCursor++, pool->displayList);
         return;
     }
-    pool->displayList = D_80110634;
-    gSPBranchList(D_80110634++, 0);
-    gDPPipeSync(D_80110634++);
+    pool->displayList = g_displayListCursor;
+    gSPBranchList(g_displayListCursor++, 0);
+    gDPPipeSync(g_displayListCursor++);
     Render_SetModePreset(0xE);
     Render_SetCombineMode(0x1C);
     /* 0x80 has no F3DEX2 geometry-mode name. */
-    gSPGeometryMode(D_80110634++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);
-    gSPGeometryMode(D_80110634++, 0, G_SHADE | G_SHADING_SMOOTH);
-    gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
-    gDPSetTexturePersp(D_80110634++, G_TP_PERSP);
-    gSPTexture(D_80110634++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
+    gSPGeometryMode(g_displayListCursor++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);
+    gSPGeometryMode(g_displayListCursor++, 0, G_SHADE | G_SHADING_SMOOTH);
+    gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
+    gDPSetTexturePersp(g_displayListCursor++, G_TP_PERSP);
+    gSPTexture(g_displayListCursor++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
     for (ribbon = pool->ribbons; ribbon != 0; ribbon = ribbon->next) {
         if (ribbon->layer < 0) Render_DrawLinkedRibbon(pool, ribbon, camera);
     }
     for (ribbon = pool->ribbons; ribbon != 0; ribbon = ribbon->next) {
         if (ribbon->layer > 0) Render_DrawLinkedRibbon(pool, ribbon, camera);
     }
-    gSPEndDisplayList(D_80110634++);
-    gSPBranchList(pool->displayList++, D_80110634);
-    gSPDisplayList(D_80110634++, pool->displayList);
+    gSPEndDisplayList(g_displayListCursor++);
+    gSPBranchList(pool->displayList++, g_displayListCursor);
+    gSPDisplayList(g_displayListCursor++, pool->displayList);
 }

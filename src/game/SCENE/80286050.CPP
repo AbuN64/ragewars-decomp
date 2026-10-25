@@ -196,7 +196,7 @@ first_pass_done:
     func_8025CB88_de(func_8025CC6C_de());
 }
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern char D_0028DFE4[], D_0028E044[];
 typedef struct SortEntry { void *object; f32 distance; } SortEntry;
 extern void Camera_GetObjectPositionAt260(void *, void *);
@@ -225,16 +225,16 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
     f32 oy;
     f32 oz;
     if ((void *)world->counter124 != 0) {
-        gSPDisplayList(D_80110634++, (void *)world->counter124);
+        gSPDisplayList(g_displayListCursor++, (void *)world->counter124);
     }
     count = world->drawableCount;
     if (count == 0) {
         return;
     }
-    gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_1);
-    gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_1);
-    gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_1);
-    gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_1);
+    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_1);
+    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_1);
+    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_1);
+    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_1);
     Camera_GetObjectPositionAt260(&jitter, camera);
     ox = jitter.x * -2.0f;
     Camera_GetObjectPositionAt260(&jitter, camera);

@@ -108,7 +108,7 @@ void func_8024F634_de(void *arg0) {
     f32 matrix[16];
 
     if (*(s32 *)((StaticObject *)o)->type == 8) {
-        func_802736D4_de(matrix, D_8011FE88.elapsed);
+        func_802736D4_de(matrix, g_world.elapsed);
     } else {
         func_802736D4_de(matrix, ((StaticObject *)o)->angle);
     }
@@ -179,7 +179,7 @@ s32 func_8024F858_de(StaticObject *staticObject) {
     }
 
     value = ((PropGeometry *)(obj))->variant;
-    index = func_8028B25C_de(&D_8011FE88, staticObject->id);
+    index = func_8028B25C_de(&g_world, staticObject->id);
     if (index < 0x6AB) {
         if (index < 0x6A9) {
             return value;

@@ -103,7 +103,7 @@ extern void func_8042854C_de(s32 slot, s32 item, s32 arg2);
 void func_804280BC_de(void) {
     char buffer[0x40];
 
-    func_8028D380_de(&D_8011FE88, D_800E4690->selection, buffer, 0x3F);
+    func_8028D380_de(&g_world, D_800E4690->selection, buffer, 0x3F);
     Resmgr_CopyString(D_800E4690->text, func_802A0494_de(buffer));
     D_800E4690->owner->unk38 = D_800E4690->text;
 }
@@ -177,7 +177,7 @@ void func_80428300_de(void) {
 
     func_80428700_de();
     player = D_800E4690->player;
-    model = func_8028CFA0_de(&D_8011FE88, 0xB, D_801462C8.playerSettings[player].character);
+    model = func_8028CFA0_de(&g_world, 0xB, D_801462C8.playerSettings[player].character);
     row = 0;
     for (i = 0; i < 8; i++) {
         id = model->slots[i];
@@ -216,7 +216,7 @@ void func_804284C0_de(s32 key) {
     s32 item;
 
     func_80428700_de();
-    record = func_8028D474_de(&D_8011FE88, key);
+    record = func_8028D474_de(&g_world, key);
     count = 0;
     for (i = 0; i < 8; i++) {
         item = record->items[i];

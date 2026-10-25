@@ -171,7 +171,7 @@ s32 func_80429A24_de(void *window) {
     D_800E4F60->unk468 = -1;
 
     for (i = 0; i < 8; i++) {
-        record = &D_80146398[i];
+        record = &g_playerSettings[i];
         if (record->m_IsBot == 1) {
             record->active = 0;
             record->m_IsBot = 0;

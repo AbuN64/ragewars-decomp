@@ -225,10 +225,10 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
     }
     switch (definition->kind) {
     case 0:
-        entry = Engine_GetActorDefinition(&D_8011FE88, definition->selector);
+        entry = Engine_GetActorDefinition(&g_world, definition->selector);
         switch (*entry) {
         case 8:
-            id = func_8028B25C_de(&D_8011FE88, definition->id);
+            id = func_8028B25C_de(&g_world, definition->id);
             if (!available(id)) {
                 return;
             }
@@ -288,7 +288,7 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
             if (definition->flags & 0x40) {
                 func_8027985C_de(&picker);
                 choice = spawnTable2();
-                if (D_8011FE88.visibilityEnabled) {
+                if (g_world.visibilityEnabled) {
                     choice = spawnTable3();
                 }
                 while (choice->id != -1) {
@@ -355,7 +355,7 @@ void func_80206018_de(void *arg0, EventRecAt30 *arg1) {
     CallbackHolder *holder;
     s32 different;
 
-    different = Render_TestActorStateBit(&D_8011FE88, arg0) != 1;
+    different = Render_TestActorStateBit(&g_world, arg0) != 1;
     if (different == 0) {
         holder = arg1->holder;
         if ((holder != 0) && (holder->callback != 0)) {

@@ -6,7 +6,7 @@
 
 #include "COMMON/RECTANGLE_DRAW.H"
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 
 extern s32 D_800DF290;
 
@@ -31,7 +31,7 @@ static inline void sync(void) {
 
     if (D_800E32E4 == 0) {
         D_800E32E4 = 1;
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gDPPipeSync(cmd);
     }
 }
@@ -39,7 +39,7 @@ static inline void sync(void) {
 static inline void emit(unsigned int w0, unsigned int w1) {
     Gfx *cmd;
 
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     _GBI_CMD(cmd, w0, w1);
 }
 
@@ -51,7 +51,7 @@ static inline void beginFrame(void) {
     Gfx *g;
 
     D_800E32E4 = 1;
-    g = D_80110634++;
+    g = g_displayListCursor++;
     gDPPipeSync(g);
 }
 
@@ -103,12 +103,12 @@ void func_80418FF4_de(s32 mode) {
         }
         switch (mode) {
         case 6: {
-            Gfx *g = D_80110634++;
+            Gfx *g = g_displayListCursor++;
             gDPSetTexturePersp(g, G_TP_PERSP);
             break;
         }
         case 7: {
-            Gfx *g = D_80110634++;
+            Gfx *g = g_displayListCursor++;
             gDPSetTexturePersp(g, G_TP_NONE);
             break;
         }

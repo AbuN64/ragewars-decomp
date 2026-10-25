@@ -260,7 +260,7 @@ void func_80204468_de(LevelActor *actor, ActorMotionState *motionState) {
 void func_802044C8_de(SharedPlayer *actor, void *state) {
     s32 flags;
 
-    if (Render_TestActorStateBit(&D_8011FE88, actor) == 1) {
+    if (Render_TestActorStateBit(&g_world, actor) == 1) {
         Weapons_RequestActorState(actor, state, 1);
         switch (actor->views1C.viewE4_7.kind) {
         case 0x64C:
@@ -296,7 +296,7 @@ s32 func_8020459C_de(LevelActor *actor) {
 
 void func_802045CC_de(void *arg0, void *actorMotionState) {
     ActorMotionState *state = actorMotionState;
-    Render_SetActorStateBit(&D_8011FE88, arg0, 0);
+    Render_SetActorStateBit(&g_world, arg0, 0);
     func_80278D78_de(arg0, 0x200000, arg0);
     state->unk12C = 0;
 }
@@ -322,7 +322,7 @@ void func_80204658_de(void *arg0) {
     Shared_World *pFlag;
 
     breakableDefinition = (BreakableDefinition *)((LevelActor *)arg0)->definition;
-    pFlag = &D_8011FE88;
+    pFlag = &g_world;
     Render_SetActorStateBit(pFlag, arg0, 1);
     if (D_800C8270_de == 0) {
         func_80278D78_de(arg0, 0x80000, arg0);
@@ -361,14 +361,14 @@ void func_80204770_de(void *a, void *b) {
     Weapons_RequestActorState(a, b, 0x1); }
 
 void func_8020478C_de(Trigger *trigger) {
-    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 1);
+    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 1);
 }
 
 void func_802047BC_de(void *a, void *b) {
     Weapons_RequestActorState(a, b, 0x0); }
 
 void func_802047D8_de(Trigger *trigger) {
-    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 0);
+    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 0);
 }
 
 void func_80204808_de(Actor_func_8024A1D0_de *actor, struct InputRecAt40 *input, Lookup *lookup) {

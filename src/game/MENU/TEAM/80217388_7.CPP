@@ -38,7 +38,7 @@ void func_802183E8_de(s32 arg0, s32 arg1, s32 arg2) {
     Gfx *cmd;
 
     Text_SetupSpriteMode(0xFF);
-    gDPSetTextureFilter(D_80110634++, G_TF_BILERP);
+    gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
     func_80217928_de((CBarrel *)arg0, arg1, arg2);
 }
 

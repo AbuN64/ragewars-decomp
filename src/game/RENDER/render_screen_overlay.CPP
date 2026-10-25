@@ -28,40 +28,40 @@ extern void Render_SetModePreset(s32 mode);
 void Render_ClearDepthRect(void *unused, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced) {
     s32 y;
 
-    gDPPipeSync(D_80110634++);
+    gDPPipeSync(g_displayListCursor++);
     Render_SetModePreset(0x14);
-    gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)((D_801536E8)));
-    gDPPipeSync(D_80110634++);
-    gDPSetCycleType(D_80110634++, G_CYC_FILL);
+    gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)((D_801536E8)));
+    gDPPipeSync(g_displayListCursor++);
+    gDPSetCycleType(g_displayListCursor++, G_CYC_FILL);
     if (!interlaced) {
-        gDPSetFillColor(D_80110634++, ((0xFFFCFFFC)));
-        gDPFillRectangle(D_80110634++, (ulx), (uly), (lrx), (lry));
+        gDPSetFillColor(g_displayListCursor++, ((0xFFFCFFFC)));
+        gDPFillRectangle(g_displayListCursor++, (ulx), (uly), (lrx), (lry));
     } else if (D_800E28D8 == 0) {
-        gDPSetFillColor(D_80110634++, ((0xFFFCFFFC)));
+        gDPSetFillColor(g_displayListCursor++, ((0xFFFCFFFC)));
         for (y = uly; y < lry; y += 2) {
-            gDPFillRectangle(D_80110634++, (ulx), (y), (lrx), (y));
+            gDPFillRectangle(g_displayListCursor++, (ulx), (y), (lrx), (y));
         }
-        gDPSetFillColor(D_80110634++, ((0)));
+        gDPSetFillColor(g_displayListCursor++, ((0)));
         for (y = uly + 1; y < lry; y += 2) {
-            gDPFillRectangle(D_80110634++, (ulx), (y), (lrx), (y));
+            gDPFillRectangle(g_displayListCursor++, (ulx), (y), (lrx), (y));
         }
     } else {
-        gDPSetFillColor(D_80110634++, ((0xFFFCFFFC)));
+        gDPSetFillColor(g_displayListCursor++, ((0xFFFCFFFC)));
         for (y = uly; y < lry; y++) {
             if ((y & 3) < 2) {
-                gDPFillRectangle(D_80110634++, (ulx), (y), (lrx), (y));
+                gDPFillRectangle(g_displayListCursor++, (ulx), (y), (lrx), (y));
             }
         }
-        gDPSetFillColor(D_80110634++, ((0)));
+        gDPSetFillColor(g_displayListCursor++, ((0)));
         for (y = uly; y < lry; y++) {
             if ((y & 3) >= 2) {
-                gDPFillRectangle(D_80110634++, (ulx), (y), (lrx), (y));
+                gDPFillRectangle(g_displayListCursor++, (ulx), (y), (lrx), (y));
             }
         }
     }
-    gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)((D_8011FAC0.ring.current->colorImage)));
-    gDPPipeSync(D_80110634++);
-    gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
+    gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)((D_8011FAC0.ring.current->colorImage)));
+    gDPPipeSync(g_displayListCursor++);
+    gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
 }
 
 extern void func_802A84F8_de(void);
@@ -77,13 +77,13 @@ void Render_DrawTextLines(void *state, s32 drawBackdrop, char **lines, s32 x, s3
     y = y * D_800E28D4 / 222;
     if (drawBackdrop) {
         Render_ClearDepthRect(state, 0, D_800E28D0, 0, D_800E28D4, 0);
-        gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, 0, 0, D_800E28D0 - 1, D_800E28D4 - 1);
-        gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)frame->colorImage);
-        gDPSetCycleType(D_80110634++, G_CYC_FILL);
-        gDPSetCombineLERP(D_80110634++, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE);
-        gDPSetRenderMode(D_80110634++, 0, 0);
-        gDPSetFillColor(D_80110634++, 0x00010001);
-        gDPFillRectangle(D_80110634++, 0, 0, D_800E28D0, D_800E28D4);
+        gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, D_800E28D0 - 1, D_800E28D4 - 1);
+        gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)frame->colorImage);
+        gDPSetCycleType(g_displayListCursor++, G_CYC_FILL);
+        gDPSetCombineLERP(g_displayListCursor++, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE);
+        gDPSetRenderMode(g_displayListCursor++, 0, 0);
+        gDPSetFillColor(g_displayListCursor++, 0x00010001);
+        gDPFillRectangle(g_displayListCursor++, 0, 0, D_800E28D0, D_800E28D4);
     }
     func_802A84F8_de();
     func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);

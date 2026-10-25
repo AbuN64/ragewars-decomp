@@ -13,7 +13,7 @@
 #include "MENU/GFX/80414430_24.H"
 #include "particle/80271B18_3.H"
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern Triple D_80153F60;
 extern void func_802A1898_de(s32 *, s32 *, s32 *, s32 *);
 
@@ -25,11 +25,11 @@ extern void func_802A1898_de(s32 *, s32 *, s32 *, s32 *);
 static inline void put_vertex(s32 index, s32 x, s32 y, u32 color) {
     Gfx *g;
 
-    g = D_80110634++;
+    g = g_displayListCursor++;
     gSPModifyVertex(g, index, G_MWO_POINT_XYSCREEN, (x << 18) | ((y & 0xFFFF) << 2));
-    g = D_80110634++;
+    g = g_displayListCursor++;
     gSPModifyVertex(g, index, G_MWO_POINT_RGBA, (color << 8) | (color >> 24));
-    g = D_80110634++;
+    g = g_displayListCursor++;
     gSPModifyVertex(g, index, G_MWO_POINT_ST, 0);
 }
 
@@ -111,31 +111,31 @@ void func_80415C90_de(f32 x, f32 y, f32 w, f32 h, u32 col0, u32 col1, u32 col2, 
     put_vertex(2, right, bottom, col3);
     put_vertex(3, right, y, col1);
     if (D_80153F60.y == 0) {
-        gSPLine3D(D_80110634++, 0, 1, 0);
-        gSPLine3D(D_80110634++, 1, 2, 0);
-        gSPLine3D(D_80110634++, 2, 3, 0);
-        gSPLine3D(D_80110634++, 3, 0, 0);
+        gSPLine3D(g_displayListCursor++, 0, 1, 0);
+        gSPLine3D(g_displayListCursor++, 1, 2, 0);
+        gSPLine3D(g_displayListCursor++, 2, 3, 0);
+        gSPLine3D(g_displayListCursor++, 3, 0, 0);
     } else {
-        gSP2Triangles(D_80110634++, 0, 1, 2, 0, 2, 3, 0, 0);
+        gSP2Triangles(g_displayListCursor++, 0, 1, 2, 0, 2, 3, 0, 0);
     }
 }
 
 /* Switches the graphics combiner and emits a pipeline sync once per frame. */
 extern int D_800DF270,D_800E32E4,D_8014DCDC;
-extern Gfx *D_80110634;
-static inline void sync(void){D_800E32E4=1;gDPPipeSync(D_80110634++);}
+extern Gfx *g_displayListCursor;
+static inline void sync(void){D_800E32E4=1;gDPPipeSync(g_displayListCursor++);}
 
 void Gfx_SetCombineMode(int mode){
  if(mode!=D_800DF270){
  D_800DF270=mode;
  if(!D_800E32E4)sync();
- gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
+ gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
  switch(mode){
- case 1: if(D_8014DCDC){gDPSetCombineLERP(D_80110634++, TEXEL0, 0, ENVIRONMENT, 0, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, ENVIRONMENT, 0, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT);}else{gDPSetCombineLERP(D_80110634++, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1);}break;
- case 2: if(D_8014DCDC){gDPSetCombineLERP(D_80110634++, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, PRIMITIVE);}else{gDPSetCombineLERP(D_80110634++, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1);}break;
- case 3: gDPSetCombineLERP(D_80110634++, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1);break;
- case 4: if(D_8014DCDC){gDPSetCombineLERP(D_80110634++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0);}else{gDPSetCombineLERP(D_80110634++, TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, TEXEL0, 0, SHADE, 0, 0, 0, 0, 1);}break;
- case 5: if(D_8014DCDC){gDPSetCombineLERP(D_80110634++, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE);}else{gDPSetCombineLERP(D_80110634++, 0, 0, 0, SHADE, 0, 0, 0, 1, 0, 0, 0, SHADE, 0, 0, 0, 1);}break;
+ case 1: if(D_8014DCDC){gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, ENVIRONMENT, 0, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, ENVIRONMENT, 0, PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT);}else{gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1);}break;
+ case 2: if(D_8014DCDC){gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, PRIMITIVE);}else{gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1);}break;
+ case 3: gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1);break;
+ case 4: if(D_8014DCDC){gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0);}else{gDPSetCombineLERP(g_displayListCursor++, TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, TEXEL0, 0, SHADE, 0, 0, 0, 0, 1);}break;
+ case 5: if(D_8014DCDC){gDPSetCombineLERP(g_displayListCursor++, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE);}else{gDPSetCombineLERP(g_displayListCursor++, 0, 0, 0, SHADE, 0, 0, 0, 1, 0, 0, 0, SHADE, 0, 0, 0, 1);}break;
  }
  }
 }
@@ -145,7 +145,7 @@ void Gfx_SetCombineMode(int mode){
    D_80141168, loads four white vertices at that point and marks each vertex's screen position for
    modification. */
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern s32 D_800DF278;
 
 extern char D_80141168;
@@ -185,11 +185,11 @@ void func_80416ECC_de(s32 mode) {
             vertices[i].v.cn[3] = 0xFF;
         }
         {
-            Gfx *cmd = D_80110634++;
+            Gfx *cmd = g_displayListCursor++;
             gSPVertex(cmd, (u32)vertices, count, 0);
         }
         for (i = 0; i < count; i++) {
-            Gfx *cmd = D_80110634++;
+            Gfx *cmd = g_displayListCursor++;
             gSPModifyVertex(cmd, i, G_MWO_POINT_ZSCREEN, 0);
         }
     }

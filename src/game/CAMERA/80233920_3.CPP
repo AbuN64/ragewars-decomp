@@ -29,12 +29,12 @@ void func_802343C8_de(View *self) {
     u16 *key = self->key;
 
     if (key == 0) {
-        if (&D_8011FE88 == 0 || D_8011FE88.mode == 0) {
+        if (&g_world == 0 || g_world.mode == 0) {
             return;
         }
-        rec = (void *)(Render_GetPackSection(D_8011FE88.modelSections, 0) + 8);
+        rec = (void *)(Render_GetPackSection(g_world.modelSections, 0) + 8);
     } else {
-        rec = func_8028B2F8_de(&D_8011FE88, key);
+        rec = func_8028B2F8_de(&g_world, key);
         if (rec == 0) {
             return;
         }

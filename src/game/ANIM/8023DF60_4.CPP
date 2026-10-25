@@ -139,7 +139,7 @@ void func_8023ECBC_de(void *arg0, u16 *arg1)
   ((Shared_Func80243A80Frame *)o)->sp54 = temp_v1_2 & 0xFFFC7FFF;
   if (temp_v1_2 & 0x7000)
   {
-    temp_v0 = func_8028B2F8_de(&D_8011FE88, arg1);
+    temp_v0 = func_8028B2F8_de(&g_world, arg1);
     if (temp_v0 != 0)
     {
       if ((((ModelBlend *)temp_v0)->collisionFlags) & 0x400000)

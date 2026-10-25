@@ -12,7 +12,7 @@ extern s32 D_800FEB70[][100];
 extern u8 D_800FEB26[];
 extern s8 D_8014222C;
 extern s8 D_8014222D;
-extern AchieveRecord D_80146398[];
+extern AchieveRecord g_playerSettings[];
 extern s32 D_800FF140_de[];
 typedef struct { s8 pad[0x24]; s8 a; s8 b; } Settings;
 extern Settings D_801462C8;
@@ -40,7 +40,7 @@ void Achieve_UpdateMatchCounters(s32 arg0, s32 arg1) {
         eligible = 1;
         count = 0;
         for (i = 0; i < 8; i++) {
-            rec = &D_80146398[i];
+            rec = &g_playerSettings[i];
             if (rec->active == 1) {
                 if (rec->team != rec->active) {
                     if (D_800FF140_de[i] >= 0x4C) {
@@ -106,7 +106,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         return (D_800D3200[0]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        return ((D_800E1254)[D_80152789]);
+        return ((D_800E1254)[g_languageIndex]);
 #endif
     }
     count = 0;
@@ -124,7 +124,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[0]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1254)[D_80152789]);
+        text = ((D_800E1254)[g_languageIndex]);
 #endif
         break;
     case 2:
@@ -133,7 +133,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[1]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1264)[D_80152789]);
+        text = ((D_800E1264)[g_languageIndex]);
 #endif
         break;
     case 4:
@@ -142,7 +142,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[2]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1274)[D_80152789]);
+        text = ((D_800E1274)[g_languageIndex]);
 #endif
         break;
     case 6:
@@ -151,7 +151,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[3]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1284)[D_80152789]);
+        text = ((D_800E1284)[g_languageIndex]);
 #endif
         break;
     case 8:
@@ -160,7 +160,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[4]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1294)[D_80152789]);
+        text = ((D_800E1294)[g_languageIndex]);
 #endif
         break;
     case 10:
@@ -169,7 +169,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[5]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E12A4)[D_80152789]);
+        text = ((D_800E12A4)[g_languageIndex]);
 #endif
         break;
     case 12:
@@ -178,7 +178,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[6]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E12B4)[D_80152789]);
+        text = ((D_800E12B4)[g_languageIndex]);
 #endif
         break;
     case 14:
@@ -187,7 +187,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[7]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E12C4)[D_80152789]);
+        text = ((D_800E12C4)[g_languageIndex]);
 #endif
         break;
     case 16:
@@ -196,7 +196,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[8]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E12D4)[D_80152789]);
+        text = ((D_800E12D4)[g_languageIndex]);
 #endif
         break;
     case 18:
@@ -205,7 +205,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[9]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E12E4)[D_80152789]);
+        text = ((D_800E12E4)[g_languageIndex]);
 #endif
         break;
     case 20:
@@ -214,7 +214,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[10]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E12F4)[D_80152789]);
+        text = ((D_800E12F4)[g_languageIndex]);
 #endif
         break;
     case 22:
@@ -224,7 +224,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[11]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1304)[D_80152789]);
+        text = ((D_800E1304)[g_languageIndex]);
 #endif
         break;
     case 25:
@@ -234,7 +234,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[12]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1314)[D_80152789]);
+        text = ((D_800E1314)[g_languageIndex]);
 #endif
         break;
     case 28:
@@ -244,7 +244,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[13]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1324)[D_80152789]);
+        text = ((D_800E1324)[g_languageIndex]);
 #endif
         break;
     case 31:
@@ -254,7 +254,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[14]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1334)[D_80152789]);
+        text = ((D_800E1334)[g_languageIndex]);
 #endif
         break;
     case 34:
@@ -264,7 +264,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[15]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1344)[D_80152789]);
+        text = ((D_800E1344)[g_languageIndex]);
 #endif
         break;
     case 37:
@@ -274,7 +274,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[16]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1354)[D_80152789]);
+        text = ((D_800E1354)[g_languageIndex]);
 #endif
         break;
     case 40:
@@ -286,7 +286,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[17]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1364)[D_80152789]);
+        text = ((D_800E1364)[g_languageIndex]);
 #endif
         break;
     case 45:
@@ -298,7 +298,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[18]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1374_eu)[D_80152789]);
+        text = ((D_800E1374_eu)[g_languageIndex]);
 #endif
         break;
     default:
@@ -306,7 +306,7 @@ char *func_80424DE8_de(s32 index) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         text = (D_800D3200[19]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = ((D_800E1384)[D_80152789]);
+        text = ((D_800E1384)[g_languageIndex]);
 #endif
         break;
     }

@@ -22,7 +22,7 @@
    mode at 0x54 where it matters), updates the player's name records, and refreshes the player through
    func_804322AC_de. Returns zero. */
 extern u8 D_80102B00[];
-extern u8 D_80146398[];
+extern u8 g_playerSettings[];
 
 extern void MarkMenuEventHandled(void);
 extern s32 func_8041B810_de(s32, s32);
@@ -224,7 +224,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             D_800E54A4->players[p].records[D_800E54A4->players[p].record].player = p;
             D_800E54A4->players[p].records[D_800E54A4->players[p].record].time = D_800E54A4->players[p].profile;
             if (D_800E54A4->phase == 7) {
-                settings = D_80146398;
+                settings = g_playerSettings;
                 D_800E54A4->players[p].records[D_800E54A4->players[p].record].setting[0] = settings[0x7B];
                 D_800E54A4->players[p].records[D_800E54A4->players[p].record].setting[1] = settings[0x7D];
                 D_800E54A4->players[p].records[D_800E54A4->players[p].record].setting[2] = settings[0x79];
@@ -410,7 +410,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
 #endif
             if (Pak_DeleteNote(p, D_800E54A4->players[p].slot) == 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                if (func_802A03F4_de((u8 *)D_800E25A4[D_80152789],
+                if (func_802A03F4_de((u8 *)D_800E25A4[g_languageIndex],
 #else
                 if (func_802A03F4_de((u8 *)D_800D36D4,
 #endif

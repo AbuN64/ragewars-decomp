@@ -188,23 +188,23 @@ void func_80207E74_de(struct Shared_Actor *actor, int *arg1) {
 }
 
 void func_80207EAC_de(struct Shared_Actor *actor) {
-    Render_SetActorStateBit(&D_8011FE88, actor, 1);
+    Render_SetActorStateBit(&g_world, actor, 1);
     actor->weaponFlags |= 0x100;
 }
 
 void func_80207EEC_de(void *event) {
     ActorMotionEvent *actorMotionEvent = event;
-    func_8028B670_de(&D_8011FE88, actorMotionEvent->id, actorMotionEvent->key, 1);
+    func_8028B670_de(&g_world, actorMotionEvent->id, actorMotionEvent->key, 1);
 }
 
 void func_80207F1C_de(struct Shared_Actor *actor) {
-    Render_SetActorStateBit(&D_8011FE88, actor, 0);
+    Render_SetActorStateBit(&g_world, actor, 0);
     actor->weaponFlags &= ~0x100;
 }
 
 void func_80207F60_de(void *event) {
     ActorMotionEvent *actorMotionEvent = event;
-    func_8028B670_de(&D_8011FE88, actorMotionEvent->id, actorMotionEvent->key, 0);
+    func_8028B670_de(&g_world, actorMotionEvent->id, actorMotionEvent->key, 0);
 }
 
 /** Set flags 0x2100 in the word at offset 0x100. */

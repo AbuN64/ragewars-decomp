@@ -13,7 +13,7 @@
 
 
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern void func_80253908_de(s32 heap);
 extern void Scene_BuildCachedGeometry(Scene_func_80288EA8_de *scene);
 
@@ -33,11 +33,11 @@ void func_80288EA8_de(Scene_func_80288EA8_de *scene, void *camera) {
             return;
         }
     }
-    gSPDisplayList(D_80110634++, (unsigned int)Render_GetPackSection(scene->model, 2));
+    gSPDisplayList(g_displayListCursor++, (unsigned int)Render_GetPackSection(scene->model, 2));
     if (scene->lists[0] == 0) {
         for (pass = 0; pass < 2; pass++) {
-            scene->lists[pass] = D_80110634;
-            gSPBranchList(D_80110634++, 0);
+            scene->lists[pass] = g_displayListCursor;
+            gSPBranchList(g_displayListCursor++, 0);
             Render_BeginModelBatch();
             objects = Render_GetPackSection(scene->model, 1);
             while (*objects != 0) {
@@ -56,11 +56,11 @@ void func_80288EA8_de(Scene_func_80288EA8_de *scene, void *camera) {
                 }
             }
             Render_FlushModelBatch();
-            gSPEndDisplayList(D_80110634++);
-            gSPBranchList(scene->lists[pass]++, (unsigned int)D_80110634);
+            gSPEndDisplayList(g_displayListCursor++);
+            gSPBranchList(scene->lists[pass]++, (unsigned int)g_displayListCursor);
         }
     }
-    gSPDisplayList(D_80110634++, (unsigned int)scene->lists[0]);
+    gSPDisplayList(g_displayListCursor++, (unsigned int)scene->lists[0]);
 }
 
 #include "stddef.h"
@@ -145,7 +145,7 @@ typedef struct CScene_t {
     char pad1B92C[0x1B930 - 0x1B92C];
 } CScene_t;
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern s32 D_800D2AE0;
 extern s32 D_800CD730;
 extern Shared_func_80234FDC_S1 *Camera_FindScreenMessage(GameplayCamera *camera);
@@ -209,21 +209,21 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
     if (player != NULL && shipModel != -1) {
         showShip = D_801462C8.local == 0;
     }
-    gDPPipeSync(D_80110634++);
-    gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
+    gDPPipeSync(g_displayListCursor++);
+    gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
     scene = world;
     Render_BeginModelBatch();
     scene->m_nTransparentInstances = 0;
     if (player != NULL && (player->unk664 & 0x100)) {
-        gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_1);
-        gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_1);
-        gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_1);
-        gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_1);
+        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_1);
+        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_1);
+        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_1);
+        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_1);
     } else {
-        gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_2);
-        gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_2);
-        gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_2);
-        gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_2);
+        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_2);
+        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_2);
+        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_2);
+        gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_2);
     }
     sectorCount = scene->m_nActiveGridSections;
     sectors = scene->m_ActiveGridSections;

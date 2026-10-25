@@ -46,7 +46,7 @@ void func_80212E30_eu_x(PatrolActor *actor)
     Clip *route;
 
     if (bot->route == -1) {
-        Shared_World *routes = &D_8011FE88;
+        Shared_World *routes = &g_world;
 
         if (*routes->routeCount > 0) {
             bot->route = 0;
@@ -62,7 +62,7 @@ void func_80212E30_eu_x(PatrolActor *actor)
         pos = Nav_GetControllerPosition(bot);
         if (Particle_GetPointDistance(pos, Nav_GetGraphPoint(nodes, bot->goal)) < D_800C23B0_eu_x) {
             if (bot->route >= 0) {
-                route = Engine_GetPlatformRoute(&D_8011FE88, bot->route);
+                route = Engine_GetPlatformRoute(&g_world, bot->route);
                 bot->routePos++;
                 if (bot->routePos == route->frames) {
                     bot->routePos = 0;
@@ -75,7 +75,7 @@ void func_80212E30_eu_x(PatrolActor *actor)
         if (bot->route == -2) {
             bot->goal = Nav_NextRandom() % nodes->count;
         } else {
-            bot->goal = Nav_FindNearestPointIndex(nodes, Engine_GetPlatformRoutePoint(&D_8011FE88, bot->route, bot->routePos));
+            bot->goal = Nav_FindNearestPointIndex(nodes, Engine_GetPlatformRoutePoint(&g_world, bot->route, bot->routePos));
         }
     }
     Nav_SteerAlongRoute(bot);

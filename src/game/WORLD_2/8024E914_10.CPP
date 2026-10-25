@@ -69,7 +69,7 @@ void func_8024F960_eu(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *
     prop->fieldB0 = 0;
     prop->fieldB4 = 0;
     turn = 0.0f;
-    prop->model = Engine_GetActorDefinition(&D_8011FE88, record->model);
+    prop->model = Engine_GetActorDefinition(&g_world, record->model);
     prop->fade = 16;
     prop->fieldDC = 0;
     model = prop->model;

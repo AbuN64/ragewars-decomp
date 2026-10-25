@@ -32,7 +32,7 @@ s32 func_8043AB40_de(void *unused0, void *unused1, s32 arg2) {
         }
         Frontend_FindKeyIndex(D_801462C8.playerSettings[player].character);
         settings = (u8 *)D_800E59E0 + (player * sizeof(struct Entry42) + 8);
-        { void *panel = settings; settings = (u8 *)D_80146398; func_8041CE10_de(panel, 0); }
+        { void *panel = settings; settings = (u8 *)g_playerSettings; func_8041CE10_de(panel, 0); }
         if (func_8043BA24_de() != 0) return 0;
         {
             func_8043B854_de();

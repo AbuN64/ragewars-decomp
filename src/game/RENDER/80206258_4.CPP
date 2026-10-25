@@ -51,7 +51,7 @@ void func_802079B0_de(Player *mover, ActorMotionState *rider) {
     ActorMotionResource *resource = mover->definition;
     ActorMotionDefinition *body = &resource->motion;
 
-    if (Render_TestActorStateBit(&D_8011FE88, mover) == 0) {
+    if (Render_TestActorStateBit(&g_world, mover) == 0) {
         mover->weaponFlags &= ~0x10000;
         mover->weaponFlags &= ~0x100;
         return;

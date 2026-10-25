@@ -324,7 +324,7 @@ actor_found:
     Sched_UpdateSceneEffects(&camera->sceneEffects, camera);
     Pak_UpdateDialogList(&camera->messageList);
     if (Camera_IsSequenceInWindow() != 0) {
-        camera->floorPoly = ((void *(*)())Scene_FindFloorPolygon)(&D_8011FE88, &camera->unk38);
+        camera->floorPoly = ((void *(*)())Scene_FindFloorPolygon)(&g_world, &camera->unk38);
     }
     captured_state = D_800CD8D0;
     camera->floorSurface = captured_state;
@@ -355,7 +355,7 @@ actor_found:
 #include "gbi.h"
 extern Gfx D_800CBCC0[], D_800CBCF0_de[];
 extern s32 D_800D297C, D_800E28D0;
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
 extern Shared_func_80234FDC_S4 D_80140FF8;
 #include "COMMON/GAME_SESSION.H"
@@ -388,7 +388,7 @@ void Camera_SetupViewportAndFog(Racer *view) {
     f32 width, height, x, y;
     Frame *buffer;
     s32 frame;
-    Gfx **gfx = &D_80110634;
+    Gfx **gfx = &g_displayListCursor;
 
     gDPPipeSync((*gfx)++);
     gSPDisplayList((*gfx)++, D_800CBCC0);
@@ -439,16 +439,16 @@ void Camera_SetupViewportAndFog(Racer *view) {
     }
     Render_SelectEffectModes();
     System_ResetTextureCache();
-    gDPSetTextureFilter(D_80110634++, G_TF_BILERP);
+    gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
     flag = 0;
     if (func_802A23B4_de() != 0) {
         flag = GetMenuScreenOwner() != 2;
     }
     if (view != &D_80140FF8.view || D_80140FF8.unk0 == 0 || flag != 0) {
         Render_SetModePreset(20);
-        gDPPipeSync(D_80110634++);
+        gDPPipeSync(g_displayListCursor++);
         Render_ClearDepthRect(&D_8011FAC0, ulx, lrx, uly, lry, view->effect);
-        gDPSetCycleType(D_80110634++, G_CYC_FILL);
+        gDPSetCycleType(g_displayListCursor++, G_CYC_FILL);
         if (D_801462C8.flags & 0x4000) {
             red = 0;
             green = 0;
@@ -464,31 +464,31 @@ void Camera_SetupViewportAndFog(Racer *view) {
                 Camera_UnpackColor(color, &red, &green, &blue);
             }
         }
-        gSPGeometryMode(D_80110634++, 0, G_FOG);
+        gSPGeometryMode(g_displayListCursor++, 0, G_FOG);
         if (view->effect != 0) {
-            gDPSetFogColor(D_80110634++, 0, 0, 0, 255);
-            gSPFogPosition(D_80110634++, 995, 1000);
+            gDPSetFogColor(g_displayListCursor++, 0, 0, 0, 255);
+            gSPFogPosition(g_displayListCursor++, 995, 1000);
         } else {
-            gDPSetFogColor(D_80110634++, red, green, blue, 255);
-            gSPFogPosition(D_80110634++, (u16)view->fogNear, 1000);
+            gDPSetFogColor(g_displayListCursor++, red, green, blue, 255);
+            gSPFogPosition(g_displayListCursor++, (u16)view->fogNear, 1000);
         }
-        gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, buffer->colorImage);
+        gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, buffer->colorImage);
         if (view->effect != 0) {
-            gDPSetFillColor(D_80110634++, (GPACK_RGBA5551(0, 0, 0, 1) << 16) | GPACK_RGBA5551(0, 0, 0, 1));
+            gDPSetFillColor(g_displayListCursor++, (GPACK_RGBA5551(0, 0, 0, 1) << 16) | GPACK_RGBA5551(0, 0, 0, 1));
         } else {
-            gDPSetFillColor(D_80110634++, (GPACK_RGBA5551(red, green, blue, 1) << 16) |
+            gDPSetFillColor(g_displayListCursor++, (GPACK_RGBA5551(red, green, blue, 1) << 16) |
                                               GPACK_RGBA5551(red, green, blue, 1));
         }
         if (view != &D_80140FF8.view || D_80140FF8.state.unk0 == 3) {
-            gDPFillRectangle(D_80110634++, ulx, uly, lrx, lry);
+            gDPFillRectangle(g_displayListCursor++, ulx, uly, lrx, lry);
         }
     }
-    gDPPipeSync(D_80110634++);
+    gDPPipeSync(g_displayListCursor++);
     Render_SetColorDither(0);
-    gDPSetAlphaDither(D_80110634++, G_AD_NOTPATTERN);
-    gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
+    gDPSetAlphaDither(g_displayListCursor++, G_AD_NOTPATTERN);
+    gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
     if (view != &D_80140FF8.view) {
         System_SetupPointLights(view);
     }
-    gDPPipeSync(D_80110634++);
+    gDPPipeSync(g_displayListCursor++);
 }

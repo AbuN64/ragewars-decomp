@@ -24,7 +24,7 @@ extern char D_800EE048[];
 extern char D_800EE050[];
 #define RES_TIMEFMT D_800EE048
 #define RES_TIMEPOST D_800EE050
-#define RES_HEAD3 ((char *)D_800E1DC4[D_80152789])
+#define RES_HEAD3 ((char *)D_800E1DC4[g_languageIndex])
 #define RES_HEAD4 ((char *)D_800E1DB4[settings->language])
 #define RES_NAME(m) (((char **)D_800F00DC[m].name)[settings->language])
 #else

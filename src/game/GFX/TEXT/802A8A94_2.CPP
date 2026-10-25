@@ -39,15 +39,15 @@ void func_802A88F0_de(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow,
     u8 ch, next, glyph;
     f32 advance, sx, sy, a, b;
 
-    gDPPipeSync(D_80110634++);
+    gDPPipeSync(g_displayListCursor++);
     if (shadow) {
-        gDPSetEnvColor(D_80110634++, 0, 0, 0, alpha);
-        gDPSetPrimColor(D_80110634++, 0, 0, 0, 0, 0, 255);
+        gDPSetEnvColor(g_displayListCursor++, 0, 0, 0, alpha);
+        gDPSetPrimColor(g_displayListCursor++, 0, 0, 0, 0, 0, 255);
         x += style->shadowX * (D_800E28D0 / 284);
         y += style->shadowY * (D_800E28D4 / 222);
     } else {
-        gDPSetEnvColor(D_80110634++, style->envR, style->envG, style->envB, alpha);
-        gDPSetPrimColor(D_80110634++, 0, 0, style->primR, style->primG, style->primB, 255);
+        gDPSetEnvColor(g_displayListCursor++, style->envR, style->envG, style->envB, alpha);
+        gDPSetPrimColor(g_displayListCursor++, 0, 0, style->primR, style->primG, style->primB, 255);
     }
     switch (language) {
     default: case 0: resource = 2; break;
@@ -56,7 +56,7 @@ void func_802A88F0_de(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow,
     case 4: case 5: resource = 5; break;
     case 6: resource = 7; break;
     }
-    font = Render_StartWorldEffect(&D_8011FE88, resource, 0x10, 1);
+    font = Render_StartWorldEffect(&g_world, resource, 0x10, 1);
     if (font) {
         while (text && (ch = *text) && ch != 10) {
             next = text[1];

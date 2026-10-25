@@ -39,7 +39,7 @@ s32 func_802ACFB0_de(Actor_func_802AB400_de *arg0, MultiChannelItemEffect *arg1)
             Camera_PostScreenMessage(&D_80145088,
                           arg0->owner,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                          ((void **)resource)[D_80152789]);
+                          ((void **)resource)[g_languageIndex]);
 #else
                           *(void **)resource);
 #endif

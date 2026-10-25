@@ -167,17 +167,17 @@ void func_8024B3A8_de(void *arg0, InputRecAt27 *arg1, s32 mode, s32 index) {
     f32 amount;
     CVector3 zero;
 
-    resource0 = Engine_GetActorDefinition(&D_8011FE88, arg1->resource22);
+    resource0 = Engine_GetActorDefinition(&g_world, arg1->resource22);
     if (arg1->resource20 == 0xFFFF) {
         resource1 = 0;
     } else {
-        resource1 = func_8028B394_de(&D_8011FE88, arg1->resource20);
+        resource1 = func_8028B394_de(&g_world, arg1->resource20);
     }
     amountRaw = arg1->amount24;
     fzero = 0.0f;
     amount = amountRaw * D_800C3B48_de[1];
     zero.x = zero.y = zero.z = fzero;
-    lookup = Render_TestActorStateBit(&D_8011FE88, arg0);
+    lookup = Render_TestActorStateBit(&g_world, arg0);
     func_802466A0_de(arg0, arg1->unk1C, arg1->unk1E, arg1->unk0,
                   resource0, arg1->unk27 == 0xFF ? -1 : arg1->unk27,
                   resource1, amount, *(CVector3 *)arg1->vec4, arg1->unk26,

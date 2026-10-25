@@ -152,7 +152,7 @@ void func_80409F2C_de(struct Shared_PakMenu *record) {
 
 void func_80409F6C_de(void *unused, void *object) {
     Render_DisableControllerPak(object);
-    Items_SetSelection(&D_8011FE88, D_8011FE88.selectionValues[3], 2);
+    Items_SetSelection(&g_world, g_world.selectionValues[3], 2);
 }
 
 s32 func_80409FA0_de(void *unused, void *arg1, s32 arg2, s32 *arg3) {
@@ -326,7 +326,7 @@ s32 func_8040A244_de(struct Field *field) {
         } while (0);
         field->text = table;
         value = D_800E28C8;
-        text = table[D_80152789];
+        text = table[g_languageIndex];
         func_802658E4_de(text + (Pak_CountLineChars(field) - 1), D_800ED3FC, value + 1);
     }
 done:

@@ -44,12 +44,12 @@ void func_8043EE5C_de(struct ItemRecAt18V2 *item, MenuOptionBox *box, s32 unused
         D_800E1E20 = 5;
         Text_SetupSpriteMode((s32)(context->fade * (context->alpha * D_800E23A0[0])));
     }
-    gDPPipeSync(D_80110634++);
-    gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
+    gDPPipeSync(g_displayListCursor++);
+    gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
     if (available) {
-        gDPSetEnvColor(D_80110634++, 255, 255, 255, (s32)(context->fade * (context->alpha * D_800E23A0[1])));
+        gDPSetEnvColor(g_displayListCursor++, 255, 255, 255, (s32)(context->fade * (context->alpha * D_800E23A0[1])));
     } else {
-        gDPSetEnvColor(D_80110634++, 50, 50, 50, (s32)(context->fade * (context->alpha * D_800E23A8)));
+        gDPSetEnvColor(g_displayListCursor++, 50, 50, 50, (s32)(context->fade * (context->alpha * D_800E23A8)));
     }
     func_802AAC28_de(item->resource, 0, box->left, box->top, box->scaleX, box->scaleY, 1);
 }

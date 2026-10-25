@@ -27,7 +27,7 @@ void func_8022FDAC_de(void *arg0, void *weaponFireState) {
     state = ((Shared_ActorView *)arg0)->self;
     index = ((Shared_ActorView *)state)->nextWeapon;
     unsigned_index = (u16)((Shared_ActorView *)state)->nextWeapon;
-    if ((((Shared_ActorView *)state)->selectedAction != index) || (D_8011FE88.mode != 4)) {
+    if ((((Shared_ActorView *)state)->selectedAction != index) || (g_world.mode != 4)) {
         if (func_80232780_de(index) != 0) {
             ((Shared_ActorView *)state)->weaponChanged = 1;
         } else if (func_802327A0_de(index) != 0) {
@@ -60,7 +60,7 @@ void func_8022FF04_de(void *arg0, WeaponFireState *fireState) {
     temp_s1 = ((Shared_ActorView *)arg0)->self;
     temp_s0 = ((Shared_ActorView *)temp_s1)->nextWeapon;
     temp_s2 = (u16)((Shared_ActorView *)temp_s1)->nextWeapon;
-    if ((((Shared_ActorView *)temp_s1)->selectedAction != temp_s0) || (D_8011FE88.mode != 4)) {
+    if ((((Shared_ActorView *)temp_s1)->selectedAction != temp_s0) || (g_world.mode != 4)) {
         if (func_80232780_de(temp_s0) != 0) {
             ((Shared_ActorView *)temp_s1)->weaponChanged = 1;
         } else if (func_802327A0_de(temp_s0) != 0) {

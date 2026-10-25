@@ -76,7 +76,7 @@ s32 Menu_SelectNextPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s3
             D_800E5690->item = 0;
         }
         Menu_SelectPlayerSettingsEntry(D_800E5690->item);
-        func_802A0C08_de(D_800E5690->text, RW_LOCALIZED_TEXT(D_800D34C0_de, D_800E1D54, D_800E1D54, D_80152789), D_800E5690->item + 1);
+        func_802A0C08_de(D_800E5690->text, RW_LOCALIZED_TEXT(D_800D34C0_de, D_800E1D54, D_800E1D54, g_languageIndex), D_800E5690->item + 1);
         D_800E5690->label->text = (void *) (D_800E5690->text);
         Render_PlayFlatSound(0xE81);
         return 0;
@@ -96,7 +96,7 @@ s32 Menu_SelectPreviousPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2
             D_800E5690->item = 3;
         }
         Menu_SelectPlayerSettingsEntry(D_800E5690->item);
-        func_802A0C08_de(D_800E5690->text, RW_LOCALIZED_TEXT(D_800D34C0_de, D_800E1D54, D_800E1D54, D_80152789), D_800E5690->item + 1);
+        func_802A0C08_de(D_800E5690->text, RW_LOCALIZED_TEXT(D_800D34C0_de, D_800E1D54, D_800E1D54, g_languageIndex), D_800E5690->item + 1);
         D_800E5690->label->text = (void *) (D_800E5690->text);
         Render_PlayFlatSound(0xE81);
         return 0;

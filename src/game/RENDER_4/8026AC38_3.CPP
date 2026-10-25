@@ -13,7 +13,7 @@
 
 extern Group18 *D_8010C56C,*D_8010C584;
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 
 extern s32 Render_SetupMaterial(Material18 *,s8);
 
@@ -56,18 +56,18 @@ void func_8026C020_de(void) {
    scaleT=0;scaleS=0;
    do {
     Render_ApplyMaterialLighting(mesh->matrix,mesh->aux,group->material);
-    if(mesh->segmented){gSPSegment(D_80110634++, 1, ((mesh->matrix)));}else{gSPMatrix(D_80110634++, ((mesh->matrix)), G_MTX_LOAD);}
-    gSPSegment(D_80110634++, 2, ((mesh->vertices)));
+    if(mesh->segmented){gSPSegment(g_displayListCursor++, 1, ((mesh->matrix)));}else{gSPMatrix(g_displayListCursor++, ((mesh->matrix)), G_MTX_LOAD);}
+    gSPSegment(g_displayListCursor++, 2, ((mesh->vertices)));
     if(mesh->scaleS) {
      if(scaleS!=mesh->scaleS || scaleT!=mesh->scaleT) {
-      if(group->material->flags&0x2000){gSPTexture(D_80110634++, mesh->scaleS, mesh->scaleT, 5, 0, 1);}else{gSPTexture(D_80110634++, mesh->scaleS, mesh->scaleT, 0, 0, 1);}
+      if(group->material->flags&0x2000){gSPTexture(g_displayListCursor++, mesh->scaleS, mesh->scaleT, 5, 0, 1);}else{gSPTexture(g_displayListCursor++, mesh->scaleS, mesh->scaleT, 0, 0, 1);}
      }
      scaleS=mesh->scaleS;scaleT=mesh->scaleT;
     }
-    gSPDisplayList(D_80110634++, ((mesh->list)));
+    gSPDisplayList(g_displayListCursor++, ((mesh->list)));
     mesh=mesh->next;
    }while(mesh);
-   if(group->material->flags&0x2000) {gDPSetTextureLOD(D_80110634++, G_TL_TILE);}
+   if(group->material->flags&0x2000) {gDPSetTextureLOD(g_displayListCursor++, G_TL_TILE);}
    if(group->material->flags&0x4000) {
     Group18 *next=group->next;group->next=deferred;deferred=group;group=next;
    } else group=group->next;
@@ -78,12 +78,12 @@ void func_8026C020_de(void) {
   do {
    mesh=group->meshes;
    if(mesh) {
-    gDPSetPrimColor(D_80110634++, 0, 0, 0, 0, 0, group->material->alpha);
+    gDPSetPrimColor(g_displayListCursor++, 0, 0, 0, 0, 0, group->material->alpha);
     do {
      Render_ApplyMaterialLighting(mesh->matrix,mesh->aux,group->material);
-     if(mesh->segmented){gSPSegment(D_80110634++, 1, ((mesh->matrix)));}else{gSPMatrix(D_80110634++, ((mesh->matrix)), G_MTX_LOAD);}
-     gSPSegment(D_80110634++, 2, ((mesh->vertices)));
-     gSPDisplayList(D_80110634++, ((mesh->list)));
+     if(mesh->segmented){gSPSegment(g_displayListCursor++, 1, ((mesh->matrix)));}else{gSPMatrix(g_displayListCursor++, ((mesh->matrix)), G_MTX_LOAD);}
+     gSPSegment(g_displayListCursor++, 2, ((mesh->vertices)));
+     gSPDisplayList(g_displayListCursor++, ((mesh->list)));
      mesh=mesh->next;
     }while(mesh);
    }
@@ -97,18 +97,18 @@ void func_8026C020_de(void) {
    scaleT=0;scaleS=0;
    do {
     Render_ApplyMaterialLighting(mesh->matrix,mesh->aux,group->material);
-    if(mesh->segmented){gSPSegment(D_80110634++, 1, ((mesh->matrix)));}else{gSPMatrix(D_80110634++, ((mesh->matrix)), G_MTX_LOAD);}
-    gSPSegment(D_80110634++, 2, ((mesh->vertices)));
+    if(mesh->segmented){gSPSegment(g_displayListCursor++, 1, ((mesh->matrix)));}else{gSPMatrix(g_displayListCursor++, ((mesh->matrix)), G_MTX_LOAD);}
+    gSPSegment(g_displayListCursor++, 2, ((mesh->vertices)));
     if(mesh->scaleS) {
      if(scaleS!=mesh->scaleS || scaleT!=mesh->scaleT) {
-      if(group->material->flags&0x2000){gSPTexture(D_80110634++, mesh->scaleS, mesh->scaleT, 5, 0, 1);}else{gSPTexture(D_80110634++, mesh->scaleS, mesh->scaleT, 0, 0, 1);}
+      if(group->material->flags&0x2000){gSPTexture(g_displayListCursor++, mesh->scaleS, mesh->scaleT, 5, 0, 1);}else{gSPTexture(g_displayListCursor++, mesh->scaleS, mesh->scaleT, 0, 0, 1);}
      }
      scaleS=mesh->scaleS;scaleT=mesh->scaleT;
     }
-    gSPDisplayList(D_80110634++, ((mesh->list)));
+    gSPDisplayList(g_displayListCursor++, ((mesh->list)));
     mesh=mesh->next;
    }while(mesh);
-   if(group->material->flags&0x2000){gDPSetTextureLOD(D_80110634++, G_TL_TILE);}
+   if(group->material->flags&0x2000){gDPSetTextureLOD(g_displayListCursor++, G_TL_TILE);}
   }
   group=group->next;
  }while(group);
@@ -193,43 +193,43 @@ void Render_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
     s32 partIndex;
     s32 opacity = alpha;
 
-    if (D_800E28A4 - (((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) >> 3) < 3000U) {
+    if (D_800E28A4 - (((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) >> 3) < 3000U) {
         return;
     }
     resourceHeader = *(void **)resource;
     Scene_MarkResourceInUse(0, (void **)resource);
     if (segment != 0) {
-        gSPSegment(D_80110634++, 1, matrix);
+        gSPSegment(g_displayListCursor++, 1, matrix);
     } else {
-        gSPMatrix(D_80110634++, matrix, G_MTX_LOAD);
+        gSPMatrix(g_displayListCursor++, matrix, G_MTX_LOAD);
     }
     textures = (void *)textureAddress;
     if (textures == 0) {
         textures = Render_GetPackSection(resourceHeader, 0);
     }
-    gSPSegment(D_80110634++, 2, (u32)textures);
+    gSPSegment(g_displayListCursor++, 2, (u32)textures);
     partTable = Render_GetPackSection(resourceHeader, 2);
     D_800CC360 = -1;
     D_800CC364 = -1;
-    syncCommand = D_80110634++;
+    syncCommand = g_displayListCursor++;
     geometryMode = D_800CC384;
     partCount = *(s32 *)partTable;
     gDPPipeSync(syncCommand);
-    gDPSetTextureLUT(D_80110634++, G_TT_NONE);
-    gSPTextureL(D_80110634++, 0x8000, 0x8000, 0, 0xFF, G_TX_RENDERTILE, G_ON);
-    gDPSetPrimColor(D_80110634++, 0, 0, 0, 0, 0, opacity & 0xFF);
-    gDPSetCombineLERP(D_80110634++, 0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE,
+    gDPSetTextureLUT(g_displayListCursor++, G_TT_NONE);
+    gSPTextureL(g_displayListCursor++, 0x8000, 0x8000, 0, 0xFF, G_TX_RENDERTILE, G_ON);
+    gDPSetPrimColor(g_displayListCursor++, 0, 0, 0, 0, 0, opacity & 0xFF);
+    gDPSetCombineLERP(g_displayListCursor++, 0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE,
                      0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE);
-    gDPSetRenderMode(D_80110634++, D_800CC38C, G_RM_ZB_XLU_DECAL2);
-    gSPGeometryMode(D_80110634++, G_SHADE | G_CULL_BACK | G_FOG |
+    gDPSetRenderMode(g_displayListCursor++, D_800CC38C, G_RM_ZB_XLU_DECAL2);
+    gSPGeometryMode(g_displayListCursor++, G_SHADE | G_CULL_BACK | G_FOG |
                     G_LIGHTING | G_TEXTURE_GEN | G_SHADING_SMOOTH, 0);
     geometryMode |= G_CULL_BACK;
-    gSPGeometryMode(D_80110634++, 0, geometryMode);
+    gSPGeometryMode(g_displayListCursor++, 0, geometryMode);
     for (partIndex = 0; partIndex < partCount; partIndex++) {
         partHeader = Render_GetPackSection(partTable, partIndex);
         Render_GetPackSection(partHeader, 0);
         displayList = Render_GetPackSection(partHeader, 1);
-        gSPDisplayList(D_80110634++, (u32)displayList);
+        gSPDisplayList(g_displayListCursor++, (u32)displayList);
     }
     D_800CC364 = -1;
     D_800CC360 = -1;

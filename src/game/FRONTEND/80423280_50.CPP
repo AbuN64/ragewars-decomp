@@ -180,10 +180,10 @@ void func_8042A990_de(void) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
         Resmgr_CopyString(D_800E4F60->text, D_800D34D4_de[0]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        Resmgr_CopyString(D_800E4F60->text, D_800E1DA4[D_80152789]);
+        Resmgr_CopyString(D_800E4F60->text, D_800E1DA4[g_languageIndex]);
 #endif
     } else {
-        func_8028D380_de(&D_8011FE88,
+        func_8028D380_de(&g_world,
                       func_8042B1B8_de(Frontend_CategoryToList(D_800E4F60->category), D_800E4F60->selection),
                       buffer, 0x3F);
         Resmgr_CopyString(D_800E4F60->text, func_802A0494_de(buffer));

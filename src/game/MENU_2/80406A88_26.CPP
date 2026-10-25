@@ -34,7 +34,7 @@ void func_80446A50_eu_x(void *obj) {
     for (i = 8; i > 0 && src[i - 1] == ' '; i--) {
         blanks++;
     }
-    def = D_800E3B64[D_80152789];
+    def = D_800E3B64[g_languageIndex];
     for (k = 0, n = 6; n > 0; k++, n--) {
         if (src[k] != def[k] || src[k] == 0) {
             break;

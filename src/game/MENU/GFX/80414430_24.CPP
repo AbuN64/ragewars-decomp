@@ -6,14 +6,14 @@
 
 extern void *func_802A15E4_de(int);
 extern void func_802B6CBC_de(void *, void *);
-extern struct Command *D_80110634;
+extern struct Command *g_displayListCursor;
 
 void Gfx_EmitMatrix(void *source) {
     void *allocation = func_802A15E4_de(0x40);
     struct Command *command;
 
     func_802B6CBC_de(source, allocation);
-    command = D_80110634++;
+    command = g_displayListCursor++;
     command->words[0] = 0xDA380003;
     command->words[1] = (unsigned)allocation;
 }

@@ -25,7 +25,7 @@
    through func_8026CBA4_de with 255 less twice that alpha, mode 1 draws only the second pass in fading
    yellow starting at alpha 128, and mode 3 draws through func_8024A3B0_de with an alpha rising with the
    time; the override is switched off afterwards. */
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern RulesWeaponsDrawTintedPlayer D_801468A0[];
 extern s32 D_800D297C;
 extern void Render_SetCombineMode(s32);
@@ -38,7 +38,7 @@ void Weapons_DrawTintedPlayer(LevelActor *actor, s32 arg1, Draw *draw) {
     if (actor != 0) {
         player = actor->controller;
         if (player != 0) {
-            gDPSetRenderMode(D_80110634++, 0xC4404B50, 0);
+            gDPSetRenderMode(g_displayListCursor++, 0xC4404B50, 0);
             Render_SetCombineMode(2);
             if (D_801468A0->teams != 0 && player->controls->unk8F != 0) {
                 actor->team = D_801468A0->colour;

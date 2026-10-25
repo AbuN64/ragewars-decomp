@@ -133,11 +133,11 @@ void func_80294C8C_de(s32 arg0, Resource *handle) {
 #if !(defined(VERSION_US_REV1))
 #ifdef NON_MATCHING
 extern s32 D_800CD890, D_80146DF0, D_80146DF4, D_80146DF8, D_80146DFC;
-extern u32 *D_80110634;
+extern u32 *g_displayListCursor;
 extern void Scene_MarkResourceInUse(s32);
 extern void *Render_GetPackSection(void *, s32);
 extern u8 D_800CBE50[], D_800CBEE8[], D_800CBD50_de[], D_800CBDD0[], D_auto_800CCB60[];
-#define DLW(a, b) do { D_80110634[0] = (u32)(a); D_80110634[1] = (u32)(b); D_80110634 += 2; } while (0)
+#define DLW(a, b) do { g_displayListCursor[0] = (u32)(a); g_displayListCursor[1] = (u32)(b); g_displayListCursor += 2; } while (0)
 /* Texture state setter (the gDP texture-load sequence of a texture-header object): looks up the header, bitmap and palette
    tables of the object's resource, skips the load when the same texture and tile parameters are already set, otherwise
    emits SetTextureImage / SetTile / LoadBlock-or-LoadTLUT for the texture's format (header byte 0: 0 and 1 are 16-bit and 32-bit

@@ -15,7 +15,7 @@
 
 
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
 extern u32 D_800E28A4;
 extern char D_8013B2D8;
@@ -31,21 +31,21 @@ void func_8026C978_de(void **resource, s32 matrix, s32 segment, s32 lights, void
     s32 count;
     s32 i;
 
-    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (D_800E28A4 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     if (Render_SetupMaterial(&D_8013B2D8, pass) == 0) {
         return;
     }
-    gDPSetRenderMode(D_80110634++, 0x0C184F50, 0);
+    gDPSetRenderMode(g_displayListCursor++, 0x0C184F50, 0);
     Render_SetCombineMode(2);
-    if (segment != 0) { gSPSegment(D_80110634++, 1, matrix); } else { gSPMatrix(D_80110634++, matrix, G_MTX_LOAD); }
+    if (segment != 0) { gSPSegment(g_displayListCursor++, 1, matrix); } else { gSPMatrix(g_displayListCursor++, matrix, G_MTX_LOAD); }
     if (lights != 0) {
-        Gfx *cmd = D_80110634++;
+        Gfx *cmd = g_displayListCursor++;
         gSPMoveWord(cmd, G_MW_NUMLIGHT, 0, 0x18);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gSPMoveMem(cmd, G_MV_LIGHT, 48, 16, lights + 8);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gSPMoveMem(cmd, G_MV_LIGHT, 72, 16, lights);
     }
     Scene_MarkResourceInUse(0, resource);
@@ -54,7 +54,7 @@ void func_8026C978_de(void **resource, s32 matrix, s32 segment, s32 lights, void
     if (base == 0) {
         base = Render_GetPackSection(header, 0);
     }
-    gSPSegment(D_80110634++, 2, (unsigned int)base);
+    gSPSegment(g_displayListCursor++, 2, (unsigned int)base);
     parts = Render_GetPackSection(header, 2);
     count = *(s32 *)parts;
     for (i = 0; i < count; i++) {
@@ -64,7 +64,7 @@ void func_8026C978_de(void **resource, s32 matrix, s32 segment, s32 lights, void
             Gfx *cmd;
             void *list = Render_GetPackSection(part, 1);
 
-            cmd = D_80110634++;
+            cmd = g_displayListCursor++;
             gSPDisplayList(cmd, (unsigned int)list);
         }
     }
@@ -75,7 +75,7 @@ void func_8026C978_de(void **resource, s32 matrix, s32 segment, s32 lights, void
 
 
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
 extern u32 D_800E28A4;
 
@@ -104,7 +104,7 @@ void func_8026CBA4_de(void **resource, void *owner, void *matrix, s32 segment, S
     start = &D_8011FAC0.ring.current->commands;
     shared = &D_80137288;
     *shared |= 0x20;
-    used = (u32)D_80110634 - (u32)*start;
+    used = (u32)g_displayListCursor - (u32)*start;
     D_800D15E0 = 1;
     if (D_800E28A4 - used / sizeof(Gfx) < 3000) {
         return;
@@ -112,14 +112,14 @@ void func_8026CBA4_de(void **resource, void *owner, void *matrix, s32 segment, S
     if (Render_SetupMaterial(shared, pass) == 0) {
         return;
     }
-    gDPSetRenderMode(D_80110634++, 0x0C184DD8, 0);
-    if (segment != 0) { gSPSegment(D_80110634++, 1, matrix); } else { gSPMatrix(D_80110634++, matrix, G_MTX_LOAD); }
+    gDPSetRenderMode(g_displayListCursor++, 0x0C184DD8, 0);
+    if (segment != 0) { gSPSegment(g_displayListCursor++, 1, matrix); } else { gSPMatrix(g_displayListCursor++, matrix, G_MTX_LOAD); }
     if (lights != 0) {
-        Gfx *cmd = D_80110634++;
+        Gfx *cmd = g_displayListCursor++;
         gSPMoveWord(cmd, G_MW_NUMLIGHT, 0, 0x18);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gSPMoveMem(cmd, G_MV_LIGHT, 48, 16, lights->diffuse);
-        cmd = D_80110634++;
+        cmd = g_displayListCursor++;
         gSPMoveMem(cmd, G_MV_LIGHT, 72, 16, lights);
     }
     Scene_MarkResourceInUse(0, resource);
@@ -128,7 +128,7 @@ void func_8026CBA4_de(void **resource, void *owner, void *matrix, s32 segment, S
     if (base == 0) {
         base = Render_GetPackSection(header, 0);
     }
-    gSPSegment(D_80110634++, 2, (unsigned int)base);
+    gSPSegment(g_displayListCursor++, 2, (unsigned int)base);
     parts = Render_GetPackSection(header, 2);
     count = *(s32 *)parts;
     for (i = 0; i < count; i++) {
@@ -138,7 +138,7 @@ void func_8026CBA4_de(void **resource, void *owner, void *matrix, s32 segment, S
             Gfx *cmd;
             void *list = Render_GetPackSection(part, 1);
 
-            cmd = D_80110634++;
+            cmd = g_displayListCursor++;
             gSPDisplayList(cmd, (unsigned int)list);
         }
     }
@@ -194,23 +194,23 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
     D_800D15E4[3] = D_800C46A4_de;
     shared->flags = flags | 0x1402;
     D_800D15E0 = 3;
-    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (D_800E28A4 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     if (Render_SetupMaterial(shared, pass) != 0) {
-        gDPSetRenderMode(D_80110634++, 0x0C184DD8, 0);
+        gDPSetRenderMode(g_displayListCursor++, 0x0C184DD8, 0);
         Render_SetCombineMode(1);
         if (segment != 0) {
-            gSPSegment(D_80110634++, 1, matrix);
+            gSPSegment(g_displayListCursor++, 1, matrix);
         } else {
-            gSPMatrix(D_80110634++, matrix, G_MTX_LOAD);
+            gSPMatrix(g_displayListCursor++, matrix, G_MTX_LOAD);
         }
         if (lights != 0) {
-            Gfx *cmd = D_80110634++;
+            Gfx *cmd = g_displayListCursor++;
             gSPMoveWord(cmd, G_MW_NUMLIGHT, 0, 0x18);
-            cmd = D_80110634++;
+            cmd = g_displayListCursor++;
             gSPMoveMem(cmd, G_MV_LIGHT, 48, 16, lights->diffuse);
-            cmd = D_80110634++;
+            cmd = g_displayListCursor++;
             gSPMoveMem(cmd, G_MV_LIGHT, 72, 16, lights);
         }
         Scene_MarkResourceInUse(0, resource);
@@ -219,7 +219,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
         if (base == 0) {
             base = Render_GetPackSection(header, 0);
         }
-        gSPSegment(D_80110634++, 2, (unsigned int)base);
+        gSPSegment(g_displayListCursor++, 2, (unsigned int)base);
         parts = Render_GetPackSection(header, 2);
         count = *(s32 *)parts;
         for (i = 0; i < count; i++) {
@@ -237,7 +237,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
                     if ((material->mode & 0x38) == 0x28) {
                         if (Render_SetupMaterial(material, pass) != 0) {
                             void *list = Render_GetPackSection(part, 1);
-                            Gfx *cmd = D_80110634++;
+                            Gfx *cmd = g_displayListCursor++;
                             gSPDisplayList(cmd, (unsigned int)list);
                         }
                     }
@@ -246,7 +246,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
                     if ((material->mode & 0x38) == 0x20) {
                         if (Render_SetupMaterial(material, pass) != 0) {
                             void *list = Render_GetPackSection(part, 1);
-                            Gfx *cmd = D_80110634++;
+                            Gfx *cmd = g_displayListCursor++;
                             gSPDisplayList(cmd, (unsigned int)list);
                         }
                     }
@@ -255,7 +255,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
                     if ((material->mode & 0x38) == 0x18) {
                         if (Render_SetupMaterial(material, pass) != 0) {
                             void *list = Render_GetPackSection(part, 1);
-                            Gfx *cmd = D_80110634++;
+                            Gfx *cmd = g_displayListCursor++;
                             gSPDisplayList(cmd, (unsigned int)list);
                         }
                     }
@@ -268,7 +268,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
                 if (bits == 0x10 && glow == 0) continue;
                 if (Render_SetupMaterial(material, pass) != 0) {
                     void *list = Render_GetPackSection(part, 1);
-                    Gfx *cmd = D_80110634++;
+                    Gfx *cmd = g_displayListCursor++;
                     gSPDisplayList(cmd, (unsigned int)list);
                 }
             }
@@ -311,22 +311,22 @@ void Render_DrawModelWithSharedMaterial(void **resource, void *matrix, s32 segme
     D_800D15E4[3] = D_800C46A8_de;
     shared->flags = flags | 0x1402;
     D_800D15E0 = 1;
-    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (D_800E28A4 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     if (Render_SetupMaterial(shared, pass) == 0) {
         return;
     }
-    gDPSetRenderMode(D_80110634++, 0x0C184DD8, 0);
+    gDPSetRenderMode(g_displayListCursor++, 0x0C184DD8, 0);
     Render_SetCombineMode(1);
-    if (segment != 0) { gSPSegment(D_80110634++, 1, matrix); } else { gSPMatrix(D_80110634++, matrix, G_MTX_LOAD); }
+    if (segment != 0) { gSPSegment(g_displayListCursor++, 1, matrix); } else { gSPMatrix(g_displayListCursor++, matrix, G_MTX_LOAD); }
     Scene_MarkResourceInUse(0, resource);
     header = *resource;
     base = textures;
     if (base == 0) {
         base = Render_GetPackSection(header, 0);
     }
-    gSPSegment(D_80110634++, 2, (unsigned int)base);
+    gSPSegment(g_displayListCursor++, 2, (unsigned int)base);
     parts = Render_GetPackSection(header, 2);
     count = *(s32 *)parts;
     for (i = 0; i < count; i++) {
@@ -338,7 +338,7 @@ void Render_DrawModelWithSharedMaterial(void **resource, void *matrix, s32 segme
         {
             Gfx *cmd;
             void *list = Render_GetPackSection(part, 1);
-            cmd = D_80110634++;
+            cmd = g_displayListCursor++;
             gSPDisplayList(cmd, (unsigned int)list);
         }
     }

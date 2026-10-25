@@ -18,7 +18,7 @@
 
 
 extern struct Screen_func_8043B6E8_de *D_800E59E0;
-extern u8 D_80146398[];
+extern u8 g_playerSettings[];
 extern struct Shape_typemap_165 D_800E5BC4[];
 extern struct Shape_typemap_165 D_800E5B14[];
 extern struct Shape_typemap_165 D_800E5B44[];
@@ -34,7 +34,7 @@ void func_8043B6E8_de(s32 player) {
     if (D_800E59E0->entries[player].mode == 0) {
         return;
     }
-    record = &D_80146398[player * 150];
+    record = &g_playerSettings[player * 150];
     for (column = 0; column < 8; column++) {
         if (D_800E59E0->entries[player].mode == 1) {
             switch (column) {
@@ -107,7 +107,7 @@ void func_8043B854_de(void) {
     s32 column;
 
     for (i = 0; i < 4; i++) {
-        record = &D_80146398[i * 150];
+        record = &g_playerSettings[i * 150];
         if (record[0x78] != 1) {
             continue;
         }

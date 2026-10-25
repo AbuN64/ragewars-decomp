@@ -28,7 +28,7 @@ s32 func_802169AC_de(LevelActor *actor, RouteChaseBot *routeChaseBot, LevelActor
     if (arg2->type == 0x64F) {
         return 7;
     }
-    if (D_8011FE88.visibilityEnabled == 0) {
+    if (g_world.visibilityEnabled == 0) {
         if (arg2->flags & 0x300000) {
             controller = arg2->controller;
             if ((((Shared_ActorView *)controller)->controllerOwner == actor) &&

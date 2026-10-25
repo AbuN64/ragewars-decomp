@@ -307,7 +307,7 @@ void Ovlgame_InitActorHudState(void *actor) {
     if (Camera_IsSequenceActive() == 0) {
         enabled = enabled < (u32)(D_8013B2BC ^ 0x3E7);
     }
-    if (D_8011FE88.visibilityEnabled != 0) {
+    if (g_world.visibilityEnabled != 0) {
         enabled = 1;
     }
     if (enabled != 0) {

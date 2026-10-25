@@ -42,7 +42,7 @@ void Actors_DispatchTrigger(Trigger *trigger) {
         } else {
             fallback = &D_80145088.fallbackCamera;
         }
-        if (D_8011FE88.mode == 4) {
+        if (g_world.mode == 4) {
             index = trigger->sound;
             if (index != 0) {
                 Camera_PostTargetedScreenMessage(&D_80145088, fallback, gameplaySoundValue(index), D_800CD730, triggerSoundWeight());
@@ -93,7 +93,7 @@ void func_80278D78_de(struct Shared_Actor *actor, s32 arg1, void *arg2) {
     s32 sp24;
 
     if (!(actor->weaponFlags & 0x80000)) {
-        func_8028C26C_de(&D_8011FE88, actor, &sp20, &sp24);
+        func_8028C26C_de(&g_world, actor, &sp20, &sp24);
         if (sp24 != 0) {
             func_80279204_de(sp20, sp24, 0, arg1 & 0x3FC1FF, arg1 & 0x400000, 0x400000, arg2);
         }
@@ -105,7 +105,7 @@ void func_80278E04_de(s32 arg0, s32 arg1, void *actor) {
     s32 sp24;
 
     if (arg0 != 0) {
-        func_8028C1D4_de(&D_8011FE88, arg0, &sp20, &sp24);
+        func_8028C1D4_de(&g_world, arg0, &sp20, &sp24);
         if (sp24 != 0) {
             func_80279204_de(sp20, sp24, 0, arg1 & 0x7FF, arg1 & 0x3800, 0x3800, actor);
         }
@@ -116,9 +116,9 @@ void func_80278E7C_de(void *trigger) {
     func_80278EEC_S1 *object = trigger;
 
     object->unkE |= 0x10;
-    func_8028BB1C_de(&D_8011FE88, trigger, 1);
-    if ((D_8011FE88.mode == 4) && (object->unkE & 2)) {
-        func_8028C568_de(&D_8011FE88, trigger);
+    func_8028BB1C_de(&g_world, trigger, 1);
+    if ((g_world.mode == 4) && (object->unkE & 2)) {
+        func_8028C568_de(&g_world, trigger);
         return;
     }
     Actors_DispatchTrigger(trigger);
@@ -151,14 +151,14 @@ void func_80278F84_de(LevelActor *actor) {
 }
 
 void func_80278FB4_de(s32 arg0, s32 unused1, s32 arg2) {
-    if (D_8011FE88.mode == 4) {
+    if (g_world.mode == 4) {
         func_8028D90C_de();
         Menu_RequestTrackByIds(arg0, arg2);
     }
 }
 
 void func_80279004_de(s32 arg0) {
-    if (D_8011FE88.mode == 4) {
+    if (g_world.mode == 4) {
         func_8028D90C_de();
         Menu_RequestTrackByIds(0, arg0);
     }

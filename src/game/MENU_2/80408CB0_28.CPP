@@ -247,17 +247,17 @@ s32 func_80422E34_eu(void *node) {
     func_8041B110_de(0x37C);
     firstListHandle = func_8041ABC0_de(0x375, 0x376);
     D_800E4518->firstList = firstListHandle;
-    Menu_AppendListText(firstListHandle, D_800E1C14[D_80152789]);
-    Menu_AppendListText(D_800E4518->firstList, D_800E1C34[D_80152789]);
-    Menu_AppendListText(D_800E4518->firstList, D_800E1C44[D_80152789]);
+    Menu_AppendListText(firstListHandle, D_800E1C14[g_languageIndex]);
+    Menu_AppendListText(D_800E4518->firstList, D_800E1C34[g_languageIndex]);
+    Menu_AppendListText(D_800E4518->firstList, D_800E1C44[g_languageIndex]);
     settings = &D_801462C8;
     Menu_SelectListEntry(D_800E4518->firstList, settings->firstListMode);
     secondListHandle = func_8041ABC0_de(0x378, 0x379);
     D_800E4518->secondList = secondListHandle;
-    Menu_AppendListText(secondListHandle, D_800D2134[D_80152789]);
+    Menu_AppendListText(secondListHandle, D_800D2134[g_languageIndex]);
     if (System_GetMemorySize() != 0x400000) {
-        Menu_AppendListText(D_800E4518->secondList, D_800D2138[D_80152789]);
-        Menu_AppendListText(D_800E4518->secondList, D_800D213C[D_80152789]);
+        Menu_AppendListText(D_800E4518->secondList, D_800D2138[g_languageIndex]);
+        Menu_AppendListText(D_800E4518->secondList, D_800D213C[g_languageIndex]);
     }
     Menu_SelectListEntry(D_800E4518->secondList, settings->slots[7].secondListMode);
     slider = func_8041A580_de(0x37A, 0x37B, 0x80);

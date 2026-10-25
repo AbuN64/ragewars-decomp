@@ -58,7 +58,7 @@ s32 func_80444D9C_de(LayeredText *item) {
     } else {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         item->text = D_800E22F4;
-        text = item->text[D_80152789];
+        text = item->text[g_languageIndex];
 #else
         item->text = &D_800D3628;
         text = *item->text;

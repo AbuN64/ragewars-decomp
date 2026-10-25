@@ -607,7 +607,7 @@ void Scene_ShowResultsGoal(void) {
     ResultsHeadingCharacter *character;
 
     Camera_ClearMessageCount();
-    copyLevelName(&D_8011FE88, D_8015402C, name, 63);
+    copyLevelName(&g_world, D_8015402C, name, 63);
     Camera_AddMessage(name);
     if (currentGame()->controllerMode == 0) {
         return;
@@ -656,10 +656,10 @@ void Scene_ShowResultsGoal(void) {
             break;
         default:
             if (D_800E4680->targetCount < 2) {
-                func_802A0C08_de(goal, RW_LOCALIZED_TEXT(D_800D336C, D_800E1804, D_800E1804, D_80152789),
+                func_802A0C08_de(goal, RW_LOCALIZED_TEXT(D_800D336C, D_800E1804, D_800E1804, g_languageIndex),
                                  D_800E4680->targetCount);
             } else {
-                func_802A0C08_de(goal, RW_LOCALIZED_TEXT(D_800D3370, D_800E1814, D_800E1814, D_80152789),
+                func_802A0C08_de(goal, RW_LOCALIZED_TEXT(D_800D3370, D_800E1814, D_800E1814, g_languageIndex),
                                  D_800E4680->targetCount);
             }
             break;
@@ -703,7 +703,7 @@ void Scene_ShowResultsGoal(void) {
         Camera_AddMessage(name);
         break;
     case 4:
-        challenge = findLevelChallenge(&D_8011FE88, D_8015402C);
+        challenge = findLevelChallenge(&g_world, D_8015402C);
         character = &RESULTS_CHARACTERS[Frontend_FindKeyIndex(challenge->character)];
         func_802A0C08_de(name, RESULTS_NAME_FORMAT, character->name[RESULTS_LANGUAGE].text);
         Camera_AddMessage(name);

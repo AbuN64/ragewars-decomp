@@ -44,7 +44,7 @@ void func_80433610_de(s32 player)
       }
       else
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        if (Pak_FindNoteByName(((D_800E25A4)[D_80152789]), player, &result) == one)
+        if (Pak_FindNoteByName(((D_800E25A4)[g_languageIndex]), player, &result) == one)
 #else
         if (Pak_FindNoteByName((D_800D36D4), player, &result) == one)
 #endif

@@ -44,7 +44,7 @@ void func_8020AA40_de(Shared_Arg0 *arg0)
   Shared_WeaponSlot *var_s3;
   Shared_World *ww;
   var_s5 = arg0->unk24;
-  ww = &D_8011FE88;
+  ww = &g_world;
   if (var_s5 != 0)
   {
     var_f21 = D_800C1D40[0];
@@ -168,10 +168,10 @@ void Nav_AssignPlatformEndpoints(CNavData *graph) {
                 motion = &actor->motion;
                 definition = &actor->resource->motion;
                 if (motion->mode == 4) {
-                    route = Engine_GetPlatformRoute(&D_8011FE88, motion->route);
+                    route = Engine_GetPlatformRoute(&g_world, motion->route);
                     if (route != 0) {
                         for (j = 0; j < route->count; j++) {
-                            position = Engine_GetPlatformRoutePoint(&D_8011FE88, motion->route, j);
+                            position = Engine_GetPlatformRoutePoint(&g_world, motion->route, j);
                             distance = Particle_GetPointDistance(point, position);
                             if (distance < best || best == -1.0f) {
                                 chosen = platforms[i];

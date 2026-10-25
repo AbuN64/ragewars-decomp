@@ -79,12 +79,12 @@ void func_8022B484_de(char *arg0) {
     s32 index;
 
     if (object->unk120C != 0) {
-        index = func_8028B21C_de(&D_8011FE88, 0xC84);
+        index = func_8028B21C_de(&g_world, 0xC84);
     } else {
-        index = func_8028B21C_de(&D_8011FE88, 0xC85);
+        index = func_8028B21C_de(&g_world, 0xC85);
     }
     if (index != -1) {
-        func_8026DF30_de(func_8028C198_de(&D_8011FE88, index),
+        func_8026DF30_de(func_8028C198_de(&g_world, index),
                       (s32)((Shared_ActorView *)arg0)->transform1600, (s32)&D_800D0EF8, 0, -1);
     }
 }

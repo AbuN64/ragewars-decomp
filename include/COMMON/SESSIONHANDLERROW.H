@@ -48,7 +48,7 @@ extern int D_800CD734;
 
 extern char D_80142CB8[];
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern s32 D_800CD8C8_de;
 extern u32 D_800DE850;
 extern void *D_8014D468_de[];

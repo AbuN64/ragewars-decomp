@@ -107,9 +107,9 @@ void func_80433914_de(s32 player) {
     }
    }
 #if defined(VERSION_EU)
-  } else {value->text=((D_800E1394)[D_80152789]);Frontend_SetWidgetFlag08((func_8041F2A0_Item *)label,0);}
+  } else {value->text=((D_800E1394)[g_languageIndex]);Frontend_SetWidgetFlag08((func_8041F2A0_Item *)label,0);}
 #elif defined(VERSION_EU_X)
-  } else {value->text=((D_800DD124)[D_80152789]);Frontend_SetWidgetFlag08((func_8041F2A0_Item *)label,0);}
+  } else {value->text=((D_800DD124)[g_languageIndex]);Frontend_SetWidgetFlag08((func_8041F2A0_Item *)label,0);}
 #else
   } else {value->text=(D_800D3250[0]);Frontend_SetWidgetFlag08((func_8041F2A0_Item *)label,0);}
 #endif

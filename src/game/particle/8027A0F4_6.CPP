@@ -27,7 +27,7 @@ struct Shared_AnimInfo;
  * frame for a shared camera, per view otherwise), selects the texture and render mode, works out its alpha from life,
  * fade-in, fade-out and distance from the view, and emits the colour and draw commands. */
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
 extern f32 D_800D2988;
 extern s32 D_800D297C;
@@ -122,7 +122,7 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
     u8 *envFrom;
     u8 *primFrom;
 
-    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
+    if (D_800E28A4 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     if (particle->time < 0.0f) {
@@ -243,7 +243,7 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
         dist = -dist;
     }
     if (D_80140FF8 == 1) {
-        gSPMatrix(D_80110634++, &particle->mtx[D_800D297C], G_MTX_LOAD);
+        gSPMatrix(g_displayListCursor++, &particle->mtx[D_800D297C], G_MTX_LOAD);
     } else {
         mtx = func_802799C0_de(&D_8011FFB0, 1);
         if (mtx == 0) {
@@ -251,7 +251,7 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
             return;
         }
         Particle_BuildMatrix(particle, mtx, view, dist);
-        gSPMatrix(D_80110634++, (u32)mtx, G_MTX_LOAD);
+        gSPMatrix(g_displayListCursor++, (u32)mtx, G_MTX_LOAD);
     }
 
     textured = particle->flags & 0x800000;
@@ -274,7 +274,7 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
     if (textured) {
         Render_SetModePreset(0xF);
         {
-            gSPTextureL(D_80110634++, shiftS, shiftT, 0, 0xFF, 0, G_ON);
+            gSPTextureL(g_displayListCursor++, shiftS, shiftT, 0, 0xFF, 0, G_ON);
         }
     } else if ((desc->flags & 0x400) && desc->fade->unkE != 4) {
         Render_SetModePreset(0xF);
@@ -322,34 +322,34 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
         switch (mode) {
             case 0:
             default:
-                gDPSetEnvColor(D_80110634++, env[0], env[1], env[2], 255);
+                gDPSetEnvColor(g_displayListCursor++, env[0], env[1], env[2], 255);
                 break;
             case 2:
-                gDPSetEnvColor(D_80110634++, env[0], env[0], env[2], 255);
+                gDPSetEnvColor(g_displayListCursor++, env[0], env[0], env[2], 255);
                 break;
             case 1:
-                gDPSetEnvColor(D_80110634++, env[1], env[0], env[2], 255);
+                gDPSetEnvColor(g_displayListCursor++, env[1], env[0], env[2], 255);
                 break;
         }
     }
     alpha = (alpha > 255 ? 255 : alpha) < 0 ? 0 : (alpha > 255 ? 255 : alpha);
-    gSPVertex(D_80110634++, &D_8011AF78, 4, 0);
+    gSPVertex(g_displayListCursor++, &D_8011AF78, 4, 0);
     if (textured) {
-        gSPTextureL(D_80110634++, shiftS, shiftT, 0, 0xFF, 0, G_ON);
+        gSPTextureL(g_displayListCursor++, shiftS, shiftT, 0, 0xFF, 0, G_ON);
         }
     particle->alpha = (alpha * particle->opacity) >> 8;
     switch (mode) {
         case 0:
         default:
-            gDPSetPrimColor(D_80110634++, 0, 0, prim[0], prim[1], prim[2], (u32)particle->alpha);
+            gDPSetPrimColor(g_displayListCursor++, 0, 0, prim[0], prim[1], prim[2], (u32)particle->alpha);
             break;
         case 2:
-            gDPSetPrimColor(D_80110634++, 0, 0, prim[0], prim[0], prim[2], (u32)particle->alpha);
+            gDPSetPrimColor(g_displayListCursor++, 0, 0, prim[0], prim[0], prim[2], (u32)particle->alpha);
             break;
         case 1:
-            gDPSetPrimColor(D_80110634++, 0, 0, prim[1], prim[0], prim[2], (u32)particle->alpha);
+            gDPSetPrimColor(g_displayListCursor++, 0, 0, prim[1], prim[0], prim[2], (u32)particle->alpha);
             break;
     }
-    gSP2Triangles(D_80110634++, 0, 1, 2, 0, 2, 3, 0, 0);
+    gSP2Triangles(g_displayListCursor++, 0, 1, 2, 0, 2, 3, 0, 0);
     Scene_UnlockResource(0, model);
 }

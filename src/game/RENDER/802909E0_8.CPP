@@ -72,7 +72,7 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
     u8 matrix[0x40];
 
     D_800CC380 = 0;
-    handle = func_8028B21C_de(&D_8011FE88, 0xE10);
+    handle = func_8028B21C_de(&g_world, 0xE10);
     D_800D15E0 = 0;
     D_800D15E4[0] = D_800CA4B0;
     D_800D15E4[1] = D_800CA4B0;
@@ -84,12 +84,12 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
         func_802739C4_de(matrix, state->unk26DB0 * D_800CA4B4);
         SwapMatrixUpForward(matrix);
         Rsp_ConvertMatrixToFixed(matrix, VIEW_MATRICES + D_800D297C * 64);
-        h2 = func_8028C198_de(&D_8011FE88, handle);
+        h2 = func_8028C198_de(&g_world, handle);
         Render_BeginModelBatch();
         func_8026DF30_de(h2, VIEW_MATRICES + D_800D297C * 64, &D_800D0EF8, 0, -1);
         Render_FlushModelBatch();
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        Render_DrawTextLines(state, 0, (void *)((s32 **)&D_800CA4B8)[D_80152789], D_800E28D0 / 2, 0xBE, 0xA, D_auto_800C5678[0], D_auto_800C5678[1]);
+        Render_DrawTextLines(state, 0, (void *)((s32 **)&D_800CA4B8)[g_languageIndex], D_800E28D0 / 2, 0xBE, 0xA, D_auto_800C5678[0], D_auto_800C5678[1]);
 #else
         Render_DrawTextLines(state, 0, (void *)D_auto_800D7068, D_800E28D0 / 2, 0xBE, 0xA, D_800CA4B8, (&D_800CA4B8)[1]);
 #endif
@@ -101,7 +101,7 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
 
 #if !(defined(VERSION_US))
 /* Clears the screen: clears the depth buffer over the whole screen through Render_ClearDepthRect, emits a full-screen scissor, the frame's colour image, fill cycle, combiner, no-op render mode, fill colour 0x10001 and a full-screen fill rectangle, then, when image 0x386 has a size, draws it stretched across the screen through func_802AAC28_de after func_802A9234_de(255). Written with libultra-style display-list macros and the screen size read from D_800E28D0 and D_800E28D4. */
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
 extern void Render_ClearDepthRect(void *arg0, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced);
 
@@ -113,13 +113,13 @@ void func_80290C24_de(void *arg0) {
     Render_ClearDepthRect(arg0, 0, SCREEN_WD, 0, SCREEN_HT, 0);
     width = 0;
     height = 0;
-    gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
-    gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, (u32)((frame->colorImage)));
-    gDPSetCycleType(D_80110634++, G_CYC_FILL);
-    gDPSetCombineLERP(D_80110634++, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE);
-    gDPSetRenderMode(D_80110634++, ((0)), 0);
-    gDPSetFillColor(D_80110634++, ((0x10001)));
-    gDPFillRectangle(D_80110634++, 0, 0, (SCREEN_WD), (SCREEN_HT));
+    gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
+    gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, (u32)((frame->colorImage)));
+    gDPSetCycleType(g_displayListCursor++, G_CYC_FILL);
+    gDPSetCombineLERP(g_displayListCursor++, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE);
+    gDPSetRenderMode(g_displayListCursor++, ((0)), 0);
+    gDPSetFillColor(g_displayListCursor++, ((0x10001)));
+    gDPFillRectangle(g_displayListCursor++, 0, 0, (SCREEN_WD), (SCREEN_HT));
     func_802AA950_de(0x386, 0, &width, &height);
     if (width != 0 && height != 0) {
         Text_SetupSpriteMode(0xFF);

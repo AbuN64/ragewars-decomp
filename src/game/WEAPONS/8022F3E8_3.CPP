@@ -31,14 +31,14 @@ void func_8022F770_de(void *object, void *unused) {
     s32 red, alpha;
     node=actor->node;
     if(node->active) {
-        gSPMatrix(D_80110634++, (u32)&node->matrices[D_800D297C], G_MTX_LOAD);
-        gDPPipeSync(D_80110634++);
+        gSPMatrix(g_displayListCursor++, (u32)&node->matrices[D_800D297C], G_MTX_LOAD);
+        gDPPipeSync(g_displayListCursor++);
         func_8026D8F8_de();
         Render_SetModePreset(0xE);
         Render_SetCombineMode(0x1C);
         red=200; alpha=150;
-        gSPGeometryMode(D_80110634++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);
-        gSPGeometryMode(D_80110634++, 0, G_SHADE | G_SHADING_SMOOTH);
+        gSPGeometryMode(g_displayListCursor++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);
+        gSPGeometryMode(g_displayListCursor++, 0, G_SHADE | G_SHADING_SMOOTH);
         D_800FF1B0_de[0].x=1;
         D_800FF1B0_de[0].y=1;
         D_800FF1B0_de[0].z=0;
@@ -79,9 +79,9 @@ void func_8022F770_de(void *object, void *unused) {
         D_800FF1B0_de[3].g=0;
         D_800FF1B0_de[3].b=0;
         D_800FF1B0_de[3].a=alpha;
-        gSPVertex(D_80110634++, (u32)D_800FF1B0_de, 4, 0);
-        gSP1Triangle(D_80110634++, 0, 1, 2, 0);
-        gSP1Triangle(D_80110634++, 1, 2, 3, 0);
+        gSPVertex(g_displayListCursor++, (u32)D_800FF1B0_de, 4, 0);
+        gSP1Triangle(g_displayListCursor++, 0, 1, 2, 0);
+        gSP1Triangle(g_displayListCursor++, 1, 2, 3, 0);
         if(node->extra) func_802A5498_de((u32)&node->extraMatrices[D_800D297C]);
     }
 }
@@ -295,7 +295,7 @@ void Weapons_ApplyWeaponSwitch(void *part, void *body) {
     state = ((Shared_ActorView *)part)->self;
     index = ((Shared_ActorView *)state)->nextWeapon;
     unsigned_index = (u16)((Shared_ActorView *)state)->nextWeapon;
-    if ((((Shared_ActorView *)state)->selectedAction != index) || (D_8011FE88.mode != 4)) {
+    if ((((Shared_ActorView *)state)->selectedAction != index) || (g_world.mode != 4)) {
         if (func_80232780_de(index) != 0) {
             ((Shared_ActorView *)state)->weaponChanged = 1;
         } else if (func_802327A0_de(index) != 0) {

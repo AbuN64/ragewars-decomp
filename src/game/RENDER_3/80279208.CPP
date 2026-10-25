@@ -57,7 +57,7 @@ void func_80279204_de(Trigger *triggers, s32 count, s32 require, s32 enter, s32 
     Trigger *trigger;
 
     for (trigger = triggers, i = 0; i < count; trigger++, i++) {
-        world = &D_8011FE88;
+        world = &g_world;
         usable = 1;
         if (world->mode != 4) {
             usable = func_8028BC0C_de(world, trigger) == 0;

@@ -34,7 +34,7 @@ void Engine_LoadSelectedTexture(void) {
     s32 frame;
     u8 *name;
     s32 i;
-    Shared_World *world = &D_8011FE88;
+    Shared_World *world = &g_world;
 
     if (D_8014AECC != NULL) {
         Scene_UnlockResource(NULL, D_8014AECC);

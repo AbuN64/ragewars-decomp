@@ -41,7 +41,7 @@ extern char *D_800E27C4_eu[];
 extern u8 *D_800E2804_eu[];
 extern char *D_800E25B4[];
 extern char D_004501C4[];
-#define ENTRY_TEXT(e) ((e)->text[D_80152789])
+#define ENTRY_TEXT(e) ((e)->text[g_languageIndex])
 #define PAK_HEADER_376C D_800E2804_eu
 #else
 #define ENTRY_TEXT(e) (*(e)->text)
@@ -125,7 +125,7 @@ static inline s32 findNote(s32 ch, s32 *found)
     char name[16];
     s32 state;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    char *game = D_800E25B4[D_80152789];
+    char *game = D_800E25B4[g_languageIndex];
 #else
     char *game = D_800D36D8;
 #endif
@@ -175,7 +175,7 @@ s32 func_80407F6C_de(PakNoteTextEntry *entry, PakNotesMenu *menu) {
     if (exists != 0 && result == 0) {
         if (func_804057BC_de(name, 16) != 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-            Resmgr_CopyString(name, D_800E27B4[D_80152789]);
+            Resmgr_CopyString(name, D_800E27B4[g_languageIndex]);
 #else
             Resmgr_CopyString(name, D_800D3758);
 #endif

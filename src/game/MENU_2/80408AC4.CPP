@@ -47,7 +47,7 @@ s32 Menu_HandleMatchMessage(void) {
         if (func_802999A0_de(0) == 0x16) {
             Items_ResetActorPools(&D_80145040.object, 0);
             func_804499B0_de(&D_80145040, 0, 0);
-            func_80286AA8_de(&D_8011FE88, 0, 0);
+            func_80286AA8_de(&g_world, 0, 0);
             if (func_8025477C_de() == 0) {
                 func_8025476C_de(1);
             }

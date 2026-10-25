@@ -552,7 +552,7 @@ loop_89:
         temp_v1_7 = ((struct Shared_SceneActorPrefix *)var_s2_3)[-1].definition;
         temp_v0_20 = temp_v1_7->unk0;
         if (temp_v0_20 == actor_type3) {
-            if (func_8028B25C_de(&D_8011FE88, temp_v1_7->unk28) != actor_kind_bd7) {
+            if (func_8028B25C_de(&g_world, temp_v1_7->unk28) != actor_kind_bd7) {
                 goto block_108;
             }
             D_800F3CD0.primary.kindBd7 = scene_actor_ptr;

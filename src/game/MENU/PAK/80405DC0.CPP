@@ -178,7 +178,7 @@ s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu) {
                 ch = menu->slot->unk4;
             }
             Render_DisableControllerPak(ch);
-            Items_SetSelection(&D_8011FE88, menu->player->menu, 2);
+            Items_SetSelection(&g_world, menu->player->menu, 2);
             return 1;
         }
         func_8044DDD4_de(&D_8011FAC0);
@@ -191,7 +191,7 @@ s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu) {
     }
     if (D_80153788 == 5) {
         Render_DisableControllerPak(ch);
-        Items_SetSelection(&D_8011FE88, D_8011FE88.selectionValues[3], 2);
+        Items_SetSelection(&g_world, g_world.selectionValues[3], 2);
     }
     if (D_8015375C != 0 && D_80153788 == 6) {
         D_8014ADA0 = 1;

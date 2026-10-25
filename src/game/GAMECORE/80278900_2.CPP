@@ -27,7 +27,7 @@
 s32 func_80278ABC_de(void) {
     s32 total = 0;
     s32 i;
-    char *base = (char *)&D_8011FE88;
+    char *base = (char *)&g_world;
 
     for (i = 0; i < ((IntegerState1504 *)(base))->unk_1500; i++) {
         total += ((struct Shape_typemap_13 *)Render_GetPackSection(*((struct ObjectLinks150C *) (base + (i * 0xC)))->unk_1508, 2))->field_4;
@@ -39,7 +39,7 @@ void func_80278B3C_de(s32 arg0, s32 count, CVector3 *vtx) {
     Table *t;
     s32 zero;
     s32 i;
-    char *base = (char *)&D_8011FE88;
+    char *base = (char *)&g_world;
     s32 *d;
     s32 w;
     s32 dx;

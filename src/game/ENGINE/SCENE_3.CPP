@@ -116,7 +116,7 @@ finished:
 #include "gbi.h"
 /* One geometry vertex of a prop's collision mesh (stride from its section header). */
 typedef struct ScenePoint { s16 x, y, z; } ScenePoint;
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern void Render_BeginModelBatch(void), Render_FlushModelBatch(void);
 extern struct Shape_typemap_165 *Scene_AllocateResource(s32, s32, u32, void *);
 extern s32 Scene_GetPropModelIndex(Object_func_80288EA8_de *object);
@@ -174,13 +174,13 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     nextResource = resources;
     nextProp = props;
     firstX = 0;
-    firstGfx = D_80110634;
-    gDPPipeSync(D_80110634++);
-    gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
-    gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_2);
-    gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_2);
-    gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_2);
-    gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_2);
+    firstGfx = g_displayListCursor;
+    gDPPipeSync(g_displayListCursor++);
+    gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
+    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_2);
+    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_2);
+    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_2);
+    gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_2);
     z = 0;
     Render_BeginModelBatch();
     xCount = ((DraftStreamTable *)Render_GetPackSection(world->grid, 0))->count;
@@ -256,8 +256,8 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     size &= ~7;
     count = offset;
     offset += size;
-    gSPEndDisplayList(D_80110634++);
-    gfxBytes = (u8 *)D_80110634 - (u8 *)firstGfx;
+    gSPEndDisplayList(g_displayListCursor++);
+    gfxBytes = (u8 *)g_displayListCursor - (u8 *)firstGfx;
     handle = Scene_AllocateResource(0, offset + ((gfxBytes + 7) & ~7), 3, "Multi player data");
     world->cacheHandle = handle;
     cache = handle->data;
@@ -269,5 +269,5 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     func_802BD3A0_de(Render_GetPackSection(world->cache, 0), resources, resourceBytes);
     func_802BD3A0_de(Render_GetPackSection(world->cache, 1), props, propBytes);
     func_802BD3A0_de(Render_GetPackSection(world->cache, 2), firstGfx, gfxBytes);
-    D_80110634 = firstGfx;
+    g_displayListCursor = firstGfx;
 }

@@ -78,7 +78,7 @@ D_800D34D4_de[0]
 #endif
 );
     } else {
-        func_8028D380_de(&D_8011FE88, func_8042B1B8_de(Frontend_CategoryToList(D_800E4F60->list), D_800E4F60->entry),
+        func_8028D380_de(&g_world, func_8042B1B8_de(Frontend_CategoryToList(D_800E4F60->list), D_800E4F60->entry),
                       buffer, 0x3F);
         Resmgr_CopyString(D_800E4F60->label, func_802A0494_de(buffer));
     }

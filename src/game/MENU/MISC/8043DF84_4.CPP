@@ -89,7 +89,7 @@ s32 func_8043E2D8_de(struct Field *field, Shared_MenuHandle *holder) {
             break;
         }
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        text = field->text[D_80152789];
+        text = field->text[g_languageIndex];
         func_802658E4_de(text + (Pak_CountLineChars(field) - 2), D_800EE970, value);
 #else
         text = *field->text;

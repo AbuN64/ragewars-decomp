@@ -106,7 +106,7 @@ void func_80244E58_de(void) {
         Render_FreeAllPoolNodes(&D_8010EC90);
     }
     if (target != -1) {
-        table = &D_8011FE88;
+        table = &g_world;
         if (D_801371D4.field_0 != target) {
             origin.w[0] = 0;
             origin.w[1] = 0;

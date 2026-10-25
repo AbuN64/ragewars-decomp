@@ -49,7 +49,7 @@ s32 func_8041DBCC_de(void) {
 #include "COMMON/VIDEO_DIMENSIONS.H"
 extern s32 Frontend_GetModelRecordCount(struct Record_func_80439C80_de *record);
 extern void func_804399D0(struct Record_func_80439C80_de *record);
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern s32 D_800E28D0;
 /* Draw callback of the menu block: on draw event 1 in state 3 it clears the fill mode D_800D15E0, sets the fill
  * colour D_800D15E4 to opaque white, scissors the display list to the full screen and, when the block record at
@@ -61,7 +61,7 @@ s32 Frontend_DrawMenuBlockModel(void *window, void *item, s32 event) {
         D_800D15E4[1] = 255.0f;
         D_800D15E4[2] = 255.0f;
         D_800D15E4[3] = 255.0f;
-        gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
+        gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
         if (Frontend_GetModelRecordCount(&D_800E3590->record) != 0) {
             D_800D15E0 = 1;
             D_800D15E4[3] = 210.0f;

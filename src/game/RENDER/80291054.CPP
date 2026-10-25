@@ -47,7 +47,7 @@ advance:
             D_8011B9F0 = line;
             D_80146CB8 += height;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-            if (D_800D3E14_de[D_80152789][line] == 0) {
+            if (D_800D3E14_de[g_languageIndex][line] == 0) {
 #else
             if (D_800D3E14_de[0][line] == 0) {
 #endif

@@ -55,7 +55,7 @@ void func_80246E44_de(Actor36 *actor) {
     void *box;
     flags = actor->flags;
     if (!(flags & 0x40000)) return;
-    if (D_8011FE88.mode == 4 && !(flags & 0x2000)) return;
+    if (g_world.mode == 4 && !(flags & 0x2000)) return;
     mode = flags & 0x300000;
     before = actor->position;
     func_802472F0_de(actor);
@@ -66,7 +66,7 @@ void func_80246E44_de(Actor36 *actor) {
         Particle_AddVec3(&after, &after, &actor->displacement);
         func_8024715C_de((void *)actor, &after);
         if (*actor->kind == 1) {
-            Scene_UpdateMovementTriggers(&D_8011FE88, actor, &before, &actor->position);
+            Scene_UpdateMovementTriggers(&g_world, actor, &before, &actor->position);
         }
     }
     func_80247004_de((void *)actor);

@@ -43,7 +43,7 @@ extern SavedState *D_800E28BC;
 extern s32 D_8013B2D4[]; /* an array: its store may alias the loads through D_800E28BC, so it stays after them */
 extern u8 D_80146848, D_800F91F0[];
 void func_80409AC0_de(RestorePlayer *player) {
-    Shared_World *world = &D_8011FE88;
+    Shared_World *world = &g_world;
     s32 i;
     u8 *from, *to;
     u8 saved = D_80146848;

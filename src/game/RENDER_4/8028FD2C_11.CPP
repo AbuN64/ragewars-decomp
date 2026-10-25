@@ -96,7 +96,7 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVect
   s32 temp_v1_2;
   char *temp_s0;
   char *temp_v1;
-  if (((*D_800CD764_de) == 0) || ((temp_v0 = func_8028B21C_de(&D_8011FE88, arg2), temp_v0 == (-1))))
+  if (((*D_800CD764_de) == 0) || ((temp_v0 = func_8028B21C_de(&g_world, arg2), temp_v0 == (-1))))
   {
     return 0;
   }
@@ -122,7 +122,7 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVect
   ((SceneEffect *)(temp_s0))->state = (s32) ((((SceneEffect *)(temp_s0))->state) | 1);
   Camera_ResetActorMotion(temp_s0);
   ((SceneEffect *)(temp_s0))->lifetime = 0;
-  temp_v1_2 = func_8028C198_de(&D_8011FE88, temp_v0);
+  temp_v1_2 = func_8028C198_de(&g_world, temp_v0);
   ((SceneEffect *)(temp_s0))->counter = arg1;
   if (arg1 != 0)
   {
@@ -165,7 +165,7 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVect
   center.x = ((SceneEffect *)(temp_s0))->position.x;
   center.y = (((SceneEffect *)(temp_s0))->position.y) + (Particle_GetActorHeight(temp_s0) * 0.5f);
   center.z = ((SceneEffect *)(temp_s0))->position.z;
-  func_8028C6D4_de(&D_8011FE88, &center, (char *)temp_s0 + 0x1A8);
+  func_8028C6D4_de(&g_world, &center, (char *)temp_s0 + 0x1A8);
   return temp_s0;
 }
 

@@ -5,10 +5,10 @@
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern char *D_800E2044_eu[], *D_800E2064_eu[], *D_800E2074_eu[], *D_800E2084[], *D_800E2094_eu[];
 static inline char *resultsUnavailable(Shared_Game *game) { return D_800E2044_eu[game->language]; }
-static inline char *resultsFirstHeading(void) { return D_800E2064_eu[D_80152789]; }
-static inline char *resultsSecondHeading(void) { return D_800E2074_eu[D_80152789]; }
-static inline char *resultsThirdHeading(void) { return D_800E2084[D_80152789]; }
-static inline char *resultsFourthHeading(void) { return D_800E2094_eu[D_80152789]; }
+static inline char *resultsFirstHeading(void) { return D_800E2064_eu[g_languageIndex]; }
+static inline char *resultsSecondHeading(void) { return D_800E2074_eu[g_languageIndex]; }
+static inline char *resultsThirdHeading(void) { return D_800E2084[g_languageIndex]; }
+static inline char *resultsFourthHeading(void) { return D_800E2094_eu[g_languageIndex]; }
 #else
 extern char *D_800D357C, *D_800D3584, *D_800D3588, *D_800D358C, *D_800D3590;
 static inline char *resultsUnavailable(Shared_Game *game) { return D_800D357C; }

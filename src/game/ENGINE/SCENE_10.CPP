@@ -51,7 +51,7 @@ void *func_8028C050_de(void *triangle, CVector3 *arg1) {
             return triangle;
         }
     }
-    return Scene_FindFloorPolygon(&D_8011FE88, arg1);
+    return Scene_FindFloorPolygon(&g_world, arg1);
 }
 
 /* Searches the counted pointer list at offset 0x1B620 of a world record for the first entry whose definition id at 0x18->0xC equals the given id, returning it or null. */

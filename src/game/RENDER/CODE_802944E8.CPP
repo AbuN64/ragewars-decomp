@@ -81,7 +81,7 @@ void func_80294614_de(GameSession *arg0) {
 #if defined(VERSION_US_REV1)
     func_802954E0_us_rev1();
 #endif
-    dst = &D_8011FE88;
+    dst = &g_world;
 #if defined(VERSION_US_REV1)
     f = (1.0f);
 #else
@@ -125,8 +125,8 @@ void Render_StartRound(GameSession *session) {
     D_800CD744_de = roundTimerConstant();
     D_800D298C = roundTimerConstant();
     D_800CD740_de = roundTimerConstant();
-    Items_InitPreview(&D_8011FE88, session->resource);
-    Items_SetSelection(&D_8011FE88, session->selector, 0);
+    Items_InitPreview(&g_world, session->resource);
+    Items_SetSelection(&g_world, session->selector, 0);
 }
 
 #if !(defined(VERSION_US_REV1))

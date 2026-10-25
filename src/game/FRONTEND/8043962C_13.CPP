@@ -13,7 +13,7 @@
 #include "particle/80271B18_3.H"
 
 /* Draws a menu model with screen-scaled translation, animated and fixed rotations, restoring the render-state flag afterward; the unsigned offset-to-pointer cast preserves matrix-address scheduling. */
-extern MenuModelScreen D_80141008[]; extern Gfx *D_80110634;
+extern MenuModelScreen D_80141008[]; extern Gfx *g_displayListCursor;
 extern s32 D_800CC380, D_800D297C, D_800E28D0;
 #if defined(VERSION_DE)
 extern float D_800DDF50_de;
@@ -46,12 +46,12 @@ void func_804399D0(MenuModelItem *item) {
  saved=D_800CC380; D_800CC380=0;
  if (item->model != -1) {
   func_80417138_de(0x33335);
-  gDPPipeSync(D_80110634++);
-  gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
-  gDPSetTexturePersp(D_80110634++, G_TP_PERSP);
-  gDPSetTextureFilter(D_80110634++, G_TF_BILERP);
+  gDPPipeSync(g_displayListCursor++);
+  gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
+  gDPSetTexturePersp(g_displayListCursor++, G_TP_PERSP);
+  gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
   func_8026D844_de();
-  {Gfx *g=D_80110634++; char *address=(char *)(u32)(D_800D297C<<6); address+=0x380; address+=(u32)D_80141008; gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);}
+  {Gfx *g=g_displayListCursor++; char *address=(char *)(u32)(D_800D297C<<6); address+=0x380; address+=(u32)D_80141008; gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);}
   position=item->position;
   Particle_TransformPoint(&D_80141008[0].camera,&position,&transformed);
   Particle_BuildTranslationMatrix(&matrix, transformed.x, transformed.y, transformed.z);
@@ -78,7 +78,7 @@ void func_804399D0(MenuModelItem *item) {
   scale.y=item->scale.y*(D_80141008[0].height/(f32)*(&D_800E28D0+1));
   func_8027347C_de(&matrix,scale.x,scale.y,scale.z);SwapMatrixUpForward(&matrix);
   Rsp_ConvertMatrixToFixed(&matrix,(char *)item+((D_800D297C<<6)+0x38));
-  model=func_8028C198_de(&D_8011FE88,item->model);Render_BeginModelBatch();
+  model=func_8028C198_de(&g_world,item->model);Render_BeginModelBatch();
   func_8026DF30_de(model,(char *)item+((D_800D297C<<6)+0x38),&D_800D0EF8,0,item->flags);
   Render_FlushModelBatch();
  }

@@ -42,7 +42,7 @@ void func_802947C8_de(void *arg0, s32 arg1) {
     s32 selectionValues;
 
     selectionValues = arg1;
-    if (Items_FindPlacedObjectsByKey(&D_8011FE88, -1, selectionValues, &spawn, 1) == 0) {
+    if (Items_FindPlacedObjectsByKey(&g_world, -1, selectionValues, &spawn, 1) == 0) {
         selectionValues = 0;
     }
     object->phase = 2;

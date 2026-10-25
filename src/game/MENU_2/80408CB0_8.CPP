@@ -17,19 +17,19 @@ s32 func_80408CB0_eu(PakRangeTextEu *entry) {
     char *dst;
     s32 i;
 
-    if (v < 0x32) src = D_800E2814_eu[D_80152789];
-    else if (v - 0x32 < 0x64) src = D_800E2824_eu[D_80152789];
-    else if (v - 0x96 < 0x96) src = D_800E2834[D_80152789];
-    else if (v - 0x12C < 0xC8) src = D_800E2844_eu[D_80152789];
-    else if (v - 0x1F4 < 0x12C) src = D_800E2854_eu[D_80152789];
-    else if (v - 0x320 < 0x1F4) src = D_800E2864[D_80152789];
-    else if (v - 0x514 < 0x2BC) src = D_800E2874[D_80152789];
-    else if (v - 0x7D0 < 0x3E8) src = D_800E2884[D_80152789];
-    else if (v - 0xBB8 < 0x5DC) src = D_800E2894[D_80152789];
-    else if (v - 0x1194 < 0x7D0) src = D_800E28A4_eu[D_80152789];
-    else if (v - 0x1964 < 0xDAB) src = D_800E28B4_eu[D_80152789];
-    else if (v >= 0x270F) src = D_800E28C4_eu[D_80152789];
-    dst = entry->text[D_80152789];
+    if (v < 0x32) src = D_800E2814_eu[g_languageIndex];
+    else if (v - 0x32 < 0x64) src = D_800E2824_eu[g_languageIndex];
+    else if (v - 0x96 < 0x96) src = D_800E2834[g_languageIndex];
+    else if (v - 0x12C < 0xC8) src = D_800E2844_eu[g_languageIndex];
+    else if (v - 0x1F4 < 0x12C) src = D_800E2854_eu[g_languageIndex];
+    else if (v - 0x320 < 0x1F4) src = D_800E2864[g_languageIndex];
+    else if (v - 0x514 < 0x2BC) src = D_800E2874[g_languageIndex];
+    else if (v - 0x7D0 < 0x3E8) src = D_800E2884[g_languageIndex];
+    else if (v - 0xBB8 < 0x5DC) src = D_800E2894[g_languageIndex];
+    else if (v - 0x1194 < 0x7D0) src = D_800E28A4_eu[g_languageIndex];
+    else if (v - 0x1964 < 0xDAB) src = D_800E28B4_eu[g_languageIndex];
+    else if (v >= 0x270F) src = D_800E28C4_eu[g_languageIndex];
+    dst = entry->text[g_languageIndex];
     dst += Pak_CountLineChars(entry) - 11;
     if (src != 0) {
         for (i = 0; i < 11; i++) {

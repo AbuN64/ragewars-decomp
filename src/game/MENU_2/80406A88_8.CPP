@@ -9,7 +9,7 @@ extern void *g_optionsPage;
 int func_80423B70_eu_x(void *arg0) {
     Scene_FreeMemory(arg0);
     g_optionsPage = 0;
-    Frontend_LoadLanguageStringsIfAny(D_80152789);
+    Frontend_LoadLanguageStringsIfAny(g_languageIndex);
     return 0;
 }
 #endif

@@ -136,7 +136,7 @@ s32 Weapons_UpdateTrackerAim(Actor_func_80214624_de *actor, Plan *tracker, Actor
             else if(candidate->unkE4==0x64F) var_s1=7;
             else {
                 var_s1=0;
-                if(!D_8011FE88.visibilityEnabled) {
+                if(!g_world.visibilityEnabled) {
                     if((!(candidate->unk100&0x300000) || candidate->unk1D8->unk794!=actor || (var_s1=1,candidate->unk1D8->unk788!=2)) && (!(actor->unk2E0&2) || (var_s1=1,actor->unkE4==0xCA))) var_s1=0;
                 }
             }

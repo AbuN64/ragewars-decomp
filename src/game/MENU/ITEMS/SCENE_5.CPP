@@ -154,7 +154,7 @@ void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
                 D_80141060 = Scene_FindFloorPolygon(world, rec->vec4);
                 playerIndex = 0;
                 if (playerIndex < D_80145048) {
-                    slot = D_80146398;
+                    slot = g_playerSettings;
                     do {
                         player = &D_80140F84[playerIndex];
                         if (nspawns != 0) {

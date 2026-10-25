@@ -529,7 +529,7 @@ s32 Frontend_OpenResultsScreen(void *root) {
     default: item->text = resultsThirdHeading(); break;
     }
     item = func_8040EC30_de(root, 0x235 + RESULTS_MENU_SHIFT);
-    func_8028D380_de(&D_8011FE88, D_8015402C, buffer, 63);
+    func_8028D380_de(&g_world, D_8015402C, buffer, 63);
     Resmgr_CopyString(D_800E53C0->name, func_802A0494_de(buffer));
     item->text = D_800E53C0->name;
     D_800E53C0->buttonAddress = (s32)func_8040EC30_de(root, 0x23D + RESULTS_MENU_SHIFT);
@@ -565,7 +565,7 @@ void Frontend_FillResultRows(void) {
     for (row = 0; row < 4; row++) {
         if (row >= D_800E53C0->count) return;
         player = D_800E53C0->players[D_800E53C0->first + row];
-        record = &D_80146398[player];
+        record = &g_playerSettings[player];
 
         widget = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[0]);
         Frontend_SetWidgetFlag08(widget, 1);

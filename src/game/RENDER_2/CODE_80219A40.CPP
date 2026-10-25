@@ -119,7 +119,7 @@ void func_80219A40_de(struct Shared_ReactionActor *attacker, void *arg1, struct 
         }
         
         while (temp_a1 != 0) {
-            temp_v0 = func_8028B2F8_de(&D_8011FE88, temp_a1);
+            temp_v0 = func_8028B2F8_de(&g_world, temp_a1);
             var_v1 = 0;
             if (temp_v0 == 0) {
                 break;

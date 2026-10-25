@@ -96,7 +96,7 @@ void World_FindTrackedActors(Shared_World *world) {
     for (i = 0; i < world->actorCount; actor++, i++) {
         struct Def *def = (struct Def *)actor->definition;
         if (def->type == 3) {
-            if (func_8028B25C_de(&D_8011FE88, def->id) == 0xBD7) {
+            if (func_8028B25C_de(&g_world, def->id) == 0xBD7) {
                 D_800F3D08 = actor;
                 return;
             }

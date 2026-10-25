@@ -43,8 +43,8 @@ void Pak_CreateSaveSnapshot(u8 *player) {
     snapshot->view[2] = D_801468A0[2];
     snapshot->view[3] = D_801468A0[3];
     snapshot->size = snapshotSize;
-    snapshot->dataSize = D_8011FE88.noteCount;
-    func_802BD3A0_de(snapshot->name, D_800F91F0, D_8011FE88.noteCount);
+    snapshot->dataSize = g_world.noteCount;
+    func_802BD3A0_de(snapshot->name, D_800F91F0, g_world.noteCount);
 }
 #else
 INCLUDE_ASM("ovl_80400000", Pak_CreateSaveSnapshot);
@@ -64,8 +64,8 @@ extern char *D_800E25D4[];
 extern char *D_800E25C4[];
 extern char *D_800E25A4[];
 extern char *D_800E25B4[];
-#define PAK_CODE D_800E25D4[D_80152789]
-#define PAK_COMPANY D_800E25C4[D_80152789]
+#define PAK_CODE D_800E25D4[g_languageIndex]
+#define PAK_COMPANY D_800E25C4[g_languageIndex]
 #define PAK_TITLE1 D_800E25A4[((u8 *)&D_801462C8)[0x581]]
 #define PAK_TITLE2 D_800E25B4[((u8 *)&D_801462C8)[0x581]]
 #else

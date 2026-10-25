@@ -160,7 +160,7 @@ block_4:
                 func_80290548_de(arg1);
                 return;
             }
-            func_8028B898_de(&D_8011FE88, arg1, 1);
+            func_8028B898_de(&g_world, arg1, 1);
             func_80278E04_de(((struct Shared_ProjectileView *)(arg1))->source, 0x400, arg0);
         }
     }
@@ -193,7 +193,7 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
             Camera_PostScreenMessage(&D_80145088,
                           ((struct Actor_func_802AB400_de *)(arg0))->owner,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                          ((void **)resource)[D_80152789]);
+                          ((void **)resource)[g_languageIndex]);
 #else
                           *(void **)resource);
 #endif
@@ -248,7 +248,7 @@ s32 func_802ACC04_de(void *arg0, void *arg1) {
                 Camera_PostScreenMessage(&D_80145088,
                               ((struct Actor_func_802AB400_de *)(arg0))->owner,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                          ((void **)resource)[D_80152789]);
+                          ((void **)resource)[g_languageIndex]);
 #else
                           *(void **)resource);
 #endif
@@ -300,7 +300,7 @@ s32 func_802ACD28_de(void *arg0, void *arg1) {
             Camera_PostScreenMessage(&D_80145088,
                           ((struct Actor_func_802AB400_de *)(arg0))->owner,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                          ((void **)resource)[D_80152789]);
+                          ((void **)resource)[g_languageIndex]);
 #else
                           *(void **)resource);
 #endif

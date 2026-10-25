@@ -341,8 +341,8 @@ void func_8043C688_de(void) {
         "nop\n"
         "beqz       $v0, .Lauto_8043C784\n"
         "addu      $a1, $s0, $zero\n"
-        "lui        $a0, %hi(D_8011FE88)\n"
-        "addiu      $a0, $a0, %lo(D_8011FE88)\n"
+        "lui        $a0, %hi(g_world)\n"
+        "addiu      $a0, $a0, %lo(g_world)\n"
         "jal        Items_SetSelection\n"
         "addiu     $a2, $zero, 0x2\n"
         "j          .Lauto_8043C984\n"
@@ -648,7 +648,7 @@ s32 func_8043C688_de(s32 arg0, Shared_MenuInput *pad) {
             return 1;
         }
         if (func_802934F8_de() != 0) {
-            Items_SetSelection(&D_8011FE88, target, 2);
+            Items_SetSelection(&g_world, target, 2);
             return 0;
         }
         rules = &D_801462C8;

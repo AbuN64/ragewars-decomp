@@ -14,7 +14,7 @@ int func_8024E924_de(void *prop) {
     if (((LevelActor *)prop)->kind == 1) {
         return ((LevelActor *)prop)->type;
     }
-    return func_8028B25C_de(&D_8011FE88, (u16)((LevelActor *)prop)->modelIndex);
+    return func_8028B25C_de(&g_world, (u16)((LevelActor *)prop)->modelIndex);
 }
 
 /** Return the selected record field, or negative one for another type. */

@@ -47,7 +47,7 @@ void func_80238F24_de(GameplayCamera *arg0, s32 arg1, f32 arg2, f32 arg3, f32 ar
     arg0->zoomBlend = arg12;
     arg0->zoomFov = arg13;
     if (Camera_IsSequenceInWindow() != 0) {
-        arg0->floorPoly = (void *)Scene_FindFloorPolygon(&D_8011FE88, &arg0->unk38);
+        arg0->floorPoly = (void *)Scene_FindFloorPolygon(&g_world, &arg0->unk38);
     }
     object = (s32)arg0->floorPoly;
     x = arg0->unk38;

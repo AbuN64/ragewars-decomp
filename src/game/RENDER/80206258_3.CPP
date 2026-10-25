@@ -344,7 +344,7 @@ s32 func_80207738_de(void *context, struct InputRecAt37 *option) {
 
 extern s32 Render_TestActorStateBit(void *, void *);
 void func_802077CC_de(int arg0) {
-    Render_TestActorStateBit(&D_8011FE88, (void *)arg0);
+    Render_TestActorStateBit(&g_world, (void *)arg0);
 }
 
 void func_802077F4_de(void *object, void *state)
@@ -394,7 +394,7 @@ void func_80207890_de(void *object, void *state) {
         motionState->destination = motionState->start;
         Weapons_RequestActorState(player, motionState, 4);
     }
-    if (Render_TestActorStateBit(&D_8011FE88, player) == 0) {
+    if (Render_TestActorStateBit(&g_world, player) == 0) {
         player->weaponFlags &= ~0x100;
     }
 }

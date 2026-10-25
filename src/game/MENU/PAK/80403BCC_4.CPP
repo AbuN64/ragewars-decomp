@@ -40,7 +40,7 @@ s32 func_80403BCC_de(void) {
 int Pak_RequestTrackBundle(void) {
     int size;
     void *res;
-    Shared_World *menu = &D_8011FE88;
+    Shared_World *menu = &g_world;
 
     res = Render_LocatePackSection((int)menu->trackBundle, menu->trackLookup, 0, &size);
     if (res == 0) {

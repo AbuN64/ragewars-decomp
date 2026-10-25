@@ -80,7 +80,7 @@ s32 func_8040B444_de(LayeredText *field, struct Shared_PakMenu *holder) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         table = ((u8 **)(void *)D_800E2FB4);
         field->text = table;
-        text = (char *)table[D_80152789];
+        text = (char *)table[g_languageIndex];
 #else
         field->text = ((u8 **)(void *)&D_800D3958);
         text = ((char **)(void *)&D_800D3958)[0];

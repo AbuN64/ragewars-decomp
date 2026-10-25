@@ -55,7 +55,7 @@ s32 func_80445AB8(LayeredText *field) {
     } else if (step > 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         field->text = D_800E40B4;
-        text = (char *)field->text[D_80152789];
+        text = (char *)field->text[g_languageIndex];
         func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800EEE10, step);
 #else
         field->text = (u8 **)&D_800D7DE4;
@@ -65,7 +65,7 @@ s32 func_80445AB8(LayeredText *field) {
     } else {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         field->text = D_800E40B4;
-        text = (char *)field->text[D_80152789];
+        text = (char *)field->text[g_languageIndex];
         func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800EEE18, step);
 #else
         field->text = (u8 **)&D_800D7DE4;

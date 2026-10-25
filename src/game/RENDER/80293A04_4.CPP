@@ -20,7 +20,7 @@
 
 
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 
 #include "COMMON/DISPLAY.H"
 
@@ -61,7 +61,7 @@ void func_80294200_de(void) {
     D_800CC380 = 0;
     width = 0;
     height = 0;
-    gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)D_8011BDC0->colorImage);
+    gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)D_8011BDC0->colorImage);
     func_802AA950_de(0x389, 0, &width, &height);
     if ((width != 0) && (height != 0)) {
         Text_SetupSpriteMode(0xFA);
@@ -106,7 +106,7 @@ void func_802943A0_de(struct GameSession *session) {
 
 void func_802943C4_de(void *arg0) {
     func_80293334_de(arg0, 0, 0);
-    func_80286AA8_de(&D_8011FE88, 0, 0);
+    func_80286AA8_de(&g_world, 0, 0);
     D_801462C8.counters.transitionActive = 0;
     func_80298368_de(0x18);
     func_8025E2D4_de(0x34);

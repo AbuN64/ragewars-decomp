@@ -23,7 +23,7 @@ void func_80422170_de(void) {
     object = &D_80145088;
     Items_ResetActorPools(object, 1);
     func_804499B0_de(object - 0x48, 1, 0);
-    Items_SetSelection(&D_8011FE88, ~func_804030E0_de(0x27D), 0);
+    Items_SetSelection(&g_world, ~func_804030E0_de(0x27D), 0);
     if (func_8025477C_de() == 0) {
         func_8025476C_de(1);
     }

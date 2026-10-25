@@ -16,7 +16,7 @@
  * depth with a fill-rectangle command. */
 
 
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern char D_80145040;
 extern char D_801379C0;
 extern s32 D_801462C8;
@@ -70,17 +70,17 @@ void func_802362E8_de(char *view, char *world) {
         func_8022A328_de(&D_80145040, view);
     }
     if (D_801462C8 & 0x200) {
-        gDPPipeSync(D_80110634++);
-        gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
-        gDPSetBlendColor(D_80110634++, 255, 255, 255, 255);
-        gDPSetPrimDepth(D_80110634++, 65535, 65535);
-        gDPSetDepthSource(D_80110634++, G_ZS_PRIM);
+        gDPPipeSync(g_displayListCursor++);
+        gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
+        gDPSetBlendColor(g_displayListCursor++, 255, 255, 255, 255);
+        gDPSetPrimDepth(g_displayListCursor++, 65535, 65535);
+        gDPSetDepthSource(g_displayListCursor++, G_ZS_PRIM);
         Render_SetModePreset(0x16);
         {
             Gfx *_g;
 
             right = ((GameplayCamera *)(view))->viewLeft + ((GameplayCamera *)(view))->viewWidth;
-            gDPFillRectangle((Gfx *)(D_80110634++), ((GameplayCamera *)(view))->viewLeft, ((GameplayCamera *)(view))->viewTop, right, ((GameplayCamera *)(view))->viewTop + ((GameplayCamera *)(view))->viewHeight);
+            gDPFillRectangle((Gfx *)(g_displayListCursor++), ((GameplayCamera *)(view))->viewLeft, ((GameplayCamera *)(view))->viewTop, right, ((GameplayCamera *)(view))->viewTop + ((GameplayCamera *)(view))->viewHeight);
         }
     }
 }

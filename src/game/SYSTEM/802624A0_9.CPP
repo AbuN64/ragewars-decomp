@@ -35,7 +35,7 @@ extern void func_8024B2D0_de(SceneEffect *);
 static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref) {
     SceneEffect *effect;
 
-    if (D_8011FE88.visibilityEnabled == 0 && (unsigned int)scene->UsedList.count >= 3) {
+    if (g_world.visibilityEnabled == 0 && (unsigned int)scene->UsedList.count >= 3) {
         return 0;
     }
     effect = scene->FreeList.head;
@@ -61,13 +61,13 @@ static inline SceneEffect *spawn_effect(struct SceneEffectPool *scene, s32 id, s
         return 0;
     }
     if (id == -1) {
-        id = func_8028B21C_de(&D_8011FE88, variant);
+        id = func_8028B21C_de(&g_world, variant);
         if (id == -1) {
             return 0;
         }
     }
     if ((unsigned int)(variant + 1) < 2) {
-        variant = func_8028B25C_de(&D_8011FE88, id);
+        variant = func_8028B25C_de(&g_world, id);
     }
     effect = take_effect(scene, ref);
     if (effect == 0) {

@@ -84,7 +84,7 @@ INCLUDE_ASM("span_1000", func_80285634);
 
 static inline void bind(NodeCode8028469C *node, s32 offset, s32 id) {
 
-    func_80264DE0_de((char *)node + offset, func_8028CE78_de(&D_8011FE88, id));
+    func_80264DE0_de((char *)node + offset, func_8028CE78_de(&g_world, id));
 }
 
 static inline void init(NodeCode8028469C *node, Clip *key, CVector3 position, f32 value0, f32 value1, NodeCode8028469C **owner) {
@@ -116,9 +116,9 @@ void func_802858B0_de(NodeCode8028469C *arg0, Clip *arg1, CVector3 arg2,
         *arg7 = arg0;
     }
     func_80264DE0_de(&arg0->amplitudeHandle,
-                  (unsigned int)func_8028CE78_de(&D_8011FE88, arg1->mode));
+                  (unsigned int)func_8028CE78_de(&g_world, arg1->mode));
     func_80264DE0_de(&arg0->lifetimeHandle,
-                  (unsigned int)func_8028CE78_de(&D_8011FE88, arg1->frames));
+                  (unsigned int)func_8028CE78_de(&g_world, arg1->frames));
 }
 
 /** Clear the target word when the pointer field is populated. */

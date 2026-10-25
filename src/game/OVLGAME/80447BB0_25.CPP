@@ -261,7 +261,7 @@ void func_80449E18_de(CPlayerPool *pool) {
     if (actor != 0) {
         do {
             Ovlgame_InitActorHudState(actor);
-            temp_v0 = Scene_FindFloorPolygon(&D_8011FE88, &actor->position);
+            temp_v0 = Scene_FindFloorPolygon(&g_world, &actor->position);
             actor->weapon.model = temp_v0;
             actor->modelId = temp_v0;
             Weapons_UpdatePlayerCamera(actor, actor);

@@ -783,7 +783,7 @@ s32 func_802ACB98_eu_x(struct Player *player, PowerupEntry *pickup, void *obj) {
     }
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
         Camera_StartFade(player->owner, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
-        if (text) Camera_PostScreenMessage(&D_80145088, player->owner, ((char **)text)[D_80152789]);
+        if (text) Camera_PostScreenMessage(&D_80145088, player->owner, ((char **)text)[g_languageIndex]);
     }
     if (sound) Render_PlaySoundAtPosition(sound, player->pos, 0, -1);
     if (event) func_8025E11C_de(event);
@@ -816,7 +816,7 @@ s32 func_802ACB58_eu(struct Player *player, PowerupEntry *pickup, void *obj) {
     }
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
         Camera_StartFade(player->owner, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
-        if (text) Camera_PostScreenMessage(&D_80145088, player->owner, ((char **)text)[D_80152789]);
+        if (text) Camera_PostScreenMessage(&D_80145088, player->owner, ((char **)text)[g_languageIndex]);
     }
     if (sound) Render_PlaySoundAtPosition(sound, player->pos, 0, -1);
     if (event) func_8025E11C_de(event);

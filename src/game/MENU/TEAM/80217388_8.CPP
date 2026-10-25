@@ -65,7 +65,7 @@ void func_802185D0_de(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 count, We
                 blue = red;
                 alpha *= 0.75f;
             }
-            gDPSetEnvColor(D_80110634++, red, green, blue, alpha * fade);
+            gDPSetEnvColor(g_displayListCursor++, red, green, blue, alpha * fade);
             func_802AAC28_de(item->icon, 0, x - width * item->height * scaleX * 0.5f,
                           y - height * item->height * scaleY * 0.5f,
                           scaleX * item->height, scaleY * item->height, 1);

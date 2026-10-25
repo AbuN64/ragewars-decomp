@@ -63,15 +63,15 @@ void Text_LoadActorModel(void *actor) {
     if (D_801462C8.counters.m_bFragTagOn != 0 && ((Shared_ActorView *)actor)->controls->transientFlag == 1) {
         modelKind = 0x13;
     }
-    result = func_8028CFA0_de(&D_8011FE88, 0xB, modelKind);
+    result = func_8028CFA0_de(&g_world, 0xB, modelKind);
     if (result != 0) {
         ((Shared_ActorView *)actor)->model = result;
     } else {
-        result = func_8028CFA0_de(&D_8011FE88, 0xB, -1);
+        result = func_8028CFA0_de(&g_world, 0xB, -1);
         if (result != 0) {
             ((Shared_ActorView *)actor)->model = result;
         } else {
-            result = func_8028CFA0_de(&D_8011FE88, -1, -1);
+            result = func_8028CFA0_de(&g_world, -1, -1);
             ((Shared_ActorView *)actor)->model = result;
         }
     }
@@ -93,7 +93,7 @@ void func_8022BB80_de(void *actor) {
         var_a2 = D_800CE430[((LevelActor *)actor)->definition->character];
         ((Shared_ActorView *)actor)->id = ((Shared_ActorView *)actor)->controls->playerId;
     }
-    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&D_8011FE88, actor, var_a2, ((Shared_ActorView *)actor)->effectId);
+    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&g_world, actor, var_a2, ((Shared_ActorView *)actor)->effectId);
 }
 
 void func_8022BC14_de(Player *actor) {
@@ -107,7 +107,7 @@ void func_8022BC14_de(Player *actor) {
     }
     var_t0 = (D_80140FF8 == 1) ? 0 : 0x17;
 after:
-    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&D_8011FE88, &actor->weaponModel,
+    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&g_world, &actor->weaponModel,
         ((WeaponInfo *)D_800D052C[actor->selectedAction])->model + var_t0,
         actor->weaponAnimationTable->defaultAnimation);
 }

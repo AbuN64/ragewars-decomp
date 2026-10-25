@@ -36,7 +36,7 @@ void func_8022BF04_de(void *player, s32 unused, s32 period, s32 kind) {
     if (func_8022C460_de(player) != 0) {
         return;
     }
-    if (D_8011FE88.frozen != 0) {
+    if (g_world.frozen != 0) {
         return;
     }
     if (D_801462C8 & 1) {

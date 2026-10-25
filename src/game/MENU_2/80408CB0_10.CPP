@@ -23,7 +23,7 @@ s32 func_8040AB70_eu(PakTextEu *entry) {
     entry->text = (char **)D_8014B49B;
     scan = (u8 *)D_800D2478;
     while (*scan-- == 0x20 && count != 0) count--;
-    dst = entry->text[D_80152789];
+    dst = entry->text[g_languageIndex];
     dst += Pak_CountLineChars(entry) - 8;
     for (i = 7; i >= 0; i--) dst[i] = 0x20;
     dst += 8 - count;
@@ -61,8 +61,8 @@ s32 func_8040AC68_eu(PakTextEu *entry) {
     case 4: table = D_800E32C4_eu; break;
     default: table = D_800E3234; break;
     }
-    src = table[D_80152789];
-    dst = entry->text[D_80152789];
+    src = table[g_languageIndex];
+    dst = entry->text[g_languageIndex];
     dst += Pak_CountLineChars(entry) - 11;
     for (i = 0; i < 11; i++) {
         *dst++ = *src++;

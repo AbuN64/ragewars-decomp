@@ -41,7 +41,7 @@ void Turret_Setup_DEATH(void *actor, void *state) {
 
     motion = &((ActorMotionResource *)actorView->definition)->motion;
     Weapons_SpawnFlaggedEffects(actor, state, 4, motion->eventMask, motion->secondaryEventMask);
-    world = &D_8011FE88;
+    world = &g_world;
     stateView->event = 0;
     Render_SetActorStateBit(world, actor, 1);
     func_80278D78_de(actor, 1, actor);
@@ -59,7 +59,7 @@ void Turret_Code_DEATH(LevelActor *actor, ActorMotionState *state) {
 }
 
 void Turret_LinkEffect_MakeVisible(Shared_Actor *actor) {
-    if (Render_TestActorStateBit(&D_8011FE88, actor) == 0) {
+    if (Render_TestActorStateBit(&g_world, actor) == 0) {
         actor->weaponFlags |= 0x2100;
     }
 }

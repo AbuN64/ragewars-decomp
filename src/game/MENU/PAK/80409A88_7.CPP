@@ -133,7 +133,7 @@ s32 func_8040A530_de(struct Field *field) {
     s32 value = D_800E28BC->value >> 8;
     char *text =
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        field->text[D_80152789];
+        field->text[g_languageIndex];
 #else
         *field->text;
 #endif

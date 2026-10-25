@@ -94,9 +94,9 @@ void func_802061D8_de(void *a, struct WeaponEventSource *b) {
 }
 
 int func_80206200_de(int arg0) {
-    return Render_TestActorStateBit(&D_8011FE88, arg0) == 1;
+    return Render_TestActorStateBit(&g_world, arg0) == 1;
 }
 
 void func_80206230_de(void *arg0) {
-    Render_SetActorStateBit(&D_8011FE88, arg0, 1);
+    Render_SetActorStateBit(&g_world, arg0, 1);
 }

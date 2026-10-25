@@ -8,7 +8,7 @@
 extern const char D_800EE170[], D_800EE174[];
 static inline const char *resultsNumberFormat(void) { return D_800EE170; }
 static inline const char *resultsPercentFormat(void) { return D_800EE174; }
-static inline char *resultsRankText(s32 rank) { return D_800DF964[rank][D_80152789]; }
+static inline char *resultsRankText(s32 rank) { return D_800DF964[rank][g_languageIndex]; }
 #else
 extern const char g_resultRowIntFormat[], g_resultRowPercentFormat[];
 static inline const char *resultsNumberFormat(void) { return g_resultRowIntFormat; }

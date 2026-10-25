@@ -23,7 +23,7 @@ extern FourPlayerResultsScreen *D_800E59E0;
 
 
 
-extern u8 D_80146398[];
+extern u8 g_playerSettings[];
 
 extern struct Model *func_8028CFA0_de(Shared_World *, s32, s32);
 
@@ -126,7 +126,7 @@ void func_8043B96C_de(void) {
     u8 *entry;
 
     for (player = 0; player < 4; player++) {
-        record = &D_80146398[player * 150];
+        record = &g_playerSettings[player * 150];
         i = 0x15;
         entry = record + 0x15;
         do {
@@ -135,7 +135,7 @@ void func_8043B96C_de(void) {
             entry -= 1;
         } while (i >= 0);
         if (record[0x78] == 1) {
-            model = func_8028CFA0_de(&D_8011FE88, 0xB, (s8) record[0x80]);
+            model = func_8028CFA0_de(&g_world, 0xB, (s8) record[0x80]);
             for (i = 0; i < 8; i++) {
                 id = model->slots[i];
                 if (id >= 0x4C3) {
@@ -344,8 +344,8 @@ void Frontend_DrawMenuImage(MenuImage *menu) {
             b = 1.0810812f;
             break;
         }
-        gDPSetEnvColor(D_80110634++, (u8)menu->red, (u8)menu->green, (u8)menu->blue, 0xFF);
-        gDPSetPrimColor(D_80110634++, 0, 0, 0xE0, 0, 0, 0xFF);
+        gDPSetEnvColor(g_displayListCursor++, (u8)menu->red, (u8)menu->green, (u8)menu->blue, 0xFF);
+        gDPSetPrimColor(g_displayListCursor++, 0, 0, 0xE0, 0, 0, 0xFF);
         func_802AAC28_de(menu->image, frame, (s16)(s32)screen[0xA9], (s16)(s32)screen[0xAA],
                          a * 9.0f, b * 4.0f, 1);
     }

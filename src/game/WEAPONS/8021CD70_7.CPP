@@ -21,7 +21,7 @@
    the ticker of fading player names, the second counter (count rule) or the squad score, the
    power-up icon and status sprite, the zoom gauge, the ammo pips for weapon 12, and finally the
    team and squad overlays. */
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 
 extern char D_8011D8D0;
 extern s32 D_80140FF8;
@@ -164,7 +164,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             y = view->x + view->width * 0.5f;
             x = view->y + view->height * 0.5f;
             Text_SetupSpriteMode(0xFA);
-            gDPSetEnvColor(D_80110634++, (r), (g), (b), 250);
+            gDPSetEnvColor(g_displayListCursor++, (r), (g), (b), 250);
             for (k = 0; k < 4; k++) {
                 func_802AAC28_de(0x208, k, y + scaleX * D_800C9F64_de[k + 4], x + scaleY * D_800C9F74_de[k + 4], sx,
                               scaleY * 1.5f, 1);
@@ -181,7 +181,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                 r = 253;
                 g = 0;
                 b = 0;
-                gDPSetEnvColor(D_80110634++, (r), (g), (b), (player->flashAlpha));
+                gDPSetEnvColor(g_displayListCursor++, (r), (g), (b), (player->flashAlpha));
                 for (k = 0; k < 4; k++) {
                     func_802AAC28_de(0x208, k, y + scaleX * D_800C9F64_de[k + 4], x + scaleY * D_800C9F74_de[k + 4], sx,
                                   scaleY * 1.5f, 1);
@@ -250,9 +250,9 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             if (player->scoreAnim != 0 && player->scoreState != 0) {
                 frames = 1;
                 if (D_801462C8.counters.teams != 0) {
-                    res = Render_StartWorldEffect(&D_8011FE88, 0x204, 0, 1);
+                    res = Render_StartWorldEffect(&g_world, 0x204, 0, 1);
                 } else {
-                    res = Render_StartWorldEffect(&D_8011FE88, 0x1FA, 0, 1);
+                    res = Render_StartWorldEffect(&g_world, 0x1FA, 0, 1);
                 }
                 if (res != NULL) {
                     frames = (*res != NULL) ? **res : 1;
@@ -363,7 +363,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                 player->countAnim = 1;
                 if (player->countState != 0) {
                     n = 1;
-                    res = Render_StartWorldEffect(&D_8011FE88, 0x1FD, 0, 1);
+                    res = Render_StartWorldEffect(&g_world, 0x1FD, 0, 1);
                     if (res != NULL) {
                         if (*res != NULL) {
                             n = **res;
@@ -408,7 +408,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                 player->squadAnim = 1;
                 if (player->squadState != 0) {
                     frames = 1;
-                    res = Render_StartWorldEffect(&D_8011FE88, 0x201, 0, 1);
+                    res = Render_StartWorldEffect(&g_world, 0x201, 0, 1);
                     if (res != NULL) {
                         if (*res != NULL) {
                             frames = **res;

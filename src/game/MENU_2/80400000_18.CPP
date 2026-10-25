@@ -171,7 +171,7 @@ s32 func_8040332C_de(void) {
     n = track[1];
     refs = (Triple *)(track + 2);
     for (i = 0; i < n; i++) {
-        tables = &D_8011FE88;
+        tables = &g_world;
         if (refs[i].y == 0) {
             item = &((ItemRecAt12 *)tables->recordArray)[refs[i].z];
         } else {

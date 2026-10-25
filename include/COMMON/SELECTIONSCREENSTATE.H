@@ -133,7 +133,7 @@ extern func_8041F2A0_Layout D_800E42D4[];
 /* func_8041DB30_de advances the cursor word it is handed, the menu block's slot at +0x10C. */
 extern func_8041F2A0_MenuBlock *D_800E3590;
 extern void Frontend_AdvanceActiveSlot(int *cursor);
-extern func_8041F2A0_Config D_80146398[];
+extern func_8041F2A0_Config g_playerSettings[];
 extern SelectionScreenState *Scene_AllocateMemory(s32);
 extern NodeMenuCreateOverlayNode *Menu_CreateOverlayNode(OwnerRecAt44 *, s32);
 extern void Menu_ShowSlotById(OwnerRecAt8V1 *, s32, s32);

@@ -7,7 +7,7 @@
 #if defined(VERSION_US_REV1)
 struct Node80253610;
 extern void Scene_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 
 void func_802AA8EC_de(Table802AB8DC **handle, s32 index, void **out, u8 *tag);
 void func_802A9EE8_de(void *pTexture, f32 XPos, f32 YPos, int TextureWidth, int TextureHeight, f32 ScaleX, f32 ScaleY);
@@ -31,7 +31,7 @@ void Text_DrawTileGrid(void *handle, s32 index, s32 initialX, s16 initialY, f32 
     void *resource;
     u8 intensity;
     TextureTileGrid *grid;
-    gDPPipeSync(D_80110634++);
+    gDPPipeSync(g_displayListCursor++);
     if(handle != NULL) {
         func_802AA8EC_de(handle,index,&resource,&intensity);
         grid=resource;

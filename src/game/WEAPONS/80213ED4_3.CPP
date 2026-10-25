@@ -62,7 +62,7 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
     if (*actor->kind != 1) {
         mode = -1;
     }
-    if (tracker->team == D_8011FE88.kind1Cursor) {
+    if (tracker->team == g_world.kind1Cursor) {
         if ((tracker->flags & 0x40000) && tracker->lockedTarget == 0) {
             if (Weapons_UpdateTrackerAim(actor, tracker, tracker->target) == 0) {
                 tracker->flags &= ~0x40000;
@@ -85,7 +85,7 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
             kind = 5;
         } else if (target->id == 0x64F) {
             kind = 7;
-        } else if (D_8011FE88.visibilityEnabled != 0) {
+        } else if (g_world.visibilityEnabled != 0) {
             kind = 0;
         } else if (((target->flags100 & 0x300000) && target->controller->owner == actor &&
                     target->controller->state == 2) ||

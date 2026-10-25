@@ -171,7 +171,7 @@ void func_8021B468_de(struct Shared_ActorView *player, void *attacker, s32 arg2,
         flow->count = (s32) (flow->count + 1);
         playersGlobal = (struct Shared_GlobalPlayers *)&D_80145040;
         if (playersGlobal->count > 0) {
-            settingsBase = (s8 *)&D_80146398;
+            settingsBase = (s8 *)&g_playerSettings;
             var_s1 = (struct Shared_PlayerSettingsRecord *)settingsBase;
             var_s4 = 0;
 settings_loop:
@@ -243,7 +243,7 @@ case 7:
                     var_s1_2 = ((struct Shared_ActorView *)player)->projectileIndex + 0xBE7;
                     break;
                 }
-                func_8028B21C_de(&D_8011FE88, var_s1_2);
+                func_8028B21C_de(&g_world, var_s1_2);
                 temp_v1_2 = ((struct Shared_ActorView *)player)->projectiles[((struct Shared_ActorView *)player)->projectileIndex];
                 if (temp_v1_2 != 0) {
                     ((struct Shared_ProjectileView *)temp_v1_2)->flags = (u16) (((struct Shared_ProjectileView *)temp_v1_2)->flags | 1);
@@ -251,7 +251,7 @@ case 7:
                     if (((struct Shared_ProjectileView *)temp_a1)->flags & 8) {
                         func_80290548_de(temp_a1);
                     } else {
-                        func_8028B898_de(&D_8011FE88, temp_a1, 1);
+                        func_8028B898_de(&g_world, temp_a1, 1);
                         func_80278E04_de(((struct Shared_ProjectileView *)((struct Shared_ActorView *)player)->projectiles[((struct Shared_ActorView *)player)->projectileIndex])->source, 0x400, player);
                     }
                 }
@@ -534,7 +534,7 @@ void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
     s32 shifted;
     char *state;
     s32 remaining;
-    if (Camera_IsSequenceActive() != 0 || func_8022C460_de(player) != 0 || D_8011FE88.frozen != 0) {
+    if (Camera_IsSequenceActive() != 0 || func_8022C460_de(player) != 0 || g_world.frozen != 0) {
         return;
     }
     if ((FIELD(u32, &D_801462C8, 0) & 1) && kind != 0x20) {
@@ -631,7 +631,7 @@ void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
             zero.x = 0;
             zero.y = 0;
             zero.z = 0;
-            func_8028CE94_de(&D_8011FE88, (char *)FIELD(void *, player, 0x698) + 0x140, 0x11, zero, D_800C22B0_us, strength);
+            func_8028CE94_de(&g_world, (char *)FIELD(void *, player, 0x698) + 0x140, 0x11, zero, D_800C22B0_us, strength);
         }
     }
     if (dead == 0 && FIELD(s16, player, 0x650) != 0x12 && FIELD(void *, player, 0x5DC) != 0) {

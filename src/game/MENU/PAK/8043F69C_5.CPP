@@ -108,7 +108,7 @@ int Pak_CountLineChars(LayeredText *item) {
     } else {
         
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-p = item->text[D_80152789];
+p = item->text[g_languageIndex];
 #else
 p = *item->text;
 #endif
@@ -124,7 +124,7 @@ p = *item->text;
 void func_80442064_de(struct Field *object, s32 second, s32 third, s32 fourth) {
     
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-func_8043FE3C_de(object, second, third, fourth, object->text[D_80152789], 0);
+func_8043FE3C_de(object, second, third, fourth, object->text[g_languageIndex], 0);
 #else
 func_8043FE3C_de(object, second, third, fourth, *object->text, 0);
 #endif
@@ -134,7 +134,7 @@ func_8043FE3C_de(object, second, third, fourth, *object->text, 0);
 void func_8044208C_de(struct Field *object, s32 second, s32 third, s32 fourth) {
     
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-func_8043FE3C_de(object, second, third, fourth, object->text[D_80152789], 0);
+func_8043FE3C_de(object, second, third, fourth, object->text[g_languageIndex], 0);
 #else
 func_8043FE3C_de(object, second, third, fourth, *object->text, 0);
 #endif
@@ -165,7 +165,7 @@ func_8043F114_de
 
 PreviewWidget *Pak_SelectPreviewModel(WidgetRecAt20 *widget,int selection,int kind) {
  StateRecAt47C *state=widget->state;
- PreviewWidget *model=func_8028CFA0_de(&D_8011FE88,selection,kind);
+ PreviewWidget *model=func_8028CFA0_de(&g_world,selection,kind);
  if(!model){state->active=0;return 0;}
  state->selection=selection;
  state->active=1;

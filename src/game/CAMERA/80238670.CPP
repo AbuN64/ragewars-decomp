@@ -8,7 +8,7 @@
 typedef struct ClipView FlareActor;
 #include "COMMON/LENS_FLARE.H"
 extern s32 D_800E28D0;
-extern Gfx *D_80110634;
+extern Gfx *g_displayListCursor;
 extern f32 Math_Sqrtf(f32);
 void Camera_DrawLensFlare(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 special, s32 unused) {
     FlareRadii radii = D_800C344C_de;
@@ -21,7 +21,7 @@ void Camera_DrawLensFlare(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 sp
     if (intensity == 0.0f || actor->hidden) return;
     dx = D_800E28D0 / 2 - x;
     dy = D_800E28D4 / 2 - y;
-    gfx = D_80110634++;
+    gfx = g_displayListCursor++;
     gDPSetTextureFilter(gfx, G_TF_BILERP);
     distance = Math_Sqrtf(dx * dx + dy * dy);
     if (!special) {
@@ -70,10 +70,10 @@ void Camera_DrawLensFlare(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 sp
         half = width * 16.0f;
         if (!(x > -half && x < D_800E28D0 + half && y > (top = -half) && y < D_800E28D4 + half)) return;
         if (special && i == 0) {
-            gDPSetEnvColor(D_80110634++, 255, 255, 255, intensity * 255.0f);
+            gDPSetEnvColor(g_displayListCursor++, 255, 255, 255, intensity * 255.0f);
             func_802AAC28_de(600, 0, (s16)(s32)(x - half), (s16)(s32)(y - half), width, width, 1);
         } else {
-            gDPSetEnvColor(D_80110634++, colors.value[i * 3], colors.value[i * 3 + 1], colors.value[i * 3 + 2], alphas.value[i] * intensity);
+            gDPSetEnvColor(g_displayListCursor++, colors.value[i * 3], colors.value[i * 3 + 1], colors.value[i * 3 + 2], alphas.value[i] * intensity);
             func_802AAC28_de(601, 0, (s16)(s32)(x - half), (s16)(s32)(y - half), width, width, 1);
         }
     }
@@ -113,7 +113,7 @@ static inline void ProjectToScreen(FlareActor *view, CVector3 *point, f32 *scree
 
 /* Draws the lens flares of every lit flare source the view can see. */
 void Camera_DrawObjectFlares(FlareActor *view) {
-    Gfx **gfx = &D_80110634;
+    Gfx **gfx = &g_displayListCursor;
     Gfx *g;
     FlareSource *source;
     f32 x, y;

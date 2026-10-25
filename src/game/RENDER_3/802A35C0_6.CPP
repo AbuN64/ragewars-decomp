@@ -121,17 +121,17 @@ void func_802A5180_de(SceneRecAt95A8 *scene) {
     if (scene->free.count == 100) {
         return;
     }
-    gDPPipeSync(D_80110634++);
-    gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
-    gDPSetTextureImage(D_80110634++, G_IM_FMT_I, G_IM_SIZ_16b, 1, (u32)&D_800D14B0);
-    gDPSetTile(D_80110634++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
-    gDPLoadSync(D_80110634++);
-    gDPLoadBlock(D_80110634++, G_TX_LOADTILE, 0, 0, 127, 1024);
-    gDPPipeSync(D_80110634++);
-    gDPSetTile(D_80110634++, G_IM_FMT_I, G_IM_SIZ_8b, 2, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
-    gDPSetTileSize(D_80110634++, G_TX_RENDERTILE, 0, 0, 60, 60);
-    gDPSetPrimColor(D_80110634++, 0, 0, 255, 255, 255, 200);
-    gSPDisplayList(D_80110634++, (u32)&D_800D2E60);
+    gDPPipeSync(g_displayListCursor++);
+    gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
+    gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 1, (u32)&D_800D14B0);
+    gDPSetTile(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
+    gDPLoadSync(g_displayListCursor++);
+    gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, 127, 1024);
+    gDPPipeSync(g_displayListCursor++);
+    gDPSetTile(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_8b, 2, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
+    gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, 60, 60);
+    gDPSetPrimColor(g_displayListCursor++, 0, 0, 255, 255, 255, 200);
+    gSPDisplayList(g_displayListCursor++, (u32)&D_800D2E60);
     for (i = 0; i < 10; i++) {
         max = (&D_801031F8 + 1);
         list = &scene->lists[i];
@@ -148,9 +148,9 @@ void func_802A5180_de(SceneRecAt95A8 *scene) {
                 func_80255ED8_de(list, particle);
                 func_80255D14_de(&scene->free, particle);
             } else {
-                gSPMatrix(D_80110634++, (u32)transform, G_MTX_LOAD);
-                gSPVertex(D_80110634++, (u32)&D_801469A0, 4, 0);
-                gSP2Triangles(D_80110634++, 0, 1, 2, 0, 2, 3, 0, 0);
+                gSPMatrix(g_displayListCursor++, (u32)transform, G_MTX_LOAD);
+                gSPVertex(g_displayListCursor++, (u32)&D_801469A0, 4, 0);
+                gSP2Triangles(g_displayListCursor++, 0, 1, 2, 0, 2, 3, 0, 0);
             }
             particle = next;
         }
@@ -170,33 +170,33 @@ void func_802A5498_de(u32 arg0) {
     local.matrix[6] = 0.0f;
     local.matrix[5] = D_800C5E90_de;
 
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPPipeSync(cmd);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPSetCycleType(cmd, G_CYC_2CYCLE);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, &D_800D14B0);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPLoadSync(cmd);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPLoadBlock(cmd, G_TX_LOADTILE, 0, 0, 127, 1024);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPPipeSync(cmd);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_8b, 2, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPSetTileSize(cmd, G_TX_RENDERTILE, 0, 0, 60, 60);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gDPSetPrimColor(cmd, 255, 255, 200, 0, 0, 150);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPDisplayList(cmd, &D_800CDCA8);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPMatrix(cmd, arg0, G_MTX_LOAD);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSPVertex(cmd, &D_801469A0, 4, 0);
-    cmd = D_80110634++;
+    cmd = g_displayListCursor++;
     gSP2Triangles(cmd, 0, 1, 2, 0, 2, 3, 0, 0);
 
     func_8026D8F8_de();

@@ -20,7 +20,7 @@
 #include "ACHIEVE/80424E30_3.H"
 #include "SCENE/802508E0_13.H"
 extern MatchScoreScreen *D_800E53C0;
-extern Shared_Rec3 D_80146398[8];
+extern Shared_Rec3 g_playerSettings[8];
 extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 
@@ -258,7 +258,7 @@ void func_8042D118_de(void)
     s32 val;
     temp_1 = -1;
     obj = D_800E53C0;
-    recs = D_80146398;
+    recs = g_playerSettings;
     val = obj->players[i];
     if (val == temp_1)
     {
@@ -269,7 +269,7 @@ void func_8042D118_de(void)
       continue;
     }
     func_804243E0_de(val, obj->icons[val]);
-    recs = D_80146398;
+    recs = g_playerSettings;
     func_804259E0_de(val);
   }
 
@@ -285,7 +285,7 @@ void func_8042D1C8_de(void) {
         if (id == -1) {
             continue;
         }
-        record = &D_80146398[id];
+        record = &g_playerSettings[id];
         if (record->flag != 0) {
             continue;
         }
@@ -320,7 +320,7 @@ void func_8042D304_de(s32 player, s32 kind, unsigned short group) {
     u32 rank;
     s32 id;
     s32 frame;
-    record = &D_80146398[player];
+    record = &g_playerSettings[player];
     parent = func_8040EC30_de(D_800E53C0->unkE0, group);
     switch (kind) {
     case 0:
@@ -439,7 +439,7 @@ s32 func_8042D4FC_de(void *window, void *unused1, s32 event) {
             object = &D_80145088;
             Items_ResetActorPools(object, 0);
             func_804499B0_de(object - 0x48, 0, 0);
-            func_80286AA8_de(&D_8011FE88, 0, 0);
+            func_80286AA8_de(&g_world, 0, 0);
             ((MatchMenuObjects *)(object))->transition = 8;
         } else {
             Frontend_SetWidgetFlag08(window, 0);
