@@ -4,13 +4,13 @@
 #include "TYPES.H"
 
 #if !(defined(VERSION_EU))
-void alHeapInit(void *arg0, s32 arg1, s32 arg2) {
+void alHeapInit(void *arg0, u8 *base, s32 arg2) {
     s32 temp_v1;
-    temp_v1 = 0x10 - (arg1 & 0xF);
+    temp_v1 = 0x10 - ((s32) base & 0xF);
     if (temp_v1 != 0x10) {
-        (((struct Shape_typemap_6 *) ((s8 *) arg0))->field_0) = (s32) (arg1 + temp_v1);
+        (((struct Shape_typemap_6 *) ((s8 *) arg0))->field_0) = (s32) (base + temp_v1);
     } else {
-        (((struct Shape_typemap_6 *) ((s8 *) arg0))->field_0) = arg1;
+        (((struct Shape_typemap_6 *) ((s8 *) arg0))->field_0) = (s32) base;
     }
     (((struct Shape_typemap_6 *) ((s8 *) arg0))->field_8) = arg2;
     (((struct Shape_typemap_6 *) ((s8 *) arg0))->field_C) = 0;

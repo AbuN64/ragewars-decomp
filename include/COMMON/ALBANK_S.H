@@ -205,7 +205,7 @@ struct ALSeqPlayer;
 struct List802B663C;
 typedef struct List802B663C List802B663C;
 
-extern void alHeapInit(void *arg0, s32 arg1, s32 arg2);
+extern void alHeapInit(void *arg0, u8 *base, s32 arg2);
 
 typedef signed int ( *Lane_ALOscUpdate)(void *, float *);
 

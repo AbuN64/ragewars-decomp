@@ -167,7 +167,8 @@ u32 func_802571F0_de(s32 offset, s32 length) {
 #include "COMMON/AUDIO_INITIALIZE.H"
 #include "TEXTURE/80256220.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-extern int D_8014D420_de, D_8014D45C;
+extern u8 *D_8014D420_de;
+extern int D_8014D45C;
 extern float D_800C3ED0_de, D_800C3ED4;
 typedef struct AudioBankHeader {
     s32 reserved0;

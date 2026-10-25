@@ -204,7 +204,7 @@ extern int D_80146E10;
 extern int D_80147190;
 extern int D_8014721C;
 extern struct FftTables * D_8014B830;
-extern int D_8014D420_de;
+extern u8 *D_8014D420_de;
 extern int D_8014D45C;
 extern struct GlyphBuffer * D_8014D560;
 extern int D_8014D564;

@@ -306,7 +306,7 @@ int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
     D_8014D464 = D_8014D42C + D_800DE858;
     D_8014D430_de = D_8014D464 + D_800E28A4;
     D_8014D428 = record->fifo->data;
-    D_8014D420_de = (s32)record->audioHeap->data;
+    D_8014D420_de = (u8 *)record->audioHeap->data;
     for (i = 0; i < D_800DE850; i++) {
     }
     record->ready = 1;
