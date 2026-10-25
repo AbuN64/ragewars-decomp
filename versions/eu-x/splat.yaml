@@ -3256,7 +3256,7 @@ segments:
       - [0xC2A98, rodata, data_800C/D_80208410_C78A8]
       - [0xC2ABC, rodata, data_800C/D_80208AAC_C78CC]
       - [0xC2AE0, rodata, data_800C/D_80208EB0_C78F0]
-      - [0xC2B04, rodata, data_800C/literals_func_80209308_de]
+      - [0xC2B04, rodata, data_800C/literals_Nav_SteerTowardPoint]
       - [0xC2B54, rodata, data_800C/D_802095F8_C7964]
       - [0xC2B68, rodata, data_800C/D_80209910_C7978]
       - [0xC2B6C, rodata, data_800C/D_802099B4_C797C]

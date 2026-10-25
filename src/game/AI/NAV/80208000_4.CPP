@@ -145,7 +145,7 @@ s32 func_80209874_de(AiController *controller, s32 behaviourId) {
     return 1;
 }
 
-void func_80209910_de(AiController *controller, float amount) {
+void Nav_SetPitchFromAngle(AiController *controller, float amount) {
     float result = amount * D_800C1C88_de;
     if (controller != 0) {
         controller->player->pitch = -result;

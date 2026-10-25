@@ -23,7 +23,7 @@ extern void func_80209874_de(CloseAttackBrain *, s32);
 extern f32 func_802726BC_de(CVector3 *, CVector3 *);
 extern f32 func_80209BE0_de(CloseAttackBrain *);
 extern f32 func_80209DAC_de(CloseAttackBrain *);
-extern f32 func_80209308_de(CloseAttackBrain *, CVector3 *, f32, f32);
+extern f32 Nav_SteerTowardPoint(CloseAttackBrain *, CVector3 *, f32, f32);
 extern s32 func_80210EFC_de(f32);
 extern void Nav_MeasureWheelClearance(CloseAttackActor *, s32);
 extern void func_80209E80_de(CloseAttackBrain *);
@@ -73,7 +73,7 @@ void func_80211A9C_eu(CloseAttackActor *actor) {
                 brain->distance = Nav_NextRandom() % 32400 + 10000;
             }
             pos = &target->pos;
-            func_80209308_de(brain, pos, 2.0f, func_80209DAC_de(brain));
+            Nav_SteerTowardPoint(brain, pos, 2.0f, func_80209DAC_de(brain));
             dist = func_802726BC_de(pos, &brain->player->pos);
             if (dist > 377487.3f) {
                 brain->combat = 5;

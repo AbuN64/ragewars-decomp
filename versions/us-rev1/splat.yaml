@@ -3329,7 +3329,7 @@ segments:
       - [0xC78A8, rodata, data_800C/D_auto_src_rw_pool_80208410_C78A8_us_rev1]
       - [0xC78CC, rodata, data_800C/D_auto_src_rw_pool_80208AAC_C78CC_us_rev1]
       - [0xC78F0, rodata, data_800C/D_auto_src_rw_pool_80208EB0_C78F0_us_rev1]
-      - [0xC7914, rodata, data_800C/literals_func_80209308_de]
+      - [0xC7914, rodata, data_800C/literals_Nav_SteerTowardPoint]
       - [0xC7964, rodata, data_800C/D_auto_src_rw_pool_802095F8_C7964_us_rev1]
       - [0xC7978, rodata, data_800C/D_blob_0e77fd4c639ef9183fe4]
       - [0xC797C, rodata, data_800C/D_blob_789de96649ad15205aab]

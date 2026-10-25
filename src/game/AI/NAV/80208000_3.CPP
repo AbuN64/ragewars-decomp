@@ -10,9 +10,9 @@
 
 
 extern f32 Weapons_GetSignedAngleToPoint(Player_func_80209308_de *, CVector3);
-extern void func_80209910_de(Brain_func_80209308_de *, f32, s32);
+extern void Nav_SetPitchFromAngle(Brain_func_80209308_de *, f32, s32);
 
-f32 func_80209308_de(Brain_func_80209308_de *brain, CVector3 *target, f32 rate, f32 offset) {
+f32 Nav_SteerTowardPoint(Brain_func_80209308_de *brain, CVector3 *target, f32 rate, f32 offset) {
     f32 angle;
     f32 direction;
     f32 limit;
@@ -45,6 +45,6 @@ f32 func_80209308_de(Brain_func_80209308_de *brain, CVector3 *target, f32 rate, 
             brain->player->steer = direction * scale;
         }
     }
-    func_80209910_de(brain, (brain->player->gear == 2 ? brain->speed[1] + brain->speed[3] : brain->speed[0] + brain->speed[2]) * 0.017453294f, rate);
+    Nav_SetPitchFromAngle(brain, (brain->player->gear == 2 ? brain->speed[1] + brain->speed[3] : brain->speed[0] + brain->speed[2]) * 0.017453294f, rate);
     return angle;
 }

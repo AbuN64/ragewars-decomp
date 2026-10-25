@@ -59,7 +59,7 @@ extern f32 func_802726BC_de(CVector3 *, CVector3 *);
 extern f32 func_80209BE0_de(Brain *arg0);
 extern s32 Nav_NextRandom(void);
 extern f32 func_80209DAC_de(Brain *arg0);
-extern f32 func_80209308_de(Brain *, CVector3 *, f32, f32);
+extern f32 Nav_SteerTowardPoint(Brain *, CVector3 *, f32, f32);
 extern s32 func_80210EFC_de(f32);
 extern void Nav_MeasureWheelClearance(Actor *, s32);
 extern void func_80209E80_de(Brain *arg0);
@@ -105,7 +105,7 @@ void func_8021113C_eu(Actor *actor) {
                     brain->pattern = 2;
                 }
             }
-            func_80209308_de(brain, &target->pos, 2.0f, func_80209DAC_de(brain));
+            Nav_SteerTowardPoint(brain, &target->pos, 2.0f, func_80209DAC_de(brain));
             pattern = brain->pattern;
             if (pattern == 0) {
                 dir = func_80210EFC_de((brain->player->yaw - 3.1415927f) - 1.5707964f);
