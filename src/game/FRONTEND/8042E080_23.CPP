@@ -69,16 +69,16 @@ s32 func_8042E460_de(u8 *request) {
     return result;
 }
 
-#ifdef NON_MATCHING
 /* Sets up the attract-mode demo match: shuffles the character/level tables, seats 2-4 random players (the first group of
  * 1-2 as unlocked, the rest locked) with random costumes and names, and picks the level goal in D_8014DD98.
- * 4 aligned edits of 231 words; remaining: the dead 8-iteration loop keeps its a0=1 / v1=0xD0 inits in the ROM. */
+ * The last loop looks for the last enabled seat and never uses the answer: flow deletes its store after loop.c has
+ * hoisted the 1 and strength-reduced the seat offset, so the ROM keeps only the counter, a0=1 and the 0xD0+0x96*i offset. */
 void Frontend_SetupRandomTeams(void) {
     s32 characters[4];
     s32 arenas[4];
     s32 *gameMode;
     s32 i, firstIndex, secondIndex, swappedCharacter;
-    s32 playerCount, unlockedCount, one;
+    s32 playerCount, unlockedCount;
     Shared_PlayerSettingsRecord *player;
     Shared_Game *game;
     characters[0] = 0;
@@ -129,7 +129,9 @@ void Frontend_SetupRandomTeams(void) {
     }
     for (i = 0; i < 8; i++) {
         player = &game->playerSettings[i];
-        one = 1;
+        if (player->enabled == 1) {
+            firstIndex = i;
+        }
     }
     D_8014288C = 1;
     game->local = 1;
@@ -141,6 +143,3 @@ void Frontend_SetupRandomTeams(void) {
     gameMode[0] = 2;
     gameMode[1] = arenas[func_802744D4_de() % 4];
 }
-#else
-INCLUDE_ASM("ovl_80400000", Frontend_SetupRandomTeams);
-#endif
