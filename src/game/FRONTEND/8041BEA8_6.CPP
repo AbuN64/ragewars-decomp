@@ -6,50 +6,40 @@
 #include "TYPES.H"
 #include "FRONTEND/8041BEA8_6.H"
 
-#if defined(VERSION_DE)
-INCLUDE_ASM("ovl_80400000", func_8041C614);
-#endif
-#if !(defined(VERSION_DE))
-#ifdef NON_MATCHING
 #include "COMMON/WORLD.H"
+#include "COMMON/SCENERECAT10C0.H"
+#include "COMMON/ACTOR_DEFINITION.H"
 extern u8 D_800DD460_de[], D_800DD474[];
 extern void *Render_GetDirectoryEntry(void *, void *, s32);
 extern void *Render_LocatePackSection(void *, void *, s32, s32 *);
 extern void *func_8028CF6C_de(void *, u16);
 extern void func_80246BE8_de(void *, void *, void *, s32);
-#include "COMMON/SCENERECAT10C0.H"
-#include "COMMON/ACTOR_DEFINITION.H"
 typedef struct FrontendModelHeader {
     u8 prefix[0x1C];
     u16 definitionIndex;
 } FrontendModelHeader;
-
-static inline struct TableRecAt8 *Frontend_GetPreviewModelIds(Shared_World *world) {
-    return world->modelIds;
-}
-
-/* 19/121 aligned edits; remaining: world-pointer setup and failed-index branch scheduling. */
+/* Scans the world's preview model id table for entries equal to id. For each one it loads the model's index and info
+ * resources; when the model's actor definition has the expected character and the preview's kind, it binds model i to
+ * the preview (func_80246BE8_de with extra) and stops. */
 void Frontend_SelectMatchingPreviewModel(struct Unk8041CE88 *preview, s32 id, s32 extra, s32 expected) {
-    Shared_World *world;
     Obj8041CAD8At190 *previewState = &((Obj8041CAD8 *)preview)->sub190;
-    struct TableRecAt8 *list = Frontend_GetPreviewModelIds(&D_8011FE88);
+    Shared_World *scene = &D_8011FE88;
+    struct TableRecAt8 *list = scene->modelIds;
     s32 count = list->count;
-    s32 i = 0;
+    u16 *entries = list->entries;
+    s32 i;
     s32 found = 0;
-    u16 *entry;
     void *modelName;
     void **indexResource;
     void **modelResource;
     void *modelData;
     ActorDefinitionHeader *definition;
     s32 modelSize;
-    if (count <= 0) {
-        return;
-    }
-    world = &D_8011FE88;
-    entry = list->entries;
-    do {
-        if (*entry == id) {
+
+    for (i = 0; i < count && !found; i++) {
+        Shared_World *world = &D_8011FE88;
+
+        if (entries[i] == id) {
             modelName = Render_GetDirectoryEntry(world->indexedDirectory, (void *)world->indexedBank, i);
             indexResource = Scene_RequestResource(0, (u32)modelName, (u32)modelName, 0x18, 0, 0, 0, (const char *)D_800DD460_de, 1);
             if (indexResource != 0) {
@@ -68,14 +58,8 @@ void Frontend_SelectMatchingPreviewModel(struct Unk8041CE88 *preview, s32 id, s3
                 Scene_UnlockResource(0, (struct Node80253610 *)indexResource);
             }
         }
-        i++;
-        entry++;
-    } while (i < count && !found);
+    }
 }
-#else
-INCLUDE_ASM("ovl_80400000", Frontend_SelectMatchingPreviewModel);
-#endif
-#endif
 
 #ifdef NON_MATCHING
 /* The names m2c output assumes (its valid-syntax macros), so a draft compiles on its own. */
