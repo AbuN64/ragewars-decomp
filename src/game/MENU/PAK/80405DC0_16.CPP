@@ -1,4 +1,5 @@
 #include "COMMON/MENURECAT24.H"
+#include "MENU/PAK/SAVE_SNAPSHOT.H"
 #include "MENU/80405DC0.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "stddef.h"
@@ -30,7 +31,6 @@ extern void *D_800DE860_de;
 
 extern struct Shape_typemap_165 *D_800DE864_de;
 
-extern s32 D_800DE868;
 
 extern s32 D_800E28BC;
 

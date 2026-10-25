@@ -1,4 +1,5 @@
 #include "TYPES.H"
+#include "MENU/PAK/SAVE_SNAPSHOT.H"
 #include "COMMON/LONE/D_0044E4B0.H"
 #include "COMMON/LONE/D_0044E468.H"
 #include "COMMON/SHAREDPLAYER.H"

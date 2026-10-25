@@ -81,11 +81,12 @@ void func_804070F4_de(Shared_PakMenu *menu)
 
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/PAK_SAVE_TEXT.H"
+#include "MENU/PAK/SAVE_SNAPSHOT.H"
 extern void Scene_ReleaseResource(s32, void *);
 extern s32 D_8015375C, D_800E28C8, D_8014D4C0_de;
 extern void *D_800DE860_de;
 extern struct Shape_typemap_165 *D_800DE864_de;
-extern s32 D_800DE868, D_800E28BC;
+extern s32 D_800E28BC;
 extern char D_80153738[], D_8014561C[];
 extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
 extern s32 Ovlgame_BytesToPakPages(s32);
@@ -192,7 +193,7 @@ s32 Pak_SaveSnapshotAndClose(void *unused, Shared_PakMenu *menu) {
     s32 showPrompt = 1;
     selectedPlayer = pakRecordChannel(menu, &channel);
     player = selectedPlayer;
-    snapshotBytes = D_8011FECC + 0x610;
+    snapshotBytes = D_8011FECC + sizeof(SaveSnapshot);
     if (D_8014D4C0_de != 0) {
         required = Ovlgame_BytesToPakPages(snapshotBytes);
         status = Pak_GetFreePages(channel, &freePages);
@@ -201,7 +202,7 @@ s32 Pak_SaveSnapshotAndClose(void *unused, Shared_PakMenu *menu) {
                 if (Pak_CountFreeNotes(channel, &freeNotes) == 0 && freeNotes != 0) {
                     showPrompt = 0;
                     if (Ovlgame_FindFreeNoteExtension(channel, extension) == 0) {
-                        Pak_SaveNote(channel, snapshotBytes, (void *)D_800DE868,
+                        Pak_SaveNote(channel, snapshotBytes, D_800DE868,
                                      RW_PAK_SNAPSHOT_TITLE, extension, RW_PAK_GAME_CODE);
                     }
                 }

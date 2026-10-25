@@ -2335,7 +2335,6 @@ extern char *D_800E1E04[];
 
 extern const float D_800C77E0_de;
 
-extern s32 D_800DE868;
 
 extern int D_800CD3E0;
 

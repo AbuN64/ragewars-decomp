@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "MENU/PAK/SAVE_SNAPSHOT.H"
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/UNUSED.H"
@@ -209,7 +210,7 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
             if (error == 0) {
                 error = Pak_CountFreeNotes(D_800E28C8, &freeNotes);
                 if (error == 0) {
-                    maxBytes = Ovlgame_BytesToPakPages(D_8011FECC + 0x610);
+                    maxBytes = Ovlgame_BytesToPakPages(D_8011FECC + sizeof(SaveSnapshot));
                     minBytes = Ovlgame_BytesToPakPages(0x18U);
                     if (freeNotes != 0) {
                         if (freeBytes >= (s32)minBytes && freeBytes < (s32)maxBytes) {
@@ -266,7 +267,7 @@ finish:
 
 #ifdef NON_MATCHING
 #include "TYPES.H"
-extern s32 D_8014D4C0_de, D_8014D4DC, D_80153760, D_8014D4EC_de, D_800DE874, D_80153784, D_8015375C, D_800E28C0, D_800DE868;
+extern s32 D_8014D4C0_de, D_8014D4DC, D_80153760, D_8014D4EC_de, D_800DE874, D_80153784, D_8015375C, D_800E28C0;
 extern char D_0044EA08[], D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
 extern void func_80404E28_de(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
@@ -308,7 +309,7 @@ void func_80406F7C_de(Shared_PakMenu *menu) {
     func_80404E28_de(menu->slot->unk4);
     if (Pak_GetStatus(ch) == 0) {
         Pak_CreateSaveSnapshot(player);
-        *(u32 *)(D_8011FECC + D_800DE868 + 0x60C) = func_804057F8_de(D_800DE868, (void *)(D_8011FECC + 0x60C), 11);
+        *(u32 *)((u8 *)D_800DE868 + D_8011FECC + 0x60C) = func_804057F8_de((s32)D_800DE868, (void *)(D_8011FECC + 0x60C), 11);
         func_80405F48_de(menu);
         return;
     }

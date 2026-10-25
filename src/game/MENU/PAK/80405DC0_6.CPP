@@ -4,22 +4,11 @@
 #include "COMMON/LONE/D_80152789.H"
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/WORLD.H"
-
-typedef struct Copy70 { s32 words[28]; } Copy70;
-typedef struct Copy584 { s32 words[0x161]; } Copy584;
-typedef struct SaveSnapshot {
-    s32 size;
-    s32 dataSize;
-    f32 view[4];
-    Copy70 player;
-    Copy584 world;
-    u8 name[4];
-} SaveSnapshot;
+#include "MENU/PAK/SAVE_SNAPSHOT.H"
 /* D_8011FECC is D_8011FE88.noteCount (world + 0x44). The tail reads it as that member, which keeps cse from
  * folding its loads across the snapshot header stores; the two head reads stay plain scalar loads (MIXED). */
 extern s32 D_8011FECC;
 extern void *D_800DE860_de;
-extern SaveSnapshot *D_800DE868;
 extern u8 D_800DCD60[];
 extern Copy584 D_801462C8;
 extern f32 D_801468A0[];

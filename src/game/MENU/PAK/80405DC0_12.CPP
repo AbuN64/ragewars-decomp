@@ -1,4 +1,5 @@
 #include "COMMON/SHAREDPLAYER.H"
+#include "MENU/PAK/SAVE_SNAPSHOT.H"
 #include "COMMON/LONE/D_0044E4F8.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/MENURECAT24.H"
@@ -35,7 +36,6 @@ extern s32 D_8015375C;
 
 extern void *D_800DE860_de;
 extern struct Shape_typemap_165 *D_800DE864_de;
-extern s32 D_800DE868;
 extern s32 D_800E28BC;
 
 extern SharedPlayer *func_8022A5C0_de(void *profiles, PakMenuSlot *slot);
