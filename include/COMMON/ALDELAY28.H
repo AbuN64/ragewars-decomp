@@ -12,8 +12,6 @@ typedef struct ALDelay28 ALDelay28;
 struct CallbackStateC;
 
 
-struct func_802BB32C_S2;
-typedef struct func_802BB32C_S2 func_802BB32C_S2;
 
 struct ALResampler_s28;
 struct ALResampler_s28 {
@@ -52,7 +50,6 @@ struct ALResampler_s {
 };
 
 
-extern void *jtbl_800C7750[];
 
 struct ALResampler_s28;
 typedef struct ALResampler_s28 ALResampler_s28;
@@ -82,41 +79,9 @@ typedef struct IntegerState34 IntegerState34;
 struct ALFx;
 typedef struct ALFx ALFx;
 
-struct func_802BB32C_S2;
-struct func_802BB32C_S2 {
-    char pad0[0x2];
-    u16 unk2;
-    char pad2[0x28 - 0x2 - sizeof(u16)];
-    s32 unk28;
-    char pad28[0x2F - 0x28 - sizeof(s32)];
-    u8 unk2F;
-};
 
-struct func_802BB32C_S1;
-struct func_802BB32C_S1 {
-    s32 unk0;
-    char pad0[0x4 - 0x0 - sizeof(s32)];
-    s32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(s32)];
-    s32 unk8;
-    char pad8[0xC - 0x8 - sizeof(s32)];
-    s32 unkC;
-    char padC[0x10 - 0xC - sizeof(s32)];
-    s32 unk10;
-    char pad10[0x14 - 0x10 - sizeof(s32)];
-    s32 unk14;
-};
 
-struct func_802BB590_S1;
-struct func_802BB590_S1 {
-    char pad0[0x30];
-    void * unk30;
-    char pad30[0x34 - 0x30 - sizeof(void*)];
-    s32 unk34;
-};
 
-struct func_802BB590_S1;
-typedef struct func_802BB590_S1 func_802BB590_S1;
 
 extern float D_800C7748_de;
 
@@ -129,8 +94,6 @@ extern float D_800C7884_de;
 
 struct IntegerState34;
 
-struct func_802BB32C_S1;
-typedef struct func_802BB32C_S1 func_802BB32C_S1;
 
 struct CallbackStateC;
 typedef struct CallbackStateC CallbackStateC;

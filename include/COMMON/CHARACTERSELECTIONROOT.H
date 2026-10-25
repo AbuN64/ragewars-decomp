@@ -18,15 +18,7 @@ struct RowMenuRandomizeCharacterPreview {
     char tail[0x10];
 };
 
-struct SelectionMenuRandomizeCharacterPreview;
-struct SelectionMenuRandomizeCharacterPreview {
-    void *screen;
-    char pad4[0xC];
-    RowMenuRandomizeCharacterPreview rows[8];
-};
 
-struct SelectionMenuRandomizeCharacterPreview;
-typedef struct SelectionMenuRandomizeCharacterPreview SelectionMenuRandomizeCharacterPreview;
 
 struct CharacterSelectionRoot;
 struct CharacterSelectionRoot {
@@ -48,12 +40,6 @@ struct PanelRecord {
     char pad21[0x4A7];
 };
 
-struct EntryRecAt14V2;
-struct EntryRecAt14V2 {
-    char pad[0x14];
-    s32 state;
-    char pad18[0x4C8 - 0x18];
-};
 
 struct RosterSlot;
 typedef struct RosterSlot RosterSlot;
@@ -80,13 +66,6 @@ struct SelectEntry {
 struct SelectEntry;
 typedef struct SelectEntry SelectEntry;
 
-struct SelectMenu;
-struct SelectMenu {
-    void *screen;
-    void *menu;
-    char pad08[8];
-    SelectEntry entries[8];
-};
 
 
 struct EntryCode8041F1FC;
@@ -100,30 +79,15 @@ struct EntryCode8041F1FC {
 };
 
 struct EntryCode8041F1FC;
-struct Screen_func_80420308_de;
-struct Screen_func_80420308_de {
-    struct EntryCode8041F1FC entries[4];
-};
 
 struct MatchMenuApplySlotValueGfx;
 typedef struct MatchMenuApplySlotValueGfx MatchMenuApplySlotValueGfx;
 
-struct Row;
 struct StateFlags;
-struct Row {
-    char pad0[0xC];
-    struct StateFlags cells[6];
-};
 
 extern void Menu_RandomizeCharacterPreview(s32 player);
 
-struct RowRecAt18;
 struct StateFlags;
-struct RowRecAt18 {
-    char pad0[0xC];
-    struct StateFlags cells[3];
-    struct StateFlags options[3];
-};
 
 struct CharacterData_t;
 typedef struct CharacterData_t s_CharacterData;
@@ -140,13 +104,6 @@ struct Panel_func_8041FC50_de {
 };
 
 struct Panel_func_8041FC50_de;
-struct FourPlayerScreen;
-struct FourPlayerScreen {
-    char pad0[8];
-    struct Panel_func_8041FC50_de panels[4];
-    char pad1328[0x10];
-    s32 state;
-};
 
 struct CharacterData_t;
 struct CharacterData_t {
@@ -172,8 +129,6 @@ struct CharacterScreenCell {
 struct CharacterSelectionRoot;
 typedef struct CharacterSelectionRoot CharacterSelectionRoot;
 
-struct SelectMenu;
-typedef struct SelectMenu SelectMenu;
 
 struct State_func_80420C10_de;
 typedef struct State_func_80420C10_de State_func_80420C10_de;
@@ -192,10 +147,6 @@ struct Entry_func_804201A4_de {
 };
 
 struct Entry_func_804201A4_de;
-struct Screen_func_804201A4_de;
-struct Screen_func_804201A4_de {
-    struct Entry_func_804201A4_de entries[4];
-};
 
 extern s32 func_8041F1D8_de(s32 key);
 
@@ -216,12 +167,6 @@ struct RosterSlot {
 };
 
 
-struct SlotRecAt4;
-struct SlotRecAt4 {
-    s32 key;
-    s32 value;
-    char pad[0x70 - 8];
-};
 
 struct MatchMenuApplySlotValueGfx;
 
@@ -239,16 +184,6 @@ struct State_func_80420C10_de {
     s32 unk1354;
 };
 
-struct RowRecAtA;
-struct RowRecAtA {
-    s16 pad0;
-    s16 frame;
-    s16 pad4;
-    u16 cursor;
-    s16 pad8;
-    u16 prompt;
-    char padC[36 - 0xC];
-};
 
 extern s32 func_80420AD4_de(void);
 

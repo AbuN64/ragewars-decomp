@@ -27,28 +27,11 @@ struct ALEndEvent;
 struct ALTempoEvent;
 
 
-struct func_802B742C_S1;
-typedef struct func_802B742C_S1 func_802B742C_S1;
 
 struct ALEvent;
 
-struct func_802B73C4_S1;
-typedef struct func_802B73C4_S1 func_802B73C4_S1;
 
-struct func_802B742C_S1;
-struct func_802B742C_S1 {
-    char pad0[0x8];
-    u8 * unk8;
-};
 
-struct func_802B73C4_S1;
-struct func_802B73C4_S1 {
-    s32 unk0;
-    char pad0[0x8 - 0x0 - sizeof(s32)];
-    u32 unk8;
-    char pad8[0x10 - 0x8 - sizeof(u32)];
-    s32 unk10;
-};
 
 struct ALSeq_s;
 typedef struct ALSeq_s ALSeq_s;
@@ -59,14 +42,6 @@ typedef struct MidiState802B70B8 MidiState802B70B8;
 extern float D_800C74E0_de;
 
 
-struct func_802B738C_S2;
-struct func_802B738C_S2 {
-    int unk0;
-    char pad0[0x4 - 0x0 - sizeof(int)];
-    int unk4;
-    char pad4[0xC - 0x4 - sizeof(int)];
-    unsigned short unkC;
-};
 
 struct ALSeqMarker;
 struct ALSeqMarker {
@@ -76,8 +51,6 @@ struct ALSeqMarker {
     s16 lastStatus;
 };
 
-struct func_802B738C_S1;
-typedef struct func_802B738C_S1 func_802B738C_S1;
 
 struct ALSeq_s;
 struct ALSeq_s {
@@ -95,16 +68,5 @@ struct ALSeqMarker;
 typedef struct ALSeqMarker ALSeqMarker;
 
 
-struct func_802B738C_S2;
-typedef struct func_802B738C_S2 func_802B738C_S2;
 
-struct func_802B738C_S1;
-struct func_802B738C_S1 {
-    char pad0[0x8];
-    int unk8;
-    char pad8[0xC - 0x8 - sizeof(int)];
-    int unkC;
-    char padC[0x1A - 0xC - sizeof(int)];
-    unsigned short unk1A;
-};
 #endif

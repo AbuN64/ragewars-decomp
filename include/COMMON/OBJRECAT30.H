@@ -37,33 +37,11 @@ struct BreakableHitContext {
     f32 unk_134;
 };
 
-struct RecCode80203F0480204738;
-typedef struct RecCode80203F0480204738 RecCode80203F0480204738;
-
-struct func_80204C68_S2;
-typedef struct func_80204C68_S2 func_80204C68_S2;
 
 
-struct RecCode80203F04;
-struct RecCode80203F04 {
-    char pad0[0x2C];
-    void * unk2C;
-    char pad2C[0x108 - 0x2C - sizeof(void*)];
-    void * unk108;
-    char pad108[0x124 - 0x108 - sizeof(void*)];
-    int unk124;
-    char pad124[0x128 - 0x124 - sizeof(int)];
-    int unk128;
-    char pad128[0x12C - 0x128 - sizeof(int)];
-    int unk12C;
-};
 
 
-struct func_80204728_S1;
-struct func_80204728_S1 {
-    char pad0[0x10C];
-    void * unk10C;
-};
+
 
 
 struct ObjectStateCC;
@@ -76,25 +54,13 @@ struct ObjectStateCC {
 
 struct Dest;
 
-struct RecCode80203F04;
-typedef struct RecCode80203F04 RecCode80203F04;
 
 struct ActorMotionState;
 struct LevelActor;
 
 extern float D_800C1A70_de;
 
-struct func_80204C68_S1;
-struct func_80204C68_S1 {
-    char pad0[0x64];
-    s32 unk64;
-};
 
-struct func_8020459C_S2;
-struct func_8020459C_S2 {
-    char pad0[0x20];
-    s16 unk20;
-};
 
 
 
@@ -110,16 +76,7 @@ typedef struct BreakableHitContext BreakableHitContext;
 struct RiderRecAt130V2;
 typedef struct RiderRecAt130V2 RiderRecAt130V2;
 
-struct func_80204C68_S2;
-struct func_80204C68_S2 {
-    char pad0[0x8];
-    Triple unk8;
-    char pad8[0x100 - 0x8 - sizeof(Triple)];
-    s32 unk100;
-};
 
-struct func_8020459C_S2;
-typedef struct func_8020459C_S2 func_8020459C_S2;
 
 
 struct RiderRecAt130V2;
@@ -128,21 +85,10 @@ struct RiderRecAt130V2 {
     CVector3 aim;
 };
 
-struct func_80204728_S1;
-typedef struct func_80204728_S1 func_80204728_S1;
 
 struct LevelActor;
 
-struct RecCode80203F0480204738;
-struct RecCode80203F0480204738 {
-    char pad0[0x100];
-    int unk100;
-    char pad100[0x1B0 - 0x100 - sizeof(int)];
-    float unk1B0;
-};
 
-struct func_80204C68_S1;
-typedef struct func_80204C68_S1 func_80204C68_S1;
 
 
 struct Actor_func_8024A1D0_de;

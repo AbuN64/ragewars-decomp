@@ -9,26 +9,9 @@
 struct Label;
 typedef struct Label Label;
 
-struct State_func_8041C40C_de;
-struct State_func_8041C40C_de {
-    char pad[0x14];
-    int ticks;
-    int paused;
-};
-
-struct State_func_8041DE5C_de;
-struct State_func_8041DE5C_de {
-    char pad[0xD8];
-    s32 first;
-    s32 second;
-};
 
 
-struct Game_func_8041D960_de;
-struct Game_func_8041D960_de {
-    char pad0[0x17C1];
-    u8 language;
-};
+
 
 struct Menu_func_8041D960_de;
 typedef struct Menu_func_8041D960_de Menu_func_8041D960_de;
@@ -62,8 +45,6 @@ struct ObjRecAt48C;
 typedef struct ObjRecAt48C ObjRecAt48C;
 
 
-struct MenuRecAt10C;
-typedef struct MenuRecAt10C MenuRecAt10C;
 
 struct MenuRecAt108;
 typedef struct MenuRecAt108 MenuRecAt108;
@@ -71,11 +52,6 @@ typedef struct MenuRecAt108 MenuRecAt108;
 struct ObjRecAt480;
 typedef struct ObjRecAt480 ObjRecAt480;
 
-struct NodeRecAt10;
-struct NodeRecAt10 {
-    char pad0[0x10];
-    s8 style;
-};
 
 
 
@@ -87,20 +63,12 @@ struct ObjRecAt498 {
 };
 
 
-struct MenuRecAt10C;
-struct MenuRecAt10C {
-    void *root;
-    char pad4[0x108];
-    s32 player;
-};
 
 
 struct ObjRecAt498;
 typedef struct ObjRecAt498 ObjRecAt498;
 
 
-struct Game_func_8041D960_de;
-typedef struct Game_func_8041D960_de Game_func_8041D960_de;
 
 struct Node_func_8041D134_de;
 typedef struct Node_func_8041D134_de Node_func_8041D134_de;
@@ -124,8 +92,6 @@ struct ProfileStatisticsScreen {
 };
 
 
-struct State_func_8041C40C_de;
-typedef struct State_func_8041C40C_de State_func_8041C40C_de;
 
 struct Node_func_8041D134_de;
 struct Node_func_8041D134_de {
@@ -152,14 +118,6 @@ typedef struct ListRecAt4C ListRecAt4C;
 struct MenuRecAt8;
 typedef struct MenuRecAt8 MenuRecAt8;
 
-struct Screen_func_8041C2AC_de;
-struct Screen_func_8041C2AC_de {
-    void *parent;
-    void *windows[4];
-    s32 selection;
-    s32 scroll;
-    s32 state;
-};
 
 struct ListRecAt4C;
 struct ListRecAt4C {
@@ -168,14 +126,7 @@ struct ListRecAt4C {
     void *items[1];
 };
 
-struct NodeRecAt10;
-typedef struct NodeRecAt10 NodeRecAt10;
 
-struct State_func_8041DDF4_de;
-struct State_func_8041DDF4_de {
-    char pad0[0xEC];
-    s32 value;
-};
 
 
 struct MenuRecAt108;

@@ -9,13 +9,6 @@ struct EntryRecAt0V3 {
     char data[32];
 };
 
-struct MenuPakRequestTrackBundle;
-struct MenuPakRequestTrackBundle {
-    char pad[0x34];
-    int group;
-    char pad38[0x3C];
-    int id;
-};
 
 struct RecordRecAt12;
 typedef struct RecordRecAt12 RecordRecAt12;
@@ -28,11 +21,6 @@ struct Entry_func_804053E0_de {
 };
 
 struct Entry_func_804053E0_de;
-struct RecordRecAt4V2;
-struct RecordRecAt4V2 {
-    s32 header;
-    struct Entry_func_804053E0_de entries[16];
-};
 
 struct NoteState;
 struct NoteState {
@@ -62,18 +50,8 @@ struct NoteStatePakReadNoteInfo {
     char pad[2];
 };
 
-struct PakDirectoryRecAt4;
-struct PakDirectoryRecAt4 {
-    s32 free;
-    NoteStatePakReadNoteInfo notes[16];
-};
 
 struct EntryRecAt0V3;
-struct RecordRecAt4V1;
-struct RecordRecAt4V1 {
-    s32 header;
-    struct EntryRecAt0V3 entries[16];
-};
 
 struct PakDirectory;
 typedef struct PakDirectory PakDirectory;
@@ -92,15 +70,10 @@ struct PakDirectory;
 
 
 
-struct MenuPakRequestTrackBundle;
-typedef struct MenuPakRequestTrackBundle MenuPakRequestTrackBundle;
 
-struct PakDirectoryRecAt4;
-typedef struct PakDirectoryRecAt4 PakDirectoryRecAt4;
 
 
 extern void Pak_FreeScratchBuffer(void);
 
-extern int func_804041E8_de(void);
 void Pak_AllocateScratchBuffer(void);
 #endif

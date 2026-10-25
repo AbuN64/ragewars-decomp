@@ -26,8 +26,6 @@ typedef struct Record_func_80403458_de Record_func_80403458_de;
 struct EntryRecAt4V2;
 typedef struct EntryRecAt4V2 EntryRecAt4V2;
 
-struct State_Menu_GetTrackStartEye;
-typedef struct State_Menu_GetTrackStartEye State_Menu_GetTrackStartEye;
 
 extern void func_80402BA0_de();
 
@@ -51,13 +49,6 @@ struct Tables {
 };
 
 
-struct State_Menu_GetTrackStartEye;
-struct State_Menu_GetTrackStartEye {
-    char a[4];
-    void *unk4;
-    char b[0x30];
-    s32 unk38;
-};
 
 
 
@@ -80,16 +71,6 @@ typedef struct Tables Tables;
 
 extern u32 func_80403B0C_de(u8 *bits, s32 index);
 
-struct Record_func_80402FB4_de;
-struct Record_func_80402FB4_de {
-    char pad0[0x18];
-    s32 owner;
-    char pad1C[0x58 - 0x1C];
-    s32 pending;
-    char pad5C[0xD8 - 0x5C];
-    s32 id;
-    s32 index;
-};
 
 struct Spline;
 typedef struct Spline Spline;
@@ -135,13 +116,9 @@ struct EntryRecAt4V2 {
 extern void *func_80403B04_de(void *value);
 
 
-struct State_func_804039C4_de;
-typedef struct State_func_804039C4_de State_func_804039C4_de;
 
 
 
-struct Record_func_804030E0_de;
-typedef struct Record_func_804030E0_de Record_func_804030E0_de;
 
 
 extern void *func_80403ADC_de(void);
@@ -162,29 +139,11 @@ struct Record_func_80403458_de {
 
 extern s32 func_80403A64_de();
 
-struct Record_func_804030E0_de;
-struct Record_func_804030E0_de {
-    char pad0[0x18];
-    s32 owner;
-    char pad1C[0x58 - 0x1C];
-    s32 pending;
-    char pad5C[0xD8 - 0x5C];
-    s32 id;
-    s32 index;
-    s32 key;
-};
 
 
-struct State_func_804039C4_de;
-struct State_func_804039C4_de {
-    s32 a;
-    s32 *unk4;
-};
 
 extern f32 D_800E0B60[];
 
-struct Record_func_80402FB4_de;
-typedef struct Record_func_80402FB4_de Record_func_80402FB4_de;
 
 typedef struct ScreenRectangle { char pad0[0x29c]; f32 x,y,width,height; } ScreenRectangle;
 

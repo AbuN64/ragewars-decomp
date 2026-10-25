@@ -10,8 +10,6 @@ extern s32 func_80255D14_de(IntrusiveList *list, void *node);
 struct Pool80255ACC;
 
 
-struct func_80256130_S1;
-typedef struct func_80256130_S1 func_80256130_S1;
 
 union func_80255F34_S1_U4;
 union func_80255F34_S1_U4 {
@@ -22,38 +20,11 @@ union func_80255F34_S1_U4 {
 union func_80255F34_S1_U4;
 typedef union func_80255F34_S1_U4 func_80255F34_S1_U4;
 
-struct func_80255F34_S1;
-struct func_80255F34_S1 {
-    char pad0[0x4];
-    func_80255F34_S1_U4 unk4;
-    char pad4[0x8 - 0x4 - sizeof(func_80255F34_S1_U4)];
-    int unk8;
-    char pad8[0x10 - 0x8 - sizeof(int)];
-    int unk10;
-};
-
-struct func_80255BEC_S2;
-typedef struct func_80255BEC_S2 func_80255BEC_S2;
 
 
 
 
-struct func_80256130_S1;
-struct func_80256130_S1 {
-    char pad0[0xC];
-    s32 unkC;
-    char padC[0x10 - 0xC - sizeof(s32)];
-    u32 unk10;
-};
 
-struct func_80255F34_S1;
-typedef struct func_80255F34_S1 func_80255F34_S1;
 
-struct func_80255BEC_S2;
-struct func_80255BEC_S2 {
-    char pad0[0x4];
-    void * unk4;
-    char pad4[0x14 - 0x4 - sizeof(void*)];
-    u32 unk14;
-};
+
 #endif

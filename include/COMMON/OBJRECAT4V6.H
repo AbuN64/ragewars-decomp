@@ -54,13 +54,6 @@ typedef struct PoolCode8025A3EC {
 
 struct ObjRecAt4V6;
 
-struct RecCode8025A3EC;
-struct RecCode8025A3EC {
-    char pad0[0x44];
-    Triple unk44;
-    char pad44[0x50 - 0x44 - sizeof(Triple)];
-    int unk50;
-};
 
 struct SlotRecAtB0;
 typedef struct SlotRecAtB0 SlotRecAtB0;
@@ -90,8 +83,6 @@ struct HeaderRecAt102 {
 
 struct RecordRecAt4V3;
 
-struct func_8025C4D4_S1;
-typedef struct func_8025C4D4_S1 func_8025C4D4_S1;
 
 struct ObjRecAt4V6;
 typedef struct ObjRecAt4V6 ObjRecAt4V6;
@@ -99,8 +90,6 @@ typedef struct ObjRecAt4V6 ObjRecAt4V6;
 struct OwnerCode8025A3EC8025B5F0;
 typedef struct OwnerCode8025A3EC8025B5F0 OwnerCode8025A3EC8025B5F0;
 
-struct RecCode8025A3EC;
-typedef struct RecCode8025A3EC RecCode8025A3EC;
 
 
 struct OwnerCode8025A3EC8025B5F0;
@@ -145,14 +134,6 @@ struct SlotRecAtB8 {
 struct SlotRecAtB4V1;
 typedef struct SlotRecAtB4V1 SlotRecAtB4V1;
 
-struct func_8025C458_S1;
-struct func_8025C458_S1 {
-    char unk0;
-    char pad0[0xB0 - 0x0 - sizeof(char)];
-    s32 unkB0;
-    char padB0[0xC8 - 0xB0 - sizeof(s32)];
-    f32 unkC8;
-};
 
 struct SlotCode8025A3EC;
 struct SlotCode8025A3EC {
@@ -177,8 +158,6 @@ typedef struct RecordRecAt4V3 RecordRecAt4V3;
 
 
 
-struct func_8025AA4C_S2;
-typedef struct func_8025AA4C_S2 func_8025AA4C_S2;
 
 struct Slots;
 struct Slots {
@@ -186,46 +165,6 @@ struct Slots {
     s16 ids[16];
 };
 
-struct func_8025B718_S1;
-struct func_8025B718_S1 {
-    int unk0;
-    char pad0[0x8 - 0x0 - sizeof(int)];
-    int unk8;
-    char pad8[0xC - 0x8 - sizeof(int)];
-    int unkC;
-    char padC[0x14 - 0xC - sizeof(int)];
-    int unk14;
-    char pad14[0x2C - 0x14 - sizeof(int)];
-    float unk2C;
-    char pad2C[0x34 - 0x2C - sizeof(float)];
-    float unk34;
-    char pad34[0x38 - 0x34 - sizeof(float)];
-    short unk38;
-    char pad38[0x3A - 0x38 - sizeof(short)];
-    short unk3A;
-    char pad3A[0x40 - 0x3A - sizeof(short)];
-    int unk40;
-    char pad40[0x58 - 0x40 - sizeof(int)];
-    int unk58;
-    char pad58[0x5C - 0x58 - sizeof(int)];
-    int unk5C;
-    char pad5C[0xA4 - 0x5C - sizeof(int)];
-    int unkA4;
-    char padA4[0xAC - 0xA4 - sizeof(int)];
-    int unkAC;
-    char padAC[0xB0 - 0xAC - sizeof(int)];
-    int unkB0;
-    char padB0[0xB4 - 0xB0 - sizeof(int)];
-    int unkB4;
-    char padB4[0xB8 - 0xB4 - sizeof(int)];
-    float unkB8;
-    char padB8[0xBC - 0xB8 - sizeof(float)];
-    int unkBC;
-    char padBC[0xC0 - 0xBC - sizeof(int)];
-    int unkC0;
-    char padC0[0xC4 - 0xC0 - sizeof(int)];
-    int unkC4;
-};
 
 struct SlotRecAtB4V1;
 struct SlotRecAtB4V1 {
@@ -275,8 +214,6 @@ struct ContextCode8025A3EC;
 struct View_func_8025AE1C_de;
 
 
-struct func_8025C388_S1;
-typedef struct func_8025C388_S1 func_8025C388_S1;
 
 extern float D_800C3F80_de;
 
@@ -303,8 +240,6 @@ struct SlotRecAtB4V2 {
 
 extern float D_800C3F88_de;
 
-struct func_8025C458_S1;
-typedef struct func_8025C458_S1 func_8025C458_S1;
 
 struct SlotRecAtB4V2;
 typedef struct SlotRecAtB4V2 SlotRecAtB4V2;
@@ -346,50 +281,22 @@ struct RecordRecAt4V5;
 
 extern float D_800C3F50_de;
 
-struct func_8025AA4C_S1;
-typedef struct func_8025AA4C_S1 func_8025AA4C_S1;
 
-struct func_8025AA4C_S2;
-struct func_8025AA4C_S2 {
-    char pad0[0x128];
-    f32 unk128;
-    char pad128[0x12C - 0x128 - sizeof(f32)];
-    f32 unk12C;
-    char pad12C[0x130 - 0x12C - sizeof(f32)];
-    f32 unk130;
-};
 
 struct RecordRecAt4V4;
 typedef struct RecordRecAt4V4 RecordRecAt4V4;
 
 extern float D_800CB8E8;
 
-struct func_8025AA4C_S1;
-struct func_8025AA4C_S1 {
-    char pad0[0x2B98];
-    char * unk2B98;
-};
 
 struct Emitter;
 
 extern float D_800C3F84_de;
 
-struct func_8025B718_S1;
-typedef struct func_8025B718_S1 func_8025B718_S1;
 
 struct RecordRecAt4V6;
 typedef struct RecordRecAt4V6 RecordRecAt4V6;
 
-struct func_8025C4D4_S1;
-struct func_8025C4D4_S1 {
-    char unk0;
-    char pad0[0x34 - 0x0 - sizeof(char)];
-    f32 unk34;
-    char pad34[0xB0 - 0x34 - sizeof(f32)];
-    s32 unkB0;
-    char padB0[0xB8 - 0xB0 - sizeof(s32)];
-    f32 unkB8;
-};
 
 struct IntegerStateB4;
 typedef struct IntegerStateB4 IntegerStateB4;
@@ -405,13 +312,6 @@ extern float D_800C9048;
 struct Emitter;
 typedef struct Emitter Emitter;
 
-struct func_8025C388_S1;
-struct func_8025C388_S1 {
-    char pad0[0x34];
-    CVector3 unk34;
-    char pad34[0x44 - 0x34 - sizeof(CVector3)];
-    s8 unk44;
-};
 
 struct ObjRecAtCV4;
 typedef struct ObjRecAtCV4 ObjRecAtCV4;

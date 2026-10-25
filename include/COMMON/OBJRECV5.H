@@ -143,13 +143,6 @@ struct ObjectState5E8 {
     s32 unk_5E4;
 };
 
-struct func_80229A54_S1;
-struct func_80229A54_S1 {
-    char pad0[0x4];
-    char * unk4;
-    char pad4[0x20 - 0x4 - sizeof(char*)];
-    char * unk20;
-};
 
 extern float D_800C2B58_de;
 
@@ -171,13 +164,6 @@ struct Receiver {
     s32 amount;
 };
 
-struct func_80226524_S1;
-struct func_80226524_S1 {
-    char pad0[0x8];
-    func_8020E674_S1_U8 unk8;
-    char pad8[0x1210 - 0x8 - sizeof(func_8020E674_S1_U8)];
-    s32 unk1210;
-};
 
 extern float D_800C2C08_de;
 
@@ -1670,8 +1656,6 @@ typedef struct PlayerCode80225D10 PlayerCode80225D10;
 
 
 
-struct func_80226524_S1;
-typedef struct func_80226524_S1 func_80226524_S1;
 
 struct IntegerStateB4C;
 struct IntegerStateB4C {
@@ -1689,8 +1673,6 @@ struct Game {
     Rules rules;
 };
 
-struct func_80229A54_S1;
-typedef struct func_80229A54_S1 func_80229A54_S1;
 
 struct ViewCode80225D10;
 typedef struct ViewCode80225D10 ViewCode80225D10;
@@ -1752,13 +1734,6 @@ typedef struct ObjectLinks16E4 ObjectLinks16E4;
 struct ObjectLinks148;
 typedef struct ObjectLinks148 ObjectLinks148;
 
-struct func_80229BE0_S1;
-struct func_80229BE0_S1 {
-    char pad0[0xE4];
-    u16 unkE4;
-    char padE4[0x5D8 - 0xE4 - sizeof(u16)];
-    char * unk5D8;
-};
 
 struct State;
 typedef struct State State;
@@ -3477,11 +3452,8 @@ struct Round {
     struct ActorNode *players;
 };
 
-struct ModelDef;
 struct PlayerCode80225D10;
 
-struct func_80229BE0_S1;
-typedef struct func_80229BE0_S1 func_80229BE0_S1;
 
 struct SharedPlayer;
 

@@ -363,8 +363,6 @@ struct PlayerRecAt122C {
     s32 flags;
 };
 
-struct func_8028414C_S1;
-typedef struct func_8028414C_S1 func_8028414C_S1;
 
 struct ObjRecAt4V5;
 struct ObjRecAt4V5 {
@@ -406,8 +404,6 @@ struct func_80204468_S3 {
     int unk14;
 };
 
-struct HeadRecord;
-typedef struct HeadRecord HeadRecord;
 
 struct PakMenuSlot;
 struct PakMenuSlot {
@@ -435,11 +431,6 @@ struct Owner8020F150 {
     s32 active;
 };
 
-struct HeadRecord;
-struct HeadRecord {
-    void *head;
-    char rest[0x10];
-};
 
 struct ObjRecAt8F;
 struct ObjRecAt8F {
@@ -449,22 +440,10 @@ struct ObjRecAt8F {
 
 extern float D_800CD740_de;
 
-struct func_80283038_S1;
-struct func_80283038_S1 {
-    char pad0[0x5C];
-    s32 unk5C;
-    char pad5C[0x118 - 0x5C - sizeof(s32)];
-    s32 * unk118;
-};
 
 struct ObjRecAt4V5;
 typedef struct ObjRecAt4V5 ObjRecAt4V5;
 
-struct func_8028414C_S1;
-struct func_8028414C_S1 {
-    char pad0[0x220];
-    char unk220;
-};
 
 struct ObjRecAt18V4;
 
@@ -477,8 +456,6 @@ struct func_80228774_S5 {
     void * unk5DC;
 };
 
-struct func_80283038_S1;
-typedef struct func_80283038_S1 func_80283038_S1;
 
 struct Saved;
 struct Saved {
@@ -492,8 +469,6 @@ struct Saved {
 struct PlayerRecAt122C;
 typedef struct PlayerRecAt122C PlayerRecAt122C;
 
-struct func_8027C324_S3;
-typedef struct func_8027C324_S3 func_8027C324_S3;
 
 struct OwnerRecAt5D8V1;
 struct ProfileRecAt84;
@@ -502,15 +477,6 @@ struct OwnerRecAt5D8V1 {
     struct ProfileRecAt84 *settings;
 };
 
-struct func_8027C324_S3;
-struct func_8027C324_S3 {
-    char pad0[0x70];
-    u16 unk70;
-    char pad70[0x8C - 0x70 - sizeof(u16)];
-    u16 unk8C;
-    char pad8C[0xA8 - 0x8C - sizeof(u16)];
-    u16 unkA8;
-};
 
 struct Shape_typemap_3;
 struct Shape_typemap_3 {

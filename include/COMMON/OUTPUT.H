@@ -41,27 +41,8 @@ struct Ray {
 
 extern float D_800C87C0;
 
-struct func_8023E844_S1;
-struct func_8023E844_S1 {
-    char pad0[0x18C];
-    int unk18C;
-    char pad18C[0x190 - 0x18C - sizeof(int)];
-    int unk190;
-    char pad190[0x194 - 0x190 - sizeof(int)];
-    int unk194;
-};
 
-struct func_8023E6C0_S1;
-typedef struct func_8023E6C0_S1 func_8023E6C0_S1;
 
-struct func_8023ED54_S1;
-struct func_8023ED54_S1 {
-    s32 unk0;
-    char pad0[0x8 - 0x0 - sizeof(s32)];
-    s32 unk8;
-    char pad8[0xCC - 0x8 - sizeof(s32)];
-    f32 unkCC;
-};
 
 struct Polygon;
 struct Polygon {
@@ -80,8 +61,6 @@ struct Polygon {
     CVector3 hit;
 };
 
-struct func_8023E854_S1;
-typedef struct func_8023E854_S1 func_8023E854_S1;
 
 struct ActorMotion;
 struct MotionContactResult;
@@ -93,8 +72,6 @@ struct ObjRecAt18C {
     Triple unk18C;
 };
 
-struct func_8023E854_S2;
-typedef struct func_8023E854_S2 func_8023E854_S2;
 
 struct ObjRecAt18C;
 typedef struct ObjRecAt18C ObjRecAt18C;
@@ -114,8 +91,6 @@ struct Ray_func_8023E178_de {
     Polygon_func_8023E178_de nearest;
 };
 
-struct func_8023ED54_S1;
-typedef struct func_8023ED54_S1 func_8023ED54_S1;
 
 struct Polygon;
 typedef struct Polygon Polygon_func_8023E8D4_de;
@@ -165,8 +140,6 @@ struct Input {
 struct CapsuleSweep;
 typedef struct CapsuleSweep CapsuleSweep;
 
-struct func_8023E844_S1;
-typedef struct func_8023E844_S1 func_8023E844_S1;
 
 struct World;
 
@@ -194,18 +167,7 @@ struct Range {
 
 
 
-struct func_8023E854_S2;
-struct func_8023E854_S2 {
-    char pad0[0x48];
-    f32 unk48;
-    char pad48[0x4C - 0x48 - sizeof(f32)];
-    f32 unk4C;
-    char pad4C[0x50 - 0x4C - sizeof(f32)];
-    f32 unk50;
-};
 
-struct func_8023EE24_S1;
-typedef struct func_8023EE24_S1 func_8023EE24_S1;
 
 struct Instance;
 struct Output;
@@ -232,15 +194,6 @@ struct Output {
 struct Ray_func_8023E178_de;
 typedef struct Ray_func_8023E178_de Ray_func_8023E178_de;
 
-struct func_8023E854_S1;
-struct func_8023E854_S1 {
-    char pad0[0x18C];
-    f32 unk18C;
-    char pad18C[0x190 - 0x18C - sizeof(f32)];
-    f32 unk190;
-    char pad190[0x194 - 0x190 - sizeof(f32)];
-    f32 unk194;
-};
 
 struct ObjRecAt48;
 typedef struct ObjRecAt48 ObjRecAt48;
@@ -257,22 +210,6 @@ struct ObjRecAt48 {
 struct SegmentCode8023A284;
 typedef struct SegmentCode8023A284 SegmentCode8023A284;
 
-struct func_8023EE24_S1;
-struct func_8023EE24_S1 {
-    unsigned int unk0;
-    char pad0[0x14 - 0x0 - sizeof(unsigned int)];
-    int unk14;
-    char pad14[0x88 - 0x14 - sizeof(int)];
-    unsigned int unk88;
-    char pad88[0x9C - 0x88 - sizeof(unsigned int)];
-    unsigned int unk9C;
-    char pad9C[0xB0 - 0x9C - sizeof(unsigned int)];
-    unsigned int unkB0;
-    char padB0[0xB4 - 0xB0 - sizeof(unsigned int)];
-    unsigned int unkB4;
-    char padB4[0xC4 - 0xB4 - sizeof(unsigned int)];
-    unsigned int unkC4;
-};
 
 struct SegmentCode8023A284;
 struct SegmentCode8023A284 {
@@ -293,32 +230,10 @@ typedef struct Input Input;
 
 extern float D_800C87B4;
 
-struct func_8023ED54_S2;
-struct func_8023ED54_S2 {
-    char pad0[0x80];
-    f32 unk80;
-    char pad80[0x17C - 0x80 - sizeof(f32)];
-    f32 unk17C;
-};
 
-struct func_8023ED54_S2;
-typedef struct func_8023ED54_S2 func_8023ED54_S2;
 
 struct Reusable;
 
-struct func_8023E6C0_S1;
-struct func_8023E6C0_S1 {
-    char pad0[0x8];
-    float unk8;
-    char pad8[0xC - 0x8 - sizeof(float)];
-    float unkC;
-    char padC[0x10 - 0xC - sizeof(float)];
-    float unk10;
-    char pad10[0x14 - 0x10 - sizeof(float)];
-    int unk14;
-    char pad14[0x18 - 0x14 - sizeof(int)];
-    float unk18;
-};
 
 struct CapsuleSweep;
 

@@ -50,20 +50,8 @@ struct EntryRecAt4V4 {
 };
 
 
-union func_80282E6C_S1_U8;
-union func_80282E6C_S1_U8 {
-    Triple v0;
-    CVector3 v1;
-};
 
-union func_8027C5A0_S1_U118;
-union func_8027C5A0_S1_U118 {
-    void * v0;
-    s32 * v1;
-};
 
-union func_8027C5A0_S1_U118;
-typedef union func_8027C5A0_S1_U118 func_8027C5A0_S1_U118;
 
 
 
@@ -95,15 +83,6 @@ struct Shared_ParticleInstance;
 
 struct Shared_ParticleInstance;
 
-struct ActorDef;
-struct ActorDef {
-    s32 flags;
-    char pad4[0x10];
-    s32 large;
-    char pad18[0xC];
-    ObjRecAt18V3 *size;
-};
-struct ActorDef;
 
 struct Shared_Particle;
 
@@ -131,27 +110,13 @@ struct Shared_ParticleTarget {
 
 extern float D_800C4E60_de;
 
-struct Object_func_80281A9C_de;
-typedef struct Object_func_80281A9C_de Object_func_80281A9C_de;
 
-struct Object_func_80281A9C_de;
-struct Object_func_80281A9C_de {
-    char pad0[8];
-    CVector3 position;
-    char pad14[0x160];
-    s32 count;
-};
 
 
 struct Shared_Particle;
 typedef struct Shared_Particle Shared_Particle;
 
 
-union func_8027C324_S1_U118;
-union func_8027C324_S1_U118 {
-    s32 * v0;
-    void * v1;
-};
 
 
 struct Ground;
@@ -206,13 +171,9 @@ struct Actor_func_8027DAD0_de {
 
 
 
-union func_80282E6C_S1_U8;
-typedef union func_80282E6C_S1_U8 func_80282E6C_S1_U8;
 
 
 
-union func_8027C324_S1_U118;
-typedef union func_8027C324_S1_U118 func_8027C324_S1_U118;
 
 struct Shared_ParticleOwner;
 struct Shared_ParticleOwner {

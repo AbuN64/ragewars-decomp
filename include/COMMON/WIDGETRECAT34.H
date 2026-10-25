@@ -9,21 +9,11 @@ typedef struct WidgetRecAt34 WidgetRecAt34;
 
 extern s16 func_80411D94_de(void);
 
-struct ObjectLinks490;
-struct ObjectLinks490 {
-    unsigned char padding_0[1164];
-    char *unk_48C;
-};
 
 extern void func_80412038_de(void);
 
 extern void func_80411F28_de();
 
-struct ObjectStateA;
-struct ObjectStateA {
-    unsigned char padding_0[9];
-    signed char unk_9;
-};
 
 extern short func_80411C98_de(int index);
 
@@ -37,14 +27,7 @@ extern int func_80411D08_de(void);
 
 extern void func_80411F48_de(void);
 
-struct ObjectStateB;
-typedef struct ObjectStateB ObjectStateB;
 
-struct ObjectStateB;
-struct ObjectStateB {
-    unsigned char padding_0[10];
-    signed char unk_A;
-};
 
 extern short func_80411CD0_de(int index);
 
@@ -61,8 +44,6 @@ extern signed char func_80411BE8_de(int entry, int index);
 
 extern short D_80153C2C;
 
-struct ObjectLinks490;
-typedef struct ObjectLinks490 ObjectLinks490;
 
 extern short func_80411C60_de(int index);
 
@@ -88,6 +69,4 @@ struct WidgetRecAt34 {
     struct WidgetRecAt34 *pressed;
 };
 
-struct ObjectStateA;
-typedef struct ObjectStateA ObjectStateA;
 #endif

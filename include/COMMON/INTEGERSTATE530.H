@@ -5,7 +5,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-typedef signed int ( *func_802995D4_de_Callback)(signed int, signed int, signed int, signed int);
 
 
 
@@ -32,16 +31,7 @@ struct Element {
 struct ScreenManager;
 typedef struct ScreenManager ScreenManager;
 
-struct Entries;
-struct Entries {
-    void *object;
-    s32 field4;
-    s32 field8;
-    StreamBuffer fieldC;
-};
 
-struct Entries;
-typedef struct Entries Entries;
 
 
 struct Element;
@@ -49,13 +39,6 @@ typedef struct Element Element;
 
 
 
-struct Entry_func_80297EA4_de;
-struct Entry_func_80297EA4_de {
-    char pad[8];
-    ObjRecAtCV1 *unk8;
-    char rest[16];
-};
-struct Entry_func_80297EA4_de;
 
 extern void func_80298ECC_de();
 
@@ -142,15 +125,7 @@ extern double D_800C5668_de;
 extern float D_800C5678_de;
 
 
-struct EntryCode80296014;
 struct ObjRecAt40V1;
-struct EntryCode80296014 {
-    struct ObjRecAt40V1 *unk0;
-    s32 unk4;
-    s32 unk8;
-    StreamBuffer unkC;
-};
-struct EntryCode80296014;
 
 
 extern MenuElementHandler FindKindHandler(s32 kind);
@@ -159,7 +134,6 @@ struct ArgsCode80296014;
 
 extern int D_800CD8E0;
 
-struct Entries;
 
 struct Element;
 struct Entry_func_802991D4_de;

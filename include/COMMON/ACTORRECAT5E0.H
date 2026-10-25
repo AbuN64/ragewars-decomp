@@ -48,8 +48,6 @@ struct PlayerRecAt8 {
 
 extern void func_80264B7C_de();
 
-struct func_80264A40_S1;
-typedef struct func_80264A40_S1 func_80264A40_S1;
 
 struct PlayerRecAt8;
 typedef struct PlayerRecAt8 PlayerRecAt8;
@@ -66,22 +64,9 @@ struct Snapshot;
 
 extern s32 func_802646D4_de(s32 arg0);
 
-struct func_80264E10_S1;
-typedef struct func_80264E10_S1 func_80264E10_S1;
 
 extern void func_80264B8C_de();
 
-struct func_80264E10_S2;
-struct func_80264E10_S2 {
-    char pad0[0x4];
-    f32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(f32)];
-    u8 unk8;
-    char pad8[0x9 - 0x8 - sizeof(u8)];
-    u8 unk9;
-    char pad9[0x14 - 0x9 - sizeof(u8)];
-    f32 unk14;
-};
 
 extern void func_80264CB8_de();
 
@@ -92,8 +77,6 @@ extern void func_802649FC_de();
 
 extern void func_8026479C_de();
 
-struct func_80264E10_S2;
-typedef struct func_80264E10_S2 func_80264E10_S2;
 
 extern void func_80264A20_de(void);
 
@@ -104,23 +87,9 @@ extern void Render_ResetControllerProfiles();
 
 extern void func_80264B44_de();
 
-struct func_80264A40_S1;
-struct func_80264A40_S1 {
-    char pad0[0x5EC];
-    s32 unk5EC;
-    char pad5EC[0x650 - 0x5EC - sizeof(s32)];
-    u16 unk650;
-};
 
 extern void Render_RestoreControllerSetup();
 
-struct func_80264E10_S1;
-struct func_80264E10_S1 {
-    char pad0[0x4];
-    f32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(f32)];
-    f32 unk8;
-};
 
 extern s32 func_80264DF0_de(void *arg0);
 

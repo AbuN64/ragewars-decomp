@@ -11,11 +11,6 @@ extern void func_802765A0_de(void);
 
 extern void func_802761B8_de(void *arg0);
 
-struct func_802760C4_S1;
-struct func_802760C4_S1 {
-    char pad0[0x58];
-    u8 unk58;
-};
 
 extern float D_800C4A04_de;
 
@@ -27,8 +22,6 @@ extern float D_800C4A00_de;
 
 extern float D_800C4ACC_de;
 
-struct func_802760C4_S1;
-typedef struct func_802760C4_S1 func_802760C4_S1;
 
 extern float D_800C49FC_de;
 
@@ -40,18 +33,9 @@ typedef union ObjectLinks4_2 ObjectLinks4_2;
 
 extern float D_800C4AD0_de;
 
-struct func_80277198_S1;
-struct func_80277198_S1 {
-    char pad0[0x14];
-    CVector3 unk14;
-    char pad14[0xBB - 0x14 - sizeof(CVector3)];
-    u8 unkBB;
-};
 
 
 
-struct func_80277198_S1;
-typedef struct func_80277198_S1 func_80277198_S1;
 
 union ObjectLinks4_2;
 union ObjectLinks4_2 {
@@ -91,18 +75,10 @@ extern void func_8027640C_de(f32 *arg0, s32 arg1, CVector3 *arg2);
 
 extern float D_800CD4FC[];
 
-struct func_802760F8_S1;
-typedef struct func_802760F8_S1 func_802760F8_S1;
 
-struct func_802760F8_S1;
-struct func_802760F8_S1 {
-    char pad0[0x59];
-    u8 unk59;
-};
 
 extern void func_80276214_de(struct ModelTreeNode *arg0, u16 arg1);
 
-extern void func_80276608_eu_x(void);
 
 /* Shared object layout established by model-tree consumers. */
 struct ModelTreeNode {

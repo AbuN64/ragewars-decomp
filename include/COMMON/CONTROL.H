@@ -4,13 +4,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 
 
-struct Control;
-struct Control {
-    short unk0;
-    unsigned short first;
-    int second;
-    char pad8[8];
-};
 
 struct MenuMarker;
 struct Screen_func_8042B78C_de;
@@ -42,11 +35,6 @@ struct Screen_func_8042AFE0_de {
     s32 entry;
 };
 
-struct State_func_8042BA98_de;
-struct State_func_8042BA98_de {
-    char pad[0x3DC];
-    s32 mode;
-};
 
 struct G;
 struct G {
@@ -82,15 +70,6 @@ struct VersusResultsScreen {
 };
 
 struct Resource_func_80419E54_de;
-struct func_8042B4C4_S1;
-struct func_8042B4C4_S1 {
-    char pad0[0x450];
-    struct Resource_func_80419E54_de * unk450;
-    char pad450[0x454 - 0x450 - sizeof(struct Resource_func_80419E54_de*)];
-    struct Resource_func_80419E54_de * unk454;
-    char pad454[0x46C - 0x454 - sizeof(struct Resource_func_80419E54_de*)];
-    s32 unk46C;
-};
 
 struct MenuMarker;
 struct Screen_func_8042B4D4_de;
@@ -125,24 +104,8 @@ struct G;
 typedef struct G G;
 
 struct Resource_func_80419E54_de;
-struct Screen_func_8042B644_de;
-struct Screen_func_8042B644_de {
-    char pad0[0x434];
-    s32 category;
-    s32 selection;
-    struct Resource_func_80419E54_de *item;
-    struct Resource_func_80419E54_de *left;
-    struct Resource_func_80419E54_de *right;
-    struct Resource_func_80419E54_de *marker;
-    char pad44C[0x45C - 0x44C];
-    s32 word45C;
-    char pad460[0x464 - 0x460];
-    s32 word464;
-};
 
 
-struct Control;
-typedef struct Control Control;
 
 struct RecordRecAtCV2;
 struct RecordRecAtCV2 {
@@ -175,8 +138,6 @@ struct MenuRenderFill {
     f32 color[4];
 };
 
-struct func_8042B4C4_S1;
-typedef struct func_8042B4C4_S1 func_8042B4C4_S1;
 
 extern s32 func_8042BAD0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 

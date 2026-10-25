@@ -13,30 +13,14 @@ struct Target {
 struct Vec4s;
 typedef struct Vec4s Vec4s;
 
-struct func_80267540_S2;
-struct func_80267540_S2 {
-    char pad0[0x18];
-    s32 * unk18;
-    char pad18[0xE4 - 0x18 - sizeof(s32*)];
-    u16 unkE4;
-    char padE4[0x100 - 0xE4 - sizeof(u16)];
-    s32 unk100;
-};
 
 extern float D_800C442C_de;
 
-struct func_80267D80_S2;
-typedef struct func_80267D80_S2 func_80267D80_S2;
 
 struct ResourceManagerState;
 struct Triple;
 typedef void ( *func_802671FC_de_Callback)(void *, void *, signed int, CVector3, struct ResourceManagerState);
 
-struct CallbackEntryRecAt4V2;
-struct CallbackEntryRecAt4V2 {
-    func_802671FC_de_Callback callback;
-    s32 unused;
-};
 
 extern float D_800C4440_de;
 
@@ -1513,35 +1497,17 @@ extern float D_800C4424_de;
 
 
 
-struct func_8026745C_S1;
-struct func_8026745C_S1 {
-    char pad0[0x100];
-    s32 unk100;
-    char pad100[0x1D8 - 0x100 - sizeof(s32)];
-    char * unk1D8;
-};
 
 struct ObjectRecAtD0;
 typedef struct ObjectRecAtD0 ObjectRecAtD0;
 
-struct func_8026745C_S2;
-struct func_8026745C_S2 {
-    char pad0[0x8];
-    CVector3 unk8;
-    char pad8[0x62E - 0x8 - sizeof(CVector3)];
-    s16 unk62E;
-};
 
-struct func_8026745C_S2;
-typedef struct func_8026745C_S2 func_8026745C_S2;
 
 struct s_CEventValueFormat7a;
 typedef struct s_CEventValueFormat7a CEventValueFormat7a;
 
 extern float D_800C4420_de;
 
-struct CallbackEntryRecAt4V2;
-typedef struct CallbackEntryRecAt4V2 CallbackEntryRecAt4V2;
 
 
 struct Actor_func_80267958_de;
@@ -1550,8 +1516,6 @@ typedef struct Actor_func_80267958_de Actor_func_80267958_de;
 struct Actor_func_802676EC_de;
 struct Carrier;
 
-struct func_8026745C_S1;
-typedef struct func_8026745C_S1 func_8026745C_S1;
 
 struct CallbackEntryRecAt4V1;
 typedef struct CallbackEntryRecAt4V1 CallbackEntryRecAt4V1;
@@ -1568,8 +1532,6 @@ struct Vec4s;
 
 extern float D_800C9538;
 
-struct func_80267540_S2;
-typedef struct func_80267540_S2 func_80267540_S2;
 
 struct Node_func_80267CE4_de;
 struct Node_func_80267CE4_de {
@@ -1577,11 +1539,6 @@ struct Node_func_80267CE4_de {
     struct Node_func_80267CE4_de *next;
 };
 
-struct func_80267D80_S2;
-struct func_80267D80_S2 {
-    char pad0[0x774];
-    Triple unk774;
-};
 
 extern float D_800C46E8_eu;
 

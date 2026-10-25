@@ -42,44 +42,8 @@ extern float D_800C9AD8;
 
 extern void func_802744AC_de(void);
 
-struct func_80274BEC_S2;
-typedef struct func_80274BEC_S2 func_80274BEC_S2;
 
-struct func_80274DFC_S1;
-struct func_80274DFC_S1 {
-    f32 unk0;
-    char pad0[0x8 - 0x0 - sizeof(f32)];
-    f32 unk8;
-    char pad8[0x30 - 0x8 - sizeof(f32)];
-    CVector3 unk30;
-};
 
-struct func_80274BEC_S2;
-struct func_80274BEC_S2 {
-    s32 unk0;
-    char pad0[0x4 - 0x0 - sizeof(s32)];
-    s32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(s32)];
-    s32 unk8;
-    char pad8[0xC - 0x8 - sizeof(s32)];
-    s32 unkC;
-    char padC[0x10 - 0xC - sizeof(s32)];
-    s32 unk10;
-    char pad10[0x14 - 0x10 - sizeof(s32)];
-    s32 unk14;
-    char pad14[0x18 - 0x14 - sizeof(s32)];
-    f32 unk18;
-    char pad18[0x1C - 0x18 - sizeof(f32)];
-    f32 unk1C;
-    char pad1C[0x20 - 0x1C - sizeof(f32)];
-    f32 unk20;
-    char pad20[0x30 - 0x20 - sizeof(f32)];
-    f32 unk30;
-    char pad30[0x34 - 0x30 - sizeof(f32)];
-    s32 unk34;
-    char pad34[0x38 - 0x34 - sizeof(s32)];
-    f32 unk38;
-};
 
 extern void Nav_ScaleWordsToFloats(void *arg0);
 
@@ -124,16 +88,12 @@ struct Triangle {
 
 extern s32 func_80274D8C_de(void *arg0, void *arg1);
 
-struct func_80274DFC_S1;
-typedef struct func_80274DFC_S1 func_80274DFC_S1;
 
 struct Triangle;
 typedef struct Triangle Triangle;
 
 extern void func_80274C7C_de(void *arg0);
 
-struct func_80274BEC_S1;
-typedef struct func_80274BEC_S1 func_80274BEC_S1;
 
 struct ObjRecAt2CV1;
 typedef struct ObjRecAt2CV1 ObjRecAt2CV1;
@@ -144,14 +104,6 @@ extern float D_800C49C8_de;
 
 extern float D_800C4998_de;
 
-struct func_80274BEC_S1;
-struct func_80274BEC_S1 {
-    func_8022E280_S1_U744 unk0;
-    char pad0[0x4 - 0x0 - sizeof(func_8022E280_S1_U744)];
-    func_8022E280_S1_U744 unk4;
-    char pad4[0x8 - 0x4 - sizeof(func_8022E280_S1_U744)];
-    func_8022E280_S1_U744 unk8;
-};
 
 extern double D_800C4940_de;
 

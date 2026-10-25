@@ -20,15 +20,6 @@ typedef struct Node_func_802524B0_de Node_func_802524B0_de;
 struct ObjectState13;
 typedef struct ObjectState13 ObjectState13;
 
-struct func_80250A7C_S1;
-struct func_80250A7C_S1 {
-    char pad0[0xD0];
-    s32 unkD0;
-    char padD0[0xD8 - 0xD0 - sizeof(s32)];
-    u16 unkD8;
-    char padD8[0xDA - 0xD8 - sizeof(u16)];
-    u8 unkDA;
-};
 
 
 struct ResourceCacheEntry;
@@ -81,19 +72,10 @@ struct ResourceHashEntry {
 struct Manager;
 typedef struct Manager Manager;
 
-struct func_80250D88_S1;
-struct func_80250D88_S1 {
-    char pad0[0x18];
-    void * unk18;
-    char pad18[0xDC - 0x18 - sizeof(void*)];
-    unsigned int unkDC;
-};
 
 
 
 
-struct func_802532A0_S1;
-typedef struct func_802532A0_S1 func_802532A0_S1;
 
 struct Request_func_802524B0_de;
 typedef struct Request_func_802524B0_de Request_func_802524B0_de;
@@ -123,8 +105,6 @@ struct Owner_func_80250C84_de;
 struct ResourceCacheEntry;
 typedef struct ResourceCacheEntry ResourceCacheEntry;
 
-struct func_80250D88_S2;
-typedef struct func_80250D88_S2 func_80250D88_S2;
 
 struct CachedResource;
 
@@ -135,13 +115,6 @@ struct CachedResource;
 
 extern int func_80250BF0_de();
 
-struct func_802532A0_S1;
-struct func_802532A0_S1 {
-    char pad0[0x8];
-    int unk8;
-    char pad8[0xC - 0x8 - sizeof(int)];
-    unsigned int unkC;
-};
 
 
 
@@ -149,18 +122,7 @@ struct func_802532A0_S1 {
 struct LevelActor;
 
 
-struct func_80250D88_S2;
-struct func_80250D88_S2 {
-    char pad0[0xE];
-    signed char unkE;
-    char padE[0xF - 0xE - sizeof(signed char)];
-    signed char unkF;
-    char padF[0x24 - 0xF - sizeof(signed char)];
-    unsigned int unk24;
-};
 
-struct func_80250A7C_S1;
-typedef struct func_80250A7C_S1 func_80250A7C_S1;
 
 struct ObjectLinksDC;
 typedef struct ObjectLinksDC ObjectLinksDC;
@@ -184,8 +146,6 @@ struct Shape_func_802BC570_de;
 
 struct ResourceLoadRequest;
 
-struct func_80250D88_S1;
-typedef struct func_80250D88_S1 func_80250D88_S1;
 
 
 

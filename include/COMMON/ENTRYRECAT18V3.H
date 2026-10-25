@@ -2,11 +2,6 @@
 #define COMMON_ENTRYRECAT18V3_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct func_80255428_S3;
-struct func_80255428_S3 {
-    char pad0[0xC];
-    s32 * unkC;
-};
 
 struct EntryRecAt18V3;
 struct EntryRecAt18V3 {
@@ -61,16 +56,7 @@ struct EntryRecAtCV1 {
     struct EntryRecAtCV1 *next;
 };
 
-struct func_80255428_S3;
-typedef struct func_80255428_S3 func_80255428_S3;
 
-struct HashSlot;
-struct HashSlot {
-    s32 key;
-    s32 value;
-    u32 index;
-    struct HashSlot *next;
-};
 
 union func_80255428_S1_UC;
 union func_80255428_S1_UC {
@@ -81,8 +67,6 @@ union func_80255428_S1_UC {
 struct HeapRecAtC;
 typedef struct HeapRecAtC HeapRecAtC;
 
-struct func_802551C8_S1;
-typedef struct func_802551C8_S1 func_802551C8_S1;
 
 struct BlockRecAt20;
 struct BlockRecAt20 {
@@ -105,68 +89,26 @@ struct Pool80255720;
 
 
 
-struct func_80255428_S2;
-typedef struct func_80255428_S2 func_80255428_S2;
 
-struct BlockRecAt14;
-struct BlockRecAt14 {
-    struct BlockRecAt14 *next;
-    struct BlockRecAt14 *previous;
-    s32 a;
-    s32 b;
-    s32 header;
-    s32 size;
-};
 
-struct BlockRecAt14;
 struct Heap;
 
-struct HashSlot;
-typedef struct HashSlot HashSlot;
 
 struct BlockRecAt20;
 struct HeapRecAtC;
 
-struct func_80255110_S2;
-struct func_80255110_S2 {
-    char pad0[0x230];
-    s32 unk230;
-};
 
 struct Pool80255ACC;
 typedef struct Pool80255ACC Pool80255ACC;
 
-struct func_80255110_S2;
-typedef struct func_80255110_S2 func_80255110_S2;
 
-struct func_80255428_S1;
-struct func_80255428_S1 {
-    char pad0[0x4];
-    s32 unk4;
-    char pad4[0xC - 0x4 - sizeof(s32)];
-    func_80255428_S1_UC unkC;
-};
 
 struct BlockRecAt20;
 typedef struct BlockRecAt20 BlockRecAt20;
 
 
-struct func_80255428_S1;
-typedef struct func_80255428_S1 func_80255428_S1;
 
-struct func_80255428_S2;
-struct func_80255428_S2 {
-    char pad0[0x4];
-    s32 unk4;
-    char pad4[0xC - 0x4 - sizeof(s32)];
-    s32 * unkC;
-};
 
-struct func_802551C8_S1;
-struct func_802551C8_S1 {
-    char pad0[0x238];
-    s32 unk238;
-};
 
 
 

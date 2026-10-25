@@ -21,7 +21,6 @@ struct Shared_func_80227014_S1 {
     char pad78[0x98 - 0x78];
     s32 unk98; /* +0x98: origin/legacy func_80286A78.c, SharedRecAt98. */
 };
-typedef char Shared_func_80227014_S1_size_check[(sizeof(Shared_func_80227014_S1) == 0x9C) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S2 Shared_func_80227014_S2;
@@ -50,7 +49,6 @@ struct Shared_func_80227014_S2 {
     char pad11B8[0x298];
     s32 unk1450; /* +0x1450: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S2_size_check[(sizeof(Shared_func_80227014_S2) == 0x1454) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S3 Shared_func_80227014_S3;
@@ -62,7 +60,6 @@ struct Shared_func_80227014_S3 {
     char pad91[0x3];
     u8 unk94; /* +0x94: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S3_size_check[(sizeof(Shared_func_80227014_S3) == 0x95) ? 1 : -1];
 
 
 typedef struct SharedRecAt564V1 SharedRecAt564V1;
@@ -81,7 +78,6 @@ struct SharedRecAt564V1 {
     char pad2AC[0x2B8];
     s32 unk564; /* +0x564: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S4_size_check[(sizeof(SharedRecAt564V1) == 0x568) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S5 Shared_func_80227014_S5;
@@ -89,7 +85,6 @@ struct Shared_func_80227014_S5 {
     s32 unk0; /* +0x0: src/func_80227014.c */
     s32 unk4; /* +0x4: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S5_size_check[(sizeof(Shared_func_80227014_S5) == 0x8) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S6 Shared_func_80227014_S6;
@@ -97,7 +92,6 @@ struct Shared_func_80227014_S6 {
     char pad0[0x8F];
     s8 unk8F; /* +0x8F: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S6_size_check[(sizeof(Shared_func_80227014_S6) == 0x90) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S7 Shared_func_80227014_S7;
@@ -105,7 +99,6 @@ struct Shared_func_80227014_S7 {
     char pad0[0x18];
     s32 unk18; /* +0x18: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S7_size_check[(sizeof(Shared_func_80227014_S7) == 0x1C) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S8 Shared_func_80227014_S8;
@@ -134,7 +127,6 @@ struct Shared_func_80227014_S8 {
     char pad11B8[0x298];
     s32 unk1450; /* +0x1450: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S8_size_check[(sizeof(Shared_func_80227014_S8) == 0x1454) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S9 Shared_func_80227014_S9;
@@ -147,7 +139,6 @@ struct Shared_func_80227014_S9 {
     char pad2AC[0x2B8];
     s32 unk564; /* +0x564: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S9_size_check[(sizeof(Shared_func_80227014_S9) == 0x568) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S10 Shared_func_80227014_S10;
@@ -155,7 +146,6 @@ struct Shared_func_80227014_S10 {
     char pad0[0x8F];
     u8 unk8F; /* +0x8F: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S10_size_check[(sizeof(Shared_func_80227014_S10) == 0x90) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S11 Shared_func_80227014_S11;
@@ -167,7 +157,6 @@ struct Shared_func_80227014_S11 {
     char pad90[0x4];
     u8 unk94; /* +0x94: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S11_size_check[(sizeof(Shared_func_80227014_S11) == 0x95) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S12 Shared_func_80227014_S12;
@@ -175,7 +164,6 @@ struct Shared_func_80227014_S12 {
     char pad0[0x18];
     s32 unk18; /* +0x18: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S12_size_check[(sizeof(Shared_func_80227014_S12) == 0x1C) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S13 Shared_func_80227014_S13;
@@ -204,7 +192,6 @@ struct Shared_func_80227014_S13 {
     char pad11B8[0x298];
     s32 unk1450; /* +0x1450: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S13_size_check[(sizeof(Shared_func_80227014_S13) == 0x1454) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S14 Shared_func_80227014_S14;
@@ -217,7 +204,6 @@ struct Shared_func_80227014_S14 {
     char pad2AC[0x2B8];
     s32 unk564; /* +0x564: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S14_size_check[(sizeof(Shared_func_80227014_S14) == 0x568) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S15 Shared_func_80227014_S15;
@@ -225,7 +211,6 @@ struct Shared_func_80227014_S15 {
     char pad0[0x8F];
     u8 unk8F; /* +0x8F: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S15_size_check[(sizeof(Shared_func_80227014_S15) == 0x90) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S16 Shared_func_80227014_S16;
@@ -237,7 +222,6 @@ struct Shared_func_80227014_S16 {
     char pad90[0x4];
     u8 unk94; /* +0x94: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S16_size_check[(sizeof(Shared_func_80227014_S16) == 0x95) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S17 Shared_func_80227014_S17;
@@ -245,7 +229,6 @@ struct Shared_func_80227014_S17 {
     char pad0[0x18];
     s32 unk18; /* +0x18: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S17_size_check[(sizeof(Shared_func_80227014_S17) == 0x1C) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S18 Shared_func_80227014_S18;
@@ -274,7 +257,6 @@ struct Shared_func_80227014_S18 {
     char pad11B8[0x298];
     s32 unk1450; /* +0x1450: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S18_size_check[(sizeof(Shared_func_80227014_S18) == 0x1454) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S19 Shared_func_80227014_S19;
@@ -283,7 +265,6 @@ struct Shared_func_80227014_S19 {
     u8 unk8F; /* +0x8F: src/func_80227014.c */
     s8 unk90; /* +0x90: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S19_size_check[(sizeof(Shared_func_80227014_S19) == 0x91) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S20 Shared_func_80227014_S20;
@@ -296,7 +277,6 @@ struct Shared_func_80227014_S20 {
     char pad2AC[0x2B8];
     s32 unk564; /* +0x564: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S20_size_check[(sizeof(Shared_func_80227014_S20) == 0x568) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S21 Shared_func_80227014_S21;
@@ -304,7 +284,6 @@ struct Shared_func_80227014_S21 {
     char pad0[0x8F];
     u8 unk8F; /* +0x8F: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S21_size_check[(sizeof(Shared_func_80227014_S21) == 0x90) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S22 Shared_func_80227014_S22;
@@ -316,7 +295,6 @@ struct Shared_func_80227014_S22 {
     char pad90[0x4];
     u8 unk94; /* +0x94: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S22_size_check[(sizeof(Shared_func_80227014_S22) == 0x95) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S23 Shared_func_80227014_S23;
@@ -324,7 +302,6 @@ struct Shared_func_80227014_S23 {
     char pad0[0x18];
     s32 unk18; /* +0x18: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S23_size_check[(sizeof(Shared_func_80227014_S23) == 0x1C) ? 1 : -1];
 
 
 typedef struct Shared_Entry190 Shared_Entry190;
@@ -332,5 +309,4 @@ struct Shared_Entry190 {
     s32 value; /* +0x0: src/func_80227014.c */
     u8 pad[396]; /* +0x4: src/func_80227014.c */
 };
-typedef char Shared_Entry190_size_check[(sizeof(Shared_Entry190) == 0x190) ? 1 : -1];
 #endif

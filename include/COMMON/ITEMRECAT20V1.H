@@ -805,11 +805,6 @@ struct ListScreenRecord {
 struct ObjRecAt14V1;
 typedef struct ObjRecAt14V1 ObjRecAt14V1;
 
-struct func_80204EA8_S1;
-struct func_80204EA8_S1 {
-    char pad0[0x8];
-    Triple unk8;
-};
 
 extern IntrusiveList D_80137064;
 
@@ -1114,8 +1109,6 @@ struct func_80255BEC_S1;
 typedef struct func_80255BEC_S1 func_80255BEC_S1;
 
 
-struct func_80204EA8_S1;
-typedef struct func_80204EA8_S1 func_80204EA8_S1;
 
 struct __OSDir;
 typedef struct __OSDir __OSDir;
@@ -1809,11 +1802,6 @@ struct ALFilter_s_func_802B3000_de {
 struct Field_u16_14;
 typedef struct Field_u16_14 Field_u16_14;
 
-struct func_804360F4_S2;
-struct func_804360F4_S2 {
-    char pad0[0x1C];
-    void * unk1C;
-};
 
 struct ALFilter_s_func_802B3000_de;
 struct ALVoice_s_func_802B3000_de;
@@ -2191,8 +2179,6 @@ struct ObjRecAt40V1 {
 
 
 
-struct func_804360F4_S2;
-typedef struct func_804360F4_S2 func_804360F4_S2;
 
 
 struct SlotRecAt0V1;
@@ -2496,8 +2482,6 @@ struct func_80203908_S4 {
 struct ObjRecAtDC;
 typedef struct ObjRecAtDC ObjRecAtDC;
 
-struct func_8020D9C0_S1;
-typedef struct func_8020D9C0_S1 func_8020D9C0_S1;
 
 
 struct ALFilter_s_func_802B3000_de;
@@ -2580,11 +2564,6 @@ struct WeaponInfo;
 typedef struct WeaponInfo WeaponInfo;
 
 
-struct func_8020D9C0_S1;
-struct func_8020D9C0_S1 {
-    char pad0[0x14];
-    f32 unk14;
-};
 
 extern int D_800CC388;
 

@@ -10,17 +10,6 @@ struct SceneEffectPool;
 
 
 
-struct func_802626BC_S1;
-struct func_802626BC_S1 {
-    char pad0[0x4];
-    u16 unk4;
-    char pad4[0x8 - 0x4 - sizeof(u16)];
-    u16 unk8;
-    char pad8[0xC - 0x8 - sizeof(u16)];
-    s32 unkC;
-    char padC[0x10 - 0xC - sizeof(s32)];
-    func_802626BC_S1_U10 unk10;
-};
 
 struct ObjRecAt5F14;
 typedef struct ObjRecAt5F14 ObjRecAt5F14;
@@ -100,8 +89,6 @@ struct ObjectLinks5F28 {
     s32 unk_5F24;
 };
 
-union func_80262EA8_S1_U5F14;
-typedef union func_80262EA8_S1_U5F14 func_80262EA8_S1_U5F14;
 
 struct Effect_func_80262E88_de;
 struct Effect_func_80262E88_de {
@@ -118,19 +105,7 @@ struct Effect_func_80262E88_de {
 };
 
 struct Effect_func_80262E88_de;
-union func_80262EA8_S1_U5F14;
-union func_80262EA8_S1_U5F14 {
-    struct Effect_func_80262E88_de * v0;
-    char v1;
-};
 
-struct func_80262EA8_S1;
-struct func_80262EA8_S1 {
-    char pad0[0x5F00];
-    IntrusiveList unk5F00;
-    char pad5F00[0x5F14 - 0x5F00 - sizeof(IntrusiveList)];
-    IntrusiveList unk5F14;
-};
 
 struct ObjectLinks5F28;
 typedef struct ObjectLinks5F28 ObjectLinks5F28;
@@ -138,8 +113,6 @@ typedef struct ObjectLinks5F28 ObjectLinks5F28;
 struct Record_func_802627A0_de;
 typedef struct Record_func_802627A0_de Record_func_802627A0_de;
 
-struct func_802626BC_S1;
-typedef struct func_802626BC_S1 func_802626BC_S1;
 
 extern void func_802624A8_de(void *arg0);
 
@@ -151,14 +124,7 @@ typedef struct BitReader BitReader;
 
 extern float D_800C4258_de;
 
-union func_80262ABC_S1_U5F00;
-typedef union func_80262ABC_S1_U5F00 func_80262ABC_S1_U5F00;
 
-union func_80262ABC_S1_U5F00;
-union func_80262ABC_S1_U5F00 {
-    struct SceneEffect * v0;
-    char v1;
-};
 
 struct ObjRecAt5F14;
 struct ObjRecAt5F14 {
@@ -187,8 +153,6 @@ struct ResourceBitGrid {
     s16 cells[17 * 17];
 };
 
-struct func_80262EA8_S1;
-typedef struct func_80262EA8_S1 func_80262EA8_S1;
 
 struct ResourceEntry;
 struct ResourceEntry {

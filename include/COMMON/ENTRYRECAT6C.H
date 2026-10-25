@@ -29,8 +29,6 @@ struct Triple;
 
 
 
-struct IntegerState346C;
-typedef struct IntegerState346C IntegerState346C;
 
 
 
@@ -75,13 +73,6 @@ typedef struct IntegerStateBC0 IntegerStateBC0;
 
 
 
-struct func_80435898_S1;
-struct func_80435898_S1 {
-    char pad0[0xC];
-    s8 unkC;
-    char padC[0xD - 0xC - sizeof(s8)];
-    s8 unkD;
-};
 
 extern int D_800E54A0;
 
@@ -95,11 +86,6 @@ extern int D_800E54A0;
 
 
 
-struct IntegerState346C;
-struct IntegerState346C {
-    char pad0[0x3468];
-    s32 unk_3468;
-};
 
 
 
@@ -131,16 +117,7 @@ struct State_func_80434D70_de {
     s32 selected;
 };
 
-struct IntegerState3470;
-struct IntegerState3470 {
-    char pad0[0x3468];
-    s32 unk_3468;
-    char pad3468[0x346C - 0x3468 - sizeof(s32)];
-    s32 unk_346C;
-};
 
-struct func_80435898_S1;
-typedef struct func_80435898_S1 func_80435898_S1;
 
 extern float D_800E1EF8;
 
@@ -159,8 +136,6 @@ typedef struct ObjectState71 ObjectState71;
 
 
 
-struct IntegerState3470;
-typedef struct IntegerState3470 IntegerState3470;
 
 
 extern void func_804355E8_de(void);

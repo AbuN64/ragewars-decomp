@@ -18,16 +18,7 @@ struct CartridgeReadWorker {
     IntrusiveList pending; /* 0x507C */
 };
 
-struct func_802566A8_S1;
-struct func_802566A8_S1 {
-    char pad0[0x5068];
-    char unk5068;
-    char pad5068[0x507C - 0x5068 - sizeof(char)];
-    char unk507C;
-};
 
-struct func_802566A8_S1;
-typedef struct func_802566A8_S1 func_802566A8_S1;
 
 
 
@@ -41,35 +32,9 @@ typedef struct Item57BD4 Item57BD4;
 struct Chunk;
 
 
-struct func_8025663C_S1;
-struct func_8025663C_S1 {
-    char pad0[0x5068];
-    IntrusiveList unk5068;
-    char pad5068[0x507C - 0x5068 - sizeof(IntrusiveList)];
-    char unk507C;
-};
 
 extern int D_800CB708;
 
-struct func_8025844C_S1;
-struct func_8025844C_S1 {
-    char pad0[0x104];
-    s32 unk104;
-    char pad104[0x134 - 0x104 - sizeof(s32)];
-    s32 unk134;
-    char pad134[0x1DB8 - 0x134 - sizeof(s32)];
-    void * unk1DB8;
-    char pad1DB8[0x2BA0 - 0x1DB8 - sizeof(void*)];
-    f32 unk2BA0;
-    char pad2BA0[0x2BA4 - 0x2BA0 - sizeof(f32)];
-    f32 unk2BA4;
-    char pad2BA4[0x2BA8 - 0x2BA4 - sizeof(f32)];
-    f32 unk2BA8;
-    char pad2BA8[0x2BB0 - 0x2BA8 - sizeof(f32)];
-    s32 unk2BB0;
-    char pad2BB0[0x2BB4 - 0x2BB0 - sizeof(s32)];
-    s32 unk2BB4;
-};
 
 extern int D_800CB714;
 
@@ -92,19 +57,6 @@ struct Handles {
     s16 handles[17];
 };
 
-struct func_80257A34_S1;
-struct func_80257A34_S1 {
-    char pad0[0x7C];
-    Handles unk7C;
-    char pad7C[0x110 - 0x7C - sizeof(Handles)];
-    char unk110;
-    char pad110[0x138 - 0x110 - sizeof(char)];
-    char unk138;
-    char pad138[0x1DB8 - 0x138 - sizeof(char)];
-    char unk1DB8;
-    char pad1DB8[0x1DBC - 0x1DB8 - sizeof(char)];
-    char unk1DBC;
-};
 
 extern int D_801076A0;
 
@@ -166,8 +118,6 @@ struct Voice {
     f32 volumeScale;
 };
 
-struct func_80257BD4_S1;
-typedef struct func_80257BD4_S1 func_80257BD4_S1;
 
 struct CartridgeReadWorker;
 typedef struct CartridgeReadWorker CartridgeReadWorker;
@@ -176,21 +126,6 @@ extern Window *D_80107DF4[];
 extern u32 D_800CB700_de;
 extern u32 D_800CB704_de;
 
-struct func_80257BD4_S1;
-struct func_80257BD4_S1 {
-    char pad0[0x110];
-    char unk110;
-    char pad110[0x138 - 0x110 - sizeof(char)];
-    char unk138;
-    char pad138[0x1DB8 - 0x138 - sizeof(char)];
-    char unk1DB8;
-    char pad1DB8[0x2B8C - 0x1DB8 - sizeof(char)];
-    s16 unk2B8C;
-    char pad2B8C[0x2B90 - 0x2B8C - sizeof(s16)];
-    s32 unk2B90;
-    char pad2B90[0x2B98 - 0x2B90 - sizeof(s32)];
-    void * unk2B98;
-};
 
 struct ObjectLinksC;
 
@@ -204,8 +139,6 @@ struct CacheEntry {
     char data[0x80];
 };
 
-struct func_80257A34_S1;
-typedef struct func_80257A34_S1 func_80257A34_S1;
 
 struct ObjectLinksC;
 typedef struct ObjectLinksC ObjectLinksC;
@@ -213,18 +146,13 @@ typedef struct ObjectLinksC ObjectLinksC;
 struct CartridgeReadRequest;
 typedef struct CartridgeReadRequest CartridgeReadRequest;
 
-struct func_8025663C_S1;
-typedef struct func_8025663C_S1 func_8025663C_S1;
 
 struct CacheEntry;
 typedef struct CacheEntry CacheEntry;
 
 
-struct func_8025844C_S1;
-typedef struct func_8025844C_S1 func_8025844C_S1;
 
 #include "COMMON/AUDIO_QUEUES.H"
 #include "COMMON/AUDIO_SYNTH.H"
 extern u32 D_800CB70C_de;
-typedef char Voice_size_check[(sizeof(Voice) == 0xCC) ? 1 : -1];
 #endif

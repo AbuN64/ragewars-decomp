@@ -67,8 +67,6 @@ struct MatchScoreScreen;
 typedef struct MatchScoreScreen MatchScoreScreen;
 typedef struct MatchScoreScreen func_8042CE54_S1;
 
-struct IntegerStateF4;
-typedef struct IntegerStateF4 IntegerStateF4;
 
 struct ResourceBank;
 typedef struct ResourceBank ResourceBank;
@@ -78,8 +76,6 @@ struct ResourceBank {
     u16 ids[20];
 };
 
-struct Screen_func_8042DC04_de;
-typedef struct Screen_func_8042DC04_de Screen_func_8042DC04_de;
 
 struct MatchScoreScreen {
     s32 transition[7];
@@ -96,8 +92,6 @@ struct MatchScoreScreen {
 };
 
 
-struct IntegerState330;
-typedef struct IntegerState330 IntegerState330;
 
 
 struct Shared_Rec3;
@@ -105,21 +99,7 @@ typedef struct Shared_Rec3 Shared_Rec3;
 
 extern void func_8042D118_de();
 
-struct Object_func_8042DD00_de;
-struct Object_func_8042DD00_de {
-    char pad[0x14];
-    char text[0xC];
-    s32 value;
-};
 
-struct Screen_func_8042DC04_de;
-struct Screen_func_8042DC04_de {
-    int window;
-    char pad4[12];
-    int state;
-    char pad14[12];
-    int count;
-};
 
 extern void func_8042D034_de(void);
 
@@ -127,16 +107,10 @@ extern void func_8042D034_de(void);
 struct Game_func_8042D060_de;
 typedef struct Game_func_8042D060_de Game_func_8042D060_de;
 
-struct IntegerState330;
-struct IntegerState330 {
-    char pad0[0x32C];
-    s32 unk_32C;
-};
 
 
 extern void func_8042D418_de(s32 arg0);
 
-struct MatchState;
 
 extern s32 Frontend_GetMatchEndReason();
 
@@ -149,11 +123,6 @@ struct SlotRecAt7F {
     char pad80[0x16];
 };
 
-struct IntegerStateF4;
-struct IntegerStateF4 {
-    unsigned char padding_0[240];
-    s32 unk_F0;
-};
 
 extern void func_8042CFB0_de(void);
 

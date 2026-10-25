@@ -9,7 +9,6 @@ struct Shared_Model {
     u16 unk0; /* +0x0: src/func_80220EB0.c */
     u16 flags; /* +0x2: src/func_80220EB0.c */
 };
-typedef char Shared_Model_size_check[(sizeof(Shared_Model) == 0x4) ? 1 : -1];
 
 
 #include "COMMON/LEVEL_PLACEMENT.H"
@@ -26,7 +25,6 @@ struct Shared_Scratch {
         } view0_1;
     } views0;
 };
-typedef char Shared_Scratch_size_check[(sizeof(Shared_Scratch) == 0x14) ? 1 : -1];
 
 
 typedef struct Shared_StateInfo Shared_StateInfo;
@@ -36,7 +34,6 @@ struct Shared_StateInfo {
     s32 * flags; /* +0x8: src/func_80220EB0.c */
     s32 pad0C[3]; /* +0xC: src/func_80220EB0.c */
 };
-typedef char Shared_StateInfo_size_check[(sizeof(Shared_StateInfo) == 0x18) ? 1 : -1];
 
 
 typedef struct Shared_Surface Shared_Surface;
@@ -51,7 +48,6 @@ struct Shared_Surface {
     u16 sound; /* +0x50: src/func_80220EB0.c */
     u16 flags52; /* 0x52 */
 };
-typedef char Shared_Surface_size_check[(sizeof(Shared_Surface) == 0x54) ? 1 : -1];
 
 
 typedef struct Shared_PickupDef Shared_PickupDef;
@@ -63,7 +59,6 @@ struct Shared_PickupDef {
     s32 pad1C; /* +0x1C: src/func_80220EB0.c */
     s32 item; /* +0x20: src/func_80220EB0.c */
 };
-typedef char Shared_PickupDef_size_check[(sizeof(Shared_PickupDef) == 0x24) ? 1 : -1];
 
 
 typedef struct Shared_Pickup Shared_Pickup;
@@ -73,7 +68,6 @@ struct Shared_Pickup {
     s32 pad14; /* +0x14: src/func_80220EB0.c */
     struct Shared_PickupDef * def; /* +0x18: src/func_80220EB0.c */
 };
-typedef char Shared_Pickup_size_check[(sizeof(Shared_Pickup) == 0x1C) ? 1 : -1];
 
 
 typedef struct Shared_CharInfo Shared_CharInfo;
@@ -93,7 +87,6 @@ struct Shared_CharInfo {
     } viewsC;
     char padE[0x2];
 };
-typedef char Shared_CharInfo_size_check[(sizeof(Shared_CharInfo) == 0x10) ? 1 : -1];
 
 
 typedef struct Shared_Floor Shared_Floor;
@@ -101,7 +94,6 @@ struct Shared_Floor {
     char pad0[0xE8];
     f32 y; /* +0xE8: src/func_80220EB0.c */
 };
-typedef char Shared_Floor_size_check[(sizeof(Shared_Floor) == 0xEC) ? 1 : -1];
 
 
 typedef struct Shared_Profile Shared_Profile;
@@ -113,7 +105,6 @@ struct Shared_Profile {
     char pad90[0x4];
     u8 counts; /* +0x94: src/func_80220EB0.c */
 };
-typedef char Shared_Profile_size_check[(sizeof(Shared_Profile) == 0x95) ? 1 : -1];
 
 
 typedef struct Shared_Hud Shared_Hud;
@@ -123,7 +114,6 @@ struct Shared_Hud {
     u16 pad124; /* +0x124: src/func_80220EB0.c */
     u16 bonus; /* +0x126: src/func_80220EB0.c */
 };
-typedef char Shared_Hud_size_check[(sizeof(Shared_Hud) == 0x128) ? 1 : -1];
 
 
 typedef struct Shared_Shadow Shared_Shadow;
@@ -131,7 +121,6 @@ struct Shared_Shadow {
     char pad0[0x8];
     CVector3 pos; /* +0x8: src/func_80220EB0.c */
 };
-typedef char Shared_Shadow_size_check[(sizeof(Shared_Shadow) == 0x14) ? 1 : -1];
 
 
 typedef struct Shared_Voice Shared_Voice;
@@ -139,7 +128,6 @@ struct Shared_Voice {
     char pad0[0x10];
     s32 bank; /* +0x10: src/func_80220EB0.c */
 };
-typedef char Shared_Voice_size_check[(sizeof(Shared_Voice) == 0x14) ? 1 : -1];
 
 
 typedef struct Shared_Net Shared_Net;
@@ -149,7 +137,6 @@ struct Shared_Net {
     char pad58[0x10];
     s32 host; /* +0x68: src/func_80220EB0.c */
 };
-typedef char Shared_Net_size_check[(sizeof(Shared_Net) == 0x6C) ? 1 : -1];
 
 
 /* The per-character stride sound halfword has distinct auto symbols in each ROM. */

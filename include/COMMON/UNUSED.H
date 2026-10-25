@@ -442,10 +442,6 @@ extern int D_002B2BBC(void * arg0);
 
 extern char *D_8011CA18[];
 
-typedef struct StringBankEntry {
-    u32 offset; /* byte offset of the bank's first string */
-    s32 count;
-} StringBankEntry;
 
 extern FieldRow D_800E5834[];
 
@@ -2579,8 +2575,6 @@ typedef struct ALADPCMloop ALADPCMloop;
 
 
 
-struct ALDelay28_2;
-typedef struct ALDelay28_2 ALDelay28_2;
 
 struct ALDelay_func_802B5B94_de;
 typedef struct ALDelay_func_802B5B94_de ALDelay_func_802B5B94_de;
@@ -2657,8 +2651,6 @@ typedef struct AnglesRecAt8 AnglesRecAt8;
 struct Animator;
 typedef struct Animator Animator;
 
-struct ArenaPageNode;
-typedef struct ArenaPageNode ArenaPageNode;
 
 
 
@@ -2672,8 +2664,6 @@ typedef struct BankCode8044E2B8 BankCode8044E2B8;
 struct Binding;
 typedef struct Binding Binding;
 
-struct BlinkFrame;
-typedef struct BlinkFrame BlinkFrame;
 
 
 struct Block12;
@@ -2697,8 +2687,6 @@ typedef struct CallbackState114 CallbackState114;
 
 
 
-struct CameraRecord;
-typedef struct CameraRecord CameraRecord;
 
 struct Camera_func_8026851C_de;
 typedef struct Camera_func_8026851C_de Camera_func_8026851C_de;
@@ -2707,8 +2695,6 @@ typedef struct Camera_func_8026851C_de Camera_func_8026851C_de;
 
 
 
-struct CharacterScreenEntry;
-typedef struct CharacterScreenEntry CharacterScreenEntry;
 
 
 
@@ -2774,15 +2760,9 @@ struct Ent;
 typedef struct Ent Ent;
 
 
-struct EntityCode8041BEA8;
-typedef struct EntityCode8041BEA8 EntityCode8041BEA8;
 
 
-struct EntryCode80296014;
-typedef struct EntryCode80296014 EntryCode80296014;
 
-struct Entry_func_80297EA4_de;
-typedef struct Entry_func_80297EA4_de Entry_func_80297EA4_de;
 
 struct Entry_func_80298170_de;
 typedef struct Entry_func_80298170_de Entry_func_80298170_de;
@@ -2864,15 +2844,9 @@ typedef struct KeyRecAt10 KeyRecAt10;
 
 
 
-struct LevelSpawnLevelObject;
-typedef struct LevelSpawnLevelObject LevelSpawnLevelObject;
 
 
-struct LevelSpawnLevelRecord;
-typedef struct LevelSpawnLevelRecord LevelSpawnLevelRecord;
 
-struct LevelSpawnLevelSlot;
-typedef struct LevelSpawnLevelSlot LevelSpawnLevelSlot;
 
 
 
@@ -2898,24 +2872,18 @@ typedef struct Loadout Loadout;
 
 
 
-struct Match;
-typedef struct Match Match;
 
 
 
 struct MatchRewardsRecord;
 typedef struct MatchRewardsRecord MatchRewardsRecord;
 
-struct MatchRewardsStatus;
-typedef struct MatchRewardsStatus MatchRewardsStatus;
 
 
 
 struct MatchSetupName;
 typedef struct MatchSetupName MatchSetupName;
 
-struct MatchSetupPlayer;
-typedef struct MatchSetupPlayer MatchSetupPlayer;
 
 
 struct MatchSetupRecord;
@@ -2959,8 +2927,6 @@ struct Node_func_8020D364_de;
 typedef struct Node_func_8020D364_de Node_func_8020D364_de;
 
 
-struct Node_func_8041D4E0_de;
-typedef struct Node_func_8041D4E0_de Node_func_8041D4E0_de;
 
 
 
@@ -3017,8 +2983,6 @@ typedef struct ObjRecAt174 ObjRecAt174;
 
 
 
-struct ObjectCode80400000;
-typedef struct ObjectCode80400000 ObjectCode80400000;
 
 struct ParticleView;
 typedef struct ParticleView ParticleView;
@@ -3049,16 +3013,10 @@ struct PakNotesMenuItem;
 typedef struct PakNotesMenuItem PakNotesMenuItem;
 
 
-struct PakSavePakSlot;
-typedef struct PakSavePakSlot PakSavePakSlot;
 
 
 
-struct PakSearchPlayer;
-typedef struct PakSearchPlayer PakSearchPlayer;
 
-struct PakSlot;
-typedef struct PakSlot PakSlot;
 
 
 struct PakStatusPakSaveMenu;
@@ -3105,8 +3063,6 @@ struct PlayerRankInner;
 typedef struct PlayerRankInner PlayerRankInner;
 
 
-union PlayerResultsContextValue28;
-typedef union PlayerResultsContextValue28 PlayerResultsContextValue28;
 
 
 
@@ -3114,13 +3070,9 @@ struct PlayerSelectionItem;
 typedef struct PlayerSelectionItem PlayerSelectionItem;
 
 
-struct PlayerSelectionPlayer;
-typedef struct PlayerSelectionPlayer PlayerSelectionPlayer;
 
 
 
-struct PlayerStatusPlayer;
-typedef struct PlayerStatusPlayer PlayerStatusPlayer;
 
 struct Player_func_80212D78_eu_x;
 typedef struct Player_func_80212D78_eu_x Player_func_80212D78_eu_x;
@@ -3171,11 +3123,7 @@ struct RosterEntry;
 typedef struct RosterEntry RosterEntry;
 
 
-struct Rules84;
-typedef struct Rules84 Rules84;
 
-struct RulesAC;
-typedef struct RulesAC RulesAC;
 
 
 struct Runtime;
@@ -3194,12 +3142,8 @@ typedef struct ScreenState ScreenState;
 struct Selection;
 typedef struct Selection Selection;
 
-struct SelectionSprite;
-typedef struct SelectionSprite SelectionSprite;
 
 
-struct SessionScreenRecord;
-typedef struct SessionScreenRecord SessionScreenRecord;
 
 
 struct Settings20;
@@ -3343,8 +3287,6 @@ typedef struct TrailState TrailState;
 
 
 
-struct Value;
-typedef struct Value Value;
 
 struct Variable;
 typedef struct Variable Variable;
@@ -3377,8 +3319,6 @@ typedef struct WeaponMenuPlayer WeaponMenuPlayer;
 struct WeaponMenuView;
 typedef struct WeaponMenuView WeaponMenuView;
 
-struct WidgetHandler;
-typedef struct WidgetHandler WidgetHandler;
 
 
 
@@ -3475,25 +3415,8 @@ struct ALADPCMWaveInfo {
     ALADPCMloop *loop;
     ALADPCMBook *book;
 };
-typedef signed int ( *ALOscInit)(void * *, float *, unsigned char, unsigned char, unsigned char, unsigned char);
-typedef void ( *ALOscStop)(void *);
-typedef signed int ( *ALOscUpdate)(void *, float *);
 struct Opaque_ALLowPass_s;
 typedef struct Opaque_ALLowPass_s Opaque_ALLowPass;
-struct ALDelay28_2;
-struct ALDelay28_2 {
-    u32 input;
-    u32 output;
-    s16 ffcoef;
-    s16 fbcoef;
-    s16 gain;
-    f32 rsinc;
-    f32 rsval;
-    s32 rsdelta;
-    f32 rsgain;
-    Opaque_ALLowPass *lp;
-    void *rs;
-};
 struct ALDelay_func_802B5B94_de;
 struct ALDelay_func_802B5B94_de {
     u32 input;
@@ -3645,7 +3568,6 @@ union ALSndpEvent_func_802B2780_de {
         u8 mix;
     } fx;
 };
-typedef void ( *SharedCallback10)(void *, void *);
 struct Access_s8_E6;
 struct Brain_func_80212D78_eu_x;
 struct Player_func_80212D78_eu_x;
@@ -3702,15 +3624,6 @@ struct AnglesRecAt8 {
     s16 pad0A;
 };
 struct Animator;
-struct ArenaPageNode;
-struct ArenaPageNode {
-    char pad0[0x10];
-    u8 alpha;
-    char pad11[5];
-    s16 unk_16;
-    char pad18[2];
-    s16 unk_1A;
-};
 struct Attachment;
 struct Attachment {
     char pad0[2];
@@ -3729,11 +3642,6 @@ struct Binding {
     char pad8[16];
     void *(*storage)(void);
 };
-struct BlinkFrame;
-struct BlinkFrame {
-    u8 pad0[3];
-    u8 value;
-};
 struct Shape_func_80299E74_de_2;
 struct Block12;
 struct Block12 {
@@ -3742,21 +3650,12 @@ struct Block12 {
 struct Bytes12;
 struct Shape_typemap_13;
 struct Triple;
-typedef void ( *SharedCallback14)(void *, void *, signed int, struct Triple, struct Shape_typemap_13);
-typedef void ( *PrimaryCallback)(signed int, signed int, void *);
-typedef void ( *SecondaryCallback)(void *);
 struct CallbackState114;
 struct CallbackState114 {
     char pad0[0x110];
     VoidCallback callback;
 };
-typedef void ( *SharedCallback8)(void *, void *);
 typedef void ( *ContextCallback)(void *);
-struct CameraRecord;
-struct CameraRecord {
-    Floats first;
-    char tail[0x54 - sizeof(Floats)];
-};
 struct Camera_func_8026851C_de;
 struct Rec_func_8024C92C_de;
 struct MatchSetupSprite;
@@ -3768,29 +3667,8 @@ struct MatchSetupSprite {
     char pad16[0x18 - 0x16];
     s16 width;
 };
-struct CharacterScreenEntry;
 struct MatchSetupSprite;
-struct CharacterScreenEntry {
-    char pad0[0x4A8];
-    s32 unk_4A8;
-    s32 column;
-    char pad4B0[0x4C8 - 0x4B0];
-    struct MatchSetupSprite *item;
-    s32 mode;
-};
-struct CharacterScreenEntry;
 struct MatchSetupSprite;
-struct SelectionSprite;
-struct SelectionSprite {
-    char p[12];
-    short unkC;
-    char pe[2];
-    u8 unk10;
-    char p11[3];
-    short unk14;
-    short unk16;
-};
-struct SelectionSprite;
 struct ContextRecAt2BC0;
 
 struct ContextRecAt104;
@@ -4133,20 +4011,6 @@ struct Effect_func_8026851C_de {
     struct Effect_func_8026851C_de *child;
 };
 struct Ent;
-struct EntityCode8041BEA8;
-struct EntityCode8041BEA8 {
-    char p0[8];
-    CVector3 pos;
-    char p14[0x58];
-    f32 scale;
-    char p70[0x9e];
-    signed char flag;
-    char p10f[0x31];
-    Box bounds;
-    Box oldbounds;
-    char p170[0x54];
-    CVector3 saved;
-};
 struct Entry_func_8044D794_de;
 struct Entry_func_8044D794_de {
     char pad0[4];
@@ -4173,37 +4037,6 @@ struct SlotRecAt0V2 {
     char pad4[0x34];
 };
 struct FrameCode8044E2B8;
-struct Rules84;
-struct Rules84 {
-    char pad0[0x14];
-    f32 timeLeft;
-    s32 scoreLimit;
-    s32 unk_1C;
-    char pad20[0x24 - 0x20];
-    s32 teamGame;
-    s32 unk_28;
-    s32 teamScore[5];
-    s32 teamPoints[5];
-    s32 fragTag;
-    s32 tagLimit;
-    char pad5C[0x6C - 0x5C];
-    s32 roundLength;
-    char pad70[0x78 - 0x70];
-    s32 unk_78;
-    s32 pointTarget;
-    s32 unk_80;
-};
-struct RulesAC;
-struct RulesAC {
-    char pad0[0x18];
-    s32 scoreLimit;
-    char pad1C[0x24 - 0x1C];
-    s32 teamGame;
-    char pad28[0x2C - 0x28];
-    s32 teamScore[5];
-    char pad40[0xA8 - 0x40];
-    s32 humanWon;
-};
 struct RosterEntry;
 struct RosterEntry {
     char pad0[0x78];
@@ -4233,12 +4066,6 @@ struct Settings20 {
     u8 trialKind;
     char padE[0x1D - 0xE];
     u8 replay;
-};
-struct Match;
-struct Match {
-    Settings20 settings;
-    char padSettings[0x5D8 - sizeof(Settings20)];
-    func_8025BB9C_S1 rules;
 };
 struct ParticleView;
 struct ParticleView {
@@ -4281,13 +4108,7 @@ struct Record_func_8043E2D8_de {
     char pad[0x83];
     u8 value;
 };
-struct Owner_func_8043E2D8_de;
 struct Record_func_8043E2D8_de;
-struct Owner_func_8043E2D8_de {
-    char pad[0x5D8];
-    struct Record_func_8043E2D8_de *record;
-};
-struct Owner_func_8043E2D8_de;
 struct PakMenuSlot;
 struct Effect_func_8026851C_de;
 struct HudCue;
@@ -4319,32 +4140,6 @@ struct KeyRecAt10 {
     char pad0[0xC];
     f32 value;
     f32 time;
-};
-struct LevelSpawnLevelObject;
-struct LevelSpawnLevelObject {
-    char pad0[8];
-    CVector3 pos;
-    char pad14[4];
-    s32 *kind;
-    char pad1C[0x1D8 - 0x1C];
-    struct LevelSpawnLevelObject *target;
-    char pad1DC[0x2E8 - 0x1DC];
-};
-struct LevelSpawnLevelRecord;
-struct LevelSpawnLevelRecord {
-    s32 pad0;
-    CVector3 pos;
-    char pad10[0x20 - 0x10];
-    u16 zone;
-    u16 id;
-    s16 angle;
-    char pad26[0x28 - 0x26];
-};
-struct LevelSpawnLevelSlot;
-struct LevelSpawnLevelSlot {
-    char pad0[0x80];
-    s8 kind;
-    char pad81[0x96 - 0x81];
 };
 struct LevelCode8044ACCC;
 struct Params_func_80283A80_de;
@@ -4406,21 +4201,6 @@ struct ListScreenScreen {
     s32 unk_46C;
 };
 struct SlotRecAt7F;
-typedef signed int ( *SharedCallback16)(signed int, signed int, signed int, signed int);
-typedef void ( *SharedCallback15)(signed int, signed int, signed int, signed int);
-struct MatchRewardsStatus;
-struct MatchRewardsStatus {
-    s16 wins;
-    s16 losses;
-    s16 score;
-    char pad6[0xA - 0x6];
-    s16 kills;
-    char padC[0x78 - 0xC];
-    u8 active;
-    char pad79[0x91 - 0x79];
-    u8 out;
-    char pad92[0x96 - 0x92];
-};
 struct MatchRewardsRecord;
 struct MatchRewardsRecord {
     char pad0[0x26];
@@ -4441,36 +4221,6 @@ struct MatchSetupRecord;
 struct MatchSetupRecord {
     char pad0[0x190];
 };
-struct MatchSetupPlayer;
-struct MatchSetupPlayer {
-    s32 state;
-    s32 sub;
-    s32 next;
-    s32 menu;
-    MatchSetupSprite *sprite;
-    s32 back;
-    MatchSetupRecord records[4];
-    MatchSetupName names[16];
-    u8 codes[3][0xA];
-    char padAD6[0xAD8 - 0xAD6];
-    s32 slot;
-    char padADC[0xAEC - 0xADC];
-    s32 choice;
-    s32 used[4];
-    s32 notes[4];
-    char padB10[0xB28 - 0xB10];
-    s32 port;
-    s32 record;
-    s32 host;
-    char padB34[0xB64 - 0xB34];
-    s32 profile;
-};
-struct Node_func_8041D4E0_de;
-struct Node_func_8041D4E0_de {
-    u8 pad0[0xC];
-    s16 unkC;
-};
-struct Node_func_8041D4E0_de;
 struct Variable;
 struct Variable {
     int unk0;
@@ -4581,22 +4331,7 @@ struct ObjRecAt174 {
     char gap2[0x174-0x11c];
     CVector3 direction;
 };
-struct Value;
-struct Value {
-    s32 pad;
-    u32 kind;
-    char gap[16];
-    void *(*get)(void);
-};
-struct Value;
 struct func_80205628_S3;
-struct ObjectCode80400000;
-struct ObjectCode80400000 {
-    s32 header[2];
-    CVector3 position;
-    char pad14[0x58];
-    f32 yaw;
-};
 struct Object_func_80443128_de;
 struct OptionsOpenItem;
 struct OptionsOpenItem {
@@ -4651,34 +4386,6 @@ struct PakNotesMenu {
     PakNotesMenuItem *items;
     char pad10[0x10];
     PakMenuSlot *owner;
-};
-struct PakSavePakSlot;
-struct PakSavePakSlot {
-    s32 state;
-    char pad04[0x10];
-    s32 saveState;
-    char record[0xB4C];
-    s32 checksum;
-};
-struct PakSearchPlayer;
-struct PakSearchPlayer {
-    char pad0[0x5D8];
-};
-struct PakSlot;
-struct PakSlot {
-    s32 state;
-    char pad4[8];
-    void *menu;
-    char pad10[0x648];
-    Note notes[16];
-    char pad0AB8[0xA];
-    char used[0xA];
-    char free[0xA];
-    char pad0AD6[2];
-    s32 cursor;
-    s32 scroll;
-    void *items[3];
-    char pad0AEC[0x7C];
 };
 struct PakStatusPakSaveMenu;
 struct PakStatusPakSaveMenu {
@@ -4778,11 +4485,6 @@ struct PlayerRankInner {
     char pad[0x10];
     char **text;
 };
-union PlayerResultsContextValue28;
-union PlayerResultsContextValue28 {
-    char v0;
-    u8 v1;
-};
 struct PlayerSelectionItem;
 struct PlayerSelectionItem {
     char pad0[0x10];
@@ -4791,26 +4493,6 @@ struct PlayerSelectionItem {
     s16 x;
     s16 y;
     s16 w;
-};
-struct PlayerSelectionPlayer;
-struct PlayerSelectionPlayer {
-    PlayerSelectionItem *highlight;
-    s32 unk_4;
-    s32 kind;
-    s32 unk_C;
-    s32 choice;
-    char pad14[4];
-    char model[0x4C0 - 0x18];
-    s32 unk_4C0;
-    s32 pad4C4;
-};
-struct PlayerStatusPlayer;
-struct PlayerStatusPlayer {
-    char pad0[0x5D8];
-    char *record;
-    char pad5DC[0x12EC - 0x5DC];
-    struct PlayerStatusPlayer *partner;
-    unsigned int mode;
 };
 struct ViewRecAt54D;
 struct ViewRecAt54D {
@@ -4899,7 +4581,6 @@ struct ResultsHeadingScreen {
     char padA48[0xA5C - 0xA48];
     s32 record;
 };
-struct LevelSpawnLevelSlot;
 struct ResultsHeadingStage;
 struct ResultsHeadingStage {
     char pad0[0x24];
@@ -4938,12 +4619,6 @@ struct Selection {
     s32 selection;
     u8 pad1C4[4];
     s32 matches;
-};
-struct SessionScreenRecord;
-struct SessionScreenRecord {
-    char pad0[0x78];
-    s8 unk_78;
-    char pad79[0x96 - 0x79];
 };
 /* Shape_func_80206A20_de: partial shape; common base param:func_802079B0_de:r4; size unknown; common-base owner ABI is incomplete or conflicting */
 /* Shape_func_80206DD4_de: partial shape; common base field:param:func_802079B0_de:r4:24; size unknown; common-base owner ABI is incomplete or conflicting */
@@ -6764,26 +6439,6 @@ struct SharedPlayer16E4 {
         } view16E0_2;
     } views16E0;
 };
-struct Opaque_BodyView;
-struct Opaque_CharacterView;
-struct Opaque_ControllerView;
-struct Opaque_CtrlView;
-struct Opaque_HeldView;
-struct Opaque_ModeView;
-struct Opaque_ModelView;
-struct Opaque_MountView;
-struct Opaque_ProfileView;
-struct Opaque_RecordView;
-struct Opaque_RiderView;
-struct Opaque_Shared_BodyView;
-struct Opaque_Shared_HudView;
-struct Opaque_Shared_ModelView;
-struct Opaque_Shared_ProfileView;
-struct Opaque_Shared_StateInfoView;
-struct Opaque_Shared_VoiceView;
-struct Opaque_StateInfoView;
-struct Opaque_TeamInfoView;
-struct Opaque_ViewView;
 struct Settings20;
 struct ObjRecAt8F;
 struct Body;
@@ -8395,7 +8050,6 @@ struct Shared_PoseContext {
     Shared_AnimState *animA;
     Shared_AnimState *animB;
 };
-struct Shared_Item_func_8042BD40;
 struct Shared_func_80261EB8_S1;
 struct Shared_func_80261EB8_S2;
 struct SlotDialog;
@@ -8492,7 +8146,6 @@ struct TextBoundsText {
     s32 field20;
     struct TextBoundsDescriptor *descriptor; /* 0x24 */
 };
-struct ObjectCode80400000;
 struct ItemDef;
 struct ViewRecAtB0;
 struct ContextRecAt104;
@@ -8525,14 +8178,6 @@ struct WeaponMenuView {
 struct WeaponMenuPlayer;
 struct t_dldc;
 typedef signed int ( *WidgetCallback)(void *, struct t_dldc);
-struct WidgetHandler;
-struct WidgetHandler {
-    s32 id;
-    s32 unk_4;
-    s32 unk_8;
-    WidgetCallback callback;
-    s32 unk_10;
-};
 struct Entry_func_802991D4_de;
 struct Slider;
 struct World24;
@@ -8570,7 +8215,6 @@ union fu {
     unsigned int i;
     float f;
 };
-struct func_80244E48_S1;
 struct ObjRecAtCV2;
 struct func_8028C544_S2;
 struct func_8028C544_S2 {
@@ -8581,7 +8225,6 @@ struct func_8028C544_S2 {
 };
 struct Screen_func_80422960_de;
 struct LevelActor;
-struct func_804360F4_S2;
 struct func_8043D2D0_S;
 struct func_8043D2D0_S {
     u8 pad0[0x14];
@@ -8593,8 +8236,6 @@ struct func_8043DD30_S1 {
     char pad0[0x10];
     char **unk14;
 };
-struct ActorDef;
-typedef struct ActorDef ActorDef;
 struct ActorCode80443868;
 typedef struct ActorCode80443868 ActorCode80443868;
 struct Actor_func_8044560C_de;
@@ -8662,8 +8303,6 @@ struct StateInfo;
 typedef struct StateInfo StateInfo;
 struct TablePakUpdateDialogList;
 typedef struct TablePakUpdateDialogList TablePakUpdateDialogList;
-struct TargetPosition;
-typedef struct TargetPosition TargetPosition;
 struct CROMSwoosh_t;
 struct Widget_func_8040C950_de;
 typedef struct Widget_func_8040C950_de Widget_func_8040C950_de;
