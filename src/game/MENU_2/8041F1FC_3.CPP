@@ -307,7 +307,7 @@ void func_80420438_de(s32 player) {
     item->alpha = 0x96;
 }
 
-void func_80420618_de(int player, int choice) {
+void Menu_ApplySlotValueGfx(int player, int choice) {
     int i;
     int j;
     int count;
@@ -352,7 +352,7 @@ void func_80420618_de(int player, int choice) {
     func_80298368_de(D_801462C8->trialKind == 1 ? 10 : 8);
 }
 
-void func_80420850_de(s32 player) {
+void Menu_RandomizeCharacterPreview(s32 player) {
     s32 tries;
     s32 done;
     s32 id;

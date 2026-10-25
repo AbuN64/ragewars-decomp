@@ -49,7 +49,7 @@ s32 Menu_GetSlotValue(s32, s32);
 s32 func_8041B810_de(s32, s32);
 
                         /* extern */
-void func_80420618_de(s32, s32);
+void Menu_ApplySlotValueGfx(s32, s32);
 
                           /* extern */
 
@@ -144,7 +144,7 @@ s32 func_80420C10_de(s32 unused0, s32 unused1, s32 arg2) {
     return 0;
 }
 
-s32 func_80420CDC_de(s32 arg0, s32 arg1, s32 arg2) {
+s32 Menu_ReadSelectionSlot(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_s0;
     s32 choice;
     s32 var_a1;
@@ -155,8 +155,8 @@ s32 func_80420CDC_de(s32 arg0, s32 arg1, s32 arg2) {
     MarkMenuEventHandled();
     characterSelectionRoot = (CharacterSelectionRoot *)((char *)D_800E42D0 + (temp_s0 * 0x4C8));
     if (characterSelectionRoot->phase == 1) {
-        if (choice == SPECIAL_CHAR) func_80420618_de(temp_s0,characterSelectionRoot->choice);
-        else if (func_8040EBD0_de(Menu_GetSlotValue(D_800E42D0->unk4,temp_s0)) == 0) func_80420618_de(temp_s0,choice);
+        if (choice == SPECIAL_CHAR) Menu_ApplySlotValueGfx(temp_s0,characterSelectionRoot->choice);
+        else if (func_8040EBD0_de(Menu_GetSlotValue(D_800E42D0->unk4,temp_s0)) == 0) Menu_ApplySlotValueGfx(temp_s0,choice);
     }
     return 0;
 }

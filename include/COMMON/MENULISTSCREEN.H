@@ -60,8 +60,8 @@ struct State_func_804368F8_de {
     void *e;
 };
 
-struct State_func_804366B8_de;
-struct State_func_804366B8_de {
+struct StateMenuSelectPlayerSettingsEntry;
+struct StateMenuSelectPlayerSettingsEntry {
     char pad0[8];
     void *c;
     void *d;

@@ -59,11 +59,11 @@ void func_804261DC_de(WeaponPlayer *player) {
 }
 
 #include "COMMON/CHARACTERSELECTIONROOT.H"
-extern Match_func_80420618_de D_801462C8;
+extern MatchMenuApplySlotValueGfx D_801462C8;
 extern s32 D_800FF140_de[];
 
 s32 Achieve_MatchQualifies(void) {
-    Match_func_80420618_de *match;
+    MatchMenuApplySlotValueGfx *match;
     s32 i;
     s32 count;
     s32 result;

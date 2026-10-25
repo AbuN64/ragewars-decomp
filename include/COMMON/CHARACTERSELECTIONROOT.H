@@ -5,11 +5,11 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/LABEL.H"
-struct Row_func_80420850_de;
-typedef struct Row_func_80420850_de Row_func_80420850_de;
+struct RowMenuRandomizeCharacterPreview;
+typedef struct RowMenuRandomizeCharacterPreview RowMenuRandomizeCharacterPreview;
 
-struct Row_func_80420850_de;
-struct Row_func_80420850_de {
+struct RowMenuRandomizeCharacterPreview;
+struct RowMenuRandomizeCharacterPreview {
     s32 choice;
     s32 phase;
     s32 costume;
@@ -18,15 +18,15 @@ struct Row_func_80420850_de {
     char tail[0x10];
 };
 
-struct Selection_func_80420850_de;
-struct Selection_func_80420850_de {
+struct SelectionMenuRandomizeCharacterPreview;
+struct SelectionMenuRandomizeCharacterPreview {
     void *screen;
     char pad4[0xC];
-    Row_func_80420850_de rows[8];
+    RowMenuRandomizeCharacterPreview rows[8];
 };
 
-struct Selection_func_80420850_de;
-typedef struct Selection_func_80420850_de Selection_func_80420850_de;
+struct SelectionMenuRandomizeCharacterPreview;
+typedef struct SelectionMenuRandomizeCharacterPreview SelectionMenuRandomizeCharacterPreview;
 
 struct CharacterSelectionRoot;
 struct CharacterSelectionRoot {
@@ -105,8 +105,8 @@ struct Screen_func_80420308_de {
     struct EntryCode8041F1FC entries[4];
 };
 
-struct Match_func_80420618_de;
-typedef struct Match_func_80420618_de Match_func_80420618_de;
+struct MatchMenuApplySlotValueGfx;
+typedef struct MatchMenuApplySlotValueGfx MatchMenuApplySlotValueGfx;
 
 struct Row;
 struct StateFlags;
@@ -115,7 +115,7 @@ struct Row {
     struct StateFlags cells[6];
 };
 
-extern void func_80420850_de(s32 player);
+extern void Menu_RandomizeCharacterPreview(s32 player);
 
 struct RowRecAt18;
 struct StateFlags;
@@ -223,7 +223,7 @@ struct SlotRecAt4 {
     char pad[0x70 - 8];
 };
 
-struct Match_func_80420618_de;
+struct MatchMenuApplySlotValueGfx;
 
 struct State_func_80420C10_de;
 struct State_func_80420C10_de {

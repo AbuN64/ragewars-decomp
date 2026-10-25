@@ -7,7 +7,7 @@
 #include "COMMON/MENULISTSCREEN.H"
 #include "COMMON/CHARACTERSELECTIONROOT.H"
 #include "COMMON/STATERECAT91.H"
-struct Match_func_80420618_de {
+struct MatchMenuApplySlotValueGfx {
     char pad00[0xD];
     unsigned char mode;
     char pad0E[0x16];

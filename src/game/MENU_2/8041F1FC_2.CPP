@@ -16,7 +16,7 @@ extern s32 func_8040EBD0_de(struct WidgetNode *);
 extern struct WidgetNode *Menu_GetSlotValue(struct SlotsCode804196C0 *, s32);
 
 /* Advances the selection panels, cursor highlight and character previews. */
-s32 func_8041F6C8_de(s32 arg0,s32 arg1,s32 arg2) {
+s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
     CVector3 scale;
     f32 temp_f0;
     s16 resource;
@@ -126,14 +126,14 @@ s32 func_8041F6C8_de(s32 arg0,s32 arg1,s32 arg2) {
                                 scale.z = D_800E3A58[temp_v1].scale[i];
                                 Frontend_InitModelPreview(D_800E42D0->players[i].model, 9, temp_s0 + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[temp_v1].position[i], D_800E3A58[temp_v1].distance[i], D_800E3A58[temp_v1].light[i]);
                             } else {
-                                func_80420850_de(i);
+                                Menu_RandomizeCharacterPreview(i);
                             }
                         } else {
                             D_800E42D0->players[i].kind = -1;
                         }
                         func_80420438_de(i);
                     } else if (widgetNode->resource == empty_slot) {
-                        func_80420850_de(i);
+                        Menu_RandomizeCharacterPreview(i);
                     }
                     D_800E42D0->players[i].highlight->x = (s16) ((u16) widgetNode->x - 2);
                     D_800E42D0->players[i].highlight->y = (s16) ((u16) widgetNode->y - 2);

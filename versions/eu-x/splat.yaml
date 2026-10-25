@@ -4560,7 +4560,7 @@ segments:
       - [0xE9970, rodata, data_800C/literals_func_8041EA70_de]
       - [0xE9980, rodata, data_800C/rodata_func_8041F6D8_eu_x_800E8D80]
       - [0xE9984, data, data_800C/rodata_unresolved_800E8D84]
-      - [0xE9988, rodata, data_800C/literals_func_8041F6C8_de]
+      - [0xE9988, rodata, data_800C/literals_Menu_UpdateCharacterPreview]
       - [0xE99B4, rodata, data_800C/literals_func_8041FC50_de]
       - [0xE99CC, data, data_800C/rodata_unresolved_800E8DCC]
       - [0xE99D0, rodata, data_800C/literals_func_804210E8_de]
