@@ -132,6 +132,7 @@ extern PlatformRoute *func_8028D218_de(void *, s32);
 extern CVector3 *func_8028D244_de(void *, s32, s32);
 extern f32 func_802726F8_de(void *, void *);
 
+/* 224/235 aligned (11 edits): regalloc ties only (out/offset giv a0-a1, point/chosen s5-s6; unbake score --alloc). */
 void Nav_AssignPlatformEndpoints(CNavData *graph) {
     NavigationPlatform *platforms[30];
     CVector3 chosenPosition, start, end;
@@ -153,8 +154,8 @@ void Nav_AssignPlatformEndpoints(CNavData *graph) {
     {
         s32 gather = 0;
         NavigationPlatform **out;
-        if (D_8011FE88.actorCount > 0) {
-            out = platforms;
+        out = platforms;
+        if (D_8011BF08 > 0) {
             do {
                 NavigationPlatform *entry = &D_8011BF00[gather];
                 if (entry->objectId == 0x642) {
@@ -163,7 +164,7 @@ void Nav_AssignPlatformEndpoints(CNavData *graph) {
                     count++;
                 }
                 gather++;
-            } while (gather < D_8011FE88.actorCount);
+            } while (gather < D_8011BF08);
         }
     }
     node = graph->nodes;
