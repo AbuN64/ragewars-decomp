@@ -4150,8 +4150,6 @@ segments:
       - [0xC7090, rodata, data_800C/D_802AA7A4_CBF80]
       - [0xC7094, data, data_800C/rodata_unresolved_800C6494]
       - [0xC7098, rodata, data_800C/literals_func_802AA6D0_de]
-      - [0xC70B4, rodata, data_800C/D_802AA864_CBFA4]
-      - [0xC70CC, rodata, data_800C/D_802AAEE4_CBFBC]
       - [0xC70E0, rodata, data_800C/literals_func_802AB0B0_de]
       - [0xC70FC, data, data_800C/rodata_unresolved_800C64FC]
       - [0xC7100, rodata, data_800C/data_func_802ABBDC_de_800C6500]
