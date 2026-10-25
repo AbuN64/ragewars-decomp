@@ -62,7 +62,7 @@ extern struct Shape_typemap_165 * Scene_AllocateResource();
 extern void func_80253838_de(void *arg0, void *arg1);
 extern void func_80253908_de();
 extern s32 func_80254284_de();
-extern void ** func_80254408_de();
+extern void **func_80254408_de(s32 arg0, void *handle, s32 arg2, s32 tempv0, void *world, void *arg5, void *arg6);
 extern void func_8025476C_de();
 extern s32 func_80255228_de();
 extern void func_8025C8D8_de();

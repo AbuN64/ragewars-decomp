@@ -733,7 +733,6 @@ extern f32 D_801518C0[];
 
 extern char D_800D79A8[];
 
-extern char D_800C5210_de[];
 
 extern char D_800D39C8[];
 

@@ -12,6 +12,8 @@
 #include "particle/80271B18_3.H"
 #include "RENDER_4/8028FD2C_6.H"
 
+/* Tag of the cell grid packs (the first .rodata of this unit; the items overlay reads it too). */
+const char D_800C5210_de[] = "grid section";
 extern DraftStreamPair D_801031F8;
 extern char D_00285160[];
 extern s32 Render_LocatePackSection(void *, s32, s32, s32 *);
@@ -64,7 +66,7 @@ void func_80288470_de(DraftStreamWorld *world)
         else {
             world->specialPresent = 1;
             world->special = (void *)func_80254408_de(0, world->specialTable, focusX + focusZ * xCount + 1,
-                world->resourceKey, world, D_00285160, D_800C5220_de);
+                world->resourceKey, world, D_00285160, "Vis Info");
             Scene_LockResource(0, (void *)world->special);
             System_DecodeRegionGrid(world->specialState, focusX, focusZ, world->special->data, &viewers->position);
         }
@@ -115,7 +117,6 @@ finished:
 /* One geometry vertex of a prop's collision mesh (stride from its section header). */
 typedef struct ScenePoint { s16 x, y, z; } ScenePoint;
 extern Gfx *D_80110634;
-extern char D_800C5210_de[], D_800C522C_de[];
 extern void Render_BeginModelBatch(void), Render_FlushModelBatch(void);
 extern struct Shape_typemap_165 *Scene_AllocateResource(s32, s32, u32, void *);
 extern s32 Scene_GetPropModelIndex(Object_func_80288EA8_de *object);
@@ -257,7 +258,7 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     offset += size;
     gSPEndDisplayList(D_80110634++);
     gfxBytes = (u8 *)D_80110634 - (u8 *)firstGfx;
-    handle = Scene_AllocateResource(0, offset + ((gfxBytes + 7) & ~7), 3, D_800C522C_de);
+    handle = Scene_AllocateResource(0, offset + ((gfxBytes + 7) & ~7), 3, "Multi player data");
     world->cacheHandle = handle;
     cache = handle->data;
     world->cache = cache;

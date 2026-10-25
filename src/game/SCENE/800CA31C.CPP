@@ -1,9 +1,5 @@
 #include "include_asm.h"
 
-#if !(defined(VERSION_US_REV1))
-const char D_80288938_CAF1C[18] =
-    "Multi player data\000";
-#endif
 
 #if defined(VERSION_US)
 unsigned short rodata_unresolved_800C516E[1] = {
@@ -29,9 +25,6 @@ unsigned short rodata_unresolved_800C523E[1] = {
 };
 #endif
 
-#if defined(VERSION_US_REV1)
-const char D_auto_src_rw_text_80288938_CAF1C_us_rev1[18] = "Multi player data";
-#endif
 
 #if defined(VERSION_US_REV1)
 unsigned short rodata_unresolved_800CA32E[1] = {

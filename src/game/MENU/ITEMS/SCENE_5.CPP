@@ -43,7 +43,7 @@ extern s32 func_8044D3E8_de(World *world, void *data, s32 group, void *buf);
 
 extern char D_0028798C[];
 
-extern char D_800C5210_de[];
+extern const char D_800C5210_de[];
 
 extern void func_8024F294_de(ObjB *obj, s32 arg1);
 

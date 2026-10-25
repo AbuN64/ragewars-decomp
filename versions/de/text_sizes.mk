@@ -1359,7 +1359,6 @@ build/de/src/game/SCENE/800CA218.CPP.o: NOALIGN := 1
 build/de/src/game/SCENE/800CA244.CPP.o: NOALIGN := 1
 build/de/src/game/SCENE/800CA250_2.CPP.o: NOALIGN := 1
 build/de/src/game/SCENE/800CA2B0.CPP.o: NOALIGN := 1
-build/de/src/game/SCENE/800CA310.CPP.o: NOALIGN := 1
 build/de/src/game/SCENE/800CA31C.CPP.o: NOALIGN := 1
 build/de/src/game/SCENE/800CA3D4.CPP.o: NOALIGN := 1
 build/de/src/game/SCHED/800C86F0.CPP.o: NOALIGN := 1
