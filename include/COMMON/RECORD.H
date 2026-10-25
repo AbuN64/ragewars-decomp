@@ -16,7 +16,7 @@ extern int D_801470A8;
 struct Record_func_802A1990_de;
 typedef struct Record_func_802A1990_de Record_func_802A1990_de;
 
-extern int D_80147060[];
+extern int D_80147060[16];
 
 
 extern int D_800D2C18;
