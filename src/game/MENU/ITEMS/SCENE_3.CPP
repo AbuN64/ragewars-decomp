@@ -19,7 +19,7 @@ extern u8 D_800CBC90[];
 extern u8 D_800CBC94[];
 extern u8 D_800CBC9C[];
 extern u8 D_800CBCA0[];
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 extern void Particle_ScaleVector(f32 *, f32 *, f32);
 void func_8044BE04_de(SceneRecAt1B2B4 *scene) {
     s32 i;
@@ -40,7 +40,7 @@ void func_8044BE04_de(SceneRecAt1B2B4 *scene) {
     v[0] = scene->light->m_Direction[0];
     v[1] = scene->light->m_Direction[1];
     v[2] = scene->light->m_Direction[2];
-    length = func_802B72B0_de(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+    length = Math_Sqrtf(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
     if (length != 0.0f) {
         Particle_ScaleVector(v, v, D_800CA1F0 / length);
         scene->dir[0] = v[0];

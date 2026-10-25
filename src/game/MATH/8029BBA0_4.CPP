@@ -107,7 +107,7 @@ void func_8029CAB4_de(InputRecAt28 *arg0, CVector3 *arg1) {
     if (delta <= 0.0f) {
         root = 0.0f;
     } else {
-        root = func_802B72B0_de(delta);
+        root = Math_Sqrtf(delta);
     }
     angle_temp = D_800C5AC8_de - (root * polynomial);
     if (negative != 0) {
@@ -166,7 +166,7 @@ void func_8029CC70_de(InputRecAt28 *arg0, CVector3 *arg1) {
     if (delta <= 0.0f) {
         root = 0.0f;
     } else {
-        root = func_802B72B0_de(delta);
+        root = Math_Sqrtf(delta);
     }
     angle_temp = D_800C5AF0_de - (root * polynomial);
     if (negative != 0) {
@@ -243,7 +243,7 @@ static inline f32 safe_sqrt(f32 x) {
     if (x <= 0.0f) {
         return 0.0f;
     }
-    return func_802B72B0_de(x);
+    return Math_Sqrtf(x);
 }
 
 static inline void normalize_x(CVector3 *v) {

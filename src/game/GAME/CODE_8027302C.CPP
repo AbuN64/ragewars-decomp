@@ -23,7 +23,7 @@ extern func_8020CA10_G1 D_800C48E8_de;
 extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 /* Copies a 4x4 float matrix while scaling its first three rows by three per-row factors, zeroing their fourth column and setting the last element to the canonical unit constant. Adapted from func_8027302C with the row scaling, the zeroed column and the constant corner changed. */
 extern f32 D_800C48F4_de;
@@ -174,17 +174,17 @@ void func_802732EC_de(void *matrix, f32 *arg1) {
     tmp.x = m->m[0];
     tmp.y = m->m[1];
     tmp.z = m->m[2];
-    arg1[0] = func_802B72B0_de((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
+    arg1[0] = Math_Sqrtf((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
 
     tmp.x = m->m[4];
     tmp.y = m->m[5];
     tmp.z = m->m[6];
-    arg1[1] = func_802B72B0_de((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
+    arg1[1] = Math_Sqrtf((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
 
     tmp.x = m->m[8];
     tmp.y = m->m[9];
     tmp.z = m->m[10];
-    arg1[2] = func_802B72B0_de((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
+    arg1[2] = Math_Sqrtf((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
 }
 
 void func_802733B4_de(void *matrix, f32 tiltX, f32 lift, f32 arg3) {
@@ -260,7 +260,7 @@ void func_80273648_de(void *rest, f32 arg1) {
     f32 zero;
     f32 identity;
 
-    sin_v = func_802B7130_de(arg1);
+    sin_v = Math_Sinf(arg1);
     zero = 0;
     identity = D_800C48F8_de[0];
     m->forward.y = -sin_v;
@@ -277,7 +277,7 @@ void func_80273648_de(void *rest, f32 arg1) {
     m->m03 = zero;
     m->m33 = identity;
     m->right.x = identity;
-    cos_v = func_802B6560_de(arg1);
+    cos_v = Math_Cosf(arg1);
     m->forward.z = cos_v;
     m->up.y = cos_v;
 }
@@ -290,7 +290,7 @@ void func_802736D4_de(void *arg0, f32 arg1)
   f32 zero;
   f32 identity;
   zero = 0;
-  sin_v = func_802B7130_de(arg1);
+  sin_v = Math_Sinf(arg1);
   identity = D_800C48F8_de[1];
   m->forward.x = sin_v;
   m->right.y = zero;
@@ -306,7 +306,7 @@ void func_802736D4_de(void *arg0, f32 arg1)
   m->m03 = zero;
   m->m33 = identity;
   m->up.y = identity;
-  cos_v = func_802B6560_de(arg1);
+  cos_v = Math_Cosf(arg1);
   m->forward.z = cos_v;
   m->right.x = cos_v;
 }
@@ -318,7 +318,7 @@ void func_80273760_de(void *matrix, f32 arg1) {
     f32 zero;
     f32 one;
 
-    sin_v = func_802B7130_de(arg1);
+    sin_v = Math_Sinf(arg1);
     zero = (f32) 0;
     one = D_800C99F0[0];
     m->right.z = zero;
@@ -333,7 +333,7 @@ void func_80273760_de(void *matrix, f32 arg1) {
     m->m03 = zero;
     m->forward.z = one;
     m->m33 = one;
-    cos_v = func_802B6560_de(arg1);
+    cos_v = Math_Cosf(arg1);
     m->up.y = cos_v;
     m->right.x = cos_v;
     m->up.x = -sin_v;
@@ -347,8 +347,8 @@ void func_802737F0_de(void *arg0, f32 arg1) {
     f32 neg_sin;
     f32 a;
 
-    sin_v = func_802B7130_de(arg1);
-    cos_v = func_802B6560_de(arg1);
+    sin_v = Math_Sinf(arg1);
+    cos_v = Math_Cosf(arg1);
     neg_sin = -sin_v;
 
     a = m->up.x;
@@ -371,8 +371,8 @@ void func_802738C0_de(void *arg0, f32 arg1) {
     f32 neg_sin;
     f32 a;
 
-    sin_v = func_802B7130_de(arg1);
-    cos_v = func_802B6560_de(arg1);
+    sin_v = Math_Sinf(arg1);
+    cos_v = Math_Cosf(arg1);
     neg_sin = -sin_v;
 
     a = m->right.y;
@@ -399,8 +399,8 @@ void func_802739C4_de(void *matrix, f32 arg1) {
     f32 neg_sin;
     f32 a;
 
-    sin_v = func_802B7130_de(arg1);
-    cos_v = func_802B6560_de(arg1);
+    sin_v = Math_Sinf(arg1);
+    cos_v = Math_Cosf(arg1);
     neg_sin = -sin_v;
 
     a = m->right.x;
@@ -423,8 +423,8 @@ void func_80273A98_de(void *matrix, f32 arg1) {
     f32 neg_sin;
     f32 a;
 
-    sin_v = func_802B7130_de(arg1);
-    cos_v = func_802B6560_de(arg1);
+    sin_v = Math_Sinf(arg1);
+    cos_v = Math_Cosf(arg1);
     neg_sin = -sin_v;
 
     a = m->right.x;
@@ -451,8 +451,8 @@ void func_80273B98_de(void *matrix, f32 arg1) {
     f32 neg_sin;
     f32 a;
 
-    sin_v = func_802B7130_de(arg1);
-    cos_v = func_802B6560_de(arg1);
+    sin_v = Math_Sinf(arg1);
+    cos_v = Math_Cosf(arg1);
     neg_sin = -sin_v;
 
     a = m->right.x;
@@ -475,8 +475,8 @@ void func_80273C68_de(void *arg0, f32 arg1) {
     f32 neg_sin;
     f32 a;
 
-    sin_v = func_802B7130_de(arg1);
-    cos_v = func_802B6560_de(arg1);
+    sin_v = Math_Sinf(arg1);
+    cos_v = Math_Cosf(arg1);
     neg_sin = -sin_v;
 
     a = m->right.x;
@@ -660,7 +660,7 @@ void func_802741A4_de(f32 *rotation) {
     f32 mag;
     f32 scale;
 
-    mag = func_802B72B0_de((rotation[0] * rotation[0]) + (rotation[1] * rotation[1]) + (rotation[2] * rotation[2]) + (rotation[3] * rotation[3]));
+    mag = Math_Sqrtf((rotation[0] * rotation[0]) + (rotation[1] * rotation[1]) + (rotation[2] * rotation[2]) + (rotation[3] * rotation[3]));
     if (mag != 0.0f) {
         scale = D_800C492C_de / mag;
         rotation[0] = rotation[0] * scale;

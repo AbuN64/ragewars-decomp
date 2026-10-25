@@ -327,7 +327,7 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
                     bottom = top + (bottom - top);
                     Text_SetupFillMode();
                     alpha = menu->alpha * menu->fade *
-                        ((func_802B7130_de((f32)(D_800CD730 * 10) * 0.017453294f) + 1.0f) * 50.0f + 50.0f);
+                        ((Math_Sinf((f32)(D_800CD730 * 10) * 0.017453294f) + 1.0f) * 50.0f + 50.0f);
                     if (entry->flags & 0x10) {
                         Text_DrawBevelBox(placed.left - 4, top, placed.right + 4, bottom, 0, 0, 255, 0, 10, (u8)alpha);
                     } else {

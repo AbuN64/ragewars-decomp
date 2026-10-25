@@ -72,8 +72,8 @@ s32 func_8024BD08_de(Shared_Func80243A80Actor *arg0) {
         if (arg0->y < lowerNext) {
             return 0;
         }
-        sine = func_802B7130_de(arg0->angle);
-        cosine = func_802B6560_de(arg0->angle);
+        sine = Math_Sinf(arg0->angle);
+        cosine = Math_Cosf(arg0->angle);
         func_80275BC8_de(&direction, node);
         if (direction.x * -sine + direction.z * -cosine < 0.0f) {
             return 1;

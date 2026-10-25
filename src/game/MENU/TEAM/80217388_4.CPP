@@ -45,7 +45,7 @@ void Team_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *player)
         if (item->icon != 0) {
             func_802AA950_de(item->icon, 0, &width, &height);
             if (menu->m_Selected == item->slot) {
-                blue = red = func_802B6560_de(menu->m_Glow) * 63.0f + 192.0f;
+                blue = red = Math_Cosf(menu->m_Glow) * 63.0f + 192.0f;
                 alpha = 1.0f;
                 green = red;
             } else {

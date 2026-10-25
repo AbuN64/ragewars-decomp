@@ -8,7 +8,7 @@
 
 extern f32 func_80241728_de(struct Query *, f32, f32);
 
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 extern void Particle_ScaleVector(void *, void *, f32);
 
@@ -84,7 +84,7 @@ void func_8023E6EC_de(SegmentCode8023A284 *arg0, struct Query *query) {
         arg0->height = start;
         return;
     }
-    share = func_802B72B0_de(flat / total);
+    share = Math_Sqrtf(flat / total);
     node = arg0->node;
     nx = arg0->x0 + (share * (arg0->x1 - arg0->x0));
     arg0->height = start + (share * span);

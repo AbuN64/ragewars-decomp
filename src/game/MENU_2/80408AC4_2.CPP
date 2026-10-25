@@ -109,11 +109,11 @@ s32 func_8042A2B0_de(void *root, s32 unused, s32 delta) {
         D_800E4F60->unk45C += delta;
         if (D_80154020.value == -1) {
             if (D_800E4F60->selection == 0) {
-                alpha = func_802B6560_de((f32)D_800E4F60->unk45C * 0.0033333334f) * 100.0f + 150.0f;
+                alpha = Math_Cosf((f32)D_800E4F60->unk45C * 0.0033333334f) * 100.0f + 150.0f;
                 item = D_800E4F60->unk448;
                 item->alpha = (u32)alpha;
             } else {
-                alpha = func_802B6560_de((f32)D_800E4F60->unk45C * 0.0033333334f) * 100.0f + 150.0f;
+                alpha = Math_Cosf((f32)D_800E4F60->unk45C * 0.0033333334f) * 100.0f + 150.0f;
                 item = D_800E4F60->item;
                 item->alpha = (u32)alpha;
             }

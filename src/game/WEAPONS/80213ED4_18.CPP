@@ -8,7 +8,7 @@
    built from the sine and cosine of the yaw at 0x6C, clamps it to -1..1, converts it through the arc
    cosine Nav_ArcCos and negates it when the point lies on the other side, or returns zero when the
    point is at the actor. Scheduler lever, disclosed: the sine read sits in a do-while(0) block. */
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 
 
@@ -22,14 +22,14 @@ f32 Weapons_GetSignedAngleToPoint(void *actor, CVector3 point) {
     f32 angle;
     dx = point.x - ((struct Actor_func_80214DD4_de *)actor)->pos.x;
     dz = point.z - ((struct Actor_func_80214DD4_de *)actor)->pos.z;
-    dist = func_802B72B0_de(dx * dx + dz * dz);
+    dist = Math_Sqrtf(dx * dx + dz * dz);
     if (dist == 0.0f) {
         return 0.0f;
     }
     do {
-        s = func_802B7130_de(((struct Actor_func_80214DD4_de *)actor)->heading);
+        s = Math_Sinf(((struct Actor_func_80214DD4_de *)actor)->heading);
     } while (0);
-    c = -func_802B6560_de(((struct Actor_func_80214DD4_de *)actor)->heading);
+    c = -Math_Cosf(((struct Actor_func_80214DD4_de *)actor)->heading);
     dot = (dx * -s + dz * c) / dist;
     dot = ((RW_MIN(dot, 1.0f))<((-1.0f))?((-1.0f)):(RW_MIN(dot, 1.0f)));
     angle = Nav_ArcCos(dot);

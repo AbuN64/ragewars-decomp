@@ -6,7 +6,7 @@
 static inline void normalizeProjectionNormal(CVector3 *normal) {
     f32 length;
     f32 inverse;
-    length = func_802B72B0_de(normal->x * normal->x + normal->y * normal->y + normal->z * normal->z);
+    length = Math_Sqrtf(normal->x * normal->x + normal->y * normal->y + normal->z * normal->z);
     if (length != 0.0f) {
         inverse = D_800C48B0_de / length;
         normal->x *= inverse;

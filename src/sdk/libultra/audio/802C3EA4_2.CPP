@@ -37,8 +37,8 @@ void func_802BF514_de(void) {
     zeros = D_801518C0;
     for (; i < 128; i++) {
         angle = (i * step + offset) * scale;
-        sines[i] = func_802B6560_de(angle);
-        cosines[i] = func_802B7130_de(angle);
+        sines[i] = Math_Cosf(angle);
+        cosines[i] = Math_Sinf(angle);
         zeros[i] = 0.0f;
     }
     i = 0;
@@ -47,8 +47,8 @@ void func_802BF514_de(void) {
     differences = D_801516C0;
     for (; i < 128; i++) {
         angle = i * scale;
-        s = func_802B6560_de(angle);
-        c = func_802B7130_de(angle);
+        s = Math_Cosf(angle);
+        c = Math_Sinf(angle);
         sums[i] = s + c;
         differences[i] = c - s;
     }
@@ -79,8 +79,8 @@ FftTables *func_802BF67C_de(s32 n) {
         count = n;
         do {
             angle = i * scale / count;
-            tables->sines[i] = func_802B6560_de(angle);
-            tables->cosines[i] = -func_802B7130_de(angle);
+            tables->sines[i] = Math_Cosf(angle);
+            tables->cosines[i] = -Math_Sinf(angle);
             i++;
         } while (i < half);
     }

@@ -4,14 +4,14 @@
 #include "sdk/os.h"
 
 extern OSThread_s *D_800D5270;
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 extern void func_802BC36C_de(void *);
 extern void *__osPopThread(void *);
 extern void func_802BB750_de(void *);
 
 s32 osRecvMesg(OSMesgQueue *queue, OSMesg *message, s32 block)
 {
-    u32 mask = func_802BCF30_de();
+    u32 mask = __osDisableInt();
 
     while (queue->validCount == 0) {
         if (!block) {

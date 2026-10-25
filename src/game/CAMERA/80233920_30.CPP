@@ -224,7 +224,7 @@ void func_80239D00_de(struct Channel *channel, float arg1, int arg2) {
 f32 func_80239D1C_de(struct Wave *wave) {
     switch (wave->kind) {
     case 1:
-        return func_802B7130_de(wave->phase * D_800C865C) * wave->amplitude;
+        return Math_Sinf(wave->phase * D_800C865C) * wave->amplitude;
     case 0:
         return Nav_RandomBetween(-wave->amplitude, wave->amplitude);
     }

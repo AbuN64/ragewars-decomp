@@ -14,7 +14,7 @@ extern void func_802BB750_de(void *value);
 s32 osSendMesg(OSMesgQueue *queue, OSMesg entry, s32 mode) {
     s32 saved;
 
-    saved = func_802BCF30_de();
+    saved = __osDisableInt();
     while (queue->validCount >= queue->msgCount) {
         if (mode != 1) {
             __osRestoreInt(saved);

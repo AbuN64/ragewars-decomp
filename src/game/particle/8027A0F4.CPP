@@ -72,11 +72,11 @@ block_7:
             temp_fv0f = arg0->velocity.x;
             temp_fv0 = arg0->velocity.y;
             temp_fa0 = arg0->velocity.z;
-            temp_fv0_2 = func_802B72B0_de((temp_fv0f * temp_fv0f) + (temp_fv0 * temp_fv0) + (temp_fa0 * temp_fa0));
+            temp_fv0_2 = Math_Sqrtf((temp_fv0f * temp_fv0f) + (temp_fv0 * temp_fv0) + (temp_fa0 * temp_fa0));
             
             sp18 = target->position;
             Particle_SubtractVectors(&sp28, &sp18, &arg0->position);
-            amount = func_802B72B0_de((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
+            amount = Math_Sqrtf((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
             if (amount < D_800C4B50_de) {
                 sp68 = func_80271818_de(&sp28);
                 MatrixFromQuaternion(&sp68.x, sp78.m);
@@ -90,7 +90,7 @@ block_7:
             if (D_800C4B58_de < amount) {
                 sp18.y += D_800C4B50_de;
                 Particle_SubtractVectors(&sp28, &sp18, &arg0->position);
-                amount = func_802B72B0_de((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
+                amount = Math_Sqrtf((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
             }
             Particle_NormalizeVec3(&sp28.x);
             sp58 = func_80271818_de(&sp28);
@@ -127,7 +127,7 @@ block_21:
             temp_fv0f_3 = arg0->velocity.x;
             temp_fv0_4 = arg0->velocity.y;
             temp_fa0_2 = arg0->velocity.z;
-            temp_fs0 = func_802B72B0_de((temp_fv0f_3 * temp_fv0f_3) + (temp_fv0_4 * temp_fv0_4) + (temp_fa0_2 * temp_fa0_2));
+            temp_fs0 = Math_Sqrtf((temp_fv0f_3 * temp_fv0f_3) + (temp_fv0_4 * temp_fv0_4) + (temp_fa0_2 * temp_fa0_2));
             temp_fv0_5 = func_802B2350((s32) arg0->descriptor->motion->speed);
             if (scale > 0.0f) {if (!(temp_fv0_5 < temp_fs0)) goto after_clamp;} else {if (!(temp_fs0 < temp_fv0_5)) goto after_clamp;}
             Particle_ScaleVector(temp_s0_3, &spC8, temp_fv0_5);
@@ -179,7 +179,7 @@ void Particle_SteerHoming(void *particle) {
     CVector3 *velocity;
     SteeringSound *sound;
     q78 = func_80271818_de(&arg0->direction);
-    speed = func_802B72B0_de(arg0->velocity.x * arg0->velocity.x + arg0->velocity.y * arg0->velocity.y +
+    speed = Math_Sqrtf(arg0->velocity.x * arg0->velocity.x + arg0->velocity.y * arg0->velocity.y +
                              arg0->velocity.z * arg0->velocity.z);
     owner = FIELD(void *, FIELD(void *, arg0, 0x12C), 0x1D8);
     id = 0x8AC;
@@ -204,7 +204,7 @@ create_sound:
         v58.z = D_800C4B7C_de;
         func_8022B09C_de(owner, &v58);
         Particle_SubtractVectors(&v68, &v58, &arg0->position);
-        distance = func_802B72B0_de(v68.x * v68.x + v68.y * v68.y + v68.z * v68.z);
+        distance = Math_Sqrtf(v68.x * v68.x + v68.y * v68.y + v68.z * v68.z);
         if (distance < D_800C4B80_de && arg0->time > D_800C4B84_de) {
             func_80283D50_de(arg0);
             Particle_Release(D_8011D8D0, arg0);
@@ -250,7 +250,7 @@ create_sound:
         vF8 = arg0->direction;
         makeImpulse(&vF8, accel, &vE8);
         addImpulse(velocity, &vE8);
-        speed2 = func_802B72B0_de(arg0->velocity.x * arg0->velocity.x + arg0->velocity.y * arg0->velocity.y +
+        speed2 = Math_Sqrtf(arg0->velocity.x * arg0->velocity.x + arg0->velocity.y * arg0->velocity.y +
                                   arg0->velocity.z * arg0->velocity.z);
         limit = func_802B2350((s32)arg0->descriptor->motion->speed);
         if (accel > 0.0f) {
@@ -286,7 +286,7 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
     AccelSteeringVec *vel;
 
     Particle_SubtractVectors(&offset, goal, &particle->position);
-    distance = func_802B72B0_de((offset.x * offset.x) + (offset.y * offset.y) + (offset.z * offset.z));
+    distance = Math_Sqrtf((offset.x * offset.x) + (offset.y * offset.y) + (offset.z * offset.z));
     if (distance <= 51.199997f) {
         particle->position = *goal;
         return;
@@ -294,7 +294,7 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
     Particle_NormalizeVec3(&offset.x);
     wanted = func_80271818_de(&offset.x);
     current = func_80271818_de(&particle->direction.x);
-    speed = func_802B72B0_de((particle->velocity.x * particle->velocity.x) + (particle->velocity.y * particle->velocity.y) + (particle->velocity.z * particle->velocity.z));
+    speed = Math_Sqrtf((particle->velocity.x * particle->velocity.x) + (particle->velocity.y * particle->velocity.y) + (particle->velocity.z * particle->velocity.z));
     if (distance < 1024.0f) {
         blend = distance - 204.79999f;
         if (blend < 0.0f) {
@@ -319,7 +319,7 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
         heading = particle->direction;
         makeImpulse(&heading, acceleration, &impulse);
         addImpulse(vel, &impulse);
-        newSpeed = func_802B72B0_de((particle->velocity.x * particle->velocity.x) + (particle->velocity.y * particle->velocity.y) + (particle->velocity.z * particle->velocity.z));
+        newSpeed = Math_Sqrtf((particle->velocity.x * particle->velocity.x) + (particle->velocity.y * particle->velocity.y) + (particle->velocity.z * particle->velocity.z));
         limit = func_802B2350(particle->link->params->limit);
         if (acceleration > 0.0f) {
             if (!(limit < newSpeed)) goto skip;

@@ -22,7 +22,7 @@ extern s32 D_800D297C;
 extern s32 func_8024E158_de(void *);
 extern f32 func_8024E650_de(char *, s32);
 extern void *func_802799C0_de(void *, s32);
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 extern void func_80268A40_de(void *, CVector3, CVector3 *, f32 *);
 extern void func_8027310C_de(f32 *, CVector3 *, f32);
 extern void TranslateMatrix(void *, f32, f32, f32);
@@ -63,7 +63,7 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
             dir.x = ((struct Shared_ParticleLighting *)(light))->direction[0] * 0.007874016f;
             dir.y = ((struct Shared_ParticleLighting *)(light))->direction[1] * 0.007874016f;
             dir.z = ((struct Shared_ParticleLighting *)(light))->direction[2] * 0.007874016f;
-            strength = func_802B72B0_de((f32)((struct Shared_ParticleLighting *)(light))->diffuse[0] * (f32)((struct Shared_ParticleLighting *)(light))->diffuse[0] +
+            strength = Math_Sqrtf((f32)((struct Shared_ParticleLighting *)(light))->diffuse[0] * (f32)((struct Shared_ParticleLighting *)(light))->diffuse[0] +
                                          (f32)((struct Shared_ParticleLighting *)(light))->diffuse[1] * (f32)((struct Shared_ParticleLighting *)(light))->diffuse[1] +
                                          (f32)((struct Shared_ParticleLighting *)(light))->diffuse[1] * (f32)((struct Shared_ParticleLighting *)(light))->diffuse[1]) *
                        -0.00090497744f;

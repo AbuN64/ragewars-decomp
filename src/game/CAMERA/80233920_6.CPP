@@ -34,7 +34,7 @@ int func_802A23F0_de(void);
 
 void func_802B6F9C_de(float *, u16 *, float, float, float, float, float);
 
-f32 func_802B72B0_de(f32);
+f32 Math_Sqrtf(f32);
 void func_804428F8_de(void *);
 s32 func_802343C8_de();                        /* extern */
 void func_802349C0_de(void *);                        /* extern */
@@ -167,9 +167,9 @@ actor_found:
     func_8027302C(&camera->unk220, sp128);
     if ((var_s5 != 0) && (var_s5->unk664 & 0x40) && (camera->unk24 == 0) && (Camera_IsSequenceInWindow() == 0)) {
         f32 temp_f20; 
-        var_f1 = (((camera->unk88 * 0.5f * (func_802B7130_de(camera->unk90) + 1.0f)) + 0.8f) > 1.0f) ? 1.0f : ((camera->unk88 * 0.5f * (func_802B7130_de(camera->unk90) + 1.0f)) + 0.8f);
+        var_f1 = (((camera->unk88 * 0.5f * (Math_Sinf(camera->unk90) + 1.0f)) + 0.8f) > 1.0f) ? 1.0f : ((camera->unk88 * 0.5f * (Math_Sinf(camera->unk90) + 1.0f)) + 0.8f);
         camera->unk80 = var_f1;
-        var_f4 = (((camera->unk8C * 0.5f * (func_802B7130_de(camera->unk94) + 1.0f)) + 0.9f) > 1.0f) ? 1.0f : ((camera->unk8C * 0.5f * (func_802B7130_de(camera->unk94) + 1.0f)) + 0.9f);
+        var_f4 = (((camera->unk8C * 0.5f * (Math_Sinf(camera->unk94) + 1.0f)) + 0.9f) > 1.0f) ? 1.0f : ((camera->unk8C * 0.5f * (Math_Sinf(camera->unk94) + 1.0f)) + 0.9f);
         camera->unk84 = var_f4;
         camera->unk90 = (f32) (camera->unk90 + (D_800D2988 * camera->unk98));
         camera->unk94 = (f32) (camera->unk94 + (D_800D2988 * camera->unk9C));
@@ -228,14 +228,14 @@ actor_found:
         aspect = 1.333333f;
     }
     fovy = fovy * 0.017453294f;
-    temp_f21 = func_802B7130_de(fovy);
-    temp_f21_3 = temp_f21 / func_802B6560_de(fovy);
+    temp_f21 = Math_Sinf(fovy);
+    temp_f21_3 = temp_f21 / Math_Cosf(fovy);
     temp_f20_2 = temp_f21_3 * 1.2792794f;
     temp_f21_3 = temp_f20_2 / aspect;
     temp_f21_3 = temp_f21_3 / camera->unk84;
     temp_f20_3 = temp_f20_2 / camera->unk80;
     temp_f1 = 1.0f; 
-    fovy = Nav_ArcCos(func_802B72B0_de(temp_f1 / ((temp_f21_3 * temp_f21_3) + 1.0f)));
+    fovy = Nav_ArcCos(Math_Sqrtf(temp_f1 / ((temp_f21_3 * temp_f21_3) + 1.0f)));
     fovy = fovy * 57.295776f; 
     temp_f0 = camera->unk528;
     aspect = temp_f20_3 / temp_f21_3;

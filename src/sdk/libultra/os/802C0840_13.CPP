@@ -15,7 +15,7 @@ extern void func_802BC36C_de(ThreadNode **queue, ThreadNode *node);
 void func_802BB750_de(ThreadNode *arg0) {
     ThreadNode **sentinel;
     u32 token;
-    token = func_802BCF30_de();
+    token = __osDisableInt();
     if (arg0->state == 1) {
         goto state_one;
     }

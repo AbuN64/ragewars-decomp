@@ -19,7 +19,7 @@ extern const double D_800C7858_de; /* 0.5 */
 extern const double D_800C7860_de; /* 0.0 */
 extern const double D_800C7868_de; /* 0.5 */
 
-float func_802B6560_de(float x)
+float Math_Cosf(float x)
 {
     float absx;
     double dx, xsq, poly;

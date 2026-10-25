@@ -458,13 +458,13 @@ f32 func_8029C044_de(f32 y, f32 x) {
     return angle + D_800D2B60[quadrant];
 }
 
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 /** Square root that returns 0 for zero or negative input. */
 static inline f32 safeSqrt(f32 value) {
     if (value <= 0.0f) {
         return 0.0f;
     }
-    return func_802B72B0_de(value);
+    return Math_Sqrtf(value);
 }
 /** Length of a 3-vector. */
 static inline f32 vectorLength(f32 *v) {

@@ -11,7 +11,7 @@ extern State_func_802BA700_de *D_800D4414;
 void func_802BA700_de(s32 arg0) {
     u32 token;
 
-    token = func_802BCF30_de();
+    token = __osDisableInt();
     if (arg0 & 1) {
         D_800D4414->flags |= 8;
     }

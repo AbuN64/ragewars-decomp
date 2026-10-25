@@ -99,7 +99,7 @@ segments = [
   { name = "retained_1C0860", rom = 0x1C0860, kind = "bin" },
 ]
 
-[library."src/sdk/lib_802BB630/"]
+[library."src/sdk/MATH/"]
 origin = "unidentified library"
 
 [library."src/sdk/libgcc/"]
@@ -114,7 +114,7 @@ origin = "Rob Northen compression"
 [dir."src/sdk/libsn/"]
 toolchain = "gcc-2.7.2-sn64"
 
-[file."src/sdk/lib_802BB630/802BC380.CPP"]
+[file."src/sdk/MATH/802BC380.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math", "-fno-delayed-branch"]
 omit = []

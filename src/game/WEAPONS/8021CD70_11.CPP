@@ -57,10 +57,10 @@ void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMoveme
             } else {
                 player->views5E8.view6C0_51.unk6C0=Nav_DecayToZero(player->views5E8.view6C0_51.unk6C0,arg2->unk8);
             }
-            temp_f1_4 = player->views5E8.view6C0_51.unk6C0 * func_802B7130_de(body->unk6C + 3.1415927f);
+            temp_f1_4 = player->views5E8.view6C0_51.unk6C0 * Math_Sinf(body->unk6C + 3.1415927f);
             motion.y = 0;
             motion.x = temp_f1_4;
-            motion.z = player->views5E8.view6C0_51.unk6C0 * func_802B6560_de(body->unk6C + 3.1415927f);
+            motion.z = player->views5E8.view6C0_51.unk6C0 * Math_Cosf(body->unk6C + 3.1415927f);
             temp_f1_5=player->views5E8.view6C4_54.unk6C4; temp_f2_2=arg2->unk10;
             if (temp_f1_5 < 0.0f ? temp_f2_2 < -temp_f1_5 : temp_f2_2 < temp_f1_5) {
                 player->views5E8.view6C4_54.unk6C4=Nav_DecayToZero(player->views5E8.view6C4_54.unk6C4,arg2->unk14*0.5f);
@@ -69,8 +69,8 @@ void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMoveme
             } else {
                 player->views5E8.view6C4_54.unk6C4=Nav_DecayToZero(player->views5E8.view6C4_54.unk6C4,arg2->unk14);
             }
-            motion.x += player->views5E8.view6C4_54.unk6C4 * func_802B7130_de(body->unk6C - 1.5707964f);
-            motion.z += player->views5E8.view6C4_54.unk6C4 * func_802B6560_de(body->unk6C - 1.5707964f);
+            motion.x += player->views5E8.view6C4_54.unk6C4 * Math_Sinf(body->unk6C - 1.5707964f);
+            motion.z += player->views5E8.view6C4_54.unk6C4 * Math_Cosf(body->unk6C - 1.5707964f);
             var_f1 = player->views5E8.view6C4_54.unk6C4;
             if (var_f1 < 0.0f) {
                 var_f1 = -var_f1;
@@ -105,8 +105,8 @@ block_42:
                 var_f0_3 = Nav_DecayToZero(player->views5E8.view6D4_58.unk6D4, arg2->unk1C);
             }
             player->views5E8.view6D4_58.unk6D4 = var_f0_3;
-            motion.x += player->views5E8.view6D4_58.unk6D4 * func_802B7130_de(body->unk6C + 3.1415927f);
-            motion.z += player->views5E8.view6D4_58.unk6D4 * func_802B6560_de(body->unk6C + 3.1415927f);
+            motion.x += player->views5E8.view6D4_58.unk6D4 * Math_Sinf(body->unk6C + 3.1415927f);
+            motion.z += player->views5E8.view6D4_58.unk6D4 * Math_Cosf(body->unk6C + 3.1415927f);
             if (var_s4 && (player->views5E8.view6B8_49.unk6B8 & 1)) {
                 player->views5E8.view6D8_59.unk6D8 = arg2->unk18;
                 player->views5E8.view6D8_59.unk6D8 *= 0.75f;
@@ -117,8 +117,8 @@ block_42:
             } else {
                 player->views5E8.view6D8_59.unk6D8=Nav_DecayToZero(player->views5E8.view6D8_59.unk6D8,arg2->unk1C*0.75f);
             }
-            motion.x += player->views5E8.view6D8_59.unk6D8 * func_802B7130_de(body->unk6C - 1.5707964f);
-            motion.z += player->views5E8.view6D8_59.unk6D8 * func_802B6560_de(body->unk6C - 1.5707964f);
+            motion.x += player->views5E8.view6D8_59.unk6D8 * Math_Sinf(body->unk6C - 1.5707964f);
+            motion.z += player->views5E8.view6D8_59.unk6D8 * Math_Cosf(body->unk6C - 1.5707964f);
             Particle_ScaleVector(&motion, &motion, player->views5E8.view66C_29.unk66C);
             temp_a0 = &player->views5E8.view6E8_63.unk6E8;
             Particle_AddVec3(temp_a0, temp_a0, &motion);

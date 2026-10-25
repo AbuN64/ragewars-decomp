@@ -17,7 +17,7 @@ extern const f32 D_800C3200_de[];
 extern const f32 D_800C3208_de;
 
 
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 extern void func_80272944_de(void *, CVector3 *, CVector3 *, s32);
 extern void func_802965B0_de(void *, CVector3 *, CVector3 *, CVector3 *, CVector3 *, CVector3 *);
 extern void func_80275954_de(void *, s32, CVector3 *);
@@ -39,11 +39,11 @@ void func_80234DE0_de(GameplayCamera *camera) {
     }
     if (D_801462C8.local == 0) {
         radius = camera->unk528 /
-                 func_802B6560_de(camera->unk530 * camera->aspect * D_800C3200_de[0]);
+                 Math_Cosf(camera->unk530 * camera->aspect * D_800C3200_de[0]);
         pts[0].x = 0.0f;
         pts[0].y = 0.0f;
         pts[0].z = 0.0f;
-        pts[1].x = radius * func_802B7130_de(camera->unk530 * camera->aspect * D_800C3200_de[0]);
+        pts[1].x = radius * Math_Sinf(camera->unk530 * camera->aspect * D_800C3200_de[0]);
         pts[1].y = pts[1].x / camera->aspect;
         pts[1].z = -camera->unk528;
         pts[2].x = -pts[1].x;
@@ -71,7 +71,7 @@ void func_80234DE0_de(GameplayCamera *camera) {
         pts[4].x = -pts[1].x;
         pts[4].y = -pts[1].y;
         pts[4].z = pts[1].z;
-        radius = func_802B72B0_de(pts[1].x * pts[1].x + pts[1].y * pts[1].y + pts[1].z * pts[1].z);
+        radius = Math_Sqrtf(pts[1].x * pts[1].x + pts[1].y * pts[1].y + pts[1].z * pts[1].z);
     }
     out = &camera->corners[0];
     func_80272944_de(&camera->unk160, pts, out, 5);

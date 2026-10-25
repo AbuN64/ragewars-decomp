@@ -238,9 +238,9 @@ extern s32 func_802B15D0_de(void *arg0, s32 arg1, s32 arg2);
 
 extern void func_802B1C34_de(void *arg0, void *arg1);
 
-extern float func_802B6560_de(float x);
+extern float Math_Cosf(float x);
 
-extern float func_802B7130_de(float x);
+extern float Math_Sinf(float x);
 
 extern unsigned int func_802B7EF0_eu(void *arg0);
 

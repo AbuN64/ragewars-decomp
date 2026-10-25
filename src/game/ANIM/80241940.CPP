@@ -113,13 +113,13 @@ void func_80241950_de(char *obj, CVector3 *corners, char *floor, s32 attachment)
     corners[7].y = bottom;
     corners[7].z = minZ;
     func_80273648_de(rest, ((Dest *)anim)->restPitch);
-    sine = func_802B7130_de(((LevelActor *)obj)->yaw * 0.5f);
+    sine = Math_Sinf(((LevelActor *)obj)->yaw * 0.5f);
     yaw.x = 0.0f;
     yaw.y = sine;
     yaw.z = 0.0f;
     angle = ((LevelActor *)obj)->yaw * 0.5f;
     D_80115DEC = sine;
-    yaw.w = func_802B6560_de(angle);
+    yaw.w = Math_Cosf(angle);
     MultiplyQuaternions(&orient, &yaw, &((LevelActor *)obj)->rotation);
     MatrixFromQuaternion(&orient, turn);
     Rsp_MultiplyAffineMatrices(matrix, rest, turn);

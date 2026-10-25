@@ -89,12 +89,12 @@ CQuatern func_8024D4AC_de(char *actor, CVector3 point) {
     Particle_CrossVectors(&axis, &forward, &dir);
     Particle_NormalizeVec3(&axis);
     angle = Nav_ArcCos(forward.x * dir.x + forward.y * dir.y + forward.z * dir.z) * 0.5f;
-    scale = func_802B7130_de(angle);
+    scale = Math_Sinf(angle);
     turn.x = axis.x * scale;
     turn.y = axis.y * scale;
     turn.z = axis.z * scale;
     D_80115DEC = scale;
-    turn.w = func_802B6560_de(angle);
+    turn.w = Math_Cosf(angle);
     if (actor != 0 && *(u8 *)actor == 1) {
         MultiplyQuaternions(&result, &aim, &turn);
     } else {
@@ -141,12 +141,12 @@ source_ready:
                           (up.y * source.y) +
                           (up.z * source.z));
     angle *= D_800C3CA0_de;
-    scale = func_802B7130_de(angle);
+    scale = Math_Sinf(angle);
     result.x = axis.x * scale;
     result.y = axis.y * scale;
     result.z = axis.z * scale;
     D_80115DEC = scale;
-    result.w = func_802B6560_de(angle);
+    result.w = Math_Cosf(angle);
 
     return result;
 }

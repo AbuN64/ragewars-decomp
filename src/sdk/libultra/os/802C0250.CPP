@@ -18,7 +18,7 @@ s32 func_802BB160_de(OSMesgQueue *arg0, void *arg1, s32 arg2) {
     u32 saved;
     s32 index;
 
-    saved = func_802BCF30_de();
+    saved = __osDisableInt();
     while (arg0->validCount >= arg0->msgCount) {
         if (arg2 != 1) {
             __osRestoreInt(saved);

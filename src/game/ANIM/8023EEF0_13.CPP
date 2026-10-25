@@ -66,12 +66,12 @@ s32 Anim_TestPointNearPolygon(Polygon *polygon, CVector3 *point, f32 radius)
                     lengthSquared = edge.x * edge.x + edge.y * edge.y + edge.z * edge.z;
                     projection /= lengthSquared;
                     if (projection < 0.0f) {
-                        limit = -radius / func_802B72B0_de(lengthSquared);
+                        limit = -radius / Math_Sqrtf(lengthSquared);
                         if (projection < limit) {
                             return 0;
                         }
                     } else if (1.0f < projection) {
-                        limit = 1.0f + radius / func_802B72B0_de(lengthSquared);
+                        limit = 1.0f + radius / Math_Sqrtf(lengthSquared);
                         if (limit < projection) {
                             return 0;
                         }

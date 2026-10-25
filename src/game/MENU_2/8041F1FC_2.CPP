@@ -107,7 +107,7 @@ s32 func_8041F6C8_de(s32 arg0,s32 arg1,s32 arg2) {
             do {
                 if (D_800E42D0->players[i].unkC == 1) {
                     if (D_800E42D0->players[i].highlight != 0) {
-                        temp_f0 = (func_802B6560_de((f32) i + ((f32) D_800E42D0->clock * 0.0033333334f)) * 70.0f) + 170.0f;
+                        temp_f0 = (Math_Cosf((f32) i + ((f32) D_800E42D0->clock * 0.0033333334f)) * 70.0f) + 170.0f;
                         highlight = D_800E42D0->players[i].highlight;
                         highlight->alpha=(unsigned int)temp_f0;
                     }

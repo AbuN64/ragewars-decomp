@@ -74,7 +74,7 @@ void func_802BB9F8_de(void) {
 
 void func_802BBA4C_de(u64 interval) {
     u64 compare;
-    u32 saved = func_802BCF30_de();
+    u32 saved = __osDisableInt();
 
     D_8014FE30 = func_802BCF00_de();
     compare = D_8014FE30 + interval;

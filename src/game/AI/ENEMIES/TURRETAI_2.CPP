@@ -17,7 +17,7 @@ typedef struct Owner Owner;
 
 
 
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 extern f32 func_80274808_de(f32, f32, f32);
 
@@ -61,7 +61,7 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
     segment = (Segment *)(owner->track + 0x14);
     throttle = rider->throttle;
     if (segment->radius != 0.0f || segment->rise != 0.0f) {
-        limit = segment->length / func_802B72B0_de(segment->radius * segment->radius + segment->rise * segment->rise);
+        limit = segment->length / Math_Sqrtf(segment->radius * segment->radius + segment->rise * segment->rise);
     } else {
         limit = 0.0f;
     }
@@ -113,9 +113,9 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
     }
     rider->throttle = throttle;
     position = rider->base;
-    position.x += segment->radius * func_802B7130_de(segment->angle);
+    position.x += segment->radius * Math_Sinf(segment->angle);
     position.y += segment->rise;
-    position.z += segment->radius * func_802B6560_de(segment->angle);
+    position.z += segment->radius * Math_Cosf(segment->angle);
     func_80271FC8_de(rider->frame, throttle, &rider->base, &position);
 }
 
@@ -173,7 +173,7 @@ void AI_DynTurretGetTargetInfo(SharedPlayer *player, RiderRecAt130V1 *rider, Res
     }
     if (best != 0) {
         rider->target = best;
-        result->distance = func_802B72B0_de(nearest);
+        result->distance = Math_Sqrtf(nearest);
         result->target = best;
     } else {
         result->target = 0;

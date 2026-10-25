@@ -76,7 +76,7 @@ void func_8027ABF4_de(AccelSteeringObj *particle) {
             velocity = &particle->velocity;
             Particle_AddVec3(velocity, velocity, &delta);
         } while (0);
-        length = func_802B72B0_de(particle->velocity.x * particle->velocity.x + particle->velocity.y * particle->velocity.y + particle->velocity.z * particle->velocity.z);
+        length = Math_Sqrtf(particle->velocity.x * particle->velocity.x + particle->velocity.y * particle->velocity.y + particle->velocity.z * particle->velocity.z);
         limit = func_802B2350(particle->link->params->limit);
         if (accel > 0.0f) {
             if (!(limit < length)) goto done;
@@ -221,7 +221,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
       sp20.y += nearby_height;
       sp20.y += Particle_GetActorHeight(var_a0) * nearby_scale;
       Particle_SubtractVectors(&sp10, nearby_position, &arg0->inst.pos);
-      temp_f20 = func_802B72B0_de(((sp10.x * sp10.x) + (sp10.y * sp10.y)) + (sp10.z * sp10.z));
+      temp_f20 = Math_Sqrtf(((sp10.x * sp10.x) + (sp10.y * sp10.y)) + (sp10.z * sp10.z));
       if (temp_f20 < D_800C4BD4_de)
       {
         temp_f20 = D_800C4BDC_de - (temp_f20 * D_800C4BD8_de);
@@ -279,7 +279,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
     temp_f1 = arg0->inst.velocity.x;
     temp_f0_4 = arg0->inst.velocity.y;
     temp_f12 = arg0->inst.velocity.z;
-    temp_f20_2 = func_802B72B0_de(((temp_f1 * temp_f1) + (temp_f0_4 * temp_f0_4)) + (temp_f12 * temp_f12));
+    temp_f20_2 = Math_Sqrtf(((temp_f1 * temp_f1) + (temp_f0_4 * temp_f0_4)) + (temp_f12 * temp_f12));
 #if defined(VERSION_EU)
     temp_f0_5 = func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
 #else
@@ -325,7 +325,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
     temp_f1_3 = arg0->inst.velocity.x;
     temp_f0_7 = arg0->inst.velocity.y;
     temp_f12_2 = arg0->inst.velocity.z;
-    temp_f20_3 = func_802B72B0_de(((temp_f1_3 * temp_f1_3) + (temp_f0_7 * temp_f0_7)) + (temp_f12_2 * temp_f12_2));
+    temp_f20_3 = Math_Sqrtf(((temp_f1_3 * temp_f1_3) + (temp_f0_7 * temp_f0_7)) + (temp_f12_2 * temp_f12_2));
     temp_f0_8 = Nav_ArcCos(((sp30.x * sp40.x) + (sp30.y * sp40.y)) + (sp30.z * sp40.z));
     temp_f1_4 = ((f32) ((BallisticParamsHolder *)arg0->desc)->unkE) * D_800C4BEC_de;
     var_f2 = D_800C4BF0_de;
@@ -359,7 +359,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
       temp_f1_5 = arg0->inst.velocity.x;
       temp_f0_10 = arg0->inst.velocity.y;
       temp_f12_3 = arg0->inst.velocity.z;
-      temp_f20_4 = func_802B72B0_de(((temp_f1_5 * temp_f1_5) + (temp_f0_10 * temp_f0_10)) + (temp_f12_3 * temp_f12_3));
+      temp_f20_4 = Math_Sqrtf(((temp_f1_5 * temp_f1_5) + (temp_f0_10 * temp_f0_10)) + (temp_f12_3 * temp_f12_3));
 #if defined(VERSION_EU)
       temp_f0_11 = func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
 #else

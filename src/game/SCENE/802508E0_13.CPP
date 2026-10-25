@@ -9,7 +9,7 @@
 
 extern OSMesgQueue D_80101140;
 
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 
 extern void func_80254990_de(void *, void *);
@@ -30,7 +30,7 @@ void Scene_FreeMemory(void *arg0) {
     void *temp_s0;
 
     temp_s0 = ((void **)arg0)[-4];
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
@@ -40,7 +40,7 @@ void Scene_FreeMemory(void *arg0) {
         __osRestoreInt(mask);
     }
     func_80254990_de(0, temp_s0);
-    temp_v0 = func_802BCF30_de();
+    temp_v0 = __osDisableInt();
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {

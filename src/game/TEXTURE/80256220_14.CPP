@@ -177,7 +177,7 @@ typedef struct AudioBankHeader {
     ALBankFile *bankFile;
 } AudioBankHeader;
 extern void func_802567A4_de(MenuRules *lock);
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 extern void __osRestoreInt(u32);
 extern void Texture_InitializeAudioWorker(ALSynConfig *, s32, AudioInitializeTiming *);
 extern void func_802B2650_de(void *, void *);
@@ -193,7 +193,7 @@ extern s32 D_801076A0;
 s32 func_80265964_de(s32 arg0);
 void *func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2);
 static inline void LockEnter(MenuRules *lock) {
-    u32 mask = func_802BCF30_de();
+    u32 mask = __osDisableInt();
     if (++lock->locked != 1) {
         __osRestoreInt(mask);
         osRecvMesg(lock, 0, 1);
@@ -202,7 +202,7 @@ static inline void LockEnter(MenuRules *lock) {
     }
 }
 static inline void LockLeave(MenuRules *lock) {
-    u32 mask = func_802BCF30_de();
+    u32 mask = __osDisableInt();
     if (--lock->locked != 0) {
         __osRestoreInt(mask);
         osSendMesg(lock, 0, 1);

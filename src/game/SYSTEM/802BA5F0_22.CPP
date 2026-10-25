@@ -33,7 +33,7 @@ extern void func_802BB5F0_de(OSThread *t, s32 pri);
 extern void func_802BAC90_de(OSThread *t, s32 id, void (*entry)(void *), void *arg, void *sp, s32 pri);
 
 extern void func_802BB750_de(OSThread *t);
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 void func_802BA350_de(s32 pri)
 {
@@ -62,7 +62,7 @@ void func_802BA350_de(s32 pri)
         func_802BB5F0_de(0, pri);
     }
 
-    savedMask = func_802BCF30_de();
+    savedMask = __osDisableInt();
     D_800D4420.active = 1;
     D_800D4420.thread = &D_80148850;
     D_800D4420.cmdQueue = &D_80149A80;

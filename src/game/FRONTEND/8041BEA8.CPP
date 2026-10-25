@@ -86,7 +86,7 @@ s32 func_8041D134_de(s32 unused0, s32 unused1, s32 arg2) {
 
     if (((MenuRecAt108 *) D_800E3590)->state == 3) {
         ((MenuRecAt108 *) D_800E3590)->clock += arg2;
-        ((MenuRecAt108 *) D_800E3590)->cursor->style = func_802B6560_de((f32) ((MenuRecAt108 *) D_800E3590)->clock * 0.0033333334f) * 30.0f + 220.0f;
+        ((MenuRecAt108 *) D_800E3590)->cursor->style = Math_Cosf((f32) ((MenuRecAt108 *) D_800E3590)->clock * 0.0033333334f) * 30.0f + 220.0f;
         node = func_8041B7FC_de(((MenuRecAt108 *) D_800E3590)->handle, 0);
         if (node != ((MenuRecAt108 *) D_800E3590)->focus) {
             Render_PlayFlatSound(0xE7E);

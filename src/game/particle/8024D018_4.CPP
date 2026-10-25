@@ -98,14 +98,14 @@ CQuatern func_8024D870_de(char *obj) {
                 Particle_CrossVectors(&axis, &up, &normal);
                 Particle_NormalizeVec3(&axis);
                 slope = Nav_ArcCos(up.x * normal.x + up.y * normal.y + up.z * normal.z);
-                D_80115DEC = func_802B7130_de(RW_MIN(slope, 0.43633235f) * 0.375f);
+                D_80115DEC = Math_Sinf(RW_MIN(slope, 0.43633235f) * 0.375f);
                 tilt.x = axis.x * D_80115DEC;
                 tilt.y = axis.y * D_80115DEC;
                 tilt.z = axis.z * D_80115DEC;
-                tilt.w = func_802B6560_de(RW_MIN(slope, 0.43633235f) * 0.375f);
+                tilt.w = Math_Cosf(RW_MIN(slope, 0.43633235f) * 0.375f);
                 tilt = func_8024D728_de(obj);
-                sine = func_802B7130_de(((LevelActor *)(self))->yaw);
-                cosine = func_802B6560_de(((LevelActor *)(self))->yaw);
+                sine = Math_Sinf(((LevelActor *)(self))->yaw);
+                cosine = Math_Cosf(((LevelActor *)(self))->yaw);
                 probe.dir = ((LevelActor *)(self))->floorDirection;
                 probe.start.x = ((LevelActor *)(self))->position0.x;
                 probe.start.y = ((LevelActor *)(self))->floorHeight;
@@ -115,11 +115,11 @@ CQuatern func_8024D870_de(char *obj) {
                 slope = RW_MIN(slope, 25.0f) * 0.75f;
                 half = 0.5f;
                 angle = slope * half;
-                D_80115DEC = func_802B7130_de(angle);
+                D_80115DEC = Math_Sinf(angle);
                 lean.y = 0.0f;
                 lean.x = cosine * D_80115DEC;
                 lean.z = -sine * D_80115DEC;
-                lean.w = func_802B6560_de(angle);
+                lean.w = Math_Cosf(angle);
                 func_80270CD0_de(&result, half, &lean, &tilt);
                 return result;
             }

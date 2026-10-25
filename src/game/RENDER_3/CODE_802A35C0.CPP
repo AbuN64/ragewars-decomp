@@ -25,7 +25,7 @@ extern void func_802732EC_de(void *arg0, f32 *arg1);
 
 extern void Particle_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
 
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 /* Interpolates morph vertex positions and shades between two key frames. */
 
@@ -125,7 +125,7 @@ void *func_802A25D0_de(void *arg0, void *arg1, void *local) {
         ((ObjectLinksB4 *)(var_s0))->unk_A8 = 0.0f;
         if (temp_s1 != 0) {
             Particle_SubtractVectors(&sp10, &((ObjectLinksB4 *)(var_s0))->unk_10.v1, &((ObjectStateB0 *)(temp_s1))->unk_10);
-            temp_f0 = func_802B72B0_de((sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z));
+            temp_f0 = Math_Sqrtf((sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z));
             ((ObjectStateB0 *)(temp_s1))->unk_AC = temp_f0;
             ((ObjectLinks54 *)(arg1))->unk_4C += temp_f0;
         }
@@ -166,9 +166,9 @@ void func_802A274C_de(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, Morph *
     s32 green;
     s32 blue;
 
-    weight = 0.5f - func_802B6560_de(clock->unk8 / actor->track->total * 3.1415927f) * 0.5f;
+    weight = 0.5f - Math_Cosf(clock->unk8 / actor->track->total * 3.1415927f) * 0.5f;
     if (actor->time <= actor->track->span) {
-        weight = weight * (0.5f - func_802B6560_de(actor->time / actor->track->span * 3.1415927f) * 0.5f);
+        weight = weight * (0.5f - Math_Cosf(actor->time / actor->track->span * 3.1415927f) * 0.5f);
     }
     count = morph->count;
     blend = morph->blends;
@@ -217,9 +217,9 @@ void func_802A2B58_de(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, f32 sca
     s32 green;
     s32 blue;
 
-    weight = 0.5f - func_802B6560_de(clock->unk8 / actor->track->total * 3.1415927f) * 0.5f;
+    weight = 0.5f - Math_Cosf(clock->unk8 / actor->track->total * 3.1415927f) * 0.5f;
     if (actor->time <= actor->track->span) {
-        weight = weight * (0.5f - func_802B6560_de(actor->time / actor->track->span * 3.1415927f) * 0.5f);
+        weight = weight * (0.5f - Math_Cosf(actor->time / actor->track->span * 3.1415927f) * 0.5f);
     }
     fade = 0.0f;
     count = morph->count;
@@ -519,7 +519,7 @@ void Render_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
         if (parent != 0) {
             f32 length;
             Particle_SubtractVectors((CVector3 *)delta, &node->pos, &parent->pos);
-            length = func_802B72B0_de(delta[0] * delta[0] + delta[1] * delta[1] + delta[2] * delta[2]);
+            length = Math_Sqrtf(delta[0] * delta[0] + delta[1] * delta[1] + delta[2] * delta[2]);
             parent->length = length;
             owner->totalLength += length;
         }

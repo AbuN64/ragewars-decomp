@@ -19,7 +19,7 @@ extern s32 func_802BADA0_de(struct OSThread_s *);
 extern void func_802BB5F0_de(struct OSThread_s *, s32);
 extern void func_802BAC90_de(struct OSThread_s *, s32, void (*)(void *), void *, void *, s32);
 extern void func_802BB750_de(struct OSThread_s *);
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 void func_802B8DC8_de(s32 pri, OSMesgQueue *cmdQ, void **cmdBuf, s32 cmdMsgCnt)
 {
@@ -46,7 +46,7 @@ void func_802B8DC8_de(s32 pri, OSMesgQueue *cmdQ, void **cmdBuf, s32 cmdMsgCnt)
         func_802BB5F0_de(0, pri);
     }
 
-    savedMask = func_802BCF30_de();
+    savedMask = __osDisableInt();
     D_800D4360.active = 1;
     D_800D4360.acsQueue = &D_8014EA58;
     D_800D4360.dma = D_002B9A40;

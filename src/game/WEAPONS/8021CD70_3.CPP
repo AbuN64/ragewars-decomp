@@ -40,7 +40,7 @@ s32 func_802444A4_de(char *, CVector3, CVector3, s32);
 void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
-f32 func_802B72B0_de(f32);
+f32 Math_Sqrtf(f32);
 typedef struct SharedPlayer_func_8021D408_de SharedPlayer_func_8021D408_de;
 void func_8021D408_de(struct SharedPlayer_func_8021D408_de *, CVector3 *, CVector3 *);
 CQuatern Weapons_ComputeAimRotation(void *, AimActor **, void *);
@@ -95,7 +95,7 @@ void func_8021D774_de(AimPlayer *player) {
             if (temp_a1->kind == 1) {
                 if (temp_a1->flags & 0x300000) {
                     Particle_SubtractVectors((CVector3 *)&spB0, &temp_a1->pos, &player->unk8);
-                    temp_fv0 = func_802B72B0_de((spB0.x * spB0.x) + (spB0.y * spB0.y) + (spB0.z * spB0.z));
+                    temp_fv0 = Math_Sqrtf((spB0.x * spB0.x) + (spB0.y * spB0.y) + (spB0.z * spB0.z));
                     spE0 = sp30;
                     Particle_NormalizeVec3(&spE0);
                     Particle_ScaleVector(&spC0.xyz, &spE0, temp_fv0);

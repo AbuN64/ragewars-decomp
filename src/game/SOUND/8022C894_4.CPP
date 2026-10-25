@@ -175,8 +175,8 @@ void func_8022DB04_de(Actor126 *actor, Object126 *arg1) {
         object = arg1;
         object_angle = object->angle;
         angle = D_800C2DCC_de;
-        sine = func_802B7130_de(object_angle + angle);
-        cosine = func_802B6560_de(object->angle + angle);
+        sine = Math_Sinf(object_angle + angle);
+        cosine = Math_Cosf(object->angle + angle);
         sine *= D_800C7EC0;
         cosine *= D_800C7EC0;
         object->x += sine;

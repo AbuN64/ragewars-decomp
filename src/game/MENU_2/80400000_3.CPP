@@ -10,7 +10,7 @@ extern f32 *Scene_AllocateMemory(s32 size);
 
 extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
-extern f32 func_802B72B0_de(f32 value);
+extern f32 Math_Sqrtf(f32 value);
 
 extern void func_80400000_de(s32 n, f32 *ys, f32 *xs, f32 *out);
 
@@ -102,7 +102,7 @@ void func_804002D8_de(s32 count, CVector3 *points, f32 *weights, Spline *spline)
             break;
         }
         Particle_SubtractVectors(&delta, &nodes[i].p, &nodes[i + 1].p);
-        length += func_802B72B0_de(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
+        length += Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
     }
     for (i = 0; i < count; i++) {
         ys[i] = nodes[i].p.x;

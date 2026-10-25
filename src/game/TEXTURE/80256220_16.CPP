@@ -19,7 +19,7 @@ extern f32 D_800C3EE0_de;
 #include "AUDIO/8025A3EC_4.H"
 #include "AUDIO_2/8025D470_2.H"
 
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 extern void func_80259440_de(void *arg0);
 extern void func_8025CC90_de(void *arg0);
@@ -49,7 +49,7 @@ s32 func_8025842C_de(void *arg0) {
     ((struct ContextRecAt2BC0 *)(object))->blue = (f32)bytes[1] * D_800C3EE0_de;
     queue = object + 0x110;
     ((struct ContextRecAt2BC0 *)(object))->field2BB0 = bytes[-2];
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     count = ((MenuRules *)(queue))->locked + 1;
     ((MenuRules *)(queue))->locked = count;
     if (count != 1) {
@@ -62,7 +62,7 @@ s32 func_8025842C_de(void *arg0) {
     func_8025BD00_de(&((struct ContextRecAt2BC0 *)(object))->menu[0]);
     {
         char *queue2 = object + 0x110;
-        u32 mask2 = func_802BCF30_de();
+        u32 mask2 = __osDisableInt();
         s32 count2 = ((MenuRules *)(queue2))->locked - 1;
 
         ((MenuRules *)(queue2))->locked = count2;
@@ -100,7 +100,7 @@ s32 func_8025842C_de(void *arg0) {
     return ++((struct ContextRecAt2BC0 *)(object))->frame;
 }
 
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 extern s32 func_8025C17C_de(void *arg0, s32 arg1);
 extern s32 func_80259AB8_de(void *arg0, s32 arg1);
 
@@ -116,7 +116,7 @@ s32 func_802585F4_de(struct ContextRecAt2BC0 *arg0, s32 arg1) {
         u32 mask;
 
         temp_s0 = &arg0->lock;
-        mask = func_802BCF30_de();
+        mask = __osDisableInt();
         temp_v1 = temp_s0->locked + 1;
         temp_s0->locked = temp_v1;
         if (temp_v1 != 1) {
@@ -132,7 +132,7 @@ s32 func_802585F4_de(struct ContextRecAt2BC0 *arg0, s32 arg1) {
         u32 temp_v0;
 
         temp_s0 = &arg0->lock;
-        temp_v0 = func_802BCF30_de();
+        temp_v0 = __osDisableInt();
         temp_v1 = temp_s0->locked - 1;
         temp_s0->locked = temp_v1;
         if (temp_v1 != 0) {
@@ -149,7 +149,7 @@ s32 func_802585F4_de(struct ContextRecAt2BC0 *arg0, s32 arg1) {
         u32 temp_v0;
 
         temp_s0 = &arg0->lock;
-        temp_v0 = func_802BCF30_de();
+        temp_v0 = __osDisableInt();
         temp_v1 = temp_s0->locked - 1;
         temp_s0->locked = temp_v1;
         if (temp_v1 != 0) {
@@ -166,7 +166,7 @@ s32 func_802585F4_de(struct ContextRecAt2BC0 *arg0, s32 arg1) {
         u32 temp_v0;
 
         temp_s0 = &arg0->lock;
-        temp_v0 = func_802BCF30_de();
+        temp_v0 = __osDisableInt();
         temp_v1 = temp_s0->locked - 1;
         temp_s0->locked = temp_v1;
         if (temp_v1 != 0) {
@@ -179,7 +179,7 @@ s32 func_802585F4_de(struct ContextRecAt2BC0 *arg0, s32 arg1) {
     return 0;
 }
 
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 
 
@@ -192,7 +192,7 @@ void func_80258740_de(s32 *engine) {
     u32 mask;
 
     menuRules = &((struct ContextRecAt2BC0 *)(engine))->lock;
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = menuRules->locked + 1;
     menuRules->locked = temp_v1;
     if (temp_v1 != 1) {
@@ -203,7 +203,7 @@ void func_80258740_de(s32 *engine) {
     __osRestoreInt(mask);
 }
 
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 
 
@@ -216,7 +216,7 @@ void func_802587A4_de(s32 *engine) {
     u32 mask;
 
     menuRules = &((struct ContextRecAt2BC0 *)(engine))->lock;
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = menuRules->locked - 1;
     menuRules->locked = temp_v1;
     if (temp_v1 != 0) {

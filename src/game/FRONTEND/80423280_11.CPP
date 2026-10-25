@@ -188,11 +188,11 @@ block_7:
             D_800E4F60->unk_45C = temp_a2;
             if (D_80154020.selection == -1) {
                 if (D_800E4F60->selection == 0) {
-                    var_f0 = (func_802B6560_de((f32) temp_a2 * 0.0033333334f) * 100.0f) + 150.0f;
+                    var_f0 = (Math_Cosf((f32) temp_a2 * 0.0033333334f) * 100.0f) + 150.0f;
                     var_a0_2 = D_800E4F60->unk_448;
                     var_a0_2->alpha = (u8) (u32) var_f0;
                 } else {
-                    var_f0 = (func_802B6560_de((f32) temp_a2 * 0.0033333334f) * 100.0f) + 150.0f;
+                    var_f0 = (Math_Cosf((f32) temp_a2 * 0.0033333334f) * 100.0f) + 150.0f;
                     var_a0_2 = D_800E4F60->item;
                     var_a0_2->alpha = (u8) (u32) var_f0;
                 }

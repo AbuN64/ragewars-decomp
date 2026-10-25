@@ -28,7 +28,7 @@ extern void func_8025637C_de(struct CartridgeReadWorker *, u32, s32, void *);
 extern void func_80256454_de(struct CartridgeReadWorker *, u32, s32, void *, struct Queue *, s32, s32);
 
 static inline void acquire(void) {
-    u32 token = func_802BCF30_de();
+    u32 token = __osDisableInt();
     s32 count = D_8010515C + 1;
     D_8010515C = count;
     if (count != 1) {
@@ -37,7 +37,7 @@ static inline void acquire(void) {
     } else __osRestoreInt(token);
 }
 static inline void release(void) {
-    u32 token = func_802BCF30_de();
+    u32 token = __osDisableInt();
     s32 count = D_8010515C - 1;
     D_8010515C = count;
     if (count != 0) {

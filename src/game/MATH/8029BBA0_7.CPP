@@ -81,7 +81,7 @@ static inline f32 safe_sqrt(f32 x) {
     if (x <= 0.0f) {
         return 0.0f;
     }
-    return func_802B72B0_de(x);
+    return Math_Sqrtf(x);
 }
 
 f32 func_8029E1D4_de(f32 a, f32 b) { return centered(a - b); }
@@ -145,7 +145,7 @@ void Vector3Distance(f32 *a, f32 *b) {
     sum = ((dx * dx) + (dy * dy)) + (dz * dz);
     if (!(((dx * dx) + (dy * dy)) + (dz * dz) <= 0.0f)) {
         sum = dz;
-        func_802B72B0_de(((dx * dx) + (dy * dy)) + (sum * sum));
+        Math_Sqrtf(((dx * dx) + (dy * dy)) + (sum * sum));
     }
 }
 
@@ -170,7 +170,7 @@ void func_8029E4DC_de(CVector3 *arg0)
   if (!((((arg0->x * arg0->x) + (arg0->y * arg0->y)) + (arg0->z * arg0->z)) <= 0.0f))
   {
     sum = arg0->z;
-    func_802B72B0_de(((arg0->x * arg0->x) + (arg0->y * arg0->y)) + (sum * sum));
+    Math_Sqrtf(((arg0->x * arg0->x) + (arg0->y * arg0->y)) + (sum * sum));
   }
 }
 
@@ -236,7 +236,7 @@ void Vector3Angles(f32 *arg0, f32 *arg1, f32 *arg2) {
     if (magnitude_squared <= 0.0f) {
         magnitude = 0.0f;
     } else {
-        magnitude = func_802B72B0_de(magnitude_squared);
+        magnitude = Math_Sqrtf(magnitude_squared);
     }
     *arg2 = func_8029C044_de(arg0[0], arg0[2]);
     *arg1 = -func_8029C044_de(arg0[1], magnitude);
@@ -257,7 +257,7 @@ void Vector3AnglesInverse(f32 *arg0, f32 *arg1, f32 *arg2) {
     if (magnitude_squared <= 0.0f) {
         magnitude = 0.0f;
     } else {
-        magnitude = func_802B72B0_de(magnitude_squared);
+        magnitude = Math_Sqrtf(magnitude_squared);
     }
     *arg2 = func_8029C044_de(arg0[0], arg0[2]);
     *arg1 = func_8029C044_de(arg0[1], magnitude);

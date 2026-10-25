@@ -20,7 +20,7 @@
 #include "SYSTEM_3/80265370.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 
 
@@ -67,7 +67,7 @@ void func_80258800_de(ContextRecAt2BC0 *arg0, s32 arg1) {
         u32 mask;
 
         temp_s0 = &arg0->lock;
-        mask = func_802BCF30_de();
+        mask = __osDisableInt();
         temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 1) {
@@ -85,7 +85,7 @@ void func_80258800_de(ContextRecAt2BC0 *arg0, s32 arg1) {
         u32 temp_v0;
 
         temp_s0 = &arg0->lock;
-        temp_v0 = func_802BCF30_de();
+        temp_v0 = __osDisableInt();
         temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 0) {
@@ -107,7 +107,7 @@ void func_802588D4_de(ContextRecAt2BC0 *arg0, s32 arg1) {
     u32 temp_v0;
 
     temp_s0 = &arg0->lock;
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
@@ -121,7 +121,7 @@ void func_802588D4_de(ContextRecAt2BC0 *arg0, s32 arg1) {
     func_8025BF08_de(record, arg1);
     func_802599EC_de(&arg0->view[0], arg1);
     temp_s0 = &arg0->lock;
-    temp_v0 = func_802BCF30_de();
+    temp_v0 = __osDisableInt();
     temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 0) {
@@ -140,7 +140,7 @@ void func_802589A8_de(ContextRecAt2BC0 *arg0, s32 arg1) {
     u32 temp_v0;
 
     temp_s0 = &arg0->lock;
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
@@ -154,7 +154,7 @@ void func_802589A8_de(ContextRecAt2BC0 *arg0, s32 arg1) {
     func_8025C008_de(record, arg1);
     func_80259A50_de(&arg0->view[0], arg1);
     temp_s0 = &arg0->lock;
-    temp_v0 = func_802BCF30_de();
+    temp_v0 = __osDisableInt();
     temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 0) {
@@ -233,7 +233,7 @@ void func_80258C0C_de(void *arg0, s32 arg1) {
         u32 mask;
 
         temp_s0 = &((ContextRecAt2BC0 *)(arg0))->lock;
-        mask = func_802BCF30_de();
+        mask = __osDisableInt();
         temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 1) {
@@ -252,7 +252,7 @@ void func_80258C0C_de(void *arg0, s32 arg1) {
 
         temp_s0 = &((ContextRecAt2BC0 *)(arg0))->lock;
         ((ContextRecAt2BC0 *)(arg0))->field2B9C = 0;
-        temp_v0 = func_802BCF30_de();
+        temp_v0 = __osDisableInt();
         temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 0) {
@@ -320,7 +320,7 @@ s32 func_80258D50_de(char *obj, s32 owner)
         u32 temp_a0;
 
         temp_s0 = &((ContextRecAt2BC0 *)(obj))->lock;
-        temp_a0 = func_802BCF30_de();
+        temp_a0 = __osDisableInt();
         temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 1) {
@@ -341,7 +341,7 @@ s32 func_80258D50_de(char *obj, s32 owner)
         u32 temp_v0;
 
         temp_s0 = &((ContextRecAt2BC0 *)(obj))->lock;
-        temp_v0 = func_802BCF30_de();
+        temp_v0 = __osDisableInt();
         temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 0) {

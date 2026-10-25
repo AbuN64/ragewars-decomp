@@ -5,7 +5,7 @@
 #include "particle/80271B18_3.H"
 #include "COMMON/POOLED_FLOATS.H"
 
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 static __inline__ CVector3 project(CVector3 *arg0, CVector3 *arg1) {
     CVector3 projected;
@@ -18,7 +18,7 @@ static __inline__ CVector3 project(CVector3 *arg0, CVector3 *arg1) {
     return projected;
 }
 
-extern f32 func_802B72B0_de(f32 arg0);
+extern f32 Math_Sqrtf(f32 arg0);
 
 CVector3 func_802723FC_de(CVector3 *remaining, CVector3 *arg1) {
     CVector3 projected;
@@ -27,11 +27,11 @@ CVector3 func_802723FC_de(CVector3 *remaining, CVector3 *arg1) {
 
     projected = project(remaining, arg1);
 
-    projectedMagnitude = func_802B72B0_de((projected.x * projected.x) +
+    projectedMagnitude = Math_Sqrtf((projected.x * projected.x) +
                                        (projected.y * projected.y) +
                                        (projected.z * projected.z));
     if (projectedMagnitude != 0.0f) {
-        magnitudeRatio = func_802B72B0_de((remaining->x * remaining->x) +
+        magnitudeRatio = Math_Sqrtf((remaining->x * remaining->x) +
                                        (remaining->y * remaining->y) +
                                        (remaining->z * remaining->z)) / projectedMagnitude;
 
@@ -50,7 +50,7 @@ s32 func_8027254C_de(f32 *arg0, f32 arg1) {
 
     magSq = (arg0[0] * arg0[0]) + (arg0[1] * arg0[1]) + (arg0[2] * arg0[2]);
     if ((arg1 * arg1) < magSq) {
-        mag = func_802B72B0_de(magSq);
+        mag = Math_Sqrtf(magSq);
         if (mag == 0.0f) {
             return 0;
         }
@@ -85,7 +85,7 @@ f32 func_802725FC_de(f32 *delta) {
     if (magnitude_squared == zero) {
         return zero;
     }
-    ratio = y / func_802B72B0_de(magnitude_squared);
+    ratio = y / Math_Sqrtf(magnitude_squared);
     if (ratio < *(&D_800C48B0_de + 1)) {
         return zero;
     }
@@ -109,7 +109,7 @@ f32 Particle_GetPointDistance(f32 *a, f32 *b) {
     f32 dx = a[0] - b[0];
     f32 dy = a[1] - b[1];
     f32 dz = a[2] - b[2];
-    return func_802B72B0_de((dx * dx) + (dy * dy) + (dz * dz));
+    return Math_Sqrtf((dx * dx) + (dy * dy) + (dz * dz));
 }
 
 void func_80272748_de(CVector3 *motion, f32 arg1) {
@@ -119,7 +119,7 @@ void func_80272748_de(CVector3 *motion, f32 arg1) {
 
     magSq = (motion->x * motion->x) + (motion->y * motion->y) + (motion->z * motion->z);
     if ((arg1 * arg1) < magSq) {
-        mag = func_802B72B0_de(magSq);
+        mag = Math_Sqrtf(magSq);
         scale = arg1 / mag;
         motion->x = motion->x * scale;
         motion->y = motion->y * scale;
@@ -329,8 +329,8 @@ void func_80272D00_de(f32 (*mfThis)[4], f32 Theta, f32 X, f32 Y, f32 Z) {
     f32 cosine;
     f32 ab, bc, ca, t, one;
 
-    sine = func_802B7130_de(Theta);
-    cosine = func_802B6560_de(Theta);
+    sine = Math_Sinf(Theta);
+    cosine = Math_Cosf(Theta);
 
     one = D_800C48D8_de;
     t = one - cosine;
@@ -364,13 +364,13 @@ void func_80272D00_de(f32 (*mfThis)[4], f32 Theta, f32 X, f32 Y, f32 Z) {
 void func_80272E3C_de(f32 *m, f32 x, f32 y, f32 z)
 {
   f32 zero;
-  f32 ax = func_802B7130_de(x);
-  f32 bx = func_802B6560_de(x);
-  f32 ay = func_802B7130_de(y);
-  f32 by = func_802B6560_de(y);
+  f32 ax = Math_Sinf(x);
+  f32 bx = Math_Cosf(x);
+  f32 ay = Math_Sinf(y);
+  f32 by = Math_Cosf(y);
   int new_var;
-  f32 az = func_802B7130_de(z);
-  f32 bz = func_802B6560_de(z);
+  f32 az = Math_Sinf(z);
+  f32 bz = Math_Cosf(z);
   new_var = 0;
   m[new_var] = by * bz;
   m[1] = by * az;

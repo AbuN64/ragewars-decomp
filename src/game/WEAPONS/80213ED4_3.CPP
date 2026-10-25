@@ -23,7 +23,7 @@ extern void Particle_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 
 extern void Particle_ScaleVector(CVector3 *result, CVector3 *vec, f32 scale);
 
 
-extern f32 func_802B72B0_de(f32 value);
+extern f32 Math_Sqrtf(f32 value);
 /* Places the goal beside kind-7 targets: pushed away from the anchor by both extents. */
 static inline void Weapons_PlaceGoalBeside(Actor_func_80214DD4_de *actor, Actor_func_80214DD4_de *target, Actor_func_80214DD4_de *anchor, CVector3 *outPos, s32 *outRoom) {
     CVector3 dir;
@@ -148,17 +148,17 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
     if (gap > 0.0f) {
         Particle_SubtractVectors(&away, &actor->pos, &pos);
         angle = Particle_GetHorizontalAngle(&away);
-        pos.x -= gap * func_802B7130_de(angle);
-        pos.z -= gap * func_802B6560_de(angle);
+        pos.x -= gap * Math_Sinf(angle);
+        pos.z -= gap * Math_Cosf(angle);
     }
     if (mode == 2) {
         pos.y = RW_MIN_LT(pos.y, func_8024E80C_de(actor));
     }
     if (boost) {
         reach = Sound_GetActorReach(actor);
-        probe.x = actor->pos.x + reach * func_802B7130_de(tracker->angle);
+        probe.x = actor->pos.x + reach * Math_Sinf(tracker->angle);
         probe.y = tracker->height;
-        probe.z = actor->pos.z + reach * func_802B6560_de(tracker->angle);
+        probe.z = actor->pos.z + reach * Math_Cosf(tracker->angle);
         range = Weapons_FindClearAimAngle(actor, probe, target, D_800C2178_de);
         pos.y = tracker->height;
     } else {
@@ -170,10 +170,10 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
     out->range = range;
     out->pos = pos;
     out->delta = delta;
-    out->dist = func_802B72B0_de(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
+    out->dist = Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
     delta.y = 0.0f;
     pos.y = 0.0f;
     out->flatPos = pos;
     out->flatDelta = delta;
-    out->flatDist = func_802B72B0_de(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
+    out->flatDist = Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
 }

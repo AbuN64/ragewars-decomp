@@ -5,7 +5,7 @@
 #include "COMMON/UNUSED.H"
 
 
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 
 extern u32 func_802BCF00_de(void);

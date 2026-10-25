@@ -55,7 +55,7 @@ void func_802185D0_de(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 count, We
         if (item->icon != 0) {
             func_802AA950_de(item->icon, 0, &width, &height);
             if (menu->cursor == item->slot) {
-                red = func_802B6560_de(menu->spin) * 63.0f + 192.0f;
+                red = Math_Cosf(menu->spin) * 63.0f + 192.0f;
                 alpha = 1.0f;
                 green = red;
                 blue = red;

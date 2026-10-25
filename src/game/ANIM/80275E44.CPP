@@ -38,7 +38,7 @@ static inline void cross_edges(Node75 *node) {
 
 extern void *func_8028B2F8_de(Shared_World *arg0, s32 arg1);
 
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 
 extern void func_80276510_de(void *arg0, s32 arg1, void *arg2);
@@ -128,7 +128,7 @@ f32 func_802760BC_de(void *triangle, s32 arg1) {
     v0 = polygon->vertices[(arg1 + 1) % 3];
     dx = v0->x - v1->x;
     dz = v0->z - v1->z;
-    mag = func_802B72B0_de((dx * dx) + (dz * dz));
+    mag = Math_Sqrtf((dx * dx) + (dz * dz));
     if (mag == 0.0f) {
         return 0.0f;
     }

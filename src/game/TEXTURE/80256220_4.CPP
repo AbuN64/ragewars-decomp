@@ -7,7 +7,7 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
 
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 
 
@@ -19,7 +19,7 @@ void *func_8025661C_de(CartridgeReadWorker *cartridgeReadWorker) {
     u32 mask;
     void *head;
 
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     head = cartridgeReadWorker->available.head;
     if (head != 0) {
         func_80255ED8_de(&cartridgeReadWorker->available, head);
@@ -30,7 +30,7 @@ void *func_8025661C_de(CartridgeReadWorker *cartridgeReadWorker) {
     return head;
 }
 
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 
 
@@ -40,7 +40,7 @@ extern u32 func_802BCF30_de(void);
 void func_80256688_de(s32 worker, CartridgeReadRequest *request) {
     u32 mask;
 
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     func_80255ED8_de(&((CartridgeReadWorker *)worker)->pending, request);
     request->active = 0;
     func_80255CB8_de(&((CartridgeReadWorker *)worker)->available, request);

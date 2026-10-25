@@ -242,8 +242,8 @@ block_47:
                                 temp_v1_5 = (void *)var_s2->unk5D8;
                                 temp_v1_5->special_hits = (u16) (temp_v1_5->special_hits + 1);
                             }
-                            temp_f20 = func_802B7130_de(attacker->unk6C);
-                            temp_f3 = ((temp_s1->unk8 - reaction_source->unk8) * -temp_f20) + ((temp_s1->unk10 - reaction_source->unk10) * -func_802B6560_de(attacker->unk6C));
+                            temp_f20 = Math_Sinf(attacker->unk6C);
+                            temp_f3 = ((temp_s1->unk8 - reaction_source->unk8) * -temp_f20) + ((temp_s1->unk10 - reaction_source->unk10) * -Math_Cosf(attacker->unk6C));
                             if (temp_f3 < D_800C22DC_de) {
 
                                 temp_s1->unk13C4 = 1;

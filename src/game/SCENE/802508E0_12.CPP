@@ -8,7 +8,7 @@
 
 extern OSMesgQueue D_80101140;
 
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 
 extern struct Shape_typemap_165 *func_802514A8_de(s32, u32);
@@ -32,7 +32,7 @@ struct Shape_typemap_165 *Scene_AllocResourceBlock(s32 arg0, void *handle, s32 t
     u32 token2;
     u32 flags;
 
-    token = func_802BCF30_de();
+    token = __osDisableInt();
     counter = D_8010515C + 1;
     D_8010515C = counter;
     if (counter != 1) {
@@ -61,7 +61,7 @@ struct Shape_typemap_165 *Scene_AllocResourceBlock(s32 arg0, void *handle, s32 t
             node = 0;
         }
     }
-    token2 = func_802BCF30_de();
+    token2 = __osDisableInt();
     counter2 = D_8010515C - 1;
     D_8010515C = counter2;
     if (counter2 != 0) {
@@ -81,7 +81,7 @@ struct Shape_typemap_165 *func_80254600_de(s32 unused0, s32 unused1, s32 arg2) {
     u32 token;
     u32 token2;
 
-    token = func_802BCF30_de();
+    token = __osDisableInt();
     counter = D_8010515C + 1;
     D_8010515C = counter;
     if (counter != 1) {
@@ -109,7 +109,7 @@ struct Shape_typemap_165 *func_80254600_de(s32 unused0, s32 unused1, s32 arg2) {
             node = 0;
         }
     }
-    token2 = func_802BCF30_de();
+    token2 = __osDisableInt();
     counter2 = D_8010515C - 1;
     D_8010515C = counter2;
     if (counter2 != 0) {

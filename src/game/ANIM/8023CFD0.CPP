@@ -8,7 +8,7 @@
 #include "ANIM/8023F740.H"
 
 extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 extern void Particle_ScaleVector(void *, void *, f32);
 extern void func_8023F43C_de(void *arg0);
 extern void func_80242BF0_de(void *arg0);
@@ -36,7 +36,7 @@ s32 func_8023D158_de(ActorMotion *object) {
     Particle_SubtractVectors(&object->velocity,
                   &object->end,
                   &object->start);
-    magnitude = func_802B72B0_de(
+    magnitude = Math_Sqrtf(
         (object->velocity.x * object->velocity.x) +
         (object->velocity.y * object->velocity.y) +
         (object->velocity.z * object->velocity.z));

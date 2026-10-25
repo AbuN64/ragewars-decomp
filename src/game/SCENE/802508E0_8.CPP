@@ -35,7 +35,7 @@ void func_80253344_de(s32 unused) {
     var_s0 = 1;
     temp_s1->active = var_s0;
     temp_s1->count += var_s0;
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = D_8010515C + var_s0;
     D_8010515C = temp_v1;
     if (temp_v1 != var_s0) {
@@ -52,7 +52,7 @@ void func_80253344_de(s32 unused) {
         func_802515F0_de(0, 0);
         var_s0++;
     } while (var_s0 < 10);
-    temp_v0 = func_802BCF30_de();
+    temp_v0 = __osDisableInt();
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {

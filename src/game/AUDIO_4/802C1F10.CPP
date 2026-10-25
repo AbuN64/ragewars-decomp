@@ -17,7 +17,7 @@ void func_802BCE20_de(Func802C1F10Node *arg0) {
     Func802C1F10Node **head;
     s32 token;
     node = arg0;
-    token = func_802BCF30_de();
+    token = __osDisableInt();
     if (node == 0) {
         node = D_800D5270;
     } else if (node->field10 != 1) {

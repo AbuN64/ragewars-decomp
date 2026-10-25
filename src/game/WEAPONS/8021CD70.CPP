@@ -114,7 +114,7 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
     best = 0;
     if (player->weapon != -1) angle = ((DraftAimWeapon *)D_800D052C[player->weapon])->angle;
     else angle = bestPosition.x;
-    threshold = func_802B6560_de(angle * D_800C238C_de);
+    threshold = Math_Cosf(angle * D_800C238C_de);
     if (angle != 0.0f) {
         unit.x = 0.0f;
         unit.y = 0.0f;
@@ -186,16 +186,16 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
         Particle_NormalizeVec3(&axis.x);
         scale = D_800C239C_de;
         threshold = Nav_ArcCos(threshold);
-        amount = func_802B72B0_de(D_800C23A0_de - threshold / (angle * scale));
-        amount = func_802B72B0_de(amount);
+        amount = Math_Sqrtf(D_800C23A0_de - threshold / (angle * scale));
+        amount = Math_Sqrtf(amount);
         threshold *= amount;
         threshold *= scale;
-        amount = func_802B7130_de(threshold);
+        amount = Math_Sinf(threshold);
         correction.x = axis.x * amount;
         correction.y = axis.y * amount;
         correction.z = axis.z * amount;
         D_80115DEC = amount;
-        correction.w = func_802B6560_de(threshold);
+        correction.w = Math_Cosf(threshold);
         facing = func_8024796C_de((char *)player);
         MultiplyQuaternions(&result, &facing, &correction);
     }

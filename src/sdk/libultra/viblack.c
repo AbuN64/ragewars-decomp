@@ -12,7 +12,7 @@ void osViBlack(s32 arg0) {
     u16 *ptr;
     u16 v;
 
-    temp_a0 = func_802BCF30_de();
+    temp_a0 = __osDisableInt();
     if (arg0 & 0xFF) {
         ptr = (u16 *)D_800D4414;
         v = *ptr | 0x20;

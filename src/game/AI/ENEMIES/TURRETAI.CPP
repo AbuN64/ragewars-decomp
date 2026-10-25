@@ -51,20 +51,20 @@ CQuatern CVector3_GetDirectionRotation2(CVector3 *dir) {
         q.w = D_800C1A00_de;
     } else if (dir->y < D_800C1A04_de) {
         angle = D_800C1A08_de;
-        q.x = D_80115DEC = func_802B7130_de(angle);
+        q.x = D_80115DEC = Math_Sinf(angle);
         q.y = 0.0f;
         q.z = 0.0f;
-        q.w = func_802B6560_de(angle);
+        q.w = Math_Cosf(angle);
     } else {
         turn = Nav_ArcCos(dir->x * up.x + dir->y * up.y + dir->z * up.z);
         Particle_CrossVectors(&axis, &up, dir);
         Particle_NormalizeVec3(&axis);
         angle = turn * D_800C1A0C;
-        D_80115DEC = func_802B7130_de(angle);
+        D_80115DEC = Math_Sinf(angle);
         q.x = axis.x * D_80115DEC;
         q.y = axis.y * D_80115DEC;
         q.z = axis.z * D_80115DEC;
-        q.w = func_802B6560_de(angle);
+        q.w = Math_Cosf(angle);
     }
     return q;
 }
@@ -84,19 +84,19 @@ void Turret_CalcOrientMtx(struct Owner *owner, RiderRecAt130V1 *rider) {
     if (segment->m_RotNode == -1) {
         angle = owner->heading;
         angleScale = D_800C1A10_de;
-        sine = func_802B7130_de(angle * angleScale);
+        sine = Math_Sinf(angle * angleScale);
         rotation.x = 0.0f;
         rotation.y = sine;
         D_80115DEC = sine;
         rotation.z = 0.0f;
-        rotation.w = func_802B6560_de(owner->heading * angleScale);
+        rotation.w = Math_Cosf(owner->heading * angleScale);
     } else {
-        D_80115DEC = func_802B7130_de(rider->heading * D_800C1A14_de);
+        D_80115DEC = Math_Sinf(rider->heading * D_800C1A14_de);
     }
     rotation.x = 0.0f;
     rotation.z = 0.0f;
     rotation.y = D_80115DEC;
-    rotation.w = func_802B6560_de(rider->heading * D_800C1A18);
+    rotation.w = Math_Cosf(rider->heading * D_800C1A18);
     MultiplyQuaternions(&combined, &rotation, &owner->orientation);
     MatrixFromQuaternion(&combined, model);
     func_8027347C_de(model, owner->scale.x, owner->scale.y, owner->scale.z);

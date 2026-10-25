@@ -41,7 +41,7 @@ void func_80433398_de(s32 arg0) {
         case 0xC:
             temp_s0 = func_8041B7FC_de(D_800E54A4->root, var_s1);
             temp_v0_4 = (Blk *)((char *)D_800E54A4 + (var_s1 * 4));
-            temp_f0 = (func_802B6560_de((f32)var_s1 + ((f32)temp_v0_4->unk2C * 0.005f)) * 100.0f) + 150.0f;
+            temp_f0 = (Math_Cosf((f32)var_s1 + ((f32)temp_v0_4->unk2C * 0.005f)) * 100.0f) + 150.0f;
             temp_s0->value = temp_f0;
             temp_a0_2 = (Blk *)((char *)D_800E54A4 + (var_s1 * 0xB68));
             temp_v1_2 = temp_a0_2->unkBA0;
@@ -68,7 +68,7 @@ void func_80433398_de(s32 arg0) {
             temp_idx = ((temp_a0->unkB30 - temp_a0->unkB34) * 4) + (var_s1 * 0xB68);
             temp_s0 = ((Blk *)((char *)D_800E54A4 + temp_idx))->unkB38;
             temp_v0_5 = (Blk *)((char *)D_800E54A4 + (var_s1 * 4));
-            temp_f0 = (func_802B6560_de((f32)var_s1 + ((f32)temp_v0_5->unk2C * 0.005f)) * 100.0f) + 150.0f;
+            temp_f0 = (Math_Cosf((f32)var_s1 + ((f32)temp_v0_5->unk2C * 0.005f)) * 100.0f) + 150.0f;
             temp_s0->value = temp_f0;
             break;
         }

@@ -9,7 +9,7 @@ typedef struct ClipView FlareActor;
 #include "COMMON/LENS_FLARE.H"
 extern s32 D_800E28D0;
 extern Gfx *D_80110634;
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 void Camera_DrawLensFlare(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 special, s32 unused) {
     FlareRadii radii = D_800C344C_de;
     FlareAlphas alphas = D_800C3468_de;
@@ -23,9 +23,9 @@ void Camera_DrawLensFlare(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 sp
     dy = D_800E28D4 / 2 - y;
     gfx = D_80110634++;
     gDPSetTextureFilter(gfx, G_TF_BILERP);
-    distance = func_802B72B0_de(dx * dx + dy * dy);
+    distance = Math_Sqrtf(dx * dx + dy * dy);
     if (!special) {
-        edge = distance / func_802B72B0_de((f32)(D_800E28D0 * D_800E28D0) * 0.25f + (f32)(D_800E28D4 * D_800E28D4) * 0.25f);
+        edge = distance / Math_Sqrtf((f32)(D_800E28D0 * D_800E28D0) * 0.25f + (f32)(D_800E28D4 * D_800E28D4) * 0.25f);
         if (edge > 1.0f) intensity = 0.0f;
         else intensity *= 1.0f - edge;
     }

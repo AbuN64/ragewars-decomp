@@ -18,7 +18,7 @@ extern f32 D_800C4968_de[2];
 
 extern f32 D_800C4970_de[2];
 
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 extern char D_800C49A0_de;
 
@@ -32,7 +32,7 @@ extern const float D_800C49A8_de;
 extern const float D_800C49B0_de;
 
 
-extern float func_802B72B0_de(float);
+extern float Math_Sqrtf(float);
 
 /* Returns the normalised cross product of a path node's two edge vectors, cached in D_80115E00 for the last node seen, with a default up vector for a null node. Adapted from func_80275F28_de, which it inlines to compute the raw cross product, with the result normalised through func_8027207C_de and cached by a second last-node word; the inlined copy records its last node before copying its result. */
 
@@ -395,7 +395,7 @@ void func_80274BF4_de(void *arg0)
             (o->unk20 * o->unk20);
     zOut = 0.0f;
     if (magSq != 0.0f) {
-        mag = func_802B72B0_de(magSq);
+        mag = Math_Sqrtf(magSq);
         magSq = *(f32 *)&D_800C49A0_de / mag;
         o->unk24 = o->unk18 * magSq;
         o->unk28 = o->unk1C * magSq;
@@ -419,7 +419,7 @@ void func_80274C7C_de(void *arg0)
             (o->unk20 * o->unk20);
     zOut = 0.0f;
     if (magSq != 0.0f) {
-        mag = func_802B72B0_de(magSq);
+        mag = Math_Sqrtf(magSq);
         magSq = D_800C49A4_de / mag;
         o->unk24 = o->unk18 * magSq;
         o->unk28 = o->unk1C * magSq;
@@ -477,7 +477,7 @@ void func_80274DFC_de(float mf[4][4], float xEye, float yEye, float zEye,
     yLook = yAt - yEye;
     zLook = zAt - zEye;
 
-    len = D_800C49A8_de / func_802B72B0_de(xLook * xLook + yLook * yLook + zLook * zLook);
+    len = D_800C49A8_de / Math_Sqrtf(xLook * xLook + yLook * yLook + zLook * zLook);
     xLook *= len;
     yLook *= len;
     zLook *= len;
@@ -489,7 +489,7 @@ void func_80274DFC_de(float mf[4][4], float xEye, float yEye, float zEye,
         xRight = (&D_800C49A8_de)[1];
     }
     one = D_800C49B0_de;
-    len = one / func_802B72B0_de(xRight * xRight + yRight * yRight + zRight * zRight);
+    len = one / Math_Sqrtf(xRight * xRight + yRight * yRight + zRight * zRight);
     xRight *= len;
     yRight *= len;
     zRight *= len;
@@ -497,7 +497,7 @@ void func_80274DFC_de(float mf[4][4], float xEye, float yEye, float zEye,
     xUp = yLook * zRight - zLook * yRight;
     yUp = zLook * xRight - xLook * zRight;
     zUp = xLook * yRight - yLook * xRight;
-    len = one / func_802B72B0_de(xUp * xUp + yUp * yUp + zUp * zUp);
+    len = one / Math_Sqrtf(xUp * xUp + yUp * yUp + zUp * zUp);
     xUp *= len;
     yUp *= len;
     zUp *= len;

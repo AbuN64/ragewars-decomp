@@ -8,7 +8,7 @@
 #include "ANIM/RAY180.H"
 #include "stddef.h"
 
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 /* Returns the distance from point p to the segment from a to b: the offset of p from a is reduced by
  * its projection onto the segment direction, clamped to the segment ends, before taking the length. */
@@ -37,7 +37,7 @@ f32 func_80241840_de(CVector3 *a, CVector3 *b, CVector3 *p) {
         Particle_SubtractVectors(&offset, &offset, &dir);
     }
     value = offset.x * offset.x + offset.y * offset.y + offset.z * offset.z;
-    return func_802B72B0_de(value);
+    return Math_Sqrtf(value);
 }
 
 #if defined(VERSION_US)

@@ -3,7 +3,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/EXTERNS_16.H"
-#include "sdk/lib_802BB630/802BC3B0.H"
+#include "sdk/MATH/802BC3B0.H"
 
  /* 0.5, followed by 2^31 */
 

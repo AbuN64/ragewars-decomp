@@ -70,7 +70,7 @@ void MatrixFromQuaternion(f32 *, f32 *);
 
 
 void func_80279DD0_de(void *, f32);
-f32 func_802B72B0_de(f32);
+f32 Math_Sqrtf(f32);
 CQuatern func_80271818_de(f32 *);            /* extern */
 extern Shared_MenuData D_80145040;
 extern Shared_GlobalRuntimeState D_80145060;

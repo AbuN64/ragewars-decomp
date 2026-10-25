@@ -87,7 +87,7 @@ f32 func_8029D8B0_de(f32 arg0) {
 
 void func_8029D8BC_de(f32 arg0) {
     if (!(arg0 <= 0.0f)) {
-        func_802B72B0_de(arg0);
+        Math_Sqrtf(arg0);
     }
 }
 
@@ -97,7 +97,7 @@ f32 func_8029D8E8_de(f32 arg0) {
     if (arg0 <= 0.0f) {
         var_f0 = 0.0f;
     } else {
-        var_f0 = func_802B72B0_de(arg0);
+        var_f0 = Math_Sqrtf(arg0);
     }
     return D_800C5B0C_de / var_f0;
 }
@@ -306,7 +306,7 @@ f32 func_8029DE48_de(f32 x) {
         if (x <= 0.0f) {
             root = 0.0f;
         } else {
-            root = func_802B72B0_de(x);
+            root = Math_Sqrtf(x);
         }
     } while (0);
     result = D_800C5C20_de - root * poly;
@@ -340,7 +340,7 @@ f32 func_8029DF48_de(f32 x) {
         if (x <= 0.0f) {
             root = 0.0f;
         } else {
-            root = func_802B72B0_de(x);
+            root = Math_Sqrtf(x);
         }
     } while (0);
     result = *(&D_800C5C40_de + 1) - root * poly;

@@ -222,7 +222,7 @@ Player *func_8028C834_de(WorldRecAt1B6A4 *world) {
     for (i = 0; i < world->count; i++) {
         object = world->objects[i];
         Particle_SubtractVectors(&delta, &object->pos, &player->pos);
-        distance = func_802B72B0_de(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
+        distance = Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
         if (distance <= best) {
             nearest = object;
             best = distance;

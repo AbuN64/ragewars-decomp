@@ -17,7 +17,7 @@
 
 
 extern f32 Particle_GetActorHeight(Actor_func_80214310_de *);
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 extern CQuatern func_8024796C_de(Actor_func_80214310_de *);
 extern void MatrixFromQuaternion(CQuatern *, Matrix *);
 
@@ -46,7 +46,7 @@ s32 func_80214310_de(Actor_func_80214310_de *viewer, Actor_func_80214310_de *tar
   to.y += target->eye;
   to.y += Particle_GetActorHeight(target) * 0.9f;
   Particle_SubtractVectors(&dir, &to, &from);
-  distance = func_802B72B0_de(((dir.x * dir.x) + (dir.y * dir.y)) + (dir.z * dir.z));
+  distance = Math_Sqrtf(((dir.x * dir.x) + (dir.y * dir.y)) + (dir.z * dir.z));
   if (range < distance)
   {
     return 0;
@@ -63,7 +63,7 @@ s32 func_80214310_de(Actor_func_80214310_de *viewer, Actor_func_80214310_de *tar
   flatDir.y = 0.0f;
   zero = *((volatile f32 *) (&flatDir.y));
   flatDir.z = dir.z;
-  dirLength = func_802B72B0_de((flatDir.x * flatDir.x) + (flatDir.z * flatDir.z));
+  dirLength = Math_Sqrtf((flatDir.x * flatDir.x) + (flatDir.z * flatDir.z));
   if (dirLength != zero)
   {
     if (across)
@@ -80,7 +80,7 @@ s32 func_80214310_de(Actor_func_80214310_de *viewer, Actor_func_80214310_de *tar
   flatForward.x = forward.x;
   flatForward.y = zero;
   flatForward.z = forward.z;
-  forwardLength = func_802B72B0_de((flatForward.x * flatForward.x) + (flatForward.z * flatForward.z));
+  forwardLength = Math_Sqrtf((flatForward.x * flatForward.x) + (flatForward.z * flatForward.z));
   if (forwardLength != zero)
   {
     flatForward.x /= forwardLength;

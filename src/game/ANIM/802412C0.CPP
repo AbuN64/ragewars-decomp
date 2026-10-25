@@ -14,7 +14,7 @@ f32 func_802417C4_de(f32 *arg0) {
     f32 result;
     f32 zero;
 
-    magnitude = func_802B72B0_de((arg0[18] * arg0[18]) + (arg0[20] * arg0[20]));
+    magnitude = Math_Sqrtf((arg0[18] * arg0[18]) + (arg0[20] * arg0[20]));
     zero = 0.0f;
     if (magnitude == zero) {
         return zero;

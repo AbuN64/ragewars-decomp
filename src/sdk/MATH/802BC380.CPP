@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "TYPES.H"
 
-f32 func_802B72B0_de(f32 value) {
+f32 Math_Sqrtf(f32 value) {
     return __builtin_sqrtf(value);
 }
 

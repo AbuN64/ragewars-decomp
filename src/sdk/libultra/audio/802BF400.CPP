@@ -12,7 +12,7 @@
 extern Field_void_4 *D_800D8440;
 
 void *osViGetCurrentFramebuffer(void) {
-    void *result = func_802BCF30_de();
+    void *result = __osDisableInt();
     void *saved = D_800D8440->value;
     __osRestoreInt(result);
     return saved;

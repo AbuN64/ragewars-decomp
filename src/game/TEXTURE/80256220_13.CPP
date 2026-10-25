@@ -15,7 +15,7 @@
 #include "SYSTEM_2/8025E280.H"
 #include "SYSTEM_2/8025E280_3.H"
 #include "TEXTURE/80256220_13.H"
-#include "sdk/lib_802BB630/802BC390.H"
+#include "sdk/MATH/802BC390.H"
 #include "sdk/libgultra/libasm_802BD1A8_3.h"
 #include "sdk/libgultra/part_800C7F20/code_802B7520.h"
 #include "sdk/OSINT/802C0CB0.H"

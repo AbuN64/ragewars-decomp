@@ -65,12 +65,12 @@ void func_802095F8_de(Brain *object) {
         delta.y -= origin.y;
         delta.z -= origin.z;
         correction = targetHeight - ownHeight;
-        brain->distance = func_802B72B0_de(delta.x*delta.x + delta.y*delta.y + delta.z*delta.z);
+        brain->distance = Math_Sqrtf(delta.x*delta.x + delta.y*delta.y + delta.z*delta.z);
         vertical = delta.y;
         delta.y = 0.0f;
         vertical += correction;
         zero = delta.y;
-        horizontal = func_802B72B0_de(delta.x*delta.x + delta.z*delta.z);
+        horizontal = Math_Sqrtf(delta.x*delta.x + delta.z*delta.z);
         if (horizontal == zero) {
             if (vertical < zero) brain->angle = D_800C1C7C_de;
             else brain->angle = D_800C1C80_de;

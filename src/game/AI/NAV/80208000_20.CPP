@@ -79,10 +79,10 @@ s32 func_8020DDF4_eu(ActorRec *actor) {
             delta.x = temp_fv1f;
             delta.y = temp_fv1;
             delta.z = temp_fv0f;
-            actor->field264 = func_802B72B0_de((temp_fv1f * temp_fv1f) + (temp_fv1 * temp_fv1) + (temp_fv0f * temp_fv0f));
+            actor->field264 = Math_Sqrtf((temp_fv1f * temp_fv1f) + (temp_fv1 * temp_fv1) + (temp_fv0f * temp_fv0f));
             temp_fs1 = delta.y;
             delta.y = 0;
-            temp_fs0f = func_802B72B0_de((delta.x * delta.x) + (delta.z * delta.z));
+            temp_fs0f = Math_Sqrtf((delta.x * delta.x) + (delta.z * delta.z));
             {
                 switch (trajectoryMode) {
                 case 10:
@@ -198,11 +198,11 @@ block_43:
                     delta.x = temp_ft0;
                     delta.y = temp_fv1f_2;
                     delta.z = temp_fv1_4;
-                    actor->field264 = func_802B72B0_de((temp_ft0 * temp_ft0) + (temp_fv1f_2 * temp_fv1f_2) + (temp_fv1_4 * temp_fv1_4));
+                    actor->field264 = Math_Sqrtf((temp_ft0 * temp_ft0) + (temp_fv1f_2 * temp_fv1f_2) + (temp_fv1_4 * temp_fv1_4));
                     temp_fs1 = delta.y;
                     delta.y = 0;
-                    temp_fs0f = func_802B72B0_de((delta.x * delta.x) + (delta.z * delta.z));
-                    temp_fv0_4 = func_802B6560_de(actor->field278 * 0.0174532942f);
+                    temp_fs0f = Math_Sqrtf((delta.x * delta.x) + (delta.z * delta.z));
+                    temp_fv0_4 = Math_Cosf(actor->field278 * 0.0174532942f);
                     temp_fs0_2 = temp_fv0_4 * temp_fv0_4;
                     temp_fv0f_2 = (func_8029DD3C_de(actor->field278 * 0.0174532942f) * temp_fs0f) + ((lateral * (temp_fs0f * temp_fs0f)) / (2.0f * (scale * scale) * temp_fs0_2));
                     if (((temp_fs1 - 1.0f) <= temp_fv0f_2) && (temp_fv0f_2 <= (temp_fs1 + 1.0f))) {
@@ -331,16 +331,16 @@ s32 func_8020E674_de(ActorRec *actor, f32 scale, f32 lateral) {
 
     invDuration = D_800C1E40_de / actor->field264;
     delta.x = (actor->field258 - actor->instance->header.spatial.position.x) * invDuration;
-    delta.x *= scale * func_802B6560_de(actor->field278);
+    delta.x *= scale * Math_Cosf(actor->field278);
     delta.z = (actor->field260 - actor->instance->header.spatial.position.z) * invDuration;
-    delta.z *= scale * func_802B6560_de(actor->field278);
-    delta.y = scale * func_802B7130_de(actor->field278);
+    delta.z *= scale * Math_Cosf(actor->field278);
+    delta.y = scale * Math_Sinf(actor->field278);
 
     acceleration.x = 0.0f;
     acceleration.y = lateral;
     acceleration.z = 0.0f;
 
-    total = (scale * func_802B6560_de(actor->field278)) / actor->field264;
+    total = (scale * Math_Cosf(actor->field278)) / actor->field264;
     if (total == 0.0f) {
         return 0;
     }

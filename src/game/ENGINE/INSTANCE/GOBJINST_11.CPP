@@ -42,13 +42,13 @@ void func_8024B53C_de(void *levelActor) {
 
     angle = ((struct LevelActor *)(levelActor))->yaw;
     scale = (0.5f);
-    sine = func_802B7130_de(angle * scale);
+    sine = Math_Sinf(angle * scale);
     trig.x = 0.0f;
     trig.y = sine;
     trig.z = 0.0f;
     angle = ((struct LevelActor *)(levelActor))->yaw * scale;
     D_80115DEC = sine;
-    trig.w = func_802B6560_de(angle);
+    trig.w = Math_Cosf(angle);
 
     product_ptr = &product;
     MultiplyQuaternions(product_ptr, &trig, copy_ptr);

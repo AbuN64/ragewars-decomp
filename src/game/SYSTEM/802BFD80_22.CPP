@@ -11,7 +11,7 @@
 
 extern OSThread_s *D_800D526C;
 extern void D_002BC76C(void);
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 void func_802BAC90_de(OSThread_s *t, s32 id, void (*entry)(void *), void *arg, void *sp, s32 p)
 {
@@ -35,7 +35,7 @@ void func_802BAC90_de(OSThread_s *t, s32 id, void (*entry)(void *), void *arg, v
     t->state = 1;
     t->flags = 0;
 
-    saveMask = func_802BCF30_de();
+    saveMask = __osDisableInt();
     active = &D_800D526C;
     t->tlnext = *active;
     *active = t;

@@ -25,13 +25,13 @@ static inline f32 distanceToNode(func_80285880_S1 *node, CVector3 from) {
     f32 x = from.x - node->position.x;
     f32 y = from.y - node->position.y;
     f32 z = from.z - node->position.z;
-    return func_802B72B0_de(x * x + y * y + z * z);
+    return Math_Sqrtf(x * x + y * y + z * z);
 }
 /* Sums the strength of every source in the pool at the given position (inverse-distance falloff scaled by each
  * source's two curves), clamped to 0..1; the pool is read with interrupts disabled. */
 f32 Render_GetSpatialEffectLevel(func_80285D00_S1 *pool, CVector3 position) {
     f32 value = pool->baseLevel;
-    s32 mask = func_802BCF30_de();
+    s32 mask = __osDisableInt();
     func_80285880_S1 *node;
     f32 distance, amount, first, second, limit;
     if (D_801462C8.counters.transitionActive == 1 || Camera_IsSequenceInWindow() != 0) {
@@ -161,7 +161,7 @@ f32 func_802859D0_de(f32 *arg0, u32 arg1, u32 arg2, u32 arg3) {
     dx = *(f32 *)&arg1 - arg0[3];
     dy = *(f32 *)&arg2 - arg0[4];
     dz = *(f32 *)&arg3 - arg0[5];
-    magnitude = func_802B72B0_de((dx * dx) + (dy * dy) + (dz * dz));
+    magnitude = Math_Sqrtf((dx * dx) + (dy * dy) + (dz * dz));
     if ((magnitude == 0.0f) || ((limit = arg0[6]) == 0.0f)) {
         factor = D_800C4ECC_de;
     } else {
@@ -182,7 +182,7 @@ void func_80285AC4_de(void *arg0, void *arg1, s32 arg2) {
     u32 saved;
 
     p = arg1;
-    saved = func_802BCF30_de();
+    saved = __osDisableInt();
     func_80255CA0_de(arg0, 0, 4);
     func_80255CA0_de(&((PoolRecAt28V1 *)arg0)->active, 0, 4);
     i = 0;
@@ -202,7 +202,7 @@ NodeCode8028469C *func_80285B64_de(PoolRecAt28V1 *pool, Clip *key, CVector3 posi
     s32 mask;
     NodeCode8028469C *node;
 
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     node = pool->free.head;
     if (node != 0) {
         func_80255ED8_de(&pool->free, node);
@@ -221,7 +221,7 @@ void func_80285C78_de(void *pool) {
     u32 saved;
     NodeCode8028469C **inner;
 
-    saved = func_802BCF30_de();
+    saved = __osDisableInt();
     for (node = (*active_list(pool)).head; node != 0; node = next) {
         next = node->next;
         flag = 0;
@@ -247,7 +247,7 @@ void func_80285D30_de(void *arg0) {
     void *next;
     s32 saved;
 
-    saved = func_802BCF30_de();
+    saved = __osDisableInt();
     node = ((PoolRecAt28V1 *)arg0)->active.head;
     if (node != 0) {
         do {

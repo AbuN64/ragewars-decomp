@@ -42,7 +42,7 @@ s16 func_80259B10_de(CVector3 *position, GameplayCamera *listener) {
     forward.x = forward.y = local.y;
     forward.z = (&D_800C3F00_de)[1];
     Particle_NormalizeVec3(&local.x);
-    pan = func_802B7130_de(Nav_ArcCos(local.x * forward.x + local.y * forward.y + local.z * forward.z));
+    pan = Math_Sinf(Nav_ArcCos(local.x * forward.x + local.y * forward.y + local.z * forward.z));
     if (local.x == 0.0f) {
         return 0x40;
     }

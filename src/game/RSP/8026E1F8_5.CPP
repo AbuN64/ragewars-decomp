@@ -126,7 +126,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
     f32 length;
 
     Particle_SubtractVectors(&forward, target, eye);
-    length = func_802B72B0_de(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z);
+    length = Math_Sqrtf(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z);
     if (0.001f < length) {
         length = -1.0f / length;
         forward.x *= length;
@@ -139,7 +139,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
     }
 
     Particle_CrossVectors(&right, up, &forward);
-    length = func_802B72B0_de(right.x * right.x + right.y * right.y + right.z * right.z);
+    length = Math_Sqrtf(right.x * right.x + right.y * right.y + right.z * right.z);
     if (0.001f < length) {
         length = 1.0f / length;
         right.x *= length;
@@ -152,7 +152,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
     }
 
     Particle_CrossVectors(&upward, &forward, &right);
-    length = 1.0f / func_802B72B0_de(upward.x * upward.x + upward.y * upward.y + upward.z * upward.z);
+    length = 1.0f / Math_Sqrtf(upward.x * upward.x + upward.y * upward.y + upward.z * upward.z);
     upward.x *= length;
     upward.y *= length;
     upward.z *= length;
@@ -356,15 +356,15 @@ void func_80270AAC_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
     }
 
     angle = Nav_ArcCos(dot);
-    sine = func_802B7130_de(angle);
+    sine = Math_Sinf(angle);
     if (sine == 0.0f) {
         *out = *a;
         return;
     }
 
     inverseSine = D_800C47DC_de / sine;
-    scaleA = func_802B7130_de((D_800C47DC_de - amount) * angle) * inverseSine;
-    scaleB = func_802B7130_de(amount * angle) * inverseSine;
+    scaleA = Math_Sinf((D_800C47DC_de - amount) * angle) * inverseSine;
+    scaleB = Math_Sinf(amount * angle) * inverseSine;
     if (dot < negativeDot) {
         other = &negative;
     }
@@ -408,7 +408,7 @@ void func_80270CD0_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
         out->y = a->y + amount * (other->y - a->y);
         out->z = a->z + amount * (other->z - a->z);
         out->w = a->w + amount * (other->w - a->w);
-        magnitude = func_802B72B0_de((out->x * out->x) + (out->y * out->y) +
+        magnitude = Math_Sqrtf((out->x * out->x) + (out->y * out->y) +
                                   (out->z * out->z) + (out->w * out->w));
         if (magnitude != 0.0f) {
             scale = D_800C47E4_de / magnitude;
@@ -419,15 +419,15 @@ void func_80270CD0_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
         }
     } else {
         angle = Nav_ArcCos(dot);
-        sine = func_802B7130_de(angle);
+        sine = Math_Sinf(angle);
         if (sine == 0.0f) {
             *out = *a;
             return;
         }
 
         inverseSine = D_800C47E8_de / sine;
-        scaleA = func_802B7130_de((D_800C47E8_de - amount) * angle) * inverseSine;
-        scaleB = func_802B7130_de(amount * angle) * inverseSine;
+        scaleA = Math_Sinf((D_800C47E8_de - amount) * angle) * inverseSine;
+        scaleB = Math_Sinf(amount * angle) * inverseSine;
     if (dot < negativeDot) {
         other = &negative;
     }
@@ -452,7 +452,7 @@ CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
     random.z = (f32)((Nav_NextRandom() % 20000) - 0x2710);
     randomPtr = &random;
 
-    randomMagnitude = func_802B72B0_de((randomPtr->x * randomPtr->x) +
+    randomMagnitude = Math_Sqrtf((randomPtr->x * randomPtr->x) +
                                     (randomPtr->y * randomPtr->y) +
                                     (randomPtr->z * randomPtr->z));
     if (randomMagnitude != 0.0f) {
@@ -462,7 +462,7 @@ CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
         randomPtr->z *= randomScale;
     }
 
-    inputMagnitude = func_802B72B0_de((in->x * in->x) +
+    inputMagnitude = Math_Sqrtf((in->x * in->x) +
                                    (in->y * in->y) +
                                    (in->z * in->z));
     if (inputMagnitude != 0.0f) {
@@ -494,7 +494,7 @@ CVector3 func_80271248_de(CVector3 *in, f32 amount) {
     random.z = in->z;
     randomPtr = &random;
 
-    randomMagnitude = func_802B72B0_de((randomPtr->x * randomPtr->x) +
+    randomMagnitude = Math_Sqrtf((randomPtr->x * randomPtr->x) +
                                     (randomPtr->y * randomPtr->y) +
                                     (randomPtr->z * randomPtr->z));
     if (randomMagnitude != 0.0f) {
@@ -504,7 +504,7 @@ CVector3 func_80271248_de(CVector3 *in, f32 amount) {
         randomPtr->z *= randomScale;
     }
 
-    inputMagnitude = func_802B72B0_de((in->x * in->x) +
+    inputMagnitude = Math_Sqrtf((in->x * in->x) +
                                    (in->y * in->y) +
                                    (in->z * in->z));
     if (inputMagnitude != 0.0f) {
@@ -533,7 +533,7 @@ CVector3 func_80271430_de(CVector3 *in, f32 amount) {
     random.z = in->z;
     randomPtr = &random;
 
-    randomMagnitude = func_802B72B0_de((randomPtr->x * randomPtr->x) +
+    randomMagnitude = Math_Sqrtf((randomPtr->x * randomPtr->x) +
                                     (randomPtr->y * randomPtr->y) +
                                     (randomPtr->z * randomPtr->z));
     if (randomMagnitude != 0.0f) {
@@ -543,7 +543,7 @@ CVector3 func_80271430_de(CVector3 *in, f32 amount) {
         randomPtr->z *= randomScale;
     }
 
-    inputMagnitude = func_802B72B0_de((in->x * in->x) +
+    inputMagnitude = Math_Sqrtf((in->x * in->x) +
                                    (in->y * in->y) +
                                    (in->z * in->z));
     if (inputMagnitude != 0.0f) {
@@ -573,7 +573,7 @@ CVector3 *func_80271624_de(CVector3 *out, CVector3 *in, f32 amount) {
         f32 magnitude;
         f32 scale;
 
-        magnitude = func_802B72B0_de((randomPtr->x * randomPtr->x) +
+        magnitude = Math_Sqrtf((randomPtr->x * randomPtr->x) +
                                   (randomPtr->y * randomPtr->y) +
                                   (randomPtr->z * randomPtr->z));
         if (magnitude != 0.0f) {
@@ -587,7 +587,7 @@ CVector3 *func_80271624_de(CVector3 *out, CVector3 *in, f32 amount) {
         f32 magnitude;
         f32 scale;
 
-        magnitude = func_802B72B0_de((in->x * in->x) +
+        magnitude = Math_Sqrtf((in->x * in->x) +
                                   (in->y * in->y) +
                                   (in->z * in->z));
         if (magnitude != 0.0f) {
@@ -613,7 +613,7 @@ CQuatern func_80271818_de(CVector3 *input) {
     f32 angle;
     f32 axisMagnitude;
 
-    magnitude = func_802B72B0_de((input->x * input->x) +
+    magnitude = Math_Sqrtf((input->x * input->x) +
                               (input->y * input->y) +
                               (input->z * input->z));
     if (magnitude == 0.0f) {
@@ -646,12 +646,12 @@ pole:
             f32 scale;
 
             halfAngle = 0.0f;
-            scale = func_802B7130_de(halfAngle);
+            scale = Math_Sinf(halfAngle);
             result.z = normalized.z * scale;
             D_80115DEC = scale;
             result.x = halfAngle;
             result.y = halfAngle;
-            result.w = func_802B6560_de(halfAngle);
+            result.w = Math_Cosf(halfAngle);
         }
         } else {
 general:
@@ -666,7 +666,7 @@ general:
             axis.y = (basis.z * normalized.x) - (basis.x * normalized.z);
             axis.z = (basis.x * normalized.y) - (basis.y * normalized.x);
 
-            axisMagnitude = func_802B72B0_de((axis.x * axis.x) +
+            axisMagnitude = Math_Sqrtf((axis.x * axis.x) +
                                           (axis.y * axis.y) +
                                           (axis.z * axis.z));
             if (axisMagnitude != 0.0f) {
@@ -679,12 +679,12 @@ general:
             }
 
             halfAngle = angle * D_800C4834_de;
-            scale = func_802B7130_de(halfAngle);
+            scale = Math_Sinf(halfAngle);
             result.x = axis.x * scale;
             result.y = axis.y * scale;
             result.z = axis.z * scale;
             D_80115DEC = scale;
-            result.w = func_802B6560_de(halfAngle);
+            result.w = Math_Cosf(halfAngle);
         }
         }
     }
@@ -837,7 +837,7 @@ void func_8026EF58_de(f32 *out, f32 *m) {
 
 extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *up) {
     CVector3 upward;
@@ -846,7 +846,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
     f32 length;
 
     Particle_SubtractVectors(&forward, target, eye);
-    length = func_802B72B0_de(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z);
+    length = Math_Sqrtf(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z);
     if (0.001f < length) {
         length = -1.0f / length;
         forward.x *= length;
@@ -859,7 +859,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
     }
 
     Particle_CrossVectors(&right, up, &forward);
-    length = func_802B72B0_de(right.x * right.x + right.y * right.y + right.z * right.z);
+    length = Math_Sqrtf(right.x * right.x + right.y * right.y + right.z * right.z);
     if (0.001f < length) {
         length = 1.0f / length;
         right.x *= length;
@@ -872,7 +872,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
     }
 
     Particle_CrossVectors(&upward, &forward, &right);
-    length = 1.0f / func_802B72B0_de(upward.x * upward.x + upward.y * upward.y + upward.z * upward.z);
+    length = 1.0f / Math_Sqrtf(upward.x * upward.x + upward.y * upward.y + upward.z * upward.z);
     upward.x *= length;
     upward.y *= length;
     upward.z *= length;
@@ -1078,15 +1078,15 @@ void func_80270AAC_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
     }
 
     angle = Nav_ArcCos(dot);
-    sine = func_802B7130_de(angle);
+    sine = Math_Sinf(angle);
     if (sine == 0.0f) {
         *out = *a;
         return;
     }
 
     inverseSine = *(&D_800C98C8 + 1) / sine;
-    scaleA = func_802B7130_de((*(&D_800C98C8 + 1) - amount) * angle) * inverseSine;
-    scaleB = func_802B7130_de(amount * angle) * inverseSine;
+    scaleA = Math_Sinf((*(&D_800C98C8 + 1) - amount) * angle) * inverseSine;
+    scaleB = Math_Sinf(amount * angle) * inverseSine;
     if (dot < negativeDot) {
         other = &negative;
     }
@@ -1099,7 +1099,7 @@ void func_80270AAC_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
 
 
 
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 void func_80270CD0_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
     CQuatern negative;
@@ -1135,7 +1135,7 @@ void func_80270CD0_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
         out->y = a->y + amount * (other->y - a->y);
         out->z = a->z + amount * (other->z - a->z);
         out->w = a->w + amount * (other->w - a->w);
-        magnitude = func_802B72B0_de((out->x * out->x) + (out->y * out->y) +
+        magnitude = Math_Sqrtf((out->x * out->x) + (out->y * out->y) +
                                   (out->z * out->z) + (out->w * out->w));
         if (magnitude != 0.0f) {
             scale = *(&D_800C47E0_de + 1) / magnitude;
@@ -1146,15 +1146,15 @@ void func_80270CD0_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
         }
     } else {
         angle = Nav_ArcCos(dot);
-        sine = func_802B7130_de(angle);
+        sine = Math_Sinf(angle);
         if (sine == 0.0f) {
             *out = *a;
             return;
         }
 
         inverseSine = D_800C47E8_de / sine;
-        scaleA = func_802B7130_de((D_800C47E8_de - amount) * angle) * inverseSine;
-        scaleB = func_802B7130_de(amount * angle) * inverseSine;
+        scaleA = Math_Sinf((D_800C47E8_de - amount) * angle) * inverseSine;
+        scaleB = Math_Sinf(amount * angle) * inverseSine;
         if (dot < negativeDot) {
             other = &negative;
         }
@@ -1167,7 +1167,7 @@ void func_80270CD0_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
 }
 
 extern s32 Nav_NextRandom(void);
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
     CVector3 random;
@@ -1183,7 +1183,7 @@ CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
     random.z = (f32)((Nav_NextRandom() % 20000) - 0x2710);
     randomPtr = &random;
 
-    randomMagnitude = func_802B72B0_de((randomPtr->x * randomPtr->x) +
+    randomMagnitude = Math_Sqrtf((randomPtr->x * randomPtr->x) +
                                     (randomPtr->y * randomPtr->y) +
                                     (randomPtr->z * randomPtr->z));
     if (randomMagnitude != 0.0f) {
@@ -1193,7 +1193,7 @@ CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
         randomPtr->z *= randomScale;
     }
 
-    inputMagnitude = func_802B72B0_de((in->x * in->x) +
+    inputMagnitude = Math_Sqrtf((in->x * in->x) +
                                    (in->y * in->y) +
                                    (in->z * in->z));
     if (inputMagnitude != 0.0f) {
@@ -1210,7 +1210,7 @@ CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
 }
 
 extern s32 Nav_NextRandom(void);
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 CVector3 func_80271248_de(CVector3 *in, f32 amount) {
     CVector3 random;
@@ -1227,7 +1227,7 @@ CVector3 func_80271248_de(CVector3 *in, f32 amount) {
     random.z = in->z;
     randomPtr = &random;
 
-    randomMagnitude = func_802B72B0_de((randomPtr->x * randomPtr->x) +
+    randomMagnitude = Math_Sqrtf((randomPtr->x * randomPtr->x) +
                                     (randomPtr->y * randomPtr->y) +
                                     (randomPtr->z * randomPtr->z));
     if (randomMagnitude != 0.0f) {
@@ -1237,7 +1237,7 @@ CVector3 func_80271248_de(CVector3 *in, f32 amount) {
         randomPtr->z *= randomScale;
     }
 
-    inputMagnitude = func_802B72B0_de((in->x * in->x) +
+    inputMagnitude = Math_Sqrtf((in->x * in->x) +
                                    (in->y * in->y) +
                                    (in->z * in->z));
     if (inputMagnitude != 0.0f) {
@@ -1254,7 +1254,7 @@ CVector3 func_80271248_de(CVector3 *in, f32 amount) {
 }
 
 extern s32 Nav_NextRandom(void);
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 CVector3 func_80271430_de(CVector3 *in, f32 amount) {
     CVector3 random;
@@ -1270,7 +1270,7 @@ CVector3 func_80271430_de(CVector3 *in, f32 amount) {
     random.z = in->z;
     randomPtr = &random;
 
-    randomMagnitude = func_802B72B0_de((randomPtr->x * randomPtr->x) +
+    randomMagnitude = Math_Sqrtf((randomPtr->x * randomPtr->x) +
                                     (randomPtr->y * randomPtr->y) +
                                     (randomPtr->z * randomPtr->z));
     if (randomMagnitude != 0.0f) {
@@ -1280,7 +1280,7 @@ CVector3 func_80271430_de(CVector3 *in, f32 amount) {
         randomPtr->z *= randomScale;
     }
 
-    inputMagnitude = func_802B72B0_de((in->x * in->x) +
+    inputMagnitude = Math_Sqrtf((in->x * in->x) +
                                    (in->y * in->y) +
                                    (in->z * in->z));
     if (inputMagnitude != 0.0f) {
@@ -1297,7 +1297,7 @@ CVector3 func_80271430_de(CVector3 *in, f32 amount) {
 }
 
 extern s32 Nav_NextRandom(void);
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 CVector3 *func_80271624_de(CVector3 *out, CVector3 *in, f32 amount) {
     CVector3 random;
@@ -1314,7 +1314,7 @@ CVector3 *func_80271624_de(CVector3 *out, CVector3 *in, f32 amount) {
         f32 magnitude;
         f32 scale;
 
-        magnitude = func_802B72B0_de((randomPtr->x * randomPtr->x) +
+        magnitude = Math_Sqrtf((randomPtr->x * randomPtr->x) +
                                   (randomPtr->y * randomPtr->y) +
                                   (randomPtr->z * randomPtr->z));
         if (magnitude != 0.0f) {
@@ -1328,7 +1328,7 @@ CVector3 *func_80271624_de(CVector3 *out, CVector3 *in, f32 amount) {
         f32 magnitude;
         f32 scale;
 
-        magnitude = func_802B72B0_de((in->x * in->x) +
+        magnitude = Math_Sqrtf((in->x * in->x) +
                                   (in->y * in->y) +
                                   (in->z * in->z));
         if (magnitude != 0.0f) {
@@ -1348,7 +1348,7 @@ CVector3 *func_80271624_de(CVector3 *out, CVector3 *in, f32 amount) {
 
 extern f32 D_80115DEC;
 
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 
 
@@ -1362,7 +1362,7 @@ CQuatern func_80271818_de(CVector3 *input) {
     f32 angle;
     f32 axisMagnitude;
 
-    magnitude = func_802B72B0_de((input->x * input->x) +
+    magnitude = Math_Sqrtf((input->x * input->x) +
                               (input->y * input->y) +
                               (input->z * input->z));
     if (magnitude == 0.0f) {
@@ -1395,12 +1395,12 @@ pole:
             f32 scale;
 
             halfAngle = 0.0f;
-            scale = func_802B7130_de(halfAngle);
+            scale = Math_Sinf(halfAngle);
             result.z = normalized.z * scale;
             D_80115DEC = scale;
             result.x = halfAngle;
             result.y = halfAngle;
-            result.w = func_802B6560_de(halfAngle);
+            result.w = Math_Cosf(halfAngle);
         }
         } else {
 general:
@@ -1415,7 +1415,7 @@ general:
             axis.y = (basis.z * normalized.x) - (basis.x * normalized.z);
             axis.z = (basis.x * normalized.y) - (basis.y * normalized.x);
 
-            axisMagnitude = func_802B72B0_de((axis.x * axis.x) +
+            axisMagnitude = Math_Sqrtf((axis.x * axis.x) +
                                           (axis.y * axis.y) +
                                           (axis.z * axis.z));
             if (axisMagnitude != 0.0f) {
@@ -1428,12 +1428,12 @@ general:
             }
 
             halfAngle = angle * D_800C4834_de;
-            scale = func_802B7130_de(halfAngle);
+            scale = Math_Sinf(halfAngle);
             result.x = axis.x * scale;
             result.y = axis.y * scale;
             result.z = axis.z * scale;
             D_80115DEC = scale;
-            result.w = func_802B6560_de(halfAngle);
+            result.w = Math_Cosf(halfAngle);
         }
         }
     }

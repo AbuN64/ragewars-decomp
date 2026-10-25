@@ -6,7 +6,7 @@
 #include "TYPES.H"
 
 #include "COMMON/MATH_HELPERS.H"
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 extern f32 Nav_ArcCos(f32);
 /** Heading of a direction in the XZ plane: acos of the dominant axis, clamped to [-1, 1]. */
 f32 Particle_GetHorizontalAngle(CVector3 *direction) {
@@ -18,7 +18,7 @@ f32 Particle_GetHorizontalAngle(CVector3 *direction) {
     if (length == 0.0f) {
         return 0.0f;
     }
-    length = func_802B72B0_de(length);
+    length = Math_Sqrtf(length);
     if (length == 0.0f) {
         return 0.0f;
     }
@@ -43,7 +43,7 @@ f32 Particle_GetHorizontalAngle(CVector3 *direction) {
     return angle;
 }
 
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 extern f32 D_800C48AC_de;
 
@@ -111,7 +111,7 @@ void Particle_NormalizeVec3(f32 *arg0) {
     f32 mag;
     f32 scale;
 
-    mag = func_802B72B0_de((arg0[0] * arg0[0]) + (arg0[1] * arg0[1]) + (arg0[2] * arg0[2]));
+    mag = Math_Sqrtf((arg0[0] * arg0[0]) + (arg0[1] * arg0[1]) + (arg0[2] * arg0[2]));
     if (mag != 0.0f) {
         scale = D_800C48AC_de / mag;
         arg0[0] = arg0[0] * scale;

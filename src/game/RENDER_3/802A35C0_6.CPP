@@ -22,7 +22,7 @@ extern f32 D_80115DEC;
 
 extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 extern void Particle_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
@@ -85,7 +85,7 @@ CQuatern *func_802A5020_de(CQuatern *out, u32 bx, u32 by, u32 bz) {
     axis.z = 0.0f;
     Particle_CrossVectors(&cross, &axis, (CVector3 *)&bx);
 
-    magnitude = func_802B72B0_de((cross.x * cross.x) +
+    magnitude = Math_Sqrtf((cross.x * cross.x) +
                               (cross.y * cross.y) +
                               (cross.z * cross.z));
     if (magnitude == 0.0f) {
@@ -99,12 +99,12 @@ CQuatern *func_802A5020_de(CQuatern *out, u32 bx, u32 by, u32 bz) {
                               (axis.y * *(f32 *)&by) +
                               (axis.z * *(f32 *)&bz));
         angle *= ((struct func_802077F4_S2 *) ((f32 *) (&D_800C5E88_de)))->unk4;
-        trig = func_802B7130_de(angle);
+        trig = Math_Sinf(angle);
         result.x = cross.x * trig;
         result.y = cross.y * trig;
         result.z = cross.z * trig;
         D_80115DEC = trig;
-        result.w = func_802B6560_de(angle);
+        result.w = Math_Cosf(angle);
     }
     *out = result;
     return out;

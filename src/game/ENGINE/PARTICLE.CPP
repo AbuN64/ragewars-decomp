@@ -104,10 +104,10 @@ void func_8027E784_de(Shared_Particle *actor, struct Shared_ParticleView *view) 
     }
     angle = 0.78539824f;
     tilt = func_80271818_de(&ground->normal);
-    roll.x = D_80115DEC = func_802B7130_de(angle);
+    roll.x = D_80115DEC = Math_Sinf(angle);
     roll.y = 0.0f;
     roll.z = 0.0f;
-    roll.w = func_802B6560_de(angle);
+    roll.w = Math_Cosf(angle);
     MultiplyQuaternions(&rotation, &roll, &tilt);
     floor = ground->height;
     height = actor->inst.pos.y - floor;

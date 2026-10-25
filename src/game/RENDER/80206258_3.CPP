@@ -60,7 +60,7 @@ void *func_80219434_de(struct Cursor *);
 void Particle_SubtractVectors(void *, void *, void *);
 
 
-f32 func_802B72B0_de(f32);
+f32 Math_Sqrtf(f32);
 
 f32 Weapons_GetSignedAngleToPoint(void *, CVector3);
 
@@ -108,21 +108,21 @@ void func_80206DD4_de(Actor_func_80206DD4_de *actor, RiderCode80206258 *rider) {
     base = &rider->base;
     point.y += segment->rise;
     if (segment->moving != 0) {
-        point.x += segment->radius * func_802B7130_de(segment->angle);
-        point.z += segment->radius * func_802B6560_de(segment->angle);
+        point.x += segment->radius * Math_Sinf(segment->angle);
+        point.z += segment->radius * Math_Cosf(segment->angle);
     }
     func_80271FC8_de(&rider->pos, t, base, &point);
     switch (segment->bobMode) {
     case 0:
-        rider->pos.y += segment->bob * func_802B7130_de(rider->phase);
+        rider->pos.y += segment->bob * Math_Sinf(rider->phase);
         break;
     case 1:
         phase = rider->phase;
         amp = 0.25f;
-        rider->pos.y += segment->bob * (func_802B7130_de(phase) * amp);
-        rider->pos.y += segment->bob * (func_802B7130_de(phase * 1.1f) * amp);
-        rider->pos.y += segment->bob * (func_802B7130_de(phase * 1.2f) * amp);
-        rider->pos.y += segment->bob * (func_802B7130_de(phase * 1.3f) * amp);
+        rider->pos.y += segment->bob * (Math_Sinf(phase) * amp);
+        rider->pos.y += segment->bob * (Math_Sinf(phase * 1.1f) * amp);
+        rider->pos.y += segment->bob * (Math_Sinf(phase * 1.2f) * amp);
+        rider->pos.y += segment->bob * (Math_Sinf(phase * 1.3f) * amp);
         break;
     }
     rider->pos.x += rider->shake.x;
@@ -184,7 +184,7 @@ void func_802070D0_de(func_802070D0_S3 *arg0, func_802070D0_S1 *arg1) {
     initial = temp_v0->pos;
     Particle_SubtractVectors(&vec0, &initial, &arg0->unk8);
     temp_s2 = func_80219434_de(temp_s3);
-    temp_f2 = func_802B72B0_de(vec0.x * vec0.x + vec0.y * vec0.y + vec0.z * vec0.z);
+    temp_f2 = Math_Sqrtf(vec0.x * vec0.x + vec0.y * vec0.y + vec0.z * vec0.z);
     var_f1 = temp_v0->unk1C;
     temp_f20 = temp_s2->unk20;
     if (var_f1 < 3.0f) {
@@ -250,7 +250,7 @@ void func_802070D0_de(func_802070D0_S3 *arg0, func_802070D0_S1 *arg1) {
     half = temp_s2->unk14.half;
     if (half & 1) {
         if (arg1->unk168 > 0.0f && !(half & 0x8000)) {
-            var_f3 = arg1->unk168 + (func_802B6560_de((1.0f - temp_s2->unk30) * 3.1415927f) + 1.0f) * (-arg1->unk168 * 0.5f);
+            var_f3 = arg1->unk168 + (Math_Cosf((1.0f - temp_s2->unk30) * 3.1415927f) + 1.0f) * (-arg1->unk168 * 0.5f);
             if (var_f3 <= 0.3f) {
                 arg1->unk16C = (f32) (temp_s2->unk34 * 15.0f);
                 var_f3 = 0.0f;
@@ -266,11 +266,11 @@ void func_802070D0_de(func_802070D0_S3 *arg0, func_802070D0_S1 *arg1) {
                     arg1->unk16C = 0.0f;
                 }
             } else if (temp_f1_5 == 0.0f) {
-                var_f3 = arg1->unk168 + (func_802B6560_de((1.0f - temp_s2->unk30) * 3.1415927f) + 1.0f) * ((temp_s2->unk24 - arg1->unk168) * 0.5f);
+                var_f3 = arg1->unk168 + (Math_Cosf((1.0f - temp_s2->unk30) * 3.1415927f) + 1.0f) * ((temp_s2->unk24 - arg1->unk168) * 0.5f);
             }
         }
     } else {
-        var_f3 = arg1->unk168 + (func_802B6560_de(2.670354f) + 1.0f) * ((temp_s2->unk24 - arg1->unk168) * 0.5f);
+        var_f3 = arg1->unk168 + (Math_Cosf(2.670354f) + 1.0f) * ((temp_s2->unk24 - arg1->unk168) * 0.5f);
     }
     if (arg0->unk38 & 8) {
         var_f3 = 0.0f;

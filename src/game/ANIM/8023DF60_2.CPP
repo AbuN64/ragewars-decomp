@@ -59,7 +59,7 @@ s32 func_8023E178_de(Ray_func_8023E178_de *ray, CVector3 *center, f32 radius, f3
     if (delta.x * ray->dir.x + delta.z * ray->dir.z < 0.0f) {
         return 0;
     }
-    len = func_802B72B0_de(ray->dir.x * ray->dir.x + ray->dir.z * ray->dir.z);
+    len = Math_Sqrtf(ray->dir.x * ray->dir.x + ray->dir.z * ray->dir.z);
     if (len == 0.0f) {
         return 0;
     }
@@ -73,7 +73,7 @@ s32 func_8023E178_de(Ray_func_8023E178_de *ray, CVector3 *center, f32 radius, f3
     if (!(disc > 0.0f)) {
         return 0;
     }
-    poly->t = (along - func_802B72B0_de(disc)) * inv;
+    poly->t = (along - Math_Sqrtf(disc)) * inv;
     if (accepts(ray, poly) != 0) {
         func_80271FC8_de(&poly->hit, poly->t, &ray->start, &ray->end);
         if (clip != 0 && (poly->hit.y > top || poly->hit.y < bottom)) {

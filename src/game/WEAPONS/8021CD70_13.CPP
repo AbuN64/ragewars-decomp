@@ -52,9 +52,9 @@ void func_80223E34_de(SharedPlayer_func_80223E34_de *player, func_80203908_S4 *c
             height = 82.94399261f;
         }
         rate = 0.5f;
-        Nav_EaseValueToward(&player->views5E8.view740_84.height, height + player->views5E8.view758_88.bobStrength * (func_802B7130_de(phase) * 10.24f), rate);
-        amount = player->views5E8.view758_88.bobStrength * (func_802B6560_de(phase) * 8.192f);
-        Nav_EaseValueToward(&player->views5E8.view73C_81.side, -func_802B7130_de(camera->unk6C + 3.1415927f) * amount, rate);
-        Nav_EaseValueToward(&player->views5E8.view744_86.forward, -func_802B6560_de(camera->unk6C + 3.1415927f) * amount, rate);
+        Nav_EaseValueToward(&player->views5E8.view740_84.height, height + player->views5E8.view758_88.bobStrength * (Math_Sinf(phase) * 10.24f), rate);
+        amount = player->views5E8.view758_88.bobStrength * (Math_Cosf(phase) * 8.192f);
+        Nav_EaseValueToward(&player->views5E8.view73C_81.side, -Math_Sinf(camera->unk6C + 3.1415927f) * amount, rate);
+        Nav_EaseValueToward(&player->views5E8.view744_86.forward, -Math_Cosf(camera->unk6C + 3.1415927f) * amount, rate);
     }
 }

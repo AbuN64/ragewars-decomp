@@ -278,7 +278,7 @@ void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct Screen
             node = msg;
             switch (msg->kind) {
             case 2:
-                msg->timer = (s32)(func_802B7130_de(msg->progress * 1.5707964f) * 255.0f);
+                msg->timer = (s32)(Math_Sinf(msg->progress * 1.5707964f) * 255.0f);
                 msg->progress += fade;
                 if (msg->progress > 1.0f) {
                     msg->kind = 3;
@@ -292,7 +292,7 @@ void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct Screen
                 msg->timer = 255;
                 break;
             case 4:
-                msg->timer = (s32)(func_802B6560_de(msg->progress * 1.5707964f) * 255.0f);
+                msg->timer = (s32)(Math_Cosf(msg->progress * 1.5707964f) * 255.0f);
                 msg->progress += fade;
                 if (msg->progress > 1.0f) {
                     for (waiting = pool->freeMessages.head; waiting != 0; waiting = waiting->next) {
@@ -328,7 +328,7 @@ extern const f32 D_800C3444_de, D_800C3448_de;
 extern s32 D_800E28D8;
 extern void func_802A84F8_de(void);
 extern void func_802A8F28_de(void *, s32, s32, s32, s32, s32, f32, f32);
-extern float func_802B7130_de(float x);
+extern float Math_Sinf(float x);
 
 /* Draws and advances the screen messages of one view, retiring finished ones. */
 void func_80238314_de(Race *race, Racer *racer) {
@@ -390,7 +390,7 @@ void func_80238314_de(Race *race, Racer *racer) {
                     message->kind = 3;
                     message->hold = message->size;
                 }
-                message->alpha = func_802B7130_de((f32)message->timer * D_800C3434_de);
+                message->alpha = Math_Sinf((f32)message->timer * D_800C3434_de);
                 break;
             case 3:
                 message->hold -= D_800D2988;
@@ -403,7 +403,7 @@ void func_80238314_de(Race *race, Racer *racer) {
                 }
                 break;
             case 4:
-                message->alpha -= func_802B7130_de(D_800C3440_de - (f32)message->timer * D_800C343C_de) * D_800C3444_de;
+                message->alpha -= Math_Sinf(D_800C3440_de - (f32)message->timer * D_800C343C_de) * D_800C3444_de;
                 if (message->alpha < 0.0f) {
                     message->alpha = 0.0f;
                 }

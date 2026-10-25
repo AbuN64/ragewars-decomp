@@ -227,7 +227,7 @@ extern f32 Particle_GetActorHeight(void *);
 extern s32 func_8024B06C_de(void *, CVector3, Shield *);
 extern f32 Particle_GetPointDistance(CVector3 *, CVector3 *);
 extern f32 func_802672D0_de(u8 *);
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 extern void func_80216488_de(CDamageInfo *, void *, s32, f32, s32, Shield *);
 extern s32 func_8022AC00_de(void *);
 struct CallbackState114;
@@ -300,7 +300,7 @@ static inline void hitImpulse(Shared_ReactionActor *source, Shared_ReactionActor
 #endif
         target->category == 2) {
         Particle_SubtractVectors(&direction, &source->position, &target->position);
-        distance = func_802B72B0_de(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
+        distance = Math_Sqrtf(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
         Particle_NormalizeVec3(&direction);
         if (!(radius <= distance)) {
             Particle_ScaleVector(out, &direction, (f32)copied.impulse * (((radius - distance) / radius) * D_800C43E0_de[7]));
@@ -664,7 +664,7 @@ s32 func_80267528_de(char *actor, char *target)
 
 #include "TYPES.H"
 #include "COMMON/AIPROFILE.H"
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 extern f32 D_800C46E8_eu;
 extern void Particle_SubtractVectors(void *, void *, void *);
 typedef struct PushStrength { u16 value; u16 pad; } PushStrength;
@@ -685,7 +685,7 @@ void func_802675C8_de(struct Player *actor, u8 *other, PushStrength strength, Pu
     if (*other == 2) {
 #endif
         Particle_SubtractVectors(&offset, &actor->pos, &((struct Player *)other)->pos);
-        distance = func_802B72B0_de(offset.x * offset.x + offset.y * offset.y + offset.z * offset.z);
+        distance = Math_Sqrtf(offset.x * offset.x + offset.y * offset.y + offset.z * offset.z);
         Particle_NormalizeVec3(&offset.x);
         if (!(radius <= distance)) {
             Particle_ScaleVector(out, &offset, (f32)scale.value * (((radius - distance) / radius) * D_800C46E8_eu));

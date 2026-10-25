@@ -51,8 +51,8 @@ void func_802251DC_de(SharedPlayer *player, SharedPlayer *body) {
         player->turnAccumulator = 0.0f;
         if (func_8024E62C_de(body) == 0) {
             temp_fs0 = D_800C2A58_de;
-            player->views5E8.view6E8_79.unk6E8.x -= func_802B7130_de(body->views1C.view6C_5.heading) * temp_fs0;
-            player->views5E8.view6E8_79.unk6E8.z -= func_802B6560_de(body->views1C.view6C_5.heading) * temp_fs0;
+            player->views5E8.view6E8_79.unk6E8.x -= Math_Sinf(body->views1C.view6C_5.heading) * temp_fs0;
+            player->views5E8.view6E8_79.unk6E8.z -= Math_Cosf(body->views1C.view6C_5.heading) * temp_fs0;
         }
         Weapons_SetPlayerState(player, body, 5);
         return;
@@ -88,8 +88,8 @@ block_25:
         }
         temp_fv0f_4 = body->views1C.view6C_5.heading;
         temp_fs0_2 = D_800C2A94_de;
-        temp_fs0_6 = func_802B7130_de(temp_fv0f_4 + temp_fs0_2);
-        temp_fv0 = func_802B6560_de(body->views1C.view6C_5.heading + temp_fs0_2);
+        temp_fs0_6 = Math_Sinf(temp_fv0f_4 + temp_fs0_2);
+        temp_fv0 = Math_Cosf(body->views1C.view6C_5.heading + temp_fs0_2);
         body->views1C.view1C_0.localDisplacement.x += temp_fs0_6 * D_800C2A98_de;
         body->views1C.view1C_0.localDisplacement.z += temp_fv0 * D_800C2A98_de;
         temp_fv0f_3 = player->views5E8.view728_73.unk728;
@@ -102,7 +102,7 @@ block_25:
         player->turnAccumulator = 0.0f;
         return;
     }
-    temp_fv1_2 = player->views5E8.view6DC_60.strideSign * player->views5E8.view6C0_51.unk6C0 * func_802B7130_de(player->views5E8.view658_23.stride * D_800C2AAC_de);
+    temp_fv1_2 = player->views5E8.view6DC_60.strideSign * player->views5E8.view6C0_51.unk6C0 * Math_Sinf(player->views5E8.view658_23.stride * D_800C2AAC_de);
     temp_fv1f = player->views5E8.view6A8_44.lift;
     if (temp_fv1f > 0.0f || temp_fv1f < 0.0f)
         Nav_EaseValueToward(&player->views5E8.view72C_75.unk72C, temp_fv1_2, 0.25f);
@@ -166,8 +166,8 @@ block_25:
     eyez = &player->views5E8.view6E8_79.unk6E8.z;
     temp_fv0f_4 = body->views1C.view6C_5.heading;
     temp_fs0_5 = D_800C2AD8_de;
-    temp_fs0_6 = func_802B7130_de(temp_fv0f_4 - temp_fs0_5);
-    temp_fv0 = func_802B6560_de(body->views1C.view6C_5.heading - temp_fs0_5);
+    temp_fs0_6 = Math_Sinf(temp_fv0f_4 - temp_fs0_5);
+    temp_fv0 = Math_Cosf(body->views1C.view6C_5.heading - temp_fs0_5);
     {
     f32 horizontal = *eyex + temp_fs0_6 * player->views5E8.view6C4_54.unk6C4 * player->views5E8.view66C_29.unk66C;
     f32 coefficient = D_800C2ADC_de;

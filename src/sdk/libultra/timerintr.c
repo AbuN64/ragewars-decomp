@@ -14,13 +14,13 @@ typedef struct OSTimer_s {
 } OSTimer;
 
 extern OSTimer *D_800D5280;
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 u64 __osInsertTimer(OSTimer *t)
 {
     OSTimer *timep;
     u64 tim;
-    u32 savedMask = func_802BCF30_de();
+    u32 savedMask = __osDisableInt();
 
     timep = D_800D5280->next;
     tim = t->value;

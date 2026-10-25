@@ -37,7 +37,7 @@ extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 extern void Particle_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 static inline void edge(CVector3 *out, CVector3 *a, CVector3 *b) {
     Particle_SubtractVectors(out, a, b);
@@ -94,7 +94,7 @@ CQuatern *func_80275410_de(CQuatern *out, Triangle *polygon) {
     up.y = one;
     up.z = 0.0f;
     Particle_CrossVectors(&axis, &up, &normal);
-    len = func_802B72B0_de(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
+    len = Math_Sqrtf(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
     if (len == 0.0f) {
         result.z = 0.0f;
         result.y = 0.0f;
@@ -104,12 +104,12 @@ CQuatern *func_80275410_de(CQuatern *out, Triangle *polygon) {
         Particle_ScaleVector(&axis, &axis, one / len);
         angle = Nav_ArcCos(up.x * normal.x + up.y * normal.y + up.z * normal.z);
         angle *= 0.5f;
-        scale = func_802B7130_de(angle);
+        scale = Math_Sinf(angle);
         result.x = axis.x * scale;
         result.y = axis.y * scale;
         result.z = axis.z * scale;
         D_80115DEC = scale;
-        result.w = func_802B6560_de(angle);
+        result.w = Math_Cosf(angle);
     }
     *out = result;
     return out;
@@ -131,7 +131,7 @@ CQuatern *func_80275688_de(CQuatern *out) {
     up.y = one;
     up.z = 0;
     Particle_CrossVectors(&axis, &up, &a);
-    len = func_802B72B0_de(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
+    len = Math_Sqrtf(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
     if (len == 0) {
         result.z = 0;
         result.y = 0;
@@ -141,12 +141,12 @@ CQuatern *func_80275688_de(CQuatern *out) {
         Particle_ScaleVector(&axis, &axis, one / len);
         angle = Nav_ArcCos(up.x * a.x + up.y * a.y + up.z * a.z);
         angle *= D_800C49E0_de;
-        scale = func_802B7130_de(angle);
+        scale = Math_Sinf(angle);
         result.x = axis.x * scale;
         result.y = axis.y * scale;
         result.z = axis.z * scale;
         D_80115DEC = scale;
-        result.w = func_802B6560_de(angle);
+        result.w = Math_Cosf(angle);
     }
     *out = result;
     return out;

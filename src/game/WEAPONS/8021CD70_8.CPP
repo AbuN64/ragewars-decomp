@@ -283,7 +283,7 @@ void func_80220ED4_de(SharedPlayer *player)
     }
     player->views5E8.view66C_29.unk66C = D_800D2988 * player->views5E8.view784_117.unk784;
     func_8022C080_de(player, actor);
-    player->views5E8.view6C8_57.speed = func_802B72B0_de((player->views5E8.view6C0_64.velX * player->views5E8.view6C0_64.velX) + (player->views5E8.view6C4_67.velZ * player->views5E8.view6C4_67.velZ));
+    player->views5E8.view6C8_57.speed = Math_Sqrtf((player->views5E8.view6C0_64.velX * player->views5E8.view6C0_64.velX) + (player->views5E8.view6C4_67.velZ * player->views5E8.view6C4_67.velZ));
     player->views5E8.view75C_89.unk75C += player->views5E8.view6C8_57.speed * 0.021000001579523087f;
     player->views5E8.view758_87.unk758 += player->views5E8.view6C8_57.speed * 0.00010000000474974513f;
     player->views5E8.view6E8_79.unk6E8 = actor->views0.view8_3.pos;
@@ -559,7 +559,7 @@ void func_80220ED4_de(SharedPlayer *player)
           diff.x = player->views0.view8_3.pos.x - entry->pos.x;
           diff.y = player->views0.view8_3.pos.y - entry->pos.y;
           diff.z = player->views0.view8_3.pos.z - entry->pos.z;
-          if (((f32) ((s32) func_802B72B0_de(((diff.x * diff.x) + (diff.y * diff.y)) + (diff.z * diff.z)))) < def->radius)
+          if (((f32) ((s32) Math_Sqrtf(((diff.x * diff.x) + (diff.y * diff.y)) + (diff.z * diff.z)))) < def->radius)
           {
             if (Items_FindPlacedObjectsByKey(&D_8011FE88, -1, def->item, &found, 1) != 0)
             {

@@ -38,7 +38,7 @@ void func_802B6DF0_de(s32 *m, u16 *perspNorm, f32 fovy, f32 aspect, f32 near, f3
     func_802B6C6C_de((u8 *)row);
     fovy *= D_800C78A0_de;
     fovy *= D_800C78A4_de;
-    cot = func_802B6560_de(fovy) / func_802B7130_de(fovy);
+    cot = Math_Cosf(fovy) / Math_Sinf(fovy);
 
     mf[0][0] = cot / aspect;
     mf[1][1] = cot;
@@ -82,7 +82,7 @@ void func_802B6F9C_de(float mf[4][4], u16 *perspNorm, float fovy, float aspect, 
     func_802B6C6C_de(mf);
     fovy *= D_800CCB08;
     fovy *= D_800C78BC_de;
-    cot = func_802B6560_de(fovy) / func_802B7130_de(fovy);
+    cot = Math_Cosf(fovy) / Math_Sinf(fovy);
     mf[0][0] = cot / aspect;
     mf[1][1] = cot;
     mf[2][2] = (near + far) / (near - far);

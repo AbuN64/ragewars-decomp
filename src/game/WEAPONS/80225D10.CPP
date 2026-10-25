@@ -85,7 +85,7 @@ void func_80225F44_de(SharedPlayer *player,func_802165F8_S1 *body) {
     SharedMovement *movement;
     f32 wave,yaw,unit,forward,side,bump,result,force,absolute,sway,rawForward,rawSide,time;
     mount=player->views5E8.view80C_108.mount;
-    wave=func_802B6560_de(player->views5E8.view838_114.rideTime*D_800C2AF4_de);
+    wave=Math_Cosf(player->views5E8.view838_114.rideTime*D_800C2AF4_de);
     wave=(((wave+D_800C2AF8_de)*D_800C2AFC_de+D_800C2B00_de)*D_800C2B04_de);
     time=player->views5E8.view838_114.rideTime;
     sway=player->views5E8.view69C_40.stick; sway*=wave;

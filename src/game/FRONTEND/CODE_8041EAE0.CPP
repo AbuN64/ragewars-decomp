@@ -204,7 +204,7 @@ s32 func_8041ECB4_de(void *unused0, void *unused1, s32 delta) {
 #elif defined(VERSION_EU_X)
     node = func_8040EC30_de(D_800E39C0->rows[D_800E39C0->selection], 0x396);
 #endif
-    node->alpha = (u32)(func_802B6560_de(D_800E39C0->timer * 0.0033333334f) * 100.0f + 150.0f);
+    node->alpha = (u32)(Math_Cosf(D_800E39C0->timer * 0.0033333334f) * 100.0f + 150.0f);
     return 0;
 }
 

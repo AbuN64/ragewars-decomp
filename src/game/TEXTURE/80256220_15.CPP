@@ -24,7 +24,7 @@ extern void func_802598B4_de(ChannelSet *arg0, s32 arg1);
 
 
 
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 extern void func_8025BA9C_de(void *, s16);
 
@@ -48,7 +48,7 @@ s32 func_80257A14_de(void *arg0, s32 id) {
         return found;
     }
     temp_s0 = &((ContextRecAt2BC0 *)(arg0))->lock;
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
@@ -82,7 +82,7 @@ s32 func_80257A14_de(void *arg0, s32 id) {
         }
     }
     temp_s0 = &((ContextRecAt2BC0 *)(arg0))->lock;
-    temp_v0 = func_802BCF30_de();
+    temp_v0 = __osDisableInt();
     temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 0) {
@@ -108,7 +108,7 @@ extern void func_8025BB5C_de(void *, CVector3 *, s32);
 
 extern void func_8025BB84_de(void *, Item57BD4 *, s32);
 extern void Texture_UpdateSoundSlot(void *, void *, s32, CVector3 *);
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 
 
@@ -152,7 +152,7 @@ s32 Texture_StartSoundRecord(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 ar
 
     {
         char *queue = &((ContextRecAt2BC0 *)(arg0))->lock;
-        u32 token = func_802BCF30_de();
+        u32 token = __osDisableInt();
         s32 count = ((MenuRules *)(queue))->locked + 1;
         ((MenuRules *)(queue))->locked = count;
         if (count != 1) {
@@ -165,7 +165,7 @@ s32 Texture_StartSoundRecord(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 ar
     Texture_UpdateSoundSlot(arg0, ((Draw *)(node))->model, 0, arg2);
     {
         char *queue = &((ContextRecAt2BC0 *)(arg0))->lock;
-        u32 token = func_802BCF30_de();
+        u32 token = __osDisableInt();
         s32 count = ((MenuRules *)(queue))->locked - 1;
         ((MenuRules *)(queue))->locked = count;
         if (count != 0) {
@@ -179,7 +179,7 @@ s32 Texture_StartSoundRecord(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 ar
 }
 
 static inline void soundAcquireLock(MenuRules *lock) {
-    u32 mask = func_802BCF30_de();
+    u32 mask = __osDisableInt();
     s32 held = lock->locked + 1;
     lock->locked = held;
     if (held != 1) {
@@ -191,7 +191,7 @@ static inline void soundAcquireLock(MenuRules *lock) {
 }
 
 static inline void soundReleaseLock(MenuRules *lock) {
-    u32 mask = func_802BCF30_de();
+    u32 mask = __osDisableInt();
     s32 held = lock->locked - 1;
     lock->locked = held;
     if (held != 0) {

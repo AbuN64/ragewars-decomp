@@ -221,7 +221,7 @@ void func_802849F0_de(ParticleEffect *effect)
         x = effect->velocity.x;
         y = effect->velocity.y;
         z = effect->velocity.z;
-        speed = func_802B72B0_de(x * x + y * y + z * z);
+        speed = Math_Sqrtf(x * x + y * y + z * z);
         limit = func_802B2350(effect->entry->motion->speedLimit);
         if (acceleration > 0.0f) {
             if (!(limit < speed)) goto finished;

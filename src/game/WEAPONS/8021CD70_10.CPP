@@ -230,11 +230,11 @@ s32 func_80222FE0_de(void *playerObject, void *positionObject, s32 *unused) {
     if (actor->state.active) {
         angle = position->angle;
         offset = D_800C2860_de;
-        xSpeed = player->speed * func_802B7130_de(angle + offset);
+        xSpeed = player->speed * Math_Sinf(angle + offset);
         scale = D_800C2864_de;
         actor->vx = xSpeed * scale;
         actor->vy = player->speed * D_800C2868_de;
-        actor->vz = player->speed * func_802B6560_de(position->angle + offset) * scale;
+        actor->vz = player->speed * Math_Cosf(position->angle + offset) * scale;
         if (player->effect)
             func_80239324_de(player->effect, D_800C2870_de, 100.0f, D_800C2870_de, D_800C286C_de, kind, position->pos);
         if (selected->state.kind == 0x2E) actor->state.flags |= 0x200;

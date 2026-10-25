@@ -156,7 +156,7 @@ s32 func_80426918_de(void *unused0, void *unused1, s32 delta) {
         clock = D_800E4690->clock + delta;
         D_800E4690->clock = clock;
         if (D_80154020[0] == -1) {
-            D_800E4690->pulse->alpha = (u32)(func_802B6560_de(clock * 0.005f) * 100.0f + 150.0f);
+            D_800E4690->pulse->alpha = (u32)(Math_Cosf(clock * 0.005f) * 100.0f + 150.0f);
         }
     }
     return 0;

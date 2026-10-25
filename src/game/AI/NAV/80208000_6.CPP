@@ -185,8 +185,8 @@ void Nav_AssignPlatformEndpoints(CNavData *graph) {
                     end = motion->base;
                     end.y += definition->height;
                     if (definition->radial != 0) {
-                        end.x += definition->radius * func_802B7130_de(definition->heading);
-                        end.z += definition->radius * func_802B6560_de(definition->heading);
+                        end.x += definition->radius * Math_Sinf(definition->heading);
+                        end.z += definition->radius * Math_Cosf(definition->heading);
                     }
                     distance = Particle_GetPointDistance(point, &start);
                     if (distance < best || best == -1.0f) {

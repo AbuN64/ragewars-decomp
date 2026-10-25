@@ -33,7 +33,7 @@ static inline void set_emitter(Effect33920 *node, f32 a, f32 b, f32 c, f32 scale
 
 extern s32 func_8027254C_de(f32 *arg0, f32 arg1);
 
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 /* Posts a text as on-screen messages, one per line: the text (or D_800D7028 when given D_800D7034) is split
  * at newlines and for each non-empty line the oldest message node of the owner's list at 0xF24 is recycled
@@ -172,7 +172,7 @@ f32 func_80239678_de(Race *arg0, void *arg1) {
     if (node != 0) {
         do {
             Particle_SubtractVectors(&position, &((GameplayCamera *)node)->position, arg1);
-            sum += func_802B72B0_de(
+            sum += Math_Sqrtf(
                 (position.x * position.x) +
                 (position.y * position.y) +
                 (position.z * position.z));

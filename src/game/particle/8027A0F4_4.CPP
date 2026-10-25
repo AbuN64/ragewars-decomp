@@ -308,7 +308,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
                 up.z = 0;
                 up.y = 1.0f;
                 Particle_CrossVectors(&side, &up, &direction);
-                Particle_ScaleVector(&offset, &side, func_802B7130_de(particle->phaseA) * -particle->amplitudeA * fade);
+                Particle_ScaleVector(&offset, &side, Math_Sinf(particle->phaseA) * -particle->amplitudeA * fade);
                 Particle_AddVec3(&position, &position, &offset);
             }
             if (particle->amplitudeB < 0.0f) {
@@ -317,7 +317,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
                 up.y = 1.0f;
                 Particle_CrossVectors(&across, &up, &direction);
                 Particle_CrossVectors(&side, &across, &direction);
-                Particle_ScaleVector(&offset, &side, func_802B7130_de(particle->phaseB) * -particle->amplitudeB * fade);
+                Particle_ScaleVector(&offset, &side, Math_Sinf(particle->phaseB) * -particle->amplitudeB * fade);
                 Particle_AddVec3(&position, &position, &offset);
             }
         }
@@ -442,8 +442,8 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         joltSq = jolt * jolt;
         angle = joltSq * (RW_PI_F6 * 5 / 180);
         Particle_BuildTranslationMatrix(shakeMtx, 0.0f, 0.0f, -66.56f);
-        func_80273A98_de(shakeMtx, angle * (func_802B7130_de(joltSq * (6 * RW_PI_F6)) * 0.25f));
-        func_802738C0_de(shakeMtx, angle * func_802B7130_de(joltSq * (14 * RW_PI_F6)));
+        func_80273A98_de(shakeMtx, angle * (Math_Sinf(joltSq * (6 * RW_PI_F6)) * 0.25f));
+        func_802738C0_de(shakeMtx, angle * Math_Sinf(joltSq * (14 * RW_PI_F6)));
         TranslateMatrix(shakeMtx, 0.0f, 0.0f, 66.56f);
         Rsp_MultiplyAffineMatrices(rotation, shakeMtx, world);
         func_80272828_de(rotation);

@@ -9,7 +9,7 @@
 #include "sdk/os.h"
 #include "SCENE/802508E0_4.H"
 
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 
 extern void func_80254DD0_de(void *arg0, void *arg1);
@@ -51,7 +51,7 @@ void Scene_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, s
     u32 token;
     u32 token2;
 
-    token = func_802BCF30_de();
+    token = __osDisableInt();
     counter = D_8010515C + 1;
     D_8010515C = counter;
     if (counter != 1) {
@@ -81,7 +81,7 @@ void Scene_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, s
     }
     *handle = arg2;
 
-    token2 = func_802BCF30_de();
+    token2 = __osDisableInt();
     counter2 = D_8010515C - 1;
     D_8010515C = counter2;
     if (counter2 != 0) {
@@ -104,7 +104,7 @@ void func_80253E64_de(s32 arg0, NodePair80253E04 *arg1, Node80253610 *arg2) {
 
     temp_s0 = arg1;
     temp_s1 = arg2;
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
@@ -130,7 +130,7 @@ void func_80253E64_de(s32 arg0, NodePair80253E04 *arg1, Node80253610 *arg2) {
     }
     temp_s0->first = temp_s1;
 
-    temp_v0 = func_802BCF30_de();
+    temp_v0 = __osDisableInt();
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
@@ -151,7 +151,7 @@ void func_80253F8C_de(s32 arg0, s32 arg1) {
     void *value;
     void **out;
 
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
@@ -194,7 +194,7 @@ found:
         func_80255FB8_de(&D_80100570, object);
     }
 
-    temp_v0 = func_802BCF30_de();
+    temp_v0 = __osDisableInt();
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
@@ -217,7 +217,7 @@ void **func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 direct)
     resource = Scene_RequestResource(0, arg2, arg2, 4, 0, 0, 0, &D_800C3EA0_de, direct);
     if (resource != 0) {
         size = **(s32 **)resource;
-        token = func_802BCF30_de();
+        token = __osDisableInt();
         counter = D_8010515C + 1;
         D_8010515C = counter;
         if (counter != 1) {
@@ -227,7 +227,7 @@ void **func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 direct)
             __osRestoreInt(token);
         }
         func_80254990_de(0, resource);
-        token2 = func_802BCF30_de();
+        token2 = __osDisableInt();
         counter2 = D_8010515C - 1;
         D_8010515C = counter2;
         if (counter2 != 0) {
@@ -258,7 +258,7 @@ s32 func_80254284_de(s32 arg0, void **handle, s32 tempv0, void *arg3) {
 
     resource = Scene_RequestResource(0, tempv0, tempv0, 4, 0x1B, 0, 0, &D_800C3EA0_de, one);
     size = **(s32 **)resource;
-    token = func_802BCF30_de();
+    token = __osDisableInt();
     counter = D_8010515C + one;
     D_8010515C = counter;
     if (counter != one) {
@@ -268,7 +268,7 @@ s32 func_80254284_de(s32 arg0, void **handle, s32 tempv0, void *arg3) {
         __osRestoreInt(token);
     }
     func_80254990_de(0, resource);
-    token2 = func_802BCF30_de();
+    token2 = __osDisableInt();
     counter2 = D_8010515C - 1;
     D_8010515C = counter2;
     if (counter2 != 0) {

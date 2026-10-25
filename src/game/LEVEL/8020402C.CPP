@@ -48,7 +48,7 @@ INCLUDE_ASM("span_1000", func_80204030_de);
 #define LV_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 extern s32 D_auto_800D70DC;
 extern u8 *func_8022A420_de(u8 *);
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 extern void func_8022E17C_de(void *, void *, s32);
 extern void Camera_PostScreenMessage(u8 *, void *, s32);
 /* 182/182 words in us-rev1 and de (local j targets aside); not exact on the ROM path only because the switch jump table (D_auto_rodata_func_8020402C_us_rev1_800C6B48) still lives in a separate rodata file; us/eu/eu-x differ in prologue size */
@@ -96,7 +96,7 @@ void LV_FN(u8 *self, u8 *hit) {
         d.x = LV_FIELD(player, f32, 8) - LV_FIELD(self, f32, 8);
         d.y = LV_FIELD(player, f32, 0xC) - LV_FIELD(self, f32, 0xC);
         d.z = LV_FIELD(player, f32, 0x10) - LV_FIELD(self, f32, 0x10);
-        distance = func_802B72B0_de(d.x * d.x + d.y * d.y + d.z * d.z);
+        distance = Math_Sqrtf(d.x * d.x + d.y * d.y + d.z * d.z);
         if ((f32)(s32)distance < 122.88f) {
             LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) = 0;
             LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x90) = 1;

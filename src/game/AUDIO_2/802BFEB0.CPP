@@ -13,7 +13,7 @@ u64 func_802BADC0_de(void) {
     u32 elapsed;
     u64 time;
 
-    saved = func_802BCF30_de();
+    saved = __osDisableInt();
     count = func_802BCF00_de();
     elapsed = count - D_80149B90;
     time = D_80149B98;

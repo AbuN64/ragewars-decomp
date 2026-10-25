@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/EXTERNS_16.H"
-#include "sdk/lib_802BB630/802BC390.H"
+#include "sdk/MATH/802BC390.H"
 
 /** Read the hardware register at 0xA450000C. */
 unsigned int func_802B72C0_de(void) {

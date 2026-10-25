@@ -162,8 +162,8 @@ s32 func_80243A90_de(Func80243A80Actor *actor, Func80243A80Vec3 pos, u32 *arg4) 
         } else {
             frame.sp2C8 = 0.0f;
         }
-        temp_f22_2 = func_802B7130_de(frame.sp2C8);
-        temp_f0 = func_802B6560_de(frame.sp2C8);
+        temp_f22_2 = Math_Sinf(frame.sp2C8);
+        temp_f0 = Math_Cosf(frame.sp2C8);
         frame.sp54 &= ~0x2000;
         temp_v1 = *arg4;
         if (temp_v1 & 4) {

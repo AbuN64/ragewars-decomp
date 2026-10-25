@@ -9,7 +9,7 @@
 #if !(defined(VERSION_US))
 extern OSPiHandle_s D_801486C0;
 extern OSPiHandle_s *D_800D437C;
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 OSPiHandle_s *func_802B8F48_de(void)
 {
@@ -33,7 +33,7 @@ OSPiHandle_s *func_802B8F48_de(void)
 
     Resmgr_FillMemory(&h->transferInfo, 0, sizeof(h->transferInfo));
 
-    saveMask = func_802BCF30_de();
+    saveMask = __osDisableInt();
     table = &D_800D437C;
     h->next = *table;
     *table = h;

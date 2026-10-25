@@ -22,14 +22,14 @@ void func_802566E8_de(Object *obj) {
     if (obj->depth == 0) {
         return;
     }
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     if (++obj->depth != 1) {
         __osRestoreInt(mask);
         osRecvMesg(obj, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
-    mask2 = func_802BCF30_de();
+    mask2 = __osDisableInt();
     if (--obj->depth != 0) {
         __osRestoreInt(mask2);
         osSendMesg(obj, 0, 1);

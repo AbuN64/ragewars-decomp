@@ -39,9 +39,9 @@ void func_80224F5C_de(SharedPlayer_func_80224F5C_de *player, Body_func_80224F5C_
         player->views5E8.view650_18.mode = 0xC;
     }
     Weapons_UpdateViewAngles(player, body, &D_800CE874);
-    player->views5E8.view730_79.sway[0] = 2.0f * func_802B7130_de(player->views5E8.view658_24.swimTime * 0.06981318f) * 0.017453294f;
-    player->views5E8.view730_79.sway[1] = 2.0f * func_802B7130_de(player->views5E8.view658_24.swimTime * 0.08726647496f) * 0.017453294f;
-    player->views5E8.view730_79.sway[2] = 2.0f * func_802B7130_de(player->views5E8.view658_24.swimTime * 0.10471976548f) * 0.017453294f;
+    player->views5E8.view730_79.sway[0] = 2.0f * Math_Sinf(player->views5E8.view658_24.swimTime * 0.06981318f) * 0.017453294f;
+    player->views5E8.view730_79.sway[1] = 2.0f * Math_Sinf(player->views5E8.view658_24.swimTime * 0.08726647496f) * 0.017453294f;
+    player->views5E8.view730_79.sway[2] = 2.0f * Math_Sinf(player->views5E8.view658_24.swimTime * 0.10471976548f) * 0.017453294f;
     func_802238E0_de(player, body, &D_800CE850);
     if (!(body->flags & 0x1000) && 2.0f < player->views5E8.view658_24.swimTime) {
         func_80218464_de(player->views5E8.view938_129.strokes);

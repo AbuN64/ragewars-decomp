@@ -307,7 +307,7 @@ f32 System_CosineEase(f32 arg0)
       var_f0 = var_f1;
     }
   }
-  return (D_800C43A0_de - func_802B6560_de(var_f0 * D_800C439C_de)) * (((struct func_802077F4_S2 *) ((char *) (&D_800C43A0_de)))->unk4);
+  return (D_800C43A0_de - Math_Cosf(var_f0 * D_800C439C_de)) * (((struct func_802077F4_S2 *) ((char *) (&D_800C43A0_de)))->unk4);
 }
 
 /** Return whether an address lies within one of three recognized ranges. */

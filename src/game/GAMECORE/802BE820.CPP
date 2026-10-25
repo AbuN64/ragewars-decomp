@@ -80,7 +80,7 @@ OSPiHandle_s *func_802B9870_de(void) {
     state->speed = 0;
     handle = (void *)state;
     Resmgr_FillMemory(handle->transferInfo, 0, 0x60);
-    lock = func_802BCF30_de();
+    lock = __osDisableInt();
     slot = &D_800D437C;
     previous = *slot;
     *slot = state;

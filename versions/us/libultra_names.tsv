@@ -15,3 +15,4 @@ vram	name	basis
 0x802BDF60	lldiv	machine code
 0x802BB1D0	osRecvMesg	machine code
 0x802BB350	osSendMesg	machine code
+0x802BCE60	__osDisableInt	machine code

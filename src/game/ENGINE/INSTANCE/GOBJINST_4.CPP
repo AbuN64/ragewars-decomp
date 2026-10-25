@@ -103,7 +103,7 @@ extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern f32 func_802B72B0_de(f32);
+extern f32 Math_Sqrtf(f32);
 
 extern s32 *func_8024BFD4_de(char *arg0, s8 arg1);
 
@@ -321,48 +321,48 @@ CQuatern func_8024796C_de(char *actor) {
         weapon = ((Shared_ActorView *)player)->message;
         if (weapon != 0) {
             angle = 1.5707964f;
-            D_80115DEC = func_802B7130_de(angle);
+            D_80115DEC = Math_Sinf(angle);
             yaw.x = 0.0f;
             yaw.y = D_80115DEC;
             yaw.z = 0.0f;
-            yaw.w = func_802B6560_de(angle);
+            yaw.w = Math_Cosf(angle);
             MultiplyQuaternions(&result, &yaw, &((SharedRecAt564V1 *)weapon)->orientation);
         } else {
             angle = 1.5707964f;
             Weapons_BuildPlayerOrientation(player, &own);
-            D_80115DEC = func_802B7130_de(angle);
+            D_80115DEC = Math_Sinf(angle);
             yaw.x = 0.0f;
             yaw.y = D_80115DEC;
             yaw.z = 0.0f;
-            yaw.w = func_802B6560_de(angle);
+            yaw.w = Math_Cosf(angle);
             MultiplyQuaternions(&result, &yaw, &own);
         }
     } else if (((LevelActor *)actor)->definition->kind == 4) {
-        sine = func_802B7130_de(((LevelActor *)actor)->pitch * 0.5f);
+        sine = Math_Sinf(((LevelActor *)actor)->pitch * 0.5f);
         pitch.x = sine;
         pitch.y = 0.0f;
         pitch.z = 0.0f;
         angle = ((LevelActor *)actor)->pitch * 0.5f;
         D_80115DEC = sine;
-        pitch.w = func_802B6560_de(angle);
-        sine = func_802B7130_de((((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f);
+        pitch.w = Math_Cosf(angle);
+        sine = Math_Sinf((((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f);
         yaw.x = 0.0f;
         yaw.y = sine;
         yaw.z = 0.0f;
         angle = (((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f;
         D_80115DEC = sine;
-        yaw.w = func_802B6560_de(angle);
+        yaw.w = Math_Cosf(angle);
         MultiplyQuaternions(&both, &pitch, &yaw);
         Turret_BuildPlaneRot(&base, actor, (char *)actor + 0x170);
         MultiplyQuaternions(&result, &both, &base);
     } else {
-        sine = func_802B7130_de((((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f);
+        sine = Math_Sinf((((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f);
         yaw.x = 0.0f;
         yaw.y = sine;
         yaw.z = 0.0f;
         angle = (((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f;
         D_80115DEC = sine;
-        yaw.w = func_802B6560_de(angle);
+        yaw.w = Math_Cosf(angle);
         MultiplyQuaternions(&result, &yaw, &((LevelActor *)actor)->rotation);
     }
     return result;
@@ -402,7 +402,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
     Particle_TransformPoint(matrix, &local, &aim);
     i = 0;
     target = 0;
-    bestDot = func_802B6560_de(cone * 0.008726647f);
+    bestDot = Math_Cosf(cone * 0.008726647f);
     count = D_8011FE88.registeredCount;
     for (; i < count; i++) {
         entity = D_8011CA18[i];
@@ -425,13 +425,13 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
         Particle_CrossVectors(&axis, &aim, &best);
         Particle_NormalizeVec3(&axis);
         angle = Nav_ArcCos(bestDot);
-        angle *= func_802B72B0_de(func_802B72B0_de(1.0f - angle / (cone * 0.008726647f)));
+        angle *= Math_Sqrtf(Math_Sqrtf(1.0f - angle / (cone * 0.008726647f)));
         angle *= 0.5f;
-        D_80115DEC = func_802B7130_de(angle);
+        D_80115DEC = Math_Sinf(angle);
         turn.x = axis.x * D_80115DEC;
         turn.y = axis.y * D_80115DEC;
         turn.z = axis.z * D_80115DEC;
-        turn.w = func_802B6560_de(angle);
+        turn.w = Math_Cosf(angle);
         MultiplyQuaternions(&result, &base, &turn);
         if (assist != 0) {
             *assist = turn;

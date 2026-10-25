@@ -10,7 +10,7 @@
 #include "SCENE/802508E0_9.H"
 #include "sdk/os.h"
 
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 
 extern struct Shape_typemap_165 *func_802548B8_de(s32, s32, u32, void *);
@@ -52,7 +52,7 @@ struct Shape_typemap_165 *Scene_AllocateResource(s32 arg0, s32 arg1, u32 arg2, v
     temp_s0 = arg1;
     temp_s1 = arg2;
     temp_s2 = arg3;
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
@@ -62,7 +62,7 @@ struct Shape_typemap_165 *Scene_AllocateResource(s32 arg0, s32 arg1, u32 arg2, v
         __osRestoreInt(mask);
     }
     var_s0 = func_802548B8_de(0, temp_s0, temp_s1, temp_s2);
-    temp_v0 = func_802BCF30_de();
+    temp_v0 = __osDisableInt();
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
@@ -83,7 +83,7 @@ struct Shape_typemap_165 *Scene_AllocateResourceAt(void *arg0, void *arg1, s32 a
     u32 mask;
     u32 temp_v0_2;
 
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
@@ -105,7 +105,7 @@ struct Shape_typemap_165 *Scene_AllocateResourceAt(void *arg0, void *arg1, s32 a
             var_s0 = 0;
         }
     }
-    temp_v0_2 = func_802BCF30_de();
+    temp_v0_2 = __osDisableInt();
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
@@ -126,7 +126,7 @@ void Scene_LockResource(void *arg0, Node80253610 *resource) {
     Node80253610 *temp_s0;
 
     temp_s0 = resource;
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
@@ -138,7 +138,7 @@ void Scene_LockResource(void *arg0, Node80253610 *resource) {
     func_80254DA4_de(0, temp_s0);
     temp_s0->references += 1;
     temp_s0->flags |= 0x100;
-    temp_v0 = func_802BCF30_de();
+    temp_v0 = __osDisableInt();
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
@@ -158,7 +158,7 @@ void Scene_UnlockResource(void *arg0, Node80253610 *arg1) {
     Node80253610 *temp_s0;
 
     temp_s0 = arg1;
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
@@ -171,7 +171,7 @@ void Scene_UnlockResource(void *arg0, Node80253610 *arg1) {
     if (temp_s0->references == 0) {
         temp_s0->flags &= ~0x100;
     }
-    temp_v0 = func_802BCF30_de();
+    temp_v0 = __osDisableInt();
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
@@ -189,7 +189,7 @@ void Scene_ReleaseResource(void *arg0, void *arg1) {
     u32 mask;
     u32 temp_v0;
 
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
@@ -199,7 +199,7 @@ void Scene_ReleaseResource(void *arg0, void *arg1) {
         __osRestoreInt(mask);
     }
     func_80254990_de(0, arg1);
-    temp_v0 = func_802BCF30_de();
+    temp_v0 = __osDisableInt();
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
@@ -217,7 +217,7 @@ void func_80253908_de(s32 unusedHeap) {
     u32 mask;
     u32 temp_v0;
 
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
@@ -230,7 +230,7 @@ void func_80253908_de(s32 unusedHeap) {
     while (func_80254B58_de(0, 0, 0) != 0) {
     }
     func_802515F0_de(0, 1);
-    temp_v0 = func_802BCF30_de();
+    temp_v0 = __osDisableInt();
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
@@ -248,7 +248,7 @@ void func_802539EC_de(s32 unused, s32 arg1) {
     u32 mask;
     u32 temp_v0;
 
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
@@ -260,7 +260,7 @@ void func_802539EC_de(s32 unused, s32 arg1) {
     base = (ResourceLockState *)&D_801005A8;
     base->slot = arg1;
     D_80100598[arg1] = 1;
-    temp_v0 = func_802BCF30_de();
+    temp_v0 = __osDisableInt();
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
@@ -279,7 +279,7 @@ s32 func_80253AD4_de(void) {
     u32 temp_v0;
     s32 result;
 
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
@@ -291,7 +291,7 @@ s32 func_80253AD4_de(void) {
     base = &D_801005A8;
     result = *(s32 *)((char *)D_80100598 + (*base << 2));
     *base = -1;
-    temp_v0 = func_802BCF30_de();
+    temp_v0 = __osDisableInt();
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
@@ -316,7 +316,7 @@ void Scene_MarkResourceInUse(s32 unused0, Node80253610 *arg1) {
 
     base = &D_801005A8;
     index = *base;
-    token = func_802BCF30_de();
+    token = __osDisableInt();
     counter = D_8010515C + 1;
     D_8010515C = counter;
     if (counter != 1) {
@@ -338,7 +338,7 @@ void Scene_MarkResourceInUse(s32 unused0, Node80253610 *arg1) {
         }
     }
 
-    token2 = func_802BCF30_de();
+    token2 = __osDisableInt();
     counter2 = D_8010515C - 1;
     D_8010515C = counter2;
     if (counter2 != 0) {

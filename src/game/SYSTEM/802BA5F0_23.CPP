@@ -46,7 +46,7 @@ void func_802BA5F0_eu(s32 arg0) {
             var_s3 = temp_v0;
             func_802BB5F0_de(0, arg0);
         }
-        temp_v0_2 = func_802BCF30_de();
+        temp_v0_2 = __osDisableInt();
         D_800D4420.active = 1;
         D_800D4420.cmdQueue = &D_80149A80;
         D_800D4420.evtQueue = &D_80149A80;

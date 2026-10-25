@@ -5,14 +5,14 @@
 #include "sdk/os.h"
 
 #if !(defined(VERSION_DE))
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 
 void func_802BB850_eu(s32 arg0) {
     u32 mask;
     s32 *p;
 
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     p = &D_800D5258;
     *p |= arg0;
     __osRestoreInt(mask);

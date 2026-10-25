@@ -583,9 +583,9 @@ void func_80220A80_de(Player_func_80220A80_de *player, Body_func_80220A80_de *bo
                 D_800CAB88_eu += 4.096f;
             }
             angle = body->heading + D_800C9FA0_de;
-            x = body->x + D_800CAB88_eu * func_802B7130_de(angle);
+            x = body->x + D_800CAB88_eu * Math_Sinf(angle);
             func_80238F24_de(view, 1, angle, 0.0f, 0.0f, 0.0f, x, body->y + 81.92f,
-                          body->z + D_800CAB88_eu * func_802B6560_de(angle), 0.0f, body->rotation, body->room,
+                          body->z + D_800CAB88_eu * Math_Cosf(angle), 0.0f, body->rotation, body->room,
                           0.0f, 3.0f);
         }
         func_80234FEC_de(view);

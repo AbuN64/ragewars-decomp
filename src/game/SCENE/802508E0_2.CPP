@@ -26,7 +26,7 @@ extern s32 func_80255B2C_de(void *, s32);
 extern s32 D_801051A0[3];
 extern char D_80100570;
 extern ResourceCacheEntry *D_80100568;
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 #include "COMMON/ENTRYRECAT18V3.H"
 /* The resource manager record at D_80100560: node array, free-slot stack, link records, lists and its lock queue.
@@ -91,7 +91,7 @@ void Scene_InitializeResourceCache(s32 unused, s32 count) {
     u32 i;
     void *thread;
     func_802567A4_de(&D_80101140);
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     D_8010515C += 1;
     if (D_8010515C != 1) {
         __osRestoreInt(mask);
@@ -139,7 +139,7 @@ void Scene_InitializeResourceCache(s32 unused, s32 count) {
     }
     func_802552E0_de(D_800CB6E0);
     osCreateMesgQueue((OSMesgQueue *)D_801047E0.queue, (OSMesg *)(D_801047E0.queue + 0x18), 0x40);
-    unlockMask = func_802BCF30_de();
+    unlockMask = __osDisableInt();
     D_8010515C -= 1;
     if (D_8010515C != 0) {
         __osRestoreInt(unlockMask);
@@ -158,7 +158,7 @@ extern s32 D_80101134[];
 
 extern s32 D_80101160;
 
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 
 /* Reclaims one pool node: finds the first unlocked node (none of flags 0x702) in the D_80104574 list that
@@ -269,7 +269,7 @@ block_7:
         }
     } while (var_s0 < 2);
     if (var_s1 != 0) {
-        mask = func_802BCF30_de();
+        mask = __osDisableInt();
         temp_v1 = D_8010515C - 1;
         D_8010515C = temp_v1;
         if (temp_v1 != 0) {
@@ -286,7 +286,7 @@ block_7:
                 i += 1;
             } while (i < var_s1);
         }
-        temp_a0 = func_802BCF30_de();
+        temp_a0 = __osDisableInt();
         temp_v1_2 = D_8010515C + 1;
         D_8010515C = temp_v1_2;
         if (temp_v1_2 != 1) {
@@ -414,7 +414,7 @@ void *func_802517B4_de(s32 arg0, s32 arg1) {
     void **out;
     struct IntrusiveList *object;
 
-    mask = func_802BCF30_de();
+    mask = __osDisableInt();
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
@@ -460,7 +460,7 @@ found:
         func_80255FB8_de(&D_80100570, object);
     }
 
-    temp_v0 = func_802BCF30_de();
+    temp_v0 = __osDisableInt();
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {

@@ -129,16 +129,16 @@ void func_8022409C_de(void *player, void *arg1) {
         f32 angle;
         angle = ((func_80224078_Arg1 *)arg1)->unk6C;
         angle += (held = D_800C2998_de);
-        direction.x = ((func_80224078_Arg0 *)player)->unk6C0 * func_802B7130_de(angle);
+        direction.x = ((func_80224078_Arg0 *)player)->unk6C0 * Math_Sinf(angle);
     }
     direction.y = ((func_80224078_Arg1 *)arg1)->unk20;
     direction.z = ((func_80224078_Arg0 *)player)->unk6C0 *
-                  func_802B6560_de(((func_80224078_Arg1 *)arg1)->unk6C + held);
+                  Math_Cosf(((func_80224078_Arg1 *)arg1)->unk6C + held);
     held = D_800C299C_de;
     direction.x += ((func_80224078_Arg0 *)player)->unk6C4 *
-                   func_802B7130_de(((func_80224078_Arg1 *)arg1)->unk6C - held);
+                   Math_Sinf(((func_80224078_Arg1 *)arg1)->unk6C - held);
     direction.z += ((func_80224078_Arg0 *)player)->unk6C4 *
-                   func_802B6560_de(((func_80224078_Arg1 *)arg1)->unk6C - held);
+                   Math_Cosf(((func_80224078_Arg1 *)arg1)->unk6C - held);
 
     Particle_ScaleVector(&direction, &direction, D_800D2988);
     Particle_AddVec3(&((func_80224078_Arg0 *)(player))->unk6E8,

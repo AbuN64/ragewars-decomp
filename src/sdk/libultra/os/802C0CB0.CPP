@@ -28,7 +28,7 @@ void func_802BBC20_de(void)
   s32 *new_var2;
   s8 *new_var;
   int new_var3;
-  temp_s0 = func_802BCF30_de();
+  temp_s0 = __osDisableInt();
   ((OSThread_s *)(new_var = (s8 *) D_800D5270))->state = (new_var3 = 2);
   new_var2 = &D_800D5268_de;
   func_802BC36C_de(new_var2, new_var3);

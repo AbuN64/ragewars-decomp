@@ -108,7 +108,7 @@ ResourceLoadRequest *func_80252774_de(s32 unused, ResourceLoadRequest *request, 
 extern Gfx *D_80110634;
 extern struct Shape_func_8021A2D4_de_2 D_80105180;
 extern Manager D_801047E0;
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 extern void Render_SetCombineMode(s32);
 extern void Render_SetModePreset(s32);
 
@@ -122,7 +122,7 @@ static inline struct Heap *mainHeap(void) {
 #define BRIGHTEN(c) ((((c) * 3) >> 1) > 0xFF ? 0xFF : (((c) * 3) >> 1))
 
 static inline void lock(void) {
-    u32 token = func_802BCF30_de();
+    u32 token = __osDisableInt();
     s32 counter = D_8010515C + 1;
 
     D_8010515C = counter;
@@ -135,7 +135,7 @@ static inline void lock(void) {
 }
 
 static inline void unlock(void) {
-    u32 token = func_802BCF30_de();
+    u32 token = __osDisableInt();
     s32 counter = D_8010515C - 1;
 
     D_8010515C = counter;

@@ -43,7 +43,7 @@ extern s32 D_80101190;
 
 extern s32 D_80101194;
 
-extern u32 func_802BCF30_de(void);
+extern u32 __osDisableInt(void);
 
 
 
@@ -73,7 +73,7 @@ static inline void unref(CachedResource *node) {
 
 static inline void acquire(void) {
     extern Manager D_801047E0;
-    u32 token = func_802BCF30_de();
+    u32 token = __osDisableInt();
     s32 counter = D_8010515C + 1;
 
     D_8010515C = counter;
@@ -87,7 +87,7 @@ static inline void acquire(void) {
 
 static inline void release(void) {
     extern Manager D_801047E0;
-    u32 token = func_802BCF30_de();
+    u32 token = __osDisableInt();
     s32 counter = D_8010515C - 1;
 
     D_8010515C = counter;
@@ -121,7 +121,7 @@ extern void func_80254AD0_de(s32 arg0, s32 arg1);
 
 static inline void lock(void) {
     extern Manager D_801047E0;
-    u32 token = func_802BCF30_de();
+    u32 token = __osDisableInt();
     s32 counter = D_8010515C + 1;
 
     D_8010515C = counter;
@@ -135,7 +135,7 @@ static inline void lock(void) {
 
 static inline void unlock(void) {
     extern Manager D_801047E0;
-    u32 token = func_802BCF30_de();
+    u32 token = __osDisableInt();
     s32 counter = D_8010515C - 1;
 
     D_8010515C = counter;

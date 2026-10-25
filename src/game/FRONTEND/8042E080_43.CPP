@@ -14,7 +14,7 @@ void func_80434FC4_de(s32 index) {
     float f;
     u32 alpha;
     struct Entry_func_80434FC4_de *entry;
-    f = func_802B6560_de((float)index + (float)D_800E54A4->selected[index] * D_800E1EF8)
+    f = Math_Cosf((float)index + (float)D_800E54A4->selected[index] * D_800E1EF8)
         * (*(&D_800E1EF8 + 1)) + D_800DDED0;
     if (f >= (*(&D_800DDED0 + 1))) {
         goto large;

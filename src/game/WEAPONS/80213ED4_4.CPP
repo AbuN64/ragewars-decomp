@@ -10,7 +10,7 @@
 
 /* Picks an actor's target (the tracked enemy when the aim point is chosen, else the nearest permitted target from Weapons_SelectCombatTarget), classifies it into one of eight kinds, and fills the target record with the kind, target, height difference, position, direction and distance, both in full and flattened to the horizontal plane. */
 extern void *Weapons_SelectCombatTarget(void *,void *,s32,s32), *func_80219408_de(void *);
-extern f32 Weapons_GetSignedAngleToPoint(void *,f32,f32,f32),func_802B72B0_de(f32);
+extern f32 Weapons_GetSignedAngleToPoint(void *,f32,f32,f32),Math_Sqrtf(f32);
 extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 static inline s32 func_80215410_kind(Actor_func_80214DD4_de *self, Tracker *ctx, Actor_func_80214DD4_de *target) {
     if (ctx->active == 0) {
@@ -91,12 +91,12 @@ void func_80215410_de(Actor_func_80214DD4_de *arg0, Tracker *tracker, s32 unused
     arg3->target = target;
     arg3->pos = pos;
     arg3->delta = delta;
-    arg3->dist = func_802B72B0_de((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
+    arg3->dist = Math_Sqrtf((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
     delta.y = 0.0f;
     pos.y = 0;
     arg3->flatPos = pos;
     arg3->flatDelta = delta;
-    arg3->flatDist = func_802B72B0_de((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
+    arg3->flatDist = Math_Sqrtf((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
 }
 
 #include "COMMON/PROBE.H"
@@ -118,14 +118,14 @@ static inline f32 Weapons_ProbeHeading(Actor_u1 *actor, CVector3 point) {
 
     dx = point.x - actor->position.x;
     dz = point.z - actor->position.z;
-    dist = func_802B72B0_de(dx * dx + dz * dz);
+    dist = Math_Sqrtf(dx * dx + dz * dz);
     if (dist == 0.0f) {
         return 0.0f;
     }
     do {
-        s = func_802B7130_de(actor->yaw);
+        s = Math_Sinf(actor->yaw);
     } while (0);
-    c = -func_802B6560_de(actor->yaw);
+    c = -Math_Cosf(actor->yaw);
     dot = (dx * -s + dz * c) / dist;
     dot = ((RW_MIN(dot, 1.0f)) < (-1.0f) ? (-1.0f) : (RW_MIN(dot, 1.0f)));
     angle = Nav_ArcCos(dot);
@@ -155,9 +155,9 @@ f32 Weapons_FindClearAimAngle(Actor_u1 *actor, CVector3 point, s32 target, f32 d
                     angle -= offset;
                     bias = (-RW_PI_F6 / 12.0f);
                 }
-                cosine = func_802B7130_de(actor->yaw + 3.1415927f + angle);
+                cosine = Math_Sinf(actor->yaw + 3.1415927f + angle);
                 probe.x = actor->position.x + cosine * (distance * Particle_GetActorRadius(actor));
-                sine = func_802B6560_de(actor->yaw + 3.1415927f + angle);
+                sine = Math_Cosf(actor->yaw + 3.1415927f + angle);
                 probe.z = actor->position.z + sine * (distance * Particle_GetActorRadius(actor));
                 if (!func_802462E8_de(actor, probe, 0)) {
                     angle += bias;
@@ -187,14 +187,14 @@ static inline f32 angleTo(Actor_func_80214DD4_de *actor, CVector3 point) {
 
     dx = point.x - actor->pos.x;
     dz = point.z - actor->pos.z;
-    dist = func_802B72B0_de(dx * dx + dz * dz);
+    dist = Math_Sqrtf(dx * dx + dz * dz);
     if (dist == 0.0f) {
         return 0.0f;
     }
     do {
-        s = func_802B7130_de(actor->heading);
+        s = Math_Sinf(actor->heading);
     } while (0);
-    c = -func_802B6560_de(actor->heading);
+    c = -Math_Cosf(actor->heading);
     dot = (dx * -s + dz * c) / dist;
     dot = ((RW_MIN(dot, 1.0f)) < ((-1.0f)) ? ((-1.0f)) : (RW_MIN(dot, 1.0f)));
     angle = Nav_ArcCos(dot);

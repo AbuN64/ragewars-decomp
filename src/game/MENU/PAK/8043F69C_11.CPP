@@ -206,7 +206,7 @@ void Pak_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unused
         func_8024B2D0_de(draw);
         entry->flags |= 0x2000000;
     }
-    wobble = func_802B7130_de((f32)(u32)((u32)D_800CD730 * 10U) * (RW_PI_F6 / 180.0f)) + 1.0f;
+    wobble = Math_Sinf((f32)(u32)((u32)D_800CD730 * 10U) * (RW_PI_F6 / 180.0f)) + 1.0f;
     opacity = context->fade * context->alpha;
     D_8014DE50 = (s32)(opacity * (wobble * 50.0f + 50.0f));
     if (context->selection == cursor->selection) {
