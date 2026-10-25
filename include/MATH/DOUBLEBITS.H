@@ -68,7 +68,7 @@ extern double D_800C5B98_de;
 extern double D_800C5BB0_de;
 
 
-extern f64 func_8029DB74_de(void);
+extern f64 Log10Double(f64 value);
 
 extern float D_800C5C10_de;
 
