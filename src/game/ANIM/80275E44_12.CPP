@@ -17,7 +17,7 @@ extern void func_802735A8_de(void *, f32, f32, f32);
 extern void func_802738C0_de(void *, f32);
 extern void TranslateMatrix(void *, f32, f32, f32);
 extern void func_8026EF58_de(void *, void *);
-extern void func_80275954_de(void *, s32, void *);
+extern void Nav_ComputePointBounds(void *, s32, void *);
 void Anim_DecodeBoxTransform(u8 *self, u8 *src) {
     SkelVec translation;
     SkelVec rotation;
@@ -113,7 +113,7 @@ void Anim_DecodeBoxTransform(u8 *self, u8 *src) {
         probe.z = z;
         Particle_ProjectPoint(self + 0x60, &probe, &corners[i]);
     }
-    func_80275954_de(self + 0xA0, 8, corners);
+    Nav_ComputePointBounds(self + 0xA0, 8, corners);
 }
 
 

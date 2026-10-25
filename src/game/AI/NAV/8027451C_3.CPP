@@ -73,7 +73,7 @@ s32 func_802757E4_de(Triangle *polygon) {
     return 0;
 }
 
-void func_80275954_de(f32 *arg0, s32 arg1, CVector3 *arg2)
+void Nav_ComputePointBounds(f32 *arg0, s32 arg1, CVector3 *arg2)
 {
     s32 i;
 

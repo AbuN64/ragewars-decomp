@@ -287,7 +287,7 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
 #include "COMMON/WORLD.H"
 #include "stddef.h"
 f32 Anim_GetPolygonHeight(Node75 *node, f32 x, f32 z);
-f32 func_8027525C_de(Node75 *node, f32 x, f32 z);
+f32 Nav_GetTrianglePlaneHeight(Node75 *node, f32 x, f32 z);
 
 /* The floor polygon under pos: a volume polygon (flag 0x40) that holds pos, else the one nearest in height. */
 /* Finds the containing solid volume, or the nearest floor polygon, as a legacy 32-bit handle. */
@@ -336,7 +336,7 @@ s32 Scene_FindFloorPolygon(Shared_World *world, CVector3 *pos) {
                     if (Nav_IsPointInTriangleXZ(poly, pos->x, pos->z) != 0) {
                         floor = Anim_GetPolygonHeight(poly, pos->x, pos->z);
                         if (poly->flags & 0x40) {
-                            ceiling = func_8027525C_de(poly, pos->x, pos->z);
+                            ceiling = Nav_GetTrianglePlaneHeight(poly, pos->x, pos->z);
                             if (floor <= pos->y && pos->y <= ceiling) {
                                 return (s32)poly;
                             }

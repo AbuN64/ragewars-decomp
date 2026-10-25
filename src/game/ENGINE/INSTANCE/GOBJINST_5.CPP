@@ -93,7 +93,7 @@ extern void func_8027302C(PoseMatrix, PoseMatrix);
 extern void TranslateMatrix(PoseMatrix, f32, f32, f32);
 extern void func_8027347C_de(PoseMatrix, f32, f32, f32);
 extern s32 Nav_NextRandom(void);
-extern f32 func_8027525C_de(StateFlags *, f32, f32);
+extern f32 Nav_GetTrianglePlaneHeight(StateFlags *, f32, f32);
 extern s32 func_802799C0_de(void *, s32);
 extern void func_8028C6D4_de(void *, CVector3 *, u8 *);
 extern void func_802A57E0_de(Owner802A6DF8 *, Shared_PoseActor *, PoseMatrix *);
@@ -528,7 +528,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
                         actor->unk_70 = 0.0f;
                     }
                     if ((actor->flags & 0x20000000) && actor->surface != 0 && (actor->surface->flags & 0x40)) {
-                        f32 ground = func_8027525C_de(actor->surface, actor->pos.x, actor->pos.z);
+                        f32 ground = Nav_GetTrianglePlaneHeight(actor->surface, actor->pos.x, actor->pos.z);
                         f32 d = actor->pos.y + actor->unk_70 + h;
 
                         d -= ground;

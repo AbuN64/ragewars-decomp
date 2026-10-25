@@ -32,7 +32,7 @@ typedef struct CGameRegion_t CGameRegion;
 /* Cached path-node plane normal (Particle_CrossVectors edge cross product). */
 extern CVector3 D_80111D30;
 
-extern void func_80275AA4_de(CGameRegion *dst, Packed *src, char *base, int unused, char *extra);
+extern void Nav_DecodePackedRegion(CGameRegion *dst, Packed *src, char *base, int unused, char *extra);
 
 extern float D_800C4980_de;
 
@@ -81,7 +81,7 @@ struct func_80274BEC_S2 {
     f32 unk38;
 };
 
-extern void func_80275A58_de(void *arg0);
+extern void Nav_ScaleWordsToFloats(void *arg0);
 
 extern float D_800C4978_de;
 

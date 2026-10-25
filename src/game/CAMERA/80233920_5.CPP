@@ -20,7 +20,7 @@ extern const f32 D_800C3208_de;
 extern f32 Math_Sqrtf(f32);
 extern void func_80272944_de(void *, CVector3 *, CVector3 *, s32);
 extern void func_802965B0_de(void *, CVector3 *, CVector3 *, CVector3 *, CVector3 *, CVector3 *);
-extern void func_80275954_de(void *, s32, CVector3 *);
+extern void Nav_ComputePointBounds(void *, s32, CVector3 *);
 
 
 
@@ -76,7 +76,7 @@ void func_80234DE0_de(GameplayCamera *camera) {
     out = &camera->corners[0];
     func_80272944_de(&camera->unk160, pts, out, 5);
     func_802965B0_de(camera->clipPlanes, out, out + 1, out + 2, out + 3, out + 4);
-    func_80275954_de(camera->clipBounds, 5, out);
+    Nav_ComputePointBounds(camera->clipBounds, 5, out);
     height = radius * D_800C3208_de;
     camera->volumeBounds[0].x = camera->corners[0].x - radius;
     camera->volumeBounds[1].x = camera->corners[0].x + radius;

@@ -44,7 +44,7 @@ static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
     return out;
 }
 
-void func_80275A58_de(void *arg0) {
+void Nav_ScaleWordsToFloats(void *arg0) {
     s32 *ip = (s32 *)arg0;
     f32 *fp = (f32 *)arg0;
     f32 scale = D_800C49EC_de;
@@ -61,7 +61,7 @@ void func_80275A58_de(void *arg0) {
 
 
 
-void func_80275AA4_de(CGameRegion *dst, Packed *src, char *base, int unused, char *extra) {
+void Nav_DecodePackedRegion(CGameRegion *dst, Packed *src, char *base, int unused, char *extra) {
     int i;
 
     dst->unk0 = src->unk0;

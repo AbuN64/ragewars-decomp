@@ -15,7 +15,7 @@
 #include "RENDER_2/802192C0_3.H"
 extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
-extern f32 func_8027525C_de(void *arg0, f32 arg1, f32 arg2);
+extern f32 Nav_GetTrianglePlaneHeight(void *arg0, f32 arg1, f32 arg2);
 
 extern f32 Anim_GetPolygonHeight(s32, f32, f32);
 
@@ -113,7 +113,7 @@ void func_8022EA3C_de(void *surface, CVector3 *arg1) {
 
     if (surface != 0 && arg1 != 0 &&
         (((Shared_Func80243A80Collision *)surface)->flags & 0x40)) {
-        first = func_8027525C_de(surface,
+        first = Nav_GetTrianglePlaneHeight(surface,
             arg1->x, arg1->z);
         amount = (f32)(s32)(first - Anim_GetPolygonHeight(surface,
             arg1->x, arg1->z));

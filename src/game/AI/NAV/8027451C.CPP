@@ -537,7 +537,7 @@ CVector3 *func_802750B0_de(CVector3 *out, Node75 *node) {
     return out;
 }
 
-f32 func_8027525C_de(Node75 *node, f32 x, f32 z) {
+f32 Nav_GetTrianglePlaneHeight(Node75 *node, f32 x, f32 z) {
     CVector3 normal;
     CVector3 point;
     CVector3 a;

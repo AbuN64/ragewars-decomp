@@ -106,12 +106,12 @@ void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **han
             copiedVertices=(void*)vdst;
             verts = copiedVertices->items;
             for (i = 0; i < nverts; i++) {
-                func_80275A58_de(&verts[i]);
+                Nav_ScaleWordsToFloats(&verts[i]);
             }
             for (j = 0; j < ntris; j++) {
                 tri = &tris[j];
                 /* The caller supplies a sixth bounds value; the decoder uses the first five. */
-                ((void (*)(CGameRegion *,Packed *,char *,int,char *,int))func_80275AA4_de)(&tri->canonical, &face[j], (char*)verts, nverts, (char*)tris, ntris);
+                ((void (*)(CGameRegion *,Packed *,char *,int,char *,int))Nav_DecodePackedRegion)(&tri->canonical, &face[j], (char*)verts, nverts, (char*)tris, ntris);
                 for (i = 0; i < 3; i++) {
                     y = tri->fields.v[i]->y;
                     if (!(y <= world->minY)) {

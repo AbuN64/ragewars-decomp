@@ -16,7 +16,7 @@ extern s32 Nav_IsPointInTriangleXZ(Node75 *arg0, f32 arg1, f32 arg2);
 
 extern f32 Anim_GetPolygonHeight(void *, f32, f32);
 
-extern f32 func_8027525C_de(void *arg0, f32 arg1, f32 arg2);
+extern f32 Nav_GetTrianglePlaneHeight(void *arg0, f32 arg1, f32 arg2);
 
 extern s32 Render_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);
 
@@ -44,7 +44,7 @@ void *func_8028C050_de(void *triangle, CVector3 *arg1) {
         }
         lower = Anim_GetPolygonHeight(triangle,
             arg1->x, arg1->z);
-        upper = func_8027525C_de(triangle,
+        upper = Nav_GetTrianglePlaneHeight(triangle,
             arg1->x, arg1->z);
         value = arg1->y;
         if (lower <= value && value <= upper) {
