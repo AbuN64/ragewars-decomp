@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 
 #include "stddef.h"
 #include "TYPES.H"
@@ -76,7 +77,6 @@ s32 func_80210248_eu(Chaser *self) {
 }
 
 
-extern s32 D_80146938, D_801468F4;
 extern CNavData D_8013B364;
 extern f32 Nav_GetScaledAttackRange(AiController *controller);
 extern f32 Nav_GetScaledAggression(AiController *controller);
@@ -117,9 +117,9 @@ s32 Nav_EvaluateAttackTarget(AiController *brain, s32 index) {
         }
         range = 2;
     }
-    if (D_80146938 && brain->player->profile->enabled && brain->player->profile->character == 12) accept = 1;
+    if (D_801462C8.counters.enabled && brain->player->profile->enabled && brain->player->profile->character == 12) accept = 1;
     if (accept) {
-        if (D_801468F4 && target->profile->bonus)
+        if (D_801462C8.counters.m_bFragTagOn && target->profile->bonus)
             brain->candidateDistances[index] = brain->candidateDistances[index] * 0.8f;
         if (target->computer == 0)
             brain->candidateDistances[index] = brain->candidateDistances[index] * 0.8f;

@@ -1,4 +1,5 @@
 #include "TYPES.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_10.H"
 #include "COMMON/WORLD.H"
@@ -255,7 +256,7 @@ void func_80286AA8_de(void *table, s32 target, s32 arg2) {
         func_8044D794_de(table);
     }
     (((struct SharedRecAt1B92C *)(table))->unk1B6AC) = 0;
-    if ((Camera_IsSequenceActive() == 0) && (var_s5 != 0) && ((((struct SharedRecAt1B92C *)(table))->unk1B41C) != 0) && (D_8014288C == 0)) {
+    if ((Camera_IsSequenceActive() == 0) && (var_s5 != 0) && ((((struct SharedRecAt1B92C *)(table))->unk1B41C) != 0) && (D_801462C8.counters.transitionActive == 0)) {
         func_8028D90C_de();
         temp_v0 = (((struct SharedRecAt1B92C *)(table))->unk1B434);
         if ((u32) (temp_v0 - 0xBC2) < 0x15FU) {
@@ -644,7 +645,7 @@ loop_114:
         }
     } else {
 block_122:
-        D_80142850 = func_802A01E8_de(var_a0_3) % 3;
+        D_801462C8.counters.teamColour = func_802A01E8_de(var_a0_3) % 3;
     }
     (((struct SharedRecAt1B92C *)(table))->unk0) = 2;
     func_8044D5C4_de(table);

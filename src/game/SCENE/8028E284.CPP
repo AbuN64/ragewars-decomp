@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/WORLDRECAT1B6A4.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -16,7 +17,6 @@
 
 
 extern LevelActor *D_800F3CD0[],*D_800F3D0C;
-extern s32 D_80142850;
 extern s32 func_802A01E8_de(void);
 void func_8028E284_de(SceneRecAt140 *scene) {
  s32 count=0,i=9,offset=36;LevelActor *actor=scene->actors;
@@ -30,5 +30,5 @@ void func_8028E284_de(SceneRecAt140 *scene) {
   actor++;
 
  }while(++i<scene->count);
- D_80142850=func_802A01E8_de()%3;
+ D_801462C8.counters.teamColour=func_802A01E8_de()%3;
 }

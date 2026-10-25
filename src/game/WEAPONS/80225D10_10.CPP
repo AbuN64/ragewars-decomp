@@ -433,7 +433,7 @@ s32 func_8022AC00_de(void *arg0) {
     s32 value;
     s8 type;
 
-    if (D_80146938 != 0 && ((struct RecordRecAt94 *) ((ObjectLinks1454_3 *) o)->unk_5D8)->display != 0) {
+    if (D_801462C8.counters.enabled != 0 && ((struct RecordRecAt94 *) ((ObjectLinks1454_3 *) o)->unk_5D8)->display != 0) {
         type = ((struct RecordRecAt94 *) ((ObjectLinks1454_3 *) o)->unk_5D8)->kind;
         if (type == 0xB) {
             value = 0x19000;

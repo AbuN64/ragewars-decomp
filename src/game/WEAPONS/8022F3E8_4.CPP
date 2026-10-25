@@ -1,4 +1,5 @@
 #include "COMMON/WORLD.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "include_asm.h"
 #include "COMMON/OBJECTLINKS14C.H"
 #include "COMMON/VECTOR4F.H"
@@ -116,13 +117,12 @@ typedef struct WeaponSlot {
 } WeaponSlot;
 s32 func_80283228_de(s32 *, void *);
 extern s32 D_8011D8D0;
-extern s32 D_801468F4;
 s32 func_80230058_de(void *owner, void *slot) {
     WeaponOwner *weaponOwner = (WeaponOwner *)owner;
     WeaponSlot *weaponSlot = (WeaponSlot *)slot;
     WeaponPlayer *player = weaponOwner->player;
     if (weaponSlot->delay > 0.0f || !Weapons_HasAmmoForMode(player, player->mode)) return 0;
-    if ((player->record->flag8F == 1 && D_801468F4 != 0) || player->recoil > 0.0f || player->busy != 0) return 0;
+    if ((player->record->flag8F == 1 && D_801462C8.counters.m_bFragTagOn != 0) || player->recoil > 0.0f || player->busy != 0) return 0;
     switch ((s16)(player->mode - 1)) {
     case 10:
         if (player->flags6AC & 0x4000) return 0;

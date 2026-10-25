@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -44,7 +45,7 @@ void func_80217D74_de(s32 *menu, void *player, s32 unused2) {
     if (func_8022C460_de(player) != 0) {
         held = 0;
     }
-    if (D_801468F4 != 0 && ((struct ObjRecAt8F *) ((ObjectLinks11B8 *) player)->unk_5D8)->unk8F == 1) {
+    if (D_801462C8.counters.m_bFragTagOn != 0 && ((struct ObjRecAt8F *) ((ObjectLinks11B8 *) player)->unk_5D8)->unk8F == 1) {
         held = 0;
         menu[0] = 3;
     }

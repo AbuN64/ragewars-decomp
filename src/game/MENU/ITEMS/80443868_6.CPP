@@ -1,4 +1,5 @@
 #include "COMMON/ACTORRECAT260.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/EXTERNS_13.H"
 #include "TYPES.H"
@@ -36,12 +37,11 @@ s32 func_80443B3C_de(Shared_DebugWidget *field, Shared_MenuHandle *holder) {
 }
 
 /* Does nothing. Nothing in the cartridge image calls it or stores its address as a word. */
-extern s32 D_801468F4[];
 void func_80443BCC_de(void) {
 }
 
 void func_80443BD4_de(struct RecordRecAtCV3 *record) {
-    if (D_801468F4[0] != 0) {
+    if (D_801462C8.counters.m_bFragTagOn != 0) {
         record->target->flags |= 0x01000000;
     } else {
         record->target->flags &= ~0x01000000;
@@ -56,6 +56,6 @@ void func_80443C14_de(ObjectRecAt1C *object) {
  object->actor->flags210 &= 0xFE7FFFFF;
  object->actor->flags238 &= 0xFE7FFFFF;
  object->actor->flags260 &= 0xFE7FFFFF;
- if(D_801468F4[0]) {object->actor->flags120 |= 0x01000000; return;}
+ if(D_801462C8.counters.m_bFragTagOn) {object->actor->flags120 |= 0x01000000; return;}
  object->actor->flags120 &= 0xFEFFFFFF;
 }

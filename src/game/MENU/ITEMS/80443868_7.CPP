@@ -1,4 +1,5 @@
 #include "COMMON/ACTORRECAT260.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "stddef.h"
 #include "TYPES.H"
@@ -15,7 +16,6 @@ s32 Weapons_GetPlayerIndex(s32 *, s32);
 
  /* extern */
 
-extern s32 D_801468F4[];
 
 extern s32 D_8015375C[];
 
@@ -52,7 +52,7 @@ void func_80443CD4_de(ArgRecAt1C *arg0) {
     D_8015375C[0] = 0;
     D_800E28C0[0] = 0;
     var_s0 = 0;
-    if (D_801468F4[0] != 0) {
+    if (D_801462C8.counters.m_bFragTagOn != 0) {
         temp_v0 = arg0->unkC;
         temp_v0->flags120 = (s32) (temp_v0->flags120 | 0x01000000);
     } else {
@@ -97,7 +97,7 @@ void func_80443DD0_de(ArgRecAt1C *arg0) {
     temp_v1_4->flags58 = (s32) (temp_v1_4->flags58 & 0xFE7FFFFF);
     temp_v1_5 = arg0->unkC;
     temp_v1_5->flags210 = (s32) (temp_v1_5->flags210 & 0xFE7FFFFF);
-    if (D_801468F4[0] != 0) {
+    if (D_801462C8.counters.m_bFragTagOn != 0) {
         temp_v0 = arg0->unkC;
         temp_v0->flags120 = (s32) (temp_v0->flags120 | 0x01000000);
         return;

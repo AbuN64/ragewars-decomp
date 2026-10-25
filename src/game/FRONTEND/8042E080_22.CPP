@@ -29,7 +29,6 @@ struct Stage {
 };
 extern struct Stage *D_800E4680;
 extern s32 D_8015402C;
-extern s32 D_80146948;
 
 extern void MarkMenuEventHandled(void);
 extern void func_80298368_de(s32);
@@ -93,7 +92,7 @@ void func_8042DEA0_de(void) {
             D_800E4680 = func_80425C70_de(D_8015402C, 2, 0);
             break;
         }
-        D_80146948 = 0;
+        D_801462C8.counters.humanWon = 0;
         Frontend_PlaceStageOpponents();
     }
     switch (D_8014DD98.kind) {

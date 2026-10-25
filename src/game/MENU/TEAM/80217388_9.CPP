@@ -1,4 +1,5 @@
 #include "MENU/TEAMMENU.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_6.H"
@@ -58,7 +59,7 @@ void func_80218B84_de(TeamMenu *menu, SharedPlayer_func_80218B84_de *player) {
     }
     held = player->views5E8.view698_35.controller->unkB0 & 0x8000;
     if (menu->state == 0 || menu->state == 3) {
-        if (D_801468C4 == 0 || player->views5D8.view5D8_2.controls->team != 0xFF) {
+        if (D_801462C8.counters.teams == 0 || player->views5D8.view5D8_2.controls->team != 0xFF) {
             goto run;
         }
         func_80219124_de(menu, held, player);

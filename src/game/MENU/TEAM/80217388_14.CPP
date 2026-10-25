@@ -1,4 +1,5 @@
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "MENU/TEAMMENU.H"
 #include "TYPES.H"
@@ -22,7 +23,7 @@ void func_802191B8_de(char *arg0, void *arg1) {
     flags = ((struct ObjRecAtB0 *) ((ObjectLinks11BC *) arg1)->unk_698)->unkB0 & 0x8000;
     state = *(s32 *)arg0;
     if ((state == 0) || (state == 3)) {
-        if ((D_801468C4 != 0) &&
+        if ((D_801462C8.counters.teams != 0) &&
             (((struct Record *) ((ObjectLinks11BC *) arg1)->unk_5D8)->team == 0xFF)) {
             func_80219124_de((void *)arg0, flags, arg1);
             *(s32 *)arg0 = 1;

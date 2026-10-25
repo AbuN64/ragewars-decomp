@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/OBJRECV5.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -240,7 +241,7 @@ void func_802283B8_de(World_func_802283B8_de *world) {
                 Weapons_EndRound(world);
             }
         }
-        if (D_80146938 != 0) {
+        if (D_801462C8.counters.enabled != 0) {
             active = 0;
             out = 0;
             special = 0;
@@ -264,7 +265,7 @@ void func_802283B8_de(World_func_802283B8_de *world) {
                         Weapons_EndRound(world);
                     }
                 } else {
-                    D_80146948 = 1;
+                    D_801462C8.counters.humanWon = 1;
                     Weapons_EndRound(world);
                 }
             }

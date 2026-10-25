@@ -2171,6 +2171,7 @@ struct ALFilter_s_func_802B3000_de {
     ALSetParam setParam;
 };
 
+extern int D_801427D0;
 
 struct Field_u16_14;
 typedef struct Field_u16_14 Field_u16_14;

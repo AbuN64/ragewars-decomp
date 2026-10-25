@@ -39,7 +39,7 @@ s32 func_802AB400_de(s32 arg0, Actor_func_802AB400_de *actor) {
         if (player->count == 0) {
             return 0;
         }
-        if (D_801468F4 != 0 && player->model->unk8F != 0) {
+        if (D_801462C8.counters.m_bFragTagOn != 0 && player->model->unk8F != 0) {
             return 1;
         }
         powerup = find_entry(&D_800D31D0, 3, 0x18, id);

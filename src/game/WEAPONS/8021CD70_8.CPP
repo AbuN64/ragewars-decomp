@@ -232,7 +232,7 @@ void func_80220ED4_de(SharedPlayer *player)
     linkFlags |= 0x2000;
     soundFlags |= 0x400000;
   }
-  if ((D_80146918 != 0) && (player->views5D8.view5D8_9.profile->remote == 1))
+  if ((D_801462C8.counters.m_bCTFOn != 0) && (player->views5D8.view5D8_9.profile->remote == 1))
   {
     linkFlags |= 0x2000;
   }
@@ -317,7 +317,7 @@ void func_80220ED4_de(SharedPlayer *player)
         player->views5E8.view728_73.unk728 = 0.0f;
       }
       target = 0.0f;
-      if (((D_800D052C[player->views5E8.view62E_17.character]->ammo <= 0) || (player->views5E8.view7E8_105.unk7E8 == 0)) || ((D_801468F4 != 0) && (player->views5D8.view5D8_9.profile->remote != 0)))
+      if (((D_800D052C[player->views5E8.view62E_17.character]->ammo <= 0) || (player->views5E8.view7E8_105.unk7E8 == 0)) || ((D_801462C8.counters.m_bFragTagOn != 0) && (player->views5D8.view5D8_9.profile->remote != 0)))
       {
         effect = &player->views5E8.view878_158.effect;
         player->views5E8.view7E8_105.unk7E8 = 0;
@@ -626,7 +626,7 @@ void func_80220ED4_de(SharedPlayer *player)
     sound = 102;
     if (D_80145088.settings.local != 0)
     {
-      if ((D_801468F4 != 0) && (player->views5D8.view5D8_9.profile->remote != 0))
+      if ((D_801462C8.counters.m_bFragTagOn != 0) && (player->views5D8.view5D8_9.profile->remote != 0))
       {
         sound = D_800CE47C;
       }
@@ -757,7 +757,7 @@ void func_80220ED4_de(SharedPlayer *player)
     player->views5E8.view11EC_189.unk11EC = left;
   }
   player->views5E8.view688_43.input.shadow->pos = player->views0.view8_3.pos;
-  if ((player->views1450.view1450_0.unk1450 != 0) && (D_8014288C == 0))
+  if ((player->views1450.view1450_0.unk1450 != 0) && (D_801462C8.counters.transitionActive == 0))
   {
     offset = 23;
   }

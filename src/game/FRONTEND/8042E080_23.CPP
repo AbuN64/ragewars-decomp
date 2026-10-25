@@ -134,7 +134,7 @@ void Frontend_SetupRandomTeams(void) {
             firstIndex = i;
         }
     }
-    D_8014288C = 1;
+    D_801462C8.counters.transitionActive = 1;
     game->local = 1;
     game->mode1E = 8;
     game->controllerMode = 0;

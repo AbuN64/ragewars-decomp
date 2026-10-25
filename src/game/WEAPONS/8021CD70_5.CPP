@@ -19,7 +19,7 @@ void func_8021E2A0_de(SharedPlayer *player, void *view) {
     if (player->views5E8.view788_94.icons == 0) {
         return;
     }
-    if (player->views5D8.view5D8_9.profile->remote == 1 && D_801468F4 != 0) {
+    if (player->views5D8.view5D8_9.profile->remote == 1 && D_801462C8.counters.m_bFragTagOn != 0) {
         return;
     }
     if (player->views5E8.view650_17.action == 0x27) {

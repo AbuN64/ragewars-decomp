@@ -83,8 +83,7 @@ static __inline__ SpawnChoice *spawnTable6(void) {
 }
 
 static __inline__ s32 spawnBlocked(void) {
-    extern s32 D_80142860;
-    return D_80142860;
+    return D_801462C8.counters.m_CTFPlayerWithFlag;
 }
 
 static __inline__ s32 available(s32 id) {
@@ -131,7 +130,7 @@ static __inline__ void spawn(SpawnDispatchObject *object, s32 id,
         CVector3 position, SpawnDispatchOwner *owner, void *world) {
     SpawnDispatchActor *actor;
     id = copySpawnId(id);
-    if (id == 0xBD7 && D_80146918 && spawnBlocked()) {
+    if (id == 0xBD7 && D_801462C8.counters.m_bCTFOn && spawnBlocked()) {
         return;
     }
     if (id == 0x1388 && D_801462C8.controllerMode == 1) {
@@ -152,7 +151,7 @@ static __inline__ void spawn(SpawnDispatchObject *object, s32 id,
 static __inline__ void spawnSelected(SpawnDispatchObject *object, SpawnDispatchOwner *owner, s32 id,
         void *world, CVector3 position) {
     SpawnDispatchActor *actor;
-    if (id == 0xBD7 && D_80146918 && spawnBlocked()) {
+    if (id == 0xBD7 && D_801462C8.counters.m_bCTFOn && spawnBlocked()) {
         return;
     }
     if (id == 0x1388 && D_801462C8.controllerMode == 1) {

@@ -203,7 +203,7 @@ block_13:
                 if (i < loopLimit) goto settings_loop;
             } while (0);
         }
-        if (D_8014693C < 3) {
+        if (D_801462C8.counters.unk9C < 3) {
             ((struct Shared_ActorView *)player)->special = 0;
             Weapons_SetPlayerState(player, attacker, 0x2E);
             return;

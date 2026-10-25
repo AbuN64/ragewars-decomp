@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #ifdef NON_MATCHING
@@ -19,7 +20,7 @@ typedef struct Holder_func_8043FC50_eu {
 } Holder_func_8043FC50_eu;
 
 void func_8043FC50_eu(Holder_func_8043FC50_eu *arg0) {
-    D_801468B0 = D_800E2390;
+    D_801462C8.counters.countdown = D_800E2390;
     arg0->owner->flags &= 0xFBFFFFFF;
 }
 #else

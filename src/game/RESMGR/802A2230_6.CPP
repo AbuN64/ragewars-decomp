@@ -1,4 +1,5 @@
 #include "COMMON/INTEGERSTATE530.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RECORD.H"
 #include "COMMON/STATEPAIR.H"
 #include "RESMGR/802A2230.H"
@@ -47,7 +48,7 @@ mode_three:
 mode_inactive:
         active = 0;
 mode_done:
-        if ((D_8014288C == 0) && (active == 1) && ((f32)(value * 15) < D_800CDA30_de.value)) {
+        if ((D_801462C8.counters.transitionActive == 0) && (active == 1) && ((f32)(value * 15) < D_800CDA30_de.value)) {
             Frontend_SetupRandomTeams();
             func_8042DEA0_de();
             func_802A2400_de(0.0f);

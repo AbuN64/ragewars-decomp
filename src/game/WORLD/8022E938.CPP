@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
@@ -41,7 +42,6 @@ extern s32 D_800CED30;
 extern void func_80253908_de(s32 a);
 
 
-extern s32 D_80142850;
 
 extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
@@ -313,7 +313,7 @@ void func_8022EDFC_de(void *player) {
     s32 mode;
 
     ((Shared_ActorView *)player)->controls->transientFlag = 1;
-    mode = D_80142850;
+    mode = D_801462C8.counters.teamColour;
     switch (mode) {
     case 0:
         Render_PlaySoundAtPosition(0x18A1,

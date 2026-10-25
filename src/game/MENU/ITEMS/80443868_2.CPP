@@ -131,7 +131,7 @@ s32 func_804438BC_de(StateRecAt1C *arg0) {
 }
 
 s32 func_80443964_de(struct FieldRecAt14 *field) {
-    if (D_801468F4 != 0) {
+    if (D_801462C8.counters.m_bFragTagOn != 0) {
         field->text = D_800D7BE8;
     } else {
         field->text = D_800D7BE4;

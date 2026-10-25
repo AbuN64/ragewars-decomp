@@ -1,4 +1,5 @@
 #include "TYPES.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/UNUSED.H"
@@ -28,14 +29,14 @@ static inline u32 averageFour(void) {
 }
 static inline s32 idlePause(TimingWorld *world) {
  if(func_80442A28_de(&D_8014561C)==0 && Camera_IsSequenceInWindow()!=0 && func_80245B0C_de()==120) {
- if(D_80142868==0) {
- if(world->unk26DD4==0) { D_80142868=1;func_804037D4_de(); }
+ if(D_801462C8.counters.first==0) {
+ if(world->unk26DD4==0) { D_801462C8.counters.first=1;func_804037D4_de(); }
  goto checkFlag;
  }
  goto active;
  }
  checkFlag:
- if(D_80142868!=0) {
+ if(D_801462C8.counters.first!=0) {
  active:
  if(func_80245850_de()!=0) return 1;
  }

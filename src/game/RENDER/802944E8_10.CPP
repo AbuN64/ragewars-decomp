@@ -1,4 +1,5 @@
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/OBJRECAT26DD8.H"
 #include "RENDER/802944E8.H"
 #include "TYPES.H"
@@ -15,7 +16,6 @@ s32 func_80442A28_de(void *);
 
 
 extern func_80294BB0_S1 D_8014561C;
-extern s32 D_80142868;
 
 s32 func_80294B9C_de(ObjRecAt26DD4 *arg0) {
     s32 var_v0;
@@ -35,7 +35,7 @@ s32 func_80294B9C_de(ObjRecAt26DD4 *arg0) {
         }
     }
 block_6:
-    if (D_80142868 != 0) {
+    if (D_801462C8.counters.first != 0) {
 block_7:
         if (func_80245850_de() != 0) return 1;
     }

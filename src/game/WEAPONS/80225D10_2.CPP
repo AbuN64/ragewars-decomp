@@ -152,7 +152,6 @@ typedef struct {
 } BonusPlayer;
 typedef struct { s32 value; u8 pad4[0x18C]; } PlayerBonus;
 struct World;
-extern s32 D_801468F4, D_80146938;
 struct Shared_World;
 extern void *func_8028CFA0_de(struct Shared_World *, s32, s32);
 
@@ -167,7 +166,7 @@ static inline ActorTemplate *findModel(s32 kind, s32 id) {
 static inline s32 startHealth(BonusPlayer *player) {
     s32 health;
     s8 kind;
-    if (optionEnabled((GameOption *)&D_80146938) && player->info->boosted != 0) {
+    if (optionEnabled((GameOption *)&D_801462C8.counters.enabled) && player->info->boosted != 0) {
         kind = player->info->kind;
         if (kind == 0xB) health = 0x19000;
         else if (kind == 0xC) health = 0x19000;
@@ -184,7 +183,7 @@ void Weapons_InitializePlayerHealth(BonusPlayer *player) {
     ActorTemplate *model;
     s32 id;
     id = player->modelId;
-    if (optionEnabled((GameOption *)&D_801468F4) && player->info->special == 1) id = 0x13;
+    if (optionEnabled((GameOption *)&D_801462C8.counters.m_bFragTagOn) && player->info->special == 1) id = 0x13;
     model = findModel(0xB, id);
     if (model == 0) {
         model = findModel(0xB, -1);
@@ -192,7 +191,7 @@ void Weapons_InitializePlayerHealth(BonusPlayer *player) {
     }
     player->model = model;
     player->x = model->x; player->y = model->y; player->z = model->z;
-    if (optionEnabled((GameOption *)&D_801468F4) && player->info->special != 0) {
+    if (optionEnabled((GameOption *)&D_801462C8.counters.m_bFragTagOn) && player->info->special != 0) {
         player->maxHealth = 0xA00;
         player->health = 0xA00;
         return;

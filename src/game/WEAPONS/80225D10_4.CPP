@@ -101,7 +101,6 @@ void * func_8022C55C_de(void *, u32);
    when func_802282EC_de reports it over. */
 
 
-extern s32 D_801427FC;
 
 
 
@@ -111,6 +110,11 @@ s32 func_802282EC_de(Round *arg0);
 
 extern u8 D_801462D5; /* MIXED func_80227038_de */
 extern u8 D_801462DE; /* MIXED func_80227038_de */
+extern int D_80142848; /* MIXED func_80227038_de */
+extern int D_8014284C; /* MIXED func_80227038_de */
+extern s32 D_80142850; /* MIXED func_80227038_de */
+extern s32 D_80146914; /* MIXED func_80227038_de */
+extern s32 D_80146938; /* MIXED func_80227038_de */
 void func_80227038_de(s8 *world) {
     CGameStatus *initial_rules; 
     CGameStatus *select_rules; 
@@ -588,7 +592,7 @@ void Weapons_ReleaseWaitingPlayer(Round *round) {
     ActorNode *node;
     CGameStatus *state;
     s32 waiting;
-    if ((D_80146918 != 0) && (Camera_IsSequenceActive() == 0) && (Camera_IsSequenceInWindow() == 0)) {
+    if ((D_801462C8.counters.m_bCTFOn != 0) && (Camera_IsSequenceActive() == 0) && (Camera_IsSequenceInWindow() == 0)) {
         count = Weapons_CountPlayersIn(round);
         if (count > 0) {
             waiting = Weapons_FindWaitingPlayer(round) != 0;
@@ -603,7 +607,7 @@ void Weapons_ReleaseWaitingPlayer(Round *round) {
                     node = Weapons_FindWaitingPlayer(round);
                     if (node != 0) {
                         node->scores->unk90 = 0;
-                        D_80146924 = 3;
+                        D_801462C8.counters.unk84 = 3;
                     }
                 } else {
                     state->unk84 = 2;
@@ -622,7 +626,7 @@ void Weapons_ReleaseWaitingPlayer(Round *round) {
             case 3:
                 break;
             }
-            if ((func_802282EC_de(round) != 0) && (D_801427FC == 0)) {
+            if ((func_802282EC_de(round) != 0) && (D_801462C8.counters.elapsed == 0)) {
                 Weapons_EndRound(round);
             }
         }

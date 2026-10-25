@@ -1,4 +1,5 @@
 #include "TYPES.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
@@ -43,7 +44,6 @@ extern void func_80273C68_de(void *arg0, f32 arg1);
 
 
 
-extern int D_801468C4;
 
 /* Tests whether a viewer can see a target: raises both positions by their heights scaled by one half and casts
    a ray between them through func_802444A4_de into D_80103FD0, returning 1 when nothing or the target itself
@@ -131,7 +131,7 @@ int AI_DynTurretOpposingPlayer(Actor *self, int unused, Actor *target) {
     if (linked == target || target->active == 0) {
         return 0;
     }
-    if (D_801468C4 != 0) { if (linked->info->team == target->info->team) { return 0; } } return 1;
+    if (D_801462C8.counters.teams != 0) { if (linked->info->team == target->info->team) { return 0; } } return 1;
 }
 
 s32 AI_DynTurretCanSeePlayer(Player *player, RiderRecAt130V2 *rider, Player *other) {

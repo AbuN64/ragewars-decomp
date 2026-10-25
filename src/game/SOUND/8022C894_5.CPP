@@ -218,7 +218,7 @@ void func_8022DFA8_de(void *arg0) {
     effect = &((ObjectLinks87C *)(arg0))->unk_878;
     if (((struct Shape_typemap_14 *)(D_800D052C[((ObjectLinks87C *)(arg0))->unk_62E]))->field_8 <= 0
         || ((ObjectLinks87C *)(arg0))->unk_7E8 == 0
-        || (D_801468F4 != 0 && ((struct ObjRecAt8F *) ((ObjectLinks87C *) arg0)->unk_5D8)->unk8F != 0)) {
+        || (D_801462C8.counters.m_bFragTagOn != 0 && ((struct ObjRecAt8F *) ((ObjectLinks87C *) arg0)->unk_5D8)->unk8F != 0)) {
         do {
             ((ObjectLinks87C *)(arg0))->unk_7E8 = 0;
             state = ((Shared_Effect *)(effect))->state;

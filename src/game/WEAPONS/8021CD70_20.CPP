@@ -27,7 +27,6 @@ extern char D_00450AF4;
 extern char D_00450B18;
 extern char D_00450B3C;
 extern char D_80145040;
-extern s32 D_80146938;
 
 extern void func_8044A07C_de(void *);
 extern void Pak_OpenDialog(char *, char *, SharedPlayer *, void *, s32);
@@ -62,7 +61,7 @@ void Weapons_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
                 break;
             }
         }
-        if (D_80146938 != 0 && player->views5D8.view5D8_2.controls->team == 0 && player->views5D8.view5D8_2.controls->active != 0) {
+        if (D_801462C8.counters.enabled != 0 && player->views5D8.view5D8_2.controls->team == 0 && player->views5D8.view5D8_2.controls->active != 0) {
             active = 0;
             out = 0;
             leader = 0;
@@ -81,7 +80,7 @@ void Weapons_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
                 }
             }
             if (out == active) {
-                if (D_8014693C == 2 && leader->views5E4.view5E4_3.alive == 0) {
+                if (D_801462C8.counters.unk9C == 2 && leader->views5E4.view5E4_3.alive == 0) {
                     for (i = 0; i < 8; i++) {
                         other = func_8022A5F4_de(&D_80145040, i);
                         if (other != 0 && other->views5D8.view5D8_2.controls->active != 0) {
@@ -89,7 +88,7 @@ void Weapons_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
                         }
                     }
                 }
-                if (D_8014693C < 3) {
+                if (D_801462C8.counters.unk9C < 3) {
                     func_8044972C_de(leader);
                 }
             }

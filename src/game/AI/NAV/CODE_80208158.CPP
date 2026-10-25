@@ -68,10 +68,10 @@ void func_80208158_de(Brain *brain) {
         meter = (f32)health / (f32)maximum * 100.0f;
         if (brain->player->views5D8.view5D8_1.record->kind == 14) {
             if (meter == 0.0f) {
-                meter = (3 - D_8014693C) * 33;
+                meter = (3 - D_801462C8.counters.unk9C) * 33;
             } else {
                 meter *= 0.33333334f;
-                meter += (2 - D_8014693C) * 33;
+                meter += (2 - D_801462C8.counters.unk9C) * 33;
             }
             if (meter < 0.0f) {
                 meter = 0.0f;

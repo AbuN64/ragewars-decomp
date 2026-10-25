@@ -103,6 +103,9 @@ s32 func_80438AD4_de(void) {
     return 0;
 }
 
+extern s32 D_801468F4; /* MIXED func_80438ADC_de */
+extern s32 D_80146918; /* MIXED func_80438ADC_de */
+extern s32 D_80146948; /* MIXED func_80438ADC_de */
 s32 func_80438ADC_de(void *window, void *unused1, s32 event) {
     s32 state;
     char *object;
@@ -175,7 +178,7 @@ s32 func_80438C84_de(void *window) {
 #elif defined(VERSION_EU_X)
         func_802991D4_de(func_8040EBD0_de(func_8040EC30_de(window, 0x278)) == 0 ? 0x278 : 0x277);
 #endif
-        if (D_80146948 == 0) {
+        if (D_801462C8.counters.humanWon == 0) {
 #if defined(VERSION_DE)
             func_802991D4_de(0x26E);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)

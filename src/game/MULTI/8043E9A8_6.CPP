@@ -7,12 +7,11 @@
 
 /* When the timer D_801468B0 has run out, calls func_8044DD50_de on D_8011FAC0 and returns one;
    otherwise returns zero. */
-extern f32 D_801468B0;
 #include "COMMON/GAME_SESSION.H"
 extern void func_8044DD50_de(void *);
 
 s32 func_8043EDDC_de(void) {
-    if (D_801468B0 <= 0.0f) {
+    if (D_801462C8.counters.countdown <= 0.0f) {
         func_8044DD50_de(&D_8011FAC0);
         return 1;
     }

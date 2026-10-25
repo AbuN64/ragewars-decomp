@@ -242,7 +242,6 @@ spawn:
    sets the starting ammo by whether the player has a definition, and chooses the starting weapon (fixed for states 17 and
    18, none for a bonus profile, the low half of the second loadout word of the definition when the player is a computer, else the first
    action marked 1) before loading the weapon's animation table and count. */
-extern s32 D_801468F4;
 extern void *D_800D052C[];
 extern s32 func_80426090_de(struct Player *);
 extern s32 func_80426174_de(struct Player *);
@@ -301,7 +300,7 @@ void Render_ResetPlayerWeapons(struct Player *player) {
         player->selectedAction = 17;
         player->queuedAction = 17;
         player->lastAction = 17;
-    } else if (D_801468F4 != 0 && player->profile->bonus != 0) {
+    } else if (D_801462C8.counters.m_bFragTagOn != 0 && player->profile->bonus != 0) {
         player->selectedAction = 0;
         player->weapon = 0;
         player->queuedAction = 0;

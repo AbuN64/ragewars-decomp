@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
@@ -31,7 +32,7 @@ void func_80291074_de(void *object) {
             if (D_800CD780 != 0) {
 advance:
                 Render_SetTransitionTarget(object, 1);
-                D_8014286C = 1;
+                D_801462C8.counters.second = 1;
             }
         }
     } else {
@@ -82,7 +83,7 @@ void func_80291074_de(void *arg0) {
             if (D_800CD780 != 0) {
 block_6:
                 Render_SetTransitionTarget(arg0, 1);
-                D_8014286C = 1;
+                D_801462C8.counters.second = 1;
             }
         }
     } else {

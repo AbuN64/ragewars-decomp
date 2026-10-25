@@ -59,7 +59,7 @@ void func_802095F8_de(Brain *object) {
             targetHeight = delta.y - target->position.y;
         } else targetHeight = target->model->height - target->position.y;
         targetHeight *= D_800C1C74_de;
-        if (D_801468F4 && target->profile->scaled) targetHeight *= D_800C1C78_de;
+        if (D_801462C8.counters.m_bFragTagOn && target->profile->scaled) targetHeight *= D_800C1C78_de;
         delta = brain->targetPosition;
         delta.x -= origin.x;
         delta.y -= origin.y;
@@ -350,7 +350,7 @@ void func_80209CD8_de(SharedPlayer **brain) {
     CGameStatus *session;
     s8 mode;
 
-    if (D_80146938 != 0) {
+    if (D_801462C8.counters.enabled != 0) {
         mode = (*brain)->views5D8.view5D8_2.controls->mode;
         if (mode == 0xC || mode == 0xF) {
             limit = 0x384;

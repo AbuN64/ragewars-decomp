@@ -74,7 +74,7 @@ void func_80294614_de(GameSession *arg0) {
     s32 field;
     f32 f;
 
-    D_80142868 = 0;
+    D_801462C8.counters.first = 0;
     D_800CD730 = 0;
     func_80293268_de(arg0);
     func_8023EE00_de();

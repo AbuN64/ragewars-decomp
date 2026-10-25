@@ -1,4 +1,5 @@
 #include "TYPES.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJ.H"
@@ -143,7 +144,7 @@ void AI_DynTurretGetTargetInfo(SharedPlayer *player, RiderRecAt130V1 *rider, Res
                 enemy = 0;
                 if (player->views1C.view1D8_23.self != other && other->views5E4.view5E4_1.active != 0) {
                     enemy = 1;
-                    if (D_801468C4 != 0) {
+                    if (D_801462C8.counters.teams != 0) {
                         enemy = player->views1C.view1D8_23.self->views5D8.view5D8_1.record->team != other->views5D8.view5D8_1.record->team;
                     }
                 }

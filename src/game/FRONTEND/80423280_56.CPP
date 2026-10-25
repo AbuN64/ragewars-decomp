@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/RECRECAT4.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -18,7 +19,6 @@ extern MatchScoreScreen *D_800E53C0;
 
 
 
-extern s32 D_801468F4;
 
 extern void MarkMenuEventHandled();
 
@@ -54,13 +54,16 @@ typedef s32 (*Handler8042DB38)(void *, s32, s32, s32, s32);
 
 extern Handler8042DB38 D_800E53CC;
 
+extern s32 D_80146894; /* MIXED func_8042D788_de */
+extern s32 D_801468F4; /* MIXED func_8042D788_de */
+extern s32 D_80146918; /* MIXED func_8042D788_de */
 s32 func_8042D788_de(void) {
     s32 *paused;
     MarkMenuEventHandled();
     if (func_8043C308_de(D_800E53C0) == 1) {
         return 0;
     }
-    paused = &D_8011FAC0.clockPaused;
+    paused = &D_80146894;
     *paused = 0;
     switch (func_80299A08_de()) {
 #if defined(VERSION_DE)

@@ -1,10 +1,10 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "FX/8020F6E0.H"
 #include "TYPES.H"
 #include "stddef.h"
 
-extern s32 D_801468C4;
 extern CVector3 *Nav_GetControllerPosition(AiController *controller);
 extern s32 func_80209A94_de(AiController *controller);
 extern f32 Particle_GetPointDistance(f32 *a, f32 *b);
@@ -35,7 +35,7 @@ s32 Fx_UpdateTargetSelection(void *object) {
         if (linked->reactionFlags & 0x20) {
             controller->target = NULL;
         }
-        if (D_801468C4 != 0) {
+        if (D_801462C8.counters.teams != 0) {
             if (controller->player->profile->team == linked->profile->team) {
                 controller->target = NULL;
             }

@@ -1,4 +1,5 @@
 #include "WEAPONS/PLAYERRECAT1450V1.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "WEAPONS/MEASUREDRECAT1D8V3.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -132,7 +133,7 @@ void func_80233438_de(void *arg0, void *attack) {
 
     if (((ObjectLinks11DC *)(actor))->unk_11D8 <= 0.0f) {
         if ((((struct Ctrl *) ((ObjectLinks11DC *) actor)->unk_5D8)->flag == 0 ||
-             D_801468F4 == 0) &&
+             D_801462C8.counters.m_bFragTagOn == 0) &&
             (((ObjectLinks11DC *)(actor))->unk_6AC & 0x4000)) {
             func_8022B190_de(actor);
         }

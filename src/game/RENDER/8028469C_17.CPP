@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/PACKEDMESHMATERIAL.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -33,7 +34,7 @@ f32 Render_GetSpatialEffectLevel(func_80285D00_S1 *pool, CVector3 position) {
     s32 mask = func_802BCF30_de();
     func_80285880_S1 *node;
     f32 distance, amount, first, second, limit;
-    if (D_8014288C == 1 || Camera_IsSequenceInWindow() != 0) {
+    if (D_801462C8.counters.transitionActive == 1 || Camera_IsSequenceInWindow() != 0) {
         value = 0.0f;
     } else {
         node = pool->unk14.head;

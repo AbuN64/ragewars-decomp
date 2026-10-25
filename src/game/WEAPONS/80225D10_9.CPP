@@ -147,7 +147,7 @@ s32 func_80229C0C_de(struct Shared_ActorView *player, s32 arg1) {
     s32 offset;
 
     if (type == types[0]) {
-        switch (D_80142850) {
+        switch (D_801462C8.counters.teamColour) {
         case 0:
             offset = 0x514;
             break;
@@ -158,7 +158,7 @@ s32 func_80229C0C_de(struct Shared_ActorView *player, s32 arg1) {
             offset = 0x578;
             break;
         default:
-            D_80142850 = 0;
+            D_801462C8.counters.teamColour = 0;
             offset = 0x514;
             break;
         }

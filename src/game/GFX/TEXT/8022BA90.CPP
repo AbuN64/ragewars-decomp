@@ -25,7 +25,6 @@
 
 extern void *func_8028CFA0_de(Shared_World *arg0, s32 arg1, s32 arg2);
 
-extern s32 D_801468F4;
 
 extern s32 D_80140FF8;
 
@@ -61,7 +60,7 @@ void Text_LoadActorModel(void *actor) {
     void *result;
 
     modelKind = ((Shared_ActorView *)actor)->state;
-    if (D_801468F4 != 0 && ((Shared_ActorView *)actor)->controls->transientFlag == 1) {
+    if (D_801462C8.counters.m_bFragTagOn != 0 && ((Shared_ActorView *)actor)->controls->transientFlag == 1) {
         modelKind = 0x13;
     }
     result = func_8028CFA0_de(&D_8011FE88, 0xB, modelKind);
@@ -101,7 +100,7 @@ void func_8022BC14_de(Player *actor) {
     s32 var_t0;
 
     if (actor->computer != 0) {
-        if (D_8014288C == 0) {
+        if (D_801462C8.counters.transitionActive == 0) {
             var_t0 = 0x17;
             goto after;
         }

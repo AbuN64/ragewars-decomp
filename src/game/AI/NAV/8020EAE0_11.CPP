@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/SHAREDCALLBACK5.H"
@@ -77,7 +78,7 @@ s32 Nav_SelectPlayerState(AiController *controller) {
         return 1;
     }
     healthThreshold = (s32)((1.0f - Nav_GetScaledAggression(controller)) * 80.0f);
-    if (D_80146938 != 0 && controller->player->profile->enabled != 0) {
+    if (D_801462C8.counters.enabled != 0 && controller->player->profile->enabled != 0) {
         healthThreshold = 0;
     }
     if (func_80209AD8_de(controller) == 0 && healthPercent < (f32)healthThreshold) {
