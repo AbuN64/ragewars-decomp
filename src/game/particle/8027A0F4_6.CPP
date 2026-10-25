@@ -132,7 +132,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
         return;
     }
     desc = particle->desc;
-    if ((desc->flags & 0x80000) && desc->animMode == 1) {
+    if ((desc->flags & 0x80000) && desc->playback == 1) {
         if (particle->inst.type != 0x60) {
             particle->time = 0.0f;
         }
@@ -182,7 +182,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
     func_80295F78_de(model, &info);
     frame = particle->frame;
     time = particle->time;
-    switch (desc->animMode) {
+    switch (desc->playback) {
         case 0:
             if (frame >= info.count - 1) {
                 time = particle->life;

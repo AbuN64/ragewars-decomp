@@ -169,11 +169,11 @@ struct Shared_ParticleFade {
 struct Shared_ParticleColors;
 struct Shared_ParticleDesc;
 struct Shared_ParticleFade;
-/* The oscillator controller is reached through descriptor byte0x2C.
- * The ROM reads its signed ramp byte at0x18. */
-struct Shared_ParticleOscillation {
+/* The descriptor's sine wobble (CROMParticleSineWave_t): random X/Y amplitude, frequency and phase pairs, then the
+ * frames the wobble fades in over. */
+struct Shared_ParticleSineWave {
     char reserved[0x18];
-    s8 ramp;
+    s8 fadeInFrames; /* 0x18: m_nSineWaveFadeIn */
 };
 /* Descriptor distance range: scalars read at +0x1C/+0x20 by the particle transform. */
 struct Shared_ParticleDistanceRange {
@@ -194,9 +194,9 @@ struct Shared_ParticleEvents {
 struct Shared_ParticleDesc {
     s32 flags;
     char pad4[0x4];
-    s8 animMode;
+    s8 playback; /* 0x08: CROMParticleEffect_t m_Playback */
     char pad9;
-    s8 clampToGround;
+    s8 wallBehavior; /* 0x0A: m_WallBehavior; the floor and ceiling alignments clamp to their surface when set */
     char padB[5];
     s16 unk10;
     char pad12[2];
@@ -205,7 +205,7 @@ struct Shared_ParticleDesc {
     char pad1C[8];
     struct Shared_ParticleDistanceRange *distanceRange;
     char pad28[4];
-    struct Shared_ParticleOscillation *oscillation;
+    struct Shared_ParticleSineWave *sineWave;
     char pad30[0x4];
     struct Shared_ParticleColors *colors;
     struct Shared_ParticleFade *fade;
@@ -243,13 +243,13 @@ struct Shared_Particle {
     CVector3 rot;
     CVector3 rotSpeed;
     f32 alpha;
-    /* Two phase/speed/amplitude triples occupy the existing oscillator words. */
-    f32 phaseA;
-    f32 phaseB;
-    f32 phaseSpeedA;
-    f32 phaseSpeedB;
-    f32 amplitudeA;
-    f32 amplitudeB;
+    /* Sine wobble across (X) and up (Y) the travel direction (CParticle_t m_X/YSine*); amplitude > 0 moves it, < 0 only draws it offset. */
+    f32 sineAngleX;
+    f32 sineAngleY;
+    f32 sineAngleSpeedX;
+    f32 sineAngleSpeedY;
+    f32 sineAmplitudeX;
+    f32 sineAmplitudeY;
     s32 unk1B4;
     s8 mode0;
     s8 unk1B9;

@@ -259,7 +259,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     if (!(particle->flags & 0x30000)) {
         ramp = particle->time;
         if (ramp > 0.0f) {
-            rampTime = desc->oscillation->ramp;
+            rampTime = desc->sineWave->fadeInFrames;
             fade = 1.0f;
             if (rampTime != 0) {
                 f32 rampLength = (f32)rampTime;
@@ -268,21 +268,21 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
                 }
             }
             direction = particle->direction;
-            if (particle->amplitudeA < 0.0f) {
+            if (particle->sineAmplitudeX < 0.0f) {
                 up.x = 0;
                 up.z = 0;
                 up.y = 1.0f;
                 Particle_CrossVectors(&side, &up, &direction);
-                Particle_ScaleVector(&offset, &side, Math_Sinf(particle->phaseA) * -particle->amplitudeA * fade);
+                Particle_ScaleVector(&offset, &side, Math_Sinf(particle->sineAngleX) * -particle->sineAmplitudeX * fade);
                 Particle_AddVec3(&position, &position, &offset);
             }
-            if (particle->amplitudeB < 0.0f) {
+            if (particle->sineAmplitudeY < 0.0f) {
                 up.x = 0;
                 up.z = 0;
                 up.y = 1.0f;
                 Particle_CrossVectors(&across, &up, &direction);
                 Particle_CrossVectors(&side, &across, &direction);
-                Particle_ScaleVector(&offset, &side, Math_Sinf(particle->phaseB) * -particle->amplitudeB * fade);
+                Particle_ScaleVector(&offset, &side, Math_Sinf(particle->sineAngleY) * -particle->sineAmplitudeY * fade);
                 Particle_AddVec3(&position, &position, &offset);
             }
         }
@@ -347,7 +347,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         position.z += particle->direction.z * 5.12f;
         break;
     case -5:
-        if (desc->clampToGround != 0) {
+        if (desc->wallBehavior != 0) {
             position.y = RW_MAX_GT(position.y, Anim_GetPolygonHeight(0, position.x, position.z) + 5.12f);
         }
         break;
@@ -364,7 +364,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         }
         break;
     case -2:
-        if (desc->clampToGround != 0) {
+        if (desc->wallBehavior != 0) {
             position.y = RW_MIN_LT(position.y, Nav_GetTrianglePlaneHeight(0, position.x, position.z) - 5.12f);
         }
         break;
@@ -380,7 +380,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         break;
     }
     Particle_LimitVectorLength(&position.x, 20000.0f);
-    if ((desc->flags & 0x80000) && (desc->animMode == 1)) {
+    if ((desc->flags & 0x80000) && (desc->playback == 1)) {
         scale = scale * (1.0f / 255.0f) * (f32)particle->opacity;
     }
     if (particle->desc->renderModel != 0) {
