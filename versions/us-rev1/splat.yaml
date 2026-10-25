@@ -3494,7 +3494,7 @@ segments:
       - [0xC8838, data, data_800C/D_blob_c1152b0c41cfd659b4a8]
       - [0xC883C, rodata, data_800C/D_auto_src_rw_pool_80226548_C883C_us_rev1]
       - [0xC8858, rodata, data_800C/D_blob_af1896a0441772b8ba99]
-      - [0xC8860, rodata, data_800C/D_blob_098b176cdbefbc098449]
+      - [0xC8860, rodata, data_800C/literals_Weapons_BuildPlayerOrientation]
       - [0xC8864, rodata, data_800C/literals_Weapons_BuildPlayerViewTransform]
       - [0xC886C, data, data_800C/D_blob_6588ef319ee5e6e352e3]
       - [0xC8870, rodata, data_800C/literals_func_80227038_de]

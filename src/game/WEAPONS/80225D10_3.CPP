@@ -125,7 +125,6 @@ void func_80226A34_de(World_func_80226A34_de *world) {
     }
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -134,11 +133,10 @@ void func_80226A34_de(World_func_80226A34_de *world) {
 #include "COMMON/SHAPE_TYPEMAP_14.H"
 #include "TYPES.H"
 
-extern float D_800C2B70_de;
 extern f32 D_80115DEC;
 extern void MultiplyQuaternions(CQuatern *out, CQuatern *a, CQuatern *b);
 
-void Weapons_BuildPlayerOrientation(void *object, CQuatern *output)
+void Weapons_BuildPlayerOrientation(Player *player, CQuatern *output)
 {
     CQuatern pitchRotation;
     CQuatern yawRotation;
@@ -146,49 +144,36 @@ void Weapons_BuildPlayerOrientation(void *object, CQuatern *output)
     CQuatern orientation;
     CQuatern pitchYaw;
     CQuatern oriented;
-    Player *player = object;
-    float pitch;
-    float roll;
-    float heading;
-    float yaw;
-    float scale;
-
-    heading = player->heading;
-    roll = player->lean + player->sway[2];
-    pitch = player->pitchOffset + player->sway[0];
-    pitch -= player->state708;
-    orientation = player->orientation;
-    scale = D_800C2B70_de;
+    f32 pitch, yaw, roll, scale, heading;
+    f32 rollAngle, pitchAngle, yawAngle;
+    pitch = player->pitchOffset + player->sway[0] - player->state708;
     yaw = player->kickYaw + player->sway[1];
-    roll *= scale;
-
-    D_80115DEC = func_802B7130_de(roll);
-    pitch *= scale;
+    roll = player->lean + player->sway[2];
+    heading = player->heading;
+    scale = 0.5f;
+    rollAngle = roll * scale;
+    orientation = player->orientation;
+    D_80115DEC = func_802B7130_de(rollAngle);
     rollRotation.x = 0.0f;
     rollRotation.y = 0.0f;
     rollRotation.z = D_80115DEC;
-    rollRotation.w = func_802B6560_de(roll);
-
-    D_80115DEC = func_802B7130_de(pitch);
+    rollRotation.w = func_802B6560_de(rollAngle);
+    pitchAngle = pitch * scale;
+    D_80115DEC = func_802B7130_de(pitchAngle);
     pitchRotation.x = D_80115DEC;
     pitchRotation.y = 0.0f;
     pitchRotation.z = 0.0f;
-    pitchRotation.w = func_802B6560_de(pitch);
-
-    heading = (heading + yaw) * scale;
-    D_80115DEC = func_802B7130_de(heading);
+    pitchRotation.w = func_802B6560_de(pitchAngle);
+    yawAngle = (heading + yaw) * scale;
+    D_80115DEC = func_802B7130_de(yawAngle);
     yawRotation.x = 0.0f;
     yawRotation.y = D_80115DEC;
     yawRotation.z = 0.0f;
-    yawRotation.w = func_802B6560_de(heading);
-
+    yawRotation.w = func_802B6560_de(yawAngle);
     MultiplyQuaternions(&pitchYaw, &pitchRotation, &yawRotation);
     MultiplyQuaternions(&oriented, &pitchYaw, &orientation);
     MultiplyQuaternions(output, &rollRotation, &oriented);
 }
-#else
-INCLUDE_ASM("span_1000", Weapons_BuildPlayerOrientation);
-#endif
 
 #include "TYPES.H"
 #include "COMMON/AIPROFILE.H"
