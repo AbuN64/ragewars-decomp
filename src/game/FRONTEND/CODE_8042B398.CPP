@@ -87,7 +87,6 @@ void func_8042B2E4_de(void) {
     D_800E4F60->unk46C = 0;
 }
 
-extern char D_80154018[];
 extern void func_80265688_de(void *, s32, s32);
 
 /* Clears the first 0x28 bits of the bit set D_80154018 (bit i set to 0 through func_80265688_de). */
@@ -95,7 +94,7 @@ void Frontend_ClearFlagBits(void) {
     s32 i;
 
     for (i = 0; i < 0x28; i++) {
-        func_80265688_de(D_80154018, i, 0);
+        func_80265688_de(D_80154010.played, i, 0);
     }
 }
 

@@ -2521,7 +2521,6 @@ extern float D_800C7910_de;
 
 extern char *D_800D75F8;
 
-extern char D_80154018[];
 
 extern const f64 D_800C76A0_de;
 
