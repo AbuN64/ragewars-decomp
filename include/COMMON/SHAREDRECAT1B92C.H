@@ -16,7 +16,7 @@ struct SharedRecAt1B92C {
     char pad44[0x8];
     s32 * unk4C; /* +0x4C: src/func_80286A78.c */
     char pad50[0x10];
-    s32 * unk60; /* +0x60: src/func_80286A78.c */
+    s32 * sceneResources; /* +0x60: src/func_80286A78.c */
     u8 address64; /* +0x64: src/func_80286A78.c */
     char pad65[0x3];
     void * unk68; /* +0x68: src/func_80286A78.c */
@@ -73,7 +73,7 @@ struct SharedRecAt1B92C {
     char pad1B420[0x14];
     s32 unk1B434; /* +0x1B434: src/func_80286A78.c */
     char pad1B438[0xA4];
-    void * unk1B4DC; /* +0x1B4DC: src/func_80286A78.c */
+    void * navPointSet; /* +0x1B4DC: src/func_80286A78.c */
     s32 unk1B4E0; /* +0x1B4E0: src/func_80286A78.c */
     void * unk1B4E4; /* +0x1B4E4: src/func_80286A78.c */
     s32 unk1B4E8; /* +0x1B4E8: src/func_80286A78.c */

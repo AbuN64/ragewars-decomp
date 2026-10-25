@@ -413,18 +413,18 @@ scene_size_done:
     (((struct SharedRecAt1B92C *)(table))->unkE8) = (void *)temp_v0_4;
     Items_InitEntryBatch(&((struct SharedRecAt1B92C *)table)->address128, temp_v0_4->field_0, count);
     resourceKey = Render_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->unk4C), (((struct SharedRecAt1B92C *)(table))->unk1C), var_s6);
-    (((struct SharedRecAt1B92C *)(table))->unkB8) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->unk60, resourceKey, D_800C5110_de);
-    temp_v0_6 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 1, resourceKey, table, &D_0044C3D4, &D_800C511C_de);
+    (((struct SharedRecAt1B92C *)(table))->unkB8) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->sceneResources, resourceKey, D_800C5110_de);
+    temp_v0_6 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 1, resourceKey, table, &D_0044C3D4, &D_800C511C_de);
     (((struct SharedRecAt1B92C *)(table))->unkBC) = temp_v0_6;
     (((struct SharedRecAt1B92C *)(table))->unk6C) = (void *) *temp_v0_6;
-    temp_v0_7 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 4, resourceKey, table, &D_00285160, &D_800C5128_de);
+    temp_v0_7 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 4, resourceKey, table, &D_00285160, &D_800C5128_de);
     (((struct SharedRecAt1B92C *)(table))->unkC0) = temp_v0_7;
     (((struct SharedRecAt1B92C *)(table))->unk68) = (void *) *temp_v0_7;
-    temp_v0_8 = Render_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->unk60), resourceKey, 5);
+    temp_v0_8 = Render_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->sceneResources), resourceKey, 5);
     (((struct SharedRecAt1B92C *)(table))->unk30) = temp_v0_8;
     (((struct SharedRecAt1B92C *)(table))->unkC4) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->address64, temp_v0_8, &D_800C5134_de);
-    if (*(((struct SharedRecAt1B92C *)(table))->unk60) >= 0xD) {
-        temp_v0_9 = Render_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->unk60), resourceKey, 0xC);
+    if (*(((struct SharedRecAt1B92C *)(table))->sceneResources) >= 0xD) {
+        temp_v0_9 = Render_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->sceneResources), resourceKey, 0xC);
         (((struct SharedRecAt1B92C *)(table))->unk40) = temp_v0_9;
         (((struct SharedRecAt1B92C *)(table))->unk100) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->unk8C, temp_v0_9, &D_800C5148_de);
         temp_v0_10 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk8C), 0, (((struct SharedRecAt1B92C *)(table))->unk40), table, 0, &D_800C5154_de);
@@ -439,21 +439,21 @@ scene_size_done:
     } else {
         (((struct SharedRecAt1B92C *)(table))->unk1B92C) = 0;
     }
-    (((struct SharedRecAt1B92C *)(table))->unkD4) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 7, resourceKey, table, &D_0044C108, &D_800C5160_de);
-    (((struct SharedRecAt1B92C *)(table))->unkEC) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 2, resourceKey, table, &D_0044DA54, &D_800C5168_de);
-    temp_v0_11 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 0, resourceKey, table, 0, &D_800C5174_de);
+    (((struct SharedRecAt1B92C *)(table))->unkD4) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 7, resourceKey, table, &D_0044C108, &D_800C5160_de);
+    (((struct SharedRecAt1B92C *)(table))->unkEC) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 2, resourceKey, table, &D_0044DA54, &D_800C5168_de);
+    temp_v0_11 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 0, resourceKey, table, 0, &D_800C5174_de);
     (((struct SharedRecAt1B92C *)(table))->unkC8) = temp_v0_11;
     (((struct SharedRecAt1B92C *)(table))->unk1B2B0) = (void *) *temp_v0_11;
     Items_LoadSceneLight(table);
-    resource_count = *(((struct SharedRecAt1B92C *)(table))->unk60);
+    resource_count = *(((struct SharedRecAt1B92C *)(table))->sceneResources);
     D_800CC380 = ((u8) (((struct SharedRecAt10V2 *)(((struct SharedRecAt1B92C *)(table))->unk1B2B0))->unk10) >> 2) & 1;
     if (resource_count >= 9) {
-        temp_v0_12 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 9, resourceKey, table, &D_00285160, &D_800C5180_de);
+        temp_v0_12 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 9, resourceKey, table, &D_00285160, &D_800C5180_de);
         (((struct SharedRecAt1B92C *)(table))->unkF0) = temp_v0_12;
         temp_v0_13 = *temp_v0_12;
-        (((struct SharedRecAt1B92C *)(table))->unk1B4DC) = temp_v0_13;
+        (((struct SharedRecAt1B92C *)(table))->navPointSet) = temp_v0_13;
         (((struct SharedRecAt1B92C *)(table))->unk1B4E0) = (s32) temp_v0_13->unk4;
-        temp_v0_14 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 0xA, resourceKey, table, &D_00285160, &D_800C5190_de);
+        temp_v0_14 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 0xA, resourceKey, table, &D_00285160, &D_800C5190_de);
         (((struct SharedRecAt1B92C *)(table))->unkF4) = temp_v0_14;
         temp_v0_15 = *temp_v0_14;
         (((struct SharedRecAt1B92C *)(table))->unk1B4E4) = temp_v0_15;
@@ -473,14 +473,14 @@ scene_size_done:
             }
         }
     }
-    if (*(((struct SharedRecAt1B92C *)(table))->unk60) >= 0xC) {
-        temp_v0_17 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 0xB, resourceKey, table, &D_00285160, &D_800C51A0_de);
+    if (*(((struct SharedRecAt1B92C *)(table))->sceneResources) >= 0xC) {
+        temp_v0_17 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 0xB, resourceKey, table, &D_00285160, &D_800C51A0_de);
         (((struct SharedRecAt1B92C *)(table))->unkFC) = temp_v0_17;
         temp_v0_18 = *temp_v0_17;
         (((struct SharedRecAt1B92C *)(table))->unk1B4EC) = temp_v0_18;
         (((struct SharedRecAt1B92C *)(table))->unk1B4F0) = (s32) temp_v0_18->unk4;
     }
-    temp_v0_19 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 6, resourceKey, table, &D_00285160, &D_800C51B4_de);
+    temp_v0_19 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 6, resourceKey, table, &D_00285160, &D_800C51B4_de);
     (((struct SharedRecAt1B92C *)(table))->unkCC) = temp_v0_19;
     temp_v1_6 = *temp_v0_19;
     (((struct SharedRecAt1B92C *)(table))->unk1B300) = (void *) (&((struct SharedRecAt8V1 *)temp_v1_6)->address8);
@@ -488,7 +488,7 @@ scene_size_done:
     (((struct SharedRecAt1B92C *)(table))->unk0) = 1;
     (((struct SharedRecAt1B92C *)(table))->unk138) = 0;
     (((struct SharedRecAt1B92C *)(table))->unk140) = 0;
-    (((struct SharedRecAt1B92C *)(table))->unkD0) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 3, resourceKey, table, &D_0044C7B8, &D_800C51C0_de);
+    (((struct SharedRecAt1B92C *)(table))->unkD0) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 3, resourceKey, table, &D_0044C7B8, &D_800C51C0_de);
     func_80286950_de(table);
     
     i = 0;
@@ -667,7 +667,7 @@ block_122:
         do {
             func_8024B2D0_de(temp_v0_2);
             func_8024B2D0_de(NEXT_SCENE_ACTOR(temp_v0_2));
-            (((struct func_80203E78_S1 *)(((struct SharedRecAt16E0V3 *)(var_s1_4))->unk1454))->unk4) = Nav_FindNearestPointIndex(&((struct SharedRecAt1B92C *)table)->unk1B4DC, &((struct SharedRecAt16E0V3 *)var_s1_4)->address8);
+            (((struct func_80203E78_S1 *)(((struct SharedRecAt16E0V3 *)(var_s1_4))->unk1454))->unk4) = Nav_FindNearestPointIndex(&((struct SharedRecAt1B92C *)table)->navPointSet, &((struct SharedRecAt16E0V3 *)var_s1_4)->address8);
             var_s1_4 = (((struct SharedRecAt16E0V3 *)(var_s1_4))->unk16E0);
             if (var_s1_4 == 0) {
                 break;
@@ -691,7 +691,7 @@ block_122:
     }
     
     
-    count = (char *)&((struct SharedRecAt1B92C *)table)->unk1B4DC - (char *)table;
+    count = (char *)&((struct SharedRecAt1B92C *)table)->navPointSet - (char *)table;
     temp_v0_2 = (char *)table + count;
     func_8020AA40_de(temp_v0_2);
     Nav_AssignPlatformEndpoints(temp_v0_2);
