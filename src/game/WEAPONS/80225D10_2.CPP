@@ -95,45 +95,45 @@ extern f32 Particle_GetHorizontalAngle(CVector3 *);
 
 
 void func_80226548_de(void *arg0, void *body) {
-    Shared_Quad sp20;
-    Shared_Quad sp30;
-    CVector3 sp40;
-    void *sp50;
-    f32 sp54;
+    Shared_Quad aimRotation;
+    Shared_Quad aimWords;
+    CVector3 toTarget;
+    void *aimTarget;
+    f32 targetAngle;
     f32 *position;
     f32 temp_f1;
 
     Weapons_UpdateViewAngles(arg0, body, &D_800CE7E4);
     if (((Shared_ActorView *)arg0)->targeting != 0) {
-        sp20 = Weapons_ComputeAimRotation(arg0, &sp50, &sp30);
-        if (sp50 != 0) {
+        aimRotation = Weapons_ComputeAimRotation(arg0, &aimTarget, &aimWords);
+        if (aimTarget != 0) {
             position = &((Shared_ActorView *)arg0)->position.vector.x;
-            if (!(D_800C2B48_de[1] < Particle_GetPointDistance(position, &((Shared_ActorView *)sp50)->position.vector.x))) {
+            if (!(D_800C2B48_de[1] < Particle_GetPointDistance(position, &((Shared_ActorView *)aimTarget)->position.vector.x))) {
                 if (func_802444A4_de(arg0, ((Shared_ActorView *)arg0)->position.vector,
-                                     ((Shared_ActorView *)sp50)->position.vector,
+                                     ((Shared_ActorView *)aimTarget)->position.vector,
                                      &D_80103FD0) == 0 ||
-                    *D_80103FCC == sp50) {
-                    Particle_SubtractVectors(&sp40, &((Shared_ActorView *)sp50)->position.vector, (CVector3 *)position);
-                    sp54 = Particle_GetHorizontalAngle(&sp40);
-                    func_80274020_de(&sp54);
+                    *D_80103FCC == aimTarget) {
+                    Particle_SubtractVectors(&toTarget, &((Shared_ActorView *)aimTarget)->position.vector, (CVector3 *)position);
+                    targetAngle = Particle_GetHorizontalAngle(&toTarget);
+                    func_80274020_de(&targetAngle);
                     func_80274020_de(&((LevelActor *)body)->yaw);
                     temp_f1 = ((LevelActor *)body)->yaw;
                     if (D_800C2B50_de < temp_f1) {
-                        if (sp54 < D_800C2B54_de) {
-                            sp54 += D_800C2B58_de;
+                        if (targetAngle < D_800C2B54_de) {
+                            targetAngle += D_800C2B58_de;
                         } else {
                             goto positive;
                         }
                     } else {
 positive:
-                        temp_f1 = sp54;
+                        temp_f1 = targetAngle;
                         if (D_800C2B5C_de < temp_f1 &&
                             ((LevelActor *)body)->yaw < D_800C2B60_de) {
                             ((LevelActor *)body)->yaw =
                                 ((LevelActor *)body)->yaw + D_800C2B64_de;
                         }
                     }
-                    Nav_EaseValueToward(&((LevelActor *)body)->yaw, sp54, D_800C9FEC);
+                    Nav_EaseValueToward(&((LevelActor *)body)->yaw, targetAngle, D_800C9FEC);
                 }
             }
         }

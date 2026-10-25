@@ -50,18 +50,18 @@ typedef struct func_8021CD70_S2 func_8021CD70_S2;
 s32 Weapons_CanLockTarget(func_8021CD70_S1 *, func_8021CD70_S2 *);
 f32 Particle_GetActorHeight(void *);
 void func_8021D774_de(AimPlayer *player) {
-    AimOutput sp20;
-    CVector3 sp30;
-    CVector3 sp40;
+    AimOutput aimResult;
+    CVector3 localForward;
+    CVector3 smoothOffset;
     CVector3 desired;
     f32 matrix[16];
     CVector3 current;
-    CQuatern spB0;
+    CQuatern aimRotation;
     AimWeapon *weapon;
-    AimOutput spC0;
-    CQuatern spD0;
-    CVector3 spE0;
-    AimActor *spF0, *spF4;
+    AimOutput probeLow;
+    CQuatern probeHigh;
+    CVector3 direction;
+    AimActor *lockedTarget, *probeTarget;
     CVector3 *var_a0, *temp_s2, *temp_s2_2, *var_a1, *temp_s0_2, *temp_s1;
     f32 temp_fs0, temp_fs1f, temp_fs2, temp_fv0, temp_fv0_2, var_fs0f, var_fs1;
     s16 temp_v1, temp_v1_2;
@@ -69,15 +69,15 @@ void func_8021D774_de(AimPlayer *player) {
     s32 temp_v1_3, var_s0, var_s5;
     AimActor *temp_a1, *target;
     AimView *view;
-    spF0 = NULL;
+    lockedTarget = NULL;
     view = player->view;
     temp_fs1f = D_800C23B4_de;
     temp_fs2 = D_800C23B8_de;
     if (view) { switch (view->mode) { case 1: Weapons_BuildPlayerViewTransform(player, matrix); func_8022B144_de(player, &current.x); break; default: func_8027302C(matrix, view->matrix); current = view->origin; break; } } else { Weapons_BuildPlayerViewTransform(player, matrix); func_8022B144_de(player, &current.x); }
-    sp30.x = 0.0f;
-    sp30.y = 0;
-    sp30.z = D_800C23BC_de;
-    Particle_TransformPoint(matrix, &sp30, &desired);
+    localForward.x = 0.0f;
+    localForward.y = 0;
+    localForward.z = D_800C23BC_de;
+    Particle_TransformPoint(matrix, &localForward, &desired);
     if (func_802444A4_de((char *)player, current, desired, (s32) &D_80103FD0) != 0) {
         player->aim = D_80103FCC->point;
         player->normal = D_80103FCC->normal;
@@ -86,22 +86,22 @@ void func_8021D774_de(AimPlayer *player) {
         player->aim = desired;
         player->target = NULL;
     }
-    sp30.x = 0.0f;
-    sp30.y = 0;
-    sp30.z = D_800C23C0_de;
-    Particle_TransformPoint(matrix, &sp30, &desired);
+    localForward.x = 0.0f;
+    localForward.y = 0;
+    localForward.z = D_800C23C0_de;
+    Particle_TransformPoint(matrix, &localForward, &desired);
     if (player->enabled != 0) {
         if ((func_802444A4_de((char *)player, current, desired, (s32) &D_801000F0) != 0) && (temp_a1 = D_80103FCC->actor, (temp_a1 != NULL))) {
             if (temp_a1->kind == 1) {
                 if (temp_a1->flags & 0x300000) {
-                    Particle_SubtractVectors((CVector3 *)&spB0, &temp_a1->pos, &player->unk8);
-                    temp_fv0 = Math_Sqrtf((spB0.x * spB0.x) + (spB0.y * spB0.y) + (spB0.z * spB0.z));
-                    spE0 = sp30;
-                    Particle_NormalizeVec3(&spE0);
-                    Particle_ScaleVector(&spC0.xyz, &spE0, temp_fv0);
-                    Particle_TransformPoint(matrix, &spC0.xyz, (CVector3 *)&spD0);
-                    player->aim2 = (*(CVector3 *)&spD0);
-                    func_8021D408_de((void *)player, (CVector3 *)&spD0, &D_80103FCC->normal);
+                    Particle_SubtractVectors((CVector3 *)&aimRotation, &temp_a1->pos, &player->unk8);
+                    temp_fv0 = Math_Sqrtf((aimRotation.x * aimRotation.x) + (aimRotation.y * aimRotation.y) + (aimRotation.z * aimRotation.z));
+                    direction = localForward;
+                    Particle_NormalizeVec3(&direction);
+                    Particle_ScaleVector(&probeLow.xyz, &direction, temp_fv0);
+                    Particle_TransformPoint(matrix, &probeLow.xyz, (CVector3 *)&probeHigh);
+                    player->aim2 = (*(CVector3 *)&probeHigh);
+                    func_8021D408_de((void *)player, (CVector3 *)&probeHigh, &D_80103FCC->normal);
                 } else {
                     goto block_14;
                 }
@@ -147,36 +147,36 @@ block_15:
         break;
     case 1:
     case 0x12:
-        spB0 = Weapons_ComputeAimRotation(player, &spF0, &sp20.words);
+        aimRotation = Weapons_ComputeAimRotation(player, &lockedTarget, &aimResult.words);
         var_s0 = 0;
         break;
     default:
         var_s5 = -1;
         break;
     }
-    spB0 = func_8024796C_de((char *)player);
-    player->rotation = spB0;
-    spC0.xyz = player->aim;
-    spC0.xyz.x -= D_800C23C8_de;
-    (*(CVector3 *)&spD0) = player->aim;
-    (*(CVector3 *)&spD0).x += D_800C23C8_de;
-    spC0.xyz = player->aim;
-    spC0.xyz.z -= D_800C23C8_de;
-    (*(CVector3 *)&spD0) = player->aim;
-    (*(CVector3 *)&spD0).z += D_800C23C8_de;
-    spC0.xyz = player->aim;
-    spC0.xyz.y -= D_800C23C8_de;
-    (*(CVector3 *)&spD0) = player->aim;
-    (*(CVector3 *)&spD0).y += D_800C23C8_de;
-    if (spF0 == NULL) {
-        sp20.xyz = desired;
+    aimRotation = func_8024796C_de((char *)player);
+    player->rotation = aimRotation;
+    probeLow.xyz = player->aim;
+    probeLow.xyz.x -= D_800C23C8_de;
+    (*(CVector3 *)&probeHigh) = player->aim;
+    (*(CVector3 *)&probeHigh).x += D_800C23C8_de;
+    probeLow.xyz = player->aim;
+    probeLow.xyz.z -= D_800C23C8_de;
+    (*(CVector3 *)&probeHigh) = player->aim;
+    (*(CVector3 *)&probeHigh).z += D_800C23C8_de;
+    probeLow.xyz = player->aim;
+    probeLow.xyz.y -= D_800C23C8_de;
+    (*(CVector3 *)&probeHigh) = player->aim;
+    (*(CVector3 *)&probeHigh).y += D_800C23C8_de;
+    if (lockedTarget == NULL) {
+        aimResult.xyz = desired;
         if ((player->unk5D8->active != 0) && (var_s0 != 0)) {
-            spD0 = Weapons_ComputeAimRotation(player, &spF4, &spC0.words);
-            if (spF4 != NULL) {
-                player->rotation = spD0;
+            probeHigh = Weapons_ComputeAimRotation(player, &probeTarget, &probeLow.words);
+            if (probeTarget != NULL) {
+                player->rotation = probeHigh;
             }
         }
-        if (spF0 == NULL) {
+        if (lockedTarget == NULL) {
             player->unk794 = NULL;
         }
     }
@@ -195,21 +195,21 @@ block_15:
     }
     temp_s2 = &player->smooth;
     temp_fs0 = D_800C23CC_de;
-    Particle_SubtractVectors(&sp40, &sp20.xyz, temp_s2);
-    Particle_ScaleVector(&sp40, &sp40, temp_fs1f * temp_fs0);
+    Particle_SubtractVectors(&smoothOffset, &aimResult.xyz, temp_s2);
+    Particle_ScaleVector(&smoothOffset, &smoothOffset, temp_fs1f * temp_fs0);
     temp_s0_2 = &player->smoothVelocity;
-    Particle_AddVec3(temp_s0_2, temp_s0_2, &sp40);
+    Particle_AddVec3(temp_s0_2, temp_s0_2, &smoothOffset);
     Particle_AddVec3(temp_s2, temp_s2, temp_s0_2);
     Particle_ScaleVector(temp_s0_2, temp_s0_2, temp_fs2 * temp_fs0);
-    if (spF0 != NULL) {
+    if (lockedTarget != NULL) {
         weapon=D_800D052C[player->unk62E]; player->unk7B8=weapon->locked+0x64;
     } else {
         player->unk7B8 = var_s5;
     }
     switch (player->unk788) {
     case 1:
-        if ((spF0 == NULL) || (player->unk794 != spF0)) {
-            player->unk794 = spF0;
+        if ((lockedTarget == NULL) || (player->unk794 != lockedTarget)) {
+            player->unk794 = lockedTarget;
             player->unk78C = 0.0f;
         }
         temp_fv0_2 = player->unk78C + D_800D2988;
@@ -220,29 +220,29 @@ block_15:
         }
         goto reset_position;
     case 2:
-            if (player->unk7B4 != spF0) {
-                player->unk7B4 = spF0;
+            if (player->unk7B4 != lockedTarget) {
+                player->unk7B4 = lockedTarget;
                 player->unk78C = 0.0f;
             } else {
                 player->unk78C += D_800D2988;
             }
-            if ((spF0 != NULL) && (player->unk794 != spF0) && (var_fs0f <= player->unk78C)) {
-                player->unk794 = spF0;
+            if ((lockedTarget != NULL) && (player->unk794 != lockedTarget) && (var_fs0f <= player->unk78C)) {
+                player->unk794 = lockedTarget;
                 player->unk78C = 0.0f;
             }
             target = player->unk794;
-            spF0 = target;
+            lockedTarget = target;
             if (target != NULL) {
                 if (Weapons_CanLockTarget((void *)player, (void *)target) == 0) {
                     player->unk788 = 1;
                     player->unk78C = 0.0f;
                 }
                 if (player->unk62E == 0x12) {
-                    sp20.xyz = spF0->focus;
+                    aimResult.xyz = lockedTarget->focus;
                 } else {
-                    sp20.xyz = spF0->pos;
-                    sp20.xyz.y = sp20.xyz.y + spF0->height;
-                    sp20.xyz.y += Particle_GetActorHeight(spF0) * D_800C23D0_de;
+                    aimResult.xyz = lockedTarget->pos;
+                    aimResult.xyz.y = aimResult.xyz.y + lockedTarget->height;
+                    aimResult.xyz.y += Particle_GetActorHeight(lockedTarget) * D_800C23D0_de;
                 }
                 if (player->unk62E == 1 && player->unk594 == 2) {
                     var_s4 = 0x2C7;
@@ -255,17 +255,17 @@ block_15:
         break;
     case 0:
 reset_position:
-        sp20.xyz = desired;
+        aimResult.xyz = desired;
         break;
     default:
         break;
     }
-    var_a0 = &sp40;
+    var_a0 = &smoothOffset;
     temp_s2_2 = &player->out;
-    Particle_SubtractVectors(var_a0, &sp20.xyz, temp_s2_2);
-    Particle_ScaleVector(&sp40, &sp40, temp_fs1f);
+    Particle_SubtractVectors(var_a0, &aimResult.xyz, temp_s2_2);
+    Particle_ScaleVector(&smoothOffset, &smoothOffset, temp_fs1f);
     temp_s1 = &player->velocity;
-    Particle_AddVec3(temp_s1, temp_s1, &sp40);
+    Particle_AddVec3(temp_s1, temp_s1, &smoothOffset);
     Particle_AddVec3(temp_s2_2, temp_s2_2, temp_s1);
     Particle_ScaleVector(temp_s1, temp_s1, temp_fs2);
     player->unk798 = (s32) var_s4;

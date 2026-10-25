@@ -20,8 +20,8 @@ extern void MatrixFromQuaternion(CQuatern *,MatrixF *),Particle_AddVec3(CVector3
 extern f32 Math_Sqrtf(f32);
 void func_802238E0_de(SharedPlayer *player, Actor_func_802238E0_de *body, SharedMovement *arg2) {
     CVector3 v18,v28,v38,v48,v58;
-    MatrixF sp68;
-    CQuatern spA8;
+    MatrixF rotationMatrix;
+    CQuatern bodyRotation;
     f32 temp_f0;
     f32 temp_f0_2;
     f32 temp_f12;
@@ -111,10 +111,10 @@ block_31:
     v28.x = player->views5E8.view6C4_54.unk6C4 + player->views5E8.view6D8_59.unk6D8;
     v28.y = 0;
     v28.z = 0;
-    spA8 = func_8024796C_de(body);
-    MatrixFromQuaternion(&spA8, &sp68);
-    Particle_TransformPoint(&sp68, &v18, &v38);
-    Particle_TransformPoint(&sp68, &v28, &v48);
+    bodyRotation = func_8024796C_de(body);
+    MatrixFromQuaternion(&bodyRotation, &rotationMatrix);
+    Particle_TransformPoint(&rotationMatrix, &v18, &v38);
+    Particle_TransformPoint(&rotationMatrix, &v28, &v48);
     player->views5E8.view6E8_63.unk6E8 = (f32) (player->views5E8.view6E8_63.unk6E8 + ((v38.x + v48.x) * player->views5E8.view66C_29.unk66C));
     player->views5E8.view6EC_64.unk6EC = (f32) (player->views5E8.view6EC_64.unk6EC + ((v38.y + v48.y) * player->views5E8.view66C_29.unk66C));
     player->views5E8.view6F0_66.unk6F0 = (f32) (player->views5E8.view6F0_66.unk6F0 + ((v38.z + v48.z) * player->views5E8.view66C_29.unk66C));

@@ -105,42 +105,42 @@ void func_8022F5C4_de(Profile *record, s32 index) {
 
 void func_8022F5E0_de(char *arg0) {
     CVector3 position;
-    Matrix sp20;
-    CVector3 sp60;
-    CVector3 sp70;
-    Matrix sp80;
-    Matrix spC0;
-    CQuatern sp100;
+    Matrix worldMatrix;
+    CVector3 scaledOffset;
+    CVector3 handOffset;
+    Matrix offsetMatrix;
+    Matrix viewMatrix;
+    CQuatern viewOrientation;
     char *object;
     char *orientation;
 
     object = ((ObjectLinks1DC *)(arg0))->unk_1D8;
-    sp70 = ((struct ObjectState44 *) D_800D052C[((ObjectState630 *) object)->unk_62E])->unk_38;
+    handOffset = ((struct ObjectState44 *) D_800D052C[((ObjectState630 *) object)->unk_62E])->unk_38;
     if (D_800CA040_de != 0) {
-        sp70.x = -sp70.x;
+        handOffset.x = -handOffset.x;
     }
     if (D_800CA044 != 0) {
-        sp70.y = -sp70.y;
+        handOffset.y = -handOffset.y;
     }
     if (D_800CA048 != 0) {
-        sp70.z = -sp70.z;
+        handOffset.z = -handOffset.z;
     }
-    Particle_ScaleVector(&sp60, &((ObjectLinks1DC *)(arg0))->unk_50, 0.1f);
-    func_80272CB0_de(&sp80, sp60.x, sp60.y, sp60.z);
-    Particle_ScaleVector(&sp70, &sp70, -10.24f);
+    Particle_ScaleVector(&scaledOffset, &((ObjectLinks1DC *)(arg0))->unk_50, 0.1f);
+    func_80272CB0_de(&offsetMatrix, scaledOffset.x, scaledOffset.y, scaledOffset.z);
+    Particle_ScaleVector(&handOffset, &handOffset, -10.24f);
     if (((ObjectState630 *)(object))->unk_5DC.v0 != 0) {
         func_802732D0_de(((ObjectState630 *)(object))->unk_5DC.v1 + 0x160, &position);
         MatrixFromQuaternion((CQuatern *)(((ObjectState630 *)(object))->unk_5DC.v1 + 0x140),
-                      &sp20);
+                      &worldMatrix);
     } else {
-        Weapons_BuildPlayerViewTransform(object, &spC0);
-        Weapons_BuildPlayerOrientation(object, &sp100);
-        func_802732D0_de((char *)&spC0, &position);
-        MatrixFromQuaternion(&sp100, &sp20);
+        Weapons_BuildPlayerViewTransform(object, &viewMatrix);
+        Weapons_BuildPlayerOrientation(object, &viewOrientation);
+        func_802732D0_de((char *)&viewMatrix, &position);
+        MatrixFromQuaternion(&viewOrientation, &worldMatrix);
     }
     orientation = arg0 + 0x74;
-    TranslateMatrix(&sp80, sp70.x, sp70.y, sp70.z);
-    SwapMatrixUpForward(&sp80);
-    Rsp_MultiplyAffineMatrices((Matrix *)orientation, &sp80, &sp20);
+    TranslateMatrix(&offsetMatrix, handOffset.x, handOffset.y, handOffset.z);
+    SwapMatrixUpForward(&offsetMatrix);
+    Rsp_MultiplyAffineMatrices((Matrix *)orientation, &offsetMatrix, &worldMatrix);
     TranslateMatrix((Matrix *)orientation, position.x, position.y, position.z);
 }
