@@ -63,8 +63,8 @@ u16 Audio_ReadPackedSamples(u16 *out, u16 width, u16 count, s16 signExtend, Deco
 INCLUDE_ASM("span_1000", Audio_ReadPackedSamples);
 #endif
 
-s32 func_802BEF84_de(DecodeBlock *arg0, u16 *arg1, s16 arg2,
-                    u16 *arg3, void *arg4) {
+s32 Audio_DecodeHuffmanSamples(DecodeBlock *blocks, u16 *samples, s16 sampleCount,
+                               s16 *blocksDone, DecodeState *stream) {
     u16 node;
     s16 block, output;
     DecodeTable *table;
@@ -76,15 +76,15 @@ s32 func_802BEF84_de(DecodeBlock *arg0, u16 *arg1, s16 arg2,
     s32 dictOffset;
     u16 next;
     DecodePhrase *phrase;
-    u16 *out;
+    u16 *dst;
 
     node = 0;
     block = 0;
-    *arg3 = 0;
-    table = arg0->table;
+    *blocksDone = 0;
+    table = blocks->table;
     tree = table->tree;
     output = 0;
-    if (arg2 > 0) {
+    if (sampleCount > 0) {
         do {
             if (D_800D54BC != 0) {
                 D_800D54BC--;
@@ -100,11 +100,11 @@ s32 func_802BEF84_de(DecodeBlock *arg0, u16 *arg1, s16 arg2,
                     mask = value & 0xF00;
                     node = 0;
                     if (mask == 0 || mask == 0xF00) {
-                        arg1[(s16)output] = value;
+                        samples[(s16)output] = value;
                         output++;
                     } else if ((s16)value == 0x900) {
                         value = D_800D54BA;
-                        if (Audio_ReadPackedSamples(&D_800D54BA, table->width, 1, 0, arg4) == 0) {
+                        if (Audio_ReadPackedSamples(&D_800D54BA, table->width, 1, 0, stream) == 0) {
                             return -1;
                         }
                         mask = (s16)output;
@@ -112,45 +112,45 @@ s32 func_802BEF84_de(DecodeBlock *arg0, u16 *arg1, s16 arg2,
                         high = D_800D54BA;
                         next = D_800D54BC;
                         D_800D54BA = high << (16 - next);
-                        arg1[(s16)mask] = value | (high >> next);
+                        samples[(s16)mask] = value | (high >> next);
                     } else if (mask == 0xA00) {
                         j = 0;
                         dictOffset = (value & 0xFF) * sizeof(DecodePhrase);
-                        out = (u16 *)((s16)output * sizeof(u16) + (s32)arg1);
+                        dst = (u16 *)((s16)output * sizeof(u16) + (s32)samples);
                         phrase = (DecodePhrase *)(dictOffset + (s32)table->phrases);
                         while ((s16)j < phrase->count) {
-                            out[(s16)j] = phrase->samples[(s16)j].value;
+                            dst[(s16)j] = phrase->samples[(s16)j].value;
                             j++;
                         }
                         output += (s32)((u32)j << 16) >> 16;
                     } else if (mask == 0xB00) {
-                        while ((s16)output < arg2) {
-                            arg1[(s16)output++] = 0;
+                        while ((s16)output < sampleCount) {
+                            samples[(s16)output++] = 0;
                         }
-                        while (arg2 >= arg0[(s16)block].start +
-                                       arg0[(s16)block].length) {
+                        while (sampleCount >= blocks[(s16)block].start +
+                                       blocks[(s16)block].length) {
                             block++;
-                            (*arg3)++;
+                            (*blocksDone)++;
                         }
-                        return arg2;
+                        return sampleCount;
                     }
-                    if ((s16)output >= arg0[(s16)block].start +
-                                       arg0[(s16)block].length) {
+                    if ((s16)output >= blocks[(s16)block].start +
+                                       blocks[(s16)block].length) {
                         block++;
-                        (*arg3)++;
-                        table = arg0[(s16)block].table;
+                        (*blocksDone)++;
+                        table = blocks[(s16)block].table;
                         tree = table->tree;
                     }
                 } else {
                     node = mask;
                 }
             } else {
-                if (Audio_ReadPackedSamples(&D_800D54BA, 16, 1, 0, arg4) == 0) {
+                if (Audio_ReadPackedSamples(&D_800D54BA, 16, 1, 0, stream) == 0) {
                     return -1;
                 }
                 D_800D54BC += 16;
             }
-        } while ((s16)output < arg2);
+        } while ((s16)output < sampleCount);
     }
     return (s16)output;
 }
@@ -180,7 +180,7 @@ s32 Audio_DecodeFrame(DecodeState *stream) {
             block++;
         }
     } else {
-        count = (s16)func_802BEF84_de(block, stream->frame, 16, &done, stream);
+        count = (s16)Audio_DecodeHuffmanSamples(block, stream->frame, 16, &done, stream);
         if (count != 16) {
             return -1;
         }
@@ -191,7 +191,7 @@ s32 Audio_DecodeFrame(DecodeState *stream) {
             D_8014AE10[i] = stream->frame[i];
         }
     }
-    count = (s16)func_802BEF84_de(block, stream->frame + 80, 256, &done, stream);
+    count = (s16)Audio_DecodeHuffmanSamples(block, stream->frame + 80, 256, &done, stream);
     if (count == 256) {
         block += done;
         return 1;
