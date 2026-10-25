@@ -49,17 +49,17 @@ int Pak_RequestTrackBundle(void) {
     return Scene_RequestResource(0, res, res, size, 0x33, 0, 0, D_800E0B2C, 1);
 }
 
-f32 func_80403C58_de(f32 from, f32 to, f32 t) {
+f32 Pak_BlendCubic(f32 from, f32 to, f32 t) {
     f32 u = D_800E0CB0[0] - t;
 
     return from * (u * u * u - u) + to * (t * t * t - t);
 }
 
-f32 func_80403C98_de(f32 from, f32 to, f32 weight) {
+f32 Pak_BlendLinear(f32 from, f32 to, f32 weight) {
     return from * (D_800E0CB0[1] - weight) + to * weight;
 }
 
-void *func_80403CBC_de(s32 key) {
+void *Pak_GetPackEntry(s32 key) {
     return Render_GetPackSection(Render_GetPackSection(D_800E2830->value, 0), key);
 }
 

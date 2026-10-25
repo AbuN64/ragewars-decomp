@@ -43,7 +43,7 @@ void Pak_AllocateScratchBuffer(void) {
     D_800E2850 = 1;
 }
 
-void func_80404DDC_de(void) {
+void Pak_FreeScratchBuffer(void) {
     func_80253908_de(0);
     if (D_800DE808) {
         Scene_ReleaseResource(0, D_800DE808);
@@ -96,6 +96,6 @@ s32 Pak_GetStatus(s32 index) {
 /* Returns whether entry i of the word table D_801534F0 equals 2. */
 
 
-s32 func_80404F3C_de(s32 index) {
+s32 Pak_IsChannelReady(s32 index) {
     return D_801534F0[index] == 2;
 }

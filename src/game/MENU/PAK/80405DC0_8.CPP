@@ -271,7 +271,7 @@ extern s32 D_8014561C, D_0044ED44, D_8011FECC;
 extern char D_0044EA08[];
 extern void Pak_ProbeStatus(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
-extern s32 func_80404F3C_de(s32 ch);
+extern s32 Pak_IsChannelReady(s32 ch);
 extern s32 func_80405598_de(s32 ch);
 extern void Pak_CreateSaveSnapshot(ObjRecAt5DC *);
 extern u32 Ovlgame_Crc32(void *data, u32 size, u32 seed);
@@ -321,7 +321,7 @@ void Pak_BeginSnapshotSave(Shared_PakMenu *menu) {
         return;
     }
     D_80153784 = 1;
-    if (func_80404F3C_de(channel)) {
+    if (Pak_IsChannelReady(channel)) {
         Pak_OpenDialog(player->unk5DC + 0x554, D_0044EA08, (s32)player, (s32)player->controller, 1);
     } else if (func_80405598_de(channel)) {
         Pak_OpenDialog(&D_8014561C, &D_0044ED44, (s32)player, (s32)player->controller, (s32)D_0044E4D4);

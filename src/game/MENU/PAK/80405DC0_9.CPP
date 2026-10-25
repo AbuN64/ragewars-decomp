@@ -27,7 +27,7 @@ extern char D_0044EA2C[];
 extern char D_0044E9C0[];
 extern void Pak_ProbeStatus(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
-extern s32 func_80404F3C_de(s32 ch);
+extern s32 Pak_IsChannelReady(s32 ch);
 extern s32 func_80405598_de(s32 ch);
 extern void Pak_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
 void func_804070F4_de(Shared_PakMenu *menu)
@@ -60,7 +60,7 @@ void func_804070F4_de(Shared_PakMenu *menu)
     return;
   }
   D_80153784 = 1;
-  if (func_80404F3C_de(ch) != new_var)
+  if (Pak_IsChannelReady(ch) != new_var)
   {
     new_var2 = D_0044EA2C;
     Pak_OpenDialog(D_8014561C, new_var2, menu->player, menu->slot, (char *) 1);

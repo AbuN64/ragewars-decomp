@@ -167,7 +167,7 @@ extern char D_8014561C[], D_0044FFA4[], D_0044FB50[];
 extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
 extern char D_0044EA98[], D_0044E9C0[], D_0044EA2C[], D_0044EA08[], D_0044E9E4[];
 extern void Pak_ProbeStatus(s32);
-extern s32 Pak_GetStatus(s32), func_80404F3C_de(s32), func_80405598_de(s32), func_80264580_de(s32);
+extern s32 Pak_GetStatus(s32), Pak_IsChannelReady(s32), func_80405598_de(s32), func_80264580_de(s32);
 extern void Pak_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
 s32 Pak_CheckStatusPrompt(Menu_func_804066BC_de *menu, s32 channel, s32 quiet)
 {
@@ -197,7 +197,7 @@ s32 Pak_CheckStatusPrompt(Menu_func_804066BC_de *menu, s32 channel, s32 quiet)
         }
         return result;
     }
-    if (func_80404F3C_de(channel)) {
+    if (Pak_IsChannelReady(channel)) {
         D_80153784 = 1;
         if (D_8015375C) message = D_0044E9E4;
         else {
@@ -226,7 +226,7 @@ extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
 extern char D_0044EA08[], D_0044E48C[], D_0044E9C0[], D_8014561C[];
 extern void Pak_ProbeStatus(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
-extern s32 func_80404F3C_de(s32 ch);
+extern s32 Pak_IsChannelReady(s32 ch);
 extern s32 func_80405598_de(s32 ch);
 extern u32 Ovlgame_Crc32(void *data, u32 size, u32 seed);
 
@@ -281,7 +281,7 @@ void Pak_BeginProfileSave(Shared_PakMenu *menu) {
         return;
     }
     D_80153784 = 1;
-    if (func_80404F3C_de(channel)) {
+    if (Pak_IsChannelReady(channel)) {
         Pak_OpenDialog(D_8014561C, D_0044EA08, player, player->controller, prompt);
     } else if (func_80405598_de(channel)) {
         Pak_OpenDialog(D_8014561C, D_0044ED44, player, player->controller, D_0044E48C);
