@@ -4359,6 +4359,7 @@ segments:
       - [0xCD330, data, data_800C/D_blob_phase2_1719a24fe19d89786db9]
       - [0xCD340, rodata, data_800C/D_8025F434_D19A0]
       - [0xCD344, data, data_800C/D_auto_rodata_unresolved_800CC744]
+      - [0xCD350, data, data_800C/D_800CBB70]
       - [0xCD3F0, data, data_800C/D_blob_phase2_c60516986d26724838dd]
       - [0xCD3F1, data, data_800C/D_blob_ef9c5cfc5ef74ebc9220]
       - [0xCD3F2, data, data_800C/D_blob_phase2_92fa79f50dd8dc42e292]
