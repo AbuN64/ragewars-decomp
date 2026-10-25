@@ -3336,7 +3336,7 @@ segments:
       - [0xC2D1C, rodata, data_800C/D_80217594_C7EDC]
       - [0xC2D24, data, data_800C/rodata_unresolved_800C2124]
       - [0xC2D30, rodata, data_800C/literals_Team_DrawWeaponIcons]
-      - [0xC2D64, rodata, data_800C/D_80217F4C_C7F24]
+      - [0xC2D64, rodata, data_800C/literals_Team_UpdateDraftPanel]
       - [0xC2D78, rodata, data_800C/D_802181FC_C7F38]
       - [0xC2D7C, rodata, data_800C/D_8021836C_C7F3C]
       - [0xC2D80, rodata, data_800C/D_802184C0_C7F40]

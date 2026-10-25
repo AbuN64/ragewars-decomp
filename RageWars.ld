@@ -10699,7 +10699,7 @@ SECTIONS
         src/game/MENU/TEAM/800C72DC.CPP.o(.data);
         . = ALIGN(8) /* src/game/MENU/TEAM/80217388_4.CPP.o */;
         src/game/MENU/TEAM/80217388_4.CPP.o(.rodata .rdata);
-        src/game/MENU/TEAM/800C7324.CPP.o(.rodata .rdata);
+        src/game/MENU/TEAM/80217388_6.CPP.o(.rodata .rdata);
         src/game/MENU/TEAM/800C7338.CPP.o(.rodata .rdata);
         src/game/MENU/TEAM/800C733C.CPP.o(.rodata .rdata);
         src/game/MENU/TEAM/800C7340.CPP.o(.rodata .rdata);
@@ -12454,7 +12454,7 @@ SECTIONS
         src/game/MENU/TEAM/800C72DC.CPP.o(.data);
         . = ALIGN(8) /* src/game/MENU/TEAM/80217388_4.CPP.o */;
         src/game/MENU/TEAM/80217388_4.CPP.o(.rodata .rdata);
-        src/game/MENU/TEAM/800C7324.CPP.o(.rodata .rdata);
+        src/game/MENU/TEAM/80217388_6.CPP.o(.rodata .rdata);
         src/game/MENU/TEAM/800C7338.CPP.o(.rodata .rdata);
         src/game/MENU/TEAM/800C733C.CPP.o(.rodata .rdata);
         src/game/MENU/TEAM/800C7340.CPP.o(.rodata .rdata);
@@ -14153,7 +14153,7 @@ SECTIONS
         src/game/MENU/TEAM/800C72DC.CPP.o(.data);
         . = ALIGN(8) /* src/game/MENU/TEAM/80217388_4.CPP.o */;
         src/game/MENU/TEAM/80217388_4.CPP.o(.rodata .rdata);
-        src/game/MENU/TEAM/800C7324.CPP.o(.rodata .rdata);
+        src/game/MENU/TEAM/80217388_6.CPP.o(.rodata .rdata);
         src/game/MENU/TEAM/800C7338.CPP.o(.rodata .rdata);
         src/game/MENU/TEAM/800C733C.CPP.o(.rodata .rdata);
         src/game/MENU/TEAM/800C7340.CPP.o(.rodata .rdata);
@@ -15869,7 +15869,7 @@ SECTIONS
         src/game/MENU/TEAM/800C72DC.CPP.o(.data);
         . = ALIGN(8) /* src/game/MENU/TEAM/80217388_4.CPP.o */;
         src/game/MENU/TEAM/80217388_4.CPP.o(.rodata .rdata);
-        src/game/MENU/TEAM/800C7324.CPP.o(.rodata .rdata);
+        src/game/MENU/TEAM/80217388_6.CPP.o(.rodata .rdata);
         src/game/MENU/TEAM/800C7338.CPP.o(.rodata .rdata);
         src/game/MENU/TEAM/800C733C.CPP.o(.rodata .rdata);
         src/game/MENU/TEAM/800C7340.CPP.o(.rodata .rdata);
@@ -17609,7 +17609,7 @@ SECTIONS
         src/game/DATA/OVLTAB1/800C72E4.CPP.o(.data);
         . = ALIGN(8) /* src/game/MENU/TEAM/80217388_4.CPP.o */;
         src/game/MENU/TEAM/80217388_4.CPP.o(.rodata .rdata);
-        src/game/MENU/TEAM/800C7324.CPP.o(.rodata .rdata);
+        src/game/MENU/TEAM/80217388_6.CPP.o(.rodata .rdata);
         src/game/MENU/TEAM/800C7338.CPP.o(.rodata .rdata);
         src/game/MENU/TEAM/800C733C.CPP.o(.rodata .rdata);
         src/game/MENU/TEAM/800C7340.CPP.o(.rodata .rdata);
@@ -19892,7 +19892,7 @@ SECTIONS
         src/game/MENU/TEAM/800C72D8.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C72DC.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/80217388_4.CPP.o(.bss .sbss COMMON);
-        src/game/MENU/TEAM/800C7324.CPP.o(.bss .sbss COMMON);
+        src/game/MENU/TEAM/80217388_6.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C7338.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C733C.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C7340.CPP.o(.bss .sbss COMMON);
@@ -21145,7 +21145,7 @@ SECTIONS
         src/game/MENU/TEAM/800C72D8.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C72DC.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/80217388_4.CPP.o(.bss .sbss COMMON);
-        src/game/MENU/TEAM/800C7324.CPP.o(.bss .sbss COMMON);
+        src/game/MENU/TEAM/80217388_6.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C7338.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C733C.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C7340.CPP.o(.bss .sbss COMMON);
@@ -22363,7 +22363,7 @@ SECTIONS
         src/game/MENU/TEAM/800C72D8.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C72DC.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/80217388_4.CPP.o(.bss .sbss COMMON);
-        src/game/MENU/TEAM/800C7324.CPP.o(.bss .sbss COMMON);
+        src/game/MENU/TEAM/80217388_6.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C7338.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C733C.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C7340.CPP.o(.bss .sbss COMMON);
@@ -23588,7 +23588,7 @@ SECTIONS
         src/game/MENU/TEAM/800C72D8.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C72DC.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/80217388_4.CPP.o(.bss .sbss COMMON);
-        src/game/MENU/TEAM/800C7324.CPP.o(.bss .sbss COMMON);
+        src/game/MENU/TEAM/80217388_6.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C7338.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C733C.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C7340.CPP.o(.bss .sbss COMMON);
@@ -24874,7 +24874,7 @@ SECTIONS
         src/game/MENU/TEAM/800C72DC.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTAB1/800C72E4.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/80217388_4.CPP.o(.bss .sbss COMMON);
-        src/game/MENU/TEAM/800C7324.CPP.o(.bss .sbss COMMON);
+        src/game/MENU/TEAM/80217388_6.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C7338.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C733C.CPP.o(.bss .sbss COMMON);
         src/game/MENU/TEAM/800C7340.CPP.o(.bss .sbss COMMON);

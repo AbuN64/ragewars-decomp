@@ -3427,7 +3427,7 @@ segments:
       - [0xC7EDC, rodata, data_800C/D_blob_667c528ce0704f8f6261]
       - [0xC7EE4, data, data_800C/D_blob_e03cc6e246c8aa497c08]
       - [0xC7EF0, rodata, data_800C/literals_Team_DrawWeaponIcons]
-      - [0xC7F24, rodata, data_800C/D_auto_src_rw_pool_80217F4C_C7F24_us_rev1]
+      - [0xC7F24, rodata, data_800C/literals_Team_UpdateDraftPanel]
       - [0xC7F38, rodata, data_800C/D_blob_1e25dcce6c996fa1ef7c]
       - [0xC7F3C, rodata, data_800C/D_blob_5c38d58e12f46481afc5]
       - [0xC7F40, rodata, data_800C/D_blob_32e5c09556bbd500697d]

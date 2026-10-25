@@ -14,7 +14,7 @@ extern void Particle_TransformPoint(void *arg0, void *arg1, void *arg2);
 
 extern Gfx *D_80110634;
 extern s32 func_8022EB0C_de(Player *player, s32 weapon);
-void Team_DrawWeaponIcons(Menu *menu, Item *items, s32 count, Player *player) {
+void Team_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *player) {
     s32 width;
     s32 height;
     f32 fade;
@@ -32,7 +32,7 @@ void Team_DrawWeaponIcons(Menu *menu, Item *items, s32 count, Player *player) {
     Item *item;
 
     level = D_801462C8.hudFade + 0x40;
-    fade = menu->open * (level < 0x100 ? level : 255.0f);
+    fade = menu->m_Alpha * (level < 0x100 ? level : 255.0f);
     item = items;
     while (--count != -1) {
         view = player->owner;
@@ -44,8 +44,8 @@ void Team_DrawWeaponIcons(Menu *menu, Item *items, s32 count, Player *player) {
         alpha = item->width;
         if (item->icon != 0) {
             func_802AA950_de(item->icon, 0, &width, &height);
-            if (menu->cursor == item->slot) {
-                blue = red = func_802B6560_de(menu->spin) * 63.0f + 192.0f;
+            if (menu->m_Selected == item->slot) {
+                blue = red = func_802B6560_de(menu->m_Glow) * 63.0f + 192.0f;
                 alpha = 1.0f;
                 green = red;
             } else {
@@ -92,39 +92,39 @@ extern void func_80273C68_de(Matrix *, f32);
 
 
 
-void func_80217928_de(Menu *menu, s32 arg1, s32 arg2) {
+void func_80217928_de(CBarrel *menu, s32 arg1, s32 arg2) {
     Matrix matrix;
     CVector3 position;
     Item items[36];
     CVector3 offset;
     s32 count;
     s32 i;
-    SlotRecAt14 *slot;
+    CBarrelWeapon *slot;
     Item *item;
     f32 target;
     f32 size;
     s32 weapon;
 
-    if (menu->active != 0) {
+    if (menu->m_Mode != 0) {
         offset.x = 0.0f;
         item = items;
         count = 0;
-        offset.y = -0.6f - (0.4f - menu->open * 0.4f);
+        offset.y = -0.6f - (0.4f - menu->m_Alpha * 0.4f);
         offset.z = 0.0f;
         for (i = 0; i < 8; i++) {
-            slot = &menu->slots[i];
-            if (menu->slots[i].weapon != -1) {
-                if (i == menu->cursor) {
+            slot = &menu->m_WeaponList[i];
+            if (menu->m_WeaponList[i].m_Weapon != -1) {
+                if (i == menu->m_Selected) {
                     target = *(&D_800C9138_de + 1) * 1.3f;
                 } else {
                     target = *(&D_800C9138_de + 1);
                 }
                 size = 1.0f;
-                slot->scale = func_80274808_de(slot->scale, target, *(&D_800C9138_de + 1) * 0.1f);
+                slot->m_Scale = func_80274808_de(slot->m_Scale, target, *(&D_800C9138_de + 1) * 0.1f);
                 func_802727D8_de(&matrix);
-                func_80273C68_de(&matrix, slot->angle);
+                func_80273C68_de(&matrix, slot->m_Rot);
                 Particle_TransformPoint(&matrix, &offset, &position);
-                weapon = menu->slots[i].weapon;
+                weapon = menu->m_WeaponList[i].m_Weapon;
                 if (weapon < 0) {
                     goto no_icon;
                 }
@@ -132,11 +132,11 @@ void func_80217928_de(Menu *menu, s32 arg1, s32 arg2) {
                 no_icon:
                     item->icon = item->width = 0;
                     item->slot = i;
-                    item->weapon = menu->slots[i].weapon;
+                    item->weapon = menu->m_WeaponList[i].m_Weapon;
                     item->position = position;
                 } else {
                     item->slot = i;
-                    item->weapon = menu->slots[i].weapon;
+                    item->weapon = menu->m_WeaponList[i].m_Weapon;
                     item->position = position;
                     item->icon = D_800D052C[weapon]->unk6;
                     item->width = size;

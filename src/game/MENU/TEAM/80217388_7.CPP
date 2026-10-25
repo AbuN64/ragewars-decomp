@@ -13,24 +13,24 @@
 #include "MENU/TEAM/80217388_7.H"
 
 /** Reset the weapon menu: closed, no cursor or hover, and its thirty-six slots fanned 30 degrees apart. */
-void func_8021836C_de(Menu *menu) {
+void func_8021836C_de(CBarrel *menu) {
     s32 i;
 
-    menu->active = 0;
-    menu->pad4 = 0;
-    menu->open = 0;
-    menu->reset = 0;
-    menu->spin = 0;
-    menu->cursor = -1;
-    menu->count = 1;
-    menu->hover = -1;
-    menu->selected = 0;
-    menu->scroll = 0;
-    menu->last = -1;
+    menu->m_Mode = 0;
+    menu->m_Time = 0;
+    menu->m_Alpha = 0;
+    menu->m_Rot = 0;
+    menu->m_Glow = 0;
+    menu->m_Selected = -1;
+    menu->m_QuickSelect = 1;
+    menu->m_DisplaySlot = -1;
+    menu->CurrentWeaponListSize = 0;
+    menu->m_UnderwaterWhenSetup = 0;
+    menu->m_WheelIndexLastFrame = -1;
     for (i = 0; i < 36; i++) {
-        menu->slots[i].angle = -(i * D_800C224C_de);
-        menu->slots[i].y = 0;
-        menu->slots[i].scale = D_800C913C_de;
+        menu->m_WeaponList[i].m_Rot = -(i * D_800C224C_de);
+        menu->m_WeaponList[i].m_Spin = 0;
+        menu->m_WeaponList[i].m_Scale = D_800C913C_de;
     }
 }
 
@@ -39,7 +39,7 @@ void func_802183E8_de(s32 arg0, s32 arg1, s32 arg2) {
 
     Text_SetupSpriteMode(0xFF);
     gDPSetTextureFilter(D_80110634++, G_TF_BILERP);
-    func_80217928_de((Menu *)arg0, arg1, arg2);
+    func_80217928_de((CBarrel *)arg0, arg1, arg2);
 }
 
 /** Preserve the empty hook at VRAM 0x80218464. */

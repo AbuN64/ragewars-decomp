@@ -3340,7 +3340,7 @@ segments:
       - [0xC308C, rodata, data_800C/D_80217594_C7EDC]
       - [0xC3094, data, data_800C/rodata_unresolved_800C2494]
       - [0xC30A0, rodata, data_800C/literals_Team_DrawWeaponIcons]
-      - [0xC30D4, rodata, data_800C/D_80217F4C_C7F24]
+      - [0xC30D4, rodata, data_800C/literals_Team_UpdateDraftPanel]
       - [0xC30E8, rodata, data_800C/D_802181FC_C7F38]
       - [0xC30EC, rodata, data_800C/D_8021836C_C7F3C]
       - [0xC30F0, rodata, data_800C/D_802184C0_C7F40]

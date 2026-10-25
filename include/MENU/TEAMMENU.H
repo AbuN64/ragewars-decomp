@@ -12,36 +12,31 @@ extern float D_800C22A8_de;
 
 struct Shared_ActorView;
 
-struct SlotRecAt14;
-typedef struct SlotRecAt14 SlotRecAt14;
-
-struct SlotRecAt14;
-struct SlotRecAt14 {
-    s32 weapon;
-    void *info;
-    s32 owned;
-    f32 angle;
-    s32 y;
-    f32 scale;
-};
-
-struct Menu;
-struct Menu {
-    s32 active;
-    s32 pad4;
-    f32 open;
-    s32 reset;
-    u8 reserved10[4];
-    f32 spin;
-    s32 selected;
-    SlotRecAt14 slots[36];
-    s32 cursor;
-    s32 count;
-    s32 held;
-    s32 hover;
-    s32 scroll;
-    s32 last;
-};
+/* The weapon barrel (wheel) menu: CBarrel_t and CBarrelWeapon_t of the debug catalog. */
+typedef struct CBarrelWeapon_t {
+    s32 m_Weapon;
+    void *m_pInfo;
+    s32 m_bEnabled;
+    f32 m_Rot;
+    f32 m_Spin;
+    f32 m_Scale;
+} CBarrelWeapon;
+typedef struct CBarrel_t {
+    s32 m_Mode;
+    f32 m_Time;
+    f32 m_Alpha;
+    f32 m_Rot;
+    s32 m_Dir;
+    f32 m_Glow;
+    s32 CurrentWeaponListSize;
+    CBarrelWeapon m_WeaponList[36];
+    s32 m_Selected;
+    s32 m_QuickSelect;
+    s32 m_ButtonAWheel;
+    s32 m_DisplaySlot;
+    s32 m_UnderwaterWhenSetup;
+    s32 m_WheelIndexLastFrame;
+} CBarrel;
 
 extern float D_800C2254_de;
 
@@ -169,8 +164,6 @@ struct Entry34 {
     f32 z;
 };
 
-struct Menu;
-typedef struct Menu Menu;
 
 struct IntegerState74;
 typedef struct IntegerState74 IntegerState74;
@@ -1703,7 +1696,7 @@ extern char D_800C2260_de[];
 
 struct TeamWeaponPlayer;
 typedef struct TeamWeaponPlayer TeamWeaponPlayer;
-extern void Team_InitWeaponChoices(Menu *menu, s32 held, TeamWeaponPlayer *player);
+extern void Team_InitWeaponChoices(CBarrel *barrel, s32 buttonAWheel, TeamWeaponPlayer *player);
 
 extern void func_8025E1C4_de(s32);
 #endif
