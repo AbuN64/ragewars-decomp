@@ -4685,7 +4685,7 @@ segments:
       - [0xEF724, rodata, data_800C/g_pakMenuAnimationLimits]
       - [0xEF734, rodata, data_800C/g_menuCenterFraction]
       - [0xEF738, rodata, data_800C/literals_Pak_DrawMenuEntries]
-      - [0xEF754, rodata, data_800C/D_auto_rodata_func_80441BE0_de_800EEB54]
+      - [0xEF754, rodata, data_800C/literals_Pak_DrawMenuPanel]
       - [0xEF76C, rodata, data_800C/D_blob_phase2_866ba8f28e81b8aecc75]
       - [0xEF771, data, data_800C/rodata_unresolved_800EEB71]
       - [0xEF774, rodata, data_800C/literals_func_80441EB0_de]

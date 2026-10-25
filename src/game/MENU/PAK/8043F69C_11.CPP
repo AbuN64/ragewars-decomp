@@ -11,7 +11,7 @@
 #include "COMMON/MENU_TEXT.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"
 
-extern void func_8043F52C_de(LayeredText *, TextLayerMetrics *);
+extern void Pak_MeasureMenuText(LayeredText *, TextLayerMetrics *);
 extern void func_804402DC_de(LayeredText *, MenuOptionBox *, MenuOptionBox *, int);
 extern void func_8043FE3C_de(LayeredText *, MenuOptionBox *, MenuOptionBox *, int, void *, int);
 
@@ -24,15 +24,15 @@ void func_804404A8_de(LayeredText *source, MenuOptionBox *position, MenuOptionBo
     center = (bounds->left + bounds->field18) / 2;
     current = *source;
     current.mode = 0;
-    func_8043F52C_de(&current, &first);
+    Pak_MeasureMenuText(&current, &first);
     current = *source;
     current.mode = 1;
     current.text = 0;
-    func_8043F52C_de(&current, &second);
+    Pak_MeasureMenuText(&current, &second);
     current = *source;
     current.mode = 1;
     current.text = 0;
-    func_8043F52C_de(&current, &third);
+    Pak_MeasureMenuText(&current, &third);
     current = *source;
     current.text = 0;
     position->top += first.height;
@@ -65,15 +65,15 @@ void func_804404A8_de(LayeredText *source, MenuOptionBox *position, MenuOptionBo
     center = (bounds->left + bounds->field18) / 2;
     current = *source;
     current.mode = 0;
-    func_8043F52C_de(&current, &first);
+    Pak_MeasureMenuText(&current, &first);
     current = *source;
     current.mode = 1;
     current.text = 0;
-    func_8043F52C_de(&current, &second);
+    Pak_MeasureMenuText(&current, &second);
     current = *source;
     current.mode = 1;
     current.text = 0;
-    func_8043F52C_de(&current, &third);
+    Pak_MeasureMenuText(&current, &third);
     current = *source;
     current.text = 0;
     position->top += first.height;

@@ -12191,7 +12191,6 @@ SECTIONS
         src/game/MENU/PAK/800E24E4.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/MENU/PAK/pak_menu_entries.CPP.o */;
         src/game/MENU/PAK/pak_menu_entries.CPP.o(.rodata .rdata);
-        src/game/MENU/PAK/8043F69C_2.CPP.o(.rodata .rdata);
         src/game/DATA/AMMO/DATA_800E251C.CPP.o(.rodata .rdata);
         src/game/DATA/AMMO/DATA_800E251C.CPP.o(.data);
         src/game/MENU/PAK/8043F69C_5.CPP.o(.rodata .rdata);
@@ -13926,7 +13925,6 @@ SECTIONS
         src/game/MENU/PAK/800E24E4.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/MENU/PAK/pak_menu_entries.CPP.o */;
         src/game/MENU/PAK/pak_menu_entries.CPP.o(.rodata .rdata);
-        src/game/MENU/PAK/8043F69C_10.CPP.o(.rodata .rdata);
         src/game/DATA/AMMO/DATA_800E251C.CPP.o(.rodata .rdata);
         src/game/DATA/AMMO/DATA_800E251C.CPP.o(.data);
         src/game/MENU/PAK/8043F69C_5.CPP.o(.rodata .rdata);
@@ -15657,7 +15655,6 @@ SECTIONS
         src/game/MENU/PAK/800E24E4.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/MENU/PAK/pak_menu_entries.CPP.o */;
         src/game/MENU/PAK/pak_menu_entries.CPP.o(.rodata .rdata);
-        src/game/MENU/PAK/8043F69C_8.CPP.o(.rodata .rdata);
         src/game/DATA/AMMO/DATA_800E251C.CPP.o(.rodata .rdata);
         src/game/DATA/AMMO/DATA_800E251C.CPP.o(.data);
         src/game/MENU/PAK/8043F69C_5.CPP.o(.rodata .rdata);
@@ -17369,7 +17366,6 @@ SECTIONS
         src/game/MENU/PAK/800E24E4.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/MENU/PAK/pak_menu_entries.CPP.o */;
         src/game/MENU/PAK/pak_menu_entries.CPP.o(.rodata .rdata);
-        src/game/MENU/PAK/8043F69C.CPP.o(.rodata .rdata);
         src/game/DATA/AMMO/DATA_800E251C.CPP.o(.rodata .rdata);
         src/game/DATA/AMMO/DATA_800E251C.CPP.o(.data);
         src/game/MENU/PAK/8043F69C_5.CPP.o(.rodata .rdata);
@@ -20984,7 +20980,6 @@ SECTIONS
         src/game/MENU/PAK/800E24C0.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/800E24E4.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/pak_menu_entries.CPP.o(.bss .sbss COMMON);
-        src/game/MENU/PAK/8043F69C_2.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AMMO/DATA_800E251C.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/8043F69C_5.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/8043F69C_6.CPP.o(.bss .sbss COMMON);
@@ -22242,7 +22237,6 @@ SECTIONS
         src/game/MENU/PAK/800E24C0.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/800E24E4.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/pak_menu_entries.CPP.o(.bss .sbss COMMON);
-        src/game/MENU/PAK/8043F69C_10.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AMMO/DATA_800E251C.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/8043F69C_5.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/8043F69C_6.CPP.o(.bss .sbss COMMON);
@@ -23477,7 +23471,6 @@ SECTIONS
         src/game/MENU/PAK/800E24C0.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/800E24E4.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/pak_menu_entries.CPP.o(.bss .sbss COMMON);
-        src/game/MENU/PAK/8043F69C_8.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AMMO/DATA_800E251C.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/8043F69C_5.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/8043F69C_6.CPP.o(.bss .sbss COMMON);
@@ -24727,7 +24720,6 @@ SECTIONS
         src/game/MENU/PAK/800E24C0.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/800E24E4.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/pak_menu_entries.CPP.o(.bss .sbss COMMON);
-        src/game/MENU/PAK/8043F69C.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AMMO/DATA_800E251C.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/8043F69C_5.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/8043F69C_6.CPP.o(.bss .sbss COMMON);
@@ -27332,7 +27324,6 @@ SECTIONS
         src/game/MENU/PAK/800E24E4.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/MENU/PAK/pak_menu_entries.CPP.o */;
         src/game/MENU/PAK/pak_menu_entries.CPP.o(.rodata .rdata);
-        src/game/MENU/PAK/800E2504.CPP.o(.rodata .rdata);
         src/game/DATA/AMMO/DATA_800E251C.CPP.o(.rodata .rdata);
         src/game/DATA/AMMO/DATA_800E251C.CPP.o(.data);
         src/game/MENU/PAK/8043F69C_5.CPP.o(.rodata .rdata);
@@ -27887,7 +27878,6 @@ SECTIONS
         src/game/MENU/PAK/800E24D4.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/800E24E4.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/pak_menu_entries.CPP.o(.bss .sbss COMMON);
-        src/game/MENU/PAK/800E2504.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AMMO/DATA_800E251C.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/8043F69C_5.CPP.o(.bss .sbss COMMON);
         src/game/MENU/PAK/8043F69C_6.CPP.o(.bss .sbss COMMON);

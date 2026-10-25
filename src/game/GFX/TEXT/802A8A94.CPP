@@ -135,7 +135,7 @@ void func_802A7AA4_de(Mover *m) {
     } while (next);
 }
 
-void func_802A7DE4_de(s32 x0,s32 y0,s32 x1,s32 y1,s32 border,s32 invert,s32 red,s32 green,s32 blue,s32 alpha) {
+void Text_DrawBevelBox(s32 x0,s32 y0,s32 x1,s32 y1,s32 border,s32 invert,s32 red,s32 green,s32 blue,s32 alpha) {
     u8 r=red,g=green,b=blue,a=alpha;
     s32 lightR,lightG,lightB,darkR,darkG,darkB;
     lightR=invert ? r>>1 : r<<1;

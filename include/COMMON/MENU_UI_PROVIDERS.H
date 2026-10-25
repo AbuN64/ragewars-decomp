@@ -15,5 +15,5 @@ typedef struct MenuOptionBox {
 } MenuOptionBox;
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 extern f32 D_800DE47C_de;
-extern void func_802A7DE4_de(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
+extern void Text_DrawBevelBox(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
 #endif

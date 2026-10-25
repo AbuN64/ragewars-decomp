@@ -80,7 +80,7 @@ void func_802A7660_de(Hud *hud, s32 which) {
     }
     x = (s32) bar->x;
     y = (s32) (bar->y + (f32) offset * scale);
-    func_802AA9F4_de();
+    Text_SetupFillMode();
     func_802A7AA4_de(bar);
     if (bar->state == 1) {
         value = bar->fill;

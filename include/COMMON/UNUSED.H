@@ -2399,7 +2399,6 @@ extern char D_800D799C[];
 
 extern u32 D_800CB6F4;
 
-extern char D_800DE4E8[];
 
 extern float D_800C49F4_de;
 

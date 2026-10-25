@@ -6,6 +6,8 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "MENU/8043F69C.H"
+#include "COMMON/MENU_UI_PROVIDERS.H"
+#include "GFX/TEXT/802A8A94_5.H"
 
 /* Moves a menu cursor through its entry table in one direction (16 to 19, reading the step byte at that offset of the current entry), wrapping at either end, recording the reverse step on the new entry when its flag allows, until it reaches an entry flagged 0x1800000 whose descriptor word at 0x1C is set. */
 
@@ -220,9 +222,7 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
 
 
 extern void *func_80442A58_de(s8 *);
-extern void func_8043F52C_de(TextBoundsText *, CItemInfo *);
-extern void func_802AA9F4_de(void);
-extern void func_802A7DE4_de(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
+extern void Pak_MeasureMenuText(TextBoundsText *, CItemInfo *);
 extern u32 D_800CD730;
 extern s32 D_800E1E20;
 extern const f32 g_menuCenterFraction;
@@ -257,7 +257,7 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
                 metrics.width = 0;
                 metrics.height = 0;
             } else {
-                func_8043F52C_de(entry, &metrics);
+                Pak_MeasureMenuText(entry, &metrics);
             }
             bounds.left = bounds.left < metrics.left ? bounds.left : metrics.left;
             bounds.right = bounds.right > metrics.right ? bounds.right : metrics.right;
@@ -290,7 +290,7 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
         if (entry->flags & 0x800000) {
             metrics.field0 = i;
             if (entry->flags & 0x20000000) {
-                func_8043F52C_de(entry, &metrics);
+                Pak_MeasureMenuText(entry, &metrics);
                 metrics.width = 0;
                 metrics.height = 0;
                 metrics.left = data->x;
@@ -298,7 +298,7 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
                 metrics.m_Top = data->y;
                 metrics.m_Bottom = 0;
             } else {
-                func_8043F52C_de(entry, &metrics);
+                Pak_MeasureMenuText(entry, &metrics);
             }
             placed = metrics;
             if (!(entry->flags & 0x20000000)) {
@@ -325,13 +325,13 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
                     bottom = placed.m_Bottom;
                     /* Preserve the highlight extent calculation and its float rounding. */
                     bottom = top + (bottom - top);
-                    func_802AA9F4_de();
+                    Text_SetupFillMode();
                     alpha = menu->alpha * menu->fade *
                         ((func_802B7130_de((f32)(D_800CD730 * 10) * 0.017453294f) + 1.0f) * 50.0f + 50.0f);
                     if (entry->flags & 0x10) {
-                        func_802A7DE4_de(placed.left - 4, top, placed.right + 4, bottom, 0, 0, 255, 0, 10, (u8)alpha);
+                        Text_DrawBevelBox(placed.left - 4, top, placed.right + 4, bottom, 0, 0, 255, 0, 10, (u8)alpha);
                     } else {
-                        func_802A7DE4_de(placed.left - 4, top, placed.right + 4, bottom, 0, 0, 255, 0, 10, (u8)alpha);
+                        Text_DrawBevelBox(placed.left - 4, top, placed.right + 4, bottom, 0, 0, 255, 0, 10, (u8)alpha);
                     }
                     D_800E1E20 = -1;
                 }
@@ -342,13 +342,11 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
 }
 
 
-#ifdef NON_MATCHING
-#include "COMMON/MENU_UI_PROVIDERS.H"
-#include "COMMON/TRIPLE.H"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/VIDEO_DIMENSIONS.H"
-extern f32 D_800E2504;
-extern void func_802AA9F4_de();
+extern s32 D_800E28D0;
 extern TextBoundsFont D_800E1E24_de[];
+/* The font a text entry's style bits select (the switch of func_8043FE3C_de). */
 static __inline__ TextBoundsFont *textBoundsFont(TextBoundsText *text) {
     s32 style = 0;
     switch ((u32)text->flags & 0x3FE0) {
@@ -365,59 +363,58 @@ static __inline__ TextBoundsFont *textBoundsFont(TextBoundsText *text) {
     }
     return &D_800E1E24_de[style];
 }
-/* 20/180 aligned edits; remaining: parameter copy order, the gap/margin join and the relative-top float loads;
- * the (u32) alpha conversion uses its own 2^31 literal, while D_800DE4E8 (that literal in the ROM) is also read
- * at +4 as a string by other functions, so the pool cannot be placed yet. */
-void Pak_DrawMenuPanel(u8 *self, void *unused, s32 relative) {
-    TextBoundsFont *font = textBoundsFont((TextBoundsText *)unused);
-    u8 *view = *(u8 **)(self + 0x40);
-    CItemInfo box;
+/* Draws the dark backing panel behind a menu: as wide as the screen, centred on the menu's anchor, and as
+ * tall as a fraction of the screen height less a margin. The relative pass places it above the anchor, the
+ * other below. Measures every entry first and draws nothing when the menu has no extent. */
+void Pak_DrawMenuPanel(func_8043FFAC_S2 *menu, TextBoundsText *text, s32 relative) {
+    TextBoundsData *data = menu->data;
+    TextBoundsFont *font = textBoundsFont(text);
+    CItemInfo panel;
     CItemInfo bounds;
     s32 i;
     f32 centerX;
-    f32 margin;
-    f32 gap;
-    f32 top;
-    box.left = 0x400;
-    box.right = -0x400;
-    box.m_Top = 0x400;
-    box.m_Bottom = -0x400;
+    f32 height;
+    s32 top;
+    panel.left = 1024;
+    panel.right = -1024;
+    panel.m_Top = 1024;
+    panel.m_Bottom = -1024;
     bounds.width = 0;
     bounds.height = 0;
     bounds.left = 0;
     bounds.right = 0;
     bounds.m_Top = 0;
     bounds.m_Bottom = 0;
-    for (i = 0; i < *(s32 *)(self + 0x10); i++) {
-        func_8043F52C_de((TextBoundsText *)(*(u8 **)(self + 0xC) + i * 0x28), &bounds);
-        box.left = box.left < bounds.left ? box.left : bounds.left;
-        box.right = box.right > bounds.right ? box.right : bounds.right;
-        box.m_Top = box.m_Top < bounds.m_Top ? box.m_Top : bounds.m_Top;
-        box.m_Bottom = box.m_Bottom > bounds.m_Bottom ? box.m_Bottom : bounds.m_Bottom;
+    for (i = 0; i < menu->count; i++) {
+        Pak_MeasureMenuText(&menu->entries[i], &bounds);
+        panel.left = panel.left < bounds.left ? panel.left : bounds.left;
+        panel.right = panel.right > bounds.right ? panel.right : bounds.right;
+        panel.m_Top = panel.m_Top < bounds.m_Top ? panel.m_Top : bounds.m_Top;
+        panel.m_Bottom = panel.m_Bottom > bounds.m_Bottom ? panel.m_Bottom : bounds.m_Bottom;
     }
-    box.width = box.right - box.left;
-    box.height = box.m_Bottom - box.m_Top;
-    if (box.width < 0 || box.height < 0) {
+    panel.width = panel.right - panel.left;
+    panel.height = panel.m_Bottom - panel.m_Top;
+    if (panel.width < 0 || panel.height < 0) {
         return;
     }
-    centerX = *(f32 *)(view + 0x2A4) + *(f32 *)(view + 0x29C) * D_800E2504 + *(s16 *)(self + 2);
-    box.width = D_800E28D0;
-    box.left = (s32)(centerX - box.width / 2);
-    box.right = (s32)(centerX + box.width / 2);
-    margin = D_800E28D4 * D_800DE4D8;
-    gap = D_800E28D4 < 0xDF ? D_800DE4DC : D_800DE4E0_de;
-    margin = margin - gap;
-    if (relative != 0) {
-        top = *(f32 *)(view + 0x2A8) + (f32)D_800E28D4 + *(s16 *)(self + 4) - margin;
+    centerX = data->x + data->unk_29C * 0.5f + menu->x;
+    panel.width = SCREEN_WD;
+    panel.left = centerX - panel.width / 2;
+    panel.right = centerX + panel.width / 2;
+    height = SCREEN_HT * 0.21621622f;
+    if (SCREEN_HT >= 223) {
+        height -= 13.0f;
     } else {
-        top = *(f32 *)(view + 0x2A8) + *(s16 *)(self + 4);
+        height -= 9.0f;
     }
-    box.m_Top = (s32)top;
-    box.m_Bottom = (s32)(box.m_Top + margin);
-    box.height = box.m_Bottom - box.m_Top;
-    func_802AA9F4_de();
-    func_802A7DE4_de(box.left, box.m_Top, box.right, box.m_Bottom, 1, 0, 0, 0, 0, (u8)(u32)(*(f32 *)(self + 0x30) * D_800DE4E4));
+    if (relative != 0) {
+        top = data->y + (f32)SCREEN_HT + menu->y - height;
+    } else {
+        top = data->y + menu->y;
+    }
+    panel.m_Top = top;
+    panel.m_Bottom = top + height;
+    panel.height = panel.m_Bottom - panel.m_Top;
+    Text_SetupFillMode();
+    Text_DrawBevelBox(panel.left, panel.m_Top, panel.right, panel.m_Bottom, 1, 0, 0, 0, 0, (u8)(u32)(menu->alpha * 192.0f));
 }
-#else
-INCLUDE_ASM("ovl_80400000", Pak_DrawMenuPanel);
-#endif

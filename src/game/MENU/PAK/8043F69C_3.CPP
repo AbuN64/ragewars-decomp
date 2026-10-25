@@ -17,7 +17,7 @@ const unsigned int rodata_func_8043F52C_de_800E2460[6] = {
 #ifdef NON_MATCHING
 /* Drafted below with the other versions' body. */
 #else
-INCLUDE_ASM("ovl_80400000", func_8043F52C_de);
+INCLUDE_ASM("ovl_80400000", Pak_MeasureMenuText);
 #endif
 #endif
 
@@ -55,7 +55,7 @@ static __inline__ TextBoundsFont *textBoundsFont(TextBoundsText *text) {
 
 /* Measures a text item into its metrics: size by kind (glyph run, image, three-part composite, box), then the scaled screen
  * rectangle from the item position (284 x 222 virtual screen). */
-void func_8043F52C_de(TextBoundsText *text, CItemInfo *metrics) {
+void Pak_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
     TextBoundsText part;
     CItemInfo first, second, third;
     TextBoundsData *data;
@@ -130,17 +130,17 @@ void func_8043F52C_de(TextBoundsText *text, CItemInfo *metrics) {
         first = *metrics;
         part = *text;
         part.mode = 0;
-        func_8043F52C_de(&part, &first);
+        Pak_MeasureMenuText(&part, &first);
         second = *metrics;
         part = *text;
         part.mode = 1;
         part.text = 0;
-        func_8043F52C_de(&part, &second);
+        Pak_MeasureMenuText(&part, &second);
         third = *metrics;
         part = *text;
         part.mode = 1;
         part.text = 0;
-        func_8043F52C_de(&part, &third);
+        Pak_MeasureMenuText(&part, &third);
         width = second.width + third.width;
         if (width < first.width) {
             width = first.width;

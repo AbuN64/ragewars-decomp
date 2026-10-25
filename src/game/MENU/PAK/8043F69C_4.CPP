@@ -24,7 +24,7 @@ u32 func_80265350_de(void);
 
 int func_802934F8_de(void);
 
-void Pak_DrawMenuPanel(u8 *self, void *entry, s32 relative);
+void Pak_DrawMenuPanel(func_8043FFAC_S2 *menu, TextBoundsText *text, s32 relative);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
@@ -43,7 +43,7 @@ extern CMenuFontInfo D_800E1E24_de[];
 
 void func_802A9234_de(s32);
 
-void func_802AA9F4_de(void);
+void Text_SetupFillMode(void);
 
 /* unable to generate initializer: unknown type */
 
@@ -82,8 +82,8 @@ block_5:
         if (arg3->unk3C != 0) {
             arg3->unk38 = 0;
         }
-        Pak_DrawMenuPanel((u8 *)arg3, arg0, 1);
-        Pak_DrawMenuPanel((u8 *)arg3, arg0, 0);
+        Pak_DrawMenuPanel(arg3, (TextBoundsText *)arg0, 1);
+        Pak_DrawMenuPanel(arg3, (TextBoundsText *)arg0, 0);
         var_s5 = 0;
     }
     if (arg3->unk38 == 0) {
@@ -168,7 +168,7 @@ block_5:
     if (var_s5 != 0) {
         var_s5 = temp_s1->unk14;
     }
-    func_802A8F28_de(arg4, arg1->unk14, arg1->unk1C, (s32) (arg3->unk30 * (arg3->unk34 * 255.0f)), 0, (s32) var_s5, 1.0f, 1.0f);
+    func_802A8F28_de(arg4, arg1->unk14, arg1->unk1C, (s32) (arg3->alpha * (arg3->fade * 255.0f)), 0, (s32) var_s5, 1.0f, 1.0f);
 }
 
 void func_804402DC_de(MenuOption *arg0, MenuOptionBox *arg1, s32 arg2, MenuOptionFade *arg3) {
@@ -184,7 +184,7 @@ void func_804402DC_de(MenuOption *arg0, MenuOptionBox *arg1, s32 arg2, MenuOptio
         if (D_800E1E20 != 3) {
             D_800E1E20 = 3;
         }
-        func_802AA9F4_de();
+        Text_SetupFillMode();
         width = (f32)arg1->width * arg1->scaleX;
         height = (f32)arg1->height * arg1->scaleY;
         bottom = (f32)arg1->top;
@@ -203,7 +203,7 @@ void func_804402DC_de(MenuOption *arg0, MenuOptionBox *arg1, s32 arg2, MenuOptio
         } else {
             var_v1 = 0x80;
         }
-        func_802A7DE4_de(arg1->left, arg1->top, (s32)right, (s32)bottom, 1, 0, 0, 0, 0, var_v1);
+        Text_DrawBevelBox(arg1->left, arg1->top, (s32)right, (s32)bottom, 1, 0, 0, 0, 0, var_v1);
         return;
     }
     if (D_800E1E20 != 3) {

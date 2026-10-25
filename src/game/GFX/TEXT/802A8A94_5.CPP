@@ -45,7 +45,7 @@ void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
 #endif
 
 #if defined(VERSION_EU_X)
-void func_802AA9F4_de(void) {
+void Text_SetupFillMode(void) {
 
     Gfx *gfx;
 
@@ -152,7 +152,7 @@ void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
   }
 }
 
-void func_802AA9F4_de(void) {
+void Text_SetupFillMode(void) {
 
     Gfx *gfx;
 

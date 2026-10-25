@@ -50,10 +50,11 @@ struct func_8043FFAC_S2 {
     struct TextBoundsText *entries; /* 0x0C */
     s32 count; /* 0x10 */
     char pad14[0x1C];
-    f32 unk30;
-    f32 unk34;
+    f32 alpha; /* 0x30 */
+    f32 fade; /* 0x34 */
     s32 unk38;
     s32 unk3C;
+    struct TextBoundsData *data; /* 0x40 */
 };
 
 struct StateRecAtBCV1;
