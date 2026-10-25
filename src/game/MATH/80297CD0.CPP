@@ -328,125 +328,59 @@ void func_80299CF0_de(struct NodeRecAt12 *, s32, s32, s32, s32, s32);
 void MarkMenuEventHandled(void);
 void func_80298368_de(s32);
 
-/* 113/250 aligned edits; remaining: event-loop scheduling and register allocation. */
-static inline void Screen_DispatchChildren(Element *element, s32 event, s32 value, s32 argument, s32 context) {
-    ScreenManager *manager;
-    s32 saved;
-    s32 *handled;
-    if (element != 0) {
-        manager = D_8014D080;
-        handled = &manager->handled;
-        saved = manager->handled;
-        manager->handled = 0;
-        if (element->left != 0) {
-            func_80299CF0_de(element->left, event, value, argument, context, 1);
-        }
-        if (manager->handled != 0) {
-            *handled = saved;
-            return;
-        }
-        if (element->right != 0) {
-            func_80299CF0_de(element->right, event, value, argument, context, 1);
-        }
-        *handled = saved;
-    }
-}
-
-static inline s32 Screen_DispatchStandardEvent(Element *element, s32 event, s32 argument, s32 systemEvents, s32 screenEvents, s32 userEvents) {
-    s32 result = 0;
-    s32 category = result;
-    if ((u32)event >= 0xE00U) {
-        category = 1;
-        if (!systemEvents) {
-            category = 2;
-            if (!screenEvents) {
-                category = result;
-                if (userEvents) category = 3;
-            }
-        }
-    }
-    switch (category) {
-    case 0:
-        switch (event) {
-        case 5: case 6: case 7: case 8:
-            if (argument == 1) MoveMenuFocus(event);
-            break;
-        case 1:
-            if (element->flags & 0x10) {
-                if (element->linked_id != 0) {
-                    MarkMenuEventHandled();
-                    func_80298368_de(element->linked_id);
-                }
-            }
-            break;
-        case 2:
-            if (D_8014D080->current > 0) func_802998A8_de();
-            break;
-        case 15: func_8040E928_de(element, 1); break;
-        case 16: func_8040E928_de(element, 0); break;
-        }
-        break;
-    case 1: result = 0; break;
-    case 2: result = 0; break;
-    case 3: result = 0; break;
-    }
-    return result;
-}
-
+/* 1/250 words differ: the recurse test branch is a plain beqz here where the ROM uses beql (reorg annuls the
+ * inline's result = 0 in its delay slot); everything else matches. Same inlines as DispatchCurrentScreenEvent. */
 s32 DispatchScreenRangeEvent(s32 recurse, s32 event, s32 value, void *argument, s32 context) {
-    s32 first, last;
-    s32 systemEvents, screenEvents, userEvents;
-    s32 result = 0;
-    s32 saved, consumed;
-    s32 *handled;
-    ScreenManager *manager = D_8014D080;
+    ScreenManager *table = D_8014D080;
+    s32 *handledFlag = &table->handled;
     Element *element;
     MenuElementHandler handler;
-    handled = &manager->handled;
-    if (manager->callback != 0) {
-        saved = manager->handled;
-        manager->handled = 0;
-        result = manager->callback(event, value, (s32)argument, context);
-        consumed = manager->handled;
-        manager->handled = saved;
-        if (consumed == 1) return result;
+    s32 result = 0;
+    s32 saved, handled;
+    s32 first, last;
+    if (table->callback != 0) {
+        saved = table->handled;
+        table->handled = 0;
+        result = table->callback(event, value, (s32)argument, context);
+        handled = table->handled;
+        table->handled = saved;
+        if (handled == 1) return result;
     }
-    goto dispatchScreens;
-restoreHandled:
-    *handled = saved;
-    return result;
-dispatchScreens:
     first = D_8014D080->lowIndex;
     last = D_8014D080->current;
-    if (first > last) return result;
-    systemEvents = (u32)event - 0x1000U < 0x1000U;
-    screenEvents = (u32)event - 0xE00U < 0x200U;
-    userEvents = (u32)event - 0x4000U < 0x4000U;
-    do {
-        if (event < 0xE03 && event > 0xE00) {
+    for (; first <= last; first++) {
+        switch (event) {
+        case 0xE01:
+        case 0xE02:
             value = (s32)&D_8014D080->screens[first].data;
+            break;
         }
         element = D_8014D080->screens[first].primary;
         handler = element->handler;
         if (handler != 0) {
-            saved = *handled;
-            *handled = 0;
+            saved = *handledFlag;
+            *handledFlag = 0;
             result = handler(element, event, value, (s32)argument, context);
-            if (*handled == 1) goto restoreHandled;
-            *handled = saved;
+            if (*handledFlag == 1) {
+                *handledFlag = saved;
+                return result;
+            }
+            *handledFlag = saved;
         }
         if (recurse != 0) {
             D_80146E18 = D_8014D080->screens[first].owner;
-            saved = *handled;
-            *handled = 0;
-            Screen_DispatchChildren(element, event, value, (s32)argument, context);
+            saved = *handledFlag;
+            *handledFlag = 0;
+            Menu_DispatchChildEvents(element, event, value, (s32)argument, context);
             D_80146E18 = -1;
-            if (*handled == 1) goto restoreHandled;
-            *handled = saved;
+            if (*handledFlag == 1) {
+                *handledFlag = saved;
+                return result;
+            }
+            *handledFlag = saved;
         }
-        result = Screen_DispatchStandardEvent(element, event, (s32)argument, systemEvents, screenEvents, userEvents);
-        first++;
-    } while (first <= last);
+        result = Menu_DispatchDefaultEvent(element, event, (s32)argument);
+    }
     return result;
 }
 #else
