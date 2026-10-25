@@ -3510,7 +3510,7 @@ segments:
       - [0xC3DF8, rodata, data_800C/D_802349C0_C8EE8]
       - [0xC3E00, rodata, data_800C/D_80234DE0_C8EF0]
       - [0xC3E0C, rodata, data_800C/literals_func_80234FEC_de]
-      - [0xC3EB8, rodata, data_800C/D_80235AE0_C8FA8]
+      - [0xC3EB8, rodata, data_800C/literals_Camera_SetupViewportAndFog]
       - [0xC3EC4, rodata, data_800C/literals_func_802362E8_de]
       - [0xC3ED4, rodata, data_800C/D_blob_phase2_f3450f076efb0015cdf2]
       - [0xC3EDC, rodata, data_800C/D_d0_f6a5694fb306509f]

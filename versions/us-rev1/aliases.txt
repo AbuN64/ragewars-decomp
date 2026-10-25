@@ -2947,3 +2947,4 @@ literals_Ovlgame_InitActorHudState = 0x800C73F0; // rom:0xC7FF0 size:0x18
 literals_Weapons_UpdateAlternateFire = 0x800C7FD8; // rom:0xC8BD8 size:0x8
 literals_Audio_DecodeTransformBlock = 0x800CCF28; // rom:0xCDB28 size:0x10
 literals_DispatchControllerButtonEvent = 0x800CA820; // rom:0xCB420 size:0x24
+literals_Camera_SetupViewportAndFog = 0x800C83A8; // rom:0xC8FA8 size:0xC

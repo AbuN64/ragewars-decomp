@@ -2502,3 +2502,4 @@ literals_Frontend_DrawMenuImage = 0x800DE030; // rom:0xDEC30 size:0x1C
 literals_Nav_SetPickupGoalWeights = 0x800C1E60; // rom:0xC2A60 size:0x7C
 literals_Weapons_UpdateAlternateFire = 0x800C2EE8; // rom:0xC3AE8 size:0x8
 literals_Audio_DecodeTransformBlock = 0x800C7CD8; // rom:0xC88D8 size:0x10
+literals_Camera_SetupViewportAndFog = 0x800C32B8; // rom:0xC3EB8 size:0xC
