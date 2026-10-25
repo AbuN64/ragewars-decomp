@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJECTSTATE96.H"
 #include "TYPES.H"
-extern s32 func_804488A4_de(OSPfs *pfs, __OSInode *inode, u8 backup, u8 bank);
+#include "sdk/PFS/80447BB0_19.H"
 /* Counts (up to 2) the inode-table slots of every bank holding the page key fpage, reading banks through the cache; returns the count, a read error, or 2 once two slots hold it. 6/88 words: bank value copy register only. */
 s32 Pfs_CountPageReferences(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cache) {
     s32 j;
@@ -21,7 +21,7 @@ s32 Pfs_CountPageReferences(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cac
             continue;
         }
         if (bank != cache->bank) {
-            ret = func_804488A4_de(pfs, &cache->inode, 0, bank);
+            ret = Pfs_ReadWriteInode(pfs, &cache->inode, 0, bank);
             if (ret != 0 && ret != 3) {
                 return ret;
             }

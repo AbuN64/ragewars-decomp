@@ -9,13 +9,12 @@
 /* Reads or writes Controller Pak file blocks while validating and following its inode chain, based on the 2.0I public reference. */
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
 extern s32 func_802B8880_de(void *queue, int channel, u16 address, u8 *buffer, int force);
-extern s32 func_804488A4_de(OSPfs *,__OSInode *,u8,u8);
 extern s32 func_80448BFC_de(OSPfs *);
 static inline s32 __osPfsGetNextPage(OSPfs* pfs, u8* bank, __OSInode* inode, __OSInodeUnit* page) {
     s32 ret;
     if (page->inode_t.bank != *bank) {
         *bank = page->inode_t.bank;
-        ret=func_804488A4_de(pfs, inode, 0, *bank); if(ret!=0) return ret;
+        ret=Pfs_ReadWriteInode(pfs, inode, 0, *bank); if(ret!=0) return ret;
     }
     *page = inode->inode_page[page->inode_t.page];
     if (!(((*page).ipage >= pfs->inode_start_page) && ((*page).inode_t.bank < pfs->banks) && ((*page).inode_t.page >= 0x01) && ((*page).inode_t.page < 0x80))) {

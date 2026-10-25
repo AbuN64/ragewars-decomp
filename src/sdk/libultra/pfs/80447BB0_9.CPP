@@ -174,7 +174,7 @@ s32 func_80447130_de(OSPfs *pfs)
                    (next_page.inode_t.page >= 0x01) && (next_page.inode_t.page < 0x80)) {
                 if (bank != next_page.inode_t.bank) {
                     bank = next_page.inode_t.bank;
-                    ret = func_804488A4_de(pfs, &tmp_inode, 0, bank);
+                    ret = Pfs_ReadWriteInode(pfs, &tmp_inode, 0, bank);
                     if (ret != 0 && ret != 3) {
                         return ret;
                     }
@@ -243,7 +243,7 @@ Pfs_CountPageReferences
     }
 
     for (bank = 0; bank < pfs->banks; bank++) {
-        ret = func_804488A4_de(pfs, &tmp_inode, 0, bank);
+        ret = Pfs_ReadWriteInode(pfs, &tmp_inode, 0, bank);
 
         if (ret != 0 && ret != 3) {
             return ret;
@@ -266,7 +266,7 @@ Pfs_CountPageReferences
                 file_next_node[j] = checked_inode.inode_page[pp] = tmp_inode.inode_page[pp];
             }
         }
-        ret = func_804488A4_de(pfs, &checked_inode, 1, bank);
+        ret = Pfs_ReadWriteInode(pfs, &checked_inode, 1, bank);
         if (ret != 0)
             return ret;
     }
@@ -311,7 +311,7 @@ s32 func_8044756C_de(OSPfs *pfs, __OSInodeCache *cache)
     for (bank = 0; bank < pfs->banks; bank++) {
         offset = bank > 0 ? 1 : pfs->inode_start_page;
 
-        ret = func_804488A4_de(pfs, &tmp_inode, 0, bank);
+        ret = Pfs_ReadWriteInode(pfs, &tmp_inode, 0, bank);
 
         if (ret != 0 && ret != 3) {
             return ret;
@@ -330,40 +330,46 @@ s32 func_8044756C_de(OSPfs *pfs, __OSInodeCache *cache)
 }
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-#ifdef NON_MATCHING
-/* Counts (up to 2) the inode-table slots of every bank holding the page key fpage, reading banks through the cache; returns the count, a read error, or 2 once two slots hold it (the pak checker's duplicate-page test). 6/88 words: the target compares and masks a register copy of the u8 bank variable. */
-extern s32 func_804488A4_de(OSPfs *pfs, __OSInode *inode, u8 backup, u8 bank);
+/* corrupted: counts (up to 2) the inode-table slots of every bank that may hold the page key fpage,
+   reading banks through the cache; returns the count, a read error, or PFS_ERR_NEW_PACK (2) once two
+   slots hold it (the pak checker's duplicate-page test). The unit is built with -fforce-addr. */
 s32 Pfs_CountPageReferences(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cache) {
-    s32 j;
+    int j;
+    int n;
+    int hit;
     u8 bank;
+    int offset;
     s32 ret;
-    s32 start;
-    s32 sum = 0;
-    u32 idx = (fpage.inode_t.page >> 2) + (fpage.inode_t.bank & 7) * 32;
+
+    hit = 0;
+    ret = 0;
+    n = (fpage.inode_t.page / 4) + (fpage.inode_t.bank % 8) * 32;
+
     for (bank = 0; bank < pfs->banks; bank++) {
-        start = (bank == 0) ? pfs->inode_start_page : 1;
-        if (bank != fpage.inode_t.bank && !((cache->map[idx] >> (bank & 7)) & 1)) {
-            continue;
-        }
-        if (bank != cache->bank) {
-            ret = func_804488A4_de(pfs, &cache->inode, 0, bank);
-            if (ret != 0 && ret != 3) {
-                return ret;
+        offset = bank > 0 ? 1 : pfs->inode_start_page;
+
+        if (bank == fpage.inode_t.bank || cache->map[n] & (1 << (bank % 8))) {
+            if (bank != cache->bank) {
+                ret = Pfs_ReadWriteInode(pfs, &cache->inode, 0, bank);
+
+                if (ret != 0 && ret != 3) {
+                    return ret;
+                }
+
+                cache->bank = bank;
             }
-            cache->bank = bank;
-        }
-        for (j = start; sum < 2 && j < 128; j++) {
-            if (cache->inode.inode_page[j].ipage == fpage.ipage) {
-                sum++;
+
+            for (j = offset; hit < 2 && (j < 128); j++) {
+                if (cache->inode.inode_page[j].ipage == fpage.ipage) {
+                    hit++;
+                }
             }
-        }
-        if (sum >= 2) {
-            return 2;
+
+            if (hit >= 2) {
+                return 2;
+            }
         }
     }
-    return sum;
+    return hit;
 }
-#else
-INCLUDE_ASM("ovl_80400000", Pfs_CountPageReferences);
-#endif
 #endif

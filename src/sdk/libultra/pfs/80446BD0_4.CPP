@@ -80,7 +80,7 @@ s32 func_80445F80_de(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name,
         }
 
         for (bank = 0; bank < pfs->banks; bank++) {
-            ret = func_804488A4_de(pfs, &inode, 0, bank);
+            ret = Pfs_ReadWriteInode(pfs, &inode, 0, bank);
             if (ret != 0)
                 return ret;
             ret = func_80446324_de(pfs, &inode, file_size_in_pages, &start_page, bank, &decleared, &last_page);
@@ -94,7 +94,7 @@ s32 func_80445F80_de(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name,
                 } else {
                     backup_inode.inode_page[old_last_page].inode_t.bank = bank;
                     backup_inode.inode_page[old_last_page].inode_t.page = start_page;
-                    ret = func_804488A4_de(pfs, &backup_inode, 1, old_bank);
+                    ret = Pfs_ReadWriteInode(pfs, &backup_inode, 1, old_bank);
                     if (ret != 0)
                         return ret;
                 }
@@ -120,7 +120,7 @@ s32 func_80445F80_de(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name,
 
         backup_inode.inode_page[old_last_page].inode_t.bank = bank;
         backup_inode.inode_page[old_last_page].inode_t.page = start_page;
-        ret = func_804488A4_de(pfs, &backup_inode, 1, old_bank);
+        ret = Pfs_ReadWriteInode(pfs, &backup_inode, 1, old_bank);
         if (ret != 0)
             return ret;
 
@@ -294,13 +294,13 @@ s32 func_80446580_de(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name,
     startpage = dir.start_page.inode_t.page;
 
     for (bank = dir.start_page.inode_t.bank; bank < pfs->banks;) {
-        ret = func_804488A4_de(pfs, &inode, 0, bank);
+        ret = Pfs_ReadWriteInode(pfs, &inode, 0, bank);
         if (ret != 0)
             return ret;
         ret = func_804467AC_de(pfs, &inode, startpage, &sum, bank, &last_page, 1);
         if (ret != 0)
             return ret;
-        ret = func_804488A4_de(pfs, &inode, 1, bank);
+        ret = Pfs_ReadWriteInode(pfs, &inode, 1, bank);
         if (ret != 0)
             return ret;
 

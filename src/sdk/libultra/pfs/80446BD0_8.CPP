@@ -31,7 +31,7 @@ s32 func_80446C60_de(OSPfs *pfs, s32 *bytes_not_used)
     if (func_80448BFC_de(pfs) == 2)
         return 2;
     for (bank = 0; bank < pfs->banks; bank++) {
-        ret = func_804488A4_de(pfs, &inode, 0, bank);
+        ret = Pfs_ReadWriteInode(pfs, &inode, 0, bank);
         if (ret != 0)
             return ret;
         offset = ((bank > 0) ? 1 : pfs->inode_start_page);

@@ -63,7 +63,7 @@ s32 func_80446A20_de(OSPfs *pfs, s32 file_no, NoteState *state)
     bank = dir.start_page.inode_t.bank;
 
     while (bank < pfs->banks) {
-        ret = func_804488A4_de(pfs, &inode, 0, bank);
+        ret = Pfs_ReadWriteInode(pfs, &inode, 0, bank);
         if (ret != 0)
             return ret;
         next_page = inode.inode_page[start_page];

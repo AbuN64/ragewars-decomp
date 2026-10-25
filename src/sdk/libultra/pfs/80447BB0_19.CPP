@@ -121,7 +121,7 @@ s32 func_804486B8_de(OSPfs *pfs)
     return 0;
 }
 
-s32 func_804488A4_de(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank)
+s32 Pfs_ReadWriteInode(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank)
 {
     u8 sum;
     int j;
