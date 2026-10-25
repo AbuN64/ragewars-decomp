@@ -152,7 +152,7 @@ struct t_dldc {
     f32 YScale;
     u8 alpha;
     u8 pad15[3];
-    s32 Rgn[4];
+    struct Shape_typemap_165 Rgn;
 };
 
 struct WidgetNode;

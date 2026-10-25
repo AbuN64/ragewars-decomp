@@ -4516,7 +4516,7 @@ segments:
       - [0xDDC68, rodata, data_800C/literals_func_8040BB40_de]
       - [0xDDC7C, rodata, data_800C/D_auto_rodata_func_8040BB40_de_800DD07C]
       - [0xDDC80, rodata, data_800C/D_blob_phase2_909a18e76a085edf187f]
-      - [0xDDCA0, rodata, data_800C/rodata_func_8040E0D4_de_800DD0A0]
+      - [0xDDCA0, rodata, data_800C/literals_Frontend_ComputeWidgetBounds]
       - [0xDDCB0, rodata, data_800C/D_blob_phase2_e6036f2dfb04ad707672]
       - [0xDDCB3, data, data_800C/rodata_unresolved_800DD0B3]
       - [0xDDCC0, rodata, data_800C/D_804142AC_E1CF0]

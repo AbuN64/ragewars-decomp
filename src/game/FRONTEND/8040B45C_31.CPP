@@ -22,7 +22,7 @@
 
 extern BatchRec D_8014D590[];
 extern struct Shape_typemap_165 D_8014D580;
-extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_typemap_165 *, void *widget, sm_dldc *);
+extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_typemap_165 *, WidgetLayout *widget, sm_dldc *);
 /* Flushes the queued text sprite batches: when any are queued it selects render mode 0x53333 if
    not already active, saves the clip rectangle and applies the queue's own, then walks the texture
    pages from the lowest first page to the highest last page among the batches, loading each page
@@ -491,184 +491,117 @@ void Frontend_DrawWidget(DraftWidget *widget, sm_dldc args) {
 INCLUDE_ASM("ovl_80400000", Frontend_DrawWidget);
 #endif
 
-#ifdef NON_MATCHING
-#include "COMMON/WIDGETRECAT1A.H"
-extern s32 D_800DEA60, D_800E2AB4_de;
+/* Applies a widget's flags, opacity and scale to the draw context, computes its draw rectangle
+   (scaled about its centre when any scale is not 1) and its hit box, and clips the hit box to the
+   screen. Returns 1 when the widget is visible, and then moves the context origin and clip to the
+   draw rectangle. */
+s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *draw, struct Shape_typemap_165 *hit, WidgetLayout *widget, sm_dldc *ctx) {
+    u16 flags = widget->flags;
+    s32 parentFlags = ctx->flags;
+    f32 parentScaleX = ctx->XScale;
+    f32 parentScaleY = ctx->YScale;
+    s32 centred = flags & 0x800;
+    s32 useDraw = flags & 0x400;
+    s32 halfW = widget->width >> 1;
+    s32 halfH = widget->height >> 1;
+    s32 drawHalfW;
+    s32 drawHalfH;
+    s32 centreX;
+    s32 centreY;
 
-/* Propagate widget opacity and scale, compute its bounds, then clip the hit box. */
-/* 168/362 aligned words; remaining: scaled bounds scheduling and register allocation. */
-s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *draw, struct Shape_typemap_165 *hit, void *widget, sm_dldc *context) {
-    WidgetLayout *layout = widget;
-    f32 scaledCenterX,scaledCenterY,scaleX,scaleY,scaledHalfWidth,scaledHalfHeight;
-    f32 parentScaleX;
-    f32 parentScaleY;
-    s16 widgetX;
-    s32 centerX;
-    s32 centerY;
-    s32 hitCenterX;
-    s32 hitCenterY;
-    s32 parentFlags;
-    s32 offsetHitBox;
-    s32 centerFlag;
-    s32 unscaledHalfWidth;
-    s32 unscaledHalfHeight;
-    s32 hitRight;
-    s32 hitBottom;
-    s32 hitLeft;
-    s32 hitTop;
-    s32 clippedLeft;
-    s32 clippedTop;
-    s32 halfWidth;
-    s32 halfHeight;
-    s32 visible;
-    s32 bottom;
-    s32 left;
-    s32 top;
-    u16 widgetFlags;
-    u16 widgetHeight;
-
-    widgetFlags = layout->flags;
-    parentFlags = context->flags;
-    parentScaleX = context->XScale;
-    parentScaleY = context->YScale;
-    centerFlag = widgetFlags & 0x800 & 0xFFFF;
-    offsetHitBox = widgetFlags & 0x400 & 0xFFFF;
-    unscaledHalfWidth = (s32) (((u16)layout->width) << 0x10) >> 0x11;
-    unscaledHalfHeight = (s32) (((u16)layout->height) << 0x10) >> 0x11;
     if (!(parentFlags & 0x4000)) {
-        context->flags = (s32) (parentFlags | (widgetFlags & 0x140));
+        ctx->flags = parentFlags | (flags & 0x140);
     }
-    context->flags = (s32) (context->flags | (layout->flags & 0x609));
-    if ((u8) layout->alpha < 0xFFU) {
-        context->alpha = (u8) ((context->alpha * layout->alpha) / 255);
+    ctx->flags |= widget->flags & 0x609;
+    if (widget->alpha < 0xFF) {
+        ctx->alpha = ctx->alpha * widget->alpha / 255;
     }
-    if (context->flags & 1) {
-        context->alpha = (u8) ((u8) context->alpha >> 1);
+    if (ctx->flags & 1) {
+        ctx->alpha >>= 1;
     }
-    visible = 0;
-    if (context->alpha != 0) {
-        if (!(layout->flags & 8)) {
-            return 0;
-        }
-        if ((context->XScale != 1.0f) || (context->YScale != 1.0f) || (layout->scaleX != 1.0f) || (layout->scaleY != 1.0f)) {
-            scaledCenterX=(f32)(layout->x+layout->offsetX)+(f32)(s16)layout->width*0.5f;
-            scaledCenterX*=context->XScale;
-            scaleX=context->XScale*layout->scaleX;
-            context->XScale=scaleX;
-            scaleY=context->YScale*layout->scaleY;
-            scaledCenterY=(f32)(layout->y+layout->offsetY)+(f32)(s16)layout->height*0.5f;
-            scaledCenterY*=context->YScale;
-            context->YScale=scaleY;
-            scaledHalfWidth=(f32)(s16)layout->width*scaleX; scaledHalfWidth*=0.5f;
-            scaledHalfHeight=(f32)(s16)layout->height*scaleY; scaledHalfHeight*=0.5f;
-            centerX=(s32)scaledCenterX;
-            centerY=(s32)scaledCenterY;
-            halfWidth=(s32)scaledHalfWidth;
-            halfHeight=(s32)scaledHalfHeight;
-            draw->field_0=centerX-halfWidth+context->x;
-            draw->field_4=centerX+halfWidth+context->x;
-            draw->field_8=centerY-halfHeight+context->y;
-            draw->field_C=centerY+halfHeight+context->y;
+    if (ctx->alpha == 0) {
+        return 0;
+    }
+    if (!(widget->flags & 8)) {
+        return 0;
+    }
+    if (ctx->XScale != 1.0f || ctx->YScale != 1.0f || widget->scaleX != 1.0f || widget->scaleY != 1.0f) {
+        centreX = (widget->x + widget->offsetX + widget->width * 0.5f) * ctx->XScale;
+        centreY = (widget->y + widget->offsetY + widget->height * 0.5f) * ctx->YScale;
+        ctx->XScale *= widget->scaleX;
+        ctx->YScale *= widget->scaleY;
+        drawHalfW = widget->width * ctx->XScale * 0.5f;
+        drawHalfH = widget->height * ctx->YScale * 0.5f;
+        draw->field_0 = centreX - drawHalfW + ctx->x;
+        draw->field_4 = centreX + drawHalfW + ctx->x;
+        draw->field_8 = centreY - drawHalfH + ctx->y;
+        draw->field_C = centreY + drawHalfH + ctx->y;
+    } else {
+        draw->field_0 = ctx->x + widget->x + widget->offsetX;
+        draw->field_8 = ctx->y + widget->y + widget->offsetY;
+        draw->field_4 = draw->field_0 + widget->width - 1;
+        draw->field_C = draw->field_8 + widget->height - 1;
+        drawHalfW = widget->width >> 1;
+        drawHalfH = widget->height >> 1;
+    }
+    centreX = (f32)(widget->x + widget->width / 2) * parentScaleX;
+    centreY = (f32)(widget->y + widget->height / 2) * parentScaleY;
+    if (centred && useDraw) {
+        *hit = *draw;
+    } else if (!centred && !useDraw) {
+        if (parentScaleX != 1.0f) {
+            hit->field_0 = (s32)(widget->x * parentScaleX) + ctx->x;
         } else {
-            draw->field_0 = (s32) (context->x + layout->x + layout->offsetX);
-            draw->field_8 = (s32) (context->y + layout->y + layout->offsetY);
-            draw->field_4 = (s32) ((draw->field_0 + (s16) ((u16)layout->width)) - 1);
-            draw->field_C = (s32) ((draw->field_8 + (s16) ((u16)layout->height)) - 1);
-            halfWidth = (s32) (((u16)layout->width) << 0x10) >> 0x11;
-            halfHeight = (s32) (((u16)layout->height) << 0x10) >> 0x11;
+            hit->field_0 = widget->x + ctx->x;
         }
-        widgetX = layout->x;
-        widgetHeight = ((u16)layout->height);
-        hitCenterX = (s32) ((f32) (widgetX + ((s16) ((u16)layout->width) / 2)) * parentScaleX);
-        hitCenterY = (s32) ((f32) (layout->y + ((s32) ((s16) widgetHeight + ((u32) (widgetHeight << 0x10) >> 0x1F)) >> 1)) * parentScaleY);
-        if (centerFlag) {
-            if (offsetHitBox != 0) {
-                *hit = *draw;
-            } else {
-                hit->field_0 = (s32) ((hitCenterX - halfWidth) + context->x);
-                hit->field_8 = (s32) ((hitCenterY - halfHeight) + context->y);
-                hit->field_4 = (s32) (hitCenterX + halfWidth + context->x);
-                bottom = hitCenterY + halfHeight + context->y;
-                goto storeHitBottom;
-            }
+        hit->field_4 = hit->field_0 + widget->width;
+        if (parentScaleY != 1.0f) {
+            hit->field_8 = (s32)(widget->y * parentScaleY) + ctx->y;
         } else {
-            if (offsetHitBox == 0) {
-                if (parentScaleX != 1.0f) {
-                    left = (s32) ((f32) widgetX * parentScaleX) + context->x;
-                } else {
-                    left = widgetX + context->x;
-                }
-                hit->field_0 = left;
-                hit->field_4 = (s32) (hit->field_0 + (s16) ((u16)layout->width));
-                if (parentScaleY != 1.0f) {
-                    top = (s32) ((f32) layout->y * parentScaleY) + context->y;
-                } else {
-                    top = layout->y + context->y;
-                }
-                hit->field_8 = top;
-                bottom = hit->field_8 + (s16) ((u16)layout->height);
-            } else {
-                hit->field_0 = (s32) ((hitCenterX - unscaledHalfWidth) + layout->offsetX + context->x);
-                hit->field_8 = (s32) ((hitCenterY - unscaledHalfHeight) + layout->offsetY + context->y);
-                hit->field_4 = (s32) (hitCenterX + unscaledHalfWidth + layout->offsetX + context->x);
-                bottom = hitCenterY + unscaledHalfHeight + layout->offsetY + context->y;
-            }
-storeHitBottom:
-            hit->field_C = bottom;
+            hit->field_8 = widget->y + ctx->y;
         }
-        hitLeft = hit->field_0;
-        if (hitLeft < 0) {
-            hit->field_0 = 0;
-            goto clipRight;
-        }
-        visible = 0;
-        if (D_800DEA60 >= hitLeft) {
-clipRight:
-            hitRight = hit->field_4;
-            if (hitRight < 0) {
-                return 0;
-            }
-            if (D_800DEA60 < hitRight) {
-                hit->field_4 = (s32) D_800DEA60;
-            }
-            hitTop = hit->field_8;
-            if (hitTop < 0) {
-                hit->field_8 = 0;
-                goto clipBottom;
-            }
-            visible = 0;
-            if (D_800E2AB4_de >= hitTop) {
-clipBottom:
-                hitBottom = hit->field_C;
-                if (hitBottom < 0) {
-                    return 0;
-                }
-                if (D_800E2AB4_de < hitBottom) {
-                    hit->field_C = (s32) D_800E2AB4_de;
-                }
-                clippedLeft = hit->field_0;
-                if (clippedLeft >= hit->field_4) {
-                    hit->field_4 = (s32) (clippedLeft + 1);
-                }
-                clippedTop = hit->field_8;
-                if (clippedTop >= hit->field_C) {
-                    hit->field_C = (s32) (clippedTop + 1);
-                }
-                context->x = (s32) draw->field_0;
-                visible = 1;
-                context->y = (s32) draw->field_8;
-                context->Rgn[0] = (s32) draw->field_0;
-                context->Rgn[1] = (s32) draw->field_4;
-                context->Rgn[2] = (s32) draw->field_8;
-                context->Rgn[3] = (s32) draw->field_C;
-                return visible;
-            }
-            return visible;
-        }
-        return visible;
+        hit->field_C = hit->field_8 + widget->height;
+    } else if (centred) {
+        hit->field_0 = centreX - drawHalfW + ctx->x;
+        hit->field_8 = centreY - drawHalfH + ctx->y;
+        hit->field_4 = centreX + drawHalfW + ctx->x;
+        hit->field_C = centreY + drawHalfH + ctx->y;
+    } else {
+        hit->field_0 = centreX - halfW + widget->offsetX + ctx->x;
+        hit->field_8 = centreY - halfH + widget->offsetY + ctx->y;
+        hit->field_4 = centreX + halfW + widget->offsetX + ctx->x;
+        hit->field_C = centreY + halfH + widget->offsetY + ctx->y;
     }
-    return visible;
+    if (hit->field_0 < 0) {
+        hit->field_0 = 0;
+    } else if (hit->field_0 > D_800DEA60) {
+        return 0;
+    }
+    if (hit->field_4 < 0) {
+        return 0;
+    }
+    if (hit->field_4 > D_800DEA60) {
+        hit->field_4 = D_800DEA60;
+    }
+    if (hit->field_8 < 0) {
+        hit->field_8 = 0;
+    } else if (hit->field_8 > D_800E2AB4_de) {
+        return 0;
+    }
+    if (hit->field_C < 0) {
+        return 0;
+    }
+    if (hit->field_C > D_800E2AB4_de) {
+        hit->field_C = D_800E2AB4_de;
+    }
+    if (hit->field_4 <= hit->field_0) {
+        hit->field_4 = hit->field_0 + 1;
+    }
+    if (hit->field_C <= hit->field_8) {
+        hit->field_C = hit->field_8 + 1;
+    }
+    ctx->x = draw->field_0;
+    ctx->y = draw->field_8;
+    ctx->Rgn = *draw;
+    return 1;
 }
-#else
-INCLUDE_ASM("ovl_80400000", Frontend_ComputeWidgetBounds);
-#endif
