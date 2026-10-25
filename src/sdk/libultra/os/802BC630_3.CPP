@@ -54,14 +54,14 @@ s32 func_802B7880_de(s32 arg0, s32 *arg1, s32 arg2) {
     if (value <= 0x0165A0BBULL) {
         osCreateMesgQueue(sp40, (s32)sp58, 1);
         func_802BB6C0_de(sp20, 0x0165A0BCULL - value, 0, sp40, sp58);
-        func_802BB2A0_de(sp40, (s32)sp58, 1);
+        osRecvMesg(sp40, (s32)sp58, 1);
     }
     D_8014D46C[0] = 4;
     func_802B7A20_de(0);
     __osSiRawStartDma(1, &D_8014D470);
-    func_802BB2A0_de(arg0, (s32)sp58, 1);
+    osRecvMesg(arg0, (s32)sp58, 1);
     result = __osSiRawStartDma(0, &D_8014D470);
-    func_802BB2A0_de(arg0, (s32)sp58, 1);
+    osRecvMesg(arg0, (s32)sp58, 1);
     func_802B7AD8_de(arg1, arg2);
     D_8014D4B0 = 0;
     func_802B9BC0_de();

@@ -37,7 +37,7 @@ struct Shape_typemap_165 *Scene_AllocResourceBlock(s32 arg0, void *handle, s32 t
     D_8010515C = counter;
     if (counter != 1) {
         __osRestoreInt(token);
-        func_802BB2A0_de(&D_80101140, 0, 1);
+        osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(token);
     }
@@ -66,7 +66,7 @@ struct Shape_typemap_165 *Scene_AllocResourceBlock(s32 arg0, void *handle, s32 t
     D_8010515C = counter2;
     if (counter2 != 0) {
         __osRestoreInt(token2);
-        func_802BB420_de(&D_80101140, 0, 1);
+        osSendMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(token2);
     }
@@ -86,7 +86,7 @@ struct Shape_typemap_165 *func_80254600_de(s32 unused0, s32 unused1, s32 arg2) {
     D_8010515C = counter;
     if (counter != 1) {
         __osRestoreInt(token);
-        func_802BB2A0_de(&D_80101140, 0, 1);
+        osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(token);
     }
@@ -114,7 +114,7 @@ struct Shape_typemap_165 *func_80254600_de(s32 unused0, s32 unused1, s32 arg2) {
     D_8010515C = counter2;
     if (counter2 != 0) {
         __osRestoreInt(token2);
-        func_802BB420_de(&D_80101140, 0, 1);
+        osSendMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(token2);
     }

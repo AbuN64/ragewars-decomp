@@ -94,7 +94,7 @@ void func_8023B9C0_eu(void) {
         D_800FF230.fD72 = 1;
     }
     for (i = 0; i < 8; i++) {
-        func_802BB420_de(&D_800FF230.jobs, &D_800FF230.channels[i], 1);
+        osSendMesg(&D_800FF230.jobs, &D_800FF230.channels[i], 1);
     }
     D_800FF230.f20 = 0;
     func_802BB550_de(0xC, &D_800FF230.completion, &D_800FF230.f20);
@@ -264,7 +264,7 @@ void func_8023B9B0_de(void) {
         ".Lauto_8023BBDC:\n"
         "addu       $a0, $s2, $zero\n"
         "addu       $a1, $s0, $zero\n"
-        "jal        func_802BB420_de\n"
+        "jal        osSendMesg\n"
         "addiu     $a2, $zero, 0x1\n"
         "addiu      $s1, $s1, 0x1\n"
         "sltiu      $v0, $s1, 0x8\n"
@@ -517,7 +517,7 @@ void Virtual_HandleResourcePageRequest(void) {
                 func_802BB750_de(thread);
                 return;
             }
-            func_802BB2A0_de(&D_800FF230.jobs, (void **)&job, 1);
+            osRecvMesg(&D_800FF230.jobs, (void **)&job, 1);
             D_800FF230.counters.misses++;
             job->source = region->source[page - region->start];
             job->size = 4096;
@@ -534,7 +534,7 @@ void Virtual_HandleResourcePageRequest(void) {
             job->page = page;
             job->slot = slot;
             job->thread = thread;
-            func_802BB420_de(&D_800FF230.pending, job, 1);
+            osSendMesg(&D_800FF230.pending, job, 1);
             return;
         }
         start = func_802BADC0_de();

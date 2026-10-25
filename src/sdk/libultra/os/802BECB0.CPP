@@ -14,5 +14,5 @@ void func_802B9BC0_de(void) {
     extern s32 D_800D83D0;
     D_800D83D0 = 1;
     osCreateMesgQueue(&D_8014EA78, &D_8014EA70, 1);
-    func_802BB420_de(&D_8014EA78, 0, 0);
+    osSendMesg(&D_8014EA78, 0, 0);
 }

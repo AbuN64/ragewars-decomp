@@ -95,7 +95,7 @@ void Scene_InitializeResourceCache(s32 unused, s32 count) {
     D_8010515C += 1;
     if (D_8010515C != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(&D_80101140, 0, 1);
+        osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -143,7 +143,7 @@ void Scene_InitializeResourceCache(s32 unused, s32 count) {
     D_8010515C -= 1;
     if (D_8010515C != 0) {
         __osRestoreInt(unlockMask);
-        func_802BB420_de((OSMesgQueue *)D_801047E0.lock, 0, 1);
+        osSendMesg((OSMesgQueue *)D_801047E0.lock, 0, 1);
     } else {
         __osRestoreInt(unlockMask);
     }
@@ -274,7 +274,7 @@ block_7:
         D_8010515C = temp_v1;
         if (temp_v1 != 0) {
             __osRestoreInt(mask);
-            func_802BB420_de(&D_80101140, 0, 1);
+            osSendMesg(&D_80101140, 0, 1);
             i = 0;
         } else {
             __osRestoreInt(mask);
@@ -282,7 +282,7 @@ block_7:
         }
         if (var_s1 > 0) {
             do {
-                func_802BB2A0_de(&D_80101160, 0, 1);
+                osRecvMesg(&D_80101160, 0, 1);
                 i += 1;
             } while (i < var_s1);
         }
@@ -291,7 +291,7 @@ block_7:
         D_8010515C = temp_v1_2;
         if (temp_v1_2 != 1) {
             __osRestoreInt(temp_a0);
-            func_802BB2A0_de(&D_80101140, 0, 1);
+            osRecvMesg(&D_80101140, 0, 1);
             return;
         }
         __osRestoreInt(temp_a0);
@@ -419,7 +419,7 @@ void *func_802517B4_de(s32 arg0, s32 arg1) {
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(&D_80101140, 0, 1);
+        osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -465,7 +465,7 @@ found:
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
         __osRestoreInt(temp_v0);
-        func_802BB420_de(&D_80101140, 0, 1);
+        osSendMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(temp_v0);
     }

@@ -123,7 +123,7 @@ void func_80292308_de(TimingWorld *world) {
     if (func_80253AD4_de(0) != 0) {
         Render_SubmitFrameTasks(world, D_80146CD8);
     } else {
-        func_802BB420_de(&D_801428C0, &D_80146CD8->done, 1);
+        osSendMesg(&D_801428C0, &D_80146CD8->done, 1);
     }
     if (hasFadeMode(&world->unk26DC1)) {
         speed = D_800C5454;

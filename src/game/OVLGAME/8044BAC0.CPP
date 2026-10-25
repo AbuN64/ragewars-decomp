@@ -44,7 +44,7 @@ s16 func_8044AE70_de(void) {
     func_802B7880_de(D_8010FC00, D_800CBC11, D_8010BBE0);
     func_802BAD80_de(0);
     D_800CBC1C = -1;
-    func_802BB420_de(&D_8010FBC0, 0, 1);
+    osSendMesg(&D_8010FBC0, 0, 1);
     D_8010F320 = -1;
     D_800D0E52 = 0;
     for (i = 3; i >= 0; i--) {

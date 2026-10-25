@@ -79,7 +79,7 @@ static inline void acquire(void) {
     D_8010515C = counter;
     if (counter != 1) {
         __osRestoreInt(token);
-        func_802BB2A0_de(D_801047E0.lock, 0, 1);
+        osRecvMesg(D_801047E0.lock, 0, 1);
     } else {
         __osRestoreInt(token);
     }
@@ -93,7 +93,7 @@ static inline void release(void) {
     D_8010515C = counter;
     if (counter != 0) {
         __osRestoreInt(token);
-        func_802BB420_de(D_801047E0.lock, 0, 1);
+        osSendMesg(D_801047E0.lock, 0, 1);
     } else {
         __osRestoreInt(token);
     }
@@ -127,7 +127,7 @@ static inline void lock(void) {
     D_8010515C = counter;
     if (counter != 1) {
         __osRestoreInt(token);
-        func_802BB2A0_de(D_801047E0.lock, 0, 1);
+        osRecvMesg(D_801047E0.lock, 0, 1);
     } else {
         __osRestoreInt(token);
     }
@@ -141,7 +141,7 @@ static inline void unlock(void) {
     D_8010515C = counter;
     if (counter != 0) {
         __osRestoreInt(token);
-        func_802BB420_de(D_801047E0.lock, 0, 1);
+        osSendMesg(D_801047E0.lock, 0, 1);
     } else {
         __osRestoreInt(token);
     }
@@ -263,7 +263,7 @@ void func_802524B0_de(void *arg) {
     s32 flags;
 
     for (;;) {
-        func_802BB2A0_de(&D_801047E0, &request, 1);
+        osRecvMesg(&D_801047E0, &request, 1);
         if ((u32)request < 2) {
             lock();
             func_80254F9C_de(0, request);

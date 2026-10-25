@@ -41,7 +41,7 @@ void func_802BB8B0_de(void)
         t->prev = 0;
 
         if (t->mq != 0) {
-            func_802BB420_de(t->mq, t->msg, 0);
+            osSendMesg(t->mq, t->msg, 0);
         }
 
         if (t->interval != 0) {

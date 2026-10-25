@@ -591,7 +591,7 @@ void func_802A3718_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *cam
     gDPPipeSync(D_80110634++);
     switch (info.frame->kind) {
     case 3:
-        func_80268CE0_de(0x29);
+        Render_SetCombineMode(0x29);
         if (camera->monochrome) {
             grey = track->env[0] + track->env[1] + track->env[2];
             gDPSetEnvColor(D_80110634++, 0, 0, grey / 3, 255);
@@ -604,7 +604,7 @@ void func_802A3718_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *cam
         break;
     case 0:
     case 1:
-        func_80268CE0_de(0x28);
+        Render_SetCombineMode(0x28);
         break;
     }
     Render_SetModePreset(0xD);

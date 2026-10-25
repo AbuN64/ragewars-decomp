@@ -18,13 +18,13 @@ void func_8025657C_de(CartridgeReadWorker *worker) {
     void *done;
 
     for (;;) {
-        func_802BB2A0_de(&worker->requestQueueStorage, &request, 1);
+        osRecvMesg(&worker->requestQueueStorage, &request, 1);
         func_802BD280_de(request->buffer, request->size);
         func_802B9A40_de(0, request->devAddr, request->buffer, request->size);
-        func_802BB2A0_de(&worker->completionQueueStorage, &done, 1);
+        osRecvMesg(&worker->completionQueueStorage, &done, 1);
         func_802BCF70_de(request->buffer, request->size);
         if (request->replyQueue != 0) {
-            func_802BB420_de(request->replyQueue, request->replyMsg, 1);
+            osSendMesg(request->replyQueue, request->replyMsg, 1);
         }
         func_80256688_de(worker, request);
     }

@@ -27,7 +27,7 @@
 extern Gfx *D_80110634;
 extern Rules_func_80228FB8_de D_801468A0[];
 extern s32 D_800D297C;
-extern void func_80268CE0_de(s32);
+extern void Render_SetCombineMode(s32);
 extern void func_8024A3B0_de(LevelActor *, PlayerCode80225D10 *, s32, Draw *);
 
 void func_80228FB8_de(LevelActor *actor, s32 arg1, Draw *draw) {
@@ -38,7 +38,7 @@ void func_80228FB8_de(LevelActor *actor, s32 arg1, Draw *draw) {
         player = actor->controller;
         if (player != 0) {
             gDPSetRenderMode(D_80110634++, 0xC4404B50, 0);
-            func_80268CE0_de(2);
+            Render_SetCombineMode(2);
             if (D_801468A0->teams != 0 && player->controls->unk8F != 0) {
                 actor->team = D_801468A0->colour;
             } else {

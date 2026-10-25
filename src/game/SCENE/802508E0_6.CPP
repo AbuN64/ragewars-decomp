@@ -109,7 +109,7 @@ extern Gfx *D_80110634;
 extern struct Shape_func_8021A2D4_de_2 D_80105180;
 extern Manager D_801047E0;
 extern u32 func_802BCF30_de(void);
-extern void func_80268CE0_de(s32);
+extern void Render_SetCombineMode(s32);
 extern void Render_SetModePreset(s32);
 
 /* The main heap (its other users declare D_801051A0 as a plain byte); its block list is read through this view. */
@@ -128,7 +128,7 @@ static inline void lock(void) {
     D_8010515C = counter;
     if (counter != 1) {
         __osRestoreInt(token);
-        func_802BB2A0_de(D_801047E0.lock, 0, 1);
+        osRecvMesg(D_801047E0.lock, 0, 1);
     } else {
         __osRestoreInt(token);
     }
@@ -141,7 +141,7 @@ static inline void unlock(void) {
     D_8010515C = counter;
     if (counter != 0) {
         __osRestoreInt(token);
-        func_802BB420_de(D_801047E0.lock, 0, 1);
+        osSendMesg(D_801047E0.lock, 0, 1);
     } else {
         __osRestoreInt(token);
     }
@@ -167,7 +167,7 @@ void Scene_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom)
 
     gDPPipeSync(D_80110634++);
     gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
-    func_80268CE0_de(0x19);
+    Render_SetCombineMode(0x19);
     Render_SetModePreset(0x15);
     gDPSetPrimColor(D_80110634++, 0, 0, 0xA0, 0xA0, 0xA0, 0x00);
     gDPFillRectangle(D_80110634++, left - 1, top - 1, right + 1, bottom + 1);

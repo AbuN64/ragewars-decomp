@@ -54,7 +54,7 @@ s32 func_8025842C_de(void *arg0) {
     ((MenuRules *)(queue))->locked = count;
     if (count != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(queue, 0, 1);
+        osRecvMesg(queue, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -68,7 +68,7 @@ s32 func_8025842C_de(void *arg0) {
         ((MenuRules *)(queue2))->locked = count2;
         if (count2 != 0) {
             __osRestoreInt(mask2);
-            func_802BB420_de(queue2, 0, 1);
+            osSendMesg(queue2, 0, 1);
         } else {
             __osRestoreInt(mask2);
         }
@@ -121,7 +121,7 @@ s32 func_802585F4_de(struct ContextRecAt2BC0 *arg0, s32 arg1) {
         temp_s0->locked = temp_v1;
         if (temp_v1 != 1) {
             __osRestoreInt(mask);
-            func_802BB2A0_de(temp_s0, 0, 1);
+            osRecvMesg(temp_s0, 0, 1);
         } else {
             __osRestoreInt(mask);
         }
@@ -137,7 +137,7 @@ s32 func_802585F4_de(struct ContextRecAt2BC0 *arg0, s32 arg1) {
         temp_s0->locked = temp_v1;
         if (temp_v1 != 0) {
             __osRestoreInt(temp_v0);
-            func_802BB420_de(temp_s0, 0, 1);
+            osSendMesg(temp_s0, 0, 1);
         } else {
             __osRestoreInt(temp_v0);
         }
@@ -154,7 +154,7 @@ s32 func_802585F4_de(struct ContextRecAt2BC0 *arg0, s32 arg1) {
         temp_s0->locked = temp_v1;
         if (temp_v1 != 0) {
             __osRestoreInt(temp_v0);
-            func_802BB420_de(temp_s0, 0, 1);
+            osSendMesg(temp_s0, 0, 1);
         } else {
             __osRestoreInt(temp_v0);
         }
@@ -171,7 +171,7 @@ s32 func_802585F4_de(struct ContextRecAt2BC0 *arg0, s32 arg1) {
         temp_s0->locked = temp_v1;
         if (temp_v1 != 0) {
             __osRestoreInt(temp_v0);
-            func_802BB420_de(temp_s0, 0, 1);
+            osSendMesg(temp_s0, 0, 1);
         } else {
             __osRestoreInt(temp_v0);
         }
@@ -197,7 +197,7 @@ void func_80258740_de(s32 *engine) {
     menuRules->locked = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(menuRules, 0, 1);
+        osRecvMesg(menuRules, 0, 1);
         return;
     }
     __osRestoreInt(mask);
@@ -221,7 +221,7 @@ void func_802587A4_de(s32 *engine) {
     menuRules->locked = temp_v1;
     if (temp_v1 != 0) {
         __osRestoreInt(mask);
-        func_802BB420_de(menuRules, 0, 1);
+        osSendMesg(menuRules, 0, 1);
         return;
     }
     __osRestoreInt(mask);

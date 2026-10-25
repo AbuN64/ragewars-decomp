@@ -354,7 +354,7 @@ void Render_DrawLinkedGeometry(VertexArena *pool, GameplayCamera *camera) {
     gSPBranchList(D_80110634++, 0);
     gDPPipeSync(D_80110634++);
     Render_SetModePreset(0xE);
-    func_80268CE0_de(0x1C);
+    Render_SetCombineMode(0x1C);
     /* 0x80 has no F3DEX2 geometry-mode name. */
     gSPGeometryMode(D_80110634++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);
     gSPGeometryMode(D_80110634++, 0, G_SHADE | G_SHADING_SMOOTH);

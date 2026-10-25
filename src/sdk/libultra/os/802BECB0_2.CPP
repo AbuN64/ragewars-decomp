@@ -21,7 +21,7 @@ static inline void create_access_queue(void) {
     extern OSMesg D_8014EA70;
     D_800D83D0[0] = 1;
     osCreateMesgQueue(&D_8014EA78, &D_8014EA70, 1);
-    func_802BB420_de(&D_8014EA78, 0, 0);
+    osSendMesg(&D_8014EA78, 0, 0);
 }
 
 void func_802B9C14_de(void) {
@@ -31,5 +31,5 @@ void func_802B9C14_de(void) {
     if (!D_800D83D0[0]) {
         create_access_queue();
     }
-    func_802BB2A0_de(&D_8014EA78, &token, 1);
+    osRecvMesg(&D_8014EA78, &token, 1);
 }

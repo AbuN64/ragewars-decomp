@@ -105,14 +105,14 @@ void func_802BA4C0_de(struct OSDevMgr *arg)
     dm = arg;
 
     while (1) {
-        func_802BB2A0_de(dm->evtQueue, (OSMesg *)&mb, 1);
+        osRecvMesg(dm->evtQueue, (OSMesg *)&mb, 1);
         switch (mb->hdr.type) {
             case 13:
                 func_802BA910_de();
                 if (--*viRetrace() == 0) {
                     vc = func_802BA640_de();
                     if (vc->msgq != 0) {
-                        func_802BB420_de(vc->msgq, vc->msg, 0);
+                        osSendMesg(vc->msgq, vc->msg, 0);
                     }
                     *viRetrace() = vc->retraceCount;
                 }

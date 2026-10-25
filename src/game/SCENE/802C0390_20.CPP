@@ -11,7 +11,7 @@ extern void *__osPopThread(OSMesgQueue *queue);
 
 extern void func_802BB750_de(void *value);
 
-s32 func_802BB420_de(OSMesgQueue *queue, OSMesg entry, s32 mode) {
+s32 osSendMesg(OSMesgQueue *queue, OSMesg entry, s32 mode) {
     s32 saved;
 
     saved = func_802BCF30_de();

@@ -104,7 +104,7 @@ void System_RunPiManager(void *argument) {
     s32 twoBlocks, result;
 
     for (;;) {
-        func_802BB2A0_de(manager->commandQueue, (OSMesg *)&request, 1);
+        osRecvMesg(manager->commandQueue, (OSMesg *)&request, 1);
         handle = (PiDiskHandle *)request->handle;
         if (handle != 0 && handle->type == 2 &&
             (transfer = &handle->transfer)->command <= 1) {
@@ -117,12 +117,12 @@ void System_RunPiManager(void *argument) {
             if (handle->transfer.mode == 2) {
                 twoBlocks = ((PiDiskTransfer *)request->handle->transferInfo)->command == 0;
             }
-            func_802BB2A0_de(manager->accessQueue, &access, 1);
+            osRecvMesg(manager->accessQueue, &access, 1);
             func_802BB3D0_de(0x100401);
             func_802B9730_de(request->handle, 0x05000510, handle->transfer.control | 0x80000000);
             diskEvent:
             {
-                func_802BB2A0_de(manager->eventQueue, &event, 1);
+                osRecvMesg(manager->eventQueue, &event, 1);
                 handle = (PiDiskHandle *)request->handle;
                 transfer = &handle->transfer;
                 block = &transfer->blocks[handle->transfer.blockNumber];
@@ -137,14 +137,14 @@ void System_RunPiManager(void *argument) {
                     *(volatile u32 *)0xA4600010 = 2;
                     func_802BB850_eu(0x100C01);
                 }
-                func_802BB420_de(request->replyQueue, request, 0);
+                osSendMesg(request->replyQueue, request, 0);
                 if (twoBlocks == 1 &&
                     ((PiDiskTransfer *)request->handle->transferInfo)->blocks[0].error == 0) {
                     twoBlocks = 0;
                     goto diskEvent;
                 }
             }
-            func_802BB420_de(manager->accessQueue, 0, 0);
+            osSendMesg(manager->accessQueue, 0, 0);
             if (((PiDiskTransfer *)request->handle->transferInfo)->blockNumber == 1) {
                 func_802BBC20_de();
             }
@@ -152,32 +152,32 @@ void System_RunPiManager(void *argument) {
         }
         switch (request->type) {
         case 11:
-            func_802BB2A0_de(manager->accessQueue, &access, 1);
+            osRecvMesg(manager->accessQueue, &access, 1);
             result = manager->dma(0, request->deviceAddress, request->dramAddress, request->size);
             break;
         case 12:
-            func_802BB2A0_de(manager->accessQueue, &access, 1);
+            osRecvMesg(manager->accessQueue, &access, 1);
             result = manager->dma(1, request->deviceAddress, request->dramAddress, request->size);
             break;
         case 15:
-            func_802BB2A0_de(manager->accessQueue, &access, 1);
+            osRecvMesg(manager->accessQueue, &access, 1);
             result = manager->extendedDma(request->handle, 0, request->deviceAddress, request->dramAddress, request->size);
             break;
         case 16:
-            func_802BB2A0_de(manager->accessQueue, &access, 1);
+            osRecvMesg(manager->accessQueue, &access, 1);
             result = manager->extendedDma(request->handle, 1, request->deviceAddress, request->dramAddress, request->size);
             break;
         case 10:
-            func_802BB420_de(request->replyQueue, request, 0);
+            osSendMesg(request->replyQueue, request, 0);
             /* A loopback message has no DMA completion to wait for. */
         default:
             result = -1;
             break;
         }
         if (result == 0) {
-            func_802BB2A0_de(manager->eventQueue, &event, 1);
-            func_802BB420_de(request->replyQueue, request, 0);
-            func_802BB420_de(manager->accessQueue, 0, 0);
+            osRecvMesg(manager->eventQueue, &event, 1);
+            osSendMesg(request->replyQueue, request, 0);
+            osSendMesg(manager->accessQueue, 0, 0);
         }
     }
 }

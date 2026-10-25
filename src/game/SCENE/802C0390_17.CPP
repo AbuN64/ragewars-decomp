@@ -9,7 +9,7 @@ extern void func_802BC36C_de(void *);
 extern void *__osPopThread(void *);
 extern void func_802BB750_de(void *);
 
-s32 func_802BB2A0_de(OSMesgQueue *queue, OSMesg *message, s32 block)
+s32 osRecvMesg(OSMesgQueue *queue, OSMesg *message, s32 block)
 {
     u32 mask = func_802BCF30_de();
 

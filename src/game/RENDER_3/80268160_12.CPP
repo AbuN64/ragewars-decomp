@@ -9,7 +9,7 @@
 
 /* Selects a cached RDP color-combiner mode and emits the corresponding display-list command. */
 extern Gfx *D_80110634;
-void func_80268CE0_de(u32 mode) {
+void Render_SetCombineMode(u32 mode) {
  if (D_800CC360 != mode) {
  D_800CC360=mode;
  switch(mode) {
@@ -335,7 +335,7 @@ void func_80295FB4_us_rev1(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #else
 void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
-void func_80268CE0_de(u32);
+void Render_SetCombineMode(u32);
 s32 Render_SetModePreset(s32);
 void Scene_UnlockResource(s32, void *);
 s32 func_802744D4_de(void);
@@ -440,16 +440,16 @@ a = func_802744D4_de() % info.count;
             }
             if (flags & 2) {
                 if (!(flags & 0x1000)) {
-                    func_80268CE0_de(2);
+                    Render_SetCombineMode(2);
                 } else if (D_800D15E0 == 0) {
-                    func_80268CE0_de(0);
+                    Render_SetCombineMode(0);
                 } else {
-                    func_80268CE0_de(1);
+                    Render_SetCombineMode(1);
                 }
             } else if (!(flags & 0x1000)) {
-                func_80268CE0_de(4);
+                Render_SetCombineMode(4);
             } else {
-                func_80268CE0_de(3);
+                Render_SetCombineMode(3);
             }
             Scene_UnlockResource(0, node);
         } else if (flags & 2) {
@@ -458,34 +458,34 @@ a = func_802744D4_de() % info.count;
                     case 4:
                     case 5:
                         gDPSetEnvColor(D_80110634++, mat->unk14, mat->unk15, mat->unk16, mat->unk17);
-                        func_80268CE0_de(0x23);
+                        Render_SetCombineMode(0x23);
                         break;
                     default:
-                        func_80268CE0_de(5);
+                        Render_SetCombineMode(5);
                         break;
                 }
             } else if (D_800D15E0 == 0) {
-                func_80268CE0_de(6);
+                Render_SetCombineMode(6);
             } else {
                 gDPSetEnvColor(D_80110634++, D_800D15E4[0], D_800D15E4[1], D_800D15E4[2], D_800D15E4[3]);
                 switch (D_800D15E0) {
                     case 1:
                     case 2:
-                        func_80268CE0_de(7);
+                        Render_SetCombineMode(7);
                         break;
                     case 3:
-                        func_80268CE0_de(8);
+                        Render_SetCombineMode(8);
                         break;
                     case 7:
-                        func_80268CE0_de(9);
+                        Render_SetCombineMode(9);
                         break;
                     case 4:
                     case 5:
-                        func_80268CE0_de(10);
+                        Render_SetCombineMode(10);
                         break;
                     case 6:
                         gDPSetPrimColor(D_80110634++, 0, 0, mat->unk10, mat->unk11, mat->unk12, D_800D15E4[4]);
-                        func_80268CE0_de(0xB);
+                        Render_SetCombineMode(0xB);
                         break;
                     default:
                         break;
@@ -497,38 +497,38 @@ a = func_802744D4_de() % info.count;
                 switch (info.frame->unk5) {
                     case 4:
                         gDPSetEnvColor(D_80110634++, mat->unk14, mat->unk15, mat->unk16, mat->unk17);
-                        func_80268CE0_de(0x25);
+                        Render_SetCombineMode(0x25);
                         break;
                     case 5:
                         gDPSetEnvColor(D_80110634++, mat->unk14, mat->unk15, mat->unk16, mat->unk17);
-                        func_80268CE0_de(0x24);
+                        Render_SetCombineMode(0x24);
                         break;
                     default:
-                        func_80268CE0_de(0xC);
+                        Render_SetCombineMode(0xC);
                         break;
                 }
             } else if (D_800D15E0 == 0) {
-                func_80268CE0_de(0xD);
+                Render_SetCombineMode(0xD);
             } else {
                 gDPSetEnvColor(D_80110634++, D_800D15E4[0], D_800D15E4[1], D_800D15E4[2], D_800D15E4[3]);
                 switch (D_800D15E0) {
                     case 1:
                     case 2:
-                        func_80268CE0_de(0xE);
+                        Render_SetCombineMode(0xE);
                         break;
                     case 3:
-                        func_80268CE0_de(0xF);
+                        Render_SetCombineMode(0xF);
                         break;
                     case 7:
-                        func_80268CE0_de(9);
+                        Render_SetCombineMode(9);
                         break;
                     case 4:
                     case 5:
-                        func_80268CE0_de(0x10);
+                        Render_SetCombineMode(0x10);
                         break;
                     case 6:
                         gDPSetPrimColor(D_80110634++, 0, 0, mat->unk10, mat->unk11, mat->unk12, D_800D15E4[4]);
-                        func_80268CE0_de(0x11);
+                        Render_SetCombineMode(0x11);
                         break;
                     default:
                         break;
@@ -557,29 +557,29 @@ a = func_802744D4_de() % info.count;
         }
         gSPTexture(D_80110634++, 0, 0, 0, 0, 0);
         if (flags & 2) {
-            func_80268CE0_de(0x12);
+            Render_SetCombineMode(0x12);
         } else if (D_800D15E0 == 0) {
-            func_80268CE0_de(0x13);
+            Render_SetCombineMode(0x13);
         } else {
             gDPSetEnvColor(D_80110634++, D_800D15E4[0], D_800D15E4[1], D_800D15E4[2], D_800D15E4[3]);
             switch (D_800D15E0) {
                 case 1:
                 case 2:
-                    func_80268CE0_de(0x14);
+                    Render_SetCombineMode(0x14);
                     break;
                 case 3:
-                    func_80268CE0_de(0x15);
+                    Render_SetCombineMode(0x15);
                     break;
                 case 7:
-                    func_80268CE0_de(0x16);
+                    Render_SetCombineMode(0x16);
                     break;
                 case 4:
                 case 5:
-                    func_80268CE0_de(0x17);
+                    Render_SetCombineMode(0x17);
                     break;
                 case 6:
                     gDPSetPrimColor(D_80110634++, 0, 0, mat->unk10, mat->unk11, mat->unk12, D_800D15E4[4]);
-                    func_80268CE0_de(0x11);
+                    Render_SetCombineMode(0x11);
                     break;
                 default:
                     break;

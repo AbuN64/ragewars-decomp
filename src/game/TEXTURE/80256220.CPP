@@ -73,7 +73,7 @@ void func_8025637C_de(struct CartridgeReadWorker *cartridgeReadWorker, u32 arg1,
         chunk->length = length;
         chunk->queue = queue;
         func_802BB160_de(&cartridgeReadWorker->requestQueueStorage, chunk, 1);
-        func_802BB2A0_de(queue, &completed, 1);
+        osRecvMesg(queue, &completed, 1);
         remaining -= length;
     } while (remaining != 0);
 }
@@ -116,7 +116,7 @@ void func_80256454_de(struct CartridgeReadWorker *arg0, u32 source, s32 length, 
                 chunk->queue = queue;
                 chunk->value = value;
             }
-            func_802BB420_de(&arg0->requestQueueStorage, (s32)chunk, 1);
+            osSendMesg(&arg0->requestQueueStorage, (s32)chunk, 1);
         } while ((chunk != 0) && (remaining != 0));
     }
 }

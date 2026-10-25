@@ -25,9 +25,9 @@ s32 func_80448470_eu_x(OSMesgQueue *queue, u8 *pattern) {
     do {
         func_8044799C_de(0);
         __osSiRawStartDma(1, &D_80154110);
-        func_802BB2A0_de(queue, &dummy, 1);
+        osRecvMesg(queue, &dummy, 1);
         ret = __osSiRawStartDma(0, &D_80154110);
-        func_802BB2A0_de(queue, &dummy, 1);
+        osRecvMesg(queue, &dummy, 1);
         func_80447A38_de(&bitpattern, data);
         for (i = 0; i < D_8014D46C[0]; i++) {
             if (!(data[i].team & 4)) {

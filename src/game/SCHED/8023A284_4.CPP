@@ -67,7 +67,7 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
             switch (format) {
             case 2:
             default:
-                func_80268CE0_de(32);
+                Render_SetCombineMode(32);
                 gDPSetEnvColor(D_80110634++, descriptor->envRed, descriptor->envGreen, descriptor->envBlue, 255);
                 center[0] = descriptor->red;
                 center[1] = descriptor->green;
@@ -77,7 +77,7 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
                 rim[2] = descriptor->blue;
                 break;
             case 0: case 1:
-                func_80268CE0_de(33);
+                Render_SetCombineMode(33);
                 center[0] = 255; center[1] = 255; center[2] = 255;
                 rim[0] = 255; rim[1] = 255; rim[2] = 255;
                 break;

@@ -20,7 +20,7 @@ extern s32 Render_StartWorldEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 extern void func_802AA8EC_de(s32 arg0, s32 arg1, void **arg2, s32 *arg3);
 extern void Scene_UnlockResource(s32 arg0, s32 arg1);
 extern void Render_SetModePreset(u32);
-extern void func_80268CE0_de(u32);
+extern void Render_SetCombineMode(u32);
 
 #if defined(VERSION_EU_X)
 void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
@@ -54,7 +54,7 @@ void Text_SetupFillMode(void) {
     gfx = D_80110634++;
     gDPSetCycleType(gfx, G_CYC_1CYCLE);
     Render_SetModePreset(0x15);
-    func_80268CE0_de(0x19);
+    Render_SetCombineMode(0x19);
 }
 #endif
 
@@ -161,7 +161,7 @@ void Text_SetupFillMode(void) {
     gfx = D_80110634++;
     gDPSetCycleType(gfx, G_CYC_1CYCLE);
     Render_SetModePreset(0x15);
-    func_80268CE0_de(0x19);
+    Render_SetCombineMode(0x19);
 }
 
 void func_802AAA54_de(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {

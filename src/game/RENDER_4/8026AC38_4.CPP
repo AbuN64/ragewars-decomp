@@ -21,7 +21,7 @@ extern u32 D_800E28A4;
 extern char D_8013B2D8;
 extern void Scene_MarkResourceInUse(s32 heap, void **resource);
 extern s32 Render_SetupMaterial(void *material, s32 pass);
-extern void func_80268CE0_de(s32 mode);
+extern void Render_SetCombineMode(s32 mode);
 
 void func_8026C978_de(void **resource, s32 matrix, s32 segment, s32 lights, void *textures, s32 pass) {
     void *header;
@@ -38,7 +38,7 @@ void func_8026C978_de(void **resource, s32 matrix, s32 segment, s32 lights, void
         return;
     }
     gDPSetRenderMode(D_80110634++, 0x0C184F50, 0);
-    func_80268CE0_de(2);
+    Render_SetCombineMode(2);
     if (segment != 0) { gSPSegment(D_80110634++, 1, matrix); } else { gSPMatrix(D_80110634++, matrix, G_MTX_LOAD); }
     if (lights != 0) {
         Gfx *cmd = D_80110634++;
@@ -199,7 +199,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
     }
     if (Render_SetupMaterial(shared, pass) != 0) {
         gDPSetRenderMode(D_80110634++, 0x0C184DD8, 0);
-        func_80268CE0_de(1);
+        Render_SetCombineMode(1);
         if (segment != 0) {
             gSPSegment(D_80110634++, 1, matrix);
         } else {
@@ -318,7 +318,7 @@ void Render_DrawModelWithSharedMaterial(void **resource, void *matrix, s32 segme
         return;
     }
     gDPSetRenderMode(D_80110634++, 0x0C184DD8, 0);
-    func_80268CE0_de(1);
+    Render_SetCombineMode(1);
     if (segment != 0) { gSPSegment(D_80110634++, 1, matrix); } else { gSPMatrix(D_80110634++, matrix, G_MTX_LOAD); }
     Scene_MarkResourceInUse(0, resource);
     header = *resource;

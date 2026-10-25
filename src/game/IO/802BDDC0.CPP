@@ -32,7 +32,7 @@ s32 func_802B8CF0_de(OSIoMesg *entry, s32 subtype, s32 arg2, s32 arg3,
     entry->size = arg5;
     entry->piHandle = 0;
     if (subtype != 1) {
-        return func_802BB420_de(func_802B8DA0_de(), (s32)entry, 0);
+        return osSendMesg(func_802B8DA0_de(), (s32)entry, 0);
     }
     return func_802BB160_de(func_802B8DA0_de(), entry, 0);
 }

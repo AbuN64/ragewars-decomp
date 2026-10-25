@@ -15,7 +15,7 @@ void func_8020095C_de(u32 address,u8 *out,u32 count) {
  while(count>3) {
   if(count>=16 && ((((u32)out&15)==0) & (status!=-1))) {
    status=func_802B8CF0_de(D_800F2CE0,1,0,address,out,count,D_800F2CC0);
-   if(status!=-1) { func_802BB2A0_de(D_800F2CC0,0,1); count=0; }
+   if(status!=-1) { osRecvMesg(D_800F2CC0,0,1); count=0; }
   } else {
    word=func_802005A0_de(address);
    *out++=word>>24; *out++=word>>16; *out++=word>>8; *out++=word;

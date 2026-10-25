@@ -57,7 +57,7 @@ struct Shape_typemap_165 *Scene_AllocateResource(s32 arg0, s32 arg1, u32 arg2, v
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(&D_80101140, 0, 1);
+        osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -67,7 +67,7 @@ struct Shape_typemap_165 *Scene_AllocateResource(s32 arg0, s32 arg1, u32 arg2, v
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
         __osRestoreInt(temp_v0);
-        func_802BB420_de(&D_80101140, 0, 1);
+        osSendMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(temp_v0);
     }
@@ -88,7 +88,7 @@ struct Shape_typemap_165 *Scene_AllocateResourceAt(void *arg0, void *arg1, s32 a
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(&D_80101140, 0, 1);
+        osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -110,7 +110,7 @@ struct Shape_typemap_165 *Scene_AllocateResourceAt(void *arg0, void *arg1, s32 a
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
         __osRestoreInt(temp_v0_2);
-        func_802BB420_de(&D_80101140, 0, 1);
+        osSendMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(temp_v0_2);
     }
@@ -131,7 +131,7 @@ void Scene_LockResource(void *arg0, Node80253610 *resource) {
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(&D_80101140, 0, 1);
+        osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -143,7 +143,7 @@ void Scene_LockResource(void *arg0, Node80253610 *resource) {
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
         __osRestoreInt(temp_v0);
-        func_802BB420_de(&D_80101140, 0, 1);
+        osSendMesg(&D_80101140, 0, 1);
         return;
     }
     __osRestoreInt(temp_v0);
@@ -163,7 +163,7 @@ void Scene_UnlockResource(void *arg0, Node80253610 *arg1) {
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(&D_80101140, 0, 1);
+        osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -176,7 +176,7 @@ void Scene_UnlockResource(void *arg0, Node80253610 *arg1) {
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
         __osRestoreInt(temp_v0);
-        func_802BB420_de(&D_80101140, 0, 1);
+        osSendMesg(&D_80101140, 0, 1);
         return;
     }
     __osRestoreInt(temp_v0);
@@ -194,7 +194,7 @@ void Scene_ReleaseResource(void *arg0, void *arg1) {
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(&D_80101140, 0, 1);
+        osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -204,7 +204,7 @@ void Scene_ReleaseResource(void *arg0, void *arg1) {
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
         __osRestoreInt(temp_v0);
-        func_802BB420_de(&D_80101140, 0, 1);
+        osSendMesg(&D_80101140, 0, 1);
         return;
     }
     __osRestoreInt(temp_v0);
@@ -222,7 +222,7 @@ void func_80253908_de(s32 unusedHeap) {
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(&D_80101140, 0, 1);
+        osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -235,7 +235,7 @@ void func_80253908_de(s32 unusedHeap) {
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
         __osRestoreInt(temp_v0);
-        func_802BB420_de(&D_80101140, 0, 1);
+        osSendMesg(&D_80101140, 0, 1);
         return;
     }
     __osRestoreInt(temp_v0);
@@ -253,7 +253,7 @@ void func_802539EC_de(s32 unused, s32 arg1) {
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(&((ResourceLockState *)&D_801005A8)->waitQueue, 0, 1);
+        osRecvMesg(&((ResourceLockState *)&D_801005A8)->waitQueue, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -265,7 +265,7 @@ void func_802539EC_de(s32 unused, s32 arg1) {
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
         __osRestoreInt(temp_v0);
-        func_802BB420_de(&base->waitQueue, 0, 1);
+        osSendMesg(&base->waitQueue, 0, 1);
         return;
     }
     __osRestoreInt(temp_v0);
@@ -284,7 +284,7 @@ s32 func_80253AD4_de(void) {
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(((char *)&D_801005A8 + 0xB98), 0, 1);
+        osRecvMesg(((char *)&D_801005A8 + 0xB98), 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -296,7 +296,7 @@ s32 func_80253AD4_de(void) {
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
         __osRestoreInt(temp_v0);
-        func_802BB420_de((char *)base + 0xB98, 0, 1);
+        osSendMesg((char *)base + 0xB98, 0, 1);
     } else {
         __osRestoreInt(temp_v0);
     }
@@ -321,7 +321,7 @@ void Scene_MarkResourceInUse(s32 unused0, Node80253610 *arg1) {
     D_8010515C = counter;
     if (counter != 1) {
         __osRestoreInt(token);
-        func_802BB2A0_de(((char *)base + 0xB98), 0, 1);
+        osRecvMesg(((char *)base + 0xB98), 0, 1);
     } else {
         __osRestoreInt(token);
     }
@@ -343,7 +343,7 @@ void Scene_MarkResourceInUse(s32 unused0, Node80253610 *arg1) {
     D_8010515C = counter2;
     if (counter2 != 0) {
         __osRestoreInt(token2);
-        func_802BB420_de(&D_80101140, 0, 1);
+        osSendMesg(&D_80101140, 0, 1);
         return;
     }
     __osRestoreInt(token2);

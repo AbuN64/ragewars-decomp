@@ -33,7 +33,7 @@ static inline void acquire(void) {
     D_8010515C = count;
     if (count != 1) {
         __osRestoreInt(token);
-        func_802BB2A0_de(D_801047E0.lock, 0, 1);
+        osRecvMesg(D_801047E0.lock, 0, 1);
     } else __osRestoreInt(token);
 }
 static inline void release(void) {
@@ -42,7 +42,7 @@ static inline void release(void) {
     D_8010515C = count;
     if (count != 0) {
         __osRestoreInt(token);
-        func_802BB420_de(D_801047E0.lock, 0, 1);
+        osSendMesg(D_801047E0.lock, 0, 1);
     } else __osRestoreInt(token);
 }
 static inline void find(u32 key, ResourceLoadRequest **out) {

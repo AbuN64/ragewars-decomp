@@ -56,7 +56,7 @@ void Scene_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, s
     D_8010515C = counter;
     if (counter != 1) {
         __osRestoreInt(token);
-        func_802BB2A0_de(&D_80101140, 0, 1);
+        osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(token);
     }
@@ -86,7 +86,7 @@ void Scene_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, s
     D_8010515C = counter2;
     if (counter2 != 0) {
         __osRestoreInt(token2);
-        func_802BB420_de(&D_80101140, 0, 1);
+        osSendMesg(&D_80101140, 0, 1);
         return;
     }
     __osRestoreInt(token2);
@@ -109,7 +109,7 @@ void func_80253E64_de(s32 arg0, NodePair80253E04 *arg1, Node80253610 *arg2) {
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(&D_80101140, 0, 1);
+        osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -135,7 +135,7 @@ void func_80253E64_de(s32 arg0, NodePair80253E04 *arg1, Node80253610 *arg2) {
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
         __osRestoreInt(temp_v0);
-        func_802BB420_de(&D_80101140, 0, 1);
+        osSendMesg(&D_80101140, 0, 1);
         return;
     }
     __osRestoreInt(temp_v0);
@@ -156,7 +156,7 @@ void func_80253F8C_de(s32 arg0, s32 arg1) {
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(&D_80101140, 0, 1);
+        osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -199,7 +199,7 @@ found:
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
         __osRestoreInt(temp_v0);
-        func_802BB420_de(&D_80101140, 0, 1);
+        osSendMesg(&D_80101140, 0, 1);
         return;
     }
     __osRestoreInt(temp_v0);
@@ -222,7 +222,7 @@ void **func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 direct)
         D_8010515C = counter;
         if (counter != 1) {
             __osRestoreInt(token);
-            func_802BB2A0_de(&D_80101140, 0, 1);
+            osRecvMesg(&D_80101140, 0, 1);
         } else {
             __osRestoreInt(token);
         }
@@ -232,7 +232,7 @@ void **func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 direct)
         D_8010515C = counter2;
         if (counter2 != 0) {
             __osRestoreInt(token2);
-            func_802BB420_de(&D_80101140, 0, 1);
+            osSendMesg(&D_80101140, 0, 1);
         } else {
             __osRestoreInt(token2);
         }
@@ -263,7 +263,7 @@ s32 func_80254284_de(s32 arg0, void **handle, s32 tempv0, void *arg3) {
     D_8010515C = counter;
     if (counter != one) {
         __osRestoreInt(token);
-        func_802BB2A0_de(&D_80101140, 0, one);
+        osRecvMesg(&D_80101140, 0, one);
     } else {
         __osRestoreInt(token);
     }
@@ -273,7 +273,7 @@ s32 func_80254284_de(s32 arg0, void **handle, s32 tempv0, void *arg3) {
     D_8010515C = counter2;
     if (counter2 != 0) {
         __osRestoreInt(token2);
-        func_802BB420_de(&D_80101140, 0, 1);
+        osSendMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(token2);
     }

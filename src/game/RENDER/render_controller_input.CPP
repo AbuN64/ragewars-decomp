@@ -27,7 +27,7 @@ void Render_ReadControllerStates(void) {
 
     switch (D_8010BBB8) {
     case 0:
-        func_802BB2A0_de((OSMesgQueue *)&D_8010FC00, (OSMesg *)D_8010BBD8, 1);
+        osRecvMesg((OSMesgQueue *)&D_8010FC00, (OSMesg *)D_8010BBD8, 1);
         func_802B75F4_de(D_8010AEA0);
         D_8010B0E0.port = -1;
         D_8010B0E0.connected = 0;
@@ -75,7 +75,7 @@ void Render_ReadControllerStates(void) {
         D_8010B0E0.previousStickY = (s32)(D_8010B0E0.previousStickY * scale);
         break;
     case 1:
-        func_802BB2A0_de((OSMesgQueue *)&D_8010FC00, (OSMesg *)D_8010BBD8, 1);
+        osRecvMesg((OSMesgQueue *)&D_8010FC00, (OSMesg *)D_8010BBD8, 1);
         func_802B7538_de(D_8010BBE0);
         for (i = 0; i < 4; i++) {
             func_80263CF0_de(&D_8010F328[i]);
@@ -110,7 +110,7 @@ void func_80263AF4_de(void) {
 
     if (D_800CBC10 != 0) {
         func_80285C78_de(&D_8010EC90);
-        if ((locked = func_802BB2A0_de(&D_8010FBC0, 0, 0) == 0)) {
+        if ((locked = osRecvMesg(&D_8010FBC0, 0, 0) == 0)) {
             D_800CBC1C = func_802BAD80_de(0);
         }
         if (locked) {
@@ -135,7 +135,7 @@ void func_80263AF4_de(void) {
                 break;
             }
             D_800CBC1C = -1;
-            func_802BB420_de(&D_8010FBC0, 0, 1);
+            osSendMesg(&D_8010FBC0, 0, 1);
         }
     }
 }

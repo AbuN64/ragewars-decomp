@@ -84,7 +84,7 @@ void func_8023B9C0_eu(void) {
         D_800FF230.fD72 = 1;
     }
     for (i = 0; i < 8; i++) {
-        func_802BB420_de(&D_800FF230.jobs, &D_800FF230.channels[i], 1);
+        osSendMesg(&D_800FF230.jobs, &D_800FF230.channels[i], 1);
     }
     D_800FF230.f20 = 0;
     func_802BB550_de(0xC, &D_800FF230.completion, &D_800FF230.f20);

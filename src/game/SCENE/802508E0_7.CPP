@@ -41,7 +41,7 @@ Record *Scene_AllocateMemory(s32 size) {
     D_8010515C = counter;
     if (counter != 1) {
         __osRestoreInt(token);
-        func_802BB2A0_de(&D_80101140, 0, 1);
+        osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(token);
     }
@@ -51,7 +51,7 @@ Record *Scene_AllocateMemory(s32 size) {
     D_8010515C = counter2;
     if (counter2 != 0) {
         __osRestoreInt(token2);
-        func_802BB420_de(&D_80101140, 0, 1);
+        osSendMesg(&D_80101140, 0, 1);
         current = node;
     } else {
         __osRestoreInt(token2);
@@ -63,7 +63,7 @@ Record *Scene_AllocateMemory(s32 size) {
         D_8010515C = counter3;
         if (counter3 != 1) {
             __osRestoreInt(token3);
-            func_802BB2A0_de(&D_80101140, 0, 1);
+            osRecvMesg(&D_80101140, 0, 1);
         } else {
             __osRestoreInt(token3);
         }
@@ -76,7 +76,7 @@ Record *Scene_AllocateMemory(s32 size) {
         D_8010515C = counter4;
         if (counter4 != 0) {
             __osRestoreInt(token4);
-            func_802BB420_de(&D_80101140, 0, 1);
+            osSendMesg(&D_80101140, 0, 1);
         } else {
             __osRestoreInt(token4);
         }
@@ -85,7 +85,7 @@ Record *Scene_AllocateMemory(s32 size) {
         D_8010515C = counter3;
         if (counter3 != 1) {
             __osRestoreInt(token3);
-            func_802BB2A0_de(&D_80101140, 0, 1);
+            osRecvMesg(&D_80101140, 0, 1);
         } else {
             __osRestoreInt(token3);
         }
@@ -95,7 +95,7 @@ Record *Scene_AllocateMemory(s32 size) {
         D_8010515C = counter2;
         if (counter2 != 0) {
             __osRestoreInt(token2);
-            func_802BB420_de(&D_80101140, 0, 1);
+            osSendMesg(&D_80101140, 0, 1);
             current = node;
         } else {
             __osRestoreInt(token2);

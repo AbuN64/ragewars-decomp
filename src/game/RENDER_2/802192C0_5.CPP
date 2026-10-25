@@ -22,7 +22,7 @@
 extern s32 D_800D297C;
 
 extern void Render_SetModePreset(s32);
-extern void func_80268CE0_de(s32);
+extern void Render_SetCombineMode(s32);
 extern void func_802A5498_de(UnitMtx *, s32, s32, s32);
 
 void func_8021C698_de(PlayerCode802192C0 *player) {
@@ -35,7 +35,7 @@ void func_8021C698_de(PlayerCode802192C0 *player) {
         gDPPipeSync(D_80110634++);
         func_8026D8F8_de();
         Render_SetModePreset(0xE);
-        func_80268CE0_de(0x1C);
+        Render_SetCombineMode(0x1C);
         red = 200;
         low = 100;
         high = 150;

@@ -31,7 +31,7 @@ extern ObjectState18 D_8013B2D8;
 extern void Scene_MarkResourceInUse(s32 heap, void **resource);
 extern s32 Render_ApplyMaterialLighting(void *matrix, void *lights, void *material);
 extern s32 Render_SetupMaterial(void *material, s32 pass);
-extern void func_80268CE0_de(s32 mode);
+extern void Render_SetCombineMode(s32 mode);
 
 void func_8026D4F0_de(void **resource, void *unused, void *matrix, s32 segment, void *lights, void *textures, s32 pass, u8 r, u8 g, u8 b, u8 a) {
     void *header;
@@ -72,7 +72,7 @@ void func_8026D4F0_de(void **resource, void *unused, void *matrix, s32 segment, 
     }
     if (Render_SetupMaterial(shared, pass) != 0) {
         gDPSetRenderMode(D_80110634++, 0x0C184DD8, 0);
-        func_80268CE0_de(1);
+        Render_SetCombineMode(1);
         header = *resource;
         Scene_MarkResourceInUse(0, resource);
         if (segment != 0) gSPSegment(D_80110634++, 1, matrix) else gSPMatrix(D_80110634++, matrix, G_MTX_LOAD);

@@ -18,13 +18,13 @@
 static inline void create_access_queue(void) {
     D_800D83C0[0] = 1;
     osCreateMesgQueue(&D_8014EA58, &D_8014EA50, 1);
-    func_802BB420_de(&D_8014EA58, 0, 0);
+    osSendMesg(&D_8014EA58, 0, 0);
 }
 
 void func_802B9950_de(void) {
     D_800D83C0[0] = 1;
     osCreateMesgQueue(&D_8014EA58, &D_8014EA50, 1);
-    func_802BB420_de(&D_8014EA58, 0, 0);
+    osSendMesg(&D_8014EA58, 0, 0);
 }
 
 void func_802B99A4_de(void) {
@@ -33,5 +33,5 @@ void func_802B99A4_de(void) {
     if (!D_800D83C0[0]) {
         create_access_queue();
     }
-    func_802BB2A0_de(&D_8014EA58, &token, 1);
+    osRecvMesg(&D_8014EA58, &token, 1);
 }

@@ -7,7 +7,7 @@
 #include "sdk/os_pif.h"
 
 void func_802B9A10_de(void) {
-    func_802BB420_de(&D_8014EA58, 0, 0);
+    osSendMesg(&D_8014EA58, 0, 0);
 }
 
 #if defined(VERSION_US)

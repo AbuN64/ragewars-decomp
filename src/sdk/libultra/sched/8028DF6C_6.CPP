@@ -56,13 +56,13 @@ void func_8028EDA0_de(void *object) {
      else if(task->framebuffer==frame[2].colorImage) frame+=2;
     }
     func_80253CEC_de(0,frame->commands==D_8014D464);
-    if(func_802BB420_de(task->msgQ,task->msg,1)==-1) *((char *)NULL)=0;
+    if(osSendMesg(task->msgQ,task->msg,1)==-1) *((char *)NULL)=0;
    }
   } else {
    elapsed=((func_802BADC0_de()-D_8011B1D0)<<6)/3;
    duration4=(f32)elapsed;
    D_800CD74C=duration4*D_800C5360_de;
-   if(func_802BB420_de(task->msgQ,task->msg,1)==-1) *((char *)NULL)=0;
+   if(osSendMesg(task->msgQ,task->msg,1)==-1) *((char *)NULL)=0;
   }
   func_8028FA0C_de(scheduler,task);
  }

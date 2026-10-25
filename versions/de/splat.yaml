@@ -3788,7 +3788,7 @@ segments:
       - [0xC5090, rodata, data_800C/D_80268A40_CA180]
       - [0xC5098, rodata, data_800C/literals_func_8044B0E0_de]
       - [0xC509C, data, data_800C/rodata_unresolved_800C449C]
-      - [0xC50A0, rodata, data_800C/literals_func_80268CE0_de]
+      - [0xC50A0, rodata, data_800C/literals_Render_SetCombineMode]
       - [0xC5268, rodata, data_800C/D_8026B504_CA358]
       - [0xC526C, rodata, data_800C/D_8026C484_CA35C]
       - [0xC527E, data, data_800C/rodata_unresolved_800C467E]

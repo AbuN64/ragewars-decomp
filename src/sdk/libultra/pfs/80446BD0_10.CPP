@@ -45,10 +45,10 @@ s32 func_80446D80_de(void *queue, int channel)
     func_80446E58_de(channel);
 
     ret = __osSiRawStartDma(1, &D_80154110);
-    func_802BB2A0_de(queue, &dummy, 1);
+    osRecvMesg(queue, &dummy, 1);
 
     ret = __osSiRawStartDma(0, &D_80154110);
-    func_802BB2A0_de(queue, &dummy, 1);
+    osRecvMesg(queue, &dummy, 1);
 
     func_80446EE4_de(channel, &data);
 

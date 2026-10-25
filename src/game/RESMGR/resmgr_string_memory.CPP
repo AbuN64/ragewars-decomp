@@ -570,15 +570,15 @@ void func_802A0960_de(u8 *path, u8 *drive, u8 *directory, u8 *name, u8 *extensio
 void func_802A0A48_de(void *messageSemaphore) {
     MessageSemaphore *semaphore = messageSemaphore;
     osCreateMesgQueue(messageSemaphore, &semaphore->message, 1);
-    func_802BB420_de(messageSemaphore, 1, 1);
+    osSendMesg(messageSemaphore, 1, 1);
 }
 
 void func_802A0A84_de(s32 arg0) {
-    func_802BB2A0_de(arg0, arg0 + 0x18, 1);
+    osRecvMesg(arg0, arg0 + 0x18, 1);
 }
 
 void func_802A0AA4_de(s32 *arg0) {
-    func_802BB420_de(arg0, 1, 1);
+    osSendMesg(arg0, 1, 1);
 }
 
 #if defined(VERSION_US)

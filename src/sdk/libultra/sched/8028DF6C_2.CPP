@@ -32,7 +32,7 @@ void func_8028E880_us(OSSched *sc) {
     void *msg;
     OSScClientWork *client;
     for (;;) {
-        func_802BB2A0_de(&sc->interruptQueue, &msg, 1);
+        osRecvMesg(&sc->interruptQueue, &msg, 1);
         switch ((s32)msg) {
         case 0x29A:
             if (D_800CD708 && --D_800CD70C <= 0) {
@@ -52,7 +52,7 @@ void func_8028E880_us(OSSched *sc) {
             D_800CD708 = 1;
             D_800CD70C = 20;
             while (client) {
-                func_802BB420_de(client->queue, &sc->retraceMessage, 0);
+                osSendMesg(client->queue, &sc->retraceMessage, 0);
                 client = client->next;
             }
             break;

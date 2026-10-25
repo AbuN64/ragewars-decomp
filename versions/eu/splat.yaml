@@ -3789,7 +3789,7 @@ segments:
       - [0xC5340, rodata, data_800C/D_80268A40_CA180]
       - [0xC5348, rodata, data_800C/literals_func_8044B0E0_de]
       - [0xC534C, data, data_800C/rodata_unresolved_800C474C]
-      - [0xC5350, rodata, data_800C/literals_func_80268CE0_de]
+      - [0xC5350, rodata, data_800C/literals_Render_SetCombineMode]
       - [0xC5518, rodata, data_800C/D_8026B504_CA358]
       - [0xC551C, rodata, data_800C/D_8026C484_CA35C]
       - [0xC552E, data, data_800C/rodata_unresolved_800C492E]

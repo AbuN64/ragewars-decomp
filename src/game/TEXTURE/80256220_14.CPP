@@ -49,7 +49,7 @@ void func_80256FC0_de(void) {
 
     value = 0;
     for (i = 0; i < D_800CB704_de; i++) {
-        func_802BB2A0_de(&D_80107DD8, &value, 1);
+        osRecvMesg(&D_80107DD8, &value, 1);
     }
 
     node = D_80107DF4[0];
@@ -196,7 +196,7 @@ static inline void LockEnter(MenuRules *lock) {
     u32 mask = func_802BCF30_de();
     if (++lock->locked != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(lock, 0, 1);
+        osRecvMesg(lock, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -205,7 +205,7 @@ static inline void LockLeave(MenuRules *lock) {
     u32 mask = func_802BCF30_de();
     if (--lock->locked != 0) {
         __osRestoreInt(mask);
-        func_802BB420_de(lock, 0, 1);
+        osSendMesg(lock, 0, 1);
     } else {
         __osRestoreInt(mask);
     }

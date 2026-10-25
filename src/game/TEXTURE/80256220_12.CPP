@@ -123,5 +123,5 @@ void Texture_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioIniti
     Resmgr_FillMemory(D_800E5400, 8, sizeof(D_800E5400));
     func_802BAC90_de(D_801076F8, 8, (void (*)(void))&D_00256C90, 0, D_800E5400 + sizeof(D_800E5400), priority);
     func_802BB750_de(D_801076F8);
-    func_802BB420_de(&D_80107E00, (OSMesg)7, 0);
+    osSendMesg(&D_80107E00, (OSMesg)7, 0);
 }

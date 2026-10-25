@@ -25,14 +25,14 @@ void func_802566E8_de(Object *obj) {
     mask = func_802BCF30_de();
     if (++obj->depth != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(obj, 0, 1);
+        osRecvMesg(obj, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
     mask2 = func_802BCF30_de();
     if (--obj->depth != 0) {
         __osRestoreInt(mask2);
-        func_802BB420_de(obj, 0, 1);
+        osSendMesg(obj, 0, 1);
         return;
     }
     __osRestoreInt(mask2);

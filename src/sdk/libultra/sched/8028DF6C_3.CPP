@@ -44,7 +44,7 @@ void func_8028E930_de(void *arg0) {
 
 loop_1:
 loop_2:
-    func_802BB2A0_de(&scheduler->interruptQueue, &event, 1);
+    osRecvMesg(&scheduler->interruptQueue, &event, 1);
     if (event == 0x29B) {
         goto event_29b;
     }
@@ -102,7 +102,7 @@ event_29d:
     D_800CD70C = 0x14;
     if (node != 0) {
         do {
-            func_802BB420_de(node->queue, &scheduler->retraceMessage, 0);
+            osSendMesg(node->queue, &scheduler->retraceMessage, 0);
             node = node->next;
         } while (node != 0);
     }

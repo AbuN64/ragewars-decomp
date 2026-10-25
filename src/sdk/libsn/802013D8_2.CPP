@@ -85,7 +85,7 @@ INCLUDE_ASM("span_1000", func_802017E8_de);
 void func_802018A0_de(void) {
     ControllerRequest *request;
     for (;;) {
-        func_802BB2A0_de(&D_800F2F40, (OSMesg *)&request, 1);
+        osRecvMesg(&D_800F2F40, (OSMesg *)&request, 1);
         if (request->status != 0 && request->reserved == 1) {
             if (request->command & 0x80000000) {
                 D_800C8140_de = 0;
@@ -95,13 +95,13 @@ void func_802018A0_de(void) {
                 D_800C8140_de = 1;
             }
         }
-        func_802BB2A0_de(&D_800F1C90, 0, 0);
+        osRecvMesg(&D_800F1C90, 0, 0);
         func_80200568_de(0xB1FFFFE4, request->argument0);
         func_80200568_de(0xB1FFFFE8, request->argument1);
         func_80200568_de(0xB1FFFFEC, request->argument2);
         func_80200568_de(0xB1FFFFD8, 0x01010101);
         func_80200568_de(0xB1FFFFE0, (u16)request->command);
-        func_802BB2A0_de(&D_800F1C90, 0, 1);
+        osRecvMesg(&D_800F1C90, 0, 1);
         if (request->status != 0 && request->reserved == 0) {
             s32 length = func_802005A0_de(0xB1FFFFDC);
             if (length != 0) {
@@ -115,7 +115,7 @@ void func_802018A0_de(void) {
             }
         }
         if (request->reply != 0) {
-            func_802BB420_de(request->reply, (OSMesg)func_802005A0_de(0xB1FFFFDC), 1);
+            osSendMesg(request->reply, (OSMesg)func_802005A0_de(0xB1FFFFDC), 1);
         }
     }
 }
@@ -141,8 +141,8 @@ void *func_80201AD0_de(void) {
     request.argument1 = 0;
     request.argument2 = 0;
     request.reply = &D_800F3110;
-    func_802BB420_de(&D_800F2F40, &request, 1);
-    func_802BB2A0_de(&D_800F3110, &response.message, 1);
+    osSendMesg(&D_800F2F40, &request, 1);
+    osRecvMesg(&D_800F3110, &response.message, 1);
     return response.message;
 }
 u32 func_80201B50_de(u8 *buffer, s32 argument) {
@@ -160,8 +160,8 @@ u32 func_80201B50_de(u8 *buffer, s32 argument) {
         request.argument1 = argument;
         request.argument2 = 0;
         request.reply = &D_800F3110;
-        func_802BB420_de(&D_800F2F40, &request, 1);
-        func_802BB2A0_de(&D_800F3110, &response.message, 1);
+        osSendMesg(&D_800F2F40, &request, 1);
+        osRecvMesg(&D_800F3110, &response.message, 1);
         if (response.status & 0x8000) {
             response.status |= 0xFFFF0000;
         }
@@ -192,8 +192,8 @@ s32 func_80201C80_de(u8 *name, u32 flags) {
         request.argument1 = flags;
         request.argument2 = 0;
         request.reply = &D_800F3110;
-        func_802BB420_de(&D_800F2F40, &request, 1);
-        func_802BB2A0_de(&D_800F3110, &response.message, 1);
+        osSendMesg(&D_800F2F40, &request, 1);
+        osRecvMesg(&D_800F3110, &response.message, 1);
         if (response.status & 0x8000) {
             response.status |= 0xFFFF0000;
         }
@@ -220,8 +220,8 @@ s32 func_80201DB0_de(s32 arg0) {
         request.argument1 = 0;
         request.argument2 = 0;
         request.reply = &D_800F3110;
-        func_802BB420_de(&D_800F2F40, &request, 1);
-        func_802BB2A0_de(&D_800F3110, &response.message, 1);
+        osSendMesg(&D_800F2F40, &request, 1);
+        osRecvMesg(&D_800F3110, &response.message, 1);
         if (response.status & 0x8000) {
             response.status |= 0xFFFF0000;
         }
@@ -255,8 +255,8 @@ s32 func_80201E94_de(s32 channel, u8 *destination, u32 remaining) {
             request.argument1 = chunk;
             request.argument2 = 0;
             request.reply = &D_800F3110;
-            func_802BB420_de(&D_800F2F40, &request, 1);
-            func_802BB2A0_de(&D_800F3110, &response.message, 1);
+            osSendMesg(&D_800F2F40, &request, 1);
+            osRecvMesg(&D_800F3110, &response.message, 1);
             if (response.status == 0) {
                 return total;
             }
@@ -302,8 +302,8 @@ s32 func_80202018_de(s32 channel, u8 *source, u32 remaining) {
             request.argument1 = chunk;
             request.argument2 = 0;
             request.reply = &D_800F3110;
-            func_802BB420_de(&D_800F2F40, &request, 1);
-            func_802BB2A0_de(&D_800F3110, &response.message, 1);
+            osSendMesg(&D_800F2F40, &request, 1);
+            osRecvMesg(&D_800F3110, &response.message, 1);
             if (response.status == 0) return total;
             source += response.status;
             total += response.status;
@@ -336,8 +336,8 @@ s32 func_80202198_de(s32 arg0, u32 arg1, s32 arg2) {
         request.argument1 = arg1;
         request.argument2 = arg2;
         request.reply = &D_800F3110;
-        func_802BB420_de(&D_800F2F40, &request, 1);
-        func_802BB2A0_de(&D_800F3110, &response.message, 1);
+        osSendMesg(&D_800F2F40, &request, 1);
+        osRecvMesg(&D_800F3110, &response.message, 1);
     } else {
         saved = func_80200500_de();
         response.status = func_802017E8_de(0x707, arg0, arg1, arg2);

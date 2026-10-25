@@ -39,7 +39,7 @@ void func_8028FC10_de(void *arg0) {
     s32 value2 = 0;
     s32 flags;
 
-    while (func_802BB2A0_de(&((OSSched *)arg0)->commandQueue, &node, 0) != -1) {
+    while (osRecvMesg(&((OSSched *)arg0)->commandQueue, &node, 0) != -1) {
         if (node->type == 1 && (node->flags & 0x20) && D_800CD704 == 0) {
             D_800CD704 = 2;
             func_802BB5F0_de(&D_80106248, D_800CD8B8_de);

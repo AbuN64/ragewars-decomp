@@ -73,7 +73,7 @@ void Menu_DrawLetterboxBands(void) {
     gDPPipeSync(D_80110634++);
     gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
     Render_SetModePreset(0x13);
-    func_80268CE0_de(0x19);
+    Render_SetCombineMode(0x19);
     gDPSetPrimColor(D_80110634++, 255, 255, 0, 0, 0, 255);
     gDPFillRectangle(D_80110634++, 0, 0, MENU_CLAMP_PIXEL(D_800E28D0), MENU_CLAMP_PIXEL((s32)height));
     gDPFillRectangle(D_80110634++, 0, (u32)MENU_CLAMP_HEIGHT((f32)D_800E28D4 - height), MENU_CLAMP_PIXEL(D_800E28D0), MENU_CLAMP_PIXEL(D_800E28D4));

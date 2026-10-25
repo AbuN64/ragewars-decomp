@@ -33,7 +33,7 @@ extern Gfx *D_80110634;
 
 #include "GFX/TEXT/802A8A94_6.H"
 
-extern void func_80268CE0_de(s32 arg0);
+extern void Render_SetCombineMode(s32 arg0);
 
 extern s32 Render_SetModePreset(s32);
 
@@ -251,7 +251,7 @@ void func_802A84F8_de(void) {
             gDPSetCycleType(cmd, G_CYC_2CYCLE);
         }
 
-        func_80268CE0_de(0x1A);
+        Render_SetCombineMode(0x1A);
         Render_SetModePreset(0x15);
 
         D_80147150 = 0;

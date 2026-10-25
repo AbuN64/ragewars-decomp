@@ -72,7 +72,7 @@ void func_80258800_de(ContextRecAt2BC0 *arg0, s32 arg1) {
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 1) {
             __osRestoreInt(mask);
-            func_802BB2A0_de(temp_s0, 0, 1);
+            osRecvMesg(temp_s0, 0, 1);
         } else {
             __osRestoreInt(mask);
         }
@@ -90,7 +90,7 @@ void func_80258800_de(ContextRecAt2BC0 *arg0, s32 arg1) {
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 0) {
             __osRestoreInt(temp_v0);
-            func_802BB420_de(temp_s0, 0, 1);
+            osSendMesg(temp_s0, 0, 1);
         } else {
             __osRestoreInt(temp_v0);
         }
@@ -112,7 +112,7 @@ void func_802588D4_de(ContextRecAt2BC0 *arg0, s32 arg1) {
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(temp_s0, 0, 1);
+        osRecvMesg(temp_s0, 0, 1);
         record = &arg0->menu[0];
     } else {
         __osRestoreInt(mask);
@@ -126,7 +126,7 @@ void func_802588D4_de(ContextRecAt2BC0 *arg0, s32 arg1) {
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 0) {
         __osRestoreInt(temp_v0);
-        func_802BB420_de(temp_s0, 0, 1);
+        osSendMesg(temp_s0, 0, 1);
         return;
     }
     __osRestoreInt(temp_v0);
@@ -145,7 +145,7 @@ void func_802589A8_de(ContextRecAt2BC0 *arg0, s32 arg1) {
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(temp_s0, 0, 1);
+        osRecvMesg(temp_s0, 0, 1);
         record = &arg0->menu[0];
     } else {
         __osRestoreInt(mask);
@@ -159,7 +159,7 @@ void func_802589A8_de(ContextRecAt2BC0 *arg0, s32 arg1) {
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 0) {
         __osRestoreInt(temp_v0);
-        func_802BB420_de(temp_s0, 0, 1);
+        osSendMesg(temp_s0, 0, 1);
         return;
     }
     __osRestoreInt(temp_v0);
@@ -238,7 +238,7 @@ void func_80258C0C_de(void *arg0, s32 arg1) {
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 1) {
             __osRestoreInt(mask);
-            func_802BB2A0_de(temp_s0, 0, 1);
+            osRecvMesg(temp_s0, 0, 1);
         } else {
             __osRestoreInt(mask);
         }
@@ -257,7 +257,7 @@ void func_80258C0C_de(void *arg0, s32 arg1) {
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 0) {
             __osRestoreInt(temp_v0);
-            func_802BB420_de(temp_s0, 0, 1);
+            osSendMesg(temp_s0, 0, 1);
         } else {
             __osRestoreInt(temp_v0);
         }
@@ -325,7 +325,7 @@ s32 func_80258D50_de(char *obj, s32 owner)
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 1) {
             __osRestoreInt(temp_a0);
-            func_802BB2A0_de(temp_s0, 0, 1);
+            osRecvMesg(temp_s0, 0, 1);
         } else {
             __osRestoreInt(temp_a0);
         }
@@ -346,7 +346,7 @@ s32 func_80258D50_de(char *obj, s32 owner)
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 0) {
             __osRestoreInt(temp_v0);
-            func_802BB420_de(temp_s0, 0, 1);
+            osSendMesg(temp_s0, 0, 1);
         } else {
             __osRestoreInt(temp_v0);
         }

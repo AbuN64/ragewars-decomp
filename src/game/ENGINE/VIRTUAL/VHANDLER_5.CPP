@@ -89,7 +89,7 @@ void func_8023CCD4_de(OwnerRecAt8V2 *arg0) {
         }
         slot++;
     }
-    func_802BB420_de(arg0->queue, node, 1);
+    osSendMesg(arg0->queue, node, 1);
 }
 
 void func_8023CDD4_de(RegionDesc *desc)
@@ -131,7 +131,7 @@ void func_8023CDD4_de(RegionDesc *desc)
     while (i-- != 0) {
         *map++ = fill;
     }
-    func_802BB420_de(desc->mapping, start << 12, 1);
+    osSendMesg(desc->mapping, start << 12, 1);
 }
 
 #include "SCHED/RESOURCE_PAGE_WORKER.H"
@@ -174,7 +174,7 @@ void Sched_FinishPageJob(ResourcePageJob *req) {
     }
     req->thread->state = 2;
     func_802BB750_de(req->thread);
-    func_802BB420_de(D_800FFCD0, req, 1);
+    osSendMesg(D_800FFCD0, req, 1);
 }
 
 #if defined(VERSION_EU_X)

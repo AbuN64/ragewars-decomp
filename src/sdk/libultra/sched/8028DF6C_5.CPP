@@ -33,7 +33,7 @@ void func_8028EA40_eu(OSSched *sc) {
     OSScClientWork *client;
     OSViMode *mode;
     for (;;) {
-        func_802BB2A0_de(&sc->interruptQueue, &msg, 1);
+        osRecvMesg(&sc->interruptQueue, &msg, 1);
         switch ((s32)msg) {
         case 0x29A:
             if (D_800CD708 && --D_800CD70C <= 0) {
@@ -58,7 +58,7 @@ void func_8028EA40_eu(OSSched *sc) {
             D_800CD708 = 1;
             D_800CD70C = 20;
             while (client) {
-                func_802BB420_de(client->queue, &sc->retraceMessage, 0);
+                osSendMesg(client->queue, &sc->retraceMessage, 0);
                 client = client->next;
             }
             break;
@@ -99,7 +99,7 @@ void func_8028EACC_de(OSSched *sc) {
         if (D_800CD704 == 0) func_802BB5F0_de(&D_80106248, D_800CD8AC_de);
     }
     sc->frameCount++;
-    while (func_802BB2A0_de(&sc->commandQueue, &event, 0) != -1) __scAppendList(sc, event);
+    while (osRecvMesg(&sc->commandQueue, &event, 0) != -1) __scAppendList(sc, event);
     D_80142920++;
     if (D_80146CC8 != 0) {
         D_80142920 = 0;
@@ -137,7 +137,7 @@ void func_8028EACC_de(OSSched *sc) {
     }
     work = sc->clientList;
     while (work != 0) {
-        if (work->queue->validCount < 2) func_802BB420_de(work->queue, sc, 0);
+        if (work->queue->validCount < 2) osSendMesg(work->queue, sc, 0);
         work = work->next;
     }
     func_80263AF4_de();

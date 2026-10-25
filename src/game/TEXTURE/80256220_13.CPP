@@ -59,7 +59,7 @@ void func_80256C90_de(void) {
     osScAddClient(&D_80142928, &client, &D_80107E00);
     do {
         D_800CB710 = ((func_802BADC0_de() - previous) << 6) / 3000ULL;
-        func_802BB2A0_de(&D_80107E00, &event.message, 1);
+        osRecvMesg(&D_80107E00, &event.message, 1);
         previous = func_802BADC0_de();
         switch (event.words[0]) {
         case 1:
@@ -113,7 +113,7 @@ s32 func_80256EA8_de(Work56EC8 *arg0, u32 unused)
     Render_SendSchedulerTask(&D_80142928, arg0->payload);
     D_800CB708 ^= 1;
     func_8025E23C_de();
-    func_802BB2A0_de(&D_80107E80, &event, 1);
+    osRecvMesg(&D_80107E80, &event, 1);
     func_802B7400_de(arg0->owner, arg0->id << 2);
     return 1;
   }

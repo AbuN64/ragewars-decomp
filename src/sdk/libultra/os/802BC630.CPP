@@ -21,7 +21,7 @@ s32 func_802B7560_de(s32 arg0) {
     if (*p != 1) {
         func_802B768C_de();
         __osSiRawStartDma(1, &D_8014D470);
-        func_802BB2A0_de(arg0, 0, 1);
+        osRecvMesg(arg0, 0, 1);
     }
     result = __osSiRawStartDma(0, &D_8014D470);
     *p = 1;

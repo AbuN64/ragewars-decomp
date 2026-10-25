@@ -42,13 +42,13 @@ s32 func_80255170_de(ResourceLoadWorker *arg0, ResourceLoadRequest *message) {
     D_800CD704 = 2;
     func_802BB5F0_de(arg0, temp);
     func_802BB160_de(&arg0->requests, message, 1);
-    func_802BB2A0_de(&sp10, &sp2C, 1);
+    osRecvMesg(&sp10, &sp2C, 1);
     return 1;
 }
 
 s32 func_802551FC_de(ResourceLoadWorker *worker, ResourceRequest *request, void *replyQueue) {
     request->replyQueue = replyQueue;
-    return ~func_802BB420_de(&worker->requests, request, 0) != 0;
+    return ~osSendMesg(&worker->requests, request, 0) != 0;
 }
 
 extern s32 func_802BB5F0_de(void *, s32);
@@ -73,10 +73,10 @@ void func_80255220_us(ResourceLoadWorker *worker)
     extern s32 D_800D2978;
 
     for (;;) {
-        func_802BB2A0_de(&worker->requests, (void **)&request, 1);
+        osRecvMesg(&worker->requests, (void **)&request, 1);
         worker->timestamp = D_800D2978;
         request->dispatch(request->argument, request);
-        func_802BB420_de(request->replyQueue, request, 1);
+        osSendMesg(request->replyQueue, request, 1);
     }
 }
 #endif
@@ -88,10 +88,10 @@ void func_80255240_eu(ResourceLoadWorker *worker)
     extern s32 D_800D2978;
 
     for (;;) {
-        func_802BB2A0_de(&worker->requests, (void **)&request, 1);
+        osRecvMesg(&worker->requests, (void **)&request, 1);
         worker->timestamp = D_800D2978;
         request->dispatch(request->argument, request);
-        func_802BB420_de(request->replyQueue, request, 1);
+        osSendMesg(request->replyQueue, request, 1);
     }
 }
 #endif
@@ -103,10 +103,10 @@ void func_80255280_de(ResourceLoadWorker *worker)
     extern s32 D_800D2978;
 
     for (;;) {
-        func_802BB2A0_de(&worker->requests, (void **)&request, 1);
+        osRecvMesg(&worker->requests, (void **)&request, 1);
         worker->timestamp = D_800D2978;
         request->dispatch(request->argument, request);
-        func_802BB420_de(request->replyQueue, request, 1);
+        osSendMesg(request->replyQueue, request, 1);
     }
 }
 #endif
@@ -118,10 +118,10 @@ void func_80255270_eu_x(ResourceLoadWorker *worker)
     extern s32 D_800D2978;
 
     for (;;) {
-        func_802BB2A0_de(&worker->requests, (void **)&request, 1);
+        osRecvMesg(&worker->requests, (void **)&request, 1);
         worker->timestamp = D_800D2978;
         request->dispatch(request->argument, request);
-        func_802BB420_de(request->replyQueue, request, 1);
+        osSendMesg(request->replyQueue, request, 1);
     }
 }
 #endif

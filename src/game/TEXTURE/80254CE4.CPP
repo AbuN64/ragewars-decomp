@@ -126,7 +126,7 @@ void func_80254F9C_de(s32 unused, s32 request) {
 
     if (D_801005A0[request] != 0) {
         D_801005A0[request] = 0;
-        func_802BB420_de(&D_80101160, 0, 1);
+        osSendMesg(&D_80101160, 0, 1);
     }
     mask = -0x201;
     if (request != 0) {

@@ -25,9 +25,9 @@ u32 func_802B7EF0_eu(void *arg0) {
         func_802B9C14_de();
         D_8014D4B0 = 3;
         __osSiRawStartDma(1, &D_8014D5E0[((func_802B80B4_eu_Arg *)arg0)->index << 6]);
-        func_802BB2A0_de(((func_802B80B4_eu_Arg *)arg0)->field4, 0, 1);
+        osRecvMesg(((func_802B80B4_eu_Arg *)arg0)->field4, 0, 1);
         __osSiRawStartDma(0, (u8 *)&D_80154110);
-        func_802BB2A0_de(((func_802B80B4_eu_Arg *)arg0)->field4, 0, 1);
+        osRecvMesg(((func_802B80B4_eu_Arg *)arg0)->field4, 0, 1);
         count = ((func_802B80B4_eu_Arg *)arg0)->index;
         if (count != 0) {
             i = 0;
@@ -65,9 +65,9 @@ u32 func_802B80B4_eu(void *arg0) {
         func_802B9C14_de();
         D_8014D4B0 = 3;
         __osSiRawStartDma(1, &D_8014D4C0[((func_802B80B4_eu_Arg *)arg0)->index << 6]);
-        func_802BB2A0_de(((func_802B80B4_eu_Arg *)arg0)->field4, 0, 1);
+        osRecvMesg(((func_802B80B4_eu_Arg *)arg0)->field4, 0, 1);
         __osSiRawStartDma(0, (u8 *)&D_80154110);
-        func_802BB2A0_de(((func_802B80B4_eu_Arg *)arg0)->field4, 0, 1);
+        osRecvMesg(((func_802B80B4_eu_Arg *)arg0)->field4, 0, 1);
         count = ((func_802B80B4_eu_Arg *)arg0)->index;
         if (count != 0) {
             i = 0;

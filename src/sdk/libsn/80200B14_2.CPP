@@ -75,7 +75,7 @@ void func_80200E04_de(u32 address, u8 *source, u32 remaining) {
             dmaResult = func_802B8CF0_de(&D_800F2CE0, 1, 1, address,
                 source, remaining, &D_800F2CC0);
             if (dmaResult != -1) {
-                func_802BB2A0_de(&D_800F2CC0, 0, 1);
+                osRecvMesg(&D_800F2CC0, 0, 1);
                 remaining = 0;
             }
         } else {

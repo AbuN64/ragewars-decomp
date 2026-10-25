@@ -166,7 +166,7 @@ void Render_RunGameLoop(GameSession *session) {
     Render_InitFrameRing((RenderState *)session);
 #if defined(VERSION_US_REV1)
     func_802B155C_us_rev1(D_002953FC_us_rev1);
-    func_802BB420_de((OSMesgQueue *)D_801053E8_us_rev1, (OSMesg)0xBEEFDEAD, 0);
+    osSendMesg((OSMesgQueue *)D_801053E8_us_rev1, (OSMesg)0xBEEFDEAD, 0);
 #endif
     for (i = 0; i < D_800DE850; i++) {
         Resmgr_FillMemory(D_8014D468_de[i], 0, D_800E28D0 * D_800E28D4 * 2);
@@ -196,7 +196,7 @@ void Render_RunGameLoop(GameSession *session) {
     Render_BeginModeTransition(session, 0);
     for (;;) {
         Shared_Game *game = currentGame();
-        func_802BB2A0_de(&D_801428C0, (OSMesg *)&D_80146CBC, 1);
+        osRecvMesg(&D_801428C0, (OSMesg *)&D_80146CBC, 1);
         msg = D_80146CBC;
         switch (*msg) {
         case 1:

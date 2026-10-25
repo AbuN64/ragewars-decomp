@@ -311,7 +311,7 @@ typedef struct MarkerActor { u8 pad0[0x1D8]; MarkerNode *node; } MarkerActor;
 extern s32 D_800D297C;
 extern struct UnitVtx D_800FF1B0_de[];
 extern s32 Render_SetModePreset(s32);
-extern void func_80268CE0_de(u32);
+extern void Render_SetCombineMode(u32);
 extern void func_802A5498_de(u32);
 
 extern s32 func_802327A0_de(s32);

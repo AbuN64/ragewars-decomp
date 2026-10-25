@@ -81,16 +81,16 @@ s32 func_802B7740_de(s32 arg0, s32 arg1) {
         func_802B784C_de();
         data = &D_8014D470;
         __osSiRawStartDma(1, data);
-        func_802BB2A0_de(arg0, 0, 1);
+        osRecvMesg(arg0, 0, 1);
         __osSiRawStartDma(0, data);
-        func_802BB2A0_de(arg0, 0, 1);
+        osRecvMesg(arg0, 0, 1);
         func_802B7A20_de(sentinel);
         __osSiRawStartDma(1, data);
-        func_802BB2A0_de(arg0, 0, 1);
+        osRecvMesg(arg0, 0, 1);
         *state = sentinel;
     }
     result = __osSiRawStartDma(0, &D_8014D470);
-    func_802BB2A0_de(arg0, 0, 1);
+    osRecvMesg(arg0, 0, 1);
     func_802B7AD8_de(&output, arg1);
     func_802B9C80_de();
     return result;

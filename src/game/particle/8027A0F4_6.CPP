@@ -50,7 +50,7 @@ Shared_ParticleInstance *func_802392EC_de(struct Shared_ParticleView *);
 s32 func_80243A90_de(Shared_ParticleInstance *, CVector3, void *);
 void Particle_BuildMatrix(Shared_Particle *, void *, void *, f32);
 void *func_802799C0_de(void *, s32);
-void func_80268CE0_de(s32);
+void Render_SetCombineMode(s32);
 void Render_SetModePreset(s32);
 void Scene_UnlockResource(s32, void *);
 s32 func_802744D4_de(void);
@@ -265,10 +265,10 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
     switch (info.frame->kind) {
         case 0:
         case 1:
-            func_80268CE0_de(0x18);
+            Render_SetCombineMode(0x18);
             break;
         case 3:
-            func_80268CE0_de(0x1D);
+            Render_SetCombineMode(0x1D);
             break;
     }
     if (textured) {

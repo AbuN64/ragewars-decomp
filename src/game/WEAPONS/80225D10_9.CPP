@@ -31,7 +31,7 @@ extern void func_8026D8F8_de(void);
 
 extern void Render_SetModePreset(s32);
 
-extern void func_80268CE0_de(s32);
+extern void Render_SetCombineMode(s32);
 
 /* Scales damage by ownership and player state and suppresses friendly damage when configured. */
 
@@ -236,7 +236,7 @@ void func_80229D28_de(Player16C0 *player) {
         gDPPipeSync(D_80110634++);
         func_8026D8F8_de();
         Render_SetModePreset(0xE);
-        func_80268CE0_de(0x1C);
+        Render_SetCombineMode(0x1C);
         green = 200;
         alpha = 150;
         gSPGeometryMode(D_80110634++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);

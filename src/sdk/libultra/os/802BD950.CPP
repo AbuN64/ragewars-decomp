@@ -33,10 +33,10 @@ u32 func_802B8880_de(s32 arg0, s32 arg1, u16 arg2, u8 *arg3, s32 arg4) {
     D_8014D4B0 = 3;
     func_802B8AA0_de(arg1, arg2 & 0xFFFF, arg3);
     result = __osSiRawStartDma(1, (u8 *)&D_80154110);
-    func_802BB2A0_de(arg0, 0, 1);
+    osRecvMesg(arg0, 0, 1);
     do {
         result = __osSiRawStartDma(0, (u8 *)&D_80154110);
-        func_802BB2A0_de(arg0, 0, 1);
+        osRecvMesg(arg0, 0, 1);
         source = (u8 *)&D_80154110;
         if (arg1 != 0) {
             i = 0;

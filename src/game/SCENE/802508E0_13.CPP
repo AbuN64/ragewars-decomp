@@ -35,7 +35,7 @@ void Scene_FreeMemory(void *arg0) {
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(&D_80101140, 0, 1);
+        osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -45,7 +45,7 @@ void Scene_FreeMemory(void *arg0) {
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
         __osRestoreInt(temp_v0);
-        func_802BB420_de(&D_80101140, 0, 1);
+        osSendMesg(&D_80101140, 0, 1);
         return;
     }
     __osRestoreInt(temp_v0);

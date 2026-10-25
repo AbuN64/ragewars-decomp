@@ -42,7 +42,7 @@ void func_80253344_de(s32 unused) {
         __osRestoreInt(mask);
         queueAddress = (char *)temp_s1 - 0x3C;
         receive = queueAddress;
-        func_802BB2A0_de(receive, 0, var_s0);
+        osRecvMesg(receive, 0, var_s0);
         var_s0 = 0;
     } else {
         __osRestoreInt(mask);
@@ -59,7 +59,7 @@ void func_80253344_de(s32 unused) {
         __osRestoreInt(temp_v0);
         queueAddress = &D_80101140;
         send = queueAddress;
-        func_802BB420_de(send, 0, 1);
+        osSendMesg(send, 0, 1);
     } else {
         __osRestoreInt(temp_v0);
     }

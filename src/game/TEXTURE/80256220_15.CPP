@@ -53,7 +53,7 @@ s32 func_80257A14_de(void *arg0, s32 id) {
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de(temp_s0, 0, 1);
+        osRecvMesg(temp_s0, 0, 1);
         var_a0 = &((ContextRecAt2BC0 *)(arg0))->view[0];
     } else {
         __osRestoreInt(mask);
@@ -87,7 +87,7 @@ s32 func_80257A14_de(void *arg0, s32 id) {
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 0) {
         __osRestoreInt(temp_v0);
-        func_802BB420_de(temp_s0, 0, 1);
+        osSendMesg(temp_s0, 0, 1);
     } else {
         __osRestoreInt(temp_v0);
     }
@@ -157,7 +157,7 @@ s32 Texture_StartSoundRecord(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 ar
         ((MenuRules *)(queue))->locked = count;
         if (count != 1) {
             __osRestoreInt(token);
-            func_802BB2A0_de(queue, 0, 1);
+            osRecvMesg(queue, 0, 1);
         } else {
             __osRestoreInt(token);
         }
@@ -170,7 +170,7 @@ s32 Texture_StartSoundRecord(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 ar
         ((MenuRules *)(queue))->locked = count;
         if (count != 0) {
             __osRestoreInt(token);
-            func_802BB420_de(queue, 0, 1);
+            osSendMesg(queue, 0, 1);
         } else {
             __osRestoreInt(token);
         }
@@ -184,7 +184,7 @@ static inline void soundAcquireLock(MenuRules *lock) {
     lock->locked = held;
     if (held != 1) {
         __osRestoreInt(mask);
-        func_802BB2A0_de((OSMesgQueue *)lock, 0, 1);
+        osRecvMesg((OSMesgQueue *)lock, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
@@ -196,7 +196,7 @@ static inline void soundReleaseLock(MenuRules *lock) {
     lock->locked = held;
     if (held != 0) {
         __osRestoreInt(mask);
-        func_802BB420_de((OSMesgQueue *)lock, 0, 1);
+        osSendMesg((OSMesgQueue *)lock, 0, 1);
     } else {
         __osRestoreInt(mask);
     }

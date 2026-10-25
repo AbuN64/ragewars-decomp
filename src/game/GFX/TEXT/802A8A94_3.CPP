@@ -107,13 +107,13 @@ void func_802A8F28_de(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 sha
 extern Gfx *D_80110634;
 extern s32 D_800E28D8;
 
-extern void func_80268CE0_de(s32 arg0);
+extern void Render_SetCombineMode(s32 arg0);
 extern void Render_SetModePreset(s32 arg0);
 
 void func_802A9234_de(s32 color) {
     gDPPipeSync(D_80110634++);
     gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
-    func_80268CE0_de(0x1B);
+    Render_SetCombineMode(0x1B);
     Render_SetModePreset(0x19);
     {
         Gfx *cmd = D_80110634++;

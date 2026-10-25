@@ -53,7 +53,7 @@ void func_80264248_de(ControllerProfile *arg0) {
     char *o=(char *)address;
 
     if (D_800CBC10 != 0 && ((Obj80264124 *)address)->flags != 0) {
-        if (func_802BB2A0_de(&D_8010FBC0, 0, 1) == 0) {
+        if (osRecvMesg(&D_8010FBC0, 0, 1) == 0) {
             D_800CBC1C = func_802BAD80_de(0);
         }
         Render_ReadControllerStates();
@@ -114,7 +114,7 @@ func_802B7C50_de
         }
         D_8010BBB8 = 2;
         D_800CBC1C = -1;
-        func_802BB420_de(&((PakQueueState *)&D_8010BBB8)->queue, 0, 1);
+        osSendMesg(&((PakQueueState *)&D_8010BBB8)->queue, 0, 1);
     }
 }
 
@@ -228,7 +228,7 @@ s32 func_802644FC_de(s32 arg0) {
 
     s32 result;
 
-    result = func_802BB2A0_de(&D_8010FBC0, 0, arg0) == 0;
+    result = osRecvMesg(&D_8010FBC0, 0, arg0) == 0;
     if (result != 0) {
         D_800CBC1C = func_802BAD80_de(0);
     }
@@ -238,7 +238,7 @@ s32 func_802644FC_de(s32 arg0) {
 void func_8026454C_de(void) {
 
     D_800CBC1C = -1;
-    func_802BB420_de(&D_8010FBC0, 0, 1);
+    osSendMesg(&D_8010FBC0, 0, 1);
 }
 
 /** Fetch-and-clear: return the old slot value, then zero it. */
