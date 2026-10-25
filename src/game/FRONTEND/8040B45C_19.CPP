@@ -16,8 +16,6 @@ extern void func_802658E4_de(char *buffer, const char *format, s32 value);
 #include "SYSTEM_3/80265370.H"
 extern s32 D_8015375C;
 extern char D_800ED41C[];
-extern s32 D_80153734;
-extern s32 D_800E28C8;
 extern char *D_800D394C[];
 extern char *D_800E2FB4[];
 extern s32 Pak_CountLineChars(struct Field *);

@@ -36,17 +36,11 @@ extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape
 
 
 
-extern s32 D_8014D570;
 
-extern s32 D_8014D584;
 
-extern s32 D_8014D588;
 
-extern s32 D_8014D58C;
 
-extern s32 D_800E2AB8;
 
-extern s32 D_8014D714;
 
 extern void func_802A1898_de(s32 *left, s32 *right, s32 *top, s32 *bottom);
 
@@ -386,7 +380,6 @@ typedef struct DraftWidget {
     struct DraftWidget *disabled;
 } DraftWidget;
 
-extern s32 D_800E2AB8;
 extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 extern void func_802A1898_de(s32 *, s32 *, s32 *, s32 *);
 extern void Frontend_DrawVisibleSiblings(void *, sm_dldc);

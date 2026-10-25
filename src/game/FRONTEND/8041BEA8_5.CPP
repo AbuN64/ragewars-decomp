@@ -96,7 +96,6 @@ extern s32 D_800E3514;
 
 /* Calls func_802A2394_de and MarkMenuEventHandled, then func_80298368_de with 2, sets D_8014ADA0 and returns
    one. */
-extern s32 D_8014ADA0;
 
 extern void func_802A2394_de();
 
@@ -114,7 +113,6 @@ extern s32 Pak_GetStatus(s32 port);
 
 /* Advances the slot-dialog retry counter. Before the fourth attempt it updates
  * the dialog; later attempts start the transition and mark it active. */
-extern s32 D_800DF4C0;
 
 extern void func_8041BE90_de(void);
 
@@ -125,9 +123,7 @@ extern void func_8041BE90_de(void);
    word at 0x1C and returns zero. */
 
 
-extern s32 D_800E28C8;
 
-extern s32 D_80146D70;
 
 #include "COMMON/GAME_SESSION.H"
 
@@ -173,9 +169,7 @@ extern s32 func_80299A08_de(void);
 
 
 
-extern s32 D_800E351C;
 
-extern s32 D_800E3520;
 
 extern Handler802A2B50 D_800E3524;
 

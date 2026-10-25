@@ -411,7 +411,6 @@ s32 func_8042BAD0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 #include "FRONTEND/RESULTS_SETUP_TEXT.H"
 #include "COMMON/SETTINGSRECAT24.H"
 extern func_8042CE54_S1 *D_800E53C0;
-extern s32 D_8015402C;
 extern s8 D_80102B0D[], D_800FEB0E[];
 extern void func_8043C210_de(s32 *, s32, s32, s32, s32);
 extern void func_8043C278_de(s32 *);

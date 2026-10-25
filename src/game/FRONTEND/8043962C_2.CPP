@@ -10,7 +10,6 @@
 
 
 
-extern s32 D_800E28E0;
 
 extern void func_802A2360_de(void);
 
