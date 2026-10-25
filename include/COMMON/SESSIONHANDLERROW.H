@@ -113,7 +113,7 @@ extern void func_8028F754_de(Panel *, s32, s32, s32, u8);
 extern void func_802B6B80_de(s32 *);
 extern void Items_ResetGameOptions(void *);
 
-typedef Node_func_80442A28_de TimingQueue;
+typedef Node_Pak_CountLiveNodes TimingQueue;
 typedef struct TimingWorld {
  char pad0[0x255C8];
  RaceViewportState viewport;
@@ -133,7 +133,7 @@ extern FrameCallback D_800CD790[];
 extern u64 func_802BADC0_de(void);
 extern s32 func_80245B0C_de(void);
 extern u32 func_80245850_de(void);
-extern s32 func_80442A28_de(Node_func_80442A28_de **);
+extern s32 Pak_CountLiveNodes(Node_Pak_CountLiveNodes **);
 struct GameSession;
 extern void func_80293C34_de(struct GameSession *);
 extern void func_804037D4_de(void);

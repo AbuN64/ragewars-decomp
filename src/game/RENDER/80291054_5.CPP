@@ -28,7 +28,7 @@ static inline u32 averageFour(void) {
  { s32 adjusted=maximum-2; return ((u32)sum-(u32)adjusted)/3; }
 }
 static inline s32 idlePause(TimingWorld *world) {
- if(func_80442A28_de(&D_8014561C)==0 && Camera_IsSequenceInWindow()!=0 && func_80245B0C_de()==120) {
+ if(Pak_CountLiveNodes(&D_8014561C)==0 && Camera_IsSequenceInWindow()!=0 && func_80245B0C_de()==120) {
  if(D_801462C8.counters.first==0) {
  if(world->unk26DD4==0) { D_801462C8.counters.first=1;func_804037D4_de(); }
  goto checkFlag;
@@ -81,7 +81,7 @@ void Render_UpdateFrameTiming(TimingWorld *world) {
         if (func_802934F8_de() == 0) {
             world->unk26DD4 = 0;
         } else {
-            world->unk26DD4 = func_80442A28_de(&world->viewport.self.messageList.head);
+            world->unk26DD4 = Pak_CountLiveNodes(&world->viewport.self.messageList.head);
         }
     }
     if (D_80154048 != 0) {

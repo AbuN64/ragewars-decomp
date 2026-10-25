@@ -10,7 +10,7 @@
 #include "COMMON/OBJECTLINKS14C.H"
 
 
-extern s32 func_80442A28_de(void *arg0);
+extern s32 Pak_CountLiveNodes(void *arg0);
 extern s32 func_8022AB20_de(void *arg0, s16 arg1);
 
 void func_8023293C_de(void *arg0, Dest *arg1, Lookup *lookup) {
@@ -27,7 +27,7 @@ void func_8023293C_de(void *arg0, Dest *arg1, Lookup *lookup) {
         return;
     }
     if (D_801462C8.local != 0) {
-        if (func_80442A28_de((char *)resource + 0x554) != 0) {
+        if (Pak_CountLiveNodes((char *)resource + 0x554) != 0) {
             return;
         }
     }

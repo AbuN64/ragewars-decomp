@@ -47,7 +47,7 @@ void Text_SetupFillMode(void);
 
 /* unable to generate initializer: unknown type */
 
-void func_8043FE3C_de(func_80254D70_S2 *arg0, func_8043FFAC_S5 *arg1, s32 arg2, func_8043FFAC_S2 *arg3, void *arg4, s32 arg5) {
+void func_8043FE3C_de(func_80254D70_S2 *arg0, func_8043FFAC_S5 *entry, s32 arg2, func_8043FFAC_S2 *arg3, void *arg4, s32 arg5) {
     f32 var_f1;
     s32 temp_f3;
     s32 temp_f3_2;
@@ -132,7 +132,7 @@ block_5:
         }
         D_800E1E20 = var_s0;
     }
-    if (arg1->unk0 == arg3->unk0) {
+    if (entry->unk0 == arg3->unk0) {
         var_f1 = 1.25f;
     } else if (!(arg0->unk8 & 0x01000000)) {
         var_f1 = 0.25f;
@@ -168,10 +168,10 @@ block_5:
     if (var_s5 != 0) {
         var_s5 = temp_s1->unk14;
     }
-    func_802A8F28_de(arg4, arg1->unk14, arg1->unk1C, (s32) (arg3->alpha * (arg3->fade * 255.0f)), 0, (s32) var_s5, 1.0f, 1.0f);
+    func_802A8F28_de(arg4, entry->unk14, entry->unk1C, (s32) (arg3->alpha * (arg3->fade * 255.0f)), 0, (s32) var_s5, 1.0f, 1.0f);
 }
 
-void func_804402DC_de(MenuOption *arg0, MenuOptionBox *arg1, s32 arg2, MenuOptionFade *arg3) {
+void func_804402DC_de(MenuOption *arg0, MenuOptionBox *box, s32 dir, MenuOptionFade *arg3) {
     s32 var_v1;
     f32 right;
     f32 bottom;
@@ -185,10 +185,10 @@ void func_804402DC_de(MenuOption *arg0, MenuOptionBox *arg1, s32 arg2, MenuOptio
             D_800E1E20 = 3;
         }
         Text_SetupFillMode();
-        width = (f32)arg1->width * arg1->scaleX;
-        height = (f32)arg1->height * arg1->scaleY;
-        bottom = (f32)arg1->top;
-        right = (f32)arg1->left;
+        width = (f32)box->width * box->scaleX;
+        height = (f32)box->height * box->scaleY;
+        bottom = (f32)box->top;
+        right = (f32)box->left;
         right += width;
         bottom += height;
         active = &D_80145088.status[7];
@@ -203,12 +203,12 @@ void func_804402DC_de(MenuOption *arg0, MenuOptionBox *arg1, s32 arg2, MenuOptio
         } else {
             var_v1 = 0x80;
         }
-        Text_DrawBevelBox(arg1->left, arg1->top, (s32)right, (s32)bottom, 1, 0, 0, 0, 0, var_v1);
+        Text_DrawBevelBox(box->left, box->top, (s32)right, (s32)bottom, 1, 0, 0, 0, 0, var_v1);
         return;
     }
     if (D_800E1E20 != 3) {
         D_800E1E20 = 3;
         Text_SetupSpriteMode((s32) (arg3->fade * (arg3->alpha * D_800DE47C_de)));
     }
-    func_802AAC28_de(arg0->resource, 0, (s16)arg1->left, (s16)arg1->top, arg1->scaleX, arg1->scaleY, 1);
+    func_802AAC28_de(arg0->resource, 0, (s16)box->left, (s16)box->top, box->scaleX, box->scaleY, 1);
 }

@@ -57,7 +57,7 @@ extern int Weapons_GetPlayerIndex(Root *,ObjRecAt16E0V1 *);
 
 extern s32 Camera_IsSequenceInWindow(void);
 
-extern s32 func_80442A28_de(GameSession *);
+extern s32 Pak_CountLiveNodes(GameSession *);
 
 extern s32 func_8022C650_de(World_func_802283B8_de *);
 
@@ -222,7 +222,7 @@ void func_802283B8_de(World_func_802283B8_de *world) {
         if (rules->locked != 0 || D_8014561C.settings.allowed == 0) {
             return;
         }
-        if (func_80442A28_de(&D_8014561C) == 0 && rules->timeLimit > 0.0f && D_8014561C.paused == 0) {
+        if (Pak_CountLiveNodes(&D_8014561C) == 0 && rules->timeLimit > 0.0f && D_8014561C.paused == 0) {
             if (func_8022C650_de(world) != 0) {
                 rules->timeLimit -= D_800D2988;
             }
@@ -235,7 +235,7 @@ void func_802283B8_de(World_func_802283B8_de *world) {
             }
         }
         game = &D_8014561C;
-        if (func_80442A28_de(game) == 0 && Weapons_CheckScoreLimit(world) != 0) {
+        if (Pak_CountLiveNodes(game) == 0 && Weapons_CheckScoreLimit(world) != 0) {
             limits = &game->rules;
             if (limits->locked == 0 && game->paused == 0 && limits->scoreLimit > 0 && limits->sudden == 0) {
                 Weapons_EndRound(world);

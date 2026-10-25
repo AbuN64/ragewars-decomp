@@ -38,7 +38,7 @@ extern void func_80264770_de(int arg0);
 
 extern s32 D_0044E4B0;
 
-void func_804097E8_de(void);
+void Pak_ClearTimerFlag(void);
 
 extern void func_80264788_de(s32 arg0);
 
@@ -121,7 +121,7 @@ s32 func_8043E9A8_de(void *unused0, Obj8043EB20 *arg1) {
 }
 
 s32 func_8043EA00_de(void *unused0, Arg1Struct *arg1) {
-    func_804097E8_de();
+    Pak_ClearTimerFlag();
     Pak_OpenDialog(D_8014561C, &D_0044E4B0, arg1->unk1C, arg1->unk20, 0);
     return 1;
 }

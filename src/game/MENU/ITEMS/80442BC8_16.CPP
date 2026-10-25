@@ -20,7 +20,7 @@ s32 func_80443694_de(void *unused, struct HolderRecAt1CV1 *holder) {
     struct OwnerRecAt698 *owner = holder->owner;
 
     Weapons_GetPlayerIndex(D_80145040, owner);
-    func_804097E8_de();
+    Pak_ClearTimerFlag();
     Pak_OpenDialog(D_80145040 + 0x5DC, D_0044E48C, owner, owner->value, 0);
     return 1;
 }

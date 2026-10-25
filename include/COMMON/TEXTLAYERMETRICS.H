@@ -178,7 +178,7 @@ typedef struct func_8043FFAC_S5 func_8043FFAC_S5;
 struct Object_func_804420B4_de;
 
 
-typedef struct CMenu_t Node_func_80442A28_de;
+typedef struct CMenu_t Node_Pak_CountLiveNodes;
 
 struct CMenuFontInfo_t;
 typedef struct CMenuFontInfo_t CMenuFontInfo;

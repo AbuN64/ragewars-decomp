@@ -310,8 +310,8 @@ void func_804429D4_de(struct OwnerRecAt4 *owner) {
     }
 }
 
-int func_80442A28_de(Node_func_80442A28_de **head) {
-    Node_func_80442A28_de *node = *head;
+int Pak_CountLiveNodes(Node_Pak_CountLiveNodes **head) {
+    Node_Pak_CountLiveNodes *node = *head;
     int count = 0;
     while (node != 0) {
         if (node->kind != 4) {

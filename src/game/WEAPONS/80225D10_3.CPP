@@ -67,7 +67,7 @@ extern void func_80220A80_de(SharedPlayer *, SharedPlayer *);
 extern s32 func_8026435C_de(Shared_Effect *);
 
 extern s32 func_802A23B4_de(void);
-extern s32 func_80442A28_de(Menu_func_80226A34_de *);
+extern s32 Pak_CountLiveNodes(Menu_func_80226A34_de *);
 extern void func_8025E360_de(void);
 extern void func_8025E3A8_de(void);
 extern void func_80218464_de(char *);
@@ -105,7 +105,7 @@ void func_80226A34_de(World_func_80226A34_de *world) {
             } else if (func_8026435C_de(player->views5E8.view698_36.controller) != 0) {
                 if (Camera_IsSequenceActive() != 0 || func_8024576C_de() != 0) {
                     func_8024570C_de();
-                } else if (func_802A23B4_de() == 0 && func_80442A28_de(&D_8014561C) == 0 && player->views5E4.view5E4_3.alive != 0
+                } else if (func_802A23B4_de() == 0 && Pak_CountLiveNodes(&D_8014561C) == 0 && player->views5E4.view5E4_3.alive != 0
                            && player->views5DC.view5DC_2.view != 0 && player->views5DC.view5DC_2.view->unk564 == 0
                            && ((&D_8014561C.rules)->locked == 0 || D_8014561C.allowed == 0)) {
                     D_8014561C.open = 1;

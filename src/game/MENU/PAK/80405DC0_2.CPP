@@ -131,7 +131,7 @@ s32 func_804097D4_de(void) {
     return D_800E28C8 != -1;
 }
 
-void func_804097E8_de(void) {
+void Pak_ClearTimerFlag(void) {
     D_800E28C0 = 0;
 }
 
