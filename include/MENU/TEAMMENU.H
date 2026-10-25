@@ -37,7 +37,7 @@ struct Menu {
     SlotRecAt14 slots[36];
     s32 cursor;
     s32 count;
-    u8 reserved384[4];
+    s32 held;
     s32 hover;
     s32 scroll;
     s32 last;
@@ -1701,7 +1701,9 @@ typedef struct StickPlayer { char pad00[0x698]; StickInput *input; } StickPlayer
 
 extern char D_800C2260_de[];
 
-extern void Team_InitWeaponChoices(void *, s32, void *);
+struct TeamWeaponPlayer;
+typedef struct TeamWeaponPlayer TeamWeaponPlayer;
+extern void Team_InitWeaponChoices(Menu *menu, s32 held, TeamWeaponPlayer *player);
 
 extern void func_8025E1C4_de(s32);
 #endif

@@ -53,13 +53,13 @@ void func_80217D74_de(s32 *menu, void *player, s32 unused2) {
     if (menu[0] == 0 || menu[0] == 3) {
         if (!held) {
             if (((ObjectLinks11B8 *)(player))->unk_CC0 != -1 && menu[0x388 / 4] != 8) {
-                Team_InitWeaponChoices(menu, 0, player);
+                Team_InitWeaponChoices((Menu *)menu, 0, player);
                 menu[0] = 1;
             }
             return;
         }
         ((ObjectLinks11B8 *)(player))->unk_CC0 = -1;
-        Team_InitWeaponChoices(menu, held, player);
+        Team_InitWeaponChoices((Menu *)menu, held, player);
         ((ObjectLinks11B8 *)(player))->unk_11B4 = 1;
         menu[0] = 1;
     }
@@ -165,76 +165,64 @@ void Team_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *player, s32
     else player->active = 0;
 }
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-
-typedef struct CBarrelWeapon_t {
-    s32 m_Weapon;
-    void *resource;
-    s32 enabled;
-    f32 m_Rot, value, scale;
-} CBarrelWeapon;
-typedef struct DraftChoiceMenu {
-    u8 pad0[0x1C];
-    CBarrelWeapon choices[8];
-    u8 padDC[0x37C-0xDC];
-    s32 selected, ready;
-    void *context;
-    s32 filter, active;
-} DraftChoiceMenu;
-typedef struct DraftChoiceMap { u8 unused; s8 slot; } DraftChoiceMap;
-typedef struct DraftChoicePlayer {
+/* The player's weapon table as the weapon menu reads it: per weapon index (0-21) whether the player owns
+   the weapon and which menu choice (0-7) shows it; it ends at the current weapon at 0x62E (struct
+   Controller currentWeapon). */
+typedef struct TeamWeaponSlot {
+    u8 owned;
+    s8 choice;
+} TeamWeaponSlot;
+struct TeamWeaponPlayer {
     u8 pad0[0x602];
-    DraftChoiceMap map[22];
-    s16 selected;
-} DraftChoicePlayer;
-extern void *D_800D052C[];
+    TeamWeaponSlot weapons[22];
+    s16 currentWeapon;
+};
 extern f32 D_800C2248_de, D_800C913C_de;
-extern s32 func_8022EB0C_de(void *);
-
-void Team_InitWeaponChoices(void *menuData, s32 context, void *playerData) {
-    DraftChoiceMenu *menu = (DraftChoiceMenu *)menuData;
-    DraftChoicePlayer *player = (DraftChoicePlayer *)playerData;
-    s32 choiceIndex;
-    s32 weaponIndex;
+extern s32 func_8022EB0C_de(void *player, s32 weapon);
+/* Fills the eight weapon choices of the menu: a choice shows the weapon the player assigned to it when the
+   menu filter at hover allows it (-1 every choice, 3, 7 or 4 only that choice, else that choice and the
+   next), with its D_800D052C record, whether the player has ammo for it and a wheel angle of 45 degrees
+   per choice, and the cursor lands on the current weapon; any other choice is empty (-1). */
+void Team_InitWeaponChoices(Menu *menu, s32 held, TeamWeaponPlayer *player) {
+    s32 choice;
+    s32 weapon;
     s32 filter;
     s32 accepted;
-    menu->active = 0;
-    menu->context = (void *)context;
-    menu->selected = -1;
-    choiceIndex = 0;
+    menu->scroll = 0;
+    menu->held = held;
+    menu->cursor = -1;
+    choice = 0;
     do {
-        for (weaponIndex = 0; weaponIndex < 22; weaponIndex++) {
-            if (choiceIndex == player->map[weaponIndex].slot) break;
+        for (weapon = 0; weapon < 22; weapon++) {
+            if (choice == player->weapons[weapon].choice) break;
         }
-        if (weaponIndex < 22) {
-            filter = menu->filter;
+        if (weapon >= 22) {
+            menu->slots[choice].weapon = -1;
+            menu->slots[choice].owned = 0;
+        } else {
+            filter = menu->hover;
             if (filter == -1) accepted = 1;
-            else if (filter == 3 || filter == 7) accepted = choiceIndex == filter;
-            else if (filter == 4) accepted = choiceIndex == 4;
+            else if (filter == 3 || filter == 7) accepted = choice == filter;
+            else if (filter == 4) accepted = choice == 4;
             else {
                 accepted = 0;
-                if (choiceIndex == filter || choiceIndex == filter + 1) accepted = 1;
+                if (choice == filter || choice == filter + 1) accepted = 1;
             }
-            if (accepted) goto accepted;
+            if (!accepted) {
+                menu->slots[choice].weapon = -1;
+                menu->slots[choice].owned = 0;
+            } else {
+                menu->slots[choice].weapon = weapon;
+                if (player->currentWeapon == weapon) menu->cursor = choice;
+                menu->slots[choice].info = D_800D052C[weapon];
+                if (func_8022EB0C_de(player, weapon) != 0) menu->slots[choice].owned = 1;
+                else menu->slots[choice].owned = 0;
+                menu->slots[choice].y = 0;
+                menu->slots[choice].scale = D_800C913C_de;
+                menu->slots[choice].angle = (f32)choice * D_800C2248_de;
+            }
         }
-        menu->choices[choiceIndex].m_Weapon = -1;
-        menu->choices[choiceIndex].enabled = 0;
-        goto tail;
-accepted:
-        menu->choices[choiceIndex].m_Weapon = weaponIndex;
-        if (player->selected == weaponIndex) menu->selected = choiceIndex;
-        menu->choices[choiceIndex].resource = D_800D052C[weaponIndex];
-        if (func_8022EB0C_de(player) != 0) menu->choices[choiceIndex].enabled = 1;
-        else menu->choices[choiceIndex].enabled = 0;
-        menu->choices[choiceIndex].value = 0.0f;
-        menu->choices[choiceIndex].scale = D_800C913C_de;
-        menu->choices[choiceIndex].m_Rot = (f32)choiceIndex * D_800C2248_de;
-tail:
-        choiceIndex++;
-    } while (choiceIndex < 8);
-    menu->ready = 1;
+        choice++;
+    } while (choice < 8);
+    menu->count = 1;
 }
-#else
-INCLUDE_ASM("span_1000", Team_InitWeaponChoices);
-#endif
