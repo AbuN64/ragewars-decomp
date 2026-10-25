@@ -96,7 +96,7 @@ static inline void make_plane(PlaneEquation *plane, CVector3 *from, CVector3 *th
     Particle_SubtractVectors(&a, through, from);
     Particle_SubtractVectors(&b, to, through);
     Particle_CrossVectors(&plane->normal, &b, &a);
-    func_8027207C_de(&plane->normal);
+    Particle_NormalizeVec3(&plane->normal);
     plane->distance = plane->normal.x * point->x + plane->normal.y * point->y + plane->normal.z * point->z;
 }
 
@@ -204,7 +204,7 @@ void func_80296878_de(void *planeEquation, void *arg1, void *arg2, void *arg3) {
     Particle_SubtractVectors(&sp10, arg2, arg1);
     Particle_SubtractVectors(&sp20, arg3, arg2);
     Particle_CrossVectors(planeEquation, &sp20, &sp10);
-    func_8027207C_de(planeEquation);
+    Particle_NormalizeVec3(planeEquation);
     plane->distance = (plane->normal.x * point->x)
                                   + (plane->normal.y * point->y)
                                   + (plane->normal.z * point->z);

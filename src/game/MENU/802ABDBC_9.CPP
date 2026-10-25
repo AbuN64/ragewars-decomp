@@ -78,7 +78,7 @@ struct Shared_MenuAmountColumn {
 typedef struct SharedRecAt13E0 SharedRecAt13E0;
 struct SharedRecAt13E0 {
     char pad0[0x8];
-    CVector3 position; /* +0x8: passed by value to func_8025DE54_de */
+    CVector3 position; /* +0x8: passed by value to Render_PlaySoundAtPosition */
     char pad14[0x4];
     struct SharedRecAtC * unk18; /* +0x18: src/func_802ACBCC.c */
     char pad1C[0x5B8];
@@ -689,7 +689,7 @@ command_done:
             }
         }
         if (temp_s1 != 0) {
-            func_8025DE54_de(temp_s1, arg0->position, 0, -1);
+            Render_PlaySoundAtPosition(temp_s1, arg0->position, 0, -1);
         }
         if (temp_s3 != 0) {
             func_8025E11C_de((s32) temp_s3);
@@ -726,7 +726,7 @@ static inline void announcePowerup(struct Player *player, PowerupEntry *entry)
         func_802391AC_de(player->owner, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&D_80145088, player->owner, text[MENU_LANGUAGE]);
     }
-    if (sound) func_8025DE54_de(sound, player->pos, 0, -1);
+    if (sound) Render_PlaySoundAtPosition(sound, player->pos, 0, -1);
     if (event) func_8025E11C_de(event);
 }
 /* Powerup pickup handler (D_800D31D0 rows). A powerup the player already holds, or any pickup in a tag match by a
@@ -785,7 +785,7 @@ s32 func_802ACB98_eu_x(struct Player *player, PowerupEntry *pickup, void *obj) {
         func_802391AC_de(player->owner, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&D_80145088, player->owner, ((char **)text)[D_80152789]);
     }
-    if (sound) func_8025DE54_de(sound, player->pos, 0, -1);
+    if (sound) Render_PlaySoundAtPosition(sound, player->pos, 0, -1);
     if (event) func_8025E11C_de(event);
     return 1;
 }
@@ -818,7 +818,7 @@ s32 func_802ACB58_eu(struct Player *player, PowerupEntry *pickup, void *obj) {
         func_802391AC_de(player->owner, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&D_80145088, player->owner, ((char **)text)[D_80152789]);
     }
-    if (sound) func_8025DE54_de(sound, player->pos, 0, -1);
+    if (sound) Render_PlaySoundAtPosition(sound, player->pos, 0, -1);
     if (event) func_8025E11C_de(event);
     return 1;
 }

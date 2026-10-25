@@ -83,7 +83,7 @@ f32 func_8024E3C4_de(Actor_u1 *actor) {
     }
 }
 
-f32 func_8024E420_de(void *arg0) {
+f32 Sound_GetActorBaseOffset(void *arg0) {
     Resource_u1 *nested;
     if (*(u8 *)arg0 == 1) {
         return ((LevelActor *)arg0)->eyeHeight;

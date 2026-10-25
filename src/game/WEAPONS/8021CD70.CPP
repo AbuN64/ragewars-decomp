@@ -138,7 +138,7 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
                         candidate.y += Particle_GetActorHeight(other) * scale;
                     }
                     Particle_SubtractVectors(&direction, &candidate, &origin);
-                    func_8027207C_de(&direction.x);
+                    Particle_NormalizeVec3(&direction.x);
                     dot = forward.x * direction.x + forward.y * direction.y +
                           forward.z * direction.z;
                     if (threshold < dot) {
@@ -165,7 +165,7 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
                     candidate.y += Particle_GetActorHeight(other) * scale;
                 }
                 Particle_SubtractVectors(&direction, &candidate, &origin);
-                func_8027207C_de(&direction.x);
+                Particle_NormalizeVec3(&direction.x);
                 dot = forward.x * direction.x + forward.y * direction.y +
                       forward.z * direction.z;
                 if (threshold < dot) {
@@ -183,7 +183,7 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
     *targetPosition = bestPosition;
     if (best) {
         Particle_CrossVectors(&axis, &forward, &bestDirection);
-        func_8027207C_de(&axis.x);
+        Particle_NormalizeVec3(&axis.x);
         scale = D_800C239C_de;
         threshold = Nav_ArcCos(threshold);
         amount = func_802B72B0_de(D_800C23A0_de - threshold / (angle * scale));

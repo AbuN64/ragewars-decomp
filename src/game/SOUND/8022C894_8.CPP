@@ -23,7 +23,7 @@ extern Marker *func_80268C1C_de(char *, s32);
 
 extern void func_8024BC94_de(CVector3 *, void *, CVector3);
 
-extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 extern f32 Particle_GetActorHeight(void *);
 
@@ -63,7 +63,7 @@ void func_8022E78C_de(Player *actor, Marker **slot, s32 kind, f32 distance) {
     offset.y = 0.0f;
     offset.z = distance;
     func_8024BC94_de(&pos, actor, offset);
-    func_80271F34_de(&pos, &pos, &actor->pos);
+    Particle_AddVec3(&pos, &pos, &actor->pos);
     marker->active = 1;
     marker->x = pos.x;
     marker->y = pos.y + Particle_GetActorHeight(actor) * D_800C7F08[1];
@@ -76,7 +76,7 @@ void func_8022E890_de(void *unused0, s32 *arg1) {
 
     temp = *arg1;
     if (temp != 0) {
-        func_80268C7C_de(&D_8013B1A8, temp);
+        Render_ReleaseLight(&D_8013B1A8, temp);
         *arg1 = 0;
     }
 }

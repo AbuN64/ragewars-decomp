@@ -112,8 +112,8 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
         target = rotated;
         Particle_TransformPoint(matrix, &eye, &rotated);
         eye = rotated;
-        func_80271F34_de(&target, &target, &D_800E2830->position);
-        func_80271F34_de(&eye, &eye, &D_800E2830->position);
+        Particle_AddVec3(&target, &target, &D_800E2830->position);
+        Particle_AddVec3(&eye, &eye, &D_800E2830->position);
         Particle_SubtractVectors(&delta, &target, &eye);
         if (actor != 0) {
             saved = actor->prefix;

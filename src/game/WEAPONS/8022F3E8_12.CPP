@@ -71,10 +71,10 @@ void func_80231BB0_de(Shared_Actor *actor, void *attack) {
         return;
     }
     if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player)) {
-        func_80214178_de(actor, attack, 8);
+        Weapons_RequestActorState(actor, attack, 8);
         return;
     }
     if (func_802301F4_de(actor, attack) == 0 && !(actor->weaponFlags & 0x400)) {
-        func_80214178_de(actor, attack, action);
+        Weapons_RequestActorState(actor, attack, action);
     }
 }

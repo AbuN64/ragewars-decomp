@@ -15,7 +15,7 @@
 extern s32 *func_8025CC6C_de(void);
 extern s32 func_8025CA24_de(void *,void *);
 static inline void makeImpulse(CVector3 *input,f32 scale,CVector3 *out){Particle_ScaleVector(out,input,scale);}
-static inline void addImpulse(CVector3 *v,CVector3 *impulse){func_80271F34_de(v,v,impulse);}
+static inline void addImpulse(CVector3 *v,CVector3 *impulse){Particle_AddVec3(v,v,impulse);}
 void func_8027A084_de(void *particle) {
     SteeringParticle *arg0=particle;
     CVector3 sp18;
@@ -58,7 +58,7 @@ void func_8027A084_de(void *particle) {
         id=0x730;sound = arg0->sound;
         if (sound != 0) {
             if ((sound->id != id) || (sound->handle == -1)) {
-                func_80284434_de(arg0);
+                Particle_StopSound(arg0);
                 goto block_7;
             }
         } else {
@@ -92,7 +92,7 @@ block_7:
                 Particle_SubtractVectors(&sp28, &sp18, &arg0->position);
                 amount = func_802B72B0_de((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
             }
-            func_8027207C_de(&sp28.x);
+            Particle_NormalizeVec3(&sp28.x);
             sp58 = func_80271818_de(&sp28);
             if (amount < D_800C4B5C_de) {
                 temp_fv0f_2 = amount - D_800C4B60_de;
@@ -145,7 +145,7 @@ extern f32 D_800C4B90_de, D_800C4B94_de, D_800C4B98_de, D_800C4B9C_de, D_800C4BA
 extern char D_8011D8D0[];
 extern void func_8022B09C_de(void *, CVector3 *);
 extern void func_80283D50_de(void *);
-extern void func_80284570_de(void *, void *);
+extern void Particle_Release(void *, void *);
 extern f32 Nav_ArcCos(f32);
 /* Steers a homing particle (sound 0x8AC) at its target, or straight ahead when it has none: keeps its loop
  * sound alive, drops the target after D_800C4B78_de seconds, ends the particle when it gets close enough,
@@ -186,7 +186,7 @@ void Particle_SteerHoming(void *particle) {
     sound = arg0->sound;
     if (sound != 0) {
         if ((sound->id != id) || (sound->handle == -1)) {
-            func_80284434_de(arg0);
+            Particle_StopSound(arg0);
             goto create_sound;
         }
     } else {
@@ -207,8 +207,8 @@ create_sound:
         distance = func_802B72B0_de(v68.x * v68.x + v68.y * v68.y + v68.z * v68.z);
         if (distance < D_800C4B80_de && arg0->time > D_800C4B84_de) {
             func_80283D50_de(arg0);
-            func_80284570_de(D_8011D8D0, arg0);
-            func_80284434_de(arg0);
+            Particle_Release(D_8011D8D0, arg0);
+            Particle_StopSound(arg0);
             return;
         }
     } else {
@@ -217,13 +217,13 @@ create_sound:
         Particle_SubtractVectors(&v68, &v18, &arg0->position);
     }
     v28 = v68;
-    func_8027207C_de(&v28);
+    Particle_NormalizeVec3(&v28);
     q88 = func_80271818_de(&v28);
     func_802741A4_de(&q88);
     func_802741A4_de(&q78);
-    func_8027207C_de(&v28);
+    Particle_NormalizeVec3(&v28);
     v38 = arg0->direction;
-    func_8027207C_de(&v38);
+    Particle_NormalizeVec3(&v38);
     angle = Nav_ArcCos(v28.x * v38.x + v28.y * v38.y + v28.z * v38.z);
     rate = 0.0f;
     if (!(arg0->time < D_800C4B8C_de)) {
@@ -291,7 +291,7 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
         particle->position = *goal;
         return;
     }
-    func_8027207C_de(&offset.x);
+    Particle_NormalizeVec3(&offset.x);
     wanted = func_80271818_de(&offset.x);
     current = func_80271818_de(&particle->direction.x);
     speed = func_802B72B0_de((particle->velocity.x * particle->velocity.x) + (particle->velocity.y * particle->velocity.y) + (particle->velocity.z * particle->velocity.z));

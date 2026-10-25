@@ -22,13 +22,13 @@ extern s32 func_80285F58_de(void *, void *);
 
 void Turret_Code_IDLE(void *actor, void *state) {
     if (Turret_TrackTarget(actor) != 0) {
-        func_80214178_de(actor, state, 0x3F);
+        Weapons_RequestActorState(actor, state, 0x3F);
     }
 }
 
 void Turret_Code_FIRE(void *actor, void *state) {
     if (Turret_TrackTarget(actor) == 0) {
-        func_80214178_de(actor, state, 0x3E);
+        Weapons_RequestActorState(actor, state, 0x3E);
     }
 }
 

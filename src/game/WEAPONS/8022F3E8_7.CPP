@@ -88,7 +88,7 @@ extern s32 func_8022AB20_de(void *arg0, s16 arg1);
 extern s32 D_80140FF8;
 
 
-extern s32 func_8025DE54_de(s16, CVector3, void *, s32);
+extern s32 Render_PlaySoundAtPosition(s16, CVector3, void *, s32);
 
 
 static inline s32 released(void *actor, char *player) {
@@ -124,7 +124,7 @@ void func_802307FC_de(Shared_Actor *actor, WeaponFireState *fire) {
     }
     if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player) && fire->mode == 1) {
         if (((SharedPlayer *)(player))->views5E8.chargeView.charge >= 50) {
-            func_80214178_de(actor, fire, 5);
+            Weapons_RequestActorState(actor, fire, 5);
             fire->mode = 2;
         } else {
             func_8025DF34_de(0xD4D);
@@ -138,7 +138,7 @@ void func_802307FC_de(Shared_Actor *actor, WeaponFireState *fire) {
     }
     if (func_802301F4_de(actor, fire) == 0) {
         if (!(actor->weaponFlags & 0x400)) {
-            func_80214178_de(actor, fire, action);
+            Weapons_RequestActorState(actor, fire, action);
         }
     } else {
         fire->spin += fire->spin * D_800D2988 * 2.0f;
@@ -170,9 +170,9 @@ void func_80230B04_de(struct MeasuredRecAt1D8V1 *arg0, void *arg1) {
             if (temp_a1 == 2) {
                 temp_v1 = ((struct MeasuredRecAt13CV2 *)(arg1))->value;
                 if (temp_v1 == 1) {
-                    func_80214178_de(arg0, arg1, 5);
+                    Weapons_RequestActorState(arg0, arg1, 5);
                 } else if (temp_v1 == temp_a1) {
-                    func_80214178_de(arg0, arg1, 9);
+                    Weapons_RequestActorState(arg0, arg1, 9);
                 } else {
                     goto check_height;
                 }
@@ -182,17 +182,17 @@ void func_80230B04_de(struct MeasuredRecAt1D8V1 *arg0, void *arg1) {
         } else {
 check_height:
             if (!(((struct MeasuredRecAt40 *)(arg1))->value > D_800C2F14_de)) {
-                func_80214178_de(arg0, arg1, 9);
+                Weapons_RequestActorState(arg0, arg1, 9);
             } else {
-                func_80214178_de(arg0, arg1, 5);
+                Weapons_RequestActorState(arg0, arg1, 5);
             }
         }
         goto done;
 check_state:
         if (func_8022AB20_de(value, temp_a1) == 1) {
-            func_80214178_de(arg0, arg1, 7);
+            Weapons_RequestActorState(arg0, arg1, 7);
         } else {
-            func_80214178_de(arg0, arg1, 5);
+            Weapons_RequestActorState(arg0, arg1, 5);
         }
 done:
         ;
@@ -212,10 +212,10 @@ void func_80230BC8_de(LevelActor *actor, Dest *attack) {
         position = &((Shared_ActorView *)player)->position.vector;
     }
     if (released(actor, player)) {
-        func_80214178_de(actor, attack, 2);
+        Weapons_RequestActorState(actor, attack, 2);
         func_8022AF40_de(player);
         func_8022B00C_de(player);
-        func_8025DE54_de(0x794, *position, position, -1);
+        Render_PlaySoundAtPosition(0x794, *position, position, -1);
         Nav_EaseValueToward(&attack->charge, (f32)D_800CA2D8_de * D_800C2F1C_de, 0.4f);
         return;
     }

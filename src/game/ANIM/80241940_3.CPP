@@ -17,7 +17,7 @@ extern f32 Sound_GetActorReach(Input_func_802426CC_de *);
 
 extern f32 Particle_GetActorHeight(Input_func_802426CC_de *);
 
-extern f32 func_8024E420_de(void *);
+extern f32 Sound_GetActorBaseOffset(void *);
 
 extern f32 func_80241728_de(SurfaceHit *, f32, f32);
 
@@ -80,7 +80,7 @@ void func_802426CC_de(ActorRecAtB0 *actor, void *owner, Input_func_802426CC_de *
     extent0 = Sound_GetActorReach(input);
     extent1 = func_8024D398_de(input);
     extent2 = Particle_GetActorHeight(input);
-    extent3 = func_8024E420_de(input);
+    extent3 = Sound_GetActorBaseOffset(input);
     next.x = input->x;
     next.y = hit_y + D_800C3760_de;
     next.z = input->z;

@@ -138,10 +138,10 @@ void LV_FN(u8 *self, u8 *hit) {
             LV_FIELD(self, u32, 0x100) = t1 & ~0x100;
         }
         if (LV_FIELD(hit, s32, 0x128) != 0) {
-            func_80214178_de(self, hit, 0);
+            Weapons_RequestActorState(self, hit, 0);
         }
         if (LV_FIELD(self, u16, 0xE4) == 0x64C) {
-            func_80214178_de(self, hit, 2);
+            Weapons_RequestActorState(self, hit, 2);
         }
     }
 }
@@ -161,7 +161,7 @@ extern void Camera_PostTargetedScreenMessage(void *, void *, s32, void *, f32);
 /* EU/EU-X: this body is 56/57 words; reorg picks beqz (target beql) for the flags check, so those versions
  * keep their asm. */
 #if (!defined(VERSION_EU) && !defined(VERSION_EU_X)) || defined(NON_MATCHING)
-s32 func_80204308_de(struct NavigationPlatform *object, ActorMotionState *guard, struct Player *player) {
+s32 Level_ShowTriggerMessage(struct NavigationPlatform *object, ActorMotionState *guard, struct Player *player) {
     ActorMotionDefinition *record;
     SoundParent *parent;
     void *emitter, *fallback;
@@ -185,7 +185,7 @@ s32 func_80204308_de(struct NavigationPlatform *object, ActorMotionState *guard,
     return 0;
 }
 #else
-INCLUDE_ASM("span_1000", func_80204308_de);
+INCLUDE_ASM("span_1000", Level_ShowTriggerMessage);
 #endif
 
 typedef struct Owner Owner;
@@ -261,7 +261,7 @@ void func_802044C8_de(SharedPlayer *actor, void *state) {
     s32 flags;
 
     if (func_80285F58_de(&D_8011FE88, actor) == 1) {
-        func_80214178_de(actor, state, 1);
+        Weapons_RequestActorState(actor, state, 1);
         switch (actor->views1C.viewE4_7.kind) {
         case 0x64C:
             flags = actor->views1C.view100_9.flags & ~0x2000;
@@ -274,7 +274,7 @@ void func_802044C8_de(SharedPlayer *actor, void *state) {
         }
     } else {
         D_800C8270_de = 1;
-        func_80214178_de(actor, state, 0);
+        Weapons_RequestActorState(actor, state, 0);
         D_800C8270_de = 0;
     }
 }
@@ -358,14 +358,14 @@ void func_80204738_de(LevelActor *object) {
 }
 
 void func_80204770_de(void *a, void *b) {
-    func_80214178_de(a, b, 0x1); }
+    Weapons_RequestActorState(a, b, 0x1); }
 
 void func_8020478C_de(Trigger *trigger) {
     func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 1);
 }
 
 void func_802047BC_de(void *a, void *b) {
-    func_80214178_de(a, b, 0x0); }
+    Weapons_RequestActorState(a, b, 0x0); }
 
 void func_802047D8_de(Trigger *trigger) {
     func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 0);

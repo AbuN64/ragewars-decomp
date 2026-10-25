@@ -96,7 +96,7 @@ CQuatern func_8024D870_de(char *obj) {
                 up.y = 1.0f;
                 up.z = 0.0f;
                 Particle_CrossVectors(&axis, &up, &normal);
-                func_8027207C_de(&axis);
+                Particle_NormalizeVec3(&axis);
                 slope = Nav_ArcCos(up.x * normal.x + up.y * normal.y + up.z * normal.z);
                 D_80115DEC = func_802B7130_de(RW_MIN(slope, 0.43633235f) * 0.375f);
                 tilt.x = axis.x * D_80115DEC;
@@ -151,7 +151,7 @@ void func_8024DBC0_de(void *actor, CVector3 pos, s32 sound, f32 volume) {
     up.y = D_800C3CD0_de[1];
     up.z = 0.0f;
     dir.x = dir.y = dir.z = up.x;
-    func_8027207C_de(&dir);
+    Particle_NormalizeVec3(&dir);
     if (sound != 0xBD7) {
         Particle_ScaleVector(&velocity, &dir, 409.59998f);
     }

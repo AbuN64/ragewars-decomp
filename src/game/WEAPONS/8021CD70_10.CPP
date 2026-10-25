@@ -240,7 +240,7 @@ s32 func_80222FE0_de(void *playerObject, void *positionObject, s32 *unused) {
             func_80239324_de(player->effect, D_800C2870_de, 100.0f, D_800C2870_de, D_800C286C_de, kind, position->pos);
         if (selected->state.kind == 0x2E) actor->state.flags |= 0x200;
         actor->state.timer = -1;
-        func_80214178_de(actor, &actor->state, 0x34);
+        Weapons_RequestActorState(actor, &actor->state, 0x34);
     } else if (player->effect)
         func_80239324_de(player->effect, D_800C2878_de, 60.0f, D_800C2878_de, D_800C2874_de, kind, position->pos);
     return 1;

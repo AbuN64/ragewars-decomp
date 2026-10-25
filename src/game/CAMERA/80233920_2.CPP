@@ -38,7 +38,7 @@ void func_80233DFC_de(View *actor) {
     direction.x = func_802B7130_de((f32) (D_800CD730 * 6) * 0.01745329424738884f);
     direction.y = func_802B7130_de((f32) (D_800CD730 * 8) * 0.01745329424738884f);
     direction.z = func_802B6560_de((f32) (D_800CD730 * 10) * 0.01745329424738884f);
-    func_8027207C_de(&direction);
+    Particle_NormalizeVec3(&direction);
     direction.x *= 120.0f;
     direction.y *= 120.0f;
     direction.z *= 120.0f;

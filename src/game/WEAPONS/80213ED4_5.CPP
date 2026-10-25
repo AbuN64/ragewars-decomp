@@ -9,7 +9,7 @@ extern s32 func_8024E924_de(void *arg0);
 
 
 
-s32 func_80216108_de(void *arg0)
+s32 Weapons_GetImpactSlot(void *arg0)
 {
     char *actor = arg0;
     CGameStatus *audio;

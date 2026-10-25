@@ -77,14 +77,14 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
             }
             ((struct LevelActor *)(obj))->shadowAlpha = alpha;
             dir.y = 1.0f;
-            func_8027207C_de(&dir);
+            Particle_NormalizeVec3(&dir);
             if (RW_ABS(dir.y) < 0.15f) {
                 if (dir.y >= 0.0f) {
                     dir.y = 0.15f;
                 } else {
                     dir.y = -0.15f;
                 }
-                func_8027207C_de(&dir);
+                Particle_NormalizeVec3(&dir);
             }
             plane = ground + height * 0.9f;
             func_8027310C_de(projection, &dir, plane);

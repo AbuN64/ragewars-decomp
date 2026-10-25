@@ -22,7 +22,7 @@ extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void func_80272BCC_de(f32 *, CVector3 *, CVector3 *);
 
-extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 static inline void build_rotation(struct RotationObject *object, f32 *matrix) {
     CQuatern rotation;
@@ -67,7 +67,7 @@ void Turret_LinkEffect_Activate(void *actor, WeaponFireState *state, s32 unusedA
     if ((func_80285F58_de(&D_8011FE88, actor) == 0) &&
         (state->variant == 0)) {
         Turret_LinkEffect_MakeVisible(actor, state, unusedArg);
-        func_80214178_de(actor, state, 1);
+        Weapons_RequestActorState(actor, state, 1);
     }
 }
 
@@ -89,7 +89,7 @@ void Turret_MoveTargetIntoTurretSpace(void *unused, struct RotationObject *objec
     build_rotation(object, matrix);
     Particle_SubtractVectors(&offset, point, pivot);
     func_80272BCC_de(matrix, &offset, point);
-    func_80271F34_de(point, point, pivot);
+    Particle_AddVec3(point, point, pivot);
 }
 
 void Turret_SpecialEffects(void *actor, ObjRecAt8V1 *event) {
@@ -122,7 +122,7 @@ void Turret_DecreaseHealth(void *actor, Dest *state, CDamageInfo *damage) {
     }
     state->health = health;
     if (health == 0) {
-        func_80214178_de(actor, state, 0x40);
+        Weapons_RequestActorState(actor, state, 0x40);
     }
 }
 

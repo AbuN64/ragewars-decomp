@@ -28,7 +28,7 @@ void func_8025DE30_de(void) {
     func_80257360_de(&D_8010C080);
 }
 
-s32 func_8025DE54_de(s16 track, CVector3 arg1, s32 position, s32 arg5) {
+s32 Render_PlaySoundAtPosition(s16 track, CVector3 arg1, s32 position, s32 arg5) {
     if (D_801427D0 != 0) {
         return -1;
     }

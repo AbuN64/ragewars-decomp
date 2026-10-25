@@ -309,7 +309,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
                 up.y = 1.0f;
                 Particle_CrossVectors(&side, &up, &direction);
                 Particle_ScaleVector(&offset, &side, func_802B7130_de(particle->phaseA) * -particle->amplitudeA * fade);
-                func_80271F34_de(&position, &position, &offset);
+                Particle_AddVec3(&position, &position, &offset);
             }
             if (particle->amplitudeB < 0.0f) {
                 up.x = 0;
@@ -318,7 +318,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
                 Particle_CrossVectors(&across, &up, &direction);
                 Particle_CrossVectors(&side, &across, &direction);
                 Particle_ScaleVector(&offset, &side, func_802B7130_de(particle->phaseB) * -particle->amplitudeB * fade);
-                func_80271F34_de(&position, &position, &offset);
+                Particle_AddVec3(&position, &position, &offset);
             }
         }
     }
@@ -330,16 +330,16 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
             } else {
                 axisZ = heading;
             }
-            func_8027207C_de(&axisZ.x);
+            Particle_NormalizeVec3(&axisZ.x);
             up.x = 0;
             up.z = 0;
             up.y = 1.0f;
             Particle_CrossVectors(&axisX, &up, &axisZ);
             Particle_CrossVectors(&axisY, &axisX, &axisZ);
             func_802727D8_de(basis);
-            func_8027207C_de(&axisX.x);
-            func_8027207C_de(&axisY.x);
-            func_8027207C_de(&axisZ.x);
+            Particle_NormalizeVec3(&axisX.x);
+            Particle_NormalizeVec3(&axisY.x);
+            Particle_NormalizeVec3(&axisZ.x);
             basis[0] = axisX.x;
             basis[1] = axisX.y;
             basis[2] = axisX.z;

@@ -134,10 +134,10 @@ void Engine_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *p
             volume = volumes[sampleIndex];
             Particle_TransformPoint(volume->inverse, position, &transformed);
             if (func_80277128_de(volume, transformed.x, transformed.y, transformed.z, &localDirection, &weights[sampleIndex]) != 0) {
-                func_80271F34_de(&translatedDirection, &localDirection, &transformed);
+                Particle_AddVec3(&translatedDirection, &localDirection, &transformed);
                 func_80272A10_de(volume->transform, &translatedDirection, &localDirection);
                 Particle_SubtractVectors(sampleDirection, position, &localDirection);
-                func_8027207C_de(sampleDirection);
+                Particle_NormalizeVec3(sampleDirection);
                 color = volume->direction;
                 if (volume->animatedLight != 0) {
                     level = func_80278890_de(volume);
@@ -149,7 +149,7 @@ void Engine_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *p
                     if (volume->flagB8 != 0) {
                         Particle_ScaleVector(&contribution, &contribution, -1.0f);
                     }
-                    func_80271F34_de(&ambient, &ambient, &contribution);
+                    Particle_AddVec3(&ambient, &ambient, &contribution);
                 }
                 amount = volume->value * 0.5f;
                 scale = 1.0f - amount;
@@ -157,14 +157,14 @@ void Engine_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *p
                 if (volume->flagB8 != 0) {
                     Particle_ScaleVector(&contribution, &contribution, -1.0f);
                 }
-                func_80271F34_de(&ambient, &ambient, &contribution);
+                Particle_AddVec3(&ambient, &ambient, &contribution);
                 weights[sampleIndex] *= scale;
                 amount = color.x; if (amount < 0.0f) amount = -amount;
                 if (color.y < 0.0f) amount = amount - color.y; else amount = amount + color.y;
                 if (color.z < 0.0f) scale = amount - color.z; else scale = amount + color.z;
                 Particle_ScaleVector(&contribution, sampleDirection, weights[sampleIndex]);
                 Particle_ScaleVector(&contribution, &contribution, scale);
-                func_80271F34_de(&combinedDirection, &combinedDirection, &contribution);
+                Particle_AddVec3(&combinedDirection, &combinedDirection, &contribution);
                 if (volume->flagB8 != 0) {
                     weights[sampleIndex] = -weights[sampleIndex];
                 }
@@ -180,7 +180,7 @@ void Engine_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *p
 
         } while (sampleIndex < count);
     }
-    func_8027207C_de(&combinedDirection);
+    Particle_NormalizeVec3(&combinedDirection);
     sampleIndex = 0;
     if (sampleIndex < count) {
         one = 1.0f;
@@ -198,21 +198,21 @@ void Engine_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *p
                 animationColor.y = pulse;
                 animationColor.z = pulse;
                 Particle_ScaleVector(&animatedContribution, &animationColor, scale * samples[sampleIndex]);
-                func_80271F34_de(&diffuse, &diffuse, &animatedContribution);
+                Particle_AddVec3(&diffuse, &diffuse, &animatedContribution);
                 Particle_ScaleVector(&animatedContribution, &animationColor, backScale * samples[sampleIndex]);
-                func_80271F34_de(&backLight, &backLight, &animatedContribution);
+                Particle_AddVec3(&backLight, &backLight, &animatedContribution);
             }
             Particle_ScaleVector(&contribution, &color, scale * samples[sampleIndex]);
-            func_80271F34_de(&diffuse, &diffuse, &contribution);
+            Particle_AddVec3(&diffuse, &diffuse, &contribution);
 
 
             Particle_ScaleVector(&contribution, &color, backScale * samples[sampleIndex]);
-            func_80271F34_de(&backLight, &backLight, &contribution);
+            Particle_AddVec3(&backLight, &backLight, &contribution);
             sampleIndex++;
         } while (sampleIndex < count);
     }
     Particle_ScaleVector(&backLight, &backLight, 0.5f);
-    func_80271F34_de(&ambient, &ambient, &backLight);
+    Particle_AddVec3(&ambient, &ambient, &backLight);
     if (ambient.x < 0.0f) {
         diffuse.x += ambient.x;
     }
@@ -266,7 +266,7 @@ void Engine_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *p
 #include "COMMON/OBJECTLINKS180_2.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/LEVEL_ACTOR.H"
-s32 func_80204308_de(void *, void *, void *);
+s32 Level_ShowTriggerMessage(void *, void *, void *);
 typedef struct SceneTriggerDefinition {
     ActorDefinitionHeader header;
     char pad18[8];
@@ -313,7 +313,7 @@ void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVecto
     kind = actor->definition->kind;
     isKindB = kind == 0xB;
     isKind1 = kind == 1;
-    bottom = actor->position0.y + func_8024E420_de(actor);
+    bottom = actor->position0.y + Sound_GetActorBaseOffset(actor);
     top = bottom + Particle_GetActorHeight(actor);
     for (i = 0; i < world->flaggedCount; i++) {
         trigger = world->flagged[i];
@@ -322,7 +322,7 @@ void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVecto
         }
         ring = 0;
         checkHeight = 0;
-        triggerBottom = trigger->position0.y + func_8024E420_de(trigger);
+        triggerBottom = trigger->position0.y + Sound_GetActorBaseOffset(trigger);
         triggerTop = triggerBottom + Particle_GetActorHeight(trigger);
         definition = (SceneTriggerDefinition *)trigger->definition;
         switch (definition->header.kind) {
@@ -406,10 +406,10 @@ void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVecto
                 }
                 if (hit) {
                     if (trigger->definition->kind == 10 && enterMode == 1) {
-                        hit = func_80204308_de(trigger, &trigger->behaviorFlags, actor);
+                        hit = Level_ShowTriggerMessage(trigger, &trigger->behaviorFlags, actor);
                     }
                     if (hit) {
-                        func_80214178_de(trigger, &trigger->behaviorFlags, enterMode);
+                        Weapons_RequestActorState(trigger, &trigger->behaviorFlags, enterMode);
                     }
                 }
             }
@@ -427,7 +427,7 @@ void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVecto
                     }
                 }
                 if (hit) {
-                    func_80214178_de(trigger, &trigger->behaviorFlags, exitMode);
+                    Weapons_RequestActorState(trigger, &trigger->behaviorFlags, exitMode);
                 }
             }
         }

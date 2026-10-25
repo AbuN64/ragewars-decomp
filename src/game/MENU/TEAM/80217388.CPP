@@ -45,7 +45,7 @@ void func_80217388_de(void *arg0, void *arg1) {
 extern void Particle_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 *right);
 extern f32 func_8024D398_de(void *arg0);
 extern void Particle_ScaleVector(void *result, void *vector, f32 scale);
-extern void func_80271F34_de(CVector3 *result, CVector3 *left, CVector3 *right);
+extern void Particle_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void func_8024E79C_de(void *arg0, CVector3 value, void *arg4, s32 *arg5,
                           s32 arg6, s32 arg7);
 
@@ -65,7 +65,7 @@ void func_8021740C_de(void *arg0, s32 unused, void *arg2, Player *arg3,
         Particle_SubtractVectors(&offset, &((Player *)(arg2))->pos,
                        &arg3->pos);
         offset.y = 0.0f;
-        func_8027207C_de(&offset.x);
+        Particle_NormalizeVec3(&offset.x);
     } else {
         offset.x = 0.0f;
         offset.y = 0.0f;
@@ -74,7 +74,7 @@ void func_8021740C_de(void *arg0, s32 unused, void *arg2, Player *arg3,
 
     distance = func_8024D398_de(arg2) + func_8024D398_de(arg0) + D_800C21E8_de;
     Particle_ScaleVector(&offset, &offset, distance);
-    func_80271F34_de(&position, &((Player *)(arg2))->pos, &offset);
+    Particle_AddVec3(&position, &((Player *)(arg2))->pos, &offset);
     func_8024E79C_de(arg2, position, arg4, arg5, 0, 0);
 }
 

@@ -74,7 +74,7 @@ void func_8027ABF4_de(AccelSteeringObj *particle) {
             direction = particle->direction;
             Particle_ScaleVector(&delta, &direction, accel);
             velocity = &particle->velocity;
-            func_80271F34_de(velocity, velocity, &delta);
+            Particle_AddVec3(velocity, velocity, &delta);
         } while (0);
         length = func_802B72B0_de(particle->velocity.x * particle->velocity.x + particle->velocity.y * particle->velocity.y + particle->velocity.z * particle->velocity.z);
         limit = func_802B2350(particle->link->params->limit);
@@ -236,7 +236,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
     while (var_a0 != ((void *) 0));
   }
   temp_s0 = arg0->target;
-  temp_f0_2 = func_8024E420_de(temp_s0);
+  temp_f0_2 = Sound_GetActorBaseOffset(temp_s0);
   sp20 = temp_s0->pos;
   sp20.y += temp_f0_2;
   Particle_SubtractVectors(&sp10, &sp20, &arg0->inst.pos);
@@ -246,7 +246,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
   sp10.y *= Nav_RandomBetween(tracking_min, tracking_max);
   sp10.z *= Nav_RandomBetween(tracking_min, tracking_max);
   temp_s0_2 = (void *) (&arg0->inst.velocity.x);
-  func_80271F34_de(temp_s0_2, temp_s0_2, &sp10);
+  Particle_AddVec3(temp_s0_2, temp_s0_2, &sp10);
 #if defined(VERSION_EU)
   func_80272748_de(temp_s0_2, func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12));
 #else
@@ -275,7 +275,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
     spE0 = arg0->direction;
     Particle_ScaleVector(temp_s0_2, &spE0, temp_f0_3);
     temp_s0_2 = (void *) (&arg0->inst.velocity.x);
-    func_80271F34_de(temp_s0_2, temp_s0_2, &spD0);
+    Particle_AddVec3(temp_s0_2, temp_s0_2, &spD0);
     temp_f1 = arg0->inst.velocity.x;
     temp_f0_4 = arg0->inst.velocity.y;
     temp_f12 = arg0->inst.velocity.z;
@@ -311,17 +311,17 @@ void func_8027AD4C_de(Shared_Particle *arg0)
   temp_a0 = arg0->desc;
   if (((temp_s0_4 != ((void *) 0)) && (arg0->desc->flags & 0x40000)) && (((BallisticParamsHolder *)arg0->desc)->unkE != 0))
   {
-    temp_f0_6 = func_8024E420_de(temp_s0_4);
+    temp_f0_6 = Sound_GetActorBaseOffset(temp_s0_4);
     sp20 = temp_s0_4->pos;
     sp20.y += temp_f0_6;
     sp20.y += Particle_GetActorHeight(temp_s0_4) * D_800C4BE8_de;
     Particle_SubtractVectors(&sp40, &sp20, &arg0->inst.pos);
-    func_8027207C_de(&sp40);
+    Particle_NormalizeVec3(&sp40);
     sp70 = func_80271818_de(&sp40);
     temp_s2_2 = &arg0->direction;
     sp60 = func_80271818_de(temp_s2_2);
     sp30 = arg0->direction;
-    func_8027207C_de(&sp30);
+    Particle_NormalizeVec3(&sp30);
     temp_f1_3 = arg0->inst.velocity.x;
     temp_f0_7 = arg0->inst.velocity.y;
     temp_f12_2 = arg0->inst.velocity.z;
@@ -355,7 +355,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
     spE0 = arg0->direction;
       Particle_ScaleVector(temp_s0_2, &spE0, temp_f0_9);
       temp_s0_2 = (void *) (&arg0->inst.velocity.x);
-      func_80271F34_de(temp_s0_2, temp_s0_2, &spD0);
+      Particle_AddVec3(temp_s0_2, temp_s0_2, &spD0);
       temp_f1_5 = arg0->inst.velocity.x;
       temp_f0_10 = arg0->inst.velocity.y;
       temp_f12_3 = arg0->inst.velocity.z;

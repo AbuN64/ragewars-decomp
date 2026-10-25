@@ -18,7 +18,7 @@ extern f32 Sound_GetActorReach(Actor_func_80214DD4_de *arg0);
 extern void func_8024E79C_de(Actor_func_80214DD4_de *arg0, CVector3 pos, CVector3 *outPos, s32 *outRoom, s32 arg4, s32 arg5);
 extern f32 func_8024E80C_de(Actor_func_80214DD4_de *arg0);
 extern f32 Particle_GetHorizontalAngle(CVector3 *arg0);
-extern void func_80271F34_de(CVector3 *result, CVector3 *left, CVector3 *right);
+extern void Particle_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void Particle_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void Particle_ScaleVector(CVector3 *result, CVector3 *vec, f32 scale);
 
@@ -31,14 +31,14 @@ static inline void Weapons_PlaceGoalBeside(Actor_func_80214DD4_de *actor, Actor_
     if (anchor != 0) {
         Particle_SubtractVectors(&dir, &target->pos, &anchor->pos);
         dir.y = 0.0f;
-        func_8027207C_de(&dir);
+        Particle_NormalizeVec3(&dir);
     } else {
         dir.x = 0.0f;
         dir.y = 0.0f;
         dir.z = 0.0f;
     }
     Particle_ScaleVector(&dir, &dir, func_8024D398_de(target) + func_8024D398_de(actor) + D_800C216C_de);
-    func_80271F34_de(&goal, &target->pos, &dir);
+    Particle_AddVec3(&goal, &target->pos, &dir);
     func_8024E79C_de(target, goal, outPos, outRoom, 0, 0);
 }
 /** Picks what the tracker aims at (its target, itself, a slot or home point, or the actor) and
@@ -144,7 +144,7 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
                 break;
         }
     }
-    func_80271F34_de(&pos, &pos, &tracker->offset);
+    Particle_AddVec3(&pos, &pos, &tracker->offset);
     if (gap > 0.0f) {
         Particle_SubtractVectors(&away, &actor->pos, &pos);
         angle = Particle_GetHorizontalAngle(&away);

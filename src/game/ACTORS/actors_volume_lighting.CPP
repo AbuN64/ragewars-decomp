@@ -40,7 +40,7 @@ s32 Actors_EvaluateLightVolume(ObjectRecAtBC *arg0, CVector3 arg1, CVector3 arg4
         Particle_TransformPoint(arg7, &arg1.x, &first);
         func_80272B38_de(arg7, &arg4.x, &second);
     }
-    func_8027207C_de(&second.x);
+    Particle_NormalizeVec3(&second.x);
     if (func_80277128_de(arg0, first.x, first.y, first.z,
                      &normal.x, &amount) == 0) {
         return 0;
@@ -70,7 +70,7 @@ s32 Actors_EvaluateLightVolume(ObjectRecAtBC *arg0, CVector3 arg1, CVector3 arg4
 }
 
 extern void Rsp_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
-extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 void Actors_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, Vertices38 *mesh,
                      PackedMatrixWords *matrices, CVector3 *output, s32 multiple)
 {
@@ -128,7 +128,7 @@ void Actors_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, Ver
                     colour = light->animationSeed;
                     selectedAmount = amount;
                 }
-                func_80271F34_de(&sum, &sum, &contribution);
+                Particle_AddVec3(&sum, &sum, &contribution);
             }
         }
         if (mode) {

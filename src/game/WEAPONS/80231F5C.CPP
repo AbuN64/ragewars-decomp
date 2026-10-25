@@ -27,7 +27,7 @@ extern char D_80145040[];
 
 extern s16 func_8022F96C_de(void *);
 extern s32 func_8022F55C_de(void *, s16);
-extern s32 func_8025DE54_de(s32, s32, s32, s32, void *, void *);
+extern s32 Render_PlaySoundAtPosition(s32, s32, s32, s32, void *, void *);
 extern s32 func_8022A5A0_de(void *, void *);
 extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
@@ -74,8 +74,8 @@ void func_80231F6C_de(Shared_Actor *actor, WeaponFireState *fireState) {
     if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player) && (type = fireState->mode) == 1) {
         fireState->mode = 2;
         if (((SharedPlayer *)(player))->views5E8.chargeView.charge >= 0x32) {
-            func_8025DE54_de(0xB23, pos[0], pos[1], pos[2], pos, player);
-            func_80214178_de(actor, fireState, 5);
+            Render_PlaySoundAtPosition(0xB23, pos[0], pos[1], pos[2], pos, player);
+            Weapons_RequestActorState(actor, fireState, 5);
         } else {
             func_8025DF34_de(0xD4D);
             if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
@@ -88,7 +88,7 @@ void func_80231F6C_de(Shared_Actor *actor, WeaponFireState *fireState) {
     }
     if (func_802301F4_de(actor, fireState) == 0) {
         if (!(actor->weaponFlags & 0x400)) {
-            func_80214178_de(actor, fireState, action);
+            Weapons_RequestActorState(actor, fireState, action);
         }
         return;
     }

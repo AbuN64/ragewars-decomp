@@ -15,7 +15,7 @@ extern void Particle_ScaleVector(void *, void *, f32);
 extern void func_8024E79C_de(void *, Triple, Triple *, s32 *, s32, s32);
 extern struct Shape_typemap_165 func_80271818_de(Triple *);
 #include "particle/8027A0F4_8.H"
-extern void func_80265E10_de(void *, void *, s32, s32, Triple, AttachmentEffectArgs);
+extern void System_DeliverContactEffect(void *, void *, s32, s32, Triple, AttachmentEffectArgs);
 
 void Fx_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct MatrixF *arg2, func_8026E5E0_S3 *actor, AttachmentTable *arg4) {
     Triple pos;
@@ -194,7 +194,7 @@ void Fx_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct Matri
                     lifetime *= D_800C4968_eu;
 #endif
                     params.fields.lifeBase = (s16)(s32)lifetime;
-                    func_80265E10_de(actor, actor, 3, -1, pos, params);
+                    System_DeliverContactEffect(actor, actor, 3, -1, pos, params);
                 }
             }
             arg0++;

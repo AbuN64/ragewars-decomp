@@ -10,7 +10,7 @@
 #include "COMMON/OBJRECV5.H"
 #include "GAME/CODE_8027302C.H"
 extern void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMovement *tuning);
-extern s32 func_80214178_de(void *arg0, void *arg1, s32 arg2);
+extern s32 Weapons_RequestActorState(void *arg0, void *arg1, s32 arg2);
 extern void Particle_TransformPoint(void *arg0, void *arg1, void *arg2);
 
 #if defined(VERSION_US_REV1) || defined(NON_MATCHING)
@@ -99,7 +99,7 @@ void func_80225F44_de(SharedPlayer *player,func_802165F8_S1 *body) {
     Weapons_UpdateViewAngles(player,body,&D_800C95D0);
     offset=0;
     if(player->views5E8.view6B8_50.input&8) {
-        func_80214178_de(mount,&mount->animation,0x2e);
+        Weapons_RequestActorState(mount,&mount->animation,0x2e);
         player->views5E8.view704_68.lift=D_800C2B10_de;
         player->views5E8.view6C0_51.unk6C0=D_800C9514_de+D_800C9514_de;
     }

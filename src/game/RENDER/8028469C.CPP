@@ -216,7 +216,7 @@ void func_802849F0_de(ParticleEffect *effect)
     if (acceleration != 0.0f) {
         direction = effect->direction;
         Particle_ScaleVector(&delta, &direction, acceleration);
-        func_80271F34_de(&effect->velocity, &effect->velocity, &delta);
+        Particle_AddVec3(&effect->velocity, &effect->velocity, &delta);
         velocity = &effect->velocity;
         x = effect->velocity.x;
         y = effect->velocity.y;

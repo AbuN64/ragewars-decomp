@@ -177,7 +177,7 @@ void func_80206604_de(LevelActor *actor, ActorMotionState *motionState) {
 
 void func_802066A4_de(LevelActor *actor, Dest *arg1) {
     arg1->field124 = ((ActorHealthDefinition *)actor->definition)->health;
-    func_80214178_de(actor, arg1, 0);
+    Weapons_RequestActorState(actor, arg1, 0);
     arg1->charge = D_800C1AE0_de;
     arg1->field12C = D_800C1AE0_de;
     if (func_80285F58_de(&D_8011FE88, actor) == 1) {

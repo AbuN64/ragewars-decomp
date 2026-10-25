@@ -19,11 +19,11 @@
 #include "particle/8027A0F4_4.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/MATH_HELPERS.H"
-extern void func_80284178_de(void *);
+extern void Particle_UpdateMatrix(void *);
 
 extern void func_80279A00_de(void *arg0);
 
-extern void func_802A42F4_de(void *arg0, void *arg1);
+extern void Render_DetachParticleSwooshes(void *arg0, void *arg1);
 
 
 
@@ -37,7 +37,7 @@ extern s32 D_8011ADB0;
 
 extern char D_8011D8D0;
 
-extern void func_80284570_de(void *a, void *b);
+extern void Particle_Release(void *a, void *b);
 
 extern CVector3 D_801042C8;
 
@@ -63,7 +63,7 @@ f32 func_802B72B0_de(f32);
 
 void Particle_ScaleVector(CVector3 *,CVector3 *,f32);
 
- void func_80271F34_de(CVector3 *,CVector3 *,CVector3 *);
+ void Particle_AddVec3(CVector3 *,CVector3 *,CVector3 *);
 
 /* Transform the measured attachment position and direction into the target frame. */
 extern ParticleAttachmentState D_801041F0;
@@ -76,9 +76,9 @@ extern void func_8026EF58_de(f32 *out, f32 *m);
 
 extern void func_80272B38_de(void *matrix, void *input, void *output);
 
-extern void func_80265E10_de(void *, void *, s32, s32, CVector3, struct IntPair);
+extern void System_DeliverContactEffect(void *, void *, s32, s32, CVector3, struct IntPair);
 
-extern void func_80279B40_de(void *, s32, s8, s32);
+extern void Render_SpawnChildEffect(void *, s32, s8, s32);
 
 /** Return the word at offset 0xFC68. */
 int func_802830B8_de(struct EffectSystem *effectSystem) {
@@ -103,12 +103,12 @@ void func_802830CC_de(struct EffectSystem *effectSystem, s32 arg1) {
                 if ((flags & 0x100) && (var_s0->owner == (void *)arg1) && !(flags & 0x800)) {
                     func_80279A00_de(var_s0);
                     if (var_s0->unk1D9 != 0) {
-                        func_80284178_de(var_s0);
-                        func_802A42F4_de(&D_801379C0, var_s0);
+                        Particle_UpdateMatrix(var_s0);
+                        Render_DetachParticleSwooshes(&D_801379C0, var_s0);
                     }
                     temp_a1 = var_s0->unk138;
                     if (temp_a1 != 0) {
-                        func_80268C7C_de(&D_8013B1A8, temp_a1);
+                        Render_ReleaseLight(&D_8013B1A8, temp_a1);
                         var_s0->unk138 = 0;
                     }
                     temp_v1_3 = var_s0->refCount;
@@ -168,12 +168,12 @@ void func_80283278_de(struct EffectSystem *effectSystem, s32 arg1) {
                   if (!(flags & 0x800)) {
                     func_80279A00_de(var_s0);
                     if (var_s0->unk1D9 != 0) {
-                        func_80284178_de(var_s0);
-                        func_802A42F4_de(&D_801379C0, var_s0);
+                        Particle_UpdateMatrix(var_s0);
+                        Render_DetachParticleSwooshes(&D_801379C0, var_s0);
                     }
                     temp_a1 = var_s0->unk138;
                     if (temp_a1 != 0) {
-                        func_80268C7C_de(&D_8013B1A8, temp_a1);
+                        Render_ReleaseLight(&D_8013B1A8, temp_a1);
                         var_s0->unk138 = 0;
                     }
                     temp_v1_3 = var_s0->refCount;
@@ -225,14 +225,14 @@ void func_80283424_de(void *arg0) {
 }
 
 void func_80283448_de(void *object) {
-    func_80284570_de(&D_8011D8D0, object);
-    func_80284434_de(object);
+    Particle_Release(&D_8011D8D0, object);
+    Particle_StopSound(object);
 }
 
 #include "particle/8027A0F4_8.H"
 extern CQuatern func_80271818_de(CVector3 *);
 extern Triple D_801002A8;
-extern s32 func_8025DE54_de(s16, CVector3, s32, s32);
+extern s32 Render_PlaySoundAtPosition(s16, CVector3, s32, s32);
 void func_80283480_de(Obj_func_80283920_de *source, s32 kind) {
     CQuatern q;
     CVector3 pos;
@@ -322,7 +322,7 @@ void func_80283920_de(Obj_func_80283920_de *actor, Params_func_80283920_de *arg1
         case 0x22: case 0x5f: case 0x60:
             func_802843B8_de(actor,temp_t0); break;
         default:
-            func_8025DE54_de(temp_t0, *(CVector3 *)&actor->unk8, 0, -1); break;
+            Render_PlaySoundAtPosition(temp_t0, *(CVector3 *)&actor->unk8, 0, -1); break;
         }
     }
 }
@@ -331,12 +331,12 @@ void func_80283A1C_de(void *arg0) {
     s32 temp;
 
     if (((Obj_func_80283920_de *)arg0)->active1D9 != 0) {
-        func_80284178_de(arg0);
-        func_802A42F4_de(&D_801379C0, arg0);
+        Particle_UpdateMatrix(arg0);
+        Render_DetachParticleSwooshes(&D_801379C0, arg0);
     }
     temp = ((Obj_func_80283920_de *)arg0)->unk138;
     if (temp != 0) {
-        func_80268C7C_de(&D_8013B1A8, temp);
+        Render_ReleaseLight(&D_8013B1A8, temp);
         ((Obj_func_80283920_de *)arg0)->unk138 = 0;
     }
 }
@@ -352,7 +352,7 @@ void func_80283A80_de(ObjRecAt174 *arg0) {
  direction=arg0->direction;
  Particle_ScaleVector(&delta,dir,accel);
  velocity=&arg0->velocity;
- func_80271F34_de(velocity,velocity,&delta);
+ Particle_AddVec3(velocity,velocity,&delta);
  length=func_802B72B0_de(arg0->velocity.x*arg0->velocity.x+arg0->velocity.y*arg0->velocity.y+arg0->velocity.z*arg0->velocity.z);
  limit=RW_BITS_TO_FLOAT(arg0->link->params->limit);
  if(accel>0.0f) { if(!(limit<length)) goto done; } else { if(!(length<limit)) goto done; } Particle_ScaleVector(velocity,dir,limit); done:;
@@ -397,7 +397,7 @@ void func_80283C1C_de(void *arg0, f32 *arg1, s32 arg2) {
     Particle_TransformPoint(matrix_ptr, scene, &((Shared_Particle *)actor)->attachmentPosition);
     direction_ptr = &direction;
     direction = scene->direction;
-    func_8027207C_de((f32 *)direction_ptr);
+    Particle_NormalizeVec3((f32 *)direction_ptr);
     func_80272B38_de(matrix_ptr, direction_ptr, &((Shared_Particle *)actor)->inst.velocity);
     ((Shared_Particle *)actor)->target = current;
     ((Shared_Particle *)actor)->flags |= 0x10000;
@@ -428,7 +428,7 @@ void func_80283D50_de(void *actor) {
     void *temp_v1;
 
     temp_s1 = ((Shared_Particle *)actor)->desc;
-    if (func_80284068_de(actor) != 0) {
+    if (Particle_HasSurfaceFlag(actor) != 0) {
         var_a0 = 0xC;
     } else {
         var_a0 = 0xA;
@@ -442,14 +442,14 @@ void func_80283D50_de(void *actor) {
     pair = events->parameters[var_a0];
     temp_s3 = temp_s1->events->sounds[var_a0];
     if (temp_a2 != 0xFFFF) {
-        func_80265E10_de(actor, actor, temp_a2, -1,
+        System_DeliverContactEffect(actor, actor, temp_a2, -1,
                      ((Shared_Particle *)actor)->inst.pos, pair);
     }
     if (model != 0xFFFF) {
-        func_80279B40_de(actor, model, ((Shared_Particle *)actor)->space, 1);
+        Render_SpawnChildEffect(actor, model, ((Shared_Particle *)actor)->space, 1);
     }
     if (temp_s3 != 0xFFFF) {
-        func_8025DE54_de((s16)temp_s3,
+        Render_PlaySoundAtPosition((s16)temp_s3,
                       ((Shared_Particle *)actor)->inst.pos, 0, -1);
     }
 }
@@ -467,7 +467,7 @@ void func_80283E58_de(void *particle) {
     void *temp_v1;
 
     temp_s1 = ((Shared_Particle *)particle)->desc;
-    if (func_80284068_de(particle) != 0) {
+    if (Particle_HasSurfaceFlag(particle) != 0) {
         var_a0 = 0xD;
     } else {
         var_a0 = 0xB;
@@ -481,14 +481,14 @@ void func_80283E58_de(void *particle) {
     pair = events->parameters[var_a0];
     temp_s3 = temp_s1->events->sounds[var_a0];
     if (temp_a2 != 0xFFFF) {
-        func_80265E10_de(particle, particle, temp_a2, -1,
+        System_DeliverContactEffect(particle, particle, temp_a2, -1,
                      ((Shared_Particle *)particle)->inst.pos, pair);
     }
     if (temp_s2 != 0xFFFF) {
-        func_80279B40_de(particle, temp_s2, ((Shared_Particle *)particle)->space, 1);
+        Render_SpawnChildEffect(particle, temp_s2, ((Shared_Particle *)particle)->space, 1);
     }
     if (temp_s3 != 0xFFFF) {
-        func_8025DE54_de((s16)temp_s3,
+        Render_PlaySoundAtPosition((s16)temp_s3,
                       ((Shared_Particle *)particle)->inst.pos,
                       (s32)&((Shared_Particle *)particle)->inst.pos, (s32)particle);
     }
@@ -507,7 +507,7 @@ void func_80283F60_de(void *particle) {
     void *temp_v1;
 
     temp_s1 = ((Shared_Particle *)particle)->desc;
-    if (func_80284068_de(particle) != 0) {
+    if (Particle_HasSurfaceFlag(particle) != 0) {
         var_a0 = 0xC;
     } else {
         var_a0 = 0xA;
@@ -521,19 +521,19 @@ void func_80283F60_de(void *particle) {
     pair = events->parameters[var_a0];
     temp_s3 = temp_s1->events->sounds[var_a0];
     if (temp_a2 != 0xFFFF) {
-        func_80265E10_de(particle, particle, temp_a2, -1,
+        System_DeliverContactEffect(particle, particle, temp_a2, -1,
                      ((Shared_Particle *)particle)->inst.pos, pair);
     }
     if (temp_s2 != 0xFFFF) {
-        func_80279B40_de(particle, temp_s2, ((Shared_Particle *)particle)->space, 1);
+        Render_SpawnChildEffect(particle, temp_s2, ((Shared_Particle *)particle)->space, 1);
     }
     if (temp_s3 != 0xFFFF) {
-        func_8025DE54_de((s16)temp_s3,
+        Render_PlaySoundAtPosition((s16)temp_s3,
                       ((Shared_Particle *)particle)->inst.pos, 0, -1);
     }
 }
 
-int func_80284068_de(void *particle) {
+int Particle_HasSurfaceFlag(void *particle) {
     char pad[0x10];
     return ((u32)((Shared_Particle *)particle)->flags >> 2) & 1;
 }

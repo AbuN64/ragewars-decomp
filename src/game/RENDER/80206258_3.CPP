@@ -219,26 +219,26 @@ void func_802070D0_de(func_802070D0_S3 *arg0, func_802070D0_S1 *arg1) {
         } else {
             Particle_SubtractVectors(&vec1, temp_v0, temp_s2);
         }
-        func_8027207C_de(&vec1);
+        Particle_NormalizeVec3(&vec1);
         ;
         vec1.x = arg1->unk140 + arg1->unk14C * (vec1.x - arg1->unk140);
         temp_f2_3 = arg1->unk144;
         vec1.y = temp_f2_3 + arg1->unk14C * (vec1.y - temp_f2_3);
         temp_f2_4 = arg1->unk148;
         vec1.z = temp_f2_4 + arg1->unk14C * (vec1.z - temp_f2_4);
-        func_8027207C_de(&vec1);
+        Particle_NormalizeVec3(&vec1);
         if (arg1->unk14C >= 1.0f) {
             goto block_17;
         }
     } else {
-        func_8027207C_de(&vec0);
+        Particle_NormalizeVec3(&vec0);
         ;
         vec1.x = arg1->unk140 + temp_f20 * (vec0.x - arg1->unk140);
         temp_f1_3 = arg1->unk144;
         vec1.y = temp_f1_3 + temp_f20 * (vec0.y - temp_f1_3);
         temp_f1_4 = arg1->unk148;
         vec1.z = temp_f1_4 + temp_f20 * (vec0.z - temp_f1_4);
-        func_8027207C_de(&vec1);
+        Particle_NormalizeVec3(&vec1);
         block_17:
         arg1->unk140 = vec1.x;
         arg1->unk144 = vec1.y;
@@ -389,10 +389,10 @@ void func_80207890_de(void *object, void *state) {
     Player *player = object;
     ActorMotionState *motionState = state;
     motionState->state = 0;
-    func_80214178_de(player, motionState, 0);
+    Weapons_RequestActorState(player, motionState, 0);
     if (motionState->routeMode == 1) {
         motionState->destination = motionState->start;
-        func_80214178_de(player, motionState, 4);
+        Weapons_RequestActorState(player, motionState, 4);
     }
     if (func_80285F58_de(&D_8011FE88, player) == 0) {
         player->weaponFlags &= ~0x100;

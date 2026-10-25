@@ -19,7 +19,7 @@ void *func_80268C1C_de(void *intrusiveList, void *arg1) {
     return temp_s0;
 }
 
-void func_80268C7C_de(void *a, s32 b) {
+void Render_ReleaseLight(void *a, s32 b) {
     (((struct Limit *) ((s8 *) b))->limit) = 0;
     func_80255ED8_de(a, b);
     func_80255CB8_de(a + 0x14, b);

@@ -61,7 +61,7 @@ extern s32 *func_8024BFD4_de(char *, s8);
 
 extern void Rsp_ConvertMatrixToFloat(f32 *, char *);
 
-extern void func_80265E10_de(char *, char *, u16, s32, CVector3, struct IntPair);
+extern void System_DeliverContactEffect(char *, char *, u16, s32, CVector3, struct IntPair);
 
 /* Returns an actor's aiming orientation: a controlled actor turns a quarter turn about the vertical from its
  * weapon's orientation at 0x140, or from the player's own orientation from Weapons_BuildPlayerOrientation when unarmed; an
@@ -294,7 +294,7 @@ void func_802476C8_de(char *obj, void *anim, f32 from, f32 to) {
                 }
             }
             if (fire != 0) {
-                func_80265E10_de(obj, obj, events[i].effect, -1, pos, events[i].params);
+                System_DeliverContactEffect(obj, obj, events[i].effect, -1, pos, events[i].params);
                 D_800D06BC++;
             }
         }
@@ -413,7 +413,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
         center.y += ((LevelActor *)(entity))->eyeHeight;
         center.y += Particle_GetActorHeight(entity) * 0.5f;
         Particle_SubtractVectors(&dir, &center, &point);
-        func_8027207C_de(&dir);
+        Particle_NormalizeVec3(&dir);
         dot = aim.x * dir.x + aim.y * dir.y + aim.z * dir.z;
         if (bestDot < dot) {
             bestDot = dot;
@@ -423,7 +423,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
     }
     if (target != 0) {
         Particle_CrossVectors(&axis, &aim, &best);
-        func_8027207C_de(&axis);
+        Particle_NormalizeVec3(&axis);
         angle = Nav_ArcCos(bestDot);
         angle *= func_802B72B0_de(func_802B72B0_de(1.0f - angle / (cone * 0.008726647f)));
         angle *= 0.5f;
@@ -483,14 +483,14 @@ void func_80247F18_de(char *arg0, char *arg1, char *arg2, CVector3 arg3,
         sp20.z = ((Matrix *)arg2)->m[14];
         Particle_SubtractVectors(&arg3, &arg3, &sp20);
         Particle_CrossVectors(&sp10, &arg3, &arg6);
-        func_8027207C_de(&sp10);
-        func_8027207C_de(&arg3);
-        func_8027207C_de(&arg6);
+        Particle_NormalizeVec3(&sp10);
+        Particle_NormalizeVec3(&arg3);
+        Particle_NormalizeVec3(&arg6);
         Particle_CrossVectors(&sp30, &sp10, &arg3);
         Particle_ScaleVector(&sp10, &sp10,
                       (sp30.x * arg6.x) + (sp30.y * arg6.y) +
                           (sp30.z * arg6.z));
-        func_8027207C_de(&sp10);
+        Particle_NormalizeVec3(&sp10);
         ((Field_Vec_18 *)(arg1))->value = sp10;
        }
       }
@@ -540,7 +540,7 @@ void func_802480F0_de(s32 time, s32 flags, f32 *matrix) {
     } else {
         return;
     }
-    func_8027207C_de(&axis);
+    Particle_NormalizeVec3(&axis);
     origin.x = matrix[12];
     origin.y = matrix[13];
     origin.z = matrix[14];

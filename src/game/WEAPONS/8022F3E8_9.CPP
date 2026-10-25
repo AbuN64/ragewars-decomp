@@ -87,6 +87,6 @@ void func_80230FDC_de(Shared_Actor *actor, WeaponFireState *fireState) {
         }
     }
     if (func_802301F4_de(actor, fireState) == 0 && !(actor->weaponFlags & 0x400)) {
-        func_80214178_de(actor, fireState, action);
+        Weapons_RequestActorState(actor, fireState, action);
     }
 }

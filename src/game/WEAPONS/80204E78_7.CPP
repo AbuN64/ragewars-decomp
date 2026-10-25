@@ -83,13 +83,13 @@ void func_8020612C_de(LevelActor *actor, ActorMotionState *motionState) {
         }
     }
     if (motionState->timer >= motionState->speed) {
-        func_80214178_de(actor, motionState, 1);
+        Weapons_RequestActorState(actor, motionState, 1);
     }
 }
 
 void func_802061D8_de(void *a, struct WeaponEventSource *b) {
     if (b->eventEnabled != 0) {
-        func_80214178_de(a, b, 0x0);
+        Weapons_RequestActorState(a, b, 0x0);
     }
 }
 

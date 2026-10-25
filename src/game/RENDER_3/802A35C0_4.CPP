@@ -123,7 +123,7 @@ s32 func_802A4134_de(AnimationFrameState *state,
     return frame;
 }
 
-void func_802A42F4_de(Root752C *arg0, Entity1DC *arg1) {
+void Render_DetachParticleSwooshes(Root752C *arg0, Entity1DC *arg1) {
     f32 sp10[16];
     f32 temp_f1;
     f32 scale;

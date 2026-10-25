@@ -68,7 +68,7 @@ extern char D_800C8F60[];
 extern s32 Render_LocatePackSection(s32 *, s32, s32, s32 *);
 
 
-extern void func_80265E10_de(void *, void *, s32, s32, Triple, ResourceManagerState);
+extern void System_DeliverContactEffect(void *, void *, s32, s32, Triple, ResourceManagerState);
 
 s32 func_802500FC_de(void *prop, s32 arg1) {
     Owner_func_80250274_de *owner = prop;
@@ -284,7 +284,7 @@ void func_80250624_de(void *object, s32 all) {
             attachment = &entries[i];
             if (all != 0 || attachment->type == 8) {
                 Particle_TransformPoint(((PlacedProp *)object)->matrix, &attachment->offset, &position);
-                func_80265E10_de(object, object, attachment->type, -1, position, attachment->params);
+                System_DeliverContactEffect(object, object, attachment->type, -1, position, attachment->params);
             }
         }
         Scene_UnlockResource(0, table);

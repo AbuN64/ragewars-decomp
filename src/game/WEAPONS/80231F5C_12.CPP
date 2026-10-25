@@ -65,7 +65,7 @@ void func_802331FC_de(Shared_ActorView *arg0, WeaponFireState *fireState) {
         } else {
             func_8021A9A4_de(arg0->self, 0x4CD);
         }
-        func_80214178_de(arg0, fireState, 4);
+        Weapons_RequestActorState(arg0, fireState, 4);
         func_8022AEA0_de(player, 0x977);
         func_8022AF74_de(player, 0x974);
 
@@ -86,7 +86,7 @@ void func_80233314_de(void) {
 
 void func_8023331C_de(void *arg0, struct Shared_Particle *particle) {
     particle->unk148 = D_800C3050_de;
-    func_80214178_de(arg0, particle, 8);
+    Weapons_RequestActorState(arg0, particle, 8);
 }
 
 /** Perform the no-op callback at VRAM 0x80233334. */
@@ -111,7 +111,7 @@ void func_8023334C_de(void *arg0, void *attack) {
 
     if (!((((Shared_ActorView *)actor)->actionFlags & 0x4000) &&
           (((Shared_ActorView *)actor)->health != 0))) {
-        func_80214178_de(arg0, attack, 2);
+        Weapons_RequestActorState(arg0, attack, 2);
         func_8022B9C4_de(actor);
         ((WeaponFireState *)attack)->mode = 1;
     }
@@ -144,13 +144,13 @@ void func_80233438_de(void *arg0, void *attack) {
         }
     } else if (func_802301F4_de(arg0, attack) == 0 &&
                !(((ObjectLinks1DC_3 *)arg0)->unk_100 & 0x400)) {
-        func_80214178_de(arg0, attack, value);
+        Weapons_RequestActorState(arg0, attack, value);
     }
 }
 
 void func_80233544_de(void *a, struct WeaponEventSource *b) {
     if (b->eventEnabled != 0) {
-        func_80214178_de(a, b, 2);
+        Weapons_RequestActorState(a, b, 2);
     }
 }
 
@@ -211,7 +211,7 @@ void func_8023371C_de(void *arg0, struct WeaponFireState *fireState) {
     temp_f0 = func_80274808_de(fireState->spinStep, target, D_800CA7A0_de);
     fireState->spinStep = temp_f0;
     if (target <= temp_f0) {
-        func_80214178_de(arg0, fireState, 2);
+        Weapons_RequestActorState(arg0, fireState, 2);
     }
 }
 

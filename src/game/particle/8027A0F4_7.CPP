@@ -11,8 +11,8 @@ extern char D_801379C0;
 extern char D_8013B1A8;
 
 extern void func_80279A00_de(void *arg0);
-extern void func_80284178_de(void *);
-extern void func_802A42F4_de(void *arg0, void *arg1);
+extern void Particle_UpdateMatrix(void *);
+extern void Render_DetachParticleSwooshes(void *arg0, void *arg1);
 
 
 
@@ -53,12 +53,12 @@ void func_8027FF58_de(void *arg0) {
                   if (!(flags & 0x800)) {
                     func_80279A00_de(temp_s0);
                     if (temp_s0->unk1D9 != 0) {
-                        func_80284178_de(temp_s0);
-                        func_802A42F4_de(&D_801379C0, temp_s0);
+                        Particle_UpdateMatrix(temp_s0);
+                        Render_DetachParticleSwooshes(&D_801379C0, temp_s0);
                     }
                     temp_a1 = temp_s0->unk138;
                     if (temp_a1 != 0) {
-                        func_80268C7C_de(&D_8013B1A8, temp_a1);
+                        Render_ReleaseLight(&D_8013B1A8, temp_a1);
                         temp_s0->unk138 = 0;
                     }
                     temp_v1_2 = temp_s0->refCount;

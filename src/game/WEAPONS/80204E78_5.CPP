@@ -36,7 +36,7 @@ void func_802054E0_de(Obj54E0 *arg0, void *arg1) {
     }
     if (D_8011FE88.mode == 4) {
         if (rec->unk34.whole != -1) {
-            func_8025DE54_de(rec->unk34.half.id, arg0->pos.v, 0, -1);
+            Render_PlaySoundAtPosition(rec->unk34.half.id, arg0->pos.v, 0, -1);
         }
         if (rec->unk30 != -1) {
             func_80216288_de(arg0, rec->unk30, arg0->pos.t, 0);
@@ -74,7 +74,7 @@ void func_80205628_de(void *levelActor, void *spawnDispatchOwner, void *arg2) {
 }
 
 void func_80205694_de(void *arg0, void *arg1) {
-    func_80214178_de(arg0, arg1, 1);
+    Weapons_RequestActorState(arg0, arg1, 1);
     func_80285DB0_de(&D_8011FE88, arg0, 1);
 }
 

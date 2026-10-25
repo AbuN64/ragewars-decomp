@@ -60,7 +60,7 @@ s32 func_8020D4AC_de(Selection_func_8020D4AC_de *sel) {
         sel->dirs[stage].x = node->x - sel->objects[i]->pos.x;
         sel->dirs[stage].y = node->y - sel->objects[i]->pos.y;
         sel->dirs[stage].z = node->z - sel->objects[i]->pos.z;
-        func_8027207C_de(&sel->dirs[stage]);
+        Particle_NormalizeVec3(&sel->dirs[stage]);
         facing.x *= sel->dirs[stage].x;
         facing.y *= sel->dirs[stage].y;
         facing.z *= sel->dirs[stage].z;

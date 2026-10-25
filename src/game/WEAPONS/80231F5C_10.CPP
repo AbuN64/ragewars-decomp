@@ -31,7 +31,7 @@ void func_80232B64_de(LevelActor *actor, WeaponFireState *fireState) {
     fireState->spinStep = 0;
     fireState->spin = 0;
     if ((fireState->triggerMode != 0) && (func_802301F4_de(actor, fireState) == 0)) {
-        func_80214178_de(actor, fireState, 2);
+        Weapons_RequestActorState(actor, fireState, 2);
     }
 }
 
@@ -87,15 +87,15 @@ void func_80232CEC_de(void *actor, void *attack) {
         } else {
             switch (state->selectedAction) {
             case 8:
-                func_8025DE54_de(0xA3E, state->pos,
+                Render_PlaySoundAtPosition(0xA3E, state->pos,
                               (s32)&state->pos, -1);
             case 0:
             case 14:
                 func_8022B00C_de(state);
-                func_80214178_de(actor, attack, 2);
+                Weapons_RequestActorState(actor, attack, 2);
                 break;
             default:
-                func_80214178_de(actor, attack, 2);
+                Weapons_RequestActorState(actor, attack, 2);
                 break;
             }
         }

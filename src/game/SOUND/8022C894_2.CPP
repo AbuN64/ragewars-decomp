@@ -15,7 +15,7 @@ extern const f32 D_800C2D9C_de;
 
 extern void func_80218464_de();
 
-extern s32 func_8025DE54_de(s16 arg0, CVector3 arg1, s32 arg4, s32 arg5);
+extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 arg1, s32 arg4, s32 arg5);
 
 /* Runs a player's landing state: sets state 0xD when the value at 0x6C8 is zero or 0xE otherwise,
    applies the movement tables D_800CE88C and D_800CE8A4, picks animation 0x8A2 for the model
@@ -38,7 +38,7 @@ extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void Particle_ScaleVector(void *, void *, f32);
 
-extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 extern void func_8044A07C_de(s32 arg0);
 
@@ -60,9 +60,9 @@ void func_8022CF38_de(void *arg0, LevelActor *actor) {
     func_80218464_de(((Shared_func_80227014_S2 *)arg0)->unk938);
 
     if (actor->motionState & 0x8000) {
-        func_8025DE54_de(0x2DA, actor->position0, 0, -1);
+        Render_PlaySoundAtPosition(0x2DA, actor->position0, 0, -1);
     } else {
-        func_8025DE54_de(0x2DC, actor->position0, 0, -1);
+        Render_PlaySoundAtPosition(0x2DC, actor->position0, 0, -1);
     }
 }
 
@@ -154,9 +154,9 @@ void func_8022D1A8_de(void *arg0) {
 
     temp_s1 = &((Shared_ActorView *)arg0)->weapon.aimPosition;
     Particle_SubtractVectors(&vector, &((Shared_ActorView *)arg0)->resetPosition, temp_s1);
-    func_8027207C_de(&vector);
+    Particle_NormalizeVec3(&vector);
     Particle_ScaleVector(&vector, &vector, 30.0f);
-    func_80271F34_de(&((Player *)arg0)->previousPosition, temp_s1, &vector);
+    Particle_AddVec3(&((Player *)arg0)->previousPosition, temp_s1, &vector);
 }
 
 void func_8022D20C_de(void) {

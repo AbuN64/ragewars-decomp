@@ -23,7 +23,7 @@
 extern CROMEventEntry *func_80262598_de(void *);
 
 
-extern void func_80265E10_de(char *, char *, u16, s32, CVector3, struct IntPair);
+extern void System_DeliverContactEffect(char *, char *, u16, s32, CVector3, struct IntPair);
 
 
 
@@ -65,7 +65,7 @@ void func_8024C1C4_de(char *obj, void *anim)
         case 6:
         case 7:
             Particle_TransformPoint(obj + 0x74, &e[i].local, &pos);
-            func_80265E10_de(obj, obj, e[i].effect, -1, pos, e[i].params);
+            System_DeliverContactEffect(obj, obj, e[i].effect, -1, pos, e[i].params);
         }
     }
 }

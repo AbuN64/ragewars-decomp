@@ -31,7 +31,7 @@ extern void Weapons_UpdateViewAngles(SharedPlayer_func_80224C4C_de *, Body_func_
 extern void func_802233F0_de(SharedPlayer_func_80224C4C_de *, Body_func_80224C4C_de *, Tuning *);
 
 extern void func_80218464_de(char *);
-extern s32 func_8025DE54_de(s16, s32, s32, s32, s32, s32);
+extern s32 Render_PlaySoundAtPosition(s16, s32, s32, s32, s32, s32);
 extern void func_802227F4_de(SharedPlayer_func_80224C4C_de *, Body_func_80224C4C_de *, s32);
 
 static inline s32 try_jump(SharedPlayer_func_80224C4C_de *player, Body_func_80224C4C_de *body) {
@@ -87,7 +87,7 @@ void func_80224C4C_de(SharedPlayer_func_80224C4C_de *player, Body_func_80224C4C_
         player->views5E8.view11C4_144.soundTime += D_800D2988;
         if (5.12f < player->views5E8.view6C8_57.speed && 11.25f < player->views5E8.view11C4_144.soundTime) {
             player->views5E8.view11C4_144.soundTime = 0.0f;
-            func_8025DE54_de(D_800CE82C.strokeSound, body->x, body->y, body->z, 0, -1);
+            Render_PlaySoundAtPosition(D_800CE82C.strokeSound, body->x, body->y, body->z, 0, -1);
         }
     }
 }

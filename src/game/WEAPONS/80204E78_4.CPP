@@ -28,9 +28,9 @@ void func_8020520C_de(LevelActor *source, void *dest) {
 
 void func_8020524C_de(LevelActor *actor, void *arg1) {
     if (func_80285F58_de(&D_8011FE88, actor) == 1) {
-        func_80214178_de(actor, arg1, 1);
+        Weapons_RequestActorState(actor, arg1, 1);
     } else {
-        func_80214178_de(actor, arg1, 0);
+        Weapons_RequestActorState(actor, arg1, 0);
         actor->flags |= 0x10000;
     }
 }
@@ -77,7 +77,7 @@ void func_80205324_de(Obj5324 *arg0, s32 *arg1) {
     mode = pFlag->mode;
     if (mode == 4) {
         if (rec->unk20.whole != -1) {
-            func_8025DE54_de(rec->unk20.half.id, arg0->pos.v, 0, -1);
+            Render_PlaySoundAtPosition(rec->unk20.half.id, arg0->pos.v, 0, -1);
         }
         if (rec->unk1C != -1) {
             func_80216288_de(arg0, rec->unk1C, arg0->pos.t, 0);

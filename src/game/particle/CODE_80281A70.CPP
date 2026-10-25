@@ -121,10 +121,10 @@ typedef struct CParticleSystem_t {
 } CParticleSystem_t;
 extern const f32 D_800C4E4C_de,D_800C4E50_de;
 extern Box D_801031F0;
-extern void Particle_Update(void *),func_80279A00_de(void *),func_80284178_de(void *);
-extern void func_802A42F4_de(void *,void *),func_80268C7C_de(void *,s32);
-extern void func_80279B40_de(void *,s32,s32,s32);
-extern void func_8025DE54_de(s16,CVector3,s32,s32);
+extern void Particle_Update(void *),func_80279A00_de(void *),Particle_UpdateMatrix(void *);
+extern void Render_DetachParticleSwooshes(void *,void *),Render_ReleaseLight(void *,s32);
+extern void Render_SpawnChildEffect(void *,s32,s32,s32);
+extern void Render_PlaySoundAtPosition(s16,CVector3,s32,s32);
 extern void Particle_SubtractVectors(CVector3 *,CVector3 *,CVector3 *);
 /* Frees a particle: runs its end hook (and its swoosh teardown when it has swooshes), hands its dynamic light back to
  * D_8013B1A8, drops one owner count, unlinks it from its active list onto the free list and, when flagged, from the
@@ -132,11 +132,11 @@ extern void Particle_SubtractVectors(CVector3 *,CVector3 *,CVector3 *);
 static __inline__ void Particle_Free(CParticleSystem_t *world, CParticle_t *p) {
     func_80279A00_de(p);
     if (p->m_ActiveSwooshes) {
-        func_80284178_de(p);
-        func_802A42F4_de(&D_801379C0, p);
+        Particle_UpdateMatrix(p);
+        Render_DetachParticleSwooshes(&D_801379C0, p);
     }
     if (p->m_pDLight) {
-        func_80268C7C_de(&D_8013B1A8, (s32)p->m_pDLight);
+        Render_ReleaseLight(&D_8013B1A8, (s32)p->m_pDLight);
         p->m_pDLight = 0;
     }
     if (p->m_pOwnerCount) {
@@ -221,19 +221,19 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
             }
         } else {
             effect = p->m_pEffect;
-            event = func_80284068_de(p) ? 12 : 10;
+            event = Particle_HasSurfaceFlag(p) ? 12 : 10;
             particleType = effect->m_pImpact->m_ImpactParticleType[event];
             eventType = effect->m_pImpact->m_ImpactEventType[event];
             value = effect->m_pImpact->m_ImpactEventValue[event];
             soundType = effect->m_pImpact->m_ImpactSoundType[event];
             if (eventType != 0xFFFF) {
-                func_80265E10_de(p, p, eventType, -1, p->m_vPos, value);
+                System_DeliverContactEffect(p, p, eventType, -1, p->m_vPos, value);
             }
             if (particleType != 0xFFFF) {
-                func_80279B40_de(p, particleType, p->m_Alignment, 1);
+                Render_SpawnChildEffect(p, particleType, p->m_Alignment, 1);
             }
             if (soundType != 0xFFFF) {
-                func_8025DE54_de(soundType, p->m_vPos, 0, -1);
+                Render_PlaySoundAtPosition(soundType, p->m_vPos, 0, -1);
             }
             if (!(p->m_dwFlags & 0x100)) {
                 continue;
@@ -416,8 +416,8 @@ typedef struct DraftActor827C8 {
     u8 pad1DA[0xA]; void *list; u8 pad1E8[4]; struct DraftActor827C8 *next;
 } DraftActor827C8;
 typedef struct DraftWorld827C8 { u8 pad[0xFC00]; u8 freeList[0x14], activeList[0x14], padFC28[0x14]; DraftActor827C8 *actors; } DraftWorld827C8;
-extern void func_80279B40_de(void *, s32, s32, s32), func_80279A00_de(void *), func_80284178_de(void *);
-extern void func_802A42F4_de(void *, void *);
+extern void Render_SpawnChildEffect(void *, s32, s32, s32), func_80279A00_de(void *), Particle_UpdateMatrix(void *);
+extern void Render_DetachParticleSwooshes(void *, void *);
 void Particle_ReleaseOwnerEmitters(DraftWorld827C8 *world, s32 owner)
 {
   DraftActor827C8 *actor;
@@ -438,7 +438,7 @@ void Particle_ReleaseOwnerEmitters(DraftWorld827C8 *world, s32 owner)
     {
       model = actor->model;
       actor->flags &= ~0x100;
-      index = (func_80284068_de(actor)) ? (12) : (10);
+      index = (Particle_HasSurfaceFlag(actor)) ? (12) : (10);
       actions = model->actions;
       animation = actions->animation[index];
       effect = actions->effect[index];
@@ -446,15 +446,15 @@ void Particle_ReleaseOwnerEmitters(DraftWorld827C8 *world, s32 owner)
       sound = model->actions->sound[index];
       if (effect != 0xFFFF)
       {
-        func_80265E10_de(actor, actor, effect, -1, actor->position, params);
+        System_DeliverContactEffect(actor, actor, effect, -1, actor->position, params);
       }
       if (animation != 0xFFFF)
       {
-        func_80279B40_de(actor, animation, actor->animation, 1);
+        Render_SpawnChildEffect(actor, animation, actor->animation, 1);
       }
       if (sound != 0xFFFF)
       {
-        func_8025DE54_de((s16) sound, actor->position, 0, -1);
+        Render_PlaySoundAtPosition((s16) sound, actor->position, 0, -1);
       }
       actor->flags |= 0x100;
       if (actor->flags & 0x100)
@@ -464,12 +464,12 @@ void Particle_ReleaseOwnerEmitters(DraftWorld827C8 *world, s32 owner)
         func_80279A00_de(actor);
         if (actor->linked)
         {
-          func_80284178_de(actor);
-          func_802A42F4_de(&D_801379C0, actor);
+          Particle_UpdateMatrix(actor);
+          Render_DetachParticleSwooshes(&D_801379C0, actor);
         }
         if (actor->effect)
         {
-          func_80268C7C_de(&D_8013B1A8, actor->effect);
+          Render_ReleaseLight(&D_8013B1A8, actor->effect);
           actor->effect = 0;
         }
         if (actor->refs)
@@ -523,10 +523,10 @@ typedef struct ActorWorld {
     char pad00[0xFC00]; IntrusiveList active, secondary;
     char padFC28[0x14]; Actor *head;
 } ActorWorld;
-extern void func_80279B40_de(void *, s32, s32, s32);
+extern void Render_SpawnChildEffect(void *, s32, s32, s32);
 extern void func_80279A00_de(void *);
-extern void func_80284178_de(void *);
-extern void func_802A42F4_de(void *, void *);
+extern void Particle_UpdateMatrix(void *);
+extern void Render_DetachParticleSwooshes(void *, void *);
 
 void Particle_RetireOwnedActors(ActorWorld *world, void *owner) {
     Actor *actor, *next;
@@ -540,26 +540,26 @@ void Particle_RetireOwnedActors(ActorWorld *world, void *owner) {
         if ((actor->kind == 0x41E || actor->kind == 0x3EF) &&
             (actor->flags & 0x100) && actor->owner == owner) {
             definition = actor->definition;
-            index = func_80284068_de(actor) ? 12 : 10;
+            index = Particle_HasSurfaceFlag(actor) ? 12 : 10;
             animation = definition->effects->animations[index];
             effect = definition->effects->effects[index];
             pair = definition->effects->pairs[index];
             sound = definition->effects->sounds[index];
             if (effect != 0xFFFF)
-                func_80265E10_de(actor, actor, effect, -1, actor->position, pair);
+                System_DeliverContactEffect(actor, actor, effect, -1, actor->position, pair);
             if (animation != 0xFFFF)
-                func_80279B40_de(actor, animation, actor->channel, 1);
+                Render_SpawnChildEffect(actor, animation, actor->channel, 1);
             if (sound != 0xFFFF)
-                func_8025DE54_de((s16)sound, actor->position, 0, -1);
+                Render_PlaySoundAtPosition((s16)sound, actor->position, 0, -1);
             if (actor->flags & 0x100) {
                 if (!(actor->flags & 0x800)) {
                     func_80279A00_de(actor);
                     if (actor->linked) {
-                        func_80284178_de(actor);
-                        func_802A42F4_de(&D_801379C0, actor);
+                        Particle_UpdateMatrix(actor);
+                        Render_DetachParticleSwooshes(&D_801379C0, actor);
                     }
                     if (actor->handle) {
-                        func_80268C7C_de(&D_8013B1A8, actor->handle);
+                        Render_ReleaseLight(&D_8013B1A8, actor->handle);
                         actor->handle = 0;
                     }
                     if (actor->counter) --*actor->counter;

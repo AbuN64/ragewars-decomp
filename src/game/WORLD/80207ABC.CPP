@@ -46,7 +46,7 @@ void func_80207ABC_de(void *object, void *state) {
     }
     if (var_v1 != 0) {
         if (motionState->timer >= motionDefinition->openThreshold) {
-            func_80214178_de(player, motionState, 1);
+            Weapons_RequestActorState(player, motionState, 1);
         }
     } else {
         motionState->timer = 0.0f;
@@ -91,7 +91,7 @@ void func_80207BB8_de(void *object, void *state) {
         motionState->speed = motionState->speed + (D_800D2988 / motionDefinition->transitionTime);
     }
     if (motionState->speed >= D_800C1BA0_de) {
-        func_80214178_de(player, motionState, 2);
+        Weapons_RequestActorState(player, motionState, 2);
     }
 }
 
@@ -126,7 +126,7 @@ void func_80207C94_de(void *object, void *state) {
     }
     if (var_v1 != 0) {
         if (motionState->timer >= motionDefinition->closeThreshold) {
-            func_80214178_de(player, motionState, 3);
+            Weapons_RequestActorState(player, motionState, 3);
         }
     } else {
         motionState->timer = 0.0f;
@@ -171,20 +171,20 @@ void func_80207D90_de(void *object, void *state) {
         motionState->speed = motionState->speed - (D_800D2988 / motionDefinition->transitionTime);
     }
     if (motionState->speed <= 0.0f) {
-        func_80214178_de(player, motionState, 0);
+        Weapons_RequestActorState(player, motionState, 0);
     }
 }
 
 void func_80207E3C_de(struct Shared_Actor *actor, int *arg1) {
     actor->weaponFlags |= 0x2100;
     *arg1 |= 0x10000;
-    func_80214178_de(actor, arg1, 1);
+    Weapons_RequestActorState(actor, arg1, 1);
 }
 
 void func_80207E74_de(struct Shared_Actor *actor, int *arg1) {
     actor->weaponFlags |= 0x2100;
     *arg1 |= 0x20000;
-    func_80214178_de(actor, arg1, 3);
+    Weapons_RequestActorState(actor, arg1, 3);
 }
 
 void func_80207EAC_de(struct Shared_Actor *actor) {

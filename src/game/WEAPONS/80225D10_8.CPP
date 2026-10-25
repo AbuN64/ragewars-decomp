@@ -47,7 +47,7 @@ void func_80229814_de(SharedPlayer *player, f32 amount) {
             stun = 75.0f;
         }
         player->views5E8.view11D8_149.stun = stun;
-        func_80214178_de(player->views1C.view2E8_28.weapon, player->views1C.view458_30.ammo, 2);
+        Weapons_RequestActorState(player->views1C.view2E8_28.weapon, player->views1C.view458_30.ammo, 2);
         if (player->views5E8.view1210_153.marker != 0) {
             if (player->views5E4.view5E4_4.holding != 0) {
                 func_802227F4_de(player, player, 2);

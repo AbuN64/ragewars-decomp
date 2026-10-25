@@ -366,7 +366,7 @@ struct Shared_World;
 extern void func_80285DB0_de(struct Shared_World *, void *, s32);
 extern void func_80278D78_de(struct Shared_Actor *arg0, s32 arg1, void *arg2);
 extern void func_80216288_de(void *, s32, Triple, s32);
-extern s32 func_8025DE54_de(s16, CVector3, s32, s32);
+extern s32 Render_PlaySoundAtPosition(s16, CVector3, s32, s32);
 struct Player;
 extern void func_802170A0_de(struct Player *, s32 *, s32, s32, s32);
 struct SceneRecAt95A8;

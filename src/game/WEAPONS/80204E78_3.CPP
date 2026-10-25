@@ -61,7 +61,7 @@ void func_802050C0_eu_x(Damageable *obj, Health *health, Hit *hit)
             if (obj->desc->damage.flags & 0x40) {
                 kind = 2;
             }
-            func_80214178_de(obj, health, kind);
+            Weapons_RequestActorState(obj, health, kind);
         }
     }
 }

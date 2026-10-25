@@ -103,13 +103,13 @@ extern f32 D_800C4E58_de[];
 
 
 
-extern s32 func_8025DE54_de(s16, CVector3, s32, s32);
+extern s32 Render_PlaySoundAtPosition(s16, CVector3, s32, s32);
 extern void func_8022B550_de(void *, f32, f32, void *, s32);
 extern void func_8028CE94_de(void *, void *, s32, Triple, f32, f32);
 
-extern void func_80265E10_de(void *, void *, s32, s32, CVector3, struct IntPair);
-extern void func_80279B40_de(void *, s32, s8, s32);
-extern void func_80284570_de(void *, void *);
+extern void System_DeliverContactEffect(void *, void *, s32, s32, CVector3, struct IntPair);
+extern void Render_SpawnChildEffect(void *, s32, s8, s32);
+extern void Particle_Release(void *, void *);
 
 
 
@@ -140,7 +140,7 @@ void func_80282E98_de(void *particle, void *player) {
 
     Resmgr_FillMemory(&scratch, 0, 0xC);
     if (((Shared_Particle *)particle)->inst.type == 0x40F) {
-        func_8025DE54_de(0xCDA, ((Shared_ActorView *)player)->position.vector,
+        Render_PlaySoundAtPosition(0xCDA, ((Shared_ActorView *)player)->position.vector,
                       (s32)&((Shared_ActorView *)player)->position.vector, -1);
         func_8022B550_de(player, 30.0f, 3.0f,
                      ((Shared_Particle *)particle)->owner, 0);
@@ -151,7 +151,7 @@ void func_80282E98_de(void *particle, void *player) {
     }
 
     temp_s1 = ((Shared_Particle *)particle)->desc;
-    if (func_80284068_de(particle) != 0) {
+    if (Particle_HasSurfaceFlag(particle) != 0) {
         var_a0 = 0xC;
     } else {
         var_a0 = 0xA;
@@ -165,17 +165,17 @@ void func_80282E98_de(void *particle, void *player) {
     pair = events->parameters[var_a0];
     temp_s3 = temp_s1->events->sounds[var_a0];
     if (temp_a2 != 0xFFFF) {
-        func_80265E10_de(particle, particle, temp_a2, -1,
+        System_DeliverContactEffect(particle, particle, temp_a2, -1,
                      ((Shared_Particle *)particle)->inst.pos, pair);
     }
     if (model != 0xFFFF) {
-        func_80279B40_de(particle, model, ((Shared_Particle *)particle)->space, 1);
+        Render_SpawnChildEffect(particle, model, ((Shared_Particle *)particle)->space, 1);
     }
     if (temp_s3 != 0xFFFF) {
-        func_8025DE54_de((s16)temp_s3, ((Shared_Particle *)particle)->inst.pos, 0, -1);
+        Render_PlaySoundAtPosition((s16)temp_s3, ((Shared_Particle *)particle)->inst.pos, 0, -1);
     }
-    func_80284570_de(&D_8011D8D0, particle);
-    func_80284434_de(particle);
+    Particle_Release(&D_8011D8D0, particle);
+    Particle_StopSound(particle);
 }
 
 extern u8 D_801462E3;

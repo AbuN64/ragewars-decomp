@@ -150,13 +150,13 @@ block_25:
             if ((game->local != 0) && ((player->views5D8.view5D8_9.profile->remote != 1) || (game->unk62C == 0))) {
                 temp_v1 = player->views1C.view38_3.flags;
                 if (temp_v1 & 0x200) {
-                    func_8025DE54_de(D_800C9FD6, body->views0.view8_4.position, 0, -1);
+                    Render_PlaySoundAtPosition(D_800C9FD6, body->views0.view8_4.position, 0, -1);
                 } else if (temp_v1 & 0x400) {
-                    func_8025DE54_de(D_800C9FDA, body->views0.view8_4.position, 0, -1);
+                    Render_PlaySoundAtPosition(D_800C9FDA, body->views0.view8_4.position, 0, -1);
                 } else if (temp_v1 & 0x800) {
-                    func_8025DE54_de(D_800C9FDE, body->views0.view8_4.position, 0, -1);
+                    Render_PlaySoundAtPosition(D_800C9FDE, body->views0.view8_4.position, 0, -1);
                 } else {
-                    func_8025DE54_de(strideSound(player->views5DC.view5E0_10.slot), body->views0.view8_4.position, 0, -1);
+                    Render_PlaySoundAtPosition(strideSound(player->views5DC.view5E0_10.slot), body->views0.view8_4.position, 0, -1);
                 }
             }
         }

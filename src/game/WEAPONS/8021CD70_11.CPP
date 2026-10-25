@@ -11,7 +11,7 @@ extern float D_800D2988[];
 
 
 extern s32 func_80245784_de(void);
-extern void func_8025DE54_de(s16,CVector3,s32,s32),func_80271F34_de(CVector3 *,CVector3 *,CVector3 *),Particle_ScaleVector(CVector3 *,CVector3 *,f32),func_80272748_de(CVector3 *,f32);
+extern void Render_PlaySoundAtPosition(s16,CVector3,s32,s32),Particle_AddVec3(CVector3 *,CVector3 *,CVector3 *),Particle_ScaleVector(CVector3 *,CVector3 *,f32),func_80272748_de(CVector3 *,f32);
 
 void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMovement *arg2) {
     CVector3 motion;
@@ -121,10 +121,10 @@ block_42:
             motion.z += player->views5E8.view6D8_59.unk6D8 * func_802B6560_de(body->unk6C - 1.5707964f);
             Particle_ScaleVector(&motion, &motion, player->views5E8.view66C_29.unk66C);
             temp_a0 = &player->views5E8.view6E8_63.unk6E8;
-            func_80271F34_de(temp_a0, temp_a0, &motion);
+            Particle_AddVec3(temp_a0, temp_a0, &motion);
             if (var_s3 != 0) {
                 player->views5E8.view6DC_60.unk6DC = (f32) (player->views5E8.view6DC_60.unk6DC + 7.5f);
-                func_8025DE54_de(arg2->unk22, body->unk8, 0, -1);
+                Render_PlaySoundAtPosition(arg2->unk22, body->unk8, 0, -1);
             }
         }
     }

@@ -64,7 +64,7 @@ void func_80231D48_de(Shared_Actor *actor, WeaponFireState *fireState) {
     }
     if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player) && fireState->mode == 1) {
         if (((SharedPlayer *)(player))->views5E8.view5F4_11.unk5F4[0] >= 0x30 || ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E != 4) {
-            func_80214178_de(actor, fireState, 5);
+            Weapons_RequestActorState(actor, fireState, 5);
             fireState->mode = 2;
             return;
         } else {
@@ -78,7 +78,7 @@ void func_80231D48_de(Shared_Actor *actor, WeaponFireState *fireState) {
     }
     if (func_802301F4_de(actor, fireState) == 0) {
         if (!(actor->weaponFlags & 0x400)) {
-            func_80214178_de(actor, fireState, action);
+            Weapons_RequestActorState(actor, fireState, action);
         }
         return;
     }

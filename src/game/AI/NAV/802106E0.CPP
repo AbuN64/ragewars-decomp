@@ -12,7 +12,7 @@ extern char D_80103FD0[];
 extern f32 Sound_GetActorReach(Vehicle *);
 extern f32 func_8024D398_de(Vehicle *);
 extern f32 Particle_GetActorHeight(Vehicle *);
-extern f32 func_8024E420_de(Vehicle *);
+extern f32 Sound_GetActorBaseOffset(Vehicle *);
 struct MotionSurface;
 extern s32 func_8024491C_de(Vehicle *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
 void func_802106E0_de(Vehicle *vehicle, s32 wheel) {
@@ -34,7 +34,7 @@ void func_802106E0_de(Vehicle *vehicle, s32 wheel) {
     a = Sound_GetActorReach(vehicle);
     b = func_8024D398_de(vehicle);
     c = Particle_GetActorHeight(vehicle);
-    if (func_8024491C_de(vehicle, from, to, D_80103FD0, a, b, c, func_8024E420_de(vehicle))) {
+    if (func_8024491C_de(vehicle, from, to, D_80103FD0, a, b, c, Sound_GetActorBaseOffset(vehicle))) {
         delta = D_80103FCC->pos;
         delta.x -= from.x;
         delta.y = 0.0f;
@@ -87,7 +87,7 @@ void Nav_MeasureWheelClearance(Vehicle *vehicle, s32 wheel) {
     i = 0;
     radius = func_8024D398_de(vehicle);
     height = Particle_GetActorHeight(vehicle);
-    base = func_8024E420_de(vehicle);
+    base = Sound_GetActorBaseOffset(vehicle);
     position = vehicle->pos;
     surface.flags = 0xC008;
     surface.enabled = 1;

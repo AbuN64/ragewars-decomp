@@ -259,18 +259,18 @@ void func_80227038_de(s8 *world) {
                                 player->unk5D8->unk8F = 1;
                                 switch (D_80142850) {
                                 case 0:
-                                    func_8025DE54_de(0x18A1, player->position, (s32)&player->position, -1);
+                                    Render_PlaySoundAtPosition(0x18A1, player->position, (s32)&player->position, -1);
                                     break;
                                 case 1:
-                                    func_8025DE54_de(0x1969, player->position, (s32)&player->position, -1);
+                                    Render_PlaySoundAtPosition(0x1969, player->position, (s32)&player->position, -1);
                                     break;
                                 case 2:
-                                    func_8025DE54_de(0x1905, player->position, (s32)&player->position, -1);
+                                    Render_PlaySoundAtPosition(0x1905, player->position, (s32)&player->position, -1);
                                     break;
                                 }
                                 func_80218464_de(&player->unk938);
                                 player->unk11B4 = 0;
-                                func_80214178_de(&player->unk2E8, &player->unk458, 1);
+                                Weapons_RequestActorState(&player->unk2E8, &player->unk458, 1);
                                 Render_PlacePlayerAtSpawnPoint(player, player->unk5EC, 0, 1);
                                 Weapons_InitializePlayerHealth(player);
                                 player->unk5E4 = (s32) D_8014284C;
@@ -333,18 +333,18 @@ void func_80227038_de(s8 *world) {
                     temp_v0_6->unk5D8->unk8F = 1U;
                     switch (D_80142850) {
                     case 0:
-                        func_8025DE54_de(0x18A1, temp_v0_6->position, (s32)&temp_v0_6->position, -1);
+                        Render_PlaySoundAtPosition(0x18A1, temp_v0_6->position, (s32)&temp_v0_6->position, -1);
                         break;
                     case 1:
-                        func_8025DE54_de(0x1969, temp_v0_6->position, (s32)&temp_v0_6->position, -1);
+                        Render_PlaySoundAtPosition(0x1969, temp_v0_6->position, (s32)&temp_v0_6->position, -1);
                         break;
                     case 2:
-                        func_8025DE54_de(0x1905, temp_v0_6->position, (s32)&temp_v0_6->position, -1);
+                        Render_PlaySoundAtPosition(0x1905, temp_v0_6->position, (s32)&temp_v0_6->position, -1);
                         break;
                     }
                     func_80218464_de(&temp_v0_6->unk938);
                     temp_v0_6->unk11B4 = 0;
-                    func_80214178_de(&temp_v0_6->unk2E8, &temp_v0_6->unk458, 1);
+                    Weapons_RequestActorState(&temp_v0_6->unk2E8, &temp_v0_6->unk458, 1);
                     Render_PlacePlayerAtSpawnPoint(temp_v0_6, temp_v0_6->unk5EC, 0, 1);
                     Weapons_InitializePlayerHealth(temp_v0_6);
                 }
@@ -414,18 +414,18 @@ void func_80227038_de(s8 *world) {
                     temp_v0_8->unk5D8->unk8F = 1U;
                     switch (D_80142850) {
                     case 0:
-                        func_8025DE54_de(0x18A1, temp_v0_8->position, (s32)&temp_v0_8->position, -1);
+                        Render_PlaySoundAtPosition(0x18A1, temp_v0_8->position, (s32)&temp_v0_8->position, -1);
                         break;
                     case 1:
-                        func_8025DE54_de(0x1969, temp_v0_8->position, (s32)&temp_v0_8->position, -1);
+                        Render_PlaySoundAtPosition(0x1969, temp_v0_8->position, (s32)&temp_v0_8->position, -1);
                         break;
                     case 2:
-                        func_8025DE54_de(0x1905, temp_v0_8->position, (s32)&temp_v0_8->position, -1);
+                        Render_PlaySoundAtPosition(0x1905, temp_v0_8->position, (s32)&temp_v0_8->position, -1);
                         break;
                     }
                     func_80218464_de(&temp_v0_8->unk938);
                     temp_v0_8->unk11B4 = 0;
-                    func_80214178_de(&temp_v0_8->unk2E8, &temp_v0_8->unk458, 1);
+                    Weapons_RequestActorState(&temp_v0_8->unk2E8, &temp_v0_8->unk458, 1);
                     Render_PlacePlayerAtSpawnPoint(temp_v0_8, temp_v0_8->unk5EC, 0, 1);
                     Weapons_InitializePlayerHealth(temp_v0_8);
                 }
@@ -497,18 +497,18 @@ void func_80227038_de(s8 *world) {
                                 temp_v0_11->unk5D8->unk8F = 1U;
                                 switch (D_80142850) {
                                 case 0:
-                                    func_8025DE54_de(0x18A1, temp_v0_11->position, (s32)&temp_v0_11->position, -1);
+                                    Render_PlaySoundAtPosition(0x18A1, temp_v0_11->position, (s32)&temp_v0_11->position, -1);
                                     break;
                                 case 1:
-                                    func_8025DE54_de(0x1969, temp_v0_11->position, (s32)&temp_v0_11->position, -1);
+                                    Render_PlaySoundAtPosition(0x1969, temp_v0_11->position, (s32)&temp_v0_11->position, -1);
                                     break;
                                 case 2:
-                                    func_8025DE54_de(0x1905, temp_v0_11->position, (s32)&temp_v0_11->position, -1);
+                                    Render_PlaySoundAtPosition(0x1905, temp_v0_11->position, (s32)&temp_v0_11->position, -1);
                                     break;
                                 }
                                 func_80218464_de(&temp_v0_11->unk938);
                                 temp_v0_11->unk11B4 = 0;
-                                func_80214178_de(&temp_v0_11->unk2E8, &temp_v0_11->unk458, 1);
+                                Weapons_RequestActorState(&temp_v0_11->unk2E8, &temp_v0_11->unk458, 1);
                                 Render_PlacePlayerAtSpawnPoint(temp_v0_11, temp_v0_11->unk5EC, 0, 1);
                                 Weapons_InitializePlayerHealth(temp_v0_11);
                             } else {

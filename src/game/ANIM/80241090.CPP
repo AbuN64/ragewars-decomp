@@ -23,7 +23,7 @@ static inline void quad_normal(struct Quad *quad) {
     Particle_SubtractVectors(&first, &quad->corner[1], &quad->corner[0]);
     Particle_SubtractVectors(&second, &quad->corner[2], &quad->corner[1]);
     Particle_CrossVectors(&quad->normal, &second, &first);
-    func_8027207C_de(&quad->normal);
+    Particle_NormalizeVec3(&quad->normal);
 }
 
 void Anim_BuildBoxFace4(struct Quad *quad, CVector3 *points) {

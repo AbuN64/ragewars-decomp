@@ -152,9 +152,9 @@ void func_80273198_de(Mtx *m, CVector3 *direction) {
     }
     Particle_CrossVectors(&m->up, &m->right, direction);
     m->forward = *direction;
-    func_8027207C_de(&m->right);
-    func_8027207C_de(&m->up);
-    func_8027207C_de(&m->forward);
+    Particle_NormalizeVec3(&m->right);
+    Particle_NormalizeVec3(&m->up);
+    Particle_NormalizeVec3(&m->forward);
     m->m03 = m->m13 = m->m23 = m->m30 = m->m31 = m->m32 = 0.0f;
     m->m33 = D_800C48F0_de;
 }

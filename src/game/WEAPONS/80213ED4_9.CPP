@@ -18,7 +18,7 @@ void func_802165F8_de(Player *player, ActorMotionState *motionState, OffsetResul
     Particle_SubtractVectors(&result->first, &player->pos,
                   &motionState->position);
     result->first_normalized = result->first;
-    func_8027207C_de(&result->first_normalized.x);
+    Particle_NormalizeVec3(&result->first_normalized.x);
     result->first_length = func_802B72B0_de(
         result->first.x * result->first.x +
         result->first.y * result->first.y +
@@ -27,7 +27,7 @@ void func_802165F8_de(Player *player, ActorMotionState *motionState, OffsetResul
     result->flat.y = 0.0f;
     result->flat.z = result->first.z;
     result->flat_normalized = result->flat;
-    func_8027207C_de(&result->flat_normalized.x);
+    Particle_NormalizeVec3(&result->flat_normalized.x);
     result->flat_length = func_802B72B0_de(
         result->flat.x * result->flat.x +
         result->flat.y * result->flat.y +

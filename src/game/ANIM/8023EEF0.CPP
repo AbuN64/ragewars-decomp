@@ -9,7 +9,7 @@
 
 #if !(defined(VERSION_EU))
 extern f32 func_8024D398_de(void *);
-extern f32 func_8024E420_de(void *);
+extern f32 Sound_GetActorBaseOffset(void *);
 extern f32 Particle_GetActorHeight(void *);
 extern void func_80242550_de(void *, void *);
 extern void func_80242288_de(void *, void *);
@@ -88,7 +88,7 @@ void Anim_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelActor
     contact.valid = 1;
     contact.actor = (BoxContactActor *)entity;
     contact.index = -1;
-    bottom = entity->position0.y + func_8024E420_de(entity);
+    bottom = entity->position0.y + Sound_GetActorBaseOffset(entity);
     top = Particle_GetActorHeight(entity) + bottom;
     if (sweep->flag != 0) {
         normal.x = normal.z = 0.0f;

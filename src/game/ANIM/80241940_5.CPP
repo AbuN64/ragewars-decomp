@@ -57,7 +57,7 @@ void Anim_TraceMeshTriangle(ContextB0 *mesh,CollisionVertex **points) {
     Particle_SubtractVectors(&edgeA,&polygon.vertices[1],&polygon.vertices[0]);
     Particle_SubtractVectors(&edgeB,&polygon.vertices[2],&polygon.vertices[1]);
     Particle_CrossVectors(&polygon.normal,&edgeB,&edgeA);
-    func_8027207C_de(&polygon.normal);
+    Particle_NormalizeVec3(&polygon.normal);
     surface=ray->surface;
     polygon.input=mesh->element;
     polygon.index=-1;

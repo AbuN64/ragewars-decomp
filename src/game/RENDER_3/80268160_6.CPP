@@ -7,7 +7,7 @@
 
 extern void Particle_ScaleVector(void *, void *, f32);
 
-extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 extern void *func_8028B00C_de(struct Shared_World *object, int index);
 
@@ -54,10 +54,10 @@ void func_80268A40_de(RangeNode **arg0, u32 arg1, u32 arg2, u32 arg3,
                     delta.y = (f32)node->y - *(f32 *)&arg2;
                     delta.z = (f32)node->z - *(f32 *)&arg3;
                     temp_f20 = D_800C4490_de - (var_f2_3 / temp_f3);
-                    func_8027207C_de(&delta);
+                    Particle_NormalizeVec3(&delta);
                     temp_f20_2 = temp_f20 * D_800C4494_de;
                     Particle_ScaleVector(&delta, &delta, temp_f20_2);
-                    func_80271F34_de(arg4, arg4, &delta);
+                    Particle_AddVec3(arg4, arg4, &delta);
                     *arg5 -= temp_f20_2;
                 }
             }

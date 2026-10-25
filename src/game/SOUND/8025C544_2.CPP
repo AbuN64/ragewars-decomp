@@ -15,7 +15,7 @@ static inline short slot_id(Slots *slots, int index) {
     return slots->ids[index];
 }
 
-extern s32 func_8025DE54_de(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
+extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 extern s32 func_8025E0F4_de(s32 arg0);
 
@@ -77,7 +77,7 @@ void *func_8025C95C_de(void *arg0, s32 arg1, CVector3 *arg2, void *position, s32
         func_80255D14_de(&((SoundVoicePool *)arg0)->playing, node);
         node->state = -1;
         node->value = -1;
-        result = func_8025DE54_de((s16)arg1, *arg2,
+        result = Render_PlaySoundAtPosition((s16)arg1, *arg2,
                                 (s32)position, fallback);
         node->value = result;
         D_800CBB10 = result;
@@ -135,7 +135,7 @@ void func_8025CB0C_de(SoundVoicePool *soundVoicePool) {
     var_s0 = soundVoicePool->playing.head;
     if (var_s0 != 0) {
         do {
-            temp_v0 = func_8025DE54_de((s16)var_s0->state,
+            temp_v0 = Render_PlaySoundAtPosition((s16)var_s0->state,
                                      var_s0->m_vSoundPos,
                                      (s32)var_s0->m_vSoundPosPtr,
                                      -1);

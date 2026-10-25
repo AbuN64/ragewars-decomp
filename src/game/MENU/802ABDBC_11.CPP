@@ -170,7 +170,7 @@ block_4:
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 extern void func_80222BE8_de(void *, s16, s16);
-extern s32 func_8025DE54_de(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
+extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
 /** Apply an effect descriptor's optional setup, resource, sound, and callback. */
@@ -200,7 +200,7 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
         }
     }
     if (sound != 0) {
-        func_8025DE54_de(sound,
+        Render_PlaySoundAtPosition(sound,
                       ((Actor_func_802AB400_de *)arg0)->position, 0, -1);
     }
     if (callback != 0) {
@@ -212,7 +212,7 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 extern s32 func_8022AC00_de(void *arg0);
-extern s32 func_8025DE54_de(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
+extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
 /** Advance a timed effect and apply its optional resource, sound, and callback. */
@@ -255,7 +255,7 @@ s32 func_802ACC04_de(void *arg0, void *arg1) {
             }
         }
         if (sound != 0) {
-            func_8025DE54_de(sound,
+            Render_PlaySoundAtPosition(sound,
                           ((Actor_func_802AB400_de *)arg0)->position, 0, -1);
         }
         if (callback != 0) {
@@ -267,7 +267,7 @@ s32 func_802ACC04_de(void *arg0, void *arg1) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
-extern s32 func_8025DE54_de(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
+extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
 
@@ -307,7 +307,7 @@ s32 func_802ACD28_de(void *arg0, void *arg1) {
         }
     }
     if (sound != 0) {
-        func_8025DE54_de(sound,
+        Render_PlaySoundAtPosition(sound,
                       ((Actor_func_802AB400_de *)arg0)->position, 0, -1);
     }
     if (callback != 0) {
@@ -410,7 +410,7 @@ s32 func_802ACE38_de(ActivationActor *arg0, ActivationSlot *arg1, func_802ADE28_
         }
     }
     if (sound != 0) {
-        func_8025DE54_de(sound,
+        Render_PlaySoundAtPosition(sound,
                       *(CVector3 *)&arg0->unk8, 0, -1);
     }
     if (callback != 0) {

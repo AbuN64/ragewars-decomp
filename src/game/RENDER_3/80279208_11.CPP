@@ -57,7 +57,7 @@ reset_state:
         }
     }
 
-    func_80284434_de(actor);
+    Particle_StopSound(actor);
     owner = ((ObjectLinks1BC *)(actor))->unk_118;
     if (((struct ObjectStateC4 *) ((Owner *) owner)->track)->unk_BE != 0xFFFF) {
         func_8025E1C4_de((s32)actor);
@@ -81,7 +81,7 @@ extern char D_8011D8D0;
 extern char D_801041F0;
 extern CQuatern func_80271818_de(CVector3 *);
 extern void func_80273760_de(f32 *matrix, s32 angle);
-extern void func_80271F34_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 #include "particle/8027A0F4_8.H"
 
 static inline f32 offset_x(Actor_func_80279B40_de *actor) {
@@ -98,7 +98,7 @@ static inline f32 offset_y(Actor_func_80279B40_de *actor) {
     return actor->offsetY;
 }
 
-void func_80279B40_de(Actor_func_80279B40_de *actor, s32 model, s32 arg2, s32 flags) {
+void Render_SpawnChildEffect(Actor_func_80279B40_de *actor, s32 model, s32 arg2, s32 flags) {
     CQuatern rotation;
     CVector3 direction;
     CVector3 offset;
@@ -130,7 +130,7 @@ void func_80279B40_de(Actor_func_80279B40_de *actor, s32 model, s32 arg2, s32 fl
         } else {
             carried = turned;
         }
-        func_80271F34_de(&moved, &carried, &actor->position);
+        Particle_AddVec3(&moved, &carried, &actor->position);
         D_80103FCC = scratch;
         point = moved;
         D_80103FCC = &D_801041F0;

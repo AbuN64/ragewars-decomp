@@ -19,7 +19,7 @@ extern char D_8011D8D0;
 
 extern void Particle_ReleaseOwnerEmitters(void *arg0, s32 arg1);
 
-void func_8022B064_de(void *arg0, CVector3 *arg1)
+void Render_SetPlayerResetPosition(void *arg0, CVector3 *arg1)
 {
   Shared_ActorView *player = arg0;
   void *new_var;
@@ -95,7 +95,7 @@ extern void *D_800D311C,*D_800D3120,*D_800D3124;
 #include "COMMON/CHANNEL.H"
 extern void func_80273198_de(f32 *,CVector3 *);
 extern void Particle_ScaleVector(CVector3 *,CVector3 *,f32);
-extern void func_80271F34_de(CVector3 *,CVector3 *,CVector3 *);
+extern void Particle_AddVec3(CVector3 *,CVector3 *,CVector3 *);
 extern void func_80273448_de(f32 *,f32,f32,f32);
 extern void func_80273D6C_de(f32 *);
 extern void func_8027027C_de(f32 *,void *);
@@ -116,7 +116,7 @@ void func_8022B1A8(TogglePlayer *player,s32 mode) {
             player->timer = D_800C2D0C_de;
             func_80273198_de(matrix,&player->direction);
             Particle_ScaleVector(&position,&player->direction,5.12f);
-            func_80271F34_de(&position,&position,&player->position);
+            Particle_AddVec3(&position,&position,&player->position);
             func_80273448_de(matrix,position.x,position.y,position.z);
             func_80273D6C_de(matrix);
             func_8027027C_de(matrix,player->matrix);

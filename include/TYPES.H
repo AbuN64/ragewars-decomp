@@ -124,7 +124,7 @@ extern int func_8026475C_de(int arg0);
 
 extern void Render_SetControllerMode(s32 a);
 
-extern void func_80268C7C_de(void *a, s32 b);
+extern void Render_ReleaseLight(void *a, s32 b);
 
 extern void func_80274020_de(f32 *value);
 
@@ -144,9 +144,9 @@ extern void func_80276968_de(u8 amount, u8 r, u8 g, u8 b, u8 *outR, u8 *outG, u8
 
 extern void func_80279990_de(void *arg0);
 
-extern int func_80284068_de(void *arg0);
+extern int Particle_HasSurfaceFlag(void *arg0);
 
-extern void func_80284434_de(void *a);
+extern void Particle_StopSound(void *a);
 
 extern void func_80285C78_de(void *arg0);
 

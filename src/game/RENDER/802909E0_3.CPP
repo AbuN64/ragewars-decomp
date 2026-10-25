@@ -16,5 +16,5 @@ void func_80290A14_de(void *frame, void *arg1) {
     Frame *view = frame;
     CVector3 *direction = arg1;
     view->direction = *direction;
-    func_8027207C_de(&view->direction.x);
+    Particle_NormalizeVec3(&view->direction.x);
 }

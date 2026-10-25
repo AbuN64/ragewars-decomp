@@ -10,7 +10,7 @@ extern f32 D_800C73E4;
 extern u8 D_0024B52C_us_rev1[], D_0022E0A0_us_rev1[], D_00219A40_us_rev1[], D_0022E250_us_rev1[];
 extern u8 D_0021A2D4_us_rev1[], D_0022F5D0_us_rev1[];
 extern void func_8024B3A8_de(void *, void *, void *, s32);
-extern void func_80214178_de(void *, void *, s32);
+extern void Weapons_RequestActorState(void *, void *, s32);
 extern void func_802325FC_de(void *, void *);
 extern void func_80220A80_de(void *, void *);
 extern void func_80245864_de(void *);
@@ -69,7 +69,7 @@ void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s
     record->part[1].table288 = D_0022E250_us_rev1;
     record->selection = -1;
     record->part[1].flags &= 0xFFFEFFFF;
-    func_80214178_de((actor + 0x2E8), (actor + 0x458), 0);
+    Weapons_RequestActorState((actor + 0x2E8), (actor + 0x458), 0);
     func_802325FC_de((actor + 0x2E8), (actor + 0x458));
     func_80220A80_de(actor, actor);
     if (record->auxiliary != 0) {

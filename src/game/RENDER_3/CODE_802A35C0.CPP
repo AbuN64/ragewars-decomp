@@ -348,7 +348,7 @@ void func_802A31E8_de(Node438C *arg0, Node438C *arg1, GameplayCamera *camera, vo
 
     Particle_SubtractVectors(&first, &arg0->position,
                   &arg1->position);
-    func_8027207C_de(&first);
+    Particle_NormalizeVec3(&first);
     setup[0] = 0;
     setup[1] = 0;
     setup[2] = D_800C5DE8_de[1];
@@ -360,9 +360,9 @@ void func_802A31E8_de(Node438C *arg0, Node438C *arg1, GameplayCamera *camera, vo
     Particle_ScaleVector(&cross, &basis,
                   basis.x * first.x + neg_y * first.y + neg_z * first.z);
     Particle_SubtractVectors(&cross, &first, &cross);
-    func_8027207C_de(&cross);
+    Particle_NormalizeVec3(&cross);
     Particle_CrossVectors(&result, &basis, &cross);
-    func_8027207C_de(&result);
+    Particle_NormalizeVec3(&result);
     Particle_ScaleVector(&result, &result, arg0->a);
     Particle_ScaleVector(&cross, &cross, arg0->b);
     Particle_ScaleVector(&basis, &basis, arg0->c);

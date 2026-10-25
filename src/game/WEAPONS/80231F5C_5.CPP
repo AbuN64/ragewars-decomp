@@ -117,6 +117,6 @@ s32 func_80232790_eu(PlayerRecAt1450V1 *pThis) {
 
 void func_80232878_eu(void *arg0, void *arg1) {
     func_802325FC_de(arg0, arg1);
-    func_80214178_de(arg0, arg1, 0);
+    Weapons_RequestActorState(arg0, arg1, 0);
 }
 #endif

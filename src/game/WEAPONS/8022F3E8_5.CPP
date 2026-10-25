@@ -127,10 +127,10 @@ s32 func_802301F4_de(void *actor, void *attack) {
     }
     if (trigger != 0 && func_80230058_de(actor, attack) != 0) {
         if (((AttackTriggerAction *)(attack))->unk13C == 2 && can_fire(player)) {
-            func_80214178_de(actor, attack, 8);
+            Weapons_RequestActorState(actor, attack, 8);
             return 2;
         }
-        func_80214178_de(actor, attack, 4);
+        Weapons_RequestActorState(actor, attack, 4);
         ((AttackTriggerAction *)(attack))->unkCB = 0;
         return 1;
     }
@@ -204,7 +204,7 @@ void Weapons_UpdateAlternateFire(void *actor, void *attack) {
         }
     }
     if (func_802301F4_de(actor, attack) == 0 && !(((AttackTriggerActor *)actor)->unk100 & 0x400)) {
-        func_80214178_de(actor, attack, action);
+        Weapons_RequestActorState(actor, attack, action);
     }
 }
 #else
@@ -227,7 +227,7 @@ INCLUDE_ASM("span_1000", Weapons_UpdateAlternateFire);
 
 
 extern s16 func_8022F96C_de(void *arg0);
-extern s32 func_8025DE54_de(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
+extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
 
@@ -271,17 +271,17 @@ void func_80230630_de(LevelActor *arg0, void *arg1) {
             mode = audio->teamColour;
             switch (mode) {
             case 0:
-                func_8025DE54_de(0x18A1,
+                Render_PlaySoundAtPosition(0x18A1,
                               ((Shared_ActorView *)actor)->position.vector,
                               (s32)&((Player *)actor)->pos, -1);
                 break;
             case 1:
-                func_8025DE54_de(0x1969,
+                Render_PlaySoundAtPosition(0x1969,
                               ((Shared_ActorView *)actor)->position.vector,
                               (s32)&((Player *)actor)->pos, -1);
                 break;
             case 2:
-                func_8025DE54_de(0x1905,
+                Render_PlaySoundAtPosition(0x1905,
                               ((Shared_ActorView *)actor)->position.vector,
                               (s32)&((Player *)actor)->pos, -1);
                 break;

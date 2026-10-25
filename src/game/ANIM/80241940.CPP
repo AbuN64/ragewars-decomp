@@ -20,7 +20,7 @@
 
 extern f32 func_8024D398_de(s32);
 extern f32 Particle_GetActorHeight(s32);
-extern f32 func_8024E420_de(s32);
+extern f32 Sound_GetActorBaseOffset(s32);
 
 
 extern void func_80273648_de(f32 *, f32);
@@ -66,7 +66,7 @@ void func_80241950_de(char *obj, CVector3 *corners, char *floor, s32 attachment)
     if (attachment != 0) {
         grow = func_8024D398_de(attachment);
         lift = Particle_GetActorHeight(attachment);
-        extra = func_8024E420_de(attachment);
+        extra = Sound_GetActorBaseOffset(attachment);
     } else {
         lift = 0.0f;
         grow = 0.0f;

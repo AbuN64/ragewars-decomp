@@ -65,7 +65,7 @@ extern s32 func_8024B6A0_de(void *, s32, s32);
 extern f32 Sound_GetActorReach(void *);
 extern s32 func_8024E62C_de(void *);
 extern struct Shared_Surface *Sound_FindActorModelEntry(void *);
-extern s32 func_8025DE54_de(s16, CVector3, s32, s32);
+extern s32 Render_PlaySoundAtPosition(s16, CVector3, s32, s32);
 extern void func_8025E418_de(s32);
 
 
@@ -453,7 +453,7 @@ void func_80220ED4_de(SharedPlayer *player)
       f22 = Sound_GetActorReach(actor);
       f21 = func_8024D398_de(actor);
       f20 = Particle_GetActorHeight(actor);
-      f0 = func_8024E420_de(actor);
+      f0 = Sound_GetActorBaseOffset(actor);
       scratch.views0.view0_1.to.x = actor->views0.view8_3.pos.x;
       scratch.views0.view0_1.to.y = actor->views0.view8_3.pos.y + rise;
       scratch.views0.view0_1.to.z = actor->views0.view8_3.pos.z;
@@ -570,7 +570,7 @@ void func_80220ED4_de(SharedPlayer *player)
             {
               world->offset = diff;
             }
-            func_8025DE54_de(0x230, player->views0.view8_3.pos, 0, -1);
+            Render_PlaySoundAtPosition(0x230, player->views0.view8_3.pos, 0, -1);
             Render_PlacePlayerAtSpawnPoint(player, def->item, 0, 0);
             break;
           }

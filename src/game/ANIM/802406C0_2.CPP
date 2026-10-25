@@ -32,7 +32,7 @@ static inline void quad_normal(struct Quad *quad) {
     Particle_SubtractVectors(&first, &quad->corner[1], &quad->corner[0]);
     Particle_SubtractVectors(&second, &quad->corner[2], &quad->corner[1]);
     Particle_CrossVectors(&quad->normal, &second, &first);
-    func_8027207C_de(&quad->normal);
+    Particle_NormalizeVec3(&quad->normal);
 }
 
 void func_80240CAC_de(void *query) {
@@ -47,7 +47,7 @@ void func_80240CAC_de(void *query) {
     Particle_SubtractVectors(&sp20, &object->vectors[2], temp_s1);
     temp_s0 = &object->result;
     Particle_CrossVectors(temp_s0, &sp20, &sp10);
-    func_8027207C_de(temp_s0);
+    Particle_NormalizeVec3(temp_s0);
 }
 
 void Anim_BuildBoxFace0(struct Quad *quad, CVector3 *points) {

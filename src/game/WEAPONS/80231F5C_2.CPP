@@ -104,7 +104,7 @@ void func_802321C8_de(Shared_Actor *actor, WeaponFireState *attack) {
         attack->triggered = 0;
     }
     if (func_802301F4_de(actor, attack) == 0 && !(actor->weaponFlags & 0x400)) {
-        func_80214178_de(actor, attack, action);
+        Weapons_RequestActorState(actor, attack, action);
     }
 }
 /* D_800C2FCC_de and D_800C2FD0_de are the two message-duration floats of this unit's literal pool. */
@@ -157,13 +157,13 @@ void Weapons_UpdateHeldFire(Shared_Actor *actor, WeaponFireState *attack) {
         } else {
             if (state->mode == 5) {
                 func_8022B00C_de(state);
-                func_8025DE54_de(0x460, state->position, &state->position, -1);
+                Render_PlaySoundAtPosition(0x460, state->position, &state->position, -1);
             }
             if (state->mode == 3 && can_fire((char *)state, &D_800C2FD0_de) != 0 && state->mode594 == 2) {
-                func_80214178_de(actor, attack, 0xB);
+                Weapons_RequestActorState(actor, attack, 0xB);
                 func_8022B984_de(state);
             } else {
-                func_80214178_de(actor, attack, 2);
+                Weapons_RequestActorState(actor, attack, 2);
             }
         }
         state->handled788 = 1;

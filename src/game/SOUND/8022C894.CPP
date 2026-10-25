@@ -117,7 +117,7 @@ void func_8022CA14_de(Player *player, void *arg1) {
     result = func_8024E6A0_de(arg1);
     if (result != 0) {
         func_8024E6D8_de(result, &vector);
-        func_80271F34_de(&((LevelActor *)arg1)->position1,
+        Particle_AddVec3(&((LevelActor *)arg1)->position1,
                       &((LevelActor *)arg1)->position1, &vector);
     }
 
@@ -128,17 +128,17 @@ void func_8022CA14_de(Player *player, void *arg1) {
             mode = audio->teamColour;
             switch (mode) {
         case 0:
-            func_8025DE54_de(0x18A1,
+            Render_PlaySoundAtPosition(0x18A1,
                           player->pos,
                           (s32)&player->pos, -1);
             break;
         case 1:
-            func_8025DE54_de(0x1969,
+            Render_PlaySoundAtPosition(0x1969,
                           player->pos,
                           (s32)&player->pos, -1);
             break;
         case 2:
-            func_8025DE54_de(0x1905,
+            Render_PlaySoundAtPosition(0x1905,
                           player->pos,
                           (s32)&player->pos, -1);
             break;

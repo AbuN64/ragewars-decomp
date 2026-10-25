@@ -171,7 +171,7 @@ f32 Weapons_FindClearAimAngle(Actor_u1 *actor, CVector3 point, s32 target, f32 d
 }
 
 #include "COMMON/MATH_HELPERS.H"
-extern void func_8027207C_de(CVector3 *);
+extern void Particle_NormalizeVec3(CVector3 *);
 extern void func_8024BC94_de(CVector3 *out, void *actor, CVector3 offset);
 extern f32 Particle_GetActorHeight(void *);
 
@@ -268,7 +268,7 @@ s32 Weapons_GetFacingSide(Actor_func_80214DD4_de *self, void *unused, Actor_func
         return 0;
     }
     Particle_SubtractVectors(&dir, &from, &to);
-    func_8027207C_de(&dir);
+    Particle_NormalizeVec3(&dir);
     forward.x = 0.0f;
     forward.y = 0.0f;
     forward.z = 1.0f;

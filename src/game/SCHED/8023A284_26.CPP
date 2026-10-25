@@ -30,7 +30,7 @@ s32 func_8023D380_de(ActorMotion *a) {
     s32 i, active, type, timer;
     settings=a->surface;
     if (a->collisionState!=0) {
-    func_8027207C_de(&a->normal.x);
+    Particle_NormalizeVec3(&a->normal.x);
     step=D_800CB404_de*D_800C3634_de;
     a->position=a->end;
     a->projectedOrientation=a->orientation;
@@ -107,7 +107,7 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
         delta=&slide;
         func_80272180_de(delta,&remaining,&a->normal,settings->response);
         Particle_ScaleVector(delta,delta,scale-a->damping);
-        func_80271F34_de(&a->position,&a->interpolated,delta);
+        Particle_AddVec3(&a->position,&a->interpolated,delta);
         return 1;
     }
     case 2: {
@@ -125,9 +125,9 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
         Particle_ScaleVector(&remaining,&a->velocity,remainingFraction);
         func_80272214_de(&bounce,&remaining,&a->normal);
         Particle_ScaleVector(&bounce,&bounce,scale-a->damping);
-    func_80271F34_de(&a->position,&a->interpolated,&bounce);
+    Particle_AddVec3(&a->position,&a->interpolated,&bounce);
     Particle_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
-    func_80271F34_de(&a->position,&a->position,&gravity);
+    Particle_AddVec3(&a->position,&a->position,&gravity);
     return 1;
 
     }
@@ -137,9 +137,9 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
         fraction=a->blend;
         Particle_ScaleVector(&remaining,&a->velocity,D_800C3680_de-fraction);
         bounce=func_802723FC_de(&remaining,&a->normal);
-        func_80271F34_de(&a->position,&a->interpolated,&bounce);
+        Particle_AddVec3(&a->position,&a->interpolated,&bounce);
     Particle_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
-    func_80271F34_de(&a->position,&a->position,&gravity);
+    Particle_AddVec3(&a->position,&a->position,&gravity);
     return 1;
 
     case 5: {
@@ -160,9 +160,9 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
         projected=func_802723FC_de(&remaining,&a->normal);
         func_80271FC8_de(&bounce,0.25f,&reflection,&projected);
         Particle_ScaleVector(&bounce,&bounce,scale-a->damping);
-    func_80271F34_de(&a->position,&a->interpolated,&bounce);
+    Particle_AddVec3(&a->position,&a->interpolated,&bounce);
     Particle_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
-    func_80271F34_de(&a->position,&a->position,&gravity);
+    Particle_AddVec3(&a->position,&a->position,&gravity);
     return 1;
 
     }

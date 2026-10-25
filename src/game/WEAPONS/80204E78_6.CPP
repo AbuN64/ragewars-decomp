@@ -348,7 +348,7 @@ void func_80205F18_de(Actor_func_80205F18_de *actor, Action *action) {
     action->timer = 0;
     action->duration = info->duration;
     if (actor->model == 0x644 || (info->flags & 8)) actor->flags &= ~0x2000;
-    func_80214178_de(actor, action, 0);
+    Weapons_RequestActorState(actor, action, 0);
     if (!(info->flags & 0x10) || D_80142226 == 1) return;
     actor->flags &= ~0x100;
 }

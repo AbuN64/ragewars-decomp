@@ -98,11 +98,11 @@ s32 func_80214310_de(Actor_func_80214310_de *viewer, Actor_func_80214310_de *tar
   *((volatile f32 *) (&pitchDir.x)) = 0.0f;
   pitchDir.z = dirLength;
   pitchDir.y = dir.y;
-  func_8027207C_de(&pitchDir);
+  Particle_NormalizeVec3(&pitchDir);
   *((volatile f32 *) (&pitchForward.x)) = 0.0f;
   pitchForward.z = forwardLength;
   pitchForward.y = forward.y;
-  func_8027207C_de(&pitchForward);
+  Particle_NormalizeVec3(&pitchForward);
   angle = Nav_ArcCos(((pitchDir.x * pitchForward.x) + (pitchDir.y * pitchForward.y)) + (pitchDir.z * pitchForward.z));
   if (up < ((angle < 0.0f) ? (-angle) : (angle)))
   {

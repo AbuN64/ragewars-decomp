@@ -43,7 +43,7 @@ extern void func_80253908_de(s32 a);
 
 extern s32 D_80142850;
 
-extern s32 func_8025DE54_de(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
+extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 extern void func_80218464_de(void *arg0);
 
@@ -316,24 +316,24 @@ void func_8022EDFC_de(void *player) {
     mode = D_80142850;
     switch (mode) {
     case 0:
-        func_8025DE54_de(0x18A1,
+        Render_PlaySoundAtPosition(0x18A1,
                       ((Shared_ActorView *)player)->position.vector,
                       (s32)((char *)player + 8), -1);
         break;
     case 1:
-        func_8025DE54_de(0x1969,
+        Render_PlaySoundAtPosition(0x1969,
                       ((Shared_ActorView *)player)->position.vector,
                       (s32)((char *)player + 8), -1);
         break;
     case 2:
-        func_8025DE54_de(0x1905,
+        Render_PlaySoundAtPosition(0x1905,
                       ((Shared_ActorView *)player)->position.vector,
                       (s32)((char *)player + 8), -1);
         break;
     }
     func_80218464_de((char *)player + 0x938);
     ((ActorRecAt16E0 *)player)->unk_0x11B4 = 0;
-    func_80214178_de(&((Shared_ActorView *)player)->weapon, &((Shared_ActorView *)player)->weapon.behaviorFlags, 1);
+    Weapons_RequestActorState(&((Shared_ActorView *)player)->weapon, &((Shared_ActorView *)player)->weapon.behaviorFlags, 1);
     Render_PlacePlayerAtSpawnPoint(player, ((Shared_ActorView *)player)->spawn, 0, 1);
     Weapons_InitializePlayerHealth(player);
 }

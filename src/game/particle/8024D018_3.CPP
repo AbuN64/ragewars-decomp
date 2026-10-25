@@ -85,9 +85,9 @@ CQuatern func_8024D4AC_de(char *actor, CVector3 point) {
     origin.y += ((Actor_func_80214310_de *)(target))->eye;
     origin.y += Particle_GetActorHeight(target) * 0.75f;
     Particle_SubtractVectors(&dir, &origin, &point);
-    func_8027207C_de(&dir);
+    Particle_NormalizeVec3(&dir);
     Particle_CrossVectors(&axis, &forward, &dir);
-    func_8027207C_de(&axis);
+    Particle_NormalizeVec3(&axis);
     angle = Nav_ArcCos(forward.x * dir.x + forward.y * dir.y + forward.z * dir.z) * 0.5f;
     scale = func_802B7130_de(angle);
     turn.x = axis.x * scale;
@@ -135,7 +135,7 @@ source_ready:
     up.y = D_800C3C9C_de;
     up.z = 0.0f;
     Particle_CrossVectors(&axis, &up, &source);
-    func_8027207C_de(&axis);
+    Particle_NormalizeVec3(&axis);
 
     angle = Nav_ArcCos((up.x * source.x) +
                           (up.y * source.y) +

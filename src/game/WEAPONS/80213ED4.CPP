@@ -93,7 +93,7 @@ void func_80213ED4_de(Source110 *src, Dest *dst) {
 #include "COMMON/WORLD.H"
 extern void func_80217388_de(void *, void *);
 
-s32 func_80214178_de(void *arg0, void *arg1, s32 action) {
+s32 Weapons_RequestActorState(void *arg0, void *arg1, s32 action) {
     struct ActorStateTable *node;
     StateEntry *entry;
     StateEntry *scan;

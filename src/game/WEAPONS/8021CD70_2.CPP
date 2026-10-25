@@ -35,7 +35,7 @@ extern CQuatern func_80271818_de(CVector3 *);
 extern void MatrixFromQuaternion(CQuatern *, Matrix *);
 extern void func_802737F0_de(Matrix *, f32);
 extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
-extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 void func_8021D408_de(SharedPlayer_func_8021D408_de *player, CVector3 *target, CVector3 *normal) {
     CVector3 to;
@@ -58,7 +58,7 @@ void func_8021D408_de(SharedPlayer_func_8021D408_de *player, CVector3 *target, C
     eye = origin;
     to = *target;
     Particle_SubtractVectors(&direction, &to, &eye);
-    func_8027207C_de(&direction);
+    Particle_NormalizeVec3(&direction);
     func_802727D8_de(&matrix);
     if (0.99999899f <= direction.y) {
         func_80272E3C_de(&matrix, -1.57079649f, player->views1C.view6C_5.heading, 0.0f);
@@ -80,7 +80,7 @@ void func_8021D408_de(SharedPlayer_func_8021D408_de *player, CVector3 *target, C
         aim.y = height;
     }
     Particle_SubtractVectors(&direction, &aim, &player->views1C.view260_26.muzzle);
-    func_8027207C_de(&direction);
+    Particle_NormalizeVec3(&direction);
     func_802727D8_de(&matrix);
     func_80273198_de(&matrix, &direction);
     func_80273448_de(&matrix, player->views1C.view260_26.muzzle);
@@ -93,9 +93,9 @@ void func_8021D408_de(SharedPlayer_func_8021D408_de *player, CVector3 *target, C
         turn = func_80271818_de(&lift);
         MatrixFromQuaternion(&turn, &matrix);
         func_802737F0_de(&matrix, 1.57079649f);
-        func_8027207C_de(&lift);
+        Particle_NormalizeVec3(&lift);
         Particle_ScaleVector(&lift, &lift, 2.048f);
-        func_80271F34_de(&eye, &eye, &lift);
+        Particle_AddVec3(&eye, &eye, &lift);
         func_80273448_de(&matrix, to);
         func_8027347C_de(&matrix, 1.536f, scale, 1.536f);
         func_8027027C_de(&matrix, &player->views1580.view1580_1.dots[D_800D297C]);

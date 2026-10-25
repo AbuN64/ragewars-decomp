@@ -71,7 +71,7 @@ void func_80271F00_de(CVector3 *result, CVector3 *left, CVector3 *right) {
 }
 
 /** Add two three-component vectors. */
-void func_80271F34_de(CVector3 *result, CVector3 *left, CVector3 *right) {
+void Particle_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right) {
     result->x = left->x + right->x;
     result->y = left->y + right->y;
     result->z = left->z + right->z;
@@ -107,7 +107,7 @@ void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b) {
     out->z = (a->x * b->y) - (a->y * b->x);
 }
 
-void func_8027207C_de(f32 *arg0) {
+void Particle_NormalizeVec3(f32 *arg0) {
     f32 mag;
     f32 scale;
 

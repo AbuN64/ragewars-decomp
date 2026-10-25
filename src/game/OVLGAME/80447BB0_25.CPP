@@ -328,6 +328,6 @@ void func_80449EE4_de(char *player, s32 slot, RecordCode80447BB080449EE4 *record
 void func_8044A020_de(struct ActorCode80447BB0 *actor, s32 character) {
     actor->part->active = 1;
     Ovlgame_ResetPlayerForRound(actor, character, 1);
-    func_80214178_de(&actor->firstEffect, &actor->secondEffect, 2);
+    Weapons_RequestActorState(&actor->firstEffect, &actor->secondEffect, 2);
     Render_PlacePlayerAtSpawnPoint(actor, D_80146898, 0, 1);
 }

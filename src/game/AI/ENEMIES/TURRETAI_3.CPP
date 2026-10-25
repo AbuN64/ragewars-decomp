@@ -118,7 +118,7 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
         navRotation(&work.rotation,&work.aim.v);
         MatrixFromQuaternion(&work.rotation.x,work.matrix);
         navProject(work.matrix,&work.local.v,&work.destination.v,&work.destination.v,&work.origin.v);
-        func_80271F34_de(&work.destination.v, &work.destination.v, &work.origin.v);
+        Particle_AddVec3(&work.destination.v, &work.destination.v, &work.origin.v);
         Particle_SubtractVectors(&work.relative.v, &work.destination.v, &work.origin.v);
         desiredSpeed = func_802725FC_de(&work.relative.v.x);
         aimError = Weapons_GetSignedAngleToPoint(&actor->actor,work.destination.v);
@@ -218,12 +218,12 @@ void Turret_Setup(LevelActor *actor, struct RecordRecAt13C *turret) {
         if (record->flags & 0x800) {
             actor->flags =
                 actor->flags & ~0x100;
-            func_80214178_de(actor, turret, 0);
+            Weapons_RequestActorState(actor, turret, 0);
         } else {
-            func_80214178_de(actor, turret, 1);
+            Weapons_RequestActorState(actor, turret, 1);
         }
     } else {
-        func_80214178_de(actor, turret, 0x40);
+        Weapons_RequestActorState(actor, turret, 0x40);
     }
     turret->state = 0;
 }
@@ -235,7 +235,7 @@ void Turret_Advance(char *actor, Obj *state) {
     if (((struct OwnerRecAtE4 *)(actor))->id == 0x40C) {
         state->timer += D_800D2988;
         if (D_800C1A48_de < state->timer || state->count <= 0) {
-            func_80214178_de(actor, state, 0x40);
+            Weapons_RequestActorState(actor, state, 0x40);
         }
     }
 }
@@ -251,6 +251,6 @@ int Turret_Anim_ACTIVATE(struct Owner *owner) {
 
 void Turret_Code_ACTIVATE(void *a, struct WeaponEventSource *b) {
     if (b->eventEnabled != 0) {
-        func_80214178_de(a, b, 0x3E);
+        Weapons_RequestActorState(a, b, 0x3E);
     }
 }

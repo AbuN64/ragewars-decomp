@@ -35,7 +35,7 @@ extern void func_8026FC9C_de(f32 *, s32);
 
 extern void func_8024BC94_de(CVector3 *out, void *actor, CVector3 offset);
 
-extern void func_80271F34_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 
 extern void func_8024E79C_de(void *actor, CVector3 target, void *arg4, s32 *arg5, s32 arg6, s32 arg7);
 
@@ -80,11 +80,11 @@ void func_8024BBB4_de(char *actor, CVector3 offset, void *arg4, s32 *arg5)
             Particle_TransformPoint(parent + 0x160, &offset, &target);
         } else {
             func_8024BC94_de(&turned, actor, offset);
-            func_80271F34_de(&target, &((ObjectLinks1DC_3 *)(actor))->unk_8, &turned);
+            Particle_AddVec3(&target, &((ObjectLinks1DC_3 *)(actor))->unk_8, &turned);
         }
     } else {
         func_8024BC94_de(&turned, actor, offset);
-        func_80271F34_de(&target, &((ObjectLinks1DC_3 *)(actor))->unk_8, &turned);
+        Particle_AddVec3(&target, &((ObjectLinks1DC_3 *)(actor))->unk_8, &turned);
     }
     func_8024E79C_de(actor, target, arg4, arg5, 1, 1);
 }

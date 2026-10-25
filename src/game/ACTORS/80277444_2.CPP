@@ -31,7 +31,7 @@ void Actors_AccumulateDirectionalLighting(Vertices38 *data, PackedMatrixWords *m
     light.x = source->x;
     light.y = source->y;
     light.z = source->z;
-    func_8027207C_de(&light);
+    Particle_NormalizeVec3(&light);
     drawn = 0;
     for (i = 0; i < count; i++) {
         vertex = &base[i];

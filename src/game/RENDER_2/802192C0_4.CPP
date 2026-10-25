@@ -48,7 +48,7 @@ void *Camera_PostScreenMessage(void *, void *, u8 *);
 void *Camera_PostScaledScreenMessage(void *, void *, void *, f32); CQuatern func_8024796C_de(char *);
 s32 func_8024BE80_de(void *);
 void func_8024E79C_de(void *, Triple, void *, s32 *, s32, s32); /* extern */
-s32 func_8025DE54_de(s16, CVector3, s32, s32); /* extern */
+s32 Render_PlaySoundAtPosition(s16, CVector3, s32, s32); /* extern */
 void func_802647E8_de(void *, s32);
 void func_80278D78_de(void *, s32, void *);
 void func_80278E04_de(s32, s32, void *);
@@ -183,7 +183,7 @@ settings_loop:
                     Ovlgame_ResetPlayerForRound(temp_s0, var_s1->character, 1);
                     temp_v0 = ((struct Shared_ActorView *)temp_s0)->model;
                     ((struct Shared_ModelView *)temp_v0)->flags = (s32) (((struct Shared_ModelView *)temp_v0)->flags & ~4);
-                    func_80214178_de(&((struct Shared_ActorView *)temp_s0)->weapon, &((struct Shared_ActorView *)temp_s0)->weapon.behaviorFlags, 2);
+                    Weapons_RequestActorState(&((struct Shared_ActorView *)temp_s0)->weapon, &((struct Shared_ActorView *)temp_s0)->weapon.behaviorFlags, 2);
                     Render_PlacePlayerAtSpawnPoint(temp_s0, ((struct Shared_PlayerSettingsView *)settingsBase)->effect, 0, 0);
                     func_80255ED8_de(playersGlobal->controller, temp_s0);
                     func_80255CB8_de(&playersGlobal->effects, temp_s0);
@@ -351,7 +351,7 @@ case 7:
             }
             if ((((struct Shared_ActorView *)player)->controls->transientFlag != 0) && (laterFlow = &D_80145060.flow, laterFlow->transition != 0)) {
                 if (D_800F3D08 != 0) {
-                    func_80214178_de(D_800F3D08, ((struct Shared_SpecialObjectView *)D_800F3D08)->segment, 1);
+                    Weapons_RequestActorState(D_800F3D08, ((struct Shared_SpecialObjectView *)D_800F3D08)->segment, 1);
                     ((struct Shared_SpecialObjectView *)D_800F3D08)->reset = 0;
                     laterFlow->reset = 0;
                     func_8025DF34_de(0x2D0);
@@ -403,9 +403,9 @@ case 7:
             if (state != 0x1F) {
                 var_a0_4 = func_80229C0C_de(player, 0x1397);
             }
-            func_8025DE54_de(var_a0_4, player->position.vector, (s32)&player->position.vector, -1);
+            Render_PlaySoundAtPosition(var_a0_4, player->position.vector, (s32)&player->position.vector, -1);
         } else {
-            func_8025DE54_de(0x9FB, player->position.vector, (s32)&player->position.vector, -1);
+            Render_PlaySoundAtPosition(0x9FB, player->position.vector, (s32)&player->position.vector, -1);
         }
         func_8025DF34_de(0x212);
         if ((((struct Shared_ActorView *)player)->special != 0) || (temp_v1_5 = ((struct Shared_ActorView *)player)->kind, (temp_v1_5 == D_800C9228_de[0])) || (temp_v1_5 == D_800C9228_de[1])) {
@@ -601,7 +601,7 @@ void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
         if (FIELD(s32, player, 0x5E4) > 0) {
             s32 id = func_80229C0C_de((struct Shared_ActorView *)player, 0x138D);
             if (func_8025E4D4_de(id) == 0) {
-                func_8025DE54_de((s16)id, FIELD(CVector3, player, 0x8), (s32)((char *)player + 8), -1);
+                Render_PlaySoundAtPosition((s16)id, FIELD(CVector3, player, 0x8), (s32)((char *)player + 8), -1);
             }
         }
     }

@@ -16,7 +16,7 @@
 
 extern f32 D_800D2988[];
 extern CQuatern func_8024796C_de(Actor_func_802238E0_de *);
-extern void MatrixFromQuaternion(CQuatern *,MatrixF *),func_80271F34_de(CVector3 *,CVector3 *,CVector3 *),func_8025DE54_de(s16,CVector3,s32,s32),Nav_EaseValueToward(f32 *,f32,f32);
+extern void MatrixFromQuaternion(CQuatern *,MatrixF *),Particle_AddVec3(CVector3 *,CVector3 *,CVector3 *),Render_PlaySoundAtPosition(s16,CVector3,s32,s32),Nav_EaseValueToward(f32 *,f32,f32);
 extern f32 func_802B72B0_de(f32);
 void func_802238E0_de(SharedPlayer *player, Actor_func_802238E0_de *body, SharedMovement *arg2) {
     CVector3 v18,v28,v38,v48,v58;
@@ -119,12 +119,12 @@ block_31:
     player->views5E8.view6EC_64.unk6EC = (f32) (player->views5E8.view6EC_64.unk6EC + ((v38.y + v48.y) * player->views5E8.view66C_29.unk66C));
     player->views5E8.view6F0_66.unk6F0 = (f32) (player->views5E8.view6F0_66.unk6F0 + ((v38.z + v48.z) * player->views5E8.view66C_29.unk66C));
     if (body->unk20 < 0.0f) {
-        func_80271F34_de(&v58, &v38, &v48);
+        Particle_AddVec3(&v58, &v38, &v48);
         body->unk20 = (f32) (body->unk20 - (player->views13B4.view13B4_2.unk13B4[player->views5E8.view650_15.unk650].physics->unk8 * (func_802B72B0_de((v58.x * v58.x) + (v58.y * v58.y) + (v58.z * v58.z)) / (arg2->unk4 * 4.0f)) * player->views5E8.view66C_29.unk66C));
     }
     Nav_EaseValueToward(&player->views5E8.view72C_75.unk72C, ((player->views5E8.view6C4_54.unk6C4 * 1.8f) + (player->views5E8.view69C_39.unk69C * 16.0f)) * 0.01745329424738884f, 0.04f);
     if (var_s5 != 0) {
         player->views5E8.view6DC_60.unk6DC = (f32) (player->views5E8.view6DC_60.unk6DC + 7.5f);
-        func_8025DE54_de(arg2->unk22, body->unk8, 0, -1);
+        Render_PlaySoundAtPosition(arg2->unk22, body->unk8, 0, -1);
     }
 }

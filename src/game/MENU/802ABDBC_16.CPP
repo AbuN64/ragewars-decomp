@@ -46,7 +46,7 @@ s32 func_802ACFB0_de(Actor_func_802AB400_de *arg0, MultiChannelItemEffect *arg1)
         }
     }
     if (sound != 0) {
-        func_8025DE54_de(sound,
+        Render_PlaySoundAtPosition(sound,
                       arg0->position, 0, -1);
     }
     if (callback != 0) {
@@ -90,7 +90,7 @@ void func_802AD0E4_de(void *arg0, void *resource, s32 sound, s32 callback) {
         }
     }
     if (sound != 0) {
-        func_8025DE54_de((s16)sound,
+        Render_PlaySoundAtPosition((s16)sound,
                       ((LevelActor *)arg0)->position0, 0, -1);
     }
     if (callback != 0) {

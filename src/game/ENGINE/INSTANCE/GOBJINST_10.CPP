@@ -28,7 +28,7 @@ extern s32 *func_8024BFD4_de(char *, s8);
 
 
 
-extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 
@@ -86,7 +86,7 @@ s32 func_8024B06C_de(char *obj, CVector3 point, Box70 *out) {
         if (box->mask & ((struct ObjectLinks180_2 *) obj)->unk_17C) {
             center = box->corners[0];
             for (j = 1; j < 8; j++) {
-                func_80271F34_de(&center, &center, &box->corners[j]);
+                Particle_AddVec3(&center, &center, &box->corners[j]);
             }
             Particle_ScaleVector(&center, &center, 0.125f);
             Rsp_ConvertMatrixToFloat(matrix, bones + i * 0x40);

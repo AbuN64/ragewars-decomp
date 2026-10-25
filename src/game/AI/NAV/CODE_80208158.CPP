@@ -527,7 +527,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
             steer.x = desired.x + tangent.x;
             steer.y = 0.0f;
             steer.z = desired.z + tangent.z;
-            func_8027207C_de(&steer);
+            Particle_NormalizeVec3(&steer);
             player->forward = steer.x * facing.x + steer.y * facing.y + steer.z * facing.z;
             navigationTurnRight(&facing);
             player->strafe = steer.x * facing.x + steer.z * facing.z;

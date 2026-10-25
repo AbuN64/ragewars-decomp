@@ -20,7 +20,7 @@
 extern func_80203E78_S1 *D_800E2830;
 
 extern void Particle_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
-extern void func_80271F34_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 
 CVector3 func_80401564_de(f32 t) {
     s32 *track;
@@ -62,7 +62,7 @@ CVector3 func_80401564_de(f32 t) {
         b.z = key->z;
         Particle_ScaleVector(&a, &a, (1.0f) - u);
         Particle_ScaleVector(&b, &b, u);
-        func_80271F34_de(&result, &a, &b);
+        Particle_AddVec3(&result, &a, &b);
     }
     return result;
 }

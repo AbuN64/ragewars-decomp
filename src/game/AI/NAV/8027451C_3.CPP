@@ -34,7 +34,7 @@ static inline void edge(CVector3 *out, CVector3 *a, CVector3 *b) {
 
 static inline void normalize_copy(CVector3 *out, CVector3 *in) {
     *out = *in;
-    func_8027207C_de(out);
+    Particle_NormalizeVec3(out);
 }
 
 s32 func_802757E4_de(Triangle *polygon) {

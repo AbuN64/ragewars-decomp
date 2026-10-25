@@ -194,7 +194,7 @@ shared:
         } else {
             *arg4 = arg1;
         }
-        func_8027207C_de(arg4);
+        Particle_NormalizeVec3(arg4);
         *arg5 = var_f20;
         return 1;
     } else {

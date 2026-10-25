@@ -73,7 +73,7 @@ void Level_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *h
         }
     }
     if (hit->limit != 0.0f && hit->limit <= hit->elapsed) {
-        func_80214178_de(ctx, (ObjectStateCC *)hit, 1);
+        Weapons_RequestActorState(ctx, (ObjectStateCC *)hit, 1);
     }
 }
 
@@ -149,9 +149,9 @@ void func_80204BD0_de(void *arg0, void *arg1) {
     s32 different = func_80285F58_de(&D_8011FE88, arg0) != 1;
 
     if (different == 0) {
-        func_80214178_de(arg0, arg1, 0);
+        Weapons_RequestActorState(arg0, arg1, 0);
     } else {
-        func_80214178_de(arg0, arg1, 1);
+        Weapons_RequestActorState(arg0, arg1, 1);
     }
 }
 
@@ -200,14 +200,14 @@ void func_80204D2C_de(BreakableHitContext *breakableHitContext) {
 }
 
 void func_80204DE0_de(void *a, void *b) {
-    func_80214178_de(a, b, 0x0); }
+    Weapons_RequestActorState(a, b, 0x0); }
 
 void func_80204DFC_de(Trigger *trigger) {
     func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 1);
 }
 
 void func_80204E2C_de(void *a, void *b) {
-    func_80214178_de(a, b, 0x1); }
+    Weapons_RequestActorState(a, b, 0x1); }
 
 void func_80204E48_de(Trigger *trigger) {
     func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 0);

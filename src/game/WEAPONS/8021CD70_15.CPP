@@ -16,7 +16,7 @@ extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
 
 extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 
-extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 /* Runs a player's standing and walking state for its body: settles the weapon sway through
    func_80223E34_de, turns the view through Weapons_UpdateViewAngles with the crouching tuning D_800CE7FC while the
@@ -141,7 +141,7 @@ void func_8022409C_de(void *player, void *arg1) {
                    func_802B6560_de(((func_80224078_Arg1 *)arg1)->unk6C - held);
 
     Particle_ScaleVector(&direction, &direction, D_800D2988);
-    func_80271F34_de(&((func_80224078_Arg0 *)(player))->unk6E8,
+    Particle_AddVec3(&((func_80224078_Arg0 *)(player))->unk6E8,
                   &((func_80224078_Arg0 *)(player))->unk6E8, &direction);
     result = Scene_FindFloorPolygon(&D_8011FE88, &((func_80224078_Arg1 *)arg1)->unk8);
     if (result != 0) {

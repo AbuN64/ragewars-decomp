@@ -63,7 +63,7 @@ extern f32 D_800C4BE0_de;
 
 void func_80228DC4_de(void *, void *);
 f32 Particle_GetActorHeight(void *);
-f32 func_8024E420_de(void *);
+f32 Sound_GetActorBaseOffset(void *);
 void func_80270CD0_de(void *, f32, void *, void *);
 void func_80272748_de(void *, f32);
 void MatrixFromQuaternion(f32 *, f32 *);

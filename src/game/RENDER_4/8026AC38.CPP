@@ -309,7 +309,7 @@ s32 Render_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *mater
         func_80270700_de((f32 *)matrix, model);
         func_802732D0_de((f32 *)matrix, &position);
         Particle_SubtractVectors(&direction, func_8022A414_de(&D_80145040) + 0x6E8, &position);
-        func_8027207C_de(&direction);
+        Particle_NormalizeVec3(&direction);
         {
             Gfx *cmd;
             Gfx *light;

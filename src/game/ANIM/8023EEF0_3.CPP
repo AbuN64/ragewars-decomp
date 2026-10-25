@@ -13,7 +13,7 @@
 s32 func_8023E8D4_de(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly, s32 keep);
 void func_8044A07C_de(struct Object_func_8044A07C_de *);
 void func_80271FC8_de(CVector3 *, f32, void *, void *);
-void func_80265E10_de(void *, void *, s32, s32, CVector3, ContactEffectStyle);
+void System_DeliverContactEffect(void *, void *, s32, s32, CVector3, ContactEffectStyle);
 s32 func_802833D0_de(void *);
 
 s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, CVector3 *origin,
@@ -98,7 +98,7 @@ s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, C
         style.red = ray->projectile->color.x;
         style.green = ray->projectile->color.y;
         style.blue = ray->projectile->color.z;
-        func_80265E10_de(actor, ray->projectile, 2, -1, effectPosition, style);
+        System_DeliverContactEffect(actor, ray->projectile, 2, -1, effectPosition, style);
         if (*actor->kind == 11 && ray->projectile->kind == 0x42D) {
             func_802833D0_de(ray->projectile);
             func_8022B730_de(actor, 2.0f);

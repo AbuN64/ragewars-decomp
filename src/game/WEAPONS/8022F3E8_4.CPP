@@ -47,7 +47,7 @@ void func_8022FDAC_de(void *arg0, void *weaponFireState) {
         ((Shared_Actor *)arg0)->color = 0;
         ((WeaponFireState *)weaponFireState)->charge = 0;
     }
-    func_80214178_de(arg0, weaponFireState, 0);
+    Weapons_RequestActorState(arg0, weaponFireState, 0);
 }
 
 void func_8022FF04_de(void *arg0, WeaponFireState *fireState) {

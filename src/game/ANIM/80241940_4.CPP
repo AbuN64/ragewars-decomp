@@ -185,7 +185,7 @@ void func_80242BF0_de(Ray180 *ray) {
             }
             element = hit->element;
             ctx.element = element;
-            ctx.kind = func_80216108_de(element);
+            ctx.kind = Weapons_GetImpactSlot(element);
             if (ctx.kind == 9) {
                 ctx.isKind9 = 1;
             } else {

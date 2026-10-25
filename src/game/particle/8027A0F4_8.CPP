@@ -37,7 +37,7 @@ extern void func_8027347C_de(MatrixF *, f32, f32, f32);
 extern void func_80273448_de(MatrixF *, f32, f32, f32);
 extern void Particle_BuildMatrix(EffectActor *, MatrixF *, void *, f32);
 extern s32 Nav_NextRandom(void);
-extern void func_80284570_de(EffectSystem *, ParticleEffect *);
+extern void Particle_Release(EffectSystem *, ParticleEffect *);
 extern void func_80255D70_de(IntrusiveList *, ParticleEffect *, ParticleEffect *);
 extern void func_80295E84_de(u32 *, s32);
 extern void func_80246184_de(ParticleEffect *);
@@ -53,7 +53,7 @@ extern void func_8022B040_de(s32, ParticleEffect *);
 extern void func_802A4598_de(void *, ParticleEffect *, s32);
 extern s32 func_80268BE0_de(void *, s32);
 extern void func_802843B8_de(ParticleEffect *, s32);
-extern void func_8025DE54_de(s16, CVector3, s32, s32);
+extern void Render_PlaySoundAtPosition(s16, CVector3, s32, s32);
 extern void func_802765B0_de(s8, u8, u8, u8, u8 *, u8 *, u8 *);
 
 extern void func_80276B44_de(u8, u8, u8, u8, u8 *, u8 *, u8 *);
@@ -90,7 +90,7 @@ static inline ParticleEffect *effect_spawn_allocate(EffectSystem *sys, u8 index)
     if (sys->free.head == 0) {
         for (i = 0; i <= index; i++) {
             if ((&sys->lists[i])->tail != 0) {
-                func_80284570_de(sys, (&sys->lists[i])->tail);
+                Particle_Release(sys, (&sys->lists[i])->tail);
                 break;
             }
         }
@@ -124,7 +124,7 @@ static inline void effect_spawn_aim(ParticleEffect *effect, EffectTarget *aimTar
         func_8026EF58_de(targetInv.m[0], targetMtx.m[0]);
         Particle_TransformPoint(&targetInv, &aimTarget->pos, &effect->unk50);
         up = D_801042C8;
-        func_8027207C_de(&up.x);
+        Particle_NormalizeVec3(&up.x);
         func_80272B38_de(&targetInv, &up, vel);
         effect->unk134 = (s32) targetActor;
         effect->flags |= 0x10000;
@@ -413,7 +413,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     dir.x = func_80285630_de(entry->direction[0]);
                     dir.y = func_80285630_de(entry->direction[1]);
                     dir.z = func_80285630_de(entry->direction[2]);
-                    func_8027207C_de(&dir.x);
+                    Particle_NormalizeVec3(&dir.x);
                     if (dir.x != 0.0f || dir.y != 0.0f || dir.z != 0.0f) {
                         Particle_TransformPoint(&mtx, &dir, &dirOut);
                     } else {
@@ -421,7 +421,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     }
                     if (mode == -8) {
                         effect->direction = D_801002E0;
-                        func_8027207C_de(&effect->direction.x);
+                        Particle_NormalizeVec3(&effect->direction.x);
                     } else {
                         effect->direction = dirOut;
                     }
@@ -462,22 +462,22 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 if (offset.x != 0.0f || offset.y != 0.0f || offset.z != 0.0f) {
                     Particle_TransformPoint(&mtx, &offset, &offsetOut);
                     if (!(entry->flags & 0x8000)) {
-                        func_80271F34_de(&offsetOut, &pos, &offsetOut);
+                        Particle_AddVec3(&offsetOut, &pos, &offsetOut);
                     }
                     effect->pos = offsetOut;
                 }
                 if (aim != 0) {
                     Particle_SubtractVectors(&aimDelta, aim, &effect->pos);
-                    func_8027207C_de(&aimDelta.x);
+                    Particle_NormalizeVec3(&aimDelta.x);
                     func_80273198_de(&mtx, &aimDelta);
                     if (mode == -8) {
                         effect->direction = D_801002E0;
-                        func_8027207C_de(&effect->direction.x);
+                        Particle_NormalizeVec3(&effect->direction.x);
                     } else {
                         dir.x = func_80285630_de(entry->direction[0]);
                         dir.y = func_80285630_de(entry->direction[1]);
                         dir.z = func_80285630_de(entry->direction[2]);
-                        func_8027207C_de(&dir.x);
+                        Particle_NormalizeVec3(&dir.x);
                         if (dir.x != 0.0f || dir.y != 0.0f || dir.z != 0.0f) {
                             Particle_TransformPoint(&mtx, &dir, &dirOut);
                         } else {
@@ -490,7 +490,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 effect->unk50 = effect->pos;
                 Particle_ScaleVector(&effect->velocity, &dirOut, func_80285630_de(entry->motion->speed));
                 if (entry->flags & 0x20) {
-                    func_80271F34_de(&effect->velocity, &effect->velocity, &arg6);
+                    Particle_AddVec3(&effect->velocity, &effect->velocity, &arg6);
                 }
                 hue = 0;
                 if (entry->color->m_RandomizeHue != 0) {
@@ -596,7 +596,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                             func_802843B8_de(effect, sound);
                             break;
                         default:
-                            func_8025DE54_de(sound, effect->pos, 0, -1);
+                            Render_PlaySoundAtPosition(sound, effect->pos, 0, -1);
                             break;
                     }
                 }

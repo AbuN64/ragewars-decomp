@@ -500,7 +500,7 @@ void func_80228AF4_de(void *arg0, ViewState *viewState) {
 #define EUF(p, t, o) (*(t *)((u8 *)(p) + (o)))
 extern f32 D_800C2EB4_eu;
 extern void func_8025DF34_de(s32), Camera_PostScreenMessage(void *, void *, void *);
-extern void func_80273198_de(void *, void *), func_80271F34_de(void *, void *, void *);
+extern void func_80273198_de(void *, void *), Particle_AddVec3(void *, void *, void *);
 extern void func_80273448_de(void *, f32, f32, f32), func_80273D6C_de(void *), func_8027027C_de(void *, void *);
 /* Pulse of the player's ring effect: with the timer at 0x11FC running it only plays sound 0x578 and re-shows the text of the
    active language, otherwise it rebuilds the ring matrix at 0x1600 from the vectors at 0x1458/0x1470/0x1200 first. */
@@ -529,7 +529,7 @@ void func_80228E60_eu(u8 *player, s32 flag) {
         EUF(player, f32, 0x11FC) = D_800C2EB4_eu;
         func_80273198_de(mtx, player + 0x1470);
         Particle_ScaleVector((void *)vec, (void *)(player + 0x1470), 5.12f);
-        func_80271F34_de(vec, vec, player + 0x1200);
+        Particle_AddVec3(vec, vec, player + 0x1200);
         func_80273448_de(mtx, vec[0], vec[1], vec[2]);
         func_80273D6C_de(mtx);
         func_8027027C_de(mtx, player + 0x1600);

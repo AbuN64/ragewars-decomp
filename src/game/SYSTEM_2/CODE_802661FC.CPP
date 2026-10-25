@@ -9,7 +9,7 @@
 #include "TYPES.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 #include "SYSTEM_2/CODE_802661FC.H"
-extern void func_8027207C_de(f32 *arg0);
+extern void Particle_NormalizeVec3(f32 *arg0);
 
 typedef struct DamageDefinition { s32 kind; } DamageDefinition;
 typedef struct DamageActor {
@@ -207,7 +207,7 @@ void System_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 abso
         }
     }
     if (source->definition->kind == 1 || source->definition->kind == 11) {
-        func_80271F34_de(&source->velocity, &source->velocity, &impulse);
+        Particle_AddVec3(&source->velocity, &source->velocity, &impulse);
         if (applyTurn) {
             angle = Weapons_GetSignedAngleToPoint((Actor_func_80214624_de *)source, target->position);
             source->turn += angle * D_800C43DC_de;
@@ -301,7 +301,7 @@ static inline void hitImpulse(Shared_ReactionActor *source, Shared_ReactionActor
         target->category == 2) {
         Particle_SubtractVectors(&direction, &source->position, &target->position);
         distance = func_802B72B0_de(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
-        func_8027207C_de(&direction);
+        Particle_NormalizeVec3(&direction);
         if (!(radius <= distance)) {
             Particle_ScaleVector(out, &direction, (f32)copied.impulse * (((radius - distance) / radius) * D_800C43E0_de[7]));
         }
@@ -688,7 +688,7 @@ void func_802675C8_de(struct Player *actor, u8 *other, PushStrength strength, Pu
 #endif
         Particle_SubtractVectors(&offset, &actor->pos, &((struct Player *)other)->pos);
         distance = func_802B72B0_de(offset.x * offset.x + offset.y * offset.y + offset.z * offset.z);
-        func_8027207C_de(&offset.x);
+        Particle_NormalizeVec3(&offset.x);
         if (!(radius <= distance)) {
             Particle_ScaleVector(out, &offset, (f32)scale.value * (((radius - distance) / radius) * D_800C46E8_eu));
         }

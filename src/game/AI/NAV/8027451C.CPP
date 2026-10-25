@@ -530,7 +530,7 @@ CVector3 *func_802750B0_de(CVector3 *out, Node75 *node) {
         ((CVector3 *)&D_80115E00)->y = D_800C49C0_de;
     } else if ((int)node != D_800CD3E4) {
         cross_edges((CVector3 *)&D_80115E00, node);
-        func_8027207C_de((CVector3 *)&D_80115E00);
+        Particle_NormalizeVec3((CVector3 *)&D_80115E00);
     }
     *out = *(CVector3 *)&D_80115E00;
     D_800CD3E4 = (int)node;

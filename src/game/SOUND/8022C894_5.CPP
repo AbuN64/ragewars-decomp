@@ -193,7 +193,7 @@ void func_8022DE58_de(Player *player, LevelActor *actor) {
         temp_f22 = Sound_GetActorReach(actor);
         temp_f21 = func_8024D398_de(actor);
         temp_f20 = Particle_GetActorHeight(actor);
-        temp_f0 = func_8024E420_de(actor);
+        temp_f0 = Sound_GetActorBaseOffset(actor);
         next.x = actor->position0.x;
         next.y = actor->position0.y + var_f23;
         next.z = actor->position0.z;

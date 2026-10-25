@@ -61,7 +61,7 @@ void func_80273448_de(char *, f32, f32, f32);
 void func_8027347C_de(void *, f32, f32, f32);
 void func_8027027C_de(f32 *, PackedMatrixWords *);
 
-Particle *func_802A5BE4_de(SceneRecAt95A8 *scene, CVector3 position, CVector3 normal, s32 surface, s32 owner) {
+Particle *System_SpawnImpactMark(SceneRecAt95A8 *scene, CVector3 position, CVector3 normal, s32 surface, s32 owner) {
     f32 matrix[16];
     CQuatern rotation;
     Particle *node;
@@ -84,9 +84,9 @@ Particle *func_802A5BE4_de(SceneRecAt95A8 *scene, CVector3 position, CVector3 no
         node->owner = owner;
         MatrixFromQuaternion(&rotation.x, matrix);
         func_802737F0_de(matrix, 1.5707965f);
-        func_8027207C_de(&normal);
+        Particle_NormalizeVec3(&normal);
         Particle_ScaleVector(&normal, &normal, 2.048f);
-        func_80271F34_de(&position, &position, &normal);
+        Particle_AddVec3(&position, &position, &normal);
         func_80273448_de((char *)matrix, position.x, position.y, position.z);
         func_8027347C_de(matrix, D_800C5EA8_de, 1.0f, D_800C5EA8_de);
         func_8027027C_de(matrix, &node->transform.matrix);

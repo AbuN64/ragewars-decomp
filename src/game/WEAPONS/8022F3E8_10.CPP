@@ -81,10 +81,10 @@ void func_802312C8_de(Shared_Actor *actor, WeaponFireState *attack) {
         position = &player->pos;
     }
     if (released(actor, player)) {
-        func_80214178_de(actor, attack, 2);
+        Weapons_RequestActorState(actor, attack, 2);
         func_8022AF40_de(player);
         func_8022B00C_de(player);
-        func_8025DE54_de(0x978, *position, (s32)position, -1);
+        Render_PlaySoundAtPosition(0x978, *position, (s32)position, -1);
         return;
     }
     Nav_EaseValueToward(&attack->spin, (f32)D_800CA37C * D_800C2F60_de, 0.4f);
@@ -244,6 +244,6 @@ spin:
     }
     player->fireFrame = (player->fireFrame + (s32)player->fireSpin) % 8;
     if (func_802301F4_de(actor, fireState) == 0 && !(actor->weaponFlags & 0x400)) {
-        func_80214178_de(actor, fireState, action);
+        Weapons_RequestActorState(actor, fireState, action);
     }
 }

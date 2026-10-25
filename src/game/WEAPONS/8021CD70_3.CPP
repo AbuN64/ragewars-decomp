@@ -38,7 +38,7 @@ void Weapons_BuildPlayerViewTransform(void *, f32 *);
 void func_8022B144_de(void *, f32 *);
 s32 func_802444A4_de(char *, CVector3, CVector3, s32);
 void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
-void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
+void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 f32 func_802B72B0_de(f32);
 typedef struct SharedPlayer_func_8021D408_de SharedPlayer_func_8021D408_de;
@@ -97,7 +97,7 @@ void func_8021D774_de(AimPlayer *player) {
                     Particle_SubtractVectors((CVector3 *)&spB0, &temp_a1->pos, &player->unk8);
                     temp_fv0 = func_802B72B0_de((spB0.x * spB0.x) + (spB0.y * spB0.y) + (spB0.z * spB0.z));
                     spE0 = sp30;
-                    func_8027207C_de(&spE0);
+                    Particle_NormalizeVec3(&spE0);
                     Particle_ScaleVector(&spC0.xyz, &spE0, temp_fv0);
                     Particle_TransformPoint(matrix, &spC0.xyz, (CVector3 *)&spD0);
                     player->aim2 = (*(CVector3 *)&spD0);
@@ -198,8 +198,8 @@ block_15:
     Particle_SubtractVectors(&sp40, &sp20.xyz, temp_s2);
     Particle_ScaleVector(&sp40, &sp40, temp_fs1f * temp_fs0);
     temp_s0_2 = &player->smoothVelocity;
-    func_80271F34_de(temp_s0_2, temp_s0_2, &sp40);
-    func_80271F34_de(temp_s2, temp_s2, temp_s0_2);
+    Particle_AddVec3(temp_s0_2, temp_s0_2, &sp40);
+    Particle_AddVec3(temp_s2, temp_s2, temp_s0_2);
     Particle_ScaleVector(temp_s0_2, temp_s0_2, temp_fs2 * temp_fs0);
     if (spF0 != NULL) {
         weapon=D_800D052C[player->unk62E]; player->unk7B8=weapon->locked+0x64;
@@ -265,8 +265,8 @@ reset_position:
     Particle_SubtractVectors(var_a0, &sp20.xyz, temp_s2_2);
     Particle_ScaleVector(&sp40, &sp40, temp_fs1f);
     temp_s1 = &player->velocity;
-    func_80271F34_de(temp_s1, temp_s1, &sp40);
-    func_80271F34_de(temp_s2_2, temp_s2_2, temp_s1);
+    Particle_AddVec3(temp_s1, temp_s1, &sp40);
+    Particle_AddVec3(temp_s2_2, temp_s2_2, temp_s1);
     Particle_ScaleVector(temp_s1, temp_s1, temp_fs2);
     player->unk798 = (s32) var_s4;
 }

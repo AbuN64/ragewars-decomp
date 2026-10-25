@@ -115,7 +115,7 @@ void func_80232FF8_de(void *actor, ObjectState140 *attack) {
     } else {
         attack->unk_13C = 1;
         if (func_802301F4_de(actor, attack) == 0 && !(((Actor_func_8022D290_de *)o)->flags & 0x400)) {
-            func_80214178_de(actor, attack, action);
+            Weapons_RequestActorState(actor, attack, action);
         }
     }
 }

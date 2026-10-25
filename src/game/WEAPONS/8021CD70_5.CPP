@@ -169,7 +169,7 @@ static inline void placePlayerLight(struct Player *player, struct PlayerEffectLi
     offset.y = 0.0f;
     offset.z = offsetZ;
     func_8024BC94_de(&position, player, offset);
-    func_80271F34_de(&position, &position, &player->pos);
+    Particle_AddVec3(&position, &position, &player->pos);
     light->active = 1;
     light->x = (s16)position.x;
     light->y = (s16)(position.y + Particle_GetActorHeight(player) * *heightScale);
@@ -183,7 +183,7 @@ void Weapons_UpdatePlayerEffectLights(struct Player *player) {
     if (D_801462C8.flags & 0x4000) {
         player->rangeTimer = 0.0f;
     } else if (player->rangeNodes[2] != 0) {
-        func_80268C7C_de(&D_8013B1A8, (s32)player->rangeNodes[2]);
+        Render_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[2]);
         player->rangeNodes[2] = 0;
     }
     if (player->rangeTimer != 0.0f) {
@@ -221,11 +221,11 @@ void Weapons_UpdatePlayerEffectLights(struct Player *player) {
         }
     } else {
         if (player->rangeNodes[0] != 0) {
-            func_80268C7C_de(&D_8013B1A8, (s32)player->rangeNodes[0]);
+            Render_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[0]);
             player->rangeNodes[0] = 0;
         }
         if (player->rangeNodes[1] != 0) {
-            func_80268C7C_de(&D_8013B1A8, (s32)player->rangeNodes[1]);
+            Render_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[1]);
             player->rangeNodes[1] = 0;
         }
     }

@@ -19,7 +19,7 @@ extern void Particle_BuildMatrix(void *, s32, s32, f32);
 
 
 
-void func_80284178_de(void *particle) {
+void Particle_UpdateMatrix(void *particle) {
     CVector3 delta;
     void *camera;
     f32 amount;
@@ -58,7 +58,7 @@ extern char D_8011D8D0;
 extern struct Shape_typemap_165 func_80271818_de(Triple *);
 extern void Particle_SubtractVectors(Triple *, Triple *, Triple *);
 extern void Particle_ScaleVector(Triple *, Triple *, f32);
-extern void func_80271F34_de(Triple *, Triple *, Triple *);
+extern void Particle_AddVec3(Triple *, Triple *, Triple *);
 #include "particle/8027A0F4_8.H"
 void func_8028422C_de(TrailActor *actor) {
         struct Shape_typemap_165 rotation;
@@ -82,7 +82,7 @@ void func_8028422C_de(TrailActor *actor) {
                 if (temp) {
                         divisor = (f32) count + (&D_800C4E88_de)[1];
                         do {
-    do { Particle_ScaleVector(&step, &delta, (f32) i / divisor); func_80271F34_de(&step, &step, &actor->end); actor_2 = actor->model; func_802800C0_de((struct EffectSystem *)system, (struct EffectActor *)actor, (struct EffectActor *)actor->owner, (s32 *)actor->property, actor->type, actor_2, *(CVector3 *)&position, *(CQuatern *)&rotation, *(CVector3 *)&step, 0, -1, 0x20E001); i++; } while (0);
+    do { Particle_ScaleVector(&step, &delta, (f32) i / divisor); Particle_AddVec3(&step, &step, &actor->end); actor_2 = actor->model; func_802800C0_de((struct EffectSystem *)system, (struct EffectActor *)actor, (struct EffectActor *)actor->owner, (s32 *)actor->property, actor->type, actor_2, *(CVector3 *)&position, *(CQuatern *)&rotation, *(CVector3 *)&step, 0, -1, 0x20E001); i++; } while (0);
                         } while (count >= i);
                 }
         }
@@ -105,13 +105,13 @@ void func_802843B8_de(void *soundParticle, s32 arg1) {
         if (((Node80253610 *)node)->flags == arg1 && ((Node80253610 *)node)->references != -1) {
             return;
         }
-        func_80284434_de(soundParticle);
+        Particle_StopSound(soundParticle);
     }
     ((SoundParticle *)soundParticle)->sound =
         func_8025C95C_de(func_8025CC6C_de(), arg1, &((SoundParticle *)soundParticle)->particle.inst.pos, &((SoundParticle *)soundParticle)->particle.inst.pos, -1);
 }
 
-void func_80284434_de(void *a) {
+void Particle_StopSound(void *a) {
     if (((SoundParticle *)a)->sound != 0) {
         func_8025CA24_de(func_8025CC6C_de(), ((SoundParticle *)a)->sound);
         ((SoundParticle *)a)->sound = 0;
@@ -141,7 +141,7 @@ typedef struct PoolNode84478 {
     s32 counter;
     s32 flags;
 } PoolNode84478;
-extern void func_80284570_de(PoolOwner84478 *, PoolNode84478 *);
+extern void Particle_Release(PoolOwner84478 *, PoolNode84478 *);
 
 PoolNode84478 *Particle_AllocPoolNode(PoolOwner84478 *owner, s32 index) {
     PoolNode84478 *node;
@@ -152,7 +152,7 @@ PoolNode84478 *Particle_AllocPoolNode(PoolOwner84478 *owner, s32 index) {
         for (i = 0; i <= (index & 0xFF); i++) {
             tail = (&owner->slots[i])->tail;
             if (tail != 0) {
-                func_80284570_de(owner, tail);
+                Particle_Release(owner, tail);
                 break;
             }
         }

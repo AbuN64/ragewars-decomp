@@ -11,14 +11,14 @@ extern f32 Sound_GetActorReach(CollisionProbe *);
 
 extern f32 Particle_GetActorHeight(CollisionProbe *);
 
-extern f32 func_8024E420_de(CollisionProbe *);
+extern f32 Sound_GetActorBaseOffset(CollisionProbe *);
 
 extern f32 func_80241728_de(SurfaceHit *, f32, f32);
 
 struct MotionSurface;
 extern s32 func_8024491C_de(CollisionProbe *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
 
-extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 
 
@@ -57,7 +57,7 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
             extent0 = Sound_GetActorReach(input);
             extent1 = func_8024D398_de(input);
             extent2 = Particle_GetActorHeight(input);
-            extent3 = func_8024E420_de(input);
+            extent3 = Sound_GetActorBaseOffset(input);
             next.x = input->x;
             next.y = hit_y + D_800C3758_de[0];
             next.z = input->z;
@@ -100,7 +100,7 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
         hit |= func_8023E8D4_de(actor, query, 1);
         if (hit) {
             actor->flags |= 8;
-            func_80271F34_de(&((LevelActor *)input)->position1,
+            Particle_AddVec3(&((LevelActor *)input)->position1,
                           &((LevelActor *)input)->position1,
                           &actor->movement);
         }
@@ -134,7 +134,7 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
             extent0 = Sound_GetActorReach(input);
             extent1 = func_8024D398_de(input);
             extent2 = Particle_GetActorHeight(input);
-            extent3 = func_8024E420_de(input);
+            extent3 = Sound_GetActorBaseOffset(input);
             next.x = input->x;
             next.y = hit_y + D_800C3758_de[1];
             next.z = input->z;
@@ -171,7 +171,7 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
                           bounds->corners[0].y, bounds->corners[4].y,
                           1, query, 1)) {
             actor->flags |= 8;
-            func_80271F34_de(&((LevelActor *)input)->position1,
+            Particle_AddVec3(&((LevelActor *)input)->position1,
                           &((LevelActor *)input)->position1,
                           &actor->movement);
         }

@@ -45,7 +45,7 @@ CQuatern CVector3_GetDirectionRotation2(CVector3 *dir) {
     f32 turn;
 
     up = D_800C19F0;
-    func_8027207C_de(dir);
+    Particle_NormalizeVec3(dir);
     if (dir->y > D_800C19FC_de) {
         q.x = q.y = q.z = 0.0f;
         q.w = D_800C1A00_de;
@@ -58,7 +58,7 @@ CQuatern CVector3_GetDirectionRotation2(CVector3 *dir) {
     } else {
         turn = Nav_ArcCos(dir->x * up.x + dir->y * up.y + dir->z * up.z);
         Particle_CrossVectors(&axis, &up, dir);
-        func_8027207C_de(&axis);
+        Particle_NormalizeVec3(&axis);
         angle = turn * D_800C1A0C;
         D_80115DEC = func_802B7130_de(angle);
         q.x = axis.x * D_80115DEC;
