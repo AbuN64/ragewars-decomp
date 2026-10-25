@@ -66,7 +66,7 @@ void func_80412634_de(GridList *gridList, sm_dldc style) {
     for (column = 0; column < list->columns; column++) {
         for (row = 0; row < list->rows; row++) {
             func_804122CC_de(list, &cell, column, row);
-            func_8040D2D0_de((TextWidget *)&cell, style);
+            Frontend_DrawTextWidget((TextWidget *)&cell, style);
         }
     }
 }

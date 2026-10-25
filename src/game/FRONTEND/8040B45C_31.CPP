@@ -129,7 +129,7 @@ static inline s32 textClipChanged(struct Shape_typemap_165 *current) {
     return current->field_C != D_8014D58C;
 }
 
-void func_8040CAB0_de(void) {
+void Frontend_FlushTextBatches(void) {
     u16 first;
     u16 last;
     u16 page;
@@ -214,7 +214,7 @@ void func_8040CD50_de(Widget_func_8040CD50_de *widget, sm_dldc args) {
         func_802A1870_de(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
     }
     if (func_8040CDD0_overlaps(&area)) {
-        func_8040CAB0_de();
+        Frontend_FlushTextBatches();
     }
     texture = func_80410674_de(widget->image, 1);
     color = (args.alpha << 24) | 0xFFFFFF;
@@ -255,7 +255,7 @@ void func_8040CF8C_de(WidgetLayout *widget, sm_dldc args) {
         func_802A1870_de(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
     }
     if (func_8040D00C_overlaps(&area)) {
-        func_8040CAB0_de();
+        Frontend_FlushTextBatches();
     }
     if (D_800DEA6C != 0x53533 || D_800E2AB8 == 0) {
         D_800DEA6C = 0x53533;
@@ -273,7 +273,7 @@ void func_8040CF8C_de(WidgetLayout *widget, sm_dldc args) {
     }
 }
 
-void func_8040D2D0_de(TextWidget *widget, sm_dldc args) {
+void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
     struct Shape_typemap_165 box, saved, clip, area, current;
     s32 clipped, length, width, mismatch, count, i, tempX, tempY;
     u8 font, style;
@@ -308,7 +308,7 @@ void func_8040D2D0_de(TextWidget *widget, sm_dldc args) {
         func_802A1898_de(&current.field_0, &current.field_8, &current.field_4, &current.field_C);
         mismatch = textClipChanged(&current);
         if (mismatch || D_8014D710 != (s8)font || D_8014D714 != (s8)style) {
-            if (D_8014D570) func_8040CAB0_de();
+            if (D_8014D570) Frontend_FlushTextBatches();
             textBegin(font, style);
         }
     } else textBegin(font, style);
@@ -334,7 +334,7 @@ void func_8040D2D0_de(TextWidget *widget, sm_dldc args) {
     batch->area.field_8=tempY; batch->area.field_C=tempY+(s32)(D_8014D568*args.YScale);
     if (batch->area.field_0 >= batch->area.field_4) batch->area.field_4=batch->area.field_0+1;
     if (batch->area.field_C <= batch->area.field_8) batch->area.field_C=batch->area.field_8+1;
-    if (textOverlaps(batch)) { func_8040CAB0_de(); textBegin(font, style); }
+    if (textOverlaps(batch)) { Frontend_FlushTextBatches(); textBegin(font, style); }
     sprite=func_802A15E4_de(length*sizeof(TextSprite));
     sprites=sprite;
     D_8014D590[D_8014D570].cursor=sprites;
@@ -359,7 +359,7 @@ void func_8040D2D0_de(TextWidget *widget, sm_dldc args) {
         D_8014D590[D_8014D570].count=count;
         func_8029FE38_de((char *)D_8014D590[D_8014D570].cursor, count, sizeof(TextSprite), D_0040F570);
         D_8014D570++;
-        if (D_8014D570>=16) func_8040CAB0_de();
+        if (D_8014D570>=16) Frontend_FlushTextBatches();
     }
 }
 
@@ -458,7 +458,7 @@ void Frontend_DrawWidget(DraftWidget *widget, sm_dldc args) {
         func_8040CD50_de((void *)widget, args);
         break;
     case 4:
-        func_8040D2D0_de((void *)widget, args);
+        Frontend_DrawTextWidget((void *)widget, args);
         break;
     case 6:
         func_8040CF8C_de((void *)widget, args);

@@ -77,7 +77,7 @@ void func_8040E894_de(void) {
 
     struct Shape_typemap_165 *state;
 
-    func_8040CAB0_de();
+    Frontend_FlushTextBatches();
     state = &D_8014D580;
     state->field_8 = 0;
     state->field_0 = 0;
