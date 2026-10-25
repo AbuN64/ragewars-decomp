@@ -49,10 +49,10 @@ void Fx_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct Matri
                 switch (temp_v1) {                  /* irregular */
 #if !defined(VERSION_DE)
                 case 0x2:
-                    func_80216288_de(actor, 0x51, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0x51, pos, temp_s0);
                     break;
                 case 0x8:
-                    func_80216288_de(actor, 0x5C, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0x5C, pos, temp_s0);
                     break;
 #endif
                 case 0x1:
@@ -88,64 +88,64 @@ void Fx_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct Matri
                     }
                     break;
                 case 0x80:
-                    func_80216288_de(actor, 0xAC, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0xAC, pos, temp_s0);
                     break;
                 case 0x100:
-                    func_80216288_de(actor, 0xAD, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0xAD, pos, temp_s0);
                     break;
                 case 0x200:
-                    func_80216288_de(actor, 0xAE, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0xAE, pos, temp_s0);
                     break;
                 case 0x400:
-                    func_80216288_de(actor, 0xAF, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0xAF, pos, temp_s0);
                     break;
                 case 0x800:
-                    func_80216288_de(actor, 0xB0, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0xB0, pos, temp_s0);
                     break;
                 case 0x1000:
-                    func_80216288_de(actor, 0xB1, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0xB1, pos, temp_s0);
                     break;
                 case 0x2000:
-                    func_80216288_de(actor, 0xB2, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0xB2, pos, temp_s0);
                     break;
                 case 0x4000:
-                    func_80216288_de(actor, 0xB3, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0xB3, pos, temp_s0);
                     break;
                 case 0x8000:
-                    func_80216288_de(actor, 0xB4, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0xB4, pos, temp_s0);
                     break;
                 case 0x10000:
-                    func_80216288_de(actor, 0xB5, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0xB5, pos, temp_s0);
                     break;
                 case 0x20000:
-                    func_80216288_de(actor, 0xB6, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0xB6, pos, temp_s0);
                     break;
                 case 0x40000:
-                    func_80216288_de(actor, 0xB7, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0xB7, pos, temp_s0);
                     break;
                 case 0x80000:
-                    func_80216288_de(actor, 0xB8, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0xB8, pos, temp_s0);
                     break;
                 case 0x100000:
-                    func_80216288_de(actor, 0xB9, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0xB9, pos, temp_s0);
                     break;
                 case 0x200000:
-                    func_80216288_de(actor, 0xBA, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0xBA, pos, temp_s0);
                     break;
                 case 0x400000:
-                    func_80216288_de(actor, 0xBB, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0xBB, pos, temp_s0);
                     break;
                 case 0x20000000:
-                    func_80216288_de(actor, 0x1E9, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0x1E9, pos, temp_s0);
                     break;
                 case 0x40000000:
-                    func_80216288_de(actor, 0x1EA, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0x1EA, pos, temp_s0);
                     break;
                 case 0x80000000:
-                    func_80216288_de(actor, 0x1EB, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0x1EB, pos, temp_s0);
                     break;
                 case 0x8000000:
-                    func_80216288_de(actor, 0x11C, pos, temp_s0);
+                    Weapons_SpawnActorEffect(actor, 0x11C, pos, temp_s0);
                     break;
                 case 0x10000000:
                     actor->unk260 = pos;

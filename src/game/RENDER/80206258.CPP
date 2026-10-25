@@ -104,7 +104,7 @@ void func_802062E0_de(LevelActor *actor, ActorMotionState *owner, Params params,
     if (node != 0) {
         node->state = 0;
         owner->unk128 -= 1;
-        func_80216288_de(node, 0x11D, node->position, 0);
+        Weapons_SpawnActorEffect(node, 0x11D, node->position, 0);
     }
 }
 

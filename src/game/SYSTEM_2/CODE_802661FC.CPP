@@ -604,7 +604,7 @@ void func_802673EC_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3, s32 unuse
 }
 
 void func_8026740C_de(void *actor,int unused1,int unused2,Triple input,int event) {
- func_80216288_de(actor,event,input,0);
+ Weapons_SpawnActorEffect(actor,event,input,0);
 }
 
 s32 func_80267444_de(void *levelActor, CVector3 *arg1) {

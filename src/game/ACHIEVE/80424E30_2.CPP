@@ -34,7 +34,7 @@ extern void Weapons_IncrementLevelProgress(Profile *, s32);
 
 extern void Weapons_SetAchievementFlag2F(Profile *, s32);
 
-extern void func_8022F514_de(Profile *, s32);
+extern void Weapons_SetAchievementFlagByIndex(Profile *, s32);
 
 extern void func_8022F31C_de(Profile *);
 
@@ -224,34 +224,34 @@ s32 func_80425014_de(s32 index) {
         Weapons_SetAchievementFlag2F(player, 4);
         goto done;
     effect_3:
-        func_8022F514_de(player, 2);
+        Weapons_SetAchievementFlagByIndex(player, 2);
         goto done;
     effect_4:
         Weapons_SetAchievementFlag2F(player, 14);
         goto done;
     effect_5:
-        func_8022F514_de(player, 6);
+        Weapons_SetAchievementFlagByIndex(player, 6);
         goto done;
     effect_6:
         Weapons_SetAchievementFlag2F(player, 7);
         goto done;
     effect_7:
-        func_8022F514_de(player, 16);
+        Weapons_SetAchievementFlagByIndex(player, 16);
         goto done;
     effect_8:
-        func_8022F514_de(player, 5);
+        Weapons_SetAchievementFlagByIndex(player, 5);
         goto done;
     effect_9:
-        func_8022F514_de(player, 17);
+        Weapons_SetAchievementFlagByIndex(player, 17);
         goto done;
     effect_10:
         Weapons_SetAchievementFlag2F(player, 6);
         goto done;
     effect_11:
-        func_8022F514_de(player, 14);
+        Weapons_SetAchievementFlagByIndex(player, 14);
         goto done;
     effect_12:
-        func_8022F514_de(player, 4);
+        Weapons_SetAchievementFlagByIndex(player, 4);
         goto done;
     effect_13:
         Weapons_SetAchievementFlag2F(player, 12);
@@ -263,7 +263,7 @@ s32 func_80425014_de(s32 index) {
         func_8022F31C_de(player);
         goto done;
     effect_16:
-        func_8022F514_de(player, 8);
+        Weapons_SetAchievementFlagByIndex(player, 8);
         goto done;
     effect_17:
         Weapons_SetAchievementFlag2F(player, 8);
@@ -272,13 +272,13 @@ s32 func_80425014_de(s32 index) {
         Weapons_SetAchievementFlag2F(player, 15);
         goto done;
     effect_19:
-        func_8022F514_de(player, 11);
+        Weapons_SetAchievementFlagByIndex(player, 11);
         goto done;
     effect_20:
-        func_8022F514_de(player, 10);
+        Weapons_SetAchievementFlagByIndex(player, 10);
         goto done;
     effect_21:
-        func_8022F514_de(player, 3);
+        Weapons_SetAchievementFlagByIndex(player, 3);
         goto done;
     effect_22:
         func_8022F364_de(player);
@@ -293,16 +293,16 @@ s32 func_80425014_de(s32 index) {
         Weapons_SetAchievementFlag2F(player, 9);
         goto done;
     effect_26:
-        func_8022F514_de(player, 1);
+        Weapons_SetAchievementFlagByIndex(player, 1);
         goto done;
     effect_27:
-        func_8022F514_de(player, 9);
+        Weapons_SetAchievementFlagByIndex(player, 9);
         goto done;
     effect_28:
-        func_8022F514_de(player, 7);
+        Weapons_SetAchievementFlagByIndex(player, 7);
         goto done;
     effect_29:
-        func_8022F514_de(player, 13);
+        Weapons_SetAchievementFlagByIndex(player, 13);
         goto done;
     effect_30:
         Weapons_SetAchievementFlag2F(player, 5);
@@ -311,7 +311,7 @@ s32 func_80425014_de(s32 index) {
         Weapons_SetAchievementFlag2F(player, 1);
         goto done;
     effect_32:
-        func_8022F514_de(player, 0);
+        Weapons_SetAchievementFlagByIndex(player, 0);
         goto done;
     effect_33:
         Weapons_SetAchievementFlag2F(player, 11);

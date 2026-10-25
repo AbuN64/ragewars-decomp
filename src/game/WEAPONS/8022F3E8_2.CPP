@@ -54,7 +54,7 @@ s32 func_8022F4DC_de(u8 *arg0, s32 arg1)
   return func_80265650_de(arg0 + 0x79, arg1);
 }
 
-void func_8022F514_de(Profile *player, s32 arg1) {
+void Weapons_SetAchievementFlagByIndex(Profile *player, s32 arg1) {
     u8 *var_a0;
     s32 var_a1 = arg1;
 

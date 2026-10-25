@@ -80,7 +80,7 @@ void func_80205324_de(Obj5324 *arg0, s32 *arg1) {
             Render_PlaySoundAtPosition(rec->unk20.half.id, arg0->pos.v, 0, -1);
         }
         if (rec->unk1C != -1) {
-            func_80216288_de(arg0, rec->unk1C, arg0->pos.t, 0);
+            Weapons_SpawnActorEffect(arg0, rec->unk1C, arg0->pos.t, 0);
         }
         Weapons_SpawnFlaggedEffects(arg0, arg1, 4, rec->unk24, rec->unk28);
         /* func_802A5D38_de unlinks the walker by the object's 32-bit identity;

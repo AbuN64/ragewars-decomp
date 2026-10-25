@@ -161,7 +161,7 @@ struct func_8023292C_S2 {
 
 extern float D_800C301C_de;
 
-extern void func_802325FC_de(void *arg0, void *arg1);
+extern void Weapons_ApplyWeaponSwitch(void *arg0, void *arg1);
 
 
 

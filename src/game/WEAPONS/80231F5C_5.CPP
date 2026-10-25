@@ -116,7 +116,7 @@ s32 func_80232790_eu(PlayerRecAt1450V1 *pThis) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 
 void func_80232878_eu(void *arg0, void *arg1) {
-    func_802325FC_de(arg0, arg1);
+    Weapons_ApplyWeaponSwitch(arg0, arg1);
     Weapons_RequestActorState(arg0, arg1, 0);
 }
 #endif

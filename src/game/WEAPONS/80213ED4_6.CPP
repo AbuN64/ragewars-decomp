@@ -17,7 +17,7 @@ extern s32 func_8024BE80_de(CActor_t *actor);
 extern CQuatern func_8024F478_de(CActor_t *actor);
 #include "particle/8027A0F4_8.H"
 
-void func_80216288_de(void *actor, s32 kind, Triple input, s32 unused0) {
+void Weapons_SpawnActorEffect(void *actor, s32 kind, Triple input, s32 unused0) {
     Triple copiedInput;
     CVector3 position;
     CQuatern rotation;

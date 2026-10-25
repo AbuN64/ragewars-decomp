@@ -381,7 +381,7 @@ s16 Weapons_GetWeaponClassId(Player *player, s32 arg1) {
     return -1;
 }
 
-s16 func_8022AB20_de(void *actor, s32 arg1) {
+s16 Weapons_GetWeaponAmmo(void *actor, s32 arg1) {
     s16 *var_v0;
     s32 temp_v1;
     WeaponInfo *weapon;

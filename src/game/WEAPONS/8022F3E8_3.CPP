@@ -154,7 +154,7 @@ s32 func_8022F96C_de(void *arg0)
     return 0;
 }
 
-s32 func_8022FAF8_de(Object_func_8022FAF8_de *player) {
+s32 Weapons_NextAvailableWeapon(ObjectWeaponsNextAvailableWeapon *player) {
     s32 value;
     s32 number;
     s32 index;
@@ -286,7 +286,7 @@ extern s32 D_800CD730;
 
 
 
-void func_802325FC_de(void *part, void *body) {
+void Weapons_ApplyWeaponSwitch(void *part, void *body) {
     s16 index;
     u16 unsigned_index;
     void *owner;
@@ -318,6 +318,6 @@ void func_802325FC_de(void *part, void *body) {
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_802325FC_de);
+INCLUDE_ASM("span_1000", Weapons_ApplyWeaponSwitch);
 #endif
 #endif

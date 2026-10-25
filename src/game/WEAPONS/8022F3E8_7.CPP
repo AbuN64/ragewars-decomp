@@ -74,7 +74,7 @@ static inline s32 can_fire(char *player) {
     return ammo;
 }
 
-extern s32 func_8022AB20_de(void *arg0, s16 arg1);
+extern s32 Weapons_GetWeaponAmmo(void *arg0, s16 arg1);
 
 /* Advances a player's second charging action: when the trigger is released (as in func_802312C8_de) or the
  * cooldown is past D_800C8008, it switches to action 2, runs func_8022AF40_de and func_8022B00C_de, plays sound
@@ -190,7 +190,7 @@ check_height:
         }
         goto done;
 check_state:
-        if (func_8022AB20_de(value, temp_a1) == 1) {
+        if (Weapons_GetWeaponAmmo(value, temp_a1) == 1) {
             Weapons_RequestActorState(arg0, arg1, 7);
         } else {
             Weapons_RequestActorState(arg0, arg1, 5);

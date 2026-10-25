@@ -121,7 +121,7 @@ typedef struct DraftState17F4C {
 extern f32 D_800D2988;
 
 s32 func_8021846C_de(void *, void *);
-s16 func_8022FAF8_de(void *);
+s16 Weapons_NextAvailableWeapon(void *);
 s32 func_80285974_de(s32, s32);
 void Team_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *player, s32 arg2)
 {
@@ -134,7 +134,7 @@ void Team_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *player, s32
         if (!player->enabled) return;
         if (player->input->pressed & 0x8000) player->choice = Weapons_PickRandomArmedWeapon(player);
     } else if ((player->input->held & 0x8000) && player->config->mode) {
-        player->choice = func_8022FAF8_de(player);
+        player->choice = Weapons_NextAvailableWeapon(player);
     } else if (player->config->mode != 1 || (player->selection != -1 && state->selection != 8)) {
         func_80217D74_de(&state->state, player, arg2);
     }

@@ -68,8 +68,8 @@ extern float D_800C2F5C_de;
 
 extern float D_800C2FBC_de;
 
-struct Object_func_8022FAF8_de;
-typedef struct Object_func_8022FAF8_de Object_func_8022FAF8_de;
+struct ObjectWeaponsNextAvailableWeapon;
+typedef struct ObjectWeaponsNextAvailableWeapon ObjectWeaponsNextAvailableWeapon;
 
 struct ObjectLinks1DC_2;
 struct ObjectLinks1DC_2 {
@@ -98,8 +98,8 @@ struct CallbackState60 {
 extern void func_8022FF04_de(void *arg0, WeaponFireState *arg1);
 
 
-struct Object_func_8022FAF8_de;
-struct Object_func_8022FAF8_de {
+struct ObjectWeaponsNextAvailableWeapon;
+struct ObjectWeaponsNextAvailableWeapon {
     s8 pad603[0x603];
     s8 values[0x2B];
     s16 selected;

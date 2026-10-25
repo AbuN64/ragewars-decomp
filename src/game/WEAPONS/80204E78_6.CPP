@@ -144,7 +144,7 @@ static __inline__ void spawn(SpawnDispatchObject *object, s32 id,
     if (actor) {
         actor->state = 0;
         owner->remaining--;
-        func_80216288_de(actor, 0x11D, actor->position, 0);
+        Weapons_SpawnActorEffect(actor, 0x11D, actor->position, 0);
     }
 }
 
@@ -165,7 +165,7 @@ static __inline__ void spawnSelected(SpawnDispatchObject *object, SpawnDispatchO
     if (actor) {
         actor->state = 0;
         owner->remaining--;
-        func_80216288_de(actor, 0x11D, actor->position, 0);
+        Weapons_SpawnActorEffect(actor, 0x11D, actor->position, 0);
     }
 }
 

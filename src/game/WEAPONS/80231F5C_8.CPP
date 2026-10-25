@@ -11,7 +11,7 @@
 
 
 extern s32 Pak_CountLiveNodes(void *arg0);
-extern s32 func_8022AB20_de(void *arg0, s16 arg1);
+extern s32 Weapons_GetWeaponAmmo(void *arg0, s16 arg1);
 
 void func_8023293C_de(void *arg0, Dest *arg1, Lookup *lookup) {
     void *actor;
@@ -36,7 +36,7 @@ void func_8023293C_de(void *arg0, Dest *arg1, Lookup *lookup) {
     if ((state == one) && (arg1->field144 == 0)) {
         return;
     }
-    if ((state >= 0x12) && (func_8022AB20_de(actor, state) <= 0)) {
+    if ((state >= 0x12) && (Weapons_GetWeaponAmmo(actor, state) <= 0)) {
         return;
     }
     state = ((Actor_func_8022D290_de *)actor)->unk_0x062E;

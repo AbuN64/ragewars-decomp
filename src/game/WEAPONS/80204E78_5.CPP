@@ -39,7 +39,7 @@ void func_802054E0_de(Obj54E0 *arg0, void *arg1) {
             Render_PlaySoundAtPosition(rec->unk34.half.id, arg0->pos.v, 0, -1);
         }
         if (rec->unk30 != -1) {
-            func_80216288_de(arg0, rec->unk30, arg0->pos.t, 0);
+            Weapons_SpawnActorEffect(arg0, rec->unk30, arg0->pos.t, 0);
         }
         Weapons_SpawnFlaggedEffects(arg0, arg1, 8, rec->unk38, rec->unk3C);
     }

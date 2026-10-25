@@ -129,7 +129,7 @@ void func_8026835C_de(void *actor, Filter *filter, s32 arg2, Triple position, st
         }
         break;
     }
-    func_80216288_de(actor, arg6.field_0, position, 0);
+    Weapons_SpawnActorEffect(actor, arg6.field_0, position, 0);
 }
 
 void func_802683E0_de(char *arg0, s32 arg1, s32 arg2, Triple_func_802683E0_de arg3, struct IntPair arg6)
