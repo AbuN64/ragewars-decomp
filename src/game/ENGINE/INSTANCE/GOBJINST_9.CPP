@@ -28,7 +28,7 @@ extern void func_8027310C_de(f32 *, CVector3 *, f32);
 extern void func_80273448_de(void *, f32, f32, f32);
 extern void func_802735A8_de(f32 *, f32, f32, f32);
 #ifndef NON_MATCHING
-extern void func_80274244_de(void *, f32 *);
+extern void func_80274244_de(f32 *, f32 *);
 #endif
 extern void func_8026F620_de(void *, f32 *, f32 *);
 extern void func_8024BA7C_de(char *, char *, void *, u8);
@@ -91,7 +91,7 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
             func_80273448_de(projection, -((struct LevelActor *)(obj))->position0.x, -plane, -((struct LevelActor *)(obj))->position0.z);
             scale = height * 0.003f + 1.0f;
             func_802735A8_de(projection, scale, scale, scale);
-            func_80274244_de(obj + 0x5C, turn);
+            func_80274244_de((f32 *)(obj + 0x5C), turn);
             func_8026F620_de(((struct LevelActor *)(obj))->shadow, projection, turn);
             func_80273448_de(((struct LevelActor *)(obj))->shadow, ((struct LevelActor *)(obj))->position0.x, ground, ((struct LevelActor *)(obj))->position0.z);
             if (((struct LevelActor *)(obj))->shadow == 0) {
@@ -104,61 +104,60 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
     }
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-float func_8024E678_de(void *object);
+float func_8024E678_de(void *object, s32 mode);
 f32 func_8024E2FC_de(Actor_u1 *arg0);
 s32 func_8027254C_de(f32 *arg0, f32 arg1);
 void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
 
 void func_8027027C_de(f32 *src, PackedMatrixWords *dst);
 void func_8026992C_de(void *matrix, s32 pass, u32 alpha);
-/* 29/167 aligned edits; remaining: radius/float allocation and call setup. */
 void Instance_DrawBlobShadow(struct LevelActor *actor, CVector3 *offset, s32 raised) {
     f32 matrix[16];
     CVector3 position;
     f32 scale;
     f32 groundHeight;
     f32 height;
-    f32 baseRadius;
     f32 opacity;
     f32 shrink;
     f32 limitedRadius;
     f32 radius;
-    f32 scaleFactor;
     f32 lift;
     PackedMatrixWords *packed;
     u8 targetAlpha;
 
     packed = func_802799C0_de(&D_8011FFB0, 1);
     if (packed != 0) {
-        groundHeight = func_8024E678_de(actor);
+        groundHeight = func_8024E678_de(actor, 0);
         height = (actor->position0.y + actor->eyeHeight) - groundHeight;
-        baseRadius = func_8024E2FC_de((Actor_u1 *)actor);
-        shrink = height * D_800C3AB8_de;
-        limitedRadius = baseRadius - shrink;
-        if (!(limitedRadius <= baseRadius)) {
-            limitedRadius = baseRadius;
+        radius = func_8024E2FC_de((Actor_u1 *)actor);
+        shrink = height * 0.1f;
+        limitedRadius = radius - shrink;
+        if (!(limitedRadius <= radius)) {
+            limitedRadius = radius;
         }
-        radius = 0.0f;
-        if (!(limitedRadius < 0.0f)) {
-            radius = baseRadius - shrink;
-            if (!(radius <= baseRadius)) {
-                radius = baseRadius;
+        if (limitedRadius < 0.0f) {
+            radius = 0.0f;
+            limitedRadius = radius;
+        } else {
+            limitedRadius = radius - shrink;
+            if (!(limitedRadius <= radius)) {
+                limitedRadius = radius;
             }
         }
+        radius = limitedRadius;
         if (raised != 0) {
-            scaleFactor = D_800C3ABC_de;
-            lift = D_800C3AC0_de;
+            radius *= 0.5f;
+            lift = 15.36f;
         } else {
-            scaleFactor = D_800C3AC4_de;
+            radius *= 0.7f;
             lift = 0.0f;
         }
-        scale = radius * scaleFactor;
+        scale = radius;
         position.x = actor->position0.x + offset->x;
         position.z = actor->position0.z + offset->z;
         position.y = groundHeight + lift + offset->y;
@@ -167,22 +166,19 @@ void Instance_DrawBlobShadow(struct LevelActor *actor, CVector3 *offset, s32 rai
         func_8027347C_de(matrix, scale, 1.0f, scale);
         func_80273448_de((s8 *) matrix, position.x, position.y, position.z);
         func_8027027C_de(matrix, (PackedMatrixWords *) packed);
-        opacity = D_800C3ACC_de - (height * D_800C3AC8_de);
+        opacity = 200.0f - (height * 1.2207031f);
         targetAlpha = 0xFF;
-        if (!(D_800C8BC0 < opacity)) {
+        if (!(255.0f < opacity)) {
             targetAlpha = 0;
             if (!(opacity < 0.0f)) {
                 targetAlpha = 0xFF;
-                if (!(D_800C8BC0 < opacity)) {
+                if (!(255.0f < opacity)) {
                     targetAlpha = (u8)opacity;
                 }
             }
         }
         actor->shadowAlpha = (u8)(actor->shadowAlpha +
-            ((s32)targetAlpha - actor->shadowAlpha) * D_800C3AD8_de);
+            ((s32)targetAlpha - actor->shadowAlpha) * 0.5f);
         func_8026992C_de(packed, raised == 0, actor->shadowAlpha);
     }
 }
-#else
-INCLUDE_ASM("span_1000", Instance_DrawBlobShadow);
-#endif

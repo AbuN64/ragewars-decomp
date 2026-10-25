@@ -3615,7 +3615,7 @@ segments:
       - [0xC4921, data, data_800C/rodata_unresolved_800C3D21]
       - [0xC4924, rodata, data_800C/D_8024A7A0_C9764]
       - [0xC492C, rodata, data_800C/literals_func_8024AA18_de]
-      - [0xC4968, rodata, data_800C/D_8024ADD0_C97A8]
+      - [0xC4968, rodata, data_800C/literals_Instance_DrawBlobShadow]
       - [0xC4990, rodata, data_800C/literals_func_8024B06C_de]
       - [0xC4998, rodata, data_800C/D_8024BF24_C97D8]
       - [0xC49D6, data, data_800C/rodata_unresolved_800C3DD6]

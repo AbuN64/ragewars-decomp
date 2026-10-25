@@ -81,7 +81,7 @@ f32 func_8024E650_de(Shared_Func80243A80Actor *arg0)
 }
 
 /** Select one of two float fields according to the leading byte. */
-float func_8024E678_de(Shared_Func80243A80Actor *object) {
+float func_8024E678_de(Shared_Func80243A80Actor *object, s32 mode) {
     if (object->type != 1) {
         return object->y;
     }

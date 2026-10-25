@@ -3613,7 +3613,7 @@ segments:
       - [0xC4671, data, data_800C/rodata_unresolved_800C3A71]
       - [0xC4674, rodata, data_800C/D_8024A7A0_C9764]
       - [0xC467C, rodata, data_800C/literals_func_8024AA18_de]
-      - [0xC46B8, rodata, data_800C/D_8024ADD0_C97A8]
+      - [0xC46B8, rodata, data_800C/literals_Instance_DrawBlobShadow]
       - [0xC46E0, rodata, data_800C/literals_func_8024B06C_de]
       - [0xC46E8, rodata, data_800C/D_8024BF24_C97D8]
       - [0xC4726, data, data_800C/rodata_unresolved_800C3B26]

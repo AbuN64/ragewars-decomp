@@ -3719,7 +3719,7 @@ segments:
       - [0xC9761, data, data_800C/rodata_unresolved_800C8B61]
       - [0xC9764, rodata, data_800C/D_blob_f21b4efe07551ac48bbb]
       - [0xC976C, rodata, data_800C/literals_func_8024AA18_de]
-      - [0xC97A8, rodata, data_800C/D_auto_src_rw_pool_8024ADD0_C97A8_us_rev1]
+      - [0xC97A8, rodata, data_800C/literals_Instance_DrawBlobShadow]
       - [0xC97D0, rodata, data_800C/literals_func_8024B06C_de]
       - [0xC97D8, rodata, data_800C/D_auto_src_rw_text_8024BF24_C97D8_us_rev1]
       - [0xC9816, data, data_800C/rodata_unresolved_800C8C16]
