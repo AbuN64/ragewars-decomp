@@ -21,8 +21,9 @@ s32 func_802016DC_de(u8 *arg0) {
 
 /* Shared declarations of the drafts below (one place, so every draft compiles together under -DNON_MATCHING). */
 #include "IO/CONTROLLER_REQUEST.H"
-extern s32 D_002018A0;
-extern s32 D_800C8140_de;
+#include "COMMON/OSTHREAD_S.H"
+extern void D_002018A0(void *); /* host request thread entry, as the ROM stores its address */
+extern volatile s32 D_800C8140_de; /* host link ready: the request thread clears it around each cart transfer */
 extern s32 D_800C8144_de;
 extern void *D_800F1C84;
 extern OSMesgQueue D_800F1C90;
@@ -32,19 +33,18 @@ extern void *D_800F2CB4;
 extern OSMesgQueue D_800F2CC0;
 extern OSMesgQueue D_800F2F40;
 extern void *D_800F2F58;
-extern s32 D_800F2F60;
+extern OSThread_s D_800F2F60; /* host request thread */
 extern OSMesgQueue D_800F3110;
-s32 func_802BAC90_de(s32 *, s32, s32 *, s32, void **, s32);
-s32 func_802BB550_de(s32, OSMesgQueue *, s32);
-s32 func_802BB750_de(s32 *);
+void func_802BAC90_de(OSThread_s *thread, s32 id, void (*entry)(void *), void *arg, void *stackTop, s32 priority); /* osCreateThread */
+void func_802BB550_de(s32 event, OSMesgQueue *queue, void *message); /* osSetEventMesg */
+void func_802BB750_de(OSThread_s *thread); /* osStartThread */
 extern s32 func_80200500_de(void);
 extern s32 func_802017E8_de(s32, s32, s32, s32);
 extern void func_80200880_de(u32, void *, s32);
 extern void func_80200D18_de(u32, const void *, u32);
 extern void func_80200E04_de(u32, u8 *, u32);
 extern void func_8020095C_de(u32, u8 *, u32);
-#ifdef NON_MATCHING
-/* 43/59 words; remaining: the ROM's `lui` of D_800F1C90 sits in the first jal's delay slot (addiu later) and the D_800C8140 store precedes the jal; the stack-top argument is a symbol-plus-offset (a bare &D_800F2CB0 is CSE'd into a saved register) */
+/* Create the host request queues and start the request thread once (thread id FS). */
 void Libsn_InitializeHostRequestThread(s32 threadPriority) {
     if (D_800C8140_de == 0) {
         D_800C8140_de = 1;
@@ -52,14 +52,11 @@ void Libsn_InitializeHostRequestThread(s32 threadPriority) {
         osCreateMesgQueue(&D_800F2F40, &D_800F2CB0, 1);
         osCreateMesgQueue(&D_800F3110, &D_800F2F58, 1);
         osCreateMesgQueue(&D_800F1C90, &D_800F1C84, 1);
-        func_802BB550_de(0, &D_800F1C90, 1);
-        func_802BAC90_de(&D_800F2F60, 0x4653, &D_002018A0, 0, (void **)(D_800F2CE0 - 0x30), threadPriority);
+        func_802BB550_de(0, &D_800F1C90, (void *)1);
+        func_802BAC90_de(&D_800F2F60, 0x4653, D_002018A0, 0, D_800F2CE0 - 0x30, threadPriority);
         func_802BB750_de(&D_800F2F60);
     }
 }
-#else
-INCLUDE_ASM("span_1000", Libsn_InitializeHostRequestThread);
-#endif
 #ifdef NON_MATCHING
 /* 46/46 words; the ROM's `break 1` in the poll loop's failure arm is inline asm (cc1 has no trap builtin), so no ROM-path C */
 s32 func_802017E8_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
