@@ -11,7 +11,7 @@
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 #include "RENDER_2/8025DE50_5.H"
 #include "RESMGR/resmgr_string_memory.H"
-extern s32 func_802744D4_de(void);
+extern s32 Nav_NextRandom(void);
 extern void func_80419C84_de(func_80419D04_S1 *, s32);
 /* Per-frame step of a menu widget flicker: while the effect is armed (state 1) the timer counts down to 0 (capped at 50); at 0 a roll below 2 in 100
    starts the flicker (flag set, current entry shown on the widget, sound 0xE75). While flickering each frame spends one hold count of the current
@@ -23,7 +23,7 @@ s32 Menu_UpdateFlicker(func_80419D04_S1 *flicker) {
   if(flicker->unk44==0) {
    timer=flicker->unk7C-1<0?0:flicker->unk7C-1>50?50:flicker->unk7C-1;
    widgetOwner->unk7C=timer;
-   if(timer<=0 && func_802744D4_de()%100<2) {
+   if(timer<=0 && Nav_NextRandom()%100<2) {
     widgetOwner->unk44=1;
     widgetOwner->unk78->value=widgetOwner->unk4C[widgetOwner->unk74];
     func_8025DF34_de(0xe75);
@@ -49,7 +49,7 @@ s32 Menu_UpdateFlicker(func_80419D04_S1 *flicker) {
 }
 #endif
 
-s32 func_802744D4_de(void);
+s32 Nav_NextRandom(void);
 
 /* Allocates and initializes an object, attaches its resource and owner value, then registers it with the resource. */
 
@@ -80,11 +80,11 @@ void func_80419C84_de(func_80419D04_S1 *flicker, s32 arg1) {
     if (arg1 > 0) {
         flicker->unk48 = arg1;
     } else {
-        flicker->unk48 = (s32) (func_802744D4_de() % 5 + 1);
+        flicker->unk48 = (s32) (Nav_NextRandom() % 5 + 1);
     }
     for (i = 0; i < flicker->unk48; i++) {
-        flicker->unk60[i] = (s32) (func_802744D4_de() % 3 + 1);
-        var_v1 = (offset = func_802744D4_de() % 40 + 30, flicker->unk80 - offset) < 0 ? 0 : ((offset = func_802744D4_de() % 40 + 30, flicker->unk80 - offset) >= 0x100 ? 0xFF : (offset = temp = func_802744D4_de() % 40 + 30, flicker->unk80 - offset));
+        flicker->unk60[i] = (s32) (Nav_NextRandom() % 3 + 1);
+        var_v1 = (offset = Nav_NextRandom() % 40 + 30, flicker->unk80 - offset) < 0 ? 0 : ((offset = Nav_NextRandom() % 40 + 30, flicker->unk80 - offset) >= 0x100 ? 0xFF : (offset = temp = Nav_NextRandom() % 40 + 30, flicker->unk80 - offset));
         flicker->unk4C[i] = var_v1;
     }
 }

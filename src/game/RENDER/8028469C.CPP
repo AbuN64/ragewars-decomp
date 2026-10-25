@@ -68,7 +68,7 @@ loop:
 
 s32 func_8028480C_de(s32 arg0) {
     if (arg0 != 0) {
-        return func_802744D4_de() % (arg0 + 1);
+        return Nav_NextRandom() % (arg0 + 1);
     }
     return 0;
 }
@@ -76,7 +76,7 @@ s32 func_8028480C_de(s32 arg0) {
 
 void func_80284870_de(f32 arg0) {
     if (arg0 != 0.0f) {
-        ((s32 (*)())func_80274564_de)();
+        ((s32 (*)())Nav_RandomFloat)();
     }
 }
 

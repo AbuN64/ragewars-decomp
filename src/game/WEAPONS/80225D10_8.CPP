@@ -58,7 +58,7 @@ void func_80229814_de(SharedPlayer *player, f32 amount) {
         player->views1C.view100_9.flags &= ~0x01000000;
         if (player->views5DC.view5DC_2.view != 0) {
             if (((ViewRecAt54D *)player->views5DC.view5DC_2.view)->flash == 0) {
-                func_802391AC_de((ViewRecAt54D *)player->views5DC.view5DC_2.view, 0x80, 0, 0, 0xFA, (u8) (u32) func_80274564_de(7.5f), 0,
+                func_802391AC_de((ViewRecAt54D *)player->views5DC.view5DC_2.view, 0x80, 0, 0, 0xFA, (u8) (u32) Nav_RandomFloat(7.5f), 0,
                               (u8) (u32) ((player->views5E8.view11D8_149.stun * 0.06666667f - 1.5f) * 15.0f));
             } else {
                 ((ViewRecAt54D *)player->views5DC.view5DC_2.view)->flash = 3;

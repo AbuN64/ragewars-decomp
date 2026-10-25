@@ -130,7 +130,7 @@ extern void func_80274020_de(f32 *value);
 
 extern void func_802741A4_de(f32 *arg0);
 
-extern f32 func_80274564_de(f32 arg0);
+extern f32 Nav_RandomFloat(f32 arg0);
 
 extern f32 Nav_ArcCos(f32 arg0);
 

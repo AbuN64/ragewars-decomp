@@ -111,11 +111,11 @@ s32 func_802A4134_de(AnimationFrameState *state,
         }
         break;
     case 4:
-        *selected = func_802744D4_de() % *frame_count;
+        *selected = Nav_NextRandom() % *frame_count;
         break;
     case 5:
         if (state->cached_frame == -1) {
-            state->cached_frame = func_802744D4_de() % *frame_count;
+            state->cached_frame = Nav_NextRandom() % *frame_count;
         }
         *selected = state->cached_frame;
         break;

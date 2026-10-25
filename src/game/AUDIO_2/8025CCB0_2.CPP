@@ -40,7 +40,7 @@ static inline s32 pick(Bank_func_8025CED0_de *bank, s32 group) {
         for (i = first; i <= last; i++) {
             total += 100;
         }
-        roll = func_802744D4_de() % total;
+        roll = Nav_NextRandom() % total;
         total = 0;
         for (i = first; i < last; i++) {
             total += 100;
@@ -144,7 +144,7 @@ s32 func_8025D238_de(void **arg0, s16 id, s16 avoid) {
         for (entry = first; entry <= last; entry++) {
             total += 100;
         }
-        draw = func_802744D4_de() % total;
+        draw = Nav_NextRandom() % total;
         total = 0;
         for (entry = first; entry < last; entry++) {
             total += 100;

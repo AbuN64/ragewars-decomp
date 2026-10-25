@@ -178,7 +178,7 @@ s32 Frontend_StartFourPlayerResults(void) {
             position.y = D_800DDFAC_de;
             break;
         }
-        rotation.y = (f32)(baseAngle + func_802744D4_de() % 10);
+        rotation.y = (f32)(baseAngle + Nav_NextRandom() % 10);
         baseAngle += 0x2D;
         func_80439B5C_de((u8 *)D_800E59E0 + badgeOffset, 0, scale, position);
         func_80439BE0_de((u8 *)D_800E59E0 + badgeOffset, rotation);

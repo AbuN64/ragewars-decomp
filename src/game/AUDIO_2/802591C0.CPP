@@ -467,7 +467,7 @@ s32 func_80259038_de(SceneRecAt2B5C *scene, s16 id, s16 avoid) {
             for (i = first; i <= last; i++) {
                 total += scene->weights[i] * 10;
             }
-            draw = func_802744D4_de() % total;
+            draw = Nav_NextRandom() % total;
             total = 0;
             for (entry = first; entry < last; entry++) {
                 total += scene->weights[entry] * 10;

@@ -226,7 +226,7 @@ static inline s32 selectSoundVariant(ContextRecAt2BC0 *context, s32 sound, s16 a
             for (i = first; i <= last; i++) {
                 total += context->envelopeData[i] * 10;
             }
-            threshold = func_802744D4_de() % total;
+            threshold = Nav_NextRandom() % total;
             total = 0;
             for (index = first; index < last; index++) {
                 total += context->envelopeData[index] * 10;
@@ -283,7 +283,7 @@ s32 Texture_PlaySoundAtPosition(ContextRecAt2BC0 *context, s32 sound, CVector3 p
     }
     if (sound < 0x100) {
         index = selectSoundVariant(context, sound, context->lastInstrument);
-        context->randomPan = (s32)func_80274564_de(127.0f);
+        context->randomPan = (s32)Nav_RandomFloat(127.0f);
     } else {
         index = selectSoundVariant(context, sound, 0);
     }

@@ -91,7 +91,7 @@ extern void func_80272D00_de(PoseMatrix, f32, f32, f32, f32);
 extern void func_8027302C(PoseMatrix, PoseMatrix);
 extern void func_80273448_de(PoseMatrix, f32, f32, f32);
 extern void func_8027347C_de(PoseMatrix, f32, f32, f32);
-extern s32 func_802744D4_de(void);
+extern s32 Nav_NextRandom(void);
 extern f32 func_8027525C_de(StateFlags *, f32, f32);
 extern s32 func_802799C0_de(void *, s32);
 extern void func_8028C6D4_de(void *, CVector3 *, u8 *);
@@ -101,9 +101,9 @@ extern u32 func_802BCF00_de(void);
 static inline CVector3 randVec(void) {
     CVector3 v;
 
-    v.x = func_802744D4_de() % 100;
-    v.y = func_802744D4_de() % 100;
-    v.z = func_802744D4_de() % 100;
+    v.x = Nav_NextRandom() % 100;
+    v.y = Nav_NextRandom() % 100;
+    v.z = Nav_NextRandom() % 100;
     return v;
 }
 

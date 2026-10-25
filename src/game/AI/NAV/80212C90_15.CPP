@@ -61,7 +61,7 @@ void func_80213500_de(Shared_Actor *arg0) {
                 candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
 loop:
                 if (tries < 10) {
-                    candidate = func_802744D4_de() % table[1];
+                    candidate = Nav_NextRandom() % table[1];
                     if (navigation_point_flags((NavigationPoint *)(Nav_GetGraphPoint(table, candidate))) & 0x400) {
                         candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
                     }
@@ -93,7 +93,7 @@ store_c:
         }
     }
     if (((Brain_func_80212D78_eu_x *)(actor))->jumpTimer < 0) {
-        ((Brain_func_80212D78_eu_x *)(actor))->jumpTimer = (func_802744D4_de() % 7 + 3) * 15;
+        ((Brain_func_80212D78_eu_x *)(actor))->jumpTimer = (Nav_NextRandom() % 7 + 3) * 15;
     }
     func_80211020_de(actor);
     Nav_SteerAlongRoute(actor);
@@ -139,7 +139,7 @@ void func_802136EC_de(Shared_Actor *arg0)
                 candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
 loop:
                 if (tries < 10) {
-                    candidate = func_802744D4_de() % table[1];
+                    candidate = Nav_NextRandom() % table[1];
                     if (navigation_point_flags((NavigationPoint *)(Nav_GetGraphPoint(table, candidate))) & 0x400) {
                         candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
                     }
@@ -184,7 +184,7 @@ void func_80213810_de(void *arg0)
         candidate = ((Brain_func_80212D78_eu_x *)(arg0))->goal;
 loop:
         if (tries < 10) {
-            candidate = func_802744D4_de() % table[1];
+            candidate = Nav_NextRandom() % table[1];
             if (navigation_point_flags((NavigationPoint *)(Nav_GetGraphPoint(table, candidate))) & 0x400) {
                 candidate = ((Brain_func_80212D78_eu_x *)(arg0))->goal;
             }

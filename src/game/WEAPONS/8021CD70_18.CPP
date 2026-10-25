@@ -71,7 +71,7 @@ void func_80224F5C_de(SharedPlayer_func_80224F5C_de *player, Body_func_80224F5C_
     }
     player->views5E8.view11C4_144.soundTime += D_800D2988;
     if (5.12f < player->views5E8.view6C8_57.speed && 45.0f < player->views5E8.view11C4_144.soundTime) {
-        player->views5E8.view11C4_144.soundTime = func_80274564_de(15.0f);
+        player->views5E8.view11C4_144.soundTime = Nav_RandomFloat(15.0f);
         func_8025DE54_de(D_800CE850.strokeSound, body->x, body->y, body->z, 0, -1);
         func_8025DE54_de(0x2E0, body->x, body->y, body->z, 0, -1);
     }

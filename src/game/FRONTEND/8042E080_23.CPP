@@ -44,7 +44,7 @@ s32 func_8042E460_de(u8 *request) {
         }
         team = request[1];
         if (team == 3) {
-            player->team = func_802744D4_de() % 3;
+            player->team = Nav_NextRandom() % 3;
         } else {
             player->team = team;
         }
@@ -91,14 +91,14 @@ void Frontend_SetupRandomTeams(void) {
     arenas[2] = 0x1B;
     arenas[3] = 1;
     for (i = 0; i < 100; i++) {
-        firstIndex = func_802744D4_de() % 4;
-        secondIndex = func_802744D4_de() % 4;
+        firstIndex = Nav_NextRandom() % 4;
+        secondIndex = Nav_NextRandom() % 4;
         swappedCharacter = characters[firstIndex];
         characters[firstIndex] = characters[secondIndex];
         characters[secondIndex] = swappedCharacter;
     }
-    playerCount = func_802744D4_de() % 3 + 2;
-    unlockedCount = func_802744D4_de() % playerCount + 1;
+    playerCount = Nav_NextRandom() % 3 + 2;
+    unlockedCount = Nav_NextRandom() % playerCount + 1;
     if (unlockedCount == 3) {
         unlockedCount = 2;
     }
@@ -116,7 +116,7 @@ void Frontend_SetupRandomTeams(void) {
         player->character = characters[i];
         player->locked = 0;
         player->team = 2;
-        player->variant = func_802744D4_de() % 3;
+        player->variant = Nav_NextRandom() % 3;
         func_802A025C_de(player->name, joinTeamName((s8)player->variant * 17 + func_8041F140_de(player->character)));
     }
     for (i = 0; i < playerCount - unlockedCount; i++) {
@@ -125,7 +125,7 @@ void Frontend_SetupRandomTeams(void) {
         player->character = characters[i + unlockedCount];
         player->locked = 1;
         player->team = 2;
-        player->variant = func_802744D4_de() % 3;
+        player->variant = Nav_NextRandom() % 3;
         func_802A025C_de(player->name, joinTeamName((s8)player->variant * 17 + func_8041F140_de(player->character)));
     }
     for (i = 0; i < 8; i++) {
@@ -142,5 +142,5 @@ void Frontend_SetupRandomTeams(void) {
     game->players = 0;
     levelGoal = &D_8014DD98;
     levelGoal->kind = 2;
-    levelGoal->goal = arenas[func_802744D4_de() % 4];
+    levelGoal->goal = arenas[Nav_NextRandom() % 4];
 }

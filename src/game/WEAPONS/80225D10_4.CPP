@@ -198,7 +198,7 @@ void func_80227038_de(s8 *world) {
                 if (temp_v0 > 0) {
                     temp_s1 = (select_rules = &D_801462C8.counters)->m_FragTagSelectionType;
                     if (temp_s1 == 3) {
-                        temp_v0_2 = func_802744D4_de();
+                        temp_v0_2 = Nav_NextRandom();
                         temp_v0_3 = temp_v0_2 / temp_v0;
                         if (temp_v0 == 0) {
 

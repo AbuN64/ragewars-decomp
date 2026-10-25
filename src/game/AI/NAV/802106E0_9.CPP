@@ -73,7 +73,7 @@ void func_80211120_de(void) {
         "mul.s      $f20, $f0, $f1\n"
         "bgtz       $v0, .Lauto_80211284\n"
         "sw        $v0, 0x2D8($s0)\n"
-        "jal        func_802744D4_de\n"
+        "jal        Nav_NextRandom\n"
         "nop\n"
         "addu       $v1, $v0, $zero\n"
         "bltzl      $v1, .Lauto_80211230\n"
@@ -83,14 +83,14 @@ void func_80211120_de(void) {
         "sll        $v0, $v0, 2\n"
         "subu       $v0, $v1, $v0\n"
         "addiu      $v0, $v0, 0xC\n"
-        "jal        func_802744D4_de\n"
+        "jal        Nav_NextRandom\n"
         "sw        $v0, 0x2D8($s0)\n"
         "srl        $v1, $v0, 31\n"
         "addu       $v1, $v0, $v1\n"
         "sra        $v1, $v1, 1\n"
         "sll        $v1, $v1, 1\n"
         "subu       $v0, $v0, $v1\n"
-        "jal        func_802744D4_de\n"
+        "jal        Nav_NextRandom\n"
         "sw        $v0, 0x2DC($s0)\n"
         "srl        $v1, $v0, 31\n"
         "addu       $v1, $v0, $v1\n"
@@ -319,7 +319,7 @@ void func_80211470_de(void) {
         "mul.s      $f20, $f21, $f1\n"
         "bgtz       $v0, .Lauto_80211610\n"
         "sw        $v0, 0x2D8($s1)\n"
-        "jal        func_802744D4_de\n"
+        "jal        Nav_NextRandom\n"
         "nop\n"
         "addu       $v1, $v0, $zero\n"
         "bltzl      $v1, .Lauto_80211590\n"
@@ -329,14 +329,14 @@ void func_80211470_de(void) {
         "sll        $v0, $v0, 2\n"
         "subu       $v0, $v1, $v0\n"
         "addiu      $v0, $v0, 0xC\n"
-        "jal        func_802744D4_de\n"
+        "jal        Nav_NextRandom\n"
         "sw        $v0, 0x2D8($s1)\n"
         "srl        $v1, $v0, 31\n"
         "addu       $v1, $v0, $v1\n"
         "sra        $v1, $v1, 1\n"
         "sll        $v1, $v1, 1\n"
         "subu       $v0, $v0, $v1\n"
-        "jal        func_802744D4_de\n"
+        "jal        Nav_NextRandom\n"
         "sw        $v0, 0x2DC($s1)\n"
         "lui        $v1, (0x431BDE83 >> 16)\n"
         "ori        $v1, $v1, (0x431BDE83 & 0xFFFF)\n"
@@ -590,7 +590,7 @@ void func_80211470_de(void) {
         "addu       $v0, $v0, $v1\n"
         "bnez       $v0, .Lauto_802119D0\n"
         "sw        $v0, 0x320($s1)\n"
-        "jal        func_802744D4_de\n"
+        "jal        Nav_NextRandom\n"
         "nop\n"
         "lui        $v1, (0x51EB851F >> 16)\n"
         "ori        $v1, $v1, (0x51EB851F & 0xFFFF)\n"
@@ -618,7 +618,7 @@ void func_80211470_de(void) {
         "lw         $v0, 0x320($s1)\n"
         "bgez       $v0, .Lauto_80211A08\n"
         "nop\n"
-        "jal        func_802744D4_de\n"
+        "jal        Nav_NextRandom\n"
         "nop\n"
         "srl        $v1, $v0, 31\n"
         "addu       $v1, $v0, $v1\n"
@@ -745,7 +745,7 @@ void func_80211A7C_de(void) {
         "addiu      $v0, $v0, -0x1\n"
         "bgtz       $v0, .Lauto_80211C10\n"
         "sw        $v0, 0x2D8($s1)\n"
-        "jal        func_802744D4_de\n"
+        "jal        Nav_NextRandom\n"
         "nop\n"
         "addu       $v1, $v0, $zero\n"
         "bltzl      $v1, .Lauto_80211B94\n"
@@ -755,14 +755,14 @@ void func_80211A7C_de(void) {
         "sll        $v0, $v0, 2\n"
         "subu       $v0, $v1, $v0\n"
         "addiu      $v0, $v0, 0x2\n"
-        "jal        func_802744D4_de\n"
+        "jal        Nav_NextRandom\n"
         "sw        $v0, 0x2D8($s1)\n"
         "srl        $v1, $v0, 31\n"
         "addu       $v1, $v0, $v1\n"
         "sra        $v1, $v1, 1\n"
         "sll        $v1, $v1, 1\n"
         "subu       $v0, $v0, $v1\n"
-        "jal        func_802744D4_de\n"
+        "jal        Nav_NextRandom\n"
         "sw        $v0, 0x2DC($s1)\n"
         "lui        $v1, (0x81742E05 >> 16)\n"
         "ori        $v1, $v1, (0x81742E05 & 0xFFFF)\n"
@@ -1026,7 +1026,7 @@ void func_80211A7C_de(void) {
         "addu       $v0, $v0, $v1\n"
         "bnez       $v0, .Lauto_80211FF8\n"
         "sw        $v0, 0x320($s1)\n"
-        "jal        func_802744D4_de\n"
+        "jal        Nav_NextRandom\n"
         "nop\n"
         "lui        $v1, (0x51EB851F >> 16)\n"
         "ori        $v1, $v1, (0x51EB851F & 0xFFFF)\n"
@@ -1054,7 +1054,7 @@ void func_80211A7C_de(void) {
         "lw         $v0, 0x320($s1)\n"
         "bgez       $v0, .Lauto_80212014\n"
         "nop\n"
-        "jal        func_802744D4_de\n"
+        "jal        Nav_NextRandom\n"
         "nop\n"
         "addiu      $v0, $zero, 0x1E\n"
         "sw         $v0, 0x320($s1)\n"
@@ -1172,7 +1172,7 @@ void func_80212088_de(void) {
         "mul.s      $f20, $f0, $f1\n"
         "bgtz       $v0, .Lauto_802121EC\n"
         "sw        $v0, 0x2D8($s0)\n"
-        "jal        func_802744D4_de\n"
+        "jal        Nav_NextRandom\n"
         "nop\n"
         "addu       $v1, $v0, $zero\n"
         "bltzl      $v1, .Lauto_80212198\n"
@@ -1182,14 +1182,14 @@ void func_80212088_de(void) {
         "sll        $v0, $v0, 2\n"
         "subu       $v0, $v1, $v0\n"
         "addiu      $v0, $v0, 0xC\n"
-        "jal        func_802744D4_de\n"
+        "jal        Nav_NextRandom\n"
         "sw        $v0, 0x2D8($s0)\n"
         "srl        $v1, $v0, 31\n"
         "addu       $v1, $v0, $v1\n"
         "sra        $v1, $v1, 1\n"
         "sll        $v1, $v1, 1\n"
         "subu       $v0, $v0, $v1\n"
-        "jal        func_802744D4_de\n"
+        "jal        Nav_NextRandom\n"
         "sw        $v0, 0x2DC($s0)\n"
         "srl        $v1, $v0, 31\n"
         "addu       $v1, $v0, $v1\n"
@@ -1346,14 +1346,14 @@ INCLUDE_ASM("span_1000", func_80212088_de);
 #if defined(VERSION_DE)
 #include "COMMON/SELF.H"
 extern void func_80209988_de(void *);
-extern s32 func_802744D4_de(void);
+extern s32 Nav_NextRandom(void);
 
 void func_802123DC_de(CloseAttackActor *actor) {
     CloseAttackBrain *brain = actor->self->brain;
     brain->state = 0;
     func_80209988_de(brain);
-    brain->timer = func_802744D4_de() % 4 + 12;
-    brain->pattern = func_802744D4_de() % 2;
+    brain->timer = Nav_NextRandom() % 4 + 12;
+    brain->pattern = Nav_NextRandom() % 2;
 }
 #endif
 
@@ -1362,9 +1362,9 @@ void func_80212450_de(CloseAttackActor *actor) {
     CloseAttackBrain *brain = actor->self->brain;
     brain->state = 0;
     func_80209988_de(brain);
-    brain->timer = func_802744D4_de() % 4 + 12;
-    brain->pattern = func_802744D4_de() % 2;
-    brain->distance = func_802744D4_de() % 250000 + 360000;
+    brain->timer = Nav_NextRandom() % 4 + 12;
+    brain->pattern = Nav_NextRandom() % 2;
+    brain->distance = Nav_NextRandom() % 250000 + 360000;
     brain->fireTimer = -1;
     brain->frames = 0;
     brain->visible = 0;
@@ -1375,9 +1375,9 @@ void func_80212450_de(CloseAttackActor *actor) {
 void func_80212524_de(CloseAttackActor *actor) {
     CloseAttackBrain *brain = actor->self->brain;
     brain->state = 0;
-    brain->timer = func_802744D4_de() % 4 + 2;
-    brain->pattern = func_802744D4_de() % 2;
-    brain->distance = func_802744D4_de() % 32400 + 10000;
+    brain->timer = Nav_NextRandom() % 4 + 2;
+    brain->pattern = Nav_NextRandom() % 2;
+    brain->distance = Nav_NextRandom() % 32400 + 10000;
     func_80209988_de(brain);
     brain->frames = 0;
     brain->visible = 0;
@@ -1390,8 +1390,8 @@ void func_802125F0_de(CloseAttackActor *actor) {
     CloseAttackBrain *brain = actor->self->brain;
     brain->state = 0;
     func_80209988_de(brain);
-    brain->timer = func_802744D4_de() % 4 + 12;
-    brain->pattern = func_802744D4_de() % 2;
+    brain->timer = Nav_NextRandom() % 4 + 12;
+    brain->pattern = Nav_NextRandom() % 2;
 }
 #endif
 

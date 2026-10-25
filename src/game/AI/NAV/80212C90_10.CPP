@@ -61,7 +61,7 @@ void func_8021321C_de(Root802131E0 *arg0)
     }
 
     if (((Brain_func_80212D78_eu_x *)state)->jumpTimer < 0) {
-        random = func_802744D4_de();
+        random = Nav_NextRandom();
         ((Brain_func_80212D78_eu_x *)state)->jumpTimer = ((random % 5) + 3) * 15;
     }
 

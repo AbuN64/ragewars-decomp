@@ -337,7 +337,7 @@ struct func_802123DC_S3 {
 
 
 
-extern s32 func_802744D4_de(void);
+extern s32 Nav_NextRandom(void);
 typedef struct func_802125F0_S1 func_802125F0_S1;
 typedef struct func_802125F0_S2 func_802125F0_S2;
 typedef struct func_802125F0_S3 func_802125F0_S3;

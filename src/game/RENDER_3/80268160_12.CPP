@@ -338,7 +338,7 @@ void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 void Render_SetCombineMode(u32);
 s32 Render_SetModePreset(s32);
 void Scene_UnlockResource(s32, void *);
-s32 func_802744D4_de(void);
+s32 Nav_NextRandom(void);
 
 s32 Render_SetupMaterial(struct Shared_GfxMaterial *mat, s32 pass) {
     struct Shared_AnimInfo info;
@@ -377,7 +377,7 @@ s32 Render_SetupMaterial(struct Shared_GfxMaterial *mat, s32 pass) {
                 }
                 idx = (u8)(D_800CD730 / info.frame->unknown1);
                 if (mat->unk7 != idx) {
-a = func_802744D4_de() % info.count;
+a = Nav_NextRandom() % info.count;
  if (info.unk4 != 0) { b = a; if (b >= info.unk4) { b = 0; } } else { b = 0; }
                     mat->unk7 = idx;
                 } else {

@@ -11,7 +11,7 @@ void ReselectCloseAttack(void *brainAddress) {
     CloseAttackBrain *brain = brainAddress;
     WeightSource *weights;
     s32 selectedState;
-    if (func_802744D4_de() % 4 == 1) {
+    if (Nav_NextRandom() % 4 == 1) {
         weights = (WeightSource *)((u8 *)((Player *)brain->player)->definition + 0x14);
         selectedState = func_8020DD04_de(weights);
         brain->combat = selectedState;

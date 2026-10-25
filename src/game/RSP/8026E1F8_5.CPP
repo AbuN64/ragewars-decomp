@@ -447,9 +447,9 @@ CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
     f32 inputMagnitude;
     f32 inputScale;
 
-    random.x = (f32)((func_802744D4_de() % 20000) - 0x2710);
-    random.y = (f32)((func_802744D4_de() % 20000) - 0x2710);
-    random.z = (f32)((func_802744D4_de() % 20000) - 0x2710);
+    random.x = (f32)((Nav_NextRandom() % 20000) - 0x2710);
+    random.y = (f32)((Nav_NextRandom() % 20000) - 0x2710);
+    random.z = (f32)((Nav_NextRandom() % 20000) - 0x2710);
     randomPtr = &random;
 
     randomMagnitude = func_802B72B0_de((randomPtr->x * randomPtr->x) +
@@ -488,7 +488,7 @@ CVector3 func_80271248_de(CVector3 *in, f32 amount) {
     f32 inputMagnitude;
     f32 inputScale;
 
-    random.x = (f32)((func_802744D4_de() % 20000) - 0x2710) *
+    random.x = (f32)((Nav_NextRandom() % 20000) - 0x2710) *
                D_800C47F4_de;
     random.y = in->y;
     random.z = in->z;
@@ -529,7 +529,7 @@ CVector3 func_80271430_de(CVector3 *in, f32 amount) {
     f32 inputScale;
 
     random.x = in->x;
-    random.y = ((f32)(func_802744D4_de() % 20000) - D_800C4800_de) * D_800C4804_de;
+    random.y = ((f32)(Nav_NextRandom() % 20000) - D_800C4800_de) * D_800C4804_de;
     random.z = in->z;
     randomPtr = &random;
 
@@ -565,7 +565,7 @@ CVector3 *func_80271624_de(CVector3 *out, CVector3 *in, f32 amount) {
 
     random.x = in->x;
     random.y = in->y;
-    random.z = ((f32)(func_802744D4_de() % 20000) - D_800C4810_de) *
+    random.z = ((f32)(Nav_NextRandom() % 20000) - D_800C4810_de) *
                D_800C4814_de;
 
     randomPtr = &random;
@@ -1166,7 +1166,7 @@ void func_80270CD0_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
     }
 }
 
-extern s32 func_802744D4_de(void);
+extern s32 Nav_NextRandom(void);
 extern f32 func_802B72B0_de(f32);
 
 CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
@@ -1178,9 +1178,9 @@ CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
     f32 inputMagnitude;
     f32 inputScale;
 
-    random.x = (f32)((func_802744D4_de() % 20000) - 0x2710);
-    random.y = (f32)((func_802744D4_de() % 20000) - 0x2710);
-    random.z = (f32)((func_802744D4_de() % 20000) - 0x2710);
+    random.x = (f32)((Nav_NextRandom() % 20000) - 0x2710);
+    random.y = (f32)((Nav_NextRandom() % 20000) - 0x2710);
+    random.z = (f32)((Nav_NextRandom() % 20000) - 0x2710);
     randomPtr = &random;
 
     randomMagnitude = func_802B72B0_de((randomPtr->x * randomPtr->x) +
@@ -1209,7 +1209,7 @@ CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
     return result;
 }
 
-extern s32 func_802744D4_de(void);
+extern s32 Nav_NextRandom(void);
 extern f32 func_802B72B0_de(f32);
 
 CVector3 func_80271248_de(CVector3 *in, f32 amount) {
@@ -1221,7 +1221,7 @@ CVector3 func_80271248_de(CVector3 *in, f32 amount) {
     f32 inputMagnitude;
     f32 inputScale;
 
-    random.x = (f32)((func_802744D4_de() % 20000) - 0x2710) *
+    random.x = (f32)((Nav_NextRandom() % 20000) - 0x2710) *
                *(&D_800C47F0_de + 1);
     random.y = in->y;
     random.z = in->z;
@@ -1253,7 +1253,7 @@ CVector3 func_80271248_de(CVector3 *in, f32 amount) {
     return result;
 }
 
-extern s32 func_802744D4_de(void);
+extern s32 Nav_NextRandom(void);
 extern f32 func_802B72B0_de(f32);
 
 CVector3 func_80271430_de(CVector3 *in, f32 amount) {
@@ -1266,7 +1266,7 @@ CVector3 func_80271430_de(CVector3 *in, f32 amount) {
     f32 inputScale;
 
     random.x = in->x;
-    random.y = ((f32)(func_802744D4_de() % 20000) - D_800C4800_de) * *(&D_800C4800_de + 1);
+    random.y = ((f32)(Nav_NextRandom() % 20000) - D_800C4800_de) * *(&D_800C4800_de + 1);
     random.z = in->z;
     randomPtr = &random;
 
@@ -1296,7 +1296,7 @@ CVector3 func_80271430_de(CVector3 *in, f32 amount) {
     return result;
 }
 
-extern s32 func_802744D4_de(void);
+extern s32 Nav_NextRandom(void);
 extern f32 func_802B72B0_de(f32);
 
 CVector3 *func_80271624_de(CVector3 *out, CVector3 *in, f32 amount) {
@@ -1306,7 +1306,7 @@ CVector3 *func_80271624_de(CVector3 *out, CVector3 *in, f32 amount) {
 
     random.x = in->x;
     random.y = in->y;
-    random.z = ((f32)(func_802744D4_de() % 20000) - D_800C4810_de) *
+    random.z = ((f32)(Nav_NextRandom() % 20000) - D_800C4810_de) *
                *(&D_800C4810_de + 1);
 
     randomPtr = &random;

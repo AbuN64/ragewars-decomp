@@ -16,7 +16,7 @@ extern s32 func_80434638_de(s32, s32);
 extern s32 func_80435128_de(s32);
 extern s32 func_80435184_de(s32);
 extern s32 func_8043590C_de(s32);
-extern s32 func_802744D4_de(void);
+extern s32 Nav_NextRandom(void);
 extern void func_804322AC_de(s32);
 void func_80433610_de(s32 player)
 {
@@ -100,7 +100,7 @@ void func_80433610_de(s32 player)
           case 1:
 
           case 7:
-            random = func_802744D4_de();
+            random = Nav_NextRandom();
             D_800E54A4->players[player].state = 15;
             D_800E54A4->players[player].profile = (random % 9999999) + 1;
             break;

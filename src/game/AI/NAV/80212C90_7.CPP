@@ -77,7 +77,7 @@ void func_80212E30_eu_x(PatrolActor *actor)
     }
     if (bot->goal == -1) {
         if (bot->route == -2) {
-            bot->goal = func_802744D4_de() % nodes->count;
+            bot->goal = Nav_NextRandom() % nodes->count;
         } else {
             bot->goal = func_8020CB3C_de(nodes, Engine_GetPlatformRoutePoint(&D_8011FE88, bot->route, bot->routePos));
         }

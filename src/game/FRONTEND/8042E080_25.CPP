@@ -23,7 +23,7 @@ s32 func_8042EE34_de(void) {
 
 extern Shared_PlayerSettingsRecord D_80146398[];
 
-extern s32 func_802744D4_de(void);
+extern s32 Nav_NextRandom(void);
 
 /* Characters 0 and 5 may appear only once among the eight enabled players. */
 static inline s32 characterAvailable(s32 character, s32 firstUniqueCharacter, s32 secondUniqueCharacter) {
@@ -45,7 +45,7 @@ static inline s32 characterAvailable(s32 character, s32 firstUniqueCharacter, s3
 s32 Frontend_ChooseRandomCharacter(void) {
     s32 character;
     do {
-        character = func_802744D4_de() % 11;
+        character = Nav_NextRandom() % 11;
     } while (!characterAvailable(character, 0, 5));
     return character;
 }

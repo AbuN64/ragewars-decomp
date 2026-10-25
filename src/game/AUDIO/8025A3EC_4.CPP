@@ -512,7 +512,7 @@ f32 func_8025C2EC_de(u8 arg0, u8 arg1) {
     if (second == first) {
         return first;
     }
-    return first + func_80274564_de(second - first);
+    return first + Nav_RandomFloat(second - first);
 }
 
 f32 func_8025C368_de(char *source, char *listener)

@@ -659,7 +659,7 @@ void func_80220ED4_de(SharedPlayer *player)
     {
       if (actor->views1C.view108_16.anim == low)
       {
-        if (func_80274564_de(100.0f) < 0.4f)
+        if (Nav_RandomFloat(100.0f) < 0.4f)
         {
           func_8024B6F4_de(actor, flag, 0);
           actor->views1C.view10E_20.animPending = 0;

@@ -68,9 +68,9 @@ void func_80211A9C_eu(CloseAttackActor *actor) {
             speed = func_80209BE0_de(brain);
             strafe = speed;
             if (--brain->timer <= 0) {
-                brain->timer = func_802744D4_de() % 4 + 2;
-                brain->pattern = func_802744D4_de() % 2;
-                brain->distance = func_802744D4_de() % 32400 + 10000;
+                brain->timer = Nav_NextRandom() % 4 + 2;
+                brain->pattern = Nav_NextRandom() % 2;
+                brain->distance = Nav_NextRandom() % 32400 + 10000;
             }
             pos = &target->pos;
             func_80209308_de(brain, pos, 2.0f, func_80209DAC_de(brain));
@@ -156,11 +156,11 @@ halt:
                 brain->player->strafe = 0.0f;
             }
             brain->routeNodes[0] = -1;
-            if (--brain->fireTimer == 0 && (func_802744D4_de() % 100) < (s32)speed) {
+            if (--brain->fireTimer == 0 && (Nav_NextRandom() % 100) < (s32)speed) {
                 brain->player->buttons |= 0x10;
             }
             if (brain->fireTimer < 0) {
-                brain->fireTimer = ((func_802744D4_de() % 1) + 2) * 0xF;
+                brain->fireTimer = ((Nav_NextRandom() % 1) + 2) * 0xF;
             }
             func_80209E80_de(brain);
         } else {

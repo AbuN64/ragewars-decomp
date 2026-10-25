@@ -596,7 +596,7 @@ void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
         remaining = 0;
     }
     FIELD(s32, player, 0x5E4) = remaining;
-    roll = func_802744D4_de();
+    roll = Nav_NextRandom();
     if ((roll % 2) == 1) {
         if (FIELD(s32, player, 0x5E4) > 0) {
             s32 id = func_80229C0C_de((struct Shared_ActorView *)player, 0x138D);

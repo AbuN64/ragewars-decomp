@@ -53,7 +53,7 @@ void *func_802799C0_de(void *, s32);
 void Render_SetCombineMode(s32);
 void Render_SetModePreset(s32);
 void Scene_UnlockResource(s32, void *);
-s32 func_802744D4_de(void);
+s32 Nav_NextRandom(void);
 
 static inline s32 func_8027ED6C_de_occluded(Shared_Particle *particle, struct Shared_ParticleView *view) {
     Shared_ParticleInstance *inst;
@@ -210,11 +210,11 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
             }
             break;
         case 4:
-            frame = func_802744D4_de() % info.count;
+            frame = Nav_NextRandom() % info.count;
             break;
         case 5:
             if (particle->unk14F == -1) {
-                particle->unk14F = func_802744D4_de() % info.count;
+                particle->unk14F = Nav_NextRandom() % info.count;
             }
             frame = particle->unk14F;
             break;

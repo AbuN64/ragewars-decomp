@@ -93,7 +93,7 @@ void func_802744B4_de(void) {
     D_80111D28 = 0xE3F635E3;
 }
 
-s32 func_802744D4_de(void) {
+s32 Nav_NextRandom(void) {
     u32 seed;
 
     seed = (D_80111D24 * 0xA84A5B53) + 0x58348C2D;
@@ -110,7 +110,7 @@ s32 func_8027451C_de(void) {
 }
 
 /** LCG PRNG step scaled into [0, arg0 * D_800C9A38) as a float. */
-f32 func_80274564_de(f32 range) {
+f32 Nav_RandomFloat(f32 range) {
     f64 value;
     s32 randomBits;
     u32 seed;

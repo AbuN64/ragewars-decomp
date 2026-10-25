@@ -144,7 +144,7 @@ extern void func_80298368_de(int);
 
 extern s_CharacterData D_800E3A50[];
 
-extern s32 func_802744D4_de(void);
+extern s32 Nav_NextRandom(void);
 
 extern s32 func_8040EBD0_de(void *widget);
 
@@ -363,7 +363,7 @@ void func_80420850_de(s32 player) {
     tries = 0;
     done = 0;
     do {
-        id = D_800E3A50[func_802744D4_de() % 17].id;
+        id = D_800E3A50[Nav_NextRandom() % 17].id;
         if (func_8040EBD0_de(func_8040EC30_de(D_800E42D0->screen, (u16)id)) == 0 && D_800E42D0->players[player].kind != id) {
             done = 1;
         } else if (++tries > 5000) {
@@ -393,7 +393,7 @@ void func_80420850_de(s32 player) {
     if (costumes <= 0) {
         costumes = 1;
     }
-    D_800E42D0->players[player].choice = func_802744D4_de() % costumes;
+    D_800E42D0->players[player].choice = Nav_NextRandom() % costumes;
 }
 
 s32 func_80420AD4_de(void) {

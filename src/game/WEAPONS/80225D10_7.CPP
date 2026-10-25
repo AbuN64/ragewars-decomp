@@ -141,7 +141,7 @@ void func_802292B8_de(void *actor) {
 
 /* Transfers a randomly selected inventory quantity into an empty recipient slot. */
 
-s32 func_802744D4_de(); /* extern */
+s32 Nav_NextRandom(); /* extern */
 
 void func_80229468_de(Inventory *inventory, Receiver *receiver) {
  s32 amount;
@@ -150,11 +150,11 @@ void func_80229468_de(Inventory *inventory, Receiver *receiver) {
  void *scan;
  if (receiver->amount == 0) {
   amount=15;
-  index=func_802744D4_de()%3;
+  index=Nav_NextRandom()%3;
   value=inventory->items[index];
   if(value<16) amount=value;
   if(amount==0) {
-   func_802744D4_de();
+   Nav_NextRandom();
    scan=inventory;
    for(index=0;index<3;index++) {
     s16 item=inventory->items[index];

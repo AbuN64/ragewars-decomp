@@ -35,7 +35,7 @@ void func_8041E81C_de(s32 count, s32 level) {
     }
     i = 0;
     while (budget > 0) {
-        entry = &points[func_802744D4_de() % count];
+        entry = &points[Nav_NextRandom() % count];
         value = *entry;
         if (value < 20 && budget >= value) {
             *entry = value * 2;
@@ -51,7 +51,7 @@ void func_8041E81C_de(s32 count, s32 level) {
         D_80153F80[i].variant = tier;
         D_80153F80[i].variantC = tier;
         do {
-            pick = func_802744D4_de() % 17;
+            pick = Nav_NextRandom() % 17;
             D_80153F80[i].id = D_800E381C[tier][pick].field_0;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
             name = D_80153F80[i].name;
@@ -90,7 +90,7 @@ extern s32 D_800E37B8[];
 extern Prize D_800E381C[][17];
 extern Reward D_80153F80[];
 
-extern s32 func_802744D4_de(void);
+extern s32 Nav_NextRandom(void);
 extern void func_802A025C_de(char *dst, char *src);
 
 void func_8041E81C_de(s32 count, s32 level) {
@@ -122,7 +122,7 @@ void func_8041E81C_de(s32 count, s32 level) {
     }
     i = 0;
     while (budget > 0) {
-        entry = &points[func_802744D4_de() % count];
+        entry = &points[Nav_NextRandom() % count];
         value = *entry;
         if (value < 20 && budget >= value) {
             *entry = value * 2;
@@ -138,7 +138,7 @@ void func_8041E81C_de(s32 count, s32 level) {
         D_80153F80[i].tier = tier;
         D_80153F80[i].shown = tier;
         do {
-            pick = func_802744D4_de() % 17;
+            pick = Nav_NextRandom() % 17;
             D_80153F80[i].id = D_800E381C[tier][pick].id;
             func_802A025C_de(D_80153F80[i].name, *D_800E381C[tier][pick].name);
         } while (D_80153F80[i].id == -1);

@@ -42,9 +42,9 @@ void func_80226340_de(SharedPlayer *player) {
     f32 alpha;
     s32 level;
 
-    if (player->views5DC.view5DC_2.view != 0 && 80.0f < func_80274564_de(100.0f)) {
+    if (player->views5DC.view5DC_2.view != 0 && 80.0f < Nav_RandomFloat(100.0f)) {
         view = player->views5DC.view5DC_2.view;
-        alpha = func_80274564_de(7.5f);
+        alpha = Nav_RandomFloat(7.5f);
         level = (u32) alpha;
         func_802391AC_de(view, 0xFF, 0xFF, 0, 0, (u8) level, 3, 7);
         func_802394BC_de(&D_80145088, 0.0f, 204.79999f, 0.0f, 512.0f, 0, view->position);

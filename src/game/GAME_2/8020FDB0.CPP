@@ -87,14 +87,14 @@ void func_8020FDB0_de(BrainCode8020EAE0 *brain, s32 *ammo) {
         if (func_80283228_de(D_8011D8D0, brain->player) > 0) {
             return;
         }
-        if (func_802744D4_de() % 100 >= 21) {
+        if (Nav_NextRandom() % 100 >= 21) {
             return;
         }
     }
     if (count == 0) {
         return;
     }
-    pick = choices[func_802744D4_de() % count];
+    pick = choices[Nav_NextRandom() % count];
     brain->player->views5E8.view770_92.nextWeapon = pick;
     if (pick != brain->player->views5E8.view62E_14.weapon) {
         brain->switchTimer = 0;

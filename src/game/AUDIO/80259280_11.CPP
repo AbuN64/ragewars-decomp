@@ -204,7 +204,7 @@ void Audio_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s32
         maximumGain = (f32)gainRange[1] * D_800C3F28_de;
         if (minimumGain == D_800C3F2C_de) gain = D_800C3F2C_de;
         else if (maximumGain == minimumGain) gain = minimumGain;
-        else gain = minimumGain + func_80274564_de(maximumGain - minimumGain);
+        else gain = minimumGain + Nav_RandomFloat(maximumGain - minimumGain);
         sourcePosition = &mix->position;
         listenerPosition = &voice->context->field2B98->position;
         dx = sourcePosition->x - listenerPosition->x;

@@ -119,12 +119,12 @@ void func_8020CA10_de(void *arg0, s32 arg1)
   flags = navigation_point_flags(entry);
   if (flags & 0x40)
   {
-    node->ticks = (func_802744D4_de() % 5) + 5;
+    node->ticks = (Nav_NextRandom() % 5) + 5;
   }
   flags = navigation_point_flags(entry);
   if (flags & 0x80)
   {
-    node->delay = (func_802744D4_de() % 5) + 5;
+    node->delay = (Nav_NextRandom() % 5) + 5;
   }
 }
 

@@ -109,7 +109,7 @@ s32 func_802AD1B4_de(Shared_ActorView *arg0) {
     if (arg0->message != 0) {
         input = D_800C62E0;
         ((Racer *)arg0->message)->pad124 = 0;
-        value = func_80274564_de(input);
+        value = Nav_RandomFloat(input);
         threshold = (&D_800C62E0)[1];
         if (!(threshold <= value)) {
             converted = (s32)value;

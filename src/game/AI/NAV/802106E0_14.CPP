@@ -14,10 +14,10 @@ void func_802123FC_eu(void *closeAttackActor) {
     inner->state = 0;
     func_80209988_de(inner);
 
-    r1 = func_802744D4_de();
+    r1 = Nav_NextRandom();
     inner->timer = r1 % 4 + 0xC;
 
-    r2 = func_802744D4_de();
+    r2 = Nav_NextRandom();
     inner->pattern = r2 % 2;
 }
 #endif

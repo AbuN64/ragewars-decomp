@@ -158,7 +158,7 @@ extern f32 D_800C25B4_de, D_800C25B8_de, D_800C25BC_de, D_800C25C0_de;
 extern char PLAYER_EFFECT_LIGHT_PATTERN[], D_800C91C8_de[], PLAYER_MODE_LIGHT_PATTERN[], D_800C91D8_de[];
 extern void *func_80268C1C_de(void *, void *);
 extern void func_8024BC94_de(CVector3 *, void *, CVector3);
-extern s32 func_802744D4_de(void);
+extern s32 Nav_NextRandom(void);
 extern f32 Particle_GetActorHeight(void *);
 /* Position one effect light, reading its scale and radius at their use sites. */
 static inline void placePlayerLight(struct Player *player, struct PlayerEffectLight *light,
@@ -206,9 +206,9 @@ void Weapons_UpdatePlayerEffectLights(struct Player *player) {
         if (player->rangeTimer < D_800C25B4_de) {
             flicker = 1;
             if (player->rangeTimer < D_800C25B8_de) {
-                flicker ^= (func_802744D4_de() % 100) < 50;
+                flicker ^= (Nav_NextRandom() % 100) < 50;
             } else {
-                if ((func_802744D4_de() % 100) < 15) {
+                if ((Nav_NextRandom() % 100) < 15) {
                     flicker = 0;
                 }
             }

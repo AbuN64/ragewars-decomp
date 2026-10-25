@@ -57,7 +57,7 @@ void func_80213340_de(void *arg0)
             candidate = ((Brain_func_80212D78_eu_x *)arg0)->goal;
 loop:
             if (tries < 10) {
-                candidate = func_802744D4_de() % table[1];
+                candidate = Nav_NextRandom() % table[1];
                 if (navigation_point_flags((NavigationPoint *)Nav_GetGraphPoint(table, candidate)) & 0x400) {
                     candidate = ((Brain_func_80212D78_eu_x *)arg0)->goal;
                 }
@@ -78,7 +78,7 @@ store_both:
 store_c:
         ((Brain_func_80212D78_eu_x *)arg0)->nextNode = candidate;
     } else {
-        result = choices[func_802744D4_de() % count];
+        result = choices[Nav_NextRandom() % count];
     }
 
     ((Brain_func_80212D78_eu_x *)arg0)->goal = result;

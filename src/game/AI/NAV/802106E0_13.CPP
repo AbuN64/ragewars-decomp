@@ -65,9 +65,9 @@ void func_802120A8_eu(Self *actor) {
         }
         speed = func_80209BE0_de(brain) * 0.4f;
         if (--brain->timer <= 0) {
-            brain->timer = func_802744D4_de() % 4 + 12;
-            brain->pattern = func_802744D4_de() % 2;
-            roll = func_802744D4_de();
+            brain->timer = Nav_NextRandom() % 4 + 12;
+            brain->pattern = Nav_NextRandom() % 2;
+            roll = Nav_NextRandom();
             if (roll / 2 * 2 == roll - 1) {
                 brain->pattern = 2;
             }

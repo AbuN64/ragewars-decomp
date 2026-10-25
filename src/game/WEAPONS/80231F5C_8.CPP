@@ -95,7 +95,7 @@ s32 func_80232ABC_de(void *player) {
     s32 var_s0;
 
     weapon = ((Shared_ActorView *)player)->selectedAction;
-    var_s0 = func_802744D4_de() % 22;
+    var_s0 = Nav_NextRandom() % 22;
     if (var_s0 >= 0) {
         do {
             weapon += 1;

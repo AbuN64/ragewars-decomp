@@ -85,7 +85,7 @@ void func_80212E10_de(void) {
         "lw         $a1, 0x224($s1)\n"
         "bne        $a1, $v0, .Lauto_80212F68\n"
         "nop\n"
-        "jal        func_802744D4_de\n"
+        "jal        Nav_NextRandom\n"
         "nop\n"
         "lw         $v1, 0x4($s2)\n"
         "div $zero,$v0,$v1\n"

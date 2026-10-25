@@ -35,7 +35,7 @@ void Particle_SubtractVectors(CVector3 *normal, CVector3 *pos, void *surface);
 
 f32 func_802726BC_de(CVector3 *a, CVector3 *b);
 
-s32 func_802744D4_de(void);
+s32 Nav_NextRandom(void);
 
 void func_8027AD4C_de(Shared_Particle *particle);
 
@@ -247,7 +247,7 @@ void Particle_Update(Shared_Particle *particle) {
             particle->time = 0.0f;
             particle->space = -7;
             particle->flags = (particle->flags & ~0x30000) | 0x40000;
-            particle->rot.z = (f32)(func_802744D4_de() % 360) * 0.017453294f;
+            particle->rot.z = (f32)(Nav_NextRandom() % 360) * 0.017453294f;
             particle->inst.velocity.y = 0.0f;
             if (particle->flags & 0x4000000) {
                 particle->inst.velocity.x = -particle->direction.x;

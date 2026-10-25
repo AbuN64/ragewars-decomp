@@ -31,7 +31,7 @@ extern void func_8040C428_de(s32);
 extern void func_8040E8D8_de(void *, s32);
 extern void func_804030E0_de(s32);
 extern void MarkMenuEventHandled(void);
-extern s32 func_802744D4_de(void);
+extern s32 Nav_NextRandom(void);
 
 extern void func_802A230C_de(void);
 extern void Items_ResetActorPools(void *, s32);
@@ -72,7 +72,7 @@ s32 func_80422960_de(void *item, s32 unused1, s32 event) {
         } else {
             MarkMenuEventHandled();
             if (D_800E4518->arena == 0 && func_8025E2C4_de() != 0) {
-                func_8025E2D4_de(func_802744D4_de() % 4 + 0x38);
+                func_8025E2D4_de(Nav_NextRandom() % 4 + 0x38);
             } else {
                 func_8025E2D4_de(D_800E4518->arena);
             }

@@ -10,7 +10,7 @@ void func_802100E0_de(void *brain) {
     AiController *controller = brain;
     s32 temp_v0;
 
-    if ((func_802744D4_de() % 100) < 0x15) {
+    if ((Nav_NextRandom() % 100) < 0x15) {
         do {
             temp_v0 = func_80232ABC_de(controller->player);
         } while (temp_v0 >= 0x10);

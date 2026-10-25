@@ -103,7 +103,7 @@ s32 func_8042ACD8_de(void) {
         found = 0;
         size = cup_stages(D_80154010.index) - 1;
         while (!found) {
-            stage = func_802744D4_de() % size + 1;
+            stage = Nav_NextRandom() % size + 1;
             if (func_80265650_de(D_80154010.played, stage) == 0) {
                 found = 1;
                 func_80265688_de(D_80154010.played, stage, found);

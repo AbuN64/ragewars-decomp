@@ -28,7 +28,7 @@ s32 func_8020DD04_de(WeightSource *weights) {
     if (total == 0) {
         return 3;
     }
-    value = (func_802744D4_de() % total) + 1;
+    value = (Nav_NextRandom() % total) + 1;
     if (first_end < value) {
         if (second_end >= value) {
             return 4;

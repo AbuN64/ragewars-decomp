@@ -36,7 +36,7 @@ extern void Rsp_ConvertMatrixToFloat(MatrixF *, MatrixF *);
 extern void func_8027347C_de(MatrixF *, f32, f32, f32);
 extern void func_80273448_de(MatrixF *, f32, f32, f32);
 extern void Particle_BuildMatrix(EffectActor *, MatrixF *, void *, f32);
-extern s32 func_802744D4_de(void);
+extern s32 Nav_NextRandom(void);
 extern void func_80284570_de(EffectSystem *, ParticleEffect *);
 extern void func_80255D70_de(IntrusiveList *, ParticleEffect *, ParticleEffect *);
 extern void func_80295E84_de(u32 *, s32);
@@ -59,7 +59,7 @@ extern void func_802765B0_de(s8, u8, u8, u8, u8 *, u8 *, u8 *);
 extern void func_80276B44_de(u8, u8, u8, u8, u8 *, u8 *, u8 *);
 
 static inline s32 effect_spawn_random_count(s32 range) {
-    return range != 0 ? func_802744D4_de() % (range + 1) : 0;
+    return range != 0 ? Nav_NextRandom() % (range + 1) : 0;
 }
 
 static inline ParticleEffect *effect_spawn_find_owned(IntrusiveList *list, void *ownerId, EffectEntry *entry) {
@@ -292,7 +292,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 }
             }
             if (entry->params->chance != 100) {
-                if (func_802744D4_de() % 1000 + 1 > entry->params->chance * 10) {
+                if (Nav_NextRandom() % 1000 + 1 > entry->params->chance * 10) {
                     ok = 0;
                 }
             }
@@ -494,10 +494,10 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 }
                 hue = 0;
                 if (entry->color->m_RandomizeHue != 0) {
-                    hue = func_802744D4_de() % (entry->color->m_RandomizeHue * 2) - (u8) entry->color->m_RandomizeHue;
+                    hue = Nav_NextRandom() % (entry->color->m_RandomizeHue * 2) - (u8) entry->color->m_RandomizeHue;
                 }
-                sat = entry->color->m_RandomizeSaturation != 0 ? func_802744D4_de() % entry->color->m_RandomizeSaturation : 0;
-                val = entry->color->unkE != 0 ? func_802744D4_de() % entry->color->unkE : 0;
+                sat = entry->color->m_RandomizeSaturation != 0 ? Nav_NextRandom() % entry->color->m_RandomizeSaturation : 0;
+                val = entry->color->unkE != 0 ? Nav_NextRandom() % entry->color->unkE : 0;
                 r = entry->color->m_WhiteColor[0];
                 g = entry->color->m_WhiteColor[1];
                 b = entry->color->m_WhiteColor[2];

@@ -84,9 +84,9 @@ void func_80211490_eu(CloseAttackActor *actor) {
             temp_f20 = temp_f21 * 0.6f;
             brain->timer = temp_v0;
             if (temp_v0 <= 0) {
-                brain->timer=func_802744D4_de()%4+12;
-                brain->pattern = func_802744D4_de() % 2;
-                brain->distance = (func_802744D4_de() % 250000) + 0x57E40;
+                brain->timer=Nav_NextRandom()%4+12;
+                brain->pattern = Nav_NextRandom() % 2;
+                brain->distance = (Nav_NextRandom() % 250000) + 0x57E40;
             }
             temp_s0_2 = &temp_s0->pos;
             func_80209308_de(brain, temp_s0_2, 2.0f, func_80209DAC_de(brain));
@@ -169,12 +169,12 @@ block_41:
             brain->routeNodes[0] = -1;
             temp_v0_6 = brain->fireTimer - 1;
             brain->fireTimer = temp_v0_6;
-            if ((temp_v0_6 == 0) && ((func_802744D4_de() % 100) < (s32) temp_f21)) {
+            if ((temp_v0_6 == 0) && ((Nav_NextRandom() % 100) < (s32) temp_f21)) {
                 temp_v1_3 = brain->player;
                 temp_v1_3->buttons |= 0x10;
             }
             if (brain->fireTimer < 0) {
-                brain->fireTimer = ((func_802744D4_de() % 2) + 2) * 0xF;
+                brain->fireTimer = ((Nav_NextRandom() % 2) + 2) * 0xF;
             }
             func_80209E80_de(brain);
         } else {
