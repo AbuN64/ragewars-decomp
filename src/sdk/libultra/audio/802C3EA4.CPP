@@ -4,66 +4,58 @@
 #include "TYPES.H"
 #include "sdk/AUDIO/802C3EA4.H"
 
-#ifdef NON_MATCHING
-#include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/RESIDENT_EVENT_HANDLER.H"
-#include "COMMON/ALLOADFILTER48_2.H"
-#include "TYPES.H"
-#include "COMMON/LLDIVRESULT.H"
-extern u16 D_800D5350[];
-extern u16 D_800D5374[];
+extern u16 D_800D5350[17];
+extern u16 D_800D5374[17];
 extern u16 D_8014AE00;
 
-/* NON_MATCHING: 4 aligned edits / 117 ROM words; remaining: the ROM keeps the first refill's store
-   address in a register (la + sh) where this build folds it into a direct store. */
+static inline void Audio_SignExtend(u16 *value, u16 width, s16 signExtend) {
+    if (signExtend && ((s16)*value & D_800D5374[width])) {
+        *value |= ~D_800D5350[width];
+    }
+}
+
+/* Reads count packed width-bit samples from the 16-bit word stream into out (the bit reader keeps the
+   current word in D_8014AE00 and its unread bit count in D_800D54B8); signExtend widens negative samples. */
 u16 Audio_ReadPackedSamples(u16 *out, u16 width, u16 count, s16 signExtend, DecodeState *stream) {
     s16 i;
     u16 need;
-    u16 *word;
+
     if (D_800D54B8 == 0) {
         u16 *cursor = stream->cursor;
-        u16 next = *cursor;
+        *(volatile u16 *)&D_8014AE00 = *cursor;
         stream->cursor = cursor + 1;
         D_800D54B8 = 16;
-        word = &D_8014AE00;
-        *word = next;
     }
     for (i = 0; i < count; i++) {
-        u16 *left = &D_800D54B8;
-        word = &D_8014AE00;
-        if (*left < width) {
-            need = width - *left;
+        if (D_800D54B8 >> 16) D_8014AE00 = 0;
+        if (D_800D54B8 < width) {
+            need = width - D_800D54B8;
             {
-                u16 high = *word & D_800D5350[*left];
+                u16 high = D_8014AE00 & D_800D5350[D_800D54B8];
                 out[i] = high << need;
             }
             {
                 u16 *cursor = stream->cursor;
-                *word = *cursor;
+                D_8014AE00 = *cursor;
                 stream->cursor = cursor + 1;
             }
             {
-                s32 low = (*word >> (16 - need)) & D_800D5350[need];
+                s32 low = (D_8014AE00 >> (16 - need)) & D_800D5350[need];
                 out[i] |= low;
             }
-            if (signExtend && ((s16)out[i] & D_800D5374[width])) {
-                out[i] |= ~D_800D5350[width];
-            }
-            *left = 16 - need;
+            Audio_SignExtend(&out[i], width, signExtend);
+            D_800D54B8 = 16 - need;
         } else {
-            s32 low = (*word >> (*left - width)) & D_800D5350[width];
-            out[i] = low;
-            if (signExtend && ((s16)out[i] & D_800D5374[width])) {
-                out[i] |= ~D_800D5350[width];
+            {
+                s32 low = (D_8014AE00 >> (D_800D54B8 - width)) & D_800D5350[width];
+                out[i] = low;
             }
-            *left -= width;
+            Audio_SignExtend(&out[i], width, signExtend);
+            D_800D54B8 -= width;
         }
     }
     return 1;
 }
-#else
-INCLUDE_ASM("span_1000", Audio_ReadPackedSamples);
-#endif
 
 /* Copies a dictionary phrase's samples to out; returns how many. */
 static inline s16 Audio_CopyPhrase(DecodePhrase *phrase, u16 *out) {
