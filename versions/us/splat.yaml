@@ -4019,7 +4019,7 @@ segments:
       - [0xC5F38, rodata, data_800C/D_80293534_CB0F8]
       - [0xC5F4D, data, data_800C/rodata_unresolved_800C534D]
       - [0xC5F50, rodata, data_800C/literals_Render_RunGameLoop]
-      - [0xC5F58, rodata, data_800C/D_802917D8_CB118]
+      - [0xC5F58, rodata, data_800C/literals_Render_BeginFrameDisplayList]
       - [0xC5F5C, rodata, data_800C/literals_Render_DrawTextLines]
       - [0xC5F78, rodata, data_800C/D_80292308_CB138]
       - [0xC5F9C, rodata, data_800C/D_80292900_CB15C]

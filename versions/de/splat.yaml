@@ -4024,7 +4024,7 @@ segments:
       - [0xC6008, rodata, data_800C/D_80293534_CB0F8]
       - [0xC601D, data, data_800C/rodata_unresolved_800C541D]
       - [0xC6020, rodata, data_800C/literals_Render_RunGameLoop]
-      - [0xC6028, rodata, data_800C/D_802917D8_CB118]
+      - [0xC6028, rodata, data_800C/literals_Render_BeginFrameDisplayList]
       - [0xC602C, rodata, data_800C/literals_Render_DrawTextLines]
       - [0xC6048, rodata, data_800C/D_80292308_CB138]
       - [0xC606C, rodata, data_800C/D_80292900_CB15C]

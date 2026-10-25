@@ -232,7 +232,6 @@ void Render_RunGameLoop(GameSession *session) {
     }
 }
 
-#ifdef NON_MATCHING
 #include "abi.h"
 #include "TYPES.H"
 #include "COMMON/GFX.H"
@@ -250,38 +249,28 @@ extern UnitVp D_80142C40[];
 extern s32 D_800D297C;
 extern s32 D_800E28D0;
 
-f32 Render_BeginFrameDisplayList(void *world) {
+#include "COMMON/VIDEO_DIMENSIONS.H"
+/* Starts the frame display list in the current ring buffer: segment 0, the two setup lists, the depth image, a
+ * full-screen viewport (SCREEN_WD x SCREEN_HT) in D_80142C40[D_800D297C] and a full-screen scissor. */
+void Render_BeginFrameDisplayList(void *world) {
     UnitVp *viewport;
-    s32 height;
-    s32 width;
-    f32 right;
-    f32 bottom;
-
     D_80110634 = D_8011FAC0.ring.current->commands;
     gSPSegment(D_80110634++, 0, 0);
     gSPDisplayList(D_80110634++, &D_800CBCC0);
     gSPDisplayList(D_80110634++, &D_800CBCF0_de);
-    gDPSetDepthImage(D_80110634++, D_801536E8);
     viewport = &D_80142C40[D_800D297C];
-    height = D_800E28D4;
-    viewport->vscale[1] = height * 2;
-    viewport->vtrans[1] = height * 2;
+    gDPSetDepthImage(D_80110634++, D_801536E8);
+    viewport->vscale[0] = SCREEN_WD * 2;
+    viewport->vscale[1] = SCREEN_HT * 2;
     viewport->vscale[2] = 0x3FF;
-    bottom = (f32)(height - 1) * (4.0f);
     viewport->vscale[3] = 0;
+    viewport->vtrans[0] = SCREEN_WD * 2;
+    viewport->vtrans[1] = SCREEN_HT * 2;
     viewport->vtrans[2] = 0;
     viewport->vtrans[3] = 0;
-    width = D_800E28D0;
-    right = (f32)(width - 1) * (4.0f);
-    viewport->vscale[0] = width * 2;
-    viewport->vtrans[0] = width * 2;
-    gSPMoveMem(D_80110634++, G_MV_VIEWPORT, 0, 16, viewport);
-    gDPSetScissorFrac(D_80110634++, G_SC_NON_INTERLACE, 0, 0, (s32)right, (s32)bottom);
-    return bottom;
+    gSPViewport(D_80110634++, viewport);
+    gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
 }
-#else
-INCLUDE_ASM("span_1000", Render_BeginFrameDisplayList);
-#endif
 
 /* rspboot text is 0xD0 bytes: it ends where the first graphics microcode text (D_800D8CE0) starts. */
 extern u64 rspbootTextStart[], rspbootTextEnd[], D_800D8CE0[], D_800DC020_de[], D_800DA070[], D_800DC440[], D_800E4000[];

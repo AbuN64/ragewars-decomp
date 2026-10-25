@@ -2526,3 +2526,4 @@ literals_Particle_GetAngleDistance = 0x800C484C; // rom:0xC544C size:0x60
 literals_Nav_AssignPlatformEndpoints = 0x800C1D4C; // rom:0xC294C size:0x8
 literals_Particle_GetHorizontalAngle = 0x800C4838; // rom:0xC5438 size:0x14
 literals_Weapons_UpdateViewAngles = 0x800C287C; // rom:0xC347C size:0x38
+literals_Render_BeginFrameDisplayList = 0x800C5428; // rom:0xC6028 size:0x4
