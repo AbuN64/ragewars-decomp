@@ -16,6 +16,7 @@
 #include "RENDER_4/8028FD2C_6.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/WORLD.H"
+#include "ENGINE/SCENE_11.H"
 #include "COMMON/GAMEPLAY_REACTIONS.H"
 
 extern void func_80278F00_de(Rec_func_8024C92C_de *arg0);
@@ -131,7 +132,7 @@ void func_8028C60C_de(void *arg0) {
     }
 }
 
-/* Produces an object's placement: when one of its tracks has an active second node and D_800D2850 is set, it samples the track through Engine_FindLightVolumes and resolves the placement with func_80289970_de, and otherwise copies the default placement D_800CBC90. */
+/* Lights a point: blends the light volumes around it when the world's sectors hold any and lighting is on (D_800D2850), else copies the default lights D_800CBC90. */
 
 
 
@@ -144,28 +145,24 @@ void func_8028C60C_de(void *arg0) {
 
 
 
-extern void Engine_FindLightVolumes(OwnerEngineSampleWorldLighting *owner, s32 time, Sample *sample, s32 *segment);
-
-static inline s32 has_active(OwnerEngineSampleWorldLighting *owner) {
+extern void Engine_FindLightVolumes(Shared_World *world, CVector3 *point, ObjectRecAtBC **volumes, s32 *total);
+static inline s32 worldHasLightVolumes(Shared_World *world) {
     s32 i;
-
-    for (i = 0; i < owner->count; i++) {
-        if (((struct IntPair *)Render_GetPackSection(*owner->tracks[i].nodes, 2))->field_4 != 0) {
+    for (i = 0; i < world->sectorCount; i++) {
+        if (((LightVolumeList *)Render_GetPackSection(world->sectors[i].resource->pack, 2))->count != 0) {
             return 1;
         }
     }
     return 0;
 }
-
-void Engine_SampleWorldLighting(OwnerEngineSampleWorldLighting *owner, s32 time, Block24 *out) {
-    Sample sample;
-    s32 segment;
-
-    if (!has_active(owner) || D_800D2850 == 0) {
-        *out = *(Block24 *)D_800CBC90;
+void Engine_SampleWorldLighting(Shared_World *world, CVector3 *position, Shared_ParticleLighting *out) {
+    ObjectRecAtBC *volumes[10];
+    s32 count;
+    if (!worldHasLightVolumes(world) || D_800D2850 == 0) {
+        *out = D_800CBC90[0];
     } else {
-        Engine_FindLightVolumes(owner, time, &sample, &segment);
-        Engine_SampleVolumeLighting(&sample, segment, time, out);
+        Engine_FindLightVolumes(world, position, volumes, &count);
+        Engine_SampleVolumeLighting(volumes, count, position, out);
     }
 }
 

@@ -5,6 +5,8 @@
 #include "COMMON/EXTERNS_14.H"
 #include "COMMON/SCENERECAT10C0.H"
 #include "SCENE/CODE.H"
+#include "COMMON/WORLD.H"
+#include "COMMON/OBJECTLINKS150C.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "FX_2/80271B18.H"
 #include "WEAPONS/80213ED4.H"
@@ -12,37 +14,39 @@
 #include "RENDER_4/8028FD2C_6.H"
 #include "COMMON/PLAYERPROFILES.H"
 
-void Engine_FindLightVolumes(World37 *world, CVector3 *point, Item37 **output, s32 *total) {
-    Region37 *region;
-    s32 i, found, regionCount, itemCount;
+/* Collects up to 10 light volumes holding a point from the world sector whose x/z extent holds it, returning their
+ * count through total (0 outside every sector). */
+void Engine_FindLightVolumes(Shared_World *world, CVector3 *point, ObjectRecAtBC **volumes, s32 *total) {
+    WorldSector *sector;
+    s32 i, found, sectorCount, volumeCount;
     f32 x, z;
-    Items37 *items;
-    Item37 *item, *base;
-    region = 0;
+    LightVolumeList *list;
+    ObjectRecAtBC *volume, *base;
+    sector = 0;
     i = 0;
     found = 0;
     x = point->x; z = point->z;
-    regionCount = world->count;
-    for (; i < regionCount; i++) {
-        Bounds2D37 *bounds = world->regions[i].bounds;
-        if (bounds->maxX < x || x < bounds->minX ||
-            bounds->maxZ < z || z < bounds->minZ) continue;
-        region = &world->regions[i];
+    sectorCount = world->sectorCount;
+    for (; i < sectorCount; i++) {
+        WorldSectorExtent *extent = world->sectors[i].bounds;
+        if (extent->maxX < x || x < extent->minX ||
+            extent->maxZ < z || z < extent->minZ) continue;
+        sector = &world->sectors[i];
         break;
     }
-    if (region == 0) {
+    if (sector == 0) {
         *total = 0;
     } else {
-        items = Render_GetPackSection(region->resource->data, 2);
-        itemCount = items->count;
-        base = items->items;
-        for (i = 0; i < itemCount; i++) {
-            Bounds37 *bounds;
-            item = &base[i];
-            bounds = &item->bounds;
-            if (bounds->maxX > point->x && bounds->maxY > point->y && bounds->maxZ > point->z &&
-                bounds->minX <= point->x && bounds->minY <= point->y && bounds->minZ <= point->z) {
-                output[found++] = item;
+        list = Render_GetPackSection(sector->resource->pack, 2);
+        volumeCount = list->count;
+        base = list->volumes;
+        for (i = 0; i < volumeCount; i++) {
+            Box *bounds;
+            volume = &base[i];
+            bounds = &volume->bounds;
+            if (bounds->max.x > point->x && bounds->max.y > point->y && bounds->max.z > point->z &&
+                bounds->min.x <= point->x && bounds->min.y <= point->y && bounds->min.z <= point->z) {
+                volumes[found++] = volume;
                 if (found == 10) break;
             }
         }

@@ -28,6 +28,12 @@ struct ObjectRecAtBC {
     u8 animationSeed; /* 0xBC */
     u8 fieldBD; /* 0xBD: Anim_DecodeBoxTransform */
 };
+/* A world sector's light volumes: section 2 of its model pack. */
+typedef struct LightVolumeList {
+    s32 stride;
+    s32 count;
+    struct ObjectRecAtBC volumes[1];
+} LightVolumeList;
 
 struct ObjectRecAt8;
 
