@@ -41,7 +41,7 @@ void *func_8022B304_de(ForcePlayerList *forcePlayerList, void *arg1) {
     if (node != 0) {
         do {
             if (node->actorState != 0 &&
-                node->field11FC != 0.0f) {
+                node->markerTime != 0.0f) {
                 Particle_SubtractVectors(&sp10, arg1, &node->targetPosition);
                 distSq = sp10.x * sp10.x + sp10.y * sp10.y + sp10.z * sp10.z;
                 if (bestNode == 0 || distSq < bestDist) {
@@ -71,7 +71,7 @@ void Render_BuildForceMarkerTransform(char *actorView, s32 unused1, CVector3 *ar
 /** Report whether the floating field at offset 0x11FC is positive. */
 int func_8022B460_de(char *object) {
     Shared_ActorView *actor = (void *)object;
-    return actor->field11FC > 0.0f;
+    return actor->markerTime > 0.0f;
 }
 
 void func_8022B484_de(char *arg0) {

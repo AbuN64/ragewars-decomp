@@ -162,7 +162,7 @@ void func_8021B468_de(struct Shared_ActorView *player, void *attacker, s32 arg2,
     func_8044A07C_de(player);
     func_8022B530_de((s32)player);
     ((struct Shared_ActorView *)player)->stun = 0;
-    ((struct Shared_ActorView *)player)->field11FC = 0;
+    ((struct Shared_ActorView *)player)->markerTime = 0;
     func_80283278_de(&D_8011D8D0, (s32)player);
     flow = &D_80145060.flow;
     if ((flow->active != 0)

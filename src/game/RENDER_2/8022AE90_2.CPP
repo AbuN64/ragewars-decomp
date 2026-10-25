@@ -113,8 +113,8 @@ void Render_ToggleForceMarker(Shared_ActorView *player, s32 attract) {
     void *screen;
     u8 *text;
     if (player->aimTarget != 0) {
-        if (player->field11FC > 0.0f) {
-            player->field11FC = 0;
+        if (player->markerTime > 0.0f) {
+            player->markerTime = 0;
             Render_PlayFlatSound(0x578);
             screen = player->message;
             if (screen == 0) return;
@@ -122,7 +122,7 @@ void Render_ToggleForceMarker(Shared_ActorView *player, s32 attract) {
         } else {
             player->targetPosition = player->aimPoint;
             player->attract = attract;
-            player->field11FC = 150.0f;
+            player->markerTime = 150.0f;
             buildForceMarkerTransform(player, attract, &player->aimNormal);
             Render_PlayFlatSound(0x578);
             screen = player->message;

@@ -107,7 +107,7 @@ struct Shared_ActorView {
     s32 field11E8;
     f32 impactTimer; /* 0x11EC */
     u8 pad11F0[0xC];
-    f32 field11FC; /* 0x11FC: target radius, cleared by player reset */
+    f32 markerTime; /* 0x11FC: frames left on the attract/repulse marker, cleared by player reset */
     CVector3 targetPosition; /* 0x1200 */
     s32 attract; /* 0x120C: the force marker pulls (1) or pushes (0) */
     s32 targeting; /* 0x1210 */
