@@ -3247,7 +3247,7 @@ segments:
       - [0xC29B8, rodata, data_800C/literals_func_80206080_de]
       - [0xC29C0, rodata, data_800C/D_802066A4_C77D0]
       - [0xC29C4, data, data_800C/rodata_unresolved_800C1DC4]
-      - [0xC29D0, rodata, data_800C/D_blob_phase2_f6d5ea33b5f44a7b0f4e]
+      - [0xC29D0, rodata, data_800C/literals_Render_UpdateTriggeredMotion]
       - [0xC29F0, rodata, data_800C/literals_func_80206DD4_de]
       - [0xC2A7C, rodata, data_800C/D_802077F4_C788C]
       - [0xC2A80, rodata, data_800C/D_80207BB8_C7890]

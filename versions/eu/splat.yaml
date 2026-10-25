@@ -3239,7 +3239,7 @@ segments:
       - [0xC2978, rodata, data_800C/literals_func_80206080_de]
       - [0xC2980, rodata, data_800C/D_802066A4_C77D0]
       - [0xC2984, rodata, data_800C/D_auto_rodata_unresolved_800C1D84]
-      - [0xC29A4, rodata, data_800C/D_80206A20_C77F4]
+      - [0xC2990, rodata, data_800C/literals_Render_UpdateTriggeredMotion]
       - [0xC29B0, rodata, data_800C/literals_func_80206DD4_de]
       - [0xC2A3C, rodata, data_800C/D_802077F4_C788C]
       - [0xC2A40, rodata, data_800C/D_80207BB8_C7890]

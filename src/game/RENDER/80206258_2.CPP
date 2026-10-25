@@ -1,6 +1,7 @@
 #include "COMMON/MODEL_RENDER.H"
 #include "include_asm.h"
 #include "COMMON/REC.H"
+#include "COMMON/LIGHTDATA.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
@@ -97,21 +98,10 @@ void func_8020694C_de(char *arg0, void *arg1, Rec *info) {
     }
 }
 
-#ifdef NON_MATCHING
-#include "COMMON/REC.H"
-#include "COMMON/LIGHTDATA.H"
 extern f32 D_800D2988;
-extern f32 D_800C1B04_de, D_800C1B08_de, D_800C1B0C_de;
 
-/* 2/237 aligned edits; remaining: the ROM threads the hold test's not-held path straight to the toggle test. */
 /* Advance triggered shaking and vertical motion, invalidating animation on a state change. */
 /* A hold segment keeps the motion until the input is held. */
-static inline s32 holdReleased(SegmentRecAt5C *segment, Actor_func_80206DD4_de *actor) {
-    if (segment->flags & 0x08000000) {
-        return actor->inputFlags & 0x40;
-    }
-    return 1;
-}
 void Render_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode80206258 *motion) {
     SegmentRecAt5C *segment;
     s32 oldState;
@@ -147,13 +137,13 @@ void Render_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802062
         }
         break;
     case 3:
-        shakeMin = D_800C1B04_de;
-        shakeMax = D_800C1B08_de;
+        shakeMin = -0.512f;
+        shakeMax = 0.512f;
         motion->shake.x = func_80274A90_de(shakeMin, shakeMax);
         motion->shake.y = func_80274A90_de(shakeMin, shakeMax);
         motion->shake.z = func_80274A90_de(shakeMin, shakeMax);
         motion->timer += D_800D2988;
-        if (D_800C1B0C_de < motion->timer) {
+        if (45.0f < motion->timer) {
             motion->timer = 0.0f;
             if (segment->flags & 0x400000) {
                 motion->state = 1;
@@ -169,12 +159,13 @@ void Render_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802062
             actor->flags &= ~0x2000;
         } else {
             motion->timer = segment->duration;
-            if (!holdReleased(segment, actor)) {
+            if ((segment->flags & 0x08000000) && !(actor->inputFlags & 0x40)) {
                 release = 0;
             } else {
+                u32 flags = segment->flags;
                 release = 1;
-                if (segment->flags & 0x10000000) {
-                    release = (u32)(actor->inputFlags & 0x40) < (u32)release;
+                if (flags & 0x10000000) {
+                    release = (actor->inputFlags & 0x40) < release;
                 }
             }
             if (release) {
@@ -218,6 +209,3 @@ void Render_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802062
         motion->animation = -1;
     }
 }
-#else
-INCLUDE_ASM("span_1000", Render_UpdateTriggeredMotion);
-#endif

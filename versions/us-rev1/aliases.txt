@@ -2950,3 +2950,4 @@ literals_Fx_BuildControllerState = 0x800C9380; // rom:0xC9F80 size:0x5C
 literals_Render_RunGameLoop = 0x800CA510; // rom:0xCB110 size:0x8
 literals_Anim_TestPointNearPolygon = 0x800C8820; // rom:0xC9420 size:0x4
 literals_Scene_BuildCachedGeometry = 0x800CA300; // rom:0xCAF00 size:0x2E
+literals_Render_UpdateTriggeredMotion = 0x800C6BE0; // rom:0xC77E0 size:0x20
