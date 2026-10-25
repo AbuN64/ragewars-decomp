@@ -134,7 +134,7 @@ struct Block_func_804347CC_de {
     u32 checksum; /* 0x346C */
 };
 
-extern s32 D_800E25A4[];
+extern char *D_800E25A4[];
 
 struct Shared_Item;
 struct func_8028469C_S2;
