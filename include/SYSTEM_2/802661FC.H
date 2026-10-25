@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 struct Actor_func_80267958_de {
     char pad0[0x1D8];
-    SharedPlayerCode802661FC *player;
+    SharedPlayer *player;
 };
 struct Carrier {
     struct Actor_func_802676EC_de *owner;

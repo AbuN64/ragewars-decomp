@@ -60,7 +60,7 @@ extern f32 D_800C4450_de;
 
 extern char D_8011D8D0;
 
-extern void func_8022B09C_de(SharedPlayerCode802661FC *, CVector3 *);
+extern void func_8022B09C_de(SharedPlayer *, CVector3 *);
 
 extern struct Shape_typemap_165 func_80271818_de(CVector3 *);
 
@@ -154,8 +154,8 @@ have:
     return scale;
 }
 
-void func_80267958_de(SharedPlayerCode802661FC *target, Actor_func_80267958_de *actor, Triple position, CVector3 direction, s32 kind) {
-    SharedPlayerCode802661FC *player;
+void func_80267958_de(SharedPlayer *target, Actor_func_80267958_de *actor, Triple position, CVector3 direction, s32 kind) {
+    SharedPlayer *player;
     CVector3 v;
     Triple point;
     Triple zero;

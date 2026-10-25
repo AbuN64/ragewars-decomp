@@ -1528,8 +1528,14 @@ struct RiderRecAt130V1 {
     SharedPlayer *target;
     char pad84[0x18];
     f32 heading; /* 0x9C */
-    char padA0[0x90];
-    CVector3 aim;
+    char padA0[0x88];
+    union {
+        CVector3 unk128;
+        struct {
+            char pad128[8];
+            CVector3 aim;
+        };
+    };
 };
 
 struct WeaponFireState;
