@@ -23,48 +23,48 @@ char *func_80442214_de(struct ObjRecAt20V2 *object) {
 }
 
 /* Computes a glyph advance using character widths and special spacing before T. */
-f32 func_8044222C_de(s32 arg0, u8 arg1, f32 arg2, f32 arg3) {
-    f32 var_f0;
-    s32 temp_a0;
-    s32 temp_a1;
-    s32 temp_a1_2;
+f32 func_8044222C_de(s32 ch, u8 next_ch, f32 scale, f32 special_advance) {
+    f32 factor;
+    s32 cur;
+    s32 next_a;
+    s32 next_b;
 
-    temp_a0 = arg0 & 0xFF;
-    var_f0 = 1.0f;
-    switch (temp_a0) {
+    cur = ch & 0xFF;
+    factor = 1.0f;
+    switch (cur) {
     case 0x24:
     case 0x26:
     case 0x7E:
-        return arg3;
+        return special_advance;
     case 0x49:
     case 0x69:
-        var_f0 = 0.5f;
+        factor = 0.5f;
     default:
         break;
     case 0x4C:
     case 0x6C:
-        temp_a1 = arg1 & 0xFF;
-        if ((temp_a1 == 0x74) || (temp_a1 == 0x54)) {
-            var_f0 = 0.7f;
+        next_a = next_ch & 0xFF;
+        if ((next_a == 0x74) || (next_a == 0x54)) {
+            factor = 0.7f;
         }
         break;
     case 0x41:
     case 0x61:
-        temp_a1_2 = arg1 & 0xFF;
-        if ((temp_a1_2 == 0x74) || (temp_a1_2 == 0x54)) {
-            var_f0 = 0.8f;
+        next_b = next_ch & 0xFF;
+        if ((next_b == 0x74) || (next_b == 0x54)) {
+            factor = 0.8f;
         }
         break;
     case 0x4D:
     case 0x6D:
-        var_f0 = 1.2f;
+        factor = 1.2f;
         break;
     case 0x21:
     case 0x2E:
-        var_f0 = 0.4f;
+        factor = 0.4f;
         break;
     }
-    return var_f0 * arg2;
+    return factor * scale;
 }
 
 /* Sums the glyph advances that func_8044222C_de returns for each character pair of a string at the given scales, stopping at a newline, the end of the string or a null pointer. */
@@ -121,34 +121,34 @@ s32 Pak_AdjustValue(func_8022A404_S1 *menu,s32 value,s32 step,s32 minimum,s32 ma
  /* extern */
  /* extern */
 
-s32 func_80442488_de(func_8022A404_S1 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
-    s32 temp_s0;
-    s32 var_s0;
-    s32 var_v0;
+s32 func_80442488_de(func_8022A404_S1 *menu, s32 value, s32 step, s32 minimum, s32 maximum, s32 wrap) {
+    s32 stepped;
+    s32 current;
+    s32 result;
 
-    var_s0 = arg1;
-    if (((s32 (*)(s32))func_80264388_de)(arg0->unk20) != 0) {
-        var_s0 -= arg2;
-        if (var_s0 < arg3) {
-            var_s0 = arg3;
-            if (arg5 != 0) {
-                var_s0 = arg4;
+    current = value;
+    if (((s32 (*)(s32))func_80264388_de)(menu->unk20) != 0) {
+        current -= step;
+        if (current < minimum) {
+            current = minimum;
+            if (wrap != 0) {
+                current = maximum;
             }
         }
     }
-    var_v0 = var_s0;
-    if (((s32 (*)(s32))func_802643A0_de)(arg0->unk20) != 0) {
-        temp_s0 = var_s0 + arg2;
-        var_v0 = temp_s0;
-        if (arg4 < temp_s0) {
-            var_s0 = arg4;
-            if (arg5 != 0) {
-                var_s0 = arg3;
+    result = current;
+    if (((s32 (*)(s32))func_802643A0_de)(menu->unk20) != 0) {
+        stepped = current + step;
+        result = stepped;
+        if (maximum < stepped) {
+            current = maximum;
+            if (wrap != 0) {
+                current = minimum;
             }
-            var_v0 = var_s0;
+            result = current;
         }
     }
-    return var_v0;
+    return result;
 }
 
 
@@ -162,7 +162,7 @@ void func_80442544_de(void *object) {
 extern char D_800DE4EC_de[];
 extern void **Scene_AllocateResource(s32, s32, s32, char *);
 
-void *Pak_OpenDialog(void *arg0, struct Dialog *list, s32 b, s32 c, s32 d) {
+void *Pak_OpenDialog(void *parent, struct Dialog *list, s32 player, s32 controller, s32 d) {
     struct func_8025E5B0_S1 *owner;
     s32 size = list->count * 40 + 0x1D8;
     s32 i;
@@ -184,9 +184,9 @@ void *Pak_OpenDialog(void *arg0, struct Dialog *list, s32 b, s32 c, s32 d) {
     if (first == 0) {
         return 0;
     }
-    Pak_InitializeMenu(first, block, list, 0, b, c, d, arg0);
-    func_80255CB8_de(arg0, first);
-    owner = arg0;
+    Pak_InitializeMenu(first, block, list, 0, player, controller, d, parent);
+    func_80255CB8_de(parent, first);
+    owner = parent;
     if (++owner->unk14 >= 4) {
         owner->unk14 = 0;
     }

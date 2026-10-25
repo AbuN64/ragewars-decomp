@@ -156,14 +156,14 @@ void func_80409F6C_de(void *unused, void *object) {
 }
 
 s32 func_80409FA0_de(void *unused, void *arg1, s32 arg2, s32 *arg3) {
-    char sp10[16];
-    s32 sp20;
-    s32 var_s0;
-    for(var_s0=0;var_s0<16;var_s0++) {
-        Pak_GetNoteGameName(arg2,var_s0,&sp20);
-        func_80405648_de(sp20,&sp10,16);
-        if(Resmgr_CompareStrings(&sp10,arg1)==0) {
-            if(arg3) *arg3=var_s0;
+    char game_name[16];
+    s32 game_ref;
+    s32 note_index;
+    for(note_index=0;note_index<16;note_index++) {
+        Pak_GetNoteGameName(arg2,note_index,&game_ref);
+        func_80405648_de(game_ref,&game_name,16);
+        if(Resmgr_CompareStrings(&game_name,arg1)==0) {
+            if(arg3) *arg3=note_index;
             return 1;
         }
     }

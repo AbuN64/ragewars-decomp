@@ -54,11 +54,11 @@ extern s32 func_80441FE8_de(struct Field *);
 
 
 /* Selects a menu field's label table from the connection mode and the option index. */
-s32 func_8040A37C_de(struct Field *field, s16 *arg1) {
+s32 func_8040A37C_de(struct Field *field, s16 *option_ptr) {
     s32 option;
     u32 rel;
 
-    option = *arg1;
+    option = *option_ptr;
     rel = option - 3;
     if (D_80153760 != 0) {
         if (D_8014D4EC_de != 0) {
