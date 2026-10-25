@@ -87,7 +87,7 @@ extern void Frontend_DrawVisibleSiblings(void *, Args);
 extern void func_8041A6EC_de(struct Scroll *, s32);
 
 void func_8041A430_de(struct func_8022FD9C_S4 *object, s32 mode) {
-    object->unk58 = mode;
+    object->modeState = mode;
     switch (mode) {
     case 1:
         Render_PlayFlatSound(0xE77);

@@ -397,20 +397,20 @@ void func_8022A1FC_de(struct CPlayerPool_t *arg0, void *world) {
             ((ObjectLinks16E4_2 *)(node))->unk_358 = 0;
             if (func_8024D160_de(node) != 0) {
                 if (node) {
-                    count1 = ((IntegerState948 *)(world))->unk_944;
+                    count1 = ((IntegerState948 *)(world))->itemCount1;
                 } else {
-                    count1 = ((IntegerState948 *)(world))->unk_944;
+                    count1 = ((IntegerState948 *)(world))->itemCount1;
                 }
                 if (count1 != 0x200) {
                     scale = 4;
                     ((ObjectLinks148 *)(((s32)world + count1 * scale)))->unk_144 = node;
-                    ((IntegerState948 *)(world))->unk_944 = count1 + 1;
+                    ((IntegerState948 *)(world))->itemCount1 = count1 + 1;
                 }
                 count1 = 0xB48;
-                count2 = ((IntegerStateB4C *)world)->unk_B48;
+                count2 = ((IntegerStateB4C *)world)->itemCount2;
                 if (count2 != 0x80) {
                     ((struct ObjectLinks94C *) (entry = (char *) (((s32) world) + (count2 * 4))))->unk_948 = node;
-                    ((IntegerStateB4C *)world)->unk_B48 = count2 + 1;
+                    ((IntegerStateB4C *)world)->itemCount2 = count2 + 1;
                 }
             }
             node = ((ObjectLinks16E4_2 *)(node))->unk_16E0;

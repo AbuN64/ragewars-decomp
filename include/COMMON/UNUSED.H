@@ -3873,7 +3873,7 @@ struct EffectParams {
     char pad9[2];
     s8 unkB;
     char padC;
-    s8 unkD;
+    s8 emitSpread;
     s8 unkE;
 };
 struct CROMParticleColor_t;
@@ -3936,7 +3936,7 @@ struct ParticleEffect {
     char pad18[4];
     CVector3 velocity;
     char pad28[0x28];
-    CVector3 unk50;
+    CVector3 startPosition;
     u32 flags;
     char pad60[0xB0];
     s32 unk110;
@@ -3948,10 +3948,10 @@ struct ParticleEffect {
     struct EffectActor *source;
     struct EffectActor *owner;
     s32 *refCount;
-    s32 unk134;
+    s32 followedActor;
     s32 unk138;
     s32 unk13C;
-    f32 unk140;
+    f32 spreadAngle;
     f32 unk144;
     f32 unk148;
     s16 life;
@@ -3965,7 +3965,7 @@ struct ParticleEffect {
     f32 unk19C[6];
     EffectRender render;
     s8 mode;
-    u8 unk1D1;
+    u8 boundMatrixIndex;
     u8 rgb0[3];
     u8 rgb1[3];
     u8 unk1D8;
@@ -3996,7 +3996,7 @@ struct EffectTarget {
     CVector3 pos;
     s32 matrixIndex;
     char pad18[0x66];
-    u8 unk7E;
+    u8 victimTeam;
     char pad7F[0x89];
 };
 struct Effect_func_8026851C_de;
@@ -7697,7 +7697,7 @@ struct SharedPlayer_func_8021D408_de {
     s32 fxStage;
     char pad123C[0x4];
     f32 unk1240;
-    f32 unk1244;
+    f32 rightAxisValue;
     char pad1248[0x7C];
     union {
         struct {

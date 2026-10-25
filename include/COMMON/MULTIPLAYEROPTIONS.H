@@ -1304,7 +1304,7 @@ struct SharedPlayer_func_80224C4C_de {
     s32 fxStage;
     char pad123C[0x4];
     f32 unk1240;
-    f32 unk1244;
+    f32 rightAxisValue;
     char pad1248[0x7C];
     union {
         struct {
@@ -2850,7 +2850,7 @@ struct SharedPlayer_func_80224F5C_de {
     s32 fxStage;
     char pad123C[0x4];
     f32 unk1240;
-    f32 unk1244;
+    f32 rightAxisValue;
     char pad1248[0x7C];
     union {
         struct {
@@ -3179,7 +3179,7 @@ typedef struct Desc Desc;
 struct ObjectState108;
 struct ObjectState108 {
     char pad0[0x44];
-    u32 unk_44;
+    u32 resourceFlagBits;
     char pad44[0xFC - 0x44 - sizeof(u32)];
     f32 unk_FC;
     char padFC[0x100 - 0xFC - sizeof(f32)];
@@ -4592,7 +4592,7 @@ struct SharedPlayer_func_80224408_de {
     s32 fxStage;
     char pad123C[0x4];
     f32 unk1240;
-    f32 unk1244;
+    f32 rightAxisValue;
     char pad1248[0x7C];
     union {
         struct {
@@ -6065,7 +6065,7 @@ struct SharedPlayer_func_80223E34_de {
     s32 fxStage;
     char pad123C[0x4];
     f32 unk1240;
-    f32 unk1244;
+    f32 rightAxisValue;
     char pad1248[0x7C];
     union {
         struct {

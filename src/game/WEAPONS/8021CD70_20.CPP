@@ -132,7 +132,7 @@ void func_80225B98_de(ObjectLinks854 *arg0, void *arg1, s32 arg2)
     if (arg0->unk_14 != 0) {
         resource = func_8028B2F8_de(&D_8011FE88, arg0->unk_14);
         if (resource != 0) {
-            resource_flags = ((ObjectState108 *)(resource))->unk_44;
+            resource_flags = ((ObjectState108 *)(resource))->resourceFlagBits;
         }
     }
 

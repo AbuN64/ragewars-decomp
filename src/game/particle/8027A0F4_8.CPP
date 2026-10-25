@@ -120,16 +120,16 @@ static inline void effect_spawn_aim(ParticleEffect *effect, EffectTarget *aimTar
     if (aimTarget->matrixIndex != -1) {
         effect->mode = -4;
         targetActor = D_801041F0.actor;
-        targetTeam = aimTarget->unk7E;
+        targetTeam = aimTarget->victimTeam;
         Rsp_ConvertMatrixToFloat(&targetMtx, &targetActor->u60.link.matrixArray[D_801041F0.matrixIndex]);
         func_8026EF58_de(targetInv.m[0], targetMtx.m[0]);
-        Particle_TransformPoint(&targetInv, &aimTarget->pos, &effect->unk50);
+        Particle_TransformPoint(&targetInv, &aimTarget->pos, &effect->startPosition);
         up = D_801042C8;
         Particle_NormalizeVec3(&up.x);
         func_80272B38_de(&targetInv, &up, vel);
-        effect->unk134 = (s32) targetActor;
+        effect->followedActor = (s32) targetActor;
         effect->flags |= 0x10000;
-        effect->unk1D1 = D_801041F0.matrixIndex;
+        effect->boundMatrixIndex = D_801041F0.matrixIndex;
         if (effect->kind == 0x56 && targetTeam == sourceType) {
             effect->flags |= 0x4000000;
         }
@@ -375,7 +375,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 if (refCount != 0) {
                     (*refCount)++;
                 }
-                effect->unk134 = arg4;
+                effect->followedActor = arg4;
                 effect->unk13C = 0;
                 effect->flags = (effect->flags & ~0xE600) | (arg11 | extra);
                 bits = &effect->unk11C;
@@ -389,11 +389,11 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 }
                 *bits |= layer << 30;
                 effect->unk1D9 = 0;
-                spread = entry->params->unkD;
+                spread = entry->params->emitSpread;
                 if (spread < 0) {
-                    effect->unk140 = spread;
+                    effect->spreadAngle = spread;
                 } else {
-                    effect->unk140 = -(f32) effect_spawn_random_count(spread);
+                    effect->spreadAngle = -(f32) effect_spawn_random_count(spread);
                 }
                 effect->unk19C[0] = func_80285630_de(entry->unk2C[2]) * D_800C4E04_de;
                 effect->unk19C[2] = func_80285630_de(entry->unk2C[1]) * 0.41887906f;
@@ -488,7 +488,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     }
                 }
                 effect->unk168 = effect->pos;
-                effect->unk50 = effect->pos;
+                effect->startPosition = effect->pos;
                 Particle_ScaleVector(&effect->velocity, &dirOut, func_80285630_de(entry->motion->speed));
                 if (entry->flags & 0x20) {
                     Particle_AddVec3(&effect->velocity, &effect->velocity, &arg6);

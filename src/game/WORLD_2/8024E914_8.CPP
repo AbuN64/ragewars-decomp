@@ -139,7 +139,7 @@ void **func_8024F6EC_de(void *arg0, s32 arg1) {
     s32 key;
     s32 found;
 
-    if (arg1 != ((func_8022FD9C_Record *)(arg0))->unk54) {
+    if (arg1 != ((func_8022FD9C_Record *)(arg0))->activeState) {
         resource = Scene_RequestResource(0, ((Access_s32_50 *)(arg0))->field,
                                 ((Access_s32_50 *)(arg0))->field, 0x18,
                                 0, 0, 0, &D_800C3DA8_de + 4, 1);
@@ -151,7 +151,7 @@ void **func_8024F6EC_de(void *arg0, s32 arg1) {
                 ((StaticObject *)(arg0))->resource = Render_LocatePackSection((s32)sp28, key,
                                                     arg1 % *(s32 *)sp28,
                                                     &((Access_s32_5C *)(arg0))->field);
-                ((func_8022FD9C_Record *)(arg0))->unk54 = arg1;
+                ((func_8022FD9C_Record *)(arg0))->activeState = arg1;
                 Scene_ReleaseResource(0, (void *)found);
             }
         }

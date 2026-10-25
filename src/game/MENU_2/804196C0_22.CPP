@@ -55,10 +55,10 @@ s32 func_8041A9B0_de(struct CommandListMenu *commandListMenu) {
 
 s32 func_8041AA10_de(struct func_8022FD9C_Record *menu, void *second, void *third, s32 active, s32 fifth) {
     if (func_8029DB58_de(fifth) < func_80299B4C_de()) {
-        menu->unk54 = 2;
+        menu->activeState = 2;
     }
     if (active == 1) {
-        menu->unk54 = active;
+        menu->activeState = active;
         func_8041A910_de(menu);
         return 0;
     }
@@ -67,10 +67,10 @@ s32 func_8041AA10_de(struct func_8022FD9C_Record *menu, void *second, void *thir
 
 s32 func_8041AA80_de(struct func_8022FD9C_Record *menu, void *second, void *third, s32 active, s32 fifth) {
     if (func_8029DB58_de(fifth) < func_80299B4C_de()) {
-        menu->unk54 = 2;
+        menu->activeState = 2;
     }
     if (active == 1) {
-        menu->unk54 = 0;
+        menu->activeState = 0;
         func_8041A8E8_de(menu);
         return 0;
     }
@@ -83,7 +83,7 @@ s32 func_8041AA80_de(struct func_8022FD9C_Record *menu, void *second, void *thir
 
 s32 func_8041AAF0_de(struct func_8022FD9C_Record *object, void *unused, u32 event, s32 value) {
     if ((event >> 16) == 3 && value < 8 && value >= 6) {
-        object->unk54 = 2;
+        object->activeState = 2;
     }
     return 0;
 }
@@ -92,7 +92,7 @@ s32 func_8041AB1C_de(struct func_8022FD9C_Record *menu)
 {
     struct func_8022FD9C_Record *target = menu;
 
-    switch (menu->unk54) {
+    switch (menu->activeState) {
     case 0:
         func_8041A8E8_de(menu);
         break;

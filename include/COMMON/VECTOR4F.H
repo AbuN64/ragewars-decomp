@@ -1317,7 +1317,7 @@ struct SharedPlayer {
     s32 fxStage;
     char pad123C[0x4];
     f32 unk1240;
-    f32 unk1244;
+    f32 rightAxisValue;
     char pad1248[0x7C];
     union {
         struct {
@@ -1623,7 +1623,7 @@ struct ObjRecAt18V3 {
 struct func_8022FD9C_Record;
 struct func_8022FD9C_Record {
     char pad0[0x54];
-    s32 unk54;
+    s32 activeState;
 };
 
 struct WeaponActionRecord;
@@ -1752,7 +1752,7 @@ struct ObjRecAt1D8V1 {
 struct func_8022FD9C_S4;
 struct func_8022FD9C_S4 {
     char pad0[0x58];
-    s32 unk58;
+    s32 modeState;
 };
 
 struct ObjRecAt650;

@@ -806,7 +806,7 @@ void func_80220ED4_de(SharedPlayer *player)
       f32 prior;
       f32 left;
       prior = player->unk1240;
-      right = player->unk1244;
+      right = player->rightAxisValue;
       left = prior - right;
       if (left < 0.0f)
       {

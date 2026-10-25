@@ -103,7 +103,7 @@ struct SharedRecAt13E0 {
     u8 unk123E; /* +0x123E: src/func_802ACBCC.c */
     char pad123F[0x1];
     f32 unk1240; /* +0x1240: src/func_802ACBCC.c */
-    f32 unk1244; /* +0x1244: src/func_802ACBCC.c */
+    f32 rightAxisValue; /* +0x1244: src/func_802ACBCC.c */
     char pad1248[0x198];
     s32 unk13E0; /* +0x13E0: src/func_802ACBCC.c */
 };
@@ -620,7 +620,7 @@ block_114:
 block_115:
                     arg0->unk1240 = temp_alpha;
 block_116:
-                    arg0->unk1244 = (f32) (temp_alpha / temp_duration);
+                    arg0->rightAxisValue = (f32) (temp_alpha / temp_duration);
                     goto block_after_alpha;
 block_default:
                     temp_a1_11 = arg0->unk5DC;

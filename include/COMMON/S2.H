@@ -1255,7 +1255,7 @@ struct SharedPlayer_func_8020FDB0_de {
     s32 fxStage;
     char pad123C[0x4];
     f32 unk1240;
-    f32 unk1244;
+    f32 rightAxisValue;
     char pad1248[0x7C];
     union {
         struct {

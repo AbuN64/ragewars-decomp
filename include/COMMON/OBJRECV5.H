@@ -1423,7 +1423,7 @@ struct SharedPlayerRecV2 {
     s32 fxStage;
     char pad123C[0x4];
     f32 unk1240;
-    f32 unk1244;
+    f32 rightAxisValue;
     char pad1248[0x7C];
     union {
         struct {
@@ -1660,7 +1660,7 @@ typedef struct PlayerCode80225D10 PlayerCode80225D10;
 struct IntegerStateB4C;
 struct IntegerStateB4C {
     char pad0[0xB48];
-    s32 unk_B48;
+    s32 itemCount2;
 };
 
 struct CPlayerDamageOverTime_t;
@@ -1717,7 +1717,7 @@ typedef struct IntegerState1230 IntegerState1230;
 struct IntegerState948;
 struct IntegerState948 {
     char pad0[0x944];
-    s32 unk_944;
+    s32 itemCount1;
 };
 
 struct ObjectLinks94C;
@@ -3083,7 +3083,7 @@ struct SharedPlayerRecV1 {
     s32 fxStage;
     char pad123C[0x4];
     f32 unk1240;
-    f32 unk1244;
+    f32 rightAxisValue;
     char pad1248[0x7C];
     union {
         struct {
