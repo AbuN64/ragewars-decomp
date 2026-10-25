@@ -113,7 +113,7 @@ void func_80290C24_de(void *arg0) {
     Render_ClearDepthRect(arg0, 0, SCREEN_WD, 0, SCREEN_HT, 0);
     width = 0;
     height = 0;
-    gDPSetScissorFrac(D_80110634++, G_SC_NON_INTERLACE, (int)((float)((0)) * 4.0F), (int)((float)((0)) * 4.0F), (int)((float)((SCREEN_WD - 1)) * 4.0F), (int)((float)((SCREEN_HT - 1)) * 4.0F));
+    gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
     gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, (u32)((frame->colorImage)));
     gDPSetCycleType(D_80110634++, G_CYC_FILL);
     gDPSetCombineLERP(D_80110634++, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE);

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/VIDEO_DIMENSIONS.H"
 #include "COMMON/LONE/D_800E28D4.H"
 #include "RENDER_4/8026AC38.H"
 #include "COMMON/RECRECAT4.H"
@@ -77,9 +78,9 @@ s32 func_80426CE4_de(void *unused0, void *unused1, s32 event) {
             views = 2;
         }
         for (i = 0, k = 0; i < views; i++, k = 2) {
-            gDPSetScissorFrac(D_80110634++, G_SC_NON_INTERLACE, (s32)((f32)((D_800E41C0[k].field_0)) * 4.0f), (s32)((f32)((D_800E41C0[k].field_4)) * 4.0f), (s32)((f32)((D_800E41C0[k].field_8)) * 4.0f), (s32)((f32)((D_800E41C0[k].field_C)) * 4.0f));
+            gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, D_800E41C0[k].field_0, D_800E41C0[k].field_4, D_800E41C0[k].field_8, D_800E41C0[k].field_C);
             func_8041C7F4_de(D_800E4690->panels[i]);
-            gDPSetScissorFrac(D_80110634++, G_SC_NON_INTERLACE, (s32)((f32)((0)) * 4.0f), (s32)((f32)((0)) * 4.0f), (s32)((f32)((D_800E28D0 - 1)) * 4.0f), (s32)((f32)((D_800E28D4 - 1)) * 4.0f));
+            gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
         }
         if (D_801462C8.players != 2 && GetMenuScreenOwner() != 0x19) {
             if (D_800E4690->frames < 20) {

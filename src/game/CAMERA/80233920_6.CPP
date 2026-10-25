@@ -430,8 +430,7 @@ void Camera_SetupViewportAndFog(Racer *view) {
     view->viewports[frame].vtrans[0] = (vx * 0.25f + view->viewportX) * 4.0f;
     view->viewports[frame].vtrans[1] = (vy * 0.25f + view->viewportY) * 4.0f;
     gSPViewport((*gfx)++, &view->viewports[frame]);
-    gDPSetScissorFrac((*gfx)++, G_SC_NON_INTERLACE, (s32)(ulx * 4.0f), (s32)(uly * 4.0f), (s32)(lrx * 4.0f),
-                      (s32)(lry * 4.0f));
+    gDPSetScissor((*gfx)++, G_SC_NON_INTERLACE, ulx, uly, lrx, lry);
     gSPLookAtX((*gfx)++, &view->lights[frame][0]);
     gSPLookAtY((*gfx)++, &view->lights[frame][4]);
     Rsp_SetViewEffect(view->effect);

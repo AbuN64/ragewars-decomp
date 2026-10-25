@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/VIDEO_DIMENSIONS.H"
 #include "COMMON/LONE/D_800E28D4.H"
 #include "RENDER_4/8026AC38.H"
 #include "FRONTEND/8040B45C_32.H"
@@ -308,11 +309,11 @@ s32 Frontend_DrawFourPlayerResults(void *window, void *item, s32 event) {
         D_800D15E4[3] = 255.0f;
         for (i = 0; i < 4; i++) {
             if (D_800E59E0->panels[i].state == 1 || D_800E59E0->panels[i].state == 2) {
-                gDPSetScissorFrac(D_80110634++, 0, (s32)((f32)((D_800E41C0[i].field_0)) * 4.0f), (s32)((f32)((D_800E41C0[i].field_4)) * 4.0f), (s32)((f32)((D_800E41C0[i].field_8)) * 4.0f), (s32)((f32)((D_800E41C0[i].field_C)) * 4.0f));
+                gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, D_800E41C0[i].field_0, D_800E41C0[i].field_4, D_800E41C0[i].field_8, D_800E41C0[i].field_C);
                 func_8041C7F4_de(&D_800E59E0->panels[i]);
             }
         }
-        gDPSetScissorFrac(D_80110634++, 0, 0, 0, (s32)((f32)(D_800E28D0 - 1) * 4.0f), (s32)((f32)(D_800E28D4 - 1) * 4.0f));
+        gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
         for (i = 0; i < 4; i++) {
             if (D_800E59E0->panels[i].state == 1 && Frontend_GetModelRecordCount(D_800E59E0->badges[i]) != 0) {
                 D_800D15E0 = 1;
