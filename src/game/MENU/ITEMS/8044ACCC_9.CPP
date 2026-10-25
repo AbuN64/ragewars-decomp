@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -18,7 +19,7 @@ void func_802727D8_de(void *);                            /* extern */
 void func_80442544_de(void *);                    /* extern */
 
 
-extern s32 D_800E28D0, D_800E28D4;
+extern s32 D_800E28D0;
 
 
 

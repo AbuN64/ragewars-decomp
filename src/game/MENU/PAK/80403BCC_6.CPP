@@ -1,4 +1,5 @@
 #include "MENU/PAK/pak_note_search.H"
+#include "COMMON/LONE/D_80152789.H"
 #include "include_asm.h"
 #include "COMMON/ENTRYRECAT0V3.H"
 #include "MENU/80403BCC.H"
@@ -84,7 +85,6 @@ static inline void func_8040458C_decode(u8 *dst, u8 *src, s32 n) {
    the bytes compare equal or deletes the note through Pak_DeleteNote and retries, returning the
    write result. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 extern u8 *D_800E25C4[], *D_800E25C4[];
 #endif
 

@@ -1,4 +1,5 @@
 #include "COMMON/RECRECAT4.H"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/CONTROL.H"
@@ -47,7 +48,6 @@ extern s32 func_8042B154_de(s32 index);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 extern char *D_800E1DA4[];
 #endif
 

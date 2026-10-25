@@ -1,4 +1,5 @@
 #include "TYPES.H"
+#include "COMMON/LONE/D_800CD764_de.H"
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
@@ -22,7 +23,6 @@ extern void func_80286AA8_de(void *,s32,s32);
 extern int func_8028FE28_de(int *,int,int);
 extern s32 Render_LocatePackSection(s32,s32,s32,s32 *);
 extern s32 D_00285160;
-extern s32 D_800CD764_de;
 extern char D_800F41F0;
 void func_8044B7C0_de(LevelCode8044ACCC *arg0, s32 arg1) {
     s32 *sp20;

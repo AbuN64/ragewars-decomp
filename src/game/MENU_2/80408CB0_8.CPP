@@ -1,11 +1,11 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #ifdef NON_MATCHING
 #include "TYPES.H"
 typedef struct { u8 pad0[0x14]; char **text; } PakRangeTextEu;
 extern u16 D_8014D48C;
-extern u8 D_80152789;
 extern char *D_800E2814_eu[], *D_800E2824_eu[], *D_800E2834[], *D_800E2844_eu[], *D_800E2854_eu[], *D_800E2864[], *D_800E2874[],
     *D_800E2884[], *D_800E2894[], *D_800E28A4_eu[], *D_800E28B4_eu[], *D_800E28C4_eu[];
 extern s32 func_80441FE8_de();

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800CD8D0.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/PROPGEOMETRY.H"
@@ -312,7 +313,6 @@ INCLUDE_ASM("span_1000", func_8024F960_eu);
 extern s32 func_8024E924_de(PlacedProp *);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #endif
-extern s32 D_800CD8D0;
 
 extern void func_8024DD10_de(PlacedProp *, PlacedPropRecord *, s32, char *);
 extern PropGeometry *func_8028CF6C_de(void *, s32);

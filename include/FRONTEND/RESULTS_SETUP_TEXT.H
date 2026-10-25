@@ -1,8 +1,8 @@
 #ifndef FRONTEND_RESULTS_SETUP_TEXT_H
 #define FRONTEND_RESULTS_SETUP_TEXT_H
 #include "COMMON/SHARED_GAMESLOT.H"
+#include "COMMON/LONE/D_80152789.H"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 extern char *D_800E2044_eu[], *D_800E2064_eu[], *D_800E2074_eu[], *D_800E2084[], *D_800E2094_eu[];
 static inline char *resultsUnavailable(Shared_Game *game) { return D_800E2044_eu[game->language]; }
 static inline char *resultsFirstHeading(void) { return D_800E2064_eu[D_80152789]; }

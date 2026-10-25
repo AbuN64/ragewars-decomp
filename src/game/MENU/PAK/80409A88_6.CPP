@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/RECORDRECATCV1.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -13,7 +14,6 @@ extern void func_802658E4_de(char *buffer, const char *format, s32 value);
 extern s32 D_8015375C;
 extern char *D_800D7E14[];
 extern char *D_800E25E4[];
-extern u8 D_80152789;
 extern char D_800ED3FC[];
 extern s32 func_80441FE8_de(struct Field *);
 

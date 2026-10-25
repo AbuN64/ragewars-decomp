@@ -1,4 +1,5 @@
 #include "COMMON/OBJECTSTATE90.H"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -39,7 +40,6 @@ extern u8 D_801462DE;
 
 extern s32 D_800E28D0;
 
-extern s32 D_800E28D4;
 
 void func_802A9234_de(u8 arg0);
 

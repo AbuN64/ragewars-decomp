@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/NAME.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
@@ -26,7 +27,6 @@ int func_802934F8_de(void);
 u8 *func_8043F290(TextBoundsText *);
 f32 Pak_MeasureLine(u8 *, f32, f32);
 void *func_80442A58_de(s8 *);
-extern s32 D_800E28D4;
 extern s32 D_800E28D0;
 extern f32 D_800DE448;
 extern f32 D_800E247C;

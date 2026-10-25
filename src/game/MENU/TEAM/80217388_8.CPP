@@ -1,4 +1,5 @@
 #include "MENU/TEAMMENU.H"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/UNUSED.H"
 #include "MENU/80217388.H"
 #include "gbi.h"
@@ -12,7 +13,6 @@ extern u8 D_801462DE;
 
 extern s32 D_800E28D0;
 
-extern s32 D_800E28D4;
 
 
  /* "Select Team" */

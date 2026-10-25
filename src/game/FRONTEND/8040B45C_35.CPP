@@ -1,4 +1,5 @@
 #include "MENU/GFX/80414430_24.H"
+#include "COMMON/LONE/D_800DEA60.H"
 #include "RESMGR/resmgr_stream_callbacks.H"
 #include "include_asm.h"
 #include "COMMON/NODERECAT2A8.H"
@@ -91,7 +92,6 @@ extern s32 D_800E2AB8;
    to height - 1. */
 
 
-extern s32 D_800DEA60;
 
 extern s32 D_800E2AB4_de;
 

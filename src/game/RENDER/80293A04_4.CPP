@@ -1,4 +1,5 @@
 #include "COMMON/INTEGERSTATEB0.H"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/AIPROFILE.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
@@ -24,7 +25,6 @@ extern Gfx *D_80110634;
 
 extern s32 D_800E28D0;
 
-extern s32 D_800E28D4;
 
 
 extern void func_80293A20_de(s32 arg0, s32 arg1, s32 arg2);

@@ -1,4 +1,5 @@
 #include "COMMON/RECORDRECATCV1.H"
+#include "COMMON/LONE/D_80152789.H"
 #include "MENU/80409A88.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
@@ -37,7 +38,6 @@ extern char *D_800D7E14[];
 
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 #endif
 
 /* Formats the word at offset 0x1C of the structure D_800E28BC points to, shifted down eight bits,

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800CD764_de.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/OBJECTLINKSC_2.H"
 #include "GFX/802A8A94.H"
@@ -12,7 +13,6 @@
 #include "TYPES.H"
 #include "GFX/TEXT/802A8A94_5.H"
 
-extern s32 D_800CD764_de;
 extern Gfx *D_80110634;
 #include "COMMON/DISPLAY.H"
 

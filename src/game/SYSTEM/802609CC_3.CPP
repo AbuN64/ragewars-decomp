@@ -1,4 +1,5 @@
 #include "COMMON/LOCALDECODERANGE.H"
+#include "COMMON/LONE/D_8010AC80.H"
 #include "SYSTEM/802609CC.H"
 #include "SYSTEM/8025E5B0.H"
 #include "COMMON/VECTOR4F.H"
@@ -30,7 +31,6 @@ extern s32 System_ExpandAnimationTracks(void *, void *, s32, s32, s32, s32);
 extern s32 func_8025F0D4_de(void *, void *, s32, s32, s32, s32);
 #endif
 
-extern f32 D_8010AC80;
 
 extern s32 D_8010AC78;
 

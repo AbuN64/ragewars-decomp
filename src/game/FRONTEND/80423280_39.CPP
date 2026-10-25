@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/EXTERNS_9.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/UNUSED.H"
@@ -18,7 +19,6 @@ INCLUDE_ASM("ovl_80400000", func_80427B08_de);
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 extern struct ResultsHeadingCharacter D_800F00DC[];
 extern char D_800EE048[];
 extern char D_800EE050[];

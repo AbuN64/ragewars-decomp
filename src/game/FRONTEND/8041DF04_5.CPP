@@ -1,4 +1,5 @@
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/REQUESTRECAT10.H"
 #include "TYPES.H"
@@ -6,7 +7,6 @@
 
 #if !(defined(VERSION_US))
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 #endif
 
 /* Steps the model of the join request the screen D_800E39C0 edits (index at 0x14) back on event 1
@@ -73,7 +73,6 @@ s32 func_8041E100_de(void *unused0, void *unused1, void *unused2, s32 event) {
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 #endif
 
 /* Steps the model of the join request the screen D_800E39C0 edits (index at 0x14) forward on event 1

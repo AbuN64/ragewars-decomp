@@ -1,4 +1,5 @@
 #include "RESMGR/resmgr_string_memory.H"
+#include "COMMON/LONE/D_80106248.H"
 #include "COMMON/OBJRECAT3CV2.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -13,7 +14,6 @@ s32 func_80253908_de(s32);
 
 s32 func_80255228_de(s32 *);
 
-extern s32 D_80106248;
 
 void StreamBufferRead(StreamBuffer *arg0, void *arg1, s32 arg2)
 {

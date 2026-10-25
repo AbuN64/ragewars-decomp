@@ -1,10 +1,10 @@
 #include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "TYPES.H"
 
 extern s32 D_800E28D0;
-extern s32 D_800E28D4;
 extern void func_80272A10_de(void *, void *, CVector3 *);
 
 

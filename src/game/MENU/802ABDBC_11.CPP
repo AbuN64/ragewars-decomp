@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/CHANNEL.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/WORLD.H"
@@ -167,7 +168,6 @@ block_4:
 
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 #endif
 extern void func_80222BE8_de(void *, s16, s16);
 extern s32 func_8025DE54_de(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
@@ -210,7 +210,6 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 #endif
 extern s32 func_8022AC00_de(void *arg0);
 extern s32 func_8025DE54_de(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
@@ -267,7 +266,6 @@ s32 func_802ACC04_de(void *arg0, void *arg1) {
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 #endif
 extern s32 func_8025DE54_de(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "MENU/OPTIONEDITSTATE.H"
 #include "TYPES.H"
@@ -33,7 +34,6 @@ s32 func_80444D9C_de(LayeredText *item) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 *D_800E22E4_eu[];
 extern u8 *D_800E22F4[];
-extern u8 D_80152789;
 #else
 extern u8 *D_800D3628;
 #endif

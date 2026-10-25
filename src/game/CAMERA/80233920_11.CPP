@@ -1,4 +1,5 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
+#include "COMMON/LONE/D_800CD8D0.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -13,7 +14,6 @@ extern s32 func_80245798_de(void);
 
 extern f32 func_80275DD4_de(s32 arg0, f32 arg1, f32 arg2);
 
-extern s32 D_800CD8D0;
 
 
 

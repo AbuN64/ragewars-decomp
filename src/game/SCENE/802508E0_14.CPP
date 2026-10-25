@@ -1,4 +1,5 @@
 #include "COMMON/MANAGER.H"
+#include "COMMON/LONE/D_801051A0.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
@@ -10,7 +11,6 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
 
-extern char D_801051A0;
 
 extern void func_80254DD0_de(void *arg0, struct IntrusiveList *arg1);
 

@@ -1,4 +1,5 @@
 #include "COMMON/VECTOR4F.H"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/OBJECTLINKS14C.H"
 #include "TYPES.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
@@ -11,7 +12,6 @@
  * func_802301F4_de handles is marked type 1 and the default action for the player's state is started unless
  * the actor is flagged 0x400. Adapted from func_80231BB0_de with the same static fire check. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 extern s32 D_800E0D44[], D_800DCC68[];
 #endif
 

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/TRIPLE.H"
@@ -215,7 +216,6 @@ INCLUDE_ASM("ovl_80400000", Ovlgame_ResetPlayerForRound);
 #endif
 extern char D_800C9278_de[], D_800C92E8_de[], D_800C9358[], D_auto_800CE480[], D_800C93C8_de[];
 extern char D_auto_rodata_unresolved_800CE410_unclaimed_CF230[], D_800C942C_de[], D_800C9458[], D_800C9494_de[];
-extern s32 D_800E28D4;
 extern u32 D_8013B2BC;
 extern void Text_LoadActorModel(void *actor);
 extern void func_8022BB80_de(void *);

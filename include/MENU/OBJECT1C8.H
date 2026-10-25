@@ -1,6 +1,7 @@
 #ifndef MENU_OBJECT1C8_H
 #define MENU_OBJECT1C8_H
 #include "TYPES.H"
+#include "COMMON/LONE/D_8014DE50.H"
 #include "COMMON/ITEMRECAT20V1.H"
 struct Object1C8;
 struct Object1C8 {
@@ -167,5 +168,4 @@ struct ObjectRecAt14 {
 };
 
 
-extern int D_8014DE50;
 #endif

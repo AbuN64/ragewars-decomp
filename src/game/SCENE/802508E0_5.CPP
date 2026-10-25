@@ -1,4 +1,6 @@
 #include "COMMON/MANAGER.H"
+#include "COMMON/LONE/D_80106248.H"
+#include "COMMON/LONE/D_801051A0.H"
 #include "SCENE/802508E0.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/S1.H"
@@ -107,11 +109,9 @@ static inline void release(void) {
 
 
 
-extern char D_801051A0;
 
 extern void func_80254F9C_de(s32, Request_func_802524B0_de *);
 extern s32 func_802551FC_de(void *, void *, Manager *);
-extern s32 D_80106248;
 
 extern void func_80254DD0_de(s32, Node_func_802524B0_de *);
 

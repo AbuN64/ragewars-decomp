@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "TYPES.H"
 #include "COMMON/MENURECAT20V1.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -14,7 +15,6 @@ struct PreviewTextValue { char pad[0x22]; s16 value; };
 extern struct PreviewTextValue *D_800E28BC;
 extern s32 func_80441FE8_de(struct Field *);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 extern char D_800ED400[];
 #define PREVIEW_VALUE_FORMAT D_800ED400
 #else

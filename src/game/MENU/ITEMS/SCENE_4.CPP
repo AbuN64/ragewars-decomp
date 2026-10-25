@@ -4,6 +4,7 @@
    face, lowers the world's minimum height to every triangle vertex, and flags triangles whose group
    bit, callback or neighbours mark them with the default surface mask. */
 #include "TYPES.H"
+#include "COMMON/LONE/D_800CD8D0.H"
 #include "COMMON/PACKED.H"
 #include "COMMON/RESOURCELOCKSTATE.H"
 #include "COMMON/EXTERNS_14.H"
@@ -23,7 +24,6 @@ extern void func_80253D10_de(s32 unused, struct Shape_typemap_165 **arg1, struct
 
 
 
-extern s32 D_800CD8D0;
 
 
 

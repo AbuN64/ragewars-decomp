@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/MENULISTSCREEN.H"
 #include "COMMON/MEASUREDRECAT0V1.H"
 #include "COMMON/MEASURED.H"
@@ -93,7 +94,6 @@ s32 func_802A0C08_de(void *, s32, ...);
                                /* extern */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern s32 D_800E1D54[];
-extern u8 D_80152789;
 #else
 #endif
 

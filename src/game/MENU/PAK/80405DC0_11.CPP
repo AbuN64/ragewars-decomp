@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/MENURECAT24.H"
 #include "MENU/80405DC0.H"
 #include "COMMON/UNUSED.H"
@@ -34,7 +35,6 @@ INCLUDE_ASM("ovl_80400000", func_804082FC_de);
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
-extern u8 D_80152789;
 extern char *D_800E27B4[];
 extern char *D_800E27C4_eu[];
 extern u8 *D_800E2804_eu[];

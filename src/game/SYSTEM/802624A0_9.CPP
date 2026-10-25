@@ -1,4 +1,6 @@
 #include "COMMON/OBJRECAT5F14.H"
+#include "COMMON/LONE/D_800CD764_de.H"
+#include "COMMON/LONE/D_800CD8D0.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/WORLD.H"
@@ -18,9 +20,7 @@
 
 
 
-extern s32 D_800CD764_de;
 
-extern s32 D_800CD8D0;
 
 
 extern s32 func_8028B21C_de(struct Shared_World *, s32);

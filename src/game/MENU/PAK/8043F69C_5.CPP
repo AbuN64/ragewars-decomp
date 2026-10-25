@@ -1,4 +1,5 @@
 #include "COMMON/TEXTLAYERMETRICS.H"
+#include "COMMON/LONE/D_80152789.H"
 #include "MENU/8043F69C.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/WORLD.H"
@@ -22,7 +23,6 @@ extern void **Scene_AllocateResource(s32, s32, s32, char *);
 
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 #endif
 
 /* Returns the length of the first line of a text item's string, taken from func_8043F290 for type 5 items and from the string pointer at 0x14 otherwise, counting until a newline, the end of the string or a null pointer. */

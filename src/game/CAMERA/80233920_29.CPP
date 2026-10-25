@@ -1,4 +1,5 @@
 #include "COMMON/VIEWFLAGS.H"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
@@ -48,7 +49,6 @@ extern func_80237E70_G1 D_800D7028;
 extern func_80237E70_G1 D_800D7034;
 
 extern s32 D_800E28D0;
-extern s32 D_800E28D4;
 
 extern void func_80239CE0_de(void *arg0);
 

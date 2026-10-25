@@ -1,4 +1,8 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800CD8D0.H"
+#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/D_8014DE50.H"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
@@ -7,7 +11,6 @@
 #include "COMMON/MENU_TEXT.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"
 
-extern u8 D_80152789;
 extern void func_8043F52C_de(LayeredText *, TextLayerMetrics *);
 extern void func_804402DC_de(LayeredText *, MenuOptionBox *, MenuOptionBox *, int);
 extern void func_8043FE3C_de(LayeredText *, MenuOptionBox *, MenuOptionBox *, int, void *, int);
@@ -119,7 +122,7 @@ typedef struct PakModelContext {
     MenuModelScreen *screen;
 } PakModelContext;
 extern Gfx *D_80110634;
-extern s32 D_800D297C, D_800E28D0, D_800E28D4, D_800E1E20, D_800CD730, D_800CD8D0, D_8014DE50;
+extern s32 D_800D297C, D_800E28D0, D_800E1E20, D_800CD730;
 extern f32 literals_func_8028D244_de;
 extern s32 D_800CE430[];
 extern u8 D_00443128[], D_00443104[];

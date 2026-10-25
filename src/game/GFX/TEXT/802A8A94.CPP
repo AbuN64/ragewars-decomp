@@ -1,4 +1,5 @@
 #include "COMMON/OBJECTLINKSC_2.H"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "GFX/802A8A94.H"
 #include "TYPES.H"
 #include "abi.h"
@@ -11,7 +12,6 @@
 
 extern s32 D_800E28D0;
 
-extern s32 D_800E28D4;
 
 static inline void rectangle(s32 x0,s32 y0,s32 x1,s32 y1,s32 r,s32 g,s32 b,s32 a) {
     gDPPipeSync(D_80110634++);

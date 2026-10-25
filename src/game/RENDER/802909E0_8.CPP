@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/GAME_SESSION.H"
 #include "RENDER_4/8026AC38.H"
 #include "COMMON/GFX.H"
@@ -46,7 +47,6 @@ extern s32 D_auto_800D303C;
 extern s32 D_auto_800D7068;
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 extern f32 D_auto_800C5678[2];
 #endif
 extern s32 func_8028B21C_de(void *, s32);

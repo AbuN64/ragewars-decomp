@@ -1,4 +1,5 @@
 #include "TYPES.H"
+#include "COMMON/LONE/D_800CD8D0.H"
 #include "COMMON/GFX.H"
 #include "COMMON/STATERECAT10.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
@@ -18,7 +19,6 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
 
-extern s32 D_800CD8D0;
 extern ViewFlags D_80103220;
 extern u32 func_802337D0_de(StateRecAt10 *);
 extern void func_80234FEC_de(GameplayCamera *camera);

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/CHEATCODE.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -29,7 +30,6 @@ extern f32 D_800D2988;
 extern f32 D_800E2280[];
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 #endif
 
 /* Shifts the input history, appends the current byte, and advances the history counters. */

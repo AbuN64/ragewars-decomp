@@ -1,10 +1,10 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 
 #if defined(VERSION_EU_X)
 #ifdef NON_MATCHING
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-extern u8 D_80152789;
 extern char *D_auto_800DDB08[];
 extern void MarkMenuEventHandled(void *);
 extern void *func_8040EC30_de(void *, s32);

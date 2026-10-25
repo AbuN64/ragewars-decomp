@@ -1,4 +1,5 @@
 #include "COMMON/MANAGER.H"
+#include "COMMON/LONE/D_801051A0.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RESOURCELOCKSTATE.H"
@@ -17,7 +18,6 @@ extern void func_80255B2C_de(void *arg0, s32 arg1);
 
 extern void func_80254AD0_de(s32 arg0, s32 arg1);
 
-extern char D_801051A0;
 
 
 extern s32 D_80100570;

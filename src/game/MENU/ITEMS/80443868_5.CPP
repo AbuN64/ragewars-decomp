@@ -1,4 +1,5 @@
 #include "COMMON/UNUSED.H"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
@@ -7,7 +8,6 @@
 #include "SYSTEM_3/80265370.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 extern char D_800EED80[];
 
 #else

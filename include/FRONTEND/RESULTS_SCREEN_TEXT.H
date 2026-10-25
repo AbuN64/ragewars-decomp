@@ -1,10 +1,10 @@
 #ifndef FRONTEND_RESULTS_SCREEN_TEXT_H
 #define FRONTEND_RESULTS_SCREEN_TEXT_H
 #include "TYPES.H"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/EFFECTRENDER.H"
 /* PAL resources provide a string per selected language. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 extern const char D_800EE170[], D_800EE174[];
 static inline const char *resultsNumberFormat(void) { return D_800EE170; }
 static inline const char *resultsPercentFormat(void) { return D_800EE174; }

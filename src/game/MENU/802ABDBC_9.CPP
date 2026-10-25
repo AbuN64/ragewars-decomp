@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
@@ -760,7 +761,6 @@ INCLUDE_ASM("span_1000", func_802AC66C_de);
 /* Pickup effect handler: applies the pickup's effect id (0x708..0x70F) to the player (two float settings, an accumulated float
    or a sound/effect spawn through func_802A6FB8_de) then shows the pickup text in the current language, plays its sound and
    raises its event. Returns one. */
-extern u8 D_80152789;
 extern f32 rodata_func_802ACB58_eu_800C6578, D_auto_800C657C;
 extern char D_002AD44C_eu[], D_002AD4FC_eu[];
 extern void func_802A6FB8_de();
@@ -794,7 +794,6 @@ INCLUDE_ASM("span_1000", func_802ACB98_eu_x);
 /* Pickup effect handler: applies the pickup's effect id (0x708..0x70F) to the player (two float settings, an accumulated float
    or a sound/effect spawn through func_802A6FB8_de) then shows the pickup text in the current language, plays its sound and
    raises its event. Returns one. */
-extern u8 D_80152789;
 extern f32 rodata_func_802ACB58_eu_800C6578, D_auto_800C657C;
 extern char D_002AD44C_eu[], D_002AD4FC_eu[];
 extern void func_802A6FB8_de();

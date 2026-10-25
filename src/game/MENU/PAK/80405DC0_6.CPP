@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/WORLD.H"
 
@@ -68,7 +69,6 @@ INCLUDE_ASM("ovl_80400000", func_80405F48_de);
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 extern char *D_800E25D4[];
 extern char *D_800E25C4[];
 extern char *D_800E25A4[];

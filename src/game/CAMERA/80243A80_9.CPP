@@ -1,4 +1,5 @@
 #include "COMMON/GROUP.H"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
@@ -39,7 +40,6 @@ extern f32 func_8040184C_de(f32 arg0);
 
 extern s32 D_800E28D0;
 
-extern int D_800E28D4;
 
 extern void func_802A025C_de(void *arg0, int arg1);
 

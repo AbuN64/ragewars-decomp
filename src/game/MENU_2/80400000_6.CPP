@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "TYPES.H"
 #include "COMMON/GFX.H"
 #include "gbi.h"
@@ -8,7 +9,6 @@
 void func_8026D8F8_de(void);
 extern Gfx *D_80110634;
 extern s32 D_800E28D0;
-extern s32 D_800E28D4;
 
 void func_80401D74_de(s32 inset) {
     f32 left;

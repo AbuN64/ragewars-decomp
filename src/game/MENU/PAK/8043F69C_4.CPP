@@ -1,4 +1,6 @@
 #include "COMMON/TEXTLAYERMETRICS.H"
+#include "COMMON/LONE/D_80152789.H"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "MENU/8043F69C.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJECTLINKSC_2.H"
@@ -25,12 +27,10 @@ int func_802934F8_de(void);
 void Pak_DrawMenuPanel(u8 *self, void *entry, s32 relative);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 #endif
 
 extern s32 D_800E28D0;
 
-extern s32 D_800E28D4;
 
                           /* unable to generate initializer: unknown type */
 extern s32 D_800E1E20;

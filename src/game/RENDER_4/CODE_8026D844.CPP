@@ -1,4 +1,5 @@
 #include "COMMON/MODEL_RENDER.H"
+#include "COMMON/LONE/D_800CC384.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/UNUSED.H"
 #include "RENDER_4/8026AC38.H"
@@ -26,7 +27,6 @@ extern s32 D_800CC380;
 
 extern s32 D_80110620;
 
-extern s32 D_800CC384;
 
 extern int D_800CC364;
 

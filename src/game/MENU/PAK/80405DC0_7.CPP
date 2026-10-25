@@ -1,4 +1,5 @@
 #include "COMMON/PAK_MENU.H"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RECORDRECAT1C.H"
 #include "COMMON/MENURECAT24.H"
@@ -80,7 +81,6 @@ void func_804066BC_de(Shared_PakMenu *menu) {
 
 extern char *D_800E25A4[];
 extern char *D_800E25B4[];
-extern u8 D_80152789;
 
 
 #else

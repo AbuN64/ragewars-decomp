@@ -1,6 +1,8 @@
 #ifndef COMMON_WIDGETRECAT1A_H
 #define COMMON_WIDGETRECAT1A_H
 #include "TYPES.H"
+#include "COMMON/LONE/D_8014D56C.H"
+#include "COMMON/LONE/D_8014D568.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -255,8 +257,6 @@ struct BatchRec {
     s32 count;
 };
 
-extern s32 D_8014D568;
-extern s32 D_8014D56C;
 char *func_80411D78_de(s32);
 s32 D_0040F570(char *, char *);
 #endif

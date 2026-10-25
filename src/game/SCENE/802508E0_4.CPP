@@ -1,4 +1,5 @@
 #include "COMMON/EXTERNS_18.H"
+#include "COMMON/LONE/D_80106248.H"
 #include "COMMON/MANAGER.H"
 #include "SCENE/802508E0.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
@@ -16,7 +17,6 @@ extern u32 D_80101190;
 extern ResourceHashEntry *D_80101194;
 extern struct CartridgeReadWorker D_801011B8;
 extern s32 D_80105180;
-extern s32 D_80106248;
 extern void func_80255FB8_de(void *, s32);
 extern void *func_80254ED0_de(s32, s32);
 extern void *func_802514A8_de(s32, s32);

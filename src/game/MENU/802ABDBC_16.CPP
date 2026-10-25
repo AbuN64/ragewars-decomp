@@ -1,4 +1,5 @@
 #include "COMMON/ENTRYRECATE.H"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
@@ -11,7 +12,6 @@
 #include "COMMON/CHANNEL.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 #endif
 
 extern void func_80222BE8_de(void *, s16, s16);

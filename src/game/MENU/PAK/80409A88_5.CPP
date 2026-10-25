@@ -1,4 +1,5 @@
 #include "COMMON/RECORDRECATCV1.H"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "MENU/80409A88.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -301,7 +302,6 @@ extern s32 D_8015375C;
 extern char *D_800D3728[];
 extern char *D_800D372C[];
 extern char *D_800E27E4[];
-extern u8 D_80152789;
 extern s32 D_800E28C8;
 extern char D_800ED3FC[];
 extern s32 func_80441FE8_de(struct Field *);

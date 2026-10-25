@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "RENDER_4/8026AC38.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
@@ -50,7 +51,7 @@ s32 func_8041DBCC_de(void) {
 extern s32 func_804399D0(void *);
 extern s32 func_80439CC8_de(void *, Gfx **, Gfx *);
 extern f32 D_800DD528_de;
-extern s32 D_800E28D0, D_800E28D4;
+extern s32 D_800E28D0;
 extern Gfx *D_80110634;
 s32 func_8041DCC0_de(void *unused0, void *unused1, s32 event) {
     Gfx *gfx;

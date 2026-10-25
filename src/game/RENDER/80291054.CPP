@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/OBJRECAT26DD8.H"
@@ -10,7 +11,6 @@
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern s32 func_8022A414_de(void *);
-extern u8 D_80152789;
 
 void func_80291074_de(void *object) {
     f32 time;

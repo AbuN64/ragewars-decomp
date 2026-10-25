@@ -1,9 +1,9 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80106248.H"
 
 #if defined(VERSION_EU)
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-extern s32 D_80106248;
 extern u8 D_0043C500[];
 extern char D_800C6080_eu_x[];
 extern s32 D_800CBC14;

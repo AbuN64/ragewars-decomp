@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "SYSTEM_2/8025E280.H"
 
 #if defined(VERSION_EU)
@@ -185,7 +186,6 @@ extern char *D_800D2134[];
 extern char *D_800E1C14[];
 extern char *D_800E1C34[];
 extern char *D_800E1C44[];
-extern u8 D_80152789;
 extern char *D_800D2138[];
 extern char *D_800D213C[];
 extern s32 D_80146894;

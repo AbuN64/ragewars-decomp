@@ -1,4 +1,5 @@
 #include "COMMON/RECORDRECATCV1.H"
+#include "COMMON/LONE/D_80152789.H"
 #include "MENU/PAK_LOAD.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -15,7 +16,6 @@ extern s32 D_80153788;
    PAL items select their text using the current language. */
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 extern u16 D_8015D48C;
 extern char D_800ED414[];
 #else

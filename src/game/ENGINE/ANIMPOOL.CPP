@@ -1,4 +1,6 @@
 #include "COMMON/WORLD.H"
+#include "COMMON/LONE/D_800CD764_de.H"
+#include "COMMON/LONE/D_800CD8D0.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJRECAT5F14.H"
 #include "COMMON/VERSION_CALLS.H"
@@ -10,8 +12,6 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
 #include "RENDER_4/8028FD2C_6.H"
-extern s32 D_800CD764_de;
-extern s32 D_800CD8D0;
 extern s32 func_8028FE28_de(s32, s32, s32);
 extern s32 Render_LocatePackSection(void *, s32, s32, s32 *);
 extern s32 func_8028CF6C_de(void *, s32);

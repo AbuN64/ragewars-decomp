@@ -1,4 +1,6 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800CD8D0.H"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
@@ -44,9 +46,7 @@ extern void *D_80145060;
 extern s32 D_80141008;
 extern s32 D_800D297C;
 extern f32 D_800D2988;
-extern s32 D_800CD8D0; 
 extern s32 D_800E28D0;
-extern s32 D_800E28D4;                          /* unable to generate initializer: unknown type */
 typedef struct Shared_func_80234FDC_S1 func_80234FDC_S1;
 typedef struct GameplayCamera func_80234FDC_S2;
 typedef struct Shared_func_80234FDC_S3 SharedRecV11;
@@ -354,7 +354,7 @@ actor_found:
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "gbi.h"
 extern Gfx D_800CBCC0[], D_800CBCF0_de[];
-extern s32 D_800D297C, D_800E28D0, D_800E28D4;
+extern s32 D_800D297C, D_800E28D0;
 extern Gfx *D_80110634;
 #include "COMMON/DISPLAY.H"
 extern Shared_func_80234FDC_S4 D_80140FF8;

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/LEVEL_GOAL.H"
 
 #if defined(VERSION_EU)
@@ -11,7 +12,6 @@ extern u8 D_801462C8_raw[], D_80146398[];
 extern u8 *D_800E4680;
 extern s32 D_8015402C;
 extern s8 D_80102B0D[], D_800FEB0E[];
-extern u8 D_80152789;
 extern char *D_auto_800E2054[], *D_auto_800E20B4[], *D_auto_800E20A4[], *D_800E2044_eu[], *D_800E2074_eu[], *D_800E2094_eu[], *D_800E2084[], *D_auto_800E2034[];
 extern u8 D_800FEB0F[], D_800FEB17[], D_800FEB4A[], D_800FEB54[], D_80102C24[], D_8010EB7D[], D_80142358[];
 extern s32 D_8010EB94[], D_80146894;

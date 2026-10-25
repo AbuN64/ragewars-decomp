@@ -2,6 +2,7 @@
 #define COMMON_RESULTS_TEXT_H
 /* Results-screen texts: one per language in PAL builds, chosen by the game settings. */
 #include "TYPES.H"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENU_TEXT.H"
 /* The game settings record. */
@@ -11,7 +12,6 @@ static inline Shared_Game *currentGame(void) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 /* PAL builds keep one text per language, chosen by the game settings. */
 #define RESULTS_LANGUAGE (currentGame()->language)
-extern u8 D_80152789;
 extern ResultsHeadingCharacter D_800F00DC[];
 extern char D_800C5594[];
 extern char *D_800E1664_eu[], *D_800E1724[], *D_800E1734_eu[], *D_800E1744[], *D_800E1754[], *D_800E1784[],

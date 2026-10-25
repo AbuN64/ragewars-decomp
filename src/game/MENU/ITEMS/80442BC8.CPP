@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "MENU/OBJECT1C8.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "gbi.h"
@@ -37,7 +38,6 @@ static inline void remove_item(struct List_func_80442A60_de *list, struct ItemRe
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 #endif
 
 /* Hands Pak_MeasureLine a target and the scale twice: the target is what func_8043F290 returns for

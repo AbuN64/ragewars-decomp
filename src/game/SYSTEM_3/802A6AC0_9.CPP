@@ -1,4 +1,5 @@
 #include "COMMON/OBJRECAT18V6.H"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/OBJECTLINKSC_2.H"
 #include "TYPES.H"
 #include "GFX/TEXT/802A8A94_5.H"
@@ -18,7 +19,6 @@ extern void func_802A9234_de(s32 color);
 
 
 extern s32 D_800E28D0;
-extern s32 D_800E28D4;
 extern u8 D_801462DE;
 
 extern s32 func_80245798_de(void);

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/TRIPLE.H"
 #include "WEAPONS/80213ED4.H"
@@ -147,10 +148,8 @@ extern void *D_800D052C[];
 typedef struct AlternateModeInfo { u8 pad0[0x14]; u32 flags; } AlternateModeInfo;
 #if defined(VERSION_EU)
 extern s32 D_800E0D44[];
-extern u8 D_80152789;
 #elif defined(VERSION_EU_X)
 extern s32 D_800DCC68[];
-extern u8 D_80152789;
 #endif
 /* The adjacent exact can_fire supplies the same readiness check; this call site
  * owns its distinct message-duration literal and localized European strings. */

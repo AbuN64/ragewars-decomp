@@ -1,4 +1,5 @@
 #include "COMMON/VECTOR4F.H"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJECTLINKS14C.H"
 #include "TYPES.H"
@@ -18,7 +19,6 @@
    helper shared with func_80231BB0_de. */
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 extern s32 D_800E0D44[], D_800DCC68[];
 #endif
 extern WeaponActionRecord D_800CE8DC[];

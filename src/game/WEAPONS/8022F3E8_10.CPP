@@ -1,4 +1,5 @@
 #include "COMMON/AIPROFILE.H"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/GAMEPLAY_ROUND_RULES.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
@@ -166,10 +167,8 @@ extern s32 func_802301F4_de(void *, void *);
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #elif defined(VERSION_EU)
 extern s32 D_800E0D44[];
-extern u8 D_80152789;
 #elif defined(VERSION_EU_X)
 extern s32 D_800DCC68[];
-extern u8 D_80152789;
 #endif
 static inline s32 can_fire(Player *player) {
     s32 ammo;

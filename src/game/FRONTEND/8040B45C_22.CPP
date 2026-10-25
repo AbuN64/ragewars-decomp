@@ -1,4 +1,5 @@
 #include "COMMON/NODERECAT2A8.H"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "TYPES.H"
 #include "stddef.h"
 #include "FRONTEND/8040B45C_21.H"
@@ -11,7 +12,6 @@ extern int D_800E28DC;
 extern int D_800E28E4;
 extern ModeRecAt8 D_800DE8A8[2][5];
 extern int D_800E28D0;
-extern int D_800E28D4;
 extern int func_80265350_de(void);
 void func_8040C09C_de(void)
 {
@@ -147,7 +147,7 @@ struct VideoViewList {
     NodeRecAt2A8 defaultView;
 };
 extern struct VideoViewList D_80140FE8_de;
-extern int D_800E28D0, D_800E28D4;
+extern int D_800E28D0;
 extern void Frontend_SetVideoViewport(unsigned, int, int, int, int, int);
 
 void Frontend_SetVideoModeAndViewports(unsigned width, int a1, int a2, int a3, int a4, int a5) {

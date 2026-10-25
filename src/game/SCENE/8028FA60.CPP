@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_8011B1D8.H"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -23,7 +24,6 @@
 
 extern u64 D_8011B1D0;
 
-extern f32 D_8011B1D8;
 
 extern u64 D_8011B1E0;
 

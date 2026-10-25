@@ -1,4 +1,5 @@
 #include "COMMON/VECTOR4F.H"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJECTLINKS14C.H"
 #include "TYPES.H"
@@ -30,10 +31,8 @@ extern s32 func_802301F4_de(void *, void *);
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #elif defined(VERSION_EU)
 extern s32 D_800E0D44[];
-extern u8 D_80152789;
 #elif defined(VERSION_EU_X)
 extern s32 D_800DCC68[];
-extern u8 D_80152789;
 #endif
 static inline s32 can_fire(char *player) {
     s32 ammo;

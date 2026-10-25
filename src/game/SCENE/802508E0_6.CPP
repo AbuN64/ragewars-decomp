@@ -1,4 +1,5 @@
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/LONE/D_801051A0.H"
 #include "include_asm.h"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/MANAGER.H"
@@ -20,7 +21,6 @@
 
 
 extern char D_80101120;
-extern char D_801051A0;
 extern s32 D_80100570;
 extern struct { CachedResource **value; } D_80100564;
 extern CachedResource *D_80100568;

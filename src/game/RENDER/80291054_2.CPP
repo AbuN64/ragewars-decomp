@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/GAME_SESSION.H"
 #include "TYPES.H"
 #include "COMMON/GFX.H"
@@ -249,7 +250,6 @@ extern void *D_801536E8;
 extern UnitVp D_80142C40[];
 extern s32 D_800D297C;
 extern s32 D_800E28D0;
-extern s32 D_800E28D4;
 
 f32 Render_BeginFrameDisplayList(void *world) {
     UnitVp *viewport;

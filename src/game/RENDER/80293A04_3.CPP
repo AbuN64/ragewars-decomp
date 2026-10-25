@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "COMMON/INTEGERSTATEB0.H"
@@ -6,7 +7,6 @@
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern void *D_800E0B34[];
-extern u8 D_80152789;
 /* The EU builds pick the text for the current menu language. */
 #define LINES_TEXT D_800E0B34[D_80152789]
 #else

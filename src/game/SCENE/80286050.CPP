@@ -1,4 +1,5 @@
 #include "COMMON/FLOOR_RESOURCE.H"
+#include "COMMON/LONE/D_800CD764_de.H"
 #include "include_asm.h"
 #include "COMMON/SCENERECAT10C0.H"
 #include "COMMON/EXTERNS_9.H"
@@ -287,7 +288,6 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
 #include "stddef.h"
 f32 func_80275DD4_de(Node75 *node, f32 x, f32 z);
 f32 func_8027525C_de(Node75 *node, f32 x, f32 z);
-extern s32 D_800CD764_de;
 
 /* The floor polygon under pos: a volume polygon (flag 0x40) that holds pos, else the one nearest in height. */
 /* Finds the containing solid volume, or the nearest floor polygon, as a legacy 32-bit handle. */

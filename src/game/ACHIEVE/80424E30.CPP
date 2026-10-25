@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/PLAYERPROFILES.H"
 
@@ -74,7 +75,6 @@ extern s32 func_80265650_de(s32 bits, s32 index);
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 extern char *D_800D3200[];
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 extern char *D_800E1254[];
 extern char *D_800E1264[];
 extern char *D_800E1274[];

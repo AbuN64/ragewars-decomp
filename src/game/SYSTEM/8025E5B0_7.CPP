@@ -1,4 +1,5 @@
 #include "COMMON/STREAM.H"
+#include "COMMON/LONE/D_8010AC80.H"
 #include "SYSTEM/8025E5B0.H"
 #include "TYPES.H"
 #include "SYSTEM/8025E5B0_9.H"
@@ -40,7 +41,7 @@ extern const f32 D_800C411C_de, D_800C4120_de, D_800C4124_de;
 
 extern const f32 D_800C4128_de, D_800C412C_de;
 
-extern f32 D_8010AC70, D_8010AC7C, D_8010AC80;
+extern f32 D_8010AC70, D_8010AC7C;
 
 #include "COMMON/STREAM.H"
 extern s32 D_8010AC74, D_8010AC78;

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/ACTORRECAT260.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "COMMON/UNUSED.H"
@@ -25,7 +26,6 @@ s32 func_80443998_de(LayeredText *field, struct MenuRules *holder) {
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 extern char D_800EED80[];
 
 #else

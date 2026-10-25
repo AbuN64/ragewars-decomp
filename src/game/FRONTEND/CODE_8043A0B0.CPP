@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "RENDER_4/8026AC38.H"
 #include "FRONTEND/8040B45C_32.H"
 #include "RENDER_2/8025DE50_5.H"
@@ -293,7 +294,6 @@ extern void func_804397F0_auto(char *);
 extern void func_804399D0(char *);
 #endif
 extern struct Shape_typemap_6 D_800E41C0[];
-extern s32 D_800E28D4;
 extern struct FourPlayerResultsScreen *D_800E59E0;
 /* Draw callback of the four-player results screen: on draw event 1 in state 3 it resets the fill colour D_800D15E0
    and the colour table D_800D15E4, scissors the display list to each active panel rectangle in D_800E41C0 and draws

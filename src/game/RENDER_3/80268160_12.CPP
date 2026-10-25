@@ -1,4 +1,5 @@
 #include "COMMON/EXTERNS_9.H"
+#include "COMMON/LONE/D_800CC384.H"
 #include "RENDER_4/8026AC38.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "RENDER_3/RANGENODE.H"
@@ -320,7 +321,6 @@ extern s32 D_80110620;
 extern u32 D_800CD730;
 extern s32 D_800CC378;
 extern s32 D_800CC37C;
-extern s32 D_800CC384;
 extern u8 D_800CC3A8;
 extern u8 D_800CC3A9;
 extern u8 D_800CC3AA;

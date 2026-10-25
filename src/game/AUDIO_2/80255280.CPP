@@ -1,4 +1,5 @@
 #include "COMMON/EXTERNS.H"
+#include "COMMON/LONE/D_801051A0.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/ENTRYRECAT18V3.H"
 #include "TYPES.H"
@@ -9,7 +10,6 @@
 
 
 extern s32 D_80101190;
-extern char D_801051A0;
 extern EntryRecAtCV1 *func_80255920_de(void *, s32);
 
 void func_802552E0_de(s32 capacity)

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80106248.H"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -22,7 +23,6 @@ s32 func_802BD170_de(s32);
 
 extern s32 func_802BD170_de(s32);
 extern s32 D_800CD704;
-extern s32 D_80106248;
 extern void func_802BB5F0_de(void *arg0, s32 arg1);
 void __scYield(void *arg0) {
     void *temp_a0;

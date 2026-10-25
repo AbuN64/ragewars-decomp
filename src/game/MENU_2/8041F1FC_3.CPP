@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "RENDER_4/8026AC38.H"
 #include "COMMON/CHARACTERSELECTIONROOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -16,7 +17,6 @@ extern struct Shape_typemap_165 D_800E41C0[];
 
 extern s32 D_800E28D0;
 
-extern s32 D_800E28D4;
 
 extern Gfx *D_80110634;
 

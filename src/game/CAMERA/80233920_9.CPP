@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/CHANNEL.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "abi.h"
@@ -18,8 +19,6 @@ extern Gfx *D_80110634;
 #include "COMMON/DISPLAY.H"
 extern void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool);
 extern s32 D_800E28D0;
-extern s32 D_800E28D4;
-extern s32 D_800E28D4;
 extern s32 D_800D297C;
 extern s32 D_80146894;
 extern f32 D_800D2988;
@@ -159,7 +158,6 @@ extern func_80237E70_G1 D_800D7028;
 extern func_80237E70_G1 D_800D7034;
 
 extern s32 D_800E28D0;
-extern s32 D_800E28D4;
 extern void func_80239CE0_de(void *arg0);
 extern s32 func_80245784_de(void);
 

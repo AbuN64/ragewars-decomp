@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -44,7 +45,6 @@ s32 func_8040B444_de(struct Field *field, Shared_PakMenu *pThis) {
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80152789;
 extern char D_800ED41C[];
 #else
 #endif

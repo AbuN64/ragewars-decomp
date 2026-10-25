@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_8010AC80.H"
 #include "COMMON/STREAM.H"
 #include "SYSTEM/8025E5B0.H"
 #include "COMMON/VECTOR4F.H"
@@ -107,7 +108,6 @@ extern void func_80270AAC_de(CQuatern *out, f32 t, CQuatern *from, CQuatern *to)
 
 extern s32 D_8010AC78;
 
-extern f32 D_8010AC80;
 
 
 extern f32 func_80260B80_de(u32 *stream, s32 bits, f32 base, f32 range);

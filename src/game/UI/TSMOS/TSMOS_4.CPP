@@ -1,11 +1,11 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 
 #if defined(VERSION_EU_X)
 #ifdef NON_MATCHING
 #include "TYPES.H"
 extern char D_80106248[], D_800C6080_eu_x[], D_0043D330_eu_x[];
 extern s32 D_800CBC14, D_800D2C90, D_800D2C98;
-extern u8 D_80152789;
 extern void func_80255228_de(void *), func_80253908_de(s32), func_80414360_de(void), func_802A16F8_de(s32);
 extern void func_80297FA0_de(s32, void *), Frontend_OpenResourceArchive(void *), func_8041B5E0_de(void), func_8041989C_de(void);
 extern void func_8041A400_de(void), func_8041B0E0_de(void), func_80419E24_de(void), func_8041A550_de(void);

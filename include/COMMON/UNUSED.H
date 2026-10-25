@@ -1,5 +1,8 @@
 #ifndef COMMON_UNUSED_H
 #define COMMON_UNUSED_H
+#include "COMMON/LONE/D_8011B1D8.H"
+#include "COMMON/LONE/D_800DEA60.H"
+#include "COMMON/LONE/D_800D5250.H"
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "TYPES.H"
@@ -201,7 +204,6 @@ extern char D_800DD4C8[];
 
 extern s32 D_800E1DF8_de;
 
-extern f32 D_8011B1D8;
 
 extern char D_800D3918[];
 
@@ -1631,7 +1633,6 @@ extern s32 D_80101134[];
 
 extern s32 D_800CBC1C;
 
-extern s32 D_800DEA60;
 
 extern ResourceCacheEntry *D_80104574;
 
@@ -1753,7 +1754,6 @@ extern s32 D_800E0650[];
 
 extern char D_0044F798[];
 
-extern s32 D_800D5250;
 
 extern s32 D_800CBC80;
 

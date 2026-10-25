@@ -1,4 +1,5 @@
 #include "COMMON/NODERECAT2A8.H"
+#include "COMMON/LONE/D_800DEA60.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/INTEGERSTATE530.H"
@@ -28,7 +29,6 @@ extern s32 func_8040F488_de(struct Shape_typemap_165 *rect, struct Shape_typemap
 
 /* Resets the state and copies the two configured values after initialization. */
 
-extern int D_800DEA60;
 
 extern int D_800E2AB4_de;
 

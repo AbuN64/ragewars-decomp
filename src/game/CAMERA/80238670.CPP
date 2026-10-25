@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "TYPES.H"
 #include "COMMON/GFX.H"
 #include "gbi.h"
@@ -6,7 +7,7 @@
 #include "GFX/TEXT/802A8A94_5.H"
 typedef struct ClipView FlareActor;
 #include "COMMON/LENS_FLARE.H"
-extern s32 D_800E28D0, D_800E28D4;
+extern s32 D_800E28D0;
 extern Gfx *D_80110634;
 extern f32 func_802B72B0_de(f32);
 void func_80238670_de(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 special, s32 unused) {

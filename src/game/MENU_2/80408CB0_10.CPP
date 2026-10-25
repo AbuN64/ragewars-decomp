@@ -1,11 +1,11 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #ifdef NON_MATCHING
 #include "TYPES.H"
 typedef struct { u8 pad0[0x14]; char **text; } PakTextEu;
 extern s32 D_80153774;
-extern u8 D_80152789;
 extern s32 func_80441FE8_de(void *);
 extern char D_800E2984_eu[], D_8014B49B[], D_800D2478[], D_8014B494[];
 /* Select the status text and right-align its nonblank characters (the us body with eu addresses; the eu symbol of the

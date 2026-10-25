@@ -1,4 +1,6 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800CD8D0.H"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/LABEL.H"
 #include "TYPES.H"
@@ -180,8 +182,7 @@ void func_8041C7F4_de(Obj8041CAD8 *self) {
 
 #include "COMMON/WORLD.H"
 #include "RESMGR/802A0888.H"
-extern s32 D_800D297C, D_800E28D0, D_800E28D4;
-extern s32 D_800CD8D0;
+extern s32 D_800D297C, D_800E28D0;
 extern void *func_8028CFA0_de(void *, s32, s32, void *);
 extern void func_802466A0_de(void *, s32, s32, s32, void *, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
 extern void func_8024B2D0_de();

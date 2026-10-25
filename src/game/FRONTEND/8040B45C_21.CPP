@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/NODERECAT2A8.H"
@@ -14,7 +15,7 @@ s32 func_80265350_de(); /* extern */
 void Frontend_SetVideoModeAndViewports(s32, s32, s32, s32, s32, s32); /* extern */
 extern s32 D_80000300;
 extern s32 D_800CC374;
-extern s32 D_800E28D0,D_800E28D4;
+extern s32 D_800E28D0;
 extern s32 D_800E28D8;
 extern struct ShapeRecAt18V2 D_800DE8A8[];
 extern struct ShapeRecAt18V2 D_800DE934[];

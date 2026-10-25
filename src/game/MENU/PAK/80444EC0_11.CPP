@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80152789.H"
 #include "MENU/OPTIONEDITSTATE.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "COMMON/UNUSED.H"
@@ -15,7 +16,6 @@ INCLUDE_ASM("ovl_80400000", func_804451D0_de);
 #if defined(VERSION_DE) || defined(VERSION_US_REV1) || ((defined(VERSION_EU) || defined(VERSION_EU_X)) && defined(NON_MATCHING))
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
-extern u8 D_80152789;
 extern char D_800EEE10[], D_800EEE18[];
 #define VOLUME_BYTE D_801462C8.volume[0]
 #else
