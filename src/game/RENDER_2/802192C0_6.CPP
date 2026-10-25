@@ -31,7 +31,7 @@ extern void func_8021C698_de(void *arg0, void *arg1);
 
 #include "COMMON/GAME_SESSION.H"
 
-extern void func_80291BE8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3,
+extern void Render_ClearDepthRect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);
 
 void func_8021C9D8_de(void *player, void *camera) {
@@ -104,7 +104,7 @@ void func_8021CBD0_de(void *arg0, WeaponMenuView *camera) {
         right = entry->scopeBounds[2] * x + rect[2];
         top = entry->scopeBounds[1] * y + rect[3];
         bottom = entry->scopeBounds[3] * y + rect[3];
-        func_80291BE8_de(&D_8011FAC0, (s32)left, (s32)right, (s32)top,
+        Render_ClearDepthRect(&D_8011FAC0, (s32)left, (s32)right, (s32)top,
                       (s32)bottom, camera->clipMode);
 
         gSPGeometryMode(D_80110634++, 0, G_FOG);

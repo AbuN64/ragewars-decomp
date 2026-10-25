@@ -120,7 +120,7 @@ extern char D_800CBC90;
 
 
 
-extern void func_80291BE8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3,
+extern void Render_ClearDepthRect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);
 extern void func_80272CB0_de(void *arg0, f32 arg1, f32 arg2, f32 arg3);
 extern void func_80273448_de(char *object, f32 x, f32 y, f32 z);
@@ -152,7 +152,7 @@ void func_80219490_de(char *object, char *camera) {
         return;
     }
 
-    func_8026D914_de(0xC0);
+    Render_SetColorDither(0xC0);
     func_8026E378_de(1, 0x20);
 
     command = D_80110634++;
@@ -165,7 +165,7 @@ void func_80219490_de(char *object, char *camera) {
     y = ((GameplayCamera *)(camera))->unk2A8;
     z = ((GameplayCamera *)(camera))->unk2A0 + y;
     w = ((GameplayCamera *)(camera))->unk29C + x;
-    func_80291BE8_de(&D_8011FAC0, (s32)x, (s32)w, (s32)y, (s32)z, 0);
+    Render_ClearDepthRect(&D_8011FAC0, (s32)x, (s32)w, (s32)y, (s32)z, 0);
 
     func_80272CB0_de(first, ((AnimationSprite *)(object))->scaleX,
                    ((AnimationSprite *)(object))->scaleY, ((AnimationSprite *)(object))->scaleZ);
@@ -191,7 +191,7 @@ void func_80219490_de(char *object, char *camera) {
                        (s32)&D_800CBC90, 0, -1);
     }
     func_8026D9D0_de();
-    func_8026D914_de(0);
+    Render_SetColorDither(0);
     func_8026E378_de(0, 0x20);
 }
 

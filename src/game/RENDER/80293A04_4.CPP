@@ -43,7 +43,7 @@ extern void func_80298368_de(s32 arg0);
 
 void func_802941B8_de(void) {
     D_80141128 = 0;
-    func_80296004_de(0U);
+    System_SetTextureEffect(0U);
 }
 
 void func_802941DC_de(struct GameSession *session) {

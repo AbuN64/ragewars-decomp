@@ -149,7 +149,7 @@ Element *func_80298170_de(s32 id) {
     s32 context;
     s32 i;
 
-    context = (s32)func_80411DCC_de(func_80299958_de());
+    context = (s32)func_80411DCC_de(GetMenuScreenOwner());
     for (i = 0; i < D_8014D080->cacheCount; i++) {
         if (D_8014D080->cache[i].context == context && D_8014D080->cache[i].id == id
             && D_8014D080->cache[i].object != 0 && D_8014D080->cache[i].object->id == id) {

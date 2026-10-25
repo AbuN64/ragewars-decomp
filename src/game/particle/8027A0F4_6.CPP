@@ -51,7 +51,7 @@ s32 func_80243A90_de(Shared_ParticleInstance *, CVector3, void *);
 void Particle_BuildMatrix(Shared_Particle *, void *, void *, f32);
 void *func_802799C0_de(void *, s32);
 void func_80268CE0_de(s32);
-void func_8026925C_de(s32);
+void Render_SetModePreset(s32);
 void func_80253754_de(s32, void *);
 s32 func_802744D4_de(void);
 
@@ -272,16 +272,16 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
             break;
     }
     if (textured) {
-        func_8026925C_de(0xF);
+        Render_SetModePreset(0xF);
         {
             gSPTextureL(D_80110634++, shiftS, shiftT, 0, 0xFF, 0, G_ON);
         }
     } else if ((desc->flags & 0x400) && desc->fade->unkE != 4) {
-        func_8026925C_de(0xF);
+        Render_SetModePreset(0xF);
     } else if (desc->flags & 0x4000) {
-        func_8026925C_de(!(D_801462C8 & 0x200) ? 0xD : 0x11);
+        Render_SetModePreset(!(D_801462C8 & 0x200) ? 0xD : 0x11);
     } else {
-        func_8026925C_de((D_801462C8 & 0x200) ? 0x12 : 0x13);
+        Render_SetModePreset((D_801462C8 & 0x200) ? 0x12 : 0x13);
     }
 
     alpha = 0xFF;

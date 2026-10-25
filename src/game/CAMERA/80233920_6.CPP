@@ -359,17 +359,17 @@ extern Gfx *D_80110634;
 #include "COMMON/DISPLAY.H"
 extern Shared_func_80234FDC_S4 D_80140FF8;
 #include "COMMON/GAME_SESSION.H"
-extern void func_8026E330_de(s32);
-extern void func_80296004_de(s32);
-extern void func_8026D88C_de(void);
-extern void func_80295FF4_de(void);
-extern s32 func_802A23B4_de(void), func_80299958_de(void);
-extern s32 func_8026925C_de(s32);
-extern void func_80291BE8_de(void *, s32, s32, s32, s32, s32);
+extern void Rsp_SetViewEffect(s32);
+extern void System_SetTextureEffect(s32);
+extern void Render_SelectEffectModes(void);
+extern void System_ResetTextureCache(void);
+extern s32 func_802A23B4_de(void), GetMenuScreenOwner(void);
+extern s32 Render_SetModePreset(s32);
+extern void Render_ClearDepthRect(void *, s32, s32, s32, s32, s32);
 extern s32 func_80245798_de(void);
 extern u32 func_80245AF8_de(void);
-extern void func_8026D914_de(s32);
-extern void func_802659E0_de(void *);
+extern void Render_SetColorDither(s32);
+extern void System_SetupPointLights(void *);
 /* Splits a 0x00BBGGRR fade color into its three fog/fill channels. */
 static inline void Camera_UnpackColor(u32 color, u8 *red, u8 *green, u8 *blue) {
     *blue = color >> 16;
@@ -434,21 +434,21 @@ void Camera_SetupViewportAndFog(Racer *view) {
                       (s32)(lry * 4.0f));
     gSPLookAtX((*gfx)++, &view->lights[frame][0]);
     gSPLookAtY((*gfx)++, &view->lights[frame][4]);
-    func_8026E330_de(view->effect);
+    Rsp_SetViewEffect(view->effect);
     if (view != &D_80140FF8.view) {
-        func_80296004_de(view->effect);
+        System_SetTextureEffect(view->effect);
     }
-    func_8026D88C_de();
-    func_80295FF4_de();
+    Render_SelectEffectModes();
+    System_ResetTextureCache();
     gDPSetTextureFilter(D_80110634++, G_TF_BILERP);
     flag = 0;
     if (func_802A23B4_de() != 0) {
-        flag = func_80299958_de() != 2;
+        flag = GetMenuScreenOwner() != 2;
     }
     if (view != &D_80140FF8.view || D_80140FF8.unk0 == 0 || flag != 0) {
-        func_8026925C_de(20);
+        Render_SetModePreset(20);
         gDPPipeSync(D_80110634++);
-        func_80291BE8_de(&D_8011FAC0, ulx, lrx, uly, lry, view->effect);
+        Render_ClearDepthRect(&D_8011FAC0, ulx, lrx, uly, lry, view->effect);
         gDPSetCycleType(D_80110634++, G_CYC_FILL);
         if (D_801462C8.flags & 0x4000) {
             red = 0;
@@ -485,11 +485,11 @@ void Camera_SetupViewportAndFog(Racer *view) {
         }
     }
     gDPPipeSync(D_80110634++);
-    func_8026D914_de(0);
+    Render_SetColorDither(0);
     gDPSetAlphaDither(D_80110634++, G_AD_NOTPATTERN);
     gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
     if (view != &D_80140FF8.view) {
-        func_802659E0_de(view);
+        System_SetupPointLights(view);
     }
     gDPPipeSync(D_80110634++);
 }

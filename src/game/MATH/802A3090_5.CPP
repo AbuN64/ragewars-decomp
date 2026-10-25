@@ -11,7 +11,7 @@
 /** Set D_800D2C90 to one. */
 
 
-s32 func_80299958_de();
+s32 GetMenuScreenOwner();
 
 extern void func_8029AA34_de(s32 *arg0);
 

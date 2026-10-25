@@ -11,7 +11,7 @@
 /** Set D_800D2C90 to one. */
 
 
-s32 func_80299958_de();
+s32 GetMenuScreenOwner();
 
 extern void func_8029AA34_de(s32 *arg0);
 
@@ -22,6 +22,6 @@ void func_802A230C_de(void) {
 
 void func_802A2320_de(void) {
     if (D_800E28D8 == 1) {
-        func_802A2480_de(func_80411DCC_de(func_80299958_de()), 0);
+        func_802A2480_de(func_80411DCC_de(GetMenuScreenOwner()), 0);
     }
 }

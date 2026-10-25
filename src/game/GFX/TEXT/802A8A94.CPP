@@ -36,7 +36,7 @@ extern s32 D_801377B8[2];
 
 extern void func_80268CE0_de(s32 arg0);
 
-extern s32 func_8026925C_de(s32);
+extern s32 Render_SetModePreset(s32);
 
 void func_802A7AA4_de(Mover *m) {
     s32 next;
@@ -253,7 +253,7 @@ void func_802A84F8_de(void) {
         }
 
         func_80268CE0_de(0x1A);
-        func_8026925C_de(0x15);
+        Render_SetModePreset(0x15);
 
         D_80147150 = 0;
         {

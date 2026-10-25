@@ -104,7 +104,7 @@ void func_80298368_de(s32 index) {
     var_s2 = 0;
     var_s5 = 1;
     if (D_8014D080->current >= 0) {
-        func_80299958_de();
+        GetMenuScreenOwner();
     }
     temp_v1 = D_8014D080->current;
     screens = D_8014D080->screens;
@@ -128,7 +128,7 @@ block_search_check:
         goto block_not_found;
     }
     {
-        temp_s4 = func_80299958_de();
+        temp_s4 = GetMenuScreenOwner();
         var_a0_2 = D_8014D080->lowIndex;
         temp_a1 = D_8014D080->current;
         if (temp_a1 >= var_a0_2) {
@@ -241,7 +241,7 @@ block_not_found:
             }
         }
 after_focus10:
-        D_8014D080->focus = func_80299958_de();
+        D_8014D080->focus = GetMenuScreenOwner();
         D_8014D080->current = (s32) (D_8014D080->current + 1);
         temp_v0_6 = func_80411DCC_de(index);
         temp_a0_5 = ((void *)&D_8014D080->screens[D_8014D080->current]);
@@ -349,7 +349,7 @@ after_e03:
         temp_v1_2 = D_8014D080;
     }
     temp_v1_2->lowIndex = temp_v1_2->current;
-    D_8014D080->focus = func_80299958_de();
+    D_8014D080->focus = GetMenuScreenOwner();
     D_8014D080->current = (s32) (D_8014D080->current + 1);
     temp_v0_13 = func_80411DCC_de(index);
     temp_a0_6 = ((void *)&D_8014D080->screens[D_8014D080->current]);
@@ -396,7 +396,7 @@ after_e06_second:
         DispatchCurrentScreenEvent(1, 0xE07, 0, 0, 0);
     }
 after_e07_second:
-    if (func_80299958_de() != index) {
+    if (GetMenuScreenOwner() != index) {
         D_8014D080->cacheCount = 0;
         return;
     }

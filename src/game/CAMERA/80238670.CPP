@@ -97,7 +97,7 @@ typedef struct { s32 unk0; } func_80238D20_G2;
 typedef struct { f32 unk0; } func_80238D20_G3;
 extern f32 D_800C3514_de;
 extern void func_802A9234_de(s32);
-extern s32 func_8026925C_de(s32);
+extern s32 Render_SetModePreset(s32);
 extern void func_80272A10_de(void *, void *, Vector3f *);
 
 typedef struct func_80238D20_S1 func_80238D20_S1;
@@ -139,7 +139,7 @@ void Camera_DrawObjectFlares(func_80238D20_S1 *view) {
 
     mask = 8 << view->unk8;
     func_802A9234_de(0x64);
-    func_8026925C_de(0x1A);
+    Render_SetModePreset(0x1A);
     gDPSetTextureFilter(D_80110634++, G_TF_BILERP);
     node = D_8012D4E4;
     if (node != 0) {

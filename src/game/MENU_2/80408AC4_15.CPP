@@ -158,7 +158,7 @@ void func_8040C700_de(void) {
         ".Lauto_8040C900:\n"
         "jal        func_8040C950_de\n"
         "addu      $a0, $s0, $zero\n"
-        "jal        func_80299958_de\n"
+        "jal        GetMenuScreenOwner\n"
         "nop\n"
         "lh         $a2, 0xC($s1)\n"
         "addu       $a0, $v0, $zero\n"

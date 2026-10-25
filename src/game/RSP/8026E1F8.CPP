@@ -62,7 +62,7 @@ s32 *func_8026E27C_de(void **arg0, s32 variation, s32 *arg2) {
 }
 
 extern int D_80110620;
-void func_8026E330_de(int arg0) {
+void Rsp_SetViewEffect(int arg0) {
     D_80110620 = arg0;
 }
 

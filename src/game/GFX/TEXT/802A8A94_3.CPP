@@ -100,7 +100,7 @@ void func_802A8F28_de(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 sha
 }
 
 /* Emits the render-state display-list prologue for a flat colour pass: pipeline sync, one-cycle
-   mode, the two combiner/mode presets through func_80268CE0_de and func_8026925C_de, the environment
+   mode, the two combiner/mode presets through func_80268CE0_de and Render_SetModePreset, the environment
    colour from the argument with full alpha bits, texture enable and the texture-filter, colour-dither
    and alpha-dither mode words, the alpha dither chosen by D_800E28D8. */
 
@@ -108,13 +108,13 @@ extern Gfx *D_80110634;
 extern s32 D_800E28D8;
 
 extern void func_80268CE0_de(s32 arg0);
-extern void func_8026925C_de(s32 arg0);
+extern void Render_SetModePreset(s32 arg0);
 
 void func_802A9234_de(s32 color) {
     gDPPipeSync(D_80110634++);
     gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
     func_80268CE0_de(0x1B);
-    func_8026925C_de(0x19);
+    Render_SetModePreset(0x19);
     {
         Gfx *cmd = D_80110634++;
         gDPSetEnvColor(cmd, 255, 255, 255, color);

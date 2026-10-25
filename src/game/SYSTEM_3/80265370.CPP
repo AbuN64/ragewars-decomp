@@ -381,7 +381,7 @@ s32 func_80265964_de(s32 arg0) {
     return result;
 }
 
-void func_802659E0_de(char *view) {
+void System_SetupPointLights(char *view) {
     LightNode *node;
     LightData *data;
     f32 position[4];

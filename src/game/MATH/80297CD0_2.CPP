@@ -31,7 +31,7 @@ s32 func_80297A34_de(s32 event,s32 value,s32 amount,s32 context) {
     handled=&D_8014D080->handled;
     element=D_8014D080->screens[D_8014D080->current].primary;
     result=0;
-    func_80299958_de();
+    GetMenuScreenOwner();
     category=menuCategory(event);
     switch(category) {
     case 0:

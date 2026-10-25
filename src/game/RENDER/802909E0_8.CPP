@@ -100,17 +100,17 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
 
 
 #if !(defined(VERSION_US))
-/* Clears the screen: clears the depth buffer over the whole screen through func_80291BE8_de, emits a full-screen scissor, the frame's colour image, fill cycle, combiner, no-op render mode, fill colour 0x10001 and a full-screen fill rectangle, then, when image 0x386 has a size, draws it stretched across the screen through func_802AAC28_de after func_802A9234_de(255). Written with libultra-style display-list macros and the screen size read from D_800E28D0 and D_800E28D4. */
+/* Clears the screen: clears the depth buffer over the whole screen through Render_ClearDepthRect, emits a full-screen scissor, the frame's colour image, fill cycle, combiner, no-op render mode, fill colour 0x10001 and a full-screen fill rectangle, then, when image 0x386 has a size, draws it stretched across the screen through func_802AAC28_de after func_802A9234_de(255). Written with libultra-style display-list macros and the screen size read from D_800E28D0 and D_800E28D4. */
 extern Gfx *D_80110634;
 #include "COMMON/DISPLAY.H"
-extern void func_80291BE8_de(void *arg0, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced);
+extern void Render_ClearDepthRect(void *arg0, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced);
 
 extern void func_802A9234_de(s32 alpha);
 void func_80290C24_de(void *arg0) {
     Frame *frame = D_8011FAC0.ring.current;
     s32 width;
     s32 height;
-    func_80291BE8_de(arg0, 0, SCREEN_WD, 0, SCREEN_HT, 0);
+    Render_ClearDepthRect(arg0, 0, SCREEN_WD, 0, SCREEN_HT, 0);
     width = 0;
     height = 0;
     gDPSetScissorFrac(D_80110634++, G_SC_NON_INTERLACE, (int)((float)((0)) * 4.0F), (int)((float)((0)) * 4.0F), (int)((float)((SCREEN_WD - 1)) * 4.0F), (int)((float)((SCREEN_HT - 1)) * 4.0F));

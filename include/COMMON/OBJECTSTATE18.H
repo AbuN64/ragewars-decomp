@@ -90,7 +90,7 @@ typedef struct ItemRecAt1C ItemRecAt1C;
 
 extern u32 D_800CC360;
 
-extern void func_8026D88C_de();
+extern void Render_SelectEffectModes();
 
 extern float D_800C4668_de;
 

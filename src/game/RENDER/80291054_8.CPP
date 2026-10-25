@@ -19,7 +19,7 @@ void func_8029311C_de(void *unused, u8 *color, s32 left, s32 top, s32 right, s32
     if (color[3] != 0) {
         gDPPipeSync(D_80110634++);
         gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
-        func_8026925C_de(0x13);
+        Render_SetModePreset(0x13);
         func_80268CE0_de(0x19);
         gDPSetPrimColor(D_80110634++, 255, 255, color[0], color[1], color[2], color[3]);
         {

@@ -29,7 +29,7 @@ extern s32 func_802A23B4_de(void);
 
 extern void func_8026D8F8_de(void);
 
-extern void func_8026925C_de(s32);
+extern void Render_SetModePreset(s32);
 
 extern void func_80268CE0_de(s32);
 
@@ -235,7 +235,7 @@ void func_80229D28_de(Player16C0 *player) {
         }
         gDPPipeSync(D_80110634++);
         func_8026D8F8_de();
-        func_8026925C_de(0xE);
+        Render_SetModePreset(0xE);
         func_80268CE0_de(0x1C);
         green = 200;
         alpha = 150;

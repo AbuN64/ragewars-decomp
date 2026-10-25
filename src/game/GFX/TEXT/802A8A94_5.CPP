@@ -21,7 +21,7 @@ extern float D_801377B0[2];
 extern s32 Render_StartWorldEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 extern void func_802AA8EC_de(s32 arg0, s32 arg1, void **arg2, s32 *arg3);
 extern void func_80253754_de(s32 arg0, s32 arg1);
-extern void func_8026925C_de(u32);
+extern void Render_SetModePreset(u32);
 extern void func_80268CE0_de(u32);
 
 #if defined(VERSION_EU_X)
@@ -55,7 +55,7 @@ void func_802AA9F4_de(void) {
     gDPPipeSync(gfx);
     gfx = D_80110634++;
     gDPSetCycleType(gfx, G_CYC_1CYCLE);
-    func_8026925C_de(0x15);
+    Render_SetModePreset(0x15);
     func_80268CE0_de(0x19);
 }
 #endif
@@ -127,7 +127,7 @@ INCLUDE_ASM("span_1000", func_802AAC28_de);
 
 
 /* Appends a pipe synchronisation and an other-mode setting to the display list D_80110634 points
-   into, then calls func_8026925C_de with 0x15 and func_80268CE0_de with 0x19. */
+   into, then calls Render_SetModePreset with 0x15 and func_80268CE0_de with 0x19. */
 
 
 /* Emits pipe sync, primitive color and a rectangle with nonnegative coordinates. */
@@ -164,7 +164,7 @@ void func_802AA9F4_de(void) {
     gDPPipeSync(gfx);
     gfx = D_80110634++;
     gDPSetCycleType(gfx, G_CYC_1CYCLE);
-    func_8026925C_de(0x15);
+    Render_SetModePreset(0x15);
     func_80268CE0_de(0x19);
 }
 

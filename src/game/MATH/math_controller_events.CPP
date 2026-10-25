@@ -17,7 +17,7 @@ INCLUDE_ASM("span_1000", DispatchControllerButtonEvent);
 #endif
 
 extern s32 func_80299B4C_de(void);
-extern s32 func_80299958_de(void);
+extern s32 GetMenuScreenOwner(void);
 
 #if !defined(VERSION_DE) && (!(defined(VERSION_US) || defined(VERSION_EU)) || defined(NON_MATCHING))
 /* Turns one control event into manager events. Controls 4..7 and 11..12 first send their own event on a
@@ -46,7 +46,7 @@ void DispatchControllerButtonEvent(ControllerEvent *event) {
     s32 control;
     s16 pressed;
 
-    manager = func_80299958_de();
+    manager = GetMenuScreenOwner();
     source = ((u16)event->source << 16) | (u16)event->device;
     control = event->control;
     pressed = event->pressed == 1;
@@ -140,14 +140,14 @@ void DispatchControllerAxisEvents(ControllerEvent *event) {
         if (-threshold < state->oldX && state->x < -threshold) xCross = 1;
         xCode = 7; xValue = state->x;
     }
-    if (yCode != 0) func_802995D4_de(func_80299958_de(), yCode, id, yCross, yValue);
-    if (xCode != 0) func_802995D4_de(func_80299958_de(), xCode, id, xCross, xValue);
+    if (yCode != 0) func_802995D4_de(GetMenuScreenOwner(), yCode, id, yCross, yValue);
+    if (xCode != 0) func_802995D4_de(GetMenuScreenOwner(), xCode, id, xCross, xValue);
     state->oldX = state->x;
     state->oldY = state->y;
 }
 
 
-extern s32 func_80299958_de(void);
+extern s32 GetMenuScreenOwner(void);
 
 
 
@@ -164,7 +164,7 @@ void func_8029A558_de(ControllerEvent *event) {
     switch (event->kind) {
     case 0:
         source = ((u16)event->source << 16) | (u16)event->device;
-        func_802995D4_de(func_80299958_de(), 0x11, source, event->pressed, event->control);
+        func_802995D4_de(GetMenuScreenOwner(), 0x11, source, event->pressed, event->control);
         break;
     case 1:
         if (event->source == 4) {

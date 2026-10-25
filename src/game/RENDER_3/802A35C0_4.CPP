@@ -312,7 +312,7 @@ INCLUDE_ASM("span_1000", func_802A4598_de);
 #endif
 
 extern void func_8026D8F8_de(void);
-extern void func_80295FF4_de(void);
+extern void System_ResetTextureCache(void);
 extern void Render_UpdateLinkedNodeTransforms(RibbonActor *ribbon);
 extern void func_802A339C_de(RibbonActor *ribbon, GameplayCamera *camera);
 extern void func_802A3718_de(VertexArena *pool, RibbonActor *ribbon, GameplayCamera *camera);
@@ -345,7 +345,7 @@ static inline void Render_DrawLinkedRibbon(VertexArena *pool, RibbonActor *ribbo
 void Render_DrawLinkedGeometry(VertexArena *pool, GameplayCamera *camera) {
     RibbonActor *ribbon;
     func_8026D8F8_de();
-    func_80295FF4_de();
+    System_ResetTextureCache();
     if (pool->displayList != 0) {
         gSPDisplayList(D_80110634++, pool->displayList);
         return;
@@ -353,7 +353,7 @@ void Render_DrawLinkedGeometry(VertexArena *pool, GameplayCamera *camera) {
     pool->displayList = D_80110634;
     gSPBranchList(D_80110634++, 0);
     gDPPipeSync(D_80110634++);
-    func_8026925C_de(0xE);
+    Render_SetModePreset(0xE);
     func_80268CE0_de(0x1C);
     /* 0x80 has no F3DEX2 geometry-mode name. */
     gSPGeometryMode(D_80110634++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);

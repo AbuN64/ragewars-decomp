@@ -4,7 +4,7 @@
 #include "COMMON/WIDGETRECAT1A.H"
 #include "FRONTEND/8040B45C_29.H"
 #include "MATH/80299ECC.H"
-extern s32 func_80299958_de(void);
+extern s32 GetMenuScreenOwner(void);
 extern void func_8029973C_de(void);
 
 /* Clamp the slider and handle range, value, step and parent notifications. */
@@ -100,7 +100,7 @@ s32 func_8040C780_us(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
 
 post:
     func_8040C950_de(widget);
-    func_802995D4_de(func_80299958_de(), 0x100A, slider->parentId, widget->value, 0);
+    func_802995D4_de(GetMenuScreenOwner(), 0x100A, slider->parentId, widget->value, 0);
     func_8029973C_de();
     result = 0;
 

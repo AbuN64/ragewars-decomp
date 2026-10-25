@@ -8,27 +8,27 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 
-/* Clears the depth buffer over a rectangle: switches the colour image to the depth buffer D_801536E8 in fill mode after setting render mode 0x14 through func_8026925C_de, fills the rectangle with the far depth value (or, for interlaced output, alternate lines with the far value and the remaining lines with 0, by single lines or by line pairs as D_800E28D8 selects), then restores the frame's colour image and one-cycle mode. Written with libultra-style display-list macros. */
+/* Clears the depth buffer over a rectangle: switches the colour image to the depth buffer D_801536E8 in fill mode after setting render mode 0x14 through Render_SetModePreset, fills the rectangle with the far depth value (or, for interlaced output, alternate lines with the far value and the remaining lines with 0, by single lines or by line pairs as D_800E28D8 selects), then restores the frame's colour image and one-cycle mode. Written with libultra-style display-list macros. */
 
 
 
 
-extern void func_8026925C_de(s32 mode);
-
-
-
-
-
+extern void Render_SetModePreset(s32 mode);
 
 
 
 
 
-void func_80291BE8_de(void *unused, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced) {
+
+
+
+
+
+void Render_ClearDepthRect(void *unused, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced) {
     s32 y;
 
     gDPPipeSync(D_80110634++);
-    func_8026925C_de(0x14);
+    Render_SetModePreset(0x14);
     gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)((D_801536E8)));
     gDPPipeSync(D_80110634++);
     gDPSetCycleType(D_80110634++, G_CYC_FILL);
@@ -76,7 +76,7 @@ void Render_DrawTextLines(void *state, s32 drawBackdrop, char **lines, s32 x, s3
 
     y = y * D_800E28D4 / 222;
     if (drawBackdrop) {
-        func_80291BE8_de(state, 0, D_800E28D0, 0, D_800E28D4, 0);
+        Render_ClearDepthRect(state, 0, D_800E28D0, 0, D_800E28D4, 0);
         gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, 0, 0, D_800E28D0 - 1, D_800E28D4 - 1);
         gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)frame->colorImage);
         gDPSetCycleType(D_80110634++, G_CYC_FILL);

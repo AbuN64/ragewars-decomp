@@ -25,12 +25,12 @@ void func_802A2090_de(void) {
     s32 state;
     if (D_800D2C98 == 1) {
         func_802A17C4_de();
-        mode = func_80299958_de();
+        mode = GetMenuScreenOwner();
         func_802995D4_de(mode, 0xE08, 0, 0, 0);
         func_80298FE8_de();
         func_80410448_de();
         func_802A1944_de();
-        mode = func_80299958_de();
+        mode = GetMenuScreenOwner();
         active = 1;
         value = 0;
         if (mode == 3) {

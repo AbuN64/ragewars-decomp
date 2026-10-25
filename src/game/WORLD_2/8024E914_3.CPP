@@ -131,7 +131,7 @@ void func_8024EB90_de(StaticObject *obj) {
     Gfx *branch;
 
     func_8026D8F8_de();
-    func_80295FF4_de();
+    System_ResetTextureCache();
     if (obj->cached != 0) {
         gSPDisplayList(D_80110634++, (unsigned int)obj->cached);
         return;

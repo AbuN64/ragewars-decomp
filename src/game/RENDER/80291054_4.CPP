@@ -33,7 +33,7 @@
 #include "sdk/os.h"
 extern void func_80236874_de(RaceViewportState *);
 extern void func_8029311C_de(void *, u8 *, s32,s32,s32,s32);
-extern void func_80291BE8_de(void *, s32,s32,s32,s32,s32);
+extern void Render_ClearDepthRect(void *, s32,s32,s32,s32,s32);
 extern void Render_SubmitFrameTasks(TimingWorld *,Frame *);
 static __inline__ s32 hasFadeMode(u8 *mode) { return *mode != 0; }
 void func_80292308_de(TimingWorld *world) {
@@ -62,7 +62,7 @@ void func_80292308_de(TimingWorld *world) {
     startTime = start;
     D_80146CD8 = D_8011FAC0.ring.current;
     func_802539EC_de(0, D_800D297C);
-    func_80295FF4_de();
+    System_ResetTextureCache();
     func_8026D844_de();
     Render_BeginFrameDisplayList(world);
     func_80265DD0_de();
@@ -95,7 +95,7 @@ void func_80292308_de(TimingWorld *world) {
         if (D_800E28E0 == 0x14) {
             func_8040C09C_de();
         }
-        func_80291BE8_de(world, 0, 0x1E0, 0, 0x168, 0);
+        Render_ClearDepthRect(world, 0, 0x1E0, 0, 0x168, 0);
         gDPSetScissorFrac(D_80110634++,0,0,0,0x77C,0x59C);
         gDPSetColorImage(D_80110634++,G_IM_FMT_RGBA,G_IM_SIZ_16b,480,D_80146CD8->colorImage);
         gDPSetCycleType(D_80110634++,G_CYC_FILL);

@@ -369,5 +369,5 @@ extern s32 D_0041B970(void *, s32, s32, s32, s32);
 /* D_0041BA00: func_8041BA00_de */
 extern void D_0041BA00();
 
-extern s32 func_80299958_de(void);
+extern s32 GetMenuScreenOwner(void);
 #endif

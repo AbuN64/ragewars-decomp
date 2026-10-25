@@ -16,7 +16,7 @@ extern ResultsOptionsScreen *D_800E4690;
 /* Draw callback of the results screen D_800E4690: on draw event 1 in states 3, 8 or 9 it resets
    the fill colour D_800D15E0 to opaque white, and for each of the one or two viewports clips the
    display list to its rectangle in D_800E41C0 (0, then 2 for the lower view), draws the player's panel through func_8041C7F4_de and restores the
-   full-screen clip. Outside two-player mode (and unless func_80299958_de reports 0x19) it plays sound
+   full-screen clip. Outside two-player mode (and unless GetMenuScreenOwner reports 0x19) it plays sound
    0x259 past the base at 0xA44 on the twentieth frame, raises the banner blink after six more
    frames, and fades the two banner sprites out by 30 per frame before hiding them. Returns zero. */
 
@@ -81,7 +81,7 @@ s32 func_80426CE4_de(void *unused0, void *unused1, s32 event) {
             func_8041C7F4_de(D_800E4690->panels[i]);
             gDPSetScissorFrac(D_80110634++, G_SC_NON_INTERLACE, (s32)((f32)((0)) * 4.0f), (s32)((f32)((0)) * 4.0f), (s32)((f32)((D_800E28D0 - 1)) * 4.0f), (s32)((f32)((D_800E28D4 - 1)) * 4.0f));
         }
-        if (D_801462C8.players != 2 && func_80299958_de() != 0x19) {
+        if (D_801462C8.players != 2 && GetMenuScreenOwner() != 0x19) {
             if (D_800E4690->frames < 20) {
                 if (++D_800E4690->frames == 20) {
                     k = D_800E4690->selection;

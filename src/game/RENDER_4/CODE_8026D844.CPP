@@ -71,7 +71,7 @@ extern void func_80253670_de(s32, s32);
 
 extern void func_8026C484_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 arg5);
 
-extern void func_8026925C_de(s32 mode);
+extern void Render_SetModePreset(s32 mode);
 
 
 extern void **func_80295EAC_de(void *arg0, s32 arg1);
@@ -84,7 +84,7 @@ void func_8026D844_de(void) {
     func_8026FC9C_de(local, &D_8010C520);
 }
 
-void func_8026D88C_de(void) {
+void Render_SelectEffectModes(void) {
     if (D_800CC380 != 0 || D_80110620 != 0) {
         D_800CC384 = 0x10000;
         D_800CC388 = 0xC4000000;
@@ -102,7 +102,7 @@ void func_8026D8F8_de(void) {
     D_800CC360 = -1;
 }
 
-void func_8026D914_de(s32 arg0) {
+void Render_SetColorDither(s32 arg0) {
     if (D_80110620 == 0) gDPSetColorDither(D_80110634++, arg0) else gDPSetColorDither(D_80110634++, G_CD_NOISE);
 }
 
@@ -276,7 +276,7 @@ void func_8026DF7C_de(void *shared, s32 mode, void **resource, s32 matrix, s32 s
     }
     if (segment != 0) { gSPSegment(D_80110634++, 1, matrix); } else { gSPMatrix(D_80110634++, matrix, G_MTX_LOAD); }
     if (mode != -1) {
-        func_8026925C_de(mode);
+        Render_SetModePreset(mode);
     }
     func_80253BBC_de(0, resource);
     header = *resource;

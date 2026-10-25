@@ -66,7 +66,7 @@ extern s32 D_800CC364;
 
 extern Gfx *D_80110634;
 
-s32 func_8026925C_de(s32 tailEnum) {
+s32 Render_SetModePreset(s32 tailEnum) {
 
     if (D_800CC364 == tailEnum) {
         return 0;
@@ -263,7 +263,7 @@ sw_mode_default:
 extern Gfx *D_80110634;
 extern Gfx D_800CC018_de[], D_800CC0A0[];
 extern s32 D_800CC364;
-extern void func_80295FF4_de(void);
+extern void System_ResetTextureCache(void);
 /* Emits a 16 by 16 intensity texture, white tint, matrix and the selected pass list. */
 void func_8026992C_de(void *matrix, s32 pass, u32 alpha) {
     Gfx *list;
@@ -280,7 +280,7 @@ void func_8026992C_de(void *matrix, s32 pass, u32 alpha) {
     gSPDisplayList(D_80110634++, ({ if (pass != 0) list = D_800CC0A0; list; }));
     D_800CC364 = -1;
     D_800CC360 = -1;
-    func_80295FF4_de();
+    System_ResetTextureCache();
 }
 
 
@@ -336,7 +336,7 @@ void func_80295FB4_us_rev1(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
 void func_80268CE0_de(u32);
-s32 func_8026925C_de(s32);
+s32 Render_SetModePreset(s32);
 void func_80253754_de(s32, void *);
 s32 func_802744D4_de(void);
 
@@ -602,7 +602,7 @@ a = func_802744D4_de() % info.count;
             }
         }
     } else if (flags & 0x80) {
-        func_8026925C_de(6);
+        Render_SetModePreset(6);
     } else {
         tailEnum = 7;
         if (!(flags & 0x200)) {
@@ -620,7 +620,7 @@ a = func_802744D4_de() % info.count;
         }
     }
     if (tailEnum != -1) {
-        func_8026925C_de(tailEnum);
+        Render_SetModePreset(tailEnum);
     }
     mode = 0x260404;
     if (flags & 0x1000) {

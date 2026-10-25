@@ -77,7 +77,7 @@ void func_80296CD0_de(s32 direction) {
 #include "TYPES.H"
 
 extern s32 D_80146E04;
-extern s32 func_80299958_de(void);
+extern s32 GetMenuScreenOwner(void);
 extern void *func_80411DCC_de(s32 index);
 extern Element *func_80298170_de(s32);
 extern void func_8029973C_de(void);
@@ -147,7 +147,7 @@ s32 DispatchElementEvent(s32 id, s32 event, s32 arg2, s32 arg3, s32 arg4)
     if (event != 0xE09) D_80146E04++;
     handled = &D_8014D080->handled;
     category = eventCategory(event);
-    context = func_80411DCC_de(func_80299958_de());
+    context = func_80411DCC_de(GetMenuScreenOwner());
     if (id == -1) {
         direct = 1;
         element = context;

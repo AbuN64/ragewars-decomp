@@ -22,7 +22,7 @@
 
 
 
-extern void func_8026925C_de(s32);
+extern void Render_SetModePreset(s32);
 
 extern void func_802852C0_de(char *, u32, u32, void *, void *);
 
@@ -65,7 +65,7 @@ void func_8023B3F8_de(Scene *scene, ClipView *view) {
     gSPMoveWord(D_80110634++, G_MW_CLIP, 28, (u32)((0xFFFE)));
     gSPGeometryMode(D_80110634++, G_FOG, 0);
     gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
-    func_8026925C_de(0xD);
+    Render_SetModePreset(0xD);
     gSPGeometryMode(D_80110634++, G_CULL_BACK | G_LIGHTING | G_TEXTURE_GEN, 0);
     gSPGeometryMode(D_80110634++, 0, G_SHADE | G_SHADING_SMOOTH);
     gDPSetTexturePersp(D_80110634++, G_TP_PERSP);

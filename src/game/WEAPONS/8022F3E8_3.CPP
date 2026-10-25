@@ -34,7 +34,7 @@ void func_8022F770_de(void *object, void *unused) {
         gSPMatrix(D_80110634++, (u32)&node->matrices[D_800D297C], G_MTX_LOAD);
         gDPPipeSync(D_80110634++);
         func_8026D8F8_de();
-        func_8026925C_de(0xE);
+        Render_SetModePreset(0xE);
         func_80268CE0_de(0x1C);
         red=200; alpha=150;
         gSPGeometryMode(D_80110634++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);

@@ -622,7 +622,7 @@ struct SceneObject {
 extern void *func_8024BFD4_de(SceneObject *, s32);
 extern s32 func_80296B74_de(void *, void *);
 extern void func_8026D8F8_de(void);
-extern void func_80295FF4_de(void);
+extern void System_ResetTextureCache(void);
 /* Draws one scene object: loads its model, culls its bounding box against the camera's clip box and plane test,
  * then records the object's draw callback into a display list cached on the object (a branch placeholder is
  * patched at the end) or replays the cached list.
@@ -677,7 +677,7 @@ void func_80249E28_de(SceneObject *object, struct Racer *camera) {
         return;
     }
     func_8026D8F8_de();
-    func_80295FF4_de();
+    System_ResetTextureCache();
     if (object->cached != 0) {
         gSPDisplayList(D_80110634++, (unsigned int)object->cached);
         func_80253754_de(0, mem);

@@ -607,7 +607,7 @@ void func_802A3718_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *cam
         func_80268CE0_de(0x28);
         break;
     }
-    func_8026925C_de(0xD);
+    Render_SetModePreset(0xD);
     clock = actor->clock;
     count = track->count;
     next = clock->next;

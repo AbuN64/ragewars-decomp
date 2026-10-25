@@ -25,7 +25,7 @@
 
 
 
-extern s32 func_80299958_de(void);
+extern s32 GetMenuScreenOwner(void);
 
 extern void *func_80411DCC_de(s32 index);
 extern void func_8040EF84_de(NodeRecAt44 *node, void *from, void *to);
@@ -113,8 +113,8 @@ MenuListWidget *func_8041ABC0_de(s32 arg0, s32 arg1) {
     MenuListWidget *result;
     void *child;
 
-    source = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), arg0 & 0xFFFF);
-    context = func_80411DCC_de(func_80299958_de());
+    source = func_8040EC30_de(func_80411DCC_de(GetMenuScreenOwner()), arg0 & 0xFFFF);
+    context = func_80411DCC_de(GetMenuScreenOwner());
     result = func_8025305C_de(0x118);
     func_802A0748_de(result, 0, 0x118);
     *(Header44 *)result = *(Header44 *)source;
@@ -297,8 +297,8 @@ void func_8041B110_de(s32 arg0) {
     void *context;
     Record_func_8041B110_de *result;
 
-    source = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), arg0 & 0xFFFF);
-    context = func_80411DCC_de(func_80299958_de());
+    source = func_8040EC30_de(func_80411DCC_de(GetMenuScreenOwner()), arg0 & 0xFFFF);
+    context = func_80411DCC_de(GetMenuScreenOwner());
     result = func_8025305C_de(0x44);
     func_802A0748_de(result, 0, 0x44);
     *(Header44 *)result = *(Header44 *)source;
@@ -316,7 +316,7 @@ void func_8041B22C_de(Record_func_8041B22C_de *source) {
     if (source->field_0E == 0xB61) {
         return;
     }
-    context = func_80411DCC_de(func_80299958_de());
+    context = func_80411DCC_de(GetMenuScreenOwner());
     result = func_8025305C_de(0x44);
     func_802A0748_de(result, 0, 0x44);
     *(Header44 *)result = *(Header44 *)source;

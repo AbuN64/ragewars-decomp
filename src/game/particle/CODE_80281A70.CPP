@@ -301,7 +301,7 @@ extern Gfx *D_80110634;
 extern Globals_func_804220A8_de D_80140FE8_de;
 extern s32 D_80140FF8, D_800D297C;
 extern float D_800C4E54_de;
-extern void func_8026D914_de(s32 arg0);
+extern void Render_SetColorDither(s32 arg0);
 extern void Particle_BuildMatrix(Shared_Particle *particle, void *matrix, void *camera, f32 depth);
 extern s32 func_80296B74_de(f32 (*planes)[4], Box *box);
 extern void Particle_DrawModel(void *arg0, struct Shared_ParticleView *arg1);
@@ -320,7 +320,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, struct Shared_ParticleVie
     if (world->render.head != 0) {
         gDPPipeSync(D_80110634++);
         gDPSetAlphaDither(D_80110634++, G_AD_NOISE);
-        func_8026D914_de(0x80);
+        Render_SetColorDither(0x80);
         gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
         gSPGeometryMode(D_80110634++, 0x60400, 0);
         for (node = world->render.head; node != 0; node = node->next) {
@@ -398,7 +398,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, struct Shared_ParticleVie
         }
         gDPPipeSync(D_80110634++);
         gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
-        func_8026D914_de(0);
+        Render_SetColorDither(0);
         gDPSetAlphaDither(D_80110634++, G_AD_NOTPATTERN);
     }
 }

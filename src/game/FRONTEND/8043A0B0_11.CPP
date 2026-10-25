@@ -328,7 +328,7 @@ void Frontend_DrawMenuImage(MenuImage *menu) {
         frame = menu->frame;
         screen = D_80141008;
         func_802A84F8_de();
-        func_8026925C_de(0x15);
+        Render_SetModePreset(0x15);
         b = 1.0f;
         a = b;
         switch (D_800E28D8) {

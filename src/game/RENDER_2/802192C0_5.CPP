@@ -21,7 +21,7 @@
 
 extern s32 D_800D297C;
 
-extern void func_8026925C_de(s32);
+extern void Render_SetModePreset(s32);
 extern void func_80268CE0_de(s32);
 extern void func_802A5498_de(UnitMtx *, s32, s32, s32);
 
@@ -34,7 +34,7 @@ void func_8021C698_de(PlayerCode802192C0 *player) {
         gSPMatrix(D_80110634++, &player->views[D_800D297C], G_MTX_LOAD);
         gDPPipeSync(D_80110634++);
         func_8026D8F8_de();
-        func_8026925C_de(0xE);
+        Render_SetModePreset(0xE);
         func_80268CE0_de(0x1C);
         red = 200;
         low = 100;

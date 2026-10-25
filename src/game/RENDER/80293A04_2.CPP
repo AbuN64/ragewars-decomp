@@ -85,7 +85,7 @@ void func_80293EB8_de(void *arg0) {
     p2 = ((s8 *)(&D_801468A0)) - 0x1818;
     Items_ResetActorPools(p2, 1);
     ((IntegerState164 *)(p2))->unk_160 = 0;
-    func_80296004_de(0);
+    System_SetTextureEffect(0);
 }
 
 struct ObjRecV2;

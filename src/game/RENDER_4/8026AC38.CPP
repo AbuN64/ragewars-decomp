@@ -22,7 +22,7 @@ extern char D_0044B180;
 
 extern u32 D_800CC384;
 
-extern s32 func_8026925C_de(s32);
+extern s32 Render_SetModePreset(s32);
 
 s32 func_8028FDC8_de(s32 arg0, s32 arg1, s32 *arg2);
 
@@ -50,7 +50,7 @@ extern void func_80271F68_de(CVector3 *out, void *a, CVector3 *b);
 void func_8026AC38_de(void) {
     Gfx *cmd;
 
-    func_80295FF4_de();
+    System_ResetTextureCache();
 
     cmd = D_80110634++;
     gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, &D_0044B180);
@@ -73,7 +73,7 @@ void func_8026AC38_de(void) {
     cmd = D_80110634++;
     gSPGeometryMode(cmd, 0, D_800CC384 | 0x00260404);
 
-    func_8026925C_de(0x1D);
+    Render_SetModePreset(0x1D);
 }
 
 /* Expand packed geometry commands into display lists while rebuilding resource offsets. */

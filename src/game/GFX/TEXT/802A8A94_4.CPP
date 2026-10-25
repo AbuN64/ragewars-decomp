@@ -82,7 +82,7 @@ void func_802AA7A4_de(void *arg0) {
     if (func_802A23B4_de() == 1) {
         func_802A2090_de();
         func_8026D8F8_de();
-        func_80295FF4_de();
+        System_ResetTextureCache();
     }
     func_802A84F8_de();
     func_802A8710_de();

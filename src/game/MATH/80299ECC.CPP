@@ -389,7 +389,7 @@ s32 func_802998E0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     return 0;
 }
 
-s32 func_80299958_de(void) {
+s32 GetMenuScreenOwner(void) {
     s32 result;
     s32 field4;
     result = D_80146E18;

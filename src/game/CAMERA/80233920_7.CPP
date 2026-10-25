@@ -36,7 +36,7 @@ extern void func_8028B160_de(char *, char *);
 extern void Render_DrawLinkedGeometry(void *, char *);
 extern void Camera_DrawObjectFlares(char *);
 extern void func_8022A328_de(void *, char *);
-extern void func_8026925C_de(s32);
+extern void Render_SetModePreset(s32);
 
 
 
@@ -75,7 +75,7 @@ void func_802362E8_de(char *view, char *world) {
         gDPSetBlendColor(D_80110634++, 255, 255, 255, 255);
         gDPSetPrimDepth(D_80110634++, 65535, 65535);
         gDPSetDepthSource(D_80110634++, G_ZS_PRIM);
-        func_8026925C_de(0x16);
+        Render_SetModePreset(0x16);
         {
             Gfx *_g;
 

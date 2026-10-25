@@ -57,7 +57,7 @@ s32 func_802744D4_de(void);
 
 extern MenuResourceWidget *func_8025305C_de(int);
 
-extern int func_80299958_de(void);
+extern int GetMenuScreenOwner(void);
 
 
 
@@ -98,8 +98,8 @@ MenuResourceWidget *func_80419E54_de(int arg0, int arg1)
   Resource_func_80419E54_de *r;
   MenuResourceWidget *p;
   int kind;
-  r = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), arg0 & 65535);
-  func_80411DCC_de(func_80299958_de());
+  r = func_8040EC30_de(func_80411DCC_de(GetMenuScreenOwner()), arg0 & 65535);
+  func_80411DCC_de(GetMenuScreenOwner());
   p = func_8025305C_de(0x88);
   func_802A0748_de(p, 0, 0x88);
   p->b = (kind = 0xB62);

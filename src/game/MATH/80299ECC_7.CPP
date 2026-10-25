@@ -5,7 +5,7 @@
 #include "COMMON/CALLBACK.H"
 #include "MATH/80299ECC.H"
 
-extern s32 func_80299958_de(void);
+extern s32 GetMenuScreenOwner(void);
 
 
 void func_80299CF0_de(NodeRecAt12 *node, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
@@ -35,7 +35,7 @@ void func_80299CF0_de(NodeRecAt12 *node, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                     valid = 0;
                 }
                 if (valid != 0) {
-                    func_80299958_de();
+                    GetMenuScreenOwner();
                     func_802995D4_de(node->value, arg1, arg2, arg3, arg4);
                 }
             }
