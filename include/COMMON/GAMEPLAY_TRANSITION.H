@@ -109,7 +109,7 @@ struct Shared_ActorView {
     u8 pad11F0[0xC];
     f32 field11FC; /* 0x11FC: target radius, cleared by player reset */
     CVector3 targetPosition; /* 0x1200 */
-    char pad120C[4];
+    s32 attract; /* 0x120C: the force marker pulls (1) or pushes (0) */
     s32 targeting; /* 0x1210 */
     u8 pad1214[4];
     s32 field1218; /* +0x1218: src/func_8021B468.c */
@@ -149,7 +149,11 @@ struct Shared_ActorView {
     u8 effectPayload[0x64]; /* 0x13EC */
     s32 remote; /* 0x1450 */
     void *owner; /* 0x1454 */
-    u8 pad1458[0x1600 - 0x1458];
+    CVector3 aimPoint; /* 0x1458: where the aim ray hit */
+    CVector3 aimPoint2; /* 0x1464 */
+    CVector3 aimNormal; /* 0x1470: surface normal at the hit */
+    void *aimTarget; /* 0x147C: what the aim ray hit, or NULL */
+    u8 pad1480[0x1600 - 0x1480];
     f32 transform1600[16]; /* 0x1600 */
     u8 pad1640[0x16C4 - 0x1640];
     CVector3 resetPosition; /* 0x16C4: previous reset position */

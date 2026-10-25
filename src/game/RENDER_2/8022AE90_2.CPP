@@ -85,51 +85,52 @@ void func_8022B190_de(s32 actor) {
 }
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
-#ifdef NON_MATCHING
-#include "TYPES.H"
-#include "COMMON/SHAREDPLAYER.H"
-typedef struct TogglePlayer { u8 pad0[0x5dc]; void *owner; u8 pad5e0[0xc1c]; f32 timer; CVector3 position; s32 mode; u8 pad1210[0x248]; CVector3 source; u8 pad1464[0xc]; CVector3 direction; s32 enabled; u8 pad1480[0x180]; u8 matrix[0x40]; } TogglePlayer;
-extern f32 D_800C2D0C_de;
-extern void *D_800D311C,*D_800D3120,*D_800D3124;
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/CHANNEL.H"
-extern void func_80273198_de(f32 *,CVector3 *);
-extern void Particle_ScaleVector(CVector3 *,CVector3 *,f32);
-extern void Particle_AddVec3(CVector3 *,CVector3 *,CVector3 *);
-extern void func_80273448_de(f32 *,f32,f32,f32);
-extern void func_80273D6C_de(f32 *);
-extern void func_8027027C_de(f32 *,void *);
-void func_8022B1A8(TogglePlayer *player,s32 mode) {
-    f32 matrix[16];
-    CVector3 position;
-    void *owner,*message;
-    if (player->enabled != 0) {
-        if (player->timer > 0.0f) {
-            player->timer = 0;
+extern u8 *D_800D311C, *D_800D3120, *D_800D3124;
+extern void func_80273198_de(Matrix *, CVector3 *);
+extern void Particle_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
+extern void Particle_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
+extern void func_80273448_de(Matrix *, f32 x, f32 y, f32 z);
+extern void func_80273D6C_de(Matrix *);
+extern void func_8027027C_de(Matrix *src, void *dst);
+/* Copy of func_8022B3D0_de: orients the marker matrix along the aim normal, moves it to the marker origin
+ * pushed 5.12 units off the surface and packs it into the player's marker transform. */
+static inline void buildForceMarkerTransform(Shared_ActorView *player, s32 attract, CVector3 *normal) {
+    Matrix matrix;
+    CVector3 offset;
+    func_80273198_de(&matrix, normal);
+    Particle_ScaleVector(&offset, normal, 5.12f);
+    Particle_AddVec3(&offset, &offset, &player->targetPosition);
+    func_80273448_de(&matrix, offset.x, offset.y, offset.z);
+    func_80273D6C_de(&matrix);
+    func_8027027C_de(&matrix, player->transform1600);
+}
+/* Toggles the player's attract/repulse marker while the aim ray hits something: a live marker is removed
+ * ("ATTRACT REMOVED"); otherwise a new one is placed at the aim point for 150 frames, pulling when
+ * attract is set ("ATTRACT MARKED") and pushing otherwise ("REPULSE MARKED"). */
+void Render_ToggleForceMarker(Shared_ActorView *player, s32 attract) {
+    void *screen;
+    u8 *text;
+    if (player->aimTarget != 0) {
+        if (player->field11FC > 0.0f) {
+            player->field11FC = 0;
             func_8025DF34_de(0x578);
-            owner = player->owner;
-            if (owner == 0) return;
-            message = D_800D311C;
+            screen = player->message;
+            if (screen == 0) return;
+            text = D_800D311C;
         } else {
-            player->position = player->source;
-            player->mode = mode;
-            player->timer = D_800C2D0C_de;
-            func_80273198_de(matrix,&player->direction);
-            Particle_ScaleVector(&position,&player->direction,5.12f);
-            Particle_AddVec3(&position,&position,&player->position);
-            func_80273448_de(matrix,position.x,position.y,position.z);
-            func_80273D6C_de(matrix);
-            func_8027027C_de(matrix,player->matrix);
+            player->targetPosition = player->aimPoint;
+            player->attract = attract;
+            player->field11FC = 150.0f;
+            buildForceMarkerTransform(player, attract, &player->aimNormal);
             func_8025DF34_de(0x578);
-            owner = player->owner;
-            if (owner == 0) return;
-            message = D_800D3124;
-            if (mode != 0) message = D_800D3120;
+            screen = player->message;
+            if (screen == 0) return;
+            if (attract != 0) text = D_800D3120;
+            else text = D_800D3124;
         }
-        Camera_PostScreenMessage(&D_80145088,owner,message);
+        Camera_PostScreenMessage((void *)&D_80145088, screen, text);
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_8022B1A8);
-#endif
 #endif

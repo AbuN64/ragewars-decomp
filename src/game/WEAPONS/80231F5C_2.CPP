@@ -85,7 +85,7 @@ void func_802321C8_de(Shared_Actor *actor, WeaponFireState *attack) {
 #if defined(VERSION_EU_X)
             func_80228E60_eu(player, 0);
 #else
-            func_8022B1A8(player, 0);
+            Render_ToggleForceMarker(player, 0);
 #endif
 
             attack->alternate = 1;
@@ -96,7 +96,7 @@ void func_802321C8_de(Shared_Actor *actor, WeaponFireState *attack) {
 #if defined(VERSION_EU_X)
             func_80228E60_eu(player, 1);
 #else
-            func_8022B1A8(player, 1);
+            Render_ToggleForceMarker(player, 1);
 #endif
 
         } else {

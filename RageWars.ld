@@ -10791,7 +10791,7 @@ SECTIONS
         src/game/WEAPONS/80225D10_10.CPP.o(.rodata .rdata);
         src/game/WEAPONS/800C7DF0.CPP.o(.rodata .rdata);
         src/game/WEAPONS/800C7DF8.CPP.o(.rodata .rdata);
-        src/game/RENDER_2/800C7DFC.CPP.o(.rodata .rdata);
+        src/game/RENDER_2/8022AE90_2.CPP.o(.rodata .rdata);
         src/game/RENDER_2/800C7E00.CPP.o(.rodata .rdata);
         src/game/RENDER_2/800C7E04.CPP.o(.rodata .rdata);
         src/game/RENDER_2/800C7E08.CPP.o(.rodata .rdata);
@@ -15960,7 +15960,7 @@ SECTIONS
         src/game/WEAPONS/80225D10_10.CPP.o(.rodata .rdata);
         src/game/WEAPONS/800C7DF0.CPP.o(.rodata .rdata);
         src/game/WEAPONS/800C7DF8.CPP.o(.rodata .rdata);
-        src/game/RENDER_2/800C7DFC.CPP.o(.rodata .rdata);
+        src/game/RENDER_2/8022AE90_2.CPP.o(.rodata .rdata);
         src/game/RENDER_2/800C7E00.CPP.o(.rodata .rdata);
         src/game/RENDER_2/800C7E04.CPP.o(.rodata .rdata);
         src/game/RENDER_2/800C7E08.CPP.o(.rodata .rdata);
@@ -17700,7 +17700,7 @@ SECTIONS
         src/game/WEAPONS/80225D10_10.CPP.o(.rodata .rdata);
         src/game/WEAPONS/800C7DF0.CPP.o(.rodata .rdata);
         src/game/WEAPONS/800C7DF8.CPP.o(.rodata .rdata);
-        src/game/RENDER_2/800C7DFC.CPP.o(.rodata .rdata);
+        src/game/RENDER_2/8022AE90_2.CPP.o(.rodata .rdata);
         src/game/RENDER_2/800C7E00.CPP.o(.rodata .rdata);
         src/game/RENDER_2/800C7E04.CPP.o(.rodata .rdata);
         src/game/RENDER_2/800C7E08.CPP.o(.rodata .rdata);
@@ -19962,7 +19962,7 @@ SECTIONS
         src/game/WEAPONS/80225D10_10.CPP.o(.bss .sbss COMMON);
         src/game/WEAPONS/800C7DF0.CPP.o(.bss .sbss COMMON);
         src/game/WEAPONS/800C7DF8.CPP.o(.bss .sbss COMMON);
-        src/game/RENDER_2/800C7DFC.CPP.o(.bss .sbss COMMON);
+        src/game/RENDER_2/8022AE90_2.CPP.o(.bss .sbss COMMON);
         src/game/RENDER_2/800C7E00.CPP.o(.bss .sbss COMMON);
         src/game/RENDER_2/800C7E04.CPP.o(.bss .sbss COMMON);
         src/game/RENDER_2/800C7E08.CPP.o(.bss .sbss COMMON);
@@ -23660,7 +23660,7 @@ SECTIONS
         src/game/WEAPONS/80225D10_10.CPP.o(.bss .sbss COMMON);
         src/game/WEAPONS/800C7DF0.CPP.o(.bss .sbss COMMON);
         src/game/WEAPONS/800C7DF8.CPP.o(.bss .sbss COMMON);
-        src/game/RENDER_2/800C7DFC.CPP.o(.bss .sbss COMMON);
+        src/game/RENDER_2/8022AE90_2.CPP.o(.bss .sbss COMMON);
         src/game/RENDER_2/800C7E00.CPP.o(.bss .sbss COMMON);
         src/game/RENDER_2/800C7E04.CPP.o(.bss .sbss COMMON);
         src/game/RENDER_2/800C7E08.CPP.o(.bss .sbss COMMON);
@@ -24948,7 +24948,7 @@ SECTIONS
         src/game/WEAPONS/80225D10_10.CPP.o(.bss .sbss COMMON);
         src/game/WEAPONS/800C7DF0.CPP.o(.bss .sbss COMMON);
         src/game/WEAPONS/800C7DF8.CPP.o(.bss .sbss COMMON);
-        src/game/RENDER_2/800C7DFC.CPP.o(.bss .sbss COMMON);
+        src/game/RENDER_2/8022AE90_2.CPP.o(.bss .sbss COMMON);
         src/game/RENDER_2/800C7E00.CPP.o(.bss .sbss COMMON);
         src/game/RENDER_2/800C7E04.CPP.o(.bss .sbss COMMON);
         src/game/RENDER_2/800C7E08.CPP.o(.bss .sbss COMMON);

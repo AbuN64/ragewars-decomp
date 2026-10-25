@@ -2977,3 +2977,4 @@ literals_Render_UpdateFadeTransition = 0x800CA56C; // rom:0xCB16C size:0x18
 literals_Nav_InitSpawnedActor = 0x800C7218; // rom:0xC7E18 size:0x4
 literals_Weapons_BuildPlayerOrientation = 0x800C7C60; // rom:0xC8860 size:0x4
 literals_Frontend_InitGameStatus = 0x800E1B84; // rom:0xE2784 size:0xC
+literals_Render_ToggleForceMarker = 0x800C7DFC; // rom:0xC89FC size:0x4
