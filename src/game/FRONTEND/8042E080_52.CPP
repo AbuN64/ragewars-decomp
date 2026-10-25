@@ -9,7 +9,7 @@ extern s32 Pak_CountFreeNotes(void *a0, s32 *a1);
 
 extern s32 Ovlgame_BytesToPakPages(s32 a0);
 
-s32 func_80435384_de(void *arg0, s32 *out)
+s32 func_80435384_de(void *slot, s32 *out)
 {
     s32 a, b;
     s32 ret;
@@ -17,9 +17,9 @@ s32 func_80435384_de(void *arg0, s32 *out)
 
     *out = 0;
 
-    ret = Pak_GetFreePages(arg0, &a);
+    ret = Pak_GetFreePages(slot, &a);
     if (ret == 0) {
-        ret = Pak_CountFreeNotes(arg0, &b);
+        ret = Pak_CountFreeNotes(slot, &b);
         if (ret == 0) {
             val = Ovlgame_BytesToPakPages(Frontend_GetRecordsNoteSize());
             if (b == 0) {

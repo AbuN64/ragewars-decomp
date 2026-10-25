@@ -3,5 +3,5 @@
 #include "COMMON/SLOTRECATCV1.H"
 extern void func_804101BC_de();
 extern void func_80410448_de();
-extern s32 func_80410674_de(s32 index, s32 mode);
+extern s32 Frontend_GetImageTexture(s32 index, s32 mode);
 #endif

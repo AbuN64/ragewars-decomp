@@ -110,27 +110,27 @@ s32 Frontend_OpenPakChannel(s32 unused0, Shared_PakMenu *menu) {
     return 1;
 }
 
-s32 func_8040B58C_de(void *arg0, Shared_PakMenu *arg1) {
+s32 func_8040B58C_de(void *arg0, Shared_PakMenu *menu) {
     void *buffer;
     ObjRecAt5DC *player;
     s32 channel;
     if (D_8015375C != 0) {
         channel = D_800E28C8;
     } else {
-        channel = arg1->owner->unk4;
+        channel = menu->owner->unk4;
     }
     D_80153784 = 1;
-    if (Pak_CheckStatusPrompt(arg1, channel, 1) != 0) {
-        player = arg1->player;
+    if (Pak_CheckStatusPrompt(menu, channel, 1) != 0) {
+        player = menu->player;
         if (player != NULL) {
             buffer = player->unk5DC + 0x554;
         } else {
             buffer = D_8014561C;
         }
-        Pak_OpenDialog(buffer, arg1->unk24, arg1->player, arg1->owner, 0);
+        Pak_OpenDialog(buffer, menu->unk24, menu->player, menu->owner, 0);
         return 1;
     }
-    Pak_OpenDialog(D_8014561C, arg1->unk24, arg1->player, arg1->owner, 0);
+    Pak_OpenDialog(D_8014561C, menu->unk24, menu->player, menu->owner, 0);
     return 1;
 }
 

@@ -191,7 +191,7 @@ void Frontend_FlushTextBatches(void) {
     D_8014D570 = 0;
 }
 
-void func_8040CD50_de(Widget_func_8040CD50_de *widget, sm_dldc args) {
+void Frontend_DrawImageWidget(WidgetFrontendDrawImageWidget *widget, sm_dldc args) {
     struct Shape_typemap_165 box;
     struct Shape_typemap_165 area;
     struct Shape_typemap_165 saved;
@@ -216,7 +216,7 @@ void func_8040CD50_de(Widget_func_8040CD50_de *widget, sm_dldc args) {
     if (func_8040CDD0_overlaps(&area)) {
         Frontend_FlushTextBatches();
     }
-    texture = func_80410674_de(widget->image, 1);
+    texture = Frontend_GetImageTexture(widget->image, 1);
     color = (args.alpha << 24) | 0xFFFFFF;
     if (D_800DEA6C != 0x53333 || D_800E2AB8 == 0) {
         D_800DEA6C = 0x53333;
@@ -230,7 +230,7 @@ void func_8040CD50_de(Widget_func_8040CD50_de *widget, sm_dldc args) {
     }
 }
 
-void func_8040CF8C_de(WidgetLayout *widget, sm_dldc args) {
+void Frontend_DrawGradientWidget(WidgetLayout *widget, sm_dldc args) {
     struct Shape_typemap_165 box;
     struct Shape_typemap_165 area;
     struct Shape_typemap_165 saved;
@@ -455,13 +455,13 @@ static inline void drawWidgetGroup(DraftWidget *widget, sm_dldc args) {
 void Frontend_DrawWidget(DraftWidget *widget, sm_dldc args) {
     switch (widget->type) {
     case 3:
-        func_8040CD50_de((void *)widget, args);
+        Frontend_DrawImageWidget((void *)widget, args);
         break;
     case 4:
         Frontend_DrawTextWidget((void *)widget, args);
         break;
     case 6:
-        func_8040CF8C_de((void *)widget, args);
+        Frontend_DrawGradientWidget((void *)widget, args);
         break;
     case 8:
         drawWidgetChoice(widget, args);

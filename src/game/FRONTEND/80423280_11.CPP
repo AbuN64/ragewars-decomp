@@ -47,7 +47,7 @@ extern MenuTransitionSignal D_80154020;
 
 extern ListScreenScreen *D_800E4F60;
 
-s32 func_8042AE60_eu(void *arg0, s32 arg1, s32 arg2) {
+s32 func_8042AE60_eu(void *root, s32 arg1, s32 arg2) {
     ListScreenScreen *countdown;
     f32 var_f0;
     s32 temp_a2;
@@ -157,7 +157,7 @@ block_7:
         Render_PlayFlatSound(0xE78);
         break;
     case 8:
-        temp_v0 = ((ListScreenItem *)func_8040EC30_de(arg0, 0x316U))->alpha;
+        temp_v0 = ((ListScreenItem *)func_8040EC30_de(root, 0x316U))->alpha;
         temp_s0 = temp_v0 >> 1;
         func_8042A7B4_de(temp_s0);
         if (temp_s0 < 0xA) {
@@ -167,7 +167,7 @@ block_7:
         }
         break;
     case 9:
-        temp_s0 = ((ListScreenItem *)func_8040EC30_de(arg0, 0x316U))->alpha;
+        temp_s0 = ((ListScreenItem *)func_8040EC30_de(root, 0x316U))->alpha;
         temp_s0 = (temp_s0 + 1) * 2;
         if (temp_s0 >= 0x42) {
             temp_s0 = 0x41;

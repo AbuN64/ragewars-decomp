@@ -82,7 +82,7 @@ struct func_8042362C_S1 {
     s32 unk10;
 };
 
-s32 func_804234CC_de(void) {
+s32 Frontend_CreateGameOptionsScreen(void) {
 
     SliderSettings *settings;
     s32 list;

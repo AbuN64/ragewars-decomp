@@ -16,7 +16,7 @@ enum { MENU_80435D14_62 = 62 };
 #elif defined(VERSION_EU_X)
 enum { MENU_80435D14_62 = 64 };
 #endif
-s32 func_80435B34_de(MenuWidget *arg0) {
+s32 func_80435B34_de(MenuWidget *root) {
     s32 *temp_v0;
     temp_v0 = Scene_AllocateMemory(0x14);
     D_800E5550 = temp_v0;
@@ -24,14 +24,14 @@ s32 func_80435B34_de(MenuWidget *arg0) {
     func_8025E214_de(-1);
     Render_SaveControllerSetup();
     if (Frontend_GetScreenMode() == 1) {
-        arg0->x = 0x62;
-        arg0->y = 0x45;
+        root->x = 0x62;
+        root->y = 0x45;
     } else if (Frontend_GetScreenMode() == 2) {
-        arg0->x = 0x69;
+        root->x = 0x69;
     }
     func_802A2360_de();
     if ((D_801462C8.controllerMode != 0) || (Frontend_IsCupSelected() == 0)) {
-        Frontend_SetWidgetFlag100((s32)func_8040EC30_de(arg0, MENU_80435D14_62), 1);
+        Frontend_SetWidgetFlag100((s32)func_8040EC30_de(root, MENU_80435D14_62), 1);
     }
     D_8011FAC0.clockPaused = 1;
     return 0;

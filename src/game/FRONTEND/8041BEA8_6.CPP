@@ -171,7 +171,7 @@ extern void func_802466A0_de(void *, s32, s32, s32, void *, s32, s32, f32, CVect
 extern void func_8024B2D0_de();
 /* Starts a menu model preview: loads the projection, spawns the model through func_8028CFA0_de, keeps a copy
  * of its record, places it scaled to the screen and runs its first update. Returns the copy, or 0 when no model. */
-void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s32 arg4, CVector3 position, CVector3 facing,
+void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 modelKind, s32 arg3, s32 extra, CVector3 position, CVector3 facing,
                        f32 scale, s32 arg8) {
     CVector3 scales;
     CVector3 local60;
@@ -189,7 +189,7 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s
     self->unk49C = 1;
     self->unk4A0 = arg8;
     draw = &self->sub190;
-    source = func_8028CFA0_de(&g_world, id, arg2, g);
+    source = func_8028CFA0_de(&g_world, id, modelKind, g);
     if (source == 0) {
         self->unk478 = 0;
         return 0;
@@ -217,7 +217,7 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s
                      self->unk480, local60, 0);
     func_8024B2D0_de(draw);
     if (self->unk0 == 9) {
-        Frontend_SelectPreviewModel(self, arg3, arg4, arg2);
+        Frontend_SelectPreviewModel(self, arg3, extra, modelKind);
     }
     return &self->copy4;
 }

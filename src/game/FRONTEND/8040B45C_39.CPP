@@ -334,7 +334,7 @@ void func_80411F48_de(void) {
         Frontend_AcquireArchiveEntry(i);
     }
     for (i = 0; i < D_80153C0C; i++) {
-        func_80410674_de(i, 2);
+        Frontend_GetImageTexture(i, 2);
     }
     for (i = 0; i < D_80153C20.count; i++) {
         Frontend_GetBankTileTexture(0, i, 0);
@@ -382,7 +382,7 @@ void func_804120DC_de(WidgetRecAt34 *widget, s32 load, s32 siblings) {
             break;
         case 3:
             if (load != 0) {
-                func_80410674_de(widget->normal, 3);
+                Frontend_GetImageTexture(widget->normal, 3);
             } else {
                 func_80411AF0_de(widget->normal);
             }

@@ -390,11 +390,11 @@ void func_8042D304_de(s32 player, s32 kind, unsigned short group) {
 }
 
 void func_8042D418_de(s32 arg0) {
-    MenuWidget *temp_s1;
+    MenuWidget *root;
     s32 var_a1;
     s32 var_s0;
 
-    temp_s1 = func_8040EC30_de(D_800E53C0->unkE0, arg0 & 0xFFFF);
+    root = func_8040EC30_de(D_800E53C0->unkE0, arg0 & 0xFFFF);
     var_s0 = 0;
     do {
         switch(var_s0) {
@@ -404,7 +404,7 @@ void func_8042D418_de(s32 arg0) {
         case 3: var_a1=ITEM3; break;
         default: var_a1=ITEM0; break;
         }
-        Frontend_SetWidgetFlag08(func_8040EC30_de(temp_s1, var_a1), 0);
+        Frontend_SetWidgetFlag08(func_8040EC30_de(root, var_a1), 0);
         var_s0 += 1;
     } while (var_s0 < 4);
 }

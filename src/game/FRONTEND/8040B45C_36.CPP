@@ -229,7 +229,7 @@ void func_80410448_de(void) {
     }
 }
 
-s32 func_80410674_de(s32 index, s32 mode) {
+s32 Frontend_GetImageTexture(s32 index, s32 mode) {
     s32 id;
     s32 texture;
     u16 *palette;

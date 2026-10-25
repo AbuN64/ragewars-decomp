@@ -70,16 +70,16 @@ struct WidgetNode;
 struct NodeRecAt44;
 typedef struct NodeRecAt44 NodeRecAt44;
 
-struct Widget_func_8040CD50_de;
-struct Widget_func_8040CD50_de {
+struct WidgetFrontendDrawImageWidget;
+struct WidgetFrontendDrawImageWidget {
     char pad0[0x12];
     u16 flags;
     char pad14[0x18];
     s32 image;
 };
 
-struct Widget_func_8040CD50_de;
-typedef struct Widget_func_8040CD50_de Widget_func_8040CD50_de;
+struct WidgetFrontendDrawImageWidget;
+typedef struct WidgetFrontendDrawImageWidget WidgetFrontendDrawImageWidget;
 
 struct Widget;
 
