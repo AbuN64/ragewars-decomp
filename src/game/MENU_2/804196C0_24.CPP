@@ -261,7 +261,7 @@ D_800E34A8
     return 0;
 }
 
-void func_8041BA00_de(Shared_Item *widget, Args args) {
+void Menu_DrawOverlayWidget(Shared_Item *widget, Args args) {
     Quad_func_802A1BE0_de first;
     Quad_func_802A1BE0_de basis;
     Quad_func_802A1BE0_de value;

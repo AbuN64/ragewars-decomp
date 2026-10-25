@@ -12,7 +12,7 @@
 #include "RENDER_2/8025DE50_5.H"
 #include "RESMGR/resmgr_string_memory.H"
 extern s32 Nav_NextRandom(void);
-extern void func_80419C84_de(func_80419D04_S1 *, s32);
+extern void Menu_InitFlicker(func_80419D04_S1 *, s32);
 /* Per-frame step of a menu widget flicker: while the effect is armed (state 1) the timer counts down to 0 (capped at 50); at 0 a roll below 2 in 100
    starts the flicker (flag set, current entry shown on the widget, sound 0xE75). While flickering each frame spends one hold count of the current
    entry and moves on to the next entry; after the last one the effect is re-rolled and the timer rewinds to 50. Returns 0. */
@@ -35,7 +35,7 @@ s32 Menu_UpdateFlicker(func_80419D04_S1 *flicker) {
    if(flicker->unk60[entry]<=0 || entry+1>=flicker->unk48) {
     next=entry+1; flicker->unk74=next;
     if(flicker->unk48<=next) {
-     func_80419C84_de(flicker,-1);
+     Menu_InitFlicker(flicker,-1);
      flicker->unk78->value=flicker->unk80;
      flicker->unk7C=50;
     } else {
@@ -65,12 +65,12 @@ extern void func_8040EDE4_de(Resource_func_80419E54_de *, MenuResourceWidget *);
 
 extern void *Frontend_GetScreenData(s32 index);
 
-extern void func_80419C84_de(func_80419D04_S1 *arg0, s32 arg1);
+extern void Menu_InitFlicker(func_80419D04_S1 *arg0, s32 arg1);
 
 extern void func_80419F18_de(MenuResourceWidget *);
 
 /* Initializes a flicker effect and randomizes each element's intensity. */
-void func_80419C84_de(func_80419D04_S1 *flicker, s32 arg1) {
+void Menu_InitFlicker(func_80419D04_S1 *flicker, s32 arg1) {
     s32 i;
     s32 var_v1;
     s32 offset;
@@ -108,7 +108,7 @@ MenuResourceWidget *func_80419E54_de(int arg0, int arg1)
   p->c = 8;
   p->a = kind;
   p->resource->value = p->owner.bytes[3];
-  func_80419C84_de(p, -1);
+  Menu_InitFlicker(p, -1);
   func_80419F18_de(p);
   func_8040EDE4_de(r, p);
   return p;

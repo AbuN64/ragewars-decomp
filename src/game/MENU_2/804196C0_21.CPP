@@ -234,7 +234,7 @@ s32 func_8041A724_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return 0;
 }
 
-void func_8041A7B4_de(void *widget, Args args) {
+void Menu_DrawSliderWidget(void *widget, Args args) {
     Quad_func_802A1BE0_de first;
     Quad_func_802A1BE0_de basis;
     Quad_func_802A1BE0_de value;

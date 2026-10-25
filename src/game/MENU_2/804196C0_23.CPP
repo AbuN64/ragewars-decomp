@@ -179,7 +179,7 @@ s32 func_8041AD7C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return 0;
 }
 
-void func_8041AE0C_de(Shared_Item *widget, Args args) {
+void Menu_DrawListWidget(Shared_Item *widget, Args args) {
     Quad_func_802A1BE0_de first;
     Quad_func_802A1BE0_de basis;
     Quad_func_802A1BE0_de value;
@@ -353,7 +353,7 @@ s32 func_8041B340_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return 0;
 }
 
-void func_8041B3D0_de(Shared_Item *widget, Args args) {
+void Menu_DrawButtonWidget(Shared_Item *widget, Args args) {
     Quad_func_802A1BE0_de first;
     Quad_func_802A1BE0_de basis;
     Quad_func_802A1BE0_de value;

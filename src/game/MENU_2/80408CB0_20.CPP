@@ -13,7 +13,7 @@
 #include "RENDER_2/8025DE50_5.H"
 #include "RESMGR/resmgr_string_memory.H"
 extern s32 Nav_NextRandom(void);
-extern void func_80419C84_de(func_80419D04_S1 *, s32);
+extern void Menu_InitFlicker(func_80419D04_S1 *, s32);
 /* Per-frame step of a menu widget flicker: while the effect is armed (state 1) the timer counts down to 0 (capped at 50); at 0 a roll below 2 in 100
    starts the flicker (flag set, current entry shown on the widget, sound 0xE75). While flickering each frame spends one hold count of the current
    entry and moves on to the next entry; after the last one the effect is re-rolled and the timer rewinds to 50. Returns 0. */
@@ -36,7 +36,7 @@ s32 Menu_UpdateFlicker(func_80419D04_S1 *flicker) {
    if(flicker->unk60[entry]<=0 || entry+1>=flicker->unk48) {
     next=entry+1; flicker->unk74=next;
     if(flicker->unk48<=next) {
-     func_80419C84_de(flicker,-1);
+     Menu_InitFlicker(flicker,-1);
      flicker->unk78->value=flicker->unk80;
      flicker->unk7C=50;
     } else {
