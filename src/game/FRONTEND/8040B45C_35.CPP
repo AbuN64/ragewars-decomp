@@ -678,7 +678,10 @@ void Frontend_OpenResourceArchive(u8 *name) {
                 for (j = 0; j < entry->bitmapCount; j++) {
                     font->Clut[j] = font->Clut[0] + j * stride;
                 }
-                clut += entry->bitmapCount + n - n; /* FAKEMATCH: the extra n terms give the font counter the allocation priority the ROM shows. */
+                if (n < 0) {
+                    stride = 0;
+                }
+                clut += entry->bitmapCount;
             }
         }
         Scene_FreeMemory(clutOffsets);
