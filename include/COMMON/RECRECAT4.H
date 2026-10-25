@@ -6,8 +6,6 @@
 struct RecRecAt4;
 typedef struct RecRecAt4 RecRecAt4;
 
-struct TabOptionsCommitOptions;
-typedef struct TabOptionsCommitOptions TabOptionsCommitOptions;
 
 struct RecRecAt4;
 struct RecRecAt4 {
@@ -42,8 +40,6 @@ struct OptionsCommitContext {
     s32 state;
 };
 
-struct OptionsBuildSettings;
-typedef struct OptionsBuildSettings OptionsBuildSettings;
 
 
 
@@ -90,15 +86,6 @@ struct MessageScreen {
     s32 timer;
 };
 
-struct TabOptionsCommitOptions;
-struct TabOptionsCommitOptions {
-    char pad0[0x10];
-    s32 position;
-    char pad14[0x1B - 0x14];
-    u8 first;
-    char pad1C[0x580 - 0x1C];
-    u8 second;
-};
 
 struct CompactOptionsCommitContext;
 struct CompactOptionsCommitContext {
@@ -107,17 +94,6 @@ struct CompactOptionsCommitContext {
     void * unk_8;
 };
 
-struct OptionsBuildSettings;
-struct OptionsBuildSettings {
-    char pad0[0x10];
-    s32 position;
-    char pad14[0x7];
-    u8 first;
-    char pad1C[0x3];
-    u8 second;
-    char pad20[0x560];
-    u8 third;
-};
 
 struct OptionsCommitContext;
 typedef struct OptionsCommitContext OptionsCommitContext;

@@ -256,8 +256,6 @@ typedef struct SlotRecAtB8 SlotRecAtB8;
 
 extern void Audio_PlayVoiceSound(SlotRecAtB8 *base, s16 index);
 
-struct func_8025BB9C_S1;
-typedef struct func_8025BB9C_S1 func_8025BB9C_S1;
 
 
 extern s32 Audio_GetVoiceSoundState(SlotRecAtB8 *arg0, s16 arg1);
@@ -268,11 +266,6 @@ extern s32 Audio_GetVoiceSoundState(SlotRecAtB8 *arg0, s16 arg1);
 struct RecordRecAt4V5;
 typedef struct RecordRecAt4V5 RecordRecAt4V5;
 
-struct func_8025BB9C_S1;
-struct func_8025BB9C_S1 {
-    char pad0[0xA8];
-    int unkA8;
-};
 
 struct HeaderRecAt102;
 struct RecordRecAt4V6;

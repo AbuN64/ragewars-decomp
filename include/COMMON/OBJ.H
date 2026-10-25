@@ -9,17 +9,6 @@
 struct Obj;
 typedef struct Obj Obj;
 
-struct func_80203908_S3;
-struct func_80203908_S3 {
-    char pad0[0x37];
-    s8 unk37;
-    char pad37[0x64 - 0x37 - sizeof(s8)];
-    f32 unk64;
-    char pad64[0x124 - 0x64 - sizeof(f32)];
-    func_80203908_S3_U124 unk124;
-    char pad124[0x128 - 0x124 - sizeof(func_80203908_S3_U124)];
-    s32 unk128;
-};
 
 struct RecordRecAt13C;
 struct RecordRecAt13C {
@@ -57,22 +46,11 @@ typedef struct CTurretIntelligence_t CTurretIntelligence;
 
 extern float D_800C1A00_de;
 
-struct func_80203DF0_S4;
-typedef struct func_80203DF0_S4 func_80203DF0_S4;
 
 struct Result;
 typedef struct Result Result;
 
-struct func_80203DF0_S4;
-struct func_80203DF0_S4 {
-    char pad0[0x6C];
-    f32 unk6C;
-    char pad6C[0x20C - 0x6C - sizeof(f32)];
-    f32 unk20C;
-};
 
-struct func_80203908_S3;
-typedef struct func_80203908_S3 func_80203908_S3;
 
 
 
@@ -179,8 +157,6 @@ struct Rider;
 typedef struct Rider Rider;
 
 extern void func_802022E0_de();
-extern void Libgultra_TrwCacheFlush0(void);
-extern void Libgultra_TrwCacheFlush1(void);
 extern int Libgultra_TrwGetSr();
 extern void Libgultra_TrwSetSr(int arg0);
 

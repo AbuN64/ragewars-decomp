@@ -108,11 +108,6 @@ struct Camera {
     s32 style;
 };
 
-union func_8024C33C_S1_U8;
-union func_8024C33C_S1_U8 {
-    f32 v0;
-    char v1;
-};
 
 struct SourceRecAt18;
 typedef struct SourceRecAt18 SourceRecAt18;
@@ -150,8 +145,6 @@ extern float D_800C3B98;
 struct ObjectLinks24;
 typedef struct ObjectLinks24 ObjectLinks24;
 
-union func_8024C33C_S1_U8;
-typedef union func_8024C33C_S1_U8 func_8024C33C_S1_U8;
 
 
 

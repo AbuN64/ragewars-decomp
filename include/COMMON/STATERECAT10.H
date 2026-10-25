@@ -5,8 +5,6 @@ struct CShakeAxis_t;
 typedef struct CShakeAxis_t CShakeAxis;
 
 
-struct func_80233588_S2;
-typedef struct func_80233588_S2 func_80233588_S2;
 
 extern float D_800C3080_de;
 
@@ -16,13 +14,6 @@ extern float D_800C3060_de;
 
 extern float D_800C3078_de;
 
-struct func_80233588_S2;
-struct func_80233588_S2 {
-    char pad0[0xCB];
-    s8 unkCB;
-    char padCB[0x13C - 0xCB - sizeof(s8)];
-    s32 unk13C;
-};
 
 extern float D_800C3050_de;
 
@@ -43,8 +34,6 @@ extern float D_800C3074_de;
 
 extern float D_800C3054_de;
 
-struct func_8023333C_S1;
-typedef struct func_8023333C_S1 func_8023333C_S1;
 
 extern float D_800C3088_de;
 
@@ -58,13 +47,6 @@ extern float D_800C3070_de;
 
 extern float D_800C308C_de;
 
-struct func_8023333C_S1;
-struct func_8023333C_S1 {
-    char pad0[0x104];
-    f32 unk104;
-    char pad104[0x1D8 - 0x104 - sizeof(f32)];
-    void * unk1D8;
-};
 
 extern float D_800C305C_de;
 

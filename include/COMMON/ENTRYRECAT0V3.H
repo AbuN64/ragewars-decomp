@@ -14,13 +14,7 @@ struct RecordRecAt12;
 typedef struct RecordRecAt12 RecordRecAt12;
 
 
-struct Entry_func_804053E0_de;
-struct Entry_func_804053E0_de {
-    s32 size;
-    char data[28];
-};
 
-struct Entry_func_804053E0_de;
 
 struct NoteState;
 struct NoteState {
@@ -37,18 +31,7 @@ struct NoteState {
 extern unsigned char * D_800D36DC;
 
 
-struct NoteStatePakReadNoteInfo;
-typedef struct NoteStatePakReadNoteInfo NoteStatePakReadNoteInfo;
 
-struct NoteStatePakReadNoteInfo;
-struct NoteStatePakReadNoteInfo {
-    u32 file_size;
-    u32 game_code;
-    u16 company_code;
-    u8 ext_name[4];
-    u8 game_name[16];
-    char pad[2];
-};
 
 
 struct EntryRecAt0V3;

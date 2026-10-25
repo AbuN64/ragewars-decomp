@@ -14,8 +14,6 @@ extern void func_80422020_de();
 
 extern void func_8042177C_de();
 
-struct Data800E4400Ptr;
-typedef struct Data800E4400Ptr Data800E4400Ptr;
 
 
 
@@ -42,15 +40,6 @@ struct Meter;
 
 extern float D_800DD608;
 
-struct State_func_8042177C_de;
-struct State_func_8042177C_de {
-    char pad0[8];
-    void *list;
-    char padC[0x20 - 0xC];
-    void *object;
-    char pad24[0x34 - 0x24];
-    s32 ready;
-};
 
 struct NumberPadScreen {
     union { s32 dialog; void *title; };
@@ -68,21 +57,7 @@ struct NumberPadScreen {
 };
 
 struct CellRecAt1A;
-struct Data800E4400Ptr;
-struct Data800E4400Ptr {
-    char a[8];
-    s32 unk8;
-    char b[0x14];
-    struct CellRecAt1A *unk20;
-    char c[8];
-    s32 unk2C;
-};
 
-struct Screen_func_804210E8_de;
-struct Screen_func_804210E8_de {
-    char pad0[0xC];
-    void *boxes[4];
-};
 
 struct Triple;
 

@@ -2881,16 +2881,10 @@ typedef struct MatchRewardsRecord MatchRewardsRecord;
 
 
 
-struct MatchSetupName;
-typedef struct MatchSetupName MatchSetupName;
 
 
 
-struct MatchSetupRecord;
-typedef struct MatchSetupRecord MatchSetupRecord;
 
-struct MatchSetupSprite;
-typedef struct MatchSetupSprite MatchSetupSprite;
 
 
 
@@ -3066,8 +3060,6 @@ typedef struct PlayerRankInner PlayerRankInner;
 
 
 
-struct PlayerSelectionItem;
-typedef struct PlayerSelectionItem PlayerSelectionItem;
 
 
 
@@ -3146,8 +3138,6 @@ typedef struct Selection Selection;
 
 
 
-struct Settings20;
-typedef struct Settings20 Settings20;
 
 struct Settings580;
 typedef struct Settings580 Settings580;
@@ -3416,7 +3406,6 @@ struct ALADPCMWaveInfo {
     ALADPCMBook *book;
 };
 struct Opaque_ALLowPass_s;
-typedef struct Opaque_ALLowPass_s Opaque_ALLowPass;
 struct ALDelay_func_802B5B94_de;
 struct ALDelay_func_802B5B94_de {
     u32 input;
@@ -3658,17 +3647,6 @@ struct CallbackState114 {
 typedef void ( *ContextCallback)(void *);
 struct Camera_func_8026851C_de;
 struct Rec_func_8024C92C_de;
-struct MatchSetupSprite;
-struct MatchSetupSprite {
-    char pad0[0x10];
-    u8 alpha;
-    char pad11[0x14 - 0x11];
-    u16 x;
-    char pad16[0x18 - 0x16];
-    s16 width;
-};
-struct MatchSetupSprite;
-struct MatchSetupSprite;
 struct ContextRecAt2BC0;
 
 struct ContextRecAt104;
@@ -4059,14 +4037,6 @@ struct GameLocalizationState {
     u8 reserved[0x581];
     u8 language;
 };
-struct Settings20;
-struct Settings20 {
-    s32 flags;
-    char pad4[0xD - 0x4];
-    u8 trialKind;
-    char padE[0x1D - 0xE];
-    u8 replay;
-};
 struct ParticleView;
 struct ParticleView {
     char pad0[0x6C];
@@ -4103,12 +4073,6 @@ struct Piece {
     s32 unk38;
 };
 struct GroupCode8044E2B8;
-struct Record_func_8043E2D8_de;
-struct Record_func_8043E2D8_de {
-    char pad[0x83];
-    u8 value;
-};
-struct Record_func_8043E2D8_de;
 struct PakMenuSlot;
 struct Effect_func_8026851C_de;
 struct HudCue;
@@ -4210,16 +4174,6 @@ struct MatchRewardsRecord {
     char pad70[0x74 - 0x70];
     s32 total2;
     char pad78[0x190 - 0x78];
-};
-struct MatchSetupName;
-struct MatchSetupName {
-    char pad0[0x28];
-    u8 code[0x14];
-    u8 text[0xA];
-};
-struct MatchSetupRecord;
-struct MatchSetupRecord {
-    char pad0[0x190];
 };
 struct Variable;
 struct Variable {
@@ -4484,15 +4438,6 @@ struct PlayerRankInner;
 struct PlayerRankInner {
     char pad[0x10];
     char **text;
-};
-struct PlayerSelectionItem;
-struct PlayerSelectionItem {
-    char pad0[0x10];
-    u8 alpha;
-    char pad11[3];
-    s16 x;
-    s16 y;
-    s16 w;
 };
 struct ViewRecAt54D;
 struct ViewRecAt54D {
@@ -6439,7 +6384,6 @@ struct SharedPlayer16E4 {
         } view16E0_2;
     } views16E0;
 };
-struct Settings20;
 struct ObjRecAt8F;
 struct Body;
 struct Character;

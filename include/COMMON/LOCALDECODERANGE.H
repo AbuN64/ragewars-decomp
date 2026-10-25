@@ -24,8 +24,6 @@ extern double D_800C4170_de;
 
 
 
-struct func_80260C8C_S1;
-typedef struct func_80260C8C_S1 func_80260C8C_S1;
 
 struct Track_func_80261180_de;
 
@@ -95,14 +93,6 @@ typedef struct Track_func_80261180_de Track_func_80261180_de;
 
 
 
-struct func_80260C8C_S1;
-struct func_80260C8C_S1 {
-    int unk0;
-    char pad0[0x4 - 0x0 - sizeof(int)];
-    Triple unk4;
-    char pad4[0x10 - 0x4 - sizeof(Triple)];
-    int unk10;
-};
 
 
 struct ObjRecAt4V4;

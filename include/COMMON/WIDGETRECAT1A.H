@@ -222,8 +222,6 @@ typedef struct WidgetRecAt1A WidgetRecAt1A;
 
 extern int D_8014D710;
 
-struct Batch;
-typedef struct Batch Batch;
 
 struct SpriteRecAt14;
 struct SpriteRecAt14 {
@@ -236,13 +234,7 @@ struct SpriteRecAt14 {
     u16 pad16;
 };
 
-struct Batch;
 struct SpriteRecAt14;
-struct Batch {
-    s32 pad0[4];
-    struct SpriteRecAt14 *cursor;
-    s32 count;
-};
 
 
 

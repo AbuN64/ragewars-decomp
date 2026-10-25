@@ -4,21 +4,10 @@
 struct OSThread_s;
 typedef struct OSThread_s OSThread_s;
 
-struct ObjectLinks18_2;
-typedef struct ObjectLinks18_2 ObjectLinks18_2;
 
 struct OSThreadContext;
 typedef struct OSThreadContext OSThreadContext;
 
-struct ObjectLinks18_2;
-struct ObjectLinks18_2 {
-    s32 *unk_0;
-    s32 *unk_4;
-    s32 unk_8;
-    s32 unk_C;
-    s32 unk_10;
-    s32 unk_14;
-};
 
 struct OSThreadContext;
 struct OSThreadContext {
@@ -74,6 +63,4 @@ struct OSThread_s {
     OSThreadContext context;
 };
 
-extern void func_802BAD68_de(void);
-extern void func_802BB008_eu(void);
 #endif

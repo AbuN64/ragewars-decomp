@@ -29,12 +29,6 @@ struct Pool_func_80411518_de {
     struct EntryCode8040B45C80411518 *entries;
 };
 
-struct Usage;
-struct Usage {
-    s32 expiry;
-    u16 count;
-    u16 pad6;
-};
 
 extern void func_80411A3C_de(void);
 
@@ -89,13 +83,6 @@ extern int D_80153C08;
 
 
 
-struct RecordRecAtCV4;
-struct RecordRecAtCV4 {
-    char pad0[0xA];
-    s16 a;
-    s16 c;
-    char padE[28 - 0xE];
-};
 
 struct QuadRecAt2C;
 struct QuadRecAt2C {
@@ -201,8 +188,6 @@ struct Pair2C;
 
 extern s16 func_80411A84_de(s32 index);
 
-struct Usage;
-typedef struct Usage Usage;
 
 
 struct SlotRecAtCV2;

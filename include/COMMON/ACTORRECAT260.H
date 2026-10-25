@@ -32,13 +32,6 @@ struct ArgRecAt1C {
     int unk1C;
 };
 
-struct Sync;
-struct Sync {
-    char pad[0x54];
-    int sync;
-    char pad58[0x1C];
-    int team;
-};
 
 struct ArgRecAt1C;
 typedef struct ArgRecAt1C ArgRecAt1C;
@@ -141,8 +134,6 @@ struct StateRecAt1C;
 typedef struct StateRecAt1C StateRecAt1C;
 
 
-struct Sync;
-typedef struct Sync Sync;
 
 struct MenuRules;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)

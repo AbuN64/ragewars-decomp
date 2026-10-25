@@ -32,16 +32,9 @@ extern float D_800C48EC_de;
 
 extern float D_800C4910_de;
 
-struct func_80273208_S1;
-typedef struct func_80273208_S1 func_80273208_S1;
 
 
 
-struct func_80273208_S1;
-struct func_80273208_S1 {
-    char pad0[0x4];
-    CVector3 unk4;
-};
 
 extern float D_800C48F0_de;
 

@@ -21,11 +21,6 @@ struct SceneRecAt140;
 typedef struct SceneRecAt140 SceneRecAt140;
 
 
-struct Node_func_8028E930_de;
-struct Node_func_8028E930_de {
-    struct Node_func_8028E930_de *next;
-    void *queue;
-};
 
 extern float D_800C5350_de;
 
@@ -159,7 +154,6 @@ struct ObjectLinks2F8;
 typedef struct ObjectLinks2F8 ObjectLinks2F8;
 
 
-struct Node_func_8028E930_de;
 
 struct OSSched;
 typedef struct OSSched OSSched;
@@ -191,8 +185,6 @@ struct Node_func_8028FC10_de {
     s32 type;
 };
 
-struct Node_func_8028E930_de;
-typedef struct Node_func_8028E930_de Node_func_8028E930_de;
 
 
 

@@ -4,20 +4,6 @@
 struct ALParam_s;
 typedef struct ALParam_s ALParam_s;
 
-struct func_802BA4B0_S1;
-struct func_802BA4B0_S1 {
-    int unk0;
-    char pad0[0x4 - 0x0 - sizeof(int)];
-    int unk4;
-    char pad4[0x8 - 0x4 - sizeof(int)];
-    int unk8;
-    char pad8[0xC - 0x8 - sizeof(int)];
-    short unkC;
-    char padC[0xE - 0xC - sizeof(short)];
-    short unkE;
-    char padE[0x10 - 0xE - sizeof(short)];
-    int unk10;
-};
 
 extern float D_800C7708_de;
 
@@ -138,8 +124,6 @@ struct AudioLowPassFilter;
 typedef struct AudioLowPassFilter AudioLowPassFilter;
 
 
-struct func_802B95DC_S1;
-typedef struct func_802B95DC_S1 func_802B95DC_S1;
 
 struct LogTab;
 typedef struct LogTab LogTab;
@@ -160,30 +144,8 @@ extern f64 frexp(f64 arg0, s32 *arg2);
 
 extern float D_800C770C_de;
 
-struct func_802B95DC_S1;
-struct func_802B95DC_S1 {
-    char pad0[0x14];
-    s32 unk14;
-    char pad14[0x18 - 0x14 - sizeof(s32)];
-    f32 unk18;
-    char pad18[0x1C - 0x18 - sizeof(f32)];
-    s32 unk1C;
-    char pad1C[0x20 - 0x1C - sizeof(s32)];
-    s32 unk20;
-    char pad20[0x24 - 0x20 - sizeof(s32)];
-    s32 unk24;
-    char pad24[0x28 - 0x24 - sizeof(s32)];
-    s32 unk28;
-    char pad28[0x2C - 0x28 - sizeof(s32)];
-    s32 unk2C;
-    char pad2C[0x30 - 0x2C - sizeof(s32)];
-    s32 unk30;
-};
 
-struct func_802BA4B0_S1;
-typedef struct func_802BA4B0_S1 func_802BA4B0_S1;
 
 extern f32 Audio_GetEnvelopeVolume(f32 arg0, s32 arg1, s32 arg2, s32 arg3);
 
-extern void func_802B4A08_eu_x(void);
 #endif

@@ -3,8 +3,6 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct State_func_80428214_de;
-typedef struct State_func_80428214_de State_func_80428214_de;
 
 struct Resource_func_80419E54_de;
 
@@ -71,11 +69,6 @@ struct SlotCode80423280 {
     u8 pad2D[0x96 - 0x2D];
 };
 
-struct State_func_80428214_de;
-struct State_func_80428214_de {
-    u8 pad0[0x11C];
-    SlotCode80423280 slots[4];
-};
 
 
 
@@ -114,11 +107,6 @@ struct Resource_func_80419E54_de;
 
 
 
-struct ScreenCode80423280;
-struct ScreenCode80423280 {
-    char pad0[0x970];
-    s32 context;
-};
 
 
 struct Pair;

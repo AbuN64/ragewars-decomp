@@ -8,8 +8,6 @@ typedef struct ObjectState10_2 ObjectState10_2;
 
 extern float D_800C7340_de;
 
-struct func_802B3B80_S1;
-typedef struct func_802B3B80_S1 func_802B3B80_S1;
 
 struct CopyDest802B3998;
 typedef struct CopyDest802B3998 CopyDest802B3998;
@@ -17,12 +15,6 @@ typedef struct CopyDest802B3998 CopyDest802B3998;
 
 
 
-struct CallbackNode;
-struct CallbackNode {
-    s32 state;
-    struct CallbackNode *self;
-    void *callback;
-};
 
 struct ALCSeq_s;
 typedef struct ALCSeq_s ALCSeq_s;
@@ -93,47 +85,6 @@ extern double D_800C7300_de;
 struct ALCMidiHdr;
 typedef struct ALCMidiHdr ALCMidiHdr;
 
-struct func_802B3B80_S1;
-struct func_802B3B80_S1 {
-    char pad0[0x14];
-    s32 unk14;
-    char pad14[0x18 - 0x14 - sizeof(s32)];
-    s32 unk18;
-    char pad18[0x1C - 0x18 - sizeof(s32)];
-    s32 unk1C;
-    char pad1C[0x20 - 0x1C - sizeof(s32)];
-    s32 unk20;
-    char pad20[0x24 - 0x20 - sizeof(s32)];
-    s32 unk24;
-    char pad24[0x28 - 0x24 - sizeof(s32)];
-    s32 unk28;
-    char pad28[0x2C - 0x28 - sizeof(s32)];
-    s32 unk2C;
-    char pad2C[0x30 - 0x2C - sizeof(s32)];
-    s16 unk30;
-    char pad30[0x32 - 0x30 - sizeof(s16)];
-    s16 unk32;
-    char pad32[0x34 - 0x32 - sizeof(s16)];
-    u8 unk34;
-    char pad34[0x38 - 0x34 - sizeof(u8)];
-    s16 unk38;
-    char pad38[0x5C - 0x38 - sizeof(s16)];
-    s32 unk5C;
-    char pad5C[0x60 - 0x5C - sizeof(s32)];
-    s32 unk60;
-    char pad60[0x64 - 0x60 - sizeof(s32)];
-    s32 unk64;
-    char pad64[0x68 - 0x64 - sizeof(s32)];
-    s32 unk68;
-    char pad68[0x6C - 0x68 - sizeof(s32)];
-    func_8028472C_S2_U118 unk6C;
-    char pad6C[0x70 - 0x6C - sizeof(func_8028472C_S2_U118)];
-    s32 unk70;
-    char pad70[0x74 - 0x70 - sizeof(s32)];
-    s32 unk74;
-    char pad74[0x78 - 0x74 - sizeof(s32)];
-    s32 unk78;
-};
 
 struct CopySource802B3998;
 struct CopySource802B3998 {
@@ -147,8 +98,6 @@ struct CopySource802B3998 {
     int wordsAC[16];
 };
 
-struct CallbackNode;
-typedef struct CallbackNode CallbackNode;
 
 struct Node_func_802AFD6C_de;
 struct Node_func_802AFD6C_de {

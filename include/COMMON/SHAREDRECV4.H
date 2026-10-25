@@ -26,8 +26,6 @@ struct ObjectLinks10_2 {
     void * unk_C;
 };
 
-struct func_802B8200_S1;
-typedef struct func_802B8200_S1 func_802B8200_S1;
 
 struct ObjectState10_4;
 typedef struct ObjectState10_4 ObjectState10_4;
@@ -63,15 +61,6 @@ struct ObjRecAt40V2 {
     s32 field40;
 };
 
-struct func_802B8200_S1;
-struct func_802B8200_S1 {
-    char pad0[4];
-    void *unk4;
-    char pad4[4];
-    void *unkC;
-    char padC[4];
-    void *unk14;
-};
 
 struct ObjectState10_3;
 struct ObjectState10_3 {
@@ -110,5 +99,4 @@ struct ObjectState10_4 {
 struct ObjRecAt40V2;
 typedef struct ObjRecAt40V2 ObjRecAt40V2;
 
-extern void func_802B31E8_de(void);
 #endif

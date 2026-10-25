@@ -7,7 +7,6 @@
 struct ActorRec;
 typedef struct ActorRec ActorRec;
 
-extern float D_800C1DB4_de;
 extern float D_800C1DB8_de;
 
 struct Obj_func_8020D9C0_de;
@@ -51,8 +50,6 @@ struct Selection_func_8020D4AC_de {
     s32 failed;
 };
 
-struct RecCode802080008020DC10;
-typedef struct RecCode802080008020DC10 RecCode802080008020DC10;
 
 /* The trajectory mode belongs to the full instance, beyond its 20-byte header. */
 typedef struct BallisticInstance {
@@ -84,13 +81,6 @@ struct ActorRec {
     s32 field284;
 };
 
-struct RecCode802080008020DC10;
-struct RecCode802080008020DC10 {
-    char pad0[0x64];
-    s32 unk64;
-    char pad64[0x21C - 0x64 - sizeof(s32)];
-    s32 unk21C;
-};
 
 struct Selection_func_8020D4AC_de;
 typedef struct Selection_func_8020D4AC_de Selection_func_8020D4AC_de;

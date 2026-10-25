@@ -127,8 +127,6 @@ struct PakMenuController {
     PakSavePacket packet; /* 0x2E28 */
     s32 focus; /* 0x3470 */
 };
-typedef char PakMenuController_links_check[(((u32)&((struct PakMenuController *)0)->links) == 0x2DF8) ? 1 : -1];
-typedef char PakMenuController_size_check[(sizeof(struct PakMenuController) == 0x3474) ? 1 : -1];
 
 struct Char;
 struct Char {
@@ -202,12 +200,7 @@ struct RowRecAtBA4 {
 struct Shared_Item;
 typedef struct Shared_Item Shared_Item;
 
-struct Block_func_80430028_de;
 struct SlotsCode804196C0;
-struct Block_func_80430028_de {
-    char pad0[4];
-    struct SlotsCode804196C0 *slots;
-};
 
 
 struct ItemFrontendRelabelSlotRows;

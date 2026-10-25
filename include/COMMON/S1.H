@@ -11,14 +11,7 @@ struct Pool80255ACC;
 
 
 
-union func_80255F34_S1_U4;
-union func_80255F34_S1_U4 {
-    char * v0;
-    int v1;
-};
 
-union func_80255F34_S1_U4;
-typedef union func_80255F34_S1_U4 func_80255F34_S1_U4;
 
 
 

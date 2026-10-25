@@ -7,13 +7,6 @@ struct StatePair;
 typedef struct StatePair StatePair;
 extern StatePair D_800CDA30_de;
 
-struct func_802A2EC0_S1;
-struct func_802A2EC0_S1 {
-    char pad0[0x48];
-    s32 unk48;
-    char pad48[0x5C - 0x48 - sizeof(s32)];
-    s32 unk5C;
-};
 
 
 
@@ -36,27 +29,12 @@ extern int D_800CBC14;
 
 struct StatePair;
 
-struct func_802A2EC0_S1;
-typedef struct func_802A2EC0_S1 func_802A2EC0_S1;
 
 
 
 
 
-struct func_802A2D14_S1;
-typedef struct func_802A2D14_S1 func_802A2D14_S1;
 
-struct func_802A2D14_S1;
-struct func_802A2D14_S1 {
-    char pad0[0x4C];
-    s32 unk4C;
-    char pad4C[0x50 - 0x4C - sizeof(s32)];
-    s32 unk50;
-    char pad50[0x54 - 0x50 - sizeof(s32)];
-    s32 unk54;
-    char pad54[0x58 - 0x54 - sizeof(s32)];
-    s32 unk58;
-};
 
 
 

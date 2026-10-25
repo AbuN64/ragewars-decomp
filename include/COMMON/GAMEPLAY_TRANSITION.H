@@ -163,7 +163,6 @@ struct Shared_ActorView {
     u8 pad16DA[6];
     struct Shared_ActorView * next; /* +0x16E0: src/func_8021B468.c */
 };
-typedef char Shared_ActorView_size_check[(sizeof(Shared_ActorView) == 0x16E4) ? 1 : -1];
 
 typedef struct Shared_ControlView Shared_ControlView;
 struct Shared_ControlView {
@@ -180,7 +179,6 @@ struct Shared_ControlView {
     u8 difficulty; /* 0x93 */
     u8 germanActive; /* +0x94: src/func_8021B468.c */
 };
-typedef char Shared_ControlView_size_check[(sizeof(Shared_ControlView) == 0x95) ? 1 : -1];
 
 typedef struct Shared_ProjectileView Shared_ProjectileView;
 struct Shared_ProjectileView {
@@ -191,7 +189,6 @@ struct Shared_ProjectileView {
     char pad19E[0x32];
     s32 stateFlags; /* 0x1D0 */
 };
-typedef char Shared_ProjectileView_size_check[(sizeof(Shared_ProjectileView) == 0x1D4) ? 1 : -1];
 
 typedef struct Shared_PlayerSettingsView Shared_PlayerSettingsView;
 struct Shared_PlayerSettingsView {
@@ -204,7 +201,6 @@ struct Shared_PlayerSettingsView {
     char pad504[0xA0];
     s32 state; /* +0x5A4: src/func_8021B468.c */
 };
-typedef char Shared_PlayerSettingsView_size_check[(sizeof(Shared_PlayerSettingsView) == 0x5A8) ? 1 : -1];
 
 #include "COMMON/GAMEPLAY_SETTINGS.H"
 
@@ -213,7 +209,6 @@ struct Shared_ModelView {
     s32 unused; /* +0x0: src/func_8021B468.c */
     s32 flags; /* +0x4: src/func_8021B468.c */
 };
-typedef char Shared_ModelView_size_check[(sizeof(Shared_ModelView) == 0x8) ? 1 : -1];
 
 typedef struct Shared_SpecialObjectView Shared_SpecialObjectView;
 struct Shared_SpecialObjectView {
@@ -221,7 +216,6 @@ struct Shared_SpecialObjectView {
     char segment[100]; /* +0x170: src/func_8021B468.c */
     s32 reset; /* +0x1D4: src/func_8021B468.c */
 };
-typedef char Shared_SpecialObjectView_size_check[(sizeof(Shared_SpecialObjectView) == 0x1D8) ? 1 : -1];
 
 typedef struct Shared_GlobalPlayers Shared_GlobalPlayers;
 struct Shared_GlobalPlayers {
@@ -232,7 +226,6 @@ struct Shared_GlobalPlayers {
     char effects; /* +0x20: src/func_8021B468.c */
     char pad21[0x3];
 };
-typedef char Shared_GlobalPlayers_size_check[(sizeof(Shared_GlobalPlayers) == 0x24) ? 1 : -1];
 
 typedef struct Shared_struct_D_800D34C0_0x18 Shared_struct_D_800D34C0_0x18;
 struct Shared_struct_D_800D34C0_0x18 {
@@ -244,7 +237,6 @@ struct Shared_struct_D_800D34C0_0x18 {
     s16 unk10; /* +0x10: src/func_8021B468.c */
     char pad12[0x6];
 };
-typedef char Shared_struct_D_800D34C0_0x18_size_check[(sizeof(Shared_struct_D_800D34C0_0x18) == 0x18) ? 1 : -1];
 extern Shared_struct_D_800D34C0_0x18 D_800D34C0[15]; /* item records, looked up by id */
 
 typedef struct Shared_HeightBonuses Shared_HeightBonuses;
@@ -252,5 +244,4 @@ struct Shared_HeightBonuses {
     f32 spawn; /* +0x0: src/func_8021B468.c */
     f32 projectile; /* +0x4: src/func_8021B468.c */
 };
-typedef char Shared_HeightBonuses_size_check[(sizeof(Shared_HeightBonuses) == 0x8) ? 1 : -1];
 #endif

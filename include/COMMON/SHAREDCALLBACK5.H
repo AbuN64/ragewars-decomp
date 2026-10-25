@@ -14,7 +14,6 @@ typedef struct Player_func_80209308_de Player_func_80209308_de;
 struct SharedPlayer_func_80208158_de;
 typedef struct SharedPlayer_func_80208158_de SharedPlayer_func_80208158_de;
 
-typedef void ( *SharedCallback5)(void *, signed int);
 
 
 
@@ -1517,12 +1516,6 @@ struct Brain {
     s32 cooldown;
 };
 
-struct TargetPosition;
-struct TargetPosition {
-    u8 padding[8];
-    f32 position[3];
-};
-struct TargetPosition;
 
 
 

@@ -64,14 +64,7 @@ struct Shape_func_8020AF9C_de_2 {
     int field_0;
 };
 
-union func_80230BB8_S2_U1D8;
-union func_80230BB8_S2_U1D8 {
-    char * v0;
-    void * v1;
-};
 
-union func_80230BB8_S2_U1D8;
-typedef union func_80230BB8_S2_U1D8 func_80230BB8_S2_U1D8;
 
 struct ObjRecAt18V3;
 typedef struct ObjRecAt18V3 ObjRecAt18V3;
@@ -1580,11 +1573,6 @@ struct Shared_Actor;
 typedef struct Shared_Actor Shared_Actor;
 
 
-union func_8022FD9C_S2_U770;
-union func_8022FD9C_S2_U770 {
-    s16 v0;
-    u16 v1;
-};
 
 
 
@@ -1602,8 +1590,6 @@ struct SettingsE {
 };
 
 
-union func_8022FD9C_S2_U770;
-typedef union func_8022FD9C_S2_U770 func_8022FD9C_S2_U770;
 
 
 struct IntegerState11C4;

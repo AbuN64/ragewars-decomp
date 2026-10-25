@@ -2,16 +2,7 @@
 #define COMMON_S1_5_H
 #include "TYPES.H"
 #include "COMMON/LEVEL_ACTOR.H"
-struct func_80422C20_S1;
-struct func_80422C20_S1 {
-    char pad0[0x1240];
-    u8 unk1240;
-    char pad1240[0x180C - 0x1240 - sizeof(u8)];
-    s32 unk180C;
-};
 
-struct func_80422C20_S1;
-typedef struct func_80422C20_S1 func_80422C20_S1;
 
 
 extern void func_80422170_de();

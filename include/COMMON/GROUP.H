@@ -44,8 +44,6 @@ typedef struct VectorPair VectorPair;
 struct Work80244494;
 
 
-struct func_80244E48_S1;
-typedef struct func_80244E48_S1 func_80244E48_S1;
 
 
 
@@ -65,27 +63,6 @@ struct GameState {
 
 extern int func_80245908_de();
 
-struct func_80244E48_S1;
-struct func_80244E48_S1 {
-    char pad0[0x40];
-    s32 unk40;
-    char pad40[0x50 - 0x40 - sizeof(s32)];
-    s32 unk50;
-    char pad50[0x54 - 0x50 - sizeof(s32)];
-    s32 unk54;
-    char pad54[0x5C - 0x54 - sizeof(s32)];
-    s32 unk5C;
-    char pad5C[0xD8 - 0x5C - sizeof(s32)];
-    s32 unkD8;
-    char padD8[0x108 - 0xD8 - sizeof(s32)];
-    s32 unk108;
-    char pad108[0x10C - 0x108 - sizeof(s32)];
-    s32 unk10C;
-    char pad10C[0x110 - 0x10C - sizeof(s32)];
-    s32 unk110;
-    char pad110[0x114 - 0x110 - sizeof(s32)];
-    s32 unk114;
-};
 
 struct GameState;
 typedef struct GameState GameState;

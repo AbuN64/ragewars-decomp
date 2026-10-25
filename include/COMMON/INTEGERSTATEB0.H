@@ -20,8 +20,6 @@ typedef struct IntegerStateB0 IntegerStateB0;
 
 
 
-struct func_80293378_S1;
-typedef struct func_80293378_S1 func_80293378_S1;
 
 
 
@@ -64,11 +62,6 @@ extern float D_800C54B4_de;
 
 
 
-struct func_80293378_S1;
-struct func_80293378_S1 {
-    char pad0[0x26DC4];
-    f32 unk26DC4;
-};
 
 
 extern void Frontend_RequestScreenMode(s32 arg0);

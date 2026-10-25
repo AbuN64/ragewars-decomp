@@ -21,8 +21,6 @@ typedef struct Pool80255720 Pool80255720;
 struct EntryList;
 typedef struct EntryList EntryList;
 
-union func_80255428_S1_UC;
-typedef union func_80255428_S1_UC func_80255428_S1_UC;
 
 struct EntryRecAtCV1;
 typedef struct EntryRecAtCV1 EntryRecAtCV1;
@@ -58,11 +56,6 @@ struct EntryRecAtCV1 {
 
 
 
-union func_80255428_S1_UC;
-union func_80255428_S1_UC {
-    s32 * v0;
-    s32 v1;
-};
 
 struct HeapRecAtC;
 typedef struct HeapRecAtC HeapRecAtC;

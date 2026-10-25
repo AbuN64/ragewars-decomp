@@ -103,11 +103,6 @@ struct IntegerState610;
 extern s32 D_800DE874;
 
 
-struct func_80408E1C_S1;
-struct func_80408E1C_S1 {
-    char pad0[0x554];
-    char unk554;
-};
 
 extern int D_800D2444;
 
@@ -120,8 +115,6 @@ extern int D_800D243C;
 extern s32 D_80142CAC;
 
 
-struct func_80408E1C_S1;
-typedef struct func_80408E1C_S1 func_80408E1C_S1;
 
 struct OwnerRecAt5D8V1;
 

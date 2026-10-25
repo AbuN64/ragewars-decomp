@@ -225,8 +225,6 @@ struct ObjRecAtCV1 {
     s16 unkC;
 };
 
-union func_80234DD0_S1_U260;
-typedef union func_80234DD0_S1_U260 func_80234DD0_S1_U260;
 
 struct CCameraText_t;
 struct CCameraText_t {
@@ -293,11 +291,6 @@ extern int D_800CE47C;
 struct CCameraText_t;
 typedef struct CCameraText_t CCameraText;
 
-union func_80234DD0_S1_U260;
-union func_80234DD0_S1_U260 {
-    CVector3 v0;
-    f32 v1;
-};
 
 struct CCameraText_t;
 
@@ -346,15 +339,8 @@ struct ObjRecAt20V2 {
 };
 
 
-union func_80209DAC_S2_U93;
-typedef union func_80209DAC_S2_U93 func_80209DAC_S2_U93;
 
 
-union func_80209DAC_S2_U93;
-union func_80209DAC_S2_U93 {
-    u8 v0;
-    s8 v1;
-};
 
 
 struct CCameraText_t;

@@ -8,20 +8,11 @@ extern s32 func_8041EAC4_de();
 struct Player_func_8041EAC4_de;
 typedef struct Player_func_8041EAC4_de Player_func_8041EAC4_de;
 
-struct Screen_func_8041ECB4_de;
-struct Screen_func_8041ECB4_de {
-    char pad0[8];
-    void *roots[3];
-    s32 request;
-    s32 timer;
-};
 
 extern s32 Frontend_FindKeyIndex(s32 key);
 
 extern void Frontend_SeatJoinRequests(void);
 
-struct Menu_func_8041EE08_de;
-typedef struct Menu_func_8041EE08_de Menu_func_8041EE08_de;
 
 extern s32 func_8041EBBC_de(void);
 
@@ -37,14 +28,6 @@ struct RequestRecAt10 {
 extern struct RequestRecAt10 D_80153F80[3];
 
 
-struct Menu_func_8041EE08_de;
-struct Menu_func_8041EE08_de {
-    char pad[8];
-    int items[3];
-    int unk14;
-    int unk18;
-    int unk1C;
-};
 
 extern s32 Frontend_CountUsedSlots();
 

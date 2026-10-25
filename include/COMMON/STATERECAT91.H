@@ -33,22 +33,7 @@ struct PresetTable;
 struct Arg;
 struct StateRecAt91;
 
-struct func_80426270_S1;
-struct func_80426270_S1 {
-    char pad0[0x4];
-    func_8024DED0_S2 unk4;
-};
 
-struct Player_func_80425014_de;
-struct Player_func_80425014_de {
-    char pad0[0xF];
-    u8 slot;
-    char pad10[0x17 - 0x10];
-    u8 count;
-    char pad18[0x125 - 0x18];
-    u8 flags[4][5];
-    char pad139[0x190 - 0x139];
-};
 
 struct PresetTable;
 typedef struct PresetTable PresetTable;
@@ -74,8 +59,6 @@ typedef struct Arg Arg;
 struct PlayerRecAt602;
 typedef struct PlayerRecAt602 PlayerRecAt602;
 
-struct func_80426270_S1;
-typedef struct func_80426270_S1 func_80426270_S1;
 
 typedef struct WeaponStatus {
     u8 pad[0x78];

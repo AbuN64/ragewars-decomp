@@ -56,19 +56,12 @@ struct Other;
 typedef struct Other Other;
 
 
-union func_802ADD18_S1_U5E8;
-union func_802ADD18_S1_U5E8 {
-    u16 v0;
-    s16 v1;
-};
 
 
 
 
 
 
-union func_802ADD18_S1_U5E8;
-typedef union func_802ADD18_S1_U5E8 func_802ADD18_S1_U5E8;
 
 
 

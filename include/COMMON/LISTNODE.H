@@ -3,8 +3,6 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-union func_802598D4_S1_UD8;
-typedef union func_802598D4_S1_UD8 func_802598D4_S1_UD8;
 
 struct ListNode;
 struct ListNode {
@@ -18,11 +16,6 @@ struct ListNode;
 typedef struct ListNode ListNode;
 
 struct ListNode;
-union func_80259A0C_S1_UD8;
-union func_80259A0C_S1_UD8 {
-    ListNode v0;
-    struct ListNode * v1;
-};
 
 struct NodeRecAtAC;
 typedef struct NodeRecAtAC NodeRecAtAC;
@@ -103,8 +96,6 @@ struct SceneCode802591C0;
 
 struct ObjectLinks8;
 
-union func_80259A0C_S1_UD8;
-typedef union func_80259A0C_S1_UD8 func_80259A0C_S1_UD8;
 
 extern float D_800C8FF8;
 
@@ -194,11 +185,6 @@ struct Node_func_802598B4_de;
 typedef struct Node_func_802598B4_de Node_func_802598B4_de;
 
 struct Node_func_802598B4_de;
-union func_802598D4_S1_UD8;
-union func_802598D4_S1_UD8 {
-    Node_func_802598B4_de v0;
-    struct Node_func_802598B4_de * v1;
-};
 
 
 struct Entry_func_80259440_de;

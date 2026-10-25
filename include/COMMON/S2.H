@@ -3,19 +3,8 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
-struct func_802100E0_S2;
-typedef struct func_802100E0_S2 func_802100E0_S2;
 
-struct func_802100E0_S1;
-struct func_802100E0_S1 {
-    char pad0[0x62E];
-    s16 unk62E;
-    char pad62E[0x770 - 0x62E - sizeof(s16)];
-    s16 unk770;
-};
 
-struct func_802100E0_S1;
-typedef struct func_802100E0_S1 func_802100E0_S1;
 
 struct SharedPlayer_func_8020FDB0_de;
 typedef struct SharedPlayer_func_8020FDB0_de SharedPlayer_func_8020FDB0_de;
@@ -1465,11 +1454,6 @@ struct SharedPlayer_func_8020FDB0_de {
     } views16E0;
 };
 
-struct func_802100E0_S2;
-struct func_802100E0_S2 {
-    char pad0[0x2E4];
-    s32 unk2E4;
-};
 
 struct BrainCode8020EAE0;
 typedef struct BrainCode8020EAE0 BrainCode8020EAE0;

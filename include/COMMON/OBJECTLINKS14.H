@@ -39,16 +39,7 @@ typedef struct ObjectState10 ObjectState10;
 
 extern float D_800C1D6C_de;
 
-struct Node8020D114;
-struct Node8020D114 {
-    s32 value;
-    char pad04[0xC];
-    struct Node8020D114 *next;
-    char pad14[0x1C];
-    struct Node8020D114 *parent;
-};
 
-struct Node8020D114;
 
 
 
@@ -90,8 +81,6 @@ typedef struct Graph Graph;
 
 
 
-struct Node8020D114;
-typedef struct Node8020D114 Node8020D114;
 
 
 

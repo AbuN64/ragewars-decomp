@@ -541,14 +541,7 @@ struct ObjRecAt130 {
     f32 unk130;
 };
 
-union func_802626BC_S1_U10;
-union func_802626BC_S1_U10 {
-    s32 v0;
-    void * v1;
-};
 
-union func_802626BC_S1_U10;
-typedef union func_802626BC_S1_U10 func_802626BC_S1_U10;
 
 struct Handler;
 struct Handler {
