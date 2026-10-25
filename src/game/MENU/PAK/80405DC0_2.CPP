@@ -100,29 +100,29 @@ s32 func_80409448_de(void *unused, Menu_func_804066BC_de *menu) {
 
  /* extern */
 void func_80409744_de(void) {
-    s32 var_s0;
-    s32 var_s1;
+    s32 channel;
+    s32 attempts;
     s32 unavailable;
     if (D_800E28C8 == -1) {
-        var_s0 = 0;
-        var_s1 = 0;
+        channel = 0;
+        attempts = 0;
     unavailable = -2;
 loop_2:
-        Pak_ProbeStatus(var_s0);
-        if (Pak_GetStatus(var_s0) == unavailable) {
-            var_s0 += 1;
-            if (var_s0 >= 4) {
-                var_s0 = 0;
+        Pak_ProbeStatus(channel);
+        if (Pak_GetStatus(channel) == unavailable) {
+            channel += 1;
+            if (channel >= 4) {
+                channel = 0;
             }
-            var_s1 += 1;
-            if (var_s1 < 4) {
+            attempts += 1;
+            if (attempts < 4) {
                 goto loop_2;
             }
         }
-        if (var_s1 == 4) {
-            var_s0 = -1;
+        if (attempts == 4) {
+            channel = -1;
         }
-        D_800E28C8 = var_s0;
+        D_800E28C8 = channel;
     }
 }
 

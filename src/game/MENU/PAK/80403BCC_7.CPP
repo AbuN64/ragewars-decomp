@@ -32,14 +32,14 @@ extern s32 Pak_UpdateStatus(s32 a0);
 extern void func_8026454C_de(void);
 
 void Pak_AllocateScratchBuffer(void) {
-    struct Shape_typemap_165 *temp_v0;
-    s32 temp_a0;
+    struct Shape_typemap_165 *block;
+    s32 buffer;
 
-    temp_v0 = Scene_AllocateResource(0, 0x810, 0x23, &g_pakPakStateNoteName);
-    temp_a0 = temp_v0->field_0;
-    D_800DE808 = (s32 *)temp_v0;
-    D_800E2854 = temp_a0;
-    Resmgr_FillMemory((void *)temp_a0, 0, 0x810);
+    block = Scene_AllocateResource(0, 0x810, 0x23, &g_pakPakStateNoteName);
+    buffer = block->field_0;
+    D_800DE808 = (s32 *)block;
+    D_800E2854 = buffer;
+    Resmgr_FillMemory((void *)buffer, 0, 0x810);
     D_800E2850 = 1;
 }
 

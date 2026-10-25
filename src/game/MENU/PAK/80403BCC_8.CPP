@@ -164,43 +164,43 @@ int Pak_GetFreePages(int slot, int *score) {
     return D_80153500[slot];
 }
 
-s32 func_804051D4_de(s32 arg0) {
-    s32 temp_s0;
-    s32 var_s0;
-    temp_s0 = arg0 * 4;
-    if (D_801534F0[arg0] != 3) {
+s32 func_804051D4_de(s32 channel) {
+    s32 channelOffset;
+    s32 result;
+    channelOffset = channel * 4;
+    if (D_801534F0[channel] != 3) {
         return -2;
     }
     ((void (*)(s32))func_802644FC_de)(1);
     Render_ReadControllerStates();
-    var_s0 = D_80153500[arg0];
+    result = D_80153500[channel];
     D_8010BBB8 = 2;
-    if (var_s0 == -4) {
-        var_s0 = func_80447F30_de(&D_8014D280[arg0]);
-        if (var_s0 != 0) {
-            var_s0 = -1;
+    if (result == -4) {
+        result = func_80447F30_de(&D_8014D280[channel]);
+        if (result != 0) {
+            result = -1;
         }
-        Pak_UpdateStatus(arg0);
+        Pak_UpdateStatus(channel);
     }
     func_8026454C_de();
-    return var_s0;
+    return result;
 }
 
-s32 func_80405290_de(s32 arg0) {
-    s32 var_s0;
-    if (D_801534F0[arg0] != 3) {
+s32 func_80405290_de(s32 channel) {
+    s32 result;
+    if (D_801534F0[channel] != 3) {
         return -2;
     }
     ((void (*)(s32))func_802644FC_de)(1);
     Render_ReadControllerStates();
     D_8010BBB8 = 2;
-    var_s0 = func_80447F30_de(&D_8014D280[arg0]);
-    if (var_s0 != 0) {
-        var_s0 = -1;
+    result = func_80447F30_de(&D_8014D280[channel]);
+    if (result != 0) {
+        result = -1;
     }
-    Pak_UpdateStatus(arg0);
+    Pak_UpdateStatus(channel);
     func_8026454C_de();
-    return var_s0;
+    return result;
 }
 
 s32 Pak_GetNoteGameName(s32 index, s32 entry, char **out) {
