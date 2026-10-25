@@ -183,9 +183,9 @@ void func_802335EC_de(struct MeasuredRecAt1D8V3 *arg0, void *arg1) {
 
     value = arg0->value;
     if (((struct MeasuredRecAt34 *)(arg1))->value == 5) {
-        func_80274870_de(arg1 + 0x128, (f32) D_800CA2D8_de * D_800C3058_de, 0.4f);
+        Nav_EaseValueToward(arg1 + 0x128, (f32) D_800CA2D8_de * D_800C3058_de, 0.4f);
     } else {
-        func_80274870_de(arg1 + 0x128, 0.0f, 0.4f);
+        Nav_EaseValueToward(arg1 + 0x128, 0.0f, 0.4f);
     }
     temp_f1 = ((struct MeasuredRecAt128 *)(arg1))->value;
     temp_v0 = ((struct MeasuredRecAt698V1 *)(value))->value;

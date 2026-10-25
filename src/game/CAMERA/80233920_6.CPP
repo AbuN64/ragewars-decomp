@@ -27,7 +27,7 @@ void func_802738C0_de(void *, f32);
 void func_80273A98_de(void *, f32);
 void MatrixFromQuaternion(f32 *, f32 *);
 
-extern void func_80274870_de(f32 *value, f32 target, f32 rate);
+extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
 f32 func_80275DD4_de(void *, f32, f32);
 int func_802A23B4_de(void);
 int func_802A23F0_de(void);
@@ -178,11 +178,11 @@ actor_found:
         if ((var_f22 < 0.0f) || (var_f0 = 1.0f, (var_f22 > 1.0f))) {
             var_f22 = var_f0;
         }
-        func_80274870_de(&camera->unk88, 0.1f, 0.5f);
-        func_80274870_de(&camera->unk8C, 0.05f, 0.5f);
+        Nav_EaseValueToward(&camera->unk88, 0.1f, 0.5f);
+        Nav_EaseValueToward(&camera->unk8C, 0.05f, 0.5f);
         temp_f20 = 1.0f - var_f22;
-        func_80274870_de(&camera->unk98, (var_f22 * 0.104719765f) + (temp_f20 * 0.06981318f), 0.16666667f);
-        func_80274870_de(&camera->unk9C, (var_f22 * 0.087266475f) + (temp_f20 * 0.03490659f), 0.16666667f);
+        Nav_EaseValueToward(&camera->unk98, (var_f22 * 0.104719765f) + (temp_f20 * 0.06981318f), 0.16666667f);
+        Nav_EaseValueToward(&camera->unk9C, (var_f22 * 0.087266475f) + (temp_f20 * 0.03490659f), 0.16666667f);
     } else {
         camera->unk84 = 1.0f;
         camera->unk80 = 1.0f;

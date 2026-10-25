@@ -73,7 +73,7 @@ INCLUDE_ASM("span_1000", func_80225D34_de);
 #endif
 
 extern void Weapons_UpdateViewAngles(void *,void *,void *);
-extern void func_80274870_de(f32 *value, f32 target, f32 rate);
+extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
 extern f32 D_800C9514_de;
 extern f32 D_800C9FE8;
 extern Triple D_800C94DC_de;
@@ -93,9 +93,9 @@ void func_80225F44_de(SharedPlayer *player,func_802165F8_S1 *body) {
     unit=D_800C2B08_de;
     yaw=body->unk6C;
     sway*=unit;force=yaw+sway;
-    func_80274870_de(&body->unk6C,force,0.9f);
+    Nav_EaseValueToward(&body->unk6C,force,0.9f);
     yaw=((yaw-body->unk6C)+player->views5E8.view69C_40.stick*D_800C2B0C_de)*unit;
-    func_80274870_de(&player->views5E8.view72C_76.kickRoll,yaw,0.1f);
+    Nav_EaseValueToward(&player->views5E8.view72C_76.kickRoll,yaw,0.1f);
     Weapons_UpdateViewAngles(player,body,&D_800C95D0);
     offset=0;
     if(player->views5E8.view6B8_50.input&8) {

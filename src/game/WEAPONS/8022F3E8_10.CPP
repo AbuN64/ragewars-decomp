@@ -87,7 +87,7 @@ void func_802312C8_de(Shared_Actor *actor, WeaponFireState *attack) {
         func_8025DE54_de(0x978, *position, (s32)position, -1);
         return;
     }
-    func_80274870_de(&attack->spin, (f32)D_800CA37C * D_800C2F60_de, 0.4f);
+    Nav_EaseValueToward(&attack->spin, (f32)D_800CA37C * D_800C2F60_de, 0.4f);
     attack->cueTimer -= D_800D2988;
     if (attack->cueTimer <= 0.0f) {
         attack->cueTimer = D_800C2F64_de;
@@ -125,13 +125,13 @@ void func_80231474_de(Shared_Actor *actor, WeaponFireState *fireState) {
             }
             period = fireState->spinStep;
             if (period < D_800C2F70_de) {
-                func_80274870_de(&fireState->spinStep, 0.0f, 0.125f);
+                Nav_EaseValueToward(&fireState->spinStep, 0.0f, 0.125f);
             } else if (period < D_800C2F74_de) {
-                func_80274870_de(&fireState->spinStep, 2.0943952f, 0.125f);
+                Nav_EaseValueToward(&fireState->spinStep, 2.0943952f, 0.125f);
             } else if (period < D_800C2F78_de) {
-                func_80274870_de(&fireState->spinStep, 4.1887903f, 0.125f);
+                Nav_EaseValueToward(&fireState->spinStep, 4.1887903f, 0.125f);
             } else {
-                func_80274870_de(&fireState->spinStep, 6.2831855f, 0.125f);
+                Nav_EaseValueToward(&fireState->spinStep, 6.2831855f, 0.125f);
             }
         }
     }

@@ -15,7 +15,7 @@
 
 
 
-extern void func_80274870_de(f32 *value, f32 target, f32 rate);
+extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
 
 
 
@@ -28,8 +28,8 @@ void func_80223E34_de(SharedPlayer_func_80223E34_de *player, func_80203908_S4 *c
     f32 amount;
 
     if (!(player->views5E8.view11D8_148.recoil > 0.0f)) {
-        func_80274870_de(&player->views5E8.view72C_76.kickRoll, 0.0f, 0.25f);
-        func_80274870_de(&player->views5E8.view728_74.kickPitch, 0.0f, 0.5f);
+        Nav_EaseValueToward(&player->views5E8.view72C_76.kickRoll, 0.0f, 0.25f);
+        Nav_EaseValueToward(&player->views5E8.view728_74.kickPitch, 0.0f, 0.5f);
         step = 0.08726647496f;
         player->views5E8.view730_79.sway[0] = Nav_DecayToZero(player->views5E8.view730_79.sway[0], step);
         player->views5E8.view730_79.sway[1] = Nav_DecayToZero(player->views5E8.view730_79.sway[1], step);
@@ -52,9 +52,9 @@ void func_80223E34_de(SharedPlayer_func_80223E34_de *player, func_80203908_S4 *c
             height = 82.94399261f;
         }
         rate = 0.5f;
-        func_80274870_de(&player->views5E8.view740_84.height, height + player->views5E8.view758_88.bobStrength * (func_802B7130_de(phase) * 10.24f), rate);
+        Nav_EaseValueToward(&player->views5E8.view740_84.height, height + player->views5E8.view758_88.bobStrength * (func_802B7130_de(phase) * 10.24f), rate);
         amount = player->views5E8.view758_88.bobStrength * (func_802B6560_de(phase) * 8.192f);
-        func_80274870_de(&player->views5E8.view73C_81.side, -func_802B7130_de(camera->unk6C + 3.1415927f) * amount, rate);
-        func_80274870_de(&player->views5E8.view744_86.forward, -func_802B6560_de(camera->unk6C + 3.1415927f) * amount, rate);
+        Nav_EaseValueToward(&player->views5E8.view73C_81.side, -func_802B7130_de(camera->unk6C + 3.1415927f) * amount, rate);
+        Nav_EaseValueToward(&player->views5E8.view744_86.forward, -func_802B6560_de(camera->unk6C + 3.1415927f) * amount, rate);
     }
 }

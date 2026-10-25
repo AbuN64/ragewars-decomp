@@ -108,7 +108,7 @@ void func_8022D428_de(void *player) {
     Actor_func_8022D290_de *actor = player;
     if (actor->unk_0x0850 == 0) {
         if ((actor->unk_0x0664 & 0x8000) == 0) {
-            func_80274870_de(&actor->unk_0x072C, 1.308997f, 0.25f);
+            Nav_EaseValueToward(&actor->unk_0x072C, 1.308997f, 0.25f);
         }
         if (actor->unk_0x0658 > D_800C2DB8_de) {
             Ovlgame_UpdateRunEndPlayer(player);
@@ -161,7 +161,7 @@ void func_8022D57C_de(void *player) {
         return;
     }
     if ((actor->unk_0x0664 & 0x8000) == 0) {
-        func_80274870_de(&actor->unk_0x072C, 1.308997f, 0.25f);
+        Nav_EaseValueToward(&actor->unk_0x072C, 1.308997f, 0.25f);
     }
     value = actor->unk_0x0658;
     if (D_800C2DC4_de < value) {

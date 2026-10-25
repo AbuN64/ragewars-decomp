@@ -132,7 +132,7 @@ positive:
                                 ((LevelActor *)body)->yaw + D_800C2B64_de;
                         }
                     }
-                    func_80274870_de(&((LevelActor *)body)->yaw, sp54, D_800C9FEC);
+                    Nav_EaseValueToward(&((LevelActor *)body)->yaw, sp54, D_800C9FEC);
                 }
             }
         }

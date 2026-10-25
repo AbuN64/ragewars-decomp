@@ -12,7 +12,7 @@ extern f32 D_800D2988;
 
 extern char D_800C2950_de;
 
-extern void func_80274870_de(f32 *value, f32 target, f32 rate);
+extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
 
 extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 
@@ -70,11 +70,11 @@ void func_8022409C_de(void *player, void *arg1) {
     ((func_80224078_Arg0 *)player)->unk72C = 0;
 
     held = (&D_800C2960_de)[1];
-    func_80274870_de(&((func_80224078_Arg1 *)(arg1))->unk6C,
+    Nav_EaseValueToward(&((func_80224078_Arg1 *)(arg1))->unk6C,
                   ((func_80224078_Arg1 *)arg1)->unk6C +
                       (f32)((ControllerRecAtC7 *)((func_80224078_Arg0 *)player)->unk698)->x * D_800C2960_de,
                   held);
-    func_80274870_de(&((func_80224078_Arg0 *)(player))->unk724,
+    Nav_EaseValueToward(&((func_80224078_Arg0 *)(player))->unk724,
                   ((func_80224078_Arg0 *)player)->unk724 +
                       (f32)-((ControllerRecAtC7 *)((func_80224078_Arg0 *)player)->unk698)->y * D_800C2968_de,
                   held);

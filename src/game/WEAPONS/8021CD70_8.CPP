@@ -69,7 +69,7 @@ extern s32 func_8025DE54_de(s16, CVector3, s32, s32);
 extern void func_8025E418_de(s32);
 
 
-extern void func_80274870_de(f32 *value, f32 target, f32 rate);
+extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
 extern f32 func_8027525C_de(struct Shared_Model *, f32, f32);
 extern f32 func_80275DD4_de(struct Shared_Model *, f32, f32);
 extern void func_80278D78_de(void *, s32, void *);
@@ -333,7 +333,7 @@ void func_80220ED4_de(SharedPlayer *player)
       }
       player->views5E8.view7F0_133.unk7F0 = target;
       func_80219480_de(&player->views5E8.view878_158.effect, player);
-      func_80274870_de(&player->views5E8.view7EC_132.unk7EC, target, 0.5f);
+      Nav_EaseValueToward(&player->views5E8.view7EC_132.unk7EC, target, 0.5f);
       if ((target == 0.0f) && (player->views5E8.view7EC_132.unk7EC < 0.01f))
       {
         player->views5E8.view7EC_132.unk7EC = 0.0f;
@@ -389,7 +389,7 @@ void func_80220ED4_de(SharedPlayer *player)
       goal = 40.96f;
     }
     depth = player->views5E8.view718_70.crouch;
-    func_80274870_de(&depth, goal, 0.25f);
+    Nav_EaseValueToward(&depth, goal, 0.25f);
     do
     {
       change = depth - player->views5E8.view718_70.crouch;
@@ -429,7 +429,7 @@ void func_80220ED4_de(SharedPlayer *player)
         target = 66.56f;
       }
       swim = player->views5E8.view720_90.swim;
-      func_80274870_de(&swim, target, 0.25f);
+      Nav_EaseValueToward(&swim, target, 0.25f);
       step = swim - player->views5E8.view720_90.swim;
       if (step < 0.0f)
       {

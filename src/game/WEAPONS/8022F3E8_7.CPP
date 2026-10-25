@@ -216,10 +216,10 @@ void func_80230BC8_de(LevelActor *actor, Dest *attack) {
         func_8022AF40_de(player);
         func_8022B00C_de(player);
         func_8025DE54_de(0x794, *position, position, -1);
-        func_80274870_de(&attack->charge, (f32)D_800CA2D8_de * D_800C2F1C_de, 0.4f);
+        Nav_EaseValueToward(&attack->charge, (f32)D_800CA2D8_de * D_800C2F1C_de, 0.4f);
         return;
     }
-    func_80274870_de(&attack->charge, (f32)D_800CA2D8_de * D_800C2F20_de, 0.4f);
+    Nav_EaseValueToward(&attack->charge, (f32)D_800CA2D8_de * D_800C2F20_de, 0.4f);
     attack->cueTimer -= D_800D2988;
     if (attack->cueTimer <= 0.0f) {
         attack->cueTimer += D_800C2F24_de;

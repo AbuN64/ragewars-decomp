@@ -265,7 +265,7 @@ typedef struct SurfaceView {
     u32 flags; /* 0x50 */
 } SurfaceView;
 extern void *Sound_FindActorModelEntry(void *);
-extern void func_80274870_de(f32 *, f32, f32);
+extern void Nav_EaseValueToward(f32 *, f32, f32);
 /* Smooths a player's view: the turn and look rates are the tuning table's rates damped by the state
    at 0x7EC and scaled by the profile's yaw and pitch sensitivities (128 = centre); control mode 1
    locks the look rate at 0.5 and mode 0 without the pitch option at 0.8. Unless the body stands on
@@ -299,12 +299,12 @@ void Weapons_UpdateViewAngles(Player *player, Player *body, ViewTuning *tuning) 
             yawDelta *= 80.0f;
             yawDelta = yawDelta * tuning->yawScale;
             yawDelta = yawDelta * 0.017453294f;
-            func_80274870_de(&body->heading, body->heading + yawDelta, yawRate);
+            Nav_EaseValueToward(&body->heading, body->heading + yawDelta, yawRate);
         }
     }
     input = -player->pitch * 80.0f;
     if (input < 0.0f) value = input * -0.71619713f * tuning->downScale;
     else value = input * 0.71619713f * tuning->upScale;
     value = value * 0.017453294f;
-    func_80274870_de(&player->pitchOffset, value, pitchRate);
+    Nav_EaseValueToward(&player->pitchOffset, value, pitchRate);
 }

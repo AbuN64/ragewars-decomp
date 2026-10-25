@@ -10,7 +10,7 @@
 
 extern char D_800CED30;
 s32 func_8024E62C_de(void *);
-extern void func_80274870_de(f32 *value, f32 target, f32 rate);
+extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
 /* Updates swimming turn, pitch, stride motion, sounds, and animation. */
 void func_802251DC_de(SharedPlayer *player, SharedPlayer *body) {
     Shared_Game *game;
@@ -65,13 +65,13 @@ void func_802251DC_de(SharedPlayer *player, SharedPlayer *body) {
     var_fv0f = D_800C2A64_de;
     if (var_fv0f < temp_fv0) player->turnAccumulator = var_fv0f;
     else if (temp_fv0 < D_800C2A68_de) player->turnAccumulator=D_800C2A68_de;
-    func_80274870_de(&player->views5E8.view728_73.unk728, player->turnAccumulator * D_800C2A6C_de, 0.5f);
+    Nav_EaseValueToward(&player->views5E8.view728_73.unk728, player->turnAccumulator * D_800C2A6C_de, 0.5f);
     var_fv0f_2 = -player->views5E8.view69C_39.pitchInput * D_800C2A70_de;
     var_fv0 = D_800C2A74_de;
     if ((var_fv0f_2 < var_fv0) || (var_fv0 = D_800C2A78_de, (var_fv0 < var_fv0f_2))) {
         var_fv0f_2 = var_fv0;
     }
-    func_80274870_de(&player->views5E8.view724_72.pitch, var_fv0f_2 * D_800C2A7C_de, 0.0625f);
+    Nav_EaseValueToward(&player->views5E8.view724_72.pitch, var_fv0f_2 * D_800C2A7C_de, 0.0625f);
     if ((player->views5E8.view7E8_105.unk7E8 == 0) && !(player->views5E8.view6E4_61.unk6E4 > D_800C2A80_de) && !(body->views1C.view38_3.flags & 0xC0000) && (body->views18.view18_2.model->flags & 2) && (player->views5E8.view6B0_46.unk6B0 & 0x10) && (player->views5E8.view11D8_147.unk11D8 <= 0.0f)) { func_802227F4_de(player, body, 5); var_v0 = 1; } else var_v0 = 0;
     if (var_v0 != 0) {
         temp_fv0f = body->views1C.view6C_5.heading + player->views5E8.view728_73.unk728;
@@ -105,8 +105,8 @@ block_25:
     temp_fv1_2 = player->views5E8.view6DC_60.strideSign * player->views5E8.view6C0_51.unk6C0 * func_802B7130_de(player->views5E8.view658_23.stride * D_800C2AAC_de);
     temp_fv1f = player->views5E8.view6A8_44.lift;
     if (temp_fv1f > 0.0f || temp_fv1f < 0.0f)
-        func_80274870_de(&player->views5E8.view72C_75.unk72C, temp_fv1_2, 0.25f);
-    else func_80274870_de(&player->views5E8.view72C_75.unk72C, 0.0f, 0.9f);
+        Nav_EaseValueToward(&player->views5E8.view72C_75.unk72C, temp_fv1_2, 0.25f);
+    else Nav_EaseValueToward(&player->views5E8.view72C_75.unk72C, 0.0f, 0.9f);
     temp_fv1_3 = player->views5E8.view6A8_44.lift;
     var_v1 = temp_fv1_3 > 0.0f;
     var_v0_2 = temp_fv1_3 < 0.0f;

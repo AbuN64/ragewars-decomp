@@ -217,7 +217,7 @@ f32 func_80274808_de(f32 current, f32 target, f32 rate) {
     return value;
 }
 
-void func_80274870_de(f32 *value, f32 target, f32 rate) {
+void Nav_EaseValueToward(f32 *value, f32 target, f32 rate) {
     f32 current;
     f32 next;
 

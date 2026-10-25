@@ -3,7 +3,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/VECTOR4F.H"
 
-extern void func_80274870_de(f32 *value, f32 target, f32 rate);
+extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
 extern void Weapons_UpdateViewAngles(SharedPlayer *,func_802165F8_S1 *,char *);
 extern char D_800CE7E4,D_800CE7FC,D_800CED30;
 extern f32 D_800D2988;
@@ -30,7 +30,7 @@ void func_8022470C_de(void *playerContext, void *bodyContext) {
     s32 nextAnimation;
 
     func_8022404C_de(playerContext);
-    func_80274870_de(&player->views5E8.view72C_75.unk72C, 0.0f, 0.25f);
+    Nav_EaseValueToward(&player->views5E8.view72C_75.unk72C, 0.0f, 0.25f);
     var_v0 = 1;
     if (!(player->views5E8.view718_70.crouch > D_800C29C0_de)) {
         var_v0 = 0;
