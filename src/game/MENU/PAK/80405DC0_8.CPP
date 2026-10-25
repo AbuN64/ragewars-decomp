@@ -291,7 +291,7 @@ static __inline__ void pakSetChecksum(s32 offset, s32 value) {
 /* Opens the pak menu for a snapshot save: unless a message is pending (D_800E28C0), probes the channel's
    Controller Pak; a ready pak gets the save snapshot with its checksum and the note list (func_80405F48_de),
    otherwise the damaged-pak (D_0044EA08) or D_0044ED44 prompt opens. Twin of Pak_BeginProfileSave. */
-void func_80406F7C_de(Shared_PakMenu *menu) {
+void Pak_BeginSnapshotSave(Shared_PakMenu *menu) {
     ObjRecAt5DC *owner = menu->player;
     ObjRecAt5DC *player;
     s32 channel;
