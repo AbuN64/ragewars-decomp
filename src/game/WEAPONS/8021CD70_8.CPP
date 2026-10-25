@@ -700,11 +700,11 @@ void func_80220ED4_de(SharedPlayer *player)
   if (player->views5DC.view5DC_8.hud != 0)
   {
     player->views5DC.view5DC_8.hud->score = player->views16D4.view16D4_0.unk16D4;
-    player->views5DC.view5DC_8.hud->bonus = player->unk16D8;
+    player->views5DC.view5DC_8.hud->bonus = player->pendingBonus;
   }
-  if (player->unk16D8 != 0)
+  if (player->pendingBonus != 0)
   {
-    count = player->unk16D8;
+    count = player->pendingBonus;
     drain = (count * 2) / 3;
     if (drain < 5)
     {
@@ -712,11 +712,11 @@ void func_80220ED4_de(SharedPlayer *player)
     }
     if (count < drain)
     {
-      player->unk16D8 = 0;
+      player->pendingBonus = 0;
     }
     else
     {
-      player->unk16D8 = count - drain;
+      player->pendingBonus = count - drain;
     }
   }
   Team_UpdateDraftPanel(&player->views5E8.view938_162.unk938, player, &player->views1C.view458_40.unk458);
@@ -793,7 +793,7 @@ void func_80220ED4_de(SharedPlayer *player)
     player->fxTime -= D_800D2988;
     if (player->fxTime <= 0.0f)
     {
-      player->unk1240 = 0.0f;
+      player->fxLevel = 0.0f;
       player->fxStage = -1;
       player->fxTime = 0.0f;
       player->fxSpeed = 0.0f;
@@ -805,7 +805,7 @@ void func_80220ED4_de(SharedPlayer *player)
       f32 right;
       f32 prior;
       f32 left;
-      prior = player->unk1240;
+      prior = player->fxLevel;
       right = player->rightAxisValue;
       left = prior - right;
       if (left < 0.0f)
@@ -821,7 +821,7 @@ void func_80220ED4_de(SharedPlayer *player)
       {
         right = left;
       }
-      player->unk1240 = right;
+      player->fxLevel = right;
     }
   }
   else

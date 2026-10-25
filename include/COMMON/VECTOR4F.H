@@ -1309,7 +1309,7 @@ struct SharedPlayer {
     f32 fxSpeed;
     s32 fxStage;
     char pad123C[0x4];
-    f32 unk1240;
+    f32 fxLevel;
     f32 rightAxisValue;
     char pad1248[0x7C];
     union {
@@ -1507,7 +1507,7 @@ struct SharedPlayer {
             s32 f16D4;
         } view16D4_1;
     } views16D4;
-    u16 unk16D8;
+    u16 pendingBonus;
     char pad16DA[0x6];
     union {
         struct {
