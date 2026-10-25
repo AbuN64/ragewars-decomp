@@ -51,11 +51,11 @@ void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMoveme
             }
             temp_f0=player->views5E8.view6C0_51.unk6C0; temp_f1_2=arg2->unk4;
             if (temp_f0 < 0.0f ? temp_f1_2 < -temp_f0 : temp_f1_2 < temp_f0) {
-                player->views5E8.view6C0_51.unk6C0=func_802747A0_de(player->views5E8.view6C0_51.unk6C0,arg2->unk8*0.5f);
+                player->views5E8.view6C0_51.unk6C0=Nav_DecayToZero(player->views5E8.view6C0_51.unk6C0,arg2->unk8*0.5f);
             } else if(player->views5E8.view6A8_43.unk6A8 != 0.0f && player->views5E8.view7E8_105.unk7E8 != 2) {
                 player->views5E8.view6C0_51.unk6C0=func_802746A0_de(player->views5E8.view6C0_51.unk6C0,player->views5E8.view6A8_43.unk6A8*arg2->unk0,(player->views5E8.view6A8_43.unk6A8<0.0f?-player->views5E8.view6A8_43.unk6A8:player->views5E8.view6A8_43.unk6A8)*arg2->unk4);
             } else {
-                player->views5E8.view6C0_51.unk6C0=func_802747A0_de(player->views5E8.view6C0_51.unk6C0,arg2->unk8);
+                player->views5E8.view6C0_51.unk6C0=Nav_DecayToZero(player->views5E8.view6C0_51.unk6C0,arg2->unk8);
             }
             temp_f1_4 = player->views5E8.view6C0_51.unk6C0 * func_802B7130_de(body->unk6C + 3.1415927f);
             motion.y = 0;
@@ -63,11 +63,11 @@ void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMoveme
             motion.z = player->views5E8.view6C0_51.unk6C0 * func_802B6560_de(body->unk6C + 3.1415927f);
             temp_f1_5=player->views5E8.view6C4_54.unk6C4; temp_f2_2=arg2->unk10;
             if (temp_f1_5 < 0.0f ? temp_f2_2 < -temp_f1_5 : temp_f2_2 < temp_f1_5) {
-                player->views5E8.view6C4_54.unk6C4=func_802747A0_de(player->views5E8.view6C4_54.unk6C4,arg2->unk14*0.5f);
+                player->views5E8.view6C4_54.unk6C4=Nav_DecayToZero(player->views5E8.view6C4_54.unk6C4,arg2->unk14*0.5f);
             } else if(player->views5E8.view6A4_41.unk6A4 != 0.0f) {
                 player->views5E8.view6C4_54.unk6C4=func_802746A0_de(player->views5E8.view6C4_54.unk6C4,player->views5E8.view6A4_41.unk6A4*arg2->unkC,(player->views5E8.view6A4_41.unk6A4<0.0f?-player->views5E8.view6A4_41.unk6A4:player->views5E8.view6A4_41.unk6A4)*arg2->unk10);
             } else {
-                player->views5E8.view6C4_54.unk6C4=func_802747A0_de(player->views5E8.view6C4_54.unk6C4,arg2->unk14);
+                player->views5E8.view6C4_54.unk6C4=Nav_DecayToZero(player->views5E8.view6C4_54.unk6C4,arg2->unk14);
             }
             motion.x += player->views5E8.view6C4_54.unk6C4 * func_802B7130_de(body->unk6C - 1.5707964f);
             motion.z += player->views5E8.view6C4_54.unk6C4 * func_802B6560_de(body->unk6C - 1.5707964f);
@@ -102,7 +102,7 @@ block_36:
                 }
             } else {
 block_42:
-                var_f0_3 = func_802747A0_de(player->views5E8.view6D4_58.unk6D4, arg2->unk1C);
+                var_f0_3 = Nav_DecayToZero(player->views5E8.view6D4_58.unk6D4, arg2->unk1C);
             }
             player->views5E8.view6D4_58.unk6D4 = var_f0_3;
             motion.x += player->views5E8.view6D4_58.unk6D4 * func_802B7130_de(body->unk6C + 3.1415927f);
@@ -115,7 +115,7 @@ block_42:
                 player->views5E8.view6D8_59.unk6D8 = -arg2->unk18*0.75f;
                 var_s3=1;
             } else {
-                player->views5E8.view6D8_59.unk6D8=func_802747A0_de(player->views5E8.view6D8_59.unk6D8,arg2->unk1C*0.75f);
+                player->views5E8.view6D8_59.unk6D8=Nav_DecayToZero(player->views5E8.view6D8_59.unk6D8,arg2->unk1C*0.75f);
             }
             motion.x += player->views5E8.view6D8_59.unk6D8 * func_802B7130_de(body->unk6C - 1.5707964f);
             motion.z += player->views5E8.view6D8_59.unk6D8 * func_802B6560_de(body->unk6C - 1.5707964f);

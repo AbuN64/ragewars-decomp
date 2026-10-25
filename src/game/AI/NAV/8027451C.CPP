@@ -181,7 +181,7 @@ f32 func_802746A0_de(f32 value, f32 velocity, f32 limit) {
     return value;
 }
 
-f32 func_802747A0_de(f32 value, f32 rate) {
+f32 Nav_DecayToZero(f32 value, f32 rate) {
     f32 zero;
 
     zero = 0.0f;

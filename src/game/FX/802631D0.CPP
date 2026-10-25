@@ -39,12 +39,12 @@ extern ButtonRemap D_800CBB70[];
 /* Builds the player's analog input from its controller: remaps the buttons through D_800CBB70 when the
    profile asks for it (control modes 0 and 1), turns stick and C buttons into turn, pitch, strafe and
    forward for the profile's control mode (pitch steps scale with the profile sensitivity, the frame time
-   D_800D2988 and the player's 0x7EC damping; mode 1 recentres the pitch through func_802747A0_de while
+   D_800D2988 and the player's 0x7EC damping; mode 1 recentres the pitch through Nav_DecayToZero while
    moving), then writes the cubic-shaped turn and strafe and the pitch and forward copies.
    The ROM keeps two pieces of dead source: a first per-mode table choice that the reset to NULL
    overrides, and a pitch-mode test whose two arms are the same. gcc deletes the dead stores and the
    merged branches, but their tests still load controlMode once more and keep the profile live
-   in a saved register across func_802747A0_de. */
+   in a saved register across Nav_DecayToZero. */
 void Fx_BuildControllerState(ControllerInput *input, Player *player) {
     AiProfile *profile;
     f32 forward;
@@ -198,7 +198,7 @@ void Fx_BuildControllerState(ControllerInput *input, Player *player) {
                     if (recenterStep < 0.0f) {
                         recenterStep = -recenterStep;
                     }
-                    input->pitch = func_802747A0_de(input->pitch, recenterStep);
+                    input->pitch = Nav_DecayToZero(input->pitch, recenterStep);
                 }
             }
         }

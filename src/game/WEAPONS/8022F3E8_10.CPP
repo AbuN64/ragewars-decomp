@@ -108,7 +108,7 @@ void func_80231474_de(Shared_Actor *actor, WeaponFireState *fireState) {
     if (fireState->variant != 4) {
         spin = fireState->spin;
         if (spin > 0.0f) {
-            fireState->spin = func_802747A0_de(spin, D_800C2F68_de);
+            fireState->spin = Nav_DecayToZero(spin, D_800C2F68_de);
         } else {
             f32 value = fireState->spinStep;
             f32 period = D_800C2F6C_de;

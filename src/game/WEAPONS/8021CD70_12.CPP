@@ -54,19 +54,19 @@ void func_802238E0_de(SharedPlayer *player, Actor_func_802238E0_de *body, Shared
     }
     temp_f0=player->views5E8.view6C0_51.unk6C0; temp_f1_2=arg2->unk4;
     if (temp_f0<0.0f ? temp_f1_2 < -temp_f0 : temp_f1_2 < temp_f0) {
-        player->views5E8.view6C0_51.unk6C0=func_802747A0_de(player->views5E8.view6C0_51.unk6C0,arg2->unk8*0.5f);
+        player->views5E8.view6C0_51.unk6C0=Nav_DecayToZero(player->views5E8.view6C0_51.unk6C0,arg2->unk8*0.5f);
     } else if(player->views5E8.view6A8_43.unk6A8 != 0.0f) {
         player->views5E8.view6C0_51.unk6C0=func_802746A0_de(player->views5E8.view6C0_51.unk6C0,player->views5E8.view6A8_43.unk6A8*arg2->unk0,(player->views5E8.view6A8_43.unk6A8<0.0f?-player->views5E8.view6A8_43.unk6A8:player->views5E8.view6A8_43.unk6A8)*arg2->unk4);
     } else {
-        player->views5E8.view6C0_51.unk6C0=func_802747A0_de(player->views5E8.view6C0_51.unk6C0,arg2->unk8);
+        player->views5E8.view6C0_51.unk6C0=Nav_DecayToZero(player->views5E8.view6C0_51.unk6C0,arg2->unk8);
     }
     temp_f1_4=player->views5E8.view6C4_54.unk6C4; temp_f2_2=arg2->unk4;
     if (temp_f1_4<0.0f ? temp_f2_2 < -temp_f1_4 : temp_f2_2 < temp_f1_4) {
-        player->views5E8.view6C4_54.unk6C4=func_802747A0_de(player->views5E8.view6C4_54.unk6C4,arg2->unk8*0.5f);
+        player->views5E8.view6C4_54.unk6C4=Nav_DecayToZero(player->views5E8.view6C4_54.unk6C4,arg2->unk8*0.5f);
     } else if(player->views5E8.view6A4_41.unk6A4 != 0.0f) {
         player->views5E8.view6C4_54.unk6C4=func_802746A0_de(player->views5E8.view6C4_54.unk6C4,player->views5E8.view6A4_41.unk6A4*arg2->unk0,(player->views5E8.view6A4_41.unk6A4<0.0f?-player->views5E8.view6A4_41.unk6A4:player->views5E8.view6A4_41.unk6A4)*arg2->unk4*0.75f);
     } else {
-        player->views5E8.view6C4_54.unk6C4=func_802747A0_de(player->views5E8.view6C4_54.unk6C4,arg2->unk8);
+        player->views5E8.view6C4_54.unk6C4=Nav_DecayToZero(player->views5E8.view6C4_54.unk6C4,arg2->unk8);
     }
     if (var_s0 != 0) {
         temp_v1 = player->views5E8.view6B0_46.unk6B0;
@@ -81,7 +81,7 @@ void func_802238E0_de(SharedPlayer *player, Actor_func_802238E0_de *body, Shared
         }
     } else {
 block_31:
-        var_f0_3 = func_802747A0_de(player->views5E8.view6D4_58.unk6D4, arg2->unk10);
+        var_f0_3 = Nav_DecayToZero(player->views5E8.view6D4_58.unk6D4, arg2->unk10);
     }
     player->views5E8.view6D4_58.unk6D4 = var_f0_3;
     if (var_s0 && (player->views5E8.view6B8_49.unk6B8 & 1)) {
@@ -92,7 +92,7 @@ block_31:
         player->views5E8.view6D8_59.unk6D8=-arg2->unkC*0.75f;
         var_s5=1;
     } else {
-        player->views5E8.view6D8_59.unk6D8=func_802747A0_de(player->views5E8.view6D8_59.unk6D8,arg2->unk10*0.75f);
+        player->views5E8.view6D8_59.unk6D8=Nav_DecayToZero(player->views5E8.view6D8_59.unk6D8,arg2->unk10*0.75f);
     }
     if ((var_s0 != 0) && (player->views5E8.view6B0_46.unk6B0 & 0x10)) {
         var_s5 = 1;

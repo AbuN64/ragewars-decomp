@@ -136,7 +136,7 @@ extern f32 func_802745D0_de(f32 arg0);
 
 extern f32 func_802746A0_de(f32 arg0, f32 arg1, f32 arg2);
 
-extern f32 func_802747A0_de(f32 arg0, f32 arg1);
+extern f32 Nav_DecayToZero(f32 arg0, f32 arg1);
 
 extern f32 func_80274A90_de(f32 arg0, f32 arg1);
 

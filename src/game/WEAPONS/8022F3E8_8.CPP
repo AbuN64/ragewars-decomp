@@ -59,7 +59,7 @@ void func_80230DA4_de(Shared_Actor *actor, WeaponFireState *weapon) {
     char *model;
     player = actor->entity;
     if (weapon->variant != 4) {
-        weapon->spin = func_802747A0_de(weapon->spin, 0.013613569f);
+        weapon->spin = Nav_DecayToZero(weapon->spin, 0.013613569f);
     }
     weapon->spinStep += weapon->spin * D_800D2988 * 2.0f;
     model = ((SharedPlayer *)(player))->views5E8.view698_37.emitter;

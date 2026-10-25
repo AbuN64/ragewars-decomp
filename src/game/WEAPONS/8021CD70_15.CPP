@@ -93,7 +93,7 @@ void func_8022409C_de(void *player, void *arg1) {
             func_802746A0_de(((func_80224078_Arg0 *)player)->unk6C0, step, limit);
     } else {
         ((func_80224078_Arg0 *)player)->unk6C0 =
-            func_802747A0_de(((func_80224078_Arg0 *)player)->unk6C0, D_800C2978_de);
+            Nav_DecayToZero(((func_80224078_Arg0 *)player)->unk6C0, D_800C2978_de);
     }
 
     value = ((func_80224078_Arg0 *)player)->unk6A4;
@@ -110,7 +110,7 @@ void func_8022409C_de(void *player, void *arg1) {
             func_802746A0_de(((func_80224078_Arg0 *)player)->unk6C4, step, limit);
     } else {
         ((func_80224078_Arg0 *)player)->unk6C4 =
-            func_802747A0_de(((func_80224078_Arg0 *)player)->unk6C4, D_800C2988_de);
+            Nav_DecayToZero(((func_80224078_Arg0 *)player)->unk6C4, D_800C2988_de);
     }
 
     flags = ((func_80224078_Arg0 *)player)->unk6AC;
@@ -122,7 +122,7 @@ void func_8022409C_de(void *player, void *arg1) {
             func_802746A0_de(((func_80224078_Arg1 *)arg1)->unk20, D_800C2990_de, 71.68f);
     } else {
         ((func_80224078_Arg1 *)arg1)->unk20 =
-            func_802747A0_de(((func_80224078_Arg1 *)arg1)->unk20, D_800C2994_de);
+            Nav_DecayToZero(((func_80224078_Arg1 *)arg1)->unk20, D_800C2994_de);
     }
 
     {

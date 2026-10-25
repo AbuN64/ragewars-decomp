@@ -31,17 +31,17 @@ void func_80223E34_de(SharedPlayer_func_80223E34_de *player, func_80203908_S4 *c
         func_80274870_de(&player->views5E8.view72C_76.kickRoll, 0.0f, 0.25f);
         func_80274870_de(&player->views5E8.view728_74.kickPitch, 0.0f, 0.5f);
         step = 0.08726647496f;
-        player->views5E8.view730_79.sway[0] = func_802747A0_de(player->views5E8.view730_79.sway[0], step);
-        player->views5E8.view730_79.sway[1] = func_802747A0_de(player->views5E8.view730_79.sway[1], step);
-        player->views5E8.view730_79.sway[2] = func_802747A0_de(player->views5E8.view730_79.sway[2], step);
+        player->views5E8.view730_79.sway[0] = Nav_DecayToZero(player->views5E8.view730_79.sway[0], step);
+        player->views5E8.view730_79.sway[1] = Nav_DecayToZero(player->views5E8.view730_79.sway[1], step);
+        player->views5E8.view730_79.sway[2] = Nav_DecayToZero(player->views5E8.view730_79.sway[2], step);
         if (21.0f < player->views5E8.view75C_90.bobSpeed) {
             player->views5E8.view75C_90.bobSpeed = 21.0f;
         }
         if (0.1f < player->views5E8.view758_88.bobStrength) {
             player->views5E8.view758_88.bobStrength = 0.1f;
         }
-        player->views5E8.view75C_90.bobSpeed = func_802747A0_de(player->views5E8.view75C_90.bobSpeed, 0.11666667f);
-        player->views5E8.view758_88.bobStrength = func_802747A0_de(player->views5E8.view758_88.bobStrength, 0.00055555557f);
+        player->views5E8.view75C_90.bobSpeed = Nav_DecayToZero(player->views5E8.view75C_90.bobSpeed, 0.11666667f);
+        player->views5E8.view758_88.bobStrength = Nav_DecayToZero(player->views5E8.view758_88.bobStrength, 0.00055555557f);
         if (player->views5E8.view758_88.bobStrength < 0.06f) {
             player->views5E8.view75C_90.bobSpeed = player->views5E8.view758_88.bobStrength = 0.0f;
         }

@@ -120,7 +120,7 @@ block_25:
         }
         player->views5E8.view6C0_51.unk6C0 = func_802746A0_de(player->views5E8.view6C0_51.unk6C0, var_a1, var_fv0_4);
     } else {
-        player->views5E8.view6C0_51.unk6C0 = func_802747A0_de(temp_fs0_4, D_800C2ABC_de);
+        player->views5E8.view6C0_51.unk6C0 = Nav_DecayToZero(temp_fs0_4, D_800C2ABC_de);
     }
     temp_fv1_4 = player->views5E8.view6A4_42.strafe;
     if (temp_fv1_4 != 0.0f) {
@@ -132,7 +132,7 @@ block_25:
         }
         player->views5E8.view6C4_54.unk6C4 = func_802746A0_de(player->views5E8.view6C4_54.unk6C4, var_a2, var_fv0_5);
     } else {
-        player->views5E8.view6C4_54.unk6C4 = func_802747A0_de(player->views5E8.view6C4_54.unk6C4, D_800C2ACC_de);
+        player->views5E8.view6C4_54.unk6C4 = Nav_DecayToZero(player->views5E8.view6C4_54.unk6C4, D_800C2ACC_de);
     }
     if ((player->views5E8.view6C0_51.unk6C0 == 0.0f) && (player->views5E8.view6C4_54.unk6C4 == 0.0f)) {
         player->views5E8.view658_23.stride = 0.0f;
