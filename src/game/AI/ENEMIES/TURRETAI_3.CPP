@@ -121,7 +121,7 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
         func_80271F34_de(&work.destination.v, &work.destination.v, &work.origin.v);
         Particle_SubtractVectors(&work.relative.v, &work.destination.v, &work.origin.v);
         desiredSpeed = func_802725FC_de(&work.relative.v.x);
-        aimError = func_80216F44_de(&actor->actor,work.destination.v);
+        aimError = Weapons_GetSignedAngleToPoint(&actor->actor,work.destination.v);
         work.result.workspace.projection = aimError;
         if (work.result.result.distance <= turret->range) {
             fireCone = turret->m_FireAngle * heightScale;

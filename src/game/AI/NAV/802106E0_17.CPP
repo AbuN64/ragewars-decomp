@@ -47,7 +47,7 @@ void Nav_SelectFarthestReachableNeighbor(AiController *object)
         link = func_8020C9B0_de(graph, links[i]);
         if ((link->type >= 1 && link->type <= 2) || link->type == 7) {
             point = func_8020C994_de(graph, neighbors[i]);
-            if (func_8020D1CC_de(graph, actor_node, neighbors[i])) {
+            if (Nav_GetRouteRelation(graph, actor_node, neighbors[i])) {
                 distance = func_802726BC_de(&position.x, point);
                 if (farthest < distance) {
                     farthest = distance;

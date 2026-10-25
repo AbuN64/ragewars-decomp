@@ -2,14 +2,14 @@
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "TYPES.H"
 
-/* Steers a computer player toward a point: measures the heading error to the point through func_80216F44_de plus an offset, wrapped to -pi..pi, and when it exceeds the turn rate in degrees sets the player's steering at 0x69C to full lock beyond 60 degrees or to a half, quarter, eighth or tenth of lock beyond 30, 10 and 4 degrees, in the error's direction; then passes the brain's speed sum (by the player's gear at 0x594) in radians and the turn rate to func_80209910_de and returns the heading error. */
+/* Steers a computer player toward a point: measures the heading error to the point through Weapons_GetSignedAngleToPoint plus an offset, wrapped to -pi..pi, and when it exceeds the turn rate in degrees sets the player's steering at 0x69C to full lock beyond 60 degrees or to a half, quarter, eighth or tenth of lock beyond 30, 10 and 4 degrees, in the error's direction; then passes the brain's speed sum (by the player's gear at 0x594) in radians and the turn rate to func_80209910_de and returns the heading error. */
 
 
 
 
 
 
-extern f32 func_80216F44_de(Player_func_80209308_de *, CVector3);
+extern f32 Weapons_GetSignedAngleToPoint(Player_func_80209308_de *, CVector3);
 extern void func_80209910_de(Brain_func_80209308_de *, f32, s32);
 
 f32 func_80209308_de(Brain_func_80209308_de *brain, CVector3 *target, f32 rate, f32 offset) {
@@ -18,7 +18,7 @@ f32 func_80209308_de(Brain_func_80209308_de *brain, CVector3 *target, f32 rate, 
     f32 limit;
     f32 scale;
 
-    angle = func_80216F44_de(brain->player, *target) + offset;
+    angle = Weapons_GetSignedAngleToPoint(brain->player, *target) + offset;
     if (angle > 3.141593f) {
         angle -= 6.283186f;
     } else if (angle < -3.141593f) {

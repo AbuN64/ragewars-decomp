@@ -9,7 +9,7 @@
 s32 func_80209874_de(void *, s32);
 s32 func_80209A94_de(void *);
 s32 func_80209AD8_de(void *);
-f32 func_80209B64_de(void *);
+f32 Nav_GetScaledAggression(void *);
 s32 func_8020EA10_de(void *);
 s32 func_8020F5A4_de(void *);
 s32 func_8022AAD4_de(void *, s16);
@@ -76,7 +76,7 @@ s32 Nav_SelectPlayerState(AiController *controller) {
         func_80209874_de(controller, nextState);
         return 1;
     }
-    healthThreshold = (s32)((1.0f - func_80209B64_de(controller)) * 80.0f);
+    healthThreshold = (s32)((1.0f - Nav_GetScaledAggression(controller)) * 80.0f);
     if (D_80146938 != 0 && controller->player->profile->enabled != 0) {
         healthThreshold = 0;
     }

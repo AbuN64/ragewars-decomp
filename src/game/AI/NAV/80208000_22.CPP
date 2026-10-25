@@ -9,7 +9,7 @@
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/TRIPLE.H"
 
-extern f32 func_80209B64_de(void *arg0);
+extern f32 Nav_GetScaledAggression(void *arg0);
 
 extern s32 D_801468A0;
 
@@ -38,7 +38,7 @@ s32 func_8020EA10_de(void **controller) {
     if (func_8022A83C_de(base - 0x1860) != 0) {
         return 0;
     }
-    temp_f20 = func_80209B64_de(controller) * D_800C1E50_de + D_800C1E54_de;
+    temp_f20 = Nav_GetScaledAggression(controller) * D_800C1E50_de + D_800C1E54_de;
     if (temp_f20 < Nav_RandomBetween(0.0f, D_800C1E58_de)) {
         return 1;
     }

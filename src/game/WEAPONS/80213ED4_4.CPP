@@ -10,7 +10,7 @@
 
 /* Picks an actor's target (the tracked enemy when the aim point is chosen, else the nearest permitted target from Weapons_SelectCombatTarget), classifies it into one of eight kinds, and fills the target record with the kind, target, height difference, position, direction and distance, both in full and flattened to the horizontal plane. */
 extern void *Weapons_SelectCombatTarget(void *,void *,s32,s32), *func_80219408_de(void *);
-extern f32 func_80216F44_de(void *,f32,f32,f32),func_802B72B0_de(f32);
+extern f32 Weapons_GetSignedAngleToPoint(void *,f32,f32,f32),func_802B72B0_de(f32);
 extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 static inline s32 func_80215410_kind(Actor_func_80214DD4_de *self, Tracker *ctx, Actor_func_80214DD4_de *target) {
     if (ctx->active == 0) {
@@ -62,7 +62,7 @@ void func_80215410_de(Actor_func_80214DD4_de *arg0, Tracker *tracker, s32 unused
     }
     if (target != NULL) {
         pos = target->pos;
-        height = func_80216F44_de(arg0, pos.x, pos.y, pos.z);
+        height = Weapons_GetSignedAngleToPoint(arg0, pos.x, pos.y, pos.z);
     } else {
         switch (kind) {
             case 4:
@@ -71,7 +71,7 @@ void func_80215410_de(Actor_func_80214DD4_de *arg0, Tracker *tracker, s32 unused
                 if (point->flags & 1) {
                     height = point->heading * 0.0174532942f - arg0->heading;
                 } else {
-                    height = func_80216F44_de(arg0, pos.x, pos.y, pos.z);
+                    height = Weapons_GetSignedAngleToPoint(arg0, pos.x, pos.y, pos.z);
                 }
                 break;
             case 3:
@@ -175,7 +175,7 @@ extern void func_8027207C_de(CVector3 *);
 extern void func_8024BC94_de(CVector3 *out, void *actor, CVector3 offset);
 extern f32 Particle_GetActorHeight(void *);
 
-/* func_80216F44_de's body: the signed angle between the actor's facing and the direction to the point. */
+/* Weapons_GetSignedAngleToPoint's body: the signed angle between the actor's facing and the direction to the point. */
 static inline f32 angleTo(Actor_func_80214DD4_de *actor, CVector3 point) {
     f32 dx;
     f32 dz;

@@ -260,7 +260,7 @@ f32 func_80209AE8_de(AiController *arg0)
 
 }
 
-f32 func_80209B64_de(AiController *controller) {
+f32 Nav_GetScaledAggression(AiController *controller) {
     f32 value;
     u8 difficulty;
     Player *player;
@@ -315,7 +315,7 @@ done:
     return value;
 }
 
-f32 func_80209C5C_de(AiController *controller) {
+f32 Nav_GetScaledAttackRange(AiController *controller) {
     f32 difficultyScale;
     f32 value;
     u8 difficulty;

@@ -12,7 +12,7 @@ extern f32 func_802B72B0_de(f32);
 
 
 
-f32 func_80216F44_de(void *actor, CVector3 point) {
+f32 Weapons_GetSignedAngleToPoint(void *actor, CVector3 point) {
     f32 dx;
     f32 dz;
     f32 dist;

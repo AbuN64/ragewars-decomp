@@ -7,7 +7,7 @@
 #include "TYPES.H"
 #include "AI/NAV/8020EAE0_7.H"
 
-extern s32 func_8020D1CC_de(void *arg0, s32 arg1, s32 arg2);
+extern s32 Nav_GetRouteRelation(void *arg0, s32 arg1, s32 arg2);
 
 extern s32 func_8020BC50_de(void *arg0, s32 arg1, s32 arg2, void *arg3);
 
@@ -30,7 +30,7 @@ s32 func_8020ED50_de(Func8020ED50Arg *owner) {
         if (owner->field4 == owner->field10) {
             return 1;
         }
-        if (func_8020D1CC_de(base, owner->field4, owner->field10) == 0) {
+        if (Nav_GetRouteRelation(base, owner->field4, owner->field10) == 0) {
             owner->fieldC = func_8020BC50_de(base, owner->field4, owner->field10, owner);
         }
     }

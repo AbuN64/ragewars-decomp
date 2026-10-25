@@ -62,7 +62,7 @@ void Particle_SubtractVectors(void *, void *, void *);
 
 f32 func_802B72B0_de(f32);
 
-f32 func_80216F44_de(void *, CVector3);
+f32 Weapons_GetSignedAngleToPoint(void *, CVector3);
 
  /* extern */
 extern f32 D_800D2988;
@@ -289,7 +289,7 @@ void func_802070D0_de(func_802070D0_S3 *arg0, func_802070D0_S1 *arg1) {
             arg0->unk6C = (f32) (temp_f1_6 + (temp_s2->unk10 * 0.017453294f - temp_f1_6) * 0.1f);
         }
     } else {
-        func_80216808_de(arg0, (s32) arg1, 10.0f, func_80216F44_de(arg0, *(CVector3 *) &arg1->unk54));
+        func_80216808_de(arg0, (s32) arg1, 10.0f, Weapons_GetSignedAngleToPoint(arg0, *(CVector3 *) &arg1->unk54));
     }
     if (temp_s2->unk14.half & 4) {
         if ((temp_s2->unk14.word & 0x220000) == 0x220000) {

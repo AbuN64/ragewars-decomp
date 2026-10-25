@@ -63,7 +63,7 @@ extern f32 func_80209308_de(Brain *, CVector3 *, f32, f32);
 extern s32 func_80210EFC_de(f32);
 extern void Nav_MeasureWheelClearance(Actor *, s32);
 extern void func_80209E80_de(Brain *arg0);
-extern s32 func_8020D1CC_de(char *, s32, s32);
+extern s32 Nav_GetRouteRelation(char *, s32, s32);
 
 
 extern void Nav_SteerAlongRoute(Brain *arg0), Nav_UpdatePlayerSteering(Brain *arg0);
@@ -143,7 +143,7 @@ halt:
         }
         if (route != brain->node) {
             brain->node = route;
-            if (func_8020D1CC_de(D_8013B364, brain->route, route) == 0) {
+            if (Nav_GetRouteRelation(D_8013B364, brain->route, route) == 0) {
                 func_80209874_de(brain, 1);
             }
         }

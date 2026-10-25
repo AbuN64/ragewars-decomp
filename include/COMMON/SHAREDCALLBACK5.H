@@ -1643,10 +1643,12 @@ typedef struct AiController {
     u8 pad24[4];
     s32 routeGoal; /* 0x28 */
     CVector3 destination; /* 0x2C */
-    u8 pad38[0x2C];
+    s32 candidateCount; /* 0x38 */
+    AiTarget * candidates[10]; /* 0x3C */
     AiTarget * target; /* 0x64 */
     Player *routeObject; /* 0x68 */
-    u8 pad6C[0x50];
+    s32 candidateAccepted[10]; /* 0x6C */
+    s32 candidateDistances[10]; /* 0x94: weighted by Nav_EvaluateAttackTarget */
     s32 routeState; /* 0xBC */
     u8 padC0[0xF0];
     CVector3 home; /* 0x1B0 */
@@ -1679,8 +1681,8 @@ typedef struct AiController {
     s32 unk318; /* 0x318 */
     s32 unk31C; /* 0x31C */
     s32 unk320; /* 0x320 */
-    s32 unk324; /* 0x324 */
-    s32 unk328; /* 0x328 */
+    s32 attackedTimer; /* 0x324: set to 500 when hit, counts down */
+    Player * lastAttacker; /* 0x328 */
     s32 unk32C; /* 0x32C */
 } AiController;
 

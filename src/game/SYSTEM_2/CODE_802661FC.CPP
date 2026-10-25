@@ -209,7 +209,7 @@ void System_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 abso
     if (source->definition->kind == 1 || source->definition->kind == 11) {
         func_80271F34_de(&source->velocity, &source->velocity, &impulse);
         if (applyTurn) {
-            angle = func_80216F44_de((Actor_func_80214624_de *)source, target->position);
+            angle = Weapons_GetSignedAngleToPoint((Actor_func_80214624_de *)source, target->position);
             source->turn += angle * D_800C43DC_de;
         }
     }

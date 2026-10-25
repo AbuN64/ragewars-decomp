@@ -181,7 +181,7 @@ s32 func_80214624_de(Actor_func_80214624_de *actor, Plan *tracker, Actor_func_80
     }
     if (var_s1 == 1) {
         tracker->unk90 = pos.y;
-        tracker->unk8C = (f32) (actor->unk6C + func_80216F44_de(actor, pos));
+        tracker->unk8C = (f32) (actor->unk6C + Weapons_GetSignedAngleToPoint(actor, pos));
         return 1;
     }
     return 0;

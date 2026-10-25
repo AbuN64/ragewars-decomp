@@ -18,7 +18,7 @@ extern CNavData D_8013B364;
 
 extern void func_80211020_de(void *);
 
-extern s32 func_8020D1CC_de(void *, s32, s32);
+extern s32 Nav_GetRouteRelation(void *, s32, s32);
 
 extern f32 func_802726BC_de(f32 *, f32 *);
 
@@ -85,7 +85,7 @@ void func_80212828_de(CloseAttackActor *arg0)
     state->destination = value;
     if (value != state->node) {
         state->node = value;
-        if (!func_8020D1CC_de(&D_8013B364, state->route, value)) {
+        if (!Nav_GetRouteRelation(&D_8013B364, state->route, value)) {
             func_80209874_de(state, 1);
             return;
         }

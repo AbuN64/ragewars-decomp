@@ -9,7 +9,7 @@
 extern s32 func_80214624_de(Actor_func_80214DD4_de *arg0, Tracker *arg1, Actor_func_80214DD4_de *target);
 extern Actor_func_80214DD4_de *Weapons_SelectCombatTarget(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 arg2, s32 arg3);
 extern f32 Weapons_FindClearAimAngle(Actor_func_80214DD4_de *arg0, CVector3 pos, Actor_func_80214DD4_de *target, f32 arg3);
-extern f32 func_80216F44_de(Actor_func_80214DD4_de *arg0, CVector3 pos);
+extern f32 Weapons_GetSignedAngleToPoint(Actor_func_80214DD4_de *arg0, CVector3 pos);
 struct Cursor;
 extern Location *func_80219408_de(struct Cursor *slot);
 extern f32 Particle_GetActorHeight(Actor_func_80214DD4_de *arg0);
@@ -162,7 +162,7 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
         range = Weapons_FindClearAimAngle(actor, probe, target, D_800C2178_de);
         pos.y = tracker->height;
     } else {
-        range = func_80216F44_de(actor, pos);
+        range = Weapons_GetSignedAngleToPoint(actor, pos);
     }
     Particle_SubtractVectors(&delta, &pos, &actor->pos);
     out->kind = kind;

@@ -10674,7 +10674,8 @@ SECTIONS
         . = ALIGN(8) /* src/game/GAME_2/80210180.CPP.o */;
         src/game/GAME_2/80210180.CPP.o(.rodata .rdata);
         src/game/DATA/OVLDAT1/800C1F38_2.CPP.o(.data);
-        src/game/AI/NAV/800C6E84_15.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/NAV/8020EAE0_13.CPP.o */;
+        src/game/AI/NAV/8020EAE0_13.CPP.o(.rodata .rdata);
         src/game/DATA/OVLDAT1/800C1F84.CPP.o(.data);
         . = ALIGN(8) /* src/game/AI/NAV/802106E0.CPP.o */;
         src/game/AI/NAV/802106E0.CPP.o(.rodata .rdata);
@@ -12429,7 +12430,8 @@ SECTIONS
         src/game/AI/NAV/800C6E84_14.CPP.o(.data);
         src/game/AI/NAV/800C6E84_5.CPP.o(.rodata .rdata);
         src/game/AI/NAV/800C6E84_5.CPP.o(.data);
-        src/game/AI/NAV/800C6E84_15.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/NAV/8020EAE0_13.CPP.o */;
+        src/game/AI/NAV/8020EAE0_13.CPP.o(.rodata .rdata);
         src/game/GAME_2/80210180.CPP.o(.data);
         . = ALIGN(8) /* src/game/AI/NAV/802106E0.CPP.o */;
         src/game/AI/NAV/802106E0.CPP.o(.rodata .rdata);
@@ -14136,7 +14138,8 @@ SECTIONS
         . = ALIGN(8) /* src/game/GAME_2/80210180.CPP.o */;
         src/game/GAME_2/80210180.CPP.o(.rodata .rdata);
         src/game/GAME_2/80210180.CPP.o(.data);
-        src/game/AI/NAV/800C6E84_15.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/NAV/8020EAE0_13.CPP.o */;
+        src/game/AI/NAV/8020EAE0_13.CPP.o(.rodata .rdata);
         src/game/AI/NAV/800C6E84_15.CPP.o(.data);
         . = ALIGN(8) /* src/game/AI/NAV/802106E0.CPP.o */;
         src/game/AI/NAV/802106E0.CPP.o(.rodata .rdata);
@@ -15864,7 +15867,8 @@ SECTIONS
         . = ALIGN(8) /* src/game/GAME_2/80210180.CPP.o */;
         src/game/GAME_2/80210180.CPP.o(.rodata .rdata);
         src/game/DATA/OVLDAT1/800C1E68_2.CPP.o(.data);
-        src/game/AI/NAV/800C6E84_15.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/NAV/8020EAE0_13.CPP.o */;
+        src/game/AI/NAV/8020EAE0_13.CPP.o(.rodata .rdata);
         src/game/AI/NAV/800C6E84_15.CPP.o(.data);
         . = ALIGN(8) /* src/game/AI/NAV/802106E0.CPP.o */;
         src/game/AI/NAV/802106E0.CPP.o(.rodata .rdata);
@@ -17608,7 +17612,8 @@ SECTIONS
         . = ALIGN(8) /* src/game/GAME_2/80210180.CPP.o */;
         src/game/GAME_2/80210180.CPP.o(.rodata .rdata);
         src/game/DATA/OVLTAB1/800C7034.CPP.o(.data);
-        src/game/AI/NAV/800C6E84_15.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/NAV/8020EAE0_13.CPP.o */;
+        src/game/AI/NAV/8020EAE0_13.CPP.o(.rodata .rdata);
         src/game/DATA/OVLTAB1/800C7074.CPP.o(.data);
         . = ALIGN(8) /* src/game/AI/NAV/802106E0.CPP.o */;
         src/game/AI/NAV/802106E0.CPP.o(.rodata .rdata);
@@ -19912,7 +19917,7 @@ SECTIONS
         src/game/DATA/OVLDAT1/800C1F38.CPP.o(.bss .sbss COMMON);
         src/game/GAME_2/80210180.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT1/800C1F38_2.CPP.o(.bss .sbss COMMON);
-        src/game/AI/NAV/800C6E84_15.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/8020EAE0_13.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT1/800C1F84.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/802106E0.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_16.CPP.o(.bss .sbss COMMON);
@@ -21172,7 +21177,7 @@ SECTIONS
         src/game/AI/NAV/8020EAE0_11.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_14.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_5.CPP.o(.bss .sbss COMMON);
-        src/game/AI/NAV/800C6E84_15.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/8020EAE0_13.CPP.o(.bss .sbss COMMON);
         src/game/GAME_2/80210180.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/802106E0.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_16.CPP.o(.bss .sbss COMMON);
@@ -22403,6 +22408,7 @@ SECTIONS
         src/game/AI/NAV/8020EAE0_11.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_14.CPP.o(.bss .sbss COMMON);
         src/game/GAME_2/80210180.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/8020EAE0_13.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_15.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/802106E0.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_16.CPP.o(.bss .sbss COMMON);
@@ -23638,6 +23644,7 @@ SECTIONS
         src/game/DATA/OVLDAT1/800C1E68.CPP.o(.bss .sbss COMMON);
         src/game/GAME_2/80210180.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT1/800C1E68_2.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/8020EAE0_13.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_15.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/802106E0.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_16.CPP.o(.bss .sbss COMMON);
@@ -24929,7 +24936,7 @@ SECTIONS
         src/game/DATA/OVLTAB1/800C7028.CPP.o(.bss .sbss COMMON);
         src/game/GAME_2/80210180.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTAB1/800C7034.CPP.o(.bss .sbss COMMON);
-        src/game/AI/NAV/800C6E84_15.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/8020EAE0_13.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTAB1/800C7074.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/802106E0.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_16.CPP.o(.bss .sbss COMMON);
