@@ -117,22 +117,22 @@ extern u32 func_802BCF30_de(void);
 
 
 
-s32 func_80257BB4_de(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 arg3,
+s32 Texture_StartSoundRecord(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 arg3,
                   s32 arg4, s32 arg5, s32 arg6) {
     void *node;
 
     ((ContextRecAt2BC0 *)(arg0))->field2B98 = func_802395A4_de(&D_80145088, arg2);
     if (arg1->flags & 1) {
-        if (func_8025BA4C_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], ((ContextRecAt2BC0 *)(arg0))->field2B8C) != 0) {
+        if (func_8025BA4C_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], ((ContextRecAt2BC0 *)(arg0))->selectedSound) != 0) {
             return -1;
         }
         if (func_8025C10C_de(arg2, (char *)((ContextRecAt2BC0 *)(arg0))->field2B98 + 0x128) == 0.0f) {
             return -1;
         }
     }
-    if ((arg1->flags & 0x1000) && ((ContextRecAt2BC0 *)(arg0))->field2B90 != -1) {
-        if (func_8025BDAC_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], ((ContextRecAt2BC0 *)(arg0))->field2B8C,
-                         ((ContextRecAt2BC0 *)(arg0))->field2B90) != -1) {
+    if ((arg1->flags & 0x1000) && ((ContextRecAt2BC0 *)(arg0))->selectedOwner != -1) {
+        if (func_8025BDAC_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], ((ContextRecAt2BC0 *)(arg0))->selectedSound,
+                         ((ContextRecAt2BC0 *)(arg0))->selectedOwner) != -1) {
             return -1;
         }
     }
@@ -140,14 +140,14 @@ s32 func_80257BB4_de(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 arg3,
         return func_80259260_de(&((ContextRecAt2BC0 *)(arg0))->view[0], arg1, arg2, arg3, arg5);
     }
     if (arg1->flags & 0x40) {
-        func_8025B920_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], ((ContextRecAt2BC0 *)(arg0))->field2B8C, arg1->field0);
+        func_8025B920_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], ((ContextRecAt2BC0 *)(arg0))->selectedSound, arg1->field0);
     }
     node = Audio_StartNoteVoice(&((ContextRecAt2BC0 *)(arg0))->menu[0], arg1, arg3, arg4);
     if (node == 0) {
         return -1;
     }
     func_8025BB5C_de(node, arg2, arg6);
-    func_8025BB7C_de(node, ((ContextRecAt2BC0 *)(arg0))->field2B8C);
+    func_8025BB7C_de(node, ((ContextRecAt2BC0 *)(arg0))->selectedSound);
     func_8025BB84_de(node, arg1, arg5);
 
     {
@@ -207,63 +207,45 @@ typedef struct SoundVoiceGroup {
     u32 count;
 } SoundVoiceGroup;
 
-#ifdef NON_MATCHING
-#include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/RESIDENT_EVENT_HANDLER.H"
-#include "COMMON/ARG.H"
-#include "COMMON/EXTERNS_11.H"
-#include "COMMON/EXTERNS_14.H"
 #include "COMMON/SELF.H"
-#include "COMMON/CARTRIDGEREADWORKER.H"
-#include "COMMON/EXTERNS_18.H"
-#include "COMMON/TRIPLE.H"
-#include "stddef.h"
-#include "TYPES.H"
-s32 func_80257BB4_de(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 /* The definition range is inclusive; weights are signed 32-bit entries. */
-static inline s32 selectSoundVariant(ContextRecAt2BC0 *context, s32 sound, u16 avoidPrevious) {
+static inline s32 selectSoundVariant(ContextRecAt2BC0 *context, s32 sound, s16 avoidPrevious) {
     s32 first;
     s32 last;
-    s32 total = 0;
+    s32 total;
     s32 index;
+    s32 i;
     s32 threshold;
-    s32 *weights;
-
-    if (context->instrumentCount == 0 ||
-        !func_80265550_de((u32 *)context->instrumentData, context->instrumentCount,
-                         (u32)(s16)sound, &first, &last)) {
-        return -1;
-    }
-    if (first == last) {
-        return first;
-    }
-    if (first <= last) {
-        weights = &context->envelopeData[first];
-        for (index = first; index <= last; index++) total += *weights++ * 10;
-    }
-    threshold = func_802744D4_de() % total;
     total = 0;
-    index = first;
-    if (index < last) {
-        weights = &context->envelopeData[index];
-        for (; index < last; index++, weights++) {
-            total += *weights * 10;
-            if (total >= threshold) {
-                break;
+    if (context->instrumentCount != 0) {
+        if (!func_80265550_de((u32 *)context->instrumentData, context->instrumentCount, (s16)sound, &first, &last)) {
+            return -1;
+        }
+        index = first;
+        if (index != last) {
+            for (i = first; i <= last; i++) {
+                total += context->envelopeData[i] * 10;
+            }
+            threshold = func_802744D4_de() % total;
+            total = 0;
+            for (index = first; index < last; index++) {
+                total += context->envelopeData[index] * 10;
+                if (total >= threshold) {
+                    break;
+                }
+            }
+            if (avoidPrevious && index == context->lastInstrument) {
+                if (index == last) {
+                    index--;
+                } else {
+                    index++;
+                }
             }
         }
+        return index;
     }
-    if ((s16)avoidPrevious && index == context->lastInstrument) {
-        if (index != last) {
-            index++;
-        } else {
-            index--;
-        }
-    }
-    return index;
+    return -1;
 }
-
 static inline s32 soundVoiceLimitReached(ContextRecAt2BC0 *context, s32 sound) {
     s32 count;
     s32 i;
@@ -284,9 +266,12 @@ static inline s32 soundVoiceLimitReached(ContextRecAt2BC0 *context, s32 sound) {
     return 0;
 }
 
-/* 91/294 aligned edits remain in register allocation and selection branches. */
-s32 Texture_PlaySoundAtPosition(void *memory, s32 sound, CVector3 position, s32 spatialMode, s32 owner) {
-    ContextRecAt2BC0 *context = memory;
+/* Plays sound-bank entry `sound` at `position`: refuses while a handle is selected or when six voices
+ * already play the same sound effect, picks a weighted random variant of the entry (sound effects below
+ * 0x100 avoid repeating the previous variant and get a random pan), records the entry, sound and owner as
+ * the current selection, hands out a play id under the recursive lock and starts every voice record of the
+ * variant; returns the play id, or -1 when nothing was started. */
+s32 Texture_PlaySoundAtPosition(ContextRecAt2BC0 *context, s32 sound, CVector3 position, s32 spatialMode, s32 owner) {
     SoundVoiceGroup *group;
     u32 count;
     u32 i;
@@ -296,47 +281,41 @@ s32 Texture_PlaySoundAtPosition(void *memory, s32 sound, CVector3 position, s32 
     if (soundVoiceLimitReached(context, sound)) {
         return -1;
     }
-    {
-        if (sound < 0x100) {
-            index = selectSoundVariant(context, sound, (u16)context->lastInstrument);
-            context->field2B94 = (s8)(s32)func_80274564_de(D_800C3EDC_de);
+    if (sound < 0x100) {
+        index = selectSoundVariant(context, sound, context->lastInstrument);
+        context->randomPan = (s32)func_80274564_de(127.0f);
+    } else {
+        index = selectSoundVariant(context, sound, 0);
+    }
+    if (index != -1) {
+        context->selectedEntry = func_8028FDB4_de(func_8028FDB4_de(context->instrumentIndex, (s16)index), 0);
+        context->selectedSound = sound;
+        context->selectedOwner = owner;
+        group = func_8028FDB4_de(func_8028FDB4_de(context->instrumentIndex, (s16)index), 1);
+        count = group->count;
+        if (count != 0) {
+            soundAcquireLock(&context->lock);
+            playId = ++context->playIdCounter;
+            soundReleaseLock(&context->lock);
+            if (sound < 0x100) {
+                context->lastInstrument = index;
+            }
         } else {
-            index = selectSoundVariant(context, sound, 0);
-        }
-        if (index != -1) {
-            context->field2B88 = func_8028FDB4_de(func_8028FDB4_de(context->instrumentIndex, (s16)index), 0);
-            context->field2B8C = sound;
-            context->field2B90 = owner;
-            group = func_8028FDB4_de(func_8028FDB4_de(context->instrumentIndex, (s16)index), 1);
-            count = group->count;
             playId = -1;
-            if (count != 0) {
-                soundAcquireLock(&context->lock);
-                playId = ++context->playIdCounter;
-                soundReleaseLock(&context->lock);
-                if (sound < 0x100) {
-                    context->lastInstrument = index;
-                }
-            }
-            for (i = 0; i < count; i++) {
-                func_80257BB4_de(context, (Item57BD4 *)((u8 *)(group + 1) + i * group->stride),
-                                &position, index, playId, 0, spatialMode);
-            }
-            context->field2B90 = -1;
-            return playId;
         }
+        for (i = 0; i < count; i++) {
+            Texture_StartSoundRecord(context, (Item57BD4 *)((u8 *)(group + 1) + i * group->stride), &position, index,
+                                     playId, 0, spatialMode);
+        }
+        context->selectedOwner = -1;
+        return playId;
     }
     return -1;
 }
 
-
-#else
-INCLUDE_ASM("span_1000", Texture_PlaySoundAtPosition);
-#endif
-
 /* Starts a sound-bank entry: looks up the entry's record in the bank table at 0x2B4C, resets the current
  * selection (0x2B88/0x2B8C/0x2B90), takes the recursive lock at 0x110 to hand out a new play id (counter
- * at 0x10C), then starts every voice record of the entry through func_80257BB4_de at the given position;
+ * at 0x10C), then starts every voice record of the entry through Texture_StartSoundRecord at the given position;
  * returns the play id, or -1 for an out-of-range index or an empty entry. */
 s32 Texture_PlayInstrumentAtPosition(ContextRecAt2BC0 *self, s32 index, CVector3 position, s32 voiceParameter) {
     SoundVoiceGroup *group;
@@ -346,9 +325,9 @@ s32 Texture_PlayInstrumentAtPosition(ContextRecAt2BC0 *self, s32 index, CVector3
     if (index >= self->instrumentCount) {
         return -1;
     }
-    self->field2B88 = func_8028FDB4_de(func_8028FDB4_de(self->instrumentIndex, (s16)index), 0);
-    self->field2B8C = 0x100;
-    self->field2B90 = -1;
+    self->selectedEntry = func_8028FDB4_de(func_8028FDB4_de(self->instrumentIndex, (s16)index), 0);
+    self->selectedSound = 0x100;
+    self->selectedOwner = -1;
     group = func_8028FDB4_de(func_8028FDB4_de(self->instrumentIndex, (s16)index), 1);
     count = group->count;
     if (count != 0) {
@@ -359,7 +338,7 @@ s32 Texture_PlayInstrumentAtPosition(ContextRecAt2BC0 *self, s32 index, CVector3
         playId = -1;
     }
     for (i = 0; i < count; i++) {
-        func_80257BB4_de(self, (Item57BD4 *)((u8 *)(group + 1) + i * group->stride), &position, index, playId, 0, voiceParameter);
+        Texture_StartSoundRecord(self, (Item57BD4 *)((u8 *)(group + 1) + i * group->stride), &position, index, playId, 0, voiceParameter);
     }
     return playId;
 }

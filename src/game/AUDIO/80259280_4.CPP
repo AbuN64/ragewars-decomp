@@ -97,7 +97,7 @@ s32 func_80259260_de(ManagerRecAtD8V1 *manager, void *desc, Vec3Words *position,
         node->position = *position;
         node->pad58 = 0;
         node->padB4 = 0;
-        func_8025BB7C_de(node->channel, ((struct ContextRecAt2BC0 *)manager->scene)->field2B8C);
+        func_8025BB7C_de(node->channel, ((struct ContextRecAt2BC0 *)manager->scene)->selectedSound);
         node->mix = manager->scene[0x2BAC / 4];
         func_8025BB84_de(node->channel, desc, extra);
         at = manager->active.next;

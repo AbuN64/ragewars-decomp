@@ -179,7 +179,7 @@ void Audio_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s32
     SoundEnvelope *preset;
 
     mix = (SoundMixParameters *)voice->reserved10;
-    gainRange = voice->context->field2B88;
+    gainRange = voice->context->selectedEntry;
     voice->volumeScale = D_800C3F20_de;
     if (voice->soundId < 0x100) {
         for (i = 0; i < 0x1F; i++) {

@@ -314,7 +314,7 @@ void func_8025BB84_de(void *arg0, void *desc, s32 extra) {
     if (((struct View_func_8025AE1C_de *)(arg0))->trackId < 0x100) {
         if (((struct View_func_8025AE1C_de *)(arg0))->fixed == 0 &&
             func_80258D2C_de(((struct View_func_8025AE1C_de *)(arg0))->context) != 0) {
-            value = (s8)((ContextRecAt2BC0 *)((struct View_func_8025AE1C_de *)arg0)->context)->field2B94;
+            value = (s8)((ContextRecAt2BC0 *)((struct View_func_8025AE1C_de *)arg0)->context)->randomPan;
             goto store_value;
         }
     } else if (((struct View_func_8025AE1C_de *)(arg0))->fixed == 0 &&

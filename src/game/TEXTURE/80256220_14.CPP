@@ -268,11 +268,11 @@ void func_80257360_de(ContextRecAt2BC0 *ctx) {
         }
     }
     ctx->selectedHandle = -1;
-    ctx->field2B8C = -1;
+    ctx->selectedSound = -1;
     ctx->soundCounter = 0;
     ctx->frame = 0;
-    ctx->field2B88 = 0;
-    ctx->field2B94 = 0x40;
+    ctx->selectedEntry = 0;
+    ctx->randomPan = 0x40;
     ctx->field2B98 = 0;
     ctx->field2BB8 = 0;
     ctx->field2B9C = 0;

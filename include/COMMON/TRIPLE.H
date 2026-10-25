@@ -1191,7 +1191,6 @@ extern double D_800C3EC0_de;
 extern float D_800C3ED0_de;
 extern float D_800C3ED4;
 extern float D_800C3ED8_de;
-extern float D_800C3EDC_de;
 extern float D_800C3EE4_de;
 extern float D_800C3EF8;
 extern float D_800C3F04_de;

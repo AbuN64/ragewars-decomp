@@ -2951,3 +2951,4 @@ literals_Camera_SetupViewportAndFog = 0x800C83A8; // rom:0xC8FA8 size:0xC
 literals_Instance_DrawBlobShadow = 0x800C8BA8; // rom:0xC97A8 size:0x28
 literals_Libsn_ServiceHostCommands = 0x800C6AB0; // rom:0xC76B0 size:0x28
 literals_Engine_BuildPlacedInstances = 0x800CA2F8; // rom:0xCAEF8 size:0x4
+literals_Texture_PlaySoundAtPosition = 0x800C8FCC; // rom:0xC9BCC size:0x4

@@ -2570,3 +2570,4 @@ literals_Instance_DrawBlobShadow = 0x800C3DA8; // rom:0xC49A8 size:0x28
 literals_Libsn_ServiceHostCommands = 0x800C1CA0; // rom:0xC28A0 size:0x28
 literals_Frontend_ComputeWidgetBounds = 0x800E88E0; // rom:0xE94E0 size:0x10
 literals_Engine_BuildPlacedInstances = 0x800C54F8; // rom:0xC60F8 size:0x4
+literals_Texture_PlaySoundAtPosition = 0x800C41CC; // rom:0xC4DCC size:0x4

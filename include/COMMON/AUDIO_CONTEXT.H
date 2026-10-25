@@ -45,11 +45,11 @@ struct ContextRecAt2BC0 {
     void *table2B74;
     void *table2B78;
     s32 tableCount2B7C, tableCount2B80, tableCount2B84;
-    u8 *field2B88; /* byte range, Audio_InitializeVoiceMix */
-    s16 field2B8C;
+    u8 *selectedEntry; /* +0x2B88: section 0 of the playing variant (gain range, Audio_InitializeVoiceMix) */
+    s16 selectedSound; /* +0x2B8C: sound-bank entry being started, -1 idle */
     char pad2B8E[2];
-    s32 field2B90;
-    u8 field2B94;
+    s32 selectedOwner; /* +0x2B90: owner id while its voices start, -1 otherwise */
+    u8 randomPan; /* +0x2B94: random 0..127 pan of the last sound effect (0x40 centre) */
     char pad2B95[3];
     struct GameplayCamera *field2B98; /* listener, Audio_InitializeVoiceMix */
     s32 field2B9C;
