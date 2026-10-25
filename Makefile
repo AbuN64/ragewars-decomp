@@ -1,4 +1,5 @@
 # Turok: Rage Wars: matching build.
+# generator: c995f6ed96ef
 # make check             builds every version ROM from the committed sources and verifies its SHA-1.
 # make check CHECK=tree  verifies only that the committed generated files are present (no ROMs needed).
 # make extract           splits every baserom into asm/<version>/ with splat; a data file's section is its stand-in's.
