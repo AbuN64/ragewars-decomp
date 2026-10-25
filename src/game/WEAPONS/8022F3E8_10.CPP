@@ -75,7 +75,7 @@ void func_802312C8_de(Shared_Actor *actor, WeaponFireState *attack) {
     SharedRecAt564V1 *target;
 
     player = actor->entity;
-    target = player->owner;
+    target = player->camera;
     if (target != 0) {
         position = &target->position;
     } else {
@@ -185,8 +185,8 @@ static inline s32 can_fire(Player *player) {
     ammo = func_8022F55C_de(&D_80102B00[player->slot * 0x190], player->selectedAction);
     if (ammo == 0) {
         Render_PlayFlatSound(0xD4D);
-        if (player->owner != 0) {
-            Camera_PostTargetedScreenMessage(&D_80145088, player->owner, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Weapons_GetPlayerIndex(&D_80145040, player),
+        if (player->camera != 0) {
+            Camera_PostTargetedScreenMessage(&D_80145088, player->camera, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Weapons_GetPlayerIndex(&D_80145040, player),
                           1.0f);
         }
     }
@@ -215,8 +215,8 @@ void func_80231664_de(Shared_Actor *actor, WeaponFireState *fireState) {
             fireState->mode = 2;
             if (Weapons_HasAmmoForMode(player, player->selectedAction) == 0) {
                 Render_PlayFlatSound(0xD4D);
-                if (player->owner != 0) {
-                    Camera_PostTargetedScreenMessage(&D_80145040.object, player->owner, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80145040.object.language),
+                if (player->camera != 0) {
+                    Camera_PostTargetedScreenMessage(&D_80145040.object, player->camera, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80145040.object.language),
                                   Weapons_GetPlayerIndex(&D_80145040, player), 1.0f);
                 }
                 fireState->mode = single;

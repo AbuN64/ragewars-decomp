@@ -129,8 +129,8 @@ void Particle_Update(Shared_Particle *particle) {
     if (particle->time < 0.0f) {
         return;
     }
-    if (owner != NULL && owner->kind == 1 && (owner->flags & 0x300000) && owner->state != NULL &&
-        (owner->state->flags & 0x2000)) {
+    if (owner != NULL && owner->kind == 1 && (owner->flags & 0x300000) && owner->player != NULL &&
+        (owner->player->reactionFlags & 0x2000)) {
         D_800D2988 = savedStep * 0.25f;
     }
     extent = particle->size.z;
@@ -152,9 +152,9 @@ void Particle_Update(Shared_Particle *particle) {
     if (particle->flags & 0x20000) {
         particle->time = 0.0f;
         particle->life = particle->unk148 * 32.0f;
-        halfExtent = particle->shake - D_800D2988 * 6.0f;
+        halfExtent = particle->quiver - D_800D2988 * 6.0f;
         newShake = (halfExtent < 0.0f) ? 0 : (s32)halfExtent;
-        particle->shake = newShake;
+        particle->quiver = newShake;
     }
     if (particle->flags & 0x10000) {
         target = particle->target;
@@ -1280,7 +1280,7 @@ static __inline__ void attachParticle(Shared_Particle *particle, f32 *transform,
     Particle_TransformDirection(inverse, &direction, &particle->inst.velocity);
     particle->flags|=0x10000;
     particle->target=attached;
-    particle->shake=D_801041F0.frame;
+    particle->collisionNode=D_801041F0.frame;
     if (particle->inst.type==0x56 && action==2) particle->flags|=0x4000000;
 }
 void Particle_HitTarget(void *particle) {
@@ -1463,7 +1463,7 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
                 particle->flags |= 0x20000;
                 particle->inst.pos = D_801001F8.position;
                 particle->inst.velocity = D_801042C8;
-                Render_SetPlayerResetPosition(particle->owner->state, &particle->inst.pos);
+                Render_SetPlayerResetPosition(particle->owner->player, &particle->inst.pos);
             } else {
                 particle->life = 1;
             }

@@ -38,8 +38,6 @@ struct Actor_func_8027B428_de {
     func_8024E8F0_S1 *owner;
 };
 
-struct Parent;
-typedef struct Parent Parent;
 
 
 struct EntryRecAt4V4;
@@ -75,8 +73,6 @@ struct RecordRecAt2C {
 
 extern int D_801042C4;
 
-struct Actor_func_8027DAD0_de;
-typedef struct Actor_func_8027DAD0_de Actor_func_8027DAD0_de;
 
 
 struct Shared_ParticleInstance;
@@ -89,11 +85,13 @@ struct Shared_Particle;
 struct Shared_ParticleTarget;
 struct Shared_ParticleTarget {
     u8 kind;
-    char reserved1[0x17];
+    char reserved1[0x7];
+    CVector3 position; /* 0x08 */
+    char reserved14[0x4];
     s32 *category;
     char reserved1C[0x98];
-    struct UnitMtx *drawMatrices;
-    struct UnitMtx *bones;
+    PackedMatrixWords *drawMatrices; /* 0xB4: one per skeleton node (CGameObjectInstance_t m_pmtDrawMtxs) */
+    PackedMatrixWords *bones;
     char padBC[0x44];
     s32 flags;
     char pad104[0x6C];
@@ -132,41 +130,7 @@ extern int D_8010029C;
 
 
 
-struct Parent;
-struct Parent {
-    char pad0[8];
-    CVector3 position;
-    char pad14[0x60];
-    f32 transform[16];
-    void *skeleton;
-    char padB8[0x48];
-    s32 flags;
-    char pad104[0xD4];
-    func_80228774_S5 *model;
-};
 
-struct Actor_func_8027DAD0_de;
-struct Parent;
-struct Actor_func_8027DAD0_de {
-    char pad0[4];
-    u16 type;
-    char pad6[2];
-    CVector3 position;
-    s32 unk14;
-    char pad18[4];
-    CVector3 heading;
-    char pad28[0x28];
-    CVector3 offset;
-    s32 flags;
-    char pad60[0xCC];
-    struct Parent *owner;
-    char pad130[4];
-    struct Parent *parent;
-    char pad138[0x3C];
-    CVector3 facing;
-    char pad180[0x51];
-    s8 bone;
-};
 
 
 
@@ -178,10 +142,12 @@ struct Actor_func_8027DAD0_de {
 struct Shared_ParticleOwner;
 struct Shared_ParticleOwner {
     u8 kind;
-    char pad1[0xFF];
-    s32 flags;
+    char pad1[0x73];
+    f32 orient[16]; /* 0x74: the owner's orientation (CGameObjectInstance_t m_mfOrient) */
+    char padB4[0x4C];
+    s32 flags; /* 0x100: 0x300000 = a player */
     char pad104[0xD4];
-    PlayerRecAt122C *state;
+    struct Player *player; /* 0x1D8: a player owner's player record */
 };
 
 struct Shared_ParticleColors;
@@ -294,7 +260,10 @@ struct Shared_Particle {
     f32 rotationScale;
     char pad1C8[8];
     s8 space; /* reference frame the particle is placed in (-8..2): func_8027D97C_de picks its parent transform, func_8027DD48_de its ground clamp */
-    s8 shake; /* decaying shake strength 0..127 (flags 0x20000): swings the drawn particle about a pivot */
+    union {
+        s8 collisionNode; /* 0x1D1: skeleton node of the target a riding particle (flags 0x10000) follows */
+        s8 quiver; /* a stuck particle's (flags 0x20000) quiver strength 0..127, decaying 6 a frame */
+    };
     u8 prim[3];
     u8 env[3];
     u8 opacity;

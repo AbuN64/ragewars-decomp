@@ -6,6 +6,7 @@
 #include "TYPES.H"
 #include "particle/80271B18_3.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
+#include "particle/8027A0F4_4.H"
 
 struct Shared_AnimFrame {
     u8 kind;
@@ -47,7 +48,6 @@ void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
 Shared_ParticleInstance *Camera_FindScreenMessage(GameplayCamera *);
 s32 Camera_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, void *);
-void Particle_BuildMatrix(Shared_Particle *, void *, void *, f32);
 void *func_802799C0_de(void *, s32);
 void Render_SetCombineMode(s32);
 void Render_SetModePreset(s32);

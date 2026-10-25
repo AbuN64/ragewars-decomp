@@ -7,6 +7,7 @@
 #include "COMMON/MATH_HELPERS.H"
 #include "TYPES.H"
 #include "ENGINE/PARTICLE.H"
+#include "particle/8027A0F4_4.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "SCENE/802508E0_4.H"
 #include "particle/80271B18_3.H"
@@ -54,7 +55,6 @@ extern char D_800C4D68_de;
 extern char D_0026D7F4;
 
 
-extern void Particle_BuildMatrix(void *, s32, s32, f32);
 
 
 extern s32 Render_GetDirectoryEntry(s32 *, s32, s32);
@@ -149,10 +149,10 @@ void func_8027E784_de(Shared_Particle *actor, GameplayCamera *view) {
     }
 }
 
-void Particle_DrawModel(void *particle, GameplayCamera *view) {
+void Particle_DrawModel(Shared_Particle *particle, GameplayCamera *view) {
     CVector3 delta;
     void *modelTable;
-    void *matrix;
+    PackedMatrixWords *matrix;
     void **resource;
     s32 key;
     s32 found;
@@ -161,43 +161,43 @@ void Particle_DrawModel(void *particle, GameplayCamera *view) {
 
     index = 0;
     if (D_80140FF8 == 1) {
-        matrix = (char *)particle + ((D_800D297C << 6) + 0x60);
+        matrix = &particle->mtx[D_800D297C];
     } else {
         matrix = func_802799C0_de(&D_8011FFB0, 1);
         if (matrix == 0) {
             return;
         }
-        Particle_TransformPoint(view->worldToView, &((Shared_Particle *)particle)->inst.pos, &delta);
+        Particle_TransformPoint(view->worldToView, &particle->inst.pos, &delta);
         amount = delta.z;
         if (amount < 0.0f) {
             amount = -amount;
         }
-        Particle_BuildMatrix(particle, (s32)matrix, (s32)view, amount);
+        Particle_BuildMatrix(particle, matrix, view, amount);
     }
 
-    if (((Shared_Particle *)particle)->resource == 0) {
-        resource = Scene_RequestResource(0, ((Shared_Particle *)particle)->desc->renderModel,
-                                ((Shared_Particle *)particle)->desc->renderModel, 0x18,
+    if (particle->resource == 0) {
+        resource = Scene_RequestResource(0, particle->desc->renderModel,
+                                particle->desc->renderModel, 0x18,
                                 0, 0, 0, &D_800C4D38_de, 1);
         if (resource != 0) {
             key = Render_GetDirectoryEntry(*resource,
-                                ((Shared_Particle *)particle)->desc->renderModel, 1);
+                                particle->desc->renderModel, 1);
             Scene_ReleaseResource(0, resource);
             found = func_802540F4_de(0, &modelTable, key, &D_800C4D50_de, 1);
             if (found != 0) {
-                ((Shared_Particle *)particle)->resource = Render_LocatePackSection(
+                particle->resource = Render_LocatePackSection(
                     (s32)modelTable, key, index % *(s32 *)modelTable,
-                    &((Shared_Particle *)particle)->resourceSize);
+                    &particle->resourceSize);
                 Scene_ReleaseResource(0, (void *)found);
             }
         }
-        if (((Shared_Particle *)particle)->resource == 0) {
+        if (particle->resource == 0) {
             return;
         }
     }
 
-    resource = Scene_RequestResource(0, ((Shared_Particle *)particle)->resource,
-                            ((Shared_Particle *)particle)->resource, ((Shared_Particle *)particle)->resourceSize,
+    resource = Scene_RequestResource(0, particle->resource,
+                            particle->resource, particle->resourceSize,
                             0, 0, &D_0026D7F4, &D_800C4D68_de, 1);
     if (resource != 0) {
         Render_QueueModelInstance(resource, matrix, 0,

@@ -124,7 +124,7 @@ void Render_SpawnChildEffect(Actor_func_80279B40_de *actor, s32 model, s32 arg2,
         offset.z = 0.0f;
         BuildRollMatrix(matrix, actor->angle);
         Particle_TransformPoint(matrix, &offset, &turned);
-        parent = Particle_ParentTransform((struct EffectActor *)actor, 0);
+        parent = Particle_ParentTransform((struct Shared_Particle *)actor, 0);
         if (parent != 0) {
             Particle_TransformPoint(parent, &turned, &carried);
         } else {

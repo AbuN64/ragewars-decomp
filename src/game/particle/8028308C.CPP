@@ -311,7 +311,7 @@ void func_80283920_de(Obj_func_80283920_de *actor, Params_func_80283920_de *arg1
     s8 temp_a1;
     s8 resourceId;
     u16 temp_v1;
-    Particle_Attach((struct Actor_func_8027DAD0_de *)actor, 0, 0);
+    Particle_Attach((Shared_Particle *)actor, 0, 0);
     resourceId = arg1->unk6;
     if (resourceId != -1) {
         func_802A4598_de(&D_801379C0, actor, resourceId);
@@ -402,7 +402,7 @@ void func_80283C1C_de(void *arg0, f32 *arg1, s32 arg2) {
     Particle_TransformDirection(matrix_ptr, direction_ptr, &((Shared_Particle *)actor)->inst.velocity);
     ((Shared_Particle *)actor)->target = current;
     ((Shared_Particle *)actor)->flags |= 0x10000;
-    ((Shared_Particle *)actor)->shake = scene->actor_byte;
+    ((Shared_Particle *)actor)->collisionNode = scene->actor_byte;
     if (((Shared_Particle *)actor)->inst.type == 0x56 && mode == 2) {
         ((Shared_Particle *)actor)->flags |= 0x04000000;
     }

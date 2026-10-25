@@ -8,19 +8,19 @@
 #include "SYSTEM/80255C40_7.H"
 #include "particle/80271B18_3.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
+#include "particle/8027A0F4_4.H"
 extern s32 func_8025CA24_de(void *arg0, void *arg1);
 
 extern s32 D_80140FF8[];
 extern s32 D_800D297C;
 
-extern void Particle_BuildMatrix(void *, s32, s32, f32);
 
 
 
 
 
 
-void Particle_UpdateMatrix(void *particle) {
+void Particle_UpdateMatrix(Shared_Particle *particle) {
     CVector3 delta;
     GameplayCamera *camera;
     f32 amount;
@@ -29,20 +29,16 @@ void Particle_UpdateMatrix(void *particle) {
     state = D_80140FF8;
     if (state[0] == 1) {
         camera = (GameplayCamera *)state[-4];
-        Particle_TransformPoint(camera->worldToView, &((Shared_Particle *)particle)->inst.pos, &delta);
+        Particle_TransformPoint(camera->worldToView, &particle->inst.pos, &delta);
         amount = delta.z;
         if (amount < 0.0f) {
             amount = -amount;
         }
-        Particle_BuildMatrix(particle,
-                      (s32)((char *)particle + ((D_800D297C << 6) + 0x60)),
-                      (s32)camera, amount);
+        Particle_BuildMatrix(particle, &particle->mtx[D_800D297C], camera, amount);
     } else {
-        Particle_BuildMatrix(particle,
-                      (s32)((char *)particle + ((D_800D297C << 6) + 0x60)),
-                      0, 0.0f);
+        Particle_BuildMatrix(particle, &particle->mtx[D_800D297C], 0, 0.0f);
     }
-    ((Shared_Particle *)particle)->flags |= 0x100000;
+    particle->flags |= 0x100000;
 }
 
 /* Spawns a sequence of effects along an object's motion segment. */

@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "TYPES.H"
+#include "COMMON/LONE/D_8011AF38.H"
 
 extern void func_802B6B80_de(s32 *);
 extern void func_80255CA0_de(void *list, s32 nextOffset, s32 prevOffset);
@@ -7,7 +8,6 @@ extern void func_80255D14_de(void *list, void *node);
 extern void func_80219460_de(void *definition);
 extern void BuildPitchMatrix(void *matrix, f32 angle);
 extern s32 D_8011ADB0;
-extern f32 D_8011AF38[16];
 
 typedef struct EntryBlock {
     s32 *entries;

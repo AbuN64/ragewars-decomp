@@ -284,6 +284,7 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "gbi.h"
 #include "COMMON/GAMEPLAY_CAMERA.H"
+#include "particle/8027A0F4_4.H"
 /* A particle on the world's render list; the list links through next. */
 typedef struct DrawParticle {
     Shared_Particle particle;
@@ -301,9 +302,7 @@ extern Globals_func_804220A8_de D_80140FE8_de;
 extern s32 D_80140FF8, D_800D297C;
 extern float D_800C4E54_de;
 extern void Render_SetColorDither(s32 arg0);
-extern void Particle_BuildMatrix(Shared_Particle *particle, void *matrix, void *camera, f32 depth);
 extern s32 func_80296B74_de(CQuatern *planes, Box *box);
-extern void Particle_DrawModel(void *arg0, GameplayCamera *arg1);
 extern void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view);
 extern void func_802A58B0_de(ObjRecAt7528 *arg0, Shared_Particle *arg1, PackedMatrixWords *matrix);
 void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
@@ -369,7 +368,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
                         }
                         node->particle.flags |= 0x100000;
                     }
-                    if (node->particle.desc->renderModel != 0) Particle_DrawModel(node, view);
+                    if (node->particle.desc->renderModel != 0) Particle_DrawModel(&node->particle, view);
                     else Particle_DrawSprite(&node->particle, view);
                     if (node->particle.desc->flags & 0x100000) {
                         func_8027E784_de(&node->particle, view);

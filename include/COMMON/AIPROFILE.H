@@ -66,7 +66,7 @@ struct Player {
     u8 pad598[0x3C];
     s32 slot; /* 0x5D4 */
     AiProfile * profile; /* 0x5D8 */
-    void *owner; /* 0x5DC */
+    struct GameplayCamera *camera; /* 0x5DC: the camera following this player */
     s32 state; /* 0x5E0 */
     s32 health; /* 0x5E4 */
     u8 pad5E8[4];

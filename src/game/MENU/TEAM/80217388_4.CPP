@@ -35,7 +35,7 @@ void Team_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *player)
     fade = menu->m_Alpha * (level < 0x100 ? level : 255.0f);
     item = items;
     while (--count != -1) {
-        view = player->owner;
+        view = player->camera;
         scaleX = view->viewportWidth * (1.0f / 320.0f);
         scaleY = view->viewportHeight * (1.0f / 240.0f);
         viewport = &view->viewportWidth;

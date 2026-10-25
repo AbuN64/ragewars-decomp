@@ -10,8 +10,9 @@
 #include "FX_2/80271B18.H"
 #include "particle/80271B18_3.H"
 #include "particle/8027A0F4_4.H"
+#include "COMMON/GAMEPLAY_CAMERA.H"
+#include "COMMON/AIPROFILE.H"
 
-extern char D_8011AD70;
 extern void BuildDirectionMatrix(void *arg0, void *arg1);
 extern f32 Anim_GetPolygonHeight(Node75 *node, f32 x, f32 z);
 extern void Nav_GetPolygonUpQuat(void *arg0, s32 arg1);
@@ -27,15 +28,18 @@ extern f32 Anim_GetTriangleEdgeAngle(s32 arg0, s32 arg1);
 
 
 
-/** Resolve the shared effect object selected by the actor state. */
-void *Particle_ParentTransform(EffectActor *arg0, Shared_ActorView *camera) {
+/* Returns the matrix a particle's alignment places it in, or null for world space: the travel direction (-8),
+ * the camera's billboards (-6 upright, -4 and -1 facing the screen), the ground basis D_8011AF38 (-5, and -3 when
+ * off the ground) or the ground basis tilted to the floor (-3 on the ground, -2 cached), or turned to a floor
+ * triangle edge (0..2). Built matrices go to the scratch matrix D_8011AD70. */
+f32 *Particle_ParentTransform(Shared_Particle *particle, GameplayCamera *camera) {
     char output[0x40];
     char state[0x10];
     void *shared;
     f32 value;
 
     {
-        s32 sw_state_value = (s8)(arg0->unk1D0 + 8);
+        s32 sw_state_value = (s8)(particle->space + 8);
         if ((unsigned int)sw_state_value > 10) {
             goto sw_state_default;
         }
@@ -55,82 +59,74 @@ void *Particle_ParentTransform(EffectActor *arg0, Shared_ActorView *camera) {
     }
     do {
     sw_state_neg_8:
-        shared = &D_8011AD70;
-        BuildDirectionMatrix(shared, (char *)arg0 + 0x174);
+        shared = D_8011AD70;
+        BuildDirectionMatrix(shared, &particle->direction);
         return shared;
     sw_state_neg_6:
         if (camera == 0) {
             return 0;
         }
-        return camera->effectOffsetTransform;
+        return camera->faceScreenUpright;
     sw_state_neg_4:
     sw_state_neg_1:
         if (camera == 0) {
             return 0;
         }
-        return camera->effectTransform;
+        return camera->faceScreen;
     sw_state_neg_3:
-        value = Anim_GetPolygonHeight(0, arg0->pos.x,
-            arg0->pos.z);
-        if (arg0->pos.y - value <= 0.01f) {
+        value = Anim_GetPolygonHeight(0, particle->inst.pos.x,
+            particle->inst.pos.z);
+        if (particle->inst.pos.y - value <= 0.01f) {
             Nav_GetPolygonUpQuat(state, 0);
             MatrixFromQuaternion(state, output);
-            shared = &D_8011AD70;
-            Rsp_MultiplyAffineMatrices(shared, &D_8011AF38, output);
+            shared = D_8011AD70;
+            Rsp_MultiplyAffineMatrices(shared, D_8011AF38, output);
             return shared;
         }
     sw_state_neg_5:
-        return &D_8011AF38;
+        return D_8011AF38;
     sw_state_neg_2:
         Nav_GetCachedUpQuat(state, 0);
         MatrixFromQuaternion(state, output);
-        shared = &D_8011AD70;
-        Rsp_MultiplyAffineMatrices(shared, &D_8011AF38, output);
+        shared = D_8011AD70;
+        Rsp_MultiplyAffineMatrices(shared, D_8011AF38, output);
         return shared;
     sw_state_0:
     sw_state_1:
     sw_state_2:
-        value = Anim_GetTriangleEdgeAngle(0, arg0->unk1D0);
-        BuildYawMatrix(&D_8011AD70, value);
-        return &D_8011AD70;
+        value = Anim_GetTriangleEdgeAngle(0, particle->space);
+        BuildYawMatrix(D_8011AD70, value);
+        return D_8011AD70;
     sw_state_default:
         return 0;
     
     } while (0);
 }
 
-/* Refreshes an attached actor's placement and returns its position and heading through optional pointers: an actor flagged 0x10000 of one of the bone-mounted types takes its position and heading from its parent's bone matrix (or just the parent's position when the parent has no skeleton) and clears its field 0x14, and an actor flagged 0x400000 places its local offset through its owner's transform (the owner's model matrix for owners flagged 0x300000, built through Weapons_BuildPlayerViewTransform when missing). */
-
-
-
-
-
-
-
-
-
-extern void Rsp_ConvertMatrixToFloat(f32 *out, void *in);
+/* Refreshes a particle that rides something and returns its position and direction through optional pointers: a
+ * particle riding a target (flag 0x10000) of one of the bone-mounted types takes its position and direction from
+ * the target's draw matrix for its collision node (or just the target's position when the target has no draw
+ * matrices) and clears its region; a particle carried by its owner (flag 0x400000) places its local position through
+ * the owner's orientation, or for a player owner (flags 0x300000) through its camera's view orientation, or the
+ * player view transform when the player has no camera. */
+extern void Rsp_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
 extern void Particle_TransformDirection(void *matrix, CVector3 *in, CVector3 *out);
-extern void Weapons_BuildPlayerViewTransform(func_80228774_S5 *model, f32 *out);
-
-
-
-
-void Particle_Attach(Actor_func_8027DAD0_de *actor, CVector3 *outPosition, CVector3 *outHeading) {
+extern void Weapons_BuildPlayerViewTransform(Player *player, f32 out[4][4]);
+void Particle_Attach(Shared_Particle *particle, CVector3 *outPosition, CVector3 *outDirection) {
     f32 matrix[16];
     CVector3 position;
-    CVector3 heading;
-    f32 built[16];
-    Parent *parent;
-    Parent *owner;
-    void *transform;
-    void *skeleton;
+    CVector3 direction;
+    f32 viewTransform[4][4];
+    Shared_ParticleTarget *target;
+    Shared_ParticleOwner *owner;
+    f32 *transform;
+    PackedMatrixWords *drawMatrices;
 
-    position = actor->position;
-    heading = actor->heading;
-    if (actor->flags & 0x10000) {
-        parent = actor->parent;
-        switch (actor->type) {
+    position = particle->inst.pos;
+    direction = particle->inst.velocity;
+    if (particle->flags & 0x10000) {
+        target = particle->target;
+        switch (particle->inst.type) {
             case 2:
             case 0xB:
             case 0xF:
@@ -141,41 +137,41 @@ void Particle_Attach(Actor_func_8027DAD0_de *actor, CVector3 *outPosition, CVect
             case 0x12A:
             case 0x132:
             case 0x41E:
-                skeleton = parent->skeleton;
-                if (skeleton != 0) {
-                    Rsp_ConvertMatrixToFloat(matrix, (char *)skeleton + actor->bone * 64);
-                    Particle_TransformPoint(matrix, &actor->offset, &position);
-                    Particle_TransformDirection(matrix, &actor->heading, &heading);
-                    actor->position = position;
-                    actor->facing = heading;
+                drawMatrices = target->drawMatrices;
+                if (drawMatrices != 0) {
+                    Rsp_ConvertMatrixToFloat(matrix, &drawMatrices[particle->collisionNode]);
+                    Particle_TransformPoint(matrix, &particle->attachmentPosition, &position);
+                    Particle_TransformDirection(matrix, &particle->inst.velocity, &direction);
+                    particle->inst.pos = position;
+                    particle->direction = direction;
                 } else {
-                    position = parent->position;
-                    actor->position = position;
+                    position = target->position;
+                    particle->inst.pos = position;
                 }
                 break;
         }
-        actor->unk14 = 0;
+        particle->inst.unk14 = 0;
     }
-    if (actor->flags & 0x400000) {
-        owner = actor->owner;
+    if (particle->flags & 0x400000) {
+        owner = particle->owner;
         if (owner->flags & 0x300000) {
-            if (owner->model->unk5DC != 0) {
-                transform = ((SharedRecAt564V1 *)owner->model->unk5DC)->transform;
+            if (owner->player->camera != 0) {
+                transform = owner->player->camera->viewOrient;
             } else {
-                Weapons_BuildPlayerViewTransform(owner->model, built);
-                transform = built;
+                Weapons_BuildPlayerViewTransform(owner->player, viewTransform);
+                transform = viewTransform[0];
             }
         } else {
-            transform = owner->transform;
+            transform = owner->orient;
         }
-        Particle_TransformPoint(transform, &actor->offset, &position);
-        actor->position = position;
+        Particle_TransformPoint(transform, &particle->attachmentPosition, &position);
+        particle->inst.pos = position;
     }
     if (outPosition != 0) {
         *outPosition = position;
     }
-    if (outHeading != 0) {
-        *outHeading = heading;
+    if (outDirection != 0) {
+        *outDirection = direction;
     }
 }
 
@@ -259,7 +255,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     } else {
         lift = 0.0f;
     }
-    Particle_Attach((struct Actor_func_8027DAD0_de *)particle, &position, &heading);
+    Particle_Attach(particle, &position, &heading);
     if (!(particle->flags & 0x30000)) {
         ramp = particle->time;
         if (ramp > 0.0f) {
@@ -399,14 +395,14 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         extent = scale * particle->size.z;
         ScaleMatrixLocal(local, particle->size.x * extent, particle->size.y * extent, extent * 10.24f);
     }
-    parent = Particle_ParentTransform((EffectActor *)particle, (Shared_ActorView *)camera);
+    parent = Particle_ParentTransform(particle, camera);
     if (parent != 0) {
         Rsp_MultiplyAffineMatrices(world, local, parent);
     } else {
         CopyMatrix(world, local);
     }
     TranslateMatrix(world, position.x, position.y, position.z);
-    if ((particle->flags & 0x20000) && (shake = particle->shake) != 0) {
+    if ((particle->flags & 0x20000) && (shake = particle->quiver) != 0) {
         jolt = (f32)shake * (1.0f / 127.0f);
         joltSq = jolt * jolt;
         angle = joltSq * (RW_PI_F6 * 5 / 180);

@@ -70,7 +70,7 @@ void func_8026851C_de(SourceRecAt1C *source, Shared_ParticleOwner *host, s32 unu
         effect->offset.z = D_80103FCC->offset.z;
     } else if ((unsigned)(spawn.kind - 0x474) < 4) {
         if (host->kind == 1 && (host->flags & 0x300000)) {
-            partner = host->state;
+            partner = host->player;
             if (partner != 0) {
                 partner->child = effect;
                 effect->scale = partner->scale;

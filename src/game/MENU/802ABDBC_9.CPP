@@ -722,9 +722,9 @@ static inline void announcePowerup(struct Player *player, PowerupEntry *entry)
     u8 **text = entry->text;
     s32 sound = entry->sound;
     s32 event = entry->event;
-    if (player->owner) {
-        Camera_StartFade(player->owner, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
-        if (text) Camera_PostScreenMessage(&D_80145088, player->owner, text[MENU_LANGUAGE]);
+    if (player->camera) {
+        Camera_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        if (text) Camera_PostScreenMessage(&D_80145088, player->camera, text[MENU_LANGUAGE]);
     }
     if (sound) Render_PlaySoundAtPosition(sound, player->pos, 0, -1);
     if (event) func_8025E11C_de(event);
@@ -782,8 +782,8 @@ s32 func_802ACB98_eu_x(struct Player *player, PowerupEntry *pickup, void *obj) {
     case 3: func_802A6FB8_de((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, D_002AD44C_eu, D_002AD4FC_eu); break;
     }
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
-        Camera_StartFade(player->owner, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
-        if (text) Camera_PostScreenMessage(&D_80145088, player->owner, ((char **)text)[g_languageIndex]);
+        Camera_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        if (text) Camera_PostScreenMessage(&D_80145088, player->camera, ((char **)text)[g_languageIndex]);
     }
     if (sound) Render_PlaySoundAtPosition(sound, player->pos, 0, -1);
     if (event) func_8025E11C_de(event);
@@ -815,8 +815,8 @@ s32 func_802ACB58_eu(struct Player *player, PowerupEntry *pickup, void *obj) {
     case 3: func_802A6FB8_de((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, D_002AD44C_eu, D_002AD4FC_eu); break;
     }
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
-        Camera_StartFade(player->owner, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
-        if (text) Camera_PostScreenMessage(&D_80145088, player->owner, ((char **)text)[g_languageIndex]);
+        Camera_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        if (text) Camera_PostScreenMessage(&D_80145088, player->camera, ((char **)text)[g_languageIndex]);
     }
     if (sound) Render_PlaySoundAtPosition(sound, player->pos, 0, -1);
     if (event) func_8025E11C_de(event);

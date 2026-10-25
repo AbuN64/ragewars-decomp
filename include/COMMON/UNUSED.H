@@ -2063,7 +2063,7 @@ extern struct UnitVtx D_800FE9F8[];
 extern u8 D_800D0EEA[];
 
 
-extern char D_8011AD70;
+extern f32 D_8011AD70[16];
 
 extern char D_800C5280_de;
 
@@ -3776,10 +3776,10 @@ struct EffectActor {
     char pad14[0x48];
     u32 flags;
     union {
-        MatrixF matrices[2];
+        PackedMatrixWords matrices[2];
         struct {
             char pad[0x54];
-            MatrixF *matrixArray;
+            PackedMatrixWords *matrixArray;
             char padB8[0x18];
             void *owner;
         } link;
