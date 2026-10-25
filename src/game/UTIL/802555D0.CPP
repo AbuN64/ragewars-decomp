@@ -188,21 +188,21 @@ merge:
 
 
 void func_802558B4_de(struct Heap *heap, char *start, s32 size) {
-    struct BlockRecAt14 *block;
+    struct BlockRecAt20 *block;
 
     heap->start = start;
     heap->end = start + size;
-    block = (struct BlockRecAt14 *) (((u32) start + 15) & ~15);
+    block = (struct BlockRecAt20 *) (((u32) start + 15) & ~15);
     size -= (char *) block - start;
     size &= ~15;
-    block->previous = 0;
+    block->nextFree = 0;
+    block->prevFree = 0;
     block->next = 0;
-    block->b = 0;
-    block->a = 0;
-    block->header = 0x20;
-    block->size = size - 0x20;
+    block->prev = 0;
+    block->size = 0x20;
+    block->free = size - 0x20;
     heap->first = block;
-    if (block->size != 0) {
+    if (block->free != 0) {
         heap->last = block;
         heap->free = block;
     } else {

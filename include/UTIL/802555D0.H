@@ -14,12 +14,14 @@ struct Pool80255720 {
     struct Block80255720 *tail;
     struct Block80255720 *anchor;
 };
+/* A first-fit heap: its byte range, the free-block list (head and tail) and the address-ordered list of all
+   blocks; D_801051A0 is the game's main heap. */
 struct Heap {
     char *start;
     char *end;
-    struct BlockRecAt14 *free;
-    struct BlockRecAt14 *last;
-    struct BlockRecAt14 *first;
+    struct BlockRecAt20 *free;
+    struct BlockRecAt20 *last;
+    struct BlockRecAt20 *first;
 };
 struct HeapRecAtC {
     char pad0[8];

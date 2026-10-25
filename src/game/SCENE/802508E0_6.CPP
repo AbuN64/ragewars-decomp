@@ -178,7 +178,7 @@ void Scene_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom)
     lock();
 
     base = 0x80000000;
-    span = (struct BlockRecAt20 *)mainHeap()->first;
+    span = mainHeap()->first;
     total = (u32)span - base;
     for (; span != 0; span = span->next) {
         total += span->size + span->free;
