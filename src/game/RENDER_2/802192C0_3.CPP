@@ -341,7 +341,6 @@ void Render_ResetPlayerWeapons(struct Player *player) {
     }
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/LEVEL_TRACK.H"
 #include "COMMON/WORLD.H"
@@ -353,10 +352,13 @@ extern void func_8044A07C_de(void *);
 extern void func_8044D528_de(void *, s32, s32);
 extern f32 func_802726F8_de(void *, void *);
 extern s32 func_8020CB3C_de(void *, void *);
+extern void func_802647E8_de(void *, s32);
+extern void Ovlgame_InitActorHudState(void *);
 /* Places the player at the matching level spawn. In multiplayer, choose the last
  * point tied for the greatest distance to its nearest player. Fall back when no
- * point is available, then update the controller's current cell.
- * 43/161 aligned edits remain: actor/point-offset registers and fallback layout. */
+ * point is available, then update the controller's current cell. The single-player arm opens with a dead
+ * conditional store: its join label ends cse's path, so the mismatch call keeps passing world (s1) instead
+ * of being cross-jumped into the fallback's &D_8011FE88 call; flow and jump2 remove it. */
 void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale, s32 reset) {
     Shared_World *world;
     Shared_Placed single;
@@ -397,7 +399,13 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
         ((LevelActor *)player)->yaw = ((Shared_ActorView *)player)->weapon.yaw = points[best].unkC;
         floor = Scene_FindFloorPolygon(&D_8011FE88, &((Shared_ActorView *)player)->position.vector);
     } else {
-        if (func_8044D220_de(world, -1, model, &single, 1) == 0 || single.kind != D_801371D4) {
+        if (model != 0 && player != 0) {
+            floor = 0;
+        }
+        if (func_8044D220_de(world, -1, model, &single, 1) == 0) {
+            goto fallback;
+        }
+        if (single.kind != D_801371D4) {
             func_8044D528_de(world, model, scale);
             goto done;
         }
@@ -416,6 +424,3 @@ done:
     cell = func_8020CB3C_de(D_8013B364, &((Shared_ActorView *)player)->position.vector);
     ((AiController *)((Shared_ActorView *)player)->owner)->current = cell;
 }
-#else
-INCLUDE_ASM("span_1000", Render_PlacePlayerAtSpawnPoint);
-#endif
