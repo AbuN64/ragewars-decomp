@@ -102,7 +102,6 @@ void func_802138F0_de(Dest *voice, void *def, ResourceManagerState unused, s32 u
     voice->maxHealth = voice->health;
 }
 
-#ifdef NON_MATCHING
 /* Builds an actor record from its source object: clears the 0x170-byte record (keeping the field at
  * 0x68), calls the shared initialiser, installs the two behaviour tables for this version, seeds the
  * position and scale copies, the sentinel indices and the default colour factors, runs the optional first
@@ -189,11 +188,12 @@ extern f32 D_800C7218;
 /* the shared initialiser is declared with five parameters above; this caller also passes the source on the stack */
 typedef void (*SetupInitFn)(SetupActor *, SetupDesc *, SetupVec, SetupSource *);
 extern f32 func_80275DD4_de(void *, f32, f32);
-/* 134/147 words; remaining: target loads actor->flags before the -1 store group (v0 flags, v1 -1), ours loads it after */
 void Nav_InitSpawnedActor(SetupSource *source, SetupActor *actor, SetupCallbacks *callbacks) {
     s32 saved;
     void *model;
-    f32 default_;
+    f32 scale;
+    s32 value;
+    u32 bits;
 
     saved = actor->field68;
     Resmgr_FillMemory(actor, 0, 0x170);
@@ -228,19 +228,22 @@ void Nav_InitSpawnedActor(SetupSource *source, SetupActor *actor, SetupCallbacks
     if ((source->desc->flags & 4) && model != 0) {
         actor->posB0.y = func_80275DD4_de(model, actor->posB0.x, actor->posB0.z);
     }
-    default_ = D_800C7218;
-    actor->fieldCA = -1;
-    actor->sentinel14[3] = -1;
-    actor->sentinel14[2] = -1;
-    actor->flags &= ~1;
-    actor->field13 = 0x14;
-    actor->fieldC8 = -1;
-    actor->field96 = -1;
-    actor->field102 = -1;
-    actor->sentinel14[0] = -1;
-    actor->field95 = 0xFF;
-    actor->sentinel14[1] = -1;
-    actor->field35 = -1;
+    scale = D_800C7218;
+    value = -1;
+    actor->fieldCA = value;
+    value = 0x14;
+    actor->field13 = value;
+    value = 0xFF;
+    actor->field95 = value;
+    bits = -1;
+    actor->fieldC8 = bits;
+    actor->field35 = bits;
+    actor->sentinel14[0] = bits;
+    actor->sentinel14[1] = bits;
+    actor->sentinel14[2] = bits;
+    actor->sentinel14[3] = bits;
+    actor->field102 = bits;
+    actor->field96 = bits;
     actor->fieldCB = 0;
     actor->fieldD0 = 0;
     actor->fieldD4 = 0;
@@ -253,16 +256,15 @@ void Nav_InitSpawnedActor(SetupSource *source, SetupActor *actor, SetupCallbacks
     actor->field100 = 0;
     actor->field94 = 0;
     actor->fieldFC = 0;
-    actor->fieldC0 = default_;
-    actor->fieldC4 = default_;
-    actor->field18 = default_;
+    actor->fieldC0 = scale;
+    actor->fieldC4 = scale;
+    actor->flags &= ~1;
+    actor->field18 = scale;
     if (callbacks != 0 && callbacks->first != 0) {
         callbacks->first(source, actor);
     }
-    if (source->flags & 0x8000000) {
+    bits = 0x8000000;
+    if (source->flags & bits) {
         actor->fieldCB = 1;
     }
 }
-#else
-INCLUDE_ASM("span_1000", Nav_InitSpawnedActor);
-#endif
