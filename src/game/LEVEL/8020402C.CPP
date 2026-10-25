@@ -225,21 +225,21 @@ extern void func_8024A1D0_de(Actor_func_8024A1D0_de *, void *, Lookup *);
 
 
 
-void Level_CopyTrackBytes(char *arg0, char *arg1) {
-    Owner *owner = (void *)arg0;
-    ObjRecAt30 *event = (void *)arg1;
+void Level_CopyTrackBytes(char *ownerRecord, char *eventRecord) {
+    Owner *owner = (void *)ownerRecord;
+    ObjRecAt30 *event = (void *)eventRecord;
     char *base = owner->track + 0x14;
     Hook *hook = event->unk30;
 
     if (hook != 0 && hook->fn != 0) {
-        hook->fn(arg0, arg1);
+        hook->fn(ownerRecord, eventRecord);
     }
-    if (arg1[0x34] == 0) {
-        arg0[1] = base[0xE];
-        arg0[3] = base[0xF];
+    if (eventRecord[0x34] == 0) {
+        ownerRecord[1] = base[0xE];
+        ownerRecord[3] = base[0xF];
     } else {
-        arg0[1] = base[0x1A];
-        arg0[3] = base[0x1B];
+        ownerRecord[1] = base[0x1A];
+        ownerRecord[3] = base[0x1B];
     }
 }
 
@@ -317,7 +317,7 @@ s32 Level_UpdateHealthFlag(LevelActor *actor) {
 
 void Level_SetBreakableState(void *arg0) {
     BreakableDefinition *breakableDefinition;
-    s32 temp_v1;
+    s32 hitFlags;
     s32 masked;
     Shared_World *pFlag;
 
@@ -329,10 +329,10 @@ void Level_SetBreakableState(void *arg0) {
     }
     func_802A5D38_de(&D_801379C0, arg0);
     if (pFlag->mode != 4) {
-        temp_v1 = ((LevelActor *)arg0)->flags | 0x08000000;
-        ((LevelActor *)arg0)->flags = temp_v1;
+        hitFlags = ((LevelActor *)arg0)->flags | 0x08000000;
+        ((LevelActor *)arg0)->flags = hitFlags;
         if (breakableDefinition->flags & 2) {
-            masked = temp_v1 & ~0x2000;
+            masked = hitFlags & ~0x2000;
             masked = masked & ~0x100;
             ((LevelActor *)arg0)->flags = masked;
         }
@@ -342,8 +342,8 @@ void Level_SetBreakableState(void *arg0) {
     }
 }
 
-void Level_SetDrawHandler(void *unused0, void *arg1) {
-    Dest *state = arg1;
+void Level_SetDrawHandler(void *unused0, void *motionState) {
+    Dest *state = motionState;
     state->draw = &D_00204808;
 }
 
