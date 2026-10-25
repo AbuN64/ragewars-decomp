@@ -22,7 +22,7 @@ void func_8044DDD4_de(GameSession *gameSession) {
     s32 var_s0;
 
     var_s0 = -1;
-    if (func_8044D220_de(&D_8011FE88, var_s0, var_s0, &spawn, 1) == 0) {
+    if (Items_FindPlacedObjectsByKey(&D_8011FE88, var_s0, var_s0, &spawn, 1) == 0) {
         var_s0 = 0;
     }
     D_801462C8.counters.ticks = 0;
@@ -36,26 +36,12 @@ void func_8044DDD4_de(GameSession *gameSession) {
     gameSession->target = 0xC;
 }
 
-#ifdef NON_MATCHING
-#include "COMMON/OBJB.H"
-#include "TYPES.H"
-
-struct ResetActorDE7C {
-    char pad0[0x26825];
-    u8 enabled;
-    char pad26826[0x596];
-    s32 state;
-    char pad26DC0;
-    u8 phase;
-    char pad26DC2[0x16];
-    s32 key;
-    s32 counter;
-};
-
-void func_8044DE7C_de(struct ResetActorDE7C *actor, s32 key) {
-    Shared_Placed entry;
-    s32 next;
-    if (func_8044D220_de(&D_8011FE88, -1, key, &entry, 1) == 0) {
+/* Starts the fade out of the session into the match: keeps key as the session selector when
+   Items_FindPlacedObjectsByKey finds a placed object for it (else 0), restarts the game clock and targets mode 13
+   when the local player has a transition pending, otherwise mode 12. */
+void Ovlgame_StartMatchTransition(GameSession *session, s32 key) {
+    Shared_Placed spawn;
+    if (Items_FindPlacedObjectsByKey(&D_8011FE88, -1, key, &spawn, 1) == 0) {
         key = 0;
     }
     D_801462C8.counters.ticks = 0;
@@ -63,17 +49,18 @@ void func_8044DE7C_de(struct ResetActorDE7C *actor, s32 key) {
     D_801462C8.counters.m_GameTimeMinutes = 0;
     D_801462C8.counters.m_GameTimeHours = 0;
     D_801462C8.counters.first = 0;
-    actor->counter = 0;
-    actor->key = key;
-    if (actor->enabled != 0 && D_801462C8.counters.transitionActive != 0) {
-        actor->phase = 2;
-        next = 13;
+    session->selectionActive = 0;
+    session->selector = key;
+    if (session->local != 0) {
+        if (D_801462C8.counters.transitionActive != 0) {
+            session->phase = 2;
+            session->target = 13;
+        } else {
+            session->phase = 2;
+            session->target = 12;
+        }
     } else {
-        actor->phase = 2;
-        next = 12;
+        session->phase = 2;
+        session->target = 12;
     }
-    actor->state = next;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_8044DE7C_de);
-#endif

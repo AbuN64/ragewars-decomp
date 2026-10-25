@@ -378,7 +378,7 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
         ((Shared_ActorView *)player)->field868 = 0;
     }
     if (D_80145088.settings.local) {
-        count = func_8044D220_de(world, -1, model, points, 32);
+        count = Items_FindPlacedObjectsByKey(world, -1, model, points, 32);
         best = -1;
         bestDistance = 0.0f;
         for (i = 0; i < count; i++) {
@@ -401,7 +401,7 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
         if (model != 0 && player != 0) {
             floor = 0;
         }
-        if (func_8044D220_de(world, -1, model, &single, 1) == 0) {
+        if (Items_FindPlacedObjectsByKey(world, -1, model, &single, 1) == 0) {
             goto fallback;
         }
         if (single.kind != D_801371D4) {

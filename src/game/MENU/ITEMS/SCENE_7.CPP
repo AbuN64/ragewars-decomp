@@ -64,19 +64,19 @@ void func_8044D1B4_de(char *state) {
 
 
 
-extern Node_func_8044D220_de *func_80256190_de(ListRec *);
+extern Node_Items_FindPlacedObjectsByKey *func_80256190_de(ListRec *);
 
-s32 func_8044D220_de(void *world, s32 kind, s32 key, Shared_Placed *out, s32 max) {
+s32 Items_FindPlacedObjectsByKey(void *world, s32 kind, s32 key, Shared_Placed *out, s32 max) {
     Shared_World *track = world;
     ListRec list;
-    Node_func_8044D220_de nodes[64];
+    Node_Items_FindPlacedObjectsByKey nodes[64];
     s32 first;
     s32 last;
     s32 found;
     s32 *keys;
     s32 *objectTable;
     Shared_Placed *objects;
-    Node_func_8044D220_de *node;
+    Node_Items_FindPlacedObjectsByKey *node;
     s32 i;
     s32 match;
     s32 count;

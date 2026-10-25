@@ -53,7 +53,7 @@ void func_80293284_de(GameSession *gameSession, s32 target) {
     s32 selectionValues;
 
     selectionValues = target;
-    if (func_8044D220_de(&D_8011FE88, -1, selectionValues, &spawn, 1) == 0) {
+    if (Items_FindPlacedObjectsByKey(&D_8011FE88, -1, selectionValues, &spawn, 1) == 0) {
         selectionValues = 0;
     }
     D_801462C8.counters.ticks = 0;

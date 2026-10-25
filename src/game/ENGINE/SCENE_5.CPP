@@ -469,7 +469,7 @@ void Scene_UpdateSelectionTransition(Shared_World *scene)
             if (scene->selectionState == 0) scene->frozen = 0;
             else scene->frozen = 2;
             if (scene->selectionValues[1] < 0) { scene->selectionValues[1] = ~scene->selectionValues[1]; scene->selectionFlags = 0; }
-            else scene->selectionFlags = func_8044D220_de(scene, -1, scene->selectionValues[1], &scene->selectionSpawn, 1);
+            else scene->selectionFlags = Items_FindPlacedObjectsByKey(scene, -1, scene->selectionValues[1], &scene->selectionSpawn, 1);
             scene->selectionValues[0] = scene->selectionValues[1];
             id = transitionId(scene);
             func_80286AA8_de(scene, id, scene->selectionFlags);

@@ -165,7 +165,7 @@ typedef struct Floats Floats;
 struct State_func_8044D528_de;
 typedef struct State_func_8044D528_de State_func_8044D528_de;
 
-struct Node_func_8044D220_de;
+struct Node_Items_FindPlacedObjectsByKey;
 
 struct ObjA;
 typedef struct ObjA ObjA;
@@ -207,8 +207,8 @@ struct State_func_8044D0F0_de;
 struct World;
 
 
-struct Node_func_8044D220_de;
-typedef struct Node_func_8044D220_de Node_func_8044D220_de;
+struct Node_Items_FindPlacedObjectsByKey;
+typedef struct Node_Items_FindPlacedObjectsByKey Node_Items_FindPlacedObjectsByKey;
 
 struct State_func_8044D0F0_de;
 typedef struct State_func_8044D0F0_de State_func_8044D0F0_de;

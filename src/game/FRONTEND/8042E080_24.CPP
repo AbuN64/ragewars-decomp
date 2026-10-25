@@ -94,12 +94,12 @@ extern Active *D_800E4680;
 #include "COMMON/GAME_SESSION.H"
 extern void Frontend_InitGameStatus(f32,s32,s32,s32,s32,s32,s32);
 extern s32 func_8042EE34_de(void);
-extern void func_8044DE7C_de(void *,s32);
+extern void Ovlgame_StartMatchTransition(GameSession *, s32);
 void func_8042EB10_de(void) {
  Shared_Game *g=&D_801462C8;
  if(g->controllerMode != 0) Frontend_InitGameStatus((f32)D_800E4680->time,0,D_800E4680->score,D_800E4680->other,1,0,0);
  else Frontend_InitGameStatus((f32)g->laps,0,g->trialScore,g->trialOther,1,0,0);
- func_8044DE7C_de(&D_8011FAC0,func_8042EE34_de());
+ Ovlgame_StartMatchTransition(&D_8011FAC0,func_8042EE34_de());
 }
 
 /* Applies the selected rule settings and refreshes the menu state. */
@@ -108,12 +108,12 @@ void func_8042EB10_de(void) {
 extern Active *D_800E4680;
 extern void Frontend_InitGameStatus(f32,s32,s32,s32,s32,s32,s32);
 extern s32 func_8042EE34_de(void);
-extern void func_8044DE7C_de(void *,s32);
+extern void Ovlgame_StartMatchTransition(GameSession *, s32);
 void func_8042EBA4_de(void) {
  Shared_Game *g=&D_801462C8;
  if(g->controllerMode != 0) Frontend_InitGameStatus((f32)D_800E4680->time,0,D_800E4680->score,D_800E4680->other,0,1,1);
  else Frontend_InitGameStatus((f32)g->laps,0,g->trialScore,g->trialOther,0,1,1);
- func_8044DE7C_de(&D_8011FAC0,func_8042EE34_de());
+ Ovlgame_StartMatchTransition(&D_8011FAC0,func_8042EE34_de());
 }
 
 /* Applies the selected rule settings and refreshes the menu state. */
@@ -122,12 +122,12 @@ void func_8042EBA4_de(void) {
 extern Active *D_800E4680;
 extern void Frontend_InitGameStatus(f32,s32,s32,s32,s32,s32,s32);
 extern s32 func_8042EE34_de(void);
-extern void func_8044DE7C_de(void *,s32);
+extern void Ovlgame_StartMatchTransition(GameSession *, s32);
 void func_8042EC38_de(void) {
  Shared_Game *g=&D_801462C8;
  if(g->controllerMode != 0) Frontend_InitGameStatus((f32)D_800E4680->time,D_800E4680->limit,D_800E4680->score,D_800E4680->other,0,1,0);
  else Frontend_InitGameStatus((f32)g->laps,D_801462C8.players,g->trialScore,g->trialOther,0,1,0);
- func_8044DE7C_de(&D_8011FAC0,func_8042EE34_de());
+ Ovlgame_StartMatchTransition(&D_8011FAC0,func_8042EE34_de());
 }
 
 /* Applies the selected rule settings and refreshes the menu state. */
@@ -136,12 +136,12 @@ void func_8042EC38_de(void) {
 extern Active *D_800E4680;
 extern void Frontend_InitGameStatus(f32,s32,s32,s32,s32,s32,s32);
 extern s32 func_8042EE34_de(void);
-extern void func_8044DE7C_de(void *,s32);
+extern void Ovlgame_StartMatchTransition(GameSession *, s32);
 void func_8042ECD8_de(void) {
  Shared_Game *g=&D_801462C8;
  if(g->controllerMode != 0) Frontend_InitGameStatus((f32)D_800E4680->time,D_800E4680->score,D_800E4680->score,D_800E4680->other,0,0,0);
  else Frontend_InitGameStatus((f32)g->laps,D_801462C8.players,g->trialScore,g->trialOther,0,0,0);
- func_8044DE7C_de(&D_8011FAC0,func_8042EE34_de());
+ Ovlgame_StartMatchTransition(&D_8011FAC0,func_8042EE34_de());
 }
 
 /* Starts the match status block: the frag tag limit, the second score limit, the frag tag, team and

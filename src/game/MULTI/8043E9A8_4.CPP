@@ -22,7 +22,7 @@ extern s32 func_8026437C_de(struct ControllerProfile *);
 
 extern void func_8025E384_de(void);
 
-extern void func_8044DE7C_de(char *, s32);
+extern void Ovlgame_StartMatchTransition(GameSession *, s32);
 
 extern s32 func_80264690_de(void);
 
@@ -89,7 +89,7 @@ void Multi_SelectInitialController(void *unused0, struct ObjRecAt20V2 *menu) {
         }
     }
     func_8025E384_de();
-    func_8044DE7C_de(&D_8011FAC0, -1);
+    Ovlgame_StartMatchTransition(&D_8011FAC0, -1);
     D_80154048 = 1;
 }
 

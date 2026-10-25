@@ -121,7 +121,7 @@ void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
             spawnIndex = 0;
             nspawns = 0;
             if (world->unk1B41C != 0) {
-                nspawns = func_8044D220_de(world, world->unk1B40C, world->unk1B434, spawns, 8);
+                nspawns = Items_FindPlacedObjectsByKey(world, world->unk1B40C, world->unk1B434, spawns, 8);
             }
             world->unk138 = objects;
             world->unk140 = n;
@@ -159,7 +159,7 @@ void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
                         player = &D_80140F84[playerIndex];
                         if (nspawns != 0) {
                             if (slot->kind == 0xC && player->views1450.view1450_1.computer != 0 && world->unk1B40C == 9) {
-                                func_8044D220_de(world, 9, specialSet, &extra, 1);
+                                Items_FindPlacedObjectsByKey(world, 9, specialSet, &extra, 1);
                                 spawn = &extra;
                             } else {
                                 spawn = &spawns[spawnIndex];

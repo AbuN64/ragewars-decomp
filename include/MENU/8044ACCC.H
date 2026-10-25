@@ -56,7 +56,7 @@ struct Level_func_8044CD8C_de {
     s32 file;
     void *grid;
 };
-struct Node_func_8044D220_de {
+struct Node_Items_FindPlacedObjectsByKey {
     s32 index;
     s32 link[2];
 };

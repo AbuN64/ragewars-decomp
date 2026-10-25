@@ -18,7 +18,8 @@ struct GameSession {
     ObjectPool menu[1]; /* +0x25580, func_80449DB0_de */
     u8 reserved255C4[4];
     struct ScreenMessageOwner players[1]; /* +0x255C8, func_8044A62C_de */
-    u8 reservedPlayers[0x26826 - 0x255C8 - sizeof(struct ScreenMessageOwner)];
+    u8 reservedPlayers[0x26825 - 0x255C8 - sizeof(struct ScreenMessageOwner)];
+    u8 local; /* +0x26825: D_801462C8.local, the local-player input flag (func_8044DE7C_de) */
     u8 arena; /* +0x26826: Render_StartRound */
     u8 reserved26827[0x26D8C - 0x26827];
     RenderSettings settings; /* +0x26D8C */

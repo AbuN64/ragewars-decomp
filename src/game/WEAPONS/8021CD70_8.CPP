@@ -561,7 +561,7 @@ void func_80220ED4_de(SharedPlayer *player)
           diff.z = player->views0.view8_3.pos.z - entry->pos.z;
           if (((f32) ((s32) func_802B72B0_de(((diff.x * diff.x) + (diff.y * diff.y)) + (diff.z * diff.z)))) < def->radius)
           {
-            if (func_8044D220_de(&D_8011FE88, -1, def->item, &found, 1) != 0)
+            if (Items_FindPlacedObjectsByKey(&D_8011FE88, -1, def->item, &found, 1) != 0)
             {
               world->offset.x = player->views0.view8_3.pos.x - found.pos.x;
               world->offset.y = player->views0.view8_3.pos.y - found.pos.y;
