@@ -50,7 +50,7 @@ static inline s32 send_event(s32 value, s32 event, s32 arg2, s32 amount, s32 con
     s32 saved;
     s32 result;
 
-    if (func_80411DF0_de(value) != 0) {
+    if (Frontend_IsValidScreenIndex(value) != 0) {
         if (value != D_8014D080->screens[D_8014D080->current].owner) {
             return 0;
         }
@@ -242,7 +242,7 @@ s32 func_802995D4_de(s32 value, s32 arg1, s32 arg2, s32 control, s32 extra) {
     s32 result;
     Element *element;
 
-    if (func_80411DF0_de(value) != 0) {
+    if (Frontend_IsValidScreenIndex(value) != 0) {
         if (value != D_8014D080->screens[D_8014D080->current].owner) {
             return 0;
         }

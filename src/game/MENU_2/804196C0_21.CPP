@@ -53,7 +53,7 @@ extern MenuSliderWidget *Scene_AllocateMemory(s32);
 
 
 
-extern void func_8040EF84_de(s32 arg0, MenuSliderWidget *arg1, MenuSliderWidget *arg2);
+extern void Frontend_ReplaceNodeRefs(s32 arg0, MenuSliderWidget *arg1, MenuSliderWidget *arg2);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3390, an actor kind at D_800E3394 and a handler at D_800E3398: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
 
@@ -75,10 +75,10 @@ extern s32 Frontend_ComputeWidgetBounds(Quad_func_802A1BE0_de *, Quad_func_802A1
 
 extern void func_802A1898_de(u32 *, u32 *, u32 *, u32 *);
 
-extern s32 func_8040F488_de(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 
 
-extern void func_8040E7FC_de(void *, Args);
+extern void Frontend_DrawVisibleSiblings(void *, Args);
 
 /* Scrolls up: moves a scroll bar to the previous item through func_8041A6EC_de unless it is already
    at the first. */
@@ -185,9 +185,9 @@ MenuSliderWidget *func_8041A580_de(s32 arg0, s32 arg1, s32 arg2) {
     result->field_4C = arg2;
     result->field_50 = 0;
     result->field_54 = 2;
-    func_8040EEA4_de(source, result);
+    Frontend_WrapNodeInParent(source, result);
     source->field_0C = -1;
-    func_8040EF84_de(context, source, result);
+    Frontend_ReplaceNodeRefs(context, source, result);
     return result;
 }
 
@@ -247,12 +247,12 @@ void func_8041A7B4_de(void *widget, Args args) {
         if ((window->flags & 0x200) != 0) {
             func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
-            func_8040F488_de(&transformed, &basis);
+            Frontend_ClampRectToClip(&transformed, &basis);
             func_802A1870_de(transformed.x, transformed.z,
                           transformed.y, transformed.w);
             changed = 1;
         }
-        func_8040E7FC_de(window->children, args);
+        Frontend_DrawVisibleSiblings(window->children, args);
         if (changed != 0) {
             func_802A1870_de(value.x, value.z, value.y, value.w);
         }

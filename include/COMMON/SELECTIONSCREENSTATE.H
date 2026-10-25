@@ -132,7 +132,7 @@ extern func_8041F2A0_Layout D_800E42D4[];
 
 /* func_8041DB30_de advances the cursor word it is handed, the menu block's slot at +0x10C. */
 extern func_8041F2A0_MenuBlock *D_800E3590;
-extern void func_8041DB30_de(int *cursor);
+extern void Frontend_AdvanceActiveSlot(int *cursor);
 extern func_8041F2A0_Config D_80146398[];
 extern SelectionScreenState *Scene_AllocateMemory(s32);
 extern Node_func_8041B610_de *func_8041B610_de(OwnerRecAt44 *, s32);

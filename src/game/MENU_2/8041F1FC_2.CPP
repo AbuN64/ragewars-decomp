@@ -12,7 +12,7 @@
 #include "RENDER_2/8025DE50_5.H"
 #include "FRONTEND/8041BEA8_6.H"
 
-extern s32 func_8040EBD0_de(struct WidgetNode *);
+extern s32 Frontend_ListHasFlag100(struct WidgetNode *);
 extern struct WidgetNode *Menu_GetSlotValue(struct SlotsCode804196C0 *, s32);
 
 /* Advances the selection panels, cursor highlight and character previews. */
@@ -115,7 +115,7 @@ s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
                     temp_a0_3 = D_800E42D0->players[i].highlight;
                     if ((temp_a0_3->x != (widgetNode->x - 2)) || (temp_a0_3->y != (widgetNode->y - 2))) {
                         Render_PlayFlatSound(0xE7F);
-                        if (func_8040EBD0_de(widgetNode) == 0) {
+                        if (Frontend_ListHasFlag100(widgetNode) == 0) {
                             resource = widgetNode->resource;
                             if (resource != empty_slot) {
                                 D_800E42D0->players[i].kind = (s32) resource;

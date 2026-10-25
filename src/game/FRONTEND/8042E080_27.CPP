@@ -65,7 +65,7 @@ s32 func_80430028_de(s32 unused0, s32 unused1, s32 arg2, s32 arg3) {
 /* Handles Controller Pak menu confirmations for the active channel, clearing its status on a confirmed state-12 prompt and returning focus to an enabled widget in the list states. */
 #include "COMMON/NAME.H"
 s32 func_80299B4C_de();                                /* extern */
-s32 func_8040EBD0_de(void *);                          /* extern */
+s32 Frontend_ListHasFlag100(void *);                          /* extern */
 void Menu_ShowSlotNode(s32, s32, void *);                  /* extern */
 void func_80433BCC_de(s32);                               /* extern */
 void func_80433D38_de(s32);                               /* extern */
@@ -112,7 +112,7 @@ s32 func_80430118_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
             MarkMenuEventHandled();
             var_s0 = ((MenuWidget *)Menu_GetSlotValue(D_800E54A4->root, temp_s1))->next;
 loop_11:
-            if (func_8040EBD0_de(var_s0) != 0) {
+            if (Frontend_ListHasFlag100(var_s0) != 0) {
                 var_s0 = var_s0->next;
                 goto loop_11;
             }
@@ -125,7 +125,7 @@ loop_11:
         if (arg3 == 1) {
             var_s0_2 = ((MenuWidget *)Menu_GetSlotValue(D_800E54A4->root, temp_s1))->next;
 loop_16:
-            if (func_8040EBD0_de(var_s0_2) != 0) {
+            if (Frontend_ListHasFlag100(var_s0_2) != 0) {
                 var_s0_2 = var_s0_2->next;
                 goto loop_16;
             }
@@ -137,7 +137,7 @@ loop_16:
         if (arg3 == 1) {
             var_s0_3 = ((MenuWidget *)Menu_GetSlotValue(D_800E54A4->root, temp_s1))->next;
 loop_21:
-            if (func_8040EBD0_de(var_s0_3) != 0) {
+            if (Frontend_ListHasFlag100(var_s0_3) != 0) {
                 var_s0_3 = var_s0_3->next;
                 goto loop_21;
             }
@@ -155,7 +155,7 @@ block_24:
 extern s32 func_80299B4C_de(void);
 extern s32 func_8029DB58_de(s32);
 extern void MarkMenuEventHandled(void);
-extern s32 func_8040EBD0_de(void *);
+extern s32 Frontend_ListHasFlag100(void *);
 extern void Menu_ShowSlotNode(s32, s32, void *);
 extern void func_80433BCC_de(s32);
 extern void func_80433D38_de(s32);
@@ -192,7 +192,7 @@ s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, 
             MarkMenuEventHandled();
             node = Menu_GetSlotValue(D_800E54A4->root, player);
             node = node->ref2C;
-            while (func_8040EBD0_de(node) != 0) {
+            while (Frontend_ListHasFlag100(node) != 0) {
                 node = node->ref2C;
             }
             Menu_ShowSlotNode(D_800E54A4->root, player, node);
@@ -203,7 +203,7 @@ s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, 
         if (arg3 == 1) {
             node = Menu_GetSlotValue(D_800E54A4->root, player);
             node = node->ref2C;
-            while (func_8040EBD0_de(node) != 0) {
+            while (Frontend_ListHasFlag100(node) != 0) {
                 node = node->ref2C;
             }
             Menu_ShowSlotNode(D_800E54A4->root, player, node);
@@ -215,7 +215,7 @@ s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, 
         if (arg3 == 1) {
             node = Menu_GetSlotValue(D_800E54A4->root, player);
             node = node->ref2C;
-            while (func_8040EBD0_de(node) != 0) {
+            while (Frontend_ListHasFlag100(node) != 0) {
                 node = node->ref2C;
             }
             Menu_ShowSlotNode(D_800E54A4->root, player, node);

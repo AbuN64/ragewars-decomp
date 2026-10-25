@@ -30,7 +30,7 @@ s32 func_8041E3A0_eu(void *handle) {
     D_800E39C0->rows[0] = func_8040EC30_de(handle, 0x38C);
     D_800E39C0->rows[1] = func_8040EC30_de(handle, 0x395);
     D_800E39C0->rows[2] = func_8040EC30_de(handle, 0x396);
-    D_800E39C0->step = func_8041EB50_de();
+    D_800E39C0->step = Frontend_CountUsedSlots();
     for (i = 0; i < 3; i++) {
         func_8041E408_de(i);
         Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E39C0->rows[i], 0x392), 0);

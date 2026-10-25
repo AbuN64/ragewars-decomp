@@ -146,7 +146,7 @@ extern s_CharacterData D_800E3A50[];
 
 extern s32 Nav_NextRandom(void);
 
-extern s32 func_8040EBD0_de(void *widget);
+extern s32 Frontend_ListHasFlag100(void *widget);
 
 
 /* Counts how many of the four 0x4C8-byte entries D_800E42D0 points to are in state 1 or 2. */
@@ -364,7 +364,7 @@ void Menu_RandomizeCharacterPreview(s32 player) {
     done = 0;
     do {
         id = D_800E3A50[Nav_NextRandom() % 17].id;
-        if (func_8040EBD0_de(func_8040EC30_de(D_800E42D0->screen, (u16)id)) == 0 && D_800E42D0->players[player].kind != id) {
+        if (Frontend_ListHasFlag100(func_8040EC30_de(D_800E42D0->screen, (u16)id)) == 0 && D_800E42D0->players[player].kind != id) {
             done = 1;
         } else if (++tries > 5000) {
 #if defined(VERSION_DE)

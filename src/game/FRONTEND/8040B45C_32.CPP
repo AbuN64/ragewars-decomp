@@ -24,7 +24,7 @@ extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *a, struct Shap
 
 extern void func_802A1898_de(s32 *left, s32 *right, s32 *top, s32 *bottom);
 
-extern s32 func_8040F488_de(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 
 
 /* Resets the state and copies the two configured values after initialization. */
@@ -50,7 +50,7 @@ void func_8040E67C_de(Widget *widget, DrawArgs_func_8040E67C_de args) {
             if (local.flags & 0x200) {
                 func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
                 clip = saved;
-                if (func_8040F488_de(&clip, &box) == 0) {
+                if (Frontend_ClampRectToClip(&clip, &box) == 0) {
                     return;
                 }
                 clipped = 1;
@@ -65,7 +65,7 @@ void func_8040E67C_de(Widget *widget, DrawArgs_func_8040E67C_de args) {
 }
 
 /* Walks a sibling node list and dispatches the by-value event to every node whose flag bit 3 is set. */
-void func_8040E7FC_de(Widget *node, DrawArgs_func_8040E67C_de event) {
+void Frontend_DrawVisibleSiblings(Widget *node, DrawArgs_func_8040E67C_de event) {
     for (; node != 0; node = node->next) {
         if (node->flags & 8) {
             Frontend_DrawWidget(node, event);
@@ -232,7 +232,7 @@ s32 func_8040EBAC_de(struct WidgetNode *node) {
 /* Returns whether any node in a linked list has bit 8 set in its flag halfword at offset 0x12. */
 
 
-s32 func_8040EBD0_de(struct WidgetNode *node) {
+s32 Frontend_ListHasFlag100(struct WidgetNode *node) {
     u32 flags = 0;
 
     while (node != 0) {

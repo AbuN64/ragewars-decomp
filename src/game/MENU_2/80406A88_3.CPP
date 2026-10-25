@@ -11,7 +11,7 @@ extern void func_8041B6E8_de(void *, s32, s32);
 extern void *func_8040EC30_de(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern s32 func_802999A0_de(s32);
-extern s32 func_8041EB50_de(void);
+extern s32 Frontend_CountUsedSlots(void);
 extern void func_8041E408_de(s32);
 extern void func_802A2360_de(void);
 /* Builds the pak-draw selection screen: allocates its 0x20-byte state, creates the four rows, hides the pointer item
@@ -40,7 +40,7 @@ s32 func_8041E3A0_eu_x(void *window) {
     D_800E39C0->roots[0] = func_8040EC30_de(window, 0x390);
     D_800E39C0->roots[1] = func_8040EC30_de(window, 0x399);
     D_800E39C0->roots[2] = func_8040EC30_de(window, 0x39A);
-    D_800E39C0->count = func_8041EB50_de();
+    D_800E39C0->count = Frontend_CountUsedSlots();
     for (i = 0; i < 3; i++) {
         func_8041E408_de(i);
         Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E39C0->roots[i], 0x396), 0);

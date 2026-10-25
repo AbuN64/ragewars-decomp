@@ -10,7 +10,7 @@ extern void func_8041B968_de(void *, s32);
 extern u8 *func_8040EC30_de(s32, s32);
 extern void *func_80419E54_de(s32, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
-extern void func_8041DB30_de(void *);
+extern void Frontend_AdvanceActiveSlot(void *);
 extern void func_8041D6A8_de(void);
 extern void Frontend_ShowUnlockedEntries(s32);
 #define ST_W(off) (*(s32 *)(D_800E3590 + (off)))
@@ -65,7 +65,7 @@ s32 func_8041CE40_de(s32 owner) {
     ST_W(0xF0) = (s32)func_8040EC30_de(owner, 0x1FA);
     ST_W(0x108) = 0;
     ST_W(0x10C) = -1;
-    func_8041DB30_de(D_800E3590 + 0x10C);
+    Frontend_AdvanceActiveSlot(D_800E3590 + 0x10C);
     func_8041D6A8_de();
     Frontend_ShowUnlockedEntries(ST_W(0xFC));
     func_8040EC30_de(owner, 0x1E9)[0x10] = 0x6E;

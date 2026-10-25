@@ -51,7 +51,7 @@ extern short func_80411CD0_de(int index);
 struct Manager_func_80411D18_de;
 typedef struct Manager_func_80411D18_de Manager_func_80411D18_de;
 
-extern void func_80411DA4_de(s32);
+extern void Frontend_LoadLanguageStringsIfAny(s32);
 
 extern short func_80411C28_de(int index);
 

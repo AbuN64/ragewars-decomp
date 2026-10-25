@@ -26,7 +26,7 @@ extern void func_802A2400_de(f32 a);
 extern void func_802A2418_de(s32 a);
 extern void func_802A2360_de(void);
 extern void func_802A23C4_de(s32 a);
-extern void func_80411DA4_de(s32 a);
+extern void Frontend_LoadLanguageStringsIfAny(s32 a);
 /* Start-up sequence for the title mode: initialises the subsystems in a fixed order, sets D_800CBC14 to 0x3C, then D_800D2C98 to 1 and D_800D2C90 to 0 around the final mode calls. */
 void func_802A2224_de(void) {
     func_80255228_de(D_80106248);
@@ -50,7 +50,7 @@ void func_802A2224_de(void) {
     func_802A2360_de();
     D_800D2C90 = 0;
     func_802A23C4_de(2);
-    func_80411DA4_de(0);
+    Frontend_LoadLanguageStringsIfAny(0);
 }
 #else
 INCLUDE_ASM("span_1000", func_802A2224_de);

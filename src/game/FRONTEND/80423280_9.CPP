@@ -116,7 +116,7 @@ void func_80429560_de(void) {
     func_802A1B24_de(D_800E4EF0->widget28, opts->laps);
     func_802A1B24_de(D_800E4EF0->widget2C, opts->trialOther);
     func_802A1B24_de(D_800E4EF0->widget30, opts->trialScore);
-    count = func_8041EB50_de();
+    count = Frontend_CountUsedSlots();
     cap = D_800E4EF0->countCap;
     if (cap < count) {
         count = cap;
@@ -139,7 +139,7 @@ void func_80429654_de(s32 force) {
         func_8041EA70_de();
         return;
     }
-    if (count != func_8041EB50_de() || force == 1) {
+    if (count != Frontend_CountUsedSlots() || force == 1) {
         func_8041EA70_de();
         func_8041E81C_de(count, selection);
     }

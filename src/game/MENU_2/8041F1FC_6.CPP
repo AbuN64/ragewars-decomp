@@ -40,7 +40,7 @@ void func_80420438_de(s32);
 void MarkMenuEventHandled();
 
                                   /* extern */
-s32 func_8040EBD0_de(s32);
+s32 Frontend_ListHasFlag100(s32);
 
                              /* extern */
 s32 Menu_GetSlotValue(s32, s32);
@@ -156,7 +156,7 @@ s32 Menu_ReadSelectionSlot(s32 arg0, s32 arg1, s32 arg2) {
     characterSelectionRoot = (CharacterSelectionRoot *)((char *)D_800E42D0 + (temp_s0 * 0x4C8));
     if (characterSelectionRoot->phase == 1) {
         if (choice == SPECIAL_CHAR) Menu_ApplySlotValueGfx(temp_s0,characterSelectionRoot->choice);
-        else if (func_8040EBD0_de(Menu_GetSlotValue(D_800E42D0->unk4,temp_s0)) == 0) Menu_ApplySlotValueGfx(temp_s0,choice);
+        else if (Frontend_ListHasFlag100(Menu_GetSlotValue(D_800E42D0->unk4,temp_s0)) == 0) Menu_ApplySlotValueGfx(temp_s0,choice);
     }
     return 0;
 }

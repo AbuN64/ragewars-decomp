@@ -173,7 +173,7 @@ extern void MarkMenuEventHandled();
 
 extern s32 D_80154020[];
 
-extern s32 func_8040EBD0_de(void *);
+extern s32 Frontend_ListHasFlag100(void *);
 
 extern void func_802991D4_de(s32);
 
@@ -474,7 +474,7 @@ s32 func_8042D690_de(s32 context) {
     if (D_800E28E0 <= 0) {
         if (D_800E53C0->phase == 0) {
             D_800E53C0->phase = 1;
-            if (func_8040EBD0_de(func_8040EC30_de(context, CONFIRM_MESSAGE)) == 0) {
+            if (Frontend_ListHasFlag100(func_8040EC30_de(context, CONFIRM_MESSAGE)) == 0) {
                 message = CONFIRM_MESSAGE;
             } else {
                 message = FALLBACK_MESSAGE;

@@ -79,7 +79,7 @@ enum { PAK_SLOT_RESOURCE_688 = 688, PAK_SLOT_RESOURCE_689 = 689, PAK_SLOT_RESOUR
 extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 extern void Menu_ShowSlotNode(s32,s32,MenuWidget *);
 extern MenuWidget *Menu_GetSlotValue(s32,s32);
-extern s32 func_8040EBD0_de(MenuWidget *);
+extern s32 Frontend_ListHasFlag100(MenuWidget *);
 void func_80433914_de(s32 player) {
  s32 i;
  MenuWidget *label,*value;
@@ -115,6 +115,6 @@ void func_80433914_de(s32 player) {
 #endif
  }
  label=Menu_GetSlotValue(D_800E54A4->root,player);
- while(func_8040EBD0_de(label))label=label->next;
+ while(Frontend_ListHasFlag100(label))label=label->next;
  Menu_ShowSlotNode(D_800E54A4->root,player,label);
 }

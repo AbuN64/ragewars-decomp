@@ -12,5 +12,5 @@ extern void func_8040F1FC_de(struct Pair2C *record, u8 first, u8 second);
 extern void func_8040F534_de(s32 width, s32 height);
 extern void func_8040F218_de(struct QuadRecAt2C *record, s32 first, s32 second, s32 third, s32 fourth);
 struct Tree;
-extern void func_8040EEA4_de(struct Tree *node, struct Tree *added);
+extern void Frontend_WrapNodeInParent(struct Tree *node, struct Tree *added);
 #endif

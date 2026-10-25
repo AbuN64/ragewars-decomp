@@ -283,7 +283,7 @@ s16 func_80411D94_de(void) {
     return D_801539B0.NLanguages;
 }
 
-void func_80411DA4_de(s32 arg0) {
+void Frontend_LoadLanguageStringsIfAny(s32 arg0) {
     if (D_801539B0.NLanguages != 0) {
         Frontend_LoadLanguageStrings(arg0);
     }
@@ -293,7 +293,7 @@ void *Frontend_GetScreenData(s32 index) {
     return D_801539B0.Screen[index].data;
 }
 
-s32 func_80411DF0_de(s32 index) {
+s32 Frontend_IsValidScreenIndex(s32 index) {
     if (index >= 0 && index < D_801539B0.NScreens) {
         return 1;
     }

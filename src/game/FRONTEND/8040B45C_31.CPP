@@ -58,7 +58,7 @@ static inline void func_8040CB30_restore(struct Shape_typemap_165 *clip) {
     func_802A1870_de(clip->field_0, clip->field_8, clip->field_4, clip->field_C);
 }
 
-extern s32 func_8040F488_de(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 
 
 static inline s32 func_8040CDD0_overlaps(struct Shape_typemap_165 *area) {
@@ -207,7 +207,7 @@ void func_8040CD50_de(Widget_func_8040CD50_de *widget, sm_dldc args) {
     if (widget->flags & 0x200) {
         func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
         clip = saved;
-        if (func_8040F488_de(&clip, &box) == 0) {
+        if (Frontend_ClampRectToClip(&clip, &box) == 0) {
             return;
         }
         clipped = 1;
@@ -248,7 +248,7 @@ void func_8040CF8C_de(WidgetLayout *widget, sm_dldc args) {
     if (widget->flags & 0x200) {
         func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
         clip = saved;
-        if (func_8040F488_de(&clip, &box) == 0) {
+        if (Frontend_ClampRectToClip(&clip, &box) == 0) {
             return;
         }
         clipped = 1;
@@ -294,7 +294,7 @@ void func_8040D2D0_de(TextWidget *widget, sm_dldc args) {
     if (widget->flags & 0x200) {
         func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
         clip = saved;
-        if (!func_8040F488_de(&clip, &box)) return;
+        if (!Frontend_ClampRectToClip(&clip, &box)) return;
         clipped = 1;
         func_802A1870_de(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
     }
@@ -387,9 +387,9 @@ typedef struct DraftWidget {
 } DraftWidget;
 
 extern s32 D_800E2AB8;
-extern s32 func_8040F488_de(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 extern void func_802A1898_de(s32 *, s32 *, s32 *, s32 *);
-extern void func_8040E7FC_de(void *, sm_dldc);
+extern void Frontend_DrawVisibleSiblings(void *, sm_dldc);
 extern s32 func_80299838_de(s32);
 extern void func_802A18FC_de(void);
 extern void func_802A18F4_de(void);
@@ -423,11 +423,11 @@ static inline void drawWidgetResetGroup(DraftWidget *widget, sm_dldc args) {
             if (widget->flags & 0x200) {
                 func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
                 clip = saved;
-                if (!func_8040F488_de(&clip, &box)) return;
+                if (!Frontend_ClampRectToClip(&clip, &box)) return;
                 clipped = 1;
                 func_802A1870_de(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
             }
-            func_8040E7FC_de(widget->child, args);
+            Frontend_DrawVisibleSiblings(widget->child, args);
             if (clipped) func_802A1870_de(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
         }
 }
@@ -443,11 +443,11 @@ static inline void drawWidgetGroup(DraftWidget *widget, sm_dldc args) {
             if (widget->flags & 0x200) {
                 func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
                 clip = saved;
-                if (!func_8040F488_de(&clip, &box)) return;
+                if (!Frontend_ClampRectToClip(&clip, &box)) return;
                 clipped = 1;
                 func_802A1870_de(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
             }
-            func_8040E7FC_de(widget->child, args);
+            Frontend_DrawVisibleSiblings(widget->child, args);
             if (clipped) func_802A1870_de(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
         }
 }

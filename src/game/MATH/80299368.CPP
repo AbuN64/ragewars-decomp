@@ -221,7 +221,7 @@ block_not_found:
     Frontend_AcquireArchiveEntry(index);
     if (((u16) (((Shared_MenuDefinition *)(Frontend_GetScreenData(index)))->unk12) >> 0xC) & 1) {
         focus = D_8014D080->screens[D_8014D080->current].focus;
-        if ((focus != 0) && ((temp_s1 = focus->unkC, (func_80411DF0_de((s32) temp_s1) == 0)) || (temp_s1 == D_8014D080->screens[D_8014D080->current].owner)) && ((focus_index = D_8014D080->current), (temp_s1 != D_8014D080->focus)) && ((temp_a1 = -1), (focus_index != temp_a1))) {
+        if ((focus != 0) && ((temp_s1 = focus->unkC, (Frontend_IsValidScreenIndex((s32) temp_s1) == 0)) || (temp_s1 == D_8014D080->screens[D_8014D080->current].owner)) && ((focus_index = D_8014D080->current), (temp_s1 != D_8014D080->focus)) && ((temp_a1 = -1), (focus_index != temp_a1))) {
             temp_v0_5 = D_8014D080->callback;
             if (temp_v0_5 != 0) {
                 temp_s0_4 = D_8014D080->handled;
@@ -415,7 +415,7 @@ block_78:
         }
     }
     temp_a0_7 = D_8014D080->screens[D_8014D080->current].focus;
-    if ((temp_a0_7 != 0) && ((temp_s1_2 = temp_a0_7->unkC, (func_80411DF0_de((s32) temp_s1_2) == 0)) || (temp_s1_2 == D_8014D080->screens[D_8014D080->current].owner)) && ((focus_index_final = D_8014D080->current), (temp_s1_2 != D_8014D080->focus)) && ((temp_a1 = -1), (focus_index_final != temp_a1))) {
+    if ((temp_a0_7 != 0) && ((temp_s1_2 = temp_a0_7->unkC, (Frontend_IsValidScreenIndex((s32) temp_s1_2) == 0)) || (temp_s1_2 == D_8014D080->screens[D_8014D080->current].owner)) && ((focus_index_final = D_8014D080->current), (temp_s1_2 != D_8014D080->focus)) && ((temp_a1 = -1), (focus_index_final != temp_a1))) {
         temp_v0_16 = D_8014D080->callback;
         if (temp_v0_16 != 0) {
             temp_s0_11 = D_8014D080->handled;

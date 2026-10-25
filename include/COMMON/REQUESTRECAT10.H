@@ -46,7 +46,7 @@ struct Menu_func_8041EE08_de {
     int unk1C;
 };
 
-extern s32 func_8041EB50_de();
+extern s32 Frontend_CountUsedSlots();
 
 typedef struct RequestDrawScreen {
     char pad0[8];

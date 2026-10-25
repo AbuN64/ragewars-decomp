@@ -80,10 +80,10 @@ extern void Frontend_DrawWidget(struct Pair14 *image, Triple at, Style style);
 
 extern void func_802A1898_de(u32 *, u32 *, u32 *, u32 *);
 
-extern s32 func_8040F488_de(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 
 
-extern void func_8040E7FC_de(void *, Args);
+extern void Frontend_DrawVisibleSiblings(void *, Args);
 
 extern s32 D_800E2AB8;
 
@@ -173,7 +173,7 @@ static inline void func_8040F75C_resolve(UiWidget *widget) {
     }
 }
 
-void func_8040EEA4_de(struct Tree *node, struct Tree *added) {
+void Frontend_WrapNodeInParent(struct Tree *node, struct Tree *added) {
     struct Tree *parent;
 
     added->child = node;
@@ -195,13 +195,13 @@ void func_8040EEA4_de(struct Tree *node, struct Tree *added) {
 
 
 
-void func_8040EF84_de(NodeRecAt44 *node, void *from, void *to) {
+void Frontend_ReplaceNodeRefs(NodeRecAt44 *node, void *from, void *to) {
     if (node != 0) {
         if (node->left != 0) {
-            func_8040EF84_de(node->left, from, to);
+            Frontend_ReplaceNodeRefs(node->left, from, to);
         }
         if (node->right != 0) {
-            func_8040EF84_de(node->right, from, to);
+            Frontend_ReplaceNodeRefs(node->right, from, to);
         }
         if (node->flags & 0x10) {
             if (node->ref30 == from) {
@@ -366,14 +366,14 @@ void Frontend_DrawClippedChildren(WidgetLayout *arg0, Args args) {
         if ((window->flags & 0x200) != 0) {
             func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
-            if (func_8040F488_de(&transformed, &basis) == 0) {
+            if (Frontend_ClampRectToClip(&transformed, &basis) == 0) {
                 return;
             }
             func_802A1870_de(transformed.x, transformed.z,
                           transformed.y, transformed.w);
             changed = 1;
         }
-        func_8040E7FC_de(window->children, args);
+        Frontend_DrawVisibleSiblings(window->children, args);
         if (changed != 0) {
             func_802A1870_de(value.x, value.z, value.y, value.w);
         }
@@ -384,7 +384,7 @@ void Frontend_DrawClippedChildren(WidgetLayout *arg0, Args args) {
 
 
 
-s32 func_8040F488_de(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip) {
+s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip) {
     s32 ok;
     s32 x0;
     s32 x1;

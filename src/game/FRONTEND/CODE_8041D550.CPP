@@ -179,7 +179,7 @@ void Frontend_ShowUnlockedEntries(s32 style) {
 
 /* Advances a cursor over four 400-byte entries, wrapping to 0, until it reaches one whose flag byte in
    D_80102B0D is not negative; after six steps without one it sets the cursor to -1. */
-void func_8041DB30_de(int *cursor) {
+void Frontend_AdvanceActiveSlot(int *cursor) {
     int steps;
 
     steps = 0;

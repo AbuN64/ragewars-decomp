@@ -69,7 +69,7 @@ extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void Frontend_SetWidgetFlag100(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void func_8041B110_de(s32);
-extern void func_8041DB30_de(int *);
+extern void Frontend_AdvanceActiveSlot(int *);
 extern s32 func_80264614_de(s32);
 extern void *func_8041A280_de(s32, s32);
 extern void func_8041A488_de(void *);
@@ -160,7 +160,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
         break;
     }
     i = -1;
-    func_8041DB30_de(&i);
+    Frontend_AdvanceActiveSlot(&i);
     if (i < 0) {
         Frontend_SetWidgetFlag100(func_8040EC30_de(menu, 0x4C), 1);
     }

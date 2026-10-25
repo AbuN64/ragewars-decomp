@@ -95,7 +95,7 @@ s32 func_8041CEB0_us_rev1(void *owner) {
 
     D_800E3590->player = 0;
     D_800E3590->unk268 = -1;
-    func_8041DB30_de(&D_800E3590->unk268);
+    Frontend_AdvanceActiveSlot(&D_800E3590->unk268);
     func_8041D6A8_de();
     Frontend_ShowUnlockedEntries(D_800E3590->style);
     func_8040EC30_de(owner, 493)->alpha = 110;

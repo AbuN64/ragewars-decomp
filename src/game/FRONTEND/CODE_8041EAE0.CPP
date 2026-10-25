@@ -130,7 +130,7 @@ s32 func_8041EAC4_de(void) {
     return result;
 }
 
-s32 func_8041EB50_de(void) {
+s32 Frontend_CountUsedSlots(void) {
     s32 count = 0;
     s32 i;
 

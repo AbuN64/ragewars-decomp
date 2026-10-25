@@ -28,7 +28,7 @@
 extern s32 GetMenuScreenOwner(void);
 
 extern void *Frontend_GetScreenData(s32 index);
-extern void func_8040EF84_de(NodeRecAt44 *node, void *from, void *to);
+extern void Frontend_ReplaceNodeRefs(NodeRecAt44 *node, void *from, void *to);
 extern MenuWidget *func_8040EC30_de(void *root, s32 id);
 extern void *Scene_AllocateMemory(s32 size);
 
@@ -60,10 +60,10 @@ extern s32 Frontend_ComputeWidgetBounds(Quad_func_802A1BE0_de *, Quad_func_802A1
 
 extern void func_802A1898_de(u32 *, u32 *, u32 *, u32 *);
 
-extern s32 func_8040F488_de(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 
 
-extern void func_8040E7FC_de(void *, Args);
+extern void Frontend_DrawVisibleSiblings(void *, Args);
 
 /* When the fourth argument is one, advances a menu's selection at offset 0x110 to the next of its
    0x114 entries, wrapping to the first, points word 0x38 of its owner at 0x44 to the selected
@@ -124,9 +124,9 @@ MenuListWidget *func_8041ABC0_de(s32 arg0, s32 arg1) {
     result->owner = child;
     result->index = 0;
     result->count = 0;
-    func_8040EEA4_de(source, result);
+    Frontend_WrapNodeInParent(source, result);
     source->field_0C = -1;
-    func_8040EF84_de(context, source, result);
+    Frontend_ReplaceNodeRefs(context, source, result);
     return result;
 }
 
@@ -191,12 +191,12 @@ void func_8041AE0C_de(Shared_Item *widget, Args args) {
         if ((widget->flags & 0x200) != 0) {
             func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
-            func_8040F488_de(&transformed, &basis);
+            Frontend_ClampRectToClip(&transformed, &basis);
             func_802A1870_de(transformed.x, transformed.z,
                           transformed.y, transformed.w);
             changed = 1;
         }
-        func_8040E7FC_de(widget->label, args);
+        Frontend_DrawVisibleSiblings(widget->label, args);
         if (changed != 0) {
             func_802A1870_de(value.x, value.z, value.y, value.w);
         }
@@ -304,9 +304,9 @@ void func_8041B110_de(s32 arg0) {
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB61;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
-    func_8040EEA4_de(source, result);
+    Frontend_WrapNodeInParent(source, result);
     source->field_0C = -1;
-    func_8040EF84_de(context, source, result);
+    Frontend_ReplaceNodeRefs(context, source, result);
 }
 
 void func_8041B22C_de(Record_func_8041B22C_de *source) {
@@ -322,9 +322,9 @@ void func_8041B22C_de(Record_func_8041B22C_de *source) {
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB61;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
-    func_8040EEA4_de(source, result);
+    Frontend_WrapNodeInParent(source, result);
     source->field_0C = -1;
-    func_8040EF84_de(context, source, result);
+    Frontend_ReplaceNodeRefs(context, source, result);
 }
 
 s32 func_8041B340_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
@@ -365,12 +365,12 @@ void func_8041B3D0_de(Shared_Item *widget, Args args) {
         if ((widget->flags & 0x200) != 0) {
             func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
-            func_8040F488_de(&transformed, &basis);
+            Frontend_ClampRectToClip(&transformed, &basis);
             func_802A1870_de(transformed.x, transformed.z,
                           transformed.y, transformed.w);
             changed = 1;
         }
-        func_8040E7FC_de(widget->label, args);
+        Frontend_DrawVisibleSiblings(widget->label, args);
         if (changed != 0) {
             func_802A1870_de(value.x, value.z, value.y, value.w);
         }

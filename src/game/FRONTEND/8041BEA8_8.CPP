@@ -13,7 +13,7 @@ extern void Frontend_ShowUnlockedEntries(s32);
 s32 func_8041DDF4_de(void *first, void *second, u32 event, s32 value) {
     if ((event >> 16) == 3 && value == 0) {
         MarkMenuEventHandled();
-        func_8041DB30_de(&D_800E3590->unk268);
+        Frontend_AdvanceActiveSlot(&D_800E3590->unk268);
         Frontend_ShowUnlockedEntries(0x6E);
         func_8041D6A8_de();
         func_8041D960_de();

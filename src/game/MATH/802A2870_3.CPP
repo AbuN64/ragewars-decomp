@@ -17,7 +17,7 @@ extern Record_func_802A1990_de *Scene_AllocateMemory(s32);
 extern void func_802A1B24_de(void *arg0, s32 arg1);
 
 
-extern void func_8040EF84_de(s32 arg0, Record_func_802A1990_de *arg1, Record_func_802A1990_de *arg2);
+extern void Frontend_ReplaceNodeRefs(s32 arg0, Record_func_802A1990_de *arg1, Record_func_802A1990_de *arg2);
 
 Record_func_802A1990_de *func_802A1990_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Record_func_802A1990_de *source;
@@ -42,9 +42,9 @@ Record_func_802A1990_de *func_802A1990_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3
     result->field_54 = arg4;
     func_802A1B24_de(result, arg2);
     result->field_5C = 2;
-    func_8040EEA4_de(source, result);
+    Frontend_WrapNodeInParent(source, result);
     source->field_0C = -1;
-    func_8040EF84_de(context, source, result);
+    Frontend_ReplaceNodeRefs(context, source, result);
     return result;
 }
 

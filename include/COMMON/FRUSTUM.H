@@ -17,5 +17,5 @@ extern s32 func_80296C30_de(f32 *arg0, f32 *arg1);
 
 extern void *Frontend_GetScreenData(s32 index);
 
-s32 func_80411DF0_de(s32);
+s32 Frontend_IsValidScreenIndex(s32);
 #endif

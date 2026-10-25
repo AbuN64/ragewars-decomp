@@ -77,7 +77,7 @@ extern void func_80298368_de(s32);
 
 extern void *func_8040EC30_de(void *, s32);
 
-extern s32 func_8040EBD0_de(void *);
+extern s32 Frontend_ListHasFlag100(void *);
 
 extern void func_802991D4_de(s32);
 
@@ -172,11 +172,11 @@ s32 func_80438C84_de(void *window) {
     if (D_800E5830->started == 0) {
         D_800E5830->started = 1;
 #if defined(VERSION_DE)
-        func_802991D4_de(func_8040EBD0_de(func_8040EC30_de(window, 0x26F)) == 0 ? 0x26F : 0x26E);
+        func_802991D4_de(Frontend_ListHasFlag100(func_8040EC30_de(window, 0x26F)) == 0 ? 0x26F : 0x26E);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        func_802991D4_de(func_8040EBD0_de(func_8040EC30_de(window, 0x273)) == 0 ? 0x273 : 0x272);
+        func_802991D4_de(Frontend_ListHasFlag100(func_8040EC30_de(window, 0x273)) == 0 ? 0x273 : 0x272);
 #elif defined(VERSION_EU_X)
-        func_802991D4_de(func_8040EBD0_de(func_8040EC30_de(window, 0x278)) == 0 ? 0x278 : 0x277);
+        func_802991D4_de(Frontend_ListHasFlag100(func_8040EC30_de(window, 0x278)) == 0 ? 0x278 : 0x277);
 #endif
         if (D_801462C8.counters.humanWon == 0) {
 #if defined(VERSION_DE)

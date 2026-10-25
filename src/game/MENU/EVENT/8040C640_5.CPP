@@ -38,7 +38,7 @@ s32 func_8041DFC0_us(void *arg0) {
     D_800E39C0->rows[1] = item;
     item = func_8040EC30_de(arg0, 0x396);
     D_800E39C0->rows[2] = item;
-    D_800E39C0->step = func_8041EB50_de();
+    D_800E39C0->step = Frontend_CountUsedSlots();
 
     for (row = 0; row < 3; row++) {
         func_8041E408_de(row);

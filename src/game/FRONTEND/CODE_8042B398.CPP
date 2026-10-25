@@ -423,7 +423,7 @@ extern void Frontend_FillResultRows(void);
 extern void func_8042CE74_de(void);
 
 extern void Frontend_SetWidgetFlag100(void *, s32);
-extern s32 func_8040EBD0_de(void *);
+extern s32 Frontend_ListHasFlag100(void *);
 extern s32 func_8042AF28_de(void);
 extern s32 func_8042AFB8_de(void);
 extern void func_8028D380_de(Shared_World *, s32, void *, s32);
@@ -515,7 +515,7 @@ s32 Frontend_OpenResultsScreen(void *root) {
         }
         offset += 400;
     } while (i < 4);
-    if (func_8040EBD0_de(func_8040EC30_de(root, 0x238 + RESULTS_MENU_SHIFT)) == 0 && func_8042AF28_de() == 1 && func_8042AFB8_de() == 0) {
+    if (Frontend_ListHasFlag100(func_8040EC30_de(root, 0x238 + RESULTS_MENU_SHIFT)) == 0 && func_8042AF28_de() == 1 && func_8042AFB8_de() == 0) {
         Frontend_SetWidgetFlag100(func_8040EC30_de(root, 0x238 + RESULTS_MENU_SHIFT), 1);
     }
     item = func_8040EC30_de(D_800E53C0->unkE0, RESULTS_HEADING1);

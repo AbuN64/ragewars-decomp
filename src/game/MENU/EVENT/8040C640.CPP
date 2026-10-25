@@ -11,10 +11,10 @@ extern s32 Frontend_ComputeWidgetBounds(Quad_func_802A1BE0_de *, Quad_func_802A1
 
 extern void func_802A1898_de(u32 *, u32 *, u32 *, u32 *);
 
-extern s32 func_8040F488_de(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
+extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 
 
-extern void func_8040E7FC_de(void *, Args);
+extern void Frontend_DrawVisibleSiblings(void *, Args);
 
 s32 func_8040C638_us(s32 arg0) {
     arg0 << 0;
@@ -34,12 +34,12 @@ void func_8040C648_us(void *arg0, Args args) {
         if ((record->unk12 & 0x200) != 0) {
             func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
-            func_8040F488_de(&transformed, &basis);
+            Frontend_ClampRectToClip(&transformed, &basis);
             func_802A1870_de(transformed.x, transformed.z,
                           transformed.y, transformed.w);
             changed = 1;
         }
-        func_8040E7FC_de(record->unk8, args);
+        Frontend_DrawVisibleSiblings(record->unk8, args);
         if (changed != 0) {
             func_802A1870_de(value.x, value.z, value.y, value.w);
         }
