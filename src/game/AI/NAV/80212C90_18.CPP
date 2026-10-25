@@ -3,7 +3,7 @@
 #include "AI/SOURCE.H"
 #include "AI/ACTOR_SETUP_VERSIONS.H"
 #include "TYPES.H"
-extern void *func_802A001C_de(void *arg0, int arg1, u32 arg2);
+#include "RESMGR/802A0888.H"
 
 /* Sets up a sound voice from its definition: clears the voice's handle at 0xC and state at 0x100 and
    0x102, takes the definition's three bytes at 0x12, 0xE and 0x10 for the output parameters, and the
@@ -196,7 +196,7 @@ void Nav_InitSpawnedActor(SetupSource *source, SetupActor *actor, SetupCallbacks
     f32 default_;
 
     saved = actor->field68;
-    func_802A001C_de(actor, 0, 0x170);
+    Resmgr_FillMemory(actor, 0, 0x170);
     actor->flags = 0x40;
     actor->field68 = saved;
     ((SetupInitFn)func_802138F0_de)(actor, source->desc, source->pos, source);

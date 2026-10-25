@@ -145,7 +145,7 @@ extern void Sched_FinishPageJob(struct ResourcePageJob *job);
 void func_8023C924_de(void) {
     OSMesg request;
 
-    func_802A001C_de(D_800FF230.pool2, 0x62, sizeof(D_800FF230.pool2));
+    Resmgr_FillMemory(D_800FF230.pool2, 0x62, sizeof(D_800FF230.pool2));
     func_802BAC90_de(D_800FF230.queueData, 0x62, D_0023CA24, 0, D_800FF230.pool2 + sizeof(D_800FF230.pool2), 0x94);
     func_802BB750_de(D_800FF230.queueData);
     for (;;) {

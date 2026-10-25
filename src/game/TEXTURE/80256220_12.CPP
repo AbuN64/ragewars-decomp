@@ -29,7 +29,7 @@ extern void func_8023B9B0_de(s32, s32);
 #endif
 extern void Scene_InitializeResourceCache(s32, s32);
 
-void func_802567D0_de(void) {
+void Texture_InitHeap(void) {
     u8 *heapStart;
     s32 heapEnd;
     s32 size;
@@ -41,7 +41,7 @@ void func_802567D0_de(void) {
     }
 
     size = heapEnd - (s32)heapStart;
-    func_802A001C_de(heapStart, 0, size);
+    Resmgr_FillMemory(heapStart, 0, size);
     func_802558B4_de(D_801051A0, heapStart, size);
     func_802550F0_de(D_80106248, 3);
     func_80256280_de(D_801011B8, 4);
@@ -120,7 +120,7 @@ void Texture_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioIniti
     func_802BB550_de(6, &D_80107E00, 7);
     D_80107DFC = 0;
     D_80107EA0 = config->heap;
-    func_802A001C_de(D_800E5400, 8, sizeof(D_800E5400));
+    Resmgr_FillMemory(D_800E5400, 8, sizeof(D_800E5400));
     func_802BAC90_de(D_801076F8, 8, (void (*)(void))&D_00256C90, 0, D_800E5400 + sizeof(D_800E5400), priority);
     func_802BB750_de(D_801076F8);
     func_802BB420_de(&D_80107E00, (OSMesg)7, 0);

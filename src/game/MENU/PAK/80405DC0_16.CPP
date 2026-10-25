@@ -78,7 +78,7 @@ void func_804098CC_de(void ***handle, void **data, s32 units) {
     *handle = block;
     first = *block;
     *data = first;
-    func_802A001C_de(first, 0, units);
+    Resmgr_FillMemory(first, 0, units);
 }
 
 void func_80409964_de(void) {

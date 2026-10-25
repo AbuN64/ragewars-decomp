@@ -199,7 +199,7 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s
     Gfx *g;
     f32 ratio;
     Ret8028CFA0 *source;
-    func_802A001C_de(&local60, 0, sizeof(local60));
+    Resmgr_FillMemory(&local60, 0, sizeof(local60));
     g = D_80110634++;
     view = D_80141008;
     gSPMatrix(g, &view->matrices[D_800D297C], G_MTX_LOAD | G_MTX_PROJECTION);

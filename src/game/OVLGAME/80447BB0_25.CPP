@@ -31,7 +31,7 @@ extern void Ovlgame_ResetPlayerForRound(void *actor, s32 character, s32 active);
 
 
 
-/* Resets a 0x44-byte record: clears it through func_802A001C_de, initialises the two lists at offsets
+/* Resets a 0x44-byte record: clears it through Resmgr_FillMemory, initialises the two lists at offsets
    0xC and 0x20 through func_80255CA0_de with 0x16DC and 0x16E0, and clears the words at 0 to 8 and
    0x34 to 0x40. */
 
@@ -83,7 +83,7 @@ void func_804499B0_de(ObjectPool *pool, s32 count, s32 force_active) {
 
     func_80255CA0_de(&pool->active_queue, 0x16DC, 0x16E0);
     func_80255CA0_de(&pool->object_queue, 0x16DC, 0x16E0);
-    func_80264854_de(0);
+    Render_SetControllerMode(0);
     func_80253908_de(0);
     global = D_801462C8;
 
@@ -231,8 +231,8 @@ initialized:
     ((IntegerState88 *)(state))->unk_84 = 3;
 }
 
-void func_80449DB0_de(struct RecordCode80447BB0 *record) {
-    func_802A001C_de(record, 0, 0x44);
+void Ovlgame_ResetMenuPool(struct RecordCode80447BB0 *record) {
+    Resmgr_FillMemory(record, 0, 0x44);
     func_80255CA0_de(&record->listC, 0x16DC, 0x16E0);
     func_80255CA0_de(&record->list20, 0x16DC, 0x16E0);
     record->word0 = 0;

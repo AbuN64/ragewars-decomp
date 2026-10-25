@@ -23,13 +23,16 @@
 #include "sdk/AUDIO/802BD1A8_19.H"
 #include "sdk/os.h"
 #include "RESMGR/802A0888.H"
+#include "OVLGAME/80405454_4.H"
+#include "RESMGR/802A2230_6.H"
+#include "TEXTURE/80256220_12.H"
 
-void func_80291208_de(RenderState *state) {
+void Render_InitFrameRing(RenderState *state) {
     u32 i, count, previous, next;
     CGameStatus *counters;
     Frame *view;
     osCreateMesgQueue(&D_801428C0, (s32)D_80142CB8, 0x1000);
-    func_802A001C_de(D_800EFC80_de, 7, 0x2000);
+    Resmgr_FillMemory(D_800EFC80_de, 7, 0x2000);
     func_8028F754_de((void *)&D_80142928, (s32)(D_800EFC80_de + 0x2000), D_800CD8C8_de, 0, 1);
     osScAddClient(&D_80142928, &D_80146CC0, &D_801428C0);
     state->handle = -1;
@@ -95,11 +98,9 @@ extern char D_002953FC_us_rev1[];
 extern char D_801053E8_us_rev1[];
 extern void func_802B155C_us_rev1(void *segment);
 #endif
-extern void func_802567D0_de(void);
 extern void osViBlack(s32 active);
-extern void func_80405CA8_de(void *record);
-extern void func_8044A62C_de(void *players);
-extern void func_80449DB0_de(void *menu);
+extern void Items_ResetPlayers(void *players);
+extern void Ovlgame_ResetMenuPool(void *menu);
 extern void func_8023EE00_de(void);
 extern s32 func_80265964_de(s32 size);
 extern void Items_ResetActorPools(void *players, s32 arg1);
@@ -107,14 +108,12 @@ extern void func_804499B0_de(void *menu, s32 arg1, s32 arg2);
 extern void func_8044B7C0_de(Shared_World *world, s32 resource);
 extern void func_8044AE70_de(void);
 extern void Ovlgame_ResetHudCharTables(void *hud);
-extern void func_80404D84_de(void);
-extern void func_802A21F4_de(void);
+extern void Pak_AllocateScratchBuffer(void);
 extern void func_80298368_de(s32 arg0);
 extern void func_8026479C_de(void);
-extern void func_80293790_de(GameSession *session, s32 arg1);
-extern void func_80293848_de(void *session);
+extern void Render_BeginModeTransition(GameSession *session, s32 arg1);
+extern void Render_UpdateGameMode(void *session);
 extern void Render_UpdateFrameTiming(void *session);
-extern void func_8026480C_de(void);
 /* The game settings record and its round counters. */
 static inline Shared_Game *currentGame(void) {
     return &D_801462C8;
@@ -127,7 +126,7 @@ static inline CGameStatus *gameStatus(void) {
 void Render_RunGameLoop(GameSession *session) {
     u32 i;
     s16 *msg;
-    func_802567D0_de();
+    Texture_InitHeap();
 #if defined(VERSION_EU)
     func_802BA5F0_eu(0xFE);
 #else
@@ -142,7 +141,7 @@ void Render_RunGameLoop(GameSession *session) {
         for (;;) {
         }
     }
-    func_80405CA8_de(&D_8014D438);
+    Ovlgame_ClearRenderRecord(&D_8014D438);
     Ovlgame_AllocateRenderBuffers(&D_8014D438);
     osViSwapBuffer((s32)D_8014D468_de[0]);
     osViBlack(0);
@@ -164,16 +163,16 @@ void Render_RunGameLoop(GameSession *session) {
     D_8011B9F4 = 0;
     D_80142C38[0] = 0.0f;
     D_80142C30 = 0;
-    func_80291208_de((RenderState *)session);
+    Render_InitFrameRing((RenderState *)session);
 #if defined(VERSION_US_REV1)
     func_802B155C_us_rev1(D_002953FC_us_rev1);
     func_802BB420_de((OSMesgQueue *)D_801053E8_us_rev1, (OSMesg)0xBEEFDEAD, 0);
 #endif
     for (i = 0; i < D_800DE850; i++) {
-        func_802A001C_de(D_8014D468_de[i], 0, D_800E28D0 * D_800E28D4 * 2);
+        Resmgr_FillMemory(D_8014D468_de[i], 0, D_800E28D0 * D_800E28D4 * 2);
     }
-    func_8044A62C_de(session->players);
-    func_80449DB0_de(session->menu);
+    Items_ResetPlayers(session->players);
+    Ovlgame_ResetMenuPool(session->menu);
     func_8023EE00_de();
     session->resource = func_80265964_de(0x18) & 0x3FFFFFFF;
     Items_ResetActorPools(session->players, 0);
@@ -183,8 +182,8 @@ void Render_RunGameLoop(GameSession *session) {
         func_8044AE70_de();
     }
     Ovlgame_ResetHudCharTables(&session->hud);
-    func_80404D84_de();
-    func_802A21F4_de();
+    Pak_AllocateScratchBuffer();
+    Resmgr_InitFrontendOnce();
     func_80298368_de(2);
     D_801428D8 = 3;
     D_8014AD94 = 0;
@@ -194,14 +193,14 @@ void Render_RunGameLoop(GameSession *session) {
     D_80142CAC = 0;
     func_8026479C_de();
     gameStatus()->transitionActive = 0;
-    func_80293790_de(session, 0);
+    Render_BeginModeTransition(session, 0);
     for (;;) {
         Shared_Game *game = currentGame();
         func_802BB2A0_de(&D_801428C0, (OSMesg *)&D_80146CBC, 1);
         msg = D_80146CBC;
         switch (*msg) {
         case 1:
-            func_80293848_de(session);
+            Render_UpdateGameMode(session);
             break;
         case 2:
             if (msg == &session->ring.frames[0].done.type) {
@@ -223,11 +222,11 @@ void Render_RunGameLoop(GameSession *session) {
             break;
         case 4:
             D_800CDD10 = 0;
-            func_8026480C_de();
-            func_80264854_de(0);
+            Render_ResetControllerProfiles();
+            Render_SetControllerMode(0);
             session->pad26DC0 = 1;
             session->transitionBlocked = 1;
-            func_80293824_de(session, 0x14);
+            Render_SetTransitionTarget(session, 0x14);
             break;
         }
     }

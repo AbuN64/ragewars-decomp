@@ -4,6 +4,7 @@
 #include "ACHIEVE/80424E30_3.H"
 #include "ACHIEVE/80424E30_2.H"
 #include "COMMON/PLAYERPROFILES.H"
+#include "RESMGR/802A0888.H"
 
 const unsigned int rodata_func_80438614_de_800E1F50[6] = {
     0x3E99999A, 0x3C1374BC, 0x40400000, 0xC0A00000, 0xC2C80000, 0xC1F00000,
@@ -33,7 +34,6 @@ extern s32 func_80265650_de(u8 *, s32);
 extern void func_80265688_de(u8 *, s32, s32);
 extern s32 func_80425014_de(s32);
 extern void func_804259E0_de(s32);
-extern void *func_802A001C_de(void *, int, u32);
 extern s32 func_80425674_de(s32);
 extern s32 func_8041F140_de(s32);
 extern void func_802A0C08_de(char *, char *, ...);
@@ -131,7 +131,7 @@ done:
             }
             if (D_8015402C >= 0x23) {
                 func_80265688_de(D_80102B00[D_800E5830->player].kindFlags, D_80146398[D_800E5830->player].kind, 1);
-                func_802A001C_de(D_80102B00[D_800E5830->player].levelFlags[0], 0, 5);
+                Resmgr_FillMemory(D_80102B00[D_800E5830->player].levelFlags[0], 0, 5);
                 character = func_80425674_de(D_800E5830->player);
                 if (character >= 0) {
                     func_802A0C08_de(D_800E5830->resultText, D_800D3578, *D_800DFA6C[func_8041F140_de(character)].name);

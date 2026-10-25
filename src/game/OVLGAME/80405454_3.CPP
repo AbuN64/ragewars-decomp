@@ -294,8 +294,8 @@ int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
                                          D_800DCD00_de);
         colorHandle = (s32 *)func_80253530_de(0, (s32)(memoryEnd - 2 * megabyte),
                                          D_800DE850 * bufferBytes, D_800DCD0C);
-        func_802A001C_de((void *)*colorHandle, 0, 0xfd200);
-        func_802A001C_de((void *)*depthHandle, 0, 0x54600);
+        Resmgr_FillMemory((void *)*colorHandle, 0, 0xfd200);
+        Resmgr_FillMemory((void *)*depthHandle, 0, 0x54600);
         ((void **)record)[6] = depthHandle;
         ((void **)record)[3] = colorHandle;
         D_801536E8 = *(void **)((void **)record)[6];
@@ -317,9 +317,9 @@ int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
     }
 
     for (i = 0; i < D_800DE850; i++) {
-        func_802A001C_de(D_8014D468_de[i], 0, bufferBytes);
+        Resmgr_FillMemory(D_8014D468_de[i], 0, bufferBytes);
     }
-    func_802A001C_de(D_801536E8, 0, bufferBytes);
+    Resmgr_FillMemory(D_801536E8, 0, bufferBytes);
 
     ((void **)record)[1] = Scene_AllocateResource(0, (D_800E28A4 + D_800DE858) * 0x10, 0x23, D_800DCD3C);
     ((void **)record)[2] = Scene_AllocateResource(0, 0x8000, 0x23, &D_800DCD4C);

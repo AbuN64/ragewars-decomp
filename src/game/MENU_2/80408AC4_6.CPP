@@ -333,7 +333,7 @@ void func_8043C688_de(void) {
         "addu      $a0, $s1, $zero\n"
         "lui        $a0, %hi(D_8011FAC0)\n"
         "addiu      $a0, $a0, %lo(D_8011FAC0)\n"
-        "jal        func_80293824_de\n"
+        "jal        Render_SetTransitionTarget\n"
         "addiu     $a1, $zero, 0x11\n"
         "j          .Lauto_8043C984\n"
         "addiu     $v0, $zero, 0x1\n"
@@ -680,7 +680,7 @@ s32 func_8043C688_de(s32 arg0, Shared_MenuInput *pad) {
         if (target == 8000) {
             D_80142226 = 1;
             Ovlgame_SelectConfirmingController(pad);
-            func_80293824_de(&D_8011FAC0, 0x11);
+            Render_SetTransitionTarget(&D_8011FAC0, 0x11);
             return 1;
         }
         if (func_802934F8_de() != 0) {

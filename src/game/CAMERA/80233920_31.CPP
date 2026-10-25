@@ -129,7 +129,7 @@ void func_8023A114_de(void *messageBuffer, s32 count) {
     buffer->allocation = allocation;
     firstBlock = *allocation;
     buffer->first = firstBlock;
-    func_802A001C_de(firstBlock, 0, bytes);
+    Resmgr_FillMemory(firstBlock, 0, bytes);
 }
 
 void func_8023A190_de(void *screenMessageOwner, int count) {
@@ -143,7 +143,7 @@ void func_8023A190_de(void *screenMessageOwner, int count) {
     owner->storage.allocation = allocation;
     firstBlock = *allocation;
     owner->storage.first = firstBlock;
-    func_802A001C_de(firstBlock, 0, bytes);
+    Resmgr_FillMemory(firstBlock, 0, bytes);
 }
 
 void func_8023A1F4_de(struct ScreenMessageOwner *owner) {

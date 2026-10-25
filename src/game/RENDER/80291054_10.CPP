@@ -10,7 +10,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/TRIPLE.H"
 
-void func_80293790_de(GameSession *session, s32 arg1) {
+void Render_BeginModeTransition(GameSession *session, s32 arg1) {
     s32 saved;
 
     saved = session->mode;
@@ -25,7 +25,7 @@ void func_80293790_de(GameSession *session, s32 arg1) {
 }
 
 /** Set the state byte and linked value in a large object. */
-void func_80293824_de(GameSession *object, int value) {
+void Render_SetTransitionTarget(GameSession *object, int value) {
     object->phase = 2;
     object->target = value;
 }
@@ -40,7 +40,7 @@ extern void Render_UpdateFrameTiming(void *arg0);
 
 
 
-void func_80293848_de(void *session) {
+void Render_UpdateGameMode(void *session) {
     s32 field;
     Handler8029382C fn;
 

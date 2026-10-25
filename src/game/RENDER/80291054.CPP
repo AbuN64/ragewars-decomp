@@ -30,7 +30,7 @@ void func_80291074_de(void *object) {
             }
             if (D_800CD780 != 0) {
 advance:
-                func_80293824_de(object, 1);
+                Render_SetTransitionTarget(object, 1);
                 D_8014286C = 1;
             }
         }
@@ -81,7 +81,7 @@ void func_80291074_de(void *arg0) {
             }
             if (D_800CD780 != 0) {
 block_6:
-                func_80293824_de(arg0, 1);
+                Render_SetTransitionTarget(arg0, 1);
                 D_8014286C = 1;
             }
         }

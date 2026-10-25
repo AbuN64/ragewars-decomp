@@ -221,7 +221,7 @@ void func_8022A748_de(void *arg0) {
         return;
     }
 
-    func_80264854_de(0);
+    Render_SetControllerMode(0);
     if (state->teams != 0) {
         if (state->round == 0) {
             state->round = 1;

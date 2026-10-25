@@ -243,7 +243,7 @@ void func_8029FE38_de(char *base, s32 n, s32 size, s32 (*compare)(char *a, char 
     }
 }
 
-void *func_802A001C_de(void *arg0, int arg1, u32 arg2) {
+void *Resmgr_FillMemory(void *arg0, int arg1, u32 arg2) {
     u8 *start;
     u8 *end;
     u8 *cur;

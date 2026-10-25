@@ -126,7 +126,7 @@ extern s32 D_800D297C, D_800E28D0, D_800E1E20, D_800CD730;
 extern f32 literals_func_8028D244_de;
 extern s32 D_800CE430[];
 extern u8 D_00443128[], D_00443104[];
-extern void func_802A001C_de(void *, s32, s32);
+extern void Resmgr_FillMemory(void *, s32, s32);
 extern u8 *func_8028CFA0_de(void *, s32, s32);
 extern void Particle_TransformPoint(void *, CVector3 *, CVector3 *);
 extern void func_802466A0_de(u8 *, s32, s32, s32, u8 *, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
@@ -174,7 +174,7 @@ void Pak_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unused
     f32 ratioX;
     f32 ratioY;
     f32 wobble, opacity;
-    func_802A001C_de(&zero, 0, 0xC);
+    Resmgr_FillMemory(&zero, 0, 0xC);
     selectedWidget = entry->state;
     if (selectedWidget == 0) return;
     widget = selectedWidget;

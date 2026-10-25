@@ -44,7 +44,7 @@ void func_80256280_de(s32 arg0, s32 count) {
         s1 += 1;
         s0 += 0x20;
     } while (s1 < 0x210);
-    func_802A001C_de(arg0 + 0xA68, count, 0x400);
+    Resmgr_FillMemory(arg0 + 0xA68, count, 0x400);
     func_802BAC90_de(arg0, count, &D_0025657C, arg0, arg0 + 0xE68, D_800CD8C4_de);
     func_802BB750_de(arg0);
 }

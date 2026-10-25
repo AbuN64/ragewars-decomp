@@ -20,7 +20,7 @@ void func_802BA210_de(void)
     __OSViContext_func_802BA910_de *contexts = D_800D43B0;
     s32 tv_type;
 
-    func_802A001C_de(contexts, 0, sizeof(D_800D43B0));
+    Resmgr_FillMemory(contexts, 0, sizeof(D_800D43B0));
     tv_type = D_80000300;
     D_800D8440 = &contexts[0];
     D_800D4414 = &contexts[1];

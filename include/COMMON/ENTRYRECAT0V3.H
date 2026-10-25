@@ -102,5 +102,5 @@ typedef struct PakDirectoryRecAt4 PakDirectoryRecAt4;
 extern void func_80404DDC_de(void);
 
 extern int func_804041E8_de(void);
-void func_80404D84_de(void);
+void Pak_AllocateScratchBuffer(void);
 #endif

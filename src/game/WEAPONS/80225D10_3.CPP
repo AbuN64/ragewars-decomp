@@ -24,8 +24,8 @@ void func_80226950_de(PlayerList *list, int count) {
     list->count = count;
     list->players = *handle;
     states = (char *)list->players + playerSize;
-    func_802A001C_de(list->players, 0, playerSize);
-    func_802A001C_de(states, 0, stateSize);
+    Resmgr_FillMemory(list->players, 0, playerSize);
+    Resmgr_FillMemory(states, 0, stateSize);
     for (i = 0; i < count; i++) {
         list->players[i].state = states + i * 0x330;
     }

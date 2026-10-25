@@ -114,7 +114,7 @@ profile_failed:
                 payload = handle->data;
                 D_800DE864_de = handle;
                 D_800E28BC = payload;
-                func_802A001C_de(payload, 0, (u32) blockState);
+                Resmgr_FillMemory(payload, 0, (u32) blockState);
                 if (func_80404F58_de(channel, noteIndex, (s32)D_800E28BC, pages << 8)==0 &&
                     pak_block_has_size(D_800E28BC,expectedSize) &&
                     func_804057F8_de(D_800E28BC,*(s32 *)D_800E28BC-4,11)==*(s32 *)(D_800E28BC+(*(s32 *)D_800E28BC-4)) &&
@@ -210,7 +210,7 @@ profile_failed:
                     payload2 = handle2->data;
                     D_800DE864_de = handle2;
                     D_800E28BC = payload2;
-                    func_802A001C_de(payload2, 0, (u32) allocationSize);
+                    Resmgr_FillMemory(payload2, 0, (u32) allocationSize);
                     if (func_80404F58_de(channel, noteIndex, (s32)D_800E28BC, pages << 8) == 0) {
                         length = *(s32 *)D_800E28BC;
                         if ((length == expectedSize) && (func_804057F8_de(D_800E28BC, length - 4, 0xBU) == *(s32 *)(D_800E28BC+(*(s32 *)D_800E28BC-4))) && (D_8011FECC == ((s32 *)D_800E28BC)[1])) {

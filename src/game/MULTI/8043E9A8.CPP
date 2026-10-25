@@ -128,7 +128,7 @@ s32 func_8043EA00_de(void *unused0, Arg1Struct *arg1) {
 
 /** Clears the D_8011FAC0 record and D_80154048, then re-registers the target through func_80264788_de. */
 s32 func_8043EA4C_de(void *unused0, Outer8043E56C *arg1) {
-    func_80293824_de(&D_8011FAC0, 8);
+    Render_SetTransitionTarget(&D_8011FAC0, 8);
     D_80154048 = 0;
     func_80264788_de(arg1->unk20->unk4);
     return 1;

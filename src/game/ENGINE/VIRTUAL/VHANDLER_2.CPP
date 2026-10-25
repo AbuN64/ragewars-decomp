@@ -98,7 +98,7 @@ void func_8023B9C0_eu(void) {
     }
     D_800FF230.f20 = 0;
     func_802BB550_de(0xC, &D_800FF230.completion, &D_800FF230.f20);
-    func_802A001C_de(D_800FF230.pool, 0x63, 0x200);
+    Resmgr_FillMemory(D_800FF230.pool, 0x63, 0x200);
     func_802BAC90_de(D_800FF230.queue, 0x63, D_0023C934, 0, D_800FF230.queueData, 0x93);
     func_802BB750_de(D_800FF230.queue);
 }
@@ -277,7 +277,7 @@ void func_8023B9B0_de(void) {
         "sh        $zero, -0xA80($s2)\n"
         "addiu      $a0, $s2, -0x7B0\n"
         "addiu      $a1, $zero, 0x63\n"
-        "jal        func_802A001C_de\n"
+        "jal        Resmgr_FillMemory\n"
         "addiu     $a2, $zero, 0x200\n"
         "addiu      $s0, $s2, -0x9E0\n"
         "addu       $a0, $s0, $zero\n"

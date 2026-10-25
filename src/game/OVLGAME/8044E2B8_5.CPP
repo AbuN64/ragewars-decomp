@@ -59,7 +59,7 @@ extern void func_8022A880_de(struct Context *);
 void func_8044DD50_de(char *match) {
     CGameStatus *state;
 
-    func_80264854_de(0);
+    Render_SetControllerMode(0);
     func_80285D30_de(D_8010EC90);
     func_8022A880_de(D_80145040);
     state = &D_801462C8.counters;

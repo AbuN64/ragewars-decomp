@@ -115,7 +115,7 @@ func_8042201C_de
 ();
 #endif
         func_8042DEA0_de();
-        func_80264854_de(1);
+        Render_SetControllerMode(1);
     }
     return 0;
 }

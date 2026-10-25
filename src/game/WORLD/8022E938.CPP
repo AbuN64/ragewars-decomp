@@ -294,7 +294,7 @@ void func_8022ED48_de(ActorRecAt16E0 *arg0)
 void func_8022EDA4_de(ResourceLoadState *resourceLoadState) {
     s32 handle;
 
-    func_80264854_de(0);
+    Render_SetControllerMode(0);
     func_80253908_de(0);
     handle = resourceLoadState->handle;
     if (handle != 0) {

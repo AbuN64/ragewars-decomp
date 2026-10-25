@@ -79,7 +79,7 @@ OSPiHandle_s *func_802B9870_de(void) {
     *(volatile u32 *)0xA4600030 = 2;
     state->speed = 0;
     handle = (void *)state;
-    func_802A001C_de(handle->transferInfo, 0, 0x60);
+    Resmgr_FillMemory(handle->transferInfo, 0, 0x60);
     lock = func_802BCF30_de();
     slot = &D_800D437C;
     previous = *slot;

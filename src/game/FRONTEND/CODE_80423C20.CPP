@@ -2,6 +2,7 @@
 #include "SCENE/802508E0_13.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/PLAYERPROFILES.H"
+#include "RESMGR/802A0888.H"
 
 
 #if !defined(NON_MATCHING) && !defined(VERSION_US_REV1)
@@ -63,7 +64,6 @@ extern void func_8042E9A0_de(s32, s32);
 extern void func_802A2400_de(f32);
 extern void func_802A2360_de(void);
 extern void *func_8025305C_de(s32);
-extern void *func_802A001C_de(void *, int, u32);
 extern s32 func_80265650_de(u8 *, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void func_8040E950_de(void *, s32);
@@ -108,7 +108,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
             D_80102B00[i].player = -1;
             D_800FEB0E[i * sizeof(Profile)] = 0;
         }
-        func_802A001C_de((char *)&D_80102B00[i] + 0x83, 0, 5);
+        Resmgr_FillMemory((char *)&D_80102B00[i] + 0x83, 0, 5);
     }
     D_800E4600 = func_8025305C_de(0x1C);
     func_802A2360_de();

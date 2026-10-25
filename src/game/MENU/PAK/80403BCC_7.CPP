@@ -31,7 +31,7 @@ extern s32 Pak_UpdateStatus(s32 a0);
 
 extern void func_8026454C_de(void);
 
-void func_80404D84_de(void) {
+void Pak_AllocateScratchBuffer(void) {
     struct Shape_typemap_165 *temp_v0;
     s32 temp_a0;
 
@@ -39,7 +39,7 @@ void func_80404D84_de(void) {
     temp_a0 = temp_v0->field_0;
     D_800DE808 = (s32 *)temp_v0;
     D_800E2854 = temp_a0;
-    func_802A001C_de((void *)temp_a0, 0, 0x810);
+    Resmgr_FillMemory((void *)temp_a0, 0, 0x810);
     D_800E2850 = 1;
 }
 

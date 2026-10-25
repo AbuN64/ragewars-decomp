@@ -193,7 +193,7 @@ void Items_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
         owner->count = actorCount;
         owner->handle = Scene_AllocateResource(0, actorCount * 0xED8, 0x23, D_800C32D4_de);
         owner->actors = *owner->handle;
-        func_802A001C_de(owner->actors, 0, actorCount * 0xED8);
+        Resmgr_FillMemory(owner->actors, 0, actorCount * 0xED8);
         for (i = 0; i < owner->count; i++) {
             owner->actors[i].index = i;
             func_80255D14_de(&owner->active, &owner->actors[i]);
@@ -204,7 +204,7 @@ void Items_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
     owner->smallCount = 16;
     owner->smallHandle = Scene_AllocateResource(0, 0x400, 0x23, D_800C32DC_de);
     owner->small = *owner->smallHandle;
-    func_802A001C_de(owner->small, 0, 0x400);
+    Resmgr_FillMemory(owner->small, 0, 0x400);
     for (i = 0; i < owner->smallCount; i++) {
         func_80255D14_de(&owner->smallList, &owner->small[i]);
     }

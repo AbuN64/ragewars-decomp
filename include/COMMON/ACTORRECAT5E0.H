@@ -100,7 +100,7 @@ extern void func_80264A20_de(void);
 struct ActorList;
 typedef struct ActorList ActorList;
 
-extern void func_8026480C_de();
+extern void Render_ResetControllerProfiles();
 
 extern void func_80264B44_de();
 

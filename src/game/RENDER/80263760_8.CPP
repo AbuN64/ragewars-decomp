@@ -73,7 +73,7 @@ void func_802647E8_de(ControllerProfile *slot, s32 arg1) {
     }
 }
 
-void func_8026480C_de(void) {
+void Render_ResetControllerProfiles(void) {
     ControllerProfile *slot;
     s32 i;
 
@@ -86,7 +86,7 @@ void func_8026480C_de(void) {
     } while (i < 4);
 }
 
-void func_80264854_de(s32 a) {
+void Render_SetControllerMode(s32 a) {
     ControllerProfile *slot;
     s32 i;
 

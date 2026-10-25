@@ -88,7 +88,7 @@ void func_8023B9C0_eu(void) {
     }
     D_800FF230.f20 = 0;
     func_802BB550_de(0xC, &D_800FF230.completion, &D_800FF230.f20);
-    func_802A001C_de(D_800FF230.pool, 0x63, 0x200);
+    Resmgr_FillMemory(D_800FF230.pool, 0x63, 0x200);
     func_802BAC90_de(D_800FF230.queue, 0x63, D_0023C934, 0, D_800FF230.queueData, 0x93);
     func_802BB750_de(D_800FF230.queue);
 }

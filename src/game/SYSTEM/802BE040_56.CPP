@@ -31,7 +31,7 @@ OSPiHandle_s *func_802B8F48_de(void)
     h->domain = 0;
     h->speed = 0;
 
-    func_802A001C_de(&h->transferInfo, 0, sizeof(h->transferInfo));
+    Resmgr_FillMemory(&h->transferInfo, 0, sizeof(h->transferInfo));
 
     saveMask = func_802BCF30_de();
     table = &D_800D437C;

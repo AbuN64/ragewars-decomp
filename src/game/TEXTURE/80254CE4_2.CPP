@@ -15,7 +15,7 @@ extern void func_802BB750_de(void *thread);
 
 void func_802550F0_de(ResourceLoadWorker *worker, s32 id) {
     osCreateMesgQueue(&worker->requests, worker->messages, 0x80);
-    func_802A001C_de(worker->stack, id, 0x1000);
+    Resmgr_FillMemory(worker->stack, id, 0x1000);
     func_802BAC90_de(worker, id, &D_00255280, worker,
                      worker->stack + sizeof(worker->stack), D_800CD8AC_de);
     func_802BB750_de(worker);

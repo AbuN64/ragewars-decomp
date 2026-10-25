@@ -328,12 +328,12 @@ s32 func_8042F130_us_rev1(void *screen) {
             func_8022EF30_de(&D_800E54A4->players[i].records[j]);
         }
         for (j = 0; j < 16; j++) {
-            func_802A001C_de(D_800E54A4->players[i].names[j].code, 0, 0x14);
-            func_802A001C_de(D_800E54A4->players[i].names[j].text, 0, 0xA);
+            Resmgr_FillMemory(D_800E54A4->players[i].names[j].code, 0, 0x14);
+            Resmgr_FillMemory(D_800E54A4->players[i].names[j].text, 0, 0xA);
         }
-        func_802A001C_de(D_800E54A4->players[i].codes[2], 0, 0xA);
-        func_802A001C_de(D_800E54A4->players[i].codes[1], 0, 0xA);
-        func_802A001C_de(D_800E54A4->players[i].codes[0], 0, 0xA);
+        Resmgr_FillMemory(D_800E54A4->players[i].codes[2], 0, 0xA);
+        Resmgr_FillMemory(D_800E54A4->players[i].codes[1], 0, 0xA);
+        Resmgr_FillMemory(D_800E54A4->players[i].codes[0], 0, 0xA);
         D_800E54A4->players[i].slot = 0;
         D_800E54A4->players[i].choice = 0;
         for (j = 0; j < 4; j++) {

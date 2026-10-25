@@ -18,7 +18,7 @@ extern s32 D_8010EB94[], D_80146894;
 extern void *func_8025305C_de(), *func_8040EC30_de(), *func_80425C70_de(), *Achieve_GetResultText();
 extern s32 func_80265650_de(), func_80425014_de(), func_80425674_de(), func_8041F140_de();
 extern void func_8040E8D8_de(), func_8040E950_de(), func_8043C210_de(), func_8043C278_de(), func_80438A88_de(), func_80425D14_de();
-extern void func_80265688_de(), func_802A001C_de(), func_804259E0_de(), func_802A0C08_de(), func_802A025C_de(), Achieve_UpdatePlayerPreviewStats(), func_80438614_de();
+extern void func_80265688_de(), Resmgr_FillMemory(), func_804259E0_de(), func_802A0C08_de(), func_802A025C_de(), Achieve_UpdatePlayerPreviewStats(), func_80438614_de();
 extern void func_8041B110_de(), func_8028D380_de(), func_802A2394_de();
 extern char *func_802A0494_de();
 extern u8 D_800F00DC_raw[];
@@ -90,7 +90,7 @@ s32 func_80438880_eu(void *root) {
                 }
                 if (D_8015402C >= 0x23) {
                     func_80265688_de(D_800FEB54 + SG(g, s32, 0x94) * 0x98, D_80142358[SG(g, s32, 0x94) * 0x8C], 1);
-                    func_802A001C_de(D_800FEB54 + 0x2A + SG(g, s32, 0x94) * 0x98, 0, 5);
+                    Resmgr_FillMemory(D_800FEB54 + 0x2A + SG(g, s32, 0x94) * 0x98, 0, 5);
                     v = func_80425674_de(SG(g, s32, 0x94));
                     if (v >= 0) {
                         i = func_8041F140_de(v);

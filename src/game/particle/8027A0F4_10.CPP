@@ -138,7 +138,7 @@ void func_80282E98_de(void *particle, void *player) {
     void *temp_v0_2;
     void *temp_v1;
 
-    func_802A001C_de(&scratch, 0, 0xC);
+    Resmgr_FillMemory(&scratch, 0, 0xC);
     if (((Shared_Particle *)particle)->inst.type == 0x40F) {
         func_8025DE54_de(0xCDA, ((Shared_ActorView *)player)->position.vector,
                       (s32)&((Shared_ActorView *)player)->position.vector, -1);

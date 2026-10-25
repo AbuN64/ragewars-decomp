@@ -352,7 +352,7 @@ void *Resmgr_CopyBytes(void *destination, const void *source, s32 bytes) {
     return result;
 }
 
-/* Fills arg2 bytes at arg0 with the byte arg1, storing single bytes up to word alignment, replicated words through the middle and single bytes at the tail, and returns arg0. Adapted from func_802A001C_de. */
+/* Fills arg2 bytes at arg0 with the byte arg1, storing single bytes up to word alignment, replicated words through the middle and single bytes at the tail, and returns arg0. Adapted from Resmgr_FillMemory. */
 void *Resmgr_FillBytes(void *destination, int value, u32 count) {
     u8 *start;
     u8 *end;

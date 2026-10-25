@@ -25,7 +25,7 @@ void func_80294AB0_de(void *gameSession) {
         ((struct GameSession *)gameSession)->mode = index;
         func_802456A0_de();
         func_8025E214_de(-1);
-        func_80264854_de(0);
+        Render_SetControllerMode(0);
         callback = D_800CD788[((struct GameSession *)gameSession)->mode].callback;
         if (callback != 0) {
             callback(gameSession);

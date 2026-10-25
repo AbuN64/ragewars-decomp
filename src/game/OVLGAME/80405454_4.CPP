@@ -8,7 +8,7 @@
 
 /* Clears a record: the words at offsets 0, 4, 8, 0x18 and 0x1C, and the three-word array at 0xC
    from its last entry down. */
-void func_80405CA8_de(struct RecordRecAt1C *record) {
+void Ovlgame_ClearRenderRecord(struct RecordRecAt1C *record) {
     s32 i;
     record->a = 0;
     record->b = 0;

@@ -57,7 +57,7 @@ void func_80293DF0_de(GameSession *gameSession) {
 
 void func_80293E6C_de(void *arg0) {
     if (D_8014ADA0 != 0) {
-        func_80293824_de(arg0, 1);
+        Render_SetTransitionTarget(arg0, 1);
         func_802647C4_de();
     }
 }

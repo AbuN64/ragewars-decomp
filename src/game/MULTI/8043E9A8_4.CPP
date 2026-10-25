@@ -151,7 +151,7 @@ s32 func_8043ED48_de(void) {
 }
 
 s32 func_8043ED50_de(void) {
-    func_80293824_de(&D_8011FAC0, 8);
+    Render_SetTransitionTarget(&D_8011FAC0, 8);
     return 1;
 }
 

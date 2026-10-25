@@ -122,7 +122,7 @@ extern s32 func_802644FC_de(s32 arg0);
 
 extern int func_8026475C_de(int arg0);
 
-extern void func_80264854_de(s32 a);
+extern void Render_SetControllerMode(s32 a);
 
 extern void func_80268C7C_de(void *a, s32 b);
 
@@ -168,7 +168,7 @@ extern int func_80293440_de(u8 *a, u8 *b);
 
 struct GameSession;
 
-extern void func_80293824_de(struct GameSession *object, int value);
+extern void Render_SetTransitionTarget(struct GameSession *object, int value);
 
 extern void func_80293998_de(s32 arg0, s32 arg1);
 

@@ -309,7 +309,7 @@ void func_80437A50_de(void) {
         "sll        $a0, $a0, 3\n"
         "addu       $a0, $a0, $v0\n"
         "sll        $a0, $a0, 4\n"
-        "jal        func_802A001C_de\n"
+        "jal        Resmgr_FillMemory\n"
         "addu      $a0, $a0, $s0\n"
         "lui        $v0, %hi(D_800E5830)\n"
         "lw         $v0, %lo(D_800E5830)($v0)\n"

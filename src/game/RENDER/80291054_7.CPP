@@ -31,13 +31,13 @@ extern int D_800CD730,D_800D297C;
 
 
 void func_80292F48_de(void) {
-    func_802A001C_de((s32)D_800E7C00, 0, 0x80);
+    Resmgr_FillMemory((s32)D_800E7C00, 0, 0x80);
     func_802BAC90_de((s32)D_8011B590, 0, D_0029350C, 0, (s32)(D_800E7C00 + 0x80), D_800CD8A4_de);
     func_802BB750_de((s32)D_8011B590);
 }
 
 void func_80292FC0_de(s32 *gameSession, s32 arg1) {
-    func_802A001C_de((s32)D_800E7C80_de, 1, 0x8000);
+    Resmgr_FillMemory((s32)D_800E7C80_de, 1, 0x8000);
     func_802BAC90_de((s32)D_8011B7C0, 1, D_00293534, arg1, (s32)D_800EFC80_de, D_800CD8B4);
     func_802BB750_de((s32)D_8011B7C0);
     {

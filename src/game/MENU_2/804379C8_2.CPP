@@ -31,7 +31,7 @@ extern void MarkMenuEventHandled();
 extern void func_8041A430_de(void *, s32);
 
 /* Calls MarkMenuEventHandled; when func_80299A08_de reports 0x3D0 it sets the word at 0x10 of the menu block
-   D_800E5784 points to to 7 and clears five bytes at D_80102B7E through func_802A001C_de, for 0x3D1 it
+   D_800E5784 points to to 7 and clears five bytes at D_80102B7E through Resmgr_FillMemory, for 0x3D1 it
    sets that word to -1; then it calls func_8041A430_de on the block's first word with 2. Returns
    zero. */
 
@@ -107,7 +107,7 @@ s32 func_80437930_de(void) {
         break;
     case MENU_80437B10_976:
         D_800E5784->unk10 = 7;
-        func_802A001C_de(D_80102B7E, 0, 5);
+        Resmgr_FillMemory(D_80102B7E, 0, 5);
         break;
     }
     func_8041A430_de(D_800E5784->unk0, 2);

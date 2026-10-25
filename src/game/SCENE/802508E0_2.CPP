@@ -15,6 +15,7 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
 #include "COMMON/ENTRYRECAT18V3.H"
+#include "RESMGR/802A0888.H"
 
 /* One declaration per symbol for the whole unit; the functions below used to redeclare them locally with
  * conflicting types, which only the MIPS compiler accepted. */
@@ -76,7 +77,6 @@ extern s32 func_802BB750_de(void *);
 extern void func_80255CA0_de(IntrusiveList *, s32, s32);
 extern s32 func_80255D14_de(IntrusiveList *, void *);
 extern void func_802552E0_de(s32);
-extern void *func_802A001C_de(void *, int, u32);
 extern s32 D_002524B0;
 extern s32 D_800CD8BC;
 extern s32 D_801008F8;
@@ -148,7 +148,7 @@ void Scene_InitializeResourceCache(s32 unused, s32 count) {
         __osRestoreInt(unlockMask);
     }
     /* thread block D_801008F8 - 0x348 followed by its 0x800-byte stack at D_801008F8 */
-    func_802A001C_de(&D_801008F8, count, 0x800);
+    Resmgr_FillMemory(&D_801008F8, count, 0x800);
     thread = (char *)&D_801008F8 - 0x348;
     func_802BAC90_de(thread, count, &D_002524B0, 0, (char *)&D_801008F8 + 0x800, D_800CD8BC);
     func_802BB750_de(thread);
