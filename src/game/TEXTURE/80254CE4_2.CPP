@@ -10,15 +10,15 @@
 #include "sdk/os.h"
 #include "RESMGR/802A0888.H"
 
-extern void func_802BAC90_de(void *thread, s32 id, void *entry, void *argument, void *stack, s32 priority);
-extern void func_802BB750_de(void *thread);
+extern void osCreateThread(void *thread, s32 id, void *entry, void *argument, void *stack, s32 priority);
+extern void osStartThread(void *thread);
 
 void func_802550F0_de(ResourceLoadWorker *worker, s32 id) {
     osCreateMesgQueue(&worker->requests, worker->messages, 0x80);
     Resmgr_FillMemory(worker->stack, id, 0x1000);
-    func_802BAC90_de(worker, id, &D_00255280, worker,
+    osCreateThread(worker, id, &D_00255280, worker,
                      worker->stack + sizeof(worker->stack), D_800CD8AC_de);
-    func_802BB750_de(worker);
+    osStartThread(worker);
 }
 
 extern s32 func_802BB5F0_de(void *, s32);

@@ -139,7 +139,7 @@ void func_8023CDD4_de(RegionDesc *desc)
 extern char D_800FFCD0[];
 extern void func_802BCF70_de(u32, s32);
 extern void func_802BD010_de(u32, s32);
-extern void func_802BB750_de(void *);
+extern void osStartThread(void *);
 
 static __inline__ void writeLink(ResourcePageMapping **where, ResourcePageMapping *value) { *where = value; }
 
@@ -173,7 +173,7 @@ void Sched_FinishPageJob(ResourcePageJob *req) {
         }
     }
     req->thread->state = 2;
-    func_802BB750_de(req->thread);
+    osStartThread(req->thread);
     osSendMesg(D_800FFCD0, req, 1);
 }
 

@@ -35,9 +35,9 @@ extern OSMesgQueue D_800F2F40;
 extern void *D_800F2F58;
 extern OSThread_s D_800F2F60; /* host request thread */
 extern OSMesgQueue D_800F3110;
-void func_802BAC90_de(OSThread_s *thread, s32 id, void (*entry)(void *), void *arg, void *stackTop, s32 priority); /* osCreateThread */
-void func_802BB550_de(s32 event, OSMesgQueue *queue, void *message); /* osSetEventMesg */
-void func_802BB750_de(OSThread_s *thread); /* osStartThread */
+void osCreateThread(OSThread_s *thread, s32 id, void (*entry)(void *), void *arg, void *stackTop, s32 priority); /* osCreateThread */
+void osSetEventMesg(s32 event, OSMesgQueue *queue, void *message); /* osSetEventMesg */
+void osStartThread(OSThread_s *thread); /* osStartThread */
 extern s32 func_80200500_de(void);
 extern s32 func_802017E8_de(s32, s32, s32, s32);
 extern void func_80200880_de(u32, void *, s32);
@@ -52,9 +52,9 @@ void Libsn_InitializeHostRequestThread(s32 threadPriority) {
         osCreateMesgQueue(&D_800F2F40, &D_800F2CB0, 1);
         osCreateMesgQueue(&D_800F3110, &D_800F2F58, 1);
         osCreateMesgQueue(&D_800F1C90, &D_800F1C84, 1);
-        func_802BB550_de(0, &D_800F1C90, (void *)1);
-        func_802BAC90_de(&D_800F2F60, 0x4653, D_002018A0, 0, D_800F2CE0 - 0x30, threadPriority);
-        func_802BB750_de(&D_800F2F60);
+        osSetEventMesg(0, &D_800F1C90, (void *)1);
+        osCreateThread(&D_800F2F60, 0x4653, D_002018A0, 0, D_800F2CE0 - 0x30, threadPriority);
+        osStartThread(&D_800F2F60);
     }
 }
 #ifdef NON_MATCHING

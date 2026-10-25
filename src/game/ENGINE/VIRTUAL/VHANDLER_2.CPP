@@ -38,9 +38,9 @@ extern void func_8023CB60_de(Field_void_4 *base, Slot_func_8023B9C0_eu *slot);
 extern void func_8025637C_de(void *dst, void *rom, void *size, u32 extra);
 extern u32 System_GetMemorySize(void);
 extern void func_802AD370_de(s32 arg0, s32 arg1, s32 arg2, u32 addr, s32 arg4, s32 arg5);
-extern void func_802BAC90_de(void *queue, s32 count, void *arg2, s32 arg3, void *data, s32 arg5);
-extern void func_802BB550_de(s32 count, void *list, s16 *arg2);
-extern void func_802BB750_de(void *queue);
+extern void osCreateThread(void *queue, s32 count, void *arg2, s32 arg3, void *data, s32 arg5);
+extern void osSetEventMesg(s32 count, void *list, s16 *arg2);
+extern void osStartThread(void *queue);
 
 
 static inline void fill(void *dst, u8 value, s32 n) {
@@ -97,10 +97,10 @@ void func_8023B9C0_eu(void) {
         osSendMesg(&D_800FF230.jobs, &D_800FF230.channels[i], 1);
     }
     D_800FF230.f20 = 0;
-    func_802BB550_de(0xC, &D_800FF230.completion, &D_800FF230.f20);
+    osSetEventMesg(0xC, &D_800FF230.completion, &D_800FF230.f20);
     Resmgr_FillMemory(D_800FF230.pool, 0x63, 0x200);
-    func_802BAC90_de(D_800FF230.queue, 0x63, D_0023C934, 0, D_800FF230.queueData, 0x93);
-    func_802BB750_de(D_800FF230.queue);
+    osCreateThread(D_800FF230.queue, 0x63, D_0023C934, 0, D_800FF230.queueData, 0x93);
+    osStartThread(D_800FF230.queue);
 }
 #else
 INCLUDE_ASM("span_1000", func_8023B9C0_eu);
@@ -273,7 +273,7 @@ void func_8023B9B0_de(void) {
         "addiu      $a0, $zero, 0xC\n"
         "addiu      $a1, $s2, -0xA7C\n"
         "addiu      $a2, $s2, -0xA80\n"
-        "jal        func_802BB550_de\n"
+        "jal        osSetEventMesg\n"
         "sh        $zero, -0xA80($s2)\n"
         "addiu      $a0, $s2, -0x7B0\n"
         "addiu      $a1, $zero, 0x63\n"
@@ -288,9 +288,9 @@ void func_8023B9B0_de(void) {
         "addiu      $v0, $s2, -0x5B0\n"
         "sw         $v0, 0x10($sp)\n"
         "addiu      $v0, $zero, 0x93\n"
-        "jal        func_802BAC90_de\n"
+        "jal        osCreateThread\n"
         "sw        $v0, 0x14($sp)\n"
-        "jal        func_802BB750_de\n"
+        "jal        osStartThread\n"
         "addu      $a0, $s0, $zero\n"
         "lw         $ra, 0x2C($sp)\n"
         "lw         $s4, 0x28($sp)\n"
@@ -450,7 +450,7 @@ u64 func_802BADC0_de(void);
 void *func_8023CBC0_de(u16);
 void osWritebackDCacheAll(void);
 void func_802BD170_de(s32);
-void func_802BB750_de(void *);
+void osStartThread(void *);
 
 static __inline__ void detachPage(ResourcePageMapping *mapping) {
     if (readLink(&mapping->prev)) readLink(&mapping->prev)->next = readLink(&mapping->next);
@@ -514,7 +514,7 @@ void Virtual_HandleResourcePageRequest(void) {
                     appendPage((Field_void_4 *)&D_800FFE20, mapping);
                 }
                 thread->state = 2;
-                func_802BB750_de(thread);
+                osStartThread(thread);
                 return;
             }
             osRecvMesg(&D_800FF230.jobs, (void **)&job, 1);
@@ -558,5 +558,5 @@ void Virtual_HandleResourcePageRequest(void) {
     ((void (*)(void))0x80000400)();
     D_800CB3F8_de = -1;
     thread->state = 2;
-    func_802BB750_de(thread);
+    osStartThread(thread);
 }

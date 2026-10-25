@@ -8,7 +8,7 @@
 
 extern void func_802BC36C_de(void *arg0);
 extern s32 __osPopThread(OSMesgQueue *arg0);
-extern void func_802BB750_de(s32 arg0);
+extern void osStartThread(s32 arg0);
 
 
 
@@ -33,7 +33,7 @@ s32 func_802BB160_de(OSMesgQueue *arg0, void *arg1, s32 arg2) {
     arg0->msg[index] = arg1;
     arg0->validCount++;
     if (*arg0->mtqueue != 0) {
-        func_802BB750_de(__osPopThread(arg0));
+        osStartThread(__osPopThread(arg0));
     }
     __osRestoreInt(saved);
     return 0;

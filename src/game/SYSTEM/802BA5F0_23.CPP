@@ -14,11 +14,11 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/EXTERNS_11.H"
 #include "COMMON/NODERECAT1C.H"
-void func_802BB550_de(s32 event, OSMesgQueue *queue, void *message);
+void osSetEventMesg(s32 event, OSMesgQueue *queue, void *message);
 s32 func_802BADA0_de(OSThread_s *thread);
 void func_802BB5F0_de(OSThread_s *thread, s32 priority);
-void func_802BAC90_de(OSThread_s *thread, s32 id, void (*entry)(void *), void *arg, void *stack, s32 priority);
-void func_802BB750_de(OSThread_s *thread);
+void osCreateThread(OSThread_s *thread, s32 id, void (*entry)(void *), void *arg, void *stack, s32 priority);
+void osStartThread(OSThread_s *thread);
 extern OSThread_s D_80148850;
 extern struct OSMesgQueue D_80149A80;
 extern void *D_80149AA0[5];
@@ -39,8 +39,8 @@ void func_802BA5F0_eu(s32 arg0) {
         D_80149AE0.hdr.type = 0xE;
         D_80149AE0.hdr.pri = 0;
         D_80149AE0.hdr.retQueue = 0;
-        func_802BB550_de(7, &D_80149A80, &D_80149AC0);
-        func_802BB550_de(3, &D_80149A80, &D_80149AE0);
+        osSetEventMesg(7, &D_80149A80, &D_80149AC0);
+        osSetEventMesg(3, &D_80149A80, &D_80149AE0);
         temp_v0 = func_802BADA0_de(0);
         if (temp_v0 < arg0) {
             var_s3 = temp_v0;
@@ -54,9 +54,9 @@ void func_802BA5F0_eu(s32 arg0) {
         D_800D4420.acsQueue = 0;
         D_800D4420.dma = 0;
         D_800D4420.edma = 0;
-        func_802BAC90_de(&D_80148850, 0, D_002BA4C0, &D_800D4420, D_8014ED10_de + sizeof(D_8014ED10_de) / sizeof(D_8014ED10_de[0]), arg0);
+        osCreateThread(&D_80148850, 0, D_002BA4C0, &D_800D4420, D_8014ED10_de + sizeof(D_8014ED10_de) / sizeof(D_8014ED10_de[0]), arg0);
         func_802BA210_de();
-        func_802BB750_de(&D_80148850);
+        osStartThread(&D_80148850);
         __osRestoreInt(temp_v0_2);
         if (var_s3 != -1) {
             func_802BB5F0_de(0, var_s3);

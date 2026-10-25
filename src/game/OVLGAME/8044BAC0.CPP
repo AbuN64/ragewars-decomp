@@ -29,7 +29,7 @@ extern ControllerProfile D_8010F328[];
 extern signed char D_800CBC10;
 
 extern void func_80285AC4_de(char *, char *, s32);
-extern void func_802BB550_de(s32, char *, s32);
+extern void osSetEventMesg(s32, char *, s32);
 extern void func_802B7880_de(char *, char *, char *);
 extern void func_80264788_de(s32);
 
@@ -40,7 +40,7 @@ s16 func_8044AE70_de(void) {
     D_8010BBB8 = 2;
     osCreateMesgQueue(D_8010FC00, D_8010BBD8, 1);
     osCreateMesgQueue(&D_8010FBC0, D_8010B304, 1);
-    func_802BB550_de(5, D_8010FC00, 1);
+    osSetEventMesg(5, D_8010FC00, 1);
     func_802B7880_de(D_8010FC00, D_800CBC11, D_8010BBE0);
     func_802BAD80_de(0);
     D_800CBC1C = -1;

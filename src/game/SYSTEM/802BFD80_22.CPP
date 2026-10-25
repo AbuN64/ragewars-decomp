@@ -13,7 +13,7 @@ extern OSThread_s *D_800D526C;
 extern void D_002BC76C(void);
 extern u32 __osDisableInt(void);
 
-void func_802BAC90_de(OSThread_s *t, s32 id, void (*entry)(void *), void *arg, void *sp, s32 p)
+void osCreateThread(OSThread_s *t, s32 id, void (*entry)(void *), void *arg, void *sp, s32 p)
 {
     register u32 saveMask;
     u32 mask;

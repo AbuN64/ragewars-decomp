@@ -22,13 +22,13 @@ extern s32 D_80142C38;
 
 
 
-extern void func_802BB550_de(s32 slot, char *row, s32 text);
+extern void osSetEventMesg(s32 slot, char *row, s32 text);
 
 extern void func_802BA650_de(char *row, s32 text, s32 style);
 
-extern void func_802BAC90_de(char *list, s32 count, void *entryTemplate, Panel *owner, s32 arg4, s32 arg5);
+extern void osCreateThread(char *list, s32 count, void *entryTemplate, Panel *owner, s32 arg4, s32 arg5);
 
-extern void func_802BB750_de(char *list);
+extern void osStartThread(char *list);
 
 s32 func_8028F544_de(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg2, s32 arg3) {
     OSScTask_s *gfxListHead;
@@ -142,10 +142,10 @@ void func_8028F754_de(Panel *panel, s32 arg1, s32 priority, s32 arg3, unsigned c
     panel->mode = 4;
     osCreateMesgQueue(panel->row0, panel->row0Slots, 8);
     osCreateMesgQueue(panel->row1, panel->row1Slots, 8);
-    func_802BB550_de(4, panel->row0, 0x29B);
-    func_802BB550_de(9, panel->row0, 0x29C);
-    func_802BB550_de(0xE, panel->row0, 0x29D);
+    osSetEventMesg(4, panel->row0, 0x29B);
+    osSetEventMesg(9, panel->row0, 0x29C);
+    osSetEventMesg(0xE, panel->row0, 0x29D);
     func_802BA650_de(panel->row0, 0x29A, style);
-    func_802BAC90_de(panel->elements, 7, &D_0028E930, panel, arg1, priority);
-    func_802BB750_de(panel->elements);
+    osCreateThread(panel->elements, 7, &D_0028E930, panel, arg1, priority);
+    osStartThread(panel->elements);
 }

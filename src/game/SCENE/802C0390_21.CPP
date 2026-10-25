@@ -5,7 +5,7 @@
 
 extern struct IntPair D_80149B10[];
 
-void func_802BB550_de(s32 arg0, s32 arg1, s32 arg2) {
+void osSetEventMesg(s32 arg0, s32 arg1, s32 arg2) {
     extern u32 __osDisableInt(void);
     u32 mask;
     struct IntPair *e;

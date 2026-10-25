@@ -72,8 +72,8 @@ struct ResMgr {
 extern s32 func_80255920_de(void *, s32);
 extern s32 func_802567A4_de(OSMesgQueue *);
 extern u32 System_GetMemorySize(void);
-extern s32 func_802BAC90_de(void *, s32, void *, s32, void *, s32);
-extern s32 func_802BB750_de(void *);
+extern s32 osCreateThread(void *, s32, void *, s32, void *, s32);
+extern s32 osStartThread(void *);
 extern void func_80255CA0_de(IntrusiveList *, s32, s32);
 extern s32 func_80255D14_de(IntrusiveList *, void *);
 extern void func_802552E0_de(s32);
@@ -150,8 +150,8 @@ void Scene_InitializeResourceCache(s32 unused, s32 count) {
     /* thread block D_801008F8 - 0x348 followed by its 0x800-byte stack at D_801008F8 */
     Resmgr_FillMemory(&D_801008F8, count, 0x800);
     thread = (char *)&D_801008F8 - 0x348;
-    func_802BAC90_de(thread, count, &D_002524B0, 0, (char *)&D_801008F8 + 0x800, D_800CD8BC);
-    func_802BB750_de(thread);
+    osCreateThread(thread, count, &D_002524B0, 0, (char *)&D_801008F8 + 0x800, D_800CD8BC);
+    osStartThread(thread);
 }
 
 extern s32 D_80101134[];

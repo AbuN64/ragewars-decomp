@@ -7,7 +7,7 @@ extern OSThread_s *D_800D5270;
 extern u32 __osDisableInt(void);
 extern void func_802BC36C_de(void *);
 extern void *__osPopThread(void *);
-extern void func_802BB750_de(void *);
+extern void osStartThread(void *);
 
 s32 osRecvMesg(OSMesgQueue *queue, OSMesg *message, s32 block)
 {
@@ -28,7 +28,7 @@ s32 osRecvMesg(OSMesgQueue *queue, OSMesg *message, s32 block)
     queue->first = (queue->first + 1) % queue->msgCount;
     queue->validCount--;
     if (*queue->fullqueue != 0) {
-        func_802BB750_de(__osPopThread(&queue->fullqueue));
+        osStartThread(__osPopThread(&queue->fullqueue));
     }
     __osRestoreInt(mask);
     return 0;

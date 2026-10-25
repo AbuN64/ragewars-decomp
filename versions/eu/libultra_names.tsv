@@ -15,3 +15,6 @@ vram	name	basis
 0x802BB540	osRecvMesg	machine code
 0x802BB6C0	osSendMesg	machine code
 0x802BD1D0	__osDisableInt	machine code
+0x802BB7F0	osSetEventMesg	machine code
+0x802BAF30	osCreateThread	machine code
+0x802BB9F0	osStartThread	machine code

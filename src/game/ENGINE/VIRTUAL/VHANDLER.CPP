@@ -28,9 +28,9 @@ extern void func_8023CB60_de(Field_void_4 *base, Slot_func_8023B9C0_eu *slot);
 extern void func_8025637C_de(void *dst, void *rom, void *size, u32 extra);
 extern u32 System_GetMemorySize(void);
 extern void func_802AD370_de(s32 arg0, s32 arg1, s32 arg2, u32 addr, s32 arg4, s32 arg5);
-extern void func_802BAC90_de(void *queue, s32 count, void *arg2, s32 arg3, void *data, s32 arg5);
-extern void func_802BB550_de(s32 count, void *list, s16 *arg2);
-extern void func_802BB750_de(void *queue);
+extern void osCreateThread(void *queue, s32 count, void *arg2, s32 arg3, void *data, s32 arg5);
+extern void osSetEventMesg(s32 count, void *list, s16 *arg2);
+extern void osStartThread(void *queue);
 
 
 static inline void fill(void *dst, u8 value, s32 n) {
@@ -87,9 +87,9 @@ void func_8023B9C0_eu(void) {
         osSendMesg(&D_800FF230.jobs, &D_800FF230.channels[i], 1);
     }
     D_800FF230.f20 = 0;
-    func_802BB550_de(0xC, &D_800FF230.completion, &D_800FF230.f20);
+    osSetEventMesg(0xC, &D_800FF230.completion, &D_800FF230.f20);
     Resmgr_FillMemory(D_800FF230.pool, 0x63, 0x200);
-    func_802BAC90_de(D_800FF230.queue, 0x63, D_0023C934, 0, D_800FF230.queueData, 0x93);
-    func_802BB750_de(D_800FF230.queue);
+    osCreateThread(D_800FF230.queue, 0x63, D_0023C934, 0, D_800FF230.queueData, 0x93);
+    osStartThread(D_800FF230.queue);
 }
 #endif

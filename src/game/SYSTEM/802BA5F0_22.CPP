@@ -27,12 +27,12 @@ extern OSIoMesgCode802BA23C D_80149AE0;
 extern void D_002BA4C0(void *arg);
 
 
-extern void func_802BB550_de(s32 event, OSMesgQueue *mq, OSMesg msg);
+extern void osSetEventMesg(s32 event, OSMesgQueue *mq, OSMesg msg);
 extern s32 func_802BADA0_de(OSThread *t);
 extern void func_802BB5F0_de(OSThread *t, s32 pri);
-extern void func_802BAC90_de(OSThread *t, s32 id, void (*entry)(void *), void *arg, void *sp, s32 pri);
+extern void osCreateThread(OSThread *t, s32 id, void (*entry)(void *), void *arg, void *sp, s32 pri);
 
-extern void func_802BB750_de(OSThread *t);
+extern void osStartThread(OSThread *t);
 extern u32 __osDisableInt(void);
 
 void func_802BA350_de(s32 pri)
@@ -52,8 +52,8 @@ void func_802BA350_de(s32 pri)
     D_80149AE0.hdr.type = 14;
     D_80149AE0.hdr.pri = 0;
     D_80149AE0.hdr.retQueue = 0;
-    func_802BB550_de(7, &D_80149A80, &D_80149AC0);
-    func_802BB550_de(3, &D_80149A80, &D_80149AE0);
+    osSetEventMesg(7, &D_80149A80, &D_80149AC0);
+    osSetEventMesg(3, &D_80149A80, &D_80149AE0);
     oldPri = -1;
     myPri = func_802BADA0_de(0);
 
@@ -70,9 +70,9 @@ void func_802BA350_de(s32 pri)
     D_800D4420.acsQueue = 0;
     D_800D4420.dma = 0;
     D_800D4420.edma = 0;
-    func_802BAC90_de(&D_80148850, 0, D_002BA4C0, &D_800D4420, D_8014ED10_de + 0x1000 / sizeof(u64), pri);
+    osCreateThread(&D_80148850, 0, D_002BA4C0, &D_800D4420, D_8014ED10_de + 0x1000 / sizeof(u64), pri);
     func_802BA210_de();
-    func_802BB750_de(&D_80148850);
+    osStartThread(&D_80148850);
     __osRestoreInt(savedMask);
 
     if (oldPri != -1) {

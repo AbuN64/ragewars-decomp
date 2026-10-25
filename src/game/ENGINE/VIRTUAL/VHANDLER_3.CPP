@@ -138,16 +138,16 @@ void func_8023C8D4_de(struct PagerCounters *arg0) {
  * messages and dispatches on the request type to Virtual_HandleResourcePageRequest, Sched_FinishPageJob, func_8023CCD4_de or
  * func_8023CDD4_de. */
 extern char D_0023CA24[];
-extern void func_802BAC90_de(void *, s32, void *, void *, void *, s32);
-extern void func_802BB750_de(void *);
+extern void osCreateThread(void *, s32, void *, void *, void *, s32);
+extern void osStartThread(void *);
 extern void Sched_FinishPageJob(struct ResourcePageJob *job);
 
 void func_8023C924_de(void) {
     OSMesg request;
 
     Resmgr_FillMemory(D_800FF230.pool2, 0x62, sizeof(D_800FF230.pool2));
-    func_802BAC90_de(D_800FF230.queueData, 0x62, D_0023CA24, 0, D_800FF230.pool2 + sizeof(D_800FF230.pool2), 0x94);
-    func_802BB750_de(D_800FF230.queueData);
+    osCreateThread(D_800FF230.queueData, 0x62, D_0023CA24, 0, D_800FF230.pool2 + sizeof(D_800FF230.pool2), 0x94);
+    osStartThread(D_800FF230.queueData);
     for (;;) {
         osRecvMesg(&D_800FF230.completion, &request, 1);
         switch (((Request *)request)->type) {

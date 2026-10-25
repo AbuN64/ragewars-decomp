@@ -75,9 +75,9 @@ void func_80256C90_de(void);
 s32 func_802B72E0_de(u32);
 void func_802B24A0_de(void *, void *);
 void *func_802B0340_de(s32, s32, void *, s32, u32);
-void func_802BB550_de(s32, void *, s32);
-void func_802BAC90_de(void *, s32, void (*)(void), void *, void *, s32);
-void func_802BB750_de(void *);
+void osSetEventMesg(s32, void *, s32);
+void osCreateThread(void *, s32, void (*)(void), void *, void *, s32);
+void osStartThread(void *);
 
 /* Reset the DMA cache, allocate sample/task buffers, then start the audio worker. */
 void Texture_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioInitializeTiming *timing) {
@@ -117,11 +117,11 @@ void Texture_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioIniti
     osCreateMesgQueue(&D_80107E80, D_801076D0, 10);
     osCreateMesgQueue(&D_80107E00, D_801076A8, 10);
     osCreateMesgQueue(&D_80107DD8, D_80107EA8, 60);
-    func_802BB550_de(6, &D_80107E00, 7);
+    osSetEventMesg(6, &D_80107E00, 7);
     D_80107DFC = 0;
     D_80107EA0 = config->heap;
     Resmgr_FillMemory(D_800E5400, 8, sizeof(D_800E5400));
-    func_802BAC90_de(D_801076F8, 8, (void (*)(void))&D_00256C90, 0, D_800E5400 + sizeof(D_800E5400), priority);
-    func_802BB750_de(D_801076F8);
+    osCreateThread(D_801076F8, 8, (void (*)(void))&D_00256C90, 0, D_800E5400 + sizeof(D_800E5400), priority);
+    osStartThread(D_801076F8);
     osSendMesg(&D_80107E00, (OSMesg)7, 0);
 }

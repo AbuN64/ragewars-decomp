@@ -8,12 +8,12 @@
 #include "sdk/os.h"
 #include "RESMGR/802A0888.H"
 
-extern void func_802BB550_de(s32 arg0, s32 arg1, s32 arg2);
+extern void osSetEventMesg(s32 arg0, s32 arg1, s32 arg2);
 
 
-extern void func_802BAC90_de(s32 arg0, s32 arg1, void *arg2, s32 arg3, s32 arg4, s32 arg5);
+extern void osCreateThread(s32 arg0, s32 arg1, void *arg2, s32 arg3, s32 arg4, s32 arg5);
 
-extern void func_802BB750_de(s32 arg0);
+extern void osStartThread(s32 arg0);
 
 extern char D_0025657C;
 
@@ -33,7 +33,7 @@ void func_80256280_de(s32 arg0, s32 count) {
     osCreateMesgQueue(arg0 + 0x230, arg0 + 0x248, 0x200);
     s0 = arg0 + 0xA48;
     osCreateMesgQueue(s0, arg0 + 0xA60, 1);
-    func_802BB550_de(8, s0, 0x7D1);
+    osSetEventMesg(8, s0, 0x7D1);
     func_80255CA0_de(arg0 + 0x5068, 0x18, 0x1C);
     func_80255CA0_de(arg0 + 0x507C, 0x18, 0x1C);
     s1 = 0;
@@ -45,8 +45,8 @@ void func_80256280_de(s32 arg0, s32 count) {
         s0 += 0x20;
     } while (s1 < 0x210);
     Resmgr_FillMemory(arg0 + 0xA68, count, 0x400);
-    func_802BAC90_de(arg0, count, &D_0025657C, arg0, arg0 + 0xE68, D_800CD8C4_de);
-    func_802BB750_de(arg0);
+    osCreateThread(arg0, count, &D_0025657C, arg0, arg0 + 0xE68, D_800CD8C4_de);
+    osStartThread(arg0);
 }
 
 void func_8025637C_de(struct CartridgeReadWorker *cartridgeReadWorker, u32 arg1, s32 arg2, void *extra) {
