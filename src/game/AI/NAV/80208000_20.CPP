@@ -31,15 +31,15 @@ s32 func_8020DDF4_eu(ActorRec *actor) {
     s32 first, last;
     s32 keyCount;
     BallisticInstance *instance;
-    BallisticInstance *temp_v0_5;
+    BallisticInstance *activeInstance;
     f32 temp_fs0_2;
-    f32 temp_fs0f;
-    f32 temp_fs1;
+    f32 horizontalDistance;
+    f32 heightDelta;
     f32 scale;
-    f32 temp_ft0;
+    f32 deltaX;
     f32 lateral;
     f32 temp_fv0_4;
-    f32 temp_fv0f;
+    f32 deltaZ;
     f32 temp_fv0f_2;
     f32 temp_fv1;
     f32 temp_fv1_4;
@@ -75,14 +75,14 @@ s32 func_8020DDF4_eu(ActorRec *actor) {
             delta = actor->destination;
             temp_fv1f = delta.x - current.x;
             temp_fv1 = delta.y - current.y;
-            temp_fv0f = delta.z - current.z;
+            deltaZ = delta.z - current.z;
             delta.x = temp_fv1f;
             delta.y = temp_fv1;
-            delta.z = temp_fv0f;
-            actor->field264 = Math_Sqrtf((temp_fv1f * temp_fv1f) + (temp_fv1 * temp_fv1) + (temp_fv0f * temp_fv0f));
-            temp_fs1 = delta.y;
+            delta.z = deltaZ;
+            actor->field264 = Math_Sqrtf((temp_fv1f * temp_fv1f) + (temp_fv1 * temp_fv1) + (deltaZ * deltaZ));
+            heightDelta = delta.y;
             delta.y = 0;
-            temp_fs0f = Math_Sqrtf((delta.x * delta.x) + (delta.z * delta.z));
+            horizontalDistance = Math_Sqrtf((delta.x * delta.x) + (delta.z * delta.z));
             {
                 switch (trajectoryMode) {
                 case 10:
@@ -105,14 +105,14 @@ s32 func_8020DDF4_eu(ActorRec *actor) {
                 default:
                 case 7:
                 case 11:
-                if (temp_fs0f == 0.0f) {
-                    if (temp_fs1 < 0.0f) {
+                if (horizontalDistance == 0.0f) {
+                    if (heightDelta < 0.0f) {
                         actor->field248 = (f32) -90.0f;
                     } else {
                         actor->field248 = (f32) 90.0f;
                     }
                 } else {
-                    actor->field248 = (f32) (func_8029C044_de(temp_fs1, temp_fs0f) * 57.2957764f);
+                    actor->field248 = (f32) (func_8029C044_de(heightDelta, horizontalDistance) * 57.2957764f);
                 }
                 actor->field270 = 0;
                 actor->field274 = 0;
@@ -120,14 +120,14 @@ s32 func_8020DDF4_eu(ActorRec *actor) {
                 actor->field254 = actor->field250 = 0.0f;
                 return 1;
                 }
-                    if (temp_fs0f == 0.0f) {
-                        if (temp_fs1 < 0.0f) {
+                    if (horizontalDistance == 0.0f) {
+                        if (heightDelta < 0.0f) {
                             actor->field278 = -90.0f;
                         } else {
                             actor->field278 = 90.0f;
                         }
                     } else {
-                        actor->field278 = func_8029C044_de(temp_fs1, temp_fs0f) * 57.2957764f;
+                        actor->field278 = func_8029C044_de(heightDelta, horizontalDistance) * 57.2957764f;
                     }
                     actor->field24C = actor->field278;
                     if (45.0f < actor->field278) {
@@ -189,23 +189,23 @@ block_43:
                     scale = func_80285630_de((temp_v0_3->speedHi << 0x10) | temp_v0_3->speedLo);
                     temp_v0_4 = temp_s0_3->unk30;
                     lateral = func_80285630_de((temp_v0_4->gravityHi << 0x10) | temp_v0_4->gravityLo);
-                    temp_v0_5 = actor->instance;
-                    current = temp_v0_5->header.spatial.position;
+                    activeInstance = actor->instance;
+                    current = activeInstance->header.spatial.position;
                     delta = actor->destination;
-                    temp_ft0 = delta.x - current.x;
+                    deltaX = delta.x - current.x;
                     temp_fv1f_2 = delta.y - current.y;
                     temp_fv1_4 = delta.z - current.z;
-                    delta.x = temp_ft0;
+                    delta.x = deltaX;
                     delta.y = temp_fv1f_2;
                     delta.z = temp_fv1_4;
-                    actor->field264 = Math_Sqrtf((temp_ft0 * temp_ft0) + (temp_fv1f_2 * temp_fv1f_2) + (temp_fv1_4 * temp_fv1_4));
-                    temp_fs1 = delta.y;
+                    actor->field264 = Math_Sqrtf((deltaX * deltaX) + (temp_fv1f_2 * temp_fv1f_2) + (temp_fv1_4 * temp_fv1_4));
+                    heightDelta = delta.y;
                     delta.y = 0;
-                    temp_fs0f = Math_Sqrtf((delta.x * delta.x) + (delta.z * delta.z));
+                    horizontalDistance = Math_Sqrtf((delta.x * delta.x) + (delta.z * delta.z));
                     temp_fv0_4 = Math_Cosf(actor->field278 * 0.0174532942f);
                     temp_fs0_2 = temp_fv0_4 * temp_fv0_4;
-                    temp_fv0f_2 = (func_8029DD3C_de(actor->field278 * 0.0174532942f) * temp_fs0f) + ((lateral * (temp_fs0f * temp_fs0f)) / (2.0f * (scale * scale) * temp_fs0_2));
-                    if (((temp_fs1 - 1.0f) <= temp_fv0f_2) && (temp_fv0f_2 <= (temp_fs1 + 1.0f))) {
+                    temp_fv0f_2 = (func_8029DD3C_de(actor->field278 * 0.0174532942f) * horizontalDistance) + ((lateral * (horizontalDistance * horizontalDistance)) / (2.0f * (scale * scale) * temp_fs0_2));
+                    if (((heightDelta - 1.0f) <= temp_fv0f_2) && (temp_fv0f_2 <= (heightDelta + 1.0f))) {
                         if (func_8020E674_de(actor, scale, lateral) != 0) {
                             temp_v0_6 = actor->field284;
                             if (temp_v0_6 > 0) {
@@ -280,7 +280,7 @@ block_54:
                         actor->field254 = (f32) (actor->field278 - actor->field24C);
                         return 1;
                     }
-                    if (temp_fv0f_2 < (temp_fs1 - 1.0f)) {
+                    if (temp_fv0f_2 < (heightDelta - 1.0f)) {
                         switch (actor->field284) {
                         case 0: actor->field27C = actor->field278; break;
                         case 1: case 2: case 3: actor->field280 = actor->field278; break;
