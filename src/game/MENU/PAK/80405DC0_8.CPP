@@ -285,6 +285,7 @@ static __inline__ char *pakPrompt(s32 *channel) {
     }
     return result;
 }
+/* us-rev1: 11/94 aligned edits remain: the dead pakPrompt switch keeps ch in a register, checksum address load order. */
 void func_80406F7C_de(Shared_PakMenu *menu) {
     s32 ch;
     ObjRecAt5DC *player;
@@ -299,11 +300,11 @@ void func_80406F7C_de(Shared_PakMenu *menu) {
     D_8015375C = 0;
     ch = menu->slot->unk4;
     player = menu->player;
-    prompt = pakPrompt(&ch);
     if (D_800E28C0 != 0) {
         D_80153784 = 1;
         return;
     }
+    prompt = pakPrompt(&ch);
     func_80404E28_de(menu->slot->unk4);
     if (Pak_GetStatus(ch) == 0) {
         Pak_CreateSaveSnapshot(player);
