@@ -65,6 +65,14 @@ u16 Audio_ReadPackedSamples(u16 *out, u16 width, u16 count, s16 signExtend, Deco
 INCLUDE_ASM("span_1000", Audio_ReadPackedSamples);
 #endif
 
+/* Copies a dictionary phrase's samples to out; returns how many. */
+static inline s16 Audio_CopyPhrase(DecodePhrase *phrase, u16 *out) {
+    s16 j;
+    for (j = 0; j < phrase->count; j++) {
+        out[j] = phrase->samples[j].value;
+    }
+    return j;
+}
 s32 Audio_DecodeHuffmanSamples(DecodeBlock *blocks, u16 *samples, s16 sampleCount,
                                s16 *blocksDone, DecodeState *stream) {
     u16 node;
@@ -74,11 +82,8 @@ s32 Audio_DecodeHuffmanSamples(DecodeBlock *blocks, u16 *samples, s16 sampleCoun
     u16 value;
     s32 mask, high;
     u16 topbit;
-    s16 j;
     s32 dictOffset;
     u16 next;
-    DecodePhrase *phrase;
-    u16 *dst;
 
     node = 0;
     block = 0;
@@ -116,15 +121,9 @@ s32 Audio_DecodeHuffmanSamples(DecodeBlock *blocks, u16 *samples, s16 sampleCoun
                         D_800D54BA = high << (16 - next);
                         samples[(s16)mask] = value | (high >> next);
                     } else if (mask == 0xA00) {
-                        j = 0;
                         dictOffset = (value & 0xFF) * sizeof(DecodePhrase);
-                        dst = (u16 *)((s16)output * sizeof(u16) + (s32)samples);
-                        phrase = (DecodePhrase *)(dictOffset + (s32)table->phrases);
-                        while ((s16)j < phrase->count) {
-                            dst[(s16)j] = phrase->samples[(s16)j].value;
-                            j++;
-                        }
-                        output += (s32)((u32)j << 16) >> 16;
+                        output += Audio_CopyPhrase((DecodePhrase *)(dictOffset + (s32)table->phrases),
+                                                   &samples[output]);
                     } else if (mask == 0xB00) {
                         while ((s16)output < sampleCount) {
                             samples[(s16)output++] = 0;
