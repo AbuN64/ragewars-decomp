@@ -2971,3 +2971,4 @@ literals_Render_BeginFrameDisplayList = 0x800CA518; // rom:0xCB118 size:0x4
 literals_VectorAngle = 0x800CABE8; // rom:0xCB7E8 size:0x2C
 literals_Nav_MeasureWheelClearance = 0x800C7088; // rom:0xC7C88 size:0x18
 literals_Render_UpdateFillMode = 0x800CAFF4; // rom:0xCBBF4 size:0x24
+literals_Engine_LoadSelectedTexture = 0x800CA5D0; // rom:0xCB1D0 size:0x3C

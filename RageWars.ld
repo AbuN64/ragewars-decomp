@@ -18420,8 +18420,8 @@ SECTIONS
         src/game/RENDER/800CA5C4.CPP.o(.rodata .rdata);
         src/game/RENDER/800CA5C8.CPP.o(.rodata .rdata);
         src/game/RENDER/802944E8_3.CPP.o(.rodata .rdata);
-        src/game/TEXTURE/800CA5D0.CPP.o(.rodata .rdata);
-        src/game/TEXTURE/80294C64_18.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/ENGINE/TENGINE.CPP.o */;
+        src/game/ENGINE/TENGINE.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C.CPP.o(.data);
         src/game/MATH/800CA60C_2.CPP.o(.rodata .rdata);
@@ -25542,8 +25542,7 @@ SECTIONS
         src/game/RENDER/800CA5C4.CPP.o(.bss .sbss COMMON);
         src/game/RENDER/800CA5C8.CPP.o(.bss .sbss COMMON);
         src/game/RENDER/802944E8_3.CPP.o(.bss .sbss COMMON);
-        src/game/TEXTURE/800CA5D0.CPP.o(.bss .sbss COMMON);
-        src/game/TEXTURE/80294C64_18.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/TENGINE.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_2.CPP.o(.bss .sbss COMMON);
         src/game/TEXTURE/80294C64_19.CPP.o(.bss .sbss COMMON);

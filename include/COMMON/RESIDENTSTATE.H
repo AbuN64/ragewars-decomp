@@ -120,7 +120,7 @@ extern s32 D_auto_800D2AF4;
 
 extern s32 D_auto_800D2AF8;
 
-extern void func_80294CA0_us_rev1(void);
+extern void Engine_LoadSelectedTexture(void);
 extern u8 D_800CA60C[0x14];
 extern u8 D_auto_800CA620[0x14];
 extern f32 D_auto_800CA634;

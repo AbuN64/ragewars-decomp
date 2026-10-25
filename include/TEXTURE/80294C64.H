@@ -25,7 +25,7 @@ typedef struct FrontendInputSelector {
 } FrontendInputSelector;
 struct Node80253610;
 /* The us-rev1 resident texture menu state (D_8014AEB0, 0x21BC bytes): func_802954E0_us_rev1 clears it,
-   func_80294CA0_us_rev1 loads the selected entry and func_80294F1C_us_rev1 steps the selection. */
+   Engine_LoadSelectedTexture loads the selected entry and func_80294F1C_us_rev1 steps the selection. */
 struct MenuGlobalRecAt21B8 {
     u8 alternateTitle; /* +0x0 */
     u8 state; /* +0x1 */

@@ -3,36 +3,6 @@
 #include "TEXTURE/80294C64.H"
 
 #if defined(VERSION_US_REV1)
-#ifdef NON_MATCHING
-/* The names m2c output assumes (its valid-syntax macros), so a draft compiles on its own. */
-#ifndef NULL
-#define NULL ((void *)0)
-#endif
-typedef int M2C_UNK;
-typedef signed char M2C_UNK8;
-typedef short M2C_UNK16;
-typedef int M2C_UNK32;
-typedef long long M2C_UNK64;
-#define M2C_FIELD(base, type, offset) (*(type)((char *)(base) + (offset)))
-#define M2C_BITWISE(type, expr) ((type)(expr))
-#define M2C_LWL(expr) (expr)
-#define M2C_FIRST3BYTES(expr) (expr)
-#define M2C_UNALIGNED32(expr) (expr)
-#define M2C_ERROR(desc) (0)
-#define M2C_TRAP_IF(cond) (0)
-#define M2C_BREAK(...) (0)
-#define M2C_SYNC(...) (0)
-#define M2C_DCACHE_CLEAN(addr) (0)
-#define M2C_DCACHE_INVALIDATE(addr) (0)
-#define M2C_DCACHE_CLEAN_INVALIDATE(addr) (0)
-#define M2C_DCACHE_BLOCK_SETZERO(addr) (0)
-#define M2C_DCACHE_BLOCK_SETZERO_LOCKED(addr) (0)
-#define M2C_ICACHE_INVALIDATE(addr) (0)
-#define M2C_PREFETCH(addr) (0)
-#define M2C_PREFETCH_STORE(addr) (0)
-#define GLUE_F64(a, b) (0.0)
-#define MULT_HI(a, b) (0)
-#define MULTU_HI(a, b) (0)
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENTSTATE.H"
 #include "COMMON/UNUSED.H"
@@ -44,86 +14,70 @@ typedef long long M2C_UNK64;
 #include "TYPES.H"
 #include "stddef.h"
 u32 Render_LocatePackSection(s32, s32, s32, u32 *);
-s32 func_802BD400_de(void *);
+s32 func_802BD400_de(const char *);
 extern s32 D_00295B90_us_rev1;
-extern s32 D_8014AEC0;
-extern Node80253610 *D_8014AECC;
+/* Separate-object views of the menu state words (each access has its own lui; DATA-FRAME-O1 F2b). */
+extern struct Node80253610 *D_8014AECC;
 extern s32 D_8014AED0;
 extern s32 D_8014AED4;
-extern s8 D_8014CFE8_us_rev1;
-extern s8 D_auto_800CA5F8;
-extern s8 D_auto_rodata_func_80294CA0_us_rev1_800CA5D0_unclaimed_CB1E0;
-extern s8 D_auto_src_ragewars_resident_strings_CB1D0_us_rev1;
-
-/* 132/159 words (positional); remaining: one delay-slot fill (move s5,s4 belongs in the bne delay slot; ours annuls with bnel), same instructions otherwise */
-void func_80294CA0_us_rev1(void) {
-    u32 sp28;
+/* Releases the previous texture viewer entry, loads entry D_8014AEB0.selectionIndex from the resident pack,
+   wraps the frame selection into its texture/palette tables and prints the "tex N frm F of C" title. */
+void Engine_LoadSelectedTexture(void) {
+    u32 size;
     u32 key;
-    s32 **res;
-    s32 *s3;
-    s32 *s2;
-    s32 hi;
-    s32 lo;
-    s32 idx;
-    s32 *s5;
-    char *s1;
-    s32 *sel;
-    s32 t;
-    void *v;
-    Shared_World *w;
+    struct Node80253610 *resource;
+    s32 *entries;
+    s32 *textures;
+    s32 *palettes;
+    s32 texture;
+    s32 palette;
+    s32 frame;
     u8 *name;
     s32 i;
-    w = &D_8011FE88;
+    Shared_World *world = &D_8011FE88;
+
     if (D_8014AECC != NULL) {
         Scene_UnlockResource(NULL, D_8014AECC);
     }
-    sel = (s32 *)&D_8014AEBC;
     D_8014AECC = NULL;
     D_8014AED4 = 0;
     D_8014AED8 = 0;
     D_8014AED0 = 0;
-    key = Render_LocatePackSection(w->unk50, w->unk20, sel[0], &sp28);
-    res = Scene_RequestResource(0, key - 1, key, sp28, 9, -1, &D_00295B90_us_rev1, &D_auto_src_ragewars_resident_strings_CB1D0_us_rev1, 1);
-    s3 = *res;
-    s2 = Render_GetPackSection(s3, 1);
-    s5 = Render_GetPackSection(s3, 2);
-    if (sel[1] < 0) {
-        s32 *p = &sel[1];
-        do {
-            t = *p + *s2;
-            *p = t;
-        } while (t < 0);
+    key = Render_LocatePackSection(world->unk50, world->unk20, D_8014AEB0.selectionIndex, &size);
+    resource = Scene_RequestResource(0, key - 1, key, size, 9, -1, &D_00295B90_us_rev1, "Artsend Texture", 1);
+    entries = (s32 *)resource->field0;
+    textures = Render_GetPackSection(entries, 1);
+    palettes = Render_GetPackSection(entries, 2);
+    while (D_8014AEB0.selectionValue < 0) {
+        D_8014AEB0.selectionValue += *textures;
     }
-    s1 = (char *)&D_8014AEC0;
-    hi = *(s32 *)s1 % *s2;
-    lo = *(s32 *)s1 % *s5;
-    *(s32 ***)(s1 + 0xC) = res;
-    *(void **)(s1 + 0x14) = Render_GetPackSection(s2, hi);
-    *(void **)(s1 + 0x18) = Render_GetPackSection(s5, lo);
-    v = Render_GetPackSection(s3, 0);
-    *(s32 **)(s1 + 0x2124) = s5;
-    *(void **)(s1 + 0x10) = v;
-    *(s32 *)(s1 + 8) = 0;
-    *(s32 **)(s1 + 0x211C) = s3;
-    *(s32 **)(s1 + 0x2120) = s2;
-    if (*s3 == 4) {
-        s5 = (s32 *)hi;
-        name = Render_GetPackSection(s3, 3);
-        for (i = 0; i < func_802BD400_de(name); i++) {
-            if (name[i] == 0x2E) {
-                name[i] = 0;
+    texture = D_8014AEB0.selectionValue % *textures;
+    palette = D_8014AEB0.selectionValue % *palettes;
+    D_8014AEB0.resource = resource;
+    D_8014AEB0.textureOverride = Render_GetPackSection(textures, texture);
+    D_8014AEB0.paletteOverride = Render_GetPackSection(palettes, palette);
+    D_8014AEB0.selector = Render_GetPackSection(entries, 0);
+    D_8014AEB0.overridesOff = 0;
+    D_8014AEB0.entryTable = entries;
+    D_8014AEB0.textureTable = textures;
+    D_8014AEB0.paletteTable = palettes;
+    frame = texture;
+    if (*entries == 4) {
+        name = Render_GetPackSection(entries, 3);
+        for (i = 0; i < func_802BD400_de((char *)name); i++) {
+            if (name[i] == '.') {
+                name[i] = '\0';
                 break;
             }
         }
-        func_802BD320_de(&D_8014CFE8_us_rev1, &D_auto_rodata_func_80294CA0_us_rev1_800CA5D0_unclaimed_CB1E0, *(s32 *)(&D_8014CFE8_us_rev1 - 0x212C), (s32)s5, *s2, name);
+        func_802BD320_de(D_8014AEB0.displayData, "tex %d frm %d of %d, %s", D_8014AEB0.selectionIndex, frame,
+                         *textures, name);
     } else {
-        func_802BD320_de(s1 + 0x2128, &D_auto_800CA5F8, *(s32 *)(s1 - 4), hi, *s2);
+        func_802BD320_de(D_8014AEB0.displayData, "tex %d frm %d of %d", D_8014AEB0.selectionIndex, texture,
+                         *textures);
     }
-    D_8014D068 = 0;
+    D_8014AEB0.frameCount = 0;
 }
-#else
-INCLUDE_ASM("span_1000", func_80294CA0_us_rev1);
-#endif
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -291,7 +245,7 @@ void func_80294F1C_us_rev1(void) {
         }
         D_8014AEB0.frameCount += 1;
         if (D_8014AEB0.titleWasShown != 0) {
-            func_80294CA0_us_rev1();
+            Engine_LoadSelectedTexture();
             D_8014AEB0.titleWasShown = 0;
         }
         func_802A84F8_de();
