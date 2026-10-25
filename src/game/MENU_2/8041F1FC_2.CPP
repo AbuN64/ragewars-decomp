@@ -49,7 +49,7 @@ s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
         if (temp_v0_2 <= 0) {
             Render_PlayFlatSound(0xE79);
             Frontend_SetWidgetFlag08(D_800E42D0->promptItem, 1);
-            func_80419F58_de(D_800E42D0->prompt, 4);
+            Menu_StartFlicker(D_800E42D0->prompt, 4);
             D_800E42D0->phase = 4;
             D_800E42D0->timer = 4;
         }

@@ -22,10 +22,10 @@
 
 
 
-extern Node_func_8041B610_de *Scene_AllocateMemory(s32 size);
+extern NodeMenuCreateOverlayNode *Scene_AllocateMemory(s32 size);
 
 
-extern void func_8040EDE4_de(Node_func_8041B610_de *parent, Node_func_8041B610_de *node);
+extern void func_8040EDE4_de(NodeMenuCreateOverlayNode *parent, NodeMenuCreateOverlayNode *node);
 
 /* Unless slot index is locked, hides the node shown in that slot, finds node id under the context root through func_8040EC30_de, shows it, and stores it in that slot or, in shared mode, in all four slots; then clears the slot's lock. */
 
@@ -36,7 +36,7 @@ extern void func_8040EDE4_de(Node_func_8041B610_de *parent, Node_func_8041B610_d
 
 
 
-extern Node_func_8041B6E8_de *func_8040EC30_de(void *root, s32 id);
+extern NodeMenuShowSlotById *func_8040EC30_de(void *root, s32 id);
 
 /* Unless slot index is locked, hides the node in that slot and shows the given node through func_8040E928_de, storing it in that slot or, in shared mode, in all four slots. */
 
@@ -80,12 +80,12 @@ extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape
 
 extern void Frontend_DrawVisibleSiblings(void *, Args);
 
-void func_8041B5E0_de(void) {
+void Menu_RegisterOverlayClass(void) {
     func_802982C4_de(0x7D5, D_0041B970, D_0041BA00, 3);
 }
 
-Node_func_8041B610_de *func_8041B610_de(OwnerRecAt44 *owner, s32 value) {
-    Node_func_8041B610_de *node;
+NodeMenuCreateOverlayNode *Menu_CreateOverlayNode(OwnerRecAt44 *owner, s32 value) {
+    NodeMenuCreateOverlayNode *node;
 
     node = Scene_AllocateMemory(0x70);
     Resmgr_FillBytes(node, 0, 0x70);
@@ -100,9 +100,9 @@ Node_func_8041B610_de *func_8041B610_de(OwnerRecAt44 *owner, s32 value) {
     return owner->overlay = node;
 }
 
-void func_8041B6E8_de(OwnerRecAt8V1 *owner, s32 index, s32 id) {
+void Menu_ShowSlotById(OwnerRecAt8V1 *owner, s32 index, s32 id) {
     sm_dlmultiuser *context;
-    Node_func_8041B6E8_de *node;
+    NodeMenuShowSlotById *node;
     s32 i;
 
     context = owner->context;
@@ -166,7 +166,7 @@ s16 func_8041B810_de(struct SlotsRecAt4C *object, s32 index) {
 }
 
 void func_8041B828_de(sm_dlmultiuser *context, s32 index, s32 id) {
-    Node_func_8041B6E8_de *node;
+    NodeMenuShowSlotById *node;
     s32 i;
 
     if (context->locked[index] == 0) {
@@ -185,7 +185,7 @@ void func_8041B828_de(sm_dlmultiuser *context, s32 index, s32 id) {
     }
 }
 
-void Menu_ShowSlotNode(sm_dlmultiuser *context, s32 index, Node_func_8041B6E8_de *node) {
+void Menu_ShowSlotNode(sm_dlmultiuser *context, s32 index, NodeMenuShowSlotById *node) {
     s32 i;
 
     if (context->locked[index] == 0) {

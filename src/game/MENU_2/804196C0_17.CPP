@@ -59,7 +59,7 @@ s32 func_80419F38_de(struct ObjectRecAt84 *object) {
     return object->busy == 0;
 }
 
-void func_80419F58_de(struct ObjectCode804196C0 *object, s32 count) {
+void Menu_StartFlicker(struct ObjectCode804196C0 *object, s32 count) {
     func_80419C84_de(object, count);
     object->busy = 1;
     object->target->value = object->entries[object->index];

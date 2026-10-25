@@ -138,7 +138,7 @@ void func_80422B94_de(void) {
         "lui        $v0, %hi(D_800E4518)\n"
         "lw         $v0, %lo(D_800E4518)($v0)\n"
         "lw         $a0, 0x38($v0)\n"
-        "jal        func_80419F58_de\n"
+        "jal        Menu_StartFlicker\n"
         "addiu     $a1, $zero, 0x4\n"
         "lui        $v1, %hi(D_800E4518)\n"
         "lw         $v1, %lo(D_800E4518)($v1)\n"

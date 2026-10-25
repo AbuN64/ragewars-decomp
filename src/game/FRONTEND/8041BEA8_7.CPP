@@ -29,11 +29,11 @@ s32 func_8041CEB0_us_rev1(void *arg0) {
 
     D_800E3590 = (func_8041F2A0_MenuBlock *) Scene_AllocateMemory(528);
     D_800E3590->root = arg0;
-    D_800E3590->list = func_8041B610_de((s32) arg0, 4);
-    func_8041B6E8_de((s32) arg0, 0, 513);
-    func_8041B6E8_de((s32) arg0, 1, 513);
-    func_8041B6E8_de((s32) arg0, 2, 513);
-    func_8041B6E8_de((s32) arg0, 3, 513);
+    D_800E3590->list = Menu_CreateOverlayNode((s32) arg0, 4);
+    Menu_ShowSlotById((s32) arg0, 0, 513);
+    Menu_ShowSlotById((s32) arg0, 1, 513);
+    Menu_ShowSlotById((s32) arg0, 2, 513);
+    Menu_ShowSlotById((s32) arg0, 3, 513);
     /* func_8041B610_de is published to this unit as handing back a word while func_8041B968_de is
      * published as taking the pool object that word names; the cast puts that object view back on
      * the pool stored at +0x004 and carries it through unchanged. */

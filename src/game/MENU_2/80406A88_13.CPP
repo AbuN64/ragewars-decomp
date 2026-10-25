@@ -39,7 +39,7 @@ s32 func_8042AFB0_eu_x(void *root, s32 unused, s32 delta) {
         if (--D_800E4F60->unk3E0 <= 0) {
             Render_PlayFlatSound(0xE79);
             Frontend_SetWidgetFlag08(D_800E4F60->unk3E8, 1);
-            func_80419F58_de(D_800E4F60->text3E4, 4);
+            Menu_StartFlicker(D_800E4F60->text3E4, 4);
             D_800E4F60->unk3DC = 4;
             D_800E4F60->unk3E0 = 4;
         }

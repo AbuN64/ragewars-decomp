@@ -19,11 +19,11 @@ s32 func_8041F2A0_us_rev1(s32 screen)
   s32 rest;
   D_800E42D0 = Scene_AllocateMemory(0x1358);
   D_800E42D0->screen = (void *) screen;
-  D_800E42D0->unk4 = func_8041B610_de(screen, 4);
-  func_8041B6E8_de(screen, 0, 0x7A);
-  func_8041B6E8_de(screen, 1, 0x7A);
-  func_8041B6E8_de(screen, 2, 0x7A);
-  func_8041B6E8_de(screen, 3, 0x7A);
+  D_800E42D0->unk4 = Menu_CreateOverlayNode(screen, 4);
+  Menu_ShowSlotById(screen, 0, 0x7A);
+  Menu_ShowSlotById(screen, 1, 0x7A);
+  Menu_ShowSlotById(screen, 2, 0x7A);
+  Menu_ShowSlotById(screen, 3, 0x7A);
   func_8042E9A0_de(0, 0);
   D_800E42D0->clock = 0;
   scale.x = 1.0f;

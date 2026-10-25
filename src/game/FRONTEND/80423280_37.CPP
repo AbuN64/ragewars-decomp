@@ -54,11 +54,11 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     screen = Scene_AllocateMemory(0xA80);
     D_800E4690 = screen;
     screen->root = arg0;
-    D_800E4690->nodes = func_8041B610_de(arg0, 4);
-    func_8041B6E8_de(arg0, 0, 0x13E);
-    func_8041B6E8_de(arg0, 1, 0x13E);
-    func_8041B6E8_de(arg0, 2, 0x13E);
-    func_8041B6E8_de(arg0, 3, 0x13E);
+    D_800E4690->nodes = Menu_CreateOverlayNode(arg0, 4);
+    Menu_ShowSlotById(arg0, 0, 0x13E);
+    Menu_ShowSlotById(arg0, 1, 0x13E);
+    Menu_ShowSlotById(arg0, 2, 0x13E);
+    Menu_ShowSlotById(arg0, 3, 0x13E);
     for (i = 0; i < 0x24; i++) {
         func_80265688_de(D_800E4690->owned, i, 0);
         func_80265688_de(D_800E4690->pending, i, 0);

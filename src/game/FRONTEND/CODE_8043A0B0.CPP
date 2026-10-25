@@ -16,8 +16,8 @@ extern struct RowRecAt54 D_800E3A58[];
 extern struct StateFlags D_800E59E6[][19];
 extern f32 D_800DDF90_de;
 extern void *Scene_AllocateMemory(s32);
-extern void *func_8041B610_de(void *, s32);
-extern void func_8041B6E8_de(void *, s32, s32);
+extern void *Menu_CreateOverlayNode(void *, s32);
+extern void Menu_ShowSlotById(void *, s32, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern s32 Frontend_FindKeyIndex(s32);
@@ -28,7 +28,7 @@ extern void func_802A2394_de(void);
 extern struct StateFlags D_800E5A06[][19];
 extern s32 func_80419F38_de(void *);
 extern void func_80419F24_de(void *);
-extern void func_80419F58_de(void *, int);
+extern void Menu_StartFlicker(void *, int);
 extern void func_80298368_de(s32);
 extern void func_802A2360_de(void);
 extern void MarkMenuEventHandled(void);
@@ -56,11 +56,11 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
 
     D_800E59E0 = Scene_AllocateMemory(sizeof(struct FourPlayerResultsScreen));
     D_800E59E0->window = window;
-    D_800E59E0->menu = func_8041B610_de(window, 4);
-    func_8041B6E8_de(window, 0, slotResource);
-    func_8041B6E8_de(window, 1, slotResource);
-    func_8041B6E8_de(window, 2, slotResource);
-    func_8041B6E8_de(window, 3, slotResource);
+    D_800E59E0->menu = Menu_CreateOverlayNode(window, 4);
+    Menu_ShowSlotById(window, 0, slotResource);
+    Menu_ShowSlotById(window, 1, slotResource);
+    Menu_ShowSlotById(window, 2, slotResource);
+    Menu_ShowSlotById(window, 3, slotResource);
     scale.x = D_800DDF90_de;
     scale.y = D_800DDF90_de;
     scale.z = D_800DDF90_de;
@@ -229,7 +229,7 @@ s32 Frontend_UpdateFourPlayerResults(void) {
         if (D_800E59E0->timer <= 0) {
             Render_PlayFlatSound(0xE79);
             Frontend_SetWidgetFlag08(D_800E59E0->message, 1);
-            func_80419F58_de(D_800E59E0->resource, 4);
+            Menu_StartFlicker(D_800E59E0->resource, 4);
             D_800E59E0->state = 4;
             D_800E59E0->timer = 4;
         }

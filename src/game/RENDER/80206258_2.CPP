@@ -25,7 +25,7 @@ extern void *func_8024BFD4_de(void *, int);
 extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 
 extern void func_802472F0_de(void *);
-extern void func_80402FB4_de(s32, void *);
+extern void Menu_RequestTrackByIds(s32, void *);
 
 void func_8020676C_de(void *arg0, void *arg1, Trigger *trigger) {
     extern void Render_SetActorStateBit(Shared_World *a, void *b, int c);
@@ -64,13 +64,13 @@ void func_80206898_de(Trigger *trigger) {
 
 void func_802068C8_de(struct Shared_Actor *actor, s32 arg1, s32 arg2) {
     extern void Render_SetActorStateBit(Shared_World *, void *, s32);
-    func_80402FB4_de((s32)actor, (void *)arg2);
+    Menu_RequestTrackByIds((s32)actor, (void *)arg2);
     actor->weaponFlags |= 0x2100;
     Render_SetActorStateBit(&D_8011FE88, actor, 0);
 }
 
 void func_80206910_de(s32 arg0) {
-    func_80402FB4_de(0, (void *)arg0);
+    Menu_RequestTrackByIds(0, (void *)arg0);
 }
 
 /** Copy the source byte at offset 7 into two fields under object offset 0x18. */

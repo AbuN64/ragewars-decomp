@@ -6,8 +6,8 @@
 struct OwnerRecAt8V1;
 typedef struct OwnerRecAt8V1 OwnerRecAt8V1;
 
-struct Node_func_8041B610_de;
-typedef struct Node_func_8041B610_de Node_func_8041B610_de;
+struct NodeMenuCreateOverlayNode;
+typedef struct NodeMenuCreateOverlayNode NodeMenuCreateOverlayNode;
 
 extern s32 func_8041B970_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
@@ -30,9 +30,9 @@ typedef struct Mixer Mixer;
 struct sm_dlmultiuser_t;
 typedef struct sm_dlmultiuser_t sm_dlmultiuser;
 
-struct Node_func_8041B610_de;
+struct NodeMenuCreateOverlayNode;
 struct OwnerRecAt44;
-struct Node_func_8041B610_de {
+struct NodeMenuCreateOverlayNode {
     s32 words_00[3];
     s16 tag;
     s16 kind;
@@ -48,9 +48,9 @@ struct Node_func_8041B610_de {
 
 struct OwnerRecAt44 {
     s32 words_00[2];
-    struct Node_func_8041B610_de *root;
+    struct NodeMenuCreateOverlayNode *root;
     s32 words_0C[14];
-    struct Node_func_8041B610_de *overlay;
+    struct NodeMenuCreateOverlayNode *overlay;
 };
 
 struct SlotsRecAt5CV2;
@@ -79,10 +79,10 @@ struct SlotsRecAt5CV1 {
     s32 values[1];
 };
 
-extern void func_8041B0E0_de();
+extern void Menu_RegisterButtonClass();
 
-struct Node_func_8041B6E8_de;
-typedef struct Node_func_8041B6E8_de Node_func_8041B6E8_de;
+struct NodeMenuShowSlotById;
+typedef struct NodeMenuShowSlotById NodeMenuShowSlotById;
 
 struct Child;
 struct Child {
@@ -113,8 +113,8 @@ struct ChildRecAt2C {
     void *target;
 };
 
-struct Node_func_8041B6E8_de;
-struct Node_func_8041B6E8_de {
+struct NodeMenuShowSlotById;
+struct NodeMenuShowSlotById {
     s32 words_00[3];
     s16 id;
 };
@@ -124,7 +124,7 @@ struct sm_dlmultiuser_t {
     s32 words_00[17];
     void *root;
     s32 NUsers;
-    Node_func_8041B6E8_de *shown[4];
+    NodeMenuShowSlotById *shown[4];
     s32 locked[4];
     s32 shared;
 };
@@ -156,7 +156,7 @@ struct ChildRecAt2C;
 struct Record_func_8041B110_de;
 typedef struct Record_func_8041B110_de Record_func_8041B110_de;
 
-extern void func_8041B5E0_de();
+extern void Menu_RegisterOverlayClass();
 
 struct Mixer;
 struct Mixer {

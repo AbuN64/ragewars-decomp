@@ -66,7 +66,7 @@ block_11:
             if (temp_v0_2 <= 0) {
                 Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->marker), 1);
                 Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->pakIcon), 1);
-                func_80419F58_de((((Shared_OptionsScreen *)(D_800E4518))->title), 4);
+                Menu_StartFlicker((((Shared_OptionsScreen *)(D_800E4518))->title), 4);
                 finish = (Shared_OptionsScreen *)D_800E4518;
                 finish->page = 4;
                 finish->pages = 4;

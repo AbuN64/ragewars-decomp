@@ -89,7 +89,7 @@ void func_80419C84_de(func_80419D04_S1 *flicker, s32 arg1) {
     }
 }
 
-void func_80419E24_de(void) {
+void Menu_RegisterFlickerClass(void) {
     func_802982C4_de(0xB62, D_00419F9C, D_0041A02C, 3);
 }
 

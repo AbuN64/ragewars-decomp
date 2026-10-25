@@ -180,7 +180,7 @@ void Frontend_RefreshPlayerPanel(s32 arg0) {
     }
     Frontend_SetWidgetFlag40(Menu_GetSlotValue(D_800E54A4->root, arg0), 0);
     /* the published B6E8 takes the controller handle as a plain scalar */
-    func_8041B6E8_de((s32) D_800E54A4->field0, arg0, SETUP_LABEL_ID);
+    Menu_ShowSlotById((s32) D_800E54A4->field0, arg0, SETUP_LABEL_ID);
     temp_v1 = D_800E54A4->players[arg0].state;
     switch (temp_v1) {                              /* switch 1 */
     case 0:                                         /* switch 1 */
@@ -307,7 +307,7 @@ case22_two:
 case22_three:
         var_s0 = SLOT_3_ID;
 case22_selected:
-        func_8041B6E8_de((s32) D_800E54A4->field0, arg0, var_s0);
+        Menu_ShowSlotById((s32) D_800E54A4->field0, arg0, var_s0);
         Frontend_RelabelSlotRows(arg0);
         var_v0 = arg0 * 8;
         break;
@@ -412,7 +412,7 @@ case22_selected:
         break;
     case 14:                                        /* switch 1 */
     case 17:                                        /* switch 1 */
-        func_8041B6E8_de((s32) D_800E54A4->field0, arg0, SETUP_LABEL_ID);
+        Menu_ShowSlotById((s32) D_800E54A4->field0, arg0, SETUP_LABEL_ID);
         Menu_SetSlotValue(D_800E54A4->root, arg0, 1);
 
         temp_v0_17 = func_8040EC30_de(D_800E54A4->players[arg0].sprite, UI_CASE_17_2A5);
@@ -511,13 +511,13 @@ block_61:
         Menu_ShowSlotNode(D_800E54A4->root, arg0, func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, UI_CASE_26_2A7));
         break;
 case27_found:
-        func_8041B6E8_de((s32) D_800E54A4->field0, arg0, var_s0);
+        Menu_ShowSlotById((s32) D_800E54A4->field0, arg0, var_s0);
         goto case27_done;
     case 27:                                        /* switch 1 */
         Frontend_SetWidgetFlag08((func_8041F2A0_Item *) D_800E54A4->players[arg0].menuWidget, 1);
         temp_s2 = 0;
 
-        func_8041B6E8_de((s32) D_800E54A4->field0, arg0, CHECK_0_ID);
+        Menu_ShowSlotById((s32) D_800E54A4->field0, arg0, CHECK_0_ID);
         do {
 loop_69:
         if (temp_s2 == 1) {

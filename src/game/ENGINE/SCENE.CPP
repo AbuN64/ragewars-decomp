@@ -79,7 +79,7 @@ extern int Render_GetDirectoryEntry();
 extern s32 func_802A01E8_de();
 extern s32 func_802AA730_de();
 extern void func_802AA760_de();
-extern void func_804037E8_de();
+extern void Menu_TriggerTrackEvent();
 extern void func_80449E18_de();
 extern void Items_InitGroupPools();
 extern void func_8044ADF0_de();
@@ -260,7 +260,7 @@ void func_80286AA8_de(void *table, s32 target, s32 arg2) {
         func_8028D90C_de();
         temp_v0 = (((struct SharedRecAt1B92C *)(table))->unk1B434);
         if ((u32) (temp_v0 - 0xBC2) < 0x15FU) {
-            func_804037E8_de(((temp_v0 - 0xBC2) / 10) + 0x259);
+            Menu_TriggerTrackEvent(((temp_v0 - 0xBC2) / 10) + 0x259);
         }
         Scene_ShowResultsGoal();
     }

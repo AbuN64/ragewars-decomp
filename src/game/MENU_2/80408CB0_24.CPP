@@ -4,8 +4,8 @@
 #include "COMMON/REQUESTRECAT10.H"
 extern struct CourseOptionsScreen *D_800E39C0;
 extern void *Scene_AllocateMemory(s32);
-extern s32 func_8041B610_de(void *, s32);
-extern void func_8041B6E8_de(void *, s32, s32);
+extern s32 Menu_CreateOverlayNode(void *, s32);
+extern void Menu_ShowSlotById(void *, s32, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern void func_802A2360_de(void);
@@ -15,11 +15,11 @@ s32 func_8041E3A0_eu(void *handle) {
     s32 i;
     D_800E39C0 = Scene_AllocateMemory(0x20);
     D_800E39C0->handle = handle;
-    D_800E39C0->mode = func_8041B610_de(handle, 4);
-    func_8041B6E8_de(handle, 0, 0x389);
-    func_8041B6E8_de(handle, 1, 0x389);
-    func_8041B6E8_de(handle, 2, 0x389);
-    func_8041B6E8_de(handle, 3, 0x389);
+    D_800E39C0->mode = Menu_CreateOverlayNode(handle, 4);
+    Menu_ShowSlotById(handle, 0, 0x389);
+    Menu_ShowSlotById(handle, 1, 0x389);
+    Menu_ShowSlotById(handle, 2, 0x389);
+    Menu_ShowSlotById(handle, 3, 0x389);
     widget = func_8040EC30_de(handle, 0x38B);
     widget->alpha = 0x8C;
     if (func_802999A0_de(0) == 0x16) {

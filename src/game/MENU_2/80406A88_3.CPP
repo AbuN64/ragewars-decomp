@@ -6,8 +6,8 @@ typedef struct EuxDrawScreen { void *window; s32 unk4; void *roots[3]; s32 unk14
 typedef struct { u8 pad0[0x10]; u8 alpha; } EuxDrawItem;
 extern EuxDrawScreen *D_800E39C0;
 extern void *Scene_AllocateMemory(s32);
-extern s32 func_8041B610_de(void *, s32);
-extern void func_8041B6E8_de(void *, s32, s32);
+extern s32 Menu_CreateOverlayNode(void *, s32);
+extern void Menu_ShowSlotById(void *, s32, s32);
 extern void *func_8040EC30_de(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern s32 func_802999A0_de(s32);
@@ -25,11 +25,11 @@ s32 func_8041E3A0_eu_x(void *window) {
     screen = Scene_AllocateMemory(0x20);
     D_800E39C0 = screen;
     screen->window = window;
-    D_800E39C0->unk4 = func_8041B610_de(window, 4);
-    func_8041B6E8_de(window, 0, 0x38D);
-    func_8041B6E8_de(window, 1, 0x38D);
-    func_8041B6E8_de(window, 2, 0x38D);
-    func_8041B6E8_de(window, 3, 0x38D);
+    D_800E39C0->unk4 = Menu_CreateOverlayNode(window, 4);
+    Menu_ShowSlotById(window, 0, 0x38D);
+    Menu_ShowSlotById(window, 1, 0x38D);
+    Menu_ShowSlotById(window, 2, 0x38D);
+    Menu_ShowSlotById(window, 3, 0x38D);
     item = func_8040EC30_de(window, 0x38F);
     item->alpha = 0x8C;
     if (func_802999A0_de(0) == 0x16) {

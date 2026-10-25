@@ -12,7 +12,7 @@
    their values with the smoothstep weight 3u^2 - 2u^3; an empty track yields D_800E0B60[1]. */
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
-f32 func_8040184C_de(f32 t) {
+f32 Menu_EvaluateTrackScalar(f32 t) {
     s32 *track;
     D_800C7470_Pair *key;
     s32 count;

@@ -32,7 +32,7 @@ extern void func_80419A04_de(Animation *anim, s32 value);
 
 extern void func_8040EDE4_de(s32 widget, Animation *anim);
 
-void func_8041989C_de(void) {
+void Menu_RegisterFrameAnimClass(void) {
     func_802982C4_de(0xB5F, D_00419A4C, D_00419ADC, 3);
 }
 

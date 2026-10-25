@@ -34,7 +34,7 @@ extern int Camera_IsSequenceInWindow(void);
    otherwise. */
 
 
-extern f32 func_8040184C_de(f32 arg0);
+extern f32 Menu_EvaluateTrackScalar(f32 arg0);
 
 /** Clear the word at offset 0x100 in the active object. */
 
@@ -150,7 +150,7 @@ f32 func_802459A0_de(void) {
     }
     response = record->response;
     if (!(D_800C37D8_de < response)) {
-        return func_8040184C_de(record->time);
+        return Menu_EvaluateTrackScalar(record->time);
     }
     return response;
 }

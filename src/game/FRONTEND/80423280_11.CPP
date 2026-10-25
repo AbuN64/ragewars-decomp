@@ -39,7 +39,7 @@ void func_80419F24_de(void *);
 
 s32 func_80419F38_de(void *);
 
-void func_80419F58_de(void *, int);
+void Menu_StartFlicker(void *, int);
 
 void func_80298368_de(s32);
 
@@ -101,7 +101,7 @@ block_7:
         if (temp_v0_2 <= 0) {
             Render_PlayFlatSound(0xE79);
             Frontend_SetWidgetFlag08(D_800E4F60->unk_3E8, 1);
-            func_80419F58_de(D_800E4F60->text3E4, 4);
+            Menu_StartFlicker(D_800E4F60->text3E4, 4);
             D_800E4F60->unk_3DC = 4;
             D_800E4F60->unk_3E0 = 4;
         }

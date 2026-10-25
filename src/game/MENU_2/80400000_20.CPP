@@ -132,7 +132,7 @@ void func_804037D4_de(void) {
     D_800E2830->fieldB4 = 1;
 }
 
-void func_804037E8_de(int event) {
+void Menu_TriggerTrackEvent(int event) {
     unsigned char *bits = D_80145060;
     int index;
     if (D_800DE7E8 != 0) {

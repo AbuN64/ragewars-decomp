@@ -104,11 +104,11 @@ s32 func_80429A24_de(void *window) {
 
     D_800E4F60 = Scene_AllocateMemory(sizeof(SetupScreen));
     D_800E4F60->window = window;
-    D_800E4F60->list = func_8041B610_de(window, 4);
-    func_8041B6E8_de(window, 0, ID_2FF);
-    func_8041B6E8_de(window, 1, ID_2FF);
-    func_8041B6E8_de(window, 2, ID_2FF);
-    func_8041B6E8_de(window, 3, ID_2FF);
+    D_800E4F60->list = Menu_CreateOverlayNode(window, 4);
+    Menu_ShowSlotById(window, 0, ID_2FF);
+    Menu_ShowSlotById(window, 1, ID_2FF);
+    Menu_ShowSlotById(window, 2, ID_2FF);
+    Menu_ShowSlotById(window, 3, ID_2FF);
     D_800E4F60->unk3DC = 1;
     D_800E4F60->unk45C = 0;
     D_800E4F60->unk3E0 = 4;

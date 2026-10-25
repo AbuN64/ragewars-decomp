@@ -61,6 +61,6 @@ MenuFadeWidget *func_8041A280_de(s32 frameId, s32 itemId) {
 }
 
 
-void func_8041A400_de(void) {
+void Menu_RegisterFadeClass(void) {
     func_802982C4_de(0xB60, D_0041A490, D_0041A520, 3);
 }

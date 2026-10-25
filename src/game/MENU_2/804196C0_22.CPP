@@ -110,6 +110,6 @@ s32 func_8041AB70_de(void *arg0) {
     return 0;
 }
 
-void func_8041AB90_de(void) {
+void Menu_RegisterListClass(void) {
     func_802982C4_de(0xB64, D_0041AD7C, D_0041AE0C, 3);
 }

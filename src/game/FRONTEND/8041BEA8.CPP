@@ -20,7 +20,7 @@ extern void func_802998A8_de(void);
 
 extern void func_80419F24_de(s32 fade);
 extern s32 func_80419F38_de(s32 fade);
-extern void func_80419F58_de(s32 fade, s32 speed);
+extern void Menu_StartFlicker(s32 fade, s32 speed);
 extern Node_func_8041D134_de *Menu_GetSlotValue(void *handle, s32 arg1);
 
 /* Frontend_ShowUnlockedEntries is declared by span code_8041BEA8.h; no local extern needed. */
@@ -37,7 +37,7 @@ s32 func_8041D134_de(s32 unused0, s32 unused1, s32 arg2) {
             /* Node_func_8041D134_de is the hub Item view's twin (style at 0x10, x/y at 0x14/0x16);
                E8D8 speaks Item, so the node slots cast to it here. */
             Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupA, 1);
-            func_80419F58_de(((MenuRecAt108 *) D_800E3590)->fade, 4);
+            Menu_StartFlicker(((MenuRecAt108 *) D_800E3590)->fade, 4);
             ((MenuRecAt108 *) D_800E3590)->state = 4;
             ((MenuRecAt108 *) D_800E3590)->timer = 4;
         }

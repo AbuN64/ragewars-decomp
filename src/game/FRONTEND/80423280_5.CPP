@@ -67,7 +67,7 @@ extern s32 D_80154020[];
 extern void func_80298368_de(s32);
 
 
-extern void func_80419F58_de(void *, s32);
+extern void Menu_StartFlicker(void *, s32);
 
 extern void func_802A2360_de(void);
 
@@ -98,7 +98,7 @@ s32 func_80426918_de(void *unused0, void *unused1, s32 delta) {
         }
         Render_PlayFlatSound(0xE79);
         Frontend_SetWidgetFlag08(D_800E4690->button, 1);
-        func_80419F58_de(D_800E4690->prompt, 4);
+        Menu_StartFlicker(D_800E4690->prompt, 4);
         D_800E4690->state = 4;
         D_800E4690->timer = 4;
         break;

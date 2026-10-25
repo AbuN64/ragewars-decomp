@@ -14,7 +14,7 @@ extern void func_80298368_de(s32);
 extern void MarkMenuEventHandled(void);
 extern void func_802A2360_de(void);
 extern void func_80419F24_de(void *);
-extern void func_80419F58_de(void *, s32);
+extern void Menu_StartFlicker(void *, s32);
 
 extern s32 func_80419F38_de(void *);
 s32 func_8042F91C_de(s32 unused0, s32 unused1, s32 arg2) {
@@ -43,7 +43,7 @@ s32 func_8042F91C_de(s32 unused0, s32 unused1, s32 arg2) {
                 Render_PlayFlatSound(0xE79);
                 /* unk28 is the panel's item handle, kept untyped in the animation state */
                 Frontend_SetWidgetFlag08((func_8041F2A0_Item *) D_800E54A4->title, 1);
-                func_80419F58_de(D_800E54A4->music, 4);
+                Menu_StartFlicker(D_800E54A4->music, 4);
                 D_800E54A4->ready = 4;
                 D_800E54A4->timer = 4;
             }

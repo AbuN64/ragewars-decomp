@@ -288,7 +288,7 @@ s32 func_8041B0C0_de(void *arg0) {
     return 0;
 }
 
-void func_8041B0E0_de(void) {
+void Menu_RegisterButtonClass(void) {
     func_802982C4_de(0xB61, D_0041B340, D_0041B3D0, 3);
 }
 
@@ -418,10 +418,10 @@ s32 func_8041B564_de(OwnerRecAt44 *arg0) {
     p = arg0->root;
     if (p != 0) {
         do {
-            if ((u16)((Node_func_8041B610_de *)p)->kind != 8) {
-                ((Node_func_8041B610_de *)p)->alpha = 0x64;
+            if ((u16)((NodeMenuCreateOverlayNode *)p)->kind != 8) {
+                ((NodeMenuCreateOverlayNode *)p)->alpha = 0x64;
             }
-            p = (Node_func_8041B610_de *)((Node_func_8041B610_de *)p)->words_00[1];
+            p = (NodeMenuCreateOverlayNode *)((NodeMenuCreateOverlayNode *)p)->words_00[1];
         } while (p != 0);
     }
     return 0;

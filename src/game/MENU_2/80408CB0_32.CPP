@@ -64,11 +64,11 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *owner) {
     screen->root = owner;
     i = 0;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((void * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2420))) = func_8041B610_de(owner, 4);
-    func_8041B6E8_de(owner, 0, 0x13E);
-    func_8041B6E8_de(owner, 1, 0x13E);
-    func_8041B6E8_de(owner, 2, 0x13E);
-    func_8041B6E8_de(owner, 3, 0x13E);
+    (*((void * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2420))) = Menu_CreateOverlayNode(owner, 4);
+    Menu_ShowSlotById(owner, 0, 0x13E);
+    Menu_ShowSlotById(owner, 1, 0x13E);
+    Menu_ShowSlotById(owner, 2, 0x13E);
+    Menu_ShowSlotById(owner, 3, 0x13E);
     var_a1 = 0;
     do {
         func_80265688_de((*(ResultsOptionsScreen **)&D_800E4690)->owned, var_a1, 0);

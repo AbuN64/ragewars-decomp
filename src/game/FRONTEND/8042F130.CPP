@@ -144,8 +144,8 @@ extern PakSetupProfile D_80102B00[];
 
 extern void *Scene_AllocateMemory(s32);
 extern void func_8043C210_de(void *, s32, s32, s32, s32);
-extern void *func_8041B610_de(void *, s32);
-extern void func_8041B6E8_de(void *, s32, s32);
+extern void *Menu_CreateOverlayNode(void *, s32);
+extern void Menu_ShowSlotById(void *, s32, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern void *func_80419E54_de(s32, s32);
@@ -172,11 +172,11 @@ s32 func_8042F130_us_rev1(void *screen) {
     D_800E54A4 = block;
     block->window = screen;
     func_8043C210_de(block->menu, 0x67, 0, 0, 0);
-    D_800E54A4->list = func_8041B610_de(screen, 4);
-    func_8041B6E8_de(screen, 0, SPRITE_285);
-    func_8041B6E8_de(screen, 1, SPRITE_285);
-    func_8041B6E8_de(screen, 2, SPRITE_285);
-    func_8041B6E8_de(screen, 3, SPRITE_285);
+    D_800E54A4->list = Menu_CreateOverlayNode(screen, 4);
+    Menu_ShowSlotById(screen, 0, SPRITE_285);
+    Menu_ShowSlotById(screen, 1, SPRITE_285);
+    Menu_ShowSlotById(screen, 2, SPRITE_285);
+    Menu_ShowSlotById(screen, 3, SPRITE_285);
     for (i = 0; i < 4; i++) {
         D_800E54A4->selected[i] = 0;
     }

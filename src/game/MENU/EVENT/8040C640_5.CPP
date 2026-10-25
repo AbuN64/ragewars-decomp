@@ -18,11 +18,11 @@ s32 func_8041DFC0_us(void *arg0) {
 
     { void *memory = Scene_AllocateMemory(0x20); D_800E39C0 = memory; }
     D_800E39C0->handle = arg0;
-    D_800E39C0->mode = func_8041B610_de((s32) arg0, 4);
-    func_8041B6E8_de((s32) arg0, 0, 0x389);
-    func_8041B6E8_de((s32) arg0, 1, 0x389);
-    func_8041B6E8_de((s32) arg0, 2, 0x389);
-    func_8041B6E8_de((s32) arg0, 3, 0x389);
+    D_800E39C0->mode = Menu_CreateOverlayNode((s32) arg0, 4);
+    Menu_ShowSlotById((s32) arg0, 0, 0x389);
+    Menu_ShowSlotById((s32) arg0, 1, 0x389);
+    Menu_ShowSlotById((s32) arg0, 2, 0x389);
+    Menu_ShowSlotById((s32) arg0, 3, 0x389);
 
     item = func_8040EC30_de(arg0, 0x38B);
     item->alpha = 0x8C;

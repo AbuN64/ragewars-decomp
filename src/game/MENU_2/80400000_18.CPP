@@ -49,7 +49,7 @@ extern s32 Render_LocatePackSection(s32 *, s32, s32, s32 *);
 
 
 
-void func_80402FB4_de(struct SharedTrackObject *owner, func_8020478C_S1 *obj) {
+void Menu_RequestTrackByIds(struct SharedTrackObject *owner, func_8020478C_S1 *obj) {
     s32 size;
     s32 **table;
     s32 key;

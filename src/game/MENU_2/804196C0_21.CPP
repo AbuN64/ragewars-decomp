@@ -162,7 +162,7 @@ s32 func_8041A530_de(void *arg0) {
     return 0;
 }
 
-void func_8041A550_de(void) {
+void Menu_RegisterSliderClass(void) {
     func_802982C4_de(0xB63, D_0041A724, D_0041A7B4, 3);
 }
 

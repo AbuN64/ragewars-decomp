@@ -267,7 +267,7 @@ void func_804201A4_de(s32 player) {
 void func_80420308_de(s32 player) {
     MenuWidget *frame;
 
-    func_8041B6E8_de(D_800E42D0->screen, player, (s16)D_800E42D4[player].kind);
+    Menu_ShowSlotById(D_800E42D0->screen, player, (s16)D_800E42D4[player].kind);
     D_800E42D0->players[player].highlight = func_8040EC30_de(D_800E42D0->screen, D_800E42D4[player].cursor);
     frame = func_8040EC30_de(D_800E42D0->screen, (u16)D_800E42D4[player].kind);
     D_800E42D0->players[player].highlight->x = frame->x - 2;

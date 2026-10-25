@@ -80,7 +80,7 @@ extern s32 func_8028BB1C_de(void *arg0, void *arg1, s32 arg2);
 
 extern void func_8028D90C_de(void);
 
-extern void func_80402FB4_de(s32, s32);
+extern void Menu_RequestTrackByIds(s32, s32);
 
 extern void func_80217388_de(void);
 
@@ -153,14 +153,14 @@ void func_80278F84_de(LevelActor *actor) {
 void func_80278FB4_de(s32 arg0, s32 unused1, s32 arg2) {
     if (D_8011FE88.mode == 4) {
         func_8028D90C_de();
-        func_80402FB4_de(arg0, arg2);
+        Menu_RequestTrackByIds(arg0, arg2);
     }
 }
 
 void func_80279004_de(s32 arg0) {
     if (D_8011FE88.mode == 4) {
         func_8028D90C_de();
-        func_80402FB4_de(0, arg0);
+        Menu_RequestTrackByIds(0, arg0);
     }
 }
 

@@ -4,8 +4,8 @@
 #ifdef NON_MATCHING
 extern char *D_800E3590;
 extern void *Scene_AllocateMemory(s32);
-extern void *func_8041B610_de(s32, s32);
-extern void func_8041B6E8_de(s32, s32, s32);
+extern void *Menu_CreateOverlayNode(s32, s32);
+extern void Menu_ShowSlotById(s32, s32, s32);
 extern void func_8041B968_de(void *, s32);
 extern u8 *func_8040EC30_de(s32, s32);
 extern void *func_80419E54_de(s32, s32);
@@ -21,11 +21,11 @@ s32 func_8041CEB0_us(s32 arg0) {
     u8 *w;
     D_800E3590 = (char *)Scene_AllocateMemory(0x210);
     ST_W(0) = arg0;
-    ST_W(4) = (s32)func_8041B610_de(arg0, 4);
-    func_8041B6E8_de(arg0, 0, 0x1FD);
-    func_8041B6E8_de(arg0, 1, 0x1FD);
-    func_8041B6E8_de(arg0, 2, 0x1FD);
-    func_8041B6E8_de(arg0, 3, 0x1FD);
+    ST_W(4) = (s32)Menu_CreateOverlayNode(arg0, 4);
+    Menu_ShowSlotById(arg0, 0, 0x1FD);
+    Menu_ShowSlotById(arg0, 1, 0x1FD);
+    Menu_ShowSlotById(arg0, 2, 0x1FD);
+    Menu_ShowSlotById(arg0, 3, 0x1FD);
     func_8041B968_de((void *)ST_W(4), 1);
     ST_W(0xD8) = 1;
     ST_W(0xDC) = 4;
