@@ -189,7 +189,7 @@ int func_8022A68C_de(char *forcePlayerList) {
     CGameStatus *s;
     CGameStatus *t;
 
-    if (func_80245798_de() != 0 || func_80245784_de() != 0 || D_801371DC != 0) {
+    if (func_80245798_de() != 0 || func_80245784_de() != 0 || D_8011FE88.frozen != 0) {
         return 0;
     }
     t = &D_801462C8.counters;

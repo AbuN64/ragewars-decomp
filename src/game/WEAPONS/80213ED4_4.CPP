@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/WORLD.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -8,7 +9,6 @@
 #include "stddef.h"
 
 /* Picks an actor's target (the tracked enemy when the aim point is chosen, else the nearest permitted target from Weapons_SelectCombatTarget), classifies it into one of eight kinds, and fills the target record with the kind, target, height difference, position, direction and distance, both in full and flattened to the horizontal plane. */
-extern s32 D_8011CD20,D_8013B290;
 extern void *Weapons_SelectCombatTarget(void *,void *,s32,s32), *func_80219408_de(void *);
 extern f32 func_80216F44_de(void *,f32,f32,f32),func_802B72B0_de(f32);
 extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
@@ -31,7 +31,7 @@ static inline s32 func_80215410_kind(Actor_func_80214DD4_de *self, Tracker *ctx,
     if (target->id == 0x64F) {
         return 7;
     }
-    if (D_8013B290 == 0) {
+    if (D_8011FE88.visibilityEnabled == 0) {
         if ((target->flags100 & 0x300000) && target->controller->owner == self
             && target->controller->state == 2) {
             return 1;
@@ -49,7 +49,7 @@ void func_80215410_de(Actor_func_80214DD4_de *arg0, Tracker *tracker, s32 unused
     s32 kind;
     Actor_func_80214DD4_de *target;
     Location *point;
-    if ((tracker->team == D_8011CD20) && !(arg0->kind[1] & 0x400) && (!(tracker->flags & 0x80000) || (tracker->unk78 != 0))) {
+    if ((tracker->team == D_8011FE88.kind1Cursor) && !(arg0->kind[1] & 0x400) && (!(tracker->flags & 0x80000) || (tracker->unk78 != 0))) {
         tracker->anchor = Weapons_SelectCombatTarget(arg0, tracker, 1, 0);
     }
     if ((*arg0->kind == 1) && (tracker->mode == 0xB)

@@ -108,7 +108,6 @@ extern s32 D_800CD6E0_de;
 extern void *D_800FE9F0;
 extern u8 D_800FEAD8[];
 
-extern s32 D_8013B290;
 
 extern char D_0022ECCC;
 
@@ -138,13 +137,13 @@ void func_80225B98_de(ObjectLinks854 *arg0, void *arg1, s32 arg2)
         }
     }
 
-    if (D_8013B290 != 0) {
+    if (D_8011FE88.visibilityEnabled != 0) {
         enabled = 0;
     }
     if (arg0->unk_664 & 0x8000) {
         enabled = 0;
     }
-    if (D_8013B290 != 0) {
+    if (D_8011FE88.visibilityEnabled != 0) {
         enabled = 0;
     }
     if (D_80145048 >= 2) {

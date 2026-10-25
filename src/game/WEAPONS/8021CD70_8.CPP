@@ -1,4 +1,5 @@
 #include "COMMON/GAMEPLAY_MOVEMENT.H"
+#include "COMMON/WORLD.H"
 #include "RENDER_2/802192C0_3.H"
 #include "GFX/TEXT/8022BA90_4.H"
 
@@ -543,7 +544,7 @@ void func_80220ED4_de(SharedPlayer *player)
       {
         player->views5E8.view5EC_5.unk5EC = after->item;
         player->views5E8.view5F0_9.unk5F0 = after->item;
-        D_8013B2C8 = after->item;
+        D_8011FE88.selectionValues[3] = after->item;
       }
     }
     world = &D_8011FE88;

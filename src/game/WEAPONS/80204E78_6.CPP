@@ -290,7 +290,7 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
             if (definition->flags & 0x40) {
                 func_8027985C_de(&picker);
                 choice = spawnTable2();
-                if (D_8013B290) {
+                if (D_8011FE88.visibilityEnabled) {
                     choice = spawnTable3();
                 }
                 while (choice->id != -1) {

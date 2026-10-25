@@ -1,4 +1,5 @@
 #include "COMMON/ROUTE_CHASE_RECORDS.H"
+#include "COMMON/WORLD.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/FIELD_VEC_B0.H"
@@ -27,7 +28,7 @@ s32 func_802169AC_de(LevelActor *actor, RouteChaseBot *routeChaseBot, LevelActor
     if (arg2->type == 0x64F) {
         return 7;
     }
-    if (D_8013B290 == 0) {
+    if (D_8011FE88.visibilityEnabled == 0) {
         if (arg2->flags & 0x300000) {
             controller = arg2->controller;
             if ((((Shared_ActorView *)controller)->controllerOwner == actor) &&

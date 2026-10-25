@@ -507,7 +507,7 @@ case 7:
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 #endif
 extern f32 D_800C22A8_us, D_800C22AC_us, D_800C22B0_us;
-extern s32 D_801371DC, D_800D2A90;
+extern s32 D_800D2A90;
 extern char D_801468A0[];
 extern s32 func_8022C460_de(void *);
 extern s32 func_8022AC00_de(void *);
@@ -534,7 +534,7 @@ void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
     s32 shifted;
     char *state;
     s32 remaining;
-    if (func_80245784_de() != 0 || func_8022C460_de(player) != 0 || D_801371DC != 0) {
+    if (func_80245784_de() != 0 || func_8022C460_de(player) != 0 || D_8011FE88.frozen != 0) {
         return;
     }
     if ((FIELD(u32, &D_801462C8, 0) & 1) && kind != 0x20) {

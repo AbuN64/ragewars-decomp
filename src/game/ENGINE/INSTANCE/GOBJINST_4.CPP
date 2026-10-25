@@ -403,7 +403,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
     i = 0;
     target = 0;
     bestDot = func_802B6560_de(cone * 0.008726647f);
-    count = D_8011CC18;
+    count = D_8011FE88.registeredCount;
     for (; i < count; i++) {
         entity = D_8011CA18[i];
         if (entity == actor || (((LevelActor *)(entity))->flags & 1) || ((LevelActor *)(entity))->active == 0) {

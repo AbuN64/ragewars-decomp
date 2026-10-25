@@ -151,7 +151,7 @@ void func_80409F2C_de(struct Shared_PakMenu *record) {
 
 void func_80409F6C_de(void *unused, void *object) {
     func_80264788_de(object);
-    func_8044D528_de(&D_8011FE88, D_8013B2C8, 2);
+    func_8044D528_de(&D_8011FE88, D_8011FE88.selectionValues[3], 2);
 }
 
 s32 func_80409FA0_de(void *unused, void *arg1, s32 arg2, s32 *arg3) {

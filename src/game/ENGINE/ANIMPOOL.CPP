@@ -12,7 +12,6 @@
 #include "RENDER_4/8028FD2C_6.H"
 extern s32 D_800CD764_de;
 extern s32 D_800CD8D0;
-extern s32 D_8013B290;
 extern s32 func_8028FE28_de(s32, s32, s32);
 extern s32 func_8028FE3C_de(void *, s32, s32, s32 *);
 extern s32 func_8028CF6C_de(void *, s32);
@@ -25,7 +24,7 @@ extern void func_802466A0_de(SceneEffect *, s32, s32, s32, s32, s32, s32, f32, C
 extern void func_8024B2D0_de(SceneEffect *);
 static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref) {
     SceneEffect *effect;
-    if (D_8013B290 == 0 && (unsigned int)scene->UsedList.count >= 3) {
+    if (D_8011FE88.visibilityEnabled == 0 && (unsigned int)scene->UsedList.count >= 3) {
         return 0;
     }
     effect = scene->FreeList.head;

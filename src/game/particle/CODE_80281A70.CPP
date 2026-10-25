@@ -120,7 +120,6 @@ typedef struct CParticleSystem_t {
     CParticle_t *m_pLastCreatedParticle;
 } CParticleSystem_t;
 extern const f32 D_800C4E4C_de,D_800C4E50_de;
-extern s32 D_801371DC;
 extern Box D_801031F0;
 extern void Particle_Update(void *),func_80279A00_de(void *),func_80284178_de(void *);
 extern void func_802A42F4_de(void *,void *),func_80268C7C_de(void *,s32);
@@ -183,7 +182,7 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
             stepped[count++] = node;
         }
     }
-    if (D_80146894 != 0 || D_801371DC != 0) {
+    if (D_80146894 != 0 || D_8011FE88.frozen != 0) {
         return;
     }
     D_800D2988 = savedStep;

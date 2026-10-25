@@ -486,7 +486,6 @@ extern s32 D_00255280;
 
 extern unsigned char D_800DDCB8;
 
-extern s32 D_8013B2C8;
 
 extern s32 D_800CD70C;
 
@@ -1834,7 +1833,6 @@ extern char D_0044FB50[];
 
 extern s32 D_8014AEB4;
 
-extern void *D_8011FF08;
 
 extern int D_800E12C4[];
 

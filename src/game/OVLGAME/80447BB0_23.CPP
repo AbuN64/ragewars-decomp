@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/WORLD.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/TRIPLE.H"
 #include "RENDER_2/802192C0_3.H"
@@ -304,7 +305,7 @@ void Ovlgame_InitActorHudState(void *actor) {
     if (func_80245784_de() == 0) {
         enabled = enabled < (u32)(D_8013B2BC ^ 0x3E7);
     }
-    if (D_8013B290 != 0) {
+    if (D_8011FE88.visibilityEnabled != 0) {
         enabled = 1;
     }
     if (enabled != 0) {

@@ -127,7 +127,6 @@ void func_8020AA40_de(Shared_Arg0 *arg0)
 #include "COMMON/OBJECTLINKS14.H"
 #include "COMMON/WORLD.H"
 
-extern s32 D_8011BF08;
 extern f32 D_800C1D4C_de, D_800C1D50_de;
 extern PlatformRoute *func_8028D218_de(void *, s32);
 extern CVector3 *func_8028D244_de(void *, s32, s32);
@@ -154,7 +153,7 @@ void Nav_AssignPlatformEndpoints(CNavData *graph) {
     {
         s32 gather = 0;
         NavigationPlatform **out;
-        if (D_8011BF08 > 0) {
+        if (D_8011FE88.actorCount > 0) {
             out = platforms;
             do {
                 NavigationPlatform *entry = &D_8011BF00[gather];
@@ -164,7 +163,7 @@ void Nav_AssignPlatformEndpoints(CNavData *graph) {
                     count++;
                 }
                 gather++;
-            } while (gather < D_8011BF08);
+            } while (gather < D_8011FE88.actorCount);
         }
     }
     node = graph->nodes;

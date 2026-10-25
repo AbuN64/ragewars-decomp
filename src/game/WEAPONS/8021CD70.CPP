@@ -1,4 +1,5 @@
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/WORLD.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "stddef.h"
@@ -149,7 +150,7 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
                             } while ((other = other->next) != 0);
             }
         }
-        count = D_8011CC18;
+        count = D_8011FE88.registeredCount;
         i = 0;
         if (i < count) {
             secondSpecial = 0x12;

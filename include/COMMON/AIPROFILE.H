@@ -510,7 +510,6 @@ struct func_8022C884_S1 {
     int unk24;
 };
 
-extern int D_801371DC;
 
 extern int D_800CE430[];
 

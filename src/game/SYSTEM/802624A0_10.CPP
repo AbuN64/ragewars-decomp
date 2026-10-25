@@ -22,7 +22,6 @@ extern s32 D_800CD764_de;
 
 extern s32 D_800CD8D0;
 
-extern s32 D_8013B290;
 
 extern s32 func_8028B21C_de(struct Shared_World *, s32);
 
@@ -35,7 +34,7 @@ extern void func_8024B2D0_de(SceneEffect *);
 static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref) {
     SceneEffect *effect;
 
-    if (D_8013B290 == 0 && (unsigned int)scene->UsedList.count >= 3) {
+    if (D_8011FE88.visibilityEnabled == 0 && (unsigned int)scene->UsedList.count >= 3) {
         return 0;
     }
     effect = scene->FreeList.head;
@@ -132,7 +131,7 @@ void func_80262E88_de(struct SceneEffectPool *scene, s32 arg1) {
 void *func_80262FF8_de(s32 arg0, s32 *arg1) {
     void *temp_s0;
 
-    if ((D_8013B290 != 0) || ((u32)((struct ObjectLinks5F28 *) arg0)->unk_5F24 < 3)) {
+    if ((D_8011FE88.visibilityEnabled != 0) || ((u32)((struct ObjectLinks5F28 *) arg0)->unk_5F24 < 3)) {
         temp_s0 = ((struct ObjectLinks5F28 *) arg0)->unk_5F00;
         if (temp_s0 != 0) {
             func_80255ED8_de((void *)(arg0 + 0x5F00), temp_s0);

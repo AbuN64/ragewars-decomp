@@ -14,6 +14,7 @@
 #include "TEXTURE/80294C64_12.H"
 #include "TEXTURE/80294C64_13.H"
 #include "TEXTURE/80294C64_15.H"
+#include "COMMON/WORLD.H"
 
 extern void func_80253754_de(void *, Node80253610 *);
 extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
@@ -201,7 +202,6 @@ typedef struct HostView8023AFF0 {
 } HostView8023AFF0;
 extern DescriptorRecAt29 *D_801370C8;
 extern s32 D_801370CC;
-extern char D_8011FE88;
 extern f32 D_800D2988;
 extern Shared_ReactionFlags *func_8028B2F8_de(void *, void *);
 extern f32 func_80275DD4_de(void *, s32, s32);
@@ -278,7 +278,7 @@ void Sched_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
     u16 mask;
     u32 bit;
 
-    if (D_801371DC != 0) {
+    if (D_8011FE88.frozen != 0) {
         return;
     }
     resource = host->resource;

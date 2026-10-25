@@ -143,7 +143,7 @@ void func_8024EB90_de(StaticObject *obj) {
     obj->cached = D_80110634;
     gSPBranchList(D_80110634++, 0);
     if (*obj->type == 8) {
-        func_802736D4_de(&matrix, D_8013B190);
+        func_802736D4_de(&matrix, D_8011FE88.elapsed);
     } else {
         func_802736D4_de(&matrix, obj->angle);
     }

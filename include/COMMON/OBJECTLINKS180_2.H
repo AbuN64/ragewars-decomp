@@ -279,7 +279,6 @@ struct func_802472E0_S1 {
     u8 unk139;
 };
 
-extern int D_8011CC18;
 
 struct ObjectState110;
 typedef struct ObjectState110 ObjectState110;

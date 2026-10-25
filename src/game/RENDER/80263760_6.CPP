@@ -1,4 +1,5 @@
 #include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/WORLD.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/PAKQUEUESTATE.H"
 #include "TYPES.H"
@@ -42,7 +43,7 @@ void func_80264104_de(Obj80264124 *arg0) {
             goto reset;
         }
         global = &D_80146894;
-        if ((*global != 0) || (D_801371DC != 0) || (global[-6] != 13)) {
+        if ((*global != 0) || (D_8011FE88.frozen != 0) || (global[-6] != 13)) {
 reset:
             arg0->amount = 0.0f;
             func_80285D30_de(arg0->object);

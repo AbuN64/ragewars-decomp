@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/WORLD.H"
 #include "COMMON/TARGET.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -25,7 +26,6 @@ typedef struct DamageActor {
 
 
 extern u8 D_801462E5;
-extern s32 D_8013B290;
 extern s32 func_8024D160_de(void *);
 
 /* Whether source may hurt target: never itself, nor when source is a player whose hit func_8024D160_de refuses;
@@ -41,7 +41,7 @@ static inline s32 canDamage(DamageActor *source, DamageActor *actor) {
     if (!(source->flags & 0x310000)) {
         return 0;
     }
-    if (D_8013B290 && !(actor->flags & 0x300000) && !(source->flags & 0x300000)) {
+    if (D_8011FE88.visibilityEnabled && !(actor->flags & 0x300000) && !(source->flags & 0x300000)) {
         return 0;
     }
     switch (source->definition->kind) {
@@ -530,7 +530,6 @@ extern f32 Particle_GetActorHeight(void *arg0);
 
 extern u8 D_801462E5;
 
-extern s32 D_8013B290;
 
 extern CallbackEntryRecAt4V1 D_800CC130[];
 void func_80267198_de(void *arg0, void *arg1, s32 arg2, CVector3 arg3, ResourceManagerState arg6) {
@@ -652,7 +651,7 @@ s32 func_80267528_de(char *actor, char *target)
     if (!(flags & 0x310000)) {
         return 0;
     }
-    if (D_8013B290 != 0 && !(source->flags & 0x300000) && !(flags & 0x300000)) {
+    if (D_8011FE88.visibilityEnabled != 0 && !(source->flags & 0x300000) && !(flags & 0x300000)) {
         return 0;
     }
     switch (destination->definition->kind) {

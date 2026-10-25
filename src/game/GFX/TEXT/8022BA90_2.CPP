@@ -1,4 +1,5 @@
 #include "COMMON/OBJECTSTATE90.H"
+#include "COMMON/WORLD.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
@@ -35,7 +36,7 @@ void func_8022BF04_de(void *player, s32 unused, s32 period, s32 kind) {
     if (func_8022C460_de(player) != 0) {
         return;
     }
-    if (D_801371DC != 0) {
+    if (D_8011FE88.frozen != 0) {
         return;
     }
     if (D_801462C8 & 1) {

@@ -78,7 +78,6 @@ extern s32 D_80153758;
 
 extern s32 D_8014ADA0;
 
-extern s32 D_8013B2C8;
 
 #include "COMMON/GAME_SESSION.H"
 
@@ -192,7 +191,7 @@ s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu) {
     }
     if (D_80153788 == 5) {
         func_80264788_de(ch);
-        func_8044D528_de(&D_8011FE88, D_8013B2C8, 2);
+        func_8044D528_de(&D_8011FE88, D_8011FE88.selectionValues[3], 2);
     }
     if (D_8015375C != 0 && D_80153788 == 6) {
         D_8014ADA0 = 1;

@@ -107,7 +107,7 @@ void func_8024F634_de(void *arg0) {
     f32 matrix[16];
 
     if (*(s32 *)((StaticObject *)o)->type == 8) {
-        func_802736D4_de(matrix, D_8013B190);
+        func_802736D4_de(matrix, D_8011FE88.elapsed);
     } else {
         func_802736D4_de(matrix, ((StaticObject *)o)->angle);
     }
