@@ -110,14 +110,10 @@ struct GameplayCamera {
     CQuatern orientation;
     f32 unk150; /* +0x150: src/func_80234FDC.c */
     char pad154[0xC];
-    s8 viewMatrix; /* +0x160: src/func_80234FDC.c */
-    char pad161[0x3F];
-    f32 unk1A0; /* +0x1A0: src/func_80234FDC.c */
-    char pad1A4[0x3C];
-    s8 viewProjection; /* +0x1E0: src/func_80234FDC.c */
-    char pad1E1[0x3F];
-    f32 unk220; /* +0x220: src/func_80234FDC.c */
-    char pad224[0x3C];
+    f32 viewOrient[16]; /* 0x160: view-to-world rotation (CCamera_t m_mfViewOrient) */
+    f32 inverseViewOrient[16]; /* 0x1A0: world-to-view rotation (m_mfInverseViewOrient) */
+    f32 viewProjection[16]; /* 0x1E0: float projection the fixed one at 0x380 is packed from (m_mfProjection) */
+    f32 worldToView[16]; /* 0x220: world-to-view transform; its z is a point's depth (m_mfView) */
     CVector3 corners[5];
     f32 viewWidth; /* +0x29C: src/func_80234FDC.c */
     f32 viewHeight; /* +0x2A0: src/func_80234FDC.c */
@@ -150,10 +146,9 @@ struct GameplayCamera {
     s8 sceneEffects; /* +0x570: src/func_80234FDC.c */
     char pad571[0xE40 - 0x571];
     IntrusiveList objects;
-    f32 orientationMatrix; /* +0xE54: src/func_80234FDC.c */
-    char padE58[0x3C];
-    s8 rollMatrix; /* +0xE94: src/func_80234FDC.c */
-    char padE95[0x3];
+    f32 faceScreen[16]; /* 0xE54: billboard rotation facing the screen (m_mfFaceScreen) */
+    f32 faceScreenUpright[16]; /* 0xE94: billboard rotation about Y only, keeping Y up (m_mfFaceScreenYAxisUp) */
+    u8 alignED4[4]; /* CCamera_t is 0xED8 bytes: its packed-matrix members align it to 8 */
 };
 
 

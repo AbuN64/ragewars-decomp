@@ -74,7 +74,7 @@ void func_80234DE0_de(GameplayCamera *camera) {
         radius = Math_Sqrtf(pts[1].x * pts[1].x + pts[1].y * pts[1].y + pts[1].z * pts[1].z);
     }
     out = &camera->corners[0];
-    func_80272944_de(&camera->viewMatrix, pts, out, 5);
+    func_80272944_de(camera->viewOrient, pts, out, 5);
     func_802965B0_de(camera->clipPlanes, out, out + 1, out + 2, out + 3, out + 4);
     Nav_ComputePointBounds(camera->clipBounds, 5, out);
     height = radius * D_800C3208_de;

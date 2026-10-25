@@ -352,7 +352,7 @@ void func_802A31E8_de(Node438C *arg0, Node438C *arg1, GameplayCamera *camera, vo
     setup[0] = 0;
     setup[1] = 0;
     setup[2] = D_800C5DE8_de[1];
-    Particle_TransformDirection(&camera->unk1A0, setup, &basis);
+    Particle_TransformDirection(camera->inverseViewOrient, setup, &basis);
     neg_y = -basis.y;
     neg_z = -basis.z;
     basis.y = neg_y;

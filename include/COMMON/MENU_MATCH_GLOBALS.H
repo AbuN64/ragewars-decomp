@@ -19,7 +19,7 @@ typedef struct MenuMatchGlobals {
     GameplayCamera *cameras; /* 0x20 */
     u8 unobserved24[0x40 - 0x24];
     GameplayCamera fallbackCamera; /* 0x40 */
-    u8 unobservedED8[0x1200 - 0xED8];
+    u8 unobservedF18[0x1200 - 0xF18];
     s32 useFallbackCamera; /* 0x1200 */
     u8 unobserved1204[0x1240 - 0x1204];
     MenuSettings settings; /* 0x1240, menu input byte at settings.local (+0x125D) */

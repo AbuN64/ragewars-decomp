@@ -40,8 +40,8 @@ void func_8044A170_de(State_func_8044A170_de *arg0) {
     Floats *temp_v0_5;
 
     func_80238EB8_de(((void *)&((GameplayCamera *)arg0)->unk24));
-    Particle_IdentityMatrix(((void *)&((GameplayCamera *)arg0)->viewMatrix));
-    Particle_IdentityMatrix(((void *)&((GameplayCamera *)arg0)->viewProjection));
+    Particle_IdentityMatrix(((GameplayCamera *)arg0)->viewOrient);
+    Particle_IdentityMatrix(((GameplayCamera *)arg0)->viewProjection);
     zero = 0.0f;
     temp_f21 = 1.0f;
     temp_v0 = ((void *)&((GameplayCamera *)arg0)->orientation);
@@ -49,7 +49,7 @@ void func_8044A170_de(State_func_8044A170_de *arg0) {
     temp_v0->unk4 = zero;
     arg0->unk140 = zero;
     arg0->unk14C = temp_f21;
-    Particle_IdentityMatrix(((void *)&((GameplayCamera *)arg0)->unk1A0));
+    Particle_IdentityMatrix(((GameplayCamera *)arg0)->inverseViewOrient);
     arg0->unk29C = (f32) D_800E28D0;
     arg0->unk2A0 = (f32) D_800E28D4;
     arg0->unk518 = -1;
@@ -110,8 +110,8 @@ void func_8044A170_de(State_func_8044A170_de *arg0) {
         ((Racer *)arg0)->viewports[var_a1].vtrans[3] = 0;
     }
     func_80442544_de(((void *)&((GameplayCamera *)arg0)->messageList));
-    Particle_IdentityMatrix(((void *)&((GameplayCamera *)arg0)->orientationMatrix));
-    Particle_IdentityMatrix(((void *)&((GameplayCamera *)arg0)->rollMatrix));
+    Particle_IdentityMatrix(((GameplayCamera *)arg0)->faceScreen);
+    Particle_IdentityMatrix(((GameplayCamera *)arg0)->faceScreenUpright);
     arg0->unk544 = 0;
     arg0->unk120 = 0;
     arg0->unk124 = 0x32;
