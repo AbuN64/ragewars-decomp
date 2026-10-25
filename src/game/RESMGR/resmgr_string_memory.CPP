@@ -131,7 +131,7 @@ u8 *func_802A0324_de(u8 *destination, u8 *source, s32 count) {
     return destination;
 }
 
-s32 func_802A037C_de(const void *arg0, const void *arg1) {
+s32 Resmgr_CompareStrings(const void *arg0, const void *arg1) {
     const u8 *a = arg0;
     const u8 *b = arg1;
     s32 difference;

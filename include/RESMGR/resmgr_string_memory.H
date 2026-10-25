@@ -19,4 +19,5 @@ extern u8 *func_802A0444_de(u8 *s, int c);
 extern s32 func_802A0814_de(u8 *arg0, u8 *arg1, s32 arg2);
 extern void *Resmgr_FillBytes(void *arg0, int arg1, u32 arg2);
 extern void *Resmgr_CopyBytes(void *destination, const void *source, s32 bytes);
+extern s32 Resmgr_CompareStrings(const void *a, const void *b);
 #endif

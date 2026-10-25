@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "COMMON/MENURECAT24.H"
 #include "MENU/80405DC0.H"
@@ -38,7 +39,7 @@ INCLUDE_ASM("ovl_80400000", func_804082FC_de);
 extern char *D_800E27B4[];
 extern char *D_800E27C4_eu[];
 extern u8 *D_800E2804_eu[];
-extern s32 D_800E25B4[];
+extern char *D_800E25B4[];
 extern char D_004501C4[];
 #define ENTRY_TEXT(e) ((e)->text[D_80152789])
 #define PAK_HEADER_376C D_800E2804_eu
@@ -103,7 +104,6 @@ extern void Pak_GetNoteGameName(s32 ch, s32 note, s32 *state);
 
 extern void func_80405648_de(s32 state, char *name, s32 size);
 
-extern s32 func_802A037C_de(char *name, s32 game);
 
 extern void Pak_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
 
@@ -125,9 +125,9 @@ static inline s32 findNote(s32 ch, s32 *found)
     char name[16];
     s32 state;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    s32 game = D_800E25B4[D_80152789];
+    char *game = D_800E25B4[D_80152789];
 #else
-    s32 game = D_800D36D8;
+    char *game = D_800D36D8;
 #endif
     s32 i;
 
@@ -135,7 +135,7 @@ static inline s32 findNote(s32 ch, s32 *found)
     for (i = 0; i < 16; i++) {
         Pak_GetNoteGameName(ch, i, &state);
         func_80405648_de(state, name, 16);
-        if (func_802A037C_de(name, game) == 0) {
+        if (Resmgr_CompareStrings(name, game) == 0) {
             if (found != 0) {
                 *found = i;
             }

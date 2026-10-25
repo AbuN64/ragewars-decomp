@@ -1,4 +1,5 @@
 #include "COMMON/RECORDRECATCV1.H"
+#include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/LONE/D_0044E4F8.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -58,7 +59,6 @@ extern void func_80264788_de(void *);
 /* Searches the sixteen controller-pak notes for the requested name and returns the matching index when requested. */
 extern void Pak_GetNoteGameName(s32,s32,s32 *),func_80405648_de(s32,void *,s32);
 
-extern s32 func_802A037C_de(void *,void *);
 
 /* Returns the data table for a kind: kinds 1, 2 and 3 have their own, kind 0 and anything else use the
    first. */
@@ -162,7 +162,7 @@ s32 func_80409FA0_de(void *unused, void *arg1, s32 arg2, s32 *arg3) {
     for(var_s0=0;var_s0<16;var_s0++) {
         Pak_GetNoteGameName(arg2,var_s0,&sp20);
         func_80405648_de(sp20,&sp10,16);
-        if(func_802A037C_de(&sp10,arg1)==0) {
+        if(Resmgr_CompareStrings(&sp10,arg1)==0) {
             if(arg3) *arg3=var_s0;
             return 1;
         }

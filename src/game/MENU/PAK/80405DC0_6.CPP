@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/LONE/D_0044E4F8.H"
 #include "COMMON/LONE/D_0044ED44.H"
 #include "COMMON/LONE/D_80152789.H"
@@ -83,7 +84,6 @@ extern char *D_800D36E0;
 extern s32 func_8040458C_de(s32 ch, s32 index, s32 *exists, char *name, char *ext, s32 *size,
                          char *company, char *code);
 extern s32 func_802A0238_de(char *);
-extern s32 func_802A037C_de(char *a, char *b);
 
 void func_80405F48_de(Shared_PakMenu *menu) {
     s32 ch;
@@ -111,7 +111,7 @@ void func_80405F48_de(Shared_PakMenu *menu) {
             switch (D_800DE874) {
                 case 1:
                     if (func_802A0238_de(code) == 4 && func_802A0238_de(company) == 2 &&
-                        func_802A037C_de(code, PAK_CODE) == 0 && func_802A037C_de(company, PAK_COMPANY) == 0) {
+                        Resmgr_CompareStrings(code, PAK_CODE) == 0 && Resmgr_CompareStrings(company, PAK_COMPANY) == 0) {
                         match = 1;
                     } else {
                         match = 0;
@@ -120,7 +120,7 @@ void func_80405F48_de(Shared_PakMenu *menu) {
                     break;
                 case 2:
                     if (func_802A0238_de(code) == 4 && func_802A0238_de(company) == 2 &&
-                        func_802A037C_de(code, PAK_CODE) == 0 && func_802A037C_de(company, PAK_COMPANY) == 0) {
+                        Resmgr_CompareStrings(code, PAK_CODE) == 0 && Resmgr_CompareStrings(company, PAK_COMPANY) == 0) {
                         match = 1;
                     } else {
                         match = 0;
@@ -132,7 +132,7 @@ void func_80405F48_de(Shared_PakMenu *menu) {
                     other = 0;
                     goto done;
             }
-            if (func_802A037C_de(name, title) == 0 && match != 0) {
+            if (Resmgr_CompareStrings(name, title) == 0 && match != 0) {
                 other = 0;
             }
         }

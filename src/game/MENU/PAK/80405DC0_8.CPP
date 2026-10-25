@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "RESMGR/resmgr_string_memory.H"
 #include "MENU/PAK/SAVE_SNAPSHOT.H"
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -28,7 +29,6 @@ void func_80405648_de(u8 *, u8 *, s32);
 u32 Ovlgame_BytesToPakPages(u32);
 s32 func_80406858_de(void *, s32, s32 *, s32 *);
 void * Pak_OpenDialog(void *, void *, s32, s32, s32);
-s32 func_802A037C_de(); /* extern */
 extern s32 D_0044E4F8;
 #if defined(VERSION_DE)
 extern s32 D_0044EA74;
@@ -82,14 +82,14 @@ static inline s32 Pak_ScanNextChannel(s32 currentChannel) {
     }
     return channel;
 }
-static inline s32 Pak_HasNamedNote(s32 name, s32 channel) {
+static inline s32 Pak_HasNamedNote(char *name, s32 channel) {
     u8 text[16];
     s8 *note;
     s32 index;
     for (index = 0; index < 16; index++) {
         Pak_GetNoteGameName(channel, index, &note);
         func_80405648_de((u8 *)note, text, 16);
-        if (func_802A037C_de(text, name) == 0) {
+        if (Resmgr_CompareStrings(text, name) == 0) {
             return 1;
         }
     }

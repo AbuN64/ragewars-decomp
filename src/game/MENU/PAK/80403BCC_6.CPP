@@ -1,6 +1,8 @@
 #include "MENU/PAK/pak_note_search.H"
+#include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "include_asm.h"
+#include "stddef.h"
 #include "COMMON/ENTRYRECAT0V3.H"
 #include "MENU/80403BCC.H"
 #include "TYPES.H"
@@ -24,7 +26,7 @@ extern PakDirectory *D_800E2854;
 
 extern u8 D_8010BBB8;
 
-extern u8 D_800DE80C[];
+extern u8 D_800DE80C[0x42];
 
 extern void Render_ReadControllerStates(void);
 
@@ -37,19 +39,9 @@ extern s32 func_80445F80_de(OSPfs *pfs, u16 company_code, u32 game_code, u8 *gam
 
 extern s32 func_80447AF0_de(OSPfs *pfs, s32 file_no, s32 flag, s32 offset, s32 size, void *data);
 
-/* Reports note index of the Controller Pak on channel ch from the cached directory: refuses with -2
-   unless the pak is ready, clears the exists flag for an empty slot, and otherwise returns its size
-   in 256-byte blocks, its company and game codes as terminated byte strings, and its game name and
-   extension decoded from pak font codes with trailing blanks trimmed. */
-
-
-
-
-
-
-
-
-static inline void func_8040458C_decode(u8 *dst, u8 *src, s32 n) {
+/* Inline copy of func_80405648_de: decodes the n pak font codes at src into dst as text (codes from
+   0x42 up become '~', leading zero codes blanks), trims trailing blanks and terminates dst. */
+static inline void Pak_DecodeNoteName(u8 *src, u8 *dst, s32 n) {
     s32 i;
     u8 *p;
     s32 started;
@@ -145,6 +137,10 @@ static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
 
 extern s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name, u8 *company, u8 *code);
 
+/* Reports note index of the Controller Pak on channel ch from the cached directory: refuses with -2
+   unless the pak is ready, clears the exists flag for an empty slot, and otherwise returns its size
+   in 256-byte blocks, its company and game codes as terminated byte strings, and its game name and
+   extension decoded from pak font codes with trailing blanks trimmed. */
 s32 func_8040458C_de(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *size, u8 *company,
                   u8 *code) {
     if (D_801534F0[ch] != 3) {
@@ -157,8 +153,8 @@ s32 func_8040458C_de(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *siz
     *size = D_800E2854[ch].notes[index].file_size >> 8;
     func_802BD3A0_de(company, &D_800E2854[ch].notes[index].company_code, 2);
     func_802BD3A0_de(code, &D_800E2854[ch].notes[index].game_code, 4);
-    func_8040458C_decode(name, D_800E2854[ch].notes[index].game_name, 17);
-    func_8040458C_decode(ext, D_800E2854[ch].notes[index].ext_name, 4);
+    Pak_DecodeNoteName(D_800E2854[ch].notes[index].game_name, name, 17);
+    Pak_DecodeNoteName(D_800E2854[ch].notes[index].ext_name, ext, 4);
     code[4] = 0;
     company[2] = 0;
     }
@@ -224,85 +220,34 @@ s32 Pak_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
     return result;
 }
 
-#ifdef NON_MATCHING
-#include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/RESIDENT_EVENT_HANDLER.H"
-#include "stddef.h"
-#include "TYPES.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
-s32 func_802A037C_de(const void *arg0, const void *arg1);
-extern u8 D_800DE80C[];
 
+/* Inline copy of Pak_GetNoteGameName: points *gameName at note's encoded game name in the cached
+   directory of channel's pak and returns 0, or returns -2 (leaving *gameName untouched) unless that
+   pak is ready. */
+static inline s32 Pak_PeekNoteGameName(s32 channel, s32 note, u8 **gameName) {
+    if (D_801534F0[channel] != 3) {
+        return -2;
+    }
+    *gameName = D_800E2854[channel].notes[note].game_name;
+    return 0;
+}
+
+/* Searches the 16 notes of the Controller Pak on channel for one whose decoded game name equals name:
+   stores its index in *noteIndex (when given) and returns 1, or returns 0 when none matches. */
 s32 Pak_FindNoteByName(void *name, s32 channel, s32 *noteIndex) {
     u8 decodedName[16];
     u8 *encodedName;
-    s32 clearIndex;
-    s32 decodeIndex;
-    s32 trimIndex;
-    s32 nameStarted;
     s32 note;
-    s32 noteOffset;
-    s8 *clearChar;
-    u8 *trailingChar;
-    u8 *decodedChar;
-    u8 blank;
-    u8 *buf;
-    u8 *encodedChar;
-    u8 trailingValue;
-    u8 encodedValue;
 
-    note = 0;
-    noteOffset = 4;
-    do {
-        if (D_801534F0[channel] == 3) {
-            encodedName = (u8 *)D_800E2854 + channel * 0x204 + noteOffset + 0xE;
-        }
-        buf = decodedName;
-        clearIndex = 15;
-        clearChar = (s8 *)&buf[15];
-        do {
-            *clearChar = 0;
-            clearIndex--;
-            clearChar--;
-        } while (clearIndex >= 0);
-        nameStarted = 0;
-        blank = ' ';
-        decodeIndex = 0;
-        decodedChar = buf;
-        encodedChar = encodedName;
-        do {
-            encodedValue = *encodedChar;
-            if (encodedValue >= 0x42U) {
-                *decodedChar = '~';
-            } else if (encodedValue == 0 && nameStarted == 0) {
-                *decodedChar = blank;
-            } else {
-                nameStarted = 1;
-                *decodedChar = D_800DE80C[*encodedChar];
-            }
-            decodedChar++;
-            decodeIndex++;
-            encodedChar++;
-        } while (decodeIndex < 16);
-        for (trimIndex = 15; trimIndex >= 0; trimIndex--) {
-            trailingChar = &buf[trimIndex];
-            if (*trailingChar != ' ' && *trailingChar != 0) {
-                break;
-            }
-            *trailingChar = 0;
-        }
-        buf[15] = 0;
-        if (func_802A037C_de(decodedName, name) == 0) {
+    for (note = 0; note < 16; note++) {
+        Pak_PeekNoteGameName(channel, note, &encodedName);
+        Pak_DecodeNoteName(encodedName, decodedName, 16);
+        if (Resmgr_CompareStrings(decodedName, name) == 0) {
             if (noteIndex != NULL) {
                 *noteIndex = note;
             }
             return 1;
         }
-        note++;
-        noteOffset += 0x20;
-    } while (note < 16);
+    }
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_80400000", Pak_FindNoteByName);
-#endif

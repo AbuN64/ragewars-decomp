@@ -1,4 +1,5 @@
 #include "COMMON/PAK_MENU.H"
+#include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/LONE/D_0044E468.H"
 #include "COMMON/LONE/D_0044ED44.H"
 #include "COMMON/LONE/D_80152789.H"
@@ -95,7 +96,6 @@ extern s32 D_8011FECC;
 
 extern s32 Pak_GetNoteGameName(s32 ch, s32 index, u8 **state);
 extern void func_80405648_de(u8 *state, u8 *name, s32 size);
-extern s32 func_802A037C_de(const void *a, const void *b);
 extern s32 Pak_GetFreePages(s32 ch, s32 *freeSpace);
 extern s32 Pak_CountFreeNotes(s32 ch, s32 *noteCount);
 extern u32 Ovlgame_BytesToPakPages(u32 size);
@@ -121,7 +121,7 @@ s32 func_80406858_de(void *unused, s32 ch, s32 *bestCh, s32 *bestScore) {
     for (i = 0; i < 16; i++) {
         Pak_GetNoteGameName(ch, i, &state0);
         func_80405648_de(state0, name, 16);
-        if (func_802A037C_de(name, wanted) == 0) {
+        if (Resmgr_CompareStrings(name, wanted) == 0) {
             found0 = 1;
             goto search1;
         }
@@ -136,7 +136,7 @@ search1:
     for (i = 0; i < 16; i++) {
         Pak_GetNoteGameName(ch, i, &state1);
         func_80405648_de(state1, name, 16);
-        if (func_802A037C_de(name, wanted) == 0) {
+        if (Resmgr_CompareStrings(name, wanted) == 0) {
             found1 = 1;
             goto check;
         }
