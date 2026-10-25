@@ -4051,7 +4051,7 @@ segments:
       - [0xC6114, data, data_800C/D_d1_736c650ca92c1b2a]
       - [0xC6120, rodata, data_800C/literals_DispatchElementEvent]
       - [0xC61A0, rodata, data_800C/literals_DispatchCurrentScreenEvent]
-      - [0xC61E0, rodata, data_800C/rodata_func_8029764C_de_800CA770]
+      - [0xC61E0, rodata, data_800C/literals_DispatchScreenRangeEvent]
       - [0xC6220, rodata, data_800C/D_80297A34_CB3B0]
       - [0xC6228, rodata, data_800C/literals_func_80297A34_de]
       - [0xC6268, rodata, data_800C/D_80297FA0_CB3F8]

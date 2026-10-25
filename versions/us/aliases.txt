@@ -2602,3 +2602,4 @@ literals_Render_UpdateTriggeredMotion = 0x800C1A20; // rom:0xC2620 size:0x20
 literals_InvertMatrix = 0x800C5A34; // rom:0xC6634 size:0x8
 literals_Nav_EvaluateAttackTarget = 0x800C1E80; // rom:0xC2A80 size:0x34
 literals_Pak_DrawMenuPanel = 0x800DD184; // rom:0xDDD84 size:0x18
+literals_DispatchScreenRangeEvent = 0x800C5510; // rom:0xC6110 size:0x40

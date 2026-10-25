@@ -316,35 +316,25 @@ s32 DispatchCurrentScreenEvent(s32 recurse, s32 event, s32 value, s32 argument, 
     return result;
 }
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-#include "COMMON/UNUSED.H"
-#include "MATH/SHARED_WIDGETIDE.H"
-#include "COMMON/INTEGERSTATE530.H"
-
-
-void func_80299CF0_de(struct NodeRecAt12 *, s32, s32, s32, s32, s32);
-#include "COMMON/CALLBACK.H"
-void MarkMenuEventHandled(void);
-void func_80298368_de(s32);
-
-/* 1/250 words differ: the recurse test branch is a plain beqz here where the ROM uses beql (reorg annuls the
- * inline's result = 0 in its delay slot); everything else matches. Same inlines as DispatchCurrentScreenEvent. */
+/* Sends an event to every screen from lowIndex to the current one: the menu callback first, then each screen's
+ * primary element handler, its child trees (recurse) and the default actions, restoring the handled flags. */
 s32 DispatchScreenRangeEvent(s32 recurse, s32 event, s32 value, void *argument, s32 context) {
     ScreenManager *table = D_8014D080;
     s32 *handledFlag = &table->handled;
     Element *element;
     MenuElementHandler handler;
     s32 result = 0;
-    s32 saved, handled;
+    s32 saved;
     s32 first, last;
     if (table->callback != 0) {
         saved = table->handled;
         table->handled = 0;
         result = table->callback(event, value, (s32)argument, context);
-        handled = table->handled;
+        if (table->handled == 1) {
+            table->handled = saved;
+            return result;
+        }
         table->handled = saved;
-        if (handled == 1) return result;
     }
     first = D_8014D080->lowIndex;
     last = D_8014D080->current;
@@ -383,6 +373,3 @@ s32 DispatchScreenRangeEvent(s32 recurse, s32 event, s32 value, void *argument, 
     }
     return result;
 }
-#else
-INCLUDE_ASM("span_1000", DispatchScreenRangeEvent);
-#endif

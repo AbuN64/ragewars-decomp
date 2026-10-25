@@ -2581,3 +2581,4 @@ literals_InvertMatrix = 0x800C5DA4; // rom:0xC69A4 size:0x8
 literals_Nav_EvaluateAttackTarget = 0x800C21F0; // rom:0xC2DF0 size:0x34
 literals_Pak_DrawMenuPanel = 0x800EEB54; // rom:0xEF754 size:0x18
 literals_Render_GetSpatialEffectLevel = 0x800C5170; // rom:0xC5D70 size:0xC
+literals_DispatchScreenRangeEvent = 0x800C5880; // rom:0xC6480 size:0x3C
