@@ -102,29 +102,54 @@ ResourceLoadRequest *func_80252774_de(s32 unused, ResourceLoadRequest *request, 
 }
 
 #ifdef NON_MATCHING
-#include "COMMON/GFX.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/ENTRYRECAT18V3.H"
 #include "gbi.h"
-#include "TYPES.H"
+#include "UTIL/802555D0.H"
+#include "SCENE/802508E0.H"
 
 extern Gfx *D_80110634;
 extern struct Shape_func_8021A2D4_de_2 D_80105180;
-extern char D_80101140[];
-
+extern Manager D_801047E0;
 extern u32 func_802BCF30_de(void);
 extern void func_80268CE0_de(s32);
 extern void func_8026925C_de(s32);
 
-extern struct BlockRecAt20 *D_801011B0;
+/* Band edge shades: half (darker) and one and a half (brighter) of a colour channel, clamped to 255. */
+#define DARKEN(c) ((s32)((u32)(c) >> 1) < 0x100 ? (s32)((u32)(c) >> 1) : 0xFF)
+#define BRIGHTEN(c) ((((c) * 3) >> 1) > 0xFF ? 0xFF : (((c) * 3) >> 1))
 
-/* Draws the heap usage bar: a bordered box with one coloured band per tracked allocation, scaled to the
- * total heap size. */
+static inline void lock(void) {
+    u32 token = func_802BCF30_de();
+    s32 counter = D_8010515C + 1;
+
+    D_8010515C = counter;
+    if (counter != 1) {
+        __osRestoreInt(token);
+        func_802BB2A0_de(D_801047E0.lock, 0, 1);
+    } else {
+        __osRestoreInt(token);
+    }
+}
+
+static inline void unlock(void) {
+    u32 token = func_802BCF30_de();
+    s32 counter = D_8010515C - 1;
+
+    D_8010515C = counter;
+    if (counter != 0) {
+        __osRestoreInt(token);
+        func_802BB420_de(D_801047E0.lock, 0, 1);
+    } else {
+        __osRestoreInt(token);
+    }
+}
+
+/* Debug heap map: a grey frame, then one band per cache entry from the bottom of the bar upward (height scaled
+ * to the heap's total span size), unlocked entries in the first pass and locked ones in the second, each with a
+ * darker bottom edge; entries unused for 5+ frames get a white inset band. */
 void Scene_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom) {
     struct BlockRecAt20 *span;
     Node80254C10 *node;
     u32 total;
-    u32 lock;
     s32 height;
     s32 pass;
     s32 select;
@@ -133,43 +158,30 @@ void Scene_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom)
     s32 r;
     s32 g;
     s32 b;
-    s32 full;
-    s32 bright;
     u32 base;
-    Gfx *cmd;
 
     gDPPipeSync(D_80110634++);
     gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
     func_80268CE0_de(0x19);
     func_8026925C_de(0x15);
-
     gDPSetPrimColor(D_80110634++, 0, 0, 0xA0, 0xA0, 0xA0, 0x00);
     gDPFillRectangle(D_80110634++, left - 1, top - 1, right + 1, bottom + 1);
     func_8026925C_de(0x1B);
-
     gDPSetPrimColor(D_80110634++, 0, 0, 0xA0, 0xA0, 0xA0, 0xFF);
     gDPFillRectangle(D_80110634++, left, top, right, bottom);
 
-    lock = func_802BCF30_de();
-    D_8010515C++;
-    if (D_8010515C != 1) {
-        __osRestoreInt(lock);
-        func_802BB2A0_de(D_80101140, 0, 1);
-    } else {
-        __osRestoreInt(lock);
-    }
+    lock();
 
     base = 0x80000000;
-    span = D_801011B0;
+    span = (struct BlockRecAt20 *)((struct Heap *)&D_801051A0)->first;
     total = (u32)span - base;
     for (; span != 0; span = span->next) {
         total += span->size + span->free;
     }
 
-    cmd = D_80110634++;
-    gDPSetPrimColor(cmd, 0, 0, 0x64, 0x64, 0x00, 0xFF);
+    gDPSetPrimColor(D_80110634++, 0, 0, 0x64, 0x64, 0x00, 0xFF);
     height = bottom - top;
-    hi = bottom - ((u32)(((u32)D_801011B0 - base) * height) / total) - 1;
+    hi = bottom - ((u32)(((u32)((struct Heap *)&D_801051A0)->first - base) * height) / total) - 1;
     gDPFillRectangle(D_80110634++, left, hi, right, bottom + 1);
 
     for (pass = 0; pass < 2; pass++) {
@@ -188,41 +200,28 @@ void Scene_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom)
             else if (node->flags & 0x600) { r = 0; g = 0; b = 255; }
             else { r = 0; g = 255; b = 0; }
 
-            cmd = D_80110634++;
-            gDPSetPrimColor(cmd, 0, 0, r, g, b, 0xFF);
+            gDPSetPrimColor(D_80110634++, 0, 0, r, g, b, 0xFF);
             hi = bottom - ((u32)(((node->start + node->end) - base) * height) / total) - 1;
             lo = bottom - ((u32)(((node->start - base) - 0x20) * height) / total) - 1;
-                    if (hi < lo) {
+            if (hi < lo) {
                 gDPFillRectangle(D_80110634++, left, hi, right, lo);
             }
-
-            gDPSetPrimColor(D_80110634++, 0, 0, ((s32)((u32)r >> 1)) < 0x100 ? ((s32)((u32)r >> 1)) : 0xFF, ((s32)((u32)g >> 1)) < 0x100 ? ((s32)((u32)g >> 1)) : 0xFF,
-                            ((s32)((u32)b >> 1)) < 0x100 ? ((s32)((u32)b >> 1)) : 0xFF, 0xFF);
+            gDPSetPrimColor(D_80110634++, 0, 0, DARKEN(r), DARKEN(g), DARKEN(b), 0xFF);
             gDPFillRectangle(D_80110634++, left, lo - 1, right, lo);
 
             if (!(node->flags & 0x702) && (u32)(D_80105180.field_0 - node->stamp) >= 5U) {
-                b = 0xFF;
-                gDPSetPrimColor(D_80110634++, 0, 0, 255, 255, 255, 255);
-                for (;;) {
-                    if (hi >= lo) break;
+                r = g = b = 0xFF;
+                gDPSetPrimColor(D_80110634++, 0, 0, r, g, b, 255);
+                if (hi < lo) {
                     gDPFillRectangle(D_80110634++, left + 8, hi, right, lo);
-                    break;
                 }
-                bright = (b * 3) >> 1;
-                gDPSetPrimColor(D_80110634++, 0, 0, 255, 255, bright < 256 ? bright : 255, 255);
+                gDPSetPrimColor(D_80110634++, 0, 0, BRIGHTEN(r), BRIGHTEN(g), BRIGHTEN(b), 255);
                 gDPFillRectangle(D_80110634++, left + 8, lo - 1, right, lo);
             }
         }
     }
 
-    lock = func_802BCF30_de();
-    D_8010515C--;
-    if (D_8010515C != 0) {
-        __osRestoreInt(lock);
-        func_802BB420_de(D_80101140, 0, 1);
-        return;
-    }
-    __osRestoreInt(lock);
+    unlock();
 }
 #else
 INCLUDE_ASM("span_1000", Scene_DrawMemoryUsage);
