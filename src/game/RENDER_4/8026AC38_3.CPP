@@ -166,23 +166,20 @@ void func_8026C484_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 
         }
 }
 
-#ifdef NON_MATCHING
-#include "abi.h"
-#include "TYPES.H"
 #include "COMMON/GFX.H"
-#include "COMMON/OBJECTSTATE18.H"
-#include "gbi.h"
 
 #include "COMMON/DISPLAY.H"
-extern Gfx *D_80110634;
 extern u32 D_800E28A4;
 
 extern s32 D_800CC364;
-extern u32 D_800CC384[]; /* read as an aggregate element: the ROM keeps its load ahead of the display-list stores */
+#include "COMMON/LONE/D_800CC384.H"
 extern void Scene_MarkResourceInUse(s32, void **);
 
-/* 19/168 aligned words differ: geometry-mode register (a2/a3) and display-list store scheduling.
- * The sixth argument overrides the texture segment; the fifth is unused. */
+/* Draws a pack resource model as a translucent decal: skips when fewer than 3000 display-list commands are
+ * left, loads the matrix (or segment 1), points segment 2 at the textures (the sixth argument overrides the
+ * texture section of the pack), sets a primitive-alpha combine with the fog render mode bits and the global
+ * geometry mode, then emits the display list of each part; the cached texture and combine states are
+ * invalidated before and after. The fifth and seventh arguments are unused. */
 void Render_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
                      s32 segment, void *unusedLighting, s32 textureAddress, s32 unusedMode) {
     void *resourceHeader;
@@ -212,10 +209,10 @@ void Render_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
     }
     gSPSegment(D_80110634++, 2, (u32)textures);
     partTable = Render_GetPackSection(resourceHeader, 2);
-    geometryMode = D_800CC384[0];
     D_800CC360 = -1;
     D_800CC364 = -1;
     syncCommand = D_80110634++;
+    geometryMode = D_800CC384;
     partCount = *(s32 *)partTable;
     gDPPipeSync(syncCommand);
     gDPSetTextureLUT(D_80110634++, G_TT_NONE);
@@ -223,10 +220,11 @@ void Render_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
     gDPSetPrimColor(D_80110634++, 0, 0, 0, 0, 0, opacity & 0xFF);
     gDPSetCombineLERP(D_80110634++, 0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE,
                      0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE);
-    gDPSetRenderMode(D_80110634++, (*(u32 *)&D_800CC38C), G_RM_ZB_XLU_DECAL2);
+    gDPSetRenderMode(D_80110634++, D_800CC38C, G_RM_ZB_XLU_DECAL2);
     gSPGeometryMode(D_80110634++, G_SHADE | G_CULL_BACK | G_FOG |
                     G_LIGHTING | G_TEXTURE_GEN | G_SHADING_SMOOTH, 0);
-    gSPGeometryMode(D_80110634++, 0, geometryMode | G_CULL_BACK);
+    geometryMode |= G_CULL_BACK;
+    gSPGeometryMode(D_80110634++, 0, geometryMode);
     for (partIndex = 0; partIndex < partCount; partIndex++) {
         partHeader = Render_GetPackSection(partTable, partIndex);
         Render_GetPackSection(partHeader, 0);
@@ -236,6 +234,3 @@ void Render_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
     D_800CC364 = -1;
     D_800CC360 = -1;
 }
-#else
-INCLUDE_ASM("span_1000", Render_DrawResourceModel);
-#endif
