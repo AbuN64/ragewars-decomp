@@ -13,14 +13,14 @@ void func_80200CA0_de(s32 arg0, unsigned char arg1)
   new_var = ((~arg0) & 3) * 8;
   arg0 = arg0 & (~3);
   temp_s2 = new_var;
-  func_80200568_de(arg0, (func_802005A0_de(arg0) & (~(0xFF << temp_s2))) | (new_var = (arg1 & 0xFF) << temp_s2));
+  Libsn_WritePortWord(arg0, (Libsn_ReadPortWord(arg0) & (~(0xFF << temp_s2))) | (new_var = (arg1 & 0xFF) << temp_s2));
 }
 
 #include "COMMON/EXTERNS_15.H"
 #include "TYPES.H"
 
 extern void func_80200C28_de(s32 address, s32 value);
-extern void func_80200568_de(s32 address, s32 value);
+extern void Libsn_WritePortWord(s32 address, s32 value);
 
 /* Copy an arbitrary byte buffer to a PI range, packing big-endian words. */
 void func_80200D18_de(s32 address, const u8 *source, u32 length)
@@ -38,7 +38,7 @@ void func_80200D18_de(s32 address, const u8 *source, u32 length)
     do
     {
       word = (((((u32) source[0]) << 24) | (((u32) source[1]) << 16)) | (((u32) source[2]) << 8)) | source[3];
-      func_80200568_de(address, word);
+      Libsn_WritePortWord(address, word);
       address += 4;
       source += 4;
       length -= 4;
@@ -79,7 +79,7 @@ void func_80200E04_de(u32 address, u8 *source, u32 remaining) {
                 remaining = 0;
             }
         } else {
-            func_80200568_de(address, ((u32)source[0] << 24) |
+            Libsn_WritePortWord(address, ((u32)source[0] << 24) |
                 ((u32)source[1] << 16) | ((u32)source[2] << 8) | source[3]);
             address += 4;
             source += 4;

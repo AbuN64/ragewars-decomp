@@ -38,7 +38,7 @@ struct IntrusiveList {
 
 struct IntrusiveList;
 
-extern s32 func_802005A0_de(s32 arg0);
+extern s32 Libsn_ReadPortWord(s32 arg0);
 
 extern void func_80209988_de(void *arg0);
 

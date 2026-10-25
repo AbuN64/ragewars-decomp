@@ -12,7 +12,7 @@ extern Gfx *g_displayListCursor;
 void func_802AA8EC_de(Table802AB8DC **handle, s32 index, void **out, u8 *tag);
 void func_802A9EE8_de(void *pTexture, f32 XPos, f32 YPos, int TextureWidth, int TextureHeight, f32 ScaleX, f32 ScaleY);
 void func_802A9CD0_de(void *pTexture, int XPos, int YPos, int TextureWidth, int TextureHeight);
-void func_802A9734_de(void *pTexture, void *pOpacity, float XPos, float YPos, int TextureWidth, int TextureHeight, float ScaleX, float ScaleY);
+void Text_DrawScaledMaskedImage(void *pTexture, void *pOpacity, float XPos, float YPos, int TextureWidth, int TextureHeight, float ScaleX, float ScaleY);
 void func_802A9364_de(void *pTexture, void *pOpacity, int XPos, int YPos, int TextureWidth, int TextureHeight);
 typedef struct TextureTileBlock {
     u32 width;
@@ -107,7 +107,7 @@ void Text_DrawTileGrid(void *handle, s32 index, s32 initialX, s16 initialY, f32 
                         while(column-- != 0.0f) {
                             height=tile->height;
                             width=tile->width;
-                            func_802A9734_de(tile->pixels,tile->pixels+width*height*2,x,y,width,height,scaleX,scaleY);
+                            Text_DrawScaledMaskedImage(tile->pixels,tile->pixels+width*height*2,x,y,width,height,scaleX,scaleY);
                             x+=(f32)width*scaleX;
                             tile=(TextureTileBlock *)((u8 *)tile+(width*height*2+(width*height>>1)));
                             tile++;

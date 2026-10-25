@@ -7,15 +7,15 @@
 extern u8 D_800F3452;
 extern s32 func_80200500_de(void);
 extern void func_802022E0_de(void);
-extern void func_80200568_de(s32, s32);
+extern void Libsn_WritePortWord(s32, s32);
 
 void func_802013E0_de(void) {
     s32 saved;
     u32 size;
     saved = func_80200500_de();
     func_802022E0_de();
-    func_80200568_de(0xB1FFFFF0, 0);
-    func_80200568_de(0xB1FFFFFC, 0);
+    Libsn_WritePortWord(0xB1FFFFF0, 0);
+    Libsn_WritePortWord(0xB1FFFFFC, 0);
     size = *(u32 *)0x80000318;
     D_800F3450 = 1;
     D_800F3452 = 0xFF;
@@ -31,8 +31,8 @@ void func_802013E0_de(void) {
 
 extern int Libgultra_TrwGetSr(void);
 extern void Libgultra_TrwSetSr(int);
-extern s32 func_802005A0_de(s32);
-extern void func_802005DC_de(s32);
+extern s32 Libsn_ReadPortWord(s32);
+extern void Libsn_SpinDelay(s32);
 extern void func_802010D8_de(u32);
 extern void Io_CopyHostBlockToCart(void);
 extern u32 D_800F32A8;
@@ -43,20 +43,20 @@ void Libsn_ServiceHostCommands(void) {
     s32 command;
     do {
         keepRunning = 1;
-        while ((command = func_802005A0_de(0xB1FFFFF0)) == 0) {
-            func_802005DC_de(1000);
+        while ((command = Libsn_ReadPortWord(0xB1FFFFF0)) == 0) {
+            Libsn_SpinDelay(1000);
         }
         if (command == 2) {
-            func_80200568_de(0xB1FFFFFC, 0);
-            func_802005DC_de(1000);
+            Libsn_WritePortWord(0xB1FFFFFC, 0);
+            Libsn_SpinDelay(1000);
             continue;
         }
-        func_80200568_de(0xB1FFFFFC, 0x101);
-        while (func_802005A0_de(0xB1FFFFF0) == command) {
-            func_802005DC_de(500);
+        Libsn_WritePortWord(0xB1FFFFFC, 0x101);
+        while (Libsn_ReadPortWord(0xB1FFFFF0) == command) {
+            Libsn_SpinDelay(500);
         }
-        if (func_802005A0_de(0xB1FFFFF0) == 2) {
-            func_80200568_de(0xB1FFFFFC, 0);
+        if (Libsn_ReadPortWord(0xB1FFFFF0) == 2) {
+            Libsn_WritePortWord(0xB1FFFFFC, 0);
             continue;
         }
         switch (command) {
@@ -82,7 +82,7 @@ void Libsn_ServiceHostCommands(void) {
             D_800F3452 = 0;
             break;
         case 0x16:
-            func_80200568_de(0xB1FE0000, (D_800F3452 << 24) | ((u8)D_800F3450 << 16));
+            Libsn_WritePortWord(0xB1FE0000, (D_800F3452 << 24) | ((u8)D_800F3450 << 16));
             break;
         case 0x17:
             func_802010D8_de(2);
@@ -94,10 +94,10 @@ void Libsn_ServiceHostCommands(void) {
             Io_CopyHostBlockToCart();
             break;
         }
-        func_80200568_de(0xB1FFFFFC, 0);
-        while (func_802005A0_de(0xB1FFFFF0) == 1) {
-            func_802005DC_de(500);
+        Libsn_WritePortWord(0xB1FFFFFC, 0);
+        while (Libsn_ReadPortWord(0xB1FFFFF0) == 1) {
+            Libsn_SpinDelay(500);
         }
     } while (keepRunning != 0 || D_800F3452 == 0);
-    func_80200568_de(0xB1FFFFF0, 0);
+    Libsn_WritePortWord(0xB1FFFFF0, 0);
 }

@@ -436,11 +436,11 @@ void func_802AADCC_de(u16 *grid, s16 x0, s32 y) {
 
 /* Draws a grid of 16-bit image tiles with a 4-bit mask scaled by sx and sy: the header holds the column
    and row counts, each tile holds its width, height, two bytes per pixel and then half a byte per pixel
-   of mask, and every tile goes to func_802A9734_de at the running float position, advancing x by the
+   of mask, and every tile goes to Text_DrawScaledMaskedImage at the running float position, advancing x by the
    scaled tile width and y by the scaled last tile height per row. Scaled counterpart of
    func_802AADCC_de; the float counters count down with `rows-- != 0.0f` as in func_802AB1B0_de. */
-extern void func_802A9734_de(void *pTexture, void *pOpacity, float XPos, float YPos, int TextureWidth, int TextureHeight, float ScaleX, float ScaleY);
-void func_802AAEE4_de(u16 *grid, f32 x0, f32 y, f32 sx, f32 sy) {
+extern void Text_DrawScaledMaskedImage(void *pTexture, void *pOpacity, float XPos, float YPos, int TextureWidth, int TextureHeight, float ScaleX, float ScaleY);
+void Text_DrawScaledMaskedTileGrid(u16 *grid, f32 x0, f32 y, f32 sx, f32 sy) {
     u32 *tile;
     f32 rows;
     f32 cols;
@@ -459,7 +459,7 @@ void func_802AAEE4_de(u16 *grid, f32 x0, f32 y, f32 sx, f32 sy) {
             w = tile[0];
             h = tile[1];
             area = w * h;
-            func_802A9734_de(tile + 2, (char *)tile + (area * 2 + 8), x, y, w, h, sx, sy);
+            Text_DrawScaledMaskedImage(tile + 2, (char *)tile + (area * 2 + 8), x, y, w, h, sx, sy);
             x += w * sx;
             tile = (u32 *)((char *)tile + (area * 2 + (area >> 1)));
             tile += 2;

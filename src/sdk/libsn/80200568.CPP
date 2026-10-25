@@ -25,7 +25,7 @@ void func_80200538_de(s32 arg0) {
     Libgultra_TrwSetSr(Libgultra_TrwGetSr() | arg0);
 }
 
-void func_80200568_de(s32 address, s32 value) {
+void Libsn_WritePortWord(s32 address, s32 value) {
     if (IO_READ_WORD(PI_STATUS_REG) & PI_STATUS_BUSY_MASK) {
         do {
         } while (IO_READ_WORD(PI_STATUS_REG) & PI_STATUS_BUSY_MASK);

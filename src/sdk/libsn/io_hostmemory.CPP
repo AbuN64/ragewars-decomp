@@ -26,7 +26,7 @@ void func_80200F98_de(s32 address, s32 value, u32 count)
     word = (((byte << 24) | (byte << 16)) | (new_var << 8)) | new_var;
     do
     {
-      func_80200568_de(address, word);
+      Libsn_WritePortWord(address, word);
       count -= 4;
       address += 4;
     }
@@ -68,8 +68,8 @@ void func_802010D8_de(u32 mode) {
     u32 i;
     Libsn_EnumerateMemoryRanges();
     port = 0xB1FE0000;
-    address = func_802005A0_de(0xB1FFFFF4);
-    remaining = func_802005A0_de(0xB1FFFFF8);
+    address = Libsn_ReadPortWord(0xB1FFFFF4);
+    remaining = Libsn_ReadPortWord(0xB1FFFFF8);
     if (address > 0xEFFFFFFF) address += (u32)D_8F0F3130;
     while (remaining != 0) {
         i = 0;
@@ -100,7 +100,7 @@ void func_802010D8_de(u32 mode) {
     }
 }
 
-extern s32 func_802005A0_de(s32 address);
+extern s32 Libsn_ReadPortWord(s32 address);
 
 /* Copy the block the debugger host announced (address at 0xB1FFFFF4, byte size at 0xB1FFFFF8) from its
  * 0xB1xxxxxx window onto the matching 0xB0xxxxxx address one word at a time, once the host signals ready at
@@ -110,18 +110,18 @@ void Io_CopyHostBlockToCart(void) {
     u32 size;
     u32 index;
 
-    address = func_802005A0_de(0xB1FFFFF4) & 0xB1FFFFFC;
-    size = func_802005A0_de(0xB1FFFFF8) & 0x01FFFFFC;
-    func_80200568_de(0xB1FFFFFC, 0);
-    while ((index = func_802005A0_de(0xB0000010)) == 0) {
-        func_802005DC_de(500);
+    address = Libsn_ReadPortWord(0xB1FFFFF4) & 0xB1FFFFFC;
+    size = Libsn_ReadPortWord(0xB1FFFFF8) & 0x01FFFFFC;
+    Libsn_WritePortWord(0xB1FFFFFC, 0);
+    while ((index = Libsn_ReadPortWord(0xB0000010)) == 0) {
+        Libsn_SpinDelay(500);
     }
     index = 0;
     if (size >> 2 != 0) {
         do {
-            func_80200568_de((address & 0xB07FFFFF) + index * 4, func_802005A0_de(address + index * 4));
+            Libsn_WritePortWord((address & 0xB07FFFFF) + index * 4, Libsn_ReadPortWord(address + index * 4));
         } while (++index < size >> 2);
     }
-    func_802005DC_de(2000);
-    func_80200568_de(0xB1FFFFF4, 0);
+    Libsn_SpinDelay(2000);
+    Libsn_WritePortWord(0xB1FFFFF4, 0);
 }

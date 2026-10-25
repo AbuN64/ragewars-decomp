@@ -3,5 +3,5 @@
 #include "TYPES.H"
 #include "IO/80200568.H"
 
-extern void func_802005DC_de(int arg0);
+extern void Libsn_SpinDelay(int arg0);
 #endif

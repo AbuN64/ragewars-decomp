@@ -17,7 +17,7 @@ void func_8020095C_de(u32 address,u8 *out,u32 count) {
    status=func_802B8CF0_de(D_800F2CE0,1,0,address,out,count,D_800F2CC0);
    if(status!=-1) { osRecvMesg(D_800F2CC0,0,1); count=0; }
   } else {
-   word=func_802005A0_de(address);
+   word=Libsn_ReadPortWord(address);
    *out++=word>>24; *out++=word>>16; *out++=word>>8; *out++=word;
    address+=4; count-=4;
   }

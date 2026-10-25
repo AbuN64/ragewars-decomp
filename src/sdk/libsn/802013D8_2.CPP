@@ -39,7 +39,7 @@ void osCreateThread(OSThread_s *thread, s32 id, void (*entry)(void *), void *arg
 void osSetEventMesg(s32 event, OSMesgQueue *queue, void *message); /* osSetEventMesg */
 void osStartThread(OSThread_s *thread); /* osStartThread */
 extern s32 func_80200500_de(void);
-extern s32 func_802017E8_de(s32, s32, s32, s32);
+extern s32 Libsn_SendHostCommand(s32, s32, s32, s32);
 extern void func_80200880_de(u32, void *, s32);
 extern void func_80200D18_de(u32, const void *, u32);
 extern void func_80200E04_de(u32, u8 *, u32);
@@ -60,22 +60,22 @@ void Libsn_InitializeHostRequestThread(s32 threadPriority) {
 /* Host monitor call: writes the three arguments and then the command word to the SN cart port, polls until
    the host clears the command (a set error word raises SN's debugger trap `break 1`; cc1 has no construct
    for it, SN wrote it inline in their runtime: the only `break 1` in the ROM) and returns the host's reply. */
-s32 func_802017E8_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    func_80200568_de(0xB1FFFFE4, arg1);
-    func_80200568_de(0xB1FFFFE8, arg2);
-    func_80200568_de(0xB1FFFFEC, arg3);
-    func_80200568_de(0xB1FFFFE0, arg0);
+s32 Libsn_SendHostCommand(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    Libsn_WritePortWord(0xB1FFFFE4, arg1);
+    Libsn_WritePortWord(0xB1FFFFE8, arg2);
+    Libsn_WritePortWord(0xB1FFFFEC, arg3);
+    Libsn_WritePortWord(0xB1FFFFE0, arg0);
     do {
-        func_802005DC_de(0x3E8);
-        if (func_802005A0_de(0xB1FFFFF0) != 0) {
+        Libsn_SpinDelay(0x3E8);
+        if (Libsn_ReadPortWord(0xB1FFFFF0) != 0) {
 #if defined(__i386__) || defined(__x86_64__)
             __builtin_trap();
 #else
             __asm__ volatile ("break 1");
 #endif
         }
-    } while (func_802005A0_de(0xB1FFFFE0) != 0);
-    return func_802005A0_de(0xB1FFFFDC);
+    } while (Libsn_ReadPortWord(0xB1FFFFE0) != 0);
+    return Libsn_ReadPortWord(0xB1FFFFDC);
 }
 void func_802018A0_de(void) {
     ControllerRequest *request;
@@ -91,14 +91,14 @@ void func_802018A0_de(void) {
             }
         }
         osRecvMesg(&D_800F1C90, 0, 0);
-        func_80200568_de(0xB1FFFFE4, request->argument0);
-        func_80200568_de(0xB1FFFFE8, request->argument1);
-        func_80200568_de(0xB1FFFFEC, request->argument2);
-        func_80200568_de(0xB1FFFFD8, 0x01010101);
-        func_80200568_de(0xB1FFFFE0, (u16)request->command);
+        Libsn_WritePortWord(0xB1FFFFE4, request->argument0);
+        Libsn_WritePortWord(0xB1FFFFE8, request->argument1);
+        Libsn_WritePortWord(0xB1FFFFEC, request->argument2);
+        Libsn_WritePortWord(0xB1FFFFD8, 0x01010101);
+        Libsn_WritePortWord(0xB1FFFFE0, (u16)request->command);
         osRecvMesg(&D_800F1C90, 0, 1);
         if (request->status != 0 && request->reserved == 0) {
-            s32 length = func_802005A0_de(0xB1FFFFDC);
+            s32 length = Libsn_ReadPortWord(0xB1FFFFDC);
             if (length != 0) {
                 if (request->command & 0x80000000) {
                     D_800C8140_de = 0;
@@ -110,7 +110,7 @@ void func_802018A0_de(void) {
             }
         }
         if (request->reply != 0) {
-            osSendMesg(request->reply, (OSMesg)func_802005A0_de(0xB1FFFFDC), 1);
+            osSendMesg(request->reply, (OSMesg)Libsn_ReadPortWord(0xB1FFFFDC), 1);
         }
     }
 }
@@ -121,7 +121,7 @@ s32 func_80201A80_de(void)
     s32 result;
     previous = func_80200500_de();
     D_800C8144_de = 1;
-    result = func_802017E8_de(0x101, 0, 0, 0);
+    result = Libsn_SendHostCommand(0x101, 0, 0, 0);
     func_80200538_de(previous);
     return result;
 }
@@ -164,7 +164,7 @@ u32 func_80201B50_de(u8 *buffer, s32 argument) {
         saved = func_80200500_de();
         length = func_802016DC_de(buffer);
         func_80200D18_de(0xB1FF0000, buffer, length);
-        response.status = func_802017E8_de(0x202, length, argument, 0);
+        response.status = Libsn_SendHostCommand(0x202, length, argument, 0);
         if (response.status & 0x8000) {
             response.status |= 0xFFFF0000;
         }
@@ -196,7 +196,7 @@ s32 func_80201C80_de(u8 *name, u32 flags) {
         saved = func_80200500_de();
         length = func_802016DC_de(name);
         func_80200D18_de(0xB1FF0000, name, length);
-        response.status = func_802017E8_de(0x303, length, flags, 0);
+        response.status = Libsn_SendHostCommand(0x303, length, flags, 0);
         if (response.status & 0x8000) {
             response.status |= 0xFFFF0000;
         }
@@ -222,7 +222,7 @@ s32 func_80201DB0_de(s32 arg0) {
         }
     } else {
         saved = func_80200500_de();
-        response.status = func_802017E8_de(0x404, arg0, 0, 0);
+        response.status = Libsn_SendHostCommand(0x404, arg0, 0, 0);
         if (response.status & 0x8000) {
             response.status |= 0xFFFF0000;
         }
@@ -266,7 +266,7 @@ s32 func_80201E94_de(s32 channel, u8 *destination, u32 remaining) {
             if (chunk > 0x8000) {
                 chunk = 0x8000;
             }
-            response.status = func_802017E8_de(0x505, channel, chunk, 0);
+            response.status = Libsn_SendHostCommand(0x505, channel, chunk, 0);
             if (response.status == 0) {
                 break;
             }
@@ -310,7 +310,7 @@ s32 func_80202018_de(s32 channel, u8 *source, u32 remaining) {
             chunk = remaining;
             if (chunk > 0x8000) chunk = 0x8000;
             func_80200D18_de(0xB1FF0000, source, chunk);
-            response.status = func_802017E8_de(0x606, channel, chunk, 0);
+            response.status = Libsn_SendHostCommand(0x606, channel, chunk, 0);
             if (response.status == 0) break;
             source += response.status;
             total += response.status;
@@ -335,7 +335,7 @@ s32 func_80202198_de(s32 arg0, u32 arg1, s32 arg2) {
         osRecvMesg(&D_800F3110, &response.message, 1);
     } else {
         saved = func_80200500_de();
-        response.status = func_802017E8_de(0x707, arg0, arg1, arg2);
+        response.status = Libsn_SendHostCommand(0x707, arg0, arg1, arg2);
         func_80200538_de(saved);
     }
     return response.status;
