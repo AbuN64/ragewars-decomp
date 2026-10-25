@@ -14,52 +14,48 @@ extern u16 D_800D5350[];
 extern u16 D_800D5374[];
 extern u16 D_8014AE00;
 
-typedef struct {
-    u8 pad0[0x14];
-    u16 *cursor;
-} PackedBitStream;
-#define STREAM(s) ((PackedBitStream *)(s))
-u16 Audio_ReadPackedSamples(u16 *out, u16 width, s32 count, s32 signExtend, void *stream) {
+/* NON_MATCHING: 28 aligned edits / 117 ROM words; remaining: the refill keeps &D_8014AE00 in a register for its store,
+   and the loop word/mask-table pointers swap t3/t4. */
+u16 Audio_ReadPackedSamples(u16 *out, u16 width, u16 count, s16 signExtend, DecodeState *stream) {
     s16 i;
+    u16 need;
     u16 *bitsLeft = &D_800D54B8;
-    u16 *word = &D_8014AE00;
-    u16 *masks = D_800D5350;
-    u16 *signs = D_800D5374;
-    u16 *p;
-    u16 v;
     if (*bitsLeft == 0) {
-        p = STREAM(stream)->cursor;
-        v = *p;
-        STREAM(stream)->cursor = p + 1;
+        u16 *cursor = stream->cursor;
+        u16 v = *cursor;
+        stream->cursor = cursor + 1;
         *bitsLeft = 16;
-        *word = v;
+        D_8014AE00 = v;
     }
-    i = 0;
-    if (count != 0) {
-        do {
-            u16 bits = *bitsLeft;
-            if (bits < width) {
-                u16 need = width - bits;
-                out[i] = (*word & masks[bits]) << need;
-                p = STREAM(stream)->cursor;
-                v = *p;
-                STREAM(stream)->cursor = p + 1;
-                *word = v;
-                out[i] |= ((s32)v >> (16 - need)) & masks[need];
-                if ((s16)signExtend != 0 && ((s16)out[i] & signs[width])) {
-                    out[i] |= ~masks[width];
-                }
-                *bitsLeft = 16 - need;
-            } else {
-                u16 r = (*word >> (bits - width)) & masks[width];
-                out[i] = r;
-                if ((s16)signExtend != 0 && ((s16)r & signs[width])) {
-                    out[i] = r | ~masks[width];
-                }
-                *bitsLeft = *bitsLeft - width;
+    for (i = 0; i < count; i++) {
+        u16 *left = &D_800D54B8;
+        u16 *word = &D_8014AE00;
+        u16 *masks = D_800D5350;
+        u16 *signs = D_800D5374;
+        if (*left < width) {
+            need = width - *left;
+            out[i] = (*word & masks[*left]) << need;
+            {
+                u16 *cursor = stream->cursor;
+                *word = *cursor;
+                stream->cursor = cursor + 1;
             }
-            i++;
-        } while (i < count);
+            {
+                s32 low = (*word >> (16 - need)) & masks[need];
+                out[i] |= low;
+            }
+            if (signExtend && ((s16)out[i] & signs[width])) {
+                out[i] |= ~masks[width];
+            }
+            *left = 16 - need;
+        } else {
+            s32 low = (*word >> (*left - width)) & masks[width];
+            out[i] = low;
+            if (signExtend && ((s16)out[i] & signs[width])) {
+                out[i] |= ~masks[width];
+            }
+            *left -= width;
+        }
     }
     return 1;
 }
