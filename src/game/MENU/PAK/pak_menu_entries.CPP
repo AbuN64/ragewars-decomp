@@ -112,7 +112,7 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
     PakEntryCallback callback;
     callback = menu->cls->hold;
     if (callback != 0) {
-        closeRequested = callback();
+        closeRequested = callback(menu, context);
     }
     i = menu->count;
     entry = menu->entries;
