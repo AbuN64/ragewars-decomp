@@ -90,7 +90,7 @@ typedef union VideoHorizontal {
     struct { s32 first : 16; u32 last : 16; } edge;
 } VideoHorizontal;
 
-/* 92/185 aligned edits; remaining: halfword and scale scheduling. */
+/* 25/185 aligned edits; remaining: borderY/2 vs vertical[0] first temp in t1/t2 and the vStart1 copy kept in a3. */
 /* Resize the selected VI mode around its horizontal and field centres. */
 void Frontend_SetVideoViewport(s32 width, s32 height, s32 x, s32 y, s32 borderX, s32 borderY) {
     VideoInterval vertical[2];
@@ -103,23 +103,23 @@ void Frontend_SetVideoViewport(s32 width, s32 height, s32 x, s32 y, s32 borderX,
 
     func_802BD3A0_de(mode, &D_800D4530[D_8014D500], 0x50);
     horizontal.packed = mode->comRegs.hStart;
-    scaleY = mode->fldRegs[0].yScale;
     vertical[0].packed = mode->fldRegs[0].vStart;
     originalHorizontal = horizontal;
     centerX = ((s16)horizontal.edge.last - horizontal.edge.first) / 2 + horizontal.edge.first - x;
+    centerY[0] = vertical[0].half.first + ((s16)vertical[0].half.last - (s16)vertical[0].half.first) / 2;
+    scaleY = mode->fldRegs[0].yScale;
+    centerY[0] -= y;
     horizontal.edge.first = centerX - width / 2 + borderX / 2;
     horizontal.edge.last = centerX + width / 2 - borderX * 2;
-    centerY[0] = vertical[0].half.first + ((s16)vertical[0].half.last - (s16)vertical[0].half.first) / 2;
-    centerY[0] -= y;
     vertical[0].half.first = centerY[0] - height / 2 + borderY / 2;
     vertical[0].half.last = centerY[0] + height / 2 - borderY * 2;
     scaleY &= 0xFFFF0000;
     scaleY |= (((height << 11) /
         ((s16)vertical[0].half.last - (s16)vertical[0].half.first)) & 0xFFFF);
     originalVertical[0].packed = mode->fldRegs[0].vStart;
-    vertical[0].half.last -= 3;
     vertical[1].packed = mode->fldRegs[1].vStart;
     centerY[1] = vertical[1].half.first + ((s16)vertical[1].half.last - (s16)vertical[1].half.first) / 2;
+    vertical[0].half.last -= 3;
     centerY[1] -= y;
     vertical[1].half.first = centerY[1] - height / 2 + borderY / 2;
     vertical[1].half.last = centerY[1] + height / 2 - borderY * 2;
