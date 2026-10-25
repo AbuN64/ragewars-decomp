@@ -350,7 +350,7 @@ extern char D_8013B364[];
 extern void Items_ReleaseObjectHandles(void *);
 extern void Items_SetSelection(void *, s32, s32);
 extern f32 Particle_GetPointDistance(void *, void *);
-extern s32 func_8020CB3C_de(void *, void *);
+extern s32 Nav_FindNearestPointIndex(void *, void *);
 extern void func_802647E8_de(void *, s32);
 extern void Ovlgame_InitActorHudState(void *);
 /* Places the player at the matching level spawn. In multiplayer, choose the last
@@ -420,6 +420,6 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
 fallback:
     Items_SetSelection(&D_8011FE88, model, scale);
 done:
-    cell = func_8020CB3C_de(D_8013B364, &((Shared_ActorView *)player)->position.vector);
+    cell = Nav_FindNearestPointIndex(D_8013B364, &((Shared_ActorView *)player)->position.vector);
     ((AiController *)((Shared_ActorView *)player)->owner)->current = cell;
 }

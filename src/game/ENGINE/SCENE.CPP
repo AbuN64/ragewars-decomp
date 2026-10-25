@@ -53,7 +53,7 @@ extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 extern void World_ResetPlayerState();
 extern void Nav_AssignPlatformEndpoints();
-extern s32 func_8020CB3C_de();
+extern s32 Nav_FindNearestPointIndex();
 extern void * Weapons_GetPlayerByIndex();
 extern void func_80236874_de();
 extern int Camera_IsSequenceActive();
@@ -466,7 +466,7 @@ scene_size_done:
             var_s2 = 0;
             if ((((struct SharedRecAt1B92C *)(table))->unk1B4E0) > 0) {
                 do {
-                    func_8020CA10_de(record, var_s2);
+                    Nav_InitSearchNode(record, var_s2);
                     func_80255D14_de(&((struct SharedRecAt1B92C *)table)->address1B500, record);
                     record = (void *)((char *)record + 0x50);
                 } while ((((struct SharedRecAt1B92C *)table)->unk1B4E0) > ++var_s2);
@@ -667,7 +667,7 @@ block_122:
         do {
             func_8024B2D0_de(temp_v0_2);
             func_8024B2D0_de(NEXT_SCENE_ACTOR(temp_v0_2));
-            (((struct func_80203E78_S1 *)(((struct SharedRecAt16E0V3 *)(var_s1_4))->unk1454))->unk4) = func_8020CB3C_de(&((struct SharedRecAt1B92C *)table)->unk1B4DC, &((struct SharedRecAt16E0V3 *)var_s1_4)->address8);
+            (((struct func_80203E78_S1 *)(((struct SharedRecAt16E0V3 *)(var_s1_4))->unk1454))->unk4) = Nav_FindNearestPointIndex(&((struct SharedRecAt1B92C *)table)->unk1B4DC, &((struct SharedRecAt16E0V3 *)var_s1_4)->address8);
             var_s1_4 = (((struct SharedRecAt16E0V3 *)(var_s1_4))->unk16E0);
             if (var_s1_4 == 0) {
                 break;

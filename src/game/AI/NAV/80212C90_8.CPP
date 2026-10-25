@@ -110,7 +110,7 @@ void func_80212E10_de(void) {
         "jal        Engine_GetPlatformRoutePoint\n"
         "nop\n"
         "addu       $a0, $s2, $zero\n"
-        "jal        func_8020CB3C_de\n"
+        "jal        Nav_FindNearestPointIndex\n"
         "addu      $a1, $v0, $zero\n"
         "sw         $v0, 0xC($s1)\n"
         ".Lauto_80212F8C:\n"

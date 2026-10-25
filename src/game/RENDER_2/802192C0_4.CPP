@@ -40,7 +40,7 @@ extern s32 D_800C9228_de[2];
 
 
 void *Nav_GetGraphPoint(void *, s32);
-s32 func_8020CB3C_de(void *, void *);
+s32 Nav_FindNearestPointIndex(void *, void *);
 s32 Weapons_SetPlayerState(void *, void *, s32);
 #ifndef NON_MATCHING
 void *Camera_PostScreenMessage(void *, void *, u8 *);
@@ -331,7 +331,7 @@ case 7:
                     }
                 }
                 if (var_s3_2 != 0) {
-                    temp_s0_5 = Nav_GetGraphPoint(&D_8013B364, func_8020CB3C_de(&D_8013B364, &player->position.vector));
+                    temp_s0_5 = Nav_GetGraphPoint(&D_8013B364, Nav_FindNearestPointIndex(&D_8013B364, &player->position.vector));
                     func_8024E79C_de(player, player->position.words, &spawnPosition, &sp90, 0, 0);
                     if (temp_s0_5 != 0) {
                         spawnPosition = *(CVector3 *)temp_s0_5;

@@ -78,10 +78,10 @@ s32 func_8020EAE0_de(void *arg0) {
 }
 
 extern u8 D_8011D8D0[];
-extern s32 func_8020CB3C_de(s32 *, void *);
+extern s32 Nav_FindNearestPointIndex(s32 *, void *);
 extern u8 *Nav_FindSearchNode(s32 *, s32);
 /* Finds the nav node of obj and stores weight as its goal weight (+0x18). */
-#define navigationNodeOf(graph, obj, out) do { (out) = Nav_FindSearchNode((graph), func_8020CB3C_de((graph), (obj))); } while (0)
+#define navigationNodeOf(graph, obj, out) do { (out) = Nav_FindSearchNode((graph), Nav_FindNearestPointIndex((graph), (obj))); } while (0)
 #define navigationSetGoalWeight(graph, obj, weight) do { u8 *node_; navigationNodeOf(graph, obj, node_); *(f32 *)(node_ + 0x18) = (weight); } while (0)
 void Nav_SetPickupGoalWeights(void *arg) {
     s32 *ctrl = &D_8013B364;

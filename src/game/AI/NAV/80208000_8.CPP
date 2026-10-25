@@ -89,7 +89,7 @@ ret0:
     return 0;
 }
 
-void func_8020CA10_de(void *arg0, s32 arg1)
+void Nav_InitSearchNode(void *arg0, s32 arg1)
 {
   NavigationPoint *entry;
   NavigationSearchNode *node = arg0;
@@ -128,7 +128,7 @@ void func_8020CA10_de(void *arg0, s32 arg1)
   }
 }
 
-s32 func_8020CB3C_de(struct Obj8020BC50 *pointSet, void *point) {
+s32 Nav_FindNearestPointIndex(struct Obj8020BC50 *pointSet, void *point) {
     CVector3 offset;
     f32 distanceSq;
     f32 bestDistanceSq;

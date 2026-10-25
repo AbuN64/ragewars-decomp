@@ -55,7 +55,7 @@ extern char D_8013B364;
 
 extern f32 D_800C3CD0_de[];
 
-extern s32 func_8020CB3C_de(void *, void *);
+extern s32 Nav_FindNearestPointIndex(void *, void *);
 
 extern CVector3 *Nav_GetGraphPoint(void *, s32);
 
@@ -140,7 +140,7 @@ void func_8024DBC0_de(void *actor, CVector3 pos, s32 sound, f32 volume) {
     SoundRequest request;
     CVector3 *emitter;
 
-    emitter = Nav_GetGraphPoint(&D_8013B364, func_8020CB3C_de(&D_8013B364, &pos));
+    emitter = Nav_GetGraphPoint(&D_8013B364, Nav_FindNearestPointIndex(&D_8013B364, &pos));
     request.position = pos;
     at = request.position;
     request.owner = ((struct Actor_func_80214DD4_de *)actor)->room;

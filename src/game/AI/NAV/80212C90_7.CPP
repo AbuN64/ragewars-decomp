@@ -34,7 +34,7 @@ extern RoutePatrolNodes D_8013B364;
 
 extern Clip *Engine_GetPlatformRoute(PatrolRouteSet *set, s32 route);
 extern s32 Engine_GetPlatformRoutePoint(PatrolRouteSet *set, s32 route, s32 pos);
-extern s32 func_8020CB3C_de(RoutePatrolNodes *list, s32 id);
+extern s32 Nav_FindNearestPointIndex(RoutePatrolNodes *list, s32 id);
 extern void *Nav_GetGraphPoint(RoutePatrolNodes *list, s32 index);
 extern void *Nav_GetControllerPosition(PatrolBot *bot);
 extern f32 Particle_GetPointDistance(void *a, void *b);
@@ -79,7 +79,7 @@ void func_80212E30_eu_x(PatrolActor *actor)
         if (bot->route == -2) {
             bot->goal = Nav_NextRandom() % nodes->count;
         } else {
-            bot->goal = func_8020CB3C_de(nodes, Engine_GetPlatformRoutePoint(&D_8011FE88, bot->route, bot->routePos));
+            bot->goal = Nav_FindNearestPointIndex(nodes, Engine_GetPlatformRoutePoint(&D_8011FE88, bot->route, bot->routePos));
         }
     }
     Nav_SteerAlongRoute(bot);
