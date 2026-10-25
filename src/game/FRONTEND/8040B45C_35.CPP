@@ -352,17 +352,17 @@ void Frontend_DrawButtonImage(ButtonWidget *widget, Triple at, Style style) {
     }
 }
 
-void Frontend_DrawClippedChildren(WidgetLayout *arg0, Args args) {
+void Frontend_DrawClippedChildren(WidgetLayout *widget, Args args) {
     Quad_func_802A1BE0_de basis;
     Quad_func_802A1BE0_de value;
     Quad_func_802A1BE0_de transformed;
     Quad_func_802A1BE0_de first;
     s32 changed;
-    UiWidget *window = arg0;
+    UiWidget *window = widget;
 
     changed = 0;
     D_800E2AB8 = 0;
-    if (Frontend_ComputeWidgetBounds((struct Shape_typemap_165 *)&first, (struct Shape_typemap_165 *)&basis, arg0, (sm_dldc *)&args) != 0) {
+    if (Frontend_ComputeWidgetBounds((struct Shape_typemap_165 *)&first, (struct Shape_typemap_165 *)&basis, widget, (sm_dldc *)&args) != 0) {
         if ((window->flags & 0x200) != 0) {
             func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
             transformed = value;

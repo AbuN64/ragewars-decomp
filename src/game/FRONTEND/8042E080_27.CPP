@@ -75,25 +75,25 @@ extern PakMenuController *D_800E54A4;
 
 s32 func_80430118_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 temp_s0;
-    s32 temp_s1;
-    s32 temp_v0;
+    s32 player;
+    s32 playerState;
     MenuWidget *var_s0;
     MenuWidget *var_s0_2;
     MenuWidget *var_s0_3;
 
-    temp_s1 = arg2 & 0xFFFF;
-    temp_v0 = D_800E54A4->players[temp_s1].state;
-    switch (temp_v0) {
+    player = arg2 & 0xFFFF;
+    playerState = D_800E54A4->players[player].state;
+    switch (playerState) {
     case 12:
         temp_s0 = func_8029DB58_de(arg4);
         if (temp_s0 < func_80299B4C_de()) {
-            D_800E54A4->players[temp_s1].nameTimer = 0;
-            D_800E54A4->players[temp_s1].namePhase = 2;
+            D_800E54A4->players[player].nameTimer = 0;
+            D_800E54A4->players[player].namePhase = 2;
         }
         if (arg3 == 1) {
             MarkMenuEventHandled();
-            func_80434EF4_de(temp_s1);
-            D_800E54A4->players[temp_s1].namePhase = 0;
+            func_80434EF4_de(player);
+            D_800E54A4->players[player].namePhase = 0;
             Render_PlayFlatSound(0xE81);
             return 0;
         }
@@ -101,48 +101,48 @@ s32 func_80430118_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     case 4:
         if (arg3 == 1) {
             MarkMenuEventHandled();
-            func_80434250_de(temp_s1, 1);
-            D_800E54A4->selected[temp_s1] = 0;
+            func_80434250_de(player, 1);
+            D_800E54A4->selected[player] = 0;
             Render_PlayFlatSound(0xE74);
             return 0;
         }
         return 0;
     case 13:
-        if ((D_800E54A4->players[temp_s1].sub == 6) && (arg3 == 1)) {
+        if ((D_800E54A4->players[player].sub == 6) && (arg3 == 1)) {
             MarkMenuEventHandled();
-            var_s0 = ((MenuWidget *)Menu_GetSlotValue(D_800E54A4->root, temp_s1))->next;
+            var_s0 = ((MenuWidget *)Menu_GetSlotValue(D_800E54A4->root, player))->next;
 loop_11:
             if (Frontend_ListHasFlag100(var_s0) != 0) {
                 var_s0 = var_s0->next;
                 goto loop_11;
             }
-            Menu_ShowSlotNode((D_800E54A4->root), temp_s1, var_s0);
+            Menu_ShowSlotNode((D_800E54A4->root), player, var_s0);
             Render_PlayFlatSound(0xE74);
             return 0;
         }
         return 0;
     case 22:
         if (arg3 == 1) {
-            var_s0_2 = ((MenuWidget *)Menu_GetSlotValue(D_800E54A4->root, temp_s1))->next;
+            var_s0_2 = ((MenuWidget *)Menu_GetSlotValue(D_800E54A4->root, player))->next;
 loop_16:
             if (Frontend_ListHasFlag100(var_s0_2) != 0) {
                 var_s0_2 = var_s0_2->next;
                 goto loop_16;
             }
-            Menu_ShowSlotNode((D_800E54A4->root), temp_s1, var_s0_2);
-            Frontend_RelabelSlotRows(temp_s1);
+            Menu_ShowSlotNode((D_800E54A4->root), player, var_s0_2);
+            Frontend_RelabelSlotRows(player);
         }
         goto block_24;
     case 27:
         if (arg3 == 1) {
-            var_s0_3 = ((MenuWidget *)Menu_GetSlotValue(D_800E54A4->root, temp_s1))->next;
+            var_s0_3 = ((MenuWidget *)Menu_GetSlotValue(D_800E54A4->root, player))->next;
 loop_21:
             if (Frontend_ListHasFlag100(var_s0_3) != 0) {
                 var_s0_3 = var_s0_3->next;
                 goto loop_21;
             }
-            Menu_ShowSlotNode((D_800E54A4->root), temp_s1, var_s0_3);
-            Frontend_UpdatePlayerControlRows(temp_s1);
+            Menu_ShowSlotNode((D_800E54A4->root), player, var_s0_3);
+            Frontend_UpdatePlayerControlRows(player);
         }
 block_24:
         MarkMenuEventHandled();

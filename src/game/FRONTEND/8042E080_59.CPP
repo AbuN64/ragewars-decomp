@@ -19,14 +19,14 @@ extern char D_80102B00[];
 
 
 
-void func_804356BC_de(s32 arg0) {
+void func_804356BC_de(s32 linkIndex) {
     char *record;
     s32 place;
     s32 owner;
 
-    place = D_800E54A4->links[arg0].player;
-    owner = D_800E54A4->links[arg0].entry;
-    record = &D_80102B00[arg0 * 400];
+    place = D_800E54A4->links[linkIndex].player;
+    owner = D_800E54A4->links[linkIndex].entry;
+    record = &D_80102B00[linkIndex * 400];
     if (place != -1) {
         Resmgr_CopyBytes(record, D_800E54A4->players[place].slots[owner], 400);
         ((struct RecordRecAtD *)record)->slot = (s8) owner;

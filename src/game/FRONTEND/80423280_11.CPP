@@ -59,10 +59,10 @@ s32 func_8042AE60_eu(void *arg0, s32 arg1, s32 arg2) {
     s32 temp_v1;
     s32 var_a1;
     s32 var_v0;
-    ListScreenItem *temp_a0;
-    ListScreenItem *temp_a0_2;
-    ListScreenItem *temp_a1;
-    ListScreenItem *temp_a1_2;
+    ListScreenItem *closeLeft;
+    ListScreenItem *closeRight;
+    ListScreenItem *openLeft;
+    ListScreenItem *openRight;
     void *var_a0;
     ListScreenItem *var_a0_2;
     void *var_a0_3;
@@ -92,10 +92,10 @@ block_7:
     temp_v0 = D_800E4F60->unk_3DC;
     switch (temp_v0) {
     case 1:
-        temp_a1 = D_800E4F60->left;
-        temp_a1->x = (u16) (temp_a1->x + (u16)D_800E4F60->leftCount);
-        temp_a1_2 = D_800E4F60->right;
-        temp_a1_2->x = (u16) (temp_a1_2->x - (u16)D_800E4F60->rightCount);
+        openLeft = D_800E4F60->left;
+        openLeft->x = (u16) (openLeft->x + (u16)D_800E4F60->leftCount);
+        openRight = D_800E4F60->right;
+        openRight->x = (u16) (openRight->x - (u16)D_800E4F60->rightCount);
         temp_v0_2 = D_800E4F60->unk_3E0 - 1;
         D_800E4F60->unk_3E0 = temp_v0_2;
         if (temp_v0_2 <= 0) {
@@ -107,10 +107,10 @@ block_7:
         }
         break;
     case 2:
-        temp_a0 = D_800E4F60->left;
-        temp_a0->x = (u16) (temp_a0->x - (u16)D_800E4F60->leftCount);
-        temp_a0_2 = D_800E4F60->right;
-        temp_a0_2->x = (u16) (temp_a0_2->x + (u16)D_800E4F60->rightCount);
+        closeLeft = D_800E4F60->left;
+        closeLeft->x = (u16) (closeLeft->x - (u16)D_800E4F60->leftCount);
+        closeRight = D_800E4F60->right;
+        closeRight->x = (u16) (closeRight->x + (u16)D_800E4F60->rightCount);
         temp_v0_3 = D_800E4F60->unk_3E0 - 1;
         D_800E4F60->unk_3E0 = temp_v0_3;
         if (temp_v0_3 <= 0) {

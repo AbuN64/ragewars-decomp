@@ -283,9 +283,9 @@ s16 func_80411D94_de(void) {
     return D_801539B0.NLanguages;
 }
 
-void Frontend_LoadLanguageStringsIfAny(s32 arg0) {
+void Frontend_LoadLanguageStringsIfAny(s32 languageIndex) {
     if (D_801539B0.NLanguages != 0) {
-        Frontend_LoadLanguageStrings(arg0);
+        Frontend_LoadLanguageStrings(languageIndex);
     }
 }
 

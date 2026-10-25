@@ -289,7 +289,7 @@ s32 func_8041EED0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 s32 func_8041EFAC_de(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
     s32 temp_a1;
-    s32 temp_a1_2;
+    s32 selectedRow;
     u32 temp_a2;
 
     temp_a2 = arg2 >> 0x10;
@@ -299,8 +299,8 @@ s32 func_8041EFAC_de(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
         *(s32 *)((char *)D_8014DCF8 + temp_a1) = (*(s32 *)((char *)D_8014DCF8 + temp_a1) + 1) % 5;
         func_8041E408_de(D_800E39C0->selection);
         if (func_802999A0_de(0) == 0x16) {
-            temp_a1_2 = D_800E39C0->selection;
-            D_801462C8.playerSettings[7 - temp_a1_2].rank = *(D_8014DCFB + (temp_a1_2 * 0x1C));
+            selectedRow = D_800E39C0->selection;
+            D_801462C8.playerSettings[7 - selectedRow].rank = *(D_8014DCFB + (selectedRow * 0x1C));
         }
     }
     return 0;
