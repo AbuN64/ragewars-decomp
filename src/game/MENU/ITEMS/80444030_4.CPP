@@ -157,16 +157,16 @@ INCLUDE_ASM("ovl_80400000", Items_ResetGameOptions);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 func_80444F30_eu
 #else
-func_804440F0_de
+Items_SetDefaultPlayerName
 #endif
  on the record. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern void func_80444F30_eu(u8 *);
 #else
-extern void func_804440F0_de(u8 *);
+extern void Items_SetDefaultPlayerName(u8 *);
 #endif
 
-void func_80444094_de(u8 *record, u8 value) {
+void Items_ResetPlayerSettings(u8 *record, u8 value) {
     record[0x79] = 0x86;
     record[0x7A] = 0x84;
     record[0x78] = 0;
@@ -185,7 +185,7 @@ void func_80444094_de(u8 *record, u8 value) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 func_80444F30_eu
 #else
-func_804440F0_de
+Items_SetDefaultPlayerName
 #endif
 (record);
 }
@@ -199,7 +199,7 @@ extern u8 *D_800D3C48;
 extern u8 *D_800D3C4C;
 extern u8 *D_800D3C50;
 
-void func_804440F0_de(u8 *record) {
+void Items_SetDefaultPlayerName(u8 *record) {
     s32 i;
 
     switch ((signed char)record[0x7F]) {

@@ -26,7 +26,7 @@ extern TextEntryRecAtC D_800E63C0[];
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern void func_80442384_de(s32,EntryRecAt1C *,s32), func_80444F30_eu(void *);
 #else
-extern void func_80442384_de(s32,EntryRecAt1C *,s32), func_804440F0_de(void *);
+extern void func_80442384_de(s32,EntryRecAt1C *,s32), Items_SetDefaultPlayerName(void *);
 #endif
 
 extern s32 Weapons_GetPlayerIndex(void *table, void *player);
@@ -85,7 +85,7 @@ s32 func_80445E04_de(s32 arg0, EntryRecAt1C *arg1, s32 arg2) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 func_80444F30_eu
 #else
-func_804440F0_de
+Items_SetDefaultPlayerName
 #endif
 (temp_s1->unk5D8);
     }

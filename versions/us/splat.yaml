@@ -4712,7 +4712,7 @@ segments:
       - [0xDE016, data, data_800C/rodata_unresolved_800DD416]
       - [0xDE018, rodata, data_800C/D_blob_c5d93977abc56847c570]
       - [0xDE01C, rodata, data_800C/D_auto_rodata_unresolved_800DD41C]
-      - [0xDE020, rodata, data_800C/literals_func_804440F0_de]
+      - [0xDE020, rodata, data_800C/literals_Items_SetDefaultPlayerName]
       - [0xDE040, rodata, data_800C/literals_func_80444920_de]
       - [0xDE044, data, data_800C/D_auto_rodata_unresolved_800DD444]
       - [0xDE098, data, data_800C/D_blob_phase2_8823d8e776d2f7fae076]
