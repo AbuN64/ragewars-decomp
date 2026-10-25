@@ -35,7 +35,7 @@ s32 func_8020EA10_de(void **controller) {
     if (((Shared_ActorView *)*controller)->controls->transientFlag != 0) {
         return 0;
     }
-    if (func_8022A83C_de(base - 0x1860) != 0) {
+    if (Weapons_FindPlayerWithMarker(base - 0x1860) != 0) {
         return 0;
     }
     temp_f20 = Nav_GetScaledAggression(controller) * D_800C1E50_de + D_800C1E54_de;

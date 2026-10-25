@@ -41,7 +41,7 @@ typedef struct Chaser {
     s32 dist[10];
 } Chaser;
 
-Racer *func_8022A5F4_de(MatchWorld *arg0, u32 arg1);
+Racer *Weapons_GetPlayerByIndex(MatchWorld *arg0, u32 arg1);
 f32 Particle_GetPointDistance(void *arg0, void *arg1);
 s32 Nav_EvaluateAttackTarget(AiController *brain, s32 index);
 
@@ -62,7 +62,7 @@ s32 func_80210248_eu(Chaser *self) {
     world = (MatchWorld *)&D_80145040;
     rules = &world->rules;
     for (; i < 8; i++) {
-        other = func_8022A5F4_de(world, i);
+        other = Weapons_GetPlayerByIndex(world, i);
         if (other != NULL && other != self->self
             && (rules->teamsEnabled == 0 || other->team->id != self->self->team->id)
             && (other->stateBits >> 8) > 0) {

@@ -51,7 +51,7 @@ extern char D_80145040[];
 
 extern void func_80285D30_de(void *);
 struct Context;
-extern void func_8022A880_de(struct Context *);
+extern void Weapons_ResetPlayerControllers(struct Context *);
 
 
 
@@ -61,7 +61,7 @@ void func_8044DD50_de(char *match) {
 
     Render_SetControllerMode(0);
     func_80285D30_de(D_8010EC90);
-    func_8022A880_de(D_80145040);
+    Weapons_ResetPlayerControllers(D_80145040);
     state = &D_801462C8.counters;
     state->teams = 0;
     state->m_bFragTagOn = 0;

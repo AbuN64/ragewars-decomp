@@ -41,8 +41,8 @@ typedef struct func_80230BB8_S5 func_80230BB8_S5;
 struct ObjectState44;
 typedef struct ObjectState44 ObjectState44;
 
-struct Obj_func_8022F3F8_de;
-typedef struct Obj_func_8022F3F8_de Obj_func_8022F3F8_de;
+struct ObjWeaponsIncrementLevelProgress;
+typedef struct ObjWeaponsIncrementLevelProgress ObjWeaponsIncrementLevelProgress;
 
 union ObjectLinks4;
 union ObjectLinks4 {
@@ -261,8 +261,8 @@ typedef struct func_80230620_S3 func_80230620_S3;
 struct func_8022F95C_S1;
 typedef struct func_8022F95C_S1 func_8022F95C_S1;
 
-struct Obj_func_8022F3F8_de;
-struct Obj_func_8022F3F8_de {
+struct ObjWeaponsIncrementLevelProgress;
+struct ObjWeaponsIncrementLevelProgress {
     char pad[0x18];
     unsigned char slots[13];
 };

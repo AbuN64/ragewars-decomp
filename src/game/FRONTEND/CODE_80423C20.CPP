@@ -35,7 +35,7 @@ extern void func_8022EF30_de(char *);
 
 extern void func_80434FB4_de(s32);
 
-extern void func_8022F5A4_de(char *, s32);
+extern void Weapons_SetAchievementFlag7(char *, s32);
 
 extern void func_8041A430_de(void *, s32);
 
@@ -270,7 +270,7 @@ s32 Frontend_ApplyModeChoice(void) {
         if (D_80102B00[0].player < 0) {
             func_8022F204_de(0);
             for (i = 0; i < 20; i++) {
-                func_8022F5A4_de((char *)D_80102B00, i);
+                Weapons_SetAchievementFlag7((char *)D_80102B00, i);
             }
         }
         D_801462C8.controllerMode = 3;

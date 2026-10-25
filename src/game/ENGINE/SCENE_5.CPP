@@ -537,7 +537,7 @@ extern void *func_80254284_de(s32, void **, s32, void *);
 extern ResultsText *func_80254408_de(s32, void *, s32, s32, void *, s32, void *);
 extern void func_802BD3A0_de(void *, const void *, s32);
 extern s32 func_802A0C08_de(char *, const char *, ...);
-extern u8 func_8022F454_de(Profile *, s32);
+extern u8 Weapons_GetLevelProgress(Profile *, s32);
 extern void func_8028DA74_de(Shared_World *);
 extern void *Scene_RequestResource(s32, u32, u32, u32, u32, s32, void *, const char *, u32);
 extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
@@ -670,7 +670,7 @@ void Scene_ShowResultsGoal(void) {
     switch (mode) {
     case 1:
         func_80245A78_de(goal);
-        players = (func_8022F454_de(D_80102B00, D_80102B00[0].slot) >> 1) + 1;
+        players = (Weapons_GetLevelProgress(D_80102B00, D_80102B00[0].slot) >> 1) + 1;
         if (players < 2) {
             func_802A0C08_de(name, RESULTS_TEXT(D_800D3388, D_800E1874), players);
         } else {

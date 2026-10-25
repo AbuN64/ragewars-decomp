@@ -47,7 +47,7 @@ INCLUDE_ASM("span_1000", func_80204030_de);
 #endif
 #define LV_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 extern s32 D_auto_800D70DC;
-extern u8 *func_8022A420_de(u8 *);
+extern u8 *Weapons_FindTransientPlayer(u8 *);
 extern f32 Math_Sqrtf(f32);
 extern void func_8022E17C_de(void *, void *, s32);
 extern void Camera_PostScreenMessage(u8 *, void *, s32);
@@ -68,7 +68,7 @@ void LV_FN(u8 *self, u8 *hit) {
     u32 t1;
     switch (kind) {
     case 0x64E:
-        player = func_8022A420_de((u8 *)&D_80145040);
+        player = Weapons_FindTransientPlayer((u8 *)&D_80145040);
         if (player != 0 && LV_FIELD(player, s32, 0x5E4) != 0 && LV_FIELD(hit, s8, 0x36) != LV_FIELD(hit, s8, 0x34)) {
             table = (u8 *)&D_80145040 + 0x1860;
             if (LV_FIELD(table, s32, 0x68) == 0 && LV_FIELD(hit, s32, 0x12C) == 0) {
@@ -89,7 +89,7 @@ void LV_FN(u8 *self, u8 *hit) {
         if (LV_FIELD(hit, s8, 0x36) == LV_FIELD(hit, s8, 0x34)) {
             return;
         }
-        player = func_8022A420_de((u8 *)&D_80145040);
+        player = Weapons_FindTransientPlayer((u8 *)&D_80145040);
         if (player == 0 || LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) == 0) {
             return;
         }

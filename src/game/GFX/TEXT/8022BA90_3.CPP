@@ -34,7 +34,7 @@ extern Course *D_800E4680;
 
 extern char D_80102B00[][0x190];
 
-extern unsigned char func_8022F454_de(char *, int);
+extern unsigned char Weapons_GetLevelProgress(char *, int);
 
 extern u8 D_801462DE;
 
@@ -112,7 +112,7 @@ void func_8022C110_de(PlayerRecAt1450V2 *player) {
 
     if (D_801462C8.started != 0) {
         if (D_801462C8.mode == 1 && player->isBot == 0) {
-            player->lives = (unsigned char)func_8022F454_de(D_80102B00[player->character], player->info->unk80) / 2 + 1;
+            player->lives = (unsigned char)Weapons_GetLevelProgress(D_80102B00[player->character], player->info->unk80) / 2 + 1;
         }
         if (D_801462C8.mode == 4 && player->isBot == 0 && D_800E4680 != 0) {
             player->lives = D_800E4680->laps;

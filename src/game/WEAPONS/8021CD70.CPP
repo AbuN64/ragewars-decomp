@@ -122,7 +122,7 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
         /* The ROM ABI returns a three-float vector and takes a three-float offset. */
         forward = ((CVector3 (*)(void *, CVector3))func_8024BC94_de)(player, unit);
         origin = player->position;
-        origin.y += func_8022ADBC_de(player);
+        origin.y += Weapons_GetObjectOwnerHeight(player);
         enable = &D_80145088.settings.local;
         if (*enable) {
             other = ((AimGlobals *)(enable - 0x1285))->head;

@@ -13,7 +13,7 @@ s32 func_80209AD8_de(void *);
 f32 Nav_GetScaledAggression(void *);
 s32 func_8020EA10_de(void *);
 s32 func_8020F5A4_de(void *);
-s32 func_8022AAD4_de(void *, s16);
+s32 Weapons_GetWeaponClassId(void *, s16);
 s32 func_8022AB20_de(void *, s16);
 s32 func_8022AC00_de(void *);
 s32 func_8022ACB8_de(void *, s32, s32);
@@ -41,7 +41,7 @@ s32 Nav_SelectPlayerState(AiController *controller) {
     maxHealth = func_8022AC00_de(controller->player) >> 8;
     healthPercent = (f32)health / (f32)maxHealth * 100.0f;
     ammoCount = func_8022AB20_de(controller->player, controller->player->selectedAction);
-    ammoType = func_8022AAD4_de(controller->player, controller->player->selectedAction);
+    ammoType = Weapons_GetWeaponClassId(controller->player, controller->player->selectedAction);
     capacity = func_8022ACB8_de(controller->player, ammoType, 1);
     if (capacity != 0 && ammoCount != -1) {
         ammoPercent = (f32)ammoCount / (f32)capacity * 100.0f;
@@ -51,7 +51,7 @@ s32 Nav_SelectPlayerState(AiController *controller) {
     ammo0 = controller->player->ammo[0];
     ammo1 = controller->player->ammo[1];
     ammo2 = controller->player->ammo[2];
-    carrier = func_8022A83C_de((char *)&D_80145040);
+    carrier = Weapons_FindPlayerWithMarker((char *)&D_80145040);
     if (carrier != 0 && D_80145040.game.counters.m_bCTFOn != 0) {
         if (carrier == controller->player) {
             nextState = 10;

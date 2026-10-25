@@ -51,7 +51,7 @@ extern void Nav_UpdatePlayerSteering(void *arg0);
 extern void Nav_SelectPlayerState(void *arg0);
 
 
-extern void *func_8022A83C_de(char *);
+extern void *Weapons_FindPlayerWithMarker(char *);
 
 extern f32 Nav_DistanceToNode(s32 *, s32);
 
@@ -217,7 +217,7 @@ void func_80212C04_de(void *arg0) {
     ObjRecAt1454V1 *actor = object->unk1D8;
 
     rec = actor->unk1454;
-    v0 = func_8022A83C_de((char *)&D_80145040);
+    v0 = Weapons_FindPlayerWithMarker((char *)&D_80145040);
     if (v0 == (void *) *rec) {
         func_80209874_de(rec, 10);
         return;

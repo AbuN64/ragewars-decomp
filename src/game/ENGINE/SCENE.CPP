@@ -54,7 +54,7 @@ extern void Scene_ReleaseResource(void *arg0, void *arg1);
 extern void World_ResetPlayerState();
 extern void Nav_AssignPlatformEndpoints();
 extern s32 func_8020CB3C_de();
-extern void * func_8022A5F4_de();
+extern void * Weapons_GetPlayerByIndex();
 extern void func_80236874_de();
 extern int Camera_IsSequenceActive();
 extern void func_80246E44_de();
@@ -286,7 +286,7 @@ void func_80286AA8_de(void *table, s32 target, s32 arg2) {
     func_8025C8D8_de(&D_8011F260, &D_8011AFC0, 0xF);
     Ovlgame_StartPanelMovers(&D_801376F8);
     do {
-        var_s1_4 = func_8022A5F4_de(&D_80145040, var_s2);
+        var_s1_4 = Weapons_GetPlayerByIndex(&D_80145040, var_s2);
         if (var_s1_4 != 0) {
             temp_v1 = var_s1_4->unk5D8;
             if ((((struct SharedRecAt91 *)temp_v1)->unk78 == 1) && (((struct SharedRecAt91 *)temp_v1)->unk91 == 1)) {

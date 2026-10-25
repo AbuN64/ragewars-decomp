@@ -63,7 +63,7 @@ void func_8021A78C_de(void *arg0) {
     ((ObjectLinks16D8 *)(object))->unk_734 = 0;
     ((ObjectLinks16D8 *)(object))->unk_738 = 0;
     ((ObjectLinks16D8 *)(object))->unk_73C = 0;
-    ((ObjectLinks16D8 *)(object))->unk_740 = func_8022ADBC_de(object);
+    ((ObjectLinks16D8 *)(object))->unk_740 = Weapons_GetObjectOwnerHeight(object);
     default_value = D_800C22F8_de;
     ((ObjectLinks16D8 *)(object))->unk_744 = 0;
     (&((ObjectLinks16D8 *)(object))->unk_748)->x = (&((ObjectLinks16D8 *)(object))->unk_748)->y = (&((ObjectLinks16D8 *)(object))->unk_748)->z = 0;

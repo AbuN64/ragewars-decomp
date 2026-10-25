@@ -66,7 +66,7 @@ void Weapons_InitializePlayerHealth(void *);
 
 s32 func_802281F0_de(void *);
 
-void * func_8022A5F4_de(void *, u32);
+void * Weapons_GetPlayerByIndex(void *, u32);
 
 void * func_8022C55C_de(void *, u32);
 
@@ -246,7 +246,7 @@ void func_80227038_de(s8 *world) {
                     banner_half = D_800C2BA0_de;
                     banner_size = D_800C2BA4_de;
                     do {
-                        player = func_8022A5F4_de(world, var_s2);
+                        player = Weapons_GetPlayerByIndex(world, var_s2);
                         if (player != 0) {
                             temp_v1 = player->unk5D8;
                             if (temp_v1->unk90 == 0) {
@@ -484,7 +484,7 @@ void func_80227038_de(s8 *world) {
                     banner_half = D_800C2BB8_de;
                     banner_size = D_800C2BBC_de;
                     do {
-                        temp_v0_11 = func_8022A5F4_de(world, var_s2);
+                        temp_v0_11 = Weapons_GetPlayerByIndex(world, var_s2);
                         if (temp_v0_11 != 0) {
                             temp_v1_3 = temp_v0_11->unk5D8;
                             if (temp_v1_3->unk8F == 0) {

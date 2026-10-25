@@ -34,7 +34,7 @@ extern struct Shared_StateInfo D_800CED30[];
 extern struct Shared_StateInfo D_800C9684[];
 extern void func_8020AF9C_de(void *, void *);
 extern void func_80213CF8_de(void *, void *);
-extern void func_80216488_de(void *, s32, s32, s32, s32, s32);
+extern void Weapons_FillDamagePacket(void *, s32, s32, s32, s32, s32);
 extern void Team_UpdateDraftPanel(void *, void *, void *);
 extern void func_80218B84_de(void *, void *, void *);
 extern void func_80219480_de(void *, void *);
@@ -355,7 +355,7 @@ void func_80220ED4_de(SharedPlayer *player)
       if ((material->flags & 0x4000) && (player->views5E4.view5E4_2.health > 0))
       {
         Weapons_SetPlayerState(player, player, 32);
-        func_80216488_de(scratch.views0.view0_0.damage, 0, 0x3E700, 0x41CCCCCC, 128, 0);
+        Weapons_FillDamagePacket(scratch.views0.view0_0.damage, 0, 0x3E700, 0x41CCCCCC, 128, 0);
         func_80219A40_de(player, &player->views1C.view170_23.unk170, scratch.views0.view0_0.damage);
       }
       if (material->flags & 0x80000)
@@ -365,7 +365,7 @@ void func_80220ED4_de(SharedPlayer *player)
         {
           if (player->views5E4.view5E4_2.health > 0)
           {
-            func_80216488_de(scratch.views0.view0_0.damage, 0, material->sound << 8, 0x41CCCCCC, 128, 0);
+            Weapons_FillDamagePacket(scratch.views0.view0_0.damage, 0, material->sound << 8, 0x41CCCCCC, 128, 0);
             func_80219A40_de(player, &player->views1C.view170_23.unk170, scratch.views0.view0_0.damage);
           }
           player->views5E8.view854_147.unk854 = material->timer;

@@ -33,7 +33,7 @@
 
 extern void func_802394BC_de(char *, f32, f32, f32, f32, s32, Triple);
 extern void Weapons_SetPlayerState(SharedPlayer *, SharedPlayer *, s32);
-extern void func_80216488_de(Slot *, Held *, s32, f32, s32, s32);
+extern void Weapons_FillDamagePacket(Slot *, Held *, s32, f32, s32, s32);
 extern void func_80219A40_de(SharedPlayer *, char *, Slot *);
 
 void func_80226340_de(SharedPlayer *player) {
@@ -59,9 +59,9 @@ void func_80226340_de(SharedPlayer *player) {
         player->views1C.view100_9.flags &= ~0x800000;
         Weapons_SetPlayerState(player, player, 2);
         if (owner->options & 0x200) {
-            func_80216488_de(&hit, player->views13D8.view13D8_1.held, 0x30200, 25.599998f, 0x80, 0);
+            Weapons_FillDamagePacket(&hit, player->views13D8.view13D8_1.held, 0x30200, 25.599998f, 0x80, 0);
         } else {
-            func_80216488_de(&hit, player->views13D8.view13D8_1.held, 0x4600, 25.599998f, 0x80, 0);
+            Weapons_FillDamagePacket(&hit, player->views13D8.view13D8_1.held, 0x4600, 25.599998f, 0x80, 0);
         }
         player->views13D8.view13D8_1.held = 0;
         func_80219A40_de(player, player->views1C.view170_16.body, &hit);

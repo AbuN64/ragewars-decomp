@@ -13,7 +13,7 @@
 #include "COMMON/STATERECAT91.H"
 #include "ACHIEVE/80424E30_2.H"
 #include "COMMON/PLAYERPROFILES.H"
-extern s32 func_8022F454_de(Profile *, s32);
+extern s32 Weapons_GetLevelProgress(Profile *, s32);
 
 /* Applies event *D_800E4680 to player record D_80102B00[index] once per D_8015402C: when that bit
    of the record's current slot flags is already set it returns -1; otherwise it sets the bit and,
@@ -30,9 +30,9 @@ extern s32 func_80265650_de(u8 *, s32);
 
 extern void func_80265688_de(u8 *, s32, s32);
 
-extern void func_8022F3F8_de(Profile *, s32);
+extern void Weapons_IncrementLevelProgress(Profile *, s32);
 
-extern void func_8022F4BC_de(Profile *, s32);
+extern void Weapons_SetAchievementFlag2F(Profile *, s32);
 
 extern void func_8022F514_de(Profile *, s32);
 
@@ -211,29 +211,29 @@ s32 func_80425014_de(s32 index) {
         case 57: goto effect_35;
         }
     effect_0:
-        func_8022F3F8_de(player, player->slot);
-        func_8022F3F8_de(player, player->slot);
+        Weapons_IncrementLevelProgress(player, player->slot);
+        Weapons_IncrementLevelProgress(player, player->slot);
         goto done;
     effect_1:
-        func_8022F3F8_de(player, player->slot);
-        if ((func_8022F454_de(player, player->slot) & 1) == 0) {
+        Weapons_IncrementLevelProgress(player, player->slot);
+        if ((Weapons_GetLevelProgress(player, player->slot) & 1) == 0) {
             result = 5001;
         }
         goto done;
     effect_2:
-        func_8022F4BC_de(player, 4);
+        Weapons_SetAchievementFlag2F(player, 4);
         goto done;
     effect_3:
         func_8022F514_de(player, 2);
         goto done;
     effect_4:
-        func_8022F4BC_de(player, 14);
+        Weapons_SetAchievementFlag2F(player, 14);
         goto done;
     effect_5:
         func_8022F514_de(player, 6);
         goto done;
     effect_6:
-        func_8022F4BC_de(player, 7);
+        Weapons_SetAchievementFlag2F(player, 7);
         goto done;
     effect_7:
         func_8022F514_de(player, 16);
@@ -245,7 +245,7 @@ s32 func_80425014_de(s32 index) {
         func_8022F514_de(player, 17);
         goto done;
     effect_10:
-        func_8022F4BC_de(player, 6);
+        Weapons_SetAchievementFlag2F(player, 6);
         goto done;
     effect_11:
         func_8022F514_de(player, 14);
@@ -254,10 +254,10 @@ s32 func_80425014_de(s32 index) {
         func_8022F514_de(player, 4);
         goto done;
     effect_13:
-        func_8022F4BC_de(player, 12);
+        Weapons_SetAchievementFlag2F(player, 12);
         goto done;
     effect_14:
-        func_8022F4BC_de(player, 10);
+        Weapons_SetAchievementFlag2F(player, 10);
         goto done;
     effect_15:
         func_8022F31C_de(player);
@@ -266,10 +266,10 @@ s32 func_80425014_de(s32 index) {
         func_8022F514_de(player, 8);
         goto done;
     effect_17:
-        func_8022F4BC_de(player, 8);
+        Weapons_SetAchievementFlag2F(player, 8);
         goto done;
     effect_18:
-        func_8022F4BC_de(player, 15);
+        Weapons_SetAchievementFlag2F(player, 15);
         goto done;
     effect_19:
         func_8022F514_de(player, 11);
@@ -287,10 +287,10 @@ s32 func_80425014_de(s32 index) {
         func_8022F340_de(player);
         goto done;
     effect_24:
-        func_8022F4BC_de(player, 13);
+        Weapons_SetAchievementFlag2F(player, 13);
         goto done;
     effect_25:
-        func_8022F4BC_de(player, 9);
+        Weapons_SetAchievementFlag2F(player, 9);
         goto done;
     effect_26:
         func_8022F514_de(player, 1);
@@ -305,16 +305,16 @@ s32 func_80425014_de(s32 index) {
         func_8022F514_de(player, 13);
         goto done;
     effect_30:
-        func_8022F4BC_de(player, 5);
+        Weapons_SetAchievementFlag2F(player, 5);
         goto done;
     effect_31:
-        func_8022F4BC_de(player, 1);
+        Weapons_SetAchievementFlag2F(player, 1);
         goto done;
     effect_32:
         func_8022F514_de(player, 0);
         goto done;
     effect_33:
-        func_8022F4BC_de(player, 11);
+        Weapons_SetAchievementFlag2F(player, 11);
         goto done;
     effect_34:
         player->count++;
@@ -341,7 +341,7 @@ char *Achieve_GetResultText(s32 result) {
         text = RW_LOCALIZED_TEXT(D_800D34E4, D_800E1DE4, D_800E1DE4, D_80152789);
         break;
     case 5002:
-        if ((func_8022F454_de(player, player->slot) & 1) == 0) {
+        if ((Weapons_GetLevelProgress(player, player->slot) & 1) == 0) {
             text = RW_LOCALIZED_TEXT(D_800D34EC, D_800E1E04, D_800E1E04, D_80152789);
         } else {
             text = RW_LOCALIZED_TEXT(D_800D34E8, D_800E1DF4, D_800E1DF4, D_80152789);

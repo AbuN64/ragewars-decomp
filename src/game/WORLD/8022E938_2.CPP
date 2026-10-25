@@ -8,8 +8,8 @@ extern void func_8022F338_de(void *, u8);
 extern void func_8022F35C_de(void *, u8);
 extern void func_8022F380_de(void *, s32);
 extern void func_8022F3A4_de(void *, s32, s32);
-extern void func_8022F5A4_de(s32, s32);
-extern void func_8022F4BC_de(s32, s32);
+extern void Weapons_SetAchievementFlag7(s32, s32);
+extern void Weapons_SetAchievementFlag2F(s32, s32);
 
 
 
@@ -53,18 +53,18 @@ void func_8022EF30_de(void *arg0) {
     Resmgr_FillMemory((s32)((char *)object + 0x7D), 0, 1);
     Resmgr_FillMemory((s32)((char *)object + 0x51), 0, 3);
     Resmgr_FillMemory((s32)((char *)object + 0x125), 0, 0x64);
-    func_8022F5A4_de((s32)object, 0);
-    func_8022F5A4_de((s32)object, 5);
-    func_8022F5A4_de((s32)object, 7);
+    Weapons_SetAchievementFlag7((s32)object, 0);
+    Weapons_SetAchievementFlag7((s32)object, 5);
+    Weapons_SetAchievementFlag7((s32)object, 7);
     Resmgr_FillMemory((s32)((char *)object + 0x57), 0, 0x14);
     Resmgr_FillMemory((s32)((char *)object + 0x54), 0, 3);
     Resmgr_FillMemory((s32)((char *)object + 0x4A), 0, 7);
     Resmgr_FillMemory((s32)((char *)object + 0x78), 0, 1);
     Resmgr_FillMemory((s32)((char *)object + 0x79), 0, 2);
-    func_8022F4BC_de((s32)object, 0);
-    func_8022F4BC_de((s32)object, 2);
-    func_8022F4BC_de((s32)object, 3);
-    func_8022F4BC_de((s32)object, 4);
+    Weapons_SetAchievementFlag2F((s32)object, 0);
+    Weapons_SetAchievementFlag2F((s32)object, 2);
+    Weapons_SetAchievementFlag2F((s32)object, 3);
+    Weapons_SetAchievementFlag2F((s32)object, 4);
     Resmgr_FillMemory((s32)((char *)object + 0x7B), 0, 2);
     Resmgr_FillMemory((s32)((char *)object + 0x7E), 0, 5);
     Resmgr_FillMemory((s32)((char *)object + 0x88), 0, 5);

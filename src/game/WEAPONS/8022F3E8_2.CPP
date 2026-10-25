@@ -30,7 +30,7 @@ extern void Rsp_MultiplyAffineMatrices(void *, void *, void *);
 
 extern s32 func_80265650_de(void *, s32);
 extern void func_80265688_de(u8 *, s32, s32);
-void func_8022F4BC_de(Profile *player, s32 arg1) {
+void Weapons_SetAchievementFlag2F(Profile *player, s32 arg1) {
     func_80265688_de(&player->achievementFlags[0x2F], arg1, 1);
 }
 
@@ -94,12 +94,12 @@ s32 func_8022F55C_de(Profile *profile, s32 arg1) {
     return func_80265650_de(var_a0, index);
 }
 
-void func_8022F5A4_de(Profile *record, s32 arg1) {
+void Weapons_SetAchievementFlag7(Profile *record, s32 arg1) {
     func_80265688_de(&record->achievementFlags[7], arg1, 1);
 }
 
 /** Thin wrapper forwarding an offset argument to func_80265650_de. */
-void func_8022F5C4_de(Profile *record, s32 index) {
+void Weapons_TestAchievementFlag7(Profile *record, s32 index) {
     func_80265650_de(&record->achievementFlags[7], index);
 }
 

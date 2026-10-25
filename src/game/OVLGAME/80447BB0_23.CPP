@@ -95,7 +95,7 @@ extern s32 func_80264B6C_de(void);
 extern void *Items_RecycleModel(void *);
 extern void func_8021836C_de(void *);
 extern void func_80218E98_de(void *);
-extern u32 func_8022F454_de(void *, s32);
+extern u32 Weapons_GetLevelProgress(void *, s32);
 extern void Render_ResetPlayerWeapons(struct RespawnPlayer *);
 extern void Ovlgame_ResetRespawnedPlayer(struct RespawnPlayer *);
 extern void Pak_OpenDialog(void *, void *, void *, s32, s32);
@@ -148,7 +148,7 @@ void Ovlgame_ResetPlayerForRound(void *actor, s32 character) {
     } while (--i >= 0);
     if (D_80145088.settings.local != 0) {
         if (D_801462D5 == 1 && FIELD(s32, actor, 0x1450) == 0) {
-            u32 value = func_8022F454_de(D_80102B00 + FIELD(s32, actor, 0x5D4) * 0x190, FIELD(s8, FIELD(void *, actor, 0x5D8), 0x80));
+            u32 value = Weapons_GetLevelProgress(D_80102B00 + FIELD(s32, actor, 0x5D4) * 0x190, FIELD(s8, FIELD(void *, actor, 0x5D8), 0x80));
             FIELD(s32, actor, 0x133C) = ((value & 0xFF) >> 1) + 1;
         }
         if (D_801462D5 == 4 && FIELD(s32, actor, 0x1450) == 0 && D_800E4680 != 0) {

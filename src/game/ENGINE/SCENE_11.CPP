@@ -198,9 +198,9 @@ EntryRecAt18V4 *func_8028C7E0_de(WorldCode8028B64C *world, s32 id) {
 
 
 
-extern Player *func_8022A414_de(void *list);
+extern Player *Weapons_GetFirstPlayer(void *list);
 #ifdef VERSION_EU
-extern Player *func_8022A414_de(void *list);
+extern Player *Weapons_GetFirstPlayer(void *list);
 #endif
 
 Player *func_8028C834_de(WorldRecAt1B6A4 *world) {
@@ -213,9 +213,9 @@ Player *func_8028C834_de(WorldRecAt1B6A4 *world) {
     s32 i;
 
 #ifdef VERSION_EU
-    player = func_8022A414_de(&D_80145040);
+    player = Weapons_GetFirstPlayer(&D_80145040);
 #else
-    player = func_8022A414_de(&D_80145040);
+    player = Weapons_GetFirstPlayer(&D_80145040);
 #endif
     best = 9999999;
     nearest = 0;
@@ -439,18 +439,18 @@ void func_8028CCA4_de(void *arg0, s32 arg1) {
     }
 }
 
-extern void func_80216488_de(CDamageInfo *event, void *target, s32 damage, f32 radius, s32 flags, Shield *shield);
-extern void func_802171FC_de(LevelActor *actor, s32 *behavior, CDamageInfo *event);
+extern void Weapons_FillDamagePacket(CDamageInfo *event, void *target, s32 damage, f32 radius, s32 flags, Shield *shield);
+extern void Weapons_RunDamageHook(LevelActor *actor, s32 *behavior, CDamageInfo *event);
 void func_8028CCDC_de(Shared_World *world, s32 damage, s32 flags) {
     CDamageInfo event;
     LevelActor **actors;
     s32 count;
     s32 i;
 
-    func_80216488_de(&event, 0, damage, 102.399994f, flags, 0);
+    Weapons_FillDamagePacket(&event, 0, damage, 102.399994f, flags, 0);
     count = world->kind1Count;
     actors = world->kind1;
     for (i = 0; i < count; i++) {
-        func_802171FC_de(actors[i], &actors[i]->behaviorFlags, &event);
+        Weapons_RunDamageHook(actors[i], &actors[i]->behaviorFlags, &event);
     }
 }

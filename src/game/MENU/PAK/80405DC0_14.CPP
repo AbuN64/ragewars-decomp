@@ -58,7 +58,7 @@ extern struct PakSaveBlock *D_800E28BC;
 
 extern s32 func_80406178_de(MenuRecAt24 *menu, s32 ch, s32 quiet);
 extern s32 Pak_DeleteNote(s32 ch, s32 index);
-extern struct PakSaveOwner *func_8022A5C0_de(char *profiles, PakMenuSlot *slot);
+extern struct PakSaveOwner *Weapons_FindPlayerByController(char *profiles, PakMenuSlot *slot);
 extern void Pak_OpenDialog(void *owner, char *message, void *player, void *slot, char *title);
 
 extern s32 D_801462CC; /* MIXED Pak_RestoreSaveBlock */
@@ -81,7 +81,7 @@ s32 Pak_RestoreSaveBlock(void *unused, MenuRecAt24 *menu) {
         return 1;
     }
     if (D_80153780 != 0) {
-        owner = func_8022A5C0_de(D_80145040, menu->slot);
+        owner = Weapons_FindPlayerByController(D_80145040, menu->slot);
         world = &D_8011FE88;
         kept = D_80146848[0];
         owner->block = D_800E28BC->block18;

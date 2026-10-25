@@ -76,7 +76,7 @@ void func_8022E290_de(void *player) {
     object->sway[1] = 0;
     object->sway[2] = 0;
     object->sideOffset = 0;
-    object->baseHeight = func_8022ADBC_de(object);
+    object->baseHeight = Weapons_GetObjectOwnerHeight(object);
     object->forwardOffset = 0;
     zero = object->forwardOffset;
     (&object->velocity)->x = (&object->velocity)->y = (&object->velocity)->z = zero;

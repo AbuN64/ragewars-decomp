@@ -22,7 +22,7 @@ extern s32 D_80142898;
 extern s32 D_800CD784_de;
 
 
-extern int func_8022A414_de(void *arg0);
+extern int Weapons_GetFirstPlayer(void *arg0);
 
 extern void func_8028D90C_de(void);
 
@@ -56,7 +56,7 @@ void func_80294848_de(s32 arg0) {
     D_8011B9F0 = 0;
     D_80146CB8 = (f32)(&D_800E28D0)[1];
     D_80142898 = 0;
-    func_8022A414_de(&D_80145040);
+    Weapons_GetFirstPlayer(&D_80145040);
     D_800CD784_de = 0;
     func_8028D90C_de();
     func_80293998_de(arg0, 0x82);
@@ -92,7 +92,7 @@ void func_8029496C_de(s32 arg0) {
     D_8011B9F0 = 0;
     D_80146CB8 = (f32)(&D_800E28D0)[1];
     D_80142898 = 0;
-    func_8022A414_de(base - 0x1288);
+    Weapons_GetFirstPlayer(base - 0x1288);
     D_800CD784_de = 0;
     func_8028D90C_de();
     func_80293998_de(arg0, 0x82);

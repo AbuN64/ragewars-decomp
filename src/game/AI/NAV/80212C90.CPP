@@ -32,7 +32,7 @@ void func_80212CC4_de(AiTarget *aiTarget) {
     void *v0;
 
     controller = aiTarget->player->controller;
-    v0 = func_8022A83C_de(&D_80145040);
+    v0 = Weapons_FindPlayerWithMarker(&D_80145040);
     if (v0 == 0 || v0 != (void *)controller->player) {
         func_80209874_de(controller, 2);
         return;

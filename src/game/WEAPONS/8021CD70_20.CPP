@@ -30,7 +30,7 @@ extern char D_80145040;
 
 extern void Items_ReleaseObjectHandles(void *);
 extern void Pak_OpenDialog(char *, char *, SharedPlayer *, void *, s32);
-extern SharedPlayer *func_8022A5F4_de(char *, s32);
+extern SharedPlayer *Weapons_GetPlayerByIndex(char *, s32);
 extern void func_8044972C_de(SharedPlayer *);
 
 void Weapons_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
@@ -66,7 +66,7 @@ void Weapons_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
             out = 0;
             leader = 0;
             for (i = 0; i < 8; i++) {
-                other = func_8022A5F4_de(&D_80145040, i);
+                other = Weapons_GetPlayerByIndex(&D_80145040, i);
                 if (other != 0) {
                     if (other->views5D8.view5D8_2.controls->active != 0) {
                         active++;
@@ -82,7 +82,7 @@ void Weapons_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
             if (out == active) {
                 if (D_801462C8.counters.m_nTalsetLives == 2 && leader->views5E4.view5E4_3.alive == 0) {
                     for (i = 0; i < 8; i++) {
-                        other = func_8022A5F4_de(&D_80145040, i);
+                        other = Weapons_GetPlayerByIndex(&D_80145040, i);
                         if (other != 0 && other->views5D8.view5D8_2.controls->active != 0) {
                             func_8044972C_de(other);
                         }

@@ -32,7 +32,7 @@ extern int func_8028B25C_de(void *arg0, int arg1);
 struct Context;
 extern s32 func_8022A8F0_de(struct Context *arg0);
 
-extern int func_8022A414_de(void *arg0);
+extern int Weapons_GetFirstPlayer(void *arg0);
 
 extern void func_8027985C_de(WeightedTable *object);
 
@@ -270,7 +270,7 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
             }
         } else {
             /* Configuration lies 0x1288 bytes into the shared runtime block. */
-            context = func_8022A414_de((u8 *)&D_801462C8 - 0x1288);
+            context = Weapons_GetFirstPlayer((u8 *)&D_801462C8 - 0x1288);
             if (!context) {
                 return;
             }

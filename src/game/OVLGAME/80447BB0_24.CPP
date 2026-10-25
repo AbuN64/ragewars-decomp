@@ -21,7 +21,7 @@ extern char D_80102B00[];
 extern Course *D_800E4680;
 extern s32 D_801371D4;
 
-extern s32 func_8022F454_de(char *, s32);
+extern s32 Weapons_GetLevelProgress(char *, s32);
 extern void Ovlgame_ResetRespawnedPlayer(SharedPlayer *);
 extern void Weapons_EndRound(void *);
 
@@ -33,7 +33,7 @@ void func_8044972C_de(SharedPlayer *player) {
     scale = (D_80145048 >= 2) * 2;
     if (D_801462E5 != 0) {
         if (D_801462D5 == 1 && player->views1450.view1450_1.computer == 0) {
-            player->views133C.view133C_1.laps = ((u8)func_8022F454_de(D_80102B00 + player->views1C.view5D4_46.slot * 0x190, player->views5D8.view5D8_1.record->unk80) >> 1) + 1;
+            player->views133C.view133C_1.laps = ((u8)Weapons_GetLevelProgress(D_80102B00 + player->views1C.view5D4_46.slot * 0x190, player->views5D8.view5D8_1.record->unk80) >> 1) + 1;
         }
         if (D_801462D5 == 4 && player->views1450.view1450_1.computer == 0 && D_800E4680 != 0) {
             player->views133C.view133C_1.laps = D_800E4680->laps;

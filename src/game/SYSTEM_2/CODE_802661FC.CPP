@@ -228,10 +228,10 @@ extern s32 func_8024B06C_de(void *, CVector3, Shield *);
 extern f32 Particle_GetPointDistance(CVector3 *, CVector3 *);
 extern f32 func_802672D0_de(u8 *);
 extern f32 Math_Sqrtf(f32);
-extern void func_80216488_de(CDamageInfo *, void *, s32, f32, s32, Shield *);
+extern void Weapons_FillDamagePacket(CDamageInfo *, void *, s32, f32, s32, Shield *);
 extern s32 func_8022AC00_de(void *);
 struct CallbackState114;
-extern void func_802171FC_de(void *, struct CallbackState114 *, CDamageInfo *);
+extern void Weapons_RunDamageHook(void *, struct CallbackState114 *, CDamageInfo *);
 extern s32 func_80282C8C_de(Shared_ReactionObjectKind *);
 extern s32 func_80282D38_de(Shared_ReactionObjectKind *);
 extern s32 func_80282DEC_de(Shared_ReactionObjectKind *);
@@ -245,20 +245,20 @@ static inline void storePlayerHealth(Shared_ReactionPlayer *player, s32 value) {
     storeActorHealth(&player->actor2E8, player->unk5E4);
 }
 static inline void buildDamage(CDamageInfo *event, Shared_ReactionActor *target, f32 damage, f32 radius, s32 flags, Shield **shield) {
-    func_80216488_de(event, target, (s32)damage, radius, flags, *shield);
+    Weapons_FillDamagePacket(event, target, (s32)damage, radius, flags, *shield);
 }
 static inline void reflectedProjectile(Shared_ReactionPlayer *player, Shared_ReactionActor *target, f32 damage, f32 radius, s32 flags, Shield **shield) {
     CDamageInfo event;
     CDamageInfo *p = &event;
     buildDamage(p, target, damage * 2.0f, radius, flags, shield);
-    if (damage * D_800C43E0_de[9] > 0.0f) func_802171FC_de(player, &player->unk170, p);
+    if (damage * D_800C43E0_de[9] > 0.0f) Weapons_RunDamageHook(player, &player->unk170, p);
 }
 static inline void reflectedActor(Shared_ReactionPlayer *player, Shared_ReactionActor *target, f32 damage, f32 radius, s32 flags, Shield **shield) {
     CDamageInfo event;
     CDamageInfo *p = &event;
     f32 value = damage * D_800C43E0_de[13];
     buildDamage(p, target, value, radius, flags, shield);
-    if (value > 0.0f) func_802171FC_de(player, &player->unk170, p);
+    if (value > 0.0f) Weapons_RunDamageHook(player, &player->unk170, p);
 }
 static inline s32 adjustHit(Shared_ReactionActor *target, CVector3 *position) {
     s32 adjusted;
@@ -409,7 +409,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
         if (!(damage <= 0.0f)) {
             hitImpulse(source, target, params, &impulse);
             event = &hit;
-            func_80216488_de(event, target, (s32)damage, radius, flags, shield);
+            Weapons_FillDamagePacket(event, target, (s32)damage, radius, flags, shield);
             category = target->category;
             if (category == 2) {
                 projectile = &target->objectKind;
@@ -449,7 +449,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
                         }
                         if (ownerPlayer->unk122C & 0x200) {
                             damage *= D_800C43E0_de[11];
-                            func_80216488_de(&hit, target, (s32)damage, radius, flags, shield);
+                            Weapons_FillDamagePacket(&hit, target, (s32)damage, radius, flags, shield);
                         }
                     } else if (target->type == 0x427) {
                         carrier = NULL;
@@ -458,7 +458,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
                         }
                         if ((carrier != NULL) && (carrier->unk122C & 0x200)) {
                             damage *= D_800C43E0_de[11];
-                            func_80216488_de(event, target, (s32)damage, radius, flags, shield);
+                            Weapons_FillDamagePacket(event, target, (s32)damage, radius, flags, shield);
                         }
                     }
                     if (attacker != NULL) {
@@ -496,7 +496,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
                     }
                     if (victim->unk122C & 0x200) {
                         damage *= D_800C43E0_de[15];
-                        func_80216488_de(&hit, target, (s32)damage, radius, flags, shield);
+                        Weapons_FillDamagePacket(&hit, target, (s32)damage, radius, flags, shield);
                     }
                 }
                 if ((attacker != NULL) && (attacker->unk122C & 0x400)) {
@@ -507,7 +507,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
                 }
             }
             if (damage != 0.0f) {
-                func_802171FC_de(source, &source->unk170, &hit);
+                Weapons_RunDamageHook(source, &source->unk170, &hit);
                 System_ApplyDamageReaction(source, target, adjusted, position, impulse, knockback, shield, flags);
             }
         }

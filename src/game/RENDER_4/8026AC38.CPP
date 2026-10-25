@@ -42,7 +42,7 @@ extern void func_80270700_de(f32 *matrix, void *model);
 
 extern void func_802732D0_de(f32 *matrix, CVector3 *position);
 
-extern char *func_8022A414_de(void *players);
+extern char *Weapons_GetFirstPlayer(void *players);
 
 extern void Particle_SubtractVectors(CVector3 *out, void *a, CVector3 *b);
 
@@ -308,7 +308,7 @@ s32 Render_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *mater
     if (D_80110620 != 0 && (material->flagWord & 0x8000)) {
         func_80270700_de((f32 *)matrix, model);
         func_802732D0_de((f32 *)matrix, &position);
-        Particle_SubtractVectors(&direction, func_8022A414_de(&D_80145040) + 0x6E8, &position);
+        Particle_SubtractVectors(&direction, Weapons_GetFirstPlayer(&D_80145040) + 0x6E8, &position);
         Particle_NormalizeVec3(&direction);
         {
             Gfx *cmd;

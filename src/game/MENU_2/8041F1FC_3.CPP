@@ -43,7 +43,7 @@ extern u8 D_800FEB54[];
 extern s32 D_800E3A54[][28];
 
 
-extern s32 func_8022F5C4_de(void *profile, s32 character);
+extern s32 Weapons_TestAchievementFlag7(void *profile, s32 character);
 
 extern s32 func_80265650_de(u8 *bits, s32 index);
 
@@ -209,7 +209,7 @@ void Menu_RefreshCharacterUnlocks(void) {
         found = 0;
         for (j = 0; j < 4 && !found; j++) {
             if (D_80102B0D[j * 0x190] >= 0) {
-                found = found || func_8022F5C4_de(D_80102B00[j], D_800E3A54[i][0]);
+                found = found || Weapons_TestAchievementFlag7(D_80102B00[j], D_800E3A54[i][0]);
             }
         }
         if (D_801462C8->trialKind == 0 || D_801462C8->trialKind == 2) {

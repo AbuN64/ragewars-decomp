@@ -123,7 +123,7 @@ s32 Weapons_GetPlayerIndex(void *arg0, unsigned int arg1)
   return (arg1 - (arg0_record->unk4)) / 5864;
 }
 
-void *func_8022A5C0_de(char *object, s32 arg1) {
+void *Weapons_FindPlayerByController(char *object, s32 arg1) {
     Round *round = (Round *)object;
     Shared_ActorView *record = (Shared_ActorView *)round->players;
     if (record != 0) {
@@ -137,7 +137,7 @@ void *func_8022A5C0_de(char *object, s32 arg1) {
     return 0;
 }
 
-void *func_8022A5F4_de(void *world, u32 arg1) {
+void *Weapons_GetPlayerByIndex(void *world, u32 arg1) {
     Shared_ActorView *actor;
     s32 var_a2;
 
@@ -250,7 +250,7 @@ void Weapons_EndRound(void *arg0) {
 }
 
 /** Find the first linked record whose nested flags include either type marker. */
-void *func_8022A83C_de(char *object) {
+void *Weapons_FindPlayerWithMarker(char *object) {
     Shared_ActorView *record = (void *)((struct Context *)object)->head;
     while (record != 0) {
         Shared_ControlView *nested = record->controls;
@@ -263,7 +263,7 @@ void *func_8022A83C_de(char *object) {
     return record;
 }
 
-void func_8022A880_de(struct Context *object) {
+void Weapons_ResetPlayerControllers(struct Context *object) {
     Shared_ActorView *record = (void *)object->head;
     if (record != 0) {
         do {
@@ -365,7 +365,7 @@ s32 func_8022AA9C_de(AimPlayer *aimPlayer, s32 arg1) {
     return ((GlobalState *)p)->field24;
 }
 
-s16 func_8022AAD4_de(Player *player, s32 arg1) {
+s16 Weapons_GetWeaponClassId(Player *player, s32 arg1) {
     s16 *var_v0;
     WeaponInfo *temp_a0;
 
@@ -483,7 +483,7 @@ int func_8022ADB0_de(struct SharedPlayer *object, s32 unused1) {
     return object->views5E4.view5E4_0.unk5E4 < 0x6400;
 }
 
-f32 func_8022ADBC_de(void *arg0) {
+f32 Weapons_GetObjectOwnerHeight(void *arg0) {
     struct Object *object = arg0;
     struct ModelBlend *owner;
 

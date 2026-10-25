@@ -1698,5 +1698,5 @@ typedef struct AiController {
 extern void func_802AA794_de(char *, s32);
 
 
-extern void *func_8022A83C_de(char *);
+extern void *Weapons_FindPlayerWithMarker(char *);
 #endif

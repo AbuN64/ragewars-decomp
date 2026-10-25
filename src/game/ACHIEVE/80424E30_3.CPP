@@ -18,8 +18,8 @@
 extern s32 func_80265650_de(void *, s32);
 extern void func_80265688_de(u8 *, s32, s32);
 extern s32 func_8022F4DC_de(u8 *, s32);
-extern s32 func_8022F5C4_de(Profile *, s32);
-extern void func_8022F5A4_de(Profile *, s32);
+extern s32 Weapons_TestAchievementFlag7(Profile *, s32);
+extern void Weapons_SetAchievementFlag7(Profile *, s32);
 
 /* Upgrades the thirteen weapon levels of player record D_80102B00[index] from the number of its 50
    achievement flags func_80265650_de reports set: every two achievements from 2 raise one more weapon
@@ -84,84 +84,84 @@ s32 func_80425674_de(s32 p) {
     if (settings->controllerMode == 1 && settings->humanWon == 1 && D_8015402C >= 0x23) {
         switch (settings->slots[p].kind) {
         case 0:
-            if (func_8022F5C4_de(record, 0x11) == 0) {
-                func_8022F5A4_de(record, 0x11);
+            if (Weapons_TestAchievementFlag7(record, 0x11) == 0) {
+                Weapons_SetAchievementFlag7(record, 0x11);
                 given = 0x11;
             }
             break;
         case 1:
-            if (func_8022F5C4_de(record, 0x6) == 0) {
-                func_8022F5A4_de(record, 0x6);
+            if (Weapons_TestAchievementFlag7(record, 0x6) == 0) {
+                Weapons_SetAchievementFlag7(record, 0x6);
                 given = 0x6;
             }
             break;
         case 2:
-            if (func_8022F5C4_de(record, 0x3) == 0) {
-                func_8022F5A4_de(record, 0x3);
+            if (Weapons_TestAchievementFlag7(record, 0x3) == 0) {
+                Weapons_SetAchievementFlag7(record, 0x3);
                 given = 0x3;
             }
             break;
         case 3:
-            if (func_8022F5C4_de(record, 0x4) == 0) {
-                func_8022F5A4_de(record, 0x4);
+            if (Weapons_TestAchievementFlag7(record, 0x4) == 0) {
+                Weapons_SetAchievementFlag7(record, 0x4);
                 given = 0x4;
             }
             break;
         case 4:
-            if (func_8022F5C4_de(record, 0xE) == 0) {
-                func_8022F5A4_de(record, 0xE);
+            if (Weapons_TestAchievementFlag7(record, 0xE) == 0) {
+                Weapons_SetAchievementFlag7(record, 0xE);
             }
             break;
         case 5:
-            if (func_8022F5C4_de(record, 0x1) == 0) {
-                func_8022F5A4_de(record, 0x1);
+            if (Weapons_TestAchievementFlag7(record, 0x1) == 0) {
+                Weapons_SetAchievementFlag7(record, 0x1);
                 given = 0x1;
             }
             break;
         case 6:
-            if (func_8022F5C4_de(record, 0x12) == 0) {
-                func_8022F5A4_de(record, 0x12);
+            if (Weapons_TestAchievementFlag7(record, 0x12) == 0) {
+                Weapons_SetAchievementFlag7(record, 0x12);
                 given = 0x12;
             }
             break;
         case 7:
-            if (func_8022F5C4_de(record, 0x8) == 0) {
-                func_8022F5A4_de(record, 0x8);
+            if (Weapons_TestAchievementFlag7(record, 0x8) == 0) {
+                Weapons_SetAchievementFlag7(record, 0x8);
                 given = 0x8;
             }
             break;
         case 8:
-            if (func_8022F5C4_de(record, 0x9) == 0) {
-                func_8022F5A4_de(record, 0x9);
+            if (Weapons_TestAchievementFlag7(record, 0x9) == 0) {
+                Weapons_SetAchievementFlag7(record, 0x9);
                 given = 0x9;
             }
             break;
         case 9:
-            if (func_8022F5C4_de(record, 0xA) == 0) {
-                func_8022F5A4_de(record, 0xA);
+            if (Weapons_TestAchievementFlag7(record, 0xA) == 0) {
+                Weapons_SetAchievementFlag7(record, 0xA);
                 given = 0xA;
             }
             break;
         case 17:
-            if (func_8022F5C4_de(record, 0x2) == 0) {
-                func_8022F5A4_de(record, 0x2);
+            if (Weapons_TestAchievementFlag7(record, 0x2) == 0) {
+                Weapons_SetAchievementFlag7(record, 0x2);
                 given = 0x2;
             }
             break;
         case 18:
             break;
         }
-        if (func_8022F5C4_de(record, 0x11) == 1 && func_8022F5C4_de(record, 1) == 1 &&
-            func_8022F5C4_de(record, 8) == 1 && func_8022F5C4_de(record, 0xB) == 0) {
-            func_8022F5A4_de(record, 0xB);
+        if (Weapons_TestAchievementFlag7(record, 0x11) == 1 && Weapons_TestAchievementFlag7(record, 1) == 1 &&
+            Weapons_TestAchievementFlag7(record, 8) == 1 && Weapons_TestAchievementFlag7(record, 0xB) == 0) {
+            Weapons_SetAchievementFlag7(record, 0xB);
         }
-        if (func_8022F5C4_de(record, 2) == 1 && func_8022F5C4_de(record, 6) == 1 &&
-            func_8022F5C4_de(record, 9) == 1 && func_8022F5C4_de(record, 0xC) == 0) {
-            func_8022F5A4_de(record, 0xC);
+        if (Weapons_TestAchievementFlag7(record, 2) == 1 && Weapons_TestAchievementFlag7(record, 6) == 1 &&
+            Weapons_TestAchievementFlag7(record, 9) == 1 && Weapons_TestAchievementFlag7(record, 0xC) == 0) {
+            Weapons_SetAchievementFlag7(record, 0xC);
         }
-        if (func_8022F5C4_de(record, 3) == 1 && func_8022F5C4_de(record, 0x12) == 1 &&
-            func_8022F5C4_de(record, 0xA) == 1 && func_8022F5C4_de(record, 0xD) == 0) {
-            func_8022F5A4_de(record, 0xD);
+        if (Weapons_TestAchievementFlag7(record, 3) == 1 && Weapons_TestAchievementFlag7(record, 0x12) == 1 &&
+            Weapons_TestAchievementFlag7(record, 0xA) == 1 && Weapons_TestAchievementFlag7(record, 0xD) == 0) {
+            Weapons_SetAchievementFlag7(record, 0xD);
         }
     }
     return given;

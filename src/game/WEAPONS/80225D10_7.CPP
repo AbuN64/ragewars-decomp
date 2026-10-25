@@ -79,7 +79,7 @@ void func_80228FB8_de(LevelActor *actor, s32 arg1, Draw *draw) {
     }
 }
 
-extern void func_80216488_de(void *arg0, s32 arg1, s32 arg2, f32 arg3, s32 arg4, s32 arg5);
+extern void Weapons_FillDamagePacket(void *arg0, s32 arg1, s32 arg2, f32 arg3, s32 arg4, s32 arg5);
 extern void func_80219A40_de(void *arg0, void *arg1, void *arg2);
 
 
@@ -131,7 +131,7 @@ void func_802292B8_de(void *actor) {
                     var_f20 = D_800C2C4C_de.unk0;
                 }
             }
-            func_80216488_de((void *)&damage, (s32)((CPlayerDamageOverTime *)(temp_s0))->m_pDamageSource,
+            Weapons_FillDamagePacket((void *)&damage, (s32)((CPlayerDamageOverTime *)(temp_s0))->m_pDamageSource,
                           (s32)var_f20, 25.599998f, 0x100080, 0);
             func_80219A40_de(actor, &((ObjectState5E8 *)(actor))->unk_170, (void *)&damage);
         }

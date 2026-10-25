@@ -48,7 +48,7 @@ void Items_LoadSceneLight(SceneRecAt1B2B4 *scene) {
         scene->dir[2] = v[2];
     }
 }
-int func_8022A414_de(void *);
+int Weapons_GetFirstPlayer(void *);
 void func_8025CBEC_de(void *);
 s32 * func_8025CC6C_de(void);
 void func_8028D59C_de(void *);
@@ -62,7 +62,7 @@ void Items_FreeSceneResources(func_8044CBE0_S1 *arg0) {
     void *temp_s0;
     void *temp_s1;
     func_8020D0CC_S2 *var_a1;
-    temp_v0 = func_8022A414_de(&D_80145040);
+    temp_v0 = Weapons_GetFirstPlayer(&D_80145040);
     if (temp_v0 != 0) {
         Items_ReleaseObjectHandles((void *) temp_v0);
     }
