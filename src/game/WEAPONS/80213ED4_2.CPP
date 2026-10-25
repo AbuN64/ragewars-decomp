@@ -187,7 +187,6 @@ s32 func_80214624_de(Actor_func_80214624_de *actor, Plan *tracker, Actor_func_80
     return 0;
 }
 
-#ifdef NON_MATCHING
 #ifndef FIELD
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 #endif
@@ -198,7 +197,7 @@ extern s32 func_80245798_de(void);
 extern s32 func_80245B0C_de(void);
 extern void *func_8022A504_de(void *, f32, f32, f32, void *);
 extern void *func_8022A480_de(void *, f32, f32, f32);
-extern void func_8024E7DC_de(void *);
+extern s32 func_8024E7DC_de(void *);
 extern f32 func_80217224_de(void *, f32, f32, f32);
 extern f32 func_80217290_de(void *, f32, f32, f32);
 extern s32 func_8024DE6C_de(void *);
@@ -211,7 +210,6 @@ extern s32 func_802444A4_de(void *, f32, f32, f32, CVector3, void *);
  * a line-of-sight probe through func_802444A4_de when requested), and remembers the actor's position when
  * nothing qualified. */
 typedef struct Copy50_802149C0 { s32 words[20]; } Copy50_802149C0;
-/* 8/261 aligned edits; remaining: the 0x650 != 1 test keeps 1 in $s2 and a second null test after func_8024E7DC_de. */
 void *Weapons_SelectCombatTarget(void *actor, void *state, s32 lineOfSight, s32 combat) {
     void *candidates[3];
     u8 spare[0x1F0];
@@ -254,10 +252,17 @@ void *Weapons_SelectCombatTarget(void *actor, void *state, s32 lineOfSight, s32 
             } else {
                 candidate = func_8022A480_de(&D_80145040, FIELD(f32, actor, 0x8), FIELD(f32, actor, 0xC), FIELD(f32, actor, 0x10));
             }
-            if (candidate != 0 && FIELD(s16, candidate, 0x5EA) != 0 && FIELD(s16, candidate, 0x650) != 1) {
-                func_8024E7DC_de(candidate);
-                if (candidate != 0) {
-                    candidates[count++] = candidate;
+            if (candidate != 0) {
+                i = 1;
+                if (FIELD(s16, candidate, 0x5EA) != 0 && FIELD(s16, candidate, 0x650) != 1) {
+                    if (func_8024E7DC_de(candidate) != 0) {
+                        best = candidate;
+                    } else {
+                        i = 0;
+                    }
+                    if (candidate != 0) {
+                        candidates[count++] = candidate;
+                    }
                 }
             }
         }
@@ -310,6 +315,4 @@ void *Weapons_SelectCombatTarget(void *actor, void *state, s32 lineOfSight, s32 
     }
     return best;
 }
-#else
-INCLUDE_ASM("span_1000", Weapons_SelectCombatTarget);
-#endif
+
