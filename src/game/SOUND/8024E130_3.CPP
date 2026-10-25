@@ -5,6 +5,7 @@
 #include "COMMON/LEGACY_COLLISION_ACTOR.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/PROBE.H"
+#include "COMMON/FIELD_VEC_B0.H"
 #include "TYPES.H"
 
 extern void func_8024E79C_de(void *arg0, TripleRecAt8 t, void *arg4, s32 *arg5, s32 arg6, s32 arg7);
@@ -96,12 +97,11 @@ void *func_8024E6A0_de(struct ItemCode8024E130 *item) {
 }
 
 void func_8024E6D8_de(u8 *arg0, void *vector) {
-    Triple buf;
-    char pad[0x30];
+    OffsetResult offset;
 
     if (*arg0 == 1) {
-        Weapons_ComputeTargetOffset(arg0, arg0 + 0x170, &buf);
-        *(Triple *)vector = buf;
+        Weapons_ComputeTargetOffset(arg0, arg0 + 0x170, &offset);
+        *(CVector3 *)vector = offset.first;
         return;
     }
     *(s32 *)vector = 0;
@@ -110,10 +110,10 @@ void func_8024E6D8_de(u8 *arg0, void *vector) {
 }
 
 f32 func_8024E73C_de(u8 *arg0) {
-    char buf[0x40];
+    OffsetResult offset;
     if (*arg0 == 1) {
-        Weapons_ComputeTargetOffset(arg0, arg0 + 0x170, buf);
-        return ((struct FloatState3C *) buf)->unk_38;
+        Weapons_ComputeTargetOffset(arg0, arg0 + 0x170, &offset);
+        return offset.height;
     }
     return 0.0f;
 }
