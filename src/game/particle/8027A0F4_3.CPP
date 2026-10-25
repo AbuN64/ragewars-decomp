@@ -54,7 +54,7 @@ void func_8027CC20_de(Shared_Particle *particle);
 void Particle_HitTarget(void *particle);
 #endif
 
-void Particle_ApplyImpactResponse(void *particle);
+void Particle_ApplyImpactResponse(Shared_Particle *particle);
 
 void func_80282E98_de(Shared_Particle *particle, SharedPlayer *player);
 
@@ -1401,132 +1401,116 @@ void Particle_HitTarget(void *particle) {
 }
 #endif
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-#include "COMMON/SHAREDPLAYER.H"
-typedef struct CROMParticleImpact_t {
-    struct IntPair m_ImpactEventValue[14];
-    u16 m_ImpactParticleType[14];
-    u16 m_ImpactEventType[14];
-    u16 m_ImpactSoundType[14];
-} CROMParticleImpact_t;
-typedef struct CROMParticleEffect_t {
-    u32 m_dwFlags;
-    char pad4[0x18 - 0x4];
-    CROMParticleImpact_t *m_pImpact;
-    char pad1C[0x3C - 0x1C];
-} CROMParticleEffect_t;
-typedef struct ImpactParticle {
-    char pad0[4]; u16 type; char pad6[2]; CVector3 position;
-    char pad14[8]; CVector3 facing;
-    char pad28[0x34]; u32 flags; char pad60[0xB8]; CROMParticleEffect_t *definition;
-    char pad11C[0x10]; Shared_ParticleOwner *owner; char pad130[8]; void *sound;
-    char pad13C[0x10]; s16 dead; char pad14E[0x6B]; s8 state, nextState;
-    char pad1BB[0x15]; s8 modelOffset; char pad1D1[8]; u8 active;
-} ImpactParticle;
-extern s32 func_80216108_de(void *);
-extern void func_80284178_de(void *);
-extern void func_802A42F4_de(void *, void *);
-extern void func_80279B40_de(void *, s32, s32, s32);
 extern u32 D_801002F0;
 extern void func_802A5BE4_de(void *, CVector3, CVector3, s32, s32);
 extern void func_8022B064_de(void *, CVector3 *);
 extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
 
-/* 292/309 words; remaining: controlled-impact index register rotation (a0/v0/v1 local-alloc order) and one lhu/ori schedule in the impact branch */
-void Particle_ApplyImpactResponse(void *particleArg) {
-    ImpactParticle *particle = particleArg;
-    CROMParticleEffect_t *definition, *controlledDefinition;
-    Shared_ParticleTarget *source;
+/* Reacts to a particle striking the current attachment target. The target picks the impact slot (slot 5 becomes slot 4
+ * and sets flag 2). Under the controlled-impact mode (D_801462E5) descriptor slot 12 or 10 fires its event, particle
+ * and sound at the particle. Otherwise slots 0, 2 and 3 leave a mark when the descriptor has flag 0x800000; a particle
+ * whose response byte is 8 is handed to a kind 1 owner (flag 0x20000) or expires; types 0x56, 0x126, 0xCD and 0xF move
+ * to the impact point and release their swooshes and light; then the particle is pushed off the surface along the hit
+ * normal and the slot's event, particle and sound fire at the impact point (event table flag 2 makes the particle, not
+ * the target, the event source). The particle is removed when its response byte is 1 and flags 0x30000 are clear. */
+void Particle_ApplyImpactResponse(Shared_Particle *particle) {
+    struct Shared_ParticleDesc *desc, *controlledDesc;
+    Shared_ParticleTarget *target;
     void *eventSource;
-    s32 kind;
-    short controlledKind;
-    s32 model, sound, effect;
+    s32 hit;
+    s32 event;
+    u32 particleType, eventType, soundType;
+    u32 model, sound, effect;
     struct IntPair params;
     CVector3 normal;
     struct IntPair controlledParams;
     Shared_ParticleOwner *owner;
-    ImpactContext *context;
-    CVector3 *normalSource;
 
-    source = D_801041F0.current;
-    definition = particle->definition;
-    kind = func_80216108_de(source);
-    if (kind == 5) {
-        kind = 4;
+    target = D_801041F0.current;
+    desc = particle->desc;
+    hit = func_80216108_de(target);
+    if (hit == 5) {
+        hit = 4;
         particle->flags |= 2;
     }
     if (D_801462E5 && func_80284068_de(particle)) {
-        controlledDefinition = particle->definition;
-        if (func_80284068_de(particle)) controlledKind = 12;
-        else controlledKind = 10;
-        kind = controlledDefinition->m_pImpact->m_ImpactParticleType[controlledKind];
-        effect = controlledDefinition->m_pImpact->m_ImpactEventType[controlledKind];
-        controlledParams = controlledDefinition->m_pImpact->m_ImpactEventValue[controlledKind];
-        sound = controlledDefinition->m_pImpact->m_ImpactSoundType[controlledKind];
-        if (effect != 0xFFFF) {
-            func_80265E10_de(particle, particle, effect, -1, particle->position, controlledParams);
+        controlledDesc = particle->desc;
+        event = func_80284068_de(particle) ? 12 : 10;
+        particleType = controlledDesc->events->particles[event];
+        eventType = controlledDesc->events->effects[event];
+        controlledParams = controlledDesc->events->parameters[event];
+        soundType = controlledDesc->events->sounds[event];
+        if (eventType != 0xFFFF) {
+            func_80265E10_de(particle, particle, eventType, -1, particle->inst.pos, controlledParams);
         }
-        if (kind != 0xFFFF) {
-            func_80279B40_de(particle, kind, particle->modelOffset, 1);
+        if (particleType != 0xFFFF) {
+            func_80279B40_de(particle, particleType, particle->space, 1);
         }
-        if (sound != 0xFFFF) {
-            func_8025DE54_de((s16)sound, particle->position, 0, -1);
+        if (soundType != 0xFFFF) {
+            func_8025DE54_de(soundType, particle->inst.pos, 0, -1);
         }
     } else {
-        switch (kind) {
+        switch (hit) {
         case 0:
         case 2:
         case 3:
-            if (definition->m_dwFlags & 0x800000) {
-                context = &D_801001F8;
-                func_802A5BE4_de(&D_801379C0, context->position, context->normal, kind, 0);
+            if (desc->flags & 0x800000) {
+                func_802A5BE4_de(&D_801379C0, D_801001F8.position, D_801001F8.normal, hit, 0);
             }
             break;
         }
-        if (particle->state == 8 || particle->nextState == 8) {
+        if (particle->unk1B9 == 8 || particle->unk1BA == 8) {
             if ((D_801002F0 & 0x1000000) && (owner = particle->owner) && owner->kind == 1 && (owner->flags & 0x300000)) {
                 particle->flags |= 0x20000;
-                particle->position = D_801001F8.position;
-                particle->facing = D_801042C8;
-                func_8022B064_de(particle->owner->state, &particle->position);
-            } else particle->dead = 1;
+                particle->inst.pos = D_801001F8.position;
+                particle->inst.velocity = D_801042C8;
+                func_8022B064_de(particle->owner->state, &particle->inst.pos);
+            } else {
+                particle->life = 1;
+            }
         }
-        if (particle->type == 0x56 || particle->type == 0x126 || particle->type == 0xCD || particle->type == 0xF) {
+        if (particle->inst.type == 0x56 || particle->inst.type == 0x126 || particle->inst.type == 0xCD ||
+            particle->inst.type == 0xF) {
             particle->flags |= 0x20000;
-            particle->position = D_801001F8.position;
-            particle->facing = D_801042C8;
-            if (particle->active) {
+            particle->inst.pos = D_801001F8.position;
+            particle->inst.velocity = D_801042C8;
+            if (particle->drawWhenHidden) {
                 func_80284178_de(particle);
                 func_802A42F4_de(&D_801379C0, particle);
             }
-            if (particle->sound) {
-                func_80268C7C_de(&D_8013B1A8, (s32)particle->sound);
-                particle->sound = 0;
+            if (particle->handle) {
+                func_80268C7C_de(&D_8013B1A8, particle->handle);
+                particle->handle = 0;
             }
         }
-        normalSource = &D_801001F8.normal;
-        normal = *normalSource;
+        normal = D_801001F8.normal;
         func_8027207C_de(&normal.x);
         func_80271F9C_de(&normal, &normal, 1.024f);
-        func_80271F34_de(&particle->position, &particle->position, &normal);
-        model = definition->m_pImpact->m_ImpactParticleType[kind];
-        effect = definition->m_pImpact->m_ImpactEventType[kind];
-        params = definition->m_pImpact->m_ImpactEventValue[kind];
-        sound = definition->m_pImpact->m_ImpactSoundType[kind];
+        func_80271F34_de(&particle->inst.pos, &particle->inst.pos, &normal);
+        model = desc->events->particles[hit];
+        effect = desc->events->effects[hit];
+        params = desc->events->parameters[hit];
+        sound = desc->events->sounds[hit];
         if (effect != 0xFFFF) {
-            eventSource = source;
-            if (D_800CC134[effect].flags & 2) eventSource = particle;
+            eventSource = target;
+            if (D_800CC134[effect].flags & 2) {
+                eventSource = particle;
+            }
             func_80265E10_de(eventSource, particle, effect, -1, D_801001F8.position, params);
         }
-        if (model != 0xFFFF) func_80279B40_de(particle, model, -8, 1);
-        if (sound != 0xFFFF) func_8025DE54_de((s16)sound, D_801001F8.position, 0, (s32)particle);
-        if (particle->flags & 0x30000) return;
-        if (particle->state != 1) return;
+        if (model != 0xFFFF) {
+            func_80279B40_de(particle, model, -8, 1);
+        }
+        if (sound != 0xFFFF) {
+            func_8025DE54_de(sound, D_801001F8.position, 0, (s32)particle);
+        }
+        if (particle->flags & 0x30000) {
+            return;
+        }
+        if (particle->unk1B9 != 1) {
+            return;
+        }
     }
     func_80284570_de(&D_8011D8D0, particle);
     func_80284434_de(particle);
 }
-#else
-INCLUDE_ASM("span_1000", Particle_ApplyImpactResponse);
-#endif
