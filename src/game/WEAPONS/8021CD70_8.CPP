@@ -72,7 +72,7 @@ extern void func_8025E418_de(s32);
 
 extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
 extern f32 func_8027525C_de(struct Shared_Model *, f32, f32);
-extern f32 func_80275DD4_de(struct Shared_Model *, f32, f32);
+extern f32 Anim_GetPolygonHeight(struct Shared_Model *, f32, f32);
 extern void func_80278D78_de(void *, s32, void *);
 extern void func_80278E04_de(struct Shared_Model *, s32, void *);
 
@@ -267,7 +267,7 @@ void func_80220ED4_de(SharedPlayer *player)
       pos = &player->views0.view8_3.pos;
       if (((model != 0) && (pos != 0)) && (model->flags & 0x40))
       {
-        amount = (f32) ((s32) (func_8027525C_de(model, pos->x, pos->z) - func_80275DD4_de(model, pos->x, pos->z)));
+        amount = (f32) ((s32) (func_8027525C_de(model, pos->x, pos->z) - Anim_GetPolygonHeight(model, pos->x, pos->z)));
         if (amount < 1024.0f)
         {
           func_8025E440_de(1.0f - (amount * 0.0009765625f));

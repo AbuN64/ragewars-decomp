@@ -204,7 +204,7 @@ extern DescriptorRecAt29 *D_801370C8;
 extern s32 D_801370CC;
 extern f32 D_800D2988;
 extern Shared_ReactionFlags *func_8028B2F8_de(void *, void *);
-extern f32 func_80275DD4_de(void *, s32, s32);
+extern f32 Anim_GetPolygonHeight(void *, s32, s32);
 extern void func_802390D0_de(CVector3 *, void *);
 extern void func_80295E84_de(s32 *, s32);
 extern void func_80255ED8_de(void *, void *);
@@ -290,7 +290,7 @@ void Sched_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
         return;
     }
     hostDepth = 0.0f;
-    limit = func_80275DD4_de(resource, host->field38, host->field40);
+    limit = Anim_GetPolygonHeight(resource, host->field38, host->field40);
     below = 0;
     if (entry->flags & 1) {
         func_802390D0_de(&anchor, host);

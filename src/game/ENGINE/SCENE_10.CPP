@@ -14,7 +14,7 @@ extern void func_8028FFD0_de(s32, s32, s32, Triple, Triple, s32, f32);
 
 extern s32 func_80275B10_de(Node75 *arg0, f32 arg1, f32 arg2);
 
-extern f32 func_80275DD4_de(void *, f32, f32);
+extern f32 Anim_GetPolygonHeight(void *, f32, f32);
 
 extern f32 func_8027525C_de(void *arg0, f32 arg1, f32 arg2);
 
@@ -42,7 +42,7 @@ void *func_8028C050_de(void *triangle, CVector3 *arg1) {
         if (!(((Triangle *)triangle)->flags & 0x40)) {
             return triangle;
         }
-        lower = func_80275DD4_de(triangle,
+        lower = Anim_GetPolygonHeight(triangle,
             arg1->x, arg1->z);
         upper = func_8027525C_de(triangle,
             arg1->x, arg1->z);

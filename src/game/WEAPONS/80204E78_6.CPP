@@ -23,7 +23,7 @@
 /* Dispatch configured object, particle, or weighted-choice spawns and update the owner count. */
 
 
-extern f32 func_80275DD4_de(Node75 *node, f32 x, f32 z);
+extern f32 Anim_GetPolygonHeight(Node75 *node, f32 x, f32 z);
 
 extern void *Engine_GetActorDefinition(void *arg0, s32 arg1);
 
@@ -219,7 +219,7 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
     position = object->position;
     world = object->world;
     if (world) {
-        height = func_80275DD4_de(world, object->position.x, object->position.z);
+        height = Anim_GetPolygonHeight(world, object->position.x, object->position.z);
         if (position.y < height) {
             position.y = height;
         }

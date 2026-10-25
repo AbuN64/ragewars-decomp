@@ -286,7 +286,7 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
 #include "COMMON/APPROACHLOCATION.H"
 #include "COMMON/WORLD.H"
 #include "stddef.h"
-f32 func_80275DD4_de(Node75 *node, f32 x, f32 z);
+f32 Anim_GetPolygonHeight(Node75 *node, f32 x, f32 z);
 f32 func_8027525C_de(Node75 *node, f32 x, f32 z);
 
 /* The floor polygon under pos: a volume polygon (flag 0x40) that holds pos, else the one nearest in height. */
@@ -334,7 +334,7 @@ s32 Scene_FindFloorPolygon(Shared_World *world, CVector3 *pos) {
                 poly = polys - -index;
                 do {
                     if (func_80275B10_de(poly, pos->x, pos->z) != 0) {
-                        floor = func_80275DD4_de(poly, pos->x, pos->z);
+                        floor = Anim_GetPolygonHeight(poly, pos->x, pos->z);
                         if (poly->flags & 0x40) {
                             ceiling = func_8027525C_de(poly, pos->x, pos->z);
                             if (floor <= pos->y && pos->y <= ceiling) {

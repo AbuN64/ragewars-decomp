@@ -28,7 +28,7 @@ void func_80273A98_de(void *, f32);
 void MatrixFromQuaternion(f32 *, f32 *);
 
 extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
-f32 func_80275DD4_de(void *, f32, f32);
+f32 Anim_GetPolygonHeight(void *, f32, f32);
 int func_802A23B4_de(void);
 int func_802A23F0_de(void);
 
@@ -334,7 +334,7 @@ actor_found:
     temp_f20_4 = camera->unk40;
     temp_f22_3 = camera->unk44;
     if ((temp_s0_2 != 0) && (Camera_IsSequenceInWindow() == 0)) {
-        temp_f1 = ((temp_f23_3 + temp_f22_3) - func_80275DD4_de(temp_s0_2, ground_x, temp_f20_4)) * 0.09765625f;
+        temp_f1 = ((temp_f23_3 + temp_f22_3) - Anim_GetPolygonHeight(temp_s0_2, ground_x, temp_f20_4)) * 0.09765625f;
         if ((temp_f1 < 11.0f) && (temp_f1 > 5.0f)) {
             camera->unk64 = (s32) temp_s0_2->unk1C;
         }

@@ -12,7 +12,7 @@
 
 extern s32 Camera_IsSequenceInWindow(void);
 
-extern f32 func_80275DD4_de(s32 arg0, f32 arg1, f32 arg2);
+extern f32 Anim_GetPolygonHeight(s32 arg0, f32 arg1, f32 arg2);
 
 
 
@@ -56,7 +56,7 @@ void func_80238F24_de(GameplayCamera *arg0, s32 arg1, f32 arg2, f32 arg3, f32 ar
     w = arg0->unk44;
     arg0->unk64 = D_800CD8D0;
     if (object != 0 && Camera_IsSequenceInWindow() == 0) {
-        value = ((y + w) - func_80275DD4_de(object, x, z)) * D_800C8610;
+        value = ((y + w) - Anim_GetPolygonHeight(object, x, z)) * D_800C8610;
         if (value < D_800C3524_de && D_800C3528_de < value) {
             arg0->unk64 = ((MenuRules *)(object))->locked;
         }

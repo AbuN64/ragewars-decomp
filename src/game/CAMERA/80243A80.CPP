@@ -38,7 +38,7 @@ extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
 
 f32 func_8027525C_de(void *, f32, f32);
 
-f32 func_80275DD4_de(void *, f32, f32);
+f32 Anim_GetPolygonHeight(void *, f32, f32);
 
 void * func_8028C050_de(void *, CVector3 *);
 
@@ -334,7 +334,7 @@ block_71:
         if (*arg4 & 0x80000) {
             surface = func_8028C050_de(frame.spC4, &actor->x);
             frame.sp54 &= ~0x5000;
-            if ((surface != 0) && ((((Func80243A80Collision *)surface)->flags & 0x41) == 0x41) && (func_80275DD4_de(surface, actor->x, actor->z) <= actor->y)) {
+            if ((surface != 0) && ((((Func80243A80Collision *)surface)->flags & 0x41) == 0x41) && (Anim_GetPolygonHeight(surface, actor->x, actor->z) <= actor->y)) {
                 temp_f0_2 = func_8027525C_de(surface, actor->x, actor->z);
                 if (actor->y <= temp_f0_2) {
                     frame.sp54 |= 0x4000;

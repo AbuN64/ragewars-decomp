@@ -13,7 +13,7 @@
 
 extern char D_8011AD70;
 extern void func_80273198_de(void *arg0, void *arg1);
-extern f32 func_80275DD4_de(Node75 *node, f32 x, f32 z);
+extern f32 Anim_GetPolygonHeight(Node75 *node, f32 x, f32 z);
 extern void func_80275410_de(void *arg0, s32 arg1);
 extern void func_80275688_de(void *arg0, s32 arg1);
 extern void MatrixFromQuaternion(void *arg0, void *arg1);
@@ -70,7 +70,7 @@ void *Particle_ParentTransform(EffectActor *arg0, Shared_ActorView *camera) {
         }
         return camera->effectTransform;
     sw_state_neg_3:
-        value = func_80275DD4_de(0, arg0->pos.x,
+        value = Anim_GetPolygonHeight(0, arg0->pos.x,
             arg0->pos.z);
         if (arg0->pos.y - value <= 0.01f) {
             func_80275410_de(state, 0);
@@ -383,11 +383,11 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         break;
     case -5:
         if (desc->clampToGround != 0) {
-            position.y = RW_MAX_GT(position.y, func_80275DD4_de(0, position.x, position.z) + 5.12f);
+            position.y = RW_MAX_GT(position.y, Anim_GetPolygonHeight(0, position.x, position.z) + 5.12f);
         }
         break;
     case -3:
-        ground = func_80275DD4_de(0, position.x, position.z);
+        ground = Anim_GetPolygonHeight(0, position.x, position.z);
         if (desc->flags & 0x400) {
             if (position.y < ground + 1.024f) {
                 position.y = ground;

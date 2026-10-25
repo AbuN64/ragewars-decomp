@@ -43,7 +43,7 @@ extern f32 func_802B72B0_de(f32);
 
 extern void func_80276510_de(void *arg0, s32 arg1, void *arg2);
 
-f32 func_80275DD4_de(Node75 *node, f32 x, f32 z) {
+f32 Anim_GetPolygonHeight(Node75 *node, f32 x, f32 z) {
     CVector3 normal;
     CVector3 point;
 

@@ -9,7 +9,7 @@
 
 extern void func_8024E79C_de(void *arg0, TripleRecAt8 t, void *arg4, s32 *arg5, s32 arg6, s32 arg7);
 
-extern f32 func_80275DD4_de(struct Node75 *node, f32 x, f32 z);
+extern f32 Anim_GetPolygonHeight(struct Node75 *node, f32 x, f32 z);
 
 extern void func_802165F8_de(void *arg0, void *arg1, void *arg2);
 
@@ -43,7 +43,7 @@ void func_8024E59C_de(void *actor, void *arg1, void *arg2) {
     t.b = 0;
     t.c = source->z;
     func_8024E79C_de(actor, t, arg2, &sp30, 0, 0);
-    output->y = func_80275DD4_de((struct Node75 *)sp30, output->x, output->z);
+    output->y = Anim_GetPolygonHeight((struct Node75 *)sp30, output->x, output->z);
 }
 
 /** Return offset 0x34 only when the type byte at offset 0 is 1. */

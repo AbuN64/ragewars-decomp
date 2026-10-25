@@ -95,7 +95,7 @@ typedef struct ActorSpawnCallbacks {
 } ActorSpawnCallbacks;
 extern char ACTOR_TABLE_A;
 extern char ACTOR_TABLE_B;
-extern f32 func_80275DD4_de(void *, f32, f32);
+extern f32 Anim_GetPolygonHeight(void *, f32, f32);
 void Nav_InitSpawnedActor(Source *source, Dest *actor, ActorSpawnCallbacks *callbacks) {
     void *saved;
     void *surface;
@@ -134,7 +134,7 @@ void Nav_InitSpawnedActor(Source *source, Dest *actor, ActorSpawnCallbacks *call
     surface = source->surface;
     actor->surfaceBC = surface;
     if ((source->definition->gate & 4) && surface != NULL) {
-        actor->positionB0.y = func_80275DD4_de(surface, actor->positionB0.x, actor->positionB0.z);
+        actor->positionB0.y = Anim_GetPolygonHeight(surface, actor->positionB0.x, actor->positionB0.z);
     }
     scale = 1.0f;
     value = -1;
