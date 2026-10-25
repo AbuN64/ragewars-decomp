@@ -65,14 +65,14 @@ s32 func_80436C58_de(void) {
 }
 
 s32 Menu_SelectNextPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
-    s32 temp_v0;
+    s32 nextItem;
 
     MarkMenuEventHandled();
     if (arg3 == 1) {
         func_804367A8_de(D_800E5690->item);
-        temp_v0 = D_800E5690->item + 1;
-        D_800E5690->item = temp_v0;
-        if (temp_v0 >= 4) {
+        nextItem = D_800E5690->item + 1;
+        D_800E5690->item = nextItem;
+        if (nextItem >= 4) {
             D_800E5690->item = 0;
         }
         Menu_SelectPlayerSettingsEntry(D_800E5690->item);
@@ -85,14 +85,14 @@ s32 Menu_SelectNextPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s3
 }
 
 s32 Menu_SelectPreviousPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
-    s32 temp_v0;
+    s32 previousItem;
 
     MarkMenuEventHandled();
     if (arg3 == 1) {
         func_804367A8_de(D_800E5690->item);
-        temp_v0 = D_800E5690->item - 1;
-        D_800E5690->item = temp_v0;
-        if (temp_v0 < 0) {
+        previousItem = D_800E5690->item - 1;
+        D_800E5690->item = previousItem;
+        if (previousItem < 0) {
             D_800E5690->item = 3;
         }
         Menu_SelectPlayerSettingsEntry(D_800E5690->item);

@@ -25,13 +25,13 @@ s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
     s32 temp_v0_2;
     s32 temp_v0_4;
     s32 temp_v0_6;
-    s32 temp_v1;
+    s32 entryIndex;
     s32 i;
     s32 empty_slot;
     MenuWidget *highlight;
-    MenuWidget *temp_a0_3;
-    MenuWidget *temp_a0_5;
-    MenuWidget *temp_a0_6;
+    MenuWidget *highlightWidget;
+    MenuWidget *headerWidget;
+    MenuWidget *footerWidget;
     MenuWidget *pulse;
     MenuWidget *header;
     MenuWidget *footer;
@@ -55,10 +55,10 @@ s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
         }
         break;
     case 2:
-        temp_a0_5 = D_800E42D0->header;
-        temp_a0_5->x = (u16) (temp_a0_5->x - (u16)D_800E42D0->headerStep);
-        temp_a0_6 = D_800E42D0->footer;
-        temp_a0_6->x = (u16) (temp_a0_6->x + (u16)D_800E42D0->footerStep);
+        headerWidget = D_800E42D0->header;
+        headerWidget->x = (u16) (headerWidget->x - (u16)D_800E42D0->headerStep);
+        footerWidget = D_800E42D0->footer;
+        footerWidget->x = (u16) (footerWidget->x + (u16)D_800E42D0->footerStep);
         temp_v0_4 = D_800E42D0->timer - 1;
         D_800E42D0->timer = temp_v0_4;
         if (temp_v0_4 <= 0) {
@@ -112,19 +112,19 @@ s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
                         highlight->alpha=(unsigned int)temp_f0;
                     }
                     widgetNode = Menu_GetSlotValue(D_800E42D0->unk4, i);
-                    temp_a0_3 = D_800E42D0->players[i].highlight;
-                    if ((temp_a0_3->x != (widgetNode->x - 2)) || (temp_a0_3->y != (widgetNode->y - 2))) {
+                    highlightWidget = D_800E42D0->players[i].highlight;
+                    if ((highlightWidget->x != (widgetNode->x - 2)) || (highlightWidget->y != (widgetNode->y - 2))) {
                         Render_PlayFlatSound(0xE7F);
                         if (Frontend_ListHasFlag100(widgetNode) == 0) {
                             resource = widgetNode->resource;
                             if (resource != empty_slot) {
                                 D_800E42D0->players[i].kind = (s32) resource;
                                 temp_s0 = func_8041F1D8_de(resource);
-                                temp_v1 = func_8041F18C_de(D_800E42D0->players[i].kind);
-                                scale.x = D_800E3A58[temp_v1].scale[i];
-                                scale.y = D_800E3A58[temp_v1].scale[i];
-                                scale.z = D_800E3A58[temp_v1].scale[i];
-                                Frontend_InitModelPreview(D_800E42D0->players[i].model, 9, temp_s0 + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[temp_v1].position[i], D_800E3A58[temp_v1].distance[i], D_800E3A58[temp_v1].light[i]);
+                                entryIndex = func_8041F18C_de(D_800E42D0->players[i].kind);
+                                scale.x = D_800E3A58[entryIndex].scale[i];
+                                scale.y = D_800E3A58[entryIndex].scale[i];
+                                scale.z = D_800E3A58[entryIndex].scale[i];
+                                Frontend_InitModelPreview(D_800E42D0->players[i].model, 9, temp_s0 + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[entryIndex].position[i], D_800E3A58[entryIndex].distance[i], D_800E3A58[entryIndex].light[i]);
                             } else {
                                 Menu_RandomizeCharacterPreview(i);
                             }

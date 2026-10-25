@@ -22,7 +22,7 @@ extern void *func_80419E54_de(s32, s32);
 extern void *func_8040EC30_de(s32, s32);
 #define ST ((void **)D_800E5690)
 /* Builds the five player-settings controls and opens their parent screen. */
-s32 Menu_InitPlayerSettingsScreen(s32 arg0) {
+s32 Menu_InitPlayerSettingsScreen(s32 root) {
     D_800E5690 = (struct StateMenuSelectPlayerSettingsEntry *)Scene_AllocateMemory(0x64);
     ST[0] = func_8041A280_de(PLAYER_SETTINGS_ID(0x5B), PLAYER_SETTINGS_ID(0x5C));
     func_8041B110_de(PLAYER_SETTINGS_ID(0x5E));
@@ -42,7 +42,7 @@ s32 Menu_InitPlayerSettingsScreen(s32 arg0) {
     ST[1] = func_80419E54_de(PLAYER_SETTINGS_ID(0x5D), 0x6E);
     ((s32 *)D_800E5690)[9] = 3;
     ((s32 *)D_800E5690)[8] = -1;
-    ST[0xB] = func_8040EC30_de(arg0, PLAYER_SETTINGS_ID(0x5F));
+    ST[0xB] = func_8040EC30_de(root, PLAYER_SETTINGS_ID(0x5F));
     ((s32 *)D_800E5690)[10] = 0;
     Menu_SelectPlayerSettingsEntry(0);
     return 0;
@@ -65,15 +65,15 @@ extern u8 D_800FEC8D[];
 extern void Menu_SelectListEntry(void *, s32);
 extern void func_8041A6EC_de(void *, s32);
 
-void Menu_SelectPlayerSettingsEntry(s32 arg0) {
-    u8 *slot = &D_801462C8.playerSettings[arg0].slot;
+void Menu_SelectPlayerSettingsEntry(s32 entryIndex) {
+    u8 *slot = &D_801462C8.playerSettings[entryIndex].slot;
 
-    *slot = arg0;
-    Menu_SelectListEntry(D_800E5690->a, D_80102C89[arg0 * 0x190]);
-    Menu_SelectListEntry(D_800E5690->b, D_800FEC8A[arg0 * 0x190]);
-    func_8041A6EC_de(D_800E5690->c, D_800FEC8B[arg0 * 0x190]);
-    func_8041A6EC_de(D_800E5690->d, D_800FEC8C[arg0 * 0x190]);
-    Menu_SelectListEntry(D_800E5690->e, D_800FEC8D[arg0 * 0x190]);
+    *slot = entryIndex;
+    Menu_SelectListEntry(D_800E5690->a, D_80102C89[entryIndex * 0x190]);
+    Menu_SelectListEntry(D_800E5690->b, D_800FEC8A[entryIndex * 0x190]);
+    func_8041A6EC_de(D_800E5690->c, D_800FEC8B[entryIndex * 0x190]);
+    func_8041A6EC_de(D_800E5690->d, D_800FEC8C[entryIndex * 0x190]);
+    Menu_SelectListEntry(D_800E5690->e, D_800FEC8D[entryIndex * 0x190]);
 }
 
 /* Reads five settings from the objects D_800E5690 holds through func_8041AD04_de and func_8041A6E0_de into slot arg0 of the D_80102C89 table and copies them into the matching bytes of the arg0 entry of D_80146398. */

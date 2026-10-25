@@ -46,7 +46,7 @@ extern void func_8041B110_de(s32);
 extern struct ScreenState *D_800E4450;
 
 /* Builds the screen state D_800E4450: allocates it, opens screen 0x39E, registers six resources, opens window 0x3A0 and stores the 0x3A1 label. */
-s32 func_80421AE8_de(s32 arg0) {
+s32 func_80421AE8_de(s32 root) {
     s32 screen;
     MenuWidget *window;
 
@@ -62,7 +62,7 @@ s32 func_80421AE8_de(s32 arg0) {
     func_8041B110_de(ID_ROW3);
     func_8041B110_de(ID_ROW4);
     func_8041B110_de(ID_ROW5);
-    window = func_8040EC30_de(arg0, ID_WINDOW);
+    window = func_8040EC30_de(root, ID_WINDOW);
     D_800E4450->window = window;
     window->alpha = 0xF;
     D_800E4450->label = func_80419E54_de(ID_LABEL, 0x6E);

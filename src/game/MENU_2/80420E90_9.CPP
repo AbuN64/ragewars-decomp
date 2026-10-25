@@ -57,13 +57,13 @@ void func_8042177C_de(void) {
 }
 
 void func_804217D4_de(void) {
-    s32 temp_v0;
+    s32 currentMode;
     MenuWidget *temp_a0;
     MenuWidget *temp_a0_2;
     MenuWidget *temp_v0_2;
-    temp_v0 = D_800E4400->mode - 1;
-    D_800E4400->mode = temp_v0;
-    if (temp_v0 <= 0) {
+    currentMode = D_800E4400->mode - 1;
+    D_800E4400->mode = currentMode;
+    if (currentMode <= 0) {
 #if defined(VERSION_DE)
         temp_v0_2 = func_8040EC30_de(D_800E4400->window, 0x3B2);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)

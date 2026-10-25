@@ -117,14 +117,14 @@ s32 func_80420C08_de(void) {
 
 s32 func_80420C10_de(s32 unused0, s32 unused1, s32 arg2) {
     s32 temp_a0;
-    s32 temp_s0;
+    s32 entryIndex;
     s32 temp_s1;
     State_func_80420C10_de *temp_a3;
 
     MarkMenuEventHandled();
-    temp_s0 = arg2 & 0xFFFF;
-    temp_s1 = temp_s0 * 0x4C8;
-    temp_a3 = (State_func_80420C10_de *)&((PanelRecord *)D_800E42D0)[temp_s0];
+    entryIndex = arg2 & 0xFFFF;
+    temp_s1 = entryIndex * 0x4C8;
+    temp_a3 = (State_func_80420C10_de *)&((PanelRecord *)D_800E42D0)[entryIndex];
     temp_a0 = temp_a3->unk14;
     switch (temp_a0) {
     case 1:
@@ -136,27 +136,27 @@ s32 func_80420C10_de(s32 unused0, s32 unused1, s32 arg2) {
         break;
     case 3:
         temp_a3->unk14 = 1;
-        Menu_SetSlotValue(D_800E42D0->unk4, temp_s0, 0, temp_a3);
+        Menu_SetSlotValue(D_800E42D0->unk4, entryIndex, 0, temp_a3);
         func_8041CE10_de(&((PanelRecord *)(temp_s1 + (s32)D_800E42D0))->target, 1);
-        func_80420438_de(temp_s0);
+        func_80420438_de(entryIndex);
         break;
     }
     return 0;
 }
 
 s32 Menu_ReadSelectionSlot(s32 arg0, s32 arg1, s32 arg2) {
-    s32 temp_s0;
+    s32 entryIndex;
     s32 choice;
     s32 var_a1;
     CharacterSelectionRoot *characterSelectionRoot;
 
-    temp_s0 = arg2 & 0xFFFF;
-    choice = func_8041B810_de(D_800E42D0->unk4, temp_s0);
+    entryIndex = arg2 & 0xFFFF;
+    choice = func_8041B810_de(D_800E42D0->unk4, entryIndex);
     MarkMenuEventHandled();
-    characterSelectionRoot = (CharacterSelectionRoot *)((char *)D_800E42D0 + (temp_s0 * 0x4C8));
+    characterSelectionRoot = (CharacterSelectionRoot *)((char *)D_800E42D0 + (entryIndex * 0x4C8));
     if (characterSelectionRoot->phase == 1) {
-        if (choice == SPECIAL_CHAR) Menu_ApplySlotValueGfx(temp_s0,characterSelectionRoot->choice);
-        else if (Frontend_ListHasFlag100(Menu_GetSlotValue(D_800E42D0->unk4,temp_s0)) == 0) Menu_ApplySlotValueGfx(temp_s0,choice);
+        if (choice == SPECIAL_CHAR) Menu_ApplySlotValueGfx(entryIndex,characterSelectionRoot->choice);
+        else if (Frontend_ListHasFlag100(Menu_GetSlotValue(D_800E42D0->unk4,entryIndex)) == 0) Menu_ApplySlotValueGfx(entryIndex,choice);
     }
     return 0;
 }

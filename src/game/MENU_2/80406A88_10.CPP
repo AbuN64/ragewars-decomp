@@ -57,7 +57,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *owner) {
     s32 i;
     s32 j;
     s32 k;
-    u8 temp_v1_3;
+    u8 currentControllerMode;
 
     screen = Scene_AllocateMemory(0xA80);
     (*(ResultsOptionsScreen **)&D_800E4690) = screen;
@@ -171,8 +171,8 @@ loop_7:
     (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2668))) = 0;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2672))) = -1;
-    temp_v1_3 = D_801462C8.controllerMode;
-    switch (temp_v1_3) {                            /* switch 1; irregular */
+    currentControllerMode = D_801462C8.controllerMode;
+    switch (currentControllerMode) {                            /* switch 1; irregular */
     default:                                        /* switch 1 */
     case 1:                                         /* switch 1 */
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
@@ -185,7 +185,7 @@ loop_7:
     case 2:                                         /* switch 1 */
         break;
     }
-    switch (temp_v1_3) {                            /* switch 2; irregular */
+    switch (currentControllerMode) {                            /* switch 2; irregular */
     case 1:                                         /* switch 2 */
         func_80428300_de();
         break;

@@ -59,15 +59,15 @@ extern void MarkMenuEventHandled();
 
 
 
-void func_804368F8_de(s32 arg0) {
-    u8 *slot = &D_801462C8.playerSettings[arg0].slot;
+void func_804368F8_de(s32 entryIndex) {
+    u8 *slot = &D_801462C8.playerSettings[entryIndex].slot;
 
-    *slot = arg0;
-    Menu_SelectListEntry(D_800E5694->a, D_80102C89[arg0 * 0x190]);
-    Menu_SelectListEntry(D_800E5694->b, D_800FEC8A[arg0 * 0x190]);
-    func_8041A6EC_de(D_800E5694->c, D_800FEC8B[arg0 * 0x190]);
-    func_8041A6EC_de(D_800E5694->d, D_800FEC8C[arg0 * 0x190]);
-    Menu_SelectListEntry(D_800E5694->e, D_800FEC8D[arg0 * 0x190]);
+    *slot = entryIndex;
+    Menu_SelectListEntry(D_800E5694->a, D_80102C89[entryIndex * 0x190]);
+    Menu_SelectListEntry(D_800E5694->b, D_800FEC8A[entryIndex * 0x190]);
+    func_8041A6EC_de(D_800E5694->c, D_800FEC8B[entryIndex * 0x190]);
+    func_8041A6EC_de(D_800E5694->d, D_800FEC8C[entryIndex * 0x190]);
+    Menu_SelectListEntry(D_800E5694->e, D_800FEC8D[entryIndex * 0x190]);
 }
 
 void func_804369E8_de(s32 arg0) {
