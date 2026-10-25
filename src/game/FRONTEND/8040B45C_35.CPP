@@ -536,28 +536,21 @@ void Resmgr_CloseStream(s32 handle);
 void Frontend_LoadLanguageStrings(s32 index);
 extern char D_800DD0B0;
 extern s32 D_800E2AC4;
+void func_802547E4_de(void *arg0);
 
-
-#ifndef NON_MATCHING
-INCLUDE_ASM("ovl_80400000", Frontend_LoadLanguageStrings);
-#else
 /* Loads the string table of resource archive section index: frees the previous string buffer and
  * pointer table, reads the section's bytes from the archive file into a fresh buffer (its size is the
  * distance to the next section's start, or to the archive end for the last one), then builds the table of
  * string starts: entry 0 is the buffer, and every byte after a terminating zero starts the next string. */
-void func_802547E4_de(void *arg0);
 void Frontend_LoadLanguageStrings(s32 languageIndex) {
     s32 stringCount;
-    s32 nextOffset;
     s32 bufferSize;
     s32 stringIndex;
     s32 closeArchive;
     u8 *character;
-    s32 languageOffset;
 
-    languageOffset = languageIndex * 8;
-    stringCount = ((ArchiveTextIndexEntry *)(languageOffset + (s32)D_801539B0.LangTable))->count;
     closeArchive = 0;
+    stringCount = D_801539B0.LangTable[languageIndex].count;
     if (D_801539B0.StringBuffer != 0) {
         func_802547E4_de(D_801539B0.StringBuffer);
     }
@@ -567,29 +560,27 @@ void Frontend_LoadLanguageStrings(s32 languageIndex) {
     }
     D_801539B0.StringTable = 0;
     if (languageIndex < D_801539B0.NLanguages - 1) {
-        nextOffset = ((ArchiveTextIndexEntry *)(languageOffset + (s32)D_801539B0.LangTable))[1].start;
+        bufferSize = D_801539B0.LangTable[languageIndex + 1].start - D_801539B0.LangTable[languageIndex].start;
     } else {
-        nextOffset = D_801539B0.Header.StringTableLen;
+        bufferSize = D_801539B0.Header.StringTableLen - D_801539B0.LangTable[languageIndex].start;
     }
-    bufferSize = nextOffset - ((ArchiveTextIndexEntry *)(languageOffset + (s32)D_801539B0.LangTable))->start;
-    D_801539B0.StringBuffer = (char *)func_8025305C_de(bufferSize);
+    D_801539B0.StringBuffer = func_8025305C_de(bufferSize);
     Resmgr_SeekStream(D_801539B0.In, D_801539B0.LangTable[languageIndex].start + D_801539B0.Header.StringTable, 0);
     Resmgr_ReadStream(D_801539B0.StringBuffer, bufferSize, 1, D_801539B0.In);
     if (closeArchive) {
         Resmgr_CloseStream(D_801539B0.In);
         D_801539B0.In = 0;
     }
-    D_801539B0.StringTable = (char **)func_8025305C_de(stringCount << 2);
+    D_801539B0.StringTable = func_8025305C_de(stringCount << 2);
     D_801539B0.StringTable[0] = D_801539B0.StringBuffer;
     stringIndex = 1;
     for (character = (u8 *)D_801539B0.StringBuffer + 1; character < (u8 *)D_801539B0.StringBuffer + bufferSize && stringIndex < stringCount; character++) {
         if (*character == 0) {
-            D_801539B0.StringTable[stringIndex] = (char *)(character + 1);
+            D_801539B0.StringTable[stringIndex] = (char *)character + 1;
             stringIndex++;
         }
     }
 }
-#endif
 
 /* Opens the menu archive NAME: reads its table of contents, then its image table (with a fresh image
    and load state per entry), its text index (loading section 0), its resource map (with copies when
