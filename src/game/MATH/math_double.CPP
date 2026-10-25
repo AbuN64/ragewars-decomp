@@ -62,77 +62,60 @@ overflow:
     return ScaleDoubleExponent(value * ScaleDoubleExponent(D_800C56D0_de, 53), shift - 53);
 }
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-extern f64 D_800C56D8_de,D_800C56E0_de,D_800C56E8_de,D_800C56F0_de,D_800C56F8_de;
-extern f64 D_800C5700_de,D_800C5708_de,D_800C5710_de,D_800C5718_de,D_800C5720_de,D_800C5728_de,D_800C5730_de,D_800C5738_de;
-static inline f64 Frexp(f64 value, s32 *exponent)
-{
-  union
-  {
-    f64 value;
-    struct
-    {
-      u32 high;
-      u32 low;
-    } words;
-  } bits;
-  if (value != D_800C56E0_de)
-  {
-    bits.value = value;
-    *exponent = ((bits.words.high >> 20) & 0x7ff) - 0x3fe;
-    bits.words.high = (bits.words.high & 0x800fffff) | 0x3fe00000;
-    return bits.value;
-  }
-  *exponent = 0;
-  return D_800C56E0_de;
-}
-f64 NaturalLogDouble(f64 value)
-{
-  s32 exponent;
-  f64 x;
-  f64 denominator;
-  f64 square;
-  f64 numerator;
-  f64 correction;
-  if (value <= D_800C56E0_de)
-  {
-    return D_800C56D8_de;
-  }
-  x = Frexp(value, &exponent);
-  do {
-    if (D_800C56E8_de < x)
-    {
-      denominator = x * D_800C56F0_de;
-      x = x - D_800C56F0_de;
-      x = x - D_800C56F0_de;
-      denominator += D_800C56F0_de;
+/* Splits a double into a mantissa in [0.5, 1) and a power of two (frexp): rewrites the biased exponent to 0x3FE and
+   returns the old one minus 0x3FE through exponent; zero returns 0 with exponent 0. */
+static inline f64 Frexp(f64 value, s32 *exponent) {
+    DoubleBits_8029ECB0 bits;
+
+    if (value != 0.0) {
+        bits.d = value;
+        *exponent = ((bits.w.hi >> 20) & 0x7FF) - 0x3FE;
+        bits.w.hi = (bits.w.hi & 0x800FFFFF) | 0x3FE00000;
+        return bits.d;
     }
-    else
-    {
-      x = x - D_800C56F8_de;
-      denominator = x * D_800C56F8_de;
-      exponent--;
-      denominator += D_800C56F8_de;
-    }
-    x = x / denominator;
-    square = x * x;
-    numerator = ((square * D_800C5700_de) + D_800C5708_de) * square;
-    denominator = (((square - D_800C5710_de) * square) + D_800C5718_de) * square;
-    numerator = square * (numerator - D_800C5720_de);
-    denominator = denominator - D_800C5728_de;
-  } while (0);
-  correction = x * (numerator / denominator);
-  return ((exponent * D_800C5730_de) + (x + correction)) + (exponent * D_800C5738_de);
+    *exponent = 0;
+    return 0.0;
 }
-#else
-INCLUDE_ASM("span_1000", NaturalLogDouble);
-#endif
+
+/* Returns the natural logarithm of a double (log): -infinity for zero or negative values; otherwise splits it with
+   frexp into m * 2^e, maps m to x = 2(m - 1) / (m + 1) around sqrt(1/2) and returns x + x^3 P(x^2) / Q(x^2) plus
+   e ln 2, with ln 2 split into 0.693359375 - 2.1219444e-4 for precision (the Cephes log rational form). */
+f64 NaturalLogDouble(f64 value) {
+    s32 exponent;
+    f64 x;
+    f64 divisor;
+    f64 z;
+    f64 p;
+    f64 q;
+    f64 correction;
+
+    if (value <= 0.0) {
+        return -1.0 / 0.0;
+    }
+    x = Frexp(value, &exponent);
+    if (0.7071067690849304 < x) {
+        divisor = x * 0.5 + 0.5;
+        x = x - 0.5;
+        x = x - 0.5;
+    } else {
+        exponent--;
+        x = x - 0.5;
+        divisor = x * 0.5 + 0.5;
+    }
+    x = x / divisor;
+    z = x * x;
+    p = ((z * -0.7895611524581909) + 16.383943557739258) * z;
+    q = (((z - 35.66797637939453) * z) + 312.0322265625) * z;
+    z = z * (p - 64.12494659423828);
+    z = z / (q - 769.4993286132812);
+    correction = x * z;
+    x = x + correction;
+    return (exponent * -2.1219444170128557e-4 + x) + exponent * 0.693359375;
+}
 
 /* Raises x to the power y: 1 for a zero exponent, 0 or infinity for a zero base, exp(y log x) through NaturalLogDouble (log) and an inline exponential scaled by func_8029ABA0_de (ldexp) for a positive base, and for a negative base the same magnitude signed by the parity of an integer exponent, or negated when the exponent's reciprocal is odd, otherwise negative infinity. */
 
 
-extern f64 NaturalLogDouble(f64 value);
 
 static inline f64 exp_inline(f64 x) {
     f64 t;

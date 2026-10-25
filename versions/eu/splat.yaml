@@ -4066,7 +4066,7 @@ segments:
       - [0xC6528, rodata, data_800C/D_80299B60_CB418]
       - [0xC652C, rodata, data_800C/D_auto_rodata_unresolved_800C592C]
       - [0xC6560, rodata, data_800C/D_8029ABA0_CB450]
-      - [0xC6578, rodata, data_800C/data_func_8029AD38_de_800C5978]
+      - [0xC6578, rodata, data_800C/literals_NaturalLogDouble]
       - [0xC65E0, rodata, data_800C/literals_ScaleDoubleExponent]
       - [0xC66E8, rodata, data_800C/literals_FloatModulo]
       - [0xC6718, rodata, data_800C/literals_func_8029B3C0_de]
