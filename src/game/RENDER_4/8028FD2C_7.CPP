@@ -4,7 +4,7 @@
 #include "RENDER_4/8028FD2C_7.H"
 
 /** Add an indexed word from the first argument to the second argument. */
-int func_8028FE28_de(int *directory, int arg1, int level) {
+int Render_GetDirectoryEntry(int *directory, int arg1, int level) {
     directory += level;
     return arg1 + directory[1];
 }

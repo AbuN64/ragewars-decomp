@@ -82,7 +82,7 @@ void func_8028E390_de(void *unused0, void *table, u8 *remap) {
 
 
 extern u8 D_800D2910[];
-extern s32 func_80285180_de(void *resource, s32 flags);
+extern s32 Render_UnpackResource(void *resource, s32 flags);
 extern void func_802AA8EC_de(void *table, s32 index, void **out, u8 *tag);
 
 void func_8028E4A4_de(void *unused0, void **resource) {
@@ -103,7 +103,7 @@ void func_8028E4A4_de(void *unused0, void **resource) {
     s32 width;
     s32 height;
 
-    end = func_80285180_de(resource, 0) == 0;
+    end = Render_UnpackResource(resource, 0) == 0;
     if (end) {
         return;
     }
@@ -155,7 +155,7 @@ void func_8028E4A4_de(void *unused0, void **resource) {
 
 
 extern u8 D_800D2920[];
-extern s32 func_80285180_de(void *resource, s32 flags);
+extern s32 Render_UnpackResource(void *resource, s32 flags);
 extern void func_802AA8EC_de(void *table, s32 index, void **out, u8 *tag);
 
 void func_8028E5D0_de(void *unused0, void **resource) {
@@ -176,7 +176,7 @@ void func_8028E5D0_de(void *unused0, void **resource) {
     s32 width;
     s32 height;
 
-    end = func_80285180_de(resource, 0) == 0;
+    end = Render_UnpackResource(resource, 0) == 0;
     if (end) {
         return;
     }

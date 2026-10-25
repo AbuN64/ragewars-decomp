@@ -20,7 +20,7 @@ extern void func_80253908_de(s32 unusedHeap);
 extern s32 func_80254284_de(s32,void **,s32,void *);
 extern void **func_80254408_de(s32,s32,s32,s32,s32,s32,void *);
 extern void func_80286AA8_de(void *,s32,s32);
-extern int func_8028FE28_de(int *,int,int);
+extern int Render_GetDirectoryEntry(int *,int,int);
 extern s32 Render_LocatePackSection(s32,s32,s32,s32 *);
 extern s32 D_00285160;
 extern char D_800F41F0;
@@ -58,20 +58,20 @@ void func_8044B7C0_de(LevelCode8044ACCC *arg0, s32 arg1) {
     /* The original resource API passes the unused arena argument. */
     func_80253908_de(0);
     func_80254284_de(0, (void **)&sp20, arg1, &D_800C4F50_de);
-    temp_v0 = func_8028FE28_de(sp20, arg1, 5);
+    temp_v0 = Render_GetDirectoryEntry(sp20, arg1, 5);
     arg0->unk1C = temp_v0;
     func_80254284_de(0, (void **)(arg0->pad40 + 0xC), temp_v0, &D_800C4F60_de);
-    temp_v0_2 = func_8028FE28_de(sp20, arg1, 3);
+    temp_v0_2 = Render_GetDirectoryEntry(sp20, arg1, 3);
     arg0->unk20 = temp_v0_2;
     func_80254284_de(0, (void **)(arg0->pad40 + 0x10), temp_v0_2, &D_800C4F70_de);
     arg0->unk94 = (s32) *func_80254408_de(0, (s32)sp20, 2, arg1, (s32)arg0, (s32)&D_00285160, &D_800C4F84_de);
-    temp_v0_3 = func_8028FE28_de(sp20, arg1, 0);
+    temp_v0_3 = Render_GetDirectoryEntry(sp20, arg1, 0);
     arg0->unk24 = temp_v0_3;
     func_80254284_de(0, (void **)(arg0->pad40 + 0x14), temp_v0_3, &D_800C4F94_de);
     arg0->unk78 = (s32) *func_80254408_de(0, (s32)sp20, 1, arg1, (s32)arg0, (s32)&D_0044D934, &D_800C4FA4_de);
     arg0->unkB4 = func_80254408_de(0, (s32)sp20, 4, arg1, (s32)arg0, (s32)&D_0044D804, &D_800C4FB4_de);
     arg0->unk98 = (s32) *func_80254408_de(0, (s32)sp20, 0xA, arg1, (s32)arg0, (s32)&D_00285160, &D_800C4F84_de);
-    temp_v0_4 = func_8028FE28_de(sp20, arg1, 9);
+    temp_v0_4 = Render_GetDirectoryEntry(sp20, arg1, 9);
     arg0->unk28 = temp_v0_4;
     func_80254284_de(0, (void **)(arg0->pad40 + 0x18), temp_v0_4, &D_800C4FC8_de);
     arg0->unk70 = (s32) *func_80254408_de(0, (s32)sp20, 0xB, arg1, (s32)arg0, (s32)&D_00285160, &D_800C4FD8_de);
@@ -88,10 +88,10 @@ void func_8044B7C0_de(LevelCode8044ACCC *arg0, s32 arg1) {
     arg0->unkAC = (s32) *func_80254408_de(0, (s32)sp20, 0xE, arg1, (s32)arg0, (s32)&D_00285160, &D_800C5010_de);
     arg0->unkA8 = (s32) *func_80254408_de(0, (s32)sp20, 0xF, arg1, (s32)arg0, (s32)&D_00285160, &D_800C5018_de);
     arg0->unk9C = (s32) *func_80254408_de(0, (s32)sp20, 0x11, arg1, (s32)arg0, (s32)&D_00285160, &D_800C5028_de);
-    temp_v0_6 = func_8028FE28_de(sp20, arg1, 0x10);
+    temp_v0_6 = Render_GetDirectoryEntry(sp20, arg1, 0x10);
     arg0->unk2C = temp_v0_6;
     func_80254284_de(0, (void **)(arg0->pad40 + 0x1C), temp_v0_6, &D_800C5038_de);
-    temp_v0_7 = func_8028FE28_de(sp20, arg1, 0x12);
+    temp_v0_7 = Render_GetDirectoryEntry(sp20, arg1, 0x12);
     arg0->unk34 = temp_v0_7;
     func_80254284_de(0, (void **)arg0->pad74, temp_v0_7, &D_800C504C_de);
     func_80403BE0_de();
@@ -102,7 +102,7 @@ void func_8044B7C0_de(LevelCode8044ACCC *arg0, s32 arg1) {
     arg0->unk18 = -1;
     arg0->unkB0 = temp_v0_8;
     if (*sp20 >= 0x16) {
-        arg0->unkC = func_8028FE28_de(sp20, arg1, 0x15);
+        arg0->unkC = Render_GetDirectoryEntry(sp20, arg1, 0x15);
         temp_v0_9 = /* This callee returns its allocated resource handle, not an integer ID. */
             ((void **(*)(s32,void **,s32,void *,s32))func_802540F4_de)(0, (void **)&sp24, arg0->unkC, &D_800C5070_de, 1);
         if (temp_v0_9 != 0) {

@@ -53,7 +53,7 @@ extern void func_8026992C_de(void *, s32, s32);
 
 extern s32 func_802540F4_de(s32, void **, s32, void *, s32);
 
-extern s32 func_8028FE28_de(s32 *, s32, s32);
+extern s32 Render_GetDirectoryEntry(s32 *, s32, s32);
 
 extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
 
@@ -133,7 +133,7 @@ void func_8024F108_de(StaticObject *staticObject) {
                                 staticObject->animationKey, 0x18,
                                 0, 0, 0, &D_800C3DA8_de + 4, 1);
         if (resource != 0) {
-            key = func_8028FE28_de(*resource, staticObject->animationKey, 1);
+            key = Render_GetDirectoryEntry(*resource, staticObject->animationKey, 1);
             Scene_ReleaseResource(0, resource);
             found = func_802540F4_de(0, &sp28, key, D_800C3DC0_de, 1);
             if (found != 0) {

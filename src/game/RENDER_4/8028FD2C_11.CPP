@@ -19,7 +19,7 @@ extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 
 
-void func_8028FF0C_de(void *arg0, void *arg1, s32 arg2)
+void Render_TransposeRecords(void *arg0, void *arg1, s32 arg2)
 {
   char *data = &((ResidentDataChunk *)(arg0))->data[0];
   s32 temp_a2;

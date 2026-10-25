@@ -431,7 +431,7 @@ typedef union CollisionBuildTriangle { struct {
     s32 mask;
 } fields; CGameRegion canonical; s32 words[8]; } CollisionBuildTriangle;
 typedef Packed CollisionBuildFace;
-extern void func_8028FF0C_de(void *src, void *dst, s32 arg2);
+extern void Render_TransposeRecords(void *src, void *dst, s32 arg2);
 
 extern void *memcpy(void *, const void *, unsigned int);
 extern s32 D_80141060;

@@ -28,7 +28,7 @@ void **func_802540F4_de(s32, void **, s32, void *, s32);
 void func_8026BC60_de(void);
 
 
-int func_8028FE28_de(int *, int, int);
+int Render_GetDirectoryEntry(int *, int, int);
 
 s32 Render_LocatePackSection(s32, s32, s32, s32 *);
 
@@ -129,7 +129,7 @@ void func_8026C484_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 
         ObjRecAtCV2 *temp_v1_2;
         temp_v0 = Scene_RequestResource(0, arg0, arg0, 0x18, 0, 0, 0, &D_800C466C_de, 1);
         if (temp_v0 != 0) {
-                temp_s1 = func_8028FE28_de(*temp_v0, arg0, 1);
+                temp_s1 = Render_GetDirectoryEntry(*temp_v0, arg0, 1);
                 Scene_UnlockResource(0, temp_v0);
                 temp_v0_2 = func_802540F4_de(0, (void **) &sp28, temp_s1, &D_800C4680_de, 1);
                 if (temp_v0_2 != 0) {

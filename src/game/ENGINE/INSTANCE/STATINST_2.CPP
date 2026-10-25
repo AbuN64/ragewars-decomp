@@ -8,7 +8,7 @@
 #include "SCENE/802508E0_4.H"
 
 extern char D_800C3E5C_de[];
-extern s32 func_8028FE28_de(s32 *,s32,s32);
+extern s32 Render_GetDirectoryEntry(s32 *,s32,s32);
 extern s32 Render_LocatePackSection(void *,s32,s32,s32 *);
 extern void Scene_LockResource(void *,Node80253610 *);
 void *Instance_AcquireGeometry(ResourceOwner *owner,s32 index) {
@@ -24,7 +24,7 @@ void *Instance_AcquireGeometry(ResourceOwner *owner,s32 index) {
     if (index != owner->index) {
         block = Scene_RequestResource(0,owner->key,owner->key,0x18,0,0,0,D_800C3E5C_de,1);
         if (block != 0) {
-            key = func_8028FE28_de(*block,owner->key,1);
+            key = Render_GetDirectoryEntry(*block,owner->key,1);
             Scene_ReleaseResource(0,block);
             allocation = func_802540F4_de(0,&table,key,D_800C8F70,1);
             if (allocation != 0) {

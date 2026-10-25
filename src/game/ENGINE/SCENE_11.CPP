@@ -165,7 +165,7 @@ void func_8028C6D4_de(Owner_func_8028C6D4_de *owner, s32 time, Block24 *out) {
         *out = *(Block24 *)D_800CBC90;
     } else {
         func_802897B4_de(owner, time, &sample, &segment);
-        func_80289970_de(&sample, segment, time, out);
+        Engine_SampleVolumeLighting(&sample, segment, time, out);
     }
 }
 

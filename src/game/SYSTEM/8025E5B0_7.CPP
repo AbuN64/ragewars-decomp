@@ -22,17 +22,17 @@ typedef struct MotionHeader {
     f32 frameStep;
 } MotionHeader;
 
-extern s32 func_80285180_de(void **, s32);
+extern s32 Render_UnpackResource(void **, s32);
 
 extern s32 Render_GetSizedPackSection(s32, s32, s32 *);
 
 
-extern void *func_80254480_de(s32, void *, s32);
+extern void *Scene_AllocResourceBlock(s32, void *, s32);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 
-extern void func_80253D10_de(s32, void **, void *);
+extern void Scene_ReplaceResourceBlock(s32, void **, void *);
 
 extern s32 System_ExpandAnimationTracks(void *, void *, s32, s32, s32, s32);
 
@@ -114,7 +114,7 @@ void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
     s32 success;
     f32 count;
 
-    if (func_80285180_de((void **)handle, 1)) {
+    if (Render_UnpackResource((void **)handle, 1)) {
         source = (*handle)->block;
         sourceBytes = (*handle)->bytes;
         section0 = (void *)Render_GetSizedPackSection((s32)source, 0, &bytes0);
@@ -140,7 +140,7 @@ void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
         rotationBytes = motion_storage(header->translations, D_8010AC88);
         translationBytes = motion_storage(header->rotations, D_8010AC88);
         motionBytes = translationBytes + rotationBytes + 0x38;
-        output = func_80254480_de(0, handle, sourceBytes - bytes5 + motionBytes + bytes6);
+        output = Scene_AllocResourceBlock(0, handle, sourceBytes - bytes5 + motionBytes + bytes6);
         if (output != 0) {
             result = output->block;
             resource_begin(result, 7, 0x28);
@@ -177,13 +177,13 @@ void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
             }
             if (success == 0) {
                 Scene_ReleaseResource(0, output);
-                func_80253D10_de(0, (void **)handle, 0);
+                Scene_ReplaceResourceBlock(0, (void **)handle, 0);
             } else {
                 goto replace_output;
             }
         } else {
 replace_output:
-            func_80253D10_de(0, (void **)handle, output);
+            Scene_ReplaceResourceBlock(0, (void **)handle, output);
         }
     }
 }

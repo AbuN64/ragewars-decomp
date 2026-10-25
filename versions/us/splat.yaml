@@ -3982,7 +3982,7 @@ segments:
       - [0xC5D3C, rodata, data_800C/D_80287F18_CAEFC]
       - [0xC5D40, rodata, data_800C/literals_Scene_BuildCachedGeometry]
       - [0xC5D6E, data, data_800C/rodata_unresolved_800C516E]
-      - [0xC5D70, rodata, data_800C/literals_func_80289970_de]
+      - [0xC5D70, rodata, data_800C/literals_Engine_SampleVolumeLighting]
       - [0xC5DB4, rodata, data_800C/D_blob_phase2_2968dfa2b2531d534a4c]
       - [0xC5DC0, rodata, data_800C/D_auto_rodata_shared_800CA380]
       - [0xC5DEB, data, data_800C/rodata_unresolved_800C51EB]

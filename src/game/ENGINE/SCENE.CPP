@@ -74,7 +74,7 @@ extern void func_8028D64C_de();
 extern void func_8028D888_de();
 extern void func_8028D90C_de();
 extern void func_8028DA74_de();
-extern int func_8028FE28_de();
+extern int Render_GetDirectoryEntry();
 extern s32 func_802A01E8_de();
 extern s32 func_802AA730_de();
 extern void func_802AA760_de();
@@ -411,7 +411,7 @@ scene_size_done:
     temp_v0_4 = Scene_AllocateResource(0, count << 6, 3, &D_800C5104_de);
     (((struct SharedRecAt1B92C *)(table))->unkE8) = (void *)temp_v0_4;
     Items_InitEntryBatch(&((struct SharedRecAt1B92C *)table)->address128, temp_v0_4->field_0, count);
-    resourceKey = func_8028FE28_de((((struct SharedRecAt1B92C *)(table))->unk4C), (((struct SharedRecAt1B92C *)(table))->unk1C), var_s6);
+    resourceKey = Render_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->unk4C), (((struct SharedRecAt1B92C *)(table))->unk1C), var_s6);
     (((struct SharedRecAt1B92C *)(table))->unkB8) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->unk60, resourceKey, D_800C5110_de);
     temp_v0_6 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 1, resourceKey, table, &D_0044C3D4, &D_800C511C_de);
     (((struct SharedRecAt1B92C *)(table))->unkBC) = temp_v0_6;
@@ -419,11 +419,11 @@ scene_size_done:
     temp_v0_7 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 4, resourceKey, table, &D_00285160, &D_800C5128_de);
     (((struct SharedRecAt1B92C *)(table))->unkC0) = temp_v0_7;
     (((struct SharedRecAt1B92C *)(table))->unk68) = (void *) *temp_v0_7;
-    temp_v0_8 = func_8028FE28_de((((struct SharedRecAt1B92C *)(table))->unk60), resourceKey, 5);
+    temp_v0_8 = Render_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->unk60), resourceKey, 5);
     (((struct SharedRecAt1B92C *)(table))->unk30) = temp_v0_8;
     (((struct SharedRecAt1B92C *)(table))->unkC4) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->address64, temp_v0_8, &D_800C5134_de);
     if (*(((struct SharedRecAt1B92C *)(table))->unk60) >= 0xD) {
-        temp_v0_9 = func_8028FE28_de((((struct SharedRecAt1B92C *)(table))->unk60), resourceKey, 0xC);
+        temp_v0_9 = Render_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->unk60), resourceKey, 0xC);
         (((struct SharedRecAt1B92C *)(table))->unk40) = temp_v0_9;
         (((struct SharedRecAt1B92C *)(table))->unk100) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->unk8C, temp_v0_9, &D_800C5148_de);
         temp_v0_10 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk8C), 0, (((struct SharedRecAt1B92C *)(table))->unk40), table, 0, &D_800C5154_de);

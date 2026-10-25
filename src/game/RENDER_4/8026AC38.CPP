@@ -26,9 +26,9 @@ extern s32 Render_SetModePreset(s32);
 
 s32 Render_GetSizedPackSection(s32 arg0, s32 arg1, s32 *arg2);
 
-extern struct Shape_typemap_165 *func_80254480_de(s32, void *, s32);
+extern struct Shape_typemap_165 *Scene_AllocResourceBlock(s32, void *, s32);
 
-void func_80253D10_de(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_typemap_165 *arg2);
+void Scene_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_typemap_165 *arg2);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
@@ -102,7 +102,7 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
     s32 materialBytes = 32;
     void *dstData;
     void *copySource4, *copySource5, *copySource3, *copySource2, *copySource1, *copySource0;
-    if (func_80285180_de(res, 1) != 0) {
+    if (Render_UnpackResource(res, 1) != 0) {
         parts = 6;
         if (extra == 0) {
             parts = 3;
@@ -154,7 +154,7 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
             size += len5;
         }
         if (sentinel != 0) size += 8;
-        allocation = func_80254480_de(0, res, size);
+        allocation = Scene_AllocResourceBlock(0, res, size);
         if (allocation != 0) {
             offset = (parts * 4 + 15) & ~7;
             old = (*res)->pack;
@@ -294,7 +294,7 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
                 dst->offsets[4] = offset;
             }
         }
-        func_80253D10_de(0, res, allocation);
+        Scene_ReplaceResourceBlock(0, res, allocation);
     }
 }
 

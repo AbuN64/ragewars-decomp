@@ -14,8 +14,8 @@
 #include "MENU/8044ACCC.H"
 #include "RENDER_4/8028FD2C_6.H"
 struct Shape_typemap_165;
-extern struct Shape_typemap_165 *func_80254480_de(s32 arg0, void *arg1, s32 arg2);
-extern void func_80253D10_de(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_typemap_165 *arg2);
+extern struct Shape_typemap_165 *Scene_AllocResourceBlock(s32 arg0, void *arg1, s32 arg2);
+extern void Scene_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_typemap_165 *arg2);
 
 
 
@@ -70,7 +70,7 @@ void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **han
     s32 index;
     u8 *bits;
 
-    if (func_80285180_de((void*)handle, 1) != 0) {
+    if (Render_UnpackResource((void*)handle, 1) != 0) {
         node = (*handle)->payload.data;
         first = ((void *(*)(int *,s32,s32 *))Render_GetSizedPackSection)(node, 0, &size0);
         vlist = ((void *(*)(int *,s32,s32 *))Render_GetSizedPackSection)(node, 1, &size1);
@@ -78,24 +78,24 @@ void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **han
         ntris = flist->count;
         chunk = ((void *(*)(int *,s32,s32 *))Render_GetSizedPackSection)(node, 3, &size3);
         tableSize = (ntris << 5) | 8;
-        block = (void*)func_80254480_de(0, handle, size0 + 0x18 + size1 + tableSize + size3);
+        block = (void*)Scene_AllocResourceBlock(0, handle, size0 + 0x18 + size1 + tableSize + size3);
         if (block != 0) {
             offset = 0x18;
             hdr = block->payload.data;
             i = 0;
             hdr->count = 0;
             hdr->offsets[0] = offset;
-            func_8028FF0C_de(first, (char *) hdr + offset, 0);
+            Render_TransposeRecords(first, (char *) hdr + offset, 0);
             hdr->count = 1;
             offset += size0;
             vdst = (char *) hdr + offset;
             hdr->offsets[1] = offset;
-            func_8028FF0C_de(vlist, vdst, 0);
+            Render_TransposeRecords(vlist, vdst, 0);
             hdr->count = 2;
             offset += size1;
             dst = (char *) hdr + offset;
             hdr->offsets[2] = offset;
-            func_8028FF0C_de(flist, dst, 1);
+            Render_TransposeRecords(flist, dst, 1);
             face = flist->items;
             copiedTriangles=(void*)dst;
             copiedTriangles->kind = 0x20;
@@ -148,11 +148,11 @@ void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **han
             offset += tableSize;
             hdr->count = 3;
             hdr->offsets[3] = offset;
-            func_8028FF0C_de(chunk, base + offset, 0);
+            Render_TransposeRecords(chunk, base + offset, 0);
             hdr->count = 4;
             offset += size3;
             hdr->offsets[4] = offset;
         }
-        func_80253D10_de(0, (void*)handle, (void*)block);
+        Scene_ReplaceResourceBlock(0, (void*)handle, (void*)block);
     }
 }

@@ -108,7 +108,7 @@ void func_8044BF90_de(func_8044CBE0_S1 *arg0) {
    node's four chunks with their counts, resets the two bucket lists and files the 48 buckets into
    the second, then for every face of both lists clears the solid bit when it is hidden and marks it
    0xF0 when its group bit is set in the current group's bitmap. */
-extern s32 func_80285180_de(void ***handle, s32 arg1);
+extern s32 Render_UnpackResource(void ***handle, s32 arg1);
 extern void func_8028FDF8_de(void *node, s32 arg1);
 static inline s32 groupHas(WorldRecAt1B40C *world, s32 n) {
     s32 index;
@@ -134,7 +134,7 @@ void func_8044C108_de(WorldRecAt1B40C *world, void ***handle) {
     s32 n;
     s32 count;
     Face *face;
-    if (func_80285180_de(handle, 0) != 0) {
+    if (Render_UnpackResource(handle, 0) != 0) {
         node = **handle;
         l0 = Render_GetPackSection(node, 0);
         l1 = Render_GetPackSection(node, 1);

@@ -18,7 +18,7 @@ extern f32 func_80275DD4_de(void *, f32, f32);
 
 extern f32 func_8027525C_de(void *arg0, f32 arg1, f32 arg2);
 
-extern s32 func_8028FE28_de(s32 *arg0, s32 arg1, s32 arg2);
+extern s32 Render_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);
 
 extern void func_80278E7C_de(void *arg0);
 
@@ -83,7 +83,7 @@ s32 func_8028C198_de(Shared_World *world, s32 type) {
     s32 *directory = world->indexedDirectory;
 
     if (type < *directory) {
-        return func_8028FE28_de(directory, world->indexedBank, type);
+        return Render_GetDirectoryEntry(directory, world->indexedBank, type);
     }
     return 0;
 }

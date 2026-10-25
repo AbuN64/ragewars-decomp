@@ -42,7 +42,7 @@ extern char D_800C3EA0_de;
 
 extern s32 Render_LocatePackSection(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
 
-void func_80253D10_de(s32 unused, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *arg2) {
+void Scene_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *arg2) {
     extern OSMesgQueue D_80101140;
     s32 counter;
     s32 counter2;

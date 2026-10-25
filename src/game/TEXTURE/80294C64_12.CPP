@@ -4,11 +4,11 @@
 
 extern s32 D_800CD894_de;
 
-extern s32 func_80285180_de(void *, s32);
+extern s32 Render_UnpackResource(void *, s32);
 extern u16 *Render_GetSizedPackSection(void *, s32, u32 *);
 extern s32 func_8028FDF8_de(void *, s32);
-extern s32 **func_80254480_de(s32, void *, s32);
-extern void func_80253D10_de(s32, void *, s32 **);
+extern s32 **Scene_AllocResourceBlock(s32, void *, s32);
+extern void Scene_ReplaceResourceBlock(s32, void *, s32 **);
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 typedef struct {
@@ -41,7 +41,7 @@ void func_80294C8C_de(s32 arg0, Resource *handle) {
     s32 *hdr;
     s32 *entry;
 
-    if (func_80285180_de(handle, arg0 >= 0) == 0) {
+    if (Render_UnpackResource(handle, arg0 >= 0) == 0) {
         return;
     }
     obj = *handle->handle;
@@ -106,7 +106,7 @@ void func_80294C8C_de(s32 arg0, Resource *handle) {
     total += (len1 + 7) & ~7;
     off2 = total;
     total += (len2 + 7) & ~7;
-    res = func_80254480_de(0, handle, total);
+    res = Scene_AllocResourceBlock(0, handle, total);
     if (res != 0) {
         hdr = *res;
         hdr[0] = 3;
@@ -127,7 +127,7 @@ void func_80294C8C_de(s32 arg0, Resource *handle) {
             entry[0] = 0;
         }
     }
-    func_80253D10_de(0, handle, res);
+    Scene_ReplaceResourceBlock(0, handle, res);
 }
 
 #if !(defined(VERSION_US_REV1))

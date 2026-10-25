@@ -18,11 +18,11 @@
 #include "SCENE/802508E0_4.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern struct Shape_typemap_165 *func_80254480_de(s32,void *,s32);
+extern struct Shape_typemap_165 *Scene_AllocResourceBlock(s32,void *,s32);
 
 extern void func_804002D8_de(s32,CVector3 *,f32 *,Spline *);
 
-extern void func_80253D10_de(s32,struct Shape_typemap_165 **,struct Shape_typemap_165 *);
+extern void Scene_ReplaceResourceBlock(s32,struct Shape_typemap_165 **,struct Shape_typemap_165 *);
 
 /* The pack append API tests the second ABI word for a nonzero preparation flag. */
 static inline char *packAppend(Pack *pack,void *prepare,s32 size) { return func_802610F0_de(pack,(s32)prepare,size); }
@@ -58,7 +58,7 @@ void func_8040067C_de(s32 unused, struct Shape_typemap_165 **handle) {
     SplineSourceCursor p,q,r,s;
     s32 count, i, size, sa, sb, sc, np, nr, byteP, byteR;
     void *dp, *dr;
-    if (!func_80285180_de((void **)handle, 1)) return;
+    if (!Render_UnpackResource((void **)handle, 1)) return;
     source = (*handle)->pack;
     parts = Render_GetPackSection(source, 0);
     a = Render_GetPackSection(source, 1);
@@ -78,7 +78,7 @@ void func_8040067C_de(s32 unused, struct Shape_typemap_165 **handle) {
     sc = func_8028FEB8_de(c);
     sa = func_8028FEB8_de(a);
     sb = func_8028FEB8_de(b);
-    output = func_80254480_de(0, handle, size + sa + sb + sc + 24);
+    output = Scene_AllocResourceBlock(0, handle, size + sa + sb + sc + 24);
     if (output == 0) return;
     pack = output->pack;
     func_802610A8_de(pack, 4);
@@ -118,7 +118,7 @@ void func_8040067C_de(s32 unused, struct Shape_typemap_165 **handle) {
         func_804002D8_de(np, p.points, q.weights, dp);
         func_804002D8_de(nr, r.points, s.weights, dr);
     }
-    func_80253D10_de(0, handle, output);
+    Scene_ReplaceResourceBlock(0, handle, output);
 }
 
 s32 func_804009F4_de(s32 index) {

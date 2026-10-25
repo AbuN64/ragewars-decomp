@@ -13,7 +13,7 @@ INCLUDE_ASM("ovl_80400000", func_8041C614);
 #ifdef NON_MATCHING
 #include "COMMON/WORLD.H"
 extern u8 D_800DD460_de[], D_800DD474[];
-extern void *func_8028FE28_de(void *, void *, s32);
+extern void *Render_GetDirectoryEntry(void *, void *, s32);
 extern void *Render_LocatePackSection(void *, void *, s32, s32 *);
 extern void *func_8028CF6C_de(void *, u16);
 extern void func_80246BE8_de(void *, void *, void *, s32);
@@ -50,7 +50,7 @@ void Frontend_SelectMatchingPreviewModel(struct Unk8041CE88 *preview, s32 id, s3
     entry = list->entries;
     do {
         if (*entry == id) {
-            modelName = func_8028FE28_de(world->indexedDirectory, (void *)world->indexedBank, i);
+            modelName = Render_GetDirectoryEntry(world->indexedDirectory, (void *)world->indexedBank, i);
             indexResource = Scene_RequestResource(0, (u32)modelName, (u32)modelName, 0x18, 0, 0, 0, (const char *)D_800DD460_de, 1);
             if (indexResource != 0) {
                 modelData = Render_LocatePackSection(*indexResource, modelName, 0, &modelSize);

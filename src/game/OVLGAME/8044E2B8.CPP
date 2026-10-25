@@ -68,7 +68,7 @@ void func_8044D804_de(s32 arg0, void ***arg1) {
     s32 count;
     s32 i;
 
-    if (func_80285180_de(arg1, 0) != 0) {
+    if (Render_UnpackResource(arg1, 0) != 0) {
         obj = **arg1;
         group = Render_GetPackSection(obj, 2);
         count = group->count;
@@ -105,7 +105,7 @@ void func_8044D934_de(s32 unused0, void ***arg1) {
     s32 i;
 
     scale = D_800C5304_de;
-    if (func_80285180_de(arg1, 0) != 0) {
+    if (Render_UnpackResource(arg1, 0) != 0) {
         obj = **arg1;
         count = *(s32 *) obj;
         for (i = 0; i < count; i++) {
@@ -152,7 +152,7 @@ void func_8044DA54_de(OwnerCode8044E2B8 *arg0, void ***arg1) {
     s32 j;
     s32 index;
 
-    if (func_80285180_de(arg1, 0) != 0) {
+    if (Render_UnpackResource(arg1, 0) != 0) {
         obj = **arg1;
         count = *(s32 *) obj;
         for (i = 0; i < count; i++) {

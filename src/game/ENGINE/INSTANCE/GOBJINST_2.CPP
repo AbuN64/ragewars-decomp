@@ -8,7 +8,7 @@
 #include "SCENE/802508E0_9.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern s32 func_8028FE28_de(s32 *arg0, s32 arg1, s32 arg2);
+extern s32 Render_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);
 extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
 extern void func_8026EE20_de(void *, s32, void *);
 extern void func_80262480_de(void *);
@@ -35,11 +35,11 @@ void func_80246BE8_de(void *arg0, s32 *arg1, s32 arg2, s32 extra) {
     ((LevelActor *)arg0)->resourceState = 0;
     ((LevelActor *)arg0)->resourceWindow = 0;
     ((LevelActor *)arg0)->flags &= 0xFFFBFFFF;
-    key = func_8028FE28_de(arg1, arg2, (u16)((LevelActor *)arg0)->modelIndex);
+    key = Render_GetDirectoryEntry(arg1, arg2, (u16)((LevelActor *)arg0)->modelIndex);
     resource1 = Scene_RequestResource(0, key, key, 0x18, 0, 0, 0, &D_800C389C_de, 1);
     if (resource1 != 0) {
         entry = *resource1;
-        ((LevelActor *)arg0)->animationKey = func_8028FE28_de(entry, key, 1);
+        ((LevelActor *)arg0)->animationKey = Render_GetDirectoryEntry(entry, key, 1);
         found = func_802540F4_de(0, &sp28, ((LevelActor *)arg0)->animationKey, &D_800C38B0_de, 1);
         if (found != 0) {
             ((LevelActor *)arg0)->stateE7 = (u8)*sp28;
@@ -47,7 +47,7 @@ void func_80246BE8_de(void *arg0, s32 *arg1, s32 arg2, s32 extra) {
             Scene_UnlockResource(0, (void *)found);
         }
         ((LevelActor *)arg0)->resource = Render_LocatePackSection((s32)entry, key, 0, &((LevelActor *)arg0)->resourceFlags);
-        ((LevelActor *)arg0)->resourceKey = func_8028FE28_de(entry, key, 2);
+        ((LevelActor *)arg0)->resourceKey = Render_GetDirectoryEntry(entry, key, 2);
         resource2 = Scene_RequestResource(0, ((LevelActor *)arg0)->resource,
                                  ((LevelActor *)arg0)->resource, ((LevelActor *)arg0)->resourceFlags,
                                  0, 0, 0, &D_800C38C4_de, 1);

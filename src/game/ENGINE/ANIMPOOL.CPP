@@ -12,7 +12,7 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
 #include "RENDER_4/8028FD2C_6.H"
-extern s32 func_8028FE28_de(s32, s32, s32);
+extern s32 Render_GetDirectoryEntry(s32, s32, s32);
 extern s32 Render_LocatePackSection(void *, s32, s32, s32 *);
 extern s32 func_8028CF6C_de(void *, s32);
 extern f32 func_802B2350(s32);
@@ -78,7 +78,7 @@ SceneEffect *func_802627A0_de(struct SceneEffectPool *scene, s32 variant, s32 ow
     effect = 0;
     id = func_8028B21C_de(&D_8011FE88, variant);
     if (id != -1) {
-        key = func_8028FE28_de((s32)D_8011FE88.indexedDirectory, D_8011FE88.indexedBank, id);
+        key = Render_GetDirectoryEntry((s32)D_8011FE88.indexedDirectory, D_8011FE88.indexedBank, id);
         descriptor = Scene_RequestResource(0, key, key, 0x18, 0, 0, 0, &D_800C4260_de, 1);
         if (descriptor != 0) {
             clip = Render_LocatePackSection(*descriptor, key, 0, &size);

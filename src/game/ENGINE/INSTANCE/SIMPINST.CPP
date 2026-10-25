@@ -12,7 +12,7 @@
 
 struct ObjB;
 extern CachedResource *func_80251F6C_de(s32, s32, CachedResource *, CachedResource *, s32, void *, void *, void *, s32);
-extern s32 func_8028FE28_de(s32 *, s32, s32);
+extern s32 Render_GetDirectoryEntry(s32 *, s32, s32);
 extern s32 Render_LocatePackSection(void *, s32, s32, s32 *);
 extern void Scene_UnlockResource(void *, Node80253610 *);
 extern void func_8026E158_de(void **);
@@ -30,7 +30,7 @@ void func_8024F294_de(struct ObjB *object, s32 unused) {
     if (index != obj->loadedType) {
         resource = Scene_RequestResource(0, obj->model, obj->model, 0x18, 0, 0, 0, D_800C3DAC_de, 1);
         if (resource != 0) {
-            key = func_8028FE28_de(*resource, obj->model, 1);
+            key = Render_GetDirectoryEntry(*resource, obj->model, 1);
             Scene_ReleaseResource(0, resource);
             found = func_802540F4_de(0, &header, key, D_800C3DC0_de, 1);
             if (found != 0) {

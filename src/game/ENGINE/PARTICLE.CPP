@@ -56,7 +56,7 @@ extern char D_0026D7F4;
 extern void Particle_BuildMatrix(void *, s32, s32, f32);
 
 
-extern s32 func_8028FE28_de(s32 *, s32, s32);
+extern s32 Render_GetDirectoryEntry(s32 *, s32, s32);
 
 
 extern s32 func_802540F4_de(s32, void **, s32, void *, s32);
@@ -179,7 +179,7 @@ void Particle_DrawModel(void *particle, struct Shared_ParticleView *view) {
                                 ((Shared_Particle *)particle)->desc->renderModel, 0x18,
                                 0, 0, 0, &D_800C4D38_de, 1);
         if (resource != 0) {
-            key = func_8028FE28_de(*resource,
+            key = Render_GetDirectoryEntry(*resource,
                                 ((Shared_Particle *)particle)->desc->renderModel, 1);
             Scene_ReleaseResource(0, resource);
             found = func_802540F4_de(0, &modelTable, key, &D_800C4D50_de, 1);

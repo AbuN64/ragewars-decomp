@@ -96,11 +96,11 @@ typedef struct LightVolumeRecord {
 } LightVolumeRecord;
 
 extern s32 func_8028FDF8_de(void *table, s32 index);
-extern s32 func_8028FD90_de(void *table);
-extern s32 func_8028FE28_de(s32 *directory, s32 bank, s32 type);
-extern void *func_80254480_de(s32 pool, void *handle, s32 size);
-extern void func_80253D10_de(s32 pool, void *handle, void *block);
-extern void func_8028FF0C_de(void *src, void *dst, s32 arg2);
+extern s32 Render_GetPackSize(void *table);
+extern s32 Render_GetDirectoryEntry(s32 *directory, s32 bank, s32 type);
+extern void *Scene_AllocResourceBlock(s32 pool, void *handle, s32 size);
+extern void Scene_ReplaceResourceBlock(s32 pool, void *handle, void *block);
+extern void Render_TransposeRecords(void *src, void *dst, s32 arg2);
 extern void func_802BD3A0_de(void *dst, void *src, s32 size);
 extern void func_8024F960_eu(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing);
 extern void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments);
@@ -170,7 +170,7 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
     ObjectRecAtBC *volumes;
     void *objects;
 
-    if (func_80285180_de(handle, 1) != 0) {
+    if (Render_UnpackResource(handle, 1) != 0) {
         source = **handle;
         efficientSet = Render_GetPackSection(source, 0);
         efficientCount = efficientSet->count;
@@ -185,7 +185,7 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
         volumeSize = ALIGN8(volumeCount * sizeof(ObjectRecAtBC) + sizeof(RecordSet));
         bitSet = Render_GetPackSection(source, 4);
         bitSize = ALIGN8(bitSet->count * sizeof(s32) + sizeof(RecordSet));
-        block = func_80254480_de(0, handle, staticSize + 0x18 + simpleSize + volumeSize + bitSize);
+        block = Scene_AllocResourceBlock(0, handle, staticSize + 0x18 + simpleSize + volumeSize + bitSize);
         if (block != 0) {
             n = 0;
             offset = 0x18;
@@ -193,8 +193,8 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
             dst = (char *)blocks + offset;
             blocks->count = n++;
             blocks->offsets[blocks->count] = offset;
-            func_8028FF0C_de(efficientSet, dst, 1);
-            func_8028FF0C_de(staticSet, dst, 1);
+            Render_TransposeRecords(efficientSet, dst, 1);
+            Render_TransposeRecords(staticSet, dst, 1);
             ((RecordSet *)dst)->size = sizeof(PlacedProp);
             ((RecordSet *)dst)->count = efficientCount + staticCount;
             efficient = (RecordRecAt1A *)(efficientSet + 1);
@@ -205,26 +205,26 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
             segments = (char *)objects + 8;
             for (i = 0; i < efficientCount; i++) {
                 func_8024F960_eu(&props[i], &efficient[i],
-                                 func_8028FE28_de(world->indexedDirectory, world->indexedBank, efficient[i].id),
+                                 Render_GetDirectoryEntry(world->indexedDirectory, world->indexedBank, efficient[i].id),
                                  segments, world->levelInfo->m_GridDistance);
             }
             for (j = 0; j < staticCount; j++) {
                 World_InitPlacedProp(&props[j + efficientCount], &statics[j],
-                                 func_8028FE28_de(world->indexedDirectory, world->indexedBank, statics[j].id),
+                                 Render_GetDirectoryEntry(world->indexedDirectory, world->indexedBank, statics[j].id),
                                  segments);
             }
 
             offset += staticSize;
             blocks->count = n++;
             blocks->offsets[blocks->count] = offset;
-            func_8028FF0C_de(simpleSet, base + offset, 1);
+            Render_TransposeRecords(simpleSet, base + offset, 1);
             ((RecordSet *)(base + offset))->size = sizeof(SimpleInstance);
             ((RecordSet *)(base + offset))->count = simpleCount;
             simpleRecords = (SimpleInstanceRecord *)(simpleSet + 1);
             simples = (SimpleInstance *)(base + offset + 8);
             for (k = 0; k < simpleCount; k++) {
                 World_InitSimpleInstance(&simples[k], &simpleRecords[k],
-                                 func_8028FE28_de(world->indexedDirectory, world->indexedBank, simpleRecords[k].type),
+                                 Render_GetDirectoryEntry(world->indexedDirectory, world->indexedBank, simpleRecords[k].type),
                                  segments);
                 if (Engine_TestInstanceBit(world, &simples[k])) {
                     simples[k].flags |= 1;
@@ -234,7 +234,7 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
             offset += simpleSize;
             blocks->count = n++;
             blocks->offsets[blocks->count] = offset;
-            func_8028FF0C_de(volumeSet, base + offset, 1);
+            Render_TransposeRecords(volumeSet, base + offset, 1);
             ((RecordSet *)(base + offset))->size = sizeof(ObjectRecAtBC);
             ((RecordSet *)(base + offset))->count = volumeCount;
             volumeRecords = (LightVolumeRecord *)(volumeSet + 1);
@@ -246,7 +246,7 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
             offset += volumeSize;
             blocks->count = n++;
             blocks->offsets[blocks->count] = offset;
-            func_802BD3A0_de(base + offset, bitSet, func_8028FD90_de(bitSet));
+            func_802BD3A0_de(base + offset, bitSet, Render_GetPackSize(bitSet));
 
             blocks->count = n++;
             offset += bitSize;
@@ -259,10 +259,10 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
                 position.x = simples[k].position.x;
                 position.y = simples[k].position.y + Particle_GetActorHeight(&simples[k]) * 0.5f;
                 position.z = simples[k].position.z;
-                func_80289970_de(volumeList, volumeCount, &position, &simples[k].light);
+                Engine_SampleVolumeLighting(volumeList, volumeCount, &position, &simples[k].light);
             }
         }
-        func_80253D10_de(0, handle, block);
+        Scene_ReplaceResourceBlock(0, handle, block);
     }
 }
 

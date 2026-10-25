@@ -6,7 +6,7 @@
 
 extern s32 func_8028B21C_de(struct Shared_World *, s32);
 extern s32 func_8028C198_de(void *, s32);
-extern s32 func_8028FE28_de(s32 *, s32, s32);
+extern s32 Render_GetDirectoryEntry(s32 *, s32, s32);
 extern s32 Render_LocatePackSection(void *, s32, s32, s32 *);
 extern char D_0026D7F4;
 typedef struct { u32 w[7]; } Blk28;
@@ -29,7 +29,7 @@ void func_8044B600_de(void *level, void *buffer, s32 name) {
         size = func_8028C198_de(level, index);
         header = Scene_RequestResource(0, size, size, 0x18, 0, 0, 0, D_800C4EE0_de, 1);
         if (header != 0) {
-            key = func_8028FE28_de(*header, size, 1);
+            key = Render_GetDirectoryEntry(*header, size, 1);
             resource = func_802540F4_de(0, &table, key, D_800C4F04_de, 1);
             if (resource != 0) {
                 shapeKey = Render_LocatePackSection(table, key, 0, &bytes);

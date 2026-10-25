@@ -58,7 +58,7 @@ extern s32 func_80277128_de(ObjectRecAtBC *, f32, f32, f32, CVector3 *, f32 *);
 extern void func_80272A10_de(void *, CVector3 *, CVector3 *);
 extern f32 func_80278890_de(void *);
 static inline f32 sampleDot(CVector3 *a, f32 *b, s32 index) { f32 *d=b+index+128; return a->x*d[0] + a->y*d[1] + a->z*d[2]; }
-void func_80289970_de(ObjectRecAtBC **volumes, s32 count, CVector3 *position, Shared_ParticleLighting *lighting) {
+void Engine_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *position, Shared_ParticleLighting *lighting) {
     Shared_Game *settings;
     /* The first 128 floats are weights; the remaining 384 hold XYZ directions. */
     f32 samples[512];
@@ -532,7 +532,7 @@ extern char *D_800D3304, *D_800D3334, *D_800D3338, *D_800D333C, *D_800D3340, *D_
     *D_800D338C, *D_800D3390_de, *D_800D3394, *D_800D3398;
 extern void func_80245AC8_de(void);
 extern void func_80245A78_de(char *);
-extern s32 func_8028FE28_de(s32 *, s32, s32);
+extern s32 Render_GetDirectoryEntry(s32 *, s32, s32);
 extern void *func_80254284_de(s32, void **, s32, void *);
 extern ResultsText *func_80254408_de(s32, void *, s32, s32, void *, s32, void *);
 extern void func_802BD3A0_de(void *, const void *, s32);
@@ -549,7 +549,7 @@ static inline void copyLevelName(Shared_World *world, s32 level, char *out, s32 
     ResultsText *name;
     s32 length;
 
-    entry = func_8028FE28_de(world->resourceDirectory, world->resourceBank, level);
+    entry = Render_GetDirectoryEntry(world->resourceDirectory, world->resourceBank, level);
     bank = func_80254284_de(0, &handle, entry, D_800C5110_de);
     name = func_80254408_de(0, handle, 8, entry, world, 0, D_800C5284_de);
     length = name->length;

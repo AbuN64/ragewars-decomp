@@ -17,9 +17,9 @@
 #include "SCENE/802508E0_4.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern void func_80253D10_de(s32 arg0, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *block);
+extern void Scene_ReplaceResourceBlock(s32 arg0, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *block);
 
-extern struct Shape_typemap_165 *func_80254480_de(s32 arg0, void *handle, s32 size);
+extern struct Shape_typemap_165 *Scene_AllocResourceBlock(s32 arg0, void *handle, s32 size);
 
 extern void *func_8028CF6C_de(void *world, s32 id);
 
@@ -100,13 +100,13 @@ void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
     f32 best;
     f32 dist;
 
-    if (func_80285180_de(handle, 1) != 0) {
+    if (Render_UnpackResource(handle, 1) != 0) {
         mode = func_8028B394_de(world, 0);
         node = (*handle)->data;
         n = node->count;
-        block = func_80254480_de(0, handle, n * (sizeof(LevelActor)) + 8);
+        block = Scene_AllocResourceBlock(0, handle, n * (sizeof(LevelActor)) + 8);
         if (block != 0) {
-            func_8028FF0C_de(node, block->data, 1);
+            Render_TransposeRecords(node, block->data, 1);
             hdr = block->data;
             hdr->size = sizeof(LevelActor);
             hdr->count = n;
@@ -220,7 +220,7 @@ void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
                 }
             }
         }
-        func_80253D10_de(0, handle, block);
+        Scene_ReplaceResourceBlock(0, handle, block);
         world->unkF58 = 0;
     }
 }
