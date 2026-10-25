@@ -21,7 +21,7 @@ void func_802170A0_de(Player *actor, s32 *arg1, s32 arg2, s32 arg3, s32 arg4) {
                 func_8024DBC0_de(actor,
                               actor->pos,
                               entry[1],
-                              func_80274A90_de(D_800C21D8_de, D_800C21DC_de));
+                              Nav_RandomBetween(D_800C21D8_de, D_800C21DC_de));
             }
             entry += 2;
         } while (entry[0] != 0);
@@ -34,7 +34,7 @@ void func_802170A0_de(Player *actor, s32 *arg1, s32 arg2, s32 arg3, s32 arg4) {
                 func_8024DBC0_de(actor,
                               actor->pos,
                               entry[1],
-                              func_80274A90_de(D_800C21E0_de, D_800C21E4_de));
+                              Nav_RandomBetween(D_800C21E0_de, D_800C21E4_de));
             }
             entry += 2;
         } while (entry[0] != 0);

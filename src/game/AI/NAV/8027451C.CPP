@@ -325,7 +325,7 @@ f32 func_802749B4_de(f32 angleA, f32 angleB) {
     return -difference;
 }
 
-f32 func_80274A90_de(f32 shakeMin, f32 arg1) {
+f32 Nav_RandomBetween(f32 shakeMin, f32 arg1) {
     f32 blend;
     u32 seed;
     s32 randomValue;

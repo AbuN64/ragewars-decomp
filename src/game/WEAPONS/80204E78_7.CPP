@@ -29,7 +29,7 @@ void func_80206080_de(void *levelActor, void *actorMotionState) {
 
     resource = (void *)actor->definition;
     base = &resource->trigger;
-    result = func_80274A90_de(base->delayMinimum, base->delayMaximum);
+    result = Nav_RandomBetween(base->delayMinimum, base->delayMaximum);
     motion->speed = result;
     ctx = (char *) &D_801462C8;
     if (((ObjectState1E_2 *)(ctx))->unk_1D != 0) {

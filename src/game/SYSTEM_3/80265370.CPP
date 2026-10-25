@@ -289,7 +289,7 @@ void func_802656DC_de(s32 arg0, s32 arg1)
   *temp_a1_2 ^= new_var;
 }
 
-f32 func_80265714_de(f32 arg0)
+f32 System_CosineEase(f32 arg0)
 {
   f32 var_f1;
   f32 var_f0;

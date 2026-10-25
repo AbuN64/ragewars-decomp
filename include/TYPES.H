@@ -138,7 +138,7 @@ extern f32 func_802746A0_de(f32 arg0, f32 arg1, f32 arg2);
 
 extern f32 Nav_DecayToZero(f32 arg0, f32 arg1);
 
-extern f32 func_80274A90_de(f32 arg0, f32 arg1);
+extern f32 Nav_RandomBetween(f32 arg0, f32 arg1);
 
 extern void func_80276968_de(u8 amount, u8 r, u8 g, u8 b, u8 *outR, u8 *outG, u8 *outB);
 

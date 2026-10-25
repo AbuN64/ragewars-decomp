@@ -495,9 +495,9 @@ s16 func_8025C25C_de(s16 arg0, s16 arg1) {
     f32 temp_f21;
     temp_f21 = (f32)arg1;
     temp_f20 = (f32)arg0;
-    return (s16)(s32)(func_80274A90_de(temp_f21, temp_f20) < 0.0f
-                          ? temp_f20 - func_80274A90_de(temp_f21, temp_f20)
-                          : temp_f20 + func_80274A90_de(temp_f21, temp_f20));
+    return (s16)(s32)(Nav_RandomBetween(temp_f21, temp_f20) < 0.0f
+                          ? temp_f20 - Nav_RandomBetween(temp_f21, temp_f20)
+                          : temp_f20 + Nav_RandomBetween(temp_f21, temp_f20));
 }
 
 f32 func_8025C2EC_de(u8 arg0, u8 arg1) {

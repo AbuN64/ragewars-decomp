@@ -113,7 +113,7 @@ void func_80217594_de(Player *arg0, s32 unused1, s32 arg2, s32 *entry) {
                 func_8024DBC0_de(arg0,
                               arg0->pos,
                               entry[1],
-                              func_80274A90_de(D_800C21EC_de, D_800C21F0_de));
+                              Nav_RandomBetween(D_800C21EC_de, D_800C21F0_de));
             }
             entry += 2;
         } while (entry[0] != 0);

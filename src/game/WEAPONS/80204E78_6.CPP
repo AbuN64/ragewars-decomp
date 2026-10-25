@@ -344,7 +344,7 @@ void func_80205F18_de(Actor_func_80205F18_de *actor, Action *action) {
         actor->flags &= ~0x100;
         return;
     }
-    action->delay = func_80274A90_de(D_800C1AC8_de, D_800C1ACC_de);
+    action->delay = Nav_RandomBetween(D_800C1AC8_de, D_800C1ACC_de);
     action->timer = 0;
     action->duration = info->duration;
     if (actor->model == 0x644 || (info->flags & 8)) actor->flags &= ~0x2000;

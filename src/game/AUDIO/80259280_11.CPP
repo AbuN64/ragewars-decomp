@@ -56,7 +56,7 @@ s16 func_80259B10_de(CVector3 *position, GameplayCamera *listener) {
     return pan * D_800C8FF8 + D_800C8FF8;
 }
 
-/* Updates a view's heading from its controller: clears its turn rates, takes the base angles from the controller's preset (or the heading from its default yaw), adds the stick turn derived from func_80274A90_de of the two stick axes, nudges it up for flag 0x40 and down for flag 0x80, caps it at the limit, optionally records the heading and the pitch step over the step count and the current pitch, and finally maps the heading through the 60-entry curve table D_800CB8EC with linear interpolation. The turn is truncated to 16 bits into an int, and the next table index is its own s16. */
+/* Updates a view's heading from its controller: clears its turn rates, takes the base angles from the controller's preset (or the heading from its default yaw), adds the stick turn derived from Nav_RandomBetween of the two stick axes, nudges it up for flag 0x40 and down for flag 0x80, caps it at the limit, optionally records the heading and the pitch step over the step count and the current pitch, and finally maps the heading through the 60-entry curve table D_800CB8EC with linear interpolation. The turn is truncated to 16 bits into an int, and the next table index is its own s16. */
 extern struct Bytes12 *func_80258BDC_de(ContextRecAt2BC0 *, s32);
 extern s16 func_802AD270_de(f32);
 
@@ -91,7 +91,7 @@ void func_80259C5C_de(ViewRecAtB0 *view, ControllerCode802591C0 *controller, s32
     y = func_8025E590_de(controller);
     fy = y;
     fx = x;
-    turn = (s16)(s32)(fx + ((func_80274A90_de(fy, fx)) < 0.0f ? -(func_80274A90_de(fy, fx)) : (func_80274A90_de(fy, fx))));
+    turn = (s16)(s32)(fx + ((Nav_RandomBetween(fy, fx)) < 0.0f ? -(Nav_RandomBetween(fy, fx)) : (Nav_RandomBetween(fy, fx))));
     angles->heading = func_802AD270_de(RW_BITS_TO_FLOAT(angles->heading) + turn);
     if (flags & 0x40) {
         angles->heading = func_802AD270_de(RW_BITS_TO_FLOAT(angles->heading) + D_800C3F0C_de);

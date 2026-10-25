@@ -225,9 +225,9 @@ void func_8027AD4C_de(Shared_Particle *arg0)
       if (temp_f20 < D_800C4BD4_de)
       {
         temp_f20 = D_800C4BDC_de - (temp_f20 * D_800C4BD8_de);
-        sp10.x *= temp_f20 * func_80274A90_de(nearby_scale, nearby_random_max);
-        sp10.y *= temp_f20 * func_80274A90_de(nearby_scale, nearby_random_max);
-        sp10.z *= temp_f20 * func_80274A90_de(nearby_scale, nearby_random_max);
+        sp10.x *= temp_f20 * Nav_RandomBetween(nearby_scale, nearby_random_max);
+        sp10.y *= temp_f20 * Nav_RandomBetween(nearby_scale, nearby_random_max);
+        sp10.z *= temp_f20 * Nav_RandomBetween(nearby_scale, nearby_random_max);
         Particle_SubtractVectors(temp_s2, temp_s2, &sp10);
       }
       var_a0 = var_s0->unk16E0;
@@ -242,9 +242,9 @@ void func_8027AD4C_de(Shared_Particle *arg0)
   Particle_SubtractVectors(&sp10, &sp20, &arg0->inst.pos);
   tracking_min = D_800C4BE0_de;
   tracking_max = D_800C4BE4_de;
-  sp10.x *= func_80274A90_de(tracking_min, tracking_max);
-  sp10.y *= func_80274A90_de(tracking_min, tracking_max);
-  sp10.z *= func_80274A90_de(tracking_min, tracking_max);
+  sp10.x *= Nav_RandomBetween(tracking_min, tracking_max);
+  sp10.y *= Nav_RandomBetween(tracking_min, tracking_max);
+  sp10.z *= Nav_RandomBetween(tracking_min, tracking_max);
   temp_s0_2 = (void *) (&arg0->inst.velocity.x);
   func_80271F34_de(temp_s0_2, temp_s0_2, &sp10);
 #if defined(VERSION_EU)

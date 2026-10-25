@@ -22,7 +22,7 @@ void func_80233930_de(Effect33920 *arg0, CVector3 position, CVector3 *out) {
                              (position.y * position.y) +
                              (position.z * position.z));
     if (distance < arg0->radius) {
-        distance = func_80265714_de(D_800C3090_de - (distance / arg0->radius));
+        distance = System_CosineEase(D_800C3090_de - (distance / arg0->radius));
 
         wave = &arg0->x;
         if (wave->mode == 0) goto x_sine;
@@ -30,7 +30,7 @@ void func_80233930_de(Effect33920 *arg0, CVector3 position, CVector3 *out) {
         value = func_802B7130_de(wave->accumulator * D_800C3094_de) * wave->rate;
         goto x_done;
 x_sine:
-        value = func_80274A90_de(-wave->rate, wave->rate);
+        value = Nav_RandomBetween(-wave->rate, wave->rate);
         goto x_done;
 x_zero:
         value = 0.0f;
@@ -43,7 +43,7 @@ x_done:
         value = func_802B7130_de(wave->accumulator * D_800C3098_de) * wave->rate;
         goto y_done;
 y_sine:
-        value = func_80274A90_de(-wave->rate, wave->rate);
+        value = Nav_RandomBetween(-wave->rate, wave->rate);
         goto y_done;
 y_zero:
         value = 0.0f;
@@ -56,7 +56,7 @@ y_done:
         value = func_802B7130_de(wave->accumulator * D_800C309C_de) * wave->rate;
         goto z_done;
 z_sine:
-        value = func_80274A90_de(-wave->rate, wave->rate);
+        value = Nav_RandomBetween(-wave->rate, wave->rate);
         goto z_done;
 z_zero:
         value = 0.0f;

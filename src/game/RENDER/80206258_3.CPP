@@ -12,7 +12,7 @@
 #include "FX_2/80271B18.H"
 #include "WEAPONS/80213ED4.H"
 
-/* Places a rider along its path for the frame: clamps the throttle to 0..1 (eased through func_80265714_de unless the segment is linear), offsets its base by the segment's rise and circle point, moves the rider there through func_80271FC8_de, adds a bob to its height (one wave or a sum of four detuned waves by the segment's bob mode), applies its shake offsets, turns the actor by the segment's yaw mode (interpolated, constant spin unless held, or constant spin) and, for free segments, snaps the actor to the ground through func_80275DD4_de and func_802761EC_de. */
+/* Places a rider along its path for the frame: clamps the throttle to 0..1 (eased through System_CosineEase unless the segment is linear), offsets its base by the segment's rise and circle point, moves the rider there through func_80271FC8_de, adds a bob to its height (one wave or a sum of four detuned waves by the segment's bob mode), applies its shake offsets, turns the actor by the segment's yaw mode (interpolated, constant spin unless held, or constant spin) and, for free segments, snaps the actor to the ground through func_80275DD4_de and func_802761EC_de. */
 
 
 extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
@@ -101,7 +101,7 @@ void func_80206DD4_de(Actor_func_80206DD4_de *actor, RiderCode80206258 *rider) {
         t = 1.0f;
     }
     if (segment->linear == 0) {
-        t = func_80265714_de(t);
+        t = System_CosineEase(t);
     }
     owner = actor;
     point = rider->base;

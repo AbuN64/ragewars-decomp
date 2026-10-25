@@ -324,7 +324,7 @@ s32 func_80264DF0_de(void *arg0) {
         if (temp_f1_2 <= 0.0f) {
             player->time =
                 temp_f1_2 + random->period;
-            player->value = func_80274A90_de(
+            player->value = Nav_RandomBetween(
                 (f32)random->minimum * D_800C4318_de.unk0,
                 (f32)random->maximum * D_800C4318_de.unk0);
         }

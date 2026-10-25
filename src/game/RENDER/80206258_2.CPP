@@ -139,9 +139,9 @@ void Render_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802062
     case 3:
         shakeMin = -0.512f;
         shakeMax = 0.512f;
-        motion->shake.x = func_80274A90_de(shakeMin, shakeMax);
-        motion->shake.y = func_80274A90_de(shakeMin, shakeMax);
-        motion->shake.z = func_80274A90_de(shakeMin, shakeMax);
+        motion->shake.x = Nav_RandomBetween(shakeMin, shakeMax);
+        motion->shake.y = Nav_RandomBetween(shakeMin, shakeMax);
+        motion->shake.z = Nav_RandomBetween(shakeMin, shakeMax);
         motion->timer += D_800D2988;
         if (45.0f < motion->timer) {
             motion->timer = 0.0f;
@@ -173,7 +173,7 @@ void Render_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802062
             }
         }
         if (segment->duration > 0.0f) {
-            motion->shake.y = -segment->displacement * func_80265714_de(motion->timer / segment->duration);
+            motion->shake.y = -segment->displacement * System_CosineEase(motion->timer / segment->duration);
         } else {
             motion->shake.y = -segment->displacement;
         }
@@ -186,7 +186,7 @@ void Render_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802062
             motion->triggerTime = 0.0f;
         }
         if (segment->duration > 0.0f) {
-            motion->shake.y = -segment->displacement * func_80265714_de(motion->timer / segment->duration);
+            motion->shake.y = -segment->displacement * System_CosineEase(motion->timer / segment->duration);
         } else {
             motion->shake.y = -segment->displacement;
         }
@@ -196,7 +196,7 @@ void Render_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802062
             motion->timer += D_800D2988;
         }
         if (segment->duration > 0.0f) {
-            motion->shake.y = -segment->displacement * func_80265714_de(motion->timer / segment->duration);
+            motion->shake.y = -segment->displacement * System_CosineEase(motion->timer / segment->duration);
         } else {
             motion->shake.y = -segment->displacement;
         }

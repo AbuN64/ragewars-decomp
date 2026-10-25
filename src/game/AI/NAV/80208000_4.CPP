@@ -404,7 +404,7 @@ f32 func_80209DAC_de(void *aiController) {
         break;
     }
     aim = brain->aim;
-    if (aim < func_80274A90_de(-aimLimit, aimLimit)) {
+    if (aim < Nav_RandomBetween(-aimLimit, aimLimit)) {
         aim += D_800C1CC0_de;
     } else {
         aim -= D_800C1CC4_de;

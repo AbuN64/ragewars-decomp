@@ -71,10 +71,10 @@ void func_80239EA4_de(void *gameplayCamera, CVector3 *out) {
     scale = D_800C3584_de.unk0;
     o->shakeHorizontal = value;
     o->shakeVertical += (targetY - o->shakeVertical) * D_800C3588_de.unk0;
-    out->x = func_80274A90_de(-o->shakeHorizontal * scale, o->shakeHorizontal * scale);
-    out->y = func_80274A90_de(0.0f, o->shakeVertical * D_800C358C_de.unk0);
+    out->x = Nav_RandomBetween(-o->shakeHorizontal * scale, o->shakeHorizontal * scale);
+    out->y = Nav_RandomBetween(0.0f, o->shakeVertical * D_800C358C_de.unk0);
     value = -o->shakeHorizontal * scale;
-    out->z = func_80274A90_de(value, o->shakeHorizontal * scale);
+    out->z = Nav_RandomBetween(value, o->shakeHorizontal * scale);
 }
 
 /** Preserve the empty hook at VRAM 0x80239FBC. */
