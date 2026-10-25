@@ -111,7 +111,8 @@ origin = "Nintendo libgultra"
 [library."src/sdk/rnc/"]
 origin = "Rob Northen compression"
 
-[dir."src/sdk/libsn/"]
+[library."src/sdk/libsn/"]
+origin = "SN Systems libsn"
 toolchain = "gcc-2.7.2-sn64"
 
 [file."src/sdk/MATH/802BC380.CPP"]
