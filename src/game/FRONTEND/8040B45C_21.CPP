@@ -71,27 +71,24 @@ void func_8040BBB0_de(void) {
     }
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/OSVISCALE.H"
-
 extern s16 D_8014D500;
 extern Modep D_8014D508;
 extern Modep D_800D4530[];
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 extern void osViSetMode(void *);
-
-typedef union VideoInterval {
-    u32 packed;
-    struct { u16 first, last; } half;
-} VideoInterval;
-
-typedef union VideoHorizontal {
-    u32 packed;
-    struct { s32 first : 16; u32 last : 16; } edge;
-} VideoHorizontal;
-
-/* 25/185 aligned edits; remaining: borderY/2 vs vertical[0] first temp in t1/t2 and the vStart1 copy kept in a3. */
-/* Resize the selected VI mode around its horizontal and field centres. */
+/* VI start registers (hStart, vStart) hold the first pixel/line in the high half and the last in the low half. The
+   ROM reads the halves through a stack copy, so a little-endian host keeps the low half at the first address. */
+#if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+typedef union VideoInterval { u32 packed; struct { u16 last, first; } half; } VideoInterval;
+typedef union VideoHorizontal { u32 packed; struct { u32 last : 16; s32 first : 16; } edge; } VideoHorizontal;
+#else
+typedef union VideoInterval { u32 packed; struct { u16 first, last; } half; } VideoInterval;
+typedef union VideoHorizontal { u32 packed; struct { s32 first : 16; u32 last : 16; } edge; } VideoHorizontal;
+#endif
+/* Resizes the selected VI mode (table D_800D4530[D_8014D500], copied to D_8014D508) to width x height around its
+ * horizontal and field centres moved by (x, y), shrinks the active area by the borders, rescales X and Y, clamps the
+ * last pixel and lines to the original mode and applies it. */
 void Frontend_SetVideoViewport(s32 width, s32 height, s32 x, s32 y, s32 borderX, s32 borderY) {
     VideoInterval vertical[2];
     VideoInterval originalVertical[2];
@@ -108,20 +105,20 @@ void Frontend_SetVideoViewport(s32 width, s32 height, s32 x, s32 y, s32 borderX,
     centerX = ((s16)horizontal.edge.last - horizontal.edge.first) / 2 + horizontal.edge.first - x;
     centerY[0] = vertical[0].half.first + ((s16)vertical[0].half.last - (s16)vertical[0].half.first) / 2;
     scaleY = mode->fldRegs[0].yScale;
-    centerY[0] -= y;
     horizontal.edge.first = centerX - width / 2 + borderX / 2;
     horizontal.edge.last = centerX + width / 2 - borderX * 2;
+    vertical[1].packed = mode->fldRegs[1].vStart;
+    centerY[1] = vertical[1].half.first + ((s16)vertical[1].half.last - (s16)vertical[1].half.first) / 2;
+    centerY[0] -= y;
     vertical[0].half.first = centerY[0] - height / 2 + borderY / 2;
     vertical[0].half.last = centerY[0] + height / 2 - borderY * 2;
     scaleY &= 0xFFFF0000;
     scaleY |= (((height << 11) /
         ((s16)vertical[0].half.last - (s16)vertical[0].half.first)) & 0xFFFF);
     originalVertical[0].packed = mode->fldRegs[0].vStart;
-    vertical[1].packed = mode->fldRegs[1].vStart;
-    centerY[1] = vertical[1].half.first + ((s16)vertical[1].half.last - (s16)vertical[1].half.first) / 2;
-    vertical[0].half.last -= 3;
     centerY[1] -= y;
     vertical[1].half.first = centerY[1] - height / 2 + borderY / 2;
+    vertical[0].half.last -= 3;
     vertical[1].half.last = centerY[1] + height / 2 - borderY * 2;
     originalVertical[1].packed = mode->fldRegs[1].vStart;
     vertical[1].half.last -= 3;
@@ -140,7 +137,3 @@ void Frontend_SetVideoViewport(s32 width, s32 height, s32 x, s32 y, s32 borderX,
     mode->fldRegs[1].vStart = vertical[1].packed;
     osViSetMode(mode);
 }
-
-#else
-INCLUDE_ASM("ovl_80400000", Frontend_SetVideoViewport);
-#endif
