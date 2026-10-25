@@ -251,7 +251,7 @@ typedef struct ObjRecAtB8 {
     int unkB8;
 } ObjRecAtB8;
 
-extern void func_8022BE20_de(void *arg0, void *arg1);
+extern void Text_ApplyDamageOverTime(void *arg0, void *arg1);
 
 extern s32 func_8022C460_de(void *);
 
