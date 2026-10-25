@@ -10,14 +10,7 @@
 struct StaticObject;
 
 
-union func_802500A4_S1_UE0;
-typedef union func_802500A4_S1_UE0 func_802500A4_S1_UE0;
 
-union func_802500A4_S1_UE0;
-union func_802500A4_S1_UE0 {
-    s8 v0;
-    u8 v1;
-};
 
 
 extern float D_800C3DF0_de;

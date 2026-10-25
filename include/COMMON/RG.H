@@ -9,8 +9,6 @@ struct Func8043D458Arg {
     s32 *text;
 };
 
-extern int func_804433B8_de(void);
-extern void func_80444E28_de(void);
 
 extern s32 D_800D3D14;
 extern s32 D_800D3D18;

@@ -152,7 +152,6 @@ struct MenuResourceWidget {
     int pad4;
 };
 
-extern void func_80419B18_eu_x(void);
 
 extern f32 D_800E1454;
 extern f32 D_800E1460;

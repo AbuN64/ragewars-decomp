@@ -304,9 +304,4 @@ struct Shared_func_80227014_S23 {
 };
 
 
-typedef struct Shared_Entry190 Shared_Entry190;
-struct Shared_Entry190 {
-    s32 value; /* +0x0: src/func_80227014.c */
-    u8 pad[396]; /* +0x4: src/func_80227014.c */
-};
 #endif

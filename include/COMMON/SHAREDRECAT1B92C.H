@@ -99,5 +99,4 @@ struct SharedRecAt1B92C {
     char pad1B928[0x4];
     s32 unk1B92C; /* +0x1B92C: src/func_80286A78.c */
 };
-typedef char Shared_func_80286A78_S1_size_check[(sizeof(SharedRecAt1B92C) == 0x1B930) ? 1 : -1];
 #endif

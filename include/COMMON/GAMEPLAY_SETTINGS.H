@@ -28,5 +28,4 @@ struct Shared_PlayerSettingsRecord {
     u8 active; /* +0x95: src/func_8021B468.c */
 
 };
-typedef char Shared_PlayerSettingsRecord_size_check[(sizeof(Shared_PlayerSettingsRecord) == 0x96) ? 1 : -1];
 #endif

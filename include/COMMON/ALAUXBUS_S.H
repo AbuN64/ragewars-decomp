@@ -105,21 +105,6 @@ struct ALMainBus_s {
     ALFilter_s14 **sources;
 };
 
-struct func_802B9474_S1;
-struct func_802B9474_S1 {
-    char pad0[0x14];
-    s32 unk14;
-    char pad14[0x18 - 0x14 - sizeof(s32)];
-    s32 unk18;
-    char pad18[0x30 - 0x18 - sizeof(s32)];
-    s32 unk30;
-    char pad30[0x3C - 0x30 - sizeof(s32)];
-    s32 unk3C;
-    char pad3C[0x40 - 0x3C - sizeof(s32)];
-    s32 unk40;
-    char pad40[0x44 - 0x40 - sizeof(s32)];
-    s32 unk44;
-};
 
 struct ALSynth4C;
 typedef struct ALSynth4C ALSynth4C;
@@ -157,8 +142,6 @@ typedef struct ALMainBus_s ALMainBus_s;
 struct ObjectStateC_3;
 typedef struct ObjectStateC_3 ObjectStateC_3;
 
-struct func_802B9474_S1;
-typedef struct func_802B9474_S1 func_802B9474_S1;
 
 struct ObjectStateC_3;
 struct ObjectStateC_3 {

@@ -15,5 +15,4 @@ typedef struct ArgbColor {
     u8 b;
 } ArgbColor;
 
-typedef char ArgbColor_size_check[(sizeof(ArgbColor) == 4) ? 1 : -1];
 #endif

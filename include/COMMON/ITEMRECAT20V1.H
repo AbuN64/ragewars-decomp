@@ -938,8 +938,6 @@ typedef struct Draw Draw;
 
 struct State_func_8042D8C4_de;
 
-union func_8026E158_S1_U8;
-typedef union func_8026E158_S1_U8 func_8026E158_S1_U8;
 
 struct ALMIDIEvent;
 struct ALMIDIEvent {
@@ -1310,14 +1308,7 @@ typedef struct Header44 Header44;
 struct Key;
 typedef struct Key Key;
 
-union func_8028472C_S2_U118;
-union func_8028472C_S2_U118 {
-    s32 v0;
-    s32 * v1;
-};
 
-union func_8028472C_S2_U118;
-typedef union func_8028472C_S2_U118 func_8028472C_S2_U118;
 
 
 
@@ -1900,11 +1891,6 @@ typedef struct func_8020478C_S1 func_8020478C_S1;
 
 struct Access_s32_50;
 
-union func_8026E158_S1_U8;
-union func_8026E158_S1_U8 {
-    s32 v0;
-    char v1;
-};
 
 
 

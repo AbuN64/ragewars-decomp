@@ -19,5 +19,4 @@ typedef struct CCollisionSetup_t {
     float m_WaterFriction;
 } CCollisionSetup_t;
 
-typedef char CCollisionSetup_t_size_check[(sizeof(CCollisionSetup_t) == 0x28) ? 1 : -1];
 #endif

@@ -26,19 +26,9 @@ typedef struct Spinner Spinner;
 
 struct Style_func_80445BC0_de;
 
-struct State_func_80445EF4_de;
-typedef struct State_func_80445EF4_de State_func_80445EF4_de;
 
 struct EntryRecAtCV2;
 
-struct State_func_80445EF4_de;
-struct State_func_80445EF4_de {
-    char pad[0x1C];
-    s32 unk1C;
-    s32 unk20;
-    s32 unk24;
-    s32 unk28;
-};
 
 
 struct EntryRecAt1C;

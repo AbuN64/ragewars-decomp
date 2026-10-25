@@ -5,21 +5,6 @@ struct Active;
 typedef struct Active Active;
 
 
-struct MatchState;
-struct MatchState {
-    char pad0[0x1C];
-    int armed;
-    int active;
-    char pad24[0x30];
-    s32 first;
-    char pad58[0x20];
-    s32 second;
-    char pad7C[0x14];
-    s32 kills;
-    char pad94[4];
-    s32 deaths;
-};
-typedef struct MatchState MatchState;
 
 struct RecordRecAt189;
 struct RecordRecAt189 {

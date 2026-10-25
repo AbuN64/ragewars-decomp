@@ -10,7 +10,6 @@ typedef struct Shared_ReactionPlayer Shared_ReactionPlayer;
 typedef struct Shared_ReactionFlags Shared_ReactionFlags;
 typedef struct Shared_ReactionInteraction Shared_ReactionInteraction;
 typedef struct Shared_ReactionObjectKind Shared_ReactionObjectKind;
-typedef struct Shared_ReactionFloatValue Shared_ReactionFloatValue;
 typedef struct Shared_ReactionSource Shared_ReactionSource;
 typedef struct Shared_ReactionAttribution Shared_ReactionAttribution;
 typedef struct Shared_ReactionPlayerIndex Shared_ReactionPlayerIndex;
@@ -131,10 +130,6 @@ struct Shared_ReactionFlags {
 
 
 
-struct Shared_ReactionFloatValue {
-    char pad0[0x4];
-    f32 unk4;
-};
 
 
 

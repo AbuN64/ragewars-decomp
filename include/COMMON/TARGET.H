@@ -19,7 +19,6 @@ extern float D_800C442C_de;
 
 struct ResourceManagerState;
 struct Triple;
-typedef void ( *func_802671FC_de_Callback)(void *, void *, signed int, CVector3, struct ResourceManagerState);
 
 
 extern float D_800C4440_de;

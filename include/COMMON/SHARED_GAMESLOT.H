@@ -78,8 +78,4 @@ struct Shared_Game {
 };
 extern Shared_Game D_801462C8;
 
-typedef char RenderCounters_size_check[(sizeof(CGameStatus) == 0xB0) ? 1 : -1];
-typedef char Shared_Game_size_check[(sizeof(Shared_Game) == 0xCAC) ? 1 : -1];
-typedef char Shared_Game_settings_offset_check[(((u32)&((Shared_Game *)0)->playerSettings) == 0xD0) ? 1 : -1];
-typedef char Shared_Game_slots_offset_check[(((u32)&((Shared_Game *)0)->slots) == 0x148) ? 1 : -1];
 #endif

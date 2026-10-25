@@ -3405,7 +3405,6 @@ struct ALADPCMWaveInfo {
     ALADPCMloop *loop;
     ALADPCMBook *book;
 };
-struct Opaque_ALLowPass_s;
 struct ALDelay_func_802B5B94_de;
 struct ALDelay_func_802B5B94_de {
     u32 input;

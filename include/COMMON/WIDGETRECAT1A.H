@@ -66,8 +66,6 @@ struct WidgetNode;
 
 struct WidgetNode;
 
-struct SpriteRecAt14;
-typedef struct SpriteRecAt14 SpriteRecAt14;
 
 struct NodeRecAt44;
 typedef struct NodeRecAt44 NodeRecAt44;
@@ -223,18 +221,7 @@ typedef struct WidgetRecAt1A WidgetRecAt1A;
 extern int D_8014D710;
 
 
-struct SpriteRecAt14;
-struct SpriteRecAt14 {
-    s32 glyph;
-    f32 x;
-    f32 y;
-    s32 color;
-    f32 scale;
-    u16 page;
-    u16 pad16;
-};
 
-struct SpriteRecAt14;
 
 
 

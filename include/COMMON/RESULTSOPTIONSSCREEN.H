@@ -58,16 +58,7 @@ struct RowRecAt54 {
     char pad64[0x70 - 0x64];
 };
 
-struct SlotCode80423280;
-typedef struct SlotCode80423280 SlotCode80423280;
 
-struct SlotCode80423280;
-struct SlotCode80423280 {
-    u8 flags[0x16];
-    u8 unk16[0x16];
-    u8 ready;
-    u8 pad2D[0x96 - 0x2D];
-};
 
 
 

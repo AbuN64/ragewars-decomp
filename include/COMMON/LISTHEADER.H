@@ -168,7 +168,6 @@ struct IntegerState5AC {
     s32 unk_5A8;
 };
 
-extern void func_802794A4_de(void * arg0);
 
 struct ActorMotionState;
 struct Player;

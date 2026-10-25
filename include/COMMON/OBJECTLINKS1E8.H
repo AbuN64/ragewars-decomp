@@ -82,8 +82,6 @@ typedef struct Obj_func_80283920_de Obj_func_80283920_de;
 
 
 
-union func_80283D24_S1_U8;
-typedef union func_80283D24_S1_U8 func_80283D24_S1_U8;
 
 
 
@@ -148,11 +146,6 @@ struct EntryRecAt4V1 {
 struct EntryRecAt4V1;
 typedef struct EntryRecAt4V1 EntryRecAt4V1;
 
-union func_80283D24_S1_U8;
-union func_80283D24_S1_U8 {
-    Triple v0;
-    s32 v1;
-};
 
 
 

@@ -42,7 +42,6 @@ struct Shared_Entry {
 struct EntryRecAt0V2;
 typedef struct EntryRecAt0V2 EntryRecAt0V2;
 
-extern float D_800E227C;
 
 
 struct CheatCode;

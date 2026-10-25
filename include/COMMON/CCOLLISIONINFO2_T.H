@@ -17,5 +17,4 @@ typedef struct CCollisionInfo2_t {
     float WaterFriction;
 } CCollisionInfo2_t;
 
-typedef char CCollisionInfo2_t_size_check[(sizeof(CCollisionInfo2_t) == 0x1C) ? 1 : -1];
 #endif

@@ -4,8 +4,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 
 
-struct func_802A1A48_S1;
-typedef struct func_802A1A48_S1 func_802A1A48_S1;
 
 
 
@@ -19,11 +17,6 @@ extern int D_800CD900;
 
 extern int D_8014D0C8;
 
-struct func_802A1A48_S1;
-struct func_802A1A48_S1 {
-    char pad0[0x18];
-    char unk18;
-};
 
 
 

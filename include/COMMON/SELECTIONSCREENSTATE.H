@@ -65,15 +65,6 @@ struct func_8041F2A0_Layout {
 };
 typedef struct func_8041F2A0_Layout func_8041F2A0_Layout;
 
-struct func_8041F2A0_Row {
-    s32 pad;
-    f32 scale[4];
-    f32 distance[4];
-    func_8041F2A0_Vec3 position[4];
-    s32 light[4];
-    char tail[12];
-};
-typedef struct func_8041F2A0_Row func_8041F2A0_Row;
 
 struct func_8041F2A0_Config {
     s16 total, score, kills, selected, other;

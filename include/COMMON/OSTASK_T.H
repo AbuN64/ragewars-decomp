@@ -36,5 +36,4 @@ union OSTask;
 typedef union OSTask OSTask;
 
 
-extern void func_802BA0FC_de(void);
 #endif

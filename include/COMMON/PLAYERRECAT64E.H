@@ -41,15 +41,7 @@ typedef struct Obj8043EB20 Obj8043EB20;
 
 struct ObjRecAt20V2;
 
-struct Globals_func_8043EA98_de;
 struct Player_func_8041EAC4_de;
-struct Globals_func_8043EA98_de {
-    char pad0[0x1D];
-    u8 flag1D;
-    u8 flag1E;
-    char pad1F[0xD0 - 0x1F];
-    struct Player_func_8041EAC4_de status[8];
-};
 
 struct Inner8043E56C;
 typedef struct Inner8043E56C Inner8043E56C;
@@ -66,19 +58,7 @@ struct Player_func_8043EBE4_de {
     u8 data[149];
 };
 
-struct Options_func_8043EBE4_de;
 struct Player_func_8043EBE4_de;
-struct Options_func_8043EBE4_de {
-    char pad0[0x1D];
-    u8 first;
-    u8 second;
-    char pad1F[0x2D - 0x1F];
-    u8 toggles[7]; /* 0x2D..0x33: menu checkbox flags */
-    char pad34;
-    u8 extraToggle; /* 0x35 */
-    char pad36[0x148 - 0x36];
-    struct Player_func_8043EBE4_de players[8];
-};
 
 struct Shared_PakMenu;
 

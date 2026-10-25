@@ -8,5 +8,4 @@ struct Shared_Placed {
     s16 kind; /* +0x10: src/func_80220EB0.c */
     s16 pad12; /* +0x12: src/func_80220EB0.c */
 };
-typedef char Shared_Placed_size_check[(sizeof(Shared_Placed) == 0x14) ? 1 : -1];
 #endif

@@ -8,12 +8,6 @@
 
 /* The selection-message screen D_800E5830: its menu rules block, then its item and reply state. */
 struct SelectionMessageScreen;
-struct MenuSelectionMessage;
-struct MenuSelectionMessage {
-    void *first;
-    s32 pad4[3];
-    s32 value;
-};
 
 struct SoundOptionsScreen;
 struct SoundOptionsScreen {
@@ -26,8 +20,6 @@ struct SoundOptionsScreen {
 };
 
 
-struct MenuSelectionMessage;
-typedef struct MenuSelectionMessage MenuSelectionMessage;
 
 
 struct ActorDefinitionHeader;

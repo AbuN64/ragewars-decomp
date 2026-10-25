@@ -46,7 +46,6 @@ extern float D_800DD410_de;
 
 
 
-extern void func_80419868_eu_x(void);
 
 
 extern s32 D_800DF258;
