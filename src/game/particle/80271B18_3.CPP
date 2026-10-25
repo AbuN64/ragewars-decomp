@@ -66,7 +66,7 @@ s32 func_8027254C_de(f32 *arg0, f32 arg1) {
 void func_802725F4_de(void) {
 }
 
-f32 func_802725FC_de(f32 *delta) {
+f32 Particle_GetVerticalAngle(f32 *delta) {
     f32 y;
     f32 zero;
     f32 x;

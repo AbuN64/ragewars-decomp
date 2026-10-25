@@ -85,7 +85,7 @@ struct func_80272D20_S1 {
     f32 unk3C;
 };
 
-extern f32 func_802725FC_de(f32 *arg0);
+extern f32 Particle_GetVerticalAngle(f32 *arg0);
 
 
 

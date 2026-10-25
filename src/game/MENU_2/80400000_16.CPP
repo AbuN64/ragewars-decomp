@@ -55,7 +55,7 @@ extern void func_80288470_de(void *);
 extern s32 func_80243A90_de(SharedTrackObject *, f32, f32, f32, void *);
 extern void func_8028D888_de(void *);
 extern f32 Particle_GetHorizontalAngle(CVector3 *);
-extern f32 func_802725FC_de(CVector3 *);
+extern f32 Particle_GetVerticalAngle(CVector3 *);
 /* Follow the keyframe camera and keep the collision result across world cleanup. */
 void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
     CVector3 eye;
@@ -128,7 +128,7 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
         }
     }
     yaw = Particle_GetHorizontalAngle(&delta);
-    pitch = func_802725FC_de(&delta);
+    pitch = Particle_GetVerticalAngle(&delta);
     camera->distance += yaw;
     camera->pitch = -pitch;
     camera->position = eye;

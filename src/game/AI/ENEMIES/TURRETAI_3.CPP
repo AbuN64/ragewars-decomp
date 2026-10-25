@@ -120,7 +120,7 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
         navProject(work.matrix,&work.local.v,&work.destination.v,&work.destination.v,&work.origin.v);
         Particle_AddVec3(&work.destination.v, &work.destination.v, &work.origin.v);
         Particle_SubtractVectors(&work.relative.v, &work.destination.v, &work.origin.v);
-        desiredSpeed = func_802725FC_de(&work.relative.v.x);
+        desiredSpeed = Particle_GetVerticalAngle(&work.relative.v.x);
         aimError = Weapons_GetSignedAngleToPoint(&actor->actor,work.destination.v);
         work.result.workspace.projection = aimError;
         if (work.result.result.distance <= turret->range) {

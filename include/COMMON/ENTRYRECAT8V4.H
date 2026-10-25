@@ -8,7 +8,7 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/LOCALDECODERANGE.H"
 
-extern CVector3 func_8040385C_de(void);
+extern CVector3 Menu_GetTrackStartEye(void);
 
 
 
@@ -26,8 +26,8 @@ typedef struct Record_func_80403458_de Record_func_80403458_de;
 struct EntryRecAt4V2;
 typedef struct EntryRecAt4V2 EntryRecAt4V2;
 
-struct State_func_8040385C_de;
-typedef struct State_func_8040385C_de State_func_8040385C_de;
+struct State_Menu_GetTrackStartEye;
+typedef struct State_Menu_GetTrackStartEye State_Menu_GetTrackStartEye;
 
 extern void func_80402BA0_de();
 
@@ -51,8 +51,8 @@ struct Tables {
 };
 
 
-struct State_func_8040385C_de;
-struct State_func_8040385C_de {
+struct State_Menu_GetTrackStartEye;
+struct State_Menu_GetTrackStartEye {
     char a[4];
     void *unk4;
     char b[0x30];
@@ -97,7 +97,7 @@ typedef struct Spline Spline;
 struct EntryRecAt18V5;
 typedef struct EntryRecAt18V5 EntryRecAt18V5;
 
-extern CVector3 func_8040390C_de(void);
+extern CVector3 Menu_GetTrackStartTarget(void);
 
 struct SplineNode;
 struct SplineNode {

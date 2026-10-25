@@ -9,11 +9,11 @@
 #include "RENDER_4/8028FD2C_6.H"
 extern CVector3 Menu_EvaluateCameraSpline(SplineNode *nodes, s32 count, f32 w);
 extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
-extern f32 func_802725FC_de(CVector3 *direction);
+extern f32 Particle_GetVerticalAngle(CVector3 *direction);
 extern f32 Particle_GetHorizontalAngle(CVector3 *direction);
 
 /* First point of the current track's camera path (pack section 0 of section 0 of the resource), or the origin with no track. */
-static inline CVector3 TrackStartPoint(void) {
+static inline CVector3 TrackStartEye(void) {
     CVector3 point;
     CVector3 origin;
     StridedTable *path;
@@ -29,7 +29,7 @@ static inline CVector3 TrackStartPoint(void) {
 }
 
 /* First point of the current track's target path (pack section 1), or 10 units along x with no track. */
-static inline CVector3 TrackEndPoint(void) {
+static inline CVector3 TrackStartTarget(void) {
     CVector3 point;
     CVector3 fallback;
     StridedTable *path;
@@ -53,10 +53,10 @@ CVector3 Menu_GetTrackStartAngles(void) {
         angles.z = 0.0f;
         return angles;
     } else {
-        eye = TrackStartPoint();
-        target = TrackEndPoint();
+        eye = TrackStartEye();
+        target = TrackStartTarget();
         Particle_SubtractVectors(&direction, &target, &eye);
-        angles.x = -func_802725FC_de(&direction);
+        angles.x = -Particle_GetVerticalAngle(&direction);
         angles.y = Particle_GetHorizontalAngle(&direction);
         angles.z = 0.0f;
         return angles;
@@ -145,7 +145,7 @@ void func_804037E8_de(int event) {
     }
 }
 
-CVector3 func_8040385C_de(void) {
+CVector3 Menu_GetTrackStartEye(void) {
     CVector3 sp10;
     CVector3 sp20;
     StridedTable *table;
@@ -160,7 +160,7 @@ CVector3 func_8040385C_de(void) {
     return sp10;
 }
 
-CVector3 func_8040390C_de(void) {
+CVector3 Menu_GetTrackStartTarget(void) {
     CVector3 sp10;
     CVector3 sp20;
     StridedTable *table;
