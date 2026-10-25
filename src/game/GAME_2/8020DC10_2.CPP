@@ -4,7 +4,7 @@
 #include "TYPES.H"
 
 extern s32 func_8020DD04_de(WeightSource *);
-extern s32 func_80209874_de(void *, s32);
+extern s32 Nav_SetBehaviourState(void *, s32);
 
 /* Reconsider an existing attack on one of four signed random remainders. */
 void ReselectCloseAttack(void *brainAddress) {
@@ -15,6 +15,6 @@ void ReselectCloseAttack(void *brainAddress) {
         weights = (WeightSource *)((u8 *)((Player *)brain->player)->definition + 0x14);
         selectedState = func_8020DD04_de(weights);
         brain->combat = selectedState;
-        func_80209874_de(brainAddress, selectedState);
+        Nav_SetBehaviourState(brainAddress, selectedState);
     }
 }

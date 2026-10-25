@@ -47,7 +47,7 @@ extern char D_8011D8D0;
 
 
 
-extern f32 func_80274808_de(f32, f32, s32);
+extern f32 Nav_ApproachValue(f32, f32, s32);
 
 
 void func_802331FC_de(Shared_ActorView *arg0, WeaponFireState *fireState) {
@@ -209,7 +209,7 @@ void func_8023371C_de(void *arg0, struct WeaponFireState *fireState) {
     f32 target;
 
     target = D_800C3078_de;
-    temp_f0 = func_80274808_de(fireState->spinStep, target, D_800CA7A0_de);
+    temp_f0 = Nav_ApproachValue(fireState->spinStep, target, D_800CA7A0_de);
     fireState->spinStep = temp_f0;
     if (target <= temp_f0) {
         Weapons_RequestActorState(arg0, fireState, 2);

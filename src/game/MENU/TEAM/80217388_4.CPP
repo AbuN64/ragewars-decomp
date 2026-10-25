@@ -84,7 +84,7 @@ void Team_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *player)
 
 extern ObjRecAt6V1 *D_800D052C[];
 
-extern f32 func_80274808_de(f32, f32, f32);
+extern f32 Nav_ApproachValue(f32, f32, f32);
 
 extern void func_802727D8_de(Matrix *);
 
@@ -120,7 +120,7 @@ void func_80217928_de(CBarrel *menu, s32 arg1, s32 arg2) {
                     target = *(&D_800C9138_de + 1);
                 }
                 size = 1.0f;
-                slot->m_Scale = func_80274808_de(slot->m_Scale, target, *(&D_800C9138_de + 1) * 0.1f);
+                slot->m_Scale = Nav_ApproachValue(slot->m_Scale, target, *(&D_800C9138_de + 1) * 0.1f);
                 func_802727D8_de(&matrix);
                 func_80273C68_de(&matrix, slot->m_Rot);
                 Particle_TransformPoint(&matrix, &offset, &position);

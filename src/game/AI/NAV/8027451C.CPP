@@ -199,7 +199,7 @@ f32 Nav_DecayToZero(f32 value, f32 rate) {
     return value;
 }
 
-f32 func_80274808_de(f32 current, f32 target, f32 rate) {
+f32 Nav_ApproachValue(f32 current, f32 target, f32 rate) {
     f32 value;
     value = current;
     if (value < target) {

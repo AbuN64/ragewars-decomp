@@ -77,7 +77,7 @@ void func_80275AA4_de(CGameRegion *dst, Packed *src, char *base, int unused, cha
     }
 }
 
-s32 func_80275B10_de(Node75 *triangle, f32 x, f32 z) {
+s32 Nav_IsPointInTriangleXZ(Node75 *triangle, f32 x, f32 z) {
     s32 i;
     CVector3 *vertexA;
     CVector3 *vertexB;

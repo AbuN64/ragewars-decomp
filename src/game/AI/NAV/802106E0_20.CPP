@@ -12,7 +12,7 @@
 #include "AI/NAV/802106E0_20.H"
 
 extern f32 D_800C20C0_de[];
-extern s32 func_80209874_de(void *, s32);
+extern s32 Nav_SetBehaviourState(void *, s32);
 extern void Nav_UpdateTargetSteering(void *);
 extern CNavData D_8013B364;
 
@@ -86,7 +86,7 @@ void func_80212828_de(CloseAttackActor *arg0)
     if (value != state->node) {
         state->node = value;
         if (!Nav_GetRouteRelation(&D_8013B364, state->route, value)) {
-            func_80209874_de(state, 1);
+            Nav_SetBehaviourState(state, 1);
             return;
         }
     }
@@ -97,7 +97,7 @@ void func_80212828_de(CloseAttackActor *arg0)
     if (func_802726BC_de(&peer_actor->pos.x,
                        &state->player->pos.x) < D_800C20C0_de[1] ||
         state->route == state->destination) {
-        func_80209874_de(state, state->combat);
+        Nav_SetBehaviourState(state, state->combat);
     }
 }
 
@@ -128,7 +128,7 @@ void Nav_UpdateRetreatMovement(void *actorObject)
         Nav_SelectFarthestReachableNeighbor((AiController *)brain);
         if (brain->destination == previousDestination ||
             brain->destination == brain->route) {
-            func_80209874_de(brain, 4);
+            Nav_SetBehaviourState(brain, 4);
             return;
         }
     }
@@ -136,7 +136,7 @@ void Nav_UpdateRetreatMovement(void *actorObject)
     if (D_800C20C8_de < func_802726BC_de(
             &brain->target->self->pos.x,
             &brain->player->pos.x)) {
-        func_80209874_de(brain, brain->combat);
+        Nav_SetBehaviourState(brain, brain->combat);
         return;
     }
 
@@ -219,11 +219,11 @@ void func_80212C04_de(void *arg0) {
     rec = actor->unk1454;
     v0 = Weapons_FindPlayerWithMarker((char *)&D_80145040);
     if (v0 == (void *) *rec) {
-        func_80209874_de(rec, 10);
+        Nav_SetBehaviourState(rec, 10);
         return;
     }
     if (v0 != 0) {
-        func_80209874_de(rec, 2);
+        Nav_SetBehaviourState(rec, 2);
         return;
     }
     func_80211020_de(rec);

@@ -19,7 +19,7 @@ void func_802131E0_de(Root802131E0 *arg0) {
     inner->unk2FC = 0;
 }
 
-extern void func_80209874_de(void *arg0, s32 arg1);
+extern void Nav_SetBehaviourState(void *arg0, s32 arg1);
 extern void func_80211020_de(void *arg0);
 extern f32 Nav_DistanceToNode(void *arg0, s32 arg1);
 extern void Nav_SteerAlongRoute(void *);
@@ -45,7 +45,7 @@ void func_8021321C_de(Root802131E0 *arg0)
 
     state = arg0->unk1D8->unk1454;
     if (((Shared_ControlView *)((Brain_func_80212D78_eu_x *)state)->player->unk_0x05D8)->transientFlag == 0) {
-        func_80209874_de(state, 2);
+        Nav_SetBehaviourState(state, 2);
         return;
     }
 

@@ -115,7 +115,7 @@ void func_8020986C_de(AiController *object, AiBehaviourTable *value) {
     object->table = value;
 }
 
-s32 func_80209874_de(AiController *controller, s32 behaviourId) {
+s32 Nav_SetBehaviourState(AiController *controller, s32 behaviourId) {
     AiBehaviourTable *node;
     AiBehaviourEntry *entry;
     AiBehaviourEntry *found;

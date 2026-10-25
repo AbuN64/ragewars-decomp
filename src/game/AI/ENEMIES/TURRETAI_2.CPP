@@ -19,7 +19,7 @@ typedef struct Owner Owner;
 
 extern f32 Math_Sqrtf(f32);
 
-extern f32 func_80274808_de(f32, f32, f32);
+extern f32 Nav_ApproachValue(f32, f32, f32);
 
 
 extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
@@ -73,7 +73,7 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
         if (rider->direction == mode) {
             step = -step;
         }
-        rider->change = func_80274808_de(rider->change, step, 0.25f);
+        rider->change = Nav_ApproachValue(rider->change, step, 0.25f);
         throttle += rider->change;
         if (rider->direction == 0) {
             if (throttle > 1.0f) {
@@ -101,7 +101,7 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
             } else if (step < -limit) {
                 step = -limit;
             }
-            rider->change = func_80274808_de(rider->change, step, 0.25f);
+            rider->change = Nav_ApproachValue(rider->change, step, 0.25f);
             throttle += rider->change;
         }
         break;

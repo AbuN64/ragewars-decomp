@@ -19,7 +19,7 @@ extern char D_8013B364[];
 
 extern void func_80211020_de(CloseAttackBrain *);
 extern s32 func_802099B4_de(CloseAttackBrain *, CloseAttackActor *);
-extern void func_80209874_de(CloseAttackBrain *, s32);
+extern void Nav_SetBehaviourState(CloseAttackBrain *, s32);
 extern f32 func_802726BC_de(CVector3 *, CVector3 *);
 extern f32 func_80209BE0_de(CloseAttackBrain *);
 extern f32 func_80209DAC_de(CloseAttackBrain *);
@@ -55,7 +55,7 @@ void func_80211A9C_eu(CloseAttackActor *actor) {
         mine = brain->player->flags & 0x3000;
         theirs = (target->flags & 0x3000) != 0;
         if (mine && !theirs) {
-            func_80209874_de(brain, 12);
+            Nav_SetBehaviourState(brain, 12);
             return;
         }
         route = target->brain->route;
@@ -77,7 +77,7 @@ void func_80211A9C_eu(CloseAttackActor *actor) {
             dist = func_802726BC_de(pos, &brain->player->pos);
             if (dist > 377487.3f) {
                 brain->combat = 5;
-                func_80209874_de(brain, 6);
+                Nav_SetBehaviourState(brain, 6);
                 return;
             }
             near = dist + 10000.0f;
@@ -171,7 +171,7 @@ halt:
         if (route != brain->node) {
             brain->node = route;
             if (Nav_GetRouteRelation(routes, brain->route, route) == 0) {
-                func_80209874_de(brain, 1);
+                Nav_SetBehaviourState(brain, 1);
             }
         }
     }

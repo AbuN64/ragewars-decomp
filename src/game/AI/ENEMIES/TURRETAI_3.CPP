@@ -30,7 +30,7 @@ void Weapons_SetLoopingSound(void *arg0, void *arg1, s32 arg2);
 
 void func_80217388_de(void *arg0, void *arg1);
 
-f32 func_80274808_de(f32 arg0, f32 arg1, f32 arg2);
+f32 Nav_ApproachValue(f32 arg0, f32 arg1, f32 arg2);
 
 typedef union NavRider { RiderRecAt130V1 target; Rider rider; struct { char pad0[0x9C]; f32 heading; char padA0[0x124-0xA0]; f32 speed; char pad128[8]; CVector3 aim; } nav; } NavRider;
 
@@ -166,7 +166,7 @@ changed:
     } else func_80217388_de(actor,riderState);
     /* The second ABI word is the actual rider pointer, used as such by this callee. */
     ((void (*)(void *,void *,f32,f32))Weapons_ApplyClampedTurn)(actor,riderState, turret->rate, aimError);
-    riderState->nav.speed = func_80274808_de(riderState->nav.speed, desiredSpeed, turret->rate);
+    riderState->nav.speed = Nav_ApproachValue(riderState->nav.speed, desiredSpeed, turret->rate);
     return inFireCone;
 }
 

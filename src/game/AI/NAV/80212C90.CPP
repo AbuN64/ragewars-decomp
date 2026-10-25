@@ -15,7 +15,7 @@ void func_80212C90_de(AiTarget *aiTarget) {
     controller->unk2FC = 0;
 }
 
-extern s32 func_80209874_de(void *, s32);
+extern s32 Nav_SetBehaviourState(void *, s32);
 extern void func_80211020_de(void *);
 extern f32 Nav_DistanceToNode(s32 *, s32);
 extern void Nav_SteerAlongRoute(void *);
@@ -34,7 +34,7 @@ void func_80212CC4_de(AiTarget *aiTarget) {
     controller = aiTarget->player->controller;
     v0 = Weapons_FindPlayerWithMarker(&D_80145040);
     if (v0 == 0 || v0 != (void *)controller->player) {
-        func_80209874_de(controller, 2);
+        Nav_SetBehaviourState(controller, 2);
         return;
     }
     controller = aiTarget->player->controller;

@@ -164,7 +164,7 @@ extern RouteChaseGraph D_8013B364;
 
 
 
-extern void func_80209874_de(RouteChaseBot *bot, s32 mode);
+extern void Nav_SetBehaviourState(RouteChaseBot *bot, s32 mode);
 extern void func_80211020_de(RouteChaseBot *bot);
 extern f32 Nav_DistanceToNode(RouteChaseBot *bot, s32 node);
 extern void Nav_SteerAlongRoute(RouteChaseBot *bot);
@@ -185,7 +185,7 @@ void func_80212FBC_de(RouteChaseActor *actor)
     s32 none;
 
     if (bot->targetId == -1) {
-        func_80209874_de(bot, 2);
+        Nav_SetBehaviourState(bot, 2);
         return;
     }
     if (bot->target == 0) {
@@ -196,7 +196,7 @@ void func_80212FBC_de(RouteChaseActor *actor)
     if (bot->node != bot->goal && D_800C2380_eu < dist) {
         Nav_SteerAlongRoute(bot);
     } else if (bot->arrived != 0) {
-        func_80209874_de(bot, 8);
+        Nav_SetBehaviourState(bot, 8);
     } else {
         bot->dest = bot->target->pos;
     }

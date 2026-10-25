@@ -12,7 +12,7 @@ extern s32 Render_LocatePackSection(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
 
 extern void func_8028FFD0_de(s32, s32, s32, Triple, Triple, s32, f32);
 
-extern s32 func_80275B10_de(Node75 *arg0, f32 arg1, f32 arg2);
+extern s32 Nav_IsPointInTriangleXZ(Node75 *arg0, f32 arg1, f32 arg2);
 
 extern f32 Anim_GetPolygonHeight(void *, f32, f32);
 
@@ -37,7 +37,7 @@ void *func_8028C050_de(void *triangle, CVector3 *arg1) {
     f32 value;
 
     if (triangle != 0 &&
-        func_80275B10_de(triangle, arg1->x,
+        Nav_IsPointInTriangleXZ(triangle, arg1->x,
                           arg1->z) != 0) {
         if (!(((Triangle *)triangle)->flags & 0x40)) {
             return triangle;

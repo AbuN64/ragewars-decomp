@@ -7,7 +7,7 @@
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
 #include "stddef.h"
-s32 func_80209874_de(void *, s32);
+s32 Nav_SetBehaviourState(void *, s32);
 s32 func_80209A94_de(void *);
 s32 func_80209AD8_de(void *);
 f32 Nav_GetScaledAggression(void *);
@@ -55,12 +55,12 @@ s32 Nav_SelectPlayerState(AiController *controller) {
     if (carrier != 0 && D_80145040.game.counters.m_bCTFOn != 0) {
         if (carrier == controller->player) {
             nextState = 10;
-            func_80209874_de(controller, nextState);
+            Nav_SetBehaviourState(controller, nextState);
             return 1;
         }
         if (controller->target != 0) {
             nextState = 1;
-            func_80209874_de(controller, nextState);
+            Nav_SetBehaviourState(controller, nextState);
             return 1;
         }
     }
@@ -68,13 +68,13 @@ s32 Nav_SelectPlayerState(AiController *controller) {
     if (gameStatus->m_bFragTagOn != 0 && controller->player->profile->bonus != 0) {
         if (gameStatus->m_FragTagFlipTimer > 0) {
             if (controller->state != 2) {
-                func_80209874_de(controller, 2);
+                Nav_SetBehaviourState(controller, 2);
                 return controller->unk2F8 = controller->unk2F4 = 1;
             }
             return 1;
         }
         nextState = 11;
-        func_80209874_de(controller, nextState);
+        Nav_SetBehaviourState(controller, nextState);
         return 1;
     }
     healthThreshold = (s32)((1.0f - Nav_GetScaledAggression(controller)) * 80.0f);
@@ -84,45 +84,45 @@ s32 Nav_SelectPlayerState(AiController *controller) {
     if (func_80209AD8_de(controller) == 0 && healthPercent < (f32)healthThreshold) {
         controller->routeState = 1;
         nextState = 8;
-        func_80209874_de(controller, nextState);
+        Nav_SetBehaviourState(controller, nextState);
         return 1;
     }
     if (func_80209AD8_de(controller) == 0 && ammoPercent < 10.0f) {
         controller->routeState = func_8020F5A4_de(controller);
         nextState = 8;
-        func_80209874_de(controller, nextState);
+        Nav_SetBehaviourState(controller, nextState);
         return 1;
     }
     state = controller->state;
     if ((state == 3 || state == 4 || state == 13) && ammo0 < 10 && ammo1 < 10 && ammo2 <= 0) {
         controller->routeState = 4;
         nextState = 8;
-        func_80209874_de(controller, nextState);
+        Nav_SetBehaviourState(controller, nextState);
         return 1;
     }
     if (func_80209A94_de(controller) != 0 && controller->target == 0) {
         nextState = 2;
-        func_80209874_de(controller, nextState);
+        Nav_SetBehaviourState(controller, nextState);
         return 1;
     }
     if (func_8020EA10_de(controller) != 0 && (state = controller->state) != 9) {
         if (state == 1 || state == 2) {
             nextState = 9;
-            func_80209874_de(controller, nextState);
+            Nav_SetBehaviourState(controller, nextState);
             return 1;
         }
     } else if (func_80209AD8_de(controller) != 0 && (f32)healthThreshold < healthPercent && 10.0f < ammoPercent) {
         nextState = 2;
-        func_80209874_de(controller, nextState);
+        Nav_SetBehaviourState(controller, nextState);
         return 1;
     } else if (func_80209A94_de(controller) == 0 && func_80209AD8_de(controller) == 0 && controller->target != 0) {
         if (controller->player->profile->enabled != 0) {
             if (controller->player->profile->character == 12) {
-                func_80209874_de(controller, 13);
+                Nav_SetBehaviourState(controller, 13);
                 return 1;
             }
         }
-        func_80209874_de(controller, 1);
+        Nav_SetBehaviourState(controller, 1);
         return 1;
     }
     return 1;

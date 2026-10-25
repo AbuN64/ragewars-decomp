@@ -333,7 +333,7 @@ s32 Scene_FindFloorPolygon(Shared_World *world, CVector3 *pos) {
                 /* Preserve the index-first address add emitted by the original compiler. */
                 poly = polys - -index;
                 do {
-                    if (func_80275B10_de(poly, pos->x, pos->z) != 0) {
+                    if (Nav_IsPointInTriangleXZ(poly, pos->x, pos->z) != 0) {
                         floor = Anim_GetPolygonHeight(poly, pos->x, pos->z);
                         if (poly->flags & 0x40) {
                             ceiling = func_8027525C_de(poly, pos->x, pos->z);

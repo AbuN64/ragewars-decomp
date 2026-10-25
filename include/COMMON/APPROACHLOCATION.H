@@ -16,7 +16,7 @@ struct Cursor;
 extern ApproachLocation *func_80219408_de(struct Cursor *);
 extern s32 func_80240660_de(Actor_func_80214624_de *,CVector3,s32,s32,CVector3 *);
 struct Node75;
-extern s32 func_80275B10_de(struct Node75 *,f32,f32);
+extern s32 Nav_IsPointInTriangleXZ(struct Node75 *,f32,f32);
 extern void func_8024E79C_de(Actor_func_80214624_de *,CVector3,CVector3 *,s32 *,s32,s32);
 extern void Particle_AddVec3(void *,void *,void *);
 extern void Particle_SubtractVectors(void *,void *,void *);

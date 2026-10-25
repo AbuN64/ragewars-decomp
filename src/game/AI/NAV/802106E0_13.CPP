@@ -18,7 +18,7 @@ extern char D_8013B364[];
 
 extern void func_80211020_de(Brain_func_802120A8_eu *);
 extern s32 func_802099B4_de(Brain_func_802120A8_eu *, Self *);
-extern void func_80209874_de(Brain_func_802120A8_eu *, s32);
+extern void Nav_SetBehaviourState(Brain_func_802120A8_eu *, s32);
 extern f32 func_802726BC_de(CVector3 *, CVector3 *);
 extern f32 func_80209BE0_de(Brain_func_802120A8_eu *);
 extern f32 func_80209DAC_de(Brain_func_802120A8_eu *);
@@ -42,7 +42,7 @@ void func_802120A8_eu(Self *actor) {
     func_80211020_de(brain);
     if (brain->target == 0) {
         brain->target = 0;
-        func_80209874_de(brain, 2);
+        Nav_SetBehaviourState(brain, 2);
         return;
     }
     if (!(brain->frames & 3)) {
@@ -53,14 +53,14 @@ void func_802120A8_eu(Self *actor) {
     mine = brain->player->flags & 0x3000;
     theirs = (target->flags & 0x3000) != 0;
     if (mine && !theirs) {
-        func_80209874_de(brain, 12);
+        Nav_SetBehaviourState(brain, 12);
         return;
     }
     node = target->brain->route;
     if (brain->visible != 0) {
         if (func_802726BC_de(&target->pos, &brain->player->pos) < 360000.0f) {
             brain->combat = 13;
-            func_80209874_de(brain, 7);
+            Nav_SetBehaviourState(brain, 7);
             return;
         }
         speed = func_80209BE0_de(brain) * 0.4f;
@@ -101,13 +101,13 @@ void func_802120A8_eu(Self *actor) {
         func_80209E80_de(brain);
     } else {
         brain->target = 0;
-        func_80209874_de(brain, 2);
+        Nav_SetBehaviourState(brain, 2);
     }
     if (node != brain->node) {
         brain->node = node;
         if (Nav_GetRouteRelation(D_8013B364, brain->route, node) == 0) {
             brain->target = 0;
-            func_80209874_de(brain, 2);
+            Nav_SetBehaviourState(brain, 2);
         }
     }
 }

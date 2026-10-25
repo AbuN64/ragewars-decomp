@@ -170,7 +170,7 @@ s32 Weapons_UpdateTrackerAim(Actor_func_80214624_de *actor, Plan *tracker, Actor
         break;
     }
     if (func_80240660_de(actor, pos, room, tracker->unk30->unkC, &hit) != 0) {
-        if (func_80275B10_de(actor->unk14, hit.x, hit.z) != 0) {
+        if (Nav_IsPointInTriangleXZ(actor->unk14, hit.x, hit.z) != 0) {
             tracker->unk90 = hit.y;
         } else {
             tracker->unk90 = (f32) (hit.y + D_800C2160_de[0]);

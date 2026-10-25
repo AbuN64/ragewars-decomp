@@ -11,7 +11,7 @@
 extern void ReselectCloseAttack(void *);
 
 
-s32 func_80209874_de(void *, s32);
+s32 Nav_SetBehaviourState(void *, s32);
 
 s32 func_8020DD04_de(s32);
 
@@ -33,5 +33,5 @@ void func_8020DC60_de(void *brainAddress) {
     s32 temp_v0;
     temp_v0 = func_8020DD04_de((((struct ObjRecAt18V4 *) ((s8 *) ((struct func_8020DCA0_S1 *) ((s8 *) brainAddress))->unk0))->unk18) + 0x14);
     (((struct func_8020DCA0_S1 *) ((s8 *) brainAddress))->unk230) = temp_v0;
-    func_80209874_de(brainAddress, temp_v0);
+    Nav_SetBehaviourState(brainAddress, temp_v0);
 }

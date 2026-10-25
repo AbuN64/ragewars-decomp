@@ -18,7 +18,7 @@ extern char D_8013B364[];
 
 extern void func_80211020_de(CloseAttackBrain *);
 extern s32 func_802099B4_de(CloseAttackBrain *, CloseAttackActor *);
-extern void func_80209874_de(CloseAttackBrain *, s32);
+extern void Nav_SetBehaviourState(CloseAttackBrain *, s32);
 extern f32 func_802726BC_de(CVector3 *, CVector3 *);
 extern f32 func_80209BE0_de(CloseAttackBrain *);
 extern f32 func_80209DAC_de(CloseAttackBrain *);
@@ -70,7 +70,7 @@ void func_80211490_eu(CloseAttackActor *actor) {
         temp_s0 = brain->target->self;
         mine=brain->player->flags&0x3000;theirs=(temp_s0->flags&0x3000)!=0;
         if (mine && !theirs) {
-            func_80209874_de(brain,12);return;
+            Nav_SetBehaviourState(brain,12);return;
         }
         route = temp_s0->brain->route;
         if (Nav_GetGraphPoint(routes, route)->flags & 0x400) {
@@ -185,7 +185,7 @@ block_41:
         if (route != brain->node) {
             brain->node = route;
             if (Nav_GetRouteRelation(routes, brain->route, route) == 0) {
-                func_80209874_de(brain,1);
+                Nav_SetBehaviourState(brain,1);
             }
         }
     }
