@@ -18,7 +18,7 @@ struct Screen_func_8041ECB4_de {
 
 extern s32 func_8041F140_de(s32 key);
 
-extern void func_8041E5F8_de();
+extern void Frontend_SeatJoinRequests(void);
 
 struct Menu_func_8041EE08_de;
 typedef struct Menu_func_8041EE08_de Menu_func_8041EE08_de;

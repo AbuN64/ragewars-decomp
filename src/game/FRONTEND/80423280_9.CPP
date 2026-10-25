@@ -68,14 +68,14 @@ extern void func_8041EA70_de(void);
    screen D_800E4EF0 busy: 0x36B closes the menu through func_804294C4_de, sends code -1 to
    func_8042E988_de and calls func_802998A8_de; 0x369 does the same with page reset func_80429654_de(0)
    and code 0x17 when func_802A1B18_de reports the screen's list at 0x34 non-empty; 0x36A always does
-   it with func_8041E5F8_de and code 0x19, then calls func_802A2394_de. Returns zero. */
+   it with Frontend_SeatJoinRequests and code 0x19, then calls func_802A2394_de. Returns zero. */
 
 
 
 
 extern void func_802998A8_de(void);
 
-extern void func_8041E5F8_de(void);
+extern void Frontend_SeatJoinRequests(void);
 
 
 /* Calls MarkMenuEventHandled and, unless func_8043C308_de reports one for the object D_800E4EF0 holds, calls
@@ -266,7 +266,7 @@ s32 func_804297F8_de(void) {
 #endif
         func_804294C4_de();
         func_80429654_de(0);
-        func_8041E5F8_de();
+        Frontend_SeatJoinRequests();
         func_8042E988_de(0x19);
         func_802998A8_de();
         func_802A2394_de();

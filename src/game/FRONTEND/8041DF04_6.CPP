@@ -69,39 +69,34 @@ void func_8041E408_de(s32 index) {
 }
 #endif
 
-#ifdef NON_MATCHING
-/* Takes the first free player settings slot from the top for each of the three requests; the loop shape is closer to the ROM than the earlier draft (49 edits vs 71). */
+/* Seats the three join requests in free player settings slots, searching down from slot 7. */
 extern struct RequestRecAt10 D_80153F80[];
 extern u8 *Resmgr_CopyString(u8 *, u8 *);
-void func_8041E5F8_de(void) {
+void Frontend_SeatJoinRequests(void) {
     Shared_PlayerSettingsRecord *player;
     s32 slot = 7;
     s32 i = 0;
     Shared_Game *g = &D_801462C8;
-    player = &g->playerSettings[7];
+    Shared_PlayerSettingsRecord *settings = g->playerSettings;
     do {
         if (slot <= 0) return;
         if (D_80153F80[i].id >= 0) {
             while (slot > 0 && g->playerSettings[slot].enabled == 1) {
                 slot--;
-                player--;
             }
             if (slot >= 0) {
+                player = &settings[slot];
                 player->locked = 1;
                 player->enabled = 1;
                 player->slot = slot;
-                slot--;
                 player->character = D_80153F80[i].id;
                 player->team = D_80153F80[i].variant;
                 player->rank = D_80153F80[i].word8;
                 player->variant = D_80153F80[i].variantC;
                 Resmgr_CopyString(player->name, (u8 *)D_80153F80[i].name);
-                player--;
+                slot--;
             }
         }
         i++;
     } while (i < 3);
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_8041E5F8_de);
-#endif
