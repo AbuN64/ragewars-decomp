@@ -667,7 +667,7 @@ void Frontend_FillResultRows(void) {
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 
-extern s32 func_8042D060_de(void);
+extern s32 Frontend_GetMatchEndReason(void);
 
 /* The game settings record. */
 static inline Shared_Game *resultsGame(void) { return &D_801462C8; }
@@ -701,7 +701,7 @@ void Frontend_SortResultsPlayers(void) {
             D_800E53C0->count++;
         }
     }
-    mode = func_8042D060_de();
+    mode = Frontend_GetMatchEndReason();
     if (mode == 0) {
         switch (D_8014DD98.kind) {
         case 2: mode = 1; break;

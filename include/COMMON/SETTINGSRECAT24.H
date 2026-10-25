@@ -138,7 +138,7 @@ extern void func_8042D418_de(s32 arg0);
 
 struct MatchState;
 
-extern s32 func_8042D060_de();
+extern s32 Frontend_GetMatchEndReason();
 
 struct SlotRecAt7F;
 struct SlotRecAt7F {

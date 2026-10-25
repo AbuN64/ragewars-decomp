@@ -223,7 +223,7 @@ void func_8042D034_de(void) {
     func_80298368_de(0xF);
 }
 
-s32 func_8042D060_de(void) {
+s32 Frontend_GetMatchEndReason(void) {
     SettingsRecAt24 *settings;
     settings = &D_8014561C.settings;
     if (settings->timeSetting > 0 && D_8014561C.rules.timeLeft == 0.0f) {
