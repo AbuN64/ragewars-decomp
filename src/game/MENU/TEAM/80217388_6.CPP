@@ -178,7 +178,7 @@ struct TeamWeaponPlayer {
     s16 m_CurrentWeapon;
 };
 extern f32 D_800C2248_de, D_800C913C_de;
-extern s32 func_8022EB0C_de(void *player, s32 weapon);
+extern s32 World_PlayerHasAmmoForWeapon(void *player, s32 weapon);
 /* Fills the first eight weapons of the barrel: a slot shows the weapon the player put in it when m_DisplaySlot
    allows that slot (-1 every slot, 3, 7 or 4 only that slot, else that slot and the next), with its D_800D052C
    record, whether the player has ammo for it and a rotation of 45 degrees per slot, and m_Selected lands on the
@@ -215,7 +215,7 @@ void Team_InitWeaponChoices(CBarrel *barrel, s32 buttonAWheel, TeamWeaponPlayer 
                 barrel->m_WeaponList[choice].m_Weapon = weapon;
                 if (player->m_CurrentWeapon == weapon) barrel->m_Selected = choice;
                 barrel->m_WeaponList[choice].m_pInfo = D_800D052C[weapon];
-                if (func_8022EB0C_de(player, weapon) != 0) barrel->m_WeaponList[choice].m_bEnabled = 1;
+                if (World_PlayerHasAmmoForWeapon(player, weapon) != 0) barrel->m_WeaponList[choice].m_bEnabled = 1;
                 else barrel->m_WeaponList[choice].m_bEnabled = 0;
                 barrel->m_WeaponList[choice].m_Spin = 0.0f;
                 barrel->m_WeaponList[choice].m_Scale = D_800C913C_de;

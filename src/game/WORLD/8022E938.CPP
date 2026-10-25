@@ -130,7 +130,7 @@ void func_8022EB04_de(void) {
 }
 
 /** Test whether an actor satisfies the condition selected by an entry type. */
-s32 func_8022EB0C_de(void *player, s32 arg1) {
+s32 World_PlayerHasAmmoForWeapon(void *player, s32 arg1) {
     void *entry;
     s16 *condition;
     char *indexed;

@@ -85,7 +85,7 @@ func_8022FDAC_de
 (arg0, arg1);
 }
 
-extern s32 func_8022EB0C_de(void *arg0, s32 arg1);
+extern s32 World_PlayerHasAmmoForWeapon(void *arg0, s32 arg1);
 
 
 
@@ -102,7 +102,7 @@ s32 func_80232ABC_de(void *player) {
             if (weapon >= 0x10) {
                 weapon = 0;
             }
-            if (func_8022EB0C_de(player, weapon) != 0) {
+            if (World_PlayerHasAmmoForWeapon(player, weapon) != 0) {
                 var_s0 -= 1;
             }
         } while (var_s0 >= 0);

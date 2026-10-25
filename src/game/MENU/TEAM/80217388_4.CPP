@@ -13,7 +13,7 @@
 extern void Particle_TransformPoint(void *arg0, void *arg1, void *arg2);
 
 extern Gfx *D_80110634;
-extern s32 func_8022EB0C_de(Player *player, s32 weapon);
+extern s32 World_PlayerHasAmmoForWeapon(Player *player, s32 weapon);
 void Team_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *player) {
     s32 width;
     s32 height;
@@ -49,7 +49,7 @@ void Team_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *player)
                 alpha = 1.0f;
                 green = red;
             } else {
-                red = func_8022EB0C_de(player, item->weapon);
+                red = World_PlayerHasAmmoForWeapon(player, item->weapon);
                 red = red == 0 ? 100 : 200;
                 green = red;
                 blue = red;

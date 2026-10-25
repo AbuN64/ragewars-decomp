@@ -22,7 +22,7 @@ extern char D_8011D8D0[];
 
 extern void func_802100E0_de(BrainCode8020EAE0 *);
 
-extern s32 func_8022EB0C_de(SharedPlayer_func_8020FDB0_de *, s32);
+extern s32 World_PlayerHasAmmoForWeapon(SharedPlayer_func_8020FDB0_de *, s32);
 
 extern s32 func_80283228_de(char *, SharedPlayer_func_8020FDB0_de *);
 
@@ -48,7 +48,7 @@ void func_8020FDB0_de(BrainCode8020EAE0 *brain, s32 *ammo) {
     for (i = count; i < 8; i++) {
         weapon = brain->player->views18.view18_2.model->slots[i];
         weapon -= 0x4C3;
-        if (weapon < 0 || ammo[i] == 0 || func_8022EB0C_de(brain->player, weapon) == 0) {
+        if (weapon < 0 || ammo[i] == 0 || World_PlayerHasAmmoForWeapon(brain->player, weapon) == 0) {
             continue;
         }
         if ((u32)weapon >= 2) {

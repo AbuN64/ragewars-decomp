@@ -17,7 +17,7 @@
 #include "WEAPONS/80213ED4.H"
 #include "RENDER_2/8025DE50_5.H"
 
-extern s32 func_8022EB0C_de(void *arg0, s32 arg1);
+extern s32 World_PlayerHasAmmoForWeapon(void *arg0, s32 arg1);
 
 
 
@@ -113,7 +113,7 @@ s32 func_8022F96C_de(void *arg0)
                     break;
                 }
             }
-            if ((slot < 22) && func_8022EB0C_de(actor, slot)) {
+            if ((slot < 22) && World_PlayerHasAmmoForWeapon(actor, slot)) {
                 if ((slot != special) || (actor->ammo[0] >= 11)) {
                     if ((actor->remote == 0) || (slot < 18)) {
                         return slot;
@@ -142,7 +142,7 @@ s32 func_8022F96C_de(void *arg0)
                     break;
                 }
             }
-            if ((slot < 22) && func_8022EB0C_de(actor, slot)) {
+            if ((slot < 22) && World_PlayerHasAmmoForWeapon(actor, slot)) {
                 if ((slot != special) || (actor->ammo[0] >= 11)) {
                     return slot;
                 }
@@ -173,7 +173,7 @@ s32 func_8022FAF8_de(Object_func_8022FAF8_de *player) {
         while ((number < 22) && (value != player->values[number * 2])) {
             number++;
         }
-        if ((number < 22) && (func_8022EB0C_de(player, number) != 0)) {
+        if ((number < 22) && (World_PlayerHasAmmoForWeapon(player, number) != 0)) {
             return number;
         }
         value++;
@@ -185,7 +185,7 @@ s32 func_8022FAF8_de(Object_func_8022FAF8_de *player) {
         while ((index < 22) && (number != player->values[index * 2])) {
             index++;
         }
-        if ((index < 22) && (func_8022EB0C_de(player, index) != 0)) {
+        if ((index < 22) && (World_PlayerHasAmmoForWeapon(player, index) != 0)) {
             return index;
         }
         number++;
