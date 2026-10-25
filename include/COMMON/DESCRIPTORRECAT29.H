@@ -98,11 +98,15 @@ extern float D_800CD744_de;
 
 struct ClipView;
 struct ClipView {
-    char gap0[0x120];
+    char gap0[0x8];
+    s32 index;
+    char gapC[0x120 - 0xC];
     s32 hidden;
     char gap124[8];
     f32 depth;
-    char gap130[0x130];
+    char gap130[0x1E0 - 0x130];
+    f32 viewProjection[16];
+    char gap220[0x260 - 0x220];
     CVector3 fan[5];
     char gap29C[0x74];
     f32 clipPlane[4];

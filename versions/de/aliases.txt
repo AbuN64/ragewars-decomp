@@ -2529,3 +2529,4 @@ literals_VectorAngle = 0x800C5A58; // rom:0xC6658 size:0x2C
 literals_Nav_MeasureWheelClearance = 0x800C1F98; // rom:0xC2B98 size:0x18
 literals_Render_UpdateFillMode = 0x800C5E64; // rom:0xC6A64 size:0x24
 literals_Nav_PrepareProbeSegments = 0x800C1FB0; // rom:0xC2BB0 size:0x28
+literals_Camera_DrawObjectFlares = 0x800C3514; // rom:0xC4114 size:0x4

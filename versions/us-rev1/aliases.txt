@@ -2973,3 +2973,4 @@ literals_Nav_MeasureWheelClearance = 0x800C7088; // rom:0xC7C88 size:0x18
 literals_Render_UpdateFillMode = 0x800CAFF4; // rom:0xCBBF4 size:0x24
 literals_Engine_LoadSelectedTexture = 0x800CA5D0; // rom:0xCB1D0 size:0x3C
 literals_Nav_PrepareProbeSegments = 0x800C70A0; // rom:0xC7CA0 size:0x28
+literals_Camera_DrawObjectFlares = 0x800C8604; // rom:0xC9204 size:0x4
