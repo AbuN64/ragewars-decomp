@@ -3385,7 +3385,7 @@ segments:
       - [0xC7C40, rodata, data_800C/literals_Nav_EvaluateAttackTarget]
       - [0xC7C74, data, data_800C/D_blob_60888a8577e9a4c0861e]
       - [0xC7C80, rodata, data_800C/literals_func_802106E0_de]
-      - [0xC7C88, rodata, data_800C/D_auto_src_rw_pool_80210964_C7C88_us_rev1]
+      - [0xC7C88, rodata, data_800C/literals_Nav_MeasureWheelClearance]
       - [0xC7CA0, rodata, data_800C/D_auto_src_rw_pool_80210C14_C7CA0_us_rev1]
       - [0xC7CC8, rodata, data_800C/D_auto_src_rw_pool_80210EFC_C7CC8_us_rev1]
       - [0xC7CE8, data, data_800C/D_blob_07389f7579aabffd4b93]

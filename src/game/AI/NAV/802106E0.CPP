@@ -53,19 +53,10 @@ void func_802106E0_de(Vehicle *vehicle, s32 wheel) {
     }
 }
 
-#ifdef NON_MATCHING
-/* 4/172 aligned edits left: loop.c still hoists wheel * 4 + 0x1F0 out of the probe loop (the ROM adds the
- * clearance offset in the store). The three early outs are separate (jump2 cross-jumps them), which keeps
- * &surface in the loop like the ROM. */
 #include "COMMON/MOTION_STEP.H"
-extern f32 D_800C1F98_de, D_800C1F9C_de, D_800C1FA0_de, D_800C1FA4_de, D_800C1FA8_de, D_800C1FAC_de;
+/* Stores the clearance reached before step I: (I - 1) x REACH, never below 0. */
 static inline void storeClearance(Vehicle *vehicle, s32 wheel, s32 i, f32 reach) {
-    f32 *out = &vehicle->wheels->clearance[wheel];
-    s32 last = i - 1;
-    if (last < 0) {
-        last = 0;
-    }
-    *out = last * reach;
+    vehicle->wheels->clearance[wheel] = (i - 1 >= 0 ? i - 1 : 0) * reach;
 }
 /* Walks wheel ray WHEEL outward from the vehicle in steps of 2.25 x its reach, probing the ground under
  * each step (func_8024491C_de), and stores in the clearance table the distance covered before a probe
@@ -83,16 +74,16 @@ void Nav_MeasureWheelClearance(Vehicle *vehicle, s32 wheel) {
     f32 base;
     s32 steps;
     s32 i;
-    vehicle->wheels->clearance[wheel] = D_800C1F98_de;
+    vehicle->wheels->clearance[wheel] = 100.0f;
     reach = Sound_GetActorReach(vehicle);
     length = vehicle->wheels->clearance[wheel];
     if (length < reach) {
         return;
     }
     step = D_800C88A0_de[wheel];
-    steps = length / (reach * D_800C1F9C_de) + D_800C1FA0_de;
-    step.x = step.x * D_800C1F9C_de * reach;
-    step.z = step.z * D_800C1F9C_de * reach;
+    steps = length / (reach * 2.25f) + 0.5f;
+    step.x = step.x * 2.25f * reach;
+    step.z = step.z * 2.25f * reach;
     i = 0;
     radius = func_8024D398_de(vehicle);
     height = Particle_GetActorHeight(vehicle);
@@ -107,29 +98,26 @@ void Nav_MeasureWheelClearance(Vehicle *vehicle, s32 wheel) {
     surface.friction = 0.0f;
     surface.drag = 0.0f;
     surface.materialResponse = 0.0f;
-    position.y += D_800C1FA4_de;
+    position.y += 2.5f * 61.44f;
     for (; i < steps; i++) {
         position.x += step.x;
         position.z += step.z;
         below = position;
-        below.y -= D_800C1FA8_de;
+        below.y -= 5 * 61.44f;
         if (!func_8024491C_de(vehicle, position, below, &surface, reach, radius, height, base)) {
             storeClearance(vehicle, wheel, i, reach);
             return;
         }
-        if ((u32)(D_80103FCC->kind - 5) < 2) {
+        if (D_80103FCC->kind == 5 || D_80103FCC->kind == 6) {
             storeClearance(vehicle, wheel, i, reach);
             return;
         }
-        if (D_80103FCC->pos.y <= below.y - D_800C1FAC_de) {
+        if (D_80103FCC->pos.y <= below.y - 100.0f) {
             storeClearance(vehicle, wheel, i, reach);
             return;
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", Nav_MeasureWheelClearance);
-#endif
 
 #ifdef NON_MATCHING
 #include "COMMON/AUDIO_CALLBACKS.H"
