@@ -166,33 +166,24 @@ void func_8022BD94_de(void *arg0, void *source, s32 arg2) {
 }
 
 #ifdef NON_MATCHING
-#include "TYPES.H"
-
-typedef struct HealingActor {
-    u8 pad[0x5E4];
-    s32 health;
-    u8 pad5E8[0x258];
-    f32 recoveryTime;
-    u8 pad844[4];
-    s32 recovering;
-} HealingActor;
-
 extern f32 D_800D2988;
-extern f32 D_800C2D20_de;
-extern f32 D_800C2D24_de;
-extern void Render_ApplyPlayerDamage(HealingActor *, void *, s32, s32, s32);
+extern void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3, s32 kind);
 
-/* 43/47 words; remaining: the sum is tied to the recoveryTime load (add.s f0,f0,f1; limit in f1) where the target keeps
- * it untied in f2 (limit in f0); 12 source shapes (early return, +=, pointer, else-store, separate dt/limit locals) all tie. */
-void Text_ApplyDamageOverTime(void *healingActor, void *source) {
-    HealingActor *actor = healingActor;
-    f32 elapsed = actor->recoveryTime + D_800D2988;
+/* Damage over time while the source's effect flag 0x1000 is set (func_8022BD94_de): advances the player's
+ * effect timer by the frame step; past 300 it marks the player and deals max(1, (150 - health / 256) / 15)
+ * points (8.8 fixed) of kind 0x1F, then winds the timer back by 22.5 so the next tick follows sooner.
+ * 43/47 words: only the float registers differ. The ROM keeps the sum in $f2 (untied from the timer load,
+ * limit in $f0); cc1 ties it to the load ($f0, limit $f1). Probes show $f2 needs a third float value live
+ * in this block when the sum is born (an earlier live set of `elapsed`, or the frame step still live) that
+ * the final code no longer holds; no honest shape found (REV1-ONE-65 RESULT.md). */
+void Text_ApplyDamageOverTime(Shared_ActorView *player, void *source) {
+    f32 elapsed = player->recoveryTime + D_800D2988;
     s32 missing;
     s32 amount;
 
-    actor->recoveryTime = elapsed;
-    if (D_800C2D20_de < elapsed) {
-        missing = 150 - (actor->health >> 8);
+    player->recoveryTime = elapsed;
+    if (300.0f < elapsed) {
+        missing = 150 - (player->health >> 8);
         amount = 1;
         if (missing > 0) {
             missing /= 15;
@@ -200,9 +191,9 @@ void Text_ApplyDamageOverTime(void *healingActor, void *source) {
                 amount = missing;
             }
         }
-        actor->recovering = 1;
-        Render_ApplyPlayerDamage(actor, source, amount << 8, 0, 0x1F);
-        actor->recoveryTime = actor->recoveryTime - D_800C2D24_de;
+        player->collisionState = 1;
+        Render_ApplyPlayerDamage(player, source, amount << 8, 0, 0x1F);
+        player->recoveryTime -= 22.5f;
     }
 }
 #else
