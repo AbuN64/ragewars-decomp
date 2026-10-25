@@ -223,37 +223,37 @@ s32 func_8041EDC0_de(void) {
 }
 
 s32 func_8041EE08_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
-    s32 temp_v0_2;
+    s32 prevSelection;
     s32 idx;
-    MenuWidget *temp_v0;
-    MenuWidget *temp_v0_3;
+    MenuWidget *oldItem;
+    MenuWidget *newItem;
     if (arg3 == 1) {
         MarkMenuEventHandled();
         idx = D_800E39C0->selection;
 #if defined(VERSION_DE)
-        temp_v0 = func_8040EC30_de(D_800E39C0->rows[idx], 0x38C);
+        oldItem = func_8040EC30_de(D_800E39C0->rows[idx], 0x38C);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        temp_v0 = func_8040EC30_de(D_800E39C0->rows[idx], 0x392);
+        oldItem = func_8040EC30_de(D_800E39C0->rows[idx], 0x392);
 #elif defined(VERSION_EU_X)
-        temp_v0 = func_8040EC30_de(D_800E39C0->rows[idx], 0x396);
+        oldItem = func_8040EC30_de(D_800E39C0->rows[idx], 0x396);
 #endif
-        temp_v0->alpha = 0xFF;
-        Frontend_SetWidgetFlag08(temp_v0, 0);
-        temp_v0_2 = D_800E39C0->selection - 1;
-        D_800E39C0->selection = temp_v0_2;
-        if (temp_v0_2 < 0) {
+        oldItem->alpha = 0xFF;
+        Frontend_SetWidgetFlag08(oldItem, 0);
+        prevSelection = D_800E39C0->selection - 1;
+        D_800E39C0->selection = prevSelection;
+        if (prevSelection < 0) {
             D_800E39C0->selection = D_800E39C0->step - 1;
         }
         idx = D_800E39C0->selection;
 #if defined(VERSION_DE)
-        temp_v0_3 = func_8040EC30_de(D_800E39C0->rows[idx], 0x38C);
+        newItem = func_8040EC30_de(D_800E39C0->rows[idx], 0x38C);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        temp_v0_3 = func_8040EC30_de(D_800E39C0->rows[idx], 0x392);
+        newItem = func_8040EC30_de(D_800E39C0->rows[idx], 0x392);
 #elif defined(VERSION_EU_X)
-        temp_v0_3 = func_8040EC30_de(D_800E39C0->rows[idx], 0x396);
+        newItem = func_8040EC30_de(D_800E39C0->rows[idx], 0x396);
 #endif
-        temp_v0_3->alpha = 0xFF;
-        Frontend_SetWidgetFlag08(temp_v0_3, 1);
+        newItem->alpha = 0xFF;
+        Frontend_SetWidgetFlag08(newItem, 1);
         D_800E39C0->timer = 0;
         Render_PlayFlatSound(0xE80);
         return 0;
@@ -262,24 +262,24 @@ s32 func_8041EE08_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
 }
 
 s32 func_8041EED0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    s32 temp_hi;
+    s32 nextSelection;
     s32 temp_v0_2;
-    s32 temp_v1;
-    MenuWidget *temp_v0;
-    MenuWidget *temp_v0_3;
+    s32 rowCount;
+    MenuWidget *oldItem;
+    MenuWidget *newItem;
 
     if (arg3 == 1) {
         MarkMenuEventHandled();
-        temp_v0 = func_8040EC30_de(D_800E39C0->rows[D_800E39C0->selection], MENU_RESOURCE);
-        temp_v0->alpha = 0xFF;
-        Frontend_SetWidgetFlag08(temp_v0, 0);
-        temp_v1 = D_800E39C0->step;
+        oldItem = func_8040EC30_de(D_800E39C0->rows[D_800E39C0->selection], MENU_RESOURCE);
+        oldItem->alpha = 0xFF;
+        Frontend_SetWidgetFlag08(oldItem, 0);
+        rowCount = D_800E39C0->step;
         temp_v0_2 = D_800E39C0->selection + 1;
-        temp_hi = temp_v0_2 % temp_v1;
-        D_800E39C0->selection = temp_hi;
-        temp_v0_3 = func_8040EC30_de(D_800E39C0->rows[temp_hi], MENU_RESOURCE);
-        temp_v0_3->alpha = 0xFF;
-        Frontend_SetWidgetFlag08(temp_v0_3, 1);
+        nextSelection = temp_v0_2 % rowCount;
+        D_800E39C0->selection = nextSelection;
+        newItem = func_8040EC30_de(D_800E39C0->rows[nextSelection], MENU_RESOURCE);
+        newItem->alpha = 0xFF;
+        Frontend_SetWidgetFlag08(newItem, 1);
         D_800E39C0->timer = 0;
         Render_PlayFlatSound(0xE80);
         return 0;

@@ -18,28 +18,28 @@ extern void func_80419F58_de(void *, s32);
 
 extern s32 func_80419F38_de(void *);
 s32 func_8042F91C_de(s32 unused0, s32 unused1, s32 arg2) {
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
+    s32 readyState;
+    s32 openFramesLeft;
+    s32 closeFramesLeft;
     s32 temp_v0_4;
     s32 temp_v1;
     s32 var_v0;
-    MenuWidget *temp_a0;
-    MenuWidget *temp_a0_2;
-    MenuWidget *temp_a1;
-    MenuWidget *temp_a1_2;
+    MenuWidget *closeTop;
+    MenuWidget *closeBottom;
+    MenuWidget *openTop;
+    MenuWidget *openBottom;
 
     if (D_800E28E0 < 2) {
-        temp_v0 = D_800E54A4->ready;
-        switch (temp_v0) {
+        readyState = D_800E54A4->ready;
+        switch (readyState) {
         case 1:
-            temp_a1 = D_800E54A4->top;
-            temp_a1->x = (u16) (temp_a1->x + (u16) D_800E54A4->topStep);
-            temp_a1_2 = D_800E54A4->bottom;
-            temp_a1_2->x = (u16) (temp_a1_2->x - (u16) D_800E54A4->bottomStep);
-            temp_v0_2 = D_800E54A4->timer - 1;
-            D_800E54A4->timer = temp_v0_2;
-            if (temp_v0_2 <= 0) {
+            openTop = D_800E54A4->top;
+            openTop->x = (u16) (openTop->x + (u16) D_800E54A4->topStep);
+            openBottom = D_800E54A4->bottom;
+            openBottom->x = (u16) (openBottom->x - (u16) D_800E54A4->bottomStep);
+            openFramesLeft = D_800E54A4->timer - 1;
+            D_800E54A4->timer = openFramesLeft;
+            if (openFramesLeft <= 0) {
                 Render_PlayFlatSound(0xE79);
                 /* unk28 is the panel's item handle, kept untyped in the animation state */
                 Frontend_SetWidgetFlag08((func_8041F2A0_Item *) D_800E54A4->title, 1);
@@ -49,13 +49,13 @@ s32 func_8042F91C_de(s32 unused0, s32 unused1, s32 arg2) {
             }
             break;
         case 2:
-            temp_a0 = D_800E54A4->top;
-            temp_a0->x = (u16) (temp_a0->x - (u16) D_800E54A4->topStep);
-            temp_a0_2 = D_800E54A4->bottom;
-            temp_a0_2->x = (u16) (temp_a0_2->x + (u16) D_800E54A4->bottomStep);
-            temp_v0_3 = D_800E54A4->timer - 1;
-            D_800E54A4->timer = temp_v0_3;
-            if (temp_v0_3 <= 0) {
+            closeTop = D_800E54A4->top;
+            closeTop->x = (u16) (closeTop->x - (u16) D_800E54A4->topStep);
+            closeBottom = D_800E54A4->bottom;
+            closeBottom->x = (u16) (closeBottom->x + (u16) D_800E54A4->bottomStep);
+            closeFramesLeft = D_800E54A4->timer - 1;
+            D_800E54A4->timer = closeFramesLeft;
+            if (closeFramesLeft <= 0) {
                 D_800E54A4->ready = 3;
                 MarkMenuEventHandled();
                 func_80298368_de(D_800E54A4->focus);

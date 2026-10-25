@@ -12,14 +12,14 @@
 
 
 extern void func_802A2394_de(void);
-void func_8043577C_de(s32 arg0) {
+void func_8043577C_de(s32 focusEntry) {
     s32 var_v0;
 
     func_802A2394_de();
     D_800E54A4->ready = 5;
     D_800E54A4->timer = 4;
-    D_800E54A4->focus = arg0;
-    if (arg0 == -2) {
+    D_800E54A4->focus = focusEntry;
+    if (focusEntry == -2) {
         switch(D_801462C8.controllerMode) {
         case 0:D_800E54A4->focus=7;break;
         case 2:D_800E54A4->focus=7;break;
