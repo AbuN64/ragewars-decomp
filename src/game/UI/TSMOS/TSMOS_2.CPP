@@ -13,7 +13,7 @@ extern void func_80253908_de(s32 a);
 extern void func_80414360_de(void);
 extern void func_802A16F8_de(s32 a);
 extern void func_80297FA0_de(s32 a, void *b);
-extern void func_8040FB94_de(void *a);
+extern void Frontend_OpenResourceArchive(void *a);
 extern void func_8041B5E0_de(void);
 extern void func_8041989C_de(void);
 extern void func_8041A400_de(void);
@@ -34,7 +34,7 @@ void func_802A2224_de(void) {
     func_80414360_de();
     func_802A16F8_de(0x3000);
     func_80297FA0_de(0x23, D_0043C320_de);
-    func_8040FB94_de(D_auto_rodata_func_802A2224_de_800C5DA0);
+    Frontend_OpenResourceArchive(D_auto_rodata_func_802A2224_de_800C5DA0);
     func_8041B5E0_de();
     func_8041989C_de();
     func_8041A400_de();

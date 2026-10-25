@@ -14,7 +14,7 @@ extern void func_80253908_de(s32);
 extern void func_80414360_de(void);
 extern void func_802A16F8_de(s32);
 extern void func_80297FA0_de(s32, s32);
-extern void func_8040FB94_de(char *);
+extern void Frontend_OpenResourceArchive(char *);
 extern void func_8041B5E0_de(void);
 extern void func_8041989C_de(void);
 extern void func_8041A400_de(void);
@@ -33,7 +33,7 @@ void InitFrontendMenus(void) {
     func_80414360_de();
     func_802A16F8_de(0x3000);
     func_80297FA0_de(0x23, (s32)D_0043C500);
-    func_8040FB94_de(D_800C6080_eu_x);
+    Frontend_OpenResourceArchive(D_800C6080_eu_x);
     func_8041B5E0_de();
     func_8041989C_de();
     func_8041A400_de();
