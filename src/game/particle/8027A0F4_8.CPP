@@ -1,4 +1,5 @@
 #include "COMMON/TRIPLE.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"
@@ -214,7 +215,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
             }
         }
         mask = 1;
-        if (D_801462E5 != 0) {
+        if (D_80145088.settings.local != 0) {
             mask = 2;
         }
         for (i = first; i <= last; i++) {
@@ -282,12 +283,12 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     break;
             }
             if (entry->flags & 0x2000000) {
-                if (D_801462E3 == 0 || !(arg11 & 1)) {
+                if (D_801462C8.firstListMode == 0 || !(arg11 & 1)) {
                     ok = 0;
                 }
             }
             if (entry->flags & 0x4000000) {
-                if (D_801462E3 != 0) {
+                if (D_801462C8.firstListMode != 0) {
                     ok = 0;
                 }
             }
@@ -382,7 +383,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 if (effect->entry->flags & 0x2000000) {
                     if (effect->flags & 2) {
                         layer = 2;
-                    } else if (D_801462E3 == 2) {
+                    } else if (D_801462C8.firstListMode == 2) {
                         layer = 1;
                     }
                 }

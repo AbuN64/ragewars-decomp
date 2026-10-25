@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/VIDEO_DIMENSIONS.H"
 #include "COMMON/LONE/D_800E28D4.H"
 #include "RENDER_4/8026AC38.H"
@@ -38,7 +39,6 @@ extern struct Shape_typemap_6 D_800E41C0[];
 extern s32 D_800E28D0;
 
 
-extern struct SettingsE D_801462C8;
 
 extern void func_8041C7F4_de(char *);
 
@@ -74,7 +74,7 @@ s32 func_80426CE4_de(void *unused0, void *unused1, s32 event) {
         D_800D15E4[2] = 255.0f;
         D_800D15E4[3] = 255.0f;
         views = 1;
-        if (D_801462C8.players == 2) {
+        if (D_801462C8.controllerMode == 2) {
             views = 2;
         }
         for (i = 0, k = 0; i < views; i++, k = 2) {
@@ -82,7 +82,7 @@ s32 func_80426CE4_de(void *unused0, void *unused1, s32 event) {
             func_8041C7F4_de(D_800E4690->panels[i]);
             gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WD - 1, SCREEN_HT - 1);
         }
-        if (D_801462C8.players != 2 && GetMenuScreenOwner() != 0x19) {
+        if (D_801462C8.controllerMode != 2 && GetMenuScreenOwner() != 0x19) {
             if (D_800E4690->frames < 20) {
                 if (++D_800E4690->frames == 20) {
                     k = D_800E4690->selection;
@@ -122,7 +122,7 @@ void func_80427008_de(void) {
         func_80265688_de(D_800E4690->pending, i, 0);
         i++;
     } while (i < 36);
-    switch (D_801462D5) {
+    switch (D_801462C8.controllerMode) {
     case 1:
         i = 0;
         do {

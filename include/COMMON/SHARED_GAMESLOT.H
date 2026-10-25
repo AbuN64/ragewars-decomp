@@ -21,12 +21,12 @@ struct Shared_GameSlot {
 typedef struct Shared_Game Shared_Game;
 struct Shared_Game {
     u32 flags;
-    u8 unknown04[4];
+    s32 unlockedLevels; /* 0x04: one bit per level, tested with levelBit() */
     u32 sceneMask; /* 0x08: bits tested against each actor definition */
     u8 unknown0C;
     u8 controllerMode;
     u8 unknown0E[2];
-    s32 buttons;
+    u32 buttons; /* 0x10 */
     u16 packedOptions; /* 0x14 */
     u8 hudFade;
     u8 unknown17;
@@ -46,7 +46,11 @@ struct Shared_Game {
             s8 players; /* +0x25 */
             s8 trialOther; /* +0x26: func_8042EB10_de */
             s8 trialScore; /* +0x27 */
-            u8 unknown28[0x120];
+            u8 unknown28[3];
+            u8 bonusIcon; /* +0x2B: shows the 0x2DA HUD icon */
+            u8 unknown2C;
+            u8 menuToggles[9]; /* +0x2D: on/off rows 2..9 of the options list (+0x34 unused) */
+            u8 unknown36[0x148 - 0x36];
             Shared_GameSlot slots[8];
             u8 unknown5F8[0x34];
             s32 unk62C;

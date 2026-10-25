@@ -1,4 +1,5 @@
 #include "COMMON/MENUSELECTIONMESSAGE.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SCREEN.H"
 #include "TYPES.H"
 extern struct SoundOptionsScreen *D_800E58A0;
@@ -22,7 +23,6 @@ extern struct SoundOptionsScreen *D_800E58A0;
 
 
 
-extern u8 D_801462E1;
 
 extern s32 func_8041A470_de(void *);
 
@@ -69,7 +69,7 @@ s32 func_80439018_de(void) {
         return 0;
     }
     value = func_8041A6E0_de(D_800E58A0->effects);
-    options = &D_801462E1;
+    options = &D_801462C8.volume[1];
     if (value != options[0]) {
         options[0] = value;
         func_8025DF34_de(0x460);

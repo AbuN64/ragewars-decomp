@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -76,7 +77,6 @@ void func_80290950_de(void *, void *);
 extern struct ActorDefinitionHeader D_8011B200;
 extern struct ActorDefinitionHeader D_8011B388;
 
-extern u8 D_801462E5;
 extern s32 D_800CD764_de[];
 
 
@@ -128,7 +128,7 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVect
   {
     *arg1 += 1;
   }
-  if (D_801462E5 != 0)
+  if (D_801462C8.local != 0)
   {
     ((SceneEffect *)(temp_s0))->definition = &D_8011B200;
   }

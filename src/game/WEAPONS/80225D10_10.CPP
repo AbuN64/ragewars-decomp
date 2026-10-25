@@ -449,7 +449,7 @@ s32 func_8022AC00_de(void *arg0) {
     } else {
         value = ((ActorHealthDefinition *)((ObjectLinks1454_3 *)o)->unk_18)->health << 8;
     }
-    if (D_801462D5 == 1 && ((ObjectLinks1454_3 *)(o))->unk_1450 == 0) {
+    if (D_801462C8.controllerMode == 1 && ((ObjectLinks1454_3 *)(o))->unk_1450 == 0) {
         value += D_800FEB10[((ObjectLinks1454_3 *)(o))->unk_5D4].value;
     }
     return value;
@@ -461,7 +461,7 @@ int func_8022ACB8_de(Player_func_8022ACB8_de *player, int slot) {
     if (slot == -1) {
         return 0;
     }
-    if (D_801462D5 != 1) {
+    if (D_801462C8.controllerMode != 1) {
         value = player->loadout->capacity[slot];
     } else {
         value = D_800CE3E8[slot];

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/OBJECTSTATE96.H"
@@ -14,7 +15,6 @@
 
 
 
-extern u8 D_801462E5;
 extern char D_80102B00[];
 extern Course *D_800E4680;
 extern s32 D_801371D4;
@@ -22,6 +22,8 @@ extern s32 D_801371D4;
 extern s32 func_8022F454_de(char *, s32);
 extern void func_8044952C_de(SharedPlayer *);
 
+extern u8 D_801462D5; /* MIXED func_8044972C_de */
+extern u8 D_801462E5; /* MIXED func_8044972C_de */
 void func_8044972C_de(SharedPlayer *player) {
     s32 scale;
 

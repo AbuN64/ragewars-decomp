@@ -1,4 +1,5 @@
 #include "COMMON/MODEL_RENDER.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "RENDER_4/8026AC38.H"
 #include "COMMON/MANAGER.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -30,7 +31,6 @@ void func_80250274_de(void *);
 
 void Instance_DrawModel(void *);
 
-extern u8 D_801462E5;
 
 extern void func_80253F8C_de(s32 arg0, s32 arg1);
 
@@ -84,7 +84,7 @@ signed char Scene_GetPropGeometryIndex(struct PlacedProp *object) {
 }
 
 void func_80250A9C_de(void *owner) {
-    if (D_801462E5 != 0) {
+    if (D_801462C8.local != 0) {
         Instance_DrawModel(owner);
         return;
     }
@@ -190,7 +190,7 @@ int func_80250DE0_de(void *object) {
 s8 func_80250E14_de(LevelActor *actor) {
     void *definition;
 
-    if (D_801462E5 != 0) {
+    if (D_801462C8.local != 0) {
         return ((struct ResourceFadeDefinition *)actor->definition)->nearValue;
     }
     definition = actor->definition;

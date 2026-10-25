@@ -122,7 +122,6 @@ struct OptionsBuildSettings {
 struct OptionsCommitContext;
 typedef struct OptionsCommitContext OptionsCommitContext;
 
-extern u8 D_8014222C;
 
 extern int D_800E1AFC_de[];
 extern int D_800E1B7C[];

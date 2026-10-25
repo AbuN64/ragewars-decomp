@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "MENU/OPTIONEDITSTATE.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
@@ -10,9 +11,8 @@
 extern s32 D_800E63B4, D_800E63B0;
 
 s32 func_80444F98_de(void *first, void *second, void *third) { func_8025E214_de(-1); func_8025E29C_de(0); if (D_800E63B4 != 0) { func_8025E360_de(); } func_8025E2D4_de(D_800E63B0); func_80264A0C_de(); return func_80442384_de(first, second, third); }
-extern u8 D_801462E2;
 
-s32 func_80445020_de(void *first, void *second) { u8 *option = &D_801462E2; s32 value = *option; value = Pak_AdjustValue(second, value, 8, 0, 0xFF, 0); if (value == 0xF7) { value = 0xF8; } *option = value; return 0; }
+s32 func_80445020_de(void *first, void *second) { u8 *option = &D_801462C8.volume[2]; s32 value = *option; value = Pak_AdjustValue(second, value, 8, 0, 0xFF, 0); if (value == 0xF7) { value = 0xF8; } *option = value; return 0; }
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
@@ -39,7 +39,7 @@ s32 func_80444F98_de(void *first, void *second, void *third) {
 extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 s32 func_80445020_de(void *first, void *second) {
-    u8 *option = &D_801462E2;
+    u8 *option = &D_801462C8.volume[2];
     s32 value = *option;
 
     value = Pak_AdjustValue(second, value, 8, 0, 0xFF, 0);

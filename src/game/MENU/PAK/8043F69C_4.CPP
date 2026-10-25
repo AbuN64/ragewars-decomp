@@ -67,7 +67,7 @@ void func_8043FE3C_de(func_80254D70_S2 *arg0, func_8043FFAC_S5 *arg1, s32 arg2, 
 
     var_s5 = 1;
     if ((func_802934F8_de() == 0) || !(arg0->unk8 & 0x40000000)) {
-        if (D_801462E5 != 0) {
+        if (D_80145088.settings.local != 0) {
             if (arg0->unk8 < 0) {
                 if (System_GetMemorySize() == 0x400000) {
                     goto block_5;
@@ -179,7 +179,7 @@ void func_804402DC_de(MenuOption *arg0, MenuOptionBox *arg1, s32 arg2, MenuOptio
     f32 height;
     s32 *active;
 
-    if (((func_802934F8_de() != 0) && (arg0->flags & 0x40000000)) || ((D_801462E5 != 0) && (arg0->flags < 0) && (System_GetMemorySize() == 0x400000))) {
+    if (((func_802934F8_de() != 0) && (arg0->flags & 0x40000000)) || ((D_80145088.settings.local != 0) && (arg0->flags < 0) && (System_GetMemorySize() == 0x400000))) {
         arg3->highlighted = 1;
         if (D_800E1E20 != 3) {
             D_800E1E20 = 3;
@@ -193,7 +193,7 @@ void func_804402DC_de(MenuOption *arg0, MenuOptionBox *arg1, s32 arg2, MenuOptio
         bottom += height;
         active = &D_80146894;
         if (*active != 0) {
-            if (D_801462E5 == 0) {
+            if (D_80145088.settings.local == 0) {
                 var_v1 = 0x80;
             } else if (arg0->flags < 0) {
                 var_v1 = 0xFF;

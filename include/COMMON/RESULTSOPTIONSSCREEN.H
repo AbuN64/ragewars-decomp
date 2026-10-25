@@ -77,7 +77,6 @@ struct State_func_80428214_de {
     SlotCode80423280 slots[4];
 };
 
-extern u8 D_801462D5;
 
 
 

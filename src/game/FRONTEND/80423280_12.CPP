@@ -444,7 +444,7 @@ s32 func_8042D4FC_de(void *window, void *unused1, s32 event) {
         } else {
             func_8040E8D8_de(window, 0);
             MarkMenuEventHandled();
-            if (D_801462D5 == 0) {
+            if (D_801462C8.controllerMode == 0) {
                 D_80146918 = 0;
                 D_801468F4 = 0;
                 if (func_8042AF28_de() != 0 && func_8042ACD8_de() != 0) {

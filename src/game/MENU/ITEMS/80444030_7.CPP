@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "MENU/HOLDERRECAT1CV2.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "COMMON/UNUSED.H"
@@ -42,7 +43,7 @@ extern s32 func_80441FE8_de(LayeredText *);
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 s32 func_8044488C_de(LayeredText *field) {
     char *text;
-    s32 value = D_801462DC >> 4;
+    s32 value = D_801462C8.packedOptions >> 4;
 
     if (value == 0) {
         field->text = D_800D35EC;

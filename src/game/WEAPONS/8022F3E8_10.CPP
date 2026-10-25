@@ -1,4 +1,5 @@
 #include "COMMON/AIPROFILE.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_800E0D44.H"
 #include "COMMON/LONE/D_800DCC68.H"
 #include "COMMON/LONE/D_800D30BC.H"
@@ -178,7 +179,7 @@ static inline s32 can_fire(Player *player) {
     if (player->computer != 0) {
         return 1;
     }
-    if (D_801462D5 != 1) {
+    if (D_801462C8.controllerMode != 1) {
         return 1;
     }
     ammo = func_8022F55C_de(&D_80102B00[player->slot * 0x190], player->selectedAction);

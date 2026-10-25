@@ -93,7 +93,6 @@ void * func_8022C55C_de(void *, u32);
 
 
 
-extern u8 D_801462DE;
 
 /* Advances an elimination round when rule D_80146918 is on and not paused (func_80245784_de,
    func_80245798_de): counts the players still in, clears D_800F7D10 while one is waiting, then by the
@@ -110,6 +109,8 @@ s32 func_802282EC_de(Round *arg0);
 
 
 
+extern u8 D_801462D5; /* MIXED func_80227038_de */
+extern u8 D_801462DE; /* MIXED func_80227038_de */
 void func_80227038_de(s8 *world) {
     CGameStatus *initial_rules; 
     CGameStatus *select_rules; 

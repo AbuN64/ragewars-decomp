@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 
 #if defined(VERSION_US)
 #ifdef NON_MATCHING
@@ -173,8 +174,6 @@ typedef struct LevelSelectOwner {
     LevelSelectDescriptor *descriptor;
 } LevelSelectOwner;
 extern s32 D_80154034;
-extern s32 D_801462CC;
-extern u8 D_801462E5;
 
 static inline s32 levelBit(s32 level) {
     s32 bit;
@@ -223,7 +222,7 @@ static inline s32 firstUnlocked(void) {
     s32 level = 0;
     s32 i;
     for (i = 0; i < 11; i++) {
-        if (D_801462CC & levelBit(level)) {
+        if (D_801462C8.unlockedLevels & levelBit(level)) {
             return level;
         }
         level++;
@@ -244,7 +243,7 @@ void func_8043C72C_us(LevelSelectOwner *owner) {
     } else {
         owner->descriptor->flags &= 0xFE7FFFFF;
     }
-    if (D_801462E5) {
+    if (D_801462C8.local) {
         owner->descriptor->flags &= 0xFE7FFFFF;
     }
 }

@@ -108,13 +108,13 @@ s32 func_8043E6A4_de(void *arg0, struct Shape_typemap_114 *obj)
     } else {
         scale = D_800DE330_de;
     }
-    D_80142228 = scale;
+    D_801462C8.speedFactor = scale;
     return 0;
 }
 
 #include "COMMON/SHARED_DEBUGFIELD.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-extern f32 D_80142228, D_800DE338;
+extern f32 D_800DE338;
 extern char *D_800D3DD8[], *D_800D3DDC[];
 extern char D_800DE2F8[];
 extern s32 func_80441FE8_de(void *);
@@ -127,7 +127,7 @@ s32 func_8043E7AC_de(Shared_DebugWidget *widget) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     if (game->speedFactor == D_800DE338) {
 #else
-    if (D_80142228 == D_800DE338) {
+    if (D_801462C8.speedFactor == D_800DE338) {
 #endif
         widget->text = D_800D3DDC;
     } else {

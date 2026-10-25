@@ -1,4 +1,5 @@
 #include "COMMON/OBJRECAT18V6.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/OBJECTLINKSC_2.H"
 #include "TYPES.H"
@@ -19,7 +20,6 @@ extern void func_802A9234_de(s32 color);
 
 
 extern s32 D_800E28D0;
-extern u8 D_801462DE;
 
 extern s32 func_80245798_de(void);
 extern s32 func_802934F8_de(void);
@@ -101,7 +101,7 @@ void func_802A7660_de(Hud *hud, s32 which) {
     left = x + 0x50;
     inset = x - 0x70;
     right = inset + D_800E28D0;
-    fade = &D_801462DE;
+    fade = &D_801462C8.hudFade;
     func_802AAA54_de(left, (s32) ((f32) y + scale * 9.0f),
                   left + ((right - left) * bar->fill) / 100,
                   (s32) ((f32) y + scale * 15.0f), red, green, blue,

@@ -1,4 +1,5 @@
 #include "COMMON/GAMEPLAY_MOVEMENT.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/WORLD.H"
 #include "RENDER_2/802192C0_3.H"
 #include "GFX/TEXT/8022BA90_4.H"
@@ -185,7 +186,7 @@ void func_80220ED4_de(SharedPlayer *player)
     enable = (game - 1)->flags == 0;
   }
   func_8025E418_de(enable);
-  if (D_801462E5 == 0)
+  if (D_80145088.settings.local == 0)
   {
     if ((!((D_801421D0 != 0) && (player->views5E8.view688_43.input.held & 0x20))) && (player->views5E8.view688_43.input.pressed & 0x800))
     {
@@ -198,7 +199,7 @@ void func_80220ED4_de(SharedPlayer *player)
         player->unk13D4 = 1;
       }
     }
-    if ((((D_801462E5 == 0) && (!((player->views5E8.viewCB8_163.unkCB8 != 0) && (player->views5E8.view938_162.unk938 != 0)))) && (!((D_801421D0 != 0) && (player->views5E8.view688_43.input.held & 0x20)))) && (player->views5E8.view688_43.input.pressed & 0x200))
+    if ((((D_80145088.settings.local == 0) && (!((player->views5E8.viewCB8_163.unkCB8 != 0) && (player->views5E8.view938_162.unk938 != 0)))) && (!((D_801421D0 != 0) && (player->views5E8.view688_43.input.held & 0x20)))) && (player->views5E8.view688_43.input.pressed & 0x200))
     {
       slotInfo = D_800D052C[player->views5E8.view770_113.weapon];
       next770 = slotInfo->viewsC.viewC_0.next_s;
@@ -261,7 +262,7 @@ void func_80220ED4_de(SharedPlayer *player)
     player->views5E8.view65C_32.unk65C = player->views5E8.view664_27.unk664;
     model = actor->views0.view14_6.model;
     func_80222908_de(player, actor, Sound_FindActorModelEntry(actor));
-    if (D_801462E5 == 0)
+    if (D_80145088.settings.local == 0)
     {
       pos = &player->views0.view8_3.pos;
       if (((model != 0) && (pos != 0)) && (model->flags & 0x40))
@@ -623,7 +624,7 @@ void func_80220ED4_de(SharedPlayer *player)
   if (human)
   {
     sound = 102;
-    if (D_801462E5 != 0)
+    if (D_80145088.settings.local != 0)
     {
       if ((D_801468F4 != 0) && (player->views5D8.view5D8_9.profile->remote != 0))
       {

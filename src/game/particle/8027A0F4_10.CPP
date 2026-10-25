@@ -1,4 +1,5 @@
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -178,7 +179,6 @@ void func_80282E98_de(void *particle, void *player) {
     Particle_StopSound(particle);
 }
 
-extern u8 D_801462E3;
 
 
 
@@ -190,7 +190,7 @@ void func_80283064_de(void *actor, s32 *arg1) {
     if ((((Shared_Particle *)actor)->desc->flags) & 0x02000000) {
         if (((Shared_Particle *)actor)->flags & 2) {
             result = 2;
-        } else if (D_801462E3 == 2) {
+        } else if (D_801462C8.firstListMode == 2) {
             result = 1;
         }
     }

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/PROBE.H"
 #include "TYPES.H"
@@ -71,7 +72,6 @@ typedef struct InteractionActor {
     char pad1C[0xE4]; s32 flags; char pad104[0x9C]; InteractionLink *attached;
     char pad1A4[0x34]; InteractionLink *player;
 } InteractionActor;
-extern u8 D_801462E5;
 s32 func_8024D160_de(InteractionActor *actor) {
     s32 flags;
     InteractionLink *link;
@@ -80,7 +80,7 @@ s32 func_8024D160_de(InteractionActor *actor) {
     case 11:
         if (actor->kind == 1 && (actor->flags & 0x300000) != 0) {
             link = actor->player;
-            if (D_801462E5 != 0 && link->linked != 0) return 0;
+            if (D_801462C8.local != 0 && link->linked != 0) return 0;
         }
     case 8: return 1;
     case 0: return actor->descriptor->flags & 2;

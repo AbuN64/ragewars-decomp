@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ACTIVE.H"
@@ -12,13 +13,12 @@
    D_8015402C in D_8011FE88, when the option byte D_801462D5 is one, or D_8015402C itself. */
 
 
-extern u8 D_801462D5;
 extern s32 D_8015402C;
 
 extern struct StateFlags *func_8028D474_de(void *, s32);
 
 s32 func_8042EE34_de(void) {
-    return (D_801462D5 == 1 ? func_8028D474_de(&D_8011FE88, D_8015402C)->flags : D_8015402C) * 10 + 0xBC2;
+    return (D_801462C8.controllerMode == 1 ? func_8028D474_de(&D_8011FE88, D_8015402C)->flags : D_8015402C) * 10 + 0xBC2;
 }
 
 extern Shared_PlayerSettingsRecord D_80146398[];

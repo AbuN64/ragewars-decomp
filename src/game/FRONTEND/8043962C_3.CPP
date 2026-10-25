@@ -1,4 +1,5 @@
 #include "COMMON/WIDGETRECAT1A.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/OBJECTRECAT28.H"
@@ -9,7 +10,6 @@
    func_80298368_de for a time chosen by setting D_801462D5 through jtbl_800DDF70 (20, 15 or 10, and
    3 for any other setting); 0x3DB sends code -1 to func_8042E988_de and calls func_802998A8_de.
    Returns zero. */
-extern u8 D_801462D5;
 extern void MarkMenuEventHandled(void);
 extern s32 func_80299A08_de(void);
 extern void func_80298368_de(s32);
@@ -30,7 +30,7 @@ s32 Frontend_UpdateTimedTransition(void) {
     MarkMenuEventHandled();
     switch (func_80299A08_de()) {
     case MENU_80439F38_986:
-        switch (D_801462D5) {
+        switch (D_801462C8.controllerMode) {
         case 0:
             time = 20;
             break;

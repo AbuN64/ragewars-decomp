@@ -1,4 +1,5 @@
 #include "COMMON/WORLD.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_80103FD0.H"
 #include "include_asm.h"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
@@ -152,7 +153,6 @@ typedef struct {
 typedef struct { s32 value; u8 pad4[0x18C]; } PlayerBonus;
 struct World;
 extern s32 D_801468F4, D_80146938;
-extern u8 D_801462D5;
 struct Shared_World;
 extern void *func_8028CFA0_de(struct Shared_World *, s32, s32);
 
@@ -177,7 +177,7 @@ static inline s32 startHealth(BonusPlayer *player) {
     } else {
         health = player->model->health << 8;
     }
-    if (D_801462D5 == 1 && player->bot == 0) health += ((PlayerBonus *)D_800FEB10)[player->slot].value;
+    if (D_801462C8.controllerMode == 1 && player->bot == 0) health += ((PlayerBonus *)D_800FEB10)[player->slot].value;
     return health;
 }
 void Weapons_InitializePlayerHealth(BonusPlayer *player) {

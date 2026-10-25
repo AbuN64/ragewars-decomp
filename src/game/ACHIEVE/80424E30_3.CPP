@@ -262,7 +262,7 @@ Preset *func_80425C70_de(s32 key, s32 row, s32 column) {
 }
 
 void func_80425D14_de(s32 slot) {
-    switch (D_801462D5) {
+    switch (D_801462C8.controllerMode) {
     case 1:
         func_80265688_de(&D_80102B7E[slot * 0x190], D_8015402C, 1);
         return;

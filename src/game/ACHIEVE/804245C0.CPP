@@ -16,6 +16,7 @@ extern s32 func_80265650_de(void *, s32);
 
 extern void func_80265688_de(u8 *, s32, s32);
 
+extern u8 D_8014222C; /* MIXED func_804243E0_de */
 void func_804243E0_de(s32 player, s32 *awarded) {
     func_8041F2A0_Config *status;
     Shared_Game *globals;

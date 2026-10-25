@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENURECAT20V1.H"
 #include "MULTI/804453C4.H"
 #include "TYPES.H"
@@ -13,7 +14,6 @@
 
 
 
-extern u8 D_801462E5;
 extern s32 func_8025CC6C_de(s32 mask);
 extern void func_8025CAB0_de(s32 value);
 
@@ -23,7 +23,7 @@ void func_8044560C_de(PlayerRecAtC *player) {
     player->state = 2;
     func_802648C8_de();
     mask = 0x800000;
-    if (D_801462E5 != 0) {
+    if (D_801462C8.local != 0) {
         mask = 0xFF7FFFFF;
         player->actor->mask80 &= mask;
         player->actor->maskA8 &= mask;

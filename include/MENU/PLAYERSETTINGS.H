@@ -117,7 +117,6 @@ struct func_8043E5BC_S1 {
 struct StatusView;
 typedef struct StatusView StatusView;
 
-extern float D_80142228;
 
 struct func_8043E5BC_S1;
 typedef struct func_8043E5BC_S1 func_8043E5BC_S1;

@@ -1,4 +1,5 @@
 #include "COMMON/OBJECTLINKSC_2.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "GFX/802A8A94.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJECTSTATE18.H"
@@ -23,7 +24,6 @@ extern void func_802A9234_de(s32);
 
 extern void func_802A7660_de(void *arg0, int arg1);
 
-extern u8 D_801462DE;
 
 extern f32 D_800CB3A8;
 
@@ -88,7 +88,7 @@ void func_802AA7A4_de(void *arg0) {
     func_802A8710_de();
     func_802AAB68_de(D_800C61F0_de, D_800C61F0_de);
     func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
-    func_802A9234_de(D_801462DE);
+    func_802A9234_de(D_801462C8.hudFade);
     if (((Hud *)arg0)->bars[0].enabled != 0) {
         func_802A7660_de(arg0, 1);
     }

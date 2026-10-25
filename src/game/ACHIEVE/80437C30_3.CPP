@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
@@ -133,7 +134,7 @@ s32 func_80438ADC_de(void *window, void *unused1, s32 event) {
             D_80146918 = 0;
             D_801468F4 = 0;
             if (D_80146948 == state && D_8015402C >= 35) {
-                switch (D_801462D5) {
+                switch (D_801462C8.controllerMode) {
                 case 4:
                     next = 3;
                     break;

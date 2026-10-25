@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "MENU/OPTIONEDITSTATE.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
@@ -19,7 +20,7 @@ INCLUDE_ASM("ovl_80400000", func_80445AB8);
 extern char D_800EEE10[], D_800EEE18[];
 #define VOLUME_BYTE D_801462C8.volume[2]
 #else
-#define VOLUME_BYTE D_801462E2
+#define VOLUME_BYTE D_801462C8.volume[2]
 #endif
 /* Shows one of three fixed volume texts for steps zero, fifteen and minus
  * sixteen from the option byte D_801462E2. Other steps are formatted into

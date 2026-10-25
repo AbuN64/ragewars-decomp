@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_800E0D44.H"
 #include "COMMON/LONE/D_800DCC68.H"
 #include "COMMON/LONE/D_800D30BC.H"
@@ -95,7 +96,7 @@ static inline s32 can_fire(char *player) {
     if (((AttackTriggerPlayer *)(player))->unk1450 != 0) {
         return 1;
     }
-    if (D_801462D5 != 1) {
+    if (D_801462C8.controllerMode != 1) {
         return 1;
     }
     ammo = func_8022F55C_de(&D_80102B00[((AttackTriggerPlayer *)(player))->unk5D4], ((AttackTriggerPlayer *)(player))->unk62E);
@@ -157,7 +158,7 @@ static inline s32 can_toggle_mode(Player *player) {
     s32 allowed;
     if (player->cooldown > 0.0f) return 0;
     if (player->computer != 0) return 1;
-    if (D_801462D5 != 1) return 1;
+    if (D_801462C8.controllerMode != 1) return 1;
     allowed = func_8022F55C_de(&D_80102B00[player->slot], player->selectedAction);
     if (allowed == 0) {
         func_8025DF34_de(0xD4D);

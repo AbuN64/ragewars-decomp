@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/S1_5.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -52,7 +53,6 @@ extern void func_8042DEA0_de(void);
 
 
 
-extern u8 D_801462D5;
 
 extern void func_802A2360_de();
 
@@ -131,7 +131,7 @@ s32 func_80422340_de(void) {
         return 0;
     }
     func_802A2394_de();
-    if (D_801462D5 == 0) {
+    if (D_801462C8.controllerMode == 0) {
         func_80245B28_de();
         func_8042B2E4_de();
     }

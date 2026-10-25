@@ -1,4 +1,5 @@
 #include "TYPES.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/EFFECTRENDER.H"
 
 #if defined(VERSION_US_REV1)
@@ -12,8 +13,6 @@ typedef struct LevelSelectOwner {
     u32 unknown00[3];
     LevelSelectDescriptor *descriptor;
 } LevelSelectOwner;
-extern s32 D_801462CC;
-extern u8 D_801462E5;
 
 static inline s32 levelBit(s32 level) {
     s32 bit;
@@ -62,7 +61,7 @@ static inline s32 firstUnlocked(void) {
     s32 level = 0;
     s32 i;
     for (i = 0; i < 11; i++) {
-        if (D_801462CC & levelBit(level)) {
+        if (D_801462C8.unlockedLevels & levelBit(level)) {
             return level;
         }
         level++;
@@ -83,7 +82,7 @@ void func_8043C730_us_rev1(LevelSelectOwner *owner) {
     } else {
         owner->descriptor->flags &= 0xFE7FFFFF;
     }
-    if (D_801462E5) {
+    if (D_801462C8.local) {
         owner->descriptor->flags &= 0xFE7FFFFF;
     }
 }

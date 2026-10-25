@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ENTRYRECAT6C.H"
 
 /* Enters the selected menu state and resolves the default destination from the game mode. */
@@ -19,7 +20,7 @@ void func_8043577C_de(s32 arg0) {
     D_800E54A4->unk50 = 4;
     D_800E54A4->unk3470 = arg0;
     if (arg0 == -2) {
-        switch(D_801462D5) {
+        switch(D_801462C8.controllerMode) {
         case 0:D_800E54A4->unk3470=7;break;
         case 2:D_800E54A4->unk3470=7;break;
         case 1:D_800E54A4->unk3470=9;break;

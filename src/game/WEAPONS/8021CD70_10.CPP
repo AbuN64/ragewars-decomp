@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
@@ -23,7 +24,6 @@
 
 
 extern void *func_802AC950_de(s32);
-extern u8 D_801462D5;
 extern s32 D_800CE3E8[];
 
 
@@ -39,7 +39,7 @@ s32 func_80222BE8_de(void *player, s32 slot, s32 amount) {
     count = (&((Actor_func_8022D290_de *)(player))->unk_0x05F4 + slot);
     if (slot == -1) {
         cap = 0;
-    } else if (D_801462D5 != 1) {
+    } else if (D_801462C8.controllerMode != 1) {
         cap = ((Desc *)((Actor_func_8022D290_de *)(player))->field_0x18)->caps[slot];
     } else {
         cap = D_800CE3E8[slot];
@@ -89,7 +89,6 @@ s32 func_80222BE8_de(void *player, s32 slot, s32 amount) {
 
 
 extern void *func_802AC950_de(s32);
-extern u8 D_801462D5;
 extern s32 D_800CE3E8[];
 
 
@@ -113,7 +112,7 @@ s32 func_80222D64_de(void *context, s32 arg1) {
     if (slot == -1) {
         cap = 0;
     } else {
-        if (D_801462D5 != 1) {
+        if (D_801462C8.controllerMode != 1) {
             base = ((Desc *)((Actor_func_8022D290_de *)(context))->field_0x18)->caps[slot];
         } else {
             base = D_800CE3E8[slot];

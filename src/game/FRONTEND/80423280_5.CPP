@@ -1,4 +1,5 @@
 #include "COMMON/RECRECAT4.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MEASUREDRECAT0V1.H"
 #include "COMMON/MEASURED.H"
 #include "COMMON/MEASUREDRECAT14V4.H"
@@ -109,7 +110,7 @@ s32 func_80426918_de(void *unused0, void *unused1, s32 delta) {
         }
         D_800E4690->state = 3;
         MarkMenuEventHandled();
-        if (D_801462D5 == 4) {
+        if (D_801462C8.controllerMode == 4) {
             func_80298368_de(3);
         } else {
             func_80298368_de(7);
@@ -131,7 +132,7 @@ s32 func_80426918_de(void *unused0, void *unused1, s32 delta) {
     case 5:
         func_8025DF34_de(0xE78);
         func_8040E8D8_de(D_800E4690->button, 0);
-        switch (D_801462D5) {
+        switch (D_801462C8.controllerMode) {
         case 1:
         case 3:
         case 4:

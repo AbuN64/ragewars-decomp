@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/S1_6.H"
 #include "TYPES.H"
@@ -10,7 +11,6 @@
    D_801462D5 through jtbl_800DDEF0 (10, 15 or 10, and 20 for any other setting) and shows the
    screen through func_8043C278_de. Returns zero. */
 extern MenuRules *D_800E5554;
-extern u8 D_801462D5;
 extern void MarkMenuEventHandled(void);
 extern s32 func_80299A08_de(void);
 extern void func_80298368_de(s32);
@@ -37,7 +37,7 @@ s32 Frontend_UpdateTimedScreen(void) {
             func_8025E2D4_de(0x34);
         }
         func_802A2394_de();
-        switch (D_801462D5) {
+        switch (D_801462C8.controllerMode) {
         case 1:
             D_800E5554->locked = 10;
             break;

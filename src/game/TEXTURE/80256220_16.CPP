@@ -1,4 +1,5 @@
 #include "COMMON/EXTERNS_18.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAMEPLAY_ROUND_RULES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/VECTOR4F.H"
@@ -12,7 +13,6 @@
 #include "sdk/os.h"
 #include "TEXTURE/80256220_16.H"
 
-extern u8 D_801462E1;
 extern f32 D_800C3EE0_de;
 
 #include "COMMON/MENU_MATCH_GLOBALS.H"
@@ -39,7 +39,7 @@ extern void *func_802395A4_de(MenuMatchGlobals *arg0, CVector3 *arg1);
 
 s32 func_8025842C_de(void *arg0) {
     char *object = arg0;
-    u8 *bytes = &D_801462E1;
+    u8 *bytes = &D_801462C8.volume[1];
     char *queue;
     u32 mask;
     s32 count;

@@ -1,4 +1,5 @@
 #include "COMMON/LEVEL_ACTOR.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "RENDER_4/8026AC38.H"
 #include "COMMON/MODEL_RENDER.H"
 #include "COMMON/GFX.H"
@@ -187,7 +188,7 @@ static inline s32 max_ammo(SharedPlayerRecV1 *player, s32 type) {
     if (type == -1) {
         return 0;
     }
-    if (D_801462D5 != 1) {
+    if (D_801462C8.controllerMode != 1) {
         max = player->views18.view18_4.character->caps[type];
     } else {
         max = D_800CE3E8[type];

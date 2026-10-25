@@ -1,4 +1,5 @@
 #include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_800E0D44.H"
 #include "COMMON/LONE/D_800DCC68.H"
 #include "COMMON/NAME.H"
@@ -40,7 +41,7 @@ static inline s32 can_fire(char *player) {
     if (((SharedPlayer *)(player))->views1450.view1450_0.unk1450 != 0) {
         return 1;
     }
-    if (D_801462D5 != 1) {
+    if (D_801462C8.controllerMode != 1) {
         return 1;
     }
     ammo = func_8022F55C_de(&D_80102B00[((SharedPlayer *)(player))->views1C.view5D4_45.unk5D4], ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E);

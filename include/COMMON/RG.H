@@ -28,11 +28,4 @@ extern s32 D_800D3D44;
 extern s32 D_800D3D48;
 extern s32 D_800D3D4C;
 extern s32 D_800D3D50;
-extern u8 D_80142236;
-extern u8 D_80142237;
-extern u8 D_80142238;
-extern u8 D_80142239;
-extern u8 D_8014223A;
-extern u8 D_8014223B;
-extern u8 D_8014223D;
 #endif

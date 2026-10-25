@@ -1,4 +1,5 @@
 #include "MENU/TEAMMENU.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/UNUSED.H"
 #include "MENU/80217388.H"
@@ -8,7 +9,6 @@
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "GFX/TEXT/802A8A94_5.H"
 
-extern u8 D_801462DE;
 
 
 extern s32 D_800E28D0;
@@ -41,7 +41,7 @@ void func_802185D0_de(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 count, We
     ItemRecAt18V1 *item;
 
     titleView = player->view;
-    level = D_801462DE + 0x40;
+    level = D_801462C8.hudFade + 0x40;
     fade = menu->open * (level < 0x100 ? level : 255.0f);
     item = items;
     while (--count != -1) {

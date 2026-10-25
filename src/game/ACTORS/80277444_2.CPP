@@ -290,7 +290,6 @@ s32 Actors_QueryLightVolumes(Bounds *bounds, void *table, void **out, s32 *count
 typedef struct { s16 x, y, z; u16 flags; s16 s, t; u8 r, g, b, a; } ColorVertex;
 typedef struct { s32 tag, count; ColorVertex vertices[1]; } ColorMesh;
 typedef struct { f32 x, y, z; } VertexColor;
-extern u32 D_80142218;
 
 /* 2/147 aligned edits left (was 34): only a zeroed a3 the ROM sets before the first branch (a dead init that flow
  * keeps in the original; the stack adjust then stays first). The clamp result is its own local (z channel copy) and
@@ -311,10 +310,10 @@ void Actors_ApplyVertexColors(ColorMesh *mesh, VertexColor *colors) {
     VertexColor color;
     ColorVertex *vertex;
     s32 count, i, channelValue;
-    if (1.0f < (f32)D_80142218 * (1.0f / 255.0f)) {
+    if (1.0f < (f32)D_801462C8.buttons * (1.0f / 255.0f)) {
         whiteBlend = 1.0f;
     } else {
-        whiteBlend = (f32)D_80142218 * (1.0f / 255.0f);
+        whiteBlend = (f32)D_801462C8.buttons * (1.0f / 255.0f);
     }
     vertex = mesh->vertices;
     count = mesh->count;

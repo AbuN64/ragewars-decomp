@@ -1,4 +1,5 @@
 #include "COMMON/TARGET.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "SYSTEM_2/802661FC.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -30,7 +31,6 @@ extern void func_80266810_de(void *, s32, s32, Triple, struct IntPair, s32, s32,
 
 
 
-extern u8 D_801462E5;
 
 extern Carrier D_801041F0;
 
@@ -108,7 +108,7 @@ f32 func_802676EC_de(Actor_func_802676EC_de *self, Target *target, CVector3 posi
     if (self->flags & 0x300000) {
         player = self->player;
     }
-    if (D_801462E5 != 0 && (flags & 0x200)) {
+    if (D_801462C8.local != 0 && (flags & 0x200)) {
         shielded = 0;
     }
     if (target->kind == 2) {

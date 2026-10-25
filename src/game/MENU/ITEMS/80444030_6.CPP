@@ -1,4 +1,5 @@
 #include "MENU/HOLDERRECAT1CV2.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "stddef.h"
 #include "TYPES.H"
@@ -142,9 +143,6 @@ extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
                                 /* extern */
 
 
-extern u8 D_801462E5;
-
-extern u32 D_801462D0[];
 void func_804441E4_de(void) {
     D_80154100 = 0;
 }
@@ -160,17 +158,17 @@ char *func_804441F4_de(struct ActorRecAt1C *actor) {
 
 s32 func_8044421C_de(void) {
  if(((s32 (*)(char *))func_80264388_de)(&D_8010B0E0)) {
- switch(D_801462D0[0]) {
- case 8: D_801462D0[0]=32; break;
- case 16: D_801462D0[0]=8; break;
- case 32: D_801462D0[0]=16; break;
+ switch(D_801462C8.sceneMask) {
+ case 8: D_801462C8.sceneMask=32; break;
+ case 16: D_801462C8.sceneMask=8; break;
+ case 32: D_801462C8.sceneMask=16; break;
  }
  }
  if(((s32 (*)(char *))func_802643A0_de)(&D_8010B0E0) || func_8026437C_de(&D_8010B0E0)) {
- switch(D_801462D0[0]) {
- case 8: D_801462D0[0]=16; break;
- case 16: D_801462D0[0]=32; break;
- case 32: D_801462D0[0]=8; break;
+ switch(D_801462C8.sceneMask) {
+ case 8: D_801462C8.sceneMask=16; break;
+ case 16: D_801462C8.sceneMask=32; break;
+ case 32: D_801462C8.sceneMask=8; break;
  }
  }
  return 0;
@@ -183,7 +181,7 @@ s32 func_80444314_de(MenuItemRecAt14 *item) {
     } else {
         item->flags &= ~0x01000000;
     }
-    switch (D_801462D0[0]) {
+    switch (D_801462C8.sceneMask) {
     case 8:
         item->table = D_800D35A8;
         break;
@@ -306,14 +304,14 @@ s32 func_80444674_de(struct Field *field, struct ActorRecAt1C *holder) {
 }
 
 s32 func_804446D8_de(void *first, void *second) {
-    u8 *option = &D_801462E3;
+    u8 *option = &D_801462C8.firstListMode;
 
     *option = Pak_AdjustValue(second, *option, 1, 0, 2, 1);
     return 0;
 }
 
 s32 func_8044472C_de(struct FieldRecAt14 *field) {
-    switch (D_801462E3) {
+    switch (D_801462C8.firstListMode) {
     case 0:
         field->text = D_800D7604;
         break;
@@ -330,7 +328,7 @@ s32 func_8044472C_de(struct FieldRecAt14 *field) {
 }
 
 s32 func_804447A0_de(void *first, void *second) {
-    u8 *option = &D_801462E7;
+    u8 *option = &D_801462C8.unknown1F;
 
     *option = Pak_AdjustValue(second, *option, 1, 0, 1, 1);
     return 0;
@@ -339,12 +337,12 @@ s32 func_804447A0_de(void *first, void *second) {
 s32 func_804447F0_de(StateRecAt14 *arg0) {
     s32 var_v0;
 
-    if ((func_802934F8_de() != 0) && (D_801462E5 == 0)) {
+    if ((func_802934F8_de() != 0) && (D_801462C8.local == 0)) {
         arg0->unk8 = arg0->unk8 & 0xFEFFFFFF;
     } else {
         arg0->unk8 = arg0->unk8 | 0x01000000;
     }
-    switch (D_801462E7) {                           /* irregular */
+    switch (D_801462C8.unknown1F) {                           /* irregular */
     case 0:
         arg0->unk14 = &D_800D35E4;
         break;

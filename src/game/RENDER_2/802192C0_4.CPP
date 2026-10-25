@@ -212,7 +212,7 @@ block_13:
         }
     } else {
 block_17:
-        if (D_801462E5 != 0) {
+        if (D_80145088.settings.local != 0) {
             if ((((struct Shared_ActorView *)player)->ammo[0] > 0) || (((struct Shared_ActorView *)player)->ammo[1] > 0) || (((struct Shared_ActorView *)player)->ammo[2] > 0)) {
                 temp_v1 = ((struct Shared_ActorView *)player)->mode;
                 var_s3_2 = 0;
@@ -620,7 +620,7 @@ void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
         intensity = ((intensity > 0xFF ? 0xFF : intensity) < 0x80) ? 0x80 : (intensity > 0xFF ? 0xFF : intensity);
         delay = 0x1E;
         if (FIELD(void *, player, 0x5DC) != 0) {
-            if (oldHealth > 0xF00 && FIELD(s32, player, 0x5E4) <= 0xF00 && D_801462E5 == 0) {
+            if (oldHealth > 0xF00 && FIELD(s32, player, 0x5E4) <= 0xF00 && D_80145088.settings.local == 0) {
                 Camera_PostScreenMessage(&D_80145088, FIELD(void *, player, 0x5DC), (u8 *)D_800D2A90);
             }
         }

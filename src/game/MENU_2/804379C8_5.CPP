@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENULISTSCREEN.H"
 #include "MENU_2/804379C8_5.H"
 
@@ -25,7 +26,7 @@ s32 func_80438F0C_de(void) {
     cue = func_8041A580_de(0x6F, 0x70, 0xFF);
 #endif
     D_800E58A0->cue0 = cue;
-    func_8041A6EC_de(cue, D_801462E0[0]);
+    func_8041A6EC_de(cue, D_801462C8.volume[0]);
 #if defined(VERSION_DE)
     cue = func_8041A580_de(0x6F, 0x70, 0xFF);
 #elif defined(VERSION_EU_X)
@@ -34,7 +35,7 @@ s32 func_80438F0C_de(void) {
     cue = func_8041A580_de(0x71, 0x72, 0xFF);
 #endif
     D_800E58A0->cue1 = cue;
-    func_8041A6EC_de(cue, D_801462E0[1]);
+    func_8041A6EC_de(cue, D_801462C8.volume[1]);
 #if defined(VERSION_DE)
     func_8041B110_de(0x71);
     cue = func_80419E54_de(0x6C, 0x6E);
@@ -78,10 +79,10 @@ s32 func_80438F0C_de(void) {
     D_800E58A0->handle = func_8041A280_de(0x6C, 0x6D);
     cue = func_8041A580_de(0x6F, 0x70, 0xFF);
     D_800E58A0->cue0 = cue;
-    func_8041A6EC_de(cue, D_801462E0[0]);
+    func_8041A6EC_de(cue, D_801462C8.volume[0]);
     cue = func_8041A580_de(0x71, 0x72, 0xFF);
     D_800E58A0->cue1 = cue;
-    func_8041A6EC_de(cue, D_801462E0[1]);
+    func_8041A6EC_de(cue, D_801462C8.volume[1]);
     func_8041B110_de(0x73);
     cue = func_80419E54_de(0x6E, 0x6E);
     D_800E58A0->state = 3;

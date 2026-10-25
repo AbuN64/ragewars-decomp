@@ -15,7 +15,7 @@ extern void func_80220A80_de(void *, void *);
 extern void func_80245864_de(void *);
 typedef struct InitView { char pad0[4]; u32 flags; char pad8[0xF4]; f32 x, y, z; } InitView;
 /* Initialises an actor and its embedded part at 0x2E8: sets the shared table pointers and flag bits (one flag
- * depends on D_801462E5), runs the part setup calls, then copies the view's position into the actor. */
+ * depends on D_80145088.settings.local), runs the part setup calls, then copies the view's position into the actor. */
 void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s32 index) {
     char *actor = (char *)player;
     char *part = actor + 0x2E8;
@@ -27,14 +27,14 @@ void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s
     *(void **)(actor + 0x1D8) = actor;
     flags = *(u32 *)(actor + 0x100) | 0x100000 | 0x10000 | 0x1000000 | 0x2000000;
     *(u32 *)(actor + 0x100) = flags;
-    if (D_801462E5 == 0) {
+    if (D_80145088.settings.local == 0) {
         *(u32 *)(actor + 0x100) = flags | 0x10000000;
     }
     *(void **)(actor + 0x28C) = D_0024B52C_us_rev1;
     *(void **)(actor + 0x290) = D_0022E0A0_us_rev1;
     *(void **)(actor + 0x280) = D_00219A40_us_rev1;
     *(void **)(actor + 0x288) = D_0022E250_us_rev1;
-    if (D_801462E5 != 0) {
+    if (D_80145088.settings.local != 0) {
         *(void **)(actor + 0x27C) = D_0021A2D4_us_rev1;
     }
     *(void **)(actor + 0x4C0) = actor;

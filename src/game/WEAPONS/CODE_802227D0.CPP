@@ -17,14 +17,13 @@
 
 
 
-extern unsigned char D_801462E5;
 extern s32 func_8022C460_de(void *player);
 
 s32 func_802227F4_de(SharedPlayer *player, void *arg1, s32 state) {
     void (*enter)(void *, void *);
     s32 parameter;
 
-    if (D_801462E5 != 0 && func_8022C460_de(player) != 0 && state != 0x15 && state != 0x13 && state != 0x14) {
+    if (D_801462C8.local != 0 && func_8022C460_de(player) != 0 && state != 0x15 && state != 0x13 && state != 0x14) {
         return 0;
     }
     player->views5E8.view652_20.previous = player->views5E8.view650_16.state;

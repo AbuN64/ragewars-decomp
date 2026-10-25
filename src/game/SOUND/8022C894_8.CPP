@@ -1,11 +1,11 @@
 #include "COMMON/INTEGERSTATE244.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/SHAPE_TYPEMAP_14.H"
 #include "TYPES.H"
 
-extern u8 D_801462E5;
 
 /* Places a marker in front of an actor: takes the node in *slot or allocates one from pool
    D_8013B1A8, turns the offset (0, 0, distance) into world space by the actor's facing through
@@ -38,7 +38,7 @@ u8 func_8022E758_de(s32 unused0, s32 arg1) {
     u8 *ptr;
 
     if (arg1 == 0x2DA) {
-        ptr = &D_801462E5;
+        ptr = &D_801462C8.local;
         if (*ptr != 0) {
             return ptr[0xE];
         }

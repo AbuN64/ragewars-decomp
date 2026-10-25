@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ENTRYRECATE.H"
@@ -203,14 +204,14 @@ s32 Menu_ApplyWeaponPickup(DraftPlayerAB97C *player, DraftPickupAB97C *pickup)
             if (!(game->local && player->config->mode && game->unk62C)) return 0;
         }
     }
-    if (D_801462E5) { if (!(D_800D052C[pickup->index]->flags & 8)) return 0; }
+    if (D_80145088.settings.local) { if (!(D_800D052C[pickup->index]->flags & 8)) return 0; }
     else if (D_800D052C[pickup->index]->flags & 8) return 0;
     owned = player->choices[pickup->index].enabled;
     player->choices[pickup->index].enabled = 1;
     weapon = D_800D052C[pickup->index];
     if (player->current < pickup->index) {
         if (player->flags & 0x1000 ? weapon->flags & 2 : weapon->flags & 1) {
-            if (!D_801462E5 && !owned) player->next = pickup->index;
+            if (!D_80145088.settings.local && !owned) player->next = pickup->index;
         }
     }
     label = pickup->label; sound = pickup->sound; event = pickup->event;

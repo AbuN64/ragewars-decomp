@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/WORLD.H"
 #include "TYPES.H"
 
@@ -195,8 +196,6 @@ typedef struct LevelSelectOwner {
     LevelSelectDescriptor *descriptor;
 } LevelSelectOwner;
 extern s32 D_80154034;
-extern s32 D_801462CC;
-extern u8 D_801462E5;
 
 static inline s32 levelBit(s32 level) {
     s32 bit;
@@ -245,7 +244,7 @@ static inline s32 firstUnlocked(void) {
     s32 level = 0;
     s32 i;
     for (i = 0; i < 11; i++) {
-        if (D_801462CC & levelBit(level)) {
+        if (D_801462C8.unlockedLevels & levelBit(level)) {
             return level;
         }
         level++;
@@ -266,7 +265,7 @@ void func_8043C54C_de(LevelSelectOwner *owner) {
     } else {
         owner->descriptor->flags &= 0xFE7FFFFF;
     }
-    if (D_801462E5) {
+    if (D_801462C8.local) {
         owner->descriptor->flags &= 0xFE7FFFFF;
     }
 }
@@ -520,47 +519,12 @@ typedef struct Shared_MenuInput {
     s32 buttons;
 } Shared_MenuInput;
 
-typedef struct Shared_GameSlot Shared_GameSlot;
-struct Shared_GameSlot {
-    u8 enabled;
-    u8 unknown01[6];
-    u8 slot;
-    s8 kind;
-    u8 unknown09[0x10];
-    u8 controller;
-    u8 unknown1A[2];
-    u8 role;
-    u8 escort;
-    u8 secondListMode;
-    u8 unknown1F[0x77];
-};
-typedef struct Shared_Game Shared_Game;
-struct Shared_Game {
-    u32 flags;
-    u8 unknown04[9];
-    u8 controllerMode;
-    u8 unknown0E[2];
-    s32 buttons;
-    u8 unknown14[7];
-    u8 firstListMode;
-    u8 unknown1C;
-    u8 local;
-    u8 mode1E;
-    u8 unknown1F[0x129];
-    Shared_GameSlot slots[8];
-    u8 unknown5F8[0x34];
-    s32 unk62C;
-    u8 unknown630[0x40];
-    s32 split;
-    u32 unknown674[3];
-    s32 humanWon;
-};
+#include "COMMON/SHARED_GAMESLOT.H"
 
 #include "COMMON/UNUSED.H"
 
 
 extern Shared_Game D_801462C8;
-extern s32 D_801462CC;
 
 extern s32 D_80154034;
 #include "COMMON/GAME_SESSION.H"
@@ -628,7 +592,7 @@ static inline s32 findUnlocked(s32 level, s32 step) {
         } else if (level < 0) {
             level = 10;
         }
-        if (D_801462CC & levelBit(level)) {
+        if (D_801462C8.unlockedLevels & levelBit(level)) {
             return level;
         }
     }
@@ -678,7 +642,7 @@ s32 func_8043C688_de(s32 arg0, Shared_MenuInput *pad) {
 
     if (func_8026437C_de(pad->buttons) != 0) {
         if (target == 8000) {
-            D_80142226 = 1;
+            D_801462C8.mode1E = 1;
             Ovlgame_SelectConfirmingController(pad);
             Render_SetTransitionTarget(&D_8011FAC0, 0x11);
             return 1;

@@ -1,4 +1,5 @@
 #include "COMMON/PROBE.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -62,7 +63,6 @@ extern void Particle_ScaleVector(void *, void *, f32);
 
 extern s32 func_8028FFD0_de(s32, s32, s32, CVector3, CVector3, s32, f32);
 
-extern u8 D_801462E5;
 
 /* Callers write the lean through a pointer (the MIPS hidden result pointer); a native host cannot call a
  * struct-returning function that way, so the host entry takes the pointer and the body stays by value. */
@@ -293,7 +293,7 @@ s32 func_8024DEA0_de(void *arg0) {
     void *temp_a0;
     temp_a0 = (((struct ObjRecAt18V5 *) ((s8 *) arg0))->unk18);
     if ((((struct ObjRecAt14V3 *) ((s8 *) temp_a0))->unk0) == 0xB) {
-        if (D_801462E5 != 0) {
+        if (D_801462C8.local != 0) {
             return (((struct ObjRecAt14V3 *) ((s8 *) temp_a0))->unk14) & 1;
         }
         return 1;

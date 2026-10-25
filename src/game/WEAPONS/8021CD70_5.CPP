@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/OBJRECAT4V6.H"
 #include "COMMON/OBJECTRECAT28.H"
 #include "COMMON/UNUSED.H"
@@ -8,6 +9,7 @@
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "COMMON/EXTERNS_6.H"
 
+extern u8 D_80142233; /* MIXED func_8021E2A0_de */
 void func_8021E2A0_de(SharedPlayer *player, void *view) {
     s32 icon;
     s32 show;
@@ -61,7 +63,7 @@ void func_8021E2A0_de(SharedPlayer *player, void *view) {
 
     icon = player->views5E8.view7B8_100.target;
     show = 1;
-    if (icon == 0x2DA && D_801462E5 != 0) {
+    if (icon == 0x2DA && D_80145088.settings.local != 0) {
         show = D_80142233;
     }
     if (icon != -1) {
@@ -94,7 +96,7 @@ void func_8021E2A0_de(SharedPlayer *player, void *view) {
 
     icon = player->views5E8.view798_96.carried;
     show = 1;
-    if (icon == 0x2DA && D_801462E5 != 0) {
+    if (icon == 0x2DA && D_80145088.settings.local != 0) {
         show = D_80142233;
     }
     if (icon != -1) {

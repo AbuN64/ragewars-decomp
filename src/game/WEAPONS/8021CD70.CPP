@@ -123,7 +123,7 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
         forward = ((CVector3 (*)(void *, CVector3))func_8024BC94_de)(player, unit);
         origin = player->position;
         origin.y += func_8022ADBC_de(player);
-        enable = &D_801462E5;
+        enable = &D_80145088.settings.local;
         if (*enable) {
             other = ((AimGlobals *)(enable - 0x1285))->head;
             if (other) {

@@ -1,4 +1,5 @@
 #include "COMMON/WORLD.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "TYPES.H"
@@ -26,7 +27,6 @@ extern char D_00450AF4;
 extern char D_00450B18;
 extern char D_00450B3C;
 extern char D_80145040;
-extern u8 D_801462E5;
 extern s32 D_80146938;
 
 extern void func_8044A07C_de(void *);
@@ -45,7 +45,7 @@ void Weapons_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
     body->motion[1] = 0;
     body->motion[2] = 0;
     func_8044A07C_de(player);
-    if (D_801462E5 != 0) {
+    if (D_801462C8.local != 0) {
         if (player->views1450.view1450_2.infinite == 0) {
             switch (player->views1C.view5D4_46.slot) {
             case 0:

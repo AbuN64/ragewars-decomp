@@ -36,7 +36,7 @@ void Actors_DispatchTrigger(Trigger *trigger) {
     s32 callback;
     table = D_800CD668_de[trigger->table];
     if (table != 0) {
-        if (D_801462E5 == 0) {
+        if (D_80145088.settings.local == 0) {
             fallback = D_80145088.cameras;
             if (fallback == 0) fallback = &D_80145088.fallbackCamera;
         } else {

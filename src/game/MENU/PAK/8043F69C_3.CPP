@@ -110,7 +110,7 @@ void Pak_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
         break;
     case 1:
         if ((func_802934F8_de() != 0 && (text->flags & 0x40000000)) ||
-            (D_801462E5 != 0 && text->flags < 0 && System_GetMemorySize() == 0x400000)) {
+            (D_80145088.settings.local != 0 && text->flags < 0 && System_GetMemorySize() == 0x400000)) {
             metrics->width = 284;
             metrics->height = 222;
         } else {

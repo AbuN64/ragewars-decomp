@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
 
@@ -15,7 +16,6 @@
 
 
 extern struct Data800E54A4Ptr *D_800E54A4;
-extern u8 D_801462D5;
 extern void func_802A2394_de();
 extern void func_802A2360_de();
 extern void func_80404E28_de(s32);
@@ -58,7 +58,7 @@ s32 func_8042F7A8_de(void *unused0, void *unused1, s32 event) {
         return 0;
     }
     MarkMenuEventHandled();
-    option = D_801462D5;
+    option = D_801462C8.controllerMode;
     if (option >= 5) {
         goto done;
     }

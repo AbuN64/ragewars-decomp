@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "AI/SOURCE.H"
 #include "AI/ACTOR_SETUP_VERSIONS.H"
@@ -20,7 +21,6 @@
 
 
 
-extern s32 D_801462D0;
 
 
 
@@ -76,7 +76,7 @@ void func_802138F0_de(Dest *voice, void *def, ResourceManagerState unused, s32 u
             break;
         }
         if (((ActorDefinitionHeader *)def)->kind == 1 || ((ActorDefinitionHeader *)def)->kind == 4) {
-            switch (D_801462D0) {
+            switch (D_801462C8.sceneMask) {
             case 8:
                 scaled = pitch * D_800C2118_de;
                 level2 = 0.0f;

@@ -1,4 +1,5 @@
 #include "COMMON/LEVEL_ACTOR.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "RENDER_4/8026AC38.H"
 #include "include_asm.h"
 #include "COMMON/EXTERNS_9.H"
@@ -500,9 +501,9 @@ void Render_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
     if (player->selectedWeapon >= 16) model = weaponModel - 0x4B5; }
         goto weapon;
     } else {
-        if (D_801462E5) {
+        if (D_80145088.settings.local) {
             if (player->controls->unk8F && D_80145088.modes.tag && player->health == 0) return;
-            if (D_801462E5 && (player->hidden || player->kind == D_800C9228_de) &&
+            if (D_80145088.settings.local && (player->hidden || player->kind == D_800C9228_de) &&
                 player->health == 0) return;
         }
         if (player->flags & 0x20) func_80228FB8_de(actor, arg1, context);

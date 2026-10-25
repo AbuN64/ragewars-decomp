@@ -134,7 +134,7 @@ static __inline__ void spawn(SpawnDispatchObject *object, s32 id,
     if (id == 0xBD7 && D_80146918 && spawnBlocked()) {
         return;
     }
-    if (id == 0x1388 && D_801462D5 == 1) {
+    if (id == 0x1388 && D_801462C8.controllerMode == 1) {
         id = *D_800E4680 + 0x1388;
         if (id == 0x1388) {
             return;
@@ -155,7 +155,7 @@ static __inline__ void spawnSelected(SpawnDispatchObject *object, SpawnDispatchO
     if (id == 0xBD7 && D_80146918 && spawnBlocked()) {
         return;
     }
-    if (id == 0x1388 && D_801462D5 == 1) {
+    if (id == 0x1388 && D_801462C8.controllerMode == 1) {
         id = *D_800E4680 + 0x1388;
         if (id == 0x1388) {
             return;
@@ -186,7 +186,6 @@ static __inline__ void spawnGroup(SpawnDispatchObject *object, SpawnDispatchOwne
 
 
 
-extern u8 D_801462E5[];
 
 
 
@@ -340,7 +339,7 @@ void func_80205EC4_de(void *levelActor, void *actorMotionState) {
 /* Starts an eligible actor action with a random delay and descriptor duration, applies its flags and callback, then clears the pending flag when required. */
 void func_80205F18_de(Actor_func_80205F18_de *actor, Action *action) {
     ActionInfo *info = &actor->desc->info;
-    if ((info->flags & 0x10) && (D_801462E5[0] == 0 || D_801462E5[1] != 1)) {
+    if ((info->flags & 0x10) && (D_801462C8.local == 0 || D_801462C8.mode1E != 1)) {
         actor->flags &= ~0x100;
         return;
     }
@@ -349,7 +348,7 @@ void func_80205F18_de(Actor_func_80205F18_de *actor, Action *action) {
     action->duration = info->duration;
     if (actor->model == 0x644 || (info->flags & 8)) actor->flags &= ~0x2000;
     Weapons_RequestActorState(actor, action, 0);
-    if (!(info->flags & 0x10) || D_80142226 == 1) return;
+    if (!(info->flags & 0x10) || D_801462C8.mode1E == 1) return;
     actor->flags &= ~0x100;
 }
 

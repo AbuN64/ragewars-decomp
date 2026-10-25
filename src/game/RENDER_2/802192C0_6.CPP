@@ -1,4 +1,5 @@
 #include "RENDER_2/OBJECTSTATE8E.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
@@ -15,7 +16,6 @@
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "ENGINE/SCENE_6.H"
 
-extern u8 D_801462E5;
 
 extern s32 D_801468F4;
 
@@ -46,7 +46,7 @@ void func_8021C9D8_de(void *player, void *camera) {
                   &((LevelActor *)player)->lighting[D_800D297C]);
 
     value = 0x66;
-    if (D_801462E5 != 0) {
+    if (D_801462C8.local != 0) {
         if ((D_801468F4 != 0) &&
             (((Shared_ActorView *)player)->controls->transientFlag != 0)) {
             value = D_800CE47C;

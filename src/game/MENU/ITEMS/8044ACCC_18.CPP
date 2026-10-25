@@ -1,4 +1,5 @@
 #include "COMMON/GAMEPLAY_TRANSITION.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/OBJB.H"
@@ -26,7 +27,6 @@ void func_8044A07C_de(struct Object_func_8044A07C_de *object) {
 
 extern void Weapons_InitializePlayerHealth(void *);
 extern void Render_ResetPlayerWeapons(void *);
-extern u8 D_801462E5;
 extern s32 D_801468F4;
 
 
@@ -45,7 +45,7 @@ void func_8044A0C4_de(Player *arg0, s32 arg1) {
     arg0->state = arg1;
     Weapons_InitializePlayerHealth(arg0);
     Render_ResetPlayerWeapons(arg0);
-    if (D_801462E5 == 0) {
+    if (D_801462C8.local == 0) {
         var_a2 = 0x66;
     } else if (D_801468F4 != 0 && ((Shared_ControlView *)arg0->profile)->transientFlag != 0) {
         var_a2 = D_800CE47C;

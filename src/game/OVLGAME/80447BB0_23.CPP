@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/UNUSED.H"
@@ -16,7 +17,7 @@ extern void func_80220A80_de(void *, void *);
 extern void func_80245864_de(void *);
 typedef struct InitView { char pad0[4]; u32 flags; char pad8[0xF4]; f32 x, y, z; } InitView;
 /* Initialises an actor and its embedded part at 0x2E8: sets the shared table pointers and flag bits (one flag
- * depends on D_801462E5), runs the part setup calls, then copies the view's position into the actor. */
+ * depends on D_80145088.settings.local), runs the part setup calls, then copies the view's position into the actor. */
 typedef struct ActorInitPart {
     u8 pad0[0x18]; InitView *view;
     u8 pad1C[0x34]; f32 x, y, z;
@@ -46,14 +47,14 @@ void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s
     t3 = t2 | 0x1000000;
     flags = t3 | 0x2000000;
     record->part[0].flags = flags;
-    if (D_801462E5 == 0) {
+    if (D_80145088.settings.local == 0) {
         record->part[0].flags = flags | 0x10000000;
     }
     record->part[0].table28C = D_0024B52C_us_rev1;
     record->part[0].table290 = D_0022E0A0_us_rev1;
     record->part[0].table280 = D_00219A40_us_rev1;
     record->part[0].table288 = D_0022E250_us_rev1;
-    if (D_801462E5 != 0) {
+    if (D_80145088.settings.local != 0) {
         record->part[0].action = D_0021A2D4_us_rev1;
     }
     record->part[1].owner = actor;
@@ -113,6 +114,7 @@ typedef struct PlayerRoundReset {
     u8 counters[2][6];
 } PlayerRoundReset;
 
+extern u8 D_801462D5; /* MIXED Ovlgame_ResetPlayerForRound */
 void Ovlgame_ResetPlayerForRound(void *actor, s32 character) {
     s32 i;
     unsigned long counterAddress;
@@ -144,7 +146,7 @@ void Ovlgame_ResetPlayerForRound(void *actor, s32 character) {
         *(u8 *)(counterAddress + 0x64A) = 0;
         counterAddress--;
     } while (--i >= 0);
-    if (D_801462E5 != 0) {
+    if (D_80145088.settings.local != 0) {
         if (D_801462D5 == 1 && FIELD(s32, actor, 0x1450) == 0) {
             u32 value = func_8022F454_de(D_80102B00 + FIELD(s32, actor, 0x5D4) * 0x190, FIELD(s8, FIELD(void *, actor, 0x5D8), 0x80));
             FIELD(s32, actor, 0x133C) = ((value & 0xFF) >> 1) + 1;
@@ -386,7 +388,7 @@ typedef struct RespawnPlayer {
 
 
 static inline int isOnline(void) {
-    return D_801462E5;
+    return D_80145088.settings.local;
 }
 extern unsigned int D_800CD730;
 
@@ -415,7 +417,7 @@ void func_8044952C_de(struct RespawnPlayer *player) {
     player->moving = 0;
     player->fade = D_800C2338_de;
     func_802647E8_de(player->anim, 1);
-    if (D_801462E5 != 0) {
+    if (D_80145088.settings.local != 0) {
         Weapons_InitializePlayerHealth(player);
     } else {
         if (player->isBot == 0) {
@@ -437,7 +439,7 @@ void func_8044952C_de(struct RespawnPlayer *player) {
     player->field13DC = 0;
     player->field13E4 = 0;
     player->field13D4 = 0;
-    if (func_802934F8_de() != 0 && D_801462E5 == 0 && D_800CD730 > 10 && player->state < 11) {
+    if (func_802934F8_de() != 0 && D_80145088.settings.local == 0 && D_800CD730 > 10 && player->state < 11) {
         func_8025E11C_de(D_800CF198[player->state]);
     }
     if (isOnline()) {

@@ -80,7 +80,6 @@ extern u8 *D_800D3DBC;
 extern char D_800DE7B0_de[];
 
 
-extern u32 D_80142218;
 extern u8 *D_800D3624;
 
 extern u8 *D_800D7DD8;

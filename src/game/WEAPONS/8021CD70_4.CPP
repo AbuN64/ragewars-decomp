@@ -1,4 +1,5 @@
 #include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "TYPES.H"
 #include "GFX/TEXT/802A8A94_5.H"
@@ -13,7 +14,6 @@
 
 
 extern s32 D_800E28D0;
-extern u8 D_801462E5;
 extern void func_80239244_de(View *, CVector3 *, f32 *, f32 *);
 
 void func_8021E08C_de(View *view, CVector3 *point, s32 icon, f32 frame, f32 scale, f32 size) {
@@ -35,7 +35,7 @@ void func_8021E08C_de(View *view, CVector3 *point, s32 icon, f32 frame, f32 scal
             || (f32) (*(&D_800E28D0 + 1) + 0x40) < y) {
             return;
         }
-        if (D_801462E5 != 0) {
+        if (D_801462C8.local != 0) {
             x = view->viewport[2] + x / D_800E28D0 * view->viewport[0];
             y = view->viewport[3] + y / *(&D_800E28D0 + 1) * view->viewport[1];
         }

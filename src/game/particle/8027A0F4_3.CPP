@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -1243,7 +1244,6 @@ INCLUDE_ASM("span_1000", func_8027CC20_de);
 
 typedef struct ImpactContext { CVector3 position; char padC[0xE8 - 0xC]; CVector3 normal; } ImpactContext;
 extern ImpactContext D_801001F8;
-extern u8 D_801462E5;
 extern char D_801379C0, D_8013B1A8;
 extern s32 Weapons_GetImpactSlot(void *);
 extern void Particle_UpdateMatrix(void *);
@@ -1360,7 +1360,7 @@ void Particle_HitTarget(void *particle) {
     }
     if (action!=4) {
         draw=1;
-        if (D_801462E5) {
+        if (D_801462C8.local) {
             draw=*source->category!=11;
             if (mode==actor->particle.unk1B9) draw=0;
         }
@@ -1432,7 +1432,7 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
         hit = 4;
         particle->flags |= 2;
     }
-    if (D_801462E5 && Particle_HasSurfaceFlag(particle)) {
+    if (D_801462C8.local && Particle_HasSurfaceFlag(particle)) {
         controlledDesc = particle->desc;
         event = Particle_HasSurfaceFlag(particle) ? 12 : 10;
         particleType = controlledDesc->events->particles[event];

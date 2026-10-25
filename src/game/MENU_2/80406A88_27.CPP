@@ -1,10 +1,10 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 
 #if defined(VERSION_EU_X)
 #ifdef NON_MATCHING
 #include "TYPES.H"
 #define EUP(p, t, o) (*(t *)((u8 *)(p) + (o)))
-extern u8 D_801462E5;
 extern char D_0024B54C_eu[], D_0022E1A8_eu[], D_00219AD8_eu[], D_0022E358_eu[], D_0021A36C_eu[], D_0022F6E0_eu[];
 extern f32 D_800C73E4;
 extern void func_8024B3A8_de(), Weapons_RequestActorState(), func_802325FC_de(), func_80220A80_de(), func_80245864_de();
@@ -20,14 +20,14 @@ void Ovlgame_InitActorParts(u8 *p, void *a1, void *a2) {
     EUP(p, u8 *, 0x1D8) = p;
     flags = EUP(p, u32, 0x100) | 0x100000 | 0x10000 | 0x1000000 | 0x2000000;
     EUP(p, u32, 0x100) = flags;
-    if (D_801462E5 == 0) {
+    if (D_801462C8.local == 0) {
         EUP(p, u32, 0x100) = flags | 0x10000000;
     }
     EUP(p, void *, 0x28C) = D_0024B54C_eu;
     EUP(p, void *, 0x290) = D_0022E1A8_eu;
     EUP(p, void *, 0x280) = D_00219AD8_eu;
     EUP(p, void *, 0x288) = D_0022E358_eu;
-    if (D_801462E5 != 0) {
+    if (D_801462C8.local != 0) {
         EUP(p, void *, 0x27C) = D_0021A36C_eu;
     }
     EUP(p, u8 *, 0x4C0) = p;

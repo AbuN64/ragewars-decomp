@@ -193,8 +193,6 @@ extern void * D_8013D538;
 extern CVector3 D_80141040;
 extern int D_801421B4;
 extern int D_801421D0;
-extern unsigned char D_80142233;
-extern unsigned char D_80142235;
 extern int D_80142848;
 extern int D_8014284C;
 extern unsigned long long D_801428A0;

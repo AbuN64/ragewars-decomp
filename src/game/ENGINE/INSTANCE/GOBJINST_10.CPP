@@ -1,4 +1,5 @@
 #include "COMMON/OBJECTLINKS180_2.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_800CA8C4_de.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -22,7 +23,6 @@
 
 
 
-extern u8 D_801462E5;
 
 extern s32 *func_8024BFD4_de(char *, s8);
 
@@ -101,7 +101,7 @@ s32 func_8024B06C_de(char *obj, CVector3 point, Box70 *out) {
     }
     if (best != 0) {
         *out = *best;
-        if ((((struct ObjectLinks180_2 *) obj)->unk_100 & 0x300000) && D_801462E5 == 0) {
+        if ((((struct ObjectLinks180_2 *) obj)->unk_100 & 0x300000) && D_801462C8.local == 0) {
             ((struct Shield *) ((char *) out))->factor = 1.0f;
         }
     }

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "MENU/OPTIONEDITSTATE.H"
@@ -46,7 +47,7 @@ s32 func_80444D9C_de(LayeredText *item) {
     u8 *text;
     s32 length;
 
-    code = D_80142218 >> 4;
+    code = D_801462C8.buttons >> 4;
     func_8025476C_de((u32)func_8025477C_de() + 2U);
     if (code == 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

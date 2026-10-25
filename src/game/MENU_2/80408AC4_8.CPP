@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CHEATCODE.H"
 #include "TYPES.H"
@@ -24,7 +25,6 @@ s32 func_8043CF44_de(ObjRecAt14V1 *arg0) {
 
 /* Steps index through the eleven entries (wrapping 10 to 0 and below 0 to 10), before the test when mode is 0 and after it otherwise, until one whose flag bit is set in D_801462CC; returns that index, or -1 after eleven tries. */
 
-extern s32 D_801462CC;
 
 s32 func_8043CF84_de(s32 index, s32 step, s32 mode) {
     s32 i;
@@ -76,7 +76,7 @@ s32 func_8043CF84_de(s32 index, s32 step, s32 mode) {
             mask = 0x4000000;
             break;
         }
-        flags = &D_801462CC;
+        flags = &D_801462C8.unlockedLevels;
         if (*flags & mask) {
             return index;
         }

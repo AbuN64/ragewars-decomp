@@ -269,7 +269,7 @@ void Render_ResetPlayerWeapons(struct Player *player) {
                 player->actions[j][1] = -1;
             }
         }
-        switch (D_801462D5) {
+        switch (D_801462C8.controllerMode) {
         case 1:
             func_80426090_de(player);
             break;
@@ -333,7 +333,7 @@ void Render_ResetPlayerWeapons(struct Player *player) {
         player->queuedAction = player->selectedAction;
         player->lastAction = player->selectedAction;
     }
-    if (D_801462E5 != 0) {
+    if (D_80145088.settings.local != 0) {
         weaponInfo = D_800D052C[player->weapon];
         player->weaponAnimationTable = weaponInfo->animation;
         weaponInfo = D_800D052C[player->selectedAction];
@@ -378,7 +378,7 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
         ((Shared_ActorView *)player)->field864 = 0;
         ((Shared_ActorView *)player)->field868 = 0;
     }
-    if (D_801462E5) {
+    if (D_80145088.settings.local) {
         count = func_8044D220_de(world, -1, model, points, 32);
         best = -1;
         bestDistance = 0.0f;

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/OBJECTLINKS1E8.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -31,7 +32,6 @@ extern char D_801379C0;
 
 extern char D_8013B1A8;
 
-extern u8 D_801462E3;
 
 extern s32 D_8011ADB0;
 
@@ -209,7 +209,7 @@ s32 func_802833DC_de(void *arg0) {
     if ((*object->effectFlags) & 0x02000000) {
         if (object->unk5C & 2) {
             result = 2;
-        } else if (D_801462E3 == 2) {
+        } else if (D_801462C8.firstListMode == 2) {
             result = 1;
         }
     }

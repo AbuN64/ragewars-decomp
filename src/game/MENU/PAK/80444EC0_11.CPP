@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "MENU/OPTIONEDITSTATE.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
@@ -19,7 +20,7 @@ INCLUDE_ASM("ovl_80400000", func_804451D0_de);
 extern char D_800EEE10[], D_800EEE18[];
 #define VOLUME_BYTE D_801462C8.volume[0]
 #else
-#define VOLUME_BYTE D_801462E0[0]
+#define VOLUME_BYTE D_801462C8.volume[0]
 #endif
 /* Selects a localized volume label and formats an intermediate value.
  * DE/US-rev1 source and proofs remain preserved separately. */

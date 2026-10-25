@@ -54,7 +54,7 @@ extern void Weapons_InitializePlayerHealth(void *arg0);
 void func_8022E948_de(Player *player) {
     u8 *ptr;
 
-    ptr = &D_801462E5;
+    ptr = &D_80145088.settings.local;
     if (*ptr != 0) {
         return;
     }
@@ -79,7 +79,7 @@ void func_8022E9A8_de(Player *player) {
     s16 alternate;
     u16 temp_a1u;
 
-    ptr = &D_801462E5;
+    ptr = &D_80145088.settings.local;
     if (*ptr != 0) {
         return;
     }

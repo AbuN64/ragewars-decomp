@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 
 #if defined(VERSION_EU)
@@ -159,7 +160,7 @@ loop_7:
     temp_v0_5->alpha = 0xFF;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2636))) = 0;
-    if (((s32) D_801462D5 < 5) && ((s32) D_801462D5 >= 3)) {
+    if (((s32) D_801462C8.controllerMode < 5) && ((s32) D_801462C8.controllerMode >= 3)) {
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
         (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2636))) = 1;
         func_804279B8_de((*(ResultsOptionsScreen **)&D_800E4690));
@@ -170,7 +171,7 @@ loop_7:
     (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2668))) = 0;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2672))) = -1;
-    temp_v1_3 = D_801462D5;
+    temp_v1_3 = D_801462C8.controllerMode;
     switch (temp_v1_3) {                            /* switch 1; irregular */
     default:                                        /* switch 1 */
     case 1:                                         /* switch 1 */
@@ -195,7 +196,7 @@ loop_7:
         func_80428214_de();
         break;
     }
-    if (D_801462D5 != 2) {
+    if (D_801462C8.controllerMode != 2) {
         func_80427B08_de();
     }
     func_8025DF34_de(0xE78);

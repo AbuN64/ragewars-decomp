@@ -1,4 +1,5 @@
 #include "COMMON/MENUSELECTIONMESSAGE.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/OWNERRECAT8V1.H"
@@ -49,7 +50,6 @@ extern void func_8041A6EC_de(void *, s32);
 
 
 
-extern unsigned char D_801462E1[];
 
 extern int func_8041A6E0_de(void *slider);
 
@@ -104,7 +104,7 @@ s32 func_80439240_de(void) {
 #elif defined(VERSION_EU_X)
     slider = func_8041A580_de(0x1D8, 0x1D8 + 1, 0xFF);
 #endif
-    options = D_801462E0;
+    options = D_801462C8.volume;
     D_800E58A4[0] = slider;
     func_8041A6EC_de(slider, options[0]);
 #if defined(VERSION_DE)
@@ -138,6 +138,7 @@ s32 func_80439300_de(void) {
     return 0;
 }
 
+extern unsigned char D_801462E1[]; /* MIXED func_80439308_de */
 int func_80439308_de(void) {
  int value;
  unsigned char *options;

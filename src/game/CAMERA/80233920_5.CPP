@@ -1,4 +1,5 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "TYPES.H"
@@ -14,7 +15,6 @@
 
 extern const f32 D_800C3200_de[];
 extern const f32 D_800C3208_de;
-extern u8 D_801462E5;
 
 
 extern f32 func_802B72B0_de(f32);
@@ -37,7 +37,7 @@ void func_80234DE0_de(GameplayCamera *camera) {
     if (camera->unk7C == 0) {
         return;
     }
-    if (D_801462E5 == 0) {
+    if (D_801462C8.local == 0) {
         radius = camera->unk528 /
                  func_802B6560_de(camera->unk530 * camera->aspect * D_800C3200_de[0]);
         pts[0].x = 0.0f;

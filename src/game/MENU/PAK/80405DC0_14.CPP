@@ -46,7 +46,6 @@ extern char D_0044EAE0[];
 extern char D_80145040[];
 extern char D_8014561C[];
 extern s32 D_80140FB4[];
-extern s32 D_801462CC;
 extern s32 D_8013B2D4;
 extern u8 D_80146848[]; /* D_801462C8+0x580, kept across the options reload */
 /* The ROM stores the clock's seconds/minutes/hours through three separate objects (no shared base
@@ -62,6 +61,7 @@ extern s32 Pak_DeleteNote(s32 ch, s32 index);
 extern struct PakSaveOwner *func_8022A5C0_de(char *profiles, PakMenuSlot *slot);
 extern void Pak_OpenDialog(void *owner, char *message, void *player, void *slot, char *title);
 
+extern s32 D_801462CC; /* MIXED Pak_RestoreSaveBlock */
 s32 Pak_RestoreSaveBlock(void *unused, MenuRecAt24 *menu) {
     struct PakSaveOwner *owner;
     s32 channel;

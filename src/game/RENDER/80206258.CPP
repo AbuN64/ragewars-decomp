@@ -35,7 +35,6 @@ extern void func_80285DB0_de(Shared_World *a, void *b, int c);
 extern char D_80131600;
 
 
-extern u8 D_801462D5;
 
 
 extern SpawnDispatchActor *func_8028FFD0_de(char *, void *, s32, CVector3, Triple, s32, f32);
@@ -94,7 +93,7 @@ void func_802062E0_de(LevelActor *actor, ActorMotionState *owner, Params params,
             return;
         }
     }
-    if (kind == 0x1388 && D_801462D5 == 1) {
+    if (kind == 0x1388 && D_801462C8.controllerMode == 1) {
         kind = *D_800E4680 + 0x1388;
         if (kind == 0x1388) {
             return;

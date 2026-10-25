@@ -404,7 +404,7 @@ scene_size_4b0:
 scene_size_320:
     count = 0x320;
 scene_size_done:
-    if (D_801462E5 != 0) {
+    if (D_80145088.settings.local != 0) {
         count += 0x200;
     }
     func_80253908_de(0);

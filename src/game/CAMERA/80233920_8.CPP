@@ -110,7 +110,7 @@ void func_80236874_de(RaceViewportState *state) {
             view->unk2A8 = 0;
             break;
         case 2:
-            if (D_801462E7 == 0) {
+            if (D_801462C8.unknown1F == 0) {
                 view->unk29C = width;
                 view->unk2A0 = halfHeight;
                 view->unk2A4 = left;

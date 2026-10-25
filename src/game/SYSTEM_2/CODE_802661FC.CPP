@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/TARGET.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -25,14 +26,13 @@ typedef struct DamageActor {
 #include "FX_2/80271B18.H"
 
 
-extern u8 D_801462E5;
 extern s32 func_8024D160_de(void *);
 
 /* Whether source may hurt target: never itself, nor when source is a player whose hit func_8024D160_de refuses;
  * a stand-in (category 2) is safe when its owner is a player canDamage protects, when source owns it and it has
  * property 0x40, or for source kind 1 on team 0xCA against kind 0x14; players (category 1) go through canDamage. */
 static inline s32 canDamage(DamageActor *source, DamageActor *actor) {
-    if (D_801462E5) {
+    if (D_801462C8.local) {
         return 1;
     }
     if (actor->team == source->team) {
@@ -234,7 +234,6 @@ extern void func_802171FC_de(void *, struct CallbackState114 *, CDamageInfo *);
 extern s32 func_80282C8C_de(Shared_ReactionObjectKind *);
 extern s32 func_80282D38_de(Shared_ReactionObjectKind *);
 extern s32 func_80282DEC_de(Shared_ReactionObjectKind *);
-extern u8 D_801462E5;
 extern void *D_801041F0;
 extern s32 D_80100204;
 extern Shield D_80100208, D_80110570;
@@ -328,7 +327,7 @@ static inline f32 scaleHit(Shared_ReactionActor *self, Shared_ReactionActor *tar
     if (self->flags & 0x300000) {
         player = self->unk1D8;
     }
-    if (D_801462E5 != 0 && (flags & 0x200)) {
+    if (D_801462C8.local != 0 && (flags & 0x200)) {
         shielded = 0;
     }
     if (target->category == 2) {
@@ -528,7 +527,6 @@ extern f32 Particle_GetActorHeight(void *arg0);
 
 /* Decides whether one actor may affect another: always when the override D_801462E5 is set; never for actors of the same kind or a target lacking flags 0x310000, nor, while D_8013B290 is set, when neither actor carries 0x300000; otherwise only when the target is in state 1, 4, 7 or 11. */
 
-extern u8 D_801462E5;
 
 
 extern CallbackEntryRecAt4V1 D_800CC130[];
@@ -641,7 +639,7 @@ s32 func_80267528_de(char *actor, char *target)
     LevelActor *destination = (LevelActor *)target;
     s32 flags;
 
-    if (D_801462E5 != 0) {
+    if (D_801462C8.local != 0) {
         return 1;
     }
     if (source->type == destination->type) {

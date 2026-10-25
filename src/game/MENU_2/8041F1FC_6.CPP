@@ -1,4 +1,5 @@
 #include "COMMON/CHARACTERSELECTIONROOT.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
@@ -22,7 +23,6 @@ extern void func_804201A4_de(int, EntryRecAt14V1 *);
 
 
 
-extern u8 D_801462D5;
 
 void MarkMenuEventHandled(void);
 
@@ -128,7 +128,7 @@ s32 func_80420C10_de(s32 unused0, s32 unused1, s32 arg2) {
     temp_a0 = temp_a3->unk14;
     switch (temp_a0) {
     case 1:
-        if (D_801462D5 != 1) {
+        if (D_801462C8.controllerMode != 1) {
             D_800E42D0->phase = 5;
             D_800E42D0->timer = 4;
             D_800E42D0->result = 3;
