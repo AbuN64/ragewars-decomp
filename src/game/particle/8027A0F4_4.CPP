@@ -161,7 +161,7 @@ void Particle_Attach(Shared_Particle *particle, CVector3 *outPosition, CVector3 
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/OBJECTLINKS14C.H"
 #include "COMMON/MATH_HELPERS.H"
-#include "particle/DEPTH_SCALE.H"
+#include "particle/CAMERA_SCALE.H"
 #include "ENGINE/SCENE_11.H"
 
 void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);

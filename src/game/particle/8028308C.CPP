@@ -20,7 +20,7 @@
 #include "particle/8027A0F4_4.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/MATH_HELPERS.H"
-#include "particle/DEPTH_SCALE.H"
+#include "particle/CAMERA_SCALE.H"
 extern void Particle_UpdateMatrix(void *);
 
 extern void func_80279A00_de(void *arg0);
@@ -545,7 +545,7 @@ int func_80284080_de(void) {
 }
 
 /* Size scale for a particle seen through a camera: the out-of-line copy of the inline particleCameraScale
- * (particle/DEPTH_SCALE.H), which Particle_BuildMatrix inlines. */
-f32 Particle_CameraScale(Shared_Particle *particle, f32 depth, GameplayCamera *camera) {
-    return particleCameraScale(particle, depth, camera);
+ * (particle/CAMERA_SCALE.H), which Particle_BuildMatrix inlines. */
+f32 Particle_CameraScale(Shared_Particle *particle, f32 distFromCamera, GameplayCamera *camera) {
+    return particleCameraScale(particle, distFromCamera, camera);
 }
