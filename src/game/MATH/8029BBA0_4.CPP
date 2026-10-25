@@ -376,12 +376,6 @@ s32 func_8029D248_de(f32 *out, f32 *input)
   return result;
 }
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-extern f32 D_800C5B04_de;
-extern f32 D_800C5B08_de;
-
-/* 1/228 aligned edits; remaining: equivalent neg.s source register. */
 /* Invert a 4x4 matrix with partial pivoting. Return one for a singular
  * matrix, leaving the destination untouched until elimination succeeds. */
 s32 InvertMatrix(struct MatrixF *output, struct MatrixF *input)
@@ -407,12 +401,19 @@ s32 InvertMatrix(struct MatrixF *output, struct MatrixF *input)
         }
         for (j = elementIndex + 1; j < 4; j++) {
             entry = augmented[rowOrder[j]][i];
-            absoluteEntry = entry;
-            if (!(0.0f <= absoluteEntry)) absoluteEntry = -absoluteEntry;
+            if (!(0.0f <= entry)) {
+                absoluteEntry = -entry;
+            } else {
+                absoluteEntry = entry;
+            }
             if (value < absoluteEntry) {
                 elementIndex = j;
-                value = entry;
-                if (!(0.0f <= value)) value = -value;
+                if (!(0.0f <= entry)) {
+                    value = -entry;
+                } else {
+                    value = entry;
+                }
+                absoluteEntry = value;
             }
         }
         pivotRow = rowOrder[elementIndex];
@@ -445,6 +446,3 @@ s32 InvertMatrix(struct MatrixF *output, struct MatrixF *input)
     }
     return 0;
 }
-#else
-INCLUDE_ASM("span_1000", InvertMatrix);
-#endif
