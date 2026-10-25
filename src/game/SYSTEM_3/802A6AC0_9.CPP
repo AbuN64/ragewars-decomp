@@ -23,7 +23,7 @@ extern s32 D_800E28D0;
 
 extern s32 Camera_IsSequenceInWindow(void);
 extern s32 func_802934F8_de(void);
-extern s32 func_8040C474_de(void);
+extern s32 Frontend_GetScreenMode(void);
 
 extern void func_802A7AA4_de(void *mover);
 extern void func_802AAA54_de(s32 x0, s32 y0, s32 x1, s32 y1, s32 red, s32 green, s32 blue, u8 alpha);
@@ -55,7 +55,7 @@ void func_802A7660_de(Hud *hud, s32 which) {
     if (func_802934F8_de() == 0) {
         return;
     }
-    wide = func_8040C474_de() == 0 ? 0.75f : 1.0f;
+    wide = Frontend_GetScreenMode() == 0 ? 0.75f : 1.0f;
     scale = D_80140FE8_de.object->b / (f32) D_800E28D4;
     scale = scale * wide;
     switch (which) {

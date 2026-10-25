@@ -148,7 +148,7 @@ extern void Frontend_DrawMenuImage(void *);
 extern void func_8043C2A4_de(void *);
 
 
-extern void func_8040C428_de(s32);
+extern void Frontend_RequestScreenMode(s32);
 
 extern void Items_ResetActorPools(void *, s32);
 
@@ -208,7 +208,7 @@ void func_8042CFDC_de(void) {
 
     state->m_bCTFOn = 0;
     state->m_bFragTagOn = 0;
-    if (func_8042AF28_de() == 0 || func_8042ACD8_de() == 0) {
+    if (Frontend_IsCupSelected() == 0 || func_8042ACD8_de() == 0) {
         func_80298368_de(0x14);
     } else {
         func_8042DEA0_de();
@@ -434,7 +434,7 @@ s32 func_8042D4FC_de(void *window, void *unused1, s32 event) {
             if (D_800E53C0->active != state) {
                 return 0;
             }
-            func_8040C428_de(0);
+            Frontend_RequestScreenMode(0);
             Frontend_SetWidgetFlag08(window, 1);
             object = &D_80145088;
             Items_ResetActorPools(object, 0);
@@ -447,7 +447,7 @@ s32 func_8042D4FC_de(void *window, void *unused1, s32 event) {
             if (D_801462C8.controllerMode == 0) {
                 D_80146918 = 0;
                 D_801468F4 = 0;
-                if (func_8042AF28_de() != 0 && func_8042ACD8_de() != 0) {
+                if (Frontend_IsCupSelected() != 0 && func_8042ACD8_de() != 0) {
                     func_8042DEA0_de();
                     return 0;
                 }

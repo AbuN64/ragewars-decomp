@@ -46,7 +46,7 @@ void func_80293DE8_de(s32 session) {
 void func_80293DF0_de(GameSession *gameSession) {
     D_800E28C8 = -1;
     D_80146D70 = 0;
-    func_8040C428_de(0);
+    Frontend_RequestScreenMode(0);
     D_800CD774 = 1;
     D_80146D60 = 1;
     D_800E28CC = 1;

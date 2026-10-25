@@ -131,7 +131,7 @@ extern s32 D_80146D70;
 
 #include "COMMON/GAME_SESSION.H"
 
-extern void func_8040C428_de(s32);
+extern void Frontend_RequestScreenMode(s32);
 
 extern void func_802A2394_de(void);
 
@@ -381,7 +381,7 @@ s32 func_8041C2AC_de(void *parent) {
     Frontend_SetWidgetFlag08(window, 0);
     D_800E3518->elapsed = 0;
     D_800E3518->state = 0;
-    func_8040C428_de(0);
+    Frontend_RequestScreenMode(0);
     func_802A2394_de();
     D_800E28C8 = -1;
     D_80146D70 = 0;

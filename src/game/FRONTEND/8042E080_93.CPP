@@ -9,7 +9,7 @@ extern void MarkMenuEventHandled(void);
 extern s32 func_80299A08_de(void);
 extern void func_802A2394_de(void);
 extern s32 func_8042ACD8_de(void);
-extern void func_8040C428_de(s32);
+extern void Frontend_RequestScreenMode(s32);
 extern void func_8043C278_de(s32);
 extern void func_80298368_de(s32);
 
@@ -31,7 +31,7 @@ s32 func_804363BC_de(void) {
         D_8011FAC0.clockPaused = 0;
         func_802A2394_de();
         if (func_8042ACD8_de() == 0) {
-            func_8040C428_de(0);
+            Frontend_RequestScreenMode(0);
             func_80298368_de(0x14);
         } else {
             func_8043C278_de(D_800E5558);

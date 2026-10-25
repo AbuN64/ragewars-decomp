@@ -6549,7 +6549,7 @@ typedef struct PowerHudPlayer {
     char pad630[0x7FC]; PowerHudAnimation a,b,c;
     char padEE0[0x4D8]; s32 refreshA,refreshB,refreshC;
 } PowerHudPlayer;
-extern s32 func_8040C474_de(void);
+extern s32 Frontend_GetScreenMode(void);
 extern s32 func_8022AB9C_de(void *);
 extern s32 func_802AA70C_de(void *,s32 *);
 extern void func_802A822C_de(s32,f32,f32,f32,f32,s32,s32,s32);

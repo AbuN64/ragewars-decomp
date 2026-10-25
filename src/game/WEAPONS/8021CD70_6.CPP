@@ -10,7 +10,7 @@ void func_8021EA54_de(PowerHudPlayer *player, Shared_HudView *view) {
     f32 sx,sy,numberScale,offset,halfWidth,x,y;
     sx=view->width/(f32)D_800E28D0;
     sy=view->height/(f32)D_800E28D4;
-    if (func_8040C474_de()==0) {
+    if (Frontend_GetScreenMode()==0) {
         numberScale=D_800C25C4_de;
         offset=D_800C25C8_de;
     } else {
@@ -19,19 +19,19 @@ void func_8021EA54_de(PowerHudPlayer *player, Shared_HudView *view) {
     }
     halfWidth=sx*D_800C25D4_de;
     if(player->first!=player->a.last || player->refreshA) {
-        if(func_8040C474_de()==0) func_802AA70C_de(&player->a,D_800C9288_de);
+        if(Frontend_GetScreenMode()==0) func_802AA70C_de(&player->a,D_800C9288_de);
         else func_802AA70C_de(&player->a,D_800C9288_de+12);
         player->refreshA=0;
         player->a.last=player->first;
     }
     if(player->second!=player->b.last || player->refreshB) {
-        if(func_8040C474_de()==0) func_802AA70C_de(&player->b,D_800C9328_de-12);
+        if(Frontend_GetScreenMode()==0) func_802AA70C_de(&player->b,D_800C9328_de-12);
         else func_802AA70C_de(&player->b,D_800C9328_de);
         player->refreshB=0;
         player->b.last=player->second;
     }
     if(player->third!=player->c.last || player->refreshC) {
-        if(func_8040C474_de()==0) func_802AA70C_de(&player->c,D_800C9368);
+        if(Frontend_GetScreenMode()==0) func_802AA70C_de(&player->c,D_800C9368);
         else func_802AA70C_de(&player->c,D_800C9398_de);
         player->refreshC=0;
         player->c.last=player->third;

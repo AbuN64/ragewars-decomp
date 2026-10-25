@@ -100,7 +100,7 @@ extern f32 D_800D2988;
 
 extern s32 System_GetMemorySize(void);
 
-extern s32 func_8040C3BC_de();
+extern s32 Frontend_GetScreenModePalette();
 
 
 
@@ -279,13 +279,13 @@ s32 func_80444C68_de(struct RecordRecAt14 *record) {
     } else {
         record->flags &= ~0x1000000;
     }
-    record->value = func_8040C3BC_de();
+    record->value = Frontend_GetScreenModePalette();
     return 0;
 }
 
 s32 func_80444CF8_de(void) {
     if (D_80154100 == 0.0f) {
-        func_8040C2F8_de();
+        Frontend_StartScreenModeFade();
         D_80154100 = (18.0f);
         D_80146848 = (u8)D_800E28D8;
     }

@@ -39,7 +39,7 @@ extern void func_802A230C_de(void);
 
 
 extern void Resmgr_CopyString(char *, char *);
-extern void func_8040C428_de(s32);
+extern void Frontend_RequestScreenMode(s32);
 extern s32 Nav_NextRandom(void);
 
 
@@ -127,9 +127,9 @@ void func_8042DEA0_de(void) {
     }
     config = (u8 *)&D_801462C8;
     if (config[0x580] == 2 && humans >= 2) {
-        func_8040C428_de(1);
+        Frontend_RequestScreenMode(1);
     } else {
-        func_8040C428_de(config[0x580]);
+        Frontend_RequestScreenMode(config[0x580]);
     }
     if (func_8025E2C4_de() != 0) {
         func_8025E2D4_de(Nav_NextRandom() % 4 + 0x38);

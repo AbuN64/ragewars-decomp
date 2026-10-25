@@ -110,7 +110,7 @@ extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void Frontend_SetWidgetFlag100(void *, s32);
 extern void func_8025E384_de(void);
-extern s32 func_8042AF28_de(void);
+extern s32 Frontend_IsCupSelected(void);
 extern void func_804221E8_de(void);
 extern void func_802A2394_de(void);
 extern void func_8043C210_de(Shared_OptionsScreen *, s32, s32, s32, s32);
@@ -185,7 +185,7 @@ s32 Menu_OpenOptionsScreen(void *node) {
     func_8041A6EC_de(slider, settings->buttons);
     switch (settings->controllerMode) {
     case 0:
-        if (func_8042AF28_de() == 0) {
+        if (Frontend_IsCupSelected() == 0) {
             Frontend_SetWidgetFlag100(func_8040EC30_de(node, 0x37E), 1);
         }
         handle = func_8040EC30_de(node, 0x380);

@@ -82,7 +82,7 @@ event_29a:
         }
     }
     func_8028EACC_de(scheduler);
-    func_8040C318_de();
+    Frontend_UpdateScreenMode();
     goto loop_1;
 
 event_29b:

@@ -14,17 +14,17 @@ extern struct MenuRules *D_800E5554;
 extern struct MenuRules *Scene_AllocateMemory(s32);
 extern void func_802A2360_de(void);
 extern void func_8043C210_de(struct MenuRules *, s32, s32, s32, s32);
-extern s32 func_8040C474_de(void);
+extern s32 Frontend_GetScreenMode(void);
 
 s32 func_80435E20_de(struct Pair14 *window) {
     D_800E5554 = Scene_AllocateMemory(0x20);
     func_802A2360_de();
     D_800E5554->locked = -1;
     func_8043C210_de(D_800E5554, 0x67, 0, 0, 0);
-    if (func_8040C474_de() == 1) {
+    if (Frontend_GetScreenMode() == 1) {
         window->first = 0x62;
         window->second = 0x45;
-    } else if (func_8040C474_de() == 2) {
+    } else if (Frontend_GetScreenMode() == 2) {
         window->first = 0x69;
     }
     return 0;

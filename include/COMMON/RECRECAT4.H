@@ -132,7 +132,7 @@ extern int D_800E1ACC_de[];
 
 extern void func_8042201C_de();
 
-extern s32 func_8042AF28_de();
+extern s32 Frontend_IsCupSelected();
 enum MatchEnd {
     MATCH_END_TIME_UP,
     MATCH_END_SCORE_LIMIT,

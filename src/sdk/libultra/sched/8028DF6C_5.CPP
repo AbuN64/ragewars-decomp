@@ -19,7 +19,7 @@ extern void osViSetMode(OSViMode *);
 extern void osViBlack(s32);
 extern void func_802BA700_de(s32);
 extern void func_8028EACC_de(OSSched *);
-extern void func_8040C318_de(void);
+extern void Frontend_UpdateScreenMode(void);
 extern void func_8028EDA0_de(void *);
 extern void func_8028F278_de(OSSched *);
 extern void func_8025E318_de(void);
@@ -46,7 +46,7 @@ void func_8028EA40_eu(OSSched *sc) {
                 for (;;) {}
             }
             func_8028EACC_de(sc);
-            func_8040C318_de();
+            Frontend_UpdateScreenMode();
             break;
         case 0x29B: func_8028EDA0_de(sc); break;
         case 0x29C: func_8028F278_de(sc); break;

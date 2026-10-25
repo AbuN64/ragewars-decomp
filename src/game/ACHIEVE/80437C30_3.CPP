@@ -125,7 +125,7 @@ s32 func_80438ADC_de(void *window, void *unused1, s32 event) {
             if (D_800E5830->rules.locked != state) {
                 return 0;
             }
-            func_8040C428_de(0);
+            Frontend_RequestScreenMode(0);
             Frontend_SetWidgetFlag08(window, 1);
             object = &D_80145088;
             Items_ResetActorPools(object, 0);

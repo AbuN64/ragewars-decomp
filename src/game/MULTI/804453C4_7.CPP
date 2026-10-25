@@ -11,7 +11,7 @@
 
 
 extern s32 System_GetMemorySize(struct RecordRecAt14 *);
-extern s32 func_8040C3BC_de();
+extern s32 Frontend_GetScreenModePalette();
 
 s32 func_80445590_de(struct RecordRecAt14 *record) {
     if (System_GetMemorySize(record) != 0x400000) {
@@ -19,14 +19,14 @@ s32 func_80445590_de(struct RecordRecAt14 *record) {
     } else {
         record->flags &= ~0x800000;
     }
-    record->value = func_8040C3BC_de();
+    record->value = Frontend_GetScreenModePalette();
     return 0;
 }
 
 /* Calls func_8040C2F8_de and returns zero. */
 
 s32 func_804455EC_de(void) {
-    func_8040C2F8_de();
+    Frontend_StartScreenModeFade();
     return 0;
 }
 #endif

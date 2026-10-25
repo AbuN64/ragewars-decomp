@@ -89,7 +89,7 @@ func_802A2224_de
 #endif
 ();
                 func_80298368_de(2);
-                func_8040C428_de(0);
+                Frontend_RequestScreenMode(0);
                 Render_BeginModeTransition(state, 1);
                 state->transitionTime = 0;
             } else if (D_8010B0E0.buttons != 0) {
@@ -175,7 +175,7 @@ void func_80293CE4_de(GameSession *session) {
                 counters->transitionActive = 0;
                 stopRoundPlatform();
                 func_80298368_de(2);
-                func_8040C428_de(0);
+                Frontend_RequestScreenMode(0);
                 Render_BeginModeTransition(session, 1);
                 session->transitionTime = 0;
             } else if (D_8010B0E0.buttons != 0) {

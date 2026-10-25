@@ -155,7 +155,7 @@ extern void func_80264770_de(s32);
 extern void func_8022EF30_de(Profile *);
 extern void func_80404E28_de(s32);
 extern s32 Pak_GetStatus(s32);
-extern void func_8040C428_de(s32);
+extern void Frontend_RequestScreenMode(s32);
 extern void func_802A2394_de(void);
 extern void func_802A2418_de(s32);
 
@@ -346,7 +346,7 @@ s32 func_8042F130_us_rev1(void *screen) {
         Frontend_RefreshPlayerPanel(0);
         break;
     }
-    func_8040C428_de(0);
+    Frontend_RequestScreenMode(0);
     func_802A2394_de();
     func_802A2418_de(0);
     Render_PlayFlatSound(0xE78);

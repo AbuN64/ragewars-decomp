@@ -99,7 +99,7 @@ s32 func_8042D788_de(void) {
 #elif defined(VERSION_EU_X)
     case 0x23E + 3:
 #endif
-        if (func_8042AF28_de() == 1) {
+        if (Frontend_IsCupSelected() == 1) {
             func_8042E988_de(0x21);
             return 0;
         }

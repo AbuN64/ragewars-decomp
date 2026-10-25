@@ -12,7 +12,7 @@ extern MenuRules *D_800E5554;
 extern s32 func_8043C308_de(void *);
 extern void Frontend_DrawMenuImage(void *);
 extern void func_8043C2A4_de(void *);
-extern void func_8040C428_de(s32);
+extern void Frontend_RequestScreenMode(s32);
 extern void MarkMenuEventHandled(void);
 extern void Items_ResetActorPools(void *, s32);
 extern void func_804499B0_de(void *, s32, s32);
@@ -33,7 +33,7 @@ s32 func_80435F14_de(s32 unused0, s32 unused1, s32 event) {
         if (func_8043C308_de(D_800E5554) != 2) {
             return 0;
         }
-        func_8040C428_de(0);
+        Frontend_RequestScreenMode(0);
         MarkMenuEventHandled();
         pause = &D_80145088.status[7];
         *pause = 0;

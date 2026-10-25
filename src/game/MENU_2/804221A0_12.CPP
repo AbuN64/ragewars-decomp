@@ -27,7 +27,7 @@ extern s32 D_8015402C;
 extern s32 func_8043C308_de(struct Screen_func_80422960_de *);
 extern void Frontend_DrawMenuImage(struct Screen_func_80422960_de *);
 extern void func_8043C2A4_de(struct Screen_func_80422960_de *);
-extern void func_8040C428_de(s32);
+extern void Frontend_RequestScreenMode(s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void func_804030E0_de(s32);
 extern void MarkMenuEventHandled(void);
@@ -64,7 +64,7 @@ s32 func_80422960_de(void *item, s32 unused1, s32 event) {
             return 0;
         }
         if (D_800E4518->choice == 0) {
-            func_8040C428_de(0);
+            Frontend_RequestScreenMode(0);
             Frontend_SetWidgetFlag08(item, 1);
             func_804030E0_de(D_8015402C + 0x259);
             D_800E2830->resourceHandle = -1;
@@ -90,9 +90,9 @@ s32 func_80422960_de(void *item, s32 unused1, s32 event) {
                 } while (i < 4);
                 settings = &D_801462C8;
                 if (settings->reserved580 == 2 && humans >= 2) {
-                    func_8040C428_de(1);
+                    Frontend_RequestScreenMode(1);
                 } else {
-                    func_8040C428_de(settings->reserved580);
+                    Frontend_RequestScreenMode(settings->reserved580);
                 }
                 func_802A230C_de();
                 return 0;

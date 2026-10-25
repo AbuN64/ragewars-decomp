@@ -71,7 +71,7 @@ void Frontend_ApplyScreenModeValue(s32 value) {
 }
 /* Gives D_800E28E0 the value 0x14 when it is still zero. */
 extern s32 D_800E28E0;
-void func_8040C2F8_de(void) {
+void Frontend_StartScreenModeFade(void) {
     if (D_800E28E0 == 0) {
         D_800E28E0 = 0x14;
     }
@@ -83,7 +83,7 @@ extern s32 D_800E28D8;
 extern s32 D_800E28DC;
 extern s32 D_800E28E0;
 extern u8 D_80146848;
-void func_8040C318_de(void) {
+void Frontend_UpdateScreenMode(void) {
     if (D_800E28D8 == -1) {
         if (System_GetMemorySize() != 0x400000) {
             D_800E28D8 = 1;
@@ -104,7 +104,7 @@ extern int D_800D3610;
 extern int D_800D3614;
 extern int D_800D3618;
 extern int D_800D3620;
-int *func_8040C3BC_de(void) {
+int *Frontend_GetScreenModePalette(void) {
     switch (D_800E28D8) {
     case 0:
     default:
@@ -124,7 +124,7 @@ extern s32 D_800E28D8;
 extern s32 D_800E28DC;
 extern s32 D_800E28E0;
 extern s32 D_800E28E4;
-void func_8040C428_de(s32 value) {
+void Frontend_RequestScreenMode(s32 value) {
     if (D_800E28E0 == 0 && value != D_800E28D8) {
         D_800E28E4 = 1;
         D_800E28DC = D_800E28D8;
@@ -134,7 +134,7 @@ void func_8040C428_de(s32 value) {
 }
 /* Returns the word held in D_800E28D8. */
 extern s32 D_800E28D8;
-s32 func_8040C474_de(void) {
+s32 Frontend_GetScreenMode(void) {
     return D_800E28D8;
 }
 /* Selects the video mode and resets viewport dimensions on the linked views. */

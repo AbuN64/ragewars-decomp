@@ -14,7 +14,7 @@ extern void func_804499B0_de(void *, s32, s32);
 extern void func_80286AA8_de(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(u32);
-extern void func_8040C428_de(s32);
+extern void Frontend_RequestScreenMode(s32);
 extern void func_802A2394_de(void);
 extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void func_802A2400_de(f32);
@@ -33,7 +33,7 @@ s32 func_804394E0_de(MenuWidget *tree) {
     if (func_8025477C_de() == 0) {
         func_8025476C_de(1);
     }
-    func_8040C428_de(0);
+    Frontend_RequestScreenMode(0);
     i = 7;
     func_802A2394_de();
     record = &object->playerSettings[7];

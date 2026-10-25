@@ -121,7 +121,7 @@ s32 func_8042ACD8_de(void) {
 
 /* Returns whether D_80154010 holds anything other than -1; func_8042AFC0_de stores it. */
 
-s32 func_8042AF28_de(void) {
+s32 Frontend_IsCupSelected(void) {
     return D_80154010.index != -1;
 }
 

@@ -29,7 +29,7 @@ s32 func_804396C0_us_rev1(MenuWidget *tree) {
     if (func_8025477C_de() == 0) {
         func_8025476C_de(1);
     }
-    func_8040C428_de(0);
+    Frontend_RequestScreenMode(0);
     i = 7;
     func_802A2394_de();
     record = &object->playerSettings[7];

@@ -78,7 +78,7 @@ extern void Menu_SelectListEntry(MenuListWidget *, s32);
 extern s32 System_GetMemorySize(void);
 extern s32 func_8041A580_de(s32, s32, s32);
 extern void func_8041A6EC_de(s32, s32);
-extern s32 func_8042AF28_de(void);
+extern s32 Frontend_IsCupSelected(void);
 extern void func_8043C210_de(Shared_OptionsScreen *, s32, s32, s32, s32);
 extern void func_8043C278_de(Shared_OptionsScreen *);
 
@@ -146,7 +146,7 @@ s32 func_804224E0_de(void *node) {
     func_8041A6EC_de(slider, settings->buttons);
     switch (settings->controllerMode) {
     case 0:
-        if (func_8042AF28_de() == 0) {
+        if (Frontend_IsCupSelected() == 0) {
             Frontend_SetWidgetFlag100(func_8040EC30_de(node, 0x374), 1);
         }
         handle = func_8040EC30_de(node, 0x376);

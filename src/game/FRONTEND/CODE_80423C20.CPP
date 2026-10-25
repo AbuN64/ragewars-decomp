@@ -75,7 +75,7 @@ extern void *func_8041A280_de(s32, s32);
 extern void func_8041A488_de(void *);
 extern MenuWidget *func_80419E54_de(s32, s32);
 extern u32 func_802999F4_de(void);
-extern void func_8040C428_de(s32);
+extern void Frontend_RequestScreenMode(s32);
 /* Builds the options screen: clears the per-player settings, retires bots that are no longer wanted, allocates
  * the screen record in D_800E4600 and picks the button layout. The layout is 3 when any human is on a pad
  * that func_80265650_de reports in group 0 (or the game flag 0x20000000 is set), 2 for group 1, else the
@@ -185,7 +185,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
         D_800E4600->mode = 1;
     }
     D_800E4600->state = 3;
-    func_8040C428_de(0);
+    Frontend_RequestScreenMode(0);
     return 0;
 }
 #endif
