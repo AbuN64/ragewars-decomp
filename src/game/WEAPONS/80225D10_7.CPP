@@ -180,9 +180,9 @@ void func_80229468_de(Inventory *inventory, Receiver *receiver) {
 extern void Resmgr_CopyString(char *, char *);
 extern void func_802A02E8_de(char *, char *);
 extern char *func_80232764_de(s32);
-extern void func_8022B75C_de(SharedPlayerRecV1 *, char *, f32);
+extern void func_8022B75C_de(SharedPlayer *, char *, f32);
 
-static inline s32 max_ammo(SharedPlayerRecV1 *player, s32 type) {
+static inline s32 max_ammo(SharedPlayer *player, s32 type) {
     s32 max;
 
     if (type == -1) {
@@ -205,7 +205,7 @@ static inline s32 max_ammo(SharedPlayerRecV1 *player, s32 type) {
     return max;
 }
 
-void Weapons_GiveAmmoWithMessage(SharedPlayerRecV1 *player, s32 type, s32 amount) {
+void Weapons_GiveAmmoWithMessage(SharedPlayer *player, s32 type, s32 amount) {
     char number[8];
     char message[32];
 

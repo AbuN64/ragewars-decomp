@@ -197,7 +197,9 @@ struct View {
     char pad0[0x58];
     u16 *key; /* 0x58 */
     f32 blendOffset; /* 0x5C */
-    char pad60[0x29C - 0x60];
+    char pad60[0x128 - 0x60];
+    CVector3 unk128;
+    char pad134[0x29C - 0x134];
     f32 viewport[4]; /* 0x29C: width, height, x, y */
     char pad2AC[0x340 - 0x2AC];
     CVector3 normal;
@@ -329,7 +331,10 @@ struct StateInfo {
     s32 pad14;
 };
 struct Body;
-struct Character;
+struct Character {
+    char pad0[0x108];
+    s32 caps[4]; /* 0x108: per ammo type maximum */
+};
 struct Controller;
 struct Controls;
 struct Ctrl;

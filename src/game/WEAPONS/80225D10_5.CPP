@@ -65,8 +65,8 @@ extern void Weapons_EndRound(World_func_802283B8_de *);
 
 extern s32 Weapons_CheckScoreLimit(World_func_802283B8_de *);
 
-static inline SharedPlayerRecV2 *player_at(World_func_802283B8_de *world, u32 index) {
-    SharedPlayerRecV2 *player;
+static inline SharedPlayer *player_at(World_func_802283B8_de *world, u32 index) {
+    SharedPlayer *player;
     s32 count;
 
     player = 0;
@@ -208,7 +208,7 @@ s32 Weapons_CheckTeamPointWin(struct World *world) {
 }
 
 void func_802283B8_de(World_func_802283B8_de *world) {
-    SharedPlayerRecV2 *player;
+    SharedPlayer *player;
     GameRules *rules;
     GameSession *game;
     GameRules *limits;
@@ -247,12 +247,12 @@ void func_802283B8_de(World_func_802283B8_de *world) {
             special = 0;
             for (i = 0; i < 8; i++) {
                 player = player_at(world, i);
-                if (player != 0 && player->views5D8.view5D8_2.controls->display != 0) {
+                if (player != 0 && player->views5D8.view5D8_1.record->display != 0) {
                     active++;
                     if (player->views5E4.view5E4_3.alive == 0) {
                         out++;
                     }
-                    if (player->views5D8.view5D8_2.controls->kind == 0xE) {
+                    if (player->views5D8.view5D8_1.record->unk80 == 0xE) {
                         special = 1;
                     }
                 }

@@ -22,7 +22,7 @@ static inline f32 aimAbs(f32 value) { return value < 0.0f ? -value : value; }
 
 extern f32 D_800C9F70_de;
 extern s32 D_800D297C;
-extern void func_8022B144_de(SharedPlayer_func_8021D408_de *, CVector3 *);
+extern void func_8022B144_de(SharedPlayer *, CVector3 *);
 extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern void func_802727D8_de(Matrix *);
 extern void func_80272E3C_de(Matrix *, f32, f32, f32);
@@ -37,7 +37,7 @@ extern void func_802737F0_de(Matrix *, f32);
 extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
-void func_8021D408_de(SharedPlayer_func_8021D408_de *player, CVector3 *target, CVector3 *normal) {
+void func_8021D408_de(SharedPlayer *player, CVector3 *target, CVector3 *normal) {
     CVector3 to;
     CVector3 eye;
     CVector3 lift;
