@@ -12214,7 +12214,6 @@ D_blob_696593eb0c65dd738c2a = 0x800E272C; // rom:0xE332C
 D_blob_09bcb2a68dd1900f5fa3 = 0x800E2735; // rom:0xE3335
 D_blob_94247f6784238752b222 = 0x800E2754; // rom:0xE3354
 D_blob_af54990f76d301f08e14 = 0x800E2778; // rom:0xE3378
-D_auto_rodata_unresolved_800E279C = 0x800E279C; // rom:0xE339C
 D_blob_1fd137ccdc296889cab6 = 0x800E27C4; // rom:0xE33C4
 D_blob_23a383df85cc0aa6f9a7 = 0x800E280C; // rom:0xE340C
 D_auto_rodata_unresolved_800E2824 = 0x800E2824; // rom:0xE3424
