@@ -18,6 +18,8 @@ extern OSMesgQueue D_8010FBC0;
 
 /* The four controller profiles, one per port. */
 extern struct ControllerProfile D_8010F328[4];
+/* The combined input record of all four controllers (Render_ReadControllerStates). */
+extern struct ControllerProfile D_8010B0E0;
 struct func_80264268_S1;
 struct func_80264268_S1 {
     char pad0[0xC8];

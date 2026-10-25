@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/LABEL.H"
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/UNUSED.H"
@@ -70,7 +71,7 @@ extern void func_80434FB4_de(s32);
 
 extern char *D_800D36D4;
 
-extern s32 D_800E28CC, D_800DF4C0,D_8010F190,D_80146D60,D_8014AD94;
+extern s32 D_800E28CC, D_800DF4C0,D_80146D60,D_8014AD94;
 
 #if defined(VERSION_DE)
 extern char D_800DD450[];
@@ -242,7 +243,7 @@ void func_8041BE90_de(void) {
         var_a0 = SLOT_RESOURCE_971;
         goto block_24;
     }
-    if ((var_s2 == 1) || (D_8010F190 & 0x1000)) {
+    if ((var_s2 == 1) || (D_8010B0E0.buttons & 0x1000)) {
         func_8029973C_de();
         D_80146D60 = 1;
         D_800E28CC = 1;

@@ -2,6 +2,7 @@
 #include "COMMON/OBJRECAT26DD8.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/INTEGERSTATEB0.H"
@@ -68,7 +69,7 @@ void func_802948C0_de(s32 session) {
         func_80293A20_de(session, 1, 1);
         return;
     }
-    p = &D_8010B194_de;
+    p = (s32 *)&D_8010B0E0.pressedButtons;
     if ((*p & 0x1000) && (D_80142898 == 0)) {
         D_80142898 = 1;
         *p = 0;

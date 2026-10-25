@@ -1,6 +1,7 @@
 #include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/ACTORRECAT5E0.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "RENDER/80291054.H"
@@ -61,7 +62,7 @@ void func_80293848_de(void *session) {
 }
 
 s32 func_80293904_de(ObjRecAt26DC1 *arg0, f32 arg1, s32 eight, s32 arg3) {
-    s32 *flag = &D_8010B194_de;
+    s32 *flag = (s32 *)&D_8010B0E0.pressedButtons;
 
     if ((*flag != 0) && (arg3 != -1)) {
         arg0->unk26DC1 = 2;

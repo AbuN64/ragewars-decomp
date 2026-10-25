@@ -41,7 +41,6 @@ extern s32 func_802B7FD8_de(void *, void *, s32);
 extern void func_8029A650_de(void *arg0);
 
 
-extern u8 D_8010B0E0;
 
 
 

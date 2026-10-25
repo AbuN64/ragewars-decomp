@@ -14,7 +14,6 @@
  * records (Render_UpdateControllerInput), ORs their button words into the combined record, adds the stick
  * bytes, and rescales the combined sticks by D_800C42F0_de. States 1 and 3 restart or query the
  * controllers, state 2 does nothing. */
-extern ControllerProfile D_8010B0E0;
 extern u8 D_8010BBB8;
 extern char D_8010FC00;
 extern ContPad D_8010AEA0[4];

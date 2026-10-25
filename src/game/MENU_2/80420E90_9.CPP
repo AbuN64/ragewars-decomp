@@ -1,5 +1,6 @@
 #include "COMMON/NUMBERPADSCREEN.H"
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/PAKQUEUESTATE.H"
 #include "stddef.h"
 #include "TYPES.H"
 #include "MENU_2/80420E90.H"
@@ -29,14 +30,13 @@ void func_80421568_de(void *, void *);
 
 
 /* Polls the dialog of screen D_800E4400 through func_8041A470_de: state 3 opens the screen through
-   func_804217D4_de while its word at 0x34 is zero, and otherwise, when D_8010F190 is 0x433, marks the
+   func_804217D4_de while its word at 0x34 is zero, and otherwise, when D_8010B0E0.buttons is 0x433, marks the
    screen confirmed at 0x38 and calls func_80421234_de; state 4 calls func_8029973C_de and waits 3
    through func_80298368_de. Returns zero. */
 
 
 
 
-extern s32 D_8010F190;
 
 extern s32 func_8041A470_de(s32);
 
@@ -95,7 +95,7 @@ s32 func_80421884_de(void) {
             func_804217D4_de();
             return 0;
         }
-        if (D_8010F190 != 0x433) {
+        if (D_8010B0E0.buttons != 0x433) {
             return 0;
         }
         D_800E4400->confirmed = 1;

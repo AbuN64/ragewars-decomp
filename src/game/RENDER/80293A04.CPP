@@ -2,6 +2,7 @@
 #include "include_asm.h"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/INTEGERSTATEB0.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
@@ -19,7 +20,7 @@ void func_80293A20_de(GameSession *session, s32 arg1, s32 target) {
     s32 pending;
     s32 *flags;
 
-    flags = &D_8010B194_de;
+    flags = (s32 *)&D_8010B0E0.pressedButtons;
     pending = *flags & 0x1000;
     if ((unsigned)(session->mode - 0xB) < 2) {
         pending = 0;
@@ -91,7 +92,7 @@ func_802A2224_de
                 func_8040C428_de(0);
                 func_80293790_de(state, 1);
                 state->transitionTime = 0;
-            } else if (D_8010F190 != 0) {
+            } else if (D_8010B0E0.buttons != 0) {
                 D_8014288C = 0;
                 
 #if defined(VERSION_EU)
@@ -177,7 +178,7 @@ void func_80293CE4_de(GameSession *session) {
                 func_8040C428_de(0);
                 func_80293790_de(session, 1);
                 session->transitionTime = 0;
-            } else if (D_8010F190 != 0) {
+            } else if (D_8010B0E0.buttons != 0) {
                 counters->transitionActive = 0;
                 stopRoundPlatform();
                 func_80298368_de(2);
