@@ -40,7 +40,7 @@ void func_802052C4_de(void *arg0, Shared_CallbackOwner *callbackOwner) {
     if (obj != 0) {
         FuncPtr fn = ((Shared_CallbackHook *)(obj))->callback;
         if (fn != 0) {
-            fn();
+            ((void (*)(void *, Shared_CallbackOwner *))fn)(arg0, callbackOwner);
         }
     }
 }

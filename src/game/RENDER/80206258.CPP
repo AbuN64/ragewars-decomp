@@ -190,7 +190,7 @@ void func_80206724_de(void *arg0, Shared_CallbackOwner *callbackOwner) {
     if (obj != 0) {
         Shared_VoidCallback fn = obj->callback;
         if (fn != 0) {
-            fn();
+            ((void (*)(void *, Shared_CallbackOwner *))fn)(arg0, callbackOwner);
         }
     }
 }
