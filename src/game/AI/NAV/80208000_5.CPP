@@ -293,7 +293,7 @@ void func_8020A458_de(void *object, void *settings) {
     }
 }
 
-void func_8020A604_de(void *arg0) {
+void Nav_LoadCollisionTable(void *arg0) {
     s32 s0;
     s32 s1;
     s32 s2;

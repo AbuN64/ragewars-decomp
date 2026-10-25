@@ -114,7 +114,7 @@ void Items_LoadSceneResources(LevelCode8044ACCC *arg0, s32 arg1) {
     }
     if (*sp20 >= 0x18) {
         temp_v0_10 = func_80254408_de(0, (s32)sp20, 0x17, arg1, (s32)arg0, (s32)&D_00285160, &g_bloodlustWeaponData);
-        func_8020A604_de(*temp_v0_10);
+        Nav_LoadCollisionTable(*temp_v0_10);
         Scene_ReleaseResource(0, temp_v0_10);
     }
     Items_InitPreview((Shared_World *)arg0, arg1);
