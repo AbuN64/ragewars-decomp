@@ -1,26 +1,18 @@
 #include "include_asm.h"
+#include "TYPES.H"
+#include "IO/DEBUG_MEMORY.H"
 
 #ifdef NON_MATCHING
-#include "TYPES.H"
-
-typedef struct { u32 first, last, flags; } MemoryRange;
-typedef struct { u32 pageMask, entryHi, entryLo0, entryLo1; } TranslationEntry;
-typedef struct { u32 last, flags; } MemoryBoundary;
-extern MemoryRange D_800F2D00[48];
-extern TranslationEntry D_800F3470[32];
-extern u32 D_800C8148_de[];
-extern MemoryBoundary D_800CB3A0[];
-extern u32 Libgultra_TrwReadTlbEntry(void);
-
-/* 78/124 words; remaining: register assignment of the TLB loop temporaries (entry pointer and the four entry words land in other t/a registers than the ROM) */
+/* Rebuild the debugger memory map: entries 16-47 describe the valid pages of the 32 TLB entries
+ * (snapshot taken by Libgultra_TrwReadTlbEntry), entries 0-15 copy the static region table from
+ * KSEG0 (0x80000000) up to the end marker (last == 0xFFFFFFFF); unused entries get first = -1. */
 void Libsn_EnumerateMemoryRanges(void) {
-    u32 addressSpaceId, pageMask, entryHi, entryLo0, entryLo1, pageSize, first, last, rangeCount, supportedMask, i;
+    u32 addressSpaceId, pageMask, entryHi, entryLo0, entryLo1, pageSize, first, last, flags, rangeCount, supportedMask, i;
     u32 *entry;
-    MemoryRange *range;
     u32 *boundary;
     u32 *supportedMasks;
     addressSpaceId = Libgultra_TrwReadTlbEntry() & 0xFF;
-    entry = (u32 *)D_800F3470;
+    entry = &D_800F3470[0].pageMask;
     for (i = 16; i < 48; i++) {
         D_800F2D00[i].first = -1;
         D_800F2D00[i].flags = 0;
@@ -28,8 +20,8 @@ void Libsn_EnumerateMemoryRanges(void) {
         entryHi = *entry++;
         entryLo0 = *entry++;
         entryLo1 = *entry++;
-        if ((entryLo0 | entryLo1) & 2) {
-            pageMask &= 0x1FFE000;
+        if ((entryLo0 | entryLo1) & TLBLO_V) {
+            pageMask &= TLBPGMASK_16M;
             supportedMasks = D_800C8148_de;
             pageSize = 0x1000;
             while (1) {
@@ -43,31 +35,30 @@ void Libsn_EnumerateMemoryRanges(void) {
                 pageSize <<= 2;
             }
             if (pageSize != 0) {
-                if ((entryLo0 & entryLo1 & 3) != 3) {
-                    if ((entryLo0 & 3) == 2 && (entryHi & 0xFF) != addressSpaceId) entryLo0 &= ~2U;
-                    if ((entryLo1 & 3) == 2 && (entryHi & 0xFF) != addressSpaceId) entryLo1 &= ~2U;
+                if ((entryLo0 & entryLo1 & (TLBLO_V | TLBLO_G)) != (TLBLO_V | TLBLO_G)) {
+                    if ((entryLo0 & (TLBLO_V | TLBLO_G)) == TLBLO_V && (entryHi & TLBHI_PIDMASK) != addressSpaceId) entryLo0 &= ~TLBLO_V;
+                    if ((entryLo1 & (TLBLO_V | TLBLO_G)) == TLBLO_V && (entryHi & TLBHI_PIDMASK) != addressSpaceId) entryLo1 &= ~TLBLO_V;
                 }
-                first = entryHi & 0xFFFFE000;
-                if (entryLo0 & entryLo1 & 2) pageSize <<= 1;
-                else if (entryLo1 & 2) first += pageSize;
+                first = entryHi & TLBHI_VPN2MASK;
+                if (entryLo0 & entryLo1 & TLBLO_V) pageSize <<= 1;
+                else if (entryLo1 & TLBLO_V) first += pageSize;
                 D_800F2D00[i].first = first;
                 D_800F2D00[i].last = first + pageSize - 1;
-                D_800F2D00[i].flags = 3;
+                D_800F2D00[i].flags = MEMORY_READ | MEMORY_WRITE;
             }
         }
     }
-    boundary = (u32 *)D_800CB3A0;
+    boundary = &D_800CB3A0[0].last;
     first = 0x80000000;
-    if ((s32)*boundary >= 0) {
-        do { boundary += 2; } while (*boundary < first);
-    }
+    while (*boundary < first) boundary += 2;
     rangeCount = 0;
     do {
         D_800F2D00[rangeCount].first = first;
         last = *boundary++;
+        flags = *boundary++;
         D_800F2D00[rangeCount].last = last;
+        D_800F2D00[rangeCount].flags = flags;
         first = last + 1;
-        D_800F2D00[rangeCount].flags = *boundary++;
         rangeCount++;
     } while (first != 0);
     for (; rangeCount < 16; rangeCount++) {
