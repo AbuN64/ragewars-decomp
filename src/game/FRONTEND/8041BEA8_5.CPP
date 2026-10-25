@@ -189,8 +189,8 @@ int func_8041BE28_de(ListRecAt4C *list) {
 }
 
 void func_8041BE90_de(void) {
-    s32 sp10;
-    u32 sp14;
+    s32 foundNote;
+    u32 hasRoom;
     s32 var_a0;
     s32 temp_v0;
     s32 temp_v0_2;
@@ -213,11 +213,11 @@ void func_8041BE90_de(void) {
             switch (temp_v0_2) { /* irregular */
             case 0:
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                if ((Pak_FindNoteByName(((D_800E25A4)[D_80152789]), D_800DF4C0, &sp10) == 0) && (func_80435384_de(D_800DF4C0, &sp14) == 0)) {
+                if ((Pak_FindNoteByName(((D_800E25A4)[D_80152789]), D_800DF4C0, &foundNote) == 0) && (func_80435384_de(D_800DF4C0, &hasRoom) == 0)) {
 #else
-                if ((Pak_FindNoteByName((D_800D36D4), D_800DF4C0, &sp10) == 0) && (func_80435384_de(D_800DF4C0, &sp14) == 0)) {
+                if ((Pak_FindNoteByName((D_800D36D4), D_800DF4C0, &foundNote) == 0) && (func_80435384_de(D_800DF4C0, &hasRoom) == 0)) {
 #endif
-                    var_s1 = sp14 > 0U;
+                    var_s1 = hasRoom > 0U;
                 }
                 break;
             case -4:
