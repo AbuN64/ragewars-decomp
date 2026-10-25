@@ -283,10 +283,8 @@ f32 Render_BeginFrameDisplayList(void *world) {
 INCLUDE_ASM("span_1000", Render_BeginFrameDisplayList);
 #endif
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-
-extern u64 D_800D8C10[], D_800D8CE0[], D_800DC020_de[], D_800DA070[], D_800DC440[], D_800E4000[];
+/* rspboot text (D_800D8C10, 0xD0 bytes): it ends where the first graphics microcode's text starts (D_800D8CE0). */
+extern u64 D_800D8C10[], rspbootTextEnd[], D_800D8CE0[], D_800DC020_de[], D_800DA070[], D_800DC440[], D_800E4000[];
 extern u32 D_800D2978, D_800CD730;
 extern s32 D_800D297C;
 extern void osWritebackDCacheAll(void);
@@ -296,35 +294,38 @@ extern void func_8028FD4C_de(void *, OSScTask_s *);
 void Render_SubmitFrameTasks(Display *display, Frame *frame)
 {
     OSScTask_s *task;
-    s32 size;
-    s32 bytes;
-    u64 *base;
     task = &frame->task;
-    task->list.data_ptr = (u64 *)frame->commands;
-    bytes = frame->commandBytes;
-    size = D_8014D424;
-    task->list.type = 1;
-    task->list.ucode_boot = D_800D8C10;
-    base = D_8014D428;
-    task->list.ucode_boot_size = (u8 *)D_800D8CE0 - (u8 *)D_800D8C10;
-    task->list.ucode_size = 0x1000;
-    task->list.ucode_data_size = 0x800;
-    task->list.yield_data_ptr = D_800E4000;
-    task->list.yield_data_size = 0xC00;
-    task->list.ucode = D_800D8CE0;
-    task->list.ucode_data = D_800DC020_de;
-    task->list.flags = 0;
-    task->list.dram_stack = 0;
-    task->list.dram_stack_size = 0;
-    task->list.output_buff = base;
-    task->list.output_buff_size = (u64 *)((u8 *)base + size);
-    task->list.data_size = bytes;
+    {
+        s32 size, bytes;
+        u64 *base;
+        task->list.data_ptr = (u64 *)frame->commands;
+        bytes = frame->commandBytes;
+        size = D_8014D424;
+        task->list.type = 1;
+        task->list.ucode_boot = D_800D8C10;
+        base = D_8014D428;
+        task->list.ucode_boot_size = (u8 *)rspbootTextEnd - (u8 *)D_800D8C10;
+        task->list.ucode_size = 0x1000;
+        task->list.ucode_data_size = 0x800;
+        task->list.yield_data_ptr = D_800E4000;
+        task->list.yield_data_size = 0xC00;
+        task->list.ucode = D_800D8CE0;
+        task->list.ucode_data = D_800DC020_de;
+        task->list.flags = 0;
+        task->list.dram_stack = 0;
+        task->list.dram_stack_size = 0;
+        task->list.output_buff = base;
+        task->list.output_buff_size = (u64 *)((u8 *)base + size);
+        task->list.data_size = bytes;
+    }
     frame->task.next = 0;
     task->msgQ = &D_801428C0;
     task->msg = &frame->done;
     task->framebuffer = frame->colorImage;
     if (frame->dual) task->flags = 3; else task->flags = 0x23;
     if (frame->dual) {
+        s32 size, bytes;
+        u64 *base;
         task = &frame->secondTask;
         task->list.data_ptr = (u64 *)frame->secondCommands;
         bytes = frame->secondCommandBytes;
@@ -332,7 +333,7 @@ void Render_SubmitFrameTasks(Display *display, Frame *frame)
         task->list.type = 1;
         task->list.ucode_boot = D_800D8C10;
         base = D_8014D428;
-        task->list.ucode_boot_size = (u8 *)D_800D8CE0 - (u8 *)D_800D8C10;
+        task->list.ucode_boot_size = (u8 *)rspbootTextEnd - (u8 *)D_800D8C10;
         task->list.ucode_size = 0x1000;
         task->list.ucode_data_size = 0x800;
         task->list.yield_data_ptr = D_800E4000;
@@ -361,6 +362,3 @@ void Render_SubmitFrameTasks(Display *display, Frame *frame)
     display->current->commands = D_800D297C ? D_8014D464 : D_8014D460;
     display->current->secondCommands = D_800D297C ? D_8014D42C : D_8014D430_de;
 }
-#else
-INCLUDE_ASM("span_1000", Render_SubmitFrameTasks);
-#endif

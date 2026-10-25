@@ -1,3 +1,4 @@
+rspbootTextEnd = 0x800DCD10;
 D_800E3514 = 0x800E3514;
 D_auto_rodata_shared_800C6AB0 = 0x800C6AB0;
 D_auto_src_rw_pool_80202CA0_C76EC_us_rev1 = 0x800C6AEC;
