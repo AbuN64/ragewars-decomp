@@ -67,18 +67,18 @@ struct OwnedImage {
 
 struct OwnedImage;
 
-struct CellCode8040B45C;
-typedef struct CellCode8040B45C CellCode8040B45C;
+struct t_dltext;
+typedef struct t_dltext sm_dltext;
 
-struct CellCode8040B45C;
-struct CellCode8040B45C {
-    Layout layout;
-    u8 fg;
-    u8 bg;
-    u8 selectedFg;
-    u8 selectedBg;
+struct t_dltext;
+struct t_dltext {
+    Layout Hdr;
+    u8 Font;
+    u8 FontClut;
+    u8 FontHighlighted;
+    u8 FontHighlightedClut;
     s32 pad30[2];
-    s32 content;
+    s32 pString;
 };
 
 

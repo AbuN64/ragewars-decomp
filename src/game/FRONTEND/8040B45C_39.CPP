@@ -445,7 +445,7 @@ void func_804121F0_de(List *list) {
 
 
 
-void func_804122CC_de(ScrollTable *table, CellCode8040B45C *cell, u32 row, u32 col) {
+void func_804122CC_de(ScrollTable *table, sm_dltext *cell, u32 row, u32 col) {
     s32 lastCol;
     s32 lastRow;
     u32 entryCol;
@@ -455,13 +455,13 @@ void func_804122CC_de(ScrollTable *table, CellCode8040B45C *cell, u32 row, u32 c
     s32 n;
     s32 i;
 
-    cell->layout = table->layout;
-    cell->fg = table->fg;
-    cell->bg = table->bg;
+    cell->Hdr = table->layout;
+    cell->Font = table->fg;
+    cell->FontClut = table->bg;
     if (col < table->headerCols) {
         entryCol = col;
-        cell->fg = table->headerFg;
-        cell->bg = table->headerBg;
+        cell->Font = table->headerFg;
+        cell->FontClut = table->headerBg;
         lastCol = -1;
         if (col != 0) {
             lastCol = col - 1;
@@ -475,8 +475,8 @@ void func_804122CC_de(ScrollTable *table, CellCode8040B45C *cell, u32 row, u32 c
     }
     if (row < table->headerRows) {
         entryRow = row;
-        cell->fg = table->headerFg;
-        cell->bg = table->headerBg;
+        cell->Font = table->headerFg;
+        cell->FontClut = table->headerBg;
         lastRow = -1;
         if (row != 0) {
             lastRow = row - 1;
@@ -515,25 +515,25 @@ void func_804122CC_de(ScrollTable *table, CellCode8040B45C *cell, u32 row, u32 c
         y += (lastRow - table->headerRows) * table->heights[table->headerRows - 1];
     }
     if (col < table->headerCols) {
-        cell->layout.width = table->widths[col];
+        cell->Hdr.width = table->widths[col];
     } else {
-        cell->layout.width = table->widths[table->headerCols - 1];
+        cell->Hdr.width = table->widths[table->headerCols - 1];
     }
     if (row < table->headerRows) {
-        cell->layout.height = table->heights[row];
+        cell->Hdr.height = table->heights[row];
     } else {
-        cell->layout.height = table->heights[table->headerRows - 1];
+        cell->Hdr.height = table->heights[table->headerRows - 1];
     }
-    cell->content = table->contents[(entryRow * table->columns + entryCol) * 2];
+    cell->pString = table->contents[(entryRow * table->columns + entryCol) * 2];
     if (entryRow == table->selectedRow && entryCol == table->selectedCol) {
-        cell->selectedFg = table->selectedFg;
-        cell->selectedBg = table->selectedBg;
+        cell->FontHighlighted = table->selectedFg;
+        cell->FontHighlightedClut = table->selectedBg;
     } else {
-        cell->selectedFg = cell->fg;
-        cell->selectedBg = cell->bg;
+        cell->FontHighlighted = cell->Font;
+        cell->FontHighlightedClut = cell->FontClut;
     }
-    cell->layout.x += x;
-    cell->layout.y += y;
+    cell->Hdr.x += x;
+    cell->Hdr.y += y;
 }
 
 s32 func_804125A4_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
