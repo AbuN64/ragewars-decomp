@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/REQUESTRECAT10.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -84,7 +85,7 @@ enum { MENU_RESOURCE = 0x392 };
 
 extern s32 D_8014DCF8[];
 
-extern unsigned char D_8014DCFB[],D_8014236A[];
+extern unsigned char D_8014DCFB[];
 
 extern void MarkMenuEventHandled(void),func_8041E408_de(s32);
 extern struct RequestRecAt10 D_80153F80[];
@@ -300,7 +301,7 @@ s32 func_8041EFAC_de(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
         func_8041E408_de(D_800E39C0->selection);
         if (func_802999A0_de(0) == 0x16) {
             temp_a1_2 = D_800E39C0->selection;
-            *(D_8014236A + ((7 - temp_a1_2) * 0x96)) = *(D_8014DCFB + (temp_a1_2 * 0x1C));
+            D_801462C8.playerSettings[7 - temp_a1_2].rank = *(D_8014DCFB + (temp_a1_2 * 0x1C));
         }
     }
     return 0;

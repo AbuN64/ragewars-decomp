@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENURECAT20V1.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS_6.H"
@@ -52,7 +53,6 @@ const unsigned int rodata_func_80445964_de_800E2810[1] = {
 extern char D_80145040[];
 extern Spinner D_800E63C0[];
 extern s32 Weapons_GetPlayerIndex(char *, s32);
-extern u8 D_8014641C_us_rev1[][150];
 extern u8 *D_800D3C44;
 /* Highlights the name slot func_8022A5A0_de finds for the menu (display flags 0x1800000 on its model part,
    cleared on the other three), resets that spinner's timer and copies the slot's name (trailing blanks
@@ -97,7 +97,7 @@ void Multi_SetupNameSpinner(MenuRecAt20V1 *menu) {
     }
     D_800E63C0[index].timer = 0;
     destination = D_800E63C0[index].name;
-    source = D_8014641C_us_rev1[index];
+    source = D_801462C8.playerSettings[index].name;
     i = 8;
     trailing = 0;
     while (i > 0) {

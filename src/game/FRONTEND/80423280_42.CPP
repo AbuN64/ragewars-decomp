@@ -177,7 +177,7 @@ void func_80428300_de(void) {
 
     func_80428700_de();
     player = D_800E4690->player;
-    model = func_8028CFA0_de(&D_8011FE88, 0xB, D_80142358[player * 150]);
+    model = func_8028CFA0_de(&D_8011FE88, 0xB, D_801462C8.playerSettings[player].character);
     row = 0;
     for (i = 0; i < 8; i++) {
         id = model->slots[i];

@@ -91,5 +91,4 @@ struct Screen42 {
     char pad1360[8];
     s32 delay;
 };
-extern s8 D_80142358[];
 #endif

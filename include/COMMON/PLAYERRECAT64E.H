@@ -4,7 +4,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 
-extern signed char D_801422C1;
 
 struct PlayerRecAt64E;
 struct PlayerRecAt64E {

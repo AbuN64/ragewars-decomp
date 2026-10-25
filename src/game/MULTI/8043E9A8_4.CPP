@@ -83,7 +83,7 @@ void Multi_SelectInitialController(void *unused0, struct ObjRecAt20V2 *menu) {
         profile = &D_8010F328[i];
         if (func_8026437C_de(profile) != 0) {
             settings->active = 1;
-            D_801422C1 = i;
+            D_801462C8.defaults.slot = i;
             menu->unk20 = profile;
             break;
         }

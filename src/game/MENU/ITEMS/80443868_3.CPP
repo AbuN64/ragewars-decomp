@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "COMMON/ACTORRECAT260.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
@@ -54,7 +55,7 @@ s32 func_80443998_de(LayeredText *field, struct MenuRules *holder) {
     s32 player = Weapons_GetPlayerIndex(D_80145040, holder->locked);
 #endif
 
-    s32 value = D_801422DE[player * 75];
+    s32 value = D_801462C8.playerSettings[player].resultScore;
     char *text =
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

@@ -1,4 +1,5 @@
 #include "COMMON/MENULISTSCREEN.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SCREEN.H"
 #include "TYPES.H"
@@ -59,7 +60,7 @@ extern void MarkMenuEventHandled();
 
 
 void func_804368F8_de(s32 arg0) {
-    u8 *slot = &D_80146417[arg0 * 0x96];
+    u8 *slot = &D_801462C8.playerSettings[arg0].slot;
 
     *slot = arg0;
     func_8041AD10_de(D_800E5694->a, D_80102C89[arg0 * 0x190]);

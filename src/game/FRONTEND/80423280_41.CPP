@@ -35,7 +35,7 @@ void func_80427F10_de(void) {
                 preset = func_80425C70_de(D_800E4690->selection, 2, 0);
                 break;
             default:
-                preset = func_80425C70_de(D_800E4690->selection, 0, D_80142358[D_800E4690->player * 150]);
+                preset = func_80425C70_de(D_800E4690->selection, 0, D_801462C8.playerSettings[D_800E4690->player].character);
                 break;
             }
             choice = 0;

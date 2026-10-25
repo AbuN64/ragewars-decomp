@@ -149,9 +149,6 @@ struct MenuRules;
 s32 func_80443998_de(struct LayeredText *field, struct MenuRules *holder);
 #endif
 
-extern s16 D_801422DE[];
 
-extern s16 D_801422DC[];
 
-extern s16 D_801422DA[];
 #endif

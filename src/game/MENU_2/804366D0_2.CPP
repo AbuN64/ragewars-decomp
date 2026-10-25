@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENULISTSCREEN.H"
 #include "TYPES.H"
 #include "MENU_2/804366D0_2.H"
@@ -61,12 +62,11 @@ extern u8 D_800FEC8A[];
 extern u8 D_800FEC8B[];
 extern u8 D_800FEC8C[];
 extern u8 D_800FEC8D[];
-extern u8 D_80146417[];
 extern void func_8041AD10_de(void *, s32);
 extern void func_8041A6EC_de(void *, s32);
 
 void func_804366B8_de(s32 arg0) {
-    u8 *slot = &D_80146417[arg0 * 0x96];
+    u8 *slot = &D_801462C8.playerSettings[arg0].slot;
 
     *slot = arg0;
     func_8041AD10_de(D_800E5690->a, D_80102C89[arg0 * 0x190]);

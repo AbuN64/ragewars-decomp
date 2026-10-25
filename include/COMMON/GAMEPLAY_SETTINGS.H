@@ -6,7 +6,8 @@
  * reads (+0x80/+0x95) corroborate the shared record. */
 typedef struct Shared_PlayerSettingsRecord Shared_PlayerSettingsRecord;
 struct Shared_PlayerSettingsRecord {
-    char pad0[4];
+    char pad0[2];
+    s16 unknown02; /* +0x02: results halfword, func_80443AB0_de */
     s16 score; /* +0x04: end-of-match reward statistic */
     s16 resultScore; /* +0x06: results ordering score */
     s16 resultAlternate; /* +0x08: alternate results ordering score */

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "TYPES.H"
@@ -36,7 +37,7 @@ extern s32 func_80441FE8_de(LayeredText *);
 
 s32 func_80443A24_de(LayeredText *field, struct Holder *holder) {
     s32 player = Weapons_GetPlayerIndex(D_80145040, (u32)holder->owner);
-    s32 value = D_801422DC[player * 75];
+    s32 value = D_801462C8.playerSettings[player].score;
     char *text = (char *)*field->text;
 
     func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800DE700, value);

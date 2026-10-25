@@ -15,6 +15,7 @@
 
 
 extern struct Data801462C8 D_801462C8;
+extern s8 D_80142358[]; /* MIXED: this unit views D_801462C8 as Data801462C8 */
 extern struct Screen_func_80427D70_de *D_800E4690;
 extern s32 func_80265650_de(u8 *, s32);
 extern void func_80265688_de(u8 *, s32, s32);

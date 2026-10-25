@@ -50,7 +50,9 @@ struct Shared_Game {
             u8 bonusIcon; /* +0x2B: shows the 0x2DA HUD icon */
             u8 unknown2C;
             u8 menuToggles[9]; /* +0x2D: on/off rows 2..9 of the options list (+0x34 unused) */
-            u8 unknown36[0x148 - 0x36];
+            u8 unknown36[4];
+            Shared_PlayerSettingsRecord defaults; /* +0x3A: the record a new player starts from */
+            u8 unknownD0[0x148 - 0xD0];
             Shared_GameSlot slots[8];
             u8 unknown5F8[0x34];
             s32 unk62C;
