@@ -177,7 +177,7 @@ void func_8020999C_de(AiController *controller) {
     controller->unk310 = 0;
 }
 
-s32 func_802099B4_de(Player **fromRef, Player *target) {
+s32 Nav_HasLineOfSight(Player **fromRef, Player *target) {
     CVector3 first;
     CVector3 second;
 

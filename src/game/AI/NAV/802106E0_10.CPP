@@ -53,7 +53,7 @@ extern s32 D_800D297C;
 extern char D_8013B364[];
 
 extern void func_80211020_de(Brain *arg0);
-extern s32 func_802099B4_de(Brain *, Actor *);
+extern s32 Nav_HasLineOfSight(Brain *, Actor *);
 extern void Nav_SetBehaviourState(Brain *, s32);
 extern f32 func_802726BC_de(CVector3 *, CVector3 *);
 extern f32 func_80209BE0_de(Brain *arg0);
@@ -80,7 +80,7 @@ void func_8021113C_eu(Actor *actor) {
     player = brain->target;
     if (player != 0) {
         if (!(brain->frames & 3)) {
-            brain->visible = func_802099B4_de(brain, player);
+            brain->visible = Nav_HasLineOfSight(brain, player);
         }
         brain->frames += 1;
         target = brain->target->self;

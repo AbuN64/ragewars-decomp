@@ -23,7 +23,7 @@ extern f32 D_80115DEC;
 
 extern s32 func_802757E4_de(s32);
 
-extern void func_80275C94_de(CVector3 *, s32);
+extern void Nav_GetNodeNormal(CVector3 *, s32);
 
 extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
@@ -91,7 +91,7 @@ CQuatern func_8024D870_de(char *obj) {
                 if (func_802757E4_de(((LevelActor *)(obj))->model) != 0) {
                     goto identity;
                 }
-                func_80275C94_de(&normal, ((LevelActor *)(obj))->model);
+                Nav_GetNodeNormal(&normal, ((LevelActor *)(obj))->model);
                 up.x = 0.0f;
                 up.y = 1.0f;
                 up.z = 0.0f;

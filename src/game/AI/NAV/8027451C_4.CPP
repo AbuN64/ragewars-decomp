@@ -102,7 +102,7 @@ s32 Nav_IsPointInTriangleXZ(Node75 *triangle, f32 x, f32 z) {
     return 1;
 }
 
-CVector3 *func_80275BC8_de(CVector3 *out, Node75 *node) {
+CVector3 *Nav_GetNodeEdgeCross(CVector3 *out, Node75 *node) {
     CVector3 a;
     CVector3 b;
     CVector3 *b_ptr;
@@ -122,7 +122,7 @@ CVector3 *func_80275BC8_de(CVector3 *out, Node75 *node) {
     return out;
 }
 
-CVector3 *func_80275C94_de(CVector3 *out, Node75 *node) {
+CVector3 *Nav_GetNodeNormal(CVector3 *out, Node75 *node) {
     if (node == 0) {
         D_80115E20.x = 0;
         D_80115E20.z = 0;

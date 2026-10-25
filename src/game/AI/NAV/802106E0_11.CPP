@@ -17,7 +17,7 @@ extern s32 D_800D297C;
 extern char D_8013B364[];
 
 extern void func_80211020_de(CloseAttackBrain *);
-extern s32 func_802099B4_de(CloseAttackBrain *, CloseAttackActor *);
+extern s32 Nav_HasLineOfSight(CloseAttackBrain *, CloseAttackActor *);
 extern void Nav_SetBehaviourState(CloseAttackBrain *, s32);
 extern f32 func_802726BC_de(CVector3 *, CVector3 *);
 extern f32 func_80209BE0_de(CloseAttackBrain *);
@@ -64,7 +64,7 @@ void func_80211490_eu(CloseAttackActor *actor) {
     target = brain->target;routes=D_8013B364;
     if (target != 0) {
         if (!(brain->frames & 3)) {
-            brain->visible = func_802099B4_de(brain, target);
+            brain->visible = Nav_HasLineOfSight(brain, target);
         }
         brain->frames += 1;
         temp_s0 = brain->target->self;

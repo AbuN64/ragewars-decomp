@@ -33,7 +33,7 @@ typedef struct Brain {
 
 extern char D_8013B364[];
 
-extern s32 func_802099B4_de(Brain *, void *);
+extern s32 Nav_HasLineOfSight(Brain *, void *);
 extern void UpdateCloseAttack(Brain *arg0);
 extern void *Nav_GetControllerPosition(Brain *arg0);
 extern void *Nav_GetGraphPoint(char *, s32);
@@ -45,7 +45,7 @@ s32 func_80210198_eu(Brain *brain) {
     if (brain->target == 0) {
         return 1;
     }
-    if (func_802099B4_de(brain, brain->target) != 0) {
+    if (Nav_HasLineOfSight(brain, brain->target) != 0) {
         UpdateCloseAttack(brain);
     }
     if (brain->node == -1) {
