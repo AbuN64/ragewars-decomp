@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_MENUREPLY.H"
 #include "RENDER_4/8026AC38.H"
 #include "COMMON/RECRECAT4.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -53,7 +54,7 @@ s32 func_80429FF0_de(void *unused0, void *unused1, s32 event) {
         D_800D15E4[3] = 255.0f;
         gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, 0, 0, D_800E28D0 - 1, D_800E28D4 - 1);
         D_800D15E4[3] = 210.0f;
-        if (func_80299958_de() == 0x14 && D_80154024 == 0) {
+        if (func_80299958_de() == 0x14 && D_80154020.ready == 0) {
             for (i = 0; i < 4; i++) {
 #if defined(VERSION_DE)
                 

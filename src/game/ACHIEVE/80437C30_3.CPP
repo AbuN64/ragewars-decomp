@@ -5,6 +5,7 @@
 #include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/MENULISTSCREEN.H"
 #include "COMMON/UNUSED.H"
+#include "COMMON/SHARED_MENUREPLY.H"
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/WORLD.H"
@@ -45,7 +46,6 @@
 
 
 extern struct SelectionMessageScreen *D_800E5830;
-extern s32 func_8043C308_de(struct MenuRules *);
 
 extern void Frontend_DrawMenuImage(struct MenuRules *);
 
@@ -110,11 +110,11 @@ s32 func_80438ADC_de(void *window, void *unused1, s32 event) {
     if (event != 1) {
         return 0;
     }
-    state = func_8043C308_de(&D_800E5830->rules);
+    state = func_8043C308_de((Shared_OptionsScreen *)&D_800E5830->rules);
     if (state == event) {
         Frontend_DrawMenuImage(&D_800E5830->rules);
         func_8043C2A4_de(&D_800E5830->rules);
-        if (func_8043C308_de(&D_800E5830->rules) != 2) {
+        if (func_8043C308_de((Shared_OptionsScreen *)&D_800E5830->rules) != 2) {
             return 0;
         }
         if (D_800E5830->rules.locked != 0) {
@@ -185,7 +185,7 @@ s32 func_80438C84_de(void *window) {
         }
         func_802A2360_de();
     }
-    pair = &D_80154024;
+    pair = &D_80154020.ready;
     marked = pair[0];
     if (marked == 1) {
         pair[0] = 0;
@@ -216,7 +216,7 @@ extern void func_8043C278_de(void *);
 
 s32 func_80438D94_de(void) {
     func_8029973C_de();
-    if (func_8043C308_de(&D_800E5830->rules) != 1) {
+    if (func_8043C308_de((Shared_OptionsScreen *)&D_800E5830->rules) != 1) {
         D_80146894 = 0;
         switch (func_80299A08_de()) {
         case MSG_HIDE:

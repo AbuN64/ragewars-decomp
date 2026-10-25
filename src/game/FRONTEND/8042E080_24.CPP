@@ -1,14 +1,14 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_MENUREPLY.H"
 #include "COMMON/ACTIVE.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "TYPES.H"
 
 /* Marks the pair ending at D_80154024 as set by storing one there, and stores its argument in the
    word before it; func_8042E9A0_de fills the pair ending at D_8015402C. */
-extern s32 D_80154024;
 
 void func_8042E988_de(s32 value) {
-    s32 *pair = &D_80154024;
+    s32 *pair = &D_80154020.ready;
 
     pair[0] = 1;
     pair[-1] = value;

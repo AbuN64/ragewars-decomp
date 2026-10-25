@@ -171,7 +171,6 @@ extern char D_800C86A0_de;
 
 extern u8 D_800CBC9C[];
 
-extern s32 D_80154024;
 
 extern func_8020CA10_G1 D_800C4314_de;
 

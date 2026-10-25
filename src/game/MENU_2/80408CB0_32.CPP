@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_MENUREPLY.H"
 
 #if defined(VERSION_EU)
 #ifdef NON_MATCHING
@@ -148,7 +149,7 @@ loop_7:
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2632))) = func_8040EC30_de(owner, (s32) *(D_800E0646_de + ((*(ResultsOptionsScreen **)&D_800E4690)->selection * 0x1C)));
     func_804280BC_de();
-    D_80154024 = 0;
+    D_80154020.ready = 0;
     D_80154020.value = -1;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     func_8043C210_de(&(*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 0))), 0x67, 0, 0, 0);
