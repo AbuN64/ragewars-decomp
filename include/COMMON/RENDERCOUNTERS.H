@@ -36,7 +36,4 @@ typedef struct CGameStatus_t {
     s32 humanWon;
     s32 transitionActive; /* +0xAC: func_80293CE4_de */
 } CGameStatus;
-extern f32 D_800DDB54; /* time-limit scale */
-extern f32 D_800DDB58; /* time-limit scale, modes 2 and 3 */
-extern f32 D_800DDB5C_de; /* time limit when the rate is 0 */
 #endif

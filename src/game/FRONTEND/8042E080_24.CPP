@@ -144,39 +144,33 @@ void func_8042ECD8_de(void) {
  func_8044DE7C_de(&D_8011FAC0,func_8042EE34_de());
 }
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-/* Starts a match counter block: stores the six option words, scales the time limit by the mode's factor, and clears the score and count rows. */
-void func_8042ED70_de(f32 rate, s32 identifier, s32 argument2, s32 argument3,
-                     s32 argument4, s32 argument5, s32 argument6) {
-    CGameStatus *state = &D_801462C8.counters;
-    f32 scale;
+/* Starts the match status block: the frag tag limit, the second score limit, the frag tag, team and
+ * capture-the-flag switches and the mode, the time limit scaled by 900 (15 in controller modes 2 and 3,
+ * -1 when there is no limit), then clears the score and count rows. */
+static inline CGameStatus *GameCounters(void) { return &D_801462C8.counters; }
+void func_8042ED70_de(f32 duration, s32 mode, s32 fragTagLimit, s32 otherLimit,
+                     s32 fragTagOn, s32 teams, s32 ctfOn) {
     s32 i;
-    state->m_FragTagLimit = argument2;
-    state->m_CTFPlayerWithFlag = 0;
-    state->unk7C = argument3;
-    state->m_bFragTagOn = argument4;
-    state->teams = argument5;
-    scale = D_800DDB54;
-    state->m_bCTFOn = argument6;
+    GameCounters()->m_FragTagLimit = fragTagLimit;
+    GameCounters()->m_CTFPlayerWithFlag = 0;
+    GameCounters()->unk7C = otherLimit;
+    GameCounters()->m_bFragTagOn = fragTagOn;
+    GameCounters()->teams = teams;
+    GameCounters()->m_bCTFOn = ctfOn;
     if ((u32)(D_801462C8.controllerMode - 2) < 2) {
-        scale = D_800DDB58;
+        GameCounters()->timeLimit = duration * 15.0f;
+    } else {
+        GameCounters()->timeLimit = duration * 900.0f;
     }
-    state->timeLimit = rate * scale;
-    i = 0;
-    state->mask = 0xA00;
-    state->mode = identifier;
-    state->elapsed = 0;
-    do {
-        state->scores[i] = 0;
-        state->counts[i] = 0;
-        i++;
-    } while (i < 5);
-    state->round = 0;
-    if (state->timeLimit == 0.0f) {
-        state->timeLimit = D_800DDB5C_de;
+    GameCounters()->mask = 0xA00;
+    GameCounters()->mode = mode;
+    GameCounters()->elapsed = 0;
+    for (i = 0; i < 5; i++) {
+        GameCounters()->scores[i] = 0;
+        GameCounters()->counts[i] = 0;
+    }
+    GameCounters()->round = 0;
+    if (GameCounters()->timeLimit == 0.0f) {
+        GameCounters()->timeLimit = -1.0f;
     }
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_8042ED70_de);
-#endif

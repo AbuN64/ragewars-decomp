@@ -2532,3 +2532,4 @@ literals_Actors_ApplyVertexColors = 0x800C4AF8; // rom:0xC56F8 size:0x24
 literals_Render_UpdateFadeTransition = 0x800C5480; // rom:0xC6080 size:0x18
 literals_Nav_InitSpawnedActor = 0x800C2128; // rom:0xC2D28 size:0x4
 literals_Weapons_BuildPlayerOrientation = 0x800C2B70; // rom:0xC3770 size:0x4
+literals_func_8042ED70_de = 0x800DDB54; // rom:0xDE754 size:0xC

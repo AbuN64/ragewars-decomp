@@ -4596,7 +4596,7 @@ segments:
       - [0xEEDB0, rodata, data_800C/D_blob_phase2_d8cba5f9791df715fbae]
       - [0xEEDB4, rodata, data_800C/rodata_unresolved_800EE1B4]
       - [0xEEDC0, rodata, data_800C/literals_Frontend_PlaceStageOpponents]
-      - [0xEEDD4, rodata, data_800C/D_8042ED70_E2784]
+      - [0xEEDD4, rodata, data_800C/literals_func_8042ED70_de]
       - [0xEEDE0, rodata, data_800C/literals_func_8042FBF0_eu]
       - [0xEEE00, rodata, data_800C/literals_func_8042F7A8_de]
       - [0xEEE14, data, data_800C/rodata_unresolved_800EE214]
