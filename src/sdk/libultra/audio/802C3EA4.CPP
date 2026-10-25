@@ -145,9 +145,6 @@ s32 Audio_DecodeHuffmanSamples(DecodeBlock *blocks, u16 *samples, s16 sampleCoun
     return (s16)output;
 }
 
-extern DecodeBlock D_800D5564[];
-extern s16 D_800D54BE;
-extern u16 D_8014AE10[16];
 s32 Audio_DecodeFrame(DecodeState *stream) {
     DecodeBlock *block = D_800D5564;
     s16 done;

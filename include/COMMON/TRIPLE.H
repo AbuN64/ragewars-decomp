@@ -2185,7 +2185,6 @@ extern int D_800D7DD4;
 extern int D_800D7DE4;
 extern int D_800D3DC0;
 extern int D_800D3DD8;
-extern int D_800D5564;
 extern float D_800DCAF0;
 extern float D_800DCAF4;
 extern float D_800DCAF8;

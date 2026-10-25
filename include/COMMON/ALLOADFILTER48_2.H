@@ -173,4 +173,6 @@ typedef struct DecodeBlock {
     s32 offset;
     DecodeTable *table;
 } DecodeBlock;
+extern DecodeBlock D_800D5564[]; /* Audio_DecodeFrame block list, ends at kind 0 */
+extern u16 D_8014AE10[16];        /* Audio_DecodeFrame per-coefficient history */
 #endif
