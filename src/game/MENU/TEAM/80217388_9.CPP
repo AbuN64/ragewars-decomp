@@ -40,11 +40,11 @@ extern s32 D_800DCE90[];
 #include "COMMON/CHANNEL.H"
 extern s32 D_8014561C;
 extern void func_80218F84_de(TeamMenu *);
-extern void func_80219124_de(TeamMenu *, s32, SharedPlayer_func_80218B84_de *);
-extern s32 func_80218988_de(SharedPlayer_func_80218B84_de *);
-extern s32 func_8021917C_de(TeamMenu *, SharedPlayer_func_80218B84_de *);
+extern void func_80219124_de(TeamMenu *, s32, SharedPlayer *);
+extern s32 func_80218988_de(SharedPlayer *);
+extern s32 func_8021917C_de(TeamMenu *, SharedPlayer *);
 
-void func_80218B84_de(TeamMenu *menu, SharedPlayer_func_80218B84_de *player) {
+void func_80218B84_de(TeamMenu *menu, SharedPlayer *player) {
     s32 held;
     s32 slot;
     Entry *entry;
@@ -59,7 +59,7 @@ void func_80218B84_de(TeamMenu *menu, SharedPlayer_func_80218B84_de *player) {
     }
     held = player->views5E8.view698_35.controller->unkB0 & 0x8000;
     if (menu->state == 0 || menu->state == 3) {
-        if (D_801462C8.counters.teams == 0 || player->views5D8.view5D8_2.controls->team != 0xFF) {
+        if (D_801462C8.counters.teams == 0 || player->views5D8.view5D8_1.record->team != 0xFF) {
             goto run;
         }
         func_80219124_de(menu, held, player);
@@ -83,7 +83,7 @@ void func_80218B84_de(TeamMenu *menu, SharedPlayer_func_80218B84_de *player) {
             if (slot != menu->cursor) {
                 menu->cursor = slot;
             }
-            player->views5D8.view5D8_2.controls->team = team;
+            player->views5D8.view5D8_1.record->team = team;
         }
         menu->hover = slot;
     }
@@ -103,7 +103,7 @@ run:
         menu->state = 3;
         player->views5E8.view11B4_136.locked = 0;
         player->views5E8.view11B8_138.frozen = 0;
-        switch (player->views5D8.view5D8_2.controls->team) {
+        switch (player->views5D8.view5D8_1.record->team) {
         case 0:
 #ifdef VERSION_EU
             Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800E0FF4[((u8 *) &D_80145088)[0x17C1]]);

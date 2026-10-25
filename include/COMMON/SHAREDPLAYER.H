@@ -185,6 +185,8 @@ struct Record {
     u8 unk8F;
     char pad90[0x92 - 0x90];
     u8 team;
+    u8 unk93;
+    u8 display;
 };
 
 struct View;
@@ -279,7 +281,9 @@ struct Actor_func_80214DD4_de {
 };
 
 struct Controller {
-    u8 pad0[0x62E];
+    u8 pad0[0xB0];
+    s32 unkB0;
+    u8 padB4[0x62E - 0xB4];
     s16 currentWeapon; /* 0x62E: CPlayerLoadSaveData_t m_CurrentWeapon */
     u8 pad630[0x6AC - 0x630];
     u32 buttons; /* 0x6AC: CPlayerContState_t m_dwButtons */

@@ -22,9 +22,9 @@ extern char D_8011D8D0[];
 
 extern void func_802100E0_de(BrainCode8020EAE0 *);
 
-extern s32 World_PlayerHasAmmoForWeapon(SharedPlayer_func_8020FDB0_de *, s32);
+extern s32 World_PlayerHasAmmoForWeapon(SharedPlayer *, s32);
 
-extern s32 func_80283228_de(char *, SharedPlayer_func_8020FDB0_de *);
+extern s32 func_80283228_de(char *, SharedPlayer *);
 
 
 extern void func_8020FDB0_de(BrainCode8020EAE0 *, s32 *);

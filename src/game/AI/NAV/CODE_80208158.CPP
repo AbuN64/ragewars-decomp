@@ -24,11 +24,11 @@ extern char D_801376F8[];
 
 
 extern void func_802095F8_de(Brain *);
-extern s32 Weapons_GetMaxHealth(SharedPlayer_func_80208158_de *);
+extern s32 Weapons_GetMaxHealth(SharedPlayer *);
 extern void func_802AA79C_de(char *, s32);
 extern void Fx_ClearControllerInput(char *);
-extern void Weapons_SetPlayerState(SharedPlayer_func_80208158_de *, SharedPlayer_func_80208158_de *, s32);
-extern void func_80209CD8_de(Brain *, SharedPlayer_func_80208158_de *);
+extern void Weapons_SetPlayerState(SharedPlayer *, SharedPlayer *, s32);
+extern void func_80209CD8_de(Brain *, SharedPlayer *);
 
 void func_80208158_de(Brain *brain) {
     s32 health;
@@ -36,7 +36,7 @@ void func_80208158_de(Brain *brain) {
     f32 meter;
     s32 kind;
     CGameStatus *tutorial;
-    SharedPlayer_func_80208158_de *player;
+    SharedPlayer *player;
 
     if (brain->player->views1450.view1450_1.computer == 0) {
         return;
@@ -53,7 +53,7 @@ void func_80208158_de(Brain *brain) {
     }
     if (brain->player->views5D8.view5D8_1.record->display != 0) {
         health = brain->player->views5E4.view5E4_2.health >> 8;
-        kind = brain->player->views5D8.view5D8_1.record->kind;
+        kind = brain->player->views5D8.view5D8_1.record->unk80;
         if (kind == 11) {
             maximum = 400;
         } else if (kind == 12) {
@@ -66,7 +66,7 @@ void func_80208158_de(Brain *brain) {
             maximum = Weapons_GetMaxHealth(brain->player) >> 8;
         }
         meter = (f32)health / (f32)maximum * 100.0f;
-        if (brain->player->views5D8.view5D8_1.record->kind == 14) {
+        if (brain->player->views5D8.view5D8_1.record->unk80 == 14) {
             if (meter == 0.0f) {
                 meter = (3 - D_801462C8.counters.m_nTalsetLives) * 33;
             } else {
@@ -79,7 +79,7 @@ void func_80208158_de(Brain *brain) {
         }
         tutorial = &D_801462C8.counters;
         if (tutorial->enabled != 0) {
-            if (brain->player->views5D8.view5D8_1.record->kind == 11) {
+            if (brain->player->views5D8.view5D8_1.record->unk80 == 11) {
                 func_802AA794_de(D_801376F8, (f32)tutorial->m_nBastilleShield);
                 if (tutorial->m_nBastilleTimer > 0) {
                     tutorial->m_nBastilleTimer--;
