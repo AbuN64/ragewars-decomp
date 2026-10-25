@@ -82,7 +82,7 @@ void Audio_UpdateVoiceVolume(AudioVolumeVoice *voice) {
     s32 value;
 
     listener = voice->context->field2B98;
-    radius = listener->unk528;
+    radius = listener->farPlane;
     squared = radius < 3072.0f ? 3072.0f : radius;
     squared *= radius < 3072.0f ? 3072.0f : radius;
     D_800D0D10 = squared;

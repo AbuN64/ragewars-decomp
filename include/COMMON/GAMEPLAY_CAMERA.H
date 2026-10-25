@@ -61,9 +61,9 @@ struct GameplayCamera {
     char pad0[4];
     GameplayCamera *next; /* 0x04: camera list link */
     char pad8[0xC];
-    s16 unk14; /* +0x14: src/func_80234FDC.c */
+    s16 mode; /* +0x14: src/func_80234FDC.c */
     char pad16[0x2];
-    f32 unk18; /* +0x18: src/func_80234FDC.c */
+    f32 elapsed; /* +0x18: src/func_80234FDC.c */
     s16 state; /* 0x1C */
     u8 pad1E[2];
     s32 stateCounter; /* 0x20 */
@@ -77,25 +77,25 @@ struct GameplayCamera {
     f32 unk40; /* +0x40: src/func_80234FDC.c */
     f32 unk44; /* +0x44: src/func_80234FDC.c */
     Shared_Quad unk48;
-    struct Shared_func_80234FDC_S8 *unk58; /* +0x58: src/func_80234FDC.c */
-    f32 unk5C; /* +0x5C: src/func_80234FDC.c */
-    f32 unk60; /* +0x60: src/func_80234FDC.c */
-    s32 unk64; /* +0x64: src/func_80234FDC.c */
+    struct Shared_func_80234FDC_S8 *floorPoly; /* +0x58: src/func_80234FDC.c */
+    f32 zoomBlend; /* +0x5C: src/func_80234FDC.c */
+    f32 zoomFov; /* +0x60: src/func_80234FDC.c */
+    s32 floorSurface; /* +0x64: src/func_80234FDC.c */
     u16 unk68; /* +0x68: src/func_80234FDC.c */
     char pad6A[0x2];
     f32 fovY; /* +0x6C: vertical field of view in degrees, the angle the projection is built with */
     f32 aspect; /* +0x70: projection aspect ratio (width over height) */
-    f32 unk74; /* +0x74: src/func_80234FDC.c */
-    f32 unk78; /* +0x78: src/func_80234FDC.c */
-    s32 unk7C; /* +0x7C: src/func_80234FDC.c */
-    f32 unk80; /* +0x80: src/func_80234FDC.c */
-    f32 unk84; /* +0x84: src/func_80234FDC.c */
-    f32 unk88; /* +0x88: src/func_80234FDC.c */
-    f32 unk8C; /* +0x8C: src/func_80234FDC.c */
-    f32 unk90; /* +0x90: src/func_80234FDC.c */
-    f32 unk94; /* +0x94: src/func_80234FDC.c */
-    f32 unk98; /* +0x98: src/func_80234FDC.c */
-    f32 unk9C; /* +0x9C: src/func_80234FDC.c */
+    f32 farHalfWidth; /* +0x74: src/func_80234FDC.c */
+    f32 farHalfHeight; /* +0x78: src/func_80234FDC.c */
+    s32 dirty; /* +0x7C: src/func_80234FDC.c */
+    f32 stretchX; /* +0x80: src/func_80234FDC.c */
+    f32 stretchY; /* +0x84: src/func_80234FDC.c */
+    f32 bobAmplitudeX; /* +0x88: src/func_80234FDC.c */
+    f32 bobAmplitudeY; /* +0x8C: src/func_80234FDC.c */
+    f32 bobPhaseX; /* +0x90: src/func_80234FDC.c */
+    f32 bobPhaseY; /* +0x94: src/func_80234FDC.c */
+    f32 bobRateX; /* +0x98: src/func_80234FDC.c */
+    f32 bobRateY; /* +0x9C: src/func_80234FDC.c */
     char padA0[0x18];
     char unkB8[20]; /* +0xB8: src/func_80234FDC.c */
     char unkCC[20]; /* +0xCC: src/func_80234FDC.c */
@@ -104,11 +104,11 @@ struct GameplayCamera {
     f32 shakeVertical; /* 0xF8 */
     char padFC[0x120 - 0xFC];
     s32 monochrome; /* 0x120: ribbons draw grey while set */
-    u16 unk124; /* +0x124: src/func_80234FDC.c */
+    u16 kickStep; /* +0x124: src/func_80234FDC.c */
     char pad126[0x2];
     CVector3 position; /* +0x128: camera position */
     char pad134[0x4];
-    f32 unk138; /* +0x138: src/func_80234FDC.c */
+    f32 roll; /* +0x138: src/func_80234FDC.c */
     char pad13C[4];
     CQuatern orientation;
     f32 unk150; /* +0x150: src/func_80234FDC.c */
@@ -122,10 +122,10 @@ struct GameplayCamera {
     f32 unk220; /* +0x220: src/func_80234FDC.c */
     char pad224[0x3C];
     CVector3 corners[5];
-    f32 unk29C; /* +0x29C: src/func_80234FDC.c */
-    f32 unk2A0; /* +0x2A0: src/func_80234FDC.c */
-    f32 unk2A4;
-    f32 unk2A8;
+    f32 viewWidth; /* +0x29C: src/func_80234FDC.c */
+    f32 viewHeight; /* +0x2A0: src/func_80234FDC.c */
+    f32 viewLeft;
+    f32 viewTop;
     char pad2AC[0x44];
     CQuatern clipPlanes[6];
     CVector3 clipBounds[2];
@@ -136,7 +136,7 @@ struct GameplayCamera {
     char pad442[0x6];
     char unk448[3][64]; /* +0x448: src/func_80234FDC.c */
     char pad508[0x20];
-    f32 unk528; /* +0x528: src/func_80234FDC.c */
+    f32 farPlane; /* +0x528: src/func_80234FDC.c */
     f32 unk52C;
     f32 unk530;
     u8 pad534[4];

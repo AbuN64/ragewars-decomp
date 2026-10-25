@@ -56,7 +56,7 @@ void func_80239EA4_de(void *gameplayCamera, CVector3 *out) {
 
     targetY = 0.0f;
     targetX = targetY;
-    entry = func_8028B2F8_de(&D_8011FE88, (u16 *)o->unk58);
+    entry = func_8028B2F8_de(&D_8011FE88, (u16 *)o->floorPoly);
     if (entry == 0) {
         out->x = targetY;
         out->y = targetY;
@@ -94,26 +94,26 @@ void func_80239FDC_de(void *gameplayCamera) {
     f32 w;
 
     if (Camera_IsSequenceInWindow() != 0) {
-        camera->unk58 = (Shared_func_80234FDC_S8 *)Scene_FindFloorPolygon(&D_8011FE88, &camera->unk38);
+        camera->floorPoly = (Shared_func_80234FDC_S8 *)Scene_FindFloorPolygon(&D_8011FE88, &camera->unk38);
     }
-    object = (s32)camera->unk58;
+    object = (s32)camera->floorPoly;
     x = camera->unk38;
     y = camera->unk3C;
     z = camera->unk40;
     w = camera->unk44;
-    camera->unk64 = D_800CD8D0;
+    camera->floorSurface = D_800CD8D0;
     if (object != 0 && Camera_IsSequenceInWindow() == 0) {
         value = ((y + w) - Anim_GetPolygonHeight(object, x, z)) * D_800C3590_de;
         if (value < D_800C3594_de && D_800C3598_de < value) {
             Shared_func_80234FDC_S8 *surface = (Shared_func_80234FDC_S8 *)object;
-            camera->unk64 = surface->unk1C;
+            camera->floorSurface = surface->unk1C;
         }
     }
     if (Camera_IsSequenceInWindow() != 0) {
-        camera->unk64 = D_800CD8D0;
+        camera->floorSurface = D_800CD8D0;
     }
-    if (camera->unk5C > 0.0f) {
-        camera->unk64 = D_800CD8D0;
+    if (camera->zoomBlend > 0.0f) {
+        camera->floorSurface = D_800CD8D0;
     }
 }
 

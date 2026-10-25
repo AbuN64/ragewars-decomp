@@ -161,10 +161,10 @@ void func_80219490_de(char *object, char *camera) {
     gDPSetTextureFilter(command, G_TF_BILERP);
     Render_BeginModelBatch();
 
-    x = ((GameplayCamera *)(camera))->unk2A4;
-    y = ((GameplayCamera *)(camera))->unk2A8;
-    z = ((GameplayCamera *)(camera))->unk2A0 + y;
-    w = ((GameplayCamera *)(camera))->unk29C + x;
+    x = ((GameplayCamera *)(camera))->viewLeft;
+    y = ((GameplayCamera *)(camera))->viewTop;
+    z = ((GameplayCamera *)(camera))->viewHeight + y;
+    w = ((GameplayCamera *)(camera))->viewWidth + x;
     Render_ClearDepthRect(&D_8011FAC0, (s32)x, (s32)w, (s32)y, (s32)z, 0);
 
     func_80272CB0_de(first, ((AnimationSprite *)(object))->scaleX,

@@ -95,42 +95,42 @@ void func_80236874_de(RaceViewportState *state) {
             view = &state->self;
         } while (effect != 0);
     }
-    view->unk29C = (f32) D_800E28D0;
-    view->unk2A0 = (f32) D_800E28D4;
-    view->unk2A4 = 0;
-    view->unk2A8 = 0;
+    view->viewWidth = (f32) D_800E28D0;
+    view->viewHeight = (f32) D_800E28D4;
+    view->viewLeft = 0;
+    view->viewTop = 0;
     if ((Camera_IsSequenceInWindow() == 0) && (Camera_IsSequenceActive() == 0)) {
         mode = (u32) state->header.views.count;
         view = state->header.views.head;
         switch (mode) {
         case 1:
-            view->unk29C = width;
-            view->unk2A0 = height;
-            view->unk2A4 = 0;
-            view->unk2A8 = 0;
+            view->viewWidth = width;
+            view->viewHeight = height;
+            view->viewLeft = 0;
+            view->viewTop = 0;
             break;
         case 2:
             if (D_801462C8.unknown1F == 0) {
-                view->unk29C = width;
-                view->unk2A0 = halfHeight;
-                view->unk2A4 = left;
-                view->unk2A8 = top;
+                view->viewWidth = width;
+                view->viewHeight = halfHeight;
+                view->viewLeft = left;
+                view->viewTop = top;
                 view = view->next;
-                view->unk29C = width;
-                view->unk2A0 = halfHeight;
-                view->unk2A4 = left;
-                view->unk2A8 = top + halfHeight;
+                view->viewWidth = width;
+                view->viewHeight = halfHeight;
+                view->viewLeft = left;
+                view->viewTop = top + halfHeight;
                 break;
             } else {
-                view->unk29C = halfWidth;
-                view->unk2A0 = height;
-                view->unk2A4 = left;
-                view->unk2A8 = top;
+                view->viewWidth = halfWidth;
+                view->viewHeight = height;
+                view->viewLeft = left;
+                view->viewTop = top;
                 view = view->next;
-                view->unk29C = halfWidth;
-                view->unk2A0 = height;
-                    view->unk2A8 = top;
-                view->unk2A4 = (f32) (left + halfWidth);
+                view->viewWidth = halfWidth;
+                view->viewHeight = height;
+                    view->viewTop = top;
+                view->viewLeft = (f32) (left + halfWidth);
             }
             break;
         case 3:
@@ -138,77 +138,77 @@ void func_80236874_de(RaceViewportState *state) {
             if (layout->transitionActive == 0) {
             settings = &D_801462C8;
             if (settings->slots[0].enabled == 1) {
-                view->unk29C = halfWidth;
-                view->unk2A0 = halfHeight;
-                view->unk2A4 = left;
-                view->unk2A8 = top;
+                view->viewWidth = halfWidth;
+                view->viewHeight = halfHeight;
+                view->viewLeft = left;
+                view->viewTop = top;
                 view = view->next;
             }
             if (settings->slots[1].enabled == 1) {
-                view->unk29C = halfWidth;
-                view->unk2A0 = halfHeight;
-                    view->unk2A8 = top;
-                view->unk2A4 = (f32) (left + halfWidth);
+                view->viewWidth = halfWidth;
+                view->viewHeight = halfHeight;
+                    view->viewTop = top;
+                view->viewLeft = (f32) (left + halfWidth);
                 view = view->next;
             }
             if (settings->slots[2].enabled == 1) {
-                view->unk29C = halfWidth;
-                view->unk2A0 = halfHeight;
-                view->unk2A4 = left;
-                view->unk2A8 = (f32) (top + halfHeight);
+                view->viewWidth = halfWidth;
+                view->viewHeight = halfHeight;
+                view->viewLeft = left;
+                view->viewTop = (f32) (top + halfHeight);
                 view = view->next;
             }
             if (settings->slots[3].enabled == 1) {
                 splitX = left + halfWidth;
                 splitY = top + halfHeight;
-                view->unk29C = halfWidth;
-                view->unk2A0 = halfHeight;
-                view->unk2A4 = splitX;
-                view->unk2A8 = splitY;
+                view->viewWidth = halfWidth;
+                view->viewHeight = halfHeight;
+                view->viewLeft = splitX;
+                view->viewTop = splitY;
                 break;
             }
 
             } else {
-                view->unk29C = halfWidth;
-                view->unk2A0 = halfHeight;
-                view->unk2A4 = left;
-                view->unk2A8 = top;
+                view->viewWidth = halfWidth;
+                view->viewHeight = halfHeight;
+                view->viewLeft = left;
+                view->viewTop = top;
                 view = view->next;
-                view->unk29C = halfWidth;
-                view->unk2A0 = halfHeight;
-                    view->unk2A8 = top;
-                view->unk2A4 = (f32) (left + halfWidth);
+                view->viewWidth = halfWidth;
+                view->viewHeight = halfHeight;
+                    view->viewTop = top;
+                view->viewLeft = (f32) (left + halfWidth);
                 view = view->next;
                 splitY = top + halfHeight;
-                view->unk29C = halfWidth;
-                view->unk2A0 = halfHeight;
-                view->unk2A4 = left;
-                view->unk2A8 = splitY;
+                view->viewWidth = halfWidth;
+                view->viewHeight = halfHeight;
+                view->viewLeft = left;
+                view->viewTop = splitY;
                 break;
             }
             break;
         case 4:
-            view->unk29C = halfWidth;
-            view->unk2A0 = halfHeight;
-            view->unk2A4 = left;
-                view->unk2A8 = top;
+            view->viewWidth = halfWidth;
+            view->viewHeight = halfHeight;
+            view->viewLeft = left;
+                view->viewTop = top;
             view = view->next;
             splitX = left + halfWidth;
-            view->unk29C = halfWidth;
-            view->unk2A0 = halfHeight;
-                view->unk2A8 = top;
-            view->unk2A4 = splitX;
+            view->viewWidth = halfWidth;
+            view->viewHeight = halfHeight;
+                view->viewTop = top;
+            view->viewLeft = splitX;
             view = view->next;
             splitY = top + halfHeight;
-            view->unk29C = halfWidth;
-            view->unk2A0 = halfHeight;
-            view->unk2A4 = left;
-            view->unk2A8 = splitY;
+            view->viewWidth = halfWidth;
+            view->viewHeight = halfHeight;
+            view->viewLeft = left;
+            view->viewTop = splitY;
             view = view->next;
-            view->unk29C = halfWidth;
-            view->unk2A0 = halfHeight;
-            view->unk2A4 = splitX;
-            view->unk2A8 = splitY;
+            view->viewWidth = halfWidth;
+            view->viewHeight = halfHeight;
+            view->viewLeft = splitX;
+            view->viewTop = splitY;
             break;
 
         }
@@ -227,7 +227,7 @@ void func_80236874_de(RaceViewportState *state) {
         }
         memcpy(&D_800FF208, view->clipBounds, sizeof(D_800FF208));
         memcpy(&D_801031F0, view->volumeBounds, sizeof(D_801031F0));
-        initialFlags.flags = view->unk64;
+        initialFlags.flags = view->floorSurface;
         D_80103220 = initialFlags;
         view = view->next;
         if (view != 0) {
@@ -298,7 +298,7 @@ void func_80236874_de(RaceViewportState *state) {
                     var_fv0_13 = bounds->max.z;
                 }
                 bounds->max.z = var_fv0_13;
-                flags->flags |= view->unk64;
+                flags->flags |= view->floorSurface;
                 view = view->next;
             } while (view != 0);
         }

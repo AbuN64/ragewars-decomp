@@ -40,8 +40,8 @@ static inline f32 approach(f32 value, f32 target, f32 step) {
 
 void func_8023660C_de(GameplayCamera *camera, f32 a, f32 b, f32 c, f32 d) {
     GameplayCamera *record = camera;
-    record->unk29C = approach(record->unk29C, a, 16.0f);
-    record->unk2A0 = approach(record->unk2A0, b, 16.0f);
-    record->unk2A4 = approach(record->unk2A4, c, 16.0f);
-    record->unk2A8 = approach(record->unk2A8, d, 16.0f);
+    record->viewWidth = approach(record->viewWidth, a, 16.0f);
+    record->viewHeight = approach(record->viewHeight, b, 16.0f);
+    record->viewLeft = approach(record->viewLeft, c, 16.0f);
+    record->viewTop = approach(record->viewTop, d, 16.0f);
 }

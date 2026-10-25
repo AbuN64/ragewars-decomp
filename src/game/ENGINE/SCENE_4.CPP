@@ -193,7 +193,7 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
     s32 i;
 
     mask = D_801462C8.sceneMask;
-    viewMask = camera->unk64;
+    viewMask = camera->floorSurface;
     world->m_nTransparentInstances = 0;
 #if defined(VERSION_US_REV1)
     if (D_800D2AE0 == 0 && D_801462C8.local != 0) {

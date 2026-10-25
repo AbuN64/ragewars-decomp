@@ -34,18 +34,18 @@ void func_80234DE0_de(GameplayCamera *camera) {
     f32 radius;
     f32 height;
 
-    if (camera->unk7C == 0) {
+    if (camera->dirty == 0) {
         return;
     }
     if (D_801462C8.local == 0) {
-        radius = camera->unk528 /
+        radius = camera->farPlane /
                  Math_Cosf(camera->unk530 * camera->aspect * D_800C3200_de[0]);
         pts[0].x = 0.0f;
         pts[0].y = 0.0f;
         pts[0].z = 0.0f;
         pts[1].x = radius * Math_Sinf(camera->unk530 * camera->aspect * D_800C3200_de[0]);
         pts[1].y = pts[1].x / camera->aspect;
-        pts[1].z = -camera->unk528;
+        pts[1].z = -camera->farPlane;
         pts[2].x = -pts[1].x;
         pts[2].y = pts[1].y;
         pts[2].z = pts[1].z;
@@ -59,9 +59,9 @@ void func_80234DE0_de(GameplayCamera *camera) {
         pts[0].x = 0.0f;
         pts[0].y = 0.0f;
         pts[0].z = 0.0f;
-        pts[1].x = camera->unk74 * D_800C3200_de[1];
-        pts[1].y = camera->unk78 * D_800C3200_de[1];
-        pts[1].z = -camera->unk528;
+        pts[1].x = camera->farHalfWidth * D_800C3200_de[1];
+        pts[1].y = camera->farHalfHeight * D_800C3200_de[1];
+        pts[1].z = -camera->farPlane;
         pts[2].x = -pts[1].x;
         pts[2].y = pts[1].y;
         pts[2].z = pts[1].z;

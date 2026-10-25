@@ -123,10 +123,10 @@ void func_80244E58_de(void) {
     D_800E2830->unknown40 = 1;
     camera = D_80140FE8_de.unk0;
     if (camera != 0) {
-        camera->unk29C = D_800E2830->unknown104[1];
-        camera->unk2A0 = D_800E2830->unknown104[2];
-        camera->unk2A4 = D_800E2830->unknown104[3];
-        camera->unk2A8 = D_800E2830->unknown104[4];
+        camera->viewWidth = D_800E2830->unknown104[1];
+        camera->viewHeight = D_800E2830->unknown104[2];
+        camera->viewLeft = D_800E2830->unknown104[3];
+        camera->viewTop = D_800E2830->unknown104[4];
     }
 }
 

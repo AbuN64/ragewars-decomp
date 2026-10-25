@@ -135,11 +135,11 @@ void func_80234FEC_de(GameplayCamera *camera) {
     }
     var_s5 = 0;
 actor_found:
-    camera->unk18 = (f32) (camera->unk18 + D_800D2988);
+    camera->elapsed = (f32) (camera->elapsed + D_800D2988);
     func_802343C8_de(camera);
-    camera->unk7C = 1;
+    camera->dirty = 1;
     if (Camera_IsSequenceInWindow() == 0) {
-        temp_v0 = D_800CB384_de[camera->unk14].fn;
+        temp_v0 = D_800CB384_de[camera->mode].fn;
         if (temp_v0 != 0) {
             temp_v0(camera);
         }
@@ -149,8 +149,8 @@ actor_found:
     if ((Camera_IsSequenceInWindow() != 0) && (camera != &D_80141008)) {
         Camera_UpdateSequenceTrack(camera);
     }
-    temp_f24 = camera->unk5C;
-    initial_zoom = camera->unk60;
+    temp_f24 = camera->zoomBlend;
+    initial_zoom = camera->zoomFov;
     func_802349C0_de(camera);
     if (Camera_IsSequenceInWindow() == 0) {
         func_802337D0_de(camera->unkB8);
@@ -167,43 +167,43 @@ actor_found:
     func_8027302C(&camera->unk220, sp128);
     if ((var_s5 != 0) && (var_s5->unk664 & 0x40) && (camera->unk24 == 0) && (Camera_IsSequenceInWindow() == 0)) {
         f32 temp_f20; 
-        var_f1 = (((camera->unk88 * 0.5f * (Math_Sinf(camera->unk90) + 1.0f)) + 0.8f) > 1.0f) ? 1.0f : ((camera->unk88 * 0.5f * (Math_Sinf(camera->unk90) + 1.0f)) + 0.8f);
-        camera->unk80 = var_f1;
-        var_f4 = (((camera->unk8C * 0.5f * (Math_Sinf(camera->unk94) + 1.0f)) + 0.9f) > 1.0f) ? 1.0f : ((camera->unk8C * 0.5f * (Math_Sinf(camera->unk94) + 1.0f)) + 0.9f);
-        camera->unk84 = var_f4;
-        camera->unk90 = (f32) (camera->unk90 + (D_800D2988 * camera->unk98));
-        camera->unk94 = (f32) (camera->unk94 + (D_800D2988 * camera->unk9C));
+        var_f1 = (((camera->bobAmplitudeX * 0.5f * (Math_Sinf(camera->bobPhaseX) + 1.0f)) + 0.8f) > 1.0f) ? 1.0f : ((camera->bobAmplitudeX * 0.5f * (Math_Sinf(camera->bobPhaseX) + 1.0f)) + 0.8f);
+        camera->stretchX = var_f1;
+        var_f4 = (((camera->bobAmplitudeY * 0.5f * (Math_Sinf(camera->bobPhaseY) + 1.0f)) + 0.9f) > 1.0f) ? 1.0f : ((camera->bobAmplitudeY * 0.5f * (Math_Sinf(camera->bobPhaseY) + 1.0f)) + 0.9f);
+        camera->stretchY = var_f4;
+        camera->bobPhaseX = (f32) (camera->bobPhaseX + (D_800D2988 * camera->bobRateX));
+        camera->bobPhaseY = (f32) (camera->bobPhaseY + (D_800D2988 * camera->bobRateY));
         var_f22 = var_s5->unk6C8 * 2.5f;
         var_f0 = 0.0f;
         if ((var_f22 < 0.0f) || (var_f0 = 1.0f, (var_f22 > 1.0f))) {
             var_f22 = var_f0;
         }
-        Nav_EaseValueToward(&camera->unk88, 0.1f, 0.5f);
-        Nav_EaseValueToward(&camera->unk8C, 0.05f, 0.5f);
+        Nav_EaseValueToward(&camera->bobAmplitudeX, 0.1f, 0.5f);
+        Nav_EaseValueToward(&camera->bobAmplitudeY, 0.05f, 0.5f);
         temp_f20 = 1.0f - var_f22;
-        Nav_EaseValueToward(&camera->unk98, (var_f22 * 0.104719765f) + (temp_f20 * 0.06981318f), 0.16666667f);
-        Nav_EaseValueToward(&camera->unk9C, (var_f22 * 0.087266475f) + (temp_f20 * 0.03490659f), 0.16666667f);
+        Nav_EaseValueToward(&camera->bobRateX, (var_f22 * 0.104719765f) + (temp_f20 * 0.06981318f), 0.16666667f);
+        Nav_EaseValueToward(&camera->bobRateY, (var_f22 * 0.087266475f) + (temp_f20 * 0.03490659f), 0.16666667f);
     } else {
-        camera->unk84 = 1.0f;
-        camera->unk80 = 1.0f;
+        camera->stretchY = 1.0f;
+        camera->stretchX = 1.0f;
     }
-    temp_v0_2 = camera->unk124;
+    temp_v0_2 = camera->kickStep;
     var_v1_2 = 0x32; 
     if (temp_v0_2 != var_v1_2) {
-        camera->unk84 = (f32) (((f32) (var_v1_2 - temp_v0_2) * 0.08f) + 1.0f);
+        camera->stretchY = (f32) (((f32) (var_v1_2 - temp_v0_2) * 0.08f) + 1.0f);
         temp_f2 = D_800D2988 * 10.0f;
         if (!(temp_f2 >= 2.1474836e9f)) {
             var_v1_2 = (s32) temp_f2;
         } else {
             var_v1_2 = (s32) (temp_f2 - 2.1474836e9f) | 0x80000000;
         }
-        temp_v0_3 = camera->unk124 + var_v1_2;
+        temp_v0_3 = camera->kickStep + var_v1_2;
         var_v1_3 = temp_v0_3;
-        camera->unk124 = temp_v0_3;
+        camera->kickStep = temp_v0_3;
         if ((u32) (var_v1_3 & 0xFFFF) >= 0x33U) {
             var_v1_3 = 0x32;
         }
-        camera->unk124 = var_v1_3;
+        camera->kickStep = var_v1_3;
     }
     if (Camera_IsSequenceInWindow() != 0) {
         fovy = func_802459A0_de(camera);
@@ -218,7 +218,7 @@ actor_found:
         }
     }
     if ((Camera_IsSequenceInWindow() != 0) && (camera != &D_80141008)) {
-        aspect = camera->unk29C / camera->unk2A0;
+        aspect = camera->viewWidth / camera->viewHeight;
     } else if (D_80140FF8.unk0 == 2) {
         aspect = 0.6666667f;
         if (D_80140FF8.unk122F == 0) {
@@ -232,24 +232,24 @@ actor_found:
     temp_f21_3 = temp_f21 / Math_Cosf(fovy);
     temp_f20_2 = temp_f21_3 * 1.2792794f;
     temp_f21_3 = temp_f20_2 / aspect;
-    temp_f21_3 = temp_f21_3 / camera->unk84;
-    temp_f20_3 = temp_f20_2 / camera->unk80;
+    temp_f21_3 = temp_f21_3 / camera->stretchY;
+    temp_f20_3 = temp_f20_2 / camera->stretchX;
     temp_f1 = 1.0f; 
     fovy = Nav_ArcCos(Math_Sqrtf(temp_f1 / ((temp_f21_3 * temp_f21_3) + 1.0f)));
     fovy = fovy * 57.295776f; 
-    temp_f0 = camera->unk528;
+    temp_f0 = camera->farPlane;
     aspect = temp_f20_3 / temp_f21_3;
     camera->aspect = aspect;
     camera->fovY = fovy;
-    camera->unk74 = (f32) (temp_f0 * temp_f20_3);
-    camera->unk78 = (f32) (temp_f0 * temp_f21_3);
+    camera->farHalfWidth = (f32) (temp_f0 * temp_f20_3);
+    camera->farHalfHeight = (f32) (temp_f0 * temp_f21_3);
     if (Camera_IsSequenceInWindow() != 0) {
         temp_f5 = (s32) func_80245AD8_de();
         if (temp_f5 > 0) {
-            camera->unk528 = (f32) temp_f5;
+            camera->farPlane = (f32) temp_f5;
         }
     }
-    func_802B6F9C_de(right, &camera->unk68, fovy, aspect, 16.0f, camera->unk528, 1.0f - (temp_f24 * 0.95f));
+    func_802B6F9C_de(right, &camera->unk68, fovy, aspect, 16.0f, camera->farPlane, 1.0f - (temp_f24 * 0.95f));
     func_80272CB0_de(sp1A8, -1.0f, 1.0f, 1.0f);
     func_8026F898_de(sp68, sp128, (f32 *) right);
     temp_s0 = &camera->unk1E0;
@@ -259,8 +259,8 @@ actor_found:
     func_8027302C(matrix, sp128);
     state = &D_80140FF8.state;
     if (state->unk0 == 4) {
-        func_802738C0_de(matrix, camera->unk18 * 0.010908309f);
-        func_80273A98_de(matrix, camera->unk18 * 0.008726647f);
+        func_802738C0_de(matrix, camera->elapsed * 0.010908309f);
+        func_80273A98_de(matrix, camera->elapsed * 0.008726647f);
     }
     func_80272828_de(matrix);
     var_f0_2 = matrix[0] * 128.0f;
@@ -311,7 +311,7 @@ actor_found:
     temp_s4->unk17 = 0;
     func_80234DE0_de(camera);
     MatrixFromQuaternion(&camera->unk150, &camera->unkE54);
-    func_802736D4_de(&camera->unkE94, camera->unk138);
+    func_802736D4_de(&camera->unkE94, camera->roll);
     if (D_80140FF8.unk8 != 0) {
         func_802B6F9C_de(right, &camera->unk440, 47.5f, (f32) ((s32) D_800E28D0 / D_800E28D4), 16.0f, 7168.0f, 1.0f);
         func_802727D8_de(sp128);
@@ -324,11 +324,11 @@ actor_found:
     Sched_UpdateSceneEffects(&camera->unk570, camera);
     Pak_UpdateDialogList(&camera->messageList);
     if (Camera_IsSequenceInWindow() != 0) {
-        camera->unk58 = ((void *(*)())Scene_FindFloorPolygon)(&D_8011FE88, &camera->unk38);
+        camera->floorPoly = ((void *(*)())Scene_FindFloorPolygon)(&D_8011FE88, &camera->unk38);
     }
     captured_state = D_800CD8D0;
-    camera->unk64 = captured_state;
-    temp_s0_2 = camera->unk58;
+    camera->floorSurface = captured_state;
+    temp_s0_2 = camera->floorPoly;
     ground_x = camera->unk38;
     temp_f23_3 = camera->unk3C;
     temp_f20_4 = camera->unk40;
@@ -336,14 +336,14 @@ actor_found:
     if ((temp_s0_2 != 0) && (Camera_IsSequenceInWindow() == 0)) {
         temp_f1 = ((temp_f23_3 + temp_f22_3) - Anim_GetPolygonHeight(temp_s0_2, ground_x, temp_f20_4)) * 0.09765625f;
         if ((temp_f1 < 11.0f) && (temp_f1 > 5.0f)) {
-            camera->unk64 = (s32) temp_s0_2->unk1C;
+            camera->floorSurface = (s32) temp_s0_2->unk1C;
         }
     }
     if (Camera_IsSequenceInWindow() != 0) {
-        camera->unk64 = (s32) D_800CD8D0;
+        camera->floorSurface = (s32) D_800CD8D0;
     }
-    if (camera->unk5C > 0.0f) {
-        camera->unk64 = (s32) D_800CD8D0;
+    if (camera->zoomBlend > 0.0f) {
+        camera->floorSurface = (s32) D_800CD8D0;
     }
 }
 
