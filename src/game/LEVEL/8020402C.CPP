@@ -43,7 +43,7 @@ INCLUDE_ASM("span_1000", func_80204030_de);
 #elif defined(VERSION_EU_X)
 #define LV_FN func_80204030_eu_x
 #else
-#define LV_FN func_80204030_us_rev1
+#define LV_FN Level_UpdateBreakableProximity
 #endif
 #define LV_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 extern s32 D_auto_800D70DC;
@@ -225,7 +225,7 @@ extern void func_8024A1D0_de(Actor_func_8024A1D0_de *, void *, Lookup *);
 
 
 
-void func_802043E0_de(char *arg0, char *arg1) {
+void Level_CopyTrackBytes(char *arg0, char *arg1) {
     Owner *owner = (void *)arg0;
     ObjRecAt30 *event = (void *)arg1;
     char *base = owner->track + 0x14;
@@ -243,7 +243,7 @@ void func_802043E0_de(char *arg0, char *arg1) {
     }
 }
 
-void func_80204468_de(LevelActor *actor, ActorMotionState *motionState) {
+void Level_InitBreakableMotion(LevelActor *actor, ActorMotionState *motionState) {
     motionState->table = &D_800C8274;
     motionState->update = &D_002043E0;
     motionState->unk124 = 0;
@@ -257,7 +257,7 @@ void func_80204468_de(LevelActor *actor, ActorMotionState *motionState) {
 }
 
 /** Update actor state and clear flags for the relevant actor classes. */
-void func_802044C8_de(SharedPlayer *actor, void *state) {
+void Level_ActivateBreakableState(SharedPlayer *actor, void *state) {
     s32 flags;
 
     if (Render_TestActorStateBit(&g_world, actor) == 1) {
@@ -280,7 +280,7 @@ void func_802044C8_de(SharedPlayer *actor, void *state) {
 }
 
 /* The kind-10 actor initializer installs the state table containing this callback. */
-s32 func_8020459C_de(LevelActor *actor) {
+s32 Level_UpdateTriggerFlag(LevelActor *actor) {
     void *resource = actor->definition;
     BreakableDefinition *definition = resource;
     s32 val;
@@ -294,14 +294,14 @@ s32 func_8020459C_de(LevelActor *actor) {
     return val;
 }
 
-void func_802045CC_de(void *arg0, void *actorMotionState) {
+void Level_ClearBreakableState(void *arg0, void *actorMotionState) {
     ActorMotionState *state = actorMotionState;
     Render_SetActorStateBit(&g_world, arg0, 0);
     func_80278D78_de(arg0, 0x200000, arg0);
     state->unk12C = 0;
 }
 
-s32 func_80204620_de(LevelActor *actor) {
+s32 Level_UpdateHealthFlag(LevelActor *actor) {
     s32 val;
 
     val = ((BreakableDefinition *)actor->definition)->health;
@@ -315,7 +315,7 @@ s32 func_80204620_de(LevelActor *actor) {
     return val;
 }
 
-void func_80204658_de(void *arg0) {
+void Level_SetBreakableState(void *arg0) {
     BreakableDefinition *breakableDefinition;
     s32 temp_v1;
     s32 masked;
@@ -342,13 +342,13 @@ void func_80204658_de(void *arg0) {
     }
 }
 
-void func_80204728_de(void *unused0, void *arg1) {
+void Level_SetDrawHandler(void *unused0, void *arg1) {
     Dest *state = arg1;
     state->draw = &D_00204808;
 }
 
 /** Clear two flag groups when the object's 0x1B0 field exceeds a tunable. */
-void func_80204738_de(LevelActor *object) {
+void Level_ClearMotionFlags(LevelActor *object) {
     if (object->motionThreshold > D_800C1A70_de) {
         int flags = object->flags;
         flags &= ~0x2000;
@@ -357,21 +357,21 @@ void func_80204738_de(LevelActor *object) {
     }
 }
 
-void func_80204770_de(void *a, void *b) {
+void Level_RequestStateOn(void *a, void *b) {
     Weapons_RequestActorState(a, b, 0x1); }
 
-void func_8020478C_de(Trigger *trigger) {
+void Level_EnableTrigger(Trigger *trigger) {
     func_8028B670_de(&g_world, trigger->owner, trigger->actor, 1);
 }
 
-void func_802047BC_de(void *a, void *b) {
+void Level_RequestStateOff(void *a, void *b) {
     Weapons_RequestActorState(a, b, 0x0); }
 
-void func_802047D8_de(Trigger *trigger) {
+void Level_DisableTrigger(Trigger *trigger) {
     func_8028B670_de(&g_world, trigger->owner, trigger->actor, 0);
 }
 
-void func_80204808_de(Actor_func_8024A1D0_de *actor, struct InputRecAt40 *input, Lookup *lookup) {
+void Level_DrawFadedActor(Actor_func_8024A1D0_de *actor, struct InputRecAt40 *input, Lookup *lookup) {
     f32 remaining = D_800C1A78_de - input->strength * D_800C1A74_de;
     D_800D15E0 = 1;
     if (remaining < 0.0f) {

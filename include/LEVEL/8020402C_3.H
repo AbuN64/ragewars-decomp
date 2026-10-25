@@ -3,5 +3,5 @@
 #include "COMMON/OBJRECAT30.H"
 extern void func_80204DFC_de(struct Trigger *arg0);
 extern void func_80204E48_de(struct Trigger *arg0);
-extern void func_80204BB4_de(void *arg0, struct Dest *arg1);
+extern void Level_SetEnterHandler(void *arg0, struct Dest *arg1);
 #endif

@@ -107,7 +107,7 @@ extern void func_80267198_de(void *arg0, void *arg1, s32 arg2,
 
 extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
 
-void func_80204A68_de(void *breakableHitContext, ObjectStateCC *arg1) {
+void Level_ResolveBreakableHit(void *breakableHitContext, ObjectStateCC *arg1) {
     ResourceManagerState local;
     s8 factor;
     f32 scale;
@@ -140,7 +140,7 @@ void func_80204A68_de(void *breakableHitContext, ObjectStateCC *arg1) {
     }
 }
 
-void func_80204BB4_de(void *unused0, Dest *arg1) {
+void Level_SetEnterHandler(void *unused0, Dest *arg1) {
     arg1->table = &D_800C8380_de;
     arg1->enter = &D_00204C34;
 }
