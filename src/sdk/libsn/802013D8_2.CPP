@@ -57,8 +57,9 @@ void Libsn_InitializeHostRequestThread(s32 threadPriority) {
         osStartThread(&D_800F2F60);
     }
 }
-#ifdef NON_MATCHING
-/* 46/46 words; the ROM's `break 1` in the poll loop's failure arm is inline asm (cc1 has no trap builtin), so no ROM-path C */
+/* Host monitor call: writes the three arguments and then the command word to the SN cart port, polls until
+   the host clears the command (a set error word raises SN's debugger trap `break 1`; cc1 has no construct
+   for it, SN wrote it inline in their runtime: the only `break 1` in the ROM) and returns the host's reply. */
 s32 func_802017E8_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_80200568_de(0xB1FFFFE4, arg1);
     func_80200568_de(0xB1FFFFE8, arg2);
@@ -76,9 +77,6 @@ s32 func_802017E8_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     } while (func_802005A0_de(0xB1FFFFE0) != 0);
     return func_802005A0_de(0xB1FFFFDC);
 }
-#else
-INCLUDE_ASM("span_1000", func_802017E8_de);
-#endif
 void func_802018A0_de(void) {
     ControllerRequest *request;
     for (;;) {
