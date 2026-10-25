@@ -127,6 +127,18 @@ omit = []
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fforce-addr"]
 omit = []
+[file."src/sdk/libultra/audio/802C3EA4_2.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fforce-addr"]
+omit = []
+[file."src/sdk/libultra/audio/802C3EA4_3.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fforce-addr"]
+omit = []
+[file."src/sdk/libultra/audio/802C3EA4_4.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fforce-addr"]
+omit = []
 [file."src/sdk/libultra/audio/802C5E90.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-msplit-addresses"]

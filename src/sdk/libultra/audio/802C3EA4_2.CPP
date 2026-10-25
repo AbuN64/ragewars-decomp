@@ -13,6 +13,8 @@
    D_801516C0. */
 
 
+extern f32 D_800CCF14;
+extern f32 D_800CCF1C;
 void func_802BF514_de(void) {
     s16 i;
     f32 angle;
@@ -27,7 +29,7 @@ void func_802BF514_de(void) {
     f32 *sums;
     f32 *differences;
     step = D_800CCF10;
-    offset = (*(&D_800CCF10 + 1));
+    offset = D_800CCF14;
     scale = D_800CCF18;
     i = 0;
     sines = D_801510C0;
@@ -40,7 +42,7 @@ void func_802BF514_de(void) {
         zeros[i] = 0.0f;
     }
     i = 0;
-    scale = (*(&D_800CCF18 + 1));
+    scale = D_800CCF1C;
     sums = D_801514C0;
     differences = D_801516C0;
     for (; i < 128; i++) {
