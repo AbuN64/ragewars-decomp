@@ -164,7 +164,7 @@ s32 func_8042DD00_de(void *a0, void *a1, void *a2, s32 press) {
     MarkMenuEventHandled();
     if (func_80264614_de(D_800E5430->count) == press) {
         object = D_800E5430;
-        if (object->count < func_80264690_de()) {
+        if (object->count < Render_CountConnectedControllers()) {
             D_800E5430->count++;
         }
     }

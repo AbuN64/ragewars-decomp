@@ -207,7 +207,7 @@ static inline char *reactionText(char **text, MenuSettings *settings) { return t
 extern char *D_800D3A40, *D_800D3A44, *D_800D3A48, *D_800D3A54, *D_800D3A58;
 static inline char *reactionText(char *text, MenuSettings *settings) { return text; }
 #endif
-extern void func_802934C0_de(char *,const char *);
+extern void Render_CopyString(char *,const char *);
 extern void Camera_PostScaledScreenMessage(void *,void *,char *,f32);
 static inline void nextMessage(s32 *next) {
     (*next)++;
@@ -222,27 +222,27 @@ void Render_PostKillMessages(Shared_ReactionPlayer *a,Shared_ReactionPlayer *b,S
         if (!a->unk5D8->unk8F) return;
         modes = &D_80145088.modes;
         if (modes->tag) {
-            func_802934C0_de(a->messages[a->messageNext], reactionText(D_800D3A40, settings));
-            func_802934C0_de(a->messages[a->messageNext]+10, b->unk5D8->name);
+            Render_CopyString(a->messages[a->messageNext], reactionText(D_800D3A40, settings));
+            Render_CopyString(a->messages[a->messageNext]+10, b->unk5D8->name);
             if (a->owner) Camera_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
             nextMessage(&a->messageNext);
-            func_802934C0_de(b->messages[b->messageNext], reactionText(D_800D3A44, settings));
-            func_802934C0_de(b->messages[b->messageNext]+11, a->unk5D8->name);
+            Render_CopyString(b->messages[b->messageNext], reactionText(D_800D3A44, settings));
+            Render_CopyString(b->messages[b->messageNext]+11, a->unk5D8->name);
             if (b->owner) Camera_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
         } else {
             if (!modes->captureFlag) return;
-            func_802934C0_de(a->messages[a->messageNext], reactionText(D_800D3A48, settings));
-            func_802934C0_de(a->messages[a->messageNext]+10, b->unk5D8->name);
+            Render_CopyString(a->messages[a->messageNext], reactionText(D_800D3A48, settings));
+            Render_CopyString(a->messages[a->messageNext]+10, b->unk5D8->name);
             if (a->owner) Camera_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
             nextMessage(&a->messageNext);
-            func_802934C0_de(a->messages[a->messageNext], reactionText(D_800D3A54, settings));
+            Render_CopyString(a->messages[a->messageNext], reactionText(D_800D3A54, settings));
             if (a->owner) Camera_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
             nextMessage(&a->messageNext);
-            func_802934C0_de(b->messages[b->messageNext], reactionText(D_800D3A44, settings));
-            func_802934C0_de(b->messages[b->messageNext]+11, a->unk5D8->name);
+            Render_CopyString(b->messages[b->messageNext], reactionText(D_800D3A44, settings));
+            Render_CopyString(b->messages[b->messageNext]+11, a->unk5D8->name);
             if (b->owner) Camera_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
             nextMessage(&b->messageNext);
-            func_802934C0_de(b->messages[b->messageNext], reactionText(D_800D3A58, settings));
+            Render_CopyString(b->messages[b->messageNext], reactionText(D_800D3A58, settings));
             if (b->owner) Camera_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
         }
     }

@@ -35,7 +35,7 @@ extern s32 D_800CD730;
 
 extern f32 D_800D2988;
 extern f32 D_800CD740_de;
-extern s32 func_80264B6C_de(void);
+extern s32 Render_IsSnapshotActive(void);
 extern void func_80264B8C_de(void);
 extern void func_80293334_de(void *session, s32 count, s32 force_active);
 
@@ -47,7 +47,7 @@ void Render_DrawMode11Session(void *session) { func_80293B28_de(session); }
 
 void func_80294530_de(s32 arg0) {
     func_8028D90C_de();
-    ((s32 (*)(s32, s32))func_80293998_de)(arg0, 0x6F);
+    ((s32 (*)(s32, s32))Render_ResetPlayerItems)(arg0, 0x6F);
 }
 
 void func_80294560_de(s32 session) {
@@ -58,7 +58,7 @@ void Render_DrawMode10Session(void *session) { func_80293B28_de(session); }
 
 void func_8029459C_de(int arg0) {
     func_8028D90C_de();
-    func_80293998_de(arg0, ((ObjRecAt26DD8 *)arg0)->unk26DD8 + 0x259);
+    Render_ResetPlayerItems(arg0, ((ObjRecAt26DD8 *)arg0)->unk26DD8 + 0x259);
 }
 
 void func_802945D8_de(s32 session) {
@@ -106,7 +106,7 @@ void Render_StartRound(GameSession *session) {
 
     D_800CD730 = 0;
     func_80293268_de(session);
-    if (func_80264B6C_de() != 0) {
+    if (Render_IsSnapshotActive() != 0) {
         session->selector = func_80264B5C_de();
     }
     counters = &D_801462C8.counters;
@@ -116,7 +116,7 @@ void Render_StartRound(GameSession *session) {
     game->local = 1;
     game->mode1E = 8;
     func_80293334_de(session, session->arena, 0);
-    if (func_80264B6C_de() != 0) {
+    if (Render_IsSnapshotActive() != 0) {
         func_80264B8C_de();
     }
     func_8023EE00_de();

@@ -8,7 +8,7 @@
 
 
 
-extern void func_80285D30_de(s32 *);
+extern void Render_FreeAllPoolNodes(s32 *);
 
 #if defined(VERSION_EU)
 extern unsigned int func_802B80B4_eu(void *arg0);
@@ -46,7 +46,7 @@ void func_80264104_de(Obj80264124 *arg0) {
         if ((*global != 0) || (D_8011FE88.frozen != 0) || (global[-6] != 13)) {
 reset:
             arg0->amount = 0.0f;
-            func_80285D30_de(arg0->object);
+            Render_FreeAllPoolNodes(arg0->object);
         } else {
             object = arg0->object;
             func_80285C78_de(object);

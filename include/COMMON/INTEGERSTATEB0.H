@@ -78,6 +78,6 @@ extern s32 D_800CD77C;
 
 extern s32 D_800CC380;
 
-extern s32 func_80264B6C_de(void);
+extern s32 Render_IsSnapshotActive(void);
 extern void func_802AA7A4_de(void *arg0);
 #endif

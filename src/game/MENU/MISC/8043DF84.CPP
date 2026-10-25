@@ -13,12 +13,12 @@ extern StatusStep D_80142622[];
 
 extern PlayerSettings D_80146398[];
 
-extern s32 func_8026437C_de(ControllerProfile *);
+extern s32 Render_IsAButtonPressed(ControllerProfile *);
 
 /* Finds the first of the four slots in D_8010F328 that func_8026437C_de accepts, writing its index to out and returning it, or writing -1 and returning NULL when none does. */
 
 
-extern s32 func_8026437C_de(ControllerProfile *slot);
+extern s32 Render_IsAButtonPressed(ControllerProfile *slot);
 
 /** Count how many of the 4 flagged entries in D_8010F328 also have a nonzero unk148 in the
  *  matching D_801462C8 record, returning 0 early on the first flagged entry that does not. */
@@ -56,10 +56,10 @@ extern char D_800D76CC;
 
 
 
-extern void func_80264788_de(s8);
+extern void Render_DisableControllerPak(s8);
 
 
-extern void func_802647E8_de(PakMenuSlot *, s32);
+extern void Render_SetProfileMode(PakMenuSlot *, s32);
 
 /** Report whether the tutorial-progress flags (at 0x1c, 0x20, 0x28) hold any nonzero bit. */
 
@@ -85,7 +85,7 @@ void func_8043DFC8_de(void) {
     active = 1;
     settings = D_80146398;
     for (; i < 4; i++) {
-        if (func_8026437C_de(&D_8010F328[i]) != 0) {
+        if (Render_IsAButtonPressed(&D_8010F328[i]) != 0) {
             settings[i].active = active;
             settings[i].selected = i;
             break;
@@ -99,7 +99,7 @@ ControllerProfile *func_8043E05C_de(s32 *out) {
     i = 0;
     s = D_8010F328;
     while (i < 4) {
-        if (func_8026437C_de(s) != 0) {
+        if (Render_IsAButtonPressed(s) != 0) {
             *out = i;
             return s;
         }
@@ -189,9 +189,9 @@ s32 func_8043E1F8_de(s32 unused0, MenuRecAt20V2 *menu) {
 
     D_801462C8.counters.m_FragTagMode = 0;
     slot = &menu->widget;
-    func_80264788_de((*slot)->unk4);
-    func_80264248_de(*slot);
-    func_802647E8_de(*slot, 1);
+    Render_DisableControllerPak((*slot)->unk4);
+    Render_ResetControllerPak(*slot);
+    Render_SetProfileMode(*slot, 1);
     menu->owner->unk85C = 0;
     return 1;
 }

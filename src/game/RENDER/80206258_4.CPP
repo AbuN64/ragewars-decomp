@@ -24,13 +24,13 @@ extern void TranslateMatrix(f32 *, f32, f32, f32);
 
 extern void SwapMatrixUpForward(void *);
 
-s32 func_80285F58_de(void *, void *);
+s32 Render_TestActorStateBit(void *, void *);
 
 void Render_UpdateTriggeredMotion(Player *mover, ActorMotionState *rider);
 
 void func_80206DD4_de(Actor_func_80206DD4_de *, RiderCode80206258 *);
 
-void func_80207910_de(void *object, void *state) {
+void Render_BuildPlayerMatrix(void *object, void *state) {
     Player *player = object;
     ActorMotionState *motionState = state;
     f32 sp10[16];
@@ -51,7 +51,7 @@ void func_802079B0_de(Player *mover, ActorMotionState *rider) {
     ActorMotionResource *resource = mover->definition;
     ActorMotionDefinition *body = &resource->motion;
 
-    if (func_80285F58_de(&D_8011FE88, mover) == 0) {
+    if (Render_TestActorStateBit(&D_8011FE88, mover) == 0) {
         mover->weaponFlags &= ~0x10000;
         mover->weaponFlags &= ~0x100;
         return;

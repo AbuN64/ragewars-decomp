@@ -64,7 +64,7 @@ int func_80293440_de(u8 *a, u8 *b) {
  return 0;
 }
 
-u8 *func_802934C0_de(u8 *arg0, u8 *arg1)
+u8 *Render_CopyString(u8 *arg0, u8 *arg1)
 {
   u8 *var_a1;
   u8 *var_v1;

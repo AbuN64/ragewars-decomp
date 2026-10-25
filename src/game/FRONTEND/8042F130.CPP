@@ -151,7 +151,7 @@ extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern void *func_80419E54_de(s32, s32);
 extern void Frontend_RelabelSlotRows(s32);
 extern void Frontend_RefreshPlayerPanel(s32);
-extern void func_80264770_de(s32);
+extern void Render_EnableControllerPak(s32);
 extern void func_8022EF30_de(Profile *);
 extern void Pak_ProbeStatus(s32);
 extern s32 Pak_GetStatus(s32);
@@ -264,7 +264,7 @@ s32 func_8042F130_us_rev1(void *screen) {
         D_800E54A4->players[i].menu = 0;
         D_800E54A4->players[i].back = -1;
         Frontend_RefreshPlayerPanel(i);
-        func_80264770_de(i);
+        Render_EnableControllerPak(i);
         for (j = 0; j < 4; j++) {
             func_8022EF30_de(&D_800E54A4->players[i].records[j]);
         }

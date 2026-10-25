@@ -47,7 +47,7 @@ extern char D_800D7994[];
 
 extern s32 D_80153770;
 
-extern s32 func_802645D0_de(s32);
+extern s32 Render_PeekPakChange(s32);
 
 extern s32 Pak_CheckStatusPrompt(struct Shared_PakMenu *, s32, s32);
 
@@ -165,7 +165,7 @@ s32 func_8040B6CC_de(struct FieldRecAt14 *field) {
 s32 func_8040B700_de(struct Shared_PakMenu *record) {
     if (D_80153770 == 0) {
         if (func_80409BDC_de(record) != -1) {
-            if (func_802645D0_de(func_80409BDC_de(record)) != 0) {
+            if (Render_PeekPakChange(func_80409BDC_de(record)) != 0) {
                 if (Pak_CheckStatusPrompt(record, func_80409BDC_de(record), 0) != 0) {
                     D_80153770 = 1;
                 }

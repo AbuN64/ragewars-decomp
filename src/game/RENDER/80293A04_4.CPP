@@ -71,7 +71,7 @@ void func_80294200_de(void) {
 
 void func_802942F0_de(s32 arg0) {
     func_8028D90C_de();
-    ((s32 (*)(s32, s32))func_80293998_de)(arg0, 0x5A);
+    ((s32 (*)(s32, s32))Render_ResetPlayerItems)(arg0, 0x5A);
 }
 
 void func_80294320_de(s32 session) {
@@ -129,7 +129,7 @@ void func_80294434_de(s32 arg0) {
     D_800CD770 += 1;
     func_8028D90C_de();
     Camera_SetResponse(0.5f);
-    func_80293998_de(arg0, 0x6F);
+    Render_ResetPlayerItems(arg0, 0x6F);
 }
 
 void func_80294488_de(s32 session) {
@@ -142,5 +142,5 @@ void func_802944A8_de(void *session) {
 
 void func_802944C4_de(s32 arg0) {
     func_8028D90C_de();
-    ((s32 (*)(s32, s32))func_80293998_de)(arg0, 0x6F);
+    ((s32 (*)(s32, s32))Render_ResetPlayerItems)(arg0, 0x6F);
 }

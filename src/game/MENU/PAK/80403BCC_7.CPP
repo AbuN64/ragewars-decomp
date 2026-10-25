@@ -29,7 +29,7 @@ extern s32 func_802B7FD8_de(u8 *a0, u8 *a1, s32 a2);
 
 extern s32 Pak_UpdateStatus(s32 a0);
 
-extern void func_8026454C_de(void);
+extern void Render_ReleasePakLock(void);
 
 void Pak_AllocateScratchBuffer(void) {
     struct Shape_typemap_165 *block;
@@ -79,7 +79,7 @@ void Pak_ProbeStatus(s32 kind)
     } else {
         D_801534F0[kind] = 1;
     }
-    func_8026454C_de();
+    Render_ReleasePakLock();
 }
 
 /* Returns entry i of D_80153500 when entry i of the state table D_801534F0 is 3, otherwise -2. */

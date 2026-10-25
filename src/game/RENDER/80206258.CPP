@@ -18,7 +18,7 @@
 
 extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
 
-extern void func_80285DB0_de(Shared_World *a, void *b, int c);
+extern void Render_SetActorStateBit(Shared_World *a, void *b, int c);
 
 /* Spawns effect kind at an actor's position through func_8028FFD0_de in D_80131600's list: kind 0xBD7
    is skipped while both of D_801468A0's flags at 0x78 and 0x80 are set, and kind 0x1388 is offset by
@@ -69,14 +69,14 @@ extern s32 D_800C85F0_de;
 extern func_80206604_G1 D_801462E5;
 
 
-extern s32 func_80285F58_de(void *, void *);
+extern s32 Render_TestActorStateBit(void *, void *);
 
 void func_80206258_de(Trigger *trigger) {
     func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 1);
 }
 
 void func_80206288_de(void *arg0) {
-    func_80285DB0_de(&D_8011FE88, arg0, 0);
+    Render_SetActorStateBit(&D_8011FE88, arg0, 0);
 }
 
 void func_802062B0_de(Trigger *trigger) {
@@ -179,7 +179,7 @@ void func_802066A4_de(LevelActor *actor, Dest *arg1) {
     Weapons_RequestActorState(actor, arg1, 0);
     arg1->charge = D_800C1AE0_de;
     arg1->field12C = D_800C1AE0_de;
-    if (func_80285F58_de(&D_8011FE88, actor) == 1) {
+    if (Render_TestActorStateBit(&D_8011FE88, actor) == 1) {
         actor->flags &= ~0x2000;
         actor->flags &= ~0x100;
     }

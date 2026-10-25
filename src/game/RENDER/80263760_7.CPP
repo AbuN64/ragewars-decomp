@@ -21,7 +21,7 @@ extern s8 D_8010BBB8;
 extern char D_8010FC00;
 
 
-extern s32 func_80285AC4_de(void *, void *, s32);
+extern s32 Render_InitPoolNodes(void *, void *, s32);
 
 extern s32 func_802B7FD8_de(void *, void *, s32);
 
@@ -47,7 +47,7 @@ extern void func_8029A650_de(void *arg0);
 
 
 
-void func_80264248_de(ControllerProfile *arg0) {
+void Render_ResetControllerPak(ControllerProfile *arg0) {
 
     u32 address=(u32)arg0;
     char *o=(char *)address;
@@ -61,7 +61,7 @@ void func_80264248_de(ControllerProfile *arg0) {
         ((Obj80264124 *)o)->state = 0;
         ((Obj80264124 *)o)->amount = 0;
         ((Obj80264124 *)o)->timer = 0;
-        func_80285AC4_de(o + 0x140, o + 0x16C, 3);
+        Render_InitPoolNodes(o + 0x140, o + 0x16C, 3);
         func_802B7FD8_de(&D_8010FC00, o + 0xD8, arg0->port);
         
 #if defined(VERSION_EU)
@@ -130,7 +130,7 @@ int func_8026436C_de(Shared_Effect *effect) {
 }
 
 /** Return the high bit of the byte at object offset 0xB6. */
-unsigned int func_8026437C_de(struct ControllerProfile *profile) {
+unsigned int Render_IsAButtonPressed(struct ControllerProfile *profile) {
     return ((u8)(profile->pressedButtons >> 8)) >> 7;
 }
 
@@ -144,13 +144,13 @@ int func_802643A0_de(struct ControllerProfile *object) {
     return (object->buttonState & 0x40101) != 0;
 }
 
-int func_802643B8_de(void *controllerProfile) {
+int Render_IsNavUp(void *controllerProfile) {
     ControllerProfile *profile = controllerProfile;
     int flag = profile->buttonState & 0x10808;
     return flag != 0;
 }
 
-int func_802643D0_de(void *controllerProfile) {
+int Render_IsNavDown(void *controllerProfile) {
     ControllerProfile *profile = controllerProfile;
     int flag = profile->buttonState & 0x80404;
     return flag != 0;
@@ -235,14 +235,14 @@ s32 func_802644FC_de(s32 arg0) {
     return result;
 }
 
-void func_8026454C_de(void) {
+void Render_ReleasePakLock(void) {
 
     D_800CBC1C = -1;
     osSendMesg(&D_8010FBC0, 0, 1);
 }
 
 /** Fetch-and-clear: return the old slot value, then zero it. */
-s32 func_80264580_de(s32 arg0) {
+s32 Render_TakePakChange(s32 arg0) {
     s32 old;
 
     if (func_8026475C_de(arg0) == 0) {
@@ -253,7 +253,7 @@ s32 func_80264580_de(s32 arg0) {
     return old;
 }
 
-s32 func_802645D0_de(s32 arg0) {
+s32 Render_PeekPakChange(s32 arg0) {
     if (func_8026475C_de(arg0) == 0) {
         return 0;
     }
@@ -268,7 +268,7 @@ int func_80264634_de(int arg0) {
     return D_8010BBE2[arg0 * 4] & 1;
 }
 
-s32 func_8026464C_de(void) {
+s32 Render_AnyControllerConnected(void) {
     s32 i = 0;
     while (1) {
         if (!(((D_8010FBE3[i * 4] >> 3) ^ 1) & 1)) {
@@ -282,7 +282,7 @@ s32 func_8026464C_de(void) {
     }
 }
 
-s32 func_80264690_de(void) {
+s32 Render_CountConnectedControllers(void) {
     s32 count;
     s32 i;
 
@@ -335,11 +335,11 @@ int func_8026475C_de(int arg0) {
     return D_8010B308[arg0];
 }
 
-void func_80264770_de(int arg0) {
+void Render_EnableControllerPak(int arg0) {
     D_8010B308[arg0] = 1;
 }
 
-void func_80264788_de(int arg0) {
+void Render_DisableControllerPak(int arg0) {
     D_8010B308[arg0] = 0;
 }
 

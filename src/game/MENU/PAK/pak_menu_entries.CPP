@@ -198,17 +198,17 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
         allowRepeat = 0;
     }
     if (allowRepeat != 0) {
-        if (func_802643B8_de(menu->input) != 0) {
+        if (Render_IsNavUp(menu->input) != 0) {
             func_804410AC_de(menu, 0x12);
         }
-        if (func_802643D0_de(menu->input) != 0) {
+        if (Render_IsNavDown(menu->input) != 0) {
             func_804410AC_de(menu, 0x13);
         }
     }
     if (menu->state != 2) {
         return 0;
     }
-    if (func_8026437C_de(menu->input) != 0 ||
+    if (Render_IsAButtonPressed(menu->input) != 0 ||
         (func_80264388_de(menu->input) != 0 && selectionFlags != 0) ||
         (func_802643A0_de(menu->input) != 0 && selectionFlags != 0)) {
         callback = entry->cls->confirm;

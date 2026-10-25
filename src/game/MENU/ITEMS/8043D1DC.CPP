@@ -15,7 +15,7 @@ extern s16 D_auto_800E1DAA[][2];
 extern u8 D_auto_800C9237[][4];
 extern u8 D_auto_800C9233[][4];
 extern char D_0044FA6C[];
-extern s32 func_8026437C_de(struct ControllerProfile *object);
+extern s32 Render_IsAButtonPressed(struct ControllerProfile *object);
 extern void Items_StartPlayerAnimation(void *rec, s32 choice);
 extern void Render_PlayFlatSound(s32 id);
 extern void Pak_AllocateMenu(s32 a, void *obj, void *res);
@@ -25,7 +25,7 @@ extern void Pak_SelectPreviewModel(s32 a, s32 b, s32 c);
 s32 func_8043DB50_de(s32 arg0, Func_8043DB50_Obj *arg1, s32 arg2) {
     Func_8043DB50_Rec *rec = arg1->rec;
     Func_8043DB50_Slot *slot = rec->slot;
-    if (func_8026437C_de(arg1->player) != 0) {
+    if (Render_IsAButtonPressed(arg1->player) != 0) {
         Items_StartPlayerAnimation(rec, slot->choice);
         Render_PlayFlatSound(D_auto_800E1DAA[rec->style][0]);
         Pak_AllocateMenu(arg2, arg1, D_0044FA6C);
@@ -35,7 +35,7 @@ s32 func_8043DB50_de(s32 arg0, Func_8043DB50_Obj *arg1, s32 arg2) {
     if (func_80264388_de(arg1->player) != 0) {
         slot->choice = D_auto_800C9237[slot->choice][0];
     }
-    if (func_802643A0_de(arg1->player) != 0 || func_8026437C_de(arg1->player) != 0) {
+    if (func_802643A0_de(arg1->player) != 0 || Render_IsAButtonPressed(arg1->player) != 0) {
         slot->choice = D_auto_800C9233[slot->choice][0];
     }
     Items_StartPlayerAnimation(rec, slot->choice);

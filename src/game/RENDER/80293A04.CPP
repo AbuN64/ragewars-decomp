@@ -39,7 +39,7 @@ void func_80293A20_de(GameSession *session, s32 arg1, s32 target) {
         session->mode = 0x14;
         session->target = arg1;
         session->previousMode = mode;
-        if (func_80264B6C_de() != 0) {
+        if (Render_IsSnapshotActive() != 0) {
             session->timer = (1.0f);
         }
     }

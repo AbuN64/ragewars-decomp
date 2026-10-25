@@ -91,7 +91,7 @@ extern char D_80102B00[];
 extern void *D_800E4680;
 extern char D_0044FC04[], D_0044FB2C[], D_0044FF80[];
 struct RespawnPlayer;
-extern s32 func_80264B6C_de(void);
+extern s32 Render_IsSnapshotActive(void);
 extern void *Items_RecycleModel(void *);
 extern void func_8021836C_de(void *);
 extern void func_80218E98_de(void *);
@@ -120,7 +120,7 @@ void Ovlgame_ResetPlayerForRound(void *actor, s32 character) {
     unsigned long counterAddress;
     s32 openFlag = 0;
     char *globals;
-    func_80264B6C_de();
+    Render_IsSnapshotActive();
     FIELD(s32, actor, 0x5D0) = 1;
     FIELD(s32, actor, 0x5E0) = character;
     if (FIELD(s32, actor, 0x1450) == 0) {
@@ -260,7 +260,7 @@ void Ovlgame_InitActorHudState(void *actor) {
     FIELD(f32, hud, 0x98) = 0.25f;
     FIELD(f32, hud, 0xA0) = 1.5707965f;
     FIELD(s32, actor, 0x11B0) = 0;
-    func_802647E8_de((void *)FIELD(s32, actor, 0x698), 1);
+    Render_SetProfileMode((void *)FIELD(s32, actor, 0x698), 1);
     FIELD(s32, actor, 0x678) = 0;
     FIELD(s32, actor, 0x67C) = 0;
     FIELD(s32, actor, 0x680) = 0;
@@ -394,7 +394,7 @@ extern unsigned int D_800CD730;
 
 
 extern void func_8022B510_de(struct RespawnPlayer *);
-extern void func_802647E8_de(void *, int);
+extern void Render_SetProfileMode(void *, int);
 extern void Weapons_InitializePlayerHealth(struct RespawnPlayer *);
 extern int func_802934F8_de(void);
 
@@ -416,7 +416,7 @@ void Ovlgame_ResetRespawnedPlayer(struct RespawnPlayer *player) {
     func_8022B510_de(player);
     player->moving = 0;
     player->fade = D_800C2338_de;
-    func_802647E8_de(player->anim, 1);
+    Render_SetProfileMode(player->anim, 1);
     if (D_80145088.settings.local != 0) {
         Weapons_InitializePlayerHealth(player);
     } else {

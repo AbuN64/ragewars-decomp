@@ -48,7 +48,7 @@ extern void func_8022E290_de(void *);
 
 extern void func_80239B64_de(void *);
 
-extern void func_80285D30_de(void *);
+extern void Render_FreeAllPoolNodes(void *);
 
 extern s32 Items_FindNearestPlacedObject(void *, Vec3Words *, s32, void *);
 
@@ -103,7 +103,7 @@ void func_80244E58_de(void) {
             player->weaponReset = 0;
         }
         func_80239B64_de(group->members);
-        func_80285D30_de(&D_8010EC90);
+        Render_FreeAllPoolNodes(&D_8010EC90);
     }
     if (target != -1) {
         table = &D_8011FE88;

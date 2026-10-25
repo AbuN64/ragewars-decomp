@@ -170,7 +170,7 @@ struct GameSession;
 
 extern void Render_SetTransitionTarget(struct GameSession *object, int value);
 
-extern void func_80293998_de(s32 arg0, s32 arg1);
+extern void Render_ResetPlayerItems(s32 arg0, s32 arg1);
 
 extern void func_80293DF0_de(struct GameSession *arg0);
 

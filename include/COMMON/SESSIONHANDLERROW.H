@@ -150,7 +150,7 @@ extern f32 D_800C5468;
 extern void func_802539EC_de(s32,s32);
 extern void func_80293268_de(void *);
 
-extern int func_80264B6C_de(void);
+extern int Render_IsSnapshotActive(void);
 
 extern s32 func_802BCF10_de(void);
 extern char D_80146CE8[];

@@ -11,9 +11,9 @@
 
 extern s32 D_801462C8;
 
-extern int func_80285F58_de(char *a, int b);
+extern int Render_TestActorStateBit(char *a, int b);
 
-extern void func_80285DB0_de(Shared_World *a, void *b, int c);
+extern void Render_SetActorStateBit(Shared_World *a, void *b, int c);
 
 void func_80206080_de(void *levelActor, void *actorMotionState) {
     LevelActor *actor = levelActor;
@@ -94,9 +94,9 @@ void func_802061D8_de(void *a, struct WeaponEventSource *b) {
 }
 
 int func_80206200_de(int arg0) {
-    return func_80285F58_de(&D_8011FE88, arg0) == 1;
+    return Render_TestActorStateBit(&D_8011FE88, arg0) == 1;
 }
 
 void func_80206230_de(void *arg0) {
-    func_80285DB0_de(&D_8011FE88, arg0, 1);
+    Render_SetActorStateBit(&D_8011FE88, arg0, 1);
 }

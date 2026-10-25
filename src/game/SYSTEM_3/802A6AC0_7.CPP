@@ -58,7 +58,7 @@ extern s32 D_800E4000;
 
 extern s32 D_80166000;
 
-extern void func_802934C0_de(char *marker, char *name);
+extern void Render_CopyString(char *marker, char *name);
 
 static inline s32 is_restorable(u32 address) {
     if (address >= (u32)&D_800CDD10 && address < (u32)&D_800CDD10 + 0x10) {
@@ -344,7 +344,7 @@ s32 func_802A71C0_de(void) {
         D_801470B0 = 0;
     } else {
         D_801470B0 = 1;
-        func_802934C0_de(&D_800CDD10, name);
+        Render_CopyString(&D_800CDD10, name);
     }
     if (D_801470B0 == 0) {
         src = (u32 *)0xB0001000;

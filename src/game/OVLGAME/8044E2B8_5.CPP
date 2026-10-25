@@ -49,7 +49,7 @@ s32 func_8044DCC0_de(void) {
 extern char D_8010EC90[];
 extern char D_80145040[];
 
-extern void func_80285D30_de(void *);
+extern void Render_FreeAllPoolNodes(void *);
 struct Context;
 extern void Weapons_ResetPlayerControllers(struct Context *);
 
@@ -60,7 +60,7 @@ void func_8044DD50_de(char *match) {
     CGameStatus *state;
 
     Render_SetControllerMode(0);
-    func_80285D30_de(D_8010EC90);
+    Render_FreeAllPoolNodes(D_8010EC90);
     Weapons_ResetPlayerControllers(D_80145040);
     state = &D_801462C8.counters;
     state->teams = 0;

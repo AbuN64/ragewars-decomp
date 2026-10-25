@@ -43,7 +43,7 @@ extern u8 D_800DE80C[];
 
 extern void Render_ReadControllerStates(void);
 
-extern void func_8026454C_de(void);
+extern void Render_ReleasePakLock(void);
 
 extern s32 func_802A05A0_de(s32 c);
 
@@ -162,7 +162,7 @@ void func_804041F0_de(void) {
         else if (Pak_UpdateStatus(channel) != 0) D_801534F0[channel] = 3;
         else D_801534F0[channel] = 1;
     }
-    func_8026454C_de();
+    Render_ReleasePakLock();
 }
 
 s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name, u8 *company, u8 *code);
@@ -208,6 +208,6 @@ s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, 
         }
         Pak_UpdateStatus(ch);
     }
-    func_8026454C_de();
+    Render_ReleasePakLock();
     return result;
 }

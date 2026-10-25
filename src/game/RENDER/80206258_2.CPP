@@ -28,20 +28,20 @@ extern void func_802472F0_de(void *);
 extern void func_80402FB4_de(s32, void *);
 
 void func_8020676C_de(void *arg0, void *arg1, Trigger *trigger) {
-    extern void func_80285DB0_de(Shared_World *a, void *b, int c);
+    extern void Render_SetActorStateBit(Shared_World *a, void *b, int c);
     func_802065C0_de(arg0, arg1, trigger->unk6);
     ((LevelActor *)arg0)->flags = ((LevelActor *)arg0)->flags | 0x2100;
     func_802472F0_de(arg0);
-    func_80285DB0_de(&D_8011FE88, arg0, 0);
+    Render_SetActorStateBit(&D_8011FE88, arg0, 0);
 }
 
 void func_802067BC_de(Shared_Actor *actor) {
-    extern void func_80285DB0_de(Shared_World *, void *, s32);
+    extern void Render_SetActorStateBit(Shared_World *, void *, s32);
     s32 v = actor->weaponFlags;
     v &= ~0x2000;
     v &= ~0x100;
     actor->weaponFlags = v;
-    func_80285DB0_de(&D_8011FE88, actor, 1);
+    Render_SetActorStateBit(&D_8011FE88, actor, 1);
 }
 
 void func_802067FC_de(Trigger *trigger) {
@@ -49,13 +49,13 @@ void func_802067FC_de(Trigger *trigger) {
 }
 
 void func_8020682C_de(Shared_Actor *actor, s32 *arg1) {
-    extern void func_80285DB0_de(Shared_World *, void *, s32);
+    extern void Render_SetActorStateBit(Shared_World *, void *, s32);
     actor->weaponFlags |= 0x2100;
     if (Camera_IsSequenceInWindow() != 0) {
         *arg1 |= 0x200;
     }
     func_802472F0_de(actor);
-    func_80285DB0_de(&D_8011FE88, actor, 0);
+    Render_SetActorStateBit(&D_8011FE88, actor, 0);
 }
 
 void func_80206898_de(Trigger *trigger) {
@@ -63,10 +63,10 @@ void func_80206898_de(Trigger *trigger) {
 }
 
 void func_802068C8_de(struct Shared_Actor *actor, s32 arg1, s32 arg2) {
-    extern void func_80285DB0_de(Shared_World *, void *, s32);
+    extern void Render_SetActorStateBit(Shared_World *, void *, s32);
     func_80402FB4_de((s32)actor, (void *)arg2);
     actor->weaponFlags |= 0x2100;
-    func_80285DB0_de(&D_8011FE88, actor, 0);
+    Render_SetActorStateBit(&D_8011FE88, actor, 0);
 }
 
 void func_80206910_de(s32 arg0) {

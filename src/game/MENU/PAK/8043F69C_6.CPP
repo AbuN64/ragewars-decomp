@@ -101,13 +101,13 @@ s32 func_804423AC_de(struct Outer *outer) {
 
 /* Adjusts a value from controller input and clamps or wraps it between its limits. */
 
-s32 func_8026437C_de(s32); /* extern */
+s32 Render_IsAButtonPressed(s32); /* extern */
  /* extern */
  /* extern */
 
 s32 Pak_AdjustValue(func_8022A404_S1 *menu,s32 value,s32 step,s32 minimum,s32 maximum,s32 wrap) {
  if(((s32 (*)(s32))func_80264388_de)(menu->unk20))value-=step;
- if(((s32 (*)(s32))func_802643A0_de)(menu->unk20)||func_8026437C_de(menu->unk20))value+=step;
+ if(((s32 (*)(s32))func_802643A0_de)(menu->unk20)||Render_IsAButtonPressed(menu->unk20))value+=step;
  if(value<minimum) {
   value=minimum;if(wrap)value=maximum;
  } else if(value>maximum) {

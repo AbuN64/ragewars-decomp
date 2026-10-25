@@ -12,11 +12,11 @@
  * D_800FF224_de whenever a value moves. Adapted from func_8023A294_de as a static helper.
  */
 
-extern s32 func_80264B6C_de(void);
+extern s32 Render_IsSnapshotActive(void);
 
 
 static inline f32 approach(f32 value, f32 target, f32 step) {
-    if (func_80264B6C_de() != 0) {
+    if (Render_IsSnapshotActive() != 0) {
         value = target;
     }
     if (value < target) {

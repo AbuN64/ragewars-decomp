@@ -12,13 +12,13 @@ extern s32 Turret_TrackTarget(void *arg0);
 
 extern s32 Weapons_SpawnFlaggedEffects(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4);
 
-extern void func_80285DB0_de(Shared_World *, void *, s32);
+extern void Render_SetActorStateBit(Shared_World *, void *, s32);
 
 extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
 
 s32 func_80262C88_de(void *);
 
-extern s32 func_80285F58_de(void *, void *);
+extern s32 Render_TestActorStateBit(void *, void *);
 
 void Turret_Code_IDLE(void *actor, void *state) {
     if (Turret_TrackTarget(actor) != 0) {
@@ -43,7 +43,7 @@ void Turret_Setup_DEATH(void *actor, void *state) {
     Weapons_SpawnFlaggedEffects(actor, state, 4, motion->eventMask, motion->secondaryEventMask);
     world = &D_8011FE88;
     stateView->event = 0;
-    func_80285DB0_de(world, actor, 1);
+    Render_SetActorStateBit(world, actor, 1);
     func_80278D78_de(actor, 1, actor);
     clearedFlags = actorView->flags & 0xFFFEFFFF;
     actorView->flags = clearedFlags;
@@ -59,7 +59,7 @@ void Turret_Code_DEATH(LevelActor *actor, ActorMotionState *state) {
 }
 
 void Turret_LinkEffect_MakeVisible(Shared_Actor *actor) {
-    if (func_80285F58_de(&D_8011FE88, actor) == 0) {
+    if (Render_TestActorStateBit(&D_8011FE88, actor) == 0) {
         actor->weaponFlags |= 0x2100;
     }
 }

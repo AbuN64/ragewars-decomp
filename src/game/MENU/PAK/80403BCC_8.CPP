@@ -28,7 +28,7 @@ extern s32 func_8025477C_de(void);
 
 extern void Render_ReadControllerStates(void);
 
-extern void func_8026454C_de(void);
+extern void Render_ReleasePakLock(void);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
@@ -46,7 +46,7 @@ void Render_ReadControllerStates();
 
  /* extern */
  /* extern */
-void func_8026454C_de();
+void Render_ReleasePakLock();
 
  /* extern */
 void Pak_UpdateStatus(s32);
@@ -125,7 +125,7 @@ s32 Pak_ReadNoteData(s32 slot, s32 arg1, s32 arg2, s32 length)
       func_802BD3A0_de(arg2, addr, length);
     }
   }
-  func_8026454C_de();
+  Render_ReleasePakLock();
   func_80253908_de(zero);
   if (buf != ((void *) 0))
   {
@@ -182,7 +182,7 @@ s32 func_804051D4_de(s32 channel) {
         }
         Pak_UpdateStatus(channel);
     }
-    func_8026454C_de();
+    Render_ReleasePakLock();
     return result;
 }
 
@@ -199,7 +199,7 @@ s32 func_80405290_de(s32 channel) {
         result = -1;
     }
     Pak_UpdateStatus(channel);
-    func_8026454C_de();
+    Render_ReleasePakLock();
     return result;
 }
 

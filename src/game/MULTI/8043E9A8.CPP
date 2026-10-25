@@ -16,18 +16,18 @@ extern s32 D_0044FDF4;
 
 
 
-extern void func_80264770_de(s32 kind);
+extern void Render_EnableControllerPak(s32 kind);
 
 extern void Pak_ProbeStatus(s32 kind);
 
 /* Marks the selected record's byte tag and clears the active menu state. */
-extern void func_80264770_de(int);
+extern void Render_EnableControllerPak(int);
 
 extern s32 D_800E28C0;
 
 extern struct List D_0044EB04;
 
-extern void func_80264770_de(int arg0);
+extern void Render_EnableControllerPak(int arg0);
 
 /* Restarts a round for the player passed in arg1: clears the world timer flag D_800E28C0 via
    func_804097E8_de, then reallocates a fresh scoreboard entry via Pak_OpenDialog using arg1's fields
@@ -40,7 +40,7 @@ extern s32 D_0044E4B0;
 
 void Pak_ClearTimerFlag(void);
 
-extern void func_80264788_de(s32 arg0);
+extern void Render_DisableControllerPak(s32 arg0);
 
 #include "COMMON/GAME_SESSION.H"
 
@@ -96,14 +96,14 @@ void func_8043E948_de(struct Shared_PakMenu *arg0)
 {
     s32 kind = arg0->owner->unk4;
 
-    func_80264770_de(kind);
+    Render_EnableControllerPak(kind);
     Pak_ProbeStatus(kind);
 }
 
 void func_8043E97C_de(void *arg0) {
     Obj8043EB20 *item = arg0;
 
-    func_80264770_de(item->unk20->unk4);
+    Render_EnableControllerPak(item->unk20->unk4);
     D_800E28C0 = 0;
 }
 
@@ -115,7 +115,7 @@ extern char D_8014561C[];
 
 /** Marks arg1's inner record's byte tag via func_80264770_de, then hands the record and arg1's fields to Pak_OpenDialog; ignores arg0. */
 s32 func_8043E9A8_de(void *unused0, Obj8043EB20 *arg1) {
-    func_80264770_de(arg1->unk20->unk4);
+    Render_EnableControllerPak(arg1->unk20->unk4);
     Pak_OpenDialog(D_8014561C, &D_0044EB04, arg1->unk1C, (s32) arg1->unk20, 0);
     return 1;
 }
@@ -130,7 +130,7 @@ s32 func_8043EA00_de(void *unused0, Arg1Struct *arg1) {
 s32 func_8043EA4C_de(void *unused0, Outer8043E56C *arg1) {
     Render_SetTransitionTarget(&D_8011FAC0, 8);
     D_80154048 = 0;
-    func_80264788_de(arg1->unk20->unk4);
+    Render_DisableControllerPak(arg1->unk20->unk4);
     return 1;
 }
 

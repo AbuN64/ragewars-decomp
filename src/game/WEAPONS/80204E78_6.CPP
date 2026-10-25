@@ -189,7 +189,7 @@ static __inline__ void spawnGroup(SpawnDispatchObject *object, SpawnDispatchOwne
 
 
 
-extern s32 func_80285F58_de(void *, void *);
+extern s32 Render_TestActorStateBit(void *, void *);
 
 /* Retained ROM words preceding this unit's generated jump table. */
 #if defined(VERSION_EU)
@@ -355,7 +355,7 @@ void func_80206018_de(void *arg0, EventRecAt30 *arg1) {
     CallbackHolder *holder;
     s32 different;
 
-    different = func_80285F58_de(&D_8011FE88, arg0) != 1;
+    different = Render_TestActorStateBit(&D_8011FE88, arg0) != 1;
     if (different == 0) {
         holder = arg1->holder;
         if ((holder != 0) && (holder->callback != 0)) {

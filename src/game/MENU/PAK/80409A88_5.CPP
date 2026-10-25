@@ -53,7 +53,7 @@ extern void func_80293268_de(void *arg0);
    and 2. */
 
 
-extern void func_80264788_de(void *);
+extern void Render_DisableControllerPak(void *);
 
 
 /* Searches the sixteen controller-pak notes for the requested name and returns the matching index when requested. */
@@ -85,7 +85,7 @@ extern void Pak_GetNoteGameName(s32,s32,s32 *),func_80405648_de(s32,void *,s32);
 s32 func_80409CEC_de(struct Shared_PakMenu *record) {
     if (D_80153784 == 0) {
         if (func_80409BDC_de(record) != -1) {
-            if (func_802645D0_de(func_80409BDC_de(record)) != 0) {
+            if (Render_PeekPakChange(func_80409BDC_de(record)) != 0) {
                 if (Pak_CheckStatusPrompt(record, func_80409BDC_de(record), 0) != 0) {
                     D_80153784 = 1;
                 }
@@ -116,7 +116,7 @@ s32 func_80409E10_de(void *menu) {
         }
     }
     if (D_80153784 == 0) {
-        if ((D_800E28C8 != -1) && (func_802645D0_de(D_800E28C8) != 0) && (Pak_CheckStatusPrompt(menu, D_800E28C8, 0) != 0)) {
+        if ((D_800E28C8 != -1) && (Render_PeekPakChange(D_800E28C8) != 0) && (Pak_CheckStatusPrompt(menu, D_800E28C8, 0) != 0)) {
             D_8014AD94 = 0;
             D_80153784 = 1;
         }
@@ -151,7 +151,7 @@ void func_80409F2C_de(struct Shared_PakMenu *record) {
 }
 
 void func_80409F6C_de(void *unused, void *object) {
-    func_80264788_de(object);
+    Render_DisableControllerPak(object);
     Items_SetSelection(&D_8011FE88, D_8011FE88.selectionValues[3], 2);
 }
 

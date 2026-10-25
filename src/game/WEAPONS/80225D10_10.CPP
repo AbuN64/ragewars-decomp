@@ -31,7 +31,7 @@ extern struct Shape_func_8021A2D4_de_2 D_801427FC;
 
 extern void Weapons_SetPlayerState(Node_Weapons_EndRound *arg0, Node_Weapons_EndRound *arg1, s32 arg2);
 
-extern void func_80285D30_de(s32 *);
+extern void Render_FreeAllPoolNodes(s32 *);
 
 
 extern void func_8024BE3C_de(void *arg0);
@@ -267,7 +267,7 @@ void Weapons_ResetPlayerControllers(struct Context *object) {
     Shared_ActorView *record = (void *)object->head;
     if (record != 0) {
         do {
-            func_80285D30_de((char *)record->controller + 0x140);
+            Render_FreeAllPoolNodes((char *)record->controller + 0x140);
             ((struct IntegerStateD4 *)record->controller)->unk_D0 = 0;
             record = record->next;
         } while (record != 0);

@@ -49,7 +49,7 @@ void *Camera_PostScaledScreenMessage(void *, void *, void *, f32); CQuatern func
 s32 func_8024BE80_de(void *);
 void func_8024E79C_de(void *, Triple, void *, s32 *, s32, s32); /* extern */
 s32 Render_PlaySoundAtPosition(s16, CVector3, s32, s32); /* extern */
-void func_802647E8_de(void *, s32);
+void Render_SetProfileMode(void *, s32);
 void func_80278D78_de(void *, s32, void *);
 void func_80278E04_de(s32, s32, void *);
 s32 func_802800C0_de(void *, void *, void *, s32 *, s32, s32, CVector3, CQuatern, CVector3, CVector3 *, s32, s32); /* extern */
@@ -153,7 +153,7 @@ void func_8021B468_de(struct Shared_ActorView *player, void *attacker, s32 arg2,
     void *var_s0;
     void *var_s0_2;
 
-    func_802647E8_de(((struct Shared_ActorView *)player)->controller, 0);
+    Render_SetProfileMode(((struct Shared_ActorView *)player)->controller, 0);
     if (((struct Shared_ActorView *)player)->action == 0x27) {
         Weapons_SetPlayerState(player, attacker, 2);
     }

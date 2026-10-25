@@ -56,7 +56,7 @@ void func_8028CD68_de(void *arg0) {
             if (field != three) {
                 i += 1;
             } else {
-                func_80285DB0_de(arg0, entry, 1);
+                Render_SetActorStateBit(arg0, entry, 1);
                 i += 1;
             }
             offset += 0x2E8;
@@ -86,7 +86,7 @@ void func_8028CDF0_de(void *arg0) {
             if (field != three) {
                 i += 1;
             } else {
-                func_80285DB0_de(arg0, entry, 0);
+                Render_SetActorStateBit(arg0, entry, 0);
                 i += 1;
             }
             offset += 0x2E8;

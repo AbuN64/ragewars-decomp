@@ -104,7 +104,7 @@ extern void func_80264104_de(void *);
 extern void func_802B74B0_de(void *);
 extern void func_802B7560_de(void *);
 
-void func_80263AF4_de(void) {
+void Render_PollControllerPaks(void) {
     s32 locked;
     s32 i;
 
@@ -169,7 +169,7 @@ void func_80263C24_de(void)
     }
 }
 
-extern s32 func_80285AC4_de(void *arg0, void *arg1, s32 arg2);
+extern s32 Render_InitPoolNodes(void *arg0, void *arg1, s32 arg2);
 
 
 
@@ -214,7 +214,7 @@ void func_80263CF0_de(void *arg0) {
         ((ObjectState224 *)(o))->unk_D0 = 0;
         ((ObjectState224 *)(o))->unk_D4 = 0;
         ((ObjectState224 *)(o))->unk_0 = bit2;
-        func_80285AC4_de(o + 0x140, o + 0x16C, 3);
+        Render_InitPoolNodes(o + 0x140, o + 0x16C, 3);
     }
     ((ObjectState224 *)(o))->unk_0 = bit;
 }

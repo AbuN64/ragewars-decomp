@@ -721,7 +721,7 @@ done:
 s32 func_8040B2C8_de(struct Shared_PakMenu *record) {
     if (D_80153768 == 0) {
         if (func_80409BDC_de(record) != -1) {
-            if (func_802645D0_de(func_80409BDC_de(record)) != 0) {
+            if (Render_PeekPakChange(func_80409BDC_de(record)) != 0) {
                 if (Pak_CheckStatusPrompt(record, func_80409BDC_de(record), 0) != 0) {
                     D_80153768 = 1;
                 }

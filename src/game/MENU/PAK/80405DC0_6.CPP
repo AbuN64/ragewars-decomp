@@ -167,7 +167,7 @@ extern char D_8014561C[], D_0044FFA4[], D_0044FB50[];
 extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
 extern char D_0044EA98[], D_0044E9C0[], D_0044EA2C[], D_0044EA08[], D_0044E9E4[];
 extern void Pak_ProbeStatus(s32);
-extern s32 Pak_GetStatus(s32), Pak_IsChannelReady(s32), func_80405598_de(s32), func_80264580_de(s32);
+extern s32 Pak_GetStatus(s32), Pak_IsChannelReady(s32), func_80405598_de(s32), Render_TakePakChange(s32);
 extern void Pak_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
 s32 Pak_CheckStatusPrompt(Menu_func_804066BC_de *menu, s32 channel, s32 quiet)
 {
@@ -189,7 +189,7 @@ s32 Pak_CheckStatusPrompt(Menu_func_804066BC_de *menu, s32 channel, s32 quiet)
     } else if (D_8015375C) sel = D_0044E4F8;
     prompt = sel;
     if (!prompt) return 0;
-    busy = func_80264580_de(channel);
+    busy = Render_TakePakChange(channel);
     if ((result == 0 || busy != 0) && result != -2) {
         if (busy) {
             Pak_OpenDialog(D_8014561C, D_0044EA98, menu->player, menu->slot, prompt);

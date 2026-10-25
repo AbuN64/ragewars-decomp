@@ -351,7 +351,7 @@ extern void Items_ReleaseObjectHandles(void *);
 extern void Items_SetSelection(void *, s32, s32);
 extern f32 Particle_GetPointDistance(void *, void *);
 extern s32 Nav_FindNearestPointIndex(void *, void *);
-extern void func_802647E8_de(void *, s32);
+extern void Render_SetProfileMode(void *, s32);
 extern void Ovlgame_InitActorHudState(void *);
 /* Places the player at the matching level spawn. In multiplayer, choose the last
  * point tied for the greatest distance to its nearest player. Fall back when no
@@ -371,7 +371,7 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
     s32 floor;
     s32 cell;
     Items_ReleaseObjectHandles(player);
-    func_802647E8_de(((Shared_ActorView *)player)->controller, 0);
+    Render_SetProfileMode(((Shared_ActorView *)player)->controller, 0);
     world = &D_8011FE88;
     if (reset) {
         ((Shared_ActorView *)player)->field864 = 0;

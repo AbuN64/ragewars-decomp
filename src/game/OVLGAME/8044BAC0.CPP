@@ -28,15 +28,15 @@ extern char D_8010FC00[];
 extern ControllerProfile D_8010F328[];
 extern signed char D_800CBC10;
 
-extern void func_80285AC4_de(char *, char *, s32);
+extern void Render_InitPoolNodes(char *, char *, s32);
 extern void osSetEventMesg(s32, char *, s32);
 extern void func_802B7880_de(char *, char *, char *);
-extern void func_80264788_de(s32);
+extern void Render_DisableControllerPak(s32);
 
 s16 func_8044AE70_de(void) {
     s32 i;
 
-    func_80285AC4_de(D_8010EC90, D_8010ACC0, 8);
+    Render_InitPoolNodes(D_8010EC90, D_8010ACC0, 8);
     D_8010BBB8 = 2;
     osCreateMesgQueue(D_8010FC00, D_8010BBD8, 1);
     osCreateMesgQueue(&D_8010FBC0, D_8010B304, 1);
@@ -51,7 +51,7 @@ s16 func_8044AE70_de(void) {
         D_8010BBF0[i] = 0;
         D_8010BC28[i] = 0;
         D_8010B310[i] = 0;
-        func_80264788_de(i);
+        Render_DisableControllerPak(i);
         if (func_8044B008_de(&D_8010F328[i], i) != 0) {
             D_8010F320 = i;
             D_800D0E52++;
@@ -95,7 +95,7 @@ s32 func_8044B008_de(ControllerProfile *profile, s32 port) {
     profile->pakAmount = 0;
     profile->pakTimer = 0;
     profile->connected = connected;
-    func_80285AC4_de((char *)&profile->effectPool, (char *)profile->effectNodes, 3);
+    Render_InitPoolNodes((char *)&profile->effectPool, (char *)profile->effectNodes, 3);
     return profile->connected;
 }
 

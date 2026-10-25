@@ -11,7 +11,7 @@
 
 extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
-void func_80285DB0_de(Shared_World *world, void *actor, s32 arg2) {
+void Render_SetActorStateBit(Shared_World *world, void *actor, s32 arg2) {
     LevelActor *entry;
     struct Def *cond;
     void *field80;
@@ -75,7 +75,7 @@ void func_80285DB0_de(Shared_World *world, void *actor, s32 arg2) {
     base2[idx2 >> 3] &= ~mask;
 }
 
-s32 func_80285F58_de(void *arg0, void *arg1) {
+s32 Render_TestActorStateBit(void *arg0, void *arg1) {
     Shared_World *world = arg0;
     LevelActor *actor = arg1;
     void *field80;

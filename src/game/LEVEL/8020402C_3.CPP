@@ -14,7 +14,7 @@
 #include "WEAPONS/80213ED4.H"
 
 extern f32 D_800C6B74;
-extern void func_80285DB0_de(Shared_World *, void *, s32);
+extern void Render_SetActorStateBit(Shared_World *, void *, s32);
 extern void func_80267198_de(void *, void *, s32, CVector3, ResourceManagerState);
 typedef struct BreakableContactRule {
     u32 flags;
@@ -60,7 +60,7 @@ void Level_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *h
         if (triggerResponse) {
             eventState.active = 0;
             func_80267198_de(ctx, ctx, 6, ctx->unk_8, eventState);
-            func_80285DB0_de(&D_8011FE88, ctx, 1);
+            Render_SetActorStateBit(&D_8011FE88, ctx, 1);
         }
     }
     if ((rule->flags & 1) && hit->active != 0) {
@@ -93,14 +93,14 @@ void Level_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *h
 
 extern void func_80267198_de(void *, void *, s32, CVector3, ResourceManagerState);
 
-extern void func_80285DB0_de(Shared_World *, void *, s32);
+extern void Render_SetActorStateBit(Shared_World *, void *, s32);
 
-extern s32 func_80285F58_de(void *, void *);
+extern s32 Render_TestActorStateBit(void *, void *);
 
 
 extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
 
-extern void func_80285DB0_de(Shared_World *arg0, void *arg1, s32 arg2);
+extern void Render_SetActorStateBit(Shared_World *arg0, void *arg1, s32 arg2);
 
 extern void func_80267198_de(void *arg0, void *arg1, s32 arg2,
                           CVector3 arg3, ResourceManagerState arg4);
@@ -136,7 +136,7 @@ void func_80204A68_de(void *breakableHitContext, ObjectStateCC *arg1) {
     if (destroy) {
         local.active = 0;
         func_80267198_de(breakableHitContext, breakableHitContext, 7, ((BreakableHitContext *)(breakableHitContext))->unk_8, local);
-        func_80285DB0_de(&D_8011FE88, breakableHitContext, 0);
+        Render_SetActorStateBit(&D_8011FE88, breakableHitContext, 0);
     }
 }
 
@@ -146,7 +146,7 @@ void func_80204BB4_de(void *unused0, Dest *arg1) {
 }
 
 void func_80204BD0_de(void *arg0, void *arg1) {
-    s32 different = func_80285F58_de(&D_8011FE88, arg0) != 1;
+    s32 different = Render_TestActorStateBit(&D_8011FE88, arg0) != 1;
 
     if (different == 0) {
         Weapons_RequestActorState(arg0, arg1, 0);
@@ -172,7 +172,7 @@ void func_80204C68_de(void *arg0, ActorMotionState *motionState) {
 
     local.active = 0;
     flag = &D_8011FE88;
-    func_80285DB0_de(flag, arg0, 1);
+    Render_SetActorStateBit(flag, arg0, 1);
     func_80278D78_de(arg0, 0x4000, arg0);
     motionState->speed = 0;
     func_802A5D38_de(&D_801379C0, (s32)arg0);
@@ -189,7 +189,7 @@ void func_80204D2C_de(BreakableHitContext *breakableHitContext) {
 
     local.active = 0;
     flag = &D_8011FE88;
-    func_80285DB0_de(flag, breakableHitContext, 0);
+    Render_SetActorStateBit(flag, breakableHitContext, 0);
     func_80278D78_de(breakableHitContext, 0x8000, breakableHitContext);
     func_802A5D38_de(&D_801379C0, (s32)breakableHitContext);
     if (flag->mode != 4) {

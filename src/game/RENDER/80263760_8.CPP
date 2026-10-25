@@ -14,7 +14,7 @@
 #include "RENDER/80263760_8.H"
 
 
-extern void func_80285D30_de(s32 *);
+extern void Render_FreeAllPoolNodes(s32 *);
 
 
 
@@ -66,10 +66,10 @@ extern s32 func_8028B350_de(Shared_World *table, s32 id);
 
 
 
-void func_802647E8_de(ControllerProfile *slot, s32 arg1) {
+void Render_SetProfileMode(ControllerProfile *slot, s32 arg1) {
     slot->mode = arg1;
     if (arg1 == 0) {
-        func_80264248_de(slot);
+        Render_ResetControllerPak(slot);
     }
 }
 
@@ -80,7 +80,7 @@ void Render_ResetControllerProfiles(void) {
     i = 0;
     slot = D_8010F328;
     do {
-        func_80264248_de(slot);
+        Render_ResetControllerPak(slot);
         i += 1;
         slot += 1;
     } while (i < 4);
@@ -95,17 +95,17 @@ void Render_SetControllerMode(s32 a) {
     do {
         slot->mode = a;
         if (a == 0) {
-            func_80264248_de(slot);
+            Render_ResetControllerPak(slot);
         }
         i += 1;
         slot += 1;
     } while (i < 4);
     if (a == 0) {
-        func_80285D30_de(&D_8010EC90);
+        Render_FreeAllPoolNodes(&D_8010EC90);
     }
 }
 
-void func_802648C8_de(void)
+void Render_SaveControllerSetup(void)
 {
   s32 temp_v0;
   s32 temp_v1;
@@ -122,11 +122,11 @@ void func_802648C8_de(void)
   }
   while (var_a0 < 4);
   var_s1 = 0;
-  func_80285D30_de(&D_8010EC90);
+  Render_FreeAllPoolNodes(&D_8010EC90);
   var_s0 = D_8010F328;
   do
   {
-    func_80264248_de(var_s0);
+    Render_ResetControllerPak(var_s0);
     var_s1 += 1;
     var_s0 += 1;
   }
@@ -134,7 +134,7 @@ void func_802648C8_de(void)
   D_800CBC18 = 1;
 }
 
-void func_8026495C_de(void) {
+void Render_RestoreControllerSetup(void) {
     ControllerProfile *slot;
     s32 i;
     s32 j;
@@ -145,7 +145,7 @@ void func_8026495C_de(void) {
         i = 0;
         slot = D_8010F328;
         do {
-            func_80264248_de(slot);
+            Render_ResetControllerPak(slot);
             i += 1;
             slot += 1;
         } while (i < 4);
@@ -157,7 +157,7 @@ void func_8026495C_de(void) {
             *(s32 *)(&D_8010B3F4 + var_a0) = temp_v0;
             var_a0 += 0x224;
         } while (j < 4);
-        func_80285D30_de(&D_8010EC90);
+        Render_FreeAllPoolNodes(&D_8010EC90);
         D_800CBC18 = 0;
     }
 }
@@ -233,7 +233,7 @@ s32 func_80264B5C_de(void) {
     return D_8010BC40.savedActorId;
 }
 
-int func_80264B6C_de(void) {
+int Render_IsSnapshotActive(void) {
     return D_8010BC40.active;
 }
 

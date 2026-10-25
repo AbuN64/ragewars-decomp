@@ -46,7 +46,7 @@ extern f32 D_800C3B48_de[];
 
 extern void *Engine_GetActorDefinition(void *, s32);
 
-extern s32 func_80285F58_de(void *, void *);
+extern s32 Render_TestActorStateBit(void *, void *);
 
 extern void func_802466A0_de(void *, u16, u16, s32, void *, s32, s32, f32,
                           CVector3, u8, CVector3, CVector3, s32);
@@ -177,7 +177,7 @@ void func_8024B3A8_de(void *arg0, InputRecAt27 *arg1, s32 mode, s32 index) {
     fzero = 0.0f;
     amount = amountRaw * D_800C3B48_de[1];
     zero.x = zero.y = zero.z = fzero;
-    lookup = func_80285F58_de(&D_8011FE88, arg0);
+    lookup = Render_TestActorStateBit(&D_8011FE88, arg0);
     func_802466A0_de(arg0, arg1->unk1C, arg1->unk1E, arg1->unk0,
                   resource0, arg1->unk27 == 0xFF ? -1 : arg1->unk27,
                   resource1, amount, *(CVector3 *)arg1->vec4, arg1->unk26,

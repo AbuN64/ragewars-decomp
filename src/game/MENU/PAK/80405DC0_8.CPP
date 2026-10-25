@@ -17,7 +17,7 @@
 #define Pak_CheckControllerPak func_80406A90_eu_x
 #endif
 /* Selects a usable Controller Pak, checks its notes and free space, and opens the appropriate prompt. */
-s32 func_8026464C_de(void);
+s32 Render_AnyControllerConnected(void);
 void func_80293268_de(s32);
 void Pak_ProbeStatus(s32);
 s32 Pak_GetStatus(s32);
@@ -115,7 +115,7 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
     D_800DE874 = 0;
     D_80153784 = 0;
     D_8015375C = 1;
-    if (func_8026464C_de() == 0) {
+    if (Render_AnyControllerConnected() == 0) {
         D_80153784 = 1;
         D_8014AD9C = 0;
 #if defined(VERSION_DE)

@@ -81,5 +81,5 @@ struct Field;
 
 extern u8 D_800E20AC[];
 
-extern void func_802648C8_de(void);
+extern void Render_SaveControllerSetup(void);
 #endif

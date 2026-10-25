@@ -320,7 +320,7 @@ void func_8043C688_de(void) {
         "addiu      $s0, $zero, 0x1F40\n"
         ".Lauto_8043C718:\n"
         "lw         $a0, 0x20($s1)\n"
-        "jal        func_8026437C_de\n"
+        "jal        Render_IsAButtonPressed\n"
         "nop\n"
         "beqz       $v0, .Lauto_8043C7B8\n"
         "addiu     $v0, $zero, 0x1F40\n"
@@ -531,7 +531,7 @@ extern s32 D_80154034;
 #include "OVLGAME/SHAREDRECAT224.H"
 
 
-extern s32 func_8026437C_de(s32 buttons);
+extern s32 Render_IsAButtonPressed(s32 buttons);
 
 
 struct GameSession;
@@ -640,7 +640,7 @@ s32 func_8043C688_de(s32 arg0, Shared_MenuInput *pad) {
         break;
     }
 
-    if (func_8026437C_de(pad->buttons) != 0) {
+    if (Render_IsAButtonPressed(pad->buttons) != 0) {
         if (target == 8000) {
             D_801462C8.mode1E = 1;
             Ovlgame_SelectConfirmingController(pad);

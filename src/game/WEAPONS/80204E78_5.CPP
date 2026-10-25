@@ -75,7 +75,7 @@ void func_80205628_de(void *levelActor, void *spawnDispatchOwner, void *arg2) {
 
 void func_80205694_de(void *arg0, void *arg1) {
     Weapons_RequestActorState(arg0, arg1, 1);
-    func_80285DB0_de(&D_8011FE88, arg0, 1);
+    Render_SetActorStateBit(&D_8011FE88, arg0, 1);
 }
 
 void func_802056D0_de(Trigger *trigger) {

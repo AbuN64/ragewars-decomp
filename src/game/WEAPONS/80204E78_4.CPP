@@ -11,7 +11,7 @@
 #include "TYPES.H"
 #include "WEAPONS/80213ED4.H"
 
-extern s32 func_80285F58_de(void *, void *);
+extern s32 Render_TestActorStateBit(void *, void *);
 
 
 typedef struct Owner Owner;
@@ -27,7 +27,7 @@ void func_8020520C_de(LevelActor *source, void *dest) {
 }
 
 void func_8020524C_de(LevelActor *actor, void *arg1) {
-    if (func_80285F58_de(&D_8011FE88, actor) == 1) {
+    if (Render_TestActorStateBit(&D_8011FE88, actor) == 1) {
         Weapons_RequestActorState(actor, arg1, 1);
     } else {
         Weapons_RequestActorState(actor, arg1, 0);
@@ -65,7 +65,7 @@ void func_80205324_de(Obj5324 *arg0, s32 *arg1) {
 
     rec = &arg0->holder->r;
     pFlag = &D_8011FE88;
-    func_80285DB0_de(pFlag, arg0, 1);
+    Render_SetActorStateBit(pFlag, arg0, 1);
     func_80278D78_de(arg0, 0x40000, arg0);
     if (arg1[1] == 0) {
         arg0->flags = arg0->flags & 0xFFFEFFFF;

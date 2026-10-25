@@ -3763,7 +3763,7 @@ segments:
       - [0xC4F08, rodata, data_800C/D_80264104_C9FF8]
       - [0xC4F0C, data, data_800C/rodata_unresolved_800C430C]
       - [0xC4F10, rodata, data_800C/D_80264DF0_CA000]
-      - [0xC4F1C, rodata, data_800C/literals_func_802647E8_de]
+      - [0xC4F1C, rodata, data_800C/literals_Render_SetProfileMode]
       - [0xC4F24, data, data_800C/D_auto_rodata_unresolved_800C4324]
       - [0xC4F88, rodata, data_800C/D_80265964_CA078]
       - [0xC4F97, data, data_800C/rodata_unresolved_800C4397]

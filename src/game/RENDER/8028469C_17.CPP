@@ -175,7 +175,7 @@ f32 func_802859D0_de(f32 *arg0, u32 arg1, u32 arg2, u32 arg3) {
     return factor * first * func_80264EE0_de(&arg0[11]);
 }
 
-void func_80285AC4_de(void *arg0, void *arg1, s32 arg2) {
+void Render_InitPoolNodes(void *arg0, void *arg1, s32 arg2) {
 
     s32 i;
     NodeCode8028469C *p;
@@ -241,7 +241,7 @@ void func_80285C78_de(void *pool) {
     __osRestoreInt(saved);
 }
 
-void func_80285D30_de(void *arg0) {
+void Render_FreeAllPoolNodes(void *arg0) {
 
     void *node;
     void *next;

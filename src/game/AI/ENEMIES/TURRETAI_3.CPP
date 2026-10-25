@@ -66,7 +66,7 @@ typedef struct NavWork {
 
 
 
-extern s32 func_80285F58_de(void *, void *);
+extern s32 Render_TestActorStateBit(void *, void *);
 
 /** Run the object's update hook, then advance its timer and fire the expiry action when due. */
 
@@ -209,7 +209,7 @@ void Turret_Setup(LevelActor *actor, struct RecordRecAt13C *turret) {
     turret->pad128 = 0;
     turret->threshold = record->eventThreshold;
 
-    if (func_80285F58_de(&D_8011FE88, actor) == 0) {
+    if (Render_TestActorStateBit(&D_8011FE88, actor) == 0) {
         if (record->flags & 0x1000) {
             flags = actor->flags & ~0x2000;
             flags = flags & ~0x100;

@@ -27,7 +27,7 @@ s32 Weapons_GetPlayerIndex(int *, s32);
                                /* extern */
 
  /* const */
-extern void func_80264770_de(s32 kind);
+extern void Render_EnableControllerPak(s32 kind);
 extern s32 D_800E28C0[];
 void func_80443CD4_de(ArgRecAt1C *arg0) {
     s32 temp_a1;
@@ -63,7 +63,7 @@ void func_80443CD4_de(ArgRecAt1C *arg0) {
     if (temp_a1 != 0) {
         var_s0 = Weapons_GetPlayerIndex((s32 *)&D_80145040, temp_a1);
     }
-    func_80264770_de(var_s0);
+    Render_EnableControllerPak(var_s0);
     Pak_ProbeStatus(var_s0);
 }
 
@@ -86,7 +86,7 @@ void func_80443DD0_de(ArgRecAt1C *arg0) {
     if (temp_a1 != 0) {
         var_v0 = Weapons_GetPlayerIndex((s32 *)&D_80145040, temp_a1);
     }
-    func_80264770_de(var_v0);
+    Render_EnableControllerPak(var_v0);
     temp_v1 = arg0->unkC;
     temp_v1->flags238 = (s32) (temp_v1->flags238 | 0x01800000);
     temp_v1_2 = arg0->unkC;

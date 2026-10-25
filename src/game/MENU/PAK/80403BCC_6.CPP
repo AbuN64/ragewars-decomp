@@ -30,7 +30,7 @@ extern u8 D_800DE80C[0x42];
 
 extern void Render_ReadControllerStates(void);
 
-extern void func_8026454C_de(void);
+extern void Render_ReleasePakLock(void);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
@@ -127,7 +127,7 @@ static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
             func_802BD3A0_de(dst, buf, size);
         }
     }
-    func_8026454C_de();
+    Render_ReleasePakLock();
     func_80253908_de(0);
     if (handle != 0) {
         Scene_ReleaseResource(0, handle);
@@ -183,7 +183,7 @@ s32 Pak_DeleteNote(s32 ch, s32 index) {
         }
         Pak_UpdateStatus(ch);
     }
-    func_8026454C_de();
+    Render_ReleasePakLock();
     return result;
 }
 

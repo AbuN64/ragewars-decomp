@@ -21,7 +21,7 @@ void func_8044560C_de(PlayerRecAtC *player) {
     s32 mask;
 
     player->state = 2;
-    func_802648C8_de();
+    Render_SaveControllerSetup();
     mask = 0x800000;
     if (D_801462C8.local != 0) {
         mask = 0xFF7FFFFF;
@@ -37,7 +37,7 @@ void func_8044560C_de(PlayerRecAtC *player) {
 /* Calls func_8026495C_de and nothing else. */
 
 void func_8044569C_de(void) {
-    func_8026495C_de();
+    Render_RestoreControllerSetup();
 }
 
 /* Calls Pak_DrawMenuEntries and nothing else. */

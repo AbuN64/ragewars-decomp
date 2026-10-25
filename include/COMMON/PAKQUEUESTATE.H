@@ -101,12 +101,12 @@ extern int func_8026436C_de(Shared_Effect *arg0);
 struct ObjectState224;
 typedef struct ObjectState224 ObjectState224;
 
-extern int func_80264690_de();
+extern int Render_CountConnectedControllers();
 
 struct func_802644C8_S1;
 typedef struct func_802644C8_S1 func_802644C8_S1;
 
-extern void func_8026454C_de();
+extern void Render_ReleasePakLock();
 
 struct func_80264268_S1;
 typedef struct func_80264268_S1 func_80264268_S1;
@@ -135,7 +135,7 @@ extern void func_80263C24_de();
 
 
 
-extern void func_80263AF4_de();
+extern void Render_PollControllerPaks();
 
 
 
@@ -175,7 +175,7 @@ struct func_802644C8_S1 {
 };
 
 extern int func_802643F8_de(struct ControllerProfile *arg0);
-extern void func_80264248_de(struct ControllerProfile *arg0);
+extern void Render_ResetControllerPak(struct ControllerProfile *arg0);
 
 extern int func_80264634_de(int arg0);
 

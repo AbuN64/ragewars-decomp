@@ -112,7 +112,7 @@ struct func_80264A40_S1 {
     u16 unk650;
 };
 
-extern void func_8026495C_de();
+extern void Render_RestoreControllerSetup();
 
 struct func_80264E10_S1;
 struct func_80264E10_S1 {

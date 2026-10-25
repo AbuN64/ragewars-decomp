@@ -8,8 +8,8 @@
 
 /** Dispatches to func_80264770_de or func_80264788_de with a byte read from arg0->unk20->unk4, chosen by arg1. */
 
-extern void func_80264770_de(s32 arg);
-extern void func_80264788_de(s32 arg);
+extern void Render_EnableControllerPak(s32 arg);
+extern void Render_DisableControllerPak(s32 arg);
 
 
 
@@ -22,9 +22,9 @@ void func_8043DEF8_de(void *arg0, s32 arg1) {
 
     val = menu->widget->unk4;
     if (arg1 != 0) {
-        func_80264770_de(val);
+        Render_EnableControllerPak(val);
     } else {
-        func_80264788_de(val);
+        Render_DisableControllerPak(val);
     }
 }
 
