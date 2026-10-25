@@ -42,7 +42,7 @@ void func_8024F960_eu(void) {
         "lhu        $a1, 0xE($s2)\n"
         "lui        $a0, %hi(D_8011FE88)\n"
         "addiu      $a0, $a0, %lo(D_8011FE88)\n"
-        "jal        func_8028CF6C_de\n"
+        "jal        Engine_GetActorDefinition\n"
         "nop\n"
         "sw         $v0, 0x18($s1)\n"
         "addu       $a0, $v0, $zero\n"
@@ -315,7 +315,7 @@ extern s32 func_8024E924_de(PlacedProp *);
 #endif
 
 extern void func_8024DD10_de(PlacedProp *, PlacedPropRecord *, s32, char *);
-extern PropGeometry *func_8028CF6C_de(void *, s32);
+extern PropGeometry *Engine_GetActorDefinition(void *, s32);
 extern void MatrixFromQuaternion(f32 *, char *);
 extern void func_8027347C_de(char *, f32, f32, f32);
 extern void func_80273448_de(char *, f32, f32, f32);
@@ -343,7 +343,7 @@ void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner,
     prop->fieldAC = 0;
     prop->fieldB0 = 0;
     prop->fieldB4 = 0;
-    prop->model = func_8028CF6C_de(&D_8011FE88, record->model);
+    prop->model = Engine_GetActorDefinition(&D_8011FE88, record->model);
     prop->fade = 16;
     prop->fieldDC = 0;
     model = prop->model;

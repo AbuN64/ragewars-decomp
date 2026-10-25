@@ -44,7 +44,7 @@ extern char *D_80140F84;
 
 extern f32 D_800C3B48_de[];
 
-extern void *func_8028CF6C_de(void *, s32);
+extern void *Engine_GetActorDefinition(void *, s32);
 
 extern s32 func_80285F58_de(void *, void *);
 
@@ -167,7 +167,7 @@ void func_8024B3A8_de(void *arg0, InputRecAt27 *arg1, s32 mode, s32 index) {
     f32 amount;
     CVector3 zero;
 
-    resource0 = func_8028CF6C_de(&D_8011FE88, arg1->resource22);
+    resource0 = Engine_GetActorDefinition(&D_8011FE88, arg1->resource22);
     if (arg1->resource20 == 0xFFFF) {
         resource1 = 0;
     } else {

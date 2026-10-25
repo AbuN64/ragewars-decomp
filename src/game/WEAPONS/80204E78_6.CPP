@@ -25,7 +25,7 @@
 
 extern f32 func_80275DD4_de(Node75 *node, f32 x, f32 z);
 
-extern void *func_8028CF6C_de(void *arg0, s32 arg1);
+extern void *Engine_GetActorDefinition(void *arg0, s32 arg1);
 
 extern int func_8028B25C_de(void *arg0, int arg1);
 
@@ -226,7 +226,7 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
     }
     switch (definition->kind) {
     case 0:
-        entry = func_8028CF6C_de(&D_8011FE88, definition->selector);
+        entry = Engine_GetActorDefinition(&D_8011FE88, definition->selector);
         switch (*entry) {
         case 8:
             id = func_8028B25C_de(&D_8011FE88, definition->id);

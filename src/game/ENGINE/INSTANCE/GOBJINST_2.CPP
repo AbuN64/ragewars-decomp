@@ -21,7 +21,7 @@ extern char D_800C38C4_de;
 
 
 
-void func_80246BE8_de(void *arg0, s32 *arg1, s32 arg2, s32 extra) {
+void Instance_LoadModel(void *arg0, s32 *arg1, s32 arg2, s32 extra) {
     s32 *sp28;
     void **resource1;
     void **resource2;

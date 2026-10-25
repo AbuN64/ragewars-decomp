@@ -21,7 +21,7 @@ extern void Scene_ReplaceResourceBlock(s32 arg0, struct Shape_typemap_165 **hand
 
 extern struct Shape_typemap_165 *Scene_AllocResourceBlock(s32 arg0, void *handle, s32 size);
 
-extern void *func_8028CF6C_de(void *world, s32 id);
+extern void *Engine_GetActorDefinition(void *world, s32 id);
 
 
 extern s32 func_8044D3E8_de(World *world, void *data, s32 group, void *buf);
@@ -133,7 +133,7 @@ void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
                     rec = recWalk;
                     obj = objWalk;
                     i++;
-                    obj->definition = func_8028CF6C_de(world, rec->resource22);
+                    obj->definition = Engine_GetActorDefinition(world, rec->resource22);
                     objWalk = obj + 1;
                     recWalk = rec + 1;
                 }
@@ -144,7 +144,7 @@ void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
                 obj = &objects[i];
                 specialSet = 0xC1D;
                 func_8024B3A8_de(obj, rec, mode, i);
-                definition = func_8028CF6C_de(world, rec->resource22);
+                definition = Engine_GetActorDefinition(world, rec->resource22);
                 if (*definition != 0xB && i != 0) {
                     continue;
                 }

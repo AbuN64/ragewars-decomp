@@ -86,7 +86,7 @@ extern void Nav_InitSpawnedActor(char *, char *, void *);
 
 extern void func_802193C8_de(char *, s32, char *);
 
-extern void func_80246BE8_de(char *, s32, s32, s32);
+extern void Instance_LoadModel(char *, s32, s32, s32);
 
 extern s32 func_80250BF0_de(void);
 
@@ -251,7 +251,7 @@ Nav_InitSpawnedActor
         func_802193C8_de(obj + 0x204, effect, (char *)obj + 0x8);
     }
     world = &D_8011FE88;
-    func_80246BE8_de(obj, (s32)world->indexedDirectory, world->indexedBank, lean);
+    Instance_LoadModel(obj, (s32)world->indexedDirectory, world->indexedBank, lean);
     if (delay != 0) {
         ((LevelActor *)obj)->animationTime = delay;
         ((LevelActor *)obj)->flags &= ~0x400;

@@ -34,7 +34,7 @@ extern s32 D_800CD8D0[];
 
 
 extern void func_8024DD10_de(PlacedProp *, RecordRecAt1A *, s32, char *);
-extern PropGeometry *func_8028CF6C_de(void *, s32);
+extern PropGeometry *Engine_GetActorDefinition(void *, s32);
 extern void func_8027347C_de(char *, f32, f32, f32);
 extern void func_80273448_de(char *, f32, f32, f32);
 extern void func_80273D6C_de(char *);
@@ -69,7 +69,7 @@ void func_8024F960_eu(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *
     prop->fieldB0 = 0;
     prop->fieldB4 = 0;
     turn = 0.0f;
-    prop->model = func_8028CF6C_de(&D_8011FE88, record->model);
+    prop->model = Engine_GetActorDefinition(&D_8011FE88, record->model);
     prop->fade = 16;
     prop->fieldDC = 0;
     model = prop->model;

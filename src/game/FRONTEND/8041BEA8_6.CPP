@@ -11,15 +11,15 @@
 #include "COMMON/ACTOR_DEFINITION.H"
 extern void *Render_GetDirectoryEntry(void *, void *, s32);
 extern void *Render_LocatePackSection(void *, void *, s32, s32 *);
-extern void *func_8028CF6C_de(void *, u16);
-extern void func_80246BE8_de(void *, void *, void *, s32);
+extern void *Engine_GetActorDefinition(void *, u16);
+extern void Instance_LoadModel(void *, void *, void *, s32);
 typedef struct FrontendModelHeader {
     u8 prefix[0x1C];
     u16 definitionIndex;
 } FrontendModelHeader;
 /* Scans the world's preview model id table for entries equal to id. For each one it loads the model's index and info
  * resources; when the model's actor definition has the expected character and the preview's kind, it binds model i to
- * the preview (func_80246BE8_de with extra) and stops. */
+ * the preview (Instance_LoadModel with extra) and stops. */
 void Frontend_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected) {
     Obj8041CAD8At190 *previewState = &preview->sub190;
     Shared_World *scene = &D_8011FE88;
@@ -45,11 +45,11 @@ void Frontend_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra
                 modelData = Render_LocatePackSection(*indexResource, modelName, 0, &modelSize);
                 modelResource = Scene_RequestResource(0, (u32)modelData, (u32)modelData, modelSize, 0, 0, 0, "anim object info", 1);
                 if (modelResource != 0) {
-                    definition = func_8028CF6C_de(world, ((FrontendModelHeader *)Render_GetPackSection(*modelResource, 0))->definitionIndex);
+                    definition = Engine_GetActorDefinition(world, ((FrontendModelHeader *)Render_GetPackSection(*modelResource, 0))->definitionIndex);
                     if (definition->character == expected && definition->kind == preview->unk0) {
                         previewState->modelIndex = i;
                         previewState->type = id;
-                        func_80246BE8_de(previewState, world->indexedDirectory, (void *)world->indexedBank, extra);
+                        Instance_LoadModel(previewState, world->indexedDirectory, (void *)world->indexedBank, extra);
                         found = 1;
                     }
                     Scene_UnlockResource(0, (struct Node80253610 *)modelResource);
@@ -217,7 +217,7 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s
                      self->unk480, local60, 0);
     func_8024B2D0_de(draw);
     if (self->unk0 == 9) {
-        func_8041CE18_de(self, arg3, arg4, arg2);
+        Frontend_SelectPreviewModel(self, arg3, arg4, arg2);
     }
     return &self->copy4;
 }
@@ -259,7 +259,7 @@ void func_8041CE10_de(struct Object49C *object, s32 value) {
 }
 
 /* Clears the preview model type (sub190.type = 0xFFFF), then selects the matching preview model. */
-void func_8041CE18_de(Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected) {
+void Frontend_SelectPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected) {
     preview->sub190.type = 0xFFFF;
     Frontend_SelectMatchingPreviewModel(preview, id, extra, expected);
 }

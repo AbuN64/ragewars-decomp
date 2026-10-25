@@ -14,7 +14,7 @@
 #include "RENDER_4/8028FD2C_6.H"
 extern s32 Render_GetDirectoryEntry(s32, s32, s32);
 extern s32 Render_LocatePackSection(void *, s32, s32, s32 *);
-extern s32 func_8028CF6C_de(void *, s32);
+extern s32 Engine_GetActorDefinition(void *, s32);
 extern f32 func_802B2350(s32);
 extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 struct Shared_World;
@@ -85,7 +85,7 @@ SceneEffect *func_802627A0_de(struct SceneEffectPool *scene, s32 variant, s32 ow
             resource = Scene_RequestResource(0, clip, clip, size, 0, 0, 0, &D_800C4274_de, 1);
             if (resource != 0) {
                 record = Render_GetPackSection(*resource, 0);
-                count = func_8028CF6C_de(&D_8011FE88, record->count);
+                count = Engine_GetActorDefinition(&D_8011FE88, record->count);
                 Particle_ScaleVector(&color, &color, func_802B2350(record->angle));
                 effect = spawn_effect(scene, id, variant, count, owner, position, scale, direction, color, ref);
                 Scene_UnlockResource(0, resource);

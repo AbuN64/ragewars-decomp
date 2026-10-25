@@ -21,7 +21,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-void *func_8028CF6C_de(void *arg0, s32 arg1);
+void *Engine_GetActorDefinition(void *arg0, s32 arg1);
 typedef struct SimpleRecordIn {
     s32 visBits;
     CVector3 position;
@@ -85,7 +85,7 @@ void World_InitSimpleInstance(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 
     if (rec->variation == 0xFFFF) {
         inst->variation = &D_8011B388;
     } else {
-        inst->variation = func_8028CF6C_de(&D_8011FE88, rec->variation);
+        inst->variation = Engine_GetActorDefinition(&D_8011FE88, rec->variation);
     }
     if (rec->region == 0xFFFF) {
         inst->region = 0;

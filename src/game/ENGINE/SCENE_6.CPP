@@ -126,7 +126,7 @@ int func_8028B25C_de(void *world, int arg1) {
 
 
 
-extern void func_80246BE8_de(Object_func_8028B274_de *,s32,s32,s32);
+extern void Instance_LoadModel(Object_func_8028B274_de *,s32,s32,s32);
 static inline s32 find(TableRecAt8 *table,u16 id) {
  s32 index=0,count; u16 *entry;entry=table->entries;count=table->count;
  if(count>0) { do {if(*entry==id) return index; index++;entry++;} while(index<count); }
@@ -136,7 +136,7 @@ void func_8028B274_de(BankRecAt94 *arg0,Object_func_8028B274_de *draw,s32 arg2,s
  s32 index=0;
  if(draw->id!=arg2) {
  index=find(arg0->table,arg2);
- if(index!=-1){draw->index=index;draw->id=arg2;func_80246BE8_de(draw,arg0->field54,arg0->field24,arg3);}
+ if(index!=-1){draw->index=index;draw->id=arg2;Instance_LoadModel(draw,arg0->field54,arg0->field24,arg3);}
  }
 }
 

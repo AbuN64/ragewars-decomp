@@ -12,7 +12,7 @@ extern s32 D_800D2978;
 
 
 extern void func_8024DD10_de(PlacedProp *, PlacedPropRecord *, s32, char *);
-extern PropGeometry *func_8028CF6C_de(void *, s32);
+extern PropGeometry *Engine_GetActorDefinition(void *, s32);
 
 extern void MatrixFromQuaternion(f32 *, char *);
 extern void func_8027347C_de(char *, f32, f32, f32);
@@ -46,7 +46,7 @@ void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner,
     prop->fieldAC = 0;
     prop->fieldB0 = 0;
     prop->fieldB4 = 0;
-    prop->model = func_8028CF6C_de(&D_8011FE88, record->model);
+    prop->model = Engine_GetActorDefinition(&D_8011FE88, record->model);
     prop->fade = 16;
     prop->fieldDC = 0;
     model = prop->model;

@@ -117,7 +117,7 @@ void func_8028CE94_de(Object_func_8028CE94_de *arg0,s32 resource,s32 arg2,Triple
  }
 }
 
-void *func_8028CF6C_de(void *world, s32 index) {
+void *Engine_GetActorDefinition(void *world, s32 index) {
     void *result;
 
     if (index == -1) {
