@@ -12,7 +12,6 @@
 
 extern char D_8011AD70;
 extern char D_8011AF38;
-extern f32 D_800C4C64_de;
 extern void func_80273198_de(void *arg0, void *arg1);
 extern f32 func_80275DD4_de(Node75 *node, f32 x, f32 z);
 extern void func_80275410_de(void *arg0, s32 arg1);
@@ -73,7 +72,7 @@ void *Particle_ParentTransform(EffectActor *arg0, Shared_ActorView *camera) {
     sw_state_neg_3:
         value = func_80275DD4_de(0, arg0->pos.x,
             arg0->pos.z);
-        if (arg0->pos.y - value <= D_800C4C64_de) {
+        if (arg0->pos.y - value <= 0.01f) {
             func_80275410_de(state, 0);
             func_80274244_de(state, output);
             shared = &D_8011AD70;
@@ -180,7 +179,6 @@ void Particle_Attach(Actor_func_8027DAD0_de *actor, CVector3 *outPosition, CVect
     }
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/MTX.H"
 #include "TYPES.H"
 #include "COMMON/APPROACHLOCATION.H"
@@ -209,19 +207,32 @@ void func_8027027C_de(f32 *src, PackedMatrixWords *dst);
 
 
 
-/* 643/655 aligned words; remaining: depth argument in $f5 and farness in $f0 (float regalloc). */
+/* Depth part of the particle size scale (Particle_CameraScale carries the same body with the camera correction): a
+ * descriptor with flag 4 scales with depth, ramping from the distance range's minimum to its maximum (in
+ * thousandths of the depth) between 16 and 2048 units; others use 1. */
 static inline f32 particleDepthScale(struct Shared_ParticleDesc *desc, f32 depth) {
     f32 near;
     f32 farness;
     f32 scale;
-
+    f32 low;
+    f32 high;
     if (desc->flags & 4) {
         scale = depth;
         near = scale - 16.0f;
+        /* FAKEMATCH: three dead clamps (each result is overwritten before any use; jump2 deletes their compares
+         * after allocation) keep high/low and then depth/near live in the RTL, which gives the ROM's float
+         * registers (depth $f5, the range ramp in $f2/$f3). */
+        farness = RW_MAX_GT(high, near);
+        farness = RW_MAX_GT(low, near);
         farness = RW_MIN_LT(1.0f, RW_MAX_GT(0.0f, near) * (1.0f / 2032.0f));
-        farness *= desc->distanceRange->maximum - desc->distanceRange->minimum;
-        farness += desc->distanceRange->minimum;
-        scale = scale * farness * 0.001f;
+        high = RW_MAX_GT(depth, near);
+        high = desc->distanceRange->maximum;
+        low = desc->distanceRange->minimum;
+        high -= low;
+        high *= farness;
+        low += high;
+        scale *= low;
+        scale *= 0.001f;
     } else {
         scale = 1.0f;
     }
@@ -443,6 +454,3 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     }
     func_8027027C_de(final, out);
 }
-#else
-INCLUDE_ASM("span_1000", Particle_BuildMatrix);
-#endif

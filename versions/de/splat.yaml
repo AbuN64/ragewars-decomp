@@ -3886,8 +3886,6 @@ segments:
       - [0xC57CC, rodata, data_800C/D_8027AD4C_CA8BC]
       - [0xC57F8, rodata, data_800C/literals_Particle_Update]
       - [0xC5838, rodata, data_800C/literals_Particle_ParentTransform]
-      - [0xC5864, rodata, data_800C/D_8027D97C_CA954]
-      - [0xC5868, rodata, data_800C/data_func_8027DD48_de_800C4C68]
       - [0xC5910, rodata, data_800C/literals_func_8027E784_de]
       - [0xC5938, rodata, data_800C/D_8027EB2C_CAA28]
       - [0xC594F, data, data_800C/rodata_unresolved_800C4D4F]
