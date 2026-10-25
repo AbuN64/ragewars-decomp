@@ -1,4 +1,5 @@
 #include "COMMON/STATEPAIR.H"
+#include "RESMGR/802A2230.H"
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/UNUSED.H"
@@ -12,10 +13,9 @@
 
 
 
-extern float D_800CDA30_de;
 
 /** Store a scalar and clear its associated global state word. */
 void func_802A2400_de(float value) {
-    D_800CDA30_de = value;
+    D_800CDA30_de.value = value;
     D_801427B0 = 0;
 }

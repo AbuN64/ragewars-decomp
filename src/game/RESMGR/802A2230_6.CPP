@@ -16,7 +16,6 @@
 #include "MATH/80299ECC.H"
 
 extern s32 D_800D2C90;
-extern StatePair D_800CDA30_de;
 extern s8 D_8010BBB8;
 extern void Frontend_SetupRandomTeams(void);
 void func_802A2090_de(void) {

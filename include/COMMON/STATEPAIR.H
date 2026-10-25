@@ -5,6 +5,7 @@
 
 struct StatePair;
 typedef struct StatePair StatePair;
+extern StatePair D_800CDA30_de;
 
 struct func_802A2EC0_S1;
 struct func_802A2EC0_S1 {

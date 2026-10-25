@@ -19,7 +19,6 @@ extern void func_8029AA34_de(s32 *arg0);
 
 
 
-extern float D_800CDA30_de;
 
 void func_802A2360_de(void) {
     s32 *p;
