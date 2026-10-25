@@ -84,7 +84,6 @@ s32 System_CanDamageActor(DamageActor *source, DamageActor *target) {
     return 1;
 }
 
-#ifdef NON_MATCHING
 #include "TYPES.H"
 #include "COMMON/APPROACHLOCATION.H"
 #include "COMMON/BALLISTICPARAMS.H"
@@ -132,14 +131,19 @@ typedef struct ReactionActor {
     char pad1B0[0x28];
     ReactionPlayer *player;
 } ReactionActor;
+
 typedef struct ReactionShield {
     char pad00[0x66];
-    u8 effectKind;
+    u8 effectKind; /* 0x66: impact response variant (4 or 5) */
 } ReactionShield;
 
-static inline void applyShieldReaction(ReactionActor *target, ReactionPlayer *player,
-                                       CVector3 position, CVector3 impulse, ReactionShield *reaction) {
-    s32 effectKind = reaction->effectKind;
+static inline s32 isReflectShield(ReactionShield *shield) {
+    if (shield->effectKind == 4 || shield->effectKind == 5) {
+        return 1;
+    }
+    return 0;
+}
+static inline void applyShieldReaction(ReactionActor *target, ReactionPlayer *player, CVector3 position, CVector3 impulse, s32 effectKind) {
     CVector3 localImpulse;
     CVector3 effectPosition;
     CVector3 zero;
@@ -170,14 +174,14 @@ static inline void applyShieldReaction(ReactionActor *target, ReactionPlayer *pl
     }
 }
 
-/* 2/253 aligned instruction edits; remaining: the ROM loads the shield kind for the reaction before the
- * position/impulse argument copies, here the inline body loads it after them. */
+/* Applies a hit's reaction: a player victim gets its hit flag, the attacker's screen shake, and (when the hit is
+ * absorbed) a reflect-shield spark plus sound with the impulse cancelled; walking/flying attackers then take the
+ * impulse and optionally turn toward the target. */
 void System_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 absorbImpulse, CVector3 position, CVector3 impulse,
-                      s32 applyTurn, void *shield, u32 hitFlags) {
+                      s32 applyTurn, ReactionShield *shield, u32 hitFlags) {
     ReactionActor *source = (ReactionActor *)sourceObject;
     ReactionActor *target = (ReactionActor *)targetObject;
     s32 absorb = absorbImpulse;
-    ReactionShield *reaction = (ReactionShield *)shield;
     f32 angle;
     if (target->category == 1) {
         DamageActor *victim = (DamageActor *)target;
@@ -192,9 +196,9 @@ void System_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 abso
             }
         }
         if (absorb) {
-            if (reaction && (victim->flags & 0x300000) &&
-                (u32)(reaction->effectKind - 4) < 2) {
-                applyShieldReaction(target, victim->player, position, impulse, reaction);
+            if (shield && (victim->flags & 0x300000) &&
+                isReflectShield(shield)) {
+                applyShieldReaction(target, victim->player, position, impulse, shield->effectKind);
             }
             impulse.x = 0.0f; impulse.y = 0.0f; impulse.z = 0.0f;
         }
@@ -210,9 +214,6 @@ void System_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 abso
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", System_ApplyDamageReaction);
-#endif
 
 #include "stddef.h"
 #include "COMMON/GAMEPLAY_REACTIONS.H"
@@ -222,16 +223,10 @@ extern const f32 D_800C43E0_de[16];
 extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
 extern f32 func_8024BEDC_de(void *);
 extern f32 Particle_GetActorHeight(void *);
-#ifndef NON_MATCHING
-extern f32 func_8024D398_de(void *);
-#endif
 extern s32 func_8024B06C_de(void *, CVector3, Shield *);
 extern f32 func_802726F8_de(CVector3 *, CVector3 *);
 extern f32 func_802672D0_de(u8 *);
 extern f32 func_802B72B0_de(f32);
-#ifndef NON_MATCHING
-extern void func_80271F9C_de(void *, void *, f32);
-#endif
 extern void func_80216488_de(CDamageInfo *, void *, s32, f32, s32, Shield *);
 extern s32 func_8022AC00_de(void *);
 struct CallbackState114;
