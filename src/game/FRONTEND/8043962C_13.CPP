@@ -32,8 +32,8 @@ extern float D_800DDF50_de;
 extern float D_800DDF58;
 #endif
 extern void Particle_BuildTranslationMatrix(void *, f32, f32, f32);
-extern void func_802737F0_de(Matrix *,f32); extern void func_802739C4_de(Matrix *,f32); extern void func_80273B98_de(Matrix *,f32);
-extern void func_8027347C_de(Matrix *,f32,f32,f32); extern void SwapMatrixUpForward(Matrix *);
+extern void PitchMatrixLocal(Matrix *,f32); extern void YawMatrixLocal(Matrix *,f32); extern void RollMatrixLocal(Matrix *,f32);
+extern void ScaleMatrixLocal(Matrix *,f32,f32,f32); extern void SwapMatrixUpForward(Matrix *);
 extern s32 func_802A1934_de(void); extern void Rsp_ConvertMatrixToFixed(Matrix *,void *);
 extern s32 func_8028C198_de(void *,s32);
 extern void func_8026DF30_de(s32,void *,void *,s32,s32);
@@ -56,27 +56,27 @@ void func_804399D0(MenuModelItem *item) {
   Particle_TransformPoint(&D_80141008[0].camera,&position,&transformed);
   Particle_BuildTranslationMatrix(&matrix, transformed.x, transformed.y, transformed.z);
   time=func_802A1934_de();
-  if(item->speed.x!=0.0f)func_802737F0_de(&matrix,time*item->speed.x*D_800DDF50_de);
+  if(item->speed.x!=0.0f)PitchMatrixLocal(&matrix,time*item->speed.x*D_800DDF50_de);
 #if defined(VERSION_DE)
-  if(item->speed.y!=0.0f)func_802739C4_de(&matrix,time*item->speed.y*(0.01745329424738884f));
+  if(item->speed.y!=0.0f)YawMatrixLocal(&matrix,time*item->speed.y*(0.01745329424738884f));
 #elif defined(VERSION_EU)
-  if(item->speed.y!=0.0f)func_802739C4_de(&matrix,time*item->speed.y*(0.01745329424738884f));
+  if(item->speed.y!=0.0f)YawMatrixLocal(&matrix,time*item->speed.y*(0.01745329424738884f));
 #elif defined(VERSION_EU_X)
-  if(item->speed.y!=0.0f)func_802739C4_de(&matrix,time*item->speed.y*(0.01745329424738884f));
+  if(item->speed.y!=0.0f)YawMatrixLocal(&matrix,time*item->speed.y*(0.01745329424738884f));
 #elif defined(VERSION_US)
-  if(item->speed.y!=0.0f)func_802739C4_de(&matrix,time*item->speed.y*(0.01745329424738884f));
+  if(item->speed.y!=0.0f)YawMatrixLocal(&matrix,time*item->speed.y*(0.01745329424738884f));
 #elif defined(VERSION_US_REV1)
-  if(item->speed.y!=0.0f)func_802739C4_de(&matrix,time*item->speed.y*D_800E1F84);
+  if(item->speed.y!=0.0f)YawMatrixLocal(&matrix,time*item->speed.y*D_800E1F84);
 #endif
-  if(item->speed.z!=0.0f)func_80273B98_de(&matrix,time*item->speed.z*D_800DDF58);
-  if(item->rotation.x!=0.0f)func_802737F0_de(&matrix,item->rotation.x*(*(&D_800DDF58+1)));
-  if(item->rotation.y!=0.0f)func_802739C4_de(&matrix,item->rotation.y*(*(&D_800DDF58+2)));
-  if(item->rotation.z!=0.0f)func_80273B98_de(&matrix,item->rotation.z*(*(&D_800DDF58+3)));
+  if(item->speed.z!=0.0f)RollMatrixLocal(&matrix,time*item->speed.z*D_800DDF58);
+  if(item->rotation.x!=0.0f)PitchMatrixLocal(&matrix,item->rotation.x*(*(&D_800DDF58+1)));
+  if(item->rotation.y!=0.0f)YawMatrixLocal(&matrix,item->rotation.y*(*(&D_800DDF58+2)));
+  if(item->rotation.z!=0.0f)RollMatrixLocal(&matrix,item->rotation.z*(*(&D_800DDF58+3)));
   ratio=D_80141008[0].width/(f32)D_800E28D0;
   scale.x=item->scale.x*ratio;
   scale.z=item->scale.z*ratio;
   scale.y=item->scale.y*(D_80141008[0].height/(f32)*(&D_800E28D0+1));
-  func_8027347C_de(&matrix,scale.x,scale.y,scale.z);SwapMatrixUpForward(&matrix);
+  ScaleMatrixLocal(&matrix,scale.x,scale.y,scale.z);SwapMatrixUpForward(&matrix);
   Rsp_ConvertMatrixToFixed(&matrix,(char *)item+((D_800D297C<<6)+0x38));
   model=func_8028C198_de(&g_world,item->model);Render_BeginModelBatch();
   func_8026DF30_de(model,(char *)item+((D_800D297C<<6)+0x38),&D_800D0EF8,0,item->flags);

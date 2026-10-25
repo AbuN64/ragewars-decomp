@@ -22,7 +22,7 @@ extern s32 D_801468F4;
 
 extern f32 Particle_GetActorHeight(void *arg0);
 
-extern void func_8028C6D4_de(void *arg0, void *arg1, void *arg2);
+extern void Engine_SampleWorldLighting(void *arg0, void *arg1, void *arg2);
 
 extern void func_80249E28_de(void *arg0, void *arg1);
 
@@ -42,7 +42,7 @@ void func_8021C9D8_de(void *player, void *camera) {
     pos = ((LevelActor *)player)->position0;
     pos.y += ((LevelActor *)player)->eyeHeight;
     pos.y += Particle_GetActorHeight(player) * ((D_800C7470_Pair *)&D_800C22B0_us)->second;
-    func_8028C6D4_de(&g_world, &pos,
+    Engine_SampleWorldLighting(&g_world, &pos,
                   &((LevelActor *)player)->lighting[D_800D297C]);
 
     value = 0x66;

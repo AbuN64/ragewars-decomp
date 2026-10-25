@@ -28,11 +28,11 @@ extern CQuatern func_80271818_de(CVector3 *);
 
 extern void MultiplyQuaternions(CQuatern *out, CQuatern *a, CQuatern *b);
 
-extern s32 func_8027254C_de(CVector3 *, f32);
+extern s32 Particle_LimitVectorLength(CVector3 *, f32);
 
 extern void MatrixFromQuaternion(CQuatern *, f32 *);
 
-extern void func_8027347C_de(f32 *, f32, f32, f32);
+extern void ScaleMatrixLocal(f32 *, f32, f32, f32);
 
 extern void TranslateMatrix(f32 *, f32, f32, f32);
 
@@ -128,9 +128,9 @@ void func_8027E784_de(Shared_Particle *actor, struct Shared_ParticleView *view) 
     point.x = actor->inst.pos.x;
     point.z = actor->inst.pos.z;
     point.y = floor;
-    func_8027254C_de(&point, 20000.0f);
+    Particle_LimitVectorLength(&point, 20000.0f);
     MatrixFromQuaternion(&rotation, matrix);
-    func_8027347C_de(matrix, size, 1.0f, size);
+    ScaleMatrixLocal(matrix, size, 1.0f, size);
     TranslateMatrix(matrix, point.x, point.y, point.z);
     Rsp_ConvertMatrixToFixed(matrix, model);
     {

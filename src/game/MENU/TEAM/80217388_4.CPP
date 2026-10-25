@@ -86,9 +86,9 @@ extern ObjRecAt6V1 *D_800D052C[];
 
 extern f32 Nav_ApproachValue(f32, f32, f32);
 
-extern void func_802727D8_de(Matrix *);
+extern void Particle_IdentityMatrix(Matrix *);
 
-extern void func_80273C68_de(Matrix *, f32);
+extern void RollMatrix(Matrix *, f32);
 
 
 
@@ -121,8 +121,8 @@ void func_80217928_de(CBarrel *menu, s32 arg1, s32 arg2) {
                 }
                 size = 1.0f;
                 slot->m_Scale = Nav_ApproachValue(slot->m_Scale, target, *(&D_800C9138_de + 1) * 0.1f);
-                func_802727D8_de(&matrix);
-                func_80273C68_de(&matrix, slot->m_Rot);
+                Particle_IdentityMatrix(&matrix);
+                RollMatrix(&matrix, slot->m_Rot);
                 Particle_TransformPoint(&matrix, &offset, &position);
                 weapon = menu->m_WeaponList[i].m_Weapon;
                 if (weapon < 0) {

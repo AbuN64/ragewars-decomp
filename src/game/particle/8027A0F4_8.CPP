@@ -29,12 +29,12 @@ extern s32 D_800D297C;
 
 extern f32 D_800CD6B0;
 
-extern void func_80272B38_de(MatrixF *, CVector3 *, CVector3 *);
-extern void func_802727D8_de(MatrixF *);
+extern void Particle_TransformDirection(MatrixF *, CVector3 *, CVector3 *);
+extern void Particle_IdentityMatrix(MatrixF *);
 extern CQuatern func_8024D4AC_de(EffectActor *, CVector3);
 extern void BuildDirectionMatrix(MatrixF *, CVector3 *);
 extern void Rsp_ConvertMatrixToFloat(MatrixF *, MatrixF *);
-extern void func_8027347C_de(MatrixF *, f32, f32, f32);
+extern void ScaleMatrixLocal(MatrixF *, f32, f32, f32);
 extern void TranslateMatrix(MatrixF *, f32, f32, f32);
 extern void Particle_BuildMatrix(EffectActor *, MatrixF *, void *, f32);
 extern s32 Nav_NextRandom(void);
@@ -126,7 +126,7 @@ static inline void effect_spawn_aim(ParticleEffect *effect, EffectTarget *aimTar
         Particle_TransformPoint(&targetInv, &aimTarget->pos, &effect->startPosition);
         up = D_801042C8;
         Particle_NormalizeVec3(&up.x);
-        func_80272B38_de(&targetInv, &up, vel);
+        Particle_TransformDirection(&targetInv, &up, vel);
         effect->followedActor = (s32) targetActor;
         effect->flags |= 0x10000;
         effect->boundMatrixIndex = D_801041F0.matrixIndex;
@@ -323,7 +323,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                         if (source->model->unk14 != 0) {
                             scale = 2.857143f;
                         }
-                        func_8027347C_de(&mtx, scale, scale, scale);
+                        ScaleMatrixLocal(&mtx, scale, scale, scale);
                         if (source->model->flags & 8) {
                             TranslateMatrix(&mtx, 0.0f, -source->unk154 * source->unk158, 0.0f);
                         }
@@ -337,7 +337,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                         break;
                 }
             } else if (entry->flags & 0x1000000) {
-                func_802727D8_de(&mtx);
+                Particle_IdentityMatrix(&mtx);
             } else {
                 if (entry->flags & 0x40000) {
                     quat = func_8024D4AC_de(owner, pos);

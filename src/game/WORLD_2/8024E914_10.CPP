@@ -35,10 +35,10 @@ extern s32 D_800CD8D0[];
 
 extern void func_8024DD10_de(PlacedProp *, RecordRecAt1A *, s32, char *);
 extern PropGeometry *Engine_GetActorDefinition(void *, s32);
-extern void func_8027347C_de(char *, f32, f32, f32);
+extern void ScaleMatrixLocal(char *, f32, f32, f32);
 extern void TranslateMatrix(char *, f32, f32, f32);
 extern void SwapMatrixUpForward(char *);
-extern void func_8027302C(char *, char *);
+extern void CopyMatrix(char *, char *);
 extern void Rsp_ConvertMatrixToFixed(char *, char *);
 
 static inline s32 advancePropKey(void) {
@@ -100,8 +100,8 @@ void func_8024F960_eu(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *
         break;
     }
     prop->flags = record->flags;
-    func_802736D4_de(matrix, turn);
-    func_8027347C_de(matrix, record->scale, record->scale, record->scale);
+    BuildYawMatrix(matrix, turn);
+    ScaleMatrixLocal(matrix, record->scale, record->scale, record->scale);
     TranslateMatrix(matrix, position.x, position.y, position.z);
     SwapMatrixUpForward(matrix);
     if (prop->flags & 0x40) {
@@ -121,7 +121,7 @@ void func_8024F960_eu(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *
         prop->max.z = position.z + record->extents[5] * 10.23999977f + 0.5f;
         prop->fieldD4 = record->value;
     }
-    func_8027302C(prop->matrix, matrix);
+    CopyMatrix(prop->matrix, matrix);
     Rsp_ConvertMatrixToFixed(matrix, prop->transform);
     prop->position = position;
     if (record->segment == 0xFFFF) {

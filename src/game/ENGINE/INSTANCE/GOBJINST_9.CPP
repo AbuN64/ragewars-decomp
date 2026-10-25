@@ -111,8 +111,8 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
 #include "TYPES.H"
 float func_8024E678_de(void *object, s32 mode);
 f32 func_8024E2FC_de(Actor_u1 *arg0);
-s32 func_8027254C_de(f32 *arg0, f32 arg1);
-void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
+s32 Particle_LimitVectorLength(f32 *arg0, f32 arg1);
+void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
 void Rsp_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst);
 void func_8026992C_de(void *matrix, s32 pass, u32 alpha);
@@ -161,9 +161,9 @@ void Instance_DrawBlobShadow(struct LevelActor *actor, CVector3 *offset, s32 rai
         position.x = actor->position0.x + offset->x;
         position.z = actor->position0.z + offset->z;
         position.y = groundHeight + lift + offset->y;
-        func_8027254C_de((f32 *)&position, 20000.0f);
+        Particle_LimitVectorLength((f32 *)&position, 20000.0f);
         MatrixFromQuaternion(&actor->rotation, matrix);
-        func_8027347C_de(matrix, scale, 1.0f, scale);
+        ScaleMatrixLocal(matrix, scale, 1.0f, scale);
         TranslateMatrix((s8 *) matrix, position.x, position.y, position.z);
         Rsp_ConvertMatrixToFixed(matrix, (PackedMatrixWords *) packed);
         opacity = 200.0f - (height * 1.2207031f);

@@ -42,7 +42,7 @@ void *func_8024C104_de(Triple *arg0, void *arg1, AnimChannel *anim) {
     inVec[0] = spVec[0];
     inVec[1] = spVec[2];
     inVec[2] = spVec[1];
-    func_802736D4_de(mtx, ((LevelActor *)o1)->yaw);
+    BuildYawMatrix(mtx, ((LevelActor *)o1)->yaw);
     Particle_TransformPoint(mtx, inVec, outVec);
     outVec[0] *= ((LevelActor *)o1)->scale.x;
     outVec[1] *= ((LevelActor *)o1)->scale.y;
@@ -101,7 +101,7 @@ void func_8024C34C_de(LevelActor *actor, AnimChannel *arg1) {
     scratch.in[0] = scratch.second[0] - scratch.first[0];
     scratch.in[1] = zero;
     scratch.in[2] = scratch.second[1] - scratch.first[1];
-    func_802736D4_de(scratch.matrix, actor->yaw);
+    BuildYawMatrix(scratch.matrix, actor->yaw);
     Particle_TransformPoint(scratch.matrix, scratch.in, scratch.out);
     scratch.position.x = actor->position0.x +
                           (scratch.out[0] * actor->scale.x);

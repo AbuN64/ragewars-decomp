@@ -11,8 +11,8 @@ struct LevelBitRecord;
 
 
 
-struct Track_func_8028C6D4_de;
-struct Track_func_8028C6D4_de {
+struct TrackEngineSampleWorldLighting;
+struct TrackEngineSampleWorldLighting {
     void **nodes;
     s32 pad4[2];
 };
@@ -57,14 +57,14 @@ struct IntegerState54;
 typedef struct IntegerState54 IntegerState54;
 
 
-struct Track_func_8028C6D4_de;
-typedef struct Track_func_8028C6D4_de Track_func_8028C6D4_de;
+struct TrackEngineSampleWorldLighting;
+typedef struct TrackEngineSampleWorldLighting TrackEngineSampleWorldLighting;
 
-struct Owner_func_8028C6D4_de;
-struct Owner_func_8028C6D4_de {
+struct OwnerEngineSampleWorldLighting;
+struct OwnerEngineSampleWorldLighting {
     char pad0[0x1504];
     s32 count;
-    Track_func_8028C6D4_de tracks[1];
+    TrackEngineSampleWorldLighting tracks[1];
 };
 
 extern int D_800D2850;
@@ -228,8 +228,8 @@ typedef struct WorldRecAt10B8 WorldRecAt10B8;
 
 
 
-struct Owner_func_8028C6D4_de;
-typedef struct Owner_func_8028C6D4_de Owner_func_8028C6D4_de;
+struct OwnerEngineSampleWorldLighting;
+typedef struct OwnerEngineSampleWorldLighting OwnerEngineSampleWorldLighting;
 
 
 struct WorldRecAt1B6A4;

@@ -48,8 +48,8 @@ extern void func_802453D4_de(void);
 extern CVector3 Menu_GetTrackEyePosition(f32);
 extern CVector3 Menu_GetTrackTargetPosition(f32);
 extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
-extern void func_802727D8_de(void *);
-extern void func_80272E3C_de(void *, f32, f32, f32);
+extern void Particle_IdentityMatrix(void *);
+extern void Particle_MatrixFromEulerXYZ(void *, f32, f32, f32);
 extern void Particle_TransformPoint(void *, CVector3 *, CVector3 *);
 extern void func_80288470_de(void *);
 extern s32 Camera_MoveActorWithCollision(SharedTrackObject *, f32, f32, f32, void *);
@@ -106,8 +106,8 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
                 D_800E2830->yaw = 0.0f;
             }
         }
-        func_802727D8_de(matrix);
-        func_80272E3C_de(matrix, 0.0f, D_800E2830->yaw, 0.0f);
+        Particle_IdentityMatrix(matrix);
+        Particle_MatrixFromEulerXYZ(matrix, 0.0f, D_800E2830->yaw, 0.0f);
         Particle_TransformPoint(matrix, &target, &rotated);
         target = rotated;
         Particle_TransformPoint(matrix, &eye, &rotated);

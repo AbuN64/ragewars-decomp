@@ -36,7 +36,7 @@ static inline void build_rotation(struct RotationObject *object, f32 *matrix) {
     MatrixFromQuaternion(&rotation.x, matrix);
 }
 
-extern void func_80273C68_de(void *arg0, f32 arg1);
+extern void RollMatrix(void *arg0, f32 arg1);
 
 /* Returns whether a player may act on a target: never on its own linked object or an inactive
    target, always when the team rule D_801468C4 is off, otherwise only across different teams. */
@@ -103,11 +103,11 @@ void Turret_SpecialEffects(void *actor, ObjRecAt8V1 *event) {
     track = (void *)eventOwner->unk18;
     turretInfo = &track->segment;
     if (event->unk4 == turretInfo->m_GunNode) {
-        func_802738C0_de(actor, eventOwner->unk294);
+        PitchMatrix(actor, eventOwner->unk294);
     }
     if (event->unk4 == turretInfo->m_RotNode) {
         headingOwner = event->unk8;
-        func_80273C68_de(actor,
+        RollMatrix(actor,
                       headingOwner->targetHeading -
                           headingOwner->heading);
     }

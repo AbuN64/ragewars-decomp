@@ -117,8 +117,8 @@ void World_InitSimpleInstance(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 
 
 
 extern void **func_8024F6EC_de(StaticObject *, s32);
-extern void func_8027347C_de(MatrixF *, f32, f32, f32);
-extern s32 func_8027254C_de(CVector3 *, f32);
+extern void ScaleMatrixLocal(MatrixF *, f32, f32, f32);
+extern s32 Particle_LimitVectorLength(CVector3 *, f32);
 extern void TranslateMatrix(MatrixF *, f32, f32, f32);
 extern void SwapMatrixUpForward(MatrixF *);
 extern void Rsp_ConvertMatrixToFixed(MatrixF *, char *);
@@ -143,12 +143,12 @@ void func_8024EB90_de(StaticObject *obj) {
     obj->cached = g_displayListCursor;
     gSPBranchList(g_displayListCursor++, 0);
     if (*obj->type == 8) {
-        func_802736D4_de(&matrix, g_world.elapsed);
+        BuildYawMatrix(&matrix, g_world.elapsed);
     } else {
-        func_802736D4_de(&matrix, obj->angle);
+        BuildYawMatrix(&matrix, obj->angle);
     }
-    func_8027347C_de(&matrix, obj->scale, obj->scale, obj->scale);
-    func_8027254C_de(&obj->position, 20000.0f);
+    ScaleMatrixLocal(&matrix, obj->scale, obj->scale, obj->scale);
+    Particle_LimitVectorLength(&obj->position, 20000.0f);
     TranslateMatrix(&matrix, obj->position.x, obj->position.y + obj->height, obj->position.z);
     SwapMatrixUpForward(&matrix);
     Rsp_ConvertMatrixToFixed(&matrix, obj->matrices[D_800D297C]);

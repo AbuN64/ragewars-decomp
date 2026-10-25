@@ -803,7 +803,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "addiu     $a0, $sp, 0xF8\n"
         "addiu      $a0, $sp, 0xB8\n"
         "addiu      $a1, $sp, 0xF8\n"
-        "jal        func_80272B38_de\n"
+        "jal        Particle_TransformDirection\n"
         "addiu     $a2, $s2, 0x1C\n"
         "lw         $v0, 0x5C($s2)\n"
         "lui        $v1, (0x10000 >> 16)\n"
@@ -1125,7 +1125,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         ".Lauto_8027D2FC:\n"
         "lui        $a1, (0x40490FDC >> 16)\n"
         "ori        $a1, $a1, (0x40490FDC & 0xFFFF)\n"
-        "jal        func_802737F0_de\n"
+        "jal        PitchMatrixLocal\n"
         "addu      $a0, $s0, $zero\n"
         "lui        $v0, %hi(D_80103FCC)\n"
         "lw         $v0, %lo(D_80103FCC)($v0)\n"
@@ -1183,7 +1183,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "addiu     $a0, $sp, 0xF8\n"
         "addiu      $a0, $sp, 0xB8\n"
         "addiu      $a1, $sp, 0xF8\n"
-        "jal        func_80272B38_de\n"
+        "jal        Particle_TransformDirection\n"
         "addiu     $a2, $s1, 0x1C\n"
         "lw         $v0, 0x5C($s1)\n"
         "lui        $v1, (0x10000 >> 16)\n"
@@ -1258,9 +1258,9 @@ s32 func_8024E2C4_de(void *);
 void Rsp_ConvertMatrixToFloat(f32 *, void *);
 void func_80247F18_de(void *, void *, void *, CVector3, CVector3, s32);
 void func_8026EF58_de(f32 *, f32 *);
-void func_80272B38_de(f32 *, CVector3 *, CVector3 *);
+void Particle_TransformDirection(f32 *, CVector3 *, CVector3 *);
 s32 func_8024E140_de(void *);
-void func_802737F0_de(f32 *, f32);
+void PitchMatrixLocal(f32 *, f32);
 static __inline__ void attachParticle(Shared_Particle *particle, f32 *transform, s32 action) {
     f32 localTransform[16];
     f32 inverse[16];
@@ -1277,7 +1277,7 @@ static __inline__ void attachParticle(Shared_Particle *particle, f32 *transform,
     Particle_TransformPoint(inverse, &scene->origin, &particle->attachmentPosition);
     direction=scene->direction;
     Particle_NormalizeVec3(&direction);
-    func_80272B38_de(inverse, &direction, &particle->inst.velocity);
+    Particle_TransformDirection(inverse, &direction, &particle->inst.velocity);
     particle->flags|=0x10000;
     particle->target=attached;
     particle->shake=D_801041F0.frame;
@@ -1383,7 +1383,7 @@ void Particle_HitTarget(void *particle) {
         if (actor->particle.inst.type==0x3ef && D_8013D538 && owner->bones && D_8013D538->particle.inst.type==0x41e && action!=9) {
             D_8013D538->particle.rot=D_80103FCC->point;
             if (!hasMatrix) Rsp_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
-            func_802737F0_de(boneMatrix, 3.141593f);
+            PitchMatrixLocal(boneMatrix, 3.141593f);
             if (D_80103FCC->current->kind==1) {
                 if (*D_80103FCC->current->category==2) Rsp_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
                 hit=D_80103FCC->current;

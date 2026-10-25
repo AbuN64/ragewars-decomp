@@ -17,14 +17,14 @@ void func_8026EF58_de(f32 *, f32 *);
 void Rsp_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 void func_8026F898_de(f32 *, f32 *, f32 *);
 void func_8026FC9C_de(f32 *, void *);
-void func_802727D8_de(void *);
-void func_80272828_de(f32 *);
+void Particle_IdentityMatrix(void *);
+void Particle_ClampMatrixToFixedRange(f32 *);
 void func_80272CB0_de(void *, f32, f32, f32);
-void func_8027302C(float *, float *);
+void CopyMatrix(float *, float *);
 void func_802732D0_de(char *, float *);
-void func_802736D4_de(void *, f32);
-void func_802738C0_de(void *, f32);
-void func_80273A98_de(void *, f32);
+void BuildYawMatrix(void *, f32);
+void PitchMatrix(void *, f32);
+void YawMatrix(void *, f32);
 void MatrixFromQuaternion(f32 *, f32 *);
 
 extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
@@ -160,11 +160,11 @@ actor_found:
     var_s1 = &camera->viewMatrix;
     func_802732D0_de(var_s1, &camera->position.x);
     func_8026EF58_de(&camera->unk1A0, (f32 *) var_s1);
-    func_802736D4_de(spA8, 3.1415927f);
+    BuildYawMatrix(spA8, 3.1415927f);
     Rsp_MultiplyAffineMatrices(sp68, spA8, (f32 *) var_s1);
     func_8026EF58_de(spE8, sp68);
     Rsp_MultiplyAffineMatrices(sp128, spE8, sp28);
-    func_8027302C(&camera->unk220, sp128);
+    CopyMatrix(&camera->unk220, sp128);
     if ((var_s5 != 0) && (var_s5->unk664 & 0x40) && (camera->unk24 == 0) && (Camera_IsSequenceInWindow() == 0)) {
         f32 temp_f20; 
         var_f1 = (((camera->bobAmplitudeX * 0.5f * (Math_Sinf(camera->bobPhaseX) + 1.0f)) + 0.8f) > 1.0f) ? 1.0f : ((camera->bobAmplitudeX * 0.5f * (Math_Sinf(camera->bobPhaseX) + 1.0f)) + 0.8f);
@@ -254,15 +254,15 @@ actor_found:
     func_8026F898_de(sp68, sp128, (f32 *) right);
     temp_s0 = &camera->viewProjection;
     func_8026F898_de((f32 *) temp_s0, sp68, sp1A8);
-    func_80272828_de((f32 *) temp_s0);
+    Particle_ClampMatrixToFixedRange((f32 *) temp_s0);
     func_8026FC9C_de((f32 *) temp_s0, camera->projection[D_800D297C]);
-    func_8027302C(matrix, sp128);
+    CopyMatrix(matrix, sp128);
     state = &D_80140FF8.state;
     if (state->unk0 == 4) {
-        func_802738C0_de(matrix, camera->elapsed * 0.010908309f);
-        func_80273A98_de(matrix, camera->elapsed * 0.008726647f);
+        PitchMatrix(matrix, camera->elapsed * 0.010908309f);
+        YawMatrix(matrix, camera->elapsed * 0.008726647f);
     }
-    func_80272828_de(matrix);
+    Particle_ClampMatrixToFixedRange(matrix);
     var_f0_2 = matrix[0] * 128.0f;
     if (!(var_f0_2 <= 127.0f)) {
         var_f0_2 = 127.0f;
@@ -311,14 +311,14 @@ actor_found:
     temp_s4->light1PadB = 0;
     func_80234DE0_de(camera);
     MatrixFromQuaternion(&camera->unk150, &camera->orientationMatrix);
-    func_802736D4_de(&camera->rollMatrix, camera->roll);
+    BuildYawMatrix(&camera->rollMatrix, camera->roll);
     if (D_80140FF8.unk8 != 0) {
         func_802B6F9C_de(right, &camera->hudPerspNorm, 47.5f, (f32) ((s32) D_800E28D0 / D_800E28D4), 16.0f, 7168.0f, 1.0f);
-        func_802727D8_de(sp128);
+        Particle_IdentityMatrix(sp128);
         func_8026F898_de(sp68, sp128, (f32 *) right);
         func_80272CB0_de(sp1A8, -1.0f, 1.0f, 1.0f);
         func_8026F898_de(sp228, sp68, sp1A8);
-        func_80272828_de(sp228);
+        Particle_ClampMatrixToFixedRange(sp228);
         func_8026FC9C_de(sp228, camera->hudProjection[D_800D297C]);
     }
     Sched_UpdateSceneEffects(&camera->sceneEffects, camera);

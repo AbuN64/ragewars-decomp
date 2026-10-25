@@ -16,7 +16,7 @@
 #include "LISTS/80279520.H"
 
 /* Detaches an entity from linked effects while preserving their transforms and lifetimes; the unsigned offset-to-pointer cast preserves matrix-address scheduling and addition operand order. */
-extern void Rsp_ConvertMatrixToFixed(void *,void *),Rsp_ConvertMatrixToFloat(void *,void *),func_80272828_de(void *),func_802732D0_de(void *,void *),func_802732EC_de(void *,void *),func_8027347C_de(void *,f32,f32,f32),func_802A25D0_de(void *,Node44 *,void *);
+extern void Rsp_ConvertMatrixToFixed(void *,void *),Rsp_ConvertMatrixToFloat(void *,void *),Particle_ClampMatrixToFixedRange(void *),func_802732D0_de(void *,void *),func_802732EC_de(void *,void *),ScaleMatrixLocal(void *,f32,f32,f32),func_802A25D0_de(void *,Node44 *,void *);
 
 void func_802A3DD4_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *camera) {
     Morph storage;
@@ -157,8 +157,8 @@ loop_4:
                                 if (arg1->unk_118->unk14 != 0) {
                                     scale = D_800C5E2C_de;
                                 }
-                                func_8027347C_de(&sp10, scale, scale, scale);
-                                func_80272828_de(&sp10);
+                                ScaleMatrixLocal(&sp10, scale, scale, scale);
+                                Particle_ClampMatrixToFixedRange(&sp10);
                                 func_802732D0_de(&sp10, var_s0->pos);
                                 if (var_s1->unk_3C & 4) {
                                     func_802732EC_de(&sp10, var_s0->rot);
@@ -187,8 +187,8 @@ loop_4:
                     if (arg1->unk_118->unk14 != 0) {
                         var_f0_2 = D_800C5E34_de;
                     }
-                    func_8027347C_de(&sp10, var_f0_2, var_f0_2, var_f0_2);
-                    func_80272828_de(&sp10);
+                    ScaleMatrixLocal(&sp10, var_f0_2, var_f0_2, var_f0_2);
+                    Particle_ClampMatrixToFixedRange(&sp10);
                     func_802A25D0_de(&D_801379C0, var_s1, &sp10);
                 }
                 }
@@ -243,7 +243,7 @@ extern EffectResource *func_8028AFEC_de(void *, s32);
 extern void Lists_ClearHeader(void *);
 extern void func_80295E84_de(void *, s32);
 extern void func_80283064_de(void *, void *);
-extern void func_802727D8_de(void *);
+extern void Particle_IdentityMatrix(void *);
 
 static inline EffectNode *FX_FIND_NODE(EffectWorld *world, FxActor *actor) {
     EffectNode *it;
@@ -301,7 +301,7 @@ void func_802A4598_de(EffectWorld *world, FxActor *actor, s32 resourceId) {
     if (node) {
     ++actor->references;
     if (*actor->flags & 0x10000) {
-        func_802727D8_de(matrix);
+        Particle_IdentityMatrix(matrix);
         instance = ((EffectInstance *(*)(void *, void *, void *))func_802A25D0_de)(world, node, matrix);
         if (instance) instance->actor = actor;
     }

@@ -40,7 +40,7 @@ void func_80213CF8_de(Source *player, void *unused1) {
         player->velocity.z = 0.0f;
         Particle_SubtractVectors(&transformed, &position, &((Source *)object)->position);
         amount = func_8024E73C_de(object);
-        func_802736D4_de(&matrix, amount);
+        BuildYawMatrix(&matrix, amount);
         func_80272944_de(&matrix, &transformed, &transformed, 1);
         Particle_AddVec3(&transformed, &transformed, &((Source *)object)->position);
         Particle_SubtractVectors(&transformed, &transformed, &position);

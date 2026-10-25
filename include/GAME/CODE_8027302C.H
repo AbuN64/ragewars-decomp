@@ -1,8 +1,8 @@
 #ifndef GAME_8027302C_H
 #define GAME_8027302C_H
 #include "COMMON/MTX.H"
-extern void func_802733B4_de(void *matrix, f32 x, f32 y, f32 z);
-extern void func_802736D4_de(void *matrix, f32 angle);
+extern void TranslateMatrixLocal(void *matrix, f32 x, f32 y, f32 z);
+extern void BuildYawMatrix(void *matrix, f32 angle);
 extern void func_80274380_de(CQuatern *rotation, CQuatern *target);
 extern f32 func_80273F94_de(f32 arg0, f32 arg1);
 extern void func_80273DA0_de(f32 *dst, f32 *src);

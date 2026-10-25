@@ -72,7 +72,7 @@ void Camera_ResetActorMotion(void *);
 f32 Particle_GetActorHeight(void *);
 s32 func_8028B21C_de(struct Shared_World *, s32);
 s32 func_8028C198_de(void *, s32);
-void func_8028C6D4_de(void *, CVector3 *, void *);
+void Engine_SampleWorldLighting(void *, CVector3 *, void *);
 void func_80290950_de(void *, void *);
 extern struct ActorDefinitionHeader D_8011B200;
 extern struct ActorDefinitionHeader D_8011B388;
@@ -165,7 +165,7 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVect
   center.x = ((SceneEffect *)(temp_s0))->position.x;
   center.y = (((SceneEffect *)(temp_s0))->position.y) + (Particle_GetActorHeight(temp_s0) * 0.5f);
   center.z = ((SceneEffect *)(temp_s0))->position.z;
-  func_8028C6D4_de(&g_world, &center, (char *)temp_s0 + 0x1A8);
+  Engine_SampleWorldLighting(&g_world, &center, (char *)temp_s0 + 0x1A8);
   return temp_s0;
 }
 

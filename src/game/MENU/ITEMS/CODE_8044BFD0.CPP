@@ -5,7 +5,7 @@ extern void func_802B6B80_de(s32 *);
 extern void func_80255CA0_de(void *list, s32 nextOffset, s32 prevOffset);
 extern void func_80255D14_de(void *list, void *node);
 extern void func_80219460_de(void *definition);
-extern void func_80273648_de(void *matrix, f32 angle);
+extern void BuildPitchMatrix(void *matrix, f32 angle);
 extern s32 D_8011ADB0;
 extern f32 D_8011AF38[16];
 
@@ -120,7 +120,7 @@ void Items_InitSlotPool(SlotPool *pool, s32 owner) {
         v->color[2] = 0xFF;
         v->color[3] = 0xFF;
     }
-    func_80273648_de(D_8011AF38, 1.5707964f);
+    BuildPitchMatrix(D_8011AF38, 1.5707964f);
     pool->owner = owner;
     pool->count = 0;
 }

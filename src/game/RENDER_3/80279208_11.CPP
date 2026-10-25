@@ -80,7 +80,7 @@ reset_state:
 extern char D_8011D8D0;
 extern char D_801041F0;
 extern CQuatern func_80271818_de(CVector3 *);
-extern void func_80273760_de(f32 *matrix, s32 angle);
+extern void BuildRollMatrix(f32 *matrix, s32 angle);
 extern void Particle_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 #include "particle/8027A0F4_8.H"
 
@@ -122,7 +122,7 @@ void Render_SpawnChildEffect(Actor_func_80279B40_de *actor, s32 model, s32 arg2,
         offset.x = -offset_x(actor);
         offset.y = -offset_y(actor);
         offset.z = 0.0f;
-        func_80273760_de(matrix, actor->angle);
+        BuildRollMatrix(matrix, actor->angle);
         Particle_TransformPoint(matrix, &offset, &turned);
         parent = Particle_ParentTransform((struct EffectActor *)actor, 0);
         if (parent != 0) {

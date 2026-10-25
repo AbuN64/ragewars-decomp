@@ -109,7 +109,7 @@ typedef long long M2C_UNK64;
 s32 func_80246E44_de(void *);
 s32 func_80249E28_de(void *, void *);
 s32 func_8024B8C4_de(void *);
-s32 func_802737F0_de(void *, f32);
+s32 PitchMatrixLocal(void *, f32);
 extern MenuModelScreen D_80141008[];
 void func_8041C7F4_de(Obj8041CAD8 *self) {
     CVector3 local10;
@@ -148,7 +148,7 @@ void func_8041C7F4_de(Obj8041CAD8 *self) {
         if (self->unk49C != 0 || draw->unk10E == 0) {
             func_80246E44_de(draw);
             if (self->unk4A0 != 0) {
-                func_802737F0_de(&draw->unk74, (f32)self->unk4A0 * 0.017453294f);
+                PitchMatrixLocal(&draw->unk74, (f32)self->unk4A0 * 0.017453294f);
             }
         }
         draw->unk6C = self->unk498 * 0.017453294f;

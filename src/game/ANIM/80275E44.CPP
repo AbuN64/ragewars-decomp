@@ -116,7 +116,7 @@ u8 func_80276088_de(s32 modelId) {
     return blend->byte59;
 }
 
-f32 func_802760BC_de(void *triangle, s32 arg1) {
+f32 Anim_GetTriangleEdgeAngle(void *triangle, s32 arg1) {
     Triangle *polygon = triangle;
     CVector3 *v0;
     CVector3 *v1;

@@ -25,7 +25,7 @@ extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 extern f32 Math_Sqrtf(f32);
 
-/* Copies a 4x4 float matrix while scaling its first three rows by three per-row factors, zeroing their fourth column and setting the last element to the canonical unit constant. Adapted from func_8027302C with the row scaling, the zeroed column and the constant corner changed. */
+/* Copies a 4x4 float matrix while scaling its first three rows by three per-row factors, zeroing their fourth column and setting the last element to the canonical unit constant. Adapted from CopyMatrix with the row scaling, the zeroed column and the constant corner changed. */
 extern f32 D_800C48F4_de;
 
 /* Expands a 4x4 transform into an affine 4x4 matrix with its second and third rows swapped, a zero last column and the pooled corner D_800C99F0[1]. */
@@ -40,7 +40,7 @@ extern f32 D_800C4928_de;
 
 extern f32 D_800C492C_de;
 
-void func_8027302C(float *arg0, float *arg1) {
+void CopyMatrix(float *arg0, float *arg1) {
     arg0[0] = arg1[0];
     arg0[1] = arg1[1];
     arg0[2] = arg1[2];
@@ -187,7 +187,7 @@ void func_802732EC_de(void *matrix, f32 *arg1) {
     arg1[2] = Math_Sqrtf((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
 }
 
-void func_802733B4_de(void *matrix, f32 tiltX, f32 lift, f32 arg3) {
+void TranslateMatrixLocal(void *matrix, f32 tiltX, f32 lift, f32 arg3) {
     Matrix *o = matrix;
 
     o->m[12] = o->m[12] + (tiltX * o->m[0] + lift * o->m[4] + arg3 * o->m[8]);
@@ -204,7 +204,7 @@ void TranslateMatrix(char *object, float x, float y, float z) {
 }
 
 /** Scale the first three rows of a matrix's basis columns by sx, sy, sz. */
-void func_8027347C_de(void *matrix, f32 sx, f32 sy, f32 sz) {
+void ScaleMatrixLocal(void *matrix, f32 sx, f32 sy, f32 sz) {
     Matrix *o = matrix;
 
     o->m[0] = o->m[0] * sx;
@@ -253,7 +253,7 @@ void func_802735A8_de(void *matrix, f32 sx, f32 sy, f32 sz) {
     o->m[14] = o->m[14] * sz;
 }
 
-void func_80273648_de(void *rest, f32 arg1) {
+void BuildPitchMatrix(void *rest, f32 arg1) {
     struct Mtx *m = rest;
     f32 sin_v;
     f32 cos_v;
@@ -282,7 +282,7 @@ void func_80273648_de(void *rest, f32 arg1) {
     m->up.y = cos_v;
 }
 
-void func_802736D4_de(void *arg0, f32 arg1)
+void BuildYawMatrix(void *arg0, f32 arg1)
 {
   struct Mtx *m = (char *) arg0;
   f32 sin_v;
@@ -311,7 +311,7 @@ void func_802736D4_de(void *arg0, f32 arg1)
   m->right.x = cos_v;
 }
 
-void func_80273760_de(void *matrix, f32 arg1) {
+void BuildRollMatrix(void *matrix, f32 arg1) {
     struct Mtx *m = matrix;
     f32 sin_v;
     f32 cos_v;
@@ -340,7 +340,7 @@ void func_80273760_de(void *matrix, f32 arg1) {
     m->right.y = sin_v;
 }
 
-void func_802737F0_de(void *arg0, f32 arg1) {
+void PitchMatrixLocal(void *arg0, f32 arg1) {
     struct Mtx *m = (char *) arg0;
     f32 sin_v;
     f32 cos_v;
@@ -364,7 +364,7 @@ void func_802737F0_de(void *arg0, f32 arg1) {
     m->forward.z = (neg_sin * a) + (cos_v * m->forward.z);
 }
 
-void func_802738C0_de(void *arg0, f32 arg1) {
+void PitchMatrix(void *arg0, f32 arg1) {
     struct Mtx *m = (char *) arg0;
     f32 sin_v;
     f32 cos_v;
@@ -392,7 +392,7 @@ void func_802738C0_de(void *arg0, f32 arg1) {
     m->m32 = (a * sin_v) + (m->m32 * cos_v);
 }
 
-void func_802739C4_de(void *matrix, f32 arg1) {
+void YawMatrixLocal(void *matrix, f32 arg1) {
     struct Mtx *m = (char *) matrix;
     f32 sin_v;
     f32 cos_v;
@@ -416,7 +416,7 @@ void func_802739C4_de(void *matrix, f32 arg1) {
     m->forward.z = (sin_v * a) + (cos_v * m->forward.z);
 }
 
-void func_80273A98_de(void *matrix, f32 arg1) {
+void YawMatrix(void *matrix, f32 arg1) {
     struct Mtx *m = (char *) matrix;
     f32 sin_v;
     f32 cos_v;
@@ -444,7 +444,7 @@ void func_80273A98_de(void *matrix, f32 arg1) {
     m->m32 = (a * neg_sin) + (m->m32 * cos_v);
 }
 
-void func_80273B98_de(void *matrix, f32 arg1) {
+void RollMatrixLocal(void *matrix, f32 arg1) {
     struct Mtx *m = (char *) matrix;
     f32 sin_v;
     f32 cos_v;
@@ -468,7 +468,7 @@ void func_80273B98_de(void *matrix, f32 arg1) {
     m->up.z = (neg_sin * a) + (cos_v * m->up.z);
 }
 
-void func_80273C68_de(void *arg0, f32 arg1) {
+void RollMatrix(void *arg0, f32 arg1) {
     struct Mtx *m = (char *) arg0;
     f32 sin_v;
     f32 cos_v;

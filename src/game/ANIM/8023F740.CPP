@@ -22,7 +22,7 @@ void **func_8024BFD4_de(MenuPanelRoot *arg0, s32 arg1);
 
 void Rsp_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
 
-void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
+void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
 void func_80272944_de(f32 *m, f32 *in, f32 *out, u32 count);
 
@@ -106,7 +106,7 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
                 func_8023DAA0_de(ray, &box, &t)) {
                 Rsp_ConvertMatrixToFloat(matrix, &actor->bones[i]);
                 if (soft) {
-                    func_8027347C_de(matrix, 1.5f, 1.5f, 1.5f);
+                    ScaleMatrixLocal(matrix, 1.5f, 1.5f, 1.5f);
                 }
                 func_80272944_de(matrix, part->corners, vertices, 8);
                 func_8023F750_de(ray, bounds, actor, origin, vertices, part, i);

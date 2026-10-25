@@ -138,7 +138,7 @@ void func_80225F44_de(SharedPlayer *player,func_802165F8_S1 *body) {
         player->views5E8.view814_112.offset=D_800C94DC_de;
     }
     if(offset) {
-        func_802736D4_de(&rotation,body->unk6C);
+        BuildYawMatrix(&rotation,body->unk6C);
         Particle_TransformPoint(&rotation,offset,&player->views5E8.view73C_82.weapon);
         Particle_ScaleVector(&player->views5E8.view73C_82.weapon,&player->views5E8.view73C_82.weapon,10.24f);
     }

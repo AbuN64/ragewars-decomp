@@ -269,7 +269,7 @@ extern float D_800C2FC8_de;
 extern void func_8022FDAC_de(void *arg0, void *arg1);
 
 
-extern void func_802739C4_de(void *, float);
+extern void YawMatrixLocal(void *, float);
 extern void func_8022AEA0_de(struct Shared_ActorView *arg0, s32 arg1);
-extern void func_802739C4_de(void *, f32);
+extern void YawMatrixLocal(void *, f32);
 #endif

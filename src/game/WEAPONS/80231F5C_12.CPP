@@ -220,6 +220,6 @@ void func_8023378C_de(void *matrix, void *arg1) {
     ObjRecAt8V1 *event = arg1;
     if (event->unk4 == 6) {
         LevelActor *actor = event->unk8;
-        func_802733B4_de(matrix, 0.0f, actor->pitch, 0.0f);
+        TranslateMatrixLocal(matrix, 0.0f, actor->pitch, 0.0f);
     }
 }

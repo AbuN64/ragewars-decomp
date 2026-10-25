@@ -39,7 +39,7 @@ extern void *D_800CB440_de[];
 
 
 
-extern void func_8027302C(f32 *, Body_func_8024C6E8_de *);
+extern void CopyMatrix(f32 *, Body_func_8024C6E8_de *);
 
 extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 
@@ -154,7 +154,7 @@ void func_8024C6E8_de(s32 unused, SourceRecAt18 *source, Body_func_8024C6E8_de *
     } else {
         strength *= kind;
     }
-    func_8027302C(transform, body);
+    CopyMatrix(transform, body);
     reverse = -1.0f;
     Particle_ScaleVector(&velocity, &velocity, reverse);
     TranslateMatrix(transform, velocity.x, velocity.y, velocity.z);

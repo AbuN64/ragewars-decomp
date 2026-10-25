@@ -128,7 +128,7 @@ extern SineTable D_800D0720;
 
 extern s32 D_800D2978;
 
-extern void func_8027302C(f32 *, f32 *);
+extern void CopyMatrix(f32 *, f32 *);
 
 extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 
@@ -222,7 +222,7 @@ void func_802472F0_de(void *actor) {
             func_80274020_de(&((Actor36 *)(actor))->heading);
             saved.z = saved.y;
             saved.y = 0.0f;
-            func_802736D4_de(&matrix, ((Actor36 *)actor)->heading);
+            BuildYawMatrix(&matrix, ((Actor36 *)actor)->heading);
             Particle_TransformPoint(&matrix, &saved, &moved);
             ((Actor36 *)actor)->position.x += moved.x * ((Actor36 *)actor)->scaleX;
             ((Actor36 *)actor)->position.z += moved.z * ((Actor36 *)actor)->scaleZ;
@@ -544,7 +544,7 @@ void func_802480F0_de(s32 time, s32 flags, f32 *matrix) {
     origin.x = matrix[12];
     origin.y = matrix[13];
     origin.z = matrix[14];
-    func_8027302C(inverse, matrix);
+    CopyMatrix(inverse, matrix);
     flip = -1.0f;
     Particle_ScaleVector(&origin, &origin, flip);
     TranslateMatrix(inverse, origin.x, origin.y, origin.z);

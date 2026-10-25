@@ -51,7 +51,7 @@ extern void Weapons_BuildPlayerViewTransform(Player1680 *, Matrix *);
 
 extern void func_802732D0_de(Matrix *, CVector3 *);
 
-extern void func_802727D8_de(Matrix *);
+extern void Particle_IdentityMatrix(Matrix *);
 
 extern void TranslateMatrix(Matrix *, float, float, float);
 
@@ -231,8 +231,8 @@ void func_8022C490_de(Player1680 *player) {
     CVector3 pos;
 
     getEye(player, &pos);
-    func_802727D8_de(&mtx);
-    func_802736D4_de(&mtx, getYaw());
+    Particle_IdentityMatrix(&mtx);
+    BuildYawMatrix(&mtx, getYaw());
     TranslateMatrix(&mtx, pos.x, pos.y + D_800C2D40_de.second, pos.z);
     Rsp_ConvertMatrixToFixed(&mtx, &player->views[D_800D297C]);
 }

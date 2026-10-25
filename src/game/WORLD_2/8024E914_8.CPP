@@ -96,8 +96,8 @@ void func_8024F618_de(StaticObject *staticObject) {
     staticObject->frameDelta = (D_800D2988) * (((PropGeometry *)(p))->speed);
 }
 
-extern void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
-extern s32 func_8027254C_de(f32 *arg0, f32 arg1);
+extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
+extern s32 Particle_LimitVectorLength(f32 *arg0, f32 arg1);
 extern void TranslateMatrix(char *object, float x, float y, float z);
 extern void SwapMatrixUpForward(void *object);
 extern void Rsp_ConvertMatrixToFixed(void *arg0, void *arg1);
@@ -108,14 +108,14 @@ void func_8024F634_de(void *arg0) {
     f32 matrix[16];
 
     if (*(s32 *)((StaticObject *)o)->type == 8) {
-        func_802736D4_de(matrix, g_world.elapsed);
+        BuildYawMatrix(matrix, g_world.elapsed);
     } else {
-        func_802736D4_de(matrix, ((StaticObject *)o)->angle);
+        BuildYawMatrix(matrix, ((StaticObject *)o)->angle);
     }
 
-    func_8027347C_de(matrix, ((StaticObject *)(o))->scale, ((StaticObject *)(o))->scale, ((StaticObject *)(o))->scale);
+    ScaleMatrixLocal(matrix, ((StaticObject *)(o))->scale, ((StaticObject *)(o))->scale, ((StaticObject *)(o))->scale);
 
-    func_8027254C_de(&((StaticObject *)(o))->position.x, 20000.0f);
+    Particle_LimitVectorLength(&((StaticObject *)(o))->position.x, 20000.0f);
 
     TranslateMatrix((char *) matrix, ((StaticObject *)(o))->position.x, ((StaticObject *)(o))->position.y + ((StaticObject *)(o))->height, ((StaticObject *)(o))->position.z);
 

@@ -131,7 +131,7 @@ void func_8028C60C_de(void *arg0) {
     }
 }
 
-/* Produces an object's placement: when one of its tracks has an active second node and D_800D2850 is set, it samples the track through func_802897B4_de and resolves the placement with func_80289970_de, and otherwise copies the default placement D_800CBC90. */
+/* Produces an object's placement: when one of its tracks has an active second node and D_800D2850 is set, it samples the track through Engine_FindLightVolumes and resolves the placement with func_80289970_de, and otherwise copies the default placement D_800CBC90. */
 
 
 
@@ -144,9 +144,9 @@ void func_8028C60C_de(void *arg0) {
 
 
 
-extern void func_802897B4_de(Owner_func_8028C6D4_de *owner, s32 time, Sample *sample, s32 *segment);
+extern void Engine_FindLightVolumes(OwnerEngineSampleWorldLighting *owner, s32 time, Sample *sample, s32 *segment);
 
-static inline s32 has_active(Owner_func_8028C6D4_de *owner) {
+static inline s32 has_active(OwnerEngineSampleWorldLighting *owner) {
     s32 i;
 
     for (i = 0; i < owner->count; i++) {
@@ -157,14 +157,14 @@ static inline s32 has_active(Owner_func_8028C6D4_de *owner) {
     return 0;
 }
 
-void func_8028C6D4_de(Owner_func_8028C6D4_de *owner, s32 time, Block24 *out) {
+void Engine_SampleWorldLighting(OwnerEngineSampleWorldLighting *owner, s32 time, Block24 *out) {
     Sample sample;
     s32 segment;
 
     if (!has_active(owner) || D_800D2850 == 0) {
         *out = *(Block24 *)D_800CBC90;
     } else {
-        func_802897B4_de(owner, time, &sample, &segment);
+        Engine_FindLightVolumes(owner, time, &sample, &segment);
         Engine_SampleVolumeLighting(&sample, segment, time, out);
     }
 }

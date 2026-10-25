@@ -89,13 +89,13 @@ extern void Rsp_ConvertMatrixToFloat(PoseMatrix, u8 *);
 extern void func_80270AAC_de(CQuatern *, f32, CQuatern *, CQuatern *);
 extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void func_80272D00_de(PoseMatrix, f32, f32, f32, f32);
-extern void func_8027302C(PoseMatrix, PoseMatrix);
+extern void CopyMatrix(PoseMatrix, PoseMatrix);
 extern void TranslateMatrix(PoseMatrix, f32, f32, f32);
-extern void func_8027347C_de(PoseMatrix, f32, f32, f32);
+extern void ScaleMatrixLocal(PoseMatrix, f32, f32, f32);
 extern s32 Nav_NextRandom(void);
 extern f32 Nav_GetTrianglePlaneHeight(StateFlags *, f32, f32);
 extern s32 func_802799C0_de(void *, s32);
-extern void func_8028C6D4_de(void *, CVector3 *, u8 *);
+extern void Engine_SampleWorldLighting(void *, CVector3 *, u8 *);
 extern void func_802A57E0_de(Owner802A6DF8 *, Shared_PoseActor *, PoseMatrix *);
 extern u32 func_802BCF00_de(void);
 
@@ -123,7 +123,7 @@ static inline void twistPart(Shared_PosePart *part, PoseMatrix cur, s32 n, s32 i
         angle = D_800D06C0[0x19 - part->unk_12] * 0.5f;
         angle *= 0.3f;
         angle *= (n == 5 ? -2.0f : (f32)n);
-        func_8027302C(inv, cur);
+        CopyMatrix(inv, cur);
         Particle_ScaleVector(&turn, &turn, -1.0f);
         TranslateMatrix(inv, turn.x, turn.y, turn.z);
         func_80272D00_de(rotm, angle, axis.x, axis.y, axis.z);
@@ -475,23 +475,23 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
                 }
                 if (partFlags == id0) {
                     id0 = -1;
-                    func_8027347C_de(*cur, 2.0f, 2.0f, 2.0f);
+                    ScaleMatrixLocal(*cur, 2.0f, 2.0f, 2.0f);
                 } else if (partFlags == id1) {
                     id1 = -1;
-                    func_8027347C_de(*cur, 2.0f, 2.0f, 2.0f);
+                    ScaleMatrixLocal(*cur, 2.0f, 2.0f, 2.0f);
                 } else if (partFlags == id2) {
                     id2 = -1;
-                    func_8027347C_de(*cur, 2.0f, 2.0f, 2.0f);
+                    ScaleMatrixLocal(*cur, 2.0f, 2.0f, 2.0f);
                 } else if (partFlags == id3) {
                     id3 = -1;
-                    func_8027347C_de(*cur, 2.0f, 2.0f, 2.0f);
+                    ScaleMatrixLocal(*cur, 2.0f, 2.0f, 2.0f);
                 } else if (partFlags == id4) {
                     id4 = -1;
-                    func_8027347C_de(*cur, 3.0f, 3.0f, 3.0f);
+                    ScaleMatrixLocal(*cur, 3.0f, 3.0f, 3.0f);
                 }
                 if (scaled) {
-                    func_8027302C(m, *cur);
-                    func_8027347C_de(m, scale.x, scale.y, scale.z);
+                    CopyMatrix(m, *cur);
+                    ScaleMatrixLocal(m, scale.x, scale.y, scale.z);
                     packMtx(out, m);
                 } else {
                     packMtx(out, *cur);
@@ -565,7 +565,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
                 pos = actor->pos;
                 pos.y += actor->unk_70;
                 pos.y += Particle_GetActorHeight(actor) * 0.5f;
-                func_8028C6D4_de(&g_world, &pos, actor->unk_140[D_800D297C]);
+                Engine_SampleWorldLighting(&g_world, &pos, actor->unk_140[D_800D297C]);
             }
             ret = 1;
             actor->flags |= 0x200;

@@ -53,7 +53,7 @@ extern s32 func_8028B21C_de(void *, s32);
 extern s32 func_8028C198_de(void *, s32);
 extern void Camera_SetupViewportAndFog(void *);
 extern void Particle_BuildTranslationMatrix(void *, f32, f32, f32);
-extern void func_802739C4_de(void *, f32);
+extern void YawMatrixLocal(void *, f32);
 extern void SwapMatrixUpForward(void *);
 extern void Rsp_ConvertMatrixToFixed(void *, void *);
 extern void func_8026DF30_de(s32, void *, void *, s32, s32);
@@ -81,7 +81,7 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
     if (handle != -1) {
         Camera_SetupViewportAndFog(&D_80141008);
         Particle_BuildTranslationMatrix(matrix, 0.0f, -100.0f, -500.0f);
-        func_802739C4_de(matrix, state->unk26DB0 * D_800CA4B4);
+        YawMatrixLocal(matrix, state->unk26DB0 * D_800CA4B4);
         SwapMatrixUpForward(matrix);
         Rsp_ConvertMatrixToFixed(matrix, VIEW_MATRICES + D_800D297C * 64);
         h2 = func_8028C198_de(&g_world, handle);

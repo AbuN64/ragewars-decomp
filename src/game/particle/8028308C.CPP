@@ -75,7 +75,7 @@ extern void func_8026EF58_de(f32 *out, f32 *m);
 
 
 
-extern void func_80272B38_de(void *matrix, void *input, void *output);
+extern void Particle_TransformDirection(void *matrix, void *input, void *output);
 
 extern void System_DeliverContactEffect(void *, void *, s32, s32, CVector3, struct IntPair);
 
@@ -399,7 +399,7 @@ void func_80283C1C_de(void *arg0, f32 *arg1, s32 arg2) {
     direction_ptr = &direction;
     direction = scene->direction;
     Particle_NormalizeVec3((f32 *)direction_ptr);
-    func_80272B38_de(matrix_ptr, direction_ptr, &((Shared_Particle *)actor)->inst.velocity);
+    Particle_TransformDirection(matrix_ptr, direction_ptr, &((Shared_Particle *)actor)->inst.velocity);
     ((Shared_Particle *)actor)->target = current;
     ((Shared_Particle *)actor)->flags |= 0x10000;
     ((Shared_Particle *)actor)->shake = scene->actor_byte;

@@ -13,7 +13,7 @@
 #include "RENDER_4/8028FD2C_6.H"
 #include "particle/80271B18_3.H"
 
-extern void func_80272B38_de(void *arg0, void *arg1, void *arg2);
+extern void Particle_TransformDirection(void *arg0, void *arg1, void *arg2);
 extern s32 func_80277128_de(ObjectRecAtBC *volume, CVector3 point, CVector3 *normal, f32 *amount);
 
 
@@ -42,7 +42,7 @@ s32 Actors_EvaluateLightVolume(ObjectRecAtBC *arg0, CVector3 arg1, CVector3 arg4
         second.z = arg4.z * arg7[10];
     } else {
         Particle_TransformPoint(arg7, &arg1.x, &first);
-        func_80272B38_de(arg7, &arg4.x, &second);
+        Particle_TransformDirection(arg7, &arg4.x, &second);
     }
     Particle_NormalizeVec3(&second.x);
     if (func_80277128_de(arg0, first, &normal, &amount) == 0) {
@@ -108,7 +108,7 @@ void Actors_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, Ver
         normal.x = vertex->x;
         normal.y = vertex->y;
         normal.z = vertex->z;
-        func_80272B38_de(matrix, &normal, &worldNormal);
+        Particle_TransformDirection(matrix, &normal, &worldNormal);
         sum.x = 0.0f;
         sum.y = 0.0f;
         sum.z = 0.0f;
@@ -164,7 +164,7 @@ void Actors_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, Ver
 
 
 extern void Rsp_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
-extern void func_80272B38_de(void *, void *, void *);
+extern void Particle_TransformDirection(void *, void *, void *);
 void Actors_AccumulateDirectionalLighting(Vertices38 *data, PackedMatrixWords *matrices, CVector3 *output, s32 skin) {
     CVector3 light;
     f32 matrix[16];
@@ -193,7 +193,7 @@ void Actors_AccumulateDirectionalLighting(Vertices38 *data, PackedMatrixWords *m
             normal.x = vertex->x;
             normal.y = vertex->y;
             normal.z = vertex->z;
-            func_80272B38_de(matrix, &normal, &transformed);
+            Particle_TransformDirection(matrix, &normal, &transformed);
             dot = transformed.x * light.x + transformed.y * light.y + transformed.z * light.z;
             intensity = ((dot < 0.0f) ? 0.2196078598f : (dot + 0.2196078598f)) * 255.0f;
             dot = intensity;

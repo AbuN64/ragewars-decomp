@@ -15,11 +15,11 @@ extern void func_8024DD10_de(PlacedProp *, PlacedPropRecord *, s32, char *);
 extern PropGeometry *Engine_GetActorDefinition(void *, s32);
 
 extern void MatrixFromQuaternion(f32 *, char *);
-extern void func_8027347C_de(char *, f32, f32, f32);
+extern void ScaleMatrixLocal(char *, f32, f32, f32);
 extern void TranslateMatrix(char *, f32, f32, f32);
 extern void SwapMatrixUpForward(char *);
 
-extern void func_8027302C(char *, char *);
+extern void CopyMatrix(char *, char *);
 extern void Rsp_ConvertMatrixToFixed(char *, char *);
 
 static inline s32 advancePropKey(void) {
@@ -58,7 +58,7 @@ void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner,
     rotation[3] = record->rotation[3] * 0.007874016f;
     func_802741A4_de(rotation);
     MatrixFromQuaternion(rotation, matrix);
-    func_8027347C_de(matrix, record->scale.x, record->scale.y, record->scale.z);
+    ScaleMatrixLocal(matrix, record->scale.x, record->scale.y, record->scale.z);
     TranslateMatrix(matrix, record->position.x, record->position.y, record->position.z);
     SwapMatrixUpForward(matrix);
     if (prop->flags & 0x40) {
@@ -74,7 +74,7 @@ void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner,
         prop->max.z = RW_BITS_TO_FLOAT(record->extents[5]) + record->position.z + 0.5f;
         prop->fieldD4 = record->value;
     }
-    func_8027302C(prop->matrix, matrix);
+    CopyMatrix(prop->matrix, matrix);
     Rsp_ConvertMatrixToFixed(matrix, prop->transform);
     prop->position = record->position;
     if (record->segment == 0xFFFF) {

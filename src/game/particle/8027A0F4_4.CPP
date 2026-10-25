@@ -18,7 +18,7 @@ extern void Nav_GetPolygonUpQuat(void *arg0, s32 arg1);
 extern void Nav_GetCachedUpQuat(void *arg0, s32 arg1);
 extern void MatrixFromQuaternion(void *arg0, void *arg1);
 extern void Rsp_MultiplyAffineMatrices(void *arg0, void *arg1, void *arg2);
-extern f32 func_802760BC_de(s32 arg0, s32 arg1);
+extern f32 Anim_GetTriangleEdgeAngle(s32 arg0, s32 arg1);
 
 
 
@@ -90,8 +90,8 @@ void *Particle_ParentTransform(EffectActor *arg0, Shared_ActorView *camera) {
     sw_state_0:
     sw_state_1:
     sw_state_2:
-        value = func_802760BC_de(0, arg0->unk1D0);
-        func_802736D4_de(&D_8011AD70, value);
+        value = Anim_GetTriangleEdgeAngle(0, arg0->unk1D0);
+        BuildYawMatrix(&D_8011AD70, value);
         return &D_8011AD70;
     sw_state_default:
         return 0;
@@ -110,7 +110,7 @@ void *Particle_ParentTransform(EffectActor *arg0, Shared_ActorView *camera) {
 
 
 extern void Rsp_ConvertMatrixToFloat(f32 *out, void *in);
-extern void func_80272B38_de(void *matrix, CVector3 *in, CVector3 *out);
+extern void Particle_TransformDirection(void *matrix, CVector3 *in, CVector3 *out);
 extern void Weapons_BuildPlayerViewTransform(func_80228774_S5 *model, f32 *out);
 
 
@@ -145,7 +145,7 @@ void Particle_Attach(Actor_func_8027DAD0_de *actor, CVector3 *outPosition, CVect
                 if (skeleton != 0) {
                     Rsp_ConvertMatrixToFloat(matrix, (char *)skeleton + actor->bone * 64);
                     Particle_TransformPoint(matrix, &actor->offset, &position);
-                    func_80272B38_de(matrix, &actor->heading, &heading);
+                    Particle_TransformDirection(matrix, &actor->heading, &heading);
                     actor->position = position;
                     actor->facing = heading;
                 } else {
@@ -190,20 +190,20 @@ void Particle_Attach(Actor_func_8027DAD0_de *actor, CVector3 *outPosition, CVect
 #include "particle/DEPTH_SCALE.H"
 
 void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
-void func_80272E3C_de(f32 *m, f32 x, f32 y, f32 z);
-void func_802727D8_de(void *matrix);
-void func_8028C6D4_de(Shared_World *world, CVector3 *pos, struct Shared_ParticleLighting *out);
-void func_80273760_de(void *matrix, f32 angle);
+void Particle_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z);
+void Particle_IdentityMatrix(void *matrix);
+void Engine_SampleWorldLighting(Shared_World *world, CVector3 *pos, struct Shared_ParticleLighting *out);
+void BuildRollMatrix(void *matrix, f32 angle);
 void TranslateMatrix(void *matrix, f32 x, f32 y, f32 z);
 f32 Nav_GetTrianglePlaneHeight(void *node, f32 x, f32 z);
-s32 func_8027254C_de(f32 *vector, f32 limit);
-void func_8027347C_de(void *matrix, f32 sx, f32 sy, f32 sz);
+s32 Particle_LimitVectorLength(f32 *vector, f32 limit);
+void ScaleMatrixLocal(void *matrix, f32 sx, f32 sy, f32 sz);
 void SwapMatrixUpForward(void *matrix);
-void func_8027302C(f32 *dst, f32 *src);
+void CopyMatrix(f32 *dst, f32 *src);
 void Particle_BuildTranslationMatrix(void *matrix, f32 x, f32 y, f32 z);
-void func_80273A98_de(void *matrix, f32 angle);
-void func_802738C0_de(void *matrix, f32 angle);
-void func_80272828_de(f32 *matrix);
+void YawMatrix(void *matrix, f32 angle);
+void PitchMatrix(void *matrix, f32 angle);
+void Particle_ClampMatrixToFixedRange(f32 *matrix);
 void Rsp_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst);
 
 
@@ -293,7 +293,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     }
     if (particle->desc->renderModel != 0) {
         if (particle->space == -7) {
-            func_80272E3C_de(rotation, particle->rot.x + RW_PI_F6 / 2, particle->rot.y, particle->rot.z);
+            Particle_MatrixFromEulerXYZ(rotation, particle->rot.x + RW_PI_F6 / 2, particle->rot.y, particle->rot.z);
             if ((heading.x == 0.0f) && (heading.y == 0.0f) && (heading.z == 0.0f)) {
                 axisZ = particle->direction;
             } else {
@@ -305,7 +305,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
             up.y = 1.0f;
             Particle_CrossVectors(&axisX, &up, &axisZ);
             Particle_CrossVectors(&axisY, &axisX, &axisZ);
-            func_802727D8_de(basis);
+            Particle_IdentityMatrix(basis);
             Particle_NormalizeVec3(&axisX.x);
             Particle_NormalizeVec3(&axisY.x);
             Particle_NormalizeVec3(&axisZ.x);
@@ -320,13 +320,13 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
             basis[10] = axisZ.z;
             Rsp_MultiplyAffineMatrices(local, rotation, basis);
         } else {
-            func_80272E3C_de(local, particle->rot.x, particle->rot.y + RW_PI_F6, particle->rot.z);
+            Particle_MatrixFromEulerXYZ(local, particle->rot.x, particle->rot.y + RW_PI_F6, particle->rot.z);
         }
-        func_8028C6D4_de(&g_world, &particle->inst.pos, &particle->lighting[D_800D297C]);
+        Engine_SampleWorldLighting(&g_world, &particle->inst.pos, &particle->lighting[D_800D297C]);
     } else if ((particle->rot.x == 0.0f) && (particle->rot.y == 0.0f)) {
-        func_80273760_de(local, particle->rot.z);
+        BuildRollMatrix(local, particle->rot.z);
     } else {
-        func_80273760_de(local, particle->rot.z);
+        BuildRollMatrix(local, particle->rot.z);
         model = particle->desc->renderModel;
         tiltX = 0.0f;
         if (model == 0) {
@@ -337,10 +337,10 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         if (model == 0) {
             tiltY = particle->rot.y;
         }
-        func_802733B4_de(local, tiltX, -tiltY, 0.0f);
+        TranslateMatrixLocal(local, tiltX, -tiltY, 0.0f);
     }
     if (lift != 0.0f) {
-        func_802733B4_de(local, 0.0f, lift, 0.0f);
+        TranslateMatrixLocal(local, 0.0f, lift, 0.0f);
         TranslateMatrix(local, 0.0f, -lift, 0.0f);
     }
     particle->flags &= ~0x800000;
@@ -383,7 +383,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     case 2:
         break;
     }
-    func_8027254C_de(&position.x, 20000.0f);
+    Particle_LimitVectorLength(&position.x, 20000.0f);
     if ((desc->flags & 0x80000) && (desc->animMode == 1)) {
         scale = scale * (1.0f / 255.0f) * (f32)particle->opacity;
     }
@@ -391,19 +391,19 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         type = particle->inst.type;
         extent = scale * particle->size.z * (35.0f / 1024.0f);
         if ((type == 0x40B) || (type == 0x40F) || (type == 0x41E) || (type == 0x40B) || (type == 0x436)) {
-            func_8027347C_de(local, -1.0f, -1.0f, -1.0f);
+            ScaleMatrixLocal(local, -1.0f, -1.0f, -1.0f);
         }
-        func_8027347C_de(local, particle->size.x * extent, particle->size.y * extent, extent * 10.24f);
+        ScaleMatrixLocal(local, particle->size.x * extent, particle->size.y * extent, extent * 10.24f);
         SwapMatrixUpForward(local);
     } else {
         extent = scale * particle->size.z;
-        func_8027347C_de(local, particle->size.x * extent, particle->size.y * extent, extent * 10.24f);
+        ScaleMatrixLocal(local, particle->size.x * extent, particle->size.y * extent, extent * 10.24f);
     }
     parent = Particle_ParentTransform((EffectActor *)particle, (Shared_ActorView *)camera);
     if (parent != 0) {
         Rsp_MultiplyAffineMatrices(world, local, parent);
     } else {
-        func_8027302C(world, local);
+        CopyMatrix(world, local);
     }
     TranslateMatrix(world, position.x, position.y, position.z);
     if ((particle->flags & 0x20000) && (shake = particle->shake) != 0) {
@@ -411,14 +411,14 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         joltSq = jolt * jolt;
         angle = joltSq * (RW_PI_F6 * 5 / 180);
         Particle_BuildTranslationMatrix(shakeMtx, 0.0f, 0.0f, -66.56f);
-        func_80273A98_de(shakeMtx, angle * (Math_Sinf(joltSq * (6 * RW_PI_F6)) * 0.25f));
-        func_802738C0_de(shakeMtx, angle * Math_Sinf(joltSq * (14 * RW_PI_F6)));
+        YawMatrix(shakeMtx, angle * (Math_Sinf(joltSq * (6 * RW_PI_F6)) * 0.25f));
+        PitchMatrix(shakeMtx, angle * Math_Sinf(joltSq * (14 * RW_PI_F6)));
         TranslateMatrix(shakeMtx, 0.0f, 0.0f, 66.56f);
         Rsp_MultiplyAffineMatrices(rotation, shakeMtx, world);
-        func_80272828_de(rotation);
+        Particle_ClampMatrixToFixedRange(rotation);
         final = rotation;
     } else {
-        func_80272828_de(world);
+        Particle_ClampMatrixToFixedRange(world);
         final = world;
     }
     Rsp_ConvertMatrixToFixed(final, out);

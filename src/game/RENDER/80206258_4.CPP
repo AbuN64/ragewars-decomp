@@ -8,17 +8,17 @@
 #include "TYPES.H"
 #include "RENDER/80206258_4.H"
 
-extern void func_80273760_de(void *arg0, f32 arg1);
+extern void BuildRollMatrix(void *arg0, f32 arg1);
 
-extern void func_802738C0_de(void *arg0, f32 arg1);
+extern void PitchMatrix(void *arg0, f32 arg1);
 
-extern void func_80273A98_de(void *arg0, f32 arg1);
+extern void YawMatrix(void *arg0, f32 arg1);
 
-extern void func_8027302C(float *arg0, float *arg1);
+extern void CopyMatrix(float *arg0, float *arg1);
 
-extern void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
+extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
-extern s32 func_8027254C_de(f32 *arg0, f32 arg1);
+extern s32 Particle_LimitVectorLength(f32 *arg0, f32 arg1);
 
 extern void TranslateMatrix(f32 *, f32, f32, f32);
 
@@ -36,13 +36,13 @@ void Render_BuildPlayerMatrix(void *object, void *state) {
     f32 sp10[16];
     f32 *matrix;
 
-    func_80273760_de(sp10, motionState->pitch);
-    func_802738C0_de(sp10, motionState->yaw);
-    func_80273A98_de(sp10, player->heading);
+    BuildRollMatrix(sp10, motionState->pitch);
+    PitchMatrix(sp10, motionState->yaw);
+    YawMatrix(sp10, player->heading);
     matrix = player->matrix;
-    func_8027302C(matrix, sp10);
-    func_8027347C_de(matrix, player->scale.x, player->scale.y, player->scale.z);
-    func_8027254C_de(&player->pos.x, 20000.0f);
+    CopyMatrix(matrix, sp10);
+    ScaleMatrixLocal(matrix, player->scale.x, player->scale.y, player->scale.z);
+    Particle_LimitVectorLength(&player->pos.x, 20000.0f);
     TranslateMatrix(matrix, player->pos.x, player->pos.y, player->pos.z);
     SwapMatrixUpForward(matrix);
 }

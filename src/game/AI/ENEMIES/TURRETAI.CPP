@@ -16,9 +16,9 @@ CQuatern CVector3_GetDirectionRotation2(CVector3 *dir);
 
 void MultiplyQuaternions(void *, void *, void *);
 
-void func_8027347C_de(void *, f32, f32, f32);
+void ScaleMatrixLocal(void *, f32, f32, f32);
 
-s32 func_8027254C_de(f32 *, f32);
+s32 Particle_LimitVectorLength(f32 *, f32);
 
 void TranslateMatrix(char *, f32, f32, f32);
 
@@ -99,8 +99,8 @@ void Turret_CalcOrientMtx(struct Owner *owner, RiderRecAt130V1 *rider) {
     rotation.w = Math_Cosf(rider->heading * D_800C1A18);
     MultiplyQuaternions(&combined, &rotation, &owner->orientation);
     MatrixFromQuaternion(&combined, model);
-    func_8027347C_de(model, owner->scale.x, owner->scale.y, owner->scale.z);
-    func_8027254C_de(&owner->position.x, 20000.0f);
+    ScaleMatrixLocal(model, owner->scale.x, owner->scale.y, owner->scale.z);
+    Particle_LimitVectorLength(&owner->position.x, 20000.0f);
     TranslateMatrix((char *)model, owner->position.x, owner->position.y, owner->position.z);
     Rsp_MultiplyAffineMatrices(&owner->transform.right.x, alignment, model);
     SwapMatrixUpForward(&owner->transform);

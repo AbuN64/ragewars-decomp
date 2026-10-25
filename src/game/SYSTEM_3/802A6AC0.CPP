@@ -56,9 +56,9 @@ void func_802A5B84_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4) {
     }
 }
 
-void func_802737F0_de(void *, f32);
+void PitchMatrixLocal(void *, f32);
 void TranslateMatrix(char *, f32, f32, f32);
-void func_8027347C_de(void *, f32, f32, f32);
+void ScaleMatrixLocal(void *, f32, f32, f32);
 void Rsp_ConvertMatrixToFixed(f32 *, PackedMatrixWords *);
 
 Particle *System_SpawnImpactMark(SceneRecAt95A8 *scene, CVector3 position, CVector3 normal, s32 surface, s32 owner) {
@@ -83,12 +83,12 @@ Particle *System_SpawnImpactMark(SceneRecAt95A8 *scene, CVector3 position, CVect
     if (node != 0) {
         node->owner = owner;
         MatrixFromQuaternion(&rotation.x, matrix);
-        func_802737F0_de(matrix, 1.5707965f);
+        PitchMatrixLocal(matrix, 1.5707965f);
         Particle_NormalizeVec3(&normal);
         Particle_ScaleVector(&normal, &normal, 2.048f);
         Particle_AddVec3(&position, &position, &normal);
         TranslateMatrix((char *)matrix, position.x, position.y, position.z);
-        func_8027347C_de(matrix, D_800C5EA8_de, 1.0f, D_800C5EA8_de);
+        ScaleMatrixLocal(matrix, D_800C5EA8_de, 1.0f, D_800C5EA8_de);
         Rsp_ConvertMatrixToFixed(matrix, &node->transform.matrix);
     }
 done:

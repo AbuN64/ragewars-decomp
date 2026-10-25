@@ -16,8 +16,8 @@ extern CQuatern func_8024D728_de(void *arg1);
 
 extern void MultiplyQuaternions(CQuatern *arg0, CQuatern *arg1, CQuatern *arg2);
 extern void MatrixFromQuaternion(void *, void *);
-extern void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
-extern s32 func_8027254C_de(f32 *arg0, f32 arg1);
+extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
+extern s32 Particle_LimitVectorLength(f32 *arg0, f32 arg1);
 extern void TranslateMatrix(char *, f32, f32, f32);
 extern void SwapMatrixUpForward(void *);
 
@@ -54,10 +54,10 @@ void func_8024B53C_de(void *levelActor) {
     MultiplyQuaternions(product_ptr, &trig, copy_ptr);
     transform = &((struct LevelActor *)(levelActor))->transform[0];
     MatrixFromQuaternion(product_ptr, transform);
-    func_8027347C_de(transform, ((struct LevelActor *)(levelActor))->scale.x,
+    ScaleMatrixLocal(transform, ((struct LevelActor *)(levelActor))->scale.x,
                     ((struct LevelActor *)(levelActor))->scale.y,
                     ((struct LevelActor *)(levelActor))->scale.z);
-    func_8027254C_de(&((struct LevelActor *)(levelActor))->position0.x, 20000.0f);
+    Particle_LimitVectorLength(&((struct LevelActor *)(levelActor))->position0.x, 20000.0f);
     TranslateMatrix(transform, ((struct LevelActor *)(levelActor))->position0.x,
                    ((struct LevelActor *)(levelActor))->position0.y,
                    ((struct LevelActor *)(levelActor))->position0.z);

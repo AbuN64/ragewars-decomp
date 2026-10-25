@@ -43,7 +43,7 @@ CVector3 func_802723FC_de(CVector3 *remaining, CVector3 *arg1) {
     return projected;
 }
 
-s32 func_8027254C_de(f32 *arg0, f32 arg1) {
+s32 Particle_LimitVectorLength(f32 *arg0, f32 arg1) {
     f32 magSq;
     f32 mag;
     f32 scale;
@@ -128,7 +128,7 @@ void func_80272748_de(CVector3 *motion, f32 arg1) {
 }
 
 /** Reset the matrix to identity-diagonal * D_800C99B0, zeroing the rest. */
-void func_802727D8_de(void *arg0) {
+void Particle_IdentityMatrix(void *arg0) {
     Matrix *matrix = arg0;
     f32 zero = 0.0f;
 
@@ -150,7 +150,7 @@ void func_802727D8_de(void *arg0) {
     matrix->m[1] = zero;
 }
 
-void func_80272828_de(f32 *arg0) {
+void Particle_ClampMatrixToFixedRange(f32 *arg0) {
     f32 *var_a0;
     f32 *var_v1;
     f32 temp_f0;
@@ -246,7 +246,7 @@ void Particle_ProjectPoint(void *matrix, void *arg1, CVector3 *localDirection) {
     }
 }
 
-void func_80272B38_de(void *matrix, void *arg1, void *arg2) {
+void Particle_TransformDirection(void *matrix, void *arg1, void *arg2) {
     Matrix *m = matrix;
     CVector3 *v = arg1;
     CVector3 *out = arg2;
@@ -361,7 +361,7 @@ void func_80272D00_de(f32 (*mfThis)[4], f32 Theta, f32 X, f32 Y, f32 Z) {
     mfThis[0][1] = ab + Z;
 }
 
-void func_80272E3C_de(f32 *m, f32 x, f32 y, f32 z)
+void Particle_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z)
 {
   f32 zero;
   f32 ax = Math_Sinf(x);

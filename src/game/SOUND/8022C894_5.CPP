@@ -263,7 +263,7 @@ void func_8022E0B0_de(void *matrix, void *arg1) {
     if (actor->unk650 == 0xF) {
         amount += D_800C2E0C_de;
     }
-    func_802738C0_de(matrix, amount / (f32)range->unk1A);
+    PitchMatrix(matrix, amount / (f32)range->unk1A);
 }
 
 s32 func_8022E130_de(struct func_80204468_S3 *object) {

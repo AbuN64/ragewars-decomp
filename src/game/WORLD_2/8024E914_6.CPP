@@ -37,11 +37,11 @@ extern f32 Particle_GetActorRadius(Actor_func_8024ED90_de *actor);
 
 extern CQuatern func_8024D870_de(void *);
 
-extern void func_8027254C_de(CVector3 *, f32);
+extern void Particle_LimitVectorLength(CVector3 *, f32);
 
 extern void MatrixFromQuaternion(f32 *, f32 *);
 
-extern void func_8027347C_de(f32 *, f32, f32, f32);
+extern void ScaleMatrixLocal(f32 *, f32, f32, f32);
 
 extern void TranslateMatrix(f32 *, f32, f32, f32);
 
@@ -112,9 +112,9 @@ void func_8024EF28_de(void *actor) {
     position.x = ((Shared_Func80243A80Actor *)actor)->x;
     position.z = ((Shared_Func80243A80Actor *)actor)->z;
     position.y = ground;
-    func_8027254C_de(&position, 20000.0f);
+    Particle_LimitVectorLength(&position, 20000.0f);
     MatrixFromQuaternion(&rotation.x, matrix);
-    func_8027347C_de(matrix, size, 1.0f, size);
+    ScaleMatrixLocal(matrix, size, 1.0f, size);
     TranslateMatrix(matrix, position.x, position.y, position.z);
     Rsp_ConvertMatrixToFixed(matrix, (char *)actor + ((D_800D297C << 6) + 0xE8));
     func_8026992C_de((char *)actor + ((D_800D297C << 6) + 0xE8), 1, 0x96);

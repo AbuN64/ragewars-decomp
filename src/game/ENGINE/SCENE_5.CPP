@@ -12,7 +12,7 @@
 #include "RENDER_4/8028FD2C_6.H"
 #include "COMMON/PLAYERPROFILES.H"
 
-void func_802897B4_de(World37 *world, CVector3 *point, Item37 **output, s32 *total) {
+void Engine_FindLightVolumes(World37 *world, CVector3 *point, Item37 **output, s32 *total) {
     Region37 *region;
     s32 i, found, regionCount, itemCount;
     f32 x, z;

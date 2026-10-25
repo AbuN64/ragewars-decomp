@@ -125,7 +125,7 @@ extern void Render_ClearDepthRect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
 extern void func_80272CB0_de(void *arg0, f32 arg1, f32 arg2, f32 arg3);
 extern void TranslateMatrix(char *object, f32 x, f32 y, f32 z);
 extern void SwapMatrixUpForward(void *object);
-extern void func_8027302C(f32 *arg0, f32 *arg1);
+extern void CopyMatrix(f32 *arg0, f32 *arg1);
 extern void func_802735A8_de(void *arg0, s32 arg1, f32 arg2, f32 arg3);
 extern void Rsp_ConvertMatrixToFixed(void *arg0, void *arg1);
 extern void func_8026DF30_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
@@ -169,14 +169,14 @@ void func_80219490_de(char *object, char *camera) {
 
     func_80272CB0_de(first, ((AnimationSprite *)(object))->scaleX,
                    ((AnimationSprite *)(object))->scaleY, ((AnimationSprite *)(object))->scaleZ);
-    func_80273A98_de(first, ((AnimationSprite *)(object))->yaw);
-    func_802738C0_de(first, ((AnimationSprite *)(object))->pitch);
+    YawMatrix(first, ((AnimationSprite *)(object))->yaw);
+    PitchMatrix(first, ((AnimationSprite *)(object))->pitch);
     TranslateMatrix((char *)first, ((AnimationSprite *)(object))->position.x,
                    ((AnimationSprite *)(object))->position.y, ((AnimationSprite *)(object))->position.z);
     SwapMatrixUpForward(first);
 
     matrix = (char *)second;
-    func_8027302C(second, first);
+    CopyMatrix(second, first);
     if (D_800E28D8 == 2) {
         func_802735A8_de(matrix, D_800C94E8_de, D_800C22D0_de, D_800C22D0_de);
     }

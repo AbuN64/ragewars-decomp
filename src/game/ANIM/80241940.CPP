@@ -23,7 +23,7 @@ extern f32 Particle_GetActorHeight(s32);
 extern f32 Sound_GetActorBaseOffset(s32);
 
 
-extern void func_80273648_de(f32 *, f32);
+extern void BuildPitchMatrix(f32 *, f32);
 extern void MultiplyQuaternions(CQuatern *, CQuatern *, CQuatern *);
 extern void MatrixFromQuaternion(CQuatern *, f32 *);
 extern void Rsp_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
@@ -112,7 +112,7 @@ void func_80241950_de(char *obj, CVector3 *corners, char *floor, s32 attachment)
     corners[7].x = minX;
     corners[7].y = bottom;
     corners[7].z = minZ;
-    func_80273648_de(rest, ((Dest *)anim)->restPitch);
+    BuildPitchMatrix(rest, ((Dest *)anim)->restPitch);
     sine = Math_Sinf(((LevelActor *)obj)->yaw * 0.5f);
     yaw.x = 0.0f;
     yaw.y = sine;

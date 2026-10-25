@@ -26,9 +26,9 @@ extern s32 D_800D297C;
 
 extern void Rsp_ConvertMatrixToFloat(f32 *, s32);
 
-extern void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
+extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
-extern void func_80272828_de(f32 *arg0);
+extern void Particle_ClampMatrixToFixedRange(f32 *arg0);
 
 extern void func_802732D0_de(char *object, float *output);
 
@@ -240,8 +240,8 @@ void func_802A6174_de(Node44 *arg0, void *arg1) {
             if (((ParticleEffect *)entry)->entry->unk14 != 0) {
                 scale = D_800C5EBC_de;
             }
-            func_8027347C_de(local, scale, scale, scale);
-            func_80272828_de(local);
+            ScaleMatrixLocal(local, scale, scale, scale);
+            Particle_ClampMatrixToFixedRange(local);
             func_802732D0_de((char *)local, &((ChildB4 *)arg1)->pos[0]);
             if (arg0->unk_3C & 4) {
                 func_802732EC_de(local, &((ChildB4 *)arg1)->rot[0]);
@@ -303,8 +303,8 @@ void func_802A63A4_de(void *arg0, void *arg1, void *arg2, s32 arg3) {
         if (entry->desc->renderModel != 0) {
             scale = D_800C5EC4_de;
         }
-        func_8027347C_de(local, scale, scale, scale);
-        func_80272828_de(local);
+        ScaleMatrixLocal(local, scale, scale, scale);
+        Particle_ClampMatrixToFixedRange(local);
         func_802A25D0_de(arg0, state, local);
     }
 }

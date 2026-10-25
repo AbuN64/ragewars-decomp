@@ -89,7 +89,7 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
         if (target != 0) {
             if (segment->angle != 0.0f) {
                 Particle_SubtractVectors(&offset, &target->views0.view8_3.pos, &rider->base);
-                func_802736D4_de(matrix, -segment->angle);
+                BuildYawMatrix(matrix, -segment->angle);
                 Particle_TransformPoint(matrix, &offset, &local);
                 goal = local.z / segment->radius;
             } else {

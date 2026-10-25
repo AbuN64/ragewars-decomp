@@ -10,8 +10,8 @@
 
 
 extern f32 Nav_ApproachValue(f32, f32, f32);
-extern void func_802727D8_de(Matrix *);
-extern void func_80273C68_de(Matrix *, f32);
+extern void Particle_IdentityMatrix(Matrix *);
+extern void RollMatrix(Matrix *, f32);
 extern void func_802185D0_de(Menu_func_80218F9C_de *, ItemRecAt18V1 *, s32, void *);
 
 void func_80218F9C_de(Menu_func_80218F9C_de *menu, s32 unused1, void *player) {
@@ -37,8 +37,8 @@ void func_80218F9C_de(Menu_func_80218F9C_de *menu, s32 unused1, void *player) {
                 target = *(&D_800C9178_de + 1);
             }
             slot->scale = Nav_ApproachValue(slot->scale, target, *(&D_800C9178_de + 1) * 0.1f);
-            func_802727D8_de(&matrix);
-            func_80273C68_de(&matrix, slot->angle);
+            Particle_IdentityMatrix(&matrix);
+            RollMatrix(&matrix, slot->angle);
             Particle_TransformPoint(&matrix, &offset, &position);
             item->slot = i;
             item->position = position;

@@ -31,7 +31,7 @@ static inline void set_emitter(CShake *node, f32 a, f32 b, f32 c, f32 scale, s32
     node->z.value = c;
 }
 
-extern s32 func_8027254C_de(f32 *arg0, f32 arg1);
+extern s32 Particle_LimitVectorLength(f32 *arg0, f32 arg1);
 
 extern f32 Math_Sqrtf(f32);
 
@@ -131,7 +131,7 @@ void *Camera_FindNearestCamera(MenuMatchGlobals *menuMatchGlobals, CVector3 *zer
     f32 bestDist;
     f32 distSq;
 
-    func_8027254C_de(&zero->x, 20000.0f);
+    Particle_LimitVectorLength(&zero->x, 20000.0f);
     if (menuMatchGlobals->useFallbackCamera != 0) {
         return &menuMatchGlobals->fallbackCamera;
     }

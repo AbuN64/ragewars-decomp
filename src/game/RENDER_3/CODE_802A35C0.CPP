@@ -86,11 +86,11 @@ extern void func_802A5FF0_de(State_func_802A2FA4_de *);
 extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
-extern void func_80272B38_de(void *, void *, void *);
+extern void Particle_TransformDirection(void *, void *, void *);
 
 extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern void func_802727D8_de(void *);
+extern void Particle_IdentityMatrix(void *);
 
 extern void func_80272CB0_de(void *, f32, f32, f32);
 
@@ -352,7 +352,7 @@ void func_802A31E8_de(Node438C *arg0, Node438C *arg1, GameplayCamera *camera, vo
     setup[0] = 0;
     setup[1] = 0;
     setup[2] = D_800C5DE8_de[1];
-    func_80272B38_de(&camera->unk1A0, setup, &basis);
+    Particle_TransformDirection(&camera->unk1A0, setup, &basis);
     neg_y = -basis.y;
     neg_z = -basis.z;
     basis.y = neg_y;
@@ -366,7 +366,7 @@ void func_802A31E8_de(Node438C *arg0, Node438C *arg1, GameplayCamera *camera, vo
     Particle_ScaleVector(&result, &result, arg0->a);
     Particle_ScaleVector(&cross, &cross, arg0->b);
     Particle_ScaleVector(&basis, &basis, arg0->c);
-    func_802727D8_de(matrix);
+    Particle_IdentityMatrix(matrix);
     ((Matrix *)matrix)->m[0] = result.x;
     ((Matrix *)matrix)->m[1] = result.y;
     ((Matrix *)matrix)->m[2] = result.z;
@@ -398,7 +398,7 @@ void func_802A339C_de(void *arg0, void *camera) {
     if (first != 0) {
         func_80272CB0_de(matrix, first->a, first->b, first->c);
     } else {
-        func_802727D8_de(matrix);
+        Particle_IdentityMatrix(matrix);
     }
 
     while (first != 0) {
@@ -454,8 +454,8 @@ apply:
 
 extern f32 D_800C5DF0_de, D_800C5DF4_de;
 extern void Rsp_ConvertMatrixToFloat(void *, void *);
-extern void func_8027347C_de(void *, f32, f32, f32);
-extern void func_80272828_de(void *);
+extern void ScaleMatrixLocal(void *, f32, f32, f32);
+extern void Particle_ClampMatrixToFixedRange(void *);
 typedef struct LinkNode802A {
     struct LinkNode802A *parent; /* 0x00 */
     struct LinkNode802A *next;   /* 0x04 */
@@ -487,8 +487,8 @@ static inline void Render_UpdateLinkedSource(LinkOwner802A *owner, LinkNode802A 
     if (*(s32 *)(*(char **)((char *)source + 0x118) + 0x14) != 0) {
         scale = D_800C5DF4_de;
     }
-    func_8027347C_de(matrix, scale, scale, scale);
-    func_80272828_de(matrix);
+    ScaleMatrixLocal(matrix, scale, scale, scale);
+    Particle_ClampMatrixToFixedRange(matrix);
     func_802732D0_de((char *)matrix, &node->pos.x);
     if (owner->flags & 4) {
         func_802732EC_de(matrix, (f32 *)((char *)node + 0x1C));

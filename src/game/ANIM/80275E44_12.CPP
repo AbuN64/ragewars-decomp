@@ -9,12 +9,12 @@
 #define SK_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 typedef struct SkelVec { f32 x; f32 y; f32 z; } SkelVec;
 extern s32 D_801462C8;
-extern void func_802727D8_de(void *);
-extern void func_80273C68_de(void *, f32);
-extern void func_80273A98_de(void *, f32);
+extern void Particle_IdentityMatrix(void *);
+extern void RollMatrix(void *, f32);
+extern void YawMatrix(void *, f32);
 extern void Particle_ProjectPoint(void *, void *, void *);
 extern void func_802735A8_de(void *, f32, f32, f32);
-extern void func_802738C0_de(void *, f32);
+extern void PitchMatrix(void *, f32);
 extern void TranslateMatrix(void *, f32, f32, f32);
 extern void func_8026EF58_de(void *, void *);
 extern void Nav_ComputePointBounds(void *, s32, void *);
@@ -48,9 +48,9 @@ void Anim_DecodeBoxTransform(u8 *self, u8 *src) {
         tilt.y = SK_FIELD(src, s32, 0x10) * 9.31322575e-09f;
         tilt.z = SK_FIELD(src, s32, 0x14) * 9.31322575e-09f;
         matrix = self + 0x60;
-        func_802727D8_de(matrix);
-        func_80273C68_de(matrix, tilt.x);
-        func_80273A98_de(matrix, tilt.y);
+        Particle_IdentityMatrix(matrix);
+        RollMatrix(matrix, tilt.x);
+        YawMatrix(matrix, tilt.y);
         Particle_ProjectPoint(matrix, &up, self + 0x14);
         rotation.x = 0;
         rotation.y = 0;
@@ -88,11 +88,11 @@ void Anim_DecodeBoxTransform(u8 *self, u8 *src) {
     SK_FIELD(self, u8, 0xB8) = SK_FIELD(src, u8, 0x37);
     SK_FIELD(self, u8, 0xBA) = SK_FIELD(src, u8, 0x3B);
     SK_FIELD(self, u8, 0xBD) = SK_FIELD(src, u8, 0x4B);
-    func_802727D8_de(matrix);
+    Particle_IdentityMatrix(matrix);
     func_802735A8_de(matrix, scale.x, scale.y, scale.z);
-    func_80273C68_de(matrix, rotation.z);
-    func_80273A98_de(matrix, rotation.y);
-    func_802738C0_de(matrix, rotation.x);
+    RollMatrix(matrix, rotation.z);
+    YawMatrix(matrix, rotation.y);
+    PitchMatrix(matrix, rotation.x);
     TranslateMatrix(matrix, translation.x, translation.y, translation.z);
     func_8026EF58_de(self + 0x20, matrix);
     for (i = 0; i < 8; i++) {

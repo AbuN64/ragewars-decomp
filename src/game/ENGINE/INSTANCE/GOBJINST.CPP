@@ -80,7 +80,7 @@ extern void func_80262480_de(char *);
 
 extern void func_8024B65C_de(char *, s32);
 
-extern void func_802727D8_de(char *);
+extern void Particle_IdentityMatrix(char *);
 
 extern void Nav_InitSpawnedActor(char *, char *, void *);
 
@@ -228,7 +228,7 @@ void func_802466A0_de(char *obj, s32 model, s32 kind, s32 unused, void *info, s3
     func_80262480_de((char *)obj + 0x118);
     func_8024B65C_de(obj, 0);
     ((LevelActor *)obj)->flags = (((LevelActor *)obj)->flags & ~0x400) | 0x2100;
-    func_802727D8_de((char *)obj + 0x74);
+    Particle_IdentityMatrix((char *)obj + 0x74);
     ((LevelActor *)obj)->fieldB4 = 0;
     ((LevelActor *)obj)->fieldB8 = 0;
     ((LevelActor *)obj)->shadow = 0;

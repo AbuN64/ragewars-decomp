@@ -19,7 +19,7 @@ extern s32 Weapons_SetPlayerState(SharedPlayer *player, void *target, s32 state)
 extern s32 func_802301F4_de(void *, void *);
 
 /* Applies the negated, scaled speed of the event's source (float at 0x294, scaled by D_800C8130) to an
-   object through func_802739C4_de when the event side at 0x4 matches the mode: side 2 in mode 1, side 0
+   object through YawMatrixLocal when the event side at 0x4 matches the mode: side 2 in mode 1, side 0
    otherwise. */
 
 
@@ -93,10 +93,10 @@ void func_80232F8C_de(void *obj, Event *event) {
 
     if (D_80140FF8 == 1) {
         if (event->side == 2) {
-            func_802739C4_de(obj, -v);
+            YawMatrixLocal(obj, -v);
         }
     } else if (event->side == 0) {
-        func_802739C4_de(obj, -v);
+        YawMatrixLocal(obj, -v);
     }
 }
 
@@ -156,13 +156,13 @@ void func_80233188_de(void *object, Event *event) {
     if (mode == 1) {
         switch (event->side) {
         case 1:
-            func_802739C4_de(object, -speed);
+            YawMatrixLocal(object, -speed);
             break;
         case 2:
-            func_802739C4_de(object, speed * 2.0f);
+            YawMatrixLocal(object, speed * 2.0f);
             break;
         }
     } else if (event->side == 0) {
-        func_802739C4_de(object, -speed * 2.0f);
+        YawMatrixLocal(object, -speed * 2.0f);
     }
 }
