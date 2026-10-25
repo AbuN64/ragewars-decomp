@@ -454,7 +454,7 @@ void func_80228AF4_de(void *arg0, ViewState *viewState) {
         return;
     }
     hud = &D_801462DE;
-    func_802A9234_de(hud->fade);
+    Text_SetupSpriteMode(hud->fade);
     if (((HudState *)&hud->state)->timer <= 0.0f) {
         return;
     }

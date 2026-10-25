@@ -37,7 +37,7 @@ void func_8021836C_de(Menu *menu) {
 void func_802183E8_de(s32 arg0, s32 arg1, s32 arg2) {
     Gfx *cmd;
 
-    func_802A9234_de(0xFF);
+    Text_SetupSpriteMode(0xFF);
     gDPSetTextureFilter(D_80110634++, G_TF_BILERP);
     func_80217928_de((Menu *)arg0, arg1, arg2);
 }

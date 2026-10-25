@@ -3614,7 +3614,7 @@ segments:
       - [0xC9154, rodata, data_800C/rodata_func_80238670_de_800C8554]
       - [0xC9157, data, data_800C/D_blob_43bdfdb113d4bffb9985]
       - [0xC9158, data, data_800C/D_auto_data_unresolved_800C8558]
-      - [0xC91C8, rodata, data_800C/literals_func_80238670_de]
+      - [0xC91C8, rodata, data_800C/literals_Camera_DrawLensFlare]
       - [0xC9204, rodata, data_800C/literals_Camera_DrawObjectFlares]
       - [0xC9208, rodata, data_800C/literals_func_80238EB8_de]
       - [0xC9210, rodata, data_800C/D_blob_ac9c549f26b20cc919fd]

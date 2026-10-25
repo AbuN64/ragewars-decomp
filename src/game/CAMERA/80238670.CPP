@@ -10,7 +10,7 @@ typedef struct ClipView FlareActor;
 extern s32 D_800E28D0;
 extern Gfx *D_80110634;
 extern f32 func_802B72B0_de(f32);
-void func_80238670_de(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 special, s32 unused) {
+void Camera_DrawLensFlare(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 special, s32 unused) {
     FlareRadii radii = D_800C344C_de;
     FlareAlphas alphas = D_800C3468_de;
     FlareColors colors = D_800C3484_de;
@@ -97,15 +97,15 @@ struct FlareSource {
 };
 typedef struct FlareSourceList { FlareSource *first; } FlareSourceList;
 extern FlareSourceList D_8012D4E4;
-extern void func_802A9234_de(s32);
+extern void Text_SetupSpriteMode(s32);
 extern void Render_SetModePreset(s32);
-extern void func_80272A10_de(void *, void *, CVector3 *);
+extern void Particle_ProjectPoint(void *, void *, CVector3 *);
 
-/* Same body as func_80239244_de: project a world point through the view matrix to screen pixels. */
-static inline void Camera_ProjectToScreen(FlareActor *view, CVector3 *point, f32 *screenX, f32 *screenY) {
+/* Same body as Camera_ProjectToScreen: project a world point through the view matrix to screen pixels. */
+static inline void ProjectToScreen(FlareActor *view, CVector3 *point, f32 *screenX, f32 *screenY) {
     CVector3 value;
     f32 half;
-    func_80272A10_de(view->viewProjection, point, &value);
+    Particle_ProjectPoint(view->viewProjection, point, &value);
     half = (f32)(D_800E28D0 / 2);
     *screenX = value.x * half + half;
     *screenY = value.y * (f32)(-D_800E28D4 / 2) + (f32)(D_800E28D4 / 2);
@@ -119,15 +119,15 @@ void Camera_DrawObjectFlares(FlareActor *view) {
     f32 x, y;
     s32 mask = 8 << view->index;
 
-    func_802A9234_de(100);
+    Text_SetupSpriteMode(100);
     Render_SetModePreset(0x1A);
     g = *gfx;
     gDPSetTextureFilter(g++, G_TF_BILERP);
     *gfx = g;
     for (source = D_8012D4E4.first; source != 0; source = source->next) {
         if ((source->viewMask & mask) && (*source->state & 0x80000)) {
-            Camera_ProjectToScreen(view, &source->position, &x, &y);
-            func_80238670_de(view, x, y, source->brightness * (1.0f / 255.0f), 0, 0);
+            ProjectToScreen(view, &source->position, &x, &y);
+            Camera_DrawLensFlare(view, x, y, source->brightness * (1.0f / 255.0f), 0, 0);
         }
     }
 }

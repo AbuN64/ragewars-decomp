@@ -42,7 +42,7 @@ void func_8043EE5C_de(struct ItemRecAt18V2 *item, MenuOptionBox *box, s32 unused
     }
     if (D_800E1E20 != 5) {
         D_800E1E20 = 5;
-        func_802A9234_de((s32)(context->fade * (context->alpha * D_800E23A0[0])));
+        Text_SetupSpriteMode((s32)(context->fade * (context->alpha * D_800E23A0[0])));
     }
     gDPPipeSync(D_80110634++);
     gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);

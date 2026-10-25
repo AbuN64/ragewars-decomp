@@ -216,7 +216,7 @@ void func_80272944_de(f32 *m, f32 *in, f32 *out, u32 count) {
     }
 }
 
-void func_80272A10_de(void *matrix, void *arg1, CVector3 *localDirection) {
+void Particle_ProjectPoint(void *matrix, void *arg1, CVector3 *localDirection) {
     Matrix *m = matrix;
     CVector3 *v = arg1;
     f32 w;

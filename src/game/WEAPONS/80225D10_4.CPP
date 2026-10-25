@@ -248,7 +248,7 @@ void func_80227038_de(s8 *world) {
                             if (temp_v1->unk90 == 0) {
                                 temp_s1_2 = player->unk5DC;
                                 if ((temp_s1_2 != 0) && (temp_s1_2->unk564 == 0)) {
-                                    func_802A9234_de((s32) D_801462DE);
+                                    Text_SetupSpriteMode((s32) D_801462DE);
                                     temp_f2 = temp_s1_2->unk29C;
                                     temp_f3 = temp_s1_2->unk2A0;
                                     scaled5x = temp_f2 * banner_half;
@@ -317,7 +317,7 @@ void func_80227038_de(s8 *world) {
                 temp_v0_6 = func_8022C55C_de(world, (u32) ((s32) case3_entry->unk5C % temp_v0));
                 temp_s1_3 = temp_v0_6->unk5DC;
                 if ((temp_s1_3 != 0) && (temp_s1_3->unk564 == 0)) {
-                    func_802A9234_de((s32) D_801462DE);
+                    Text_SetupSpriteMode((s32) D_801462DE);
                     temp_f3_3 = temp_s1_3->unk29C;
                     temp_f2_3 = temp_s1_3->unk2A0;
                     scaled_x = temp_f3_3 * D_800C2BA8_de;
@@ -398,7 +398,7 @@ void func_80227038_de(s8 *world) {
                 temp_v0_8 = func_8022C55C_de(world, (u32) ((s32) case4_entry->unk5C % temp_v0));
                 temp_s1_4 = temp_v0_8->unk5DC;
                 if ((temp_s1_4 != 0) && (temp_s1_4->unk564 == 0)) {
-                    func_802A9234_de((s32) D_801462DE);
+                    Text_SetupSpriteMode((s32) D_801462DE);
                     temp_f3_4 = temp_s1_4->unk29C;
                     temp_f2_5 = temp_s1_4->unk2A0;
                     scaled_x4 = temp_f3_4 * D_800C2BB0_de;
@@ -486,7 +486,7 @@ void func_80227038_de(s8 *world) {
                             if (temp_v1_3->unk8F == 0) {
                                 temp_s1_5 = temp_v0_11->unk5DC;
                                 if ((temp_s1_5 != 0) && (temp_s1_5->unk564 == 0)) {
-                                    func_802A9234_de((s32) D_801462DE);
+                                    Text_SetupSpriteMode((s32) D_801462DE);
                                     temp_f2_7 = temp_s1_5->unk29C;
                                     temp_f3_5 = temp_s1_5->unk2A0;
                                     scaled6x = temp_f2_7 * banner_half;

@@ -20,7 +20,7 @@ extern s32 D_800CDEC8;
 
 extern int func_802A23B4_de(void);
 
-extern void func_802A9234_de(s32);
+extern void Text_SetupSpriteMode(s32);
 
 extern void func_802A7660_de(void *arg0, int arg1);
 
@@ -88,7 +88,7 @@ void func_802AA7A4_de(void *arg0) {
     func_802A8710_de();
     func_802AAB68_de(D_800C61F0_de, D_800C61F0_de);
     func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
-    func_802A9234_de(D_801462C8.hudFade);
+    Text_SetupSpriteMode(D_801462C8.hudFade);
     if (((Hud *)arg0)->bars[0].enabled != 0) {
         func_802A7660_de(arg0, 1);
     }

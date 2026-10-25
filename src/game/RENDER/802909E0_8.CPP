@@ -105,7 +105,7 @@ extern Gfx *D_80110634;
 #include "COMMON/DISPLAY.H"
 extern void Render_ClearDepthRect(void *arg0, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced);
 
-extern void func_802A9234_de(s32 alpha);
+extern void Text_SetupSpriteMode(s32 alpha);
 void func_80290C24_de(void *arg0) {
     Frame *frame = D_8011FAC0.ring.current;
     s32 width;
@@ -122,7 +122,7 @@ void func_80290C24_de(void *arg0) {
     gDPFillRectangle(D_80110634++, 0, 0, (SCREEN_WD), (SCREEN_HT));
     func_802AA950_de(0x386, 0, &width, &height);
     if (width != 0 && height != 0) {
-        func_802A9234_de(0xFF);
+        Text_SetupSpriteMode(0xFF);
         func_802AAC28_de(0x386, 0, 0, 0, (f32)SCREEN_WD / (f32)width, (f32)SCREEN_HT / (f32)height, 1);
     }
 }

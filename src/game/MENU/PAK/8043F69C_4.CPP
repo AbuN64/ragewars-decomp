@@ -41,7 +41,7 @@ extern s32 D_800E1E20;
 
 extern CMenuFontInfo D_800E1E24_de[];
 
-void func_802A9234_de(s32);
+void Text_SetupSpriteMode(s32);
 
 void Text_SetupFillMode(void);
 
@@ -208,7 +208,7 @@ void func_804402DC_de(MenuOption *arg0, MenuOptionBox *arg1, s32 arg2, MenuOptio
     }
     if (D_800E1E20 != 3) {
         D_800E1E20 = 3;
-        func_802A9234_de((s32) (arg3->fade * (arg3->alpha * D_800DE47C_de)));
+        Text_SetupSpriteMode((s32) (arg3->fade * (arg3->alpha * D_800DE47C_de)));
     }
     func_802AAC28_de(arg0->resource, 0, (s16)arg1->left, (s16)arg1->top, arg1->scaleX, arg1->scaleY, 1);
 }

@@ -110,7 +110,7 @@ extern s32 D_800E28D8;
 extern void Render_SetCombineMode(s32 arg0);
 extern void Render_SetModePreset(s32 arg0);
 
-void func_802A9234_de(s32 color) {
+void Text_SetupSpriteMode(s32 color) {
     gDPPipeSync(D_80110634++);
     gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
     Render_SetCombineMode(0x1B);

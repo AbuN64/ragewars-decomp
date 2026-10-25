@@ -55,7 +55,7 @@ void func_802897B4_de(World37 *world, CVector3 *point, Item37 **output, s32 *tot
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 extern s32 func_80277128_de(ObjectRecAtBC *, f32, f32, f32, CVector3 *, f32 *);
-extern void func_80272A10_de(void *, CVector3 *, CVector3 *);
+extern void Particle_ProjectPoint(void *, CVector3 *, CVector3 *);
 extern f32 func_80278890_de(void *);
 static inline f32 sampleDot(CVector3 *a, f32 *b, s32 index) { f32 *d=b+index+128; return a->x*d[0] + a->y*d[1] + a->z*d[2]; }
 void Engine_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *position, Shared_ParticleLighting *lighting) {
@@ -135,7 +135,7 @@ void Engine_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *p
             Particle_TransformPoint(volume->inverse, position, &transformed);
             if (func_80277128_de(volume, transformed.x, transformed.y, transformed.z, &localDirection, &weights[sampleIndex]) != 0) {
                 Particle_AddVec3(&translatedDirection, &localDirection, &transformed);
-                func_80272A10_de(volume->transform, &translatedDirection, &localDirection);
+                Particle_ProjectPoint(volume->transform, &translatedDirection, &localDirection);
                 Particle_SubtractVectors(sampleDirection, position, &localDirection);
                 Particle_NormalizeVec3(sampleDirection);
                 color = volume->direction;

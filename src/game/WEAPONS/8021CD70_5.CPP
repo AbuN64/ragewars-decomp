@@ -59,7 +59,7 @@ void func_8021E2A0_de(SharedPlayer *player, void *view) {
             player->views5E8.view7BC_102.timer = 0.0f;
         }
     }
-    func_802A9234_de(0xFF);
+    Text_SetupSpriteMode(0xFF);
 
     icon = player->views5E8.view7B8_100.target;
     show = 1;

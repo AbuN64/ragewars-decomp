@@ -123,7 +123,7 @@ void func_80293FF0_de(void) {
     gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)D_8011BDC0->colorImage);
     func_802AA950_de(0x388, 0, &width, &height);
     if ((width != 0) && (height != 0)) {
-        func_802A9234_de(0xFA);
+        Text_SetupSpriteMode(0xFA);
         func_802AAC28_de(0x388, 0, 0, 0, (f32)D_800E28D0 / (f32)width, (f32)D_800E28D4 / (f32)height, 1);
     }
 }

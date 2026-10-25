@@ -99,7 +99,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
         func_802183E8_de(player->strokes, view, player);
         func_80218F08_de(player->trails, view, player);
         func_802A6900_de(player->marks, player);
-        func_802A9234_de(D_801462C8.hudFade);
+        Text_SetupSpriteMode(D_801462C8.hudFade);
         sx = view->width / (f32) D_800E28D0;
         sy = view->height / (f32) D_800E28D4;
         if (D_800E28D8 == 0) {
@@ -163,7 +163,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             }
             y = view->x + view->width * 0.5f;
             x = view->y + view->height * 0.5f;
-            func_802A9234_de(0xFA);
+            Text_SetupSpriteMode(0xFA);
             gDPSetEnvColor(D_80110634++, (r), (g), (b), 250);
             for (k = 0; k < 4; k++) {
                 func_802AAC28_de(0x208, k, y + scaleX * D_800C9F64_de[k + 4], x + scaleY * D_800C9F74_de[k + 4], sx,
@@ -217,7 +217,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             }
             x = player->livesX * scaleX + view->x;
             y = player->livesY * scaleY + view->y;
-            func_802A9234_de(player->alpha);
+            Text_SetupSpriteMode(player->alpha);
             func_802A822C_de(n, x, y + scaleY * 22.0f, scaleX, scaleY, 1, 0, 0);
             func_802AAC28_de(0x1F6, 0, x + scaleX * 20.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
             if (D_801462C8.counters.enabled != 0) {
@@ -263,7 +263,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                 if (x > 200.0f) {
                     x -= 12.0f;
                 }
-                func_802A9234_de(player->alpha);
+                Text_SetupSpriteMode(player->alpha);
                 func_802A822C_de(player->scoreLast, x + scaleX * 48.0f, y + scaleY * 22.0f, scaleX, scaleY, 1, 0, 0);
                 if (player->scoreState < 2) {
                     if (hudRules()->enabled != 0) {
@@ -375,7 +375,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                     if (x > 200.0f) {
                         x -= 12.0f;
                     }
-                    func_802A9234_de(player->alpha);
+                    Text_SetupSpriteMode(player->alpha);
                     func_802A822C_de(player->owner->count, x + scaleX * 48.0f, y + scaleY * 20.0f, scaleX, scaleY, 1,
                                   0, 0);
                     if (player->countState < 2) {
@@ -420,7 +420,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                     if (x > 200.0f) {
                         x -= 12.0f;
                     }
-                    func_802A9234_de(player->alpha);
+                    Text_SetupSpriteMode(player->alpha);
                     func_802A822C_de(score, x + scaleX * 48.0f, y + scaleY * 20.0f, scaleX, scaleY, 1, 0, 0);
                     if (player->squadState < 2) {
                         func_802AAC28_de(0x201, 0, x + scaleX * 8.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
@@ -448,7 +448,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                 if (icon > 0.0f) {
                     x = view->x + view->width * 0.5f;
                     y = view->y + view->height * 0.5f;
-                    func_802A9234_de(icon);
+                    Text_SetupSpriteMode(icon);
                     func_802AAC28_de(0x209, 0, x - scaleX * 31.0f, y - scaleY * 32.0f, scaleX, scaleY, 1);
                 } else {
                     player->iconState = 0;
@@ -486,7 +486,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                     if (player->boost > 0.0f) {
                         level = 1;
                     }
-                    func_802A9234_de(player->statusAlpha);
+                    Text_SetupSpriteMode(player->statusAlpha);
                     func_802AAC28_de(0x20C, level, x - scaleX * 70.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
                 } else {
                     /* Clears the icon state, not the status state. */
@@ -509,7 +509,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             } else {
                 level = 0;
             }
-            func_802A9234_de(0xFF);
+            Text_SetupSpriteMode(0xFF);
             func_802AAC28_de(0x20B, level, x + scaleX * 10.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
         } else if (zoom > 1.0f) {
             stepOut = (D_800C9190_de[0] - 1.0f) * 0.25f;
@@ -524,7 +524,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             } else {
                 level = 0;
             }
-            func_802A9234_de(0xFF);
+            Text_SetupSpriteMode(0xFF);
             func_802AAC28_de(0x20A, level, x + scaleX * 10.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
         }
         if (player->weapon == 0xC && player->kind != D_800CE47C) {
@@ -535,7 +535,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             x = view->x + view->width * 0.5f;
             y = view->y + view->height * 0.5f;
             for (i = 0; i < 3; i++, ammo--) {
-                func_802A9234_de(ammo > 0 ? 0xFF : 0x40);
+                Text_SetupSpriteMode(ammo > 0 ? 0xFF : 0x40);
                 func_802AAC28_de(0x2F4, 0, x + D_800CAB78_eu[i] * scaleX, y + scaleY * 64.0f, scaleX, scaleY, 1);
             }
         }
