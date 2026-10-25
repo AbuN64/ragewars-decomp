@@ -14,6 +14,7 @@
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "WEAPONS/80225D10_7.H"
+#include "COMMON/PLAYERPROFILES.H"
 
 /* Draws an actor's player model with its status tint: sets the other-mode lighting command and render
    mode 2, gives the model the team colour byte (the match rule D_801468A0's colour at 0x73 when team
@@ -174,7 +175,6 @@ void func_80229468_de(Inventory *inventory, Receiver *receiver) {
    multiplayer, otherwise D_800CE3E8 plus the profile's bonus bytes in D_80102B00 unless ammunition is
    unlimited at 0x1450), and the message "<amount> <type name>" with a plural suffix for more than one
    is built and shown through func_8022B75C_de. */
-extern Profile D_80102B00[];
 
 extern void func_802A025C_de(char *, char *);
 extern void func_802A02E8_de(char *, char *);

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/PLAYERPROFILES.H"
 
 #if defined(VERSION_US)
 #include "COMMON/OBJECTRECAT28.H"
@@ -6,7 +7,6 @@
 #include "COMMON/WORLD.H"
 extern void *func_8025305C_de(s32);
 extern void func_8022EF30_de(Profile *);
-extern Profile D_80102B00[];
 extern Pulse *D_800E5950;
 extern Shared_MenuData D_80145040;
 extern void Items_ResetActorPools(void *, s32);

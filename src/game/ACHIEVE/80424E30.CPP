@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/PLAYERPROFILES.H"
 
 
 #include "TYPES.H"
@@ -67,7 +68,6 @@ void Achieve_UpdateMatchCounters(s32 arg0, s32 arg1) {
 
 
 /* Count achievements, store the rank, and select its version-specific title. */
-extern Profile D_80102B00[];
 
 extern s32 func_80265650_de(s32 bits, s32 index);
 

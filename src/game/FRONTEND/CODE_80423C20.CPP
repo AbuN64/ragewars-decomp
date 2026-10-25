@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "SCENE/802508E0_13.H"
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/PLAYERPROFILES.H"
 
 
 #if !defined(NON_MATCHING) && !defined(VERSION_US_REV1)
@@ -23,7 +24,6 @@ extern s32 D_800E4680;
 
 /* D_80146398 is the hub's func_8041F2A0_Config array: eight 0x96-byte records at Game+0xD0.
    This unit reaches them only as settings->playerSettings and declares nothing here. */
-extern Profile D_80102B00[];
 
 extern void func_8029973C_de(void);
 

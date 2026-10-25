@@ -10,7 +10,7 @@
 #include "COMMON/RECRECAT4.H"
 #include "COMMON/STATERECAT91.H"
 #include "ACHIEVE/80424E30_2.H"
-extern Profile D_80102B00[];
+#include "COMMON/PLAYERPROFILES.H"
 extern s32 func_8022F454_de(Profile *, s32);
 
 /* Applies event *D_800E4680 to player record D_80102B00[index] once per D_8015402C: when that bit

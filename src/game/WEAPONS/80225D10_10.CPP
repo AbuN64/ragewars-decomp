@@ -18,6 +18,7 @@
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
+#include "COMMON/PLAYERPROFILES.H"
 
 extern f32 D_800C2CE0_de[2];
 
@@ -51,7 +52,6 @@ extern void func_80246E44_de(char *);
 
 
 
-extern Profile D_80102B00[];
 
 extern f32 Particle_GetActorHeight(void);
 

@@ -2,6 +2,7 @@
 #include "RENDER_4/8026AC38.H"
 #include "ACHIEVE/80424E30_3.H"
 #include "ACHIEVE/80424E30_2.H"
+#include "COMMON/PLAYERPROFILES.H"
 
 const unsigned int rodata_func_80438614_de_800E1F50[6] = {
     0x3E99999A, 0x3C1374BC, 0x40400000, 0xC0A00000, 0xC2C80000, 0xC1F00000,
@@ -18,7 +19,6 @@ const unsigned int rodata_func_80438614_de_800E1F50[6] = {
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/WORLD.H"
 #include "ACHIEVE/MODELPREVIEWSCREEN.H"
-extern Profile D_80102B00[];
 extern Active *D_800E4680;
 extern struct ResultsHeadingCharacter D_800DFA6C[];
 extern s32 D_8015402C;
@@ -231,7 +231,6 @@ done:
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "ACHIEVE/MODELPREVIEWSCREEN.H"
 #include "COMMON/OBJECTRECAT28.H"
-extern Profile D_80102B00[];
 extern char D_800E1F48[];
 
 #if !defined(VERSION_US) && !defined(VERSION_US_REV1)

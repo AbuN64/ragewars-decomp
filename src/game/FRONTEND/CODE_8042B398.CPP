@@ -4,6 +4,7 @@
 #include "COMMON/MENU_SCREEN_SETUP.H"
 #include "FRONTEND/80423280_50.H"
 #include "COMMON/SCREEN.H"
+#include "COMMON/PLAYERPROFILES.H"
 
 #include "COMMON/CONTROL.H"
 extern RecordRecAtCV2 D_800E4F64[];
@@ -546,7 +547,6 @@ s32 Frontend_OpenResultsScreen(void *root) {
 extern func_8042CE54_S1 *D_800E53C0;
 extern ResourceBank D_800E12D2[];
 extern struct RowRecAt54 D_800E3A58[];
-extern Profile D_80102B00[];
 extern s32 D_800E01B0_de[],D_800FF140_de[],D_800FEAE0[],D_8014DD98;
 extern s32 func_8041F140_de(s32);
 extern char *func_802A0494_de(char *);

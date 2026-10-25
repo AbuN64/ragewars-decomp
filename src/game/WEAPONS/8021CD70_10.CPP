@@ -9,6 +9,7 @@
 #include "COMMON/INTEGERSTATE244.H"
 #include "COMMON/ENTRYRECATE.H"
 #include "WEAPONS/80213ED4.H"
+#include "COMMON/PLAYERPROFILES.H"
 
 /* Adds ammunition to a player's weapon slot: computes the slot's cap as func_80222D64_de does (zero for
    no slot, the character's cap unless option D_801462D5 is 1, otherwise D_800CE3E8's cap plus the
@@ -24,7 +25,6 @@
 extern void *func_802AC950_de(s32);
 extern u8 D_801462D5;
 extern s32 D_800CE3E8[];
-extern Profile D_80102B00[];
 
 
 
@@ -91,7 +91,6 @@ s32 func_80222BE8_de(void *player, s32 slot, s32 amount) {
 extern void *func_802AC950_de(s32);
 extern u8 D_801462D5;
 extern s32 D_800CE3E8[];
-extern Profile D_80102B00[];
 
 
 

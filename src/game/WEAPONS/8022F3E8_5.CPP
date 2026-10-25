@@ -3,6 +3,7 @@
 #include "COMMON/TRIPLE.H"
 #include "WEAPONS/80213ED4.H"
 #include "RENDER_2/8025DE50_5.H"
+#include "COMMON/PLAYERPROFILES.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #ifdef NON_MATCHING
@@ -25,7 +26,6 @@ INCLUDE_ASM("span_1000", func_802301F4_de);
 #include "COMMON/OBJECTLINKS14C.H"
 /* func_802301E4_S* are unresolved canonical player/actor/control/attack types. */
 
-extern Profile D_80102B00[];
 
 
 extern s32 D_800D30BC[];

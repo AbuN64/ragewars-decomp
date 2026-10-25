@@ -7,6 +7,7 @@
 #include "FRONTEND/8043A0B0_11.H"
 #include "FRONTEND/CODE_8043AED0.H"
 #include "FRONTEND/8040B45C_32.H"
+#include "COMMON/PLAYERPROFILES.H"
 
 /* Moves player p's column cursor on the screen D_800E59E0: fades the shown item of the current
    column (D_800E5A1A[p][column]) to alpha 0x23, calls func_8040E8D8_de(0) on the item D_800E5A06[p][column]
@@ -41,7 +42,6 @@ extern EquipEntry D_800E5B44[];
 
 extern HudStatusShared_Settings D_801462C8;
 
-extern Profile D_80102B00[];
 
 extern s32 func_8022F4DC_de(s32 record, s32 item);
 

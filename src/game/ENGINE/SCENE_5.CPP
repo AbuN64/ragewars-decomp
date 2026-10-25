@@ -9,6 +9,7 @@
 #include "WEAPONS/80213ED4.H"
 #include "particle/80271B18_3.H"
 #include "RENDER_4/8028FD2C_6.H"
+#include "COMMON/PLAYERPROFILES.H"
 
 void func_802897B4_de(World37 *world, CVector3 *point, Item37 **output, s32 *total) {
     Region37 *region;
@@ -550,7 +551,6 @@ typedef struct LevelChallenge {
 } LevelChallenge;
 extern s32 D_8015402C;
 extern ResultsCourse *D_800E4680;
-extern Profile D_80102B00[];
 extern ResultsHeadingCharacter D_800DFA6C[];
 extern char D_800C5284_de[], D_800C52E4_de[], D_00285160[];
 extern char *D_800D3304, *D_800D3334, *D_800D3338, *D_800D333C, *D_800D3340, *D_800D334C_de, *D_800D3350,

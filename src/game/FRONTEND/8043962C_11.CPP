@@ -8,10 +8,10 @@
 #include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/STATEPAIR.H"
 #include "RESMGR/802A2230_8.H"
+#include "COMMON/PLAYERPROFILES.H"
 
 #if defined(VERSION_US_REV1)
 extern void func_8022EF30_de(void *);
-extern Profile D_80102B00[];
 extern Pulse *D_800E5950;
 
 /* Initialize the pulse screen, its shared menu state, and player profiles. */

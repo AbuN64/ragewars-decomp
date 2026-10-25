@@ -8,9 +8,9 @@
 #include "COMMON/RECRECAT4.H"
 #include "TYPES.H"
 #include "ACHIEVE/achieve_match_setup.H"
+#include "COMMON/PLAYERPROFILES.H"
 
 /* Awards earned end-of-match unlocks and lists the first two new rewards. */
-extern Profile D_80102B00[];
 
 extern s32 func_80265650_de(void *, s32);
 

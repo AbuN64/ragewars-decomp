@@ -13,8 +13,8 @@
 #include "stddef.h"
 #include "TYPES.H"
 #include "ACHIEVE/80424E30_3.H"
+#include "COMMON/PLAYERPROFILES.H"
 
-extern Profile D_80102B00[];
 extern s32 func_80265650_de(void *, s32);
 extern void func_80265688_de(u8 *, s32, s32);
 extern s32 func_8022F4DC_de(u8 *, s32);

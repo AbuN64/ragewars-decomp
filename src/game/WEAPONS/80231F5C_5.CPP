@@ -6,6 +6,7 @@
 #include "COMMON/UNUSED.H"
 #include "WEAPONS/80213ED4.H"
 #include "RENDER_2/8025DE50_5.H"
+#include "COMMON/PLAYERPROFILES.H"
 
 void func_80232744_de(void *aiTarget, s32 unused1, s32 arg2) {
     AiTarget *target = aiTarget;
@@ -74,7 +75,6 @@ s32 func_802327D4_de(s32 arg0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 extern Shared_MenuData D_80145040;
-extern Profile D_80102B00[];
 extern char *D_800E0D44[];
 extern char *D_800DCC68[];
 extern s32 func_8022F55C_de(Profile *, s32);
