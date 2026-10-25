@@ -3,12 +3,12 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "TYPES.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 extern int func_80245784_de(void);
 
 extern void func_80245BC0_de(void);
 
-extern void func_80253838_de(void *arg0, void *arg1);
 
 extern f32 D_800C37D0_de;
 
@@ -28,7 +28,7 @@ void func_802456A0_de(void) {
         func_80245BC0_de();
         owner = (s32)D_800E2830->owner;
         if (owner != 0) {
-            func_80253838_de(0, owner);
+            Scene_ReleaseResource(0, owner);
         }
         record = D_800E2830;
         record->owner = 0;

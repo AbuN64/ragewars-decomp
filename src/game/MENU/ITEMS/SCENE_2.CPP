@@ -107,7 +107,7 @@ void func_8044B7C0_de(LevelCode8044ACCC *arg0, s32 arg1) {
             ((void **(*)(s32,void **,s32,void *,s32))func_802540F4_de)(0, (void **)&sp24, arg0->unkC, &D_800C5070_de, 1);
         if (temp_v0_9 != 0) {
             arg0->unk10 = (s32) (((*sp24 * 4) + 0xF) & ~7);
-            func_80253838_de(0, temp_v0_9);
+            Scene_ReleaseResource(0, temp_v0_9);
         } else {
             arg0->unkC = 0;
         }
@@ -115,7 +115,7 @@ void func_8044B7C0_de(LevelCode8044ACCC *arg0, s32 arg1) {
     if (*sp20 >= 0x18) {
         temp_v0_10 = func_80254408_de(0, (s32)sp20, 0x17, arg1, (s32)arg0, (s32)&D_00285160, &D_800C5098_de);
         func_8020A604_de(*temp_v0_10);
-        func_80253838_de(0, temp_v0_10);
+        Scene_ReleaseResource(0, temp_v0_10);
     }
     func_8044CFF8_de((Shared_World *)arg0, arg1);
     D_800CD764_de = 1;

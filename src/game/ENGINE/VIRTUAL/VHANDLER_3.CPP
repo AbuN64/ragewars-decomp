@@ -126,7 +126,7 @@ void func_8023C85C_de(s32 arg0) {
     block.data = sp10;
     func_802BB420_de(&D_800FF230.completion, &block, 1);
     func_802BB2A0_de(sp10, &sp3C, 1);
-    func_80253838_de(0, ((Draw *)(sp3C))->model);
+    Scene_ReleaseResource(0, ((Draw *)(sp3C))->model);
 }
 
 void func_8023C8D4_de(struct PagerCounters *arg0) {

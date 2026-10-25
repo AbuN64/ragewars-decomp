@@ -10,6 +10,7 @@
 #include "TYPES.H"
 #include "CAMERA/80233920_31.H"
 #include "RESMGR/802A0888.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 /* Produces a random shake offset for an object: looks up the object's model entry in D_8011FE88 and
  * zeroes the offset when there is none; otherwise eases the horizontal and vertical shake amplitudes
@@ -44,7 +45,6 @@ extern void func_8025E3F0_de(s32 arg0);
 
 extern void func_80253908_de(s32 a);
 
-extern void func_80253838_de(void *arg0, void *arg1);
 
 void func_80239EA4_de(void *gameplayCamera, CVector3 *out) {
     GameplayCamera *o = gameplayCamera;
@@ -154,7 +154,7 @@ void func_8023A1F4_de(struct ScreenMessageOwner *owner) {
     func_80253908_de(0);
     allocation = owner->allocation;
     if (allocation != 0) {
-        func_80253838_de(0, allocation);
+        Scene_ReleaseResource(0, allocation);
         owner->allocation = 0;
         owner->allocationSize = 0;
         owner->count = 0;

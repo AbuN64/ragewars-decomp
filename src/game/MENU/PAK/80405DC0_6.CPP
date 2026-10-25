@@ -23,7 +23,6 @@ extern Copy584 D_801462C8;
 extern f32 D_801468A0[];
 extern u8 D_800F91F0[];
 extern void func_80253908_de(s32);
-extern void func_80253838_de(s32, void *);
 extern SaveSnapshot **Scene_AllocateResource(s32, s32, s32, void *);
 extern void Resmgr_FillMemory(void *, s32, s32);
 extern void func_802BD3A0_de(void *, void *, s32);
@@ -37,7 +36,7 @@ void Pak_CreateSaveSnapshot(u8 *player) {
     SaveSnapshot *snapshot;
     if (D_800DE860_de != 0) {
         func_80253908_de(0);
-        func_80253838_de(0, D_800DE860_de);
+        Scene_ReleaseResource(0, D_800DE860_de);
     }
     allocationSize = D_8011FECC + 0x610;
     snapshotHandle = Scene_AllocateResource(0, allocationSize, 0x33, D_800DCD60);
@@ -225,6 +224,7 @@ s32 func_80406178_de(Menu_func_804066BC_de *menu, s32 channel, s32 quiet)
 }
 
 #include "COMMON/SHAREDPLAYER.H"
+extern void Scene_ReleaseResource(s32, void *);
 extern s32 D_8014D4C0_de, D_8014D4DC, D_80153760, D_8014D4EC_de, D_800DE874, D_80153784, D_8015375C, D_800E28C0, D_800E28C8;
 extern struct Saved D_80153738;
 extern struct { u8 value; } D_8014D4B0_de;

@@ -71,7 +71,7 @@ struct ResMgr {
 };
 extern s32 func_80255920_de(void *, s32);
 extern s32 func_802567A4_de(OSMesgQueue *);
-extern u32 func_80265350_de(void);
+extern u32 System_GetMemorySize(void);
 extern s32 func_802BAC90_de(void *, s32, void *, s32, void *, s32);
 extern s32 func_802BB750_de(void *);
 extern void func_80255CA0_de(IntrusiveList *, s32, s32);
@@ -100,7 +100,7 @@ void Scene_InitializeResourceCache(s32 unused, s32 count) {
         __osRestoreInt(mask);
     }
     D_800CB6E0 = 0x400;
-    if (func_80265350_de() > 0x400000) {
+    if (System_GetMemorySize() > 0x400000) {
         D_800CB6E0 *= 2;
     }
     D_80100560.nodes = (struct ResourceCacheEntry *)func_80255920_de(&D_801051A0, D_800CB6E0 * sizeof(struct ResourceCacheEntry));

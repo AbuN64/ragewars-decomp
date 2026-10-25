@@ -31,13 +31,13 @@ void func_8024F294_de(struct ObjB *object, s32 unused) {
         resource = Scene_RequestResource(0, obj->model, obj->model, 0x18, 0, 0, 0, D_800C3DAC_de, 1);
         if (resource != 0) {
             key = func_8028FE28_de(*resource, obj->model, 1);
-            func_80253838_de(0, resource);
+            Scene_ReleaseResource(0, resource);
             found = func_802540F4_de(0, &header, key, D_800C3DC0_de, 1);
             if (found != 0) {
                 table = header;
                 obj->resourceName = Render_LocatePackSection(table, key, index % table[0], &obj->resourceSize);
                 obj->loadedType = index;
-                func_80253838_de(0, found);
+                Scene_ReleaseResource(0, found);
             }
         }
     }

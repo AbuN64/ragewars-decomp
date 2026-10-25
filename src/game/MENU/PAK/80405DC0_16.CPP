@@ -5,6 +5,7 @@
 #include "TYPES.H"
 #include "MENU/PAK/80405DC0_16.H"
 #include "RESMGR/802A0888.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 /* Returns the address of block n, n times 256; block zero is the area 0x610 bytes into the
    buffer D_8011FECC points to. */
@@ -14,13 +15,12 @@ extern char D_800DCD60[];
 
 extern void func_80253908_de(s32 a);
 
-extern void func_80253838_de(void *arg0, void *arg1);
 
 extern void **Scene_AllocateResource(s32, s32, s32, char *);
 
 
 /* Releases the two active resources and clears their associated state. */
-void func_80253838_de(void *, void *);
+void Scene_ReleaseResource(void *, void *);
 
  /* extern */
 void func_80253908_de(s32);
@@ -67,7 +67,7 @@ void func_804098CC_de(void ***handle, void **data, s32 units) {
 
     if (*handle != 0) {
         func_80253908_de(0);
-        func_80253838_de(0, *handle);
+        Scene_ReleaseResource(0, *handle);
     }
     if (units != 0) {
         units <<= 8;
@@ -86,10 +86,10 @@ void func_80409964_de(void) {
         func_80253908_de(0);
     }
     if (D_800DE860_de != 0) {
-        func_80253838_de(0, D_800DE860_de);
+        Scene_ReleaseResource(0, D_800DE860_de);
     }
     if (D_800DE864_de != 0) {
-        func_80253838_de(0, D_800DE864_de);
+        Scene_ReleaseResource(0, D_800DE864_de);
     }
     D_800DE860_de = 0;
     D_800DE864_de = 0;

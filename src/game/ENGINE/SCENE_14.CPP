@@ -17,6 +17,7 @@
 #include "SCENE/802508E0_4.H"
 #include "SYSTEM_3/80265370.H"
 #include "RENDER_4/8028FD2C_6.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 extern void Particle_SubtractVectors(CVector3 *out, void *arg1, void *arg2);
 
@@ -28,7 +29,6 @@ extern void **func_80254408_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
-extern void func_80253838_de(void *arg0, void *arg1);
 
 
 
@@ -121,9 +121,9 @@ void func_8028D380_de(Shared_World *world, s32 type, void *levelName, s32 arg3) 
         count = arg3;
     }
     func_802BD3A0_de(levelName, node->data, count);
-    func_80253838_de(0, (s32)node);
+    Scene_ReleaseResource(0, (s32)node);
     if (world->level != type) {
-        func_80253838_de(0, temps2);
+        Scene_ReleaseResource(0, temps2);
     }
 }
 
@@ -146,7 +146,7 @@ void *func_8028D474_de(void *world, s32 record) {
             if (resource != 0) {
                 key = Render_LocatePackSection((s32)*resource, ((struct MeasuredRecAtCV4 *)(world))->value,
                                     record, &sp28);
-                func_80253838_de(0, resource);
+                Scene_ReleaseResource(0, resource);
                 if ((((struct MeasuredRecAt14V1 *)(world))->value =
                      Scene_RequestResource(0, key, key, sp28, size, 0,
                                    &D_00285160, D_800C52BC, one)) != 0) {
@@ -177,7 +177,7 @@ void func_8028D59C_de(void *arg0) {
                 Scene_UnlockResource(0, val);
             } while (*list != 0);
         }
-        func_80253838_de(0, object->loaded);
+        Scene_ReleaseResource(0, object->loaded);
         object->loaded = 0;
         object->model = 0;
     }
@@ -338,7 +338,7 @@ void func_8028D964_de(void *world, s32 arg1) {
             if (resource != 0) {
                 key = Render_LocatePackSection((s32)*resource, ((struct MeasuredRecAtCV3 *)(world))->value,
                                     arg1, &sp28);
-                func_80253838_de(0, resource);
+                Scene_ReleaseResource(0, resource);
                 if ((((struct MeasuredRecAt14V6 *)(world))->value =
                      Scene_RequestResource(0, key, key, sp28, size, 0,
                                    &D_00285160, D_800C52BC, one)) != 0) {

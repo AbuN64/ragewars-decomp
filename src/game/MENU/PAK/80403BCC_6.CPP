@@ -96,7 +96,6 @@ extern void **Scene_AllocateResource(s32, s32, s32, char *);
 
 extern void func_80253908_de(s32);
 
-extern void func_80253838_de(void *arg0, void *arg1);
 
 extern s32 func_8025477C_de(void);
 
@@ -139,7 +138,7 @@ static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
     func_8026454C_de();
     func_80253908_de(0);
     if (handle != 0) {
-        func_80253838_de(0, handle);
+        Scene_ReleaseResource(0, handle);
     }
     return result;
 }
@@ -220,7 +219,7 @@ s32 Pak_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
     }
     func_80253908_de(0);
     if (handle != 0) {
-        func_80253838_de(0, handle);
+        Scene_ReleaseResource(0, handle);
     }
     return result;
 }
@@ -230,6 +229,7 @@ s32 Pak_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "stddef.h"
 #include "TYPES.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 s32 func_802A037C_de(const void *arg0, const void *arg1);
 extern u8 D_800DE80C[];
 

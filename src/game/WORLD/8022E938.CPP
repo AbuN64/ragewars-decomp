@@ -12,6 +12,7 @@
 #include "WORLD/8022E938.H"
 #include "WEAPONS/80213ED4.H"
 #include "RENDER_2/802192C0_3.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 extern f32 func_8027525C_de(void *arg0, f32 arg1, f32 arg2);
 
@@ -39,7 +40,6 @@ extern s32 D_800CED30;
 
 extern void func_80253908_de(s32 a);
 
-extern void func_80253838_de(void *arg0, void *arg1);
 
 extern s32 D_80142850;
 
@@ -298,7 +298,7 @@ void func_8022EDA4_de(ResourceLoadState *resourceLoadState) {
     func_80253908_de(0);
     handle = resourceLoadState->handle;
     if (handle != 0) {
-        func_80253838_de(0, handle);
+        Scene_ReleaseResource(0, handle);
         resourceLoadState->handle = 0;
         resourceLoadState->state4 = 0;
         resourceLoadState->state8 = 0;

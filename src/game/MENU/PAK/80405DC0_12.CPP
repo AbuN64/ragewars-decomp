@@ -4,6 +4,7 @@
 #include "MENU/80405DC0.H"
 #include "TYPES.H"
 #include "MENU/PAK/80405DC0_12.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 /* Releases temporary profile buffers and opens the controller-pak prompt for the selected player and channel, labelling the port prompt by channel. */
 
@@ -38,7 +39,6 @@ extern s32 D_800DE868;
 extern s32 D_800E28BC;
 
 extern SharedPlayer *func_8022A5C0_de(void *profiles, PakMenuSlot *slot);
-extern void func_80253838_de(void *arg0, void *arg1);
 extern void func_80253908_de(s32 heap);
 extern void Pak_OpenDialog(void *buffer, char *message, SharedPlayer *player, char *title, s32 channel);
 
@@ -61,10 +61,10 @@ s32 func_804085E0_de(void *unused, MenuRecAt20V3 *menu) {
         func_80253908_de(0);
     }
     if (D_800DE860_de != 0) {
-        func_80253838_de(0, D_800DE860_de);
+        Scene_ReleaseResource(0, D_800DE860_de);
     }
     if (D_800DE864_de != 0) {
-        func_80253838_de(0, D_800DE864_de);
+        Scene_ReleaseResource(0, D_800DE864_de);
     }
     D_800DE860_de = 0;
     D_800DE864_de = 0;

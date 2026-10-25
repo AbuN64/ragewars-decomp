@@ -140,7 +140,7 @@ typedef struct DraftOwnerA370 {
 extern f32 D_800C32EC_de;
 extern char D_800C32D4_de[], D_800C32DC_de[];
 extern void func_8025E3F0_de(void *);
-extern void func_80253908_de(s32), func_80253838_de(s32, void *);
+extern void func_80253908_de(s32), Scene_ReleaseResource(s32, void *);
 extern void *Scene_AllocateResource(s32, s32, s32, char *);
 static inline void resetDraftList(DraftListA370 *list) {
     list->tail = 0;
@@ -181,12 +181,12 @@ void Items_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
     func_8025E3F0_de(owner->parts);
     func_80253908_de(0);
     if (owner->handle) {
-        func_80253838_de(0, owner->handle);
+        Scene_ReleaseResource(0, owner->handle);
         owner->handle = 0; owner->actors = 0; owner->count = 0;
     }
     func_80253908_de(0);
     if (owner->smallHandle) {
-        func_80253838_de(0, owner->smallHandle);
+        Scene_ReleaseResource(0, owner->smallHandle);
         owner->smallHandle = 0; owner->small = 0; owner->smallCount = 0;
     }
     if (actorCount) {

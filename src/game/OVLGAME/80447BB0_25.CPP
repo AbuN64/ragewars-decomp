@@ -14,6 +14,7 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
 #include "WEAPONS/80213ED4.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 extern char D_8010F328[];
 
@@ -23,7 +24,6 @@ extern char D_801468A0[];
 
 extern void func_80253908_de(s32);
 
-extern void func_80253838_de(void *arg0, void *arg1);
 
 extern void func_80226950_de(ObjectPool *, s32);
 extern s32 D_800C9684[];
@@ -88,7 +88,7 @@ void func_804499B0_de(ObjectPool *pool, s32 count, s32 force_active) {
     global = D_801462C8;
 
     if (pool->allocation != 0) {
-        func_80253838_de(0, pool->allocation);
+        Scene_ReleaseResource(0, pool->allocation);
         pool->allocation = 0;
         pool->objects = 0;
         pool->count = 0;

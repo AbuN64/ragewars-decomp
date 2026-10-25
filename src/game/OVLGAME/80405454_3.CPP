@@ -214,9 +214,9 @@ s32 func_804058A0_de(void) {
 #include "COMMON/DISPLAY.H"
 #include "COMMON/SHAREDPLAYER.H"
 typedef struct Shape_typemap_165 Handle;
-extern void func_80253838_de(void *heap, Handle *handle);
-extern u32 func_80265350_de(void);
-extern Handle *func_80253530_de(void *heap, u32 address, u32 size, char *name);
+extern void Scene_ReleaseResource(void *heap, Handle *handle);
+extern u32 System_GetMemorySize(void);
+extern Handle *Scene_AllocateResourceAt(void *heap, u32 address, u32 size, char *name);
 extern char D_800DCD00_de[9];  /* "Z-Buffer" */
 extern char D_800DCD0C[15];    /* "Display Buffer" */
 extern char D_800DCD1C[31];    /* "color frame buffers + z buffer" */
@@ -240,20 +240,20 @@ int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
     s32 k;
 
     if (record->displayLists != NULL) {
-        func_80253838_de(NULL, record->displayLists);
+        Scene_ReleaseResource(NULL, record->displayLists);
     }
     if (record->fifo != NULL) {
-        func_80253838_de(NULL, record->fifo);
+        Scene_ReleaseResource(NULL, record->fifo);
     }
     if (record->zBuffer != NULL) {
-        func_80253838_de(NULL, record->zBuffer);
+        Scene_ReleaseResource(NULL, record->zBuffer);
     }
     if (record->audioHeap != NULL) {
-        func_80253838_de(NULL, record->audioHeap);
+        Scene_ReleaseResource(NULL, record->audioHeap);
     }
     for (j = 0; j < 3; j++) {
         if (record->frameBuffers[j] != NULL) {
-            func_80253838_de(NULL, record->frameBuffers[j]);
+            Scene_ReleaseResource(NULL, record->frameBuffers[j]);
         }
     }
     record->ready = 0;
@@ -265,12 +265,12 @@ int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
         record->frameBuffers[k] = NULL;
     }
 
-    if (func_80265350_de() >= 6 * megabyte) {
+    if (System_GetMemorySize() >= 6 * megabyte) {
         bufferBytes = 0x54600;
-        memoryEnd = func_80265350_de() | 0x80000000;
+        memoryEnd = System_GetMemorySize() | 0x80000000;
         D_800DE850 = 3;
-        zBuffer = func_80253530_de(NULL, memoryEnd - megabyte, 0x54600, D_800DCD00_de);
-        frameBuffers = func_80253530_de(NULL, memoryEnd - 2 * megabyte, D_800DE850 * bufferBytes,
+        zBuffer = Scene_AllocateResourceAt(NULL, memoryEnd - megabyte, 0x54600, D_800DCD00_de);
+        frameBuffers = Scene_AllocateResourceAt(NULL, memoryEnd - 2 * megabyte, D_800DE850 * bufferBytes,
                                                 D_800DCD0C);
         Resmgr_FillMemory(frameBuffers->data, 0, 0xFD200);
         Resmgr_FillMemory(zBuffer->data, 0, 0x54600);
@@ -283,7 +283,7 @@ int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
     } else {
         bufferBytes = 0x1ECC0;
         memoryEnd = 0x80400000;
-        buffers = func_80253530_de(NULL, memoryEnd - (D_800DE850 + 1) * bufferBytes,
+        buffers = Scene_AllocateResourceAt(NULL, memoryEnd - (D_800DE850 + 1) * bufferBytes,
                                            (D_800DE850 + 1) * bufferBytes, D_800DCD1C);
         record->frameBuffers[0] = buffers;
         for (i = 0; i < D_800DE850; i++) {

@@ -46,6 +46,7 @@
 #include "AI/NAV/80208000_8.H"
 #include "OVLGAME/8044E2B8.H"
 #include "SCHED/8023A284_29.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 /* Unknown data types are explicit unresolved contracts, never guessed s32. */
 
@@ -59,7 +60,6 @@ extern void func_80246E44_de();
 extern void func_8024B2D0_de();
 extern void func_8024BE3C_de();
 extern struct Shape_typemap_165 * Scene_AllocateResource();
-extern void func_80253838_de(void *arg0, void *arg1);
 extern void func_80253908_de();
 extern s32 func_80254284_de();
 extern void **func_80254408_de(s32 arg0, void *handle, s32 arg2, s32 tempv0, void *world, void *arg5, void *arg6);
@@ -429,7 +429,7 @@ scene_size_done:
         temp_v0_10 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk8C), 0, (((struct SharedRecAt1B92C *)(table))->unk40), table, 0, &D_800C5154_de);
         temp_v1_5 = *temp_v0_10;
         *(struct SharedRecAt14 *)&((struct SharedRecAt1B92C *)table)->unk1B910 = *temp_v1_5;
-        func_80253838_de(0, temp_v0_10);
+        Scene_ReleaseResource(0, temp_v0_10);
         if ((((struct SharedRecAt1B92C *)(table))->unk1B920) != 0 || (((struct SharedRecAt1B92C *)(table))->unk1B924) != 0) {
             (((struct SharedRecAt1B92C *)(table))->unk1B92C) = 1;
         } else {

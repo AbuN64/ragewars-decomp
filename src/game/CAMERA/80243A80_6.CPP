@@ -11,6 +11,7 @@
 #include "CAMERA/80243A80_6.H"
 #include "MENU_2/80400000_4.H"
 #include "MENU_2/80400000_7.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 /* Starts the round once: unless already started, optionally resets the lead player (func_8022E290_de and its
  * three counters) and the player group, then when a new target id is pending selects it through
@@ -76,7 +77,6 @@ extern GameState D_80140FB4;
 
 extern void func_80245BC0_de(void);
 
-extern void func_80253838_de(void *arg0, void *arg1);
 
 extern void func_8025476C_de(s32);
 
@@ -216,7 +216,7 @@ void func_802450CC_de(void) {
             func_80245B74_de(1);
             func_80245BC0_de();
             if (D_800E2830->owner != 0) {
-                func_80253838_de(0, D_800E2830->owner);
+                Scene_ReleaseResource(0, D_800E2830->owner);
             }
             D_800E2830->owner = 0;
             D_800E2830->resource = 0;
@@ -240,7 +240,7 @@ void func_802450CC_de(void) {
         }
         if (D_800E2830->time >= D_800E2830->clipEnd && D_800E2830->closed == 0) {
             if (D_800E2830->owner != 0) {
-                func_80253838_de(0, D_800E2830->owner);
+                Scene_ReleaseResource(0, D_800E2830->owner);
             }
             {
                 FuncPtr end = D_800E2830->onClose;

@@ -16,7 +16,7 @@ extern u8 D_801051A0[];
 extern u8 D_80106248[];
 extern u8 D_801011B8[];
 
-extern s32 func_80265350_de(void);
+extern s32 System_GetMemorySize(void);
 extern void func_802558B4_de(void *, void *, s32);
 extern void func_802550F0_de(void *, s32);
 extern void func_80256280_de(void *, s32);
@@ -36,8 +36,8 @@ void Texture_InitHeap(void) {
 
     heapEnd = 0x80400000;
     heapStart = D_80166000;
-    if (func_80265350_de() != 0x400000) {
-        heapEnd = func_80265350_de() | 0x80000000;
+    if (System_GetMemorySize() != 0x400000) {
+        heapEnd = System_GetMemorySize() | 0x80000000;
     }
 
     size = heapEnd - (s32)heapStart;

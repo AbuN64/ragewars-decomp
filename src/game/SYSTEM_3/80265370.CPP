@@ -56,7 +56,7 @@ extern LightNode *func_80268CBC_de(void *);
 extern LightNode *func_80268CC8_de(void *, LightNode *);
 
 
-u32 func_80265350_de(void) {
+u32 System_GetMemorySize(void) {
     if (D_80000318 > 0x7FFFFFU) {
         return 0x700000;
     }

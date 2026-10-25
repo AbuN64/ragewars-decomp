@@ -31,7 +31,6 @@ extern void *func_80254480_de(s32, void *, s32);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
-extern void func_80253838_de(void *arg0, void *arg1);
 
 extern void func_80253D10_de(s32, void **, void *);
 
@@ -44,6 +43,7 @@ extern const f32 D_800C4128_de, D_800C412C_de;
 extern f32 D_8010AC70, D_8010AC7C;
 
 #include "COMMON/STREAM.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 extern s32 D_8010AC74, D_8010AC78;
 
 static inline void resource_begin(ResourceBlock *block, s32 count, s32 bytes) {
@@ -176,7 +176,7 @@ void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
                 success = System_ExpandAnimationTracks(translations, newTranslations, newHeader->rotations, 4, newHeader->channels, newHeader->flags) != 0;
             }
             if (success == 0) {
-                func_80253838_de(0, output);
+                Scene_ReleaseResource(0, output);
                 func_80253D10_de(0, (void **)handle, 0);
             } else {
                 goto replace_output;

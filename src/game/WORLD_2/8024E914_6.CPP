@@ -22,6 +22,7 @@ extern char D_8011D8D0;
 extern f32 Particle_GetActorHeight(Actor_func_8024ED90_de *actor);
 
 #include "particle/8027A0F4_8.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 extern EffectRecAt154 *func_802830B8_de(void *system);
 
@@ -49,7 +50,6 @@ extern void func_8027027C_de(f32 *, void *);
 extern void func_8026992C_de(void *, s32, s32);
 
 
-extern void func_80253838_de(void *arg0, void *arg1);
 
 extern s32 func_802540F4_de(s32, void **, s32, void *, s32);
 
@@ -134,14 +134,14 @@ void func_8024F108_de(StaticObject *staticObject) {
                                 0, 0, 0, &D_800C3DA8_de + 4, 1);
         if (resource != 0) {
             key = func_8028FE28_de(*resource, staticObject->animationKey, 1);
-            func_80253838_de(0, resource);
+            Scene_ReleaseResource(0, resource);
             found = func_802540F4_de(0, &sp28, key, D_800C3DC0_de, 1);
             if (found != 0) {
                 staticObject->resource = Render_LocatePackSection((s32)sp28, key,
                                                     index % *(s32 *)sp28,
                                                     &staticObject->resourceSize);
                 staticObject->animation = index;
-                func_80253838_de(0, (void *)found);
+                Scene_ReleaseResource(0, (void *)found);
             }
         }
     }

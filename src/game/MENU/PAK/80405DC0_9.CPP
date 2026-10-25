@@ -81,6 +81,7 @@ void func_804070F4_de(Shared_PakMenu *menu)
 
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/PAK_SAVE_TEXT.H"
+extern void Scene_ReleaseResource(s32, void *);
 extern s32 D_8015375C, D_800E28C8, D_8014D4C0_de;
 extern void *D_800DE860_de;
 extern struct Shape_typemap_165 *D_800DE864_de;
@@ -93,7 +94,6 @@ extern s32 Pak_CountFreeNotes(s32, s32 *);
 extern s32 func_80405454_de(s32, char *);
 extern s32 Pak_SaveNote(s32, s32, void *, char *, char *, char *);
 extern void func_80253908_de(s32);
-extern void func_80253838_de(s32, void *);
 /* Save the small controller-pak record when capacity allows, release the
  * pending resources, and show the channel-specific success/error dialog. */
 static inline ObjRecAt5DC *pakRecordChannel(Shared_PakMenu *menu, s32 *channel) {
@@ -150,8 +150,8 @@ s32 Pak_SaveControllerRecord(s32 unused, struct Shared_PakMenu *menu, s32 unused
         }
     }
     if (D_800DE860_de != 0 || D_800DE864_de != 0) func_80253908_de(0);
-    if (D_800DE860_de != 0) func_80253838_de(0, D_800DE860_de);
-    if (D_800DE864_de != 0) func_80253838_de(0, D_800DE864_de);
+    if (D_800DE860_de != 0) Scene_ReleaseResource(0, D_800DE860_de);
+    if (D_800DE864_de != 0) Scene_ReleaseResource(0, D_800DE864_de);
     D_800DE860_de = 0;
     D_800DE864_de = 0;
     D_800DE868 = 0;
@@ -228,8 +228,8 @@ s32 Pak_SaveSnapshotAndClose(void *unused, Shared_PakMenu *menu) {
         }
     }
     if (D_800DE860_de != 0 || D_800DE864_de != 0) func_80253908_de(0);
-    if (D_800DE860_de != 0) func_80253838_de(0, D_800DE860_de);
-    if (D_800DE864_de != 0) func_80253838_de(0, D_800DE864_de);
+    if (D_800DE860_de != 0) Scene_ReleaseResource(0, D_800DE860_de);
+    if (D_800DE864_de != 0) Scene_ReleaseResource(0, D_800DE864_de);
     D_800DE860_de = 0;
     D_800DE864_de = 0;
     D_800DE868 = 0;

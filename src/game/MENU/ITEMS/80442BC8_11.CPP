@@ -70,7 +70,7 @@ void *func_8044322C_de(struct func_8025E5B0_S1 *owner, struct Dialog *list, s32 
 
 /* Removes an item from a list: runs the item's optional callback at offset 0xC of its handler table
    with the item and the list, clears three words of its state at 0x20, unlinks it through
-   func_80255ED8_de and releases its resource at offset 8 through func_80253838_de. */
+   func_80255ED8_de and releases its resource at offset 8 through Scene_ReleaseResource. */
 
 
 
@@ -89,7 +89,7 @@ void func_8044334C_de(void *list, struct ItemRecAt20V2 *item) {
     state->b = 0;
     state->c = 0;
     func_80255ED8_de(list, item);
-    func_80253838_de(0, item->resource);
+    Scene_ReleaseResource(0, item->resource);
 }
 
 #if defined(VERSION_EU)

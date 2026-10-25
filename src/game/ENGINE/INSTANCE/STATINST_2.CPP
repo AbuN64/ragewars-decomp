@@ -25,13 +25,13 @@ void *Instance_AcquireGeometry(ResourceOwner *owner,s32 index) {
         block = Scene_RequestResource(0,owner->key,owner->key,0x18,0,0,0,D_800C3E5C_de,1);
         if (block != 0) {
             key = func_8028FE28_de(*block,owner->key,1);
-            func_80253838_de(0,block);
+            Scene_ReleaseResource(0,block);
             allocation = func_802540F4_de(0,&table,key,D_800C8F70,1);
             if (allocation != 0) {
                 entries = table;
                 owner->selected = Render_LocatePackSection(table,key,index % *entries,&owner->size);
                 owner->index = index;
-                func_80253838_de(0,allocation);
+                Scene_ReleaseResource(0,allocation);
             }
         }
     }

@@ -74,7 +74,7 @@ struct Shape_typemap_165 *Scene_AllocateResource(s32 arg0, s32 arg1, u32 arg2, v
     return var_s0;
 }
 
-struct Shape_typemap_165 *func_80253530_de(void *arg0, void *arg1, s32 arg2) {
+struct Shape_typemap_165 *Scene_AllocateResourceAt(void *arg0, void *arg1, s32 arg2, char *name) {
     extern OSMesgQueue D_80101140;
     struct Shape_typemap_165 *var_s0;
     s32 temp_v0;
@@ -182,7 +182,7 @@ void Scene_UnlockResource(void *arg0, Node80253610 *arg1) {
     __osRestoreInt(temp_v0);
 }
 
-void func_80253838_de(void *arg0, void *arg1) {
+void Scene_ReleaseResource(void *arg0, void *arg1) {
     extern OSMesgQueue D_80101140;
     s32 temp_v1;
     s32 temp_v1_2;

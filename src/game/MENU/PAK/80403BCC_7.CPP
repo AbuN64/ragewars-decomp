@@ -3,11 +3,11 @@
 #include "COMMON/EXTERNS_12.H"
 #include "TYPES.H"
 #include "RESMGR/802A0888.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 /* Releases the save buffer and clears its global state. */
 extern void func_80253908_de(int);
 
-extern void func_80253838_de(void *arg0, void *arg1);
 
 extern int D_800E2850;
 
@@ -46,7 +46,7 @@ void Pak_AllocateScratchBuffer(void) {
 void func_80404DDC_de(void) {
     func_80253908_de(0);
     if (D_800DE808) {
-        func_80253838_de(0, D_800DE808);
+        Scene_ReleaseResource(0, D_800DE808);
         D_800DE808 = 0;
         D_800E2854 = 0;
     }

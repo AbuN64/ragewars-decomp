@@ -502,6 +502,7 @@ void Scene_UpdateSelectionTransition(Shared_World *scene)
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENU_TEXT.H"
 #include "COMMON/RESULTS_TEXT.H"
+extern void Scene_ReleaseResource(s32, void *);
 typedef struct ResultsText {
     char *text;
     s32 length;
@@ -535,7 +536,6 @@ extern s32 func_8028FE28_de(s32 *, s32, s32);
 extern void *func_80254284_de(s32, void **, s32, void *);
 extern ResultsText *func_80254408_de(s32, void *, s32, s32, void *, s32, void *);
 extern void func_802BD3A0_de(void *, const void *, s32);
-extern void func_80253838_de(s32, void *);
 extern s32 func_802A0C08_de(char *, const char *, ...);
 extern u8 func_8022F454_de(Profile *, s32);
 extern void func_8028DA74_de(Shared_World *);
@@ -557,9 +557,9 @@ static inline void copyLevelName(Shared_World *world, s32 level, char *out, s32 
         length = limit;
     }
     func_802BD3A0_de(out, name->text, length);
-    func_80253838_de(0, name);
+    Scene_ReleaseResource(0, name);
     if (world->level != level) {
-        func_80253838_de(0, bank);
+        Scene_ReleaseResource(0, bank);
     }
 }
 static inline LevelChallenge *findLevelChallenge(Shared_World *world, s32 level) {
@@ -578,7 +578,7 @@ static inline LevelChallenge *findLevelChallenge(Shared_World *world, s32 level)
                                      0, 0, D_800C5290_de, direct);
             if (index != 0) {
                 file = Render_LocatePackSection((s32)*index, world->challengeFile, level, &size);
-                func_80253838_de(0, index);
+                Scene_ReleaseResource(0, index);
                 if ((world->resourceHandle =
                          Scene_RequestResource(0, file, file, size, mode, 0, D_00285160, D_800C52BC, direct)) == 0) {
                     goto missing;

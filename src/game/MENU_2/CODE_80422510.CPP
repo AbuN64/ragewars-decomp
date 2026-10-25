@@ -28,7 +28,7 @@ extern struct MenuResourceWidget *func_80419E54_de(s32, s32);
    record at g_optionsPage, creates the fade widget 0x4D/0x4E and the title object 0x4F/0x6E, then builds
    the three option lists 0x59/0x5A, 0x55/0x56 and 0x51/0x52, appends their localized labels, and
    selects the entry named by the game settings D_801462C8 bytes 0x1B, 0x1F and 0x580 - the third list
-   gains the labels at 0x800D74B8 and 0x800D74BC only when func_80265350_de does not return 0x400000.
+   gains the labels at 0x800D74B8 and 0x800D74BC only when System_GetMemorySize does not return 0x400000.
    The 0x80-step slider 0x53/0x54 is created and positioned at the settings' position byte, menu nodes
    0x57, 0x58 and 0x50 are released, and the record is finally armed with a selection value of -1 and
    commit state 3, returning zero. */
@@ -48,7 +48,7 @@ extern u8 *D_auto_800D74B0;
 extern void *func_8025305C_de(s32);
 extern struct MenuFadeWidget *func_8041A280_de(s32, s32);
 
-extern s32 func_80265350_de(void);
+extern s32 System_GetMemorySize(void);
 extern MenuListWidget *func_8041ABC0_de(s32, s32);
 extern void func_8041AD34_de(struct MenuListWidget *, u8 *);
 extern void func_8041AD10_de(struct MenuListWidget *, s32);
@@ -82,7 +82,7 @@ s32 Menu_CreateOptionsPage(void) {
     thirdList = func_8041ABC0_de(0x51, 0x52);
     g_optionsPage->unk_14 = thirdList;
     func_8041AD34_de(thirdList, D_800D2134[0]);
-    if (func_80265350_de() != 0x400000) {
+    if (System_GetMemorySize() != 0x400000) {
         func_8041AD34_de(g_optionsPage->unk_14, D_800D2138);
         func_8041AD34_de(g_optionsPage->unk_14, D_800D213C);
     }
@@ -174,7 +174,7 @@ s32 Menu_OpenOptionsScreen(void *node) {
     secondListHandle = func_8041ABC0_de(0x378, 0x379);
     D_800E4518->secondList = secondListHandle;
     func_8041AD34_de(secondListHandle, D_800D2134[0]);
-    if (func_80265350_de() != 0x400000) {
+    if (System_GetMemorySize() != 0x400000) {
         func_8041AD34_de(D_800E4518->secondList, D_800D2138);
         func_8041AD34_de(D_800E4518->secondList, D_800D213C);
     }

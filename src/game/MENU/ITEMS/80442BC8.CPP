@@ -12,7 +12,7 @@
 #include "SYSTEM/80255C40_7.H"
 #include "GFX/TEXT/802A8A94_5.H"
 
-/* Removes every item from a list until its head is null, running each item's optional callback, clearing three words of its state, unlinking it through func_80255ED8_de and releasing its resource through func_80253838_de. Adapted from func_8044334C_de with its body wrapped as an inline helper called in a loop over the list head changed. */
+/* Removes every item from a list until its head is null, running each item's optional callback, clearing three words of its state, unlinking it through func_80255ED8_de and releasing its resource through Scene_ReleaseResource. Adapted from func_8044334C_de with its body wrapped as an inline helper called in a loop over the list head changed. */
 
 
 
@@ -34,7 +34,7 @@ static inline void remove_item(struct List_func_80442A60_de *list, struct ItemRe
     state->b = 0;
     state->c = 0;
     func_80255ED8_de(list, item);
-    func_80253838_de(0, item->resource);
+    Scene_ReleaseResource(0, item->resource);
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

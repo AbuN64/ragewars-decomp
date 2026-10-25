@@ -12,6 +12,7 @@
 
 
 #include "MENU_2/80400000_16.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 /* Calls func_80402BA0_de when the globally selected record's word at 0x38 is non-zero. */
 
@@ -51,7 +52,6 @@ extern void func_802A025C_de(void *arg0, int arg1);
 
 
 
-extern void func_80253838_de(void *arg0, void *arg1);
 
 s32 func_80245814_de(void) {
     s32 result;
@@ -224,7 +224,7 @@ void func_80245B28_de(void) {
     int owner = (s32)D_800E2830->owner;
     Shared_MenuContext *record;
     if (owner != 0) {
-        func_80253838_de(0, owner);
+        Scene_ReleaseResource(0, owner);
     }
     record = D_800E2830;
     record->owner = 0;

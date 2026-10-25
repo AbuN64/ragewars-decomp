@@ -10,6 +10,7 @@
 #include "GAME/CODE_8027302C.H"
 #include "WORLD_2/8024E914_8.H"
 #include "SCENE/802508E0_4.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 /** Clear the word at object offset 0x1C4. */
 void func_8024F470_de(void *staticObject) {
@@ -123,7 +124,6 @@ void func_8024F634_de(void *arg0) {
     func_8027027C_de(matrix, (D_800D297C << 6) + 0x68 + o);
 }
 
-extern void func_80253838_de(void *arg0, void *arg1);
 extern s32 func_802540F4_de(s32, void **, s32, void *, s32);
 extern s32 func_8028FE28_de(s32 *, s32, s32);
 extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
@@ -145,14 +145,14 @@ void **func_8024F6EC_de(void *arg0, s32 arg1) {
                                 0, 0, 0, &D_800C3DA8_de + 4, 1);
         if (resource != 0) {
             key = func_8028FE28_de(*resource, ((Access_s32_50 *)(arg0))->field, 1);
-            func_80253838_de(0, resource);
+            Scene_ReleaseResource(0, resource);
             found = func_802540F4_de(0, &sp28, key, D_800C3DC0_de, 1);
             if (found != 0) {
                 ((StaticObject *)(arg0))->resource = Render_LocatePackSection((s32)sp28, key,
                                                     arg1 % *(s32 *)sp28,
                                                     &((Access_s32_5C *)(arg0))->field);
                 ((func_8022FD9C_Record *)(arg0))->unk54 = arg1;
-                func_80253838_de(0, (void *)found);
+                Scene_ReleaseResource(0, (void *)found);
             }
         }
     }

@@ -14,7 +14,7 @@ void func_8028DA74_de(Shared_World *world) {
 
     handle = world->resourceHandle;
     if (handle != 0) {
-        func_80253838_de(0, handle);
+        Scene_ReleaseResource(0, handle);
         world->resourceHandle = 0;
         world->resourceKey = -1;
     }

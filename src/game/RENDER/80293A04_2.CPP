@@ -22,7 +22,7 @@ extern void func_80293334_de(void *session, s32 count, s32 force_active);
 extern u8 D_801468A0;
 
 
-extern u32 func_80265350_de(void);
+extern u32 System_GetMemorySize(void);
 
 /* Emits a set-color-image display list command for the current frame buffer, then draws image 0x388
  * scaled to fill the screen dimensions over the image's returned width and height, when both are nonzero. */
@@ -95,7 +95,7 @@ void func_80293F44_de(GameSession *session) {
     s32 call_result;
     u32 result;
 
-    result = func_80265350_de();
+    result = System_GetMemorySize();
     var_a2 = 4;
     if ((result > 0x400000U) && (D_800D29C8 != 0)) {
         var_a2 = 3;

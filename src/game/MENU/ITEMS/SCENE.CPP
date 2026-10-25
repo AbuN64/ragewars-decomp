@@ -39,11 +39,11 @@ void func_8044B600_de(void *level, void *buffer, s32 name) {
                     first = Render_GetPackSection(first, 0);
                     source = Render_GetPackSection(first, 0);
                     *(Blk28 *)buffer = *(Blk28 *)source;
-                    func_80253838_de(0, shape);
+                    Scene_ReleaseResource(0, shape);
                 }
-                func_80253838_de(0, resource);
+                Scene_ReleaseResource(0, resource);
             }
-            func_80253838_de(0, header);
+            Scene_ReleaseResource(0, header);
         }
     }
 }

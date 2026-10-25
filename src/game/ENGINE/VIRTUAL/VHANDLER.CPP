@@ -26,7 +26,7 @@ extern char D_801011B8[];
 
 extern void func_8023CB60_de(Field_void_4 *base, Slot_func_8023B9C0_eu *slot);
 extern void func_8025637C_de(void *dst, void *rom, void *size, u32 extra);
-extern u32 func_80265350_de(void);
+extern u32 System_GetMemorySize(void);
 extern void func_802AD370_de(s32 arg0, s32 arg1, s32 arg2, u32 addr, s32 arg4, s32 arg5);
 extern void func_802BAC90_de(void *queue, s32 count, void *arg2, s32 arg3, void *data, s32 arg5);
 extern void func_802BB550_de(s32 count, void *list, s16 *arg2);
@@ -45,7 +45,7 @@ void func_8023B9C0_eu(void) {
     u32 extra;
     u32 i;
 
-    extra = func_80265350_de() + 0x80000000;
+    extra = System_GetMemorySize() + 0x80000000;
     if (extra <= 0x80400000) {
         extra = 0;
     }
@@ -75,7 +75,7 @@ void func_8023B9C0_eu(void) {
     D_800FF230.regions.next = 0;
     D_800FF230.regions.source = (u8 (*)[4096])((u32) D_176000 | 0xB0000000);
     D_800FF230.fD72 = 0;
-    if (func_80265350_de() > 0x4FFFFF) {
+    if (System_GetMemorySize() > 0x4FFFFF) {
         func_8025637C_de(D_801011B8, D_176000, D_52BF0, extra);
     }
     if (extra != 0) {

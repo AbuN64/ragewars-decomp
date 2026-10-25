@@ -3766,7 +3766,7 @@ segments:
       - [0xC5247, data, data_800C/rodata_unresolved_800C4647]
       - [0xC5248, rodata, data_800C/D_80265714_CA088]
       - [0xC5258, data, data_800C/rodata_unresolved_800C4658]
-      - [0xC5260, rodata, data_800C/literals_func_80265350_de]
+      - [0xC5260, rodata, data_800C/literals_System_GetMemorySize]
       - [0xC5264, data, data_800C/rodata_unresolved_800C4664]
       - [0xC5270, rodata, data_800C/D_8026641C_CA0B0]
       - [0xC5290, rodata, data_800C/D_80266810_CA0D0]

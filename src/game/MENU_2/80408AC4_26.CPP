@@ -11,7 +11,7 @@ extern void func_8041B110_de(s32);
 extern void *func_8041ABC0_de(s32, s32);
 extern void func_8041AD34_de(void *, s32);
 extern void func_8041AD10_de(void *, s32);
-extern s32 func_80265350_de(void);
+extern s32 System_GetMemorySize(void);
 extern void *func_8041A580_de(s32, s32, s32);
 extern void func_8041A6EC_de(void *, s32);
 extern void *func_80419E54_de(s32, s32);
@@ -27,7 +27,7 @@ s32 func_804230E0_de(void) {
     func_8041AD10_de((void *)g_optionsPage[4], D_801462C8[0x1F]);
     g_optionsPage[5] = (s32)func_8041ABC0_de(0x53, 0x54);
     func_8041AD34_de((void *)g_optionsPage[5], D_auto_800D3488);
-    if (func_80265350_de() != 0x400000) {
+    if (System_GetMemorySize() != 0x400000) {
         func_8041AD34_de((void *)g_optionsPage[5], D_auto_800D348C);
         func_8041AD34_de((void *)g_optionsPage[5], D_auto_800D3490);
     }

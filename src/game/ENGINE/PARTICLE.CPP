@@ -9,6 +9,7 @@
 #include "ENGINE/PARTICLE.H"
 #include "SCENE/802508E0_4.H"
 #include "particle/80271B18_3.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 /* Draws an actor's ground shadow: probes the ground under the actor through func_80243A90_de into D_801041F0, and when ground is found tilts the shadow model from D_8011FFB0 to the ground normal, scales it by the actor's size shrinking with height above the ground, fades it with height (and with lost health for actors flagged 1), places it on the ground and draws it through func_8026992C_de between render-mode commands. */
 extern char D_8011FFB0;
@@ -57,7 +58,6 @@ extern void Particle_BuildMatrix(void *, s32, s32, f32);
 
 extern s32 func_8028FE28_de(s32 *, s32, s32);
 
-extern void func_80253838_de(void *arg0, void *arg1);
 
 extern s32 func_802540F4_de(s32, void **, s32, void *, s32);
 
@@ -181,13 +181,13 @@ void Particle_DrawModel(void *particle, struct Shared_ParticleView *view) {
         if (resource != 0) {
             key = func_8028FE28_de(*resource,
                                 ((Shared_Particle *)particle)->desc->renderModel, 1);
-            func_80253838_de(0, resource);
+            Scene_ReleaseResource(0, resource);
             found = func_802540F4_de(0, &modelTable, key, &D_800C4D50_de, 1);
             if (found != 0) {
                 ((Shared_Particle *)particle)->resource = Render_LocatePackSection(
                     (s32)modelTable, key, index % *(s32 *)modelTable,
                     &((Shared_Particle *)particle)->resourceSize);
-                func_80253838_de(0, (void *)found);
+                Scene_ReleaseResource(0, (void *)found);
             }
         }
         if (((Shared_Particle *)particle)->resource == 0) {

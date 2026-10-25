@@ -27,7 +27,7 @@ void func_80245BC0_de(void) {
         {
             void *owner = D_800E2830->owner;
             if (owner != 0) {
-                func_80253838_de(0, owner);
+                Scene_ReleaseResource(0, owner);
             }
         }
         {

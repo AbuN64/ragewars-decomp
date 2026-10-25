@@ -20,25 +20,25 @@ void Ovlgame_ClearRenderRecord(struct RecordRecAt1C *record) {
     }
 }
 /* Releases every resource handle the render buffer record holds and clears the record. */
-void func_80405CDC_de(struct RecordRecAt1C *record) {
+void Ovlgame_ReleaseRenderBuffers(struct RecordRecAt1C *record) {
     s32 j;
     s32 k;
 
     if (record->displayLists != NULL) {
-        func_80253838_de(NULL, record->displayLists);
+        Scene_ReleaseResource(NULL, record->displayLists);
     }
     if (record->fifo != NULL) {
-        func_80253838_de(NULL, record->fifo);
+        Scene_ReleaseResource(NULL, record->fifo);
     }
     if (record->zBuffer != NULL) {
-        func_80253838_de(NULL, record->zBuffer);
+        Scene_ReleaseResource(NULL, record->zBuffer);
     }
     if (record->audioHeap != NULL) {
-        func_80253838_de(NULL, record->audioHeap);
+        Scene_ReleaseResource(NULL, record->audioHeap);
     }
     for (j = 0; j < 3; j++) {
         if (record->frameBuffers[j] != NULL) {
-            func_80253838_de(NULL, record->frameBuffers[j]);
+            Scene_ReleaseResource(NULL, record->frameBuffers[j]);
         }
     }
     record->ready = 0;

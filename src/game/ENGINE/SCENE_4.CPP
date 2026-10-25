@@ -72,6 +72,7 @@ void func_80288EA8_de(Scene_func_80288EA8_de *scene, void *camera) {
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ACTOR_DEFINITION.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 /* One sector of the world: its model resource, its x/z extent and its cell in the streaming grid. */
 /* Views of the SN debug records this pass reads, with their original member names: CScene_t (0x1B930 bytes),
@@ -150,7 +151,6 @@ extern s32 D_800CD730;
 extern Shared_func_80234FDC_S1 *func_802392EC_de(GameplayCamera *camera);
 extern void Scene_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
 extern void Scene_UnlockResource(void *heap, struct Node80253610 *resource);
-extern void func_80253838_de(void *arg0, void *arg1);
 extern s32 func_80296390_de(void *grid, s32 x, s32 z, s32 index);
 extern s32 func_80296B74_de(void *planes, void *bounds);
 extern void func_802509A8_de(CGameStaticInstance_t *prop, GameplayCamera *camera);
@@ -312,6 +312,6 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
     Render_FlushModelBatch();
     if (scene->m_bVisibilityValid != 0) {
         Scene_UnlockResource(NULL, scene->m_pmeVisibilityData);
-        func_80253838_de(NULL, scene->m_pmeVisibilityData);
+        Scene_ReleaseResource(NULL, scene->m_pmeVisibilityData);
     }
 }

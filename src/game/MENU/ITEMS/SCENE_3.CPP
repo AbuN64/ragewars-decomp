@@ -12,6 +12,7 @@
 #include "SYSTEM/80255C40_7.H"
 #include "SCENE/802508E0_13.H"
 #include "RENDER_4/8028FD2C_6.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 /* Loads a scene's light into the global light D_800CBC90: copies the ambient and directional colours from the scene's light settings (bytes 0xD and 0xA) into both colour copies and the direction bytes from 0x11, then scales the direction to D_800CA1F0 in length through func_802B72B0_de and Particle_ScaleVector and stores it as shorts at 0x1B2B4 of the scene. */
 extern u8 D_800CBC90[];
@@ -48,7 +49,6 @@ void func_8044BE04_de(SceneRecAt1B2B4 *scene) {
     }
 }
 int func_8022A414_de(void *);
-extern void func_80253838_de(void *arg0, void *arg1);
 void func_8025CBEC_de(void *);
 s32 * func_8025CC6C_de(void);
 void func_8028D59C_de(void *);
@@ -69,28 +69,28 @@ void func_8044BF90_de(func_8044CBE0_S1 *arg0) {
     func_8025CBEC_de(func_8025CC6C_de());
     func_8025E468_de();
     func_8025E1EC_de(0x1000);
-    func_80253838_de(NULL, arg0->unk100);
-    func_80253838_de(NULL, arg0->unkB8);
-    func_80253838_de(NULL, arg0->unkBC);
-    func_80253838_de(NULL, arg0->unkC0);
-    func_80253838_de(NULL, arg0->unkC4);
-    func_80253838_de(NULL, arg0->unkC8);
-    func_80253838_de(NULL, arg0->unkD0);
-    func_80253838_de(NULL, arg0->unkD4);
-    func_80253838_de(NULL, arg0->unkEC);
-    func_80253838_de(NULL, arg0->unkCC);
-    func_80253838_de(NULL, arg0->unkE8);
+    Scene_ReleaseResource(NULL, arg0->unk100);
+    Scene_ReleaseResource(NULL, arg0->unkB8);
+    Scene_ReleaseResource(NULL, arg0->unkBC);
+    Scene_ReleaseResource(NULL, arg0->unkC0);
+    Scene_ReleaseResource(NULL, arg0->unkC4);
+    Scene_ReleaseResource(NULL, arg0->unkC8);
+    Scene_ReleaseResource(NULL, arg0->unkD0);
+    Scene_ReleaseResource(NULL, arg0->unkD4);
+    Scene_ReleaseResource(NULL, arg0->unkEC);
+    Scene_ReleaseResource(NULL, arg0->unkCC);
+    Scene_ReleaseResource(NULL, arg0->unkE8);
     temp_a1 = arg0->unkF0;
     if (temp_a1 != NULL) {
-        func_80253838_de(NULL, temp_a1);
+        Scene_ReleaseResource(NULL, temp_a1);
     }
     temp_a1_2 = arg0->unkF4;
     if (temp_a1_2 != NULL) {
-        func_80253838_de(NULL, temp_a1_2);
+        Scene_ReleaseResource(NULL, temp_a1_2);
     }
     temp_a1_3 = arg0->unkFC;
     if (temp_a1_3 != NULL) {
-        func_80253838_de(NULL, temp_a1_3);
+        Scene_ReleaseResource(NULL, temp_a1_3);
     }
     func_8028D59C_de(arg0);
     temp_s1 = arg0->unk1B500.head;

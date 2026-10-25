@@ -4,6 +4,7 @@
 #include "stddef.h"
 #include "TYPES.H"
 #include "MENU/PAK/80403BCC_8.H"
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 /* Loads a page-aligned resource into the selected device slot and reports the result. */
 
@@ -18,7 +19,6 @@ extern char D_800DCCD0[];
 
 extern s32 *Scene_AllocateResource(s32, s32, s32, void *);
 
-extern void func_80253838_de(void *arg0, void *arg1);
 
 extern void func_80253908_de(s32);
 
@@ -129,7 +129,7 @@ s32 func_80404F58_de(s32 slot, s32 arg1, s32 arg2, s32 length)
   func_80253908_de(zero);
   if (buf != ((void *) 0))
   {
-    func_80253838_de(0, buf);
+    Scene_ReleaseResource(0, buf);
   }
   return result;
 }

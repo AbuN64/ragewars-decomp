@@ -22,5 +22,5 @@
 
 
 
-extern void func_80253838_de(void *arg0, void *arg1);
+extern void Scene_ReleaseResource(void *arg0, void *arg1);
 #endif
