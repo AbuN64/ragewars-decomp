@@ -3923,7 +3923,7 @@ segments:
       - [0xCA500, rodata, data_800C/D_auto_src_rw_pool_80271624_CA500_us_rev1]
       - [0xCA510, rodata, data_800C/D_auto_src_rw_pool_80271818_CA510_us_rev1]
       - [0xCA528, rodata, data_800C/D_auto_src_rw_pool_80271AA8_CA528_us_rev1]
-      - [0xCA53C, rodata, data_800C/D_auto_src_rw_pool_80271C54_CA53C_us_rev1]
+      - [0xCA53C, rodata, data_800C/literals_Particle_GetAngleDistance]
       - [0xCA59C, rodata, data_800C/D_blob_771e25384bbcba2fc937]
       - [0xCA5A0, rodata, data_800C/D_blob_c7643594f11715ca25ad]
       - [0xCA5A4, rodata, data_800C/D_d0_8e476a6517695559]

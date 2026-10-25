@@ -71,84 +71,20 @@ extern f32 func_802B72B0_de(f32);
 
 extern f32 D_800C48AC_de;
 
-f32 func_80271C54_de(f32 arg0, f32 arg1) {
-    extern f32 D_800C48A8_de;
-    f32 var_f0;
-    f32 result;
-    f32 var_f0_3;
-    f32 var_f0_4;
-    f32 var_f14;
-
-    var_f14 = arg1;
-    var_f0_3 = var_f14;
-    if (var_f14 < *(&D_800C4848_de + 1)) {
-        do {
-            var_f0_3 += D_800C4850_de;
-        } while (var_f0_3 < *(&D_800C4848_de + 1));
+/** Wrap an angle into [-pi, pi]. */
+static inline f32 WrapAngle(f32 angle) {
+    while (angle < -3.1415927f) {
+        angle += 6.2831855f;
     }
-    if (*(&D_800C4850_de + 1) < var_f0_3) {
-        do {
-            var_f0_3 -= D_800C4858_de;
-        } while (*(&D_800C4850_de + 1) < var_f0_3);
+    while (angle > 3.1415927f) {
+        angle -= 6.2831855f;
     }
-    var_f0_4 = arg0 - var_f0_3;
-    if (var_f0_4 < *(&D_800C4858_de + 1)) {
-        do {
-            var_f0_4 += D_800C4860_de;
-        } while (var_f0_4 < *(&D_800C4858_de + 1));
-    }
-    if (*(&D_800C4860_de + 1) < var_f0_4) {
-        do {
-            var_f0_4 -= D_800C4868_de;
-        } while (*(&D_800C4860_de + 1) < var_f0_4);
-    }
-    if (-var_f0_4 < 0.0f) {
-        if (var_f14 < D_800C486C_de) {
-            do {
-                var_f14 += D_800C4870_de;
-            } while (var_f14 < D_800C486C_de);
-        }
-        if (D_800C4874_de < var_f14) {
-            do {
-                var_f14 -= D_800C4878_de;
-            } while (D_800C4874_de < var_f14);
-        }
-        result = arg0 - var_f14;
-        if (result < *(&D_800C4878_de + 1)) {
-            do {
-                result += D_800C4880_de;
-            } while (result < *(&D_800C4878_de + 1));
-        }
-        if (*(&D_800C4880_de + 1) < result) {
-            do {
-                result -= D_800C4888_de;
-            } while (*(&D_800C4880_de + 1) < result);
-            return result;
-        }
-        return result;
-    }
-    if (var_f14 < D_800C488C_de) {
-        do {
-            var_f14 += D_800C4890_de;
-        } while (var_f14 < D_800C488C_de);
-    }
-    if (D_800C4894_de < var_f14) {
-        do {
-            var_f14 -= D_800C4898_de;
-        } while (D_800C4894_de < var_f14);
-    }
-    var_f0 = arg0 - var_f14;
-    if (var_f0 < *(&D_800C4898_de + 1)) {
-        do {
-            var_f0 += D_800C48A0_de;
-        } while (var_f0 < *(&D_800C4898_de + 1));
-    }
-    if (*(&D_800C48A0_de + 1) < var_f0) {
-        do {
-            var_f0 -= D_800C48A8_de;
-        } while (*(&D_800C48A0_de + 1) < var_f0);
-    }
-    return -var_f0;
+    return angle;
+}
+#define ANGLE_ABS(a) (-(a) < 0.0f ? (a) : -(a))
+/** Absolute angle between two headings, each wrapped into [-pi, pi]. */
+f32 Particle_GetAngleDistance(f32 target, f32 current) {
+    return ANGLE_ABS(WrapAngle(target - WrapAngle(current)));
 }
 
 /** Component-wise multiply two 3-vectors. */

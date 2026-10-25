@@ -2962,3 +2962,4 @@ literals_Fx_UpdateTargetSelection = 0x800C7000; // rom:0xC7C00 size:0x4
 literals_func_8020F984_de = 0x800C7004; // rom:0xC7C04 size:0x4
 literals_Frontend_DrawMenuBlockModel = 0x800E1554; // rom:0xE2154 size:0xC
 literals_Texture_UpdateSoundSlot = 0x800C8FC8; // rom:0xC9BC8 size:0x4
+literals_Particle_GetAngleDistance = 0x800C993C; // rom:0xCA53C size:0x60

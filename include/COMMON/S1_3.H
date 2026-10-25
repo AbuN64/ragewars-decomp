@@ -6,17 +6,11 @@ extern void Particle_BuildTranslationMatrix(void *matrix, f32 x, f32 y, f32 z);
 extern void func_80272CB0_de(void *matrix, f32 x, f32 y, f32 z);
 extern float D_800C48D8_de;
 
-extern float D_800C4870_de;
 
-extern float D_800C4874_de;
 
-extern float D_800C488C_de;
 
-extern float D_800C48A0_de;
 
-extern float D_800C4858_de;
 
-extern float D_800C4880_de;
 
 struct func_80272D20_S1;
 typedef struct func_80272D20_S1 func_80272D20_S1;
@@ -94,10 +88,9 @@ struct func_80272D20_S1 {
 extern f32 func_802725FC_de(f32 *arg0);
 
 
-extern float D_800C4878_de;
 
 
-extern f32 func_80271C54_de(f32 arg0, f32 arg1);
+extern f32 Particle_GetAngleDistance(f32 arg0, f32 arg1);
 
 extern void func_80271F00_de(CVector3 *result, CVector3 *left, CVector3 *right);
 
@@ -107,30 +100,22 @@ extern float D_800C48DC_de;
 
 extern float D_800C48B8_de;
 
-extern float D_800C486C_de;
 
 extern void *func_80272180_de(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2, f32 arg3);
 
 extern void *func_80272214_de(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
 
-extern float D_800C4860_de;
 
-extern float D_800C4868_de;
 
-extern float D_800C4888_de;
 
-extern float D_800C4894_de;
 
 extern void func_80272104_de(CVector3 *out, CVector3 *a, CVector3 *b, f32 y);
 
 struct func_80272CD0_S1;
 typedef struct func_80272CD0_S1 func_80272CD0_S1;
 
-extern float D_800C4890_de;
 
 extern float D_800C4848_de;
 
-extern float D_800C4898_de;
 
-extern float D_800C4850_de;
 #endif
