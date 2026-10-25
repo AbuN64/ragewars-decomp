@@ -1,12 +1,17 @@
-#include "include_asm.h"
-
 #include "TYPES.H"
-#include "COMMON/EFFECTRENDER.H"
-#include "COMMON/ACTORRECAT5E0.H"
-#include "COMMON/TRIPLE.H"
 
+/* Two LSB-first bit streams, each a 32-bit window, its count of valid bits and the next byte to load:
+ * D_8010C070.. carries the 6-bit predictor codes, D_8010C07C.. the 3-bit sample deltas. */
 extern u32 D_8010C070;
+extern s32 D_8010C074;
+extern u8 *D_8010C078;
 extern u32 D_8010C07C;
+extern s32 D_8010C080_de;
+extern u8 *D_8010C084;
+
+/* Q16 predictor coefficient pairs, indexed by the top 2 bits of a predictor code. */
+extern s32 D_800CBC30[4];
+extern s32 D_800CBC40[4];
 
 /* Drops width bits from the sample bit stream and refills it a byte at a time. */
 static inline void skip_sample_bits(s32 width) {
@@ -17,7 +22,7 @@ static inline void skip_sample_bits(s32 width) {
     D_8010C07C = shifted;
     D_8010C080_de = remaining;
     if (remaining < 25) {
-        u8 *cursor = (u8 *)D_8010C084;
+        u8 *cursor = D_8010C084;
         u32 next = *cursor++;
         D_8010C084 = cursor;
         D_8010C080_de = remaining + 8;
@@ -35,7 +40,7 @@ static inline u32 read_predictor_code(void) {
     D_8010C070 = shifted;
     D_8010C074 = remaining;
     if (remaining < 25) {
-        u8 *cursor = (u8 *)D_8010C078;
+        u8 *cursor = D_8010C078;
         u32 next = *cursor++;
         D_8010C078 = cursor;
         D_8010C074 = remaining + 8;
