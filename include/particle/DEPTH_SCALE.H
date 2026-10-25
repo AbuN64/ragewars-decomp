@@ -11,7 +11,7 @@
 #define PARTICLE_DEPTH_RAMP_LENGTH (PARTICLE_DEPTH_RAMP_END - PARTICLE_DEPTH_RAMP_START)
 
 /* Size scale of a particle seen through a camera: a descriptor with flag 4 scales with depth, ramping from the
- * distance range's minimum (near scale) to its maximum (far scale), in thousandths of the depth, between
+ * scaling's near scale to its far scale, in thousandths of the depth, between
  * PARTICLE_DEPTH_RAMP_START and PARTICLE_DEPTH_RAMP_END (others use 1); the result is corrected for the camera's
  * vertical field of view against the 47.5 degree default. Particle_CameraScale is its out-of-line copy and
  * Particle_BuildMatrix inlines it, as the release build did.
@@ -37,7 +37,7 @@ static inline f32 particleCameraScale(Shared_Particle *particle, f32 depth, Game
     if (desc->flags & 4) {
         scale = depth;
         farness = RW_MIN_LT(1.0f, RW_MAX_GT(0.0f, scale - PARTICLE_DEPTH_RAMP_START) / PARTICLE_DEPTH_RAMP_LENGTH);
-        scale *= desc->distanceRange->minimum + (desc->distanceRange->maximum - desc->distanceRange->minimum) * farness;
+        scale *= desc->scaling->nearScale + (desc->scaling->farScale - desc->scaling->nearScale) * farness;
         farness = RW_MAX_GT(0.0f, (depth - PARTICLE_DEPTH_RAMP_START) / PARTICLE_DEPTH_RAMP_LENGTH);
         scale *= 0.001f;
     } else {

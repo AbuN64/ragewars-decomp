@@ -117,7 +117,7 @@ void func_8027E784_de(Shared_Particle *actor, GameplayCamera *view) {
     if (actor->desc->renderModel != 0) {
         size *= 8.0f;
     }
-    size *= actor->desc->distanceRange->shadowSize;
+    size *= actor->desc->scaling->shadowScale;
     shrink = height * 0.1f;
     size = ((({ f32 _m = (size - shrink); if (!(_m <= (size))) _m = (size); _m; })) < (0.0f) ? (0.0f) : (({ f32 _m = (size - shrink); if (!(_m <= (size))) _m = (size); _m; })));
     if (actor->desc->flags & 1) {

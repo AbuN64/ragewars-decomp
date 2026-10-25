@@ -175,12 +175,12 @@ struct Shared_ParticleSineWave {
     char reserved[0x18];
     s8 fadeInFrames; /* 0x18: m_nSineWaveFadeIn */
 };
-/* Descriptor distance range: scalars read at +0x1C/+0x20 by the particle transform. */
-struct Shared_ParticleDistanceRange {
+/* The descriptor scaling (CROMParticleScale_t): random X/Y/Z scale pairs, then m_ShadowScale, m_NearScale, m_FarScale. */
+struct Shared_ParticleScaling {
     u8 reserved0[0x18];
-    f32 shadowSize;
-    f32 minimum;
-    f32 maximum;
+    f32 shadowScale;
+    f32 nearScale;
+    f32 farScale;
 };
 /* Two 24-byte directional-light records occupy particle +0xE0..+0x110. */
 #include "COMMON/PARTICLE_LIGHTING.H"
@@ -203,7 +203,7 @@ struct Shared_ParticleDesc {
     s32 renderModel;
     struct Shared_ParticleEvents *events;
     char pad1C[8];
-    struct Shared_ParticleDistanceRange *distanceRange;
+    struct Shared_ParticleScaling *scaling;
     char pad28[4];
     struct Shared_ParticleSineWave *sineWave;
     char pad30[0x4];
