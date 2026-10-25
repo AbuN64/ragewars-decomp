@@ -54,7 +54,7 @@ extern void func_8022C6E4_de(void *, void *);
 extern s32 func_8022C760_de(void *, void *);
 extern s32 func_80243A90_de(void *, CVector3, s32 *);
 struct MotionSurface;
-extern s32 func_8024491C_de(void *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
+extern s32 Camera_SweepActorMotion(void *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
 extern void func_80245D30_de(void *, void *, void *, s32);
 extern void func_80246684_de(void *);
 extern s32 func_80246A08_de(void *, s32, s32);
@@ -451,13 +451,13 @@ void func_80220ED4_de(SharedPlayer *player)
     if (rise > 0.0f)
     {
       f22 = Sound_GetActorReach(actor);
-      f21 = func_8024D398_de(actor);
+      f21 = Particle_GetActorRadius(actor);
       f20 = Particle_GetActorHeight(actor);
       f0 = Sound_GetActorBaseOffset(actor);
       scratch.views0.view0_1.to.x = actor->views0.view8_3.pos.x;
       scratch.views0.view0_1.to.y = actor->views0.view8_3.pos.y + rise;
       scratch.views0.view0_1.to.z = actor->views0.view8_3.pos.z;
-      if (func_8024491C_de(actor, actor->views0.view8_3.pos, scratch.views0.view0_1.to, &D_801000F0, f22, f21, f20, f0) != 0)
+      if (Camera_SweepActorMotion(actor, actor->views0.view8_3.pos, scratch.views0.view0_1.to, &D_801000F0, f22, f21, f20, f0) != 0)
       {
         floor = D_80103FCC->y - actor->views0.view8_3.pos.y;
         player->views5E8.view6E8_79.unk6E8.y -= rise - floor;

@@ -39,7 +39,7 @@ extern s32 func_8024B06C_de(Actor_func_802676EC_de *, CVector3, Shield *);
 
 extern f32 Particle_GetActorHeight(Actor_func_802676EC_de *);
 
-extern f32 func_8024D398_de(Actor_func_802676EC_de *);
+extern f32 Particle_GetActorRadius(Actor_func_802676EC_de *);
 
 extern f32 Particle_GetPointDistance(CVector3 *, CVector3 *);
 
@@ -141,7 +141,7 @@ have:
             } else {
                 body.y = position.y;
             }
-            reach = radius + func_8024D398_de(self);
+            reach = radius + Particle_GetActorRadius(self);
             distance = Particle_GetPointDistance(&position, &body);
             if (reach < distance) {
                 return 0.0f;

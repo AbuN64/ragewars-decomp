@@ -105,7 +105,7 @@ extern s32 func_802462E8_de(Actor_u1 *, CVector3, char **);
 
 /* Aim toward a point; when obstructed, try progressively wider left/right
  * directions and choose the first clear probe. */
-extern f32 func_8024D398_de(Actor_u1 *);
+extern f32 Particle_GetActorRadius(Actor_u1 *);
 #include "COMMON/MATH_HELPERS.H"
 static inline f32 Weapons_ProbeHeading(Actor_u1 *actor, CVector3 point) {
     f32 dx;
@@ -156,9 +156,9 @@ f32 Weapons_FindClearAimAngle(Actor_u1 *actor, CVector3 point, s32 target, f32 d
                     bias = (-RW_PI_F6 / 12.0f);
                 }
                 cosine = func_802B7130_de(actor->yaw + 3.1415927f + angle);
-                probe.x = actor->position.x + cosine * (distance * func_8024D398_de(actor));
+                probe.x = actor->position.x + cosine * (distance * Particle_GetActorRadius(actor));
                 sine = func_802B6560_de(actor->yaw + 3.1415927f + angle);
-                probe.z = actor->position.z + sine * (distance * func_8024D398_de(actor));
+                probe.z = actor->position.z + sine * (distance * Particle_GetActorRadius(actor));
                 if (!func_802462E8_de(actor, probe, 0)) {
                     angle += bias;
                     func_80274020_de(&angle);

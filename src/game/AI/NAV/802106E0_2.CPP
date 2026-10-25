@@ -4,11 +4,11 @@
 #include "AI/NAV/802106E0_2.H"
 
 /* Advances an animation player one frame: returns 1 when there is no player or clip, or after wrapping
-   past frame 7 back to 0; otherwise prepares and shows the current frame through func_802106E0_de and
+   past frame 7 back to 0; otherwise prepares and shows the current frame through Nav_MeasureWheelReach and
    Nav_MeasureWheelClearance, advances the frame at 0x1CC and returns 0. */
 
 
-extern void func_802106E0_de(void *, int);
+extern void Nav_MeasureWheelReach(void *, int);
 extern void Nav_MeasureWheelClearance(void *, int);
 
 int func_80210E88_de(PlayerRecAt1CC *p) {
@@ -19,7 +19,7 @@ int func_80210E88_de(PlayerRecAt1CC *p) {
         return 1;
     }
     if (p->frame < 8) {
-        func_802106E0_de(p->clip, p->frame);
+        Nav_MeasureWheelReach(p->clip, p->frame);
         Nav_MeasureWheelClearance(p->clip, p->frame);
         p->frame++;
         return 0;

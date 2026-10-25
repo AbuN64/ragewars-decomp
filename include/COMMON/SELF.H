@@ -45,7 +45,7 @@ struct Brain_func_802120A8_eu {
     char pad6C[0x50];
     s32 routeState; /* 0xBC */
     char padC0[0x130];
-    f32 walk[8];
+    f32 clearance[8]; /* 0x1F0 */
     char pad210[0x20];
     s32 combat;
     char pad234[0xA4];
@@ -122,7 +122,7 @@ struct CloseAttackBrain {
     char pad6C[0x50];
     s32 routeState; /* 0xBC */
     char padC0[0x130];
-    f32 walk[8];
+    f32 clearance[8]; /* 0x1F0 */
     char pad210[0x10];
     s32 state; /* 0x220 */
     char pad224[0xC];
@@ -167,8 +167,8 @@ struct PlayerRecAt288 {
     s32 ready;
 };
 
-struct Hit_func_802106E0_de;
-struct Hit_func_802106E0_de {
+struct SweepHit;
+struct SweepHit {
     char pad0[0xE4];
     CVector3 pos;
     char padF0[0xC];
@@ -253,15 +253,13 @@ struct func_80212948_S3 {
     s32 unk230;
 };
 
-struct Hit_func_802106E0_de;
-typedef struct Hit_func_802106E0_de Hit_func_802106E0_de;
+struct SweepHit;
+typedef struct SweepHit SweepHit;
 
 struct ObjectState3C;
 typedef struct ObjectState3C ObjectState3C;
 
 
-struct Vehicle;
-typedef struct Vehicle Vehicle;
 
 extern float D_800C1FEC_de;
 
@@ -269,21 +267,6 @@ extern float D_800C1FEC_de;
 struct Self;
 typedef struct Self Self;
 
-struct Wheels;
-struct Wheels {
-    char pad0[0x1D0];
-    f32 reach[8];
-    f32 clearance[8];
-    f32 length;
-};
-struct Vehicle;
-struct Wheels;
-struct Vehicle {
-    char pad0[8];
-    CVector3 pos;
-    char pad14[0x1440];
-    struct Wheels *wheels;
-};
 
 extern float D_800C1FE0_de;
 

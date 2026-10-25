@@ -152,7 +152,7 @@ void Nav_SetPitchFromAngle(AiController *controller, float amount) {
     }
 }
 
-CVector3 *func_8020993C_de(AiController *controller) {
+CVector3 *Nav_GetControllerPosition(AiController *controller) {
     return &controller->player->pos;
 }
 

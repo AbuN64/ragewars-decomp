@@ -5,7 +5,7 @@
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
 
-extern f32 func_8024D398_de(CollisionProbe *);
+extern f32 Particle_GetActorRadius(CollisionProbe *);
 
 extern f32 Sound_GetActorReach(CollisionProbe *);
 
@@ -16,7 +16,7 @@ extern f32 Sound_GetActorBaseOffset(CollisionProbe *);
 extern f32 func_80241728_de(SurfaceHit *, f32, f32);
 
 struct MotionSurface;
-extern s32 func_8024491C_de(CollisionProbe *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
+extern s32 Camera_SweepActorMotion(CollisionProbe *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
 
 extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
@@ -55,13 +55,13 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
             hit_y = func_80241728_de(query, input->x, input->z);
             input->owner = owner;
             extent0 = Sound_GetActorReach(input);
-            extent1 = func_8024D398_de(input);
+            extent1 = Particle_GetActorRadius(input);
             extent2 = Particle_GetActorHeight(input);
             extent3 = Sound_GetActorBaseOffset(input);
             next.x = input->x;
             next.y = hit_y + D_800C3758_de[0];
             next.z = input->z;
-            if (func_8024491C_de(input, *(CVector3 *)&input->x, next, &D_801000F0,
+            if (Camera_SweepActorMotion(input, *(CVector3 *)&input->x, next, &D_801000F0,
                               extent0, extent1, extent2, extent3)) {
                 actor->saved_query = *query;
                 actor->flags |= 8;
@@ -122,7 +122,7 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
 
     owner_data = &((LevelActor *)owner)->position0;
     entry = owner->entries + 0x14;
-    height = ((ShapeRecAt18V1 *)entry)->radius + func_8024D398_de(input);
+    height = ((ShapeRecAt18V1 *)entry)->radius + Particle_GetActorRadius(input);
     if (actor->movement.y > 0.0f) {
         query->word0 = 3;
         Anim_BuildBoxFace0(query, bounds);
@@ -132,13 +132,13 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
             hit_y = func_80241728_de(query, input->x, input->z);
             input->owner = owner;
             extent0 = Sound_GetActorReach(input);
-            extent1 = func_8024D398_de(input);
+            extent1 = Particle_GetActorRadius(input);
             extent2 = Particle_GetActorHeight(input);
             extent3 = Sound_GetActorBaseOffset(input);
             next.x = input->x;
             next.y = hit_y + D_800C3758_de[1];
             next.z = input->z;
-            if (func_8024491C_de(input, *(CVector3 *)&input->x, next, &D_801000F0,
+            if (Camera_SweepActorMotion(input, *(CVector3 *)&input->x, next, &D_801000F0,
                               extent0, extent1, extent2, extent3)) {
                 actor->saved_query = *query;
                 actor->flags |= 8;

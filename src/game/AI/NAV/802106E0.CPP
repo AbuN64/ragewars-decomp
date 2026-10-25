@@ -1,68 +1,69 @@
 #include "include_asm.h"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/SELF.H"
+#include "COMMON/MOTION_STEP.H"
+#include "COMMON/AIPROFILE.H"
+#include "COMMON/SHAREDCALLBACK5.H"
 #include "TYPES.H"
 
 /* Probes one of a vehicle's eight wheel rays: casts from the vehicle position to its scaled wheel offset
- * through func_8024491C_de and stores the wheel's reach as the XZ distance to whatever was hit (diagonals
+ * through Camera_SweepActorMotion and stores the wheel's reach as the XZ distance to whatever was hit (diagonals
  * scaled by 1/sqrt 2, components tested against the zeroed y), or the full ray length on a miss. */
 extern CVector3 D_800C88A0_de[8];
-extern Hit_func_802106E0_de *D_80103FCC;
-extern char D_80103FD0[];
-extern f32 Sound_GetActorReach(Vehicle *);
-extern f32 func_8024D398_de(Vehicle *);
-extern f32 Particle_GetActorHeight(Vehicle *);
-extern f32 Sound_GetActorBaseOffset(Vehicle *);
-struct MotionSurface;
-extern s32 func_8024491C_de(Vehicle *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
-void func_802106E0_de(Vehicle *vehicle, s32 wheel) {
+extern SweepHit *D_80103FCC;
+extern MotionSurface D_80103FD0;
+extern f32 Sound_GetActorReach(Player *);
+extern f32 Particle_GetActorRadius(Player *);
+extern f32 Particle_GetActorHeight(Player *);
+extern f32 Sound_GetActorBaseOffset(Player *);
+extern s32 Camera_SweepActorMotion(Player *, CVector3, CVector3, MotionSurface *, f32, f32, f32, f32);
+void Nav_MeasureWheelReach(Player *player, s32 wheel) {
     CVector3 from;
     CVector3 to;
     CVector3 delta;
     f32 a;
     f32 b;
     f32 c;
-    from = vehicle->pos;
+    from = player->pos;
     to = D_800C88A0_de[wheel];
-    to.x *= vehicle->wheels->length;
-    to.y *= vehicle->wheels->length;
-    to.z *= vehicle->wheels->length;
+    to.x *= player->controller->length;
+    to.y *= player->controller->length;
+    to.z *= player->controller->length;
     to.x += from.x;
     to.y += from.y;
     to.z += from.z;
     from.y += 61.44f;
-    a = Sound_GetActorReach(vehicle);
-    b = func_8024D398_de(vehicle);
-    c = Particle_GetActorHeight(vehicle);
-    if (func_8024491C_de(vehicle, from, to, D_80103FD0, a, b, c, Sound_GetActorBaseOffset(vehicle))) {
+    a = Sound_GetActorReach(player);
+    b = Particle_GetActorRadius(player);
+    c = Particle_GetActorHeight(player);
+    if (Camera_SweepActorMotion(player, from, to, &D_80103FD0, a, b, c, Sound_GetActorBaseOffset(player))) {
         delta = D_80103FCC->pos;
         delta.x -= from.x;
         delta.y = 0.0f;
         delta.z -= from.z;
         if (delta.x != delta.y) {
             if (delta.z == delta.y) {
-                vehicle->wheels->reach[wheel] = ((delta.x) < (delta.y) ? -(delta.x) : (delta.x));
+                player->controller->reach[wheel] = ((delta.x) < (delta.y) ? -(delta.x) : (delta.x));
             } else {
-                vehicle->wheels->reach[wheel] = (((delta.x) < (delta.y) ? -(delta.x) : (delta.x)) + ((delta.z) < (delta.y) ? -(delta.z) : (delta.z))) * 0.70710677f;
+                player->controller->reach[wheel] = (((delta.x) < (delta.y) ? -(delta.x) : (delta.x)) + ((delta.z) < (delta.y) ? -(delta.z) : (delta.z))) * 0.70710677f;
             }
         } else if (delta.z != delta.y) {
-            vehicle->wheels->reach[wheel] = ((delta.z) < (delta.y) ? -(delta.z) : (delta.z));
+            player->controller->reach[wheel] = ((delta.z) < (delta.y) ? -(delta.z) : (delta.z));
         }
     } else {
-        vehicle->wheels->reach[wheel] = vehicle->wheels->length;
+        player->controller->reach[wheel] = player->controller->length;
     }
 }
 
-#include "COMMON/MOTION_STEP.H"
 /* Stores the clearance reached before step I: (I - 1) x REACH, never below 0. */
-static inline void storeClearance(Vehicle *vehicle, s32 wheel, s32 i, f32 reach) {
-    vehicle->wheels->clearance[wheel] = (i - 1 >= 0 ? i - 1 : 0) * reach;
+static inline void storeClearance(Player *player, s32 wheel, s32 i, f32 reach) {
+    player->controller->clearance[wheel] = (i - 1 >= 0 ? i - 1 : 0) * reach;
 }
 /* Walks wheel ray WHEEL outward from the vehicle in steps of 2.25 x its reach, probing the ground under
- * each step (func_8024491C_de), and stores in the clearance table the distance covered before a probe
+ * each step (Camera_SweepActorMotion), and stores in the clearance table the distance covered before a probe
  * misses, lands on a kind 5/6 surface or drops more than 100; it stays 100 when the ray is shorter
  * than the reach. */
-void Nav_MeasureWheelClearance(Vehicle *vehicle, s32 wheel) {
+void Nav_MeasureWheelClearance(Player *player, s32 wheel) {
     CVector3 position;
     CVector3 below;
     CVector3 step;
@@ -74,9 +75,9 @@ void Nav_MeasureWheelClearance(Vehicle *vehicle, s32 wheel) {
     f32 base;
     s32 steps;
     s32 i;
-    vehicle->wheels->clearance[wheel] = 100.0f;
-    reach = Sound_GetActorReach(vehicle);
-    length = vehicle->wheels->clearance[wheel];
+    player->controller->clearance[wheel] = 100.0f;
+    reach = Sound_GetActorReach(player);
+    length = player->controller->clearance[wheel];
     if (length < reach) {
         return;
     }
@@ -85,10 +86,10 @@ void Nav_MeasureWheelClearance(Vehicle *vehicle, s32 wheel) {
     step.x = step.x * 2.25f * reach;
     step.z = step.z * 2.25f * reach;
     i = 0;
-    radius = func_8024D398_de(vehicle);
-    height = Particle_GetActorHeight(vehicle);
-    base = Sound_GetActorBaseOffset(vehicle);
-    position = vehicle->pos;
+    radius = Particle_GetActorRadius(player);
+    height = Particle_GetActorHeight(player);
+    base = Sound_GetActorBaseOffset(player);
+    position = player->pos;
     surface.flags = 0xC008;
     surface.enabled = 1;
     surface.slopeKind = 1;
@@ -104,33 +105,26 @@ void Nav_MeasureWheelClearance(Vehicle *vehicle, s32 wheel) {
         position.z += step.z;
         below = position;
         below.y -= 5 * 61.44f;
-        if (!func_8024491C_de(vehicle, position, below, &surface, reach, radius, height, base)) {
-            storeClearance(vehicle, wheel, i, reach);
+        if (!Camera_SweepActorMotion(player, position, below, &surface, reach, radius, height, base)) {
+            storeClearance(player, wheel, i, reach);
             return;
         }
         if (D_80103FCC->kind == 5 || D_80103FCC->kind == 6) {
-            storeClearance(vehicle, wheel, i, reach);
+            storeClearance(player, wheel, i, reach);
             return;
         }
         if (D_80103FCC->pos.y <= below.y - 100.0f) {
-            storeClearance(vehicle, wheel, i, reach);
+            storeClearance(player, wheel, i, reach);
             return;
         }
     }
 }
 
-#include "COMMON/AIPROFILE.H"
-extern CVector3 *func_8020993C_de(void *controller);
-typedef struct NavProbeController {
-    Player *player;
-    u8 pad4[0x1CC];
-    f32 reach[8];
-    f32 clearance[8];
-} NavProbeController;
+extern CVector3 *Nav_GetControllerPosition(AiController *controller);
 /* Builds the eight radial probe segments around the player at two heights (reach at 180, clearance at
- * 140) from its position through func_8020993C_de, after turning its heading into a sector in [0, 8].
+ * 140) from its position through Nav_GetControllerPosition, after turning its heading into a sector in [0, 8].
  * The segments stay on the stack: the debug draw that used them (and the sector) is compiled out. */
-void Nav_PrepareProbeSegments(NavProbeController *controller) {
+void Nav_PrepareProbeSegments(AiController *controller) {
     CVector3 a, b;
     f32 angle, zero, yA, yB;
     s32 i;
@@ -150,14 +144,14 @@ void Nav_PrepareProbeSegments(NavProbeController *controller) {
     yA = 180.0f;
     yB = 140.0f;
     for (i = 0; i < 8; i++) {
-        a = *func_8020993C_de(controller);
-        b = *func_8020993C_de(controller);
+        a = *Nav_GetControllerPosition(controller);
+        b = *Nav_GetControllerPosition(controller);
         a.x += D_800C88A0_de[i].x * controller->reach[i];
         a.z += D_800C88A0_de[i].z * controller->reach[i];
         a.y += yA;
         b.y += yA;
-        a = *func_8020993C_de(controller);
-        b = *func_8020993C_de(controller);
+        a = *Nav_GetControllerPosition(controller);
+        b = *Nav_GetControllerPosition(controller);
         a.x += D_800C88A0_de[i].x * controller->clearance[i];
         a.z += D_800C88A0_de[i].z * controller->clearance[i];
         a.y += yB;

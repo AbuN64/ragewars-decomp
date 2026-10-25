@@ -119,7 +119,7 @@ s32 func_80243A90_de(Func80243A80Actor *actor, Func80243A80Vec3 pos, u32 *arg4) 
     }
     frame.sp1C = var_a1;
     temp_f22 = Sound_GetActorReach(actor);
-    count = func_8024D398_de(actor);
+    count = Particle_GetActorRadius(actor);
     high = Particle_GetActorHeight(actor);
     func_8023E690_de(&frame.sp18, temp_f22, count, high, Sound_GetActorBaseOffset(actor));
     *(Func80243A80Vec3 *)&frame.sp5C = *(Func80243A80Vec3 *)&actor->x;
@@ -510,7 +510,7 @@ s32 func_802446E0_de(char *arg0, CVector3 arg1, CVector3 arg2, MotionSurface *ar
     return count;
 }
 
-s32 func_8024491C_de(char *arg0, CVector3 arg1, CVector3 arg2, MotionSurface *arg3,
+s32 Camera_SweepActorMotion(char *arg0, CVector3 arg1, CVector3 arg2, MotionSurface *arg3,
                   CVector3 arg4, f32 arg5) {
     extern s32 func_8023D380_de(void *arg0);
     Work80244494 work;

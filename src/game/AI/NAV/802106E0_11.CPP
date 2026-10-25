@@ -106,7 +106,7 @@ block_19:
                 if ((player->slot % 2) == D_800D297C) {
                     Nav_MeasureWheelClearance(player, dir);
                 }
-                if (!(brain->walk[dir] < 100.0f)) {
+                if (!(brain->clearance[dir] < 100.0f)) {
                     brain->player->forward = 1.0f;
                 } else {
                     goto block_31;
@@ -128,7 +128,7 @@ block_27:
                     if ((player->slot % 2) == D_800D297C) {
                         Nav_MeasureWheelClearance(player, dir);
                     }
-                    if (!(brain->walk[dir] < 100.0f)) {
+                    if (!(brain->clearance[dir] < 100.0f)) {
                         brain->player->forward = -1.0f;
                     } else {
                         goto block_31;
@@ -145,7 +145,7 @@ block_31:
                 if ((player->slot % 2) == D_800D297C) {
                     Nav_MeasureWheelClearance(player, dir);
                 }
-                if (!(brain->walk[dir] < 100.0f)) {
+                if (!(brain->clearance[dir] < 100.0f)) {
                     brain->player->strafe = -temp_f20;
                 } else {
                     goto block_41;
@@ -156,7 +156,7 @@ block_31:
                 if ((player->slot % 2) == D_800D297C) {
                     Nav_MeasureWheelClearance(player, dir);
                 }
-                if (brain->walk[dir] < 100.0f) {
+                if (brain->clearance[dir] < 100.0f) {
 block_41:
                     brain->player->strafe = 0.0f;
                     brain->pattern = 2;

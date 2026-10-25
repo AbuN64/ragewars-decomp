@@ -38,7 +38,7 @@ typedef struct Brain {
     char pad18[0x4C];
     Actor *target;
     char pad68[0x188];
-    f32 walk[8];
+    f32 clearance[8];
     char pad210[0x20];
     s32 combat;
     char pad234[0xA4];
@@ -113,7 +113,7 @@ void func_8021113C_eu(Actor *actor) {
                 if ((player->slot % 2) == D_800D297C) {
                     Nav_MeasureWheelClearance(player, dir);
                 }
-                if (!(brain->walk[dir] < 100.0f)) {
+                if (!(brain->clearance[dir] < 100.0f)) {
                     brain->player->strafe = -speed;
                 } else {
                     goto halt;
@@ -124,7 +124,7 @@ void func_8021113C_eu(Actor *actor) {
                 if ((player->slot % 2) == D_800D297C) {
                     Nav_MeasureWheelClearance(player, dir);
                 }
-                if (brain->walk[dir] < 100.0f) {
+                if (brain->clearance[dir] < 100.0f) {
 halt:
                     brain->player->strafe = 0.0f;
                     brain->pattern = 2;

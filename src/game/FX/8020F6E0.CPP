@@ -5,7 +5,7 @@
 #include "stddef.h"
 
 extern s32 D_801468C4;
-extern CVector3 *func_8020993C_de(AiController *controller);
+extern CVector3 *Nav_GetControllerPosition(AiController *controller);
 extern s32 func_80209A94_de(AiController *controller);
 extern f32 Particle_GetPointDistance(f32 *a, f32 *b);
 
@@ -26,7 +26,7 @@ s32 Fx_UpdateTargetSelection(void *object) {
     s32 index;
     AiTarget *target;
 
-    position = func_8020993C_de(controller);
+    position = Nav_GetControllerPosition(controller);
     if (controller->target != NULL) {
         linked = controller->target->player;
         if (linked->health == 0) {

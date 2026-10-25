@@ -13,7 +13,7 @@ extern f32 Weapons_GetSignedAngleToPoint(Actor_func_80214DD4_de *arg0, CVector3 
 struct Cursor;
 extern Location *func_80219408_de(struct Cursor *slot);
 extern f32 Particle_GetActorHeight(Actor_func_80214DD4_de *arg0);
-extern f32 func_8024D398_de(Actor_func_80214DD4_de *arg0);
+extern f32 Particle_GetActorRadius(Actor_func_80214DD4_de *arg0);
 extern f32 Sound_GetActorReach(Actor_func_80214DD4_de *arg0);
 extern void func_8024E79C_de(Actor_func_80214DD4_de *arg0, CVector3 pos, CVector3 *outPos, s32 *outRoom, s32 arg4, s32 arg5);
 extern f32 func_8024E80C_de(Actor_func_80214DD4_de *arg0);
@@ -37,7 +37,7 @@ static inline void Weapons_PlaceGoalBeside(Actor_func_80214DD4_de *actor, Actor_
         dir.y = 0.0f;
         dir.z = 0.0f;
     }
-    Particle_ScaleVector(&dir, &dir, func_8024D398_de(target) + func_8024D398_de(actor) + D_800C216C_de);
+    Particle_ScaleVector(&dir, &dir, Particle_GetActorRadius(target) + Particle_GetActorRadius(actor) + D_800C216C_de);
     Particle_AddVec3(&goal, &target->pos, &dir);
     func_8024E79C_de(target, goal, outPos, outRoom, 0, 0);
 }
@@ -105,7 +105,7 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
                 pos.y += target->height + Particle_GetActorHeight(target) * D_800C2170_de;
             }
         }
-        gap = func_8024D398_de(target) + func_8024D398_de(actor);
+        gap = Particle_GetActorRadius(target) + Particle_GetActorRadius(actor);
         switch (kind) {
             case 2:
                 gap += D_800C2174_de;
@@ -119,7 +119,7 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
                 break;
         }
     } else {
-        gap = func_8024D398_de(actor);
+        gap = Particle_GetActorRadius(actor);
         switch (kind) {
             case 4:
                 loc = func_80219408_de(&tracker->slot);

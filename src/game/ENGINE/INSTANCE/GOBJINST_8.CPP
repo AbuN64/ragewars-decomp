@@ -70,7 +70,7 @@ void func_8024A7A0_de(LevelActor *actor, s32 arg1, Lookup *params) {
             effect = func_802830B8_de(&D_8011D8D0);
             if (effect != 0) {
                 scale = D_800C3A78_de;
-                effect->field150 = func_8024D398_de(actor) * scale;
+                effect->field150 = Particle_GetActorRadius(actor) * scale;
                 effect->field154 = Particle_GetActorHeight(actor) * scale;
             }
         }

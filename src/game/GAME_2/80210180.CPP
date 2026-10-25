@@ -23,7 +23,7 @@ unsigned int rodata_unresolved_800C2224[3] = {
 #endif
 
 #if !(defined(VERSION_EU)) || (defined(NON_MATCHING) && (defined(VERSION_EU)))
-/* Route-following check for a computer driver's brain: when it has a target at 0x64, it calls UpdateCloseAttack if func_802099B4_de reports the target reached, and again when its route node at 0xC (unless -1) lies closer than 100 to the position func_8020993C_de gives; always returns one. */
+/* Route-following check for a computer driver's brain: when it has a target at 0x64, it calls UpdateCloseAttack if func_802099B4_de reports the target reached, and again when its route node at 0xC (unless -1) lies closer than 100 to the position Nav_GetControllerPosition gives; always returns one. */
 typedef struct Brain {
     char pad0[0xC];
     s32 node;
@@ -35,7 +35,7 @@ extern char D_8013B364[];
 
 extern s32 func_802099B4_de(Brain *, void *);
 extern void UpdateCloseAttack(Brain *arg0);
-extern void *func_8020993C_de(Brain *arg0);
+extern void *Nav_GetControllerPosition(Brain *arg0);
 extern void *Nav_GetGraphPoint(char *, s32);
 extern f32 Particle_GetPointDistance(void *, void *);
 
@@ -51,7 +51,7 @@ s32 func_80210198_eu(Brain *brain) {
     if (brain->node == -1) {
         return 1;
     }
-    pos = func_8020993C_de(brain);
+    pos = Nav_GetControllerPosition(brain);
     if (Particle_GetPointDistance(pos, Nav_GetGraphPoint(D_8013B364, brain->node)) < 100.0f) {
         UpdateCloseAttack(brain);
     }

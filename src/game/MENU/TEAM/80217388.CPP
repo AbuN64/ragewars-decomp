@@ -43,7 +43,7 @@ void func_80217388_de(void *arg0, void *arg1) {
 }
 
 extern void Particle_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 *right);
-extern f32 func_8024D398_de(void *arg0);
+extern f32 Particle_GetActorRadius(void *arg0);
 extern void Particle_ScaleVector(void *result, void *vector, f32 scale);
 extern void Particle_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void func_8024E79C_de(void *arg0, CVector3 value, void *arg4, s32 *arg5,
@@ -72,7 +72,7 @@ void func_8021740C_de(void *arg0, s32 unused, void *arg2, Player *arg3,
         offset.z = 0.0f;
     }
 
-    distance = func_8024D398_de(arg2) + func_8024D398_de(arg0) + D_800C21E8_de;
+    distance = Particle_GetActorRadius(arg2) + Particle_GetActorRadius(arg0) + D_800C21E8_de;
     Particle_ScaleVector(&offset, &offset, distance);
     Particle_AddVec3(&position, &((Player *)(arg2))->pos, &offset);
     func_8024E79C_de(arg2, position, arg4, arg5, 0, 0);

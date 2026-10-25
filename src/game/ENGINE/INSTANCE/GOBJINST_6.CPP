@@ -36,7 +36,7 @@ extern s32 func_8026E340_de(void);
 extern EffectRecAt154 *func_802830B8_de(void *system);
 
 #include "particle/8027A0F4_8.H"
-extern f32 func_8024D398_de(void *actor);
+extern f32 Particle_GetActorRadius(void *actor);
 extern f32 Particle_GetActorHeight(void *actor);
 static inline void func_8024A1C0_spawn(Actor_func_8024A1D0_de *actor, Lookup *lookup) {
     CVector3 position;
@@ -55,7 +55,7 @@ static inline void func_8024A1C0_spawn(Actor_func_8024A1D0_de *actor, Lookup *lo
             effect = func_802830B8_de(&D_8011D8D0);
             if (effect != 0) {
                 scale = D_800C3A50_de;
-                effect->field150 = func_8024D398_de(actor) * scale;
+                effect->field150 = Particle_GetActorRadius(actor) * scale;
                 effect->field154 = Particle_GetActorHeight(actor) * scale;
             }
         }
@@ -105,7 +105,7 @@ void func_8024A3B0_de(LevelActor *actor, PlayerCode80225D10 *player, s32 arg2, D
                 effect = func_802830B8_de(&D_8011D8D0);
                 if (effect != 0) {
                     scale = D_800C8B48;
-                    effect->field150 = func_8024D398_de(actor) * scale;
+                    effect->field150 = Particle_GetActorRadius(actor) * scale;
                     effect->field154 = Particle_GetActorHeight(actor) * scale;
                 }
             }

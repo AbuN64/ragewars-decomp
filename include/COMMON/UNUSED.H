@@ -18087,8 +18087,6 @@ struct TargetPosition;
 typedef struct TargetPosition TargetPosition;
 struct CROMSwoosh_t;
 typedef struct CROMSwoosh_t CROMSwoosh;
-struct Wheels;
-typedef struct Wheels Wheels;
 struct Widget_func_8040C950_de;
 typedef struct Widget_func_8040C950_de Widget_func_8040C950_de;
 typedef char * va_list;

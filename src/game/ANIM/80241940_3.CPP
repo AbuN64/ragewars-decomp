@@ -11,7 +11,7 @@ extern void func_80241BAC_de(Actor_func_80242550_de *, OwnerRecAt18 *, Bounds *,
 
 extern void func_80241F24_de(Actor_func_80242550_de *, OwnerRecAt18 *, Bounds *, SurfaceHit *, Source_func_802164A8_de *);
 
-extern f32 func_8024D398_de(void *);
+extern f32 Particle_GetActorRadius(void *);
 
 extern f32 Sound_GetActorReach(Input_func_802426CC_de *);
 
@@ -21,7 +21,7 @@ extern f32 Sound_GetActorBaseOffset(void *);
 
 extern f32 func_80241728_de(SurfaceHit *, f32, f32);
 
-extern s32 func_8024491C_de(Input_func_802426CC_de *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
+extern s32 Camera_SweepActorMotion(Input_func_802426CC_de *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
 
 
 extern char D_801000F0;
@@ -78,13 +78,13 @@ void func_802426CC_de(ActorRecAtB0 *actor, void *owner, Input_func_802426CC_de *
     hit_y = func_80241728_de(query, input->x, input->z);
     input->owner = owner;
     extent0 = Sound_GetActorReach(input);
-    extent1 = func_8024D398_de(input);
+    extent1 = Particle_GetActorRadius(input);
     extent2 = Particle_GetActorHeight(input);
     extent3 = Sound_GetActorBaseOffset(input);
     next.x = input->x;
     next.y = hit_y + D_800C3760_de;
     next.z = input->z;
-    if (func_8024491C_de(input, *(CVector3 *)&input->x, next, &D_801000F0,
+    if (Camera_SweepActorMotion(input, *(CVector3 *)&input->x, next, &D_801000F0,
                       extent0, extent1, extent2, extent3)) {
         actor->saved_query = *query;
         actor->flags |= 8;

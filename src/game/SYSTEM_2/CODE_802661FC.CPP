@@ -361,7 +361,7 @@ have:
             } else {
                 body.y = position.y;
             }
-            reach = radius + func_8024D398_de(self);
+            reach = radius + Particle_GetActorRadius(self);
             distance = Particle_GetPointDistance(&position, &body);
             if (reach < distance) {
                 return 0.0f;

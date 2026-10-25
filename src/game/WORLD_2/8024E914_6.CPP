@@ -26,7 +26,7 @@ extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 extern EffectRecAt154 *func_802830B8_de(void *system);
 
-extern f32 func_8024D398_de(Actor_func_8024ED90_de *actor);
+extern f32 Particle_GetActorRadius(Actor_func_8024ED90_de *actor);
 
 /* Places an actor's ground shadow: the shadow size is the smaller of half the vertical offset from
  * func_8024E2FC_de and that minus a tenth of the actor's height above its ground height at 0x40, vanishing
@@ -87,7 +87,7 @@ void func_8024ED90_de(Actor_func_8024ED90_de *actor, void **resource) {
             effect = func_802830B8_de(&D_8011D8D0);
             if (effect != 0) {
                 scale = D_800C3D98_de;
-                effect->field150 = func_8024D398_de(actor) * scale;
+                effect->field150 = Particle_GetActorRadius(actor) * scale;
                 effect->field154 = Particle_GetActorHeight(actor) * scale;
             }
         }

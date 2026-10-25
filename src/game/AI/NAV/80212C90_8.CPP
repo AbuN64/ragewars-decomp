@@ -45,7 +45,7 @@ void func_80212E10_de(void) {
         "lw         $v0, 0xC($s1)\n"
         "bne        $v1, $v0, .Lauto_80212F0C\n"
         "nop\n"
-        "jal        func_8020993C_de\n"
+        "jal        Nav_GetControllerPosition\n"
         "addu      $a0, $s1, $zero\n"
         "addu       $a0, $s2, $zero\n"
         "lw         $a1, 0xC($s1)\n"

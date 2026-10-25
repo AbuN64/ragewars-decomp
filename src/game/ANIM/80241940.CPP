@@ -8,7 +8,7 @@
 
 /* Builds the eight world-space corners of an object's collision box: the extents come from the shape at
  * 0x18 + 0x14 (half width and depth, or the radius for a cylinder of kind 1), grown by the optional
- * attachment's sizes from func_8024D398_de, Particle_GetActorHeight and func_8024E420_de; the box is turned by the object's
+ * attachment's sizes from Particle_GetActorRadius, Particle_GetActorHeight and func_8024E420_de; the box is turned by the object's
  * rest matrix from 0x2A4 and its heading 0x6C composed with its orientation at 0x5C, moved to its position
  * and, for shapes flagged 1, its bottom corners are dropped to the ground height of the given floor. */
 
@@ -18,7 +18,7 @@
 
 
 
-extern f32 func_8024D398_de(s32);
+extern f32 Particle_GetActorRadius(s32);
 extern f32 Particle_GetActorHeight(s32);
 extern f32 Sound_GetActorBaseOffset(s32);
 
@@ -64,7 +64,7 @@ void func_80241950_de(char *obj, CVector3 *corners, char *floor, s32 attachment)
     anim = obj + 0x170;
     shape = (ShapeRecAt18V1 *)((u8 *)((LevelActor *)obj)->definition + 0x14);
     if (attachment != 0) {
-        grow = func_8024D398_de(attachment);
+        grow = Particle_GetActorRadius(attachment);
         lift = Particle_GetActorHeight(attachment);
         extra = Sound_GetActorBaseOffset(attachment);
     } else {

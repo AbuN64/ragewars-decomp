@@ -78,7 +78,7 @@ void func_802120A8_eu(Self *actor) {
             if (brain->player->slot % 2 == D_800D297C) {
                 Nav_MeasureWheelClearance(brain->player, dir);
             }
-            if (brain->walk[dir] < 100.0f) {
+            if (brain->clearance[dir] < 100.0f) {
                 goto stop;
             }
             brain->player->strafe = -speed;
@@ -87,7 +87,7 @@ void func_802120A8_eu(Self *actor) {
             if (brain->player->slot % 2 == D_800D297C) {
                 Nav_MeasureWheelClearance(brain->player, dir);
             }
-            if (brain->walk[dir] < 100.0f) {
+            if (brain->clearance[dir] < 100.0f) {
             stop:
                 brain->player->strafe = 0.0f;
                 brain->pattern = 2;

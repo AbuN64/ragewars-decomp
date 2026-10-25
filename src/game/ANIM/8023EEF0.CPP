@@ -8,7 +8,7 @@
 #include "TYPES.H"
 
 #if !(defined(VERSION_EU))
-extern f32 func_8024D398_de(void *);
+extern f32 Particle_GetActorRadius(void *);
 extern f32 Sound_GetActorBaseOffset(void *);
 extern f32 Particle_GetActorHeight(void *);
 extern void func_80242550_de(void *, void *);
@@ -51,7 +51,7 @@ void Anim_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelActor
 
     entityX = entity->position0.x;
     entityZ = entity->position0.z;
-    radius = func_8024D398_de(entity);
+    radius = Particle_GetActorRadius(entity);
     bounds[0] = entityX - radius;
     bounds[2] = entityX + radius;
     bounds[1] = entityZ - radius;

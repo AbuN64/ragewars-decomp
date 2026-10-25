@@ -18,7 +18,7 @@ extern f32 Particle_GetActorHeight(Actor_func_8024A1D0_de *actor);
 
 extern EffectRecAt154 *func_802830B8_de(void *system);
 
-extern f32 func_8024D398_de(Actor_func_8024A1D0_de *actor);
+extern f32 Particle_GetActorRadius(Actor_func_8024A1D0_de *actor);
 
 extern void Fx_DispatchAttachmentEffects(void *arg0, s32 arg1, s32 arg2, void *arg3, void *arg4);
 
@@ -68,7 +68,7 @@ void func_8024C454_de(Actor_func_8024A1D0_de *actor, LookupRecAtC *lookup) {
             effect = func_802830B8_de(&D_8011D8D0);
             if (effect != 0) {
                 scale = *(&D_800C3B60_de + 1);
-                effect->field150 = func_8024D398_de(actor) * scale;
+                effect->field150 = Particle_GetActorRadius(actor) * scale;
                 effect->field154 = Particle_GetActorHeight(actor) * scale;
             }
         }

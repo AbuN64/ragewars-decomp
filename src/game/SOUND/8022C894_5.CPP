@@ -31,7 +31,7 @@ extern f32 Sound_GetActorReach(void *arg0);
 
 
 struct MotionSurface;
-extern s32 func_8024491C_de(void *arg0, CVector3 arg1, CVector3 arg2, struct MotionSurface *arg3,
+extern s32 Camera_SweepActorMotion(void *arg0, CVector3 arg1, CVector3 arg2, struct MotionSurface *arg3,
                          f32 arg4, f32 arg5, f32 arg6, f32 arg7);
 
 extern char D_80103FCC[];
@@ -191,13 +191,13 @@ void func_8022DE58_de(Player *player, LevelActor *actor) {
                  player->heightDelta;
     if (var_f23 > 0.0f) {
         temp_f22 = Sound_GetActorReach(actor);
-        temp_f21 = func_8024D398_de(actor);
+        temp_f21 = Particle_GetActorRadius(actor);
         temp_f20 = Particle_GetActorHeight(actor);
         temp_f0 = Sound_GetActorBaseOffset(actor);
         next.x = actor->position0.x;
         next.y = actor->position0.y + var_f23;
         next.z = actor->position0.z;
-        if (func_8024491C_de(actor, actor->position0, next,
+        if (Camera_SweepActorMotion(actor, actor->position0, next,
                            &D_801000F0, temp_f22, temp_f21, temp_f20,
                            temp_f0) != 0) {
             temp_f1 = ((Shared_Floor *)(*(void **)D_80103FCC))->y -
