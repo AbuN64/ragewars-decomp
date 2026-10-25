@@ -248,25 +248,6 @@ struct Shared_Particle;
 struct Shared_ParticleDesc;
 struct Shared_ParticleOwner;
 struct Shared_ParticleTarget;
-struct Shared_ParticleView {
-    u32 unknown0[2];
-    s32 unk8;
-    u32 unknownC[6];
-    s32 unk24;
-    u32 unknown28[62];
-    s32 grayscale;
-    u32 unknown124;
-    CVector3 unk128;
-    u32 unknown134[59];
-    Matrix viewMtx;
-    u32 unknown260[36];
-    f32 clipMatrix[4][4];
-    u32 unknown330[8];
-    CVector3 clipMin;
-    CVector3 clipMax;
-    u32 unknown368[112];
-    f32 fadeRange;
-};
 struct Shared_Particle {
     Shared_ParticleInstance inst;
     CVector3 attachmentPosition;

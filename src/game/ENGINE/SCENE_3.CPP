@@ -34,7 +34,7 @@ void func_80288470_de(DraftStreamWorld *world)
     s32 zCount, lastX, firstZ, lastZ;
     s32 x, z, row, loaded, size, visible, slot;
 
-    viewers = (void *)D_80140FE8_de.object;
+    viewers = (void *)D_80140FE8_de.camera;
     if (viewers) {
         firstX = count = 0;
         table = Render_GetPackSection(world->grid, 0);

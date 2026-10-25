@@ -7,6 +7,7 @@
 #include "COMMON/MATH_HELPERS.H"
 #include "TYPES.H"
 #include "ENGINE/PARTICLE.H"
+#include "COMMON/GAMEPLAY_CAMERA.H"
 #include "SCENE/802508E0_4.H"
 #include "particle/80271B18_3.H"
 extern void Scene_ReleaseResource(void *arg0, void *arg1);
@@ -68,7 +69,7 @@ extern void Render_QueueModelInstance(void **, void *, s32, void *, void *, s32)
 extern void Scene_UnlockResource(s32, void *);
 extern void *func_802799C0_de(void *, s32);
 
-void func_8027E784_de(Shared_Particle *actor, struct Shared_ParticleView *view) {
+void func_8027E784_de(Shared_Particle *actor, GameplayCamera *view) {
     f32 matrix[16];
     CVector3 point;
     CQuatern rotation;
@@ -148,7 +149,7 @@ void func_8027E784_de(Shared_Particle *actor, struct Shared_ParticleView *view) 
     }
 }
 
-void Particle_DrawModel(void *particle, struct Shared_ParticleView *view) {
+void Particle_DrawModel(void *particle, GameplayCamera *view) {
     CVector3 delta;
     void *modelTable;
     void *matrix;
@@ -166,7 +167,7 @@ void Particle_DrawModel(void *particle, struct Shared_ParticleView *view) {
         if (matrix == 0) {
             return;
         }
-        Particle_TransformPoint(&view->viewMtx, &((Shared_Particle *)particle)->inst.pos, &delta);
+        Particle_TransformPoint(view->worldToView, &((Shared_Particle *)particle)->inst.pos, &delta);
         amount = delta.z;
         if (amount < 0.0f) {
             amount = -amount;

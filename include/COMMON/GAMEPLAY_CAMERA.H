@@ -57,7 +57,9 @@ typedef struct GameplayCamera GameplayCamera;
 struct GameplayCamera {
     char pad0[4];
     GameplayCamera *next; /* 0x04: camera list link */
-    char pad8[0xC];
+    s32 index; /* 0x08: which of the split-screen views this is (CCamera_t m_Index) */
+    f32 pixelXScale; /* 0x0C */
+    f32 pixelYScale; /* 0x10 */
     s16 mode; /* +0x14: src/func_80234FDC.c */
     char pad16[0x2];
     f32 elapsed; /* +0x18: src/func_80234FDC.c */

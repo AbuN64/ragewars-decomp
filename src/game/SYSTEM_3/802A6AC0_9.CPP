@@ -56,7 +56,7 @@ void func_802A7660_de(Hud *hud, s32 which) {
         return;
     }
     wide = Frontend_GetScreenMode() == 0 ? 0.75f : 1.0f;
-    scale = D_80140FE8_de.object->b / (f32) D_800E28D4;
+    scale = D_80140FE8_de.camera->viewHeight / (f32) D_800E28D4;
     scale = scale * wide;
     switch (which) {
     case 1:

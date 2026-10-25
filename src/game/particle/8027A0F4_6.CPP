@@ -5,8 +5,8 @@
 #include "gbi.h"
 #include "TYPES.H"
 #include "particle/80271B18_3.H"
+#include "COMMON/GAMEPLAY_CAMERA.H"
 
-/* Shared_ParticleView is defined in the particle header. */
 struct Shared_AnimFrame {
     u8 kind;
     u8 unknown1;
@@ -19,7 +19,6 @@ struct Shared_AnimInfo {
     struct Shared_AnimFrame *frame;
 };
 
-struct Shared_ParticleView;
 struct Shared_AnimInfo;
 
 /* Draws one particle for a view: fades particles hidden behind geometry in or out, blends its colours towards the
@@ -33,7 +32,7 @@ extern f32 D_800D2988;
 extern s32 D_800D297C;
 extern char D_80100030;
 extern s32 D_80140FF8;
-extern struct Shared_ParticleView *D_80140FE8_de;
+extern Globals_func_804220A8_de D_80140FE8_de;
 
 extern s32 D_801462C8;
 
@@ -46,7 +45,7 @@ void func_80295FB4_us_rev1(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #else
 void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
-Shared_ParticleInstance *Camera_FindScreenMessage(struct Shared_ParticleView *);
+Shared_ParticleInstance *Camera_FindScreenMessage(GameplayCamera *);
 s32 Camera_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, void *);
 void Particle_BuildMatrix(Shared_Particle *, void *, void *, f32);
 void *func_802799C0_de(void *, s32);
@@ -55,7 +54,7 @@ void Render_SetModePreset(s32);
 void Scene_UnlockResource(s32, void *);
 s32 Nav_NextRandom(void);
 
-static inline s32 func_8027ED6C_de_occluded(Shared_Particle *particle, struct Shared_ParticleView *view) {
+static inline s32 func_8027ED6C_de_occluded(Shared_Particle *particle, GameplayCamera *view) {
     Shared_ParticleInstance *inst;
     s32 hit;
 
@@ -63,13 +62,13 @@ static inline s32 func_8027ED6C_de_occluded(Shared_Particle *particle, struct Sh
     if (inst != 0 && view->unk24 == 0) {
         Shared_ParticleInstance saved;
         saved = *inst;
-        inst->pos = view->unk128;
+        inst->pos = view->position;
         hit = Camera_MoveActorWithCollision(inst, particle->inst.pos, &D_80100030);
         *inst = saved;
     } else {
         Shared_ParticleInstance probe;
         probe = particle->inst;
-        probe.pos = view->unk128;
+        probe.pos = view->position;
         hit = Camera_MoveActorWithCollision(&probe, particle->inst.pos, &D_80100030);
     }
     return hit;
@@ -95,7 +94,7 @@ static inline s32 func_8027ED6C_de_scale(f32 value, f32 div) {
 static inline f32 lesser(f32 a, f32 b) { return a > b ? b : a; }
 static inline f32 greater(f32 a, f32 b) { return a < b ? b : a; }
 
-void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *view) {
+void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
     struct Shared_AnimInfo info;
     u8 env[3];
     u8 prim[3];
@@ -152,7 +151,7 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
         }
     }
 
-    particle->flags |= 8 << view->unk8;
+    particle->flags |= 8 << view->index;
     particle->alpha = 255.0f;
     ratio = particle->time / particle->life > 1.0f ? 1.0f : particle->time / particle->life;
     primFrom = particle->prim;
@@ -166,7 +165,7 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
     prim[1] = (u32)((((primTo[1] - primFrom[1]) * ratio + primFrom[1]) > 255.0f ? 255.0f : ((primTo[1] - primFrom[1]) * ratio + primFrom[1])) < 0.0f ? 0.0f : (((primTo[1] - primFrom[1]) * ratio + primFrom[1]) > 255.0f ? 255.0f : ((primTo[1] - primFrom[1]) * ratio + primFrom[1])));
     prim[2] = (u32)((((primTo[2] - primFrom[2]) * ratio + primFrom[2]) > 255.0f ? 255.0f : ((primTo[2] - primFrom[2]) * ratio + primFrom[2])) < 0.0f ? 0.0f : (((primTo[2] - primFrom[2]) * ratio + primFrom[2]) > 255.0f ? 255.0f : ((primTo[2] - primFrom[2]) * ratio + primFrom[2])));
 
-    if (view->grayscale != 0) {
+    if (view->monochrome != 0) {
         gray = env[0] + env[1] + env[2];
         gray /= 12;
         env[0] = gray * 2;
@@ -222,10 +221,10 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
 
     if (!(particle->flags & 0x100000)) {
         if (D_80140FF8 == 1) {
-            struct Shared_ParticleView *camera = D_80140FE8_de;
+            GameplayCamera *camera = D_80140FE8_de.camera;
             CVector3 local;
             f32 depth;
-            Particle_TransformPoint(&camera->viewMtx, &particle->inst.pos, &local);
+            Particle_TransformPoint(camera->worldToView, &particle->inst.pos, &local);
             depth = local.z;
             if (depth < 0.0f) {
                 depth = -depth;
@@ -237,7 +236,7 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
         particle->unk14E = frame;
         particle->flags |= 0x100000;
     }
-    Particle_TransformPoint(&view->viewMtx, &particle->inst.pos, &viewPos);
+    Particle_TransformPoint(view->worldToView, &particle->inst.pos, &viewPos);
     dist = viewPos.z;
     if (dist < 0.0f) {
         dist = -dist;
@@ -299,8 +298,8 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
             alpha = func_8027ED6C_de_scale(alpha * (particle->life - time), duration + 1.0f);
         }
     }
-    if (view->fadeRange < -0.0001f || view->fadeRange > 0.0001f) {
-        f32 range = view->fadeRange;
+    if (view->farPlane < -0.0001f || view->farPlane > 0.0001f) {
+        f32 range = view->farPlane;
         f32 half;
         f32 delta;
         switch (desc->fade->rangeMode) {

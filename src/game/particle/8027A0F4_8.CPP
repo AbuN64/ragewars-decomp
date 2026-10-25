@@ -179,7 +179,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
     EffectRender *render;
     CVector3 *vel;
     EffectTarget *aimTarget;
-    ParticleView *camera;
+    GameplayCamera *camera;
     f32 distSq;
     f32 scale;
     f32 depth;
@@ -306,8 +306,8 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     case 2:
                         if (!(source->flags & 0x100000)) {
                             if (D_80140FF8 == 1) {
-                                camera = D_80140FE8_de.object;
-                                Particle_TransformPoint(&camera->particleViewMatrix, &source->pos, &aimDelta);
+                                camera = D_80140FE8_de.camera;
+                                Particle_TransformPoint(camera->worldToView, &source->pos, &aimDelta);
                                 depth = aimDelta.z;
                                 if (depth < 0.0f) {
                                     depth = -depth;

@@ -283,6 +283,7 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
 #include "COMMON/UNUSED.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "gbi.h"
+#include "COMMON/GAMEPLAY_CAMERA.H"
 /* A particle on the world's render list; the list links through next. */
 typedef struct DrawParticle {
     Shared_Particle particle;
@@ -295,18 +296,17 @@ typedef struct ParticleDrawWorld {
     IntrusiveList free;
     IntrusiveList render;
 } ParticleDrawWorld;
-struct Shared_ParticleView;
 extern Gfx *g_displayListCursor;
 extern Globals_func_804220A8_de D_80140FE8_de;
 extern s32 D_80140FF8, D_800D297C;
 extern float D_800C4E54_de;
 extern void Render_SetColorDither(s32 arg0);
 extern void Particle_BuildMatrix(Shared_Particle *particle, void *matrix, void *camera, f32 depth);
-extern s32 func_80296B74_de(f32 (*planes)[4], Box *box);
-extern void Particle_DrawModel(void *arg0, struct Shared_ParticleView *arg1);
-extern void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *view);
+extern s32 func_80296B74_de(CQuatern *planes, Box *box);
+extern void Particle_DrawModel(void *arg0, GameplayCamera *arg1);
+extern void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view);
 extern void func_802A58B0_de(ObjRecAt7528 *arg0, Shared_Particle *arg1, PackedMatrixWords *matrix);
-void Particle_DrawRenderList(ParticleDrawWorld *world, struct Shared_ParticleView *view) {
+void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
     Box box;
     CVector3 transformed;
     DrawParticle *node;
@@ -314,7 +314,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, struct Shared_ParticleVie
     f32 zScale, xyScale, xScale, maximum, height, radius;
     f32 minX, maxX, minY, maxY, minZ, maxZ;
     f32 depth;
-    ParticleView *camera;
+    GameplayCamera *camera;
     u32 skipAttached;
     if (world->render.head != 0) {
         gDPPipeSync(g_displayListCursor++);
@@ -347,10 +347,10 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, struct Shared_ParticleVie
                     box.min.z = minZ;
                     maxZ = node->particle.inst.pos.z + radius;
                     box.max.z = maxZ;
-                    if (minX < view->clipMax.x && view->clipMin.x < maxX &&
-                        minZ < view->clipMax.z && view->clipMin.z < maxZ &&
-                        minY < view->clipMax.y && view->clipMin.y < maxY &&
-                        func_80296B74_de(view->clipMatrix, &box)) {
+                    if (minX < view->clipBounds[1].x && view->clipBounds[0].x < maxX &&
+                        minZ < view->clipBounds[1].z && view->clipBounds[0].z < maxZ &&
+                        minY < view->clipBounds[1].y && view->clipBounds[0].y < maxY &&
+                        func_80296B74_de(view->clipPlanes, &box)) {
                         visible = 1;
                     }
                 } else visible = 1;
@@ -359,8 +359,8 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, struct Shared_ParticleVie
                 if (visible) {
                     if (!built) {
                         if (D_80140FF8 == 1) {
-                            camera = D_80140FE8_de.object;
-                            Particle_TransformPoint(&camera->particleViewMatrix, &node->particle.inst.pos, &transformed);
+                            camera = D_80140FE8_de.camera;
+                            Particle_TransformPoint(camera->worldToView, &node->particle.inst.pos, &transformed);
                             depth = transformed.z;
                             if (depth < 0.0f) depth = -depth;
                             Particle_BuildMatrix(&node->particle, &node->particle.mtx[D_800D297C], camera, depth);
@@ -379,8 +379,8 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, struct Shared_ParticleVie
                 } else {
                     if (!node->particle.drawWhenHidden || built) break;
                     if (D_80140FF8 == 1) {
-                        camera = D_80140FE8_de.object;
-                        Particle_TransformPoint(&camera->particleViewMatrix, &node->particle.inst.pos, &transformed);
+                        camera = D_80140FE8_de.camera;
+                        Particle_TransformPoint(camera->worldToView, &node->particle.inst.pos, &transformed);
                         depth = transformed.z;
                         if (depth < 0.0f) depth = -depth;
                         Particle_BuildMatrix(&node->particle, &node->particle.mtx[D_800D297C], camera, depth);

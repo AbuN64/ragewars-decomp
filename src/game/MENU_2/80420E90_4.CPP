@@ -34,13 +34,13 @@ void func_80422020_de(void) {
 
 void func_804220A8_de(int key) {
  Globals_func_804220A8_de *g = &D_80140FE8_de;
- ParticleView *o = g->object;
+ GameplayCamera *o = g->camera;
  float width = 45.0f;
  float height = D_800DD610[1];
  State_func_804220A8_de *state = D_800E2830;
  int selection;
- o->width = width; o->height = height;
- o->a = state->a; o->b = state->b; o->c = state->c; o->d = state->d;
+ o->fovY = width; o->aspect = height;
+ o->viewWidth = state->a; o->viewHeight = state->b; o->viewLeft = state->c; o->viewTop = state->d;
  selection = func_804030E0_de(key);
  if (!func_8025477C_de()) func_8025476C_de(1);
  Items_SetSelection(&g_world, ~selection, 0);
