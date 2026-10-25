@@ -224,7 +224,7 @@ void Frontend_RefreshPlayerPanel(s32 arg0) {
 
 
         Resmgr_CopyString((&D_800E54A4->players[arg0])->nameText, temp_copy_source);
-        func_8042E9B4_de((&D_800E54A4->players[arg0])->nameText, D_800DDDC8, temp_s1);
+        func_8042E9B4_de((&D_800E54A4->players[arg0])->nameText, g_modeToken, temp_s1);
         var_v0 = arg0 * 8;
         if (D_800E54A4->phase == 6) {
             Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E54A4->players[arg0].menuWidget, MODE_HIDE_ID), 0);

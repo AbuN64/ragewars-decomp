@@ -55,7 +55,7 @@ extern s32 D_8015375C;
 
 extern u8 *D_800D394C[];
 
-extern char D_800DCD9C[];
+extern char g_digitDotFormat[];
 extern s32 Pak_CountLineChars(LayeredText *);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -89,7 +89,7 @@ s32 func_8040B444_de(LayeredText *field, struct Shared_PakMenu *holder) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         func_802658E4_de(text + (Pak_CountLineChars(field) - 2), D_800ED41C, value + 1);
 #else
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 2), D_800DCD9C, value + 1);
+        func_802658E4_de(text + (Pak_CountLineChars(field) - 2), g_digitDotFormat, value + 1);
 #endif
     }
     return 0;

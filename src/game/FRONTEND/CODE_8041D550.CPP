@@ -31,7 +31,7 @@ enum { PROFILE_RESOURCE_498 = 498, PROFILE_RESOURCE_499 = 499, PROFILE_RESOURCE_
 /* The hub spells D_800E3590 as the menu block; this unit keeps its ProfileStatisticsScreen view
    because it reads the 0x32-byte text buffers from 0x110 up, which the hub only pads over. */
 
-extern char D_800DD508_de[];
+extern char g_longAndIntFormats[];
 
 extern char D_800DD50C[];
 
@@ -117,15 +117,15 @@ void func_8041D6A8_de(void) {
     ((Label *) item)->text = func_80424DE8_de(((ProfileStatisticsScreen *) D_800E3590)->index);
     item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_509);
     Frontend_SetWidgetFlag08(item, 1);
-    func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->kills, D_800DD508_de, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.kills);
+    func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->kills, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.kills);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->kills;
     item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_500);
     Frontend_SetWidgetFlag08(item, 1);
-    func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->wins, D_800DD508_de, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.wins);
+    func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->wins, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.wins);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->wins;
     item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_502);
     Frontend_SetWidgetFlag08(item, 1);
-    func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->deaths, D_800DD508_de, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.deaths);
+    func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->deaths, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.deaths);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->deaths;
     score = func_80426004_de(((ProfileStatisticsScreen *) D_800E3590)->index);
     item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_505);

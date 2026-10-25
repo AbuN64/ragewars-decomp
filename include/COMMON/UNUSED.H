@@ -1474,7 +1474,7 @@ extern char D_800D781C[];
 
 extern void *jtbl_800DDEF0[];
 
-extern char D_800DD508_de[];
+extern char g_longAndIntFormats[];
 
 extern char D_800D39A0[];
 

@@ -32,7 +32,7 @@ unsigned char rodata_unresolved_800DD50F[1] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_8041D6A8_E2138_us_rev1.c */
-const unsigned char D_blob_c38a6f3264b76bc1d6df[7] = {
+const unsigned char g_longAndIntFormats[7] = {
     0x25, 0x6C, 0x64, 0x00, 0x25, 0x64, 0x00,
 };
 #endif

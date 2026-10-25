@@ -10,9 +10,9 @@ static inline const char *resultsNumberFormat(void) { return D_800EE170; }
 static inline const char *resultsPercentFormat(void) { return D_800EE174; }
 static inline char *resultsRankText(s32 rank) { return D_800DF964[rank][D_80152789]; }
 #else
-extern const char D_800DDAF0_de[], D_800DDAF4[];
-static inline const char *resultsNumberFormat(void) { return D_800DDAF0_de; }
-static inline const char *resultsPercentFormat(void) { return D_800DDAF4; }
+extern const char g_resultRowIntFormat[], g_resultRowPercentFormat[];
+static inline const char *resultsNumberFormat(void) { return g_resultRowIntFormat; }
+static inline const char *resultsPercentFormat(void) { return g_resultRowPercentFormat; }
 static inline char *resultsRankText(s32 rank) { return D_800DF964[rank][0]; }
 #endif
 #endif

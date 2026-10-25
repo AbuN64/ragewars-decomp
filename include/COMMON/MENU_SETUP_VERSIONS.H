@@ -7,23 +7,23 @@
 #if defined(VERSION_US)
 extern int jtbl_800DDDD0;
 extern int jtbl_800DDE48;
-extern s8 D_800DDDC8[8];
+extern s8 g_modeToken[8];
 #elif defined(VERSION_EU)
 extern int jtbl_800DDDD0;
 extern int jtbl_800DDE48;
-extern s8 D_800DDDC8[8];
+extern s8 g_modeToken[8];
 #elif defined(VERSION_EU_X)
 extern int jtbl_800DDDD0;
 extern int jtbl_800DDE48;
-extern s8 D_800DDDC8[8];
+extern s8 g_modeToken[8];
 #elif defined(VERSION_DE)
 extern int jtbl_800DDDD0;
 extern int jtbl_800DDE48;
-extern s8 D_800DDDC8[8];
+extern s8 g_modeToken[8];
 #else
 extern int jtbl_800DDDD0;
 extern int jtbl_800DDE48;
-extern s8 D_800DDDC8[8];
+extern s8 g_modeToken[8];
 #endif
 #if defined(VERSION_DE)
 extern s32 D_800DF4C4;

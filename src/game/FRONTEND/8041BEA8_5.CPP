@@ -74,7 +74,7 @@ extern char *D_800D36D4;
 extern s32 D_800E28CC, D_800DF4C0,D_80146D60,D_8014AD94;
 
 #if defined(VERSION_DE)
-extern char D_800DD450[];
+extern char g_noteCountIntFormat[];
 
 extern s32 D_800DF4C4;
 #elif defined(VERSION_EU)
@@ -85,11 +85,11 @@ extern char D_800EDAD0[];
 extern s32 D_800EACF4;
 
 #elif defined(VERSION_US)
-extern char D_800DD450[];
+extern char g_noteCountIntFormat[];
 
 extern s32 D_800DE174;
 #else
-extern char D_800DD450[];
+extern char g_noteCountIntFormat[];
 extern s32 D_800E3514;
 
 #endif
@@ -285,7 +285,7 @@ void func_8041BE90_de(void) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     func_802A0C08_de(D_800E3518->text, D_800EDAD0, D_800DF4C0 + 1);
 #else
-    func_802A0C08_de(D_800E3518->text, D_800DD450, D_800DF4C0 + 1);
+    func_802A0C08_de(D_800E3518->text, g_noteCountIntFormat, D_800DF4C0 + 1);
 #endif
     temp_s0->text = D_800E3518->text;
     D_800E3518->state = 3;

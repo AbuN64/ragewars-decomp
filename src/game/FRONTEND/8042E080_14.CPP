@@ -13,7 +13,7 @@ extern char D_800DDEC0[];
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern char D_800EE534[], D_800EE540[];
 #else
-extern char D_800DDEB0_de[];
+extern char g_noteInfoIntFormat[];
 
 #endif
 extern s32 Pak_ReadNoteInfo(s32, s32, s32 *, char *, u8 *, s32 *, char *, char *);
@@ -93,7 +93,7 @@ void func_80433EA0_de(s32 player)
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800DDEC0,
 #else
-D_800DDEB0_de,
+g_noteInfoIntFormat,
 #endif
  size);
                 if (ext[0] != 0) {
@@ -123,7 +123,7 @@ controller_pak_note_label_format,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800DDEC0,
 #else
-D_800DDEB0_de,
+g_noteInfoIntFormat,
 #endif
  0);
     numbered:
@@ -144,7 +144,7 @@ D_800DDEC0,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800DDEC0,
 #else
-D_800DDEB0_de,
+g_noteInfoIntFormat,
 #endif
  size);
             item->text = D_800E54A4->players[player].freeText;
@@ -154,7 +154,7 @@ D_800DDEB0_de,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800DDEC0,
 #else
-D_800DDEB0_de,
+g_noteInfoIntFormat,
 #endif
  Ovlgame_BytesToPakPages(size));
             item->text = D_800E54A4->players[player].usedText;
