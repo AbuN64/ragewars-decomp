@@ -22,7 +22,7 @@
 extern MatchScoreScreen *D_800E53C0;
 extern Shared_Rec3 D_80146398[8];
 extern MenuWidget *func_8040EC30_de(void *, s32);
-extern void func_8040E8D8_de(void *, s32);
+extern void Frontend_SetWidgetFlag08(void *, s32);
 
 /* Calls InitFrontendMenus and func_802A2394_de, then func_80298368_de with 0x11. */
 #if defined(VERSION_EU)
@@ -362,7 +362,7 @@ void func_8042D304_de(s32 player, s32 kind, unsigned short group) {
         break;
     }
     item = func_8040EC30_de(parent, id);
-    func_8040E8D8_de(item, 1);
+    Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0x96;
     rank = record->rank;
     switch (rank) {
@@ -382,7 +382,7 @@ void func_8042D304_de(s32 player, s32 kind, unsigned short group) {
         frame = 0x60;
         break;
     default:
-        func_8040E8D8_de(item, 0);
+        Frontend_SetWidgetFlag08(item, 0);
         frame = 0x60;
         break;
     }
@@ -404,7 +404,7 @@ void func_8042D418_de(s32 arg0) {
         case 3: var_a1=ITEM3; break;
         default: var_a1=ITEM0; break;
         }
-        func_8040E8D8_de(func_8040EC30_de(temp_s1, var_a1), 0);
+        Frontend_SetWidgetFlag08(func_8040EC30_de(temp_s1, var_a1), 0);
         var_s0 += 1;
     } while (var_s0 < 4);
 }
@@ -435,14 +435,14 @@ s32 func_8042D4FC_de(void *window, void *unused1, s32 event) {
                 return 0;
             }
             func_8040C428_de(0);
-            func_8040E8D8_de(window, 1);
+            Frontend_SetWidgetFlag08(window, 1);
             object = &D_80145088;
             Items_ResetActorPools(object, 0);
             func_804499B0_de(object - 0x48, 0, 0);
             func_80286AA8_de(&D_8011FE88, 0, 0);
             ((MatchMenuObjects *)(object))->transition = 8;
         } else {
-            func_8040E8D8_de(window, 0);
+            Frontend_SetWidgetFlag08(window, 0);
             MarkMenuEventHandled();
             if (D_801462C8.controllerMode == 0) {
                 D_80146918 = 0;
@@ -487,13 +487,13 @@ s32 func_8042D690_de(s32 context) {
         if (taken == 1) {
             choice[0] = 0;
             if (choice[-1] != -1) {
-                func_8040E8D8_de(D_800E53C0->buttonAddress, 0);
+                Frontend_SetWidgetFlag08(D_800E53C0->buttonAddress, 0);
                 D_800E53C0->dirty = 0;
                 MarkMenuEventHandled();
                 func_80298368_de(choice[-1]);
                 return 0;
             }
-            func_8040E8D8_de(D_800E53C0->buttonAddress, 1);
+            Frontend_SetWidgetFlag08(D_800E53C0->buttonAddress, 1);
             D_800E53C0->dirty = taken;
         }
     }

@@ -190,9 +190,9 @@ void Menu_ShowSlotNode(sm_dlmultiuser *context, s32 index, Node_func_8041B6E8_de
 
     if (context->locked[index] == 0) {
         if (context->shown[index] != 0) {
-            func_8040E928_de(context->shown[index], 0);
+            Frontend_SetWidgetFlag40(context->shown[index], 0);
         }
-        func_8040E928_de(node, 1);
+        Frontend_SetWidgetFlag40(node, 1);
         if (context->shared == 0) {
             context->shown[index] = node;
         } else {

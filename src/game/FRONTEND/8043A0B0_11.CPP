@@ -52,7 +52,7 @@ extern struct StateFlags D_800E5A06[];
 
 extern struct Resource_func_80419E54_de *func_8040EC30_de(void *, s32);
 
-extern void func_8040E8D8_de(struct Resource_func_80419E54_de *, s32);
+extern void Frontend_SetWidgetFlag08(struct Resource_func_80419E54_de *, s32);
 
 
 /* Releases the object D_800E59E0 holds through Scene_FreeMemory, clears D_800E59E0, calls
@@ -164,10 +164,10 @@ void func_8043BA5C_de(s32 player, s32 column) {
 
     if (column != 5) {
         item = func_8040EC30_de(D_800E59E0->window, D_800E5A06[player * 19 + column].value);
-        func_8040E8D8_de(item, 1);
+        Frontend_SetWidgetFlag08(item, 1);
     }
     item = func_8040EC30_de(D_800E59E0->window, D_800E5A1A[player][column].value);
-    func_8040E928_de(item, 1);
+    Frontend_SetWidgetFlag40(item, 1);
     item->value = 0x96;
     D_800E59E0->panels[player].selection = column;
     Frontend_ShowEquipChoice(player, column, D_800E59E0->panels[player].values[column]);

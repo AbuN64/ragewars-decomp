@@ -7,7 +7,7 @@ extern void *Scene_AllocateMemory(s32);
 extern s32 func_8041B610_de(void *, s32);
 extern void func_8041B6E8_de(void *, s32, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
-extern void func_8040E8D8_de(MenuWidget *, s32);
+extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern void func_802A2360_de(void);
 
 s32 func_8041E3A0_eu(void *handle) {
@@ -23,7 +23,7 @@ s32 func_8041E3A0_eu(void *handle) {
     widget = func_8040EC30_de(handle, 0x38B);
     widget->alpha = 0x8C;
     if (func_802999A0_de(0) == 0x16) {
-        func_8040E8D8_de(widget, 0);
+        Frontend_SetWidgetFlag08(widget, 0);
     }
     D_800E39C0->timer = 0;
     D_800E39C0->selection = 0;
@@ -33,10 +33,10 @@ s32 func_8041E3A0_eu(void *handle) {
     D_800E39C0->step = func_8041EB50_de();
     for (i = 0; i < 3; i++) {
         func_8041E408_de(i);
-        func_8040E8D8_de(func_8040EC30_de(D_800E39C0->rows[i], 0x392), 0);
+        Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E39C0->rows[i], 0x392), 0);
     }
     func_802A2360_de();
-    func_8040E8D8_de(func_8040EC30_de(D_800E39C0->rows[D_800E39C0->selection], 0x392), 1);
+    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E39C0->rows[D_800E39C0->selection], 0x392), 1);
     return 0;
 }
 #endif

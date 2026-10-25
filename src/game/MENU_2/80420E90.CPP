@@ -30,7 +30,7 @@ extern s8 D_80102B0D[];
 
 extern s32 func_80426004_de(s32);
 
-extern void func_8040E950_de(MenuWidget *record, int enable);
+extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 
 #if defined(VERSION_DE)
 enum { MENU_804212A4_941 = 935, MENU_804212A4_943 = 937, MENU_804212A4_945 = 939, MENU_804212A4_948 = 942 };
@@ -47,7 +47,7 @@ enum { MENU_804212A4_941 = 941, MENU_804212A4_943 = 943, MENU_804212A4_945 = 945
 
 
 
-extern void func_8040E8D8_de(void *, s32);
+extern void Frontend_SetWidgetFlag08(void *, s32);
 
 extern void func_80421568_de();
 
@@ -95,21 +95,21 @@ void func_80421234_de(void) {
     if (D_800E4400->full == 1) {
         total = 40;
     }
-    func_8040E950_de(func_8040EC30_de(D_800E4400->window, MENU_804212A4_948), 1);
-    func_8040E950_de(func_8040EC30_de(D_800E4400->window, MENU_804212A4_945), 1);
-    func_8040E950_de(func_8040EC30_de(D_800E4400->window, MENU_804212A4_941), 1);
-    func_8040E950_de(func_8040EC30_de(D_800E4400->window, MENU_804212A4_943), 1);
+    Frontend_SetWidgetFlag100(func_8040EC30_de(D_800E4400->window, MENU_804212A4_948), 1);
+    Frontend_SetWidgetFlag100(func_8040EC30_de(D_800E4400->window, MENU_804212A4_945), 1);
+    Frontend_SetWidgetFlag100(func_8040EC30_de(D_800E4400->window, MENU_804212A4_941), 1);
+    Frontend_SetWidgetFlag100(func_8040EC30_de(D_800E4400->window, MENU_804212A4_943), 1);
     if (total >= 10) {
-        func_8040E950_de(func_8040EC30_de(D_800E4400->window, MENU_804212A4_945), 0);
+        Frontend_SetWidgetFlag100(func_8040EC30_de(D_800E4400->window, MENU_804212A4_945), 0);
     }
     if (total >= 6) {
-        func_8040E950_de(func_8040EC30_de(D_800E4400->window, MENU_804212A4_948), 0);
+        Frontend_SetWidgetFlag100(func_8040EC30_de(D_800E4400->window, MENU_804212A4_948), 0);
     }
     if (total >= 12) {
-        func_8040E950_de(func_8040EC30_de(D_800E4400->window, MENU_804212A4_941), 0);
+        Frontend_SetWidgetFlag100(func_8040EC30_de(D_800E4400->window, MENU_804212A4_941), 0);
     }
     if (total >= 14) {
-        func_8040E950_de(func_8040EC30_de(D_800E4400->window, MENU_804212A4_943), 0);
+        Frontend_SetWidgetFlag100(func_8040EC30_de(D_800E4400->window, MENU_804212A4_943), 0);
     }
 }
 
@@ -117,8 +117,8 @@ void func_804213DC_de(void) {
     MenuWidget *item;
     s32 key;
 
-    func_8040E8D8_de(D_800E4400->pad, 1);
-    func_8040E8D8_de(func_8040EC30_de(D_800E4400->window, MENU_8042144C_939), 0);
+    Frontend_SetWidgetFlag08(D_800E4400->pad, 1);
+    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E4400->window, MENU_8042144C_939), 0);
     D_800E4400->mode = 1;
     D_800E4400->length = 8;
     D_800E4400->value = 0;

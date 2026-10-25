@@ -14,7 +14,7 @@
 extern char D_80102B00[];
 extern s8 D_80102B0D[];
 extern struct Item_func_80433BCC_de *func_8040EC30_de(void *, s32);
-extern void func_8040E950_de(MenuWidget *record, int enable);
+extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 extern struct Item_func_80433BCC_de *Menu_GetSlotValue(void *, s32);
 void func_80433BCC_de(s32 player) {
     struct Item_func_80433BCC_de *item;
@@ -61,7 +61,7 @@ void func_80433BCC_de(s32 player) {
             break;
         }
         item = func_8040EC30_de(D_800E54A4->window, id);
-        func_8040E950_de(item, 0);
+        Frontend_SetWidgetFlag100(item, 0);
         label = item->label;
         if (player != -1 && item == Menu_GetSlotValue(D_800E54A4->list, player)) {
             label->unk38 = D_800E54A4->players[player].slots[D_800E54A4->players[player].chosen];

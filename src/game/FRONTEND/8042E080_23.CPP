@@ -61,7 +61,7 @@ s32 func_8042E460_de(u8 *request) {
             name = joinName16();
             break;
         default:
-            name = joinTeamName((u8)player->team * 17 + func_8041F140_de(player->character));
+            name = joinTeamName((u8)player->team * 17 + Frontend_FindKeyIndex(player->character));
             break;
         }
         Resmgr_CopyString(player->name, name);
@@ -117,7 +117,7 @@ void Frontend_SetupRandomTeams(void) {
         player->locked = 0;
         player->team = 2;
         player->variant = Nav_NextRandom() % 3;
-        Resmgr_CopyString(player->name, joinTeamName((s8)player->variant * 17 + func_8041F140_de(player->character)));
+        Resmgr_CopyString(player->name, joinTeamName((s8)player->variant * 17 + Frontend_FindKeyIndex(player->character)));
     }
     for (i = 0; i < playerCount - unlockedCount; i++) {
         player = &game->playerSettings[4 + unlockedCount + i];
@@ -126,7 +126,7 @@ void Frontend_SetupRandomTeams(void) {
         player->locked = 1;
         player->team = 2;
         player->variant = Nav_NextRandom() % 3;
-        Resmgr_CopyString(player->name, joinTeamName((s8)player->variant * 17 + func_8041F140_de(player->character)));
+        Resmgr_CopyString(player->name, joinTeamName((s8)player->variant * 17 + Frontend_FindKeyIndex(player->character)));
     }
     for (i = 0; i < 8; i++) {
         player = &game->playerSettings[i];

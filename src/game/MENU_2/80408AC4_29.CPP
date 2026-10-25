@@ -125,7 +125,7 @@ void func_80426310_de(void) {
         "lui        $v0, %hi(D_800E4690)\n"
         "lw         $v0, %lo(D_800E4690)($v0)\n"
         "addu       $a1, $s0, $zero\n"
-        "jal        func_8040E8D8_de\n"
+        "jal        Frontend_SetWidgetFlag08\n"
         "sw        $a0, 0x994($v0)\n"
         "addu       $a0, $s1, $zero\n"
         "jal        func_8040EC30_de\n"

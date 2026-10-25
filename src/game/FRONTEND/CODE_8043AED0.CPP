@@ -28,7 +28,7 @@
 
 extern struct StateFlags D_800E5A06[][19];
 
-extern void func_8040E8D8_de(void *, s32);
+extern void Frontend_SetWidgetFlag08(void *, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
 extern FourPlayerResultsScreen *D_800E59E0;
 
@@ -71,10 +71,10 @@ void func_8043ACF0_de(s32 player, s32 direction) {
 
     column = D_800E59E0->panels[player].selection;
     item = func_8040EC30_de(D_800E59E0->window, D_800E5A1A[player][column].value);
-    func_8040E928_de(item, 0);
+    Frontend_SetWidgetFlag40(item, 0);
     item->alpha = 0x23;
     if (column != 5) {
-        func_8040E8D8_de(func_8040EC30_de(D_800E59E0->window, D_800E5A06[player][column].value), 0);
+        Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E59E0->window, D_800E5A06[player][column].value), 0);
     }
     if (direction == 1) {
         if (column == 0) {
@@ -171,34 +171,34 @@ void func_8043B0CC_de(s32 player) {
     s32 i;
 
     D_800E59E0->panels[player].state = 1;
-    func_8040E8D8_de(func_8040EC30_de(D_800E59E0->window, D_800E59E6[player][0].value), 0);
+    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E59E0->window, D_800E59E6[player][0].value), 0);
     switch (D_800E59E0->panels[player].mode) {
     case 0:
-        func_8040E8D8_de(func_8040EC30_de(D_800E59E0->window, D_800E59EE[player][5].value), 0);
+        Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E59E0->window, D_800E59EE[player][5].value), 0);
         item = func_8040EC30_de(D_800E59E0->window, D_800E5A1A[player][5].value);
-        func_8040E8D8_de(item, 1);
+        Frontend_SetWidgetFlag08(item, 1);
         item->alpha = 0x23;
         break;
     case 1:
         for (i = 0; i < 3; i++) {
-            func_8040E8D8_de(func_8040EC30_de(D_800E59E0->window, D_800E59EE[player][i].value), 0);
+            Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E59E0->window, D_800E59EE[player][i].value), 0);
             item = func_8040EC30_de(D_800E59E0->window, D_800E5A1A[player][i].value);
-            func_8040E8D8_de(item, 1);
+            Frontend_SetWidgetFlag08(item, 1);
             item->alpha = 0x23;
             Frontend_ShowEquipChoice(player, i, D_800E59E0->panels[player].values[i]);
         }
-        func_8040E8D8_de(func_8040EC30_de(D_800E59E0->window, D_800E59EE[player][5].value), 0);
+        Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E59E0->window, D_800E59EE[player][5].value), 0);
         item = func_8040EC30_de(D_800E59E0->window, D_800E5A1A[player][5].value);
-        func_8040E8D8_de(item, 1);
+        Frontend_SetWidgetFlag08(item, 1);
         item->alpha = 0x23;
-        func_8040E8D8_de(D_800E59E0->panels[player].item, 0);
+        Frontend_SetWidgetFlag08(D_800E59E0->panels[player].item, 0);
         break;
     case 2:
     default:
         for (i = 0; i < 6; i++) {
-            func_8040E8D8_de(func_8040EC30_de(D_800E59E0->window, D_800E59EE[player][i].value), 0);
+            Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E59E0->window, D_800E59EE[player][i].value), 0);
             item = func_8040EC30_de(D_800E59E0->window, D_800E5A1A[player][i].value);
-            func_8040E8D8_de(item, 1);
+            Frontend_SetWidgetFlag08(item, 1);
             item->alpha = 0x23;
             Frontend_ShowEquipChoice(player, i, D_800E59E0->panels[player].values[i]);
         }
@@ -206,12 +206,12 @@ void func_8043B0CC_de(s32 player) {
     }
     for (i = 0; i < 5; i++) {
         item = func_8040EC30_de(D_800E59E0->window, D_800E5A06[player][i].value);
-        func_8040E8D8_de(item, 0);
+        Frontend_SetWidgetFlag08(item, 0);
         item->alpha = 0x37;
     }
     item = func_8040EC30_de(D_800E59E0->window,
                          D_800E5A1A[player][D_800E59E0->panels[player].selection].value);
-    func_8040E928_de(item, 1);
+    Frontend_SetWidgetFlag40(item, 1);
     item->alpha = 0x96;
 }
 
@@ -233,7 +233,7 @@ void Frontend_ShowEquipChoice(s32 player, s32 category, s32 choice)
     if (D_800E59E0->panels[player].mode == 0) {
         return;
     }
-    func_8040E8D8_de(D_800E59E0->panels[player].item, 1);
+    Frontend_SetWidgetFlag08(D_800E59E0->panels[player].item, 1);
     if (D_800E59E0->panels[player].mode == 1) {
         switch (category) {
         case 0:
@@ -247,7 +247,7 @@ void Frontend_ShowEquipChoice(s32 player, s32 category, s32 choice)
             break;
         default:
             func_80439C80_de(D_800E59E0->badges[player], 0);
-            func_8040E8D8_de(D_800E59E0->panels[player].item, 0);
+            Frontend_SetWidgetFlag08(D_800E59E0->panels[player].item, 0);
             return;
         }
     } else {
@@ -266,7 +266,7 @@ void Frontend_ShowEquipChoice(s32 player, s32 category, s32 choice)
         case 5:
         default:
             func_80439C80_de(D_800E59E0->badges[player], 0);
-            func_8040E8D8_de(D_800E59E0->panels[player].item, 0);
+            Frontend_SetWidgetFlag08(D_800E59E0->panels[player].item, 0);
             return;
         }
     }

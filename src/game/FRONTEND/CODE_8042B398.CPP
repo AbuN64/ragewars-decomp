@@ -83,8 +83,8 @@ s32 func_8042B2DC_de(void) {
 void func_8042B2E4_de(void) {
     D_800E4F60->unk454->alpha = 0xFF;
     D_800E4F60->unk450->alpha = 0xFF;
-    func_8040E8D8_de(D_800E4F60->unk450, 1);
-    func_8040E8D8_de(D_800E4F60->unk454, 1);
+    Frontend_SetWidgetFlag08(D_800E4F60->unk450, 1);
+    Frontend_SetWidgetFlag08(D_800E4F60->unk454, 1);
     D_800E4F60->unk46C = 0;
 }
 
@@ -141,11 +141,11 @@ s32 Frontend_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
     D_800E4F60->unk3DC = 8;
     func_8042A7B4_de(0x41);
 
-    func_8040E8D8_de(D_800E4F60->unk440, 0);
-    func_8040E8D8_de(D_800E4F60->unk444, 0);
-    func_8040E8D8_de(D_800E4F60->unk448, 0);
-    func_8040E8D8_de(D_800E4F60->label, 0);
-    func_8040E8D8_de(D_800E4F60->unk3F0, 0);
+    Frontend_SetWidgetFlag08(D_800E4F60->unk440, 0);
+    Frontend_SetWidgetFlag08(D_800E4F60->unk444, 0);
+    Frontend_SetWidgetFlag08(D_800E4F60->unk448, 0);
+    Frontend_SetWidgetFlag08(D_800E4F60->label, 0);
+    Frontend_SetWidgetFlag08(D_800E4F60->unk3F0, 0);
 
     D_800E4F60->unk44C->alpha = 0x5A;
     Render_PlayFlatSound(0xE7C);
@@ -192,10 +192,10 @@ s32 func_8042B4D4_de(void *unused0, void *unused1, void *unused2, s32 event) {
     if (SCR4D4->selection != 0) {
         return 0;
     }
-    func_8040E8D8_de(SCR4D4->left, 1);
-    func_8040E8D8_de(SCR4D4->marker, 1);
+    Frontend_SetWidgetFlag08(SCR4D4->left, 1);
+    Frontend_SetWidgetFlag08(SCR4D4->marker, 1);
     SCR4D4->marker->x = SCR4D4->category * 34 + 0x7C;
-    func_8040E8D8_de(SCR4D4->right, 0);
+    Frontend_SetWidgetFlag08(SCR4D4->right, 0);
     func_80439C80_de(SCR4D4->view, SCR4D4->category + 0xEA6);
     return 0;
 }
@@ -253,9 +253,9 @@ moved:
     D_800E4F60->unk464 = 0;
     D_800E4F60->item->alpha = 0x41;
     func_8042A990_de();
-    func_8040E8D8_de(D_800E4F60->unk440, 0);
-    func_8040E8D8_de(D_800E4F60->unk444, 1);
-    func_8040E8D8_de(D_800E4F60->unk448, 0);
+    Frontend_SetWidgetFlag08(D_800E4F60->unk440, 0);
+    Frontend_SetWidgetFlag08(D_800E4F60->unk444, 1);
+    Frontend_SetWidgetFlag08(D_800E4F60->unk448, 0);
     return 0;
 }
 
@@ -296,7 +296,7 @@ s32 func_8042B78C_de(void *unused0, void *unused1, void *unused2, s32 event) {
     func_8042A990_de();
     if (SCR78C->selection == 0) {
         func_80439C80_de(SCR78C->view, SCR78C->category + 0xEA6);
-        func_8040E8D8_de(SCR78C->marker, 1);
+        Frontend_SetWidgetFlag08(SCR78C->marker, 1);
         SCR78C->marker->x = SCR78C->category * 34 + 0x7C;
     }
     return 0;
@@ -342,7 +342,7 @@ s32 func_8042B904_de(void *unused0, void *unused1, void *unused2, s32 event) {
     func_8042A990_de();
     if (SCR904->selection == 0) {
         func_80439C80_de(SCR904->view, SCR904->category + 0xEA6);
-        func_8040E8D8_de(SCR904->marker, 1);
+        Frontend_SetWidgetFlag08(SCR904->marker, 1);
         SCR904->marker->x = SCR904->category * 34 + 0x7C;
     }
     return 0;
@@ -422,7 +422,7 @@ extern void func_80425D14_de(s32);
 extern void Frontend_FillResultRows(void);
 extern void func_8042CE74_de(void);
 
-extern void func_8040E950_de(void *, s32);
+extern void Frontend_SetWidgetFlag100(void *, s32);
 extern s32 func_8040EBD0_de(void *);
 extern s32 func_8042AF28_de(void);
 extern s32 func_8042AFB8_de(void);
@@ -441,7 +441,7 @@ s32 Frontend_OpenResultsScreen(void *root) {
 
     D_800E53C0 = (void *)Scene_AllocateMemory(0x330);
     D_800E53C0->unkE0 = root;
-    func_8040E8D8_de(root, 0);
+    Frontend_SetWidgetFlag08(root, 0);
     func_8043C210_de(D_800E53C0->transition, 0x67, 0, 0, 0);
     func_8043C278_de(D_800E53C0->transition);
     D_800E53C0->active = 1;
@@ -486,15 +486,15 @@ s32 Frontend_OpenResultsScreen(void *root) {
             screen->count = 0;
             func_8042CC74_de();
             item = func_8040EC30_de(root, 0x266 + RESULTS_MENU_SHIFT);
-            func_8040E8D8_de(item, 1);
+            Frontend_SetWidgetFlag08(item, 1);
             item->alpha = 115;
             item->text = resultsUnavailable(slot);
-            func_8040E8D8_de(func_8040EC30_de(root, RESULTS_RIGHT_ITEM), 0);
+            Frontend_SetWidgetFlag08(func_8040EC30_de(root, RESULTS_RIGHT_ITEM), 0);
         } else if (screen->selection != -1) {
             screen->first = 0;
             screen->count = 0;
             func_8042CC74_de();
-            func_8040E8D8_de(func_8040EC30_de(root, RESULTS_RIGHT_ITEM), 0);
+            Frontend_SetWidgetFlag08(func_8040EC30_de(root, RESULTS_RIGHT_ITEM), 0);
             func_8042CE74_de();
         } else {
             Frontend_FillResultRows();
@@ -504,19 +504,19 @@ s32 Frontend_OpenResultsScreen(void *root) {
     func_8041B110_de(0x237 + RESULTS_MENU_SHIFT);
     func_8041B110_de(0x238 + RESULTS_MENU_SHIFT);
     func_8041B110_de(0x23C + RESULTS_MENU_SHIFT);
-    func_8040E950_de(func_8040EC30_de(root, 0x238 + RESULTS_MENU_SHIFT), 1);
+    Frontend_SetWidgetFlag100(func_8040EC30_de(root, 0x238 + RESULTS_MENU_SHIFT), 1);
     i = 0;
     offset = 0;
     do {
         i++;
         if (D_80102B0D[offset] >= 0 && D_800FEB0E[offset] == 0) {
-            func_8040E950_de(func_8040EC30_de(root, 0x238 + RESULTS_MENU_SHIFT), 0);
+            Frontend_SetWidgetFlag100(func_8040EC30_de(root, 0x238 + RESULTS_MENU_SHIFT), 0);
             break;
         }
         offset += 400;
     } while (i < 4);
     if (func_8040EBD0_de(func_8040EC30_de(root, 0x238 + RESULTS_MENU_SHIFT)) == 0 && func_8042AF28_de() == 1 && func_8042AFB8_de() == 0) {
-        func_8040E950_de(func_8040EC30_de(root, 0x238 + RESULTS_MENU_SHIFT), 1);
+        Frontend_SetWidgetFlag100(func_8040EC30_de(root, 0x238 + RESULTS_MENU_SHIFT), 1);
     }
     item = func_8040EC30_de(D_800E53C0->unkE0, RESULTS_HEADING1);
     if (D_8014DD98.kind == 0) item->text = resultsFirstHeading();
@@ -548,7 +548,7 @@ extern func_8042CE54_S1 *D_800E53C0;
 extern ResourceBank D_800E12D2[];
 extern struct RowRecAt54 D_800E3A58[];
 extern s32 D_800E01B0_de[],D_800FF140_de[],D_800FEAE0[];
-extern s32 func_8041F140_de(s32);
+extern s32 Frontend_FindKeyIndex(s32);
 extern char *func_802A0494_de(char *);
 extern char *Resmgr_CopyString(char *,char *);
 extern char *func_80424DE8_de(s32);
@@ -568,18 +568,18 @@ void Frontend_FillResultRows(void) {
         record = &D_80146398[player];
 
         widget = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[0]);
-        func_8040E8D8_de(widget, 1);
+        Frontend_SetWidgetFlag08(widget, 1);
         widget->alpha = 0x96;
         pending = widget;
-        pending->value = D_800E3A58[func_8041F140_de(record->kind)].portrait;
+        pending->value = D_800E3A58[Frontend_FindKeyIndex(record->kind)].portrait;
 
         widget = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[2]);
-        func_8040E8D8_de(widget, 1);
+        Frontend_SetWidgetFlag08(widget, 1);
         widget->alpha = 0x19;
 
         widget = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[4]);
         widget->alpha = 0xAF;
-        func_8040E8D8_de(widget, 1);
+        Frontend_SetWidgetFlag08(widget, 1);
         if (record->out == 0) {
             widget->text = D_80102B00[player].name;
         } else {
@@ -590,29 +590,29 @@ void Frontend_FillResultRows(void) {
 
         widget = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[6]);
         widget->alpha = 0x73;
-        func_8040E8D8_de(widget, 1);
+        Frontend_SetWidgetFlag08(widget, 1);
         if (record->out == 0) widget->text = func_80424DE8_de(player);
         else widget->text = resultsRankText(record->rank);
 
         widget = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[8]);
         widget->alpha = 0xAF;
-        func_8040E8D8_de(widget, 1);
+        Frontend_SetWidgetFlag08(widget, 1);
         func_802A0C08_de(D_800E53C0->killText[row], resultsNumberFormat(), record->kills);
         widget->text = D_800E53C0->killText[row];
 
         widget = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[10]);
         widget->alpha = 0xAF;
-        func_8040E8D8_de(widget, 1);
+        Frontend_SetWidgetFlag08(widget, 1);
         func_802A0C08_de(D_800E53C0->scoreText[row], resultsNumberFormat(), record->score + record->total);
         *&widget->text = D_800E53C0->scoreText[row];
 
         if (D_8014DD98.kind == 0) {
-            func_8040E8D8_de(func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[12]), 0);
+            Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[12]), 0);
             func_8042D304_de(player, row, RESULTS_RANK_GROUP);
         } else {
             widget = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[12]);
             widget->alpha = 0xAF;
-            func_8040E8D8_de(widget, 1);
+            Frontend_SetWidgetFlag08(widget, 1);
             attempts = D_800FF140_de[player];
             percent = 0;
             if (attempts > 0) percent = D_800FEAE0[player] * 100 / attempts;
@@ -621,12 +621,12 @@ void Frontend_FillResultRows(void) {
         }
 
         if (D_8014DD98.kind == 3) {
-            func_8040E8D8_de(func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[14]), 0);
+            Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[14]), 0);
             func_8042D304_de(player, row, RESULTS_SECONDARY_GROUP);
         } else {
             widget = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[14]);
             widget->alpha = 0xAF;
-            func_8040E8D8_de(widget, 1);
+            Frontend_SetWidgetFlag08(widget, 1);
             pending = widget;
             switch (D_8014DD98.kind) {
             case 0:
@@ -643,20 +643,20 @@ void Frontend_FillResultRows(void) {
         }
 
         widget = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[16]);
-        func_8040E8D8_de(widget, 0);
+        Frontend_SetWidgetFlag08(widget, 0);
         widget->alpha = 0x96;
         widget = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[18]);
-        func_8040E8D8_de(widget, 0);
+        Frontend_SetWidgetFlag08(widget, 0);
         widget->alpha = 0x96;
         if (record->out == 0) {
             if (D_800E53C0->icons[player][0] != -1) {
                 widget = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[16]);
-                func_8040E8D8_de(widget, 1);
+                Frontend_SetWidgetFlag08(widget, 1);
                 widget->value = D_800E01B0_de[D_800E53C0->icons[player][0]];
             }
             if (D_800E53C0->icons[player][1] != -1) {
                 widget = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[18]);
-                func_8040E8D8_de(widget, 1);
+                Frontend_SetWidgetFlag08(widget, 1);
                 widget->value = D_800E01B0_de[D_800E53C0->icons[player][1]];
             }
         }

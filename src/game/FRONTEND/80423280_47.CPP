@@ -39,7 +39,7 @@ extern void *Scene_AllocateMemory(s32 size);
 extern void func_8043C210_de(void *, s32, s32, s32, s32);
 extern s32 func_8041EAC4_de(void);
 extern void *func_8040EC30_de(void *root, s32 identifier);
-extern void func_8040E950_de(void *record, s32 enable);
+extern void Frontend_SetWidgetFlag100(void *record, s32 enable);
 extern void *func_802A1990_de(s32, s32, s32, s32, s32);
 extern void *func_8041ABC0_de(s32, s32);
 extern void Menu_AppendListText(void *, char *);
@@ -56,17 +56,17 @@ s32 Frontend_CreateMatchOptions(void *root) {
     D_800E4EF0->countCap = func_8041EAC4_de();
     switch (D_8014DD98.kind) {
     case 1:
-        func_8040E950_de(func_8040EC30_de(root, OPTIONS_TEXT + 0), 1);
-        func_8040E950_de(func_8040EC30_de(root, OPTIONS_TEXT + 4), 1);
+        Frontend_SetWidgetFlag100(func_8040EC30_de(root, OPTIONS_TEXT + 0), 1);
+        Frontend_SetWidgetFlag100(func_8040EC30_de(root, OPTIONS_TEXT + 4), 1);
         break;
     case 0:
-        func_8040E950_de(func_8040EC30_de(root, OPTIONS_TEXT + 6), 1);
-        func_8040E950_de(func_8040EC30_de(root, OPTIONS_TEXT + 4), 1);
+        Frontend_SetWidgetFlag100(func_8040EC30_de(root, OPTIONS_TEXT + 6), 1);
+        Frontend_SetWidgetFlag100(func_8040EC30_de(root, OPTIONS_TEXT + 4), 1);
         break;
     case 2:
     case 3:
-        func_8040E950_de(func_8040EC30_de(root, OPTIONS_TEXT + 0), 1);
-        func_8040E950_de(func_8040EC30_de(root, OPTIONS_TEXT + 6), 1);
+        Frontend_SetWidgetFlag100(func_8040EC30_de(root, OPTIONS_TEXT + 0), 1);
+        Frontend_SetWidgetFlag100(func_8040EC30_de(root, OPTIONS_TEXT + 6), 1);
         break;
     }
     D_800E4EF0->widget24 = func_802A1990_de(OPTIONS_TEXT + 4, OPTIONS_TEXT + 5, 0, 100, 1);

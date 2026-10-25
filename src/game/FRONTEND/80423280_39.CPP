@@ -54,7 +54,7 @@ extern struct ResultsHeadingRecord D_80102B00[];
 extern struct ResultsHeadingCharacter D_800DFA6C[];
 
 extern void Resmgr_CopyString(char *, char *);
-extern s32 func_8041F140_de(s32);
+extern s32 Frontend_FindKeyIndex(s32);
 extern void func_802A0C08_de(char *, char *, ...);
 
 void func_80427B08_de(void) {
@@ -71,12 +71,12 @@ void func_80427B08_de(void) {
     case 1:
         Resmgr_CopyString(D_800E4690->heading, func_80411D78_de(NAME_PHRASE));
         func_8042E9B4_de(D_800E4690->heading, D_800DD9BC,
-                      RES_NAME(func_8041F140_de(settings->playerSettings[D_800E4690->record].character)));
+                      RES_NAME(Frontend_FindKeyIndex(settings->playerSettings[D_800E4690->record].character)));
         break;
     case 3:
         Resmgr_CopyString(D_800E4690->time, func_80411D78_de(TIME_PHRASE));
         item = (struct Label *) func_8040EC30_de(D_800E4690->window, TIME_ITEM);
-        func_8040E8D8_de(item, 1);
+        Frontend_SetWidgetFlag08(item, 1);
         item->text = D_800E4690->time;
         time = D_80102B00[D_800E4690->record].times[D_800E4690->stage];
         if (time > 0) {

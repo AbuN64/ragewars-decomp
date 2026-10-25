@@ -110,30 +110,30 @@ void func_8041D6A8_de(void) {
     s32 score;
 
     item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_499);
-    func_8040E8D8_de(item, 1);
+    Frontend_SetWidgetFlag08(item, 1);
     ((Label *) item)->text = D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].name;
     item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_498);
-    func_8040E8D8_de(item, 1);
+    Frontend_SetWidgetFlag08(item, 1);
     ((Label *) item)->text = func_80424DE8_de(((ProfileStatisticsScreen *) D_800E3590)->index);
     item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_509);
-    func_8040E8D8_de(item, 1);
+    Frontend_SetWidgetFlag08(item, 1);
     func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->kills, D_800DD508_de, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.kills);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->kills;
     item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_500);
-    func_8040E8D8_de(item, 1);
+    Frontend_SetWidgetFlag08(item, 1);
     func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->wins, D_800DD508_de, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.wins);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->wins;
     item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_502);
-    func_8040E8D8_de(item, 1);
+    Frontend_SetWidgetFlag08(item, 1);
     func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->deaths, D_800DD508_de, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.deaths);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->deaths;
     score = func_80426004_de(((ProfileStatisticsScreen *) D_800E3590)->index);
     item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_505);
-    func_8040E8D8_de(item, 1);
+    Frontend_SetWidgetFlag08(item, 1);
     func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->score, D_800DD50C, score);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->score;
     item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_506);
-    func_8040E8D8_de(item, 1);
+    Frontend_SetWidgetFlag08(item, 1);
     func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->count, D_800DD50C, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].count);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->count;
 }
@@ -169,10 +169,10 @@ void Frontend_ShowUnlockedEntries(s32 style) {
     for (i = 0; i < 50; i++) {
         node = func_8040EC30_de(D_800E3590->root, (u16)D_800DF544[i].id);
         if (func_80265650_de(&D_800FEB4A[D_800E3590->unk268], i) == 1) {
-            func_8040E8D8_de(node, 1);
+            Frontend_SetWidgetFlag08(node, 1);
             node->alpha = style;
         } else {
-            func_8040E8D8_de(node, 0);
+            Frontend_SetWidgetFlag08(node, 0);
         }
     }
 }

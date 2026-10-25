@@ -23,7 +23,7 @@ extern MenuWidget *func_8040EC30_de(void *, s32);
    its own pointer, as the cartridge's strength-reduced dispatch does. */
 
 
-extern void func_8040E8D8_de(void *, s32);
+extern void Frontend_SetWidgetFlag08(void *, s32);
 
 #if defined(VERSION_DE)
 enum { RESULTS_OPTION_329 = 327, RESULTS_OPTION_331 = 329, RESULTS_OPTION_332 = 330, RESULTS_OPTION_333 = 331, RESULTS_OPTION_334 = 332, RESULTS_OPTION_335 = 333 };
@@ -160,7 +160,7 @@ void func_80428700_de(void) {
             id = RESULTS_OPTION_335;
             break;
         }
-        func_8040E8D8_de(func_8040EC30_de(func_8040EC30_de(D_800E4690->parent, id), RESULTS_OPTION_331), 1);
+        Frontend_SetWidgetFlag08(func_8040EC30_de(func_8040EC30_de(D_800E4690->parent, id), RESULTS_OPTION_331), 1);
     }
 }
 

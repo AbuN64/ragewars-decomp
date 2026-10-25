@@ -35,7 +35,7 @@ extern s32 func_80435128_de(s32);
 extern void func_8043599C_de(s32, s32, s32);
 extern void func_804356BC_de(s32);
 extern void func_8043577C_de(s32);
-extern void func_8040E8D8_de(void *, s32);
+extern void Frontend_SetWidgetFlag08(void *, s32);
 
 extern s32 Pak_DeleteNote(s32, s32);
 
@@ -738,11 +738,11 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         func_8043599C_de(p, D_800E54A4->players[p].choice, i);
         func_804356BC_de(i);
 #if defined(VERSION_DE)
-        func_8040E8D8_de(func_8040EC30_de((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2C9), 1);
+        Frontend_SetWidgetFlag08(func_8040EC30_de((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2C9), 1);
 #elif defined(VERSION_EU_X)
-        func_8040E8D8_de(func_8040EC30_de((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2F9), 1);
+        Frontend_SetWidgetFlag08(func_8040EC30_de((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2F9), 1);
 #else
-        func_8040E8D8_de(func_8040EC30_de((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2B1), 1);
+        Frontend_SetWidgetFlag08(func_8040EC30_de((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2B1), 1);
 #endif
         D_800E54A4->players[p].used[D_800E54A4->players[p].choice] = 0;
         D_800E54A4->links[i].state = 0;

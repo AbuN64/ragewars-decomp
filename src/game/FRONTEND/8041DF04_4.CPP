@@ -24,7 +24,7 @@ s32 func_8041DFC0_us_rev1(void *arg0) {
     item = func_8040EC30_de(arg0, 0x38B);
     item->alpha = 0x8C;
     if (func_802999A0_de(0) == 22) {
-        func_8040E8D8_de(item, 0);
+        Frontend_SetWidgetFlag08(item, 0);
     }
 
     D_800E39C0->timer = 0;
@@ -40,13 +40,13 @@ s32 func_8041DFC0_us_rev1(void *arg0) {
     for (row = 0; row < 3; row++) {
         func_8041E408_de(row);
         item = func_8040EC30_de(D_800E39C0->rows[row], 0x392);
-        func_8040E8D8_de(item, 0);
+        Frontend_SetWidgetFlag08(item, 0);
     }
 
     func_802A2360_de();
 
     item = func_8040EC30_de(D_800E39C0->rows[D_800E39C0->selection], 0x392);
-    func_8040E8D8_de(item, 1);
+    Frontend_SetWidgetFlag08(item, 1);
     return 0;
 }
 #endif

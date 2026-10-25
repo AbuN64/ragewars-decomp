@@ -84,12 +84,12 @@ s32 func_80297A34_de(s32 event,s32 value,s32 amount,s32 context) {
                     break;
                 case 15:
                     value=0;
-                    func_8040E928_de(element,1);
+                    Frontend_SetWidgetFlag40(element,1);
                     result=value;
                     break;
                 case 16:
                     value=0;
-                    func_8040E928_de(element,value);
+                    Frontend_SetWidgetFlag40(element,value);
                     result=value;
                     break;
                 case 3: case 4: case 9: case 10: case 11: case 12: case 13: case 14:

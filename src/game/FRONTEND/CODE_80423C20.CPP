@@ -66,8 +66,8 @@ extern void func_802A2360_de(void);
 extern void *Scene_AllocateMemory(s32);
 extern s32 func_80265650_de(u8 *, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
-extern void func_8040E950_de(void *, s32);
-extern void func_8040E8D8_de(void *, s32);
+extern void Frontend_SetWidgetFlag100(void *, s32);
+extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void func_8041B110_de(s32);
 extern void func_8041DB30_de(int *);
 extern s32 func_80264614_de(s32);
@@ -137,8 +137,8 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     case 2:
         func_8041B110_de(0x48);
         widget = func_8040EC30_de(menu, 0x4A);
-        func_8040E950_de(widget, 1);
-        func_8040E8D8_de(widget, 0);
+        Frontend_SetWidgetFlag100(widget, 1);
+        Frontend_SetWidgetFlag08(widget, 0);
         title->y = 0x33;
         title->height = 0x78;
         break;
@@ -150,11 +150,11 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
         break;
     default:
         widget = func_8040EC30_de(menu, 0x48);
-        func_8040E950_de(widget, 1);
-        func_8040E8D8_de(widget, 0);
+        Frontend_SetWidgetFlag100(widget, 1);
+        Frontend_SetWidgetFlag08(widget, 0);
         widget = func_8040EC30_de(menu, 0x4A);
-        func_8040E950_de(widget, 1);
-        func_8040E8D8_de(widget, 0);
+        Frontend_SetWidgetFlag100(widget, 1);
+        Frontend_SetWidgetFlag08(widget, 0);
         title->y = 0x3C;
         title->height = 0x68;
         break;
@@ -162,11 +162,11 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     i = -1;
     func_8041DB30_de(&i);
     if (i < 0) {
-        func_8040E950_de(func_8040EC30_de(menu, 0x4C), 1);
+        Frontend_SetWidgetFlag100(func_8040EC30_de(menu, 0x4C), 1);
     }
     mode = func_80264614_de(0);
     if (mode != 1 || func_80264614_de(1) != mode) {
-        func_8040E950_de(func_8040EC30_de(menu, 0x49), 1);
+        Frontend_SetWidgetFlag100(func_8040EC30_de(menu, 0x49), 1);
     }
     D_800E4600->music = func_8041A280_de(0x42, 0x24);
     func_8041A488_de(D_800E4600->music);

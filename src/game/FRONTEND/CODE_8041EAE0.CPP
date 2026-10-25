@@ -60,7 +60,7 @@ extern void func_802998A8_de();
 /* Steps the selected menu item backwards and updates its display state. */
 
 
-extern void MarkMenuEventHandled(void),func_8040E8D8_de(MenuWidget *,int);
+extern void MarkMenuEventHandled(void),Frontend_SetWidgetFlag08(MenuWidget *,int);
 
 #if defined(VERSION_DE)
 enum { MENU_RESOURCE = 0x38c };
@@ -238,7 +238,7 @@ s32 func_8041EE08_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
         temp_v0 = func_8040EC30_de(D_800E39C0->rows[idx], 0x396);
 #endif
         temp_v0->alpha = 0xFF;
-        func_8040E8D8_de(temp_v0, 0);
+        Frontend_SetWidgetFlag08(temp_v0, 0);
         temp_v0_2 = D_800E39C0->selection - 1;
         D_800E39C0->selection = temp_v0_2;
         if (temp_v0_2 < 0) {
@@ -253,7 +253,7 @@ s32 func_8041EE08_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
         temp_v0_3 = func_8040EC30_de(D_800E39C0->rows[idx], 0x396);
 #endif
         temp_v0_3->alpha = 0xFF;
-        func_8040E8D8_de(temp_v0_3, 1);
+        Frontend_SetWidgetFlag08(temp_v0_3, 1);
         D_800E39C0->timer = 0;
         Render_PlayFlatSound(0xE80);
         return 0;
@@ -272,14 +272,14 @@ s32 func_8041EED0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
         MarkMenuEventHandled();
         temp_v0 = func_8040EC30_de(D_800E39C0->rows[D_800E39C0->selection], MENU_RESOURCE);
         temp_v0->alpha = 0xFF;
-        func_8040E8D8_de(temp_v0, 0);
+        Frontend_SetWidgetFlag08(temp_v0, 0);
         temp_v1 = D_800E39C0->step;
         temp_v0_2 = D_800E39C0->selection + 1;
         temp_hi = temp_v0_2 % temp_v1;
         D_800E39C0->selection = temp_hi;
         temp_v0_3 = func_8040EC30_de(D_800E39C0->rows[temp_hi], MENU_RESOURCE);
         temp_v0_3->alpha = 0xFF;
-        func_8040E8D8_de(temp_v0_3, 1);
+        Frontend_SetWidgetFlag08(temp_v0_3, 1);
         D_800E39C0->timer = 0;
         Render_PlayFlatSound(0xE80);
         return 0;

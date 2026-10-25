@@ -36,7 +36,7 @@ s32 func_8041D134_de(s32 unused0, s32 unused1, s32 arg2) {
             Render_PlayFlatSound(0xE79);
             /* Node_func_8041D134_de is the hub Item view's twin (style at 0x10, x/y at 0x14/0x16);
                E8D8 speaks Item, so the node slots cast to it here. */
-            func_8040E8D8_de((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupA, 1);
+            Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupA, 1);
             func_80419F58_de(((MenuRecAt108 *) D_800E3590)->fade, 4);
             ((MenuRecAt108 *) D_800E3590)->state = 4;
             ((MenuRecAt108 *) D_800E3590)->timer = 4;
@@ -57,17 +57,17 @@ s32 func_8041D134_de(s32 unused0, s32 unused1, s32 arg2) {
             func_80419F24_de(((MenuRecAt108 *) D_800E3590)->fade);
             ((MenuRecAt108 *) D_800E3590)->state = 6;
             ((MenuRecAt108 *) D_800E3590)->timer = 4;
-            func_8040E8D8_de((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupB, 1);
-            func_8040E8D8_de((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupC, 1);
+            Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupB, 1);
+            Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupC, 1);
         }
         break;
     case 5:
         Render_PlayFlatSound(0xE78);
         ((MenuRecAt108 *) D_800E3590)->state = 2;
         ((MenuRecAt108 *) D_800E3590)->timer = 4;
-        func_8040E8D8_de((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupB, 0);
-        func_8040E8D8_de((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupC, 0);
-        func_8040E8D8_de((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupA, 0);
+        Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupB, 0);
+        Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupC, 0);
+        Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupA, 0);
         break;
     case 6:
         ((MenuRecAt108 *) D_800E3590)->styleValue += ((MenuRecAt108 *) D_800E3590)->styleStep;
@@ -77,7 +77,7 @@ s32 func_8041D134_de(s32 unused0, s32 unused1, s32 arg2) {
             ((MenuRecAt108 *) D_800E3590)->groupC->style = 100;
             Frontend_ShowUnlockedEntries(0x6E);
             ((MenuRecAt108 *) D_800E3590)->state = 3;
-            func_8040E8D8_de((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->cursor, 1);
+            Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->cursor, 1);
         }
         break;
     case 7:

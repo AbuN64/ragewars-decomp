@@ -9,7 +9,7 @@ extern void *Scene_AllocateMemory(s32);
 extern s32 func_8041B610_de(void *, s32);
 extern void func_8041B6E8_de(void *, s32, s32);
 extern void *func_8040EC30_de(void *, s32);
-extern void func_8040E8D8_de(void *, s32);
+extern void Frontend_SetWidgetFlag08(void *, s32);
 extern s32 func_802999A0_de(s32);
 extern s32 func_8041EB50_de(void);
 extern void func_8041E408_de(s32);
@@ -33,7 +33,7 @@ s32 func_8041E3A0_eu_x(void *window) {
     item = func_8040EC30_de(window, 0x38F);
     item->alpha = 0x8C;
     if (func_802999A0_de(0) == 0x16) {
-        func_8040E8D8_de(item, 0);
+        Frontend_SetWidgetFlag08(item, 0);
     }
     D_800E39C0->unk18 = 0;
     D_800E39C0->unk14 = 0;
@@ -43,10 +43,10 @@ s32 func_8041E3A0_eu_x(void *window) {
     D_800E39C0->count = func_8041EB50_de();
     for (i = 0; i < 3; i++) {
         func_8041E408_de(i);
-        func_8040E8D8_de(func_8040EC30_de(D_800E39C0->roots[i], 0x396), 0);
+        Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E39C0->roots[i], 0x396), 0);
     }
     func_802A2360_de();
-    func_8040E8D8_de(func_8040EC30_de(D_800E39C0->roots[D_800E39C0->unk14], 0x396), 1);
+    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E39C0->roots[D_800E39C0->unk14], 0x396), 1);
     return 0;
 }
 #endif

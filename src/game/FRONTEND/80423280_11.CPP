@@ -78,14 +78,14 @@ s32 func_8042AE60_eu(void *arg0, s32 arg1, s32 arg2) {
         D_800E4F60->unk_44C->alpha = 0xFF;
         D_800E4F60->unk_3DC = 9;
         if (D_800E4F60->selection == 0) {
-            func_8040E8D8_de(D_800E4F60->unk_440, 1);
+            Frontend_SetWidgetFlag08(D_800E4F60->unk_440, 1);
             var_a0 = D_800E4F60->unk_448;
         } else {
             var_a0 = D_800E4F60->unk_444;
         }
-        func_8040E8D8_de(var_a0, 1);
-        func_8040E8D8_de(D_800E4F60->label, 1);
-        func_8040E8D8_de(D_800E4F60->unk_3F0, 1);
+        Frontend_SetWidgetFlag08(var_a0, 1);
+        Frontend_SetWidgetFlag08(D_800E4F60->label, 1);
+        Frontend_SetWidgetFlag08(D_800E4F60->unk_3F0, 1);
         goto block_7;
     }
 block_7:
@@ -100,7 +100,7 @@ block_7:
         D_800E4F60->unk_3E0 = temp_v0_2;
         if (temp_v0_2 <= 0) {
             Render_PlayFlatSound(0xE79);
-            func_8040E8D8_de(D_800E4F60->unk_3E8, 1);
+            Frontend_SetWidgetFlag08(D_800E4F60->unk_3E8, 1);
             func_80419F58_de(D_800E4F60->text3E4, 4);
             D_800E4F60->unk_3DC = 4;
             D_800E4F60->unk_3E0 = 4;
@@ -126,7 +126,7 @@ block_7:
             var_a1 = 0;
             var_a0_3 = D_800E4F60->unk_458;
             D_800E4F60->unk_460 = 1;
-            func_8040E8D8_de(var_a0_3, var_a1);
+            Frontend_SetWidgetFlag08(var_a0_3, var_a1);
         }
         break;
     case 4:
@@ -147,13 +147,13 @@ block_7:
         }
         break;
     case 5:
-        func_8040E8D8_de(D_800E4F60->unk_458, 1);
-        func_8040E8D8_de(D_800E4F60->unk_3E8, 0);
+        Frontend_SetWidgetFlag08(D_800E4F60->unk_458, 1);
+        Frontend_SetWidgetFlag08(D_800E4F60->unk_3E8, 0);
         func_8042B2E4_de();
         func_8042A7B4_de(0);
         D_800E4F60->unk_3DC = 2;
         D_800E4F60->unk_3E0 = 4;
-        func_8040E8D8_de(D_800E4F60->unk_448, 0);
+        Frontend_SetWidgetFlag08(D_800E4F60->unk_448, 0);
         Render_PlayFlatSound(0xE78);
         break;
     case 8:
@@ -177,7 +177,7 @@ block_7:
         var_a1 = 1;
         if (D_800E4F60->selection == 0) {
             var_a0_3 = D_800E4F60->unk_448;
-            func_8040E8D8_de(var_a0_3, var_a1);
+            Frontend_SetWidgetFlag08(var_a0_3, var_a1);
         }
         break;
     default:

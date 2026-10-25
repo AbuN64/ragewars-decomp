@@ -85,7 +85,7 @@ void func_8040E894_de(void) {
     state->field_C = D_800E2AB4_de;
 }
 
-void func_8040E8D8_de(void *object, int enabled) {
+void Frontend_SetWidgetFlag08(void *object, int enabled) {
     u16 *flags = &((Widget *)(object))->flags;
     if (enabled) {
         *flags |= 8;
@@ -106,7 +106,7 @@ void func_8040E900_de(struct Widget *record, int enable) {
     }
 }
 
-void func_8040E928_de(void *object, int enabled) {
+void Frontend_SetWidgetFlag40(void *object, int enabled) {
     u16 *flags = &((Widget *)(object))->flags;
     if (enabled) {
         *flags |= 0x40;
@@ -119,7 +119,7 @@ void func_8040E928_de(void *object, int enabled) {
    argument. */
 
 
-void func_8040E950_de(struct Widget *record, int enable) {
+void Frontend_SetWidgetFlag100(struct Widget *record, int enable) {
     if (enable) {
         record->flags |= 0x100;
     } else {

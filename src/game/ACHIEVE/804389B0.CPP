@@ -16,8 +16,8 @@ extern char *D_auto_800E2054[], *D_auto_800E20B4[], *D_auto_800E20A4[], *D_800E2
 extern u8 D_800FEB0F[], D_800FEB17[], D_800FEB4A[], D_800FEB54[], D_80102C24[], D_8010EB7D[], D_80142358[];
 extern s32 D_8010EB94[], D_80146894;
 extern void *Scene_AllocateMemory(), *func_8040EC30_de(), *func_80425C70_de(), *Achieve_GetResultText();
-extern s32 func_80265650_de(), func_80425014_de(), func_80425674_de(), func_8041F140_de();
-extern void func_8040E8D8_de(), func_8040E950_de(), func_8043C210_de(), func_8043C278_de(), func_80438A88_de(), func_80425D14_de();
+extern s32 func_80265650_de(), func_80425014_de(), func_80425674_de(), Frontend_FindKeyIndex();
+extern void Frontend_SetWidgetFlag08(), Frontend_SetWidgetFlag100(), func_8043C210_de(), func_8043C278_de(), func_80438A88_de(), func_80425D14_de();
 extern void func_80265688_de(), Resmgr_FillMemory(), func_804259E0_de(), func_802A0C08_de(), Resmgr_CopyString(), Achieve_UpdatePlayerPreviewStats(), func_80438614_de();
 extern void func_8041B110_de(), func_8028D380_de(), func_802A2394_de();
 extern char *func_802A0494_de();
@@ -37,7 +37,7 @@ s32 func_804389B0_eu_x(void *root) {
     g = Scene_AllocateMemory(0x1C8);
     D_800E5830 = g;
     SG(g, void *, 0x20) = root;
-    func_8040E8D8_de(root, 0);
+    Frontend_SetWidgetFlag08(root, 0);
     func_8043C210_de(g, 0x67, 0, 0, 0);
     func_8043C278_de(g);
     SG(g, s32, 0x1C) = 1;
@@ -62,7 +62,7 @@ s32 func_804389B0_eu_x(void *root) {
             SG(g, s32, 0x9C) = -1;
             if (*D_800E4680 != 0 && func_80265650_de(D_80102C24 + 1 + SG(g, s32, 0x94) * 0x98 + D_800FEB0F[SG(g, s32, 0x94) * 0x98] * 5, D_8015402C) == 1) {
                 it = func_8040EC30_de(SG(g, void *, 0x20), CS(0x282));
-                func_8040E8D8_de(it, 1);
+                Frontend_SetWidgetFlag08(it, 1);
                 SG(it, u8, 0x10) = 0xAF;
                 SG(it, char *, 0x38) = D_auto_800E2054[lang];
             } else {
@@ -93,7 +93,7 @@ s32 func_804389B0_eu_x(void *root) {
                     Resmgr_FillMemory(D_800FEB54 + 0x2A + SG(g, s32, 0x94) * 0x98, 0, 5);
                     v = func_80425674_de(SG(g, s32, 0x94));
                     if (v >= 0) {
-                        i = func_8041F140_de(v);
+                        i = Frontend_FindKeyIndex(v);
                         func_802A0C08_de(g + 0x18C, D_auto_800E2034[lang], ((char **)SG(D_800F00DC_raw, char *, i * 0x70))[lang]);
                     }
                 }
@@ -106,7 +106,7 @@ s32 func_804389B0_eu_x(void *root) {
             SG(D_8010EB94, s32, 0) = SG(v, u8, 0x24) - (s32)(SG(D_801462C8_raw, f32, 0x5D8 + 0x14) * 1.0f);
             if (D_8015402C == 0x23) {
                 it = func_8040EC30_de(SG(g, void *, 0x20), CS(0x283));
-                func_8040E8D8_de(it, 1);
+                Frontend_SetWidgetFlag08(it, 1);
                 SG(it, u8, 0x10) = 0xAF;
                 SG(it, char *, 0x38) = D_auto_800E20B4[D_80152789];
             }
@@ -116,18 +116,18 @@ s32 func_804389B0_eu_x(void *root) {
             func_80425D14_de(SG(g, s32, 0x94));
             if (D_8015402C == 0x23) {
                 it = func_8040EC30_de(SG(g, void *, 0x20), CS(0x283));
-                func_8040E8D8_de(it, 1);
+                Frontend_SetWidgetFlag08(it, 1);
                 SG(it, u8, 0x10) = 0xAF;
                 SG(it, char *, 0x38) = D_auto_800E20A4[lang];
             }
         }
     } else {
-        func_8040E950_de(func_8040EC30_de(root, CS(0x273)), 0);
+        Frontend_SetWidgetFlag100(func_8040EC30_de(root, CS(0x273)), 0);
         goto tail;
     }
     Resmgr_CopyString(g + 0x18C, D_800E2044_eu[lang]);
     it = func_8040EC30_de(SG(g, void *, 0x20), CS(0x283));
-    func_8040E8D8_de(it, 1);
+    Frontend_SetWidgetFlag08(it, 1);
     SG(it, u8, 0x10) = 0xAF;
     SG(it, u8 *, 0x38) = g + 0x18C;
     Achieve_UpdatePlayerPreviewStats();
@@ -137,7 +137,7 @@ tail:
     func_8041B110_de(CS(0x272));
     func_8041B110_de(CS(0x273));
     func_8041B110_de(CS(0x277));
-    func_8040E950_de(func_8040EC30_de(root, CS(0x273)), 1);
+    Frontend_SetWidgetFlag100(func_8040EC30_de(root, CS(0x273)), 1);
     for (i = 0; i < 4; i++) {
         if (D_80102B0D[i * 0x190] >= 0 && D_800FEB0E[i * 0x190] == 0) {
             break;

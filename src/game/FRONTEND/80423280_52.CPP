@@ -40,7 +40,7 @@ extern void Resmgr_CopyString(char *, char *);
 
 
 /* Hides each primary and optional secondary selection widget. */
-extern void func_8040E8D8_de(void *, s32);
+extern void Frontend_SetWidgetFlag08(void *, s32);
 extern struct Icon D_800E4F64[];
 
  /* extern */
@@ -97,9 +97,9 @@ void Frontend_HideArenaCatalogueWidgets(void) {
     index = 0;
     do {
         offset = index * 0x10;
-        func_8040E8D8_de((void *)func_8040EC30_de((void*)D_800E4F60->field0, (u16)*(s32 *)(&D_800E0F16 - 2 + offset)), 0);
+        Frontend_SetWidgetFlag08((void *)func_8040EC30_de((void*)D_800E4F60->field0, (u16)*(s32 *)(&D_800E0F16 - 2 + offset)), 0);
         if (*(s32 *)(&D_800E0F18 + offset) != -1) {
-            func_8040E8D8_de((void *)func_8040EC30_de((void*)D_800E4F60->field0, (u16)*(s32 *)(&D_800E0F1A - 2 + offset)), 0);
+            Frontend_SetWidgetFlag08((void *)func_8040EC30_de((void*)D_800E4F60->field0, (u16)*(s32 *)(&D_800E0F1A - 2 + offset)), 0);
         }
             index += 1;
     } while (index < 0x28);

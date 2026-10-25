@@ -82,8 +82,8 @@ void func_80421568_de(void) {
             D_800E4400->value++;
         }
     } else {
-        func_8040E8D8_de(D_800E4400->pad, 0);
-        func_8040E8D8_de(func_8040EC30_de(D_800E4400->window, ID_CLOSE), 1);
+        Frontend_SetWidgetFlag08(D_800E4400->pad, 0);
+        Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E4400->window, ID_CLOSE), 1);
         D_800E4400->cursor = 1;
     }
     if (D_800E4400->length > 0) {

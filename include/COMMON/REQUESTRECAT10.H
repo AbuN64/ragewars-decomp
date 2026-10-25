@@ -16,7 +16,7 @@ struct Screen_func_8041ECB4_de {
     s32 timer;
 };
 
-extern s32 func_8041F140_de(s32 key);
+extern s32 Frontend_FindKeyIndex(s32 key);
 
 extern void Frontend_SeatJoinRequests(void);
 

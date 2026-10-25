@@ -76,10 +76,10 @@ void Frontend_HideTrialCatalogueWidgets(void) {
     absentResource = -1;
     byteOffset = index;
 loop:
-    func_8040E8D8_de(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->a & 0xFFFF), 0);
-    func_8040E8D8_de(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->b & 0xFFFF), 0);
+    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->a & 0xFFFF), 0);
+    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->b & 0xFFFF), 0);
     if (((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->c.id != absentResource) {
-        func_8040E8D8_de(func_8040EC30_de(D_800E4690->root, (u16)*(u32 *)((u8 *)D_800E4A84 + byteOffset + 8)), 0);
+        Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E4690->root, (u16)*(u32 *)((u8 *)D_800E4A84 + byteOffset + 8)), 0);
     }
     index += 1;
     byteOffset += 0xC;
@@ -134,7 +134,7 @@ void Frontend_RefreshTrialCatalogueWidgets(void) {
 found1:;
         if (func_80265650_de((s32)availableFlags, unlockIndex) == 1) {
             widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].a);
-            func_8040E8D8_de(widget, 1);
+            Frontend_SetWidgetFlag08(widget, 1);
             widget->alpha = 20;
             resourceKey = D_800E4A84[entryIndex].b;
             for (searchIndex = 0; searchIndex < 36; searchIndex++) {
@@ -144,11 +144,11 @@ found1:;
 found2:;
             if (func_80265650_de((s32)availableFlags, unlockIndex) == 1) {
                 widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].b);
-                func_8040E8D8_de(widget, 1);
+                Frontend_SetWidgetFlag08(widget, 1);
                 widget->alpha = 20;
                 if (D_800E4A84[entryIndex].c.id != -1) {
                     widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].c.id);
-                    func_8040E8D8_de(widget, 1);
+                    Frontend_SetWidgetFlag08(widget, 1);
                     widget->alpha = 20;
                 }
             }
@@ -220,7 +220,7 @@ void func_804279B8_de(void) {
         func_804284C0_de(record, settings);
         kind = func_8028D474_de(&D_8011FE88, record)->kind;
         entry->kind = kind;
-        index = func_8041F140_de((s8)kind);
+        index = Frontend_FindKeyIndex((s8)kind);
         scale.x = D_800E3A58[index].scale[0];
         scale.y = D_800E3A58[index].scale[0];
         scale.z = D_800E3A58[index].scale[0];

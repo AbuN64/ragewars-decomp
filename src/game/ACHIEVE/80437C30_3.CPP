@@ -54,7 +54,7 @@ extern void func_8043C2A4_de(struct MenuRules *);
 
 
 
-extern void func_8040E8D8_de(void *, s32);
+extern void Frontend_SetWidgetFlag08(void *, s32);
 
 extern void Items_ResetActorPools(void *, s32);
 
@@ -126,7 +126,7 @@ s32 func_80438ADC_de(void *window, void *unused1, s32 event) {
                 return 0;
             }
             func_8040C428_de(0);
-            func_8040E8D8_de(window, 1);
+            Frontend_SetWidgetFlag08(window, 1);
             object = &D_80145088;
             Items_ResetActorPools(object, 0);
             func_804499B0_de(object - 0x48, 0, 0);
@@ -194,13 +194,13 @@ s32 func_80438C84_de(void *window) {
     if (marked == 1) {
         pair[0] = 0;
         if (pair[-1] != -1) {
-            func_8040E8D8_de(D_800E5830->item, 0);
+            Frontend_SetWidgetFlag08(D_800E5830->item, 0);
             D_800E5830->busy = 0;
             MarkMenuEventHandled();
             func_80298368_de(pair[-1]);
             return 0;
         }
-        func_8040E8D8_de(D_800E5830->item, 1);
+        Frontend_SetWidgetFlag08(D_800E5830->item, 1);
         D_800E5830->busy = marked;
     }
     return 0;

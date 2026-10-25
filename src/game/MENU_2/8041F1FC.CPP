@@ -47,7 +47,7 @@ s32 func_8041F2A0_us_rev1(s32 screen)
     for (j = 0; j < 3; j++)
     {
       func_8040EC30_de(D_800E42D0->screen, D_800E42D4[i].cells[j].id)->alpha = 0x50;
-      func_8040E8D8_de(func_8040EC30_de(D_800E42D0->screen, D_800E42D4[i].options[j].id), 1);
+      Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E42D0->screen, D_800E42D4[i].options[j].id), 1);
     }
 
   }
@@ -69,9 +69,9 @@ s32 func_8041F2A0_us_rev1(s32 screen)
   D_800E42D0->prompt = func_80419E54_de(0x74, 0xFF);
   item = func_8040EC30_de((void *) screen, 0x74);
   D_800E42D0->promptItem = item;
-  func_8040E8D8_de(item, 0);
+  Frontend_SetWidgetFlag08(item, 0);
   D_800E42D0->pulse = func_8040EC30_de((void *) screen, 0x7B);
-  func_8040E8D8_de(D_800E42D0->pulse, 0);
+  Frontend_SetWidgetFlag08(D_800E42D0->pulse, 0);
   D_800E42D0->pulse->alpha = 0;
   D_800E42D0->pulseStep = 0x32;
   Menu_RefreshCharacterUnlocks();

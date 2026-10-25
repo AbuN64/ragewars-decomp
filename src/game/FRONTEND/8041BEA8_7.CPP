@@ -66,24 +66,24 @@ s32 func_8041CEB0_us_rev1(void *arg0) {
 
     item = func_8040EC30_de(arg0, 486);
     D_800E3590->item486 = item;
-    func_8040E8D8_de(item, 0);
+    Frontend_SetWidgetFlag08(item, 0);
 
     item = func_8040EC30_de(arg0, 563);
     D_800E3590->item563 = item;
-    func_8040E8D8_de(item, 0);
+    Frontend_SetWidgetFlag08(item, 0);
 
     func_8040EC30_de(arg0, 496)->alpha = 110;
     func_8040EC30_de(arg0, 497)->alpha = 120;
 
     item = func_8040EC30_de(arg0, 512);
     D_800E3590->item512 = item;
-    func_8040E8D8_de(item, 0);
+    Frontend_SetWidgetFlag08(item, 0);
 
     D_800E3590->style = 0;
     D_800E3590->unk248 = 27;
     item = func_8040EC30_de(arg0, 511);
     D_800E3590->item511 = item;
-    func_8040E8D8_de(item, 0);
+    Frontend_SetWidgetFlag08(item, 0);
 
     D_800E3590->item511->alpha = 0;
     D_800E3590->unk260 = 25;

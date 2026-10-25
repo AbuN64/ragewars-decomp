@@ -541,7 +541,7 @@ extern u8 Weapons_GetLevelProgress(Profile *, s32);
 extern void func_8028DA74_de(Shared_World *);
 extern void *Scene_RequestResource(s32, u32, u32, u32, u32, s32, void *, const char *, u32);
 extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
-extern s32 func_8041F140_de(s32);
+extern s32 Frontend_FindKeyIndex(s32);
 static inline void copyLevelName(Shared_World *world, s32 level, char *out, s32 limit) {
     void *handle;
     s32 entry;
@@ -704,7 +704,7 @@ void Scene_ShowResultsGoal(void) {
         break;
     case 4:
         challenge = findLevelChallenge(&D_8011FE88, D_8015402C);
-        character = &RESULTS_CHARACTERS[func_8041F140_de(challenge->character)];
+        character = &RESULTS_CHARACTERS[Frontend_FindKeyIndex(challenge->character)];
         func_802A0C08_de(name, RESULTS_NAME_FORMAT, character->name[RESULTS_LANGUAGE].text);
         func_80245A78_de(name);
         func_80245A78_de(goal);

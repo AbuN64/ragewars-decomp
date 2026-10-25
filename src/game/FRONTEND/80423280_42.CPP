@@ -48,7 +48,7 @@ extern struct Pair D_800E4A84[];
 
 
 
-extern void func_8040E8D8_de(struct Resource_func_80419E54_de *, s32);
+extern void Frontend_SetWidgetFlag08(struct Resource_func_80419E54_de *, s32);
 
 /* Reports every set entry of each ready slot to the handler, stopping after two slots. */
 
@@ -136,8 +136,8 @@ s32 Frontend_IsUnlockLinked(s32 a, s32 b) {
 void func_804281A8_de(void) {
     (D_800E4690->banner)->alpha = 0xFF;
     (D_800E4690->bannerShadow)->alpha = 0xFF;
-    func_8040E8D8_de(D_800E4690->bannerShadow, 1);
-    func_8040E8D8_de(D_800E4690->banner, 1);
+    Frontend_SetWidgetFlag08(D_800E4690->bannerShadow, 1);
+    Frontend_SetWidgetFlag08(D_800E4690->banner, 1);
     D_800E4690->blinking = 0;
 }
 

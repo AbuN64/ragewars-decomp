@@ -8,7 +8,7 @@ extern void *func_8041B610_de(s32, s32);
 extern void func_8041B6E8_de(s32, s32, s32);
 extern u8 *func_8040EC30_de(s32, s32);
 extern s32 func_802999A0_de(s32);
-extern void func_8040E8D8_de(void *, s32);
+extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void *func_8041EB50_de(void);
 extern void func_802A2360_de(void);
 extern void func_8041E408_de(s32);
@@ -26,7 +26,7 @@ s32 func_8041DF50_de(s32 owner) {
     widget = func_8040EC30_de(owner, 0x385);
     widget[0x10] = 0x8C;
     if (func_802999A0_de(0) == 0x16) {
-        func_8040E8D8_de(widget, 0);
+        Frontend_SetWidgetFlag08(widget, 0);
     }
     D_800E39C0->sel = 0;
     D_800E39C0->w14 = 0;
@@ -36,11 +36,11 @@ s32 func_8041DF50_de(s32 owner) {
     D_800E39C0->unk1C = (s32)func_8041EB50_de();
     for (i = 0; i < 3; ) {
         func_8041E408_de(i);
-        func_8040E8D8_de(func_8040EC30_de((s32)D_800E39C0->w8[i], 0x38C), 0);
+        Frontend_SetWidgetFlag08(func_8040EC30_de((s32)D_800E39C0->w8[i], 0x38C), 0);
         i++;
     }
     func_802A2360_de();
-    func_8040E8D8_de(func_8040EC30_de((s32)D_800E39C0->w8[(s32)D_800E39C0->w14], 0x38C), 1);
+    Frontend_SetWidgetFlag08(func_8040EC30_de((s32)D_800E39C0->w8[(s32)D_800E39C0->w14], 0x38C), 1);
     return 0;
 }
 #endif

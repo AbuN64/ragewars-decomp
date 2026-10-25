@@ -14,7 +14,7 @@ extern MenuWidget *func_8040EC30_de(void *, s32);
    the word at offset 0x34. */
 
 
-extern void func_8040E8D8_de(void *, s32);
+extern void Frontend_SetWidgetFlag08(void *, s32);
 
 /* Advances the animation frame countdown and wraps exhausted frames. */
 
@@ -45,13 +45,13 @@ extern void MarkMenuEventHandled(void);
 extern void func_80298368_de(s32);
 
 void func_8042177C_de(void) {
-    func_8040E8D8_de(D_800E4400->pad, 0);
+    Frontend_SetWidgetFlag08(D_800E4400->pad, 0);
 #if defined(VERSION_DE)
-    func_8040E8D8_de(func_8040EC30_de(D_800E4400->window, 0x3A5), 1);
+    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E4400->window, 0x3A5), 1);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    func_8040E8D8_de(func_8040EC30_de(D_800E4400->window, 0x3AB), 1);
+    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E4400->window, 0x3AB), 1);
 #elif defined(VERSION_EU_X)
-    func_8040E8D8_de(func_8040EC30_de(D_800E4400->window, 0x3AF), 1);
+    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E4400->window, 0x3AF), 1);
 #endif
     D_800E4400->open = 1;
 }

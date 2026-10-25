@@ -38,7 +38,7 @@ extern void func_804397F0_auto(char *);
 
 extern s32 func_8042B1B8_de(s32, s32);
 
-extern void func_8040E8D8_de(struct Resource_func_80419E54_de *, s32);
+extern void Frontend_SetWidgetFlag08(struct Resource_func_80419E54_de *, s32);
 
 s32 func_80429FF0_de(void *unused0, void *unused1, s32 event) {
     s32 i;
@@ -115,8 +115,8 @@ func_804397E8_de
             alpha -= 30;
             if (alpha <= 0) {
                 D_800E4F60->blinking = 0;
-                func_8040E8D8_de(D_800E4F60->bannerShadow, 0);
-                func_8040E8D8_de(D_800E4F60->banner, 0);
+                Frontend_SetWidgetFlag08(D_800E4F60->bannerShadow, 0);
+                Frontend_SetWidgetFlag08(D_800E4F60->banner, 0);
                 alpha = 0xFF;
             }
             D_800E4F60->banner->value = alpha;

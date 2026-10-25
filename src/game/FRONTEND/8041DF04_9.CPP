@@ -8,7 +8,7 @@
 
 extern struct SlotRecAt0V1 D_800E3A54[];
 
-s32 func_8041F140_de(s32 key) {
+s32 Frontend_FindKeyIndex(s32 key) {
     s32 index = 0;
     s32 found = 0;
     s32 i;

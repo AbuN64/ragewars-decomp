@@ -34,12 +34,12 @@ void func_8041E408_de(s32 index) {
     screen = D_800E39C0;
     window = screen->roots[index];
     if (screen->count < index || D_80153F80[index].id < 0) {
-        func_8040E8D8_de(window, 0);
+        Frontend_SetWidgetFlag08(window, 0);
     } else {
         widgetObject = func_8040EC30_de(window, DRAW_ICON);
         widget = widgetObject;
         widget->alpha = 125;
-        model = func_8041F140_de(D_80153F80[index].id);
+        model = Frontend_FindKeyIndex(D_80153F80[index].id);
         widget->value = D_800E3A58[model].portrait;
         widgetObject = func_8040EC30_de(window, DRAW_NAME);
         widget = widgetObject;

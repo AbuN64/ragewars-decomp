@@ -80,7 +80,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     D_800E4690->resource = func_80419E54_de(0x141, 0x6E);
     wHead = func_8040EC30_de(arg0, 0x13F);
     D_800E4690->focusItem = wHead;
-    func_8040E8D8_de(wHead, 0);
+    Frontend_SetWidgetFlag08(wHead, 0);
     D_800E4690->owner = (void *)func_8040EC30_de(arg0, 0x154);
     D_800E4690->item155 = func_8040EC30_de(arg0, 0x155);
     D_800E4690->player = 0;
@@ -189,7 +189,7 @@ next:
     status = (struct Status *)((char *)D_80146398 + offset);
     if (status->active == 1) {
         shown++;
-        row = func_8041F140_de(status->kind);
+        row = Frontend_FindKeyIndex(status->kind);
         scale.x = D_800E3A58[row].scale[layout];
         scale.y = D_800E3A58[row].scale[layout];
         scale.z = D_800E3A58[row].scale[layout];

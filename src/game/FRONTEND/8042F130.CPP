@@ -147,7 +147,7 @@ extern void func_8043C210_de(void *, s32, s32, s32, s32);
 extern void *func_8041B610_de(void *, s32);
 extern void func_8041B6E8_de(void *, s32, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
-extern void func_8040E8D8_de(MenuWidget *, s32);
+extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern void *func_80419E54_de(s32, s32);
 extern void func_80433BCC_de(s32);
 extern void Frontend_RefreshPlayerPanel(s32);
@@ -195,7 +195,7 @@ s32 func_8042F130_us_rev1(void *screen) {
     func_8040EC30_de(screen, SPRITE_286)->alpha = 0x6E;
     D_800E54A4->music = func_80419E54_de(SPRITE_287, 0xFF);
     D_800E54A4->title = func_8040EC30_de(screen, SPRITE_287);
-    func_8040E8D8_de(D_800E54A4->title, 0);
+    Frontend_SetWidgetFlag08(D_800E54A4->title, 0);
     D_800E54A4->players[0].sprite = func_8040EC30_de(screen, SPRITE_2FC);
     D_800E54A4->players[1].sprite = func_8040EC30_de(screen, SPRITE_2A3);
     D_800E54A4->players[2].sprite = func_8040EC30_de(screen, SPRITE_2FD);
@@ -209,32 +209,32 @@ s32 func_8042F130_us_rev1(void *screen) {
     switch (D_800E54A4->phase) {
     case 5:
         sprite = func_8040EC30_de(screen, SPRITE_293);
-        func_8040E8D8_de(sprite, 1);
+        Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 6:
         sprite = func_8040EC30_de(screen, SPRITE_296);
-        func_8040E8D8_de(sprite, 1);
+        Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 4:
         sprite = func_8040EC30_de(screen, SPRITE_288);
-        func_8040E8D8_de(sprite, 1);
+        Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 0:
         sprite = func_8040EC30_de(screen, SPRITE_2A1);
-        func_8040E8D8_de(sprite, 1);
+        Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 3:
         sprite = func_8040EC30_de(screen, SPRITE_295);
-        func_8040E8D8_de(sprite, 1);
+        Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 1:
         sprite = func_8040EC30_de(screen, SPRITE_289);
-        func_8040E8D8_de(sprite, 1);
+        Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         for (i = 0; i < 4; i++) {
             if (D_80102B00[i].owner >= 0) {
@@ -255,7 +255,7 @@ s32 func_8042F130_us_rev1(void *screen) {
         break;
     case 2:
         sprite = func_8040EC30_de(screen, SPRITE_297);
-        func_8040E8D8_de(sprite, 1);
+        Frontend_SetWidgetFlag08(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     }

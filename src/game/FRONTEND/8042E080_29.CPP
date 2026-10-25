@@ -76,7 +76,7 @@ extern void *D_800E1394[], *D_800DD124[];
 enum { PAK_SLOT_RESOURCE_688 = 688, PAK_SLOT_RESOURCE_689 = 689, PAK_SLOT_RESOURCE_690 = 690, PAK_SLOT_RESOURCE_691 = 691, PAK_SLOT_RESOURCE_692 = 692, PAK_SLOT_RESOURCE_694 = 694 };
 
 #endif
-extern void func_8040E950_de(MenuWidget *record, int enable);
+extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 extern void Menu_ShowSlotNode(s32,s32,MenuWidget *);
 extern MenuWidget *Menu_GetSlotValue(s32,s32);
 extern s32 func_8040EBD0_de(MenuWidget *);
@@ -93,25 +93,25 @@ void func_80433914_de(s32 player) {
   D_800E54A4->players[player].used[i]=2;
   D_800E54A4->players[player].nodes[i]->alpha=255;
   label=(MenuWidget *)func_8040EC30_de(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689);
-  func_8040E950_de(D_800E54A4->players[player].nodes[i],0);
+  Frontend_SetWidgetFlag100(D_800E54A4->players[player].nodes[i],0);
   value=(MenuWidget *)func_8040EC30_de(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_690);
   if(D_800E54A4->players[player].records[i].player!=-1) {
    value->text=D_800E54A4->players[player].records[i].name;
    D_800E54A4->players[player].used[i]=1;
    if(D_800E54A4->phase==1) {
-    func_8040E8D8_de(func_8040EC30_de(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689),0);
+    Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689),0);
     if(func_804358C0_de(D_800E54A4->players[player].profile,D_800E54A4->players[player].records[i].owner)!=-1) {
      D_800E54A4->players[player].used[i]=0;
-     func_8040E950_de(D_800E54A4->players[player].nodes[i],1);
-     func_8040E8D8_de(func_8040EC30_de(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689),1);
+     Frontend_SetWidgetFlag100(D_800E54A4->players[player].nodes[i],1);
+     Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689),1);
     }
    }
 #if defined(VERSION_EU)
-  } else {value->text=((D_800E1394)[D_80152789]);func_8040E8D8_de((func_8041F2A0_Item *)label,0);}
+  } else {value->text=((D_800E1394)[D_80152789]);Frontend_SetWidgetFlag08((func_8041F2A0_Item *)label,0);}
 #elif defined(VERSION_EU_X)
-  } else {value->text=((D_800DD124)[D_80152789]);func_8040E8D8_de((func_8041F2A0_Item *)label,0);}
+  } else {value->text=((D_800DD124)[D_80152789]);Frontend_SetWidgetFlag08((func_8041F2A0_Item *)label,0);}
 #else
-  } else {value->text=(D_800D3250[0]);func_8040E8D8_de((func_8041F2A0_Item *)label,0);}
+  } else {value->text=(D_800D3250[0]);Frontend_SetWidgetFlag08((func_8041F2A0_Item *)label,0);}
 #endif
  }
  label=Menu_GetSlotValue(D_800E54A4->root,player);

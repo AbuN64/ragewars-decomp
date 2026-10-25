@@ -19,8 +19,8 @@ extern void *Scene_AllocateMemory(s32);
 extern void *func_8041B610_de(void *, s32);
 extern void func_8041B6E8_de(void *, s32, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
-extern void func_8040E8D8_de(MenuWidget *, s32);
-extern s32 func_8041F140_de(s32);
+extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
+extern s32 Frontend_FindKeyIndex(s32);
 extern void *func_80419E54_de(s32, s32);
 extern void func_8043B96C_de(void);
 extern void func_8043B0CC_de(s32);
@@ -71,12 +71,12 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
         bar = func_8040EC30_de(D_800E59E0->window, D_800E59E6[player][1].value);
         D_800E59E0->panels[player].item = bar;
         bar->alpha = 0x64;
-        func_8040E8D8_de(bar, 0);
+        Frontend_SetWidgetFlag08(bar, 0);
         widget = func_8040EC30_de(D_800E59E0->window, D_800E59E6[player][0].value);
         widget->alpha = 0x6E;
         config = &D_80146398[player];
         if (config->enabled == 1) {
-            row = func_8041F140_de(config->character);
+            row = Frontend_FindKeyIndex(config->character);
             scale.x = D_800E3A58[row].scale[player];
             scale.y = D_800E3A58[row].scale[player];
             scale.z = D_800E3A58[row].scale[player];
@@ -99,7 +99,7 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
     D_800E59E0->resource = func_80419E54_de(messageResource, 0xFF);
     widget = func_8040EC30_de(window, messageResource);
     D_800E59E0->message = widget;
-    func_8040E8D8_de(widget, 0);
+    Frontend_SetWidgetFlag08(widget, 0);
     screen = D_800E59E0;
     for (player = 0; player < 4; player++) {
         config = &D_80146398[player];
@@ -189,7 +189,7 @@ s32 Frontend_StartFourPlayerResults(void) {
         config = &D_80146398[i];
         if (config->enabled == 1) {
             widget = func_8040EC30_de(D_800E59E0->window, D_800E19DE[i * 0x26]);
-            func_8040E928_de(widget, 0);
+            Frontend_SetWidgetFlag40(widget, 0);
             widget->alpha = 0x23;
             screen = D_800E59E0;
             switch (screen->panels[i].mode) {
@@ -228,7 +228,7 @@ s32 Frontend_UpdateFourPlayerResults(void) {
         D_800E59E0->timer--;
         if (D_800E59E0->timer <= 0) {
             Render_PlayFlatSound(0xE79);
-            func_8040E8D8_de(D_800E59E0->message, 1);
+            Frontend_SetWidgetFlag08(D_800E59E0->message, 1);
             func_80419F58_de(D_800E59E0->resource, 4);
             D_800E59E0->state = 4;
             D_800E59E0->timer = 4;
@@ -269,12 +269,12 @@ s32 Frontend_UpdateFourPlayerResults(void) {
         Render_PlayFlatSound(0xE78);
         D_800E59E0->state = 2;
         D_800E59E0->timer = 4;
-        func_8040E8D8_de(D_800E59E0->message, 0);
+        Frontend_SetWidgetFlag08(D_800E59E0->message, 0);
         for (player = 0; player < 4; player++) {
             for (i = 0; i < 5; i++) {
-                func_8040E8D8_de(func_8040EC30_de(D_800E59E0->window, D_800E5A06[player][i].value), 0);
+                Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E59E0->window, D_800E5A06[player][i].value), 0);
             }
-            func_8040E8D8_de(D_800E59E0->panels[player].item, 0);
+            Frontend_SetWidgetFlag08(D_800E59E0->panels[player].item, 0);
         }
         break;
     case 6:

@@ -10,5 +10,5 @@ extern s32 func_8040EB8C_de(struct WidgetNode *node);
 extern void func_8040E978_de(struct Pair14 *record, s16 first, s16 second);
 extern void func_8040E984_de(WidgetRecAt1A **hit, WidgetRecAt1A *node, DrawArgs_func_8040E67C_de args, s32 px, s32 py);
 extern void func_8040E894_de();
-extern void func_8040E928_de(void *object, int enabled);
+extern void Frontend_SetWidgetFlag40(void *object, int enabled);
 #endif

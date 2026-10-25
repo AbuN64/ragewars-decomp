@@ -28,9 +28,9 @@ s32 func_8043AB40_de(void *unused0, void *unused1, s32 arg2) {
         D_800E59E0->entries[player].state = 2;
         Menu_SetSlotValue(D_800E59E0->entries[0].slots, player, 1);
         for (i = 0; i < 6; i++) {
-            func_8040E8D8_de(func_8040EC30_de(D_800E59E0->entries[0].window, D_800E59EE[player][i].value), 1);
+            Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E59E0->entries[0].window, D_800E59EE[player][i].value), 1);
         }
-        func_8041F140_de(D_801462C8.playerSettings[player].character);
+        Frontend_FindKeyIndex(D_801462C8.playerSettings[player].character);
         settings = (u8 *)D_800E59E0 + (player * sizeof(struct Entry42) + 8);
         { void *panel = settings; settings = (u8 *)D_80146398; func_8041CE10_de(panel, 0); }
         if (func_8043BA24_de() != 0) return 0;

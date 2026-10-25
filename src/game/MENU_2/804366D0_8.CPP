@@ -15,7 +15,7 @@ extern char D_80102B7E[];
 
 extern s32 func_8041A280_de(s32, s32);
 extern s32 func_80265650_de(char *, s32);
-extern void func_8040E950_de(MenuWidget *record, int enable);
+extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 extern s32 func_80419E54_de(s32, s32);
 
 s32 func_80437304_de(void *arg0) {
@@ -26,7 +26,7 @@ s32 func_80437304_de(void *arg0) {
     D_800E5780->unk14 = 0;
 
     if (func_80265650_de(D_80102B7E, 0) == 0) {
-        func_8040E950_de(func_8040EC30_de(arg0, 0x13A), 1);
+        Frontend_SetWidgetFlag100(func_8040EC30_de(arg0, 0x13A), 1);
     }
 
     D_800E5780->resourceWidget = func_80419E54_de(0x139, 0x6E);

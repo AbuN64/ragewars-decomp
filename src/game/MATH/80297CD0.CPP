@@ -108,11 +108,11 @@ static inline s32 defaultElementEvent(Element *element, s32 event, s32 argument)
             break;
         case 15:
             result = 0;
-            func_8040E928_de(element, 1);
+            Frontend_SetWidgetFlag40(element, 1);
             break;
         case 16:
             result = 0;
-            func_8040E928_de(element, 0);
+            Frontend_SetWidgetFlag40(element, 0);
             break;
         default:
             result = 0;
@@ -168,10 +168,10 @@ s32 DispatchElementEvent(s32 id, s32 event, s32 value, s32 argument, s32 context
                     if (D_8014D080->current > 0) func_802998A8_de();
                     break;
                 case 15:
-                    func_8040E928_de(element, 1);
+                    Frontend_SetWidgetFlag40(element, 1);
                     break;
                 case 16:
-                    func_8040E928_de(element, 0);
+                    Frontend_SetWidgetFlag40(element, 0);
                     break;
                 default:
                     return 0;
@@ -242,8 +242,8 @@ static inline s32 Menu_DispatchDefaultEvent(Element *element, s32 event, s32 arg
         case 2:
             if (D_8014D080->current > 0) func_802998A8_de();
             break;
-        case 15: result = 0; func_8040E928_de(element, 1); break;
-        case 16: result = 0; func_8040E928_de(element, 0); break;
+        case 15: result = 0; Frontend_SetWidgetFlag40(element, 1); break;
+        case 16: result = 0; Frontend_SetWidgetFlag40(element, 0); break;
         default: result = 0; break;
         }
         break;

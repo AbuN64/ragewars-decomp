@@ -6,7 +6,7 @@
 
 /* Updates the four player control rows, their visibility, and the selected player label. */
 extern s32 func_80264614_de(s32);
-extern void func_8040E950_de(MenuWidget *record, int enable);
+extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 extern struct Shared_Item *Menu_GetSlotValue(void *, s32);
 void func_80433D38_de(s32 player) {
     struct Shared_Item *item;
@@ -65,9 +65,9 @@ void func_80433D38_de(s32 player) {
     row_done:
         item = func_8040EC30_de(D_800E54A4->window, id);
         if (func_80264614_de(i) == 1) {
-            func_8040E950_de(item, 0);
+            Frontend_SetWidgetFlag100(item, 0);
         } else {
-            func_8040E950_de(item, 1);
+            Frontend_SetWidgetFlag100(item, 1);
         }
         label = item->label;
         if (player != -1 && item == Menu_GetSlotValue(D_800E54A4->list, player)) {

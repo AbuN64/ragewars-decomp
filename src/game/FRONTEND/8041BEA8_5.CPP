@@ -183,7 +183,7 @@ int func_8041BE28_de(ListRecAt4C *list) {
     int i;
 
     for (i = 0; i < list->count; i++) {
-        func_8040E928_de(list->items[i], 1);
+        Frontend_SetWidgetFlag40(list->items[i], 1);
     }
     return 0;
 }
@@ -199,11 +199,11 @@ void func_8041BE90_de(void) {
     Label *temp_s0;
 
     func_802991D4_de(SLOT_RESOURCE_962);
-    func_8040E8D8_de(D_800E3518->absent, 0);
+    Frontend_SetWidgetFlag08(D_800E3518->absent, 0);
     var_s2 = 0;
-    func_8040E8D8_de(D_800E3518->unavailable, 0);
+    Frontend_SetWidgetFlag08(D_800E3518->unavailable, 0);
     var_s1 = 1;
-    func_8040E8D8_de(D_800E3518->prompt, 0);
+    Frontend_SetWidgetFlag08(D_800E3518->prompt, 0);
     temp_v0 = func_80264614_de(0);
     if (temp_v0 == 1) {
         func_8041C19C_de();
@@ -231,15 +231,15 @@ void func_8041BE90_de(void) {
     if (temp_v0 == 0) {
         D_800E3518->state = 1;
         D_800E3518->elapsed = 0;
-        func_8040E8D8_de(D_800E3518->main, 0);
-        func_8040E8D8_de(D_800E3518->unavailable, 1);
+        Frontend_SetWidgetFlag08(D_800E3518->main, 0);
+        Frontend_SetWidgetFlag08(D_800E3518->unavailable, 1);
         goto block_25;
     }
     if (D_800E3518->ready == 0) {
         D_800E3518->state = 2;
         D_800E3518->elapsed = 0;
-        func_8040E8D8_de(D_800E3518->main, 0);
-        func_8040E8D8_de(D_800E3518->absent, 1);
+        Frontend_SetWidgetFlag08(D_800E3518->main, 0);
+        Frontend_SetWidgetFlag08(D_800E3518->absent, 1);
         var_a0 = SLOT_RESOURCE_971;
         goto block_24;
     }
@@ -290,8 +290,8 @@ void func_8041BE90_de(void) {
     temp_s0->text = D_800E3518->text;
     D_800E3518->state = 3;
     D_800E3518->elapsed = 0;
-    func_8040E8D8_de(D_800E3518->main, 0);
-    func_8040E8D8_de(D_800E3518->prompt, 1);
+    Frontend_SetWidgetFlag08(D_800E3518->main, 0);
+    Frontend_SetWidgetFlag08(D_800E3518->prompt, 1);
     var_a0 = SLOT_RESOURCE_966;
 block_24:
     func_802991D4_de(var_a0);
@@ -351,7 +351,7 @@ s32 func_8041C2AC_de(void *parent) {
     window = func_8040EC30_de(parent, 0x3CC);
 #endif
     D_800E3518->main = window;
-    func_8040E8D8_de(window, 1);
+    Frontend_SetWidgetFlag08(window, 1);
 #if defined(VERSION_DE)
     window = func_8040EC30_de(parent, 0x3C3);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -360,7 +360,7 @@ s32 func_8041C2AC_de(void *parent) {
     window = func_8040EC30_de(parent, 0x3CD);
 #endif
     D_800E3518->absent = window;
-    func_8040E8D8_de(window, 0);
+    Frontend_SetWidgetFlag08(window, 0);
 #if defined(VERSION_DE)
     window = func_8040EC30_de(parent, 0x3BD);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -369,7 +369,7 @@ s32 func_8041C2AC_de(void *parent) {
     window = func_8040EC30_de(parent, 0x3C6);
 #endif
     D_800E3518->unavailable = window;
-    func_8040E8D8_de(window, 0);
+    Frontend_SetWidgetFlag08(window, 0);
 #if defined(VERSION_DE)
     window = func_8040EC30_de(parent, 0x3BF);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -378,7 +378,7 @@ s32 func_8041C2AC_de(void *parent) {
     window = func_8040EC30_de(parent, 0x3C8);
 #endif
     D_800E3518->prompt = window;
-    func_8040E8D8_de(window, 0);
+    Frontend_SetWidgetFlag08(window, 0);
     D_800E3518->elapsed = 0;
     D_800E3518->state = 0;
     func_8040C428_de(0);
@@ -436,7 +436,7 @@ s32 func_8041C494_de(void) {
 #else
     case 0x3CB:
 #endif
-        func_8040E8D8_de(D_800E3518->absent, 0);
+        Frontend_SetWidgetFlag08(D_800E3518->absent, 0);
         func_8041BE90_de();
         break;
 #if defined(VERSION_EU_X)

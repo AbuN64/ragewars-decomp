@@ -118,7 +118,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *owner) {
     temp_v0_4 = func_8040EC30_de(owner, 0x13F);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2452))) = temp_v0_4;
-    func_8040E8D8_de(temp_v0_4, 0);
+    Frontend_SetWidgetFlag08(temp_v0_4, 0);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2456))) = func_8040EC30_de(owner, 0x154);
     var_a0 = D_80146398;

@@ -42,7 +42,7 @@ s32 func_8042F91C_de(s32 unused0, s32 unused1, s32 arg2) {
             if (temp_v0_2 <= 0) {
                 Render_PlayFlatSound(0xE79);
                 /* unk28 is the panel's item handle, kept untyped in the animation state */
-                func_8040E8D8_de((func_8041F2A0_Item *) D_800E54A4->title, 1);
+                Frontend_SetWidgetFlag08((func_8041F2A0_Item *) D_800E54A4->title, 1);
                 func_80419F58_de(D_800E54A4->music, 4);
                 D_800E54A4->ready = 4;
                 D_800E54A4->timer = 4;
@@ -76,7 +76,7 @@ s32 func_8042F91C_de(s32 unused0, s32 unused1, s32 arg2) {
             Render_PlayFlatSound(0xE78);
             D_800E54A4->ready = 2;
             D_800E54A4->timer = 4;
-            func_8040E8D8_de((func_8041F2A0_Item *) D_800E54A4->title, 0);
+            Frontend_SetWidgetFlag08((func_8041F2A0_Item *) D_800E54A4->title, 0);
             break;
         }
         if (D_800E54A4->ready == 3) func_80433398_de(arg2);

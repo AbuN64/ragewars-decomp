@@ -68,7 +68,7 @@ extern struct func_80205628_S3 *D_800E4514;
 extern struct MessageScreen *D_800E4518;
 extern void func_8043C278_de(struct MessageScreen *);
 
-extern void func_8040E8D8_de(void *object, int enabled);
+extern void Frontend_SetWidgetFlag08(void *object, int enabled);
 
 extern void func_80245B28_de(void);
 
@@ -247,8 +247,8 @@ reopen:
     func_8043C278_de(D_800E4518);
     D_800E4518->shown = 1;
     D_800E4518->timer = -1;
-    func_8040E8D8_de(D_800E4518->window, 1);
-    func_8040E8D8_de(D_800E4518->second_window, 1);
+    Frontend_SetWidgetFlag08(D_800E4518->window, 1);
+    Frontend_SetWidgetFlag08(D_800E4518->second_window, 1);
     func_80245B28_de();
     goto done;
 code_17:

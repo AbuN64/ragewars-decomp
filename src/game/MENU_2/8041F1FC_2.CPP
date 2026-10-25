@@ -48,7 +48,7 @@ s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
         D_800E42D0->timer = temp_v0_2;
         if (temp_v0_2 <= 0) {
             Render_PlayFlatSound(0xE79);
-            func_8040E8D8_de(D_800E42D0->promptItem, 1);
+            Frontend_SetWidgetFlag08(D_800E42D0->promptItem, 1);
             func_80419F58_de(D_800E42D0->prompt, 4);
             D_800E42D0->phase = 4;
             D_800E42D0->timer = 4;
@@ -78,15 +78,15 @@ s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
             func_80419F24_de(D_800E42D0->prompt);
             D_800E42D0->phase = 6;
             D_800E42D0->timer = 4;
-            func_8040E8D8_de(D_800E42D0->pulse, 1);
+            Frontend_SetWidgetFlag08(D_800E42D0->pulse, 1);
         }
         break;
     case 5:
         Render_PlayFlatSound(0xE78);
         D_800E42D0->phase = 2;
         D_800E42D0->timer = 4;
-        func_8040E8D8_de(D_800E42D0->promptItem, 0);
-        func_8040E8D8_de(D_800E42D0->pulse, 0);
+        Frontend_SetWidgetFlag08(D_800E42D0->promptItem, 0);
+        Frontend_SetWidgetFlag08(D_800E42D0->pulse, 0);
         break;
     case 7: break;
     case 6:
