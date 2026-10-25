@@ -334,10 +334,10 @@ void func_8025768C_de(ContextRecAt2BC0 *ctx) {
     ctx->sequenceIndex = Render_GetPackSection(group, 1);
 }
 
-#ifdef NON_MATCHING
-/* 7/136 words differ, all at the index == -1 test: the ROM branches straight to the epilogue with the -1
- * return value in the delay slot where this keeps an inline return block. The fourth parameter is passed
- * through to the slot-16 call. */
+/* Refreshes the voice playing sound id: an unknown id returns -1, slot 16 is handed to the spatial voice
+ * update with the passed-through position, a finished voice is flagged and the selection cleared; otherwise
+ * pitch, volume, pan and gain are pushed to the player. The not-found path has a dead conditional store:
+ * flow deletes it but its label stays until jump2, so the -1 return value is hoisted above the test. */
 /* The voice mix block at +0x10 of each Voice (Audio_InitializeVoiceMix views it the same way). */
 typedef struct VoiceMix {
     s32 frame, reserved4;
@@ -375,6 +375,9 @@ s32 Texture_UpdateSoundSlot(ContextRecAt2BC0 *context, s32 id, s32 unused, CVect
     }
     index = findVoiceById(context, id);
     if (index == -1) {
+        if (id != 0) {
+            mix = 0;
+        }
         return -1;
     }
     if (index == 16) {
@@ -408,6 +411,3 @@ s32 Texture_UpdateSoundSlot(ContextRecAt2BC0 *context, s32 id, s32 unused, CVect
     context->selectedHandle = -1;
     return 0;
 }
-#else
-INCLUDE_ASM("span_1000", Texture_UpdateSoundSlot);
-#endif
