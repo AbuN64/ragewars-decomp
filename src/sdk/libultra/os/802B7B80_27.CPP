@@ -53,7 +53,6 @@ u32 func_802B7F30_eu_x(Triple *motorContext) {
     }
 }
 
-extern u8 D_8014D4B0;
 
 
 

@@ -13,7 +13,6 @@ void func_802AFEB0_de(s32 player, s32 bank) {
     func_802B00D4_de(player + 0x48, &bankEvent, 0);
 }
 
-extern s32 func_802B00D4_de(void *, s16 *, s32);
 
 void func_802AFEE0_de(s32 player, s32 channel, s8 effectMix) {
     Buf16c controlEvent;

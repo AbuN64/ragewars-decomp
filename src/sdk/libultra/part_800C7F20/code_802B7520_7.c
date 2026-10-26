@@ -20,7 +20,6 @@ void func_802B2D80_de(ALSndPlayer *soundPlayer) {
     }
 }
 
-extern s32 func_802B00D4_de(void *, s16 *, s32);
 
 
 

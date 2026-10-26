@@ -12,7 +12,6 @@ void func_802AFF30_de(s32 player, s32 sequence) {
     func_802B00D4_de(player + 0x48, &sp10, 0);
 }
 
-extern s32 func_802B00D4_de(void *, s16 *, s32);
 
 void func_802AFF60_de(s32 player, s16 arg1) {
     Buf16b volumeEvent;
@@ -22,7 +21,6 @@ void func_802AFF60_de(s32 player, s16 arg1) {
     func_802B00D4_de(player + 0x48, &volumeEvent, 0);
 }
 
-extern s32 func_802B00D4_de(void *, s16 *, s32);
 
 void func_802AFF90_de(s32 player) {
     s16 stopEvent[8];
