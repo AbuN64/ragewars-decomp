@@ -524,7 +524,6 @@ typedef struct ActorWorld {
 extern void Particle_SpawnChildEffect(void *, s32, s32, s32);
 extern void Particle_FinishActorEffects(void *);
 extern void Particle_UpdateMatrix(void *);
-extern void Fx_DetachParticleSwooshes(void *, void *);
 
 void Particle_RetireOwnedActors(ActorWorld *world, void *owner) {
     Actor *actor, *next;

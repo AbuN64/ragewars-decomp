@@ -17,7 +17,6 @@ extern s32 func_802301F4_de(void *, void *);
 s32 Ovlgame_ReleaseObjectHandles(s32);
 
 
-extern void func_8022AF74_de(Shared_ActorView *arg0, s32 arg1);
 
 
 
