@@ -327,7 +327,6 @@ extern void ItemMenu_SetEntry(void *arg0, s32 arg1, s32 arg2, s32 arg3,
 
 typedef struct func_802ADE28_S1 func_802ADE28_S1;
 typedef struct func_802ADE28_S2 func_802ADE28_S2;
-typedef struct RecCode80213ED480216BF4 RecCode80213ED480216BF4;
 typedef struct ActivationSlot ActivationSlot;
 typedef struct ActivationActor ActivationActor;
 struct func_802ADE28_S1 {
@@ -361,10 +360,6 @@ struct ActivationActor {
     f32 unk678;
     char pad678[0xD40 - 0x678 - sizeof(f32)];
     char unkD40;
-};
-struct RecCode80213ED480216BF4 {
-    char pad0[0xC];
-    f32 unkC;
 };
 
 /** Apply a scripted effect command and its optional sound callbacks. */

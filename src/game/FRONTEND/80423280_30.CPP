@@ -75,11 +75,6 @@ extern s32 SmpSlider_CreateSliderWidget(s32, s32, s32);
 extern void SmpSlider_SetSliderItem(s32, s32);
 extern void Tsmos_DeactivateControllerState(void);
 
-typedef struct func_8042362C_S1 func_8042362C_S1;
-struct func_8042362C_S1 {
-    char pad0[0x10];
-    s32 unk10;
-};
 
 s32 Frontend_CreateGameOptionsScreen(void) {
 

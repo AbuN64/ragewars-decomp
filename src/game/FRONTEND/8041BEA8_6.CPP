@@ -66,10 +66,7 @@ void Frontend_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra
 #ifndef NULL
 #define NULL ((void *)0)
 #endif
-typedef int M2C_UNK;
 typedef signed char M2C_UNK8;
-typedef short M2C_UNK16;
-typedef int M2C_UNK32;
 typedef long long M2C_UNK64;
 #define M2C_FIELD(base, type, offset) (*(type)((char *)(base) + (offset)))
 #define M2C_BITWISE(type, expr) ((type)(expr))

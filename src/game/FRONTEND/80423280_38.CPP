@@ -197,14 +197,8 @@ found4:;
 
 typedef struct PreviewSettings { char pad[13]; u8 mode; char padE[0xC2]; struct EntryFrontendRefreshTrialCharacterPreview entries[4]; } PreviewSettings;
 typedef struct PreviewRecord { char pad[4]; u8 kind; } PreviewRecord;
-typedef struct PreviewRow { s32 pad; f32 scale[4],distance[4]; CVector3 position[4]; s32 light[4]; char tail[12]; } PreviewRow;
 extern void Frontend_FillTrialPresetWeaponRows(s32,PreviewSettings *);
 extern PreviewRecord *Scene_GetBlLevelData(void *,s32);
-typedef struct func_80427B98_S1 func_80427B98_S1;
-struct func_80427B98_S1 {
-    char pad0[0x20];
-    char unk20;
-};
 
 void Frontend_RefreshTrialCharacterPreview(void) {
     CVector3 scale;

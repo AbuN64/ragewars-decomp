@@ -98,7 +98,6 @@ extern f32 Menu_ExpandFloatHighWord(s32 arg0);
 
 typedef struct func_8025C6F4_S1 func_8025C6F4_S1;
 typedef struct func_8025C6F4_S2 func_8025C6F4_S2;
-typedef struct func_8025C6F4_S3 func_8025C6F4_S3;
 typedef struct func_8025C6F4_S4 func_8025C6F4_S4;
 struct func_8025C6F4_S1 {
     char pad0[0x28];
@@ -123,14 +122,6 @@ struct func_8025C6F4_S1 {
 struct func_8025C6F4_S2 {
     char pad0[0xC];
     s16 unkC;
-};
-struct func_8025C6F4_S3 {
-    char pad0[0x8E];
-    u16 unk8E;
-    char pad8E[0x90 - 0x8E - sizeof(u16)];
-    u16 unk90;
-    char pad90[0x92 - 0x90 - sizeof(u16)];
-    s16 unk92;
 };
 struct func_8025C6F4_S4 {
     char pad0[0x2B94];

@@ -48,15 +48,7 @@ void func_802552E0_de(s32 capacity)
 
 
 
-typedef struct Shared_HeapBlock Shared_HeapBlock;
 
-struct Shared_HeapBlock {
-    u32 start;
-    u32 unknown4[2];
-    u32 flags;
-    u32 unknown10[5];
-    Shared_HeapBlock *next;
-};
 
 typedef struct Shared_HashLink Shared_HashLink;
 

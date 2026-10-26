@@ -48,12 +48,9 @@ extern s32 D_800D297C;
 extern f32 D_800D2988;
 extern s32 D_800E28D0;
 typedef struct Shared_func_80234FDC_S1 func_80234FDC_S1;
-typedef struct GameplayCamera func_80234FDC_S2;
-typedef struct Shared_func_80234FDC_S3 SharedRecV11;
 typedef struct Shared_func_80234FDC_S4 func_80234FDC_S4;
 typedef struct Shared_func_80234FDC_S5 SharedRecAt0V2;
 typedef struct Lights SharedRecAt1A;
-typedef struct Shared_func_80234FDC_S7 SharedRecV9;
 typedef struct Shared_func_80234FDC_S8 func_80234FDC_S8;
 
 

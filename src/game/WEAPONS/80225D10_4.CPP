@@ -21,23 +21,18 @@ extern void Player_EndRound(void *);
 
 /* Updates round state, player health and round-start presentation. */
 
-typedef struct Shared_func_80227014_S1 func_80227014_S1;
 
 typedef struct Shared_func_80227014_S2 func_80227014_S2;
 
 typedef struct Shared_func_80227014_S3 func_80227014_S3;
 
-typedef struct Shared_func_80227014_S5 SharedRecV6;
 
-typedef struct Shared_func_80227014_S6 func_80227014_S6;
 
-typedef struct Shared_func_80227014_S7 SharedRecAt18;
 
 typedef struct Shared_func_80227014_S8 func_80227014_S8;
 
 typedef struct Shared_func_80227014_S9 SharedRecAt564V3;
 
-typedef struct Shared_func_80227014_S10 func_80227014_S10;
 
 typedef struct Shared_func_80227014_S11 func_80227014_S11;
 

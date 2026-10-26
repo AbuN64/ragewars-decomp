@@ -25,7 +25,6 @@
    feedback mixes, low-pass, save, gain into the output), advance the delay line input modulo its
    length and move the result into the aux left output. */
 
-typedef struct ALLowPass_s ALLowPass;
 
 #if defined(VERSION_DE)
 extern const float D_800C7780;

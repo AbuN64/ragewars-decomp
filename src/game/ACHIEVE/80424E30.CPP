@@ -6,7 +6,6 @@
 
 #include "TYPES.H"
 typedef struct AchieveRecord { u8 pad0[0x78]; u8 active; u8 pad79[0x18]; u8 team; u8 pad92[4]; } AchieveRecord;
-typedef struct AchieveCounters { u8 pad0[0x96]; } AchieveCounters;
 extern u8 D_80142369[][0x96];
 extern s32 D_800FEB70[][100];
 extern u8 D_800FEB26[];

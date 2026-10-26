@@ -65,7 +65,6 @@ typedef Shared_Func80243A80Frame Func80243A80Frame;
 
 typedef CVector3 Func80243A80Vec3;
 
-typedef Shared_Func80243A80Bits Func80243A80Bits;
 
 extern void func_8023E6D0_de(void *arg0, f32 arg1);
 

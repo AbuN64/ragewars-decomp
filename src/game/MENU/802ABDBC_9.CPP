@@ -114,11 +114,6 @@ struct SharedRecAtC {
 
 
 
-typedef struct SharedRecV1 SharedRecV1;
-struct SharedRecV1 {
-    char pad0[0x8F];
-    u8 unk8F; /* +0x8F: src/Pickup_ApplySpecialPickup.c */
-};
 
 
 
@@ -148,13 +143,6 @@ struct SharedRecAt92V1 {
 
 
 
-typedef struct SharedRecV2 SharedRecV2;
-struct SharedRecV2 {
-    char pad0[0x5DC];
-    void * unk5DC; /* +0x5DC: src/Pickup_ApplySpecialPickup.c */
-    char pad5E0[0x1100];
-    void * unk16E0; /* +0x16E0: src/Pickup_ApplySpecialPickup.c */
-};
 
 
 
@@ -255,13 +243,9 @@ extern Shared_FullPlayerMenuGlobals D_80140F84;
 
 typedef SharedRecAt13E0 ObjRecV4;
 typedef SharedRecAt8V2 ObjRecV9;
-typedef SharedRecAtC ObjRecV11;
-typedef SharedRecV1 ObjRecV10;
 typedef SharedRecAt84 ObjRecV12;
 typedef SharedRecAt92V1 ObjRecV13;
-typedef SharedRecV2 ObjRecV7;
 typedef SharedRecAt16E0V1 ObjRecV3;
-typedef SharedRecAt92V2 ObjRecV8;
 
 typedef Shared_FullPlayerMenuGlobals FullPlayerMenuGlobals;
 

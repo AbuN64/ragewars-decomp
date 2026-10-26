@@ -52,21 +52,6 @@ struct SetupRosterRecord {
     s32 unkB84;
 };
 
-typedef struct {
-    char pad0[0x58];
-    u32 state;
-    char pad5C[0x8];
-    void *panel;
-    void *root;
-    char pad6C[0x4];
-    char slot70[0x668];
-    char slot6D8[0x4B4];
-    s8 chars[2];
-    char padB8E[0xE];
-    s32 valueB9C;
-    char padBA0[0x8];
-    char textBA8[1];
-} SetupPlayerPanel;
 
 
 
