@@ -15,7 +15,7 @@ static __inline__ f32 unsignedFloat(u32 value,const f64 *bias) {
     return (f32)result;
 }
 
-#if defined(NON_MATCHING) || defined(VERSION_US_REV1)
+#if !defined(VERSION_EU)
 #include "TYPES.H"
 #include "SYSTEM/802609CC_3.H"
 #include "RENDER_4/8028FD2C_6.H"
@@ -92,12 +92,7 @@ void PolyTrak_SampleVectorTrack(AnimRef *anim, s32 index, f32 time, CVector3 *ou
     }
 }
 #else
-#if !(defined(VERSION_EU))
-INCLUDE_ASM("span_1000", PolyTrak_SampleVectorTrack);
-#endif
-#if defined(VERSION_EU)
 INCLUDE_ASM("span_1000", func_8025E574);
-#endif
 #endif
 
 extern void GraphU64_InterpolateQuaternionArc(CQuatern *out, f32 t, CQuatern *from, CQuatern *to);
@@ -222,13 +217,7 @@ void func_8025EF34_de(u32 *stream, Output8025EF54 *out, s32 count) {
     *stream = decode.stream;
 }
 
-#if defined(VERSION_US) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
-#if defined(VERSION_EU)
-#define func_8025F074_us func_8025F094_eu
-#endif
-#if defined(VERSION_EU_X)
-#define func_8025F074_us func_8025F0C4_eu_x
-#endif
+#if defined(VERSION_US)
 #ifdef NON_MATCHING
 extern char D_00261180_de[], D_0025EF34_de[], D_00261238_de[];
 /* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through GraphU64_NormalizeQuaternion. */
