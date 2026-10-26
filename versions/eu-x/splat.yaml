@@ -3427,7 +3427,7 @@ segments:
       - [0xC3B08, rodata, data_800C/literals_Player_DrawTintedPlayer]
       - [0xC3B28, rodata, data_800C/D_802292B8_C8934]
       - [0xC3B34, data, data_800C/D_blob_4bfd0d97c5ac1844e484]
-      - [0xC3B3C, rodata, data_800C/rodata_func_80229814_de_800C7D48]
+      - [0xC3B3C, rodata, data_800C/literals_Player_ApplyStun]
       - [0xC3B64, data, data_800C/rodata_unresolved_800C2F64]
       - [0xC3B68, rodata, data_800C/literals_func_80229A80_de]
       - [0xC3BAC, rodata, data_800C/D_80229FA0_C89B4]

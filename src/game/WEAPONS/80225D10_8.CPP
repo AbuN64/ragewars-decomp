@@ -6,16 +6,7 @@
 #include "WEAPONS/80225D10_8.H"
 #include "WEAPONS/80213ED4.H"
 
-#if (defined(VERSION_DE) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_ASM("span_1000", Player_ApplyStun);
-#endif
 
-#if (defined(VERSION_DE) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-const unsigned int rodata_func_80229814_de_800C7D48[10] = {
-    0x42960000, 0x41700000, 0x42960000, 0x40F00000, 0x4F000000, 0x3D888889, 0x3FC00000, 0x41700000,
-    0x4F000000, 0x4F000000,
-};
-#endif
 
 #if defined(VERSION_EU_X)
 unsigned int rodata_unresolved_800C2F64[1] = {
@@ -23,7 +14,6 @@ unsigned int rodata_unresolved_800C2F64[1] = {
 };
 #endif
 
-#if !(defined(VERSION_DE) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
 /* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 typedef struct {
     char pad0[0x98];
@@ -40,7 +30,11 @@ void Player_ApplyStun(SharedPlayer *player, f32 amount) {
     f32 stun;
 
     if (amount != 0.0f && !(75.0f <= player->views5E8.view11D8_149.stun) && !(player->views5E8.view670_31.shield > 0.0f)
-        && !(D_801468A0->rule != 0 && player->views5D8.view5D8_2.controls->mode == 0xB && D_801468A0->protect > 0)
+        && !(D_801468A0->rule != 0
+#if defined(VERSION_DE) || defined(VERSION_EU_X)
+            && player->views5D8.view5D8_2.controls->team != 0
+#endif
+            && player->views5D8.view5D8_2.controls->mode == 0xB && D_801468A0->protect > 0)
         && !(player->views122C.view122C_2.options & 0x8000)) {
         stun = player->views5E8.view11D8_149.stun + amount * 15.0f;
         if (75.0f < stun) {
@@ -67,7 +61,6 @@ void Player_ApplyStun(SharedPlayer *player, f32 amount) {
         }
     }
 }
-#endif
 
 #if defined(VERSION_EU)
 unsigned int rodata_unresolved_800C2F24[1] = {

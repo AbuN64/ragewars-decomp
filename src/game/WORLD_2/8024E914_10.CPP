@@ -7,7 +7,6 @@
 #include "GAME/CODE_8027302C.H"
 extern s32 D_800D2978;
 
-#if !(defined(VERSION_DE))
 /* Initialises a placed prop from its compact record: resets its state and owner, loads its model and
  * caches the squared model radius, places it on the grid by multiplying the record's byte cell
  * coordinates by the caller's cell spacing and its packed height by 5.12, mirrors either axis for
@@ -41,6 +40,9 @@ extern void SwapMatrixUpForward(char *);
 extern void CopyMatrix(char *, char *);
 extern void GraphU64_ConvertMatrixToFixed(char *, char *);
 
+#if defined(VERSION_DE)
+extern s32 InstHdr_GetActorType(void *);
+#endif
 static inline s32 advancePropKey(void) {
     s32 next;
 
@@ -131,5 +133,9 @@ void StaticInstance_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record
     }
     prop->key = advancePropKey() << 10;
     prop->colorFrame = (u8)D_800D2978 - 1;
-}
+#if defined(VERSION_DE)
+    if ((u32)(InstHdr_GetActorType(prop) - 9) < 2) {
+        prop->flags |= 0x50;
+    }
 #endif
+}

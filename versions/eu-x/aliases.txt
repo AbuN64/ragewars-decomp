@@ -2613,3 +2613,4 @@ literals_Pickup_ApplySpecialPickup = 0x800C6540; // rom:0xC7140 size:0x54
 literals_Menu_AnimateTabOptionsMenu = 0x800E8E60; // rom:0xE9A60 size:0x14
 literals_ScenarioSetup_UpdateSetupTransition = 0x800E92E0; // rom:0xE9EE0 size:0x44
 literals_Frontend_HandleMatchMenuMessage = 0x800E9250; // rom:0xE9E50 size:0x14
+literals_Player_ApplyStun = 0x800C2F3C; // rom:0xC3B3C size:0x28

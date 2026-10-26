@@ -9527,7 +9527,6 @@ D_d1_075aec7b430a6497 = 0x800C1BA4; // rom:0xC27A4
 D_d1_ff70dee8b7fa5da8 = 0x800C1F84; // rom:0xC2B84
 D_d1_cec074029f3b200f = 0x800C37E4; // rom:0xC43E4
 D_auto_rodata_unresolved_800C3BB4 = 0x800C3BB4; // rom:0xC47B4
-D_auto_rodata_func_8024F950_de_800C3E10 = 0x800C3E10; // rom:0xC4A10
 D_auto_rodata_unresolved_800C4324 = 0x800C4324; // rom:0xC4F24
 D_d1_736c650ca92c1b2a = 0x800C5514; // rom:0xC6114
 D_auto_rodata_unresolved_800C5D58 = 0x800C5D58; // rom:0xC6958

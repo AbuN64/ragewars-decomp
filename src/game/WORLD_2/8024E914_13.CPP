@@ -6,7 +6,6 @@
 #include "COMMON.H"
 extern s32 D_800D2978;
 
-#if !(defined(VERSION_DE))
 /* Initialises a placed prop from its record: resets its state and owner, loads its model and caches the squared model radius, builds its rotation from the record's packed quaternion, scale and position into a matrix copied into the object, sets its bounding box either as a fixed cube for flag 0x40 or from the record's six extents through Menu_ExpandFloatHighWord with a half-unit margin, copies the position, links its path segment and takes the next colour key and colour frame. The fixed cube is written through do-while(0) vector macros, which the stores' order needs, and 102.4 is the cartridge's rounded 0x42CCCCCC. */
 
 
@@ -22,6 +21,9 @@ extern void SwapMatrixUpForward(char *);
 extern void CopyMatrix(char *, char *);
 extern void GraphU64_ConvertMatrixToFixed(char *, char *);
 
+#if defined(VERSION_DE)
+extern s32 InstHdr_GetActorType(void *);
+#endif
 static inline s32 advancePropKey(void) {
     s32 next;
 
@@ -84,6 +86,9 @@ void StaticInstance_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s
     }
     prop->key = advancePropKey() << 10;
     prop->colorFrame = (u8)D_800D2978 - 1;
-
-}
+#if defined(VERSION_DE)
+    if ((u32)(InstHdr_GetActorType(prop) - 9) < 2) {
+        prop->flags |= 0x50;
+    }
 #endif
+}
