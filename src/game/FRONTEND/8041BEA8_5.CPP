@@ -33,12 +33,10 @@ enum { SLOT_RESOURCE_962 = 956, SLOT_RESOURCE_966 = 961, SLOT_RESOURCE_968 = 960
 #elif defined(VERSION_EU)
 enum { SLOT_RESOURCE_962 = 962, SLOT_RESOURCE_966 = 966, SLOT_RESOURCE_968 = 968, SLOT_RESOURCE_971 = 971 };
 
-extern char *D_800E25A4[];
 
 #elif defined(VERSION_EU_X)
 enum { SLOT_RESOURCE_962 = 967, SLOT_RESOURCE_966 = 969, SLOT_RESOURCE_968 = 971, SLOT_RESOURCE_971 = 975 };
 
-extern char *D_800E25A4[];
 
 #else
 enum { SLOT_RESOURCE_962 = 962, SLOT_RESOURCE_966 = 966, SLOT_RESOURCE_968 = 968, SLOT_RESOURCE_971 = 971 };
@@ -69,9 +67,8 @@ extern void func_8041C244_de(void);
 
 extern void func_80434FB4_de(s32);
 
-extern char *D_800D36D4;
 
-extern s32 D_800E28CC, D_800DF4C0,D_80146D60,D_8014AD94;
+extern s32 D_800E28CC;
 
 #if defined(VERSION_DE)
 extern char g_noteCountIntFormat[];
@@ -171,7 +168,6 @@ extern s32 func_80299A08_de(void);
 
 
 
-extern Handler802A2B50 D_800E3524;
 
 int func_8041BE28_de(ListRecAt4C *list) {
     int i;

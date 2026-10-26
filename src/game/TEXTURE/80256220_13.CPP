@@ -27,7 +27,6 @@ extern u32 D_800CB710;
 
 
 
-extern void *D_80107E20[];
 
 
 

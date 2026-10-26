@@ -153,7 +153,6 @@ void Scene_InitializeResourceCache(s32 unused, s32 count) {
     osStartThread(thread);
 }
 
-extern s32 D_80101134[];
 
 
 extern u32 __osDisableInt(void);
@@ -167,7 +166,6 @@ extern u32 __osDisableInt(void);
 
 
 
-extern ResourceCacheEntry *D_80104574;
 
 extern void func_80254DD0_de(void *, ResourceCacheEntry *);
 

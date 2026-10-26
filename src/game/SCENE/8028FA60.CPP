@@ -22,14 +22,10 @@
 
 
 
-extern u64 D_8011B1D0;
 
 
-extern u64 D_8011B1E0;
 
-extern s64 D_8011B1E8;
 
-extern s64 D_8011B1F0;
 
 
 extern s64 func_802BADC0_de(void);

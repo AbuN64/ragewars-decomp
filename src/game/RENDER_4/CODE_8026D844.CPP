@@ -44,7 +44,6 @@ extern s32 D_8011064C;
 
 
 
-extern s32 D_80111318[];
 
 #include "COMMON/DISPLAY.H"
 

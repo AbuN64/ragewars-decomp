@@ -17,7 +17,6 @@ extern void func_802658E4_de(char *buffer, const char *format, s32 value);
 extern s32 D_8015375C;
 extern char D_800ED41C[];
 extern char *D_800D394C[];
-extern char *D_800E2FB4[];
 extern s32 Pak_CountLineChars(struct Field *);
 
 s32 func_8040B444_de(struct Field *field, Shared_PakMenu *pThis) {

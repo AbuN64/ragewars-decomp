@@ -52,7 +52,6 @@ static inline s32 is_held(char *obj) {
 
 extern char D_8013B364;
 
-extern f32 D_800C3CD0_de[];
 
 extern s32 Nav_FindNearestPointIndex(void *, void *);
 
