@@ -9,7 +9,6 @@
 #include "TYPES.H"
 #include "stddef.h"
 
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
 #if defined(VERSION_EU)
 #define Pak_CheckControllerPak Pak_CheckEuropeanSaveAvailability
 #endif
@@ -30,26 +29,48 @@ u32 Pak_BytesToPakPages(u32);
 s32 Pak_EvaluateSaveChannel(void *, s32, s32 *, s32 *);
 void * Pak_OpenDialog(void *, void *, s32, s32, s32);
 extern s32 D_0044E4F8;
-#if defined(VERSION_DE)
-extern s32 D_0044EA74;
-extern s32 D_0044EABC;
-#elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-
-
-#elif defined(VERSION_US)
-extern s32 D_0044EBE4;
-extern s32 D_0044EC2C;
-#endif
 extern s32 D_0044ED44;
+/* Per-version dialog scripts opened by Pak_CheckControllerPak. */
 #if defined(VERSION_DE)
-extern s32 D_0044EEAC;
-extern s32 D_0044EED0;
-#elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-
-
+extern s32 D_0044EA74, D_0044EABC, D_0044EEAC, D_0044EED0;
+#define PAK_DIALOG_NO_CONTROLLER D_0044EABC
+#define PAK_DIALOG_NO_PAK D_0044EA74
+#define PAK_DIALOG_LOW_SPACE D_0044EED0
+#define PAK_DIALOG_FULL D_0044EEAC
 #elif defined(VERSION_US)
-extern s32 D_0044F01C;
-extern s32 D_0044F040;
+extern s32 D_0044EBE4, D_0044EC2C, D_0044F01C, D_0044F040;
+#define PAK_DIALOG_NO_CONTROLLER D_0044EC2C
+#define PAK_DIALOG_NO_PAK D_0044EBE4
+#define PAK_DIALOG_LOW_SPACE D_0044F040
+#define PAK_DIALOG_FULL D_0044F01C
+#elif defined(VERSION_EU)
+extern s32 D_0044FD44_eu, D_0044FD8C_eu, D_0045017C, D_004501A0_eu;
+#define PAK_DIALOG_NO_CONTROLLER D_0044FD8C_eu
+#define PAK_DIALOG_NO_PAK D_0044FD44_eu
+#define PAK_DIALOG_LOW_SPACE D_004501A0_eu
+#define PAK_DIALOG_FULL D_0045017C
+#elif defined(VERSION_EU_X)
+extern s32 D_0044FE74_eu_x, D_0044FEBC_eu_x, D_0045017C, D_004502D0_eu_x;
+#define PAK_DIALOG_NO_CONTROLLER D_0044FEBC_eu_x
+#define PAK_DIALOG_NO_PAK D_0044FE74_eu_x
+#define PAK_DIALOG_LOW_SPACE D_004502D0_eu_x
+#define PAK_DIALOG_FULL D_0045017C
+#else
+#define PAK_DIALOG_NO_CONTROLLER D_0044F70C
+#define PAK_DIALOG_NO_PAK D_0044F6C4
+#define PAK_DIALOG_LOW_SPACE D_0044FB20
+#define PAK_DIALOG_FULL D_0044FAFC
+#endif
+/* The game's two Controller Pak note names (PAL: per language). */
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+#include "COMMON/LONE/D_80152789.H"
+extern char *D_800E25A4[];
+extern char *D_800E25B4[];
+#define PAK_NOTE_NAME_1 D_800E25A4[g_languageIndex]
+#define PAK_NOTE_NAME_2 D_800E25B4[g_languageIndex]
+#else
+#define PAK_NOTE_NAME_1 D_800D36D4
+#define PAK_NOTE_NAME_2 D_800D36D8
 #endif
 extern s32 D_8011FECC;
 #include "COMMON/GAME_SESSION.H"
@@ -84,7 +105,7 @@ static inline s32 Pak_ScanNextChannel(s32 currentChannel) {
 }
 static inline s32 Pak_HasNamedNote(char *name, s32 channel) {
     u8 text[16];
-    s8 *note;
+    char *note;
     s32 index;
     for (index = 0; index < 16; index++) {
         Pak_GetNoteGameName(channel, index, &note);
@@ -118,13 +139,7 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
     if (Control_AnyControllerConnected() == 0) {
         D_80153784 = 1;
         D_8014AD9C = 0;
-#if defined(VERSION_DE)
-        Pak_OpenDialog(&D_8014561C, &D_0044EABC, (s32)menu->player, (s32) menu->slot, 0);
-#elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-        Pak_OpenDialog(&D_8014561C, &D_0044F70C, (s32)menu->player, (s32) menu->slot, 0);
-#elif defined(VERSION_US)
-        Pak_OpenDialog(&D_8014561C, &D_0044EC2C, (s32)menu->player, (s32) menu->slot, 0);
-#endif
+        Pak_OpenDialog(&D_8014561C, &PAK_DIALOG_NO_CONTROLLER, (s32)menu->player, (s32) menu->slot, 0);
         D_800E28CC = 1;
         D_8014AD94 = 0;
         return;
@@ -134,13 +149,7 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
         if (D_800E28C8 == -1) {
             D_80153784 = 1;
             D_8014AD9C = 0;
-#if defined(VERSION_DE)
-            Pak_OpenDialog(&D_8014561C, &D_0044EA74, (s32)menu->player, (s32) menu->slot, 0);
-#elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-            Pak_OpenDialog(&D_8014561C, &D_0044F6C4, (s32)menu->player, (s32) menu->slot, 0);
-#elif defined(VERSION_US)
-            Pak_OpenDialog(&D_8014561C, &D_0044EBE4, (s32)menu->player, (s32) menu->slot, 0);
-#endif
+            Pak_OpenDialog(&D_8014561C, &PAK_DIALOG_NO_PAK, (s32)menu->player, (s32) menu->slot, 0);
             D_8014AD94 = 0;
             D_800E28CC = 1;
             return;
@@ -159,13 +168,7 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
             if (Pak_GetStatus(D_800E28C8) == -2) {
                 D_80153784 = 1;
                 D_8014AD9C = 0;
-#if defined(VERSION_DE)
-                Pak_OpenDialog(&D_8014561C, &D_0044EA74, (s32)menu->player, (s32) menu->slot, 0);
-#elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-                Pak_OpenDialog(&D_8014561C, &D_0044F6C4, (s32)menu->player, (s32) menu->slot, 0);
-#elif defined(VERSION_US)
-                Pak_OpenDialog(&D_8014561C, &D_0044EBE4, (s32)menu->player, (s32) menu->slot, 0);
-#endif
+                Pak_OpenDialog(&D_8014561C, &PAK_DIALOG_NO_PAK, (s32)menu->player, (s32) menu->slot, 0);
                 D_8014AD94 = 0;
                 D_800E28CC = 1;
                 return;
@@ -191,20 +194,14 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
             if (Pak_GetStatus(D_800E28C8) == -2) {
                 D_80153784 = 1;
                 D_8014AD9C = 0;
-#if defined(VERSION_DE)
-                Pak_OpenDialog(&D_8014561C, &D_0044EA74, (s32)menu->player, (s32) menu->slot, 0);
-#elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-                Pak_OpenDialog(&D_8014561C, &D_0044F6C4, (s32)menu->player, (s32) menu->slot, 0);
-#elif defined(VERSION_US)
-                Pak_OpenDialog(&D_8014561C, &D_0044EBE4, (s32)menu->player, (s32) menu->slot, 0);
-#endif
+                Pak_OpenDialog(&D_8014561C, &PAK_DIALOG_NO_PAK, (s32)menu->player, (s32) menu->slot, 0);
                 D_8014AD94 = 0;
                 D_800E28CC = 1;
                 return;
             }
         }
-        hasNote1 = Pak_HasNamedNote(D_800D36D4, D_800E28C8);
-        hasNote2 = Pak_HasNamedNote(D_800D36D8, D_800E28C8);
+        hasNote1 = Pak_HasNamedNote(PAK_NOTE_NAME_1, D_800E28C8);
+        hasNote2 = Pak_HasNamedNote(PAK_NOTE_NAME_2, D_800E28C8);
         if ((hasNote1 == 0) && (hasNote2 == 0)) {
             error = Pak_GetFreePages(D_800E28C8, &freeBytes);
             if (error == 0) {
@@ -216,34 +213,16 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
                         if (freeBytes >= (s32)minBytes && freeBytes < (s32)maxBytes) {
                             D_80153784 = 1;
                             D_80146D60 = 1;
-#if defined(VERSION_DE)
-                            Pak_OpenDialog(&D_8014561C, &D_0044EED0, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
-#elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-                            Pak_OpenDialog(&D_8014561C, &D_0044FB20, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
-#elif defined(VERSION_US)
-                            Pak_OpenDialog(&D_8014561C, &D_0044F040, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
-#endif
+                            Pak_OpenDialog(&D_8014561C, &PAK_DIALOG_LOW_SPACE, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
                         } else if (freeBytes < (s32)minBytes) {
                             D_80153784 = 1;
                             D_80146D60 = 1;
-#if defined(VERSION_DE)
-                            Pak_OpenDialog(&D_8014561C, &D_0044EEAC, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
-#elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-                            Pak_OpenDialog(&D_8014561C, &D_0044FAFC, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
-#elif defined(VERSION_US)
-                            Pak_OpenDialog(&D_8014561C, &D_0044F01C, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
-#endif
+                            Pak_OpenDialog(&D_8014561C, &PAK_DIALOG_FULL, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
                         }
                     } else {
                         D_80153784 = 1;
                         D_80146D60 = 1;
-#if defined(VERSION_DE)
-                        Pak_OpenDialog(&D_8014561C, &D_0044EEAC, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
-#elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-                        Pak_OpenDialog(&D_8014561C, &D_0044FAFC, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
-#elif defined(VERSION_US)
-                        Pak_OpenDialog(&D_8014561C, &D_0044F01C, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
-#endif
+                        Pak_OpenDialog(&D_8014561C, &PAK_DIALOG_FULL, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
                     }
                 }
             }
@@ -263,7 +242,6 @@ finish:
     D_8014AD94 = 0;
     D_800E28CC = 1;
 }
-#endif
 
 #include "TYPES.H"
 extern s32 D_8015375C, D_800E28C0;
