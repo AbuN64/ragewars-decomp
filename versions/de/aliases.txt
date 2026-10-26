@@ -2557,3 +2557,6 @@ literals_DispatchControllerButtonEvent = 0x800C5690; // rom:0xC6290 size:0x24
 literals_Player_ApplyStun = 0x800C2C58; // rom:0xC3858 size:0x28
 D_0043C500 = 0x0043C320;
 D_800C6080_eu_x = 0x800C5DA0;
+D_800C22A8_us = 0x800C2378;
+D_800C22AC_us = 0x800C237C;
+D_800D2A90 = 0x800D3DE4;

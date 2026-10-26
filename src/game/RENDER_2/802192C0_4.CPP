@@ -502,7 +502,6 @@ case 7:
     }
 }
 
-#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(NON_MATCHING)
 #ifndef FIELD
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 #endif
@@ -568,8 +567,16 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
             Player_PlacePlayerAtSpawnPoint(player, FIELD(s32, player, 0x5EC), 0, 1);
         }
     }
+#if defined(VERSION_DE) || defined(VERSION_EU_X)
+    if (FIELD(s32, player, 0x1450) != 0 && FIELD(s32, state = D_801468A0, 0x98) != 0 &&
+#else
     state = D_801468A0;
-    if (FIELD(s32, state, 0x98) != 0 && FIELD(s8, FIELD(void *, player, 0x5D8), 0x80) == 0xB && FIELD(s32, state, 0xA0) > 0) {
+    if (FIELD(s32, state, 0x98) != 0 &&
+#endif
+#if defined(VERSION_DE) || defined(VERSION_EU_X)
+        FIELD(u8, FIELD(void *, player, 0x5D8), 0x94) != 0 &&
+#endif
+        FIELD(s8, FIELD(void *, player, 0x5D8), 0x80) == 0xB && FIELD(s32, state, 0xA0) > 0) {
         FIELD(s32, state, 0xA0) -= amount >> 8;
         if (FIELD(s32, state, 0xA0) <= 0) {
             FIELD(s32, state, 0xA0) = 0;
@@ -621,7 +628,11 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
         delay = 0x1E;
         if (FIELD(void *, player, 0x5DC) != 0) {
             if (oldHealth > 0xF00 && FIELD(s32, player, 0x5E4) <= 0xF00 && D_80145088.settings.local == 0) {
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+                Camera_PostScreenMessage(&D_80145088, FIELD(void *, player, 0x5DC), ((u8 **)&D_800D2A90)[*((u8 *)&D_80145088.settings.local + 0x564)]);
+#else
                 Camera_PostScreenMessage(&D_80145088, FIELD(void *, player, 0x5DC), (u8 *)D_800D2A90);
+#endif
             }
         }
         if ((amount >> 8) != 0) {
@@ -647,9 +658,6 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
     }
     return;
 }
-#else
-INCLUDE_ASM("span_1000", Player_ApplyPlayerDamage);
-#endif
 
 #include "COMMON/FIELD_VEC_B0.H"
 #include "COMMON/AIPROFILE.H"

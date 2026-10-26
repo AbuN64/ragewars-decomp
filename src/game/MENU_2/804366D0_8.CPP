@@ -3,11 +3,8 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 
-#if defined(VERSION_DE) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_80400000", Menu_CreateUnlockGatedListScreen);
-#endif
 
-#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU_X) || defined(VERSION_EU)
+#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU_X) || defined(VERSION_EU) || defined(VERSION_DE)
 typedef struct Shared_MenuWidgetState { s32 list; s32 resourceWidget; void *item; s32 unkC; s32 unk10; s32 unk14; } Shared_MenuWidgetState;
 extern Shared_MenuWidgetState *D_800E5780;
 extern char D_80102B7E[];
@@ -17,10 +14,12 @@ extern s32 Defs_TestBit(char *, s32);
 extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 extern s32 SmpFlicker_CreateFlickerWidget(s32, s32);
 
-/* Resource ids of this screen are numbered per version (relative to us): eu-x 4. */
+/* Resource ids of this screen are numbered per version (relative to us): eu-x 4, de -2. */
 static inline s32 unlockRes(s32 id) {
 #if defined(VERSION_EU_X)
     return id + 4;
+#elif defined(VERSION_DE)
+    return id - 2;
 #else
     return id;
 #endif

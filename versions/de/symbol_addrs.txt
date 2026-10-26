@@ -8295,7 +8295,7 @@ Menu_CancelAlternatePlayerSettingsEntry = 0x804370CC; // type:func rom:0x19D0CC
 Menu_SelectNextAlternatePlayerSettingsEntry = 0x80437114; // type:func rom:0x19D114
 Menu_SelectPreviousAlternatePlayerSettingsEntry = 0x804371C4; // type:func rom:0x19D1C4
 Menu_DispatchAlternatePlayerSettingsEvent = 0x80437274; // type:func rom:0x19D274
-Menu_CreateUnlockGatedListScreen = 0x80437304; // type:func rom:0x19D304
+Menu_CreateUnlockGatedListScreen = 0x80437310; // type:func rom:0x19D310
 Menu_FreeScrollingChoiceScreen = 0x804373E4; // type:func rom:0x19D3E4
 Menu_WrapScrollingChoiceNodes = 0x80437414; // type:func rom:0x19D414
 Menu_UpdateScrollingChoiceScreen = 0x80437444; // type:func rom:0x19D444
@@ -10992,3 +10992,4 @@ D_auto_func_8044DF54_de_padding_1B3F54 = 0x8044DF54; // rom:0x1B3F54
 
 D_auto_func_802566E8_de_padding_572E8 = 0x802566E8; // rom:0x572E8
 D_auto_Nav_UpdateObjectArrivalChase_padding_13BBC = 0x80212FBC; // rom:0x13BBC
+D_auto_Menu_CreateUnlockGatedListScreen_padding_19D304 = 0x080437304; // rom:0x19D304

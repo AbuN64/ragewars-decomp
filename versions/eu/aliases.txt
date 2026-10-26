@@ -2614,3 +2614,6 @@ D_800EE614_eu = 0x800EE614;
 D_800EE624_eu = 0x800EE624;
 literals_Pickup_ApplySpecialPickup = 0x800C6500; // rom:0xC7100 size:0x54
 literals_Nav_CheckCloseAttackRoute = 0x800C21E0; // rom:0xC2DE0 size:0x4
+D_800C22A8_us = 0x800C2618;
+D_800C22AC_us = 0x800C261C;
+D_800D2A90 = 0x800E41E4;
