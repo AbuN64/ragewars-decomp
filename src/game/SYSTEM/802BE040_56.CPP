@@ -29,7 +29,7 @@ OSPiHandle_s *func_802B8F48_de(void)
     h->domain = 0;
     h->speed = 0;
 
-    XPlus_FillMemory(&h->transferInfo, 0, sizeof(h->transferInfo));
+    XPlus_FillMemory(&h->transferInfo.bytes, 0, sizeof(h->transferInfo.bytes));
 
     saveMask = __osDisableInt();
     table = &D_800D437C;
@@ -65,25 +65,6 @@ typedef struct PiManager {
     s32 (*dma)(s32, u32, void *, u32);
     s32 (*extendedDma)(OSPiHandle_s *, s32, u32, void *, u32);
 } PiManager;
-typedef struct PiDiskBlock {
-    s32 error;
-    u8 *dramAddress;
-    u32 c2Address, sectorSize;
-    u8 remaining[0x14];
-} PiDiskBlock;
-typedef struct PiDiskTransfer {
-    u32 command;
-    u16 mode, blockNumber;
-    s32 sectorNumber;
-    u32 deviceAddress, control, sequenceControl;
-    PiDiskBlock blocks[2];
-} PiDiskTransfer;
-typedef struct PiDiskHandle {
-    OSPiHandle_s *next;
-    u8 type, latency, pageSize, relDuration, pulse, domain;
-    u32 baseAddress, speed;
-    PiDiskTransfer transfer;
-} PiDiskHandle;
 extern void func_802BB3D0_de(s32);
 extern void func_802BB850_eu(s32);
 extern s32 func_802B9730_de(OSPiHandle_s *, u32, u32);
@@ -95,7 +76,7 @@ void System_RunPiManager(void *argument) {
     PiManager *manager = argument;
     PiRequest *request = 0;
     OSMesg access, event;
-    PiDiskHandle *handle;
+    OSPiHandle_s *handle;
     PiDiskBlock *block;
     PiDiskTransfer *transfer;
     u32 status;
@@ -103,33 +84,33 @@ void System_RunPiManager(void *argument) {
 
     for (;;) {
         osRecvMesg(manager->commandQueue, (OSMesg *)&request, 1);
-        handle = (PiDiskHandle *)request->handle;
+        handle = (OSPiHandle_s *)request->handle;
         if (handle != 0 && handle->type == 2 &&
-            (transfer = &handle->transfer)->command <= 1) {
-            block = &transfer->blocks[handle->transfer.blockNumber];
-            handle->transfer.sectorNumber = -1;
-            if (handle->transfer.mode != 3) {
+            (transfer = &handle->transferInfo.transfer)->command <= 1) {
+            block = &transfer->blocks[handle->transferInfo.transfer.blockNumber];
+            handle->transferInfo.transfer.sectorNumber = -1;
+            if (handle->transferInfo.transfer.mode != 3) {
                 block->dramAddress -= block->sectorSize;
             }
             twoBlocks = 0;
-            if (handle->transfer.mode == 2) {
-                twoBlocks = ((PiDiskTransfer *)request->handle->transferInfo)->command == 0;
+            if (handle->transferInfo.transfer.mode == 2) {
+                twoBlocks = ((PiDiskTransfer *)request->handle->transferInfo.bytes)->command == 0;
             }
             osRecvMesg(manager->accessQueue, &access, 1);
             func_802BB3D0_de(0x100401);
-            func_802B9730_de(request->handle, 0x05000510, handle->transfer.control | 0x80000000);
+            func_802B9730_de(request->handle, 0x05000510, handle->transferInfo.transfer.control | 0x80000000);
             diskEvent:
             {
                 osRecvMesg(manager->eventQueue, &event, 1);
-                handle = (PiDiskHandle *)request->handle;
-                transfer = &handle->transfer;
-                block = &transfer->blocks[handle->transfer.blockNumber];
+                handle = (OSPiHandle_s *)request->handle;
+                transfer = &handle->transferInfo.transfer;
+                block = &transfer->blocks[handle->transferInfo.transfer.blockNumber];
                 if (block->error == 29) {
-                    func_802B9730_de((OSPiHandle_s *)handle, 0x05000510, handle->transfer.control | 0x10000000);
-                    func_802B9730_de(request->handle, 0x05000510, handle->transfer.control);
+                    func_802B9730_de((OSPiHandle_s *)handle, 0x05000510, handle->transferInfo.transfer.control | 0x10000000);
+                    func_802B9730_de(request->handle, 0x05000510, handle->transferInfo.transfer.control);
                     func_802B9590_de(request->handle, 0x05000508, &status);
                     if (status & 0x02000000) {
-                        func_802B9730_de(request->handle, 0x05000510, handle->transfer.control | 0x01000000);
+                        func_802B9730_de(request->handle, 0x05000510, handle->transferInfo.transfer.control | 0x01000000);
                     }
                     block->error = 4;
                     *(volatile u32 *)0xA4600010 = 2;
@@ -137,13 +118,13 @@ void System_RunPiManager(void *argument) {
                 }
                 osSendMesg(request->replyQueue, request, 0);
                 if (twoBlocks == 1 &&
-                    ((PiDiskTransfer *)request->handle->transferInfo)->blocks[0].error == 0) {
+                    ((PiDiskTransfer *)request->handle->transferInfo.bytes)->blocks[0].error == 0) {
                     twoBlocks = 0;
                     goto diskEvent;
                 }
             }
             osSendMesg(manager->accessQueue, 0, 0);
-            if (((PiDiskTransfer *)request->handle->transferInfo)->blockNumber == 1) {
+            if (((PiDiskTransfer *)request->handle->transferInfo.bytes)->blockNumber == 1) {
                 func_802BBC20_de();
             }
             continue;
