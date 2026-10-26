@@ -235,7 +235,6 @@ case_default:
 }
 
 /* EU enters __umoddi3 one word before its symbol (data_unresolved_802C15D0), so EU keeps the ROM body. */
-#if !defined(VERSION_EU)
 #include "TYPES.H"
 
 
@@ -288,6 +287,3 @@ void Libc_FormatInteger(_Pft *px, unsigned char code) {
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", Libc_FormatInteger);
-#endif
