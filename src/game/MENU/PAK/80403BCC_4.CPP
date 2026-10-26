@@ -4,6 +4,7 @@
 #include "COMMON/ENTRYRECAT0V3.H"
 #include "MENU/80403BCC.H"
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "TYPES.H"
 #include "MENU/PAK/80403BCC_4.H"
 #include "SCENE/802508E0_4.H"
@@ -30,7 +31,6 @@ extern void *SetN64_LocatePackSection(int, int, int, int *);
    with zero, then looks up the result again with the argument, and returns that. */
 
 
-extern struct Field_void_4 *D_800E2830;
 
 s32 Menu_GetCinemaSequenceCount(void) {
     return *D_8011FEFC - 1;
@@ -59,23 +59,23 @@ f32 Menu_BlendLinear(f32 from, f32 to, f32 weight) {
 }
 
 void *Menu_GetPackEntry(s32 key) {
-    return SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->value, 0), key);
+    return SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), key);
 }
 
 s32 Menu_GetTrackEyeHoldFlag(s32 key) {
-    return ((s32 *) SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->value, 0), key), 2))[0];
+    return ((s32 *) SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), key), 2))[0];
 }
 
 s32 Menu_GetTrackTargetHoldFlag(s32 key) {
-    return ((s32 *) SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->value, 0), key), 2))[1];
+    return ((s32 *) SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), key), 2))[1];
 }
 
 void *Menu_GetTrackTargetClip(s32 key) {
-    return SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->value, 0), key), 1);
+    return SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), key), 1);
 }
 
 void func_80403DE8_de(void) {
-    SetN64_GetPackSection(D_800E2830->value, 3);
+    SetN64_GetPackSection(D_800E2830->resource, 3);
 }
 
 /* Returns whether a record's subtype at 0x12 is the one its kind at 0x11 requires: 5 for kind 1, 4 for

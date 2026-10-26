@@ -1,6 +1,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/ENTRYRECAT8V4.H"
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"
 
@@ -15,7 +16,6 @@
 
 
 
-extern func_80203E78_S1 *D_800E2830;
 
 extern CVector3 Menu_EvaluateCameraSpline(SplineNode *keys, s32 count, f32 t);
 
@@ -34,9 +34,9 @@ CVector3 Menu_GetTrackEyePosition(f32 t) {
     idx = 0;
     i = 0;
     end = start;
-    while (i < *((s32 *)SetN64_GetPackSection((s32 *)D_800E2830->unk4, 0))) {
+    while (i < *((s32 *)SetN64_GetPackSection(D_800E2830->resource, 0))) {
         idx = i;
-        clip = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection((s32 *)D_800E2830->unk4, 0), idx), 0);
+        clip = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), idx), 0);
         count = clip[1];
         keys = (KeyRecAt1C *)(clip + 2);
         start = end;
@@ -44,7 +44,7 @@ CVector3 Menu_GetTrackEyePosition(f32 t) {
         if (idx == 0 && t <= start) {
             break;
         }
-        if (idx == *((s32 *)SetN64_GetPackSection((s32 *)D_800E2830->unk4, 0)) - 1 && end < t) {
+        if (idx == *((s32 *)SetN64_GetPackSection(D_800E2830->resource, 0)) - 1 && end < t) {
             break;
         }
         i = idx + 1;
@@ -52,7 +52,7 @@ CVector3 Menu_GetTrackEyePosition(f32 t) {
             break;
         }
     }
-    if (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection((s32 *)D_800E2830->unk4, 0), idx), 2)) != 0) {
+    if (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), idx), 2)) != 0) {
         t = start;
     }
     return Menu_EvaluateCameraSpline((SplineNode *)keys, count, t - start);

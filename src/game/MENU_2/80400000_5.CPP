@@ -2,6 +2,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/ENTRYRECAT8V4.H"
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "TYPES.H"
 #include "MENU_2/80400000_5.H"
 #include "RENDER_4/8028FD2C_6.H"
@@ -17,7 +18,6 @@
 
 
 
-extern func_80203E78_S1 *D_800E2830;
 
 extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 extern void GraphU64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
@@ -31,7 +31,7 @@ CVector3 Menu_EvaluateTrackColor(f32 t) {
     CVector3 a;
     CVector3 b;
 
-    track = SetN64_GetPackSection(D_800E2830->unk4, 1);
+    track = SetN64_GetPackSection(D_800E2830->resource, 1);
     count = track[1];
     key = (PositionKey *)(track + 2);
     if (count == 0) {
