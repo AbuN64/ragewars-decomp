@@ -25,7 +25,6 @@ extern float D_800C9208;
 
 extern float D_800C4168_de;
 
-extern float D_800C91F8;
 
 
 

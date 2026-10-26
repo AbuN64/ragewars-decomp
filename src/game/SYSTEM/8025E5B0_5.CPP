@@ -265,7 +265,7 @@ void func_8025F074_us(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 
                     count = 0;
                     for (a = -arg4; a <= arg4; a++) {
                         sum += row[((k + a + D_8010AC88) % D_8010AC88) * 4 + j];
-                        count += D_800C91F8;
+                        count += 1.0f;
                     }
                     row[k * 4 + j] = sum / count;
                 }
@@ -357,7 +357,7 @@ void func_8025F0D4_de(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 
                     count = 0;
                     for (a = -arg4; a <= arg4; a++) {
                         sum += row[((k + a + D_8010AC88) % D_8010AC88) * 4 + j];
-                        count += D_800C91F8;
+                        count += 1.0f;
                     }
                     row[k * 4 + j] = sum / count;
                 }

@@ -498,7 +498,6 @@ void Player_DrawMatchCountdown(void *arg0, ViewState *viewState) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #ifdef NON_MATCHING
 #define EUF(p, t, o) (*(t *)((u8 *)(p) + (o)))
-extern f32 D_800C2EB4_eu;
 extern void SoundElement_PlayFlatSound(s32), Camera_PostScreenMessage(void *, void *, void *);
 extern void BuildDirectionMatrix(void *, void *), GraphU64_AddVec3(void *, void *, void *);
 extern void TranslateMatrix(void *, f32, f32, f32), SwapMatrixUpForward(void *), GraphU64_ConvertMatrixToFixed(void *, void *);
@@ -526,7 +525,7 @@ void func_80228E60_eu(u8 *player, s32 flag) {
         EUF(player, s32, 0x1204) = EUF(player, s32, 0x145C);
         EUF(player, s32, 0x1208) = EUF(player, s32, 0x1460);
         EUF(player, s32, 0x120C) = flag;
-        EUF(player, f32, 0x11FC) = D_800C2EB4_eu;
+        EUF(player, f32, 0x11FC) = 150.0f;
         BuildDirectionMatrix(mtx, player + 0x1470);
         GraphU64_ScaleVector((void *)vec, (void *)(player + 0x1470), 5.12f);
         GraphU64_AddVec3(vec, vec, player + 0x1200);

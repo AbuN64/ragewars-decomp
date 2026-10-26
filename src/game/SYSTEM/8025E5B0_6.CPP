@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "SYSTEM/8025E5B0_6.H"
 
-/* Converts an amount over a period into a whole rate: returns the constant at D_800C91F8 + 4 for an amount
+/* Converts an amount over a period into a whole rate: returns D_800C410C_de for an amount
  * equal to it or a period not above D_800C9200; otherwise the ratio scaled by D_800C9200 + 4 and rounded up
  * when that stays below the limit D_800D0DA0, else the ratio scaled by D_800C9208 rounded up when that
  * stays below the limit, else the amount itself. Rounding up is a static helper. */
