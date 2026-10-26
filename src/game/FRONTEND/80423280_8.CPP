@@ -14,6 +14,7 @@
 #include "FRONTEND/80423280_8.H"
 #include "RENDER_2/8025DE50_5.H"
 #include "SCENE/802508E0_13.H"
+
 extern ResultsOptionsScreen *D_800E4690;
 extern MenuWidget *func_8040EC30_de(void *, s32);
 
@@ -410,3 +411,10 @@ s32 func_80428F08_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     }
     return 0;
 }
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: rodata/unresolved/800E1A1C */
+unsigned int D_blob_1be93d64b27e41999388[1] = {
+    0x00000000,
+};
+#endif

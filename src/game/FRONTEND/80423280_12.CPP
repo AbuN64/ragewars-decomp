@@ -13,12 +13,12 @@
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
-#include "TYPES.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/MENULISTSCREEN.H"
 #include "ACHIEVE/80424E30_3.H"
 #include "SCENE/802508E0_13.H"
+
 extern MatchScoreScreen *D_800E53C0;
 extern Shared_Rec3 g_playerSettings[8];
 extern MenuWidget *func_8040EC30_de(void *, s32);
@@ -523,4 +523,11 @@ unsigned int rodata_unresolved_800DDB2C[1] = {
     (unsigned int)&D_800CBB1C + 0x4,
 };
 #endif
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: rodata/unresolved/800E1B44 */
+unsigned int D_blob_2b6f958a3aa45420c4fc[1] = {
+    0x00000000,
+};
 #endif
