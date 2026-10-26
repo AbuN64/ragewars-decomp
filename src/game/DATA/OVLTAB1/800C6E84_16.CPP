@@ -1,4 +1,5 @@
 #include "include_asm.h"
+
 #if !(defined(VERSION_US_REV1))
 const unsigned int D_80210EFC_C7CC8[8] = {
     0x3EC90FDB, 0x40C90FDB, 0x40C90FDB, 0x40C5DCA8, 0x3DCCCCCD, 0x3E22F983, 0x41000000, 0x40E00000,

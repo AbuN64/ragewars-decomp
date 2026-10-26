@@ -1,4 +1,5 @@
 #include "include_asm.h"
+
 #if !(defined(VERSION_US_REV1))
 const float D_800C1DB8_de = 1.0f;
 #endif
