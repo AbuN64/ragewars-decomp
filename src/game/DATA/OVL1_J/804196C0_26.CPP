@@ -1,0 +1,3 @@
+#if defined(VERSION_EU)
+unsigned char D_auto_func_804196D8_de_padding_18FB18[8] = { 0x26, 0x73, 0xFF, 0xFF, 0x24, 0x02, 0x00, 0x30 };
+#endif
