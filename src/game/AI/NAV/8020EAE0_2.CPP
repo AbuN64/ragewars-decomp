@@ -254,3 +254,10 @@ unsigned int func_8020EF74_eu_padding_FB74[3] = {
     0x0C0829F4, 0x00452821, 0x08082800,
 };
 #endif
+
+#if defined(VERSION_US)
+const unsigned int D_auto_rodata_unresolved_800C1E18[10] = {
+    0x14000000, 0x00000E43, 0x0020EFC8, 0x0020F00C, 0x0020F01C, 0x0020F028, 0x0020F034, 0x0020F068,
+    0x0020F078, 0x0020F088,
+};
+#endif

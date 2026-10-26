@@ -5,6 +5,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "TYPES.H"
+#include "AI/NAV/802106E0_2.H"
 
 /* Probes one of a vehicle's eight wheel rays: casts from the vehicle position to its scaled wheel offset
  * through Unicol_SweepActorMotion and stores the wheel's reach as the XZ distance to whatever was hit (diagonals
@@ -158,3 +159,82 @@ void Nav_PrepareProbeSegments(AiController *controller) {
         b.y += yB;
     }
 }
+
+/* Advances an animation player one frame: returns 1 when there is no player or clip, or after wrapping
+   past frame 7 back to 0; otherwise prepares and shows the current frame through Nav_MeasureWheelReach and
+   Nav_MeasureWheelClearance, advances the frame at 0x1CC and returns 0. */
+
+
+void Nav_MeasureWheelReach(Player *player, s32 wheel);
+void Nav_MeasureWheelClearance(Player *player, s32 wheel);
+
+int Nav_AdvanceWheelProbe(PlayerRecAt1CC *p) {
+    if (p == 0) {
+        return 1;
+    }
+    if (p->clip == 0) {
+        return 1;
+    }
+    if (p->frame < 8) {
+        Nav_MeasureWheelReach(p->clip, p->frame);
+        Nav_MeasureWheelClearance(p->clip, p->frame);
+        p->frame++;
+        return 0;
+    }
+    p->frame = 0;
+    return 1;
+}
+
+s32 Nav_GetDirectionSector(f32 arg0) {
+    f32 var_f0;
+
+    arg0 += D_800C1FD8_de;
+    if (D_800C1FDC_de <= arg0) {
+        do {
+            arg0 -= D_800C1FDC_de;
+        } while (D_800C1FDC_de <= arg0);
+    }
+    var_f0 = 0.0f;
+    if (arg0 < var_f0) {
+        do {
+            arg0 += D_800C1FE0_de;
+        } while (arg0 < var_f0);
+    }
+    if (D_800C1FE4_de < arg0) {
+        arg0 = D_800C1FE4_de;
+    }
+    if (arg0 < D_800C1FE8_de) {
+        arg0 = D_800C1FE8_de;
+    }
+    arg0 *= D_800C1FEC_de;
+    arg0 *= D_800C1FF0_de;
+    var_f0 = 0.0f;
+    if (arg0 < var_f0) {
+        arg0 = var_f0;
+    }
+    if (D_800C1FF0_de <= arg0) {
+        arg0 = *(&D_800C1FF0_de + 1);
+    }
+    return (s32)arg0;
+}
+
+int Nav_NextDirectionSector(int arg0) {
+    int result = arg0 + 1;
+    if (result == 8) {
+        result = 0;
+    }
+    return result;
+}
+
+int Nav_PreviousDirectionSector(int arg0) {
+    int result = arg0 - 1;
+    if (arg0 == 0) {
+        result = 7;
+    }
+    return result;
+}
+
+#if defined(VERSION_US)
+char rodata_unresolved_80211014[12] =
+    "SFX_MAG_60_R";
+#endif
