@@ -2,7 +2,12 @@
 #include "sdk/OBJECTSTATE2.H"
 
 unsigned short Menu_GetFloatHighWord(float value) {
+#if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+    /* A little-endian host keeps the high half (sign, exponent, top mantissa bits) at the second halfword. */
+    return ((unsigned short *)&value)[1];
+#else
     return *(unsigned short *)&value;
+#endif
 }
 
 #if defined(VERSION_EU)
