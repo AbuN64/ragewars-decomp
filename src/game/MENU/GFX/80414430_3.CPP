@@ -142,13 +142,13 @@ void Gfx_SetCombineMode(int mode){
 
 /* Selects vertex mode when it differs from D_800DF278: mode 9 loads an identity model matrix
    through XMath_SetIdentityMatrix and Gfx_EmitMatrix, transforms the point (0, 0, D_800DD3FC) by the view
-   D_80141168, loads four white vertices at that point and marks each vertex's screen position for
+   g_uiPointTransform, loads four white vertices at that point and marks each vertex's screen position for
    modification. */
 
 extern Gfx *g_displayListCursor;
 extern s32 D_800DF278;
 
-extern char D_80141168;
+extern char g_uiPointTransform;
 
 extern void XMath_SetIdentityMatrix(Matrix *m);
 extern Vtx10 *ESmem_AllocateFrameHeapHigh(s32 size);
@@ -170,7 +170,7 @@ void Gfx_SetPrimitiveVertexMode(s32 mode) {
         point.x = 0.0f;
         point.y = 0.0f;
         point.z = D_800DD3FC;
-        GraphU64_TransformPoint(&D_80141168, &point, &projected);
+        GraphU64_TransformPoint(&g_uiPointTransform, &point, &projected);
         count = 4;
         vertices = ESmem_AllocateFrameHeapHigh(0x40);
         for (i = 0; i < count; i++) {

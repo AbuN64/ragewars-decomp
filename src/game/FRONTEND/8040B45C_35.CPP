@@ -96,7 +96,7 @@ extern void Frontend_DrawVisibleSiblings(void *, Args);
 
 extern struct Shape_typemap_165 D_8014D580;
 
-/* Releases every loaded slot of the active, referenced entries of the pool at D_80153C20: each
+/* Releases every loaded slot of the active, referenced entries of the pool at g_frontendResourceFontCount: each
    loaded slot (flag 1) has its data released through Gfx_ReleaseImage, its flags and owner cleared and
    the entry's reference count decremented, and an entry left without references is unloaded
    through Frontend_ReleaseChunkImages and marked inactive. Pool layout and indexed slot access follow Frontend_ReleaseChunkImages. */
@@ -109,20 +109,20 @@ extern struct Shape_typemap_165 D_8014D580;
 
 
 
-extern PoolFrontendReleaseActiveChunkImages D_80153C20;
+extern PoolFrontendReleaseActiveChunkImages g_frontendResourceFontCount;
 
 
 /* Relocates a loaded widget list and its children from the stored base to base: for widgets
    flagged 0x10 rebases the four resource words, then by widget type clears an out-of-range image
    index (type 3), rebases the extra pointer and marks the widget 0x800 (type 2), clears the fourth
    word (type 4) or turns the three packed resource references (index and offset) into pointers,
-   acquiring resources through Frontend_AcquireArchiveEntry and marking them in D_80153C4C as needed (type 8);
+   acquiring resources through Frontend_AcquireArchiveEntry and marking them in g_frontendResourceScreenFlags as needed (type 8);
    it then rebases the name (clearing it for an empty type 2 widget), the child list, which it
    relocates recursively, and the next pointer. */
 
 
 
-extern s16 D_80153C0C;
+extern s16 g_frontendResourceTextureCount;
 
 
 extern void *Frontend_GetScreenData(s32 index);
@@ -143,7 +143,7 @@ static inline void func_8040F75C_resolve(UiWidget *widget) {
         if (data == 0) {
             Frontend_AcquireArchiveEntry(index);
             data = Frontend_GetScreenData(index);
-            D_80153C4C[index] |= 1;
+            g_frontendResourceScreenFlags[index] |= 1;
         }
         w->words[0] = data + offset;
     }
@@ -154,7 +154,7 @@ static inline void func_8040F75C_resolve(UiWidget *widget) {
         if (data == 0) {
             Frontend_AcquireArchiveEntry(index);
             data = Frontend_GetScreenData(index);
-            D_80153C4C[index] |= 1;
+            g_frontendResourceScreenFlags[index] |= 1;
         }
         w->words[1] = data + offset;
     }
@@ -165,7 +165,7 @@ static inline void func_8040F75C_resolve(UiWidget *widget) {
         if (data == 0) {
             Frontend_AcquireArchiveEntry(index);
             data = Frontend_GetScreenData(index);
-            D_80153C4C[index] |= 1;
+            g_frontendResourceScreenFlags[index] |= 1;
         }
         w->words[2] = data + offset;
     }
@@ -455,22 +455,22 @@ void Frontend_ReleaseActiveChunkImages(void) {
     s32 i;
     SlotRecAtCV2 *slot;
 
-    for (e = 0; e < D_80153C20.count; e++) {
-        if (D_80153C20.entries[e].refCount != 0 && D_80153C20.entries[e].active != 0) {
-            for (n = 0; n < D_80153C20.entries[e].def->unkE; n++) {
-                slot = D_80153C20.entries[e].pages[n];
+    for (e = 0; e < g_frontendResourceFontCount.count; e++) {
+        if (g_frontendResourceFontCount.entries[e].refCount != 0 && g_frontendResourceFontCount.entries[e].active != 0) {
+            for (n = 0; n < g_frontendResourceFontCount.entries[e].def->unkE; n++) {
+                slot = g_frontendResourceFontCount.entries[e].pages[n];
                 for (i = 0; i < 0x60; i++) {
                     if (slot[i].flags & 1) {
                         Gfx_ReleaseImage((struct OwnedImage *)slot[i].data);
                         slot[i].flags = 0;
                         slot[i].owner = 0;
-                        D_80153C20.entries[e].refCount--;
+                        g_frontendResourceFontCount.entries[e].refCount--;
                     }
                 }
             }
-            if (D_80153C20.entries[e].refCount == 0) {
+            if (g_frontendResourceFontCount.entries[e].refCount == 0) {
                 Frontend_ReleaseChunkImages(e);
-                D_80153C20.entries[e].active = 0;
+                g_frontendResourceFontCount.entries[e].active = 0;
             }
         }
     }
@@ -494,7 +494,7 @@ void Frontend_RelocateWidgetTree(UiWidget *widget, s32 base, s32 old) {
         }
         switch (widget->type) {
             case 3:
-                if (widget->words[0] < 0 || D_80153C0C - 1 < widget->words[0]) {
+                if (widget->words[0] < 0 || g_frontendResourceTextureCount - 1 < widget->words[0]) {
                     widget->words[0] = 0;
                 }
                 break;
@@ -546,33 +546,33 @@ void Frontend_LoadLanguageStrings(s32 languageIndex) {
     u8 *character;
 
     closeArchive = 0;
-    stringCount = D_801539B0.LangTable[languageIndex].count;
-    if (D_801539B0.StringBuffer != 0) {
-        Cache_FreeMemory(D_801539B0.StringBuffer);
+    stringCount = g_frontendResourceState.LangTable[languageIndex].count;
+    if (g_frontendResourceState.StringBuffer != 0) {
+        Cache_FreeMemory(g_frontendResourceState.StringBuffer);
     }
-    D_801539B0.StringBuffer = 0;
-    if (D_801539B0.StringTable != 0) {
-        Cache_FreeMemory(D_801539B0.StringTable);
+    g_frontendResourceState.StringBuffer = 0;
+    if (g_frontendResourceState.StringTable != 0) {
+        Cache_FreeMemory(g_frontendResourceState.StringTable);
     }
-    D_801539B0.StringTable = 0;
-    if (languageIndex < D_801539B0.NLanguages - 1) {
-        bufferSize = D_801539B0.LangTable[languageIndex + 1].start - D_801539B0.LangTable[languageIndex].start;
+    g_frontendResourceState.StringTable = 0;
+    if (languageIndex < g_frontendResourceState.NLanguages - 1) {
+        bufferSize = g_frontendResourceState.LangTable[languageIndex + 1].start - g_frontendResourceState.LangTable[languageIndex].start;
     } else {
-        bufferSize = D_801539B0.Header.StringTableLen - D_801539B0.LangTable[languageIndex].start;
+        bufferSize = g_frontendResourceState.Header.StringTableLen - g_frontendResourceState.LangTable[languageIndex].start;
     }
-    D_801539B0.StringBuffer = Cache_AllocateMemory(bufferSize);
-    XStdio_SeekStream(D_801539B0.In, D_801539B0.LangTable[languageIndex].start + D_801539B0.Header.StringTable, 0);
-    XStdio_ReadStream(D_801539B0.StringBuffer, bufferSize, 1, D_801539B0.In);
+    g_frontendResourceState.StringBuffer = Cache_AllocateMemory(bufferSize);
+    XStdio_SeekStream(g_frontendResourceState.In, g_frontendResourceState.LangTable[languageIndex].start + g_frontendResourceState.Header.StringTable, 0);
+    XStdio_ReadStream(g_frontendResourceState.StringBuffer, bufferSize, 1, g_frontendResourceState.In);
     if (closeArchive) {
-        XStdio_CloseStream(D_801539B0.In);
-        D_801539B0.In = 0;
+        XStdio_CloseStream(g_frontendResourceState.In);
+        g_frontendResourceState.In = 0;
     }
-    D_801539B0.StringTable = Cache_AllocateMemory(stringCount << 2);
-    D_801539B0.StringTable[0] = D_801539B0.StringBuffer;
+    g_frontendResourceState.StringTable = Cache_AllocateMemory(stringCount << 2);
+    g_frontendResourceState.StringTable[0] = g_frontendResourceState.StringBuffer;
     stringIndex = 1;
-    for (character = (u8 *)D_801539B0.StringBuffer + 1; character < (u8 *)D_801539B0.StringBuffer + bufferSize && stringIndex < stringCount; character++) {
+    for (character = (u8 *)g_frontendResourceState.StringBuffer + 1; character < (u8 *)g_frontendResourceState.StringBuffer + bufferSize && stringIndex < stringCount; character++) {
         if (*character == 0) {
-            D_801539B0.StringTable[stringIndex] = (char *)character + 1;
+            g_frontendResourceState.StringTable[stringIndex] = (char *)character + 1;
             stringIndex++;
         }
     }
@@ -595,69 +595,69 @@ void Frontend_OpenResourceArchive(u8 *name) {
     s32 n;
     s32 j;
 
-    res = &D_801539B0;
+    res = &g_frontendResourceState;
     handle = XStdio_OpenStream(name, &D_800DD0B0);
     res->In = handle;
-    XStdio_ReadStream(&D_801539B0.Header, sizeof(t_res_header), 1, handle);
-    D_801539B0.NTextures = D_801539B0.Header.TextureTableLen / sizeof(_sm_texture_element);
-    if (D_801539B0.NTextures > 0) {
-        D_801539B0.VramPool = Cache_AllocateMemory(D_801539B0.NTextures * sizeof(struct OwnedImage));
-        D_801539B0.TexTimer = Cache_AllocateMemory(D_801539B0.NTextures * sizeof(struct ResourceRecAt6));
-        D_801539B0.ChromaKey = Cache_AllocateMemory(D_801539B0.NTextures * sizeof(void *));
-        texture = D_801539B0.Texture = Cache_AllocateMemory(D_801539B0.Header.TextureTableLen);
-        XStdio_SeekStream(res->In, D_801539B0.Header.TextureTable, 0);
-        XStdio_ReadStream(texture, sizeof(_sm_texture_element), D_801539B0.NTextures, res->In);
-        for (i = 0; i < D_801539B0.NTextures; i++, texture++) {
+    XStdio_ReadStream(&g_frontendResourceState.Header, sizeof(t_res_header), 1, handle);
+    g_frontendResourceState.NTextures = g_frontendResourceState.Header.TextureTableLen / sizeof(_sm_texture_element);
+    if (g_frontendResourceState.NTextures > 0) {
+        g_frontendResourceState.VramPool = Cache_AllocateMemory(g_frontendResourceState.NTextures * sizeof(struct OwnedImage));
+        g_frontendResourceState.TexTimer = Cache_AllocateMemory(g_frontendResourceState.NTextures * sizeof(struct ResourceRecAt6));
+        g_frontendResourceState.ChromaKey = Cache_AllocateMemory(g_frontendResourceState.NTextures * sizeof(void *));
+        texture = g_frontendResourceState.Texture = Cache_AllocateMemory(g_frontendResourceState.Header.TextureTableLen);
+        XStdio_SeekStream(res->In, g_frontendResourceState.Header.TextureTable, 0);
+        XStdio_ReadStream(texture, sizeof(_sm_texture_element), g_frontendResourceState.NTextures, res->In);
+        for (i = 0; i < g_frontendResourceState.NTextures; i++, texture++) {
             texture->SMFlags = 0;
             texture->TPage = 0;
-            D_801539B0.TexTimer[i].retained = 0;
-            D_801539B0.TexTimer[i].id = 0;
-            D_801539B0.Texture[i].VramAddr = &D_801539B0.VramPool[i];
-            Gfx_ResetImage(&D_801539B0.VramPool[i]);
+            g_frontendResourceState.TexTimer[i].retained = 0;
+            g_frontendResourceState.TexTimer[i].id = 0;
+            g_frontendResourceState.Texture[i].VramAddr = &g_frontendResourceState.VramPool[i];
+            Gfx_ResetImage(&g_frontendResourceState.VramPool[i]);
         }
     }
-    D_801539B0.NLanguages = D_801539B0.Header.LanguageTableLen / sizeof(ArchiveTextIndexEntry);
-    if (D_801539B0.NLanguages > 0) {
-        D_801539B0.LangTable = Cache_AllocateMemory(D_801539B0.Header.LanguageTableLen);
-        XStdio_SeekStream(res->In, D_801539B0.Header.LanguageTable, 0);
-        XStdio_ReadStream(D_801539B0.LangTable, D_801539B0.Header.LanguageTableLen, 1, res->In);
+    g_frontendResourceState.NLanguages = g_frontendResourceState.Header.LanguageTableLen / sizeof(ArchiveTextIndexEntry);
+    if (g_frontendResourceState.NLanguages > 0) {
+        g_frontendResourceState.LangTable = Cache_AllocateMemory(g_frontendResourceState.Header.LanguageTableLen);
+        XStdio_SeekStream(res->In, g_frontendResourceState.Header.LanguageTable, 0);
+        XStdio_ReadStream(g_frontendResourceState.LangTable, g_frontendResourceState.Header.LanguageTableLen, 1, res->In);
         Frontend_LoadLanguageStrings(0);
     }
-    D_801539B0.NScreens = D_801539B0.Header.ScreenTableLen / sizeof(ArchiveMapEntry);
-    if (D_801539B0.NScreens > 0) {
-        D_801539B0.Screen = Cache_AllocateMemory(D_801539B0.Header.ScreenTableLen);
+    g_frontendResourceState.NScreens = g_frontendResourceState.Header.ScreenTableLen / sizeof(ArchiveMapEntry);
+    if (g_frontendResourceState.NScreens > 0) {
+        g_frontendResourceState.Screen = Cache_AllocateMemory(g_frontendResourceState.Header.ScreenTableLen);
         if (D_800E2AC4 != 0) {
-            D_801539B0.ScreenOriginal = Cache_AllocateMemory(D_801539B0.Header.ScreenTableLen);
-            XPlus_FillBytes(D_801539B0.ScreenOriginal, 0, D_801539B0.Header.ScreenTableLen);
+            g_frontendResourceState.ScreenOriginal = Cache_AllocateMemory(g_frontendResourceState.Header.ScreenTableLen);
+            XPlus_FillBytes(g_frontendResourceState.ScreenOriginal, 0, g_frontendResourceState.Header.ScreenTableLen);
         }
-        XStdio_SeekStream(res->In, D_801539B0.Header.ScreenTable, 0);
-        XStdio_ReadStream(D_801539B0.Screen, D_801539B0.Header.ScreenTableLen, 1, res->In);
-        for (i = 0; i < D_801539B0.NScreens; i++) {
-            D_801539B0.Screen[i].data = 0;
+        XStdio_SeekStream(res->In, g_frontendResourceState.Header.ScreenTable, 0);
+        XStdio_ReadStream(g_frontendResourceState.Screen, g_frontendResourceState.Header.ScreenTableLen, 1, res->In);
+        for (i = 0; i < g_frontendResourceState.NScreens; i++) {
+            g_frontendResourceState.Screen[i].data = 0;
         }
-        D_801539B0.RefCount = Cache_AllocateMemory(D_801539B0.NScreens * sizeof(s16));
-        XPlus_FillBytes(D_801539B0.RefCount, 0, D_801539B0.NScreens * sizeof(s16));
-        D_801539B0.ScreenFlags = Cache_AllocateMemory(D_801539B0.NScreens * sizeof(s16));
-        XPlus_FillBytes(D_801539B0.ScreenFlags, 0, D_801539B0.NScreens * sizeof(s16));
+        g_frontendResourceState.RefCount = Cache_AllocateMemory(g_frontendResourceState.NScreens * sizeof(s16));
+        XPlus_FillBytes(g_frontendResourceState.RefCount, 0, g_frontendResourceState.NScreens * sizeof(s16));
+        g_frontendResourceState.ScreenFlags = Cache_AllocateMemory(g_frontendResourceState.NScreens * sizeof(s16));
+        XPlus_FillBytes(g_frontendResourceState.ScreenFlags, 0, g_frontendResourceState.NScreens * sizeof(s16));
     }
-    if (D_801539B0.Header.FontTableLen > 0) {
-        clutOffsets = Cache_AllocateMemory(D_801539B0.Header.FontClutTableLen);
-        XStdio_SeekStream(res->In, D_801539B0.Header.FontClutTable, 0);
-        XStdio_ReadStream(clutOffsets, D_801539B0.Header.FontClutTableLen, 1, res->In);
-        D_801539B0.FontTable = Cache_AllocateMemory(D_801539B0.Header.FontTableLen);
-        XStdio_SeekStream(res->In, D_801539B0.Header.FontTable, 0);
-        XStdio_ReadStream(D_801539B0.FontTable, D_801539B0.Header.FontTableLen, 1, res->In);
-        D_801539B0.NFonts = D_801539B0.Header.FontTableLen / sizeof(ArchiveFontRecord);
-        D_801539B0.Font = Cache_AllocateMemory(D_801539B0.NFonts * sizeof(_sm_font));
-        XPlus_FillBytes(D_801539B0.Font, 0, D_801539B0.NFonts * sizeof(_sm_font));
-        for (i = 0; i < D_801539B0.NFonts; i++) {
-            D_801539B0.Font[i].TableEntry = &D_801539B0.FontTable[i];
+    if (g_frontendResourceState.Header.FontTableLen > 0) {
+        clutOffsets = Cache_AllocateMemory(g_frontendResourceState.Header.FontClutTableLen);
+        XStdio_SeekStream(res->In, g_frontendResourceState.Header.FontClutTable, 0);
+        XStdio_ReadStream(clutOffsets, g_frontendResourceState.Header.FontClutTableLen, 1, res->In);
+        g_frontendResourceState.FontTable = Cache_AllocateMemory(g_frontendResourceState.Header.FontTableLen);
+        XStdio_SeekStream(res->In, g_frontendResourceState.Header.FontTable, 0);
+        XStdio_ReadStream(g_frontendResourceState.FontTable, g_frontendResourceState.Header.FontTableLen, 1, res->In);
+        g_frontendResourceState.NFonts = g_frontendResourceState.Header.FontTableLen / sizeof(ArchiveFontRecord);
+        g_frontendResourceState.Font = Cache_AllocateMemory(g_frontendResourceState.NFonts * sizeof(_sm_font));
+        XPlus_FillBytes(g_frontendResourceState.Font, 0, g_frontendResourceState.NFonts * sizeof(_sm_font));
+        for (i = 0; i < g_frontendResourceState.NFonts; i++) {
+            g_frontendResourceState.Font[i].TableEntry = &g_frontendResourceState.FontTable[i];
         }
         clut = 0;
-        for (n = 0; n < D_801539B0.NFonts; n++) {
-            entry = D_801539B0.Font[n].TableEntry;
-            font = &D_801539B0.Font[n];
-            XStdio_SeekStream(res->In, D_801539B0.Header.FontData + entry->glyphTableOffset, 0);
+        for (n = 0; n < g_frontendResourceState.NFonts; n++) {
+            entry = g_frontendResourceState.Font[n].TableEntry;
+            font = &g_frontendResourceState.Font[n];
+            XStdio_SeekStream(res->In, g_frontendResourceState.Header.FontData + entry->glyphTableOffset, 0);
             XStdio_ReadStream(font->CharInfo, 8, 0x60, res->In);
             font->Char = Cache_AllocateMemory(entry->bitmapCount * sizeof(t_char *));
             font->Char[0] = Cache_AllocateMemory(entry->bitmapCount * 96 * sizeof(t_char));
@@ -669,7 +669,7 @@ void Frontend_OpenResourceArchive(u8 *name) {
                 stride = (entry->glyphWidth * 2 + 7) & ~7;
                 font->Clut = Cache_AllocateMemory(entry->bitmapCount * sizeof(t_char *));
                 font->Clut[0] = Cache_AllocateMemory(entry->bitmapCount * stride);
-                XStdio_SeekStream(res->In, D_801539B0.Header.CharData + clutOffsets[clut], 0);
+                XStdio_SeekStream(res->In, g_frontendResourceState.Header.CharData + clutOffsets[clut], 0);
                 XStdio_ReadStream(font->Clut[0], entry->bitmapCount * stride, 1, res->In);
                 for (j = 0; j < entry->bitmapCount; j++) {
                     font->Clut[j] = font->Clut[0] + j * stride;
@@ -682,11 +682,11 @@ void Frontend_OpenResourceArchive(u8 *name) {
         }
         Cache_FreeMemory(clutOffsets);
     } else {
-        D_801539B0.NFonts = 0;
+        g_frontendResourceState.NFonts = 0;
     }
-    D_801539B0.Init = 1;
-    XPlus_CopyString(D_801539B0.Name, name);
-    D_801539B0.NeverFreeResources = 0;
-    XStdio_CloseStream(D_801539B0.In);
-    D_801539B0.In = 0;
+    g_frontendResourceState.Init = 1;
+    XPlus_CopyString(g_frontendResourceState.Name, name);
+    g_frontendResourceState.NeverFreeResources = 0;
+    XStdio_CloseStream(g_frontendResourceState.In);
+    g_frontendResourceState.In = 0;
 }

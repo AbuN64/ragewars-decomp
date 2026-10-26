@@ -1,7 +1,7 @@
 #include "COMMON/MENULISTSCREEN.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
-extern struct Menu_func_80437718_de *D_800E5784;
+extern struct MenuMenuCreateTitleButtonScreen *D_800E5784;
 #include "SCENE/802508E0_13.H"
 
 /* Builds a three-item menu: allocates 0x14 bytes into D_800E5784 through Cache_AllocateMemory, creates the
@@ -10,7 +10,7 @@ extern struct Menu_func_80437718_de *D_800E5784;
    the three with 3 and -1 in the block. Returns zero. */
 
 
-extern struct Menu_func_80437718_de *Cache_AllocateMemory(s32);
+extern struct MenuMenuCreateTitleButtonScreen *Cache_AllocateMemory(s32);
 
 extern void *SmpFade_CreateFadeWidget(s32, s32);
 
@@ -22,7 +22,7 @@ extern struct ResourceSmpFlickerCreateFlickerWidget *Frontend_FindWidgetByResour
 
 
 
-s32 func_80437718_de(void *list) {
+s32 Menu_CreateTitleButtonScreen(void *list) {
     struct ResourceSmpFlickerCreateFlickerWidget *item;
     D_800E5784 = Cache_AllocateMemory(0x14);
 #if defined(VERSION_DE)
@@ -45,7 +45,7 @@ s32 func_80437718_de(void *list) {
     return 0;
 }
 
-s32 func_804377B8_de(void) {
+s32 Menu_FreeTitleButtonScreen(void) {
     Cache_FreeMemory(D_800E5784);
     D_800E5784 = 0;
     return 0;

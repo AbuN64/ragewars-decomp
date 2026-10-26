@@ -10,7 +10,7 @@ extern void Player_InitializeProfile(Profile *);
 extern Pulse *D_800E5950;
 extern Shared_MenuData D_80145040;
 extern void Items_ResetActorPools(void *, s32);
-extern void func_804499B0_de(void *, s32, s32);
+extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(u32);
@@ -19,7 +19,7 @@ extern void Tsmos_DeactivateControllerState(void);
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Tsmos_SetIdleTimer(f32);
 
-s32 func_8043A3B0_eu(MenuWidget *tree) {
+s32 Frontend_CreateProfileResetScreenEuropean(MenuWidget *tree) {
     s32 i;
     Shared_Game *settings;
     Shared_PlayerSettingsRecord *record;
@@ -28,7 +28,7 @@ s32 func_8043A3B0_eu(MenuWidget *tree) {
     D_800E5950 = Cache_AllocateMemory(sizeof(*D_800E5950));
     object = &D_80145040.object;
     Items_ResetActorPools(object, 0);
-    func_804499B0_de(&D_80145040, 0, 0);
+    Ovlgame_InitializePlayerPool(&D_80145040, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
     if (func_8025477C_de() == 0) {
         func_8025476C_de(1);

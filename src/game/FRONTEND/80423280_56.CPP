@@ -22,11 +22,11 @@ extern MatchScoreScreen *D_800E53C0;
 
 extern void MarkMenuEventHandled();
 
-extern s32 func_8043C308_de(void *);
+extern s32 Frontend_GetMenuImageState(void *);
 
 extern s32 Smos_GetFocusedElementId();
 
-extern void func_8043C278_de(void *);
+extern void Frontend_StartMenuImageTransition(void *);
 
 
 
@@ -59,7 +59,7 @@ extern s32 D_801468F4; /* MIXED Frontend_ActivateResultsAction */
 s32 Frontend_ActivateResultsAction(void) {
     s32 *paused;
     MarkMenuEventHandled();
-    if (func_8043C308_de(D_800E53C0) == 1) {
+    if (Frontend_GetMenuImageState(D_800E53C0) == 1) {
         return 0;
     }
     paused = &D_80146894;
@@ -73,7 +73,7 @@ s32 Frontend_ActivateResultsAction(void) {
     case 0x23E - 2:
 #endif
         if (((u8 *)paused)[-0x5BF] == 0) {
-            func_8043C278_de(D_800E53C0);
+            Frontend_StartMenuImageTransition(D_800E53C0);
             D_800E53C0->active = 0;
         } else {
             D_80146918 = 0;

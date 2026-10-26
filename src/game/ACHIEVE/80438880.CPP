@@ -17,8 +17,8 @@ extern u8 D_800FEB0F[], D_800FEB17[], D_800FEB4A[], D_800FEB54[], D_80102C24[], 
 extern s32 D_8010EB94[], D_80146894;
 extern void *Cache_AllocateMemory(), *Frontend_FindWidgetByResourceId(), *Achieve_CopyPreset(), *Achieve_GetResultText();
 extern s32 Defs_TestBit(), Achieve_ApplyLevelCompletionReward(), Achieve_AwardCharacterCompletionUnlock(), Frontend_FindKeyIndex();
-extern void Frontend_SetWidgetFlag08(), Frontend_SetWidgetFlag100(), func_8043C210_de(), func_8043C278_de(), func_80438A88_de(), Achieve_MarkLevelPlayed();
-extern void Defs_SetBitValue(), XPlus_FillMemory(), Achieve_UpdateUnlockTiers(), XStdio_FormatBuffer(), XPlus_CopyString(), Achieve_UpdatePlayerPreviewStats(), func_80438614_de();
+extern void Frontend_SetWidgetFlag08(), Frontend_SetWidgetFlag100(), Frontend_InitMenuImage(), Frontend_StartMenuImageTransition(), func_80438A88_de(), Achieve_MarkLevelPlayed();
+extern void Defs_SetBitValue(), XPlus_FillMemory(), Achieve_UpdateUnlockTiers(), XStdio_FormatBuffer(), XPlus_CopyString(), Achieve_UpdatePlayerPreviewStats(), Achieve_ConfigureResultModelPreview();
 extern void SmpButton_WrapButtonWidget(), Scene_CopyLevelName(), Tsmos_DeactivateControllerState();
 extern char *XPlus_UppercaseString();
 extern u8 D_800F00DC_raw[];
@@ -26,7 +26,7 @@ extern char g_world[];
 /* Builds the results screen (0x1C8-byte state D_800E5830): window items, the first active profile, then per screen mode
    (1 single, 3 time trial, 4 team) the stage entry, its time/records and the heading texts in the current language.
    Returns 0. */
-s32 func_80438880_eu(void *root) {
+s32 Achieve_CreateLocalizedResultsScreen(void *root) {
     u8 *g;
     u8 *it;
     s32 i, v, label;
@@ -38,8 +38,8 @@ s32 func_80438880_eu(void *root) {
     D_800E5830 = g;
     SG(g, void *, 0x20) = root;
     Frontend_SetWidgetFlag08(root, 0);
-    func_8043C210_de(g, 0x67, 0, 0, 0);
-    func_8043C278_de(g);
+    Frontend_InitMenuImage(g, 0x67, 0, 0, 0);
+    Frontend_StartMenuImageTransition(g);
     SG(g, s32, 0x1C) = 1;
     SG(Frontend_FindWidgetByResourceId(root, CS(0x26F)), u8, 0x10) = 0x6E;
     SG(Frontend_FindWidgetByResourceId(root, CS(0x274)), u8, 0x10) = 0x14;
@@ -132,7 +132,7 @@ s32 func_80438880_eu(void *root) {
     SG(it, u8 *, 0x38) = g + 0x18C;
     Achieve_UpdatePlayerPreviewStats();
     Achieve_UpdatePlayerPreviewStats();
-    func_80438614_de();
+    Achieve_ConfigureResultModelPreview();
 tail:
     SmpButton_WrapButtonWidget(CS(0x272));
     SmpButton_WrapButtonWidget(CS(0x273));
@@ -163,6 +163,6 @@ tail:
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80438880_eu);
+INCLUDE_ASM("ovl_80400000", Achieve_CreateLocalizedResultsScreen);
 #endif
 #endif

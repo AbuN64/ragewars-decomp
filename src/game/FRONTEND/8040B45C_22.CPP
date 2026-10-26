@@ -140,7 +140,7 @@ s32 Frontend_GetScreenMode(void) {
 /* Selects the video mode and resets viewport dimensions on the linked views. */
 extern int D_80000300, D_800CC374;
 extern unsigned int VideoModeIds[3][8];
-extern unsigned short D_8014D500;
+extern unsigned short g_frontendVideoModeId;
 struct VideoViewList {
     NodeRecAt2A8 *head;
     char reserved[0x1C];
@@ -164,7 +164,7 @@ void Frontend_SetVideoModeAndViewports(unsigned width, int a1, int a2, int a3, i
     if (width > 320) flags |= 4;
     if (D_800CC374) flags |= 2;
     if (width > 320) flags |= 1;
-    D_8014D500 = VideoModeIds[region][flags];
+    g_frontendVideoModeId = VideoModeIds[region][flags];
     Frontend_SetVideoViewport(width, a1, a2, a3, a4, a5);
     node = &D_80140FE8_de.defaultView;
     if (node) {

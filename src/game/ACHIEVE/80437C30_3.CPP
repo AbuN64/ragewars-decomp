@@ -27,9 +27,9 @@
 
 
 
-/* Handles event 1 on the screen D_800E5830: unless func_8043C308_de reports its menu in state 1 it
-   calls func_80438828_de; otherwise it advances the menu with Frontend_DrawMenuImage and func_8043C2A4_de and,
-   once func_8043C308_de reports 2, acts on the choice at 0x1C: choice 0 calls MarkMenuEventHandled, clears
+/* Handles event 1 on the screen D_800E5830: unless Frontend_GetMenuImageState reports its menu in state 1 it
+   calls Achieve_AdvanceResultModelPreview; otherwise it advances the menu with Frontend_DrawMenuImage and Frontend_AdvanceMenuImageTransition and,
+   once Frontend_GetMenuImageState reports 2, acts on the choice at 0x1C: choice 0 calls MarkMenuEventHandled, clears
    D_80146918 and D_801468F4 and leaves through SmXlate_SwitchScreen for screen 0xA unless D_80146948 is 1
    and D_8015402C is at least 35, in which case it leaves for screen 7 when option D_801462D5 is 1
    and screen 3 otherwise; choice 1 calls func_8040C428_de(0), shows the window argument, stops the
@@ -50,7 +50,7 @@ extern struct SelectionMessageScreen *D_800E5830;
 
 extern void Frontend_DrawMenuImage(struct MenuRules *);
 
-extern void func_8043C2A4_de(struct MenuRules *);
+extern void Frontend_AdvanceMenuImageTransition(struct MenuRules *);
 
 
 
@@ -98,7 +98,7 @@ s32 func_80438AD4_de(void) {
     return 0;
 }
 
-s32 func_80438ADC_de(void *window, void *unused1, s32 event) {
+s32 Achieve_UpdateResultsScreen(void *window, void *unused1, s32 event) {
     s32 state;
     char *object;
     s32 next;
@@ -106,11 +106,11 @@ s32 func_80438ADC_de(void *window, void *unused1, s32 event) {
     if (event != 1) {
         return 0;
     }
-    state = func_8043C308_de((Shared_OptionsScreen *)&D_800E5830->rules);
+    state = Frontend_GetMenuImageState((Shared_OptionsScreen *)&D_800E5830->rules);
     if (state == event) {
         Frontend_DrawMenuImage(&D_800E5830->rules);
-        func_8043C2A4_de(&D_800E5830->rules);
-        if (func_8043C308_de((Shared_OptionsScreen *)&D_800E5830->rules) != 2) {
+        Frontend_AdvanceMenuImageTransition(&D_800E5830->rules);
+        if (Frontend_GetMenuImageState((Shared_OptionsScreen *)&D_800E5830->rules) != 2) {
             return 0;
         }
         if (D_800E5830->rules.locked != 0) {
@@ -121,7 +121,7 @@ s32 func_80438ADC_de(void *window, void *unused1, s32 event) {
             Frontend_SetWidgetFlag08(window, 1);
             object = &D_80145088;
             Items_ResetActorPools(object, 0);
-            func_804499B0_de(object - 0x48, 0, 0);
+            Ovlgame_InitializePlayerPool(object - 0x48, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
             ((MatchMenuObjects *)(object))->transition = 8;
         } else {
@@ -150,12 +150,12 @@ s32 func_80438ADC_de(void *window, void *unused1, s32 event) {
             return 0;
         }
     } else {
-        func_80438828_de();
+        Achieve_AdvanceResultModelPreview();
     }
     return 0;
 }
 
-s32 func_80438C84_de(void *window) {
+s32 Achieve_UpdateResultSelectionMessage(void *window) {
     s32 *pair;
     s32 marked;
     if (D_800E28E0 > 0) {
@@ -206,15 +206,15 @@ enum { MSG_BACK = 0x273, MSG_HIDE = 0x272, MSG_LEAVE = 0x277 };
 enum { MSG_BACK = 0x278, MSG_HIDE = 0x277, MSG_LEAVE = 0x27C };
 #endif
 extern void PAKInterface_SetScreenPhase(s32);
-extern void func_8043C278_de(void *);
+extern void Frontend_StartMenuImageTransition(void *);
 
-s32 func_80438D94_de(void) {
+s32 Achieve_HandleResultsMenuChoice(void) {
     MarkMenuEventHandled();
-    if (func_8043C308_de((Shared_OptionsScreen *)&D_800E5830->rules) != 1) {
+    if (Frontend_GetMenuImageState((Shared_OptionsScreen *)&D_800E5830->rules) != 1) {
         D_80145088.status[7] = 0;
         switch (Smos_GetFocusedElementId()) {
         case MSG_HIDE:
-            func_8043C278_de(D_800E5830);
+            Frontend_StartMenuImageTransition(D_800E5830);
             D_800E5830->rules.locked = 0;
             break;
         case MSG_BACK:

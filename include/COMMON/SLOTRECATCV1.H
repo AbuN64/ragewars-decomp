@@ -79,7 +79,7 @@ struct PoolRecAtC {
 struct Field_u16_14;
 
 
-extern int D_80153C08;
+extern int g_frontendResourceFirstScreen;
 
 
 

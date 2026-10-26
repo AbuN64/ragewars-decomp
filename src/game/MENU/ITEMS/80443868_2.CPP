@@ -9,8 +9,8 @@
 #include "sdk/PFS/80443868_2.H"
 #include "GFX/TEXT/802A8A94_5.H"
 
-extern void func_8044972C_de(void *player);
-/* Forwards arg1's word at 0x1C to func_8044972C_de and always reports success. */
+extern void Ovlgame_PlacePlayerForRound(void *player);
+/* Forwards arg1's word at 0x1C to Ovlgame_PlacePlayerForRound and always reports success. */
 
 
 
@@ -19,7 +19,7 @@ extern void func_8044972C_de(void *player);
 
 
 /* When team sync is enabled, copies a player's team flag from its actor (byte 0x8F of the record at
-   0x5D8) into D_801468A0 if it is 1; then resumes the script D_8011FAC0 through func_8044DD50_de in mode
+   0x5D8) into D_801468A0 if it is 1; then resumes the script D_8011FAC0 through Ovlgame_ResetMatchControllerState in mode
    1 or else clears the actor's word at 0x5D0; returns 1. Matched through a local pointer to
    D_801468A0 and the team byte held in a local. */
 
@@ -34,7 +34,7 @@ extern void func_8044972C_de(void *player);
 
 #include "COMMON/GAME_SESSION.H"
 
-extern void func_8044DD50_de(char *);
+extern void Ovlgame_ResetMatchControllerState(char *);
 
 /* Advances the actor inactivity timer and reports pending menu state. */
 s32 func_8022B178_de(void *);
@@ -63,7 +63,7 @@ s32 func_804436F8_de(void *unused, struct RootRecAt1C *root) {
 }
 
 s32 func_80443710_de(void *unused0, StateRecAt1C *arg1) {
-    func_8044972C_de(arg1->unk1C);
+    Ovlgame_PlacePlayerForRound(arg1->unk1C);
     return 1;
 }
 
@@ -103,7 +103,7 @@ int func_80443844_de(int unused, PlayerRecAt1C *player) {
         }
     }
     if (D_80145070 == 1) {
-        func_8044DD50_de(&D_8011FAC0);
+        Ovlgame_ResetMatchControllerState(&D_8011FAC0);
     } else {
         player->actor->waiting = 0;
     }
@@ -120,7 +120,7 @@ s32 func_804438BC_de(StateRecAt1C *arg0) {
         temp_v0 = temp_s0->unk1340 + 1;
         temp_s0->unk1340 = temp_v0;
         if (temp_v0 >= 0x4C) {
-            func_8044972C_de(arg0->unk1C);
+            Ovlgame_PlacePlayerForRound(arg0->unk1C);
             return 1;
         }
     }

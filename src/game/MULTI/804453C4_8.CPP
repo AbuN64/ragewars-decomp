@@ -7,7 +7,7 @@
 #if defined(VERSION_US_REV1)
 /* Flips D_800D2AE0 between zero and one and returns zero. */
 
-s32 func_80446214_us_rev1(void) {
+s32 Pak_ToggleTextureVariationBypass(void) {
     D_800D2AE0 = D_800D2AE0 == 0;
     return 0;
 }
@@ -17,7 +17,7 @@ s32 func_80446214_us_rev1(void) {
 
 
 
-s32 func_80446230_us_rev1(struct FieldRecAt14 *field) {
+s32 Pak_UpdateTextureVariationBypassText(struct FieldRecAt14 *field) {
     if (D_800D2AE0 != 0) {
         field->text = D_800E6058;
     } else {

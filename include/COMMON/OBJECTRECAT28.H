@@ -4,8 +4,8 @@
 #include "COMMON/SHAREDPLAYER.H"
 struct Tree;
 
-struct State_func_80439B5C_de;
-typedef struct State_func_80439B5C_de State_func_80439B5C_de;
+struct StateFrontendInitModelPreviewTransform;
+typedef struct StateFrontendInitModelPreviewTransform StateFrontendInitModelPreviewTransform;
 
 struct ObjectRecAt28;
 struct Triple;
@@ -44,8 +44,8 @@ struct MenuModelItem {
     s32 flags;
 };
 
-struct State_func_80439B5C_de;
-struct State_func_80439B5C_de {
+struct StateFrontendInitModelPreviewTransform;
+struct StateFrontendInitModelPreviewTransform {
     s32 unk0;
     Triple first;
     Triple second;

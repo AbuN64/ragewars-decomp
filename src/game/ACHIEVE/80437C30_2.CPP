@@ -23,7 +23,7 @@ extern void func_802A2224_de();
 
 extern void Tsmos_DeactivateControllerState();
 
-void func_804389C4_de(void) {
+void Achieve_OpenResultsFrontend(void) {
     
 #if defined(VERSION_EU)
 Tsmos_InitializeEuropeanFrontend
@@ -39,7 +39,7 @@ func_802A2224_de
     SmXlate_SwitchScreen(0x12);
 }
 
-void func_804389F0_de(void) {
+void Achieve_SelectPostResultScreen(void) {
     s32 next;
     CGameStatus *layout = &D_801462C8.counters;
     layout->m_bCTFOn = 0;

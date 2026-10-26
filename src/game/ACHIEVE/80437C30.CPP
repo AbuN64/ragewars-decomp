@@ -26,8 +26,8 @@ extern struct ResultsHeadingCharacter D_800DFA6C[];
 extern s32 D_8015402C;
 extern f32 D_800E1F40;
 extern char *D_800D3578, *D_800D357C, *D_800D3580, *D_800D3588, *D_800D358C, *D_800D3590, *D_800D3594, *D_800D3598;
-extern void func_8043C210_de(void *, s32, s32, s32, s32);
-extern void func_8043C278_de(void *);
+extern void Frontend_InitMenuImage(void *, s32, s32, s32, s32);
+extern void Frontend_StartMenuImageTransition(void *);
 extern void func_80438A88_de();
 extern void Achieve_MarkLevelPlayed(s32);
 extern s32 Defs_TestBit(u8 *, s32);
@@ -43,10 +43,10 @@ extern void Scene_CopyLevelName(Shared_World *, s32, char *, s32);
 extern char *XPlus_UppercaseString(char *);
 extern void Tsmos_DeactivateControllerState(void);
 extern void Achieve_UpdatePlayerPreviewStats(void);
-extern void func_80438614_de(void);
+extern void Achieve_ConfigureResultModelPreview(void);
 /* Opens the level results screen: allocates the preview state, records the finished level for the winning
    player, unlocks the level-end achievements and fills the level name and status lines. */
-s32 func_80437C30_us_rev1(MenuWidget *menu) {
+s32 Achieve_CreateResultsScreen(MenuWidget *menu) {
     char levelName[0x40];
     MenuWidget *item;
     Active *preset;
@@ -63,8 +63,8 @@ s32 func_80437C30_us_rev1(MenuWidget *menu) {
     D_800E5830 = (ModelPreviewScreen *)Cache_AllocateMemory(sizeof(ModelPreviewScreen));
     D_800E5830->window = menu;
     Frontend_SetWidgetFlag08(menu, 0);
-    func_8043C210_de(D_800E5830, 0x67, 0, 0, 0);
-    func_8043C278_de(D_800E5830);
+    Frontend_InitMenuImage(D_800E5830, 0x67, 0, 0, 0);
+    Frontend_StartMenuImageTransition(D_800E5830);
     D_800E5830->cursor = 1;
     Frontend_FindWidgetByResourceId(menu, 0x26B + PREVIEW_ID_SHIFT)->alpha = 0x6E;
     Frontend_FindWidgetByResourceId(menu, 0x270 + PREVIEW_ID_SHIFT)->alpha = 0x14;
@@ -193,7 +193,7 @@ done:
         break;
     }
     Achieve_UpdatePlayerPreviewStats();
-    func_80438614_de();
+    Achieve_ConfigureResultModelPreview();
     SmpButton_WrapButtonWidget(0x26E + PREVIEW_ID_SHIFT);
     SmpButton_WrapButtonWidget(0x26F + PREVIEW_ID_SHIFT);
     SmpButton_WrapButtonWidget(0x273 + PREVIEW_ID_SHIFT);
@@ -322,7 +322,7 @@ extern f32 D_800E1F54;
 extern f32 D_800DDF30_de;
 /* Shows the selected preview row's model: sets its image widget, scales the model (0.3 for the listed models,
    0.009 otherwise; 0.3 with a lower camera for 0x1390/0x1392), places it and resets the row's fade. */
-void func_80438614_de(void) {
+void Achieve_ConfigureResultModelPreview(void) {
  SetupModelVector scale,offset,angle,position;
  s32 index, displacement, model;
  MenuWidget *item;
@@ -346,10 +346,10 @@ void func_80438614_de(void) {
    offset.value.x=0;offset.value.y=(&D_800DDF30_de)[1];offset.value.z=D_800DDF30_de;
    scale.value.x=D_800DDF38_de;scale.value.y=D_800DDF38_de;scale.value.z=D_800DDF38_de;
   }
-  func_80439B5C_de(&D_800E5830->modelWorkspace,0,scale.words,offset.words);
-  func_80439BE0_de(&D_800E5830->modelWorkspace,angle.words);
-  func_80439C30_de(&D_800E5830->modelWorkspace,position.words);
-  func_80439C80_de(&D_800E5830->modelWorkspace,model);
+  Frontend_InitModelPreviewTransform(&D_800E5830->modelWorkspace,0,scale.words,offset.words);
+  Frontend_SetPreviewRotation(&D_800E5830->modelWorkspace,angle.words);
+  Frontend_SetPreviewRotationSpeed(&D_800E5830->modelWorkspace,position.words);
+  Frontend_SetPreviewModel(&D_800E5830->modelWorkspace,model);
   D_800E5830->rows[index].unk4=0;
   D_800E5830->rows[index].unk8=10;
  }
@@ -365,13 +365,13 @@ void func_80438614_de(void) {
 #else
 void func_804399D0(MenuModelItem *item);
 #endif
-void func_80438614_de(void);
+void Achieve_ConfigureResultModelPreview(void);
 extern f32 D_800DDF3C_de;
 
 /* Advances the selected row's model preview animation one step: the preview scale (unk8) ramps up by 2
    toward 0x96 in state 0, holds in state 2 while the countdown (unkC) runs, and ramps back down to 10 in
    state 1, then moves the selection on. */
-void func_80438828_de(void) {
+void Achieve_AdvanceResultModelPreview(void) {
     s32 selected;
     s32 temp_v0;
     s32 temp_v0_2;
@@ -427,7 +427,7 @@ block_15:
             if (temp_v0_3 < 0xA) {
                 D_800E5830->rows[selected].unk8 = 0xA;
                 D_800E5830->selected += 1;
-                func_80438614_de();
+                Achieve_ConfigureResultModelPreview();
             }
             break;
         }

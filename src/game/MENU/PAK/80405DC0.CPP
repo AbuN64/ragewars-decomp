@@ -97,7 +97,7 @@ extern void Control_DisableControllerPak(s32 ch);
 extern void OvlScene_SetSelection(char *, s32, s32);
 
 struct GameSession;
-extern void func_8044DDD4_de(struct GameSession *);
+extern void Ovlgame_ResetGameClockAndSelectSpawn(struct GameSession *);
 
 extern void Pak_ProbeStatus(s32 ch);
 
@@ -181,7 +181,7 @@ s32 Pak_ClosePromptByKind(void *owner, MenuRecAt24 *menu) {
             OvlScene_SetSelection(&g_world, menu->player->menu, 2);
             return 1;
         }
-        func_8044DDD4_de(&D_8011FAC0);
+        Ovlgame_ResetGameClockAndSelectSpawn(&D_8011FAC0);
         return 1;
     }
     if (D_8015375C != 0) {
@@ -205,7 +205,7 @@ s32 Pak_ClosePromptByKind(void *owner, MenuRecAt24 *menu) {
         } else {
             Pak_OpenDialog(D_8014561C, D_0044FFA4, menu->player, menu->slot, 0);
         }
-    } else if (D_80153788 == 3 && D_8014D4D4 != 0) {
+    } else if (D_80153788 == 3 && g_pakAlternatePromptEnabled != 0) {
         Pak_ProbeStatus(ch);
         status = Pak_GetStatus(ch);
         connected = Control_TakePakChange(ch);

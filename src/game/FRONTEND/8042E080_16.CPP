@@ -9,14 +9,14 @@
    SmXlate_SwitchScreen; 0x3D3 plays cue 0x34 through func_8025E2D4_de when func_8025E2C4_de reports sound on,
    resets through Tsmos_DeactivateControllerState, sets the timer at 0x1C of screen D_800E5554 by setting
    D_801462D5 through jtbl_800DDEF0 (10, 15 or 10, and 20 for any other setting) and shows the
-   screen through func_8043C278_de. Returns zero. */
+   screen through Frontend_StartMenuImageTransition. Returns zero. */
 extern MenuRules *D_800E5554;
 extern void MarkMenuEventHandled(void);
 extern s32 Smos_GetFocusedElementId(void);
 extern void SmXlate_SwitchScreen(s32);
 
 extern void Tsmos_DeactivateControllerState(void);
-extern void func_8043C278_de(MenuRules *);
+extern void Frontend_StartMenuImageTransition(MenuRules *);
 
 #if defined(VERSION_DE)
 enum { MENU_80436224_979 = 973, MENU_80436224_981 = 975 };
@@ -53,7 +53,7 @@ s32 Frontend_UpdateTimedScreen(void) {
             D_800E5554->locked = 20;
             break;
         }
-        func_8043C278_de(D_800E5554);
+        Frontend_StartMenuImageTransition(D_800E5554);
         return 0;
     }
     return 0;

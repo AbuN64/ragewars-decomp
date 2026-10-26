@@ -14,7 +14,7 @@ extern u32 D_80154030;
 extern EntryRecAt0V2 D_0044EF44[];
 extern char D_800D7E14;
 
-s32 func_8043CF44_de(ObjRecAt14V1 *arg0) {
+s32 Menu_SetTextEntryResultLabel(ObjRecAt14V1 *arg0) {
     if (D_80154030 < 12) {
         arg0->unk14 = D_0044EF44[D_80154030].ptr;
     } else {
@@ -26,7 +26,7 @@ s32 func_8043CF44_de(ObjRecAt14V1 *arg0) {
 /* Steps index through the eleven entries (wrapping 10 to 0 and below 0 to 10), before the test when mode is 0 and after it otherwise, until one whose flag bit is set in D_801462CC; returns that index, or -1 after eleven tries. */
 
 
-s32 func_8043CF84_de(s32 index, s32 step, s32 mode) {
+s32 Menu_FindUnlockedLevel(s32 index, s32 step, s32 mode) {
     s32 i;
     s32 mask;
     s32 *flags; 

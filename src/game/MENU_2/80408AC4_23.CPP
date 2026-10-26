@@ -42,7 +42,7 @@ extern void Menu_ApplyExtraOptionFlags();
 s32 Menu_HandleGermanExtraOptionsChoice(void) {
     extern s32 SmpSlider_GetTransitionMode(s32);
     extern void SmpSlider_SetTransitionMode(s32, s32);
-    extern struct Record_func_80439C80_de *D_800E4400;
+    extern struct RecordFrontendSetPreviewModel *D_800E4400;
     if (SmpSlider_GetTransitionMode(D_800E4400->count) != 3) {
         return 0;
     }

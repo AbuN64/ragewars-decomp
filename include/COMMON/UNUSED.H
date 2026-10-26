@@ -70,7 +70,7 @@ extern s64 D_8011B1F0;
 
 extern char D_800C943C;
 
-extern s32 *D_80153C14;
+extern s32 *g_frontendResourceChromaKeys;
 
 extern char D_0044F82C_de;
 
@@ -227,7 +227,7 @@ extern s32 D_80147050_de;
 
 extern u64 D_8014ED10_de[];
 
-extern u32 D_8014DA08;
+extern u32 g_sourceBlueMask;
 
 extern char D_002BEAA4;
 
@@ -248,7 +248,7 @@ extern char D_800D7A08[];
 extern char D_8011FFB0;
 
 
-extern u32 D_8014DA00;
+extern u32 g_sourceRedMask;
 
 extern u64 D_80149B98;
 
@@ -280,7 +280,7 @@ extern u32 D_80000308;
 
 extern u8 D_800CBC94[];
 
-extern s32 D_80153C6C;
+extern s32 g_destinationColorIndex;
 
 extern int D_800E12D4[];
 
@@ -352,7 +352,7 @@ extern D801041F8_Layout D_801001F8;
 
 extern int D_80110620;
 
-extern u32 D_8014DA0C;
+extern u32 g_sourceAlphaMask;
 
 extern char *D_800D3514;
 
@@ -372,7 +372,7 @@ extern int D_800C32D0_de;
 
 extern char D_800D3B70[];
 
-extern u8 *D_80153C88;
+extern u8 *g_destinationPixelIndexBuffer;
 
 extern char D_800D3B4C[];
 
@@ -533,7 +533,7 @@ extern char D_800D3B54[];
 
 extern char D_0044E48C[];
 
-extern s32 D_80153C60;
+extern s32 g_sourceColorIndex;
 
 extern int D_800D2B84;
 
@@ -682,11 +682,11 @@ extern char D_0028E930;
 
 extern s32 D_80142850;
 
-extern void *D_8014D98C[];
+extern void *g_frontendResourceImagePool[];
 
 
 
-extern u8 *D_80153C7C;
+extern u8 *g_sourcePixelIndexBuffer;
 
 extern char D_800D7818[];
 
@@ -787,7 +787,7 @@ extern char *D_800D3760[];
 
 extern float D_800C7850_de;
 
-extern u32 D_8014DA10;
+extern u32 g_destinationRedMask;
 
 extern char D_800D3840[];
 
@@ -850,7 +850,7 @@ extern const f32 D_800C3200_de[];
 
 extern const float D_800C77D8_de;
 
-extern u32 D_8014DA18;
+extern u32 g_destinationBlueMask;
 
 
 
@@ -931,7 +931,7 @@ extern func_8020CA10_G1 D_800C3DFC_de;
 
 extern f32 D_800C3048_de[2];
 
-extern u32 D_8014DA04;
+extern u32 g_sourceGreenMask;
 
 extern char D_00204C34;
 
@@ -942,7 +942,7 @@ extern char D_800D3390;
 extern s32 D_80142898;
 
 
-extern char D_8010B304[];
+extern char g_controllerAccessMessages[];
 
 extern char D_800D382C[];
 
@@ -1134,7 +1134,7 @@ extern u8 D_80142226;
 
 extern s32 D_002B5730;
 
-extern s32 D_80153768;
+extern s32 g_pakNamePromptAccepted;
 
 extern char D_800D3928[];
 
@@ -1192,7 +1192,7 @@ extern s32 D_8014CFE4;
 
 extern char D_800D38F4[];
 
-extern char D_8010ACC0[];
+extern char g_controllerRumbleNodes[];
 
 extern s32 D_8010C570;
 
@@ -1206,11 +1206,11 @@ extern s32 D_800CD714;
 
 extern const float D_800C49A8_de;
 
-extern s32 D_80153734;
+extern s32 g_pakAlternateNameSelected;
 
 extern char D_800D39CC[];
 
-extern s32 D_80153C84;
+extern s32 g_destinationPixelOffset;
 
 extern s32 D_0044F6C4;
 
@@ -1295,7 +1295,7 @@ extern u8 D_8014D3E2;
 extern f32 D_800C3B48_de[];
 
 struct ShapeCode802B54A0;
-extern struct ShapeCode802B54A0 *D_80153D54;
+extern struct ShapeCode802B54A0 *g_conversionSourceImage;
 
 extern FieldRow D_800E58A8[];
 
@@ -1319,7 +1319,7 @@ extern unsigned int D_800CD894_de;
 
 extern CheatCode D_0044FB90[];
 
-extern s32 D_80153C78;
+extern s32 g_sourcePixelOffset;
 
 extern char D_800C38C4_de;
 
@@ -1427,7 +1427,7 @@ extern char D_800D7688;
 
 extern char D_800C8274;
 
-extern u16 *D_80153C4C;
+extern u16 *g_frontendResourceScreenFlags;
 
 extern char D_800E60E4[];
 
@@ -1481,7 +1481,7 @@ extern f32 D_800C9570[];
 
 extern s32 D_8011BDFC;
 
-extern s32 D_8014D714;
+extern s32 g_textBatchStyle;
 
 extern u32 D_800E28A4;
 
@@ -1493,7 +1493,7 @@ extern char D_800C49A0_de;
 
 extern s32 D_800E44A8;
 
-extern void (*D_80153CD0)(void);
+extern void (*g_readSourceColor)(void);
 
 extern char D_800D3888[];
 
@@ -1529,7 +1529,7 @@ extern s32 D_80111310;
 
 extern SlotVirtualReleaseVirtualRegion D_800FFB50[];
 
-extern void (*D_80153CDC)(void);
+extern void (*g_writeDestinationIndex)(void);
 
 extern char D_800E0F1A;
 
@@ -1599,7 +1599,7 @@ extern u8 D_B2000011;
 
 extern const float D_800CCB10;
 
-extern u32 D_8014DA14;
+extern u32 g_destinationGreenMask;
 
 extern float D_800DCB38;
 
@@ -1724,7 +1724,7 @@ extern struct StateFlags D_800E5A1A[][19];
 
 extern u8 D_8014D3E3;
 
-extern s32 D_8014D58C;
+extern s32 g_textClipBottom;
 
 extern char D_800D3924[];
 
@@ -1755,7 +1755,7 @@ extern s32 D_002B6480;
 
 extern unsigned char D_8000031C[];
 
-extern s32 D_8014D570;
+extern s32 g_textBatchCount;
 
 extern char D_800D3930[];
 
@@ -1783,7 +1783,7 @@ extern f32 D_80111D64;
 
 extern char D_800D3920[];
 
-extern void (*D_80153CD4)(void);
+extern void (*g_writeDestinationColor)(void);
 
 extern s32 D_800D34BC[];
 
@@ -1825,7 +1825,7 @@ extern char D_00451C64[];
 extern s32 D_80141128;
 
 
-extern s32 D_8014D0A0;
+extern s32 g_menuElementLoadCount;
 
 extern f32 D_800C9190_de[2];
 
@@ -1889,7 +1889,7 @@ extern double D_800C7868_de;
 
 extern char *D_800D3538;
 
-extern s32 D_8014D588;
+extern s32 g_textClipTop;
 
 extern const f64 D_800C5B40_de;
 
@@ -2008,7 +2008,7 @@ extern char s_animObjectInfoText;
 
 extern Handler802A2B50 D_800E372C;
 
-extern s32 D_8014D584;
+extern s32 g_textClipRight;
 
 extern const double D_800CC748;
 
@@ -2182,7 +2182,7 @@ extern f32 D_00450854[];
 extern f32 D_800C2850_de[];
 
 
-extern FileHeader D_8014D724;
+extern FileHeader g_frontendResourceFilename;
 
 struct ShapeCode802B54A0;
 extern struct ShapeCode802B54A0 *D_80153D58;
@@ -2212,7 +2212,7 @@ extern char *D_800D3564;
 
 extern char D_800D398C[];
 
-extern s32 D_80153C80;
+extern s32 g_sourcePixelIndex;
 
 extern char D_800D783C[];
 
@@ -2354,7 +2354,7 @@ extern char *D_800E1DA4[];
 
 extern f32 D_800CA3E0[];
 
-extern u32 D_8014DA1C;
+extern u32 g_destinationAlphaMask;
 
 extern FieldRow D_800E5438[];
 
@@ -2520,7 +2520,7 @@ extern s32 D_800FEB74[][100];
 
 extern char D_800D3854[];
 
-extern s32 D_80153770;
+extern s32 g_frontendPakPromptAccepted;
 
 extern const f64 D_800C5B38_de;
 
@@ -2756,8 +2756,8 @@ typedef struct EntryCode8040B45C EntryCode8040B45C;
 struct EntryCode8040B45C80411518;
 typedef struct EntryCode8040B45C80411518 EntryCode8040B45C80411518;
 
-struct Entry_func_8044D794_de;
-typedef struct Entry_func_8044D794_de Entry_func_8044D794_de;
+struct EntryOvlSceneDispatchAndRecycleQueuedTriggers;
+typedef struct EntryOvlSceneDispatchAndRecycleQueuedTriggers EntryOvlSceneDispatchAndRecycleQueuedTriggers;
 
 
 
@@ -3944,10 +3944,10 @@ struct EffectEventsSpawnAttachedEffect {
     struct EffectEventsSpawnAttachedEffect *child;
 };
 struct Ent;
-struct Entry_func_8044D794_de;
-struct Entry_func_8044D794_de {
+struct EntryOvlSceneDispatchAndRecycleQueuedTriggers;
+struct EntryOvlSceneDispatchAndRecycleQueuedTriggers {
     char pad0[4];
-    struct Entry_func_8044D794_de *next;
+    struct EntryOvlSceneDispatchAndRecycleQueuedTriggers *next;
     s32 handle;
 };
 struct FrameSequence;
@@ -4254,7 +4254,7 @@ struct OwnerCode8025A3EC {
     char pad2[0x2B98 - 0xDC - 40];
     void *listener;
 };
-struct Entry_func_8044D794_de;
+struct EntryOvlSceneDispatchAndRecycleQueuedTriggers;
 struct OwnerCode8044E2B8;
 struct PakNotesMenuItem;
 #include "COMMON/PAK_MENU.H"
@@ -4855,8 +4855,8 @@ struct func_8043DD30_S1;
 
 struct ActorCode80443868;
 typedef struct ActorCode80443868 ActorCode80443868;
-struct Actor_func_8044560C_de;
-typedef struct Actor_func_8044560C_de Actor_func_8044560C_de;
+struct ActorPakEnterPlayerOptions;
+typedef struct ActorPakEnterPlayerOptions ActorPakEnterPlayerOptions;
 struct Behaviour;
 typedef struct Behaviour Behaviour;
 struct Body;

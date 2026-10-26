@@ -8,21 +8,21 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "TYPES.H"
 
-typedef struct FlagOwner_func_8043FC50_eu {
+typedef struct FlagOwnerMultiResetPlayerGameOverTimer {
     char pad0[0x30];
     u32 flags;
-} FlagOwner_func_8043FC50_eu;
+} FlagOwnerMultiResetPlayerGameOverTimer;
 
-typedef struct Holder_func_8043FC50_eu {
+typedef struct HolderMultiResetPlayerGameOverTimer {
     char pad0[0xC];
-    FlagOwner_func_8043FC50_eu *owner;
-} Holder_func_8043FC50_eu;
+    FlagOwnerMultiResetPlayerGameOverTimer *owner;
+} HolderMultiResetPlayerGameOverTimer;
 
-void func_8043FC50_eu(Holder_func_8043FC50_eu *arg0) {
+void Multi_ResetPlayerGameOverTimer(HolderMultiResetPlayerGameOverTimer *arg0) {
     D_801462C8.counters.m_GameOverTimer = 120.0f;
     arg0->owner->flags &= 0xFBFFFFFF;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8043FC50_eu);
+INCLUDE_ASM("ovl_80400000", Multi_ResetPlayerGameOverTimer);
 #endif
 #endif

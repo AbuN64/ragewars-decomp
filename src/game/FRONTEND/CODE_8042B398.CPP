@@ -155,7 +155,7 @@ s32 ScenarioSetup_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
 
 
 extern void MarkMenuEventHandled();
-extern void func_80439C80_de(void *, s32);
+extern void Frontend_SetPreviewModel(void *, s32);
 #define SCR4D4 ((struct ScreenScenarioSetupSelectPreviousCatalogueItem *)D_800E4F60)
 s32 ScenarioSetup_SelectPreviousCatalogueItem(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 changed;
@@ -196,7 +196,7 @@ s32 ScenarioSetup_SelectPreviousCatalogueItem(void *unused0, void *unused1, void
     Frontend_SetWidgetFlag08(SCR4D4->marker, 1);
     SCR4D4->marker->x = SCR4D4->category * 34 + 0x7C;
     Frontend_SetWidgetFlag08(SCR4D4->right, 0);
-    func_80439C80_de(SCR4D4->view, SCR4D4->category + 0xEA6);
+    Frontend_SetPreviewModel(SCR4D4->view, SCR4D4->category + 0xEA6);
     return 0;
 }
 #undef SCR4D4
@@ -295,7 +295,7 @@ s32 ScenarioSetup_SelectPreviousCatalogueCategory(void *unused0, void *unused1, 
     }
     ScenarioSetup_RefreshSelectedArenaLabel();
     if (SCR78C->selection == 0) {
-        func_80439C80_de(SCR78C->view, SCR78C->category + 0xEA6);
+        Frontend_SetPreviewModel(SCR78C->view, SCR78C->category + 0xEA6);
         Frontend_SetWidgetFlag08(SCR78C->marker, 1);
         SCR78C->marker->x = SCR78C->category * 34 + 0x7C;
     }
@@ -341,7 +341,7 @@ s32 ScenarioSetup_SelectNextCatalogueCategory(void *unused0, void *unused1, void
     }
     ScenarioSetup_RefreshSelectedArenaLabel();
     if (SCR904->selection == 0) {
-        func_80439C80_de(SCR904->view, SCR904->category + 0xEA6);
+        Frontend_SetPreviewModel(SCR904->view, SCR904->category + 0xEA6);
         Frontend_SetWidgetFlag08(SCR904->marker, 1);
         SCR904->marker->x = SCR904->category * 34 + 0x7C;
     }
@@ -412,8 +412,8 @@ s32 ScenarioSetup_DispatchCatalogueEvent(void *arg0, s32 arg1, s32 arg2, s32 arg
 #include "COMMON/SETTINGSRECAT24.H"
 extern func_8042CE54_S1 *D_800E53C0;
 extern s8 D_80102B0D[], D_800FEB0E[];
-extern void func_8043C210_de(s32 *, s32, s32, s32, s32);
-extern void func_8043C278_de(s32 *);
+extern void Frontend_InitMenuImage(s32 *, s32, s32, s32, s32);
+extern void Frontend_StartMenuImageTransition(s32 *);
 extern void Frontend_AccumulatePlayerStatistics(void);
 extern void ScenarioSetup_SortResultsPlayers(void);
 extern void Achieve_UpdateMatchCounters(void *, s32);
@@ -441,8 +441,8 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
     D_800E53C0 = (void *)Cache_AllocateMemory(0x330);
     D_800E53C0->unkE0 = root;
     Frontend_SetWidgetFlag08(root, 0);
-    func_8043C210_de(D_800E53C0->transition, 0x67, 0, 0, 0);
-    func_8043C278_de(D_800E53C0->transition);
+    Frontend_InitMenuImage(D_800E53C0->transition, 0x67, 0, 0, 0);
+    Frontend_StartMenuImageTransition(D_800E53C0->transition);
     D_800E53C0->active = 1;
     Frontend_FindWidgetByResourceId(root, 0x234 + RESULTS_MENU_SHIFT)->alpha = 110;
     Frontend_FindWidgetByResourceId(root, 0x239 + RESULTS_MENU_SHIFT)->alpha = 20;
@@ -853,7 +853,7 @@ extern void MarkMenuEventHandled();
 
 extern s32 ScenarioSetup_GetCategoryEntryCount(s32);
 
-extern void func_80439C80_de(void *, s32);
+extern void Frontend_SetPreviewModel(void *, s32);
 
 /* Moves the selection of the screen D_800E4F60 on event 1: calls MarkMenuEventHandled and steps the
    selection at 0x438 forward while it stays below the count ScenarioSetup_GetCategoryEntryCount gives for the category's

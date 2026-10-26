@@ -9,16 +9,16 @@
 #include "MENU_2/804221A0_10.H"
 #include "SCENE/802508E0_13.H"
 extern s32 *D_800E44A0;
-extern s32 func_8043C308_de(s32 *record);
+extern s32 Frontend_GetMenuImageState(s32 *record);
 extern void *Cache_AllocateMemory(s32 size);
-extern void func_8043C210_de(s32 *, s32, s32, s32, s32);
+extern void Frontend_InitMenuImage(s32 *, s32, s32, s32, s32);
 
 s32 Menu_CreateOptionsImageTransition(void) {
     s32 *record = Cache_AllocateMemory(0x24);
     D_800E44A0 = record;
     record[7] = 0;
     record[8] = 0;
-    func_8043C210_de(record, 0x67, 0, 0, 0);
+    Frontend_InitMenuImage(record, 0x67, 0, 0, 0);
     return 0;
 }
 
@@ -26,15 +26,15 @@ s32 Menu_CreateOptionsImageTransition(void) {
 
 
 
-/* Event callback for screen D_800E44A0: on event 1 while func_8043C308_de reports the screen in state
-   1 it advances the screen through Frontend_DrawMenuImage and func_8043C2A4_de, and when that leaves it in
+/* Event callback for screen D_800E44A0: on event 1 while Frontend_GetMenuImageState reports the screen in state
+   1 it advances the screen through Frontend_DrawMenuImage and Frontend_AdvanceMenuImageTransition, and when that leaves it in
    state 2 it tears the match display down through Menu_ReleaseOptionsScene and Frontend_StartConfiguredMatch and calls
    func_80264854_de(1). Returns zero. */
 
 
 extern void Frontend_DrawMenuImage(void *);
 
-extern void func_8043C2A4_de(void *);
+extern void Frontend_AdvanceMenuImageTransition(void *);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 extern void Menu_ReleaseOptionsScene(void);
@@ -46,9 +46,9 @@ extern void Menu_ReleaseOptionsScene(void);
 
 extern void Frontend_StartConfiguredMatch(void);
 
-/* Unless func_8043C308_de reports one for the object D_800E44A0 holds, calls Tsmos_ActivateControllerState and, when
+/* Unless Frontend_GetMenuImageState reports one for the object D_800E44A0 holds, calls Tsmos_ActivateControllerState and, when
    the object's word at 0x20 is one, calls Tsmos_DeactivateControllerState, then func_80245B28_de and ScenarioSetup_ResetSelectionIndicators unless
-   the option byte D_801462D5 is set, and finally resets the object through func_8043C278_de. Returns
+   the option byte D_801462D5 is set, and finally resets the object through Frontend_StartMenuImageTransition. Returns
    zero. */
 
 
@@ -63,7 +63,7 @@ extern void Cinema_ReleaseSequenceContext();
 
 extern void ScenarioSetup_ResetSelectionIndicators();
 
-extern void func_8043C278_de(s32 *record);
+extern void Frontend_StartMenuImageTransition(s32 *record);
 
 /* On event 3 with value 0xB, calls MarkMenuEventHandled and sets the word at offset 0x20 of the object
    D_800E44A0 points to. Returns zero. */
@@ -93,12 +93,12 @@ s32 Menu_DestroyOptionsImageTransition(void) {
 
 s32 Menu_DrawOptionsImageTransition(s32 unused0, s32 unused1, s32 event) {
     if (event == 1) {
-        if (func_8043C308_de(D_800E44A0) != 1) {
+        if (Frontend_GetMenuImageState(D_800E44A0) != 1) {
             return 0;
         }
         Frontend_DrawMenuImage(D_800E44A0);
-        func_8043C2A4_de(D_800E44A0);
-        if (func_8043C308_de(D_800E44A0) != 2) {
+        Frontend_AdvanceMenuImageTransition(D_800E44A0);
+        if (Frontend_GetMenuImageState(D_800E44A0) != 2) {
             return 0;
         }
 #if defined(VERSION_DE)
@@ -121,7 +121,7 @@ func_8042201C_de
 s32 Menu_StartOptionsImageTransition(void) {
     s32 one = 1;
 
-    if (func_8043C308_de(D_800E44A0) == one) {
+    if (Frontend_GetMenuImageState(D_800E44A0) == one) {
         return 0;
     }
     Tsmos_ActivateControllerState();
@@ -133,7 +133,7 @@ s32 Menu_StartOptionsImageTransition(void) {
         Cinema_ReleaseSequenceContext();
         ScenarioSetup_ResetSelectionIndicators();
     }
-    func_8043C278_de(D_800E44A0);
+    Frontend_StartMenuImageTransition(D_800E44A0);
     return 0;
 }
 

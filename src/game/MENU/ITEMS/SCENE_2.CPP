@@ -15,7 +15,7 @@
 #include "MENU/ITEMS/SCENE_7.H"
 #include "MENU/PAK/80403BCC_4.H"
 
-extern void func_80449E18_de(CPlayerPool *);
+extern void Ovlgame_RefreshActivePlayerSceneState(CPlayerPool *);
 extern void func_80253908_de(s32 unusedHeap);
 extern s32 func_80254284_de(s32,void **,s32,void *);
 extern void **func_80254408_de(s32,s32,s32,s32,s32,s32,void *);
@@ -23,112 +23,112 @@ extern int SetN64_GetDirectoryEntry(int *,int,int);
 extern s32 SetN64_LocatePackSection(s32,s32,s32,s32 *);
 extern s32 D_00285160;
 extern char D_800F41F0;
-void OvlScene_LoadSceneResources(LevelCode8044ACCC *arg0, s32 arg1) {
-    s32 *sp20;
-    s32 *sp24;
-    void **temp_v0_10;
-    void **temp_v0_5;
-    void **temp_v0_9;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
-    s32 temp_v0_4;
-    s32 temp_v0_6;
-    s32 temp_v0_7;
-    s32 temp_v0_8;
-    s32 temp_v1;
+void OvlScene_LoadSceneResources(LevelCode8044ACCC *sceneToLoad, s32 cartridgeBankKey) {
+    s32 *cartridgeDirectory;
+    s32 *bloodlustLevelDirectory;
+    void **bloodlustWeaponResource;
+    void **warpDestinationsResource;
+    void **bloodlustLevelResource;
+    s32 levelDirectoryKey;
+    s32 textureDirectoryKey;
+    s32 objectDirectoryKey;
+    s32 binaryDirectoryKey;
+    s32 graphicsetDirectoryKey;
+    s32 sectionEighteenKey;
+    s32 linkGroupTypeData;
+    s32 sectionTwelveData;
 
-    Scene_ClearSceneObjectCounts(arg0);
-    arg0->unk0 = 0;
-    func_8044D1B4_de((char *)arg0);
-    arg0->unk4 = 0;
-    arg0->unk8 = 0;
-    arg0->unk1B40C = -1;
-    arg0->unk1B31C = 0;
-    arg0->unk1B308 = 0;
-    arg0->unk1B614 = 0;
-    arg0->unk1B618 = 0;
-    arg0->unk1B61C = 0;
-    arg0->unk1B660 = 0;
-    arg0->unk1B6A4 = 0;
-    arg0->unk1B6AC = 0;
+    Scene_ClearSceneObjectCounts(sceneToLoad);
+    sceneToLoad->unk0 = 0;
+    OvlScene_ResetSelectionState((char *)sceneToLoad);
+    sceneToLoad->unk4 = 0;
+    sceneToLoad->unk8 = 0;
+    sceneToLoad->unk1B40C = -1;
+    sceneToLoad->unk1B31C = 0;
+    sceneToLoad->unk1B308 = 0;
+    sceneToLoad->unk1B614 = 0;
+    sceneToLoad->unk1B618 = 0;
+    sceneToLoad->unk1B61C = 0;
+    sceneToLoad->unk1B660 = 0;
+    sceneToLoad->unk1B6A4 = 0;
+    sceneToLoad->unk1B6AC = 0;
     /* The global is the holder storage; its canonical scalar declaration is incomplete. */
-    ((void (*)(void *))func_80449E18_de)(&D_80145040);
+    ((void (*)(void *))Ovlgame_RefreshActivePlayerSceneState)(&D_80145040);
     /* The original resource API passes the unused arena argument. */
     func_80253908_de(0);
-    func_80254284_de(0, (void **)&sp20, arg1, &g_cartridgeIndex);
-    temp_v0 = SetN64_GetDirectoryEntry(sp20, arg1, 5);
-    arg0->unk1C = temp_v0;
-    func_80254284_de(0, (void **)(arg0->pad40 + 0xC), temp_v0, &D_800C4F60_de);
-    temp_v0_2 = SetN64_GetDirectoryEntry(sp20, arg1, 3);
-    arg0->unk20 = temp_v0_2;
-    func_80254284_de(0, (void **)(arg0->pad40 + 0x10), temp_v0_2, &g_textureSetsIndex);
-    arg0->unk94 = (s32) *func_80254408_de(0, (s32)sp20, 2, arg1, (s32)arg0, (s32)&D_00285160, &D_800C4F84_de);
-    temp_v0_3 = SetN64_GetDirectoryEntry(sp20, arg1, 0);
-    arg0->unk24 = temp_v0_3;
-    func_80254284_de(0, (void **)(arg0->pad40 + 0x14), temp_v0_3, &g_objectsIndex);
-    arg0->unk78 = (s32) *func_80254408_de(0, (s32)sp20, 1, arg1, (s32)arg0, (s32)&D_0044D934, &D_800C4FA4_de);
-    arg0->unkB4 = func_80254408_de(0, (s32)sp20, 4, arg1, (s32)arg0, (s32)&D_0044D804, &g_particleEffects);
-    arg0->unk98 = (s32) *func_80254408_de(0, (s32)sp20, 0xA, arg1, (s32)arg0, (s32)&D_00285160, &D_800C4F84_de);
-    temp_v0_4 = SetN64_GetDirectoryEntry(sp20, arg1, 9);
-    arg0->unk28 = temp_v0_4;
-    func_80254284_de(0, (void **)(arg0->pad40 + 0x18), temp_v0_4, &D_800C4FC8_de);
-    arg0->unk70 = (s32) *func_80254408_de(0, (s32)sp20, 0xB, arg1, (s32)arg0, (s32)&D_00285160, &g_particleSwooshes);
-    temp_v1 = (s32) *func_80254408_de(0, (s32)sp20, 0xC, arg1, (s32)arg0, (s32)&D_00285160, &D_800C4FEC_de);
-    arg0->unk80 = &D_800F91F0;
-    arg0->unkA0 = temp_v1;
-    arg0->unk38 = SetN64_LocatePackSection((s32)sp20, arg1, 6, (s32 *)(arg0->pad40 + 0x4));
-    arg0->unk84 = &D_800F41F0;
-    arg0->unk3C = SetN64_LocatePackSection((s32)sp20, arg1, 7, (s32 *)(arg0->pad40 + 0x8));
-    temp_v0_5 = func_80254408_de(0, (s32)sp20, 8, arg1, (s32)arg0, (s32)&D_00285160, &g_warpDests);
-    arg0->unk10C = temp_v0_5;
-    arg0->unk90 = (s32) *temp_v0_5;
-    arg0->unkA4 = (s32) *func_80254408_de(0, (s32)sp20, 0xD, arg1, (s32)arg0, (s32)&D_00285160, &g_curves);
-    arg0->unkAC = (s32) *func_80254408_de(0, (s32)sp20, 0xE, arg1, (s32)arg0, (s32)&D_00285160, &g_rumbleLabels);
-    arg0->unkA8 = (s32) *func_80254408_de(0, (s32)sp20, 0xF, arg1, (s32)arg0, (s32)&D_00285160, &D_800C5018_de);
-    arg0->unk9C = (s32) *func_80254408_de(0, (s32)sp20, 0x11, arg1, (s32)arg0, (s32)&D_00285160, &g_graphicsetType);
-    temp_v0_6 = SetN64_GetDirectoryEntry(sp20, arg1, 0x10);
-    arg0->unk2C = temp_v0_6;
-    func_80254284_de(0, (void **)(arg0->pad40 + 0x1C), temp_v0_6, &g_graphicsetIndex);
-    temp_v0_7 = SetN64_GetDirectoryEntry(sp20, arg1, 0x12);
-    arg0->unk34 = temp_v0_7;
-    func_80254284_de(0, (void **)arg0->pad74, temp_v0_7, &D_800C504C_de);
+    func_80254284_de(0, (void **)&cartridgeDirectory, cartridgeBankKey, &g_cartridgeIndex);
+    levelDirectoryKey = SetN64_GetDirectoryEntry(cartridgeDirectory, cartridgeBankKey, 5);
+    sceneToLoad->unk1C = levelDirectoryKey;
+    func_80254284_de(0, (void **)(sceneToLoad->pad40 + 0xC), levelDirectoryKey, &D_800C4F60_de);
+    textureDirectoryKey = SetN64_GetDirectoryEntry(cartridgeDirectory, cartridgeBankKey, 3);
+    sceneToLoad->unk20 = textureDirectoryKey;
+    func_80254284_de(0, (void **)(sceneToLoad->pad40 + 0x10), textureDirectoryKey, &g_textureSetsIndex);
+    sceneToLoad->unk94 = (s32) *func_80254408_de(0, (s32)cartridgeDirectory, 2, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &D_800C4F84_de);
+    objectDirectoryKey = SetN64_GetDirectoryEntry(cartridgeDirectory, cartridgeBankKey, 0);
+    sceneToLoad->unk24 = objectDirectoryKey;
+    func_80254284_de(0, (void **)(sceneToLoad->pad40 + 0x14), objectDirectoryKey, &g_objectsIndex);
+    sceneToLoad->unk78 = (s32) *func_80254408_de(0, (s32)cartridgeDirectory, 1, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_0044D934, &D_800C4FA4_de);
+    sceneToLoad->unkB4 = func_80254408_de(0, (s32)cartridgeDirectory, 4, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_0044D804, &g_particleEffects);
+    sceneToLoad->unk98 = (s32) *func_80254408_de(0, (s32)cartridgeDirectory, 0xA, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &D_800C4F84_de);
+    binaryDirectoryKey = SetN64_GetDirectoryEntry(cartridgeDirectory, cartridgeBankKey, 9);
+    sceneToLoad->unk28 = binaryDirectoryKey;
+    func_80254284_de(0, (void **)(sceneToLoad->pad40 + 0x18), binaryDirectoryKey, &D_800C4FC8_de);
+    sceneToLoad->unk70 = (s32) *func_80254408_de(0, (s32)cartridgeDirectory, 0xB, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &g_particleSwooshes);
+    sectionTwelveData = (s32) *func_80254408_de(0, (s32)cartridgeDirectory, 0xC, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &D_800C4FEC_de);
+    sceneToLoad->unk80 = &D_800F91F0;
+    sceneToLoad->unkA0 = sectionTwelveData;
+    sceneToLoad->unk38 = SetN64_LocatePackSection((s32)cartridgeDirectory, cartridgeBankKey, 6, (s32 *)(sceneToLoad->pad40 + 0x4));
+    sceneToLoad->unk84 = &D_800F41F0;
+    sceneToLoad->unk3C = SetN64_LocatePackSection((s32)cartridgeDirectory, cartridgeBankKey, 7, (s32 *)(sceneToLoad->pad40 + 0x8));
+    warpDestinationsResource = func_80254408_de(0, (s32)cartridgeDirectory, 8, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &g_warpDests);
+    sceneToLoad->unk10C = warpDestinationsResource;
+    sceneToLoad->unk90 = (s32) *warpDestinationsResource;
+    sceneToLoad->unkA4 = (s32) *func_80254408_de(0, (s32)cartridgeDirectory, 0xD, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &g_curves);
+    sceneToLoad->unkAC = (s32) *func_80254408_de(0, (s32)cartridgeDirectory, 0xE, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &g_rumbleLabels);
+    sceneToLoad->unkA8 = (s32) *func_80254408_de(0, (s32)cartridgeDirectory, 0xF, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &D_800C5018_de);
+    sceneToLoad->unk9C = (s32) *func_80254408_de(0, (s32)cartridgeDirectory, 0x11, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &g_graphicsetType);
+    graphicsetDirectoryKey = SetN64_GetDirectoryEntry(cartridgeDirectory, cartridgeBankKey, 0x10);
+    sceneToLoad->unk2C = graphicsetDirectoryKey;
+    func_80254284_de(0, (void **)(sceneToLoad->pad40 + 0x1C), graphicsetDirectoryKey, &g_graphicsetIndex);
+    sectionEighteenKey = SetN64_GetDirectoryEntry(cartridgeDirectory, cartridgeBankKey, 0x12);
+    sceneToLoad->unk34 = sectionEighteenKey;
+    func_80254284_de(0, (void **)sceneToLoad->pad74, sectionEighteenKey, &D_800C504C_de);
     Menu_RequestTrackBundle();
-    temp_v0_8 = (s32) *func_80254408_de(0, (s32)sp20, 0x13, arg1, (s32)arg0, (s32)&D_00285160, &g_linkGroupTypes);
-    arg0->unkC = 0;
-    arg0->unk10 = 0;
-    arg0->unk14 = 0;
-    arg0->unk18 = -1;
-    arg0->unkB0 = temp_v0_8;
-    if (*sp20 >= 0x16) {
-        arg0->unkC = SetN64_GetDirectoryEntry(sp20, arg1, 0x15);
-        temp_v0_9 = /* This callee returns its allocated resource handle, not an integer ID. */
-            ((void **(*)(s32,void **,s32,void *,s32))func_802540F4_de)(0, (void **)&sp24, arg0->unkC, &g_constructBlLevelDataIndex, 1);
-        if (temp_v0_9 != 0) {
-            arg0->unk10 = (s32) (((*sp24 * 4) + 0xF) & ~7);
-            Cache_ReleaseResource(0, temp_v0_9);
+    linkGroupTypeData = (s32) *func_80254408_de(0, (s32)cartridgeDirectory, 0x13, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &g_linkGroupTypes);
+    sceneToLoad->unkC = 0;
+    sceneToLoad->unk10 = 0;
+    sceneToLoad->unk14 = 0;
+    sceneToLoad->unk18 = -1;
+    sceneToLoad->unkB0 = linkGroupTypeData;
+    if (*cartridgeDirectory >= 0x16) {
+        sceneToLoad->unkC = SetN64_GetDirectoryEntry(cartridgeDirectory, cartridgeBankKey, 0x15);
+        bloodlustLevelResource = /* This callee returns its allocated resource handle, not an integer ID. */
+            ((void **(*)(s32,void **,s32,void *,s32))func_802540F4_de)(0, (void **)&bloodlustLevelDirectory, sceneToLoad->unkC, &g_constructBlLevelDataIndex, 1);
+        if (bloodlustLevelResource != 0) {
+            sceneToLoad->unk10 = (s32) (((*bloodlustLevelDirectory * 4) + 0xF) & ~7);
+            Cache_ReleaseResource(0, bloodlustLevelResource);
         } else {
-            arg0->unkC = 0;
+            sceneToLoad->unkC = 0;
         }
     }
-    if (*sp20 >= 0x18) {
-        temp_v0_10 = func_80254408_de(0, (s32)sp20, 0x17, arg1, (s32)arg0, (s32)&D_00285160, &g_bloodlustWeaponData);
-        Nav_LoadCollisionTable(*temp_v0_10);
-        Cache_ReleaseResource(0, temp_v0_10);
+    if (*cartridgeDirectory >= 0x18) {
+        bloodlustWeaponResource = func_80254408_de(0, (s32)cartridgeDirectory, 0x17, cartridgeBankKey, (s32)sceneToLoad, (s32)&D_00285160, &g_bloodlustWeaponData);
+        Nav_LoadCollisionTable(*bloodlustWeaponResource);
+        Cache_ReleaseResource(0, bloodlustWeaponResource);
     }
-    OvlScene_InitPreview((Shared_World *)arg0, arg1);
+    OvlScene_InitPreview((Shared_World *)sceneToLoad, cartridgeBankKey);
     D_800CD764_de = 1;
-    func_8044B600_de(arg0, arg0->pad1B410 + 0x40, 0xDAC);
-    func_8044B600_de(arg0, arg0->pad1B410 + 0x5C, 0xDAD);
-    func_8044B600_de(arg0, arg0->pad1B410 + 0x78, 0xDAE);
-    func_8044B600_de(arg0, arg0->pad1B410 + 0x94, 0xDAF);
-    func_8044B600_de(arg0, arg0->pad1B410 + 0xB0, 0xDB0);
-    arg0->unkF0 = 0;
-    arg0->unkF4 = 0;
-    arg0->unkFC = 0;
-    arg0->unkF8 = 0;
-    arg0->unk88 = 0;
-    arg0->unk120 = 0;
-    arg0->unk124 = 0;
-    Scene_LoadLevelResources(arg0, 0, 0);
+    OvlScene_CopySimpleModelHeader(sceneToLoad, sceneToLoad->pad1B410 + 0x40, 0xDAC);
+    OvlScene_CopySimpleModelHeader(sceneToLoad, sceneToLoad->pad1B410 + 0x5C, 0xDAD);
+    OvlScene_CopySimpleModelHeader(sceneToLoad, sceneToLoad->pad1B410 + 0x78, 0xDAE);
+    OvlScene_CopySimpleModelHeader(sceneToLoad, sceneToLoad->pad1B410 + 0x94, 0xDAF);
+    OvlScene_CopySimpleModelHeader(sceneToLoad, sceneToLoad->pad1B410 + 0xB0, 0xDB0);
+    sceneToLoad->unkF0 = 0;
+    sceneToLoad->unkF4 = 0;
+    sceneToLoad->unkFC = 0;
+    sceneToLoad->unkF8 = 0;
+    sceneToLoad->unk88 = 0;
+    sceneToLoad->unk120 = 0;
+    sceneToLoad->unk124 = 0;
+    Scene_LoadLevelResources(sceneToLoad, 0, 0);
 }

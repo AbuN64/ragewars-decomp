@@ -37,14 +37,14 @@ s32 func_80447F30_de(OSPfs *pfs)
 
     if (pfs->activebank != 0) {
         pfs->activebank = 0;
-        ret = func_80448CC4_de(pfs);
+        ret = Pfs_SelectActiveBank(pfs);
         if (ret != 0)
             return ret;
     }
     ret = func_802B84C0_de(pfs->queue, pfs->channel, 1, (u8 *)&temp);
     if (ret != 0)
         return ret;
-    func_80448BB4_de((u16 *)&temp, &sum, &isum);
+    Pfs_ComputeIdChecksums((u16 *)&temp, &sum, &isum);
     id = (__OSPackId *)&temp;
 
     if (((__OSPackId *)temp)->checksum != sum || ((__OSPackId *)temp)->inverted_checksum != isum) {

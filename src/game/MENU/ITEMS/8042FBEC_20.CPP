@@ -8,7 +8,7 @@ extern char *D_800E3B64[];
 /* Copies the eight-byte name from the language table entry D_800E3B64[language] into the record at 0x84. Only the default
    case of the original switch on the byte at 0x7F lives in this symbol (its jump table has cases 0..7); the others sit in the
    following unsplit code, so the draft applies the default copy to every value. */
-void func_80444F30_eu(u8 *record) {
+void Items_CopyDefaultLocalizedPlayerName(u8 *record) {
     s32 i;
     char *table = D_800E3B64[D_801462C8.language];
 
@@ -17,7 +17,7 @@ void func_80444F30_eu(u8 *record) {
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80444F30_eu);
+INCLUDE_ASM("ovl_80400000", Items_CopyDefaultLocalizedPlayerName);
 #endif
 #endif
 

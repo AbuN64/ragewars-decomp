@@ -142,8 +142,8 @@ void Smos_DrawScreenStack(void) {
     args.word18 = D_8014D080->field534;
     g_menuEventCount = 0;
     args.word20 = D_8014D080->field538;
-    args.word1C = D_80146E08 - 1;
-    args.word24 = D_80146E0C - 1;
+    args.word1C = g_screenDrawWidth - 1;
+    args.word24 = g_screenDrawHeight - 1;
 
     now = (s32)(N64Eng_GetTimeSeconds() * D_800C5680_de);
     if (s_smackFormat == 0) {
@@ -168,7 +168,7 @@ void Smos_DrawScreenStack(void) {
         } while (D_8014D080->current >= index);
     }
     DispatchScreenRangeEvent(0, 0xE0A, 1, 0, delta);
-    D_8014D0A0 = 0;
+    g_menuElementLoadCount = 0;
 }
 
 void Smos_SetFocusedElement(s32 id) {
@@ -392,7 +392,7 @@ s32 Smos_InvokeKindEventHandler(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
 s32 GetMenuScreenOwner(void) {
     s32 result;
     s32 field4;
-    result = D_80146E18;
+    result = g_dispatchingScreenOwner;
     if (result < 0) {
         field4 = D_8014D080->current;
         if (field4 < 0) {

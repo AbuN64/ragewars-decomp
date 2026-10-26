@@ -10,7 +10,7 @@
 #include "sdk/os_pif.h"
 void func_8044799C_de(u8 cmd);
 
-s32 func_80447818_de(OSMesgQueue *arg0, s8 *arg1) {
+s32 Items_QueryControllerPresence(OSMesgQueue *arg0, s8 *arg1) {
     EntryRecAt3 sp10;
     void *sp20;
     u8 sp24;
@@ -31,7 +31,7 @@ s32 func_80447818_de(OSMesgQueue *arg0, s8 *arg1) {
         osRecvMesg(arg0, &sp20, 1);
         temp_s6 = __osSiRawStartDma(0, (u8 *)&D_80154110);
         osRecvMesg(arg0, &sp20, 1);
-        func_80447A38_de(&sp24, &sp10);
+        Pfs_DecodeControllerStatusReplies(&sp24, &sp10);
         var_a0 = 0;
         if (D_8014D46C[0] != 0) {
             var_v1 = &sp10;
@@ -66,6 +66,6 @@ loop_3:
     return temp_s6;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80447818_de);
+INCLUDE_ASM("ovl_80400000", Items_QueryControllerPresence);
 #endif
 #endif

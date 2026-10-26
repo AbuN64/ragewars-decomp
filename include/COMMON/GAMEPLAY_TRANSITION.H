@@ -19,7 +19,7 @@ struct Shared_ActorView {
     /* The actual player position also has a word representation in the published
      * SharedPlayer.views0.positionBits; Triple is the copy-provider transport ABI. */
     union { CVector3 vector; Triple words; } position;
-    s32 modelId; /* +0x14: as LevelActor.model; func_80449E18_de refreshes it */
+    s32 modelId; /* +0x14: as LevelActor.model; Ovlgame_RefreshActivePlayerSceneState refreshes it */
     void * model; /* +0x18: src/func_8021B468.c */
     s32 unk_0x001C;
     s32 unk_0x0020;

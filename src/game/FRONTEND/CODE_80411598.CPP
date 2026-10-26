@@ -10,7 +10,7 @@
 #include "RESMGR/resmgr_stream_io.H"
 #include "SCENE/802508E0_13.H"
 
-/* Unloads entry index of the pool at D_80153C20: releases the data of every loaded slot (flag 1) in
+/* Unloads entry index of the pool at g_frontendResourceFontCount: releases the data of every loaded slot (flag 1) in
    each of the entry's slot ns (the n count comes from the entry's definition) through
    Gfx_ReleaseImage and clears the flag, frees the entry's buffer through Cache_FreeMemory and clears the
    buffer table when one is held, and marks the entry inactive. */
@@ -23,7 +23,7 @@
 
 
 
-extern PoolFrontendReleaseChunkImages D_80153C20;
+extern PoolFrontendReleaseChunkImages g_frontendResourceFontCount;
 
 
 void Frontend_ReleaseChunkImages(s32 index) {
@@ -31,8 +31,8 @@ void Frontend_ReleaseChunkImages(s32 index) {
     s32 i;
     SlotRecAtCV1 *slot;
 
-    for (n = 0; n < D_80153C20.entries[index].def->unkE; n++) {
-        slot = D_80153C20.entries[index].ns[n];
+    for (n = 0; n < g_frontendResourceFontCount.entries[index].def->unkE; n++) {
+        slot = g_frontendResourceFontCount.entries[index].ns[n];
         for (i = 0; i < 0x60; i++) {
             if (slot[i].flags & 1) {
                 Gfx_ReleaseImage((struct OwnedImage *)slot[i].data);
@@ -40,14 +40,14 @@ void Frontend_ReleaseChunkImages(s32 index) {
             }
         }
     }
-    if (D_80153C20.entries[index].buffers[0] != 0) {
-        Cache_FreeMemory(D_80153C20.entries[index].buffers[0]);
-        D_80153C20.entries[index].buffers[0] = 0;
+    if (g_frontendResourceFontCount.entries[index].buffers[0] != 0) {
+        Cache_FreeMemory(g_frontendResourceFontCount.entries[index].buffers[0]);
+        g_frontendResourceFontCount.entries[index].buffers[0] = 0;
         for (n = 0; n < 0x60; n++) {
-            D_80153C20.entries[index].buffers[n] = 0;
+            g_frontendResourceFontCount.entries[index].buffers[n] = 0;
         }
     }
-    D_80153C20.entries[index].active = 0;
+    g_frontendResourceFontCount.entries[index].active = 0;
 }
 
 extern void *Cache_AllocateMemory(s32);
@@ -61,27 +61,27 @@ extern void XStdio_CloseStream(s32);
    kept) and rebased. */
 void Frontend_AcquireArchiveEntry(s32 index) {
     void *data;
-    D_801539B0.RefCount[index]++;
-    if (D_801539B0.NeverFreeResources == 1) {
-        if (D_801539B0.Screen[index].data == 0) goto load;
-        XPlus_CopyBytes(D_801539B0.Screen[index].data, D_801539B0.ScreenOriginal[index].data, D_801539B0.Screen[index].size);
-        data = D_801539B0.Screen[index].data;
-        Frontend_RelocateWidgetTree(data, data, D_801539B0.Screen[index].offset - D_801539B0.Screen[0].offset);
+    g_frontendResourceState.RefCount[index]++;
+    if (g_frontendResourceState.NeverFreeResources == 1) {
+        if (g_frontendResourceState.Screen[index].data == 0) goto load;
+        XPlus_CopyBytes(g_frontendResourceState.Screen[index].data, g_frontendResourceState.ScreenOriginal[index].data, g_frontendResourceState.Screen[index].size);
+        data = g_frontendResourceState.Screen[index].data;
+        Frontend_RelocateWidgetTree(data, data, g_frontendResourceState.Screen[index].offset - g_frontendResourceState.Screen[0].offset);
     }
-    if (D_801539B0.Screen[index].data != 0) return;
+    if (g_frontendResourceState.Screen[index].data != 0) return;
 load:
     N64Eng_GetTimeSeconds();
-    D_801539B0.Screen[index].data = Cache_AllocateMemory(D_801539B0.Screen[index].size);
-    D_801539B0.In = XStdio_OpenStream(D_801539B0.Name, &D_800DD0B0);
-    XStdio_SeekStream(D_801539B0.In, D_801539B0.Header.ScreenData + D_801539B0.Screen[index].offset, 0);
-    XStdio_ReadStream(D_801539B0.Screen[index].data, D_801539B0.Screen[index].size, 1, D_801539B0.In);
+    g_frontendResourceState.Screen[index].data = Cache_AllocateMemory(g_frontendResourceState.Screen[index].size);
+    g_frontendResourceState.In = XStdio_OpenStream(g_frontendResourceState.Name, &D_800DD0B0);
+    XStdio_SeekStream(g_frontendResourceState.In, g_frontendResourceState.Header.ScreenData + g_frontendResourceState.Screen[index].offset, 0);
+    XStdio_ReadStream(g_frontendResourceState.Screen[index].data, g_frontendResourceState.Screen[index].size, 1, g_frontendResourceState.In);
     if (D_800E2AC4 != 0) {
-        D_801539B0.ScreenOriginal[index].data = Cache_AllocateMemory(D_801539B0.Screen[index].size);
-        XPlus_CopyBytes(D_801539B0.ScreenOriginal[index].data, D_801539B0.Screen[index].data, D_801539B0.Screen[index].size);
+        g_frontendResourceState.ScreenOriginal[index].data = Cache_AllocateMemory(g_frontendResourceState.Screen[index].size);
+        XPlus_CopyBytes(g_frontendResourceState.ScreenOriginal[index].data, g_frontendResourceState.Screen[index].data, g_frontendResourceState.Screen[index].size);
     }
-    XStdio_CloseStream(D_801539B0.In);
-    D_801539B0.In = 0;
-    data = D_801539B0.Screen[index].data;
-    Frontend_RelocateWidgetTree(data, data, D_801539B0.Screen[index].offset - D_801539B0.Screen[0].offset);
+    XStdio_CloseStream(g_frontendResourceState.In);
+    g_frontendResourceState.In = 0;
+    data = g_frontendResourceState.Screen[index].data;
+    Frontend_RelocateWidgetTree(data, data, g_frontendResourceState.Screen[index].offset - g_frontendResourceState.Screen[0].offset);
     N64Eng_GetTimeSeconds();
 }

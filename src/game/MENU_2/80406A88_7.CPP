@@ -26,7 +26,7 @@ s32 Menu_AnimateTabOptionsMenu(void) {
     s32 *ready;
 
     if (D_800E28E0 <= 0) {
-        if ((func_8043C308_de(D_800E4518) != 1) && ((((Shared_OptionsScreen *)(D_800E4518))->state) == 0)) {
+        if ((Frontend_GetMenuImageState(D_800E4518) != 1) && ((((Shared_OptionsScreen *)(D_800E4518))->state) == 0)) {
             (((Shared_OptionsScreen *)(D_800E4518))->state) = 1;
             Tsmos_ActivateControllerState();
             return 0;
@@ -85,7 +85,7 @@ block_11:
                 D_80145040.pause = 0;
                 (((Shared_OptionsScreen *)(D_800E4518))->page) = 3;
                 Items_ResetActorPools(&D_80145040.object, 0);
-                func_804499B0_de(&D_80145040, 0, 0);
+                Ovlgame_InitializePlayerPool(&D_80145040, 0, 0);
                 Scene_LoadLevelResources(&g_world, 0, 0);
                 if (func_8025477C_de() == 0) {
                     func_8025476C_de(1U);

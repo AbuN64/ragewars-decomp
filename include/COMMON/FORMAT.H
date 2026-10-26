@@ -1,11 +1,11 @@
 #ifndef COMMON_FORMAT_H
 #define COMMON_FORMAT_H
 #include "TYPES.H"
-extern int D_8014DA34;
+extern int g_destinationGreenShift;
 
-extern int D_8014DA28;
+extern int g_sourceBlueShift;
 
-extern int D_8014DA38;
+extern int g_destinationBlueShift;
 
 extern int Frontend_HasOwnedImagePalette(void *object);
 
@@ -25,10 +25,10 @@ extern struct Format D_800E2B20[];
 extern void Frontend_GetPixelFormatDescriptor(s32 index, struct Format *out);
 
 
-extern int D_8014DA24;
+extern int g_sourceGreenShift;
 
 
-extern int D_80153C8C;
+extern int g_destinationPixelIndex;
 
 extern s32 Frontend_GetOwnedImagePixels(s32 *record);
 
@@ -37,15 +37,15 @@ extern s32 Frontend_GetOwnedImagePixels(s32 *record);
 
 
 
-extern int D_8014DA20;
+extern int g_sourceRedShift;
 
 
 
 
-extern unsigned char D_80153C75;
+extern unsigned char g_destinationColorHighByte;
 
 
-extern int D_8014DA2C;
+extern int g_sourceAlphaShift;
 
 extern s32 Frontend_GetOwnedImagePalette(s32 *record);
 
@@ -54,13 +54,13 @@ typedef struct Format Format;
 
 extern u8 Frontend_OwnsImagePixels(u8 *record);
 
-extern int D_8014DA3C;
+extern int g_destinationAlphaShift;
 
 
 
 
 
-extern unsigned char D_80153C77;
+extern unsigned char g_destinationColorLowByte;
 
 
 struct Config;
@@ -81,5 +81,5 @@ struct Config {
 extern u8 Frontend_OwnsImagePalette(u8 *record);
 
 
-extern int D_8014DA30;
+extern int g_destinationRedShift;
 #endif

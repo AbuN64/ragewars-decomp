@@ -23,9 +23,9 @@ extern struct LevelActor *D_800E2830;
 
 
 
-extern s32 func_8043C308_de(struct ScreenMenuFinishTabOptionsTransition *);
+extern s32 Frontend_GetMenuImageState(struct ScreenMenuFinishTabOptionsTransition *);
 extern void Frontend_DrawMenuImage(struct ScreenMenuFinishTabOptionsTransition *);
-extern void func_8043C2A4_de(struct ScreenMenuFinishTabOptionsTransition *);
+extern void Frontend_AdvanceMenuImageTransition(struct ScreenMenuFinishTabOptionsTransition *);
 extern void Frontend_RequestScreenMode(s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void Menu_RequestTrackByKey(s32);
@@ -34,7 +34,7 @@ extern s32 GraphU64_NextRandom(void);
 
 extern void Tsmos_RequestFrontendShutdown(void);
 extern void Items_ResetActorPools(void *, s32);
-extern void func_804499B0_de(void *, s32, s32);
+extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern void Frontend_StartConfiguredMatch(void);
 
@@ -50,13 +50,13 @@ s32 Menu_FinishTabOptionsTransition(void *item, s32 unused1, s32 event) {
     s32 *pause;
 
     if (event == 1) {
-        state = func_8043C308_de(D_800E4518);
+        state = Frontend_GetMenuImageState(D_800E4518);
         if (state != event) {
             return 0;
         }
         Frontend_DrawMenuImage(D_800E4518);
-        func_8043C2A4_de(D_800E4518);
-        if (func_8043C308_de(D_800E4518) != 2) {
+        Frontend_AdvanceMenuImageTransition(D_800E4518);
+        if (Frontend_GetMenuImageState(D_800E4518) != 2) {
             return 0;
         }
         if (D_800E4518->choice != 0 && D_800E4518->choice != state) {
@@ -97,7 +97,7 @@ s32 Menu_FinishTabOptionsTransition(void *item, s32 unused1, s32 event) {
                 return 0;
             }
             Items_ResetActorPools((u8 *)pause - 0x180C, 0);
-            func_804499B0_de((u8 *)pause - 0x1854, 0, 0);
+            Ovlgame_InitializePlayerPool((u8 *)pause - 0x1854, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
             Frontend_StartConfiguredMatch();
         }

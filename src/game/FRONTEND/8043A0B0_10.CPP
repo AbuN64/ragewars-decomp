@@ -17,13 +17,13 @@
 
 
 
-extern struct Screen_func_8043B6E8_de *D_800E59E0;
+extern struct ScreenFrontendLoadEquipmentSelections *D_800E59E0;
 extern u8 g_playerSettings[];
 extern struct Shape_typemap_165 D_800E5BC4[];
 extern struct Shape_typemap_165 D_800E5B14[];
 extern struct Shape_typemap_165 D_800E5B44[];
 
-void func_8043B6E8_de(s32 player) {
+void Frontend_LoadEquipmentSelections(s32 player) {
     struct Shape_typemap_165 *source;
     u8 *record;
     s32 column;
@@ -95,7 +95,7 @@ void func_8043B6E8_de(s32 player) {
    value for that column selects as owned at that level, and finally marks item 0 owned at level
    0. */
 
-/* US and EU keep their asm: their jump table sits inside literals_func_8043ACF0_de's rodata, which has no
+/* US and EU keep their asm: their jump table sits inside literals_Frontend_MoveEquipmentColumn's rodata, which has no
  * unit of its own yet. */
 void func_8043B854_de(void) {
     u8 *record;

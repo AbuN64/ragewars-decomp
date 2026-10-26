@@ -23,9 +23,9 @@ struct MenuRecAt20V1 {
 struct PlayerRecAtC {
     s16 state;
     char pad2[0xA];
-    struct Actor_func_8044560C_de *actor;
+    struct ActorPakEnterPlayerOptions *actor;
 };
-struct Style_func_80445BC0_de {
+struct StyleMultiDrawNameCursor {
     char pad0[0x1C];
     s32 id;
     char pad20[0x10];

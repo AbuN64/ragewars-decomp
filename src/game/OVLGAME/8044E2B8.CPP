@@ -17,14 +17,14 @@
 
 
 
-extern void Scene_DispatchEnabledEntityTrigger(Level *, Item_func_8044D668_de *);
+extern void Scene_DispatchEnabledEntityTrigger(Level *, ItemOvlSceneDispatchSelectedEntityKinds *);
 
 extern s32 Scene_GetIndexedModelResource(s32, s32);
 
-void func_8044D668_de(Level *level) {
+void OvlScene_DispatchSelectedEntityKinds(Level *level) {
     s32 i;
     s32 n;
-    Item_func_8044D668_de *item;
+    ItemOvlSceneDispatchSelectedEntityKinds *item;
 
     func_802458D8_de();
     n = level->counts[0];
@@ -44,9 +44,9 @@ void func_8044D668_de(Level *level) {
     func_802458C4_de();
 }
 
-void func_8044D794_de(OwnerCode8044E2B8 *arg0) {
-    Entry_func_8044D794_de *entry;
-    Entry_func_8044D794_de *next;
+void OvlScene_DispatchAndRecycleQueuedTriggers(OwnerCode8044E2B8 *arg0) {
+    EntryOvlSceneDispatchAndRecycleQueuedTriggers *entry;
+    EntryOvlSceneDispatchAndRecycleQueuedTriggers *next;
 
     entry = arg0->active;
     while (entry != 0) {
@@ -58,7 +58,7 @@ void func_8044D794_de(OwnerCode8044E2B8 *arg0) {
     }
 }
 
-void func_8044D804_de(s32 arg0, void ***arg1) {
+void OvlScene_RelocateParticleEffectData(s32 arg0, void ***arg1) {
     void *obj;
     GroupCode8044E2B8 *group;
     Piece *piece;
@@ -95,7 +95,7 @@ void func_8044D804_de(s32 arg0, void ***arg1) {
     }
 }
 
-void func_8044D934_de(s32 unused0, void ***arg1) {
+void OvlScene_ScaleDefinitionFields(s32 unused0, void ***arg1) {
     f32 scale;
     void *obj;
     Ent *ent;
@@ -137,7 +137,7 @@ void func_8044D934_de(s32 unused0, void ***arg1) {
     }
 }
 
-void func_8044DA54_de(OwnerCode8044E2B8 *arg0, void ***arg1) {
+void OvlScene_ResolveFrameItemReferences(OwnerCode8044E2B8 *arg0, void ***arg1) {
     void *obj;
     FrameCode8044E2B8 *frame;
     BankCode8044E2B8 *bank;

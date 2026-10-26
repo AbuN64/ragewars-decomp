@@ -875,7 +875,7 @@ struct MenuStyle;
 /* The draw style menu item callbacks receive last: alpha and fade scale the item's intensity. */
 struct MenuStyle {
     /* The same record func_8043FE3C_de draws through as its fourth argument (func_8043FFAC_S2), and
-       func_80445BC0_de reads its id at +0x1C. */
+       Multi_DrawNameCursor reads its id at +0x1C. */
     s16 state;
     s16 x; /* 0x02 */
     s16 y; /* 0x04 */
@@ -1369,8 +1369,8 @@ struct Dialog {
     signed int value;
 };
 
-struct Record_func_80439C80_de;
-struct Record_func_80439C80_de {
+struct RecordFrontendSetPreviewModel;
+struct RecordFrontendSetPreviewModel {
     s32 count;
     char pad4[0x34 - 4];
     s32 handle;

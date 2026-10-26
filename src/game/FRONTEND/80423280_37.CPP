@@ -26,7 +26,7 @@
 extern struct EntryRecAt8V3 D_800E4694[];
 void Defs_SetBitValue(u8 *arg0, s32 arg1, s32 arg2);
 void Frontend_SelectSuggestedTrial(void);
-void func_8043C210_de(s32 *record, s32 first, s32 second, s32 third, s32 fourth);
+void Frontend_InitMenuImage(s32 *record, s32 first, s32 second, s32 third, s32 fourth);
 
 
 
@@ -101,7 +101,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     Frontend_RefreshTrialSelectionLabel();
     D_80154020.ready = 0;
     D_80154020.value = -1;
-    func_8043C210_de((s32 *)D_800E4690, 0x67, 0, 0, 0);
+    Frontend_InitMenuImage((s32 *)D_800E4690, 0x67, 0, 0, 0);
     wItem = Frontend_FindWidgetByResourceId(arg0, 0x151);
     D_800E4690->item = wItem;
     wItem->alpha = 0xFF;

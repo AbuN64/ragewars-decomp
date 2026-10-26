@@ -36,7 +36,7 @@ enum { OPTIONS_TEXT = 0x35F };
 extern struct MatchOptionsScreen *D_800E4EF0;
 extern char *D_800D3494, *D_800D3498, *D_800D349C, *D_800D34A0, *D_800D34A4, *D_800D34A8, *D_800D34AC;
 extern void *Cache_AllocateMemory(s32 size);
-extern void func_8043C210_de(void *, s32, s32, s32, s32);
+extern void Frontend_InitMenuImage(void *, s32, s32, s32, s32);
 extern s32 Frontend_CountOpenPlayerSlots(void);
 extern void *Frontend_FindWidgetByResourceId(void *root, s32 identifier);
 extern void Frontend_SetWidgetFlag100(void *record, s32 enable);
@@ -52,7 +52,7 @@ s32 Frontend_CreateMatchOptions(void *root) {
 
     screen = Cache_AllocateMemory(0x40);
     D_800E4EF0 = screen;
-    func_8043C210_de(screen->transition, 0x67, 0, 0, 0);
+    Frontend_InitMenuImage(screen->transition, 0x67, 0, 0, 0);
     D_800E4EF0->countCap = Frontend_CountOpenPlayerSlots();
     switch (D_8014DD98.kind) {
     case 1:

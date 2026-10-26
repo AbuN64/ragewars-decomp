@@ -4,8 +4,8 @@
 #include "COMMON/ITEMRECAT20V1.H"
 struct CellRecAt1A;
 struct MenuFrontendUpdatePlayModeMenu;
-struct State_func_80437444_de;
-struct State_func_80437444_de {
+struct StateMenuUpdateScrollingChoiceScreen;
+struct StateMenuUpdateScrollingChoiceScreen {
     struct MenuFrontendUpdatePlayModeMenu *menu;
     char pad4[0x8 - 0x4];
     struct CellRecAt1A *list;
@@ -14,9 +14,9 @@ struct State_func_80437444_de {
     s32 seen;
 };
 
-struct Menu_func_80437718_de;
+struct MenuMenuCreateTitleButtonScreen;
 struct ResourceSmpFlickerCreateFlickerWidget;
-struct Menu_func_80437718_de {
+struct MenuMenuCreateTitleButtonScreen {
     void *title;
     void *button;
     struct ResourceSmpFlickerCreateFlickerWidget *item;

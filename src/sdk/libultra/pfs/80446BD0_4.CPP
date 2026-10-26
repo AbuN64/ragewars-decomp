@@ -227,7 +227,7 @@ s32 func_804464F0_de(OSPfs *pfs, int page_no, u8 *data, u8 bank)
 
     ret = 0;
     pfs->activebank = bank;
-    ret = func_80448CC4_de(pfs);
+    ret = Pfs_SelectActiveBank(pfs);
     if (ret != 0)
         return ret;
     for (i = 0; i < 8; i++) {
@@ -237,7 +237,7 @@ s32 func_804464F0_de(OSPfs *pfs, int page_no, u8 *data, u8 bank)
         }
     }
     pfs->activebank = 0;
-    ret = func_80448CC4_de(pfs);
+    ret = Pfs_SelectActiveBank(pfs);
     return ret;
 }
 
@@ -276,7 +276,7 @@ s32 func_80446580_de(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name,
         return 2;
     if (pfs->activebank != 0) {
         pfs->activebank = 0;
-        ret = func_80448CC4_de(pfs);
+        ret = Pfs_SelectActiveBank(pfs);
         if (ret != 0)
             return ret;
     }
@@ -423,19 +423,19 @@ s32 func_8044694C_de(OSPfs *pfs, u8 page_no, u16 *sum, u8 bank)
 
     ret = 0;
     pfs->activebank = bank;
-    ret = func_80448CC4_de(pfs);
+    ret = Pfs_SelectActiveBank(pfs);
     if (ret != 0)
         return ret;
     for (i = 0; i < 8; i++) {
         ret = func_802B84C0_de(pfs->queue, pfs->channel, page_no * 8 + i, data);
         if (ret != 0) {
             pfs->activebank = 0;
-            func_80448CC4_de(pfs);
+            Pfs_SelectActiveBank(pfs);
             return ret;
         }
-        *sum = *sum + func_80448B84_de(data, sizeof(data));
+        *sum = *sum + Pfs_SumBytes(data, sizeof(data));
     }
     pfs->activebank = 0;
-    ret = func_80448CC4_de(pfs);
+    ret = Pfs_SelectActiveBank(pfs);
     return ret;
 }

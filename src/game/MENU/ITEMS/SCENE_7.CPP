@@ -35,7 +35,7 @@ extern void func_802BD3A0_de(void *,int,int);
 extern void OvlScene_SetSelection(ItemsPreviewStateB *,int,int);
 
 
-void func_8044D178_de(ItemsPreviewStateB *state,int selection) {
+void OvlScene_ChangePreviewSelection(ItemsPreviewStateB *state,int selection) {
  if(selection!=state->selection) {
   state->changed=0;
   OvlScene_SetSelection(state,~selection,0);
@@ -44,7 +44,7 @@ void func_8044D178_de(ItemsPreviewStateB *state,int selection) {
 
 /* Resets part of a large state block: sets its word at offset 0x1B410 to 2 and clears the words
    at 0x1B414 to 0x1B41C and 0x1B434 to 0x1B440. */
-void func_8044D1B4_de(char *state) {
+void OvlScene_ResetSelectionState(char *state) {
     ((Shared_World *)state)->selectionState = 2;
     ((Shared_World *)state)->frozen = 0;
     ((Shared_World *)state)->selectionTimer = 0;

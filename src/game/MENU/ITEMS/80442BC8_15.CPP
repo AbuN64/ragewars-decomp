@@ -97,7 +97,7 @@ typedef struct {
 } Owner;
 
 
-s32 func_804434E0_de(Item *item, Owner *owner) {
+s32 Items_FormatPlayerPartnerStatus(Item *item, Owner *owner) {
     StatusPlayer *player = owner->player;
     char *text = *item->field->text;
     if (player->partner == player) {
@@ -126,5 +126,5 @@ s32 func_804434E0_de(Item *item, Owner *owner) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_804434E0_de);
+INCLUDE_ASM("ovl_80400000", Items_FormatPlayerPartnerStatus);
 #endif

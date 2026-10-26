@@ -14,7 +14,7 @@
 /* Calls MarkMenuEventHandled with the arguments it was given and returns zero. */
 extern void MarkMenuEventHandled();
 
-s32 func_80438E5C_de(void) {
+s32 Achieve_AcknowledgeResultsEvent(void) {
     MarkMenuEventHandled();
     return 0;
 }
@@ -29,7 +29,7 @@ extern Handler8043905C D_800E583C;
 
 
 
-s32 func_80438E7C_de(ActorDefinitionHeader *actor, s32 event, s32 arg2, s32 arg3, s32 arg4) {
+s32 Achieve_DispatchResultsActorEvent(ActorDefinitionHeader *actor, s32 event, s32 arg2, s32 arg3, s32 arg4) {
     Handler8043905C *entry;
     s32 index;
     s32 wildcard;

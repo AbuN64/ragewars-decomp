@@ -20,5 +20,5 @@ struct SelectionMessageScreen {
     char pad18C[0x1C0 - 0x18C];
     s32 busy;
 };
-extern void func_80438828_de();
+extern void Achieve_AdvanceResultModelPreview();
 #endif

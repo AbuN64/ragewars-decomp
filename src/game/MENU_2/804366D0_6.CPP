@@ -145,7 +145,7 @@ s32 Menu_CancelAlternatePlayerSettingsEntry(void) {
     return 0;
 }
 
-s32 func_80437114_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
+s32 Menu_SelectNextAlternatePlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
     s32 temp_v0;
 
     MarkMenuEventHandled();
@@ -164,7 +164,7 @@ s32 func_80437114_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
     return 0;
 }
 
-s32 func_804371C4_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
+s32 Menu_SelectPreviousAlternatePlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
     s32 temp_v0;
 
     MarkMenuEventHandled();
@@ -183,7 +183,7 @@ s32 func_804371C4_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
     return 0;
 }
 
-s32 func_80437274_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchAlternatePlayerSettingsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler80437454 *entry;
     s32 index;
     s32 wildcard;

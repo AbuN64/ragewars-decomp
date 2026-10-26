@@ -214,9 +214,9 @@ s32 func_80429A24_de(void *window) {
         position.value.y = D_800E1AA8;
         z = D_800E1AAC;
         position.value.z = z;
-        func_80439B5C_de(&D_800E4F60->models[i].initial, id, scale.words, position.words);
-        func_80439BE0_de(&D_800E4F60->models[i].rotation, rotation.words);
-        func_80439C30_de(&D_800E4F60->models[i].offset, offset.words);
+        Frontend_InitModelPreviewTransform(&D_800E4F60->models[i].initial, id, scale.words, position.words);
+        Frontend_SetPreviewRotation(&D_800E4F60->models[i].rotation, rotation.words);
+        Frontend_SetPreviewRotationSpeed(&D_800E4F60->models[i].offset, offset.words);
     }
     scale.value.x = D_800E1AB0;
     scale.value.y = D_800E1AB0;
@@ -224,9 +224,9 @@ s32 func_80429A24_de(void *window) {
     position.value.z = z;
     position.value.x = D_800E1AB4;
     position.value.y = D_800E1AB8;
-    func_80439B5C_de(&D_800E4F60->models[4].initial, 0xEA6, scale.words, position.words);
-    func_80439BE0_de(&D_800E4F60->models[4].rotation, rotation.words);
-    func_80439C30_de(&D_800E4F60->models[4].offset, offset.words);
+    Frontend_InitModelPreviewTransform(&D_800E4F60->models[4].initial, 0xEA6, scale.words, position.words);
+    Frontend_SetPreviewRotation(&D_800E4F60->models[4].rotation, rotation.words);
+    Frontend_SetPreviewRotationSpeed(&D_800E4F60->models[4].offset, offset.words);
     SoundElement_PlayFlatSound(0xE78);
     Menu_InitializeOptionsScene();
     return 0;

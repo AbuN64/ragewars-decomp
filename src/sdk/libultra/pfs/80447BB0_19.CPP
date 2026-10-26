@@ -70,7 +70,7 @@ s32 func_804486B8_de(OSPfs *pfs)
 
     if (pfs->activebank != 0) {
         pfs->activebank = 0;
-        ret = func_80448CC4_de(pfs);
+        ret = Pfs_SelectActiveBank(pfs);
         if (ret != 0)
             return ret;
     }
@@ -131,7 +131,7 @@ s32 Pfs_ReadWriteInode(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank)
 
     if (pfs->activebank != 0) {
         pfs->activebank = 0;
-        ret = func_80448CC4_de(pfs);
+        ret = Pfs_SelectActiveBank(pfs);
         if (ret != 0)
             return ret;
     }
@@ -186,7 +186,7 @@ s32 Pfs_ReadWriteInode(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank)
 
 /* Returns the 16-bit sum of the first count bytes of a block. */
 
-u16 func_80448B84_de(u8 *bytes, s32 count)
+u16 Pfs_SumBytes(u8 *bytes, s32 count)
 {
     s32 i;
     s32 sum;
@@ -202,7 +202,7 @@ u16 func_80448B84_de(u8 *bytes, s32 count)
 
 /* Sums the fourteen halfwords of a 0x1C-byte block into two checksums: the plain sum and the sum
    of their complements. Returns zero. */
-s32 func_80448BB4_de(u16 *block, u16 *sum, u16 *inverse) {
+s32 Pfs_ComputeIdChecksums(u16 *block, u16 *sum, u16 *inverse) {
     u32 offset;
 
     *inverse = 0;

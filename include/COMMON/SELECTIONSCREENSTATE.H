@@ -78,7 +78,7 @@ typedef struct func_8041F2A0_Config func_8041F2A0_Config;
 struct func_8041F2A0_MenuBlock {
     void *root;
     s32 list;
-    struct Record_func_80439C80_de record;
+    struct RecordFrontendSetPreviewModel record;
     char pad40[0xC8 - 0x40];
     func_8041F2A0_Item *item492;
     s32 round492;

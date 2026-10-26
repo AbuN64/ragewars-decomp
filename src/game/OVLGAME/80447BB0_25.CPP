@@ -66,7 +66,7 @@ void Ovlgame_InitActorHudState(Shared_ActorView *);
 
 
 
-void func_804499B0_de(CPlayerPool *pool, s32 count, s32 force_active) {
+void Ovlgame_InitializePlayerPool(CPlayerPool *pool, s32 count, s32 force_active) {
     extern void ItemMenu_ResetEntries(CItemMenu *);
     s32 i;
     s32 j;
@@ -247,7 +247,7 @@ void Ovlgame_ResetMenuPool(struct RecordCode80447BB0 *record) {
 
                          /* extern */
 
-void func_80449E18_de(CPlayerPool *pool) {
+void Ovlgame_RefreshActivePlayerSceneState(CPlayerPool *pool) {
     void *message;
     s32 temp_v0;
     struct IntPair *model;
@@ -277,7 +277,7 @@ void func_80449E18_de(CPlayerPool *pool) {
         } while (actor != 0);
     }
 }
-void func_80449EE4_de(char *player, s32 slot, RecordCode80447BB080449EE4 *record) {
+void Ovlgame_InitializePlayerFromRecord(char *player, s32 slot, RecordCode80447BB080449EE4 *record) {
     extern void ItemMenu_ResetEntries(CItemMenu *);
     s32 i;
     s32 computer;
@@ -326,7 +326,7 @@ void func_80449EE4_de(char *player, s32 slot, RecordCode80447BB080449EE4 *record
     ItemMenu_ResetEntries(&((Shared_ActorView *)player)->record);
 }
 
-void func_8044A020_de(struct ActorCode80447BB0 *actor, s32 character) {
+void Ovlgame_ActivatePlayerAtSpawn(struct ActorCode80447BB0 *actor, s32 character) {
     actor->part->active = 1;
     Ovlgame_ResetPlayerForRound(actor, character, 1);
     Nav_RequestActorState(&actor->firstEffect, &actor->secondEffect, 2);

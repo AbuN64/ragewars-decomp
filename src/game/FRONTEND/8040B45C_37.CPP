@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "RESMGR/resmgr_stream_io.H"
 
-/* Advances the deferred-release timers: for each of the D_80153C0C slots (all reset first when mode
+/* Advances the deferred-release timers: for each of the g_frontendResourceTextureCount slots (all reset first when mode
    is 1) whose owner is not -1, counts the delay down, and once it has run out releases the slot's
    loaded resource data through Gfx_ReleaseImage, clearing its loaded flag, and clears the owner. */
 
@@ -16,26 +16,26 @@
 
 
 
-extern PoolRecAtC D_80153C0C;
+extern PoolRecAtC g_frontendResourceTextureCount;
 
 
 void Frontend_UpdateImageReleaseTimers(s32 mode) {
     s32 i;
 
-    for (i = 0; i < D_80153C0C.count; i++) {
+    for (i = 0; i < g_frontendResourceTextureCount.count; i++) {
         if (mode == 1) {
-            D_80153C0C.timers[i].delay = 0;
-            D_80153C0C.timers[i].owner = 0;
+            g_frontendResourceTextureCount.timers[i].delay = 0;
+            g_frontendResourceTextureCount.timers[i].owner = 0;
         }
-        if (D_80153C0C.timers[i].owner != -1) {
-            if (D_80153C0C.timers[i].delay > 0) {
-                D_80153C0C.timers[i].delay--;
+        if (g_frontendResourceTextureCount.timers[i].owner != -1) {
+            if (g_frontendResourceTextureCount.timers[i].delay > 0) {
+                g_frontendResourceTextureCount.timers[i].delay--;
             } else {
-                if (D_80153C0C.resources[i].flags & 1) {
-                    Gfx_ReleaseImage((struct OwnedImage *)D_80153C0C.resources[i].data);
-                    D_80153C0C.resources[i].flags &= ~1;
+                if (g_frontendResourceTextureCount.resources[i].flags & 1) {
+                    Gfx_ReleaseImage((struct OwnedImage *)g_frontendResourceTextureCount.resources[i].data);
+                    g_frontendResourceTextureCount.resources[i].flags &= ~1;
                 }
-                D_80153C0C.timers[i].owner = 0;
+                g_frontendResourceTextureCount.timers[i].owner = 0;
             }
         }
     }
@@ -90,7 +90,7 @@ typedef struct {
     char pad8[0x218];
     Tables tables;
 } File;
-extern File D_801539B0;
+extern File g_frontendResourceState;
 extern s32 D_800DD0B0;
 extern s32 Cache_AllocateMemory(s32 size);
 extern void XStdio_CloseStream(s32 handle);
@@ -122,14 +122,14 @@ void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
     s32 bytes;
     s32 i;
 
-    slots = D_801539B0.tables.banks[group].slotsByPass[pass];
+    slots = g_frontendResourceState.tables.banks[group].slotsByPass[pass];
     index = which;
     {
     if (slots[index].flags & 1) {
         Bank *cachedBank;
         stamp = N64Eng_GetFrameCounter() + 0xA;
         slots[index].stamp = stamp;
-        cachedBank = &D_801539B0.tables.banks[group];
+        cachedBank = &g_frontendResourceState.tables.banks[group];
         if (cachedBank->held == 0 && cachedBank->stamp != -1) {
             cachedBank->stamp = stamp;
         }
@@ -138,8 +138,8 @@ void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
     }
     kind = 0;
     N64Eng_GetTimeSeconds();
-    image = D_801539B0.tables.banks[group].image;
-    tile = &D_801539B0.tables.banks[group].tiles[index];
+    image = g_frontendResourceState.tables.banks[group].image;
+    tile = &g_frontendResourceState.tables.banks[group].tiles[index];
     slot = &slots[index];
     code = 0;
     if (tile->fmt == 0 || tile->siz == 0) {
@@ -167,16 +167,16 @@ void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
     } else if (code == 0x20) {
         kind = 0xC;
     }
-    if (D_801539B0.tables.banks[group].loaded == 0) {
-        Tables *tables = &D_801539B0.tables;
+    if (g_frontendResourceState.tables.banks[group].loaded == 0) {
+        Tables *tables = &g_frontendResourceState.tables;
 
         bank = &tables->banks[group];
-        D_801539B0.handle = XStdio_OpenStream(&D_801539B0.name, &D_800DD0B0);
+        g_frontendResourceState.handle = XStdio_OpenStream(&g_frontendResourceState.name, &D_800DD0B0);
         size = bank->image->size;
         i = 0;
         bank->offsets[0] = Cache_AllocateMemory(size);
-        XStdio_SeekStream(D_801539B0.handle, D_801539B0.tables.base + bank->image->base, 0);
-        XStdio_ReadStream(D_801539B0.tables.banks[group].offsets[0], size, 1, D_801539B0.handle);
+        XStdio_SeekStream(g_frontendResourceState.handle, g_frontendResourceState.tables.base + bank->image->base, 0);
+        XStdio_ReadStream(g_frontendResourceState.tables.banks[group].offsets[0], size, 1, g_frontendResourceState.handle);
         do {
             sizes[i] = bank->tiles[i].wid * bank->tiles[i].siz;
             sizes[i] = sizes[i] * code / 8;
@@ -190,31 +190,31 @@ void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
         i = 0;
         do {
             if (threshold < sizes[i]) {
-                Tile *big = &D_801539B0.tables.banks[group].tiles[i];
+                Tile *big = &g_frontendResourceState.tables.banks[group].tiles[i];
 
                 Frontend_ClearOwnedImage(&scratch);
                 Frontend_ConfigureOwnedImage(&scratch, kind, big->fmt, big->siz, big->wid, big->siz, 0, sizes[i],
-                              D_801539B0.tables.banks[group].offsets[i], 0, image->depth * 2,
-                              D_801539B0.tables.banks[group].listsByPass[pass], image->depth);
+                              g_frontendResourceState.tables.banks[group].offsets[i], 0, image->depth * 2,
+                              g_frontendResourceState.tables.banks[group].listsByPass[pass], image->depth);
                 Gfx_SwizzleImage(&scratch);
                 Frontend_ReleaseOwnedImageBuffers(&scratch);
             }
             i += 1;
         } while (i < 0x60);
-        XStdio_CloseStream(D_801539B0.handle);
-        D_801539B0.handle = 0;
+        XStdio_CloseStream(g_frontendResourceState.handle);
+        g_frontendResourceState.handle = 0;
         bank->loaded = 1;
     }
     bytes = tile->wid * tile->siz * code >> 3;
     Frontend_ConfigureOwnedImage(texture, kind, tile->fmt, tile->siz, tile->wid, tile->siz, 0,
-                  bytes, D_801539B0.tables.banks[group].offsets[which], 0,
-                  image->depth * 2, D_801539B0.tables.banks[group].listsByPass[pass], image->depth);
+                  bytes, g_frontendResourceState.tables.banks[group].offsets[which], 0,
+                  image->depth * 2, g_frontendResourceState.tables.banks[group].listsByPass[pass], image->depth);
     Smp_SetImageStateWord(0);
     Smp_CopyAndSwizzleImage(into, texture);
     Smp_SetImageStateWord(1);
     N64Eng_GetTimeSeconds();
     slot->stamp = N64Eng_GetFrameCounter() + 0xA;
-    D_801539B0.tables.banks[group].loads += 1;
+    g_frontendResourceState.tables.banks[group].loads += 1;
     slot->flags |= 1;
     return &slot->texture;
 }

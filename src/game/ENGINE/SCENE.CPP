@@ -77,18 +77,18 @@ extern s32 XPlus_NextRandomInteger();
 extern s32 OnScreen_StartFirstStatusBar();
 extern void OnScreen_StartSecondStatusBar();
 extern void Menu_TriggerTrackEvent();
-extern void func_80449E18_de();
+extern void Ovlgame_RefreshActivePlayerSceneState();
 extern void Items_InitGroupPools();
-extern void func_8044ADF0_de();
-extern void func_8044B0E0_de();
+extern void Ovlgame_InitializeSceneEffectPool();
+extern void Ovlgame_InitializeDynamicLightPool();
 extern void Items_InitEntryBatch();
 extern void Items_InitSlotPool();
 extern void OvlScene_LoadSceneLight();
 extern void OvlScene_FreeSceneResources();
 extern void OvlScene_UpdatePendingObjects();
-extern void func_8044D668_de();
+extern void OvlScene_DispatchSelectedEntityKinds();
 extern void Ovlgame_InitEffectPool();
-extern void func_8044DF60_de();
+extern void Ovlgame_InitializeWorldActorPools();
 extern void Ovlgame_StartPanelMovers(void *panel);
 
 
@@ -249,7 +249,7 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 arg2) {
     (((struct SharedRecAt1B92C *)(table))->unk1B2FC) = D_800C51D4;
     var_s5 = arg2;
     if ((((struct SharedRecAt1B92C *)(table))->unk1B40C) != -1) {
-        func_8044D794_de(table);
+        OvlScene_DispatchAndRecycleQueuedTriggers(table);
     }
     (((struct SharedRecAt1B92C *)(table))->unk1B6AC) = 0;
     if ((Cinema_IsSequenceActive() == 0) && (var_s5 != 0) && ((((struct SharedRecAt1B92C *)(table))->unk1B41C) != 0) && (D_801462C8.counters.transitionActive == 0)) {
@@ -275,10 +275,10 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 arg2) {
     Items_InitSlotPool(&((struct SharedRecAt1B92C *)table)->address1B08, *(((struct SharedRecAt1B92C *)(table))->unkB4));
     var_s2 = 0;
     Ovlgame_InitEffectPool(&((struct SharedRecAt1B92C *)table)->address11778);
-    func_8044ADF0_de(&((struct SharedRecAt1B92C *)table)->address15388);
-    func_8044DF60_de(&D_801376F8.actors);
+    Ovlgame_InitializeSceneEffectPool(&((struct SharedRecAt1B92C *)table)->address15388);
+    Ovlgame_InitializeWorldActorPools(&D_801376F8.actors);
     func_8023EE00_de();
-    func_8044B0E0_de(&((struct SharedRecAt1B92C *)table)->address1B320);
+    Ovlgame_InitializeDynamicLightPool(&((struct SharedRecAt1B92C *)table)->address1B320);
     func_8025C8D8_de(&D_8011F260, &D_8011AFC0, 0xF);
     Ovlgame_StartPanelMovers(&D_801376F8);
     do {
@@ -671,7 +671,7 @@ block_122:
             temp_v0_2 = var_s1_4;
         } while (1);
     }
-    func_8044D668_de(table);
+    OvlScene_DispatchSelectedEntityKinds(table);
     temp_s4 = (((struct SharedRecAt1B92C *)(table))->unk140);
     k = (((struct SharedRecAt1B92C *)(table))->unk13C);
     if (k < temp_s4) {
@@ -692,7 +692,7 @@ block_122:
     Nav_LinkNavigationObjects(temp_v0_2);
     Nav_AssignPlatformEndpoints(temp_v0_2);
     (((struct SharedRecAt1B92C *)(table))->unk0) = 4;
-    func_80449E18_de(&D_80145040);
+    Ovlgame_RefreshActivePlayerSceneState(&D_80145040);
     group = &D_80145040.object;
     Items_InitGroupPools(group);
     Camera_UpdateViewportLayoutAndBounds(group);

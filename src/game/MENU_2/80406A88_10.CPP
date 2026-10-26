@@ -32,7 +32,7 @@ extern struct Status g_playerSettings[];
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 void Defs_SetBitValue(u8 *arg0, s32 arg1, s32 arg2);
 void Frontend_SelectSuggestedTrial(void);
-void func_8043C210_de(s32 *record, s32 first, s32 second, s32 third, s32 fourth);
+void Frontend_InitMenuImage(s32 *record, s32 first, s32 second, s32 third, s32 fourth);
 
 
 
@@ -152,7 +152,7 @@ loop_7:
     D_80154020.ready = 0;
     D_80154020.value = -1;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    func_8043C210_de(&(*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 0))), 0x67, 0, 0, 0);
+    Frontend_InitMenuImage(&(*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 0))), 0x67, 0, 0, 0);
     temp_v0_5 = Frontend_FindWidgetByResourceId(owner, 0x151);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2640))) = temp_v0_5;

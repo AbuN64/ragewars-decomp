@@ -18,7 +18,7 @@ extern s32 Player_GetPlayerIndex(char *, s32);
 
 
 
-s32 func_80445964_de(void *unused, MenuRecAt20V1 *menu) {
+s32 Multi_UpdateNameCursor(void *unused, MenuRecAt20V1 *menu) {
     s32 i;
     f32 t;
 
@@ -132,7 +132,7 @@ void Multi_SetupNameSpinner(MenuRecAt20V1 *menu) {
 #endif
 
 #if defined(VERSION_US_REV1)
-s32 func_80445964_de(void *unused, MenuRecAt20V1 *menu) {
+s32 Multi_UpdateNameCursor(void *unused, MenuRecAt20V1 *menu) {
     s32 i;
     f32 t;
 

@@ -31,7 +31,7 @@ extern void MarkMenuEventHandled(void);
 extern s32 Smos_GetFocusedElementId(void);
 extern s32 Smos_GetPreviousScreenOwner(s32);
 extern void Items_ResetActorPools(void *, s32);
-extern void func_804499B0_de(void *, s32, s32);
+extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(s32);
@@ -46,7 +46,7 @@ s32 Frontend_HandleMatchMessage(void) {
     case MENU_804291A8_473:
         if (Smos_GetPreviousScreenOwner(0) == 0x16) {
             Items_ResetActorPools(&D_80145040.object, 0);
-            func_804499B0_de(&D_80145040, 0, 0);
+            Ovlgame_InitializePlayerPool(&D_80145040, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
             if (func_8025477C_de() == 0) {
                 func_8025476C_de(1);

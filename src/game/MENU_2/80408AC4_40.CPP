@@ -6,6 +6,6 @@
 
 extern s32 D_80154030;
 
-void func_8043C998_de(void) {
+void Menu_ResetTextEntryResult(void) {
     D_80154030 = -1;
 }

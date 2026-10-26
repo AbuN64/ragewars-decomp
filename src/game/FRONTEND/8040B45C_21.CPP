@@ -39,7 +39,7 @@ void Frontend_ApplyVideoMode(void) {
     s32 var_v1;
     struct ShapeRecAt18V2 *var_s0;
     var_s0 = NULL;
-    D_80141000 = 2;
+    g_frontendStartupState = 2;
     if (D_800E28D8 == -1) {
         if (Defs_GetMemorySize() != 0x400000) {
             D_800E28D8 = 1;
@@ -67,8 +67,8 @@ void Frontend_ApplyVideoMode(void) {
 }
 
 #include "COMMON/OSVISCALE.H"
-extern s16 D_8014D500;
-extern Modep D_8014D508;
+extern s16 g_frontendVideoModeId;
+extern Modep g_frontendVideoMode;
 extern Modep D_800D4530[];
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 extern void osViSetMode(void *);
@@ -94,19 +94,19 @@ typedef union VideoHorizontal {
 #endif
     } edge;
 } VideoHorizontal;
-/* Resizes the selected VI mode (table D_800D4530[D_8014D500], copied to D_8014D508) to width x height around its
+/* Resizes the selected VI mode (table D_800D4530[g_frontendVideoModeId], copied to g_frontendVideoMode) to width x height around its
  * horizontal and field centres moved by (x, y), shrinks the active area by the borders, rescales X and Y, clamps the
  * last pixel and lines to the original mode and applies it. */
 void Frontend_SetVideoViewport(s32 width, s32 height, s32 x, s32 y, s32 borderX, s32 borderY) {
     VideoInterval vertical[2];
     VideoInterval originalVertical[2];
     u16 centerY[2];
-    Modep *mode = &D_8014D508;
+    Modep *mode = &g_frontendVideoMode;
     VideoHorizontal horizontal, originalHorizontal;
     u32 scaleY;
     s32 centerX, scaleX;
 
-    func_802BD3A0_de(mode, &D_800D4530[D_8014D500], 0x50);
+    func_802BD3A0_de(mode, &D_800D4530[g_frontendVideoModeId], 0x50);
     horizontal.packed = mode->comRegs.hStart;
     vertical[0].packed = mode->fldRegs[0].vStart;
     originalHorizontal = horizontal;

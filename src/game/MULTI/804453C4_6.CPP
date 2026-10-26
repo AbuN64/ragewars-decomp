@@ -10,7 +10,7 @@
 
 
 
-s32 func_80446090_us_rev1(struct FieldRecAt14 *field) {
+s32 Pak_UpdateOwnerNotificationOptionText(struct FieldRecAt14 *field) {
     if (D_800D0EBC != 0) {
         field->text = D_800E60E4;
     } else {
@@ -23,7 +23,7 @@ s32 func_80446090_us_rev1(struct FieldRecAt14 *field) {
    and returns zero. */
 extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
 
-s32 func_804460C4_us_rev1(void *first, void *second) {
+s32 Pak_AdjustMenuChoice(void *first, void *second) {
     D_800E63BC = Pak_AdjustValue(second, D_800E63BC, 1, 0, 1, 1);
     return 0;
 }
@@ -33,7 +33,7 @@ s32 func_804460C4_us_rev1(void *first, void *second) {
 
 
 
-s32 func_8044610C_us_rev1(struct FieldRecAt14 *field) {
+s32 Pak_UpdateMenuChoiceText(struct FieldRecAt14 *field) {
     if (D_800E63BC != 0) {
         field->text = D_800E6100;
     } else {

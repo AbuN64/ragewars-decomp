@@ -8,7 +8,7 @@
 
 
 
-void func_8044B0E0_de(struct CGameDynamicLight_t *arg0) {
+void Ovlgame_InitializeDynamicLightPool(struct CGameDynamicLight_t *arg0) {
     f32 temp_f20;
     s32 var_s1;
     s32 i;

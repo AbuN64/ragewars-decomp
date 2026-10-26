@@ -13,7 +13,7 @@
 
 void Items_ResetActorPools(void *owner, s32 count);
 
-void func_804499B0_de(void *pool, s32 count, s32 force_active);
+void Ovlgame_InitializePlayerPool(void *pool, s32 count, s32 force_active);
 
 void SetN64_DrawColorRectangle(void *unused, u8 *color, s32 left, s32 top, s32 right, s32 bottom) {
     if (color[3] != 0) {
@@ -70,5 +70,5 @@ void SetN64_SelectSpawnAndStartSession(GameSession *gameSession, s32 target) {
 void SetN64_ResetSessionPlayerPools(void *owner, s32 count, s32 force_active) {
     GameSession *session = owner;
     Items_ResetActorPools(session->players, count);
-    func_804499B0_de(session->menu, count, force_active);
+    Ovlgame_InitializePlayerPool(session->menu, count, force_active);
 }

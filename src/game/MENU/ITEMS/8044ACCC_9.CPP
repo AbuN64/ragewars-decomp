@@ -32,7 +32,7 @@ extern s32 D_800E28D0;
 
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x10, 0x14, 0x20, 0x24], gap at: 0x18. */
-void func_8044A170_de(GameplayCamera *arg0) {
+void Items_InitializeGameplayCamera(GameplayCamera *arg0) {
     f32 temp_f21;
     f32 zero;
     s16 temp_a0;
@@ -169,7 +169,7 @@ void Items_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
     owner->word34 = 0;
     owner->word38 = 0;
     owner->word48 = 0;
-    func_8044A170_de(owner->parts);
+    Items_InitializeGameplayCamera(owner->parts);
     owner->word38 = 2;
     func_80255CA0_de(&owner->entryList, 0, 4);
     func_80255CA0_de(&owner->spareList, 0, 4);
@@ -216,10 +216,10 @@ void Items_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
 
 /* Resets a 0x1208-byte actor: clears it through XPlus_FillMemory, initialises its three lists at 0xC,
    0x20 and 0xF24 through func_80255CA0_de, sets its words at 0x1200 and 0x38 to 1 and 2, clears those at
-   0 to 8 and 0xF18 to 0xF20, and resets the parts at offset 0x40 through func_8044A170_de and
+   0 to 8 and 0xF18 to 0xF20, and resets the parts at offset 0x40 through Items_InitializeGameplayCamera and
    Camera_UpdateViewProjectionAndEffects. */
 
-void func_8044A170_de(GameplayCamera *arg0);
+void Items_InitializeGameplayCamera(GameplayCamera *arg0);
 
 extern void Camera_UpdateViewProjectionAndEffects(void *);
 
@@ -245,7 +245,7 @@ void Items_ResetPlayers(func_8044B27C_S1 *actor) {
     actor->unkF1C = 0;
     actor->unkF20 = 0;
     actor->unk38 = 2;
-    func_8044A170_de(parts);
+    Items_InitializeGameplayCamera(parts);
     Camera_UpdateViewProjectionAndEffects(parts);
 }
 
@@ -259,7 +259,7 @@ void Items_InitGroupPools(Triple *group) {
 }
 
 /* Detaches the object at offset 0xC of an owner: when there is one, finalises it through
-   func_8044A170_de and removes it from the lists at offsets 0xC and 0x20 through func_80255ED8_de and
+   Items_InitializeGameplayCamera and removes it from the lists at offsets 0xC and 0x20 through func_80255ED8_de and
    func_80255D14_de. Returns the object. */
 
 
@@ -273,14 +273,14 @@ void *Items_RecycleModel(struct Draw *owner) {
     void *object = owner->model;
 
     if (object != 0) {
-        func_8044A170_de(object);
+        Items_InitializeGameplayCamera(object);
         func_80255ED8_de(&owner->model, object);
         func_80255D14_de(&owner->recycled, object);
     }
     return object;
 }
 
-void func_8044A790_de(char *object, void *value) {
+void Items_TransferPoolEntry(char *object, void *value) {
     func_80255ED8_de(object + 0x20, value);
     func_80255CB8_de(object + 0xC, value);
 }

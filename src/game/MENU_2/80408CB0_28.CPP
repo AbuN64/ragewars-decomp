@@ -134,8 +134,8 @@ extern s32 D_80154020[2];
 extern void Frontend_SetWidgetFlag100(MenuWidget *, s32);
 extern void SmpButton_WrapButtonWidget(s32);
 extern s32 ScenarioSetup_IsCupSelected(void);
-extern void func_8043C210_de(Shared_OptionsScreen *, s32, s32, s32, s32);
-extern void func_8043C278_de(Shared_OptionsScreen *);
+extern void Frontend_InitMenuImage(Shared_OptionsScreen *, s32, s32, s32, s32);
+extern void Frontend_StartMenuImageTransition(Shared_OptionsScreen *);
 
 s32 func_80422E34_eu(void *node) {
     Shared_Game *settings;
@@ -233,8 +233,8 @@ s32 func_80422E34_eu(void *node) {
     SmpButton_WrapButtonWidget(0x37F);
     D_800E4518->state = 0;
     Tsmos_DeactivateControllerState();
-    func_8043C210_de(D_800E4518, 0x67, 0, 0, 0);
-    func_8043C278_de(D_800E4518);
+    Frontend_InitMenuImage(D_800E4518, 0x67, 0, 0, 0);
+    Frontend_StartMenuImageTransition(D_800E4518);
     D_800E4518->cursor = 0;
     D_800E4518->selection = -1;
     Frontend_SetWidgetFlag08(node, 0);

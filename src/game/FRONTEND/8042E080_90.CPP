@@ -4,8 +4,8 @@
 #include "COMMON/S1_6.H"
 #include "TYPES.H"
 
-/* Event callback for screen D_800E5558: on event 1 while func_8043C308_de reports the screen in state
-   1 it advances the screen through Frontend_DrawMenuImage and func_8043C2A4_de, and when that leaves it in
+/* Event callback for screen D_800E5558: on event 1 while Frontend_GetMenuImageState reports the screen in state
+   1 it advances the screen through Frontend_DrawMenuImage and Frontend_AdvanceMenuImageTransition, and when that leaves it in
    state 2 it calls MarkMenuEventHandled, clears the pause word D_80146894 (0x180C past the match objects
    at D_80145088), stops those objects and the ones 0x48 bytes before them, releases resource 0x24
    of D_8011FE88, restarts func_8025476C_de when func_8025477C_de reports it idle, and calls
@@ -13,12 +13,12 @@
 
 
 
-extern s32 func_8043C308_de(void *);
+extern s32 Frontend_GetMenuImageState(void *);
 extern void Frontend_DrawMenuImage(void *);
-extern void func_8043C2A4_de(void *);
+extern void Frontend_AdvanceMenuImageTransition(void *);
 extern void MarkMenuEventHandled(void);
 extern void Items_ResetActorPools(void *, s32);
-extern void func_804499B0_de(void *, s32, s32);
+extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(s32);
@@ -31,19 +31,19 @@ extern void Frontend_StartConfiguredMatch(void);
 s32 Frontend_UpdatePage67Exit(s32 unused0, s32 unused1, s32 event) {
     s32 *pause;
     if (event == 1) {
-        if (func_8043C308_de(D_800E5558) != 1) {
+        if (Frontend_GetMenuImageState(D_800E5558) != 1) {
             return 0;
         }
         Frontend_DrawMenuImage(D_800E5558);
-        func_8043C2A4_de(D_800E5558);
-        if (func_8043C308_de(D_800E5558) != 2) {
+        Frontend_AdvanceMenuImageTransition(D_800E5558);
+        if (Frontend_GetMenuImageState(D_800E5558) != 2) {
             return 0;
         }
         MarkMenuEventHandled();
         pause = &D_80145088.status[7];
         *pause = 0;
         Items_ResetActorPools((char *)pause - 0x180C, 0);
-        func_804499B0_de((char *)pause - 0x1854, 0, 0);
+        Ovlgame_InitializePlayerPool((char *)pause - 0x1854, 0, 0);
         Scene_LoadLevelResources(&g_world, 0x24, 0);
         if (func_8025477C_de() == 0) {
             func_8025476C_de(1);

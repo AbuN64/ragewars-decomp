@@ -24,7 +24,7 @@ extern TextEntryRecAtC D_800E63C0[];
 
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern void func_80442384_de(s32,EntryRecAt1C *,s32), func_80444F30_eu(void *);
+extern void func_80442384_de(s32,EntryRecAt1C *,s32), Items_CopyDefaultLocalizedPlayerName(void *);
 #else
 extern void func_80442384_de(s32,EntryRecAt1C *,s32), Items_SetDefaultPlayerName(void *);
 #endif
@@ -36,7 +36,7 @@ extern u8 D_80145040[];
 
 
 
-s32 func_80445D6C_de(s32 unused, EntryRecAt1C *arg1) {
+s32 Multi_DeleteNameCharacter(s32 unused, EntryRecAt1C *arg1) {
     s32 i;
     s32 count;
 
@@ -52,7 +52,7 @@ s32 func_80445D6C_de(s32 unused, EntryRecAt1C *arg1) {
     return 0;
 }
 
-s32 func_80445E04_de(s32 arg0, EntryRecAt1C *arg1, s32 arg2) {
+s32 Multi_CommitPlayerName(s32 arg0, EntryRecAt1C *arg1, s32 arg2) {
     s32 temp_v0;
     s32 var_a0;
     s32 var_a1;
@@ -83,7 +83,7 @@ s32 func_80445E04_de(s32 arg0, EntryRecAt1C *arg1, s32 arg2) {
     if (var_a1 == 0) {
         
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-func_80444F30_eu
+Items_CopyDefaultLocalizedPlayerName
 #else
 Items_SetDefaultPlayerName
 #endif
@@ -93,7 +93,7 @@ Items_SetDefaultPlayerName
     return 1;
 }
 
-s32 func_80445EF4_de(void) {
+s32 Multi_HasActiveGameCounters(void) {
     CGameStatus *s = &D_801462C8.counters;
     s32 ret;
 

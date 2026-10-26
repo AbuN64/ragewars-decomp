@@ -2,5 +2,5 @@
 #define SDK_PFS_80446BD0_10_H
 #include "sdk/OSCONTREQUESFORMATSHORT.H"
 extern void func_80446E58_de(int channel);
-extern void func_80446EE4_de(int channel, EntryRecAt3 *data);
+extern void Pfs_DecodeChannelStatus(int channel, EntryRecAt3 *data);
 #endif

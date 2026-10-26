@@ -39,19 +39,19 @@ extern void Player_ResetPlayerWeapons(void *);
 
 
 
-void Ovlgame_StartPlayerAnimation(Player *arg0, s32 arg1) {
-    s32 var_a2;
+void Ovlgame_StartPlayerAnimation(Player *animatedPlayer, s32 animationState) {
+    s32 modelResource;
 
-    arg0->state = arg1;
-    Player_InitializePlayerHealth(arg0);
-    Player_ResetPlayerWeapons(arg0);
+    animatedPlayer->state = animationState;
+    Player_InitializePlayerHealth(animatedPlayer);
+    Player_ResetPlayerWeapons(animatedPlayer);
     if (D_801462C8.local == 0) {
-        var_a2 = 0x66;
-    } else if (D_801468F4 != 0 && ((Shared_ControlView *)arg0->profile)->transientFlag != 0) {
-        var_a2 = D_800CE47C;
+        modelResource = 0x66;
+    } else if (D_801468F4 != 0 && ((Shared_ControlView *)animatedPlayer->profile)->transientFlag != 0) {
+        modelResource = D_800CE47C;
     } else {
-        var_a2 = D_800CE430[((Shared_struct_D_800D34C0_0x18 *)arg0->definition)->unkC];
-        arg0->playerId = ((Shared_ControlView *)arg0->profile)->playerId;
+        modelResource = D_800CE430[((Shared_struct_D_800D34C0_0x18 *)animatedPlayer->definition)->unkC];
+        animatedPlayer->playerId = ((Shared_ControlView *)animatedPlayer->profile)->playerId;
     }
-    ((void (*)(void *, void *, s32, s32))Scene_ChangeInstanceModel)(&g_world, arg0, var_a2, arg0->animation);
+    ((void (*)(void *, void *, s32, s32))Scene_ChangeInstanceModel)(&g_world, animatedPlayer, modelResource, animatedPlayer->animation);
 }

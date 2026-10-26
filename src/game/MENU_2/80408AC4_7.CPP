@@ -45,7 +45,7 @@ s32 func_802BD400_de(u8 *);
 extern u8 D_800E5CAC[0x64];
 
 /* Draws the D_800E5CA0 spinner: during the first part of its blink period it fills a two-pixel white bar below the item under the digit its value selects, placed from the item's x by the character width func_80442DDC_de reports scaled to the screen, with the style's alpha, through OnScreen_SetupFillMode and OnScreen_DrawBevelBox; then draws the item through func_8044208C_de. */
-void func_8043C9AC_de(void *menu, ItemRecAt20V1 *item, void *third, MenuStyle *style) {
+void Menu_DrawTextEntryCursor(void *menu, ItemRecAt20V1 *item, void *third, MenuStyle *style) {
     f32 width;
     f32 alpha;
     s32 x;
@@ -63,7 +63,7 @@ void func_8043C9AC_de(void *menu, ItemRecAt20V1 *item, void *third, MenuStyle *s
     func_8044208C_de(menu, item, third, style);
 }
 
-s32 func_8043CB30_de(void *unused, MenuRecAt20V4 *menu) {
+s32 Menu_UpdateTextEntryCursor(void *unused, MenuRecAt20V4 *menu) {
     f32 t;
 
     t = D_800E5CA0.timer + D_800D2988;
@@ -91,7 +91,7 @@ s32 func_8043CC08_de(void) {
     return 0;
 }
 
-s32 func_8043CC10_de(ObjRecAt14V2 *arg0) {
+s32 Menu_InsertTextEntryCharacter(ObjRecAt14V2 *arg0) {
     s32 index;
     s32 count;
 
@@ -120,7 +120,7 @@ s32 func_8043CC10_de(ObjRecAt14V2 *arg0) {
     return 0;
 }
 
-s32 func_8043CCD0_de(void) {
+s32 Menu_DeletePreviousTextEntryCharacter(void) {
     s32 index;
     s32 next;
 

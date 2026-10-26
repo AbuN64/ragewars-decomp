@@ -38,7 +38,7 @@ extern void SmXlate_SwitchScreen(s32);
    D_800E58A0 points to to -1 and calls SmpSlider_SetTransitionMode on its first word with 2. Returns zero. */
 
 
-s32 func_80438FE0_de(void) {
+s32 Menu_FreeSoundOptionsScreen(void) {
     Cache_FreeMemory(D_800E58A0);
     D_800E58A0 = 0;
     return 0;
@@ -50,7 +50,7 @@ s32 func_80439010_de(void) {
     return 0;
 }
 
-s32 func_80439018_de(void) {
+s32 Menu_UpdateSoundOptionsScreen(void) {
     u8 *options;
     s32 value;
     s32 track;
@@ -88,7 +88,7 @@ s32 func_80439018_de(void) {
     return 0;
 }
 
-s32 func_80439128_de(void) {
+s32 Menu_ConfirmSoundOptionsScreen(void) {
     struct SoundOptionsScreen *state;
     MarkMenuEventHandled();
 #if defined(VERSION_DE)

@@ -5,7 +5,7 @@
 #include "MENU/EXTERNS_2.H"
 
 
-void *func_8043C500_us_rev1(s32 id) {
+void *Level_GetScreenEventTable(s32 id) {
     switch (id) {
     case 1:
         return D_00435F70;

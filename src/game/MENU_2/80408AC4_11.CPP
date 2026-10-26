@@ -5,10 +5,10 @@
 extern s32 D_80153774;
 extern char D_auto_800D37CC[];
 extern char D_auto_800D37D4[];
-extern u8 D_8014D49B_de[];
-extern u8 D_8014D494_de[];
+extern u8 g_pakDisplayNameLastByte[];
+extern u8 g_pakDisplayNameBytes[];
 typedef struct { char pad0[0x14]; char **text; } Func_8040A810_Obj;
-/* Shows the eight-character name D_8014D494_de in the field 0xC bytes into the text (right aligned, blank padded after trimming trailing blanks), or points the text at D_auto_800D37CC when D_80153774 is set; returns zero. */
+/* Shows the eight-character name g_pakDisplayNameBytes in the field 0xC bytes into the text (right aligned, blank padded after trimming trailing blanks), or points the text at D_auto_800D37CC when D_80153774 is set; returns zero. */
 s32 Menu_FormatRightAlignedName(Func_8040A810_Obj *arg0) {
     u8 *last;
     char *dst;
@@ -18,7 +18,7 @@ s32 Menu_FormatRightAlignedName(Func_8040A810_Obj *arg0) {
     if (D_80153774 != 0) {
         arg0->text = (char **)D_auto_800D37CC;
     } else {
-        last = D_8014D49B_de;
+        last = g_pakDisplayNameLastByte;
         arg0->text = (char **)D_auto_800D37D4;
         if (*last == 0x20) {
             last--;
@@ -35,7 +35,7 @@ s32 Menu_FormatRightAlignedName(Func_8040A810_Obj *arg0) {
         }
         dst = dst + 8 - n;
         for (i = 0; i < n; i++) {
-            *dst++ = D_8014D494_de[i];
+            *dst++ = g_pakDisplayNameBytes[i];
         }
     }
     return 0;

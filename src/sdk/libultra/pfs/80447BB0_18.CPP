@@ -48,7 +48,7 @@ s32 func_80448548_de(OSPfs *pfs, __OSPackId *temp)
 
     if (pfs->activebank != 0) {
         pfs->activebank = 0;
-        ret = func_80448CC4_de(pfs);
+        ret = Pfs_SelectActiveBank(pfs);
         if (ret != 0)
             return ret;
     }

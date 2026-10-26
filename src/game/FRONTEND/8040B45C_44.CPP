@@ -4,72 +4,72 @@
 #include "TYPES.H"
 #include "FRONTEND/8040B45C_44.H"
 
-/* Reads the pixel at (x, y) of the current image D_80153D54 as a 0xAARRGGBB colour: seeks to
-   x + y * width through the format's seek hook D_80153CD8, fetches through D_80153CD0 and converts
+/* Reads the pixel at (x, y) of the current image g_conversionSourceImage as a 0xAARRGGBB colour: seeks to
+   x + y * width through the format's seek hook g_readSourceIndex, fetches through g_readSourceColor and converts
    the value with the format's channel masks and shifts like Frontend_ReadSourceColorEntry. */
 
 
 
 
 
-extern s32 D_80153C78;
+extern s32 g_sourcePixelOffset;
 
-extern u32 D_8014DA00;
+extern u32 g_sourceRedMask;
 
-extern u32 D_8014DA04;
+extern u32 g_sourceGreenMask;
 
-extern u32 D_8014DA08;
+extern u32 g_sourceBlueMask;
 
-extern u32 D_8014DA0C;
+extern u32 g_sourceAlphaMask;
 
-extern void (*D_80153CD0)(void);
+extern void (*g_readSourceColor)(void);
 
-/* Sets the read position D_80153C78 to row y of column x, the row stride being the halfword at
-   offset 8 of the structure D_80153D54 points to, calls the reader D_80153CD8 points to, and
-   returns the value it left in D_80153C80. */
-
-
+/* Sets the read position g_sourcePixelOffset to row y of column x, the row stride being the halfword at
+   offset 8 of the structure g_conversionSourceImage points to, calls the reader g_readSourceIndex points to, and
+   returns the value it left in g_sourcePixelIndex. */
 
 
-extern s32 D_80153C80;
+
+
+extern s32 g_sourcePixelIndex;
 
 /* Reads the pixel at index as a 0xAARRGGBB colour: stores the index for the current format's fetch
-   hook D_80153CD0, then extracts each channel of the fetched value with the format's channel mask
+   hook g_readSourceColor, then extracts each channel of the fetched value with the format's channel mask
    and signed shift (a negative shift scales up) and packs alpha, red, green and blue, using 0xFF
    for alpha when the format has no alpha mask. */
 
-extern s32 D_80153C60;
+extern s32 g_sourceColorIndex;
 
 /* Writes a 0xAARRGGBB colour to the pixel at (x, y) of the current target image D_80153D58:
    converts the colour to the format's packed value like Frontend_WriteDestinationColorEntry, then stores it and the
-   index x + y * width for the format's store hook D_80153CD4 and calls it. */
+   index x + y * width for the format's store hook g_writeDestinationColor and calls it. */
 
 
 
 
 
-extern s32 D_80153C6C;
+extern s32 g_destinationColorIndex;
 
-extern u32 D_8014DA10;
+extern u32 g_destinationRedMask;
 
-extern u32 D_8014DA14;
+extern u32 g_destinationGreenMask;
 
-extern u32 D_8014DA18;
+extern u32 g_destinationBlueMask;
 
-extern u32 D_8014DA1C;
+extern u32 g_destinationAlphaMask;
 
-extern void (*D_80153CD4)(void);
+extern void (*g_writeDestinationColor)(void);
 
-/* Stores a value in D_80153C8C, sets the write position D_80153C84 to row y of column x, the row
+/* Stores a value in g_destinationPixelIndex, sets the write position g_destinationPixelOffset to row y of column x, the row
    stride being the halfword at offset 8 of the structure D_80153D58 points to, and calls the
-   writer D_80153CDC points to. */
+   writer g_writeDestinationIndex points to. */
 
 
 
 
-extern void (*D_80153CDC)(void);
+extern void (*g_writeDestinationIndex)(void);
 
-extern s32 D_80153C84;
+extern s32 g_destinationPixelOffset;
 
 /* Encodes an 0xAARRGGBB color into a packed pixel value of entry `format` of the format table D_800E2B20, shifting each channel by its signed shift and masking it. */
 
@@ -138,63 +138,63 @@ static inline u32 decode(u32 value, Format *format) {
     return (a << 24) | (r << 16) | (g << 8) | b;
 }
 
-/* Loads the byte at offset D_80153C78 of the buffer D_80153C7C points to into both D_80153C80 and
-   D_80153C60. */
-/* The pixel buffers the format hooks read from (D_80153C64) and write to (D_80153C70); each hook reads
+/* Loads the byte at offset g_sourcePixelOffset of the buffer g_sourcePixelIndexBuffer points to into both g_sourcePixelIndex and
+   g_sourceColorIndex. */
+/* The pixel buffers the format hooks read from (g_sourceColorBuffer) and write to (g_destinationColorBuffer); each hook reads
    them as the 16-bit, 32-bit or packed 24-bit pixels of its format. */
-extern void *D_80153C64;
-extern void *D_80153C70;
-extern u32 D_80153C68; /* the fetched pixel */
-extern u32 D_80153C74; /* the pixel to store */
-extern u8 D_80153C76; /* the third byte of D_80153C74 */
-extern void (*D_80153CD8)();
-extern u8 *D_80153C7C;
+extern void *g_sourceColorBuffer;
+extern void *g_destinationColorBuffer;
+extern u32 g_sourceEncodedColor; /* the fetched pixel */
+extern u32 g_destinationEncodedColor; /* the pixel to store */
+extern u8 g_destinationColorMiddleByte; /* the third byte of g_destinationEncodedColor */
+extern void (*g_readSourceIndex)();
+extern u8 *g_sourcePixelIndexBuffer;
 
-/* Stores the byte (u8)D_80153C8C at the offset D_80153C84 within the buffer D_80153C88 points to. */
-extern u8 *D_80153C88;
+/* Stores the byte (u8)g_destinationPixelIndex at the offset g_destinationPixelOffset within the buffer g_destinationPixelIndexBuffer points to. */
+extern u8 *g_destinationPixelIndexBuffer;
 
 
 u32 Frontend_ReadSourcePixelColor(s32 x, s32 y) {
-    extern ShapeCode802B54A0 *D_80153D54;
+    extern ShapeCode802B54A0 *g_conversionSourceImage;
     u32 r;
     u32 g;
     u32 b;
     u32 a;
 
-    D_80153C78 = x + y * D_80153D54->unk8;
-    D_80153CD8(D_80153C78);
-    D_80153CD0();
-    if (D_8014DA20 < 0) {
-        r = (D_80153C68 & D_8014DA00) << -D_8014DA20;
+    g_sourcePixelOffset = x + y * g_conversionSourceImage->unk8;
+    g_readSourceIndex(g_sourcePixelOffset);
+    g_readSourceColor();
+    if (g_sourceRedShift < 0) {
+        r = (g_sourceEncodedColor & g_sourceRedMask) << -g_sourceRedShift;
     } else {
-        r = (D_80153C68 & D_8014DA00) >> D_8014DA20;
+        r = (g_sourceEncodedColor & g_sourceRedMask) >> g_sourceRedShift;
     }
-    if (D_8014DA24 < 0) {
-        g = (D_80153C68 & D_8014DA04) << -D_8014DA24;
+    if (g_sourceGreenShift < 0) {
+        g = (g_sourceEncodedColor & g_sourceGreenMask) << -g_sourceGreenShift;
     } else {
-        g = (D_80153C68 & D_8014DA04) >> D_8014DA24;
+        g = (g_sourceEncodedColor & g_sourceGreenMask) >> g_sourceGreenShift;
     }
-    if (D_8014DA28 < 0) {
-        b = (D_80153C68 & D_8014DA08) << -D_8014DA28;
+    if (g_sourceBlueShift < 0) {
+        b = (g_sourceEncodedColor & g_sourceBlueMask) << -g_sourceBlueShift;
     } else {
-        b = (D_80153C68 & D_8014DA08) >> D_8014DA28;
+        b = (g_sourceEncodedColor & g_sourceBlueMask) >> g_sourceBlueShift;
     }
-    if (D_8014DA2C < 0) {
-        a = (D_80153C68 & D_8014DA0C) << -D_8014DA2C;
+    if (g_sourceAlphaShift < 0) {
+        a = (g_sourceEncodedColor & g_sourceAlphaMask) << -g_sourceAlphaShift;
     } else {
-        a = (D_80153C68 & D_8014DA0C) >> D_8014DA2C;
+        a = (g_sourceEncodedColor & g_sourceAlphaMask) >> g_sourceAlphaShift;
     }
-    if (D_8014DA0C == 0) {
+    if (g_sourceAlphaMask == 0) {
         a = 0xFF;
     }
     return (a << 24) | (r << 16) | (g << 8) | b;
 }
 
 s32 Frontend_ReadSourcePixelIndex(s32 x, s32 y) {
-    extern struct ShapeCode802B54A0 *D_80153D54;
-    D_80153C78 = x + y * D_80153D54->unk8;
-    D_80153CD8();
-    return D_80153C80;
+    extern struct ShapeCode802B54A0 *g_conversionSourceImage;
+    g_sourcePixelOffset = x + y * g_conversionSourceImage->unk8;
+    g_readSourceIndex();
+    return g_sourcePixelIndex;
 }
 
 u32 Frontend_ReadSourceColorEntry(s32 index) {
@@ -203,29 +203,29 @@ u32 Frontend_ReadSourceColorEntry(s32 index) {
     u32 b;
     u32 a;
 
-    D_80153C60 = index;
-    D_80153CD0();
-    if (D_8014DA20 < 0) {
-        r = (D_80153C68 & D_8014DA00) << -D_8014DA20;
+    g_sourceColorIndex = index;
+    g_readSourceColor();
+    if (g_sourceRedShift < 0) {
+        r = (g_sourceEncodedColor & g_sourceRedMask) << -g_sourceRedShift;
     } else {
-        r = (D_80153C68 & D_8014DA00) >> D_8014DA20;
+        r = (g_sourceEncodedColor & g_sourceRedMask) >> g_sourceRedShift;
     }
-    if (D_8014DA24 < 0) {
-        g = (D_80153C68 & D_8014DA04) << -D_8014DA24;
+    if (g_sourceGreenShift < 0) {
+        g = (g_sourceEncodedColor & g_sourceGreenMask) << -g_sourceGreenShift;
     } else {
-        g = (D_80153C68 & D_8014DA04) >> D_8014DA24;
+        g = (g_sourceEncodedColor & g_sourceGreenMask) >> g_sourceGreenShift;
     }
-    if (D_8014DA28 < 0) {
-        b = (D_80153C68 & D_8014DA08) << -D_8014DA28;
+    if (g_sourceBlueShift < 0) {
+        b = (g_sourceEncodedColor & g_sourceBlueMask) << -g_sourceBlueShift;
     } else {
-        b = (D_80153C68 & D_8014DA08) >> D_8014DA28;
+        b = (g_sourceEncodedColor & g_sourceBlueMask) >> g_sourceBlueShift;
     }
-    if (D_8014DA2C < 0) {
-        a = (D_80153C68 & D_8014DA0C) << -D_8014DA2C;
+    if (g_sourceAlphaShift < 0) {
+        a = (g_sourceEncodedColor & g_sourceAlphaMask) << -g_sourceAlphaShift;
     } else {
-        a = (D_80153C68 & D_8014DA0C) >> D_8014DA2C;
+        a = (g_sourceEncodedColor & g_sourceAlphaMask) >> g_sourceAlphaShift;
     }
-    if (D_8014DA0C == 0) {
+    if (g_sourceAlphaMask == 0) {
         a = 0xFF;
     }
     return (a << 24) | (r << 16) | (g << 8) | b;
@@ -242,39 +242,39 @@ void Frontend_WriteDestinationPixelColor(s32 x, s32 y, u32 color) {
     g = (color & 0xFF00) >> 8;
     b = color & 0xFF;
     a = color >> 24;
-    if (D_8014DA1C == 0) {
+    if (g_destinationAlphaMask == 0) {
         a = 0xFF;
     }
-    if (D_8014DA30 < 0) {
-        r = (r >> -D_8014DA30) & D_8014DA10;
+    if (g_destinationRedShift < 0) {
+        r = (r >> -g_destinationRedShift) & g_destinationRedMask;
     } else {
-        r = (r << D_8014DA30) & D_8014DA10;
+        r = (r << g_destinationRedShift) & g_destinationRedMask;
     }
-    if (D_8014DA34 < 0) {
-        g = (g >> -D_8014DA34) & D_8014DA14;
+    if (g_destinationGreenShift < 0) {
+        g = (g >> -g_destinationGreenShift) & g_destinationGreenMask;
     } else {
-        g = (g << D_8014DA34) & D_8014DA14;
+        g = (g << g_destinationGreenShift) & g_destinationGreenMask;
     }
-    if (D_8014DA38 < 0) {
-        b = (b >> -D_8014DA38) & D_8014DA18;
+    if (g_destinationBlueShift < 0) {
+        b = (b >> -g_destinationBlueShift) & g_destinationBlueMask;
     } else {
-        b = (b << D_8014DA38) & D_8014DA18;
+        b = (b << g_destinationBlueShift) & g_destinationBlueMask;
     }
-    if (D_8014DA3C < 0) {
-        a = (a >> -D_8014DA3C) & D_8014DA1C;
+    if (g_destinationAlphaShift < 0) {
+        a = (a >> -g_destinationAlphaShift) & g_destinationAlphaMask;
     } else {
-        a = (a << D_8014DA3C) & D_8014DA1C;
+        a = (a << g_destinationAlphaShift) & g_destinationAlphaMask;
     }
-    D_80153C74 = r | g | b | a;
-    D_80153C6C = x + y * D_80153D58->unk8;
-    D_80153CD4();
+    g_destinationEncodedColor = r | g | b | a;
+    g_destinationColorIndex = x + y * D_80153D58->unk8;
+    g_writeDestinationColor();
 }
 
 void Frontend_WriteDestinationPixelIndex(s32 x, s32 y, s32 value) {
     extern struct ShapeCode802B54A0 *D_80153D58;
-    D_80153C8C = value;
-    D_80153C84 = x + y * D_80153D58->unk8;
-    D_80153CDC();
+    g_destinationPixelIndex = value;
+    g_destinationPixelOffset = x + y * D_80153D58->unk8;
+    g_writeDestinationIndex();
 }
 
 void Frontend_WriteDestinationColorEntry(s32 index, u32 color) {
@@ -287,32 +287,32 @@ void Frontend_WriteDestinationColorEntry(s32 index, u32 color) {
     g = (color & 0xFF00) >> 8;
     b = color & 0xFF;
     a = color >> 24;
-    if (D_8014DA1C == 0) {
+    if (g_destinationAlphaMask == 0) {
         a = 0xFF;
     }
-    if (D_8014DA30 < 0) {
-        r = (r >> -D_8014DA30) & D_8014DA10;
+    if (g_destinationRedShift < 0) {
+        r = (r >> -g_destinationRedShift) & g_destinationRedMask;
     } else {
-        r = (r << D_8014DA30) & D_8014DA10;
+        r = (r << g_destinationRedShift) & g_destinationRedMask;
     }
-    if (D_8014DA34 < 0) {
-        g = (g >> -D_8014DA34) & D_8014DA14;
+    if (g_destinationGreenShift < 0) {
+        g = (g >> -g_destinationGreenShift) & g_destinationGreenMask;
     } else {
-        g = (g << D_8014DA34) & D_8014DA14;
+        g = (g << g_destinationGreenShift) & g_destinationGreenMask;
     }
-    if (D_8014DA38 < 0) {
-        b = (b >> -D_8014DA38) & D_8014DA18;
+    if (g_destinationBlueShift < 0) {
+        b = (b >> -g_destinationBlueShift) & g_destinationBlueMask;
     } else {
-        b = (b << D_8014DA38) & D_8014DA18;
+        b = (b << g_destinationBlueShift) & g_destinationBlueMask;
     }
-    if (D_8014DA3C < 0) {
-        a = (a >> -D_8014DA3C) & D_8014DA1C;
+    if (g_destinationAlphaShift < 0) {
+        a = (a >> -g_destinationAlphaShift) & g_destinationAlphaMask;
     } else {
-        a = (a << D_8014DA3C) & D_8014DA1C;
+        a = (a << g_destinationAlphaShift) & g_destinationAlphaMask;
     }
-    D_80153C6C = index;
-    D_80153C74 = r | g | b | a;
-    D_80153CD4();
+    g_destinationColorIndex = index;
+    g_destinationEncodedColor = r | g | b | a;
+    g_writeDestinationColor();
 }
 
 u32 Frontend_EncodePixelColor(u32 color, s32 format) {
@@ -324,83 +324,83 @@ u32 Frontend_DecodePixelColor(u32 value, s32 format) {
 }
 
 void Frontend_ReadSourceHalfwordPixel(void) {
-    D_80153C68 = ((u16 *)D_80153C64)[D_80153C60];
+    g_sourceEncodedColor = ((u16 *)g_sourceColorBuffer)[g_sourceColorIndex];
 }
 
 void Frontend_ReadSourceWordPixel(void) {
-    D_80153C68 = ((s32 *)D_80153C64)[D_80153C60];
+    g_sourceEncodedColor = ((s32 *)g_sourceColorBuffer)[g_sourceColorIndex];
 }
 
 void Frontend_ReadSourceThreeBytePixel(void) {
-    D_80153C68 = (((u8 *)D_80153C64)[D_80153C60 * 3] << 16) | (((u8 *)D_80153C64)[D_80153C60 * 3 + 1] << 8) |
-                 ((u8 *)D_80153C64)[D_80153C60 * 3 + 2];
+    g_sourceEncodedColor = (((u8 *)g_sourceColorBuffer)[g_sourceColorIndex * 3] << 16) | (((u8 *)g_sourceColorBuffer)[g_sourceColorIndex * 3 + 1] << 8) |
+                 ((u8 *)g_sourceColorBuffer)[g_sourceColorIndex * 3 + 2];
 }
 
 void Frontend_WriteDestinationHalfwordPixel(void) {
-    ((u16 *)D_80153C70)[D_80153C6C] = (u16)D_80153C74;
+    ((u16 *)g_destinationColorBuffer)[g_destinationColorIndex] = (u16)g_destinationEncodedColor;
 }
 
 void Frontend_WriteDestinationWordPixel(void) {
-    ((s32 *)D_80153C70)[D_80153C6C] = D_80153C74;
+    ((s32 *)g_destinationColorBuffer)[g_destinationColorIndex] = g_destinationEncodedColor;
 }
 
 void Frontend_WriteDestinationThreeBytePixel(void) {
-    ((u8 *)D_80153C70)[D_80153C6C * 3] = D_80153C75;
-    ((u8 *)D_80153C70)[D_80153C6C * 3 + 1] = D_80153C76;
-    ((u8 *)D_80153C70)[D_80153C6C * 3 + 2] = D_80153C77;
+    ((u8 *)g_destinationColorBuffer)[g_destinationColorIndex * 3] = g_destinationColorHighByte;
+    ((u8 *)g_destinationColorBuffer)[g_destinationColorIndex * 3 + 1] = g_destinationColorMiddleByte;
+    ((u8 *)g_destinationColorBuffer)[g_destinationColorIndex * 3 + 2] = g_destinationColorLowByte;
 }
 
 void Frontend_ReadSourceByteIndex(void) {
-    s32 value = D_80153C7C[D_80153C78];
+    s32 value = g_sourcePixelIndexBuffer[g_sourcePixelOffset];
 
-    D_80153C80 = value;
-    D_80153C60 = value;
+    g_sourcePixelIndex = value;
+    g_sourceColorIndex = value;
 }
 
 void Frontend_ReadSourceNibbleIndex(void) {
-    s32 index = D_80153C78;
+    s32 index = g_sourcePixelOffset;
     s32 value;
 
     if (index & 1) {
-        value = D_80153C7C[index >> 1] & 0xF;
+        value = g_sourcePixelIndexBuffer[index >> 1] & 0xF;
     } else {
-        value = D_80153C7C[index >> 1] >> 4;
+        value = g_sourcePixelIndexBuffer[index >> 1] >> 4;
     }
-    D_80153C80 = value;
-    D_80153C60 = value;
+    g_sourcePixelIndex = value;
+    g_sourceColorIndex = value;
 }
 
 void Frontend_UseHalfwordPixelOffset(void) {
-    s32 value = D_80153C78;
+    s32 value = g_sourcePixelOffset;
 
-    D_80153C80 = value;
-    D_80153C60 = value;
+    g_sourcePixelIndex = value;
+    g_sourceColorIndex = value;
 }
 
 void Frontend_UseThreeBytePixelOffset(void) {
-    s32 value = D_80153C78;
+    s32 value = g_sourcePixelOffset;
 
-    D_80153C80 = value;
-    D_80153C60 = value;
+    g_sourcePixelIndex = value;
+    g_sourceColorIndex = value;
 }
 
 void Frontend_UseWordPixelOffset(void) {
-    s32 value = D_80153C78;
+    s32 value = g_sourcePixelOffset;
 
-    D_80153C80 = value;
-    D_80153C60 = value;
+    g_sourcePixelIndex = value;
+    g_sourceColorIndex = value;
 }
 
 void Frontend_WriteDestinationByteIndex(void) {
-    D_80153C88[D_80153C84] = (u8)D_80153C8C;
+    g_destinationPixelIndexBuffer[g_destinationPixelOffset] = (u8)g_destinationPixelIndex;
 }
 
 void Frontend_WriteDestinationNibbleIndex(void) {
-    s32 index = D_80153C84;
+    s32 index = g_destinationPixelOffset;
 
     if (index & 1) {
-        D_80153C88[index >> 1] = (D_80153C88[index >> 1] & 0xF0) | ((u8)D_80153C8C & 0xF);
+        g_destinationPixelIndexBuffer[index >> 1] = (g_destinationPixelIndexBuffer[index >> 1] & 0xF0) | ((u8)g_destinationPixelIndex & 0xF);
     } else {
-        D_80153C88[index >> 1] = (D_80153C88[index >> 1] & 0xF) | (((u8)D_80153C8C & 0xF) << 4);
+        g_destinationPixelIndexBuffer[index >> 1] = (g_destinationPixelIndexBuffer[index >> 1] & 0xF) | (((u8)g_destinationPixelIndex & 0xF) << 4);
     }
 }

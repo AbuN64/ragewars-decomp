@@ -9,7 +9,7 @@ extern s32 SmpSlider_CreateSliderWidget(s32, s32, s32);
 extern void SmpSlider_SetSliderItem(s32, s32);
 extern s32 SmpFlicker_CreateFlickerWidget(s32, s32);
 
-s32 func_80438F0C_de(void) {
+s32 Menu_CreateSoundOptionsScreen(void) {
     s32 cue;
     void *memory;
     memory = Cache_AllocateMemory(0x1C);
@@ -69,7 +69,7 @@ extern void SmpSlider_SetSliderItem(s32 cue, s32 volume);
 extern s32 SmpFlicker_CreateFlickerWidget(s32 a0, s32 a1);
 
 /* Allocates the HUD-cue object D_800E58A0, opens its handle for 0x6C/0x6D, starts its two timed cues at the volumes in D_801462E0 and its ambient loop, then arms state 3; returns 0. */
-s32 func_80438F0C_de(void) {
+s32 Menu_CreateSoundOptionsScreen(void) {
     s32 cue;
 
     /* the hub's allocation helper returns its SelectionScreenState view; this unit keeps its own HudCue view */

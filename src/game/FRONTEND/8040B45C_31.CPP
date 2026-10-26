@@ -20,7 +20,7 @@
 #include "MATH/80299ECC_3.H"
 #include "FRONTEND/8040B45C_36.H"
 
-extern BatchRec D_8014D590[];
+extern BatchRec g_textBatches[];
 extern struct Shape_typemap_165 D_8014D580;
 extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_typemap_165 *, WidgetLayout *widget, sm_dldc *);
 /* Flushes the queued text sprite batches: when any are queued it selects render mode 0x53333 if
@@ -58,8 +58,8 @@ static inline s32 func_8040CDD0_overlaps(struct Shape_typemap_165 *area) {
     BatchRec *batch;
     s32 i;
 
-    for (i = 0; i < D_8014D570; i++) {
-        batch = &D_8014D590[i];
+    for (i = 0; i < g_textBatchCount; i++) {
+        batch = &g_textBatches[i];
         if (area->field_4 < batch->area.field_0 || batch->area.field_4 < area->field_0 || area->field_C < batch->area.field_8 ||
             batch->area.field_C < area->field_8) {
             continue;
@@ -75,8 +75,8 @@ static inline s32 func_8040D00C_overlaps(struct Shape_typemap_165 *area) {
     BatchRec *batch;
     s32 i;
 
-    for (i = 0; i < D_8014D570; i++) {
-        batch = &D_8014D590[i];
+    for (i = 0; i < g_textBatchCount; i++) {
+        batch = &g_textBatches[i];
         if (area->field_4 < batch->area.field_0 || batch->area.field_4 < area->field_0 || area->field_C < batch->area.field_8 ||
             batch->area.field_C < area->field_8) {
             continue;
@@ -95,19 +95,19 @@ void XPlus_SortArray(char *, s32, s32, s32 (*)(char *, char *));
 static inline void textBegin(u8 font, u8 style) {
     N64Eng_GetClipBounds(&D_8014D580.field_0, &D_8014D580.field_8,
                    &D_8014D580.field_4, &D_8014D580.field_C);
-    D_8014D710 = (s8)font;
-    D_8014D714 = (s8)style;
-    D_8014D560 = Frontend_GetGlyphBuffer((s8)font);
-    D_8014D564 = Frontend_GetFontLetterSpacing((s8)font);
-    D_8014D568 = Frontend_GetFontMetricAtC((s8)font);
-    D_8014D56C = Frontend_GetFontMetricAtA((s8)font);
+    g_textBatchFontId = (s8)font;
+    g_textBatchStyle = (s8)style;
+    g_textGlyphBuffer = Frontend_GetGlyphBuffer((s8)font);
+    g_textGlyphSpacing = Frontend_GetFontLetterSpacing((s8)font);
+    g_textLineHeight = Frontend_GetFontMetricAtC((s8)font);
+    g_textVerticalOffset = Frontend_GetFontMetricAtA((s8)font);
 }
 
 static inline s32 textOverlaps(BatchRec *next) {
     s32 i;
     BatchRec *batch;
-    for (i = 0; i < D_8014D570; i++) {
-        batch = &D_8014D590[i];
+    for (i = 0; i < g_textBatchCount; i++) {
+        batch = &g_textBatches[i];
         if (next->area.field_4 < batch->area.field_0 || batch->area.field_4 < next->area.field_0 ||
             batch->area.field_8 > next->area.field_C || batch->area.field_C < next->area.field_8) continue;
         return 1;
@@ -117,9 +117,9 @@ static inline s32 textOverlaps(BatchRec *next) {
 
 static inline s32 textClipChanged(struct Shape_typemap_165 *current) {
     if (current->field_0 != D_8014D580.field_0) return 1;
-    if (current->field_8 != D_8014D588) return 1;
-    if (current->field_4 != D_8014D584) return 1;
-    return current->field_C != D_8014D58C;
+    if (current->field_8 != g_textClipTop) return 1;
+    if (current->field_4 != g_textClipRight) return 1;
+    return current->field_C != g_textClipBottom;
 }
 
 void Frontend_FlushTextBatches(void) {
@@ -134,7 +134,7 @@ void Frontend_FlushTextBatches(void) {
     BatchRec *batch;
     TextSprite *sprite;
 
-    if (D_8014D570 == 0) {
+    if (g_textBatchCount == 0) {
         return;
     }
     first = 0x60;
@@ -145,15 +145,15 @@ void Frontend_FlushTextBatches(void) {
         D_800E2AB8 = 1;
     }
     N64Eng_GetClipBounds(&clip.field_0, &clip.field_8, &clip.field_4, &clip.field_C);
-    N64Eng_SetClipBounds(D_8014D580.field_0, D_8014D588, D_8014D584, D_8014D58C);
-    for (current = 0; current < D_8014D570; current++) {
-        sprite = D_8014D590[current].cursor;
+    N64Eng_SetClipBounds(D_8014D580.field_0, g_textClipTop, g_textClipRight, g_textClipBottom);
+    for (current = 0; current < g_textBatchCount; current++) {
+        sprite = g_textBatches[current].cursor;
         page = sprite->glyph;
         if (first < page) {
             page = first;
         }
         first = page;
-        page = sprite[D_8014D590[current].count - 1].glyph;
+        page = sprite[g_textBatches[current].count - 1].glyph;
         if (page < last) {
             page = last;
         }
@@ -161,14 +161,14 @@ void Frontend_FlushTextBatches(void) {
     }
     for (current = first; current <= last; current++) {
         loaded = 0;
-        for (i = 0; i < D_8014D570; i++) {
-            batch = &D_8014D590[i];
+        for (i = 0; i < g_textBatchCount; i++) {
+            batch = &g_textBatches[i];
             while (current == batch->cursor->glyph && batch->count > 0) {
                 sprite = batch->cursor;
                 if (!loaded) {
-                    texture = Frontend_GetBankTileTexture(current & 0xFF, D_8014D710, D_8014D714);
+                    texture = Frontend_GetBankTileTexture(current & 0xFF, g_textBatchFontId, g_textBatchStyle);
                     if (texture == 0) {
-                        i = D_8014D570;
+                        i = g_textBatchCount;
                         break;
                     }
                     Gfx_BindImageTexture(texture);
@@ -181,7 +181,7 @@ void Frontend_FlushTextBatches(void) {
         }
     }
     func_8040CB30_restore(&clip);
-    D_8014D570 = 0;
+    g_textBatchCount = 0;
 }
 
 void Frontend_DrawImageWidget(WidgetFrontendDrawImageWidget *widget, sm_dldc args) {
@@ -297,11 +297,11 @@ void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
     else { font=widget->font; style=widget->style; }
     if ((s8)font == -1) font=widget->font;
     if ((s8)style == -1) style=widget->style;
-    if (D_8014D570) {
+    if (g_textBatchCount) {
         N64Eng_GetClipBounds(&current.field_0, &current.field_8, &current.field_4, &current.field_C);
         mismatch = textClipChanged(&current);
-        if (mismatch || D_8014D710 != (s8)font || D_8014D714 != (s8)style) {
-            if (D_8014D570) Frontend_FlushTextBatches();
+        if (mismatch || g_textBatchFontId != (s8)font || g_textBatchStyle != (s8)style) {
+            if (g_textBatchCount) Frontend_FlushTextBatches();
             textBegin(font, style);
         }
     } else textBegin(font, style);
@@ -314,30 +314,30 @@ void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
     }
     y = 0.0f;
     switch (widget->align & 12) {
-        case 0: y=area.field_8; y-=D_8014D56C*args.YScale; break;
+        case 0: y=area.field_8; y-=g_textVerticalOffset*args.YScale; break;
         case 4:
-            y=(area.field_8+area.field_C)/2; y-=D_8014D56C*args.YScale; y-=(D_8014D568/2)*args.YScale; break;
+            y=(area.field_8+area.field_C)/2; y-=g_textVerticalOffset*args.YScale; y-=(g_textLineHeight/2)*args.YScale; break;
         case 8:
-            sub=(D_8014D568+D_8014D56C)*args.YScale;
+            sub=(g_textLineHeight+g_textVerticalOffset)*args.YScale;
             y=area.field_C; y-=sub; break;
     }
-    batch=&D_8014D590[D_8014D570];
+    batch=&g_textBatches[g_textBatchCount];
     tempX=x; batch->area.field_0=tempX; batch->area.field_4=tempX+width;
-    tempY=(s32)y+(s32)(D_8014D56C*args.YScale);
-    batch->area.field_8=tempY; batch->area.field_C=tempY+(s32)(D_8014D568*args.YScale);
+    tempY=(s32)y+(s32)(g_textVerticalOffset*args.YScale);
+    batch->area.field_8=tempY; batch->area.field_C=tempY+(s32)(g_textLineHeight*args.YScale);
     if (batch->area.field_0 >= batch->area.field_4) batch->area.field_4=batch->area.field_0+1;
     if (batch->area.field_C <= batch->area.field_8) batch->area.field_C=batch->area.field_8+1;
     if (textOverlaps(batch)) { Frontend_FlushTextBatches(); textBegin(font, style); }
     sprite=ESmem_AllocateFrameHeapHigh(length*sizeof(TextSprite));
     sprites=sprite;
-    D_8014D590[D_8014D570].cursor=sprites;
+    g_textBatches[g_textBatchCount].cursor=sprites;
     color=((u32)args.alpha<<24)|0xFFFFFF;
     count=0;
 
     for (i=0; i<length; i++) {
         glyphId=*text-0x20;
         sprite->glyph=glyphId;
-        glyph=&D_8014D560->glyphs[glyphId];
+        glyph=&g_textGlyphBuffer->glyphs[glyphId];
         sprite->color=color;
         sprite->x=x;
         sprite->y=y+glyph->BaselineOffset*args.YScale;
@@ -345,14 +345,14 @@ void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
         sprite->height=glyph->height*args.YScale;
         text++;
         if (sprite->x<D_800DEA60 && sprite->x+sprite->width>0.0f) { sprite++; count++; }
-        x+=glyph->width*args.XScale; x+=D_8014D564*args.XScale;
+        x+=glyph->width*args.XScale; x+=g_textGlyphSpacing*args.XScale;
     }
     if (clipped) N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
     if (count>0) {
-        D_8014D590[D_8014D570].count=count;
-        XPlus_SortArray((char *)D_8014D590[D_8014D570].cursor, count, sizeof(TextSprite), D_0040F570);
-        D_8014D570++;
-        if (D_8014D570>=16) Frontend_FlushTextBatches();
+        g_textBatches[g_textBatchCount].count=count;
+        XPlus_SortArray((char *)g_textBatches[g_textBatchCount].cursor, count, sizeof(TextSprite), D_0040F570);
+        g_textBatchCount++;
+        if (g_textBatchCount>=16) Frontend_FlushTextBatches();
     }
 }
 

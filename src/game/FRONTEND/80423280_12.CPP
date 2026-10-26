@@ -125,9 +125,9 @@ enum { ITEM0 = 621, ITEM1 = 620, ITEM2 = 619, ITEM3 = 618 };
 
 
 
-/* Handles event 1 on the screen D_800E53C0: unless func_8043C308_de reports its menu in state 1 it
-   calls Frontend_DrawResultSelectionPreview; otherwise it advances the menu with Frontend_DrawMenuImage and func_8043C2A4_de and,
-   once func_8043C308_de reports 2, acts on the choice at 0x1C: choice 0 hides the window argument,
+/* Handles event 1 on the screen D_800E53C0: unless Frontend_GetMenuImageState reports its menu in state 1 it
+   calls Frontend_DrawResultSelectionPreview; otherwise it advances the menu with Frontend_DrawMenuImage and Frontend_AdvanceMenuImageTransition and,
+   once Frontend_GetMenuImageState reports 2, acts on the choice at 0x1C: choice 0 hides the window argument,
    calls MarkMenuEventHandled, clears D_80146918 and D_801468F4 and leaves for screen 0xF when option
    D_801462D5 is set, otherwise through Frontend_StartConfiguredMatch when func_8042AF28_de and ScenarioSetup_StartRandomCupStage both
    agree or for screen 0x14; choice 1 calls func_8040C428_de(0), shows the window, stops the objects
@@ -141,17 +141,17 @@ enum { ITEM0 = 621, ITEM1 = 620, ITEM2 = 619, ITEM3 = 618 };
 
 
 
-extern s32 func_8043C308_de(void *);
+extern s32 Frontend_GetMenuImageState(void *);
 
 extern void Frontend_DrawMenuImage(void *);
 
-extern void func_8043C2A4_de(void *);
+extern void Frontend_AdvanceMenuImageTransition(void *);
 
 
 
 extern void Items_ResetActorPools(void *, s32);
 
-extern void func_804499B0_de(void *, s32, s32);
+extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
 
 extern void Scene_LoadLevelResources(void *, s32, s32);
 
@@ -422,11 +422,11 @@ s32 Frontend_UpdateMatchResultsTransition(void *window, void *unused1, s32 event
     if (event != 1) {
         return 0;
     }
-    state = func_8043C308_de(D_800E53C0);
+    state = Frontend_GetMenuImageState(D_800E53C0);
     if (state == event) {
         Frontend_DrawMenuImage(D_800E53C0);
-        func_8043C2A4_de(D_800E53C0);
-        if (func_8043C308_de(D_800E53C0) != 2) {
+        Frontend_AdvanceMenuImageTransition(D_800E53C0);
+        if (Frontend_GetMenuImageState(D_800E53C0) != 2) {
             return 0;
         }
         if (D_800E53C0->active != 0) {
@@ -437,7 +437,7 @@ s32 Frontend_UpdateMatchResultsTransition(void *window, void *unused1, s32 event
             Frontend_SetWidgetFlag08(window, 1);
             object = &D_80145088;
             Items_ResetActorPools(object, 0);
-            func_804499B0_de(object - 0x48, 0, 0);
+            Ovlgame_InitializePlayerPool(object - 0x48, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
             ((MatchMenuObjects *)(object))->transition = 8;
         } else {

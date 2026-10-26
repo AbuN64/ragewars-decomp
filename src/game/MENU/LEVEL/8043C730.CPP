@@ -68,7 +68,7 @@ static inline s32 firstUnlocked(void) {
     return -1;
 }
 
-void func_8043C730_us_rev1(LevelSelectOwner *owner) {
+void Menu_UpdateLevelSelectionAvailability(LevelSelectOwner *owner) {
     s32 level = firstUnlocked();
     D_80154034 = level;
     if (level != -1) {

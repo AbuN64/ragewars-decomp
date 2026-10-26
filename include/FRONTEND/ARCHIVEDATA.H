@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "FRONTEND/LAYOUT.H"
 /* Records of the menu resource archive as they sit in memory after the archive header is read. */
-/* One entry of the resource map (D_8014D9B4, 12 bytes): the entry's offset in the archive data
+/* One entry of the resource map (g_frontendResourceScreens, 12 bytes): the entry's offset in the archive data
    and size, and the buffer it was loaded into (0 while not loaded). */
 typedef struct ArchiveMapEntry {
     s32 offset;
@@ -95,7 +95,7 @@ typedef struct t_res_header {
     s32 FirstScreen;
 } t_res_header;
 
-/* The open menu resource (D_801539B0, 0x2A8 bytes). */
+/* The open menu resource (g_frontendResourceState, 0x2A8 bytes). */
 typedef struct t_resource {
     s32 In;
     char Name[512];
@@ -122,5 +122,5 @@ typedef struct t_resource {
     s32 NeverFreeResources;
 } t_resource;
 
-extern t_resource D_801539B0;
+extern t_resource g_frontendResourceState;
 #endif

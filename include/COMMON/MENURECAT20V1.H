@@ -7,14 +7,14 @@ extern float D_800E2810;
 
 struct MenuRecAt20V1;
 
-struct Actor_func_8044560C_de;
-struct Actor_func_8044560C_de {
+struct ActorPakEnterPlayerOptions;
+struct ActorPakEnterPlayerOptions {
     char pad0[0x80];
     s32 mask80;
     char pad84[0xA8 - 0x84];
     s32 maskA8;
 };
-struct Actor_func_8044560C_de;
+struct ActorPakEnterPlayerOptions;
 struct PlayerRecAtC;
 
 struct PlayerRecAtC;
@@ -24,7 +24,7 @@ typedef struct PlayerRecAtC PlayerRecAtC;
 struct Spinner;
 typedef struct Spinner Spinner;
 
-struct Style_func_80445BC0_de;
+struct StyleMultiDrawNameCursor;
 
 
 struct EntryRecAtCV2;
@@ -46,8 +46,8 @@ struct LocalizedInputState {
 
 extern float D_800DE7C8_de;
 
-struct Style_func_80445BC0_de;
-typedef struct Style_func_80445BC0_de Style_func_80445BC0_de;
+struct StyleMultiDrawNameCursor;
+typedef struct StyleMultiDrawNameCursor StyleMultiDrawNameCursor;
 
 struct TextEntryRecAtC;
 typedef struct TextEntryRecAtC TextEntryRecAtC;

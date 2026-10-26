@@ -6,14 +6,14 @@
 
 #if defined(VERSION_EU_X) || defined(VERSION_US)
 s32 func_8043DADC_de(void *arg0, MenuRules *menuRules) {
-    func_8044972C_de(menuRules->locked);
+    Ovlgame_PlacePlayerForRound(menuRules->locked);
     return 1;
 }
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
 s32 func_8043DADC_de(void *unused, MenuRules *rules) {
-    func_8044972C_de(rules->locked);
+    Ovlgame_PlacePlayerForRound(rules->locked);
     return 1;
 }
 #endif

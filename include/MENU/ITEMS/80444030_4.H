@@ -80,8 +80,8 @@ extern void Items_ResetGameOptions(COptions *options);
 extern void Items_ResetPlayerSettings(CPlayerOptions *player, s8 controller);
 /* The default-name routine sits at different addresses in the PAL and non-PAL builds. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern void func_80444F30_eu(u8 *);
-#define PLAYER_SET_DEFAULT_NAME func_80444F30_eu
+extern void Items_CopyDefaultLocalizedPlayerName(u8 *);
+#define PLAYER_SET_DEFAULT_NAME Items_CopyDefaultLocalizedPlayerName
 #else
 extern void Items_SetDefaultPlayerName(u8 *);
 #define PLAYER_SET_DEFAULT_NAME Items_SetDefaultPlayerName

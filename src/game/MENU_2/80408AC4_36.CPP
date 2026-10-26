@@ -15,7 +15,7 @@ extern FieldRow D_800E1790_de[];
 
 extern Handler80437B98 D_800E1794_de;
 
-s32 func_804379B8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchTitleButtonColumnEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler80437B98 *entry;
     ObjRecAtCV1 *actor;
     s32 index;

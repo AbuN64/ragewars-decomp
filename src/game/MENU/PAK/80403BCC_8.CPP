@@ -32,7 +32,7 @@ extern void Control_ReleasePakLock(void);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
-extern s32 func_80447AF0_de(Device *, s32, s32, s32, s32, s32);
+extern s32 Pfs_ReadWriteFile(Device *, s32, s32, s32, s32, s32);
 
 /* For a player slot whose state D_801534F0 is 3, writes its score (the first word of its 0x204-byte
    record in D_800E2854 divided by 256, or 0 when the flag D_80153500 is set) and returns the flag;
@@ -115,7 +115,7 @@ s32 Pak_ReadNoteData(s32 slot, s32 noteIndex, s32 destination, s32 length)
   D_8010BBB8 = 2;
   if (result == 0)
   {
-    result = func_80447AF0_de(&D_8014D280[slot], noteIndex, zero, zero, size, addr);
+    result = Pfs_ReadWriteFile(&D_8014D280[slot], noteIndex, zero, zero, size, addr);
     if (result != zero)
     {
       result = -1;

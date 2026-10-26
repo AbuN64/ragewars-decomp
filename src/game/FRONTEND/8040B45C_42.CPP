@@ -94,7 +94,7 @@ static inline u32 encode(u32 color, Format *format) {
     return r | g | b | a;
 }
 
-extern void *D_80153C70,*D_80153C64;
+extern void *g_destinationColorBuffer,*g_sourceColorBuffer;
 
 /* Releases a resource object's buffers through Cache_FreeMemory (the one at 0x18 when flag 1 is set, the
    one at 0x14 when flag 2 is set and its size at 0x10 is positive) and clears its 32 bytes. */
@@ -129,66 +129,66 @@ u32 Frontend_ConvertPixelFormat(u32 value, s32 from, s32 to) {
 
 void Frontend_ConfigureImageConversion(ImageDescriptor *destination, ImageDescriptor *source) {
     Format dst,src;
-    D_80153CDC=0;
-    D_80153CD8=0;
-    D_80153CD4=0;
-    D_80153CD0=0;
-    D_80153C88=0;
-    D_80153C7C=0;
-    D_80153C70=0;
-    D_80153C64=0;
-    D_80153C84=0;
-    D_80153C78=0;
-    D_80153C6C=0;
-    D_80153C60=0;
+    g_writeDestinationIndex=0;
+    g_readSourceIndex=0;
+    g_writeDestinationColor=0;
+    g_readSourceColor=0;
+    g_destinationPixelIndexBuffer=0;
+    g_sourcePixelIndexBuffer=0;
+    g_destinationColorBuffer=0;
+    g_sourceColorBuffer=0;
+    g_destinationPixelOffset=0;
+    g_sourcePixelOffset=0;
+    g_destinationColorIndex=0;
+    g_sourceColorIndex=0;
     D_80153D58=0;
-    D_80153D54=0;
+    g_conversionSourceImage=0;
     if(destination) {
         D_80153D58=(void *)destination;
         dst=D_800E2B20[destination->format];
-        D_8014DA90=dst;
-        if(dst.flags) D_80153C70=destination->pixels;
-        else D_80153C70=destination->palette;
-        if(dst.flags) D_80153C88=destination->palette;
-        else D_80153C88=0;
-        if(dst.bits==16) D_80153CD4=D_0041406C;
-        else if(dst.bits==24) D_80153CD4=D_004140BC;
-        else if(dst.bits==32) D_80153CD4=D_00414094;
-        if(dst.type==4) D_80153CDC=D_00414244;
-        else if(dst.type==8) D_80153CDC=D_00414220;
-        D_8014DA10=dst.mask[0];
-        D_8014DA14=dst.mask[1];
-        D_8014DA18=dst.mask[2];
-        D_8014DA1C=dst.mask[3];
-        D_8014DA30=dst.shift[0];
-        D_8014DA34=dst.shift[1];
-        D_8014DA38=dst.shift[2];
-        D_8014DA3C=dst.shift[3];
+        g_destinationPixelFormat=dst;
+        if(dst.flags) g_destinationColorBuffer=destination->pixels;
+        else g_destinationColorBuffer=destination->palette;
+        if(dst.flags) g_destinationPixelIndexBuffer=destination->palette;
+        else g_destinationPixelIndexBuffer=0;
+        if(dst.bits==16) g_writeDestinationColor=D_0041406C;
+        else if(dst.bits==24) g_writeDestinationColor=D_004140BC;
+        else if(dst.bits==32) g_writeDestinationColor=D_00414094;
+        if(dst.type==4) g_writeDestinationIndex=D_00414244;
+        else if(dst.type==8) g_writeDestinationIndex=D_00414220;
+        g_destinationRedMask=dst.mask[0];
+        g_destinationGreenMask=dst.mask[1];
+        g_destinationBlueMask=dst.mask[2];
+        g_destinationAlphaMask=dst.mask[3];
+        g_destinationRedShift=dst.shift[0];
+        g_destinationGreenShift=dst.shift[1];
+        g_destinationBlueShift=dst.shift[2];
+        g_destinationAlphaShift=dst.shift[3];
     }
     if(source) {
-        D_80153D54=(void *)source;
+        g_conversionSourceImage=(void *)source;
         src=D_800E2B20[source->format];
-        D_8014DA50=src;
-        if(src.flags) D_80153C64=source->pixels;
-        else D_80153C64=source->palette;
-        if(src.flags) D_80153C7C=source->palette;
-        else D_80153C7C=0;
-        if(src.bits==16) D_80153CD0=D_00413FCC;
-        else if(src.bits==24) D_80153CD0=D_00414024;
-        else if(src.bits==32) D_80153CD0=D_00413FF8;
-        if(src.type==4) D_80153CD8=D_00414168;
-        else if(src.type==8) D_80153CD8=D_00414138;
-        else if(src.type==16) D_80153CD8=D_004141C0;
-        else if(src.type==24) D_80153CD8=D_004141E0;
-        else if(src.type==32) D_80153CD8=D_00414200;
-        D_8014DA00=src.mask[0];
-        D_8014DA04=src.mask[1];
-        D_8014DA08=src.mask[2];
-        D_8014DA0C=src.mask[3];
-        D_8014DA20=src.shift[0];
-        D_8014DA24=src.shift[1];
-        D_8014DA28=src.shift[2];
-        D_8014DA2C=src.shift[3];
+        g_sourcePixelFormat=src;
+        if(src.flags) g_sourceColorBuffer=source->pixels;
+        else g_sourceColorBuffer=source->palette;
+        if(src.flags) g_sourcePixelIndexBuffer=source->palette;
+        else g_sourcePixelIndexBuffer=0;
+        if(src.bits==16) g_readSourceColor=D_00413FCC;
+        else if(src.bits==24) g_readSourceColor=D_00414024;
+        else if(src.bits==32) g_readSourceColor=D_00413FF8;
+        if(src.type==4) g_readSourceIndex=D_00414168;
+        else if(src.type==8) g_readSourceIndex=D_00414138;
+        else if(src.type==16) g_readSourceIndex=D_004141C0;
+        else if(src.type==24) g_readSourceIndex=D_004141E0;
+        else if(src.type==32) g_readSourceIndex=D_00414200;
+        g_sourceRedMask=src.mask[0];
+        g_sourceGreenMask=src.mask[1];
+        g_sourceBlueMask=src.mask[2];
+        g_sourceAlphaMask=src.mask[3];
+        g_sourceRedShift=src.shift[0];
+        g_sourceGreenShift=src.shift[1];
+        g_sourceBlueShift=src.shift[2];
+        g_sourceAlphaShift=src.shift[3];
     }
 }
 

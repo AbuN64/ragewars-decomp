@@ -29,7 +29,7 @@ extern void **D_80103FCC;
 extern s32 func_802444A4_de(void *arg0, CVector3 arg1, CVector3 arg2, void *arg3);
 
 /* Revives a player whose down timer at 0x1340 has run past its limit (30 ticks, or 900 in
-   control modes 12 and 15 while D_80146938 asks): clears the timer and calls func_8044972C_de
+   control modes 12 and 15 while D_80146938 asks): clears the timer and calls Ovlgame_PlacePlayerForRound
    unless the session at 0x98 is running and the player's team membership at 0x94 and control
    mode disagree, or it is teamless and active outside session mode 3. */
 
@@ -41,7 +41,7 @@ extern s32 func_802444A4_de(void *arg0, CVector3 arg1, CVector3 arg2, void *arg3
 
 
 
-extern void func_8044972C_de(SharedPlayer *);
+extern void Ovlgame_PlacePlayerForRound(SharedPlayer *);
 
 void Nav_UpdateTargetPitch(Brain *object) {
     void *memory = object;
@@ -369,16 +369,16 @@ void Nav_HandlePlayerTimeout(SharedPlayer **brain) {
             controls = (*brain)->views5D8.view5D8_2.controls;
             if (controls->team == 0) {
                 if (controls->active == 0 || session->m_nTalsetLives == 3) {
-                    func_8044972C_de(*brain);
+                    Ovlgame_PlacePlayerForRound(*brain);
                 }
             } else {
                 mode = controls->mode;
                 if (mode == 0xC || mode == 0xF) {
-                    func_8044972C_de(*brain);
+                    Ovlgame_PlacePlayerForRound(*brain);
                 }
             }
         } else {
-            func_8044972C_de(*brain);
+            Ovlgame_PlacePlayerForRound(*brain);
         }
     }
 }

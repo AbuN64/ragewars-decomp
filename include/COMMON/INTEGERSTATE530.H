@@ -58,7 +58,7 @@ struct MenuHandlerEntry {
 extern void Smos_SetKindEventHandler(s32 id, s32 mode, MenuElementHandler handler);
 
 
-extern int D_80146E18;
+extern int g_dispatchingScreenOwner;
 
 struct Entry_func_80298170_de;
 struct Entry_func_80298170_de {
@@ -95,7 +95,7 @@ struct Screen {
 };
 struct Screen;
 
-extern int D_80146E08;
+extern int g_screenDrawWidth;
 
 
 
@@ -112,7 +112,7 @@ extern s32 Smos_InvokeKindEventHandler(void *arg0, s32 arg1, s32 arg2, s32 arg3,
 
 extern unsigned int Smos_GetScreenStackDepth(void);
 
-extern int D_80146E0C;
+extern int g_screenDrawHeight;
 
 
 
@@ -149,7 +149,7 @@ struct ScreenManager;
 
 
 
-extern int D_8014D09C;
+extern int g_menuElementLoadPeak;
 
 extern void Smos_SetKindHandlerFlags(s32 arg0, s32 arg1);
 

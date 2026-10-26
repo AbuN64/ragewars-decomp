@@ -23,9 +23,9 @@ extern Spinner D_800E63C0[];
 extern s32 Player_GetPlayerIndex(char *, s32);
 extern func_802077F4_S2 *Pak_GetWidgetStyle(void *, s32);
 
-extern void func_8044208C_de(void *, ItemRecAt20V1 *, void *, Style_func_80445BC0_de *);
+extern void func_8044208C_de(void *, ItemRecAt20V1 *, void *, StyleMultiDrawNameCursor *);
 
-void func_80445BC0_de(void *menu, ItemRecAt20V1 *item, void *third, Style_func_80445BC0_de *style) {
+void Multi_DrawNameCursor(void *menu, ItemRecAt20V1 *item, void *third, StyleMultiDrawNameCursor *style) {
     s32 i;
     f32 width;
     f32 alpha;

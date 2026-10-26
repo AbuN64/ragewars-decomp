@@ -89,17 +89,17 @@ s32 func_80444FA0_us_rev1(OptionEditState *arg0, OptionEditState *arg1, s32 arg2
 #endif
 
 #if !(defined(VERSION_US))
-/* Calls func_8025E2D4_de with -1, func_8025E384_de, func_8025E33C_de and func_8044DD50_de on D_8011FAC0, and
+/* Calls func_8025E2D4_de with -1, func_8025E384_de, func_8025E33C_de and Ovlgame_ResetMatchControllerState on D_8011FAC0, and
    returns one. */
 #include "COMMON/GAME_SESSION.H"
 
-extern void func_8044DD50_de(void *);
+extern void Ovlgame_ResetMatchControllerState(void *);
 
 s32 func_80444E30_de(void) {
     func_8025E2D4_de(-1);
     func_8025E384_de();
     func_8025E33C_de();
-    func_8044DD50_de(&D_8011FAC0);
+    Ovlgame_ResetMatchControllerState(&D_8011FAC0);
     return 1;
 }
 

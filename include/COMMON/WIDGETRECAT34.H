@@ -42,7 +42,7 @@ extern int Frontend_ReturnUnitValue(void);
 
 extern signed char Frontend_GetFontCharacterPhysicalWidth(int entry, int index);
 
-extern short D_80153C2C;
+extern short g_frontendResourceLanguageCount;
 
 
 extern short Frontend_GetFontLetterSpacing(int index);

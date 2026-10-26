@@ -22,7 +22,7 @@ s32 func_80448BFC_de(OSPfs *pfs)
 
     if (pfs->activebank != 0) {
         pfs->activebank = 0;
-        ret = func_80448CC4_de(pfs);
+        ret = Pfs_SelectActiveBank(pfs);
         if (ret != 0)
             return ret;
     }
@@ -61,7 +61,7 @@ s32 func_80448BFC_de(OSPfs *pfs)
 
     if (pfs->activebank != 0) {
         pfs->activebank = 0;
-        ret = func_80448CC4_de(pfs);
+        ret = Pfs_SelectActiveBank(pfs);
         if (ret != 0)
             return ret;
     }

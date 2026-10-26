@@ -51,7 +51,7 @@ extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 extern s32 func_80445F80_de(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name,
                          s32 size, s32 *file_no);
 
-extern s32 func_80447AF0_de(OSPfs *pfs, s32 file_no, s32 flag, s32 offset, s32 size, void *data);
+extern s32 Pfs_ReadWriteFile(OSPfs *pfs, s32 file_no, s32 flag, s32 offset, s32 size, void *data);
 
 static inline void func_804042F0_encode(u8 *dst, u8 *src, s32 n) {
     s32 i;
@@ -199,7 +199,7 @@ s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *fil
         }
         offset = 0;
         if (result == 0) {
-            result = func_80447AF0_de(pfs, *file_no, 1, offset, size, data);
+            result = Pfs_ReadWriteFile(pfs, *file_no, 1, offset, size, data);
             if (result != 0) {
                 func_80446580_de(pfs, company_code, game_code, name, ext);
                 result = -1;

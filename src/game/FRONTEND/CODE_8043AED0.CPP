@@ -14,7 +14,7 @@
    column (D_800E5A1A[p][column]) to alpha 0x23, calls func_8040E8D8_de(0) on the item D_800E5A06[p][column]
    unless the column is 5, then steps the column back for direction 1 (0 wraps to 5, and in mode 1
    at 0x4D4 anything above 2 becomes 2) or forward otherwise (5 wraps to 0, and in mode 1 anything
-   past 2 becomes 5), and redraws through func_8043BA5C_de. */
+   past 2 becomes 5), and redraws through Frontend_SelectEquipmentColumn. */
 
 
 
@@ -65,7 +65,7 @@ extern s32 Player_HasProfileUnlockFlag(s32 record, s32 item);
 
 
 
-void func_8043ACF0_de(s32 player, s32 direction) {
+void Frontend_MoveEquipmentColumn(s32 player, s32 direction) {
     MenuWidget *item;
     s32 column;
 
@@ -95,11 +95,11 @@ void func_8043ACF0_de(s32 player, s32 direction) {
             }
         }
     }
-    func_8043BA5C_de(player, column);
+    Frontend_SelectEquipmentColumn(player, column);
 }
 
 /* Step an equipment choice, rejecting duplicates and the locked item 15. */
-void func_8043AE5C_de(s32 player, s32 step) {
+void Frontend_CycleEquipmentChoice(s32 player, s32 step) {
     s32 count;
     s32 low;
     s32 high;
@@ -166,7 +166,7 @@ void func_8043AE5C_de(s32 player, s32 step) {
     }
 }
 
-void func_8043B0CC_de(s32 player) {
+void Frontend_ActivateEquipmentPanel(s32 player) {
     MenuWidget *item;
     s32 i;
 
@@ -221,7 +221,7 @@ void func_8043B0CC_de(s32 player) {
    language on EU); column 5 or out of range clears the badge and hides the item. */
 extern EquipEntry D_800E5BC4[];
 extern EquipEntry D_800E5B14[];
-extern void func_80439C80_de(void *, s32);
+extern void Frontend_SetPreviewModel(void *, s32);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 void Frontend_ShowEquipChoice(s32 player, s32 category, s32 choice)
@@ -246,7 +246,7 @@ void Frontend_ShowEquipChoice(s32 player, s32 category, s32 choice)
             table = D_800E5B14;
             break;
         default:
-            func_80439C80_de(D_800E59E0->badges[player], 0);
+            Frontend_SetPreviewModel(D_800E59E0->badges[player], 0);
             Frontend_SetWidgetFlag08(D_800E59E0->panels[player].item, 0);
             return;
         }
@@ -265,7 +265,7 @@ void Frontend_ShowEquipChoice(s32 player, s32 category, s32 choice)
             break;
         case 5:
         default:
-            func_80439C80_de(D_800E59E0->badges[player], 0);
+            Frontend_SetPreviewModel(D_800E59E0->badges[player], 0);
             Frontend_SetWidgetFlag08(D_800E59E0->panels[player].item, 0);
             return;
         }
@@ -281,7 +281,7 @@ void Frontend_ShowEquipChoice(s32 player, s32 category, s32 choice)
                 node = node->sibling;
             }
         } while (!found);
-        func_80439C80_de(D_800E59E0->badges[player], table[choice].resource);
+        Frontend_SetPreviewModel(D_800E59E0->badges[player], table[choice].resource);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         D_800E59E0->panels[player].item->word38 = table[choice].label[g_languageIndex];
 #else

@@ -55,7 +55,7 @@ extern int SmpSlider_GetSliderItem(void *slider);
 
 
 
-s32 func_80439174_de(void) {
+s32 Menu_CancelSoundOptionsScreen(void) {
     struct SoundOptionsScreen *state;
 
     MarkMenuEventHandled();
@@ -65,7 +65,7 @@ s32 func_80439174_de(void) {
     return 0;
 }
 
-s32 func_804391B0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchSoundOptionsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler80439390 *entry;
     s32 index;
     s32 wildcard;
@@ -93,7 +93,7 @@ s32 func_804391B0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return 0;
 }
 
-s32 func_80439240_de(void) {
+s32 Menu_CreateSoundSliders(void) {
     u8 *options;
     void *slider;
     D_800E58A4 = Cache_AllocateMemory(8);
@@ -126,7 +126,7 @@ s32 func_80439240_de(void) {
     return 0;
 }
 
-s32 func_804392D0_de(void) {
+s32 Menu_FreeSoundSliders(void) {
     Cache_FreeMemory(D_800E58A4);
     D_800E58A4 = 0;
     return 0;
@@ -138,8 +138,8 @@ s32 func_80439300_de(void) {
     return 0;
 }
 
-extern unsigned char D_801462E1[]; /* MIXED func_80439308_de */
-int func_80439308_de(void) {
+extern unsigned char D_801462E1[]; /* MIXED Menu_ApplySoundSliders */
+int Menu_ApplySoundSliders(void) {
  int value;
  unsigned char *options;
  int sound;

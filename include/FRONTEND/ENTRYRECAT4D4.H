@@ -19,8 +19,8 @@ struct EntryCode8043A0A48043B6E8 {
 };
 
 struct EntryCode8043A0A48043B6E8;
-struct Screen_func_8043B6E8_de;
-struct Screen_func_8043B6E8_de {
+struct ScreenFrontendLoadEquipmentSelections;
+struct ScreenFrontendLoadEquipmentSelections {
     void *window;
     s32 pad4;
     struct EntryCode8043A0A48043B6E8 entries[4];

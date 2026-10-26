@@ -25,7 +25,7 @@ struct CPlayerPool_t {
 };
 
 
-extern void func_80447A38_de(u8 *valid, EntryRecAt3 *data);
+extern void Pfs_DecodeControllerStatusReplies(u8 *valid, EntryRecAt3 *data);
 
 struct IntegerState88;
 typedef struct IntegerState88 IntegerState88;
@@ -73,7 +73,7 @@ struct TeamInfo;
 struct View;
 struct ObjRecAt80;
 
-extern u16 func_80448B84_de(u8 *bytes, s32 count);
+extern u16 Pfs_SumBytes(u8 *bytes, s32 count);
 
 struct RecordCode80447BB080449EE4;
 typedef struct RecordCode80447BB080449EE4 RecordCode80447BB080449EE4;
@@ -138,7 +138,7 @@ extern short D_800CF198[];
 
 s32 Control_IsSnapshotActive(void);
 
-extern s32 func_80448BB4_de(u16 *ptr, u16 *csum, u16 *icsum);
+extern s32 Pfs_ComputeIdChecksums(u16 *ptr, u16 *csum, u16 *icsum);
 extern s32 func_80447130_de(OSPfs *pfs);
 extern s32 func_804486B8_de(OSPfs *pfs);
 #endif

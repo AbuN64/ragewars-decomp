@@ -5,5 +5,5 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/MENULISTSCREEN.H"
-extern void func_804389C4_de(void);
+extern void Achieve_OpenResultsFrontend(void);
 #endif

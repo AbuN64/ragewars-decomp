@@ -54,55 +54,55 @@ s32 * func_8025CC6C_de(void);
 void Scene_ReleaseCachedGeometry(void *);
 void Ovlgame_ReleaseObjectHandles(void *);
 /* Shut down the subsystem, free its owned resources, and unlink its list. */
-void OvlScene_FreeSceneResources(func_8044CBE0_S1 *arg0) {
-    s32 temp_v0;
-    void *temp_a1;
-    void *temp_a1_2;
-    void *temp_a1_3;
-    void *temp_s0;
-    void *temp_s1;
-    func_8020D0CC_S2 *var_a1;
-    temp_v0 = Player_GetFirstPlayer(&D_80145040);
-    if (temp_v0 != 0) {
-        Ovlgame_ReleaseObjectHandles((void *) temp_v0);
+void OvlScene_FreeSceneResources(func_8044CBE0_S1 *sceneToFree) {
+    s32 firstPlayer;
+    void *firstOptionalResource;
+    void *secondOptionalResource;
+    void *thirdOptionalResource;
+    void *nextAllocationNode;
+    void *allocationBase;
+    func_8020D0CC_S2 *allocationNode;
+    firstPlayer = Player_GetFirstPlayer(&D_80145040);
+    if (firstPlayer != 0) {
+        Ovlgame_ReleaseObjectHandles((void *) firstPlayer);
     }
     func_8025CBEC_de(func_8025CC6C_de());
     func_8025E468_de();
     func_8025E1EC_de(0x1000);
-    Cache_ReleaseResource(NULL, arg0->unk100);
-    Cache_ReleaseResource(NULL, arg0->unkB8);
-    Cache_ReleaseResource(NULL, arg0->unkBC);
-    Cache_ReleaseResource(NULL, arg0->unkC0);
-    Cache_ReleaseResource(NULL, arg0->unkC4);
-    Cache_ReleaseResource(NULL, arg0->unkC8);
-    Cache_ReleaseResource(NULL, arg0->unkD0);
-    Cache_ReleaseResource(NULL, arg0->unkD4);
-    Cache_ReleaseResource(NULL, arg0->unkEC);
-    Cache_ReleaseResource(NULL, arg0->unkCC);
-    Cache_ReleaseResource(NULL, arg0->unkE8);
-    temp_a1 = arg0->unkF0;
-    if (temp_a1 != NULL) {
-        Cache_ReleaseResource(NULL, temp_a1);
+    Cache_ReleaseResource(NULL, sceneToFree->unk100);
+    Cache_ReleaseResource(NULL, sceneToFree->unkB8);
+    Cache_ReleaseResource(NULL, sceneToFree->unkBC);
+    Cache_ReleaseResource(NULL, sceneToFree->unkC0);
+    Cache_ReleaseResource(NULL, sceneToFree->unkC4);
+    Cache_ReleaseResource(NULL, sceneToFree->unkC8);
+    Cache_ReleaseResource(NULL, sceneToFree->unkD0);
+    Cache_ReleaseResource(NULL, sceneToFree->unkD4);
+    Cache_ReleaseResource(NULL, sceneToFree->unkEC);
+    Cache_ReleaseResource(NULL, sceneToFree->unkCC);
+    Cache_ReleaseResource(NULL, sceneToFree->unkE8);
+    firstOptionalResource = sceneToFree->unkF0;
+    if (firstOptionalResource != NULL) {
+        Cache_ReleaseResource(NULL, firstOptionalResource);
     }
-    temp_a1_2 = arg0->unkF4;
-    if (temp_a1_2 != NULL) {
-        Cache_ReleaseResource(NULL, temp_a1_2);
+    secondOptionalResource = sceneToFree->unkF4;
+    if (secondOptionalResource != NULL) {
+        Cache_ReleaseResource(NULL, secondOptionalResource);
     }
-    temp_a1_3 = arg0->unkFC;
-    if (temp_a1_3 != NULL) {
-        Cache_ReleaseResource(NULL, temp_a1_3);
+    thirdOptionalResource = sceneToFree->unkFC;
+    if (thirdOptionalResource != NULL) {
+        Cache_ReleaseResource(NULL, thirdOptionalResource);
     }
-    Scene_ReleaseCachedGeometry(arg0);
-    temp_s1 = arg0->unk1B500.head;
-    var_a1 = temp_s1;
-    if (temp_s1 != NULL) {
+    Scene_ReleaseCachedGeometry(sceneToFree);
+    allocationBase = sceneToFree->unk1B500.head;
+    allocationNode = allocationBase;
+    if (allocationBase != NULL) {
         do {
-            temp_s0 = var_a1->unk10;
-            func_80255ED8_de(&arg0->unk1B500, var_a1);
-            var_a1 = temp_s0;
-        } while (var_a1 != NULL);
+            nextAllocationNode = allocationNode->unk10;
+            func_80255ED8_de(&sceneToFree->unk1B500, allocationNode);
+            allocationNode = nextAllocationNode;
+        } while (allocationNode != NULL);
     }
-    Cache_FreeMemory(temp_s1);
+    Cache_FreeMemory(allocationBase);
 }
 /* Binds a loaded collision mesh to the world: records the vertex, face and edge lists from the
    node's four chunks with their counts, resets the two bucket lists and files the 48 buckets into
@@ -123,7 +123,7 @@ static inline s32 groupHas(WorldRecAt1B40C *world, s32 n) {
     mask = 1 << (n & 7);
     return bits[n / 8] & mask;
 }
-void func_8044C108_de(WorldRecAt1B40C *world, void ***handle) {
+void OvlScene_UnpackVisibilityGeometry(WorldRecAt1B40C *world, void ***handle) {
     void *node;
     struct IntPair *l0;
     struct IntPair *l1;

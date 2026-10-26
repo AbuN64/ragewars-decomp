@@ -12,7 +12,7 @@ extern const f32 D_800C53B8_de;
 
 
 
-void func_8044DC60_de(RenderSettings *state) {
+void Ovlgame_InitializeRenderDirection(RenderSettings *state) {
     state->direction.x = D_800C53B0_de;
     state->direction.y = D_800C53B4_de;
     state->direction.z = D_800C53B8_de;

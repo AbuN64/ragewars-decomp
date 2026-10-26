@@ -9,6 +9,6 @@
 #include "COMMON/PACKED.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/LEVEL_INPUT.H"
-extern s16 func_8044AE70_de();
-extern s32 func_8044B008_de(ControllerProfile *, s32);
+extern s16 Ovlgame_InitializeControllerSession();
+extern s32 Ovlgame_ResetControllerProfile(ControllerProfile *, s32);
 #endif

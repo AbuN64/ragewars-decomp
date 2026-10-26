@@ -10,7 +10,7 @@
 #if defined(VERSION_EU_X)
 extern void SmpButton_WrapButtonWidget(int id);
 
-int func_8043AD30_eu_x(void) { SmpButton_WrapButtonWidget(0x3DE); SmpButton_WrapButtonWidget(0x3DF); return 0; }
+int Frontend_WrapNodePairExtended(void) { SmpButton_WrapButtonWidget(0x3DE); SmpButton_WrapButtonWidget(0x3DF); return 0; }
 #endif
 
 /* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled: 0x3DA waits through
@@ -66,7 +66,7 @@ s32 Frontend_UpdateTimedTransition(void) {
 /* Calls MarkMenuEventHandled, then Frontend_SetMenuChoiceResult with -1, then Smos_ReturnToPreviousScreen, and returns zero. */
 extern void MarkMenuEventHandled();
 
-s32 func_80439E04_de(void) {
+s32 Frontend_CancelNodePairMenu(void) {
     MarkMenuEventHandled();
     Frontend_SetMenuChoiceResult(-1);
     Smos_ReturnToPreviousScreen();
@@ -85,7 +85,7 @@ extern Handler8043A014 D_800E59B8;
 
 
 
-s32 func_80439E34_de(struct Tree *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchNodePairMenuEvent(struct Tree *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 index;
     s32 wildcard;

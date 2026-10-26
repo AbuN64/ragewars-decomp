@@ -20,7 +20,7 @@ extern Handler80437B98 D_800E57E4;
 
 struct ObjRecAtCV1;
 
-s32 func_80437B98_us_rev1(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchTitleButtonEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler80437B98 *entry;
     s32 index;
     s32 wildcard;

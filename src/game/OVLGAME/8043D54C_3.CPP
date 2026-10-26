@@ -5,7 +5,7 @@
 #include "OVLGAME/8043D54C_3.H"
 
 #if !(defined(VERSION_EU))
-/* Calls func_8044DD50_de on D_8011FAC0 when D_80145070 is one, otherwise clears the word at offset
+/* Calls Ovlgame_ResetMatchControllerState on D_8011FAC0 when D_80145070 is one, otherwise clears the word at offset
    0x5D0 of the owner at offset 0x1C of the second argument. Returns one. */
 
 
@@ -13,11 +13,11 @@
 
 
 #include "COMMON/GAME_SESSION.H"
-extern void func_8044DD50_de(void *);
+extern void Ovlgame_ResetMatchControllerState(void *);
 
 s32 func_8043DB04_de(void *unused, struct Holder *holder) {
     if (D_80145070 == 1) {
-        func_8044DD50_de(&D_8011FAC0);
+        Ovlgame_ResetMatchControllerState(&D_8011FAC0);
     } else {
         holder->owner->value = 0;
     }

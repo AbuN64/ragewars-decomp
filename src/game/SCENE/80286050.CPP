@@ -172,7 +172,7 @@ first_pass_done:
         sw_mode_1:
         sw_mode_3:
         sw_mode_4:
-            func_804389C4_de();
+            Achieve_OpenResultsFrontend();
             break;
         
     sw_mode_default:;

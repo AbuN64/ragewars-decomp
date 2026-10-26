@@ -153,7 +153,7 @@ struct WorldRecAt1B40C {
 struct Shared_Placed;
 
 
-extern short D_8010F320;
+extern short g_firstConnectedControllerPort;
 
 struct ItemsSelectionState;
 
@@ -253,6 +253,6 @@ typedef Packed CollisionBuildFace;
 extern void SetN64_TransposeRecords(void *src, void *dst, s32 arg2);
 
 extern void *memcpy(void *, const void *, unsigned int);
-extern s32 D_80141060;
+extern s32 g_spawnReferenceFloorPolygon;
 extern void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s32 index);
 #endif

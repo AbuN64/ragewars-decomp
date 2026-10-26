@@ -218,7 +218,7 @@ struct WidgetRecAt1A;
 typedef struct WidgetRecAt1A WidgetRecAt1A;
 
 
-extern int D_8014D710;
+extern int g_textBatchFontId;
 
 
 

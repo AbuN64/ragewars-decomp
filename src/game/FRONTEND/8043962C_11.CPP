@@ -15,7 +15,7 @@ extern void Player_InitializeProfile(void *);
 extern Pulse *D_800E5950;
 
 /* Initialize the pulse screen, its shared menu state, and player profiles. */
-s32 func_804396C0_us_rev1(MenuWidget *tree) {
+s32 Frontend_CreateProfileResetScreen(MenuWidget *tree) {
     s32 i;
     Shared_Game *settings;
     Shared_PlayerSettingsRecord *record;
@@ -24,7 +24,7 @@ s32 func_804396C0_us_rev1(MenuWidget *tree) {
     D_800E5950 = Cache_AllocateMemory(sizeof(*D_800E5950));
     object = &D_80145040.object;
     Items_ResetActorPools(object, 0);
-    func_804499B0_de(&D_80145040, 0, 0);
+    Ovlgame_InitializePlayerPool(&D_80145040, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
     if (func_8025477C_de() == 0) {
         func_8025476C_de(1);

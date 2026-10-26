@@ -132,12 +132,12 @@ typedef struct ScrollTable ScrollTable;
 
 
 typedef struct ImageDescriptor { u8 format; char pad1[7]; s16 width; char padA[0xA]; void *pixels, *palette; } ImageDescriptor;
-extern Format D_8014DA90;
-extern Format D_8014DA50;
-extern void (*D_80153CD4)(void);
-extern void (*D_80153CD0)(void);
-extern void (*D_80153CDC)(void);
-extern void (*D_80153CD8)(void);
+extern Format g_destinationPixelFormat;
+extern Format g_sourcePixelFormat;
+extern void (*g_writeDestinationColor)(void);
+extern void (*g_readSourceColor)(void);
+extern void (*g_writeDestinationIndex)(void);
+extern void (*g_readSourceIndex)(void);
 extern void D_0041406C(void);
 extern void D_004140BC(void);
 extern void D_00414094(void);

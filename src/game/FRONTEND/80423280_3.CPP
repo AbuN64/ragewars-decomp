@@ -66,7 +66,7 @@ extern void Tsmos_DeactivateControllerState(void);
 /* The message screen D_800E4514; its word at 0xC marks the message handled. */
 extern struct func_80205628_S3 *D_800E4514;
 extern struct MessageScreen *D_800E4518;
-extern void func_8043C278_de(struct MessageScreen *);
+extern void Frontend_StartMenuImageTransition(struct MessageScreen *);
 
 extern void Frontend_SetWidgetFlag08(void *object, int enabled);
 
@@ -244,7 +244,7 @@ s32 Frontend_HandleTabOptionsShortcut(void) {
         }
 reopen:
     Tsmos_DeactivateControllerState();
-    func_8043C278_de(D_800E4518);
+    Frontend_StartMenuImageTransition(D_800E4518);
     D_800E4518->shown = 1;
     D_800E4518->timer = -1;
     Frontend_SetWidgetFlag08(D_800E4518->window, 1);
@@ -261,7 +261,7 @@ retry:
         D_800E4518->next_mode = 4;
         D_800E4518->timer = 20;
     } else {
-        func_8043C278_de(D_800E4518);
+        Frontend_StartMenuImageTransition(D_800E4518);
         D_800E4518->shown = 1;
         D_800E4518->timer = 0;
     }

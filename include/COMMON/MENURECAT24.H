@@ -73,7 +73,7 @@ struct MenuRecAt20V3;
 typedef struct MenuRecAt20V3 MenuRecAt20V3;
 
 
-extern int D_8014D4D4;
+extern int g_pakAlternatePromptEnabled;
 
 extern int D_800D2440;
 

@@ -7,7 +7,7 @@
 /* Handles a player's death: stops the body's motion at 0x1C to 0x24 and runs func_8044A07C_de; in a
    single player game (D_801462E5) a player with limited lives at 0x1450 gets the death menu for its
    profile slot 0 to 3 on its view, and when D_80146938 asks and the player is out of a team game, once
-   every active player among the first eight is out the team is revived through func_8044972C_de (every
+   every active player among the first eight is out the team is revived through Ovlgame_PlacePlayerForRound (every
    active player in mode 2 when the mode 14 leader is down, and the leader in modes below 3); in
    multiplayer the view shows the respawn menu, D_45047C when the player has a respawn count at 0x5EA
    or D_450DA8 otherwise. */
@@ -31,7 +31,7 @@ extern char D_80145040;
 extern void Ovlgame_ReleaseObjectHandles(void *);
 extern void Pak_OpenDialog(char *, char *, SharedPlayer *, void *, s32);
 extern SharedPlayer *Player_GetPlayerByIndex(char *, s32);
-extern void func_8044972C_de(SharedPlayer *);
+extern void Ovlgame_PlacePlayerForRound(SharedPlayer *);
 
 void Player_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
     SharedPlayer *other;
@@ -84,12 +84,12 @@ void Player_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
                     for (i = 0; i < 8; i++) {
                         other = Player_GetPlayerByIndex(&D_80145040, i);
                         if (other != 0 && other->views5D8.view5D8_2.controls->active != 0) {
-                            func_8044972C_de(other);
+                            Ovlgame_PlacePlayerForRound(other);
                         }
                     }
                 }
                 if (D_801462C8.counters.m_nTalsetLives < 3) {
-                    func_8044972C_de(leader);
+                    Ovlgame_PlacePlayerForRound(leader);
                 }
             }
         }

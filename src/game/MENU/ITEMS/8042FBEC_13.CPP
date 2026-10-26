@@ -3,12 +3,12 @@
 
 #if defined(VERSION_EU)
 #ifdef NON_MATCHING
-#define func_8043C500_us_rev1 func_8043D1F4_eu
+#define Level_GetScreenEventTable Menu_GetScreenEventTable
 #include "TYPES.H"
 #include "MENU/EXTERNS_2.H"
 
 
-void *func_8043C500_us_rev1(s32 id) {
+void *Level_GetScreenEventTable(s32 id) {
     switch (id) {
     case 1:
         return D_00435F70;
@@ -79,7 +79,7 @@ void *func_8043C500_us_rev1(s32 id) {
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8043D1F4_eu);
+INCLUDE_ASM("ovl_80400000", Menu_GetScreenEventTable);
 #endif
 #endif
 
@@ -153,7 +153,7 @@ static inline s32 firstUnlocked(void) {
     return -1;
 }
 
-void func_8043D42C_eu(LevelSelectOwner *owner) {
+void Menu_UpdateUnlockedLevelSelection(LevelSelectOwner *owner) {
     s32 level = firstUnlocked();
     D_80154034 = level;
     if (level != -1) {
@@ -166,6 +166,6 @@ void func_8043D42C_eu(LevelSelectOwner *owner) {
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8043D42C_eu);
+INCLUDE_ASM("ovl_80400000", Menu_UpdateUnlockedLevelSelection);
 #endif
 #endif

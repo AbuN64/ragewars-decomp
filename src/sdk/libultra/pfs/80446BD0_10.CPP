@@ -28,7 +28,7 @@
 
 
 /* Decodes the six-byte short controller status reply found one byte per preceding channel into D_80154110 for the given channel, recording its error bits and, without error, its type and status.
-   Adapted from func_80447A38_de with the per-channel loop over eight-byte replies changed to a single six-byte reply reached by skipping one byte per preceding channel. */
+   Adapted from Pfs_DecodeControllerStatusReplies with the per-channel loop over eight-byte replies changed to a single six-byte reply reached by skipping one byte per preceding channel. */
 
 
 
@@ -50,7 +50,7 @@ s32 func_80446D80_de(void *queue, int channel)
     ret = __osSiRawStartDma(0, &D_80154110);
     osRecvMesg(queue, &dummy, 1);
 
-    func_80446EE4_de(channel, &data);
+    Pfs_DecodeChannelStatus(channel, &data);
 
     if (((data.team & 1) != 0) && ((data.team & 2) != 0)) {
         return 2;
@@ -91,7 +91,7 @@ void func_80446E58_de(int channel)
     *ptr = 0xFE;
 }
 
-void func_80446EE4_de(s32 channel, EntryRecAt3 *data) {
+void Pfs_DecodeChannelStatus(s32 channel, EntryRecAt3 *data) {
     u8 *ptr;
     __OSContRequesFormatShort requestformat;
     s32 i;

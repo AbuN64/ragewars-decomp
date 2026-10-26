@@ -56,14 +56,14 @@ s32 func_80446F60_de(void *queue, OSPfs *pfs, int channel)
     pfs->status = 0;
 
     pfs->activebank = 0;
-    ret = func_80448CC4_de(pfs);
+    ret = Pfs_SelectActiveBank(pfs);
     if (ret != 0)
         return ret;
     ret = func_802B84C0_de(pfs->queue, pfs->channel, 1, temp);
     if (ret != 0)
         return ret;
 
-    func_80448BB4_de((u16 *)temp, &sum, &isum);
+    Pfs_ComputeIdChecksums((u16 *)temp, &sum, &isum);
     id = (__OSPackId *)temp;
 
     if ((((__OSPackId *)temp)->checksum != sum) || (((__OSPackId *)temp)->inverted_checksum != isum)) {
@@ -199,7 +199,7 @@ Pfs_CountPageReferences
 
                 if (pfs->activebank != 0) {
                     pfs->activebank = 0;
-                    ret = func_80448CC4_de(pfs);
+                    ret = Pfs_SelectActiveBank(pfs);
                     if (ret != 0)
                         return ret;
                 }
@@ -218,7 +218,7 @@ Pfs_CountPageReferences
 
                 if (pfs->activebank != 0) {
                     pfs->activebank = 0;
-                    ret = func_80448CC4_de(pfs);
+                    ret = Pfs_SelectActiveBank(pfs);
                     if (ret != 0)
                         return ret;
                 }

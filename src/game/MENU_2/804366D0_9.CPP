@@ -4,7 +4,7 @@
 #include "COMMON/OWNERRECAT8V1.H"
 #include "TYPES.H"
 #include "SCENE/802508E0_13.H"
-extern struct State_func_80437444_de *D_800E5780;
+extern struct StateMenuUpdateScrollingChoiceScreen *D_800E5780;
 extern void SmpSlider_SetTransitionMode(void *, s32);
 extern s32 Defs_TestBit(void *, s32);
 
@@ -53,14 +53,14 @@ extern void SmXlate_SwitchScreen(s32);
 
  
 
-s32 func_804373E4_de(void) {
+s32 Menu_FreeScrollingChoiceScreen(void) {
     Cache_FreeMemory(D_800E5780);
     D_800E5780 = 0;
     return 0;
 }
 
 /* Calls SmpButton_WrapButtonWidget with 0x13B, 0x13A and 0x13C in turn and returns zero. */
-s32 func_80437414_de(void) {
+s32 Menu_WrapScrollingChoiceNodes(void) {
 #if defined(VERSION_DE)
     SmpButton_WrapButtonWidget(0x139);
     SmpButton_WrapButtonWidget(0x138);
@@ -77,7 +77,7 @@ s32 func_80437414_de(void) {
     return 0;
 }
 
-s32 func_80437444_de(void) {
+s32 Menu_UpdateScrollingChoiceScreen(void) {
     s32 result;
     s32 target;
 
@@ -115,8 +115,8 @@ s32 func_80437444_de(void) {
     return 0;
 }
 
-s32 func_80437574_de(void) {
-    struct State_func_80437444_de *state;
+s32 Menu_CancelScrollingChoiceScreen(void) {
+    struct StateMenuUpdateScrollingChoiceScreen *state;
 
     MarkMenuEventHandled();
     state = D_800E5780;
@@ -125,7 +125,7 @@ s32 func_80437574_de(void) {
     return 0;
 }
 
-s32 func_804375B0_de(void) {
+s32 Menu_HandleScrollingChoice(void) {
     s32 temp_v0;
     s32 var_v0;
     MarkMenuEventHandled();

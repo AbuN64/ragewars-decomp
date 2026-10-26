@@ -50,7 +50,7 @@ int Smos_DrainResourceWork();
 extern void *Cache_AllocateMemory(s32 size);
 
 
-/* Returns the object loaded for an identifier in the current context: reuses a cached entry whose context and identifier match and whose object still carries that identifier, and otherwise loads it through Frontend_FindWidgetByResourceId, counts the load in D_8014D0A0 with its high-water mark in D_8014D09C, and records it while the cache holds fewer than 75 entries. */
+/* Returns the object loaded for an identifier in the current context: reuses a cached entry whose context and identifier match and whose object still carries that identifier, and otherwise loads it through Frontend_FindWidgetByResourceId, counts the load in g_menuElementLoadCount with its high-water mark in g_menuElementLoadPeak, and records it while the cache holds fewer than 75 entries. */
 
 
 
@@ -106,10 +106,10 @@ void SmSmngr_InitializeScreenManager(s32 screenCount, s32 value) {
     s32 i;
     f64 frames;
 
-    D_80146E18 = -1;
-    N64Eng_GetScreenSize(&D_80146E08, &D_80146E0C);
+    g_dispatchingScreenOwner = -1;
+    N64Eng_GetScreenSize(&g_screenDrawWidth, &g_screenDrawHeight);
     Frontend_InitializeResourceState();
-    Frontend_SetDisplayClipBounds(D_80146E08, D_80146E0C);
+    Frontend_SetDisplayClipBounds(g_screenDrawWidth, g_screenDrawHeight);
     Smos_AllocateControllerContext();
     g_menuEventCount = 0;
     D_8014D080 = Cache_AllocateMemory(0x544);
@@ -157,9 +157,9 @@ Element *FindMenuElement(s32 id) {
         }
     }
     object = (Element *)Frontend_FindWidgetByResourceId((struct Tree *)context, id & 0xFFFF);
-    D_8014D0A0++;
-    if (D_8014D09C < D_8014D0A0) {
-        D_8014D09C = D_8014D0A0;
+    g_menuElementLoadCount++;
+    if (g_menuElementLoadPeak < g_menuElementLoadCount) {
+        g_menuElementLoadPeak = g_menuElementLoadCount;
     }
     if (D_8014D080->cacheCount < 75) {
         D_8014D080->cache[D_8014D080->cacheCount].id = id;

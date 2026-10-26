@@ -85,7 +85,7 @@ void PAKInterface_LoadNoteList(s32);
 void PAKInterface_LabelActiveProfileRows(s32);
 s32 PAKInterface_CountPendingPlayerPanels(void);
 void PAKInterface_BeginScreenExit(s32);
-void func_8043C278_de(s32 *);
+void Frontend_StartMenuImageTransition(s32 *);
 void PAKInterface_UpdatePlayerControlRows(s32);                    /* extern */
 
 
@@ -435,7 +435,7 @@ case22_selected:
             goto mode_default;
 mode_five:
             Tsmos_DeactivateControllerState();
-            func_8043C278_de(D_800E54A4->menu);
+            Frontend_StartMenuImageTransition(D_800E54A4->menu);
             goto mode_end;
 mode_six:
             {

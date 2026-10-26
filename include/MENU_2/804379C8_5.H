@@ -4,5 +4,5 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 extern struct HudCue *D_800E58A0;
-extern s32 func_80438F0C_de(void);
+extern s32 Menu_CreateSoundOptionsScreen(void);
 #endif

@@ -19,9 +19,9 @@
 
 /* The hub spells D_800E3590 as the padded menu block; this unit reaches the model name at +0x08
  * through its own view, so each use casts back to it. */
-extern void func_80439B5C_de(char *model, s32 arg1, CVector3 scale, CVector3 position);
-extern void func_80439BE0_de(char *model, CVector3 rotation);
-extern void func_80439C30_de(char *model, CVector3 offset);
+extern void Frontend_InitModelPreviewTransform(char *model, s32 arg1, CVector3 scale, CVector3 position);
+extern void Frontend_SetPreviewRotation(char *model, CVector3 rotation);
+extern void Frontend_SetPreviewRotationSpeed(char *model, CVector3 offset);
 
 s32 Frontend_PositionSelectionMenuModel(void) {
     CVector3 scale;
@@ -42,17 +42,17 @@ s32 Frontend_PositionSelectionMenuModel(void) {
     position.x = 17.0f;
     position.y = -10.0f;
     position.z = -50.0f;
-    func_80439B5C_de(((MenuRecAt8 *) D_800E3590)->model, 0, scale, position);
-    func_80439BE0_de(((MenuRecAt8 *) D_800E3590)->model, rotation);
-    func_80439C30_de(((MenuRecAt8 *) D_800E3590)->model, offset);
+    Frontend_InitModelPreviewTransform(((MenuRecAt8 *) D_800E3590)->model, 0, scale, position);
+    Frontend_SetPreviewRotation(((MenuRecAt8 *) D_800E3590)->model, rotation);
+    Frontend_SetPreviewRotationSpeed(((MenuRecAt8 *) D_800E3590)->model, offset);
     SoundElement_PlayFlatSound(0xE78);
     return 0;
 }
 
 #include "gbi.h"
 #include "COMMON/VIDEO_DIMENSIONS.H"
-extern s32 Frontend_GetModelRecordCount(struct Record_func_80439C80_de *record);
-extern void func_804399D0(struct Record_func_80439C80_de *record);
+extern s32 Frontend_GetModelRecordCount(struct RecordFrontendSetPreviewModel *record);
+extern void func_804399D0(struct RecordFrontendSetPreviewModel *record);
 extern Gfx *g_displayListCursor;
 extern s32 D_800E28D0;
 /* Draw callback of the menu block: on draw event 1 in state 3 it clears the fill mode D_800D15E0, sets the fill

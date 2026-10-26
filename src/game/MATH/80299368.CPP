@@ -29,7 +29,7 @@ void Frontend_ReleaseReferencedBuffer(s32);
  
 
 
-extern Shared_MenuDefinition *D_80146E10;
+extern Shared_MenuDefinition *g_screenDefaultFocus;
 
 void SmXlate_SwitchScreen(s32 index) {
     s32 (*temp_v0_10)(s32, s32, s32, s32);
@@ -158,7 +158,7 @@ block_search_check:
             temp_a0_2->primary = temp_v0;
             temp_a0_2->owner = index;
             temp_a0_2->focus = temp_v0->unk44;
-            D_80146E10 = temp_v0->unk44;
+            g_screenDefaultFocus = temp_v0->unk44;
             var_s1 = temp_v0;
             SmSmngr_InitializeCurrentScreen();
             if (((u16) var_s1->unk12 >> 0xC) & 1) {
@@ -178,7 +178,7 @@ loop_18:
                     temp_a0_3->primary = temp_v0_3;
                     temp_a0_3->owner = owner;
                     temp_a0_3->focus = temp_v0_3->unk44;
-                    D_80146E10 = temp_v0_3->unk44;
+                    g_screenDefaultFocus = temp_v0_3->unk44;
                     D_8014D080->cacheCount = 0;
                     var_s1 = temp_v0_3;
                     SmSmngr_InitializeCurrentScreen();
@@ -249,7 +249,7 @@ after_focus10:
         temp_a0_5->owner = index;
         temp_a0_5->focus = temp_v0_6->unk44;
         var_s1 = temp_v0_6;
-        D_80146E10 = var_s1->unk44;
+        g_screenDefaultFocus = var_s1->unk44;
         StreamBufferFree(&D_8014D080->screens[D_8014D080->current].data);
         temp_v0_7 = D_8014D080->callback2;
         if (temp_v0_7 != 0) {
@@ -356,7 +356,7 @@ after_e03:
     temp_a0_6->primary = temp_v0_13;
     temp_a0_6->owner = index;
     temp_a0_6->focus = temp_v0_13->unk44;
-    D_80146E10 = temp_v0_13->unk44;
+    g_screenDefaultFocus = temp_v0_13->unk44;
     D_8014D080->lowIndex = (s32) D_8014D080->current;
     temp_a2 = D_8014D080->callback2;
     var_s1 = temp_v0_13;
@@ -405,7 +405,7 @@ block_78:
     *transition_state = 1;
     while (var_s5 != 0) {
         var_s5 = 0;
-        regpart_temp_v0_2 = D_80146E10;
+        regpart_temp_v0_2 = g_screenDefaultFocus;
         temp_a1_2 = var_s1->unk44;
         if (regpart_temp_v0_2 != temp_a1_2) {
             

@@ -22,7 +22,7 @@ extern s32 D_80153788;
    PAL items select their text using the current language. */
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u16 D_8015D48C;
+extern u16 g_pakPreviewNumber;
 extern char D_800ED414[];
 #else
 #endif
@@ -152,7 +152,7 @@ extern void Pak_OpenDialog(char *, char *, int, int, int);
 
 
 
-/* Latches D_80153768 to one when the record's team value is not -1 and both func_802645D0_de and Pak_CheckStatusPrompt accept it, then returns D_80153768. Adapted from Pak_CheckMenuPakChange with the latch D_80153784 changed to D_80153768. */
+/* Latches g_pakNamePromptAccepted to one when the record's team value is not -1 and both func_802645D0_de and Pak_CheckStatusPrompt accept it, then returns g_pakNamePromptAccepted. Adapted from Pak_CheckMenuPakChange with the latch D_80153784 changed to g_pakNamePromptAccepted. */
 
 
 
@@ -171,7 +171,7 @@ static inline s32 Pak_GetMenuChannel(struct Shared_PakMenu *record) {
 
 s32 func_8040A9A0_de(LayeredText *field) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    s32 value = D_8015D48C;
+    s32 value = g_pakPreviewNumber;
     char *text = (char *)field->text[g_languageIndex];
 
     Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800ED414, value);
@@ -724,39 +724,39 @@ done:
 }
 
 s32 func_8040B2C8_de(struct Shared_PakMenu *record) {
-    if (D_80153768 == 0) {
+    if (g_pakNamePromptAccepted == 0) {
         if (Pak_GetMenuChannel(record) != -1) {
             if (Control_PeekPakChange(Pak_GetMenuChannel(record)) != 0) {
                 if (Pak_CheckStatusPrompt(record, Pak_GetMenuChannel(record), 0) != 0) {
-                    D_80153768 = 1;
+                    g_pakNamePromptAccepted = 1;
                 }
             }
         }
     }
-    return D_80153768;
+    return g_pakNamePromptAccepted;
 }
 
-/* Stores 0 in D_80153768 and 1 in D_80153734. */
+/* Stores 0 in g_pakNamePromptAccepted and 1 in g_pakAlternateNameSelected. */
 
 void func_8040B3A8_de(void) {
-    D_80153768 = 0;
-    D_80153734 = 1;
+    g_pakNamePromptAccepted = 0;
+    g_pakAlternateNameSelected = 1;
 }
 
-/* Stores 0 in D_80153768 and 0 in D_80153734. */
+/* Stores 0 in g_pakNamePromptAccepted and 0 in g_pakAlternateNameSelected. */
 
 void func_8040B3C4_de(void) {
-    D_80153768 = 0;
-    D_80153734 = 0;
+    g_pakNamePromptAccepted = 0;
+    g_pakAlternateNameSelected = 0;
 }
 
-/* Points a field's text at D_800D7970 when the option D_80153734 is set and at D_800D797C otherwise, and returns
+/* Points a field's text at D_800D7970 when the option g_pakAlternateNameSelected is set and at D_800D797C otherwise, and returns
    zero: the label an option menu shows for that option. */
 
 
 
 s32 func_8040B3DC_de(struct FieldRecAt14 *field) {
-    if (D_80153734 != 0) {
+    if (g_pakAlternateNameSelected != 0) {
         field->text = D_800D7970;
     } else {
         field->text = D_800D797C;
@@ -764,13 +764,13 @@ s32 func_8040B3DC_de(struct FieldRecAt14 *field) {
     return 0;
 }
 
-/* Points a field's text at D_800D7974 when the option D_80153734 is set and at D_800D7980 otherwise, and returns
+/* Points a field's text at D_800D7974 when the option g_pakAlternateNameSelected is set and at D_800D7980 otherwise, and returns
    zero: the label an option menu shows for that option. */
 
 
 
 s32 func_8040B410_de(struct FieldRecAt14 *field) {
-    if (D_80153734 != 0) {
+    if (g_pakAlternateNameSelected != 0) {
         field->text = D_800D7974;
     } else {
         field->text = D_800D7980;
@@ -797,7 +797,7 @@ s32 func_8040B444_de(struct Field *field, Shared_PakMenu *pThis) {
     } else {
         value = pThis->owner->unk4;
     }
-    if (D_80153734 != 0) {
+    if (g_pakAlternateNameSelected != 0) {
         field->text = D_800D394C;
     } else {
         strings = D_800E2FB4;
@@ -814,8 +814,8 @@ s32 func_8040B444_de(struct Field *field, Shared_PakMenu *pThis) {
 extern char D_800ED41C[];
 #else
 #endif
-/* Takes D_800E28C8 when D_8015375C is set and otherwise the signed byte at offset 4 of the second argument's record at 0x20, then shows D_800D394C in a field when D_80153734 is set and otherwise points the field at D_800D3958 and formats one more than that value into it with D_800DCD9C two bytes before the length Pak_CountLineChars reports, returning zero.
-   Adapted from Pak_UpdateOwnerChannelLabel with the value source chosen by D_8015375C, the text chosen by D_80153734, the offset two bytes, and the texts and format changed. */
+/* Takes D_800E28C8 when D_8015375C is set and otherwise the signed byte at offset 4 of the second argument's record at 0x20, then shows D_800D394C in a field when g_pakAlternateNameSelected is set and otherwise points the field at D_800D3958 and formats one more than that value into it with D_800DCD9C two bytes before the length Pak_CountLineChars reports, returning zero.
+   Adapted from Pak_UpdateOwnerChannelLabel with the value source chosen by D_8015375C, the text chosen by g_pakAlternateNameSelected, the offset two bytes, and the texts and format changed. */
 
 extern s32 D_8015375C;
 
@@ -839,7 +839,7 @@ s32 func_8040B444_de(LayeredText *field, struct Shared_PakMenu *holder) {
     } else {
         value = holder->owner->unk4;
     }
-    if (D_80153734 != 0) {
+    if (g_pakAlternateNameSelected != 0) {
         field->text = D_800D394C;
     } else {
 

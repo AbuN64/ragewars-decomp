@@ -17,7 +17,7 @@ extern Handler8043962C D_800E5904;
 
 
 
-s32 func_8043944C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchSoundSliderEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler8043962C *entry;
     s32 index;
     s32 wildcard;

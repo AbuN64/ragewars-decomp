@@ -50,7 +50,7 @@ s32 func_80448260_de(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid)
 
     if (pfs->activebank != 0) {
         pfs->activebank = 0;
-        ret = func_80448CC4_de(pfs);
+        ret = Pfs_SelectActiveBank(pfs);
         if (ret != 0)
             return ret;
     }
@@ -63,7 +63,7 @@ s32 func_80448260_de(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid)
     j = 0;
     do {
         pfs->activebank = j;
-        ret = func_80448CC4_de(pfs);
+        ret = Pfs_SelectActiveBank(pfs);
         if (ret != 0)
             return ret;
         ret = func_802B84C0_de(pfs->queue, pfs->channel, 0, temp);
@@ -95,7 +95,7 @@ s32 func_80448260_de(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid)
 
         if (j > 0) {
             pfs->activebank = 0;
-            ret = func_80448CC4_de(pfs);
+            ret = Pfs_SelectActiveBank(pfs);
             if (ret != 0)
                 return ret;
             ret = func_802B84C0_de(pfs->queue, pfs->channel, 0, (u8 *)temp);
@@ -111,7 +111,7 @@ s32 func_80448260_de(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid)
     } while (j < 62);
 
     pfs->activebank = 0;
-    ret = func_80448CC4_de(pfs);
+    ret = Pfs_SelectActiveBank(pfs);
     if (ret != 0)
         return ret;
 

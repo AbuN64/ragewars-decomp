@@ -41,7 +41,7 @@ s32 func_80446A20_de(OSPfs *pfs, s32 file_no, NoteState *state)
         return 2;
     if (pfs->activebank != 0) {
         pfs->activebank = 0;
-        ret = func_80448CC4_de(pfs);
+        ret = Pfs_SelectActiveBank(pfs);
         if (ret != 0)
             return ret;
     }

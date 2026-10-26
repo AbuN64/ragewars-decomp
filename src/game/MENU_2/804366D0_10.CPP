@@ -16,7 +16,7 @@
 
 struct ObjRecAtCV1;
 
-s32 func_804384B8_eu(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchScrollingChoiceEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler80437868 *entry;
     s32 index;
     s32 wildcard;

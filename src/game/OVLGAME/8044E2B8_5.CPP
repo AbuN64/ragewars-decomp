@@ -56,7 +56,7 @@ extern void Player_ResetPlayerControllers(struct Context *);
 
 
 
-void func_8044DD50_de(char *match) {
+void Ovlgame_ResetMatchControllerState(char *match) {
     CGameStatus *state;
 
     Control_SetControllerMode(0);

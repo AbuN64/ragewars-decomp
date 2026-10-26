@@ -38,7 +38,7 @@ static inline s32 testBit(s32 n, u8 *bits) {
     return bits[n / 8] & mask;
 }
 
-void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **handle) {
+void OvlScene_BuildCollisionGeometry(CollisionBuildWorld *world, CollisionBuildMeshHandle **handle) {
     s32 size0;
     s32 size1;
     s32 size3;

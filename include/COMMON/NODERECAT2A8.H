@@ -66,7 +66,7 @@ struct ActionRecAt24 {
 };
 
 
-extern int D_80141000;
+extern int g_frontendStartupState;
 
 struct Shared_PakMenu;
 

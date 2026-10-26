@@ -22,8 +22,8 @@ extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern s32 Frontend_FindKeyIndex(s32);
 extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
-extern void func_8043B96C_de(void);
-extern void func_8043B0CC_de(s32);
+extern void Frontend_ResetEquipmentFromCharacter(void);
+extern void Frontend_ActivateEquipmentPanel(s32);
 extern void Tsmos_DeactivateControllerState(void);
 extern struct StateFlags D_800E5A06[][19];
 extern s32 SmpFlicker_IsFlickerIdle(void *);
@@ -116,11 +116,11 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
             }
         }
     }
-    func_8043B96C_de();
+    Frontend_ResetEquipmentFromCharacter();
     for (player = 0; player < 4; player++) {
         config = &g_playerSettings[player];
         if (config->enabled == 1) {
-            func_8043B0CC_de(player);
+            Frontend_ActivateEquipmentPanel(player);
         }
     }
     D_800E59E0->next = -1;
@@ -129,9 +129,9 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
 }
 
 
-extern s32 func_80439B5C_de(void *, s32, CVector3, CVector3);
-extern void func_80439BE0_de(void *, CVector3);
-extern void func_80439C30_de(void *, CVector3);
+extern s32 Frontend_InitModelPreviewTransform(void *, s32, CVector3, CVector3);
+extern void Frontend_SetPreviewRotation(void *, CVector3);
+extern void Frontend_SetPreviewRotationSpeed(void *, CVector3);
 #if defined(VERSION_EU)
 /* eu keeps these two floats elsewhere: D_800E1FC4/D_800E1FD4 name its string tables */
 #define D_800E1FC4 D_800EE614_eu
@@ -184,9 +184,9 @@ s32 Frontend_StartFourPlayerResults(void) {
         }
         rotation.y = (f32)(baseAngle + GraphU64_NextRandom() % 10);
         baseAngle += 0x2D;
-        func_80439B5C_de((u8 *)D_800E59E0 + badgeOffset, 0, scale, position);
-        func_80439BE0_de((u8 *)D_800E59E0 + badgeOffset, rotation);
-        func_80439C30_de((u8 *)D_800E59E0 + badgeOffset, angularVelocity);
+        Frontend_InitModelPreviewTransform((u8 *)D_800E59E0 + badgeOffset, 0, scale, position);
+        Frontend_SetPreviewRotation((u8 *)D_800E59E0 + badgeOffset, rotation);
+        Frontend_SetPreviewRotationSpeed((u8 *)D_800E59E0 + badgeOffset, angularVelocity);
         badgeOffset += sizeof(D_800E59E0->badges[0]);
     }
     for (i = 0; i < 4; i++) {
@@ -198,15 +198,15 @@ s32 Frontend_StartFourPlayerResults(void) {
             screen = D_800E59E0;
             switch (screen->panels[i].mode) {
             case 0:
-                func_8043BA5C_de(i, screen->panels[i].selection = 5);
+                Frontend_SelectEquipmentColumn(i, screen->panels[i].selection = 5);
                 break;
             case 1:
                 screen->panels[i].selection = 0;
-                func_8043BA5C_de(i, 0);
+                Frontend_SelectEquipmentColumn(i, 0);
                 break;
             case 2:
                 screen->panels[i].selection = 0;
-                func_8043BA5C_de(i, 0);
+                Frontend_SelectEquipmentColumn(i, 0);
                 break;
             }
         }

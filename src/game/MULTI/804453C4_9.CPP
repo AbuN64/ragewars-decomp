@@ -17,7 +17,7 @@
 extern s32 func_8025CC6C_de(s32 mask);
 extern void func_8025CAB0_de(s32 value);
 
-void func_8044560C_de(PlayerRecAtC *player) {
+void Pak_EnterPlayerOptions(PlayerRecAtC *player) {
     s32 mask;
 
     player->state = 2;
@@ -36,13 +36,13 @@ void func_8044560C_de(PlayerRecAtC *player) {
 
 /* Calls func_8026495C_de and nothing else. */
 
-void func_8044569C_de(void) {
+void Pak_RestoreControllerSetup(void) {
     Control_RestoreControllerSetup();
 }
 
 /* Calls Pak_DrawMenuEntries and nothing else. */
 
-void func_804456B8_de(struct MenuStyle *menu, s8 *member) {
+void Pak_RenderMenuEntryCallback(struct MenuStyle *menu, s8 *member) {
     Pak_DrawMenuEntries(menu, member);
 }
 #endif

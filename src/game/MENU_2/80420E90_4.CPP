@@ -4,7 +4,7 @@
 #include "COMMON/GLOBALS.H"
 
 /* Tears down the match display: calls func_80245B28_de, stops the objects at D_80145088 and 0x48 bytes
-   before it through Items_ResetActorPools and func_804499B0_de, releases resource 0x24 of D_8011FE88 through
+   before it through Items_ResetActorPools and Ovlgame_InitializePlayerPool, releases resource 0x24 of D_8011FE88 through
    Scene_LoadLevelResources, calls func_8025476C_de with one when func_8025477C_de reports nothing, then calls
    func_80245A10_de, func_80245A20_de with zero and func_80245A30_de. */
 extern s32 func_8025477C_de();
@@ -17,7 +17,7 @@ void Menu_ReleaseOptionsScene(void) {
     Cinema_ReleaseSequenceContext();
     object = &D_80145088;
     Items_ResetActorPools(object, 0);
-    func_804499B0_de(object - 0x48, 0, 0);
+    Ovlgame_InitializePlayerPool(object - 0x48, 0, 0);
     Scene_LoadLevelResources(&g_world, 0x24, 0);
     if (func_8025477C_de() == 0) {
         func_8025476C_de(1);

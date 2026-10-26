@@ -9,7 +9,7 @@ extern s32 Scene_GetIndexedModelResource(void *, s32);
 extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 extern s32 SetN64_LocatePackSection(void *, s32, s32, s32 *);
 typedef struct { u32 w[7]; } Blk28;
-void func_8044B600_de(void *level, void *buffer, s32 name) {
+void OvlScene_CopySimpleModelHeader(void *level, void *buffer, s32 name) {
     void *table;
     s32 bytes;
     s32 key;

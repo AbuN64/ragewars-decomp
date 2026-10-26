@@ -33,7 +33,7 @@ extern s32 D_800E28C0;
 
 
 
-/* Latches D_80153770 to one when the record's team value is not -1 and both func_802645D0_de and Pak_CheckStatusPrompt accept it, then returns D_80153770. Adapted from Pak_CheckMenuPakChange with the latch D_80153784 changed to D_80153770. */
+/* Latches g_frontendPakPromptAccepted to one when the record's team value is not -1 and both func_802645D0_de and Pak_CheckStatusPrompt accept it, then returns g_frontendPakPromptAccepted. Adapted from Pak_CheckMenuPakChange with the latch D_80153784 changed to g_frontendPakPromptAccepted. */
 
 
 
@@ -51,19 +51,19 @@ static inline s32 Pak_GetMenuChannel(struct Shared_PakMenu *record) {
     return record->owner->unk4;
 }
 
-/* Stores 0 in D_80153778 and 0 in D_80153770. */
+/* Stores 0 in D_80153778 and 0 in g_frontendPakPromptAccepted. */
 
 
-/* Stores 1 in D_80153778 and 0 in D_80153770. */
+/* Stores 1 in D_80153778 and 0 in g_frontendPakPromptAccepted. */
 
 
-/* Stores 2 in D_80153778 and 0 in D_80153770. */
+/* Stores 2 in D_80153778 and 0 in g_frontendPakPromptAccepted. */
 
 
-/* Stores 3 in D_80153778 and 0 in D_80153770. */
+/* Stores 3 in D_80153778 and 0 in g_frontendPakPromptAccepted. */
 
 
-/* Stores 4 in D_80153778 and 0 in D_80153770. */
+/* Stores 4 in D_80153778 and 0 in g_frontendPakPromptAccepted. */
 
 
 /* Points a field's text at the label for the state word D_80153778: one of four strings through the
@@ -151,41 +151,41 @@ s32 Frontend_SelectPakLoadHeading(struct FieldRecAt14 *field) {
 }
 
 s32 Frontend_CheckPakActionChange(struct Shared_PakMenu *record) {
-    if (D_80153770 == 0) {
+    if (g_frontendPakPromptAccepted == 0) {
         if (Pak_GetMenuChannel(record) != -1) {
             if (Control_PeekPakChange(Pak_GetMenuChannel(record)) != 0) {
                 if (Pak_CheckStatusPrompt(record, Pak_GetMenuChannel(record), 0) != 0) {
-                    D_80153770 = 1;
+                    g_frontendPakPromptAccepted = 1;
                 }
             }
         }
     }
-    return D_80153770;
+    return g_frontendPakPromptAccepted;
 }
 
 void Frontend_SelectPakOperationZero(void) {
     D_80153778 = 0;
-    D_80153770 = 0;
+    g_frontendPakPromptAccepted = 0;
 }
 
 void Frontend_SelectPakOperationOne(void) {
     D_80153778 = 1;
-    D_80153770 = 0;
+    g_frontendPakPromptAccepted = 0;
 }
 
 void Frontend_SelectPakOperationTwo(void) {
     D_80153778 = 2;
-    D_80153770 = 0;
+    g_frontendPakPromptAccepted = 0;
 }
 
 void Frontend_SelectPakOperationThree(void) {
     D_80153778 = 3;
-    D_80153770 = 0;
+    g_frontendPakPromptAccepted = 0;
 }
 
 void Frontend_SelectPakOperationFour(void) {
     D_80153778 = 4;
-    D_80153770 = 0;
+    g_frontendPakPromptAccepted = 0;
 }
 
 s32 Frontend_SelectPakOperationTextOne(struct FieldRecAt14 *field) {

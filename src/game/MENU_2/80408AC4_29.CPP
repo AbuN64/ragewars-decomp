@@ -195,7 +195,7 @@ void func_80426310_de(void) {
         "addu       $a3, $a2, $zero\n"
         "sw         $zero, 0x0($v1)\n"
         "sw         $v0, -0x4($v1)\n"
-        "jal        func_8043C210_de\n"
+        "jal        Frontend_InitMenuImage\n"
         "sw        $zero, 0x10($sp)\n"
         "addu       $a0, $s1, $zero\n"
         "jal        Frontend_FindWidgetByResourceId\n"

@@ -11,7 +11,7 @@ extern void func_802B9C14_de(void);
 extern void func_802B9C80_de(void);
 extern void func_8044799C_de(u8);
 
-s32 func_80448470_eu_x(OSMesgQueue *queue, u8 *pattern) {
+s32 Pfs_DetectConnectedPaks(OSMesgQueue *queue, u8 *pattern) {
     EntryRecAt3 data[4];
     void *dummy;
     u8 bitpattern;
@@ -27,7 +27,7 @@ s32 func_80448470_eu_x(OSMesgQueue *queue, u8 *pattern) {
         osRecvMesg(queue, &dummy, 1);
         ret = __osSiRawStartDma(0, &D_80154110);
         osRecvMesg(queue, &dummy, 1);
-        func_80447A38_de(&bitpattern, data);
+        Pfs_DecodeControllerStatusReplies(&bitpattern, data);
         for (i = 0; i < D_8014D46C[0]; i++) {
             if (!(data[i].team & 4)) {
                 retry--;
@@ -89,7 +89,7 @@ void func_8044799C_de(u8 cmd) {
     *ptr = 0xFE;
 }
 
-void func_80447A38_de(u8 *valid, EntryRecAt3 *data) {
+void Pfs_DecodeControllerStatusReplies(u8 *valid, EntryRecAt3 *data) {
     u8 *ptr;
     __OSContRequesFormat readformat;
     s32 i;

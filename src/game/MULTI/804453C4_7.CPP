@@ -13,7 +13,7 @@
 extern s32 Defs_GetMemorySize(struct RecordRecAt14 *);
 extern s32 Frontend_GetScreenModePalette();
 
-s32 func_80445590_de(struct RecordRecAt14 *record) {
+s32 Pak_UpdateScreenModeAvailability(struct RecordRecAt14 *record) {
     if (Defs_GetMemorySize(record) != 0x400000) {
         record->flags |= 0x800000;
     } else {
@@ -25,7 +25,7 @@ s32 func_80445590_de(struct RecordRecAt14 *record) {
 
 /* Calls func_8040C2F8_de and returns zero. */
 
-s32 func_804455EC_de(void) {
+s32 Pak_StartScreenModeFade(void) {
     Frontend_StartScreenModeFade();
     return 0;
 }

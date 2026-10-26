@@ -24,7 +24,7 @@ static inline s32 __osPfsGetNextPage(OSPfs* pfs, u8* bank, __OSInode* inode, __O
     }
     return 0;
 }
-s32 func_80447AF0_de(OSPfs* pfs, s32 file_no, u8 flag, int offset, int size_in_bytes, u8* data_buffer) {
+s32 Pfs_ReadWriteFile(OSPfs* pfs, s32 file_no, u8 flag, int offset, int size_in_bytes, u8* data_buffer) {
     s32 ret;
     __OSDir dir;
     __OSInode inode;
@@ -45,7 +45,7 @@ s32 func_80447AF0_de(OSPfs* pfs, s32 file_no, u8 flag, int offset, int size_in_b
     }
     if((pfs->status&1)==0) return 5;
     if(func_80448BFC_de(pfs)==2) return 2;
-    if(pfs->activebank!=0) {pfs->activebank=0;ret=func_80448CC4_de(pfs); if(ret!=0) return ret;} (void)0;
+    if(pfs->activebank!=0) {pfs->activebank=0;ret=Pfs_SelectActiveBank(pfs); if(ret!=0) return ret;} (void)0;
     ret=func_802B84C0_de(pfs->queue, pfs->channel, pfs->dir_table + file_no, (u8*)&dir); if(ret!=0) return ret;
     if (dir.company_code == 0 || dir.game_code == 0) {
         return 5;
@@ -74,7 +74,7 @@ s32 func_80447AF0_de(OSPfs* pfs, s32 file_no, u8 flag, int offset, int size_in_b
             cur_block = 0;
         }
         if (pfs->activebank != cur_page.inode_t.bank) {
-            ret=(pfs->activebank=(cur_page.inode_t.bank),func_80448CC4_de(pfs)); if(ret!=0) return ret;
+            ret=(pfs->activebank=(cur_page.inode_t.bank),Pfs_SelectActiveBank(pfs)); if(ret!=0) return ret;
         }
         blockno = cur_page.inode_t.page * 8 + cur_block;
         if (flag == 0) {
@@ -91,7 +91,7 @@ s32 func_80447AF0_de(OSPfs* pfs, s32 file_no, u8 flag, int offset, int size_in_b
     }
     if (flag == 1 && (dir.status & 2) == 0) {
         dir.status |= 2;
-        ret=(pfs->activebank=(0),func_80448CC4_de(pfs)); if(ret!=0) return ret;
+        ret=(pfs->activebank=(0),Pfs_SelectActiveBank(pfs)); if(ret!=0) return ret;
         ret=func_802B8880_de(pfs->queue, pfs->channel, pfs->dir_table + file_no, (u8*)&dir, 0); if(ret!=0) return ret;
     }
     return 0;

@@ -4,7 +4,7 @@
 #include "COMMON/OBJRECAT5F14.H"
 #include "COMMON/S1.H"
 
-void func_8044ADF0_de(ObjRecAt5F14 *arg0) {
+void Ovlgame_InitializeSceneEffectPool(ObjRecAt5F14 *arg0) {
     SceneEffect *sceneEffect;
     s32 i;
 

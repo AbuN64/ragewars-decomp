@@ -250,7 +250,7 @@ void Frontend_SetPreviewAngle(ObjRecAt498 *arg0, s32 arg1) {
     arg0->unk498 = arg1;
 }
 
-/* Stores a value into the word at offset 0x49C of an object; func_80420618_de and func_8043AB40_de call
+/* Stores a value into the word at offset 0x49C of an object; func_80420618_de and Frontend_ConfirmEquipmentSelection call
    it with zero, Frontend_InitModelPreview writes the same word directly and Frontend_DrawModelPreview reads it. */
 
 

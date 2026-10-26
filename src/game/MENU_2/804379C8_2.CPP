@@ -50,7 +50,7 @@ enum { MENU_80437B10_976 = 976, MENU_80437B10_977 = 977 };
 #endif
 
  /* const */
-s32 func_80437810_de(void) {
+s32 Menu_UpdateTitleButtonScreen(void) {
     s32 temp_a0_2;
     s32 temp_v0;
     s32 temp_v0_2;
@@ -86,7 +86,7 @@ block_10:
     }
 }
 
-s32 func_804378F4_de(void) {
+s32 Menu_CancelTitleButtonScreen(void) {
     StateCode80420E90 *state;
 
     MarkMenuEventHandled();
@@ -96,7 +96,7 @@ s32 func_804378F4_de(void) {
     return 0;
 }
 
-s32 func_80437930_de(void) {
+s32 Menu_HandleTitleButtonChoice(void) {
     s32 choice;
 
     MarkMenuEventHandled();

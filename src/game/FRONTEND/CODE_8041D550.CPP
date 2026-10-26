@@ -64,7 +64,7 @@ void Frontend_UpdateFocusCaption(void) {
     s32 count;
     s32 text;
     if (screen32()->focus == 0) {
-        func_80439C80_de(record32(), 0);
+        Frontend_SetPreviewModel(record32(), 0);
         return;
     }
     for (index = 0; index < 50; index++) {
@@ -89,11 +89,11 @@ void Frontend_UpdateFocusCaption(void) {
                 case 49: text = 3714; break;
                 default: text = 0xE74; count = index; break;
                 }
-                func_80439C80_de(record32(), text);
-                func_80439CD4_de(record32(), count);
+                Frontend_SetPreviewModel(record32(), text);
+                Frontend_SetPreviewRenderFlags(record32(), count);
                 if (func_8025477C_de() == 0) func_8025476C_de(1);
             } else {
-                func_80439C80_de(record32(), 0);
+                Frontend_SetPreviewModel(record32(), 0);
             }
             return;
         }

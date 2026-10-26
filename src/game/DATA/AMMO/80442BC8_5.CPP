@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-/* ROM-grounded data: rodata/func_804434E0_de/800E2738 (US: shared with the next table) */
+/* ROM-grounded data: rodata/Items_FormatPlayerPartnerStatus/800E2738 (US: shared with the next table) */
 #ifdef VERSION_US
 const unsigned int D_blob_phase2_b8084b071a881bbaccb0[15] = {
     0x004436B0, 0x004436C8, 0x004436E0, 0x004436F8, 0x00443710, 0x00443728, 0x00443740, 0x00000000,

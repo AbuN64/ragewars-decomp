@@ -358,11 +358,11 @@ s32 DispatchScreenRangeEvent(s32 recurse, s32 event, s32 value, void *argument, 
             *handledFlag = saved;
         }
         if (recurse != 0) {
-            D_80146E18 = D_8014D080->screens[first].owner;
+            g_dispatchingScreenOwner = D_8014D080->screens[first].owner;
             saved = *handledFlag;
             *handledFlag = 0;
             Menu_DispatchChildEvents(element, event, value, (s32)argument, context);
-            D_80146E18 = -1;
+            g_dispatchingScreenOwner = -1;
             if (*handledFlag == 1) {
                 *handledFlag = saved;
                 return result;

@@ -29,5 +29,5 @@ struct Shared_func_8043DEDC_S3 {
     s8 unk7F;
 };
 
-extern s32 func_8044972C_de(s32 arg0);
+extern s32 Ovlgame_PlacePlayerForRound(s32 arg0);
 #endif

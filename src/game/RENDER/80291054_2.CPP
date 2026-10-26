@@ -46,7 +46,7 @@ void SetN64_InitFrameRing(RenderState *state) {
     i = 0;
     func_80244D70_de();
     Ovlgame_InitParticleQuad();
-    func_8044DC60_de(&state->settings);
+    Ovlgame_InitializeRenderDirection(&state->settings);
     count = D_800DE850;
     state->field26DD0 = 0;
     state->enabled = 1;
@@ -103,7 +103,7 @@ extern void Ovlgame_ResetMenuPool(void *menu);
 extern void func_8023EE00_de(void);
 extern s32 Defs_ReadResourceWord(s32 size);
 extern void OvlScene_LoadSceneResources(Shared_World *world, s32 resource);
-extern void func_8044AE70_de(void);
+extern void Ovlgame_InitializeControllerSession(void);
 extern void Ovlgame_ResetHudCharTables(void *hud);
 extern void Control_EnableAllControllerPaks(void);
 extern void SetN64_BeginModeTransition(GameSession *session, s32 arg1);
@@ -171,10 +171,10 @@ void SetN64_RunGameLoop(GameSession *session) {
     func_8023EE00_de();
     session->resource = Defs_ReadResourceWord(0x18) & 0x3FFFFFFF;
     Items_ResetActorPools(session->players, 0);
-    func_804499B0_de(session->menu, 0, 0);
+    Ovlgame_InitializePlayerPool(session->menu, 0, 0);
     OvlScene_LoadSceneResources(&g_world, session->resource);
     if (D_800CBC11[0] == 0) {
-        func_8044AE70_de();
+        Ovlgame_InitializeControllerSession();
     }
     Ovlgame_ResetHudCharTables(&session->hud);
     Pak_AllocateScratchBuffer();

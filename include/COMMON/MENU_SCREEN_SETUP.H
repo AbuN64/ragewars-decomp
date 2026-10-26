@@ -11,7 +11,7 @@
 typedef union SetupModelVector { CVector3 value; Triple words; } SetupModelVector;
 /* Five retained model records start at +8, with native stride 0xC0. */
 typedef union SetupScreenModel {
-    State_func_80439B5C_de initial;
+    StateFrontendInitModelPreviewTransform initial;
     struct ObjRecAt1CV3 rotation;
     struct ObjectRecAt28 offset;
     u8 record[0xC0];
@@ -53,7 +53,7 @@ extern SetupScreen *D_800E4F60;
 /* Actual loads in the US-rev1 constructor; not guessed constants. */
 extern f32 D_800E1AA0, D_800E1AA4, D_800E1AA8, D_800E1AAC;
 extern f32 D_800E1AB0, D_800E1AB4, D_800E1AB8;
-extern s32 func_80439B5C_de(State_func_80439B5C_de *, s32, Triple, Triple);
-extern void func_80439BE0_de(struct ObjRecAt1CV3 *, Triple);
-extern void func_80439C30_de(struct ObjectRecAt28 *, Triple);
+extern s32 Frontend_InitModelPreviewTransform(StateFrontendInitModelPreviewTransform *, s32, Triple, Triple);
+extern void Frontend_SetPreviewRotation(struct ObjRecAt1CV3 *, Triple);
+extern void Frontend_SetPreviewRotationSpeed(struct ObjectRecAt28 *, Triple);
 #endif

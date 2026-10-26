@@ -17,7 +17,7 @@
 
 
 
-void func_8044DDD4_de(GameSession *gameSession) {
+void Ovlgame_ResetGameClockAndSelectSpawn(GameSession *gameSession) {
     Shared_Placed spawn;
     s32 var_s0;
 

@@ -25,9 +25,9 @@ extern s32 Player_GetLevelProgress(char *, s32);
 extern void Ovlgame_ResetRespawnedPlayer(SharedPlayer *);
 extern void Player_EndRound(void *);
 
-extern u8 D_801462D5; /* MIXED func_8044972C_de */
-extern u8 D_801462E5; /* MIXED func_8044972C_de */
-void func_8044972C_de(SharedPlayer *player) {
+extern u8 D_801462D5; /* MIXED Ovlgame_PlacePlayerForRound */
+extern u8 D_801462E5; /* MIXED Ovlgame_PlacePlayerForRound */
+void Ovlgame_PlacePlayerForRound(SharedPlayer *player) {
     s32 scale;
 
     scale = (D_80145048 >= 2) * 2;

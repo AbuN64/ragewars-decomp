@@ -9,7 +9,7 @@ struct Level {
     char pad0[0x11C0];
     s32 counts[2];
     char pad11C8[8];
-    Item_func_8044D668_de *items[2];
+    ItemOvlSceneDispatchSelectedEntityKinds *items[2];
 };
 struct BankCode8044E2B8 {
     s32 unk0;
@@ -48,10 +48,10 @@ struct OwnerCode8044E2B8 {
     char pad70[0xC];
     void *unk7C;
     char pad80[0x1158];
-    struct Entry_func_8044D794_de *active;
+    struct EntryOvlSceneDispatchAndRecycleQueuedTriggers *active;
     char pad11DC[0x10];
-    struct Entry_func_8044D794_de *spare;
+    struct EntryOvlSceneDispatchAndRecycleQueuedTriggers *spare;
 };
 /** Release every active entry of arg0 and move it onto the spare list. */
-void func_8044D794_de(OwnerCode8044E2B8 *owner);
+void OvlScene_DispatchAndRecycleQueuedTriggers(OwnerCode8044E2B8 *owner);
 #endif

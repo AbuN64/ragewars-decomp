@@ -16,7 +16,7 @@
 extern struct MatchOptionsScreen *D_800E4EF0;
 extern s32 SmpButton_GetListSelection(void *);
 extern s32 N64Eng_GetNumericWidgetValue(void *);
-extern s32 func_8043C308_de(void *);
+extern s32 Frontend_GetMenuImageState(void *);
 
 /* Refreshes the option block D_801462C8 from the menu D_800E4EF0 points to: the bytes at 0x24 to
    0x27 from the values N64Eng_GetNumericWidgetValue reports for its items at 0x28, 0x24, 0x2C and 0x30, and the
@@ -63,7 +63,7 @@ extern void Frontend_ResetJoinRequestEntries(void);
 
 
 
-/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled unless func_8043C308_de reports
+/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled unless Frontend_GetMenuImageState reports
    screen D_800E4EF0 busy: 0x36B closes the menu through Frontend_StoreMatchOptionWidgets, sends code -1 to
    Frontend_SetMenuChoiceResult and calls Smos_ReturnToPreviousScreen; 0x369 does the same with page reset Frontend_SyncMatchJoinSlots(0)
    and code 0x17 when N64Eng_GetNumericWidgetValue reports the screen's list at 0x34 non-empty; 0x36A always does
@@ -76,7 +76,7 @@ extern void Smos_ReturnToPreviousScreen(void);
 
 
 
-/* Calls MarkMenuEventHandled and, unless func_8043C308_de reports one for the object D_800E4EF0 holds, calls
+/* Calls MarkMenuEventHandled and, unless Frontend_GetMenuImageState reports one for the object D_800E4EF0 holds, calls
    Frontend_StoreMatchOptionWidgets, Frontend_SetMenuChoiceResult with -1 and Smos_ReturnToPreviousScreen. Returns zero. */
 
 
@@ -226,7 +226,7 @@ s32 Frontend_ResetMatchOptionOnEvent(s32 unused0, s32 unused1, u32 arg2, s32 arg
 
 s32 Frontend_ActivateMatchOptionAction(void) {
     MarkMenuEventHandled();
-    if (func_8043C308_de(D_800E4EF0) == 1) {
+    if (Frontend_GetMenuImageState(D_800E4EF0) == 1) {
         return 0;
     }
     switch (Smos_GetFocusedElementId()) {
@@ -275,7 +275,7 @@ s32 Frontend_ActivateMatchOptionAction(void) {
 
 s32 Frontend_ExitMatchOptions(void) {
     MarkMenuEventHandled();
-    if (func_8043C308_de(D_800E4EF0) == 1) {
+    if (Frontend_GetMenuImageState(D_800E4EF0) == 1) {
         return 0;
     }
     Frontend_StoreMatchOptionWidgets();

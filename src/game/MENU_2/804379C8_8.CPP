@@ -73,7 +73,7 @@
    and 0xB otherwise, then calls Smos_ReturnToPreviousScreen. Returns zero. */
 
 
-s32 func_804393A8_de(void) {
+s32 Menu_ConfirmSoundSliderPopup(void) {
     MarkMenuEventHandled();
 #if defined(VERSION_DE)
     if (Smos_GetFocusedElementId() == 0x1CF) {
@@ -88,7 +88,7 @@ s32 func_804393A8_de(void) {
     return 0;
 }
 
-s32 func_80439404_de(void) {
+s32 Menu_CancelSoundSliderPopup(void) {
     MarkMenuEventHandled();
     Frontend_SetMenuChoiceResult(Smos_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0xB);
     Smos_ReturnToPreviousScreen();

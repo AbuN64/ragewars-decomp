@@ -61,7 +61,7 @@ struct ListNode80290528;
 void SetN64_RecycleGlobalEffectNode(struct ListNode80290528 *);
 s32 XPlus_NextRandomInteger(void);
 s32 Ovlgame_ResetPlayerForRound(void *, s8, s32);         /* extern */
-void func_8044972C_de(void *);
+void Ovlgame_PlacePlayerForRound(void *);
 void Ovlgame_ReleaseObjectHandles(void *);
 
 
@@ -188,7 +188,7 @@ settings_loop:
                     func_80255ED8_de(playersGlobal->controller, roundPlayer);
                     func_80255CB8_de(&playersGlobal->effects, roundPlayer);
                     } else if (((struct Shared_PlayerSettingsView *)settingsBase)->state < 3) {
-                        func_8044972C_de(roundPlayer);
+                        Ovlgame_PlacePlayerForRound(roundPlayer);
                     }
                 }
 block_13:

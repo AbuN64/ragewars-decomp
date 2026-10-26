@@ -6,14 +6,14 @@
 #include "COMMON/RENDERCOUNTERS.H"
 #include "MULTI/8043E9A8_6.H"
 
-/* When the timer D_801468B0 has run out, calls func_8044DD50_de on D_8011FAC0 and returns one;
+/* When the timer D_801468B0 has run out, calls Ovlgame_ResetMatchControllerState on D_8011FAC0 and returns one;
    otherwise returns zero. */
 #include "COMMON/GAME_SESSION.H"
-extern void func_8044DD50_de(void *);
+extern void Ovlgame_ResetMatchControllerState(void *);
 
 s32 func_8043EDDC_de(void) {
     if (D_801462C8.counters.m_GameOverTimer <= 0.0f) {
-        func_8044DD50_de(&D_8011FAC0);
+        Ovlgame_ResetMatchControllerState(&D_8011FAC0);
         return 1;
     }
     return 0;

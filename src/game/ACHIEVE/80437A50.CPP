@@ -3,7 +3,7 @@
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 /* Fuzzy draft: inline-asm carrier of the original instructions (no C written yet). */
-void func_80437A50_de(void) {
+void Achieve_CreateGermanResultsScreen(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
@@ -26,11 +26,11 @@ void func_80437A50_de(void) {
         "lui        $a0, %hi(D_800E5830)\n"
         "lw         $a0, %lo(D_800E5830)($a0)\n"
         "addu       $a3, $a2, $zero\n"
-        "jal        func_8043C210_de\n"
+        "jal        Frontend_InitMenuImage\n"
         "sw        $zero, 0x10($sp)\n"
         "lui        $a0, %hi(D_800E5830)\n"
         "lw         $a0, %lo(D_800E5830)($a0)\n"
-        "jal        func_8043C278_de\n"
+        "jal        Frontend_StartMenuImageTransition\n"
         "addiu     $s0, $zero, 0x14\n"
         "addu       $a0, $s2, $zero\n"
         "addiu      $a1, $zero, 0x26B\n"
@@ -469,7 +469,7 @@ void func_80437A50_de(void) {
         ".Lauto_8043811C:\n"
         "jal        Achieve_UpdatePlayerPreviewStats\n"
         "nop\n"
-        "jal        func_80438614_de\n"
+        "jal        Achieve_ConfigureResultModelPreview\n"
         "nop\n"
         "jal        SmpButton_WrapButtonWidget\n"
         "addiu     $a0, $zero, 0x26E\n"
@@ -571,6 +571,6 @@ void func_80437A50_de(void) {
     );
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80437A50_de);
+INCLUDE_ASM("ovl_80400000", Achieve_CreateGermanResultsScreen);
 #endif
 #endif

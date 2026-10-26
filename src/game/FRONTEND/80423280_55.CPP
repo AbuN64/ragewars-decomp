@@ -60,9 +60,9 @@ void ScenarioSetup_HideResultCatalogueWidgets(void)
 #include "FRONTEND/PREVIEW_MODEL_IMAGE.H"
 /* Shows the model preview of the screen D_800E53C0 when its model id at 0x32C is set: shows the
    version-specific preview item of the screen window with alpha 0xAF and the preview image, then sets up the
-   view at 0x20 of the screen through func_80439B5C_de with mode 0, a uniform D_800DDAFC_de scale and the
-   offset (0, D_800DDB04, D_800DDB08_de), through func_80439BE0_de with a zero vector, through
-   func_80439C30_de with (0, D_800DDB00, 0), and loads the model through func_80439C80_de. */
+   view at 0x20 of the screen through Frontend_InitModelPreviewTransform with mode 0, a uniform D_800DDAFC_de scale and the
+   offset (0, D_800DDB04, D_800DDB08_de), through Frontend_SetPreviewRotation with a zero vector, through
+   Frontend_SetPreviewRotationSpeed with (0, D_800DDB00, 0), and loads the model through Frontend_SetPreviewModel. */
 typedef struct PreviewScreen {
     char pad0[0x20];
     char view[0xE0 - 0x20];
@@ -73,10 +73,10 @@ typedef struct PreviewScreen {
 #define PREVIEW_SCREEN ((PreviewScreen *)D_800E53C0)
 extern f32 D_800DDAFC_de;
 extern f32 D_800DDB00, D_800DDB04, D_800DDB08_de;
-extern void func_80439B5C_de(void *, s32, CVector3, CVector3);
-extern void func_80439BE0_de(void *, CVector3);
-extern void func_80439C30_de(void *, CVector3);
-extern void func_80439C80_de(void *, s32);
+extern void Frontend_InitModelPreviewTransform(void *, s32, CVector3, CVector3);
+extern void Frontend_SetPreviewRotation(void *, CVector3);
+extern void Frontend_SetPreviewRotationSpeed(void *, CVector3);
+extern void Frontend_SetPreviewModel(void *, s32);
 void ScenarioSetup_InitResultModelPreview(void) {
     struct MenuWidget *item;
     CVector3 scale;
@@ -106,9 +106,9 @@ void ScenarioSetup_InitResultModelPreview(void) {
         offset.x = 0;
         offset.y = D_800DDB04;
         offset.z = D_800DDB08_de;
-        func_80439B5C_de(PREVIEW_SCREEN->view, 0, scale, offset);
-        func_80439BE0_de(PREVIEW_SCREEN->view, angle);
-        func_80439C30_de(PREVIEW_SCREEN->view, position);
-        func_80439C80_de(PREVIEW_SCREEN->view, PREVIEW_SCREEN->model);
+        Frontend_InitModelPreviewTransform(PREVIEW_SCREEN->view, 0, scale, offset);
+        Frontend_SetPreviewRotation(PREVIEW_SCREEN->view, angle);
+        Frontend_SetPreviewRotationSpeed(PREVIEW_SCREEN->view, position);
+        Frontend_SetPreviewModel(PREVIEW_SCREEN->view, PREVIEW_SCREEN->model);
     }
 }

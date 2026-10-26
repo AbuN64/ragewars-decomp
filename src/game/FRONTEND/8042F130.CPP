@@ -142,7 +142,7 @@ extern s32 D_800DF4C4;
 extern PakSetupProfile D_80102B00[];
 
 extern void *Cache_AllocateMemory(s32);
-extern void func_8043C210_de(void *, s32, s32, s32, s32);
+extern void Frontend_InitMenuImage(void *, s32, s32, s32, s32);
 extern void *SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
@@ -170,7 +170,7 @@ s32 Frontend_CreatePakProfileScreen(void *screen) {
     block = Cache_AllocateMemory(sizeof(PakMenuController));
     D_800E54A4 = block;
     block->window = screen;
-    func_8043C210_de(block->menu, 0x67, 0, 0, 0);
+    Frontend_InitMenuImage(block->menu, 0x67, 0, 0, 0);
     D_800E54A4->list = SmpOverlay_CreateOverlayNode(screen, 4);
     SmpOverlay_ShowSlotById(screen, 0, SPRITE_285);
     SmpOverlay_ShowSlotById(screen, 1, SPRITE_285);

@@ -15,14 +15,14 @@ extern void *func_802BD3A0_de(void *, const void *, int); /* extern */
 extern char D_00285160;
 extern char g_loadSavePersistentData;
 
-void Items_LoadPreviewBufferA(ItemsPreviewStateA *arg0) {
-    s32 *temp_v0;
+void Items_LoadPreviewBufferA(ItemsPreviewStateA *previewToLoad) {
+    s32 *persistentDataResource;
     s32 temp_a1;
 
     if (Control_IsSnapshotActive() == 0) {
-        temp_v0 = Cache_RequestResource(0, arg0->unk38, arg0->unk38, arg0->unk44, 0, 0, &D_00285160, &g_loadSavePersistentData, 1);
-        func_802BD3A0_de(&D_800F91F0, (const void *)*temp_v0, 0x5800);
-        Cache_ReleaseResource(0, temp_v0);
-        arg0->unk4 = 1;
+        persistentDataResource = Cache_RequestResource(0, previewToLoad->unk38, previewToLoad->unk38, previewToLoad->unk44, 0, 0, &D_00285160, &g_loadSavePersistentData, 1);
+        func_802BD3A0_de(&D_800F91F0, (const void *)*persistentDataResource, 0x5800);
+        Cache_ReleaseResource(0, persistentDataResource);
+        previewToLoad->unk4 = 1;
     }
 }
