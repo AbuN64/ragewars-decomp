@@ -1,4 +1,3 @@
-
 #if defined(VERSION_EU)
 struct {
     unsigned int w0[3];

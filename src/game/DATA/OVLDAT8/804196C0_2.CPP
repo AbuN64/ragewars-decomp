@@ -1,4 +1,3 @@
-
 #if defined(VERSION_EU)
 extern char D_00419B20[];
 extern char D_00419F2C[];
