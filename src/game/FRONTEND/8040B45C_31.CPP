@@ -356,7 +356,6 @@ void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
     }
 }
 
-#if defined(NON_MATCHING) || defined(VERSION_US_REV1)
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/WIDGETRECAT1A.H"
 #include "TYPES.H"
@@ -478,9 +477,6 @@ void Frontend_DrawWidget(DraftWidget *widget, sm_dldc args) {
     }
     }
 }
-#else
-INCLUDE_ASM("ovl_80400000", Frontend_DrawWidget);
-#endif
 
 /* Applies a widget's flags, opacity and scale to the draw context, computes its draw rectangle
    (scaled about its centre when any scale is not 1) and its hit box, and clips the hit box to the

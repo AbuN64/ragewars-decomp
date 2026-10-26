@@ -1,8 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-const unsigned int D_auto_rodata_unresolved_800DBD2C[9] = {
-    0x10000B00, 0x0040DF60, 0x0040DE0C, 0x0040DBCC, 0x0040DC20, 0x0040E0AC, 0x0040DC74, 0x0040E0AC,
-    0x0040DCC8,
+const unsigned int D_auto_rodata_unresolved_800DBD2C[1] = {
+    0x10000B00,
 };
 #endif

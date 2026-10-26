@@ -4504,6 +4504,7 @@ segments:
       - [0xEE2E4, data, data_800C/rodata_unresolved_800ED6E4]
       - [0xEE2E8, rodata, data_800C/literals_Menu_SelectEuropeanPakActionLabel]
       - [0xEE2FC, rodata, data_800C/D_auto_data_unresolved_800ED6FC]
+      - [0xEE300, rodata, data_800C/literals_Frontend_DrawWidget]
       - [0xEE320, rodata, data_800C/literals_Frontend_ComputeWidgetBounds]
       - [0xEE330, rodata, data_800C/D_blob_phase2_e6036f2dfb04ad707672]
       - [0xEE334, data, data_800C/D_d1_b2e22eba7b07245c]

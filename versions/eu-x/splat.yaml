@@ -4518,7 +4518,7 @@ segments:
       - [0xE94A4, data, data_800C/rodata_unresolved_800E88A4]
       - [0xE94A8, rodata, data_800C/literals_Frontend_SelectPakActionLabel]
       - [0xE94BC, data, data_800C/rodata_unresolved_800E88BC]
-      - [0xE94C0, rodata, data_800C/D_blob_phase2_909a18e76a085edf187f]
+      - [0xE94C0, rodata, data_800C/literals_Frontend_DrawWidget]
       - [0xE94E0, rodata, data_800C/literals_Frontend_ComputeWidgetBounds]
       - [0xE94F0, rodata, data_800C/D_blob_phase2_e6036f2dfb04ad707672]
       - [0xE94F3, data, data_800C/rodata_unresolved_800E88F3]

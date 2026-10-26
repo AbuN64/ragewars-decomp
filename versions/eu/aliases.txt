@@ -2557,6 +2557,7 @@ literals_Audio_DecodeTransformBlock = 0x800C88C8; // rom:0xC94C8 size:0x10
 literals_Camera_SetupViewportAndFog = 0x800C3568; // rom:0xC4168 size:0xC
 literals_GameObject_DrawBlobShadow = 0x800C3D68; // rom:0xC4968 size:0x28
 literals_Libsn_ServiceHostCommands = 0x800C1C60; // rom:0xC2860 size:0x28
+literals_Frontend_DrawWidget = 0x800ED700; // rom:0xEE300 size:0x20
 literals_Frontend_ComputeWidgetBounds = 0x800ED720; // rom:0xEE320 size:0x10
 literals_Scene_BuildPlacedInstances = 0x800C54B8; // rom:0xC60B8 size:0x4
 literals_Audio_PlaySoundAtPosition = 0x800C418C; // rom:0xC4D8C size:0x4
