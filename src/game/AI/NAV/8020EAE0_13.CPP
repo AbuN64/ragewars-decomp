@@ -38,7 +38,7 @@ typedef struct Chaser {
     s32 dist[10];
 } Chaser;
 
-Racer *Weapons_GetPlayerByIndex(MatchWorld *arg0, u32 arg1);
+Racer *Player_GetPlayerByIndex(MatchWorld *arg0, u32 arg1);
 f32 GraphU64_GetPointDistance(void *arg0, void *arg1);
 s32 Nav_EvaluateAttackTarget(AiController *brain, s32 index);
 
@@ -59,7 +59,7 @@ s32 Nav_CollectEnemyTargets(Chaser *self) {
     world = (MatchWorld *)&D_80145040;
     rules = &world->rules;
     for (; i < 8; i++) {
-        other = Weapons_GetPlayerByIndex(world, i);
+        other = Player_GetPlayerByIndex(world, i);
         if (other != NULL && other != self->self
             && (rules->teams == 0 || other->team->id != self->self->team->id)
             && (other->stateBits >> 8) > 0) {
@@ -77,7 +77,7 @@ s32 Nav_CollectEnemyTargets(Chaser *self) {
 extern CNavData D_8013B364;
 extern f32 Nav_GetScaledAttackRange(AiController *controller);
 extern f32 Nav_GetScaledAggression(AiController *controller);
-extern f32 Weapons_GetSignedAngleToPoint(Player *actor, CVector3 point);
+extern f32 Barrel_GetSignedAngleToPoint(Player *actor, CVector3 point);
 extern s32 Nav_GetRouteRelation(void *table, s32 from, s32 to);
 
 /* Scores one attack candidate of a computer player. Its weighted distance (candidateDistances) is compared
@@ -97,7 +97,7 @@ s32 Nav_EvaluateAttackTarget(AiController *brain, s32 index) {
     nearLimit = speed * 1536.0f;
     middleLimit = speed * 921.6f;
     farLimit = speed * 512.0f;
-    angle = RW_ABS(Weapons_GetSignedAngleToPoint(brain->player, target->pos));
+    angle = RW_ABS(Barrel_GetSignedAngleToPoint(brain->player, target->pos));
     if (angle <= RW_PI_F6 / 4) {
         if (brain->candidateDistances[index] < nearLimit) accept = 1;
         range = 0;

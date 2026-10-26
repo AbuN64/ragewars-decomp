@@ -27,8 +27,8 @@
 void * Nav_FindSearchNode(char *, s32);
 void Player_ApplyStun(void *, f32);
 void func_80229FA0_de(void *, void *);
-s32 Weapons_GetPlayerIndex(void *, unsigned int);
-s32 Weapons_GetMaxHealth(void *);
+s32 Player_GetPlayerIndex(void *, unsigned int);
+s32 Player_GetMaxHealth(void *);
 int func_8022B178_de(void *);
 int Cinema_IsSequenceActive(void);
 void func_802830CC_de(void *, s32);
@@ -201,7 +201,7 @@ block_38:
                         packet->unk4 = 0;
                     } else {
                         healedHealth = previousHealth + packet->unk4;
-                        clampedHealth = Weapons_GetMaxHealth(damagedPlayer);
+                        clampedHealth = Player_GetMaxHealth(damagedPlayer);
                         if (healedHealth < clampedHealth) {
                             clampedHealth = healedHealth;
                         }
@@ -311,14 +311,14 @@ block_88:
                         countedDeathStatistics = (void *)damagedPlayer->unk5D8;
                         if (countedDeathStatistics->counted == 0) {
                             countedDeathStatistics->counted = 1U;
-                            killerPlayerIndex = Weapons_GetPlayerIndex(&D_80145040, (u32) creditedPlayer);
+                            killerPlayerIndex = Player_GetPlayerIndex(&D_80145040, (u32) creditedPlayer);
                             victimKillStatistics = (void *)damagedPlayer->unk5D8;
                             if ((victimKillStatistics->unk8F == 1) && ((((struct Shared_ReactionMatchState *)(&D_80145040))->unk18B4) != 0)) {
                                 victimKillStatistics->kills_special[killerPlayerIndex]++;
                             } else {
                                 damagedPlayer->unk5D8->kills_normal[killerPlayerIndex]++;
                             }
-                            victimPlayerIndex = Weapons_GetPlayerIndex(&D_80145040, (u32) damagedPlayer);
+                            victimPlayerIndex = Player_GetPlayerIndex(&D_80145040, (u32) damagedPlayer);
                             if ((damagedPlayer->unk5D8->unk8F == 1) && ((((struct Shared_ReactionMatchState *)(&D_80145040))->unk18B4) != 0)) {
                                 creditedPlayer->unk5D8->deaths_special[victimPlayerIndex]++;
                             } else {
@@ -458,7 +458,7 @@ extern Shared_MatchRules D_801468A0[];
 extern s32 D_800D297C;
 extern const f32 D_800C22E4_de, D_800C22E8_de, D_800C22EC_de, D_800C22F0_de;
 extern WeaponInfo *D_800D052C[];
-extern void Weapons_DrawTintedPlayer(LevelActor *, s32, Draw *);
+extern void Player_DrawTintedPlayer(LevelActor *, s32, Draw *);
 extern void **func_8024BFD4_de(LevelActor *, s32);
 extern void Cache_UnlockResource(s32, void *);
 void Player_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
@@ -506,7 +506,7 @@ void Player_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
             if (D_80145088.settings.local && (player->hidden || player->kind == D_800C9228_de) &&
                 player->health == 0) return;
         }
-        if (player->flags & 0x20) Weapons_DrawTintedPlayer(actor, arg1, context);
+        if (player->flags & 0x20) Player_DrawTintedPlayer(actor, arg1, context);
         else {
             if (D_801468A0->countRule && player->controls->unk8F) actor->team = D_801468A0->teamColour;
             else actor->team = (u8)actor->definition->first;

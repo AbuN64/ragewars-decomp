@@ -46,7 +46,7 @@ s32 Frontend_ListHasFlag100(s32);
 s32 SmpOverlay_GetSlotValue(s32, s32);
 
                         /* extern */
-s32 func_8041B810_de(s32, s32);
+s32 SmpOverlay_GetSlotNodeId(s32, s32);
 
                         /* extern */
 void Menu_ApplySlotValueGfx(s32, s32);
@@ -151,7 +151,7 @@ s32 Menu_ReadSelectionSlot(s32 arg0, s32 arg1, s32 arg2) {
     CharacterSelectionRoot *characterSelectionRoot;
 
     entryIndex = arg2 & 0xFFFF;
-    choice = func_8041B810_de(D_800E42D0->unk4, entryIndex);
+    choice = SmpOverlay_GetSlotNodeId(D_800E42D0->unk4, entryIndex);
     MarkMenuEventHandled();
     characterSelectionRoot = (CharacterSelectionRoot *)((char *)D_800E42D0 + (entryIndex * 0x4C8));
     if (characterSelectionRoot->phase == 1) {

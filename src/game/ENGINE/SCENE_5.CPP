@@ -413,7 +413,7 @@ void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVecto
                         hit = Action_ShowTriggerMessage(trigger, &trigger->behaviorFlags, actor);
                     }
                     if (hit) {
-                        Weapons_RequestActorState(trigger, &trigger->behaviorFlags, enterMode);
+                        Nav_RequestActorState(trigger, &trigger->behaviorFlags, enterMode);
                     }
                 }
             }
@@ -431,7 +431,7 @@ void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVecto
                     }
                 }
                 if (hit) {
-                    Weapons_RequestActorState(trigger, &trigger->behaviorFlags, exitMode);
+                    Nav_RequestActorState(trigger, &trigger->behaviorFlags, exitMode);
                 }
             }
         }
@@ -539,7 +539,7 @@ extern void *func_80254284_de(s32, void **, s32, void *);
 extern ResultsText *func_80254408_de(s32, void *, s32, s32, void *, s32, void *);
 extern void func_802BD3A0_de(void *, const void *, s32);
 extern s32 func_802A0C08_de(char *, const char *, ...);
-extern u8 Weapons_GetLevelProgress(Profile *, s32);
+extern u8 Player_GetLevelProgress(Profile *, s32);
 extern void func_8028DA74_de(Shared_World *);
 extern void *Cache_RequestResource(s32, u32, u32, u32, u32, s32, void *, const char *, u32);
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
@@ -672,7 +672,7 @@ void Scene_ShowResultsGoal(void) {
     switch (mode) {
     case 1:
         Cinema_AddMessage(goal);
-        players = (Weapons_GetLevelProgress(D_80102B00, D_80102B00[0].slot) >> 1) + 1;
+        players = (Player_GetLevelProgress(D_80102B00, D_80102B00[0].slot) >> 1) + 1;
         if (players < 2) {
             func_802A0C08_de(name, RESULTS_TEXT(D_800D3388, D_800E1874), players);
         } else {

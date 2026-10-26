@@ -7,8 +7,8 @@
 #include "WEAPONS/80213ED4.H"
 
 
-extern s32 func_80265878_de(StateCallback);
-extern s32 func_80265784_de(u32);
+extern s32 Defs_IsAddressInCodeRanges(StateCallback);
+extern s32 Defs_IsAddressInStaticRanges(u32);
 extern void *func_8024B738_de(void *, void *, s32);
 extern s32 func_80246A08_de(void *, s32, s32);
 
@@ -29,9 +29,9 @@ void Nav_UpdateActorStateAnimation(Source110 *src, Dest *dst) {
             src->state_changed = 0;
             callback = entry->callback;
             if (callback != 0) {
-                if (func_80265878_de(callback) != 0) {
+                if (Defs_IsAddressInCodeRanges(callback) != 0) {
                     callback = callback(src, dst);
-                } else if (func_80265784_de((u32)callback) != 0) {
+                } else if (Defs_IsAddressInStaticRanges((u32)callback) != 0) {
                     callback = (StateCallback)func_8024B738_de(src, callback, dst->state_result);
                 }
                 if (callback != 0) {
@@ -93,7 +93,7 @@ void Nav_UpdateActorStateAnimation(Source110 *src, Dest *dst) {
 #include "COMMON/WORLD.H"
 extern void Barrel_StopActorLoopingSound(void *, void *);
 
-s32 Weapons_RequestActorState(void *actor, void *stateController, s32 action) {
+s32 Nav_RequestActorState(void *actor, void *stateController, s32 action) {
     struct ActorStateTable *node;
     StateEntry *entry;
     StateEntry *scan;

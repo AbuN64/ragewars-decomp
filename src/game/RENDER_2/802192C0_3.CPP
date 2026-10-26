@@ -63,7 +63,7 @@ void func_8021A78C_de(void *playerObject) {
     ((ObjectLinks16D8 *)(object))->unk_734 = 0;
     ((ObjectLinks16D8 *)(object))->unk_738 = 0;
     ((ObjectLinks16D8 *)(object))->unk_73C = 0;
-    ((ObjectLinks16D8 *)(object))->unk_740 = Weapons_GetObjectOwnerHeight(object);
+    ((ObjectLinks16D8 *)(object))->unk_740 = Player_GetObjectOwnerHeight(object);
     default_value = D_800C22F8_de;
     ((ObjectLinks16D8 *)(object))->unk_744 = 0;
     (&((ObjectLinks16D8 *)(object))->unk_748)->x = (&((ObjectLinks16D8 *)(object))->unk_748)->y = (&((ObjectLinks16D8 *)(object))->unk_748)->z = 0;
@@ -111,7 +111,7 @@ void func_8021A78C_de(void *playerObject) {
     ((ObjectLinks16D8 *)(object))->unk_7CC = zero;
     ((ObjectLinks16D8 *)(object))->unk_7D0 = zero;
     ((ObjectLinks16D8 *)(object))->unk_7D4 = zero;
-    Weapons_SetPlayerState(object, object, type);
+    Player_SetPlayerState(object, object, type);
     ((ObjectLinks16D8 *)(object))->unk_80C = 0;
     ((ObjectLinks16D8 *)(object))->unk_838 = zero;
     ((ObjectLinks16D8 *)(object))->unk_83C = zero;

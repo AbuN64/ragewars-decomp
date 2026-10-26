@@ -77,7 +77,7 @@ extern float D_800C5C10_de;
 
 extern float D_800C5C00_de;
 
-extern f32 func_8029DD3C_de(f32 arg0);
+extern f32 XMath_EvaluateTangent(f32 arg0);
 
 
 extern double D_800C5B60_de;

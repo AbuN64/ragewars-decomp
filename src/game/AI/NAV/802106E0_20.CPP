@@ -51,7 +51,7 @@ extern void Nav_UpdatePlayerSteering(void *arg0);
 extern void Nav_SelectPlayerState(void *arg0);
 
 
-extern void *Weapons_FindPlayerWithMarker(char *);
+extern void *Player_FindPlayerWithMarker(char *);
 
 extern f32 Nav_DistanceToNode(s32 *, s32);
 
@@ -217,7 +217,7 @@ void Nav_SeekUnclaimedMarker(void *arg0) {
     ObjRecAt1454V1 *actor = object->unk1D8;
 
     rec = actor->unk1454;
-    v0 = Weapons_FindPlayerWithMarker((char *)&D_80145040);
+    v0 = Player_FindPlayerWithMarker((char *)&D_80145040);
     if (v0 == (void *) *rec) {
         Nav_SetBehaviourState(rec, 10);
         return;

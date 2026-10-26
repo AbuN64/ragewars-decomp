@@ -52,10 +52,10 @@ extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Unknown data types are explicit unresolved contracts, never guessed s32. */
 
-extern void World_ResetPlayerState();
+extern void Nav_ResetPlayerState();
 extern void Nav_AssignPlatformEndpoints();
 extern s32 Nav_FindNearestPointIndex();
-extern void * Weapons_GetPlayerByIndex();
+extern void * Player_GetPlayerByIndex();
 extern void Camera_UpdateViewportLayoutAndBounds();
 extern int Cinema_IsSequenceActive();
 extern void func_80246E44_de();
@@ -286,11 +286,11 @@ void func_80286AA8_de(void *table, s32 target, s32 arg2) {
     func_8025C8D8_de(&D_8011F260, &D_8011AFC0, 0xF);
     Ovlgame_StartPanelMovers(&D_801376F8);
     do {
-        var_s1_4 = Weapons_GetPlayerByIndex(&D_80145040, var_s2);
+        var_s1_4 = Player_GetPlayerByIndex(&D_80145040, var_s2);
         if (var_s1_4 != 0) {
             temp_v1 = var_s1_4->unk5D8;
             if ((((struct SharedRecAt91 *)temp_v1)->unk78 == 1) && (((struct SharedRecAt91 *)temp_v1)->unk91 == 1)) {
-                World_ResetPlayerState(var_s1_4->unk1454);
+                Nav_ResetPlayerState(var_s1_4->unk1454);
             }
             if ((((struct SharedRecAt98 *)(&D_801468A0))->unk98) != 0) {
                 temp_a2 = var_s1_4->unk5D8;

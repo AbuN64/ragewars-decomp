@@ -49,11 +49,11 @@ static inline s32 can_fire(char *player) {
         SoundElement_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
 #if defined(VERSION_EU)
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800E0D44)[g_languageIndex]), Weapons_GetPlayerIndex(&D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800E0D44)[g_languageIndex]), Player_GetPlayerIndex(&D_80145040, player),
 #elif defined(VERSION_EU_X)
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800DCC68)[g_languageIndex]), Weapons_GetPlayerIndex(&D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800DCC68)[g_languageIndex]), Player_GetPlayerIndex(&D_80145040, player),
 #else
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, (D_800D30BC), Weapons_GetPlayerIndex(&D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, (D_800D30BC), Player_GetPlayerIndex(&D_80145040, player),
 #endif
                           D_800C2FB8_de);
         }
@@ -67,15 +67,15 @@ void Weapon_TryEnterAlternateStateEight(Shared_Actor *actor, void *attack) {
 
     player = actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
-    if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
+    if (Player_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
         ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
         return;
     }
     if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player)) {
-        Weapons_RequestActorState(actor, attack, 8);
+        Nav_RequestActorState(actor, attack, 8);
         return;
     }
     if (func_802301F4_de(actor, attack) == 0 && !(actor->weaponFlags & 0x400)) {
-        Weapons_RequestActorState(actor, attack, action);
+        Nav_RequestActorState(actor, attack, action);
     }
 }

@@ -10,7 +10,7 @@
 extern s32 Turret_TrackTarget(void *arg0);
 
 
-extern s32 Weapons_SpawnFlaggedEffects(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 Barrel_SpawnFlaggedEffects(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4);
 
 extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
 
@@ -22,13 +22,13 @@ extern s32 Rumble_TestActorStateBit(void *, void *);
 
 void Turret_Code_IDLE(void *actor, void *state) {
     if (Turret_TrackTarget(actor) != 0) {
-        Weapons_RequestActorState(actor, state, 0x3F);
+        Nav_RequestActorState(actor, state, 0x3F);
     }
 }
 
 void Turret_Code_FIRE(void *actor, void *state) {
     if (Turret_TrackTarget(actor) == 0) {
-        Weapons_RequestActorState(actor, state, 0x3E);
+        Nav_RequestActorState(actor, state, 0x3E);
     }
 }
 
@@ -40,7 +40,7 @@ void Turret_Setup_DEATH(void *actor, void *state) {
     Shared_World *world;
 
     motion = &((ActorMotionResource *)actorView->definition)->motion;
-    Weapons_SpawnFlaggedEffects(actor, state, 4, motion->eventMask, motion->secondaryEventMask);
+    Barrel_SpawnFlaggedEffects(actor, state, 4, motion->eventMask, motion->secondaryEventMask);
     world = &g_world;
     stateView->event = 0;
     Rumble_SetActorStateBit(world, actor, 1);

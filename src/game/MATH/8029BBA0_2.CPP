@@ -6,7 +6,7 @@
 #include "MATH/math_double.H"
 #include "MATH/8029BBA0_2.H"
 
-/* Converts an array of three angles into another angle triple via sine/cosine products, clamping and atan2-style calls, and writes it back. Adapted from func_8029B868_de, with the clamped product, branch products, fallback call, and result order changed. */
+/* Converts an array of three angles into another angle triple via sine/cosine products, clamping and atan2-style calls, and writes it back. Adapted from XMath_ConvertYxzToZyxAngles, with the clamped product, branch products, fallback call, and result order changed. */
 
 
 
@@ -16,7 +16,7 @@
 
 
 
-void func_8029B3C0_de(f32 *arg0) {
+void XMath_ConvertZyxToYxzAngles(f32 *arg0) {
     f32 sp10;
     f32 sp14;
     f32 sp18;
@@ -28,9 +28,9 @@ void func_8029B3C0_de(f32 *arg0) {
     f32 out1;
     f32 out2;
 
-    func_8029BBB0_de(arg0[0], &sp10, &sp14);
-    func_8029BBB0_de(arg0[1], &sp18, &sp1C);
-    func_8029BBB0_de(arg0[2], &sp20, &sp24);
+    XMath_EvaluateSineCosine(arg0[0], &sp10, &sp14);
+    XMath_EvaluateSineCosine(arg0[1], &sp18, &sp1C);
+    XMath_EvaluateSineCosine(arg0[2], &sp20, &sp24);
     test = (sp14 * sp20 * sp18) - (sp10 * sp24);
     if ((1.0f) < test) {
         test = (1.0f);
@@ -38,8 +38,8 @@ void func_8029B3C0_de(f32 *arg0) {
     if (test < (-1.0f)) {
         test = (-1.0f);
     }
-    angle = func_8029DE48_de(-test);
-    test = ((f32 (*)(f32))func_8029DD18_de)(angle);
+    angle = XMath_EvaluateArcSine(-test);
+    test = ((f32 (*)(f32))XMath_EvaluateCosine)(angle);
     if (((9.9999997473787516e-05f) < test) || (test < (-9.9999997473787516e-05f))) {
         f32 product = sp14 * sp24;
         f32 cross = sp10 * sp20;
@@ -47,18 +47,18 @@ void func_8029B3C0_de(f32 *arg0) {
         f32 first1 = sp14 * sp1C;
         f32 second0 = sp1C * sp20;
         f32 second1 = (cross * sp18) + product;
-        out1 = func_8029C044_de(first0, first1);
-        out2 = func_8029C044_de(second0, second1);
+        out1 = XMath_EvaluateArcTangentTwo(first0, first1);
+        out2 = XMath_EvaluateArcTangentTwo(second0, second1);
     } else {
         out1 = 0.0f;
-        out2 = func_8029C044_de(-sp18, sp1C * sp24);
+        out2 = XMath_EvaluateArcTangentTwo(-sp18, sp1C * sp24);
     }
     arg0[0] = angle;
     arg0[1] = out1;
     arg0[2] = out2;
 }
 
-/* Converts a vector of three angles into another angle triple via sine/cosine products, clamping and atan2-style calls, and writes it back. Adapted from func_8029B6E0_de, with the clamped product, the branch products, and the stored order of the second and third results changed. */
+/* Converts a vector of three angles into another angle triple via sine/cosine products, clamping and atan2-style calls, and writes it back. Adapted from XMath_ConvertYzxToZyxAngles, with the clamped product, the branch products, and the stored order of the second and third results changed. */
 
 
 
@@ -70,7 +70,7 @@ void func_8029B3C0_de(f32 *arg0) {
 
 
 
-void func_8029B54C_de(CVector3 *arg0) {
+void XMath_ConvertZyxToYzxAngles(CVector3 *arg0) {
     f32 sp10;
     f32 sp14;
     f32 sp18;
@@ -83,9 +83,9 @@ void func_8029B54C_de(CVector3 *arg0) {
     f32 angle;
     f32 test;
 
-    func_8029BBB0_de(arg0->x, &sp10, &sp14);
-    func_8029BBB0_de(arg0->y, &sp18, &sp1C);
-    func_8029BBB0_de(arg0->z, &sp20, &sp24);
+    XMath_EvaluateSineCosine(arg0->x, &sp10, &sp14);
+    XMath_EvaluateSineCosine(arg0->y, &sp18, &sp1C);
+    XMath_EvaluateSineCosine(arg0->z, &sp20, &sp24);
 
     clamped = sp1C * sp20;
     if ((1.0f) < clamped) {
@@ -95,8 +95,8 @@ void func_8029B54C_de(CVector3 *arg0) {
         clamped = (-1.0f);
     }
 
-    angle = func_8029DE48_de(clamped);
-    test = ((f32 (*)(f32))func_8029DD18_de)(angle);
+    angle = XMath_EvaluateArcSine(clamped);
+    test = ((f32 (*)(f32))XMath_EvaluateCosine)(angle);
     if (((9.9999997473787516e-05f) < test) || (test < (-9.9999997473787516e-05f))) {
         f32 saved18 = sp18;
         f32 product = saved18 * sp20;
@@ -105,11 +105,11 @@ void func_8029B54C_de(CVector3 *arg0) {
         f32 secondArg = sp1C * saved24;
         f32 t = sp14 * product;
 
-        outX = func_8029C044_de((saved10 * saved24) - t,
+        outX = XMath_EvaluateArcTangentTwo((saved10 * saved24) - t,
                              (saved10 * product) + (sp14 * saved24));
-        outZ = func_8029C044_de(saved18, secondArg);
+        outZ = XMath_EvaluateArcTangentTwo(saved18, secondArg);
     } else {
-        { f32 t = sp10 * sp18 * sp24; outX = func_8029C044_de(sp10 * sp1C, (sp14 * sp20) - t); }
+        { f32 t = sp10 * sp18 * sp24; outX = XMath_EvaluateArcTangentTwo(sp10 * sp1C, (sp14 * sp20) - t); }
         outZ = 0.0f;
     }
 
@@ -123,7 +123,7 @@ void func_8029B54C_de(CVector3 *arg0) {
 
 
 
-void func_8029B6E0_de(CVector3 *arg0) {
+void XMath_ConvertYzxToZyxAngles(CVector3 *arg0) {
     f32 sp10;
     f32 sp14;
     f32 sp18;
@@ -136,9 +136,9 @@ void func_8029B6E0_de(CVector3 *arg0) {
     f32 angle;
     f32 test;
 
-    func_8029BBB0_de(arg0->x, &sp10, &sp14);
-    func_8029BBB0_de(arg0->y, &sp18, &sp1C);
-    func_8029BBB0_de(arg0->z, &sp20, &sp24);
+    XMath_EvaluateSineCosine(arg0->x, &sp10, &sp14);
+    XMath_EvaluateSineCosine(arg0->y, &sp18, &sp1C);
+    XMath_EvaluateSineCosine(arg0->z, &sp20, &sp24);
 
     clamped = -sp18 * sp24;
     if ((1.0f) < clamped) {
@@ -148,8 +148,8 @@ void func_8029B6E0_de(CVector3 *arg0) {
         clamped = (-1.0f);
     }
 
-    angle = func_8029DE48_de(-clamped);
-    test = ((f32 (*)(f32))func_8029DD18_de)(angle);
+    angle = XMath_EvaluateArcSine(-clamped);
+    test = ((f32 (*)(f32))XMath_EvaluateCosine)(angle);
     if (((9.9999997473787516e-05f) < test) || (test < (-9.9999997473787516e-05f))) {
         f32 product = sp18 * sp20;
         f32 saved10 = sp10;
@@ -157,11 +157,11 @@ void func_8029B6E0_de(CVector3 *arg0) {
         f32 saved21 = sp20;
         f32 secondArg = saved20 * sp24;
 
-        outX = func_8029C044_de((sp14 * product) + (saved10 * saved20),
+        outX = XMath_EvaluateArcTangentTwo((sp14 * product) + (saved10 * saved20),
                              (-saved10 * product) + (saved20 * sp14));
-        outZ = func_8029C044_de(saved21, secondArg);
+        outZ = XMath_EvaluateArcTangentTwo(saved21, secondArg);
     } else {
-        outX = func_8029C044_de(-sp24 * sp10, sp24 * sp14);
+        outX = XMath_EvaluateArcTangentTwo(-sp24 * sp10, sp24 * sp14);
         outZ = 0.0f;
     }
 
@@ -175,7 +175,7 @@ void func_8029B6E0_de(CVector3 *arg0) {
 
 
 
-void func_8029B868_de(f32 *arg0) {
+void XMath_ConvertYxzToZyxAngles(f32 *arg0) {
     f32 sp10;
     f32 sp14;
     f32 sp18;
@@ -187,9 +187,9 @@ void func_8029B868_de(f32 *arg0) {
     f32 out0;
     f32 out2;
 
-    func_8029BBB0_de(arg0[0], &sp10, &sp14);
-    func_8029BBB0_de(arg0[1], &sp18, &sp1C);
-    func_8029BBB0_de(arg0[2], &sp20, &sp24);
+    XMath_EvaluateSineCosine(arg0[0], &sp10, &sp14);
+    XMath_EvaluateSineCosine(arg0[1], &sp18, &sp1C);
+    XMath_EvaluateSineCosine(arg0[2], &sp20, &sp24);
     test = (sp1C * sp10 * sp20) - (sp18 * sp24);
     if ((1.0f) < test) {
         test = (1.0f);
@@ -197,8 +197,8 @@ void func_8029B868_de(f32 *arg0) {
     if (test < (-1.0f)) {
         test = (-1.0f);
     }
-    angle = func_8029DE48_de(-test);
-    test = ((f32 (*)(f32))func_8029DD18_de)(angle);
+    angle = XMath_EvaluateArcSine(-test);
+    test = ((f32 (*)(f32))XMath_EvaluateCosine)(angle);
     if (((9.9999997473787516e-05f) < test) || (test < (-9.9999997473787516e-05f))) {
         f32 product = sp1C * sp24;
         f32 cross = sp18 * sp20;
@@ -206,10 +206,10 @@ void func_8029B868_de(f32 *arg0) {
         f32 first1 = sp14 * sp1C;
         f32 second0 = sp14 * sp20;
         f32 second1 = product + (cross * sp10);
-        out0 = func_8029C044_de(first0, first1);
-        out2 = func_8029C044_de(second0, second1);
+        out0 = XMath_EvaluateArcTangentTwo(first0, first1);
+        out2 = XMath_EvaluateArcTangentTwo(second0, second1);
     } else {
-        out0 = func_8029C044_de(sp10, sp14 * sp24);
+        out0 = XMath_EvaluateArcTangentTwo(sp10, sp14 * sp24);
         out2 = 0.0f;
     }
     arg0[0] = out0;
@@ -217,7 +217,7 @@ void func_8029B868_de(f32 *arg0) {
     arg0[2] = out2;
 }
 
-f32 func_8029B9FC_de(f32 arg0) {
+f32 XMath_EvaluateSine(f32 arg0) {
     f32 temp_f2;
     f32 result;
     f32 var_f1;
@@ -265,7 +265,7 @@ f32 func_8029B9FC_de(f32 arg0) {
 }
 
 /* Computes the sine and cosine of an angle by reducing it into one turn, folding it into a quadrant, and evaluating one odd polynomial for each output.
-   Adapted from func_8029B9FC_de with the fmod result kept and copied back into the angle, a shared zero local for the wrap loops, the quadrant fold producing a sine and a cosine argument, and both polynomials computed before the two pointer stores changed. */
+   Adapted from XMath_EvaluateSine with the fmod result kept and copied back into the angle, a shared zero local for the wrap loops, the quadrant fold producing a sine and a cosine argument, and both polynomials computed before the two pointer stores changed. */
 
 
 
@@ -279,7 +279,7 @@ f32 func_8029B9FC_de(f32 arg0) {
 
 
 
-void func_8029BBB0_de(f32 angle, f32 *sinOut, f32 *cosOut) {
+void XMath_EvaluateSineCosine(f32 angle, f32 *sinOut, f32 *cosOut) {
     f32 r;
     f32 zero;
     f32 s;
@@ -368,7 +368,7 @@ static inline f64 exp_inline(f64 x) {
     return ScaleDoubleExponent(p / ((t * 4.9586285604164e-4 + 5.55538684129715e-2) * t + 0.5 - p) + 0.5, k + 1);
 }
 
-f64 func_8029BDEC_de(f64 x) {
+f64 XMath_EvaluateHyperbolicTangent(f64 x) {
     f64 z;
     f64 s;
     f64 result;
@@ -399,7 +399,7 @@ f64 func_8029BDEC_de(f64 x) {
 /* Returns the angle of the vector (x, y) in radians, atan2(y, x): both components within 1e-6 of zero are snapped to zero, the axes return exact multiples of pi/2, and otherwise the arctangent of |y/x| comes from the (t - 1)/(t + 1) series around pi/4, negated for a negative ratio and offset by the quadrant's term from D_800D2B60. */
 
 
-f32 func_8029C044_de(f32 y, f32 x) {
+f32 XMath_EvaluateArcTangentTwo(f32 y, f32 x) {
     s32 quadrant;
     f32 ratio;
     f32 magnitude;

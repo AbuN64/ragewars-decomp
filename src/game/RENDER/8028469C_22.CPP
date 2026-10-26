@@ -11,7 +11,7 @@
 
 extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
-void Rumble_SetActorStateBit(Shared_World *world, void *actor, s32 arg2) {
+void Rumble_SetActorStateBit(Shared_World *world, void *actor, s32 enabled) {
     LevelActor *entry;
     struct Def *cond;
     void *field80;
@@ -60,7 +60,7 @@ void Rumble_SetActorStateBit(Shared_World *world, void *actor, s32 arg2) {
     base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (index & 7);
-    if (arg2 != 0) {
+    if (enabled != 0) {
         idx = index;
         if (index < 0) {
             idx = index + 7;
@@ -75,9 +75,9 @@ void Rumble_SetActorStateBit(Shared_World *world, void *actor, s32 arg2) {
     base2[idx2 >> 3] &= ~mask;
 }
 
-s32 Rumble_TestActorStateBit(void *arg0, void *arg1) {
-    Shared_World *world = arg0;
-    LevelActor *actor = arg1;
+s32 Rumble_TestActorStateBit(void *worldState, void *actorPointer) {
+    Shared_World *world = worldState;
+    LevelActor *actor = actorPointer;
     void *field80;
     void *table;
     u8 *base;
@@ -91,11 +91,11 @@ s32 Rumble_TestActorStateBit(void *arg0, void *arg1) {
     if (!(actor->flags & 0x80000)) {
         first = ((u32)world->actors);
         index = -1;
-        if ((u32) arg1 >= first) {
+        if ((u32) actorPointer >= first) {
             lastOffset = world->actorCount * 0x2E8;
             lastOffset -= 0x2E8;
-            if (first + lastOffset >= (u32) arg1) {
-                index = ((u32) arg1 - first) / 0x2E8;
+            if (first + lastOffset >= (u32) actorPointer) {
+                index = ((u32) actorPointer - first) / 0x2E8;
             }
         }
     } else {

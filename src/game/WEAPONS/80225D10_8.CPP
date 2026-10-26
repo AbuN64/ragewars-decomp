@@ -47,10 +47,10 @@ void Player_ApplyStun(SharedPlayer *player, f32 amount) {
             stun = 75.0f;
         }
         player->views5E8.view11D8_149.stun = stun;
-        Weapons_RequestActorState(player->views1C.view2E8_28.weapon, player->views1C.view458_30.ammo, 2);
+        Nav_RequestActorState(player->views1C.view2E8_28.weapon, player->views1C.view458_30.ammo, 2);
         if (player->views5E8.view1210_153.marker != 0) {
             if (player->views5E4.view5E4_4.holding != 0) {
-                Weapons_SetPlayerState(player, player, 2);
+                Player_SetPlayerState(player, player, 2);
             }
             player->views5E8.view1210_153.marker = 0;
             player->views5E8.view1214_156.markerShown = 0;

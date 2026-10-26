@@ -174,12 +174,12 @@ s32 func_8040A9A0_de(LayeredText *field) {
     s32 value = D_8015D48C;
     char *text = (char *)field->text[g_languageIndex];
 
-    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800ED414, value);
+    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800ED414, value);
 #else
     s32 value = D_8014D488.values[2];
     char *text = (char *)*field->text;
 
-    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), g_pakFormatInt04, value);
+    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), g_pakFormatInt04, value);
 #endif
     return 0;
 }
@@ -778,7 +778,7 @@ s32 func_8040B410_de(struct FieldRecAt14 *field) {
     return 0;
 }
 
-extern void func_802658E4_de(char *buffer, const char *format, s32 value);
+extern void Defs_FormatIntegerValue(char *buffer, const char *format, s32 value);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/PAK_MENU.H"
@@ -804,7 +804,7 @@ s32 func_8040B444_de(struct Field *field, Shared_PakMenu *pThis) {
         strings = D_800E2FB4;
         field->text = strings;
         text = strings[D_801462C8.language];
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 2), D_800ED41C, value + 1);
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 2), D_800ED41C, value + 1);
     }
     return 0;
 }
@@ -854,9 +854,9 @@ s32 func_8040B444_de(LayeredText *field, struct Shared_PakMenu *holder) {
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 2), D_800ED41C, value + 1);
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 2), D_800ED41C, value + 1);
 #else
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 2), g_digitDotFormat, value + 1);
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 2), g_digitDotFormat, value + 1);
 #endif
     }
     return 0;

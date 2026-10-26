@@ -13,7 +13,7 @@
 extern void GraphU64_TransformPoint(void *arg0, void *arg1, void *arg2);
 
 extern Gfx *g_displayListCursor;
-extern s32 World_PlayerHasAmmoForWeapon(Player *player, s32 weapon);
+extern s32 Player_PlayerHasAmmoForWeapon(Player *player, s32 weapon);
 void TeamSelect_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *player) {
     s32 width;
     s32 height;
@@ -49,7 +49,7 @@ void TeamSelect_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *p
                 alpha = 1.0f;
                 green = red;
             } else {
-                red = World_PlayerHasAmmoForWeapon(player, item->weapon);
+                red = Player_PlayerHasAmmoForWeapon(player, item->weapon);
                 red = red == 0 ? 100 : 200;
                 green = red;
                 blue = red;

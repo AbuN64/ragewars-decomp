@@ -121,7 +121,7 @@ void Player_UpdateCrouchClearance(Player *player, LevelActor *actor, s32 unused,
     if (player->forceCrouch != 0) {
         crouch = 1;
         if (player->pose != 4) {
-            Weapons_SetPlayerState(player, actor, 4);
+            Player_SetPlayerState(player, actor, 4);
         }
     }
     target = 0.0f;

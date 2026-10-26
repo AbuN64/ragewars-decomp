@@ -560,7 +560,7 @@ extern void Camera_UpdateViewProjectionAndEffects(void *);
 extern void func_8021D774_de(PlayerWeaponsUpdatePlayerCamera *);
 
 
-void Weapons_UpdatePlayerCamera(PlayerWeaponsUpdatePlayerCamera *player, BodyWeaponsUpdatePlayerCamera *body) {
+void Player_UpdatePlayerCamera(PlayerWeaponsUpdatePlayerCamera *player, BodyWeaponsUpdatePlayerCamera *body) {
     void *view;
     f32 angle;
     f32 x;
@@ -593,7 +593,7 @@ void Weapons_UpdatePlayerCamera(PlayerWeaponsUpdatePlayerCamera *player, BodyWea
     func_8021D774_de(player);
 }
 /* Regenerates a player's health at 0x5E4 toward the cap from func_8022AC00_de: under flag 4 at 0x122C it adds D_800D2988 times gFastRegen's rate and mirrors the result to 0x174 and 0x45C, otherwise, while the flag byte at D_80145088.settings.local is set, the speed at 0x18's 0x24 meets D_800C78B8's threshold, the health is nonzero and the word 0x60F past that flag byte does not hold it back, it adds the speed scaled by D_800C78BC, D_800D2988 and D_800C78C0's rate. */
-extern s32 Weapons_GetMaxHealth(SharedPlayer *p);
+extern s32 Player_GetMaxHealth(SharedPlayer *p);
 void func_80220D44_de(SharedPlayer *p) {
     f32 f0;
     f32 f20;
@@ -601,7 +601,7 @@ void func_80220D44_de(SharedPlayer *p) {
     s32 cap;
     s32 val;
     if ((p->views122C.view122C_1.flags & 4) && p->views5E4.view5E4_2.health > 0) {
-        cap = Weapons_GetMaxHealth(p);
+        cap = Player_GetMaxHealth(p);
         f20 = p->views5E4.view5E4_2.health + D_800D2988 * D_800C27C0_de.second;
         f0 = cap;
         if (!(f0 <= f20)) {
@@ -618,5 +618,5 @@ void func_80220D44_de(SharedPlayer *p) {
     if (cur == 0.0f) return;
     if (p->views5D8.view5D8_4.ctrl->flag != 0 && D_80145088.modes.tag != 0) return;
     f20 = cur + (s32)(f20 * D_800C78BC) * (D_800D2988 * D_800C78C0.first);
-    p->views5E4.view5E4_2.health = RW_MIN_LT(f20, Weapons_GetMaxHealth(p));
+    p->views5E4.view5E4_2.health = RW_MIN_LT(f20, Player_GetMaxHealth(p));
 }

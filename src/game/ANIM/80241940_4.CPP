@@ -49,7 +49,7 @@ extern s32 func_8023DDC4_de(Ray180 *, CQuatern *, f32 *);
 
 extern void func_80243874_de(ContextB0 *);
 
-extern void func_802852C0_de(char *, u32, u32, void *, void *);
+extern void PpDecom_QuickSortRecords(char *, u32, u32, void *, void *);
 
 s32 func_80242920_de(void *ray, void *arg1, void *corners, s32 *quad) {
     s32 result;
@@ -177,7 +177,7 @@ void func_80242BF0_de(Ray180 *ray) {
     }
     if (hitCount != 0) {
         func_8026F368_de(&ctx.matrix, start, end, &D_800CC3D0_de);
-        func_802852C0_de((char *) hits, hitCount, sizeof(Hit8), D_00243850, D_00243814);
+        PpDecom_QuickSortRecords((char *) hits, hitCount, sizeof(Hit8), D_00243850, D_00243814);
         hit = hits;
         for (j = 0; j < hitCount; j++, hit++) {
             if (!(hit->t < ray->nearest)) {
@@ -185,7 +185,7 @@ void func_80242BF0_de(Ray180 *ray) {
             }
             element = hit->element;
             ctx.element = element;
-            ctx.kind = Weapons_GetImpactSlot(element);
+            ctx.kind = Barrel_GetImpactSlot(element);
             if (ctx.kind == 9) {
                 ctx.isKind9 = 1;
             } else {

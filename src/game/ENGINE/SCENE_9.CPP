@@ -9,7 +9,7 @@
 #include "RENDER_4/8028FD2C_6.H"
 
 
-extern s32 func_802654E8_de(void *arg0, s32 arg1, s32 arg2);
+extern s32 Defs_FindSortedValue(void *arg0, s32 arg1, s32 arg2);
 
 extern s32 SetN64_LocatePackSection(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
 
@@ -34,7 +34,7 @@ void *func_8028BE08_de(Shared_World *world, s32 arg1, s32 mode, s32 direct) {
     s32 result;
 
     table = world->lookupTable;
-    idx = func_802654E8_de(table->data, table->count, arg1);
+    idx = Defs_FindSortedValue(table->data, table->count, arg1);
     if (idx == -1) {
         return 0;
     }
@@ -56,7 +56,7 @@ s32 Scene_StartWorldEffect(Shared_World *world, s32 id, s32 flags, s32 extra) {
     if (id == 0) {
         return 0;
     }
-    index = func_802654E8_de(world->resourceKindTable->entries, world->resourceKindTable->count, id);
+    index = Defs_FindSortedValue(world->resourceKindTable->entries, world->resourceKindTable->count, id);
     if (index == -1) {
         return 0;
     }

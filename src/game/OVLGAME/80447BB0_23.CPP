@@ -11,9 +11,9 @@ extern f32 D_800C73E4;
 extern u8 D_0024B52C_us_rev1[], D_0022E0A0_us_rev1[], D_00219A40_us_rev1[], D_0022E250_us_rev1[];
 extern u8 D_0021A2D4_us_rev1[], D_0022F5D0_us_rev1[];
 extern void func_8024B3A8_de(void *, void *, void *, s32);
-extern void Weapons_RequestActorState(void *, void *, s32);
+extern void Nav_RequestActorState(void *, void *, s32);
 extern void Weapon_ApplyWeaponSwitch(void *, void *);
-extern void Weapons_UpdatePlayerCamera(void *, void *);
+extern void Player_UpdatePlayerCamera(void *, void *);
 extern void Cinema_UpdateSequenceTrack(void *);
 #include "MENU/INITVIEW.H"
 /* Initialises an actor and its embedded part at 0x2E8: sets the shared table pointers and flag bits (one flag
@@ -70,9 +70,9 @@ void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s
     record->part[1].table288 = D_0022E250_us_rev1;
     record->selection = -1;
     record->part[1].flags &= 0xFFFEFFFF;
-    Weapons_RequestActorState((actor + 0x2E8), (actor + 0x458), 0);
+    Nav_RequestActorState((actor + 0x2E8), (actor + 0x458), 0);
     Weapon_ApplyWeaponSwitch((actor + 0x2E8), (actor + 0x458));
-    Weapons_UpdatePlayerCamera(actor, actor);
+    Player_UpdatePlayerCamera(actor, actor);
     if (record->auxiliary != 0) {
         Cinema_UpdateSequenceTrack(record->auxiliary);
     }
@@ -94,7 +94,7 @@ extern s32 Control_IsSnapshotActive(void);
 extern void *Items_RecycleModel(void *);
 extern void func_8021836C_de(void *);
 extern void func_80218E98_de(void *);
-extern u32 Weapons_GetLevelProgress(void *, s32);
+extern u32 Player_GetLevelProgress(void *, s32);
 extern void Player_ResetPlayerWeapons(struct RespawnPlayer *);
 extern void Ovlgame_ResetRespawnedPlayer(struct RespawnPlayer *);
 extern void Pak_OpenDialog(void *, void *, void *, s32, s32);
@@ -147,7 +147,7 @@ void Ovlgame_ResetPlayerForRound(void *actor, s32 character) {
     } while (--i >= 0);
     if (D_80145088.settings.local != 0) {
         if (D_801462D5 == 1 && FIELD(s32, actor, 0x1450) == 0) {
-            u32 value = Weapons_GetLevelProgress(D_80102B00 + FIELD(s32, actor, 0x5D4) * 0x190, FIELD(s8, FIELD(void *, actor, 0x5D8), 0x80));
+            u32 value = Player_GetLevelProgress(D_80102B00 + FIELD(s32, actor, 0x5D4) * 0x190, FIELD(s8, FIELD(void *, actor, 0x5D8), 0x80));
             FIELD(s32, actor, 0x133C) = ((value & 0xFF) >> 1) + 1;
         }
         if (D_801462D5 == 4 && FIELD(s32, actor, 0x1450) == 0 && D_800E4680 != 0) {
@@ -394,11 +394,11 @@ extern unsigned int D_800CD730;
 
 extern void func_8022B510_de(struct RespawnPlayer *);
 extern void Control_SetProfileMode(void *, int);
-extern void Weapons_InitializePlayerHealth(struct RespawnPlayer *);
+extern void Player_InitializePlayerHealth(struct RespawnPlayer *);
 extern int func_802934F8_de(void);
 
 extern void Player_ResetPlayerWeapons(struct RespawnPlayer *);
-extern void World_ResetPlayerState(void *);
+extern void Nav_ResetPlayerState(void *);
 extern void Barrel_StopActorLoopingSound(LevelActor *, s32 *);
 extern void AnimPool_ReleaseSceneEffect(LevelActor *);
 static inline void releaseState(LevelActor *carried, s32 *state) {
@@ -417,7 +417,7 @@ void Ovlgame_ResetRespawnedPlayer(struct RespawnPlayer *player) {
     player->fade = D_800C2338_de;
     Control_SetProfileMode(player->anim, 1);
     if (D_80145088.settings.local != 0) {
-        Weapons_InitializePlayerHealth(player);
+        Player_InitializePlayerHealth(player);
     } else {
         if (player->isBot == 0) {
             player->health = D_800FEB10[player->character].value + 0x6400;
@@ -448,7 +448,7 @@ void Ovlgame_ResetRespawnedPlayer(struct RespawnPlayer *player) {
     player->field11B8 = 0;
     player->field13C8 = 0;
     if (player->isBot != 0) {
-        World_ResetPlayerState(player->brain);
+        Nav_ResetPlayerState(player->brain);
     }
     for (i = 1; i < 22; i++) {
         if (player->effects[i].state == 3 || player->effects[i].state == 7) {

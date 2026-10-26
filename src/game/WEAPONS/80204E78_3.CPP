@@ -73,7 +73,7 @@ void func_802050C0_eu_x(Damageable *obj, Health *health, Hit *hit)
             if (obj->desc->damage.flags & 0x40) {
                 kind = 2;
             }
-            Weapons_RequestActorState(obj, health, kind);
+            Nav_RequestActorState(obj, health, kind);
         }
     }
 }
@@ -147,7 +147,7 @@ void func_802050C0_eu(Damageable *obj, Health *health, Hit *hit)
             if (obj->desc->damage.flags & 0x40) {
                 kind = 2;
             }
-            Weapons_RequestActorState(obj, health, kind);
+            Nav_RequestActorState(obj, health, kind);
         }
     }
 }
@@ -198,7 +198,7 @@ void func_802050A0_de(Damageable *obj, Health *health, Hit *hit)
             if (obj->desc->damage.flags & 0x40) {
                 kind = 2;
             }
-            Weapons_RequestActorState(obj, health, kind);
+            Nav_RequestActorState(obj, health, kind);
         }
     }
 }
@@ -227,9 +227,9 @@ void func_8020520C_de(LevelActor *source, void *dest) {
 
 void func_8020524C_de(LevelActor *actor, void *requestContext) {
     if (Rumble_TestActorStateBit(&g_world, actor) == 1) {
-        Weapons_RequestActorState(actor, requestContext, 1);
+        Nav_RequestActorState(actor, requestContext, 1);
     } else {
-        Weapons_RequestActorState(actor, requestContext, 0);
+        Nav_RequestActorState(actor, requestContext, 0);
         actor->flags |= 0x10000;
     }
 }
@@ -279,9 +279,9 @@ void func_80205324_de(Obj5324 *actor, s32 *activationContext) {
             SoundElement_PlaySoundAtPosition(rec->unk20.half.id, actor->pos.v, 0, -1);
         }
         if (rec->unk1C != -1) {
-            Weapons_SpawnActorEffect(actor, rec->unk1C, actor->pos.t, 0);
+            Barrel_SpawnActorEffect(actor, rec->unk1C, actor->pos.t, 0);
         }
-        Weapons_SpawnFlaggedEffects(actor, activationContext, 4, rec->unk24, rec->unk28);
+        Barrel_SpawnFlaggedEffects(actor, activationContext, 4, rec->unk24, rec->unk28);
         /* func_802A5D38_de unlinks the walker by the object's 32-bit identity;
          * the registry holds those identities as s32. */
         func_802A5D38_de(&D_801379C0, (s32)actor);

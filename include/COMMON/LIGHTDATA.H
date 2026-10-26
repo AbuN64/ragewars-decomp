@@ -16,12 +16,12 @@ typedef struct LightData LightData;
 
 struct LightNode;
 
-extern int func_8026581C_de(u32 address);
+extern int Defs_IsAddressInBufferRanges(u32 address);
 
 struct UnitLight;
 typedef struct UnitLight UnitLight;
 
-extern int func_8026563C_de(int arg0);
+extern int Defs_GetBitArrayByteCount(int arg0);
 
 
 struct UnitLight;
@@ -33,7 +33,7 @@ struct UnitLight {
     u16 range;
 };
 
-extern void func_802656DC_de(s32 arg0, s32 arg1);
+extern void Defs_ToggleBit(s32 arg0, s32 arg1);
 
 extern float D_800C4398_de;
 
@@ -44,5 +44,5 @@ extern float D_800C43A0_de;
 
 extern f32 Defs_CosineEase(f32 arg0);
 
-extern void func_802658DC_de(void);
+extern void Defs_NoOperation(void);
 #endif

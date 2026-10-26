@@ -14,7 +14,7 @@ extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
 
 
 
-void Weapons_EaseOwnerHeightEffect(struct Object *object) {
+void Player_EaseOwnerHeightEffect(struct Object *object) {
     f32 level;
 
     if (object->owner != 0) {

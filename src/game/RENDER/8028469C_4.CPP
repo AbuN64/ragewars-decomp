@@ -22,53 +22,53 @@ extern void *func_802BD3A0_de(void *destination, const void *source, int count);
  /* extern */
 /* extern */
 /* Unpack or copy a resource into an allocated buffer and install it. */
-s32 PpDecom_UnpackResource(void **handle, s32 arg1) {
-    s32 var_s0;
-    u8 temp_v1;
+s32 PpDecom_UnpackResource(void **handle, s32 retainUncompressed) {
+    s32 succeeded;
+    u8 compressionMethod;
     void **block;
-    ObjRecAt4V2 *temp_a2;
-    ObjRecAt12 *temp_s0;
-    ObjRecAt4V2 *temp_v0;
-    temp_a2 = *handle;
-    temp_s0 = temp_a2->unk0;
-    if ((temp_s0->unk0 & ~0xFF) == 0x524E4300) {
-        if (arg1 != 0) {
-            block = func_80254600_de(0, (s32) handle, temp_s0->unk4);
+    ObjRecAt4V2 *sourceBlock;
+    ObjRecAt12 *packedHeader;
+    ObjRecAt4V2 *copySourceBlock;
+    sourceBlock = *handle;
+    packedHeader = sourceBlock->unk0;
+    if ((packedHeader->unk0 & ~0xFF) == 0x524E4300) {
+        if (retainUncompressed != 0) {
+            block = func_80254600_de(0, (s32) handle, packedHeader->unk4);
         } else {
-            block = Cache_AllocResourceBlock(0, handle, temp_s0->unk4);
+            block = Cache_AllocResourceBlock(0, handle, packedHeader->unk4);
         }
         if (block != NULL) {
-            temp_v1 = temp_s0->unk0; /* the method: low byte of the RNC magic word */
-            switch (temp_v1) {
+            compressionMethod = packedHeader->unk0; /* the method: low byte of the RNC magic word */
+            switch (compressionMethod) {
             case 1:
-                Rnc_UnpackMethod1(&temp_s0->unk12, *block, temp_s0->unk8, temp_s0->unk4);
+                Rnc_UnpackMethod1(&packedHeader->unk12, *block, packedHeader->unk8, packedHeader->unk4);
                 break;
             case 2:
-                Rnc_UnpackMethod2(temp_s0, *block, temp_s0->unk8, temp_s0->unk4);
+                Rnc_UnpackMethod2(packedHeader, *block, packedHeader->unk8, packedHeader->unk4);
                 break;
             default:
                 break;
             }
-            var_s0 = 1;
+            succeeded = 1;
         } else {
-            var_s0 = 0;
+            succeeded = 0;
         }
-    } else if (arg1 == 0) {
-        block = Cache_AllocResourceBlock(0, handle, temp_a2->unk4);
+    } else if (retainUncompressed == 0) {
+        block = Cache_AllocResourceBlock(0, handle, sourceBlock->unk4);
         if (block != NULL) {
-            temp_v0 = *handle;
-            var_s0 = 1;
-            func_802BD3A0_de(*block, temp_v0->unk0, temp_v0->unk4);
+            copySourceBlock = *handle;
+            succeeded = 1;
+            func_802BD3A0_de(*block, copySourceBlock->unk0, copySourceBlock->unk4);
         } else {
-            var_s0 = 0;
+            succeeded = 0;
         }
     } else {
-        var_s0 = 1;
+        succeeded = 1;
         goto done;
     }
     Cache_ReplaceResourceBlock(0, handle, block);
 done:
-    return var_s0;
+    return succeeded;
 }
 
 #if defined(VERSION_US)

@@ -41,7 +41,7 @@ extern void Particle_Release(EffectSystem *, ParticleEffect *);
 extern void func_80255D70_de(IntrusiveList *, ParticleEffect *, ParticleEffect *);
 extern void func_80295E84_de(u32 *, s32);
 extern void GameObject_ResetActorMotion(ParticleEffect *);
-extern f32 func_80285630_de(CharacterScreenCell);
+extern f32 Rumble_SamplePackedFloatRange(CharacterScreenCell);
 
 #if defined(VERSION_EU)
 extern f32 func_802AD520_eu(s32);
@@ -394,12 +394,12 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 } else {
                     effect->spreadAngle = -(f32) effect_spawn_random_count(spread);
                 }
-                effect->unk19C[0] = func_80285630_de(entry->unk2C[2]) * D_800C4E04_de;
-                effect->unk19C[2] = func_80285630_de(entry->unk2C[1]) * 0.41887906f;
-                effect->unk19C[4] = func_80285630_de(entry->unk2C[0]);
-                effect->unk19C[1] = func_80285630_de(entry->unk2C[5]) * D_800C4E04_de;
-                effect->unk19C[3] = func_80285630_de(entry->unk2C[4]) * 0.41887906f;
-                effect->unk19C[5] = func_80285630_de(entry->unk2C[3]);
+                effect->unk19C[0] = Rumble_SamplePackedFloatRange(entry->unk2C[2]) * D_800C4E04_de;
+                effect->unk19C[2] = Rumble_SamplePackedFloatRange(entry->unk2C[1]) * 0.41887906f;
+                effect->unk19C[4] = Rumble_SamplePackedFloatRange(entry->unk2C[0]);
+                effect->unk19C[1] = Rumble_SamplePackedFloatRange(entry->unk2C[5]) * D_800C4E04_de;
+                effect->unk19C[3] = Rumble_SamplePackedFloatRange(entry->unk2C[4]) * 0.41887906f;
+                effect->unk19C[5] = Rumble_SamplePackedFloatRange(entry->unk2C[3]);
                 if (entry->flags & 2) {
                     effect->unk144 = effect_spawn_random_count(life);
                 } else {
@@ -410,9 +410,9 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 effect->unk14E = 0;
                 effect->unk14F = -1;
                 if (aim == 0) {
-                    dir.x = func_80285630_de(entry->direction[0]);
-                    dir.y = func_80285630_de(entry->direction[1]);
-                    dir.z = func_80285630_de(entry->direction[2]);
+                    dir.x = Rumble_SamplePackedFloatRange(entry->direction[0]);
+                    dir.y = Rumble_SamplePackedFloatRange(entry->direction[1]);
+                    dir.z = Rumble_SamplePackedFloatRange(entry->direction[2]);
                     GraphU64_NormalizeVec3(&dir.x);
                     if (dir.x != 0.0f || dir.y != 0.0f || dir.z != 0.0f) {
                         GraphU64_TransformPoint(&mtx, &dir, &dirOut);
@@ -426,26 +426,26 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                         effect->direction = dirOut;
                     }
                 }
-                effect->unk150[0] = func_80285630_de(entry->unk24[0]);
-                effect->unk150[1] = func_80285630_de(entry->unk24[2]);
-                effect->unk150[2] = func_80285630_de(entry->unk24[4]);
-                effect->unk150[3] = func_80285630_de(entry->unk24[1]);
-                effect->unk150[4] = func_80285630_de(entry->unk24[3]);
-                effect->unk150[5] = func_80285630_de(entry->unk24[5]);
+                effect->unk150[0] = Rumble_SamplePackedFloatRange(entry->unk24[0]);
+                effect->unk150[1] = Rumble_SamplePackedFloatRange(entry->unk24[2]);
+                effect->unk150[2] = Rumble_SamplePackedFloatRange(entry->unk24[4]);
+                effect->unk150[3] = Rumble_SamplePackedFloatRange(entry->unk24[1]);
+                effect->unk150[4] = Rumble_SamplePackedFloatRange(entry->unk24[3]);
+                effect->unk150[5] = Rumble_SamplePackedFloatRange(entry->unk24[5]);
                 if (entry->unk14 != 0) {
-                    effect->unk180[0] = func_80285630_de(entry->unk20[0]);
-                    effect->unk180[1] = func_80285630_de(entry->unk20[2]);
-                    effect->unk180[2] = func_80285630_de(entry->unk20[4]);
-                    effect->unk180[3] = func_80285630_de(entry->unk20[1]);
-                    effect->unk180[4] = func_80285630_de(entry->unk20[3]);
-                    effect->unk180[5] = func_80285630_de(entry->unk20[5]);
+                    effect->unk180[0] = Rumble_SamplePackedFloatRange(entry->unk20[0]);
+                    effect->unk180[1] = Rumble_SamplePackedFloatRange(entry->unk20[2]);
+                    effect->unk180[2] = Rumble_SamplePackedFloatRange(entry->unk20[4]);
+                    effect->unk180[3] = Rumble_SamplePackedFloatRange(entry->unk20[1]);
+                    effect->unk180[4] = Rumble_SamplePackedFloatRange(entry->unk20[3]);
+                    effect->unk180[5] = Rumble_SamplePackedFloatRange(entry->unk20[5]);
                 } else {
-                    effect->unk180[0] = func_80285630_de(entry->unk20[0]);
-                    effect->unk180[1] = func_80285630_de(entry->unk20[2]);
-                    effect->unk180[2] = func_80285630_de(entry->unk20[4]);
-                    effect->unk180[3] = func_80285630_de(entry->unk20[1]);
-                    effect->unk180[4] = func_80285630_de(entry->unk20[3]);
-                    effect->unk180[5] = func_80285630_de(entry->unk20[5]);
+                    effect->unk180[0] = Rumble_SamplePackedFloatRange(entry->unk20[0]);
+                    effect->unk180[1] = Rumble_SamplePackedFloatRange(entry->unk20[2]);
+                    effect->unk180[2] = Rumble_SamplePackedFloatRange(entry->unk20[4]);
+                    effect->unk180[3] = Rumble_SamplePackedFloatRange(entry->unk20[1]);
+                    effect->unk180[4] = Rumble_SamplePackedFloatRange(entry->unk20[3]);
+                    effect->unk180[5] = Rumble_SamplePackedFloatRange(entry->unk20[5]);
                 }
                 if ((entry->flags & 0x80000) && entry->unk8 == 1) {
                     effect->unk1D8 = 0;
@@ -456,9 +456,9 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 }
                 effect->unk14 = 0;
                 effect->pos = pos;
-                offset.x = func_80285630_de(entry->offset[0]);
-                offset.y = func_80285630_de(entry->offset[1]);
-                offset.z = func_80285630_de(entry->offset[2]);
+                offset.x = Rumble_SamplePackedFloatRange(entry->offset[0]);
+                offset.y = Rumble_SamplePackedFloatRange(entry->offset[1]);
+                offset.z = Rumble_SamplePackedFloatRange(entry->offset[2]);
                 if (offset.x != 0.0f || offset.y != 0.0f || offset.z != 0.0f) {
                     GraphU64_TransformPoint(&mtx, &offset, &offsetOut);
                     if (!(entry->flags & 0x8000)) {
@@ -474,9 +474,9 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                         effect->direction = D_801002E0;
                         GraphU64_NormalizeVec3(&effect->direction.x);
                     } else {
-                        dir.x = func_80285630_de(entry->direction[0]);
-                        dir.y = func_80285630_de(entry->direction[1]);
-                        dir.z = func_80285630_de(entry->direction[2]);
+                        dir.x = Rumble_SamplePackedFloatRange(entry->direction[0]);
+                        dir.y = Rumble_SamplePackedFloatRange(entry->direction[1]);
+                        dir.z = Rumble_SamplePackedFloatRange(entry->direction[2]);
                         GraphU64_NormalizeVec3(&dir.x);
                         if (dir.x != 0.0f || dir.y != 0.0f || dir.z != 0.0f) {
                             GraphU64_TransformPoint(&mtx, &dir, &dirOut);
@@ -488,7 +488,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 }
                 effect->unk168 = effect->pos;
                 effect->startPosition = effect->pos;
-                GraphU64_ScaleVector(&effect->velocity, &dirOut, func_80285630_de(entry->motion->speed));
+                GraphU64_ScaleVector(&effect->velocity, &dirOut, Rumble_SamplePackedFloatRange(entry->motion->speed));
                 if (entry->flags & 0x20) {
                     GraphU64_AddVec3(&effect->velocity, &effect->velocity, &arg6);
                 }
@@ -521,7 +521,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 render->unk5 = entry->unkA;
                 render->unk4 = entry->unk9;
                 render->unk6 = entry->unkB;
-                render->unk8 = func_80285630_de(entry->motion->unk0);
+                render->unk8 = Rumble_SamplePackedFloatRange(entry->motion->unk0);
 #if defined(VERSION_EU)
                 render->unkC = func_802AD520_eu(entry->motion->unk8);
                 render->unk10 = func_802AD520_eu(entry->motion->unkA);

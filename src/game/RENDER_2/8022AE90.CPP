@@ -57,5 +57,5 @@ void func_8022B00C_de(void *player) {
 
 void func_8022B040_de(void *player, s32 transitionParameter) {
     (((struct IntegerState16D4 *) ((s8 *) player))->unk_16D0) = transitionParameter;
-    Weapons_SetPlayerState(player, player, 0x10);
+    Player_SetPlayerState(player, player, 0x10);
 }

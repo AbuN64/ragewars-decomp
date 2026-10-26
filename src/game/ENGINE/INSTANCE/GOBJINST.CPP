@@ -117,7 +117,7 @@ extern s32 D_800C3864_de[];
 
 
 
-extern s32 func_802654E8_de(void *, s32, s32);
+extern s32 Defs_FindSortedValue(void *, s32, s32);
 
 extern void func_8027985C_de(WeightedTable *);
 
@@ -285,7 +285,7 @@ s32 func_80246A08_de(LevelActor *owner, s32 animationKind, s32 excludedEntry) {
     data = SetN64_GetPackSection(*resource, 1);
     entries = &((struct func_80254D70_S2 *)(data))->unk8;
     total = ((struct func_80203E78_S1 *)(data))->unk4;
-    count = func_802654E8_de(entries, ((struct Access_s8_E6 *)(owner))->field, animationKind);
+    count = Defs_FindSortedValue(entries, ((struct Access_s8_E6 *)(owner))->field, animationKind);
     if (count != -1) {
         original = count;
         while (count > 0) {

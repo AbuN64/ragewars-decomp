@@ -30,8 +30,8 @@ extern void func_8043C210_de(void *, s32, s32, s32, s32);
 extern void func_8043C278_de(void *);
 extern void func_80438A88_de();
 extern void func_80425D14_de(s32);
-extern s32 func_80265650_de(u8 *, s32);
-extern void func_80265688_de(u8 *, s32, s32);
+extern s32 Defs_TestBit(u8 *, s32);
+extern void Defs_SetBitValue(u8 *, s32, s32);
 extern s32 func_80425014_de(s32);
 extern void func_804259E0_de(s32);
 extern s32 func_80425674_de(s32);
@@ -89,7 +89,7 @@ s32 func_80437C30_us_rev1(MenuWidget *menu) {
             D_800E5830->rows[0].unk0 = -1;
             if (D_800E4680->recorded != 0) {
                 slot = D_80102B00[D_800E5830->player].slot;
-                if (func_80265650_de(D_80102B00[D_800E5830->player].slotLevels[slot], D_8015402C) == 1) {
+                if (Defs_TestBit(D_80102B00[D_800E5830->player].slotLevels[slot], D_8015402C) == 1) {
                     item = func_8040EC30_de(D_800E5830->window, 0x27E + PREVIEW_ID_SHIFT);
                     Frontend_SetWidgetFlag08(item, 1);
                     item->alpha = 0xAF;
@@ -118,19 +118,19 @@ done:
                 achievement = -1;
                 break;
             }
-            if (achievement != -1 && func_80265650_de(D_80102B00[D_800E5830->player].achievementFlags, achievement) == 0) {
-                func_80265688_de(D_80102B00[D_800E5830->player].achievementFlags, achievement, 1);
+            if (achievement != -1 && Defs_TestBit(D_80102B00[D_800E5830->player].achievementFlags, achievement) == 0) {
+                Defs_SetBitValue(D_80102B00[D_800E5830->player].achievementFlags, achievement, 1);
                 D_800E5830->badge = achievement;
                 func_804259E0_de(D_800E5830->player);
             }
             if (D_80102B00[D_800E5830->player].count >= 18) {
-                func_80265688_de(&D_80102B00[D_800E5830->player].groupFlags, 1, 1);
+                Defs_SetBitValue(&D_80102B00[D_800E5830->player].groupFlags, 1, 1);
             }
             if (D_80102B00[D_800E5830->player].count >= 36) {
-                func_80265688_de(&D_80102B00[D_800E5830->player].groupFlags, 2, 1);
+                Defs_SetBitValue(&D_80102B00[D_800E5830->player].groupFlags, 2, 1);
             }
             if (D_8015402C >= 0x23) {
-                func_80265688_de(D_80102B00[D_800E5830->player].kindFlags, g_playerSettings[D_800E5830->player].kind, 1);
+                Defs_SetBitValue(D_80102B00[D_800E5830->player].kindFlags, g_playerSettings[D_800E5830->player].kind, 1);
                 XPlus_FillMemory(D_80102B00[D_800E5830->player].levelFlags[0], 0, 5);
                 character = func_80425674_de(D_800E5830->player);
                 if (character >= 0) {

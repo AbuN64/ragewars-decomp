@@ -54,7 +54,7 @@ const unsigned int D_blob_713397d39e7015fa86e1[2] = {
 #endif
 
 extern f32 D_800C4030_de;
-extern s32 func_802654E8_de(s32, s32, s32);
+extern s32 Defs_FindSortedValue(s32, s32, s32);
 extern f32 func_802B2350(s32);
 extern f32 func_802AD520_eu(s32);
 extern f32 D_800C401C_de;
@@ -65,7 +65,7 @@ void *func_8025DB80_de(Track *state, s32 index) {
     void *result;
     Resource *command;
     f32 duration;
-    selection = func_802654E8_de(state->unk0->unk2B60, state->unk0->unk2B64, index);
+    selection = Defs_FindSortedValue(state->unk0->unk2B60, state->unk0->unk2B64, index);
     if (selection != -1) {
         selection *= 2;
         result = SetN64_GetPackSection(state->unk0->unk2B50, selection | 1);

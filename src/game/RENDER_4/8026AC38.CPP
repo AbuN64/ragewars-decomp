@@ -42,7 +42,7 @@ extern void func_80270700_de(f32 *matrix, void *model);
 
 extern void func_802732D0_de(f32 *matrix, CVector3 *position);
 
-extern char *Weapons_GetFirstPlayer(void *players);
+extern char *Player_GetFirstPlayer(void *players);
 
 extern void GraphU64_SubtractVectors(CVector3 *out, void *a, CVector3 *b);
 
@@ -189,7 +189,7 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
                     dstEntry->offsets[0] = block;
                     copySource2 = SetN64_GetPackSection(srcEntry, 0);
                     dstData = SetN64_GetPackSection(dstEntry, 0);
-                    func_80285570_de(dstData, copySource2);
+                    Rumble_ExpandMeshMaterial(dstData, copySource2);
                     block += materialBytes;
                     dstEntry->offsets[1] = block;
                     input = SetN64_GetPackSection(srcEntry, 1);
@@ -308,7 +308,7 @@ s32 Geometry_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *mat
     if (D_80110620 != 0 && (material->flagWord & 0x8000)) {
         func_80270700_de((f32 *)matrix, model);
         func_802732D0_de((f32 *)matrix, &position);
-        GraphU64_SubtractVectors(&direction, Weapons_GetFirstPlayer(&D_80145040) + 0x6E8, &position);
+        GraphU64_SubtractVectors(&direction, Player_GetFirstPlayer(&D_80145040) + 0x6E8, &position);
         GraphU64_NormalizeVec3(&direction);
         {
             Gfx *cmd;

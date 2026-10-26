@@ -24,7 +24,7 @@
 
 extern void Geometry_SetModePreset(s32);
 
-extern void func_802852C0_de(char *, u32, u32, void *, void *);
+extern void PpDecom_QuickSortRecords(char *, u32, u32, void *, void *);
 
 extern void func_8023A4E0_de(ObjectRecAt220 *, ClipView *);
 
@@ -79,8 +79,8 @@ void func_8023B3F8_de(Scene *scene, ClipView *view) {
             far[farCount++] = object;
         }
     }
-    func_802852C0_de((char *)near, nearCount, 4, D_0023B94C, D_0023B938);
-    func_802852C0_de((char *)far, farCount, 4, D_0023B978_de, D_0023B938);
+    PpDecom_QuickSortRecords((char *)near, nearCount, 4, D_0023B94C, D_0023B938);
+    PpDecom_QuickSortRecords((char *)far, farCount, 4, D_0023B978_de, D_0023B938);
     for (i = 0; i < nearCount; i++) {
         func_8023A4E0_de(near[i], view);
     }

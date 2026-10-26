@@ -14,7 +14,7 @@ extern Shared_MenuWidgetState *D_800E5780;
 extern char D_80102B7E[];
 
 extern s32 func_8041A280_de(s32, s32);
-extern s32 func_80265650_de(char *, s32);
+extern s32 Defs_TestBit(char *, s32);
 extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 extern s32 func_80419E54_de(s32, s32);
 
@@ -25,7 +25,7 @@ s32 func_80437304_de(void *arg0) {
     D_800E5780->list = func_8041A280_de(0x136, 0x137);
     D_800E5780->unk14 = 0;
 
-    if (func_80265650_de(D_80102B7E, 0) == 0) {
+    if (Defs_TestBit(D_80102B7E, 0) == 0) {
         Frontend_SetWidgetFlag100(func_8040EC30_de(arg0, 0x13A), 1);
     }
 

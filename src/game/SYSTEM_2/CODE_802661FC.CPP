@@ -210,7 +210,7 @@ void Events_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 abso
     if (source->definition->kind == 1 || source->definition->kind == 11) {
         GraphU64_AddVec3(&source->velocity, &source->velocity, &impulse);
         if (applyTurn) {
-            angle = Weapons_GetSignedAngleToPoint((Actor_func_80214624_de *)source, target->position);
+            angle = Barrel_GetSignedAngleToPoint((Actor_func_80214624_de *)source, target->position);
             source->turn += angle * D_800C43DC_de;
         }
     }
@@ -226,12 +226,12 @@ extern f32 func_8024BEDC_de(void *);
 extern f32 GameObject_GetActorHeight(void *);
 extern s32 func_8024B06C_de(void *, CVector3, Shield *);
 extern f32 GraphU64_GetPointDistance(CVector3 *, CVector3 *);
-extern f32 func_802672D0_de(u8 *);
+extern f32 Events_GetActorSizeScale(u8 *);
 extern f32 Math_Sqrtf(f32);
-extern void Weapons_FillDamagePacket(CDamageInfo *, void *, s32, f32, s32, Shield *);
-extern s32 Weapons_GetMaxHealth(void *);
+extern void Barrel_FillDamagePacket(CDamageInfo *, void *, s32, f32, s32, Shield *);
+extern s32 Player_GetMaxHealth(void *);
 struct CallbackState114;
-extern void Weapons_RunDamageHook(void *, struct CallbackState114 *, CDamageInfo *);
+extern void Barrel_RunDamageHook(void *, struct CallbackState114 *, CDamageInfo *);
 extern s32 func_80282C8C_de(Shared_ReactionObjectKind *);
 extern s32 func_80282D38_de(Shared_ReactionObjectKind *);
 extern s32 func_80282DEC_de(Shared_ReactionObjectKind *);
@@ -245,20 +245,20 @@ static inline void storePlayerHealth(Shared_ReactionPlayer *player, s32 value) {
     storeActorHealth(&player->actor2E8, player->unk5E4);
 }
 static inline void buildDamage(CDamageInfo *event, Shared_ReactionActor *target, f32 damage, f32 radius, s32 flags, Shield **shield) {
-    Weapons_FillDamagePacket(event, target, (s32)damage, radius, flags, *shield);
+    Barrel_FillDamagePacket(event, target, (s32)damage, radius, flags, *shield);
 }
 static inline void reflectedProjectile(Shared_ReactionPlayer *player, Shared_ReactionActor *target, f32 damage, f32 radius, s32 flags, Shield **shield) {
     CDamageInfo event;
     CDamageInfo *p = &event;
     buildDamage(p, target, damage * 2.0f, radius, flags, shield);
-    if (damage * D_800C43E0_de[9] > 0.0f) Weapons_RunDamageHook(player, &player->unk170, p);
+    if (damage * D_800C43E0_de[9] > 0.0f) Barrel_RunDamageHook(player, &player->unk170, p);
 }
 static inline void reflectedActor(Shared_ReactionPlayer *player, Shared_ReactionActor *target, f32 damage, f32 radius, s32 flags, Shield **shield) {
     CDamageInfo event;
     CDamageInfo *p = &event;
     f32 value = damage * D_800C43E0_de[13];
     buildDamage(p, target, value, radius, flags, shield);
-    if (value > 0.0f) Weapons_RunDamageHook(player, &player->unk170, p);
+    if (value > 0.0f) Barrel_RunDamageHook(player, &player->unk170, p);
 }
 static inline s32 adjustHit(Shared_ReactionActor *target, CVector3 *position) {
     s32 adjusted;
@@ -289,7 +289,7 @@ static inline void hitImpulse(Shared_ReactionActor *source, Shared_ReactionActor
     f32 orientation[4][4];
     f32 radius, distance;
     radius = (f32)copied.radius * D_800C43E0_de[6];
-    radius *= func_802672D0_de(&target->category);
+    radius *= Events_GetActorSizeScale(&target->category);
     out->z = 0.0f;
     out->y = 0.0f;
     out->x = 0.0f;
@@ -374,7 +374,7 @@ have:
     return scale;
 }
 
-void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target, s32 kind, CVector3 position, Shared_DamageParameters params, s32 falloff, s32 knockback, s32 flags) {
+void Events_ApplyDamageEvent(Shared_ReactionActor *source, Shared_ReactionActor *target, s32 kind, CVector3 position, Shared_DamageParameters params, s32 falloff, s32 knockback, s32 flags) {
     s32 restored2;
     s32 restored;
     f32 damage;
@@ -409,7 +409,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
         if (!(damage <= 0.0f)) {
             hitImpulse(source, target, params, &impulse);
             event = &hit;
-            Weapons_FillDamagePacket(event, target, (s32)damage, radius, flags, shield);
+            Barrel_FillDamagePacket(event, target, (s32)damage, radius, flags, shield);
             category = target->category;
             if (category == 2) {
                 projectile = &target->objectKind;
@@ -420,7 +420,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
                         if (attacker != NULL) {
                             if (ownerPlayer->unk122C & 0x40) {
                                 restored = ownerPlayer->unk5E4 + (s32) (damage * D_800C43E0_de[8]);
-                                maximum = Weapons_GetMaxHealth(ownerPlayer);
+                                maximum = Player_GetMaxHealth(ownerPlayer);
                                 if (restored < maximum) {
                                     maximum = restored;
                                 }
@@ -434,7 +434,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
                                 }
                                 if ((attacker != NULL) && (attacker->unk122C & 0x1000) && (func_80282C8C_de(projectile) != 0)) {
                                     restored2 = attacker->unk5E4 + (s32) damage;
-                                    maximum2 = Weapons_GetMaxHealth(ownerPlayer);
+                                    maximum2 = Player_GetMaxHealth(ownerPlayer);
                                     if (restored2 < maximum2) {
                                         maximum2 = restored2;
                                     }
@@ -449,7 +449,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
                         }
                         if (ownerPlayer->unk122C & 0x200) {
                             damage *= D_800C43E0_de[11];
-                            Weapons_FillDamagePacket(&hit, target, (s32)damage, radius, flags, shield);
+                            Barrel_FillDamagePacket(&hit, target, (s32)damage, radius, flags, shield);
                         }
                     } else if (target->type == 0x427) {
                         carrier = NULL;
@@ -458,7 +458,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
                         }
                         if ((carrier != NULL) && (carrier->unk122C & 0x200)) {
                             damage *= D_800C43E0_de[11];
-                            Weapons_FillDamagePacket(event, target, (s32)damage, radius, flags, shield);
+                            Barrel_FillDamagePacket(event, target, (s32)damage, radius, flags, shield);
                         }
                     }
                     if (attacker != NULL) {
@@ -476,7 +476,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
                     if (attacker != NULL) {
                         if (victim->unk122C & 0x40) {
                             restored3 = victim->unk5E4 + (s32) (damage * D_800C43E0_de[12]);
-                            maximum3 = Weapons_GetMaxHealth(victim);
+                            maximum3 = Player_GetMaxHealth(victim);
                             if (restored3 < maximum3) {
                                 maximum3 = restored3;
                             }
@@ -496,7 +496,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
                     }
                     if (victim->unk122C & 0x200) {
                         damage *= D_800C43E0_de[15];
-                        Weapons_FillDamagePacket(&hit, target, (s32)damage, radius, flags, shield);
+                        Barrel_FillDamagePacket(&hit, target, (s32)damage, radius, flags, shield);
                     }
                 }
                 if ((attacker != NULL) && (attacker->unk122C & 0x400)) {
@@ -507,7 +507,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
                 }
             }
             if (damage != 0.0f) {
-                Weapons_RunDamageHook(source, &source->unk170, &hit);
+                Barrel_RunDamageHook(source, &source->unk170, &hit);
                 Events_ApplyDamageReaction(source, target, adjusted, position, impulse, knockback, shield, flags);
             }
         }
@@ -530,19 +530,19 @@ extern f32 GameObject_GetActorHeight(void *arg0);
 
 
 extern CallbackEntryRecAt4V1 D_800CC130[];
-void func_80267198_de(void *arg0, void *arg1, s32 arg2, CVector3 arg3, ResourceManagerState arg6) {
+void Events_DispatchCallback(void *arg0, void *arg1, s32 arg2, CVector3 arg3, ResourceManagerState arg6) {
     if (D_800CC130[arg2].callback != 0) {
         D_800CC130[arg2].callback(arg0, arg1, arg2, arg3, arg6);
     }
 }
 
-void func_802671FC_de(void *arg0, void *arg1, s32 arg2, CVector3 arg3, ResourceManagerState arg6) {
+void Events_ForwardCallback(void *arg0, void *arg1, s32 arg2, CVector3 arg3, ResourceManagerState arg6) {
     if (D_800CC130[arg2].callback != 0) {
         D_800CC130[arg2].callback(arg0, arg1, arg2, arg3, arg6);
     }
 }
 
-void func_80267260_de(void *actor, CVector3 input, s32 arg4) {
+void Events_UpdateNodeAtPosition(void *actor, CVector3 input, s32 arg4) {
     CVector3 output;
     s32 value;
 
@@ -554,7 +554,7 @@ void func_80267260_de(void *actor, CVector3 input, s32 arg4) {
     }
 }
 
-f32 func_802672D0_de(u8 *other) {
+f32 Events_GetActorSizeScale(u8 *other) {
     if (*other == 1) {
         return func_8024BEDC_de(other);
     } else {
@@ -562,7 +562,7 @@ f32 func_802672D0_de(u8 *other) {
     }
 }
 
-void func_8026730C_de(s32 arg0, ObjectRecAtD0 *arg1, s32 arg2, CVector3 arg3,
+void Events_PlayClipEvent(s32 arg0, ObjectRecAtD0 *arg1, s32 arg2, CVector3 arg3,
                    Clip arg6) {
     s32 *global = &D_8011FAC0.clockPaused;
     s32 selected;
@@ -598,16 +598,16 @@ void func_8026730C_de(s32 arg0, ObjectRecAtD0 *arg1, s32 arg2, CVector3 arg3,
     func_8025DEC0_de(arg6.frames, arg3, 0, selected, scale);
 }
 
-void func_802673EC_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3, s32 unused4, s32 unused5, s32 unused6) {
+void Events_StopClipEvent(s32 unused0, s32 unused1, s32 unused2, s32 arg3, s32 unused4, s32 unused5, s32 unused6) {
     s32 *p = &arg3;
     func_8025E11C_de(p[3]);
 }
 
-void func_8026740C_de(void *actor,int unused1,int unused2,Triple input,int event) {
- Weapons_SpawnActorEffect(actor,event,input,0);
+void Events_SpawnActorEffect(void *actor,int unused1,int unused2,Triple input,int event) {
+ Barrel_SpawnActorEffect(actor,event,input,0);
 }
 
-s32 func_80267444_de(void *levelActor, CVector3 *arg1) {
+s32 Events_AdjustWeaponHitPosition(void *levelActor, CVector3 *arg1) {
     CVector3 first;
     CVector3 second;
     LevelActor *object = levelActor;
@@ -633,7 +633,7 @@ s32 func_80267444_de(void *levelActor, CVector3 *arg1) {
     return result;
 }
 
-s32 func_80267528_de(char *actor, char *target)
+s32 Events_CanAffectActor(char *actor, char *target)
 {
     LevelActor *source = (LevelActor *)actor;
     LevelActor *destination = (LevelActor *)target;
@@ -676,7 +676,7 @@ void func_802675C8_de(struct Player *actor, u8 *other, PushStrength strength, Pu
     f32 radius;
     f32 distance;
     radius = (f32)strength.value * D_800C4434_de;
-    radius *= func_802672D0_de(other);
+    radius *= Events_GetActorSizeScale(other);
     out->x = out->y = out->z = 0.0f;
 #ifdef VERSION_DE
     if (*(s32 *)((u8 *)actor + 0x174) != 0 && *other == 2) {

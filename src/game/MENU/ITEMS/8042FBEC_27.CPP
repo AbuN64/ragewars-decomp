@@ -9,13 +9,13 @@ extern u8 D_80145040[];
 extern char D_800E20AC[], D_8015235C_eu[];
 extern s32 D_800E20A4_de[], D_800E20A8[], D_800E63C0[];
 extern char *D_800E3B64[];
-extern s32 Weapons_GetPlayerIndex();
+extern s32 Player_GetPlayerIndex();
 /* Name-entry slot update: marks the slot's flag word (offsets 0x30/0x58/0x80/0xA8 of the record at 0xC, one per slot) with bits
    0x1800000 and clears them in the others, then copies the slot's 8-character name from D_8015235C_eu (150-byte records) into the
    24-byte slot entry at D_800E20AC, trimming trailing blanks (all blank when it equals the language's default name). */
 void func_80446920_eu(void *obj) {
     u8 *rec = *(u8 **)((u8 *)obj + 0xC);
-    s32 slot = Weapons_GetPlayerIndex(D_80145040, *(s32 *)((u8 *)obj + 0x1C));
+    s32 slot = Player_GetPlayerIndex(D_80145040, *(s32 *)((u8 *)obj + 0x1C));
     static const u8 flagOff[4] = { 0x30, 0x58, 0x80, 0xA8 };
     char *src, *dst, *def;
     s32 i, blanks, n, k;

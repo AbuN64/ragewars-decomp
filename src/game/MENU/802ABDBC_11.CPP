@@ -211,7 +211,7 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
-extern s32 Weapons_GetMaxHealth(void *arg0);
+extern s32 Player_GetMaxHealth(void *arg0);
 extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
@@ -228,7 +228,7 @@ s32 func_802ACC04_de(void *arg0, void *arg1) {
 
         ((struct Actor_func_802AB400_de *)(arg0))->count +=
             ((struct TimedItemEffect *)(arg1))->amount << 8;
-        limit = Weapons_GetMaxHealth(arg0);
+        limit = Player_GetMaxHealth(arg0);
         if (((struct Actor_func_802AB400_de *)(arg0))->count < limit) {
             limit = ((struct Actor_func_802AB400_de *)(arg0))->count;
         }

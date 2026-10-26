@@ -12,7 +12,7 @@ extern f32 Math_Sqrtf(f32);
 
 
 
-f32 Weapons_GetSignedAngleToPoint(void *actor, CVector3 point) {
+f32 Barrel_GetSignedAngleToPoint(void *actor, CVector3 point) {
     f32 dx;
     f32 dz;
     f32 dist;

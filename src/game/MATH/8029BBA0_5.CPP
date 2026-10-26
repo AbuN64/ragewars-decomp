@@ -22,7 +22,7 @@ static inline f64 round_down(f64 arg0) {
         return arg0;
     }
     if (arg0 < D_800C5B30_de) {
-        return -func_8029D9DC_de(-arg0);
+        return -XMath_CeilDouble(-arg0);
     }
     temp = arg0;
     temp += limit;
@@ -65,7 +65,7 @@ extern f64 ScaleDoubleExponent(f64 value, s32 exponent);
 
 
 
-/* Returns the arccosine of a value clamped to [-1, 1] as pi/2 minus the arcsine, which is computed by the polynomial approximation pi/2 - sqrt(1 - x) * p(x) on the magnitude with the sign restored. Adapted from func_8029DE48_de with the constants moved to D_800CADB4 through D_800CADD4 and the final subtraction from pi/2 added. */
+/* Returns the arccosine of a value clamped to [-1, 1] as pi/2 minus the arcsine, which is computed by the polynomial approximation pi/2 - sqrt(1 - x) * p(x) on the magnitude with the sign restored. Adapted from XMath_EvaluateArcSine with the constants moved to D_800CADB4 through D_800CADD4 and the final subtraction from pi/2 added. */
 
 
 
@@ -75,10 +75,10 @@ extern f64 ScaleDoubleExponent(f64 value, s32 exponent);
 
 
 /** Perform the pair of adjacent no-op hooks at VRAM 0x8029E8A0. */
-void func_8029D8A0_de(void) {
+void XMath_InitializeMath(void) {
 }
 
-void func_8029D8A8_de(void) {
+void XMath_ShutdownMath(void) {
 }
 
 f32 func_8029D8B0_de(f32 arg0) {
@@ -121,7 +121,7 @@ f64 func_8029D964_de(f64 arg0) {
         return arg0;
     }
     if (arg0 < D_800C5B18_de) {
-        return -func_8029D9DC_de(-arg0);
+        return -XMath_CeilDouble(-arg0);
     }
     temp = arg0;
     temp += limit;
@@ -134,7 +134,7 @@ f64 func_8029D964_de(f64 arg0) {
     return integral;
 }
 
-f64 func_8029D9DC_de(f64 arg0) {
+f64 XMath_CeilDouble(f64 arg0) {
     f64 temp;
     f64 integral;
     f64 limit;
@@ -157,7 +157,7 @@ f64 func_8029D9DC_de(f64 arg0) {
     return integral;
 }
 
-f64 func_8029DAA0_de(f64 arg0, f64 *whole) {
+f64 XMath_SplitDoubleFraction(f64 arg0, f64 *whole) {
     f64 temp;
     f64 integral;
     f64 limit;
@@ -167,7 +167,7 @@ f64 func_8029DAA0_de(f64 arg0, f64 *whole) {
         integral = arg0;
     } else {
         if (arg0 < D_800C5B50_de) {
-            integral = -func_8029D9DC_de(-arg0);
+            integral = -XMath_CeilDouble(-arg0);
         } else {
             temp = arg0;
             temp += limit;
@@ -190,7 +190,7 @@ f32 func_8029DB34_de(f32 arg0) {
     return -arg0;
 }
 
-s32 func_8029DB58_de(s32 fifth) {
+s32 XMath_AbsoluteInteger(s32 fifth) {
     if (fifth < 0) {
         if (fifth) {
             return -fifth;
@@ -254,13 +254,13 @@ normal:
     return u.d;
 }
 
-void func_8029DD18_de(f32 arg0) {
-    ((s32 (*)(f32))func_8029B9FC_de)(arg0 + D_800C5BD0_de);
+void XMath_EvaluateCosine(f32 arg0) {
+    ((s32 (*)(f32))XMath_EvaluateSine)(arg0 + D_800C5BD0_de);
 }
 
-f32 func_8029DD3C_de(f32 arg0) {
-    f32 r1 = func_8029B9FC_de(arg0);
-    f32 r2 = func_8029B9FC_de(arg0 + D_800C5BD4_de);
+f32 XMath_EvaluateTangent(f32 arg0) {
+    f32 r1 = XMath_EvaluateSine(arg0);
+    f32 r2 = XMath_EvaluateSine(arg0 + D_800C5BD4_de);
     return r1 / r2;
 }
 
@@ -283,7 +283,7 @@ f32 func_8029DD78_de(f32 arg0) {
     return result;
 }
 
-f32 func_8029DE48_de(f32 x) {
+f32 XMath_EvaluateArcSine(f32 x) {
     s32 negative;
     f32 poly;
     f32 root;

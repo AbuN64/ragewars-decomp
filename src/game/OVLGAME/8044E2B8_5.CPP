@@ -51,7 +51,7 @@ extern char D_80145040[];
 
 extern void Rumble_FreeAllPoolNodes(void *);
 struct Context;
-extern void Weapons_ResetPlayerControllers(struct Context *);
+extern void Player_ResetPlayerControllers(struct Context *);
 
 
 
@@ -61,7 +61,7 @@ void func_8044DD50_de(char *match) {
 
     Control_SetControllerMode(0);
     Rumble_FreeAllPoolNodes(D_8010EC90);
-    Weapons_ResetPlayerControllers(D_80145040);
+    Player_ResetPlayerControllers(D_80145040);
     state = &D_801462C8.counters;
     state->teams = 0;
     state->m_bFragTagOn = 0;

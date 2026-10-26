@@ -15,10 +15,10 @@ extern struct LocalizedInputState D_80145040;
 
 extern EntryRecAtCV2 D_800E63C0[];
 
-extern s32 Weapons_GetPlayerIndex(void *,s32);
+extern s32 Player_GetPlayerIndex(void *,s32);
 
 s32 func_80445AB4_de(ObjRecAt14V2 *arg0, MenuRules *arg1) {
- s32 value; s32 count; s32 index=Weapons_GetPlayerIndex(&D_80145040,arg1->locked);
+ s32 value; s32 count; s32 index=Player_GetPlayerIndex(&D_80145040,arg1->locked);
  D_800E63C0[index].timer=0;
  if(D_800E63C0[index].count == 8) return 0;
  {

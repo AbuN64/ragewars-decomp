@@ -46,12 +46,12 @@ block_7:
 }
 
 struct Context;
-s32 Weapons_ResetPlayerControllers(struct Context *);
+s32 Player_ResetPlayerControllers(struct Context *);
 s32 Rumble_FreeAllPoolNodes(s32 *);
 extern char D_80145040;
 void func_80294C50_de(void) {
     Rumble_FreeAllPoolNodes(&D_8010EC90);
-    Weapons_ResetPlayerControllers(&D_80145040);
+    Player_ResetPlayerControllers(&D_80145040);
 }
 
 #if defined(VERSION_EU_X)

@@ -142,7 +142,7 @@ void Player_EnterMovingSequenceState(void *player, void *body) {
 
     func_80225F44_de(player, body);
     if (a0->views5E8.view6C0_51.unk6C0 != 0.0f) {
-        Weapons_SetPlayerState(a0, a1, 0x25);
+        Player_SetPlayerState(a0, a1, 0x25);
     }
 }
 
@@ -158,7 +158,7 @@ void Player_EnterStoppedSequenceState(void *player, void *body) {
 
     func_80225F44_de(player, body);
     if (a0->views5E8.view6C0_51.unk6C0 == 0.0f) {
-        Weapons_SetPlayerState(a0, a1, 0x24);
+        Player_SetPlayerState(a0, a1, 0x24);
     }
 }
 

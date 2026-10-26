@@ -78,7 +78,7 @@ extern Shared_MenuData D_80145040;
 extern char *D_800E0D44[];
 extern char *D_800DCC68[];
 extern s32 Player_GetProfileAchievementFlag(Profile *, s32);
-extern s32 Weapons_GetPlayerIndex(Shared_MenuData *, PlayerRecAt1450V1 *);
+extern s32 Player_GetPlayerIndex(Shared_MenuData *, PlayerRecAt1450V1 *);
 extern void Sky_PostTargetedScreenMessage(Shared_MenuObject *, void *, char *, s32, f32);
 
 s32 Weapon_CheckProfileFirePermission(PlayerRecAt1450V1 *pThis) {
@@ -98,7 +98,7 @@ s32 Weapon_CheckProfileFirePermission(PlayerRecAt1450V1 *pThis) {
     if (result == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (pThis->hud != 0) {
-            s32 player = Weapons_GetPlayerIndex(&D_80145040, pThis);
+            s32 player = Player_GetPlayerIndex(&D_80145040, pThis);
             Sky_PostTargetedScreenMessage(&D_80145040.object, pThis->hud,
 
 #if defined(VERSION_EU_X)
@@ -117,6 +117,6 @@ s32 Weapon_CheckProfileFirePermission(PlayerRecAt1450V1 *pThis) {
 
 void Weapon_ApplySwitchAndRequestIdle(void *arg0, void *arg1) {
     Weapon_ApplyWeaponSwitch(arg0, arg1);
-    Weapons_RequestActorState(arg0, arg1, 0);
+    Nav_RequestActorState(arg0, arg1, 0);
 }
 #endif

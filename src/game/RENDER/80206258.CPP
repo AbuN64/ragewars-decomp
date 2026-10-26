@@ -99,7 +99,7 @@ void func_802062E0_de(LevelActor *actor, ActorMotionState *owner, Params params,
     if (node != 0) {
         node->state = 0;
         owner->unk128 -= 1;
-        Weapons_SpawnActorEffect(node, 0x11D, node->position, 0);
+        Barrel_SpawnActorEffect(node, 0x11D, node->position, 0);
     }
 }
 
@@ -171,7 +171,7 @@ void func_80206604_de(LevelActor *actor, ActorMotionState *motionState) {
 
 void func_802066A4_de(LevelActor *actor, Dest *deviceState) {
     deviceState->field124 = ((ActorHealthDefinition *)actor->definition)->health;
-    Weapons_RequestActorState(actor, deviceState, 0);
+    Nav_RequestActorState(actor, deviceState, 0);
     deviceState->charge = D_800C1AE0_de;
     deviceState->field12C = D_800C1AE0_de;
     if (Rumble_TestActorStateBit(&g_world, actor) == 1) {

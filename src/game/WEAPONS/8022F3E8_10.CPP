@@ -66,7 +66,7 @@ static inline s32 released(void *actor, Player *player) {
     if (player->locked != 0) {
         return 1;
     }
-    return Weapons_HasAmmoForMode(player, player->selectedAction) == 0;
+    return Player_HasAmmoForMode(player, player->selectedAction) == 0;
 }
 
 void Weapon_UpdateSpinAndRepeatCue(Shared_Actor *actor, WeaponFireState *attack) {
@@ -82,7 +82,7 @@ void Weapon_UpdateSpinAndRepeatCue(Shared_Actor *actor, WeaponFireState *attack)
         position = &player->pos;
     }
     if (released(actor, player)) {
-        Weapons_RequestActorState(actor, attack, 2);
+        Nav_RequestActorState(actor, attack, 2);
         func_8022AF40_de(player);
         func_8022B00C_de(player);
         SoundElement_PlaySoundAtPosition(0x978, *position, (s32)position, -1);
@@ -186,7 +186,7 @@ static inline s32 can_fire(Player *player) {
     if (ammo == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (player->camera != 0) {
-            Sky_PostTargetedScreenMessage(&D_80145088, player->camera, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Weapons_GetPlayerIndex(&D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, player->camera, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Player_GetPlayerIndex(&D_80145040, player),
                           1.0f);
         }
     }
@@ -198,12 +198,12 @@ void Weapon_UpdateAnimatedFiringMode(Shared_Actor *actor, WeaponFireState *fireS
     s32 single;
     player = actor->entity;
     action = D_800CE8DC[player->pose].action;
-    if (Weapons_HasAmmoForMode(player, player->selectedAction) == 0) {
+    if (Player_HasAmmoForMode(player, player->selectedAction) == 0) {
         if (fireState->mode != 2) {
             goto idle;
         }
         fireState->mode = 1;
-        if (Weapons_HasAmmoForMode(player, player->selectedAction) == 0) {
+        if (Player_HasAmmoForMode(player, player->selectedAction) == 0) {
         idle:
             player->weapon = Weapon_FindNextUsableWeapon(player);
             return;
@@ -213,11 +213,11 @@ void Weapon_UpdateAnimatedFiringMode(Shared_Actor *actor, WeaponFireState *fireS
         single = 1;
         if (fireState->mode == single) {
             fireState->mode = 2;
-            if (Weapons_HasAmmoForMode(player, player->selectedAction) == 0) {
+            if (Player_HasAmmoForMode(player, player->selectedAction) == 0) {
                 SoundElement_PlayFlatSound(0xD4D);
                 if (player->camera != 0) {
                     Sky_PostTargetedScreenMessage(&D_80145040.object, player->camera, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80145040.object.language),
-                                  Weapons_GetPlayerIndex(&D_80145040, player), 1.0f);
+                                  Player_GetPlayerIndex(&D_80145040, player), 1.0f);
                 }
                 fireState->mode = single;
                 goto spin;
@@ -245,6 +245,6 @@ spin:
     }
     player->fireFrame = (player->fireFrame + (s32)player->fireSpin) % 8;
     if (func_802301F4_de(actor, fireState) == 0 && !(actor->weaponFlags & 0x400)) {
-        Weapons_RequestActorState(actor, fireState, action);
+        Nav_RequestActorState(actor, fireState, action);
     }
 }

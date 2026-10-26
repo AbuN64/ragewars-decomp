@@ -19,7 +19,7 @@ s32 func_80444D50_de(void *first, void *second) {
     return 0;
 }
 
-extern void func_802658E4_de(char *buffer, const char *format, s32 value);
+extern void Defs_FormatIntegerValue(char *buffer, const char *format, s32 value);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -38,7 +38,7 @@ s32 func_80444D9C_de(LayeredText *item) {
         item->text = D_800E22F4;
         text = item->text[game->language];
         length = Pak_CountLineChars(item);
-        func_802658E4_de((char *)text + (length - 4), D_800DE758_de, code);
+        Defs_FormatIntegerValue((char *)text + (length - 4), D_800DE758_de, code);
     }
     return 0;
 }
@@ -77,7 +77,7 @@ s32 func_80444D9C_de(LayeredText *item) {
         text = *item->text;
 #endif
         length = Pak_CountLineChars(item);
-        func_802658E4_de((char *)text + (length - 4), D_800DE758_de, code);
+        Defs_FormatIntegerValue((char *)text + (length - 4), D_800DE758_de, code);
     }
     return 0;
 }

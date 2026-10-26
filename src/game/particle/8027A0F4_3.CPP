@@ -693,7 +693,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "addiu      $v0, $zero, -0x1\n"
         "beq        $v1, $v0, .Lauto_8027CEFC\n"
         "nop\n"
-        "jal        Weapons_GetImpactSlot\n"
+        "jal        Barrel_GetImpactSlot\n"
         "addu      $a0, $s6, $zero\n"
         "addu       $s3, $v0, $zero\n"
         "addiu      $v0, $zero, 0x9\n"
@@ -848,7 +848,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "j          .Lauto_8027CF08\n"
         "sw        $zero, 0x138($s2)\n"
         ".Lauto_8027CEFC:\n"
-        "jal        Weapons_GetImpactSlot\n"
+        "jal        Barrel_GetImpactSlot\n"
         "addu      $a0, $s6, $zero\n"
         "addu       $s3, $v0, $zero\n"
         ".Lauto_8027CF08:\n"
@@ -1250,7 +1250,7 @@ INCLUDE_ASM("span_1000", func_8027CC20_de);
 typedef struct ImpactContext { CVector3 position; char padC[0xE8 - 0xC]; CVector3 normal; } ImpactContext;
 extern ImpactContext D_801001F8;
 extern char D_801379C0, D_8013B1A8;
-extern s32 Weapons_GetImpactSlot(void *);
+extern s32 Barrel_GetImpactSlot(void *);
 extern void Particle_UpdateMatrix(void *);
 extern void Fx_DetachParticleSwooshes(void *, void *);
 extern void Particle_SpawnChildEffect(void *, s32, s32, s32);
@@ -1310,7 +1310,7 @@ void Particle_HitTarget(void *particle) {
     else mode=actor->particle.mode0;
     if (!actor->particle.inst.unk14) actor->particle.inst.unk14=0;
     if (D_801041F0.frame!=-1) {
-        action=Weapons_GetImpactSlot(source);
+        action=Barrel_GetImpactSlot(source);
         if (action!=9) {
             action=D_801041F0.mode;
             if (actor->particle.inst.type==13) action=4;
@@ -1342,7 +1342,7 @@ void Particle_HitTarget(void *particle) {
                 }
             }
         }
-    } else action=Weapons_GetImpactSlot(source);
+    } else action=Barrel_GetImpactSlot(source);
     if (action==5) { action=4; actor->particle.flags|=2; }
     if (Particle_HasSurfaceFlag(actor) && action<6 && action>=4) action=6;
     actions=definition->events;
@@ -1432,7 +1432,7 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
 
     target = D_801041F0.current;
     desc = particle->desc;
-    hit = Weapons_GetImpactSlot(target);
+    hit = Barrel_GetImpactSlot(target);
     if (hit == 5) {
         hit = 4;
         particle->flags |= 2;

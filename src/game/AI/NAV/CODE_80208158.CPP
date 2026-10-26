@@ -25,7 +25,7 @@ extern char D_801376F8[];
 
 
 extern void Nav_UpdateTargetPitch(Brain *);
-extern s32 Weapons_GetMaxHealth(SharedPlayer *);
+extern s32 Player_GetMaxHealth(SharedPlayer *);
 extern void func_802AA79C_de(char *, s32);
 extern void ContPad_ClearControllerInput(char *);
 extern void Nav_HandlePlayerTimeout(Brain *, SharedPlayer *);
@@ -63,7 +63,7 @@ void Nav_UpdateComputerPlayerStatus(Brain *brain) {
         } else if (kind == 13) {
             maximum = 300;
         } else {
-            maximum = Weapons_GetMaxHealth(brain->player) >> 8;
+            maximum = Player_GetMaxHealth(brain->player) >> 8;
         }
         meter = (f32)health / (f32)maximum * 100.0f;
         if (brain->player->views5D8.view5D8_1.record->unk80 == 14) {
@@ -90,7 +90,7 @@ void Nav_UpdateComputerPlayerStatus(Brain *brain) {
                 if (tutorial->m_nBastilleTimer == 0 && brain->player->views5E4.view5E4_2.health > 0) {
                     tutorial->m_nBastilleShield = 100;
                     tutorial->m_nBastilleTimer = -1;
-                    Weapons_SetPlayerState(brain->player, brain->player, 2);
+                    Player_SetPlayerState(brain->player, brain->player, 2);
                 }
             }
             if (brain->player->views5D8.view5D8_1.record->display == 1) {
@@ -379,7 +379,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
                 }
                 if ((jumping || falling) && controller->unk304) {
                     value = delta.y;
-                    Nav_SetPitchFromAngle(controller, func_8029C044_de(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
+                    Nav_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
                     player->forward = D_800C1BEC_de;
                 }
             }
@@ -389,7 +389,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
             facing.x = Math_Sinf(angle);
             facing.y = 0.0f;
             facing.z = Math_Cosf(angle);
-            angle = func_8029C044_de(controller->destination.z - position->z, controller->destination.x - position->x);
+            angle = XMath_EvaluateArcTangentTwo(controller->destination.z - position->z, controller->destination.x - position->x);
             desired.x = Math_Cosf(angle);
             desired.y = 0.0f;
             desired.z = Math_Sinf(angle);
@@ -401,7 +401,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
             tangent.x -= controller->destination.x;
             tangent.z -= controller->destination.z;
             navigationTurnLeft(&tangent);
-            value = func_8029C044_de(tangent.z, tangent.x);
+            value = XMath_EvaluateArcTangentTwo(tangent.z, tangent.x);
             tangent.x = Math_Cosf(value);
             tangent.z = Math_Sinf(value);
             projection = desired.x * tangent.x + desired.y * tangent.y + desired.z * tangent.z;
@@ -413,7 +413,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
         }
         if ((jumping || falling) && controller->unk304) {
             value = delta.y;
-            Nav_SetPitchFromAngle(controller, func_8029C044_de(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
+            Nav_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
             player->forward = D_800C1BF4_de;
         }
         if (controller->player->pose == 0xF) {
@@ -498,7 +498,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
                 }
                 if ((jumping || falling) && controller->unk304) {
                     value = delta.y;
-                    Nav_SetPitchFromAngle(controller, func_8029C044_de(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
+                    Nav_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
                     player->forward = D_800C1C10;
                 }
             }
@@ -517,7 +517,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
             tangent.x -= controller->destination.x;
             tangent.z -= controller->destination.z;
             navigationTurnLeft(&tangent);
-            value = func_8029C044_de(tangent.z, tangent.x);
+            value = XMath_EvaluateArcTangentTwo(tangent.z, tangent.x);
             tangent.x = Math_Cosf(value);
             tangent.z = Math_Sinf(value);
             projection = desired.x * tangent.x + desired.y * tangent.y + desired.z * tangent.z;
@@ -533,7 +533,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
         }
         if ((jumping || falling) && controller->unk304) {
             value = delta.y;
-            Nav_SetPitchFromAngle(controller, func_8029C044_de(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
+            Nav_SetPitchFromAngle(controller, XMath_EvaluateArcTangentTwo(value, Math_Sqrtf(delta.x * delta.x + delta.z * delta.z)), 1);
             player->forward = D_800C1C18;
         }
         if (controller->player->pose == 0xF) {

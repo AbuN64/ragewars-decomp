@@ -92,7 +92,7 @@ extern s32 func_8025477C_de(void);
 
 extern void func_8025476C_de(s32);
 
-extern s32 func_80265444_de(void *a, void *b, s32 size);
+extern s32 Defs_CompareMemory(void *a, void *b, s32 size);
 
 extern s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
                          u8 *company, u8 *code);
@@ -205,7 +205,7 @@ s32 Pak_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
         if (result != 0) {
             break;
         }
-        if (func_80404958_read(ch, file_no, buf, blocks) == 0 && func_80265444_de(buf, data, size) == 0) {
+        if (func_80404958_read(ch, file_no, buf, blocks) == 0 && Defs_CompareMemory(buf, data, size) == 0) {
             break;
         }
         if (Pak_DeleteNote(ch, file_no) != 0) {

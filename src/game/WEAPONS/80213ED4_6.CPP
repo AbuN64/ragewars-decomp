@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 
-/* The call sites in func_8026835C_de, Ghot_DispatchAttachmentEffects and func_8026740C_de
+/* The call sites in Events_SpawnFilteredActorEffect, Ghot_DispatchAttachmentEffects and Events_SpawnActorEffect
  * pass a fourth incoming slot; the callee never reads it. The signature here
  * is the one those callers and this definition agree on across the ROM. */
 
@@ -17,7 +17,7 @@ extern s32 func_8024BE80_de(CActor_t *actor);
 extern CQuatern func_8024F478_de(CActor_t *actor);
 #include "particle/8027A0F4_8.H"
 
-void Weapons_SpawnActorEffect(void *actor, s32 kind, Triple input, s32 unused0) {
+void Barrel_SpawnActorEffect(void *actor, s32 kind, Triple input, s32 unused0) {
     Triple copiedInput;
     CVector3 position;
     CQuatern rotation;

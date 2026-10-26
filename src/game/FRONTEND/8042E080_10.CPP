@@ -18,14 +18,14 @@
 #include "FRONTEND/8040B45C_33.H"
 
 /* Steps player arg2's menu state machine at 0x58 of its 0xB68-byte record in the block D_800E54A4 points to
-   on the event func_8041B810_de reports: each state accepts its events, moves to the next state (by the game
+   on the event SmpOverlay_GetSlotNodeId reports: each state accepts its events, moves to the next state (by the game
    mode at 0x54 where it matters), updates the player's name records, and refreshes the player through
    func_804322AC_de. Returns zero. */
 extern u8 D_80102B00[];
 extern u8 g_playerSettings[];
 
 extern void MarkMenuEventHandled(void);
-extern s32 func_8041B810_de(s32, s32);
+extern s32 SmpOverlay_GetSlotNodeId(s32, s32);
 extern void SmpOverlay_SetSlotValue(s32, s32, s32);
 extern void PAKInterface_RefreshPlayerPanel(s32);
 extern void func_80434D70_de(s32);
@@ -67,7 +67,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
     MarkMenuEventHandled();
     i = 0;
     p = arg2 & 0xFFFF;
-    event = func_8041B810_de(D_800E54A4->root, p);
+    event = SmpOverlay_GetSlotNodeId(D_800E54A4->root, p);
     switch (D_800E54A4->players[p].state) {
     case 1:
         switch (event) {

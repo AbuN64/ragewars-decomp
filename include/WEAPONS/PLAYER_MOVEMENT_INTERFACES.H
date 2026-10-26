@@ -5,10 +5,10 @@
 #include "COMMON/UNUSED.H"
 
 /* Published implementations use these concrete actor and tuning records. */
-void Weapons_EaseOwnerHeightEffect(struct Object *object);
+void Player_EaseOwnerHeightEffect(struct Object *object);
 void func_802233F0_de(SharedPlayer *player,
                      func_802165F8_S1 *body, SharedMovement *tuning);
-s32 Weapons_SetPlayerState(SharedPlayer *player, void *body, s32 state);
+s32 Player_SetPlayerState(SharedPlayer *player, void *body, s32 state);
 /* Turn-rate limits shared by player movement. */
 extern const f32 D_800C2A64_de;
 extern const f32 D_800C2A68_de;

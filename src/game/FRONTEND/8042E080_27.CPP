@@ -85,7 +85,7 @@ s32 func_80430118_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     playerState = D_800E54A4->players[player].state;
     switch (playerState) {
     case 12:
-        temp_s0 = func_8029DB58_de(arg4);
+        temp_s0 = XMath_AbsoluteInteger(arg4);
         if (temp_s0 < func_80299B4C_de()) {
             D_800E54A4->players[player].nameTimer = 0;
             D_800E54A4->players[player].namePhase = 2;
@@ -153,7 +153,7 @@ block_24:
 
 /* Handles Controller Pak menu confirmations and returns focus to an enabled widget for the active channel. */
 extern s32 func_80299B4C_de(void);
-extern s32 func_8029DB58_de(s32);
+extern s32 XMath_AbsoluteInteger(s32);
 extern void MarkMenuEventHandled(void);
 extern s32 Frontend_ListHasFlag100(void *);
 extern void SmpOverlay_ShowSlotNode(s32, s32, void *);
@@ -168,7 +168,7 @@ s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 ar
     player = arg2 & 0xFFFF;
     switch (D_800E54A4->players[player].state) {
     case 12:
-        if (func_8029DB58_de(arg4) < func_80299B4C_de()) {
+        if (XMath_AbsoluteInteger(arg4) < func_80299B4C_de()) {
             D_800E54A4->players[player].nameTimer = 0;
             D_800E54A4->players[player].namePhase = 2;
         }

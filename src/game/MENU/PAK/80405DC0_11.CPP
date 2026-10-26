@@ -217,7 +217,7 @@ s32 func_80407F6C_de(PakNoteTextEntry *entry, PakNotesMenu *menu) {
         *dst++ = c;
     }
     *dst += 2;
-    func_802658E4_de(dst, g_pakFormatInt3, size);
+    Defs_FormatIntegerValue(dst, g_pakFormatInt3, size);
     return 0;
 }
 
@@ -244,12 +244,12 @@ s32 func_80408118_de(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
         if (Pak_GetFreePages(ch, &freeSpace) == 0) {
             if (D_8014D4EC_de) need=Pak_BytesToPakPages(0x18); else need=space_required(D_8011FECC);
             text = ENTRY_TEXT(entry);
-            func_802658E4_de(digits.c, g_pakFormatInt3, freeSpace);
+            Defs_FormatIntegerValue(digits.c, g_pakFormatInt3, freeSpace);
             text += 14;
             *text++ = digits.c[0];
             *text++ = digits.c[1];
             *text = digits.c[2];
-            func_802658E4_de(digits.c, g_pakFormatInt3, need);
+            Defs_FormatIntegerValue(digits.c, g_pakFormatInt3, need);
             text += 15;
             *text++ = digits.c[0];
             *text = digits.c[1];
@@ -268,11 +268,11 @@ s32 func_80408118_de(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
         if (result == 0) {
             text += 14;
             format = g_pakFormatInt3;
-            func_802658E4_de(buffer->c, format, freeSpace);
+            Defs_FormatIntegerValue(buffer->c, format, freeSpace);
             *text++ = digits.c[0];
             *text++ = digits.c[1];
             *text = digits.c[2];
-            func_802658E4_de(buffer->c, format, need);
+            Defs_FormatIntegerValue(buffer->c, format, need);
             text += 15;
             *text++ = digits.c[0];
             *text = digits.c[1];

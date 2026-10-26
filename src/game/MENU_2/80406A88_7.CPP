@@ -2,7 +2,7 @@
 
 #if defined(VERSION_EU_X)
 #ifdef NON_MATCHING
-#define func_804235A8_eu func_804235E0_eu_x
+#define func_804235A8_eu Menu_UpdateLocalizedOptionsTransitions
 #include "COMMON/OBJRECAT4V6.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/S1_5.H"
@@ -130,6 +130,6 @@ block_11:
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_804235E0_eu_x);
+INCLUDE_ASM("ovl_80400000", Menu_UpdateLocalizedOptionsTransitions);
 #endif
 #endif

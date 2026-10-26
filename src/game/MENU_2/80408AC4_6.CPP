@@ -19,19 +19,19 @@ const unsigned int rodata_func_8043C688_de_800E21E8[35] = {
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 extern s32 D_auto_004360EC;
 
-s32 *func_8043C314_de(s32 arg0) {
+s32 *Menu_GetFixedEncodedResource(s32 arg0) {
     arg0 -= 1;
     return &D_auto_004360EC;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8043C314_de);
+INCLUDE_ASM("ovl_80400000", Menu_GetFixedEncodedResource);
 #endif
 #endif
 
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 /* Fuzzy draft: inline-asm carrier of the original instructions (no C written yet). */
-void func_8043C324_de(void) {
+void Menu_GetEncodedResourceById(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
@@ -178,7 +178,7 @@ void func_8043C324_de(void) {
     );
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8043C324_de);
+INCLUDE_ASM("ovl_80400000", Menu_GetEncodedResourceById);
 #endif
 #endif
 
@@ -251,7 +251,7 @@ static inline s32 firstUnlocked(void) {
     return -1;
 }
 
-void func_8043C54C_de(LevelSelectOwner *owner) {
+void Menu_SelectFirstUnlockedLevel(LevelSelectOwner *owner) {
     s32 level = firstUnlocked();
     D_80154034 = level;
     if (level != -1) {
@@ -264,7 +264,7 @@ void func_8043C54C_de(LevelSelectOwner *owner) {
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8043C54C_de);
+INCLUDE_ASM("ovl_80400000", Menu_SelectFirstUnlockedLevel);
 #endif
 #endif
 

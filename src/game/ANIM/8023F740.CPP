@@ -202,7 +202,7 @@ typedef struct HitSelf {
 extern LevelActor **D_80103FCC;
 #include "COMMON/SHARED_GAMESLOT.H"
 extern char D_002405FC[], D_00240638[];
-extern void func_802852C0_de();
+extern void PpDecom_QuickSortRecords();
 extern void func_8023F644_de(void *, void *);
 void InstCol_ProcessEntityContacts(HitSelf *self) {
     HitState *state = self->state;
@@ -265,7 +265,7 @@ void InstCol_ProcessEntityContacts(HitSelf *self) {
     if (count == 0) {
         return;
     }
-    func_802852C0_de(list, count, 8, D_00240638, D_002405FC);
+    PpDecom_QuickSortRecords(list, count, 8, D_00240638, D_002405FC);
     entry = list;
     for (contactIndex = 0; contactIndex < count; contactIndex++, entry++) {
         if (!(entry->distance < self->range)) {

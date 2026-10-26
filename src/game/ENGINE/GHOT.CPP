@@ -51,10 +51,10 @@ void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct Mat
                 switch (temp_v1) {                  /* irregular */
 #if !defined(VERSION_DE)
                 case 0x2:
-                    Weapons_SpawnActorEffect(actor, 0x51, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0x51, pos, temp_s0);
                     break;
                 case 0x8:
-                    Weapons_SpawnActorEffect(actor, 0x5C, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0x5C, pos, temp_s0);
                     break;
 #endif
                 case 0x1:
@@ -90,64 +90,64 @@ void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct Mat
                     }
                     break;
                 case 0x80:
-                    Weapons_SpawnActorEffect(actor, 0xAC, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xAC, pos, temp_s0);
                     break;
                 case 0x100:
-                    Weapons_SpawnActorEffect(actor, 0xAD, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xAD, pos, temp_s0);
                     break;
                 case 0x200:
-                    Weapons_SpawnActorEffect(actor, 0xAE, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xAE, pos, temp_s0);
                     break;
                 case 0x400:
-                    Weapons_SpawnActorEffect(actor, 0xAF, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xAF, pos, temp_s0);
                     break;
                 case 0x800:
-                    Weapons_SpawnActorEffect(actor, 0xB0, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB0, pos, temp_s0);
                     break;
                 case 0x1000:
-                    Weapons_SpawnActorEffect(actor, 0xB1, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB1, pos, temp_s0);
                     break;
                 case 0x2000:
-                    Weapons_SpawnActorEffect(actor, 0xB2, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB2, pos, temp_s0);
                     break;
                 case 0x4000:
-                    Weapons_SpawnActorEffect(actor, 0xB3, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB3, pos, temp_s0);
                     break;
                 case 0x8000:
-                    Weapons_SpawnActorEffect(actor, 0xB4, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB4, pos, temp_s0);
                     break;
                 case 0x10000:
-                    Weapons_SpawnActorEffect(actor, 0xB5, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB5, pos, temp_s0);
                     break;
                 case 0x20000:
-                    Weapons_SpawnActorEffect(actor, 0xB6, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB6, pos, temp_s0);
                     break;
                 case 0x40000:
-                    Weapons_SpawnActorEffect(actor, 0xB7, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB7, pos, temp_s0);
                     break;
                 case 0x80000:
-                    Weapons_SpawnActorEffect(actor, 0xB8, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB8, pos, temp_s0);
                     break;
                 case 0x100000:
-                    Weapons_SpawnActorEffect(actor, 0xB9, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB9, pos, temp_s0);
                     break;
                 case 0x200000:
-                    Weapons_SpawnActorEffect(actor, 0xBA, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xBA, pos, temp_s0);
                     break;
                 case 0x400000:
-                    Weapons_SpawnActorEffect(actor, 0xBB, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xBB, pos, temp_s0);
                     break;
                 case 0x20000000:
-                    Weapons_SpawnActorEffect(actor, 0x1E9, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0x1E9, pos, temp_s0);
                     break;
                 case 0x40000000:
-                    Weapons_SpawnActorEffect(actor, 0x1EA, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0x1EA, pos, temp_s0);
                     break;
                 case 0x80000000:
-                    Weapons_SpawnActorEffect(actor, 0x1EB, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0x1EB, pos, temp_s0);
                     break;
                 case 0x8000000:
-                    Weapons_SpawnActorEffect(actor, 0x11C, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0x11C, pos, temp_s0);
                     break;
                 case 0x10000000:
                     actor->unk260 = pos;

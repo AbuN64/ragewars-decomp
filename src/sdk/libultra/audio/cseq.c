@@ -223,22 +223,22 @@ int func_802AE7B0_de(void *arg0) {
     return sequence->lastTicks;
 }
 
-f32 func_802AE7BC_de(void **arg0, s32 arg1, s32 arg2) {
+f32 func_802AE7BC_de(void **sequenceHandle, s32 tickCount, s32 microsecondsPerQuarter) {
     f64 angle;
     f32 arg1f;
     f32 scaled;
-    s32 temp_v0;
+    s32 ticksPerQuarter;
     f64 val;
 
-    angle = (f64)arg2;
-    arg1f = (f32)arg1;
-    if (arg2 < 0) {
+    angle = (f64)microsecondsPerQuarter;
+    arg1f = (f32)tickCount;
+    if (microsecondsPerQuarter < 0) {
         angle += D_800C7310_de;
     }
-    temp_v0 = ((ObjRecAt40V1 *)((*arg0)))->unk40;
+    ticksPerQuarter = ((ObjRecAt40V1 *)((*sequenceHandle)))->unk40;
     scaled = arg1f * (f32)angle;
-    val = (f64)temp_v0;
-    if (temp_v0 < 0) {
+    val = (f64)ticksPerQuarter;
+    if (ticksPerQuarter < 0) {
         val += D_800C7318_de;
     }
     return scaled / ((f32)val * D_800C7320_de);
@@ -253,24 +253,24 @@ f32 func_802AE7BC_de(void **arg0, s32 arg1, s32 arg2) {
 
 
 
-u32 func_802AE824_de(void **arg0, f32 arg1, s32 arg2) {
+u32 func_802AE824_de(void **sequenceHandle, f32 seconds, s32 microsecondsPerQuarter) {
     f64 val;
     f64 div;
     f32 arg1f;
     f32 scaled;
     f32 value;
-    s32 temp_v0;
+    s32 ticksPerQuarter;
     s32 converted;
 
-    temp_v0 = ((ObjRecAt40V1 *)((*arg0)))->unk40;
-    arg1f = arg1;
-    val = (f64)temp_v0;
-    if (temp_v0 < 0) {
+    ticksPerQuarter = ((ObjRecAt40V1 *)((*sequenceHandle)))->unk40;
+    arg1f = seconds;
+    val = (f64)ticksPerQuarter;
+    if (ticksPerQuarter < 0) {
         val += D_800C7328_de;
     }
     scaled = arg1f * ((f32)val * D_800C7330_de);
-    div = (f64)arg2;
-    if (arg2 < 0) {
+    div = (f64)microsecondsPerQuarter;
+    if (microsecondsPerQuarter < 0) {
         div += D_800C7338_de;
     }
     value = scaled / (f32)div;
@@ -342,15 +342,15 @@ s32 func_802AE9B0_de(ValueSet *set, u32 *result) {
 
 u8 func_802AE500_de(ALCSeq_s *seq, u32 track);
 
-s32 __readVarLen(s32 arg0, s32 arg1) {
+s32 __readVarLen(s32 seq, s32 track) {
     s32 temp_v0;
     s32 var_s0;
 
-    var_s0 = (u8) func_802AE500_de(arg0, arg1);
+    var_s0 = (u8) func_802AE500_de(seq, track);
     if (var_s0 & 0x80) {
         var_s0 &= 0x7F;
         do {
-            temp_v0 = (u8) func_802AE500_de(arg0, arg1);
+            temp_v0 = (u8) func_802AE500_de(seq, track);
             var_s0 = (var_s0 << 7) + (temp_v0 & 0x7F);
         } while (temp_v0 & 0x80);
     }

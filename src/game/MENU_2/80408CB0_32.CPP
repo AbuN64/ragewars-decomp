@@ -30,7 +30,7 @@
 extern struct Screen_func_80426788_de *D_800E4690;
 extern struct Status g_playerSettings[];
 extern MenuWidget *func_8040EC30_de(void *, s32);
-void func_80265688_de(u8 *arg0, s32 arg1, s32 arg2);
+void Defs_SetBitValue(u8 *arg0, s32 arg1, s32 arg2);
 void func_80427F10_de(void);
 void func_8043C210_de(s32 *record, s32 first, s32 second, s32 third, s32 fourth);
 
@@ -70,11 +70,11 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *owner) {
     SmpOverlay_ShowSlotById(owner, 3, 0x13E);
     var_a1 = 0;
     do {
-        func_80265688_de((*(ResultsOptionsScreen **)&D_800E4690)->owned, var_a1, 0);
+        Defs_SetBitValue((*(ResultsOptionsScreen **)&D_800E4690)->owned, var_a1, 0);
         temp_a1 = i;
         i += 1;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        func_80265688_de(&(*((u8 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2681))), temp_a1, 0);
+        Defs_SetBitValue(&(*((u8 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2681))), temp_a1, 0);
         var_a1 = i;
     } while (i < 0x24);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */

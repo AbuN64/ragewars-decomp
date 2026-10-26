@@ -28,7 +28,7 @@ s16 Barrel_ReadLoopingSequenceValue(Cursor802171C8 *arg0) {
 
 /* Runs the hook with the arguments this function was called with: its callers pass the actor, its hook state
  * and the damage record, and the hook reads them from the same argument registers. */
-void Weapons_RunDamageHook(void *actor, struct CallbackState114 *callbackState, void *damage) {
+void Barrel_RunDamageHook(void *actor, struct CallbackState114 *callbackState, void *damage) {
     FuncPtr fn = callbackState->callback;
     if (fn != 0) {
         ((void (*)(void *, void *, void *))fn)(actor, callbackState, damage);
@@ -41,7 +41,7 @@ extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 /** Subtract obj->y from arg2 in-place via GraphU64_SubtractVectors, then return the squared length of (arg1, arg2', arg3). */
-f32 Weapons_GetEyeDistanceSquared(void *candidate, CVector3 v) {
+f32 Barrel_GetEyeDistanceSquared(void *candidate, CVector3 v) {
     f32 eyeDeltaY;
 
     GraphU64_SubtractVectors(&v, &v, &((ActorBarrelIsTargetInViewCone *)(candidate))->position);
@@ -51,7 +51,7 @@ f32 Weapons_GetEyeDistanceSquared(void *candidate, CVector3 v) {
 }
 
 /* Squared XZ distance to a point using the existing by-value vector ABI. */
-f32 Weapons_GetFlatDistanceSquared(LevelActor *actor, CVector3 point)
+f32 Barrel_GetFlatDistanceSquared(LevelActor *actor, CVector3 point)
 {
     f32 dx = point.x - actor->position0.x;
     f32 dz = point.z - actor->position0.z;
@@ -71,7 +71,7 @@ extern s32 func_8025CA24_de(void *, void *);
 
 
 
-void Weapons_SetLoopingSound(void *actor, void *stateController, s32 sixth) {
+void Barrel_SetLoopingSound(void *actor, void *stateController, s32 sixth) {
     CLoopingSoundData *node;
     void *fallback;
     s32 kind;

@@ -35,7 +35,7 @@ s32 Nav_ShouldSeekUnclaimedTeamMarker(void **controller) {
     if (((Shared_ActorView *)*controller)->controls->transientFlag != 0) {
         return 0;
     }
-    if (Weapons_FindPlayerWithMarker(base - 0x1860) != 0) {
+    if (Player_FindPlayerWithMarker(base - 0x1860) != 0) {
         return 0;
     }
     temp_f20 = Nav_GetScaledAggression(controller) * D_800C1E50_de + D_800C1E54_de;

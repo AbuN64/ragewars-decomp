@@ -18,7 +18,7 @@ extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 /* Runs a player's standing and walking state for its body: settles the weapon sway through
-   func_80223E34_de, turns the view through Weapons_UpdateViewAngles with the crouching tuning D_800CE7FC while the
+   func_80223E34_de, turns the view through Player_UpdateViewAngles with the crouching tuning D_800CE7FC while the
    crouch at 0x718 is past 5.12 or the standing tuning D_800CE7E4 otherwise, and unless a jump releases
    the player into mode 5 it hands strafing at 0x6A4 or lifting at 0x6A8 (outside zoom mode 2) to mode
    3; then, unless an unfinished pickup, reload or wave animation is playing, it picks the animation at
@@ -41,12 +41,12 @@ extern char D_800CED30;
 
 extern void func_80223E34_de(SharedPlayer *, Body_func_80224408_de *);
 
-extern void Weapons_UpdateViewAngles(SharedPlayer *, Body_func_80224408_de *, char *);
+extern void Player_UpdateViewAngles(SharedPlayer *, Body_func_80224408_de *, char *);
 
 static inline s32 try_jump(SharedPlayer *player, Body_func_80224408_de *body) {
     if (player->views5E8.view7E8_106.zoomed == 0 && !(11.25f < player->views5E8.view6E4_62.depth) && !(body->flags & 0xC0000)
         && (body->surface->unk14 & 2) && (player->views5E8.view6B0_47.input & 0x10) && player->views5E8.view11D8_149.stun <= 0.0f) {
-        Weapons_SetPlayerState(player, body, 5);
+        Player_SetPlayerState(player, body, 5);
         return 1;
     }
     return 0;
@@ -148,7 +148,7 @@ void func_8022409C_de(void *player, void *bodyActor) {
     if (((func_80224078_Arg0 *)player)->unk650 == 1 &&
         (((func_80224078_Arg0 *)player)->unk6AC & 0xE000) == 0xE000 &&
         (((func_80224078_Arg0 *)player)->unk6B0 & 0xE000)) {
-        Weapons_SetPlayerState(player, bodyActor, 2);
+        Player_SetPlayerState(player, bodyActor, 2);
         data = ((func_80224078_Arg0 *)player)->unk5DC;
         if (data != 0) {
             Camera_PostScreenMessage(&D_80145088, data, &s_flyModeOffText);
@@ -165,16 +165,16 @@ void func_80224408_de(SharedPlayer *player, Body_func_80224408_de *body) {
     heading = body->heading;
     crouching = 5.12f < player->views5E8.view718_70.crouch;
     if (crouching) {
-        Weapons_UpdateViewAngles(player, body, &D_800CE7FC);
+        Player_UpdateViewAngles(player, body, &D_800CE7FC);
     } else {
-        Weapons_UpdateViewAngles(player, body, &D_800CE7E4);
+        Player_UpdateViewAngles(player, body, &D_800CE7E4);
     }
     heading = body->heading - heading;
     if (try_jump(player, body)) {
         return;
     }
     if (player->views5E8.view6A4_42.strafe != 0.0f || (player->views5E8.view7E8_106.zoomed != 2 && player->views5E8.view6A8_44.lift != 0.0f)) {
-        Weapons_SetPlayerState(player, body, 3);
+        Player_SetPlayerState(player, body, 3);
     }
     animate = 1;
     if ((player->views5E8.view86C_127.animation == 0x1130 || player->views5E8.view86C_127.animation == 0x1135) && player->views1C.view10E_13.idle == 0) {

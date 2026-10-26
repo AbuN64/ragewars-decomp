@@ -70,7 +70,7 @@ s32 func_80414400_de(u8 *buf, f64 input, s32 ch, s32 width, s32 precision) {
     nf = ni;
     ne = ni;
     if (fixed) {
-        value = func_8029DAA0_de(value, &whole);
+        value = XMath_SplitDoubleFraction(value, &whole);
         if (value >= round || format != 'g') {
             value += round;
             if (value >= D_800DD130_de) {
@@ -82,7 +82,7 @@ s32 func_80414400_de(u8 *buf, f64 input, s32 ch, s32 width, s32 precision) {
             if (i < prec) {
                 fixed_ten = D_800DD138_de;
                 do {
-                    frac = func_8029DAA0_de(frac * fixed_ten, &digit);
+                    frac = XMath_SplitDoubleFraction(frac * fixed_ten, &digit);
                     nf++;
                     *fp++ = (s32)digit + '0';
                     i++;
@@ -114,7 +114,7 @@ s32 func_80414400_de(u8 *buf, f64 input, s32 ch, s32 width, s32 precision) {
                 round = D_800DD160_de;
                 fixed_ten = D_800DD168_de;
                 do {
-                    *--ip = (s32)((func_8029DAA0_de(whole * fixed_base, &whole) + round) * fixed_ten) + '0';
+                    *--ip = (s32)((XMath_SplitDoubleFraction(whole * fixed_base, &whole) + round) * fixed_ten) + '0';
                     ni++;
                 } while (whole > fixed_limit);
             }
@@ -170,7 +170,7 @@ s32 func_80414400_de(u8 *buf, f64 input, s32 ch, s32 width, s32 precision) {
                 e--;
             } else break;
         }
-        value = func_8029DAA0_de(value, &mantissa);
+        value = XMath_SplitDoubleFraction(value, &mantissa);
         if (format == 'g') {
             prec--;
             scale *= D_800DD198_de;
@@ -192,7 +192,7 @@ s32 func_80414400_de(u8 *buf, f64 input, s32 ch, s32 width, s32 precision) {
             if (i < prec) {
                 scale = D_800E11F0;
                 do {
-                    sci_frac = func_8029DAA0_de(sci_frac * scale, &mantissa_digit);
+                    sci_frac = XMath_SplitDoubleFraction(sci_frac * scale, &mantissa_digit);
                     nf++;
                     *fp++ = (s32)mantissa_digit + '0';
                     i++;

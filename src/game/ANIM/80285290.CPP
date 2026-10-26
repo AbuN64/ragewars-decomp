@@ -3,9 +3,9 @@
 #include "ANIM/80285290_2.H"
 #include "stddef.h"
 
-/* Sorts num elements of the given width with a comparator and a swap routine using an iterative quicksort: partitions around the middle element, pushes the larger side onto a 30-entry stack and continues with the smaller, and hands ranges of eight or fewer elements to func_802854B4_de. Written from the classic iterative quicksort structure. */
+/* Sorts num elements of the given width with a comparator and a swap routine using an iterative quicksort: partitions around the middle element, pushes the larger side onto a 30-entry stack and continues with the smaller, and hands ranges of eight or fewer elements to PpDecom_SelectionSortRange. Written from the classic iterative quicksort structure. */
 
-void func_802852C0_de(char *base, u32 num, u32 width, s32 (*compare)(char *, char *), void (*swap)(char *, char *)) {
+void PpDecom_QuickSortRecords(char *base, u32 num, u32 width, s32 (*compare)(char *, char *), void (*swap)(char *, char *)) {
     char *lo;
     char *hi;
     char *loguy;
@@ -24,7 +24,7 @@ void func_802852C0_de(char *base, u32 num, u32 width, s32 (*compare)(char *, cha
 recurse:
     size = (hi - lo) / width + 1;
     if (size <= 8) {
-        func_802854B4_de((u32)lo, (u32)hi, width, (s32 (*)(u32, u32))compare, (void (*)(u32, u32))swap);
+        PpDecom_SelectionSortRange((u32)lo, (u32)hi, width, (s32 (*)(u32, u32))compare, (void (*)(u32, u32))swap);
     } else {
         swap(lo + (size / 2) * width, lo);
         loguy = lo;
@@ -73,7 +73,7 @@ recurse:
 }
 
 /* Sorts fixed-stride records by selecting a maximum and swapping it to the end. */
-void func_802854B4_de(u32 arg0, u32 arg1, s32 width, s32 (*arg3)(u32, u32), void (*arg4)(u32, u32)) {
+void PpDecom_SelectionSortRange(u32 arg0, u32 arg1, s32 width, s32 (*arg3)(u32, u32), void (*arg4)(u32, u32)) {
     u32 var_a0;
     u32 var_s0;
     u32 var_s1;

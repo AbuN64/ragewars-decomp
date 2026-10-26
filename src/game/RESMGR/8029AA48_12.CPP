@@ -12,14 +12,14 @@ void *Cache_AllocateMemory(s32);
 
 
 
-void func_8029AA78_de(void) {
+void Smos_AllocateControllerContext(void) {
     Callback *callback;
     callback = Cache_AllocateMemory(0xC44);
     D_8014D0B0 = callback;
     XPlus_FillBytes(callback, 0, 0xC44);
 }
 
-void func_8029AAAC_de(void) {
+void Smos_FreeControllerContext(void) {
     Cache_FreeMemory(D_8014D0B0);
     D_8014D0B0 = 0;
 }

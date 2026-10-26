@@ -159,7 +159,7 @@ struct MenuRecAt108 {
 
 extern void Frontend_UpdateFocusCaption();
 
-extern void func_8041B968_de(struct Object6C *object, s32 value);
+extern void SmpOverlay_SetObjectValue(struct Object6C *object, s32 value);
 extern void Frontend_ShowUnlockedEntries(s32 style);
 
 extern void func_80439CD4_de(struct ObjectB8 *, s32);

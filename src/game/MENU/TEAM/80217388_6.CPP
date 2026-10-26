@@ -120,8 +120,8 @@ typedef struct DraftState17F4C {
 } DraftState17F4C;
 
 s32 func_8021846C_de(void *, void *);
-s16 Weapons_NextAvailableWeapon(void *);
-s32 func_80285974_de(s32, s32);
+s16 Weapon_NextAvailableWeapon(void *);
+s32 Rumble_SetEffectOwnerSlot(s32, s32);
 void TeamSelect_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *player, s32 arg2)
 {
     if ((u32)(player->type - 17) < 2) return;
@@ -131,15 +131,15 @@ void TeamSelect_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *playe
     state->mode = player->config->mode == 1;
     if (player->type == 14) {
         if (!player->enabled) return;
-        if (player->input->pressed & 0x8000) player->choice = Weapons_PickRandomArmedWeapon(player);
+        if (player->input->pressed & 0x8000) player->choice = Weapon_PickRandomArmedWeapon(player);
     } else if ((player->input->held & 0x8000) && player->config->mode) {
-        player->choice = Weapons_NextAvailableWeapon(player);
+        player->choice = Weapon_NextAvailableWeapon(player);
     } else if (player->config->mode != 1 || (player->selection != -1 && state->selection != 8)) {
         func_80217D74_de(&state->state, player, arg2);
     }
     if (player->choice != player->oldChoice) {
         if (player->effect) {
-            func_80285974_de((s32)player->effect, 0);
+            Rumble_SetEffectOwnerSlot((s32)player->effect, 0);
             player->effect = 0;
         }
         player->word11F0 = 0; player->word11F8 = -1;
@@ -178,7 +178,7 @@ struct TeamWeaponPlayer {
     s16 m_CurrentWeapon;
 };
 extern f32 D_800C2248_de, D_800C913C_de;
-extern s32 World_PlayerHasAmmoForWeapon(void *player, s32 weapon);
+extern s32 Player_PlayerHasAmmoForWeapon(void *player, s32 weapon);
 /* Fills the first eight weapons of the barrel: a slot shows the weapon the player put in it when m_DisplaySlot
    allows that slot (-1 every slot, 3, 7 or 4 only that slot, else that slot and the next), with its D_800D052C
    record, whether the player has ammo for it and a rotation of 45 degrees per slot, and m_Selected lands on the
@@ -215,7 +215,7 @@ void TeamSelect_InitWeaponChoices(CBarrel *barrel, s32 buttonAWheel, TeamWeaponP
                 barrel->m_WeaponList[choice].m_Weapon = weapon;
                 if (player->m_CurrentWeapon == weapon) barrel->m_Selected = choice;
                 barrel->m_WeaponList[choice].m_pInfo = D_800D052C[weapon];
-                if (World_PlayerHasAmmoForWeapon(player, weapon) != 0) barrel->m_WeaponList[choice].m_bEnabled = 1;
+                if (Player_PlayerHasAmmoForWeapon(player, weapon) != 0) barrel->m_WeaponList[choice].m_bEnabled = 1;
                 else barrel->m_WeaponList[choice].m_bEnabled = 0;
                 barrel->m_WeaponList[choice].m_Spin = 0.0f;
                 barrel->m_WeaponList[choice].m_Scale = D_800C913C_de;

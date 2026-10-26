@@ -22,7 +22,7 @@ extern char D_8011D8D0[];
 
 extern void Nav_RequestRandomArmedWeapon(BrainCode8020EAE0 *);
 
-extern s32 World_PlayerHasAmmoForWeapon(SharedPlayer *, s32);
+extern s32 Player_PlayerHasAmmoForWeapon(SharedPlayer *, s32);
 
 extern s32 func_80283228_de(char *, SharedPlayer *);
 
@@ -48,7 +48,7 @@ void Nav_SelectAvailableWeapon(BrainCode8020EAE0 *brain, s32 *ammo) {
     for (i = count; i < 8; i++) {
         weapon = brain->player->views18.view18_2.model->slots[i];
         weapon -= 0x4C3;
-        if (weapon < 0 || ammo[i] == 0 || World_PlayerHasAmmoForWeapon(brain->player, weapon) == 0) {
+        if (weapon < 0 || ammo[i] == 0 || Player_PlayerHasAmmoForWeapon(brain->player, weapon) == 0) {
             continue;
         }
         if ((u32)weapon >= 2) {

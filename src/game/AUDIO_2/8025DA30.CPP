@@ -19,7 +19,7 @@
 #include "stddef.h"
 #include "stddef.h"
 #include "RENDER_4/8028FD2C_6.H"
-extern s32 func_802654E8_de(s32, s32, s32);
+extern s32 Defs_FindSortedValue(s32, s32, s32);
 extern f32 func_802B2350(s32);
 extern f32 func_802AD520_eu(s32);
 extern f32 D_800C4008_de;
@@ -31,7 +31,7 @@ s32 Audio_LoadMusicSequence(Track *state, s32 index) {
     void *selected;
     Resource *command;
     f32 duration;
-    selection = func_802654E8_de(state->unk0->unk2B60, state->unk0->unk2B64, index);
+    selection = Defs_FindSortedValue(state->unk0->unk2B60, state->unk0->unk2B64, index);
     if (selection != -1) {
         selection *= 2;
         selected = SetN64_GetPackSection(state->unk0->unk2B50, selection | 1);

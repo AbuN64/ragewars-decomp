@@ -13,7 +13,7 @@ const unsigned int rodata_func_80421568_de_800E15E8[10] = {
 #endif
 
 #if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_80400000", func_80421568_de);
+INCLUDE_ASM("ovl_80400000", Menu_AdvanceTextRows);
 #endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
@@ -25,7 +25,7 @@ INCLUDE_ASM("ovl_80400000", func_80421568_de);
 #define ID_ROW0 952
 #define ID_CLOSE 939
 #endif
-void func_80421568_de(void) {
+void Menu_AdvanceTextRows(void) {
     MenuWidget *item;
     char *text;
     s32 line;

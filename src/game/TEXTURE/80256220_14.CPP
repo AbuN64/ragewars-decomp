@@ -186,7 +186,7 @@ extern void Audio_InitializeVoicePool(void *, void *);
 extern void Audio_InitializeDialogPlayer(void *, void *);
 extern s32 D_800CD8C0_de;
 extern s32 D_800CB724;
-s32 func_80265964_de(s32 arg0);
+s32 Defs_ReadResourceWord(s32 arg0);
 void *Virtual_AllocateVirtualRegion(s32 arg0, s32 arg1_unused, s32 arg2);
 static inline void LockEnter(MenuRules *lock) {
     u32 mask = __osDisableInt();
@@ -235,9 +235,9 @@ void func_80257360_de(ContextRecAt2BC0 *ctx) {
     config.heap = ctx->frames;
     timing.samples = 0x800;
     AudioMgr_InitializeAudioWorker(&config, D_800CD8C0_de, &timing);
-    D_801076A0 = func_80265964_de(8);
-    size = func_80265964_de(4) - func_80265964_de(0);
-    loaded = Virtual_AllocateVirtualRegion(size, 0, func_80265964_de(0));
+    D_801076A0 = Defs_ReadResourceWord(8);
+    size = Defs_ReadResourceWord(4) - Defs_ReadResourceWord(0);
+    loaded = Virtual_AllocateVirtualRegion(size, 0, Defs_ReadResourceWord(0));
     ctx->field1D6C = loaded->table;
     ctx->resource = loaded->bankFile;
     ctx->font = ctx->resource->bankArray[0];
@@ -290,7 +290,7 @@ void func_80257360_de(ContextRecAt2BC0 *ctx) {
 #include "COMMON/AUDIO_CONTEXT.H"
 #include "COMMON/EXTERNS_14.H"
 #include "TYPES.H"
-s32 func_80265964_de(s32 arg0);
+s32 Defs_ReadResourceWord(s32 arg0);
 void *Virtual_AllocateVirtualRegion(s32 arg0, s32 arg1_unused, s32 arg2);
 void func_8025768C_de(ContextRecAt2BC0 *ctx) {
     s32 total;
@@ -304,8 +304,8 @@ void func_8025768C_de(ContextRecAt2BC0 *ctx) {
     s32 *group;
     void *section;
 
-    total = func_80265964_de(0x14) - func_80265964_de(0x10);
-    ctx->soundData = Virtual_AllocateVirtualRegion(total, 0, func_80265964_de(0x10));
+    total = Defs_ReadResourceWord(0x14) - Defs_ReadResourceWord(0x10);
+    ctx->soundData = Virtual_AllocateVirtualRegion(total, 0, Defs_ReadResourceWord(0x10));
     section = SetN64_GetPackSection(ctx->soundData, 0);
     SetN64_GetPackSection(ctx->soundData, 1);
     tables = SetN64_GetPackSection(section, 0);

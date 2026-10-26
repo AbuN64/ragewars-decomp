@@ -60,7 +60,7 @@ s32 func_8022C6E4_de(void *player, void *bodyActor) {
         if (((Shared_ActorView *)player)->action == 0xE) {
             return 0;
         }
-        Weapons_SetPlayerState(player, bodyActor, 0xD);
+        Player_SetPlayerState(player, bodyActor, 0xD);
         return 1;
     }
     return 0;
@@ -94,7 +94,7 @@ s32 func_8022C760_de(void *player, void *bodyActor) {
     return 0;
 fire:
     ((LevelActor *)bodyActor)->motionState = flags | 0x100;
-    Weapons_SetPlayerState(player, bodyActor, 0xF);
+    Player_SetPlayerState(player, bodyActor, 0xF);
     return 1;
 }
 
@@ -107,7 +107,7 @@ s32 func_8022C7F8_de(void *player, LevelActor *actor) {
             if (!(actor->motionState & 0xC0000)) {
                 if (((MovementDescriptor *)actor->definition)->body.header.flags & 2) {
                     if ((((Shared_ActorView *)player)->unk_0x06B0 & 0x10) && (((Shared_ActorView *)player)->stun <= 0.0f)) {
-                        Weapons_SetPlayerState(player, actor, 5);
+                        Player_SetPlayerState(player, actor, 5);
                         return 1;
                     }
                 }

@@ -3,12 +3,12 @@
 #include "TYPES.H"
 #include "COMMON/TARGET.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct Actor_func_80267958_de {
+struct ActorEventsSpawnRiderImpactEffect {
     char pad0[0x1D8];
     SharedPlayer *player;
 };
 struct Carrier {
-    struct Actor_func_802676EC_de *owner;
+    struct ActorEventsComputeDamageScale *owner;
     char pad4[0x10];
     s32 slot;
     Shield shield;

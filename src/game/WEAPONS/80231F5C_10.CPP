@@ -31,7 +31,7 @@ void Weapon_ResetControllerAndSpin(LevelActor *actor, WeaponFireState *fireState
     fireState->spinStep = 0;
     fireState->spin = 0;
     if ((fireState->triggerMode != 0) && (func_802301F4_de(actor, fireState) == 0)) {
-        Weapons_RequestActorState(actor, fireState, 2);
+        Nav_RequestActorState(actor, fireState, 2);
     }
 }
 
@@ -55,7 +55,7 @@ s32 Weapon_IsTriggerReleasedOrBlocked(LevelActor *actor, void *arg1, Shared_Acto
         if (arg2->actionState != 0) {
             return 1;
         }
-        return Weapons_HasAmmoForMode(arg2, arg2->selectedAction) == 0;
+        return Player_HasAmmoForMode(arg2, arg2->selectedAction) == 0;
     }
     return 1;
 }
@@ -92,10 +92,10 @@ void Weapon_UpdateTriggerReleaseState(void *actor, void *attack) {
             case 0:
             case 14:
                 func_8022B00C_de(state);
-                Weapons_RequestActorState(actor, attack, 2);
+                Nav_RequestActorState(actor, attack, 2);
                 break;
             default:
-                Weapons_RequestActorState(actor, attack, 2);
+                Nav_RequestActorState(actor, attack, 2);
                 break;
             }
         }

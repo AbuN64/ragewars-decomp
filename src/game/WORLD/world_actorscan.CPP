@@ -86,7 +86,7 @@ void func_8028E068_de(Shared_World *world) {
 extern LevelActor *D_800F3CF8[4];
 extern LevelActor *D_800F3D08;
 extern s32 func_8028B25C_de(Shared_World *world, s32 id);
-void World_FindTrackedActors(Shared_World *world) {
+void Scene_FindTrackedActors(Shared_World *world) {
     LevelActor *actor = world->actors;
     s32 i;
     D_800F3D08 = 0;

@@ -11,7 +11,7 @@
 #include "COMMON/SESSIONHANDLERROW.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern s32 Weapons_GetFirstPlayer(void *);
+extern s32 Player_GetFirstPlayer(void *);
 
 void func_80291074_de(void *object) {
     f32 time;
@@ -21,7 +21,7 @@ void func_80291074_de(void *object) {
         time = D_80142CB4 - D_800D2988;
         D_80142CB4 = time;
         if (time <= 0.0f) {
-            Weapons_GetFirstPlayer(&D_80145040);
+            Player_GetFirstPlayer(&D_80145040);
             if (D_800CD784_de != 0) {
                 if (D_800CD780 == 0) {
                     func_802947C8_de(object, 0x7CF);
@@ -60,7 +60,7 @@ advance:
 #endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
-extern int Weapons_GetFirstPlayer(void *arg0);
+extern int Player_GetFirstPlayer(void *arg0);
 
 
 void func_80291074_de(void *arg0) {
@@ -72,7 +72,7 @@ void func_80291074_de(void *arg0) {
         temp_f0 = D_80142CB4 - D_800D2988;
         D_80142CB4 = temp_f0;
         if (temp_f0 <= 0.0f) {
-            Weapons_GetFirstPlayer(&D_80145040);
+            Player_GetFirstPlayer(&D_80145040);
             if (D_800CD784_de != 0) {
                 if (D_800CD780 == 0) {
                     func_802947C8_de(arg0, 0x7CF);

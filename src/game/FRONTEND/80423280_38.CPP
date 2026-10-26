@@ -90,8 +90,8 @@ loop:
 
 extern struct EntryRecAt0V1 D_800E4694[];
 extern struct Pair D_800E4A84[];
-extern void func_80265688_de(u8 *, s32, s32);
-extern s32 func_80265650_de(s32, s32);
+extern void Defs_SetBitValue(u8 *, s32, s32);
+extern s32 Defs_TestBit(s32, s32);
 
 void Frontend_RefreshTrialCatalogueWidgets(void) {
     u8 availableFlags[8];
@@ -105,24 +105,24 @@ void Frontend_RefreshTrialCatalogueWidgets(void) {
     u8 opacity;
     Frontend_HideTrialCatalogueWidgets();
     for (entryIndex = 0; entryIndex < 36; entryIndex++) {
-        func_80265688_de(availableFlags, entryIndex, 0);
+        Defs_SetBitValue(availableFlags, entryIndex, 0);
     }
-    func_80265688_de(availableFlags, 0, 1);
+    Defs_SetBitValue(availableFlags, 0, 1);
     settings = &D_801462C8;
     if (settings->controllerMode == 1) {
         playerSettings = settings;
         for (entryIndex = 0; entryIndex < 36; entryIndex++) {
             unlockedPreset = func_80425C70_de(entryIndex, 0, *(s8 *)((char *)playerSettings + D_800E4690->player * 0x96 + 0x150));
             unlockValue = unlockedPreset->bytes[1];
-            if (unlockValue > 0) func_80265688_de(availableFlags, unlockValue - 1, 1);
+            if (unlockValue > 0) Defs_SetBitValue(availableFlags, unlockValue - 1, 1);
             for (unlockSlot = 0; unlockSlot < 3; unlockSlot++) {
                 unlockValue = *((u8 *)unlockedPreset + unlockSlot + 2);
-                if (unlockValue > 0) func_80265688_de(availableFlags, unlockValue - 1, 1);
+                if (unlockValue > 0) Defs_SetBitValue(availableFlags, unlockValue - 1, 1);
             }
         }
     } else {
         for (entryIndex = 0; entryIndex < 36; entryIndex++) {
-            func_80265688_de(availableFlags, entryIndex, 1);
+            Defs_SetBitValue(availableFlags, entryIndex, 1);
         }
     }
     for (entryIndex = 0; entryIndex < 64; entryIndex++) {
@@ -132,7 +132,7 @@ void Frontend_RefreshTrialCatalogueWidgets(void) {
         }
         unlockIndex = 0;
 found1:;
-        if (func_80265650_de((s32)availableFlags, unlockIndex) == 1) {
+        if (Defs_TestBit((s32)availableFlags, unlockIndex) == 1) {
             widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].a);
             Frontend_SetWidgetFlag08(widget, 1);
             widget->alpha = 20;
@@ -142,7 +142,7 @@ found1:;
             }
             unlockIndex = 0;
 found2:;
-            if (func_80265650_de((s32)availableFlags, unlockIndex) == 1) {
+            if (Defs_TestBit((s32)availableFlags, unlockIndex) == 1) {
                 widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].b);
                 Frontend_SetWidgetFlag08(widget, 1);
                 widget->alpha = 20;
@@ -155,10 +155,10 @@ found2:;
         }
     }
     for (entryIndex = 0; entryIndex < 36; entryIndex++) {
-        if (func_80265650_de((s32)D_800E4690->owned, entryIndex) == 1) ((void (*)(s32))func_80427D70_de)(entryIndex);
+        if (Defs_TestBit((s32)D_800E4690->owned, entryIndex) == 1) ((void (*)(s32))func_80427D70_de)(entryIndex);
     }
     for (entryIndex = 0; entryIndex < 36; entryIndex++) {
-        if (func_80265650_de((s32)D_800E4690->pending, entryIndex) == 1) func_80265688_de(D_800E4690->owned, entryIndex, 1);
+        if (Defs_TestBit((s32)D_800E4690->pending, entryIndex) == 1) Defs_SetBitValue(D_800E4690->owned, entryIndex, 1);
     }
     for (entryIndex = 0; entryIndex < 64; entryIndex++) {
         opacity = 170;
@@ -168,9 +168,9 @@ found2:;
         }
         unlockIndex = 0;
 found3:;
-        if (func_80265650_de((s32)D_800E4690->owned, unlockIndex) == 1) {
+        if (Defs_TestBit((s32)D_800E4690->owned, unlockIndex) == 1) {
             widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].a);
-            if (func_80265650_de((s32)D_800E4690->pending, unlockIndex) == 1) { widget->alpha = 70; opacity = 70; }
+            if (Defs_TestBit((s32)D_800E4690->pending, unlockIndex) == 1) { widget->alpha = 70; opacity = 70; }
             else widget->alpha = 170;
             resourceKey = D_800E4A84[entryIndex].b;
             for (searchIndex = 0; searchIndex < 36; searchIndex++) {
@@ -178,9 +178,9 @@ found3:;
             }
             unlockIndex = 0;
 found4:;
-            if (func_80265650_de((s32)D_800E4690->owned, unlockIndex) == 1) {
+            if (Defs_TestBit((s32)D_800E4690->owned, unlockIndex) == 1) {
                 widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].b);
-                if (func_80265650_de((s32)D_800E4690->pending, unlockIndex) == 1) { widget->alpha = 70; opacity = 70; }
+                if (Defs_TestBit((s32)D_800E4690->pending, unlockIndex) == 1) { widget->alpha = 70; opacity = 70; }
                 else widget->alpha = 170;
                 if (D_800E4A84[entryIndex].c.id != -1) {
                     widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].c.id);

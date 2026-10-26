@@ -23,7 +23,7 @@ extern f32 D_800C2DB0_de[];
 
 
 
-extern void Weapons_UpdateViewAngles(s32, s32, void *);
+extern void Player_UpdateViewAngles(s32, s32, void *);
 
 
 
@@ -82,9 +82,9 @@ void func_8022D308_de(Shared_ActorView *player) {
     if ((mode = &D_801462C8.counters)->round != 0 && mode->elapsed != 0) {
         fire:
         if ((mode = &D_801462C8.counters)->round != 0 && 0 == mode->elapsed) {
-            Weapons_SetPlayerState(player, player, 0x14);
+            Player_SetPlayerState(player, player, 0x14);
         } else {
-            Weapons_SetPlayerState(player, player, 0x13);
+            Player_SetPlayerState(player, player, 0x13);
         }
 
     }
@@ -97,7 +97,7 @@ void func_8022D3F4_de(void) {
 }
 
 void func_8022D3FC_de(s32 player, s32 body) {
-    Weapons_UpdateViewAngles(player, body, &D_800CE7E4);
+    Player_UpdateViewAngles(player, body, &D_800CE7E4);
 }
 
 /** Perform no operation. */

@@ -8,7 +8,7 @@
 #include "FRONTEND/ENTRYRECAT4D4.H"
 #include "ACHIEVE/80424E30_3.H"
 
-extern s32 func_80265650_de(void *, s32);
+extern s32 Defs_TestBit(void *, s32);
 void func_80427F10_de(void) {
     CGameStatus *state;
     Shared_Game *config;
@@ -16,7 +16,7 @@ void func_80427F10_de(void) {
     s32 value, choice, i;
     D_800E4690->selection = D_8015402C;
     if (D_800E4690->selection >= 37) D_800E4690->selection = 0;
-    if (func_80265650_de(D_800E4690->owned, D_800E4690->selection) != 0) {
+    if (Defs_TestBit(D_800E4690->owned, D_800E4690->selection) != 0) {
         state = &D_801462C8.counters;
         if (state->humanWon != 0) {
             /* The counters alias Game+0x5D8 in every version. */

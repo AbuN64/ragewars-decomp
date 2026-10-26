@@ -15,7 +15,7 @@
 
 extern void func_8022B144_de(void *, f32 *);
 
-extern void World_ResetPlayerState(s32 *state);
+extern void Nav_ResetPlayerState(s32 *state);
 
 f32 GraphU64_GetPointDistance(f32 *, f32 *);
 
@@ -74,7 +74,7 @@ void Nav_UpdateTargetPitch(Brain *object) {
         if (horizontal == zero) {
             if (vertical < zero) brain->angle = D_800C1C7C_de;
             else brain->angle = D_800C1C80_de;
-        } else brain->angle = func_8029C044_de(vertical, horizontal) * D_800C1C84_de;
+        } else brain->angle = XMath_EvaluateArcTangentTwo(vertical, horizontal) * D_800C1C84_de;
     } else brain->angle = 0.0f;
     brain->previousAngle = brain->angle;
 }
@@ -82,7 +82,7 @@ void Nav_UpdateTargetPitch(Brain *object) {
 /* Stores the player, then resets its AI state using the same pointer. */
 void Nav_InitPlayerState(int *state, int player) {
     *state = player;
-    World_ResetPlayerState(state);
+    Nav_ResetPlayerState(state);
 }
 
 void Nav_ClearNodeQueue(AiController *arg0)

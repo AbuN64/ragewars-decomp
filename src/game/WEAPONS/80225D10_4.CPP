@@ -8,7 +8,7 @@
 #include "COMMON/LOADOUT.H"
 #include "TYPES.H"
 #include "GFX/TEXT/802A8A94_5.H"
-extern void Weapons_EndRound(void *);
+extern void Player_EndRound(void *);
 #include "COMMON/RENDERCOUNTERS.H"
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
@@ -62,11 +62,11 @@ typedef struct Shared_func_80227014_S22 func_80227014_S22;
 
 void func_80218464_de(void *);
 
-void Weapons_InitializePlayerHealth(void *);
+void Player_InitializePlayerHealth(void *);
 
 s32 Player_CheckTotalScoreWin(void *);
 
-void * Weapons_GetPlayerByIndex(void *, u32);
+void * Player_GetPlayerByIndex(void *, u32);
 
 void * func_8022C55C_de(void *, u32);
 
@@ -97,7 +97,7 @@ void * func_8022C55C_de(void *, u32);
 /* Advances an elimination round when rule D_80146918 is on and not paused (Cinema_IsSequenceActive,
    Cinema_IsSequenceInWindow): counts the players still in, clears D_800F7D10 while one is waiting, then by the
    round state at 0x84 of D_801468A0 revives the first waiting player (crediting a point in state 1,
-   scheduling D_80146924 = 3 otherwise) or moves to state 2, and ends the round through Weapons_EndRound
+   scheduling D_80146924 = 3 otherwise) or moves to state 2, and ends the round through Player_EndRound
    when func_802282EC_de reports it over. */
 
 
@@ -180,7 +180,7 @@ void func_80227038_de(s8 *world) {
 
     if ((Cinema_IsSequenceActive() == 0) && (Cinema_IsSequenceInWindow() == 0) && ((initial_rules = &D_801462C8.counters)->m_bFragTagOn != 0)) {
         if ((Player_CheckTotalScoreWin(world) != 0) && (initial_rules->elapsed == 0)) {
-            Weapons_EndRound(world);
+            Player_EndRound(world);
             return;
         }
         eligiblePlayerCount = func_8022C620_de(world);
@@ -241,7 +241,7 @@ void func_80227038_de(s8 *world) {
                     banner_half = D_800C2BA0_de;
                     banner_size = D_800C2BA4_de;
                     do {
-                        player = Weapons_GetPlayerByIndex(world, playerIndex);
+                        player = Player_GetPlayerByIndex(world, playerIndex);
                         if (player != 0) {
                             playerProfile = player->unk5D8;
                             if (playerProfile->unk90 == 0) {
@@ -270,9 +270,9 @@ void func_80227038_de(s8 *world) {
                                 }
                                 func_80218464_de(&player->unk938);
                                 player->unk11B4 = 0;
-                                Weapons_RequestActorState(&player->unk2E8, &player->unk458, 1);
+                                Nav_RequestActorState(&player->unk2E8, &player->unk458, 1);
                                 Player_PlacePlayerAtSpawnPoint(player, player->unk5EC, 0, 1);
-                                Weapons_InitializePlayerHealth(player);
+                                Player_InitializePlayerHealth(player);
                                 player->unk5E4 = (s32) D_8014284C;
                             } else {
                                 if ((D_80146938 != 0) && (playerProfile->unk94 != 0)) {
@@ -344,9 +344,9 @@ void func_80227038_de(s8 *world) {
                     }
                     func_80218464_de(&rotatingPlayer->unk938);
                     rotatingPlayer->unk11B4 = 0;
-                    Weapons_RequestActorState(&rotatingPlayer->unk2E8, &rotatingPlayer->unk458, 1);
+                    Nav_RequestActorState(&rotatingPlayer->unk2E8, &rotatingPlayer->unk458, 1);
                     Player_PlacePlayerAtSpawnPoint(rotatingPlayer, rotatingPlayer->unk5EC, 0, 1);
-                    Weapons_InitializePlayerHealth(rotatingPlayer);
+                    Player_InitializePlayerHealth(rotatingPlayer);
                 }
                 playerIndex = 0;
                 if (eligiblePlayerCount >= 0) {
@@ -425,9 +425,9 @@ void func_80227038_de(s8 *world) {
                     }
                     func_80218464_de(&chosenPlayer->unk938);
                     chosenPlayer->unk11B4 = 0;
-                    Weapons_RequestActorState(&chosenPlayer->unk2E8, &chosenPlayer->unk458, 1);
+                    Nav_RequestActorState(&chosenPlayer->unk2E8, &chosenPlayer->unk458, 1);
                     Player_PlacePlayerAtSpawnPoint(chosenPlayer, chosenPlayer->unk5EC, 0, 1);
-                    Weapons_InitializePlayerHealth(chosenPlayer);
+                    Player_InitializePlayerHealth(chosenPlayer);
                 }
                 playerIndex = 0;
                 if (eligiblePlayerCount >= 0) {
@@ -479,7 +479,7 @@ void func_80227038_de(s8 *world) {
                     banner_half = D_800C2BB8_de;
                     banner_size = D_800C2BBC_de;
                     do {
-                        flippedPlayer = Weapons_GetPlayerByIndex(world, playerIndex);
+                        flippedPlayer = Player_GetPlayerByIndex(world, playerIndex);
                         if (flippedPlayer != 0) {
                             priorFlipProfile = flippedPlayer->unk5D8;
                             if (priorFlipProfile->unk8F == 0) {
@@ -508,9 +508,9 @@ void func_80227038_de(s8 *world) {
                                 }
                                 func_80218464_de(&flippedPlayer->unk938);
                                 flippedPlayer->unk11B4 = 0;
-                                Weapons_RequestActorState(&flippedPlayer->unk2E8, &flippedPlayer->unk458, 1);
+                                Nav_RequestActorState(&flippedPlayer->unk2E8, &flippedPlayer->unk458, 1);
                                 Player_PlacePlayerAtSpawnPoint(flippedPlayer, flippedPlayer->unk5EC, 0, 1);
-                                Weapons_InitializePlayerHealth(flippedPlayer);
+                                Player_InitializePlayerHealth(flippedPlayer);
                             } else {
                                 priorFlipProfile->unk90 = 0;
                                 flippedPlayer->unk5D8->unk8F = 0U;
@@ -582,7 +582,7 @@ static inline ActorNode *Weapons_FindWaitingPlayer(Round *round) {
     }
     return node;
 }
-void Weapons_ReleaseWaitingPlayer(Round *round) {
+void Player_ReleaseWaitingPlayer(Round *round) {
     s32 count;
     ActorNode *node;
     CGameStatus *state;
@@ -622,7 +622,7 @@ void Weapons_ReleaseWaitingPlayer(Round *round) {
                 break;
             }
             if ((Player_CheckTeamPointWin(round) != 0) && (D_801462C8.counters.elapsed == 0)) {
-                Weapons_EndRound(round);
+                Player_EndRound(round);
             }
         }
     }

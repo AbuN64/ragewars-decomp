@@ -6,7 +6,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "COMMON/MENURECAT20V1.H"
-extern void func_802658E4_de(char *buffer, const char *format, s32 value);
+extern void Defs_FormatIntegerValue(char *buffer, const char *format, s32 value);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -23,7 +23,7 @@ s32 func_8044488C_de(LayeredText *field) {
     } else {
         field->text = (u8 **)&D_800D35F4;
         text = (char *)field->text[D_801462C8.language];
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 2), g_fmtDec2Pad, value);
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 2), g_fmtDec2Pad, value);
     }
     return 0;
 }
@@ -49,7 +49,7 @@ s32 func_8044488C_de(LayeredText *field) {
     } else {
         field->text = (u8 **)&D_800D35F4;
         text = (char *)*(u8 **)&D_800D35F4;
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 2), g_fmtDec2Pad, value);
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 2), g_fmtDec2Pad, value);
     }
     return 0;
 }

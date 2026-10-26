@@ -5,11 +5,11 @@
 #include "TYPES.H"
 
 /* Runs a player's floating movement state for its body: sets the movement mode at 0x650 to 11 when
-   still and 12 when moving (speed at 0x6C8), turns the view through Weapons_UpdateViewAngles with tuning
+   still and 12 when moving (speed at 0x6C8), turns the view through Player_UpdateViewAngles with tuning
    D_800CE874, sways the weapon on three sine waves of the state time at 0x658, moves the body through
    func_802238E0_de with tuning D_800CE850, and once the state time passes 2 without the body's flag
    0x1000 it ends the state: clears the strokes at 0x938 and the body's 0x20, plays sound 0x2DE, clears
-   0x840 and hands the player to Weapons_SetPlayerState (mode 2 when body flags 3 are set, else 10); it then
+   0x840 and hands the player to Player_SetPlayerState (mode 2 when body flags 3 are set, else 10); it then
    picks the animation at 0x86C from the vertical speed at 0x6C0 (kept while idle animation 0x1144
    plays) and, while moving faster than 5.12, plays the tuning's stroke sound and sound 0x2E0 whenever
    the sound timer at 0x11C4 passes 45, restarting it at a random value below 15. */
@@ -23,7 +23,7 @@
 
 extern Tuning D_800CE850;
 extern char D_800CE874;
-extern void Weapons_UpdateViewAngles(SharedPlayer *, Body_func_80224F5C_de *, char *);
+extern void Player_UpdateViewAngles(SharedPlayer *, Body_func_80224F5C_de *, char *);
 
 extern void func_802238E0_de(SharedPlayer *, Body_func_80224F5C_de *, Tuning *);
 extern void func_80218464_de(char *);
@@ -38,7 +38,7 @@ void func_80224F5C_de(SharedPlayer *player, Body_func_80224F5C_de *body) {
     } else {
         player->views5E8.view650_18.mode = 0xC;
     }
-    Weapons_UpdateViewAngles(player, body, &D_800CE874);
+    Player_UpdateViewAngles(player, body, &D_800CE874);
     player->views5E8.view730_79.sway[0] = 2.0f * Math_Sinf(player->views5E8.view658_24.swimTime * 0.06981318f) * 0.017453294f;
     player->views5E8.view730_79.sway[1] = 2.0f * Math_Sinf(player->views5E8.view658_24.swimTime * 0.08726647496f) * 0.017453294f;
     player->views5E8.view730_79.sway[2] = 2.0f * Math_Sinf(player->views5E8.view658_24.swimTime * 0.10471976548f) * 0.017453294f;
@@ -49,9 +49,9 @@ void func_80224F5C_de(SharedPlayer *player, Body_func_80224F5C_de *body) {
         SoundElement_PlaySoundAtPosition(0x2DE, body->x, body->y, body->z, 0, -1);
         player->views5E8.view840_118.surfaced = 0;
         if (body->flags & 3) {
-            Weapons_SetPlayerState(player, body, 2);
+            Player_SetPlayerState(player, body, 2);
         } else {
-            Weapons_SetPlayerState(player, body, 0xA);
+            Player_SetPlayerState(player, body, 0xA);
         }
     }
     idle = 0;

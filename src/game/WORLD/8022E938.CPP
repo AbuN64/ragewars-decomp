@@ -46,7 +46,7 @@ extern void func_80218464_de(void *arg0);
 
 
 
-extern void Weapons_InitializePlayerHealth(void *arg0);
+extern void Player_InitializePlayerHealth(void *arg0);
 
 void Player_ToggleActionFlagMode(Player *player) {
     u8 *ptr;
@@ -127,7 +127,7 @@ void func_8022EB04_de(void) {
 }
 
 /** Test whether an actor satisfies the condition selected by an entry type. */
-s32 World_PlayerHasAmmoForWeapon(void *player, s32 requestedWeaponType) {
+s32 Player_PlayerHasAmmoForWeapon(void *player, s32 requestedWeaponType) {
     void *entry;
     s16 *condition;
     char *indexed;
@@ -211,7 +211,7 @@ int Player_ReturnZero(void) {
 
 s32 Player_TryEnterLandedState(void *player, LevelActor *actor) {
     if (actor->position1.y <= 0.0f && InstHdr_GetActorMotionState(actor) != 0) {
-        Weapons_SetPlayerState(player, actor, 2);
+        Player_SetPlayerState(player, actor, 2);
         return 1;
     }
     return 0;
@@ -258,7 +258,7 @@ void Player_AdvanceCurrentRunEndState(void) {
     if (D_800FE9F0->unk5EA == 1) {
         Ovlgame_UpdateRunEndPlayer((s32)D_800FE9F0);
     } else {
-        Weapons_SetPlayerState(D_800FE9F0, D_800FE9F0, 0x22);
+        Player_SetPlayerState(D_800FE9F0, D_800FE9F0, 0x22);
     }
     D_800CD6E0_de = 1;
     D_800C9FE4 = 0;
@@ -330,9 +330,9 @@ void Player_RespawnFragTagPlayer(void *player) {
     }
     func_80218464_de((char *)player + 0x938);
     ((ActorRecAt16E0 *)player)->unk_0x11B4 = 0;
-    Weapons_RequestActorState(&((Shared_ActorView *)player)->weapon, &((Shared_ActorView *)player)->weapon.behaviorFlags, 1);
+    Nav_RequestActorState(&((Shared_ActorView *)player)->weapon, &((Shared_ActorView *)player)->weapon.behaviorFlags, 1);
     Player_PlacePlayerAtSpawnPoint(player, ((Shared_ActorView *)player)->spawn, 0, 1);
-    Weapons_InitializePlayerHealth(player);
+    Player_InitializePlayerHealth(player);
 }
 
 s32 Player_CountTrailingSpaces(s32 arg0, s32 arg1) {

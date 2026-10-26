@@ -43,11 +43,11 @@ extern u8 D_800FEB54[];
 extern s32 D_800E3A54[][28];
 
 
-extern s32 Weapons_TestAchievementFlag7(void *profile, s32 character);
+extern s32 Player_TestAchievementFlag7(void *profile, s32 character);
 
-extern s32 func_80265650_de(u8 *bits, s32 index);
+extern s32 Defs_TestBit(u8 *bits, s32 index);
 
-extern void func_80265688_de(u8 *bits, s32 index, s32 value);
+extern void Defs_SetBitValue(u8 *bits, s32 index, s32 value);
 
 extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 
@@ -209,7 +209,7 @@ void Menu_RefreshCharacterUnlocks(void) {
         found = 0;
         for (j = 0; j < 4 && !found; j++) {
             if (D_80102B0D[j * 0x190] >= 0) {
-                found = found || Weapons_TestAchievementFlag7(D_80102B00[j], D_800E3A54[i][0]);
+                found = found || Player_TestAchievementFlag7(D_80102B00[j], D_800E3A54[i][0]);
             }
         }
         if (D_801462C8->trialKind == 0 || D_801462C8->trialKind == 2) {
@@ -217,26 +217,26 @@ void Menu_RefreshCharacterUnlocks(void) {
                 found = 1;
             }
         }
-        func_80265688_de(bits, i, found);
+        Defs_SetBitValue(bits, i, found);
     }
     if (D_801462C8->trialKind == 1) {
-        func_80265688_de(bits, 11, 0);
-        func_80265688_de(bits, 12, 0);
-        func_80265688_de(bits, 13, 0);
-        func_80265688_de(bits, 14, 0);
+        Defs_SetBitValue(bits, 11, 0);
+        Defs_SetBitValue(bits, 12, 0);
+        Defs_SetBitValue(bits, 13, 0);
+        Defs_SetBitValue(bits, 14, 0);
     }
     if (D_801462C8->trialKind == 0 || D_801462C8->trialKind == 2) {
-        func_80265688_de(bits, 1, 1);
+        Defs_SetBitValue(bits, 1, 1);
     }
     for (i = 0; i < 17; i++) {
         widget = func_8040EC30_de(D_800E42D0->screen, (u16)D_800E3A50[i].id);
         Frontend_SetWidgetFlag100(widget, 0);
-        if (!func_80265650_de(bits, i)) {
+        if (!Defs_TestBit(bits, i)) {
             if (widget) {
                 Frontend_SetWidgetFlag100(widget, 1);
                 Frontend_SetWidgetFlag08(widget, 0);
             }
-        } else if (D_801462C8->trialKind == 1 && func_80265650_de(D_800FEB54, D_800E3A54[i][0]) == 1) {
+        } else if (D_801462C8->trialKind == 1 && Defs_TestBit(D_800FEB54, D_800E3A54[i][0]) == 1) {
             mark = func_8040EC30_de(widget, UNLOCK_MARK);
             Frontend_SetWidgetFlag08(mark, 1);
             mark->alpha = 50;

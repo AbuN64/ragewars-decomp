@@ -34,18 +34,18 @@ extern struct Shared_StateInfo D_800CED30[];
 extern struct Shared_StateInfo D_800C9684[];
 extern void Nav_UpdateActorCurrentNode(void *, void *);
 extern void Nav_ApplySupportingPlatformMotion(void *, void *);
-extern void Weapons_FillDamagePacket(void *, s32, s32, s32, s32, s32);
+extern void Barrel_FillDamagePacket(void *, s32, s32, s32, s32, s32);
 extern void TeamSelect_UpdateDraftPanel(void *, void *, void *);
 extern void func_80218B84_de(void *, void *, void *);
 extern void func_80219480_de(void *, void *);
 extern void func_80219A40_de(void *, void *, void *);
-extern void Weapons_UpdatePlayerEffectLights(void *, void *);
+extern void Player_UpdatePlayerEffectLights(void *, void *);
 extern void func_80220D44_de(void *);
 extern void func_80222908_de(void *, void *, ObjectState54 *);
 extern void func_80222EA4_de(void *, void *);
 extern void func_80222FE0_de(void *, void *, s32 *);
 extern void func_802292B8_de(void *);
-extern s32 Weapons_GetAmmoCapacity(void *, s32, s32);
+extern s32 Player_GetAmmoCapacity(void *, s32, s32);
 extern void func_8022B5C0_de(void *);
 extern void func_8022B8E0_de(void *);
 extern void func_8022BD94_de(void *, void *, void *);
@@ -309,7 +309,7 @@ void func_80220ED4_de(SharedPlayer *player)
       func_8022C6E4_de(player, actor);
       if (((func_8022C760_de(player, actor) == 0) && (player->views5E8.view728_73.unk728 != 0.0f)) && (!(actor->views1C.view38_2.unk38 & 0x100)))
       {
-        if (((f32) func_8029DB58_de((s32) player->views5E8.view728_73.unk728)) < 0.7853982448577881f)
+        if (((f32) XMath_AbsoluteInteger((s32) player->views5E8.view728_73.unk728)) < 0.7853982448577881f)
         {
           actor->views1C.view6C_9.yaw += player->views5E8.view728_73.unk728;
         }
@@ -353,8 +353,8 @@ void func_80220ED4_de(SharedPlayer *player)
       func_80245D30_de(actor, material, &player->views5E8.view6E8_79.unk6E8, 1);
       if ((material->flags & 0x4000) && (player->views5E4.view5E4_2.health > 0))
       {
-        Weapons_SetPlayerState(player, player, 32);
-        Weapons_FillDamagePacket(scratch.views0.view0_0.damage, 0, 0x3E700, 0x41CCCCCC, 128, 0);
+        Player_SetPlayerState(player, player, 32);
+        Barrel_FillDamagePacket(scratch.views0.view0_0.damage, 0, 0x3E700, 0x41CCCCCC, 128, 0);
         func_80219A40_de(player, &player->views1C.view170_23.unk170, scratch.views0.view0_0.damage);
       }
       if (material->flags & 0x80000)
@@ -364,7 +364,7 @@ void func_80220ED4_de(SharedPlayer *player)
         {
           if (player->views5E4.view5E4_2.health > 0)
           {
-            Weapons_FillDamagePacket(scratch.views0.view0_0.damage, 0, material->sound << 8, 0x41CCCCCC, 128, 0);
+            Barrel_FillDamagePacket(scratch.views0.view0_0.damage, 0, material->sound << 8, 0x41CCCCCC, 128, 0);
             func_80219A40_de(player, &player->views1C.view170_23.unk170, scratch.views0.view0_0.damage);
           }
           player->views5E8.view854_147.unk854 = material->timer;
@@ -380,7 +380,7 @@ void func_80220ED4_de(SharedPlayer *player)
       flag = 1;
       if (player->views5E8.view650_16.state != 4)
       {
-        Weapons_SetPlayerState(player, actor, 4);
+        Player_SetPlayerState(player, actor, 4);
       }
     }
     goal = 0.0f;
@@ -474,7 +474,7 @@ void func_80220ED4_de(SharedPlayer *player)
         player->views5E8.view678_40.unk678 = 0.0f;
       }
     }
-    Weapons_UpdatePlayerEffectLights(player, actor);
+    Player_UpdatePlayerEffectLights(player, actor);
     oldModel = actor->views0.view14_6.model;
     prev = actor->views0.view8_3.pos;
     before = InstHdr_FindActorModelEntry(actor);
@@ -684,9 +684,9 @@ void func_80220ED4_de(SharedPlayer *player)
   player->views5E8.view774_115.unk774 = player->views0.view8_3.pos;
   if ((D_801462C8.flags & 8) || ((D_801462C8.counters.enabled != 0) && (player->views5D8.view5D8_9.profile->counts != 0)))
   {
-    player->views5E8.view5F4_13.ammo[0] = Weapons_GetAmmoCapacity(player, 0, 0);
-    player->views5E8.view5F4_13.ammo[1] = Weapons_GetAmmoCapacity(player, 1, 0);
-    player->views5E8.view5F4_13.ammo[2] = Weapons_GetAmmoCapacity(player, 2, 0);
+    player->views5E8.view5F4_13.ammo[0] = Player_GetAmmoCapacity(player, 0, 0);
+    player->views5E8.view5F4_13.ammo[1] = Player_GetAmmoCapacity(player, 1, 0);
+    player->views5E8.view5F4_13.ammo[2] = Player_GetAmmoCapacity(player, 2, 0);
   }
   if (D_801462C8.flags & 4)
   {

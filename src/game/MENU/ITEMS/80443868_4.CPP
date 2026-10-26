@@ -6,7 +6,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/MENURECAT20V1.H"
 #include "COMMON/ACTORRECAT260.H"
-extern void func_802658E4_de(char *buffer, const char *format, s32 value);
+extern void Defs_FormatIntegerValue(char *buffer, const char *format, s32 value);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
@@ -17,10 +17,10 @@ extern char D_800EED80[];
 
 s32 func_80443A24_de(LayeredText *field, struct MenuRules *holder) {
     Shared_MenuData *players = &D_80145040;
-    s32 player = Weapons_GetPlayerIndex(players, holder->locked);
+    s32 player = Player_GetPlayerIndex(players, holder->locked);
     s32 value = D_801522DC[player * 75];
     char *text = (char *)field->text[players->game.language];
-    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
+    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
     return 0;
 }
 #endif
@@ -32,15 +32,15 @@ s32 func_80443A24_de(LayeredText *field, struct MenuRules *holder) {
 
 extern char D_80145040[];
 extern char g_fmtDec4Pad[];
-extern s32 Weapons_GetPlayerIndex(void *, unsigned int);
+extern s32 Player_GetPlayerIndex(void *, unsigned int);
 extern s32 Pak_CountLineChars(LayeredText *);
 
 s32 func_80443A24_de(LayeredText *field, struct Holder *holder) {
-    s32 player = Weapons_GetPlayerIndex(D_80145040, (u32)holder->owner);
+    s32 player = Player_GetPlayerIndex(D_80145040, (u32)holder->owner);
     s32 value = D_801462C8.playerSettings[player].score;
     char *text = (char *)*field->text;
 
-    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), g_fmtDec4Pad, value);
+    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), g_fmtDec4Pad, value);
     return 0;
 }
 #endif

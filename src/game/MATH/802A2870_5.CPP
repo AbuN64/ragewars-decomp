@@ -97,7 +97,7 @@ s32 func_802A1EC0_de(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 arg4) {
     Record_func_802A1990_de *object = arg0;
     s32 temp_s0;
 
-    temp_s0 = func_8029DB58_de(arg4);
+    temp_s0 = XMath_AbsoluteInteger(arg4);
     if (temp_s0 < (s32)func_80299B4C_de()) {
         object->field_5C = 2;
         object->field_48 = 0;
@@ -115,7 +115,7 @@ s32 func_802A1F3C_de(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 arg4) {
     Record_func_802A1990_de *object = arg0;
     s32 temp_s0;
 
-    temp_s0 = func_8029DB58_de(arg4);
+    temp_s0 = XMath_AbsoluteInteger(arg4);
     if (temp_s0 < (s32)func_80299B4C_de()) {
         object->field_5C = 2;
         object->field_48 = 0;

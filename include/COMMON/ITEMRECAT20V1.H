@@ -1313,8 +1313,8 @@ typedef struct Key Key;
 
 
 
-struct Triple_func_802683E0_de;
-typedef struct Triple_func_802683E0_de Triple_func_802683E0_de;
+struct TripleEventsFireWithinHeightRange;
+typedef struct TripleEventsFireWithinHeightRange TripleEventsFireWithinHeightRange;
 
 struct PlayerRecord;
 typedef struct PlayerRecord PlayerRecord;
@@ -1575,7 +1575,7 @@ struct Limit {
     s16 limit;
 };
 
-struct Triple_func_802683E0_de;
+struct TripleEventsFireWithinHeightRange;
 
 struct World;
 struct World {

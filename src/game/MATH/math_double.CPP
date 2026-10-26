@@ -140,7 +140,7 @@ static inline f64 exp_inline(f64 x) {
     return ScaleDoubleExponent(p / ((t * 4.9586285604164e-4 + 5.55538684129715e-2) * t + 0.5 - p) + 0.5, k + 1);
 }
 
-f64 func_8029AEA4_de(f64 x, f64 y) {
+f64 XMath_PowerDouble(f64 x, f64 y) {
     s32 k;
     f64 t;
 
@@ -172,7 +172,7 @@ f64 func_8029AEA4_de(f64 x, f64 y) {
 }
 
 /* Rounds toward negative infinity by the 2^52 add-and-subtract trick; a negative value goes through
- * func_8029D9DC_de (ceil) as -ceil(-value). */
+ * XMath_CeilDouble (ceil) as -ceil(-value). */
 static inline f64 floor_inline(f64 value) {
     f64 temp;
     f64 integral;
@@ -183,7 +183,7 @@ static inline f64 floor_inline(f64 value) {
         return value;
     }
     if (value < 0.0) {
-        return -func_8029D9DC_de(-value);
+        return -XMath_CeilDouble(-value);
     }
     temp = value;
     temp += limit;

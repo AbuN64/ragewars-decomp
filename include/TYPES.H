@@ -60,7 +60,7 @@ struct AimPlayer;
 
 extern void func_8021A9A4_de(struct AimPlayer *arg0, s32 arg1);
 
-extern s32 Weapons_HasAmmoForMode(void *, s32);
+extern s32 Player_HasAmmoForMode(void *, s32);
 
 extern void func_8022B00C_de(void *arg0);
 
@@ -148,7 +148,7 @@ extern int Particle_HasSurfaceFlag(void *arg0);
 
 extern void Particle_StopSound(void *a);
 
-extern void func_80285C78_de(void *arg0);
+extern void Rumble_RecycleFinishedEffectNodes(void *arg0);
 
 struct Shared_World;
 struct CVector3_t;
@@ -178,19 +178,19 @@ extern s32 DispatchElementEvent(s32 id, s32 event, s32, s32, s32);
 
 extern s32 func_80297A34_de(s32 event, s32, s32, s32);
 
-extern f32 func_8029B9FC_de(f32 arg0);
+extern f32 XMath_EvaluateSine(f32 arg0);
 
-extern void func_8029BBB0_de(f32 angle, f32 *sinOut, f32 *cosOut);
+extern void XMath_EvaluateSineCosine(f32 angle, f32 *sinOut, f32 *cosOut);
 
-extern f32 func_8029C044_de(f32 y, f32 x);
+extern f32 XMath_EvaluateArcTangentTwo(f32 y, f32 x);
 
-extern void func_8029CE3C_de(s32 arg0, s32 arg1, s32 arg2);
+extern void XMath_MultiplyMatrices(s32 arg0, s32 arg1, s32 arg2);
 
-extern s32 func_8029DB58_de(s32 arg0);
+extern s32 XMath_AbsoluteInteger(s32 arg0);
 
-extern void func_8029DD18_de(f32 arg0);
+extern void XMath_EvaluateCosine(f32 arg0);
 
-extern f32 func_8029DE48_de(f32 x);
+extern f32 XMath_EvaluateArcSine(f32 x);
 
 extern s32 func_802A05D0_de(u8 *s);
 

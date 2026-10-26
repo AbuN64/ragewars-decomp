@@ -9,7 +9,7 @@
 #include "AI/NAV/80208000_5.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern f32 Weapons_GetSignedAngleToPoint(Player *, CVector3);
+extern f32 Barrel_GetSignedAngleToPoint(Player *, CVector3);
 
 /* Runs a computer player's engagement timer: while the countdown at 0x2E4 is positive it rerolls the
    wait at 0x2E8 as the config's base at 8 plus a random share (scale D_800C6E00) of its spread at 0xC
@@ -40,7 +40,7 @@ extern void func_802850C8_de(struct EffectSystem *arg0, struct LevelActor *arg1,
 extern f32 Nav_GetEngagementDistance(void *arg0);
 
 
-extern f32 Weapons_GetSignedAngleToPoint(Player *arg0, CVector3 point);
+extern f32 Barrel_GetSignedAngleToPoint(Player *arg0, CVector3 point);
 
 void Nav_DispatchActorBehavior(void *arg0)
 {
@@ -177,7 +177,7 @@ void Nav_UpdateAlternatingActionBursts(AiController *arg0, AiConfig *arg1)
     {
         AiTarget *p = arg0->target;
         Player *q = p->player;
-        if (!(f20 < Weapons_GetSignedAngleToPoint(arg0->player,
+        if (!(f20 < Barrel_GetSignedAngleToPoint(arg0->player,
                                     q->pos))) {
             arg0->unk23C = 1;
             arg0->unk2E4 = s1;
@@ -279,7 +279,7 @@ void Nav_UpdateMeterGatedActionBurst(void *object, void *settings) {
         controller->unk2E8 += minus_one;
     } else {
         record = controller->target->player;
-        distance = Weapons_GetSignedAngleToPoint(controller->player,
+        distance = Barrel_GetSignedAngleToPoint(controller->player,
                                  record->pos);
         if (Nav_GetEngagementDistance(controller) < distance) {
             return;
@@ -343,7 +343,7 @@ void Nav_UpdateTimedActionBurst(void *controller, void *settings) {
         ((AiController *)controller)->unk2E8 += minus_one;
     } else {
         record = ((AiController *)controller)->target->player;
-        distance = Weapons_GetSignedAngleToPoint(((AiController *)controller)->player, record->pos);
+        distance = Barrel_GetSignedAngleToPoint(((AiController *)controller)->player, record->pos);
         if (Nav_GetEngagementDistance(controller) < distance) {
             return;
         }
@@ -380,7 +380,7 @@ void Nav_UpdateHeldActionBurst(void *controller, void *settings) {
     }
     brain->unk2E4 = -1;
     record = brain->target->player;
-    distance = Weapons_GetSignedAngleToPoint(brain->player, record->pos);
+    distance = Barrel_GetSignedAngleToPoint(brain->player, record->pos);
     if (Nav_GetEngagementDistance(controller) < distance) {
         brain->unk23C = 1;
         return;

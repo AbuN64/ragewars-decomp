@@ -190,7 +190,7 @@ void Vector3RotatePitch(CVector3 *arg0, CVector3 *arg1, f32 arg2) {
     f32 sp20;
     f32 sp24;
 
-    func_8029BBB0_de(arg2, &sp20, &sp24);
+    XMath_EvaluateSineCosine(arg2, &sp20, &sp24);
     tmp.x = arg1->x;
     tmp.y = (sp24 * arg1->y) - (sp20 * arg1->z);
     tmp.z = (sp24 * arg1->z) + (sp20 * arg1->y);
@@ -202,7 +202,7 @@ void Vector3RotateYaw(CVector3 *arg0, CVector3 *arg1, f32 arg2) {
     f32 sp20;
     f32 sp24;
 
-    func_8029BBB0_de(arg2, &sp20, &sp24);
+    XMath_EvaluateSineCosine(arg2, &sp20, &sp24);
     tmp.x = (sp24 * arg1->x) + (sp20 * arg1->z);
     tmp.y = arg1->y;
     tmp.z = (sp24 * arg1->z) - (sp20 * arg1->x);
@@ -214,7 +214,7 @@ void Vector3RotateRoll(CVector3 *arg0, CVector3 *arg1, f32 arg2) {
     f32 sp20;
     f32 sp24;
 
-    func_8029BBB0_de(arg2, &sp20, &sp24);
+    XMath_EvaluateSineCosine(arg2, &sp20, &sp24);
     tmp.x = (sp24 * arg1->x) - (sp20 * arg1->y);
     tmp.y = (sp24 * arg1->y) + (sp20 * arg1->x);
     tmp.z = arg1->z;
@@ -238,8 +238,8 @@ void Vector3Angles(f32 *arg0, f32 *arg1, f32 *arg2) {
     } else {
         magnitude = Math_Sqrtf(magnitude_squared);
     }
-    *arg2 = func_8029C044_de(arg0[0], arg0[2]);
-    *arg1 = -func_8029C044_de(arg0[1], magnitude);
+    *arg2 = XMath_EvaluateArcTangentTwo(arg0[0], arg0[2]);
+    *arg1 = -XMath_EvaluateArcTangentTwo(arg0[1], magnitude);
 }
 
 void Vector3AnglesInverse(f32 *arg0, f32 *arg1, f32 *arg2) {
@@ -259,8 +259,8 @@ void Vector3AnglesInverse(f32 *arg0, f32 *arg1, f32 *arg2) {
     } else {
         magnitude = Math_Sqrtf(magnitude_squared);
     }
-    *arg2 = func_8029C044_de(arg0[0], arg0[2]);
-    *arg1 = func_8029C044_de(arg0[1], magnitude);
+    *arg2 = XMath_EvaluateArcTangentTwo(arg0[0], arg0[2]);
+    *arg1 = XMath_EvaluateArcTangentTwo(arg0[1], magnitude);
     *arg2 = -*arg2;
 }
 

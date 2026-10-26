@@ -139,7 +139,7 @@ s32 func_8041A490_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 /* A disabled debug print: takes a target, a format and variable arguments and does nothing beyond
-   spilling the variable arguments to their home slots. Matched like the variadic stub func_80268264_de:
+   spilling the variable arguments to their home slots. Matched like the variadic stub Events_IgnoreEvent:
    the leftover float test of its compiled-out body makes the compiler fill the return delay slot
    with the last argument spill. */
 void func_8041A520_de(void *target, const char *format, ...)

@@ -12,7 +12,7 @@ void Nav_RequestRandomArmedWeapon(void *brain) {
 
     if ((GraphU64_NextRandom() % 100) < 0x15) {
         do {
-            chosenWeapon = Weapons_PickRandomArmedWeapon(controller->player);
+            chosenWeapon = Weapon_PickRandomArmedWeapon(controller->player);
         } while (chosenWeapon >= 0x10);
         ((Shared_ActorView *)controller->player)->nextWeapon = chosenWeapon;
         if (chosenWeapon != ((Shared_ActorView *)controller->player)->selectedAction) {

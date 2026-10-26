@@ -267,10 +267,10 @@ typedef struct {
 struct Shared_World;
 extern void Rumble_SetActorStateBit(struct Shared_World *, void *, s32);
 extern void func_80278D78_de(struct Shared_Actor *arg0, s32 arg1, void *arg2);
-extern void Weapons_SpawnActorEffect(void *, s32, Triple, s32);
+extern void Barrel_SpawnActorEffect(void *, s32, Triple, s32);
 extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 struct Player;
-extern void Weapons_SpawnFlaggedEffects(struct Player *, s32 *, s32, s32, s32);
+extern void Barrel_SpawnFlaggedEffects(struct Player *, s32 *, s32, s32, s32);
 struct SceneRecAt95A8;
 extern void func_802A5D38_de(struct SceneRecAt95A8 *, s32);
 

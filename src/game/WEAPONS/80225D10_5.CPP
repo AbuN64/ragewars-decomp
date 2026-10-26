@@ -24,7 +24,7 @@
 
 
 
-extern int Weapons_GetPlayerIndex(Root *,ObjRecAt16E0V1 *);
+extern int Player_GetPlayerIndex(Root *,ObjRecAt16E0V1 *);
 
 /* Reports whether a team's points reached the point target (none when it is 0); in a trial it records
    in humanWon whether that team is the human side's and, when it is not, keeps looking. */
@@ -61,7 +61,7 @@ extern s32 Pak_CountLiveNodes(GameSession *);
 
 extern s32 func_8022C650_de(World_func_802283B8_de *);
 
-extern void Weapons_EndRound(World_func_802283B8_de *);
+extern void Player_EndRound(World_func_802283B8_de *);
 
 extern s32 Player_CheckScoreLimit(World_func_802283B8_de *);
 
@@ -148,7 +148,7 @@ s32 Player_CheckTotalScoreWin(Root *root) {
  node=root->unk20; state=initial;
  if(node) { settings=(unsigned char *)state-0x5D8; }
  for(;node;node=node->unk16E0) {
-  skip=Weapons_GetPlayerIndex(root,node);
+  skip=Player_GetPlayerIndex(root,node);
   sum=0;
   for(i=0;i<8;i++) {
    if(i!=skip) {
@@ -231,14 +231,14 @@ void func_802283B8_de(World_func_802283B8_de *world) {
                 if (D_8014561C.settings.trialKind == 3) {
                     rules->humanWon = 0;
                 }
-                Weapons_EndRound(world);
+                Player_EndRound(world);
             }
         }
         game = &D_8014561C;
         if (Pak_CountLiveNodes(game) == 0 && Player_CheckScoreLimit(world) != 0) {
             limits = &game->rules;
             if (limits->locked == 0 && game->paused == 0 && limits->scoreLimit > 0 && limits->sudden == 0) {
-                Weapons_EndRound(world);
+                Player_EndRound(world);
             }
         }
         if (D_801462C8.counters.enabled != 0) {
@@ -262,11 +262,11 @@ void func_802283B8_de(World_func_802283B8_de *world) {
                     limits = &D_8014561C.rules;
                     if (limits->rounds >= 3) {
                         limits->humanWon = 1;
-                        Weapons_EndRound(world);
+                        Player_EndRound(world);
                     }
                 } else {
                     D_801462C8.counters.humanWon = 1;
-                    Weapons_EndRound(world);
+                    Player_EndRound(world);
                 }
             }
         }

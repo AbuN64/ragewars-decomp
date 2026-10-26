@@ -32,7 +32,7 @@ void Nav_FollowMarkerCarrierRoute(AiTarget *aiTarget) {
     void *v0;
 
     controller = aiTarget->player->controller;
-    v0 = Weapons_FindPlayerWithMarker(&D_80145040);
+    v0 = Player_FindPlayerWithMarker(&D_80145040);
     if (v0 == 0 || v0 != (void *)controller->player) {
         Nav_SetBehaviourState(controller, 2);
         return;

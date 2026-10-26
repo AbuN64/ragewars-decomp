@@ -10,10 +10,10 @@
 #include "SYSTEM_3/80265370.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern f32 func_8029DD3C_de(f32);
+extern f32 XMath_EvaluateTangent(f32);
 
 
-f32 func_80285630_de(s32 arg0);
+f32 Rumble_SamplePackedFloatRange(s32 arg0);
 
 s32 Nav_IsBallisticArcObstructed(ActorRec *actor, f32 scale, f32 lateral);
 
@@ -112,7 +112,7 @@ s32 Nav_RefineBallisticAim(ActorRec *actor) {
                         actor->field248 = (f32) 90.0f;
                     }
                 } else {
-                    actor->field248 = (f32) (func_8029C044_de(heightDelta, horizontalDistance) * 57.2957764f);
+                    actor->field248 = (f32) (XMath_EvaluateArcTangentTwo(heightDelta, horizontalDistance) * 57.2957764f);
                 }
                 actor->field270 = 0;
                 actor->field274 = 0;
@@ -127,7 +127,7 @@ s32 Nav_RefineBallisticAim(ActorRec *actor) {
                             actor->field278 = 90.0f;
                         }
                     } else {
-                        actor->field278 = func_8029C044_de(heightDelta, horizontalDistance) * 57.2957764f;
+                        actor->field278 = XMath_EvaluateArcTangentTwo(heightDelta, horizontalDistance) * 57.2957764f;
                     }
                     actor->field24C = actor->field278;
                     if (45.0f < actor->field278) {
@@ -186,9 +186,9 @@ block_43:
                         temp_s0_3 += first;
                     }
                     temp_v0_3 = temp_s0_3->unk30;
-                    scale = func_80285630_de((temp_v0_3->speedHi << 0x10) | temp_v0_3->speedLo);
+                    scale = Rumble_SamplePackedFloatRange((temp_v0_3->speedHi << 0x10) | temp_v0_3->speedLo);
                     temp_v0_4 = temp_s0_3->unk30;
-                    lateral = func_80285630_de((temp_v0_4->gravityHi << 0x10) | temp_v0_4->gravityLo);
+                    lateral = Rumble_SamplePackedFloatRange((temp_v0_4->gravityHi << 0x10) | temp_v0_4->gravityLo);
                     activeInstance = actor->instance;
                     current = activeInstance->header.spatial.position;
                     delta = actor->destination;
@@ -204,7 +204,7 @@ block_43:
                     horizontalDistance = Math_Sqrtf((delta.x * delta.x) + (delta.z * delta.z));
                     temp_fv0_4 = Math_Cosf(actor->field278 * 0.0174532942f);
                     temp_fs0_2 = temp_fv0_4 * temp_fv0_4;
-                    temp_fv0f_2 = (func_8029DD3C_de(actor->field278 * 0.0174532942f) * horizontalDistance) + ((lateral * (horizontalDistance * horizontalDistance)) / (2.0f * (scale * scale) * temp_fs0_2));
+                    temp_fv0f_2 = (XMath_EvaluateTangent(actor->field278 * 0.0174532942f) * horizontalDistance) + ((lateral * (horizontalDistance * horizontalDistance)) / (2.0f * (scale * scale) * temp_fs0_2));
                     if (((heightDelta - 1.0f) <= temp_fv0f_2) && (temp_fv0f_2 <= (heightDelta + 1.0f))) {
                         if (Nav_IsBallisticArcObstructed(actor, scale, lateral) != 0) {
                             temp_v0_6 = actor->field284;

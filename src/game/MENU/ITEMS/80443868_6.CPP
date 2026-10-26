@@ -21,17 +21,17 @@
 
 
 s32 func_80443B3C_de(Shared_DebugWidget *field, Shared_MenuHandle *holder) {
-    s32 player = Weapons_GetPlayerIndex(&D_80145040, holder->owner);
+    s32 player = Player_GetPlayerIndex(&D_80145040, holder->owner);
     /* D_80146398 is the hub's func_8041F2A0_Config array (0x96-byte records); index player*150 then reads the record's first halfword */
     s32 value = *(s16 *) &g_playerSettings[player];
     char *text;
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     text = field->inner->text[D_80145040.object.language];
-    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
+    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
 #else
     text = *field->inner->text;
-    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), g_fmtDec4Pad, value);
+    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), g_fmtDec4Pad, value);
 #endif
     return 0;
 }

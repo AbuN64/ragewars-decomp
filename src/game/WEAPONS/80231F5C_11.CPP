@@ -44,7 +44,7 @@ void Weapon_ReleaseHandlesAndExitState39(void *arg0) {
     temp_s0 = (((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link);
     Ovlgame_ReleaseObjectHandles(temp_s0);
     if ((((struct ObjRecAt650 *) ((s8 *) temp_s0))->unk650) == 0x27) {
-        Weapons_SetPlayerState((void *) temp_s0, (void *) temp_s0, 2);
+        Player_SetPlayerState((void *) temp_s0, (void *) temp_s0, 2);
     }
 }
 
@@ -110,12 +110,12 @@ void Weapon_UpdateNormalFireAction(void *actor, ObjectState140 *attack) {
     idx = ((Shared_ActorView *)temp_s0)->action;
     action = D_800CE8DC[idx].action;
 
-    if (Weapons_HasAmmoForMode(temp_s0, ((Shared_ActorView *)temp_s0)->selectedAction) == 0) {
+    if (Player_HasAmmoForMode(temp_s0, ((Shared_ActorView *)temp_s0)->selectedAction) == 0) {
         ((Shared_ActorView *)temp_s0)->nextWeapon = Weapon_FindNextUsableWeapon(temp_s0);
     } else {
         attack->unk_13C = 1;
         if (func_802301F4_de(actor, attack) == 0 && !(((Shared_ActorView *)o)->flags & 0x400)) {
-            Weapons_RequestActorState(actor, attack, action);
+            Nav_RequestActorState(actor, attack, action);
         }
     }
 }

@@ -14,7 +14,7 @@
 #define Pak_CheckControllerPak func_80406A90_eu
 #endif
 #if defined(VERSION_EU_X)
-#define Pak_CheckControllerPak func_80406A90_eu_x
+#define Pak_CheckControllerPak Pak_CheckLocalizedSaveAvailability
 #endif
 /* Selects a usable Controller Pak, checks its notes and free space, and opens the appropriate prompt. */
 s32 Control_AnyControllerConnected(void);

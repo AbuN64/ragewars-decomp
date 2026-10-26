@@ -1,5 +1,5 @@
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
-INCLUDE_ASM("ovl_80400000", func_80423280_de);
+INCLUDE_ASM("ovl_80400000", Frontend_CloseSettingsPage);
 #endif

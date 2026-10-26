@@ -37,10 +37,10 @@ void Weapon_UpdateIdleWeaponSelection(LevelActor *arg0, void *arg1) {
     state = *(s16 *)(&D_800CE8DC +
                      (((Shared_ActorView *)actor)->action * 0x18));
     if ((s8)((Dest *)arg1)->count != 0) {
-        if (Weapons_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
+        if (Player_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
             if (((Dest *)arg1)->field13C == 2) {
                 ((Dest *)arg1)->field13C = 1;
-                if (Weapons_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
+                if (Player_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
                     ((Shared_ActorView *)actor)->nextWeapon = Weapon_FindNextUsableWeapon(actor);
                 }
             }

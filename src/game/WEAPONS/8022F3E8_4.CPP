@@ -48,7 +48,7 @@ void Weapon_InitializeSwitchAndRequestIdle(void *arg0, void *weaponFireState) {
         ((Shared_Actor *)arg0)->color = 0;
         ((WeaponFireState *)weaponFireState)->charge = 0;
     }
-    Weapons_RequestActorState(arg0, weaponFireState, 0);
+    Nav_RequestActorState(arg0, weaponFireState, 0);
 }
 
 void Weapon_InitializeSwitchForSingleRound(void *arg0, WeaponFireState *fireState) {
@@ -106,7 +106,7 @@ s32 func_80230058_de(void *owner, void *slot) {
     WeaponOwner *weaponOwner = (WeaponOwner *)owner;
     WeaponSlot *weaponSlot = (WeaponSlot *)slot;
     WeaponPlayer *player = weaponOwner->player;
-    if (weaponSlot->delay > 0.0f || !Weapons_HasAmmoForMode(player, player->mode)) return 0;
+    if (weaponSlot->delay > 0.0f || !Player_HasAmmoForMode(player, player->mode)) return 0;
     if ((player->status->flag8F == 1 && D_801462C8.counters.m_bFragTagOn != 0) || player->recoil > 0.0f || player->busy != 0) return 0;
     switch ((s16)(player->mode - 1)) {
     case 10:

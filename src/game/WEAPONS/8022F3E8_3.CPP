@@ -17,7 +17,7 @@
 #include "WEAPONS/80213ED4.H"
 #include "RENDER_2/8025DE50_5.H"
 
-extern s32 World_PlayerHasAmmoForWeapon(void *arg0, s32 arg1);
+extern s32 Player_PlayerHasAmmoForWeapon(void *arg0, s32 arg1);
 
 
 
@@ -113,7 +113,7 @@ s32 Weapon_FindNextUsableWeapon(void *arg0)
                     break;
                 }
             }
-            if ((slot < 22) && World_PlayerHasAmmoForWeapon(actor, slot)) {
+            if ((slot < 22) && Player_PlayerHasAmmoForWeapon(actor, slot)) {
                 if ((slot != special) || (actor->ammo[0] >= 11)) {
                     if ((actor->remote == 0) || (slot < 18)) {
                         return slot;
@@ -142,7 +142,7 @@ s32 Weapon_FindNextUsableWeapon(void *arg0)
                     break;
                 }
             }
-            if ((slot < 22) && World_PlayerHasAmmoForWeapon(actor, slot)) {
+            if ((slot < 22) && Player_PlayerHasAmmoForWeapon(actor, slot)) {
                 if ((slot != special) || (actor->ammo[0] >= 11)) {
                     return slot;
                 }
@@ -154,7 +154,7 @@ s32 Weapon_FindNextUsableWeapon(void *arg0)
     return 0;
 }
 
-s32 Weapons_NextAvailableWeapon(ObjectWeaponsNextAvailableWeapon *player) {
+s32 Weapon_NextAvailableWeapon(ObjectWeaponsNextAvailableWeapon *player) {
     s32 value;
     s32 number;
     s32 index;
@@ -173,7 +173,7 @@ s32 Weapons_NextAvailableWeapon(ObjectWeaponsNextAvailableWeapon *player) {
         while ((number < 22) && (value != player->values[number * 2])) {
             number++;
         }
-        if ((number < 22) && (World_PlayerHasAmmoForWeapon(player, number) != 0)) {
+        if ((number < 22) && (Player_PlayerHasAmmoForWeapon(player, number) != 0)) {
             return number;
         }
         value++;
@@ -185,7 +185,7 @@ s32 Weapons_NextAvailableWeapon(ObjectWeaponsNextAvailableWeapon *player) {
         while ((index < 22) && (number != player->values[index * 2])) {
             index++;
         }
-        if ((index < 22) && (World_PlayerHasAmmoForWeapon(player, index) != 0)) {
+        if ((index < 22) && (Player_PlayerHasAmmoForWeapon(player, index) != 0)) {
             return index;
         }
         number++;
@@ -236,11 +236,11 @@ void Weapon_UpdateCallbacksAndTimers(void *arg0, void *arg1) {
     }
 
     if (value == 1) {
-        Weapons_RequestActorState(arg0, arg1, 1);
+        Nav_RequestActorState(arg0, arg1, 1);
     }
     if (((ObjectState1230 *)(actor))->unk_770 != ((ObjectState1230 *)(actor))->unk_62E) {
         ((ObjectState1230 *)(actor))->unk_7E8 = 0;
-        Weapons_RequestActorState(arg0, arg1, 1);
+        Nav_RequestActorState(arg0, arg1, 1);
     }
 
     callback_owner = ((ObjectLinks14C *)(arg1))->callback_owner;

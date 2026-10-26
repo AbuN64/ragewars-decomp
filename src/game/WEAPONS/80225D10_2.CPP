@@ -15,7 +15,7 @@
    on average it tints the view through func_802391AC_de with a random alpha below 7.5 and plays effect
    D_80145088 at the view's position; the hold time at 0x1D4 counts down by the frame time D_800D2988,
    and once it runs out or the hold flag at 0x5E4 is clear the player drops flag 0x800000, is released
-   through Weapons_SetPlayerState, and lets go of the object at 0x13D8 through func_80216488_de (flags 0x30200 when
+   through Player_SetPlayerState, and lets go of the object at 0x13D8 through func_80216488_de (flags 0x30200 when
    the object is a carried actor with option 0x200, 0x4600 otherwise) before forgetting it and applying
    the result through func_80219A40_de. */
 
@@ -33,7 +33,7 @@
 #include "DATA/OVLDAT6/800CF230.H"
 
 extern void Sky_StartEmitter(char *, f32, f32, f32, f32, s32, Triple);
-extern void Weapons_FillDamagePacket(Slot *, Held *, s32, f32, s32, s32);
+extern void Barrel_FillDamagePacket(Slot *, Held *, s32, f32, s32, s32);
 extern void func_80219A40_de(SharedPlayer *, char *, Slot *);
 
 void func_80226340_de(SharedPlayer *player) {
@@ -57,11 +57,11 @@ void func_80226340_de(SharedPlayer *player) {
             owner = player->views13D8.view13D8_1.held;
         }
         player->views1C.view100_9.flags &= ~0x800000;
-        Weapons_SetPlayerState(player, player, 2);
+        Player_SetPlayerState(player, player, 2);
         if (owner->options & 0x200) {
-            Weapons_FillDamagePacket(&hit, player->views13D8.view13D8_1.held, 0x30200, 25.599998f, 0x80, 0);
+            Barrel_FillDamagePacket(&hit, player->views13D8.view13D8_1.held, 0x30200, 25.599998f, 0x80, 0);
         } else {
-            Weapons_FillDamagePacket(&hit, player->views13D8.view13D8_1.held, 0x4600, 25.599998f, 0x80, 0);
+            Barrel_FillDamagePacket(&hit, player->views13D8.view13D8_1.held, 0x4600, 25.599998f, 0x80, 0);
         }
         player->views13D8.view13D8_1.held = 0;
         func_80219A40_de(player, player->views1C.view170_16.body, &hit);
@@ -77,7 +77,7 @@ void func_80226340_de(SharedPlayer *player) {
 extern void **D_80103FCC;
 
 
-extern void Weapons_UpdateViewAngles(void *, void *, void *);
+extern void Player_UpdateViewAngles(void *, void *, void *);
 extern Shared_Quad Player_ComputeAimRotation(void *, void **, Shared_Quad *);
 extern f32 GraphU64_GetPointDistance(f32 *, f32 *);
 extern s32 func_802444A4_de(void *, CVector3, CVector3, void *);
@@ -103,7 +103,7 @@ void func_80226548_de(void *player, void *body) {
     f32 *position;
     f32 comparisonAngle;
 
-    Weapons_UpdateViewAngles(player, body, &D_800CE7E4);
+    Player_UpdateViewAngles(player, body, &D_800CE7E4);
     if (((Shared_ActorView *)player)->targeting != 0) {
         aimRotation = Player_ComputeAimRotation(player, &aimTarget, &aimWords);
         if (aimTarget != 0) {
@@ -179,7 +179,7 @@ static inline s32 startHealth(BonusPlayer *player) {
     if (D_801462C8.controllerMode == 1 && player->bot == 0) health += ((PlayerBonus *)D_800FEB10)[player->slot].value;
     return health;
 }
-void Weapons_InitializePlayerHealth(BonusPlayer *player) {
+void Player_InitializePlayerHealth(BonusPlayer *player) {
     ActorTemplate *model;
     s32 id;
     id = player->modelId;

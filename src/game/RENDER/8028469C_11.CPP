@@ -11,7 +11,7 @@ extern void func_80295E84_de(s32 *arg0, s32 arg1);
 
 
 
-void func_80285570_de(MeshMaterial *dstData, PackedMeshMaterial *arg1) {
+void Rumble_ExpandMeshMaterial(MeshMaterial *dstData, PackedMeshMaterial *arg1) {
     s16 value;
     s32 reference;
 
@@ -41,7 +41,7 @@ void func_80285570_de(MeshMaterial *dstData, PackedMeshMaterial *arg1) {
     func_80295E84_de(&dstData->texture, reference);
 }
 
-f32 func_80285630_de(s32 arg0) {
+f32 Rumble_SamplePackedFloatRange(s32 arg0) {
     s32 sp0;
     s32 sp4;
     u32 seed;

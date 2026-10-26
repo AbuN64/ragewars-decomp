@@ -6,7 +6,7 @@ struct Field_s32_2E0 {
     char pad[0x2E0];
     s32 value;
 };
-struct Triple_func_802683E0_de {
+struct TripleEventsFireWithinHeightRange {
     s32 x;
     f32 y;
     s32 z;

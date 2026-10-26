@@ -10,7 +10,7 @@ struct Player;
 struct RangeNode;
 typedef struct AiProfile {
     u8 pad0[0x79];
-    u8 yawSensitivity; /* 0x79: Weapons_UpdateViewAngles */
+    u8 yawSensitivity; /* 0x79: Player_UpdateViewAngles */
     u8 sensitivity; /* 0x7A: ContPad_BuildControllerState */
     s8 controlMode; /* 0x7B */
     u8 remap; /* 0x7C */
@@ -86,7 +86,7 @@ struct Player {
     u8 pad664[0xC];
     f32 damageCooldown; /* 0x670 */
     u8 pad674[4];
-    f32 rangeTimer; /* 0x678: Weapons_UpdatePlayerEffectLights */
+    f32 rangeTimer; /* 0x678: Player_UpdatePlayerEffectLights */
     struct RangeNode *rangeNodes[3]; /* 0x67C: created by func_80268C1C_de */
     u8 tuning[0x10]; /* 0x688 */
     void *weaponAnimation; /* 0x698 */

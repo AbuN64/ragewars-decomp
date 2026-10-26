@@ -3,7 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CALLBACK.H"
 
-void func_8029AA34_de(void) {
+void Smos_ClearControllerFlags(void) {
     s32 idx;
     s32 i;
     s32 j;

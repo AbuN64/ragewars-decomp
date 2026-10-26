@@ -67,10 +67,10 @@ s32 func_8043E2D8_de(struct Field *field, Shared_MenuHandle *holder) {
         }
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         text = field->text[g_languageIndex];
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 2), D_800EE970, value);
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 2), D_800EE970, value);
 #else
         text = *field->text;
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 2), D_800DE2F0, value);
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 2), D_800DE2F0, value);
 #endif
     }
     return 0;

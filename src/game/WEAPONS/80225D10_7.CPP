@@ -31,7 +31,7 @@ extern s32 D_800D297C;
 extern void Geometry_SetCombineMode(s32);
 extern void func_8024A3B0_de(LevelActor *, PlayerCode80225D10 *, s32, Draw *);
 
-void Weapons_DrawTintedPlayer(LevelActor *actor, s32 arg1, Draw *draw) {
+void Player_DrawTintedPlayer(LevelActor *actor, s32 arg1, Draw *draw) {
     PlayerCode80225D10 *player;
     Gfx *gfx;
 
@@ -79,7 +79,7 @@ void Weapons_DrawTintedPlayer(LevelActor *actor, s32 arg1, Draw *draw) {
     }
 }
 
-extern void Weapons_FillDamagePacket(void *arg0, s32 arg1, s32 arg2, f32 arg3, s32 arg4, s32 arg5);
+extern void Barrel_FillDamagePacket(void *arg0, s32 arg1, s32 arg2, f32 arg3, s32 arg4, s32 arg5);
 extern void func_80219A40_de(void *arg0, void *arg1, void *arg2);
 
 
@@ -131,7 +131,7 @@ void func_802292B8_de(void *actor) {
                     frameDamage = D_800C2C4C_de.unk0;
                 }
             }
-            Weapons_FillDamagePacket((void *)&damage, (s32)((CPlayerDamageOverTime *)(damageEffect))->m_pDamageSource,
+            Barrel_FillDamagePacket((void *)&damage, (s32)((CPlayerDamageOverTime *)(damageEffect))->m_pDamageSource,
                           (s32)frameDamage, 25.599998f, 0x100080, 0);
             func_80219A40_de(actor, &((ObjectState5E8 *)(actor))->unk_170, (void *)&damage);
         }
@@ -205,7 +205,7 @@ static inline s32 max_ammo(SharedPlayer *player, s32 type) {
     return max;
 }
 
-void Weapons_GiveAmmoWithMessage(SharedPlayer *player, s32 type, s32 amount) {
+void Player_GiveAmmoWithMessage(SharedPlayer *player, s32 type, s32 amount) {
     char number[8];
     char message[32];
 

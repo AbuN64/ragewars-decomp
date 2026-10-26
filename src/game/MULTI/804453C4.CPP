@@ -14,7 +14,7 @@
 extern char D_80145040[];
 extern Spinner D_800E63C0[];
 
-extern s32 Weapons_GetPlayerIndex(char *, s32);
+extern s32 Player_GetPlayerIndex(char *, s32);
 
 
 
@@ -22,7 +22,7 @@ s32 func_80445964_de(void *unused, MenuRecAt20V1 *menu) {
     s32 i;
     f32 t;
 
-    i = Weapons_GetPlayerIndex(D_80145040, menu->id);
+    i = Player_GetPlayerIndex(D_80145040, menu->id);
     t = D_800E63C0[i].timer + D_800D2988;
     D_800E63C0[i].timer = t;
     if (t >= (15.0f)) {
@@ -52,7 +52,7 @@ const unsigned int rodata_func_80445964_de_800E2810[1] = {
 #if defined(VERSION_US_REV1)
 extern char D_80145040[];
 extern Spinner D_800E63C0[];
-extern s32 Weapons_GetPlayerIndex(char *, s32);
+extern s32 Player_GetPlayerIndex(char *, s32);
 extern u8 *D_800D3C44;
 /* Highlights the name slot func_8022A5A0_de finds for the menu (display flags 0x1800000 on its model part,
    cleared on the other three), resets that spinner's timer and copies the slot's name (trailing blanks
@@ -67,7 +67,7 @@ void Multi_SetupNameSpinner(MenuRecAt20V1 *menu) {
     char *destination;
     u8 defaultChar;
     s32 nameChar;
-    index = Weapons_GetPlayerIndex(D_80145040, menu->id);
+    index = Player_GetPlayerIndex(D_80145040, menu->id);
     switch (index) {
         default:
         case 0:
@@ -136,7 +136,7 @@ s32 func_80445964_de(void *unused, MenuRecAt20V1 *menu) {
     s32 i;
     f32 t;
 
-    i = Weapons_GetPlayerIndex(D_80145040, menu->id);
+    i = Player_GetPlayerIndex(D_80145040, menu->id);
     t = D_800E63C0[i].timer + D_800D2988;
     D_800E63C0[i].timer = t;
     if (t >= D_800E2810) {

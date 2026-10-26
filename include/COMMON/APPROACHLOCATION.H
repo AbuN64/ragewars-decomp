@@ -9,7 +9,7 @@
 
 typedef struct { CVector3 pos; s32 unkC; } ApproachLocation;
 extern f32 D_800C2160_de[],D_800C215C_de;
-extern f32 Weapons_GetSignedAngleToPoint(Actor_func_80214624_de *,CVector3);
+extern f32 Barrel_GetSignedAngleToPoint(Actor_func_80214624_de *,CVector3);
 extern f32 GameObject_GetActorRadius(Actor_u1 *);
 extern f32 GraphU64_GetHorizontalAngle(CVector3 *);
 struct Cursor;

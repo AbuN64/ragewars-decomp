@@ -9,7 +9,7 @@ typedef struct OwnerRecAt8V1 OwnerRecAt8V1;
 struct NodeMenuCreateOverlayNode;
 typedef struct NodeMenuCreateOverlayNode NodeMenuCreateOverlayNode;
 
-extern s32 func_8041B970_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 SmpOverlay_DispatchSlotEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 struct Record_func_8041B22C_de;
 struct Record_func_8041B22C_de {
@@ -93,7 +93,7 @@ struct Child {
 };
 
 struct SlotsRecAt5CV2;
-extern s32 func_8041B7C4_de(struct SlotsRecAt5CV2 *object);
+extern s32 SmpOverlay_CountUsedSlots(struct SlotsRecAt5CV2 *object);
 
 struct OwnerRecAt44;
 typedef struct OwnerRecAt44 OwnerRecAt44;
@@ -165,7 +165,7 @@ struct Mixer {
     int muted[4];
 };
 
-extern void func_8041B828_de(sm_dlmultiuser *context, s32 index, s32 id);
+extern void SmpOverlay_ShowSlotNodeById(sm_dlmultiuser *context, s32 index, s32 id);
 
 struct Record_func_8041B22C_de;
 typedef struct Record_func_8041B22C_de Record_func_8041B22C_de;

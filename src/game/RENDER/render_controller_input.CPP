@@ -89,7 +89,7 @@ void Control_ReadControllerStates(void) {
     }
 }
 
-/* Polls the controller paks when they are enabled: after func_80285C78_de it tries to take the pak lock
+/* Polls the controller paks when they are enabled: after Rumble_RecycleFinishedEffectNodes it tries to take the pak lock
  * D_8010FBC0 without blocking and, holding it, refreshes the four pak entries through Control_UpdateControllerRumble and
  * advances the pak state (state 0 opens the pak through func_802B74B0_de once Control_IsAnyControllerPakEnabled detects it,
  * otherwise closes it through func_802B7560_de; states 1 to 3 reset to 0 and close it), then releases the
@@ -109,7 +109,7 @@ void Control_PollControllerPaks(void) {
     s32 i;
 
     if (D_800CBC10 != 0) {
-        func_80285C78_de(&D_8010EC90);
+        Rumble_RecycleFinishedEffectNodes(&D_8010EC90);
         if ((locked = osRecvMesg(&D_8010FBC0, 0, 0) == 0)) {
             D_800CBC1C = func_802BAD80_de(0);
         }

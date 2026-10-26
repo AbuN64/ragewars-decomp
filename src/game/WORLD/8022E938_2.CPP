@@ -8,8 +8,8 @@ extern void Player_SetProfileValue15(void *, u8);
 extern void Player_SetProfileValue16(void *, u8);
 extern void Player_SetProfileProgress(void *, s32);
 extern void Player_SetProfileSlotValue(void *, s32, s32);
-extern void Weapons_SetAchievementFlag7(s32, s32);
-extern void Weapons_SetAchievementFlag2F(s32, s32);
+extern void Player_SetAchievementFlag7(s32, s32);
+extern void Player_SetAchievementFlag2F(s32, s32);
 
 
 
@@ -53,18 +53,18 @@ void Player_InitializeProfile(void *arg0) {
     XPlus_FillMemory((s32)((char *)object + 0x7D), 0, 1);
     XPlus_FillMemory((s32)((char *)object + 0x51), 0, 3);
     XPlus_FillMemory((s32)((char *)object + 0x125), 0, 0x64);
-    Weapons_SetAchievementFlag7((s32)object, 0);
-    Weapons_SetAchievementFlag7((s32)object, 5);
-    Weapons_SetAchievementFlag7((s32)object, 7);
+    Player_SetAchievementFlag7((s32)object, 0);
+    Player_SetAchievementFlag7((s32)object, 5);
+    Player_SetAchievementFlag7((s32)object, 7);
     XPlus_FillMemory((s32)((char *)object + 0x57), 0, 0x14);
     XPlus_FillMemory((s32)((char *)object + 0x54), 0, 3);
     XPlus_FillMemory((s32)((char *)object + 0x4A), 0, 7);
     XPlus_FillMemory((s32)((char *)object + 0x78), 0, 1);
     XPlus_FillMemory((s32)((char *)object + 0x79), 0, 2);
-    Weapons_SetAchievementFlag2F((s32)object, 0);
-    Weapons_SetAchievementFlag2F((s32)object, 2);
-    Weapons_SetAchievementFlag2F((s32)object, 3);
-    Weapons_SetAchievementFlag2F((s32)object, 4);
+    Player_SetAchievementFlag2F((s32)object, 0);
+    Player_SetAchievementFlag2F((s32)object, 2);
+    Player_SetAchievementFlag2F((s32)object, 3);
+    Player_SetAchievementFlag2F((s32)object, 4);
     XPlus_FillMemory((s32)((char *)object + 0x7B), 0, 2);
     XPlus_FillMemory((s32)((char *)object + 0x7E), 0, 5);
     XPlus_FillMemory((s32)((char *)object + 0x88), 0, 5);

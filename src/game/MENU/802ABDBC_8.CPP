@@ -9,8 +9,8 @@
 /* Returns whether a player actor can use the item picked up through InstHdr_GetActorType: never for non-players or disabled actors, always during a team round when the model says so, and otherwise by the item's table: a D_800D31D0 power-up when the actor's team matches a D_800CE474 entry or its slot is free while not both states 3 and 7 are in use, a D_800D3230 weapon when on those teams or below the level from func_8022ACB8_de, a D_800D32A8 item when func_8022AC00_de exceeds the actor's count at 0x5E4, any D_800D34C0 item, and a D_800D3390 item unless it is item 0xBD6. */
 extern s32 D_800CE474[2];
 extern s32 InstHdr_GetActorType(s32 arg0);
-extern s32 Weapons_GetAmmoCapacity(Actor_func_802AB400_de *actor, s16 index, s32 arg2);
-extern s32 Weapons_GetMaxHealth(Actor_func_802AB400_de *actor, s32 id);
+extern s32 Player_GetAmmoCapacity(Actor_func_802AB400_de *actor, s16 index, s32 arg2);
+extern s32 Player_GetMaxHealth(Actor_func_802AB400_de *actor, s32 id);
 static inline EntryRecAtE *find_entry(char *table, s32 count, s32 size, s32 id) {
     EntryRecAtE *entry;
     s32 i;
@@ -66,7 +66,7 @@ s32 func_802AB400_de(s32 arg0, Actor_func_802AB400_de *actor) {
         }
         weapon = find_entry(&D_800D3230, 5, 0x14, id);
         if (weapon != 0) {
-            level = Weapons_GetAmmoCapacity(player, weapon->index, 0);
+            level = Player_GetAmmoCapacity(player, weapon->index, 0);
             if (player->team == D_800CE474[0] || player->team == D_800CE474[1]) {
                 return 1;
             }
@@ -74,7 +74,7 @@ s32 func_802AB400_de(s32 arg0, Actor_func_802AB400_de *actor) {
         }
         item = find_entry(&D_800D32A8, 7, 0x18, id);
         if (item != 0) {
-            return player->count < Weapons_GetMaxHealth(player, id);
+            return player->count < Player_GetMaxHealth(player, id);
         }
         bonus = find_entry((char *)D_800D34C0, 15, 0x18, id);
         if (bonus != 0) {

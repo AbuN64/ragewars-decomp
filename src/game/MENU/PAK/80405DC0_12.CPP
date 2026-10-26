@@ -30,7 +30,7 @@ extern s32 D_8015375C;
 
 extern s32 D_800E28BC;
 
-extern SharedPlayer *Weapons_FindPlayerByController(void *profiles, PakMenuSlot *slot);
+extern SharedPlayer *Player_FindPlayerByController(void *profiles, PakMenuSlot *slot);
 extern void func_80253908_de(s32 heap);
 extern void Pak_OpenDialog(void *buffer, char *message, SharedPlayer *player, char *title, s32 channel);
 
@@ -75,7 +75,7 @@ s32 func_804085E0_de(void *unused, MenuRecAt20V3 *menu) {
     if (D_8014D4EC_de != 0) {
         if (D_80153760 != 0) {
             D_80153784 = 1;
-            target = Weapons_FindPlayerByController(D_80145040, menu->slot);
+            target = Player_FindPlayerByController(D_80145040, menu->slot);
             Pak_OpenDialog(target->views5DC.view5DC_6.storage + 0x554, D_0044FB2C, target, target->views5E8.view698_38.title, channel);
             return 1;
         }
@@ -104,7 +104,7 @@ s32 func_804085E0_de(void *unused, MenuRecAt20V3 *menu) {
             return 1;
         }
     } else {
-        target = Weapons_FindPlayerByController(D_80145040, menu->slot);
+        target = Player_FindPlayerByController(D_80145040, menu->slot);
         if (D_80153760 != 0) {
             D_80153784 = 1;
             Pak_OpenDialog(D_80145040 + 0x5DC, D_0044FFA4, target, target->views5E8.view698_38.title, channel);

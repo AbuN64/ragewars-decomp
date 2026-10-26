@@ -13,7 +13,7 @@ extern char D_80102B00[][0x190];
 
 extern int D_800D30BC;
 extern int Player_GetProfileAchievementFlag(char *, int);
-extern int Weapons_GetPlayerIndex(void *, PlayerRecAt1450V1 *);
+extern int Player_GetPlayerIndex(void *, PlayerRecAt1450V1 *);
 extern void Sky_PostTargetedScreenMessage(void *, void *, int, int, float);
 
 int Weapon_CheckSinglePlayerFirePermission(PlayerRecAt1450V1 *player) {
@@ -35,7 +35,7 @@ int Weapon_CheckSinglePlayerFirePermission(PlayerRecAt1450V1 *player) {
         SoundElement_PlayFlatSound(0xD4D);
         if (player->hud != 0) {
             Sky_PostTargetedScreenMessage((char *)rules - 0x1240, player->hud, D_800D30BC,
-                          Weapons_GetPlayerIndex((char *)rules - 0x1288, player), D_800C8100);
+                          Player_GetPlayerIndex((char *)rules - 0x1288, player), D_800C8100);
         }
     }
     return result;

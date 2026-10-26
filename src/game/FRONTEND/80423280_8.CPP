@@ -53,7 +53,7 @@ extern void MarkMenuEventHandled();
 
 
 /* Moves the menu cursor on event 1: when the current slot's successor in the 28-byte slot table
-   (word at D_800E0658) exists and func_80265650_de reports it set in the menu's flags at 0xA74, it
+   (word at D_800E0658) exists and Defs_TestBit reports it set in the menu's flags at 0xA74, it
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
    flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
    through func_804280BC_de and, by the mode byte at 0xD of D_801462C8, through func_804281A8_de and
@@ -68,10 +68,10 @@ extern void MarkMenuEventHandled();
 
 extern u8 D_801462C8[];
 
-extern s32 func_80265650_de(u8 *, s32);
+extern s32 Defs_TestBit(u8 *, s32);
 
 /* Moves the menu cursor on event 1: when the current slot's successor in the 28-byte slot table
-   (word at D_800E065C) exists and func_80265650_de reports it set in the menu's flags at 0xA74, it
+   (word at D_800E065C) exists and Defs_TestBit reports it set in the menu's flags at 0xA74, it
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
    flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
    through func_804280BC_de and, by the mode byte at 0xD of D_801462C8, through func_804281A8_de and
@@ -84,7 +84,7 @@ extern s32 func_80265650_de(u8 *, s32);
 
 
 /* Moves the menu cursor on event 1: when the current slot's successor in the 28-byte slot table
-   (word at D_800E0654) exists and func_80265650_de reports it set in the menu's flags at 0xA74, it
+   (word at D_800E0654) exists and Defs_TestBit reports it set in the menu's flags at 0xA74, it
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
    flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
    through func_804280BC_de and, by the mode byte at 0xD of D_801462C8, through func_804281A8_de and
@@ -97,7 +97,7 @@ extern s32 func_80265650_de(u8 *, s32);
 
 
 /* Moves the menu cursor on event 1: when the current slot's successor in the 28-byte slot table
-   (word at D_800E0650) exists and func_80265650_de reports it set in the menu's flags at 0xA74, it
+   (word at D_800E0650) exists and Defs_TestBit reports it set in the menu's flags at 0xA74, it
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
    flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
    through func_804280BC_de and, by the mode byte at 0xD of D_801462C8, through func_804281A8_de and
@@ -198,12 +198,12 @@ s32 func_80428850_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     if (next == -1) {
         return 0;
     }
-    set = func_80265650_de(D_800E4690->owned, next);
+    set = Defs_TestBit(D_800E4690->owned, next);
     if (set != 1) {
         return 0;
     }
     SoundElement_PlayFlatSound(0xE7D);
-    if (func_80265650_de(D_800E4690->pending, D_800E4690->selection) == set) {
+    if (Defs_TestBit(D_800E4690->pending, D_800E4690->selection) == set) {
         D_800E4690->window->alpha = 0x46;
     } else {
         D_800E4690->window->alpha = 0xAA;
@@ -236,12 +236,12 @@ s32 func_804289B4_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     if (next == -1) {
         return 0;
     }
-    set = func_80265650_de(D_800E4690->owned, next);
+    set = Defs_TestBit(D_800E4690->owned, next);
     if (set != 1) {
         return 0;
     }
     SoundElement_PlayFlatSound(0xE7D);
-    if (func_80265650_de(D_800E4690->pending, D_800E4690->selection) == set) {
+    if (Defs_TestBit(D_800E4690->pending, D_800E4690->selection) == set) {
         D_800E4690->window->alpha = 0x46;
     } else {
         D_800E4690->window->alpha = 0xAA;
@@ -274,12 +274,12 @@ s32 func_80428B18_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     if (next == -1) {
         return 0;
     }
-    set = func_80265650_de(D_800E4690->owned, next);
+    set = Defs_TestBit(D_800E4690->owned, next);
     if (set != 1) {
         return 0;
     }
     SoundElement_PlayFlatSound(0xE7D);
-    if (func_80265650_de(D_800E4690->pending, D_800E4690->selection) == set) {
+    if (Defs_TestBit(D_800E4690->pending, D_800E4690->selection) == set) {
         D_800E4690->window->alpha = 0x46;
     } else {
         D_800E4690->window->alpha = 0xAA;
@@ -312,12 +312,12 @@ s32 func_80428C7C_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     if (next == -1) {
         return 0;
     }
-    set = func_80265650_de(D_800E4690->owned, next);
+    set = Defs_TestBit(D_800E4690->owned, next);
     if (set != 1) {
         return 0;
     }
     SoundElement_PlayFlatSound(0xE7D);
-    if (func_80265650_de(D_800E4690->pending, D_800E4690->selection) == set) {
+    if (Defs_TestBit(D_800E4690->pending, D_800E4690->selection) == set) {
         D_800E4690->window->alpha = 0x46;
     } else {
         D_800E4690->window->alpha = 0xAA;

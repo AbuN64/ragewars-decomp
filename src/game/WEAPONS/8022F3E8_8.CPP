@@ -31,7 +31,7 @@ extern char D_80145040[];
 
 extern s16 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
-extern s32 Weapons_GetPlayerIndex(void *, void *);
+extern s32 Player_GetPlayerIndex(void *, void *);
 extern void Sky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 
 static inline s32 can_fire(char *player) {
@@ -49,7 +49,7 @@ static inline s32 can_fire(char *player) {
     if (ammo == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC, D_800E0D44, D_800DCC68, g_languageIndex), Weapons_GetPlayerIndex(D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC, D_800E0D44, D_800DCC68, g_languageIndex), Player_GetPlayerIndex(D_80145040, player),
                           1.0f);
         }
     }

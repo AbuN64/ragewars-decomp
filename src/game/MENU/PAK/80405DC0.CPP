@@ -49,7 +49,7 @@ extern char D_0044FA6C[];
 
 extern char D_8014561C[];
 
-extern SharedPlayer *Weapons_FindPlayerByController(char *pool, PakMenuSlot *slot);
+extern SharedPlayer *Player_FindPlayerByController(char *pool, PakMenuSlot *slot);
 
 extern void Ovlgame_StartPlayerAnimation(SharedPlayer *player, s32 team);
 
@@ -134,7 +134,7 @@ s32 func_80408C4C_de(void *unused, Menu_func_80408C4C_de *menu) {
         return 1;
     }
     if (D_80153730 != 0) {
-        player = Weapons_FindPlayerByController(&D_80145040, menu->slot);
+        player = Player_FindPlayerByController(&D_80145040, menu->slot);
         menu->player = player;
         profile = player->views5D8.view5D8_6.profile;
         profile->flags = D_8014D4B0_de;

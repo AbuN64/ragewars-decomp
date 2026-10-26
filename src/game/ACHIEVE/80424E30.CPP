@@ -70,7 +70,7 @@ void Achieve_UpdateMatchCounters(s32 arg0, s32 arg1) {
 
 /* Count achievements, store the rank, and select its version-specific title. */
 
-extern s32 func_80265650_de(s32 bits, s32 index);
+extern s32 Defs_TestBit(s32 bits, s32 index);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 extern char *D_800D3200[];
@@ -112,7 +112,7 @@ char *func_80424DE8_de(s32 index) {
     count = 0;
     i = 0;
     do {
-        if (func_80265650_de((s32)D_80102B00[index].achievementFlags, i) == 1) {
+        if (Defs_TestBit((s32)D_80102B00[index].achievementFlags, i) == 1) {
             count++;
         }
         i++;

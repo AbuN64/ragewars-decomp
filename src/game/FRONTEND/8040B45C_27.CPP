@@ -4,7 +4,7 @@
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1) || (defined(NON_MATCHING) && defined(VERSION_EU))
 #if defined(VERSION_EU)
-#define func_8040CB40_eu_x func_8040C700_de
+#define func_8040CB40_eu_x Frontend_HandleBoundedValueEvent
 #endif
 /* Slider widget message handler: clamps the current value into range, then dispatches on the
    message to get/set the value, range, step or user word, adjusts by one step, or posts the new

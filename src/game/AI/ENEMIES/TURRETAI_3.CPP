@@ -26,7 +26,7 @@ void func_80272BCC_de(void *arg0, void *arg1, void *arg2);
 
 void Turret_Move(struct Owner *owner, Rider *rider, s32 mode, SharedPlayer *target);
 
-void Weapons_SetLoopingSound(void *arg0, void *arg1, s32 arg2);
+void Barrel_SetLoopingSound(void *arg0, void *arg1, s32 arg2);
 
 void Barrel_StopActorLoopingSound(void *arg0, void *arg1);
 
@@ -96,7 +96,7 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
     actorKind = actor->player.views1C.viewE4_6.unkE4;
     switch (actorKind) {                              /* irregular */
     case 0x40B:
-        Weapons_UpdateTrackGoals(&actor->input, riderState, &work.result.output, 0, 1);
+        Barrel_UpdateTrackGoals(&actor->input, riderState, &work.result.output, 0, 1);
         break;
     case 0x40C:
         AI_DynTurretGetTargetInfo(&actor->player,&riderState->target,&work.result.result);
@@ -121,7 +121,7 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
         GraphU64_AddVec3(&work.destination.v, &work.destination.v, &work.origin.v);
         GraphU64_SubtractVectors(&work.relative.v, &work.destination.v, &work.origin.v);
         desiredSpeed = GraphU64_GetVerticalAngle(&work.relative.v.x);
-        aimError = Weapons_GetSignedAngleToPoint(&actor->actor,work.destination.v);
+        aimError = Barrel_GetSignedAngleToPoint(&actor->actor,work.destination.v);
         work.result.workspace.projection = aimError;
         if (work.result.result.distance <= turret->range) {
             fireCone = turret->m_FireAngle * heightScale;
@@ -162,7 +162,7 @@ block_12:
     } else if(D_800C1A38_de < aimError) goto changed;
     if(riderState->nav.speed != desiredSpeed) {
 changed:
-        Weapons_SetLoopingSound(actor,riderState,0xC3F);
+        Barrel_SetLoopingSound(actor,riderState,0xC3F);
     } else Barrel_StopActorLoopingSound(actor,riderState);
     /* The second ABI word is the actual rider pointer, used as such by this callee. */
     ((void (*)(void *,void *,f32,f32))Barrel_ApplyClampedTurn)(actor,riderState, turret->rate, aimError);
@@ -218,12 +218,12 @@ void Turret_Setup(LevelActor *actor, struct RecordRecAt13C *turret) {
         if (record->flags & 0x800) {
             actor->flags =
                 actor->flags & ~0x100;
-            Weapons_RequestActorState(actor, turret, 0);
+            Nav_RequestActorState(actor, turret, 0);
         } else {
-            Weapons_RequestActorState(actor, turret, 1);
+            Nav_RequestActorState(actor, turret, 1);
         }
     } else {
-        Weapons_RequestActorState(actor, turret, 0x40);
+        Nav_RequestActorState(actor, turret, 0x40);
     }
     turret->state = 0;
 }
@@ -235,7 +235,7 @@ void Turret_Advance(char *actor, Obj *state) {
     if (((struct OwnerRecAtE4 *)(actor))->id == 0x40C) {
         state->timer += D_800D2988;
         if (D_800C1A48_de < state->timer || state->count <= 0) {
-            Weapons_RequestActorState(actor, state, 0x40);
+            Nav_RequestActorState(actor, state, 0x40);
         }
     }
 }
@@ -251,6 +251,6 @@ int Turret_Anim_ACTIVATE(struct Owner *owner) {
 
 void Turret_Code_ACTIVATE(void *a, struct WeaponEventSource *b) {
     if (b->eventEnabled != 0) {
-        Weapons_RequestActorState(a, b, 0x3E);
+        Nav_RequestActorState(a, b, 0x3E);
     }
 }

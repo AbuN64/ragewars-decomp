@@ -35,7 +35,7 @@ extern void Player_InitializeProfile(char *);
 
 extern void func_80434FB4_de(s32);
 
-extern void Weapons_SetAchievementFlag7(char *, s32);
+extern void Player_SetAchievementFlag7(char *, s32);
 
 extern void func_8041A430_de(void *, s32);
 
@@ -63,7 +63,7 @@ extern void func_8042E9A0_de(s32, s32);
 extern void func_802A2400_de(f32);
 extern void func_802A2360_de(void);
 extern void *Cache_AllocateMemory(s32);
-extern s32 func_80265650_de(u8 *, s32);
+extern s32 Defs_TestBit(u8 *, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void Frontend_SetWidgetFlag100(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
@@ -77,7 +77,7 @@ extern u32 func_802999F4_de(void);
 extern void Frontend_RequestScreenMode(s32);
 /* Builds the options screen: clears the per-player settings, retires bots that are no longer wanted, allocates
  * the screen record in D_800E4600 and picks the button layout. The layout is 3 when any human is on a pad
- * that func_80265650_de reports in group 0 (or the game flag 0x20000000 is set), 2 for group 1, else the
+ * that Defs_TestBit reports in group 0 (or the game flag 0x20000000 is set), 2 for group 1, else the
  * default; it positions the first widget and shows or hides the sibling widgets. */
 s32 Frontend_InitPlayModeMenu(void *menu) {
     CGameStatus *counters = &D_801462C8.counters;
@@ -116,9 +116,9 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     groupC = 0;
     for (i = 0; i < 4; i++) {
         if (D_80102B00[i].player >= 0) {
-            groupA = groupA || func_80265650_de(&D_8010EB7D[i * sizeof(Profile)], 0);
-            groupB = groupB || func_80265650_de(&D_8010EB7D[i * sizeof(Profile)], 1);
-            groupC = groupC || func_80265650_de(&D_8010EB7D[i * sizeof(Profile)], 2);
+            groupA = groupA || Defs_TestBit(&D_8010EB7D[i * sizeof(Profile)], 0);
+            groupB = groupB || Defs_TestBit(&D_8010EB7D[i * sizeof(Profile)], 1);
+            groupC = groupC || Defs_TestBit(&D_8010EB7D[i * sizeof(Profile)], 2);
         }
     }
     if (D_801462C8.flags & 0x20000000) {
@@ -269,7 +269,7 @@ s32 Frontend_ApplyModeChoice(void) {
         if (D_80102B00[0].player < 0) {
             Player_InitializeProfileSlot(0);
             for (i = 0; i < 20; i++) {
-                Weapons_SetAchievementFlag7((char *)D_80102B00, i);
+                Player_SetAchievementFlag7((char *)D_80102B00, i);
             }
         }
         D_801462C8.controllerMode = 3;

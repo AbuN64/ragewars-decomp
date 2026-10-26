@@ -9,7 +9,7 @@ extern s32 InstHdr_GetActorType(void *arg0);
 
 
 
-s32 Weapons_GetImpactSlot(void *actorObject)
+s32 Barrel_GetImpactSlot(void *actorObject)
 {
     char *actor = actorObject;
     CGameStatus *audio;

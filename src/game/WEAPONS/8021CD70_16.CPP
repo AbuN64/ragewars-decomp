@@ -4,7 +4,7 @@
 #include "COMMON/VECTOR4F.H"
 
 extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
-extern void Weapons_UpdateViewAngles(SharedPlayer *,func_802165F8_S1 *,char *);
+extern void Player_UpdateViewAngles(SharedPlayer *,func_802165F8_S1 *,char *);
 extern char D_800CED30;
 extern f32 D_800D2988;
 extern f32 D_800C29C0_de,D_800C29C4_de,D_800C29C8_de,D_800C29CC_de,D_800C29D0_de,D_800C29D4_de,D_800C29D8_de,D_800C29DC_de,D_800C29E0_de,D_800C29E4_de,D_800C29E8_de,D_800C29EC_de,D_800C29F0_de,D_800C29F4_de,D_800C29F8_de,D_800C29FC_de;
@@ -29,16 +29,16 @@ void func_8022470C_de(void *playerContext, void *bodyContext) {
     u16 kind;
     s32 nextAnimation;
 
-    Weapons_EaseOwnerHeightEffect(playerContext);
+    Player_EaseOwnerHeightEffect(playerContext);
     GraphU64_EaseValueToward(&player->views5E8.view72C_75.unk72C, 0.0f, 0.25f);
     crouchingView = 1;
     if (!(player->views5E8.view718_70.crouch > D_800C29C0_de)) {
         crouchingView = 0;
     }
     if (crouchingView != 0) {
-        Weapons_UpdateViewAngles(player, body, &D_800CE7FC);
+        Player_UpdateViewAngles(player, body, &D_800CE7FC);
     } else {
-        Weapons_UpdateViewAngles(player, body, &D_800CE7E4);
+        Player_UpdateViewAngles(player, body, &D_800CE7E4);
     }
     crouchingMovement = 1;
     if (!(player->views5E8.view718_70.crouch > D_800C29C4_de)) {
@@ -49,10 +49,10 @@ void func_8022470C_de(void *playerContext, void *bodyContext) {
     } else {
         func_802233F0_de(player, body, &D_800C94EC_de);
     }
-    if ((player->views5E8.view7E8_105.unk7E8 == 0) && !(player->views5E8.view6E4_61.unk6E4 > D_800C29C8_de) && !(body->flags & 0xC0000) && (body->model->flags & 2) && (player->views5E8.view6B0_46.unk6B0 & 0x10) && (player->views5E8.view11D8_147.unk11D8 <= 0.0f)) { Weapons_SetPlayerState(player, body, 5); jumpStarted = 1; } else jumpStarted = 0;
+    if ((player->views5E8.view7E8_105.unk7E8 == 0) && !(player->views5E8.view6E4_61.unk6E4 > D_800C29C8_de) && !(body->flags & 0xC0000) && (body->model->flags & 2) && (player->views5E8.view6B0_46.unk6B0 & 0x10) && (player->views5E8.view11D8_147.unk11D8 <= 0.0f)) { Player_SetPlayerState(player, body, 5); jumpStarted = 1; } else jumpStarted = 0;
     if (jumpStarted == 0) {
         if ((player->views5E8.view6C0_51.unk6C0 == 0.0f) && (player->views5E8.view6C4_54.unk6C4 == 0.0f)) {
-            Weapons_SetPlayerState(player, body, 2);
+            Player_SetPlayerState(player, body, 2);
         }
         if (((body->flags & 0x5000) == 0x4000) && (player->views5E8.view6D0_71.onGround != 0)) {
             elapsedStepTime = player->views5E8.view11C4_144.soundTime + D_800D2988;

@@ -38,7 +38,7 @@ extern ObjectState1E_2 D_801462C8;
 
 extern s32 func_802934F8_de(void);
 
-extern void *Weapons_GetFirstPlayer(void *);
+extern void *Player_GetFirstPlayer(void *);
 
 /** Return the global word at D_8010FC4C. */
 
@@ -201,7 +201,7 @@ void Control_CycleActorSnapshotMode(void) {
         snapshot->savedActorId = D_8013B2BC;
         options = &D_801462C8;
         if (options->unk_1D == 0) {
-            player = Weapons_GetFirstPlayer((char *)options - 0x1288);
+            player = Player_GetFirstPlayer((char *)options - 0x1288);
             if (player != 0) {
                 if (snapshot->mode == 1 &&
                     (D_8013B2BC != ((Shared_ActorView *)player)->spawn ||

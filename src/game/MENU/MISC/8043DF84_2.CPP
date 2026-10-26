@@ -137,7 +137,7 @@ s32 func_8043E7AC_de(Shared_DebugWidget *widget) {
 #else
         text = *widget->text;
 #endif
-        func_802658E4_de(text + (Pak_CountLineChars(widget) - 3), D_800DE2F8, D_800E1DF8_de - 5);
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(widget) - 3), D_800DE2F8, D_800E1DF8_de - 5);
     }
     return 0;
 }

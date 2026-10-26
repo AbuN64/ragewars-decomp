@@ -6,7 +6,7 @@
 #include "particle/8024D018_4.H"
 #include "WEAPONS/80213ED4_23.H"
 
-void Weapons_SpawnFlaggedEffects(Player *actor, s32 *emittedFlags, s32 emissionFlag, s32 primaryEffectMask, s32 secondaryEffectMask) {
+void Barrel_SpawnFlaggedEffects(Player *actor, s32 *emittedFlags, s32 emissionFlag, s32 primaryEffectMask, s32 secondaryEffectMask) {
     s32 *entry;
 
     if ((emittedFlags[0] & emissionFlag) != 0) {

@@ -38,7 +38,7 @@ extern s32 func_802B7FD8_de(void *, void *, s32);
 
 
 
-extern void func_8029A650_de(void *arg0);
+extern void Smos_DispatchControllerProfileChanges(void *arg0);
 
 
 
@@ -184,7 +184,7 @@ void Control_CommitControllerInputs(void) {
             if (func_802A23A4_de() != temp) {
                 continue;
             }
-            func_8029A650_de(p);
+            Smos_DispatchControllerProfileChanges(p);
         }
         Control_CommitProfileInput(&D_8010B0E0);
     }

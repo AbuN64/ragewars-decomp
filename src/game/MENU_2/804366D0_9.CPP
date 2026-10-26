@@ -6,7 +6,7 @@
 #include "SCENE/802508E0_13.H"
 extern struct State_func_80437444_de *D_800E5780;
 extern void func_8041A430_de(void *, s32);
-extern s32 func_80265650_de(void *, s32);
+extern s32 Defs_TestBit(void *, s32);
 
 /* Releases the object D_800E5780 holds through Cache_FreeMemory, clears D_800E5780 and returns zero. */
 
@@ -87,7 +87,7 @@ s32 func_80437444_de(void) {
             return 0;
         }
         D_800E5780->seen = result;
-        if (func_80265650_de(D_80102B00 + 0x7E, 0) != 0) {
+        if (Defs_TestBit(D_80102B00 + 0x7E, 0) != 0) {
             return 0;
         }
         func_802991D4_de(MENU_RESOURCE);
@@ -147,7 +147,7 @@ s32 func_804375B0_de(void) {
 #elif defined(VERSION_EU_X)
     case 0x13E + 1:
 #endif
-        if (func_80265650_de(&D_80102B7E, 0) == 0) {
+        if (Defs_TestBit(&D_80102B7E, 0) == 0) {
             D_800E5780->target = 7;
         } else {
             D_800E5780->target = 0x1E;

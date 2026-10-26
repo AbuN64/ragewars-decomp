@@ -13,7 +13,7 @@
 
 s32 GetMenuScreenOwner();
 
-extern void func_8029AA34_de(s32 *arg0);
+extern void Smos_ClearControllerFlags(s32 *arg0);
 
 void func_802A230C_de(void) {
     extern int D_800D2C90;

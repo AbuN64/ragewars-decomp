@@ -13,7 +13,7 @@
 #include "COMMON/STATERECAT91.H"
 #include "ACHIEVE/80424E30_2.H"
 #include "COMMON/PLAYERPROFILES.H"
-extern s32 Weapons_GetLevelProgress(Profile *, s32);
+extern s32 Player_GetLevelProgress(Profile *, s32);
 
 /* Applies event *D_800E4680 to player record D_80102B00[index] once per D_8015402C: when that bit
    of the record's current slot flags is already set it returns -1; otherwise it sets the bit and,
@@ -26,15 +26,15 @@ extern s32 Weapons_GetLevelProgress(Profile *, s32);
 
 
 
-extern s32 func_80265650_de(u8 *, s32);
+extern s32 Defs_TestBit(u8 *, s32);
 
-extern void func_80265688_de(u8 *, s32, s32);
+extern void Defs_SetBitValue(u8 *, s32, s32);
 
-extern void Weapons_IncrementLevelProgress(Profile *, s32);
+extern void Player_IncrementLevelProgress(Profile *, s32);
 
-extern void Weapons_SetAchievementFlag2F(Profile *, s32);
+extern void Player_SetAchievementFlag2F(Profile *, s32);
 
-extern void Weapons_SetAchievementFlagByIndex(Profile *, s32);
+extern void Player_SetAchievementFlagByIndex(Profile *, s32);
 
 extern void Player_AddTenToProfileValue14(Profile *);
 
@@ -66,10 +66,10 @@ s32 func_80425014_de(s32 index) {
     s32 *key = &D_8015402C;
     u32 code;
 
-    if (func_80265650_de(&player->achievementFlags[0xDB + player->slot * 5], *key) != 0) {
+    if (Defs_TestBit(&player->achievementFlags[0xDB + player->slot * 5], *key) != 0) {
         goto done;
     }
-    func_80265688_de(&player->achievementFlags[0xDB + player->slot * 5], *key, 1);
+    Defs_SetBitValue(&player->achievementFlags[0xDB + player->slot * 5], *key, 1);
     code = *D_800E4680;
     result = code + 5000;
     do {
@@ -137,74 +137,74 @@ s32 func_80425014_de(s32 index) {
         case 57: goto effect_35;
         }
     effect_0:
-        Weapons_IncrementLevelProgress(player, player->slot);
-        Weapons_IncrementLevelProgress(player, player->slot);
+        Player_IncrementLevelProgress(player, player->slot);
+        Player_IncrementLevelProgress(player, player->slot);
         goto done;
     effect_1:
-        Weapons_IncrementLevelProgress(player, player->slot);
-        if ((Weapons_GetLevelProgress(player, player->slot) & 1) == 0) {
+        Player_IncrementLevelProgress(player, player->slot);
+        if ((Player_GetLevelProgress(player, player->slot) & 1) == 0) {
             result = 5001;
         }
         goto done;
     effect_2:
-        Weapons_SetAchievementFlag2F(player, 4);
+        Player_SetAchievementFlag2F(player, 4);
         goto done;
     effect_3:
-        Weapons_SetAchievementFlagByIndex(player, 2);
+        Player_SetAchievementFlagByIndex(player, 2);
         goto done;
     effect_4:
-        Weapons_SetAchievementFlag2F(player, 14);
+        Player_SetAchievementFlag2F(player, 14);
         goto done;
     effect_5:
-        Weapons_SetAchievementFlagByIndex(player, 6);
+        Player_SetAchievementFlagByIndex(player, 6);
         goto done;
     effect_6:
-        Weapons_SetAchievementFlag2F(player, 7);
+        Player_SetAchievementFlag2F(player, 7);
         goto done;
     effect_7:
-        Weapons_SetAchievementFlagByIndex(player, 16);
+        Player_SetAchievementFlagByIndex(player, 16);
         goto done;
     effect_8:
-        Weapons_SetAchievementFlagByIndex(player, 5);
+        Player_SetAchievementFlagByIndex(player, 5);
         goto done;
     effect_9:
-        Weapons_SetAchievementFlagByIndex(player, 17);
+        Player_SetAchievementFlagByIndex(player, 17);
         goto done;
     effect_10:
-        Weapons_SetAchievementFlag2F(player, 6);
+        Player_SetAchievementFlag2F(player, 6);
         goto done;
     effect_11:
-        Weapons_SetAchievementFlagByIndex(player, 14);
+        Player_SetAchievementFlagByIndex(player, 14);
         goto done;
     effect_12:
-        Weapons_SetAchievementFlagByIndex(player, 4);
+        Player_SetAchievementFlagByIndex(player, 4);
         goto done;
     effect_13:
-        Weapons_SetAchievementFlag2F(player, 12);
+        Player_SetAchievementFlag2F(player, 12);
         goto done;
     effect_14:
-        Weapons_SetAchievementFlag2F(player, 10);
+        Player_SetAchievementFlag2F(player, 10);
         goto done;
     effect_15:
         Player_AddTenToProfileValue14(player);
         goto done;
     effect_16:
-        Weapons_SetAchievementFlagByIndex(player, 8);
+        Player_SetAchievementFlagByIndex(player, 8);
         goto done;
     effect_17:
-        Weapons_SetAchievementFlag2F(player, 8);
+        Player_SetAchievementFlag2F(player, 8);
         goto done;
     effect_18:
-        Weapons_SetAchievementFlag2F(player, 15);
+        Player_SetAchievementFlag2F(player, 15);
         goto done;
     effect_19:
-        Weapons_SetAchievementFlagByIndex(player, 11);
+        Player_SetAchievementFlagByIndex(player, 11);
         goto done;
     effect_20:
-        Weapons_SetAchievementFlagByIndex(player, 10);
+        Player_SetAchievementFlagByIndex(player, 10);
         goto done;
     effect_21:
-        Weapons_SetAchievementFlagByIndex(player, 3);
+        Player_SetAchievementFlagByIndex(player, 3);
         goto done;
     effect_22:
         Player_AddFiftyToProfileValue16(player);
@@ -213,34 +213,34 @@ s32 func_80425014_de(s32 index) {
         Player_AddFiftyToProfileValue15(player);
         goto done;
     effect_24:
-        Weapons_SetAchievementFlag2F(player, 13);
+        Player_SetAchievementFlag2F(player, 13);
         goto done;
     effect_25:
-        Weapons_SetAchievementFlag2F(player, 9);
+        Player_SetAchievementFlag2F(player, 9);
         goto done;
     effect_26:
-        Weapons_SetAchievementFlagByIndex(player, 1);
+        Player_SetAchievementFlagByIndex(player, 1);
         goto done;
     effect_27:
-        Weapons_SetAchievementFlagByIndex(player, 9);
+        Player_SetAchievementFlagByIndex(player, 9);
         goto done;
     effect_28:
-        Weapons_SetAchievementFlagByIndex(player, 7);
+        Player_SetAchievementFlagByIndex(player, 7);
         goto done;
     effect_29:
-        Weapons_SetAchievementFlagByIndex(player, 13);
+        Player_SetAchievementFlagByIndex(player, 13);
         goto done;
     effect_30:
-        Weapons_SetAchievementFlag2F(player, 5);
+        Player_SetAchievementFlag2F(player, 5);
         goto done;
     effect_31:
-        Weapons_SetAchievementFlag2F(player, 1);
+        Player_SetAchievementFlag2F(player, 1);
         goto done;
     effect_32:
-        Weapons_SetAchievementFlagByIndex(player, 0);
+        Player_SetAchievementFlagByIndex(player, 0);
         goto done;
     effect_33:
-        Weapons_SetAchievementFlag2F(player, 11);
+        Player_SetAchievementFlag2F(player, 11);
         goto done;
     effect_34:
         player->count++;
@@ -267,7 +267,7 @@ char *Achieve_GetResultText(s32 result) {
         text = RW_LOCALIZED_TEXT(D_800D34E4, D_800E1DE4, D_800E1DE4, g_languageIndex);
         break;
     case 5002:
-        if ((Weapons_GetLevelProgress(player, player->slot) & 1) == 0) {
+        if ((Player_GetLevelProgress(player, player->slot) & 1) == 0) {
             text = RW_LOCALIZED_TEXT(D_800D34EC, D_800E1E04, D_800E1E04, g_languageIndex);
         } else {
             text = RW_LOCALIZED_TEXT(D_800D34E8, D_800E1DF4, D_800E1DF4, g_languageIndex);

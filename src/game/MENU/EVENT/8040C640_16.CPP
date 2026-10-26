@@ -9,9 +9,9 @@ extern f32 D_800C73E4;
 extern u8 D_0024B52C_us_rev1[], D_0022E0A0_us_rev1[], D_00219A40_us_rev1[], D_0022E250_us_rev1[];
 extern u8 D_0021A2D4_us_rev1[], D_0022F5D0_us_rev1[];
 extern void func_8024B3A8_de(void *, void *, void *, s32);
-extern void Weapons_RequestActorState(void *, void *, s32);
+extern void Nav_RequestActorState(void *, void *, s32);
 extern void Weapon_ApplyWeaponSwitch(void *, void *);
-extern void Weapons_UpdatePlayerCamera(void *, void *);
+extern void Player_UpdatePlayerCamera(void *, void *);
 extern void Cinema_UpdateSequenceTrack(void *);
 #include "MENU/INITVIEW.H"
 /* Initialises an actor and its embedded part at 0x2E8: sets the shared table pointers and flag bits (one flag
@@ -51,9 +51,9 @@ void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s
     *(f32 *)(actor + 0x33C) = D_800C73E4;
     *(f32 *)(actor + 0x340) = D_800C73E4;
     *(u32 *)(actor + 0x3E8) = flags2 & 0xFFFEFFFF;
-    Weapons_RequestActorState(part, aux, 0);
+    Nav_RequestActorState(part, aux, 0);
     Weapon_ApplyWeaponSwitch(part, aux);
-    Weapons_UpdatePlayerCamera(actor, actor);
+    Player_UpdatePlayerCamera(actor, actor);
     if (*(void **)(actor + 0x5DC) != 0) {
         Cinema_UpdateSequenceTrack(*(void **)(actor + 0x5DC));
     }

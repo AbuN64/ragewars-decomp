@@ -15,7 +15,7 @@ extern void Nav_ResetWheelProbeState(void *);
 
 extern void Nav_ClearAuxiliaryBehaviorState(void *);
 
-void World_ResetPlayerState(s32 *state) {
+void Nav_ResetPlayerState(s32 *state) {
     s32 i;
     s32 none;
 

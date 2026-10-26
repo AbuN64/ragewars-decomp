@@ -207,14 +207,14 @@ void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
                     other = &objects[peerIndex];
                     if (obj->definition->kind == other->definition->kind && func_8024DD8C_de(other) != 0 && obj != other) {
                         if (obj->controller != 0) {
-                            dist = Weapons_GetEyeDistanceSquared(obj, other->position0);
+                            dist = Barrel_GetEyeDistanceSquared(obj, other->position0);
                             if (dist < best) {
                                 obj->controller = other;
                                 best = dist;
                             }
                         } else {
                             obj->controller = other;
-                            best = Weapons_GetEyeDistanceSquared(obj, other->position0);
+                            best = Barrel_GetEyeDistanceSquared(obj, other->position0);
                         }
                     }
                 }

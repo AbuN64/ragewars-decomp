@@ -49,7 +49,7 @@ reset:
             Rumble_FreeAllPoolNodes(arg0->object);
         } else {
             object = arg0->object;
-            func_80285C78_de(object);
+            Rumble_RecycleFinishedEffectNodes(object);
             first = Rumble_GetSpatialEffectLevel(&D_8010EC90, arg0->x, arg0->y, arg0->z);
             arg0->amount = first + Rumble_GetSpatialEffectLevel(object, zero.x, zero.y, zero.z);
         }

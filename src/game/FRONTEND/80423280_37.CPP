@@ -25,7 +25,7 @@
 #include "RENDER_2/8025DE50_5.H"
 extern MenuWidget *func_8040EC30_de(void *, s32);
 extern struct EntryRecAt8V3 D_800E4694[];
-void func_80265688_de(u8 *arg0, s32 arg1, s32 arg2);
+void Defs_SetBitValue(u8 *arg0, s32 arg1, s32 arg2);
 void func_80427F10_de(void);
 void func_8043C210_de(s32 *record, s32 first, s32 second, s32 third, s32 fourth);
 
@@ -60,8 +60,8 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     SmpOverlay_ShowSlotById(arg0, 2, 0x13E);
     SmpOverlay_ShowSlotById(arg0, 3, 0x13E);
     for (i = 0; i < 0x24; i++) {
-        func_80265688_de(D_800E4690->owned, i, 0);
-        func_80265688_de(D_800E4690->pending, i, 0);
+        Defs_SetBitValue(D_800E4690->owned, i, 0);
+        Defs_SetBitValue(D_800E4690->pending, i, 0);
     }
     D_800E4690->state = 1;
     D_800E4690->slideFrames = 4;

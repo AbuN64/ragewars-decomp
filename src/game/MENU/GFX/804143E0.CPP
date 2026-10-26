@@ -9,7 +9,7 @@
 
 void func_80414360_de(void) {
     XStdio_InitializeStreams();
-    func_8029D8A0_de();
+    XMath_InitializeMath();
 }
 
 /* Calls the per-version setup entry and then XStdio_ShutdownStreams. */
@@ -24,19 +24,19 @@ void func_80414384_de(void) {
 #if defined(VERSION_US)
     
 #if defined(VERSION_US)
-func_8029D8A8_de
+XMath_ShutdownMath
 #else
 func_8029D7E8_auto
 #endif
 ();
 #elif defined(VERSION_DE)
-    func_8029D8A8_de();
+    XMath_ShutdownMath();
 #elif defined(VERSION_EU)
-    func_8029D8A8_de();
+    XMath_ShutdownMath();
 #elif defined(VERSION_EU_X)
-    func_8029D8A8_de();
+    XMath_ShutdownMath();
 #else
-    func_8029D8A8_de();
+    XMath_ShutdownMath();
 #endif
     XStdio_ShutdownStreams();
 }

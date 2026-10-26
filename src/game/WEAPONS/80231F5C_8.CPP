@@ -11,7 +11,7 @@
 
 
 extern s32 Pak_CountLiveNodes(void *arg0);
-extern s32 Weapons_GetWeaponAmmo(void *arg0, s16 arg1);
+extern s32 Player_GetWeaponAmmo(void *arg0, s16 arg1);
 
 void Weapon_DrawWeaponLookupModel(void *arg0, Dest *arg1, Lookup *lookup) {
     void *actor;
@@ -36,7 +36,7 @@ void Weapon_DrawWeaponLookupModel(void *arg0, Dest *arg1, Lookup *lookup) {
     if ((state == one) && (arg1->field144 == 0)) {
         return;
     }
-    if ((state >= 0x12) && (Weapons_GetWeaponAmmo(actor, state) <= 0)) {
+    if ((state >= 0x12) && (Player_GetWeaponAmmo(actor, state) <= 0)) {
         return;
     }
     state = ((Shared_ActorView *)actor)->selectedAction;
@@ -85,12 +85,12 @@ Weapon_InitializeSwitchAndRequestIdle
 (arg0, arg1);
 }
 
-extern s32 World_PlayerHasAmmoForWeapon(void *arg0, s32 arg1);
+extern s32 Player_PlayerHasAmmoForWeapon(void *arg0, s32 arg1);
 
 
 
 
-s32 Weapons_PickRandomArmedWeapon(void *player) {
+s32 Weapon_PickRandomArmedWeapon(void *player) {
     s32 weapon;
     s32 remainingArmedSteps;
 
@@ -102,7 +102,7 @@ s32 Weapons_PickRandomArmedWeapon(void *player) {
             if (weapon >= 0x10) {
                 weapon = 0;
             }
-            if (World_PlayerHasAmmoForWeapon(player, weapon) != 0) {
+            if (Player_PlayerHasAmmoForWeapon(player, weapon) != 0) {
                 remainingArmedSteps -= 1;
             }
         } while (remainingArmedSteps >= 0);

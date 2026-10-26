@@ -16,7 +16,7 @@ void func_8022B5C0_de(void *player) {
 
 #include "COMMON/GAMEPLAY_REACTIONS.H"
 #include "RENDER_2/802192C0.H"
-extern void Weapons_FillDamagePacket(Shared_ReactionInteraction *, s32, s32, f32, s32, s32);
+extern void Barrel_FillDamagePacket(Shared_ReactionInteraction *, s32, s32, f32, s32, s32);
 
 void func_8022B60C_de(Shared_ReactionPlayer *actor, f32 amount, s32 source) {
     Shared_ReactionInteraction packet;
@@ -29,7 +29,7 @@ void func_8022B60C_de(Shared_ReactionPlayer *actor, f32 amount, s32 source) {
     }
     actor->reserve = limited;
     if (gReactionReserveMaximum <= limited) {
-        Weapons_FillDamagePacket(&packet, source, 0x40000, 25.599998f, 0x80, 0);
+        Barrel_FillDamagePacket(&packet, source, 0x40000, 25.599998f, 0x80, 0);
         func_80219A40_de((Shared_ReactionActor *)actor, &actor->unk170, &packet);
     }
 }

@@ -54,7 +54,7 @@ void func_802251DC_de(SharedPlayer *player, SharedPlayer *body) {
             player->views5E8.view6E8_79.unk6E8.x -= Math_Sinf(body->views1C.view6C_5.heading) * detachDistance;
             player->views5E8.view6E8_79.unk6E8.z -= Math_Cosf(body->views1C.view6C_5.heading) * detachDistance;
         }
-        Weapons_SetPlayerState(player, body, 5);
+        Player_SetPlayerState(player, body, 5);
         return;
     }
     motionIntermediate = player->views5E8.view69C_39.unk69C;
@@ -72,7 +72,7 @@ void func_802251DC_de(SharedPlayer *player, SharedPlayer *body) {
         targetPitch = pitchLimit;
     }
     GraphU64_EaseValueToward(&player->views5E8.view724_72.pitch, targetPitch * D_800C2A7C_de, 0.0625f);
-    if ((player->views5E8.view7E8_105.unk7E8 == 0) && !(player->views5E8.view6E4_61.unk6E4 > D_800C2A80_de) && !(body->views1C.view38_3.flags & 0xC0000) && (body->views18.view18_2.model->flags & 2) && (player->views5E8.view6B0_46.unk6B0 & 0x10) && (player->views5E8.view11D8_147.unk11D8 <= 0.0f)) { Weapons_SetPlayerState(player, body, 5); jumpStarted = 1; } else jumpStarted = 0;
+    if ((player->views5E8.view7E8_105.unk7E8 == 0) && !(player->views5E8.view6E4_61.unk6E4 > D_800C2A80_de) && !(body->views1C.view38_3.flags & 0xC0000) && (body->views18.view18_2.model->flags & 2) && (player->views5E8.view6B0_46.unk6B0 & 0x10) && (player->views5E8.view11D8_147.unk11D8 <= 0.0f)) { Player_SetPlayerState(player, body, 5); jumpStarted = 1; } else jumpStarted = 0;
     if (jumpStarted != 0) {
         jumpedHeading = body->views1C.view6C_5.heading + player->views5E8.view728_73.unk728;
         body->views1C.view6C_5.heading = jumpedHeading;

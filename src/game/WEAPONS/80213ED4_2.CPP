@@ -111,7 +111,7 @@ s32 Barrel_IsTargetInViewCone(ActorBarrelIsTargetInViewCone *viewer, ActorBarrel
   return 1;
 }
 
-s32 Weapons_UpdateTrackerAim(Actor_func_80214624_de *actor, Plan *tracker, Actor_func_80214624_de *candidate) {
+s32 Barrel_UpdateTrackerAim(Actor_func_80214624_de *actor, Plan *tracker, Actor_func_80214624_de *candidate) {
     CVector3 pos,hit;
     s32 room;
     f32 temp_f20;
@@ -181,7 +181,7 @@ s32 Weapons_UpdateTrackerAim(Actor_func_80214624_de *actor, Plan *tracker, Actor
     }
     if (targetKind == 1) {
         tracker->unk90 = pos.y;
-        tracker->unk8C = (f32) (actor->unk6C + Weapons_GetSignedAngleToPoint(actor, pos));
+        tracker->unk8C = (f32) (actor->unk6C + Barrel_GetSignedAngleToPoint(actor, pos));
         return 1;
     }
     return 0;
@@ -194,11 +194,11 @@ extern Instance8020CD74 *D_801041F0;
 extern char D_80145040[];
 extern s32 Cinema_IsSequenceInWindow(void);
 extern s32 Cinema_GetSequenceRequest(void);
-extern Actor_func_80214DD4_de *Weapons_FindNearestLivePlayer(void *players, CVector3 point, void *exclude);
-extern Actor_func_80214DD4_de *Weapons_FindNearestPlayer(void *players, CVector3 point);
+extern Actor_func_80214DD4_de *Player_FindNearestLivePlayer(void *players, CVector3 point, void *exclude);
+extern Actor_func_80214DD4_de *Player_FindNearestPlayer(void *players, CVector3 point);
 extern s32 InstHdr_FindActorModelEntry(void *actor);
-extern f32 Weapons_GetEyeDistanceSquared(void *candidate, CVector3 point);
-extern f32 Weapons_GetFlatDistanceSquared(void *candidate, CVector3 point);
+extern f32 Barrel_GetEyeDistanceSquared(void *candidate, CVector3 point);
+extern f32 Barrel_GetFlatDistanceSquared(void *candidate, CVector3 point);
 extern s32 InstHdr_HasActorTerritory(void *actor);
 extern f32 InstHdr_GetActorTerritoryRadius(void *actor);
 extern s32 func_802444A4_de(void *actor, CVector3 from, CVector3 to, CollisionInfo *info);
@@ -216,7 +216,7 @@ typedef struct CombatPlayerView {
  * actor), keeps the nearest within D_800C2168_de that passes the territory/visibility tests
  * (func_80214624_de and a line-of-sight probe through func_802444A4_de when requested), and remembers the
  * actor's position as the tracker's home when nothing qualified. */
-Actor_func_80214DD4_de *Weapons_SelectCombatTarget(Actor_func_80214DD4_de *actor, Tracker *tracker, s32 lineOfSight,
+Actor_func_80214DD4_de *Barrel_SelectCombatTarget(Actor_func_80214DD4_de *actor, Tracker *tracker, s32 lineOfSight,
                                                    s32 combat) {
     Actor_func_80214DD4_de *candidates[128];
     Instance8020CD74 saved;
@@ -232,7 +232,7 @@ Actor_func_80214DD4_de *Weapons_SelectCombatTarget(Actor_func_80214DD4_de *actor
 
     if (tracker->lockedTarget != 0) {
         if (combat != 0) {
-            Weapons_UpdateTrackerAim((Actor_func_80214624_de *)actor, (Plan *)tracker,
+            Barrel_UpdateTrackerAim((Actor_func_80214624_de *)actor, (Plan *)tracker,
                              (Actor_func_80214624_de *)tracker->lockedTarget);
         }
         return tracker->lockedTarget;
@@ -255,9 +255,9 @@ Actor_func_80214DD4_de *Weapons_SelectCombatTarget(Actor_func_80214DD4_de *actor
         }
         if ((actor->kind[1] & 0x400) == 0) {
             if ((actor->flags100 & 0x300000) != 0) {
-                candidate = Weapons_FindNearestLivePlayer(D_80145040, actor->pos, actor->controller);
+                candidate = Player_FindNearestLivePlayer(D_80145040, actor->pos, actor->controller);
             } else {
-                candidate = Weapons_FindNearestPlayer(D_80145040, actor->pos);
+                candidate = Player_FindNearestPlayer(D_80145040, actor->pos);
             }
             if (candidate != 0) {
                 /* i and best are both reset again before the loop */
@@ -278,7 +278,7 @@ Actor_func_80214DD4_de *Weapons_SelectCombatTarget(Actor_func_80214DD4_de *actor
         best = 0;
         for (i = 0; i < count; i++) {
             candidate = candidates[i];
-            distance = Weapons_GetEyeDistanceSquared(candidate, actor->pos);
+            distance = Barrel_GetEyeDistanceSquared(candidate, actor->pos);
             if (!(distance < bestDistance)) {
                 continue;
             }
@@ -287,13 +287,13 @@ Actor_func_80214DD4_de *Weapons_SelectCombatTarget(Actor_func_80214DD4_de *actor
                     continue;
                 }
                 if (InstHdr_HasActorTerritory(actor) != 0) {
-                    f32 reach = Weapons_GetFlatDistanceSquared(candidate, tracker->homePos);
+                    f32 reach = Barrel_GetFlatDistanceSquared(candidate, tracker->homePos);
                     f32 range = InstHdr_GetActorTerritoryRadius(actor);
                     if (range * InstHdr_GetActorTerritoryRadius(actor) <= reach) {
                         continue;
                     }
                 }
-                if (Weapons_UpdateTrackerAim((Actor_func_80214624_de *)actor, (Plan *)tracker,
+                if (Barrel_UpdateTrackerAim((Actor_func_80214624_de *)actor, (Plan *)tracker,
                                      (Actor_func_80214624_de *)candidate) == 0) {
                     continue;
                 }
@@ -319,7 +319,7 @@ Actor_func_80214DD4_de *Weapons_SelectCombatTarget(Actor_func_80214DD4_de *actor
         }
     }
     if (combat != 0 && best == 0 &&
-        Weapons_UpdateTrackerAim((Actor_func_80214624_de *)actor, (Plan *)tracker, 0) == 0) {
+        Barrel_UpdateTrackerAim((Actor_func_80214624_de *)actor, (Plan *)tracker, 0) == 0) {
         tracker->homePos = actor->pos;
         tracker->homeRoom = actor->room;
     }

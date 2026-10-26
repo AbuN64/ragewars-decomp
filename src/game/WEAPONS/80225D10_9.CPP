@@ -504,12 +504,12 @@ void func_8022A398_de(void *roundContext, void *entity) {
 
 void func_8022A3F8_de(void *arg0, void *viewState) { func_80228AF4_de(arg0, viewState); }
 
-int Weapons_GetFirstPlayer(void *world) {
+int Player_GetFirstPlayer(void *world) {
     Context *context = world;
     return (int)context->head;
 }
 
-void *Weapons_FindTransientPlayer(struct Context *context) {
+void *Player_FindTransientPlayer(struct Context *context) {
     CGameStatus *base = (&D_801462C8.counters);
     Shared_ActorView *record;
 

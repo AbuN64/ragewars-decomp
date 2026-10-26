@@ -24,9 +24,9 @@ struct Triple;
 
 extern float D_800C4440_de;
 
-struct Actor_func_802676EC_de;
+struct ActorEventsComputeDamageScale;
 struct PlayerRecAt122C;
-struct Actor_func_802676EC_de {
+struct ActorEventsComputeDamageScale {
     char pad0[8];
     CVector3 position;
     char pad14[0x70 - 0x14];
@@ -61,11 +61,11 @@ struct TeamInfo;
 struct View;
 struct func_8023945C_S1;
 
-struct Actor_func_80267958_de;
+struct ActorEventsSpawnRiderImpactEffect;
 
 struct ResourceManagerState;
 struct Triple;
-typedef void ( *func_80267198_de_Callback)(void *, void *, signed int, CVector3, struct ResourceManagerState);
+typedef void ( *EventsDispatchCallbackCallback)(void *, void *, signed int, CVector3, struct ResourceManagerState);
 
 struct CallbackEntryRecAt4V1;
 
@@ -86,10 +86,10 @@ extern float D_800C4420_de;
 
 
 
-struct Actor_func_80267958_de;
-typedef struct Actor_func_80267958_de Actor_func_80267958_de;
+struct ActorEventsSpawnRiderImpactEffect;
+typedef struct ActorEventsSpawnRiderImpactEffect ActorEventsSpawnRiderImpactEffect;
 
-struct Actor_func_802676EC_de;
+struct ActorEventsComputeDamageScale;
 struct Carrier;
 
 
@@ -99,8 +99,8 @@ typedef struct CallbackEntryRecAt4V1 CallbackEntryRecAt4V1;
 struct Carrier;
 typedef struct Carrier Carrier;
 
-struct Actor_func_802676EC_de;
-typedef struct Actor_func_802676EC_de Actor_func_802676EC_de;
+struct ActorEventsComputeDamageScale;
+typedef struct ActorEventsComputeDamageScale ActorEventsComputeDamageScale;
 
 struct ObjectRecAtD0;
 
@@ -109,10 +109,10 @@ struct Vec4s;
 extern float D_800C9538;
 
 
-struct Node_func_80267CE4_de;
-struct Node_func_80267CE4_de {
+struct NodeEventsStartCameraFadeAtPoint;
+struct NodeEventsStartCameraFadeAtPoint {
     s32 unused;
-    struct Node_func_80267CE4_de *next;
+    struct NodeEventsStartCameraFadeAtPoint *next;
 };
 
 
@@ -123,8 +123,8 @@ struct s_CEventValueFormat7a;
 
 extern float D_800C4428_de;
 
-struct Node_func_80267CE4_de;
-typedef struct Node_func_80267CE4_de Node_func_80267CE4_de;
+struct NodeEventsStartCameraFadeAtPoint;
+typedef struct NodeEventsStartCameraFadeAtPoint NodeEventsStartCameraFadeAtPoint;
 
 extern float D_800C4430_de;
 

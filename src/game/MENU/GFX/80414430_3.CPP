@@ -141,7 +141,7 @@ void Gfx_SetCombineMode(int mode){
 }
 
 /* Selects vertex mode when it differs from D_800DF278: mode 9 loads an identity model matrix
-   through func_8029EB14_de and Gfx_EmitMatrix, transforms the point (0, 0, D_800DD3FC) by the view
+   through XMath_SetIdentityMatrix and Gfx_EmitMatrix, transforms the point (0, 0, D_800DD3FC) by the view
    D_80141168, loads four white vertices at that point and marks each vertex's screen position for
    modification. */
 
@@ -150,7 +150,7 @@ extern s32 D_800DF278;
 
 extern char D_80141168;
 
-extern void func_8029EB14_de(Matrix *m);
+extern void XMath_SetIdentityMatrix(Matrix *m);
 extern Vtx10 *func_802A15E4_de(s32 size);
 
 void func_80416ECC_de(s32 mode) {
@@ -165,7 +165,7 @@ void func_80416ECC_de(s32 mode) {
         return;
     }
     if (mode == 9) {
-        func_8029EB14_de(&identity);
+        XMath_SetIdentityMatrix(&identity);
         Gfx_EmitMatrix(&identity);
         point.x = 0.0f;
         point.y = 0.0f;

@@ -39,9 +39,9 @@ void func_802054E0_de(Obj54E0 *actor, void *responseContext) {
             SoundElement_PlaySoundAtPosition(rec->unk34.half.id, actor->pos.v, 0, -1);
         }
         if (rec->unk30 != -1) {
-            Weapons_SpawnActorEffect(actor, rec->unk30, actor->pos.t, 0);
+            Barrel_SpawnActorEffect(actor, rec->unk30, actor->pos.t, 0);
         }
-        Weapons_SpawnFlaggedEffects(actor, responseContext, 8, rec->unk38, rec->unk3C);
+        Barrel_SpawnFlaggedEffects(actor, responseContext, 8, rec->unk38, rec->unk3C);
     }
 }
 
@@ -74,7 +74,7 @@ void func_80205628_de(void *levelActor, void *spawnDispatchOwner, void *modelLoo
 }
 
 void func_80205694_de(void *actor, void *requestContext) {
-    Weapons_RequestActorState(actor, requestContext, 1);
+    Nav_RequestActorState(actor, requestContext, 1);
     Rumble_SetActorStateBit(&g_world, actor, 1);
 }
 

@@ -60,7 +60,7 @@ f32 Rumble_GetSpatialEffectLevel(func_80285D00_S1 *pool, CVector3 position) {
     return limit < value ? limit : value;
 }
 #else
-INCLUDE_ASM("span_1000", func_80285634);
+INCLUDE_ASM("span_1000", Rumble_AccumulateSpatialEffectLevel);
 #endif
 
 #include "sdk/os.h"
@@ -102,7 +102,7 @@ static inline IntrusiveList *active_list(PoolRecAt28V1 *pool) {
     return &pool->active;
 }
 
-void func_802858B0_de(NodeCode8028469C *arg0, Clip *arg1, CVector3 arg2,
+void Rumble_InitEffectNode(NodeCode8028469C *arg0, Clip *arg1, CVector3 arg2,
                    f32 arg5, f32 arg6, void **arg7) {
 
     arg0->key = arg1;
@@ -120,7 +120,7 @@ void func_802858B0_de(NodeCode8028469C *arg0, Clip *arg1, CVector3 arg2,
 }
 
 /** Clear the target word when the pointer field is populated. */
-void func_80285960_de(char *object) {
+void Rumble_ClearEffectOwnerSlot(char *object) {
     struct NodeCode8028469C *node = (void *)object;
     struct NodeCode8028469C **target = node->owner;
     if (target != 0) {
@@ -129,12 +129,12 @@ void func_80285960_de(char *object) {
 }
 
 /** Store the supplied word at object offset 0x38. */
-void func_80285974_de(void *arg0, int arg1) {
+void Rumble_SetEffectOwnerSlot(void *arg0, int arg1) {
     func_8020D1FC_S1 *record = arg0;
     record->unk38 = arg1;
 }
 
-s32 func_8028597C_de(s32 arg0) {
+s32 Rumble_TestEffectHandleCompletion(s32 arg0) {
     s32 result;
 
     result = 0;
@@ -146,7 +146,7 @@ s32 func_8028597C_de(s32 arg0) {
     return result;
 }
 
-f32 func_802859D0_de(f32 *arg0, u32 arg1, u32 arg2, u32 arg3) {
+f32 Rumble_EvaluateSpatialEffectNode(f32 *arg0, u32 arg1, u32 arg2, u32 arg3) {
     f32 magnitude;
     f32 dx;
     f32 dy;
@@ -172,25 +172,25 @@ f32 func_802859D0_de(f32 *arg0, u32 arg1, u32 arg2, u32 arg3) {
     return factor * first * Control_SampleEffectCurve(&arg0[11]);
 }
 
-void Rumble_InitPoolNodes(void *arg0, void *arg1, s32 arg2) {
+void Rumble_InitPoolNodes(void *effectPool, void *nodeStorage, s32 nodeCount) {
 
     s32 i;
     NodeCode8028469C *p;
     u32 saved;
 
-    p = arg1;
+    p = nodeStorage;
     saved = __osDisableInt();
-    func_80255CA0_de(arg0, 0, 4);
-    func_80255CA0_de(&((PoolRecAt28V1 *)arg0)->active, 0, 4);
+    func_80255CA0_de(effectPool, 0, 4);
+    func_80255CA0_de(&((PoolRecAt28V1 *)effectPool)->active, 0, 4);
     i = 0;
-    if (arg2 > 0) {
+    if (nodeCount > 0) {
         do {
-            func_80255D14_de(arg0, p);
+            func_80255D14_de(effectPool, p);
             i += 1;
             p++;
-        } while (i < arg2);
+        } while (i < nodeCount);
     }
-    ((PoolRecAt28V1 *)arg0)->baseLevel = 0;
+    ((PoolRecAt28V1 *)effectPool)->baseLevel = 0;
     __osRestoreInt(saved);
 }
 
@@ -210,7 +210,7 @@ NodeCode8028469C *func_80285B64_de(PoolRecAt28V1 *pool, Clip *key, CVector3 posi
     return node;
 }
 
-void func_80285C78_de(void *pool) {
+void Rumble_RecycleFinishedEffectNodes(void *pool) {
 
     NodeCode8028469C *node;
     NodeCode8028469C *next;
@@ -238,23 +238,23 @@ void func_80285C78_de(void *pool) {
     __osRestoreInt(saved);
 }
 
-void Rumble_FreeAllPoolNodes(void *arg0) {
+void Rumble_FreeAllPoolNodes(void *effectPool) {
 
     void *node;
     void *next;
     s32 saved;
 
     saved = __osDisableInt();
-    node = ((PoolRecAt28V1 *)arg0)->active.head;
+    node = ((PoolRecAt28V1 *)effectPool)->active.head;
     if (node != 0) {
         do {
             next = ((NodeCode8028469C *)node)->next;
-            func_80255ED8_de(&((PoolRecAt28V1 *)arg0)->active, node);
-            func_80255D14_de(arg0, node);
+            func_80255ED8_de(&((PoolRecAt28V1 *)effectPool)->active, node);
+            func_80255D14_de(effectPool, node);
             node = next;
         } while (node != 0);
     }
-    ((PoolRecAt28V1 *)arg0)->baseLevel = 0;
+    ((PoolRecAt28V1 *)effectPool)->baseLevel = 0;
     __osRestoreInt(saved);
 }
 

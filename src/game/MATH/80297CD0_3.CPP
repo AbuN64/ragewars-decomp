@@ -110,7 +110,7 @@ void func_80297FA0_de(s32 screenCount, s32 value) {
     func_802A1918_de(&D_80146E08, &D_80146E0C);
     func_80411EEC_de();
     func_8040F534_de(D_80146E08, D_80146E0C);
-    func_8029AA78_de();
+    Smos_AllocateControllerContext();
     g_menuEventCount = 0;
     D_8014D080 = Cache_AllocateMemory(0x544);
     XPlus_FillBytes(D_8014D080, 0, 0x544);

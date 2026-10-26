@@ -40,7 +40,7 @@ extern void Ovlgame_ResetPlayerForRound(void *actor, s32 character, s32 active);
 
 
 
-void Weapons_UpdatePlayerCamera(Shared_ActorView *, Shared_ActorView *);
+void Player_UpdatePlayerCamera(Shared_ActorView *, Shared_ActorView *);
 
                  /* extern */
 void Cinema_UpdateSequenceTrack(void *);
@@ -264,7 +264,7 @@ void func_80449E18_de(CPlayerPool *pool) {
             temp_v0 = Scene_FindFloorPolygon(&g_world, &actor->position);
             actor->weapon.model = temp_v0;
             actor->modelId = temp_v0;
-            Weapons_UpdatePlayerCamera(actor, actor);
+            Player_UpdatePlayerCamera(actor, actor);
             message = actor->message;
             if (message != 0) {
                 Cinema_UpdateSequenceTrack(message);
@@ -329,6 +329,6 @@ void func_80449EE4_de(char *player, s32 slot, RecordCode80447BB080449EE4 *record
 void func_8044A020_de(struct ActorCode80447BB0 *actor, s32 character) {
     actor->part->active = 1;
     Ovlgame_ResetPlayerForRound(actor, character, 1);
-    Weapons_RequestActorState(&actor->firstEffect, &actor->secondEffect, 2);
+    Nav_RequestActorState(&actor->firstEffect, &actor->secondEffect, 2);
     Player_PlacePlayerAtSpawnPoint(actor, D_8011FAC0.selector, 0, 1);
 }

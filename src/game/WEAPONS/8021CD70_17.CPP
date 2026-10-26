@@ -5,7 +5,7 @@
 #include "TYPES.H"
 
 /* Runs a player's wading state for its body: sets the movement mode at 0x650 to 9 when still and 10
-   when moving, settles the roll kick at 0x72C, turns the view and moves the body through Weapons_UpdateViewAngles
+   when moving, settles the roll kick at 0x72C, turns the view and moves the body through Player_UpdateViewAngles
    and func_802233F0_de with tunings D_800CE7E4 and D_800CE82C, and leaves the state (clearing the strokes
    at 0x938, release mode 3) once the body loses surface flag 0x2000; otherwise looking down past 40
    degrees while lifting at 0x6A8 lowers the eye height at 0x6EC and sets flag 0x100000 of D_80104418
@@ -28,7 +28,7 @@ extern char D_800CE7E4;
 extern Tuning D_800CE82C;
 extern s32 D_80104418[];
 extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
-extern void Weapons_UpdateViewAngles(SharedPlayer *, Body_func_80224C4C_de *, char *);
+extern void Player_UpdateViewAngles(SharedPlayer *, Body_func_80224C4C_de *, char *);
 
 extern void func_80218464_de(char *);
 extern s32 SoundElement_PlaySoundAtPosition(s16, s32, s32, s32, s32, s32);
@@ -36,7 +36,7 @@ extern s32 SoundElement_PlaySoundAtPosition(s16, s32, s32, s32, s32, s32);
 static inline s32 try_jump(SharedPlayer *player, Body_func_80224C4C_de *body) {
     if (player->views5E8.view7E8_106.zoomed == 0 && !(11.25f < player->views5E8.view6E4_62.depth) && !(body->flags & 0xC0000)
         && (body->surface->unk14 & 2) && (player->views5E8.view6B0_47.input & 0x10) && player->views5E8.view11D8_149.stun <= 0.0f) {
-        Weapons_SetPlayerState(player, body, 5);
+        Player_SetPlayerState(player, body, 5);
         return 1;
     }
     return 0;
@@ -51,11 +51,11 @@ void func_80224C4C_de(SharedPlayer *player, Body_func_80224C4C_de *body) {
         player->views5E8.view650_18.mode = 0xA;
     }
     GraphU64_EaseValueToward(&player->views5E8.view72C_76.kickRoll, 0.0f, 0.25f);
-    Weapons_UpdateViewAngles(player, body, &D_800CE7E4);
+    Player_UpdateViewAngles(player, body, &D_800CE7E4);
     func_802233F0_de(player, body, &D_800CE82C);
     if (!(body->flags & 0x2000)) {
         func_80218464_de(player->views5E8.view938_129.strokes);
-        Weapons_SetPlayerState(player, body, 3);
+        Player_SetPlayerState(player, body, 3);
         return;
     }
     if (player->views5E8.view724_72.pitch * 57.295776f < -40.0f && player->views5E8.view6A8_44.lift > 0.0f) {

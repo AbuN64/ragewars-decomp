@@ -6,7 +6,7 @@ extern char *D_800E3590;
 extern void *Cache_AllocateMemory(s32);
 extern void *SmpOverlay_CreateOverlayNode(s32, s32);
 extern void SmpOverlay_ShowSlotById(s32, s32, s32);
-extern void func_8041B968_de(void *, s32);
+extern void SmpOverlay_SetObjectValue(void *, s32);
 extern u8 *func_8040EC30_de(s32, s32);
 extern void *func_80419E54_de(s32, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
@@ -26,7 +26,7 @@ s32 func_8041CEB0_us(s32 arg0) {
     SmpOverlay_ShowSlotById(arg0, 1, 0x1FD);
     SmpOverlay_ShowSlotById(arg0, 2, 0x1FD);
     SmpOverlay_ShowSlotById(arg0, 3, 0x1FD);
-    func_8041B968_de((void *)ST_W(4), 1);
+    SmpOverlay_SetObjectValue((void *)ST_W(4), 1);
     ST_W(0xD8) = 1;
     ST_W(0xDC) = 4;
     w = func_8040EC30_de(arg0, 0x1E8);

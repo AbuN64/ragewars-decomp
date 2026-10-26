@@ -29,6 +29,6 @@ s32 func_8040A58C_de(struct Field *field) {
     char *text = *field->text;
 #endif
 
-    func_802658E4_de(text + (Pak_CountLineChars(field) - 2), PREVIEW_VALUE_FORMAT, value);
+    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 2), PREVIEW_VALUE_FORMAT, value);
     return 0;
 }

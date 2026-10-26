@@ -6,10 +6,10 @@
 #include "WEAPONS/80213ED4_27.H"
 #include "FX_2/80271B18.H"
 
-extern s32 Weapons_UpdateTrackerAim(Actor_func_80214DD4_de *arg0, Tracker *arg1, Actor_func_80214DD4_de *target);
-extern Actor_func_80214DD4_de *Weapons_SelectCombatTarget(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 arg2, s32 arg3);
-extern f32 Weapons_FindClearAimAngle(Actor_func_80214DD4_de *arg0, CVector3 pos, Actor_func_80214DD4_de *target, f32 arg3);
-extern f32 Weapons_GetSignedAngleToPoint(Actor_func_80214DD4_de *arg0, CVector3 pos);
+extern s32 Barrel_UpdateTrackerAim(Actor_func_80214DD4_de *arg0, Tracker *arg1, Actor_func_80214DD4_de *target);
+extern Actor_func_80214DD4_de *Barrel_SelectCombatTarget(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 arg2, s32 arg3);
+extern f32 Barrel_FindClearAimAngle(Actor_func_80214DD4_de *arg0, CVector3 pos, Actor_func_80214DD4_de *target, f32 arg3);
+extern f32 Barrel_GetSignedAngleToPoint(Actor_func_80214DD4_de *arg0, CVector3 pos);
 struct Cursor;
 extern Location *func_80219408_de(struct Cursor *slot);
 extern f32 GameObject_GetActorHeight(Actor_func_80214DD4_de *arg0);
@@ -44,7 +44,7 @@ static inline void Weapons_PlaceGoalBeside(Actor_func_80214DD4_de *actor, Actor_
 /** Picks what the tracker aims at (its target, itself, a slot or home point, or the actor) and
     fills out with the kind, target, reach, goal position and its offset from the actor, both in 3D
     and flattened to the ground plane. The third parameter is overwritten: it serves as the boost flag. */
-void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s32 boost, CTargetInfo *out) {
+void Barrel_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s32 boost, CTargetInfo *out) {
     CVector3 pos;
     CVector3 probe;
     CVector3 away;
@@ -64,11 +64,11 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
     }
     if (tracker->team == g_world.kind1Cursor) {
         if ((tracker->flags & 0x40000) && tracker->lockedTarget == 0) {
-            if (Weapons_UpdateTrackerAim(actor, tracker, tracker->target) == 0) {
+            if (Barrel_UpdateTrackerAim(actor, tracker, tracker->target) == 0) {
                 tracker->flags &= ~0x40000;
             }
         } else {
-            tracker->target = Weapons_SelectCombatTarget(actor, tracker, 0, 1);
+            tracker->target = Barrel_SelectCombatTarget(actor, tracker, 0, 1);
         }
     }
     target = tracker->target;
@@ -159,10 +159,10 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
         probe.x = actor->pos.x + reach * Math_Sinf(tracker->angle);
         probe.y = tracker->height;
         probe.z = actor->pos.z + reach * Math_Cosf(tracker->angle);
-        range = Weapons_FindClearAimAngle(actor, probe, target, D_800C2178_de);
+        range = Barrel_FindClearAimAngle(actor, probe, target, D_800C2178_de);
         pos.y = tracker->height;
     } else {
-        range = Weapons_GetSignedAngleToPoint(actor, pos);
+        range = Barrel_GetSignedAngleToPoint(actor, pos);
     }
     GraphU64_SubtractVectors(&delta, &pos, &actor->pos);
     out->kind = kind;

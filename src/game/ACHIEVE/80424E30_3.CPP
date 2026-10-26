@@ -15,14 +15,14 @@
 #include "ACHIEVE/80424E30_3.H"
 #include "COMMON/PLAYERPROFILES.H"
 
-extern s32 func_80265650_de(void *, s32);
-extern void func_80265688_de(u8 *, s32, s32);
+extern s32 Defs_TestBit(void *, s32);
+extern void Defs_SetBitValue(u8 *, s32, s32);
 extern s32 Player_HasProfileUnlockFlag(u8 *, s32);
-extern s32 Weapons_TestAchievementFlag7(Profile *, s32);
-extern void Weapons_SetAchievementFlag7(Profile *, s32);
+extern s32 Player_TestAchievementFlag7(Profile *, s32);
+extern void Player_SetAchievementFlag7(Profile *, s32);
 
 /* Upgrades the thirteen weapon levels of player record D_80102B00[index] from the number of its 50
-   achievement flags func_80265650_de reports set: every two achievements from 2 raise one more weapon
+   achievement flags Defs_TestBit reports set: every two achievements from 2 raise one more weapon
    to level 2 and, from 28, one more of twelve to level 3, in a fixed weapon order. */
 
 
@@ -34,7 +34,7 @@ static inline s32 count_achievements(s32 index) {
     count = 0;
     i = 0;
     do {
-        if (func_80265650_de(D_80102B00[index].achievementFlags, i) == 1) {
+        if (Defs_TestBit(D_80102B00[index].achievementFlags, i) == 1) {
             count++;
         }
         i++;
@@ -47,21 +47,21 @@ extern PresetTable *func_8028D474_de(void *table, s32 key);
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 /* Announces the current arena's entry for a slot: selects one of four five-byte name tables from the
-   mode byte D_801462D5, indexes it by the argument times 400 and hands that entry to func_80265688_de
+   mode byte D_801462D5, indexes it by the argument times 400 and hands that entry to Defs_SetBitValue
    together with the current handle D_8015402C and flag 1; an unrecognised mode does nothing. */
 
 extern u8 D_80102B7E[];
 
 /* Starts the ambient track for the current stage D_8015402C (stage 4, 9, 22 and 35 select tracks
-   0 to 3): returns -1 when the stage has no track or when func_80265650_de reports the slot busy,
-   otherwise starts it on arg0's 400-byte slot of D_80102C24 through func_80265688_de and returns
+   0 to 3): returns -1 when the stage has no track or when Defs_TestBit reports the slot busy,
+   otherwise starts it on arg0's 400-byte slot of D_80102C24 through Defs_SetBitValue and returns
    0x13BC. */
 
 
 /* Awards player p flag 0x31: when the player's 150-byte record in D_80146398 has its byte at
    0x78 equal to one and its byte at 0x91 clear, and the flag set at 0x4A of the player's 400-byte
    record in D_80102B00 lacks bit 0x31 while the set at 0x124 has bits 0 to 3, it sets bit 0x31
-   through func_80265688_de and stores 0x31 through the second argument. */
+   through Defs_SetBitValue and stores 0x31 through the second argument. */
 
 extern u8 g_playerSettings[];
 
@@ -84,84 +84,84 @@ s32 func_80425674_de(s32 p) {
     if (settings->controllerMode == 1 && settings->humanWon == 1 && D_8015402C >= 0x23) {
         switch (settings->slots[p].kind) {
         case 0:
-            if (Weapons_TestAchievementFlag7(record, 0x11) == 0) {
-                Weapons_SetAchievementFlag7(record, 0x11);
+            if (Player_TestAchievementFlag7(record, 0x11) == 0) {
+                Player_SetAchievementFlag7(record, 0x11);
                 given = 0x11;
             }
             break;
         case 1:
-            if (Weapons_TestAchievementFlag7(record, 0x6) == 0) {
-                Weapons_SetAchievementFlag7(record, 0x6);
+            if (Player_TestAchievementFlag7(record, 0x6) == 0) {
+                Player_SetAchievementFlag7(record, 0x6);
                 given = 0x6;
             }
             break;
         case 2:
-            if (Weapons_TestAchievementFlag7(record, 0x3) == 0) {
-                Weapons_SetAchievementFlag7(record, 0x3);
+            if (Player_TestAchievementFlag7(record, 0x3) == 0) {
+                Player_SetAchievementFlag7(record, 0x3);
                 given = 0x3;
             }
             break;
         case 3:
-            if (Weapons_TestAchievementFlag7(record, 0x4) == 0) {
-                Weapons_SetAchievementFlag7(record, 0x4);
+            if (Player_TestAchievementFlag7(record, 0x4) == 0) {
+                Player_SetAchievementFlag7(record, 0x4);
                 given = 0x4;
             }
             break;
         case 4:
-            if (Weapons_TestAchievementFlag7(record, 0xE) == 0) {
-                Weapons_SetAchievementFlag7(record, 0xE);
+            if (Player_TestAchievementFlag7(record, 0xE) == 0) {
+                Player_SetAchievementFlag7(record, 0xE);
             }
             break;
         case 5:
-            if (Weapons_TestAchievementFlag7(record, 0x1) == 0) {
-                Weapons_SetAchievementFlag7(record, 0x1);
+            if (Player_TestAchievementFlag7(record, 0x1) == 0) {
+                Player_SetAchievementFlag7(record, 0x1);
                 given = 0x1;
             }
             break;
         case 6:
-            if (Weapons_TestAchievementFlag7(record, 0x12) == 0) {
-                Weapons_SetAchievementFlag7(record, 0x12);
+            if (Player_TestAchievementFlag7(record, 0x12) == 0) {
+                Player_SetAchievementFlag7(record, 0x12);
                 given = 0x12;
             }
             break;
         case 7:
-            if (Weapons_TestAchievementFlag7(record, 0x8) == 0) {
-                Weapons_SetAchievementFlag7(record, 0x8);
+            if (Player_TestAchievementFlag7(record, 0x8) == 0) {
+                Player_SetAchievementFlag7(record, 0x8);
                 given = 0x8;
             }
             break;
         case 8:
-            if (Weapons_TestAchievementFlag7(record, 0x9) == 0) {
-                Weapons_SetAchievementFlag7(record, 0x9);
+            if (Player_TestAchievementFlag7(record, 0x9) == 0) {
+                Player_SetAchievementFlag7(record, 0x9);
                 given = 0x9;
             }
             break;
         case 9:
-            if (Weapons_TestAchievementFlag7(record, 0xA) == 0) {
-                Weapons_SetAchievementFlag7(record, 0xA);
+            if (Player_TestAchievementFlag7(record, 0xA) == 0) {
+                Player_SetAchievementFlag7(record, 0xA);
                 given = 0xA;
             }
             break;
         case 17:
-            if (Weapons_TestAchievementFlag7(record, 0x2) == 0) {
-                Weapons_SetAchievementFlag7(record, 0x2);
+            if (Player_TestAchievementFlag7(record, 0x2) == 0) {
+                Player_SetAchievementFlag7(record, 0x2);
                 given = 0x2;
             }
             break;
         case 18:
             break;
         }
-        if (Weapons_TestAchievementFlag7(record, 0x11) == 1 && Weapons_TestAchievementFlag7(record, 1) == 1 &&
-            Weapons_TestAchievementFlag7(record, 8) == 1 && Weapons_TestAchievementFlag7(record, 0xB) == 0) {
-            Weapons_SetAchievementFlag7(record, 0xB);
+        if (Player_TestAchievementFlag7(record, 0x11) == 1 && Player_TestAchievementFlag7(record, 1) == 1 &&
+            Player_TestAchievementFlag7(record, 8) == 1 && Player_TestAchievementFlag7(record, 0xB) == 0) {
+            Player_SetAchievementFlag7(record, 0xB);
         }
-        if (Weapons_TestAchievementFlag7(record, 2) == 1 && Weapons_TestAchievementFlag7(record, 6) == 1 &&
-            Weapons_TestAchievementFlag7(record, 9) == 1 && Weapons_TestAchievementFlag7(record, 0xC) == 0) {
-            Weapons_SetAchievementFlag7(record, 0xC);
+        if (Player_TestAchievementFlag7(record, 2) == 1 && Player_TestAchievementFlag7(record, 6) == 1 &&
+            Player_TestAchievementFlag7(record, 9) == 1 && Player_TestAchievementFlag7(record, 0xC) == 0) {
+            Player_SetAchievementFlag7(record, 0xC);
         }
-        if (Weapons_TestAchievementFlag7(record, 3) == 1 && Weapons_TestAchievementFlag7(record, 0x12) == 1 &&
-            Weapons_TestAchievementFlag7(record, 0xA) == 1 && Weapons_TestAchievementFlag7(record, 0xD) == 0) {
-            Weapons_SetAchievementFlag7(record, 0xD);
+        if (Player_TestAchievementFlag7(record, 3) == 1 && Player_TestAchievementFlag7(record, 0x12) == 1 &&
+            Player_TestAchievementFlag7(record, 0xA) == 1 && Player_TestAchievementFlag7(record, 0xD) == 0) {
+            Player_SetAchievementFlag7(record, 0xD);
         }
     }
     return given;
@@ -264,16 +264,16 @@ Preset *func_80425C70_de(s32 key, s32 row, s32 column) {
 void func_80425D14_de(s32 slot) {
     switch (D_801462C8.controllerMode) {
     case 1:
-        func_80265688_de(&D_80102B7E[slot * 0x190], D_8015402C, 1);
+        Defs_SetBitValue(&D_80102B7E[slot * 0x190], D_8015402C, 1);
         return;
     case 2:
-        func_80265688_de(&D_800FEB83[slot * 0x190], D_8015402C, 1);
+        Defs_SetBitValue(&D_800FEB83[slot * 0x190], D_8015402C, 1);
         return;
     case 3:
-        func_80265688_de(&D_800FEB88[slot * 0x190], D_8015402C, 1);
+        Defs_SetBitValue(&D_800FEB88[slot * 0x190], D_8015402C, 1);
         return;
     case 4:
-        func_80265688_de(&D_800FEB8D[slot * 0x190], D_8015402C, 1);
+        Defs_SetBitValue(&D_800FEB8D[slot * 0x190], D_8015402C, 1);
         return;
     }
 }
@@ -303,9 +303,9 @@ s32 func_80425DFC_de(s32 arg0) {
     }
     if (track != -1) {
         slot = &D_80102C24[arg0 * 0x190];
-        if (func_80265650_de(slot, track) == 0) {
+        if (Defs_TestBit(slot, track) == 0) {
             result = 0x13BC;
-            func_80265688_de(slot, track, 1);
+            Defs_SetBitValue(slot, track, 1);
         }
     }
     return result;
@@ -319,17 +319,17 @@ void func_80425EE4_de(s32 player, s32 *award) {
     record = &g_playerSettings[player * 150];
     all = 1;
     if (record[0x78] == 1 && record[0x91] == 0) {
-        if (func_80265650_de(&D_80102B00->name[player * 400] + 0x4A, 0x31) == 0) {
+        if (Defs_TestBit(&D_80102B00->name[player * 400] + 0x4A, 0x31) == 0) {
             for (i = 0; i < 4; i++) {
                 if (all != 1) {
                     return;
                 }
-                if (func_80265650_de(&D_80102B00->name[player * 400] + 0x124, i) == 0) {
+                if (Defs_TestBit(&D_80102B00->name[player * 400] + 0x124, i) == 0) {
                     all = 0;
                 }
             }
             if (all == 1) {
-                func_80265688_de(&D_80102B00->name[player * 400] + 0x4A, 0x31, 1);
+                Defs_SetBitValue(&D_80102B00->name[player * 400] + 0x4A, 0x31, 1);
                 *award = 0x31;
             }
         }
@@ -347,7 +347,7 @@ s32 func_80426004_de(s32 index) {
     recordOffset = index * 0x190;
     record = recordOffset + D_800FEB4A;
     do {
-        if (func_80265650_de(recordOffset + D_800FEB4A, slot) == 1) {
+        if (Defs_TestBit(recordOffset + D_800FEB4A, slot) == 1) {
             count += 1;
         }
         slot += 1;

@@ -41,7 +41,7 @@ void Player_AllocPlayerList(PlayerList *list, int count) {
    through func_8024570C_de for a paused player or one whose controller at 0x698 asks while a menu is
    possible, or otherwise starts the in-game menu for a live player with a view not already showing
    one (unless the match forbids it), before the match end check func_802283B8_de and the world updates
-   func_80227038_de and Weapons_ReleaseWaitingPlayer run and the frame time is restored. */
+   func_80227038_de and Player_ReleaseWaitingPlayer run and the frame time is restored. */
 
 
 
@@ -63,7 +63,7 @@ extern MenuWeaponsUpdateWorldPlayers D_8014561C;
 extern Game D_8014687C;
 extern void func_8022C490_de(SharedPlayer *);
 extern void func_80220ED4_de(SharedPlayer *);
-extern void Weapons_UpdatePlayerCamera(SharedPlayer *, SharedPlayer *);
+extern void Player_UpdatePlayerCamera(SharedPlayer *, SharedPlayer *);
 
 extern s32 Control_IsStartPressed(Shared_Effect *);
 
@@ -75,9 +75,9 @@ extern void func_80218464_de(char *);
 
 extern void func_802283B8_de(WorldWeaponsUpdateWorldPlayers *);
 extern void func_80227038_de(WorldWeaponsUpdateWorldPlayers *);
-extern void Weapons_ReleaseWaitingPlayer(WorldWeaponsUpdateWorldPlayers *);
+extern void Player_ReleaseWaitingPlayer(WorldWeaponsUpdateWorldPlayers *);
 
-void Weapons_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
+void Player_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
     f32 frameTime;
     SharedPlayer *player;
     Rules *rules;
@@ -98,7 +98,7 @@ void Weapons_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
             if (D_8011FAC0.clockPaused == 0) {
                 func_80220ED4_de(player);
             }
-            Weapons_UpdatePlayerCamera(player, player);
+            Player_UpdatePlayerCamera(player, player);
         }
         for (player = world->players; player != 0; player = player->views16E0.view16E0_2.next) {
             if (Cinema_IsSequenceActive() != 0 && (player->views5E8.view6B0_48.state & 0x8000)) {
@@ -121,7 +121,7 @@ void Weapons_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
         }
         func_802283B8_de(world);
         func_80227038_de(world);
-        Weapons_ReleaseWaitingPlayer(world);
+        Player_ReleaseWaitingPlayer(world);
         D_800D2988 = frameTime;
     }
 }

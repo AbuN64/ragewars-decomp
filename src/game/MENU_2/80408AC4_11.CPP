@@ -9,7 +9,7 @@ extern u8 D_8014D49B_de[];
 extern u8 D_8014D494_de[];
 typedef struct { char pad0[0x14]; char **text; } Func_8040A810_Obj;
 /* Shows the eight-character name D_8014D494_de in the field 0xC bytes into the text (right aligned, blank padded after trimming trailing blanks), or points the text at D_auto_800D37CC when D_80153774 is set; returns zero. */
-s32 func_8040A810_de(Func_8040A810_Obj *arg0) {
+s32 Menu_FormatRightAlignedName(Func_8040A810_Obj *arg0) {
     u8 *last;
     char *dst;
     s32 n;
@@ -41,7 +41,7 @@ s32 func_8040A810_de(Func_8040A810_Obj *arg0) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8040A810_de);
+INCLUDE_ASM("ovl_80400000", Menu_FormatRightAlignedName);
 #endif
 #endif
 
@@ -54,7 +54,7 @@ extern char *D_auto_800D39F8, *D_auto_800D39FC, *D_auto_800D3A10, *D_auto_800D3A
 extern s8 D_8014D490;
 typedef struct { char pad0[0x14]; char **text; } Func_8040A8D0_Obj;
 /* Copies the 14-byte label chosen by D_8014D490 (default D_auto_800D39F8) into the text 6 bytes in, or points the text at D_800D37D0 when D_80153774 is set; returns zero. */
-s32 func_8040A8D0_de(Func_8040A8D0_Obj *arg0) {
+s32 Menu_FormatNoteTypeLabel(Func_8040A8D0_Obj *arg0) {
     char *src;
     char *dst;
     s32 i;
@@ -98,7 +98,7 @@ s32 func_8040A8D0_de(Func_8040A8D0_Obj *arg0) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8040A8D0_de);
+INCLUDE_ASM("ovl_80400000", Menu_FormatNoteTypeLabel);
 #endif
 #endif
 

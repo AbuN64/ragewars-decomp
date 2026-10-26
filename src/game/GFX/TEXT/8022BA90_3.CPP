@@ -34,7 +34,7 @@ extern Course *D_800E4680;
 
 extern char D_80102B00[][0x190];
 
-extern unsigned char Weapons_GetLevelProgress(char *, int);
+extern unsigned char Player_GetLevelProgress(char *, int);
 
 extern u8 D_801462DE;
 
@@ -72,7 +72,7 @@ static inline float getYaw(void) {
     return D_80140FC0 * D_800C2D40_de.first;
 }
 
-extern void Weapons_InitializePlayerHealth(void *arg0);
+extern void Player_InitializePlayerHealth(void *arg0);
 
 void func_8022C060_de(s32 player, s32 arg1) {
     func_8022BF04_de(player, arg1, 5, 0x1B);
@@ -112,7 +112,7 @@ void func_8022C110_de(PlayerRecAt1450V2 *player) {
 
     if (D_801462C8.started != 0) {
         if (D_801462C8.mode == 1 && player->isBot == 0) {
-            player->lives = (unsigned char)Weapons_GetLevelProgress(D_80102B00[player->character], player->info->unk80) / 2 + 1;
+            player->lives = (unsigned char)Player_GetLevelProgress(D_80102B00[player->character], player->info->unk80) / 2 + 1;
         }
         if (D_801462C8.mode == 4 && player->isBot == 0 && D_800E4680 != 0) {
             player->lives = D_800E4680->laps;
@@ -279,7 +279,7 @@ void func_8022C5DC_de(void *object) {
     if (record != 0) {
         do {
             record->controls->transientFlag = 0;
-            Weapons_InitializePlayerHealth(record);
+            Player_InitializePlayerHealth(record);
             record = record->next;
         } while (record != 0);
     }

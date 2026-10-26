@@ -13,13 +13,13 @@
 
 
 extern char D_80145040[];
-extern void Weapons_GetPlayerIndex(void *, struct OwnerRecAt698 *);
+extern void Player_GetPlayerIndex(void *, struct OwnerRecAt698 *);
 extern void Pak_OpenDialog(void *, void *, struct OwnerRecAt698 *, s32, s32);
 
 s32 Items_OpenPlayerDialog(void *unused, struct HolderRecAt1CV1 *holder) {
     struct OwnerRecAt698 *owner = holder->owner;
 
-    Weapons_GetPlayerIndex(D_80145040, owner);
+    Player_GetPlayerIndex(D_80145040, owner);
     Pak_ClearTimerFlag();
     Pak_OpenDialog(D_80145040 + 0x5DC, D_0044E48C, owner, owner->value, 0);
     return 1;

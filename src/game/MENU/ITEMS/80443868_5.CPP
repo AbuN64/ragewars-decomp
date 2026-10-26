@@ -24,16 +24,16 @@ extern char D_80145040[];
 #endif
 
 extern char g_fmtDec4Pad[];
-extern s32 Weapons_GetPlayerIndex(void *, unsigned int);
+extern s32 Player_GetPlayerIndex(void *, unsigned int);
 extern s32 Pak_CountLineChars(LayeredText *);
 
 s32 func_80443AB0_de(LayeredText *field, struct MenuRules *holder) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     struct LocalizedInputState *players = &D_80145040;
-    s32 player = Weapons_GetPlayerIndex(players, holder->locked);
+    s32 player = Player_GetPlayerIndex(players, holder->locked);
 #else
-    s32 player = Weapons_GetPlayerIndex(D_80145040, holder->locked);
+    s32 player = Player_GetPlayerIndex(D_80145040, holder->locked);
 #endif
 
     s32 value = D_801462C8.playerSettings[player].unknown02;
@@ -46,9 +46,9 @@ s32 func_80443AB0_de(LayeredText *field, struct MenuRules *holder) {
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
+    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
 #else
-    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), g_fmtDec4Pad, value);
+    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), g_fmtDec4Pad, value);
 #endif
     return 0;
 }

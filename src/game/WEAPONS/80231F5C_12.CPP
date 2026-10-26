@@ -57,7 +57,7 @@ void Weapon_EnterChargeStateWithCues(Shared_ActorView *arg0, WeaponFireState *fi
 
     player = arg0->self;
     if (fireState->mode == 2) {
-        Weapons_SetPlayerState(player, player, 2);
+        Player_SetPlayerState(player, player, 2);
     } else {
         fireState->cueTimer = D_800C3048_de[0];
         if ((((Shared_ActorView *)player)->remote == 0) &&
@@ -66,7 +66,7 @@ void Weapon_EnterChargeStateWithCues(Shared_ActorView *arg0, WeaponFireState *fi
         } else {
             func_8021A9A4_de(arg0->self, 0x4CD);
         }
-        Weapons_RequestActorState(arg0, fireState, 4);
+        Nav_RequestActorState(arg0, fireState, 4);
         func_8022AEA0_de(player, 0x977);
         func_8022AF74_de(player, 0x974);
 
@@ -87,7 +87,7 @@ void func_80233314_de(void) {
 
 void Weapon_SetDelayAndRequestStateEight(void *arg0, struct Shared_Particle *particle) {
     particle->unk148 = D_800C3050_de;
-    Weapons_RequestActorState(arg0, particle, 8);
+    Nav_RequestActorState(arg0, particle, 8);
 }
 
 /** Perform the no-op callback at VRAM 0x80233334. */
@@ -99,7 +99,7 @@ void Weapon_UpdateHeldAlternateFire(void *arg0, void *attack) {
 
     actor = ((LevelActor *)arg0)->controller;
     ((WeaponFireState *)attack)->mode = 2;
-    if (Weapons_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
+    if (Player_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
         ((Shared_ActorView *)actor)->nextWeapon = Weapon_FindNextUsableWeapon(actor);
         return;
     }
@@ -112,7 +112,7 @@ void Weapon_UpdateHeldAlternateFire(void *arg0, void *attack) {
 
     if (!((((Shared_ActorView *)actor)->actionFlags & 0x4000) &&
           (((Shared_ActorView *)actor)->health != 0))) {
-        Weapons_RequestActorState(arg0, attack, 2);
+        Nav_RequestActorState(arg0, attack, 2);
         func_8022B9C4_de(actor);
         ((WeaponFireState *)attack)->mode = 1;
     }
@@ -139,19 +139,19 @@ void Weapon_UpdateSpecialFireAndAmmo(void *arg0, void *attack) {
         }
     }
 
-    if (Weapons_HasAmmoForMode(actor, ((ObjectLinks11DC *)(actor))->unk_62E) == 0) {
+    if (Player_HasAmmoForMode(actor, ((ObjectLinks11DC *)(actor))->unk_62E) == 0) {
         if (func_80283228_de(&D_8011D8D0, actor) == 0) {
             ((ObjectLinks11DC *)(actor))->unk_770 = Weapon_FindNextUsableWeapon(actor);
         }
     } else if (func_802301F4_de(arg0, attack) == 0 &&
                !(((ObjectLinks1DC_3 *)arg0)->unk_100 & 0x400)) {
-        Weapons_RequestActorState(arg0, attack, value);
+        Nav_RequestActorState(arg0, attack, value);
     }
 }
 
 void Weapon_RequestReleaseOnEnabledEvent(void *a, struct WeaponEventSource *b) {
     if (b->eventEnabled != 0) {
-        Weapons_RequestActorState(a, b, 2);
+        Nav_RequestActorState(a, b, 2);
     }
 }
 
@@ -212,7 +212,7 @@ void Weapon_ApproachSpinPhaseAndRelease(void *arg0, struct WeaponFireState *fire
     temp_f0 = GraphU64_ApproachValue(fireState->spinStep, target, D_800CA7A0_de);
     fireState->spinStep = temp_f0;
     if (target <= temp_f0) {
-        Weapons_RequestActorState(arg0, fireState, 2);
+        Nav_RequestActorState(arg0, fireState, 2);
     }
 }
 

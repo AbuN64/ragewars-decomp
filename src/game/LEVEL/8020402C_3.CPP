@@ -15,7 +15,7 @@
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 
 extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
-extern void func_80267198_de(void *, void *, s32, CVector3, ResourceManagerState);
+extern void Events_DispatchCallback(void *, void *, s32, CVector3, ResourceManagerState);
 typedef struct BreakableContactRule {
     u32 flags;
     f32 limit;
@@ -59,7 +59,7 @@ void Action_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *
         }
         if (triggerResponse) {
             eventState.active = 0;
-            func_80267198_de(ctx, ctx, 6, ctx->unk_8, eventState);
+            Events_DispatchCallback(ctx, ctx, 6, ctx->unk_8, eventState);
             Rumble_SetActorStateBit(&g_world, ctx, 1);
         }
     }
@@ -73,7 +73,7 @@ void Action_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *
         }
     }
     if (hit->limit != 0.0f && hit->limit <= hit->elapsed) {
-        Weapons_RequestActorState(ctx, (ObjectStateCC *)hit, 1);
+        Nav_RequestActorState(ctx, (ObjectStateCC *)hit, 1);
     }
 }
 
@@ -81,7 +81,7 @@ void Action_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *
    by D_800C6B74, and the object is forced at 0xE6, or the hit's team byte at 0xCA matches both ids at
    0x108 and 0x10A and either the hit at 0xCB bypasses an object without flag 0x400 or the scaled count
    reaches its limit (the count at 0x12C against 0x134 while flagged 0x400 below three hits at 0x10C,
-   otherwise the hits against 0x104), it raises event 7 at its position through func_80267198_de and
+   otherwise the hits against 0x104), it raises event 7 at its position through Events_DispatchCallback and
    releases it through func_80285DB0_de. Written from its own assembly with the destroy decision as an
    if/else chain on a byte-sized damage factor. */
 
@@ -100,7 +100,7 @@ extern void func_80278D78_de(struct Shared_Actor *arg0, s32 arg1, void *arg2);
 
 extern void Rumble_SetActorStateBit(Shared_World *arg0, void *arg1, s32 arg2);
 
-extern void func_80267198_de(void *arg0, void *arg1, s32 arg2,
+extern void Events_DispatchCallback(void *arg0, void *arg1, s32 arg2,
                           CVector3 arg3, ResourceManagerState arg4);
 
 extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
@@ -133,7 +133,7 @@ void Action_ResolveBreakableHit(void *breakableHitContext, ObjectStateCC *hitSta
     }
     if (destroy) {
         local.active = 0;
-        func_80267198_de(breakableHitContext, breakableHitContext, 7, ((BreakableHitContext *)(breakableHitContext))->unk_8, local);
+        Events_DispatchCallback(breakableHitContext, breakableHitContext, 7, ((BreakableHitContext *)(breakableHitContext))->unk_8, local);
         Rumble_SetActorStateBit(&g_world, breakableHitContext, 0);
     }
 }
@@ -147,9 +147,9 @@ void func_80204BD0_de(void *actor, void *requestContext) {
     s32 different = Rumble_TestActorStateBit(&g_world, actor) != 1;
 
     if (different == 0) {
-        Weapons_RequestActorState(actor, requestContext, 0);
+        Nav_RequestActorState(actor, requestContext, 0);
     } else {
-        Weapons_RequestActorState(actor, requestContext, 1);
+        Nav_RequestActorState(actor, requestContext, 1);
     }
 }
 
@@ -175,7 +175,7 @@ void func_80204C68_de(void *actor, ActorMotionState *motionState) {
     motionState->speed = 0;
     func_802A5D38_de(&D_801379C0, (s32)actor);
     if (flag->mode != 4) {
-        func_80267198_de(actor, actor, 6,
+        Events_DispatchCallback(actor, actor, 6,
                       ((LevelActor *)actor)->position0, local);
         ((LevelActor *)actor)->flags |= 0x08000000;
     }
@@ -191,21 +191,21 @@ void func_80204D2C_de(BreakableHitContext *breakableHitContext) {
     func_80278D78_de(breakableHitContext, 0x8000, breakableHitContext);
     func_802A5D38_de(&D_801379C0, (s32)breakableHitContext);
     if (flag->mode != 4) {
-        func_80267198_de(breakableHitContext, breakableHitContext, 7,
+        Events_DispatchCallback(breakableHitContext, breakableHitContext, 7,
                       breakableHitContext->unk_8, local);
         breakableHitContext->unk_100 |= 0x08000000;
     }
 }
 
 void func_80204DE0_de(void *a, void *b) {
-    Weapons_RequestActorState(a, b, 0x0); }
+    Nav_RequestActorState(a, b, 0x0); }
 
 void func_80204DFC_de(Trigger *trigger) {
     func_8028B670_de(&g_world, trigger->owner, trigger->actor, 1);
 }
 
 void func_80204E2C_de(void *a, void *b) {
-    Weapons_RequestActorState(a, b, 0x1); }
+    Nav_RequestActorState(a, b, 0x1); }
 
 void func_80204E48_de(Trigger *trigger) {
     func_8028B670_de(&g_world, trigger->owner, trigger->actor, 0);
@@ -224,7 +224,7 @@ void func_80204EA8_de(LevelActor *actor) {
     ResourceManagerState pair;
 
     pair.active = 0;
-    func_80267198_de(actor, actor, 6, actor->position0, pair);
+    Events_DispatchCallback(actor, actor, 6, actor->position0, pair);
     Rumble_SetActorStateBit(&g_world, actor, 1);
 }
 
@@ -233,7 +233,7 @@ void func_80204F10_de(LevelActor *actor) {
     ResourceManagerState pair;
 
     pair.active = 0;
-    func_80267198_de(actor, actor, 7, actor->position0, pair);
+    Events_DispatchCallback(actor, actor, 7, actor->position0, pair);
     Rumble_SetActorStateBit(&g_world, actor, 0);
 }
 

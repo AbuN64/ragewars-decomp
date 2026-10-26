@@ -163,7 +163,7 @@ s32 func_80222EA4_de(void *player, void *bodyActor) {
                                 ((Shared_ActorView *)(player))->unk_0x0038 |= 0x1000;
                                 return 0;
                             }
-                            Weapons_SetPlayerState(player, bodyActor, 0xC);
+                            Player_SetPlayerState(player, bodyActor, 0xC);
                             return 1;
                         }
                     }
@@ -205,7 +205,7 @@ s32 func_80222EA4_de(void *player, void *bodyActor) {
     if (state == 0x26) {
         return 0;
     }
-    Weapons_SetPlayerState(player, bodyActor, 0xA);
+    Player_SetPlayerState(player, bodyActor, 0xA);
     return 1;
 }
 
@@ -237,7 +237,7 @@ s32 func_80222FE0_de(void *playerObject, void *positionObject, s32 *unused) {
             Sky_StartScaledShake(player->effect, D_800C2870_de, 100.0f, D_800C2870_de, D_800C286C_de, kind, position->pos);
         if (selected->state.kind == 0x2E) actor->state.flags |= 0x200;
         actor->state.timer = -1;
-        Weapons_RequestActorState(actor, &actor->state, 0x34);
+        Nav_RequestActorState(actor, &actor->state, 0x34);
     } else if (player->effect)
         Sky_StartScaledShake(player->effect, D_800C2878_de, 60.0f, D_800C2878_de, D_800C2874_de, kind, position->pos);
     return 1;
@@ -268,7 +268,7 @@ extern void GraphU64_EaseValueToward(f32 *, f32, f32);
    locks the look rate at 0.5 and mode 0 without the pitch option at 0.8. Unless the body stands on
    a surface that stops turning, the heading eases toward the stick yaw, then the pitch offset eases
    toward the stick pitch (degrees to radians). */
-void Weapons_UpdateViewAngles(Player *player, Player *body, ViewTuning *tuning) {
+void Player_UpdateViewAngles(Player *player, Player *body, ViewTuning *tuning) {
     f32 sens, decay, damp, yawSens, yawValue, yawRate, pitchSens, pitchValue, pitchRate, input, value, yawDelta;
     AiProfile *profile;
     SurfaceView *surface;

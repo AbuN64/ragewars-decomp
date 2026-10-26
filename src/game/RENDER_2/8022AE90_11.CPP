@@ -7,7 +7,7 @@
 void func_8022B9C4_de(void *actor) {
     if ((((struct IntegerState1218 *) ((s8 *) actor))->unk_1210) != 0) {
         if ((((struct IntegerState1218 *) ((s8 *) actor))->unk_5E4) != 0) {
-            Weapons_SetPlayerState(actor, actor, 2);
+            Player_SetPlayerState(actor, actor, 2);
         }
         (((struct IntegerState1218 *) ((s8 *) actor))->unk_1210) = 0;
         (((struct IntegerState1218 *) ((s8 *) actor))->unk_1214) = 0;

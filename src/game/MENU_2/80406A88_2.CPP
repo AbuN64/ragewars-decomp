@@ -2,10 +2,10 @@
 
 #if defined(VERSION_EU_X)
 #ifdef NON_MATCHING
-#define func_8041CEB0_us_rev1 func_8041D280_eu_x
+#define func_8041CEB0_us_rev1 Frontend_OpenLocalizedFourSlotSelection
 /* Builds the player-selection menu block at 0x800E3590 for one menu tree: it allocates the block
  * with a 528-byte window request, remembers the tree and the pool func_8041B610_de returns for it,
- * arms the tree's four option groups with id 513, hands the pool back to func_8041B968_de, and
+ * arms the tree's four option groups with id 513, hands the pool back to SmpOverlay_SetObjectValue, and
  * keeps the windows 492, 491, 486, 563, 510, 512, 511 and their lookup results in the block. The
  * window geometry is nudged by whole groups of four pixels so each window snaps to a 4-pixel grid;
  * the menu item window 488 and the two label windows 496/497 get fixed alpha bytes 110/120, window
@@ -20,7 +20,7 @@
  * the same block. */
 
 /* The hub spells func_8041DB30_de; these two stay here, matching how the landed units that own
- * them define them: func_8041B968_de writes the word at +0x6C of the object it is handed, and
+ * them define them: SmpOverlay_SetObjectValue writes the word at +0x6C of the object it is handed, and
  * Frontend_ShowUnlockedEntries takes the style word this block keeps at +0x0FC. */
 
 /* The pool and style helpers take a word, while this unit and the window lookups carry the menu
@@ -37,10 +37,10 @@ s32 func_8041CEB0_us_rev1(void *owner) {
     SmpOverlay_ShowSlotById((s32) owner, 1, 513);
     SmpOverlay_ShowSlotById((s32) owner, 2, 513);
     SmpOverlay_ShowSlotById((s32) owner, 3, 513);
-    /* func_8041B610_de is published to this unit as handing back a word while func_8041B968_de is
+    /* func_8041B610_de is published to this unit as handing back a word while SmpOverlay_SetObjectValue is
      * published as taking the pool object that word names; the cast puts that object view back on
      * the pool stored at +0x004 and carries it through unchanged. */
-    func_8041B968_de((struct Object6C *) D_800E3590->list, 1);
+    SmpOverlay_SetObjectValue((struct Object6C *) D_800E3590->list, 1);
 
     D_800E3590->unk216 = 1;
     D_800E3590->unk220 = 4;
@@ -103,6 +103,6 @@ s32 func_8041CEB0_us_rev1(void *owner) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8041D280_eu_x);
+INCLUDE_ASM("ovl_80400000", Frontend_OpenLocalizedFourSlotSelection);
 #endif
 #endif

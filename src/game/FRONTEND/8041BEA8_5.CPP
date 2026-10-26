@@ -63,7 +63,7 @@ extern s32 func_80435384_de(s32,u32 *);
 
 extern void Pak_ProbeStatus(s32);
 
-extern void func_8041C244_de(void);
+extern void SmpOverlay_AdvancePakDialogPort(void);
 
 extern void func_80434FB4_de(s32);
 
@@ -110,7 +110,7 @@ extern s32 Pak_GetStatus(s32 port);
 /* Advances the slot-dialog retry counter. Before the fourth attempt it updates
  * the dialog; later attempts start the transition and mark it active. */
 
-extern void func_8041BE90_de(void);
+extern void SmpOverlay_RefreshPakDialog(void);
 
 /* Builds screen state D_800E3518 under a parent window: allocates its 0x2C bytes, keeps the parent,
    opens windows 0x3C3 (shown), 0x3C9, 0x3C4 and 0x3C5 (hidden) at 0x4 to 0x10, clears the words at
@@ -136,7 +136,7 @@ extern void func_80286AA8_de(void *, s32, s32);
 
 
 /* In one- or no-player mode, counts a tick on the state D_800E3518 and, while it is not paused, once
-   more than five ticks have passed runs func_802A2360_de and func_8041C244_de; always returns 0. */
+   more than five ticks have passed runs func_802A2360_de and SmpOverlay_AdvancePakDialogPort; always returns 0. */
 
 
 
@@ -167,7 +167,7 @@ extern s32 func_80299A08_de(void);
 
 
 
-int func_8041BE28_de(ListRecAt4C *list) {
+int SmpOverlay_SetListWidgetFlag40(ListRecAt4C *list) {
     int i;
 
     for (i = 0; i < list->count; i++) {
@@ -176,7 +176,7 @@ int func_8041BE28_de(ListRecAt4C *list) {
     return 0;
 }
 
-void func_8041BE90_de(void) {
+void SmpOverlay_RefreshPakDialog(void) {
     s32 foundNote;
     u32 hasRoom;
     s32 var_a0;
@@ -194,7 +194,7 @@ void func_8041BE90_de(void) {
     Frontend_SetWidgetFlag08(D_800E3518->prompt, 0);
     temp_v0 = Control_IsControllerConnected(0);
     if (temp_v0 == 1) {
-        func_8041C19C_de();
+        SmpOverlay_ProbePakDialogPorts();
         if (D_800E3518->ready == 1) {
             Pak_ProbeStatus(D_800DF4C0);
             temp_v0_2 = Pak_GetStatus(D_800DF4C0);
@@ -266,7 +266,7 @@ void func_8041BE90_de(void) {
         return;
     }
     if (var_s1 == 1) {
-        func_8041C244_de();
+        SmpOverlay_AdvancePakDialogPort();
         return;
     }
     temp_s0 = func_8040EC30_de(D_800E3518->root, SLOT_RESOURCE_968);
@@ -287,7 +287,7 @@ block_25:
     func_802A2360_de();
 }
 
-s32 func_8041C164_de(void) {
+s32 SmpOverlay_FinishPakDialog(void) {
     func_802A2394_de();
     MarkMenuEventHandled();
     func_80298368_de(2);
@@ -295,7 +295,7 @@ s32 func_8041C164_de(void) {
     return 1;
 }
 
-void func_8041C19C_de(void) {
+void SmpOverlay_ProbePakDialogPorts(void) {
     s32 port;
 
     D_800E3518->ready = 0;
@@ -314,7 +314,7 @@ void func_8041C19C_de(void) {
     }
 }
 
-void func_8041C244_de(void) {
+void SmpOverlay_AdvancePakDialogPort(void) {
     D_800DF4C0++;
     if (D_800DF4C0 >= 4) {
         func_802A2394_de();
@@ -322,7 +322,7 @@ void func_8041C244_de(void) {
         func_80298368_de(2);
         D_8014ADA0 = 1;
     } else {
-        func_8041BE90_de();
+        SmpOverlay_RefreshPakDialog();
     }
 }
 
@@ -386,7 +386,7 @@ s32 func_8041C3DC_de(void) {
     return 0;
 }
 
-int func_8041C40C_de(void) {
+int SmpOverlay_TickPakDialog(void) {
     if (D_800E28E0 < 2) {
         D_800E3518->elapsed++;
         if (D_800E3518->state == 0) {
@@ -394,7 +394,7 @@ int func_8041C40C_de(void) {
                 return 0;
             }
             func_802A2360_de();
-            func_8041C244_de();
+            SmpOverlay_AdvancePakDialogPort();
         }
     }
     return 0;
@@ -406,7 +406,7 @@ s32 func_8041C46C_de(void) {
     return 0;
 }
 
-s32 func_8041C474_de(void) {
+s32 SmpOverlay_ConsumePakDialogEvent(void) {
     MarkMenuEventHandled();
     return 0;
 }
@@ -414,7 +414,7 @@ s32 func_8041C474_de(void) {
 /* The dialog-event codes func_80299A08_de reports differ per cartridge family: the European
    eu-x cart numbers them 0x3C9..0x3CF, the de cart 0x3C1..0x3C5, and eu/us/us-rev1 0x3C6..0x3CB.
    Each case below carries the same work in every family, only its label changes. */
-s32 func_8041C494_de(void) {
+s32 SmpOverlay_HandlePakDialogChoice(void) {
     MarkMenuEventHandled();
     switch (func_80299A08_de()) {
 #if defined(VERSION_EU_X)
@@ -425,7 +425,7 @@ s32 func_8041C494_de(void) {
     case 0x3CB:
 #endif
         Frontend_SetWidgetFlag08(D_800E3518->absent, 0);
-        func_8041BE90_de();
+        SmpOverlay_RefreshPakDialog();
         break;
 #if defined(VERSION_EU_X)
     case 0x3CE:
@@ -434,7 +434,7 @@ s32 func_8041C494_de(void) {
 #else
     case 0x3CA:
 #endif
-        func_8041C164_de();
+        SmpOverlay_FinishPakDialog();
         break;
 #if defined(VERSION_EU_X)
     case 0x3CA:
@@ -443,7 +443,7 @@ s32 func_8041C494_de(void) {
 #else
     case 0x3C7:
 #endif
-        func_8041C244_de();
+        SmpOverlay_AdvancePakDialogPort();
         break;
 #if defined(VERSION_EU_X)
     case 0x3C9:
@@ -473,7 +473,7 @@ s32 func_8041C494_de(void) {
     return 0;
 }
 
-s32 func_8041C574_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 SmpOverlay_DispatchPakDialogEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;

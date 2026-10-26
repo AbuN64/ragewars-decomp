@@ -57,9 +57,9 @@ extern void Frontend_SetWidgetFlag08(struct Shape_typemap_21 *, s32);
 
 extern struct RecordRecAt8D D_80102B00[];
 
-extern void func_80265688_de(u8 *, s32, s32);
+extern void Defs_SetBitValue(u8 *, s32, s32);
 
-extern s32 func_80265650_de(u8 *, s32);
+extern s32 Defs_TestBit(u8 *, s32);
 
 s32 func_80426CE4_de(void *unused0, void *unused1, s32 event) {
     s32 views;
@@ -118,36 +118,36 @@ void func_80427008_de(void) {
 
     i = 0;
     do {
-        func_80265688_de(D_800E4690->owned, i, 0);
-        func_80265688_de(D_800E4690->pending, i, 0);
+        Defs_SetBitValue(D_800E4690->owned, i, 0);
+        Defs_SetBitValue(D_800E4690->pending, i, 0);
         i++;
     } while (i < 36);
     switch (D_801462C8.controllerMode) {
     case 1:
         i = 0;
         do {
-            func_80265688_de(D_800E4690->owned, i, func_80265650_de(D_80102B00[D_800E4690->player].single, i));
+            Defs_SetBitValue(D_800E4690->owned, i, Defs_TestBit(D_80102B00[D_800E4690->player].single, i));
             i++;
         } while (i < 36);
         break;
     case 2:
         i = 0;
         do {
-            func_80265688_de(D_800E4690->owned, i, func_80265650_de(D_80102B00[D_800E4690->player].versus, i));
+            Defs_SetBitValue(D_800E4690->owned, i, Defs_TestBit(D_80102B00[D_800E4690->player].versus, i));
             i++;
         } while (i < 36);
         break;
     case 3:
         i = 0;
         do {
-            func_80265688_de(D_800E4690->owned, i, func_80265650_de(D_80102B00[D_800E4690->player].three, i));
+            Defs_SetBitValue(D_800E4690->owned, i, Defs_TestBit(D_80102B00[D_800E4690->player].three, i));
             i++;
         } while (i < 36);
         break;
     case 4:
         i = 0;
         do {
-            func_80265688_de(D_800E4690->owned, i, func_80265650_de(D_80102B00[D_800E4690->player].four, i));
+            Defs_SetBitValue(D_800E4690->owned, i, Defs_TestBit(D_80102B00[D_800E4690->player].four, i));
             i++;
         } while (i < 36);
         break;
@@ -171,7 +171,7 @@ s32 Frontend_FindUnlockPath(u8 *remaining, s32 *path) {
     anyLeft = 0;
     node = 0;
     do {
-        if (func_80265650_de(remaining, node) == 1) {
+        if (Defs_TestBit(remaining, node) == 1) {
             anyLeft = 1;
         }
         node++;
@@ -184,7 +184,7 @@ s32 Frontend_FindUnlockPath(u8 *remaining, s32 *path) {
         last--;
         node = 0;
         while (node < 36) {
-            if (func_80265650_de(remaining, node) == 0) {
+            if (Defs_TestBit(remaining, node) == 0) {
                 node++;
             } else {
                 linked = Frontend_IsUnlockLinked(D_800E4694[path[last]].value, D_800E4694[node].value);
@@ -192,11 +192,11 @@ s32 Frontend_FindUnlockPath(u8 *remaining, s32 *path) {
                     last++;
                     path[last] = node;
                     path[last + 1] = -1;
-                    func_80265688_de(remaining, node, 0);
+                    Defs_SetBitValue(remaining, node, 0);
                     if (Frontend_FindUnlockPath(remaining, path) == linked) {
                         return 1;
                     }
-                    func_80265688_de(remaining, node, 1);
+                    Defs_SetBitValue(remaining, node, 1);
                     path[last] = -1;
                     last--;
                 }

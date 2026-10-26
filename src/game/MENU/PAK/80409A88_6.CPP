@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-extern void func_802658E4_de(char *buffer, const char *format, s32 value);
+extern void Defs_FormatIntegerValue(char *buffer, const char *format, s32 value);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/PAK_MENU.H"
@@ -26,7 +26,7 @@ s32 func_8040A300_de(struct Field *field, Shared_PakMenu *pThis) {
         strings = D_800E25E4;
         field->text = strings;
         text = strings[D_801462C8.language];
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 1), D_800ED3FC, value + 1);
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 1), D_800ED3FC, value + 1);
     }
     return 0;
 }
@@ -50,7 +50,7 @@ s32 func_8040A300_de(LayeredText *field, struct Shared_PakMenu *holder) {
         value = holder->owner->unk4;
         field->text = (u8 **)&D_800D36E4;
         text = (char *)*(u8 **)&D_800D36E4;
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 1),
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 1),
                         g_pakFormatInt1, value + 1);
     }
     return 0;

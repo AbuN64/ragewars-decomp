@@ -226,7 +226,7 @@ extern void D_0041AE0C();
 extern s32 D_0041B340(void *, s32, s32, s32, s32);
 /* D_0041B3D0: func_8041B3D0_de */
 extern void D_0041B3D0();
-/* D_0041B970: func_8041B970_de */
+/* D_0041B970: SmpOverlay_DispatchSlotEvent */
 extern s32 D_0041B970(void *, s32, s32, s32, s32);
 /* D_0041BA00: func_8041BA00_de */
 extern void D_0041BA00();

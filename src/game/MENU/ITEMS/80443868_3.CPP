@@ -7,7 +7,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 #include "COMMON/MENURECAT20V1.H"
-extern void func_802658E4_de(char *buffer, const char *format, s32 value);
+extern void Defs_FormatIntegerValue(char *buffer, const char *format, s32 value);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
@@ -17,10 +17,10 @@ extern s16 D_801522DE[];
 
 s32 func_80443998_de(LayeredText *field, struct MenuRules *holder) {
     Shared_MenuData *players = &D_80145040;
-    s32 player = Weapons_GetPlayerIndex(players, holder->locked);
+    s32 player = Player_GetPlayerIndex(players, holder->locked);
     s32 value = D_801522DE[player * 75];
     char *text = (char *)field->text[players->game.language];
-    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
+    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
     return 0;
 }
 #endif
@@ -42,7 +42,7 @@ extern char D_80145040[];
 #endif
 
 extern char g_fmtDec4Pad[];
-extern s32 Weapons_GetPlayerIndex(void *, unsigned int);
+extern s32 Player_GetPlayerIndex(void *, unsigned int);
 extern s32 Pak_CountLineChars(LayeredText *);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -50,9 +50,9 @@ s32 func_80443998_de(LayeredText *field, struct MenuRules *holder) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     struct LocalizedInputState *players = &D_80145040;
-    s32 player = Weapons_GetPlayerIndex(players, holder->locked);
+    s32 player = Player_GetPlayerIndex(players, holder->locked);
 #else
-    s32 player = Weapons_GetPlayerIndex(D_80145040, holder->locked);
+    s32 player = Player_GetPlayerIndex(D_80145040, holder->locked);
 #endif
 
     s32 value = D_801462C8.playerSettings[player].resultScore;
@@ -65,9 +65,9 @@ s32 func_80443998_de(LayeredText *field, struct MenuRules *holder) {
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
+    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
 #else
-    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), g_fmtDec4Pad, value);
+    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), g_fmtDec4Pad, value);
 #endif
     return 0;
 }

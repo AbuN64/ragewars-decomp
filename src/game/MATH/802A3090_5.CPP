@@ -13,7 +13,7 @@
 
 s32 GetMenuScreenOwner();
 
-extern void func_8029AA34_de(s32 *arg0);
+extern void Smos_ClearControllerFlags(s32 *arg0);
 
 /** Return the global word at D_800D2C98. */
 
@@ -26,7 +26,7 @@ void func_802A2360_de(void) {
     p = &D_800CDA24;
     if (*p != 1) {
         *p = 1;
-        func_8029AA34_de(p);
+        Smos_ClearControllerFlags(p);
     }
 }
 

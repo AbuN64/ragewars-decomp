@@ -9,7 +9,7 @@
 
 
 
-s32 func_8029C4A0_de(CVector3 *out, s32 *outCount, CVector3 *in, s32 n, f32 a, f32 b, f32 c, f32 d) {
+s32 XMath_ClipPolygonToPlane(CVector3 *out, s32 *outCount, CVector3 *in, s32 n, f32 a, f32 b, f32 c, f32 d) {
     CVector3 delta;
     CVector3 *prev;
     CVector3 *point;
@@ -91,27 +91,27 @@ void MatrixFromAngles(MatrixF *matrix, f32 *angles) {
         XPlus_FillBytes(matrix, 0, 64);
         one = D_800C5A94;
         matrix->m[0][0] = one; matrix->m[1][1] = one; matrix->m[2][2] = one; matrix->m[3][3] = one;
-        func_8029BBB0_de(angles[1], &sy, &cy);
+        XMath_EvaluateSineCosine(angles[1], &sy, &cy);
         matrix->m[2][0] = sy; matrix->m[0][0] = cy; matrix->m[0][2] = -sy; matrix->m[2][2] = cy;
         return;
     case 4:
         XPlus_FillBytes(matrix, 0, 64);
         one = D_800C5A98_de;
         matrix->m[0][0] = one; matrix->m[1][1] = one; matrix->m[2][2] = one; matrix->m[3][3] = one;
-        func_8029BBB0_de(angles[0], &sx, &cx);
+        XMath_EvaluateSineCosine(angles[0], &sx, &cx);
         matrix->m[1][1] = cx; matrix->m[2][1] = -sx; matrix->m[1][2] = sx; matrix->m[2][2] = cx;
         return;
     case 1:
         XPlus_FillBytes(matrix, 0, 64);
         one = D_800C5A9C;
         matrix->m[0][0] = one; matrix->m[1][1] = one; matrix->m[2][2] = one; matrix->m[3][3] = one;
-        func_8029BBB0_de(angles[2], &sz, &cz);
+        XMath_EvaluateSineCosine(angles[2], &sz, &cz);
         matrix->m[0][0] = cz; matrix->m[1][0] = -sz; matrix->m[0][1] = sz; matrix->m[1][1] = cz;
         return;
     }
-    func_8029BBB0_de(angles[0], &sx, &cx);
-    func_8029BBB0_de(angles[1], &sy, &cy);
-    func_8029BBB0_de(angles[2], &sz, &cz);
+    XMath_EvaluateSineCosine(angles[0], &sx, &cx);
+    XMath_EvaluateSineCosine(angles[1], &sy, &cy);
+    XMath_EvaluateSineCosine(angles[2], &sz, &cz);
     {
         f32 sxsy = sx * sy;
         f32 cxcz = cx * cz;

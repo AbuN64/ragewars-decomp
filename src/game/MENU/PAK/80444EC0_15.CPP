@@ -34,7 +34,7 @@ s32 func_80445ECC(LayeredText *field) {
 #else
         text = (char *)*VALUE_TEXT;
 #endif
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 2),
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 2),
                         VALUE_FORMAT, D_800E63B8);
     }
     return 0;

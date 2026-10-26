@@ -21,9 +21,9 @@ extern char D_80102B00[];
 extern Course *D_800E4680;
 extern s32 D_801371D4;
 
-extern s32 Weapons_GetLevelProgress(char *, s32);
+extern s32 Player_GetLevelProgress(char *, s32);
 extern void Ovlgame_ResetRespawnedPlayer(SharedPlayer *);
-extern void Weapons_EndRound(void *);
+extern void Player_EndRound(void *);
 
 extern u8 D_801462D5; /* MIXED func_8044972C_de */
 extern u8 D_801462E5; /* MIXED func_8044972C_de */
@@ -33,7 +33,7 @@ void func_8044972C_de(SharedPlayer *player) {
     scale = (D_80145048 >= 2) * 2;
     if (D_801462E5 != 0) {
         if (D_801462D5 == 1 && player->views1450.view1450_1.computer == 0) {
-            player->views133C.view133C_1.laps = ((u8)Weapons_GetLevelProgress(D_80102B00 + player->views1C.view5D4_46.slot * 0x190, player->views5D8.view5D8_1.record->unk80) >> 1) + 1;
+            player->views133C.view133C_1.laps = ((u8)Player_GetLevelProgress(D_80102B00 + player->views1C.view5D4_46.slot * 0x190, player->views5D8.view5D8_1.record->unk80) >> 1) + 1;
         }
         if (D_801462D5 == 4 && player->views1450.view1450_1.computer == 0 && D_800E4680 != 0) {
             player->views133C.view133C_1.laps = D_800E4680->laps;
@@ -53,9 +53,9 @@ void func_8044972C_de(SharedPlayer *player) {
 }
 
 /* Ends a human player's run. Outside a networked session (or as its local host) the countdown at 0x133C ticks
- * down and, on reaching zero, clears humanWon and calls Weapons_EndRound on the menu data. Then a human player with
+ * down and, on reaching zero, clears humanWon and calls Player_EndRound on the menu data. Then a human player with
  * countdown left respawns with the chosen model (scaled when two or more players are in) and resets; otherwise
- * the run is settled through Weapons_SetPlayerState, except for a local idle player whose profile has no bonus. */
+ * the run is settled through Player_SetPlayerState, except for a local idle player whose profile has no bonus. */
 void Ovlgame_UpdateRunEndPlayer(struct Player *player)
 {
     s32 modelScale = (D_80145048 >= 2) * 2;
@@ -67,7 +67,7 @@ void Ovlgame_UpdateRunEndPlayer(struct Player *player)
             }
             if (player->countdown == 0) {
                 D_80145040.game.humanWon = 0;
-                Weapons_EndRound(&D_80145040);
+                Player_EndRound(&D_80145040);
             }
         }
     }
@@ -79,13 +79,13 @@ void Ovlgame_UpdateRunEndPlayer(struct Player *player)
                 if (game->local && player->animationDone == 0 && player->profile->bonus == 0) {
                     return;
                 }
-                Weapons_SetPlayerState(player, player, 0x12);
+                Player_SetPlayerState(player, player, 0x12);
             } else {
                 Player_PlacePlayerAtSpawnPoint(player, player->model, modelScale, 1);
                 Ovlgame_ResetRespawnedPlayer(player);
             }
         } else {
-            Weapons_SetPlayerState(player, player, 0x12);
+            Player_SetPlayerState(player, player, 0x12);
         }
         player->resetState = 0;
     }

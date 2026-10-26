@@ -195,9 +195,9 @@ EntryRecAt18V4 *func_8028C7E0_de(WorldCode8028B64C *world, s32 id) {
 
 
 
-extern Player *Weapons_GetFirstPlayer(void *list);
+extern Player *Player_GetFirstPlayer(void *list);
 #ifdef VERSION_EU
-extern Player *Weapons_GetFirstPlayer(void *list);
+extern Player *Player_GetFirstPlayer(void *list);
 #endif
 
 Player *func_8028C834_de(WorldRecAt1B6A4 *world) {
@@ -210,9 +210,9 @@ Player *func_8028C834_de(WorldRecAt1B6A4 *world) {
     s32 i;
 
 #ifdef VERSION_EU
-    player = Weapons_GetFirstPlayer(&D_80145040);
+    player = Player_GetFirstPlayer(&D_80145040);
 #else
-    player = Weapons_GetFirstPlayer(&D_80145040);
+    player = Player_GetFirstPlayer(&D_80145040);
 #endif
     best = 9999999;
     nearest = 0;
@@ -340,7 +340,7 @@ ObjectRecAt1A4 *func_8028CAE0_de(World_func_8028CAE0_de *world, ObjectRecAt1A4 *
     return best;
 }
 
-/* Returns the entry in an object's pointer list at 0x1024, counted at 0x10A4, whose position lies nearest a given position, or null when none lies closer than D_800CA3E0. Adapted from Weapons_FindNearestPlayer with the linked list walk replaced by a do-while loop, guarded by the zero index against the count, over a counted array of entry pointers read before the guard, the position read from a record at offset 8, and the differences taken from the position. */
+/* Returns the entry in an object's pointer list at 0x1024, counted at 0x10A4, whose position lies nearest a given position, or null when none lies closer than D_800CA3E0. Adapted from Player_FindNearestPlayer with the linked list walk replaced by a do-while loop, guarded by the zero index against the count, over a counted array of entry pointers read before the guard, the position read from a record at offset 8, and the differences taken from the position. */
 
 
 
@@ -436,18 +436,18 @@ void func_8028CCA4_de(void *arg0, s32 arg1) {
     }
 }
 
-extern void Weapons_FillDamagePacket(CDamageInfo *event, void *target, s32 damage, f32 radius, s32 flags, Shield *shield);
-extern void Weapons_RunDamageHook(LevelActor *actor, s32 *behavior, CDamageInfo *event);
+extern void Barrel_FillDamagePacket(CDamageInfo *event, void *target, s32 damage, f32 radius, s32 flags, Shield *shield);
+extern void Barrel_RunDamageHook(LevelActor *actor, s32 *behavior, CDamageInfo *event);
 void func_8028CCDC_de(Shared_World *world, s32 damage, s32 flags) {
     CDamageInfo event;
     LevelActor **actors;
     s32 count;
     s32 i;
 
-    Weapons_FillDamagePacket(&event, 0, damage, 102.399994f, flags, 0);
+    Barrel_FillDamagePacket(&event, 0, damage, 102.399994f, flags, 0);
     count = world->kind1Count;
     actors = world->kind1;
     for (i = 0; i < count; i++) {
-        Weapons_RunDamageHook(actors[i], &actors[i]->behaviorFlags, &event);
+        Barrel_RunDamageHook(actors[i], &actors[i]->behaviorFlags, &event);
     }
 }

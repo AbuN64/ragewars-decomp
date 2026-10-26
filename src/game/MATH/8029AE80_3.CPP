@@ -4,7 +4,7 @@
 #include "MATH/math_controller_events.H"
 
 
-void func_8029AAD8_de(s16 arg0, s16 arg1, s32 arg2) {
+void Smos_SendControllerButtonEvent(s16 arg0, s16 arg1, s32 arg2) {
     ControllerEvent m;
 
     m.source = 4;
@@ -16,10 +16,10 @@ void func_8029AAD8_de(s16 arg0, s16 arg1, s32 arg2) {
     m.x = 0;
     m.y = 0;
     m.z = 0;
-    func_8029A558_de(&m);
+    Smos_DispatchControllerEvent(&m);
 }
 
-void func_8029AB24_de(s16 arg0, s32 arg1, s32 arg2) {
+void Smos_SendControllerStickEvent(s16 arg0, s32 arg1, s32 arg2) {
     ControllerEvent m;
 
     m.source = 4;
@@ -31,5 +31,5 @@ void func_8029AB24_de(s16 arg0, s32 arg1, s32 arg2) {
     m.pressed = 0;
     m.y = arg2 * 0x64;
     m.z = 0;
-    func_8029A558_de(&m);
+    Smos_DispatchControllerEvent(&m);
 }

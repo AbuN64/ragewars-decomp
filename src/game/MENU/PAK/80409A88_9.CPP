@@ -77,9 +77,9 @@ s32 func_8040A614_de(struct Field *field) {
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    func_8026591C_de(text + (Pak_CountLineChars(field) - 9), D_800ED404_eu, z, y, x);
+    Defs_FormatThreeIntegers(text + (Pak_CountLineChars(field) - 9), D_800ED404_eu, z, y, x);
 #else
-    func_8026591C_de(text + (Pak_CountLineChars(field) - 9), g_pakFormatDottedTriple, z, y, x);
+    Defs_FormatThreeIntegers(text + (Pak_CountLineChars(field) - 9), g_pakFormatDottedTriple, z, y, x);
 #endif
     return 0;
 }

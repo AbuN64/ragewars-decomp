@@ -221,7 +221,7 @@ static inline void *pool_alloc(s32 arg1) {
 
 extern s32 func_80255920_de(void *, s32);
 
-extern void func_80265378_de(u32, u32, s32);
+extern void Defs_MoveMemory(u32, u32, s32);
 
 extern void func_80255D70_de(void *, s32, s32);
 
@@ -368,7 +368,7 @@ void func_802515F0_de(s32 unused, s32 compactAll) {
             func_80255B2C_de(arena, node->start);
             split = func_80255920_de(arena, node->end);
             if (split < node->start) {
-                func_80265378_de(split, node->start, node->end);
+                Defs_MoveMemory(split, node->start, node->end);
                 node->start = split;
                 func_80255ED8_de(&pool[7], node);
                 func_80255D14_de(&queue, node);

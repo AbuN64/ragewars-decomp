@@ -138,6 +138,6 @@ s32 func_8040A530_de(struct Field *field) {
         *field->text;
 #endif
 
-    func_802658E4_de(text + (Pak_CountLineChars(field) - 3), g_pakFormatInt3, value);
+    Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 3), g_pakFormatInt3, value);
     return 0;
 }

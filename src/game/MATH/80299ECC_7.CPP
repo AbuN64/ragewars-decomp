@@ -8,7 +8,7 @@
 extern s32 GetMenuScreenOwner(void);
 
 
-void func_80299CF0_de(NodeRecAt12 *node, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+void Smos_DispatchDescendantScreenEvent(NodeRecAt12 *node, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                    s32 depth) {
     ScreenManager *context;
     s32 saved;
@@ -21,11 +21,11 @@ void func_80299CF0_de(NodeRecAt12 *node, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
         context->handled = 0;
         value = &context->handled;
         if (node->left != 0) {
-            func_80299CF0_de(node->left, arg1, arg2, arg3, arg4, depth + 1);
+            Smos_DispatchDescendantScreenEvent(node->left, arg1, arg2, arg3, arg4, depth + 1);
         }
         if (context->handled == 0) {
             if (node->right != 0) {
-                func_80299CF0_de(node->right, arg1, arg2, arg3, arg4, depth + 1);
+                Smos_DispatchDescendantScreenEvent(node->right, arg1, arg2, arg3, arg4, depth + 1);
             }
             if ((context->handled == 0) && (depth > 0) && (node->value != -1) &&
                 (node->type >= 9U)) {

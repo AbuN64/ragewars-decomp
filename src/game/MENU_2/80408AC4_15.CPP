@@ -4,7 +4,7 @@
 #ifdef NON_MATCHING
 /* Drafted from the shared unit body (other versions' twin). */
 /* Fuzzy draft: inline-asm carrier of the original instructions (no C written yet). */
-void func_8040C700_de(void) {
+void Frontend_HandleBoundedValueEvent(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
@@ -178,6 +178,6 @@ void func_8040C700_de(void) {
     );
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8040C700_de);
+INCLUDE_ASM("ovl_80400000", Frontend_HandleBoundedValueEvent);
 #endif
 #endif

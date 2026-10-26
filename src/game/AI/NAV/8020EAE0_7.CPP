@@ -31,7 +31,7 @@ extern void *Nav_GetGraphPoint(void *, s32);
 
 extern void Nav_AddGoalNode(void *, s32);
 
-extern s32 Weapons_GetWeaponClassId(Player *, s32);
+extern s32 Player_GetWeaponClassId(Player *, s32);
 
 s32 Nav_SelectCloseAttackPickupGoal(CloseAttackBrain *closeAttackBrain) {
     s32 data[30];
@@ -184,7 +184,7 @@ s32 Nav_GetWeaponPickupGoalClass(void **arg0) {
     void *temp_a0;
 
     temp_a0 = *arg0;
-    temp_v0 = Weapons_GetWeaponClassId(temp_a0, (s32) ((struct MeasuredRecAt62EV1 *)(temp_a0))->value);
+    temp_v0 = Player_GetWeaponClassId(temp_a0, (s32) ((struct MeasuredRecAt62EV1 *)(temp_a0))->value);
     switch (temp_v0) {
         case 0:
             return 5;

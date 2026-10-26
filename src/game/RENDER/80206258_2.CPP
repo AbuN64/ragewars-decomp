@@ -264,7 +264,7 @@ void GraphU64_SubtractVectors(void *, void *, void *);
 
 f32 Math_Sqrtf(f32);
 
-f32 Weapons_GetSignedAngleToPoint(void *, CVector3);
+f32 Barrel_GetSignedAngleToPoint(void *, CVector3);
 
  /* extern */
 
@@ -490,7 +490,7 @@ void func_802070D0_de(func_802070D0_S3 *actor, func_802070D0_S1 *pathState) {
             actor->unk6C = (f32) (currentHeading + (segmentNode->unk10 * 0.017453294f - currentHeading) * 0.1f);
         }
     } else {
-        Barrel_ApplyClampedTurn(actor, (s32) pathState, 10.0f, Weapons_GetSignedAngleToPoint(actor, *(CVector3 *) &pathState->unk54));
+        Barrel_ApplyClampedTurn(actor, (s32) pathState, 10.0f, Barrel_GetSignedAngleToPoint(actor, *(CVector3 *) &pathState->unk54));
     }
     if (segmentNode->unk14.half & 4) {
         if ((segmentNode->unk14.word & 0x220000) == 0x220000) {
@@ -590,10 +590,10 @@ void func_80207890_de(void *object, void *state) {
     Player *player = object;
     ActorMotionState *motionState = state;
     motionState->state = 0;
-    Weapons_RequestActorState(player, motionState, 0);
+    Nav_RequestActorState(player, motionState, 0);
     if (motionState->routeMode == 1) {
         motionState->destination = motionState->start;
-        Weapons_RequestActorState(player, motionState, 4);
+        Nav_RequestActorState(player, motionState, 4);
     }
     if (Rumble_TestActorStateBit(&g_world, player) == 0) {
         player->weaponFlags &= ~0x100;

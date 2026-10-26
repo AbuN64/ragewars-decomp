@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "SYSTEM_3/80265370_3.H"
 
-void func_80265DD0_de(void) {
+void Defs_ToggleSavedFlag(void) {
     D_8010C4A0 = D_800CBC80;
     if (D_800CBC80 == 0) {
         D_800CBC80 = 0x20;

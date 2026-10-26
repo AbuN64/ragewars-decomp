@@ -10,7 +10,7 @@
 extern void func_8025476C_de(unsigned int value);
 extern int func_8025477C_de(void);
 extern PlayerRecord D_800FEB4A[];
-extern s32 func_80265650_de(void *bits, s32 bit);
+extern s32 Defs_TestBit(void *bits, s32 bit);
 
 static __inline__ Menu_func_8041D960_de *screen32(void) {
     void *block = D_800E3590;
@@ -69,7 +69,7 @@ void Frontend_UpdateFocusCaption(void) {
     }
     for (index = 0; index < 50; index++) {
         if (D_800DF544[index].id == screen32()->focus->unkC) {
-            if (func_80265650_de(&D_800FEB4A[screen32()->player], index) == 1) {
+            if (Defs_TestBit(&D_800FEB4A[screen32()->player], index) == 1) {
                 text = 0;
                 count = 0;
                 switch (index) {
@@ -149,7 +149,7 @@ void func_8041D960_de(void) {
     }
     for (i = 0; i < 50; i++) {
         if (D_800DF544[i].id == ((Menu_func_8041D960_de *) D_800E3590)->focus->unkC) {
-            if (func_80265650_de(&D_800FEB4A[((Menu_func_8041D960_de *) D_800E3590)->player], i) == 1) {
+            if (Defs_TestBit(&D_800FEB4A[((Menu_func_8041D960_de *) D_800E3590)->player], i) == 1) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
                 ((Menu_func_8041D960_de *) D_800E3590)->label->text = D_800DF544[i].text[0];
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -168,7 +168,7 @@ void Frontend_ShowUnlockedEntries(s32 style) {
     s32 i;
     for (i = 0; i < 50; i++) {
         node = func_8040EC30_de(D_800E3590->root, (u16)D_800DF544[i].id);
-        if (func_80265650_de(&D_800FEB4A[D_800E3590->unk268], i) == 1) {
+        if (Defs_TestBit(&D_800FEB4A[D_800E3590->unk268], i) == 1) {
             Frontend_SetWidgetFlag08(node, 1);
             node->alpha = style;
         } else {

@@ -244,7 +244,7 @@ struct Shared_FullPlayerMenuGlobals {
  * 0x800CB43C = 300.0 (float, D_800C62AC in this cartridge's tables)
  * 0x800CB440 = 255.0 (float, D_800C62B0 in this cartridge's tables)
  */
-void Weapons_IncrementLevelProgress(void *, int);
+void Player_IncrementLevelProgress(void *, int);
 
 
 s32 func_802A01E8_de(void);
@@ -660,10 +660,10 @@ case_13C1:
             func_804030E0_de(0x1F8);
             goto command_done;
 case_1389:
-                Weapons_IncrementLevelProgress(&D_80102B00[arg0->unk5D4], (s32) arg0->unk18->unkC);
+                Player_IncrementLevelProgress(&D_80102B00[arg0->unk5D4], (s32) arg0->unk18->unkC);
 block_126:
                 var_s4 = 1;
-                Weapons_IncrementLevelProgress(&D_80102B00[arg0->unk5D4], (s32) arg0->unk18->unkC);
+                Player_IncrementLevelProgress(&D_80102B00[arg0->unk5D4], (s32) arg0->unk18->unkC);
                 func_804030E0_de(0x1F4);
                 goto command_done;
 case_13BD:

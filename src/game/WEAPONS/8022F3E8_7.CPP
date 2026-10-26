@@ -41,7 +41,7 @@ extern s16 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 
 
-extern s32 Weapons_GetPlayerIndex(void *, void *);
+extern s32 Player_GetPlayerIndex(void *, void *);
 
 extern void Sky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 
@@ -67,14 +67,14 @@ static inline s32 can_fire(char *player) {
     if (ammo == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Weapons_GetPlayerIndex(D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Player_GetPlayerIndex(D_80145040, player),
                           1.0f);
         }
     }
     return ammo;
 }
 
-extern s32 Weapons_GetWeaponAmmo(void *arg0, s16 arg1);
+extern s32 Player_GetWeaponAmmo(void *arg0, s16 arg1);
 
 /* Advances a player's second charging action: when the trigger is released (as in Weapon_UpdateSpinAndRepeatCue) or the
  * cooldown is past D_800C8008, it switches to action 2, runs func_8022AF40_de and func_8022B00C_de, plays sound
@@ -111,7 +111,7 @@ static inline s32 released(void *actor, char *player) {
     if (((Shared_ActorView *)player)->actionState != 0) {
         return 1;
     }
-    return Weapons_HasAmmoForMode(player, ((Shared_ActorView *)player)->selectedAction) == 0;
+    return Player_HasAmmoForMode(player, ((Shared_ActorView *)player)->selectedAction) == 0;
 }
 
 void Weapon_UpdateSpinAndAlternateFire(Shared_Actor *actor, WeaponFireState *fire) {
@@ -120,18 +120,18 @@ void Weapon_UpdateSpinAndAlternateFire(Shared_Actor *actor, WeaponFireState *fir
     char *model;
     player = actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
-    if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
+    if (Player_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
         ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
     }
     if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player) && fire->mode == 1) {
         if (((SharedPlayer *)(player))->views5E8.chargeView.charge >= 50) {
-            Weapons_RequestActorState(actor, fire, 5);
+            Nav_RequestActorState(actor, fire, 5);
             fire->mode = 2;
         } else {
             SoundElement_PlayFlatSound(0xD4D);
             if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
                 Sky_PostTargetedScreenMessage((D_80145040 + 0x48), ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, (u8)D_80145040[0x1809]),
-                              Weapons_GetPlayerIndex(D_80145040, player), 1.0f);
+                              Player_GetPlayerIndex(D_80145040, player), 1.0f);
             }
             fire->mode = 1;
         }
@@ -139,7 +139,7 @@ void Weapon_UpdateSpinAndAlternateFire(Shared_Actor *actor, WeaponFireState *fir
     }
     if (func_802301F4_de(actor, fire) == 0) {
         if (!(actor->weaponFlags & 0x400)) {
-            Weapons_RequestActorState(actor, fire, action);
+            Nav_RequestActorState(actor, fire, action);
         }
     } else {
         fire->spin += fire->spin * D_800D2988 * 2.0f;
@@ -171,9 +171,9 @@ void Weapon_SelectReleasedFireState(struct MeasuredRecAt1D8V1 *arg0, void *arg1)
             if (temp_a1 == 2) {
                 temp_v1 = ((struct MeasuredRecAt13CV2 *)(arg1))->value;
                 if (temp_v1 == 1) {
-                    Weapons_RequestActorState(arg0, arg1, 5);
+                    Nav_RequestActorState(arg0, arg1, 5);
                 } else if (temp_v1 == temp_a1) {
-                    Weapons_RequestActorState(arg0, arg1, 9);
+                    Nav_RequestActorState(arg0, arg1, 9);
                 } else {
                     goto check_height;
                 }
@@ -183,17 +183,17 @@ void Weapon_SelectReleasedFireState(struct MeasuredRecAt1D8V1 *arg0, void *arg1)
         } else {
 check_height:
             if (!(((struct MeasuredRecAt40 *)(arg1))->value > D_800C2F14_de)) {
-                Weapons_RequestActorState(arg0, arg1, 9);
+                Nav_RequestActorState(arg0, arg1, 9);
             } else {
-                Weapons_RequestActorState(arg0, arg1, 5);
+                Nav_RequestActorState(arg0, arg1, 5);
             }
         }
         goto done;
 check_state:
-        if (Weapons_GetWeaponAmmo(value, temp_a1) == 1) {
-            Weapons_RequestActorState(arg0, arg1, 7);
+        if (Player_GetWeaponAmmo(value, temp_a1) == 1) {
+            Nav_RequestActorState(arg0, arg1, 7);
         } else {
-            Weapons_RequestActorState(arg0, arg1, 5);
+            Nav_RequestActorState(arg0, arg1, 5);
         }
 done:
         ;
@@ -213,7 +213,7 @@ void Weapon_UpdateChargeAndRepeatCue(LevelActor *actor, Dest *attack) {
         position = &((Shared_ActorView *)player)->position.vector;
     }
     if (released(actor, player)) {
-        Weapons_RequestActorState(actor, attack, 2);
+        Nav_RequestActorState(actor, attack, 2);
         func_8022AF40_de(player);
         func_8022B00C_de(player);
         SoundElement_PlaySoundAtPosition(0x794, *position, position, -1);

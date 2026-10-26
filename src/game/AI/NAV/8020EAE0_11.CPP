@@ -13,10 +13,10 @@ s32 func_80209AD8_de(void *);
 f32 Nav_GetScaledAggression(void *);
 s32 Nav_ShouldSeekUnclaimedTeamMarker(void *);
 s32 Nav_GetWeaponPickupGoalClass(void *);
-s32 Weapons_GetWeaponClassId(void *, s16);
-s32 Weapons_GetWeaponAmmo(void *, s16);
-s32 Weapons_GetMaxHealth(void *);
-s32 Weapons_GetAmmoCapacity(void *, s32, s32);
+s32 Player_GetWeaponClassId(void *, s16);
+s32 Player_GetWeaponAmmo(void *, s16);
+s32 Player_GetMaxHealth(void *);
+s32 Player_GetAmmoCapacity(void *, s32, s32);
 extern CGameStatus D_801468A0;
 
 /* Choose the next AI state from game objectives, supplies and the current target. */
@@ -38,11 +38,11 @@ s32 Nav_SelectPlayerState(AiController *controller) {
     CGameStatus *gameStatus;
 
     health = controller->player->health >> 8;
-    maxHealth = Weapons_GetMaxHealth(controller->player) >> 8;
+    maxHealth = Player_GetMaxHealth(controller->player) >> 8;
     healthPercent = (f32)health / (f32)maxHealth * 100.0f;
-    ammoCount = Weapons_GetWeaponAmmo(controller->player, controller->player->selectedAction);
-    ammoType = Weapons_GetWeaponClassId(controller->player, controller->player->selectedAction);
-    capacity = Weapons_GetAmmoCapacity(controller->player, ammoType, 1);
+    ammoCount = Player_GetWeaponAmmo(controller->player, controller->player->selectedAction);
+    ammoType = Player_GetWeaponClassId(controller->player, controller->player->selectedAction);
+    capacity = Player_GetAmmoCapacity(controller->player, ammoType, 1);
     if (capacity != 0 && ammoCount != -1) {
         ammoPercent = (f32)ammoCount / (f32)capacity * 100.0f;
     } else {
@@ -51,7 +51,7 @@ s32 Nav_SelectPlayerState(AiController *controller) {
     ammo0 = controller->player->ammo[0];
     ammo1 = controller->player->ammo[1];
     ammo2 = controller->player->ammo[2];
-    carrier = Weapons_FindPlayerWithMarker((char *)&D_80145040);
+    carrier = Player_FindPlayerWithMarker((char *)&D_80145040);
     if (carrier != 0 && D_80145040.game.counters.m_bCTFOn != 0) {
         if (carrier == controller->player) {
             nextState = 10;

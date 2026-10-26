@@ -79,7 +79,7 @@ scalars = true
 [[rule]]
 id = "hook-called-without-arguments"
 kind = "pattern"
-why = "A function pointer typed with no parameters and called with none: the callee reads its arguments from the registers the wrapper happened to hold (Weapons_RunDamageHook ran its hook with the actor, state and damage record it had itself received); on a native host the arguments live on the stack and the hook reads garbage (func_80219A40_de, first seen in monkey-wl8-options-menu). Type the pointer with the parameters the hook takes and forward them."
+why = "A function pointer typed with no parameters and called with none: the callee reads its arguments from the registers the wrapper happened to hold (Barrel_RunDamageHook ran its hook with the actor, state and damage record it had itself received); on a native host the arguments live on the stack and the hook reads garbage (func_80219A40_de, first seen in monkey-wl8-options-menu). Type the pointer with the parameters the hook takes and forward them."
 trees = ["rw"]
 paths = ["src/**/*.CPP", "src/**/*.c", "src/**/*.C"]
 match = '^\s*(?:\(\s*\*\s*)?\b(?:fn|cb|hook|callback|func|handler|end|cue)\b\s*\)?\s*\(\s*\)\s*;'

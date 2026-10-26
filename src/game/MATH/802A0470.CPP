@@ -154,7 +154,7 @@ f64 func_8029F5E0_de(u8 *arg0) {
             }
             goto set_threshold;
         } else {
-            scale = func_8029AEA4_de(D_800C5D48_de, exponent);
+            scale = XMath_PowerDouble(D_800C5D48_de, exponent);
         }
 set_threshold:
         threshold = D_800C5D50_de;

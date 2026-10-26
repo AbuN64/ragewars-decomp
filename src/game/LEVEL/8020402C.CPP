@@ -47,7 +47,7 @@ INCLUDE_ASM("span_1000", func_80204030_de);
 #endif
 #define LV_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 extern s32 D_auto_800D70DC;
-extern u8 *Weapons_FindTransientPlayer(u8 *);
+extern u8 *Player_FindTransientPlayer(u8 *);
 extern f32 Math_Sqrtf(f32);
 extern void func_8022E17C_de(void *, void *, s32);
 extern void Camera_PostScreenMessage(u8 *, void *, s32);
@@ -68,7 +68,7 @@ void LV_FN(u8 *self, u8 *hit) {
     u32 t1;
     switch (kind) {
     case 0x64E:
-        player = Weapons_FindTransientPlayer((u8 *)&D_80145040);
+        player = Player_FindTransientPlayer((u8 *)&D_80145040);
         if (player != 0 && LV_FIELD(player, s32, 0x5E4) != 0 && LV_FIELD(hit, s8, 0x36) != LV_FIELD(hit, s8, 0x34)) {
             table = (u8 *)&D_80145040 + 0x1860;
             if (LV_FIELD(table, s32, 0x68) == 0 && LV_FIELD(hit, s32, 0x12C) == 0) {
@@ -89,7 +89,7 @@ void LV_FN(u8 *self, u8 *hit) {
         if (LV_FIELD(hit, s8, 0x36) == LV_FIELD(hit, s8, 0x34)) {
             return;
         }
-        player = Weapons_FindTransientPlayer((u8 *)&D_80145040);
+        player = Player_FindTransientPlayer((u8 *)&D_80145040);
         if (player == 0 || LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) == 0) {
             return;
         }
@@ -138,10 +138,10 @@ void LV_FN(u8 *self, u8 *hit) {
             LV_FIELD(self, u32, 0x100) = t1 & ~0x100;
         }
         if (LV_FIELD(hit, s32, 0x128) != 0) {
-            Weapons_RequestActorState(self, hit, 0);
+            Nav_RequestActorState(self, hit, 0);
         }
         if (LV_FIELD(self, u16, 0xE4) == 0x64C) {
-            Weapons_RequestActorState(self, hit, 2);
+            Nav_RequestActorState(self, hit, 2);
         }
     }
 }
@@ -261,7 +261,7 @@ void Action_ActivateBreakableState(SharedPlayer *actor, void *state) {
     s32 flags;
 
     if (Rumble_TestActorStateBit(&g_world, actor) == 1) {
-        Weapons_RequestActorState(actor, state, 1);
+        Nav_RequestActorState(actor, state, 1);
         switch (actor->views1C.viewE4_7.kind) {
         case 0x64C:
             flags = actor->views1C.view100_9.flags & ~0x2000;
@@ -274,7 +274,7 @@ void Action_ActivateBreakableState(SharedPlayer *actor, void *state) {
         }
     } else {
         D_800C8270_de = 1;
-        Weapons_RequestActorState(actor, state, 0);
+        Nav_RequestActorState(actor, state, 0);
         D_800C8270_de = 0;
     }
 }
@@ -358,14 +358,14 @@ void Action_ClearMotionFlags(LevelActor *object) {
 }
 
 void Action_RequestStateOn(void *a, void *b) {
-    Weapons_RequestActorState(a, b, 0x1); }
+    Nav_RequestActorState(a, b, 0x1); }
 
 void Action_EnableTrigger(Trigger *trigger) {
     func_8028B670_de(&g_world, trigger->owner, trigger->actor, 1);
 }
 
 void Action_RequestStateOff(void *a, void *b) {
-    Weapons_RequestActorState(a, b, 0x0); }
+    Nav_RequestActorState(a, b, 0x0); }
 
 void Action_DisableTrigger(Trigger *trigger) {
     func_8028B670_de(&g_world, trigger->owner, trigger->actor, 0);

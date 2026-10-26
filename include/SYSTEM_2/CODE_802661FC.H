@@ -11,7 +11,7 @@ typedef struct Shared_DamageParameters {
     };
 } Shared_DamageParameters;
 struct CallbackEntryRecAt4V1 {
-    func_80267198_de_Callback callback;
+    EventsDispatchCallbackCallback callback;
     s32 unused;
 };
 struct ObjectRecAtD0 {
@@ -21,6 +21,6 @@ struct ObjectRecAtD0 {
     u8 pad1C[0xB4];
     s32 value;
 };
-extern void func_80267198_de(void *actor, void *source, s32 event, CVector3 position, struct ResourceManagerState state);
-extern void func_802671FC_de(void *arg0, void *arg1, s32 arg2, CVector3 arg3, ResourceManagerState arg6);
+extern void Events_DispatchCallback(void *actor, void *source, s32 event, CVector3 position, struct ResourceManagerState state);
+extern void Events_ForwardCallback(void *arg0, void *arg1, s32 arg2, CVector3 arg3, ResourceManagerState arg6);
 #endif

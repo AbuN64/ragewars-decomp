@@ -20,7 +20,7 @@ extern void Frontend_SetWidgetFlag08(void *, s32);
 
 
  /* extern */
-void func_80421568_de(void *, void *);
+void Menu_AdvanceTextRows(void *, void *);
 
  /* extern */
 
@@ -76,7 +76,7 @@ void func_804217D4_de(void) {
         temp_a0_2 = D_800E4400->pad;
         if (((s16) temp_a0_2->y + temp_v0_2->height) < 0) {
             temp_a0_2->y = 2U;
-            func_80421568_de(temp_a0_2, D_800E4400);
+            Menu_AdvanceTextRows(temp_a0_2, D_800E4400);
         }
         D_800E4400->mode = 1;
     }

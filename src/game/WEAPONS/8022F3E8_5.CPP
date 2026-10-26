@@ -103,7 +103,7 @@ static inline s32 can_fire(char *player) {
     if (ammo == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (((AttackTriggerPlayer *)(player))->unk5DC != 0) {
-            Sky_PostTargetedScreenMessage(&D_80145088, ((AttackTriggerPlayer *)(player))->unk5DC, D_800D30BC[0], Weapons_GetPlayerIndex(&D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, ((AttackTriggerPlayer *)(player))->unk5DC, D_800D30BC[0], Player_GetPlayerIndex(&D_80145040, player),
                           D_800C2EE4_de);
         }
     }
@@ -128,10 +128,10 @@ s32 func_802301F4_de(void *actor, void *attack) {
     }
     if (trigger != 0 && func_80230058_de(actor, attack) != 0) {
         if (((AttackTriggerAction *)(attack))->unk13C == 2 && can_fire(player)) {
-            Weapons_RequestActorState(actor, attack, 8);
+            Nav_RequestActorState(actor, attack, 8);
             return 2;
         }
-        Weapons_RequestActorState(actor, attack, 4);
+        Nav_RequestActorState(actor, attack, 4);
         ((AttackTriggerAction *)(attack))->unkCB = 0;
         return 1;
     }
@@ -164,23 +164,23 @@ static inline s32 can_toggle_mode(Player *player) {
         SoundElement_PlayFlatSound(0xD4D);
         if (player->camera) {
             Sky_PostTargetedScreenMessage(&D_80145088, player->camera, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex),
-                                             Weapons_GetPlayerIndex(&D_80145040, player), 1.0f);
+                                             Player_GetPlayerIndex(&D_80145040, player), 1.0f);
         }
     }
     return allowed;
 }
-void Weapons_UpdateAlternateFire(void *actor, void *attack) {
+void Weapon_UpdateAlternateFire(void *actor, void *attack) {
     Player *player = (Player *)((AttackTriggerActor *)actor)->unk1D8;
     s32 action = D_800CE8DC[player->pose * 12];
     AlternateModeInfo *info = (AlternateModeInfo *)D_800D052C[player->selectedAction];
-    if (!Weapons_HasAmmoForMode(player, player->selectedAction)) {
+    if (!Player_HasAmmoForMode(player, player->selectedAction)) {
         if (((AttackTriggerAction *)attack)->unk13C != 2) {
             player->weapon = Weapon_FindNextUsableWeapon(player);
             return;
         }
         ((AttackTriggerAction *)attack)->unk13C = 1;
         if (info->flags & 0x20) player->state7E8 = 0;
-        if (!Weapons_HasAmmoForMode(player, player->selectedAction)) {
+        if (!Player_HasAmmoForMode(player, player->selectedAction)) {
             player->weapon = Weapon_FindNextUsableWeapon(player);
             return;
         }
@@ -188,12 +188,12 @@ void Weapons_UpdateAlternateFire(void *actor, void *attack) {
     if ((player->actionFlags & 0x4000) && player->selectedAction < 18 && can_toggle_mode(player)) {
         if (((AttackTriggerAction *)attack)->unk13C == 1) {
             ((AttackTriggerAction *)attack)->unk13C = 2;
-            if (!Weapons_HasAmmoForMode(player, player->selectedAction)) {
+            if (!Player_HasAmmoForMode(player, player->selectedAction)) {
                 SoundElement_PlayFlatSound(0xD4D);
                 if (player->camera) {
                     Sky_PostTargetedScreenMessage((char *)&D_80145040 + 0x48, player->camera,
                                                      RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80145040.game.language),
-                                                     Weapons_GetPlayerIndex(&D_80145040, player), 1.0f);
+                                                     Player_GetPlayerIndex(&D_80145040, player), 1.0f);
                 }
                 ((AttackTriggerAction *)attack)->unk13C = 1;
             } else if (info->flags & 0x20) {
@@ -205,11 +205,11 @@ void Weapons_UpdateAlternateFire(void *actor, void *attack) {
         }
     }
     if (func_802301F4_de(actor, attack) == 0 && !(((AttackTriggerActor *)actor)->unk100 & 0x400)) {
-        Weapons_RequestActorState(actor, attack, action);
+        Nav_RequestActorState(actor, attack, action);
     }
 }
 #else
-INCLUDE_ASM("span_1000", Weapons_UpdateAlternateFire);
+INCLUDE_ASM("span_1000", Weapon_UpdateAlternateFire);
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -251,10 +251,10 @@ void Weapon_UpdateIdleWeaponSelection(LevelActor *arg0, void *arg1) {
     state = *(s16 *)((char *)D_800CE8DC +
                      (((Shared_ActorView *)actor)->action * 0x18));
     if ((s8)((Dest *)arg1)->count != 0) {
-        if (Weapons_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
+        if (Player_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
             if (((Dest *)arg1)->field13C == 2) {
                 ((Dest *)arg1)->field13C = 1;
-                if (Weapons_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
+                if (Player_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
                     ((Shared_ActorView *)actor)->nextWeapon = Weapon_FindNextUsableWeapon(actor);
                 }
             }

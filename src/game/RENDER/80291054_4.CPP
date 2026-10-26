@@ -65,7 +65,7 @@ void func_80292308_de(TimingWorld *world) {
     TextLoad_ResetTextureCache();
     func_8026D844_de();
     SetN64_BeginFrameDisplayList(world);
-    func_80265DD0_de();
+    Defs_ToggleSavedFlag();
     Control_TrackControllerPakChanges();
     Camera_UpdateViewportLayoutAndBounds(&world->viewport);
     func_80293268_de(world);

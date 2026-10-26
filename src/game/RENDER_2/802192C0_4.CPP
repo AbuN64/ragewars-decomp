@@ -41,7 +41,7 @@ extern s32 D_800C9228_de[2];
 
 void *Nav_GetGraphPoint(void *, s32);
 s32 Nav_FindNearestPointIndex(void *, void *);
-s32 Weapons_SetPlayerState(void *, void *, s32);
+s32 Player_SetPlayerState(void *, void *, s32);
 #ifndef NON_MATCHING
 void *Camera_PostScreenMessage(void *, void *, u8 *);
 #endif
@@ -155,7 +155,7 @@ void func_8021B468_de(struct Shared_ActorView *player, void *attacker, s32 damag
 
     Control_SetProfileMode(((struct Shared_ActorView *)player)->controller, 0);
     if (((struct Shared_ActorView *)player)->action == 0x27) {
-        Weapons_SetPlayerState(player, attacker, 2);
+        Player_SetPlayerState(player, attacker, 2);
     }
     ((struct Shared_ActorView *)player)->field1218 = 0;
     func_80278D78_de(attacker, 1, attacker);
@@ -183,7 +183,7 @@ settings_loop:
                     Ovlgame_ResetPlayerForRound(roundPlayer, playerSettingsRecord->character, 1);
                     roundPlayerModel = ((struct Shared_ActorView *)roundPlayer)->model;
                     ((struct Shared_ModelView *)roundPlayerModel)->flags = (s32) (((struct Shared_ModelView *)roundPlayerModel)->flags & ~4);
-                    Weapons_RequestActorState(&((struct Shared_ActorView *)roundPlayer)->weapon, &((struct Shared_ActorView *)roundPlayer)->weapon.behaviorFlags, 2);
+                    Nav_RequestActorState(&((struct Shared_ActorView *)roundPlayer)->weapon, &((struct Shared_ActorView *)roundPlayer)->weapon.behaviorFlags, 2);
                     Player_PlacePlayerAtSpawnPoint(roundPlayer, ((struct Shared_PlayerSettingsView *)settingsBase)->effect, 0, 0);
                     func_80255ED8_de(playersGlobal->controller, roundPlayer);
                     func_80255CB8_de(&playersGlobal->effects, roundPlayer);
@@ -205,7 +205,7 @@ block_13:
         }
         if (D_801462C8.counters.m_nTalsetLives < 3) {
             ((struct Shared_ActorView *)player)->special = 0;
-            Weapons_SetPlayerState(player, attacker, 0x2E);
+            Player_SetPlayerState(player, attacker, 0x2E);
             return;
         } else {
             goto block_17;
@@ -351,7 +351,7 @@ case 7:
             }
             if ((((struct Shared_ActorView *)player)->controls->transientFlag != 0) && (laterFlow = &D_80145060.flow, laterFlow->transition != 0)) {
                 if (D_800F3D08 != 0) {
-                    Weapons_RequestActorState(D_800F3D08, ((struct Shared_SpecialObjectView *)D_800F3D08)->segment, 1);
+                    Nav_RequestActorState(D_800F3D08, ((struct Shared_SpecialObjectView *)D_800F3D08)->segment, 1);
                     ((struct Shared_SpecialObjectView *)D_800F3D08)->reset = 0;
                     laterFlow->reset = 0;
                     SoundElement_PlayFlatSound(0x2D0);
@@ -439,16 +439,16 @@ case 7:
             func_802800C0_de(&D_8011D8D0, player, player, 0, deathEffectFrame, 0x64, motionVector, motionOutput, spawnVector, 0, -1, deathEffectFlags);
         }
         if (state != -1) {
-            Weapons_SetPlayerState(player, attacker, state);
+            Player_SetPlayerState(player, attacker, state);
             return;
         }
         if (((struct Shared_ActorView *)player)->state != 0x11) {
             if (((struct Shared_ActorView *)player)->action == 0xA && (damageFlags & 0x4000)) {
-                Weapons_SetPlayerState(player, attacker, 0x2A);
+                Player_SetPlayerState(player, attacker, 0x2A);
                 return;
             }
             if (damageFlags & 0x4000) {
-                Weapons_SetPlayerState(player, attacker, 0x29);
+                Player_SetPlayerState(player, attacker, 0x29);
                 return;
             }
         }
@@ -457,47 +457,47 @@ case 7:
             movingAtDeath = 0;
         }
         if (movingAtDeath != 0) {
-            Weapons_SetPlayerState(player, attacker, 0x1C);
+            Player_SetPlayerState(player, attacker, 0x1C);
             return;
         }
         previousAction = ((struct Shared_ActorView *)player)->action;
         if ((previousAction ^ 0xF) == 0) {
-            Weapons_SetPlayerState(player, attacker, 0x21);
+            Player_SetPlayerState(player, attacker, 0x21);
             return;
         }
         if (previousAction == 9) {
-            Weapons_SetPlayerState(player, attacker, 0x1F);
+            Player_SetPlayerState(player, attacker, 0x1F);
             return;
         }
         if (previousAction == 10) {
-            Weapons_SetPlayerState(player, attacker, 0x1F);
+            Player_SetPlayerState(player, attacker, 0x1F);
             return;
         }
         if (previousAction == 11) {
-            Weapons_SetPlayerState(player, attacker, 0x1F);
+            Player_SetPlayerState(player, attacker, 0x1F);
             return;
         }
         if (previousAction == 12) {
-            Weapons_SetPlayerState(player, attacker, 0x1F);
+            Player_SetPlayerState(player, attacker, 0x1F);
             return;
         }
         if (damageFlags & 0x1000) {
-            Weapons_SetPlayerState(player, attacker, 0x1F);
+            Player_SetPlayerState(player, attacker, 0x1F);
             return;
         }
         if (damageFlags & 0x200) {
-            Weapons_SetPlayerState(player, attacker, 0x19);
+            Player_SetPlayerState(player, attacker, 0x19);
             return;
         }
         if ((((struct Shared_ActorView *)player)->state != 0x11) && (((struct Shared_ActorView *)player)->specialState == 1)) {
-            Weapons_SetPlayerState(player, attacker, 0x1E);
+            Player_SetPlayerState(player, attacker, 0x1E);
             return;
         }
         if (((struct Shared_ActorView *)player)->specialState == 2) {
-            Weapons_SetPlayerState(player, attacker, 0x1D);
+            Player_SetPlayerState(player, attacker, 0x1D);
             return;
         }
-        Weapons_SetPlayerState(player, attacker, 0x16);
+        Player_SetPlayerState(player, attacker, 0x16);
         return;
     }
 }
@@ -510,7 +510,7 @@ extern f32 D_800C22A8_us, D_800C22AC_us, D_800C22B0_us;
 extern s32 D_800D2A90;
 extern char D_801468A0[];
 extern s32 func_8022C460_de(void *);
-extern s32 Weapons_GetMaxHealth(void *);
+extern s32 Player_GetMaxHealth(void *);
 extern void func_8028CE94_de(void *, void *, s32, CVector3, f32, f32);
 extern void func_80239194_de(void *, s32, s32);
 extern void func_8022B11C_de(void *, u16);
@@ -555,7 +555,7 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
         if (health < 0) {
             health = 0;
         }
-        step = Weapons_GetMaxHealth(player);
+        step = Player_GetMaxHealth(player);
         found = 0;
         for (threshold = 2; threshold < 5; threshold++) {
             step = step - step / 2;
@@ -584,7 +584,7 @@ void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
                 FIELD(s32, state, 0xA4) = 0x3C;
                 break;
             }
-            Weapons_SetPlayerState(player, player, 0x2D);
+            Player_SetPlayerState(player, player, 0x2D);
         }
         amount = 0;
     }
@@ -725,7 +725,7 @@ void func_8021C45C_de(void *playerObject, void *unused1, s32 unused2, void *proj
             if (actor->reactionOwner == 0) {
                 actor->reactionOwner = event->owner;
             }
-            Weapons_SetPlayerState(actor, actor, 0x26);
+            Player_SetPlayerState(actor, actor, 0x26);
         }
         return;
     }

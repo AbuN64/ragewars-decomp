@@ -28,10 +28,10 @@ extern void SwapMatrixUpForward(void *);
 
 extern void GraphU64_MultiplyAffineMatrices(void *, void *, void *);
 
-extern s32 func_80265650_de(void *, s32);
-extern void func_80265688_de(u8 *, s32, s32);
-void Weapons_SetAchievementFlag2F(Profile *player, s32 achievementIndex) {
-    func_80265688_de(&player->achievementFlags[0x2F], achievementIndex, 1);
+extern s32 Defs_TestBit(void *, s32);
+extern void Defs_SetBitValue(u8 *, s32, s32);
+void Player_SetAchievementFlag2F(Profile *player, s32 achievementIndex) {
+    Defs_SetBitValue(&player->achievementFlags[0x2F], achievementIndex, 1);
 }
 
 s32 Player_HasProfileUnlockFlag(u8 *arg0, s32 arg1)
@@ -51,10 +51,10 @@ s32 Player_HasProfileUnlockFlag(u8 *arg0, s32 arg1)
       return 1;
     }
   }
-  return func_80265650_de(arg0 + 0x79, arg1);
+  return Defs_TestBit(arg0 + 0x79, arg1);
 }
 
-void Weapons_SetAchievementFlagByIndex(Profile *player, s32 achievementIndex) {
+void Player_SetAchievementFlagByIndex(Profile *player, s32 achievementIndex) {
     u8 *achievementBits;
     s32 mappedAchievementIndex = achievementIndex;
 
@@ -71,7 +71,7 @@ void Weapons_SetAchievementFlagByIndex(Profile *player, s32 achievementIndex) {
         achievementBits = &player->achievementFlags[0x31];
         break;
     }
-    func_80265688_de(achievementBits, mappedAchievementIndex, 1);
+    Defs_SetBitValue(achievementBits, mappedAchievementIndex, 1);
 }
 
 s32 Player_GetProfileAchievementFlag(Profile *profile, s32 arg1) {
@@ -91,16 +91,16 @@ s32 Player_GetProfileAchievementFlag(Profile *profile, s32 arg1) {
         var_a0 = &profile->achievementFlags[0x31];
         break;
     }
-    return func_80265650_de(var_a0, index);
+    return Defs_TestBit(var_a0, index);
 }
 
-void Weapons_SetAchievementFlag7(Profile *record, s32 achievementIndex) {
-    func_80265688_de(&record->achievementFlags[7], achievementIndex, 1);
+void Player_SetAchievementFlag7(Profile *record, s32 achievementIndex) {
+    Defs_SetBitValue(&record->achievementFlags[7], achievementIndex, 1);
 }
 
-/** Thin wrapper forwarding an offset argument to func_80265650_de. */
-void Weapons_TestAchievementFlag7(Profile *record, s32 index) {
-    func_80265650_de(&record->achievementFlags[7], index);
+/** Thin wrapper forwarding an offset argument to Defs_TestBit. */
+void Player_TestAchievementFlag7(Profile *record, s32 index) {
+    Defs_TestBit(&record->achievementFlags[7], index);
 }
 
 void Player_BuildWeaponHandTransform(char *arg0) {

@@ -25,7 +25,7 @@ void Player_SetPlayerResetPosition(void *actorObject, CVector3 *newResetPosition
   void *new_var;
   player->resetPosition = *newResetPosition;
   new_var = actorObject;
-  Weapons_SetPlayerState(new_var, new_var, 0x11);
+  Player_SetPlayerState(new_var, new_var, 0x11);
 }
 
 extern void Player_BuildPlayerViewTransform(void *, MatrixF *);

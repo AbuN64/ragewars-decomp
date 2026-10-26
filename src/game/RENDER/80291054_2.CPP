@@ -101,7 +101,7 @@ extern void osViBlack(s32 active);
 extern void Items_ResetPlayers(void *players);
 extern void Ovlgame_ResetMenuPool(void *menu);
 extern void func_8023EE00_de(void);
-extern s32 func_80265964_de(s32 size);
+extern s32 Defs_ReadResourceWord(s32 size);
 extern void Items_ResetActorPools(void *players, s32 arg1);
 extern void func_804499B0_de(void *menu, s32 arg1, s32 arg2);
 extern void OvlScene_LoadSceneResources(Shared_World *world, s32 resource);
@@ -173,7 +173,7 @@ void SetN64_RunGameLoop(GameSession *session) {
     Items_ResetPlayers(session->players);
     Ovlgame_ResetMenuPool(session->menu);
     func_8023EE00_de();
-    session->resource = func_80265964_de(0x18) & 0x3FFFFFFF;
+    session->resource = Defs_ReadResourceWord(0x18) & 0x3FFFFFFF;
     Items_ResetActorPools(session->players, 0);
     func_804499B0_de(session->menu, 0, 0);
     OvlScene_LoadSceneResources(&g_world, session->resource);

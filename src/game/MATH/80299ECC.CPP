@@ -209,7 +209,7 @@ void func_80299468_de(void) {
     Cache_FreeMemory(D_8014D080->screens);
     Cache_FreeMemory(D_8014D080);
     D_8014D080 = 0;
-    func_8029AAAC_de();
+    Smos_FreeControllerContext();
     func_8040F568_de();
     func_80411F28_de();
 }

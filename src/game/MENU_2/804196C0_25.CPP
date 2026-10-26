@@ -26,7 +26,7 @@ extern void MarkMenuEventHandled(void);
 
 /* Calls Cache_FreeMemory with the arguments it was given and returns zero. */
 
-s32 func_8041BB3C_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind) {
+s32 SmpOverlay_FollowSlotTarget34(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind) {
     struct Child *child;
 
     MarkMenuEventHandled();
@@ -50,7 +50,7 @@ s32 func_8041BB3C_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 
     return 0;
 }
 
-s32 func_8041BBD0_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind) {
+s32 SmpOverlay_FollowSlotTarget2c(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind) {
     struct ChildRecAt2C *child;
 
     MarkMenuEventHandled();
@@ -74,7 +74,7 @@ s32 func_8041BBD0_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 
     return 0;
 }
 
-s32 func_8041BC64_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind) {
+s32 SmpOverlay_FollowSlotTarget38(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind) {
     struct ChildRecAt38 *child;
 
     MarkMenuEventHandled();
@@ -98,7 +98,7 @@ s32 func_8041BC64_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 
     return 0;
 }
 
-s32 func_8041BCF8_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind) {
+s32 SmpOverlay_FollowSlotTarget30(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind) {
     struct ChildRecAt30 *child;
 
     MarkMenuEventHandled();
@@ -122,7 +122,7 @@ s32 func_8041BCF8_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 
     return 0;
 }
 
-int func_8041BD8C_de(Mixer *mixer, int unused, int channel, int value, int extra) {
+int SmpOverlay_ForwardSlotEvent(Mixer *mixer, int unused, int channel, int value, int extra) {
     ObjRecAtCV1 *h;
 
     MarkMenuEventHandled();
@@ -137,7 +137,7 @@ int func_8041BD8C_de(Mixer *mixer, int unused, int channel, int value, int extra
     return 0;
 }
 
-s32 func_8041BE08_de(void *arg0) {
+s32 SmpOverlay_FreeEventObject(void *arg0) {
     Cache_FreeMemory(arg0);
     return 0;
 }

@@ -29,9 +29,9 @@ extern s32 D_800E5240[];
 extern struct Shape_typemap_165 D_800E4F64[];
 
 
-extern s32 func_80265650_de(u8 *, s32);
+extern s32 Defs_TestBit(u8 *, s32);
 
-extern void func_80265688_de(u8 *, s32, s32);
+extern void Defs_SetBitValue(u8 *, s32, s32);
 
 
 static inline s32 cup_stages(s32 cup) {
@@ -104,9 +104,9 @@ s32 func_8042ACD8_de(void) {
         size = cup_stages(D_80154010.index) - 1;
         while (!found) {
             stage = GraphU64_NextRandom() % size + 1;
-            if (func_80265650_de(D_80154010.played, stage) == 0) {
+            if (Defs_TestBit(D_80154010.played, stage) == 0) {
                 found = 1;
-                func_80265688_de(D_80154010.played, stage, found);
+                Defs_SetBitValue(D_80154010.played, stage, found);
             }
             draws++;
             if (draws >= 15001) {

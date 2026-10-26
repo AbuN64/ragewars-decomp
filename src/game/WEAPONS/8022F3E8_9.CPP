@@ -13,7 +13,7 @@
 #include "RENDER_2/8025DE50_5.H"
 
 /* Runs a weapon's two-shot alternate fire for its holder at 0x1D8: when the holder cannot use the
-   alternate mode of its weapon (Weapons_HasAmmoForMode) a pending switch at 0x13C is cancelled and, if still
+   alternate mode of its weapon (Player_HasAmmoForMode) a pending switch at 0x13C is cancelled and, if still
    unusable, the holder picks its next weapon at 0x770 through Weapon_FindNextUsableWeapon; otherwise, while the
    alternate input 0x4000 is held and the weapon can fire (not stunned, and with ammunition in a single
    player game, clicking and showing the empty message when out), mode 1 with a second shot available
@@ -28,7 +28,7 @@ extern char D_80145040[];
 
 extern s16 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
-extern s32 Weapons_GetPlayerIndex(void *, void *);
+extern s32 Player_GetPlayerIndex(void *, void *);
 extern void Sky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -50,7 +50,7 @@ static inline s32 can_fire(char *player) {
     if (ammo == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Weapons_GetPlayerIndex(D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Player_GetPlayerIndex(D_80145040, player),
                           1.0f);
         }
     }
@@ -61,13 +61,13 @@ void Weapon_ToggleFiringModeWithAmmoCheck(Shared_Actor *actor, WeaponFireState *
     s32 action;
     player = actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
-    if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
+    if (Player_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
         if (fireState->mode != 2) {
             ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
             return;
         }
         fireState->mode = 1;
-        if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
+        if (Player_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
             ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
             return;
         }
@@ -75,11 +75,11 @@ void Weapon_ToggleFiringModeWithAmmoCheck(Shared_Actor *actor, WeaponFireState *
     if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player)) {
         if (fireState->mode == 1 && can_fire(player)) {
             fireState->mode = 2;
-            if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
+            if (Player_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
                 SoundElement_PlayFlatSound(0xD4D);
                 if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
                     Sky_PostTargetedScreenMessage((D_80145040 + 0x48), ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, (u8)D_80145040[0x1809]),
-                                  Weapons_GetPlayerIndex(D_80145040, player), 1.0f);
+                                  Player_GetPlayerIndex(D_80145040, player), 1.0f);
                 }
                 fireState->mode = 1;
             }
@@ -88,6 +88,6 @@ void Weapon_ToggleFiringModeWithAmmoCheck(Shared_Actor *actor, WeaponFireState *
         }
     }
     if (func_802301F4_de(actor, fireState) == 0 && !(actor->weaponFlags & 0x400)) {
-        Weapons_RequestActorState(actor, fireState, action);
+        Nav_RequestActorState(actor, fireState, action);
     }
 }

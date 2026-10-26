@@ -5,7 +5,7 @@
    17 and 18 as slots 11 and 12, and other indices are ignored. */
 
 
-void Weapons_IncrementLevelProgress(Profile *obj, int index) {
+void Player_IncrementLevelProgress(Profile *obj, int index) {
     if (index == 17) {
         goto is17;
     }
@@ -35,7 +35,7 @@ store:
 
 #include "COMMON/SHAREDPLAYER.H"
 
-s32 Weapons_GetLevelProgress(Profile *obj, s32 index) {
+s32 Player_GetLevelProgress(Profile *obj, s32 index) {
     if (index == 17) {
         goto slot17;
     }

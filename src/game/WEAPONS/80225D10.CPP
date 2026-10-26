@@ -11,7 +11,7 @@
 #include "COMMON/OBJRECV5.H"
 #include "GAME/CODE_8027302C.H"
 extern void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMovement *tuning);
-extern s32 Weapons_RequestActorState(void *arg0, void *arg1, s32 arg2);
+extern s32 Nav_RequestActorState(void *arg0, void *arg1, s32 arg2);
 extern void GraphU64_TransformPoint(void *arg0, void *arg1, void *arg2);
 
 #if defined(VERSION_US_REV1) || defined(NON_MATCHING)
@@ -24,12 +24,12 @@ typedef struct { u8 pad0[0x34]; Position pos; f32 height; u8 pad44[0x1A]; u8 dur
 typedef struct { u8 pad0[0x6C]; f32 yaw; u8 pad70[0x2E4]; f32 bodyYaw; u8 pad358[0x390]; Position pos; u8 pad6F4[0x100]; f32 elapsed, targetYaw; TravelTarget *target; Position start; } TravelPlayer;
 extern f32 D_800C2AE0_de, D_800C2AE4_de, D_800C2AE8_de, D_800C2AEC_de, D_800C2AF0_de;
 
-extern void Weapons_UpdateViewAngles(void *, void *, void *);
+extern void Player_UpdateViewAngles(void *, void *, void *);
 
 void func_80225D34_de(TravelPlayer *player, void *body) {
     f32 yaw, targetYaw, distance, otherDistance, alternate, duration, t;
     Position pos;
-    Weapons_UpdateViewAngles(player, body, &D_800CE7E4);
+    Player_UpdateViewAngles(player, body, &D_800CE7E4);
     if (player->target != 0) {
         player->elapsed += D_800D2988;
         yaw = player->yaw;
@@ -65,13 +65,13 @@ void func_80225D34_de(TravelPlayer *player, void *body) {
             return;
         }
     }
-    Weapons_SetPlayerState(player, body, 2);
+    Player_SetPlayerState(player, body, 2);
 }
 #else
 INCLUDE_ASM("span_1000", func_80225D34_de);
 #endif
 
-extern void Weapons_UpdateViewAngles(void *,void *,void *);
+extern void Player_UpdateViewAngles(void *,void *,void *);
 extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
 extern f32 D_800C9514_de;
 extern f32 D_800C9FE8;
@@ -95,10 +95,10 @@ void func_80225F44_de(SharedPlayer *player,func_802165F8_S1 *body) {
     GraphU64_EaseValueToward(&body->unk6C,force,0.9f);
     yaw=((yaw-body->unk6C)+player->views5E8.view69C_40.stick*D_800C2B0C_de)*unit;
     GraphU64_EaseValueToward(&player->views5E8.view72C_76.kickRoll,yaw,0.1f);
-    Weapons_UpdateViewAngles(player,body,&D_800C95D0);
+    Player_UpdateViewAngles(player,body,&D_800C95D0);
     offset=0;
     if(player->views5E8.view6B8_50.input&8) {
-        Weapons_RequestActorState(mount,&mount->animation,0x2e);
+        Nav_RequestActorState(mount,&mount->animation,0x2e);
         player->views5E8.view704_68.lift=D_800C2B10_de;
         player->views5E8.view6C0_51.unk6C0=D_800C9514_de+D_800C9514_de;
     }

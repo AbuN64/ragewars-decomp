@@ -284,7 +284,7 @@ s32 func_8040A244_de(struct Field *field) {
         value = D_800E28C8;
         field->text = D_800D3764;
         text = D_800D3764[0];
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 1), g_pakFormatInt1, value + 1);
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 1), g_pakFormatInt1, value + 1);
     }
     return 0;
 }
@@ -320,7 +320,7 @@ s32 func_8040A244_de(struct Field *field) {
         field->text = table;
         value = D_800E28C8;
         text = table[g_languageIndex];
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 1), D_800ED3FC, value + 1);
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 1), D_800ED3FC, value + 1);
     }
 done:
     return 0;

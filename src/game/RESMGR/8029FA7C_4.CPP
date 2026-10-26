@@ -35,7 +35,7 @@ void func_8029EAF4_de(s32 arg0) {
     XPlus_FillBytes(arg0, 0, 0x40);
 }
 
-void func_8029EB14_de(s32 arg0)
+void XMath_SetIdentityMatrix(s32 arg0)
 {
   XPlus_FillBytes(arg0, 0, 0x40);
   ((Matrix *)(arg0))->m[15] = (((Matrix *)(arg0))->m[10] = (((Matrix *)(arg0))->m[5] = (((Matrix *)(arg0))->m[0] = (f32) D_800C5CB8_de)));
@@ -131,7 +131,7 @@ void func_8029ED54_de(Mtx3x4_8029FD54 *arg0) {
 void func_8029EDA0_de(s32 arg0, f32 *angles) {
     f32 buf[16];
     MatrixFromAngles(buf, angles);
-    func_8029CE3C_de(arg0, buf, arg0);
+    XMath_MultiplyMatrices(arg0, buf, arg0);
 }
 
 void func_8029EDD8_de(s32 arg0, f32 arg1) {
@@ -141,7 +141,7 @@ void func_8029EDD8_de(s32 arg0, f32 arg1) {
     Matrix *p;
 
     if (arg1 != 0.0f) {
-        func_8029BBB0_de(arg1, &sp50, &sp54);
+        XMath_EvaluateSineCosine(arg1, &sp50, &sp54);
         p = &matrix;
         XPlus_FillBytes(p, 0, 0x40);
         ((Matrix *)(p))->m[0] = D_800C5CC0_de;
@@ -156,7 +156,7 @@ void func_8029EDD8_de(s32 arg0, f32 arg1) {
             matrix.m[6] = t50;
             matrix.m[10] = t54;
         }
-        func_8029CE3C_de(arg0, (s32) p, arg0);
+        XMath_MultiplyMatrices(arg0, (s32) p, arg0);
     }
 }
 
@@ -167,7 +167,7 @@ void func_8029EE78_de(s32 arg0, f32 arg1) {
     Matrix *p;
 
     if (arg1 != 0.0f) {
-        func_8029BBB0_de(arg1, &sp50, &sp54);
+        XMath_EvaluateSineCosine(arg1, &sp50, &sp54);
         p = &matrix;
         XPlus_FillBytes(p, 0, 0x40);
         ((Matrix *)(p))->m[0] = D_800C5CC4_de;
@@ -184,7 +184,7 @@ void func_8029EE78_de(s32 arg0, f32 arg1) {
             matrix.m[2] = t50n;
             matrix.m[10] = t54;
         }
-        func_8029CE3C_de(arg0, (s32) p, arg0);
+        XMath_MultiplyMatrices(arg0, (s32) p, arg0);
     }
 }
 
@@ -195,7 +195,7 @@ void func_8029EF18_de(s32 arg0, f32 arg1) {
     Matrix *p;
 
     if (arg1 != 0.0f) {
-        func_8029BBB0_de(arg1, &sp50, &sp54);
+        XMath_EvaluateSineCosine(arg1, &sp50, &sp54);
         p = &matrix;
         XPlus_FillBytes(p, 0, 0x40);
         ((Matrix *)(p))->m[0] = D_800C5CC8_de;
@@ -212,7 +212,7 @@ void func_8029EF18_de(s32 arg0, f32 arg1) {
             matrix.m[1] = t50;
             matrix.m[5] = t54;
         }
-        func_8029CE3C_de(arg0, (s32) p, arg0);
+        XMath_MultiplyMatrices(arg0, (s32) p, arg0);
     }
 }
 
@@ -295,13 +295,13 @@ void func_8029F118_de(float *arg0, float *arg1, float *arg2, float *arg3) {
     arg3[2] = arg0[10];
 }
 
-/** Thin wrapper forwarding arg0 twice (as first and third args) to func_8029CE3C_de. */
+/** Thin wrapper forwarding arg0 twice (as first and third args) to XMath_MultiplyMatrices. */
 void func_8029F164_de(int arg0, int arg1) {
-    func_8029CE3C_de(arg0, arg1, arg0);
+    XMath_MultiplyMatrices(arg0, arg1, arg0);
 }
 
 void func_8029F180_de(s32 arg0, s32 arg1) {
-    func_8029CE3C_de(arg0, arg0, arg1);
+    XMath_MultiplyMatrices(arg0, arg0, arg1);
 }
 
 void func_8029F1A0_de(void *arg0, void *arg1, void *arg2, s32 arg3) {
@@ -346,7 +346,7 @@ void func_8029F254_de(struct MatrixF *matrixF, CVector3 *arg1, f32 arg2) {
     f32 sz;
     f32 zero;
 
-    func_8029BBB0_de(arg2, &sine, &cosine);
+    XMath_EvaluateSineCosine(arg2, &sine, &cosine);
     cosine_value = cosine;
     one = D_800C5CCC_de;
     one_minus_cosine = one - cosine_value;

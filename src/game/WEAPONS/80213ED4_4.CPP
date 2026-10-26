@@ -8,9 +8,9 @@
 #include "TYPES.H"
 #include "stddef.h"
 
-/* Picks an actor's target (the tracked enemy when the aim point is chosen, else the nearest permitted target from Weapons_SelectCombatTarget), classifies it into one of eight kinds, and fills the target record with the kind, target, height difference, position, direction and distance, both in full and flattened to the horizontal plane. */
-extern void *Weapons_SelectCombatTarget(void *,void *,s32,s32), *func_80219408_de(void *);
-extern f32 Weapons_GetSignedAngleToPoint(void *,f32,f32,f32),Math_Sqrtf(f32);
+/* Picks an actor's target (the tracked enemy when the aim point is chosen, else the nearest permitted target from Barrel_SelectCombatTarget), classifies it into one of eight kinds, and fills the target record with the kind, target, height difference, position, direction and distance, both in full and flattened to the horizontal plane. */
+extern void *Barrel_SelectCombatTarget(void *,void *,s32,s32), *func_80219408_de(void *);
+extern f32 Barrel_GetSignedAngleToPoint(void *,f32,f32,f32),Math_Sqrtf(f32);
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 static inline s32 func_80215410_kind(Actor_func_80214DD4_de *self, Tracker *ctx, Actor_func_80214DD4_de *target) {
     if (ctx->active == 0) {
@@ -50,7 +50,7 @@ void Barrel_FillAnchorTargetInfo(Actor_func_80214DD4_de *arg0, Tracker *tracker,
     Actor_func_80214DD4_de *target;
     Location *point;
     if ((tracker->team == g_world.kind1Cursor) && !(arg0->kind[1] & 0x400) && (!(tracker->flags & 0x80000) || (tracker->lockedTarget != 0))) {
-        tracker->anchor = Weapons_SelectCombatTarget(arg0, tracker, 1, 0);
+        tracker->anchor = Barrel_SelectCombatTarget(arg0, tracker, 1, 0);
     }
     if ((*arg0->kind == 1) && (tracker->mode == 0xB)
         && func_80215410_kind(arg0, tracker, tracker->target) == 4) {
@@ -62,7 +62,7 @@ void Barrel_FillAnchorTargetInfo(Actor_func_80214DD4_de *arg0, Tracker *tracker,
     }
     if (target != NULL) {
         pos = target->pos;
-        height = Weapons_GetSignedAngleToPoint(arg0, pos.x, pos.y, pos.z);
+        height = Barrel_GetSignedAngleToPoint(arg0, pos.x, pos.y, pos.z);
     } else {
         switch (kind) {
             case 4:
@@ -71,7 +71,7 @@ void Barrel_FillAnchorTargetInfo(Actor_func_80214DD4_de *arg0, Tracker *tracker,
                 if (point->flags & 1) {
                     height = point->heading * 0.0174532942f - arg0->heading;
                 } else {
-                    height = Weapons_GetSignedAngleToPoint(arg0, pos.x, pos.y, pos.z);
+                    height = Barrel_GetSignedAngleToPoint(arg0, pos.x, pos.y, pos.z);
                 }
                 break;
             case 3:
@@ -134,7 +134,7 @@ static inline f32 Weapons_ProbeHeading(Actor_u1 *actor, CVector3 point) {
     }
     return angle;
 }
-f32 Weapons_FindClearAimAngle(Actor_u1 *actor, CVector3 point, s32 target, f32 distance) {
+f32 Barrel_FindClearAimAngle(Actor_u1 *actor, CVector3 point, s32 target, f32 distance) {
     CVector3 probe;
     char *hit;
     f32 heading = Weapons_ProbeHeading(actor, point);
@@ -175,7 +175,7 @@ extern void GraphU64_NormalizeVec3(CVector3 *);
 extern void func_8024BC94_de(CVector3 *out, void *actor, CVector3 offset);
 extern f32 GameObject_GetActorHeight(void *);
 
-/* Weapons_GetSignedAngleToPoint's body: the signed angle between the actor's facing and the direction to the point. */
+/* Barrel_GetSignedAngleToPoint's body: the signed angle between the actor's facing and the direction to the point. */
 static inline f32 angleTo(Actor_func_80214DD4_de *actor, CVector3 point) {
     f32 dx;
     f32 dz;
@@ -211,7 +211,7 @@ static inline f32 angleTo(Actor_func_80214DD4_de *actor, CVector3 point) {
  * (kind 4). Targets 70 to 110 degrees off the actor's heading are skipped. The line from the actor (its height
  * clamped to the target's aim point) to the target is compared with the target's forward vector: 0 when the angle
  * between them is not under half the cone, else -1 or 1 for the side. */
-s32 Weapons_GetFacingSide(Actor_func_80214DD4_de *self, void *unused, Actor_func_80214DD4_de *target, f32 cone) {
+s32 Barrel_GetFacingSide(Actor_func_80214DD4_de *self, void *unused, Actor_func_80214DD4_de *target, f32 cone) {
     CVector3 dir;
     CVector3 facing;
     CVector3 forward;
@@ -227,7 +227,7 @@ s32 Weapons_GetFacingSide(Actor_func_80214DD4_de *self, void *unused, Actor_func
     }
     if (target->flags100 & 0x300000) {
         controller = target->controller;
-        if (Weapons_HasAmmoForMode(controller, controller->currentWeapon) <= 0) {
+        if (Player_HasAmmoForMode(controller, controller->currentWeapon) <= 0) {
             return 0;
         }
         if (!(controller->buttons & 0x2000)) {

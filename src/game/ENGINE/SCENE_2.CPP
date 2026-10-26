@@ -103,7 +103,7 @@ extern void Cache_ReplaceResourceBlock(s32 pool, void *handle, void *block);
 extern void SetN64_TransposeRecords(void *src, void *dst, s32 arg2);
 extern void func_802BD3A0_de(void *dst, void *src, s32 size);
 extern void StaticInstance_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing);
-extern void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments);
+extern void StaticInstance_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments);
 extern void World_InitSimpleInstance(SimpleInstance *instance, SimpleInstanceRecord *record, s32 owner, char *segments);
 extern void Lighting_DecodeBoxTransform(ObjectRecAtBC *volume, LightVolumeRecord *record);
 extern f32 GameObject_GetActorHeight(void *);
@@ -209,7 +209,7 @@ void Scene_BuildPlacedInstances(Shared_World *world, void ***handle) {
                                  segments, world->levelInfo->m_GridDistance);
             }
             for (j = 0; j < staticCount; j++) {
-                World_InitPlacedProp(&props[j + efficientCount], &statics[j],
+                StaticInstance_InitPlacedProp(&props[j + efficientCount], &statics[j],
                                  SetN64_GetDirectoryEntry(world->indexedDirectory, world->indexedBank, statics[j].id),
                                  segments);
             }

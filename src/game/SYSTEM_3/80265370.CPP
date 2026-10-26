@@ -63,7 +63,7 @@ u32 Defs_GetMemorySize(void) {
     return D_80000318;
 }
 
-void func_80265378_de(u8 *split, u8 *arg1, s32 arg2) {
+void Defs_MoveMemory(u8 *split, u8 *arg1, s32 arg2) {
     u8 *var_a3;
     u8 *var_a3_2;
     s32 temp_v0;
@@ -114,7 +114,7 @@ void func_80265378_de(u8 *split, u8 *arg1, s32 arg2) {
     }
 }
 
-s32 func_80265444_de(u8 *arg0, u8 *arg1, s32 arg2) {
+s32 Defs_CompareMemory(u8 *arg0, u8 *arg1, s32 arg2) {
     u8 *end = arg0 + arg2;
 
     if (arg2 >= 4 && !((u32)arg0 & 3) && !((u32)arg1 & 3)) {
@@ -159,7 +159,7 @@ byte_loop:
     return 0;
 }
 
-s32 func_802654E8_de(void *entries, s32 arg1, s32 arg2) {
+s32 Defs_FindSortedValue(void *entries, s32 arg1, s32 arg2) {
     u32 temp_v1;
     u32 var_a3;
 
@@ -230,7 +230,7 @@ s32 func_80265550_de(u32 *arg0, s32 arg1, u32 group, s32 *arg3, s32 *last) {
     return 1;
 }
 
-int func_8026563C_de(int arg0) {
+int Defs_GetBitArrayByteCount(int arg0) {
     int result = arg0 + 7;
     if (result < 0) {
         result = arg0 + 0xE;
@@ -238,7 +238,7 @@ int func_8026563C_de(int arg0) {
     return result >> 3;
 }
 
-s32 func_80265650_de(void *arg0, s32 arg1)
+s32 Defs_TestBit(void *arg0, s32 arg1)
 {
   s32 temp_a1;
   s32 temp_v0;
@@ -257,7 +257,7 @@ s32 func_80265650_de(void *arg0, s32 arg1)
   return (*temp_a1_2 & new_var) != 0;
 }
 
-void func_80265688_de(u8 *arg0, s32 arg1, s32 found) {
+void Defs_SetBitValue(u8 *arg0, s32 arg1, s32 found) {
     s32 byteIdx;
     s32 mask;
 
@@ -270,7 +270,7 @@ void func_80265688_de(u8 *arg0, s32 arg1, s32 found) {
     arg0[byteIdx] &= ~mask;
 }
 
-void func_802656DC_de(s32 arg0, s32 arg1)
+void Defs_ToggleBit(s32 arg0, s32 arg1)
 {
   s32 temp_a1;
   s32 temp_v0;
@@ -289,29 +289,29 @@ void func_802656DC_de(s32 arg0, s32 arg1)
   *temp_a1_2 ^= new_var;
 }
 
-f32 Defs_CosineEase(f32 arg0)
+f32 Defs_CosineEase(f32 fraction)
 {
-  f32 var_f1;
-  f32 var_f0;
-  var_f0 = arg0;
-  if (var_f0 < 0.0f)
+  f32 clampBound;
+  f32 clampedFraction;
+  clampedFraction = fraction;
+  if (clampedFraction < 0.0f)
   {
-    var_f1 = 0.0f;
-    var_f0 = var_f1;
+    clampBound = 0.0f;
+    clampedFraction = clampBound;
   }
   else
   {
-    var_f1 = D_800C4398_de;
-    if (var_f1 < var_f0)
+    clampBound = D_800C4398_de;
+    if (clampBound < clampedFraction)
     {
-      var_f0 = var_f1;
+      clampedFraction = clampBound;
     }
   }
-  return (D_800C43A0_de - Math_Cosf(var_f0 * D_800C439C_de)) * (((struct func_802077F4_S2 *) ((char *) (&D_800C43A0_de)))->unk4);
+  return (D_800C43A0_de - Math_Cosf(clampedFraction * D_800C439C_de)) * (((struct func_802077F4_S2 *) ((char *) (&D_800C43A0_de)))->unk4);
 }
 
 /** Return whether an address lies within one of three recognized ranges. */
-int func_80265784_de(u32 callback) {
+int Defs_IsAddressInStaticRanges(u32 callback) {
     if (callback >= (u32)&D_800C8140_de &&
         callback < (u32)&D_800C8140_de + (u32)&D_1087D) {
         return 1;
@@ -327,13 +327,13 @@ int func_80265784_de(u32 callback) {
     return 0;
 }
 
-int func_8026581C_de(u32 address) {
+int Defs_IsAddressInBufferRanges(u32 address) {
     if (address >= (u32)&D_800E4000 && address < (u32)&D_80166000) return 1;
     if (address >= (u32)&D_8014CEB0 && address < (u32)&D_8014DE3A) return 1;
     return 0;
 }
 
-int func_80265878_de(u32 callback) {
+int Defs_IsAddressInCodeRanges(u32 callback) {
     if (callback >= (u32)&D_00200500 &&
         callback < (u32)&D_00200500 + (u32)&D_C0DA8) {
         return 1;
@@ -345,27 +345,27 @@ int func_80265878_de(u32 callback) {
     return 0;
 }
 
-void func_802658DC_de(void) {
+void Defs_NoOperation(void) {
 }
 
 /** Formats one value into buffer. */
-void func_802658E4_de(char *buffer, const char *format, s32 value) {
+void Defs_FormatIntegerValue(char *buffer, const char *format, s32 value) {
     func_802BD320_de(buffer, format, value);
 }
 /** Formats one value into buffer. */
-void func_80265900_de(char *buffer, const char *format, s32 value) {
+void Defs_FormatSingleInteger(char *buffer, const char *format, s32 value) {
     func_802BD320_de(buffer, format, value);
 }
 /** Formats three values into buffer. */
-void func_8026591C_de(char *buffer, const char *format, s32 a, s32 b, s32 c) {
+void Defs_FormatThreeIntegers(char *buffer, const char *format, s32 a, s32 b, s32 c) {
     func_802BD320_de(buffer, format, a, b, c);
 }
 /** Formats four values into buffer. */
-void func_8026593C_de(char *buffer, const char *format, s32 a, s32 b, s32 c, s32 d) {
+void Defs_FormatFourIntegers(char *buffer, const char *format, s32 a, s32 b, s32 c, s32 d) {
     func_802BD320_de(buffer, format, a, b, c, d);
 }
 
-s32 func_80265964_de(s32 arg0) {
+s32 Defs_ReadResourceWord(s32 arg0) {
     void **resource;
     s32 result;
 

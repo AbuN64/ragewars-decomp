@@ -17,8 +17,8 @@
 extern struct Data801462C8 D_801462C8;
 extern s8 D_80142358[]; /* MIXED: this unit views D_801462C8 as Data801462C8 */
 extern struct Screen_func_80427D70_de *D_800E4690;
-extern s32 func_80265650_de(u8 *, s32);
-extern void func_80265688_de(u8 *, s32, s32);
+extern s32 Defs_TestBit(u8 *, s32);
+extern void Defs_SetBitValue(u8 *, s32, s32);
 
 void func_80427D70_de(void *arg0) {
     struct Data801462C8 *globals;
@@ -57,15 +57,15 @@ void func_80427D70_de(void *arg0) {
 selected:
     if ((value = table->first) > 0) {
         
-        if (func_80265650_de(D_800E4690->owned, value-1) == 0) {
-            func_80265688_de(D_800E4690->unlocked, value-1, 1);
+        if (Defs_TestBit(D_800E4690->owned, value-1) == 0) {
+            Defs_SetBitValue(D_800E4690->unlocked, value-1, 1);
         }
     }
     for (i = 0; i < 3; i++) {
         if ((value = table->items[i]) > 0) {
             
-            if (func_80265650_de(D_800E4690->owned, value-1) == 0) {
-                func_80265688_de(D_800E4690->unlocked, value-1, 1);
+            if (Defs_TestBit(D_800E4690->owned, value-1) == 0) {
+                Defs_SetBitValue(D_800E4690->unlocked, value-1, 1);
             }
         }
     }

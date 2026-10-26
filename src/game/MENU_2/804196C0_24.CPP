@@ -128,7 +128,7 @@ void SmpOverlay_SetSlotValue(struct SlotsRecAt5CV1 *object, s32 index, s32 value
    its count at 0x48. */
 
 
-s32 func_8041B7C4_de(struct SlotsRecAt5CV2 *object) {
+s32 SmpOverlay_CountUsedSlots(struct SlotsRecAt5CV2 *object) {
     s32 used = 0;
     s32 i;
 
@@ -154,11 +154,11 @@ struct WidgetNode *SmpOverlay_GetSlotValue(struct SlotsCode804196C0 *object, s32
 
 
 
-s16 func_8041B810_de(struct SlotsRecAt4C *object, s32 index) {
+s16 SmpOverlay_GetSlotNodeId(struct SlotsRecAt4C *object, s32 index) {
     return object->entries[index]->unkC;
 }
 
-void func_8041B828_de(sm_dlmultiuser *context, s32 index, s32 id) {
+void SmpOverlay_ShowSlotNodeById(sm_dlmultiuser *context, s32 index, s32 id) {
     NodeMenuShowSlotById *node;
     s32 i;
 
@@ -200,11 +200,11 @@ void SmpOverlay_ShowSlotNode(sm_dlmultiuser *context, s32 index, NodeMenuShowSlo
    to one on the object held at offset 4 of the structure D_800E3590 points to. */
 
 
-void func_8041B968_de(struct Object6C *object, s32 value) {
+void SmpOverlay_SetObjectValue(struct Object6C *object, s32 value) {
     object->value = value;
 }
 
-s32 func_8041B970_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 SmpOverlay_DispatchSlotEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;
@@ -280,6 +280,6 @@ void SmpOverlay_DrawOverlayWidget(Shared_Item *widget, Args args) {
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */
-s32 func_8041BB34_de(void) {
+s32 SmpOverlay_ReturnUnhandledEvent(void) {
     return 0;
 }

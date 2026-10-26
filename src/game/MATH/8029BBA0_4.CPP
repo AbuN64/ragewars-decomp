@@ -37,9 +37,9 @@ void func_8029C984_de(ObjRecAt3CV2 *arg0, CVector3 *arg1) {
     float temp_2;
     f32 p12;
     f32 p13;
-    func_8029BBB0_de(arg1->x, &sp10, &sp14);
-    func_8029BBB0_de(arg1->y, &sp18, &sp1C);
-    func_8029BBB0_de(arg1->z, &sp20, &sp24);
+    XMath_EvaluateSineCosine(arg1->x, &sp10, &sp14);
+    XMath_EvaluateSineCosine(arg1->y, &sp18, &sp1C);
+    XMath_EvaluateSineCosine(arg1->z, &sp20, &sp24);
     p0 = sp10 * sp20;
     p1 = sp10 * sp24;
     temp_2 = sp18 * p0;
@@ -114,13 +114,13 @@ void func_8029CAB4_de(InputRecAt28 *arg0, CVector3 *arg1) {
         angle_temp = -angle_temp;
     }
     angle = angle_temp;
-    test = func_8029B9FC_de(angle + D_800C5AC8_de);
+    test = XMath_EvaluateSine(angle + D_800C5AC8_de);
     if ((*(&D_800C5AC8_de + 1) < test) || (test < *(&D_800C5AC8_de + 1))) {
-        polynomial = func_8029C044_de(arg0->f20, arg0->f28);
-        out2 = func_8029C044_de(arg0->f04, arg0->f14);
+        polynomial = XMath_EvaluateArcTangentTwo(arg0->f20, arg0->f28);
+        out2 = XMath_EvaluateArcTangentTwo(arg0->f04, arg0->f14);
     } else {
         polynomial = 0.0f;
-        out2 = func_8029C044_de(arg0->f08, arg0->f00);
+        out2 = XMath_EvaluateArcTangentTwo(arg0->f08, arg0->f00);
     }
     arg1->x = angle;
     arg1->y = polynomial;
@@ -173,12 +173,12 @@ void func_8029CC70_de(InputRecAt28 *arg0, CVector3 *arg1) {
         angle_temp = -angle_temp;
     }
     angle = angle_temp;
-    test = func_8029B9FC_de(angle + D_800C5AF0_de);
+    test = XMath_EvaluateSine(angle + D_800C5AF0_de);
     if ((0.0f < test) || (test < 0.0f)) {
-        polynomial = func_8029C044_de(arg0->pad18, arg0->f28);
-        out2 = func_8029C044_de(arg0->f04, arg0->f00);
+        polynomial = XMath_EvaluateArcTangentTwo(arg0->pad18, arg0->f28);
+        out2 = XMath_EvaluateArcTangentTwo(arg0->f04, arg0->f00);
     } else {
-        polynomial = func_8029C044_de(-arg0->f24, arg0->f14);
+        polynomial = XMath_EvaluateArcTangentTwo(-arg0->f24, arg0->f14);
         out2 = 0.0f;
     }
     arg1->x = polynomial;
@@ -186,7 +186,7 @@ void func_8029CC70_de(InputRecAt28 *arg0, CVector3 *arg1) {
     arg1->z = out2;
 }
 
-void func_8029CE3C_de(s32 matrix, s32 arg1, s32 arg2) {
+void XMath_MultiplyMatrices(s32 matrix, s32 arg1, s32 arg2) {
     Matrix temporary;
     Matrix *out = (Matrix *)matrix;
     Matrix *a = (Matrix *)arg1;

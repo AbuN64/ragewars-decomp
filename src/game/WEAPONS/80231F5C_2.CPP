@@ -31,7 +31,7 @@ extern u8 *D_800D30BC[];
 
 extern s32 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s32);
-extern s32 Weapons_GetPlayerIndex(void *, void *);
+extern s32 Player_GetPlayerIndex(void *, void *);
 extern CCameraText *Sky_PostTargetedScreenMessage(void *, void *, u8 *, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
 
@@ -57,11 +57,11 @@ static inline s32 can_fire(char *player, f32 *scale) {
         SoundElement_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
 #if defined(VERSION_EU)
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800E0D44)[g_languageIndex]), Weapons_GetPlayerIndex(&D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800E0D44)[g_languageIndex]), Player_GetPlayerIndex(&D_80145040, player),
 #elif defined(VERSION_EU_X)
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800DCC68)[g_languageIndex]), Weapons_GetPlayerIndex(&D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800DCC68)[g_languageIndex]), Player_GetPlayerIndex(&D_80145040, player),
 #else
-            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, D_800D30BC[0], Weapons_GetPlayerIndex(&D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, D_800D30BC[0], Player_GetPlayerIndex(&D_80145040, player),
 #endif
                           *scale);
         }
@@ -75,7 +75,7 @@ void Weapon_UpdateForceMarkerTrigger(Shared_Actor *actor, WeaponFireState *attac
 
     player = (char *)actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
-    if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
+    if (Player_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
         ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
     }
     if ((((SharedPlayer *)(player))->views5E8.view6AC_45.unk6AC & 0x4000) && can_fire(player, &D_800C2FCC_de)) {
@@ -105,7 +105,7 @@ void Weapon_UpdateForceMarkerTrigger(Shared_Actor *actor, WeaponFireState *attac
         attack->triggered = 0;
     }
     if (func_802301F4_de(actor, attack) == 0 && !(actor->weaponFlags & 0x400)) {
-        Weapons_RequestActorState(actor, attack, action);
+        Nav_RequestActorState(actor, attack, action);
     }
 }
 /* D_800C2FCC_de and D_800C2FD0_de are the two message-duration floats of this unit's literal pool. */
@@ -127,7 +127,7 @@ typedef struct HeldPlayerState {
     s32 handled78C;
 } HeldPlayerState;
 
-void Weapons_UpdateHeldFire(Shared_Actor *actor, WeaponFireState *attack) {
+void Weapon_UpdateHeldFire(Shared_Actor *actor, WeaponFireState *attack) {
     HeldPlayerState *state;
     s32 finished;
     state = actor->entity;
@@ -161,10 +161,10 @@ void Weapons_UpdateHeldFire(Shared_Actor *actor, WeaponFireState *attack) {
                 SoundElement_PlaySoundAtPosition(0x460, state->position, &state->position, -1);
             }
             if (state->mode == 3 && can_fire((char *)state, &D_800C2FD0_de) != 0 && state->mode594 == 2) {
-                Weapons_RequestActorState(actor, attack, 0xB);
+                Nav_RequestActorState(actor, attack, 0xB);
                 func_8022B984_de(state);
             } else {
-                Weapons_RequestActorState(actor, attack, 2);
+                Nav_RequestActorState(actor, attack, 2);
             }
         }
         state->handled788 = 1;

@@ -153,7 +153,7 @@ field->text[D_801462C8.language]
 *field->text
 #endif
 ;
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800DE758_de, step);
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800DE758_de, step);
     } else {
 #if defined(VERSION_EU)
         field->text = &D_800E2244;
@@ -170,9 +170,9 @@ field->text[D_801462C8.language]
 #endif
 ;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800EEDE0, step);
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800EEDE0, step);
 #else
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 4), g_fmtSpaceDec3, step);
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), g_fmtSpaceDec3, step);
 #endif
     }
     return 0;
@@ -214,7 +214,7 @@ field->text[D_801462C8.language]
 *field->text
 #endif
 ;
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800DE758_de, step);
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800DE758_de, step);
     } else {
 #if defined(VERSION_EU)
         field->text = &D_800E2264;
@@ -231,9 +231,9 @@ field->text[D_801462C8.language]
 #endif
 ;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800EEDE0, step);
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800EEDE0, step);
 #else
-        func_802658E4_de(text + (Pak_CountLineChars(field) - 4), g_fmtSpaceDec3, step);
+        Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), g_fmtSpaceDec3, step);
 #endif
     }
     return 0;

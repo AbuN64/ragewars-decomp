@@ -32,5 +32,5 @@ extern char D_800EED80[];
 #else
 extern char g_fmtDec4Pad[];
 #endif
-extern s32 Weapons_GetPlayerIndex(void *, void *);
+extern s32 Player_GetPlayerIndex(void *, void *);
 #endif

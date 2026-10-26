@@ -19,7 +19,7 @@
 
 extern s32 func_8022C460_de(void *player);
 
-s32 Weapons_SetPlayerState(SharedPlayer *player, void *stateContext, s32 state) {
+s32 Player_SetPlayerState(SharedPlayer *player, void *stateContext, s32 state) {
     void (*enter)(void *, void *);
     s32 parameter;
 
@@ -121,7 +121,7 @@ void func_80222908_de(void *actorView, void *bodyActor, ObjectState54 *ground) {
 extern WeaponInfo *D_800D052C[];
 
 /* Check the ammo required by the selected primary or alternate weapon mode. */
-s32 Weapons_HasAmmoForMode(void *object, s32 weaponNumber)
+s32 Player_HasAmmoForMode(void *object, s32 weaponNumber)
 {
     Player *player = object;
     s32 weapon = weaponNumber;

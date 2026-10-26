@@ -11,9 +11,9 @@
 #include "COMMON/PROBE.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-extern s32 Weapons_SetPlayerState(void *, void *, s32);
+extern s32 Player_SetPlayerState(void *, void *, s32);
 extern void func_802233F0_de(void *, void *, void *);
-extern void Weapons_UpdateViewAngles(void *, void *, void *);
+extern void Player_UpdateViewAngles(void *, void *, void *);
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
 
@@ -23,7 +23,7 @@ extern void Weapons_UpdateViewAngles(void *, void *, void *);
    picks the animation from the stick at 0x6C0 and 0x6C4: 0xA64 at rest, 0xA67 or 0xA66 when the
    second axis dominates and 0xA65 or 0xA68 otherwise, by the sign of the dominant axis. */
 
-extern void Weapons_EaseOwnerHeightEffect(void *, void *);
+extern void Player_EaseOwnerHeightEffect(void *, void *);
 
 
 
@@ -52,7 +52,7 @@ extern int D_80104418;
 
 void func_8022C8A4_de(struct SharedPlayer *player, void *bodyActor) {
     if ((player->views5E8.view6C0_51.unk6C0 != 0.0f) || (player->views5E8.view6C4_54.unk6C4 != 0.0f)) {
-        Weapons_SetPlayerState(player, bodyActor, 3);
+        Player_SetPlayerState(player, bodyActor, 3);
     }
 }
 
@@ -67,13 +67,13 @@ void func_8022C8FC_de(struct SharedPlayer *player, void *bodyActor) {
     f32 y;
     f32 zero;
 
-    Weapons_EaseOwnerHeightEffect(player, bodyActor);
+    Player_EaseOwnerHeightEffect(player, bodyActor);
     zero = 0.0f;
     GraphU64_EaseValueToward(&player->views5E8.view72C_75.unk72C, zero, 0.25f);
-    Weapons_UpdateViewAngles(player, bodyActor, &D_800CE7FC);
+    Player_UpdateViewAngles(player, bodyActor, &D_800CE7FC);
     func_802233F0_de(player, bodyActor, &D_800CE7C0);
     if (!(player->views5E8.view6AC_45.unk6AC & 0x10)) {
-        Weapons_SetPlayerState(player, bodyActor, 2);
+        Player_SetPlayerState(player, bodyActor, 2);
         if (player->views13B4.view13B4_3.character == &D_800CED30) {
             player->views5E8.view86C_125.unk86C = 0x5E24;
         } else {
@@ -174,7 +174,7 @@ void func_8022CB5C_de(void *player, LevelActor *actor) {
         }
     }
 transition:
-    Weapons_SetPlayerState(player, actor, 6);
+    Player_SetPlayerState(player, actor, 6);
     goto finish;
 scale_value:
     actor->position1.y =
@@ -187,13 +187,13 @@ void func_8022CC34_de(void *player, void *body) {
     s32 value;
 
     GraphU64_EaseValueToward(&((Player *)player)->lean, 0.0f, 0.25f);
-    Weapons_UpdateViewAngles(player, body, &D_800CE7E4);
+    Player_UpdateViewAngles(player, body, &D_800CE7E4);
     if (!(((Player *)player)->flags660 & 0x8000)) {
         func_802233F0_de(player, body, &D_800C94EC_de);
     }
     if (((LevelActor *)body)->position1.y <= 0.0f) {
         if (InstHdr_GetActorMotionState(body) != 0) {
-            Weapons_SetPlayerState(player, body, 2);
+            Player_SetPlayerState(player, body, 2);
         }
     }
     if (((LevelActor *)body)->position1.y <= 0.0f) {
@@ -228,7 +228,7 @@ void func_8022CDBC_de(void *player, LevelActor *actor) {
     if ((currentLateralSpeed < 0.0f && ((Shared_ActorView *)player)->lateralInput >= 0.0f) ||
         (currentLateralSpeed > 0.0f && ((Shared_ActorView *)player)->lateralInput <= 0.0f) ||
         (((Shared_ActorView *)player)->actionTimer >= D_800C2D8C_de)) {
-        Weapons_SetPlayerState(player, actor, 8);
+        Player_SetPlayerState(player, actor, 8);
     } else {
         actor->position1.y = D_800C2D90_de;
     }
@@ -237,11 +237,11 @@ void func_8022CDBC_de(void *player, LevelActor *actor) {
 
 void func_8022CE78_de(s32 player, s32 body) {
     GraphU64_EaseValueToward(player + 0x72C, 0.0f, 0.25f);
-    Weapons_UpdateViewAngles((void *)player, (void *)body, &D_800CE7E4);
+    Player_UpdateViewAngles((void *)player, (void *)body, &D_800CE7E4);
     func_802233F0_de((void *)player, (void *)body, &D_800C9558_de);
     if (((LevelActor *)body)->position1.y <= 0.0f) {
         if (InstHdr_GetActorMotionState((void *) body) != 0) {
-            Weapons_SetPlayerState((void *) player, (void *) body, 2);
+            Player_SetPlayerState((void *) player, (void *) body, 2);
         }
     }
 }

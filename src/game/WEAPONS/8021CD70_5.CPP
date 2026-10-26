@@ -179,7 +179,7 @@ static inline void placePlayerLight(struct Player *player, struct PlayerEffectLi
     light->radius = *radius;
 }
 /* Keep the timer lights and the special-mode light in step with player state. */
-void Weapons_UpdatePlayerEffectLights(struct Player *player) {
+void Player_UpdatePlayerEffectLights(struct Player *player) {
     struct PlayerEffectLight *light;
     s32 flicker;
     if (D_801462C8.flags & 0x4000) {

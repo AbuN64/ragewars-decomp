@@ -88,14 +88,14 @@ void func_8042B2E4_de(void) {
     D_800E4F60->unk46C = 0;
 }
 
-extern void func_80265688_de(void *, s32, s32);
+extern void Defs_SetBitValue(void *, s32, s32);
 
-/* Clears the first 0x28 bits of the bit set D_80154018 (bit i set to 0 through func_80265688_de). */
+/* Clears the first 0x28 bits of the bit set D_80154018 (bit i set to 0 through Defs_SetBitValue). */
 void ScenarioSetup_ClearFlagBits(void) {
     s32 i;
 
     for (i = 0; i < 0x28; i++) {
-        func_80265688_de(D_80154010.played, i, 0);
+        Defs_SetBitValue(D_80154010.played, i, 0);
     }
 }
 
@@ -803,9 +803,9 @@ extern s32 D_800E5240[];
 
 
 
-/* Calls func_80265688_de on D_80154018 for each index from 0 to 0x27 with zero. */
+/* Calls Defs_SetBitValue on D_80154018 for each index from 0 to 0x27 with zero. */
 
-extern void func_80265688_de(void *, s32, s32);
+extern void Defs_SetBitValue(void *, s32, s32);
 
 /* Releases the object D_800E4F60 holds through Cache_FreeMemory, calls func_802A2360_de and
    func_80422020_de, clears D_800E4F60 and returns zero. */

@@ -39,7 +39,7 @@ struct ActorRecAt1D8V3 {
 struct Limit;
 typedef struct Limit Limit;
 
-extern void func_80268264_de(int arg0, int arg1, int arg2, int arg3, ...);
+extern void Events_IgnoreEvent(int arg0, int arg1, int arg2, int arg3, ...);
 
 struct ParamsRecAt4;
 typedef struct ParamsRecAt4 ParamsRecAt4;
@@ -56,8 +56,8 @@ struct Blast {
 
 extern void func_802688E4_de(ActorRecAt1D8V3 *arg0, Player *arg1, s32 arg2, Blast blast);
 
-struct Params_func_802681A8_de;
-struct Params_func_802681A8_de {
+struct ParamsEventsStartActorEmitter;
+struct ParamsEventsStartActorEmitter {
     s32 value;
     s16 angle;
     u8 scale;
@@ -88,8 +88,8 @@ struct RangeNode {
     s16 active;
 };
 
-struct Context_func_802681A8_de;
-typedef struct Context_func_802681A8_de Context_func_802681A8_de;
+struct ContextEventsStartActorEmitter;
+typedef struct ContextEventsStartActorEmitter ContextEventsStartActorEmitter;
 
 struct ParamsRecAt4;
 struct ParamsRecAt4 {
@@ -98,7 +98,7 @@ struct ParamsRecAt4 {
     s32 team;
 };
 
-extern void func_802684B8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+extern void Events_SetActorEventBit(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 
 struct Kind;
 struct Kind {
@@ -127,8 +127,8 @@ struct Filter {
 
 extern float D_800C4490_de;
 
-struct Params_func_802681A8_de;
-typedef struct Params_func_802681A8_de Params_func_802681A8_de;
+struct ParamsEventsStartActorEmitter;
+typedef struct ParamsEventsStartActorEmitter ParamsEventsStartActorEmitter;
 
 struct Filter;
 typedef struct Filter Filter;
@@ -138,9 +138,9 @@ struct Inner {
     char pad[0x698];
     char *resource;
 };
-struct Context_func_802681A8_de;
+struct ContextEventsStartActorEmitter;
 struct Inner;
-struct Context_func_802681A8_de {
+struct ContextEventsStartActorEmitter {
     char pad[0x1D8];
     struct Inner *inner;
 };

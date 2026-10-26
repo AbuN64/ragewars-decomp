@@ -6,7 +6,7 @@ extern char *D_800E3590;
 extern void *Cache_AllocateMemory(s32);
 extern void *SmpOverlay_CreateOverlayNode(s32, s32);
 extern void SmpOverlay_ShowSlotById(s32, s32, s32);
-extern void func_8041B968_de(void *, s32);
+extern void SmpOverlay_SetObjectValue(void *, s32);
 extern u8 *func_8040EC30_de(s32, s32);
 extern void *func_80419E54_de(s32, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
@@ -17,7 +17,7 @@ extern void Frontend_ShowUnlockedEntries(s32);
 #define HW(w, off) (*(s16 *)((char *)(w) + (off)))
 #define UHW(w, off) (*(u16 *)((char *)(w) + (off)))
 /* Opens the 0x210-byte screen state D_800E3590 for owner arg0: a four-row list, the side widgets 0x1E8, 0x1E7 and 0x1E4 pushed out by their width quarter, plus the labels 0x1E2, 0x22F, 0x1EC, 0x1ED, 0x1FC, 0x1FB, 0x1FA and 0x1E9; returns zero. */
-s32 func_8041CE40_de(s32 owner) {
+s32 Frontend_OpenFourSlotSelection(s32 owner) {
     u8 *w;
     D_800E3590 = (char *)Cache_AllocateMemory(0x210);
     ST_W(0) = owner;
@@ -26,7 +26,7 @@ s32 func_8041CE40_de(s32 owner) {
     SmpOverlay_ShowSlotById(owner, 1, 0x1FD);
     SmpOverlay_ShowSlotById(owner, 2, 0x1FD);
     SmpOverlay_ShowSlotById(owner, 3, 0x1FD);
-    func_8041B968_de((void *)ST_W(4), 1);
+    SmpOverlay_SetObjectValue((void *)ST_W(4), 1);
     ST_W(0xD8) = 1;
     ST_W(0xDC) = 4;
     w = func_8040EC30_de(owner, 0x1E8);
@@ -73,6 +73,6 @@ s32 func_8041CE40_de(s32 owner) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8041CE40_de);
+INCLUDE_ASM("ovl_80400000", Frontend_OpenFourSlotSelection);
 #endif
 #endif

@@ -214,7 +214,7 @@ s32 DispatchElementEvent(s32 id, s32 event, s32 value, s32 argument, s32 context
 #include "COMMON/INTEGERSTATE530.H"
 #include "COMMON/CALLBACK.H"
 #include "COMMON/UNUSED.H"
-extern void func_80299CF0_de(NodeRecAt12 *, s32, s32, s32, s32, s32);
+extern void Smos_DispatchDescendantScreenEvent(NodeRecAt12 *, s32, s32, s32, s32, s32);
 extern void MarkMenuEventHandled(void);
 extern void func_80298368_de(s32);
 static inline s32 Menu_GetDispatchCategory(u32 code) {
@@ -268,8 +268,8 @@ static inline void Menu_DispatchChildEvents(Element *element, s32 event, s32 val
         treeHandled = &tree->handled;
         treeSaved = tree->handled;
         tree->handled = 0;
-        if (element->left != 0) func_80299CF0_de(element->left, event, value, argument, context, 1);
-        if (tree->handled == 0 && element->right != 0) func_80299CF0_de(element->right, event, value, argument, context, 1);
+        if (element->left != 0) Smos_DispatchDescendantScreenEvent(element->left, event, value, argument, context, 1);
+        if (tree->handled == 0 && element->right != 0) Smos_DispatchDescendantScreenEvent(element->right, event, value, argument, context, 1);
         *treeHandled = treeSaved;
     }
 }

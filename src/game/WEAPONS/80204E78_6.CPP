@@ -33,7 +33,7 @@ extern int func_8028B25C_de(void *arg0, int arg1);
 struct Context;
 extern s32 func_8022A8F0_de(struct Context *arg0);
 
-extern int Weapons_GetFirstPlayer(void *arg0);
+extern int Player_GetFirstPlayer(void *arg0);
 
 extern void func_8027985C_de(WeightedTable *object);
 
@@ -145,7 +145,7 @@ static __inline__ void spawn(SpawnDispatchObject *object, s32 id,
     if (actor) {
         actor->state = 0;
         owner->remaining--;
-        Weapons_SpawnActorEffect(actor, 0x11D, actor->position, 0);
+        Barrel_SpawnActorEffect(actor, 0x11D, actor->position, 0);
     }
 }
 
@@ -166,7 +166,7 @@ static __inline__ void spawnSelected(SpawnDispatchObject *object, SpawnDispatchO
     if (actor) {
         actor->state = 0;
         owner->remaining--;
-        Weapons_SpawnActorEffect(actor, 0x11D, actor->position, 0);
+        Barrel_SpawnActorEffect(actor, 0x11D, actor->position, 0);
     }
 }
 
@@ -271,7 +271,7 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
             }
         } else {
             /* Configuration lies 0x1288 bytes into the shared runtime block. */
-            context = Weapons_GetFirstPlayer((u8 *)&D_801462C8 - 0x1288);
+            context = Player_GetFirstPlayer((u8 *)&D_801462C8 - 0x1288);
             if (!context) {
                 return;
             }
@@ -347,7 +347,7 @@ void func_80205F18_de(Actor_func_80205F18_de *actor, Action *action) {
     action->timer = 0;
     action->duration = info->duration;
     if (actor->model == 0x644 || (info->flags & 8)) actor->flags &= ~0x2000;
-    Weapons_RequestActorState(actor, action, 0);
+    Nav_RequestActorState(actor, action, 0);
     if (!(info->flags & 0x10) || D_801462C8.mode1E == 1) return;
     actor->flags &= ~0x100;
 }
