@@ -178,7 +178,6 @@ void Player_BuildPlayerOrientation(Player *player, CQuatern *output)
 #include "TYPES.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/VECTOR4F.H"
-extern void MultiplyQuaternions(CQuatern *out, CQuatern *a, CQuatern *b);
 extern void MatrixFromQuaternion(CQuatern *rotation, f32 matrix[4][4]);
 extern void GraphU64_BuildTranslationMatrix(f32 matrix[4][4], f32 x, f32 y, f32 z);
 extern void GraphU64_MultiplyAffineMatrices(f32 out[4][4], f32 a[4][4], f32 b[4][4]);

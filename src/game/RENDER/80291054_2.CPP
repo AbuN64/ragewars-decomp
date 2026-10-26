@@ -264,7 +264,6 @@ void SetN64_BeginFrameDisplayList(void *world) {
 /* rspboot text is 0xD0 bytes: it ends where the first graphics microcode text (D_800D8CE0) starts. */
 extern u64 rspbootTextStart[], rspbootTextEnd[], D_800D8CE0[], D_800DC020_de[], D_800DA070[], D_800DC440[], D_800E4000[];
 extern u32 D_800D2978, D_800CD730;
-extern s32 D_800D297C;
 extern void osWritebackDCacheAll(void);
 extern void Sched_SendSchedulerTask(void *, OSScTask_s *);
 /* Fills the frame's graphics task (and the second one when the frame is dual), hands them to the scheduler,

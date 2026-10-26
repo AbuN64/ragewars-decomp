@@ -75,12 +75,9 @@ void Geometry_DrawSharedMaterialModel(void **resource, s32 matrix, s32 segment, 
 
 
 
-extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
 
 extern void XPlus_NextRandomInteger(void);
-extern void Cache_MarkResourceInUse(s32 heap, void **resource);
-extern s32 Geometry_SetupMaterial(void *material, s32 pass);
 
 
 

@@ -168,7 +168,6 @@ extern s32 Control_CountConnectedControllers(void);
 struct func_8025E5B0_S1;
 struct ParamsPakAllocateMenu;
 struct Dialog;
-extern void *Pak_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateMenu *params, struct Dialog *list);
 
 /* Calls Pak_AllocateMenu with the third argument, the second argument and the resource D_451AF0,
    and returns one. */
