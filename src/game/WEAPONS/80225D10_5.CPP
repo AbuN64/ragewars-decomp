@@ -497,7 +497,7 @@ void Player_DrawMatchCountdown(void *arg0, ViewState *viewState) {
 #ifdef NON_MATCHING
 #define EUF(p, t, o) (*(t *)((u8 *)(p) + (o)))
 extern void SoundElement_PlayFlatSound(s32);
-extern void BuildDirectionMatrix(void *, void *), GraphU64_AddVec3(void *, void *, void *);
+extern void BuildDirectionMatrix(void *, void *);
 extern void TranslateMatrix(void *, f32, f32, f32), SwapMatrixUpForward(void *), GraphU64_ConvertMatrixToFixed(void *, void *);
 /* Pulse of the player's ring effect: with the timer at 0x11FC running it only plays sound 0x578 and re-shows the text of the
    active language, otherwise it rebuilds the ring matrix at 0x1600 from the vectors at 0x1458/0x1470/0x1200 first. */
@@ -526,7 +526,7 @@ void func_80228E60_eu(u8 *player, s32 flag) {
         EUF(player, f32, 0x11FC) = 150.0f;
         BuildDirectionMatrix(mtx, player + 0x1470);
         GraphU64_ScaleVector((void *)vec, (void *)(player + 0x1470), 5.12f);
-        GraphU64_AddVec3(vec, vec, player + 0x1200);
+        GraphU64_AddVec3((CVector3 *)vec, (CVector3 *)vec, (CVector3 *)(player + 0x1200));
         TranslateMatrix(mtx, vec[0], vec[1], vec[2]);
         SwapMatrixUpForward(mtx);
         GraphU64_ConvertMatrixToFixed(mtx, player + 0x1600);

@@ -18,8 +18,8 @@ extern s32 func_80240660_de(Actor_func_80214624_de *,CVector3,s32,s32,CVector3 *
 struct Node75;
 extern s32 Region_IsPointInTriangleXZ(struct Node75 *,f32,f32);
 extern void InstHdr_CopyActorPositionAndModel(Actor_func_80214624_de *,CVector3,CVector3 *,s32 *,s32,s32);
-extern void GraphU64_AddVec3(void *,void *,void *);
-extern void GraphU64_SubtractVectors(void *,void *,void *);
+extern void GraphU64_AddVec3(CVector3 *,CVector3 *,CVector3 *);
+extern void GraphU64_SubtractVectors(CVector3 *,CVector3 *,CVector3 *);
 extern void GraphU64_ScaleVector(CVector3 *,CVector3 *,f32);
 static inline void approach(Actor_func_80214624_de *arg0,Actor_func_80214624_de *arg2,Actor_func_80214624_de *temp_a2,CVector3 *posp,s32 *roomp) {
  CVector3 delta,offset; f32 temp_f20;
