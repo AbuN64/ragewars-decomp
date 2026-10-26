@@ -1,6 +1,7 @@
 #ifndef MENU_PAK_80409A88_H
 #define MENU_PAK_80409A88_H
 #include "MENU/ITEMRECAT24.H"
+
 extern void func_8040AB18_de(void);
 extern void func_8040B3A8_de(void);
 extern void func_8040AC04_de(void);

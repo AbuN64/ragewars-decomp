@@ -10,7 +10,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "MENU/GFX/80414430_20.H"
-#include "MENU/GFX/80414430_22.H"
+#include "MENU/GFX/80414430_21.H"
 #include "MENU/GFX/80414430_3.H"
 
 /* Makes palette the current texture lookup table for a texture of the given bit depth: returns 1

@@ -143,3 +143,10 @@ s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
         }
         return 0;
 }
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: rodata/unresolved/800E1574 */
+unsigned int D_blob_32c82898405be2fd2ebf[1] = {
+    0x00000000,
+};
+#endif
