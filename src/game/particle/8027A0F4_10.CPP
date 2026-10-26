@@ -46,7 +46,6 @@ s32 Particle_HasKindOneEntry(ObjRecAt4V5 *obj) {
 
 
 
-extern RecordRecAt2C *D_800D052C[];
 
 s32 Particle_HasKindZeroEntry(ObjRecAt4V5 *obj) {
     s32 i;
@@ -77,7 +76,6 @@ s32 Particle_HasKindZeroEntry(ObjRecAt4V5 *obj) {
 
 
 
-extern RecordRecAt2C *D_800D052C[];
 
 s32 Particle_HasKindTwoEntry(ObjRecAt4V5 *obj) {
     s32 i;
