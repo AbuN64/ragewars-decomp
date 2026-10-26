@@ -1,5 +1,5 @@
 
-#if defined(VERSION_US_REV1)
+#if defined(VERSION_US_REV1) || defined(VERSION_US) || defined(VERSION_EU)
 /* Builds the player-selection menu block at 0x800E3590 for one menu tree: it allocates the block
  * with a 528-byte window request, remembers the tree and the pool func_8041B610_de returns for it,
  * arms the tree's four option groups with id 513, hands the pool back to SmpOverlay_SetObjectValue, and

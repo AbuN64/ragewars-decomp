@@ -129,10 +129,14 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
 }
 
 
-#if defined(NON_MATCHING) || defined(VERSION_US_REV1)
 extern s32 func_80439B5C_de(void *, s32, CVector3, CVector3);
 extern void func_80439BE0_de(void *, CVector3);
 extern void func_80439C30_de(void *, CVector3);
+#if defined(VERSION_EU)
+/* eu keeps these two floats elsewhere: D_800E1FC4/D_800E1FD4 name its string tables */
+#define D_800E1FC4 D_800EE614_eu
+#define D_800E1FD4 D_800EE624_eu
+#endif
 extern f32 D_800E1FC4, D_800DDF98_de, D_800DDF9C, D_800E1FD0, D_800E1FD4, D_800DDFA8, D_800DDFAC_de;
 extern u16 D_800E19DE[];
 /* Initialize four rotating result badges and reveal enabled player cards. */
@@ -210,9 +214,6 @@ s32 Frontend_StartFourPlayerResults(void) {
     SoundElement_PlayFlatSound(0xE78);
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_80400000", Frontend_StartFourPlayerResults);
-#endif
 
 /* Advance the four-player results screen one frame: slide the arrows, count the timer down, step the state. */
 s32 Frontend_UpdateFourPlayerResults(void) {

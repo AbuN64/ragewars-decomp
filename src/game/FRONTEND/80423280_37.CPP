@@ -12,7 +12,7 @@
 #include "FRONTEND/8041BEA8_6.H"
 #include "FRONTEND/RESULTSOPTIONSSCREEN.H"
 
-#if defined(VERSION_US) || defined(VERSION_US_REV1)
+#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU)
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
