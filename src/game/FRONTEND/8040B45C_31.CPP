@@ -48,7 +48,7 @@ extern s32 Frontend_GetBankTileTexture(s32 page, s32 a, s32 b);
 extern void func_804174F4_de(s32 texture);
 
 static inline void func_8040CB30_restore(struct Shape_typemap_165 *clip) {
-    func_802A1870_de(clip->field_0, clip->field_8, clip->field_4, clip->field_C);
+    N64Eng_SetClipBounds(clip->field_0, clip->field_8, clip->field_4, clip->field_C);
 }
 
 extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
@@ -93,14 +93,14 @@ GlyphBuffer *Frontend_GetGlyphBuffer(s32);
 void XPlus_SortArray(char *, s32, s32, s32 (*)(char *, char *));
 
 static inline void textBegin(u8 font, u8 style) {
-    func_802A1898_de(&D_8014D580.field_0, &D_8014D580.field_8,
+    N64Eng_GetClipBounds(&D_8014D580.field_0, &D_8014D580.field_8,
                    &D_8014D580.field_4, &D_8014D580.field_C);
     D_8014D710 = (s8)font;
     D_8014D714 = (s8)style;
     D_8014D560 = Frontend_GetGlyphBuffer((s8)font);
     D_8014D564 = Frontend_GetFontLetterSpacing((s8)font);
-    D_8014D568 = func_80411CD0_de((s8)font);
-    D_8014D56C = func_80411C98_de((s8)font);
+    D_8014D568 = Frontend_GetFontMetricAtC((s8)font);
+    D_8014D56C = Frontend_GetFontMetricAtA((s8)font);
 }
 
 static inline s32 textOverlaps(BatchRec *next) {
@@ -144,8 +144,8 @@ void Frontend_FlushTextBatches(void) {
         func_80417138_de(0x53333);
         D_800E2AB8 = 1;
     }
-    func_802A1898_de(&clip.field_0, &clip.field_8, &clip.field_4, &clip.field_C);
-    func_802A1870_de(D_8014D580.field_0, D_8014D588, D_8014D584, D_8014D58C);
+    N64Eng_GetClipBounds(&clip.field_0, &clip.field_8, &clip.field_4, &clip.field_C);
+    N64Eng_SetClipBounds(D_8014D580.field_0, D_8014D588, D_8014D584, D_8014D58C);
     for (current = 0; current < D_8014D570; current++) {
         sprite = D_8014D590[current].cursor;
         page = sprite->glyph;
@@ -198,13 +198,13 @@ void Frontend_DrawImageWidget(WidgetFrontendDrawImageWidget *widget, sm_dldc arg
         return;
     }
     if (widget->flags & 0x200) {
-        func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
+        N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
         clip = saved;
         if (Frontend_ClampRectToClip(&clip, &box) == 0) {
             return;
         }
         clipped = 1;
-        func_802A1870_de(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
+        N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
     }
     if (func_8040CDD0_overlaps(&area)) {
         Frontend_FlushTextBatches();
@@ -219,7 +219,7 @@ void Frontend_DrawImageWidget(WidgetFrontendDrawImageWidget *widget, sm_dldc arg
     func_804174F4_de(texture);
     Gfx_DrawRect(area.field_0, area.field_8, 0.0f, area.field_4 - area.field_0 + 1, area.field_C - area.field_8 + 1, color);
     if (clipped) {
-        func_802A1870_de(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
+        N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
     }
 }
 
@@ -239,13 +239,13 @@ void Frontend_DrawGradientWidget(WidgetLayout *widget, sm_dldc args) {
         return;
     }
     if (widget->flags & 0x200) {
-        func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
+        N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
         clip = saved;
         if (Frontend_ClampRectToClip(&clip, &box) == 0) {
             return;
         }
         clipped = 1;
-        func_802A1870_de(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
+        N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
     }
     if (func_8040D00C_overlaps(&area)) {
         Frontend_FlushTextBatches();
@@ -262,7 +262,7 @@ void Frontend_DrawGradientWidget(WidgetLayout *widget, sm_dldc args) {
                   (widget->colors[2] & 0xFFFFFF) | ((args.alpha * (u8)(widget->colors[2] >> 24) / 255) << 24),
                   (widget->colors[3] & 0xFFFFFF) | ((args.alpha * (u8)(widget->colors[3] >> 24) / 255) << 24));
     if (clipped) {
-        func_802A1870_de(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
+        N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
     }
 }
 
@@ -285,11 +285,11 @@ void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
     text=resolved;
     if (!Frontend_ComputeWidgetBounds(&area, &box, widget, &args)) return;
     if (widget->flags & 0x200) {
-        func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
+        N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
         clip = saved;
         if (!Frontend_ClampRectToClip(&clip, &box)) return;
         clipped = 1;
-        func_802A1870_de(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
+        N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
     }
     length = XPlus_StringLength(text);
     if (args.flags & 0x100) { font=widget->fontSelected; style=widget->styleSelected; }
@@ -298,7 +298,7 @@ void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
     if ((s8)font == -1) font=widget->font;
     if ((s8)style == -1) style=widget->style;
     if (D_8014D570) {
-        func_802A1898_de(&current.field_0, &current.field_8, &current.field_4, &current.field_C);
+        N64Eng_GetClipBounds(&current.field_0, &current.field_8, &current.field_4, &current.field_C);
         mismatch = textClipChanged(&current);
         if (mismatch || D_8014D710 != (s8)font || D_8014D714 != (s8)style) {
             if (D_8014D570) Frontend_FlushTextBatches();
@@ -347,7 +347,7 @@ void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
         if (sprite->x<D_800DEA60 && sprite->x+sprite->width>0.0f) { sprite++; count++; }
         x+=glyph->width*args.XScale; x+=D_8014D564*args.XScale;
     }
-    if (clipped) func_802A1870_de(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
+    if (clipped) N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
     if (count>0) {
         D_8014D590[D_8014D570].count=count;
         XPlus_SortArray((char *)D_8014D590[D_8014D570].cursor, count, sizeof(TextSprite), D_0040F570);
@@ -382,8 +382,8 @@ typedef struct DraftWidget {
 extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 extern void Frontend_DrawVisibleSiblings(void *, sm_dldc);
 extern s32 func_80299838_de(s32);
-extern void func_802A18FC_de(void);
-extern void func_802A18F4_de(void);
+extern void N64Eng_ResetRenderState(void);
+extern void N64Eng_RenderNoop(void);
 
 void Frontend_DrawWidget(DraftWidget *, sm_dldc);
 static inline void drawWidgetChoice(DraftWidget *widget, sm_dldc args) {
@@ -412,14 +412,14 @@ static inline void drawWidgetResetGroup(DraftWidget *widget, sm_dldc args) {
         D_800E2AB8 = 0;
         if (Frontend_ComputeWidgetBounds(&area, &box, widget, &args)) {
             if (widget->flags & 0x200) {
-                func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
+                N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
                 clip = saved;
                 if (!Frontend_ClampRectToClip(&clip, &box)) return;
                 clipped = 1;
-                func_802A1870_de(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
+                N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
             }
             Frontend_DrawVisibleSiblings(widget->child, args);
-            if (clipped) func_802A1870_de(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
+            if (clipped) N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
         }
 }
 
@@ -432,14 +432,14 @@ static inline void drawWidgetGroup(DraftWidget *widget, sm_dldc args) {
         clipped = 0;
         if (Frontend_ComputeWidgetBounds(&area, &box, widget, &args)) {
             if (widget->flags & 0x200) {
-                func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
+                N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
                 clip = saved;
                 if (!Frontend_ClampRectToClip(&clip, &box)) return;
                 clipped = 1;
-                func_802A1870_de(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
+                N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
             }
             Frontend_DrawVisibleSiblings(widget->child, args);
-            if (clipped) func_802A1870_de(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
+            if (clipped) N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
         }
 }
 
@@ -467,11 +467,11 @@ void Frontend_DrawWidget(DraftWidget *widget, sm_dldc args) {
         s32 flags;
         flags = func_80299838_de(widget->type);
         if (!(flags & 1)) {
-            func_802A18FC_de();
+            N64Eng_ResetRenderState();
             D_800E2AB8 = 0;
         }
         if (func_80299A80_de((void *)widget, args) && !(flags & 1)) {
-            func_802A18F4_de();
+            N64Eng_RenderNoop();
             D_800E2AB8 = 0;
         }
         break;

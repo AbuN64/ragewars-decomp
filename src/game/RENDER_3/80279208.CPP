@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "SYSTEM_2/8025E280.H"
 
-/* Updates a table of triggers against masks: for each trigger the world accepts (always in world mode 4, otherwise when Scene_TestTriggerStateBit refuses it), a trigger not yet entered whose mask meets the enter mask is marked entered and runs its enter action (the id's action through Scene_TestTriggerKindFlags and Scene_DispatchSecondaryTriggersOfKind, or func_80278F00_de without an id); it then counts as active when its mask meets the require mask, meets the enter mask, passes the paired exclude masks, is not flagged 0x1000 without 0x100 and passes func_80279420_de, and an active trigger runs its fire action once (through Scene_SetTriggerStateBit, Scene_DecrementTriggerCounter, Scene_TestTriggerCounterZero and Scene_ActivateTriggersOfKind for an id, or func_80278E7C_de without one). */
+/* Updates a table of triggers against masks: for each trigger the world accepts (always in world mode 4, otherwise when Scene_TestTriggerStateBit refuses it), a trigger not yet entered whose mask meets the enter mask is marked entered and runs its enter action (the id's action through Scene_TestTriggerKindFlags and Scene_DispatchSecondaryTriggersOfKind, or Link_DispatchTriggerExit without an id); it then counts as active when its mask meets the require mask, meets the enter mask, passes the paired exclude masks, is not flagged 0x1000 without 0x100 and passes Link_CheckTriggerMessage, and an active trigger runs its fire action once (through Scene_SetTriggerStateBit, Scene_DecrementTriggerCounter, Scene_TestTriggerCounterZero and Scene_ActivateTriggersOfKind for an id, or Link_ActivateTrigger without one). */
 
 
 
@@ -16,9 +16,9 @@ extern s32 Scene_TestTriggerKindFlags(Shared_World *world, s32 id);
 
 extern void Scene_DispatchSecondaryTriggersOfKind(Shared_World *world, s32 id);
 
-extern void func_80278F00_de(Trigger *trigger);
+extern void Link_DispatchTriggerExit(Trigger *trigger);
 
-extern s32 func_80279420_de(Trigger *trigger, struct Player *arg);
+extern s32 Link_CheckTriggerMessage(Trigger *trigger, struct Player *arg);
 
 extern void Scene_SetTriggerStateBit(Shared_World *world, Trigger *trigger, s32 arg);
 
@@ -28,28 +28,28 @@ extern s32 Scene_TestTriggerCounterZero(Shared_World *world, s32 id);
 
 extern void Scene_ActivateTriggersOfKind(Shared_World *world, s32 id);
 
-extern void func_80278E7C_de(Trigger *trigger);
+extern void Link_ActivateTrigger(Trigger *trigger);
 
-void func_80279198_de(int unused0, int unused1, void *arg2) {
+void Link_SetTriggerTrackCallback(int unused0, int unused1, void *arg2) {
     ObjRecAt6V1 *arg2_record = arg2;
     func_8025E260_de(arg2_record->unk6);
 }
 
-void func_802791B8_de(void *arg0) {
+void Link_SetTriggerTrack(void *arg0) {
     func_8025E260_de((((struct ObjRecAt6V1 *) ((s8 *) arg0))->unk6));
 }
 
-void func_802791D8_de(struct Shared_Actor *actor) {
+void Link_ClearActorStateBit(struct Shared_Actor *actor) {
     actor->weaponFlags &= ~0x10000;
 }
 
 /** Set flag 0x10000 in the word at offset 0x100. */
-void func_802791F0_de(void *object) {
+void Link_SetActorStateBit(void *object) {
     Shared_Actor *actor = object;
     actor->weaponFlags |= 0x10000;
 }
 
-void func_80279204_de(Trigger *triggers, s32 count, s32 require, s32 enter, s32 exclude, s32 group, struct Player *arg) {
+void Link_DispatchMatchingTriggers(Trigger *triggers, s32 count, s32 require, s32 enter, s32 exclude, s32 group, struct Player *arg) {
     s32 i;
     s32 active;
     s32 usable;
@@ -73,7 +73,7 @@ void func_80279204_de(Trigger *triggers, s32 count, s32 require, s32 enter, s32 
                     Scene_DispatchSecondaryTriggersOfKind(world, trigger->flags.bytes.id);
                 }
             } else {
-                func_80278F00_de(trigger);
+                Link_DispatchTriggerExit(trigger);
             }
             active = 1;
         }
@@ -92,7 +92,7 @@ void func_80279204_de(Trigger *triggers, s32 count, s32 require, s32 enter, s32 
         if ((trigger->flags.word & 0x1100) == 0x1000) {
             active = 0;
         }
-        if (func_80279420_de(trigger, arg) == 0) {
+        if (Link_CheckTriggerMessage(trigger, arg) == 0) {
             active = 0;
         }
         if (!active) {
@@ -108,7 +108,7 @@ void func_80279204_de(Trigger *triggers, s32 count, s32 require, s32 enter, s32 
                 }
             }
         } else {
-            func_80278E7C_de(trigger);
+            Link_ActivateTrigger(trigger);
         }
     }
 }

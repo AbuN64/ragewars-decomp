@@ -7,7 +7,7 @@ extern s8 D_80102B0D[][400];
 extern RecRecAt4 g_playerSettings[];
 
 /* Adds the current record's deltas to both running totals of each player still in play, capping each at 99999. */
-void func_80424B90_de(void) {
+void Frontend_AccumulatePlayerStatistics(void) {
     s32 i;
     s32 v;
     RecRecAt4 *rec;

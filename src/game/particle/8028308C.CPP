@@ -23,7 +23,7 @@
 #include "particle/CAMERA_SCALE.H"
 extern void Particle_UpdateMatrix(void *);
 
-extern void func_80279A00_de(void *arg0);
+extern void Particle_FinishActorEffects(void *arg0);
 
 extern void Fx_DetachParticleSwooshes(void *arg0, void *arg1);
 
@@ -97,7 +97,7 @@ void func_802830CC_de(struct EffectSystem *effectSystem, s32 arg1) {
             if ((kind == 0x41E) || (kind == 0x3EF)) {
                 flags = var_s0->flags;
                 if ((flags & 0x100) && (var_s0->owner == (void *)arg1) && !(flags & 0x800)) {
-                    func_80279A00_de(var_s0);
+                    Particle_FinishActorEffects(var_s0);
                     if (var_s0->unk1D9 != 0) {
                         Particle_UpdateMatrix(var_s0);
                         Fx_DetachParticleSwooshes(&D_801379C0, var_s0);
@@ -162,7 +162,7 @@ void func_80283278_de(struct EffectSystem *effectSystem, s32 arg1) {
                 flags = var_s0->flags;
                 if (flags & 0x100) {
                   if (!(flags & 0x800)) {
-                    func_80279A00_de(var_s0);
+                    Particle_FinishActorEffects(var_s0);
                     if (var_s0->unk1D9 != 0) {
                         Particle_UpdateMatrix(var_s0);
                         Fx_DetachParticleSwooshes(&D_801379C0, var_s0);

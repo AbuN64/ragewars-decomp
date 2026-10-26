@@ -10,7 +10,7 @@
 #include "RESMGR/802A23A4_9.H"
 
 /** Perform no operation. */
-void func_802A18F4_de(void) {
+void N64Eng_RenderNoop(void) {
 }
 
-void func_802A18FC_de(void) { Gfx_ResetRenderState(); }
+void N64Eng_ResetRenderState(void) { Gfx_ResetRenderState(); }

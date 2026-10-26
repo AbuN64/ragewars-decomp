@@ -21,7 +21,7 @@ extern void SmpButton_RegisterButtonClass(void);
 extern void SmpFlicker_RegisterFlickerClass(void);
 extern void SmpSlider_RegisterSliderClass(void);
 extern void SmpList_RegisterListClass(void);
-extern void func_802A1960_de(void);
+extern void N64Eng_RegisterNumericWidgetClass(void);
 extern void Tsmos_SetIdleTimer(f32 a);
 extern void Tsmos_SetTimerState(s32 a);
 extern void Tsmos_ActivateControllerState(void);
@@ -42,7 +42,7 @@ void func_802A2224_de(void) {
     SmpFlicker_RegisterFlickerClass();
     SmpSlider_RegisterSliderClass();
     SmpList_RegisterListClass();
-    func_802A1960_de();
+    N64Eng_RegisterNumericWidgetClass();
     D_800CBC14 = 0x3C;
     Tsmos_SetIdleTimer(0.0f);
     Tsmos_SetTimerState(1);

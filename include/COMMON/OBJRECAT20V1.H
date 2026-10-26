@@ -9,7 +9,7 @@ typedef struct ObjRecAt20V1 ObjRecAt20V1;
 
 
 
-extern void func_80290A14_de(void *arg0, void *arg1);
+extern void SetN64_SetFrameDirection(void *arg0, void *arg1);
 
 
 struct ObjRecAt20V1;

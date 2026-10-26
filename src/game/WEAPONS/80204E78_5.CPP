@@ -29,7 +29,7 @@ void func_802054E0_de(Obj54E0 *actor, void *responseContext) {
 
     rec = &actor->holder->r;
     actor->flags = actor->flags & 0xFFFEFFFF;
-    func_80278D78_de(actor, 0x40000, actor);
+    Link_DispatchActorLinks(actor, 0x40000, actor);
     if (rec->unk2C == 0) {
         actor->flags &= ~0x2000;
         actor->flags &= ~0x100;

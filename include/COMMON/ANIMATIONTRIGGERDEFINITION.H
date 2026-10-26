@@ -266,7 +266,7 @@ typedef struct {
 } Obj5324;
 struct Shared_World;
 extern void Rumble_SetActorStateBit(struct Shared_World *, void *, s32);
-extern void func_80278D78_de(struct Shared_Actor *arg0, s32 arg1, void *arg2);
+extern void Link_DispatchActorLinks(struct Shared_Actor *arg0, s32 arg1, void *arg2);
 extern void Barrel_SpawnActorEffect(void *, s32, Triple, s32);
 extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 struct Player;

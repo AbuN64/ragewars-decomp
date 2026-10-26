@@ -35,7 +35,7 @@ extern s32 func_8022A8F0_de(struct Context *arg0);
 
 extern int Player_GetFirstPlayer(void *arg0);
 
-extern void func_8027985C_de(WeightedTable *object);
+extern void Lists_ClearWeightedTable(WeightedTable *object);
 
 extern SceneEffect *AnimPool_SpawnSceneEffect(void *scene, s32 id, s32 variant, s32 count, s32 owner, CVector3 position, f32 scale, CVector3 direction, CVector3 color, s32 *ref);
 
@@ -253,21 +253,21 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
         third = -1;
         if (((SpawnDispatchConfig *)&D_801462C8)->enabled) {
             if (definition->flags & 0x20) {
-                first = (s16)func_80279798_de((s16 *)spawnTable1());
+                first = (s16)Lists_ChooseWeightedEntry((s16 *)spawnTable1());
             }
             if (definition->flags & 0x40) {
-                second = (s16)func_80279798_de((s16 *)spawnTable4());
+                second = (s16)Lists_ChooseWeightedEntry((s16 *)spawnTable4());
             }
             if (definition->flags & 0x80) {
-                func_8027985C_de(&otherPicker);
+                Lists_ClearWeightedTable(&otherPicker);
                 choice = spawnTable6();
                 while (choice->id != -1) {
                     if (availableChoice(choice->id)) {
-                        func_80279864_de(&otherPicker, choice->id, choice->weight);
+                        Lists_AppendWeightedEntry(&otherPicker, choice->id, choice->weight);
                     }
                     choice++;
                 }
-                third = (s16)func_802798A8_de(&otherPicker);
+                third = (s16)Lists_ChooseWeightedTableEntry(&otherPicker);
             }
         } else {
             /* Configuration lies 0x1288 bytes into the shared runtime block. */
@@ -276,48 +276,48 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
                 return;
             }
             if (definition->flags & 0x20) {
-                func_8027985C_de(&picker);
+                Lists_ClearWeightedTable(&picker);
                 choice = spawnTable0();
                 while (choice->id != -1) {
                     if (func_80222D64_de((void *)context, choice->id)) {
-                        func_80279864_de(&picker, choice->id, choice->weight);
+                        Lists_AppendWeightedEntry(&picker, choice->id, choice->weight);
                     }
                     choice++;
                 }
-                first = (s16)func_802798A8_de(&picker);
+                first = (s16)Lists_ChooseWeightedTableEntry(&picker);
             }
             if (definition->flags & 0x40) {
-                func_8027985C_de(&picker);
+                Lists_ClearWeightedTable(&picker);
                 choice = spawnTable2();
                 if (g_world.visibilityEnabled) {
                     choice = spawnTable3();
                 }
                 while (choice->id != -1) {
                     if (func_8022ADB0_de((void *)context, choice->id)) {
-                        func_80279864_de(&picker, choice->id, choice->weight);
+                        Lists_AppendWeightedEntry(&picker, choice->id, choice->weight);
                     }
                     choice++;
                 }
-                second = (s16)func_802798A8_de(&picker);
+                second = (s16)Lists_ChooseWeightedTableEntry(&picker);
             }
             if (definition->flags & 0x80) {
-                third = (s16)func_80279798_de((s16 *)spawnTable5());
+                third = (s16)Lists_ChooseWeightedEntry((s16 *)spawnTable5());
             }
         }
-        func_8027985C_de(&picker);
+        Lists_ClearWeightedTable(&picker);
         if (first != -1) {
-            func_80279864_de(&picker, first, 100);
+            Lists_AppendWeightedEntry(&picker, first, 100);
         }
         if (second != -1) {
-            func_80279864_de(&picker, second, 100);
+            Lists_AppendWeightedEntry(&picker, second, 100);
         }
         if (third != -1) {
-            func_80279864_de(&picker, third, 100);
+            Lists_AppendWeightedEntry(&picker, third, 100);
         }
         if (!picker.count) {
             return;
         }
-        id = (s16)func_802798A8_de(&picker);
+        id = (s16)Lists_ChooseWeightedTableEntry(&picker);
         spawnSelected(object, owner, id, world, position);
         return;
     }

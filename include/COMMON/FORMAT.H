@@ -30,7 +30,7 @@ extern int D_8014DA24;
 
 extern int D_80153C8C;
 
-extern s32 func_804136B4_de(s32 *record);
+extern s32 Frontend_GetOwnedImagePixels(s32 *record);
 
 
 

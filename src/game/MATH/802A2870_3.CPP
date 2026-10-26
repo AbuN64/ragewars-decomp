@@ -11,19 +11,19 @@
 #include "RESMGR/resmgr_string_memory.H"
 #include "FRONTEND/8040B45C_33.H"
 
-extern Record_func_802A1990_de *Cache_AllocateMemory(s32);
+extern RecordN64EngCreateNumericWidget *Cache_AllocateMemory(s32);
 
 
-extern void func_802A1B24_de(void *arg0, s32 arg1);
+extern void N64Eng_SetNumericWidgetValue(void *arg0, s32 arg1);
 
 
-extern void Frontend_ReplaceNodeRefs(s32 arg0, Record_func_802A1990_de *arg1, Record_func_802A1990_de *arg2);
+extern void Frontend_ReplaceNodeRefs(s32 arg0, RecordN64EngCreateNumericWidget *arg1, RecordN64EngCreateNumericWidget *arg2);
 
-Record_func_802A1990_de *func_802A1990_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    Record_func_802A1990_de *source;
+RecordN64EngCreateNumericWidget *N64Eng_CreateNumericWidget(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    RecordN64EngCreateNumericWidget *source;
     s32 context;
-    Record_func_802A1990_de *result;
-    Record_func_802A1990_de *child;
+    RecordN64EngCreateNumericWidget *result;
+    RecordN64EngCreateNumericWidget *child;
 
     source = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());
@@ -40,7 +40,7 @@ Record_func_802A1990_de *func_802A1990_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3
     result->field_58 = 0;
     result->field_48 = 0;
     result->field_54 = arg4;
-    func_802A1B24_de(result, arg2);
+    N64Eng_SetNumericWidgetValue(result, arg2);
     result->field_5C = 2;
     Frontend_WrapNodeInParent(source, result);
     source->field_0C = -1;
@@ -49,7 +49,7 @@ Record_func_802A1990_de *func_802A1990_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3
 }
 
 /** Return the word at offset 0x58 in the supplied object. */
-int func_802A1B18_de(void *object) {
-    Record_func_802A1990_de *record = object;
+int N64Eng_GetNumericWidgetValue(void *object) {
+    RecordN64EngCreateNumericWidget *record = object;
     return record->field_58;
 }

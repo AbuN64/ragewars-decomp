@@ -19,7 +19,7 @@ typedef struct ArchiveTextIndexEntry {
 } ArchiveTextIndexEntry;
 /* One font record of the archive (32 bytes, read at ROM header word 2; three fonts): the glyph cell
    width, the count of bitmaps, and where the font's 0x60 glyph records and the bitmap sizes sit. The
-   halfwords at 0xA, 0xC and 0x10 (spacing, line height) are read by func_80411C98_de, func_80411CD0_de and
+   halfwords at 0xA, 0xC and 0x10 (spacing, line height) are read by Frontend_GetFontMetricAtA, Frontend_GetFontMetricAtC and
    Frontend_GetFontLetterSpacing; bytes 0..7, 0x12 and the word at 0x1C have no reader. */
 typedef struct ArchiveFontRecord {
     u8 unused0[8];

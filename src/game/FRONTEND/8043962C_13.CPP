@@ -34,7 +34,7 @@ extern float D_800DDF58;
 #endif
 extern void PitchMatrixLocal(Matrix *,f32); extern void YawMatrixLocal(Matrix *,f32); extern void RollMatrixLocal(Matrix *,f32);
 extern void ScaleMatrixLocal(Matrix *,f32,f32,f32); extern void SwapMatrixUpForward(Matrix *);
-extern s32 func_802A1934_de(void); extern void GraphU64_ConvertMatrixToFixed(Matrix *,void *);
+extern s32 N64Eng_GetFrameCounter(void); extern void GraphU64_ConvertMatrixToFixed(Matrix *,void *);
 extern s32 Scene_GetIndexedModelResource(void *,s32);
 extern void Geometry_QueueDirectModel(s32,void *,void *,s32,s32);
 void func_804399D0(MenuModelItem *item) {
@@ -55,7 +55,7 @@ void func_804399D0(MenuModelItem *item) {
   position=item->position;
   GraphU64_TransformPoint(&D_80141008[0].camera,&position,&transformed);
   GraphU64_BuildTranslationMatrix(&matrix, transformed.x, transformed.y, transformed.z);
-  time=func_802A1934_de();
+  time=N64Eng_GetFrameCounter();
   if(item->speed.x!=0.0f)PitchMatrixLocal(&matrix,time*item->speed.x*D_800DDF50_de);
 #if defined(VERSION_DE)
   if(item->speed.y!=0.0f)YawMatrixLocal(&matrix,time*item->speed.y*(0.01745329424738884f));

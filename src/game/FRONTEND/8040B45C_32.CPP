@@ -11,8 +11,8 @@
 #include "MATH/802A2870.H"
 
 /* Draws a visible widget (flag 8): when Frontend_ComputeWidgetBounds places it, and its draw flags ask for
-   clipping (0x200), it narrows the current scissor from func_802A1898_de to the widget's box through
-   func_8040F488_de (skipping the draw when nothing is left) and applies it with func_802A1870_de; it then
+   clipping (0x200), it narrows the current scissor from N64Eng_GetClipBounds to the widget's box through
+   func_8040F488_de (skipping the draw when nothing is left) and applies it with N64Eng_SetClipBounds; it then
    draws the widget through Frontend_DrawWidget and restores the saved scissor if it was narrowed. */
 
 
@@ -23,7 +23,7 @@
 
 extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *a, struct Shape_typemap_165 *box, Widget *widget, DrawArgsFrontendDrawVisibleWidgetClipped *args);
 
-extern void func_802A1898_de(s32 *left, s32 *right, s32 *top, s32 *bottom);
+extern void N64Eng_GetClipBounds(s32 *left, s32 *right, s32 *top, s32 *bottom);
 
 extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 
@@ -48,17 +48,17 @@ void Frontend_DrawVisibleWidgetClipped(Widget *widget, DrawArgsFrontendDrawVisib
         local = args;
         if (Frontend_ComputeWidgetBounds(&area, &box, widget, &local) != 0) {
             if (local.flags & 0x200) {
-                func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
+                N64Eng_GetClipBounds(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
                 clip = saved;
                 if (Frontend_ClampRectToClip(&clip, &box) == 0) {
                     return;
                 }
                 clipped = 1;
-                func_802A1870_de(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
+                N64Eng_SetClipBounds(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
             }
             Frontend_DrawWidget(widget, args);
             if (clipped) {
-                func_802A1870_de(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
+                N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
             }
         }
     }

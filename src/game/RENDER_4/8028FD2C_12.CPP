@@ -56,8 +56,8 @@ void SetN64_RecycleGlobalEffectNode(ListNode80290528 *node) {
     }
 }
 
-void SetN64_DrawVisibleEffects(char *arg0, char *view) {
-    WorldRecAt3C08 *world = (void *)arg0;
+void SetN64_DrawVisibleEffects(char *effectPool, char *view) {
+    WorldRecAt3C08 *world = (void *)effectPool;
     GameplayCamera *camera = (void *)view;
     SceneEffect *entry;
     f32 value;
@@ -94,7 +94,7 @@ void SetN64_DrawVisibleEffects(char *arg0, char *view) {
     Geometry_FlushModelBatch();
 }
 
-void SetN64_CollectVisibleEffectNodes(ContainerRecAt3C04 *arg0, Results *results) {
+void SetN64_CollectVisibleEffectNodes(ContainerRecAt3C04 *effectPool, Results *results) {
     f32 *bounds;
     s32 count;
     s32 mask;
@@ -102,7 +102,7 @@ void SetN64_CollectVisibleEffectNodes(ContainerRecAt3C04 *arg0, Results *results
     s32 limit;
     NodeSetN64CollectVisibleEffectNodes *node;
 
-    node = arg0->head;
+    node = effectPool->head;
     if (node != 0) {
         mask = 0x30000;
         required = 0x20000;
@@ -130,7 +130,7 @@ void SetN64_CollectVisibleEffectNodes(ContainerRecAt3C04 *arg0, Results *results
     }
 }
 
-void *func_802908C0_de(ObjectLinks3C0C *arg0)
+void *SetN64_AllocateActorFromPool(ObjectLinks3C0C *arg0)
 {
   void *new_var;
   void *node;

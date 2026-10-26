@@ -96,7 +96,7 @@ void Action_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *
 extern s32 Rumble_TestActorStateBit(void *, void *);
 
 
-extern void func_80278D78_de(struct Shared_Actor *arg0, s32 arg1, void *arg2);
+extern void Link_DispatchActorLinks(struct Shared_Actor *arg0, s32 arg1, void *arg2);
 
 extern void Rumble_SetActorStateBit(Shared_World *arg0, void *arg1, s32 arg2);
 
@@ -171,7 +171,7 @@ void func_80204C68_de(void *actor, ActorMotionState *motionState) {
     local.active = 0;
     flag = &g_world;
     Rumble_SetActorStateBit(flag, actor, 1);
-    func_80278D78_de(actor, 0x4000, actor);
+    Link_DispatchActorLinks(actor, 0x4000, actor);
     motionState->speed = 0;
     func_802A5D38_de(&D_801379C0, (s32)actor);
     if (flag->mode != 4) {
@@ -188,7 +188,7 @@ void func_80204D2C_de(BreakableHitContext *breakableHitContext) {
     local.active = 0;
     flag = &g_world;
     Rumble_SetActorStateBit(flag, breakableHitContext, 0);
-    func_80278D78_de(breakableHitContext, 0x8000, breakableHitContext);
+    Link_DispatchActorLinks(breakableHitContext, 0x8000, breakableHitContext);
     func_802A5D38_de(&D_801379C0, (s32)breakableHitContext);
     if (flag->mode != 4) {
         Events_DispatchCallback(breakableHitContext, breakableHitContext, 7,

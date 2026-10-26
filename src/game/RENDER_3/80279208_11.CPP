@@ -23,7 +23,7 @@ extern void Player_GiveAmmoWithMessage(void *arg0, s32 arg1, s32 arg2);
 
 
 
-void func_80279A00_de(void *arg0) {
+void Particle_FinishActorEffects(void *arg0) {
     char *actor = arg0;
     char *state;
     char *owner;
@@ -98,7 +98,7 @@ static inline f32 offset_y(Actor_func_80279B40_de *actor) {
     return actor->offsetY;
 }
 
-void Particle_SpawnChildEffect(Actor_func_80279B40_de *actor, s32 model, s32 arg2, s32 flags) {
+void Particle_SpawnChildEffect(Actor_func_80279B40_de *actor, s32 model, s32 spawnMode, s32 flags) {
     CQuatern rotation;
     CVector3 direction;
     CVector3 offset;
@@ -136,5 +136,5 @@ void Particle_SpawnChildEffect(Actor_func_80279B40_de *actor, s32 model, s32 arg
         D_80103FCC = &D_801041F0;
     }
     func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor->owner, (s32 *)actor->unk130, actor->unk134, model,
-                  direction, rotation, point, 0, arg2, flags | (actor->flags & 0x200006));
+                  direction, rotation, point, 0, spawnMode, flags | (actor->flags & 0x200006));
 }

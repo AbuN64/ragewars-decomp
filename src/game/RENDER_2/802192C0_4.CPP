@@ -50,8 +50,8 @@ s32 func_8024BE80_de(void *);
 void InstHdr_CopyActorPositionAndModel(void *, Triple, void *, s32 *, s32, s32); /* extern */
 s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32); /* extern */
 void Control_SetProfileMode(void *, s32);
-void func_80278D78_de(void *, s32, void *);
-void func_80278E04_de(s32, s32, void *);
+void Link_DispatchActorLinks(void *, s32, void *);
+void Link_DispatchObjectLinks(s32, s32, void *);
 s32 func_802800C0_de(void *, void *, void *, s32 *, s32, s32, CVector3, CQuatern, CVector3, CVector3 *, s32, s32); /* extern */
 void func_80283278_de(void *, s32);
 s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
@@ -158,7 +158,7 @@ void func_8021B468_de(struct Shared_ActorView *player, void *attacker, s32 damag
         Player_SetPlayerState(player, attacker, 2);
     }
     ((struct Shared_ActorView *)player)->field1218 = 0;
-    func_80278D78_de(attacker, 1, attacker);
+    Link_DispatchActorLinks(attacker, 1, attacker);
     Ovlgame_ReleaseObjectHandles(player);
     func_8022B530_de((s32)player);
     ((struct Shared_ActorView *)player)->stun = 0;
@@ -252,7 +252,7 @@ case 7:
                         SetN64_RecycleGlobalEffectNode(retiredAmmoPickup);
                     } else {
                         Scene_SetLevelRecordStateBit(&g_world, retiredAmmoPickup, 1);
-                        func_80278E04_de(((struct Shared_ProjectileView *)((struct Shared_ActorView *)player)->projectiles[((struct Shared_ActorView *)player)->projectileIndex])->source, 0x400, player);
+                        Link_DispatchObjectLinks(((struct Shared_ProjectileView *)((struct Shared_ActorView *)player)->projectiles[((struct Shared_ActorView *)player)->projectileIndex])->source, 0x400, player);
                     }
                 }
                 ammoDropActorKind = ((struct Shared_ActorView *)player)->kind;

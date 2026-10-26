@@ -31,7 +31,7 @@ extern struct Screen_func_80426788_de *D_800E4690;
 extern struct Status g_playerSettings[];
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 void Defs_SetBitValue(u8 *arg0, s32 arg1, s32 arg2);
-void func_80427F10_de(void);
+void Frontend_SelectSuggestedTrial(void);
 void func_8043C210_de(s32 *record, s32 first, s32 second, s32 third, s32 fourth);
 
 
@@ -144,11 +144,11 @@ loop_7:
         }
         var_v1_3 += 0x96;
     } while (k < 8);
-    func_80427008_de();
-    func_80427F10_de();
+    Frontend_LoadTrialCompletionFlags();
+    Frontend_SelectSuggestedTrial();
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2632))) = Frontend_FindWidgetByResourceId(owner, (s32) *(D_800E0646_de + ((*(ResultsOptionsScreen **)&D_800E4690)->selection * 0x1C)));
-    func_804280BC_de();
+    Frontend_RefreshTrialSelectionLabel();
     D_80154020.ready = 0;
     D_80154020.value = -1;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
@@ -162,7 +162,7 @@ loop_7:
     if (((s32) D_801462C8.controllerMode < 5) && ((s32) D_801462C8.controllerMode >= 3)) {
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
         (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2636))) = 1;
-        func_804279B8_de((*(ResultsOptionsScreen **)&D_800E4690));
+        Frontend_RefreshTrialCharacterPreview((*(ResultsOptionsScreen **)&D_800E4690));
     }
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2664))) = 0;
@@ -186,13 +186,13 @@ loop_7:
     }
     switch (temp_v1_3) {                            /* switch 2; irregular */
     case 1:                                         /* switch 2 */
-        func_80428300_de();
+        Frontend_FillProfileWeaponRows();
         break;
     case 3:                                         /* switch 2 */
-        func_8042840C_de();
+        Frontend_FillSelectedPlayerWeaponRows();
         break;
     case 2:                                         /* switch 2 */
-        func_80428214_de();
+        Frontend_FillTwoPlayerWeaponRows();
         break;
     }
     if (D_801462C8.controllerMode != 2) {

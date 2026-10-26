@@ -44,7 +44,7 @@ extern void Player_AddFiftyToProfileValue16(Profile *);
 
 extern void Player_AdvanceProfileProgress(Profile *);
 
-/* Returns the message text for an event result from func_80425014_de: for results 5001 to 5057 the
+/* Returns the message text for an event result from Achieve_ApplyLevelCompletionReward: for results 5001 to 5057 the
    text pointer jtbl_800DD848 selects for the result, where result 5002 picks between two texts by
    bit 0 of func_8022F454_de for the first player's current slot; zero for any other result. The
    dispatch and return sit in a one-pass loop, whose weighting gives the text its register as the
@@ -60,7 +60,7 @@ extern void Player_AdvanceProfileProgress(Profile *);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 
-s32 func_80425014_de(s32 index) {
+s32 Achieve_ApplyLevelCompletionReward(s32 index) {
     s32 result = -1;
     Profile *player = &D_80102B00[index];
     s32 *key = &D_8015402C;

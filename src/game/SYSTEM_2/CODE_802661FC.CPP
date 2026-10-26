@@ -204,7 +204,7 @@ void Events_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 abso
             impulse.x = 0.0f; impulse.y = 0.0f; impulse.z = 0.0f;
         }
         if ((victim->flags & 0x300000) && (hitFlags & 0x200)) {
-            func_80278D78_de((struct Shared_Actor *)source, 0x10, victim);
+            Link_DispatchActorLinks((struct Shared_Actor *)source, 0x10, victim);
         }
     }
     if (source->definition->kind == 1 || source->definition->kind == 11) {

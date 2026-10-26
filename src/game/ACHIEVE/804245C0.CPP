@@ -16,8 +16,8 @@ extern s32 Defs_TestBit(void *, s32);
 
 extern void Defs_SetBitValue(u8 *, s32, s32);
 
-extern u8 D_8014222C; /* MIXED func_804243E0_de */
-void func_804243E0_de(s32 player, s32 *awarded) {
+extern u8 D_8014222C; /* MIXED Frontend_AwardMatchAchievements */
+void Frontend_AwardMatchAchievements(s32 player, s32 *awarded) {
     func_8041F2A0_Config *status;
     Shared_Game *globals;
     CGameStatus *rules;

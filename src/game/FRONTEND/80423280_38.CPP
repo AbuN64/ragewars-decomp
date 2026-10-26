@@ -112,7 +112,7 @@ void Frontend_RefreshTrialCatalogueWidgets(void) {
     if (settings->controllerMode == 1) {
         playerSettings = settings;
         for (entryIndex = 0; entryIndex < 36; entryIndex++) {
-            unlockedPreset = func_80425C70_de(entryIndex, 0, *(s8 *)((char *)playerSettings + D_800E4690->player * 0x96 + 0x150));
+            unlockedPreset = Achieve_CopyPreset(entryIndex, 0, *(s8 *)((char *)playerSettings + D_800E4690->player * 0x96 + 0x150));
             unlockValue = unlockedPreset->bytes[1];
             if (unlockValue > 0) Defs_SetBitValue(availableFlags, unlockValue - 1, 1);
             for (unlockSlot = 0; unlockSlot < 3; unlockSlot++) {
@@ -155,7 +155,7 @@ found2:;
         }
     }
     for (entryIndex = 0; entryIndex < 36; entryIndex++) {
-        if (Defs_TestBit((s32)D_800E4690->owned, entryIndex) == 1) ((void (*)(s32))func_80427D70_de)(entryIndex);
+        if (Defs_TestBit((s32)D_800E4690->owned, entryIndex) == 1) ((void (*)(s32))Frontend_MarkLinkedTrialsAvailable)(entryIndex);
     }
     for (entryIndex = 0; entryIndex < 36; entryIndex++) {
         if (Defs_TestBit((s32)D_800E4690->pending, entryIndex) == 1) Defs_SetBitValue(D_800E4690->owned, entryIndex, 1);
@@ -195,11 +195,11 @@ found4:;
 #include "TYPES.H"
 #include "FRONTEND/8041BEA8_6.H"
 
-typedef struct PreviewSettings { char pad[13]; u8 mode; char padE[0xC2]; struct Entry_func_804279B8_de entries[4]; } PreviewSettings;
+typedef struct PreviewSettings { char pad[13]; u8 mode; char padE[0xC2]; struct EntryFrontendRefreshTrialCharacterPreview entries[4]; } PreviewSettings;
 typedef struct PreviewScreen { char pad[0x20]; char preview[0xA24]; s32 record; char padA48[0x14]; s32 player; } PreviewScreen;
 typedef struct PreviewRecord { char pad[4]; u8 kind; } PreviewRecord;
 typedef struct PreviewRow { s32 pad; f32 scale[4],distance[4]; CVector3 position[4]; s32 light[4]; char tail[12]; } PreviewRow;
-extern void func_804284C0_de(s32,PreviewSettings *);
+extern void Frontend_FillTrialPresetWeaponRows(s32,PreviewSettings *);
 extern PreviewRecord *Scene_GetBlLevelData(void *,s32);
 typedef struct func_80427B98_S1 func_80427B98_S1;
 struct func_80427B98_S1 {
@@ -207,17 +207,17 @@ struct func_80427B98_S1 {
     char unk20;
 };
 
-void func_804279B8_de(void) {
+void Frontend_RefreshTrialCharacterPreview(void) {
     CVector3 scale;
     s32 record;
     s32 index;
     u8 kind;
-    struct Entry_func_804279B8_de *entry;
+    struct EntryFrontendRefreshTrialCharacterPreview *entry;
     PreviewSettings *settings = (PreviewSettings *)&D_801462C8;
     if (settings->mode == 4) {
         record = (*(ResultsOptionsScreen **)&D_800E4690)->selection;
         entry = &((PreviewSettings *)&D_801462C8)->entries[(*(ResultsOptionsScreen **)&D_800E4690)->player];
-        func_804284C0_de(record, settings);
+        Frontend_FillTrialPresetWeaponRows(record, settings);
         kind = Scene_GetBlLevelData(&g_world, record)->kind;
         entry->kind = kind;
         index = Frontend_FindKeyIndex((s8)kind);

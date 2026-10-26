@@ -9,15 +9,15 @@
 #include "MATH/80297CD0_3.H"
 #include "RESMGR/802A23A4_10.H"
 
-int func_802A1934_de(void) {
+int N64Eng_GetFrameCounter(void) {
     return D_800D2C18;
 }
 
 /** Increment the global counter D_800D2C18. */
-void func_802A1944_de(void) {
+void N64Eng_AdvanceFrameCounter(void) {
     D_800D2C18 += 1;
 }
 
-void func_802A1960_de(void) {
+void N64Eng_RegisterNumericWidgetClass(void) {
     func_802982C4_de(0xB65, D_002A1B50, D_002A1BE0, 3);
 }

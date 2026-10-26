@@ -8,16 +8,16 @@
 #include "RESMGR/802A2230_4.H"
 #include "RENDER_2/8025DE50_5.H"
 
-extern void func_802A1B24_de(void *arg0, s32 arg1);
+extern void N64Eng_SetNumericWidgetValue(void *arg0, s32 arg1);
 
 extern unsigned int func_80299B4C_de(void);
 
-extern void func_802A1D7C_de(void *arg0);
+extern void N64Eng_IncrementNumericWidget(void *arg0);
 
 
-void func_802A1D7C_de(void *arg0)
+void N64Eng_IncrementNumericWidget(void *arg0)
 {
-    Record_func_802A1990_de *object = arg0;
+    RecordN64EngCreateNumericWidget *object = arg0;
   s32 temp_a1;
   s32 temp_v1;
   s32 var_a1;
@@ -43,12 +43,12 @@ void func_802A1D7C_de(void *arg0)
     }
     var_a1 = object->field_58;
     block_7:
-    func_802A1B24_de(object, var_a1);
+    N64Eng_SetNumericWidgetValue(object, var_a1);
   }
 }
 
 /** Reset the object state and mark non-type-eight linked records. */
-int func_802A1DE4_de(struct CommandListController *object) {
+int N64Eng_SetLinkedCommand100(struct CommandListController *object) {
     struct LinkedCommandEntry *record = object->entries;
     object->state = 2;
     object->progress = 0;
@@ -61,7 +61,7 @@ int func_802A1DE4_de(struct CommandListController *object) {
     return 0;
 }
 
-int func_802A1E20_de(struct CommandListController *object) {
+int N64Eng_SetLinkedCommand200(struct CommandListController *object) {
     struct LinkedCommandEntry *record = object->entries;
     object->state = 2;
     object->progress = 0;
@@ -74,7 +74,7 @@ int func_802A1E20_de(struct CommandListController *object) {
     return 0;
 }
 
-s32 func_802A1E5C_de(struct CommandListController *commandListController) {
+s32 N64Eng_SetLinkedCommand100WithSound(struct CommandListController *commandListController) {
     struct LinkedCommandEntry *p;
 
     commandListController->state = 2;
@@ -92,8 +92,8 @@ s32 func_802A1E5C_de(struct CommandListController *commandListController) {
     return 0;
 }
 
-s32 func_802A1EC0_de(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 arg4) {
-    Record_func_802A1990_de *object = arg0;
+s32 N64Eng_HandleNumericIncrement(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 arg4) {
+    RecordN64EngCreateNumericWidget *object = arg0;
     s32 temp_s0;
 
     temp_s0 = XMath_AbsoluteInteger(arg4);
@@ -105,13 +105,13 @@ s32 func_802A1EC0_de(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 arg4) {
         return 0;
     }
     object->field_5C = arg3;
-    func_802A1D7C_de(object);
+    N64Eng_IncrementNumericWidget(object);
     SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
 
-s32 func_802A1F3C_de(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 arg4) {
-    Record_func_802A1990_de *object = arg0;
+s32 N64Eng_HandleNumericDecrement(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 arg4) {
+    RecordN64EngCreateNumericWidget *object = arg0;
     s32 temp_s0;
 
     temp_s0 = XMath_AbsoluteInteger(arg4);
@@ -123,13 +123,13 @@ s32 func_802A1F3C_de(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 arg4) {
         return 0;
     }
     object->field_5C = 0;
-    func_802A1D14_de(object);
+    N64Eng_DecrementNumericWidget(object);
     SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
 
 /** Apply state two for event class three when the subcode is six or seven. */
-int func_802A1FB8_de(void *object, int unused, unsigned int event, int subcode) {
+int N64Eng_CancelSelectionRepeat(void *object, int unused, unsigned int event, int subcode) {
     struct CommandListController *controller = object;
     if ((event >> 16) == 3 && subcode < 8 && subcode >= 6) {
         controller->state = 2;

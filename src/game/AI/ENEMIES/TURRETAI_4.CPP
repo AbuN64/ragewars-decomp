@@ -14,7 +14,7 @@ extern s32 Barrel_SpawnFlaggedEffects(void *arg0, void *arg1, s32 arg2, s32 arg3
 
 extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
 
-extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
+extern void Link_DispatchActorLinks(void *arg0, s32 arg1, void *arg2);
 
 s32 AnimPool_ReleaseSceneEffect(void *);
 
@@ -44,7 +44,7 @@ void Turret_Setup_DEATH(void *actor, void *state) {
     world = &g_world;
     stateView->event = 0;
     Rumble_SetActorStateBit(world, actor, 1);
-    func_80278D78_de(actor, 1, actor);
+    Link_DispatchActorLinks(actor, 1, actor);
     clearedFlags = actorView->flags & 0xFFFEFFFF;
     actorView->flags = clearedFlags;
     if (world->mode != 4) {

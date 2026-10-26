@@ -61,7 +61,7 @@ extern void Defs_SetBitValue(u8 *, s32, s32);
 
 extern s32 Defs_TestBit(u8 *, s32);
 
-s32 func_80426CE4_de(void *unused0, void *unused1, s32 event) {
+s32 Frontend_RenderResultsOptionsPreview(void *unused0, void *unused1, s32 event) {
     s32 views;
     s32 i;
     s32 alpha;
@@ -113,7 +113,7 @@ s32 func_80426CE4_de(void *unused0, void *unused1, s32 event) {
     return 0;
 }
 
-void func_80427008_de(void) {
+void Frontend_LoadTrialCompletionFlags(void) {
     s32 i;
 
     i = 0;

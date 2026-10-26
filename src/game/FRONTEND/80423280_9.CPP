@@ -15,11 +15,11 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 extern struct MatchOptionsScreen *D_800E4EF0;
 extern s32 func_8041AD04_de(void *);
-extern s32 func_802A1B18_de(void *);
+extern s32 N64Eng_GetNumericWidgetValue(void *);
 extern s32 func_8043C308_de(void *);
 
 /* Refreshes the option block D_801462C8 from the menu D_800E4EF0 points to: the bytes at 0x24 to
-   0x27 from the values func_802A1B18_de reports for its items at 0x28, 0x24, 0x2C and 0x30, and the
+   0x27 from the values N64Eng_GetNumericWidgetValue reports for its items at 0x28, 0x24, 0x2C and 0x30, and the
    byte at 0x28 from the selection func_8041AD04_de reports for its item at 0x1C. */
 
 
@@ -40,13 +40,13 @@ extern s32 func_8043C308_de(void *);
 
 
 
-extern void func_802A1B24_de(void *arg0, s32 arg1);
+extern void N64Eng_SetNumericWidgetValue(void *arg0, s32 arg1);
 
 extern void SmpButton_SelectListEntry(void *arg0, s32 arg1);
 
 
 /* Refreshes the entry list of screen D_800E4EF0: reads the selection of its cursor at 0x20 through
-   func_8041AD04_de and the entry count of its list at 0x34 through func_802A1B18_de. With no entries it
+   func_8041AD04_de and the entry count of its list at 0x34 through N64Eng_GetNumericWidgetValue. With no entries it
    clears the list through Frontend_ResetJoinRequestEntries; otherwise, when the count differs from what
    func_8041EB50_de shows or force is 1, it clears the list and rebuilds it for the count and
    selection through Frontend_RandomizeJoinRequestEntries. */
@@ -66,7 +66,7 @@ extern void Frontend_ResetJoinRequestEntries(void);
 /* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled unless func_8043C308_de reports
    screen D_800E4EF0 busy: 0x36B closes the menu through func_804294C4_de, sends code -1 to
    func_8042E988_de and calls func_802998A8_de; 0x369 does the same with page reset func_80429654_de(0)
-   and code 0x17 when func_802A1B18_de reports the screen's list at 0x34 non-empty; 0x36A always does
+   and code 0x17 when N64Eng_GetNumericWidgetValue reports the screen's list at 0x34 non-empty; 0x36A always does
    it with Frontend_SeatJoinRequests and code 0x19, then calls Tsmos_DeactivateControllerState. Returns zero. */
 
 
@@ -83,7 +83,7 @@ extern void func_802998A8_de(void);
 extern void MarkMenuEventHandled();
 
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4EF4, an actor kind at D_800E4EF8 and a handler at D_800E4EFC: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4EF4, an actor kind at D_800E4EF8 and a handler at D_800E4EFC: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler80429B74)(void *, s32, s32, s32, s32);
 
@@ -95,12 +95,12 @@ void func_804294C4_de(void) {
     Shared_Game *options;
     s32 value;
 
-    value = func_802A1B18_de(D_800E4EF0->widget28);
+    value = N64Eng_GetNumericWidgetValue(D_800E4EF0->widget28);
     options = &D_801462C8;
     options->laps = value;
-    options->players = func_802A1B18_de(D_800E4EF0->widget24);
-    options->trialOther = func_802A1B18_de(D_800E4EF0->widget2C);
-    options->trialScore = func_802A1B18_de(D_800E4EF0->widget30);
+    options->players = N64Eng_GetNumericWidgetValue(D_800E4EF0->widget24);
+    options->trialOther = N64Eng_GetNumericWidgetValue(D_800E4EF0->widget2C);
+    options->trialScore = N64Eng_GetNumericWidgetValue(D_800E4EF0->widget30);
     options->unknown28[0] = func_8041AD04_de(D_800E4EF0->selectWidget);
 }
 
@@ -110,10 +110,10 @@ void func_80429560_de(void) {
     s32 cap;
 
     opts = &D_801462C8;
-    func_802A1B24_de(D_800E4EF0->widget24, opts->players);
-    func_802A1B24_de(D_800E4EF0->widget28, opts->laps);
-    func_802A1B24_de(D_800E4EF0->widget2C, opts->trialOther);
-    func_802A1B24_de(D_800E4EF0->widget30, opts->trialScore);
+    N64Eng_SetNumericWidgetValue(D_800E4EF0->widget24, opts->players);
+    N64Eng_SetNumericWidgetValue(D_800E4EF0->widget28, opts->laps);
+    N64Eng_SetNumericWidgetValue(D_800E4EF0->widget2C, opts->trialOther);
+    N64Eng_SetNumericWidgetValue(D_800E4EF0->widget30, opts->trialScore);
     count = Frontend_CountUsedSlots();
     cap = D_800E4EF0->countCap;
     if (cap < count) {
@@ -122,7 +122,7 @@ void func_80429560_de(void) {
     if (count == 0) {
         count = D_800E4EF0->countDefault;
     }
-    func_802A1B24_de(D_800E4EF0->widget34, count);
+    N64Eng_SetNumericWidgetValue(D_800E4EF0->widget34, count);
     SmpButton_SelectListEntry(D_800E4EF0->selectWidget, opts->unknown28[0]);
     SmpButton_SelectListEntry(D_800E4EF0->cursorWidget, Frontend_GetJoinRequestRank());
 }
@@ -132,7 +132,7 @@ void func_80429654_de(s32 force) {
     s32 count;
 
     selection = func_8041AD04_de(D_800E4EF0->cursorWidget);
-    count = func_802A1B18_de(D_800E4EF0->widget34);
+    count = N64Eng_GetNumericWidgetValue(D_800E4EF0->widget34);
     if (count <= 0) {
         Frontend_ResetJoinRequestEntries();
         return;
@@ -173,7 +173,7 @@ s32 func_8042972C_de(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
 #endif
             widget = D_800E4EF0->widget24;
             value = 0;
-            func_802A1B24_de(widget, value);
+            N64Eng_SetNumericWidgetValue(widget, value);
             break;
 #if defined(VERSION_DE)
         case 0x35D:
@@ -184,7 +184,7 @@ s32 func_8042972C_de(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
 #endif
             widget = D_800E4EF0->widget28;
             value = 0;
-            func_802A1B24_de(widget, value);
+            N64Eng_SetNumericWidgetValue(widget, value);
             break;
 #if defined(VERSION_DE)
         case 0x35B:
@@ -195,7 +195,7 @@ s32 func_8042972C_de(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
 #endif
             widget = D_800E4EF0->widget2C;
             value = 0;
-            func_802A1B24_de(widget, value);
+            N64Eng_SetNumericWidgetValue(widget, value);
             break;
 #if defined(VERSION_DE)
         case 0x361:
@@ -206,7 +206,7 @@ s32 func_8042972C_de(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
 #endif
             widget = D_800E4EF0->widget30;
             value = 0;
-            func_802A1B24_de(widget, value);
+            N64Eng_SetNumericWidgetValue(widget, value);
             break;
 #if defined(VERSION_DE)
         case 0x368:
@@ -217,7 +217,7 @@ s32 func_8042972C_de(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
 #endif
             widget = D_800E4EF0->widget34;
             value = D_800E4EF0->countDefault;
-            func_802A1B24_de(widget, value);
+            N64Eng_SetNumericWidgetValue(widget, value);
             break;
         }
     }
@@ -248,7 +248,7 @@ s32 func_804297F8_de(void) {
 #elif defined(VERSION_EU_X)
     case 0x36D:
 #endif
-        if (func_802A1B18_de(D_800E4EF0->widget34) > 0) {
+        if (N64Eng_GetNumericWidgetValue(D_800E4EF0->widget34) > 0) {
             func_804294C4_de();
             func_80429654_de(0);
             func_8042E988_de(0x17);

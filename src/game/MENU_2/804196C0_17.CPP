@@ -15,7 +15,7 @@
 
 extern void SmpFlicker_InitFlicker(struct ObjectCode804196C0 *, s32);
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3330, an actor kind at D_800E3334 and a handler at D_800E3338: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3330, an actor kind at D_800E3334 and a handler at D_800E3338: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 

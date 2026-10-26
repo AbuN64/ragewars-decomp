@@ -3,8 +3,8 @@
 extern void SetN64_GetPackBaseAndSize(int *arg0, int **arg1, int *arg2);
 
 s32 SetN64_GetPackSize(s32 *bitSet) {
-    s32 *sp10;
-    s32 sp14;
-    SetN64_GetPackBaseAndSize(bitSet, &sp10, &sp14);
-    return sp14;
+    s32 *packBase;
+    s32 packSize;
+    SetN64_GetPackBaseAndSize(bitSet, &packBase, &packSize);
+    return packSize;
 }

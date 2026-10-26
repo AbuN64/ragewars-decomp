@@ -60,7 +60,7 @@
 #include "FRONTEND/CODE_80426EC4.H"
 #include "RENDER_2/8025DE50_5.H"
 
-extern struct Screen_func_80426918_de *D_800E4690;
+extern struct ScreenFrontendAnimateResultsOptionsScreen *D_800E4690;
 
 extern s32 D_80154020[];
 
@@ -75,7 +75,7 @@ extern s32 func_80419F38_de(void *);
 
 extern void func_80419F24_de(void *);
 
-s32 func_80426918_de(void *unused0, void *unused1, s32 delta) {
+s32 Frontend_AnimateResultsOptionsScreen(void *unused0, void *unused1, s32 delta) {
     s32 clock;
 
     if (D_80154020[1] == 1) {
@@ -136,7 +136,7 @@ s32 func_80426918_de(void *unused0, void *unused1, s32 delta) {
         case 1:
         case 3:
         case 4:
-            func_804281A8_de();
+            Frontend_ShowTrialPreviewBanner();
         }
         Frontend_HideTrialCatalogueWidgets();
         D_800E4690->state = 2;
@@ -149,7 +149,7 @@ s32 func_80426918_de(void *unused0, void *unused1, s32 delta) {
         return 0;
     case 9:
         D_800E4690->state = 3;
-        func_80427008_de();
+        Frontend_LoadTrialCompletionFlags();
         break;
     }
     if (D_800E4690->state == 3) {

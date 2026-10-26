@@ -16,7 +16,7 @@ extern s32 *func_8025CC6C_de(void);
 extern s32 func_8025CA24_de(void *,void *);
 static inline void makeImpulse(CVector3 *input,f32 scale,CVector3 *out){GraphU64_ScaleVector(out,input,scale);}
 static inline void addImpulse(CVector3 *v,CVector3 *impulse){GraphU64_AddVec3(v,v,impulse);}
-void func_8027A084_de(void *particle) {
+void Particle_SteerSoundTrackingParticle(void *particle) {
     SteeringParticle *arg0=particle;
     CVector3 sp18;
     CVector3 sp28;
@@ -133,7 +133,7 @@ block_21:
             GraphU64_ScaleVector(temp_s0_3, &spC8, temp_fv0_5);
             after_clamp:;
         }
-        func_80279DD0_de(arg0, 1.0f);
+        Particle_UpdateSineMotion(arg0, 1.0f);
     }
 }
 
@@ -151,7 +151,7 @@ extern f32 GraphU64_ArcCos(f32);
  * resets the velocity along the new direction and applies the descriptor's acceleration (clamped to its
  * top speed). */
 void Particle_SteerHoming(void *particle) {
-    SteeringParticle *arg0 = particle;
+    SteeringParticle *homingParticle = particle;
     CVector3 v18;
     CVector3 v28;
     CVector3 v38;
@@ -176,43 +176,43 @@ void Particle_SteerHoming(void *particle) {
     s32 id;
     CVector3 *velocity;
     SteeringSound *sound;
-    q78 = GraphU64_BuildDirectionQuaternion(&arg0->direction);
-    speed = Math_Sqrtf(arg0->velocity.x * arg0->velocity.x + arg0->velocity.y * arg0->velocity.y +
-                             arg0->velocity.z * arg0->velocity.z);
-    owner = FIELD(void *, FIELD(void *, arg0, 0x12C), 0x1D8);
+    q78 = GraphU64_BuildDirectionQuaternion(&homingParticle->direction);
+    speed = Math_Sqrtf(homingParticle->velocity.x * homingParticle->velocity.x + homingParticle->velocity.y * homingParticle->velocity.y +
+                             homingParticle->velocity.z * homingParticle->velocity.z);
+    owner = FIELD(void *, FIELD(void *, homingParticle, 0x12C), 0x1D8);
     id = 0x8AC;
-    sound = arg0->sound;
+    sound = homingParticle->sound;
     if (sound != 0) {
         if ((sound->id != id) || (sound->handle == -1)) {
-            Particle_StopSound(arg0);
+            Particle_StopSound(homingParticle);
             goto create_sound;
         }
     } else {
 create_sound:
-        arg0->sound = func_8025C95C_de(func_8025CC6C_de(), 0x8AC, &arg0->position, &arg0->position, -1);
+        homingParticle->sound = func_8025C95C_de(func_8025CC6C_de(), 0x8AC, &homingParticle->position, &homingParticle->position, -1);
     }
-    if (FIELD(void *, arg0, 0x134) != 0) {
-        if (arg0->time >= D_800C4B78_de) {
-            FIELD(void *, arg0, 0x134) = 0;
+    if (FIELD(void *, homingParticle, 0x134) != 0) {
+        if (homingParticle->time >= D_800C4B78_de) {
+            FIELD(void *, homingParticle, 0x134) = 0;
         }
     }
-    if (FIELD(void *, arg0, 0x134) == 0) {
+    if (FIELD(void *, homingParticle, 0x134) == 0) {
         v58.x = 0;
         v58.y = 0;
         v58.z = D_800C4B7C_de;
         func_8022B09C_de(owner, &v58);
-        GraphU64_SubtractVectors(&v68, &v58, &arg0->position);
+        GraphU64_SubtractVectors(&v68, &v58, &homingParticle->position);
         distance = Math_Sqrtf(v68.x * v68.x + v68.y * v68.y + v68.z * v68.z);
-        if (distance < D_800C4B80_de && arg0->time > D_800C4B84_de) {
-            func_80283D50_de(arg0);
-            Particle_Release(D_8011D8D0, arg0);
-            Particle_StopSound(arg0);
+        if (distance < D_800C4B80_de && homingParticle->time > D_800C4B84_de) {
+            func_80283D50_de(homingParticle);
+            Particle_Release(D_8011D8D0, homingParticle);
+            Particle_StopSound(homingParticle);
             return;
         }
     } else {
-        v18 = FIELD(CVector3, FIELD(void *, arg0, 0x134), 0x8);
-        v18.y += GameObject_GetActorHeight(FIELD(void *, arg0, 0x134)) * D_800C4B88_de;
-        GraphU64_SubtractVectors(&v68, &v18, &arg0->position);
+        v18 = FIELD(CVector3, FIELD(void *, homingParticle, 0x134), 0x8);
+        v18.y += GameObject_GetActorHeight(FIELD(void *, homingParticle, 0x134)) * D_800C4B88_de;
+        GraphU64_SubtractVectors(&v68, &v18, &homingParticle->position);
     }
     v28 = v68;
     GraphU64_NormalizeVec3(&v28);
@@ -220,37 +220,37 @@ create_sound:
     GraphU64_NormalizeQuaternion(&q88);
     GraphU64_NormalizeQuaternion(&q78);
     GraphU64_NormalizeVec3(&v28);
-    v38 = arg0->direction;
+    v38 = homingParticle->direction;
     GraphU64_NormalizeVec3(&v38);
     angle = GraphU64_ArcCos(v28.x * v38.x + v28.y * v38.y + v28.z * v38.z);
     rate = 0.0f;
-    if (!(arg0->time < D_800C4B8C_de)) {
+    if (!(homingParticle->time < D_800C4B8C_de)) {
         rate = D_800C4B94_de;
-        if ((angle < D_800C4B90_de && D_800C4B98_de < arg0->time) || FIELD(void *, arg0, 0x134) != 0) {
+        if ((angle < D_800C4B90_de && D_800C4B98_de < homingParticle->time) || FIELD(void *, homingParticle, 0x134) != 0) {
             rate = D_800C4B9C_de;
         }
     }
     GraphU64_InterpolateQuaternionWithLinearFallback(&q98, rate, &q78, &q88);
     MatrixFromQuaternion(&q98, mA8.m);
-    direction = &arg0->direction;
+    direction = &homingParticle->direction;
     v48.x = 0;
     v48.y = 0;
     v48.z = D_800C4BA0_de;
     GraphU64_TransformPoint(&mA8, &v48, direction);
-    velocity = &arg0->velocity;
+    velocity = &homingParticle->velocity;
     GraphU64_ScaleVector(velocity, direction, speed);
-    if (arg0->time >= D_800C4BA4_de) {
-        FIELD(s8, arg0, 0x1B9) = 0;
-        FIELD(s8, arg0, 0x1BA) = 0;
+    if (homingParticle->time >= D_800C4BA4_de) {
+        FIELD(s8, homingParticle, 0x1B9) = 0;
+        FIELD(s8, homingParticle, 0x1BA) = 0;
     }
-    accel = func_802B2350((s32)arg0->descriptor->motion->acceleration);
+    accel = func_802B2350((s32)homingParticle->descriptor->motion->acceleration);
     if (accel != 0.0f) {
-        vF8 = arg0->direction;
+        vF8 = homingParticle->direction;
         makeImpulse(&vF8, accel, &vE8);
         addImpulse(velocity, &vE8);
-        speed2 = Math_Sqrtf(arg0->velocity.x * arg0->velocity.x + arg0->velocity.y * arg0->velocity.y +
-                                  arg0->velocity.z * arg0->velocity.z);
-        limit = func_802B2350((s32)arg0->descriptor->motion->speed);
+        speed2 = Math_Sqrtf(homingParticle->velocity.x * homingParticle->velocity.x + homingParticle->velocity.y * homingParticle->velocity.y +
+                                  homingParticle->velocity.z * homingParticle->velocity.z);
+        limit = func_802B2350((s32)homingParticle->descriptor->motion->speed);
         if (accel > 0.0f) {
             if (!(limit < speed2)) goto after_clamp;
         } else {
@@ -259,7 +259,7 @@ create_sound:
         GraphU64_ScaleVector(velocity, &vF8, limit);
     after_clamp:;
     }
-    func_80279DD0_de(arg0, 1.0f);
+    Particle_UpdateSineMotion(homingParticle, 1.0f);
 }
 
 #include "COMMON/APPROACHLOCATION.H"
@@ -325,5 +325,5 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
         GraphU64_ScaleVector(vel, &heading, limit);
     skip:;
     }
-    func_80279DD0_de(particle, 1.0f);
+    Particle_UpdateSineMotion(particle, 1.0f);
 }

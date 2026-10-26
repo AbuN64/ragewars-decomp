@@ -142,7 +142,7 @@ extern f32 GraphU64_RandomBetween(f32 arg0, f32 arg1);
 
 extern void Region_DesaturateColor(u8 amount, u8 r, u8 g, u8 b, u8 *outR, u8 *outG, u8 *outB);
 
-extern void func_80279990_de(void *arg0);
+extern void Map_ResetFramePool(void *arg0);
 
 extern int Particle_HasSurfaceFlag(void *arg0);
 
@@ -194,7 +194,7 @@ extern f32 XMath_EvaluateArcSine(f32 x);
 
 extern s32 XPlus_ParseDecimalInteger(u8 *s);
 
-extern void func_802A1918_de(int *arg0, int *arg1);
+extern void N64Eng_GetScreenSize(int *arg0, int *arg1);
 
 extern void Tsmos_SetModeOneFlag(s32 arg0);
 

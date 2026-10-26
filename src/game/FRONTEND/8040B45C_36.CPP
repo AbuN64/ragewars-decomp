@@ -16,7 +16,7 @@ extern EntryRecAt18V1 *D_80153C10;
 extern FileState D_801539B0;
 extern void XStdio_CloseStream(s32 file);
 extern void *Cache_AllocateMemory(s32 size);
-extern void func_80413720_de(s32 id, s32 format, s16 width, s16 height, s32 stride, s32 rows, s32 a6, s32 size, void *pixels, s32 a9, s32 paletteBytes, void *palette, s32 colors);
+extern void Frontend_ConfigureOwnedImage(s32 id, s32 format, s16 width, s16 height, s32 stride, s32 rows, s32 a6, s32 size, void *pixels, s32 a9, s32 paletteBytes, void *palette, s32 colors);
 
 /* Tears down the UI resource set: releases eligible entries, closes active
    subsystems, frees each nested chunk allocation and the shared tables, then
@@ -36,10 +36,10 @@ extern void Frontend_ReleaseRetainedImageSlot(s32 i);
 
 extern void Frontend_ReleaseActiveChunkImages(void);
 
-extern void Frontend_ReleaseUnprotectedBuffers(s32), Frontend_UpdateImageReleaseTimers(s32), func_80411D18_de(void);
+extern void Frontend_ReleaseUnprotectedBuffers(s32), Frontend_UpdateImageReleaseTimers(s32), Frontend_ReleaseAllChunkImages(void);
 
 
-/* Expires cached UI resources against the current tick from func_802A1934_de unless the cache is
+/* Expires cached UI resources against the current tick from N64Eng_GetFrameCounter unless the cache is
    locked: releases through Frontend_ReleaseRetainedImageSlot the first flagged entry whose unretained resource has an
    id below the tick and stops; otherwise, for each live chunk, clears every flagged slot whose time
    has passed (freeing its data through Gfx_ReleaseImage) and stops as soon as a chunk still holds live
@@ -59,7 +59,7 @@ extern void Frontend_ReleaseUnprotectedBuffers(s32), Frontend_UpdateImageRelease
 
 
 
-extern s32 func_802A1934_de(void);
+extern s32 N64Eng_GetFrameCounter(void);
 
 
 /* Returns a texture's resource id, first loading its pixel and 16-bit palette data, detecting a transparent palette entry and creating the texture resource when it is not yet loaded, and in both cases updates the texture's usage record for the requested mode (1 stamps the next expiry time, 2 pins it, 3 counts a reference); the opened file handle is stored through the header symbol as in the paletted texture loader, and the resource id is held in two locals (the second passed to func_80419640_de), which reproduces the cartridge's three stack slots. */
@@ -79,7 +79,7 @@ extern s32 func_802A1934_de(void);
 
 
 
-extern void func_804133E4_de(s32 id);
+extern void Frontend_ClearOwnedImage(s32 id);
 
 extern void func_80419640_de(s32 texture, s32 id);
 
@@ -87,7 +87,7 @@ static inline void touch(s32 index, s32 mode) {
     switch (mode) {
         case 1:
             if (D_8014D988[index].id != -1) {
-                D_8014D988[index].id = func_802A1934_de() + 10;
+                D_8014D988[index].id = N64Eng_GetFrameCounter() + 10;
             }
             break;
         case 2:
@@ -109,7 +109,7 @@ static inline void touch(s32 index, s32 mode) {
 
 
 
-extern void func_80413480_de(s32 output, s32 id);
+extern void Frontend_CopyOwnedImage(s32 output, s32 id);
 
 void Frontend_CloseResourceArchive(void) {
     s32 i;
@@ -145,7 +145,7 @@ void Frontend_CloseResourceArchive(void) {
     Frontend_UpdateImageReleaseTimers(1);
     if (state->entries) Cache_FreeMemory(state->entries);
     i_chunks = 0;
-    func_80411D18_de();
+    Frontend_ReleaseAllChunkImages();
     offset_chunks = 0;
     if (state->chunkCount > 0) {
         do {
@@ -188,7 +188,7 @@ void Frontend_EvictExpiredImages(void) {
     struct SlotRecAtCV2 *slots;
     struct ResourceRecAt6 *resource;
 
-    now = func_802A1934_de();
+    now = N64Eng_GetFrameCounter();
     if (D_801539B0.locked != 0) {
         return;
     }
@@ -247,7 +247,7 @@ s32 Frontend_GetImageTexture(s32 index, s32 mode) {
     paletteBytes = 0;
     id = D_80153C10[index].unk0;
     stride = 0;
-    func_802A18CC_de();
+    N64Eng_GetTimeSeconds();
     ((FileState *)((char *)&D_8014D724 - 4))->unk0 = XStdio_OpenStream(&D_8014D724, &D_800DD0B0);
     entry = &D_8014D724.unk25C[index];
     transparent = 0;
@@ -258,7 +258,7 @@ s32 Frontend_GetImageTexture(s32 index, s32 mode) {
     } else if (entry->unk8 == 16) {
         stride = (entry->unkA + 3) & -4;
     }
-    func_804133E4_de(id);
+    Frontend_ClearOwnedImage(id);
     texture = id;
     size = stride * entry->unkC * entry->unk8 / 8;
     pixels = Cache_AllocateMemory(size);
@@ -301,18 +301,18 @@ s32 Frontend_GetImageTexture(s32 index, s32 mode) {
     } else if (entry->unk8 == 32) {
         format = 12;
     }
-    func_80413720_de(id, format, entry->unkA, entry->unkC, stride, entry->unkC, 1, size, pixels, 1, paletteBytes,
+    Frontend_ConfigureOwnedImage(id, format, entry->unkA, entry->unkC, stride, entry->unkC, 1, size, pixels, 1, paletteBytes,
                   palette, entry->unkE);
     func_80419640_de(texture, id);
     D_80153C10[index].unk4 |= 1;
     XStdio_CloseStream(D_801539B0.unk0);
     D_801539B0.unk0 = 0;
-    func_802A18CC_de();
+    N64Eng_GetTimeSeconds();
     touch(index, mode);
     return D_80153C10[index].unk0;
 }
 
-void func_80410B14_de(s32 index, s32 output) {
+void Frontend_LoadTextureIntoOutput(s32 index, s32 output) {
     s32 *palette;
     s32 *pixels;
     s32 paletteBytes;
@@ -324,7 +324,7 @@ void func_80410B14_de(s32 index, s32 output) {
     EntryRecAt18V1 *entry;
 
     if (D_80153C10[index].unk4 & 1) {
-        func_80413480_de(output, D_80153C10[index].unk0);
+        Frontend_CopyOwnedImage(output, D_80153C10[index].unk0);
         return;
     }
     palette = 0;
@@ -381,7 +381,7 @@ void func_80410B14_de(s32 index, s32 output) {
     } else if (entry->unk8 == 32) {
         format = 12;
     }
-    func_80413720_de(output, format, entry->unkA, entry->unkC, stride, entry->unkC, 1, size, pixels, 1, paletteBytes,
+    Frontend_ConfigureOwnedImage(output, format, entry->unkA, entry->unkC, stride, entry->unkC, 1, size, pixels, 1, paletteBytes,
                   palette, entry->unkE);
     XStdio_CloseStream(D_801539B0.unk0);
     D_801539B0.unk0 = 0;

@@ -3,10 +3,10 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 struct CellRecAt1A;
-struct Menu_func_804241BC_de;
+struct MenuFrontendUpdatePlayModeMenu;
 struct State_func_80437444_de;
 struct State_func_80437444_de {
-    struct Menu_func_804241BC_de *menu;
+    struct MenuFrontendUpdatePlayModeMenu *menu;
     char pad4[0x8 - 0x4];
     struct CellRecAt1A *list;
     s32 delay;

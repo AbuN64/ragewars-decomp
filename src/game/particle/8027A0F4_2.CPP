@@ -10,7 +10,7 @@
 #include "FX_2/80271B18.H"
 #include "particle/80271B18_3.H"
 
-/* Reports an actor to the active collision state D_801041F0 when that state is of kind 1: an actor whose owner is a kind 1 object flagged 0x300000 is reported with bit 8, 4 or 0x10 for each of three type groups its type belongs to, and otherwise an actor whose descriptor is of kind 1 or 4 is reported with bit 0x80, 0x40 or 0x100 for the same groups, each through func_80278D78_de. */
+/* Reports an actor to the active collision state D_801041F0 when that state is of kind 1: an actor whose owner is a kind 1 object flagged 0x300000 is reported with bit 8, 4 or 0x10 for each of three type groups its type belongs to, and otherwise an actor whose descriptor is of kind 1 or 4 is reported with bit 0x80, 0x40 or 0x100 for the same groups, each through Link_DispatchActorLinks. */
 
 
 
@@ -20,7 +20,7 @@
 
 extern func_8024E8F0_S1 *D_801041F0;
 
-extern void func_80278D78_de(func_8024E8F0_S1 *state, s32 bits, Actor_func_8027B428_de *actor);
+extern void Link_DispatchActorLinks(func_8024E8F0_S1 *state, s32 bits, Actor_func_8027B428_de *actor);
 
 static inline s32 is_group_a(Actor_func_8027B428_de *actor) {
     switch (actor->type) {
@@ -86,10 +86,10 @@ void func_8027ABF4_de(AccelSteeringObj *particle) {
         GraphU64_ScaleVector(velocity, &direction, limit);
 done:;
     }
-    func_80279DD0_de(particle, 1.0f);
+    Particle_UpdateSineMotion(particle, 1.0f);
 }
 
-void func_8027AD4C_de(Shared_Particle *arg0)
+void Particle_UpdateTypedMotion(Shared_Particle *arg0)
 {
   CVector3 sp10;
   CVector3 sp20;
@@ -254,7 +254,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
 #endif
   return;
   block_24:
-  func_8027A084_de(arg0);
+  Particle_SteerSoundTrackingParticle(arg0);
 
   return;
   block_540:
@@ -303,7 +303,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
 
     ;
   }
-  func_80279DD0_de(arg0, 1.0f);
+  Particle_UpdateSineMotion(arg0, 1.0f);
   return;
   block_common:
   temp_s0_4 = arg0->target;
@@ -386,7 +386,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
   }
   if (!(arg0->flags & 0x30000))
   {
-    func_80279DD0_de(arg0, 1.0f);
+    Particle_UpdateSineMotion(arg0, 1.0f);
   }
 }
 
@@ -399,23 +399,23 @@ void func_8027B428_de(Actor_func_8027B428_de *actor) {
     owner = actor->owner;
     if (owner != 0 && owner->unk0 == 1 && (owner->unk100 & 0x300000)) {
         if (is_group_a(actor)) {
-            func_80278D78_de(D_801041F0, 8, actor);
+            Link_DispatchActorLinks(D_801041F0, 8, actor);
         }
         if (is_group_b(actor)) {
-            func_80278D78_de(D_801041F0, 4, actor);
+            Link_DispatchActorLinks(D_801041F0, 4, actor);
         }
         if (is_group_c(actor)) {
-            func_80278D78_de(D_801041F0, 0x10, actor);
+            Link_DispatchActorLinks(D_801041F0, 0x10, actor);
         }
     } else if (actor->descriptor->field_0 == 1 || actor->descriptor->field_0 == 4) {
         if (is_group_a(actor)) {
-            func_80278D78_de(D_801041F0, 0x80, actor);
+            Link_DispatchActorLinks(D_801041F0, 0x80, actor);
         }
         if (is_group_b(actor)) {
-            func_80278D78_de(D_801041F0, 0x40, actor);
+            Link_DispatchActorLinks(D_801041F0, 0x40, actor);
         }
         if (is_group_c(actor)) {
-            func_80278D78_de(D_801041F0, 0x100, actor);
+            Link_DispatchActorLinks(D_801041F0, 0x100, actor);
         }
     }
 }

@@ -2,8 +2,8 @@
 #define ACHIEVE_80424E30_3_H
 #include "COMMON/STATERECAT91.H"
 #include "TYPES.H"
-extern void func_804259E0_de(s32 a0);
-extern s32 func_80425DFC_de(s32);
-extern void func_80425EE4_de(s32, s32 *);
-extern Preset *func_80425C70_de(s32 key, s32 row, s32 column);
+extern void Achieve_UpdateUnlockTiers(s32 a0);
+extern s32 Achieve_AwardMilestoneCompletion(s32);
+extern void Achieve_AwardAllMilestoneAchievement(s32, s32 *);
+extern Preset *Achieve_CopyPreset(s32 key, s32 row, s32 column);
 #endif

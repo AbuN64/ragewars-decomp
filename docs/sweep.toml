@@ -60,7 +60,7 @@ returns = 'C(?:Vector3|Quatern|Matrix\w*)|Triple|Func\w+Result|MenuElementHandle
 [[rule]]
 id = "narrow-alias-of-word-array"
 kind = "word-alias"
-why = "A halfword extern whose address lies inside a data array defined as 32-bit words: the original reads the low half of a big-endian word at +2, the native word holds it at +0 (func_80426918_de read D_800E0646_de as 0 and built a null menu widget; first seen in monkey-wl1-start-pak-prompt). Read the word and cast, or define the data as the narrow type."
+why = "A halfword extern whose address lies inside a data array defined as 32-bit words: the original reads the low half of a big-endian word at +2, the native word holds it at +0 (Frontend_AnimateResultsOptionsScreen read D_800E0646_de as 0 and built a null menu widget; first seen in monkey-wl1-start-pak-prompt). Read the word and cast, or define the data as the narrow type."
 trees = ["rw"]
 paths = ["src/**/*.CPP", "src/**/*.c", "src/**/*.C", "include/**/*.H", "include/**/*.h"]
 declare_paths = ["src/game/DATA/**/*.CPP", "src/game/DATA/**/*.c"]

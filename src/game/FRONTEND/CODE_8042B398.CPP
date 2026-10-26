@@ -370,7 +370,7 @@ s32 ScenarioSetup_RefreshSetupScreen(void) {
 
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/UNUSED.H"
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E5284, an actor kind at D_800E5288 and a handler at D_800E528C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E5284, an actor kind at D_800E5288 and a handler at D_800E528C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler8042BCB0)(void *, s32, s32, s32, s32);
 
@@ -414,10 +414,10 @@ extern func_8042CE54_S1 *D_800E53C0;
 extern s8 D_80102B0D[], D_800FEB0E[];
 extern void func_8043C210_de(s32 *, s32, s32, s32, s32);
 extern void func_8043C278_de(s32 *);
-extern void func_80424B90_de(void);
+extern void Frontend_AccumulatePlayerStatistics(void);
 extern void ScenarioSetup_SortResultsPlayers(void);
 extern void Achieve_UpdateMatchCounters(void *, s32);
-extern void func_80425D14_de(s32);
+extern void Achieve_MarkLevelPlayed(s32);
 extern void ScenarioSetup_FillResultRows(void);
 extern void func_8042CE74_de(void);
 
@@ -447,7 +447,7 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
     Frontend_FindWidgetByResourceId(root, 0x234 + RESULTS_MENU_SHIFT)->alpha = 110;
     Frontend_FindWidgetByResourceId(root, 0x239 + RESULTS_MENU_SHIFT)->alpha = 20;
     Frontend_FindWidgetByResourceId(root, 0x236 + RESULTS_MENU_SHIFT)->alpha = 20;
-    func_80424B90_de();
+    Frontend_AccumulatePlayerStatistics();
     screen = D_800E53C0;
     for (i = 0; i < 8; i++) {
         screen->icons[i][0] = -1;
@@ -468,7 +468,7 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
             func_8042D1C8_de();
             config = game->playerSettings;
             for (i = 0; i < 4; i++) {
-                if (config[i].enabled == 1 && config[i].locked == 0) func_80425D14_de(i);
+                if (config[i].enabled == 1 && config[i].locked == 0) Achieve_MarkLevelPlayed(i);
             }
         } else D_800E53C0->mode = 1;
         break;
@@ -548,7 +548,7 @@ extern ResourceBank D_800E12D2[];
 extern s32 Frontend_FindKeyIndex(s32);
 extern char *XPlus_UppercaseString(char *);
 extern char *XPlus_CopyString(char *,char *);
-extern char *func_80424DE8_de(s32);
+extern char *Achieve_UpdateRankText(s32);
 extern s32 XStdio_FormatBuffer(void *,const char *,...);
 extern void func_8042D304_de(s32,s32,u16);
 /* Fill the four visible player rows of the match results screen. */
@@ -588,7 +588,7 @@ void ScenarioSetup_FillResultRows(void) {
         widget = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[6]);
         widget->alpha = 0x73;
         Frontend_SetWidgetFlag08(widget, 1);
-        if (record->out == 0) widget->text = func_80424DE8_de(player);
+        if (record->out == 0) widget->text = Achieve_UpdateRankText(player);
         else widget->text = resultsRankText(record->rank);
 
         widget = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[8]);

@@ -71,8 +71,8 @@ struct Screen_func_80426788_de {
 };
 
 
-struct Screen_func_80427D70_de;
-struct Screen_func_80427D70_de {
+struct ScreenFrontendMarkLinkedTrialsAvailable;
+struct ScreenFrontendMarkLinkedTrialsAvailable {
     char pad0[0xA5C];
     s32 player;
     char padA60[0xA74 - 0xA60];
@@ -115,20 +115,20 @@ struct Pair {
 
 
 
-struct Entry_func_804279B8_de;
-struct Entry_func_804279B8_de {
+struct EntryFrontendRefreshTrialCharacterPreview;
+struct EntryFrontendRefreshTrialCharacterPreview {
     char pad[0x80];
     s8 kind;
     char tail[0x15];
 };
 
-struct Entry_func_804279B8_de;
+struct EntryFrontendRefreshTrialCharacterPreview;
 struct Data801462C8;
 struct Data801462C8 {
     char pad0[0xD];
     u8 mode;
     char padE[0xD0 - 0xE];
-    struct Entry_func_804279B8_de status[8];
+    struct EntryFrontendRefreshTrialCharacterPreview status[8];
 };
 
 
@@ -136,8 +136,8 @@ struct Resource_func_80419E54_de;
 
 
 struct MenuMarker;
-struct Screen_func_80426918_de;
-struct Screen_func_80426918_de {
+struct ScreenFrontendAnimateResultsOptionsScreen;
+struct ScreenFrontendAnimateResultsOptionsScreen {
     char pad0[0x978];
     struct MenuMarker *left;
     s32 leftSpeed; /* slide step, stored as a word and read back as its low half */
@@ -169,8 +169,8 @@ struct EntryRecAt8V3 {
 
 struct Shape_typemap_21;
 
-struct Table_func_80427D70_de;
-struct Table_func_80427D70_de {
+struct TableFrontendMarkLinkedTrialsAvailable;
+struct TableFrontendMarkLinkedTrialsAvailable {
     u8 pad0;
     u8 first;
     u8 items[3];
@@ -181,8 +181,8 @@ struct ResultsOptionsScreen;
 typedef struct ResultsOptionsScreen ResultsOptionsScreen;
 
 
-struct Record_func_804284C0_de;
-struct Record_func_804284C0_de {
+struct RecordFrontendFillTrialPresetWeaponRows;
+struct RecordFrontendFillTrialPresetWeaponRows {
     char pad0[6];
     u16 items[8];
 };
@@ -190,6 +190,6 @@ struct Record_func_804284C0_de {
 struct EntryRecAt11C;
 typedef struct EntryRecAt11C EntryRecAt11C;
 
-struct Record_func_804284C0_de;
-typedef struct Record_func_804284C0_de Record_func_804284C0_de;
+struct RecordFrontendFillTrialPresetWeaponRows;
+typedef struct RecordFrontendFillTrialPresetWeaponRows RecordFrontendFillTrialPresetWeaponRows;
 #endif

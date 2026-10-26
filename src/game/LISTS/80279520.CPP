@@ -14,7 +14,7 @@ void Lists_ClearHeader(ListHeader *list) {
     list->count = 0;
 }
 /** Push a node onto the front of a doubly-linked list. */
-void func_802794C0_de(void *listHeader, void *arg1) {
+void Lists_PrependNode(void *listHeader, void *arg1) {
     if ((((struct ListHeader *) ((s8 *) listHeader))->count) == 0) {
         (((struct ListHeader *) ((s8 *) listHeader))->head) = arg1;
         (((struct ListHeader *) ((s8 *) listHeader))->tail) = arg1;
@@ -29,38 +29,38 @@ void func_802794C0_de(void *listHeader, void *arg1) {
     (((struct ListHeader *) ((s8 *) listHeader))->count) = (((struct ListHeader *) ((s8 *) listHeader))->count) + 1;
 }
 /** Push a node onto the tail of a doubly-linked list; returns new count. */
-s32 Lists_Append(void *listHeader, void *arg1) {
+s32 Lists_Append(void *listHeader, void *newNode) {
     s32 count;
     if ((((struct ListHeader *) ((s8 *) listHeader))->count) == 0) {
-        (((struct ListHeader *) ((s8 *) listHeader))->head) = arg1;
-        (((struct ListHeader *) ((s8 *) listHeader))->tail) = arg1;
-        (((struct Shape_typemap_3 *) ((s8 *) arg1))->field_0) = 0;
-        (((struct func_80203E78_S1 *) ((s8 *) arg1))->unk4) = 0;
+        (((struct ListHeader *) ((s8 *) listHeader))->head) = newNode;
+        (((struct ListHeader *) ((s8 *) listHeader))->tail) = newNode;
+        (((struct Shape_typemap_3 *) ((s8 *) newNode))->field_0) = 0;
+        (((struct func_80203E78_S1 *) ((s8 *) newNode))->unk4) = 0;
     } else {
-        (((struct func_80284AF4_G2 *) ((s8 *) arg1))->unk0) = (((struct ListHeader *) ((s8 *) listHeader))->tail);
-        (((struct func_80203E78_S1 *) ((s8 *) arg1))->unk4) = 0;
-        (((struct Field_void_4 *) ((s8 *) ((struct ListHeader *) ((s8 *) listHeader))->tail))->value) = arg1;
-        (((struct ListHeader *) ((s8 *) listHeader))->tail) = arg1;
+        (((struct func_80284AF4_G2 *) ((s8 *) newNode))->unk0) = (((struct ListHeader *) ((s8 *) listHeader))->tail);
+        (((struct func_80203E78_S1 *) ((s8 *) newNode))->unk4) = 0;
+        (((struct Field_void_4 *) ((s8 *) ((struct ListHeader *) ((s8 *) listHeader))->tail))->value) = newNode;
+        (((struct ListHeader *) ((s8 *) listHeader))->tail) = newNode;
     }
     count = (((struct ListHeader *) ((s8 *) listHeader))->count) + 1;
     (((struct ListHeader *) ((s8 *) listHeader))->count) = count;
     return count;
 }
-int Lists_Remove(List802795C0 *arg0, ListLink *listLink) {
+int Lists_Remove(List802795C0 *listHeader, ListLink *listLink) {
     if (listLink->prev != 0) {
         listLink->prev->next = listLink->next;
     }
     if (listLink->next != 0) {
         listLink->next->prev = listLink->prev;
     }
-    if (arg0->head == listLink) {
-        arg0->head = listLink->prev;
+    if (listHeader->head == listLink) {
+        listHeader->head = listLink->prev;
     }
-    if (arg0->tail == listLink) {
-        arg0->tail = listLink->next;
+    if (listHeader->tail == listLink) {
+        listHeader->tail = listLink->next;
     }
-    arg0->count -= 1;
-    return arg0->count;
+    listHeader->count -= 1;
+    return listHeader->count;
 }
 /* Reset a pool list header. */
 static inline void clear_list(ListHeader *list) {
@@ -96,7 +96,7 @@ void Lists_InitFromPool(ListHeader *lists, void *pool, s32 stride, s32 count) {
         pool = (char *)pool + stride;
     }
 }
-ListLink *func_8027963C_de(Lists18 *arg0) {
+ListLink *Lists_MoveHeadToInactiveList(Lists18 *arg0) {
     ListLink *node;
     ListLink *tail;
     List802795C0 *inactive;
@@ -132,7 +132,7 @@ ListLink *func_8027963C_de(Lists18 *arg0) {
     }
     return node;
 }
-void func_802796F4_de(Lists18 *arg0, ListLink *arg1) {
+void Lists_MoveNodeToActiveList(Lists18 *arg0, ListLink *arg1) {
     List802795C0 *inactive;
     ListLink *tail;
     inactive = &arg0->inactive;
@@ -163,7 +163,7 @@ void func_802796F4_de(Lists18 *arg0, ListLink *arg1) {
     }
     arg0->active.count += 1;
 }
-s16 func_80279798_de(s16 *arg0) {
+s16 Lists_ChooseWeightedEntry(s16 *arg0) {
     s16 *entry;
     s16 *start;
     s32 random;
@@ -192,10 +192,10 @@ s16 func_80279798_de(s16 *arg0) {
     return *entry;
 }
 /** Clear the leading halfword of the supplied object. */
-void func_8027985C_de(WeightedTable *object) {
+void Lists_ClearWeightedTable(WeightedTable *object) {
     object->count = 0;
 }
-s32 func_80279864_de(WeightedTable *arg0, s16 arg1, s16 arg2)
+s32 Lists_AppendWeightedEntry(WeightedTable *arg0, s16 arg1, s16 arg2)
 {
   s16 temp_v1;
   temp_v1 = arg0->count;
@@ -208,7 +208,7 @@ s32 func_80279864_de(WeightedTable *arg0, s16 arg1, s16 arg2)
   arg0->count = ((u16) arg0->count) + 1;
   return 1;
 }
-s16 func_802798A8_de(WeightedTable *weightedTable) {
+s16 Lists_ChooseWeightedTableEntry(WeightedTable *weightedTable) {
     s16 *entry;
     s16 *start;
     s32 random;

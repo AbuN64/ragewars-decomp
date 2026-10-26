@@ -30,7 +30,7 @@ void Tsmos_UpdateFrontend(void) {
         func_802995D4_de(mode, 0xE08, 0, 0, 0);
         func_80298FE8_de();
         Frontend_EvictExpiredImages();
-        func_802A1944_de();
+        N64Eng_AdvanceFrameCounter();
         mode = GetMenuScreenOwner();
         active = 1;
         value = 0;

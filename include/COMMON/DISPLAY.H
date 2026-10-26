@@ -9,7 +9,7 @@
 typedef struct Frame Frame;
 struct Frame {
     char pad0[0x14];
-    CVector3 direction; /* 0x014: func_80290A14_de */
+    CVector3 direction; /* 0x014: SetN64_SetFrameDirection */
     OSScTask_s task; /* 0x020 */
     OSScTask_s secondTask; /* 0x088 */
     OSScMsg done; /* 0x0F0: type 2 */

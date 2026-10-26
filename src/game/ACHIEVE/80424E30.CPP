@@ -17,7 +17,7 @@ extern s32 D_800FF140_de[];
 typedef struct { s8 pad[0x24]; s8 a; s8 b; } Settings;
 extern Settings D_801462C8;
 /* Increment the capped player match count and eligible level count. */
-void Achieve_UpdateMatchCounters(s32 arg0, s32 arg1) {
+void Achieve_UpdateMatchCounters(s32 playerIndex, s32 counterIndex) {
     s32 count;
     s32 i;
     s32 eligible;
@@ -25,14 +25,14 @@ void Achieve_UpdateMatchCounters(s32 arg0, s32 arg1) {
     s32 result;
     AchieveRecord *rec;
     Settings *cfg;
-    if (D_80142369[arg0][0] == 1) {
+    if (D_80142369[playerIndex][0] == 1) {
         return;
     }
-    value = D_800FEB70[arg0][0] + 1;
+    value = D_800FEB70[playerIndex][0] + 1;
     if (value > 99999) {
-        D_800FEB70[arg0][0] = 99999;
+        D_800FEB70[playerIndex][0] = 99999;
     } else {
-        D_800FEB70[arg0][0] = value;
+        D_800FEB70[playerIndex][0] = value;
     }
     if (D_8014222C <= 0 && D_8014222D <= 0) {
         result = 0;
@@ -57,11 +57,11 @@ void Achieve_UpdateMatchCounters(s32 arg0, s32 arg1) {
     if (result == 1) {
         cfg = &D_801462C8;
         if (cfg->a >= 10 || cfg->b >= 10) {
-            value = D_800FEB26[arg1 + arg0 * 400] + 1;
+            value = D_800FEB26[counterIndex + playerIndex * 400] + 1;
             if (value >= 6) {
-                D_800FEB26[arg1 + arg0 * 400] = 5;
+                D_800FEB26[counterIndex + playerIndex * 400] = 5;
             } else {
-                D_800FEB26[arg1 + arg0 * 400] = value;
+                D_800FEB26[counterIndex + playerIndex * 400] = value;
             }
         }
     }
@@ -97,7 +97,7 @@ extern char *D_800E1374_eu[];
 extern char *D_800E1384[];
 #endif
 
-char *func_80424DE8_de(s32 index) {
+char *Achieve_UpdateRankText(s32 index) {
     s32 count;
     s32 i;
     char *text;

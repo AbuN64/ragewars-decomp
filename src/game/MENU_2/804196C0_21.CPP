@@ -21,7 +21,7 @@
 
 
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3360, an actor kind at D_800E3364 and a handler at D_800E3368: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3360, an actor kind at D_800E3364 and a handler at D_800E3368: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
@@ -31,7 +31,7 @@
 /* Calls Cache_FreeMemory with the arguments it was given and returns zero. */
 
 /* Allocates and zeroes a 0x58-byte record, copies the header and five-word block of the record Frontend_FindWidgetByResourceId finds for the low half of the first argument, links the record Frontend_FindWidgetByResourceId finds for the second into it with its halfword at 0x18, stores the third argument, and registers it through func_8040EEA4_de and func_8040EF84_de.
-   Adapted from func_802A1990_de with the record size, tag 0xB63, the tail fields and the dropped func_802A1B24_de call changed. */
+   Adapted from N64Eng_CreateNumericWidget with the record size, tag 0xB63, the tail fields and the dropped N64Eng_SetNumericWidgetValue call changed. */
 
 
 
@@ -51,22 +51,22 @@ extern MenuSliderWidget *Cache_AllocateMemory(s32);
 
 extern void Frontend_ReplaceNodeRefs(s32 arg0, MenuSliderWidget *arg1, MenuSliderWidget *arg2);
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3390, an actor kind at D_800E3394 and a handler at D_800E3398: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3390, an actor kind at D_800E3394 and a handler at D_800E3398: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
 
 
 
-/* Draws the child at 0x8 of window arg0 with the arguments passed by value once Frontend_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values func_802A1898_de reports, narrows them by the resolved basis through func_8040F488_de and installs them through func_802A1870_de around the draw, restoring the saved values after it. Adapted from func_802A1BE0_de. */
+/* Draws the child at 0x8 of window arg0 with the arguments passed by value once Frontend_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through func_8040F488_de and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from N64Eng_DrawNumericWidgetChildren. */
 
 
 
 
 
-extern s32 Frontend_ComputeWidgetBounds(Quad_func_802A1BE0_de *, Quad_func_802A1BE0_de *, void *, Args *);
+extern s32 Frontend_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, Args *);
 
-extern void func_802A1898_de(u32 *, u32 *, u32 *, u32 *);
+extern void N64Eng_GetClipBounds(u32 *, u32 *, u32 *, u32 *);
 
 extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 
@@ -228,26 +228,26 @@ s32 func_8041A724_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 void SmpSlider_DrawSliderWidget(void *widget, Args args) {
-    Quad_func_802A1BE0_de first;
-    Quad_func_802A1BE0_de basis;
-    Quad_func_802A1BE0_de value;
-    Quad_func_802A1BE0_de transformed;
+    QuadN64EngDrawNumericWidgetChildren first;
+    QuadN64EngDrawNumericWidgetChildren basis;
+    QuadN64EngDrawNumericWidgetChildren value;
+    QuadN64EngDrawNumericWidgetChildren transformed;
     s32 changed;
     UiWidget *window = widget;
 
     changed = 0;
     if (Frontend_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
         if ((window->flags & 0x200) != 0) {
-            func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
+            N64Eng_GetClipBounds(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
             Frontend_ClampRectToClip(&transformed, &basis);
-            func_802A1870_de(transformed.x, transformed.z,
+            N64Eng_SetClipBounds(transformed.x, transformed.z,
                           transformed.y, transformed.w);
             changed = 1;
         }
         Frontend_DrawVisibleSiblings(window->children, args);
         if (changed != 0) {
-            func_802A1870_de(value.x, value.z, value.y, value.w);
+            N64Eng_SetClipBounds(value.x, value.z, value.y, value.w);
         }
     }
 }

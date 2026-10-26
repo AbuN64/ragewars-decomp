@@ -9,7 +9,7 @@
 #include "ACHIEVE/80424E30_3.H"
 
 extern s32 Defs_TestBit(void *, s32);
-void func_80427F10_de(void) {
+void Frontend_SelectSuggestedTrial(void) {
     CGameStatus *state;
     Shared_Game *config;
     Preset *preset;
@@ -23,19 +23,19 @@ void func_80427F10_de(void) {
             { void *whole = (u8 *)state - 0x5D8; config = whole; }
             switch (config->controllerMode) {
             case 1:
-                preset = func_80425C70_de(D_800E4690->selection, 0, config->slots[D_800E4690->player].kind);
+                preset = Achieve_CopyPreset(D_800E4690->selection, 0, config->slots[D_800E4690->player].kind);
                 break;
             case 2:
-                preset = func_80425C70_de(D_800E4690->selection, 1, 0);
+                preset = Achieve_CopyPreset(D_800E4690->selection, 1, 0);
                 break;
             case 3:
-                preset = func_80425C70_de(D_800E4690->selection, 3, 0);
+                preset = Achieve_CopyPreset(D_800E4690->selection, 3, 0);
                 break;
             case 4:
-                preset = func_80425C70_de(D_800E4690->selection, 2, 0);
+                preset = Achieve_CopyPreset(D_800E4690->selection, 2, 0);
                 break;
             default:
-                preset = func_80425C70_de(D_800E4690->selection, 0, D_801462C8.playerSettings[D_800E4690->player].character);
+                preset = Achieve_CopyPreset(D_800E4690->selection, 0, D_801462C8.playerSettings[D_800E4690->player].character);
                 break;
             }
             choice = 0;

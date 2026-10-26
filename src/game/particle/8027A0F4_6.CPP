@@ -40,7 +40,7 @@ void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
 Shared_ParticleInstance *Sky_FindScreenMessage(GameplayCamera *);
 s32 Unicol_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, void *);
-void *func_802799C0_de(void *, s32);
+void *Map_ReserveEntries(void *, s32);
 void Geometry_SetCombineMode(s32);
 void Geometry_SetModePreset(s32);
 void Cache_UnlockResource(s32, void *);
@@ -236,7 +236,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
     if (D_80140FF8 == 1) {
         gSPMatrix(g_displayListCursor++, &particle->mtx[D_800D297C], G_MTX_LOAD);
     } else {
-        mtx = func_802799C0_de(&D_8011FFB0, 1);
+        mtx = Map_ReserveEntries(&D_8011FFB0, 1);
         if (mtx == 0) {
             Cache_UnlockResource(0, model);
             return;

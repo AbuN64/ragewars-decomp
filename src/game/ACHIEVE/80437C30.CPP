@@ -29,11 +29,11 @@ extern char *D_800D3578, *D_800D357C, *D_800D3580, *D_800D3588, *D_800D358C, *D_
 extern void func_8043C210_de(void *, s32, s32, s32, s32);
 extern void func_8043C278_de(void *);
 extern void func_80438A88_de();
-extern void func_80425D14_de(s32);
+extern void Achieve_MarkLevelPlayed(s32);
 extern s32 Defs_TestBit(u8 *, s32);
 extern void Defs_SetBitValue(u8 *, s32, s32);
-extern s32 func_80425014_de(s32);
-extern s32 func_80425674_de(s32);
+extern s32 Achieve_ApplyLevelCompletionReward(s32);
+extern s32 Achieve_AwardCharacterCompletionUnlock(s32);
 extern s32 Frontend_FindKeyIndex(s32);
 extern void XStdio_FormatBuffer(char *, char *, ...);
 extern void XPlus_CopyString(char *, char *);
@@ -84,7 +84,7 @@ s32 func_80437C30_us_rev1(MenuWidget *menu) {
     switch (game->controllerMode) {
     case 1:
         if (game->humanWon == 1) {
-            func_80425D14_de(D_800E5830->player);
+            Achieve_MarkLevelPlayed(D_800E5830->player);
             D_800E5830->rows[0].unk0 = -1;
             if (D_800E4680->recorded != 0) {
                 slot = D_80102B00[D_800E5830->player].slot;
@@ -96,7 +96,7 @@ s32 func_80437C30_us_rev1(MenuWidget *menu) {
                     goto done;
                 }
             }
-            D_800E5830->rows[0].unk0 = func_80425014_de(D_800E5830->player);
+            D_800E5830->rows[0].unk0 = Achieve_ApplyLevelCompletionReward(D_800E5830->player);
             D_800E5830->rows[0].unk10 = Achieve_GetResultText(D_800E5830->rows[0].unk0);
 done:
             D_800E5830->badge = -1;
@@ -120,7 +120,7 @@ done:
             if (achievement != -1 && Defs_TestBit(D_80102B00[D_800E5830->player].achievementFlags, achievement) == 0) {
                 Defs_SetBitValue(D_80102B00[D_800E5830->player].achievementFlags, achievement, 1);
                 D_800E5830->badge = achievement;
-                func_804259E0_de(D_800E5830->player);
+                Achieve_UpdateUnlockTiers(D_800E5830->player);
             }
             if (D_80102B00[D_800E5830->player].count >= 18) {
                 Defs_SetBitValue(&D_80102B00[D_800E5830->player].groupFlags, 1, 1);
@@ -131,7 +131,7 @@ done:
             if (D_8015402C >= 0x23) {
                 Defs_SetBitValue(D_80102B00[D_800E5830->player].kindFlags, g_playerSettings[D_800E5830->player].kind, 1);
                 XPlus_FillMemory(D_80102B00[D_800E5830->player].levelFlags[0], 0, 5);
-                character = func_80425674_de(D_800E5830->player);
+                character = Achieve_AwardCharacterCompletionUnlock(D_800E5830->player);
                 if (character >= 0) {
                     XStdio_FormatBuffer(D_800E5830->resultText, D_800D3578, *D_800DFA6C[Frontend_FindKeyIndex(character)].name);
                     item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
@@ -151,9 +151,9 @@ done:
     case 3:
         counters = &game->counters;
         if (counters->humanWon == 1) {
-            func_80425D14_de(D_800E5830->player);
+            Achieve_MarkLevelPlayed(D_800E5830->player);
             level = &D_8015402C;
-            preset = func_80425C70_de(*level, 3, 0);
+            preset = Achieve_CopyPreset(*level, 3, 0);
             time = counters->timeLimit * D_800E1F40;
             if (D_80102B00[D_800E5830->player].times[*level] == 0) {
                 D_80102B00[D_800E5830->player].times[*level] = preset->time - time;
@@ -176,7 +176,7 @@ done:
         break;
     case 4:
         if (game->humanWon == 1) {
-            func_80425D14_de(D_800E5830->player);
+            Achieve_MarkLevelPlayed(D_800E5830->player);
             if (D_8015402C == 0x23) {
                 item = Frontend_FindWidgetByResourceId(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
                 item->alpha = 0xAF;
@@ -276,7 +276,7 @@ void Achieve_UpdatePlayerPreviewStats(void) {
     item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x277 + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0x73;
-    item->text = func_80424DE8_de(player);
+    item->text = Achieve_UpdateRankText(player);
     item = Frontend_FindWidgetByResourceId(D_800E5830->window, (0x278 + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;

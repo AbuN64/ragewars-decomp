@@ -11,15 +11,15 @@ extern s32 alMainBusParam(void *arg0, s32 arg1, s32 arg2);
 
 
 
-s32 func_802B64C0_de(ALSynth *arg0, s16 arg1, s32 arg2, s32 arg3) {
-    s32 scaled = arg1 * 0x4C;
-    s32 temp_a2;
+s32 func_802B64C0_de(ALSynth *synth, s16 busNumber, s32 config, s32 heap) {
+    s32 scaled = busNumber * 0x4C;
+    s32 auxiliaryBus;
 
-    func_802B3F10_de((s32)arg0->auxBus + scaled + 0x20, arg2, arg3);
-    temp_a2 = (s32)arg0->auxBus + scaled;
-    alFxParam((int *)(temp_a2 + 0x20), 1, temp_a2);
-    alMainBusParam(arg0->mainBus, 2, (s32)arg0->auxBus + scaled + 0x20);
-    return (s32)arg0->auxBus + scaled + 0x20;
+    func_802B3F10_de((s32)synth->auxBus + scaled + 0x20, config, heap);
+    auxiliaryBus = (s32)synth->auxBus + scaled;
+    alFxParam((int *)(auxiliaryBus + 0x20), 1, auxiliaryBus);
+    alMainBusParam(synth->mainBus, 2, (s32)synth->auxBus + scaled + 0x20);
+    return (s32)synth->auxBus + scaled + 0x20;
 }
 
 #if defined(VERSION_US)

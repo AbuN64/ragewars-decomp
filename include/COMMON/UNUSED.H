@@ -1126,7 +1126,7 @@ extern char D_800DE758_de[];
 
 extern FieldRow D_800E58AC[];
 
-extern Quad_func_802A1BE0_de D_002BBC70[];
+extern QuadN64EngDrawNumericWidgetChildren D_002BBC70[];
 
 extern s32 D_80149B94;
 
@@ -1793,8 +1793,8 @@ extern char *D_800E1ED4[];
 
 extern s32 D_8014D3E8;
 
-struct Entry_func_804279B8_de;
-typedef struct Entry_func_804279B8_de Entry_func_804279B8_de;
+struct EntryFrontendRefreshTrialCharacterPreview;
+typedef struct EntryFrontendRefreshTrialCharacterPreview EntryFrontendRefreshTrialCharacterPreview;
 
 extern s32 D_800E3360;
 

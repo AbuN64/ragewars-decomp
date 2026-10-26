@@ -242,9 +242,9 @@ spawn:
    sets the starting ammo by whether the player has a definition, and chooses the starting weapon (fixed for states 17 and
    18, none for a bonus profile, the low half of the second loadout word of the definition when the player is a computer, else the first
    action marked 1) before loading the weapon's animation table and count. */
-extern s32 func_80426090_de(struct Player *);
-extern s32 func_80426174_de(struct Player *);
-extern s32 func_804261DC_de(struct Player *);
+extern s32 Achieve_ApplyProfileWeaponUnlocks(struct Player *);
+extern s32 Achieve_ApplyPlayerOptionOverrides(struct Player *);
+extern s32 Achieve_EnableLevelWeapons(struct Player *);
 
 void Player_ResetPlayerWeapons(struct Player *player) {
     Shared_Game *game;
@@ -269,13 +269,13 @@ void Player_ResetPlayerWeapons(struct Player *player) {
         }
         switch (D_801462C8.controllerMode) {
         case 1:
-            func_80426090_de(player);
+            Achieve_ApplyProfileWeaponUnlocks(player);
             break;
         case 4:
-            func_804261DC_de(player);
+            Achieve_EnableLevelWeapons(player);
             break;
         default:
-            func_80426174_de(player);
+            Achieve_ApplyPlayerOptionOverrides(player);
             break;
         }
     }

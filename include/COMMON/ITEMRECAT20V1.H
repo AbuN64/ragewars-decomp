@@ -91,8 +91,8 @@ struct ObjRecAt14V3 {
 struct CellRecAt1A;
 
 struct CellRecAt1A;
-struct Menu_func_804241BC_de;
-struct Menu_func_804241BC_de {
+struct MenuFrontendUpdatePlayModeMenu;
+struct MenuFrontendUpdatePlayModeMenu {
     char pad[0x44];
     struct CellRecAt1A *list;
 };
@@ -1482,11 +1482,11 @@ typedef struct ObjRecAt28V2 ObjRecAt28V2;
 
 
 
-struct Quad_func_802A1BE0_de;
-typedef struct Quad_func_802A1BE0_de Quad_func_802A1BE0_de;
+struct QuadN64EngDrawNumericWidgetChildren;
+typedef struct QuadN64EngDrawNumericWidgetChildren QuadN64EngDrawNumericWidgetChildren;
 
-struct Quad_func_802A1BE0_de;
-struct Quad_func_802A1BE0_de {
+struct QuadN64EngDrawNumericWidgetChildren;
+struct QuadN64EngDrawNumericWidgetChildren {
     u32 x;
     u32 y;
     u32 z;

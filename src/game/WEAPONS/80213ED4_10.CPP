@@ -14,7 +14,7 @@
 
 
 
-extern void func_8027985C_de(WeightedTable *);
+extern void Lists_ClearWeightedTable(WeightedTable *);
 extern s32 func_80246A08_de(s32, s32, s32);
 
 s32 Barrel_SelectWeightedAnimation(s32 owner, s32 unused, struct IntPair *table, s32 flags) {
@@ -22,22 +22,22 @@ s32 Barrel_SelectWeightedAnimation(s32 owner, s32 unused, struct IntPair *table,
     s32 first;
     s16 pick;
 
-    func_8027985C_de(&picker);
+    Lists_ClearWeightedTable(&picker);
     first = table->field_4;
     while (table->field_0 != -1) {
         if (table->field_0 == 0 && picker.count != 0) {
             goto choose;
         }
         if ((flags & table->field_0) && func_80246A08_de(owner, table->field_4, -1) != -1) {
-            func_80279864_de(&picker, (s16) table->field_4, 10);
+            Lists_AppendWeightedEntry(&picker, (s16) table->field_4, 10);
         }
         table++;
     }
     if (picker.count == 0) {
-        func_80279864_de(&picker, (s16) first, 10);
+        Lists_AppendWeightedEntry(&picker, (s16) first, 10);
     }
 choose:
-    pick = func_802798A8_de(&picker);
+    pick = Lists_ChooseWeightedTableEntry(&picker);
     if (func_80246A08_de(owner, pick, -1) == -1) {
         return first;
     }

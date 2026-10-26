@@ -34,7 +34,7 @@ extern void Tsmos_DeactivateControllerState();
 
 extern void Tsmos_ActivateControllerState();
 
-extern s32 func_8041A470_de(struct Menu_func_804241BC_de *);
+extern s32 func_8041A470_de(struct MenuFrontendUpdatePlayModeMenu *);
 
 extern void MarkMenuEventHandled();
 
@@ -81,7 +81,7 @@ extern void XStdio_FormatBuffer(char *, char *, s32);
 
 
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E5434, an actor kind at D_800E5438 and a handler at D_800E543C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E5434, an actor kind at D_800E5438 and a handler at D_800E543C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler8042DFF0)(void *, s32, s32, s32, s32);
 

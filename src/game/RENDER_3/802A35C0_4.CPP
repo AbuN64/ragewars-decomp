@@ -266,7 +266,7 @@ void func_802A4598_de(EffectWorld *world, FxActor *actor, s32 resourceId) {
         node = 0;
     }
     if (!node) {
-        node = func_8027963C_de(&world->pool);
+        node = Lists_MoveHeadToInactiveList(&world->pool);
         if (node) {
         resource = Scene_GetLinkedResourceSection(&g_world, resourceId);
         first = ((void **)D_800CDBD0)[resource->first];

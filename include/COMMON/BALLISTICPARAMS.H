@@ -69,7 +69,7 @@ void GraphU64_ClampMotionLength(void *, f32);
 void MatrixFromQuaternion(f32 *, f32 *);
 
 
-void func_80279DD0_de(void *, f32);
+void Particle_UpdateSineMotion(void *, f32);
 f32 Math_Sqrtf(f32);
 CQuatern GraphU64_BuildDirectionQuaternion(f32 *);            /* extern */
 extern Shared_MenuData D_80145040;

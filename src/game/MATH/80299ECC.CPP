@@ -28,7 +28,7 @@ extern void Frontend_ReleaseReferencedBuffer(s16 arg0);
 
 extern void Frontend_DrawVisibleWidgetClipped(void *, ArgsCode80296014);
 
-extern s32 Frontend_ComputeWidgetBounds(Quad_func_802A1BE0_de *, Quad_func_802A1BE0_de *, void *, ArgsCode80296014 *);
+extern s32 Frontend_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, ArgsCode80296014 *);
 
 /* Moves menu focus and sends leave and enter events through menu and element callbacks. */
 
@@ -126,8 +126,8 @@ void func_80298ECC_de(void) {
 
 void func_80298FE8_de(void) {
     ArgsCode80296014 args;
-    Quad_func_802A1BE0_de first;
-    Quad_func_802A1BE0_de basis;
+    QuadN64EngDrawNumericWidgetChildren first;
+    QuadN64EngDrawNumericWidgetChildren basis;
     s32 delta;
     s32 index;
     s32 offset;
@@ -145,7 +145,7 @@ void func_80298FE8_de(void) {
     args.word1C = D_80146E08 - 1;
     args.word24 = D_80146E0C - 1;
 
-    now = (s32)(func_802A18CC_de() * D_800C5680_de);
+    now = (s32)(N64Eng_GetTimeSeconds() * D_800C5680_de);
     if (s_smackFormat == 0) {
         s_smackFormat = now;
     }
@@ -158,10 +158,10 @@ void func_80298FE8_de(void) {
         offset = index * 0x1C;
         do {
             index++;
-            func_802A18F4_de();
+            N64Eng_RenderNoop();
             Frontend_DrawVisibleWidgetClipped(*(void **)(offset + (s32)D_8014D080->screens), args);
             Frontend_ResetTextClipBounds();
-            func_802A18FC_de();
+            N64Eng_ResetRenderState();
             Frontend_ComputeWidgetBounds(&first, &basis,
                           *(void **)(offset + (s32)D_8014D080->screens), &args);
             offset += 0x1C;
@@ -211,7 +211,7 @@ void func_80299468_de(void) {
     D_8014D080 = 0;
     Smos_FreeControllerContext();
     Frontend_NoOperation();
-    func_80411F28_de();
+    Frontend_ClearResourceInitializationFlag();
 }
 
 void func_80299550_de(FuncPtr arg0) {

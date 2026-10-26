@@ -18,8 +18,8 @@ struct RecRecAt4 {
 struct CompactOptionsCommitContext;
 typedef struct CompactOptionsCommitContext CompactOptionsCommitContext;
 
-struct State_func_804242D4_de;
-struct State_func_804242D4_de {
+struct StateFrontendHandlePlayModeShortcut;
+struct StateFrontendHandlePlayModeShortcut {
     void *first;
     char pad4[0x18 - 4];
     s32 value;
@@ -47,10 +47,10 @@ struct OptionsCommitContext {
 
 
 struct CellRecAt1A;
-struct Menu_func_804241BC_de;
-struct State_func_804241BC_de;
-struct State_func_804241BC_de {
-    struct Menu_func_804241BC_de *menu;
+struct MenuFrontendUpdatePlayModeMenu;
+struct StateFrontendUpdatePlayModeMenu;
+struct StateFrontendUpdatePlayModeMenu {
+    struct MenuFrontendUpdatePlayModeMenu *menu;
     char pad4[0x8 - 0x4];
     struct CellRecAt1A *list;
     s32 opening;

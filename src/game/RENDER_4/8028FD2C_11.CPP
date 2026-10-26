@@ -9,7 +9,7 @@
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_11.H"
 
-void *func_8028FEF0_de(int *arg0, int *arg1) {
+void *SetN64_GetChunkPayload(int *arg0, int *arg1) {
     *arg1 = arg0[0] * arg0[1];
     return &((ResidentDataChunk *)(arg0))->data[0];
 }
@@ -21,48 +21,48 @@ extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 
 
-void SetN64_TransposeRecords(void *arg0, void *arg1, s32 arg2)
+void SetN64_TransposeRecords(void *sourceBlock, void *destinationBlock, s32 copyBack)
 {
-  char *data = &((ResidentDataChunk *)(arg0))->data[0];
-  s32 temp_a2;
+  char *data = &((ResidentDataChunk *)(sourceBlock))->data[0];
+  s32 columnCount;
   int first_column;
-  s32 temp_t0;
-  s32 var_a0;
-  s32 var_a1;
-  s32 var_v1;
-  u8 *temp_v0;
-  u8 *var_a3;
+  s32 rowCount;
+  s32 rowIndex;
+  s32 columnIndex;
+  s32 sourceOffset;
+  u8 *sourceByte;
+  u8 *destinationByte;
   first_column = 0;
-  func_802BD3A0_de(arg1, arg0, 8);
-  var_a3 = arg1 + 8;
-  temp_a2 = ((struct IntPair *) arg0)->field_4;
-  temp_t0 = ((struct IntPair *) arg0)->field_0;
-  var_a1 = first_column;
-  if (temp_a2 > first_column)
+  func_802BD3A0_de(destinationBlock, sourceBlock, 8);
+  destinationByte = destinationBlock + 8;
+  columnCount = ((struct IntPair *) sourceBlock)->field_4;
+  rowCount = ((struct IntPair *) sourceBlock)->field_0;
+  columnIndex = first_column;
+  if (columnCount > first_column)
   {
     do
     {
-      var_a0 = 0;
-      if (temp_t0 > 0)
+      rowIndex = 0;
+      if (rowCount > 0)
       {
-        var_v1 = var_a1;
+        sourceOffset = columnIndex;
         do
         {
-          temp_v0 = data + var_v1;
-          var_v1 += temp_a2;
-          var_a0 += 1;
-          *var_a3 = *temp_v0;
-          var_a3 += 1;
+          sourceByte = data + sourceOffset;
+          sourceOffset += columnCount;
+          rowIndex += 1;
+          *destinationByte = *sourceByte;
+          destinationByte += 1;
         }
-        while (var_a0 < temp_t0);
+        while (rowIndex < rowCount);
       }
-      var_a1 += 1;
+      columnIndex += 1;
     }
-    while (var_a1 < temp_a2);
+    while (columnIndex < columnCount);
   }
-  if (arg2 != 0)
+  if (copyBack != 0)
   {
-    func_802BD3A0_de(arg0, arg1, (temp_a2 * temp_t0) + 8);
+    func_802BD3A0_de(sourceBlock, destinationBlock, (columnCount * rowCount) + 8);
   }
 }
 
@@ -89,14 +89,14 @@ extern s32 D_800CD764_de[];
 
 
 
-void *SetN64_SpawnModelEffect(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVector3 position, s32 arg9, f32 arg10)
+void *SetN64_SpawnModelEffect(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVector3 position, s32 arg9, f32 initialLifetime)
 {
   CVector3 center;
   s32 temp_v0;
   f32 far_z;
   s32 temp_v1_2;
   char *temp_s0;
-  char *temp_v1;
+  char *previousActiveHead;
   if (((*D_800CD764_de) == 0) || ((temp_v0 = Scene_FindModelIdIndex(&g_world, arg2), temp_v0 == (-1))))
   {
     return 0;
@@ -106,11 +106,11 @@ void *SetN64_SpawnModelEffect(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation
     SetN64_RecycleEffectNode(arg0, ((WorldRecAt3C08 *)(arg0))->tail);
   }
   temp_s0 = ((WorldRecAt3C08 *)(arg0))->free;
-  temp_v1 = ((WorldRecAt3C08 *)(arg0))->head;
+  previousActiveHead = ((WorldRecAt3C08 *)(arg0))->head;
   ((WorldRecAt3C08 *)(arg0))->free = (void *) (((SceneEffect *)(temp_s0))->next);
-  if (temp_v1 != 0)
+  if (previousActiveHead != 0)
   {
-    ((SceneEffect *)(temp_v1))->prev = temp_s0;
+    ((SceneEffect *)(previousActiveHead))->prev = temp_s0;
   }
   { char *next = ((WorldRecAt3C08 *)(arg0))->head;
   ((SceneEffect *)(temp_s0))->prev = 0;
@@ -137,7 +137,7 @@ void *SetN64_SpawnModelEffect(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation
   {
     ((SceneEffect *)(temp_s0))->definition = &g_defaultEffectDefinition;
   }
-  ((SceneEffect *)(temp_s0))->lifetime = arg10;
+  ((SceneEffect *)(temp_s0))->lifetime = initialLifetime;
   ((SceneEffect *)(temp_s0))->lifetimeState = 0;
   ((SceneEffect *)(temp_s0))->model = temp_v0;
   position.y += 10.24f;
@@ -257,42 +257,42 @@ extern f32 D_800C53A4_de;
 extern void func_8024F4A0_de(SceneEffect *);
 extern void Unicol_MoveActorWithCollision(SceneEffect *, f32, f32, f32, void *);
 
-void SetN64_UpdateEffectMotionAndBounds(SceneEffect *arg0)
+void SetN64_UpdateEffectMotionAndBounds(SceneEffect *effect)
 {
-  void *var_s1;
-  f32 temp_f1;
+  void *collisionContext;
+  f32 motionHoldTime;
   f32 radius;
   f32 x;
   CVector3 saved;
-  var_s1 = &D_80100438;
-  if (!(arg0->definition->gate & 4))
+  collisionContext = &D_80100438;
+  if (!(effect->definition->gate & 4))
   {
-    var_s1 = &D_801003F8;
+    collisionContext = &D_801003F8;
   }
-  temp_f1 = arg0->lifetimeState;
-  if (temp_f1 > 0.0f)
+  motionHoldTime = effect->lifetimeState;
+  if (motionHoldTime > 0.0f)
   {
-    arg0->lifetimeState = (f32) (temp_f1 - D_800D2988);
-    saved = arg0->position;
+    effect->lifetimeState = (f32) (motionHoldTime - D_800D2988);
+    saved = effect->position;
   }
-  func_8024F4A0_de(arg0);
-  if (arg0->definition != (&g_defaultEffectDefinition))
+  func_8024F4A0_de(effect);
+  if (effect->definition != (&g_defaultEffectDefinition))
   {
-    arg0->rotation.x = 0.0f;
-    arg0->rotation.y = 0.0f;
-    arg0->rotation.z = 0.0f;
+    effect->rotation.x = 0.0f;
+    effect->rotation.y = 0.0f;
+    effect->rotation.z = 0.0f;
   }
-  Unicol_MoveActorWithCollision(arg0, arg0->position.x, arg0->position.y, arg0->position.z, var_s1);
-  x = arg0->position.x;
+  Unicol_MoveActorWithCollision(effect, effect->position.x, effect->position.y, effect->position.z, collisionContext);
+  x = effect->position.x;
   radius = D_800C53A4_de;
-  arg0->minX = (f32) (x - radius);
-  arg0->minY = (f32) (arg0->position.y - radius);
-  arg0->minZ = (f32) (arg0->position.z - radius);
-  arg0->maxX = (f32) (arg0->position.x + radius);
+  effect->minX = (f32) (x - radius);
+  effect->minY = (f32) (effect->position.y - radius);
+  effect->minZ = (f32) (effect->position.z - radius);
+  effect->maxX = (f32) (effect->position.x + radius);
   {
-    f32 z = arg0->position.z + radius;
-    f32 y = arg0->position.y + radius;
-    arg0->maxY = y;
-    arg0->maxZ = z;
+    f32 z = effect->position.z + radius;
+    f32 y = effect->position.y + radius;
+    effect->maxY = y;
+    effect->maxZ = z;
   }
 }

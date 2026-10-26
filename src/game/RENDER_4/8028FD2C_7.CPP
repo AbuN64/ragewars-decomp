@@ -17,17 +17,17 @@ s32 SetN64_LocatePackSection(void *directory, s32 bankOffset, s32 sectionIndex, 
     return bankOffset + entry[1];
 }
 
-s32 SetN64_GetPackSectionOffsetAndSize(s32 arg0, s32 arg1, s32 *arg2) {
+s32 SetN64_GetPackSectionOffsetAndSize(s32 directoryAddress, s32 sectionIndex, s32 *sectionSizeOut) {
     
-    s32 *next = (s32 *)(arg0 + ((arg1 + 1) * 4));
-    s32 *entry = (s32 *)(arg0 + (arg1 * 4));
-    *arg2 = next[1] - entry[1];
+    s32 *next = (s32 *)(directoryAddress + ((sectionIndex + 1) * 4));
+    s32 *entry = (s32 *)(directoryAddress + (sectionIndex * 4));
+    *sectionSizeOut = next[1] - entry[1];
     return entry[1];
 }
 
-void SetN64_GetPackBaseAndSize(int *arg0, int **arg1, int *arg2) {
+void SetN64_GetPackBaseAndSize(int *directory, int **packBaseOut, int *packSizeOut) {
     int *p;
-    *arg1 = arg0;
-    p = arg0 + *arg0;
-    *arg2 = p[1];
+    *packBaseOut = directory;
+    p = directory + *directory;
+    *packSizeOut = p[1];
 }

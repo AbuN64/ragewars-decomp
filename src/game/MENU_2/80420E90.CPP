@@ -18,7 +18,7 @@ extern struct Shape_func_8021A2D4_de_2 D_801462C8;
 
 extern s32 func_8041AD04_de(void *);
 
-/* Updates the limit markers of the screen D_800E4400: totals func_80426004_de over the four 400-byte
+/* Updates the limit markers of the screen D_800E4400: totals Achieve_CountEarnedAchievements over the four 400-byte
    records of D_80102B00 whose owner byte 0xD is not negative (or takes 40 when the word at 0x38 is
    1), enables items 0x3B4, 0x3B1, 0x3AD and 0x3AF of the window at 0x8 through func_8040E950_de, then
    disables 0x3B1 from a total of 10, 0x3B4 from 6, 0x3AD from 12 and 0x3AF from 14. Written from
@@ -28,7 +28,7 @@ extern s32 func_8041AD04_de(void *);
 
 extern s8 D_80102B0D[];
 
-extern s32 func_80426004_de(s32);
+extern s32 Achieve_CountEarnedAchievements(s32);
 
 extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 
@@ -89,7 +89,7 @@ void Menu_RefreshExtraOptionLocks(void) {
     total = 0;
     for (i = 0; i < 4; i++) {
         if (D_80102B0D[i * 400] >= 0) {
-            total += func_80426004_de(i);
+            total += Achieve_CountEarnedAchievements(i);
         }
     }
     if (D_800E4400->full == 1) {

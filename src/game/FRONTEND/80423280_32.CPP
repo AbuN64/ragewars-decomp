@@ -19,14 +19,14 @@
 
 
 
-extern struct State_func_804241BC_de *D_800E4600;
+extern struct StateFrontendUpdatePlayModeMenu *D_800E4600;
 extern void Tsmos_DeactivateControllerState();
 extern void Tsmos_ActivateControllerState();
-extern s32 func_8041A470_de(struct Menu_func_804241BC_de *);
-extern void func_8041A47C_de(struct Menu_func_804241BC_de *);
+extern s32 func_8041A470_de(struct MenuFrontendUpdatePlayModeMenu *);
+extern void func_8041A47C_de(struct MenuFrontendUpdatePlayModeMenu *);
 extern void MarkMenuEventHandled();
 
-s32 func_804241BC_de(void) {
+s32 Frontend_UpdatePlayModeMenu(void) {
     s32 result;
 
     if (D_800E28E0 >= 2) {

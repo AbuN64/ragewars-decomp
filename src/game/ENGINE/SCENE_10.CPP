@@ -20,7 +20,7 @@ extern f32 GraphU64_GetTrianglePlaneHeight(void *arg0, f32 arg1, f32 arg2);
 
 extern s32 SetN64_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);
 
-extern void func_80278E7C_de(void *arg0);
+extern void Link_ActivateTrigger(void *arg0);
 
 void Scene_SpawnUnrotatedEffect(s32 worldAddress, s32 ownerId, Triple position, s32 modelId, f32 lifetime) {
     Triple zero;
@@ -160,7 +160,7 @@ void Scene_ActivateTriggersOfKind(Shared_World *world, s32 arg1) {
     if (var_s0 != -1) {
         do {
             if (trigger->kind == arg1) {
-                func_80278E7C_de(trigger);
+                Link_ActivateTrigger(trigger);
             }
             var_s0 -= 1;
             trigger = trigger + 1;
@@ -172,7 +172,7 @@ void Scene_ActivateTriggersOfKind(Shared_World *world, s32 arg1) {
     if (var_s0_2 != -1) {
         do {
             if (var_s1_2->kind == arg1) {
-                func_80278E7C_de(var_s1_2);
+                Link_ActivateTrigger(var_s1_2);
             }
             var_s0_2 -= 1;
             var_s1_2 = var_s1_2 + 1;

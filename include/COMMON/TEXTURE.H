@@ -53,7 +53,7 @@ extern s32 D_800DF25C;
 extern s32 D_800DF260_de;
 extern s32 D_800DF264_de;
 extern s32 D_800DF26C_de;
-extern s32 func_804136D8_de(u8 *);
+extern s32 Frontend_HasImageFormatMaskComponent(u8 *);
 
 extern const u8 D_800DD1C8[];
 extern const u8 D_800DD1DC[];

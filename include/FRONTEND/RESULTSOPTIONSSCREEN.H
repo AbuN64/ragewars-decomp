@@ -5,7 +5,7 @@
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 
-/* Picks a menu element id from arg0 and whether arg2 is set, hides the 0x14B child of that element and stores 0x64 and the value func_8042863C_de reports for arg1 into its 0x14A child; on eu-x every element id in this menu is renumbered 4 higher. */
+/* Picks a menu element id from arg0 and whether arg2 is set, hides the 0x14B child of that element and stores 0x64 and the value Frontend_GetWeaponIconValue reports for arg1 into its 0x14A child; on eu-x every element id in this menu is renumbered 4 higher. */
 
 extern ResultsOptionsScreen *D_800E4690;
 

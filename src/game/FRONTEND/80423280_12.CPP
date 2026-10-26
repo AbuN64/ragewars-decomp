@@ -74,13 +74,13 @@ extern s32 Player_CheckTeamPointWin(World *world);
 
 
 
-extern void func_804243E0_de(s32 player, s32 *awarded);
+extern void Frontend_AwardMatchAchievements(s32 player, s32 *awarded);
 
 
 /* Refreshes each of 8 configured participants: for each slot, reads the participant id at offset
    0xF0 + slot*4 of D_800E53C0; when it is not -1 and the id's 150-byte record in D_80146398 has
-   its byte at 0x91 clear, stores func_80425DFC_de(id) at offset 0x32C of D_800E53C0, calls
-   func_80425EE4_de(id, &D_800E53C0[0x110 + id*8]), and calls func_804259E0_de(id). */
+   its byte at 0x91 clear, stores Achieve_AwardMilestoneCompletion(id) at offset 0x32C of D_800E53C0, calls
+   Achieve_AwardAllMilestoneAchievement(id, &D_800E53C0[0x110 + id*8]), and calls Achieve_UpdateUnlockTiers(id). */
 
 
 
@@ -267,9 +267,9 @@ void func_8042D118_de(void)
     {
       continue;
     }
-    func_804243E0_de(val, obj->icons[val]);
+    Frontend_AwardMatchAchievements(val, obj->icons[val]);
     recs = g_playerSettings;
-    func_804259E0_de(val);
+    Achieve_UpdateUnlockTiers(val);
   }
 
 }
@@ -288,9 +288,9 @@ void func_8042D1C8_de(void) {
         if (record->flag != 0) {
             continue;
         }
-        D_800E53C0->selection = func_80425DFC_de(id);
-        func_80425EE4_de(id, D_800E53C0->icons[id]);
-        func_804259E0_de(id);
+        D_800E53C0->selection = Achieve_AwardMilestoneCompletion(id);
+        Achieve_AwardAllMilestoneAchievement(id, D_800E53C0->icons[id]);
+        Achieve_UpdateUnlockTiers(id);
     }
 }
 

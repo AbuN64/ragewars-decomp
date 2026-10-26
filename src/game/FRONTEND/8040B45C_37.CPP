@@ -94,10 +94,10 @@ extern File D_801539B0;
 extern s32 D_800DD0B0;
 extern s32 Cache_AllocateMemory(s32 size);
 extern void XStdio_CloseStream(s32 handle);
-extern s32 func_802A1934_de(void);
-extern void func_804133E4_de(Texture *texture);
-extern void func_80413404_de(Texture *texture);
-extern void func_80413720_de(Texture *texture, s32 kind, s8 fmt, s8 siz, s32 wid, s32 siz2, s32 zero,
+extern s32 N64Eng_GetFrameCounter(void);
+extern void Frontend_ClearOwnedImage(Texture *texture);
+extern void Frontend_ReleaseOwnedImageBuffers(Texture *texture);
+extern void Frontend_ConfigureOwnedImage(Texture *texture, s32 kind, s8 fmt, s8 siz, s32 wid, s32 siz2, s32 zero,
                           s32 bytes, void *offset, s32 zero2, s32 pitch, s32 *list, s32 depth);
 extern void Gfx_SwizzleImage(Texture *texture);
 extern void func_80419640_de(Texture *into, Texture *from);
@@ -127,7 +127,7 @@ void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
     {
     if (slots[index].flags & 1) {
         Bank *cachedBank;
-        stamp = func_802A1934_de() + 0xA;
+        stamp = N64Eng_GetFrameCounter() + 0xA;
         slots[index].stamp = stamp;
         cachedBank = &D_801539B0.tables.banks[group];
         if (cachedBank->held == 0 && cachedBank->stamp != -1) {
@@ -137,7 +137,7 @@ void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
     }
     }
     kind = 0;
-    func_802A18CC_de();
+    N64Eng_GetTimeSeconds();
     image = D_801539B0.tables.banks[group].image;
     tile = &D_801539B0.tables.banks[group].tiles[index];
     slot = &slots[index];
@@ -146,7 +146,7 @@ void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
         return 0;
     }
     texture = &slot->texture;
-    func_804133E4_de(texture);
+    Frontend_ClearOwnedImage(texture);
     into = texture;
     if (image->depth == 0) {
         code = 0x20;
@@ -192,12 +192,12 @@ void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
             if (threshold < sizes[i]) {
                 Tile *big = &D_801539B0.tables.banks[group].tiles[i];
 
-                func_804133E4_de(&scratch);
-                func_80413720_de(&scratch, kind, big->fmt, big->siz, big->wid, big->siz, 0, sizes[i],
+                Frontend_ClearOwnedImage(&scratch);
+                Frontend_ConfigureOwnedImage(&scratch, kind, big->fmt, big->siz, big->wid, big->siz, 0, sizes[i],
                               D_801539B0.tables.banks[group].offsets[i], 0, image->depth * 2,
                               D_801539B0.tables.banks[group].listsByPass[pass], image->depth);
                 Gfx_SwizzleImage(&scratch);
-                func_80413404_de(&scratch);
+                Frontend_ReleaseOwnedImageBuffers(&scratch);
             }
             i += 1;
         } while (i < 0x60);
@@ -206,14 +206,14 @@ void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
         bank->loaded = 1;
     }
     bytes = tile->wid * tile->siz * code >> 3;
-    func_80413720_de(texture, kind, tile->fmt, tile->siz, tile->wid, tile->siz, 0,
+    Frontend_ConfigureOwnedImage(texture, kind, tile->fmt, tile->siz, tile->wid, tile->siz, 0,
                   bytes, D_801539B0.tables.banks[group].offsets[which], 0,
                   image->depth * 2, D_801539B0.tables.banks[group].listsByPass[pass], image->depth);
     func_804196C8_de(0);
     func_80419640_de(into, texture);
     func_804196C8_de(1);
-    func_802A18CC_de();
-    slot->stamp = func_802A1934_de() + 0xA;
+    N64Eng_GetTimeSeconds();
+    slot->stamp = N64Eng_GetFrameCounter() + 0xA;
     D_801539B0.tables.banks[group].loads += 1;
     slot->flags |= 1;
     return &slot->texture;

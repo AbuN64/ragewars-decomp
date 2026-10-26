@@ -41,7 +41,7 @@ s32 func_80297A34_de(s32 event,s32 value,s32 amount,s32 context) {
         break;
     case 2:
         if(event==0xE08) {
-            ticks=(s32)(func_802A18CC_de()*D_800C5620_de);
+            ticks=(s32)(N64Eng_GetTimeSeconds()*D_800C5620_de);
             value=ticks-D_8014D080->frames;
             amount=ticks;
             D_8014D080->frames=amount;

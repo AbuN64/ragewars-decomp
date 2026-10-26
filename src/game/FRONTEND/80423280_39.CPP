@@ -37,7 +37,7 @@ extern char D_800EE050[];
 /* Writes the heading of the results screen D_800E4690 into item 0x153: in one-player mode the
    label 0x69 followed by the name of the character in the player's status record; in three-player
    mode the label 0x3D with the stage's best time as minutes and seconds in item 0x156 (the record's
-   time when set, else the stage default from func_80425C70_de) and the heading D_800D34DC; in
+   time when set, else the stage default from Achieve_CopyPreset) and the heading D_800D34DC; in
    four-player mode the heading D_800D34D8. */
 
 /* The results screen item and phrase ids renumber on the de cartridge: its heading item is 0x151,
@@ -82,7 +82,7 @@ void func_80427B08_de(void) {
         if (time > 0) {
             XStdio_FormatBuffer(buffer, RES_TIMEFMT, time / 60, time % 60);
         } else {
-            best = ((struct ResultsHeadingStage *) func_80425C70_de(D_800E4690->stage, 3, 0))->time;
+            best = ((struct ResultsHeadingStage *) Achieve_CopyPreset(D_800E4690->stage, 3, 0))->time;
             XStdio_FormatBuffer(buffer, RES_TIMEFMT, (u8)(best / 60), (u8)(best % 60));
         }
         func_8042E9B4_de(D_800E4690->time, RES_TIMEPOST, buffer);

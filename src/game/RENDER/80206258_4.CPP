@@ -81,7 +81,7 @@ void func_80207A90_de(void *actor, s32 *stateFlags) {
 
 typedef struct Owner Owner;
 
-extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
+extern void Link_DispatchActorLinks(void *arg0, s32 arg1, void *arg2);
 
 
 extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
@@ -127,7 +127,7 @@ void func_80207B5C_de(void *object, u32 *stateFlags) {
 
     resource = player->definition;
     motionDefinition = &resource->motion;
-    func_80278D78_de(player, 0x10000, player);
+    Link_DispatchActorLinks(player, 0x10000, player);
     if (!(motionDefinition->transitionFlags & 0x40)) {
         *stateFlags &= 0xFFFEFFFF;
     }
@@ -207,7 +207,7 @@ void func_80207D34_de(void *object, u32 *stateFlags) {
 
     resource = player->definition;
     motionDefinition = &resource->motion;
-    func_80278D78_de(player, 0x20000, player);
+    Link_DispatchActorLinks(player, 0x20000, player);
     if (!(motionDefinition->transitionFlags & 0x80)) {
         *stateFlags &= 0xFFFDFFFF;
     }

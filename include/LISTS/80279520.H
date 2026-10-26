@@ -6,10 +6,10 @@
 struct List802795C0;
 struct ListLink;
 struct Lists18;
-extern void func_802796F4_de(struct Lists18 *arg0, struct ListLink *arg1);
+extern void Lists_MoveNodeToActiveList(struct Lists18 *arg0, struct ListLink *arg1);
 extern int Lists_Remove(struct List802795C0 *arg0, struct ListLink *arg1);
 extern s32 Lists_Append(void *arg0, void *arg1);
-extern ListLink *func_8027963C_de(Lists18 *arg0);
-extern s32 func_80279864_de(WeightedTable *arg0, s16 arg1, s16 arg2);
-extern s16 func_802798A8_de(WeightedTable *arg0);
+extern ListLink *Lists_MoveHeadToInactiveList(Lists18 *arg0);
+extern s32 Lists_AppendWeightedEntry(WeightedTable *arg0, s16 arg1, s16 arg2);
+extern s16 Lists_ChooseWeightedTableEntry(WeightedTable *arg0);
 #endif

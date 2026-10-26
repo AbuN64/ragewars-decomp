@@ -127,10 +127,10 @@ struct Profile {
     u8 kindFlags[0x6C - 0x54]; /* +0x54: one bit per character kind finished with */
     char pad6C[0x7D - 0x6C];
     u8 groupFlags; /* +0x7D: bits 0-2 for the level-count milestones */
-    u8 levelFlags[4][5]; /* +0x7E: one bit per level finished, per game mode 1-4 (func_80425D14_de) */
+    u8 levelFlags[4][5]; /* +0x7E: one bit per level finished, per game mode 1-4 (Achieve_MarkLevelPlayed) */
     char pad92[0x94 - 0x92];
     s32 times[(0x124 - 0x94) / 4]; /* +0x94: best time per level */
-    u8 trackFlags; /* +0x124: func_80425DFC_de */
+    u8 trackFlags; /* +0x124: Achieve_AwardMilestoneCompletion */
     u8 slotLevels[20][5]; /* +0x125: one bit per level, per save slot */
     u8 setting[5];
     char pad18E[0x190 - 0x18E];

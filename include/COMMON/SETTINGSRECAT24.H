@@ -46,10 +46,10 @@ struct Shared_Rec3 {
 };
 
 struct CellRecAt1A;
-struct Menu_func_804241BC_de;
+struct MenuFrontendUpdatePlayModeMenu;
 struct State_func_8042DAF8_de;
 struct State_func_8042DAF8_de {
-    struct Menu_func_804241BC_de *menu;
+    struct MenuFrontendUpdatePlayModeMenu *menu;
     char pad4[0x8 - 0x4];
     struct CellRecAt1A *list;
     s32 delay;

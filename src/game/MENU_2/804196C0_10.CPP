@@ -6,9 +6,9 @@
 
 typedef struct Image Image;
 
-extern s32 func_80413480_de(Image *dst, Image *src);
-extern s32 func_8041369C_de(Image *image);
-extern s32 func_804136A8_de(Image *image);
+extern s32 Frontend_CopyOwnedImage(Image *dst, Image *src);
+extern s32 Frontend_GetImagePaletteByteCount(Image *image);
+extern s32 Frontend_GetImagePixelByteCount(Image *image);
 extern void Gfx_SwizzleImage(Image *image);
 
 s32 func_80419640_de(Image *dst, Image *src) {
@@ -17,11 +17,11 @@ s32 func_80419640_de(Image *dst, Image *src) {
     s32 fix;
 
     if (dst != src) {
-        func_80413480_de(dst, src);
+        Frontend_CopyOwnedImage(dst, src);
     }
     src = dst;
-    palette = func_8041369C_de(src);
-    size = func_804136A8_de(src);
+    palette = Frontend_GetImagePaletteByteCount(src);
+    size = Frontend_GetImagePixelByteCount(src);
     fix = 0;
     if (palette > 0) {
         fix = size > 0x800;

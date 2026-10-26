@@ -10,7 +10,7 @@
 /* Prepares a match: stops the current screen, starts screen 2, resets the eight player status
    records (clearing bytes 0x94 and 0x95 and, for human slots, the team byte 0x92) while counting
    active humans, clears the match counters, and outside mode 0 looks up the stage default for the
-   first active player through func_80425C70_de and resets the round state. It then runs the setup of
+   first active player through Achieve_CopyPreset and resets the round state. It then runs the setup of
    the current rule set D_8014DD98, copies each active human's name and the five profile bytes at 0x189
    of their player record into status bytes 0x7B, 0x7D, 0x79, 0x7A and 0x82, sets the game mode (team mode 2 falls back to 1 with fewer than two
    humans) and, when func_8025E2C4_de allows, picks a random arena 0x38 to 0x3B. */
@@ -80,16 +80,16 @@ void func_8042DEA0_de(void) {
         status = (struct StatusRecAt95 *)(settings + 0xD0 + first * 0x96);
         switch (settings[0xD]) {
         case 1:
-            D_800E4680 = func_80425C70_de(D_8015402C, 0, status->kind);
+            D_800E4680 = Achieve_CopyPreset(D_8015402C, 0, status->kind);
             break;
         case 2:
-            D_800E4680 = func_80425C70_de(D_8015402C, 1, 0);
+            D_800E4680 = Achieve_CopyPreset(D_8015402C, 1, 0);
             break;
         case 3:
-            D_800E4680 = func_80425C70_de(D_8015402C, 3, 0);
+            D_800E4680 = Achieve_CopyPreset(D_8015402C, 3, 0);
             break;
         case 4:
-            D_800E4680 = func_80425C70_de(D_8015402C, 2, 0);
+            D_800E4680 = Achieve_CopyPreset(D_8015402C, 2, 0);
             break;
         }
         D_801462C8.counters.humanWon = 0;

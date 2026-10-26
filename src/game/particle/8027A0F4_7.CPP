@@ -8,7 +8,7 @@
 #include "SYSTEM/80255C40_7.H"
 
 
-extern void func_80279A00_de(void *arg0);
+extern void Particle_FinishActorEffects(void *arg0);
 extern void Particle_UpdateMatrix(void *);
 extern void Fx_DetachParticleSwooshes(void *arg0, void *arg1);
 
@@ -49,7 +49,7 @@ void func_8027FF58_de(void *arg0) {
                 flags = temp_s0->flags;
                 if (flags & 0x100) {
                   if (!(flags & 0x800)) {
-                    func_80279A00_de(temp_s0);
+                    Particle_FinishActorEffects(temp_s0);
                     if (temp_s0->unk1D9 != 0) {
                         Particle_UpdateMatrix(temp_s0);
                         Fx_DetachParticleSwooshes(&D_801379C0, temp_s0);

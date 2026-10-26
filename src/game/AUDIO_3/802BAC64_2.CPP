@@ -238,15 +238,15 @@ Acmd *func_802B60EC_de(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
     return ptr;
 }
 
-void *func_802B625C_de(void *audioLowPassFilter, s32 arg1, s32 arg2, void *awords) {
+void *func_802B625C_de(void *audioLowPassFilter, s32 dmemBuffer, s32 sampleCount, void *awords) {
     AudioLowPassFilter *o = audioLowPassFilter;
     Awords *d = awords;
     void *ret;
     s32 a1;
 
-    a1 = arg1 & 0xFFFF;
+    a1 = dmemBuffer & 0xFFFF;
     d[0].w0 = a1 | 0x08000000;
-    d[0].w1 = (a1 << 0x10) | ((arg2 * 2) & 0xFFFF);
+    d[0].w1 = (a1 << 0x10) | ((sampleCount * 2) & 0xFFFF);
     d[1].w0 = 0x0B000020;
     d[1].w1 = func_802BBBC0_de((s32)&o->coefficients);
     {

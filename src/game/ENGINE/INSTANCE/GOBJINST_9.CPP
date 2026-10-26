@@ -10,7 +10,7 @@
 #include "FX_2/80271B18.H"
 
 /* Draws an object's cast shadow: objects without shadow flag 0x10000000 get the blob shadow of
- * GameObject_DrawBlobShadow; otherwise, once per frame the shadow model from func_802799C0_de is built for an object above
+ * GameObject_DrawBlobShadow; otherwise, once per frame the shadow model from Map_ReserveEntries is built for an object above
  * the ground: the light of the current view (direction from its signed bytes, strength from its colour)
  * is sampled at the object through DynLight_AccumulateLightDirections, the shadow alpha is 128 plus 56 per unit of light (faded
  * by D_800D15F0 during a fade), the light direction is kept at least 0.15 from horizontal, and the shadow
@@ -19,7 +19,7 @@
  * submitted through func_8024BA7C_de. */
 extern s32 InstHdr_CanActorCastShadow(void *);
 extern f32 InstHdr_GetActorGroundHeight(char *, s32);
-extern void *func_802799C0_de(void *, s32);
+extern void *Map_ReserveEntries(void *, s32);
 extern f32 Math_Sqrtf(f32);
 extern void DynLight_AccumulateLightDirections(void *, CVector3, CVector3 *, f32 *);
 extern void GraphU64_BuildPlaneProjectionMatrix(f32 *, CVector3 *, f32);
@@ -54,7 +54,7 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
             }
             diff = ((struct LevelActor *)(obj))->position0.y - ground;
             height = (512.0f < diff) ? 512.0f : diff;
-            if ((((struct LevelActor *)(obj))->shadow = func_802799C0_de(&D_8011FFB0, 1)) == 0) {
+            if ((((struct LevelActor *)(obj))->shadow = Map_ReserveEntries(&D_8011FFB0, 1)) == 0) {
                 return;
             }
             light = obj + (D_800D297C * 0x18 + 0x140);
@@ -128,7 +128,7 @@ void GameObject_DrawBlobShadow(struct LevelActor *actor, CVector3 *offset, s32 r
     PackedMatrixWords *packed;
     u8 targetAlpha;
 
-    packed = func_802799C0_de(&D_8011FFB0, 1);
+    packed = Map_ReserveEntries(&D_8011FFB0, 1);
     if (packed != 0) {
         groundHeight = InstHdr_GetShadowGroundHeight(actor, 0);
         height = (actor->position0.y + actor->eyeHeight) - groundHeight;

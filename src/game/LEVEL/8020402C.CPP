@@ -197,7 +197,7 @@ extern s32 Rumble_TestActorStateBit(void *, void *);
 
 extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
 
-extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
+extern void Link_DispatchActorLinks(void *arg0, s32 arg1, void *arg2);
 
 struct SceneRecAt95A8;
 extern void func_802A5D38_de(struct SceneRecAt95A8 *, s32);
@@ -297,7 +297,7 @@ s32 Action_UpdateTriggerFlag(LevelActor *actor) {
 void Action_ClearBreakableState(void *arg0, void *actorMotionState) {
     ActorMotionState *state = actorMotionState;
     Rumble_SetActorStateBit(&g_world, arg0, 0);
-    func_80278D78_de(arg0, 0x200000, arg0);
+    Link_DispatchActorLinks(arg0, 0x200000, arg0);
     state->unk12C = 0;
 }
 
@@ -325,7 +325,7 @@ void Action_SetBreakableState(void *arg0) {
     pFlag = &g_world;
     Rumble_SetActorStateBit(pFlag, arg0, 1);
     if (D_800C8270_de == 0) {
-        func_80278D78_de(arg0, 0x80000, arg0);
+        Link_DispatchActorLinks(arg0, 0x80000, arg0);
     }
     func_802A5D38_de(&D_801379C0, arg0);
     if (pFlag->mode != 4) {

@@ -106,12 +106,12 @@ func_802BD200_eu_x
     while (func_802BB0F0_de(0x1FC007FC, pifdata | 8)) {
         ;
     }
-    *(Quad_func_802A1BE0_de *)0x80000000 = *D_002BBC70;
-    *(Quad_func_802A1BE0_de *)0x80000080 = *D_002BBC70;
-    *(Quad_func_802A1BE0_de *)0x80000100 = *D_002BBC70;
-    *(Quad_func_802A1BE0_de *)0x80000180 = *D_002BBC70;
-    func_802BD280_de((void *)0x80000000, 0x80000180 - 0x80000000 + sizeof(Quad_func_802A1BE0_de));
-    func_802BD010_de((void *)0x80000000, 0x80000180 - 0x80000000 + sizeof(Quad_func_802A1BE0_de));
+    *(QuadN64EngDrawNumericWidgetChildren *)0x80000000 = *D_002BBC70;
+    *(QuadN64EngDrawNumericWidgetChildren *)0x80000080 = *D_002BBC70;
+    *(QuadN64EngDrawNumericWidgetChildren *)0x80000100 = *D_002BBC70;
+    *(QuadN64EngDrawNumericWidgetChildren *)0x80000180 = *D_002BBC70;
+    func_802BD280_de((void *)0x80000000, 0x80000180 - 0x80000000 + sizeof(QuadN64EngDrawNumericWidgetChildren));
+    func_802BD010_de((void *)0x80000000, 0x80000180 - 0x80000000 + sizeof(QuadN64EngDrawNumericWidgetChildren));
     Virtual_MapBootstrapAddressRange();
     func_802B9B20_de(4, &clock);
     clock &= ~0xf;

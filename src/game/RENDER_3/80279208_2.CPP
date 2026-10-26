@@ -7,7 +7,7 @@ extern s32 D_801371D4;
 
 
 
-s32 func_80279420_de(void *trigger, struct Player *player) {
+s32 Link_CheckTriggerMessage(void *trigger, struct Player *player) {
     func_80279490_S1 *object = trigger;
     NavigationPlatform *platform;
 

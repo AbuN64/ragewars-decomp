@@ -265,7 +265,7 @@ void func_80205324_de(Obj5324 *actor, s32 *activationContext) {
     rec = &actor->holder->r;
     pFlag = &g_world;
     Rumble_SetActorStateBit(pFlag, actor, 1);
-    func_80278D78_de(actor, 0x40000, actor);
+    Link_DispatchActorLinks(actor, 0x40000, actor);
     if (activationContext[1] == 0) {
         actor->flags = actor->flags & 0xFFFEFFFF;
     }

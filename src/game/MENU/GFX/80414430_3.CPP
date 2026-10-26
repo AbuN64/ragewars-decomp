@@ -15,9 +15,9 @@
 
 extern Gfx *g_displayListCursor;
 extern Triple D_80153F60;
-extern void func_802A1898_de(s32 *, s32 *, s32 *, s32 *);
+extern void N64Eng_GetClipBounds(s32 *, s32 *, s32 *, s32 *);
 
-/* Clips a screen rectangle to the viewport func_802A1898_de reports, interpolating the four corner
+/* Clips a screen rectangle to the viewport N64Eng_GetClipBounds reports, interpolating the four corner
    colours along each clipped edge, then writes the corners into vertices 0-3 with gSPModifyVertex
    (screen position, colour rotated to RGBA, texture coordinates 0) and draws them as an outline of
    four lines, or as two triangles when D_80153F60.y is set. */
@@ -49,7 +49,7 @@ void func_80415C90_de(f32 x, f32 y, f32 w, f32 h, u32 col0, u32 col1, u32 col2, 
 
     right = (x + w) - 1.0f;
     bottom = (y + h) - 1.0f;
-    func_802A1898_de(&left, &top, &right_edge, &bottom_edge);
+    N64Eng_GetClipBounds(&left, &top, &right_edge, &bottom_edge);
     if ((f32)right_edge < x || (f32)bottom_edge < y || right < (f32)left || bottom < (edge = (f32)top)) {
         return;
     }

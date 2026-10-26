@@ -19,14 +19,14 @@ void Gfx_EmitMatrix(void *source) {
 }
 
 /* Rewrites an image's pixel rows in place when row fixing is enabled (D_800E32F0): the row length
-   in 8-byte pixel groups comes from the image width and the bit depth reported by func_80413608_de
+   in 8-byte pixel groups comes from the image width and the bit depth reported by Frontend_GetImagePixelType
    (4, 8 or 16 bits), odd rows swap the two words of each group and even rows are copied to the
    write position through XPlus_CopyBytes when source and destination differ. */
 
 
 
 
-extern s32 func_80413608_de(u8 *record);
+extern s32 Frontend_GetImagePixelType(u8 *record);
 
 void Gfx_SwizzleImage(Image_func_80419490_de *image) {
     s32 *src;
@@ -40,7 +40,7 @@ void Gfx_SwizzleImage(Image_func_80419490_de *image) {
     if (D_800E32F0 == 0 || image->width == 0 || image->height == 0) {
         return;
     }
-    switch (func_80413608_de((u8 *)image)) {
+    switch (Frontend_GetImagePixelType((u8 *)image)) {
         case 4:
             groups = image->width / 16;
             break;
@@ -74,15 +74,15 @@ void Gfx_SwizzleImage(Image_func_80419490_de *image) {
     }
 }
 
-extern void func_804133E4_de(int image);
+extern void Frontend_ClearOwnedImage(int image);
 struct OwnedImage;
-extern void func_80413404_de(struct OwnedImage *image);
+extern void Frontend_ReleaseOwnedImageBuffers(struct OwnedImage *image);
 
 /* The archive loader passes the image address through these forwarding calls. */
 void Gfx_ResetImage(void *image) {
-    func_804133E4_de((int)image);
+    Frontend_ClearOwnedImage((int)image);
 }
 
 void Gfx_ReleaseImage(struct OwnedImage *image) {
-    func_80413404_de(image);
+    Frontend_ReleaseOwnedImageBuffers(image);
 }

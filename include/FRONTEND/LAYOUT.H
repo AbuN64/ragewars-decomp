@@ -5,7 +5,7 @@
 #include "COMMON/FORMAT.H"
 struct MenuWidget;
 
-extern s32 func_804125A4_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 Frontend_DispatchTypedWidgetEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 
 
@@ -22,9 +22,9 @@ struct GridList {
     u8 rows;
 };
 
-struct Entry_func_80412898_de;
+struct EntryFrontendSetGridCellValues;
 struct IntPair;
-struct Entry_func_80412898_de {
+struct EntryFrontendSetGridCellValues {
     char pad_00[0x44];
     struct IntPair *cells;
     u8 pad_48[3];
@@ -35,8 +35,8 @@ struct OwnedImage;
 
 
 
-struct Object_func_80412CA0_de;
-struct Object_func_80412CA0_de {
+struct ObjectFrontendDestroyGridList;
+struct ObjectFrontendDestroyGridList {
     char pad[0x44];
     void *child;
 };
@@ -85,16 +85,16 @@ struct t_dltext {
 struct GridList;
 typedef struct GridList GridList;
 
-struct Entry_func_80412AC0_de;
-struct Entry_func_80412AC0_de {
+struct EntryFrontendSetGridDimensionArrays;
+struct EntryFrontendSetGridDimensionArrays {
     char pad[0x58];
     s32 first;
     s32 second;
 };
 
 
-struct Entry_func_80412898_de;
-typedef struct Entry_func_80412898_de Entry_func_80412898_de;
+struct EntryFrontendSetGridCellValues;
+typedef struct EntryFrontendSetGridCellValues EntryFrontendSetGridCellValues;
 
 
 

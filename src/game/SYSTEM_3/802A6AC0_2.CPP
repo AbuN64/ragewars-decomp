@@ -103,7 +103,7 @@ void func_802A5E08_de(Owner802A6DF8 *owner) {
                 if (state->value < state->node->value) {
                     state->value = state->node->value;
                 }
-                func_802796F4_de((struct Lists18 *)&owner->lists, (ListLink *)state);
+                Lists_MoveNodeToActiveList((struct Lists18 *)&owner->lists, (ListLink *)state);
             }
             state = next;
         } while (state != 0);
@@ -137,7 +137,7 @@ void func_802A5EE0_de(void *arg0)
         ((ObjectLinks14_2 *)(node))->unk_10 = count;
         if (count <= 0)
         {
-          func_802796F4_de((struct Lists18 *)&((ObjectLinks7598 *)(arg0))->unk_7588, node);
+          Lists_MoveNodeToActiveList((struct Lists18 *)&((ObjectLinks7598 *)(arg0))->unk_7588, node);
         }
       }
       node = next;

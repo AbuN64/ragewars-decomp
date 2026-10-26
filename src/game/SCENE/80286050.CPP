@@ -46,7 +46,7 @@ void Scene_UpdateAndDrawWorld(void *arg0) {
     Scene_ClearSceneObjectCounts(state);
     state->counter120 = 0;
     state->counter124 = 0;
-    func_80279990_de(state->system128);
+    Map_ResetFramePool(state->system128);
     Cache_MarkResourceInUse(0, state->resource);
     {
         void *manager;

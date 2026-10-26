@@ -106,26 +106,26 @@ s32 func_8024B6F4_de(void *levelActor, s32 animationIndex, s32 allowDuringBlend)
     return 1;
 }
 
-extern void func_8027985C_de(WeightedTable *arg0);
+extern void Lists_ClearWeightedTable(WeightedTable *arg0);
 extern s32 func_80246A08_de(void *arg0, s32 arg1, s32 arg2);
-extern s32 func_80279864_de(WeightedTable *arg0, s16 arg1, s16 arg2);
+extern s32 Lists_AppendWeightedEntry(WeightedTable *arg0, s16 arg1, s16 arg2);
 
 s16 func_8024B738_de(void *actor, s16 *callback, s32 excludedAnimation) {
     WeightedTable eligibleKinds;
     u16 animationKind;
 
-    func_8027985C_de(&eligibleKinds);
+    Lists_ClearWeightedTable(&eligibleKinds);
     animationKind = *(u16 *) callback;
     if (*callback != -1) {
         do {
             if (func_80246A08_de(actor, (s32) (s16) animationKind, excludedAnimation) != -1) {
-                func_80279864_de(&eligibleKinds, callback[0], callback[1]);
+                Lists_AppendWeightedEntry(&eligibleKinds, callback[0], callback[1]);
             }
             callback += 2;
             animationKind = *(u16 *) callback;
         } while (*callback != -1);
     }
-    return func_802798A8_de(&eligibleKinds);
+    return Lists_ChooseWeightedTableEntry(&eligibleKinds);
 }
 
 extern s32 *func_8024BFD4_de(void *arg0, s8 arg1);

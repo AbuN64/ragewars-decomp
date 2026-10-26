@@ -57,11 +57,11 @@ extern void Frontend_SetWidgetFlag08(struct Resource_func_80419E54_de *, s32);
 
 
 
-extern void func_8042854C_de(s32, s32, s32);
+extern void Frontend_SetTrialWeaponRow(s32, s32, s32);
 
 /* Rebuilds the item list for the player D_800E4690 selects: clears it through func_80428700_de, looks
    up that player's model in D_8011FE88, and for each of the model's eight slot ids at 0x4C that is
-   at least 0x4C3 adds the nonzero id less 0x4C3 as the next row through func_8042854C_de when
+   at least 0x4C3 adds the nonzero id less 0x4C3 as the next row through Frontend_SetTrialWeaponRow when
    Player_HasProfileUnlockFlag accepts it for the player's 400-byte record in D_80102B00. */
 
 
@@ -79,7 +79,7 @@ extern s32 Player_HasProfileUnlockFlag(char *, s32);
 
 /* Rebuilds the weapon menu for the player D_800E4690 selects: clears it through func_80428700_de, then
    for each of the 0x16 weapon ids (excluding id 0) whose owned flag in D_801462C8 (offset 0x11C,
-   player stride 0x96) is set, appends a row through func_8042854C_de. */
+   player stride 0x96) is set, appends a row through Frontend_SetTrialWeaponRow. */
 
 
 
@@ -87,19 +87,19 @@ extern s32 Player_HasProfileUnlockFlag(char *, s32);
 
 
 
-extern void func_8042854C_de(s32 arg0, s32 arg1, s32 arg2);
+extern void Frontend_SetTrialWeaponRow(s32 arg0, s32 arg1, s32 arg2);
 
-/* Enumerates the eight item identifiers of the record Scene_GetBlLevelData finds for a key and registers each nonzero identifier above 0x4C3 through func_8042854C_de, translated by 0x4C3 and numbered in order. */
-
-
+/* Enumerates the eight item identifiers of the record Scene_GetBlLevelData finds for a key and registers each nonzero identifier above 0x4C3 through Frontend_SetTrialWeaponRow, translated by 0x4C3 and numbered in order. */
 
 
 
-extern Record_func_804284C0_de *Scene_GetBlLevelData(void *table, s32 key);
 
-extern void func_8042854C_de(s32 slot, s32 item, s32 arg2);
 
-void func_804280BC_de(void) {
+extern RecordFrontendFillTrialPresetWeaponRows *Scene_GetBlLevelData(void *table, s32 key);
+
+extern void Frontend_SetTrialWeaponRow(s32 slot, s32 item, s32 arg2);
+
+void Frontend_RefreshTrialSelectionLabel(void) {
     char buffer[0x40];
 
     Scene_CopyLevelName(&g_world, D_800E4690->selection, buffer, 0x3F);
@@ -107,7 +107,7 @@ void func_804280BC_de(void) {
     D_800E4690->owner->unk38 = D_800E4690->text;
 }
 
-s32 func_80428120_de(s32 id) {
+s32 Frontend_FindTrialValueIndex(s32 id) {
     s32 i;
 
     for (i = 0; i < 0x24; i++) {
@@ -132,7 +132,7 @@ s32 Frontend_IsUnlockLinked(s32 a, s32 b) {
     return 0;
 }
 
-void func_804281A8_de(void) {
+void Frontend_ShowTrialPreviewBanner(void) {
     (D_800E4690->banner)->alpha = 0xFF;
     (D_800E4690->bannerShadow)->alpha = 0xFF;
     Frontend_SetWidgetFlag08(D_800E4690->bannerShadow, 1);
@@ -140,7 +140,7 @@ void func_804281A8_de(void) {
     D_800E4690->blinking = 0;
 }
 
-void func_80428214_de(void) {
+void Frontend_FillTwoPlayerWeaponRows(void) {
     Shared_Game *st;
     s32 n;
     s32 k;
@@ -155,7 +155,7 @@ void func_80428214_de(void) {
             j = 0;
             for (i = 0; i < 0x16; i++) {
                 if (((base = &D_801462C8)->playerSettings[n].weapons[i] == 1) && (i != 0)) {
-                    func_8042854C_de(j, i, k);
+                    Frontend_SetTrialWeaponRow(j, i, k);
                     j++;
                 }
             }
@@ -167,7 +167,7 @@ void func_80428214_de(void) {
     }
 }
 
-void func_80428300_de(void) {
+void Frontend_FillProfileWeaponRows(void) {
     struct Model *model;
     s32 player;
     s32 id;
@@ -183,14 +183,14 @@ void func_80428300_de(void) {
         if (id >= 0x4C3) {
             id -= 0x4C3;
             if (Player_HasProfileUnlockFlag(&D_80102B00[player * 400], id) == 1 && id != 0) {
-                func_8042854C_de(row, id, 0);
+                Frontend_SetTrialWeaponRow(row, id, 0);
                 row++;
             }
         }
     }
 }
 
-void func_8042840C_de(void) {
+void Frontend_FillSelectedPlayerWeaponRows(void) {
     s32 count;
     s32 weapon;
     s32 base;
@@ -201,15 +201,15 @@ void func_8042840C_de(void) {
     for (weapon = 0; weapon < 0x16; weapon++) {
         if (((EntryRecAt11C *)(weapon + base + (u8 *)&D_801462C8))->owned == 1) {
             if (weapon != 0) {
-                func_8042854C_de(count, weapon, 0);
+                Frontend_SetTrialWeaponRow(count, weapon, 0);
                 count += 1;
             }
         }
     }
 }
 
-void func_804284C0_de(s32 key) {
-    Record_func_804284C0_de *record;
+void Frontend_FillTrialPresetWeaponRows(s32 key) {
+    RecordFrontendFillTrialPresetWeaponRows *record;
     s32 count;
     s32 i;
     s32 item;
@@ -222,7 +222,7 @@ void func_804284C0_de(s32 key) {
         if (item >= 0x4C3) {
             item -= 0x4C3;
             if (item != 0) {
-                func_8042854C_de(count, item, 0);
+                Frontend_SetTrialWeaponRow(count, item, 0);
                 count++;
             }
         }

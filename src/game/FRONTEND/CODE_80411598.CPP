@@ -70,7 +70,7 @@ void Frontend_AcquireArchiveEntry(s32 index) {
     }
     if (D_801539B0.Screen[index].data != 0) return;
 load:
-    func_802A18CC_de();
+    N64Eng_GetTimeSeconds();
     D_801539B0.Screen[index].data = Cache_AllocateMemory(D_801539B0.Screen[index].size);
     D_801539B0.In = XStdio_OpenStream(D_801539B0.Name, &D_800DD0B0);
     XStdio_SeekStream(D_801539B0.In, D_801539B0.Header.ScreenData + D_801539B0.Screen[index].offset, 0);
@@ -83,5 +83,5 @@ load:
     D_801539B0.In = 0;
     data = D_801539B0.Screen[index].data;
     Frontend_RelocateWidgetTree(data, data, D_801539B0.Screen[index].offset - D_801539B0.Screen[0].offset);
-    func_802A18CC_de();
+    N64Eng_GetTimeSeconds();
 }

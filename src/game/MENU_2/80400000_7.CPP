@@ -6,7 +6,7 @@
 
 /* Releases the current record's track-2 timed items whose time has come (or all live ones once the
    record's end time has passed): special items (kind and subkind 1 and 5, 9 and 4, 10 and 3) go to
-   func_80402FB4_de and clear the record's pending flag, others to func_80278E7C_de, then each entry is
+   func_80402FB4_de and clear the record's pending flag, others to Link_ActivateTrigger, then each entry is
    marked spent and its item is flagged and refreshed through Scene_SetTriggerStateBit. Adapted from func_8040332C_de: indexed entry
    access and the table base taken inside the loop. */
 
@@ -22,7 +22,7 @@ extern Record_func_80403458_de *D_800E2830;
 
 extern s32 Cinema_IsSequenceActive(void);
 extern void Menu_RequestTrackByIds(s32 mode, ItemRecAt12 *item);
-extern void func_80278E7C_de(ItemRecAt12 *item);
+extern void Link_ActivateTrigger(ItemRecAt12 *item);
 extern void Scene_SetTriggerStateBit(Shared_World *world, ItemRecAt12 *item, s32 mode);
 
 void func_80403458_de(void) {
@@ -91,7 +91,7 @@ void func_80403458_de(void) {
             Menu_RequestTrackByIds(0, item);
             D_800E2830->pending = 0;
         } else {
-            func_80278E7C_de(item);
+            Link_ActivateTrigger(item);
         }
         entry[i].time = -20000.0f;
         item->flags = (item->flags | 1) & 0xEF;

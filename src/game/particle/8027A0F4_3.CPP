@@ -38,7 +38,7 @@ f32 GraphU64_GetSquaredDistance(CVector3 *a, CVector3 *b);
 
 s32 GraphU64_NextRandom(void);
 
-void func_8027AD4C_de(Shared_Particle *particle);
+void Particle_UpdateTypedMotion(Shared_Particle *particle);
 
 void func_8027B428_de(Shared_Particle *particle);
 
@@ -328,7 +328,7 @@ void Particle_Update(Shared_Particle *particle) {
             }
         }
     }
-    func_8027AD4C_de(particle);
+    Particle_UpdateTypedMotion(particle);
     if ((particle->unk1BC == 0.0f || (particle->inst.pos.y == 0.0f && particle->unk1BC < 0.0f)) &&
         particle->inst.velocity.x * particle->inst.velocity.x + particle->inst.velocity.y * particle->inst.velocity.y +
                 particle->inst.velocity.z * particle->inst.velocity.z <

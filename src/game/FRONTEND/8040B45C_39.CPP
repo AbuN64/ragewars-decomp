@@ -14,7 +14,7 @@
 #include "RESMGR/resmgr_string_memory.H"
 
 extern BufferPool D_80153C40;
-extern Manager_func_80411D18_de D_80153C20;
+extern ManagerFrontendReleaseAllChunkImages D_80153C20;
 extern EntryRecAt18V1 *D_80153C10;
 /* Releases the buffers of the pool at D_80153C40: every entry holding a buffer that is not locked
    (flag 1) unless force is set has its reference count forced to one and dropped, and when it
@@ -40,13 +40,13 @@ extern s16 D_80153C0C;
 
 
 /* Returns the halfword at offset 0xA of entry i in the 28-byte record table D_80153C10 points
-   to; func_80411A84_de and func_80411AA8_de read offsets 0xA and 0xC. */
+   to; Frontend_GetTextureEntryWidth and Frontend_GetTextureEntryHeight read offsets 0xA and 0xC. */
 
 
 
 
 /* Returns the halfword at offset 0xC of entry i in the 28-byte record table D_80153C10 points
-   to; func_80411A84_de and func_80411AA8_de read offsets 0xA and 0xC. */
+   to; Frontend_GetTextureEntryWidth and Frontend_GetTextureEntryHeight read offsets 0xA and 0xC. */
 
 
 
@@ -142,7 +142,7 @@ extern void Frontend_ReleaseRetainedImageSlot(s32 i);
 
 typedef struct List List;
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at s_typeText, an actor kind at D_800E2AD4 and a handler at D_800E2AD8: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at s_typeText, an actor kind at D_800E2AD4 and a handler at D_800E2AD8: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
@@ -172,42 +172,42 @@ void Frontend_ReleaseUnprotectedBuffers(s32 force) {
 }
 
 /** Perform no work. */
-void func_80411A3C_de(void) {
+void Frontend_SkipResourceOperation(void) {
 }
 
-s16 func_80411A44_de(void) {
+s16 Frontend_GetResourceScreenCount(void) {
     return D_801539B0.NScreens;
 }
 
-s16 func_80411A54_de(void) {
+s16 Frontend_GetResourceTextureCount(void) {
     return D_801539B0.NTextures;
 }
 
-s16 func_80411A64_de(void) {
+s16 Frontend_GetResourceFontCount(void) {
     return D_801539B0.NFonts;
 }
 
 /* Returns the word held in D_80153C08. */
 
 
-s32 func_80411A74_de(void) {
+s32 Frontend_GetFirstResourceScreen(void) {
     return D_801539B0.Header.FirstScreen;
 }
 
-s16 func_80411A84_de(s32 index) {
+s16 Frontend_GetTextureEntryWidth(s32 index) {
     return D_801539B0.Texture[index].Width;
 }
 
-s16 func_80411AA8_de(s32 index) {
+s16 Frontend_GetTextureEntryHeight(s32 index) {
     return D_801539B0.Texture[index].Height;
 }
 
-s32 func_80411ACC_de(s32 index) {
+s32 Frontend_GetTextureChromaKey(s32 index) {
     return D_801539B0.ChromaKey[index];
 }
 
 /** Report success. */
-int func_80411AE8_de(void) {
+int Frontend_ReturnOne(void) {
     return 1;
 }
 
@@ -228,15 +228,15 @@ void Frontend_ReleaseRetainedImageSlot(s32 i) {
     }
 }
 
-signed char func_80411BA8_de(int entry, int index) {
+signed char Frontend_GetFontCharacterHeight(int entry, int index) {
     return D_801539B0.Font[index].CharInfo[(unsigned char)entry].height;
 }
 
-signed char func_80411BE8_de(int entry, int index) {
+signed char Frontend_GetFontCharacterPhysicalWidth(int entry, int index) {
     return D_801539B0.Font[index].CharInfo[(unsigned char)entry].PhysicalWidth;
 }
 
-short func_80411C28_de(int index) {
+short Frontend_GetFontBitmapCount(int index) {
     return D_801539B0.Font[index].TableEntry->bitmapCount;
 }
 
@@ -244,25 +244,25 @@ short Frontend_GetFontLetterSpacing(int index) {
     return D_801539B0.Font[index].TableEntry->field_10;
 }
 
-short func_80411C98_de(int index) {
+short Frontend_GetFontMetricAtA(int index) {
     return D_801539B0.Font[index].TableEntry->field_A;
 }
 
-short func_80411CD0_de(int index) {
+short Frontend_GetFontMetricAtC(int index) {
     return D_801539B0.Font[index].TableEntry->field_C;
 }
 
 /** Report success. */
-int func_80411D08_de(void) {
+int Frontend_ReturnConstantOne(void) {
     return 1;
 }
 
 /** Report success. */
-int func_80411D10_de(void) {
+int Frontend_ReturnUnitValue(void) {
     return 1;
 }
 
-void func_80411D18_de(void) {
+void Frontend_ReleaseAllChunkImages(void) {
     int i;
 
     if (D_80153C20.mode != 1) {
@@ -279,7 +279,7 @@ char *Frontend_GetStringByIndex(s32 index) {
 /* Returns the halfword held in D_80153C2C. */
 
 
-s16 func_80411D94_de(void) {
+s16 Frontend_GetResourceLanguageCount(void) {
     return D_801539B0.NLanguages;
 }
 
@@ -312,21 +312,21 @@ void Frontend_ReleaseReferencedBuffer(s32 i) {
     }
 }
 
-void func_80411EEC_de(void) {
+void Frontend_InitializeResourceState(void) {
     XPlus_FillBytes(&D_801539B0, 0, sizeof(D_801539B0));
     D_800E2AC0 = 1;
     D_800E2AC4 = 0;
 }
 
-void func_80411F28_de(void) {
+void Frontend_ClearResourceInitializationFlag(void) {
     D_800E2AC0 = 0;
 }
 
-void func_80411F38_de(s32 value) {
+void Frontend_SetSecondaryBufferMode(s32 value) {
     D_800E2AC4 = value;
 }
 
-void func_80411F48_de(void) {
+void Frontend_AcquireAllResourceTextures(void) {
     s32 i;
 
     D_80153C40.dirty = 1;
@@ -345,7 +345,7 @@ GlyphBuffer *Frontend_GetGlyphBuffer(s32 index) {
     return (GlyphBuffer *)&D_801539B0.Font[index];
 }
 
-void func_80412038_de(void) {
+void Frontend_ReleaseUnretainedTextureEntries(void) {
     s32 i;
     s32 invalid;
     s32 offset;
@@ -367,15 +367,15 @@ void func_80412038_de(void) {
     }
 }
 
-void func_804120DC_de(WidgetRecAt34 *widget, s32 load, s32 siblings) {
+void Frontend_UpdateWidgetTextureRetention(WidgetRecAt34 *widget, s32 load, s32 siblings) {
     if (widget == 0) {
         return;
     }
     if (widget->next != 0 && siblings != 0) {
-        func_804120DC_de(widget->next, load, siblings);
+        Frontend_UpdateWidgetTextureRetention(widget->next, load, siblings);
     }
     if (widget->child != 0) {
-        func_804120DC_de(widget->child, load, siblings);
+        Frontend_UpdateWidgetTextureRetention(widget->child, load, siblings);
     }
     switch (widget->type) {
         case 4:
@@ -389,13 +389,13 @@ void func_804120DC_de(WidgetRecAt34 *widget, s32 load, s32 siblings) {
             break;
         case 8:
             if (widget->normal != 0) {
-                func_804120DC_de(widget->normal, load, 0);
+                Frontend_UpdateWidgetTextureRetention(widget->normal, load, 0);
             }
             if (widget->pressed != 0) {
-                func_804120DC_de(widget->pressed, load, 0);
+                Frontend_UpdateWidgetTextureRetention(widget->pressed, load, 0);
             }
             if (widget->highlighted != 0) {
-                func_804120DC_de(widget->highlighted, load, 0);
+                Frontend_UpdateWidgetTextureRetention(widget->highlighted, load, 0);
             }
             break;
     }
@@ -445,7 +445,7 @@ void Frontend_ClampListCursorAndScroll(List *list) {
 
 
 
-void func_804122CC_de(ScrollTable *table, sm_dltext *cell, u32 row, u32 col) {
+void Frontend_ConfigureScrolledTableCell(ScrollTable *table, sm_dltext *cell, u32 row, u32 col) {
     s32 lastCol;
     s32 lastRow;
     u32 entryCol;
@@ -536,7 +536,7 @@ void func_804122CC_de(ScrollTable *table, sm_dltext *cell, u32 row, u32 col) {
     cell->Hdr.y += y;
 }
 
-s32 func_804125A4_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchTypedWidgetEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;

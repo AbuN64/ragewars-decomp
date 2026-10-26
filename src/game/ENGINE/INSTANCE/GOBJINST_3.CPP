@@ -44,9 +44,9 @@ extern func_80237E70_G1 D_801041F0;
 
 extern s32 Unicol_MoveActorWithCollision(void *arg0, CVector3 arg1, CollisionInfo *arg2);
 
-extern void func_80278E04_de(s32 arg0, s32 arg1, void *arg2);
+extern void Link_DispatchObjectLinks(s32 arg0, s32 arg1, void *arg2);
 
-extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
+extern void Link_DispatchActorLinks(void *arg0, s32 arg1, void *arg2);
 
 void func_80246E44_de(Actor36 *actor) {
     CVector3 before, after;
@@ -141,13 +141,13 @@ void func_8024715C_de(char *actor, CVector3 *destination) {
         if (old_contact != 0 && ((ObjectLinks23C *)(actor))->unk_14 != 0 &&
                 *old_contact != *((ObjectLinks23C *)(actor))->unk_14 &&
                 *((ObjectLinks23C *)(actor))->unk_18 == 1) {
-            func_80278E04_de((s32)old_contact, 0x80, actor);
-            func_80278E04_de((s32)((ObjectLinks23C *)(actor))->unk_14, 0x40, actor);
+            Link_DispatchObjectLinks((s32)old_contact, 0x80, actor);
+            Link_DispatchObjectLinks((s32)((ObjectLinks23C *)(actor))->unk_14, 0x40, actor);
         }
         if (collided != 0 && !(((ObjectLinks23C *)(actor))->unk_100 & 0x300000) &&
                 *((ObjectLinks23C *)(actor))->unk_18 == 1 && D_801041F0.unk0 != 0 &&
                 *D_801041F0.unk0 == 1) {
-            func_80278D78_de(D_801041F0.unk0, 0x20, actor);
+            Link_DispatchActorLinks(D_801041F0.unk0, 0x20, actor);
         }
         callback = ((struct CallbackState288 *) ((char *) actor))->callback;
         if (callback != 0) {

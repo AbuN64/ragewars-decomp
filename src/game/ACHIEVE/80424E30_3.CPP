@@ -73,7 +73,7 @@ extern unsigned char D_800FEB4A[];
  /* extern */
 
 
-s32 func_80425674_de(s32 p) {
+s32 Achieve_AwardCharacterCompletionUnlock(s32 p) {
     Profile *record;
     Shared_Game *settings;
     s32 given;
@@ -167,7 +167,7 @@ s32 func_80425674_de(s32 p) {
     return given;
 }
 
-void func_804259E0_de(s32 index) {
+void Achieve_UpdateUnlockTiers(s32 index) {
     Profile *record;
     s32 count;
 
@@ -250,7 +250,7 @@ void func_804259E0_de(s32 index) {
     }
 }
 
-Preset *func_80425C70_de(s32 key, s32 row, s32 column) {
+Preset *Achieve_CopyPreset(s32 key, s32 row, s32 column) {
     PresetTable *table;
 
     table = Scene_GetBlLevelData(&g_world, key);
@@ -261,7 +261,7 @@ Preset *func_80425C70_de(s32 key, s32 row, s32 column) {
     return &D_8014DD50;
 }
 
-void func_80425D14_de(s32 slot) {
+void Achieve_MarkLevelPlayed(s32 slot) {
     switch (D_801462C8.controllerMode) {
     case 1:
         Defs_SetBitValue(&D_80102B7E[slot * 0x190], D_8015402C, 1);
@@ -278,7 +278,7 @@ void func_80425D14_de(s32 slot) {
     }
 }
 
-s32 func_80425DFC_de(s32 arg0) {
+s32 Achieve_AwardMilestoneCompletion(s32 arg0) {
     s32 result;
     s32 track;
     u8 *slot;
@@ -311,7 +311,7 @@ s32 func_80425DFC_de(s32 arg0) {
     return result;
 }
 
-void func_80425EE4_de(s32 player, s32 *award) {
+void Achieve_AwardAllMilestoneAchievement(s32 player, s32 *award) {
     u8 *record;
     s32 all;
     s32 i;
@@ -337,7 +337,7 @@ void func_80425EE4_de(s32 player, s32 *award) {
 }
 
  /* extern */
-s32 func_80426004_de(s32 index) {
+s32 Achieve_CountEarnedAchievements(s32 index) {
     s32 recordOffset;
     s32 slot;
     s32 count;
@@ -356,7 +356,7 @@ s32 func_80426004_de(s32 index) {
     return count;
 }
 
-void func_80426090_de(Arg *arg0) {
+void Achieve_ApplyProfileWeaponUnlocks(Arg *arg0) {
     s32 temp_s0;
     s32 temp_v0;
     s32 i;

@@ -9,7 +9,7 @@
 #include "SCENE/802508E0_13.H"
 #include "RESMGR/resmgr_string_memory.H"
 
-s32 func_80412CDC_de(Format *format) {
+s32 Frontend_FindPixelFormat(Format *format) {
     s32 i;
     for (i = 0; i < 36; i++) {
         if (D_800E2B20[i].flags == format->flags &&
@@ -103,31 +103,31 @@ extern void *D_80153C70,*D_80153C64;
 
 /* Copies image src into dst: releases dst's owned pixel data (flag 1) and palette (flag 2, when it
    has entries), clears it and copies src's header, drops a palette pointer without entries, marks
-   the copies owned, then allocates and copies the pixel data (size from func_804136A8_de) and, when
-   src has a palette, the palette (size from func_8041369C_de). Returns 1 when an allocation fails,
+   the copies owned, then allocates and copies the pixel data (size from Frontend_GetImagePixelByteCount) and, when
+   src has a palette, the palette (size from Frontend_GetImagePaletteByteCount). Returns 1 when an allocation fails,
    leaving dst cleared, otherwise 0. */
 
 
 
 
-extern s32 func_804136A8_de(OwnedImage *image);
+extern s32 Frontend_GetImagePixelByteCount(OwnedImage *image);
 
-extern s32 func_8041369C_de(OwnedImage *image);
+extern s32 Frontend_GetImagePaletteByteCount(OwnedImage *image);
 
 extern void *Cache_AllocateMemory(s32 size);
 
 
 /* The argument is a pointer into 0x8068xxxx whose first byte the debugger read as 0x14, and the
-   stride is 52. D_800E2B40, which func_804136D8_de indexes with the same stride and the same
+   stride is 52. D_800E2B40, which Frontend_HasImageFormatMaskComponent indexes with the same stride and the same
    argument, sits 24 bytes further on, so both are fields of one 52-byte record. */
 
 /* Returns the word in the 52-byte record D_800E2B2C selected by the first byte of a record. */
 
-u32 func_80412D94_de(u32 value, s32 from, s32 to) {
+u32 Frontend_ConvertPixelFormat(u32 value, s32 from, s32 to) {
     return encode(decode(value, &D_800E2B20[from]), &D_800E2B20[to]);
 }
 
-void func_80412F54_de(ImageDescriptor *destination, ImageDescriptor *source) {
+void Frontend_ConfigureImageConversion(ImageDescriptor *destination, ImageDescriptor *source) {
     Format dst,src;
     D_80153CDC=0;
     D_80153CD8=0;
@@ -192,11 +192,11 @@ void func_80412F54_de(ImageDescriptor *destination, ImageDescriptor *source) {
     }
 }
 
-void func_804133E4_de(int value) {
+void Frontend_ClearOwnedImage(int value) {
     XPlus_FillBytes(value, 0, 0x20);
 }
 
-void func_80413404_de(OwnedImage *res) {
+void Frontend_ReleaseOwnedImageBuffers(OwnedImage *res) {
     if (res->flags & 1) {
         Cache_FreeMemory(res->pixels);
     }
@@ -207,11 +207,11 @@ void func_80413404_de(OwnedImage *res) {
 }
 
 /** Report false. */
-int func_80413478_de(void) {
+int Frontend_ReturnImageZero(void) {
     return 0;
 }
 
-s32 func_80413480_de(OwnedImage *dst, OwnedImage *src) {
+s32 Frontend_CopyOwnedImage(OwnedImage *dst, OwnedImage *src) {
     s32 size;
 
     if (dst->flags & 1) {
@@ -229,13 +229,13 @@ s32 func_80413480_de(OwnedImage *dst, OwnedImage *src) {
     if (dst->palette != 0) {
         dst->flags = 3;
     }
-    size = func_804136A8_de(src);
+    size = Frontend_GetImagePixelByteCount(src);
     if ((dst->pixels = Cache_AllocateMemory(size)) == 0) {
         return 1;
     }
     XPlus_CopyBytes(dst->pixels, src->pixels, size);
     if (src->paletteCount != 0) {
-        size = func_8041369C_de(src);
+        size = Frontend_GetImagePaletteByteCount(src);
         if ((dst->palette = Cache_AllocateMemory(size)) == 0) {
             Cache_FreeMemory(dst->pixels);
             XPlus_FillBytes(dst, 0, 0x20);
@@ -246,45 +246,45 @@ s32 func_80413480_de(OwnedImage *dst, OwnedImage *src) {
     return 0;
 }
 
-/* Returns the first byte of a record; func_80413608_de, which follows it, reads the same byte. */
-u8 func_804135FC_de(u8 *record) {
+/* Returns the first byte of a record; Frontend_GetImagePixelType, which follows it, reads the same byte. */
+u8 Frontend_GetOwnedImageFormat(u8 *record) {
     return record[0];
 }
 
-s32 func_80413608_de(u8 *record) {
+s32 Frontend_GetImagePixelType(u8 *record) {
     return D_800DEAD8[*record][0];
 }
 
-s32 func_80413634_de(u8 *record) {
+s32 Frontend_GetImageBitsPerPixel(u8 *record) {
     return D_800E2B2C[record[0] * 13];
 }
 
 /* Returns the halfword at offset 0x2 of a record. It is one of a run of accessors from
-   func_80413660_de to func_80413690_de that return the halfwords at offsets 2 to 0xA in turn. */
-s16 func_80413660_de(s16 *record) {
+   Frontend_GetOwnedImageWidth to Frontend_GetOwnedImagePaletteCount that return the halfwords at offsets 2 to 0xA in turn. */
+s16 Frontend_GetOwnedImageWidth(s16 *record) {
     return record[0x2 / 2];
 }
 
 /* Returns the halfword at offset 0x4 of a record. It is one of a run of accessors from
-   func_80413660_de to func_80413690_de that return the halfwords at offsets 2 to 0xA in turn. */
-s16 func_8041366C_de(s16 *record) {
+   Frontend_GetOwnedImageWidth to Frontend_GetOwnedImagePaletteCount that return the halfwords at offsets 2 to 0xA in turn. */
+s16 Frontend_GetOwnedImageHeight(s16 *record) {
     return record[0x4 / 2];
 }
 
 /* Returns the halfword at offset 0x6 of a record. It is one of a run of accessors from
-   func_80413660_de to func_80413690_de that return the halfwords at offsets 2 to 0xA in turn. */
-s16 func_80413678_de(s16 *record) {
+   Frontend_GetOwnedImageWidth to Frontend_GetOwnedImagePaletteCount that return the halfwords at offsets 2 to 0xA in turn. */
+s16 Frontend_GetOwnedImageStride(s16 *record) {
     return record[0x6 / 2];
 }
 
 /* Returns the halfword at offset 0x8 of a record. It is one of a run of accessors from
-   func_80413660_de to func_80413690_de that return the halfwords at offsets 2 to 0xA in turn. */
-s16 func_80413684_de(s16 *record) {
+   Frontend_GetOwnedImageWidth to Frontend_GetOwnedImagePaletteCount that return the halfwords at offsets 2 to 0xA in turn. */
+s16 Frontend_GetOwnedImageRowCount(s16 *record) {
     return record[0x8 / 2];
 }
 
 /* Returns the halfword at offset 0xA of a record. It is one of a run of accessors from
-   func_80413660_de to func_80413690_de that return the halfwords at offsets 2 to 0xA in turn. */
-s16 func_80413690_de(s16 *record) {
+   Frontend_GetOwnedImageWidth to Frontend_GetOwnedImagePaletteCount that return the halfwords at offsets 2 to 0xA in turn. */
+s16 Frontend_GetOwnedImagePaletteCount(s16 *record) {
     return record[0xA / 2];
 }

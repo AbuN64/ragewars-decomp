@@ -119,7 +119,7 @@ extern s32 D_800C3864_de[];
 
 extern s32 Defs_FindSortedValue(void *, s32, s32);
 
-extern void func_8027985C_de(WeightedTable *);
+extern void Lists_ClearWeightedTable(WeightedTable *);
 
 
 s32 func_802462E8_de(Instance8020CD74 *actorState, CVector3 position, char **out) {
@@ -295,23 +295,23 @@ s32 func_80246A08_de(LevelActor *owner, s32 animationKind, s32 excludedEntry) {
             count--;
         }
 
-        func_8027985C_de(&table);
+        Lists_ClearWeightedTable(&table);
         if (excludedEntry == -1) {
             while (count < total && entries[count] == animationKind) {
-                func_80279864_de(&table, count++, 10);
+                Lists_AppendWeightedEntry(&table, count++, 10);
             }
         } else {
             while (count < total && entries[count] == animationKind) {
                 if (excludedEntry != count) {
-                    func_80279864_de(&table, count, 10);
+                    Lists_AppendWeightedEntry(&table, count, 10);
                 }
                 count++;
             }
         }
         if (table.count == 0) {
-            func_80279864_de(&table, original, 10);
+            Lists_AppendWeightedEntry(&table, original, 10);
         }
-        count = func_802798A8_de(&table);
+        count = Lists_ChooseWeightedTableEntry(&table);
     }
     Cache_UnlockResource(0, resource);
     return count;

@@ -232,5 +232,5 @@ void func_802849F0_de(ParticleEffect *effect)
 finished:
         ;
     }
-    func_80279DD0_de(effect, 1.0f);
+    Particle_UpdateSineMotion(effect, 1.0f);
 }

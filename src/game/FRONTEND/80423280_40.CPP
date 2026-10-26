@@ -16,13 +16,13 @@
 
 extern struct Data801462C8 D_801462C8;
 extern s8 D_80142358[]; /* MIXED: this unit views D_801462C8 as Data801462C8 */
-extern struct Screen_func_80427D70_de *D_800E4690;
+extern struct ScreenFrontendMarkLinkedTrialsAvailable *D_800E4690;
 extern s32 Defs_TestBit(u8 *, s32);
 extern void Defs_SetBitValue(u8 *, s32, s32);
 
-void func_80427D70_de(void *arg0) {
+void Frontend_MarkLinkedTrialsAvailable(void *arg0) {
     struct Data801462C8 *globals;
-    struct Table_func_80427D70_de *table;
+    struct TableFrontendMarkLinkedTrialsAvailable *table;
     unsigned int category;
     s32 kind;
     s32 value;
@@ -49,11 +49,11 @@ void func_80427D70_de(void *arg0) {
         break;
     default:
         kind = D_80142358[D_800E4690->player * 150];
-        table = func_80425C70_de(arg0,0,kind);
+        table = Achieve_CopyPreset(arg0,0,kind);
         goto selected;
         break;
     }
-    table = func_80425C70_de(arg0, category, kind);
+    table = Achieve_CopyPreset(arg0, category, kind);
 selected:
     if ((value = table->first) > 0) {
         

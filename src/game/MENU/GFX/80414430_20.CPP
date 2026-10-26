@@ -34,7 +34,7 @@ static inline void sync(void) {
     }
 }
 
-extern s32 func_80413608_de(u8 *);
+extern s32 Frontend_GetImagePixelType(u8 *);
 
 static inline u32 blockWord16(void) {
    s32 num; s32 count;
@@ -107,8 +107,8 @@ void func_804174F4_de(Texture *arg0) {
  } else {
  D_800DF254=tex; D_800DF264_de=0;
  D_800DF258=tex->width; D_800DF25C=tex->height;
- D_800DF268_de=func_80413608_de(&tex->unk0);
- D_800DF26C_de=func_804136D8_de(&D_800DF254->unk0);
+ D_800DF268_de=Frontend_GetImagePixelType(&tex->unk0);
+ D_800DF26C_de=Frontend_HasImageFormatMaskComponent(&D_800DF254->unk0);
  flags=tex->flags;size=tex->size;
  D_800DF260_de=0;
  if(flags>0 && size>2048) D_800DF260_de=1;
@@ -269,7 +269,7 @@ void func_80417B20_de(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
             var_fs1f = temp_fv0_4;
             var_fs2 = -var_fs2;
         }
-        func_802A1898_de(&sp20, &sp24, &sp28, &sp2C);
+        N64Eng_GetClipBounds(&sp20, &sp24, &sp28, &sp2C);
         if ((sp28 < var_s2) || (var_s0 < sp20) || (sp2C < var_s3) || (var_s1 < sp24)) {
             if ((sp28 >= var_s0) && (sp2C >= var_s1) && (var_s2 >= sp20) && (var_s3 >= sp24)) {
                 if (var_s1 < sp24) {

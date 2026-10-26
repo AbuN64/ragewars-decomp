@@ -69,7 +69,7 @@ void Link_DispatchTrigger(Trigger *trigger) {
 INCLUDE_ASM("span_1000", Link_DispatchTrigger);
 #endif
 
-extern s32 func_80279204_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, void *arg6);
+extern s32 Link_DispatchMatchingTriggers(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, void *arg6);
 
 extern s32 Scene_FindActorTriggerRange(s8 *arg0, void *arg1, s32 *arg2, s32 *arg3);
 
@@ -88,31 +88,31 @@ extern void AnimPool_ReleaseSceneEffect(struct Shared_Actor *arg0);
 
 
 
-void func_80278D78_de(struct Shared_Actor *actor, s32 arg1, void *arg2) {
+void Link_DispatchActorLinks(struct Shared_Actor *actor, s32 arg1, void *arg2) {
     s32 sp20;
     s32 sp24;
 
     if (!(actor->weaponFlags & 0x80000)) {
         Scene_FindActorTriggerRange(&g_world, actor, &sp20, &sp24);
         if (sp24 != 0) {
-            func_80279204_de(sp20, sp24, 0, arg1 & 0x3FC1FF, arg1 & 0x400000, 0x400000, arg2);
+            Link_DispatchMatchingTriggers(sp20, sp24, 0, arg1 & 0x3FC1FF, arg1 & 0x400000, 0x400000, arg2);
         }
     }
 }
 
-void func_80278E04_de(s32 arg0, s32 arg1, void *actor) {
+void Link_DispatchObjectLinks(s32 arg0, s32 arg1, void *actor) {
     s32 sp20;
     s32 sp24;
 
     if (arg0 != 0) {
         Scene_FindAlternateTriggerRange(&g_world, arg0, &sp20, &sp24);
         if (sp24 != 0) {
-            func_80279204_de(sp20, sp24, 0, arg1 & 0x7FF, arg1 & 0x3800, 0x3800, actor);
+            Link_DispatchMatchingTriggers(sp20, sp24, 0, arg1 & 0x7FF, arg1 & 0x3800, 0x3800, actor);
         }
     }
 }
 
-void func_80278E7C_de(void *trigger) {
+void Link_ActivateTrigger(void *trigger) {
     func_80278EEC_S1 *object = trigger;
 
     object->unkE |= 0x10;
@@ -124,7 +124,7 @@ void func_80278E7C_de(void *trigger) {
     Link_DispatchTrigger(trigger);
 }
 
-void func_80278F00_de(Record14 *trigger) {
+void Link_DispatchTriggerExit(Record14 *trigger) {
     Record14 copy;
     u8 *bytes = (u8 *)trigger;
 
@@ -140,31 +140,31 @@ void func_80278F00_de(Record14 *trigger) {
 /* Clears bits 0x2000 and 0x100 of the flag word at offset 0x100 of an object. */
 
 
-void func_80278F68_de(struct LevelActor *object) {
+void Link_ClearActorFlagMask(struct LevelActor *object) {
     object->flags &= ~0x2000;
     object->flags &= ~0x100;
 }
 
-void func_80278F84_de(LevelActor *actor) {
+void Link_SetActorFlagMask(LevelActor *actor) {
     func_802472F0_de(actor);
     actor->flags = (s32) (actor->flags | 0x2100);
 }
 
-void func_80278FB4_de(s32 arg0, s32 unused1, s32 arg2) {
+void Link_RequestOwnerTrack(s32 arg0, s32 unused1, s32 arg2) {
     if (g_world.mode == 4) {
         Scene_ResetTransitionViewport();
         Menu_RequestTrackByIds(arg0, arg2);
     }
 }
 
-void func_80279004_de(s32 arg0) {
+void Link_RequestGlobalTrack(s32 arg0) {
     if (g_world.mode == 4) {
         Scene_ResetTransitionViewport();
         Menu_RequestTrackByIds(0, arg0);
     }
 }
 
-void func_80279048_de(void *arg0, void *arg1) {
+void Link_CaptureActorTransform(void *arg0, void *arg1) {
     (((struct ObjectState104 *) ((s8 *) arg0))->unk_100) = (s32) ((((struct ObjectState104 *) ((s8 *) arg0))->unk_100) | 0x40000000);
     (((struct FloatState64 *) ((s8 *) arg1))->unk_48) = (f32) (((struct ObjectState104 *) ((s8 *) arg0))->unk_8);
     (((struct FloatState64 *) ((s8 *) arg1))->unk_4C) = (f32) (((struct ObjectState104 *) ((s8 *) arg0))->unk_C);
@@ -172,7 +172,7 @@ void func_80279048_de(void *arg0, void *arg1) {
     (((struct FloatState64 *) ((s8 *) arg1))->unk_60) = (f32) (((struct ObjectState104 *) ((s8 *) arg0))->unk_6C);
 }
 
-void func_8027907C_de(s32 arg0, s32 arg1, Trigger *trigger) {
+void Link_DispatchTriggerAudio(s32 arg0, s32 arg1, Trigger *trigger) {
     if (trigger->unk6 >= 0x100) {
         func_8025E11C_de(trigger->unk6);
         return;
@@ -180,7 +180,7 @@ void func_8027907C_de(s32 arg0, s32 arg1, Trigger *trigger) {
     func_8025E2D4_de(trigger->unk6);
 }
 
-void func_802790C0_de(struct Shared_Actor *actor, s32 *stateFlags) {
+void Link_DeactivateActorState(struct Shared_Actor *actor, s32 *stateFlags) {
     s32 flags;
 
     Barrel_StopActorLoopingSound();
@@ -194,15 +194,15 @@ void func_802790C0_de(struct Shared_Actor *actor, s32 *stateFlags) {
     }
 }
 
-void func_80279138_de(int unused0, int unused1, void *arg2) {
+void Link_PlayTriggerSoundCallback(int unused0, int unused1, void *arg2) {
     ObjRecAt6V2 *arg2_record = arg2;
     SoundElement_PlayFlatSound(arg2_record->unk6);
 }
 
-void func_80279158_de(void *arg0) {
+void Link_SelectTriggerMusic(void *arg0) {
     func_8025E2D4_de((s32) (((struct ObjRecAt6V1 *) ((s8 *) arg0))->unk6));
 }
 
-void func_80279178_de(void *arg0) {
+void Link_PlayTriggerSound(void *arg0) {
     SoundElement_PlayFlatSound((((struct ObjRecAt6V2 *) ((s8 *) arg0))->unk6));
 }

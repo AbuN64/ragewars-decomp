@@ -15,10 +15,10 @@ extern s8 D_80102B0D[], D_800FEB0E[];
 extern char *D_auto_800E2054[], *D_auto_800E20B4[], *D_auto_800E20A4[], *D_800E2044_eu[], *D_800E2074_eu[], *D_800E2094_eu[], *D_800E2084[], *D_auto_800E2034[];
 extern u8 D_800FEB0F[], D_800FEB17[], D_800FEB4A[], D_800FEB54[], D_80102C24[], D_8010EB7D[], D_80142358[];
 extern s32 D_8010EB94[], D_80146894;
-extern void *Cache_AllocateMemory(), *Frontend_FindWidgetByResourceId(), *func_80425C70_de(), *Achieve_GetResultText();
-extern s32 Defs_TestBit(), func_80425014_de(), func_80425674_de(), Frontend_FindKeyIndex();
-extern void Frontend_SetWidgetFlag08(), Frontend_SetWidgetFlag100(), func_8043C210_de(), func_8043C278_de(), func_80438A88_de(), func_80425D14_de();
-extern void Defs_SetBitValue(), XPlus_FillMemory(), func_804259E0_de(), XStdio_FormatBuffer(), XPlus_CopyString(), Achieve_UpdatePlayerPreviewStats(), func_80438614_de();
+extern void *Cache_AllocateMemory(), *Frontend_FindWidgetByResourceId(), *Achieve_CopyPreset(), *Achieve_GetResultText();
+extern s32 Defs_TestBit(), Achieve_ApplyLevelCompletionReward(), Achieve_AwardCharacterCompletionUnlock(), Frontend_FindKeyIndex();
+extern void Frontend_SetWidgetFlag08(), Frontend_SetWidgetFlag100(), func_8043C210_de(), func_8043C278_de(), func_80438A88_de(), Achieve_MarkLevelPlayed();
+extern void Defs_SetBitValue(), XPlus_FillMemory(), Achieve_UpdateUnlockTiers(), XStdio_FormatBuffer(), XPlus_CopyString(), Achieve_UpdatePlayerPreviewStats(), func_80438614_de();
 extern void func_8041B110_de(), Scene_CopyLevelName(), Tsmos_DeactivateControllerState();
 extern char *XPlus_UppercaseString();
 extern u8 D_800F00DC_raw[];
@@ -58,7 +58,7 @@ s32 func_80438880_eu(void *root) {
     mode = D_801462C8_raw[0xD];
     if (mode == 1) {
         if (SG(D_801462C8_raw, s32, 0x680) == 1) {
-            func_80425D14_de(SG(g, s32, 0x94));
+            Achieve_MarkLevelPlayed(SG(g, s32, 0x94));
             SG(g, s32, 0x9C) = -1;
             if (*D_800E4680 != 0 && Defs_TestBit(D_80102C24 + 1 + SG(g, s32, 0x94) * 0x98 + D_800FEB0F[SG(g, s32, 0x94) * 0x98] * 5, D_8015402C) == 1) {
                 it = Frontend_FindWidgetByResourceId(SG(g, void *, 0x20), CS(0x282));
@@ -66,7 +66,7 @@ s32 func_80438880_eu(void *root) {
                 SG(it, u8, 0x10) = 0xAF;
                 SG(it, char *, 0x38) = D_auto_800E2054[lang];
             } else {
-                v = func_80425014_de(SG(g, s32, 0x94));
+                v = Achieve_ApplyLevelCompletionReward(SG(g, s32, 0x94));
                 SG(g, s32, 0x9C) = v;
                 SG(g, void *, 0xAC) = Achieve_GetResultText(v);
                 SG(g, s32, 0x98) = -1;
@@ -79,7 +79,7 @@ s32 func_80438880_eu(void *root) {
                 }
                 if (label != -1 && Defs_TestBit(D_800FEB4A + SG(g, s32, 0x94) * 0x98, label) == 0) {
                     Defs_SetBitValue(D_800FEB4A + SG(g, s32, 0x94) * 0x98, label, 1);
-                    func_804259E0_de(SG(g, s32, 0x94));
+                    Achieve_UpdateUnlockTiers(SG(g, s32, 0x94));
                     SG(g, s32, 0x98) = label;
                 }
                 if (D_800FEB17[SG(g, s32, 0x94) * 0x98] >= 0x12) {
@@ -91,7 +91,7 @@ s32 func_80438880_eu(void *root) {
                 if (D_8015402C >= 0x23) {
                     Defs_SetBitValue(D_800FEB54 + SG(g, s32, 0x94) * 0x98, D_80142358[SG(g, s32, 0x94) * 0x8C], 1);
                     XPlus_FillMemory(D_800FEB54 + 0x2A + SG(g, s32, 0x94) * 0x98, 0, 5);
-                    v = func_80425674_de(SG(g, s32, 0x94));
+                    v = Achieve_AwardCharacterCompletionUnlock(SG(g, s32, 0x94));
                     if (v >= 0) {
                         i = Frontend_FindKeyIndex(v);
                         XStdio_FormatBuffer(g + 0x18C, D_auto_800E2034[lang], ((char **)SG(D_800F00DC_raw, char *, i * 0x70))[lang]);
@@ -101,8 +101,8 @@ s32 func_80438880_eu(void *root) {
         }
     } else if (mode == 3) {
         if (SG(D_801462C8_raw, s32, 0x5D8 + 0xA8) == 1) {
-            func_80425D14_de(SG(g, s32, 0x94));
-            v = (s32)func_80425C70_de(D_8015402C, 3, 0);
+            Achieve_MarkLevelPlayed(SG(g, s32, 0x94));
+            v = (s32)Achieve_CopyPreset(D_8015402C, 3, 0);
             SG(D_8010EB94, s32, 0) = SG(v, u8, 0x24) - (s32)(SG(D_801462C8_raw, f32, 0x5D8 + 0x14) * 1.0f);
             if (D_8015402C == 0x23) {
                 it = Frontend_FindWidgetByResourceId(SG(g, void *, 0x20), CS(0x283));
@@ -113,7 +113,7 @@ s32 func_80438880_eu(void *root) {
         }
     } else if (mode == 4) {
         if (SG(D_801462C8_raw, s32, 0x680) == mode) {
-            func_80425D14_de(SG(g, s32, 0x94));
+            Achieve_MarkLevelPlayed(SG(g, s32, 0x94));
             if (D_8015402C == 0x23) {
                 it = Frontend_FindWidgetByResourceId(SG(g, void *, 0x20), CS(0x283));
                 Frontend_SetWidgetFlag08(it, 1);

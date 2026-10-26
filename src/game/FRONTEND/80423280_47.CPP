@@ -40,7 +40,7 @@ extern void func_8043C210_de(void *, s32, s32, s32, s32);
 extern s32 Frontend_CountOpenPlayerSlots(void);
 extern void *Frontend_FindWidgetByResourceId(void *root, s32 identifier);
 extern void Frontend_SetWidgetFlag100(void *record, s32 enable);
-extern void *func_802A1990_de(s32, s32, s32, s32, s32);
+extern void *N64Eng_CreateNumericWidget(s32, s32, s32, s32, s32);
 extern void *func_8041ABC0_de(s32, s32);
 extern void SmpButton_AppendListText(void *, char *);
 extern void func_8041B110_de(s32);
@@ -69,15 +69,15 @@ s32 Frontend_CreateMatchOptions(void *root) {
         Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, OPTIONS_TEXT + 6), 1);
         break;
     }
-    D_800E4EF0->widget24 = func_802A1990_de(OPTIONS_TEXT + 4, OPTIONS_TEXT + 5, 0, 100, 1);
-    D_800E4EF0->widget28 = func_802A1990_de(OPTIONS_TEXT + 2, OPTIONS_TEXT + 3, 0, 100, 1);
-    D_800E4EF0->widget2C = func_802A1990_de(OPTIONS_TEXT + 0, OPTIONS_TEXT + 1, 0, 100, 1);
-    D_800E4EF0->widget30 = func_802A1990_de(OPTIONS_TEXT + 6, OPTIONS_TEXT + 7, 0, 100, 1);
+    D_800E4EF0->widget24 = N64Eng_CreateNumericWidget(OPTIONS_TEXT + 4, OPTIONS_TEXT + 5, 0, 100, 1);
+    D_800E4EF0->widget28 = N64Eng_CreateNumericWidget(OPTIONS_TEXT + 2, OPTIONS_TEXT + 3, 0, 100, 1);
+    D_800E4EF0->widget2C = N64Eng_CreateNumericWidget(OPTIONS_TEXT + 0, OPTIONS_TEXT + 1, 0, 100, 1);
+    D_800E4EF0->widget30 = N64Eng_CreateNumericWidget(OPTIONS_TEXT + 6, OPTIONS_TEXT + 7, 0, 100, 1);
     D_800E4EF0->countDefault = 0;
     if (D_800E4EF0->countCap == 3) {
         D_800E4EF0->countDefault = 1;
     }
-    D_800E4EF0->widget34 = func_802A1990_de(OPTIONS_TEXT + 13, OPTIONS_TEXT + 14, D_800E4EF0->countDefault,
+    D_800E4EF0->widget34 = N64Eng_CreateNumericWidget(OPTIONS_TEXT + 13, OPTIONS_TEXT + 14, D_800E4EF0->countDefault,
                                             D_800E4EF0->countCap, 1);
     widget = func_8041ABC0_de(OPTIONS_TEXT + 8, OPTIONS_TEXT + 9);
     slot = &D_800E4EF0->selectWidget;

@@ -448,7 +448,7 @@ after_focus:
             }
             D_8014D080->handled = temp_s0_12;
         }
-        temp_f2 = (s32)(func_802A18CC_de() * 1000.0);
+        temp_f2 = (s32)(N64Eng_GetTimeSeconds() * 1000.0);
         DispatchCurrentScreenEvent(1, 0xE08, temp_f2 - D_8014D080->frames, temp_f2, 0);
     }
 after_e08:

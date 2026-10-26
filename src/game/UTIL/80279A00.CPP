@@ -11,13 +11,13 @@
 #include "TYPES.H"
 #include "COMMON/OBJECTLINKS14C.H"
 
-void func_80279990_de(void *batch) {
+void Map_ResetFramePool(void *batch) {
     s32 *p = (s32 *)batch;
     p[2] = p[1];
     p[3] = p[0] + ((p[1] * D_800D297C) << 6);
 }
 
-s32 func_802799C0_de(void *arg0, s32 arg1) {
+s32 Map_ReserveEntries(void *arg0, s32 arg1) {
     s32 var_a2;
     var_a2 = 0;
     if ((((struct ObjRecAtCV3 *) ((s8 *) arg0))->unk8) >= arg1) {

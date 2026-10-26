@@ -71,7 +71,7 @@ extern short Frontend_GetFontLetterSpacing(s32 index);
 
 extern void Frontend_DrawWidget(struct Pair14 *image, Triple at, Style style);
 
-/* Draws the child at 0x8 of a window with the arguments passed by value after clearing D_800E2AB8 once Frontend_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values func_802A1898_de reports, narrows them by the resolved basis through func_8040F488_de, giving up when it fails, and installs them through func_802A1870_de around the draw, restoring the saved values after it. Adapted from func_8041BA00_de with D_800E2AB8 cleared before the rectangle is resolved, the resolved basis declared first, and a failed func_8040F488_de ending the function. */
+/* Draws the child at 0x8 of a window with the arguments passed by value after clearing D_800E2AB8 once Frontend_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values N64Eng_GetClipBounds reports, narrows them by the resolved basis through func_8040F488_de, giving up when it fails, and installs them through N64Eng_SetClipBounds around the draw, restoring the saved values after it. Adapted from func_8041BA00_de with D_800E2AB8 cleared before the rectangle is resolved, the resolved basis declared first, and a failed func_8040F488_de ending the function. */
 
 
 
@@ -79,7 +79,7 @@ extern void Frontend_DrawWidget(struct Pair14 *image, Triple at, Style style);
 
 
 
-extern void func_802A1898_de(u32 *, u32 *, u32 *, u32 *);
+extern void N64Eng_GetClipBounds(u32 *, u32 *, u32 *, u32 *);
 
 extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 
@@ -230,7 +230,7 @@ void Frontend_ReplaceNodeRefs(NodeRecAt44 *node, void *from, void *to) {
 
 
 
-void func_8040F044_de(WidgetRecAtE *a, WidgetRecAtE *b) {
+void Frontend_SwapWidgetTreePositions(WidgetRecAtE *a, WidgetRecAtE *b) {
     WidgetRecAtE *w;
     WidgetRecAtE *cursorA;
     WidgetRecAtE *cursorB;
@@ -302,19 +302,19 @@ s32 Frontend_MeasureTextPrefix(s32 font, u8 *text, s32 length) {
 /* Stores two bytes at offsets 0x2C and 0x2D of a record, a pair set together. */
 
 
-void func_8040F1FC_de(struct Pair2C *record, u8 first, u8 second) {
+void Frontend_SetRecordBytePair(struct Pair2C *record, u8 first, u8 second) {
     record->first = first;
     record->second = second;
 }
 
 /** Store a word at offset 0x2c. */
-void func_8040F208_de(void *object, int value) {
+void Frontend_SetObjectWordAt2C(void *object, int value) {
     ObjRecAt2CV2 *record = object;
     record->unk2C = value;
 }
 
 /** Store a word at offset 0x2c. */
-void func_8040F210_de(void *object, int value) {
+void Frontend_AssignObjectWordAt2C(void *object, int value) {
     ObjRecAt2CV2 *record = object;
     record->unk2C = value;
 }
@@ -322,7 +322,7 @@ void func_8040F210_de(void *object, int value) {
 /* Stores four values into the consecutive words at offsets 0x2C to 0x38 of a record. */
 
 
-void func_8040F218_de(struct QuadRecAt2C *record, s32 first, s32 second, s32 third, s32 fourth) {
+void Frontend_SetRecordValueQuad(struct QuadRecAt2C *record, s32 first, s32 second, s32 third, s32 fourth) {
     record->values[0] = first;
     record->values[1] = second;
     record->values[2] = third;
@@ -351,10 +351,10 @@ void Frontend_DrawButtonImage(ButtonWidget *widget, Triple at, Style style) {
 }
 
 void Frontend_DrawClippedChildren(WidgetLayout *widget, Args args) {
-    Quad_func_802A1BE0_de basis;
-    Quad_func_802A1BE0_de value;
-    Quad_func_802A1BE0_de transformed;
-    Quad_func_802A1BE0_de first;
+    QuadN64EngDrawNumericWidgetChildren basis;
+    QuadN64EngDrawNumericWidgetChildren value;
+    QuadN64EngDrawNumericWidgetChildren transformed;
+    QuadN64EngDrawNumericWidgetChildren first;
     s32 changed;
     UiWidget *window = widget;
 
@@ -362,18 +362,18 @@ void Frontend_DrawClippedChildren(WidgetLayout *widget, Args args) {
     D_800E2AB8 = 0;
     if (Frontend_ComputeWidgetBounds((struct Shape_typemap_165 *)&first, (struct Shape_typemap_165 *)&basis, widget, (sm_dldc *)&args) != 0) {
         if ((window->flags & 0x200) != 0) {
-            func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
+            N64Eng_GetClipBounds(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
             if (Frontend_ClampRectToClip(&transformed, &basis) == 0) {
                 return;
             }
-            func_802A1870_de(transformed.x, transformed.z,
+            N64Eng_SetClipBounds(transformed.x, transformed.z,
                           transformed.y, transformed.w);
             changed = 1;
         }
         Frontend_DrawVisibleSiblings(window->children, args);
         if (changed != 0) {
-            func_802A1870_de(value.x, value.z, value.y, value.w);
+            N64Eng_SetClipBounds(value.x, value.z, value.y, value.w);
         }
     }
 }
@@ -445,7 +445,7 @@ void Frontend_NoOperation(void) {
    shape a sort comparator uses. */
 
 
-int func_8040F570_de(struct Field_u16_14 *a, struct Field_u16_14 *b) {
+int Frontend_CompareRecordShortValues(struct Field_u16_14 *a, struct Field_u16_14 *b) {
     return a->value - b->value;
 }
 

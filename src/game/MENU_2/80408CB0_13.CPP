@@ -25,7 +25,7 @@ int func_8040C5C0_de(void) {
 
 
 extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_typemap_165 *, void *, Args *);
-extern void func_802A1898_de(s32 *, s32 *, s32 *, s32 *);
+extern void N64Eng_GetClipBounds(s32 *, s32 *, s32 *, s32 *);
 extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 extern void Frontend_DrawVisibleSiblings(void *, Args);
 
@@ -43,15 +43,15 @@ void func_8040C5C8_de(void *widget, Args args) {
     changed = 0;
     if (Frontend_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
         if ((record->unk12 & 0x200) != 0) {
-            func_802A1898_de(&value.field_0, &value.field_8, &value.field_4, &value.field_C);
+            N64Eng_GetClipBounds(&value.field_0, &value.field_8, &value.field_4, &value.field_C);
             transformed = value;
             Frontend_ClampRectToClip(&transformed, &basis);
-            func_802A1870_de(transformed.field_0, transformed.field_8, transformed.field_4, transformed.field_C);
+            N64Eng_SetClipBounds(transformed.field_0, transformed.field_8, transformed.field_4, transformed.field_C);
             changed = 1;
         }
         Frontend_DrawVisibleSiblings(record->unk8, args);
         if (changed != 0) {
-            func_802A1870_de(value.field_0, value.field_8, value.field_4, value.field_C);
+            N64Eng_SetClipBounds(value.field_0, value.field_8, value.field_4, value.field_C);
         }
     }
 }

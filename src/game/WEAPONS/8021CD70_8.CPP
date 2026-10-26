@@ -72,8 +72,8 @@ extern void func_8025E418_de(s32);
 extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
 extern f32 GraphU64_GetTrianglePlaneHeight(struct Shared_Model *, f32, f32);
 extern f32 Region_GetPolygonHeight(struct Shared_Model *, f32, f32);
-extern void func_80278D78_de(void *, s32, void *);
-extern void func_80278E04_de(struct Shared_Model *, s32, void *);
+extern void Link_DispatchActorLinks(void *, s32, void *);
+extern void Link_DispatchObjectLinks(struct Shared_Model *, s32, void *);
 
 
 extern void ItemMenu_UpdateToggleMenu(void *, void *);
@@ -496,8 +496,8 @@ void func_80220ED4_de(SharedPlayer *player)
     after = InstHdr_FindActorModelEntry(actor);
     if (before != after)
     {
-      func_80278E04_de(oldModel, linkFlags | 2, actor);
-      func_80278E04_de(newModel, linkFlags | 1, actor);
+      Link_DispatchObjectLinks(oldModel, linkFlags | 2, actor);
+      Link_DispatchObjectLinks(newModel, linkFlags | 1, actor);
       if ((after != 0) && (after->flags & 0x80000))
       {
         player->views5E8.view854_147.unk854 = after->timer;
@@ -508,11 +508,11 @@ void func_80220ED4_de(SharedPlayer *player)
     {
       if ((D_801041F0 != 0) && ((*D_801041F0) == 1))
       {
-        func_80278D78_de(D_801041F0, soundFlags | 2, actor);
+        Link_DispatchActorLinks(D_801041F0, soundFlags | 2, actor);
       }
       if (D_8010028C != 0)
       {
-        func_80278E04_de(D_8010028C, linkFlags | 4, actor);
+        Link_DispatchObjectLinks(D_8010028C, linkFlags | 4, actor);
       }
       func_80222FE0_de(player, actor, stateFlags);
       func_8022C88C_de(player, actor, stateFlags);

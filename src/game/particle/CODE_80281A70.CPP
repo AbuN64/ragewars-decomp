@@ -120,7 +120,7 @@ typedef struct CParticleSystem_t {
     CParticle_t *m_pLastCreatedParticle;
 } CParticleSystem_t;
 extern const f32 D_800C4E4C_de,D_800C4E50_de;
-extern void Particle_Update(void *),func_80279A00_de(void *),Particle_UpdateMatrix(void *);
+extern void Particle_Update(void *),Particle_FinishActorEffects(void *),Particle_UpdateMatrix(void *);
 extern void Fx_DetachParticleSwooshes(void *,void *),DynLight_ReleaseLight(void *,s32);
 extern void Particle_SpawnChildEffect(void *,s32,s32,s32);
 extern void SoundElement_PlaySoundAtPosition(s16,CVector3,s32,s32);
@@ -129,7 +129,7 @@ extern void GraphU64_SubtractVectors(CVector3 *,CVector3 *,CVector3 *);
  * D_8013B1A8, drops one owner count, unlinks it from its active list onto the free list and, when flagged, from the
  * draw list. */
 static __inline__ void Particle_Free(CParticleSystem_t *world, CParticle_t *p) {
-    func_80279A00_de(p);
+    Particle_FinishActorEffects(p);
     if (p->m_ActiveSwooshes) {
         Particle_UpdateMatrix(p);
         Fx_DetachParticleSwooshes(&D_801379C0, p);
@@ -414,7 +414,7 @@ typedef struct DraftActor827C8 {
     u8 pad1DA[0xA]; void *list; u8 pad1E8[4]; struct DraftActor827C8 *next;
 } DraftActor827C8;
 typedef struct DraftWorld827C8 { u8 pad[0xFC00]; u8 freeList[0x14], activeList[0x14], padFC28[0x14]; DraftActor827C8 *actors; } DraftWorld827C8;
-extern void Particle_SpawnChildEffect(void *, s32, s32, s32), func_80279A00_de(void *), Particle_UpdateMatrix(void *);
+extern void Particle_SpawnChildEffect(void *, s32, s32, s32), Particle_FinishActorEffects(void *), Particle_UpdateMatrix(void *);
 extern void Fx_DetachParticleSwooshes(void *, void *);
 void Particle_ReleaseOwnerEmitters(DraftWorld827C8 *world, s32 owner)
 {
@@ -459,7 +459,7 @@ void Particle_ReleaseOwnerEmitters(DraftWorld827C8 *world, s32 owner)
       {
       if (!(actor->flags & 0x800))
       {
-        func_80279A00_de(actor);
+        Particle_FinishActorEffects(actor);
         if (actor->linked)
         {
           Particle_UpdateMatrix(actor);
@@ -522,7 +522,7 @@ typedef struct ActorWorld {
     char padFC28[0x14]; Actor *head;
 } ActorWorld;
 extern void Particle_SpawnChildEffect(void *, s32, s32, s32);
-extern void func_80279A00_de(void *);
+extern void Particle_FinishActorEffects(void *);
 extern void Particle_UpdateMatrix(void *);
 extern void Fx_DetachParticleSwooshes(void *, void *);
 
@@ -551,7 +551,7 @@ void Particle_RetireOwnedActors(ActorWorld *world, void *owner) {
                 SoundElement_PlaySoundAtPosition((s16)sound, actor->position, 0, -1);
             if (actor->flags & 0x100) {
                 if (!(actor->flags & 0x800)) {
-                    func_80279A00_de(actor);
+                    Particle_FinishActorEffects(actor);
                     if (actor->linked) {
                         Particle_UpdateMatrix(actor);
                         Fx_DetachParticleSwooshes(&D_801379C0, actor);

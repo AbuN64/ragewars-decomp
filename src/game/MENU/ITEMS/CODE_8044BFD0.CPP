@@ -49,7 +49,7 @@ typedef struct SlotPool {
 } SlotPool;
 
 /* Sets up a batch of count 0x40-byte entries starting at entries: remembers the block and half its count, runs
- * func_802B6B80_de on every entry, then hands the batch to func_80279990_de. */
+ * func_802B6B80_de on every entry, then hands the batch to Map_ResetFramePool. */
 void Items_InitEntryBatch(EntryBlock *batch, s32 *entries, s32 count) {
     s32 i;
 
@@ -58,7 +58,7 @@ void Items_InitEntryBatch(EntryBlock *batch, s32 *entries, s32 count) {
     for (i = 0; i < count; i++) {
         func_802B6B80_de(&entries[i * 0x10]);
     }
-    func_80279990_de(batch);
+    Map_ResetFramePool(batch);
 }
 
 /* Initialises a pool of 128 slots of 0x1F8 bytes: every slot gets kind 2, the shared definition D_8011ADB0 and

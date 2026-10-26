@@ -3,7 +3,7 @@
 #include "COMMON/ALDELAY28.H"
 #include "COMMON/EXTERNS_16.H"
 
-void func_802B6B80_de(s32 *arg0) {
+void func_802B6B80_de(s32 *fixedMatrix) {
     f32 matrix[16];
     u8 *diagBase;
     u8 *diag;
@@ -47,8 +47,8 @@ void func_802B6B80_de(s32 *arg0) {
         row += 0x10;
     } while (r < 4);
 
-    outLo = arg0;
-    outHi = arg0 + 8;
+    outLo = fixedMatrix;
+    outHi = fixedMatrix + 8;
     i = 0;
     mult = D_800C7884_de;
     mask = 0xFFFF0000;
@@ -73,7 +73,7 @@ void func_802B6B80_de(s32 *arg0) {
     } while (i < 4);
 }
 
-void func_802B6C6C_de(u8 *arg0) {
+void func_802B6C6C_de(u8 *matrixBytes) {
     u8 *diag;
     u8 *elem;
     s32 r;
@@ -82,10 +82,10 @@ void func_802B6C6C_de(u8 *arg0) {
 
     r = 0;
     one = D_800C7888_de;
-    diag = arg0;
+    diag = matrixBytes;
     do {
         c = 0;
-        elem = arg0;
+        elem = matrixBytes;
         do {
             if (r == c) {
                 *(f32 *)diag = one;
@@ -97,11 +97,11 @@ void func_802B6C6C_de(u8 *arg0) {
         } while (c < 4);
         diag += 0x14;
         r += 1;
-        arg0 += 0x10;
+        matrixBytes += 0x10;
     } while (r < 4);
 }
 
-void func_802B6CBC_de(f32 *arg0, s32 *arg1) {
+void func_802B6CBC_de(f32 *floatMatrix, s32 *fixedMatrix) {
     s32 *outLo;
     s32 *outHi;
     f32 *inRow;
@@ -115,12 +115,12 @@ void func_802B6CBC_de(f32 *arg0, s32 *arg1) {
     s32 i;
     s32 j;
 
-    outLo = arg1;
-    outHi = arg1 + 8;
+    outLo = fixedMatrix;
+    outHi = fixedMatrix + 8;
     i = 0;
     mult = D_800C788C_de;
     mask = 0xFFFF0000;
-    inRow = arg0;
+    inRow = floatMatrix;
     do {
         j = 0;
         inPair = inRow;
@@ -141,7 +141,7 @@ void func_802B6CBC_de(f32 *arg0, s32 *arg1) {
     } while (i < 4);
 }
 
-void func_802B6D54_de(f32 *arg0, s32 *arg1) {
+void func_802B6D54_de(f32 *floatMatrix, s32 *fixedMatrix) {
     s32 *inLo;
     u32 *inHi;
     f32 *outRow;
@@ -155,12 +155,12 @@ void func_802B6D54_de(f32 *arg0, s32 *arg1) {
     s32 i;
     s32 j;
 
-    inLo = arg1;
-    inHi = (u32 *) (arg1 + 8);
+    inLo = fixedMatrix;
+    inHi = (u32 *) (fixedMatrix + 8);
     i = 0;
     mask = 0xFFFF0000;
     mult = D_800C7890_de;
-    outRow = arg0;
+    outRow = floatMatrix;
     do {
         j = 0;
         outPair = outRow;

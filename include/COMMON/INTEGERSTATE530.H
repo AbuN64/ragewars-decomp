@@ -190,17 +190,17 @@ typedef struct Widget Widget;
 
 /* Callable low-address aliases of the native code providers. The cartridge
  * registers these entry addresses, not overlay file ranges or data objects. */
-/* D_002A1B50: func_802A1B50_de */
+/* D_002A1B50: N64Eng_DispatchNumericWidgetEvent */
 extern s32 D_002A1B50(void *, s32, s32, s32, s32);
-/* D_002A1BE0: func_802A1BE0_de */
+/* D_002A1BE0: N64Eng_DrawNumericWidgetChildren */
 extern void D_002A1BE0();
 /* D_0040C5C0: second return stub in func_8040C5B8_de (+8) */
 extern s32 D_0040C5C0(void *, s32, s32, s32, s32);
 /* D_0040C5C8: func_8040C5C8_de */
 extern void D_0040C5C8();
-/* D_004125A4: func_804125A4_de */
+/* D_004125A4: Frontend_DispatchTypedWidgetEvent */
 extern s32 D_004125A4(void *, s32, s32, s32, s32);
-/* D_00412634: func_80412634_de */
+/* D_00412634: Frontend_DrawGridListCells */
 extern void D_00412634();
 /* D_00419A4C: func_80419A4C_de */
 extern s32 D_00419A4C(void *, s32, s32, s32, s32);

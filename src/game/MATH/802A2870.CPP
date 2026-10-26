@@ -17,14 +17,14 @@ extern f64 func_804143B0_de(void);
 #endif
 
 /** Store four arguments in the adjacent global state words. */
-void func_802A1870_de(unsigned int a0, unsigned int a1, unsigned int a2, unsigned int a3) {
+void N64Eng_SetClipBounds(unsigned int a0, unsigned int a1, unsigned int a2, unsigned int a3) {
     D_800CD990_de = a0;
     D_800CD994 = a1;
     D_800CD998 = a2;
     D_800CD99C = a3;
 }
 
-void func_802A1898_de(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
+void N64Eng_GetClipBounds(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
 
     *arg0 = D_800CD990_de;
     *arg1 = D_800CD994;
@@ -32,7 +32,7 @@ void func_802A1898_de(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
     *arg3 = D_800CD99C;
 }
 
-f64 func_802A18CC_de(void) {
+f64 N64Eng_GetTimeSeconds(void) {
     return 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 func_804147F0_eu_x

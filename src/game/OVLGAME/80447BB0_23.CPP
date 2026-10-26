@@ -220,13 +220,13 @@ extern char D_auto_rodata_unresolved_800CE410_unclaimed_CF230[], D_800C942C_de[]
 extern u32 D_8013B2BC;
 extern void Player_LoadActorModel(void *actor);
 extern void func_8022BB80_de(void *);
-extern void func_80426090_de(void *);
+extern void Achieve_ApplyProfileWeaponUnlocks(void *);
 extern void func_802AA6D0_de(void *, s32, s32);
 extern void func_8021A78C_de(void *);
 extern s32 Cinema_IsSequenceActive(void);
 extern void func_802458D8_de(void);
 extern void func_802458C4_de(void);
-extern void func_80278E04_de(void *, s32, void *);
+extern void Link_DispatchObjectLinks(void *, s32, void *);
 /* Prepares an actor's per-run HUD state: runs the mode-specific setup when the session byte is set, resets
  * the record at 0x878 to its defaults, lays out the nine on-screen widgets at 0xE2C..0x10C0 (position, then
  * their string tables), the two score fields and the 0x10FC panel, and copies the parent's four-word block. */
@@ -240,7 +240,7 @@ void Ovlgame_InitActorHudState(void *actor) {
         Player_LoadActorModel(actor);
         func_8022BB80_de(actor);
         if (FIELD(u8, FIELD(void *, actor, 0x5D8), 0x91) == 0 && FIELD(u8, session, 0xD) == 1) {
-            func_80426090_de(actor);
+            Achieve_ApplyProfileWeaponUnlocks(actor);
         }
     }
     hud = (char *)actor + 0x878;
@@ -316,7 +316,7 @@ void Ovlgame_InitActorHudState(void *actor) {
     FIELD(s32, actor, 0x1224) = 0;
     func_802458D8_de();
     if (FIELD(void *, actor, 0x14) != 0) {
-        func_80278E04_de(FIELD(void *, actor, 0x14), 1, actor);
+        Link_DispatchObjectLinks(FIELD(void *, actor, 0x14), 1, actor);
     }
     func_802458C4_de();
 }

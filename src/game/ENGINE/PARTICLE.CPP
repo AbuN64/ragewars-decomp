@@ -67,7 +67,7 @@ extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 extern void Geometry_QueueModelInstance(void **, void *, s32, void *, void *, s32);
 
 extern void Cache_UnlockResource(s32, void *);
-extern void *func_802799C0_de(void *, s32);
+extern void *Map_ReserveEntries(void *, s32);
 
 void func_8027E784_de(Shared_Particle *actor, GameplayCamera *view) {
     f32 matrix[16];
@@ -86,7 +86,7 @@ void func_8027E784_de(Shared_Particle *actor, GameplayCamera *view) {
     f32 floor;
     f32 shrink;
 
-    model = func_802799C0_de(&D_8011FFB0, 1);
+    model = Map_ReserveEntries(&D_8011FFB0, 1);
     if (model == 0) {
         return;
     }
@@ -163,7 +163,7 @@ void Particle_DrawModel(Shared_Particle *particle, GameplayCamera *view) {
     if (D_80140FF8 == 1) {
         matrix = &particle->mtx[D_800D297C];
     } else {
-        matrix = func_802799C0_de(&D_8011FFB0, 1);
+        matrix = Map_ReserveEntries(&D_8011FFB0, 1);
         if (matrix == 0) {
             return;
         }

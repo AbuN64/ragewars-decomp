@@ -25,7 +25,7 @@
 #include "RENDER_2/8025DE50_5.H"
 extern struct EntryRecAt8V3 D_800E4694[];
 void Defs_SetBitValue(u8 *arg0, s32 arg1, s32 arg2);
-void func_80427F10_de(void);
+void Frontend_SelectSuggestedTrial(void);
 void func_8043C210_de(s32 *record, s32 first, s32 second, s32 third, s32 fourth);
 
 
@@ -95,10 +95,10 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
             ((struct Status *)g_playerSettings)[i].pendingClear = 0;
         }
     }
-    func_80427008_de();
-    func_80427F10_de();
+    Frontend_LoadTrialCompletionFlags();
+    Frontend_SelectSuggestedTrial();
     D_800E4690->window = Frontend_FindWidgetByResourceId(arg0, (u16)D_800E4694[D_800E4690->selection].id);
-    func_804280BC_de();
+    Frontend_RefreshTrialSelectionLabel();
     D_80154020.ready = 0;
     D_80154020.value = -1;
     func_8043C210_de((s32 *)D_800E4690, 0x67, 0, 0, 0);
@@ -110,7 +110,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     if (mode < 5) {
         if (mode >= 3) {
             D_800E4690->modeFlag = 1;
-            func_804279B8_de(D_800E4690);
+            Frontend_RefreshTrialCharacterPreview(D_800E4690);
         }
     }
     D_800E4690->blinking = 0;
@@ -130,13 +130,13 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     }
     switch (D_801462D0.mode) {
     case 1:
-        func_80428300_de();
+        Frontend_FillProfileWeaponRows();
         break;
     case 3:
-        func_8042840C_de();
+        Frontend_FillSelectedPlayerWeaponRows();
         break;
     case 2:
-        func_80428214_de();
+        Frontend_FillTwoPlayerWeaponRows();
         break;
     }
     if (D_801462D0.mode != 2) {

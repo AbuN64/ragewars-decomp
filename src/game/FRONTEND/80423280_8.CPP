@@ -57,8 +57,8 @@ extern void MarkMenuEventHandled();
    (word at D_800E0658) exists and Defs_TestBit reports it set in the menu's flags at 0xA74, it
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
    flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
-   through func_804280BC_de and, by the mode byte at 0xD of D_801462C8, through func_804281A8_de and
-   func_80427B08_de unless the mode is 2 and func_804279B8_de when it is 4; returns zero. */
+   through Frontend_RefreshTrialSelectionLabel and, by the mode byte at 0xD of D_801462C8, through Frontend_ShowTrialPreviewBanner and
+   func_80427B08_de unless the mode is 2 and Frontend_RefreshTrialCharacterPreview when it is 4; returns zero. */
 
 
 
@@ -75,8 +75,8 @@ extern s32 Defs_TestBit(u8 *, s32);
    (word at D_800E065C) exists and Defs_TestBit reports it set in the menu's flags at 0xA74, it
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
    flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
-   through func_804280BC_de and, by the mode byte at 0xD of D_801462C8, through func_804281A8_de and
-   func_80427B08_de unless the mode is 2 and func_804279B8_de when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
+   through Frontend_RefreshTrialSelectionLabel and, by the mode byte at 0xD of D_801462C8, through Frontend_ShowTrialPreviewBanner and
+   func_80427B08_de unless the mode is 2 and Frontend_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
 
 
 
@@ -88,8 +88,8 @@ extern s32 Defs_TestBit(u8 *, s32);
    (word at D_800E0654) exists and Defs_TestBit reports it set in the menu's flags at 0xA74, it
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
    flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
-   through func_804280BC_de and, by the mode byte at 0xD of D_801462C8, through func_804281A8_de and
-   func_80427B08_de unless the mode is 2 and func_804279B8_de when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
+   through Frontend_RefreshTrialSelectionLabel and, by the mode byte at 0xD of D_801462C8, through Frontend_ShowTrialPreviewBanner and
+   func_80427B08_de unless the mode is 2 and Frontend_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
 
 
 
@@ -101,8 +101,8 @@ extern s32 Defs_TestBit(u8 *, s32);
    (word at D_800E0650) exists and Defs_TestBit reports it set in the menu's flags at 0xA74, it
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
    flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
-   through func_804280BC_de and, by the mode byte at 0xD of D_801462C8, through func_804281A8_de and
-   func_80427B08_de unless the mode is 2 and func_804279B8_de when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
+   through Frontend_RefreshTrialSelectionLabel and, by the mode byte at 0xD of D_801462C8, through Frontend_ShowTrialPreviewBanner and
+   func_80427B08_de unless the mode is 2 and Frontend_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
 
 
 
@@ -127,13 +127,13 @@ extern struct EntryRecAt8V3 D_800E4694[];
 
 extern void func_8042E9A0_de(s32, s32);
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4D84, an actor kind at D_800E4D88 and a handler at D_800E4D8C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4D84, an actor kind at D_800E4D88 and a handler at D_800E4D8C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler80429058)(void *, s32, s32, s32, s32);
 
 extern Handler80429058 D_800E4D8C;
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4E20, an actor kind at D_800E4E24 and a handler at D_800E4E28: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4E20, an actor kind at D_800E4E24 and a handler at D_800E4E28: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler804290E8)(void *, s32, s32, s32, s32);
 
@@ -211,15 +211,15 @@ s32 func_80428850_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     }
     D_800E4690->selection = next;
     D_800E4690->window = Frontend_FindWidgetByResourceId(parent, entryWindowKey(next));
-    func_804280BC_de();
+    Frontend_RefreshTrialSelectionLabel();
     options = D_801462C8;
     if (options[0xD] != 2) {
-        func_804281A8_de();
+        Frontend_ShowTrialPreviewBanner();
         D_800E4690->frames = 0;
         func_80427B08_de();
     }
     if (options[0xD] == 4) {
-        func_804279B8_de();
+        Frontend_RefreshTrialCharacterPreview();
     }
     return 0;
 }
@@ -249,15 +249,15 @@ s32 func_804289B4_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     }
     D_800E4690->selection = next;
     D_800E4690->window = Frontend_FindWidgetByResourceId(parent, entryWindowKey(next));
-    func_804280BC_de();
+    Frontend_RefreshTrialSelectionLabel();
     options = D_801462C8;
     if (options[0xD] != 2) {
-        func_804281A8_de();
+        Frontend_ShowTrialPreviewBanner();
         D_800E4690->frames = 0;
         func_80427B08_de();
     }
     if (options[0xD] == 4) {
-        func_804279B8_de();
+        Frontend_RefreshTrialCharacterPreview();
     }
     return 0;
 }
@@ -287,15 +287,15 @@ s32 func_80428B18_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     }
     D_800E4690->selection = next;
     D_800E4690->window = Frontend_FindWidgetByResourceId(parent, entryWindowKey(next));
-    func_804280BC_de();
+    Frontend_RefreshTrialSelectionLabel();
     options = D_801462C8;
     if (options[0xD] != 2) {
-        func_804281A8_de();
+        Frontend_ShowTrialPreviewBanner();
         D_800E4690->frames = 0;
         func_80427B08_de();
     }
     if (options[0xD] == 4) {
-        func_804279B8_de();
+        Frontend_RefreshTrialCharacterPreview();
     }
     return 0;
 }
@@ -325,15 +325,15 @@ s32 func_80428C7C_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     }
     D_800E4690->selection = next;
     D_800E4690->window = Frontend_FindWidgetByResourceId(parent, entryWindowKey(next));
-    func_804280BC_de();
+    Frontend_RefreshTrialSelectionLabel();
     options = D_801462C8;
     if (options[0xD] != 2) {
-        func_804281A8_de();
+        Frontend_ShowTrialPreviewBanner();
         D_800E4690->frames = 0;
         func_80427B08_de();
     }
     if (options[0xD] == 4) {
-        func_804279B8_de();
+        Frontend_RefreshTrialCharacterPreview();
     }
     return 0;
 }
@@ -356,7 +356,7 @@ s32 func_80428E10_de(void) {
     return 0;
 }
 
-s32 func_80428E78_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 func_80428E78_de(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra) {
     Handler80429058 *entry;
     s32 index;
     s32 wildcard;
@@ -369,12 +369,12 @@ s32 func_80428E78_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         entry = &D_800E4D8C;
         index = 0;
         do {
-            if (D_800E4D84[index].value == arg1) {
-                actor = arg0;
+            if (D_800E4D84[index].value == eventId) {
+                actor = eventObject;
                 actor_kind = actor->unkC;
                 table_kind = D_800E4D88[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*entry)(eventObject, eventId, eventPayload, eventValue, eventExtra);
                 }
             }
             entry += 3;
@@ -384,7 +384,7 @@ s32 func_80428E78_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return 0;
 }
 
-s32 func_80428F08_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 func_80428F08_de(void *eventObject, s32 eventId, s32 eventPayload, s32 eventValue, s32 eventExtra) {
     Handler804290E8 *entry;
     s32 index;
     s32 wildcard;
@@ -397,12 +397,12 @@ s32 func_80428F08_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         entry = &D_800E4E28;
         index = 0;
         do {
-            if (D_800E4E20[index].value == arg1) {
-                actor = arg0;
+            if (D_800E4E20[index].value == eventId) {
+                actor = eventObject;
                 actor_kind = actor->unkC;
                 table_kind = D_800E4E24[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*entry)(eventObject, eventId, eventPayload, eventValue, eventExtra);
                 }
             }
             entry += 3;

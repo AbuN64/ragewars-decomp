@@ -5,7 +5,7 @@
 #include "COMMON/FORMAT.H"
 #include "TYPES.H"
 
-/* The same table as func_80413608_de reads, at the field 24 bytes into the 52-byte record. The
+/* The same table as Frontend_GetImagePixelType reads, at the field 24 bytes into the 52-byte record. The
    debugger returned 1 on every one of 400 calls, so the observed records all carry a non-zero
    value here and the zero arm is untested by execution. */
 
@@ -13,16 +13,16 @@
 
 
 
-int func_8041369C_de(int *value) {
+int Frontend_GetImagePaletteByteCount(int *value) {
     return value[4];
 }
 
-int func_804136A8_de(int *value) {
+int Frontend_GetImagePixelByteCount(int *value) {
     return value[3];
 }
 
 /* Returns the word at offset 0x18 of a record. */
-s32 func_804136B4_de(s32 *record) {
+s32 Frontend_GetOwnedImagePixels(s32 *record) {
     return record[0x18 / 4];
 }
 
@@ -36,7 +36,7 @@ int func_804136CC_de(void *object) {
     return record->unk10 > 0;
 }
 
-s32 func_804136D8_de(u8 *record) {
+s32 Frontend_HasImageFormatMaskComponent(u8 *record) {
     return D_800E2B40[*record][0] != 0;
 }
 
@@ -50,7 +50,7 @@ u8 func_80413714_de(u8 *record) {
     return record[1] & 1;
 }
 
-void func_80413720_de(struct Config *out, unsigned char type, short x, short y,
+void Frontend_ConfigureOwnedImage(struct Config *out, unsigned char type, short x, short y,
                   short a, short b, int enable1, int d, int e, int enable2,
                   int f, int g, short last) {
     out->type = type;

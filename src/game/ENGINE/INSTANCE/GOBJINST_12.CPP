@@ -20,7 +20,7 @@
 
 
 
-extern s32 func_802799C0_de(void *, s32);
+extern s32 Map_ReserveEntries(void *, s32);
 
 
 extern void GraphU64_ClampMatrixToFixedRange(f32 *);
@@ -49,7 +49,7 @@ void func_8024BA7C_de(void *actor, Camera *camera, f32 *transform, u8 layer) {
     s32 offset;
 
     if (object->fieldB4 != 0) {
-        mtx = func_802799C0_de(&D_8011FFB0, 1);
+        mtx = Map_ReserveEntries(&D_8011FFB0, 1);
         if (mtx != 0) {
             matrices = camera->matrices;
             GraphU64_MultiplyMatrices(mf, transform, (f32 *)(matrices + 0x1E0));

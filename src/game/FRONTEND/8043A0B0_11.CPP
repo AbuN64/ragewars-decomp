@@ -112,7 +112,7 @@ extern void SmpOverlay_SetSlotValue(void *, int, int);
 
 extern void Frontend_SetPreviewTransformUpdate(void *, int);
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E5C04, an actor kind at D_800E5C08 and a handler at D_800E5C0C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E5C04, an actor kind at D_800E5C08 and a handler at D_800E5C0C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 typedef s32 (*Handler8043C1D0)(void *, s32, s32, s32, s32);
 

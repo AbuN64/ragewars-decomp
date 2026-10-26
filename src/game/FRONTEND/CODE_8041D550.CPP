@@ -39,9 +39,9 @@ extern char D_800DD50C[];
    through the store-side cast. */
 extern void XStdio_FormatBuffer(char *, char *, s32);
 
-extern char *func_80424DE8_de(s32);
+extern char *Achieve_UpdateRankText(s32);
 
-extern s32 func_80426004_de(s32);
+extern s32 Achieve_CountEarnedAchievements(s32);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -101,8 +101,8 @@ void Frontend_UpdateFocusCaption(void) {
 }
 
 /* Fills the player record screen for the selected record D_80102B00[index]: shows the record's
-   name in item 0x1F3 and its rank text from func_80424DE8_de in item 0x1F2, and formats into the
-   screen's text buffers the record's counters at 0x70, 0x6C and 0x74, the value func_80426004_de
+   name in item 0x1F3 and its rank text from Achieve_UpdateRankText in item 0x1F2, and formats into the
+   screen's text buffers the record's counters at 0x70, 0x6C and 0x74, the value Achieve_CountEarnedAchievements
    reports and the byte at 0x17 for items 0x1FD, 0x1F4, 0x1F6, 0x1F9 and 0x1FA, making each item
    visible through func_8040E8D8_de. */
 void Frontend_RefreshProfileStatistics(void) {
@@ -114,7 +114,7 @@ void Frontend_RefreshProfileStatistics(void) {
     ((Label *) item)->text = D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].name;
     item = Frontend_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_498);
     Frontend_SetWidgetFlag08(item, 1);
-    ((Label *) item)->text = func_80424DE8_de(((ProfileStatisticsScreen *) D_800E3590)->index);
+    ((Label *) item)->text = Achieve_UpdateRankText(((ProfileStatisticsScreen *) D_800E3590)->index);
     item = Frontend_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_509);
     Frontend_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->kills, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.kills);
@@ -127,7 +127,7 @@ void Frontend_RefreshProfileStatistics(void) {
     Frontend_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->deaths, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.deaths);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->deaths;
-    score = func_80426004_de(((ProfileStatisticsScreen *) D_800E3590)->index);
+    score = Achieve_CountEarnedAchievements(((ProfileStatisticsScreen *) D_800E3590)->index);
     item = Frontend_FindWidgetByResourceId(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_505);
     Frontend_SetWidgetFlag08(item, 1);
     XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->score, D_800DD50C, score);

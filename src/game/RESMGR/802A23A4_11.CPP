@@ -8,16 +8,16 @@
 #include "RESMGR/802A23A4_11.H"
 #include "MATH/802A2870.H"
 
-extern s32 Frontend_ComputeWidgetBounds(Quad_func_802A1BE0_de *, Quad_func_802A1BE0_de *, void *, Args *);
+extern s32 Frontend_ComputeWidgetBounds(QuadN64EngDrawNumericWidgetChildren *, QuadN64EngDrawNumericWidgetChildren *, void *, Args *);
 
-extern void func_802A1898_de(u32 *, u32 *, u32 *, u32 *);
+extern void N64Eng_GetClipBounds(u32 *, u32 *, u32 *, u32 *);
 
 extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 
 
 extern void Frontend_DrawVisibleSiblings(void *, Args);
 
-s32 func_802A1B50_de(struct Tree *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 N64Eng_DispatchNumericWidgetEvent(struct Tree *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;
@@ -43,26 +43,26 @@ s32 func_802A1B50_de(struct Tree *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) 
     return 0;
 }
 
-void func_802A1BE0_de(void *widget, Args args) {
-    Quad_func_802A1BE0_de first;
-    Quad_func_802A1BE0_de basis;
-    Quad_func_802A1BE0_de value;
-    Quad_func_802A1BE0_de transformed;
+void N64Eng_DrawNumericWidgetChildren(void *widget, Args args) {
+    QuadN64EngDrawNumericWidgetChildren first;
+    QuadN64EngDrawNumericWidgetChildren basis;
+    QuadN64EngDrawNumericWidgetChildren value;
+    QuadN64EngDrawNumericWidgetChildren transformed;
     s32 changed;
 
     changed = 0;
     if (Frontend_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
         if ((((Widget *)widget)->flags & 0x200) != 0) {
-            func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
+            N64Eng_GetClipBounds(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
             Frontend_ClampRectToClip(&transformed, &basis);
-            func_802A1870_de(transformed.x, transformed.z,
+            N64Eng_SetClipBounds(transformed.x, transformed.z,
                           transformed.y, transformed.w);
             changed = 1;
         }
         Frontend_DrawVisibleSiblings(((struct Tree *)widget)->child, args);
         if (changed != 0) {
-            func_802A1870_de(value.x, value.z, value.y, value.w);
+            N64Eng_SetClipBounds(value.x, value.z, value.y, value.w);
         }
     }
 }

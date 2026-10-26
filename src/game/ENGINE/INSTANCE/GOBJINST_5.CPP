@@ -94,7 +94,7 @@ extern void TranslateMatrix(PoseMatrix, f32, f32, f32);
 extern void ScaleMatrixLocal(PoseMatrix, f32, f32, f32);
 extern s32 GraphU64_NextRandom(void);
 extern f32 GraphU64_GetTrianglePlaneHeight(StateFlags *, f32, f32);
-extern s32 func_802799C0_de(void *, s32);
+extern s32 Map_ReserveEntries(void *, s32);
 extern void Scene_SampleWorldLighting(void *, CVector3 *, u8 *);
 extern void func_802A57E0_de(Owner802A6DF8 *, Shared_PoseActor *, PoseMatrix *);
 extern u32 func_802BCF00_de(void);
@@ -299,7 +299,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
     world = 0;
     ctx.parts = SetN64_GetPackSection(modelPack, 5);
     count = ctx.parts->count;
-    actor->handle = func_802799C0_de(&D_8011FFB0, count);
+    actor->handle = Map_ReserveEntries(&D_8011FFB0, count);
     if (actor->handle == 0) {
         return 0;
     }

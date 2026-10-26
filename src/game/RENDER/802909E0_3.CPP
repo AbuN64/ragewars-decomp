@@ -15,7 +15,7 @@ void SetN64_ClearFrameDirection(void *frame) {
 void SetN64_OnFrameComplete(void *schedule) {}
 
 
-void func_80290A14_de(void *frame, void *arg1) {
+void SetN64_SetFrameDirection(void *frame, void *arg1) {
     Frame *view = frame;
     CVector3 *direction = arg1;
     view->direction = *direction;
@@ -23,7 +23,7 @@ void func_80290A14_de(void *frame, void *arg1) {
 }
 
 /** Copy four scalar fields from the source into output pointers. */
-void func_80290A48_de(void *source, int *word, float *third, float *fourth, float *second) {
+void SetN64_GetRecordOutputs(void *source, int *word, float *third, float *fourth, float *second) {
     ObjRecAt20V1 *source_record = source;
     *word = source_record->unk20;
     *second = source_record->unk10;

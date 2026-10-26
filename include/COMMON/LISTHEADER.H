@@ -26,7 +26,7 @@ struct ListHeader {
     s32 count;
 };
 
-extern s16 func_80279798_de(s16 *arg0);
+extern s16 Lists_ChooseWeightedEntry(s16 *arg0);
 
 struct Lists18;
 typedef struct Lists18 Lists18;
@@ -46,7 +46,7 @@ struct func_80279490_S1 {
     u8 unk12;
 };
 
-extern void func_802791F0_de(void *object);
+extern void Link_SetActorStateBit(void *object);
 
 struct Trigger;
 typedef struct Trigger Trigger;
@@ -61,9 +61,9 @@ struct Lists18 {
     List802795C0 inactive;
 };
 
-extern void func_80279198_de(int arg0, int arg1, void *arg2);
+extern void Link_SetTriggerTrackCallback(int arg0, int arg1, void *arg2);
 
-extern void func_802791D8_de(struct Shared_Actor *arg0);
+extern void Link_ClearActorStateBit(struct Shared_Actor *arg0);
 
 struct WeightedTable;
 struct WeightedTable {
@@ -126,7 +126,7 @@ struct ObjectStateC4 {
 
 
 
-extern void func_802791B8_de(void *arg0);
+extern void Link_SetTriggerTrack(void *arg0);
 
 struct func_80279490_S1;
 typedef struct func_80279490_S1 func_80279490_S1;

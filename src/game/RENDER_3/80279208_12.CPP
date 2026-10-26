@@ -12,7 +12,7 @@
 extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
-void func_80279DD0_de(void *particle, f32 arg1) {
+void Particle_UpdateSineMotion(void *particle, f32 arg1) {
     CVector3 sp10;
     CVector3 sp20;
     Triple sp30;

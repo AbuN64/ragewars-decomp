@@ -11,12 +11,12 @@ void *SetN64_GetPackSection(void *table, s32 index) {
     return (char *)table + entry[1];
 }
 
-s32 SetN64_GetSizedPackSection(s32 arg0, s32 arg1, s32 *arg2) {
+s32 SetN64_GetSizedPackSection(s32 packAddress, s32 sectionIndex, s32 *sectionSizeOut) {
     
-    s32 *next = (s32 *)(arg0 + ((arg1 + 1) * 4));
-    s32 *entry = (s32 *)(arg0 + (arg1 * 4));
-    *arg2 = next[1] - entry[1];
-    return arg0 + entry[1];
+    s32 *next = (s32 *)(packAddress + ((sectionIndex + 1) * 4));
+    s32 *entry = (s32 *)(packAddress + (sectionIndex * 4));
+    *sectionSizeOut = next[1] - entry[1];
+    return packAddress + entry[1];
 }
 
 s32 SetN64_GetPackSectionSize(s32 *table, s32 index) {

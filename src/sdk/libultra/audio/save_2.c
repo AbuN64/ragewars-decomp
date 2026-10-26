@@ -84,16 +84,16 @@ INCLUDE_ASM("span_1000", func_802B6380_de);
 #endif
 #endif
 
-s32 func_802B6480_de(ALSave *arg0, s32 arg1, ALFilter_s14 *arg2)
+s32 func_802B6480_de(ALSave *saveFilter, s32 parameterId, ALFilter_s14 *parameterValue)
 {
-  switch (arg1)
+  switch (parameterId)
   {
     case 1:
-      arg0->filter.source = arg2;
+      saveFilter->filter.source = parameterValue;
       goto ret0;
 
     case 6:
-      arg0->dramout = arg2;
+      saveFilter->dramout = parameterValue;
 
     default:
       ret0:

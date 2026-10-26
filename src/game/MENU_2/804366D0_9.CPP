@@ -30,7 +30,7 @@ enum { MENU_RESOURCE = 0x13b };
 
 extern u8 D_80102B00[];
 
-extern s32 func_8041A470_de(struct Menu_func_804241BC_de *);
+extern s32 func_8041A470_de(struct MenuFrontendUpdatePlayModeMenu *);
 
 extern void func_802991D4_de(s32);
 

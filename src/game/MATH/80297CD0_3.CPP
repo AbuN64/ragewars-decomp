@@ -37,7 +37,7 @@ int func_80299CC4_de();
  /* extern */
 
 
-/* Initialises the interface system for a number of screens: resets the input state and display, allocates and clears the 0x544-byte interface state in D_8014D080 with its 64 widget slots, its 900-byte object cache and its screen table, records the screen count, a 4000 limit and the frame duration from func_802A18CC_de, resets the focus and paging fields, and registers fonts 9 and 11. */
+/* Initialises the interface system for a number of screens: resets the input state and display, allocates and clears the 0x544-byte interface state in D_8014D080 with its 64 widget slots, its 900-byte object cache and its screen table, records the screen count, a 4000 limit and the frame duration from N64Eng_GetTimeSeconds, resets the focus and paging fields, and registers fonts 9 and 11. */
 
 
 
@@ -107,8 +107,8 @@ void func_80297FA0_de(s32 screenCount, s32 value) {
     f64 frames;
 
     D_80146E18 = -1;
-    func_802A1918_de(&D_80146E08, &D_80146E0C);
-    func_80411EEC_de();
+    N64Eng_GetScreenSize(&D_80146E08, &D_80146E0C);
+    Frontend_InitializeResourceState();
     Frontend_SetDisplayClipBounds(D_80146E08, D_80146E0C);
     Smos_AllocateControllerContext();
     g_menuEventCount = 0;
@@ -129,7 +129,7 @@ void func_80297FA0_de(s32 screenCount, s32 value) {
     D_8014D080->cache = Cache_AllocateMemory(0x384);
     XPlus_FillBytes(D_8014D080->cache, 0, 0x384);
     D_8014D080->cacheCount = 0;
-    frames = func_802A18CC_de() * D_800C5668_de;
+    frames = N64Eng_GetTimeSeconds() * D_800C5668_de;
     D_8014D080->screenCount = screenCount;
     D_8014D080->frames = frames;
     D_8014D080->screens = Cache_AllocateMemory(screenCount * 28);

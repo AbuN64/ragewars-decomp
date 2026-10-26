@@ -19,7 +19,7 @@
 
 
 
-void func_80426174_de(PlayerRecAt602 *p) {
+void Achieve_ApplyPlayerOptionOverrides(PlayerRecAt602 *p) {
     int i;
 
     if (p->info->locked != 1 && p->info->present != 0) {
@@ -34,7 +34,7 @@ void func_80426174_de(PlayerRecAt602 *p) {
 
 extern void *Scene_GetBlLevelData(void *, s32);
 
-void func_804261DC_de(WeaponPlayer *player) {
+void Achieve_EnableLevelWeapons(WeaponPlayer *player) {
     WeaponStatus *status = player->status;
     s32 i;
     u16 *entries;

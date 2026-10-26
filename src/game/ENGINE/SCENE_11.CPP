@@ -19,7 +19,7 @@
 #include "ENGINE/SCENE_11.H"
 #include "COMMON/GAMEPLAY_REACTIONS.H"
 
-extern void func_80278F00_de(Rec_func_8024C92C_de *arg0);
+extern void Link_DispatchTriggerExit(Rec_func_8024C92C_de *arg0);
 
 
 
@@ -40,7 +40,7 @@ void Scene_DispatchSecondaryTriggersOfKind(void *world, s32 arg1) {
     if (var_s0 != -1) {
         do {
             if (((Record14 *)(trigger))->kind == arg1) {
-                func_80278F00_de(trigger);
+                Link_DispatchTriggerExit(trigger);
             }
             var_s0 -= 1;
             trigger += 1;
@@ -53,7 +53,7 @@ void Scene_DispatchSecondaryTriggersOfKind(void *world, s32 arg1) {
     if (var_s0_2 != -1) {
         do {
             if (((Record14 *)(var_s1_2))->kind == arg1) {
-                func_80278F00_de(var_s1_2);
+                Link_DispatchTriggerExit(var_s1_2);
             }
             var_s0_2 -= 1;
             var_s1_2 += 1;

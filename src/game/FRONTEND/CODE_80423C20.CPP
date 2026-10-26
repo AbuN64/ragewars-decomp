@@ -296,7 +296,7 @@ s32 Frontend_ApplyModeChoice(void) {
     return 0;
 }
 
-s32 func_8042418C_de(void) {
+s32 Frontend_DestroyPlayModeMenu(void) {
     Cache_FreeMemory(D_800E4600);
     D_800E4600 = 0;
     return 0;
