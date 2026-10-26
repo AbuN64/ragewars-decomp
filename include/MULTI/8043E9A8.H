@@ -2,6 +2,7 @@
 #define MULTI_8043E9A8_H
 #include "COMMON/PLAYERRECAT64E.H"
 #include "COMMON/ITEMRECAT20V1.H"
+
 struct HolderMultiIsPlayerItemAvailable {
     char pad[0x1C];
     struct PlayerRecAt64E *player;
@@ -33,4 +34,8 @@ extern s32 Multi_OpenDialogAfterTimerReset(void *arg0, Arg1Struct *arg1);
 extern void Multi_ProbeMenuControllerPak(struct Shared_PakMenu *arg0);
 extern s32 Multi_OpenDialogWithControllerPak(void *arg0, Obj8043EB20 *arg1);
 extern void Multi_EnableMenuControllerPak(void *arg0);
+
+extern s32 func_8043ED48_de(void);
+extern void Multi_SelectInitialController(void *arg0, struct ObjRecAt20V2 *menu);
+extern s32 Multi_RequestSessionTransition(void);
 #endif
