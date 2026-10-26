@@ -2,7 +2,7 @@
 #include "AI/SHARED_PICKUPGOALNODE.H"
 #include "AI/NAV/8020EAE0_4.H"
 
-#if !(defined(VERSION_EU) || defined(VERSION_US))
+#if !defined(VERSION_EU)
 s32 Nav_SelectPickupGoal(PickupGoalObj8020EF60 *arg0) {
     s32 buffer[30];
     s32 count;
