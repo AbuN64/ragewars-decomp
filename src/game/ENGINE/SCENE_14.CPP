@@ -134,20 +134,20 @@ void *Scene_GetBlLevelData(void *world, s32 record) {
     s32 size;
     s32 one;
 
-    if (((struct MeasuredRecAt14V4 *)(world))->value == 0 || ((struct MeasuredCode8028B64C *)(world))->value != record) {
+    if (((struct MeasuredRecAt14V2 *)(world))->value == 0 || ((struct MeasuredCode8028B64C *)(world))->value != record) {
         Scene_ReleaseCachedLevelData(world);
-        if (((struct MeasuredRecAtCV4 *)(world))->value != 0) {
+        if (((struct MeasuredRecAtCV3 *)(world))->value != 0) {
             size = 0x10;
             one = 1;
-            resource = Cache_RequestResource(0, ((struct MeasuredRecAtCV4 *)(world))->value,
-                                     ((struct MeasuredRecAtCV4 *)(world))->value,
-                                     ((struct MeasuredRecAt10V1 *)(world))->value, size, 0, 0,
+            resource = Cache_RequestResource(0, ((struct MeasuredRecAtCV3 *)(world))->value,
+                                     ((struct MeasuredRecAtCV3 *)(world))->value,
+                                     ((struct MeasuredRecAt10V2 *)(world))->value, size, 0, 0,
                                      D_800C5290_de, one);
             if (resource != 0) {
-                key = SetN64_LocatePackSection((s32)*resource, ((struct MeasuredRecAtCV4 *)(world))->value,
+                key = SetN64_LocatePackSection((s32)*resource, ((struct MeasuredRecAtCV3 *)(world))->value,
                                     record, &sp28);
                 Cache_ReleaseResource(0, resource);
-                if ((((struct MeasuredRecAt14V1 *)(world))->value =
+                if ((((struct MeasuredRecAt14V6 *)(world))->value =
                      Cache_RequestResource(0, key, key, sp28, size, 0,
                                    &D_00285160, D_800C52BC, one)) != 0) {
                     ((struct MeasuredCode8028B64C *)(world))->value = record;
@@ -157,7 +157,7 @@ void *Scene_GetBlLevelData(void *world, s32 record) {
             }
         }
     }
-    if (((struct MeasuredRecAt14V1 *)(world))->value != 0) {
+    if (((struct MeasuredRecAt14V6 *)(world))->value != 0) {
         return *((struct MeasuredRecAt14V5 *)(world))->value;
     }
     return 0;
