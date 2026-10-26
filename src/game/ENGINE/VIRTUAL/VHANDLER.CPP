@@ -8,7 +8,6 @@
 #include "sdk/os.h"
 #include "RESMGR/802A0888.H"
 
-#if !(defined(VERSION_DE) || defined(VERSION_EU_X))
 /* Initializes the game state: clears the whole state block and fills its slot and lookup tables
    with 0xFF, resets the 24 player entries and queue slots, sets up the three lists and the stream
    descriptor for the ROM data at D_16E000, loads the expansion-pak data when more memory is present,
@@ -92,4 +91,3 @@ void Virtual_InitializePagerEuroExtended(void) {
     osCreateThread(D_800FF230.queue, 0x63, D_0023C934, 0, D_800FF230.queueData, 0x93);
     osStartThread(D_800FF230.queue);
 }
-#endif

@@ -269,6 +269,7 @@ SECTIONS
         src/game/SCHED/8023A284_7.CPP.o(.text);
         src/game/SCHED/8023A284_8.CPP.o(.text);
         src/game/SCHED/8023A284_12.CPP.o(.data);
+        src/game/ENGINE/VIRTUAL/VHANDLER.CPP.o(.text);
         src/game/ENGINE/VIRTUAL/VHANDLER_2.CPP.o(.text);
         src/game/ENGINE/VIRTUAL/VHANDLER_3.CPP.o(.text);
         src/game/ENGINE/VIRTUAL/VHANDLER_4.CPP.o(.text);
@@ -2248,6 +2249,7 @@ SECTIONS
         src/game/SCHED/8023A284_7.CPP.o(.text);
         src/game/SCHED/8023A284_8.CPP.o(.text);
         src/game/SCHED/8023A284_14.CPP.o(.data);
+        src/game/ENGINE/VIRTUAL/VHANDLER.CPP.o(.text);
         src/game/ENGINE/VIRTUAL/VHANDLER_2.CPP.o(.text);
         src/game/ENGINE/VIRTUAL/VHANDLER_3.CPP.o(.text);
         src/game/ENGINE/VIRTUAL/VHANDLER_4.CPP.o(.text);
@@ -5254,6 +5256,7 @@ SECTIONS
         src/game/SCHED/8023A284_7.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/8023A284_8.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/8023A284_12.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/VIRTUAL/VHANDLER.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/VIRTUAL/VHANDLER_2.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/VIRTUAL/VHANDLER_3.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/VIRTUAL/VHANDLER_4.CPP.o(.bss .sbss COMMON);
@@ -7183,6 +7186,7 @@ SECTIONS
         src/game/SCHED/8023A284_7.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/8023A284_8.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/8023A284_14.CPP.o(.bss .sbss COMMON);
+        src/game/ENGINE/VIRTUAL/VHANDLER.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/VIRTUAL/VHANDLER_2.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/VIRTUAL/VHANDLER_3.CPP.o(.bss .sbss COMMON);
         src/game/ENGINE/VIRTUAL/VHANDLER_4.CPP.o(.bss .sbss COMMON);

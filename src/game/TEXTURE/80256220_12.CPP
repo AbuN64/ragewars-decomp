@@ -25,7 +25,7 @@ extern void Virtual_InitializePagerEuroExtended(s32, s32);
 #elif defined(VERSION_EU_X)
 extern void Virtual_InitializePagerEuroExtended(s32, s32);
 #else
-extern void Virtual_InitializePagerGerman(s32, s32);
+extern void Virtual_InitializePagerEuroExtended(s32, s32);
 #endif
 extern void Cache_InitializeResourceCache(s32, s32);
 
@@ -51,7 +51,7 @@ Virtual_InitializePagerEuroExtended
 #elif defined(VERSION_EU_X)
 Virtual_InitializePagerEuroExtended
 #else
-Virtual_InitializePagerGerman
+Virtual_InitializePagerEuroExtended
 #endif
 (0, 0);
     Cache_InitializeResourceCache(0, 5);
