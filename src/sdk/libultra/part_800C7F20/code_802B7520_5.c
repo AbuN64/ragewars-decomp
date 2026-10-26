@@ -147,7 +147,7 @@ void func_802B2780_de(ALSndPlayer *sndp, ALSndpEvent *event)
             voice = &state->voice;
             func_802B3000_de(sndp->drvr, voice, &vc);
             vol = (s16)((s32)snd->envelope->attackVolume * state->vol / 127);
-            tmp = state->pan - 64 + ((const ALSound_s_func_802B2780_de *)snd)->samplePan;
+            tmp = state->pan - 64 + ((const struct ALSound *)snd)->samplePan;
             tmp = ((tmp) > (0) ? (tmp) : (0));
             pan = (u8)((tmp) < (127) ? (tmp) : (127));
             pitch = state->pitch;
@@ -185,7 +185,7 @@ void func_802B2780_de(ALSndPlayer *sndp, ALSndpEvent *event)
         case 2: /* AL_SNDP_PAN_EVT */
             state->pan = event_view->pan.pan;
             if (state->state == 1 && snd) {
-                tmp = state->pan - 64 + ((const ALSound_s_func_802B2780_de *)snd)->samplePan;
+                tmp = state->pan - 64 + ((const struct ALSound *)snd)->samplePan;
                 tmp = ((tmp) > (0) ? (tmp) : (0));
                 pan = (u8)((tmp) < (127) ? (tmp) : (127));
                 func_802B3350_de(sndp->drvr, &state->voice, pan);

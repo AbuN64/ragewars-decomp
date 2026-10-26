@@ -2600,9 +2600,6 @@ typedef struct ALSound ALSound;
 struct ALSoundState_func_802B2780_de;
 typedef struct ALSoundState_func_802B2780_de ALSoundState_func_802B2780_de;
 
-struct ALSound_s_func_802B2780_de;
-typedef struct ALSound_s_func_802B2780_de ALSound_s_func_802B2780_de;
-
 struct ALWaveTable_s;
 typedef struct ALWaveTable_s ALWaveTable_s;
 
@@ -3485,20 +3482,10 @@ struct ALSeqPlayer88 {
     s32 loopCount;
 };
 struct ALSeq_s;
-struct ALSound_s_func_802B2780_de;
-struct ALSound_s_func_802B2780_de {
-    ALEnvelope *envelope;
-    void *keyMap;
-    void *wavetable;
-    u8 samplePan;
-    u8 sampleVolume;
-    u8 flags;
-};
 struct ALSoundState_func_802B2780_de;
-struct ALSound_s_func_802B2780_de;
 struct ALSoundState_func_802B2780_de {
     ALVoice_s voice;
-    struct ALSound_s_func_802B2780_de *sound;
+    struct ALSound *sound;
     s16 priority;
     f32 pitch;
     s32 state;
