@@ -16,7 +16,7 @@
 #include "RENDER_2/OBJECTSTATE8E.H"
 #include "COMMON/RESULTS.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 #include "WEAPONS/80213ED4.H"
 #include "RENDER_2/8025DE50_5.H"
 #include "RENDER_2/802192C0_3.H"

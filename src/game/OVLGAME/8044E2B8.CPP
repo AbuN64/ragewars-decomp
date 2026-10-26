@@ -7,7 +7,7 @@
 #include "TYPES.H"
 #include "OVLGAME/8044E2B8.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 #include "RENDER_4/8028FD2C_6.H"
 
 /* Spawns the pickups of a level: between func_802458D8_de and func_802458C4_de it passes every item of both item tables whose kind is 1, 2, 4 or 10 to Scene_DispatchEnabledEntityTrigger. */

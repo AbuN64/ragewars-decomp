@@ -2,6 +2,7 @@
 #define TEXTURE_80256220_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
+
 typedef struct AudioInitializeTiming { u32 frequency, frameTime, samples; } AudioInitializeTiming;
 struct Chunk {
     u32 source; /* cartridge device address */

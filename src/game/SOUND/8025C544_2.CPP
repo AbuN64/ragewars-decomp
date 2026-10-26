@@ -7,7 +7,7 @@
 #include "COMMON/STATERECAT34.H"
 #include "TYPES.H"
 #include "RENDER_2/8025DE50_6.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 
 void func_802B25D0_de(void *sound, short sample);
 

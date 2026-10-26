@@ -7,7 +7,7 @@
 #include "sdk/OSINT/802C0CB0.H"
 #include "sdk/os.h"
 #include "RENDER_4/8028FD2C_6.H"
-#include "AUDIO/80259280_5.H"
+#include "ENGINE/AUDIO/AUDIOWORLD.H"
 
 /* Returns the physical address of a cached copy of a data block: finds the cache entry keyed by the
  * block's address and refreshes the copy (and flushes it from the data cache) when the size changed;

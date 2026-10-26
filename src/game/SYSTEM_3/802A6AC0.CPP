@@ -9,7 +9,7 @@
 #include "COMMON/EXTERNS_10.H"
 #include "SYSTEM_3/802A6AC0.H"
 #include "FX_2/80271B18.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 #include "LISTS/80279520.H"
 
 

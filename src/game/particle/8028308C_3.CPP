@@ -2,7 +2,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 
 extern void Particle_FinishActorEffects(void *arg0);
 extern void Particle_UpdateMatrix(void *);

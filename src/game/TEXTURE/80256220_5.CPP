@@ -1,6 +1,8 @@
 #include "include_asm.h"
 #include "TYPES.H"
 #include "sdk/os.h"
+#include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/CARTRIDGEREADWORKER.H"
 
 #if (defined(VERSION_DE)) && !defined(NON_MATCHING)
 INCLUDE_ASM("span_1000", func_802566E8_de);
@@ -38,3 +40,8 @@ void func_802566E8_de(Object *obj) {
     __osRestoreInt(mask2);
 }
 #endif
+
+void func_802567A4_de(void *menuRules) {
+    (((struct MenuRules *) ((s8 *) menuRules))->locked) = 0;
+    osCreateMesgQueue(menuRules, menuRules + 0x18, 1);
+}

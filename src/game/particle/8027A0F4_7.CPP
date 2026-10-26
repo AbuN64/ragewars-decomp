@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "particle/8027A0F4_7.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 
 
 extern void Particle_FinishActorEffects(void *arg0);

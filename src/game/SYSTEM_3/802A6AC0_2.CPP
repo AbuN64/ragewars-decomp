@@ -9,7 +9,7 @@
 #include "TYPES.H"
 #include "SYSTEM_3/802A6AC0_2.H"
 #include "LISTS/80279520.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 
 
 extern s32 Smp_UpdateRibbonLifetime(s32 arg0, State802A6DF8 *state);

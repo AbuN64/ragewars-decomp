@@ -15,7 +15,7 @@
 #include "COMMON/UNUSED.H"
 #include "sdk/os.h"
 #include "RENDER/80263760_8.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 #include "ENGINE/SCENE_12.H"
 
 #if !defined(VERSION_US)

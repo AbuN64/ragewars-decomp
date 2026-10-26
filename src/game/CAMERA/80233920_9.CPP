@@ -13,7 +13,7 @@
 #include "COMMON/VIDEO_DIMENSIONS.H"
 #include "COMMON/GFX.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 #include "GFX/TEXT/802A8A94_5.H"
 
 extern Gfx *g_displayListCursor;

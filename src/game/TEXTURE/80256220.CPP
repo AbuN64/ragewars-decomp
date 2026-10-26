@@ -7,6 +7,9 @@
 #include "TYPES.H"
 #include "sdk/os.h"
 #include "RESMGR/802A0888.H"
+#include "include_asm.h"
+#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/80255C40_3.H"
 
 extern void osSetEventMesg(s32 arg0, s32 arg1, s32 arg2);
 
@@ -17,7 +20,7 @@ extern void osStartThread(s32 arg0);
 
 extern char D_0025657C;
 
-extern Chunk *func_8025661C_de(CartridgeReadWorker *arg0);
+void *func_8025661C_de(CartridgeReadWorker *cartridgeReadWorker);
 
 extern s32 func_802BB160_de(void *arg0, void *arg1, s32 arg2);
 
@@ -120,3 +123,143 @@ void func_80256454_de(struct CartridgeReadWorker *worker, u32 source, s32 length
         } while ((chunk != 0) && (remaining != 0));
     }
 }
+
+#if defined(VERSION_US_REV1)
+/* Phase1 source candidate; contract holds and immutable inputs in per-function JSON. */
+#include "COMMON/UNUSED.H"
+#include "TYPES.H"
+#include "COMMON/CARTRIDGEREADWORKER.H"
+#include "sdk/os.h"
+/* Cartridge read thread loop: waits on the manager's request queue; a 0xBEEFDEAD message arms a
+ * periodic timer that posts 0xDEADBEEF, a 0xDEADBEEF tick runs Libultra_RunDebugLinkCommands when TextLoad_IsArtsendTexturePreviewEnabled
+ * reports work, and any other message is a read request whose buffer is invalidated, read from the
+ * device through func_802B9A40_de, awaited on the completion queue, flushed, acknowledged to its reply
+ * queue when one is given and finally retired through func_80256688_de. */
+
+
+
+
+
+extern void func_802BB6C0_de(void *, u64, u64, void *, void *);
+extern int TextLoad_IsArtsendTexturePreviewEnabled(void);
+extern void Libultra_RunDebugLinkCommands(void);
+extern void func_802BD280_de(void *, s32);
+extern s32 func_802B9A40_de(s32, u32, void *, u32);
+extern void func_802BCF70_de(void *, s32);
+extern void func_80256688_de(s32, CartridgeReadRequest *);
+
+
+
+void func_8025651C_us_rev1(s32 cartridgeReadWorker) {
+    struct OSTimer_s timer;
+    struct CartridgeReadRequest *request;
+    void *done;
+
+    for (;;) {
+        osRecvMesg(&((struct CartridgeReadWorker *)(cartridgeReadWorker))->requestQueueStorage, &request, 1);
+        if (request == (struct CartridgeReadRequest *)0xBEEFDEAD) {
+            func_802BB6C0_de(&timer, 0, 0x393870, &((struct CartridgeReadWorker *)(cartridgeReadWorker))->requestQueueStorage, (void *)0xDEADBEEF);
+        } else if (request == (struct CartridgeReadRequest *)0xDEADBEEF) {
+            if (TextLoad_IsArtsendTexturePreviewEnabled() != 0) {
+                Libultra_RunDebugLinkCommands();
+            }
+        } else {
+            func_802BD280_de(request->buffer, request->size);
+            func_802B9A40_de(0, request->devAddr, request->buffer, request->size);
+            osRecvMesg(&((struct CartridgeReadWorker *)(cartridgeReadWorker))->completionQueueStorage, &done, 1);
+            func_802BCF70_de(request->buffer, request->size);
+            if (request->replyQueue != 0) {
+                osSendMesg(request->replyQueue, request->replyMsg, 1);
+            }
+            func_80256688_de(cartridgeReadWorker, request);
+        }
+    }
+}
+#endif
+
+#if !(defined(VERSION_US_REV1))
+/* Receives read requests, transfers and acknowledges each one. The timer-message
+ * handling belongs to the separate US-rev1 routine, which this item does not contain. */
+
+extern void func_802BD280_de(void *, s32);
+extern s32 func_802B9A40_de(s32, u32, void *, u32);
+extern void func_802BCF70_de(void *, s32);
+extern void func_80256688_de(s32, CartridgeReadRequest *);
+
+void func_8025657C_de(CartridgeReadWorker *worker) {
+    CartridgeReadRequest *request;
+    void *done;
+
+    for (;;) {
+        osRecvMesg(&worker->requestQueueStorage, &request, 1);
+        func_802BD280_de(request->buffer, request->size);
+        func_802B9A40_de(0, request->devAddr, request->buffer, request->size);
+        osRecvMesg(&worker->completionQueueStorage, &done, 1);
+        func_802BCF70_de(request->buffer, request->size);
+        if (request->replyQueue != 0) {
+            osSendMesg(request->replyQueue, request->replyMsg, 1);
+        }
+        func_80256688_de(worker, request);
+    }
+}
+#endif
+
+void *func_8025661C_de(CartridgeReadWorker *cartridgeReadWorker) {
+    u32 mask;
+    void *head;
+
+    mask = __osDisableInt();
+    head = cartridgeReadWorker->available.head;
+    if (head != 0) {
+        func_80255ED8_de(&cartridgeReadWorker->available, head);
+        ((CartridgeReadRequest *)head)->active = 1;
+        func_80255CB8_de(&cartridgeReadWorker->pending, head);
+    }
+    __osRestoreInt(mask);
+    return head;
+}
+
+
+
+
+
+
+
+void func_80256688_de(s32 worker, CartridgeReadRequest *request) {
+    u32 mask;
+
+    mask = __osDisableInt();
+    func_80255ED8_de(&((CartridgeReadWorker *)worker)->pending, request);
+    request->active = 0;
+    func_80255CB8_de(&((CartridgeReadWorker *)worker)->available, request);
+    __osRestoreInt(mask);
+}
+
+#if defined(VERSION_US)
+unsigned int func_80256688_de_padding_57288[1] = {
+    0x00000000,
+};
+#endif
+
+#if defined(VERSION_EU_X)
+unsigned int func_802566E8_de_padding_572D8[2] = {
+    0x24050001, 0x8E442B48,
+};
+#endif
+
+#if defined(VERSION_EU)
+unsigned int func_802566E8_de_padding_572A8[2] = {
+    0x12A00005, 0x00000000,
+};
+#endif
+
+#if defined(VERSION_US)
+unsigned int D_auto_rodata_unresolved_8025668C[46] = {
+    0x0278320C, 0x27BDFFE8, 0xAFB00010, 0x00808021, 0xAFBF0014, 0x8E02001C, 0x10400023, 0x00000000,
+    0x0C0AF398, 0x00000000, 0x00402021, 0x8E03001C, 0x24020001, 0x24630001, 0x10620009, 0xAE03001C,
+    0x0C0AF3A0, 0x00000000, 0x02002021, 0x00002821, 0x0C0AEC74, 0x24060001, 0x080959BD, 0x00000000,
+    0x0C0AF3A0, 0x00000000, 0x0C0AF398, 0x00000000, 0x8E03001C, 0x2463FFFF, 0x10600009, 0xAE03001C,
+    0x0C0AF3A0, 0x00402021, 0x02002021, 0x00002821, 0x0C0AECD4, 0x24060001, 0x080959CD, 0x00000000,
+    0x0C0AF3A0, 0x00402021, 0x8FBF0014, 0x8FB00010, 0x03E00008, 0x27BD0018,
+};
+#endif

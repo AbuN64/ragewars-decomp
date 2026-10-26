@@ -10,10 +10,10 @@ extern s32 D_80100560;
 #include "stddef.h"
 #include "TYPES.H"
 #include "COMMON/EXTERNS.H"
-#include "AUDIO_2/80255280_2.H"
+#include "AUDIO_2/80255280.H"
 #include "sdk/os.h"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 
 extern void func_80255FB8_de(void *arg0, s32 arg1);
 extern s32 D_80105180[];

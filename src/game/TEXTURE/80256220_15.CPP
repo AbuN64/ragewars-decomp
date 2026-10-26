@@ -95,7 +95,7 @@ s32 func_80257A14_de(void *context, s32 id) {
 }
 
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-#include "AUDIO/80259280_5.H"
+#include "ENGINE/AUDIO/AUDIOWORLD.H"
 
 extern void *Sky_FindNearestCamera(MenuMatchGlobals *, CVector3 *);
 extern s32 Audio_HasVoiceWithKey(void *, s32);

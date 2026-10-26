@@ -9,7 +9,7 @@
 #include "SCENE/802508E0_4.H"
 #include "SYSTEM_3/80265370.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 #include "RENDER_4/8028FD2C_6.H"
 
 /* Loads the preview resource into the sound buffer when idle, while the adjacent helper resets a changed selection. */

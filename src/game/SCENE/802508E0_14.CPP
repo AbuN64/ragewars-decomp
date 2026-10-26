@@ -9,7 +9,7 @@
 #include "TYPES.H"
 #include "SCENE/802508E0_14.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 
 
 extern void func_80254DD0_de(void *arg0, struct IntrusiveList *arg1);

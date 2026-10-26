@@ -13,7 +13,7 @@
 #include "SCENE/802508E0_2.H"
 #include "sdk/os.h"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 #include "COMMON/ENTRYRECAT18V3.H"
 #include "RESMGR/802A0888.H"
 

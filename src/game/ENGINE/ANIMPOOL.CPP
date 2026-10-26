@@ -10,7 +10,7 @@
 #include "SCENE/802508E0_4.H"
 #include "SCENE/802508E0_9.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 #include "RENDER_4/8028FD2C_6.H"
 extern s32 SetN64_GetDirectoryEntry(s32, s32, s32);
 extern s32 SetN64_LocatePackSection(void *, s32, s32, s32 *);

@@ -9,7 +9,7 @@
 #include "COMMON/S1.H"
 #include "TYPES.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 /* Spawns an emitter record: takes the head of the free list at 0x11D8 into the active list at 0x11EC (or reuses the record at 0x11F0 when none is free) and fills its position, scale, shared value and three rates converted by D_800C8630. */

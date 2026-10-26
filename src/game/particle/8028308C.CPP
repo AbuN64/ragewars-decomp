@@ -15,7 +15,7 @@
 #include "RSP/8026E1F8_5.H"
 #include "FX_2/80271B18.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 #include "particle/80271B18_3.H"
 #include "particle/8027A0F4_4.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"

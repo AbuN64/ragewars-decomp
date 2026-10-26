@@ -14,7 +14,7 @@
 #include "FX/802631D0.H"
 #include "RESMGR/802A0888.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 #include "WEAPONS/80213ED4.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 

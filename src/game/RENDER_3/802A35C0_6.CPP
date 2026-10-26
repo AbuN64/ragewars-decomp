@@ -17,7 +17,7 @@
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "SYSTEM/80296FF8_6.H"
 #include "LISTS/80279520.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 
 
 extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);

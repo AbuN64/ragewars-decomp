@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "MENU/PAK/8043F69C_6.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 #include "MENU/PAK/8043F69C_11.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 

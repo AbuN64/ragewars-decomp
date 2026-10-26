@@ -9,7 +9,7 @@
 #include "COMMON/S1.H"
 #include "sdk/os.h"
 #include "TEXTURE/80254CE4.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 
 extern Manager D_801047E0;
 extern s32 D_80100570;

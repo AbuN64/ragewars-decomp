@@ -17,7 +17,7 @@
 #include "COMMON/OBJB.H"
 #include "COMMON/TRIPLE.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 
 extern ViewFlags D_80103220;
 extern u32 Weapon_UpdateShakeAxis(CShakeAxis *);

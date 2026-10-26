@@ -12,7 +12,7 @@
 #include "COMMON/OBJB.H"
 #include "COMMON/EXTERNS_6.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 #include "RENDER_4/8028FD2C_6.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/WORLD.H"

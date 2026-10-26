@@ -7,7 +7,7 @@
 #include "MENU/ITEMS/80442BC8_11.H"
 #include "MENU/PAK/8043F69C_11.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 
 /* Runs the optional callback at offset 0xC of an object's handler table at 0x14, then clears the
    words at offsets 0xB0, 0xB4 and 0xBC of the object at 0x20. */

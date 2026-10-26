@@ -7,7 +7,7 @@
 #include "COMMON/S1.H"
 #include "TYPES.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 
 /* Spawns an effect in a scene when effects are enabled and a count is given: resolves a missing effect id
  * from the variant (Scene_FindModelIdIndex, giving up when unknown) and a default variant from the id

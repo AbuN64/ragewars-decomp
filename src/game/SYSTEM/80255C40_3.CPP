@@ -2,6 +2,8 @@
 #include "COMMON/S1.H"
 #include "TYPES.H"
 #include "SYSTEM/80255C40_3.H"
+#include "RSP/8026E1F8_5.H"
+#include "COMMON/VECTOR4F.H"
 
 /** Initialize a five-word record. */
 void func_80255CA0_de(IntrusiveList *list, s32 prevOffset, s32 nextOffset) {
@@ -26,4 +28,254 @@ void func_80255CB8_de(void *list, void *node) {
     *(void **)((char *)node + owner->prevOffset) = 0;
     owner->head = node;
     owner->count = owner->count + 1;
+}
+
+s32 func_80255D14_de(IntrusiveList *list, void *node) {
+    void **prevLink;
+    void **tailLink;
+    void **nextLink;
+    void *tail;
+    s32 count;
+
+    tail = list->tail;
+    if (tail != 0) {
+        prevLink = node + list->prevOffset;
+        *prevLink = tail;
+        tailLink = list->tail + list->nextOffset;
+        *tailLink = node;
+    } else {
+        prevLink = node + list->prevOffset;
+        *prevLink = 0;
+        list->head = node;
+    }
+    nextLink = node + list->nextOffset;
+    *nextLink = 0;
+    list->tail = node;
+    count = list->count + 1;
+    list->count = count;
+    return count;
+}
+
+void func_80255D70_de(void *list, s32 anchorNode, s32 insertedNode) {
+    char *o = (char *) list;
+    s32 next = *(s32 *) (anchorNode + ((IntrusiveList *)o)->prevOffset);
+    s32 v0;
+
+    if (next != 0) {
+        s32 off8;
+        *(s32 *) (next + ((IntrusiveList *)o)->nextOffset) = insertedNode;
+        off8 = ((IntrusiveList *)o)->prevOffset;
+        *(s32 *) (insertedNode + off8) = *(s32 *) (anchorNode + off8);
+        *(s32 *) (anchorNode + ((IntrusiveList *)o)->prevOffset) = insertedNode;
+        *(s32 *) (insertedNode + ((IntrusiveList *)o)->nextOffset) = anchorNode;
+        v0 = ((IntrusiveList *)o)->count + 1;
+    } else {
+        s32 tail = ((IntrusiveList *)o)->head;
+        if (tail != 0) {
+            *(s32 *) (insertedNode + ((IntrusiveList *)o)->nextOffset) = tail;
+            *(s32 *) (((IntrusiveList *)o)->head + ((IntrusiveList *)o)->prevOffset) = insertedNode;
+        } else {
+            *(s32 *) (insertedNode + ((IntrusiveList *)o)->nextOffset) = 0;
+            ((IntrusiveList *)o)->tail = insertedNode;
+        }
+        *(s32 *) (insertedNode + ((IntrusiveList *)o)->prevOffset) = 0;
+        ((IntrusiveList *)o)->head = insertedNode;
+        v0 = ((IntrusiveList *)o)->count + 1;
+    }
+    ((IntrusiveList *)o)->count = v0;
+}
+
+void func_80255E24_de(void *list, s32 anchorNode, s32 insertedNode) {
+    char *o = (char *) list;
+    s32 next = *(s32 *) (anchorNode + ((IntrusiveList *)o)->nextOffset);
+    s32 v0;
+
+    if (next != 0) {
+        s32 offC;
+        *(s32 *) (next + ((IntrusiveList *)o)->prevOffset) = insertedNode;
+        offC = ((IntrusiveList *)o)->nextOffset;
+        *(s32 *) (insertedNode + offC) = *(s32 *) (anchorNode + offC);
+        *(s32 *) (anchorNode + ((IntrusiveList *)o)->nextOffset) = insertedNode;
+        *(s32 *) (insertedNode + ((IntrusiveList *)o)->prevOffset) = anchorNode;
+        v0 = ((IntrusiveList *)o)->count + 1;
+    } else {
+        s32 head = ((IntrusiveList *)o)->tail;
+        if (head != 0) {
+            *(s32 *) (insertedNode + ((IntrusiveList *)o)->prevOffset) = head;
+            *(s32 *) (((IntrusiveList *)o)->tail + ((IntrusiveList *)o)->nextOffset) = insertedNode;
+        } else {
+            *(s32 *) (insertedNode + ((IntrusiveList *)o)->prevOffset) = 0;
+            ((IntrusiveList *)o)->head = insertedNode;
+        }
+        *(s32 *) (insertedNode + ((IntrusiveList *)o)->nextOffset) = 0;
+        ((IntrusiveList *)o)->tail = insertedNode;
+        v0 = ((IntrusiveList *)o)->count + 1;
+    }
+    ((IntrusiveList *)o)->count = v0;
+}
+
+void func_80255ED8_de(void *list, void *node) {
+    IntrusiveList *owner = list;
+    char *next;
+    char *prev;
+    next = *(char **)((char *)node + owner->prevOffset);
+    if (next != 0) {
+        s32 off = owner->nextOffset;
+        *(char **)(next + off) = *(char **)((char *)node + off);
+    }
+    prev = *(char **)((char *)node + owner->nextOffset);
+    if (prev != 0) {
+        s32 off = owner->prevOffset;
+        *(char **)(prev + off) = *(char **)((char *)node + off);
+    }
+    if (owner->head == node) {
+        owner->head = *(void **)((char *)node + owner->nextOffset);
+    }
+    if (owner->tail == node) {
+        owner->tail = *(void **)((char *)node + owner->prevOffset);
+    }
+    owner->count = owner->count - 1;
+}
+
+/** Advance the cursor by its stride and decrement its remaining count. */
+void func_80255F70_de(IntrusiveList *list) {
+    char *cursor = list->head;
+    int stride = list->nextOffset;
+    int value = *(int *)(cursor + stride);
+    int count = list->count - 1;
+    list->count = count;
+    list->head = value;
+}
+
+/** Advance the cursor by its stride and decrement its remaining count. */
+void func_80255F94_de(IntrusiveList *list) {
+    char *cursor = list->tail;
+    int stride = list->prevOffset;
+    int value = *(int *)(cursor + stride);
+    int count = list->count - 1;
+    list->count = count;
+    list->tail = value;
+}
+
+void func_80255FB8_de(void *list, s32 nodeToMove) {
+    char *o = (char *)list;
+    s32 next;
+    s32 prev;
+    s32 head;
+
+    next = *(s32 *)(nodeToMove + ((IntrusiveList *)o)->prevOffset);
+    if (next != 0) {
+        s32 off = ((IntrusiveList *)o)->nextOffset;
+        *(s32 *)(next + off) = *(s32 *)(nodeToMove + off);
+    }
+    prev = *(s32 *)(nodeToMove + ((IntrusiveList *)o)->nextOffset);
+    if (prev != 0) {
+        s32 off = ((IntrusiveList *)o)->prevOffset;
+        *(s32 *)(prev + off) = *(s32 *)(nodeToMove + off);
+    }
+    if (((IntrusiveList *)o)->head == nodeToMove) {
+        ((IntrusiveList *)o)->head = *(s32 *)(nodeToMove + ((IntrusiveList *)o)->nextOffset);
+    }
+    if (((IntrusiveList *)o)->tail == nodeToMove) {
+        ((IntrusiveList *)o)->tail = *(s32 *)(nodeToMove + ((IntrusiveList *)o)->prevOffset);
+    }
+    ((IntrusiveList *)o)->count = ((IntrusiveList *)o)->count - 1;
+
+    head = ((IntrusiveList *)o)->head;
+    if (head != 0) {
+        *(s32 *)(nodeToMove + ((IntrusiveList *)o)->nextOffset) = head;
+        *(s32 *)(((IntrusiveList *)o)->head + ((IntrusiveList *)o)->prevOffset) = nodeToMove;
+    } else {
+        *(s32 *)(nodeToMove + ((IntrusiveList *)o)->nextOffset) = 0;
+        ((IntrusiveList *)o)->tail = nodeToMove;
+    }
+    *(s32 *)(nodeToMove + ((IntrusiveList *)o)->prevOffset) = 0;
+    ((IntrusiveList *)o)->head = nodeToMove;
+    ((IntrusiveList *)o)->count = ((IntrusiveList *)o)->count + 1;
+}
+
+void func_802560A4_de(void *list, s32 nodeToMove) {
+    char *o = (char *)list;
+    s32 next;
+    s32 prev;
+    s32 tail;
+
+    next = *(s32 *)(nodeToMove + ((IntrusiveList *)o)->prevOffset);
+    if (next != 0) {
+        s32 off = ((IntrusiveList *)o)->nextOffset;
+        *(s32 *)(next + off) = *(s32 *)(nodeToMove + off);
+    }
+    prev = *(s32 *)(nodeToMove + ((IntrusiveList *)o)->nextOffset);
+    if (prev != 0) {
+        s32 off = ((IntrusiveList *)o)->prevOffset;
+        *(s32 *)(prev + off) = *(s32 *)(nodeToMove + off);
+    }
+    if (((IntrusiveList *)o)->head == nodeToMove) {
+        ((IntrusiveList *)o)->head = *(s32 *)(nodeToMove + ((IntrusiveList *)o)->nextOffset);
+    }
+    if (((IntrusiveList *)o)->tail == nodeToMove) {
+        ((IntrusiveList *)o)->tail = *(s32 *)(nodeToMove + ((IntrusiveList *)o)->prevOffset);
+    }
+    ((IntrusiveList *)o)->count = ((IntrusiveList *)o)->count - 1;
+
+    tail = ((IntrusiveList *)o)->tail;
+    if (tail != 0) {
+        *(s32 *)(nodeToMove + ((IntrusiveList *)o)->prevOffset) = tail;
+        *(s32 *)(((IntrusiveList *)o)->tail + ((IntrusiveList *)o)->nextOffset) = nodeToMove;
+    } else {
+        *(s32 *)(nodeToMove + ((IntrusiveList *)o)->prevOffset) = 0;
+        ((IntrusiveList *)o)->head = nodeToMove;
+    }
+    *(s32 *)(nodeToMove + ((IntrusiveList *)o)->nextOffset) = 0;
+    ((IntrusiveList *)o)->tail = nodeToMove;
+    ((IntrusiveList *)o)->count = ((IntrusiveList *)o)->count + 1;
+}
+
+
+
+
+
+void *func_80256190_de(void *intrusiveList) {
+    s32 index;
+    s32 offset;
+    void *node;
+
+    node = ((IntrusiveList *)intrusiveList)->head;
+    if (node == 0) {
+        return 0;
+    }
+    index = GraphU64_NextRandom() % (u32)((IntrusiveList *)intrusiveList)->count;
+    index--;
+    if (index != -1) {
+        offset = ((IntrusiveList *)intrusiveList)->nextOffset;
+        do {
+            { u8 *cursor = (u8 *)node; cursor += offset; node = *(void **)cursor; }
+            index--;
+        } while (index != -1);
+    }
+    return node;
+}
+
+void func_80256214_de(IntrusiveList *list) {
+    s32 node = list->head;
+    if (node != 0) {
+        s32 offset = list->nextOffset;
+        node = *(s32 *)(node + offset);
+        while (node != 0) {
+            node = *(s32 *)(node + offset);
+        }
+    }
+}
+
+int func_8025623C_de(IntrusiveList *list, int wantedNode) {
+    int node = list->head;
+    if (node != 0) {
+        do {
+            if (node == wantedNode) {
+                return 1;
+            }
+            node = *(int *)(node + list->nextOffset);
+        } while (node != 0);
+    }
+    return 0;
 }

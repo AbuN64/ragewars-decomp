@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "FX_2/PARTICLE_SOUND.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 #include "particle/80271B18_3.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "particle/8027A0F4_4.H"

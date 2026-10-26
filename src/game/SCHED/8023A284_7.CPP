@@ -9,7 +9,7 @@
 #include "TYPES.H"
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 
 /* Sorts and draws scene translucent objects in two groups around the view depth. */
 

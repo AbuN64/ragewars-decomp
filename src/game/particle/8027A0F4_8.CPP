@@ -9,7 +9,7 @@
 #include "SYSTEM_3/80265370.H"
 #include "FX_2/80271B18.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 #include "particle/80271B18_3.H"
 #include "RENDER_4/8028FD2C_6.H"
 #include "SYSTEM_3/CONTACT_EFFECT.H"

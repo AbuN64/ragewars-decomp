@@ -7,7 +7,7 @@
 #include "COMMON/S1.H"
 #include "TYPES.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 
 /* Posts a text as on-screen messages for a target: the target's messages still in the pool's list at 0xE40
  * are unlinked and returned to the owner's list at 0xF24, then the text (or D_800D7028 when given D_800D7034)

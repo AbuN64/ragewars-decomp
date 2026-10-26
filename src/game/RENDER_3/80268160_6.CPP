@@ -5,7 +5,7 @@
 #include "FX_2/80271B18.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 #include "include_asm.h"
 
 extern void GraphU64_ScaleVector(void *, void *, f32);

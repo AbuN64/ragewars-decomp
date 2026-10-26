@@ -6,11 +6,11 @@
 #include "COMMON/ENTRYRECAT18V3.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS.H"
-#include "AUDIO_2/80255280_2.H"
+#include "AUDIO_2/80255280.H"
 #include "sdk/os.h"
 #include "TEXTURE/80254CE4.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 
 /* Activates a load request: moves it from the pending to the active list and, when its node is set, looks its key up in the request hash table; an existing request with lower priority is removed from the table and finished, releasing its node's data and node when nothing else holds them, while an existing request with at least the same priority wins and this request's node is released and the request finished, returning the existing one; otherwise, or after replacing, the request is inserted, owns its node and optionally drops the node's pending reference. The hash lookup and node release are the inline forms of func_802517B4_de's lookup and func_80254AD0_de. */
 

@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "SCHED/8023A284_8.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 
 
 

@@ -7,7 +7,7 @@
 #include "COMMON/S1.H"
 #include "TYPES.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 
 /* Spawns the effect a description asks for: the spawn of AnimPool_SpawnSceneEffect (id resolution, free node, init
  * through func_802466A0_de and start) inlined with the id, variant, count, owner, position, scale, direction

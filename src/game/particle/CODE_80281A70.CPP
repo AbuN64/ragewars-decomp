@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "ENGINE/PARTICLE.H"
 #include "SYSTEM/80255C40_3.H"
-#include "SYSTEM/80255C40_7.H"
+#include "SYSTEM/80255C40_3.H"
 #include "RENDER_2/8025DE50_5.H"
 #include "particle/80271B18_3.H"
 #include "SYSTEM_3/80265370_6.H"
