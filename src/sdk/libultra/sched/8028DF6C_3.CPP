@@ -1,4 +1,5 @@
 #include "COMMON/EXTERNS_18.H"
+#include "COMMON/UNUSED.H"
 #include "COMMON/S1_2.H"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/OSVISCALE.H"
@@ -27,11 +28,7 @@ extern void osViBlack(s32 arg0);
 
 
 
-extern s32 D_800CD70C;
 
-extern s32 D_800E28D8;
-extern char D_800D47B0;
-extern char D_800D4530;
 
 
 

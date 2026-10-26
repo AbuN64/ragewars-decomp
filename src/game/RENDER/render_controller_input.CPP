@@ -1,4 +1,5 @@
 #include "RENDER/render_controller_input.H"
+#include "COMMON/TRIPLE.H"
 #include "include_asm.h"
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -17,7 +18,6 @@
 extern u8 D_8010BBB8;
 extern char D_8010FC00;
 extern ContPad D_8010AEA0[4];
-extern float D_800C42F0_de;
 extern void func_802B7538_de(void *);
 extern void func_802B7740_de(void *, void *);
 void Render_ReadControllerStates(void) {

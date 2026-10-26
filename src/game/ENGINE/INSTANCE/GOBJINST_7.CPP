@@ -1,4 +1,5 @@
 #include "COMMON/VECTOR4F.H"
+#include "COMMON/OBJECTLINKS14C.H"
 #include "RENDER_4/8026AC38.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -20,7 +21,6 @@
 
 
 
-extern s32 D_800D297C;
 
 
 extern char D_8011D8D0;

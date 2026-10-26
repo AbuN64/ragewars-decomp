@@ -1,4 +1,5 @@
 #include "COMMON/LLDIVRESULT.H"
+#include "COMMON/UNUSED.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ALLOADFILTER48_2.H"
 #include "sdk/AUDIO/802C3EA4_4.H"
@@ -9,7 +10,6 @@ extern void Audio_DecodeFrame(void *arg0);
 extern unsigned short D_800D54C2;
 
 
-extern char D_8014BCF0_de;
 
 void *func_802C016C_de(void) {
     struct DecodeState *base = &D_8014BA38_de;

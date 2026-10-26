@@ -1,4 +1,6 @@
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
+#include "COMMON/OBJECTLINKS14C.H"
+#include "RSP/8026E1F8_5.H"
 #include "abi.h"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -20,7 +22,6 @@ extern char D_80100030;
 
 extern Ground D_801041F0;
 
-extern f32 D_80115DEC;
 
 extern Gfx *g_displayListCursor;
 
@@ -44,7 +45,6 @@ extern void func_8026992C_de(void *model, s32 pass, u8 alpha);
 
 extern s32 D_80140FF8;
 
-extern s32 D_800D297C;
 
 extern char D_800C4D38_de;
 

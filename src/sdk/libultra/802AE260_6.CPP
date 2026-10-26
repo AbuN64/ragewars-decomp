@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESPONSE.H"
 #include "COMMON/S1_4.H"
@@ -9,16 +10,6 @@
 /* Reads count bytes from the cartridge-domain port D_B2000021 into a buffer, waiting for bit 0x40 of D_B2000015 before each byte with D_800D3650 retries, accumulating a rotate-and-add checksum stored through the third argument and returning 1 on success. Adapted from func_802AE380_us_rev1 with the single-byte read changed to a counted loop with a checksum and the strobe registers D_B2000004 and D_B2000008 raised and lowered around it. */
 
 
-extern u8 D_8014D3E1;
-extern u8 D_8014D3E2;
-extern u8 D_8014D3E3;
-extern s32 D_8014D3E8;
-extern s16 D_B2000004;
-extern s16 D_B2000008;
-extern s16 D_B200000C;
-extern u8 D_B2000015;
-extern s16 D_B2000018;
-extern u8 D_B2000021;
 
 
 
@@ -108,7 +99,6 @@ release:
 #endif
 
 #if defined(VERSION_US_REV1)
-extern u8 D_B2000011;
 extern s16 D_auto_B2000014;
 extern s16 D_auto_B2000020;
 static inline void waitPort(u8 *port, u8 mask, u8 expected)

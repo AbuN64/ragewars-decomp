@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/TRIPLE.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/EFFECTRENDER.H"
@@ -13,8 +14,6 @@
    D_801516C0. */
 
 
-extern f32 D_800CCF14;
-extern f32 D_800CCF1C;
 void func_802BF514_de(void) {
     s16 i;
     f32 angle;

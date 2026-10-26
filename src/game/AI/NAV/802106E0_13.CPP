@@ -1,4 +1,5 @@
 #include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/OBJECTLINKS14C.H"
 #include "COMMON/SELF.H"
 #include "TYPES.H"
 #include "AI/NAV/802106E0_13.H"
@@ -13,7 +14,6 @@
 
 
 
-extern s32 D_800D297C;
 extern char D_8013B364[];
 
 extern void func_80211020_de(Brain_func_802120A8_eu *);

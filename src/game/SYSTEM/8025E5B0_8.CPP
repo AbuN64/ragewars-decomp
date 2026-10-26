@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/STREAM.H"
 #include "GAME_2/8025E520.H"
 #include "TYPES.H"
@@ -10,7 +11,6 @@
 
 
 
-extern s32 D_8010AC78;
 
 extern s32 D_8010AC80;
 

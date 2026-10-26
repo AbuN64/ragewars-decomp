@@ -1,4 +1,5 @@
 #include "COMMON/PACKEDMESHMATERIAL.H"
+#include "COMMON/UNUSED.H"
 #include "COMMON/MODEL_RENDER.H"
 #include "include_asm.h"
 #include "COMMON/GAME_SESSION.H"
@@ -17,7 +18,6 @@
 
 extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
-extern u32 D_800E28A4;
 extern char D_8013B2D8;
 extern void Scene_MarkResourceInUse(s32 heap, void **resource);
 extern s32 Render_SetupMaterial(void *material, s32 pass);
@@ -77,7 +77,6 @@ void func_8026C978_de(void **resource, s32 matrix, s32 segment, s32 lights, void
 
 extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
-extern u32 D_800E28A4;
 
 extern void func_802A01E8_de(void);
 extern void Scene_MarkResourceInUse(s32 heap, void **resource);

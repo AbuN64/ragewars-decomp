@@ -1,4 +1,6 @@
 #include "COMMON/PACKED.H"
+#include "COMMON/OBJ.H"
+#include "COMMON/UNUSED.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
@@ -17,16 +19,11 @@ extern Triangle *D_800CD3E8;
 extern Triangle *D_800CD3EC;
 
 
-extern f32 D_80111D54;
-
-extern s32 D_80111D58;
 
 
-extern f32 D_80111D64;
 
-extern s32 D_80111D68;
 
-extern f32 D_80115DEC;
+
 
 extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
@@ -46,9 +43,7 @@ static inline void normalize_copy(CVector3 *out, CVector3 *in) {
     Particle_NormalizeVec3(out);
 }
 
-extern float D_800C49D8_de[];
 
-extern float D_80115DEC;
 
 extern void func_802750B0_de(CVector3 *);
 

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/EXTERNS_6.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/OBJECTSTATE90.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -165,7 +166,6 @@ void func_8022BD94_de(void *player, void *source, s32 enabled) {
     }
 }
 
-extern f32 D_800D2988;
 extern void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3, s32 kind);
 /* Damage over time while the source's effect flag 0x1000 is set (func_8022BD94_de): advances the player's
  * effect timer by the frame step; past 300 it marks the player and deals max(1, (150 - health / 256) / 15)

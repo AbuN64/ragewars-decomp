@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/GFX.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/VIEWFLAGS.H"
@@ -18,7 +19,6 @@
 
 extern Gfx *g_displayListCursor;
 extern char D_80145040;
-extern char D_801379C0;
 extern s32 D_801462C8;
 
 extern void func_80289084_de(char *, char *);

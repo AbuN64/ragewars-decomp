@@ -1,4 +1,5 @@
 #include "COMMON/MENU_MATCH_GLOBALS.H"
+#include "COMMON/UNUSED.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -41,7 +42,6 @@ extern void *D_800D31C0;
 #endif
 #endif
 
-extern f32 D_800C2D1C_de;
 
 
 

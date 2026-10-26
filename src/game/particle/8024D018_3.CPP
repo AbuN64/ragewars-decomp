@@ -1,4 +1,5 @@
 #include "COMMON/PROBE.H"
+#include "COMMON/OBJ.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -20,7 +21,6 @@
 
 extern char D_80145040;
 
-extern f32 D_80115DEC;
 
 extern CQuatern func_8024796C_de(char *);
 

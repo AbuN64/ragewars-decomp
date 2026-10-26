@@ -1,4 +1,5 @@
 #include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/UNUSED.H"
 #include "COMMON/GAME_SESSION.H"
 #include "RENDER_4/8026AC38.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -13,7 +14,6 @@
 
 extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
-extern u32 D_800E28A4;
 extern void Scene_MarkResourceInUse(s32 heap, void **resource);
 extern s32 Render_ApplyMaterialLighting(s32 matrix, s32 lights, void *material);
 extern s32 Render_SetupMaterial(void *material, s32 pass);
@@ -87,13 +87,9 @@ void func_8026B9EC_de(void **resource, struct Owner104 *owner, s32 matrix, s32 s
         }
     }
 }
-extern s32 D_8010C564;
 extern Node_func_8026BC60_de *D_8010C568;
 extern Node_func_8026BC60_de *D_8010C56C;
-extern s32 D_8010C570;
-extern s32 D_8010C578;
 extern Node_func_8026BC60_de *D_8010C57C;
-extern s32 D_80110640;
 extern Node_func_8026BC60_de *D_8010C584;
 extern void **D_8011064C;
 extern ItemRecAt1C D_8010C590[];

@@ -1,4 +1,5 @@
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
+#include "COMMON/EXTERNS_6.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "TYPES.H"
@@ -22,7 +23,6 @@
 
 extern Tuning D_800CE850;
 extern char D_800CE874;
-extern f32 D_800D2988;
 extern void Weapons_UpdateViewAngles(SharedPlayer *, Body_func_80224F5C_de *, char *);
 
 extern void func_802238E0_de(SharedPlayer *, Body_func_80224F5C_de *, Tuning *);

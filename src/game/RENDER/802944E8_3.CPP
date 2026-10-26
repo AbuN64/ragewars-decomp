@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/OBJRECAT26DD8.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -13,13 +14,9 @@ extern s32 D_800E28D0;
 
 
 
-extern s32 D_800CD780;
 
-extern s32 D_8011B9F0;
 
-extern s32 D_80142898;
 
-extern s32 D_800CD784_de;
 
 
 extern int Weapons_GetFirstPlayer(void *arg0);
@@ -28,7 +25,6 @@ extern void func_8028D90C_de(void);
 
 extern void func_80293A20_de(s32 arg0, s32 arg1, s32 arg2);
 
-extern s32 D_8010B194_de;
 
 s32 func_80290E6C_de(s32);
 

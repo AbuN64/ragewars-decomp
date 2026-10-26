@@ -1,4 +1,5 @@
 #include "COMMON/TRIPLE.H"
+#include "COMMON/OBJECTLINKS14C.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/S1.H"
@@ -25,7 +26,6 @@ extern CVector3 D_801042C8;
 
 extern s32 D_80140FF8;
 
-extern s32 D_800D297C;
 
 extern f32 D_800CD6B0;
 

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/ALDELAY28.H"
 #include "COMMON/ALAUXBUS_S.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -6,8 +7,6 @@
 #include "TYPES.H"
 #include "sdk/libgultra_inferred/802B975C_5.H"
 
-extern s32 D_002B5570;
-extern s32 D_002B5730;
 
 s32 func_802B0340_de(s32 a, s32 b, void *c, s32 d, s32 e);
 
@@ -28,8 +27,6 @@ void func_802B450C_de(ALResampler_s *arg0, s32 arg1) {
     arg0->ratio = k;
 }
 
-extern s32 D_002B6380;
-extern s32 D_002B6480;
 void alSaveNew(ALSave *arg0) {
     alFilterNew(arg0, (s32) &D_002B6380, (s32) &D_002B6480, 3);
     arg0->dramout = 0;

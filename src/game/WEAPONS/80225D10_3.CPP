@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/OBJ.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/OBJRECV5.H"
@@ -133,7 +134,6 @@ void Weapons_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
 #include "COMMON/SHAPE_TYPEMAP_14.H"
 #include "TYPES.H"
 
-extern f32 D_80115DEC;
 extern void MultiplyQuaternions(CQuatern *out, CQuatern *a, CQuatern *b);
 
 void Weapons_BuildPlayerOrientation(Player *player, CQuatern *output)
@@ -178,7 +178,6 @@ void Weapons_BuildPlayerOrientation(Player *player, CQuatern *output)
 #include "TYPES.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/VECTOR4F.H"
-extern f32 D_80115DEC;
 extern void MultiplyQuaternions(CQuatern *out, CQuatern *a, CQuatern *b);
 extern void MatrixFromQuaternion(CQuatern *rotation, f32 matrix[4][4]);
 extern void Particle_BuildTranslationMatrix(f32 matrix[4][4], f32 x, f32 y, f32 z);

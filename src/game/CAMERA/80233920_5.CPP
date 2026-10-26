@@ -1,4 +1,5 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
+#include "COMMON/UNUSED.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VIEWFLAGS.H"
@@ -13,8 +14,6 @@
 
 
 
-extern const f32 D_800C3200_de[];
-extern const f32 D_800C3208_de;
 
 
 extern f32 Math_Sqrtf(f32);

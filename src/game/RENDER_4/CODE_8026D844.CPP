@@ -1,4 +1,5 @@
 #include "COMMON/MODEL_RENDER.H"
+#include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/LONE/D_800CC384.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/UNUSED.H"
@@ -21,7 +22,6 @@ extern void func_8026FC9C_de(void *, void *);
 
 
 
-extern s32 D_800CC380;
 
 
 

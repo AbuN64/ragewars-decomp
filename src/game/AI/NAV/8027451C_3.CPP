@@ -1,4 +1,5 @@
 #include "COMMON/PACKED.H"
+#include "COMMON/UNUSED.H"
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "FX_2/80271B18.H"
@@ -16,9 +17,7 @@ extern Triangle *D_800CD3E8;
 extern Triangle *D_800CD3EC;
 
 
-extern f32 D_80111D54;
 
-extern s32 D_80111D58;
 
 
 extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);

@@ -1,4 +1,5 @@
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
+#include "COMMON/UNUSED.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/WORLD.H"
@@ -100,7 +101,6 @@ s32 func_80282DEC_de(ObjRecAt4V5 *obj) {
 
 
 extern char D_8011D8D0;
-extern f32 D_800C4E58_de[];
 
 
 

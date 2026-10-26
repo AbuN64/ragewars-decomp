@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/VIEWFLAGS.H"
@@ -118,7 +119,6 @@ void Camera_AdvanceOverlayFade(Overlay *overlay) {
 
 
 extern SharedPlayer *D_80145060;
-extern s32 D_800C9FE4;
 extern u8 D_800FEAD8[4];
 extern s32 D_801462C8;
 #include "COMMON/GAME_SESSION.H"

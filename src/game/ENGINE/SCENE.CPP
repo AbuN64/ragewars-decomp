@@ -1,4 +1,5 @@
 #include "TYPES.H"
+#include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_10.H"
@@ -131,7 +132,6 @@ extern unsigned char D_800C5190_de[];                          /* unable to gene
 extern unsigned char s_levelNavVisionText[];                          /* unable to generate initializer: unknown type; const */
 extern unsigned char s_skyLayersText[];                          /* unable to generate initializer: unknown type; const */
 extern unsigned char s_animatedInstancesText[];                          /* unable to generate initializer: unknown type; const */
-extern s32 D_800CC380;                          /* const */
 extern s32 D_800CD730;                          /* const */
 
        /* const */

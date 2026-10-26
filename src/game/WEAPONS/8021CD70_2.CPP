@@ -1,4 +1,5 @@
 #include "COMMON/MTX.H"
+#include "COMMON/OBJECTLINKS14C.H"
 #include "TYPES.H"
 #include "FX_2/80271B18.H"
 
@@ -21,7 +22,6 @@ static inline f32 aimAbs(f32 value) { return value < 0.0f ? -value : value; }
 
 
 extern f32 D_800C9F70_de;
-extern s32 D_800D297C;
 extern void func_8022B144_de(SharedPlayer *, CVector3 *);
 extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern void Particle_IdentityMatrix(Matrix *);

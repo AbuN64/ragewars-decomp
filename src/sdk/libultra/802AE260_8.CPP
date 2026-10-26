@@ -1,4 +1,5 @@
 #include "COMMON/RESPONSE.H"
+#include "COMMON/UNUSED.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/S1_4.H"
 #include "COMMON/EXTERNS_19.H"
@@ -12,11 +13,8 @@
 #include "sdk/libgultra_inferred/802AE260_8.H"
 
 #if defined(VERSION_US_REV1)
-extern u8 D_8014D3E2;
 
-extern s32 D_8014D3E8;
 
-extern s16 D_B2000008;
 
 extern void func_802AE260_us_rev1(void);
 
@@ -41,11 +39,8 @@ extern void func_802AEE48_us_rev1(void);
 /* Sends a 0x80 command followed by two NUL-terminated strings over the handshake port and reads back a big-endian 32-bit word, returning it (zero on failure). Adapted from func_802B0D3C_us_rev1 with the command 0x85 changed to 0x80, the 32-bit argument replaced by the two strings and the read retry loop removed. */
 
 
-extern u8 D_8014D3E1;
 
-extern s16 D_B2000004;
 
-extern u8 D_B2000015;
 
 extern void func_802AE834_us_rev1(s32, s32, void *);
 

@@ -1,4 +1,5 @@
 #include "COMMON/SHARED_GAMESLOT.H"
+#include "COMMON/UNUSED.H"
 #include "COMMON/OBJRECAT18V6.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -43,14 +44,11 @@ static inline void clear_entry(EntryRecAt34 *e) {
 extern Marker_func_802A71C0_de s_systembootdoneText;
 
 
-extern char D_800CDD10;
 
-extern s32 D_801470B0;
 
 #include "COMMON/ACTORRECAT5E0.H"
 
 
-extern char D_800F91F0;
 
 extern char D_800F41F0;
 

@@ -1,4 +1,5 @@
 #include "COMMON/PROBE.H"
+#include "COMMON/OBJ.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -19,7 +20,6 @@
  * blending lean and tilt halfway through func_80270CD0_de; other players take func_8024D728_de's tilt, and
  * objects without a floor or held players get the identity. The sine is kept in D_80115DEC. */
 
-extern f32 D_80115DEC;
 
 extern s32 func_802757E4_de(s32);
 

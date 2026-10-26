@@ -1,4 +1,5 @@
 #include "COMMON/RESULTS.H"
+#include "COMMON/TRIPLE.H"
 #include "RENDER_4/8026AC38.H"
 #include "RENDER_4/8028FD2C.H"
 #include "COMMON/VECTOR4F.H"
@@ -17,7 +18,6 @@ extern ListNode80290528 *D_80131148;
 
 
 
-extern f32 D_800C53AC_de;
 
 extern s32 func_80296B74_de(void *arg0, void *arg1);
 

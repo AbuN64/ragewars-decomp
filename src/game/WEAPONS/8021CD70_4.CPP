@@ -1,4 +1,5 @@
 #include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "TYPES.H"
@@ -13,7 +14,6 @@
 
 
 
-extern s32 D_800E28D0;
 extern void Camera_ProjectToScreen(View *, CVector3 *, f32 *, f32 *);
 
 void func_8021E08C_de(View *view, CVector3 *point, s32 icon, f32 frame, f32 scale, f32 size) {

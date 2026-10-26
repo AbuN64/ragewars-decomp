@@ -1,11 +1,11 @@
 #include "include_asm.h"
+#include "COMMON/EXTERNS_6.H"
 #include "COMMON/FIELD_VEC_B0.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "WEAPONS/80213ED4.H"
 
-extern f32 D_800D2988;
 
 extern s32 func_80265878_de(StateCallback);
 extern s32 func_80265784_de(u32);
