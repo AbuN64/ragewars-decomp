@@ -1,20 +1,11 @@
 #include "COMMON/RESPONSE.H"
+#include "COMMON/UNUSED.H"
 #include "COMMON/S1_4.H"
 #include "TYPES.H"
 #include "sdk/OSINT/802BDEA0_2.H"
 
 #if defined(VERSION_US_REV1)
 extern s8 D_8014D3E0;
-extern u8 D_8014D3E1;
-extern u8 D_8014D3E2;
-extern u8 D_8014D3E3;
-extern u8 D_8014D3E4;
-extern s32 D_8014D3E8;
-extern s16 D_B2000000;
-extern s16 D_B2000004;
-extern s16 D_B2000008;
-extern s16 D_B200000C;
-extern s16 D_B2000010;
 
 
 

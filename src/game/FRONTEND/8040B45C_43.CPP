@@ -1,4 +1,5 @@
 #include "COMMON/NODERECAT2A8.H"
+#include "COMMON/UNUSED.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "FRONTEND/LAYOUT.H"
 #include "COMMON/FORMAT.H"
@@ -7,7 +8,6 @@
 /* The same table as func_80413608_de reads, at the field 24 bytes into the 52-byte record. The
    debugger returned 1 on every one of 400 calls, so the observed records all carry a non-zero
    value here and the zero arm is untested by execution. */
-extern s32 D_800E2B40[][13];
 
 /* Copies record i of the 52-byte table D_800E2B20 into the destination. */
 

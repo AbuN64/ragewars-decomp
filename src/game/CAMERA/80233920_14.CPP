@@ -1,11 +1,11 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
+#include "COMMON/TRIPLE.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/VIEWFLAGS.H"
 #include "TYPES.H"
 #include "CAMERA/80233920_14.H"
 
 extern f32 D_800C8628;
-extern f32 D_800C3534_de;
 
 
 

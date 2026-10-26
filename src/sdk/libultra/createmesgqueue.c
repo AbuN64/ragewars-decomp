@@ -1,10 +1,10 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "sdk/libgultra.h"
 #include "COMMON/OSTHREAD_S.H"
 #include "TYPES.H"
 #include "sdk/os.h"
 
-extern s32 D_800D5260;
 void osCreateMesgQueue(OSMesgQueue *mq, OSMesg *msg, s32 msgCount) {
     mq->mtqueue = (void **)&D_800D5260;
     mq->fullqueue = (void **)&D_800D5260;

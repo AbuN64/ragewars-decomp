@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/ALPARAM_S.H"
 #include "TYPES.H"
 #include "sdk/libgultra.h"
@@ -8,8 +9,6 @@
    1/16384 and 16384.0 double constants, at D_800CC838 and D_800CC840, distinct from the copies the
    inlined body in alFxNew uses. */
 
-extern const f64 D_800CC838; /* 1.0 / 16384 */
-extern const f64 D_800CC840; /* 16384.0 */
 
 void func_802B468C_de(AudioLowPassFilter *lp)
 {

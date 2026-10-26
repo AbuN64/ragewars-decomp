@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/OSPIHANDLE_S.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ALAUXBUS_S.H"
@@ -10,7 +11,6 @@ extern char D_800C7570;
 
 extern char s_audioSynthesizerText;
 
-extern f32 D_800C7590[2];
 
 s32 func_802B3D10_de(ALSynth4C *drvr, ALPlayer_s14 **client) {
  s32 smallest = 0x7FFFFFFF;

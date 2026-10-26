@@ -1,9 +1,9 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "TYPES.H"
 #include "SOUND/8025C544_6.H"
 
-extern s32 D_8011F260;
 
 /** Return the address of the global state word at D_8011F260. */
 s32 *func_8025CC6C_de(void) {

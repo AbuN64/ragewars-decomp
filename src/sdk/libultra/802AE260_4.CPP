@@ -1,15 +1,12 @@
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/UNUSED.H"
 #include "COMMON/RESPONSE.H"
 #include "COMMON/S1_4.H"
 #include "TYPES.H"
 #include "sdk/OSINT/802BDEA0_2.H"
 
 #if defined(VERSION_US_REV1)
-extern u8 D_8014D3E3;
-extern s32 D_8014D3E8;
 
-extern s16 D_B200000C;
-extern u8 D_B2000015;
 
 
 
