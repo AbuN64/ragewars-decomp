@@ -12,10 +12,7 @@
 #if defined(VERSION_US)
 #include "COMMON/EXTERNS_18.H"
 extern s32 D_800CD70C;
-extern void osViSetYScale(f32);
-extern void osViSetMode(void *);
 extern void osViBlack(s32);
-extern void func_802BA700_de(s32);
 extern void Sched_HandleRetrace(OSSched *);
 extern void Frontend_UpdateScreenMode(void);
 extern void Sched_HandleRdpCompletion(OSSched *);

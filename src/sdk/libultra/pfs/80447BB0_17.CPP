@@ -438,7 +438,6 @@ s32 __osCheckId(OSPfs *pfs)
 /* Select the PFS active bank. Existing PFS consumers supply the canonical
  * queue/channel/activebank fields at offsets 4, 8 and 0x65. The cartridge
  * returns the controller write result directly (v0 survives the epilogue). */
-extern u32 func_802B8880_de(s32 completionQueue, s32 channel, u16 blockAddress, u8 *inputData, s32 forceWrite);
 
 s32 Pfs_SelectActiveBank(OSPfs *pfs)
 {

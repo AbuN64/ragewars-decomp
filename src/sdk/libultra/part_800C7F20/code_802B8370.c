@@ -42,7 +42,6 @@ void func_802B32A0_de(void *synth, void *voice, s8 effectMix) {
     }
 }
 
-extern void *Audio_AllocParam(void);
 
 
 
@@ -75,7 +74,6 @@ void func_802B3350_de(void *synth, void *voice, u8 pan) {
     }
 }
 
-extern void *Audio_AllocParam(void);
 
 
 
