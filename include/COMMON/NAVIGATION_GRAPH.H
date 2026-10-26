@@ -10,11 +10,16 @@ typedef struct NavigationBuffer { s32 stride; s32 reserved; u8 data[1]; } Naviga
 
 /* The ROM attribute word holds flags in its high half and the object id in its low half. Guest memory keeps the word
    numeric, so a little-endian host finds the low half (object id) at the first halfword address. */
+typedef struct NavigationPoint {
+    CVector3 position;
 #if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
-typedef struct NavigationPoint { CVector3 position; u16 objectId; u16 flags; } NavigationPoint;
+    u16 objectId;
+    u16 flags;
 #else
-typedef struct NavigationPoint { CVector3 position; u16 flags; u16 objectId; } NavigationPoint;
+    u16 flags;
+    u16 objectId;
 #endif
+} NavigationPoint;
 
 typedef struct NavigationPortal { u16 first, second; u8 kind; } NavigationPortal;
 
