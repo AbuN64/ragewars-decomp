@@ -14,9 +14,9 @@ extern void Rumble_FreeAllPoolNodes(s32 *);
 #elif defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 extern unsigned int func_802B80F4_eu_x(void *arg0);
 #elif defined(VERSION_US)
-extern unsigned int func_802B7D44_us(void *arg0);
+extern unsigned int osMotorStart(void *arg0);
 #else
-extern unsigned int func_802B7E14_de(void *arg0);
+extern unsigned int osMotorStart(void *arg0);
 #endif
 #if defined(VERSION_EU)
 
@@ -63,9 +63,9 @@ func_802B80B4_eu
 #elif defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 func_802B80F4_eu_x
 #elif defined(VERSION_US)
-func_802B7D44_us
+osMotorStart
 #else
-func_802B7E14_de
+osMotorStart
 #endif
 ((void *)arg0->status);
                     return;

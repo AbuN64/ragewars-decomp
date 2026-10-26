@@ -13,7 +13,7 @@
 
 
 
-u32 func_802B7E14_de(Triple *motorContext) {
+u32 osMotorStart(Triple *motorContext) {
     Block40 saved;
     u8 *source;
     s32 i;
