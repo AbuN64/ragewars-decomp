@@ -57,8 +57,6 @@ extern int func_80258FF4_de(char *arg0, int id);
 
 extern void *func_80258BDC_de(struct ContextRecAt2BC0 *arg0, int arg1);
 
-typedef struct Slot_func_80258FF4_de Slot_func_80258FF4_de;
-
 extern double D_800C3EE8_de;
 
 extern void func_80258B8C_de(struct ContextRecAt2BC0 *arg0, float arg1);

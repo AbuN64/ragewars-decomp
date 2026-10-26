@@ -20,8 +20,6 @@ struct ItemCode8024E130 {
 extern int func_8024E610_de(void *arg0);
 
 
-typedef union func_8024E2EC_S3_U18 func_8024E2EC_S3_U18;
-
 struct ObjectLinks18;
 struct ObjectLinks18 {
     unsigned char padding_0[12];

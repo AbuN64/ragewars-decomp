@@ -22,8 +22,6 @@ struct NodeCode8028469C;
 struct PoolRecAt28V1;
 /* PoolRecAt28V1 is shared with ControllerProfile in ITEMRECAT20V1.H. */
 
-typedef union func_80285D80_S2_U138 func_80285D80_S2_U138;
-
 extern float D_800C4ED0_de;
 
 

@@ -2440,12 +2440,6 @@ struct MenuRecAt54 {
     s32 state;
 };
 
-struct func_8022E3B4_S3;
-struct func_8022E3B4_S3 {
-    char pad0[0x4];
-    s16 unk4;
-};
-
 extern int D_80100598[];
 
 struct ObjRecAt3CV1;
@@ -2587,9 +2581,6 @@ struct IntegerStateDC_2 {
     unsigned char padding[216];
     s32 state;
 };
-
-struct func_8022E3B4_S3;
-typedef struct func_8022E3B4_S3 func_8022E3B4_S3;
 
 
 

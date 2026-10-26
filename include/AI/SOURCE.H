@@ -73,11 +73,6 @@ struct AiTarget;
 
 
 
-union func_802138F0_S2_U18 {
-    s32 v0;
-    s16 v1;
-};
-
 struct Source;
 struct Source {
     u8 pad0;
