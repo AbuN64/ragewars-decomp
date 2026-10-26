@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_20.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -9,15 +10,10 @@
 
 
 
-extern char D_800D79A8[];
 
-extern char D_800D3990[];
 
-extern char D_800D39A4[];
 
-extern char D_800D39B8[];
 
-extern char D_800D39CC[];
 
 s32 func_8040BA58_de(struct FieldRecAt14 *field) {
     u32 state = D_80153778;
