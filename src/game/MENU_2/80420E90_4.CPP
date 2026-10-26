@@ -7,7 +7,6 @@
    before it through Items_ResetActorPools and Ovlgame_InitializePlayerPool, releases resource 0x24 of D_8011FE88 through
    Scene_LoadLevelResources, calls func_8025476C_de with one when func_8025477C_de reports nothing, then calls
    func_80245A10_de, func_80245A20_de with zero and func_80245A30_de. */
-extern void Cinema_ClearResponse();
 
 
 void Menu_ReleaseOptionsScene(void) {

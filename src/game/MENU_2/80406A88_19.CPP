@@ -20,7 +20,6 @@ int Frontend_WrapNodePairExtended(void) { SmpButton_WrapButtonWidget(0x3DE); Smp
    3 for any other setting); 0x3DB sends code -1 to Frontend_SetMenuChoiceResult and calls Smos_ReturnToPreviousScreen.
    Returns zero. */
 extern void SmXlate_SwitchScreen(s32);
-extern void Smos_ReturnToPreviousScreen(void);
 
 #if defined(VERSION_DE)
 enum { MENU_80439F38_986 = 980, MENU_80439F38_987 = 981 };

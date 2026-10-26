@@ -19,7 +19,6 @@ extern u8 *D_auto_800D3490;
 extern void *Cache_AllocateMemory(s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void Frontend_SetWidgetFlag100(void *, s32);
-extern void func_8025E384_de(void);
 extern s32 Defs_GetMemorySize(void);
 extern MenuListWidget *SmpButton_CreateListWidget(s32, s32);
 extern void SmpButton_AppendListText(struct MenuListWidget *, u8 *);
