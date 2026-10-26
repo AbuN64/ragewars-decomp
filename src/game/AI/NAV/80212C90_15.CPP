@@ -100,7 +100,6 @@ store_c:
     Nav_UpdatePlayerSteering(actor);
 }
 
-extern s32 D_8013B364;
 
 
 
@@ -165,7 +164,6 @@ store_c:
     ((Brain_func_80212D78_eu_x *)(actor))->jumpTimer = -1;
 }
 
-extern s32 D_8013B364;
 
 extern void *Nav_GetGraphPoint(void *, s32);
 

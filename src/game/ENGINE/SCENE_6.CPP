@@ -63,7 +63,6 @@ void Scene_DrawOpaqueActors(SceneRecAt10C0 *scene, void *camera) {
     Geometry_FlushModelBatch();
 }
 
-extern Gfx *g_displayListCursor;
 
 extern void Particle_DrawRenderList(s32 arg0, s32 arg1);
 

@@ -90,7 +90,6 @@ void func_8024F5A0_de(StaticObject *staticObject) {
 }
 
 /** Stores D_800D2988 times the float at 0x20 of the object at 0x18 in the float at 0x1A4. */
-extern float D_800D2988;
 
 void func_8024F618_de(StaticObject *staticObject) {
     void *p = staticObject->type;

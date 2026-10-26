@@ -34,7 +34,6 @@ extern s16 Weapon_FindNextUsableWeapon(void *arg0);
 
 extern WeaponActionRecord D_800CE8DC[];
 
-extern s32 D_80140FF8;
 
 
 

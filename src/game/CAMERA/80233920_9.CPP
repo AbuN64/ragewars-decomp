@@ -156,7 +156,6 @@ extern func_80237E70_G1 D_800D7028;
 
 extern func_80237E70_G1 D_800D7034;
 
-extern s32 D_800E28D0;
 extern void func_80239CE0_de(void *arg0);
 
 
@@ -324,7 +323,6 @@ extern const f32 D_800C3424_de, D_800C3428_de, D_800C342C_de, D_800C3430_de;
 extern const f32 D_800C3434_de, D_800C3438_de, D_800C343C_de, D_800C3440_de;
 extern const f32 D_800C3444_de, D_800C3448_de;
 extern s32 D_800E28D8;
-extern void OnScreen_SetupTextRendering(void);
 extern void OnScreen_DrawText(void *, s32, s32, s32, s32, s32, f32, f32);
 
 /* Draws and advances the screen messages of one view, retiring finished ones. */
