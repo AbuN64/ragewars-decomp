@@ -218,12 +218,12 @@ void func_802AE6BC_de(ALCSeq_s *state, ALEvent *result) {
     state->deltaFlag = 1;
 }
 
-int func_802AE7B0_de(void *arg0) {
+int alCSeqGetTicks(void *arg0) {
     struct ALCSeq_s *sequence = arg0;
     return sequence->lastTicks;
 }
 
-f32 func_802AE7BC_de(void **sequenceHandle, s32 tickCount, s32 microsecondsPerQuarter) {
+f32 alCSeqTicksToSec(void **sequenceHandle, s32 tickCount, s32 microsecondsPerQuarter) {
     f64 angle;
     f32 arg1f;
     f32 scaled;
@@ -244,7 +244,7 @@ f32 func_802AE7BC_de(void **sequenceHandle, s32 tickCount, s32 microsecondsPerQu
     return scaled / ((f32)val * D_800C7320_de);
 }
 
-/* Scales the float argument by the unsigned rate at offset 0x40 of the object behind arg0 times a constant, divides by the unsigned third argument, and returns the quotient converted to unsigned. Adapted from func_802AE7BC_de with the second argument changed to a float, the product and quotient reordered so the rate term multiplies and the third argument divides, and the result converted to u32 with the explicit 2^31 split. */
+/* Scales the float argument by the unsigned rate at offset 0x40 of the object behind arg0 times a constant, divides by the unsigned third argument, and returns the quotient converted to unsigned. Adapted from alCSeqTicksToSec with the second argument changed to a float, the product and quotient reordered so the rate term multiplies and the third argument divides, and the result converted to u32 with the explicit 2^31 split. */
 
 
 
@@ -253,7 +253,7 @@ f32 func_802AE7BC_de(void **sequenceHandle, s32 tickCount, s32 microsecondsPerQu
 
 
 
-u32 func_802AE824_de(void **sequenceHandle, f32 seconds, s32 microsecondsPerQuarter) {
+u32 alCSeqSecToTicks(void **sequenceHandle, f32 seconds, s32 microsecondsPerQuarter) {
     f64 val;
     f64 div;
     f32 arg1f;
@@ -283,7 +283,7 @@ u32 func_802AE824_de(void **sequenceHandle, f32 seconds, s32 microsecondsPerQuar
     return converted;
 }
 
-void func_802AE8C8_de(ALCSeq_s *dst, ALCSeqMarker *src) {
+void alCSeqSetLoc(ALCSeq_s *dst, ALCSeqMarker *src) {
     int i;
 
     dst->validTracks = src->validTracks;
@@ -298,7 +298,7 @@ void func_802AE8C8_de(ALCSeq_s *dst, ALCSeqMarker *src) {
     }
 }
 
-void func_802AE93C_de(ALCSeq_s *src, ALCSeqMarker *dst) {
+void alCSeqGetLoc(ALCSeq_s *src, ALCSeqMarker *dst) {
     s32 i;
 
     dst->validTracks = src->validTracks;
