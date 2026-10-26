@@ -101,7 +101,6 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
 
 #if !(defined(VERSION_US))
 /* Clears the screen: clears the depth buffer over the whole screen through Render_ClearDepthRect, emits a full-screen scissor, the frame's colour image, fill cycle, combiner, no-op render mode, fill colour 0x10001 and a full-screen fill rectangle, then, when image 0x386 has a size, draws it stretched across the screen through func_802AAC28_de after func_802A9234_de(255). Written with libultra-style display-list macros and the screen size read from D_800E28D0 and D_800E28D4. */
-extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
 extern void Render_ClearDepthRect(void *arg0, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced);
 

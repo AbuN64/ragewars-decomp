@@ -16,9 +16,7 @@
 
 
 
-extern CacheEntry *D_80107DFC;
 
-extern void *D_80107EA0;
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 

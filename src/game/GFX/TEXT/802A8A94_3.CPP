@@ -10,7 +10,6 @@ extern void Scene_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
 
 /* Draws a text string in the current font style D_801376F8: when centring, measures it through Pak_MeasureLine at the style size scaled by the language-dependent factors for D_80147150, shrinks the scale so it fits 44 pixels inside the screen width D_800E28D0 and shifts x left by half the width; then sets the environment colour from the style with the given alpha and the primitive colour from the style, and draws the string through func_802A88F0_de, first as a shadow when requested. */
 
-extern s32 D_800E28D0;
 extern Gfx *g_displayListCursor;
 extern f32 Pak_MeasureLine(u8 *text, f32 size, f32 spacing);
 

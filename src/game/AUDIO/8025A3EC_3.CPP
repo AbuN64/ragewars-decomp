@@ -211,7 +211,6 @@ typedef struct SoundPlayer {
     SoundEngine *engine;
     SoundVoice voices[1];
 } SoundPlayer;
-extern float D_800C3F6C_de, D_800C3F70_de, D_800C3F74_de;
 extern s32 D_800CBAD4[];
 extern s32 D_800CBAE4[];
 extern s32 func_8025E518_de(void *);

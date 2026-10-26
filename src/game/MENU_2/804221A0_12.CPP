@@ -19,7 +19,6 @@ extern struct Screen_func_80422960_de *D_800E4518;
 
 extern struct LevelActor *D_800E2830;
 
-extern s32 D_8015402C;
 
 
 

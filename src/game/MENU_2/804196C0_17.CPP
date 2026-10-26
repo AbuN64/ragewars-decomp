@@ -19,11 +19,8 @@ extern void Menu_InitFlicker(struct ObjectCode804196C0 *, s32);
 
 
 
-extern s32 D_800E3330;
 
-extern s32 D_800E3334;
 
-extern Handler802A2B50 D_800E3338;
 
 /* Calls Scene_FreeMemory with the arguments it was given and returns zero. */
 

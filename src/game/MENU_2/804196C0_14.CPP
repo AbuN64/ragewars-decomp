@@ -11,11 +11,8 @@
 
 
 
-extern s32 D_800E3300;
 
-extern s32 D_800E3304;
 
-extern Handler802A2B50 D_800E3308;
 
 /* Calls Scene_FreeMemory with the arguments it was given and returns zero. */
 

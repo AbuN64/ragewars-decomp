@@ -7,7 +7,6 @@
 
 
 extern s32 D_800CD8D0[];
-extern f32 D_800C3518_de[];
 void func_80238EB8_de(State44 *arg0) {
     f32 temp_f0;
     CVector3 *temp_v0;

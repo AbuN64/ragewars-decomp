@@ -41,7 +41,6 @@ extern void Resmgr_CopyString(char *, char *);
 
 /* Hides each primary and optional secondary selection widget. */
 extern void Frontend_SetWidgetFlag08(void *, s32);
-extern struct Icon D_800E4F64[];
 
  /* extern */
 

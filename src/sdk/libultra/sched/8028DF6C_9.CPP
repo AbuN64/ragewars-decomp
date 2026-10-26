@@ -18,7 +18,6 @@
 #include "sdk/os.h"
 extern s32 D_80142C30;
 
-extern s32 D_80142C38;
 s32 func_802BD170_de(s32);
 
 extern s32 func_802BD170_de(s32);

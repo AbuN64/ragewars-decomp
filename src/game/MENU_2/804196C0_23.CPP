@@ -44,11 +44,8 @@ extern u8 *Resmgr_CopyString(u8 *, u8 *);
 
 
 
-extern s32 D_800E3400;
 
-extern s32 D_800E3404;
 
-extern Handler802A2B50 D_800E3408;
 
 /* Draws the child at 0x8 of window arg0 with the arguments passed by value once Frontend_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values func_802A1898_de reports, narrows them by the resolved basis through func_8040F488_de and installs them through func_802A1870_de around the draw, restoring the saved values after it. Adapted from func_802A1BE0_de. */
 
@@ -94,11 +91,8 @@ extern void Frontend_DrawVisibleSiblings(void *, Args);
 
 
 
-extern s32 D_800E3460;
 
-extern s32 D_800E3464;
 
-extern Handler802A2B50 D_800E3468;
 
 /* Calls Render_PlayFlatSound with 0xE74 and sets the byte at 0x10 of every child in the list at 0x8 of arg0 whose halfword at 0xE is not 8 to 100, returning zero. Adapted from func_802A1E5C_de with both stores to 0x5C and 0x48 removed. */
 

@@ -4,7 +4,6 @@
 #ifdef NON_MATCHING
 #include "TYPES.H"
 extern u8 D_801462C8_b[];
-extern void *D_800E5694_t[];
 typedef struct { void *a0, *a4, *a8, *aC, *a10; s32 a14; void *a18; } MenuBlockEu;
 extern MenuBlockEu *D_800E5694;
 extern char *D_800E1CE4[], *D_800E1D14[], *D_800E1C14[], *D_800E1C24[], *D_800E1D24[], *D_800E1D34_eu[], *D_800E1D44[];

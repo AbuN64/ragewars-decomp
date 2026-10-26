@@ -31,7 +31,6 @@ extern s32 Nav_GetRouteRelation(char *, s32, s32);
 
 extern void Nav_SteerAlongRoute(CloseAttackBrain *),Nav_UpdatePlayerSteering(CloseAttackBrain *),Nav_SelectPlayerState(CloseAttackBrain *);
 extern struct {char pad[0xC];unsigned short flags;} *Nav_GetGraphPoint(char *,int);
-extern float D_800C22D0_eu[];
 
 void func_80211490_eu(CloseAttackActor *actor) {
  char *routes;int mine,theirs,dir; CloseAttackActor *player;

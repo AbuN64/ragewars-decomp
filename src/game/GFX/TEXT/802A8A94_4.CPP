@@ -43,11 +43,8 @@ extern f32 D_800CB3A8;
 
 extern f32 D_800CB3B0;
 
-extern f32 D_800C6214_de;
 
-extern f32 D_800C621C_de;
 
-extern f32 D_800C6224_de;
 
 void func_802AA6D0_de(void *arg0, s16 arg1, s16 arg2)
 {

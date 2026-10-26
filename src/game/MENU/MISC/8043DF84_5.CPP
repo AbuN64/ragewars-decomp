@@ -21,9 +21,7 @@ extern void Pak_AllocateMenu(void *arg0, void *arg1, void *arg2);
 
 
 
-extern char D_800D7688;
 
-extern char D_800D768C;
 
 /* Forwards arg0->unk20->unk4 to func_80264770_de and clears D_800E28C0. */
 

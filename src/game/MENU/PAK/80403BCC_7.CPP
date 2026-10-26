@@ -14,13 +14,11 @@ extern int D_800E2850;
 
 extern int D_800E2854;
 
-extern int *D_800DE808;
 
 extern void Render_ReadControllerStates(void);
 
 extern u8 D_8010BBB8;
 
-extern u8 D_8010FBE3[];
 
 extern u8 D_80153330[];
 

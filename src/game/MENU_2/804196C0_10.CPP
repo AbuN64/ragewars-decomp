@@ -35,7 +35,6 @@ s32 func_80419640_de(Image *dst, Image *src) {
     return 0;
 }
 
-extern int D_800E32F0;
 
 void func_804196C8_de(int value) {
     D_800E32F0 = value;

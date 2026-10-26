@@ -18,7 +18,6 @@
 
 
 
-extern char D_0025F56C;
 
 extern char D_800C41B0_de;
 

@@ -19,7 +19,6 @@ extern void Text_SetupSpriteMode(s32 color);
 
 
 
-extern s32 D_800E28D0;
 
 extern s32 Camera_IsSequenceInWindow(void);
 extern s32 func_802934F8_de(void);

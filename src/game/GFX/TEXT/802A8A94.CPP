@@ -10,7 +10,6 @@
 #include "GFX/TEXT/802A8A94_5.H"
 #include "SCENE/802508E0_9.H"
 
-extern s32 D_800E28D0;
 
 
 static inline void rectangle(s32 x0,s32 y0,s32 x1,s32 y1,s32 r,s32 g,s32 b,s32 a) {

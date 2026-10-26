@@ -4,7 +4,6 @@
 #include "RENDER_2/802192C0_3.H"
 #include "GFX/TEXT/8022BA90_4.H"
 
-extern s32 D_8014561C;
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/UNUSED.H"

@@ -273,8 +273,6 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
 #include "COMMON/OBJRECAT5F14.H"
 
 extern Shared_MenuData D_80145040;
-extern Shared_Game D_801462C8;
-extern Box D_800FF208;
 extern Box D_801031F0;
 extern s32 D_800CD6E0_de;
 extern f32 D_800C520C;

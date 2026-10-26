@@ -122,7 +122,7 @@ typedef struct PakModelContext {
     MenuModelScreen *screen;
 } PakModelContext;
 extern Gfx *g_displayListCursor;
-extern s32 D_800D297C, D_800E28D0, D_800E1E20, D_800CD730;
+extern s32 D_800D297C, D_800E28D0, D_800CD730;
 extern f32 literals_Engine_GetPlatformRoutePoint;
 extern s32 D_800CE430[];
 extern u8 D_00443128[], D_00443104[];

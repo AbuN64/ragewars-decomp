@@ -441,7 +441,6 @@ void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVecto
 #include "TYPES.H"
 #include "COMMON/COLORENTRY.H"
 #include "COMMON/WORLD.H"
-extern ColorEntry D_800CD6E4_de[];
 extern f32 D_800D2988;
 
 #include "COMMON/MENU_MATCH_GLOBALS.H"
@@ -526,7 +525,6 @@ typedef struct LevelChallenge {
     u8 unknown5;
     u16 weapons[8];   /* 0x6: starting weapon item ids (read by the achieve loadout) */
 } LevelChallenge;
-extern s32 D_8015402C;
 extern ResultsCourse *D_800E4680;
 extern ResultsHeadingCharacter D_800DFA6C[];
 extern char D_800C5284_de[], D_800C52E4_de[], D_00285160[];

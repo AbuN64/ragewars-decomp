@@ -18,7 +18,6 @@
 
 extern CVector3 D_800C46C0_de[2];
 
-extern func_8020CA10_G1 D_800C48E8_de;
 
 extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 

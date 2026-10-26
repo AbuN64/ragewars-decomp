@@ -56,7 +56,6 @@ extern OptionsScreen *D_800E4600;
 
 #if defined(NON_MATCHING) || defined(VERSION_US_REV1)
 #if 1
-extern u8 D_801468A0[];
 extern s8 D_800FEB0E[];
 extern u8 D_8010EB7D[];
 extern void func_8042AFC0_de(int);

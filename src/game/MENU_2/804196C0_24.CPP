@@ -49,20 +49,13 @@ extern NodeMenuShowSlotById *func_8040EC30_de(void *root, s32 id);
 
 
 
-extern s32 D_800E34A0;
 
-extern s32 D_800E34A4;
 
 #if defined(VERSION_DE)
-extern Handler802A2B50 D_800DF458;
 #elif defined(VERSION_EU)
-extern Handler802A2B50 D_800EFAC8;
 #elif defined(VERSION_EU_X)
-extern Handler802A2B50 D_800EAC88;
 #elif defined(VERSION_US)
-extern Handler802A2B50 D_800DE108;
 #elif defined(VERSION_US_REV1)
-extern Handler802A2B50 D_800E34A8;
 #endif
 
 /* Draws the child at 0x8 of window arg0 with the arguments passed by value once Frontend_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values func_802A1898_de reports, narrows them by the resolved basis through func_8040F488_de and installs them through func_802A1870_de around the draw, restoring the saved values after it. Adapted from func_802A1BE0_de. */

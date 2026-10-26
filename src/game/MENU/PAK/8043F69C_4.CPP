@@ -29,11 +29,9 @@ void Pak_DrawMenuPanel(func_8043FFAC_S2 *menu, TextBoundsText *text, s32 relativ
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 
-extern s32 D_800E28D0;
 
 
                           /* unable to generate initializer: unknown type */
-extern s32 D_800E1E20;
 
                           
 

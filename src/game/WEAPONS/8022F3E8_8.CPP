@@ -23,7 +23,6 @@
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
-extern WeaponActionRecord D_800CE8DC[];
 extern char D_80102B00[];
 extern s32 D_800D30BC;
 extern char D_80145040[];

@@ -237,7 +237,7 @@ extern s32 func_80282D38_de(Shared_ReactionObjectKind *);
 extern s32 func_80282DEC_de(Shared_ReactionObjectKind *);
 extern void *D_801041F0;
 extern s32 D_80100204;
-extern Shield D_80100208, D_80110570;
+extern Shield D_80100208;
 static inline void storeActorHealth(Shared_ReactionActor *actor, s32 value) { actor->unk174 = value; }
 static inline void storePlayerHealth(Shared_ReactionPlayer *player, s32 value) {
     player->unk5E4 = value;

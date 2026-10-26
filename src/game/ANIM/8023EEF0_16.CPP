@@ -5,9 +5,7 @@
 #include "TYPES.H"
 #include "ANIM/8023EEF0_16.H"
 
-extern f32 D_800C8820;
 
-extern f32 D_800C8828;
 
 void func_80240C8C_de(void *arg0)
 {
