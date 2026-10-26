@@ -10,8 +10,8 @@
 #include "COMMON/STREAM.H"
 #include "GAME_2/8025E520.H"
 
-short func_8025E500_de(void *arg0) {
-    return ((ControllerCode802591C0 *)arg0)->group;
+short func_8025E500_de(void *soundDescriptor) {
+    return ((ControllerCode802591C0 *)soundDescriptor)->group;
 }
 
 short func_8025E50C_de(void *desc) {
@@ -33,13 +33,13 @@ int func_8025E530_de(char *object) {
     return ((ControllerCode802591C0 *)object)->field8;
 }
 
-short func_8025E53C_de(void *arg0) {
-    return ((ControllerCode802591C0 *)arg0)->preset;
+short func_8025E53C_de(void *soundDescriptor) {
+    return ((ControllerCode802591C0 *)soundDescriptor)->preset;
 }
 
 /** Return the upper two bits of the halfword at object offset 6. */
-unsigned int func_8025E548_de(void *arg0) {
-    return ((ControllerCode802591C0 *)arg0)->flags >> 14;
+unsigned int func_8025E548_de(void *soundDescriptor) {
+    return ((ControllerCode802591C0 *)soundDescriptor)->flags >> 14;
 }
 
 signed char func_8025E554_de(void *desc) {
@@ -56,8 +56,8 @@ int func_8025E56C_de(void *object) {
     return ((ControllerCode802591C0 *)object)->yaw;
 }
 
-unsigned short func_8025E578_de(void *arg0) {
-    return ((ControllerCode802591C0 *)arg0)->flags & 0x3FFF;
+unsigned short func_8025E578_de(void *soundDescriptor) {
+    return ((ControllerCode802591C0 *)soundDescriptor)->flags & 0x3FFF;
 }
 
 short func_8025E584_de(ControllerCode802591C0 *controller) {
@@ -70,8 +70,8 @@ int func_8025E590_de(ControllerCode802591C0 *object) {
 }
 
 /** Return the signed halfword at offset twelve. */
-int func_8025E59C_de(void *arg0) {
-    return ((ControllerCode802591C0 *)arg0)->fieldC;
+int func_8025E59C_de(void *soundDescriptor) {
+    return ((ControllerCode802591C0 *)soundDescriptor)->fieldC;
 }
 
 #if defined(VERSION_US)

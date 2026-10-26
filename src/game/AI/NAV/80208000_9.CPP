@@ -15,7 +15,7 @@ extern void Nav_SearchPathByKey(void *arg0, s32 arg1);
 
 extern void Nav_SearchPath(void *arg0, void *node);
 
-void func_8020D070_de(void *graph, s32 arg1, s32 arg2) {
+void Nav_SearchSingleGoalPath(void *graph, s32 arg1, s32 arg2) {
     Nav_ResetSearchState(graph);
     Nav_ClearGoalList((s32) graph);
     Nav_AddGoalNode(graph, arg2);

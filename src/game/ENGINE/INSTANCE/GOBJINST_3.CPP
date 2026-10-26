@@ -82,31 +82,31 @@ void func_80246E44_de(Actor36 *actor) {
 void func_80247004_de(Obj_func_80247004_de *actor) {
     CQuatern vec;
     f32 rotationBlend;
-    f32 var_f1;
-    s32 temp_s1;
-    s32 temp_s2;
-    s32 temp_v0;
+    f32 rotationBlendRate;
+    s32 resetRotationFlag;
+    s32 rotationState;
+    s32 actorFlags;
     s32 flags;
     void *rotation;
-    void *var_a0;
-    temp_v0 = actor->unk100;
-    flags = temp_v0 & 0x300000;
-    if (!(temp_v0 & 1) && (temp_s2 = func_8024E62C_de(actor), (actor->unk14 != NULL)) && (vec = func_8024D870_de(actor), temp_s1 = actor->unk14->unk2 & 1, (func_8024E29C_de(actor) != 0))) {
-        if (temp_s1 != 0) {
+    void *rotationDestination;
+    actorFlags = actor->unk100;
+    flags = actorFlags & 0x300000;
+    if (!(actorFlags & 1) && (rotationState = func_8024E62C_de(actor), (actor->unk14 != NULL)) && (vec = func_8024D870_de(actor), resetRotationFlag = actor->unk14->unk2 & 1, (func_8024E29C_de(actor) != 0))) {
+        if (resetRotationFlag != 0) {
             vec.x = vec.y = vec.z = 0.0f;
             vec.w = D_800C3924_de;
         }
         if (flags) {
-            if ((!(actor->unk100 & 0x1000) && (var_a0 = actor->rotation, (temp_s2 != 0))) || (var_a0 = actor->rotation, (temp_s1 != 0))) {
-                func_80274380_de(var_a0, &vec);
+            if ((!(actor->unk100 & 0x1000) && (rotationDestination = actor->rotation, (rotationState != 0))) || (rotationDestination = actor->rotation, (resetRotationFlag != 0))) {
+                func_80274380_de(rotationDestination, &vec);
             }
         } else {
-            if ((temp_s2 != 0) && !(actor->unk100 & 0x1000)) {
-                rotationBlend = D_800D2988[0]; var_f1 = D_800C3928_de[0];
+            if ((rotationState != 0) && !(actor->unk100 & 0x1000)) {
+                rotationBlend = D_800D2988[0]; rotationBlendRate = D_800C3928_de[0];
             } else {
-                rotationBlend = D_800D2988[0]; var_f1 = D_800C3928_de[1];
+                rotationBlend = D_800D2988[0]; rotationBlendRate = D_800C3928_de[1];
             }
-            rotationBlend = rotationBlend * var_f1;
+            rotationBlend = rotationBlend * rotationBlendRate;
             rotation = actor->rotation;
             if (rotationBlend > D_800C3930_de[0]) {
                 rotationBlend = D_800C3930_de[0];
@@ -116,7 +116,7 @@ void func_80247004_de(Obj_func_80247004_de *actor) {
     }
 }
 
-void func_8024715C_de(char *actor, CVector3 *arg1) {
+void func_8024715C_de(char *actor, CVector3 *destination) {
     CollisionInfo *collision;
     u16 *old_contact;
     s32 collided;
@@ -133,7 +133,7 @@ void func_8024715C_de(char *actor, CVector3 *arg1) {
             ((ObjectStateC *)(collision))->unk_8.v1 = 0;
         }
         old_contact = ((ObjectLinks23C *)(actor))->unk_14;
-        collided = Camera_MoveActorWithCollision(actor, *arg1, collision);
+        collided = Camera_MoveActorWithCollision(actor, *destination, collision);
         if (old_contact != ((ObjectLinks23C *)(actor))->unk_14) {
             ((ObjectLinks23C *)(actor))->unk_1F4 = old_contact;
         }
@@ -154,6 +154,6 @@ void func_8024715C_de(char *actor, CVector3 *arg1) {
             callback(actor, actor + 0x170, collision);
         }
     } else {
-        ((ObjectLinks23C *)(actor))->unk_8 = *arg1;
+        ((ObjectLinks23C *)(actor))->unk_8 = *destination;
     }
 }

@@ -122,36 +122,36 @@ f32 func_802609AC_de(s32 bitAddress, Func802608ECResult range) {
     return result;
 }
 
-void func_80260A5C_de(s32 arg0, Func802608ECResult range, f32 arg4)
+void func_80260A5C_de(s32 bitAddress, Func802608ECResult range, f32 sourceValue)
 {
   f32 arg4_2;
-  f32 temp_f1;
-  s32 temp_f2;
-  s32 var_a0;
-  arg4_2 = arg4;
-  temp_f1 = (arg4_2 - range.start) / range.delta * (f32) ((1 << range.value) - 1) + 0.5f;
-  if (temp_f1 >= 0.0f)
+  f32 roundedScaledValue;
+  s32 truncatedScaledValue;
+  s32 quantizedValue;
+  arg4_2 = sourceValue;
+  roundedScaledValue = (arg4_2 - range.start) / range.delta * (f32) ((1 << range.value) - 1) + 0.5f;
+  if (roundedScaledValue >= 0.0f)
   {
-    var_a0 = (s32) temp_f1;
+    quantizedValue = (s32) roundedScaledValue;
   }
   else
   {
-    temp_f2 = (s32) temp_f1;
-    var_a0 = 1;
-    if ((f32) temp_f2 == temp_f1)
+    truncatedScaledValue = (s32) roundedScaledValue;
+    quantizedValue = 1;
+    if ((f32) truncatedScaledValue == roundedScaledValue)
     {
-      var_a0 = 0;
+      quantizedValue = 0;
     }
     if (range.value)
     {
-      var_a0 = temp_f2 - var_a0;
+      quantizedValue = truncatedScaledValue - quantizedValue;
     }
     else
     {
-      var_a0 = temp_f2 - var_a0;
+      quantizedValue = truncatedScaledValue - quantizedValue;
     }
   }
-  write_bits(var_a0, arg0, range.value);
+  write_bits(quantizedValue, bitAddress, range.value);
 }
 
 f32 func_80260B80_de(u32 *stream, Func802608ECResult range) {
@@ -196,26 +196,26 @@ f32 func_80260B80_de(u32 *stream, Func802608ECResult range) {
 }
 
 /** Initialize a packed array and its decoding range. */
-void func_80260C6C_de(void *decodeArray, int arg1, Func802608ECResult t, int arg5) {
+void func_80260C6C_de(void *decodeArray, int baseBitAddress, Func802608ECResult t, int elementCount) {
     DecodeArray *array = decodeArray;
-    array->base = arg1;
+    array->base = baseBitAddress;
     array->range = t;
-    array->count = arg5;
+    array->count = elementCount;
 }
 
-f32 func_80260C9C_de(DecodeArray *arg0, s32 arg1) {
-    return decode(arg0->base + (arg0->range.value * arg1), arg0->range);
+f32 func_80260C9C_de(DecodeArray *packedArray, s32 elementIndex) {
+    return decode(packedArray->base + (packedArray->range.value * elementIndex), packedArray->range);
 }
 
 /** Initialize a packed array and its decoding range. */
-void func_80260D78_de(void *decodeArray, int arg1, Func802608ECResult t, int arg5) {
+void func_80260D78_de(void *decodeArray, int baseBitAddress, Func802608ECResult t, int elementCount) {
     DecodeArray *array = decodeArray;
-    array->base = arg1;
+    array->base = baseBitAddress;
     array->range = t;
-    array->count = arg5;
+    array->count = elementCount;
 }
 
-int func_80260DA8_de(BitFieldSource *arg0, int arg1) {
+int func_80260DA8_de(BitFieldSource *packedArray, int elementIndex) {
     int bitAddress;
     int shift;
     int *word;
@@ -223,8 +223,8 @@ int func_80260DA8_de(BitFieldSource *arg0, int arg1) {
     unsigned int next;
     unsigned int width;
 
-    width = arg0->width;
-    bitAddress = arg0->base + (width * arg1);
+    width = packedArray->width;
+    bitAddress = packedArray->base + (width * elementIndex);
     word = (int *) ((bitAddress & 0xF0000000) |
                     ((unsigned int) (bitAddress & 0x0FFFFFE0) >> 3));
     shift = bitAddress & 0x1F;
@@ -242,14 +242,14 @@ int func_80260DA8_de(BitFieldSource *arg0, int arg1) {
 }
 
 /** Initialize a packed array and its decoding range. */
-void func_80260E1C_de(void *decodeArray, int arg1, Func802608ECResult t, int arg5) {
+void func_80260E1C_de(void *decodeArray, int baseBitAddress, Func802608ECResult t, int elementCount) {
     DecodeArray *array = decodeArray;
-    array->base = arg1;
+    array->base = baseBitAddress;
     array->range = t;
-    array->count = arg5;
+    array->count = elementCount;
 }
 
-int func_80260E4C_de(BitFieldSource *arg0, int arg1) {
+int func_80260E4C_de(BitFieldSource *packedArray, int elementIndex) {
     int bitAddress;
     int shift;
     int *word;
@@ -257,8 +257,8 @@ int func_80260E4C_de(BitFieldSource *arg0, int arg1) {
     unsigned int next;
     unsigned int width;
 
-    width = arg0->width;
-    bitAddress = arg0->base + (width * arg1);
+    width = packedArray->width;
+    bitAddress = packedArray->base + (width * elementIndex);
     word = (int *) ((bitAddress & 0xF0000000) |
                     ((unsigned int) (bitAddress & 0x0FFFFFE0) >> 3));
     shift = bitAddress & 0x1F;

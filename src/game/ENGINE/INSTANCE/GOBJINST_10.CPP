@@ -108,7 +108,7 @@ s32 func_8024B06C_de(char *obj, CVector3 point, Box70 *out) {
     return best != 0;
 }
 
-void func_8024B2D0_de(char *arg0)
+void func_8024B2D0_de(char *actor)
 {
     s32 type;
     s32 i;
@@ -117,7 +117,7 @@ void func_8024B2D0_de(char *arg0)
     char *object;
     TypeEntry *entry;
 
-    type = ((struct LevelActor *)(arg0))->definition->kind;
+    type = ((struct LevelActor *)(actor))->definition->kind;
     if ((u32)type < 15) {
         goto valid_type;
     }
@@ -135,10 +135,10 @@ valid_type:
             limit = count;
             object = D_80140F84;
             do {
-                if (object == arg0) {
+                if (object == actor) {
                     goto zero_entry;
                 }
-                if (object + 0x2E8 == arg0) {
+                if (object + 0x2E8 == actor) {
                     goto special_entry;
                 }
                 i++;
@@ -150,14 +150,14 @@ valid_type:
 
 selected:
     if (entry != 0 && entry->callback != 0) {
-        entry->callback(arg0, (char *)arg0 + 0x170);
+        entry->callback(actor, (char *)actor + 0x170);
     }
-    if ((((struct LevelActor *)(arg0))->flags & 0x08000000) != 0) {
-        (((struct LevelActor *)(arg0))->updateCount)++;
+    if ((((struct LevelActor *)(actor))->flags & 0x08000000) != 0) {
+        (((struct LevelActor *)(actor))->updateCount)++;
     }
 }
 
-void func_8024B3A8_de(void *arg0, InputRecAt27 *arg1, s32 mode, s32 index) {
+void func_8024B3A8_de(void *actorStorage, InputRecAt27 *placement, s32 mode, s32 index) {
     void *resource0;
     s32 resource1;
     s32 lookup;
@@ -166,26 +166,26 @@ void func_8024B3A8_de(void *arg0, InputRecAt27 *arg1, s32 mode, s32 index) {
     f32 amount;
     CVector3 zero;
 
-    resource0 = Engine_GetActorDefinition(&g_world, arg1->resource22);
-    if (arg1->resource20 == 0xFFFF) {
+    resource0 = Engine_GetActorDefinition(&g_world, placement->resource22);
+    if (placement->resource20 == 0xFFFF) {
         resource1 = 0;
     } else {
-        resource1 = func_8028B394_de(&g_world, arg1->resource20);
+        resource1 = func_8028B394_de(&g_world, placement->resource20);
     }
-    amountRaw = arg1->amount24;
+    amountRaw = placement->amount24;
     fzero = 0.0f;
     amount = amountRaw * D_800C3B48_de[1];
     zero.x = zero.y = zero.z = fzero;
-    lookup = Render_TestActorStateBit(&g_world, arg0);
-    func_802466A0_de(arg0, arg1->unk1C, arg1->unk1E, arg1->unk0,
-                  resource0, arg1->unk27 == 0xFF ? -1 : arg1->unk27,
-                  resource1, amount, *(CVector3 *)arg1->vec4, arg1->unk26,
-                  *(CVector3 *)arg1->vec10, zero, lookup);
+    lookup = Render_TestActorStateBit(&g_world, actorStorage);
+    func_802466A0_de(actorStorage, placement->unk1C, placement->unk1E, placement->unk0,
+                  resource0, placement->unk27 == 0xFF ? -1 : placement->unk27,
+                  resource1, amount, *(CVector3 *)placement->vec4, placement->unk26,
+                  *(CVector3 *)placement->vec10, zero, lookup);
 }
 
-void func_8024B4F4_de(void *arg0, int arg1) {
-    Actor36 *actor = arg0;
+void func_8024B4F4_de(void *actorStorage, int model) {
+    Actor36 *actor = actorStorage;
     func_8024B4E4_de_FuncPtr fn = actor->update;
-    fn(arg0, actor->state);
-    func_8026EE20_de(actor->matrix, arg1, &actor->box);
+    fn(actorStorage, actor->state);
+    func_8026EE20_de(actor->matrix, model, &actor->box);
 }

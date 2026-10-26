@@ -136,8 +136,8 @@ int func_80245968_de(void) {
     return 0;
 }
 
-void func_80245990_de(void *arg0) {
-    D_800DE7F4_de = arg0;
+void func_80245990_de(void *letterboxEnabled) {
+    D_800DE7F4_de = letterboxEnabled;
 }
 
 f32 func_802459A0_de(void) {

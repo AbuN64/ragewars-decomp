@@ -50,9 +50,9 @@ extern f32 func_8024E678_de(void *arg0, s32 arg1);
 
 extern int D_80104418;
 
-void func_8022C8A4_de(struct SharedPlayer *player, void *arg1) {
+void func_8022C8A4_de(struct SharedPlayer *player, void *bodyActor) {
     if ((player->views5E8.view6C0_51.unk6C0 != 0.0f) || (player->views5E8.view6C4_54.unk6C4 != 0.0f)) {
-        Weapons_SetPlayerState(player, arg1, 3);
+        Weapons_SetPlayerState(player, bodyActor, 3);
     }
 }
 
@@ -62,18 +62,18 @@ void func_8022C8EC_de(void) {
 void func_8022C8F4_de(void) {
 }
 
-void func_8022C8FC_de(struct SharedPlayer *player, void *arg1) {
+void func_8022C8FC_de(struct SharedPlayer *player, void *bodyActor) {
     f32 x;
     f32 y;
     f32 zero;
 
-    Weapons_EaseOwnerHeightEffect(player, arg1);
+    Weapons_EaseOwnerHeightEffect(player, bodyActor);
     zero = 0.0f;
     Nav_EaseValueToward(&player->views5E8.view72C_75.unk72C, zero, 0.25f);
-    Weapons_UpdateViewAngles(player, arg1, &D_800CE7FC);
-    func_802233F0_de(player, arg1, &D_800CE7C0);
+    Weapons_UpdateViewAngles(player, bodyActor, &D_800CE7FC);
+    func_802233F0_de(player, bodyActor, &D_800CE7C0);
     if (!(player->views5E8.view6AC_45.unk6AC & 0x10)) {
-        Weapons_SetPlayerState(player, arg1, 2);
+        Weapons_SetPlayerState(player, bodyActor, 2);
         if (player->views13B4.view13B4_3.character == &D_800CED30) {
             player->views5E8.view86C_125.unk86C = 0x5E24;
         } else {
@@ -100,7 +100,7 @@ void func_8022C8FC_de(struct SharedPlayer *player, void *arg1) {
     }
 }
 
-void func_8022CA14_de(Player *player, void *arg1) {
+void func_8022CA14_de(Player *player, void *bodyActor) {
     CVector3 vector;
     f32 scale;
     u8 *result;
@@ -112,13 +112,13 @@ void func_8022CA14_de(Player *player, void *arg1) {
     if (D_8013B2BC == 0x1DB1) {
         scale = D_800C2D64_de;
     }
-    ((LevelActor *)arg1)->position1.y =
-        scale * ((Resource_u1 *)((LevelActor *)arg1)->definition)->value20;
-    result = func_8024E6A0_de(arg1);
+    ((LevelActor *)bodyActor)->position1.y =
+        scale * ((Resource_u1 *)((LevelActor *)bodyActor)->definition)->value20;
+    result = func_8024E6A0_de(bodyActor);
     if (result != 0) {
         func_8024E6D8_de(result, &vector);
-        Particle_AddVec3(&((LevelActor *)arg1)->position1,
-                      &((LevelActor *)arg1)->position1, &vector);
+        Particle_AddVec3(&((LevelActor *)bodyActor)->position1,
+                      &((LevelActor *)bodyActor)->position1, &vector);
     }
 
     state = ((Shared_ControlView *)player->profile)->transientFlag;
@@ -212,21 +212,21 @@ set_value:
     }
 }
 
-void func_8022CD78_de(void *arg0, void *arg1) {
-    if ((((struct FloatState6C8 *) ((s8 *) arg0))->unk_6A4) < 0.0f) {
-        (((struct FloatState6C8 *) ((s8 *) arg0))->unk_6C4) = (f32) D_800C2D80_de;
+void func_8022CD78_de(void *movementState, void *actorMotion) {
+    if ((((struct FloatState6C8 *) ((s8 *) movementState))->unk_6A4) < 0.0f) {
+        (((struct FloatState6C8 *) ((s8 *) movementState))->unk_6C4) = (f32) D_800C2D80_de;
     } else {
-        (((struct FloatState6C8 *) ((s8 *) arg0))->unk_6C4) = (f32) D_800C2D84_de;
+        (((struct FloatState6C8 *) ((s8 *) movementState))->unk_6C4) = (f32) D_800C2D84_de;
     }
-    (((struct func_8022CA04_S3 *) ((s8 *) arg1))->unk20) = (f32) D_800C2D88_de;
+    (((struct func_8022CA04_S3 *) ((s8 *) actorMotion))->unk20) = (f32) D_800C2D88_de;
 }
 
 void func_8022CDBC_de(void *player, LevelActor *actor) {
-    f32 temp_f2;
+    f32 currentLateralSpeed;
 
-    temp_f2 = ((Shared_ActorView *)player)->lateralSpeed;
-    if ((temp_f2 < 0.0f && ((Shared_ActorView *)player)->lateralInput >= 0.0f) ||
-        (temp_f2 > 0.0f && ((Shared_ActorView *)player)->lateralInput <= 0.0f) ||
+    currentLateralSpeed = ((Shared_ActorView *)player)->lateralSpeed;
+    if ((currentLateralSpeed < 0.0f && ((Shared_ActorView *)player)->lateralInput >= 0.0f) ||
+        (currentLateralSpeed > 0.0f && ((Shared_ActorView *)player)->lateralInput <= 0.0f) ||
         (((Shared_ActorView *)player)->actionTimer >= D_800C2D8C_de)) {
         Weapons_SetPlayerState(player, actor, 8);
     } else {

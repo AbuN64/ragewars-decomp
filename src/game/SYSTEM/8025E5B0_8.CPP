@@ -64,15 +64,15 @@ static inline void seek(Stream *arg0, u32 arg1) {
 
 static inline float evaluate(Poly p,float t) { return p.a + p.b*t + p.c*t*t + p.d*t*t*t; }
 
-void func_8025FFB0_de(Segment8025FFD0 *arg0, u32 *arg1) {
+void func_8025FFB0_de(Segment8025FFD0 *curve, u32 *stream) {
     u32 bits;
     u32 first;
     u32 second;
     f32 lo;
     f32 hi;
 
-    bits = *arg1;
-    arg0->unk2C = func_802607B8_de(&bits, 6);
+    bits = *stream;
+    curve->unk2C = func_802607B8_de(&bits, 6);
     if (D_8010AC78 != 0) {
         first = func_802607B8_de(&bits, 0x20);
         second = func_802607B8_de(&bits, 0x20);
@@ -86,16 +86,16 @@ void func_8025FFB0_de(Segment8025FFD0 *arg0, u32 *arg1) {
         lo = ((f32 (*)(f32, f32, s32))System_ScaleToRange)(lo, D_8010AC7C, D_8010AC80);
         hi = ((f32 (*)(f32, f32, s32))System_ScaleToRange)(hi, D_8010AC7C, D_8010AC80);
     }
-    arg0->unk4 = lo;
-    arg0->unk8 = hi - lo;
+    curve->unk4 = lo;
+    curve->unk8 = hi - lo;
     do {
-        arg0->unk0 = func_802607B8_de(&bits, 6);
-        arg0->unk28 = 0;
-        arg0->unk24 = 0;
-        arg0->unkC = bits;
-        func_8025FD74_de(arg0);
+        curve->unk0 = func_802607B8_de(&bits, 6);
+        curve->unk28 = 0;
+        curve->unk24 = 0;
+        curve->unkC = bits;
+        func_8025FD74_de(curve);
     } while (0);
-    *arg1 = bits;
+    *stream = bits;
 }
 
 float System_EvaluateAnimationCurve(Stream *stream, float time) {

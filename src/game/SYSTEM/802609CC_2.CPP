@@ -65,8 +65,8 @@ extern f32 System_EvaluateAnimationCurve(Stream *stream, f32 time);
 
 extern void func_802BD3A0_de(char *data);
 
-f32 func_80260EF8_de(LocalDecodeRange *arg0) {
-    return decode(&arg0->unused, arg0->range);
+f32 func_80260EF8_de(LocalDecodeRange *valueStream) {
+    return decode(&valueStream->unused, valueStream->range);
 }
 
 /** Advance a record pointer by an indexed number of strides. */
@@ -74,14 +74,14 @@ void func_80260FF0_de(unsigned int *record, int index) {
     record[0] += index * record[1];
 }
 
-unsigned int func_8026100C_de(unsigned int *arg0, unsigned int arg1) {
+unsigned int func_8026100C_de(unsigned int *bitCursor, unsigned int bitCount) {
     unsigned int bitAddress;
     unsigned int shift;
     unsigned int *word;
     unsigned int value;
     unsigned int next;
 
-    bitAddress = *arg0;
+    bitAddress = *bitCursor;
     word = (unsigned int *) ((bitAddress & 0xF0000000) |
                              ((bitAddress & 0x0FFFFFE0) >> 3));
     shift = bitAddress & 0x1F;
@@ -92,15 +92,15 @@ unsigned int func_8026100C_de(unsigned int *arg0, unsigned int arg1) {
         next <<= 0x20 - shift;
         value |= next;
     }
-    if (arg1 < 0x20U) {
-        value &= (1 << arg1) - 1;
+    if (bitCount < 0x20U) {
+        value &= (1 << bitCount) - 1;
     }
-    *arg0 = bitAddress + arg1;
+    *bitCursor = bitAddress + bitCount;
     return value;
 }
 
-void func_8026107C_de(int *arg0, int arg1) {
-    *arg0 = *arg0 + arg1;
+void func_8026107C_de(int *bitCursor, int bitCount) {
+    *bitCursor = *bitCursor + bitCount;
 }
 
 /** Samples the parsed animation track at the supplied frame time. */
@@ -108,23 +108,23 @@ f32 System_SampleAnimationCurve(Track_func_80261180_de *track, f32 time, s32 unu
     return System_EvaluateAnimationCurve((Stream *)track, time);
 }
 
-void func_802610A8_de(void *arg0, s32 arg1) {
+void func_802610A8_de(void *packBuffer, s32 sectionCount) {
     s32 count;
     s32 *ptr;
-    Pack *pack = arg0;
+    Pack *pack = packBuffer;
     s32 magic;
 
     count = 1;
-    pack->count = arg1;
-    pack->offsets[0] = ((arg1 * 4) + 0xF) & ~7;
-    if (arg1 > 0) {
+    pack->count = sectionCount;
+    pack->offsets[0] = ((sectionCount * 4) + 0xF) & ~7;
+    if (sectionCount > 0) {
         magic = 0xDEADBEEF;
         ptr = pack->offsets;
         do {
             ptr[1] = magic;
             count += 1;
             ptr += 1;
-        } while (arg1 >= count);
+        } while (sectionCount >= count);
     }
 }
 

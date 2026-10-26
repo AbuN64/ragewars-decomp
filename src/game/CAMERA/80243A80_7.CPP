@@ -7,65 +7,65 @@
 
 void func_802453D4_de(void)
 {
-  f32 var_f20;
-  f32 temp_f12;
+  f32 messageScaleY;
+  f32 screenScaleX;
   int new_var2;
-  f32 temp_f1;
-  f32 temp_f21;
-  f32 temp_f22;
-  f32 var_f0;
-  f32 var_f12;
-  s32 var_s0;
-  s32 var_s1;
+  f32 messageLineAdvance;
+  f32 followingMessageScale;
+  f32 messageDrawScale;
+  f32 resolutionScale;
+  f32 messageScaleX;
+  s32 messageIndex;
+  s32 messageY;
   s32 new_var;
-  s32 temp_height;
-  void *temp_a0;
+  s32 screenHeight;
+  void *sequenceContext;
   if ((D_800E2830->messageCount) > 0)
   {
-    s32 temp_s7;
-    s32 temp_s6;
-    temp_s7 = 0x1A;
-    temp_s6 = D_800E28D0 / 2;
+    s32 messageLineHeight;
+    s32 messageCenterX;
+    messageLineHeight = 0x1A;
+    messageCenterX = D_800E28D0 / 2;
     func_802A84F8_de();
-    temp_f12 = (f32) (D_800E28D0 / 284);
-    var_f20 = (f32) (D_800E28D4 / 222);
-    temp_height = D_800E28D4;
-    if (temp_height >= 0xDF)
+    screenScaleX = (f32) (D_800E28D0 / 284);
+    messageScaleY = (f32) (D_800E28D4 / 222);
+    screenHeight = D_800E28D4;
+    if (screenHeight >= 0xDF)
     {
-      var_s1 = 0xB4;
-      var_f0 = D_800C37C0_de;
-      var_f12 = temp_f12 * var_f0;
-      var_f20 *= var_f0;
+      messageY = 0xB4;
+      resolutionScale = D_800C37C0_de;
+      messageScaleX = screenScaleX * resolutionScale;
+      messageScaleY *= resolutionScale;
     }
     else
     {
-      var_s1 = 0x6E;
-      var_f0 = D_800C37C4_de;
-      var_f12 = temp_f12 * var_f0;
-      var_f20 *= var_f0;
+      messageY = 0x6E;
+      resolutionScale = D_800C37C4_de;
+      messageScaleX = screenScaleX * resolutionScale;
+      messageScaleY *= resolutionScale;
     }
     new_var = 0;
-    func_802AAB68_de(var_f12, var_f20);
-    temp_a0 = D_800E2830;
+    func_802AAB68_de(messageScaleX, messageScaleY);
+    sequenceContext = D_800E2830;
     D_801376F8.shadowX = 1;
     D_801376F8.shadowY = 1;
-    var_s0 = new_var;
-    if ((((Shared_MenuContext *)(temp_a0))->messageCount) > new_var)
+    messageIndex = new_var;
+    if ((((Shared_MenuContext *)(sequenceContext))->messageCount) > new_var)
     {
       new_var2 = 0;
-      temp_f22 = D_800C37C8_de;
-      temp_f21 = D_800C37CC_de;
+      messageDrawScale = D_800C37C8_de;
+      followingMessageScale = D_800C37CC_de;
       do
       {
-        func_802A8F28_de(((Shared_MenuContext *)temp_a0)->messages[var_s0], temp_s6, var_s1, 0xFF, 1, 1, temp_f22, temp_f22);
-        temp_f1 = ((f32) temp_s7) * var_f20;
-        temp_f12 = (f32) (D_800E28D0 / 284);
-        var_f20 = ((f32) (D_800E28D4 / 222)) * temp_f21;
-        var_s1 = (s32) (((f32) var_s1) + temp_f1);
-        func_802AAB68_de(temp_f12 * temp_f21, var_f20);
-        var_s0 += 1;
+        func_802A8F28_de(((Shared_MenuContext *)sequenceContext)->messages[messageIndex], messageCenterX, messageY, 0xFF, 1, 1, messageDrawScale, messageDrawScale);
+        messageLineAdvance = ((f32) messageLineHeight) * messageScaleY;
+        screenScaleX = (f32) (D_800E28D0 / 284);
+        messageScaleY = ((f32) (D_800E28D4 / 222)) * followingMessageScale;
+        messageY = (s32) (((f32) messageY) + messageLineAdvance);
+        func_802AAB68_de(screenScaleX * followingMessageScale, messageScaleY);
+        messageIndex += 1;
       }
-      while (var_s0 < ((Shared_MenuContext *)(temp_a0 = D_800E2830))->messageCount);
+      while (messageIndex < ((Shared_MenuContext *)(sequenceContext = D_800E2830))->messageCount);
     }
   }
 }

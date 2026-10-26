@@ -431,12 +431,12 @@ s32 func_802444A4_de(char *actorStorage, CVector3 startPosition, CVector3 desire
     return count;
 }
 
-s32 func_802446E0_de(char *arg0, CVector3 arg1, CVector3 arg2, MotionSurface *arg3,
-                   f32 arg4) {
-    extern s32 func_8023D380_de(void *arg0);
+s32 func_802446E0_de(char *actorStorage, CVector3 startPosition, CVector3 endPosition, MotionSurface *sweepSurfaceSettings,
+                   f32 sweepExtent) {
+    extern s32 func_8023D380_de(void *actorStorage);
     Work80244494 work;
     VectorPair vectors;
-    char *object = arg0;
+    char *object = actorStorage;
     char *out;
     s32 count;
     s32 active;
@@ -445,10 +445,10 @@ s32 func_802446E0_de(char *arg0, CVector3 arg1, CVector3 arg2, MotionSurface *ar
     s32 maximum;
     s32 flags;
 
-    func_8023E6D0_de(work.data, arg4);
+    func_8023E6D0_de(work.data, sweepExtent);
     out = work.data;
-    vectors.first = arg1;
-    vectors.second = arg2;
+    vectors.first = startPosition;
+    vectors.second = endPosition;
     func_8023EBD4_de(out);
     if (vectors.first.x == vectors.second.x &&
         vectors.first.y == vectors.second.y &&
@@ -484,7 +484,7 @@ s32 func_802446E0_de(char *arg0, CVector3 arg1, CVector3 arg2, MotionSurface *ar
     ((struct ActorMotion *)(out))->candidateIndex = 0;
     ((struct ActorMotion *)(out))->orientationActive = 0;
     ((struct ActorMotion *)(out))->iteration = 0;
-    ((struct ActorMotion *)(out))->surface = arg3;
+    ((struct ActorMotion *)(out))->surface = sweepSurfaceSettings;
     ((struct ActorMotion *)(out))->queryFlags = 0;
     ((struct ActorMotion *)(out))->horizontalTicks = 0;
     ((struct ActorMotion *)(out))->verticalTicks = 0;
@@ -589,11 +589,11 @@ s32 Camera_SweepActorMotion(char *actorStorage, CVector3 startPosition, CVector3
     return count;
 }
 
-s32 func_80244B68_de(char *arg0, char *arg1, CVector3 first, CVector3 second,
-                   s32 arg4) {
-    extern s32 func_8023D380_de(void *arg0);
-    char *object = arg0;
-    char *out = arg1;
+s32 func_80244B68_de(char *actorStorage, char *motionWork, CVector3 first, CVector3 second,
+                   s32 motionSurface) {
+    extern s32 func_8023D380_de(void *actorStorage);
+    char *object = actorStorage;
+    char *out = motionWork;
     s32 count;
     s32 active;
     s32 result;
@@ -634,7 +634,7 @@ s32 func_80244B68_de(char *arg0, char *arg1, CVector3 first, CVector3 second,
     ((struct ActorMotion *)(out))->candidateIndex = 0;
     ((struct ActorMotion *)(out))->orientationActive = 0;
     ((struct ActorMotion *)(out))->iteration = 0;
-    ((struct ActorMotion *)(out))->surface = arg4;
+    ((struct ActorMotion *)(out))->surface = motionSurface;
     ((struct ActorMotion *)(out))->queryFlags = 0;
     ((struct ActorMotion *)(out))->horizontalTicks = 0;
     ((struct ActorMotion *)(out))->verticalTicks = 0;

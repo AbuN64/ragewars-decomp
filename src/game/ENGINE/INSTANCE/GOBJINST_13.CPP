@@ -22,16 +22,16 @@ extern void **func_8024BFD4_de(void *arg0, s32 arg1);
 
 extern void Scene_UnlockResource(void *arg0, void *arg1);
 
-void *func_8024BC94_de(void *arg0, void *actor, struct IntPair arg2) {
-    CQuatern sp10;
-    s32 sp20[16];
-    Triple sp60;
+void *func_8024BC94_de(void *outVector, void *actor, struct IntPair localVector) {
+    CQuatern aimOrientation;
+    s32 aimMatrix[16];
+    Triple transformedVector;
 
-    sp10 = func_8024796C_de(actor);
-    MatrixFromQuaternion(&sp10, sp20);
-    Particle_TransformPoint(sp20, &arg2, &sp60);
-    *(Triple *)arg0 = sp60;
-    return arg0;
+    aimOrientation = func_8024796C_de(actor);
+    MatrixFromQuaternion(&aimOrientation, aimMatrix);
+    Particle_TransformPoint(aimMatrix, &localVector, &transformedVector);
+    *(Triple *)outVector = transformedVector;
+    return outVector;
 }
 
 s32 func_8024BD08_de(Shared_Func80243A80Actor *arg0) {
@@ -106,16 +106,16 @@ void func_8024BE58_de(void *object, int enabled) {
 }
 
 s32 func_8024BE80_de(void *typedActor) {
-    void **temp_s0;
-    char *temp_v0;
+    void **modelResource;
+    char *modelMetadata;
     s32 result;
 
     result = -1;
-    temp_s0 = func_8024BFD4_de(typedActor, ((LevelActor *)typedActor)->team);
-    if (temp_s0 != 0) {
-        temp_v0 = Render_GetPackSection((int *)*temp_s0, 5);
-        result = ((struct ActorFrameMetadata *)temp_v0)->renderMode;
-        Scene_UnlockResource(0, temp_s0);
+    modelResource = func_8024BFD4_de(typedActor, ((LevelActor *)typedActor)->team);
+    if (modelResource != 0) {
+        modelMetadata = Render_GetPackSection((int *)*modelResource, 5);
+        result = ((struct ActorFrameMetadata *)modelMetadata)->renderMode;
+        Scene_UnlockResource(0, modelResource);
     }
     return result;
 }

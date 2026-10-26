@@ -42,11 +42,11 @@ extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 extern void Items_ReleaseObjectHandles(s32 arg0);
 
-void func_8022CF38_de(void *arg0, LevelActor *actor) {
+void func_8022CF38_de(void *player, LevelActor *actor) {
     f32 value;
     f32 minimum;
-    ((Shared_ActorView *)arg0)->forwardSpeed *= D_800C2D94_de;
-    ((Shared_ActorView *)arg0)->lateralSpeed *= D_800C2D94_de;
+    ((Shared_ActorView *)player)->forwardSpeed *= D_800C2D94_de;
+    ((Shared_ActorView *)player)->lateralSpeed *= D_800C2D94_de;
 
     value = actor->position1.y * D_800C2D98_de;
     minimum = D_800C2D9C_de;
@@ -55,9 +55,9 @@ void func_8022CF38_de(void *arg0, LevelActor *actor) {
         actor->position1.y = minimum;
     }
 
-    ((Shared_ActorView *)arg0)->collisionState = 0;
-    func_8023913C_de(((Shared_ActorView *)arg0)->message);
-    func_80218464_de(((Shared_func_80227014_S2 *)arg0)->unk938);
+    ((Shared_ActorView *)player)->collisionState = 0;
+    func_8023913C_de(((Shared_ActorView *)player)->message);
+    func_80218464_de(((Shared_func_80227014_S2 *)player)->unk938);
 
     if (actor->motionState & 0x8000) {
         Render_PlaySoundAtPosition(0x2DA, actor->position0, 0, -1);
@@ -75,20 +75,20 @@ void func_8022CF38_de(void *arg0, LevelActor *actor) {
 
 
 
-void func_8022D010_de(void *arg0, void *levelActor) {
-    Shared_ActorView *actor = arg0;
+void func_8022D010_de(void *actorState, void *levelActor) {
+    Shared_ActorView *actor = actorState;
     LevelActor *other = levelActor;
     actor->forwardSpeed = actor->forwardSpeed * (D_800C7E90);
     actor->lateralSpeed = actor->lateralSpeed * (D_800C7E90);
     other->position1.y = other->position1.y * (D_800C7E90);
 }
 
-void func_8022D040_de(void *arg0, LevelActor *actor) {
+void func_8022D040_de(void *playerState, LevelActor *actor) {
     Player *player;
     s32 busy;
     f32 x;
 
-    player = arg0;
+    player = playerState;
     if (player->landing == 0.0f) {
         player->pose = 0xD;
     } else {
@@ -117,20 +117,20 @@ void func_8022D040_de(void *arg0, LevelActor *actor) {
     }
 }
 
-void func_8022D164_de(void *arg0, LevelActor *arg1)
+void func_8022D164_de(void *motionPlayerState, LevelActor *actor)
 {
   f32 new_var3;
   f32 *new_var;
   s8 *new_var2;
-  new_var2 = (s8 *) arg0;
+  new_var2 = (s8 *) motionPlayerState;
   new_var3 = (f32) D_800C2DB0_de;
   ((Player *)new_var2)->stick = 0;
-  new_var = &((Player *)arg0)->movementScale;
-  ((Player *)arg0)->state6C4 = 0;
+  new_var = &((Player *)motionPlayerState)->movementScale;
+  ((Player *)motionPlayerState)->state6C4 = 0;
   *new_var = new_var3;
-  arg1->position1.x = 0;
-  arg1->position1.y = 0;
-  arg1->position1.z = 0;
+  actor->position1.x = 0;
+  actor->position1.y = 0;
+  actor->position1.z = 0;
 }
 
 void func_8022D188_de(void *unused, void *object) {
@@ -148,15 +148,15 @@ void func_8022D198_de(void) {
 void func_8022D1A0_de(void) {
 }
 
-void func_8022D1A8_de(void *arg0) {
+void func_8022D1A8_de(void *aimPlayerState) {
     CVector3 vector;
-    CVector3 *temp_s1;
+    CVector3 *weaponAimPositionPtr;
 
-    temp_s1 = &((Shared_ActorView *)arg0)->weapon.aimPosition;
-    Particle_SubtractVectors(&vector, &((Shared_ActorView *)arg0)->resetPosition, temp_s1);
+    weaponAimPositionPtr = &((Shared_ActorView *)aimPlayerState)->weapon.aimPosition;
+    Particle_SubtractVectors(&vector, &((Shared_ActorView *)aimPlayerState)->resetPosition, weaponAimPositionPtr);
     Particle_NormalizeVec3(&vector);
     Particle_ScaleVector(&vector, &vector, 30.0f);
-    Particle_AddVec3(&((Player *)arg0)->previousPosition, temp_s1, &vector);
+    Particle_AddVec3(&((Player *)aimPlayerState)->previousPosition, weaponAimPositionPtr, &vector);
 }
 
 void func_8022D20C_de(void) {
@@ -176,8 +176,8 @@ void func_8022D254_de(void) {
 }
 
 /** Reset two object fields and replace the control word's mode bit. */
-void func_8022D25C_de(void *arg0) {
-    Shared_ActorView *actor = arg0;
+void func_8022D25C_de(void *actorState) {
+    Shared_ActorView *actor = actorState;
     actor->flags &= 0xFF7FFFFF;
     actor->stun = 0;
     actor->marker.word = 0;

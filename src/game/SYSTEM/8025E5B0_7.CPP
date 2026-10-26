@@ -188,76 +188,76 @@ replace_output:
     }
 }
 
-void func_8025FD74_de(Curve *arg0)
+void func_8025FD74_de(Curve *compressedCurve)
 {
-  s32 sp10;
+  s32 bitCursor;
   int new_var;
-  f32 temp_f0;
-  f32 temp_f0_2;
+  f32 halfRange;
+  f32 coefficientScale;
   f32 temp_f0_3;
-  f32 temp_f4;
-  f32 temp_f5;
-  f32 temp_f6;
-  f32 temp_f7;
-  f32 var_f1;
-  f32 var_f3;
-  f64 var_f2;
-  s32 temp_a2;
-  s32 temp_lo;
-  s32 temp_s3;
-  s32 temp_s0;
-  s32 temp_s1;
-  s32 temp_s2;
-  u32 temp_s5;
-  s32 temp_v0;
-  temp_s3 = arg0->unk0;
-  temp_lo = arg0->unk28 * ((temp_s3 * 4) + 6);
-  sp10 = arg0->unkC + temp_lo;
-  temp_s5 = func_802607B8_de(&sp10, 6);
-  temp_s1 = func_802607B8_de(&sp10, temp_s3);
-  temp_s0 = func_802607B8_de(&sp10, temp_s3);
-  temp_s2 = func_802607B8_de(&sp10, temp_s3);
-  temp_v0 = func_802607B8_de(&sp10, temp_s3);
-  temp_f6 = (f32) temp_s1;
-  new_var=temp_s1*0x15;
-  temp_a2 = temp_s0 << 5;
-  temp_f5 = (f32) (((temp_a2 - new_var) - (temp_s2 * 0xC)) + temp_v0);
-  temp_f5 *= 0.33333334f;
-  temp_f7 = (f32) ((((temp_s1 * 0xE) - temp_a2) + (temp_s2 * 0x14)) - (temp_v0 * 2));
-  new_var = temp_s1 * 0x18;
-  temp_f4 = (f32) ((((temp_s0 << 6) - new_var) - (temp_s2 * 0x30)) + (temp_v0 * 8));
-  temp_f4 *= 0.33333334f;
-  if (temp_s3 != 0)
+  f32 cubicCoefficient;
+  f32 linearCoefficient;
+  f32 constantCoefficient;
+  f32 quadraticCoefficient;
+  f32 inverseSampleSpan;
+  f32 quantizedValueScale;
+  f64 sampleCountDouble;
+  s32 secondSampleTimes32;
+  s32 segmentBitOffset;
+  s32 valueBitWidth;
+  s32 secondSample;
+  s32 firstSample;
+  s32 thirdSample;
+  u32 segmentSampleCount;
+  s32 fourthSample;
+  valueBitWidth = compressedCurve->unk0;
+  segmentBitOffset = compressedCurve->unk28 * ((valueBitWidth * 4) + 6);
+  bitCursor = compressedCurve->unkC + segmentBitOffset;
+  segmentSampleCount = func_802607B8_de(&bitCursor, 6);
+  firstSample = func_802607B8_de(&bitCursor, valueBitWidth);
+  secondSample = func_802607B8_de(&bitCursor, valueBitWidth);
+  thirdSample = func_802607B8_de(&bitCursor, valueBitWidth);
+  fourthSample = func_802607B8_de(&bitCursor, valueBitWidth);
+  constantCoefficient = (f32) firstSample;
+  new_var=firstSample*0x15;
+  secondSampleTimes32 = secondSample << 5;
+  linearCoefficient = (f32) (((secondSampleTimes32 - new_var) - (thirdSample * 0xC)) + fourthSample);
+  linearCoefficient *= 0.33333334f;
+  quadraticCoefficient = (f32) ((((firstSample * 0xE) - secondSampleTimes32) + (thirdSample * 0x14)) - (fourthSample * 2));
+  new_var = firstSample * 0x18;
+  cubicCoefficient = (f32) ((((secondSample << 6) - new_var) - (thirdSample * 0x30)) + (fourthSample * 8));
+  cubicCoefficient *= 0.33333334f;
+  if (valueBitWidth != 0)
   {
-    var_f3 = arg0->unk8 / ((f32) ((1 << temp_s3) - 1));
+    quantizedValueScale = compressedCurve->unk8 / ((f32) ((1 << valueBitWidth) - 1));
   }
   else
   {
-    temp_f0 = arg0->unk8 * 0.5f;
-    arg0->unk8 = 0.0f;
-    var_f3 = arg0->unk8;
-    arg0->unk4 = (f32) (arg0->unk4 + temp_f0);
+    halfRange = compressedCurve->unk8 * 0.5f;
+    compressedCurve->unk8 = 0.0f;
+    quantizedValueScale = compressedCurve->unk8;
+    compressedCurve->unk4 = (f32) (compressedCurve->unk4 + halfRange);
   }
-  temp_f6 *= var_f3;
-  if (temp_s5 >= 2U)
+  constantCoefficient *= quantizedValueScale;
+  if (segmentSampleCount >= 2U)
   {
-    var_f2 = (f64) temp_s5;
-    var_f1 = 1.0f / (((f32) var_f2) - 1.0f);
+    sampleCountDouble = (f64) segmentSampleCount;
+    inverseSampleSpan = 1.0f / (((f32) sampleCountDouble) - 1.0f);
   }
   else
   {
-    var_f1 = 1.0f;
+    inverseSampleSpan = 1.0f;
   }
-  temp_f0_2 = var_f1 * var_f3;
-  temp_f5 *= temp_f0_2;
-  temp_f0_2 *= var_f1;
-  temp_f7 *= temp_f0_2;
-  temp_f0_2 *= var_f1;
-  temp_f6 += arg0->unk4;
-  temp_f4 *= temp_f0_2;
-  arg0->unk20 = temp_s5;
-  arg0->unk14 = temp_f5;
-  arg0->unk10 = temp_f6;
-  arg0->unk18 = temp_f7;
-  arg0->unk1C = temp_f4;
+  coefficientScale = inverseSampleSpan * quantizedValueScale;
+  linearCoefficient *= coefficientScale;
+  coefficientScale *= inverseSampleSpan;
+  quadraticCoefficient *= coefficientScale;
+  coefficientScale *= inverseSampleSpan;
+  constantCoefficient += compressedCurve->unk4;
+  cubicCoefficient *= coefficientScale;
+  compressedCurve->unk20 = segmentSampleCount;
+  compressedCurve->unk14 = linearCoefficient;
+  compressedCurve->unk10 = constantCoefficient;
+  compressedCurve->unk18 = quadraticCoefficient;
+  compressedCurve->unk1C = cubicCoefficient;
 }

@@ -75,7 +75,7 @@ void func_80261180_de(char **stream, f32 *out, s32 frames)
     *stream = cursor;
 }
 
-void func_80261238_de(s32 arg0, void *arg1, s32 arg2)
+void func_80261238_de(s32 bitCursor, void *arg1, s32 arg2)
 {
   int new_var;
   s32 sp10;
@@ -89,7 +89,7 @@ void func_80261238_de(s32 arg0, void *arg1, s32 arg2)
     do
     {
       var_s0 += 1;
-      sp10 = func_802607B8_de(arg0, 0x20);
+      sp10 = func_802607B8_de(bitCursor, 0x20);
       *((f32 *) var_s1) = *((f32 *) (&sp10));
       var_s1 += 0x10;
     }
@@ -97,7 +97,7 @@ void func_80261238_de(s32 arg0, void *arg1, s32 arg2)
   }
 }
 
-s32 func_802612A8_de(void *arg0, void *arg1) {
+s32 func_802612A8_de(void *sourceMotionPack, void *destinationMotionPack) {
     Entry802612C8 *first;
     void *a;
     void *b;
@@ -105,11 +105,11 @@ s32 func_802612A8_de(void *arg0, void *arg1) {
     void *d;
     s32 one;
 
-    first = Render_GetPackSection(arg0, 0);
-    a = Render_GetPackSection(arg0, 1);
-    b = Render_GetPackSection(arg0, 2);
-    c = Render_GetPackSection(arg1, 1);
-    d = Render_GetPackSection(arg1, 2);
+    first = Render_GetPackSection(sourceMotionPack, 0);
+    a = Render_GetPackSection(sourceMotionPack, 1);
+    b = Render_GetPackSection(sourceMotionPack, 2);
+    c = Render_GetPackSection(destinationMotionPack, 1);
+    d = Render_GetPackSection(destinationMotionPack, 2);
 
     one = 1;
     D_8010AC78 = one;
@@ -158,45 +158,45 @@ int func_8026140C_de(char *object) {
     return stream->unkC;
 }
 
-void func_80261418_de(Stream *arg0, u32 arg1) {
-    u32 sp10[64];
+void func_80261418_de(Stream *arg0, u32 sampleIndex) {
+    u32 segmentSampleCounts[64];
     s32 temp_a0;
     s32 temp_lo;
-    s32 temp_s1;
+    s32 firstSegmentBitAddress;
     s32 temp_s6;
-    s32 var_s1;
-    s32 var_s2;
+    s32 segmentBitCursor;
+    s32 segmentIndex;
     u32 *var_s3;
     u32 temp_v0;
-    u32 temp_v1;
-    u32 var_s0;
-    u32 var_s4;
+    u32 activeSegmentStart;
+    u32 segmentEndSample;
+    u32 segmentStartSample;
 
     temp_s6 = (arg0->unk0 * 4) + 6;
-    temp_v1 = arg0->unk24;
-    if (arg1 < temp_v1 || arg1 >= temp_v1 + arg0->unk20) {
-        var_s2 = arg0->unk28;
-        var_s4 = temp_v1;
-        var_s0 = var_s4 + arg0->unk20;
-        var_s1 = arg0->unkC;
-        temp_s1=var_s1;
-        var_s1 += var_s2 * temp_s6;
-        if(arg1 < temp_v1) {
-            var_s1=temp_s1;var_s2=0;var_s4=0;
-            var_s0=func_802606C4_de(var_s1,6);
+    activeSegmentStart = arg0->unk24;
+    if (sampleIndex < activeSegmentStart || sampleIndex >= activeSegmentStart + arg0->unk20) {
+        segmentIndex = arg0->unk28;
+        segmentStartSample = activeSegmentStart;
+        segmentEndSample = segmentStartSample + arg0->unk20;
+        segmentBitCursor = arg0->unkC;
+        firstSegmentBitAddress=segmentBitCursor;
+        segmentBitCursor += segmentIndex * temp_s6;
+        if(sampleIndex < activeSegmentStart) {
+            segmentBitCursor=firstSegmentBitAddress;segmentIndex=0;segmentStartSample=0;
+            segmentEndSample=func_802606C4_de(segmentBitCursor,6);
         }
         for (;;) {
-            var_s1 += temp_s6;
-            if(arg1>=var_s4 && arg1<var_s0) {
-                if(var_s2!=arg0->unk28) {
-                    arg0->unk24=var_s4;arg0->unk28=var_s2;func_8025FD74_de(arg0);
+            segmentBitCursor += temp_s6;
+            if(sampleIndex>=segmentStartSample && sampleIndex<segmentEndSample) {
+                if(segmentIndex!=arg0->unk28) {
+                    arg0->unk24=segmentStartSample;arg0->unk28=segmentIndex;func_8025FD74_de(arg0);
                 }
                 break;
             }
-            var_s2++;
-            var_s4=var_s0;
-            sp10[var_s2]=func_802606C4_de(var_s1,6);
-            var_s0+=sp10[var_s2];
+            segmentIndex++;
+            segmentStartSample=segmentEndSample;
+            segmentSampleCounts[segmentIndex]=func_802606C4_de(segmentBitCursor,6);
+            segmentEndSample+=segmentSampleCounts[segmentIndex];
         }
     }
 }
@@ -205,8 +205,8 @@ s32 func_8026154C_de(f32 arg0)
 {
   unsigned long long new_var;
   f32 temp_f1;
-  s32 var_v1;
-  var_v1 = 0;
+  s32 bitCount;
+  bitCount = 0;
   new_var = 1;
   temp_f1 = arg0;
   temp_f1 = (D_800C41A8_de[new_var] / (2.0f * temp_f1)) + D_800C41A8_de[new_var];
@@ -218,11 +218,11 @@ s32 func_8026154C_de(f32 arg0)
   {
     do
     {
-      var_v1 += 1;
+      bitCount += 1;
     }
-    while (((f32) (1 << var_v1)) < temp_f1);
+    while (((f32) (1 << bitCount)) < temp_f1);
   }
-  return var_v1;
+  return bitCount;
 }
 
 f32 func_802615B4_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 unused4, f32 arg5) {
@@ -240,23 +240,23 @@ unsigned int func_8026160C_de(unsigned int value) {
 
 u32 func_80261614_de(s32 arg0) {
     u32 var_a1;
-    u32 var_a2;
+    u32 highestSetBit;
     u32 var_v1;
 
     var_a1 = 0;
-    var_a2 = 0;
+    highestSetBit = 0;
     var_v1 = 0;
     do {
         if (arg0 & (u32)(1 << var_v1)) {
             var_a1 += 1;
-            var_a2 = var_v1;
+            highestSetBit = var_v1;
         }
         var_v1 += 1;
     } while (var_v1 < 0x20U);
     if (var_a1 >= 2U) {
-        return var_a2 + 1;
+        return highestSetBit + 1;
     }
-    return var_a2;
+    return highestSetBit;
 }
 
 #if defined(VERSION_US)

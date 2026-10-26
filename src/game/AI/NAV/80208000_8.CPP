@@ -63,7 +63,7 @@ void *Nav_GetStridedTableEntry(struct EntryList8020CCE8 *object, int index) {
     return base + (index * stride + 8);
 }
 
-s32 func_8020C9CC_de(Link *link) {
+s32 Nav_IsReversibleLink(Link *link) {
     u8 linkTypeByte;
     s32 linkType;
 
@@ -211,7 +211,7 @@ s32 Nav_CollectIncidentLinks(EntryList8020CCE8 *list, s32 value, s32 *partners, 
     return found;
 }
 
-s32 func_8020CD74_de(s32 **arg0, Instance8020CD74 *arg1, s32 arg2) {
+s32 Nav_IsNodeMovementBlocked(s32 **arg0, Instance8020CD74 *arg1, s32 arg2) {
     CVector3 position;
     CollisionInfo8020CD74 collision;
     Instance8020CD74 saved;

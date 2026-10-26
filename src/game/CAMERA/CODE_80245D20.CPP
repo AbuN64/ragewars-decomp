@@ -25,110 +25,110 @@ static inline s32 currentEnabled(Actor_func_80245D30_de *actor) {
     return 0;
 }
 
-void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *arg1, CVector3 *arg2, s32 arg3) {
+void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *material, CVector3 *movement, s32 applyDirectionalCurrent) {
     Actor_func_80245D30_de *rider;
     f32 speed;
     CVector3 v10,v20;
-    f32 sp30;
-    f32 sp34;
+    f32 blendedYaw;
+    f32 currentTargetYaw;
     f32 strength;
-    f32 temp_f0_2;
+    f32 currentHeading;
     f32 temp_f0_3;
     f32 temp_f0_4;
-    f32 temp_f0_5;
-    f32 temp_f1;
+    f32 previousVerticalCurrent;
+    f32 actorYaw;
     f32 temp_f1_2;
     f32 var_f0;
-    f32 var_f0_2;
+    f32 currentBlend;
     f32 var_f1;
-    f32 var_f20;
-    f32 var_f3;
+    f32 currentYawStep;
+    f32 wrappedTargetYaw;
     f32 targetAngle,oldAngle;
     s32 temp_v1;
     s32 var_condition_bit;
-    s32 var_v0;
-    s32 var_v1;
+    s32 riderMotionFlags;
+    s32 actorCurrentEnabled;
     u16 flags;
-    CVector3 *var_a0;
+    CVector3 *actorCurrent;
 
     if (actor->kind == 1) {
         rider=actor;
-        var_v1=currentEnabled(actor);
-        var_v0 = rider->flags & 3;
+        actorCurrentEnabled=currentEnabled(actor);
+        riderMotionFlags = rider->flags & 3;
     } else {
-        var_v1 = 0;
-        var_v0 = 0;
+        actorCurrentEnabled = 0;
+        riderMotionFlags = 0;
     }
-    if ((var_v0 != 0) || ((var_v1 == 0) && !(arg1->flags & 0x8000))) {
+    if ((riderMotionFlags != 0) || ((actorCurrentEnabled == 0) && !(material->flags & 0x8000))) {
         actor->current.x = 0.0f;
         actor->current.y = 0.0f;
         actor->current.z = 0.0f;
         return;
     }
-    if ((arg1->flags & 0x100) && (arg3 != 0)) {
-        v10.x = (f32) arg1->x * 0.007874016f;
-        v10.y = (f32) arg1->y * 0.007874016f;
-        v10.z = (f32) arg1->z * 0.007874016f;
-        strength = (f32) arg1->strength;
+    if ((material->flags & 0x100) && (applyDirectionalCurrent != 0)) {
+        v10.x = (f32) material->x * 0.007874016f;
+        v10.y = (f32) material->y * 0.007874016f;
+        v10.z = (f32) material->z * 0.007874016f;
+        strength = (f32) material->strength;
         speed=strength * 3.0f;
-        var_f20 = (strength + 1.0f) * 0.00872664712369442f;
+        currentYawStep = (strength + 1.0f) * 0.00872664712369442f;
         Particle_ScaleVector(&v10,&v10,speed);
-        flags = arg1->flags;
+        flags = material->flags;
         if (flags & 0x600) {
             if (flags & 0x400) {
-                var_f20 = -var_f20;
+                currentYawStep = -currentYawStep;
             }
             if (actor->kind == 1) {
-                actor->yaw = (f32) (actor->yaw + var_f20);
+                actor->yaw = (f32) (actor->yaw + currentYawStep);
             }
         }
-        if ((arg1->flags & 0x2000) && (actor->kind == 1)) {
+        if ((material->flags & 0x2000) && (actor->kind == 1)) {
             rider=actor;
             v20=v10;
             v20.y = 0.0f;
-            temp_f0_2 = Particle_GetHorizontalAngle(&v20);
-            temp_f1 = actor->yaw;
-            sp34 = temp_f0_2;
-            sp30 = temp_f1;
-            if (temp_f0_2 != temp_f1) {
-                func_80274020_de(&sp30);
-                func_80274020_de(&sp34);
-                if (sp30 > sp34) {
-                    var_f3=sp34+6.2831855f;
-                    if ((var_f3-sp30)<(sp30-sp34)) sp34=var_f3;
+            currentHeading = Particle_GetHorizontalAngle(&v20);
+            actorYaw = actor->yaw;
+            currentTargetYaw = currentHeading;
+            blendedYaw = actorYaw;
+            if (currentHeading != actorYaw) {
+                func_80274020_de(&blendedYaw);
+                func_80274020_de(&currentTargetYaw);
+                if (blendedYaw > currentTargetYaw) {
+                    wrappedTargetYaw=currentTargetYaw+6.2831855f;
+                    if ((wrappedTargetYaw-blendedYaw)<(blendedYaw-currentTargetYaw)) currentTargetYaw=wrappedTargetYaw;
                 } else {
-                    var_f3=sp34-6.2831855f;
-                    if ((sp30-var_f3)<(sp34-sp30)) sp34=var_f3;
+                    wrappedTargetYaw=currentTargetYaw-6.2831855f;
+                    if ((blendedYaw-wrappedTargetYaw)<(currentTargetYaw-blendedYaw)) currentTargetYaw=wrappedTargetYaw;
                 }
-                targetAngle=sp34; oldAngle=sp30;
+                targetAngle=currentTargetYaw; oldAngle=blendedYaw;
                 if (oldAngle < targetAngle) {
-                    sp30=oldAngle+((f32)arg1->strength*D_800CB430_de[1]*D_800D2988[0]*0.017453294f);
-                    if (targetAngle<sp30) sp30=targetAngle;
+                    blendedYaw=oldAngle+((f32)material->strength*D_800CB430_de[1]*D_800D2988[0]*0.017453294f);
+                    if (targetAngle<blendedYaw) blendedYaw=targetAngle;
                 } else {
-                    sp30=oldAngle-((f32)arg1->strength*D_800CB430_de[1]*D_800D2988[0]*0.017453294f);
-                    if (sp30<targetAngle) sp30=targetAngle;
+                    blendedYaw=oldAngle-((f32)material->strength*D_800CB430_de[1]*D_800D2988[0]*0.017453294f);
+                    if (blendedYaw<targetAngle) blendedYaw=targetAngle;
                 }
-                func_80274020_de(&sp30);
+                func_80274020_de(&blendedYaw);
             }
-            rider->yaw = sp30;
+            rider->yaw = blendedYaw;
         }
     } else {
         v10.x = 0.0f;
         v10.y = 0.0f;
         v10.z = 0.0f;
     }
-    var_f0_2 = (f32) arg1->strength * D_800CB430_de[0] * D_800D2988[0];
-    var_f0_2 = ((var_f0_2 < 0.0f ? 0.0f : var_f0_2) > 1.0f ? 1.0f : (var_f0_2 < 0.0f ? 0.0f : var_f0_2));
-    var_a0=&actor->current;
-    func_80271FC8_de(var_a0, var_f0_2, var_a0, &v10);
-    arg2->x = (f32) (arg2->x + actor->current.x);
-    arg2->z = (f32) (arg2->z + actor->current.z);
-    if (arg1->flags & 0x100) {
+    currentBlend = (f32) material->strength * D_800CB430_de[0] * D_800D2988[0];
+    currentBlend = ((currentBlend < 0.0f ? 0.0f : currentBlend) > 1.0f ? 1.0f : (currentBlend < 0.0f ? 0.0f : currentBlend));
+    actorCurrent=&actor->current;
+    func_80271FC8_de(actorCurrent, currentBlend, actorCurrent, &v10);
+    movement->x = (f32) (movement->x + actor->current.x);
+    movement->z = (f32) (movement->z + actor->current.z);
+    if (material->flags & 0x100) {
         if (v10.y != 0.0f) {
             actor->vertical = 0.0f;
         } else {
-            temp_f0_5 = actor->current.y;
-            actor->current.y = (f32) (temp_f0_5 + ((v10.y - temp_f0_5) * 0.2f));
+            previousVerticalCurrent = actor->current.y;
+            actor->current.y = (f32) (previousVerticalCurrent + ((v10.y - previousVerticalCurrent) * 0.2f));
         }
         actor->vertical = (f32) (actor->vertical + ((2.0f * (actor->current.y * 10.24f)) + 4.0f));
         return;

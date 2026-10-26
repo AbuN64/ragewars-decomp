@@ -19,10 +19,10 @@ extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
 
 
 f32 func_8024BEDC_de(void *target) {
-    float temp_f12 = ((LevelActor *)target)->scale.x;
-    float temp_f1 = ((LevelActor *)target)->scale.y;
-    float temp_f0 = ((LevelActor *)target)->scale.z;
-    return Math_Sqrtf(((temp_f12 * temp_f12) + (temp_f1 * temp_f1) + (temp_f0 * temp_f0)) * (0.3333333432674408f));
+    float scaleX = ((LevelActor *)target)->scale.x;
+    float scaleY = ((LevelActor *)target)->scale.y;
+    float scaleZ = ((LevelActor *)target)->scale.z;
+    return Math_Sqrtf(((scaleX * scaleX) + (scaleY * scaleY) + (scaleZ * scaleZ)) * (0.3333333432674408f));
 }
 
 f32 func_8024BF24_de(void *arg0) {
@@ -40,22 +40,22 @@ f32 func_8024BF24_de(void *arg0) {
     return result;
 }
 
-void **func_8024BFD4_de(MenuPanelRoot *actor, s32 arg1) {
+void **func_8024BFD4_de(MenuPanelRoot *actor, s32 variantIndex) {
     void **resource;
 
-    if (arg1 < 0) {
+    if (variantIndex < 0) {
         return 0;
     }
-    if (arg1 != actor->selected) {
+    if (variantIndex != actor->selected) {
         resource = Scene_RequestResource(0, actor->resource,
                                  actor->resource, actor->resourceSize,
                                  0, 0, 0, &s_animModelIndexText, 1);
         if (resource != 0) {
             actor->selectedResource = Render_LocatePackSection((s32)*resource,
                                                 actor->resource,
-                                                arg1 % *(s32 *)*resource,
+                                                variantIndex % *(s32 *)*resource,
                                                 &actor->window);
-            actor->selected = arg1;
+            actor->selected = variantIndex;
             Scene_UnlockResource(0, resource);
         }
     }

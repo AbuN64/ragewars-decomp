@@ -42,16 +42,16 @@ static inline void spawn(Actor_func_8024A3B0_de *actor) {
                   actor->position1, actor->rotation, position, 0, -1, 0);
 }
 
-void func_8024A5A8_de(Actor_func_8024A3B0_de *actor, s32 arg1, s32 arg2, Lookup *params) {
+void func_8024A5A8_de(Actor_func_8024A3B0_de *actor, s32 drawView, s32 animationContext, Lookup *params) {
     EffectRecAt154 *effect;
     f32 scale;
     s32 *node;
 
     if (params->unk4 != 0) {
-        func_8024AA18_de(actor, arg2, params);
+        func_8024AA18_de(actor, animationContext, params);
     }
     if (params->unk0 != 0) {
-        func_8026DD50_de(params->value, arg1, actor->fieldB4, 1, &actor->blocks[D_800D297C], 0, actor->field3);
+        func_8026DD50_de(params->value, drawView, actor->fieldB4, 1, &actor->blocks[D_800D297C], 0, actor->field3);
         if (func_8026E340_de() != 0) {
             node = Render_GetPackSection(*params->value, 2);
             if ((*node != 0) &&

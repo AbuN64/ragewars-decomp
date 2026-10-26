@@ -22,7 +22,7 @@ extern s32 Nav_InsertPickupRouteNode(Selection *sel);
 extern s32 Nav_ComputeScaledPointCentroid(Selection *sel);
 extern s32 Nav_FindSpecialLinkedCandidate(Selection *sel);
 
-s32 func_8020D370_de(Selection *sel)
+s32 Nav_AdvancePickupRouteSelection(Selection *sel)
 {
     NodeList *list = &D_8013B364;
     Node_func_8020D364_de *node;

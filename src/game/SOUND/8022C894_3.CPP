@@ -36,19 +36,19 @@ s32 func_80245618_de(s32, s32, s32 *);
 
 
 void func_8022D290_de(Shared_ActorView *widget) {
-    s32 temp_v0;
+    s32 clearedActorFlags;
 
     widget->unk_0x0860 = 0;
     Items_ReleaseObjectHandles((s32) widget);
-    temp_v0 = widget->flags & 0xFF7FFFFF;
-    widget->flags = temp_v0;
+    clearedActorFlags = widget->flags & 0xFF7FFFFF;
+    widget->flags = clearedActorFlags;
     widget->unk_0x001C = 0;
     widget->unk_0x0020 = 0;
     widget->unk_0x0024 = 0;
     widget->stun = 0.0f;
-    widget->flags = temp_v0 | 0x01000000;
+    widget->flags = clearedActorFlags | 0x01000000;
     widget->marker.word = 0;
-    widget->flags = temp_v0 | 0x01000000;
+    widget->flags = clearedActorFlags | 0x01000000;
     if (widget->field13B4 == &D_800CED30) {
         widget->effectId = 0x5E24;
     } else {
@@ -127,29 +127,29 @@ void func_8022D4AC_de(struct SharedPlayer *player) {
     player->views122C.view122C_0.unk122C |= 0x20;
 }
 
-void func_8022D4BC_de(void *arg0)
+void func_8022D4BC_de(void *runEndPlayer)
 {
   f32 new_var;
-  new_var = ((ObjectLinks1458_2 *)(arg0))->unk_658;
+  new_var = ((ObjectLinks1458_2 *)(runEndPlayer))->unk_658;
   if (D_800C2DBC_de < new_var)
   {
-    ((ObjectLinks1458_2 *)(arg0))->unk_13C8 = 1;
-    ((ObjectLinks1458_2 *)(arg0))->unk_1238 = -1;
-    ((ObjectLinks1458_2 *)(arg0))->unk_1230 = 0;
-    ((ObjectLinks1458_2 *)(arg0))->unk_122C = (((ObjectLinks1458_2 *)(arg0))->unk_122C) & (~0x20);
-    Ovlgame_UpdateRunEndPlayer(arg0);
-    ((ObjectLinks1458_2 *)(arg0))->unk_50 = D_800C2DC0_de;
-    ((ObjectLinks1458_2 *)(arg0))->unk_54 = D_800C2DC0_de;
-    ((ObjectLinks1458_2 *)(arg0))->unk_58 = D_800C2DC0_de;
+    ((ObjectLinks1458_2 *)(runEndPlayer))->unk_13C8 = 1;
+    ((ObjectLinks1458_2 *)(runEndPlayer))->unk_1238 = -1;
+    ((ObjectLinks1458_2 *)(runEndPlayer))->unk_1230 = 0;
+    ((ObjectLinks1458_2 *)(runEndPlayer))->unk_122C = (((ObjectLinks1458_2 *)(runEndPlayer))->unk_122C) & (~0x20);
+    Ovlgame_UpdateRunEndPlayer(runEndPlayer);
+    ((ObjectLinks1458_2 *)(runEndPlayer))->unk_50 = D_800C2DC0_de;
+    ((ObjectLinks1458_2 *)(runEndPlayer))->unk_54 = D_800C2DC0_de;
+    ((ObjectLinks1458_2 *)(runEndPlayer))->unk_58 = D_800C2DC0_de;
     return;
   }
-  Fx_ClearControllerInput(((Shared_ActorView *)arg0)->profile);
-  ((struct IntegerState244 *) ((char *) ((ObjectLinks1458_2 *) arg0)->unk_1454))->unk_23C = 0;
-  ((struct IntegerState244 *) ((char *) ((ObjectLinks1458_2 *) arg0)->unk_1454))->unk_240 = 0;
+  Fx_ClearControllerInput(((Shared_ActorView *)runEndPlayer)->profile);
+  ((struct IntegerState244 *) ((char *) ((ObjectLinks1458_2 *) runEndPlayer)->unk_1454))->unk_23C = 0;
+  ((struct IntegerState244 *) ((char *) ((ObjectLinks1458_2 *) runEndPlayer)->unk_1454))->unk_240 = 0;
 }
 
-void func_8022D54C_de(s32 arg0) {
-    D_80102A48 = arg0;
+void func_8022D54C_de(s32 requestValue) {
+    D_80102A48 = requestValue;
     func_80245618_de(0x50, 0, &D_0022ED24);
 }
 

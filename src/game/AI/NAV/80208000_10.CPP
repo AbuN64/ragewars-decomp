@@ -34,13 +34,13 @@ void Nav_AddGoalNode(ObjNavAddGoalNode *obj, int id) {
     }
 }
 
-int func_8020D280_de(void *navigationSearchNode) {
+int Nav_OpenSearchNode(void *navigationSearchNode) {
     NavigationSearchNode *node = navigationSearchNode;
     node->open = 1;
     return 1;
 }
 
-void *func_8020D28C_de(void *cNavData) {
+void *Nav_TakeLowestCostOpenNode(void *cNavData) {
     CNavData *graph = cNavData;
     NavigationSearchNode *node;
     NavigationSearchNode *best;
@@ -68,23 +68,23 @@ void *func_8020D28C_de(void *cNavData) {
 }
 
 /** Set the word at byte offset 0x28 to the state value two. */
-void func_8020D2FC_de(void *object) {
+void Nav_CloseSearchNode(void *object) {
     NavigationSearchNode *node = object;
     node->open = 2;
 }
 
-int func_8020D308_de(void *navigationSearchNode) {
+int Nav_IsSearchNodeOpen(void *navigationSearchNode) {
     NavigationSearchNode *node = navigationSearchNode;
     return node->open == 1;
 }
 
 /** Report whether the word at object offset 0x28 equals two. */
-int func_8020D318_de(void *navigationSearchNode) {
+int Nav_IsSearchNodeClosed(void *navigationSearchNode) {
     NavigationSearchNode *node = navigationSearchNode;
     return node->open == 2;
 }
 
-s32 func_8020D328_de(CNavData *cNavData) {
+s32 Nav_HasOpenSearchNodes(CNavData *cNavData) {
     CNavData *graph = cNavData;
     NavigationSearchNode *record = graph->nodes;
     if (record != 0) {
@@ -99,7 +99,7 @@ s32 func_8020D328_de(CNavData *cNavData) {
 }
 
 /** Clear the word at offset 0x28. */
-void func_8020D35C_de(void *arg0) {
+void Nav_ClearSearchNodeStatus(void *arg0) {
     ObjRecAt28V2 *record = arg0;
     record->unk28 = 0;
 }

@@ -259,7 +259,7 @@ static inline void packMtx(u32 *out, PoseMatrix m) {
 
 }
 
-s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
+s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
     PoseMatrix mtx[129];
     CVector3 pos;
     Shared_PoseContext ctx;
@@ -297,7 +297,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
     u32 dt;
 
     world = 0;
-    ctx.parts = Render_GetPackSection(arg1, 5);
+    ctx.parts = Render_GetPackSection(modelPack, 5);
     count = ctx.parts->count;
     actor->handle = func_802799C0_de(&D_8011FFB0, count);
     if (actor->handle == 0) {
@@ -323,7 +323,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
             ctx.handle = actor->handle;
             ctx.mtx = &mtx[1];
             ctx.arg2 = model;
-            ctx.arg1 = arg1;
+            ctx.arg1 = modelPack;
             ctx.animA = animA;
             ctx.animB = animB;
             f.frame = (!isRoot || isKind9) && !skip;
@@ -548,13 +548,13 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
                 s32 bit = 1 << actor->unk_1;
 
                 if (actor->part.unk_C & bit) {
-                    Shared_PosePartTable *table = Render_GetPackSection(arg1, 3);
+                    Shared_PosePartTable *table = Render_GetPackSection(modelPack, 3);
                     s32 n = table->count;
 
                     if (n != 0) {
                         u8 *data = table->data;
 
-                        Fx_DispatchAttachmentEffects(data, n, &mtx[1], actor, Render_GetPackSection(arg1, 5));
+                        Fx_DispatchAttachmentEffects(data, n, &mtx[1], actor, Render_GetPackSection(modelPack, 5));
                     }
                 }
             }

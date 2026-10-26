@@ -122,24 +122,24 @@ extern s32 func_802654E8_de(void *, s32, s32);
 extern void func_8027985C_de(WeightedTable *);
 
 
-s32 func_802462E8_de(Instance8020CD74 *arg0, CVector3 position, char **out) {
+s32 func_802462E8_de(Instance8020CD74 *actorState, CVector3 position, char **out) {
 
     Instance8020CD74 saved;
     char *set;
     s32 grounded;
     s32 collisions;
-    struct Actor_func_80214DD4_de *actor = (struct Actor_func_80214DD4_de *)arg0;
+    struct Actor_func_80214DD4_de *actor = (struct Actor_func_80214DD4_de *)actorState;
 
     if (actor->type == 1 && (actor->flags100 & 0x300000) != 0) {
         set = &D_801040D0;
     } else {
-        grounded = func_8024DEE0_de(arg0);
-        if (func_8024DF5C_de(arg0) == 0) {
+        grounded = func_8024DEE0_de(actorState);
+        if (func_8024DF5C_de(actorState) == 0) {
             set = &D_801040D0;
             if (grounded != 0) {
                 set = &D_80104050;
             }
-        } else if (func_8024DFA0_de(arg0) == 0) {
+        } else if (func_8024DFA0_de(actorState) == 0) {
             set = &D_80104070;
         } else {
             set = &D_80103FF0;
@@ -148,9 +148,9 @@ s32 func_802462E8_de(Instance8020CD74 *arg0, CVector3 position, char **out) {
     if (out != 0) {
         *out = set;
     }
-    saved = *arg0;
-    collisions = Camera_MoveActorWithCollision(arg0, position, set);
-    *arg0 = saved;
+    saved = *actorState;
+    collisions = Camera_MoveActorWithCollision(actorState, position, set);
+    *actorState = saved;
     return collisions;
 }
 
@@ -172,17 +172,17 @@ s32 func_8024643C_de(Instance8020CD74 *from, Instance8020CD74 *to) {
     return collisions == 0;
 }
 
-s32 func_80246558_de(Instance8020CD74 *arg0, CVector3 position, CollisionInfoCode80243A80 *arg2) {
+s32 func_80246558_de(Instance8020CD74 *actorState, CVector3 position, CollisionInfoCode80243A80 *collisionSettings) {
     Instance8020CD74 saved;
     CollisionInfoCode80243A80 collision_info;
     s32 collisions;
 
-    saved = *arg0;
-    collision_info = *arg2;
+    saved = *actorState;
+    collision_info = *collisionSettings;
     collision_info.ground_behavior = 0;
     collision_info.instance_behavior = 1;
-    Camera_MoveActorWithCollision(arg0, position, &collision_info);
-    *arg0 = saved;
+    Camera_MoveActorWithCollision(actorState, position, &collision_info);
+    *actorState = saved;
 
     collisions = D_801041F0.active0 || D_801041F0.active9c;
     return !collisions;

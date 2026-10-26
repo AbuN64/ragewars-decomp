@@ -67,13 +67,13 @@ void func_8024B53C_de(void *levelActor) {
 void func_8024B654_de(void) {
 }
 
-void func_8024B65C_de(void *arg0, unsigned int arg1)
+void func_8024B65C_de(void *actorStorage, unsigned int animationIndex)
 {
-  ((struct LevelActor *)(arg0))->nextAnimation = arg1;
-  ((struct LevelActor *)(arg0))->animationPending = 0;
-  if ((((struct LevelActor *)(arg0))->animation) != arg1)
+  ((struct LevelActor *)(actorStorage))->nextAnimation = animationIndex;
+  ((struct LevelActor *)(actorStorage))->animationPending = 0;
+  if ((((struct LevelActor *)(actorStorage))->animation) != animationIndex)
   {
-    ((struct LevelActor *)(arg0))->animationChanged = 1;
+    ((struct LevelActor *)(actorStorage))->animationChanged = 1;
   }
 }
 
@@ -88,21 +88,21 @@ extern s32 func_80246A08_de(void *, s32, s32);
 
 
 s32 func_8024B6A0_de(void *a, s32 c, s32 flag) {
-    s32 temp_v0 = func_80246A08_de(a, c, -1);
+    s32 selectedAnimation = func_80246A08_de(a, c, -1);
 
-    if (temp_v0 != -1) {
-        return func_8024B6F4_de(a, temp_v0, flag);
+    if (selectedAnimation != -1) {
+        return func_8024B6F4_de(a, selectedAnimation, flag);
     }
     return 0;
 }
 
 extern void func_8024B65C_de(void *arg0, u32 arg1);
 
-s32 func_8024B6F4_de(void *levelActor, s32 arg1, s32 arg2) {
-    if (arg1 < 0 || (arg2 == 0 && (((struct LevelActor *)(levelActor))->flags & 0x400))) {
+s32 func_8024B6F4_de(void *levelActor, s32 animationIndex, s32 allowDuringBlend) {
+    if (animationIndex < 0 || (allowDuringBlend == 0 && (((struct LevelActor *)(levelActor))->flags & 0x400))) {
         return 0;
     }
-    func_8024B65C_de(levelActor, (u32) arg1);
+    func_8024B65C_de(levelActor, (u32) animationIndex);
     return 1;
 }
 
@@ -110,54 +110,54 @@ extern void func_8027985C_de(WeightedTable *arg0);
 extern s32 func_80246A08_de(void *arg0, s32 arg1, s32 arg2);
 extern s32 func_80279864_de(WeightedTable *arg0, s16 arg1, s16 arg2);
 
-s16 func_8024B738_de(void *arg0, s16 *callback, s32 arg2) {
-    WeightedTable sp10;
-    u16 var_a1;
+s16 func_8024B738_de(void *actor, s16 *callback, s32 excludedAnimation) {
+    WeightedTable eligibleKinds;
+    u16 animationKind;
 
-    func_8027985C_de(&sp10);
-    var_a1 = *(u16 *) callback;
+    func_8027985C_de(&eligibleKinds);
+    animationKind = *(u16 *) callback;
     if (*callback != -1) {
         do {
-            if (func_80246A08_de(arg0, (s32) (s16) var_a1, arg2) != -1) {
-                func_80279864_de(&sp10, callback[0], callback[1]);
+            if (func_80246A08_de(actor, (s32) (s16) animationKind, excludedAnimation) != -1) {
+                func_80279864_de(&eligibleKinds, callback[0], callback[1]);
             }
             callback += 2;
-            var_a1 = *(u16 *) callback;
+            animationKind = *(u16 *) callback;
         } while (*callback != -1);
     }
-    return func_802798A8_de(&sp10);
+    return func_802798A8_de(&eligibleKinds);
 }
 
 extern s32 *func_8024BFD4_de(void *arg0, s8 arg1);
 extern s32 func_802484B0_de(void *arg0, s32 arg1, void *arg2);
 extern void Scene_UnlockResource(s32 arg0, s32 arg1);
 
-s32 func_8024B7E4_de(void *arg0, s32 arg1)
+s32 func_8024B7E4_de(void *actorStorage, s32 resourceRequestMode)
 {
   void *resource;
   s32 *entry;
   s32 value;
   s32 result;
   result = 0;
-  if ((((struct LevelActor *)(arg0))->flags) & 0x40000)
+  if ((((struct LevelActor *)(actorStorage))->flags) & 0x40000)
   {
     if (resource)
     {
-      resource = Scene_RequestResource(0, ((struct LevelActor *)(arg0))->resource, ((struct LevelActor *)(arg0))->resource, ((struct LevelActor *)(arg0))->resourceFlags, 0, 0, 0, (&D_800C39E0_de) + 4, arg1);
+      resource = Scene_RequestResource(0, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resourceFlags, 0, 0, 0, (&D_800C39E0_de) + 4, resourceRequestMode);
     }
     else
     {
-      resource = Scene_RequestResource(0, ((struct LevelActor *)(arg0))->resource, ((struct LevelActor *)(arg0))->resource, ((struct LevelActor *)(arg0))->resourceFlags, 0, 0, 0, (&D_800C39E0_de) + 4, arg1);
+      resource = Scene_RequestResource(0, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resourceFlags, 0, 0, 0, (&D_800C39E0_de) + 4, resourceRequestMode);
     }
     if (resource == 0)
     {
       return result;
     }
-    entry = func_8024BFD4_de(arg0, ((struct LevelActor *)(arg0))->team);
+    entry = func_8024BFD4_de(actorStorage, ((struct LevelActor *)(actorStorage))->team);
     if (entry != 0)
     {
       value = *entry;
-      result = func_802484B0_de(arg0, value, Render_GetPackSection(*((void **) resource), 0));
+      result = func_802484B0_de(actorStorage, value, Render_GetPackSection(*((void **) resource), 0));
       Scene_UnlockResource(0, (s32) entry);
     }
     Scene_UnlockResource(0, (s32) resource);
@@ -165,14 +165,14 @@ s32 func_8024B7E4_de(void *arg0, s32 arg1)
   return result;
 }
 
-void func_8024B8C4_de(void *arg0) {
-    s32 temp_a1;
-    temp_a1 = (((struct IntegerState104 *) ((s8 *) arg0))->unk_B4);
-    (((struct IntegerState104 *) ((s8 *) arg0))->unk_B4) = 0;
-    (((struct IntegerState104 *) ((s8 *) arg0))->unk_BC) = 0;
-    (((struct IntegerState104 *) ((s8 *) arg0))->unk_C0) = 0;
-    (((struct IntegerState104 *) ((s8 *) arg0))->unk_100) = (s32) ((((struct IntegerState104 *) ((s8 *) arg0))->unk_100) & ~0x200);
-    (((struct IntegerState104 *) ((s8 *) arg0))->unk_B8) = temp_a1;
+void func_8024B8C4_de(void *actorRenderState) {
+    s32 previousPoseMatrices;
+    previousPoseMatrices = (((struct IntegerState104 *) ((s8 *) actorRenderState))->unk_B4);
+    (((struct IntegerState104 *) ((s8 *) actorRenderState))->unk_B4) = 0;
+    (((struct IntegerState104 *) ((s8 *) actorRenderState))->unk_BC) = 0;
+    (((struct IntegerState104 *) ((s8 *) actorRenderState))->unk_C0) = 0;
+    (((struct IntegerState104 *) ((s8 *) actorRenderState))->unk_100) = (s32) ((((struct IntegerState104 *) ((s8 *) actorRenderState))->unk_100) & ~0x200);
+    (((struct IntegerState104 *) ((s8 *) actorRenderState))->unk_B8) = previousPoseMatrices;
 }
 
 extern s32 D_800D297C;
@@ -206,26 +206,26 @@ extern s32 D_800D297C;
 extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 extern void func_8024C454_de(void *arg0, void *arg1);
 
-void func_8024B990_de(void *actor, void *arg1, void *arg2, Block24 *arg3) {
+void func_8024B990_de(void *actor, void *unusedShadowContext, void *renderSettings, Block24 *lighting) {
     s8 index;
     s32 one;
 
-    ((ObjectRecAt140 *)actor)->blocks[D_800D297C] = *arg3;
+    ((ObjectRecAt140 *)actor)->blocks[D_800D297C] = *lighting;
     index = ((struct LevelActor *)(actor))->team;
     if (index != -1) {
         ((struct LevelActor *)(actor))->mask = 1 << index;
-        if (((struct ActorRenderSettings *)(arg2))->drawShadow != 0) {
-            func_8024AA18_de(actor, arg1, arg2);
+        if (((struct ActorRenderSettings *)(renderSettings))->drawShadow != 0) {
+            func_8024AA18_de(actor, unusedShadowContext, renderSettings);
         }
-        if (*(s32 *)arg2 != 0) {
+        if (*(s32 *)renderSettings != 0) {
             one = 1;
-            func_8026DA4C_de(((struct ActorRenderSettings *)(arg2))->view,
+            func_8026DA4C_de(((struct ActorRenderSettings *)(renderSettings))->view,
                           ((struct LevelActor *)(actor))->fieldB4, one,
                           (char *)actor
                               + ((((D_800D297C << one) + D_800D297C) << 3)
                                  + 0x140),
                           0, ((struct LevelActor *)(actor))->field3);
-            func_8024C454_de(actor, arg2);
+            func_8024C454_de(actor, renderSettings);
         }
     }
 }

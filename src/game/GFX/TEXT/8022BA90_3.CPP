@@ -94,15 +94,15 @@ void func_8022C080_de(void *actorView, void *bodyActor) {
     }
 }
 
-void func_8022C0D0_de(void *arg0) {
-    f32 temp_f0;
-    f32 temp_f1;
-    temp_f1 = (((struct FloatState67C *) ((s8 *) arg0))->unk_678);
-    if (temp_f1 > 0.0f) {
-        temp_f0 = temp_f1 - D_800D2988;
-        (((struct FloatState67C *) ((s8 *) arg0))->unk_678) = temp_f0;
-        if (temp_f0 < 0.0f) {
-            (((struct FloatState67C *) ((s8 *) arg0))->unk_678) = 0.0f;
+void func_8022C0D0_de(void *player) {
+    f32 remainingTime;
+    f32 previousTime;
+    previousTime = (((struct FloatState67C *) ((s8 *) player))->unk_678);
+    if (previousTime > 0.0f) {
+        remainingTime = previousTime - D_800D2988;
+        (((struct FloatState67C *) ((s8 *) player))->unk_678) = remainingTime;
+        if (remainingTime < 0.0f) {
+            (((struct FloatState67C *) ((s8 *) player))->unk_678) = 0.0f;
         }
     }
 }
@@ -153,7 +153,7 @@ void func_8022C1E8_de(char *player, char *view) {
     func_802AAC28_de(0x1FC, (s32) w, (s16) (s32) screenX, (s16) (s32) screenY, sx, sy, 1);
 }
 
-void func_8022C2B4_de(void *arg0, struct ScreenRectangle *arg1)
+void func_8022C2B4_de(void *arg0, struct ScreenRectangle *viewport)
 {
   f32 x;
   f32 y;
@@ -166,17 +166,17 @@ void func_8022C2B4_de(void *arg0, struct ScreenRectangle *arg1)
   f32 screenX;
   f32 screenY;
   Text_SetupSpriteMode(D_801462DE);
-  x = arg1->x;
+  x = viewport->x;
   ax = x * D_800C2D30_de;
-  y = arg1->y;
+  y = viewport->y;
   ay = y * D_800C2D30_de;
   sx = x / ((f32) D_800E28D0);
   bx = sx * D_800C2D34_de;
   sy = y / ((f32) D_800E28D4);
   by = sy * D_800C2D34_de;
-  screenX = ((arg1->width) + ax) - bx;
-  screenY = ((arg1->height) + ay) - by;
-  func_802AAC28_de(0x1FB, 0, (s16) ((s32) (((arg1->width) + ax) - bx)), (s16) ((s32) screenY), sx, sy, 1);
+  screenX = ((viewport->width) + ax) - bx;
+  screenY = ((viewport->height) + ay) - by;
+  func_802AAC28_de(0x1FB, 0, (s16) ((s32) (((viewport->width) + ax) - bx)), (s16) ((s32) screenY), sx, sy, 1);
 }
 
 void func_8022C37C_de(char *player, char *view) {
@@ -209,8 +209,8 @@ void func_8022C37C_de(char *player, char *view) {
     func_802AAC28_de(0x201, (s32) w, (s16) (s32) screenX, (s16) (s32) screenY, sx, cz, 1);
 }
 
-void *func_8022C454_de(void *arg0) {
-    struct Player *player = arg0;
+void *func_8022C454_de(void *actorObject) {
+    struct Player *player = actorObject;
     AiProfile *p = player->profile;
     p->state90 = 0;
     return p;

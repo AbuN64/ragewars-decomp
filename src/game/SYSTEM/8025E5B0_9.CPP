@@ -19,28 +19,28 @@ void *func_8026049C_de(void *object) {
     return *animation->data;
 }
 
-void func_802604AC_de(void *arg0, s32 arg1, void *arg2) {
-    ObjectLinks24_2 *o = arg0;
+void func_802604AC_de(void *animationLinks, s32 jointIndex, void *translationOut) {
+    ObjectLinks24_2 *o = animationLinks;
     ObjRecAt2V1 *indices = (void *)o->unk_0;
     s16 idx;
     Rec_func_8024C92C_de *recs;
     void *base;
-    Triple *out = arg2;
+    Triple *out = translationOut;
 
-    idx = indices[arg1].translation;
+    idx = indices[jointIndex].translation;
     if (idx == -1) {
         recs = (void *)o->unk_4;
-        __builtin_memcpy(out, &recs[arg1], sizeof(*out));
+        __builtin_memcpy(out, &recs[jointIndex], sizeof(*out));
         return;
     }
     base = Render_GetPackSection(o->unk_8, (s32) idx);
-    func_80271FC8_de(arg2, o->unk_20,
+    func_80271FC8_de(translationOut, o->unk_20,
                   (char *)base + (o->unk_18) * 4,
                   (char *)base + (o->unk_1C) * 4);
 }
 
-void func_80260550_de(void *arg0, s32 arg1, void *cQuatern) {
-    ObjectLinks24_2 *o = arg0;
+void func_80260550_de(void *animationLinks, s32 jointIndex, void *cQuatern) {
+    ObjectLinks24_2 *o = animationLinks;
     CQuatern *out = cQuatern;
     ObjRecAt2V1 *indices = (void *)o->unk_0;
     s16 idx;
@@ -48,9 +48,9 @@ void func_80260550_de(void *arg0, s32 arg1, void *cQuatern) {
     void *base;
     f32 scale;
 
-    idx = indices[arg1].unk2;
+    idx = indices[jointIndex].unk2;
     if (idx == -1) {
-        rec = (void *)(o->unk_4 + arg1 * 0x14);
+        rec = (void *)(o->unk_4 + jointIndex * 0x14);
         scale = D_800C416C_de;
         out->x = (f32)(rec->unk_C) * scale;
         out->y = (f32)(rec->m_RotY) * scale;
@@ -73,8 +73,8 @@ f32 System_ScaleToRange(f32 value, f32 lower, f32 upper) {
     return value * (upper - lower) + lower;
 }
 
-s32 func_80260664_de(s32 arg0) {
-    return (arg0 & 0xF0000000) | ((arg0 & 0x0FFFFFFF) * 8);
+s32 func_80260664_de(s32 byteAddress) {
+    return (byteAddress & 0xF0000000) | ((byteAddress & 0x0FFFFFFF) * 8);
 }
 
 /** Preserve the top nibble and shift the lower 28 bits right by three. */
@@ -83,8 +83,8 @@ unsigned int func_80260684_de(unsigned int value) {
 }
 
 /** Repack the low address bits while retaining the high nibble. */
-unsigned int func_802606A4_de(unsigned int arg0) {
-    return (arg0 & 0xF0000000) | ((arg0 & 0x0FFFFFE0) >> 3);
+unsigned int func_802606A4_de(unsigned int bitAddress) {
+    return (bitAddress & 0xF0000000) | ((bitAddress & 0x0FFFFFE0) >> 3);
 }
 
 /* Reads a width-bit field starting at a packed bit address, returning it right-aligned. Adapted from func_80260DA8_de, with the bit address and width passed directly instead of computed from a base/width record. */
@@ -111,36 +111,36 @@ int func_802606C4_de(int bitAddress, unsigned int width) {
     return value;
 }
 
-void func_80260724_de(u32 arg0, u32 arg1, u32 arg2) {
-    u32 temp_a0;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    u32 temp_a1;
-    u32 temp_a2;
-    u32 temp_shift;
-    u32 var_a2;
-    u32 var_a3;
-    u32 var_v1;
+void func_80260724_de(u32 bitAddress, u32 bitCount, u32 fieldValue) {
+    u32 wordAddress;
+    s32 bitOffset;
+    s32 remainingWordBits;
+    u32 overflowMask;
+    u32 maskedValue;
+    u32 writeShift;
+    u32 overflowValue;
+    u32 firstWordValue;
+    u32 firstWordMask;
 
-    temp_a1 = (1 << arg1) - 1;
-    var_v1 = temp_a1;
-    temp_v0 = arg0 & 0x1F;
-    temp_shift = temp_v0;
-    temp_a2 = arg2 & temp_a1;
-    if (temp_v0 == 0) {
-        var_a3 = temp_a2;
-        temp_a1 = 0;
-        var_a2 = 0;
+    overflowMask = (1 << bitCount) - 1;
+    firstWordMask = overflowMask;
+    bitOffset = bitAddress & 0x1F;
+    writeShift = bitOffset;
+    maskedValue = fieldValue & overflowMask;
+    if (bitOffset == 0) {
+        firstWordValue = maskedValue;
+        overflowMask = 0;
+        overflowValue = 0;
     } else {
-        var_v1 = temp_a1 << temp_shift;
-        temp_v0_2 = 0x20 - temp_shift;
-        temp_a1 >>= temp_v0_2;
-        var_a3 = temp_a2 << temp_shift;
-        var_a2 = temp_a2 >> temp_v0_2;
+        firstWordMask = overflowMask << writeShift;
+        remainingWordBits = 0x20 - writeShift;
+        overflowMask >>= remainingWordBits;
+        firstWordValue = maskedValue << writeShift;
+        overflowValue = maskedValue >> remainingWordBits;
     }
-    temp_a0 = (arg0 & 0xF0000000) | ((u32)(arg0 & 0x0FFFFFE0) >> 3);
-    *(s32 *)temp_a0 = (*(s32 *)temp_a0 & ~var_v1) | var_a3;
-    ((struct func_80203E78_S1 *) temp_a0)->unk4 = (((struct func_80203E78_S1 *) temp_a0)->unk4 & ~temp_a1) | var_a2;
+    wordAddress = (bitAddress & 0xF0000000) | ((u32)(bitAddress & 0x0FFFFFE0) >> 3);
+    *(s32 *)wordAddress = (*(s32 *)wordAddress & ~firstWordMask) | firstWordValue;
+    ((struct func_80203E78_S1 *) wordAddress)->unk4 = (((struct func_80203E78_S1 *) wordAddress)->unk4 & ~overflowMask) | overflowValue;
 }
 
 u32 func_802607B8_de(u32 *stream, u32 width) {
@@ -168,42 +168,42 @@ u32 func_802607B8_de(u32 *stream, u32 width) {
     return value;
 }
 
-void func_80260828_de(u32 *arg0, u32 arg1, u32 arg2) {
-    u32 temp_a0;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    u32 temp_a1;
-    u32 temp_a2;
-    u32 temp_shift;
-    u32 var_a2;
-    u32 var_a3;
-    u32 var_v1;
+void func_80260828_de(u32 *bitCursor, u32 bitCount, u32 fieldValue) {
+    u32 wordAddress;
+    s32 bitOffset;
+    s32 remainingWordBits;
+    u32 overflowMask;
+    u32 maskedValue;
+    u32 writeShift;
+    u32 overflowValue;
+    u32 firstWordValue;
+    u32 firstWordMask;
     u32 value;
 
-    value = *arg0;
-    temp_a1 = (1 << arg1) - 1;
-    var_v1 = temp_a1;
-    temp_v0 = value & 0x1F;
-    temp_shift = temp_v0;
-    temp_a2 = arg2 & temp_a1;
-    if (temp_v0 == 0) {
-        var_a3 = temp_a2;
-        temp_a1 = 0;
-        var_a2 = 0;
+    value = *bitCursor;
+    overflowMask = (1 << bitCount) - 1;
+    firstWordMask = overflowMask;
+    bitOffset = value & 0x1F;
+    writeShift = bitOffset;
+    maskedValue = fieldValue & overflowMask;
+    if (bitOffset == 0) {
+        firstWordValue = maskedValue;
+        overflowMask = 0;
+        overflowValue = 0;
     } else {
-        var_v1 = temp_a1 << temp_shift;
-        temp_v0_2 = 0x20 - temp_shift;
-        temp_a1 >>= temp_v0_2;
-        var_a3 = temp_a2 << temp_shift;
-        var_a2 = temp_a2 >> temp_v0_2;
+        firstWordMask = overflowMask << writeShift;
+        remainingWordBits = 0x20 - writeShift;
+        overflowMask >>= remainingWordBits;
+        firstWordValue = maskedValue << writeShift;
+        overflowValue = maskedValue >> remainingWordBits;
     }
-    temp_a0 = (value & 0xF0000000) | ((u32)(value & 0x0FFFFFE0) >> 3);
-    *(s32 *)temp_a0 = (*(s32 *)temp_a0 & ~var_v1) | var_a3;
-    ((struct func_80203E78_S1 *) temp_a0)->unk4 = (((struct func_80203E78_S1 *) temp_a0)->unk4 & ~temp_a1) | var_a2;
-    *arg0 += arg1;
+    wordAddress = (value & 0xF0000000) | ((u32)(value & 0x0FFFFFE0) >> 3);
+    *(s32 *)wordAddress = (*(s32 *)wordAddress & ~firstWordMask) | firstWordValue;
+    ((struct func_80203E78_S1 *) wordAddress)->unk4 = (((struct func_80203E78_S1 *) wordAddress)->unk4 & ~overflowMask) | overflowValue;
+    *bitCursor += bitCount;
 }
 
-Func802608ECResult func_802608CC_de(f32 arg0, f32 arg1, f32 arg2) {
+Func802608ECResult func_802608CC_de(f32 minimumValue, f32 maximumValue, f32 maximumError) {
     Func802608ECResult result;
     f32 ratio;
     s32 truncated;
@@ -213,9 +213,9 @@ Func802608ECResult func_802608CC_de(f32 arg0, f32 arg1, f32 arg2) {
     u32 bit;
     u32 value;
 
-    result.start = arg0;
-    result.delta = arg1 - arg0;
-    ratio = result.delta / (arg2 + arg2);
+    result.start = minimumValue;
+    result.delta = maximumValue - minimumValue;
+    ratio = result.delta / (maximumError + maximumError);
     if (ratio <= 0.0f) {
         bits = (s32)ratio + 1;
     } else {

@@ -24,11 +24,11 @@ extern void func_80218464_de();
 extern void func_80225F44_de(void *, void *);
 
 
-void func_8022D60C_de(void *arg0) { func_8022D57C_de(arg0); }
+void func_8022D60C_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
 void func_8022D628_de(void *a, void *b) { func_80225B98_de(a, b, 0x32); }
 
-void func_8022D644_de(void *arg0) { func_8022D57C_de(arg0); }
+void func_8022D644_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
 void func_8022D660_de(void *a, void *b) { func_80225B98_de(a, b, 0x1E); }
 

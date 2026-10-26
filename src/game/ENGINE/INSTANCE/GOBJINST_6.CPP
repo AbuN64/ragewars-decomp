@@ -87,13 +87,13 @@ void func_8024A1D0_de(Actor_func_8024A1D0_de *actor, void *context, Lookup *look
     D_800D15E0 = 0;
 }
 
-void func_8024A3B0_de(LevelActor *actor, PlayerCode80225D10 *player, s32 arg2, Draw *params) {
+void func_8024A3B0_de(LevelActor *actor, PlayerCode80225D10 *player, s32 animationContext, Draw *params) {
     EffectRecAt154 *effect;
     f32 scale;
     s32 *node;
 
     if (params->updateAnimation != 0) {
-        func_8024AA18_de(actor, arg2, params);
+        func_8024AA18_de(actor, animationContext, params);
     }
     if (params->drawModel != 0) {
         Render_DrawActorModelParts(params->model, player, actor->fieldB4, 1, &actor->lighting[D_800D297C], 0, actor->field3);
