@@ -173,7 +173,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
     EffectEntry *entries;
     EffectEntry *entry;
     ParticleEffect *effect;
-    EffectRender *render;
+    CCollisionInfo2_t *render;
     CVector3 *vel;
     EffectTarget *aimTarget;
     GameplayCamera *camera;
@@ -516,37 +516,37 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 effect->rgb1[2] = b1;
                 render = &effect->render;
                 *render = D_80100090;
-                render->unk5 = entry->unkA;
-                render->unk4 = entry->unk9;
-                render->unk6 = entry->unkB;
-                render->unk8 = Rumble_SamplePackedFloatRange(entry->motion->unk0);
+                render->WallBehavior = entry->unkA;
+                render->InstanceBehavior = entry->unk9;
+                render->GroundBehavior = entry->unkB;
+                render->GravityAcceleration = Rumble_SamplePackedFloatRange(entry->motion->unk0);
 #if defined(VERSION_EU)
-                render->unkC = Menu_ExpandFloatHighWord(entry->motion->unk8);
-                render->unk10 = Menu_ExpandFloatHighWord(entry->motion->unkA);
-                render->unk14 = Menu_ExpandFloatHighWord(entry->motion->unkC);
-                render->unk18 = Menu_ExpandFloatHighWord(entry->motion->unkE);
+                render->BounceReturnEnergy = Menu_ExpandFloatHighWord(entry->motion->unk8);
+                render->GroundFriction = Menu_ExpandFloatHighWord(entry->motion->unkA);
+                render->AirFriction = Menu_ExpandFloatHighWord(entry->motion->unkC);
+                render->WaterFriction = Menu_ExpandFloatHighWord(entry->motion->unkE);
 #else
-                render->unkC = Menu_ExpandFloatHighWord(entry->motion->unk8);
-                render->unk10 = Menu_ExpandFloatHighWord(entry->motion->unkA);
-                render->unk14 = Menu_ExpandFloatHighWord(entry->motion->unkC);
-                render->unk18 = Menu_ExpandFloatHighWord(entry->motion->unkE);
+                render->BounceReturnEnergy = Menu_ExpandFloatHighWord(entry->motion->unk8);
+                render->GroundFriction = Menu_ExpandFloatHighWord(entry->motion->unkA);
+                render->AirFriction = Menu_ExpandFloatHighWord(entry->motion->unkC);
+                render->WaterFriction = Menu_ExpandFloatHighWord(entry->motion->unkE);
 #endif
-                if (render->unk5 == 8 || render->unk6 == 8 || render->unk4 == 8) {
+                if (render->WallBehavior == 8 || render->GroundBehavior == 8 || render->InstanceBehavior == 8) {
                     if (effect->owner != 0 && effect->owner->type == 1 && (effect->owner->unk100 & 0x300000)) {
                         func_8022B040_de(effect->owner->unk1D8, effect);
                     }
                 }
                 if (kind == 0x101 || kind == 0x128) {
-                    render->flags |= 4;
+                    render->dwFlags |= 4;
                 }
                 if (entry->flags & 0x100000) {
-                    render->flags |= 0x40000;
+                    render->dwFlags |= 0x40000;
                 }
                 if (entry->flags & 0x800) {
-                    render->flags |= 0x2000;
+                    render->dwFlags |= 0x2000;
                 }
                 if (entry->flags & 0x40000000) {
-                    render->flags |= 0x4000;
+                    render->dwFlags |= 0x4000;
                 }
                 if (entry->params->unk5 != 3) {
                     ParticleEffect *other;
@@ -566,7 +566,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     effect->flags |= 0x1000000;
                 }
                 if ((D_800CC130[entry->model->unk94].flags & 1) || kind == 0x68) {
-                    render->flags |= 0x20000;
+                    render->dwFlags |= 0x20000;
                 }
                 vel = &effect->velocity;
                 GraphU64_ScaleVector(vel, vel, D_800CD6B0);

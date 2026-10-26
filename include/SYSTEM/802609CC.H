@@ -45,17 +45,6 @@ struct Shared_func_80261EB8_S1 {
     s32 unkC;
     s32 ** unk10;
 };
-struct Shared_func_80261EB8_S2 {
-    s8 * unk0;
-    s8 * unk4;
-    s8 * unk8;
-    s8 * unkC;
-    s32 unk10;
-    s32 unk14;
-    s32 unk18;
-    s32 unk1C;
-    f32 unk20;
-};
 extern void func_80260C6C_de(void *arg0, int arg1, Func802608ECResult t, int arg5);
 extern int func_80260E4C_de(BitFieldSource *arg0, int arg1);
 extern f32 func_80260C9C_de(DecodeArray *arg0, s32 arg1);

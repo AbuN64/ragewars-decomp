@@ -1,3 +1,4 @@
+#include "COMMON/ACTORRESOURCEHEADER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "SYSTEM/802609CC.H"
@@ -7,10 +8,9 @@
 #include "RENDER_4/8028FD2C_6.H"
 
 typedef struct Shared_func_80261EB8_S1 SharedRecAt10V1;
-typedef struct Shared_func_80261EB8_S2 SharedRecAt20;
 typedef StridedTable ObjRecV1;
 
-void AnimState_PrepareAnimationFrames(SharedRecAt10V1 *state, SharedRecAt20 *frames) {
+void AnimState_PrepareAnimationFrames(SharedRecAt10V1 *state, ObjectLinks24 *frames) {
     f32 frameScale;
     f32 scaledCurrentLoopStart;
     f32 scaledNextLoopStart;
@@ -50,12 +50,12 @@ void AnimState_PrepareAnimationFrames(SharedRecAt10V1 *state, SharedRecAt20 *fra
         loopStart = state->unkC;
         framePosition = state->unk0;
         frameCount = (f32) state->unk8;
-        frames->unk0 = positions->data;
+        frames->unk_0 = positions->data;
         section = SetN64_GetPackSection(resource, 2);
-        frames->unk4 = section->data;
-        frames->unk8 = SetN64_GetPackSection(channels, 1);
+        frames->unk_4 = section->data;
+        frames->translationFrames = SetN64_GetPackSection(channels, 1);
         frameScale = 1.0f;
-        frames->unkC = SetN64_GetPackSection(channels, 2);
+        frames->unk_C = SetN64_GetPackSection(channels, 2);
         if (framePosition >= 0.0f) {
             floorFrameIndex = (s32) framePosition;
             goto block_8;
@@ -67,7 +67,7 @@ void AnimState_PrepareAnimationFrames(SharedRecAt10V1 *state, SharedRecAt20 *fra
 block_8:
             floorFramePosition = (f32) floorFrameIndex;
         }
-        frames->unk20 = (f32) (framePosition - floorFramePosition);
+        frames->unk_20 = (f32) (framePosition - floorFramePosition);
         if (loopStart == 0xFFFF) {
             loopStart = 0;
             if (framePosition >= 0.0f) {
@@ -112,8 +112,8 @@ block_8:
                 }
             }
         }
-        frames->unk10 = (s32) (currentFrame * 4);
-        frames->unk14 = (s32) (nextFrame * 4);
+        frames->unk_10 = (s32) (currentFrame * 4);
+        frames->unk_14 = (s32) (nextFrame * 4);
         if (framePosition >= 0.0f) {
             currentFrame = (s32) framePosition;
         } else {
@@ -139,7 +139,7 @@ block_8:
             scaledNextLoopStart = (f32) loopStart * frameScale;
             if (scaledNextLoopStart <= 0.0f) {
                 nextFrame = (s32) scaledNextLoopStart;
-                frames->unk18 = currentFrame * 4;
+                frames->translationFirst = currentFrame * 4;
             } else {
                 truncatedNextLoopStart = (s32) scaledNextLoopStart;
                 nextFrame = ((f32) truncatedNextLoopStart == scaledNextLoopStart) ? 0 : 1;
@@ -148,8 +148,8 @@ block_8:
             }
         } else {
 block_75:
-            frames->unk18 = currentFrame * 4;
+            frames->translationFirst = currentFrame * 4;
         }
-        frames->unk1C = (s32) (nextFrame * 4);
+        frames->translationNext = (s32) (nextFrame * 4);
     }
 }

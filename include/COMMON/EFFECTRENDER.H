@@ -83,7 +83,7 @@ extern char **D_800DF964[];
 extern int D_800FEAE0[];
 extern int D_800FF140_de[];
 /* Effect render defaults, copied as the complete 0x1C-byte record. */
-extern struct EffectRender D_80100090;
+extern struct CCollisionInfo2_t D_80100090;
 extern int D_80100204;
 extern unsigned char D_80100207;
 /* Effect direction vector: ROM callers copy the three words at +0/+4/+8. */

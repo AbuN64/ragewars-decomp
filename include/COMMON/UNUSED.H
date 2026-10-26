@@ -2734,8 +2734,6 @@ typedef struct EffectMotion EffectMotion;
 struct EffectParams;
 typedef struct EffectParams EffectParams;
 
-struct EffectRender;
-typedef struct EffectRender EffectRender;
 
 struct EffectSystem;
 typedef struct EffectSystem EffectSystem;
@@ -3169,8 +3167,6 @@ typedef struct Shared_PoseWorld Shared_PoseWorld;
 struct Shared_func_80261EB8_S1;
 typedef struct Shared_func_80261EB8_S1 Shared_func_80261EB8_S1;
 
-struct Shared_func_80261EB8_S2;
-typedef struct Shared_func_80261EB8_S2 Shared_func_80261EB8_S2;
 
 struct SlotCC;
 typedef struct SlotCC SlotCC;
@@ -3836,19 +3832,7 @@ struct EffectBlock {
     s32 count;
     EffectEntry entries[1];
 };
-struct EffectRender;
-struct EffectRender {
-    u32 flags;
-    s8 unk4;
-    s8 unk5;
-    s8 unk6;
-    char pad7;
-    f32 unk8;
-    f32 unkC;
-    f32 unk10;
-    f32 unk14;
-    f32 unk18;
-};
+#include "COMMON/CCOLLISIONINFO2_T.H"
 struct EffectActor;
 struct EffectEntry;
 struct ParticleEffect;
@@ -3888,7 +3872,7 @@ struct ParticleEffect {
     f32 unk180[6];
     f32 alpha;
     f32 unk19C[6];
-    EffectRender render;
+    CCollisionInfo2_t render;
     s8 mode;
     u8 boundMatrixIndex;
     u8 rgb0[3];
@@ -4649,7 +4633,6 @@ struct Shared_PoseContext {
     Shared_AnimState *animB;
 };
 struct Shared_func_80261EB8_S1;
-struct Shared_func_80261EB8_S2;
 struct SlotDialog;
 struct SlotDialog {
     s32 root;
