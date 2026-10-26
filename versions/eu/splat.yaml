@@ -5854,6 +5854,7 @@ segments:
       - [0x1B49CC, data, ovl_80400000/func_8043E9CC_eu_padding_1B49CC]
       - [0x1B49D0, c, ovl_80400000]
       - [0x1B49F4, c, ovl_80400000]
+      - [0x1B4A3C, data, ovl_80400000/D_auto_Items_SelectOptionRowLabel_padding_1B4A3C]
       - [0x1B4A40, c, ovl_80400000]
       - [0x1B4BEC, c, ovl_80400000]
       - [0x1B4C94, c, ovl_80400000]

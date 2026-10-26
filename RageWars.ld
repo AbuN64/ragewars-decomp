@@ -27785,6 +27785,8 @@ SECTIONS
         src/game/DATA/OVLTBL_9/800EEDE8.CPP.o(.text);
         src/game/DATA/OVLTBL_9/800EEDE8.CPP.o(.data);
         src/game/MENU/ITEMS/8042FBEC_14.CPP.o(.text);
+        src/game/MENU/ITEMS/8043EA3C.CPP.o(.data);
+        src/game/MENU/ITEMS/8043EA40.CPP.o(.text);
         src/game/DATA/OVLTBL_9/800EE97C.CPP.o(.text);
         src/game/MENU/MISC/8043DF84.CPP.o(.text);
         src/game/MENU/MISC/8043DF84_4.CPP.o(.text);
@@ -30019,6 +30021,8 @@ SECTIONS
         src/game/MULTI/804453C4_4.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTBL_9/800EEDE8.CPP.o(.bss .sbss COMMON);
         src/game/MENU/ITEMS/8042FBEC_14.CPP.o(.bss .sbss COMMON);
+        src/game/MENU/ITEMS/8043EA3C.CPP.o(.bss .sbss COMMON);
+        src/game/MENU/ITEMS/8043EA40.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTBL_9/800EE97C.CPP.o(.bss .sbss COMMON);
         src/game/MENU/MISC/8043DF84.CPP.o(.bss .sbss COMMON);
         src/game/MENU/MISC/8043DF84_4.CPP.o(.bss .sbss COMMON);

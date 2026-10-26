@@ -12498,3 +12498,5 @@ D_auto_func_802B755C_eu_padding_B815C = 0x802B755C; // rom:0xB815C
 D_auto_func_802B772C_eu_padding_B832C = 0x802B772C; // rom:0xB832C
 D_auto_func_8043FCFC_eu_padding_1B5CFC = 0x8043FCFC; // rom:0x1B5CFC
 D_auto_func_8044F224_eu_padding_1C5224 = 0x8044F224; // rom:0x1C5224
+
+D_auto_Items_SelectOptionRowLabel_padding_1B4A3C = 0x8043EA3C; // rom:0x1B4A3C
