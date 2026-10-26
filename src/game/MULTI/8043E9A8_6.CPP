@@ -11,7 +11,7 @@
 #include "COMMON/GAME_SESSION.H"
 extern void Ovlgame_ResetMatchControllerState(void *);
 
-s32 func_8043EDDC_de(void) {
+s32 Multi_CompleteGameOverDelay(void) {
     if (D_801462C8.counters.m_GameOverTimer <= 0.0f) {
         Ovlgame_ResetMatchControllerState(&D_8011FAC0);
         return 1;
@@ -24,7 +24,7 @@ s32 func_8043EDDC_de(void) {
 
 
 
-s32 func_8043EE24_de(void) {
+s32 Multi_DecreaseGameOverTimer(void) {
     CGameStatus *state = &D_801462C8.counters;
     f32 timer = state->m_GameOverTimer - D_800D2988;
 

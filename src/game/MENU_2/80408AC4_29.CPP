@@ -3,7 +3,7 @@
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 /* Fuzzy draft: inline-asm carrier of the original instructions (no C written yet). */
-void func_80426310_de(void) {
+void Frontend_OpenResultsOptions(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
@@ -302,7 +302,7 @@ void func_80426310_de(void) {
         "addiu      $v0, $zero, 0x2\n"
         "beq        $v1, $v0, .Lauto_80426768\n"
         "nop\n"
-        "jal        func_80427B08_de\n"
+        "jal        Frontend_UpdateResultsHeading\n"
         "nop\n"
         ".Lauto_80426768:\n"
         "jal        SoundElement_PlayFlatSound\n"
@@ -316,6 +316,6 @@ void func_80426310_de(void) {
     );
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80426310_de);
+INCLUDE_ASM("ovl_80400000", Frontend_OpenResultsOptions);
 #endif
 #endif

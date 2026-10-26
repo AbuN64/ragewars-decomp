@@ -10,17 +10,17 @@
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "RENDER_2/8025DE50_5.H"
 s32 Menu_AnimateTabOptionsMenu(void) {
-    s32 temp_s0;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
-    s32 temp_v0_4;
+    s32 cameraState;
+    s32 transitionPhase;
+    s32 openingTicksLeft;
+    s32 closingTicksLeft;
+    s32 decrementedTicks;
     s32 pages;
-    s32 var_v0;
-    MenuWidget *temp_a0;
-    MenuWidget *temp_a0_2;
-    MenuWidget *temp_a0_3;
-    MenuWidget *temp_a0_4;
+    s32 clampedTicks;
+    MenuWidget *openingLeftTab;
+    MenuWidget *openingRightTab;
+    MenuWidget *closingLeftTab;
+    MenuWidget *closingRightTab;
     Shared_OptionsScreen *timer;
     Shared_OptionsScreen *finish;
     s32 *ready;
@@ -31,8 +31,8 @@ s32 Menu_AnimateTabOptionsMenu(void) {
             Tsmos_ActivateControllerState();
             return 0;
         }
-        temp_s0 = D_800E2830->state3C;
-        if ((temp_s0 == 1) && (Cinema_IsSequenceInWindow() == temp_s0)) {
+        cameraState = D_800E2830->state3C;
+        if ((cameraState == 1) && (Cinema_IsSequenceInWindow() == cameraState)) {
             Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->prompt), 0);
             Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->footer), 0);
             Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->rumbleIcon), 0);
@@ -54,16 +54,16 @@ s32 Menu_AnimateTabOptionsMenu(void) {
             goto block_11;
         }
 block_11:
-        temp_v0 = (((Shared_OptionsScreen *)(D_800E4518))->page);
-        switch (temp_v0) {
+        transitionPhase = (((Shared_OptionsScreen *)(D_800E4518))->page);
+        switch (transitionPhase) {
         case 1:
-            temp_a0 = (((Shared_OptionsScreen *)(D_800E4518))->leftTab);
-            temp_a0->x = (u16) (temp_a0->x + (u16)(((Shared_OptionsScreen *)(D_800E4518))->leftStep));
-            temp_a0_2 = (((Shared_OptionsScreen *)(D_800E4518))->rightTab);
-            temp_a0_2->x = (u16) (temp_a0_2->x - (u16)(((Shared_OptionsScreen *)(D_800E4518))->rightStep));
-            temp_v0_2 = (((Shared_OptionsScreen *)(D_800E4518))->pages) - 1;
-            (((Shared_OptionsScreen *)(D_800E4518))->pages) = temp_v0_2;
-            if (temp_v0_2 <= 0) {
+            openingLeftTab = (((Shared_OptionsScreen *)(D_800E4518))->leftTab);
+            openingLeftTab->x = (u16) (openingLeftTab->x + (u16)(((Shared_OptionsScreen *)(D_800E4518))->leftStep));
+            openingRightTab = (((Shared_OptionsScreen *)(D_800E4518))->rightTab);
+            openingRightTab->x = (u16) (openingRightTab->x - (u16)(((Shared_OptionsScreen *)(D_800E4518))->rightStep));
+            openingTicksLeft = (((Shared_OptionsScreen *)(D_800E4518))->pages) - 1;
+            (((Shared_OptionsScreen *)(D_800E4518))->pages) = openingTicksLeft;
+            if (openingTicksLeft <= 0) {
                 Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->marker), 1);
                 Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->pakIcon), 1);
                 SmpFlicker_StartFlicker((((Shared_OptionsScreen *)(D_800E4518))->title), 4);
@@ -75,13 +75,13 @@ block_11:
         default:
             break;
         case 2:
-            temp_a0_3 = (((Shared_OptionsScreen *)(D_800E4518))->leftTab);
-            temp_a0_3->x = (u16) (temp_a0_3->x - (u16)(((Shared_OptionsScreen *)(D_800E4518))->leftStep));
-            temp_a0_4 = (((Shared_OptionsScreen *)(D_800E4518))->rightTab);
-            temp_a0_4->x = (u16) (temp_a0_4->x + (u16)(((Shared_OptionsScreen *)(D_800E4518))->rightStep));
-            temp_v0_3 = (((Shared_OptionsScreen *)(D_800E4518))->pages) - 1;
-            (((Shared_OptionsScreen *)(D_800E4518))->pages) = temp_v0_3;
-            if (temp_v0_3 <= 0) {
+            closingLeftTab = (((Shared_OptionsScreen *)(D_800E4518))->leftTab);
+            closingLeftTab->x = (u16) (closingLeftTab->x - (u16)(((Shared_OptionsScreen *)(D_800E4518))->leftStep));
+            closingRightTab = (((Shared_OptionsScreen *)(D_800E4518))->rightTab);
+            closingRightTab->x = (u16) (closingRightTab->x + (u16)(((Shared_OptionsScreen *)(D_800E4518))->rightStep));
+            closingTicksLeft = (((Shared_OptionsScreen *)(D_800E4518))->pages) - 1;
+            (((Shared_OptionsScreen *)(D_800E4518))->pages) = closingTicksLeft;
+            if (closingTicksLeft <= 0) {
                 D_80145040.pause = 0;
                 (((Shared_OptionsScreen *)(D_800E4518))->page) = 3;
                 Items_ResetActorPools(&D_80145040.object, 0);
@@ -99,13 +99,13 @@ block_11:
         case 4:
             timer = (Shared_OptionsScreen *)D_800E4518;
             pages = timer->pages;
-            temp_v0_4 = pages - 1;
-            if (temp_v0_4 >= 0) {
-                var_v0 = pages - (pages >= temp_v0_4);
+            decrementedTicks = pages - 1;
+            if (decrementedTicks >= 0) {
+                clampedTicks = pages - (pages >= decrementedTicks);
             } else {
-                var_v0 = 0;
+                clampedTicks = 0;
             }
-            timer->pages = var_v0;
+            timer->pages = clampedTicks;
             if (((((Shared_OptionsScreen *)(D_800E4518))->pages) <= 0) && (SmpFlicker_IsFlickerIdle((((Shared_OptionsScreen *)(D_800E4518))->title)) != 0)) {
                 SmpFlicker_RestoreFlickerValue((((Shared_OptionsScreen *)(D_800E4518))->title));
                 (((Shared_OptionsScreen *)(D_800E4518))->page) = 3;

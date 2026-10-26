@@ -4,7 +4,7 @@
 extern u32 D_80154034;
 
 /* Returns the score threshold for the current level index, 1000 for level 0 or out of range. */
-s32 func_8043D3BC_us_rev1(void) {
+s32 Level_GetSelectedResourceId(void) {
     switch (D_80154034) {
     case 0:
     default:

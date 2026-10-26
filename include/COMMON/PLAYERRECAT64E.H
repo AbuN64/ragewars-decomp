@@ -13,7 +13,7 @@ struct PlayerRecAt64E {
     u8 count64E;
 };
 
-struct Holder_func_8043F048_de;
+struct HolderMultiIsPlayerItemAvailable;
 struct PlayerRecAt64E;
 
 struct Flagged;

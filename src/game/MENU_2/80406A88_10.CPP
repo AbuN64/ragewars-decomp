@@ -4,7 +4,7 @@
 
 #if defined(VERSION_EU_X)
 #ifdef NON_MATCHING
-#define Frontend_CreateResultsOptionsScreen func_80426FA0_eu_x
+#define Frontend_CreateResultsOptionsScreen Frontend_OpenLocalizedResultsOptions
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/REQUESTRECAT10.H"
@@ -38,21 +38,21 @@ void Frontend_InitMenuImage(s32 *record, s32 first, s32 second, s32 third, s32 f
 
 
 s32 Frontend_CreateResultsOptionsScreen(MenuWidget *owner) {
-    MenuWidget *temp_a2;
-    MenuWidget *temp_a2_2;
-    MenuWidget *temp_v0_2;
-    MenuWidget *temp_v0_3;
-    MenuWidget *temp_v0_4;
-    MenuWidget *temp_v0_5;
+    MenuWidget *leftTab;
+    MenuWidget *rightTab;
+    MenuWidget *leftTabWidget;
+    MenuWidget *rightTabWidget;
+    MenuWidget *markerWidget;
+    MenuWidget *opaqueLabelWidget;
     ResultsOptionsScreen *screen;
-    u8 *var_a0;
-    u8 *var_v1_3;
-    s16 var_v1;
-    s16 var_v1_2;
-    s32 temp_a1;
-    s32 temp_v1;
-    s32 temp_v1_2;
-    s32 var_a1;
+    u8 *playerScan;
+    u8 *playerResetScan;
+    s16 roundedLeftWidth;
+    s16 roundedRightWidth;
+    s32 clearedBit;
+    s32 leftSlideStep;
+    s32 rightSlideStep;
+    s32 ownedBit;
     s32 i;
     s32 j;
     s32 k;
@@ -68,66 +68,66 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *owner) {
     SmpOverlay_ShowSlotById(owner, 1, 0x13E);
     SmpOverlay_ShowSlotById(owner, 2, 0x13E);
     SmpOverlay_ShowSlotById(owner, 3, 0x13E);
-    var_a1 = 0;
+    ownedBit = 0;
     do {
-        Defs_SetBitValue((*(ResultsOptionsScreen **)&D_800E4690)->owned, var_a1, 0);
-        temp_a1 = i;
+        Defs_SetBitValue((*(ResultsOptionsScreen **)&D_800E4690)->owned, ownedBit, 0);
+        clearedBit = i;
         i += 1;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        Defs_SetBitValue(&(*((u8 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2681))), temp_a1, 0);
-        var_a1 = i;
+        Defs_SetBitValue(&(*((u8 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2681))), clearedBit, 0);
+        ownedBit = i;
     } while (i < 0x24);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2440))) = 1;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2444))) = 4;
-    temp_v0_2 = Frontend_FindWidgetByResourceId(owner, 0x145);
+    leftTabWidget = Frontend_FindWidgetByResourceId(owner, 0x145);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2424))) = temp_v0_2;
-    temp_v0_2->x = (u16) temp_v0_2->x - (u16) temp_v0_2->width;
+    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2424))) = leftTabWidget;
+    leftTabWidget->x = (u16) leftTabWidget->x - (u16) leftTabWidget->width;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    var_v1 = (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2424)))->width;
-    if (var_v1 < 0) {
-        var_v1 += 3;
+    roundedLeftWidth = (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2424)))->width;
+    if (roundedLeftWidth < 0) {
+        roundedLeftWidth += 3;
     }
-    temp_v1 = var_v1 >> 2;
+    leftSlideStep = roundedLeftWidth >> 2;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2428))) = temp_v1;
+    (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2428))) = leftSlideStep;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    temp_a2 = (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2424)));
-    temp_a2->x = (u16) temp_a2->x + (temp_a2->width - (temp_v1 * 4));
-    temp_v0_3 = Frontend_FindWidgetByResourceId(owner, 0x144);
+    leftTab = (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2424)));
+    leftTab->x = (u16) leftTab->x + (leftTab->width - (leftSlideStep * 4));
+    rightTabWidget = Frontend_FindWidgetByResourceId(owner, 0x144);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2432))) = temp_v0_3;
-    temp_v0_3->x = (u16) temp_v0_3->x + (u16) temp_v0_3->width;
+    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2432))) = rightTabWidget;
+    rightTabWidget->x = (u16) rightTabWidget->x + (u16) rightTabWidget->width;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    var_v1_2 = (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2432)))->width;
-    if (var_v1_2 < 0) {
-        var_v1_2 += 3;
+    roundedRightWidth = (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2432)))->width;
+    if (roundedRightWidth < 0) {
+        roundedRightWidth += 3;
     }
     j = 0;
-    temp_v1_2 = var_v1_2 >> 2;
+    rightSlideStep = roundedRightWidth >> 2;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2436))) = temp_v1_2;
+    (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2436))) = rightSlideStep;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    temp_a2_2 = (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2432)));
-    temp_a2_2->x = (u16) temp_a2_2->x - (temp_a2_2->width - (temp_v1_2 * 4));
+    rightTab = (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2432)));
+    rightTab->x = (u16) rightTab->x - (rightTab->width - (rightSlideStep * 4));
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((void * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2448))) = SmpFlicker_CreateFlickerWidget(0x141, 0x6E);
-    temp_v0_4 = Frontend_FindWidgetByResourceId(owner, 0x13F);
+    markerWidget = Frontend_FindWidgetByResourceId(owner, 0x13F);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2452))) = temp_v0_4;
-    Frontend_SetWidgetFlag08(temp_v0_4, 0);
+    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2452))) = markerWidget;
+    Frontend_SetWidgetFlag08(markerWidget, 0);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2456))) = Frontend_FindWidgetByResourceId(owner, 0x154);
-    var_a0 = g_playerSettings;
+    playerScan = g_playerSettings;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2460))) = Frontend_FindWidgetByResourceId(owner, 0x155);
     (*(ResultsOptionsScreen **)&D_800E4690)->player = 0;
 loop_7:
-    if (var_a0[0x78] != 1) {
+    if (playerScan[0x78] != 1) {
         j += 1;
-        var_a0 += 0x96;
+        playerScan += 0x96;
         if (j < 4) {
             goto loop_7;
         }
@@ -135,14 +135,14 @@ loop_7:
         (*(ResultsOptionsScreen **)&D_800E4690)->player = j;
     }
     k = 0;
-    var_v1_3 = g_playerSettings;
+    playerResetScan = g_playerSettings;
     do {
         k += 1;
-        if (var_v1_3[0x91] == 1) {
-            var_v1_3[0x78] = 0;
-            var_v1_3[0x91] = 0;
+        if (playerResetScan[0x91] == 1) {
+            playerResetScan[0x78] = 0;
+            playerResetScan[0x91] = 0;
         }
-        var_v1_3 += 0x96;
+        playerResetScan += 0x96;
     } while (k < 8);
     Frontend_LoadTrialCompletionFlags();
     Frontend_SelectSuggestedTrial();
@@ -153,10 +153,10 @@ loop_7:
     D_80154020.value = -1;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     Frontend_InitMenuImage(&(*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 0))), 0x67, 0, 0, 0);
-    temp_v0_5 = Frontend_FindWidgetByResourceId(owner, 0x151);
+    opaqueLabelWidget = Frontend_FindWidgetByResourceId(owner, 0x151);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2640))) = temp_v0_5;
-    temp_v0_5->alpha = 0xFF;
+    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2640))) = opaqueLabelWidget;
+    opaqueLabelWidget->alpha = 0xFF;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2636))) = 0;
     if (((s32) D_801462C8.controllerMode < 5) && ((s32) D_801462C8.controllerMode >= 3)) {
@@ -196,13 +196,13 @@ loop_7:
         break;
     }
     if (D_801462C8.controllerMode != 2) {
-        func_80427B08_de();
+        Frontend_UpdateResultsHeading();
     }
     SoundElement_PlayFlatSound(0xE78);
     return 0;
 }
 #undef D_800E4690
 #else
-INCLUDE_ASM("ovl_80400000", func_80426FA0_eu_x);
+INCLUDE_ASM("ovl_80400000", Frontend_OpenLocalizedResultsOptions);
 #endif
 #endif

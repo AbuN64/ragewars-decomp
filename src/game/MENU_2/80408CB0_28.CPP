@@ -17,7 +17,7 @@ extern void SmpSlider_SetSliderItem(); extern void *SmpFlicker_CreateFlickerWidg
 extern char *D_auto_800DDB08[];
 /* Builds the options page (0x28-byte state g_optionsPage): title, the three toggle rows (ids 0x59/0x55/0x51) labelled in the
    current language and set from the option bytes 0x1B, 0x1F and 0x580 of D_801462C8, the volume bar 0x53 and its list. Returns 0. */
-s32 func_804229E0_eu(void) {
+s32 Menu_CreateEuropeanSettingsPage(void) {
     u8 lang = D_801462C8.language;
     g_optionsPage = Cache_AllocateMemory(0x28);
     g_optionsPage->title = SmpFade_CreateFadeWidget(0x4D, 0x4E);
@@ -48,7 +48,7 @@ s32 func_804229E0_eu(void) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_804229E0_eu);
+INCLUDE_ASM("ovl_80400000", Menu_CreateEuropeanSettingsPage);
 #endif
 #endif
 
@@ -68,17 +68,17 @@ extern s32 SmpSlider_CreateSliderWidget(s32, s32, s32);
 extern void SmpSlider_SetSliderItem(s32, s32);
 extern SelectionScreenState *D_800E4514;
 
-s32 func_80422C58_eu(void) {
+s32 Menu_CreateSessionSettingsControls(void) {
     MenuWidget *widget;
     void *scroll;
-    void *temp_v0;
+    void *firstSettingsList;
 
     D_800E4514 = Cache_AllocateMemory(0x10);
     SmpButton_WrapButtonWidget(0x1BD);
     SmpButton_WrapButtonWidget(0x1C2);
-    temp_v0 = SmpButton_CreateListWidget(0x1BB, 0x1BC);
-    D_800E4514->unk4 = temp_v0;
-    SmpButton_AppendListText(temp_v0);
+    firstSettingsList = SmpButton_CreateListWidget(0x1BB, 0x1BC);
+    D_800E4514->unk4 = firstSettingsList;
+    SmpButton_AppendListText(firstSettingsList);
     SmpButton_AppendListText(D_800E4514->unk4);
     SmpButton_AppendListText(D_800E4514->unk4);
     SmpButton_SelectListEntry(D_800E4514->unk4, (s32) D_801462C8.firstListMode);
@@ -100,7 +100,7 @@ s32 func_80422C58_eu(void) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80422C58_eu);
+INCLUDE_ASM("ovl_80400000", Menu_CreateSessionSettingsControls);
 #endif
 #endif
 
@@ -137,7 +137,7 @@ extern s32 ScenarioSetup_IsCupSelected(void);
 extern void Frontend_InitMenuImage(Shared_OptionsScreen *, s32, s32, s32, s32);
 extern void Frontend_StartMenuImageTransition(Shared_OptionsScreen *);
 
-s32 func_80422E34_eu(void *node) {
+s32 Menu_OpenLocalizedGameOptions(void *node) {
     Shared_Game *settings;
     MenuWidget *handle;
     MenuWidget *marker;
@@ -248,6 +248,6 @@ s32 func_80422E34_eu(void *node) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80422E34_eu);
+INCLUDE_ASM("ovl_80400000", Menu_OpenLocalizedGameOptions);
 #endif
 #endif

@@ -16,7 +16,7 @@
 
 
 
-void func_804410AC_de(struct MenuRecAt10 *menu, u8 dir) {
+void Pak_MoveMenuCursor(struct MenuRecAt10 *menu, u8 dir) {
     struct EntryRecAt18V2 *entry;
     s32 old;
 
@@ -189,20 +189,20 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
     }
     if (selectionFlags == 0) {
         if (Control_IsLeftPressed(menu->input) != 0) {
-            func_804410AC_de(menu, 0x10);
+            Pak_MoveMenuCursor(menu, 0x10);
         }
         if (Control_IsRightPressed(menu->input) != 0) {
-            func_804410AC_de(menu, 0x11);
+            Pak_MoveMenuCursor(menu, 0x11);
         }
     } else if (menu->input->buttons & 0x60303) {
         allowRepeat = 0;
     }
     if (allowRepeat != 0) {
         if (Control_IsNavUp(menu->input) != 0) {
-            func_804410AC_de(menu, 0x12);
+            Pak_MoveMenuCursor(menu, 0x12);
         }
         if (Control_IsNavDown(menu->input) != 0) {
-            func_804410AC_de(menu, 0x13);
+            Pak_MoveMenuCursor(menu, 0x13);
         }
     }
     if (menu->state != 2) {
@@ -345,7 +345,7 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
 #include "COMMON/VIDEO_DIMENSIONS.H"
 extern s32 D_800E28D0;
 extern TextBoundsFont D_800E1E24_de[];
-/* The font a text entry's style bits select (the switch of func_8043FE3C_de). */
+/* The font a text entry's style bits select (the switch of Pak_DrawStyledMenuText). */
 static __inline__ TextBoundsFont *textBoundsFont(TextBoundsText *text) {
     s32 style = 0;
     switch ((u32)text->flags & 0x3FE0) {

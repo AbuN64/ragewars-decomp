@@ -23,7 +23,7 @@ extern char *D_800D3D50;
 #include "MENU/OPTION_TEXT_TYPE.H"
 
 
-s32 func_8043DD30_us_rev1(func_8043DD30_S1 *arg0) {
+s32 Ovlgame_SelectToggleRowText(func_8043DD30_S1 *arg0) {
     s32 temp_v0;
 
     temp_v0 = arg0->unk0;

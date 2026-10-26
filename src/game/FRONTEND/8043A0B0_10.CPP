@@ -97,7 +97,7 @@ void Frontend_LoadEquipmentSelections(s32 player) {
 
 /* US and EU keep their asm: their jump table sits inside literals_Frontend_MoveEquipmentColumn's rodata, which has no
  * unit of its own yet. */
-void func_8043B854_de(void) {
+void Frontend_ApplySelectedPlayerLoadouts(void) {
     u8 *record;
     struct Shape_typemap_165 *source;
     struct Shape_typemap_165 *row;
@@ -147,5 +147,5 @@ void func_8043B854_de(void) {
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8043B854_de);
+INCLUDE_ASM("ovl_80400000", Frontend_ApplySelectedPlayerLoadouts);
 #endif

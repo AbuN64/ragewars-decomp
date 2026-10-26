@@ -12,8 +12,8 @@
 
 extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
 
-s32 func_80444D50_de(void *first, void *second) {
-    struct Options_func_80444D50_de *options = &D_801462C8;
+s32 Pak_AdjustPackedButtonOption(void *first, void *second) {
+    struct OptionsPakAdjustPackedButtonOption *options = &D_801462C8;
 
     options->value = Pak_AdjustValue(second, options->value, 0x10, 0, 0x80, 0);
     return 0;
@@ -26,7 +26,7 @@ extern void Defs_FormatIntegerValue(char *buffer, const char *format, s32 value)
 #include "SYSTEM_3/80265370.H"
 extern u8 *D_800E22E4_eu[], *D_800E22F4[];
 
-s32 func_80444D9C_de(LayeredText *item) {
+s32 Pak_FormatPackedButtonOption(LayeredText *item) {
     u32 code;
     u8 *text;
     s32 length;
@@ -55,7 +55,7 @@ extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(u32);
 extern s32 Pak_CountLineChars(LayeredText *);
 
-s32 func_80444D9C_de(LayeredText *item) {
+s32 Pak_FormatPackedButtonOption(LayeredText *item) {
     u32 code;
     u8 *text;
     s32 length;

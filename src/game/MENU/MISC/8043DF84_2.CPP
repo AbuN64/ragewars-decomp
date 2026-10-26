@@ -39,13 +39,13 @@ extern s32 D_0044FB2C;
 
 
 
-s32 func_8043E610_de(void *unused0, Handle8043E788 *arg1) {
-    Obj1C *temp_a2;
+s32 func_8043E610_de(void *unused0, Handle8043E788 *menuContext) {
+    Obj1C *selectionPlayer;
 
-    temp_a2 = arg1->unk1C;
-    temp_a2->unk858 = 0;
-    temp_a2->unk5D8->unk80 = 0;
-    Pak_OpenDialog(temp_a2->unk5DC + 0x554, &D_0044FB2C, temp_a2, temp_a2->unk698, temp_a2->unk5D4);
+    selectionPlayer = menuContext->unk1C;
+    selectionPlayer->unk858 = 0;
+    selectionPlayer->unk5D8->unk80 = 0;
+    Pak_OpenDialog(selectionPlayer->unk5DC + 0x554, &D_0044FB2C, selectionPlayer, selectionPlayer->unk698, selectionPlayer->unk5D4);
     return 1;
 }
 
@@ -60,13 +60,13 @@ extern s32 D_0044FB2C;
 
 
 
-s32 func_8043E658_de(void *unused0, Handle8043E788 *arg1) {
-    Obj1C *temp_a2;
+s32 func_8043E658_de(void *unused0, Handle8043E788 *menuContext) {
+    Obj1C *selectionPlayer;
 
-    temp_a2 = arg1->unk1C;
-    temp_a2->unk858 = 1;
-    temp_a2->unk5D8->unk80 = 0;
-    Pak_OpenDialog(temp_a2->unk5DC + 0x554, &D_0044FB2C, temp_a2, temp_a2->unk698, temp_a2->unk5D4);
+    selectionPlayer = menuContext->unk1C;
+    selectionPlayer->unk858 = 1;
+    selectionPlayer->unk5D8->unk80 = 0;
+    Pak_OpenDialog(selectionPlayer->unk5DC + 0x554, &D_0044FB2C, selectionPlayer, selectionPlayer->unk698, selectionPlayer->unk5D4);
     return 1;
 }
 

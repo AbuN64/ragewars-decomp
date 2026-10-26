@@ -59,7 +59,7 @@ void Ovlgame_InitActorHudState(Shared_ActorView *);
 
 /* Sets the byte at offset 0x78 of the object at 0x5D8 of an actor, calls Ovlgame_ResetPlayerForRound with the
    actor, its second argument and one, then func_80214178_de on offsets 0x2E8 and 0x458 with two and
-   Player_PlacePlayerAtSpawnPoint with D_80146898, zero and one. */
+   Player_PlacePlayerAtSpawnPoint with g_playerSpawnSelector, zero and one. */
 
 
 

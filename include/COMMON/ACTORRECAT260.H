@@ -137,7 +137,7 @@ typedef struct StateRecAt1C StateRecAt1C;
 
 struct MenuRules;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 func_80443998_de(struct LayeredText *field, struct MenuRules *holder);
+s32 Items_FormatPlayerResultScore(struct LayeredText *field, struct MenuRules *holder);
 #endif
 
 

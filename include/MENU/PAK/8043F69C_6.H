@@ -4,7 +4,7 @@
 #include "MENU/8043F69C.H"
 #include "COMMON/ITEMRECAT20V1.H"
 extern void *Pak_OpenDialog(void *owner, struct Dialog *list, s32 b, s32 c, s32 d);
-extern s32 func_804423AC_de(struct Outer *outer);
+extern s32 Pak_GetInnerMenuLock(struct Outer *outer);
 extern float Pak_GetGlyphAdvance(int c, unsigned char next, float sx, float sy);
 extern char *func_80442214_de(struct ObjRecAt20V2 *object);
 #endif

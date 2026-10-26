@@ -1332,7 +1332,7 @@ extern s32 D_800D0EBC;
 
 extern int *D_800CB358_de[];
 
-extern s32 D_80146898;
+extern s32 g_playerSpawnSelector;
 
 extern const f64 D_800C5B18_de;
 
@@ -1736,7 +1736,7 @@ extern void *D_801372C8;
 
 extern s32 D_800E1004[];
 
-extern u16 D_801462DC;
+extern u16 g_gamePackedOptions;
 
 extern char D_800F3D20;
 
@@ -2185,7 +2185,7 @@ extern f32 D_800C2850_de[];
 extern FileHeader g_frontendResourceFilename;
 
 struct ShapeCode802B54A0;
-extern struct ShapeCode802B54A0 *D_80153D58;
+extern struct ShapeCode802B54A0 *g_conversionDestinationImage;
 
 extern s32 D_80109E0C;
 
@@ -2206,7 +2206,7 @@ extern char *D_800DDA90[];
 
 extern char D_800D3884[];
 
-extern s32 D_8011FEF4;
+extern s32 g_modelEditPack;
 
 extern char *D_800D3564;
 
@@ -2959,8 +2959,8 @@ typedef struct ObjRecAt174 ObjRecAt174;
 
 
 
-struct Object_func_80443128_de;
-typedef struct Object_func_80443128_de Object_func_80443128_de;
+struct ObjectItemsDrawActorWithRedMenuEffect;
+typedef struct ObjectItemsDrawActorWithRedMenuEffect ObjectItemsDrawActorWithRedMenuEffect;
 
 struct OptionsOpenItem;
 typedef struct OptionsOpenItem OptionsOpenItem;
@@ -4211,7 +4211,7 @@ struct ObjRecAt174 {
     CVector3 direction;
 };
 struct func_80205628_S3;
-struct Object_func_80443128_de;
+struct ObjectItemsDrawActorWithRedMenuEffect;
 struct OptionsOpenItem;
 struct OptionsOpenItem {
     char pad0[0x1A];

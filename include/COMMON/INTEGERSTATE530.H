@@ -196,7 +196,7 @@ extern s32 D_002A1B50(void *, s32, s32, s32, s32);
 extern void D_002A1BE0();
 /* D_0040C5C0: second return stub in func_8040C5B8_de (+8) */
 extern s32 D_0040C5C0(void *, s32, s32, s32, s32);
-/* D_0040C5C8: func_8040C5C8_de */
+/* D_0040C5C8: Menu_DrawClippedWidgetSiblings */
 extern void D_0040C5C8();
 /* D_004125A4: Frontend_DispatchTypedWidgetEvent */
 extern s32 D_004125A4(void *, s32, s32, s32, s32);

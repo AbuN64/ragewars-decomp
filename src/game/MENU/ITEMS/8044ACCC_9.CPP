@@ -20,7 +20,7 @@ void func_802390F4_de(void *, s32);                         /* extern */
 void func_802393D8_de(void *);                            /* extern */
 void func_80239C20_de(void *);                            /* extern */
 void GraphU64_IdentityMatrix(void *);                            /* extern */
-void func_80442544_de(void *);                    /* extern */
+void Pak_InitMenuMessageList(void *);                    /* extern */
 
 
 extern s32 D_800E28D0;
@@ -113,7 +113,7 @@ void Items_InitializeGameplayCamera(GameplayCamera *arg0) {
         ((Racer *)arg0)->viewports[var_a1].vtrans[2] = 0;
         ((Racer *)arg0)->viewports[var_a1].vtrans[3] = 0;
     }
-    func_80442544_de(((void *)&((GameplayCamera *)arg0)->messageList));
+    Pak_InitMenuMessageList(((void *)&((GameplayCamera *)arg0)->messageList));
     GraphU64_IdentityMatrix(((GameplayCamera *)arg0)->faceScreen);
     GraphU64_IdentityMatrix(((GameplayCamera *)arg0)->faceScreenUpright);
     arg0->fadeEnabled = 0;

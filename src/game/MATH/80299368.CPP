@@ -70,7 +70,7 @@ void SmXlate_SwitchScreen(s32 index) {
     s32 *transition_state;
     s32 temp_s4;
     s32 temp_v0_2;
-    Shared_MenuDefinition *regpart_temp_v0_2; 
+    Shared_MenuDefinition *priorDefaultFocus; 
     s32 temp_v1;
     s32 search_bound; 
     s32 var_a0;
@@ -405,9 +405,9 @@ block_78:
     *transition_state = 1;
     while (var_s5 != 0) {
         var_s5 = 0;
-        regpart_temp_v0_2 = g_screenDefaultFocus;
+        priorDefaultFocus = g_screenDefaultFocus;
         temp_a1_2 = var_s1->unk44;
-        if (regpart_temp_v0_2 != temp_a1_2) {
+        if (priorDefaultFocus != temp_a1_2) {
             
             temp_a0 = D_8014D080;
             temp_v1 = temp_a0->current;

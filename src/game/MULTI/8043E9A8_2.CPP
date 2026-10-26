@@ -33,7 +33,7 @@ char *func_8043F120_de(Shared_DebugWidget *widget) {
     return D_8014DDD0;
 }
 
-s32 func_8043F294_de(MenuRecAt14 *arg0, Shared_MenuInput *menuInput) {
+s32 Multi_AdjustTypedMenuVariable(MenuRecAt14 *arg0, Shared_MenuInput *menuInput) {
     void *temp_a0_2;
     void *temp_v1;
     f32 temp_v0;

@@ -10,7 +10,7 @@ extern char D_800EED80[];
 struct CMenu_t;
 typedef struct CMenu_t CMenu;
 
-struct Entry_func_80441EB0_de;
+struct EntryPakCreateMenuFromParameters;
 
 struct func_8043FFAC_S2;
 typedef struct func_8043FFAC_S2 func_8043FFAC_S2;
@@ -175,7 +175,7 @@ struct OwnerRecAt4;
 struct func_8043FFAC_S5;
 typedef struct func_8043FFAC_S5 func_8043FFAC_S5;
 
-struct Object_func_804420B4_de;
+struct ObjectPakDrawMenuCharacter;
 
 
 typedef struct CMenu_t Node_Pak_CountLiveNodes;

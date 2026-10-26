@@ -9,7 +9,7 @@
 #include "GFX/TEXT/802A8A94_5.H"
 
 /* Chooses a text style, updates its colours and scale, then draws the text. */
-/* The values func_8043FE3C_de loads by address:
+/* The values Pak_DrawStyledMenuText loads by address:
  * 0x800E2490 = 1.25 (float, D_800E2490 in this cartridge's tables)
  * 0x800E2494 = 0.9 (float, unnamed in this cartridge's tables)
  * 0x800E2498 = 0.25 (float, D_800E2498 in this cartridge's tables)
@@ -45,7 +45,7 @@ void OnScreen_SetupFillMode(void);
 
 /* unable to generate initializer: unknown type */
 
-void func_8043FE3C_de(func_80254D70_S2 *arg0, func_8043FFAC_S5 *entry, s32 arg2, func_8043FFAC_S2 *arg3, void *arg4, s32 arg5) {
+void Pak_DrawStyledMenuText(func_80254D70_S2 *arg0, func_8043FFAC_S5 *entry, s32 arg2, func_8043FFAC_S2 *arg3, void *arg4, s32 arg5) {
     f32 var_f1;
     s32 temp_f3;
     s32 temp_f3_2;
@@ -169,7 +169,7 @@ block_5:
     OnScreen_DrawText(arg4, entry->unk14, entry->unk1C, (s32) (arg3->alpha * (arg3->fade * 255.0f)), 0, (s32) var_s5, 1.0f, 1.0f);
 }
 
-void func_804402DC_de(MenuOption *arg0, MenuOptionBox *box, s32 dir, MenuOptionFade *arg3) {
+void Pak_DrawMenuOptionSprite(MenuOption *arg0, MenuOptionBox *box, s32 dir, MenuOptionFade *arg3) {
     s32 var_v1;
     f32 right;
     f32 bottom;

@@ -14,7 +14,7 @@ unsigned int D_src_afbf569b[63] = {
     0x56472F00, 0x00000002, 0x40E66666, 0x41000000, 0x3F666666, 0x3F800000, 0x01FFFFC8, 0xFFFFC800,
     0x00000001, 0x41019999, 0x41200000, 0x3F2CCCCC, 0x3F800000, 0x02FFFFC8, 0x56472F00,
 };
-MenuBoxCorner D_800E1F20[8] = {
+MenuBoxCorner g_menuBoxCorners[8] = {
     { -1, -1, 0, 0, 0, 0 },
     { 1, -1, 0, 0, 0, 0 },
     { 1, 1, 0, 0, 0, 0 },
@@ -51,7 +51,7 @@ unsigned int D_src_afbf569b[63] = {
 #if defined(VERSION_US)
 extern char D_800E0C14_us[];
 extern char D_800E0CB0_us[];
-MenuBoxCorner D_800E1F20[8] = {
+MenuBoxCorner g_menuBoxCorners[8] = {
     { -1, -1, 0, 0, 0, 0 },
     { 1, -1, 0, 0, 0, 0 },
     { 1, 1, 0, 0, 0, 0 },
@@ -101,7 +101,7 @@ unsigned int data_unresolved_800ED7C0[189] = {
     0x40C00000, 0x41000000, 0x3F400000, 0x3F800000, 0x01FFFFC8, 0xFFFFC800, 0x00000001, 0x40D80000,
     0x41200000, 0x3F100000, 0x3F800000, 0x02FFFFC8, 0x56472F00,
 };
-MenuBoxCorner D_800E1F20[8] = {
+MenuBoxCorner g_menuBoxCorners[8] = {
     { -1, -1, 0, 0, 0, 0 },
     { 1, -1, 0, 0, 0, 0 },
     { 1, 1, 0, 0, 0, 0 },
@@ -153,7 +153,7 @@ unsigned int data_unresolved_800F25E0[189] = {
     0x40C00000, 0x41000000, 0x3F400000, 0x3F800000, 0x01FFFFC8, 0xFFFFC800, 0x00000001, 0x40D80000,
     0x41200000, 0x3F100000, 0x3F800000, 0x02FFFFC8, 0x56472F00,
 };
-MenuBoxCorner D_800E1F20[8] = {
+MenuBoxCorner g_menuBoxCorners[8] = {
     { -1, -1, 0, 0, 0, 0 },
     { 1, -1, 0, 0, 0, 0 },
     { 1, 1, 0, 0, 0, 0 },

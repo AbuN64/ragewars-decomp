@@ -141,10 +141,10 @@ void Frontend_ConfigureImageConversion(ImageDescriptor *destination, ImageDescri
     g_sourcePixelOffset=0;
     g_destinationColorIndex=0;
     g_sourceColorIndex=0;
-    D_80153D58=0;
+    g_conversionDestinationImage=0;
     g_conversionSourceImage=0;
     if(destination) {
-        D_80153D58=(void *)destination;
+        g_conversionDestinationImage=(void *)destination;
         dst=D_800E2B20[destination->format];
         g_destinationPixelFormat=dst;
         if(dst.flags) g_destinationColorBuffer=destination->pixels;

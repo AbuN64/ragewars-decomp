@@ -57,7 +57,7 @@ extern void Tsmos_ActivateControllerState();
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
    flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
    through Frontend_RefreshTrialSelectionLabel and, by the mode byte at 0xD of D_801462C8, through Frontend_ShowTrialPreviewBanner and
-   func_80427B08_de unless the mode is 2 and Frontend_RefreshTrialCharacterPreview when it is 4; returns zero. */
+   Frontend_UpdateResultsHeading unless the mode is 2 and Frontend_RefreshTrialCharacterPreview when it is 4; returns zero. */
 
 
 
@@ -75,7 +75,7 @@ extern s32 Defs_TestBit(u8 *, s32);
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
    flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
    through Frontend_RefreshTrialSelectionLabel and, by the mode byte at 0xD of D_801462C8, through Frontend_ShowTrialPreviewBanner and
-   func_80427B08_de unless the mode is 2 and Frontend_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
+   Frontend_UpdateResultsHeading unless the mode is 2 and Frontend_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
 
 
 
@@ -88,7 +88,7 @@ extern s32 Defs_TestBit(u8 *, s32);
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
    flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
    through Frontend_RefreshTrialSelectionLabel and, by the mode byte at 0xD of D_801462C8, through Frontend_ShowTrialPreviewBanner and
-   func_80427B08_de unless the mode is 2 and Frontend_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
+   Frontend_UpdateResultsHeading unless the mode is 2 and Frontend_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
 
 
 
@@ -101,7 +101,7 @@ extern s32 Defs_TestBit(u8 *, s32);
    plays sound 0xE7D, shades the old window 0x46 or 0xAA by whether the old slot is set in the
    flags at 0xA79, opens the successor's window (halfword at D_800E0646_de) under arg0, refreshes
    through Frontend_RefreshTrialSelectionLabel and, by the mode byte at 0xD of D_801462C8, through Frontend_ShowTrialPreviewBanner and
-   func_80427B08_de unless the mode is 2 and Frontend_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
+   Frontend_UpdateResultsHeading unless the mode is 2 and Frontend_RefreshTrialCharacterPreview when it is 4; returns zero. Adapted from func_80428850_de with the successor word changed. */
 
 
 
@@ -215,7 +215,7 @@ s32 func_80428850_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     if (options[0xD] != 2) {
         Frontend_ShowTrialPreviewBanner();
         D_800E4690->frames = 0;
-        func_80427B08_de();
+        Frontend_UpdateResultsHeading();
     }
     if (options[0xD] == 4) {
         Frontend_RefreshTrialCharacterPreview();
@@ -253,7 +253,7 @@ s32 func_804289B4_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     if (options[0xD] != 2) {
         Frontend_ShowTrialPreviewBanner();
         D_800E4690->frames = 0;
-        func_80427B08_de();
+        Frontend_UpdateResultsHeading();
     }
     if (options[0xD] == 4) {
         Frontend_RefreshTrialCharacterPreview();
@@ -291,7 +291,7 @@ s32 func_80428B18_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     if (options[0xD] != 2) {
         Frontend_ShowTrialPreviewBanner();
         D_800E4690->frames = 0;
-        func_80427B08_de();
+        Frontend_UpdateResultsHeading();
     }
     if (options[0xD] == 4) {
         Frontend_RefreshTrialCharacterPreview();
@@ -329,7 +329,7 @@ s32 func_80428C7C_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     if (options[0xD] != 2) {
         Frontend_ShowTrialPreviewBanner();
         D_800E4690->frames = 0;
-        func_80427B08_de();
+        Frontend_UpdateResultsHeading();
     }
     if (options[0xD] == 4) {
         Frontend_RefreshTrialCharacterPreview();

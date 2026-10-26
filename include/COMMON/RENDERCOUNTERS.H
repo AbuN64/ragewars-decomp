@@ -4,7 +4,7 @@
 /* The session clock and round counters at D_801468A0. */
 typedef struct CGameStatus_t {
     f32 m_GameTimeFifteenth, m_GameTimeSeconds, m_GameTimeMinutes, m_GameTimeHours; /* +0..+C: SetN64_AdvanceGameClock */
-    f32 m_GameOverTimer; /* +0x10: func_8043EE24_de counts it down by D_800D2988 */
+    f32 m_GameOverTimer; /* +0x10: Multi_DecreaseGameOverTimer counts it down by D_800D2988 */
     f32 timeLimit;
     s32 mode;
     s32 elapsed;

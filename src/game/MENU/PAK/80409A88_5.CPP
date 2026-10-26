@@ -266,7 +266,7 @@ s32 Pak_FindNextAvailableChannel(s32 currentChannel) {
 /* The EU builds compile a different original body for Pak_UpdateManagerChannelLabel; each version keeps its own. */
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 /* Shows D_800D3728 in a field when both D_8014D4EC_de and D_8014D4C0_de are set, D_800D372C when only D_8014D4C0_de is, and otherwise, when D_8015375C is set, points the field at D_800D3764 and formats D_800E28C8 plus one into it with D_800DCD7C one byte before the length Pak_CountLineChars reports, returning zero.
-   Adapted from func_8044488C_de with the three flag tests, the texts, the format, the offset and the incremented value changed. */
+   Adapted from Items_FormatPackedGameOption with the three flag tests, the texts, the format, the offset and the incremented value changed. */
 
 
 extern s32 D_8015375C;

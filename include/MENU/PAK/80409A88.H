@@ -2,24 +2,24 @@
 #define MENU_PAK_80409A88_H
 #include "MENU/ITEMRECAT24.H"
 
-extern void func_8040AB18_de(void);
-extern void func_8040B3A8_de(void);
-extern void func_8040AC04_de(void);
-extern void func_8040B3C4_de(void);
-extern void func_8040AAB8_de(void);
-extern void func_8040AADC_de(void);
-extern void func_8040ABF0_de(void);
-extern void func_8040AAF0_de(void);
-extern void func_8040ABBC_de(void);
-extern int func_8040AA4C_de(int unused, ItemRecAt24 *item);
-extern void func_8040AB40_de(void);
-extern void func_8040AB2C_de(void);
-extern void func_8040AC40_de(void);
-extern void func_8040AB04_de(void);
-extern void func_8040AB54_de(struct RecordRecAtCV3 *record);
-extern void func_8040AAC8_de(void);
-extern void func_8040ABA0_de(void);
-extern void func_8040ABDC_de(void);
-extern void func_8040AC2C_de(void);
-extern void func_8040AC18_de(void);
+extern void Pak_SelectPromptKindFive(void);
+extern void Pak_EnableOperationHeading(void);
+extern void Pak_SelectPromptKindTwelve(void);
+extern void Pak_DisableOperationHeading(void);
+extern void Pak_SelectPromptKindZero(void);
+extern void Pak_SelectPromptKindTwo(void);
+extern void Pak_SelectPromptKindEleven(void);
+extern void Pak_SelectPromptKindThree(void);
+extern void Pak_SelectPromptKindNinePending(void);
+extern int Pak_OpenProfileActionPrompt(int unused, ItemRecAt24 *item);
+extern void Pak_SelectPromptKindSeven(void);
+extern void Pak_SelectPromptKindSix(void);
+extern void Pak_SelectPromptKindFifteen(void);
+extern void Pak_SelectPromptKindFour(void);
+extern void Pak_SelectPromptKindEight(struct RecordRecAtCV3 *record);
+extern void Pak_SelectPromptKindOne(void);
+extern void Pak_SelectPromptKindNine(void);
+extern void Pak_SelectPromptKindTen(void);
+extern void Pak_SelectPromptKindFourteen(void);
+extern void Pak_SelectPromptKindThirteen(void);
 #endif

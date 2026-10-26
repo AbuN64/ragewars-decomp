@@ -6,7 +6,7 @@
 extern s32 D_8013B2BC;
 extern s32 func_802B2378(s32);
 
-void func_80444440_eu_x(void) {
+void Items_PrepareMenuReturnEuX(void) {
     D_801540F4 = func_802B2378(D_8013B2BC);
     D_801540F0 = 1;
 }

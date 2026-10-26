@@ -7,7 +7,7 @@
 #include "FRONTEND/8040B45C_22.H"
 #include "SYSTEM_3/80265370.H"
 
-/* Replaces the option halfword D_801462DC with what Pak_AdjustValue returns for the second argument,
+/* Replaces the option halfword g_gamePackedOptions with what Pak_AdjustValue returns for the second argument,
    that halfword, 0x10, 0, 0x100 and 0, then stores its low byte in the byte after it, or 0xFF when
    the value is 0xFF or more. Returns zero. */
 
@@ -49,7 +49,7 @@ extern char *D_800DDC28;
 extern s32 Pak_CountLineChars(struct Field *);
 
 
-/* Replaces the byte at offset 0x7A of the second argument's owner settings (or the defaults D_80146302) with what Pak_AdjustValue returns for the second argument, that byte, 8, 8, 0xF8 and 0, and returns zero. Adapted from func_80444988_de with the settings byte 0x7A changed. */
+/* Replaces the byte at offset 0x7A of the second argument's owner settings (or the defaults D_80146302) with what Pak_AdjustValue returns for the second argument, that byte, 8, 8, 0xF8 and 0, and returns zero. Adapted from Items_AdjustPlayerOption79 with the settings byte 0x7A changed. */
 
 
 
@@ -67,7 +67,7 @@ extern char *D_800DDC40;
 #else
 #endif
 
-/* Points a field's text at D_800D7634 when the byte at offset 0x82 of the settings the second argument's owner holds, or of the defaults D_80146302 without an owner, is one, and at D_800D7638 otherwise, returning zero. Adapted from Pak_UpdateOwnerModeText with the settings lookup of func_80444C34_de and the texts D_800D7634 and D_800D7638 changed, and a zero result local declared first to give the owner and settings pointers the cartridge's registers. */
+/* Points a field's text at D_800D7634 when the byte at offset 0x82 of the settings the second argument's owner holds, or of the defaults D_80146302 without an owner, is one, and at D_800D7638 otherwise, returning zero. Adapted from Pak_UpdateOwnerModeText with the settings lookup of Items_TogglePlayerFlag82 and the texts D_800D7634 and D_800D7638 changed, and a zero result local declared first to give the owner and settings pointers the cartridge's registers. */
 
 
 
@@ -104,8 +104,8 @@ extern s32 Frontend_GetScreenModePalette();
 
 
 
-s32 func_80444920_de(void *first, void *second) {
-    u16 *option = &D_801462DC;
+s32 Items_AdjustPackedGameOption(void *first, void *second) {
+    u16 *option = &g_gamePackedOptions;
     u8 limited;
 
     *option = Pak_AdjustValue(second, *option, 0x10, 0, 0x100, 0);
@@ -117,7 +117,7 @@ s32 func_80444920_de(void *first, void *second) {
     return 0;
 }
 
-s32 func_80444988_de(void *first, struct ActorRecAt1C *holder) {
+s32 Items_AdjustPlayerOption79(void *first, struct ActorRecAt1C *holder) {
     struct PlayerOptions *settings = &D_80146302;
 
     if (holder->owner != 0 && holder->owner->settings != 0) {
@@ -127,7 +127,7 @@ s32 func_80444988_de(void *first, struct ActorRecAt1C *holder) {
     return 0;
 }
 
-s32 func_804449EC_de(struct Field *field, struct ActorRecAt1C *holder) {
+s32 Items_FormatPlayerOption79Step(struct Field *field, struct ActorRecAt1C *holder) {
     struct PlayerOptions *settings = &D_80146302;
     s32 step;
     char *text;
@@ -178,7 +178,7 @@ field->text[D_801462C8.language]
     return 0;
 }
 
-s32 func_80444AB8_de(void *first, struct ActorRecAt1C *holder) {
+s32 Items_AdjustPlayerOption7A(void *first, struct ActorRecAt1C *holder) {
     struct PlayerOptions *settings = &D_80146302;
 
     if (holder->owner != 0 && holder->owner->settings != 0) {
@@ -188,7 +188,7 @@ s32 func_80444AB8_de(void *first, struct ActorRecAt1C *holder) {
     return 0;
 }
 
-s32 func_80444B1C_de(struct Field *field, struct ActorRecAt1C *holder) {
+s32 Items_FormatPlayerOption7AStep(struct Field *field, struct ActorRecAt1C *holder) {
     struct PlayerOptions *settings = &D_80146302;
     s32 step;
     char *text;
@@ -239,7 +239,7 @@ field->text[D_801462C8.language]
     return 0;
 }
 
-s32 func_80444BE8_de(struct FieldRecAt14 *field, struct ActorRecAt1C *holder) {
+s32 Items_SelectPlayerFlag82Text(struct FieldRecAt14 *field, struct ActorRecAt1C *holder) {
     s32 result = 0;
     struct PlayerOptions *settings = &D_80146302;
 
@@ -254,7 +254,7 @@ s32 func_80444BE8_de(struct FieldRecAt14 *field, struct ActorRecAt1C *holder) {
     return result;
 }
 
-s32 func_80444C34_de(void *unused, struct ActorRecAt1C *holder) {
+s32 Items_TogglePlayerFlag82(void *unused, struct ActorRecAt1C *holder) {
     struct PlayerOptions *settings = &D_80146302;
 
     if (holder->owner != 0) {
@@ -268,7 +268,7 @@ s32 func_80444C34_de(void *unused, struct ActorRecAt1C *holder) {
     return 0;
 }
 
-s32 func_80444C68_de(struct RecordRecAt14 *record) {
+s32 Items_UpdateScreenModeMenuItem(struct RecordRecAt14 *record) {
     D_80154100 -= D_800D2988;
     if (D_80154100 <= 0.0f) {
         D_80154100 = 0.0f;
@@ -282,7 +282,7 @@ s32 func_80444C68_de(struct RecordRecAt14 *record) {
     return 0;
 }
 
-s32 func_80444CF8_de(void) {
+s32 Items_RequestScreenModeFade(void) {
     if (D_80154100 == 0.0f) {
         Frontend_StartScreenModeFade();
         D_80154100 = (18.0f);

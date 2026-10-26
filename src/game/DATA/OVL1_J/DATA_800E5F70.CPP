@@ -1,7 +1,7 @@
 #include "MENU/MENU_BOX.H"
 
 #if defined(VERSION_US_REV1)
-MenuBoxCorner D_800E1F20[8] = {
+MenuBoxCorner g_menuBoxCorners[8] = {
     { -1, -1, 0, 0, 0, 0 },
     { 1, -1, 0, 0, 0, 0 },
     { 1, 1, 0, 0, 0, 0 },

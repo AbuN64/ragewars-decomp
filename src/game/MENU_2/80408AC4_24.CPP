@@ -33,7 +33,7 @@ extern void Frontend_InitMenuImage(Shared_OptionsScreen *, s32, s32, s32, s32);
 extern void Frontend_StartMenuImageTransition(Shared_OptionsScreen *);
 /* German Menu_OpenOptionsScreen: the same options screen without the first (language) list; the
    widget resource ids are 6..0x14 lower and settings is first taken after the memory-mode labels. */
-s32 func_804224E0_de(void *node) {
+s32 Menu_OpenGameOptionsScreen(void *node) {
     Shared_Game *settings;
     MenuWidget *handle;
     MenuWidget *marker;

@@ -45,12 +45,12 @@ void Items_WriteBoundValue(ItemRecAt14 *item,float value) {
 /* Calls func_8024B990_de with its three arguments and the table D_800D0EF8 as the fourth. */
 extern void func_8024B990_de(void *, void *, void *, void *);
 
-void func_80443104_de(void *first, void *second, void *third) {
+void Items_DrawActorWithMenuLighting(void *first, void *second, void *third) {
     func_8024B990_de(first, second, third, &D_800D0EF8);
 }
 
-extern void func_8024A1D0_de(Object_func_80443128_de *, void *, void *);
-void func_80443128_de(Object_func_80443128_de *object, void *context, void *lookup) {
+extern void func_8024A1D0_de(ObjectItemsDrawActorWithRedMenuEffect *, void *, void *);
+void Items_DrawActorWithRedMenuEffect(ObjectItemsDrawActorWithRedMenuEffect *object, void *context, void *lookup) {
  D_800D15E0=3;
  object->view[D_800D297C]=D_800D0EF8;
  D_800D15E4[0]=(255.0f);

@@ -35,7 +35,7 @@ s32 Frontend_ConfirmEquipmentSelection(void *unused0, void *unused1, s32 arg2) {
         { void *panel = settings; settings = (u8 *)g_playerSettings; Frontend_SetPreviewTransformUpdate(panel, 0); }
         if (Frontend_CountActiveEquipmentPanels() != 0) return 0;
         {
-            func_8043B854_de();
+            Frontend_ApplySelectedPlayerLoadouts();
             screen = D_800E59E0;
             screen->state = 5;
             screen->next = 4;

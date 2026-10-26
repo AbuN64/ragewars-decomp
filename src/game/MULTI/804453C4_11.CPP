@@ -24,9 +24,9 @@ extern TextEntryRecAtC D_800E63C0[];
 
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern void func_80442384_de(s32,EntryRecAt1C *,s32), Items_CopyDefaultLocalizedPlayerName(void *);
+extern void Pak_TryCreateMenu(s32,EntryRecAt1C *,s32), Items_CopyDefaultLocalizedPlayerName(void *);
 #else
-extern void func_80442384_de(s32,EntryRecAt1C *,s32), Items_SetDefaultPlayerName(void *);
+extern void Pak_TryCreateMenu(s32,EntryRecAt1C *,s32), Items_SetDefaultPlayerName(void *);
 #endif
 
 extern s32 Player_GetPlayerIndex(void *table, void *player);
@@ -89,7 +89,7 @@ Items_SetDefaultPlayerName
 #endif
 (temp_s1->unk5D8);
     }
-    func_80442384_de(arg0, arg1, arg2);
+    Pak_TryCreateMenu(arg0, arg1, arg2);
     return 1;
 }
 

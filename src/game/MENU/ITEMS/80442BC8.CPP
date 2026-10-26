@@ -23,7 +23,7 @@
 
 
 
-static inline void remove_item(struct List_func_80442A60_de *list, struct ItemRecAt20V2 *item) {
+static inline void remove_item(struct ListPakClearMenuItemList *list, struct ItemRecAt20V2 *item) {
     struct StateRecAtBCV2 *state;
 
     if (item->handlers->callback != 0) {
@@ -70,7 +70,7 @@ void *Pak_GetListContext(s8 *member) {
     return member - 0x554;
 }
 
-void func_80442A60_de(struct List_func_80442A60_de *list) {
+void Pak_ClearMenuItemList(struct ListPakClearMenuItemList *list) {
     struct ItemRecAt20V2 *item;
 
 loop:
@@ -81,7 +81,7 @@ loop:
     }
 }
 
-void func_80442ADC_de(struct ObjectRecAt14 *object, f32 scale) {
+void Pak_MeasureMenuItemText(struct ObjectRecAt14 *object, f32 scale) {
     void *target;
 
     if (object->kind == 5) {
@@ -139,7 +139,7 @@ void Pak_StepSpriteFrame(struct Object1C8 *object) {
    returned as they are and the rest as 0x2F less the value. */
 
 
-s32 func_80442B88_de(struct ObjectRecAt1C8 *object) {
+s32 Pak_GetMirroredMenuFrame(struct ObjectRecAt1C8 *object) {
     s32 count = object->count;
 
     if (count < 0x18) {
@@ -148,7 +148,7 @@ s32 func_80442B88_de(struct ObjectRecAt1C8 *object) {
     return 0x2F - count;
 }
 
-void func_80442BA8_de(MenuSpriteElement *e) {
+void Pak_DrawAnimatedMenuSprite(MenuSpriteElement *e) {
     s32 frame;
     Gfx *gfx;
     Shared_HudView *o;
@@ -176,7 +176,7 @@ void func_80442BA8_de(MenuSpriteElement *e) {
 }
 
 /* Returns 0x480 when the halfword a record starts with is 3, otherwise zero. */
-s32 func_80442CD8_de(s16 *record) {
+s32 Pak_GetMenuItemExtraSize(s16 *record) {
     if (*record == 3) {
         return 0x480;
     }
@@ -187,7 +187,7 @@ s32 func_80442CD8_de(s16 *record) {
    is 3. */
 
 
-void func_80442CF4_de(s16 *record, struct ObjectRecAt478 *object) {
+void Pak_EnableMenuItemExtra(s16 *record, struct ObjectRecAt478 *object) {
     if (*record == 3) {
         object->flag = 1;
     }
@@ -199,7 +199,7 @@ void func_80442CF4_de(s16 *record, struct ObjectRecAt478 *object) {
 
 
 
-void func_80442D10_de(CMenuItem *w, WidgetDescriptor *d, char **arena, int id, int arg) {
+void Pak_InitMenuItemFromDescriptor(CMenuItem *w, WidgetDescriptor *d, char **arena, int id, int arg) {
  int size; char *extra;
  w->id=id; w->type=d->type; w->flags=d->flags|0x1800000;
  w->x=d->x; w->y=d->y; w->r=d->r; w->g=d->g; w->b=d->b; w->a=d->a;
@@ -213,9 +213,9 @@ void func_80442D10_de(CMenuItem *w, WidgetDescriptor *d, char **arena, int id, i
  }
 }
 
-void *Pak_GetWidgetStyle(ObjRecAt8V4 *arg0) {
+void *Pak_GetWidgetStyle(ObjRecAt8V4 *widget) {
  s32 index=0;
- switch(arg0->flags & 0x3fe0) {
+ switch(widget->flags & 0x3fe0) {
  case 0x20: break;
  case 0x40: index=1; break;
  case 0x80: index=2; break;

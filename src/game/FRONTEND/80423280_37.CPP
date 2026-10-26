@@ -140,7 +140,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
         break;
     }
     if (D_801462D0.mode != 2) {
-        func_80427B08_de();
+        Frontend_UpdateResultsHeading();
     }
     SoundElement_PlayFlatSound(0xE78);
     return 0;

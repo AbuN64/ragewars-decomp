@@ -6,7 +6,7 @@ struct ItemRecAt14 {
     char pad[20];
     struct Binding *binding;
 };
-struct Object_func_80443128_de {
+struct ObjectItemsDrawActorWithRedMenuEffect {
     char pad[0x140];
     Shared_ParticleLighting view[1];
 };

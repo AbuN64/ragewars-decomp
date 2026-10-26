@@ -80,6 +80,6 @@ typedef struct ModeRecAt8 ModeRecAt8;
 
 struct Shared_PakMenu;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 func_8040B444_de(struct LayeredText *field, struct Shared_PakMenu *holder);
+s32 Pak_FormatOperationChannelLabel(struct LayeredText *field, struct Shared_PakMenu *holder);
 #endif
 #endif

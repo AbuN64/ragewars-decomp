@@ -13,7 +13,7 @@ extern void SmpSlider_SetSliderItem(); extern void *SmpFlicker_CreateFlickerWidg
 extern char *D_auto_800DDB08[];
 /* Builds the options page (0x28-byte state g_optionsPage): title, the three toggle rows (ids 0x53/0x56/0x58) labelled in the
    current language and set from the option bytes 0x1B, 0x1F and 0x580 of D_801462C8, the volume bar 0x5A and its list. Returns 0. */
-s32 func_804229E0_eu_x(void *window) {
+s32 Menu_CreateLocalizedSettingsPage(void *window) {
     u8 lang = D_801462C8.language;
     g_optionsPage = Cache_AllocateMemory(0x28);
     g_optionsPage->title = SmpFade_CreateFadeWidget(0x4F, 0x50);
@@ -46,6 +46,6 @@ s32 func_804229E0_eu_x(void *window) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_804229E0_eu_x);
+INCLUDE_ASM("ovl_80400000", Menu_CreateLocalizedSettingsPage);
 #endif
 #endif

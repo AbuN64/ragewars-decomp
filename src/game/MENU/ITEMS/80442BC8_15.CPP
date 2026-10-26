@@ -50,20 +50,20 @@ s32 func_8044345C_de(void) {
 }
 
 /* Calls func_8025E384_de and passes what func_8025CC6C_de returns to func_8025CB0C_de; then, when D_801540F0
-   is set, calls func_80442384_de with the three arguments, otherwise func_8026495C_de. Returns one. */
+   is set, calls Pak_TryCreateMenu with the three arguments, otherwise func_8026495C_de. Returns one. */
 extern s32 func_8025CC6C_de();
 struct SoundVoicePool;
 extern void func_8025CB0C_de(struct SoundVoicePool *);
-extern void func_80442384_de(void *, void *, void *);
+extern void Pak_TryCreateMenu(void *, void *, void *);
 
-s32 func_80443464_de(void *first, void *second, void *third) {
+s32 Items_RestoreControlsOrCreateMenu(void *first, void *second, void *third) {
     func_8025E384_de();
     func_8025CB0C_de(func_8025CC6C_de());
     if (D_801540F0 == 0) {
         Control_RestoreControllerSetup();
         return 1;
     }
-    func_80442384_de(first, second, third);
+    Pak_TryCreateMenu(first, second, third);
     return 1;
 }
 

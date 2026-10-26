@@ -74,17 +74,17 @@ struct StateRecAtBCV2 {
     s32 c;
 };
 
-struct Handlers_func_804431E4_de;
-struct Handlers_func_804431E4_de {
+struct HandlersItemsInvokeHandlerAndClearItemState;
+struct HandlersItemsInvokeHandlerAndClearItemState {
     char pad[0xC];
     void (*callback)();
 };
-struct Handlers_func_804431E4_de;
+struct HandlersItemsInvokeHandlerAndClearItemState;
 struct ObjectRecAt20;
 struct StateRecAtBCV2;
 struct ObjectRecAt20 {
     char pad[0x14];
-    struct Handlers_func_804431E4_de *handlers;
+    struct HandlersItemsInvokeHandlerAndClearItemState *handlers;
     char pad18[0x20 - 0x18];
     struct StateRecAtBCV2 *state;
 };
@@ -154,8 +154,8 @@ typedef struct ObjRecAt8V4 ObjRecAt8V4;
 
 
 struct ItemRecAt20V2;
-struct List_func_80442A60_de;
-struct List_func_80442A60_de {
+struct ListPakClearMenuItemList;
+struct ListPakClearMenuItemList {
     struct ItemRecAt20V2 *head;
 };
 

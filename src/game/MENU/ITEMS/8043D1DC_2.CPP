@@ -3,7 +3,7 @@
 #if !(defined(VERSION_US_REV1))
 /* Maps the state number D_80154034 (0 to 10) to a fixed value through a jump table; anything else gives 1000. */
 extern u32 D_80154034;
-s32 func_8043D1DC_de(void) {
+s32 Level_GetSelectedResourceIdGerman(void) {
     switch (D_80154034) {
     case 0:
     default:

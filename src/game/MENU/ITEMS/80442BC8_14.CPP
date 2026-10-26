@@ -12,7 +12,7 @@ extern s32 func_802B2378(s32);
 extern s32 func_802AD2A8(s32);
 #endif
 
-void func_804433F8_de(void) {
+void Items_PrepareControllerReturn(void) {
     D_801540F4 = 
 #if defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
 func_802B2378

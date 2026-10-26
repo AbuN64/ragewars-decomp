@@ -17,7 +17,7 @@ void func_8043F040_de(void) {
 
 
 /* Reports whether an item is available to the player: indices 0-2 and 3-5 of type 0x10FE are checked against the player's two counts, type 0x1194 against its flag table. */
-s32 func_8043F048_de(struct ItemRecAt18V2 *item, struct Holder_func_8043F048_de *holder) {
+s32 Multi_IsPlayerItemAvailable(struct ItemRecAt18V2 *item, struct HolderMultiIsPlayerItemAvailable *holder) {
     struct ItemDef *def = item->def;
     s32 type = def->type;
     s32 index = def->index;
@@ -49,11 +49,11 @@ s32 func_8043F048_de(struct ItemRecAt18V2 *item, struct Holder_func_8043F048_de 
     return result;
 }
 
-/* Calls func_8025E384_de and then returns what func_80442384_de gives for the same three arguments. */
+/* Calls func_8025E384_de and then returns what Pak_TryCreateMenu gives for the same three arguments. */
 extern void func_8025E384_de();
-extern s32 func_80442384_de(void *, void *, void *);
+extern s32 Pak_TryCreateMenu(void *, void *, void *);
 
-s32 func_8043F0C8_de(void *first, void *second, void *third) {
+s32 Multi_CreateMenuWithDefaultMusicGain(void *first, void *second, void *third) {
     func_8025E384_de();
-    return func_80442384_de(first, second, third);
+    return Pak_TryCreateMenu(first, second, third);
 }

@@ -19,7 +19,7 @@ extern struct SharedRecAt148 D_80142622[];
 
 
 
-void Ovlgame_SelectConfirmingController(func_80250BD4_S1 *arg0) {
+void Ovlgame_SelectConfirmingController(func_80250BD4_S1 *menuOwner) {
     Shared_func_8043DEDC_S3 *settings;
     s8 *status;
     s32 *profile;
@@ -38,7 +38,7 @@ void Ovlgame_SelectConfirmingController(func_80250BD4_S1 *arg0) {
         if (Control_IsAButtonPressed(profile) != 0) {
             settings->unk78 = 1;
             settings->unk7F = i;
-            arg0->unk20 = profile;
+            menuOwner->unk20 = profile;
             break;
         }
     }

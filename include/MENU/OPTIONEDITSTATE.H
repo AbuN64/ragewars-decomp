@@ -5,8 +5,8 @@
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "COMMON/SHAREDPLAYER.H"
 
-struct Options_func_80444D50_de;
-struct Options_func_80444D50_de {
+struct OptionsPakAdjustPackedButtonOption;
+struct OptionsPakAdjustPackedButtonOption {
     s32 flags;
     s32 pad4[3];
     s32 value;

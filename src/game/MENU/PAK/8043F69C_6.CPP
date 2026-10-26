@@ -81,11 +81,11 @@ f32 Pak_MeasureLine(u8 *p, f32 sx, f32 sy) {
     return total;
 }
 
-/* Returns whether func_80441EB0_de gives a non-zero answer for the third argument. */
-extern s32 func_80441EB0_de(void *);
+/* Returns whether Pak_CreateMenuFromParameters gives a non-zero answer for the third argument. */
+extern s32 Pak_CreateMenuFromParameters(void *);
 
-s32 func_80442384_de(void *first, void *second, void *third) {
-    return func_80441EB0_de(third) != 0;
+s32 Pak_TryCreateMenu(void *first, void *second, void *third) {
+    return Pak_CreateMenuFromParameters(third) != 0;
 }
 
 /* Returns zero. */
@@ -95,7 +95,7 @@ s32 func_804423A4_de(void) {
 
 /* Returns the word at offset 0x1C of the object that offset 0x14 of a record points to. */
 
-s32 func_804423AC_de(struct Outer *outer) {
+s32 Pak_GetInnerMenuLock(struct Outer *outer) {
     return outer->inner->locked;
 }
 
@@ -152,7 +152,7 @@ s32 Pak_StepValue(func_8022A404_S1 *menu, s32 value, s32 step, s32 minimum, s32 
 }
 
 
-void func_80442544_de(void *object) {
+void Pak_InitMenuMessageList(void *object) {
     func_80255CA0_de(object, 0x1D0, 0x1D4);
     ((MessageList *)object)->rotation = 0;
 }
@@ -197,7 +197,7 @@ void *Pak_OpenDialog(void *parent, struct Dialog *list, s32 player, s32 controll
 extern char g_menuText[];
 extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
-void *func_80442690_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *params, struct Dialog *list) {
+void *Pak_CreateMenuFromTemplate(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *params, struct Dialog *list) {
     s32 a = params->a;
     s32 b = params->b;
     s32 c = params->c;
@@ -230,7 +230,7 @@ void *func_80442690_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *p
     return first;
 }
 
-/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Pak_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_80442690_de with the first parameter read from offset 0x14 instead of 0x18. */
+/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Pak_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_CreateMenuFromTemplate with the first parameter read from offset 0x14 instead of 0x18. */
 extern char g_menuText[];
 extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
@@ -301,7 +301,7 @@ void Pak_UpdateDialogList(MessageList *list) {
     }
 }
 
-void func_804429D4_de(struct OwnerRecAt4 *owner) {
+void Pak_DispatchMenuListCallback(struct OwnerRecAt4 *owner) {
     struct NodeRecAt1D0 *node = owner->head;
 
     while (node != 0) {

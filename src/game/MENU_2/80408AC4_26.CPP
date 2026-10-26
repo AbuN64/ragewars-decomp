@@ -16,7 +16,7 @@ extern void *SmpSlider_CreateSliderWidget(s32, s32, s32);
 extern void SmpSlider_SetSliderItem(void *, s32);
 extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
 /* Builds the options page g_optionsPage (0x28 bytes) from resources 0x4D to 0x58 and wires its widgets to the settings in D_801462C8; returns zero. */
-s32 func_804230E0_de(void) {
+s32 Menu_CreateSettingsPage(void) {
     g_optionsPage = (s32 *)Cache_AllocateMemory(0x28);
     g_optionsPage[0] = (s32)SmpFade_CreateFadeWidget(0x4D, 0x4E);
     SmpButton_WrapButtonWidget(0x57);
@@ -41,7 +41,7 @@ s32 func_804230E0_de(void) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_804230E0_de);
+INCLUDE_ASM("ovl_80400000", Menu_CreateSettingsPage);
 #endif
 #endif
 

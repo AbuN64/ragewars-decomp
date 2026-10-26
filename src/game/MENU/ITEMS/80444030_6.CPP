@@ -32,7 +32,7 @@ extern char D_8010B0E0;
 
 
 
-/* Replaces the signed byte at offset 0x7B of the second argument's owner settings (or the defaults D_80146302) with what Pak_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, returning zero. Adapted from func_80444610_de with the settings byte made the signed byte at 0x7B. */
+/* Replaces the signed byte at offset 0x7B of the second argument's owner settings (or the defaults D_80146302) with what Pak_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, returning zero. Adapted from Items_AdjustPlayerOption7E with the settings byte made the signed byte at 0x7B. */
 
 
 
@@ -44,7 +44,7 @@ extern char D_8010B0E0;
 
 extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
 
-/* Points an option field at the text D_800D75E0 when the signed byte at offset 0x7B of the second argument's owner settings (or the defaults D_80146302) is zero and at D_800D75E4 when it is one, returning zero. Adapted from func_80444674_de with the settings byte made the signed byte at 0x7B and the texts changed. */
+/* Points an option field at the text D_800D75E0 when the signed byte at offset 0x7B of the second argument's owner settings (or the defaults D_80146302) is zero and at D_800D75E4 when it is one, returning zero. Adapted from Items_SelectPlayerOption7EText with the settings byte made the signed byte at 0x7B and the texts changed. */
 
 
 
@@ -68,7 +68,7 @@ extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 
 
-/* Points a field's text at D_800D75F0 when the byte at offset 0x7C of the settings the second argument's owner holds (or of the defaults D_80146302 without an owner or settings) is zero, at D_800D75EC when it is one, and leaves it otherwise, returning zero. Adapted from func_80444BE8_de with the settings pointer checked for null, the byte offset 0x7C, and a nested test over the texts D_800D75F0 and D_800D75EC changed. */
+/* Points a field's text at D_800D75F0 when the byte at offset 0x7C of the settings the second argument's owner holds (or of the defaults D_80146302 without an owner or settings) is zero, at D_800D75EC when it is one, and leaves it otherwise, returning zero. Adapted from Items_SelectPlayerFlag82Text with the settings pointer checked for null, the byte offset 0x7C, and a nested test over the texts D_800D75F0 and D_800D75EC changed. */
 
 
 
@@ -81,7 +81,7 @@ extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 
 
-/* Replaces the byte at offset 0x7D of the second argument's owner settings (or the defaults D_80146302) with what Pak_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, and returns zero. Adapted from func_80444488_de with the settings byte 0x7D changed. */
+/* Replaces the byte at offset 0x7D of the second argument's owner settings (or the defaults D_80146302) with what Pak_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, and returns zero. Adapted from Items_AdjustPlayerOption7C with the settings byte 0x7D changed. */
 
 
 
@@ -105,7 +105,7 @@ extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 
 
-/* Replaces the byte at offset 0x7E of the second argument's owner settings (or the defaults D_80146302) with what Pak_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, and returns zero. Adapted from func_80444488_de with the settings byte 0x7E changed. */
+/* Replaces the byte at offset 0x7E of the second argument's owner settings (or the defaults D_80146302) with what Pak_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, and returns zero. Adapted from Items_AdjustPlayerOption7C with the settings byte 0x7E changed. */
 
 
 
@@ -115,7 +115,7 @@ extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 
 
-/* Points an option field at the text D_800D7600 when the byte at offset 0x7E of the second argument's owner settings (or the defaults D_80146302) is zero and at D_800D75FC when it is one, returning zero. Adapted from func_804445AC_de with the settings byte 0x7E and the texts D_800D7600 and D_800D75FC changed. */
+/* Points an option field at the text D_800D7600 when the byte at offset 0x7E of the second argument's owner settings (or the defaults D_80146302) is zero and at D_800D75FC when it is one, returning zero. Adapted from Items_SelectPlayerOption7DText with the settings byte 0x7E and the texts D_800D7600 and D_800D75FC changed. */
 
 
 
@@ -144,11 +144,11 @@ extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
                                 /* extern */
 
 
-void func_804441E4_de(void) {
+void Items_ResetScreenModeFadeCooldown(void) {
     D_80154100 = 0;
 }
 
-char *func_804441F4_de(struct ActorRecAt1C *actor) {
+char *Items_GetPlayerSettingsText(struct ActorRecAt1C *actor) {
     char *name = D_80146302.text;
 
     if (actor->owner != 0 && actor->owner->settings != 0) {
@@ -157,7 +157,7 @@ char *func_804441F4_de(struct ActorRecAt1C *actor) {
     return name;
 }
 
-s32 func_8044421C_de(void) {
+s32 Items_CycleSceneMask(void) {
  if(((s32 (*)(char *))Control_IsLeftPressed)(&D_8010B0E0)) {
  switch(D_801462C8.sceneMask) {
  case 8: D_801462C8.sceneMask=32; break;
@@ -176,7 +176,7 @@ s32 func_8044421C_de(void) {
 }
 
 /* Sets bit 24 of the item's flags when D_80146878 is 8 (clears it otherwise) and points the item at the text table for the configuration D_801462D0 (8, 0x10 or 0x20); returns 0. */
-s32 func_80444314_de(MenuItemRecAt14 *item) {
+s32 Items_SelectSceneMaskText(MenuItemRecAt14 *item) {
     if (D_8011FAC0.mode == 8) {
         item->flags |= 0x01000000;
     } else {
@@ -196,7 +196,7 @@ s32 func_80444314_de(MenuItemRecAt14 *item) {
     return 0;
 }
 
-s32 func_804443C0_de(void *first, struct ActorRecAt1C *holder) {
+s32 Items_AdjustPlayerOption7B(void *first, struct ActorRecAt1C *holder) {
     struct PlayerOptions *settings = &D_80146302;
 
     if (holder->owner != 0 && holder->owner->settings != 0) {
@@ -206,7 +206,7 @@ s32 func_804443C0_de(void *first, struct ActorRecAt1C *holder) {
     return 0;
 }
 
-s32 func_80444424_de(struct Field *field, struct ActorRecAt1C *holder) {
+s32 Items_SelectPlayerOption7BText(struct Field *field, struct ActorRecAt1C *holder) {
     struct PlayerOptions *settings = &D_80146302;
 
     if (holder->owner != 0 && holder->owner->settings != 0) {
@@ -223,7 +223,7 @@ s32 func_80444424_de(struct Field *field, struct ActorRecAt1C *holder) {
     return 0;
 }
 
-s32 func_80444488_de(void *first, struct ActorRecAt1C *holder) {
+s32 Items_AdjustPlayerOption7C(void *first, struct ActorRecAt1C *holder) {
     struct PlayerOptions *settings = &D_80146302;
 
     if (holder->owner != 0 && holder->owner->settings != 0) {
@@ -233,7 +233,7 @@ s32 func_80444488_de(void *first, struct ActorRecAt1C *holder) {
     return 0;
 }
 
-s32 func_804444EC_de(struct FieldRecAt14 *field, struct ActorRecAt1C *holder) {
+s32 Items_SelectPlayerOption7CText(struct FieldRecAt14 *field, struct ActorRecAt1C *holder) {
     s32 result = 0;
     struct PlayerOptions *settings = &D_80146302;
 
@@ -250,7 +250,7 @@ s32 func_804444EC_de(struct FieldRecAt14 *field, struct ActorRecAt1C *holder) {
     return result;
 }
 
-s32 func_80444548_de(void *first, struct ActorRecAt1C *holder) {
+s32 Items_AdjustPlayerOption7D(void *first, struct ActorRecAt1C *holder) {
     struct PlayerOptions *settings = &D_80146302;
 
     if (holder->owner != 0 && holder->owner->settings != 0) {
@@ -260,7 +260,7 @@ s32 func_80444548_de(void *first, struct ActorRecAt1C *holder) {
     return 0;
 }
 
-s32 func_804445AC_de(struct Field *field, struct ActorRecAt1C *holder) {
+s32 Items_SelectPlayerOption7DText(struct Field *field, struct ActorRecAt1C *holder) {
     struct PlayerOptions *settings = &D_80146302;
 
     if (holder->owner != 0 && holder->owner->settings != 0) {
@@ -277,7 +277,7 @@ s32 func_804445AC_de(struct Field *field, struct ActorRecAt1C *holder) {
     return 0;
 }
 
-s32 func_80444610_de(void *first, struct ActorRecAt1C *holder) {
+s32 Items_AdjustPlayerOption7E(void *first, struct ActorRecAt1C *holder) {
     struct PlayerOptions *settings = &D_80146302;
 
     if (holder->owner != 0 && holder->owner->settings != 0) {
@@ -287,7 +287,7 @@ s32 func_80444610_de(void *first, struct ActorRecAt1C *holder) {
     return 0;
 }
 
-s32 func_80444674_de(struct Field *field, struct ActorRecAt1C *holder) {
+s32 Items_SelectPlayerOption7EText(struct Field *field, struct ActorRecAt1C *holder) {
     struct PlayerOptions *settings = &D_80146302;
 
     if (holder->owner != 0 && holder->owner->settings != 0) {
@@ -304,14 +304,14 @@ s32 func_80444674_de(struct Field *field, struct ActorRecAt1C *holder) {
     return 0;
 }
 
-s32 func_804446D8_de(void *first, void *second) {
+s32 Items_AdjustFirstListMode(void *first, void *second) {
     u8 *option = &D_801462C8.firstListMode;
 
     *option = Pak_AdjustValue(second, *option, 1, 0, 2, 1);
     return 0;
 }
 
-s32 func_8044472C_de(struct FieldRecAt14 *field) {
+s32 Items_SelectFirstListModeText(struct FieldRecAt14 *field) {
     switch (D_801462C8.firstListMode) {
     case 0:
         field->text = D_800D7604;
@@ -328,14 +328,14 @@ s32 func_8044472C_de(struct FieldRecAt14 *field) {
     return 0;
 }
 
-s32 func_804447A0_de(void *first, void *second) {
+s32 Items_AdjustGameOption1F(void *first, void *second) {
     u8 *option = &D_801462C8.unknown1F;
 
     *option = Pak_AdjustValue(second, *option, 1, 0, 1, 1);
     return 0;
 }
 
-s32 func_804447F0_de(StateRecAt14 *arg0) {
+s32 Items_SelectGameOption1FText(StateRecAt14 *arg0) {
     s32 var_v0;
 
     if ((SetN64_IsModeThirteen() != 0) && (D_801462C8.local == 0)) {

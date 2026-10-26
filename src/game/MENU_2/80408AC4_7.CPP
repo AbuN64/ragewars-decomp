@@ -15,7 +15,7 @@ extern Shared_Entry D_800E5CA0;
 extern func_802077F4_S2 *Pak_GetWidgetStyle(void *, s32);
 
 
-extern void func_8044208C_de(void *, ItemRecAt20V1 *, void *, MenuStyle *);
+extern void Pak_DrawLocalizedMenuItemText(void *, ItemRecAt20V1 *, void *, MenuStyle *);
 
 /* Steps the menu spinner in D_800E5CA0: advances its repeat timer by D_800D2988, wrapping at the second entry of D_800E2280, and while the menu is active (state 2) decrements its value above zero when Control_IsLeftPressed reports the decrease input, or else increments it below its maximum when Control_IsRightPressed reports the increase input, restarting the timer on a change. Returns zero. */
 
@@ -44,7 +44,7 @@ s32 func_802BD400_de(u8 *);
 
 extern u8 D_800E5CAC[0x64];
 
-/* Draws the D_800E5CA0 spinner: during the first part of its blink period it fills a two-pixel white bar below the item under the digit its value selects, placed from the item's x by the character width func_80442DDC_de reports scaled to the screen, with the style's alpha, through OnScreen_SetupFillMode and OnScreen_DrawBevelBox; then draws the item through func_8044208C_de. */
+/* Draws the D_800E5CA0 spinner: during the first part of its blink period it fills a two-pixel white bar below the item under the digit its value selects, placed from the item's x by the character width func_80442DDC_de reports scaled to the screen, with the style's alpha, through OnScreen_SetupFillMode and OnScreen_DrawBevelBox; then draws the item through Pak_DrawLocalizedMenuItemText. */
 void Menu_DrawTextEntryCursor(void *menu, ItemRecAt20V1 *item, void *third, MenuStyle *style) {
     f32 width;
     f32 alpha;
@@ -60,7 +60,7 @@ void Menu_DrawTextEntryCursor(void *menu, ItemRecAt20V1 *item, void *third, Menu
         OnScreen_DrawBevelBox(x, item->y, (f32)x + width, item->y + 2, 0, 0, 0xFF, 0xFF, 0xFF,
                       (u8)(bits = !((2147483648.0f) <= alpha) ? (s32)alpha : (bits = (s32)(alpha - (2147483648.0f))) | 0x80000000));
     }
-    func_8044208C_de(menu, item, third, style);
+    Pak_DrawLocalizedMenuItemText(menu, item, third, style);
 }
 
 s32 Menu_UpdateTextEntryCursor(void *unused, MenuRecAt20V4 *menu) {

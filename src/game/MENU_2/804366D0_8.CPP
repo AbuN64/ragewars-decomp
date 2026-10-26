@@ -18,7 +18,7 @@ extern s32 Defs_TestBit(char *, s32);
 extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 extern s32 SmpFlicker_CreateFlickerWidget(s32, s32);
 
-s32 Menu_CreateUnlockGatedListScreen(void *arg0) {
+s32 Menu_CreateUnlockGatedListScreen(void *window) {
     void *obj;
 
     D_800E5780 = (Shared_MenuWidgetState *)Cache_AllocateMemory(0x18);
@@ -26,12 +26,12 @@ s32 Menu_CreateUnlockGatedListScreen(void *arg0) {
     D_800E5780->unk14 = 0;
 
     if (Defs_TestBit(D_80102B7E, 0) == 0) {
-        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(arg0, 0x13A), 1);
+        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(window, 0x13A), 1);
     }
 
     D_800E5780->resourceWidget = SmpFlicker_CreateFlickerWidget(0x139, 0x6E);
 
-    obj = Frontend_FindWidgetByResourceId(arg0, 0x138);
+    obj = Frontend_FindWidgetByResourceId(window, 0x138);
     D_800E5780->item = obj;
     ((ListScreenItem *)obj)->alpha = 0xF;
 

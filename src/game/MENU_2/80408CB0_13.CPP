@@ -6,13 +6,13 @@
 #include "MATH/802A2870.H"
 
 #if defined(VERSION_EU)
-int func_8040CA00_eu(void) {
+int Menu_ReturnZeroEuropean(void) {
     return 0;
 }
 #endif
 
 #if defined(VERSION_DE)
-int func_8040C5C0_de(void) {
+int Menu_ReturnZeroGerman(void) {
     return 0;
 }
 #endif
@@ -32,7 +32,7 @@ extern void Frontend_DrawVisibleSiblings(void *, Args);
 
 
 
-void func_8040C5C8_de(void *widget, Args args) {
+void Menu_DrawClippedWidgetSiblings(void *widget, Args args) {
     func_802A2BE0_S1 *record = widget;
     struct Shape_typemap_165 first;
     struct Shape_typemap_165 basis;

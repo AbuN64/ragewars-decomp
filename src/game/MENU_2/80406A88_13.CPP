@@ -9,7 +9,7 @@ extern void ScenarioSetup_SetCatalogueAlpha(s32);
 extern void Frontend_SetMenuChoiceResult(s32);
 extern void ScenarioSetup_ResetSelectionIndicators(void);
 
-s32 func_8042AFB0_eu_x(void *root, s32 unused, s32 delta) {
+s32 ScenarioSetup_UpdateScreenTransitions(void *root, s32 unused, s32 delta) {
     MenuWidget *item;
     f32 alpha;
     u32 fade;
@@ -113,6 +113,6 @@ s32 func_8042AFB0_eu_x(void *root, s32 unused, s32 delta) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8042AFB0_eu_x);
+INCLUDE_ASM("ovl_80400000", ScenarioSetup_UpdateScreenTransitions);
 #endif
 #endif

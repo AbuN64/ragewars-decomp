@@ -49,17 +49,17 @@ void Pak_ClearTimerFlag(void);
 void *Pak_OpenDialog(void *owner, void *list, s32 b, s32 c, s32 d);
 
 /** Runs a target's animation/state transition through Pak_AdjustValue and stores the new state. */
-s32 func_8043E3CC_de(void *arg0, Outer8043E458 *arg1) {
-    Target8043E458 *temp_s0;
+s32 func_8043E3CC_de(void *arg0, Outer8043E458 *menuContext) {
+    Target8043E458 *profileOptions;
 
-    temp_s0 = arg1->unk1C->unk5D8;
-    temp_s0->unk7B = Pak_AdjustValue(arg1, temp_s0->unk7B, 1, 0, 1, 1);
+    profileOptions = menuContext->unk1C->unk5D8;
+    profileOptions->unk7B = Pak_AdjustValue(menuContext, profileOptions->unk7B, 1, 0, 1, 1);
     return 0;
 }
 
 /** Forwards arg1 through and arg2 as the first parameter, adding the D_452834 record. */
-s32 func_8043E418_de(void *unused0, void *arg1, void *arg2) {
-    Pak_AllocateMenu(arg2, arg1, &D_004518A4);
+s32 func_8043E418_de(void *unused0, void *menuOwner, void *menuContext) {
+    Pak_AllocateMenu(menuContext, menuOwner, &D_004518A4);
     return 1;
 }
 
@@ -69,30 +69,30 @@ s32 func_8043E444_de(Shared_DebugWidget *widget, Shared_MenuHandle *handle) {
 }
 
 /* Forwards arg1 through and arg2 as the first parameter, adding the D_4505C0 record. */
-s32 func_8043E468_de(void *unused0, void *arg1, void *arg2) {
-    Pak_AllocateMenu(arg2, arg1, &D_0044F994_de);
+s32 func_8043E468_de(void *unused0, void *menuOwner, void *menuContext) {
+    Pak_AllocateMenu(menuContext, menuOwner, &D_0044F994_de);
     return 1;
 }
 
-s32 func_8043E494_de(ObjRecAt14V1 *arg0, Menu_func_8043E494_de *menu) {
+s32 func_8043E494_de(ObjRecAt14V1 *modeLabel, Menu_func_8043E494_de *menu) {
     switch (menu->owner->record->mode) {
     case 0:
-        arg0->unk14 = &D_800D7688;
+        modeLabel->unk14 = &D_800D7688;
         break;
     case 1:
-        arg0->unk14 = &D_800D768C;
+        modeLabel->unk14 = &D_800D768C;
         break;
     }
     return 0;
 }
 
 /** Forwards the pointed-to inner byte field on to func_80264770_de. */
-void func_8043E4E0_de(Outer8043E56C *arg0) {
-    Control_EnableControllerPak(arg0->unk20->unk4);
+void func_8043E4E0_de(Outer8043E56C *menuOwner) {
+    Control_EnableControllerPak(menuOwner->unk20->unk4);
 }
 
-void func_8043E504_de(struct Shared_PakMenu *arg0) {
-    Control_EnableControllerPak(arg0->owner->unk4);
+void func_8043E504_de(struct Shared_PakMenu *pakMenu) {
+    Control_EnableControllerPak(pakMenu->owner->unk4);
     D_800E28C0 = 0;
 }
 
@@ -102,13 +102,13 @@ s32 func_8043E530_de(void) {
     return state->round != 0 || state->elapsed != 0 || state->state != 0;
 }
 
-s32 func_8043E568_de(void *unused0, Arg1Struct *arg1) {
+s32 func_8043E568_de(void *unused0, Arg1Struct *menuContext) {
     s32 val1C;
 
-    val1C = arg1->unk1C;
+    val1C = menuContext->unk1C;
     Pak_ClearTimerFlag();
     ((s32 (*)(s32))func_8025E214_de)(-1);
-    Pak_OpenDialog(&D_8014561C, &D_0044E468, val1C, arg1->unk20, 0);
+    Pak_OpenDialog(&D_8014561C, &D_0044E468, val1C, menuContext->unk20, 0);
     return 1;
 }
 

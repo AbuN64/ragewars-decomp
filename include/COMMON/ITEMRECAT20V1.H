@@ -170,8 +170,8 @@ struct func_8025E5B0_S1 {
     short unk14;
 };
 
-struct Entry_func_80441EB0_de;
-struct Entry_func_80441EB0_de {
+struct EntryPakCreateMenuFromParameters;
+struct EntryPakCreateMenuFromParameters {
     s16 type;
     char pad[0x22];
 };
@@ -874,7 +874,7 @@ struct TextBoundsText;
 struct MenuStyle;
 /* The draw style menu item callbacks receive last: alpha and fade scale the item's intensity. */
 struct MenuStyle {
-    /* The same record func_8043FE3C_de draws through as its fourth argument (func_8043FFAC_S2), and
+    /* The same record Pak_DrawStyledMenuText draws through as its fourth argument (func_8043FFAC_S2), and
        Multi_DrawNameCursor reads its id at +0x1C. */
     s16 state;
     s16 x; /* 0x02 */
@@ -1360,10 +1360,10 @@ struct OSPifRam {
 struct ObjRecAt3CV1;
 typedef struct ObjRecAt3CV1 ObjRecAt3CV1;
 
-struct Entry_func_80441EB0_de;
+struct EntryPakCreateMenuFromParameters;
 struct Dialog;
 struct Dialog {
-    struct Entry_func_80441EB0_de *entries;
+    struct EntryPakCreateMenuFromParameters *entries;
     s16 count;
     char pad6[0x1A];
     signed int value;
@@ -1652,16 +1652,16 @@ typedef struct Access_s32_50 Access_s32_50;
 
 struct ObjRecAtCV3;
 
-struct Target_func_8040AB54_de;
-struct Target_func_8040AB54_de {
+struct TargetPakSelectPromptKindEight;
+struct TargetPakSelectPromptKindEight {
     char pad[0x120];
     s32 flags;
 };
 struct RecordRecAtCV3;
-struct Target_func_8040AB54_de;
+struct TargetPakSelectPromptKindEight;
 struct RecordRecAtCV3 {
     char pad[0xC];
-    struct Target_func_8040AB54_de *target;
+    struct TargetPakSelectPromptKindEight *target;
 };
 
 struct ShapeCode802B54A0;

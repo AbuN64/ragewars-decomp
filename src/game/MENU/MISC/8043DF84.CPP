@@ -110,27 +110,27 @@ ControllerProfile *func_8043E05C_de(s32 *out) {
 }
 
 s32 func_8043E0CC_de(void) {
-    char *var_a0;
-    s32 var_a1;
-    s32 var_a2;
-    s32 var_v1;
+    char *rosterRecord;
+    s32 controllerIndex;
+    s32 connectedCount;
+    s32 controllerOffset;
 
-    var_a2 = 0;
-    var_a1 = 0;
-    var_a0 = (char *)&D_801462C8;
-    var_v1 = 0;
+    connectedCount = 0;
+    controllerIndex = 0;
+    rosterRecord = (char *)&D_801462C8;
+    controllerOffset = 0;
 loop_1:
-    if (*(s32 *) ((char *) D_8010F328 + var_v1) != 0) {
-        var_a2 += 1;
-        if (((FlaggedRosterView *)var_a0)->flag == 0) {
+    if (*(s32 *) ((char *) D_8010F328 + controllerOffset) != 0) {
+        connectedCount += 1;
+        if (((FlaggedRosterView *)rosterRecord)->flag == 0) {
             return 0;
         }
     }
-    var_a0 += 0x96;
-    var_a1 += 1;
-    var_v1 += 0x224;
-    if (var_a1 >= 4) {
-        return var_a2;
+    rosterRecord += 0x96;
+    controllerIndex += 1;
+    controllerOffset += 0x224;
+    if (controllerIndex >= 4) {
+        return connectedCount;
     }
     goto loop_1;
 }
@@ -155,13 +155,13 @@ s32 func_8043E134_de(void) {
     return 0;
 }
 
-s32 func_8043E190_de(ObjRecAt14V1 *arg0) {
-    arg0->unk14 = &D_800D76C8;
+s32 func_8043E190_de(ObjRecAt14V1 *labelItem) {
+    labelItem->unk14 = &D_800D76C8;
     return 0;
 }
 
-s32 func_8043E1A4_de(ObjRecAt14V1 *arg0) {
-    arg0->unk14 = &D_800D76CC;
+s32 func_8043E1A4_de(ObjRecAt14V1 *labelItem) {
+    labelItem->unk14 = &D_800D76CC;
     return 0;
 }
 
@@ -196,25 +196,25 @@ s32 func_8043E1F8_de(s32 unused0, MenuRecAt20V2 *menu) {
 }
 
 s32 func_8043E254_de(void) {
-    s32 var_a0;
+    s32 hasProgress;
     CGameStatus *state;
 
     state = &D_801462C8.counters;
-    var_a0 = 0;
+    hasProgress = 0;
     if ((state->round != 0) || (state->elapsed != 0) || (state->state != 0)) {
-        var_a0 = 1;
+        hasProgress = 1;
     }
-    return var_a0;
+    return hasProgress;
 }
 
-s32 func_8043E28C_de(void *arg0, void *arg1) {
+s32 func_8043E28C_de(void *arg0, void *menuContext) {
     Shared_ActorView *p;
     u8 *bytep;
     s32 result;
 
-    p = (void *)((MenuRecAt20V2 *)arg1)->owner;
+    p = (void *)((MenuRecAt20V2 *)menuContext)->owner;
     bytep = &p->controls->selection;
-    result = Pak_AdjustValue(arg1, *bytep, 1, 0, 0xA, 0);
+    result = Pak_AdjustValue(menuContext, *bytep, 1, 0, 0xA, 0);
     *bytep = (u8)result;
     return 0;
 }

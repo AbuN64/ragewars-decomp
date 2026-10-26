@@ -6,7 +6,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "OVLGAME/SHAREDRECAT224.H"
 
-s32 func_8043E9D0_eu(void *unused, MenuRules *rules) {
+s32 Items_ForwardRulesLock(void *unused, MenuRules *rules) {
     Ovlgame_PlacePlayerForRound(rules->locked);
     return 1;
 }

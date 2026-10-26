@@ -15,10 +15,10 @@
  /* extern */
 s32 Scene_GetModelRecordByIndexPointer(Shared_World *, s32); /* extern */
 s32 Pak_CountLineChars(void *); /* extern */
-s32 func_80442384_de(void *, void *, s32); /* extern */
+s32 Pak_TryCreateMenu(void *, void *, s32); /* extern */
 s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32); /* extern */
 
-s32 func_80444FA0_us_rev1(OptionEditState *arg0, OptionEditState *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32 arg7) {
+s32 Pak_AdjustModelField(OptionEditState *arg0, OptionEditState *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32 arg7) {
     s32 temp_a1_2;
     s32 temp_a1_3;
     s32 temp_s0_2;
@@ -32,7 +32,7 @@ s32 func_80444FA0_us_rev1(OptionEditState *arg0, OptionEditState *arg1, s32 arg2
     char *var_a0;
     var_s1 = 0;
     if (Control_IsStartPressed(arg1->unk_20) != 0) {
-        return func_80442384_de(arg0, arg1, arg2);
+        return Pak_TryCreateMenu(arg0, arg1, arg2);
     }
     temp_v0 = arg1->unk_1C;
     if (temp_v0 != NULL) {
@@ -64,7 +64,7 @@ s32 func_80444FA0_us_rev1(OptionEditState *arg0, OptionEditState *arg1, s32 arg2
                 length-=6;
                 func_802BD320_de(temp_s0_2 + length, &g_pakFormatInt06, (s32) ((f32) var_s1 / arg7));
                 if (D_800E63AC != 0) {
-                    temp_v0_2 = SetN64_GetPackSection(D_8011FEF4, 0);
+                    temp_v0_2 = SetN64_GetPackSection(g_modelEditPack, 0);
                     var_v1 = 0;
                     temp_a1_3 = temp_v0_2->count;
                     temp_v0_2=&((OptionEditContext *)(temp_v0_2))->unk_8;
@@ -95,7 +95,7 @@ s32 func_80444FA0_us_rev1(OptionEditState *arg0, OptionEditState *arg1, s32 arg2
 
 extern void Ovlgame_ResetMatchControllerState(void *);
 
-s32 func_80444E30_de(void) {
+s32 Pak_StopMusicAndResetMatch(void) {
     func_8025E2D4_de(-1);
     func_8025E384_de();
     func_8025E33C_de();
@@ -104,52 +104,52 @@ s32 func_80444E30_de(void) {
 }
 
 /* Stores 4 into the first halfword of a record. */
-void func_80444E70_de(s16 *record) {
+void Pak_SetRecordTypeFour(s16 *record) {
     record[0] = 4;
 }
 #endif
 
 #if defined(VERSION_US_REV1)
-/* Forwards its three arguments to func_80444FA0_us_rev1 with 0, 0, 1, 0xFF and the pooled constant (1.0f). */
-extern s32 func_80444FA0_us_rev1(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
+/* Forwards its three arguments to Pak_AdjustModelField with 0, 0, 1, 0xFF and the pooled constant (1.0f). */
+extern s32 Pak_AdjustModelField(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
 
-void func_8044524C_us_rev1(void *first, void *second, void *third) {
-    func_80444FA0_us_rev1(first, second, third, 0, 0, 1, 0xFF, (1.0f));
+void Pak_AdjustModelByteZero(void *first, void *second, void *third) {
+    Pak_AdjustModelField(first, second, third, 0, 0, 1, 0xFF, (1.0f));
 }
 
-/* Forwards its three arguments to func_80444FA0_us_rev1 with 0, 1, 1, 0xFF and the pooled constant (1.0f). */
-extern s32 func_80444FA0_us_rev1(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
+/* Forwards its three arguments to Pak_AdjustModelField with 0, 1, 1, 0xFF and the pooled constant (1.0f). */
+extern s32 Pak_AdjustModelField(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
 
-void func_80445288_us_rev1(void *first, void *second, void *third) {
-    func_80444FA0_us_rev1(first, second, third, 0, 1, 1, 0xFF, (1.0f));
+void Pak_AdjustModelByteOne(void *first, void *second, void *third) {
+    Pak_AdjustModelField(first, second, third, 0, 1, 1, 0xFF, (1.0f));
 }
 
-/* Forwards its three arguments to func_80444FA0_us_rev1 with 0, 2, 1, 0xFF and the pooled constant (1.0f). */
-extern s32 func_80444FA0_us_rev1(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
+/* Forwards its three arguments to Pak_AdjustModelField with 0, 2, 1, 0xFF and the pooled constant (1.0f). */
+extern s32 Pak_AdjustModelField(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
 
-void func_804452C4_us_rev1(void *first, void *second, void *third) {
-    func_80444FA0_us_rev1(first, second, third, 0, 2, 1, 0xFF, (1.0f));
+void Pak_AdjustModelByteTwo(void *first, void *second, void *third) {
+    Pak_AdjustModelField(first, second, third, 0, 2, 1, 0xFF, (1.0f));
 }
 
-/* Forwards its three arguments to func_80444FA0_us_rev1 with 1, 8, 0xA, 0x7D0 and the pooled constant (1.0f). */
-extern s32 func_80444FA0_us_rev1(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
+/* Forwards its three arguments to Pak_AdjustModelField with 1, 8, 0xA, 0x7D0 and the pooled constant (1.0f). */
+extern s32 Pak_AdjustModelField(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
 
-void func_80445304_us_rev1(void *first, void *second, void *third) {
-    func_80444FA0_us_rev1(first, second, third, 1, 8, 0xA, 0x7D0, (1.0f));
+void Pak_AdjustModelWordAt08(void *first, void *second, void *third) {
+    Pak_AdjustModelField(first, second, third, 1, 8, 0xA, 0x7D0, (1.0f));
 }
 
-/* Forwards its three arguments to func_80444FA0_us_rev1 with 2, 0x10, 0x66, 0xA000 and the pooled constant (10.239999771118164f). */
-extern s32 func_80444FA0_us_rev1(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
+/* Forwards its three arguments to Pak_AdjustModelField with 2, 0x10, 0x66, 0xA000 and the pooled constant (10.239999771118164f). */
+extern s32 Pak_AdjustModelField(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
 
-void func_80445344_us_rev1(void *first, void *second, void *third) {
-    func_80444FA0_us_rev1(first, second, third, 2, 0x10, 0x66, 0xA000, (10.239999771118164f));
+void Pak_AdjustModelFloatAt10(void *first, void *second, void *third) {
+    Pak_AdjustModelField(first, second, third, 2, 0x10, 0x66, 0xA000, (10.239999771118164f));
 }
 
-/* Forwards its three arguments to func_80444FA0_us_rev1 with 2, 0x14, 1, 0xB4 and the pooled constant
+/* Forwards its three arguments to Pak_AdjustModelField with 2, 0x14, 1, 0xB4 and the pooled constant
    (1.0f). */
-extern s32 func_80444FA0_us_rev1(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
+extern s32 Pak_AdjustModelField(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
 
-void func_80445384_us_rev1(void *first, void *second, void *third) {
-    func_80444FA0_us_rev1(first, second, third, 2, 0x14, 1, 0xB4, (1.0f));
+void Pak_AdjustModelFloatAt14(void *first, void *second, void *third) {
+    Pak_AdjustModelField(first, second, third, 2, 0x14, 1, 0xB4, (1.0f));
 }
 #endif

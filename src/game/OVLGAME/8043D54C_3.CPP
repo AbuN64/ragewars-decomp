@@ -15,7 +15,7 @@
 #include "COMMON/GAME_SESSION.H"
 extern void Ovlgame_ResetMatchControllerState(void *);
 
-s32 func_8043DB04_de(void *unused, struct Holder *holder) {
+s32 Menu_HandleSessionOptionPage(void *unused, struct Holder *holder) {
     if (D_80145070 == 1) {
         Ovlgame_ResetMatchControllerState(&D_8011FAC0);
     } else {

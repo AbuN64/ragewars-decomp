@@ -43,31 +43,31 @@ extern void Pak_OpenDialog(char *, char *, int, int, int);
 
 
 /* Sets the state word D_80153788 to 1; this is one of a run of functions that each store one
-   state number there, and func_8040AAB8_de clears it. */
+   state number there, and Pak_SelectPromptKindZero clears it. */
 
 
 /* Sets the state word D_80153788 to 2; this is one of a run of functions that each store one
-   state number there, and func_8040AAB8_de clears it. */
+   state number there, and Pak_SelectPromptKindZero clears it. */
 
 
 /* Sets the state word D_80153788 to 3; this is one of a run of functions that each store one
-   state number there, and func_8040AAB8_de clears it. */
+   state number there, and Pak_SelectPromptKindZero clears it. */
 
 
 /* Sets the state word D_80153788 to 4; this is one of a run of functions that each store one
-   state number there, and func_8040AAB8_de clears it. */
+   state number there, and Pak_SelectPromptKindZero clears it. */
 
 
 /* Sets the state word D_80153788 to 5; this is one of a run of functions that each store one
-   state number there, and func_8040AAB8_de clears it. */
+   state number there, and Pak_SelectPromptKindZero clears it. */
 
 
 /* Sets the state word D_80153788 to 6; this is one of a run of functions that each store one
-   state number there, and func_8040AAB8_de clears it. */
+   state number there, and Pak_SelectPromptKindZero clears it. */
 
 
 /* Sets the state word D_80153788 to 7; this is one of a run of functions that each store one
-   state number there, and func_8040AAB8_de clears it. */
+   state number there, and Pak_SelectPromptKindZero clears it. */
 
 
 /* Clears bit 26 and sets bit 3 of the flag word at offset 0x120 of the object at offset 0xC of a
@@ -81,31 +81,31 @@ extern void Pak_OpenDialog(char *, char *, int, int, int);
 /* Stores 9 in D_80153788 and 0 in D_80153758. */
 
 
-/* Stores 9 in the state word D_80153788 and one in D_80153758; func_8040ABA0_de stores 9 and zero. */
+/* Stores 9 in the state word D_80153788 and one in D_80153758; Pak_SelectPromptKindNine stores 9 and zero. */
 
 
 /* Sets the state word D_80153788 to 0xA; this is one of a run of functions that each store one
-   state number there, and func_8040AAB8_de clears it. */
+   state number there, and Pak_SelectPromptKindZero clears it. */
 
 
 /* Sets the state word D_80153788 to 0xB; this is one of a run of functions that each store one
-   state number there, and func_8040AAB8_de clears it. */
+   state number there, and Pak_SelectPromptKindZero clears it. */
 
 
 /* Sets the state word D_80153788 to 0xC; this is one of a run of functions that each store one
-   state number there, and func_8040AAB8_de clears it. */
+   state number there, and Pak_SelectPromptKindZero clears it. */
 
 
 /* Sets the state word D_80153788 to 0xD; this is one of a run of functions that each store one
-   state number there, and func_8040AAB8_de clears it. */
+   state number there, and Pak_SelectPromptKindZero clears it. */
 
 
 /* Sets the state word D_80153788 to 0xE; this is one of a run of functions that each store one
-   state number there, and func_8040AAB8_de clears it. */
+   state number there, and Pak_SelectPromptKindZero clears it. */
 
 
 /* Sets the state word D_80153788 to 0xF; this is one of a run of functions that each store one
-   state number there, and func_8040AAB8_de clears it. */
+   state number there, and Pak_SelectPromptKindZero clears it. */
 
 
 /* Points a field's text at the label for the state word D_80153788: the second string through the jump table
@@ -169,7 +169,7 @@ static inline s32 Pak_GetMenuChannel(struct Shared_PakMenu *record) {
     return record->owner->unk4;
 }
 
-s32 func_8040A9A0_de(LayeredText *field) {
+s32 Pak_FormatPreviewFourDigitValue(LayeredText *field) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     s32 value = g_pakPreviewNumber;
     char *text = (char *)field->text[g_languageIndex];
@@ -189,7 +189,7 @@ s32 func_8040A9A0_de(LayeredText *field) {
 
 
 
-s32 func_8040A9F8_de(struct FieldRecAt14 *field) {
+s32 Pak_UpdateProfileActionLabel(struct FieldRecAt14 *field) {
     if (D_80153730 != 0) {
         field->text = D_800D7810;
     } else if (D_80153774 != 0) {
@@ -200,7 +200,7 @@ s32 func_8040A9F8_de(struct FieldRecAt14 *field) {
     return 0;
 }
 
-int func_8040AA4C_de(int unused, ItemRecAt24 *item) {
+int Pak_OpenProfileActionPrompt(int unused, ItemRecAt24 *item) {
     if (D_80153730 != 0) {
         Pak_OpenDialog(D_8014561C, D_0044E468, item->x, item->y, 0);
     } else {
@@ -209,80 +209,80 @@ int func_8040AA4C_de(int unused, ItemRecAt24 *item) {
     return 1;
 }
 
-void func_8040AAB8_de(void) {
+void Pak_SelectPromptKindZero(void) {
     D_80153788 = 0;
 }
 
-void func_8040AAC8_de(void) {
+void Pak_SelectPromptKindOne(void) {
     D_80153788 = 1;
 }
 
-void func_8040AADC_de(void) {
+void Pak_SelectPromptKindTwo(void) {
     D_80153788 = 2;
 }
 
-void func_8040AAF0_de(void) {
+void Pak_SelectPromptKindThree(void) {
     D_80153788 = 3;
 }
 
-void func_8040AB04_de(void) {
+void Pak_SelectPromptKindFour(void) {
     D_80153788 = 4;
 }
 
-void func_8040AB18_de(void) {
+void Pak_SelectPromptKindFive(void) {
     D_80153788 = 5;
 }
 
-void func_8040AB2C_de(void) {
+void Pak_SelectPromptKindSix(void) {
     D_80153788 = 6;
 }
 
-void func_8040AB40_de(void) {
+void Pak_SelectPromptKindSeven(void) {
     D_80153788 = 7;
 }
 
-void func_8040AB54_de(struct RecordRecAtCV3 *record) {
+void Pak_SelectPromptKindEight(struct RecordRecAtCV3 *record) {
     record->target->flags &= ~0x04000000;
     D_80153788 = 8;
     record->target->flags |= 8;
     func_802649FC_de();
 }
 
-void func_8040ABA0_de(void) {
+void Pak_SelectPromptKindNine(void) {
     D_80153788 = 9;
     D_80153758 = 0;
 }
 
-void func_8040ABBC_de(void) {
+void Pak_SelectPromptKindNinePending(void) {
     D_80153788 = 9;
     D_80153758 = 1;
 }
 
-void func_8040ABDC_de(void) {
+void Pak_SelectPromptKindTen(void) {
     D_80153788 = 0xA;
 }
 
-void func_8040ABF0_de(void) {
+void Pak_SelectPromptKindEleven(void) {
     D_80153788 = 0xB;
 }
 
-void func_8040AC04_de(void) {
+void Pak_SelectPromptKindTwelve(void) {
     D_80153788 = 0xC;
 }
 
-void func_8040AC18_de(void) {
+void Pak_SelectPromptKindThirteen(void) {
     D_80153788 = 0xD;
 }
 
-void func_8040AC2C_de(void) {
+void Pak_SelectPromptKindFourteen(void) {
     D_80153788 = 0xE;
 }
 
-void func_8040AC40_de(void) {
+void Pak_SelectPromptKindFifteen(void) {
     D_80153788 = 0xF;
 }
 
-s32 func_8040AC54_de(struct FieldRecAt14 *field) {
+s32 Pak_SelectPromptActionHeading(struct FieldRecAt14 *field) {
     u32 state = D_80153788;
 
     if (state >= 16) {
@@ -315,7 +315,7 @@ done:
     return 0;
 }
 
-s32 func_8040ACA0_de(struct FieldRecAt14 *field) {
+s32 Pak_SelectPromptTextGroupOne(struct FieldRecAt14 *field) {
     u32 state = D_80153788;
 
     if (state >= 16) {
@@ -390,7 +390,7 @@ done:
     return 0;
 }
 
-s32 func_8040ADCC_de(struct FieldRecAt14 *field) {
+s32 Pak_SelectPromptTextGroupTwo(struct FieldRecAt14 *field) {
     u32 state = D_80153788;
 
     if (state >= 16) {
@@ -465,7 +465,7 @@ done:
     return 0;
 }
 
-s32 func_8040AEF8_de(struct FieldRecAt14 *field) {
+s32 Pak_SelectPromptTextGroupThree(struct FieldRecAt14 *field) {
     u32 state = D_80153788;
 
     if (state >= 16) {
@@ -540,7 +540,7 @@ done:
     return 0;
 }
 
-s32 func_8040B024_de(struct FieldRecAt14 *field) {
+s32 Pak_SelectPromptTextGroupFour(struct FieldRecAt14 *field) {
     u32 state = D_80153788;
 
     if (state >= 16) {
@@ -615,7 +615,7 @@ done:
     return 0;
 }
 
-s32 func_8040B150_de(struct FieldRecAt14 *field) {
+s32 Pak_SelectPromptTextGroupFive(struct FieldRecAt14 *field) {
     u32 state = D_80153788;
 
     if (state >= 16) {
@@ -690,7 +690,7 @@ done:
     return 0;
 }
 
-s32 func_8040B27C_de(struct FieldRecAt14 *field) {
+s32 Pak_SelectModalPromptLabel(struct FieldRecAt14 *field) {
     u32 state = D_80153788;
 
     if (state >= 16) {
@@ -723,7 +723,7 @@ done:
     return 0;
 }
 
-s32 func_8040B2C8_de(struct Shared_PakMenu *record) {
+s32 Pak_CheckOperationPakChange(struct Shared_PakMenu *record) {
     if (g_pakNamePromptAccepted == 0) {
         if (Pak_GetMenuChannel(record) != -1) {
             if (Control_PeekPakChange(Pak_GetMenuChannel(record)) != 0) {
@@ -738,14 +738,14 @@ s32 func_8040B2C8_de(struct Shared_PakMenu *record) {
 
 /* Stores 0 in g_pakNamePromptAccepted and 1 in g_pakAlternateNameSelected. */
 
-void func_8040B3A8_de(void) {
+void Pak_EnableOperationHeading(void) {
     g_pakNamePromptAccepted = 0;
     g_pakAlternateNameSelected = 1;
 }
 
 /* Stores 0 in g_pakNamePromptAccepted and 0 in g_pakAlternateNameSelected. */
 
-void func_8040B3C4_de(void) {
+void Pak_DisableOperationHeading(void) {
     g_pakNamePromptAccepted = 0;
     g_pakAlternateNameSelected = 0;
 }
@@ -755,7 +755,7 @@ void func_8040B3C4_de(void) {
 
 
 
-s32 func_8040B3DC_de(struct FieldRecAt14 *field) {
+s32 Pak_SelectOperationHeading(struct FieldRecAt14 *field) {
     if (g_pakAlternateNameSelected != 0) {
         field->text = D_800D7970;
     } else {
@@ -769,7 +769,7 @@ s32 func_8040B3DC_de(struct FieldRecAt14 *field) {
 
 
 
-s32 func_8040B410_de(struct FieldRecAt14 *field) {
+s32 Pak_SelectOperationDescription(struct FieldRecAt14 *field) {
     if (g_pakAlternateNameSelected != 0) {
         field->text = D_800D7974;
     } else {
@@ -788,7 +788,7 @@ extern char D_800ED41C[];
 extern char *D_800D394C[];
 extern s32 Pak_CountLineChars(LayeredText *);
 
-s32 func_8040B444_de(struct Field *field, Shared_PakMenu *pThis) {
+s32 Pak_FormatOperationChannelLabel(struct Field *field, Shared_PakMenu *pThis) {
     char *text;
     char **strings;
     s32 value;
@@ -825,7 +825,7 @@ extern char g_digitDotFormat[];
 extern s32 Pak_CountLineChars(LayeredText *);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 func_8040B444_de(LayeredText *field, struct Shared_PakMenu *holder) {
+s32 Pak_FormatOperationChannelLabel(LayeredText *field, struct Shared_PakMenu *holder) {
     char *text;
     s32 value;
 

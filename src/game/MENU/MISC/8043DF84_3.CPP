@@ -17,7 +17,7 @@ extern void Control_DisableControllerPak(s32 arg);
 
 
 
-void func_8043DEF8_de(void *arg0, s32 arg1) {
+void Ovlgame_SetMenuControllerPakEnabled(void *arg0, s32 arg1) {
     s32 val;
     MenuRecAt20V2 *menu = arg0;
 
@@ -32,7 +32,7 @@ void func_8043DEF8_de(void *arg0, s32 arg1) {
 #include "COMMON/SESSIONHANDLERROW.H"
 extern f32 D_800DE324_de;
 
-void func_8043DF34_de(f32 duration, s32 mode, s32 option, s32 teams, s32 last) {
+void Ovlgame_InitMatchCounters(f32 duration, s32 mode, s32 option, s32 teams, s32 last) {
     s32 i;
     CGameStatus *state = &D_801462C8.counters;
     CGameStatus *result;

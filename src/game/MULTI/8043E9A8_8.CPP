@@ -10,13 +10,13 @@
 #include "GFX/TEXT/802A8A94_5.H"
 
 #if (!(defined(VERSION_US) || defined(VERSION_US_REV1))) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_80400000", func_8043EE5C_de);
+INCLUDE_ASM("ovl_80400000", Multi_DrawPlayerItemAvailability);
 #endif
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(NON_MATCHING)
 /* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 
-void func_8043EE5C_de(struct ItemRecAt18V2 *item, MenuOptionBox *box, s32 unused, struct Holder_func_8043F048_de *context) {
+void Multi_DrawPlayerItemAvailability(struct ItemRecAt18V2 *item, MenuOptionBox *box, s32 unused, struct HolderMultiIsPlayerItemAvailable *context) {
     struct ItemDef *def = item->def;
     s32 type = def->type;
     s32 index = def->index;

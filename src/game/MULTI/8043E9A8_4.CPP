@@ -83,7 +83,7 @@ void Multi_SelectInitialController(void *unused0, struct ObjRecAt20V2 *menu) {
 }
 
 /** Clears or sets bit 24 of arg1's record's flags depending on how many of func_80264690_de's four slots are active, and demotes arg1->unk0 from state 2 to 1 in the low-count case. */
-s32 func_8043EB70_de(void *unused0, Obj8043ECE8 *arg1) {
+s32 Multi_UpdateMultiplayerAvailability(void *unused0, Obj8043ECE8 *arg1) {
     if (Control_CountConnectedControllers() < 2) {
         arg1->unkC->unk58 &= 0xFEFFFFFF;
         if (arg1->unk0 == 2) {
@@ -95,7 +95,7 @@ s32 func_8043EB70_de(void *unused0, Obj8043ECE8 *arg1) {
     return 0;
 }
 
-s32 func_8043EBE4_de(void *first, void *second, void *third) {
+s32 Multi_OpenLocalPlayerSetup(void *first, void *second, void *third) {
     Shared_Game *options = &D_801462C8;
     s32 i;
 
@@ -123,7 +123,7 @@ s32 func_8043EC98_de(void *first, void *second, void *third) {
     return 1;
 }
 
-s32 func_8043ECC4_de(void *first, void *second, void *third) {
+s32 Multi_OpenTrackPreviewMenu(void *first, void *second, void *third) {
     func_8025E214_de(-1);
     D_800E63B0 = func_8025E2C4_de();
     func_8025E2D4_de(D_800E63B8);
@@ -139,7 +139,7 @@ s32 func_8043ED48_de(void) {
     return 1;
 }
 
-s32 func_8043ED50_de(void) {
+s32 Multi_RequestSessionTransition(void) {
     SetN64_SetTransitionTarget(&D_8011FAC0, 8);
     return 1;
 }

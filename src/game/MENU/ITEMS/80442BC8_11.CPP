@@ -17,7 +17,7 @@
 
 
 
-void func_804431E4_de(struct ObjectRecAt20 *object) {
+void Items_InvokeHandlerAndClearItemState(struct ObjectRecAt20 *object) {
     struct StateRecAtBCV2 *state;
 
     if (object->handlers->callback != 0) {

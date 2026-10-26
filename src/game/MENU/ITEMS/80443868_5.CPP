@@ -13,7 +13,7 @@ extern char D_800EED80[];
 
 #else
 #endif
-/* Formats the halfword D_801422DA holds for the player func_8022A5A0_de identifies from the owner at offset
+/* Formats the halfword g_playerResultHalfwordFields holds for the player func_8022A5A0_de identifies from the owner at offset
    0x1C of the second argument, player records being 150 bytes apart, into a field's text with the
    format D_800DE700 four bytes before the length Pak_CountLineChars reports. Returns zero. */
 
@@ -27,7 +27,7 @@ extern char g_fmtDec4Pad[];
 extern s32 Player_GetPlayerIndex(void *, unsigned int);
 extern s32 Pak_CountLineChars(LayeredText *);
 
-s32 func_80443AB0_de(LayeredText *field, struct MenuRules *holder) {
+s32 Items_FormatPlayerResultHalfword(LayeredText *field, struct MenuRules *holder) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     struct LocalizedInputState *players = &D_80145040;

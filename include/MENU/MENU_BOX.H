@@ -8,5 +8,5 @@ typedef struct MenuBoxCorner {
 } MenuBoxCorner;
 /* The eight corners (front face z 0, back face z -2) Pak_InitializeMenu copies into both vertex
    banks of a new menu. */
-extern MenuBoxCorner D_800E1F20[8];
+extern MenuBoxCorner g_menuBoxCorners[8];
 #endif

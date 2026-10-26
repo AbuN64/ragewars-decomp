@@ -31,20 +31,20 @@ extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
 
 
-/* Forwards its four arguments to func_8043FE3C_de, adding the word the object's pointer at offset
-   0x14 addresses and a zero as the fifth and sixth. func_80442064_de and func_8044208C_de are the
+/* Forwards its four arguments to Pak_DrawStyledMenuText, adding the word the object's pointer at offset
+   0x14 addresses and a zero as the fifth and sixth. Pak_DrawMenuItemLabel and Pak_DrawLocalizedMenuItemText are the
    same function. */
 
 
 
 
-/* Forwards its four arguments to func_8043FE3C_de with, as the fifth, a one-character string made
+/* Forwards its four arguments to Pak_DrawStyledMenuText with, as the fifth, a one-character string made
    of the byte at offset 0x17 of the object, and a zero as the sixth. */
 
 
 
 
-/* Forwards its four arguments to func_8043FE3C_de with what func_8043F290 returns for the object as the fifth and a one as the sixth. Adapted from func_8044208C_de with the fifth argument taken from func_8043F290 and a one as the sixth changed. */
+/* Forwards its four arguments to Pak_DrawStyledMenuText with what func_8043F290 returns for the object as the fifth and a one as the sixth. Adapted from Pak_DrawLocalizedMenuItemText with the fifth argument taken from func_8043F290 and a one as the sixth changed. */
 
 
 
@@ -55,7 +55,7 @@ extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
 extern PreviewWidget *Scene_FindActorDefinition(Shared_World *,int,int);
 
-void *func_80441EB0_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V1 *params) {
+void *Pak_CreateMenuFromParameters(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V1 *params) {
     struct Dialog *list = params->list;
     s32 a;
     s32 b;
@@ -97,7 +97,7 @@ void *func_80441EB0_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V1 *p
 }
 
 extern u8 *func_8043F290(LayeredText *item);
-extern void func_8043FE3C_de(void *item, s32 second, s32 third, s32 fourth, void *text, s32 mode);
+extern void Pak_DrawStyledMenuText(void *item, s32 second, s32 third, s32 fourth, void *text, s32 mode);
 int Pak_CountLineChars(LayeredText *item) {
     u8 *p;
     int len;
@@ -121,39 +121,39 @@ p = *item->text;
     return len;
 }
 
-void func_80442064_de(struct Field *object, s32 second, s32 third, s32 fourth) {
+void Pak_DrawMenuItemLabel(struct Field *object, s32 second, s32 third, s32 fourth) {
     
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-func_8043FE3C_de(object, second, third, fourth, object->text[g_languageIndex], 0);
+Pak_DrawStyledMenuText(object, second, third, fourth, object->text[g_languageIndex], 0);
 #else
-func_8043FE3C_de(object, second, third, fourth, *object->text, 0);
+Pak_DrawStyledMenuText(object, second, third, fourth, *object->text, 0);
 #endif
 
 }
 
-void func_8044208C_de(struct Field *object, s32 second, s32 third, s32 fourth) {
+void Pak_DrawLocalizedMenuItemText(struct Field *object, s32 second, s32 third, s32 fourth) {
     
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-func_8043FE3C_de(object, second, third, fourth, object->text[g_languageIndex], 0);
+Pak_DrawStyledMenuText(object, second, third, fourth, object->text[g_languageIndex], 0);
 #else
-func_8043FE3C_de(object, second, third, fourth, *object->text, 0);
+Pak_DrawStyledMenuText(object, second, third, fourth, *object->text, 0);
 #endif
 
 }
 
-void func_804420B4_de(struct Object_func_804420B4_de *object, s32 second, s32 third, s32 fourth) {
+void Pak_DrawMenuCharacter(struct ObjectPakDrawMenuCharacter *object, s32 second, s32 third, s32 fourth) {
     u8 text[2];
 
     text[0] = object->character;
     text[1] = 0;
-    func_8043FE3C_de(object, second, third, fourth, text, 0);
+    Pak_DrawStyledMenuText(object, second, third, fourth, text, 0);
 }
 
-void func_804420E4_de(LayeredText *object, s32 second, s32 third, s32 fourth) {
+void Pak_DrawDynamicMenuText(LayeredText *object, s32 second, s32 third, s32 fourth) {
 #if defined(VERSION_DE)
-    func_8043FE3C_de(object, second, third, fourth, func_8043F290(object), 1);
+    Pak_DrawStyledMenuText(object, second, third, fourth, func_8043F290(object), 1);
 #else
-    func_8043FE3C_de(object, second, third, fourth,
+    Pak_DrawStyledMenuText(object, second, third, fourth,
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 func_8043F290
 #else

@@ -12,11 +12,11 @@
 #include "COMMON/MENU_UI_PROVIDERS.H"
 
 extern void Pak_MeasureMenuText(LayeredText *, TextLayerMetrics *);
-extern void func_804402DC_de(LayeredText *, MenuOptionBox *, MenuOptionBox *, int);
-extern void func_8043FE3C_de(LayeredText *, MenuOptionBox *, MenuOptionBox *, int, void *, int);
+extern void Pak_DrawMenuOptionSprite(LayeredText *, MenuOptionBox *, MenuOptionBox *, int);
+extern void Pak_DrawStyledMenuText(LayeredText *, MenuOptionBox *, MenuOptionBox *, int, void *, int);
 
 #if !(defined(VERSION_DE) || defined(VERSION_US_REV1))
-void func_804404A8_de(LayeredText *source, MenuOptionBox *position, MenuOptionBox *bounds, int flags) {
+void Pak_DrawLayeredMenuText(LayeredText *source, MenuOptionBox *position, MenuOptionBox *bounds, int flags) {
     LayeredText current;
     TextLayerMetrics first, second, third;
     int center;
@@ -40,24 +40,24 @@ void func_804404A8_de(LayeredText *source, MenuOptionBox *position, MenuOptionBo
         position->left = center - (second.width + third.width) / 2;
     }
     position->left += third.width / 2;
-    func_804402DC_de(&current, position, bounds, flags);
+    Pak_DrawMenuOptionSprite(&current, position, bounds, flags);
     current = *source;
     current.text = 0;
     position->left += (source->spacing * second.width) / 256 - third.width / 2;
     position->top += second.height / 2 - third.height / 2;
-    func_804402DC_de(&current, position, bounds, flags);
+    Pak_DrawMenuOptionSprite(&current, position, bounds, flags);
     current = *source;
     if (source->flags & 1) {
         position->left = center - first.width / 2;
     }
     draw = &current;
-    func_8043FE3C_de(draw, position, bounds, flags, RW_LOCALIZED_TEXT(*draw->text, draw->text, draw->text, g_languageIndex), 0);
+    Pak_DrawStyledMenuText(draw, position, bounds, flags, RW_LOCALIZED_TEXT(*draw->text, draw->text, draw->text, g_languageIndex), 0);
 }
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
 /* Measures three text layers, positions their labels, and renders the composite text. */
-void func_804404A8_de(LayeredText *source, MenuOptionBox *position, MenuOptionBox *bounds, int flags) {
+void Pak_DrawLayeredMenuText(LayeredText *source, MenuOptionBox *position, MenuOptionBox *bounds, int flags) {
     LayeredText current;
     TextLayerMetrics first, second, third;
     int center;
@@ -81,18 +81,18 @@ void func_804404A8_de(LayeredText *source, MenuOptionBox *position, MenuOptionBo
         position->left = center - (second.width + third.width) / 2;
     }
     position->left += third.width / 2;
-    func_804402DC_de(&current, position, bounds, flags);
+    Pak_DrawMenuOptionSprite(&current, position, bounds, flags);
     current = *source;
     current.text = 0;
     position->left += (source->spacing * second.width) / 256 - third.width / 2;
     position->top += second.height / 2 - third.height / 2;
-    func_804402DC_de(&current, position, bounds, flags);
+    Pak_DrawMenuOptionSprite(&current, position, bounds, flags);
     current = *source;
     if (source->flags & 1) {
         position->left = center - first.width / 2;
     }
     draw = &current;
-    func_8043FE3C_de(draw, position, bounds, flags, RW_LOCALIZED_TEXT(*draw->text, draw->text, draw->text, g_languageIndex), 0);
+    Pak_DrawStyledMenuText(draw, position, bounds, flags, RW_LOCALIZED_TEXT(*draw->text, draw->text, draw->text, g_languageIndex), 0);
 }
 #endif
 
@@ -303,14 +303,14 @@ struct MenuBuildState {
     Vtx_t vertices[2][8];
     u8 reserved148[0x90];
 };
-/* Private block size of an item: type 3 items own 0x480 bytes (inline copy of func_80442CD8_de). */
+/* Private block size of an item: type 3 items own 0x480 bytes (inline copy of Pak_GetMenuItemExtraSize). */
 static inline s32 menuItemExtraSize(MenuBuildItem *definition) {
     s32 size = 0;
     if (definition->type == 3) size = 0x480;
     return size;
 }
 /* Fills one entry from its item and hands it the next private block (inline copy of
-   func_80442D10_de). */
+   Pak_InitMenuItemFromDescriptor). */
 static inline void initializeMenuEntry(MenuBuildEntry *entry, MenuBuildItem *definition, s32 index, MenuBuildState *menu, u8 **extra) {
     entry->index = index;
     entry->type = definition->type;
@@ -369,12 +369,12 @@ void Pak_InitializeMenu(MenuBuildState *menu, void **allocation, MenuBuildDefini
     menu->owner = owner;
     for (bank = 0; bank < 2; bank++) {
         for (i = 0; i < 8; i++) {
-            menu->vertices[bank][i].ob[0] = D_800E1F20[i].x;
-            menu->vertices[bank][i].ob[1] = D_800E1F20[i].y;
-            menu->vertices[bank][i].ob[2] = D_800E1F20[i].z;
-            menu->vertices[bank][i].cn[0] = D_800E1F20[i].red;
-            menu->vertices[bank][i].cn[1] = D_800E1F20[i].green;
-            menu->vertices[bank][i].cn[2] = D_800E1F20[i].blue;
+            menu->vertices[bank][i].ob[0] = g_menuBoxCorners[i].x;
+            menu->vertices[bank][i].ob[1] = g_menuBoxCorners[i].y;
+            menu->vertices[bank][i].ob[2] = g_menuBoxCorners[i].z;
+            menu->vertices[bank][i].cn[0] = g_menuBoxCorners[i].red;
+            menu->vertices[bank][i].cn[1] = g_menuBoxCorners[i].green;
+            menu->vertices[bank][i].cn[2] = g_menuBoxCorners[i].blue;
             menu->vertices[bank][i].cn[3] = 0xFF;
             menu->vertices[bank][i].tc[0] = 0;
             menu->vertices[bank][i].tc[1] = 0;

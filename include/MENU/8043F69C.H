@@ -67,7 +67,7 @@ struct OwnerRecAt4 {
     char pad[4];
     struct NodeRecAt1D0 *head;
 };
-struct Object_func_804420B4_de {
+struct ObjectPakDrawMenuCharacter {
     char pad[0x17];
     u8 character;
 };

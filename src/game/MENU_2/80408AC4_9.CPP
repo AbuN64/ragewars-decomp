@@ -30,14 +30,14 @@ extern s32 D_800D3BB4;
 extern s32 D_800D7E14;
 
 /* Toggles the bits arg1 names in the settings flag word D_801462C8 and returns 0. */
-s32 func_8043D0D4_de(s32 unused0, s32 arg1) {
+s32 Menu_ToggleGameOptionBits(s32 unused0, s32 arg1) {
     s32 *flags = D_801462C8;
 
     *flags ^= arg1;
     return 0;
 }
 
-s32 func_8043D0F0_de(func_8043D2D0_S *arg0) {
+s32 Menu_SetSelectedLevelLabel(func_8043D2D0_S *arg0) {
     switch (D_80154034) {
     default:
         arg0->value = &D_800D7E14;

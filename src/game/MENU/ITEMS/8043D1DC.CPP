@@ -21,7 +21,7 @@ extern void Pak_AllocateMenu(s32 a, void *obj, void *res);
 extern s32 Pak_StepValue(void *obj, s32 value, s32 a, s32 b, s32 c, s32 d);
 extern void Pak_SelectPreviewModel(s32 a, s32 b, s32 c);
 /* Steps the choice byte at 0x80 of the slot the record at 0x1C of arg1 points to: while the player passes func_8026437C_de it plays the sound for the record's style and runs the resource D_0044FA6C; otherwise Pak_StepValue moves the choice and the remapping tables D_auto_800C9237 (Control_IsLeftPressed) and D_auto_800C9233 (Control_IsRightPressed or func_8026437C_de) are applied before the display is refreshed; returns 1 or 0. */
-s32 func_8043DB50_de(s32 arg0, Func_8043DB50_Obj *arg1, s32 arg2) {
+s32 Items_HandleCharacterPreviewSelectionGerman(s32 arg0, Func_8043DB50_Obj *arg1, s32 arg2) {
     Func_8043DB50_Rec *rec = arg1->rec;
     Func_8043DB50_Slot *slot = rec->slot;
     if (Control_IsAButtonPressed(arg1->player) != 0) {
@@ -43,7 +43,7 @@ s32 func_8043DB50_de(s32 arg0, Func_8043DB50_Obj *arg1, s32 arg2) {
 }
 #endif
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(NON_MATCHING)
-s32 func_8043DCA4_de(TextBoundsText *arg0) {
+s32 Items_SelectToggleRowTextGerman(TextBoundsText *arg0) {
     s32 temp_v0;
 
     temp_v0 = arg0->value;

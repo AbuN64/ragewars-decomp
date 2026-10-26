@@ -57,17 +57,17 @@ s32 func_8022B178_de(void *);
 
 
 
-s32 func_804436F8_de(void *unused, struct RootRecAt1C *root) {
+s32 Items_SetNestedItemFlag(void *unused, struct RootRecAt1C *root) {
     root->middle->leaf->flag = 1;
     return 1;
 }
 
-s32 func_80443710_de(void *unused0, StateRecAt1C *arg1) {
+s32 Items_RespawnItemPlayer(void *unused0, StateRecAt1C *arg1) {
     Ovlgame_PlacePlayerForRound(arg1->unk1C);
     return 1;
 }
 
-void func_80443734_de(ObjRecAt1CV1 *arg0, CaptionEntry *arg1, s32 arg2, MenuStyle *arg3) {
+void Items_DrawPulsingMenuSprite(ObjRecAt1CV1 *arg0, CaptionEntry *arg1, s32 arg2, MenuStyle *arg3) {
     s32 phase;
     s32 amount;
     s32 half;
@@ -92,7 +92,7 @@ void func_80443734_de(ObjRecAt1CV1 *arg0, CaptionEntry *arg1, s32 arg2, MenuStyl
                   sx * scale, arg1->scaleY * scale, 1);
 }
 
-int func_80443844_de(int unused, PlayerRecAt1C *player) {
+int Items_ResumePlayerFromMenu(int unused, PlayerRecAt1C *player) {
     CGameStatus *sync = &D_801462C8.counters;
     int team;
 
@@ -110,7 +110,7 @@ int func_80443844_de(int unused, PlayerRecAt1C *player) {
     return 1;
 }
 
-s32 func_804438BC_de(StateRecAt1C *arg0) {
+s32 Items_UpdatePlayerRespawnDelay(StateRecAt1C *arg0) {
     CGameStatus *state;
     s32 temp_v0;
     s32 var_v0;
@@ -130,7 +130,7 @@ s32 func_804438BC_de(StateRecAt1C *arg0) {
     return var_v0;
 }
 
-s32 func_80443964_de(struct FieldRecAt14 *field) {
+s32 Items_SelectFragTagLabel(struct FieldRecAt14 *field) {
     if (D_801462C8.counters.m_bFragTagOn != 0) {
         field->text = D_800D7BE8;
     } else {

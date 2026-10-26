@@ -3,5 +3,5 @@
 #include "COMMON/PLAYERRECAT64E.H"
 extern s32 func_8043ED48_de(void);
 extern void Multi_SelectInitialController(void *arg0, struct ObjRecAt20V2 *menu);
-extern s32 func_8043ED50_de(void);
+extern s32 Multi_RequestSessionTransition(void);
 #endif

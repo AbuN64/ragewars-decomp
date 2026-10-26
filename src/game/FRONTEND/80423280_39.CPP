@@ -13,7 +13,7 @@
 #ifdef NON_MATCHING
 /* Drafted below with the other versions' body. */
 #else
-INCLUDE_ASM("ovl_80400000", func_80427B08_de);
+INCLUDE_ASM("ovl_80400000", Frontend_UpdateResultsHeading);
 #endif
 #endif
 
@@ -57,7 +57,7 @@ extern void XPlus_CopyString(char *, char *);
 extern s32 Frontend_FindKeyIndex(s32);
 extern void XStdio_FormatBuffer(char *, char *, ...);
 
-void func_80427B08_de(void) {
+void Frontend_UpdateResultsHeading(void) {
     Shared_Game *settings;
     struct Label *item;
     s32 time;

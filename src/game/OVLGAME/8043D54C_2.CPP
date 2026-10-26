@@ -5,14 +5,14 @@
 #include "OVLGAME/SHAREDRECAT224.H"
 
 #if defined(VERSION_EU_X) || defined(VERSION_US)
-s32 func_8043DADC_de(void *arg0, MenuRules *menuRules) {
+s32 Menu_ForwardRulesLock(void *arg0, MenuRules *menuRules) {
     Ovlgame_PlacePlayerForRound(menuRules->locked);
     return 1;
 }
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
-s32 func_8043DADC_de(void *unused, MenuRules *rules) {
+s32 Menu_ForwardRulesLock(void *unused, MenuRules *rules) {
     Ovlgame_PlacePlayerForRound(rules->locked);
     return 1;
 }

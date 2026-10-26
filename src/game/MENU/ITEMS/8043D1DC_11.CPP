@@ -6,16 +6,16 @@ extern s32 D_801462C8;
 extern s32 D_801462CC;
 
 /* Updates the option item's flag bit and selects its associated text pointer. */
-s32 Items_UpdateOptionBit0Item(TextBoundsText *arg0) {
+s32 Items_UpdateOptionBit0Item(TextBoundsText *optionItem) {
     if (D_801462CC & 1) {
-        arg0->flags |= 0x01000000;
+        optionItem->flags |= 0x01000000;
     } else {
-        arg0->flags &= 0xFEFFFFFF;
+        optionItem->flags &= 0xFEFFFFFF;
     }
     if (D_801462C8 & 1) {
-        arg0->text = &D_800D3B0C;
+        optionItem->text = &D_800D3B0C;
     } else {
-        arg0->text = &D_800D3B10;
+        optionItem->text = &D_800D3B10;
     }
     return 0;
 }

@@ -35,7 +35,7 @@ struct MenuItemRecAt14;
 typedef struct MenuItemRecAt14 MenuItemRecAt14;
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 func_8044488C_de(struct LayeredText *field);
+s32 Items_FormatPackedGameOption(struct LayeredText *field);
 #endif
 
 extern u8 *D_800D35EC[];
