@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "RENDER_4/8026AC38.H"
@@ -14,8 +15,40 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "RESMGR/resmgr_string_memory.H"
-#include "WEAPONS/80225D10_7.H"
+#include "AI/PLAYERAI_7.H"
 #include "COMMON/PLAYERPROFILES.H"
+
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_80228AF4_C88CC[14] = {
+    0x3D888889, 0x3C888889, 0x42700000, 0x3F800000, 0x41F00000, 0x3F000000, 0x3F4CCCCD, 0x41200000,
+    0x3F000000, 0x41A00000, 0x3F000000, 0x40E00000, 0x40C00000, 0x41400000,
+};
+#endif
+
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+const unsigned int rodata_func_80228E60_eu_800C2EB4[1] = {
+    0x43160000,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+const unsigned int D_auto_src_rw_pool_80228AF4_C88CC_us_rev1[14] = {
+    0x3D888889, 0x3C888889, 0x42700000, 0x3F800000, 0x41F00000, 0x3F000000, 0x3F4CCCCD, 0x41200000,
+    0x3F000000, 0x41A00000, 0x3F000000, 0x40E00000, 0x40C00000, 0x41400000,
+};
+#endif
+
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_80228DC4_C8904[4] = {
+    0x3F800000, 0x3727C5AC, 0x4CBEBC20, 0x3F000000,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+const unsigned int D_auto_src_rw_pool_80228DC4_C8904_us_rev1[4] = {
+    0x3F800000, 0x3727C5AC, 0x4CBEBC20, 0x3F000000,
+};
+#endif
 
 /* Draws an actor's player model with its status tint: sets the other-mode lighting command and render
    mode 2, gives the model the team colour byte (the match rule D_801468A0's colour at 0x73 when team
@@ -221,3 +254,16 @@ void Player_GiveAmmoWithMessage(SharedPlayer *player, s32 type, s32 amount) {
         func_8022B75C_de(player, message, 1.0f);
     }
 }
+
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_802292B8_C8934[3] = {
+    0x43800000, 0x41300000, 0x4879C000,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_802292B8_C8934_us_rev1.c */
+const unsigned int D_blob_149b9788bb56a6447838[3] = {
+    0x43800000, 0x41300000, 0x4879C000,
+};
+#endif
