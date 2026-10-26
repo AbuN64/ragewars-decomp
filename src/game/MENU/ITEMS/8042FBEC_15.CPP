@@ -7,7 +7,6 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "TYPES.H"
-extern f32 D_800E2390;
 
 typedef struct FlagOwner_func_8043FC50_eu {
     char pad0[0x30];
@@ -20,7 +19,7 @@ typedef struct Holder_func_8043FC50_eu {
 } Holder_func_8043FC50_eu;
 
 void func_8043FC50_eu(Holder_func_8043FC50_eu *arg0) {
-    D_801462C8.counters.m_GameOverTimer = D_800E2390;
+    D_801462C8.counters.m_GameOverTimer = 120.0f;
     arg0->owner->flags &= 0xFBFFFFFF;
 }
 #else
