@@ -6,8 +6,8 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 
-struct DescriptorRecAt29;
-typedef struct DescriptorRecAt29 DescriptorRecAt29;
+struct CROMSkyLayer;
+typedef struct CROMSkyLayer CROMSkyLayer;
 
 extern float D_800C86E8;
 
@@ -27,8 +27,8 @@ struct Host {
 };
 
 
-struct DescriptorRecAt29;
-struct DescriptorRecAt29 {
+struct CROMSkyLayer;
+struct CROMSkyLayer {
     s16 texture; /* +0: Sky_UpdateSceneEffects passes it to TextLoad_LocateTextureResource */
     u8 red, green, blue;
     u8 envRed, envGreen, envBlue;
@@ -75,7 +75,7 @@ struct ObjectRecAt220 {
     char gap0[4];
     struct ObjectRecAt220 *next;
     char gap8[4];
-    DescriptorRecAt29 *descriptor;
+    CROMSkyLayer *descriptor;
     u16 mask;
     char gap12[2];
     s32 texture[2];
@@ -128,7 +128,7 @@ typedef struct Rotor Rotor;
 
 extern float D_800C35F4_de;
 
-struct DescriptorRecAt29;
+struct CROMSkyLayer;
 struct Rotor;
 
 struct ObjRecAt210;

@@ -445,7 +445,7 @@ void Frontend_ClampListCursorAndScroll(List *list) {
 
 
 
-void Frontend_ConfigureScrolledTableCell(ScrollTable *table, sm_dltext *cell, u32 row, u32 col) {
+void Frontend_ConfigureScrolledTableCell(sm_dllistbox *table, sm_dltext *cell, u32 row, u32 col) {
     s32 lastCol;
     s32 lastRow;
     u32 entryCol;

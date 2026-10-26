@@ -79,7 +79,7 @@ struct func_802070D0_S2 {
 };
 struct TrackCode80206258 {
     char prefix[0x14];
-    struct SegmentRecAt5C segment;
+    struct CPlatformIntelligence segment;
 };
 struct func_80206604_G1 {
     u8 unk0;

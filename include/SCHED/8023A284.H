@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 struct Rotor {
     char pad0[0xC];
-    struct DescriptorRecAt29 *descriptor;
+    struct CROMSkyLayer *descriptor;
     u16 mask;
     char pad12[0xA];
     f32 angleA;

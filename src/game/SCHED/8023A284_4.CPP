@@ -31,7 +31,7 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
     u8 center[3], rim[3];
     s32 below;
     void *resource;
-    DescriptorRecAt29 *descriptor;
+    CROMSkyLayer *descriptor;
     s32 frameIndex, scaleS, scaleT;
     u8 *frame;
     f32 phase, fadeRange, fadeOffset;
@@ -200,7 +200,7 @@ typedef struct HostView8023AFF0 {
     char pad5C[0xD0];
     f32 speed;
 } HostView8023AFF0;
-extern DescriptorRecAt29 *D_801370C8;
+extern CROMSkyLayer *D_801370C8;
 extern s32 D_801370CC;
 extern f32 D_800D2988;
 extern Shared_ReactionFlags *Scene_GetModelRecordByIndexPointer(void *, void *);
@@ -220,7 +220,7 @@ static inline ObjectRecAt220 *allocateSceneEffect(Scene *scene) {
 }
 
 static inline s32 updateSceneEffect(ObjectRecAt220 *object, HostView8023AFF0 *host, u16 mask, s32 below, f32 hostDepth, f32 limit) {
-    DescriptorRecAt29 *descriptor = object->descriptor;
+    CROMSkyLayer *descriptor = object->descriptor;
     f32 value, step, depth, wrapPeriod, fadeStep;
     if (object->mask & mask) {
         value = object->throttle;
@@ -268,7 +268,7 @@ void Sky_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
     CVector3 anchor;
     CVector3 probe;
     Shared_ReactionFlags *entry;
-    DescriptorRecAt29 *descriptor;
+    CROMSkyLayer *descriptor;
     ObjectRecAt220 *object;
     ObjectRecAt220 *next;
     void *resource;

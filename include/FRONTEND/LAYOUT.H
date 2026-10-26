@@ -98,8 +98,8 @@ typedef struct EntryFrontendSetGridCellValues EntryFrontendSetGridCellValues;
 
 
 
-struct ScrollTable;
-struct ScrollTable {
+struct sm_dllistbox;
+struct sm_dllistbox {
     Layout layout;
     s32 pad2C[6];
     s32 *contents;
@@ -127,8 +127,8 @@ typedef struct OwnedImage OwnedImage;
 
 
 
-struct ScrollTable;
-typedef struct ScrollTable ScrollTable;
+struct sm_dllistbox;
+typedef struct sm_dllistbox sm_dllistbox;
 
 
 typedef struct ImageDescriptor { u8 format; char pad1[7]; s16 width; char padA[0xA]; void *pixels, *palette; } ImageDescriptor;

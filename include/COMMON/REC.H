@@ -98,8 +98,8 @@ typedef struct RiderCode80206258 RiderCode80206258;
 
 
 
-struct SegmentRecAt5C;
-struct SegmentRecAt5C {
+struct CPlatformIntelligence;
+struct CPlatformIntelligence {
     char pad0[4];
     u16 moving;
     char pad6[0x1E];
@@ -123,8 +123,8 @@ struct SegmentRecAt5C {
 
 
 
-struct SegmentRecAt5C;
-typedef struct SegmentRecAt5C SegmentRecAt5C;
+struct CPlatformIntelligence;
+typedef struct CPlatformIntelligence CPlatformIntelligence;
 
 
 

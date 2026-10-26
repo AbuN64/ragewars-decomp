@@ -107,7 +107,7 @@ extern f32 D_800D2988;
 /* Advance triggered shaking and vertical motion, invalidating animation on a state change. */
 /* A hold segment keeps the motion until the input is held. */
 void Device_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode80206258 *motion) {
-    SegmentRecAt5C *segment;
+    CPlatformIntelligence *segment;
     s32 oldState;
     s32 release;
     f32 shakeMin;
@@ -288,14 +288,14 @@ extern f32 D_800C1B9C_de;
 
 void func_80206DD4_de(Actor_func_80206DD4_de *actor, RiderCode80206258 *rider) {
     CVector3 point;
-    SegmentRecAt5C *segment;
+    CPlatformIntelligence *segment;
     f32 t;
     f32 phase;
     f32 amp;
     CVector3 *base;
     Actor_func_80206DD4_de *owner;
     t = rider->throttle;
-    segment = (SegmentRecAt5C *)(actor->track + 0x14);
+    segment = (CPlatformIntelligence *)(actor->track + 0x14);
     if (t < 0.0f) {
         t = 0.0f;
     } else if (t > 1.0f) {

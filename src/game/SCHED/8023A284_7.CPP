@@ -105,7 +105,7 @@ void func_8023B694_de(Effect *effect, s16 *definition, s16 mask, f32 scale,
 }
 
 s32 func_8023B718_de(Rotor *rotor, s32 mask, f32 fallback, s32 boosting, f32 boost, Host *host) {
-    DescriptorRecAt29 *descriptor;
+    CROMSkyLayer *descriptor;
     f32 throttle;
     f32 value;
     f32 angle;
