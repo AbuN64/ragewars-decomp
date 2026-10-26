@@ -197,7 +197,6 @@ EntryRecAt18V4 *Scene_FindTypeFourteenActorByDefinitionId(WorldCode8028B64C *wor
 
 extern Player *Player_GetFirstPlayer(void *list);
 #ifdef VERSION_EU
-extern Player *Player_GetFirstPlayer(void *list);
 #endif
 
 Player *Scene_FindNearestObjectToFirstPlayer(WorldRecAt1B6A4 *world) {

@@ -47,7 +47,6 @@ INCLUDE_ASM("ovl_80400000", Menu_FormatRightAlignedName);
 
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
-extern s32 D_80153774;
 extern char D_800D37D0[];
 extern char D_auto_800D37D8[];
 extern char *D_auto_800D39F8, *D_auto_800D39FC, *D_auto_800D3A10, *D_auto_800D3A18, *D_auto_800D3A1C;

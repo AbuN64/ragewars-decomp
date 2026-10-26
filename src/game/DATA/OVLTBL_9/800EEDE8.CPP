@@ -64,8 +64,6 @@ s32 Items_UpdateOptionBit1Item(TextBoundsText *item) {
 #endif
 
 #if defined(VERSION_US_REV1)
-extern s32 D_801462C8;
-extern s32 D_801462CC;
 extern s32 D_800D3B14;
 extern s32 D_800D3B18;
 

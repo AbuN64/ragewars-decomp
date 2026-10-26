@@ -216,7 +216,6 @@ static inline void *pool_alloc(s32 arg1) {
     return cacheEntry;
 }
 
-extern s32 func_80255920_de(void *, s32);
 
 extern void Defs_MoveMemory(u32, u32, s32);
 
