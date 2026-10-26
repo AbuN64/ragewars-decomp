@@ -52,11 +52,8 @@ void SetN64_HandleSessionTransitionInput(GameSession *session, s32 arg1, s32 tar
 
 #if defined(VERSION_EU)
 extern void Tsmos_InitializeEuropeanFrontend(void);
-#elif defined(VERSION_EU_X)
-extern void func_802A2374_eu_x(void);
-#elif defined(VERSION_US) || defined(VERSION_US_REV1)
-extern void InitFrontendMenus(void);
 #else
+extern void InitFrontendMenus(void);
 #endif
 extern void SmXlate_SwitchScreen(s32 arg0);
 extern void SetN64_BeginModeTransition(GameSession *arg0, s32 arg1);
@@ -80,12 +77,8 @@ void SetN64_DrawSessionWithAttractTimeout(void *session) {
                 
 #if defined(VERSION_EU)
 Tsmos_InitializeEuropeanFrontend
-#elif defined(VERSION_EU_X)
-func_802A2374_eu_x
-#elif defined(VERSION_US) || defined(VERSION_US_REV1)
-InitFrontendMenus
 #else
-func_802A2224_de
+InitFrontendMenus
 #endif
 ();
                 SmXlate_SwitchScreen(2);
@@ -97,12 +90,8 @@ func_802A2224_de
                 
 #if defined(VERSION_EU)
 Tsmos_InitializeEuropeanFrontend
-#elif defined(VERSION_EU_X)
-func_802A2374_eu_x
-#elif defined(VERSION_US) || defined(VERSION_US_REV1)
-InitFrontendMenus
 #else
-func_802A2224_de
+InitFrontendMenus
 #endif
 ();
                 SmXlate_SwitchScreen(2);

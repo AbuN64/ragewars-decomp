@@ -263,9 +263,6 @@ s32 Pak_UpdateSpaceLabel(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
     return 0;
 }
 
-#if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_80400000", Pak_HandleMenuAction);
-#else
 s32 Pak_HandleMenuAction(s32 arg0, Shared_PakMenu *menu, s32 arg2)
 {
     s32 ch = 0;
@@ -341,4 +338,3 @@ s32 Pak_HandleMenuAction(s32 arg0, Shared_PakMenu *menu, s32 arg2)
     }
     return 0;
 }
-#endif

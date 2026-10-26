@@ -16,9 +16,6 @@
 #include "LEVEL/8020402C.H"
 #include "WEAPONS/80213ED4.H"
 
-#if defined(VERSION_US) && !defined(NON_MATCHING)
-INCLUDE_ASM("span_1000", func_8020402C_us);
-#endif
 
 #if defined(VERSION_EU_X) && !defined(NON_MATCHING)
 INCLUDE_ASM("span_1000", func_80204030_eu_x);
@@ -28,17 +25,7 @@ INCLUDE_ASM("span_1000", func_80204030_eu_x);
 INCLUDE_ASM("span_1000", func_80204030_eu);
 #endif
 
-#if defined(VERSION_US_REV1) || defined(VERSION_DE)
-/* Fuzzy draft for us and de: the us-rev1 body under each version's own name. */
-#if defined(VERSION_US)
-#define LV_FN func_8020402C_us
-#elif defined(VERSION_EU)
-#define LV_FN func_80204030_eu
-#elif defined(VERSION_EU_X)
-#define LV_FN func_80204030_eu_x
-#else
-#define LV_FN Action_UpdateBreakableProximity
-#endif
+#if defined(VERSION_US_REV1) || defined(VERSION_DE) || defined(VERSION_US)
 #define LV_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 extern s32 D_auto_800D70DC;
 extern u8 *Player_FindTransientPlayer(u8 *);
@@ -48,7 +35,7 @@ extern void Camera_PostScreenMessage(u8 *, void *, s32);
 typedef struct LvDelta {
     f32 x, y, z;
 } LvDelta;
-void LV_FN(u8 *self, u8 *hit) {
+void Action_UpdateBreakableProximity(u8 *self, u8 *hit) {
     u8 *state = LV_FIELD(self, u8 *, 0x18) + 0x14;
     u16 kind = LV_FIELD(self, u16, 0xE4);
     u8 *player;

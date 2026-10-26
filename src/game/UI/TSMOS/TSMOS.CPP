@@ -1,7 +1,8 @@
 #include "include_asm.h"
 #include "COMMON/LONE/D_80106248.H"
+#include "COMMON/LONE/D_80152789.H"
 
-#if defined(VERSION_US) || defined(VERSION_US_REV1)
+#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_DE) || defined(VERSION_EU_X)
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 
@@ -26,6 +27,7 @@ extern void N64Eng_RegisterNumericWidgetClass(void);
 extern void Tsmos_SetIdleTimer(f32);
 extern void Tsmos_SetTimerState(s32);
 extern void Tsmos_ActivateControllerState(void);
+extern void Frontend_LoadLanguageStringsIfAny(s32);
 
 void InitFrontendMenus(void) {
     func_80255228_de(&D_80106248);
@@ -49,5 +51,10 @@ void InitFrontendMenus(void) {
     Tsmos_ActivateControllerState();
     D_800D2C90.x = 0;
     Tsmos_SetModeOneFlag(2);
+#if defined(VERSION_DE)
+    Frontend_LoadLanguageStringsIfAny(0);
+#elif defined(VERSION_EU_X)
+    Frontend_LoadLanguageStringsIfAny(g_languageIndex);
+#endif
 }
 #endif

@@ -2555,3 +2555,5 @@ D_auto_800D70DC = 0x800D30B0;
 literals_Menu_AnimateTabOptionsMenu = 0x800DD620; // rom:0xDE220 size:0x14
 literals_DispatchControllerButtonEvent = 0x800C5690; // rom:0xC6290 size:0x24
 literals_Player_ApplyStun = 0x800C2C58; // rom:0xC3858 size:0x28
+D_0043C500 = 0x0043C320;
+D_800C6080_eu_x = 0x800C5DA0;

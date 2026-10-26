@@ -655,7 +655,7 @@ SECTIONS
         src/game/RESMGR/802A23A4_11.CPP.o(.text);
         src/game/DATA/MAINCODE/802A2230.CPP.o(.data);
         src/game/RESMGR/802A2230_6.CPP.o(.text);
-        src/game/UI/TSMOS/TSMOS_2.CPP.o(.text);
+        src/game/UI/TSMOS/TSMOS.CPP.o(.text);
         src/game/RESMGR/802A2230_7.CPP.o(.text);
         src/game/MATH/802A3090_5.CPP.o(.text);
         src/game/RESMGR/802A2230_8.CPP.o(.text);
@@ -2644,7 +2644,7 @@ SECTIONS
         src/game/RESMGR/802A23A4_11.CPP.o(.text);
         src/game/RESMGR/802A23A4_11.CPP.o(.data);
         src/game/RESMGR/802A2230_6.CPP.o(.text);
-        src/game/UI/TSMOS/TSMOS_4.CPP.o(.text);
+        src/game/UI/TSMOS/TSMOS.CPP.o(.text);
         src/game/RESMGR/802A2230_7.CPP.o(.text);
         src/game/MATH/802A3090_5.CPP.o(.text);
         src/game/RESMGR/802A2230_8.CPP.o(.text);
@@ -3026,6 +3026,7 @@ SECTIONS
         src/game/AI/ENEMIES/TURRETAI_3.CPP.o(.text);
         src/game/AI/ENEMIES/TURRETAI_4.CPP.o(.text);
         src/game/AI/ENEMIES/TURRETAI_5.CPP.o(.text);
+        src/game/DATA/MAINCODE/DATA_8020402C.CPP.o(.data);
         src/game/LEVEL/8020402C.CPP.o(.text);
         src/game/LEVEL/8020402C.CPP.o(.data);
         src/game/LEVEL/8020402C_3.CPP.o(.text);
@@ -5651,7 +5652,7 @@ SECTIONS
         src/game/RESMGR/802A23A4_11.CPP.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/802A2230.CPP.o(.bss .sbss COMMON);
         src/game/RESMGR/802A2230_6.CPP.o(.bss .sbss COMMON);
-        src/game/UI/TSMOS/TSMOS_2.CPP.o(.bss .sbss COMMON);
+        src/game/UI/TSMOS/TSMOS.CPP.o(.bss .sbss COMMON);
         src/game/RESMGR/802A2230_7.CPP.o(.bss .sbss COMMON);
         src/game/MATH/802A3090_5.CPP.o(.bss .sbss COMMON);
         src/game/RESMGR/802A2230_8.CPP.o(.bss .sbss COMMON);
@@ -7586,7 +7587,7 @@ SECTIONS
         src/game/MATH/802A2870_3.CPP.o(.bss .sbss COMMON);
         src/game/RESMGR/802A23A4_11.CPP.o(.bss .sbss COMMON);
         src/game/RESMGR/802A2230_6.CPP.o(.bss .sbss COMMON);
-        src/game/UI/TSMOS/TSMOS_4.CPP.o(.bss .sbss COMMON);
+        src/game/UI/TSMOS/TSMOS.CPP.o(.bss .sbss COMMON);
         src/game/RESMGR/802A2230_7.CPP.o(.bss .sbss COMMON);
         src/game/MATH/802A3090_5.CPP.o(.bss .sbss COMMON);
         src/game/RESMGR/802A2230_8.CPP.o(.bss .sbss COMMON);
@@ -7954,6 +7955,7 @@ SECTIONS
         src/game/AI/ENEMIES/TURRETAI_3.CPP.o(.bss .sbss COMMON);
         src/game/AI/ENEMIES/TURRETAI_4.CPP.o(.bss .sbss COMMON);
         src/game/AI/ENEMIES/TURRETAI_5.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/MAINCODE/DATA_8020402C.CPP.o(.bss .sbss COMMON);
         src/game/LEVEL/8020402C.CPP.o(.bss .sbss COMMON);
         src/game/LEVEL/8020402C_3.CPP.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/80204E78_2.CPP.o(.bss .sbss COMMON);
@@ -14930,8 +14932,8 @@ SECTIONS
         src/game/GAME/800C6B34.CPP.o(.rodata .rdata);
         src/game/GAME/800C6B38.CPP.o(.rodata .rdata);
         src/game/AI/ENEMIES/TURRETAI_5.CPP.o(.rodata .rdata);
-        src/game/DATA/OVL1_A/800C6B40.CPP.o(.rodata .rdata);
-        src/game/DATA/OVLDAT1/800C1984.CPP.o(.data);
+        . = ALIGN(8) /* src/game/LEVEL/8020402C.CPP.o */;
+        src/game/LEVEL/8020402C.CPP.o(.rodata .rdata);
         src/game/LEVEL/800C6B5C.CPP.o(.rodata .rdata);
         src/game/LEVEL/800C6B60.CPP.o(.rodata .rdata);
         src/game/DATA/OVL1_A/800C6B64_3.CPP.o(.rodata .rdata);
@@ -22496,8 +22498,7 @@ SECTIONS
         src/game/GAME/800C6B34.CPP.o(.bss .sbss COMMON);
         src/game/GAME/800C6B38.CPP.o(.bss .sbss COMMON);
         src/game/AI/ENEMIES/TURRETAI_5.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVL1_A/800C6B40.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVLDAT1/800C1984.CPP.o(.bss .sbss COMMON);
+        src/game/LEVEL/8020402C.CPP.o(.bss .sbss COMMON);
         src/game/LEVEL/800C6B5C.CPP.o(.bss .sbss COMMON);
         src/game/LEVEL/800C6B60.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_A/800C6B64_3.CPP.o(.bss .sbss COMMON);

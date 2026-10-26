@@ -66,26 +66,18 @@ mode_done:
         }
     }
 }
-#if defined(VERSION_DE)
-s32 func_802A2224_de();
-#elif defined(VERSION_EU)
+#if defined(VERSION_EU)
 s32 Tsmos_InitializeEuropeanFrontend();
-#elif defined(VERSION_EU_X)
-s32 func_802A2374_eu_x();
-#elif defined(VERSION_US) || defined(VERSION_US_REV1)
+#else
 s32 InitFrontendMenus();
 #endif
 s32 Frontend_ResetJoinRequestEntries();
 void Tsmos_InitFrontendOnce(void) {
     if (D_800D2C98 == 0) {
         Frontend_ResetJoinRequestEntries();
-#if defined(VERSION_DE)
-        func_802A2224_de();
-#elif defined(VERSION_EU)
+#if defined(VERSION_EU)
         Tsmos_InitializeEuropeanFrontend();
-#elif defined(VERSION_EU_X)
-        func_802A2374_eu_x();
-#elif defined(VERSION_US) || defined(VERSION_US_REV1)
+#else
         InitFrontendMenus();
 #endif
     }
