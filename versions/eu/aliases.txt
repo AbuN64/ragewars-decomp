@@ -2608,3 +2608,5 @@ literals_Items_ResetGameOptions = 0x800EEE08; // rom:0xEFA08 size:0x4
 D_auto_800CE480 = 0x800C9E20;
 D_auto_rodata_unresolved_800CE410_unclaimed_CF230 = 0x800C9FD0;
 literals_Ovlgame_InitActorHudState = 0x800C25A0; // rom:0xC31A0 size:0x18
+literals_func_8026F368_de = 0x800C4980; // rom:0xC5580 size:0x1C
+literals_Text_DrawTileGrid = 0x800C6460; // rom:0xC7060 size:0x30

@@ -246,25 +246,6 @@ void OnScreen_DrawTextWithShadow(u8 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
 }
 #endif
 
-#if defined(VERSION_EU_X)
-#ifdef NON_MATCHING
-s32 OnScreen_DrawSpriteResource(s32 icon, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 which) {
-
-    s32 temp_v0;
-
-    if ((u32)(D_800E28A4 - (((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) >> 3)) < 0x3E8
-        || D_800CD764_de == 0
-        || (temp_v0 = Scene_StartWorldEffect(&g_world, icon, 0, 1), temp_v0 == 0)) {
-        return 0;
-    }
-    Text_DrawTileGrid(temp_v0, arg1, arg2, arg3, arg4, arg5, which);
-    Cache_UnlockResource(0, temp_v0);
-    return 1;
-}
-#else
-INCLUDE_ASM("span_1000", OnScreen_DrawSpriteResource);
-#endif
-#endif
 
 #if !(defined(VERSION_EU_X))
 
@@ -336,6 +317,9 @@ void OnScreen_DrawTextWithShadow(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
     OnScreen_DrawTextGlyphs(arg0, arg1, arg2, arg3, arg4, 0, arg6, arg7);
 }
 
+#endif
+
+extern void Text_DrawTileGrid(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
 s32 OnScreen_DrawSpriteResource(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6) {
 
     s32 temp_v0;
@@ -349,7 +333,6 @@ s32 OnScreen_DrawSpriteResource(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4
     Cache_UnlockResource(0, temp_v0);
     return 1;
 }
-#endif
 
 extern u8 D_801470C0_de[0x90];
 extern void *func_802BD3A0_de(void *, const void *, int);

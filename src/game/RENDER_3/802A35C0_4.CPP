@@ -219,7 +219,6 @@ loop_4:
     }
 }
 
-#if defined(VERSION_US_REV1) || defined(NON_MATCHING)
 #include "TYPES.H"
 
 typedef struct EffectResource {
@@ -307,9 +306,6 @@ void Fx_AttachActorRibbon(EffectWorld *world, FxActor *actor, s32 resourceId) {
     }
     }
 }
-#else
-INCLUDE_ASM("span_1000", Fx_AttachActorRibbon);
-#endif
 
 extern void TextLoad_ResetTextureCache(void);
 extern void Smp_UpdateLinkedNodeTransforms(RibbonActor *ribbon);

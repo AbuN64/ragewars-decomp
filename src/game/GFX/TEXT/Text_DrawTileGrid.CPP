@@ -4,7 +4,6 @@
 #include "COMMON/GFX.H"
 #include "gbi.h"
 
-#if defined(VERSION_US_REV1)
 struct Node80253610;
 extern void Cache_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
 extern Gfx *g_displayListCursor;
@@ -139,4 +138,3 @@ void Text_DrawTileGrid(void *handle, s32 index, s32 initialX, s16 initialY, f32 
         }
     }
 }
-#endif
