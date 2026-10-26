@@ -51,7 +51,6 @@ s32 func_802551FC_de(ResourceLoadWorker *worker, ResourceRequest *request, void 
     return ~osSendMesg(&worker->requests, request, 0) != 0;
 }
 
-extern s32 func_802BB5F0_de(void *, s32);
 
 
 

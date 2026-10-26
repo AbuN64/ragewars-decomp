@@ -107,13 +107,11 @@ void Geometry_ExpandBasicModel(s32 arg0, s32 arg1) {
     Geometry_ExpandModelCommands(arg0, arg1, 0, 0);
 }
 
-extern void Geometry_ExpandModelCommands(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 
 void Geometry_ExpandModelWithSentinel(s32 arg0, s32 arg1) {
     Geometry_ExpandModelCommands(arg0, arg1, 0, 1);
 }
 
-extern void Geometry_ExpandModelCommands(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 
 void Geometry_ExpandExtendedModel(s32 arg0, s32 arg1) {
     Geometry_ExpandModelCommands(arg0, arg1, 1, 0);

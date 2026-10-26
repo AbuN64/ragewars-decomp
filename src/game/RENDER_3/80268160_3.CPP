@@ -78,7 +78,6 @@ void Events_SetActorEffectMode(LevelActor *actor, int arg1, int arg2, Blast blas
 /* Calls Barrel_StopActorLoopingSound on an object and its block at 0x170, sets bit 0x20 in that block's first word, clears flags 0x10000, 0x2000 and 0x100 at offset 0x100, and calls AnimPool_ReleaseSceneEffect when flag 0x80000 remains set. Adapted from Link_DeactivateActorState with the block taken at offset 0x170 of the object, a by-value record added as the fourth argument, and each flag update written as a compound assignment to memory. */
 
 
-extern void Barrel_StopActorLoopingSound(u8 *, u8 *);
 extern void AnimPool_ReleaseSceneEffect(void *arg0);
 
 

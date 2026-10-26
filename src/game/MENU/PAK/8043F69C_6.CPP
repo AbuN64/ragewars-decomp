@@ -194,7 +194,6 @@ void *Pak_OpenDialog(void *parent, struct Dialog *list, s32 player, s32 controll
 }
 
 /* Allocates a block sized for the entries of a list (forty bytes each plus 0x480 for every entry of type three, over a 0x1D8 header) through Cache_AllocateResource, builds it with Pak_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. */
-extern char g_menuText[];
 
 void *Pak_CreateMenuFromTemplate(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *params, struct Dialog *list) {
     s32 a = params->a;
@@ -230,7 +229,6 @@ void *Pak_CreateMenuFromTemplate(struct func_8025E5B0_S1 *owner, struct ParamsRe
 }
 
 /* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Pak_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_CreateMenuFromTemplate with the first parameter read from offset 0x14 instead of 0x18. */
-extern char g_menuText[];
 
 void *Pak_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateMenu *params, struct Dialog *list) {
     s32 a = params->a;

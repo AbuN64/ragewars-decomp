@@ -52,8 +52,6 @@ s32 func_8043E610_de(void *unused0, Handle8043E788 *menuContext) {
 
 /* Sets arg1->unk1C's unk858 flag and clears its unk5D8's unk80, then forwards to Pak_OpenDialog. */
 
-extern void Pak_OpenDialog(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4);
-extern s32 D_0044FB2C;
 
 
 
