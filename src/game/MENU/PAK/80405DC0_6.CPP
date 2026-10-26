@@ -11,7 +11,7 @@
 extern s32 D_8011FECC;
 extern void *D_800DE860_de;
 extern u8 g_pakSingleSaveBlockName[];
-extern Copy584 D_801462C8;
+#include "COMMON/SHARED_GAMESLOT.H"
 extern f32 D_801468A0[];
 extern u8 D_800F91F0[];
 extern void func_80253908_de(s32);
@@ -36,7 +36,7 @@ void Pak_CreateSaveSnapshot(u8 *player) {
     D_800DE860_de = snapshotHandle;
     XPlus_FillMemory(D_800DE868, 0, allocationSize);
     D_800DE868->player = *(Copy70 *)(player + 0x5E0);
-    D_800DE868->world = D_801462C8;
+    D_800DE868->world = *(Copy584 *)&D_801462C8;
     snapshot = D_800DE868;
     snapshot->view[0] = D_801468A0[0];
     snapshot->view[1] = D_801468A0[1];
@@ -51,23 +51,14 @@ INCLUDE_ASM("ovl_80400000", Pak_CreateSaveSnapshot);
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-#ifdef NON_MATCHING
-/* Drafted below with the other versions' body. */
-#else
-INCLUDE_ASM("ovl_80400000", Pak_MarkSaveNotes);
-#endif
-#endif
-
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern char *D_800E25D4[];
 extern char *D_800E25C4[];
 extern char *D_800E25A4[];
 extern char *D_800E25B4[];
 #define PAK_CODE D_800E25D4[g_languageIndex]
 #define PAK_COMPANY D_800E25C4[g_languageIndex]
-#define PAK_TITLE1 D_800E25A4[((u8 *)&D_801462C8)[0x581]]
-#define PAK_TITLE2 D_800E25B4[((u8 *)&D_801462C8)[0x581]]
+#define PAK_TITLE1 D_800E25A4[getSettings()->language]
+#define PAK_TITLE2 D_800E25B4[getSettings()->language]
 #else
 #define PAK_CODE D_800D36E0
 #define PAK_COMPANY D_800D36DC
@@ -84,6 +75,12 @@ extern char *D_800D36E0;
 extern s32 Pak_ReadNoteInfo(s32 ch, s32 index, s32 *exists, char *name, char *ext, s32 *size,
                          char *company, char *code);
 extern s32 XPlus_StringLength(char *);
+
+/* Inlined into each title lookup: the loop pass merges the two address loads into one hoisted register,
+ * which then outranks the loop-hoisted length constants 4 and 2 (a local pointer loses that race). */
+static __inline__ Shared_Game *getSettings(void) {
+    return &D_801462C8;
+}
 
 void Pak_MarkSaveNotes(Shared_PakMenu *menu) {
     s32 ch;
@@ -144,7 +141,6 @@ void Pak_MarkSaveNotes(Shared_PakMenu *menu) {
         }
     }
 }
-#endif
 
 extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
 static __inline__ char *pakPrompt(s32 *channel) {
