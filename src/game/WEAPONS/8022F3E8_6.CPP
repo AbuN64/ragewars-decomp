@@ -13,7 +13,7 @@
 extern char D_800CE8DC;
 
 
-extern s16 func_8022F96C_de(void *arg0);
+extern s16 Weapon_FindNextUsableWeapon(void *arg0);
 extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
@@ -27,7 +27,7 @@ extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32
 
 
 
-void func_80230630_de(LevelActor *arg0, void *arg1) {
+void Weapon_UpdateIdleWeaponSelection(LevelActor *arg0, void *arg1) {
     s32 state;
     void *actor;
     CGameStatus *audio;
@@ -41,7 +41,7 @@ void func_80230630_de(LevelActor *arg0, void *arg1) {
             if (((Dest *)arg1)->field13C == 2) {
                 ((Dest *)arg1)->field13C = 1;
                 if (Weapons_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
-                    ((Shared_ActorView *)actor)->nextWeapon = func_8022F96C_de(actor);
+                    ((Shared_ActorView *)actor)->nextWeapon = Weapon_FindNextUsableWeapon(actor);
                 }
             }
         }
@@ -76,7 +76,7 @@ void func_80230630_de(LevelActor *arg0, void *arg1) {
         }
     } else if ((state != 1) && (state != 7) &&
                ((s8)((Dest *)arg1)->count != 0)) {
-        func_8022FDAC_de(arg0, arg1);
+        Weapon_InitializeSwitchAndRequestIdle(arg0, arg1);
     }
 }
 #endif

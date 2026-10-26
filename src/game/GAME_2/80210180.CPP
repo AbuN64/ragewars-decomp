@@ -5,7 +5,7 @@
 #ifdef NON_MATCHING
 /* Drafted below with the other versions' body. */
 #else
-INCLUDE_ASM("span_1000", func_80210198_eu);
+INCLUDE_ASM("span_1000", Nav_CheckCloseAttackRoute);
 #endif
 #endif
 
@@ -39,7 +39,7 @@ extern void *Nav_GetControllerPosition(Brain *arg0);
 extern void *Nav_GetGraphPoint(char *, s32);
 extern f32 Particle_GetPointDistance(void *, void *);
 
-s32 func_80210198_eu(Brain *brain) {
+s32 Nav_CheckCloseAttackRoute(Brain *brain) {
     void *pos;
 
     if (brain->target == 0) {

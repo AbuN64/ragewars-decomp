@@ -100,7 +100,7 @@ struct Request_func_802524B0_de {
     s32 flags;
 };
 
-struct Owner_func_80250C84_de;
+struct OwnerStaticInstanceDrawGeometryVariant;
 
 struct ResourceCacheEntry;
 typedef struct ResourceCacheEntry ResourceCacheEntry;
@@ -113,7 +113,7 @@ struct CachedResource;
 
 
 
-extern int func_80250BF0_de();
+extern int StaticInstance_AdvanceResourceKey();
 
 
 
@@ -134,8 +134,8 @@ typedef struct ResourceHashEntry ResourceHashEntry;
 
 
 
-struct Owner_func_80250C84_de;
-typedef struct Owner_func_80250C84_de Owner_func_80250C84_de;
+struct OwnerStaticInstanceDrawGeometryVariant;
+typedef struct OwnerStaticInstanceDrawGeometryVariant OwnerStaticInstanceDrawGeometryVariant;
 
 struct ResourceHashEntry;
 

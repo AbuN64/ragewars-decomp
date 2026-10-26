@@ -80,7 +80,7 @@ void * func_8022C55C_de(void *, u32);
 
  /* extern */
 /* Provider passes the position identity as a 32-bit address; see func_8025DE54_de
- * and the published func_80230630_de caller. */
+ * and the published Weapon_UpdateIdleWeaponSelection caller. */
 
 
 

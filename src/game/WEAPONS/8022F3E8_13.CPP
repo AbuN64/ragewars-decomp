@@ -14,7 +14,7 @@
  * a player flagged 0x4000 that may fire with a type 1 request takes action 5 and marks the request type 2,
  * unless it is in state 4 with a charge under 48, which reports the empty weapon; otherwise a request
  * func_802301F4_de handles is marked type 1 and the default action for the player's state is started unless
- * the actor is flagged 0x400. Adapted from func_80231BB0_de with the same static fire check. */
+ * the actor is flagged 0x400. Adapted from Weapon_TryEnterAlternateStateEight with the same static fire check. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 
@@ -25,7 +25,7 @@ extern char D_80102B00[];
 extern char D_80145040[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
-extern s16 func_8022F96C_de(void *);
+extern s16 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern s32 Weapons_GetPlayerIndex(void *, void *);
 extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
@@ -54,14 +54,14 @@ static inline s32 can_fire(char *player) {
     return ammo;
 }
 
-void func_80231D48_de(Shared_Actor *actor, WeaponFireState *fireState) {
+void Weapon_TryEnterAlternateAmmoMode(Shared_Actor *actor, WeaponFireState *fireState) {
     char *player;
     s32 action;
 
     player = actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
     if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
-        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
+        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
     }
     if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player) && fireState->mode == 1) {
         if (((SharedPlayer *)(player))->views5E8.view5F4_11.unk5F4[0] >= 0x30 || ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E != 4) {

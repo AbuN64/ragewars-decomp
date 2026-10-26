@@ -29,7 +29,7 @@ extern unsigned int func_802B7E14_de(void *arg0);
 
 #endif
 
-void func_80264104_de(Obj80264124 *arg0) {
+void Control_UpdateControllerRumble(Obj80264124 *arg0) {
     Triple zero;
     void *object;
     s32 *global;

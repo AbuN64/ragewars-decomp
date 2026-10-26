@@ -47,7 +47,7 @@ extern void *Weapons_GetFirstPlayer(void *);
 
 /* Restores every actor from the global replay table: copies its 0x70-byte block back to 0x5E0 and, when
  * the table's mode is 1, also restores its position, its value at 0x6C and its identifier resolved from the
- * saved handle through func_8028B394_de. Adapted from the snapshot writer func_80264CE0_de, reading both tables
+ * saved handle through func_8028B394_de. Adapted from the snapshot writer Control_SaveActorSnapshot, reading both tables
  * through local pointers and re-taking the actor list address in the loop increment. */
 
 
@@ -170,7 +170,7 @@ void func_80264A0C_de(void) {
     D_800CBC20 = 1;
 }
 
-void func_80264A20_de(void) {
+void Control_CycleActorSnapshotMode(void) {
     Snapshot *snapshot;
     void *player;
     s32 enabled;
@@ -197,7 +197,7 @@ void func_80264A20_de(void) {
             snapshot->mode = 0;
             break;
         }
-        func_80264CE0_de();
+        Control_SaveActorSnapshot();
         snapshot->savedActorId = D_8013B2BC;
         options = &D_801462C8;
         if (options->unk_1D == 0) {
@@ -223,13 +223,13 @@ void func_80264A20_de(void) {
     }
 }
 
-void func_80264B44_de(void) {
+void Control_ResetActorSnapshot(void) {
     D_8010BC40.active = 0;
     D_8010BC40.mode = 0;
     D_8010BC40.countdown = 0;
 }
 
-s32 func_80264B5C_de(void) {
+s32 Control_GetSnapshotActorId(void) {
     return D_8010BC40.savedActorId;
 }
 
@@ -237,7 +237,7 @@ int Render_IsSnapshotActive(void) {
     return D_8010BC40.active;
 }
 
-void func_80264B7C_de(void) {
+void Control_DeactivateActorSnapshot(void) {
     D_8010BC40.active = 0;
 }
 
@@ -260,7 +260,7 @@ void Control_RestoreActorSnapshot(void) {
     }
 }
 
-void func_80264CB8_de(void) {
+void Control_TickSnapshotCountdown(void) {
     Snapshot *p = &D_8010BC40;
     s32 v = p->countdown;
     if (v != 0) {
@@ -272,7 +272,7 @@ void func_80264CB8_de(void) {
     }
 }
 
-void func_80264CE0_de(void) {
+void Control_SaveActorSnapshot(void) {
     s32 i;
     ActorRecAt5E0 *actor;
     Snapshot *snapshot;

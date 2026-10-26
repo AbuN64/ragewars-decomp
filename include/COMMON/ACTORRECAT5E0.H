@@ -46,7 +46,7 @@ struct PlayerRecAt8 {
     float value;
 };
 
-extern void func_80264B7C_de();
+extern void Control_DeactivateActorSnapshot();
 
 
 struct PlayerRecAt8;
@@ -58,34 +58,34 @@ extern Snapshot D_8010BC40;
 
 struct Snapshot;
 
-extern void func_80264CE0_de();
+extern void Control_SaveActorSnapshot();
 
 struct Snapshot;
 
-extern s32 func_802646D4_de(s32 arg0);
+extern s32 Control_FindConnectedControllerPort(s32 arg0);
 
 
 extern void Control_RestoreActorSnapshot();
 
 
-extern void func_80264CB8_de();
+extern void Control_TickSnapshotCountdown();
 
 struct ActorRecAt5E0;
 typedef struct ActorRecAt5E0 ActorRecAt5E0;
 
 extern void func_802649FC_de();
 
-extern void func_8026479C_de();
+extern void Control_EnableAllControllerPaks();
 
 
-extern void func_80264A20_de(void);
+extern void Control_CycleActorSnapshotMode(void);
 
 struct ActorList;
 typedef struct ActorList ActorList;
 
 extern void Render_ResetControllerProfiles();
 
-extern void func_80264B44_de();
+extern void Control_ResetActorSnapshot();
 
 
 extern void Render_RestoreControllerSetup();

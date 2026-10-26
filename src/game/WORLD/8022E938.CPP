@@ -24,7 +24,7 @@ extern char D_8011D8D0;
 
 extern s32 func_80283228_de(void *, s32);
 
-extern s32 func_8024E62C_de(void *arg0);
+extern s32 InstHdr_GetActorMotionState(void *arg0);
 
 
 
@@ -210,7 +210,7 @@ int Player_ReturnZero(void) {
 }
 
 s32 Player_TryEnterLandedState(void *player, LevelActor *actor) {
-    if (actor->position1.y <= 0.0f && func_8024E62C_de(actor) != 0) {
+    if (actor->position1.y <= 0.0f && InstHdr_GetActorMotionState(actor) != 0) {
         Weapons_SetPlayerState(player, actor, 2);
         return 1;
     }

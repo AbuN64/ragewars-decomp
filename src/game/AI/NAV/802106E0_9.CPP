@@ -15,7 +15,7 @@ void Nav_UpdatePursuitStrafeDe(void) {
         "sdc1       $f20, 0x20($sp)\n"
         "lw         $v0, 0x1D8($a0)\n"
         "lw         $s0, 0x1454($v0)\n"
-        "jal        func_80211020_de\n"
+        "jal        Nav_RunBehaviorHandler\n"
         "addu      $a0, $s0, $zero\n"
         "lw         $a1, 0x64($s0)\n"
         "beqz       $a1, .Lauto_80211454\n"
@@ -118,7 +118,7 @@ void Nav_UpdatePursuitStrafeDe(void) {
         "sub.s      $f12, $f12, $f0\n"
         "lui        $at, %hi(D_auto_800C201C)\n"
         "lwc1       $f0, %lo(D_auto_800C201C)($at)\n"
-        "jal        func_80210EFC_de\n"
+        "jal        Nav_GetDirectionSector\n"
         "sub.s     $f12, $f12, $f0\n"
         "lw         $a1, 0x0($s0)\n"
         "addu       $s1, $v0, $zero\n"
@@ -159,7 +159,7 @@ void Nav_UpdatePursuitStrafeDe(void) {
         "sub.s      $f12, $f12, $f0\n"
         "lui        $at, %hi(D_auto_800C2028)\n"
         "lwc1       $f0, %lo(D_auto_800C2028)($at)\n"
-        "jal        func_80210EFC_de\n"
+        "jal        Nav_GetDirectionSector\n"
         "add.s     $f12, $f12, $f0\n"
         "lw         $a1, 0x0($s0)\n"
         "addu       $s1, $v0, $zero\n"
@@ -259,7 +259,7 @@ void Nav_UpdateRangedCombatDe(void) {
         "sdc1       $f20, 0x28($sp)\n"
         "lw         $v0, 0x1D8($a0)\n"
         "lw         $s1, 0x1454($v0)\n"
-        "jal        func_80211020_de\n"
+        "jal        Nav_RunBehaviorHandler\n"
         "addu      $a0, $s1, $zero\n"
         "lw         $a1, 0x64($s1)\n"
         "lui        $s3, %hi(D_8013B364)\n"
@@ -398,7 +398,7 @@ void Nav_UpdateRangedCombatDe(void) {
         "lui        $at, %hi(D_auto_800C2038)\n"
         "lwc1       $f12, %lo(D_auto_800C2038)($at)\n"
         "lwc1       $f0, 0x6C($v0)\n"
-        "jal        func_80210EFC_de\n"
+        "jal        Nav_GetDirectionSector\n"
         "sub.s     $f12, $f0, $f12\n"
         "lw         $a1, 0x0($s1)\n"
         "addu       $s0, $v0, $zero\n"
@@ -456,7 +456,7 @@ void Nav_UpdateRangedCombatDe(void) {
         ".Lauto_80211778:\n"
         "lw         $v0, 0x0($s1)\n"
         "lwc1       $f12, 0x6C($v0)\n"
-        "jal        func_80210EFC_de\n"
+        "jal        Nav_GetDirectionSector\n"
         "nop\n"
         "lw         $a1, 0x0($s1)\n"
         "addu       $s0, $v0, $zero\n"
@@ -502,7 +502,7 @@ void Nav_UpdateRangedCombatDe(void) {
         "sub.s      $f12, $f12, $f0\n"
         "lui        $at, %hi(D_auto_800C2054)\n"
         "lwc1       $f0, %lo(D_auto_800C2054)($at)\n"
-        "jal        func_80210EFC_de\n"
+        "jal        Nav_GetDirectionSector\n"
         "sub.s     $f12, $f12, $f0\n"
         "lw         $a1, 0x0($s1)\n"
         "addu       $s0, $v0, $zero\n"
@@ -543,7 +543,7 @@ void Nav_UpdateRangedCombatDe(void) {
         "sub.s      $f12, $f12, $f0\n"
         "lui        $at, %hi(D_auto_800C2060)\n"
         "lwc1       $f0, %lo(D_auto_800C2060)($at)\n"
-        "jal        func_80210EFC_de\n"
+        "jal        Nav_GetDirectionSector\n"
         "add.s     $f12, $f12, $f0\n"
         "lw         $a1, 0x0($s1)\n"
         "addu       $s0, $v0, $zero\n"
@@ -687,7 +687,7 @@ void Nav_UpdateCloseCombatDe(void) {
         "sdc1       $f20, 0x28($sp)\n"
         "lw         $v0, 0x1D8($a0)\n"
         "lw         $s1, 0x1454($v0)\n"
-        "jal        func_80211020_de\n"
+        "jal        Nav_RunBehaviorHandler\n"
         "addu      $a0, $s1, $zero\n"
         "lw         $a1, 0x64($s1)\n"
         "lui        $s3, %hi(D_8013B364)\n"
@@ -834,7 +834,7 @@ void Nav_UpdateCloseCombatDe(void) {
         "lui        $at, %hi(D_auto_800C2070)\n"
         "lwc1       $f12, %lo(D_auto_800C2070)($at)\n"
         "lwc1       $f0, 0x6C($v0)\n"
-        "jal        func_80210EFC_de\n"
+        "jal        Nav_GetDirectionSector\n"
         "sub.s     $f12, $f0, $f12\n"
         "lw         $a1, 0x0($s1)\n"
         "addu       $s0, $v0, $zero\n"
@@ -892,7 +892,7 @@ void Nav_UpdateCloseCombatDe(void) {
         ".Lauto_80211DA0:\n"
         "lw         $v0, 0x0($s1)\n"
         "lwc1       $f12, 0x6C($v0)\n"
-        "jal        func_80210EFC_de\n"
+        "jal        Nav_GetDirectionSector\n"
         "nop\n"
         "lw         $a1, 0x0($s1)\n"
         "addu       $s0, $v0, $zero\n"
@@ -938,7 +938,7 @@ void Nav_UpdateCloseCombatDe(void) {
         "sub.s      $f12, $f12, $f0\n"
         "lui        $at, %hi(D_auto_800C208C)\n"
         "lwc1       $f0, %lo(D_auto_800C208C)($at)\n"
-        "jal        func_80210EFC_de\n"
+        "jal        Nav_GetDirectionSector\n"
         "sub.s     $f12, $f12, $f0\n"
         "lw         $a1, 0x0($s1)\n"
         "addu       $s0, $v0, $zero\n"
@@ -979,7 +979,7 @@ void Nav_UpdateCloseCombatDe(void) {
         "sub.s      $f12, $f12, $f0\n"
         "lui        $at, %hi(D_auto_800C2098)\n"
         "lwc1       $f0, %lo(D_auto_800C2098)($at)\n"
-        "jal        func_80210EFC_de\n"
+        "jal        Nav_GetDirectionSector\n"
         "add.s     $f12, $f12, $f0\n"
         "lw         $a1, 0x0($s1)\n"
         "addu       $s0, $v0, $zero\n"
@@ -1114,7 +1114,7 @@ void Nav_UpdateVisiblePursuitDe(void) {
         "sdc1       $f20, 0x20($sp)\n"
         "lw         $v0, 0x1D8($a0)\n"
         "lw         $s0, 0x1454($v0)\n"
-        "jal        func_80211020_de\n"
+        "jal        Nav_RunBehaviorHandler\n"
         "addu      $a0, $s0, $zero\n"
         "lw         $a1, 0x64($s0)\n"
         "beql       $a1, $zero, .Lauto_802123B0\n"
@@ -1217,7 +1217,7 @@ void Nav_UpdateVisiblePursuitDe(void) {
         "sub.s      $f12, $f12, $f0\n"
         "lui        $at, %hi(D_auto_800C20AC)\n"
         "lwc1       $f0, %lo(D_auto_800C20AC)($at)\n"
-        "jal        func_80210EFC_de\n"
+        "jal        Nav_GetDirectionSector\n"
         "sub.s     $f12, $f12, $f0\n"
         "lw         $a1, 0x0($s0)\n"
         "addu       $s1, $v0, $zero\n"
@@ -1258,7 +1258,7 @@ void Nav_UpdateVisiblePursuitDe(void) {
         "sub.s      $f12, $f12, $f0\n"
         "lui        $at, %hi(D_auto_800C20B8)\n"
         "lwc1       $f0, %lo(D_auto_800C20B8)($at)\n"
-        "jal        func_80210EFC_de\n"
+        "jal        Nav_GetDirectionSector\n"
         "add.s     $f12, $f12, $f0\n"
         "lw         $a1, 0x0($s0)\n"
         "addu       $s1, $v0, $zero\n"
@@ -1348,7 +1348,7 @@ INCLUDE_ASM("span_1000", Nav_UpdateVisiblePursuitDe);
 extern void Nav_ResetBehaviorState(void *);
 extern s32 Nav_NextRandom(void);
 
-void func_802123DC_de(CloseAttackActor *actor) {
+void Nav_InitPursuitStrafeDe(CloseAttackActor *actor) {
     CloseAttackBrain *brain = actor->self->brain;
     brain->state = 0;
     Nav_ResetBehaviorState(brain);
@@ -1358,7 +1358,7 @@ void func_802123DC_de(CloseAttackActor *actor) {
 #endif
 
 #if defined(VERSION_DE)
-void func_80212450_de(CloseAttackActor *actor) {
+void Nav_InitRangedCombatDe(CloseAttackActor *actor) {
     CloseAttackBrain *brain = actor->self->brain;
     brain->state = 0;
     Nav_ResetBehaviorState(brain);
@@ -1372,7 +1372,7 @@ void func_80212450_de(CloseAttackActor *actor) {
 #endif
 
 #if defined(VERSION_DE)
-void func_80212524_de(CloseAttackActor *actor) {
+void Nav_InitCloseCombatDe(CloseAttackActor *actor) {
     CloseAttackBrain *brain = actor->self->brain;
     brain->state = 0;
     brain->timer = Nav_NextRandom() % 4 + 2;
@@ -1386,7 +1386,7 @@ void func_80212524_de(CloseAttackActor *actor) {
 #endif
 
 #if defined(VERSION_DE)
-void func_802125F0_de(CloseAttackActor *actor) {
+void Nav_InitVisiblePursuitDe(CloseAttackActor *actor) {
     CloseAttackBrain *brain = actor->self->brain;
     brain->state = 0;
     Nav_ResetBehaviorState(brain);

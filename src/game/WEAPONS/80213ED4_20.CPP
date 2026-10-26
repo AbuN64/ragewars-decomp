@@ -6,18 +6,18 @@
 #include "particle/8024D018_4.H"
 #include "WEAPONS/80213ED4_23.H"
 
-void Weapons_SpawnFlaggedEffects(Player *actor, s32 *arg1, s32 arg2, s32 arg3, s32 arg4) {
+void Weapons_SpawnFlaggedEffects(Player *actor, s32 *emittedFlags, s32 emissionFlag, s32 primaryEffectMask, s32 secondaryEffectMask) {
     s32 *entry;
 
-    if ((arg1[0] & arg2) != 0) {
+    if ((emittedFlags[0] & emissionFlag) != 0) {
         return;
     }
 
-    arg1[0] |= arg2;
+    emittedFlags[0] |= emissionFlag;
     entry = D_800C8FF0_de;
     if (entry[0] != 0) {
         do {
-            if ((arg3 & entry[0]) != 0) {
+            if ((primaryEffectMask & entry[0]) != 0) {
                 InstHdr_PlayActorGraphSound(actor,
                               actor->pos,
                               entry[1],
@@ -30,7 +30,7 @@ void Weapons_SpawnFlaggedEffects(Player *actor, s32 *arg1, s32 arg2, s32 arg3, s
     entry = D_800C90F8_de;
     if (entry[0] != 0) {
         do {
-            if ((arg4 & entry[0]) != 0) {
+            if ((secondaryEffectMask & entry[0]) != 0) {
                 InstHdr_PlayActorGraphSound(actor,
                               actor->pos,
                               entry[1],

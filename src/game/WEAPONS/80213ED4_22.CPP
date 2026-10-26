@@ -28,10 +28,10 @@ s16 func_802171C8_de(Cursor802171C8 *arg0) {
 
 /* Runs the hook with the arguments this function was called with: its callers pass the actor, its hook state
  * and the damage record, and the hook reads them from the same argument registers. */
-void Weapons_RunDamageHook(void *actor, struct CallbackState114 *arg1, void *damage) {
-    FuncPtr fn = arg1->callback;
+void Weapons_RunDamageHook(void *actor, struct CallbackState114 *callbackState, void *damage) {
+    FuncPtr fn = callbackState->callback;
     if (fn != 0) {
-        ((void (*)(void *, void *, void *))fn)(actor, arg1, damage);
+        ((void (*)(void *, void *, void *))fn)(actor, callbackState, damage);
     }
 }
 
@@ -42,19 +42,19 @@ extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 /** Subtract obj->y from arg2 in-place via Particle_SubtractVectors, then return the squared length of (arg1, arg2', arg3). */
 f32 Weapons_GetEyeDistanceSquared(void *candidate, CVector3 v) {
-    f32 temp_f1;
+    f32 eyeDeltaY;
 
-    Particle_SubtractVectors(&v, &v, &((Actor_func_80214310_de *)(candidate))->position);
-    temp_f1 = v.y - ((Actor_func_80214310_de *)(candidate))->eye;
-    v.y = temp_f1;
-    return (v.x * v.x) + (temp_f1 * temp_f1) + (v.z * v.z);
+    Particle_SubtractVectors(&v, &v, &((ActorBarrelIsTargetInViewCone *)(candidate))->position);
+    eyeDeltaY = v.y - ((ActorBarrelIsTargetInViewCone *)(candidate))->eye;
+    v.y = eyeDeltaY;
+    return (v.x * v.x) + (eyeDeltaY * eyeDeltaY) + (v.z * v.z);
 }
 
 /* Squared XZ distance to a point using the existing by-value vector ABI. */
-f32 Weapons_GetFlatDistanceSquared(LevelActor *arg0, CVector3 point)
+f32 Weapons_GetFlatDistanceSquared(LevelActor *actor, CVector3 point)
 {
-    f32 dx = point.x - arg0->position0.x;
-    f32 dz = point.z - arg0->position0.z;
+    f32 dx = point.x - actor->position0.x;
+    f32 dz = point.z - actor->position0.z;
     return dx * dx + dz * dz;
 }
 
@@ -71,18 +71,18 @@ extern s32 func_8025CA24_de(void *, void *);
 
 
 
-void Weapons_SetLoopingSound(void *actor, void *arg1, s32 sixth) {
+void Weapons_SetLoopingSound(void *actor, void *stateController, s32 sixth) {
     CLoopingSoundData *node;
     void *fallback;
     s32 kind;
 
-    node = ((Dest *)arg1)->sound;
+    node = ((Dest *)stateController)->sound;
     fallback = (void *)-1;
     if (node != 0) {
         if (node->state == sixth) {
             return;
         }
-        func_8025CA24_de(func_8025CC6C_de(), ((Dest *)arg1)->sound);
+        func_8025CA24_de(func_8025CC6C_de(), ((Dest *)stateController)->sound);
     }
 
     kind = *(u8 *)actor;
@@ -96,7 +96,7 @@ void Weapons_SetLoopingSound(void *actor, void *arg1, s32 sixth) {
         fallback = (void *)((LevelActor *)actor)->resourceFlags;
     }
 
-    ((Dest *)arg1)->sound =
+    ((Dest *)stateController)->sound =
         func_8025C95C_de(func_8025CC6C_de(), sixth, &((LevelActor *)actor)->position0,
                       &((LevelActor *)actor)->position0, (s32)fallback);
 }

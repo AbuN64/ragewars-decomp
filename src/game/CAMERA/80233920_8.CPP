@@ -20,7 +20,7 @@
 #include "SYSTEM/80255C40_7.H"
 
 extern ViewFlags D_80103220;
-extern u32 func_802337D0_de(CShakeAxis *);
+extern u32 Weapon_UpdateShakeAxis(CShakeAxis *);
 extern void Camera_UpdateViewProjectionAndEffects(GameplayCamera *camera);
 /* Update split-screen rectangles, advance transient effects, and merge visible bounds. */
 void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *state) {
@@ -80,9 +80,9 @@ void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *state) {
     if (effect != 0) {
         do {
             nextEffect = effect->next;
-            xDone = func_802337D0_de(&effect->x);
-            yDone = func_802337D0_de(&effect->y);
-            zDone = func_802337D0_de(&effect->z);
+            xDone = Weapon_UpdateShakeAxis(&effect->x);
+            yDone = Weapon_UpdateShakeAxis(&effect->y);
+            zDone = Weapon_UpdateShakeAxis(&effect->z);
             finished = 0;
             if ((xDone != 0) && (yDone != 0)) {
                 finished = zDone > 0U;

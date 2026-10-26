@@ -201,7 +201,7 @@ extern char D_0028DFE4[], D_0028E044[];
 typedef struct SortEntry { void *object; f32 distance; } SortEntry;
 extern void Camera_GetObjectPositionAt260(void *, void *);
 extern void func_802852C0_de(void *, s32, s32, void *, void *);
-extern void func_80250A9C_de(void *, void *);
+extern void StaticInstance_DrawForGameMode(void *, void *);
 extern void func_8024EB90_de(void *);
 extern void func_80249E28_de(void *, void *);
 /* Draws a world's scene objects back to front: emits the world's static display list if there is one, then
@@ -269,7 +269,7 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
         object = entries[i].object;
         switch (object->kind) {
         case 0:
-            func_80250A9C_de(object, camera);
+            StaticInstance_DrawForGameMode(object, camera);
             break;
         case 3:
             func_8024EB90_de(object);

@@ -12,7 +12,7 @@ extern s32 D_800D2978;
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 /* Fuzzy draft: inline-asm carrier of the original instructions (no C written yet). */
-void func_8024F960_eu(void) {
+void StaticInstance_InitializePlacedProp(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
@@ -281,7 +281,7 @@ void func_8024F960_eu(void) {
         "sll        $v0, $v0, 10\n"
         "addiu      $v1, $v1, -0x1\n"
         "sw         $v0, 0xD0($s1)\n"
-        "jal        func_8024E924_de\n"
+        "jal        InstHdr_GetActorType\n"
         "sb        $v1, 0xDA($s1)\n"
         "addiu      $v0, $v0, -0x9\n"
         "sltiu      $v0, $v0, 0x2\n"
@@ -303,14 +303,14 @@ void func_8024F960_eu(void) {
     );
 }
 #else
-INCLUDE_ASM("span_1000", func_8024F960_eu);
+INCLUDE_ASM("span_1000", StaticInstance_InitializePlacedProp);
 #endif
 #endif
 
 #if defined(VERSION_DE)
 /* Initialises a placed prop from its record: resets its state and owner, loads its model and caches the squared model radius, builds its rotation from the record's packed quaternion, scale and position into a matrix copied into the object, sets its bounding box either as a fixed cube for flag 0x40 or from the record's six extents through func_802B2350 with a half-unit margin, copies the position, links its path segment and takes the next colour key and colour frame. The fixed cube is written through do-while(0) vector macros, which the stores' order needs, and 102.4 is the cartridge's rounded 0x42CCCCCC. */
 #if defined(VERSION_DE)
-extern s32 func_8024E924_de(PlacedProp *);
+extern s32 InstHdr_GetActorType(PlacedProp *);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #endif
 
@@ -322,7 +322,7 @@ extern void TranslateMatrix(char *, f32, f32, f32);
 extern void SwapMatrixUpForward(char *);
 extern void CopyMatrix(char *, char *);
 extern void Rsp_ConvertMatrixToFixed(char *, char *);
-static inline s32 func_80250BF0_de(void) {
+static inline s32 StaticInstance_AdvanceResourceKey(void) {
     s32 next;
     next = D_800D0910 + 1;
     D_800D0910 = next;
@@ -379,10 +379,10 @@ void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner,
     } else {
         prop->segment = segments + record->segment * 32;
     }
-    prop->key = func_80250BF0_de() << 10;
+    prop->key = StaticInstance_AdvanceResourceKey() << 10;
     prop->colorFrame = (u8)D_800D2978 - 1;
 #if defined(VERSION_DE)
-    if ((u32)(func_8024E924_de(prop) - 9) < 2) {
+    if ((u32)(InstHdr_GetActorType(prop) - 9) < 2) {
         prop->flags |= 0x50;
     }
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)

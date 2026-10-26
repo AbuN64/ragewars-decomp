@@ -4,10 +4,10 @@
 #include "RESMGR/802A0888.H"
 
 extern void Player_SetProfileValue14(void *, u8);
-extern void func_8022F338_de(void *, u8);
-extern void func_8022F35C_de(void *, u8);
-extern void func_8022F380_de(void *, s32);
-extern void func_8022F3A4_de(void *, s32, s32);
+extern void Player_SetProfileValue15(void *, u8);
+extern void Player_SetProfileValue16(void *, u8);
+extern void Player_SetProfileProgress(void *, s32);
+extern void Player_SetProfileSlotValue(void *, s32, s32);
 extern void Weapons_SetAchievementFlag7(s32, s32);
 extern void Weapons_SetAchievementFlag2F(s32, s32);
 
@@ -24,22 +24,22 @@ void Player_InitializeProfile(void *arg0) {
     Resmgr_FillMemory((s32)object, 0, 8);
     object[0xE] = 0;
     Player_SetProfileValue14(object, 0);
-    func_8022F338_de(object, 0);
-    func_8022F35C_de(object, 0);
-    func_8022F380_de(object, 0);
-    func_8022F3A4_de(object, 0, 2);
-    func_8022F3A4_de(object, 1, 2);
-    func_8022F3A4_de(object, 2, 2);
-    func_8022F3A4_de(object, 3, 2);
-    func_8022F3A4_de(object, 4, 2);
-    func_8022F3A4_de(object, 5, 2);
-    func_8022F3A4_de(object, 6, 2);
-    func_8022F3A4_de(object, 7, 2);
-    func_8022F3A4_de(object, 8, 2);
-    func_8022F3A4_de(object, 9, 2);
-    func_8022F3A4_de(object, 0xA, 2);
-    func_8022F3A4_de(object, 0x11, 2);
-    func_8022F3A4_de(object, 0x12, 2);
+    Player_SetProfileValue15(object, 0);
+    Player_SetProfileValue16(object, 0);
+    Player_SetProfileProgress(object, 0);
+    Player_SetProfileSlotValue(object, 0, 2);
+    Player_SetProfileSlotValue(object, 1, 2);
+    Player_SetProfileSlotValue(object, 2, 2);
+    Player_SetProfileSlotValue(object, 3, 2);
+    Player_SetProfileSlotValue(object, 4, 2);
+    Player_SetProfileSlotValue(object, 5, 2);
+    Player_SetProfileSlotValue(object, 6, 2);
+    Player_SetProfileSlotValue(object, 7, 2);
+    Player_SetProfileSlotValue(object, 8, 2);
+    Player_SetProfileSlotValue(object, 9, 2);
+    Player_SetProfileSlotValue(object, 0xA, 2);
+    Player_SetProfileSlotValue(object, 0x11, 2);
+    Player_SetProfileSlotValue(object, 0x12, 2);
     object[0x17] = 0;
     object[0xF] = 0;
     ((ObjCode8022E938 *)object)->totals[2] = 0;

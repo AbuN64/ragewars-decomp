@@ -23,7 +23,7 @@ INCLUDE_ASM("span_1000", func_802301F4_de);
  * controller latch at 0x23C (cleared when read) for a flagged controlled player, else flag 0x2000; when it
  * fires and func_80230058_de accepts the attack, a ranged attack (type 2) that may fire takes action 8 and
  * returns 2, otherwise action 4 starts with the combo byte cleared and returns 1. Adapted from
- * func_80231BB0_de with the fire check as the same static helper. */
+ * Weapon_TryEnterAlternateStateEight with the fire check as the same static helper. */
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -175,13 +175,13 @@ void Weapons_UpdateAlternateFire(void *actor, void *attack) {
     AlternateModeInfo *info = (AlternateModeInfo *)D_800D052C[player->selectedAction];
     if (!Weapons_HasAmmoForMode(player, player->selectedAction)) {
         if (((AttackTriggerAction *)attack)->unk13C != 2) {
-            player->weapon = func_8022F96C_de(player);
+            player->weapon = Weapon_FindNextUsableWeapon(player);
             return;
         }
         ((AttackTriggerAction *)attack)->unk13C = 1;
         if (info->flags & 0x20) player->state7E8 = 0;
         if (!Weapons_HasAmmoForMode(player, player->selectedAction)) {
-            player->weapon = func_8022F96C_de(player);
+            player->weapon = Weapon_FindNextUsableWeapon(player);
             return;
         }
     }
@@ -214,7 +214,7 @@ INCLUDE_ASM("span_1000", Weapons_UpdateAlternateFire);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #ifdef NON_MATCHING
-#define func_80230630_de func_80230610_eu
+#define Weapon_UpdateIdleWeaponSelection func_80230610_eu
 #include "COMMON/UNUSED.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/INTEGERSTATE244.H"
@@ -227,7 +227,7 @@ INCLUDE_ASM("span_1000", Weapons_UpdateAlternateFire);
 #include "WEAPONS/PLAYERRECAT1450V1.H"
 
 
-extern s16 func_8022F96C_de(void *arg0);
+extern s16 Weapon_FindNextUsableWeapon(void *arg0);
 extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
@@ -241,7 +241,7 @@ extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32
 
 
 
-void func_80230630_de(LevelActor *arg0, void *arg1) {
+void Weapon_UpdateIdleWeaponSelection(LevelActor *arg0, void *arg1) {
     s32 state;
     void *actor;
     CGameStatus *audio;
@@ -255,7 +255,7 @@ void func_80230630_de(LevelActor *arg0, void *arg1) {
             if (((Dest *)arg1)->field13C == 2) {
                 ((Dest *)arg1)->field13C = 1;
                 if (Weapons_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
-                    ((Shared_ActorView *)actor)->nextWeapon = func_8022F96C_de(actor);
+                    ((Shared_ActorView *)actor)->nextWeapon = Weapon_FindNextUsableWeapon(actor);
                 }
             }
         }
@@ -290,7 +290,7 @@ void func_80230630_de(LevelActor *arg0, void *arg1) {
         }
     } else if ((state != 1) && (state != 7) &&
                ((s8)((Dest *)arg1)->count != 0)) {
-        func_8022FDAC_de(arg0, arg1);
+        Weapon_InitializeSwitchAndRequestIdle(arg0, arg1);
     }
 }
 #else

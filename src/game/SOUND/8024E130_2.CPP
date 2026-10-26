@@ -20,7 +20,7 @@
 
 
 /** Return the vertical offset selected by the actor's current state. */
-f32 func_8024E2FC_de(Actor_u1 *actor) {
+f32 InstHdr_GetActorShadowRadius(Actor_u1 *actor) {
     Resource_u1 *state;
 
     {
@@ -68,7 +68,7 @@ f32 func_8024E2FC_de(Actor_u1 *actor) {
     } while (0);
 }
 
-f32 func_8024E3C4_de(Actor_u1 *actor) {
+f32 InstHdr_GetInactiveActorHeight(Actor_u1 *actor) {
     Resource_u1 *resource = actor->resource;
     s32 kind = resource->kind;
 
@@ -83,12 +83,12 @@ f32 func_8024E3C4_de(Actor_u1 *actor) {
     }
 }
 
-f32 Sound_GetActorBaseOffset(void *arg0) {
+f32 Sound_GetActorBaseOffset(void *actorStorage) {
     Resource_u1 *nested;
-    if (*(u8 *)arg0 == 1) {
-        return ((LevelActor *)arg0)->eyeHeight;
+    if (*(u8 *)actorStorage == 1) {
+        return ((LevelActor *)actorStorage)->eyeHeight;
     }
-    nested = ((Actor_u1 *)arg0)->resource;
+    nested = ((Actor_u1 *)actorStorage)->resource;
     if (nested->kind == 0) {
         return nested->value20;
     }

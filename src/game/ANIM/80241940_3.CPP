@@ -5,11 +5,11 @@
 
 extern void Particle_SubtractVectors(Triple *, Triple *, Triple *);
 
-extern void func_80241950_de(OwnerRecAt18 *, Bounds *, Actor_func_80242550_de *, Source_func_802164A8_de *);
+extern void func_80241950_de(OwnerRecAt18 *, Bounds *, Actor_func_80242550_de *, SourceBarrelUpdateActorController *);
 
-extern void func_80241BAC_de(Actor_func_80242550_de *, OwnerRecAt18 *, Bounds *, SurfaceHit *, Source_func_802164A8_de *);
+extern void func_80241BAC_de(Actor_func_80242550_de *, OwnerRecAt18 *, Bounds *, SurfaceHit *, SourceBarrelUpdateActorController *);
 
-extern void func_80241F24_de(Actor_func_80242550_de *, OwnerRecAt18 *, Bounds *, SurfaceHit *, Source_func_802164A8_de *);
+extern void func_80241F24_de(Actor_func_80242550_de *, OwnerRecAt18 *, Bounds *, SurfaceHit *, SourceBarrelUpdateActorController *);
 
 extern f32 Particle_GetActorRadius(void *);
 
@@ -26,7 +26,7 @@ extern s32 Camera_SweepActorMotion(Input_func_802426CC_de *, CVector3, CVector3,
 
 extern char D_801000F0;
 
-void func_80242550_de(Actor_func_80242550_de *actor, Source_func_802164A8_de *input) {
+void func_80242550_de(Actor_func_80242550_de *actor, SourceBarrelUpdateActorController *input) {
     Triple saved_previous;
     Triple saved_position;
     SurfaceHit query;

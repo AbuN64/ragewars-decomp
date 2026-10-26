@@ -113,7 +113,7 @@ void Render_DecodeThreeBitSamples(s16 *out, s32 count) {
 
 
 /* Initializes the packed control and sample bit streams, then decodes each output channel. */
-s32 func_802651B0_de(s32 destinations, void *encoded, s32 channel_count) {
+s32 Curve_DecodePackedChannels(s32 destinations, void *encoded, s32 channel_count) {
     s32 *channels = (s32 *)destinations;
     u8 *packed = (u8 *)encoded;
     s32 sample_count;

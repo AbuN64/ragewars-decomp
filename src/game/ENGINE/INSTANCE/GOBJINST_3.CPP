@@ -23,10 +23,10 @@ extern void Scene_UnlockResource(void *, Node80253610 *);
 CQuatern InstHdr_BuildActorGroundRotation(void *);
 
  /* extern */
-s32 func_8024E29C_de(void *);
+s32 InstHdr_UsesGroundRotation(void *);
 
  /* extern */
-s32 func_8024E62C_de(void *);
+s32 InstHdr_GetActorMotionState(void *);
 
  /* extern */
 void func_80270CD0_de(void *, f32, void *, f32 *);
@@ -91,7 +91,7 @@ void func_80247004_de(Obj_func_80247004_de *actor) {
     void *rotationDestination;
     actorFlags = actor->unk100;
     flags = actorFlags & 0x300000;
-    if (!(actorFlags & 1) && (rotationState = func_8024E62C_de(actor), (actor->unk14 != NULL)) && (vec = InstHdr_BuildActorGroundRotation(actor), resetRotationFlag = actor->unk14->unk2 & 1, (func_8024E29C_de(actor) != 0))) {
+    if (!(actorFlags & 1) && (rotationState = InstHdr_GetActorMotionState(actor), (actor->unk14 != NULL)) && (vec = InstHdr_BuildActorGroundRotation(actor), resetRotationFlag = actor->unk14->unk2 & 1, (InstHdr_UsesGroundRotation(actor) != 0))) {
         if (resetRotationFlag != 0) {
             vec.x = vec.y = vec.z = 0.0f;
             vec.w = D_800C3924_de;

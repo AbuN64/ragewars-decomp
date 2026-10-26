@@ -16,7 +16,7 @@ extern s32 Render_GetDirectoryEntry(s32 *, s32, s32);
 extern s32 Render_LocatePackSection(void *, s32, s32, s32 *);
 extern void Scene_UnlockResource(void *, Node80253610 *);
 extern void func_8026E158_de(void **);
-void func_8024F294_de(struct ObjB *object, s32 unused) {
+void SimpleInstance_RegisterModelVariantResources(struct ObjB *object, s32 unused) {
     void *memory = object;
     ResourceObject23 *obj = memory;
     void *header;

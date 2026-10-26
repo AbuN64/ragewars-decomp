@@ -10,7 +10,7 @@
 
 extern char D_8011D8D0;
 
-extern void func_8024E79C_de(void *actor, Triple input, Triple *output,
+extern void InstHdr_CopyActorPositionAndModel(void *actor, Triple input, Triple *output,
                           s32 *actorField, s32 unused0, s32 unused1);
 extern CQuatern func_8024796C_de(CActor_t *actor);
 extern s32 func_8024BE80_de(CActor_t *actor);
@@ -29,7 +29,7 @@ void Weapons_SpawnActorEffect(void *actor, s32 kind, Triple input, s32 unused0) 
 
     typedActor = 0;
     mode = 1;
-    func_8024E79C_de(actor, input, &copiedInput, &actorField, 0, mode);
+    InstHdr_CopyActorPositionAndModel(actor, input, &copiedInput, &actorField, 0, mode);
     eventValue = 0;
 
     switch (((CActor_t *)actor)->type) {

@@ -6,7 +6,7 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "GAME/CODE_8027302C.H"
 struct CShakeAxis_t;
-extern u32 func_802337D0_de(struct CShakeAxis_t *state);
+extern u32 Weapon_UpdateShakeAxis(struct CShakeAxis_t *state);
 
 void Camera_UpdateFrustumBounds(char *);
 int Camera_IsSequenceInWindow(void);
@@ -153,9 +153,9 @@ actor_found:
     initial_zoom = camera->zoomFov;
     Camera_BuildShakenViewTransform(camera);
     if (Camera_IsSequenceInWindow() == 0) {
-        func_802337D0_de(camera->unkB8);
-        func_802337D0_de(camera->unkCC);
-        func_802337D0_de(camera->unkE0);
+        Weapon_UpdateShakeAxis(camera->unkB8);
+        Weapon_UpdateShakeAxis(camera->unkCC);
+        Weapon_UpdateShakeAxis(camera->unkE0);
     }
     viewOrientationMatrix = (s8 *)camera->viewOrient;
     func_802732D0_de(viewOrientationMatrix, &camera->position.x);

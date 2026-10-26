@@ -51,11 +51,11 @@ s32 Weapons_SetPlayerState(SharedPlayer *player, void *stateContext, s32 state) 
    its skill byte at 0x93 (D_800C2848_de[1] then D_800C2850_de[1] for skill 0, D_800C2850_de[0] then D_800C7948
    for skill 1, unchanged for skill 2, other values reset to 0), then by the game option factor at 0x20
    of D_801462C8 when enabled at 0x1D, and by the ground's factor at 0x30 when state bits 3 at 0x38 are
-   clear, there is ground, and func_8024E62C_de reports true or the ground is flagged 0x800. */
+   clear, there is ground, and InstHdr_GetActorMotionState reports true or the ground is flagged 0x800. */
 
 extern f32 D_800C7948;
 
-extern s32 func_8024E62C_de(void *);
+extern s32 InstHdr_GetActorMotionState(void *);
 
 
 
@@ -110,7 +110,7 @@ void func_80222908_de(void *actorView, void *bodyActor, ObjectState54 *ground) {
         ((Shared_ActorView *)actorView)->speedFactor *= ((Shared_Game *)options)->speedFactor;
     }
     if (!(((ObjectLinks3C *)(bodyActor))->unk_38 & 3) && ground != 0
-        && (func_8024E62C_de(bodyActor) != 0 || (ground->unk_52 & 0x800))) {
+        && (InstHdr_GetActorMotionState(bodyActor) != 0 || (ground->unk_52 & 0x800))) {
         ((Shared_ActorView *)actorView)->speedFactor *= ground->unk_30;
     }
 }

@@ -36,13 +36,13 @@ extern void Weapons_SetAchievementFlag2F(Profile *, s32);
 
 extern void Weapons_SetAchievementFlagByIndex(Profile *, s32);
 
-extern void func_8022F31C_de(Profile *);
+extern void Player_AddTenToProfileValue14(Profile *);
 
-extern void func_8022F340_de(Profile *);
+extern void Player_AddFiftyToProfileValue15(Profile *);
 
-extern void func_8022F364_de(Profile *);
+extern void Player_AddFiftyToProfileValue16(Profile *);
 
-extern void func_8022F388_de(Profile *);
+extern void Player_AdvanceProfileProgress(Profile *);
 
 /* Returns the message text for an event result from func_80425014_de: for results 5001 to 5057 the
    text pointer jtbl_800DD848 selects for the result, where result 5002 picks between two texts by
@@ -186,7 +186,7 @@ s32 func_80425014_de(s32 index) {
         Weapons_SetAchievementFlag2F(player, 10);
         goto done;
     effect_15:
-        func_8022F31C_de(player);
+        Player_AddTenToProfileValue14(player);
         goto done;
     effect_16:
         Weapons_SetAchievementFlagByIndex(player, 8);
@@ -207,10 +207,10 @@ s32 func_80425014_de(s32 index) {
         Weapons_SetAchievementFlagByIndex(player, 3);
         goto done;
     effect_22:
-        func_8022F364_de(player);
+        Player_AddFiftyToProfileValue16(player);
         goto done;
     effect_23:
-        func_8022F340_de(player);
+        Player_AddFiftyToProfileValue15(player);
         goto done;
     effect_24:
         Weapons_SetAchievementFlag2F(player, 13);
@@ -246,7 +246,7 @@ s32 func_80425014_de(s32 index) {
         player->count++;
         goto done;
     effect_35:
-        func_8022F388_de(player);
+        Player_AdvanceProfileProgress(player);
         goto done;
     unknown:
         result = -1;

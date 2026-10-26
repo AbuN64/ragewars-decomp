@@ -16,7 +16,7 @@ extern int Player_GetProfileAchievementFlag(char *, int);
 extern int Weapons_GetPlayerIndex(void *, PlayerRecAt1450V1 *);
 extern void Camera_PostTargetedScreenMessage(void *, void *, int, int, float);
 
-int func_802327F4_de(PlayerRecAt1450V1 *player) {
+int Weapon_CheckSinglePlayerFirePermission(PlayerRecAt1450V1 *player) {
     SettingsE *rules;
     int result;
 

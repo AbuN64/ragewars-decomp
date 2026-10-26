@@ -12,10 +12,10 @@
 #include "RENDER_2/8025DE50_5.H"
 
 /* Runs a player's aiming action: refreshes the idle state when the action is not allowed; while the aim
- * flag 0x4000 is held and the weapon may fire (as in func_80231BB0_de) the attack enters aiming and, for scoped
+ * flag 0x4000 is held and the weapon may fire (as in Weapon_TryEnterAlternateStateEight) the attack enters aiming and, for scoped
  * weapons, zooms in through func_8022B1A8; when aiming stops it zooms back out unless the zoom was already
  * cancelled; then the default action for the player's state starts unless func_802301F4_de handled the
- * request or the actor is flagged 0x400. Adapted from func_80231BB0_de with the aiming state.
+ * request or the actor is flagged 0x400. Adapted from Weapon_TryEnterAlternateStateEight with the aiming state.
  */
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -29,7 +29,7 @@ extern MatchRewardsRecord D_80102B00[];
 extern u8 *D_800D30BC[];
 
 
-extern s32 func_8022F96C_de(void *);
+extern s32 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s32);
 extern s32 Weapons_GetPlayerIndex(void *, void *);
 extern CCameraText *Camera_PostTargetedScreenMessage(void *, void *, u8 *, s32, f32);
@@ -69,14 +69,14 @@ static inline s32 can_fire(char *player, f32 *scale) {
     return ammo;
 }
 
-void func_802321C8_de(Shared_Actor *actor, WeaponFireState *attack) {
+void Weapon_UpdateForceMarkerTrigger(Shared_Actor *actor, WeaponFireState *attack) {
     char *player;
     s32 action;
 
     player = (char *)actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
     if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
-        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
+        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
     }
     if ((((SharedPlayer *)(player))->views5E8.view6AC_45.unk6AC & 0x4000) && can_fire(player, &D_800C2FCC_de)) {
         attack->triggered = 1;

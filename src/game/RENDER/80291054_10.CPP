@@ -48,7 +48,7 @@ void Render_UpdateGameMode(void *session) {
     if (D_800CD724 != 0) {
         D_800CD724 = 0;
     }
-    func_80264CB8_de();
+    Control_TickSnapshotCountdown();
     field = ((GameSession *)session)->mode;
     fn = ((SessionHandlerRow *)D_800CD78C)[field].update;
     if (fn != 0) {

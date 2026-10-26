@@ -42,7 +42,7 @@ static inline s32 func_80215410_kind(Actor_func_80214DD4_de *self, Tracker *ctx,
     }
     return 0;
 }
-void func_80215410_de(Actor_func_80214DD4_de *arg0, Tracker *tracker, s32 unused, CTargetInfo *arg3) {
+void Barrel_FillAnchorTargetInfo(Actor_func_80214DD4_de *arg0, Tracker *tracker, s32 unused, CTargetInfo *arg3) {
     CVector3 pos;
     CVector3 delta;
     f32 height;

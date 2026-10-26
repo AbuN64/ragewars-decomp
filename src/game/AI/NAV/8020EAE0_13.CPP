@@ -42,7 +42,7 @@ Racer *Weapons_GetPlayerByIndex(MatchWorld *arg0, u32 arg1);
 f32 Particle_GetPointDistance(void *arg0, void *arg1);
 s32 Nav_EvaluateAttackTarget(AiController *brain, s32 index);
 
-s32 func_80210248_eu(Chaser *self) {
+s32 Nav_CollectEnemyTargets(Chaser *self) {
     s32 i;
     s32 count;
     Racer *other;

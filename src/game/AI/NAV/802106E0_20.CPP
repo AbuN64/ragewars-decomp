@@ -16,7 +16,7 @@ extern s32 Nav_SetBehaviourState(void *, s32);
 extern void Nav_UpdateTargetSteering(void *);
 extern CNavData D_8013B364;
 
-extern void func_80211020_de(void *);
+extern void Nav_RunBehaviorHandler(void *);
 
 extern s32 Nav_GetRouteRelation(void *, s32, s32);
 
@@ -44,7 +44,7 @@ extern void Nav_SearchPathByKey(void *arg0, s32 arg1);
 
 extern void Nav_ReconstructSearchPath(void *arg0, void *arg1, s32 arg2);
 
-extern void func_80211020_de(void *arg0);
+extern void Nav_RunBehaviorHandler(void *arg0);
 
 extern void Nav_UpdatePlayerSteering(void *arg0);
 
@@ -64,7 +64,7 @@ void func_802127F4_de(void *actor) {
     (((struct Brain_func_80212D78_eu_x *) ((s8 *) brain))->unk2FC) = 0;
 }
 
-void func_80212828_de(CloseAttackActor *arg0)
+void Nav_ApproachCombatTargetAlongRoute(CloseAttackActor *arg0)
 {
     CloseAttackBrain *state;
     CloseAttackActor *peer;
@@ -75,7 +75,7 @@ void func_80212828_de(CloseAttackActor *arg0)
     state = arg0->self->brain;
     peer = state->target;
     if (peer == 0) {
-        func_80211020_de(state);
+        Nav_RunBehaviorHandler(state);
         return;
     }
 
@@ -91,7 +91,7 @@ void func_80212828_de(CloseAttackActor *arg0)
         }
     }
 
-    func_80211020_de(state);
+    Nav_RunBehaviorHandler(state);
     Nav_SteerAlongRoute(state);
     Nav_UpdateTargetSteering(state);
     if (func_802726BC_de(&peer_actor->pos.x,
@@ -119,7 +119,7 @@ void Nav_UpdateRetreatMovement(void *actorObject)
 
     brain = actor->self->brain;
     if (brain->target == 0) {
-        func_80211020_de(brain);
+        Nav_RunBehaviorHandler(brain);
         return;
     }
 
@@ -140,7 +140,7 @@ void Nav_UpdateRetreatMovement(void *actorObject)
         return;
     }
 
-    func_80211020_de(brain);
+    Nav_RunBehaviorHandler(brain);
     Nav_SteerAlongRoute(brain);
     Nav_UpdateTargetSteering(brain);
     if (brain->route == brain->destination) {
@@ -158,7 +158,7 @@ void func_80212A40_de(LevelActor *actor) {
     inner->reset2FC = 0;
 }
 
-void func_80212A7C_de(Shared_Actor *arg0)
+void Nav_SeekNearbyUnrestrictedGoal(Shared_Actor *arg0)
 {
     AiController *state;
     CNavData *table;
@@ -191,7 +191,7 @@ void func_80212A7C_de(Shared_Actor *arg0)
         state->mode = value;
         state->routeGoal = value;
     }
-    func_80211020_de(state);
+    Nav_RunBehaviorHandler(state);
     Nav_SteerAlongRoute(state);
     Nav_UpdatePlayerSteering(state);
     flags = (state->player->movementFlags & 0x3000) != 0;
@@ -209,7 +209,7 @@ void func_80212BD0_de(void *actor) {
     (((struct Brain_func_80212D78_eu_x *) ((s8 *) brain))->unk2FC) = 0;
 }
 
-void func_80212C04_de(void *arg0) {
+void Nav_SeekUnclaimedMarker(void *arg0) {
     s32 *rec;
     void *v0;
 
@@ -226,7 +226,7 @@ void func_80212C04_de(void *arg0) {
         Nav_SetBehaviourState(rec, 2);
         return;
     }
-    func_80211020_de(rec);
+    Nav_RunBehaviorHandler(rec);
     Nav_DistanceToNode(rec, rec[3]);
     Nav_SteerAlongRoute(rec);
     Nav_UpdateTargetSteering(rec);

@@ -179,7 +179,7 @@ void func_80229468_de(Inventory *inventory, Receiver *receiver) {
 
 extern void Resmgr_CopyString(char *, char *);
 extern void func_802A02E8_de(char *, char *);
-extern char *func_80232764_de(s32);
+extern char *Weapon_GetIndexedTableValue(s32);
 extern void func_8022B75C_de(SharedPlayer *, char *, f32);
 
 static inline s32 max_ammo(SharedPlayer *player, s32 type) {
@@ -214,7 +214,7 @@ void Weapons_GiveAmmoWithMessage(SharedPlayer *player, s32 type, s32 amount) {
         func_802A066C_de(amount, number);
         Resmgr_CopyString(message, number);
         func_802A02E8_de(message, D_800C2C50_de);
-        func_802A02E8_de(message, func_80232764_de(type));
+        func_802A02E8_de(message, Weapon_GetIndexedTableValue(type));
         if (amount >= 2) {
             func_802A02E8_de(message, D_800C2C54_de);
         }

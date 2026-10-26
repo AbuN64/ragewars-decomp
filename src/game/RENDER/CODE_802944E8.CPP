@@ -104,7 +104,7 @@ void Render_StartRound(GameSession *session) {
     D_800CD730 = 0;
     func_80293268_de(session);
     if (Render_IsSnapshotActive() != 0) {
-        session->selector = func_80264B5C_de();
+        session->selector = Control_GetSnapshotActorId();
     }
     counters = &D_801462C8.counters;
     counters->state = 0;

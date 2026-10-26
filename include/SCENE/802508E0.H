@@ -15,7 +15,7 @@ struct ObjectState13 {
     unsigned char padding_0[18];
     signed char unk_12;
 };
-struct Owner_func_80250C84_de {
+struct OwnerStaticInstanceDrawGeometryVariant {
     char pad0[0x20];
     s32 field20;
     char pad24[4];
@@ -73,9 +73,9 @@ typedef struct ResourceLockState {
     u8 reserved4[0xB98 - 4];
     OSMesgQueue waitQueue;
 } ResourceLockState;
-extern int func_80250DE0_de(void *object);
-extern void func_80250AD4_de(void *arg0);
-extern s8 func_80250E14_de(struct LevelActor *arg0);
-extern void func_80250A9C_de(void *);
+extern int StaticInstance_SelectDistanceVariant(void *object);
+extern void StaticInstance_RefreshResourceUsage(void *arg0);
+extern s8 StaticInstance_SelectGameModeVariant(struct LevelActor *arg0);
+extern void StaticInstance_DrawForGameMode(void *);
 extern CachedResource *func_80251F6C_de(s32 unused, s32 key, CachedResource *first, CachedResource *second, s32 mode, void *owner, void *tag, void *spare, s32 async);
 #endif

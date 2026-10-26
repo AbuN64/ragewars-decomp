@@ -11,7 +11,7 @@
 extern void Nav_MeasureWheelReach(void *, int);
 extern void Nav_MeasureWheelClearance(void *, int);
 
-int func_80210E88_de(PlayerRecAt1CC *p) {
+int Nav_AdvanceWheelProbe(PlayerRecAt1CC *p) {
     if (p == 0) {
         return 1;
     }
@@ -28,7 +28,7 @@ int func_80210E88_de(PlayerRecAt1CC *p) {
     return 1;
 }
 
-s32 func_80210EFC_de(f32 arg0) {
+s32 Nav_GetDirectionSector(f32 arg0) {
     f32 var_f0;
 
     arg0 += D_800C1FD8_de;
@@ -61,7 +61,7 @@ s32 func_80210EFC_de(f32 arg0) {
     return (s32)arg0;
 }
 
-int func_80210FE8_de(int arg0) {
+int Nav_NextDirectionSector(int arg0) {
     int result = arg0 + 1;
     if (result == 8) {
         result = 0;
@@ -69,7 +69,7 @@ int func_80210FE8_de(int arg0) {
     return result;
 }
 
-int func_80211000_de(int arg0) {
+int Nav_PreviousDirectionSector(int arg0) {
     int result = arg0 - 1;
     if (arg0 == 0) {
         result = 7;

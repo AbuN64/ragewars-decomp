@@ -19,7 +19,7 @@
    (sound 0xD4D) and shows the empty message on the holder's view; with ammunition and a loaded
    weapon at 0x5F6 it plays the wind-up sound 0x7BC unless already firing, sets the firing flags
    0x18400 and restarts the firing timer at 0x1230 at 25. Written with the fire check as the static
-   helper shared with func_80231BB0_de. */
+   helper shared with Weapon_TryEnterAlternateStateEight. */
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
@@ -29,7 +29,7 @@ extern char D_80145040[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "WEAPONS/8022F3E8_8.H"
 
-extern s16 func_8022F96C_de(void *);
+extern s16 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern s32 Weapons_GetPlayerIndex(void *, void *);
 extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
@@ -55,7 +55,7 @@ static inline s32 can_fire(char *player) {
     }
     return ammo;
 }
-void func_80230DA4_de(Shared_Actor *actor, WeaponFireState *weapon) {
+void Weapon_DecaySpinAndActivateEffect(Shared_Actor *actor, WeaponFireState *weapon) {
     char *player;
     char *model;
     player = actor->entity;

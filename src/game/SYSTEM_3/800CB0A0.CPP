@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_802A71C0_CBCA0[15] =
+const char g_systembootdoneText[15] =
     "systembootdone\000";
 #endif
 

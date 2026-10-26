@@ -29,7 +29,7 @@ extern s32 func_802301F4_de(void *, void *);
 extern int D_80140FF8;
 
 
-extern s16 func_8022F96C_de(void *arg0);
+extern s16 Weapon_FindNextUsableWeapon(void *arg0);
 
 
 extern WeaponActionRecord D_800CE8DC[];
@@ -39,7 +39,7 @@ extern s32 D_80140FF8;
 
 
 
-void func_80232DF4_de(void *arg0) {
+void Weapon_ReleaseHandlesAndExitState39(void *arg0) {
     s32 temp_s0;
     temp_s0 = (((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link);
     Items_ReleaseObjectHandles(temp_s0);
@@ -48,7 +48,7 @@ void func_80232DF4_de(void *arg0) {
     }
 }
 
-void func_80232E38_de(void *arg0) {
+void Weapon_PlayStartupCue9E2(void *arg0) {
     void *temp_a0;
     temp_a0 = (((struct ObjRecAt1D8V1 *) ((s8 *) arg0))->unk1D8);
     if ((((struct IntegerState11C4 *) ((s8 *) temp_a0))->unk_11C0) == 0) {
@@ -56,7 +56,7 @@ void func_80232E38_de(void *arg0) {
     }
 }
 
-void func_80232E64_de(struct MeasuredRecAt1D8V2 *actor, void *attack) {
+void Weapon_AdvanceSpinAndTriggerMode(struct MeasuredRecAt1D8V2 *actor, void *attack) {
     f32 temp_f1;
     f32 temp_f2;
     void *value;
@@ -88,7 +88,7 @@ void func_80232E64_de(struct MeasuredRecAt1D8V2 *actor, void *attack) {
     }
 }
 
-void func_80232F8C_de(void *obj, Event *event) {
+void Weapon_ApplyScaledSideYaw(void *obj, Event *event) {
     float v = event->source->speed * D_800C8130;
 
     if (D_80140FF8 == 1) {
@@ -100,7 +100,7 @@ void func_80232F8C_de(void *obj, Event *event) {
     }
 }
 
-void func_80232FF8_de(void *actor, ObjectState140 *attack) {
+void Weapon_UpdateNormalFireAction(void *actor, ObjectState140 *attack) {
     char *o = (char *) actor;
     void *temp_s0;
     s16 idx;
@@ -111,7 +111,7 @@ void func_80232FF8_de(void *actor, ObjectState140 *attack) {
     action = D_800CE8DC[idx].action;
 
     if (Weapons_HasAmmoForMode(temp_s0, ((Shared_ActorView *)temp_s0)->selectedAction) == 0) {
-        ((Shared_ActorView *)temp_s0)->nextWeapon = func_8022F96C_de(temp_s0);
+        ((Shared_ActorView *)temp_s0)->nextWeapon = Weapon_FindNextUsableWeapon(temp_s0);
     } else {
         attack->unk_13C = 1;
         if (func_802301F4_de(actor, attack) == 0 && !(((Shared_ActorView *)o)->flags & 0x400)) {
@@ -120,7 +120,7 @@ void func_80232FF8_de(void *actor, ObjectState140 *attack) {
     }
 }
 
-void func_802330AC_de(Shared_ActorView *arg0, WeaponFireState *fireState) {
+void Weapon_InitializeChargeAndStartupCues(Shared_ActorView *arg0, WeaponFireState *fireState) {
     Shared_ActorView *temp_s0;
     Shared_ActorView *temp_a0;
     s16 index;
@@ -147,7 +147,7 @@ void func_802330AC_de(Shared_ActorView *arg0, WeaponFireState *fireState) {
     }
 }
 
-void func_80233188_de(void *object, Event *event) {
+void Weapon_ApplySideDependentYaw(void *object, Event *event) {
     f32 speed;
     s32 mode;
 

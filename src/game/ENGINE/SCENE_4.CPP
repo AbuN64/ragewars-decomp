@@ -153,10 +153,10 @@ extern void Scene_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
 extern void Scene_UnlockResource(void *heap, struct Node80253610 *resource);
 extern s32 func_80296390_de(void *grid, s32 x, s32 z, s32 index);
 extern s32 func_80296B74_de(void *planes, void *bounds);
-extern void func_802509A8_de(CGameStaticInstance_t *prop, GameplayCamera *camera);
-extern s32 func_802500FC_de(CGameStaticInstance_t *prop, GameplayCamera *camera);
-extern void func_80250274_de(CGameStaticInstance_t *prop, GameplayCamera *camera);
-extern void func_8024F294_de(CGameSimpleInstance_t *object, GameplayCamera *camera);
+extern void StaticInstance_RegisterGeometryResources(CGameStaticInstance_t *prop, GameplayCamera *camera);
+extern s32 StaticInstance_UpdateDistanceFade(CGameStaticInstance_t *prop, GameplayCamera *camera);
+extern void StaticInstance_DrawDistanceFadedModel(CGameStaticInstance_t *prop, GameplayCamera *camera);
+extern void SimpleInstance_RegisterModelVariantResources(CGameSimpleInstance_t *object, GameplayCamera *camera);
 extern void func_8024EB90_de(CGameSimpleInstance_t *object);
 
 static __inline__ s32 SceneFindShip(TableRecAt8 *table) {
@@ -247,7 +247,7 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
             }
             prop->m_pmeGridSection = sector->m_pmeGridSection;
             if (D_800CD730 == 0) {
-                func_802509A8_de(prop, camera);
+                StaticInstance_RegisterGeometryResources(prop, camera);
             }
             if ((prop->m_wFlags & 8) && (prop->m_pI->flags & 4)) {
                 queued = 1;
@@ -272,13 +272,13 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
                         scene->m_pStaticEventsInstances[scene->m_nStaticEventsInstances++] = prop;
                     }
                 }
-                if (func_802500FC_de(prop, camera)) {
+                if (StaticInstance_UpdateDistanceFade(prop, camera)) {
                     if (prop->m_wFlags & 4) {
                         if (scene->m_nTransparentInstances != 64) {
                             scene->m_pTransparentInstances[scene->m_nTransparentInstances++] = prop;
                         }
                     } else {
-                        func_80250274_de(prop, camera);
+                        StaticInstance_DrawDistanceFadedModel(prop, camera);
                     }
                 }
                 prop->m_wFlags &= ~0x200;
@@ -292,7 +292,7 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
         for (i = 0; i < staticCount; i++) {
             statics[i].m_pmeGridSection = sector->m_pmeGridSection;
             if (D_800CD730 == 0) {
-                func_8024F294_de(&statics[i], camera);
+                SimpleInstance_RegisterModelVariantResources(&statics[i], camera);
             }
             if ((statics[i].m_pI->gate & mask) && !(statics[i].m_wFlags & 1) && (viewMask & statics[i].m_VisBits) &&
                 camera->clipBounds[1].x > statics[i].m_Bounds.min.x && camera->clipBounds[0].x < statics[i].m_Bounds.max.x &&

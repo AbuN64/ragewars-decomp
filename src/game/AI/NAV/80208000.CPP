@@ -7,11 +7,11 @@
    request kind to 0xB, clears the four link words at 0x14 to -1, resets the stage counters at 0x1BC
    and 0x1C8 and the target list, installs the default table D_800CE040 through Nav_SetBehaviorTable and mode
    2 through func_80209874_de, zeroes the tracking values from 0x23C to 0x260, runs the resets
-   func_802110C4_de, Nav_ResetBehaviorState and Nav_ClearAuxiliaryBehaviorState, and clears the remaining state words. */
+   Nav_ResetWheelProbeState, Nav_ResetBehaviorState and Nav_ClearAuxiliaryBehaviorState, and clears the remaining state words. */
 
 extern void Nav_SetBehaviorTable(void *, char *, s32);
 extern void Nav_SetBehaviourState(void *, s32);
-extern void func_802110C4_de(void *);
+extern void Nav_ResetWheelProbeState(void *);
 
 extern void Nav_ClearAuxiliaryBehaviorState(void *);
 
@@ -56,7 +56,7 @@ void World_ResetPlayerState(s32 *state) {
     ((f32 *) state)[0x250 / 4] = ((f32 *) state)[0x254 / 4] = ((f32 *) state)[0x248 / 4] =
         ((f32 *) state)[0x24C / 4] = ((f32 *) state)[0x258 / 4] = ((f32 *) state)[0x25C / 4] =
         ((f32 *) state)[0x260 / 4] = ((f32 *) state)[0x244 / 4];
-    func_802110C4_de(state);
+    Nav_ResetWheelProbeState(state);
     Nav_ResetBehaviorState(state);
     Nav_ClearAuxiliaryBehaviorState(state);
     state[0x318 / 4] = 0;

@@ -16,12 +16,12 @@
 
 
 
-extern f32 Particle_GetActorHeight(Actor_func_80214310_de *);
+extern f32 Particle_GetActorHeight(ActorBarrelIsTargetInViewCone *);
 extern f32 Math_Sqrtf(f32);
-extern CQuatern func_8024796C_de(Actor_func_80214310_de *);
+extern CQuatern func_8024796C_de(ActorBarrelIsTargetInViewCone *);
 extern void MatrixFromQuaternion(CQuatern *, Matrix *);
 
-s32 func_80214310_de(Actor_func_80214310_de *viewer, Actor_func_80214310_de *target, f32 range, f32 across, f32 up)
+s32 Barrel_IsTargetInViewCone(ActorBarrelIsTargetInViewCone *viewer, ActorBarrelIsTargetInViewCone *target, f32 range, f32 across, f32 up)
 {
   CVector3 from;
   CVector3 to;
@@ -116,33 +116,33 @@ s32 Weapons_UpdateTrackerAim(Actor_func_80214624_de *actor, Plan *tracker, Actor
     s32 room;
     f32 temp_f20;
     Actor_func_80214624_de *temp_a2;
-    s32 temp_v0_2;
-    s32 var_s1;
+    s32 resolvedRoom;
+    s32 targetKind;
     s32 var_v0;
     ApproachLocation *approachLocation;
     Runtime *runtime;
 
     if (tracker->unk4 == 0) {
-        var_s1 = 6;
+        targetKind = 6;
     } else if (candidate == 0) {
-        var_s1 = 3;
+        targetKind = 3;
         if (tracker->unk94 != 0) {
-            var_s1 = 4;
+            targetKind = 4;
         }
     } else {
-        var_s1 = 2;
+        targetKind = 2;
         if (candidate != tracker->unk68) {
-            if (*candidate->unk18 == 5) var_s1=5;
-            else if(candidate->unkE4==0x64F) var_s1=7;
+            if (*candidate->unk18 == 5) targetKind=5;
+            else if(candidate->unkE4==0x64F) targetKind=7;
             else {
-                var_s1=0;
+                targetKind=0;
                 if(!g_world.visibilityEnabled) {
-                    if((!(candidate->unk100&0x300000) || candidate->unk1D8->unk794!=actor || (var_s1=1,candidate->unk1D8->unk788!=2)) && (!(actor->unk2E0&2) || (var_s1=1,actor->unkE4==0xCA))) var_s1=0;
+                    if((!(candidate->unk100&0x300000) || candidate->unk1D8->unk794!=actor || (targetKind=1,candidate->unk1D8->unk788!=2)) && (!(actor->unk2E0&2) || (targetKind=1,actor->unkE4==0xCA))) targetKind=0;
                 }
             }
         }
     }
-    switch (var_s1) {
+    switch (targetKind) {
     case 6:
         pos = actor->pos;
         room = actor->unk14;
@@ -160,9 +160,9 @@ s32 Weapons_UpdateTrackerAim(Actor_func_80214624_de *actor, Plan *tracker, Actor
         approach(actor,candidate,tracker->unk80,&pos,&room);
         break;
     case 1:
-        temp_v0_2 = func_80240698_de(actor, tracker->unk84, candidate->pos, candidate->unk14, tracker->unk30->unkC, &pos);
-        room = temp_v0_2;
-        if (temp_v0_2 == 0) {
+        resolvedRoom = func_80240698_de(actor, tracker->unk84, candidate->pos, candidate->unk14, tracker->unk30->unkC, &pos);
+        room = resolvedRoom;
+        if (resolvedRoom == 0) {
         default:
             pos = candidate->pos;
             room = candidate->unk14;
@@ -179,7 +179,7 @@ s32 Weapons_UpdateTrackerAim(Actor_func_80214624_de *actor, Plan *tracker, Actor
         tracker->unk8C = (f32) (Particle_GetHorizontalAngle(&hit) + D_800C2160_de[1]);
         return 1;
     }
-    if (var_s1 == 1) {
+    if (targetKind == 1) {
         tracker->unk90 = pos.y;
         tracker->unk8C = (f32) (actor->unk6C + Weapons_GetSignedAngleToPoint(actor, pos));
         return 1;
@@ -300,10 +300,10 @@ Actor_func_80214DD4_de *Weapons_SelectCombatTarget(Actor_func_80214DD4_de *actor
             }
             if (lineOfSight != 0) {
                 saved = *(Instance8020CD74 *)actor;
-                actor->pos.y += Particle_GetActorHeight((Actor_func_80214310_de *)actor);
+                actor->pos.y += Particle_GetActorHeight((ActorBarrelIsTargetInViewCone *)actor);
                 actor->pos.y += candidate->height;
                 target = candidate->pos;
-                target.y += Particle_GetActorHeight((Actor_func_80214310_de *)candidate);
+                target.y += Particle_GetActorHeight((ActorBarrelIsTargetInViewCone *)candidate);
                 target.y += candidate->height;
                 blocked = func_802444A4_de(actor, actor->pos, target, &D_80100030);
                 if (D_801041F0 == (Instance8020CD74 *)candidate) {

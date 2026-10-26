@@ -14,7 +14,7 @@
  * action is not allowed, and when the player is flagged 0x4000, may fire and holds a charge either releases
  * a charged shot (sound 0x42E at the player, action 0xB) once charged past 24 or reports the empty weapon;
  * otherwise the default action for the player's state is started unless func_802301F4_de handled the request
- * or the actor is flagged 0x400. Adapted from func_80231BB0_de with the same static fire check. */
+ * or the actor is flagged 0x400. Adapted from Weapon_TryEnterAlternateStateEight with the same static fire check. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 
@@ -25,7 +25,7 @@ extern char D_80102B00[];
 extern char D_80145040[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
-extern s16 func_8022F96C_de(void *);
+extern s16 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern s32 Render_PlaySoundAtPosition(s32, s32, s32, s32, void *, s32);
 extern s32 Weapons_GetPlayerIndex(void *, void *);
@@ -55,7 +55,7 @@ static inline s32 can_fire(char *player) {
     return ammo;
 }
 
-void func_8023196C_de(Shared_Actor *actor, WeaponFireState *fireState) {
+void Weapon_TryEnterAmmoCostState(Shared_Actor *actor, WeaponFireState *fireState) {
     char *player;
     s32 action;
 
@@ -63,7 +63,7 @@ void func_8023196C_de(Shared_Actor *actor, WeaponFireState *fireState) {
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
     fireState->mode = 1;
     if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
-        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
+        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
         return;
     }
     if ((((SharedPlayer *)(player))->views5E8.view6AC_45.unk6AC & 0x4000) && can_fire(player) && ((SharedPlayer *)(player))->views5E4.view5E4_0.unk5E4 != 0) {

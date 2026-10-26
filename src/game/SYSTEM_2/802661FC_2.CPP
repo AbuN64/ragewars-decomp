@@ -43,7 +43,7 @@ extern f32 Particle_GetActorRadius(Actor_func_802676EC_de *);
 
 extern f32 Particle_GetPointDistance(CVector3 *, CVector3 *);
 
-/* Spawns a hit effect when the target has a rider: turns the negated hit direction into the victim's frame through func_8022B09C_de, makes it relative to the victim rider's centre and converts it to a rotation, resolves the hit position on the attacker through func_8024E79C_de, spawns effect 0xE9 there raised by D_800C9538 (size 3 for kind 5, otherwise 1), and starts effect 3 on the victim's emitter. */
+/* Spawns a hit effect when the target has a rider: turns the negated hit direction into the victim's frame through func_8022B09C_de, makes it relative to the victim rider's centre and converts it to a rotation, resolves the hit position on the attacker through InstHdr_CopyActorPositionAndModel, spawns effect 0xE9 there raised by D_800C9538 (size 3 for kind 5, otherwise 1), and starts effect 3 on the victim's emitter. */
 
 
 
@@ -64,7 +64,7 @@ extern void func_8022B09C_de(SharedPlayer *, CVector3 *);
 
 extern struct Shape_typemap_165 func_80271818_de(CVector3 *);
 
-extern void func_8024E79C_de(void *, Triple, void *, s32 *, s32, s32);
+extern void InstHdr_CopyActorPositionAndModel(void *, Triple, void *, s32 *, s32, s32);
 
 #include "particle/8027A0F4_8.H"
 
@@ -174,7 +174,7 @@ void func_80267958_de(SharedPlayer *target, Actor_func_80267958_de *actor, Tripl
     v.y -= player->views5DC.view5DC_5.rider->unk128.y;
     v.z -= player->views5DC.view5DC_5.rider->unk128.z;
     rotation = func_80271818_de(&v);
-    func_8024E79C_de(actor, position, &point, &unused, 0, 1);
+    InstHdr_CopyActorPositionAndModel(actor, position, &point, &unused, 0, 1);
     point = position;
     ((CVector3 *)&point)->y += D_800C9538;
     zero.x = 0;
@@ -247,5 +247,5 @@ void func_80267D70_de(s32 source, void *target, s32 kind, CVector3 position, str
     s32 mode = arg6.field_0;
     LevelActor *actor = (LevelActor *)target;
     ((Player *)actor->controller)->requestedPosition = position;
-    func_80232744_de(actor, (s32) &actor->behaviorFlags, mode);
+    Weapon_SpawnTargetPlayerFireEffect(actor, (s32) &actor->behaviorFlags, mode);
 }

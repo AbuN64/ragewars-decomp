@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_802BB060_CD834[15] =
+const char g_sirawreadText[15] =
     "io/sirawread.c\000";
 #endif
 

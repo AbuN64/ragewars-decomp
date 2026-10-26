@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_802507AC_C9B84[11] =
+const char g_statModelText[11] =
     "stat model\000";
 #endif
 

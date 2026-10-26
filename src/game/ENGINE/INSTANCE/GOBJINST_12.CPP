@@ -28,7 +28,7 @@ extern void Particle_ClampMatrixToFixedRange(f32 *);
 extern void func_8026FC9C_de(f32 *, s32);
 
 
-/* Moves an actor toward a point given relative to it: the offset is turned by the actor's facing and added to its position (or, for a mirrored actor with a parent, negated in x and z and transformed by the parent's matrix at 0x160), then passed to func_8024E79C_de with both final flags set. */
+/* Moves an actor toward a point given relative to it: the offset is turned by the actor's facing and added to its position (or, for a mirrored actor with a parent, negated in x and z and transformed by the parent's matrix at 0x160), then passed to InstHdr_CopyActorPositionAndModel with both final flags set. */
 
 
 
@@ -37,7 +37,7 @@ extern void func_8024BC94_de(CVector3 *out, void *actor, CVector3 offset);
 
 extern void Particle_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 
-extern void func_8024E79C_de(void *actor, CVector3 target, void *arg4, s32 *arg5, s32 arg6, s32 arg7);
+extern void InstHdr_CopyActorPositionAndModel(void *actor, CVector3 target, void *arg4, s32 *arg5, s32 arg6, s32 arg7);
 
 void func_8024BA7C_de(void *actor, Camera *camera, f32 *transform, u8 layer) {
     struct LevelActor *object = actor;
@@ -65,7 +65,7 @@ void func_8024BA7C_de(void *actor, Camera *camera, f32 *transform, u8 layer) {
     }
 }
 
-void func_8024BBB4_de(char *actor, CVector3 offset, void *arg4, s32 *arg5)
+void GameObject_GetActorOffsetPositionAndModel(char *actor, CVector3 offset, void *arg4, s32 *arg5)
 {
     CVector3 turned;
     CVector3 target;
@@ -86,5 +86,5 @@ void func_8024BBB4_de(char *actor, CVector3 offset, void *arg4, s32 *arg5)
         func_8024BC94_de(&turned, actor, offset);
         Particle_AddVec3(&target, &((ObjectLinks1DC_3 *)(actor))->unk_8, &turned);
     }
-    func_8024E79C_de(actor, target, arg4, arg5, 1, 1);
+    InstHdr_CopyActorPositionAndModel(actor, target, arg4, arg5, 1, 1);
 }

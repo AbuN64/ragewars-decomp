@@ -21,7 +21,7 @@ extern void func_8022AF74_de(Shared_ActorView *arg0, s32 arg1);
 
 
 
-void func_80232B64_de(LevelActor *actor, WeaponFireState *fireState) {
+void Weapon_ResetControllerAndSpin(LevelActor *actor, WeaponFireState *fireState) {
     void *controller;
 
     controller = actor->controller;
@@ -35,7 +35,7 @@ void func_80232B64_de(LevelActor *actor, WeaponFireState *fireState) {
     }
 }
 
-s32 func_80232BD0_de(LevelActor *actor, void *arg1, Shared_ActorView *arg2) {
+s32 Weapon_IsTriggerReleasedOrBlocked(LevelActor *actor, void *arg1, Shared_ActorView *arg2) {
     s32 temp_v0;
     void *owner;
 
@@ -60,11 +60,11 @@ s32 func_80232BD0_de(LevelActor *actor, void *arg1, Shared_ActorView *arg2) {
     return 1;
 }
 
-void func_80232C68_de(void *arg0) {
+void Weapon_ReleaseLinkedActorHandles(void *arg0) {
     Items_ReleaseObjectHandles((((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link));
 }
 
-void func_80232C88_de(Shared_ActorView *arg0, WeaponFireState *fireState) {
+void Weapon_InitializeChargeForWeaponEight(Shared_ActorView *arg0, WeaponFireState *fireState) {
     void *temp_a0;
     s16 idx;
 
@@ -76,7 +76,7 @@ void func_80232C88_de(Shared_ActorView *arg0, WeaponFireState *fireState) {
     }
 }
 
-void func_80232CEC_de(void *actor, void *attack) {
+void Weapon_UpdateTriggerReleaseState(void *actor, void *attack) {
     Player *state;
 
     state = ((Shared_Actor *)actor)->entity;

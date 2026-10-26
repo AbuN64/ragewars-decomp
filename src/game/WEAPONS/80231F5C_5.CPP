@@ -8,17 +8,17 @@
 #include "RENDER_2/8025DE50_5.H"
 #include "COMMON/PLAYERPROFILES.H"
 
-void func_80232744_de(void *aiTarget, s32 unused1, s32 arg2) {
+void Weapon_SpawnTargetPlayerFireEffect(void *aiTarget, s32 unused1, s32 arg2) {
     AiTarget *target = aiTarget;
     func_8021A9A4_de(target->player, arg2);
 }
 
 /** Return the value pointed to by the indexed pointer table entry. */
-int func_80232764_de(int arg0) {
+int Weapon_GetIndexedTableValue(int arg0) {
     return *D_800CB358_de[arg0];
 }
 
-s32 func_80232780_de(s32 arg0) {
+s32 Weapon_IsPrimarySwitchGroup(s32 arg0) {
     if (arg0 < 7) {
         if (arg0 >= 3) {
             return 1;
@@ -28,7 +28,7 @@ s32 func_80232780_de(s32 arg0) {
 }
 
 /** Return whether the encoded type belongs to this caller's accepted set. */
-s32 func_802327A0_de(s32 arg0) {
+s32 Weapon_IsSecondarySwitchGroup(s32 arg0) {
     {
         arg0 -= 2;
         if ((unsigned int)arg0 >= 14) {
@@ -63,7 +63,7 @@ case_default:
     return 0;
 }
 
-s32 func_802327D4_de(s32 arg0) {
+s32 Weapon_IsSpecialSwitchGroup(s32 arg0) {
     if (arg0 < 0xD) {
         if (arg0 >= 0xA) {
             return 1;
@@ -81,7 +81,7 @@ extern s32 Player_GetProfileAchievementFlag(Profile *, s32);
 extern s32 Weapons_GetPlayerIndex(Shared_MenuData *, PlayerRecAt1450V1 *);
 extern void Camera_PostTargetedScreenMessage(Shared_MenuObject *, void *, char *, s32, f32);
 
-s32 func_80232790_eu(PlayerRecAt1450V1 *pThis) {
+s32 Weapon_CheckProfileFirePermission(PlayerRecAt1450V1 *pThis) {
     s32 result;
     Shared_Game *settings;
     if (pThis->shield > 0.0f) {
@@ -115,7 +115,7 @@ s32 func_80232790_eu(PlayerRecAt1450V1 *pThis) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 
-void func_80232878_eu(void *arg0, void *arg1) {
+void Weapon_ApplySwitchAndRequestIdle(void *arg0, void *arg1) {
     Weapons_ApplyWeaponSwitch(arg0, arg1);
     Weapons_RequestActorState(arg0, arg1, 0);
 }

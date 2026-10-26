@@ -2,13 +2,13 @@
 #include "TYPES.H"
 #include "COMMON/EXTERNS_6.H"
 
-extern void func_80217388_de(void);
-extern void func_80213CF8_de(Source_func_802164A8_de *, Dest_func_802164A8_de *);
-extern void func_80213ED4_de(Source_func_802164A8_de *, Dest_func_802164A8_de *);
+extern void Barrel_StopActorLoopingSound(void);
+extern void Nav_ApplySupportingPlatformMotion(SourceBarrelUpdateActorController *, DestBarrelUpdateActorController *);
+extern void Nav_UpdateActorStateAnimation(SourceBarrelUpdateActorController *, DestBarrelUpdateActorController *);
 
-void func_802164A8_de(Source_func_802164A8_de *src, Dest_func_802164A8_de *dst) {
+void Barrel_UpdateActorController(SourceBarrelUpdateActorController *src, DestBarrelUpdateActorController *dst) {
     if ((dst->aux != 0) && (dst->aux->unkC == -1)) {
-        func_80217388_de();
+        Barrel_StopActorLoopingSound();
     }
     if (dst->timer != 0) {
         dst->timer--;
@@ -23,12 +23,12 @@ void func_802164A8_de(Source_func_802164A8_de *src, Dest_func_802164A8_de *dst) 
         dst->position = src->position;
         dst->value += D_800D2988;
         if (src->flags & 0x10000) {
-            func_80213CF8_de(src, dst);
+            Nav_ApplySupportingPlatformMotion(src, dst);
         }
         if (dst->callback != 0) {
             dst->callback(src, dst);
         }
-        func_80213ED4_de(src, dst);
+        Nav_UpdateActorStateAnimation(src, dst);
         if (*src->kind != 2) {
             dst->old_position = src->position;
             dst->height = src->height;

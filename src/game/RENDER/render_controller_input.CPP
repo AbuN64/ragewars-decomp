@@ -78,7 +78,7 @@ void Render_ReadControllerStates(void) {
         osRecvMesg((OSMesgQueue *)&D_8010FC00, (OSMesg *)D_8010BBD8, 1);
         func_802B7538_de(D_8010BBE0);
         for (i = 0; i < 4; i++) {
-            func_80263CF0_de(&D_8010F328[i]);
+            Control_RefreshControllerConnection(&D_8010F328[i]);
         }
         break;
     case 2:
@@ -90,8 +90,8 @@ void Render_ReadControllerStates(void) {
 }
 
 /* Polls the controller paks when they are enabled: after func_80285C78_de it tries to take the pak lock
- * D_8010FBC0 without blocking and, holding it, refreshes the four pak entries through func_80264104_de and
- * advances the pak state (state 0 opens the pak through func_802B74B0_de once func_80264728_de detects it,
+ * D_8010FBC0 without blocking and, holding it, refreshes the four pak entries through Control_UpdateControllerRumble and
+ * advances the pak state (state 0 opens the pak through func_802B74B0_de once Control_IsAnyControllerPakEnabled detects it,
  * otherwise closes it through func_802B7560_de; states 1 to 3 reset to 0 and close it), then releases the
  * lock. */
 
@@ -100,7 +100,7 @@ extern char D_8010EC90;
 extern ControllerProfile D_8010F328[4];
 
 
-extern void func_80264104_de(void *);
+extern void Control_UpdateControllerRumble(void *);
 extern void func_802B74B0_de(void *);
 extern void func_802B7560_de(void *);
 
@@ -116,11 +116,11 @@ void Render_PollControllerPaks(void) {
         if (locked) {
             Render_ReadControllerStates();
             for (i = 0; i < 4; i++) {
-                func_80264104_de(&D_8010F328[i]);
+                Control_UpdateControllerRumble(&D_8010F328[i]);
             }
             switch (D_8010BBB8) {
             case 0:
-                if (func_80264728_de() != 0) {
+                if (Control_IsAnyControllerPakEnabled() != 0) {
                     D_8010BBB8 = 1;
                     func_802B74B0_de(&D_8010FC00);
                 } else {
@@ -152,7 +152,7 @@ void Control_TrackControllerPakChanges(void)
 
     for (i = 0; i < 4; i++) {
         if (Control_IsControllerPakEnabled(i) != 0) {
-            if (func_80264634_de(i) != 0) {
+            if (Control_IsControllerPakPresent(i) != 0) {
                 D_8010B310[i] = 1;
                 if (D_8010BC28[i] != 0) {
                     D_8010BBF0[i] = 1;
@@ -174,7 +174,7 @@ extern s32 Render_InitPoolNodes(void *arg0, void *arg1, s32 arg2);
 
 
 
-void func_80263CF0_de(void *arg0) {
+void Control_RefreshControllerConnection(void *arg0) {
     char *o = (char *) arg0;
     s32 type;
     s32 bit;

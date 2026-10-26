@@ -14,7 +14,7 @@
 
 /* Runs a weapon's two-shot alternate fire for its holder at 0x1D8: when the holder cannot use the
    alternate mode of its weapon (Weapons_HasAmmoForMode) a pending switch at 0x13C is cancelled and, if still
-   unusable, the holder picks its next weapon at 0x770 through func_8022F96C_de; otherwise, while the
+   unusable, the holder picks its next weapon at 0x770 through Weapon_FindNextUsableWeapon; otherwise, while the
    alternate input 0x4000 is held and the weapon can fire (not stunned, and with ammunition in a single
    player game, clicking and showing the empty message when out), mode 1 with a second shot available
    arms mode 2, clicking and showing the unavailable message and falling back to mode 1 when mode 2
@@ -26,7 +26,7 @@ extern char D_80102B00[];
 extern char D_80145040[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
-extern s16 func_8022F96C_de(void *);
+extern s16 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern s32 Weapons_GetPlayerIndex(void *, void *);
 extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
@@ -56,19 +56,19 @@ static inline s32 can_fire(char *player) {
     }
     return ammo;
 }
-void func_80230FDC_de(Shared_Actor *actor, WeaponFireState *fireState) {
+void Weapon_ToggleFiringModeWithAmmoCheck(Shared_Actor *actor, WeaponFireState *fireState) {
     char *player;
     s32 action;
     player = actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
     if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
         if (fireState->mode != 2) {
-            ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
+            ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
             return;
         }
         fireState->mode = 1;
         if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
-            ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
+            ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
             return;
         }
     }

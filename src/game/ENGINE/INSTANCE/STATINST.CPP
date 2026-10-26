@@ -70,8 +70,8 @@ extern s32 Render_LocatePackSection(s32 *, s32, s32, s32 *);
 
 extern void System_DeliverContactEffect(void *, void *, s32, s32, Triple, ResourceManagerState);
 
-s32 func_802500FC_de(void *prop, s32 arg1) {
-    Owner_func_80250274_de *owner = prop;
+s32 StaticInstance_UpdateDistanceFade(void *prop, s32 arg1) {
+    OwnerStaticInstanceDrawDistanceFadedModel *owner = prop;
     GameplayCamera *camera = (void *)arg1;
     CVector3 sp10;
     f32 temp_f0;
@@ -140,7 +140,7 @@ block_20:
     return 1;
 }
 
-void func_80250274_de(Owner_func_80250274_de *owner) {
+void StaticInstance_DrawDistanceFadedModel(OwnerStaticInstanceDrawDistanceFadedModel *owner) {
     DescriptorRecAt24 *descriptor;
     s32 remaining;
     s32 key;
@@ -247,7 +247,7 @@ void Instance_DrawModel(ModelOwner *owner) {
     owner->colorFrame = (u8)D_800D2978;
 }
 
-void func_80250624_de(void *object, s32 all) {
+void StaticInstance_DispatchAttachmentEvents(void *object, s32 all) {
     s32 **model;
     s32 **table;
     s32 *header;

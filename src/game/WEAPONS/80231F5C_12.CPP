@@ -29,7 +29,7 @@ extern struct Shape_func_8020AF9C_de_2 D_80140FF8;
 
 
 
-extern s16 func_8022F96C_de(void *arg0);
+extern s16 Weapon_FindNextUsableWeapon(void *arg0);
 
 extern s32 func_8022B184_de(void *arg0);
 
@@ -50,7 +50,7 @@ extern char D_8011D8D0;
 extern f32 Nav_ApproachValue(f32, f32, s32);
 
 
-void func_802331FC_de(Shared_ActorView *arg0, WeaponFireState *fireState) {
+void Weapon_EnterChargeStateWithCues(Shared_ActorView *arg0, WeaponFireState *fireState) {
     void *player;
     void *temp_a0;
     s16 index;
@@ -85,7 +85,7 @@ void func_802331FC_de(Shared_ActorView *arg0, WeaponFireState *fireState) {
 void func_80233314_de(void) {
 }
 
-void func_8023331C_de(void *arg0, struct Shared_Particle *particle) {
+void Weapon_SetDelayAndRequestStateEight(void *arg0, struct Shared_Particle *particle) {
     particle->unk148 = D_800C3050_de;
     Weapons_RequestActorState(arg0, particle, 8);
 }
@@ -94,13 +94,13 @@ void func_8023331C_de(void *arg0, struct Shared_Particle *particle) {
 void func_80233344_de(void) {
 }
 
-void func_8023334C_de(void *arg0, void *attack) {
+void Weapon_UpdateHeldAlternateFire(void *arg0, void *attack) {
     void *actor;
 
     actor = ((LevelActor *)arg0)->controller;
     ((WeaponFireState *)attack)->mode = 2;
     if (Weapons_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
-        ((Shared_ActorView *)actor)->nextWeapon = func_8022F96C_de(actor);
+        ((Shared_ActorView *)actor)->nextWeapon = Weapon_FindNextUsableWeapon(actor);
         return;
     }
 
@@ -122,7 +122,7 @@ void func_8023334C_de(void *arg0, void *attack) {
     }
 }
 
-void func_80233438_de(void *arg0, void *attack) {
+void Weapon_UpdateSpecialFireAndAmmo(void *arg0, void *attack) {
     void *actor;
     s16 idx;
     s32 value;
@@ -141,7 +141,7 @@ void func_80233438_de(void *arg0, void *attack) {
 
     if (Weapons_HasAmmoForMode(actor, ((ObjectLinks11DC *)(actor))->unk_62E) == 0) {
         if (func_80283228_de(&D_8011D8D0, actor) == 0) {
-            ((ObjectLinks11DC *)(actor))->unk_770 = func_8022F96C_de(actor);
+            ((ObjectLinks11DC *)(actor))->unk_770 = Weapon_FindNextUsableWeapon(actor);
         }
     } else if (func_802301F4_de(arg0, attack) == 0 &&
                !(((ObjectLinks1DC_3 *)arg0)->unk_100 & 0x400)) {
@@ -149,13 +149,13 @@ void func_80233438_de(void *arg0, void *attack) {
     }
 }
 
-void func_80233544_de(void *a, struct WeaponEventSource *b) {
+void Weapon_RequestReleaseOnEnabledEvent(void *a, struct WeaponEventSource *b) {
     if (b->eventEnabled != 0) {
         Weapons_RequestActorState(a, b, 2);
     }
 }
 
-void func_8023356C_de(void *arg0) {
+void Weapon_PlayStartupCue80C(void *arg0) {
     void *temp_a0;
     temp_a0 = (((struct ObjRecAt1D8V1 *) ((s8 *) arg0))->unk1D8);
     if ((((struct IntegerState11C4 *) ((s8 *) temp_a0))->unk_11C0) == 0) {
@@ -163,7 +163,7 @@ void func_8023356C_de(void *arg0) {
     }
 }
 
-void func_80233598_de(LevelActor *actor, WeaponFireState *fireState) {
+void Weapon_UpdateAlternateTriggerCompletion(LevelActor *actor, WeaponFireState *fireState) {
     void *controller;
 
     controller = actor->controller;
@@ -176,7 +176,7 @@ void func_80233598_de(LevelActor *actor, WeaponFireState *fireState) {
     }
 }
 
-void func_802335EC_de(struct MeasuredRecAt1D8V3 *arg0, void *arg1) {
+void Weapon_EaseSpinForActionFive(struct MeasuredRecAt1D8V3 *arg0, void *arg1) {
     f32 temp_f1;
     f32 temp_f2;
     void *value;
@@ -204,7 +204,7 @@ void func_802335EC_de(struct MeasuredRecAt1D8V3 *arg0, void *arg1) {
     ((struct MeasuredRecAt168V2 *)(temp_v0))->value = (f32) D_800C3074_de;
 }
 
-void func_8023371C_de(void *arg0, struct WeaponFireState *fireState) {
+void Weapon_ApproachSpinPhaseAndRelease(void *arg0, struct WeaponFireState *fireState) {
     f32 temp_f0;
     f32 target;
 
@@ -216,7 +216,7 @@ void func_8023371C_de(void *arg0, struct WeaponFireState *fireState) {
     }
 }
 
-void func_8023378C_de(void *matrix, void *arg1) {
+void Weapon_TranslateEventSixByPitch(void *matrix, void *arg1) {
     ObjRecAt8V1 *event = arg1;
     if (event->unk4 == 6) {
         LevelActor *actor = event->unk8;

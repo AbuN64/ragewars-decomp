@@ -69,7 +69,7 @@ static inline s32 released(void *actor, Player *player) {
     return Weapons_HasAmmoForMode(player, player->selectedAction) == 0;
 }
 
-void func_802312C8_de(Shared_Actor *actor, WeaponFireState *attack) {
+void Weapon_UpdateSpinAndRepeatCue(Shared_Actor *actor, WeaponFireState *attack) {
     Player *player;
     CVector3 *position;
     SharedRecAt564V1 *target;
@@ -102,7 +102,7 @@ void func_802312C8_de(Shared_Actor *actor, WeaponFireState *attack) {
 
 
 
-void func_80231474_de(Shared_Actor *actor, WeaponFireState *fireState) {
+void Weapon_SettleSpinToThirdTurn(Shared_Actor *actor, WeaponFireState *fireState) {
     f32 spin;
     f32 temp_f1;
     f32 temp_f2;
@@ -159,11 +159,11 @@ void func_80231474_de(Shared_Actor *actor, WeaponFireState *fireState) {
  * not allowed) or any other request into type 1, and holds one round; the barrel spin at 0x11F4 then winds
  * down by 0.5 to 1 while type 1 or up by 0.05 to 2 while type 2 and turns the barrel frame at 0x11F8 (of
  * 8); finally the default action for the player's state starts unless func_802301F4_de handled the request
- * or the actor is flagged 0x400. Adapted from func_80231BB0_de with the same static fire check. */
+ * or the actor is flagged 0x400. Adapted from Weapon_TryEnterAlternateStateEight with the same static fire check. */
 extern WeaponActionRecord D_800CE8DC[];
 extern char D_80102B00[];
 
-extern s16 func_8022F96C_de(void *);
+extern s16 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
@@ -192,7 +192,7 @@ static inline s32 can_fire(Player *player) {
     }
     return ammo;
 }
-void func_80231664_de(Shared_Actor *actor, WeaponFireState *fireState) {
+void Weapon_UpdateAnimatedFiringMode(Shared_Actor *actor, WeaponFireState *fireState) {
     Player *player;
     s32 action;
     s32 single;
@@ -205,7 +205,7 @@ void func_80231664_de(Shared_Actor *actor, WeaponFireState *fireState) {
         fireState->mode = 1;
         if (Weapons_HasAmmoForMode(player, player->selectedAction) == 0) {
         idle:
-            player->weapon = func_8022F96C_de(player);
+            player->weapon = Weapon_FindNextUsableWeapon(player);
             return;
         }
     }

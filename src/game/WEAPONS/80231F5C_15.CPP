@@ -2,7 +2,7 @@
 #include "TYPES.H"
 #include "COMMON/EXTERNS_6.H"
 
-u32 func_802337D0_de(CShakeAxis *state) {
+u32 Weapon_UpdateShakeAxis(CShakeAxis *state) {
     f32 scale;
     f32 step;
 

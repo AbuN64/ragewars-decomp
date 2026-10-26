@@ -12,7 +12,7 @@ extern CollisionInfo D_80103FD0;
 extern f32 Particle_GetActorHeight(Instance8020CD74 *);
 extern s32 func_802444A4_de(Instance8020CD74 *arg0, CVector3 current, CVector3 desired, CollisionInfo *arg3);
 
-s32 func_80216A6C_de(Instance8020CD74 *arg0, void *unused, Instance8020CD74 *target) {
+s32 Barrel_TestFlaggedAimObstruction(Instance8020CD74 *arg0, void *unused, Instance8020CD74 *target) {
     Instance8020CD74 saved;
     CVector3 desired;
     f32 scale;
@@ -22,9 +22,9 @@ s32 func_80216A6C_de(Instance8020CD74 *arg0, void *unused, Instance8020CD74 *tar
     ((DraftAimPlayer *)arg0)->position.y += Particle_GetActorHeight(arg0) * scale;
     ((DraftAimPlayer *)arg0)->position.y += ((DraftAimPlayer *)arg0)->height;
 
-    desired = ((Actor_func_80214310_de *)(target))->position;
+    desired = ((ActorBarrelIsTargetInViewCone *)(target))->position;
     desired.y += Particle_GetActorHeight(target) * scale;
-    desired.y += ((Actor_func_80214310_de *)(target))->eye;
+    desired.y += ((ActorBarrelIsTargetInViewCone *)(target))->eye;
 
     func_802444A4_de(arg0, ((Player *)(arg0))->pos, desired, &D_80103FD0);
     *arg0 = saved;

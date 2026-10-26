@@ -160,7 +160,7 @@ static inline void applyShieldReaction(ReactionActor *target, ReactionPlayer *pl
         localImpulse.y -= player->display->origin.y;
         localImpulse.z -= player->display->origin.z;
         rotation = func_80271818_de(&localImpulse.x);
-        func_8024E79C_de((Actor_func_80214624_de *)target, position,
+        InstHdr_CopyActorPositionAndModel((Actor_func_80214624_de *)target, position,
                          &effectPosition, hit, 0, 1);
         effectPosition = position;
         effectPosition.y += D_800C43D0_de;
@@ -546,7 +546,7 @@ void func_80267260_de(void *actor, CVector3 input, s32 arg4) {
     CVector3 output;
     s32 value;
 
-    func_8024E79C_de(actor, input, &output, &value, 0, 0);
+    InstHdr_CopyActorPositionAndModel(actor, input, &output, &value, 0, 0);
     if (arg4 != 0) {
         func_80276184_de((void *)value);
     } else {

@@ -9,7 +9,7 @@
 #include "WEAPONS/800C7B48.H"
 
 extern char D_800CED30;
-s32 func_8024E62C_de(void *);
+s32 InstHdr_GetActorMotionState(void *);
 extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
 /* Updates swimming turn, pitch, stride motion, sounds, and animation. */
 void func_802251DC_de(SharedPlayer *player, SharedPlayer *body) {
@@ -49,7 +49,7 @@ void func_802251DC_de(SharedPlayer *player, SharedPlayer *body) {
     if (!(body->views1C.view38_3.flags & 0x100)) {
         player->views5E8.view724_72.pitch = 0.0f;
         player->turnAccumulator = 0.0f;
-        if (func_8024E62C_de(body) == 0) {
+        if (InstHdr_GetActorMotionState(body) == 0) {
             detachDistance = D_800C2A58_de;
             player->views5E8.view6E8_79.unk6E8.x -= Math_Sinf(body->views1C.view6C_5.heading) * detachDistance;
             player->views5E8.view6E8_79.unk6E8.z -= Math_Cosf(body->views1C.view6C_5.heading) * detachDistance;

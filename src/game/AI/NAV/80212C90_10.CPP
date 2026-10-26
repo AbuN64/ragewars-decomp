@@ -9,7 +9,7 @@
 #include "COMMON/SELF.H"
 #include "AI/NAV/80212C90_10.H"
 
-void func_802131E0_de(Root802131E0 *arg0) {
+void Nav_InitTimedJumpRoute(Root802131E0 *arg0) {
     Target802131E0 *inner;
 
     inner = arg0->unk1D8->unk1454;
@@ -20,7 +20,7 @@ void func_802131E0_de(Root802131E0 *arg0) {
 }
 
 extern void Nav_SetBehaviourState(void *arg0, s32 arg1);
-extern void func_80211020_de(void *arg0);
+extern void Nav_RunBehaviorHandler(void *arg0);
 extern f32 Nav_DistanceToNode(void *arg0, s32 arg1);
 extern void Nav_SteerAlongRoute(void *);
 extern void Nav_UpdatePlayerSteering(void *arg0);
@@ -36,7 +36,7 @@ extern void Nav_UpdatePlayerSteering(void *arg0);
 
 
 
-void func_8021321C_de(Root802131E0 *arg0)
+void Nav_UpdateTransientJumpRoute(Root802131E0 *arg0)
 {
     void *state;
     s32 random;
@@ -49,7 +49,7 @@ void func_8021321C_de(Root802131E0 *arg0)
         return;
     }
 
-    func_80211020_de(state);
+    Nav_RunBehaviorHandler(state);
     if (--((Brain_func_80212D78_eu_x *)state)->jumpTimer == 0) {
         actor_state = ((Brain_func_80212D78_eu_x *)state)->player->action;
         flags = ((Brain_func_80212D78_eu_x *)state)->player->unk_0x0038;

@@ -15,7 +15,7 @@
 #include "COMMON/TRIPLE.H"
 #include "FX_2/80271B18.H"
 
-s32 func_80216BF4_de(void *, void *, void *);
+s32 Barrel_TestTargetEyeObstruction(void *, void *, void *);
 /* Whether the target's view reports an active shield. */
 static inline s32 Weapons_TargetShielded(func_8021CD70_S2 *target) {
     View *view = target->unk5DC;
@@ -41,7 +41,7 @@ s32 Weapons_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target) 
                 return 0;
             }
             if (!Weapons_TargetShielded(target)) {
-                return func_80216BF4_de(attacker, &attacker->unk170, target) == 0;
+                return Barrel_TestTargetEyeObstruction(attacker, &attacker->unk170, target) == 0;
             }
             return 0;
         }
@@ -54,7 +54,7 @@ s32 Weapons_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target) 
                 return 0;
             }
             if (target->unk174 != 0) {
-                return func_80216BF4_de(attacker, &attacker->unk170, target) == 0;
+                return Barrel_TestTargetEyeObstruction(attacker, &attacker->unk170, target) == 0;
             }
             return 0;
         }
@@ -62,7 +62,7 @@ s32 Weapons_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target) 
     switch (target->unk18->unk0) {
     case 4:
         if (target->unk174 != 0) {
-            return func_80216BF4_de(attacker, &attacker->unk170, target) == 0;
+            return Barrel_TestTargetEyeObstruction(attacker, &attacker->unk170, target) == 0;
         }
         return 0;
     case 0:

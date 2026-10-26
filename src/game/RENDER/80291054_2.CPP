@@ -40,7 +40,7 @@ void Render_InitFrameRing(RenderState *state) {
     g_displayListCursor = 0;
     func_802B6B80_de((void *)&D_80142C60);
     if (D_801470B0) {
-        func_80264B44_de();
+        Control_ResetActorSnapshot();
         Items_ResetGameOptions(&D_801462C8);
     }
     i = 0;
@@ -109,7 +109,7 @@ extern void func_8044AE70_de(void);
 extern void Ovlgame_ResetHudCharTables(void *hud);
 extern void Pak_AllocateScratchBuffer(void);
 extern void func_80298368_de(s32 arg0);
-extern void func_8026479C_de(void);
+extern void Control_EnableAllControllerPaks(void);
 extern void Render_BeginModeTransition(GameSession *session, s32 arg1);
 extern void Render_UpdateGameMode(void *session);
 extern void Render_UpdateFrameTiming(void *session);
@@ -190,7 +190,7 @@ void Render_RunGameLoop(GameSession *session) {
     D_80146D60 = 0;
     D_8014AD9C = 1;
     D_80142CAC = 0;
-    func_8026479C_de();
+    Control_EnableAllControllerPaks();
     gameStatus()->transitionActive = 0;
     Render_BeginModeTransition(session, 0);
     for (;;) {

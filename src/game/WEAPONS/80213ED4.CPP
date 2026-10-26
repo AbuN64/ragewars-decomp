@@ -13,7 +13,7 @@ extern void *func_8024B738_de(void *, void *, s32);
 extern s32 func_80246A08_de(void *, s32, s32);
 
 
-void func_80213ED4_de(Source110 *src, Dest *dst) {
+void Nav_UpdateActorStateAnimation(Source110 *src, Dest *dst) {
     StateEntry *entry;
     StateCallback callback;
     f32 factor;
@@ -91,9 +91,9 @@ void func_80213ED4_de(Source110 *src, Dest *dst) {
 
 #include "COMMON/WORLD.H"
 #include "COMMON/WORLD.H"
-extern void func_80217388_de(void *, void *);
+extern void Barrel_StopActorLoopingSound(void *, void *);
 
-s32 Weapons_RequestActorState(void *arg0, void *arg1, s32 action) {
+s32 Weapons_RequestActorState(void *actor, void *stateController, s32 action) {
     struct ActorStateTable *node;
     StateEntry *entry;
     StateEntry *scan;
@@ -103,20 +103,20 @@ s32 Weapons_RequestActorState(void *arg0, void *arg1, s32 action) {
         return 1;
     }
     if (g_world.mode == 4) {
-        ((Source110 *)arg0)->flags |= 0x100;
+        ((Source110 *)actor)->flags |= 0x100;
     }
 
-    ((Dest *)arg1)->requestedState = ((Dest *)arg1)->state;
-    ((Source110 *)arg0)->animationChanged = 1;
-    ((Source110 *)arg0)->stateChanged = 1;
-    if ((((Dest *)arg1)->entry != 0) && (((Dest *)arg1)->state == action)) {
+    ((Dest *)stateController)->requestedState = ((Dest *)stateController)->state;
+    ((Source110 *)actor)->animationChanged = 1;
+    ((Source110 *)actor)->stateChanged = 1;
+    if ((((Dest *)stateController)->entry != 0) && (((Dest *)stateController)->state == action)) {
         return 1;
     }
 
-    node = ((Dest *)arg1)->table;
+    node = ((Dest *)stateController)->table;
     entry = 0;
-    ((Dest *)arg1)->state = action;
-    ((Dest *)arg1)->stateTimer = 0;
+    ((Dest *)stateController)->state = action;
+    ((Dest *)stateController)->stateTimer = 0;
     while (node != 0) {
         scan = node->entries;
         if (scan->id != -1) {
@@ -138,24 +138,24 @@ s32 Weapons_RequestActorState(void *arg0, void *arg1, s32 action) {
         return 0;
     }
 
-    ((Dest *)arg1)->entry = entry;
-    ((Source110 *)arg0)->renderFlags &= 0x1F80007F;
-    if ((((Source110 *)arg0)->flags & 0x08000000) == 0) {
-        ((Dest *)arg1)->count = 0;
-        ((Dest *)arg1)->flags &= ~1U;
+    ((Dest *)stateController)->entry = entry;
+    ((Source110 *)actor)->renderFlags &= 0x1F80007F;
+    if ((((Source110 *)actor)->flags & 0x08000000) == 0) {
+        ((Dest *)stateController)->count = 0;
+        ((Dest *)stateController)->flags &= ~1U;
     }
-    if (((Dest *)arg1)->sound != 0) {
-        func_80217388_de(arg0, arg1);
+    if (((Dest *)stateController)->sound != 0) {
+        Barrel_StopActorLoopingSound(actor, stateController);
     }
     if (entry->enter != 0) {
-        entry->enter(arg0, arg1);
+        entry->enter(actor, stateController);
     }
     flags = entry->flags;
-    ((Dest *)arg1)->entry_flags = flags;
+    ((Dest *)stateController)->entry_flags = flags;
     if (flags & 4) {
-        ((Source110 *)arg0)->velocity.x = 0;
-        ((Source110 *)arg0)->velocity.y = 0;
-        ((Source110 *)arg0)->velocity.z = 0;
+        ((Source110 *)actor)->velocity.x = 0;
+        ((Source110 *)actor)->velocity.y = 0;
+        ((Source110 *)actor)->velocity.z = 0;
     }
-    return ((Dest *)arg1)->state == action;
+    return ((Dest *)stateController)->state == action;
 }

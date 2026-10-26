@@ -48,7 +48,7 @@ s32 func_8029076C_de(s32, s32);
 /* Advances the fractional animation clock and updates every active object with the resulting tick flag. */
 
 
-extern void func_80250624_de(s32, s32);
+extern void StaticInstance_DispatchAttachmentEvents(s32, s32);
 
 
 /* Releases the resource of each of the owner's listed entries through Scene_UnlockResource, then clears the counters at 0x944, 0xC4C and 0x10BC, and moves the entry count to 0x1500 and zeroes it. */
@@ -233,7 +233,7 @@ void func_8028D67C_de(State_func_8028D67C_de *arg0)
     do
     {
       temp_a0 = arg0->values[var_s0];
-      func_80250624_de(temp_a0, var_s3);
+      StaticInstance_DispatchAttachmentEvents(temp_a0, var_s3);
       var_s0 += 1;
     }
     while (var_s0 < arg0->unkC4C);

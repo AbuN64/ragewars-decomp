@@ -35,11 +35,11 @@ void Weapons_ApplyWeaponSwitch(void *part, void *body) {
     index = ((Shared_ActorView *)state)->nextWeapon;
     unsigned_index = (u16)((Shared_ActorView *)state)->nextWeapon;
     if ((((Shared_ActorView *)state)->selectedAction != index) || (g_world.mode != 4)) {
-        if (func_80232780_de(index) != 0) {
+        if (Weapon_IsPrimarySwitchGroup(index) != 0) {
             ((Shared_ActorView *)state)->weaponChanged = 1;
-        } else if (func_802327A0_de(index) != 0) {
+        } else if (Weapon_IsSecondarySwitchGroup(index) != 0) {
             ((Shared_ActorView *)state)->secondaryChanged = 1;
-        } else if (func_802327D4_de(index) != 0) {
+        } else if (Weapon_IsSpecialSwitchGroup(index) != 0) {
             ((Shared_ActorView *)state)->specialChanged = 1;
         }
         ((Shared_ActorView *)state)->selectedAction = unsigned_index;

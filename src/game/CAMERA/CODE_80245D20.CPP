@@ -11,7 +11,7 @@ extern void InstHdr_ResetInstanceRenderIndices(signed char *arg0);
 
 extern f32 D_800CB430_de[],D_800D2988[];
 
-extern s32 func_8024E62C_de(Actor_func_80245D30_de *);
+extern s32 InstHdr_GetActorMotionState(Actor_func_80245D30_de *);
 
 extern f32 Particle_GetHorizontalAngle(CVector3 *);
 
@@ -21,7 +21,7 @@ extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 
 static inline s32 currentEnabled(Actor_func_80245D30_de *actor) {
     if (actor->flags & 0x3000) return 1;
-    if (actor->flags & 0x4000) return func_8024E62C_de(actor);
+    if (actor->flags & 0x4000) return InstHdr_GetActorMotionState(actor);
     return 0;
 }
 

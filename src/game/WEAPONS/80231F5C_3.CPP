@@ -4,6 +4,6 @@
 
 
 /** Thin wrapper around func_80214178_de. */
-void func_802325E0_de(void *arg0, void *arg1, s32 arg2) {
+void Weapon_ForwardActorStateRequest(void *arg0, void *arg1, s32 arg2) {
     Weapons_RequestActorState(arg0, arg1, arg2);
 }

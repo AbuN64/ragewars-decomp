@@ -3,8 +3,8 @@
 #include "AI/NAV/80212C90_3.H"
 
 #if !(defined(VERSION_DE) || defined(VERSION_EU))
-void func_80212D80_eu_x(struct ActorRecAt1D8V2 *arg0) {
-    Brain_func_80212D78_eu_x *brain = arg0->player->brain;
+void func_80212D80_eu_x(struct ActorRecAt1D8V2 *actor) {
+    Brain_func_80212D78_eu_x *brain = actor->player->brain;
 
     brain->unk220 = 0;
     Nav_ResetBehaviorState(brain);

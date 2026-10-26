@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "AI/NAV/80212C90_9.H"
 
-void func_802131AC_de(void *actor) {
+void Nav_ResetObjectArrivalChase(void *actor) {
     void *brain;
     brain = (((struct ObjRecAt1454V2 *) ((s8 *) ((struct ObjRecAt1D8V1 *) ((s8 *) actor))->unk1D8))->unk1454);
     (((struct IntegerState23C *) ((s8 *) brain))->unk_68) = 0;

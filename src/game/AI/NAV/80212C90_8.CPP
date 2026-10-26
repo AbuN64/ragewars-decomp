@@ -116,7 +116,7 @@ void Nav_UpdatePatrolRouteDe(void) {
         ".Lauto_80212F8C:\n"
         "jal        Nav_SteerAlongRoute\n"
         "addu      $a0, $s1, $zero\n"
-        "jal        func_80211020_de\n"
+        "jal        Nav_RunBehaviorHandler\n"
         "addu      $a0, $s1, $zero\n"
         "jal        Nav_UpdatePlayerSteering\n"
         "addu      $a0, $s1, $zero\n"
@@ -165,7 +165,7 @@ extern RouteChaseGraph D_8013B364;
 
 
 extern void Nav_SetBehaviourState(RouteChaseBot *bot, s32 mode);
-extern void func_80211020_de(RouteChaseBot *bot);
+extern void Nav_RunBehaviorHandler(RouteChaseBot *bot);
 extern f32 Nav_DistanceToNode(RouteChaseBot *bot, s32 node);
 extern void Nav_SteerAlongRoute(RouteChaseBot *bot);
 extern void Nav_UpdateTargetSteering(RouteChaseBot *bot);
@@ -189,7 +189,7 @@ void Nav_UpdateObjectArrivalChase(RouteChaseActor *actor)
         return;
     }
     if (bot->target == 0) {
-        func_80211020_de(bot);
+        Nav_RunBehaviorHandler(bot);
         return;
     }
     dist = Nav_DistanceToNode(bot, bot->goal);
@@ -200,7 +200,7 @@ void Nav_UpdateObjectArrivalChase(RouteChaseActor *actor)
     } else {
         bot->dest = bot->target->pos;
     }
-    func_80211020_de(bot);
+    Nav_RunBehaviorHandler(bot);
     if (bot->target != 0) {
         Nav_UpdateTargetSteering(bot);
         if (Particle_GetPointDistance(&bot->self->pos, &bot->target->pos) < D_800C2384_eu && bot->arrived == 0) {

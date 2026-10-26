@@ -3,6 +3,6 @@
 #include "TYPES.H"
 #include "COMMON/ACTORRECAT5E0.H"
 extern f32 Control_SampleEffectCurve(PlayerRecAt8 *p);
-extern s32 func_80264B5C_de(void);
+extern s32 Control_GetSnapshotActorId(void);
 extern void Control_InitializeCurvePlayer(unsigned int *record, unsigned int value);
 #endif

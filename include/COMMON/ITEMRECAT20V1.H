@@ -1291,8 +1291,8 @@ struct UnitVtx;
 typedef struct UnitVtx UnitVtx;
 
 
-struct Actor_func_80214310_de;
-typedef struct Actor_func_80214310_de Actor_func_80214310_de;
+struct ActorBarrelIsTargetInViewCone;
+typedef struct ActorBarrelIsTargetInViewCone ActorBarrelIsTargetInViewCone;
 
 struct Shield;
 struct Shield {
@@ -2256,8 +2256,8 @@ struct ObjRecAt8V2;
 typedef struct ObjRecAt8V2 ObjRecAt8V2;
 
 
-struct Actor_func_80214310_de;
-struct Actor_func_80214310_de {
+struct ActorBarrelIsTargetInViewCone;
+struct ActorBarrelIsTargetInViewCone {
     char pad0[8];
     CVector3 position;
     char pad14[0x70 - 0x14];

@@ -47,7 +47,7 @@ void *Camera_PostScreenMessage(void *, void *, u8 *);
 #endif
 void *Camera_PostScaledScreenMessage(void *, void *, void *, f32); CQuatern func_8024796C_de(char *);
 s32 func_8024BE80_de(void *);
-void func_8024E79C_de(void *, Triple, void *, s32 *, s32, s32); /* extern */
+void InstHdr_CopyActorPositionAndModel(void *, Triple, void *, s32 *, s32, s32); /* extern */
 s32 Render_PlaySoundAtPosition(s16, CVector3, s32, s32); /* extern */
 void Render_SetProfileMode(void *, s32);
 void func_80278D78_de(void *, s32, void *);
@@ -332,7 +332,7 @@ case 7:
                 }
                 if (hasAmmoDrop != 0) {
                     nearestSpawnPoint = Nav_GetGraphPoint(&D_8013B364, Nav_FindNearestPointIndex(&D_8013B364, &player->position.vector));
-                    func_8024E79C_de(player, player->position.words, &spawnPosition, &spawnProbeResult, 0, 0);
+                    InstHdr_CopyActorPositionAndModel(player, player->position.words, &spawnPosition, &spawnProbeResult, 0, 0);
                     if (nearestSpawnPoint != 0) {
                         spawnPosition = *(CVector3 *)nearestSpawnPoint;
                     }

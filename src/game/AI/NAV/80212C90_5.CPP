@@ -11,7 +11,7 @@
 #include "COMMON/SELF.H"
 extern void Nav_ResetBehaviorState(void *);
 
-void func_80212D60_de(void *object) {
+void Nav_ResetTargetFollowStateDe(void *object) {
     CloseAttackActor *actor = object;
     CloseAttackBrain *brain = actor->self->brain;
     brain->state = 0;
@@ -21,7 +21,7 @@ void func_80212D60_de(void *object) {
 #endif
 
 #if !(defined(VERSION_EU))
-extern void func_80211020_de(void *);
+extern void Nav_RunBehaviorHandler(void *);
 extern void Nav_SteerAlongRoute(void *);
 extern void Nav_UpdatePlayerSteering(void *arg0);
 
@@ -38,7 +38,7 @@ extern void Nav_UpdatePlayerSteering(void *arg0);
 
 
 
-void func_80212D94_de(void *arg0)
+void Nav_UpdateTargetRouteFollow(void *arg0)
 {
     AiTarget *actor = arg0;
     AiController *state;
@@ -49,7 +49,7 @@ void func_80212D94_de(void *arg0)
     state = actor->player->controller;
     peer = state->target;
     if (peer == 0) {
-        func_80211020_de(state);
+        Nav_RunBehaviorHandler(state);
         return;
     }
     peer_state = peer->player->controller;
@@ -58,7 +58,7 @@ void func_80212D94_de(void *arg0)
         state->fallback = value;
     }
     Nav_SteerAlongRoute(state);
-    func_80211020_de(state);
+    Nav_RunBehaviorHandler(state);
     Nav_UpdatePlayerSteering(state);
 }
 #endif

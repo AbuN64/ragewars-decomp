@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_802627A0_C9F50[18] =
+const char g_animObjectIndexText[18] =
     "anim object index\000";
 #endif
 

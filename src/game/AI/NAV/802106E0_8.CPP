@@ -9,7 +9,7 @@
 
 
 
-void func_802110C4_de(struct PlayerRecAt288 *player) {
+void Nav_ResetWheelProbeState(struct PlayerRecAt288 *player) {
     u32 i;
 
     if (player != 0 && player->active != 0) {

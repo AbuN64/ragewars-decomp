@@ -10,17 +10,17 @@
 #include "AI/NAV/80212C90_15.H"
 
 /* Runs a computer player's think step: when it has reached its goal node or the goal at 0x22C is past
-   the node count D_8013B368, it picks a new goal as func_802136EC_de does (func_80213340_de for a player
+   the node count D_8013B368, it picks a new goal as Nav_InitRoamingWithJumps does (Nav_SelectFlaggedRoamingGoal for a player
    flagged at 0x94 in mode 12, otherwise up to ten random nodes of D_8013B364 not flagged 0x400); then
    it counts down the jump timer at 0x320 and on expiry makes its player jump (bit 0x10 at 0x6B0)
    unless the player is in state 0xF, holds input bits 0x3000 or the bot is busy at 0x314, rerolls an
-   expired timer to 15 times 3 to 9 frames, and runs func_80211020_de, Nav_SteerAlongRoute and Nav_UpdatePlayerSteering. */
+   expired timer to 15 times 3 to 9 frames, and runs Nav_RunBehaviorHandler, Nav_SteerAlongRoute and Nav_UpdatePlayerSteering. */
 
 extern s32 D_8013B364;
 
 
 extern void *Nav_GetGraphPoint(void *, s32);
-extern void func_80211020_de(void *);
+extern void Nav_RunBehaviorHandler(void *);
 extern void Nav_SteerAlongRoute(void *);
 extern void Nav_UpdatePlayerSteering(void *);
 
@@ -39,7 +39,7 @@ extern void Nav_UpdatePlayerSteering(void *);
 
 
 
-void func_80213500_de(Shared_Actor *arg0) {
+void Nav_UpdateRoamingWithJumps(Shared_Actor *arg0) {
     void *actor = ((Shared_ActorView *)(arg0->entity))->owner;
     void *player;
     s32 busy;
@@ -50,7 +50,7 @@ void func_80213500_de(Shared_Actor *arg0) {
         || !(((Brain_func_80212D78_eu_x *)(actor))->goal < D_8013B368)) {
         void *data = ((Shared_ActorView *)(*(void **) actor))->controls;
         if (((RecordRecAt94 *)(data))->display && ((RecordRecAt94 *)(data))->kind == 12) {
-            func_80213340_de(actor);
+            Nav_SelectFlaggedRoamingGoal(actor);
         } else {
             s32 global_count = D_8013B368;
             s32 *table = &D_8013B364;
@@ -95,7 +95,7 @@ store_c:
     if (((Brain_func_80212D78_eu_x *)(actor))->jumpTimer < 0) {
         ((Brain_func_80212D78_eu_x *)(actor))->jumpTimer = (Nav_NextRandom() % 7 + 3) * 15;
     }
-    func_80211020_de(actor);
+    Nav_RunBehaviorHandler(actor);
     Nav_SteerAlongRoute(actor);
     Nav_UpdatePlayerSteering(actor);
 }
@@ -120,7 +120,7 @@ extern void *Nav_GetGraphPoint(void *, s32);
 
 
 
-void func_802136EC_de(Shared_Actor *arg0)
+void Nav_InitRoamingWithJumps(Shared_Actor *arg0)
 {
     void *actor = ((Shared_ActorView *)(arg0->entity))->owner;
 
@@ -128,7 +128,7 @@ void func_802136EC_de(Shared_Actor *arg0)
     {
         void *data = ((Shared_ActorView *)(*(void **)actor))->controls;
         if (((RecordRecAt94 *)(data))->display && ((RecordRecAt94 *)(data))->kind == 12) {
-            func_80213340_de(actor);
+            Nav_SelectFlaggedRoamingGoal(actor);
         } else {
             s32 global_count = D_8013B368;
             s32 *table = &D_8013B364;
@@ -174,7 +174,7 @@ extern void *Nav_GetGraphPoint(void *, s32);
 
 
 
-void func_80213810_de(void *arg0)
+void Nav_ChooseNewRoamingGoal(void *arg0)
 {
     s32 *table = &D_8013B364;
     s32 tries = 0;

@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_802B9B20_CD7C4[15] =
+const char g_pirawreadText[15] =
     "io/pirawread.c\000";
 #endif
 

@@ -85,7 +85,7 @@ extern void *D_80140FE8_de;
 
 extern void Items_InitEntryPool(int a);
 
-extern u32 func_802337D0_de(s32);
+extern u32 Weapon_UpdateShakeAxis(s32);
 
 CCameraText *Camera_PostTargetedScreenMessage(void *owner, void *pool, u8 *text, s32 target, f32 size) {
     CCameraText *pending;
@@ -290,9 +290,9 @@ s32 func_80239E48_de(s32 waveRecord) {
     u32 firstChannelDone;
     u32 thirdChannelDone;
 
-    firstChannelDone = func_802337D0_de(waveRecord + 0x18);
-    secondChannelDone = func_802337D0_de(waveRecord + 0x2C);
-    thirdChannelDone = func_802337D0_de(waveRecord + 0x40);
+    firstChannelDone = Weapon_UpdateShakeAxis(waveRecord + 0x18);
+    secondChannelDone = Weapon_UpdateShakeAxis(waveRecord + 0x2C);
+    thirdChannelDone = Weapon_UpdateShakeAxis(waveRecord + 0x40);
     result = 0;
     if ((firstChannelDone != 0) && (secondChannelDone != 0)) {
         result = thirdChannelDone > 0U;

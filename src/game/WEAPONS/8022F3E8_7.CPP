@@ -20,7 +20,7 @@
 #include "RENDER_2/8025DE50_5.H"
 
 /* Runs a charge weapon's fire for its holder at 0x1D8: picks the holder's next weapon at 0x770 through
-   func_8022F96C_de when the current one cannot be used; while the fire input 0x4000 is held on a weapon
+   Weapon_FindNextUsableWeapon when the current one cannot be used; while the fire input 0x4000 is held on a weapon
    that can fire (not stunned, with ammunition, clicking and showing the empty message otherwise) in
    ready state 1 at 0x13C, a full charge of at least 50 at 0x5F6 fires action 5 and enters state 2,
    while a partial charge clicks and shows the not-ready message; otherwise it fires the state's action
@@ -36,7 +36,7 @@ extern char D_80102B00[];
 
 extern char D_80145040[];
 
-extern s16 func_8022F96C_de(void *);
+extern s16 Weapon_FindNextUsableWeapon(void *);
 
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 
@@ -76,12 +76,12 @@ static inline s32 can_fire(char *player) {
 
 extern s32 Weapons_GetWeaponAmmo(void *arg0, s16 arg1);
 
-/* Advances a player's second charging action: when the trigger is released (as in func_802312C8_de) or the
+/* Advances a player's second charging action: when the trigger is released (as in Weapon_UpdateSpinAndRepeatCue) or the
  * cooldown is past D_800C8008, it switches to action 2, runs func_8022AF40_de and func_8022B00C_de, plays sound
  * 0x794 at the player's target or position and pushes the charge at 0x128 by the release amount; otherwise
  * it grows the charge by the charge rate and each time the cue timer at 0x64 runs out adds the cue period
  * back and plays the charge cue (0x3F9 in a multiplayer match without controller, 0x4CB otherwise).
- * Adapted from func_802312C8_de. */
+ * Adapted from Weapon_UpdateSpinAndRepeatCue. */
 
 
 
@@ -114,14 +114,14 @@ static inline s32 released(void *actor, char *player) {
     return Weapons_HasAmmoForMode(player, ((Shared_ActorView *)player)->selectedAction) == 0;
 }
 
-void func_802307FC_de(Shared_Actor *actor, WeaponFireState *fire) {
+void Weapon_UpdateSpinAndAlternateFire(Shared_Actor *actor, WeaponFireState *fire) {
     char *player;
     s32 action;
     char *model;
     player = actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
     if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
-        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
+        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
     }
     if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player) && fire->mode == 1) {
         if (((SharedPlayer *)(player))->views5E8.chargeView.charge >= 50) {
@@ -159,7 +159,7 @@ void func_802307FC_de(Shared_Actor *actor, WeaponFireState *fire) {
     }
 }
 
-void func_80230B04_de(struct MeasuredRecAt1D8V1 *arg0, void *arg1) {
+void Weapon_SelectReleasedFireState(struct MeasuredRecAt1D8V1 *arg0, void *arg1) {
     s16 temp_a1;
     s32 temp_v1;
     void *value;
@@ -200,7 +200,7 @@ done:
     }
 }
 
-void func_80230BC8_de(LevelActor *actor, Dest *attack) {
+void Weapon_UpdateChargeAndRepeatCue(LevelActor *actor, Dest *attack) {
     char *player;
     CVector3 *position;
     char *target;

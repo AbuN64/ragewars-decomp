@@ -7,7 +7,7 @@
 #include "RENDER_2/802192C0_3.H"
 
 extern s32 Sound_FindActorModelEntry(void *);
-extern s32 func_8024E62C_de(void *arg0);
+extern s32 InstHdr_GetActorMotionState(void *arg0);
 extern f32 D_800C7F08;
 
 
@@ -29,7 +29,7 @@ void Player_RecoverOutOfBoundsActor(Shared_ActorView *player, LevelActor *actor)
     } else if (actor->position0.y < (D_801370C4 - D_800C7F08)) {
         Render_PlacePlayerAtSpawnPoint(player, player->spawn, 0, 0);
     }
-    if (func_8024E62C_de(actor) != 0) {
+    if (InstHdr_GetActorMotionState(actor) != 0) {
         player->contactPosition = actor->position0;
     }
 }

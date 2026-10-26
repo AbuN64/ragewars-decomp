@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_8022409C_C8640[13] =
+const char g_flyModeOffText[13] =
     "Fly Mode Off\000";
 #endif
 

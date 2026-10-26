@@ -16,7 +16,7 @@ extern void *Nav_GetGraphPoint(void *, s32);
 
 
 
-void func_80213340_de(void *arg0)
+void Nav_SelectFlaggedRoamingGoal(void *arg0)
 {
     s32 choices[32];
     s32 count;

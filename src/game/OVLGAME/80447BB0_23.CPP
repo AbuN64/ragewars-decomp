@@ -399,11 +399,11 @@ extern int func_802934F8_de(void);
 
 extern void Render_ResetPlayerWeapons(struct RespawnPlayer *);
 extern void World_ResetPlayerState(void *);
-extern void func_80217388_de(LevelActor *, s32 *);
+extern void Barrel_StopActorLoopingSound(LevelActor *, s32 *);
 extern void AnimPool_ReleaseSceneEffect(LevelActor *);
 static inline void releaseState(LevelActor *carried, s32 *state) {
     if (state != 0) {
-        func_80217388_de(carried, state);
+        Barrel_StopActorLoopingSound(carried, state);
         *state |= 0x20;
     }
 }

@@ -15,7 +15,7 @@ extern Location *func_80219408_de(struct Cursor *slot);
 extern f32 Particle_GetActorHeight(Actor_func_80214DD4_de *arg0);
 extern f32 Particle_GetActorRadius(Actor_func_80214DD4_de *arg0);
 extern f32 Sound_GetActorReach(Actor_func_80214DD4_de *arg0);
-extern void func_8024E79C_de(Actor_func_80214DD4_de *arg0, CVector3 pos, CVector3 *outPos, s32 *outRoom, s32 arg4, s32 arg5);
+extern void InstHdr_CopyActorPositionAndModel(Actor_func_80214DD4_de *arg0, CVector3 pos, CVector3 *outPos, s32 *outRoom, s32 arg4, s32 arg5);
 extern f32 func_8024E80C_de(Actor_func_80214DD4_de *arg0);
 extern f32 Particle_GetHorizontalAngle(CVector3 *arg0);
 extern void Particle_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
@@ -39,7 +39,7 @@ static inline void Weapons_PlaceGoalBeside(Actor_func_80214DD4_de *actor, Actor_
     }
     Particle_ScaleVector(&dir, &dir, Particle_GetActorRadius(target) + Particle_GetActorRadius(actor) + D_800C216C_de);
     Particle_AddVec3(&goal, &target->pos, &dir);
-    func_8024E79C_de(target, goal, outPos, outRoom, 0, 0);
+    InstHdr_CopyActorPositionAndModel(target, goal, outPos, outRoom, 0, 0);
 }
 /** Picks what the tracker aims at (its target, itself, a slot or home point, or the actor) and
     fills out with the kind, target, reach, goal position and its offset from the actor, both in 3D
@@ -58,7 +58,7 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
     f32 angle;
     f32 reach;
     Location *loc;
-    boost = 0; /* the shared tracker-callback slot (unused, as in func_80215410_de) holds the boost flag */
+    boost = 0; /* the shared tracker-callback slot (unused, as in Barrel_FillAnchorTargetInfo) holds the boost flag */
     if (*actor->kind != 1) {
         mode = -1;
     }

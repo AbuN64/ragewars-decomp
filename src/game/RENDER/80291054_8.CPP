@@ -43,9 +43,9 @@ void func_8029311C_de(void *unused, u8 *color, s32 left, s32 top, s32 right, s32
     }
 }
 
-/** Thin wrapper around func_80264404_de. */
+/** Thin wrapper around Control_CommitControllerInputs. */
 void func_80293268_de(void *unused) {
-    func_80264404_de();
+    Control_CommitControllerInputs();
 }
 
 void func_80293284_de(GameSession *gameSession, s32 target) {

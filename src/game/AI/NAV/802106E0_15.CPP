@@ -6,7 +6,7 @@
 #include "AI/NAV/802106E0_15.H"
 
 #if !(defined(VERSION_DE))
-void func_80212470_eu(CloseAttackActor *arg0) {
+void Nav_InitRangedCombat(CloseAttackActor *arg0) {
     CloseAttackActor *level1 = arg0->self;
     CloseAttackBrain *inner = level1->brain;
     s32 r1, r2, r3;
@@ -29,7 +29,7 @@ void func_80212470_eu(CloseAttackActor *arg0) {
 
 
 
-void func_80212544_eu(CloseAttackActor *arg0) {
+void Nav_InitCloseCombat(CloseAttackActor *arg0) {
     CloseAttackActor *level1 = arg0->self;
     CloseAttackBrain *inner = level1->brain;
     s32 r1, r2, r3;
@@ -52,7 +52,7 @@ void func_80212544_eu(CloseAttackActor *arg0) {
     inner->fireTimer = -1;
 }
 
-void func_80212610_eu(CloseAttackActor *arg0) {
+void Nav_InitVisiblePursuit(CloseAttackActor *arg0) {
     CloseAttackActor *level1 = arg0->self;
     CloseAttackBrain *inner = level1->brain;
     s32 r1, r2;

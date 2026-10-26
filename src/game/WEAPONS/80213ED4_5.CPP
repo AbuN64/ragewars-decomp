@@ -4,18 +4,18 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
 
-extern s32 func_8024E924_de(void *arg0);
+extern s32 InstHdr_GetActorType(void *arg0);
 
 
 
 
-s32 Weapons_GetImpactSlot(void *arg0)
+s32 Weapons_GetImpactSlot(void *actorObject)
 {
-    char *actor = arg0;
+    char *actor = actorObject;
     CGameStatus *audio;
     s32 type;
 
-    type = func_8024E924_de(actor);
+    type = InstHdr_GetActorType(actor);
     switch (type) {
     case 1:
     case 2:

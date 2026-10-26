@@ -23,8 +23,8 @@ typedef struct Actor_func_80214DD4_de Actor_func_80214DD4_de;
 
 
 
-struct Source_func_802164A8_de;
-struct Source_func_802164A8_de {
+struct SourceBarrelUpdateActorController;
+struct SourceBarrelUpdateActorController {
     char pad0[8];
     Triple position;
     char pad14[4];
@@ -101,8 +101,8 @@ extern float D_800C21C8_de;
 
 
 
-struct Dest_func_802164A8_de;
-typedef struct Dest_func_802164A8_de Dest_func_802164A8_de;
+struct DestBarrelUpdateActorController;
+typedef struct DestBarrelUpdateActorController DestBarrelUpdateActorController;
 
 struct CActor_t;
 struct CActor_t {
@@ -124,8 +124,8 @@ struct Func802172C4Value {
     int words[2];
 };
 
-struct Source_func_802164A8_de;
-typedef struct Source_func_802164A8_de Source_func_802164A8_de;
+struct SourceBarrelUpdateActorController;
+typedef struct SourceBarrelUpdateActorController SourceBarrelUpdateActorController;
 
 
 
@@ -222,8 +222,8 @@ struct Tracker {
 
 
 
-struct Dest_func_802164A8_de;
-struct Dest_func_802164A8_de {
+struct DestBarrelUpdateActorController;
+struct DestBarrelUpdateActorController {
     char pad0[0x40];
     f32 value;
     char pad44[4];
@@ -235,7 +235,7 @@ struct Dest_func_802164A8_de {
     char padce[0x2E];
     func_80205628_S3 *aux;
     char pad100[8];
-    void (*callback)(Source_func_802164A8_de *, struct Dest_func_802164A8_de *);
+    void (*callback)(SourceBarrelUpdateActorController *, struct DestBarrelUpdateActorController *);
 };
 
 

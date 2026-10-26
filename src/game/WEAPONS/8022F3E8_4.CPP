@@ -18,7 +18,7 @@ extern s32 D_800CD730;
 
 
 
-void func_8022FDAC_de(void *arg0, void *weaponFireState) {
+void Weapon_InitializeSwitchAndRequestIdle(void *arg0, void *weaponFireState) {
     s16 index;
     u16 unsigned_index;
     void *owner;
@@ -28,11 +28,11 @@ void func_8022FDAC_de(void *arg0, void *weaponFireState) {
     index = ((Shared_ActorView *)state)->nextWeapon;
     unsigned_index = (u16)((Shared_ActorView *)state)->nextWeapon;
     if ((((Shared_ActorView *)state)->selectedAction != index) || (g_world.mode != 4)) {
-        if (func_80232780_de(index) != 0) {
+        if (Weapon_IsPrimarySwitchGroup(index) != 0) {
             ((Shared_ActorView *)state)->weaponChanged = 1;
-        } else if (func_802327A0_de(index) != 0) {
+        } else if (Weapon_IsSecondarySwitchGroup(index) != 0) {
             ((Shared_ActorView *)state)->secondaryChanged = 1;
-        } else if (func_802327D4_de(index) != 0) {
+        } else if (Weapon_IsSpecialSwitchGroup(index) != 0) {
             ((Shared_ActorView *)state)->specialChanged = 1;
         }
         ((Shared_ActorView *)state)->selectedAction = unsigned_index;
@@ -51,7 +51,7 @@ void func_8022FDAC_de(void *arg0, void *weaponFireState) {
     Weapons_RequestActorState(arg0, weaponFireState, 0);
 }
 
-void func_8022FF04_de(void *arg0, WeaponFireState *fireState) {
+void Weapon_InitializeSwitchForSingleRound(void *arg0, WeaponFireState *fireState) {
     s16 temp_s0;
     u16 temp_s2;
     void *temp_a1;
@@ -61,11 +61,11 @@ void func_8022FF04_de(void *arg0, WeaponFireState *fireState) {
     temp_s0 = ((Shared_ActorView *)temp_s1)->nextWeapon;
     temp_s2 = (u16)((Shared_ActorView *)temp_s1)->nextWeapon;
     if ((((Shared_ActorView *)temp_s1)->selectedAction != temp_s0) || (g_world.mode != 4)) {
-        if (func_80232780_de(temp_s0) != 0) {
+        if (Weapon_IsPrimarySwitchGroup(temp_s0) != 0) {
             ((Shared_ActorView *)temp_s1)->weaponChanged = 1;
-        } else if (func_802327A0_de(temp_s0) != 0) {
+        } else if (Weapon_IsSecondarySwitchGroup(temp_s0) != 0) {
             ((Shared_ActorView *)temp_s1)->secondaryChanged = 1;
-        } else if (func_802327D4_de(temp_s0) != 0) {
+        } else if (Weapon_IsSpecialSwitchGroup(temp_s0) != 0) {
             ((Shared_ActorView *)temp_s1)->specialChanged = 1;
         }
         ((Shared_ActorView *)temp_s1)->selectedAction = temp_s2;

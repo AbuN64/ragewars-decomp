@@ -135,5 +135,5 @@ typedef struct Target Target;
 extern s32 func_8025DEC0_de(s32 arg0, CVector3 arg1, s32 arg4, s32 arg5,
                          f32 arg6);
 
-extern void func_80232744_de(void *arg0, s32 arg1, s32 arg2);
+extern void Weapon_SpawnTargetPlayerFireEffect(void *arg0, s32 arg1, s32 arg2);
 #endif

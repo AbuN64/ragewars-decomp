@@ -17,8 +17,8 @@
  * is projected along it onto a plane just below the object (0.9 of its height up to 512), grown by 0.003
  * per unit of height, turned by the object's orientation and placed on the ground; the shadow is then
  * submitted through func_8024BA7C_de. */
-extern s32 func_8024E158_de(void *);
-extern f32 func_8024E650_de(char *, s32);
+extern s32 InstHdr_CanActorCastShadow(void *);
+extern f32 InstHdr_GetActorGroundHeight(char *, s32);
 extern void *func_802799C0_de(void *, s32);
 extern f32 Math_Sqrtf(f32);
 extern void func_80268A40_de(void *, CVector3, CVector3 *, f32 *);
@@ -43,12 +43,12 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
     f32 diff;
     char *light;
     s32 alpha;
-    if (((struct LevelActor *)(obj))->model == 0 || func_8024E158_de(obj) == 0 || (((struct LevelActor *)(obj))->flags & 0x200000)) {
+    if (((struct LevelActor *)(obj))->model == 0 || InstHdr_CanActorCastShadow(obj) == 0 || (((struct LevelActor *)(obj))->flags & 0x200000)) {
         return;
     }
     if (((struct LevelActor *)(obj))->flags & 0x10000000) {
         if (((struct LevelActor *)(obj))->shadow == 0) {
-            ground = func_8024E650_de(obj, 0);
+            ground = InstHdr_GetActorGroundHeight(obj, 0);
             if (((struct LevelActor *)(obj))->position0.y < ground) {
                 return;
             }
@@ -107,8 +107,8 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-float func_8024E678_de(void *object, s32 mode);
-f32 func_8024E2FC_de(Actor_u1 *arg0);
+float InstHdr_GetShadowGroundHeight(void *object, s32 mode);
+f32 InstHdr_GetActorShadowRadius(Actor_u1 *arg0);
 s32 Particle_LimitVectorLength(f32 *arg0, f32 arg1);
 void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
@@ -130,9 +130,9 @@ void Instance_DrawBlobShadow(struct LevelActor *actor, CVector3 *offset, s32 rai
 
     packed = func_802799C0_de(&D_8011FFB0, 1);
     if (packed != 0) {
-        groundHeight = func_8024E678_de(actor, 0);
+        groundHeight = InstHdr_GetShadowGroundHeight(actor, 0);
         height = (actor->position0.y + actor->eyeHeight) - groundHeight;
-        radius = func_8024E2FC_de((Actor_u1 *)actor);
+        radius = InstHdr_GetActorShadowRadius((Actor_u1 *)actor);
         shrink = height * 0.1f;
         limitedRadius = radius - shrink;
         if (!(limitedRadius <= radius)) {

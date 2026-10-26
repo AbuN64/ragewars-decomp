@@ -9,7 +9,7 @@
 extern void func_8022AF74_de(Shared_ActorView *arg0, s32 arg1);
 
 
-void func_802328D8_de(Shared_ActorView *arg0, WeaponFireState *fireState) {
+void Weapon_InitializeChargeForWeaponFive(Shared_ActorView *arg0, WeaponFireState *fireState) {
     Shared_ActorView *temp_a0;
     s16 idx;
 

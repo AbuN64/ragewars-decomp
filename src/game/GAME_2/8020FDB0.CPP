@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "COMMON/SELF.H"
 
-/* Picks a computer player's next weapon: in state 14 defers to func_802100E0_de; otherwise gathers the loaded weapons it carries (slot kinds from 0x4C3, with ammunition and allowed by func_8022EB0C_de), filtering the specials by the record's weapon mode (mode 0 or an unknown mode, reset to 0, skips class-1 weapons and treats kind 6 as 5; modes 0 and 1 skip class-2 weapons; mode 2 allows all), and unless it already holds one of them and should keep it (holding kind 4 in gear 2, func_80283228_de reporting a threat, or a 79 percent roll through func_802744D4_de) chooses one at random into 0x770, clearing the brain's switch timer at 0x2E4 when it changes. */
+/* Picks a computer player's next weapon: in state 14 defers to Nav_RequestRandomArmedWeapon; otherwise gathers the loaded weapons it carries (slot kinds from 0x4C3, with ammunition and allowed by func_8022EB0C_de), filtering the specials by the record's weapon mode (mode 0 or an unknown mode, reset to 0, skips class-1 weapons and treats kind 6 as 5; modes 0 and 1 skip class-2 weapons; mode 2 allows all), and unless it already holds one of them and should keep it (holding kind 4 in gear 2, func_80283228_de reporting a threat, or a 79 percent roll through func_802744D4_de) chooses one at random into 0x770, clearing the brain's switch timer at 0x2E4 when it changes. */
 
 
 
@@ -20,16 +20,16 @@ extern WeaponInfo *D_800D052C[];
 
 extern char D_8011D8D0[];
 
-extern void func_802100E0_de(BrainCode8020EAE0 *);
+extern void Nav_RequestRandomArmedWeapon(BrainCode8020EAE0 *);
 
 extern s32 World_PlayerHasAmmoForWeapon(SharedPlayer *, s32);
 
 extern s32 func_80283228_de(char *, SharedPlayer *);
 
 
-extern void func_8020FDB0_de(BrainCode8020EAE0 *, s32 *);
+extern void Nav_SelectAvailableWeapon(BrainCode8020EAE0 *, s32 *);
 
-void func_8020FDB0_de(BrainCode8020EAE0 *brain, s32 *ammo) {
+void Nav_SelectAvailableWeapon(BrainCode8020EAE0 *brain, s32 *ammo) {
     s32 choices[8];
     u32 count;
     s32 holding;
@@ -41,7 +41,7 @@ void func_8020FDB0_de(BrainCode8020EAE0 *brain, s32 *ammo) {
         return;
     }
     if (brain->player->views5DC.view5E0_9.state == 14) {
-        func_802100E0_de(brain);
+        Nav_RequestRandomArmedWeapon(brain);
         return;
     }
     holding = count = 0;
@@ -101,37 +101,37 @@ void func_8020FDB0_de(BrainCode8020EAE0 *brain, s32 *ammo) {
     }
 }
 
-int func_80210018_de(void *arg0) {
-    BrainCode8020EAE0 *brain = arg0;
+int func_80210018_de(void *controller) {
+    BrainCode8020EAE0 *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
-    func_8020FDB0_de(brain, ammo + 0x8C);
+    Nav_SelectAvailableWeapon(brain, ammo + 0x8C);
     return 1;
 }
 
-int func_80210040_de(void *arg0) {
-    BrainCode8020EAE0 *brain = arg0;
+int func_80210040_de(void *controller) {
+    BrainCode8020EAE0 *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
-    func_8020FDB0_de(brain, ammo + 0xAC);
+    Nav_SelectAvailableWeapon(brain, ammo + 0xAC);
     return 1;
 }
 
-int func_80210068_de(void *arg0) {
-    BrainCode8020EAE0 *brain = arg0;
+int func_80210068_de(void *controller) {
+    BrainCode8020EAE0 *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
-    func_8020FDB0_de(brain, ammo + 0xCC);
+    Nav_SelectAvailableWeapon(brain, ammo + 0xCC);
     return 1;
 }
 
-int func_80210090_de(void *arg0) {
-    BrainCode8020EAE0 *brain = arg0;
+int func_80210090_de(void *controller) {
+    BrainCode8020EAE0 *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
-    func_8020FDB0_de(brain, ammo + 0xAC);
+    Nav_SelectAvailableWeapon(brain, ammo + 0xAC);
     return 1;
 }
 
-int func_802100B8_de(void *arg0) {
-    BrainCode8020EAE0 *brain = arg0;
+int func_802100B8_de(void *controller) {
+    BrainCode8020EAE0 *brain = controller;
     char *ammo = brain->player->views18.view18_1.track;
-    func_8020FDB0_de(brain, ammo + 0xAC);
+    Nav_SelectAvailableWeapon(brain, ammo + 0xAC);
     return 1;
 }

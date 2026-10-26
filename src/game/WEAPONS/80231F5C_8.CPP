@@ -13,7 +13,7 @@
 extern s32 Pak_CountLiveNodes(void *arg0);
 extern s32 Weapons_GetWeaponAmmo(void *arg0, s16 arg1);
 
-void func_8023293C_de(void *arg0, Dest *arg1, Lookup *lookup) {
+void Weapon_DrawWeaponLookupModel(void *arg0, Dest *arg1, Lookup *lookup) {
     void *actor;
     void *resource;
     s32 result;
@@ -49,7 +49,7 @@ void func_8023293C_de(void *arg0, Dest *arg1, Lookup *lookup) {
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern void func_80232878_eu(void *arg0, void *arg1);
+extern void Weapon_ApplySwitchAndRequestIdle(void *arg0, void *arg1);
 #else
 #endif
 
@@ -59,7 +59,7 @@ extern void func_80232878_eu(void *arg0, void *arg1);
 
 
 
-void func_80232A48_de(void *arg0, void *arg1) {
+void Weapon_InitializeFireStateCallbacks(void *arg0, void *arg1) {
     f32 k = D_800C3018_de;
 
     ((Dest *)arg1)->table = &D_800CA058;
@@ -78,9 +78,9 @@ void func_80232A48_de(void *arg0, void *arg1) {
     ((Dest *)arg1)->field150 = 0;
     
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-func_80232878_eu
+Weapon_ApplySwitchAndRequestIdle
 #else
-func_8022FDAC_de
+Weapon_InitializeSwitchAndRequestIdle
 #endif
 (arg0, arg1);
 }
@@ -92,20 +92,20 @@ extern s32 World_PlayerHasAmmoForWeapon(void *arg0, s32 arg1);
 
 s32 Weapons_PickRandomArmedWeapon(void *player) {
     s32 weapon;
-    s32 var_s0;
+    s32 remainingArmedSteps;
 
     weapon = ((Shared_ActorView *)player)->selectedAction;
-    var_s0 = Nav_NextRandom() % 22;
-    if (var_s0 >= 0) {
+    remainingArmedSteps = Nav_NextRandom() % 22;
+    if (remainingArmedSteps >= 0) {
         do {
             weapon += 1;
             if (weapon >= 0x10) {
                 weapon = 0;
             }
             if (World_PlayerHasAmmoForWeapon(player, weapon) != 0) {
-                var_s0 -= 1;
+                remainingArmedSteps -= 1;
             }
-        } while (var_s0 >= 0);
+        } while (remainingArmedSteps >= 0);
     }
     return weapon;
 }

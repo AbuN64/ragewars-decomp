@@ -24,7 +24,7 @@ int func_8024E150_de(void) {
 }
 
 /** Return whether this object is active for its current behavior class. */
-s32 func_8024E158_de(void *arg0) {
+s32 InstHdr_CanActorCastShadow(void *arg0) {
     if (*(u8 *)arg0 == 1) {
         if ((((LevelActor *)arg0)->flags & 0x300000) != 0) {
             return 1;
@@ -93,7 +93,7 @@ typedef struct Owner Owner;
 
 
 /** Return bit two of the nested state word. */
-unsigned int func_8024E29C_de(char *object) {
+unsigned int InstHdr_UsesGroundRotation(char *object) {
     return (((struct NavigationTrack *)((LevelActor *)object)->definition)->flags >> 2) & 1;
 }
 

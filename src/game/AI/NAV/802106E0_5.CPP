@@ -10,7 +10,7 @@ extern Handler *D_800C8DB0_de[];
 
 
 
-void func_80211020_de(void *aiController) {
+void Nav_RunBehaviorHandler(void *aiController) {
     s32 origIdx;
     s32 idx;
     s32 idx2;

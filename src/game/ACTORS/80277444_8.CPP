@@ -82,7 +82,7 @@ extern void func_8028D90C_de(void);
 
 extern void Menu_RequestTrackByIds(s32, s32);
 
-extern void func_80217388_de(void);
+extern void Barrel_StopActorLoopingSound(void);
 
 extern void AnimPool_ReleaseSceneEffect(struct Shared_Actor *arg0);
 
@@ -183,7 +183,7 @@ void func_8027907C_de(s32 arg0, s32 arg1, Trigger *trigger) {
 void func_802790C0_de(struct Shared_Actor *actor, s32 *stateFlags) {
     s32 flags;
 
-    func_80217388_de();
+    Barrel_StopActorLoopingSound();
     *stateFlags |= 0x20;
     flags = actor->weaponFlags & 0xFFFEFFFF;
     flags = flags & ~0x2000;

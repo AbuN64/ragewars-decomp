@@ -52,7 +52,7 @@ typedef struct Brain {
 extern s32 D_800D297C;
 extern char D_8013B364[];
 
-extern void func_80211020_de(Brain *arg0);
+extern void Nav_RunBehaviorHandler(Brain *arg0);
 extern s32 Nav_HasLineOfSight(Brain *, Actor *);
 extern void Nav_SetBehaviourState(Brain *, s32);
 extern f32 func_802726BC_de(CVector3 *, CVector3 *);
@@ -60,14 +60,14 @@ extern f32 Nav_ScaleCharacterSettingByDifficulty(Brain *arg0);
 extern s32 Nav_NextRandom(void);
 extern f32 Nav_UpdateDifficultyAimJitter(Brain *arg0);
 extern f32 Nav_SteerTowardPoint(Brain *, CVector3 *, f32, f32);
-extern s32 func_80210EFC_de(f32);
+extern s32 Nav_GetDirectionSector(f32);
 extern void Nav_MeasureWheelClearance(Actor *, s32);
 extern void Nav_DispatchActorBehavior(Brain *arg0);
 extern s32 Nav_GetRouteRelation(char *, s32, s32);
 
 
 extern void Nav_SteerAlongRoute(Brain *arg0), Nav_UpdatePlayerSteering(Brain *arg0);
-void func_8021113C_eu(Actor *actor) {
+void Nav_UpdatePursuitStrafe(Actor *actor) {
     s32 mine, theirs, dir, route;
     Actor *player;
     Actor *target;
@@ -76,7 +76,7 @@ void func_8021113C_eu(Actor *actor) {
     s32 pattern;
 
     brain = actor->self->brain;
-    func_80211020_de(brain);
+    Nav_RunBehaviorHandler(brain);
     player = brain->target;
     if (player != 0) {
         if (!(brain->frames & 3)) {
@@ -108,7 +108,7 @@ void func_8021113C_eu(Actor *actor) {
             Nav_SteerTowardPoint(brain, &target->pos, 2.0f, Nav_UpdateDifficultyAimJitter(brain));
             pattern = brain->pattern;
             if (pattern == 0) {
-                dir = func_80210EFC_de((brain->player->yaw - 3.1415927f) - 1.5707964f);
+                dir = Nav_GetDirectionSector((brain->player->yaw - 3.1415927f) - 1.5707964f);
                 player = brain->player;
                 if ((player->slot % 2) == D_800D297C) {
                     Nav_MeasureWheelClearance(player, dir);
@@ -119,7 +119,7 @@ void func_8021113C_eu(Actor *actor) {
                     goto halt;
                 }
             } else if (pattern == 1) {
-                dir = func_80210EFC_de((brain->player->yaw - 3.1415927f) + 1.5707964f);
+                dir = Nav_GetDirectionSector((brain->player->yaw - 3.1415927f) + 1.5707964f);
                 player = brain->player;
                 if ((player->slot % 2) == D_800D297C) {
                     Nav_MeasureWheelClearance(player, dir);

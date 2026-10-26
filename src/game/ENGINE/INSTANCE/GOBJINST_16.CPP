@@ -108,6 +108,6 @@ void func_8024C34C_de(LevelActor *actor, AnimChannel *animation) {
     scratch.position.y = actor->position0.y;
     scratch.position.z = actor->position0.z +
                           (scratch.out[2] * actor->scale.z);
-    func_8024E79C_de(actor, scratch.position, &actor->position0,
+    InstHdr_CopyActorPositionAndModel(actor, scratch.position, &actor->position0,
                   &actor->model, 0, 0);
 }

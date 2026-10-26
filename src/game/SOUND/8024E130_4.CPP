@@ -20,18 +20,18 @@ extern struct func_8022CA04_S3 *func_8028B2F8_de(Shared_World *, void *);
 
 
 
-void func_8024E79C_de(void *levelActor, Triple t, void *arg4, s32 *arg5, s32 unused6, s32 unused7) {
+void InstHdr_CopyActorPositionAndModel(void *levelActor, Triple t, void *arg4, s32 *arg5, s32 unused6, s32 unused7) {
     char unused[0x150];
     Triple *output = arg4;
     *output = t;
     *arg5 = ((LevelActor *)levelActor)->model;
 }
 
-int Sound_FindActorModelEntry(void *arg0) {
-    int temp_a1 = ((LevelActor *)arg0)->model;
+int Sound_FindActorModelEntry(void *actorStorage) {
+    int actorModel = ((LevelActor *)actorStorage)->model;
     int result = 0;
-    if (temp_a1 != 0) {
-        result = (int)func_8028B2F8_de(&g_world, (void *)temp_a1);
+    if (actorModel != 0) {
+        result = (int)func_8028B2F8_de(&g_world, (void *)actorModel);
     }
     return result;
 }
@@ -53,7 +53,7 @@ float func_8024E864_de(void) {
     return 0.0f;
 }
 
-f32 func_8024E870_de(void *arg0) {
+f32 InstHdr_GetActorTriangleTopOffset(void *arg0) {
     f32 temp_f1;
     f32 var_f0;
     f32 var_f1;
@@ -71,7 +71,7 @@ f32 func_8024E870_de(void *arg0) {
     return var_f1 - (((struct ObjectLinks18 *) ((s8 *) arg0))->unk_C);
 }
 
-f32 func_8024E8B8_de(void *arg0) {
+f32 InstHdr_GetActorTriangleBottomOffset(void *arg0) {
     f32 temp_f1;
     f32 var_f0;
     f32 var_f1;
@@ -89,9 +89,9 @@ f32 func_8024E8B8_de(void *arg0) {
     return (((struct ObjectLinks18 *) ((s8 *) arg0))->unk_C) - var_f1;
 }
 
-s32 func_8024E900_de(void *arg0)
+s32 func_8024E900_de(void *actorStorage)
 {
-    LevelActor *actor = arg0;
+    LevelActor *actor = actorStorage;
   int new_var;
   new_var = 1;
   if ((actor->kind) != 1)

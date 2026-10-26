@@ -102,7 +102,7 @@ extern void *Scene_AllocResourceBlock(s32 pool, void *handle, s32 size);
 extern void Scene_ReplaceResourceBlock(s32 pool, void *handle, void *block);
 extern void Render_TransposeRecords(void *src, void *dst, s32 arg2);
 extern void func_802BD3A0_de(void *dst, void *src, s32 size);
-extern void func_8024F960_eu(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing);
+extern void StaticInstance_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing);
 extern void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments);
 extern void World_InitSimpleInstance(SimpleInstance *instance, SimpleInstanceRecord *record, s32 owner, char *segments);
 extern void Anim_DecodeBoxTransform(ObjectRecAtBC *volume, LightVolumeRecord *record);
@@ -204,7 +204,7 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
             base = (char *)blocks;
             segments = (char *)objects + 8;
             for (i = 0; i < efficientCount; i++) {
-                func_8024F960_eu(&props[i], &efficient[i],
+                StaticInstance_InitializePlacedProp(&props[i], &efficient[i],
                                  Render_GetDirectoryEntry(world->indexedDirectory, world->indexedBank, efficient[i].id),
                                  segments, world->levelInfo->m_GridDistance);
             }

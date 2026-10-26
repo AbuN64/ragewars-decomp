@@ -7,7 +7,7 @@ extern f32 Weapons_FindClearAimAngle(void *arg0, f32 arg1, f32 arg2, f32 arg3,
                         void *arg4, f32 arg5);
 
 
-void func_802168B8_de(void *actor, s32 arg1, CTeamSelectTeam *arg2, f32 arg3) {
+void Barrel_TurnTowardClearAim(void *actor, s32 arg1, CTeamSelectTeam *arg2, f32 arg3) {
     f32 f0;
     f32 f1;
     f32 f2;
@@ -38,6 +38,6 @@ void func_802168B8_de(void *actor, s32 arg1, CTeamSelectTeam *arg2, f32 arg3) {
 clamp:
             f1 = f3;
         }
-        func_80217074_de(actor, f1);
+        Barrel_AddActorYaw(actor, f1);
     }
 }

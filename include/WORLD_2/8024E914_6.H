@@ -2,5 +2,5 @@
 #define WORLD_2_8024E914_6_H
 #include "COMMON/PROPGEOMETRY.H"
 #include "WORLD_2/8024E914.H"
-extern void func_8024F108_de(struct StaticObject *arg0);
+extern void SimpleInstance_RefreshModelResourceUsage(struct StaticObject *arg0);
 #endif

@@ -8,7 +8,7 @@ extern float D_800C1FD8_de;
 
 
 struct Self;
-struct Brain_func_802120A8_eu;
+struct BrainNavUpdateVisiblePursuit;
 struct Self {
     char pad0[8];
     CVector3 pos;
@@ -23,10 +23,10 @@ struct Self {
     char pad5D8[0xCC];
     f32 strafe;
     char pad6A8[0xDAC];
-    struct Brain_func_802120A8_eu *brain;
+    struct BrainNavUpdateVisiblePursuit *brain;
 };
 
-struct Brain_func_802120A8_eu {
+struct BrainNavUpdateVisiblePursuit {
     struct Self *player;
     s32 route;
     char pad8[8];
@@ -115,8 +115,8 @@ struct CloseAttackBrain {
 };
 
 
-struct Brain_func_802120A8_eu;
-typedef struct Brain_func_802120A8_eu Brain_func_802120A8_eu;
+struct BrainNavUpdateVisiblePursuit;
+typedef struct BrainNavUpdateVisiblePursuit BrainNavUpdateVisiblePursuit;
 
 
 

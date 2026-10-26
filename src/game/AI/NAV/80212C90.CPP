@@ -16,7 +16,7 @@ void func_80212C90_de(AiTarget *aiTarget) {
 }
 
 extern s32 Nav_SetBehaviourState(void *, s32);
-extern void func_80211020_de(void *);
+extern void Nav_RunBehaviorHandler(void *);
 extern f32 Nav_DistanceToNode(s32 *, s32);
 extern void Nav_SteerAlongRoute(void *);
 extern void Nav_UpdateTargetSteering(s32 *);
@@ -27,7 +27,7 @@ extern char D_80145040;
 
 
 
-void func_80212CC4_de(AiTarget *aiTarget) {
+void Nav_FollowMarkerCarrierRoute(AiTarget *aiTarget) {
     AiController *controller;
     void *v0;
 
@@ -38,7 +38,7 @@ void func_80212CC4_de(AiTarget *aiTarget) {
         return;
     }
     controller = aiTarget->player->controller;
-    func_80211020_de(controller);
+    Nav_RunBehaviorHandler(controller);
     Nav_DistanceToNode(controller, controller->mode);
     Nav_SteerAlongRoute(controller);
     Nav_UpdateTargetSteering(controller);

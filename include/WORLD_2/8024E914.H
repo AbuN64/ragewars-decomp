@@ -8,7 +8,7 @@ struct Access_s32_50 {
     char pad[0x50];
     s32 field;
 };
-struct Owner_func_80250274_de {
+struct OwnerStaticInstanceDrawDistanceFadedModel {
     char pad0[8];
     CVector3 position; /* 0x08 */
     char pad14[4];
@@ -74,7 +74,7 @@ struct ModelOwner {
     u16 flagsD8;
     u8 colorFrame;
 };
-struct Actor_func_8024ED90_de {
+struct ActorSimpleInstanceSpawnModelEffect {
     u32 pad0[2];
     CVector3 position0;
     u32 pad14[2];

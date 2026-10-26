@@ -5,7 +5,7 @@
 #include "AI/NAV/802106E0_14.H"
 
 #if !(defined(VERSION_DE))
-void func_802123FC_eu(void *closeAttackActor) {
+void Nav_InitPursuitStrafe(void *closeAttackActor) {
     CloseAttackActor *actor = closeAttackActor;
     CloseAttackActor *level1 = actor->self;
     CloseAttackBrain *inner = level1->brain;

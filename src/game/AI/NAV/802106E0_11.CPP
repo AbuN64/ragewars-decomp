@@ -16,14 +16,14 @@
 extern s32 D_800D297C;
 extern char D_8013B364[];
 
-extern void func_80211020_de(CloseAttackBrain *);
+extern void Nav_RunBehaviorHandler(CloseAttackBrain *);
 extern s32 Nav_HasLineOfSight(CloseAttackBrain *, CloseAttackActor *);
 extern void Nav_SetBehaviourState(CloseAttackBrain *, s32);
 extern f32 func_802726BC_de(CVector3 *, CVector3 *);
 extern f32 Nav_ScaleCharacterSettingByDifficulty(CloseAttackBrain *);
 extern f32 Nav_UpdateDifficultyAimJitter(CloseAttackBrain *);
 extern f32 Nav_SteerTowardPoint(CloseAttackBrain *, CVector3 *, f32, f32);
-extern s32 func_80210EFC_de(f32);
+extern s32 Nav_GetDirectionSector(f32);
 extern void Nav_MeasureWheelClearance(CloseAttackActor *, s32);
 extern void Nav_DispatchActorBehavior(CloseAttackBrain *);
 extern s32 Nav_GetRouteRelation(char *, s32, s32);
@@ -32,7 +32,7 @@ extern s32 Nav_GetRouteRelation(char *, s32, s32);
 extern void Nav_SteerAlongRoute(CloseAttackBrain *),Nav_UpdatePlayerSteering(CloseAttackBrain *),Nav_SelectPlayerState(CloseAttackBrain *);
 extern struct {char pad[0xC];unsigned short flags;} *Nav_GetGraphPoint(char *,int);
 
-void func_80211490_eu(CloseAttackActor *actor) {
+void Nav_UpdateRangedCombat(CloseAttackActor *actor) {
  char *routes;int mine,theirs,dir; CloseAttackActor *player;
     CloseAttackActor *target;
     CloseAttackActor *temp_s0;
@@ -59,7 +59,7 @@ void func_80211490_eu(CloseAttackActor *actor) {
     s32 var_v0_5;
 
     brain = actor->self->brain;
-    func_80211020_de(brain);
+    Nav_RunBehaviorHandler(brain);
     target = brain->target;routes=D_8013B364;
     if (target != 0) {
         if (!(brain->frames & 3)) {
@@ -100,7 +100,7 @@ void func_80211490_eu(CloseAttackActor *actor) {
             }
             if (distance < temp_f1) {
 block_19:
-                dir = func_80210EFC_de(brain->player->yaw - 3.1415927f);
+                dir = Nav_GetDirectionSector(brain->player->yaw - 3.1415927f);
                 player = brain->player;
                 if ((player->slot % 2) == D_800D297C) {
                     Nav_MeasureWheelClearance(player, dir);
@@ -122,7 +122,7 @@ block_23:
                 }
                 if (temp_f1_2 < temp_f2_2) {
 block_27:
-                    dir = func_80210EFC_de(brain->player->yaw);
+                    dir = Nav_GetDirectionSector(brain->player->yaw);
                     player = brain->player;
                     if ((player->slot % 2) == D_800D297C) {
                         Nav_MeasureWheelClearance(player, dir);
@@ -139,7 +139,7 @@ block_31:
             }
             pattern = brain->pattern;
             if (pattern == 0) {
-                dir = func_80210EFC_de((brain->player->yaw - 3.1415927f) - 1.5707964f);
+                dir = Nav_GetDirectionSector((brain->player->yaw - 3.1415927f) - 1.5707964f);
                 player = brain->player;
                 if ((player->slot % 2) == D_800D297C) {
                     Nav_MeasureWheelClearance(player, dir);
@@ -150,7 +150,7 @@ block_31:
                     goto block_41;
                 }
             } else if (pattern == 1) {
-                dir = func_80210EFC_de((brain->player->yaw - 3.1415927f) + 1.5707964f);
+                dir = Nav_GetDirectionSector((brain->player->yaw - 3.1415927f) + 1.5707964f);
                 player = brain->player;
                 if ((player->slot % 2) == D_800D297C) {
                     Nav_MeasureWheelClearance(player, dir);

@@ -14,7 +14,7 @@
 
 extern char D_8011D8D0;
 extern void Particle_ScaleVector(void *, void *, f32);
-extern void func_8024E79C_de(void *, Triple, Triple *, s32 *, s32, s32);
+extern void InstHdr_CopyActorPositionAndModel(void *, Triple, Triple *, s32 *, s32, s32);
 extern struct Shape_typemap_165 func_80271818_de(Triple *);
 #include "particle/8027A0F4_8.H"
 extern void System_DeliverContactEffect(void *, void *, s32, s32, Triple, AttachmentEffectArgs);
@@ -66,7 +66,7 @@ void Fx_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct Matri
                     actor->unk248 = pos;
                     temp_a0_2 = *actor->unk18;
                     if (((temp_a0_2 == 1) && (actor->unk1A4 == 0x21)) || ((temp_a0_2 == 0xB) && (actor->unk1D8->unk650 == 0x26))) {
-                        func_8024E79C_de(actor, pos, &mapped, &room, 0, 1);
+                        InstHdr_CopyActorPositionAndModel(actor, pos, &mapped, &room, 0, 1);
                         rotation = func_80271818_de(&actor->unk254);
                         zero.x = 0;
                         zero.y = 0;

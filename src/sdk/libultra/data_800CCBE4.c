@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_802B9CB0_CD7E4[14] =
+const char g_sirawdmaText[14] =
     "io/sirawdma.c\000";
 #endif
 

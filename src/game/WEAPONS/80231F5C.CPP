@@ -15,7 +15,7 @@
  * fire with a type 1 request marks it type 2 and, once charged to 50, plays sound 0xB23 at that position and
  * takes action 5, otherwise reports the empty weapon and restores type 1; any other request func_802301F4_de
  * handles becomes type 1 with 0x124 cleared, else the state's default action starts unless the actor is
- * flagged 0x400. Adapted from func_80231BB0_de with the same static fire check. */
+ * flagged 0x400. Adapted from Weapon_TryEnterAlternateStateEight with the same static fire check. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 
@@ -26,7 +26,7 @@ extern char D_80102B00[];
 extern char D_80145040[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
-extern s16 func_8022F96C_de(void *);
+extern s16 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern s32 Render_PlaySoundAtPosition(s32, s32, s32, s32, void *, void *);
 extern s32 Weapons_GetPlayerIndex(void *, void *);
@@ -56,7 +56,7 @@ static inline s32 can_fire(char *player) {
     return ammo;
 }
 
-void func_80231F6C_de(Shared_Actor *actor, WeaponFireState *fireState) {
+void Weapon_TryEnterChargedAlternateMode(Shared_Actor *actor, WeaponFireState *fireState) {
     char *player;
     s32 action;
     s32 *pos;
@@ -65,7 +65,7 @@ void func_80231F6C_de(Shared_Actor *actor, WeaponFireState *fireState) {
     player = actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
     if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
-        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
+        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
     }
     if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
         pos = (s32 *)(((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC + 0x128);

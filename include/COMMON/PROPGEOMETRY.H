@@ -22,8 +22,8 @@ extern float D_800C3E0C_de;
 
 
 
-struct Actor_func_8024ED90_de;
-typedef struct Actor_func_8024ED90_de Actor_func_8024ED90_de;
+struct ActorSimpleInstanceSpawnModelEffect;
+typedef struct ActorSimpleInstanceSpawnModelEffect ActorSimpleInstanceSpawnModelEffect;
 
 
 struct PropGeometry;
@@ -127,7 +127,7 @@ struct DescriptorRecAt24 {
 };
 
 struct DescriptorRecAt24;
-struct Owner_func_80250274_de;
+struct OwnerStaticInstanceDrawDistanceFadedModel;
 
 
 
@@ -161,7 +161,7 @@ typedef struct StaticObject StaticObject;
 
 extern f32 D_8013B190;
 
-struct Actor_func_8024ED90_de;
+struct ActorSimpleInstanceSpawnModelEffect;
 
 struct PlacedPropRecord;
 typedef struct PlacedPropRecord PlacedPropRecord;
@@ -177,8 +177,8 @@ typedef struct RecordRecAt1A RecordRecAt1A;
 extern float D_800C3E00_de;
 
 
-struct Owner_func_80250274_de;
-typedef struct Owner_func_80250274_de Owner_func_80250274_de;
+struct OwnerStaticInstanceDrawDistanceFadedModel;
+typedef struct OwnerStaticInstanceDrawDistanceFadedModel OwnerStaticInstanceDrawDistanceFadedModel;
 
 
 

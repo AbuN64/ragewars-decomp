@@ -45,9 +45,9 @@ struct Obj80264124 {
     char object[1];
 };
 
-extern void func_80263CF0_de(void *arg0);
+extern void Control_RefreshControllerConnection(void *arg0);
 
-extern int func_8026436C_de(Shared_Effect *arg0);
+extern int Control_IsStartButtonSet(Shared_Effect *arg0);
 
 
 
@@ -64,7 +64,7 @@ extern void Render_ReleasePakLock();
 
 
 
-extern int func_802643E8_de(Shared_Effect *arg0);
+extern int Control_IsButtonBSet(Shared_Effect *arg0);
 
 extern float D_800C4308_de;
 
@@ -89,10 +89,10 @@ extern void Render_PollControllerPaks();
 
 
 
-extern int func_802643F8_de(struct ControllerProfile *arg0);
+extern int Control_IsButtonAPressed(struct ControllerProfile *arg0);
 extern void Render_ResetControllerPak(struct ControllerProfile *arg0);
 
-extern int func_80264634_de(int arg0);
+extern int Control_IsControllerPakPresent(int arg0);
 
 struct Obj80264124;
 typedef struct Obj80264124 Obj80264124;
@@ -140,15 +140,15 @@ struct ObjectState224 {
     s32 unk_220;
 };
 
-extern void func_80264404_de();
+extern void Control_CommitControllerInputs();
 
 extern f32 Render_GetSpatialEffectLevel(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 
 extern void Render_ReadControllerStates(void);
-extern void func_802644A8_de(void *arg0);
+extern void Control_CommitProfileInput(void *arg0);
 extern s32 func_802A23A4_de(void);
 
-extern s32 func_80264728_de(void);
+extern s32 Control_IsAnyControllerPakEnabled(void);
 
 #endif
 #endif

@@ -19,7 +19,7 @@ extern s32 func_8025CA24_de(void *, void *);
 
 
 
-void func_80217388_de(void *arg0, void *arg1) {
+void Barrel_StopActorLoopingSound(void *arg0, void *arg1) {
     void *owner = 0;
     u8 type = *(u8 *)arg0;
 
@@ -46,7 +46,7 @@ extern void Particle_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 
 extern f32 Particle_GetActorRadius(void *arg0);
 extern void Particle_ScaleVector(void *result, void *vector, f32 scale);
 extern void Particle_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
-extern void func_8024E79C_de(void *arg0, CVector3 value, void *arg4, s32 *arg5,
+extern void InstHdr_CopyActorPositionAndModel(void *arg0, CVector3 value, void *arg4, s32 *arg5,
                           s32 arg6, s32 arg7);
 
 
@@ -75,7 +75,7 @@ void func_8021740C_de(void *arg0, s32 unused, void *arg2, Player *arg3,
     distance = Particle_GetActorRadius(arg2) + Particle_GetActorRadius(arg0) + D_800C21E8_de;
     Particle_ScaleVector(&offset, &offset, distance);
     Particle_AddVec3(&position, &((Player *)(arg2))->pos, &offset);
-    func_8024E79C_de(arg2, position, arg4, arg5, 0, 0);
+    InstHdr_CopyActorPositionAndModel(arg2, position, arg4, arg5, 0, 0);
 }
 
 void func_802174E4_de(Shared_ActorView *arg0, void *unused1, Output80216D3C *arg2) {

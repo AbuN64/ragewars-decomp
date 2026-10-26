@@ -10,7 +10,7 @@ extern int func_8028B25C_de(void *arg0, int arg1);
 
 
 
-int func_8024E924_de(void *prop) {
+int InstHdr_GetActorType(void *prop) {
     if (((LevelActor *)prop)->kind == 1) {
         return ((LevelActor *)prop)->type;
     }
@@ -18,7 +18,7 @@ int func_8024E924_de(void *prop) {
 }
 
 /** Return the selected record field, or negative one for another type. */
-int func_8024E968_de(void *record) {
+int InstHdr_GetActorMotionIndex(void *record) {
     int result = -1;
     if (((LevelActor *)record)->kind == 1) {
         result = ((LevelActor *)record)->motionIndex;

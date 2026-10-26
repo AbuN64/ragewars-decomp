@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_80226950_C8858[8] =
+const char g_playersText[8] =
     "Players\000";
 #endif
 

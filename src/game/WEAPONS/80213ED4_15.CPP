@@ -22,18 +22,18 @@ extern s32 func_802444A4_de(Instance8020CD74 *arg0, CVector3 current, CVector3 d
 
 
 
-s32 func_80216BF4_de(Instance8020CD74 *attacker, void *unused, Instance8020CD74 *target) {
+s32 Barrel_TestTargetEyeObstruction(Instance8020CD74 *attacker, void *unused, Instance8020CD74 *target) {
     Instance8020CD74 saved;
     CVector3 desired;
     s32 collisions;
 
     saved = *attacker;
     ((struct Actor_func_80214DD4_de *)attacker)->pos.y += Particle_GetActorHeight(attacker);
-    ((struct Actor_func_80214DD4_de *)attacker)->pos.y += ((Actor_func_80214310_de *)(target))->eye;
+    ((struct Actor_func_80214DD4_de *)attacker)->pos.y += ((ActorBarrelIsTargetInViewCone *)(target))->eye;
 
-    desired = ((Actor_func_80214310_de *)(target))->position;
+    desired = ((ActorBarrelIsTargetInViewCone *)(target))->position;
     desired.y += Particle_GetActorHeight(target);
-    desired.y += ((Actor_func_80214310_de *)(target))->eye;
+    desired.y += ((ActorBarrelIsTargetInViewCone *)(target))->eye;
 
     collisions = func_802444A4_de(attacker, ((struct Actor_func_80214DD4_de *)attacker)->pos, desired, &D_80100030);
     if (D_801041F0 == target)

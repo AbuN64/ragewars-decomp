@@ -25,7 +25,7 @@ extern WeaponActionRecord D_800CE8DC[];
 
 
 
-void func_8022F770_de(void *object, void *unused) {
+void Weapon_DrawRedMarkerQuad(void *object, void *unused) {
     MarkerActor *actor=object;
     MarkerNode *node;
     s32 red, alpha;
@@ -86,7 +86,7 @@ void func_8022F770_de(void *object, void *unused) {
     }
 }
 
-s32 func_8022F96C_de(void *arg0)
+s32 Weapon_FindNextUsableWeapon(void *arg0)
 {
     s32 slot;
     s32 category;
@@ -195,7 +195,7 @@ s32 Weapons_NextAvailableWeapon(ObjectWeaponsNextAvailableWeapon *player) {
     return result;
 }
 
-void func_8022FC20_de(void *arg0, void *arg1) {
+void Weapon_UpdateCallbacksAndTimers(void *arg0, void *arg1) {
     void *actor;
     s16 index;
     s32 value;
@@ -296,11 +296,11 @@ void Weapons_ApplyWeaponSwitch(void *part, void *body) {
     index = ((Shared_ActorView *)state)->nextWeapon;
     unsigned_index = (u16)((Shared_ActorView *)state)->nextWeapon;
     if ((((Shared_ActorView *)state)->selectedAction != index) || (g_world.mode != 4)) {
-        if (func_80232780_de(index) != 0) {
+        if (Weapon_IsPrimarySwitchGroup(index) != 0) {
             ((Shared_ActorView *)state)->weaponChanged = 1;
-        } else if (func_802327A0_de(index) != 0) {
+        } else if (Weapon_IsSecondarySwitchGroup(index) != 0) {
             ((Shared_ActorView *)state)->secondaryChanged = 1;
-        } else if (func_802327D4_de(index) != 0) {
+        } else if (Weapon_IsSpecialSwitchGroup(index) != 0) {
             ((Shared_ActorView *)state)->specialChanged = 1;
         }
         ((Shared_ActorView *)state)->selectedAction = unsigned_index;

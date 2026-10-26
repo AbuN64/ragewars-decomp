@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_802B9FD0_CD804[14] =
+const char g_sprawdmaText[14] =
     "io/sprawdma.c\000";
 #endif
 

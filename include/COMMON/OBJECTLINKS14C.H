@@ -65,7 +65,7 @@ struct CallbackState60 {
     void (*callback)(void *, void *);
 };
 
-extern void func_8022FF04_de(void *arg0, WeaponFireState *arg1);
+extern void Weapon_InitializeSwitchForSingleRound(void *arg0, WeaponFireState *arg1);
 
 
 struct ObjectWeaponsNextAvailableWeapon;
@@ -179,7 +179,7 @@ extern s32 Render_SetModePreset(s32);
 extern void Render_SetCombineMode(u32);
 extern void func_802A5498_de(u32);
 
-extern s32 func_802327A0_de(s32);
+extern s32 Weapon_IsSecondarySwitchGroup(s32);
 
 extern s32 func_80230058_de(void *, void *);
 

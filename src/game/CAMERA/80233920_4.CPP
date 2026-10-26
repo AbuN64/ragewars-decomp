@@ -14,7 +14,7 @@
 extern s32 D_80141008;
 extern void MultiplyQuaternions(void*,void*,void*);
 extern void Particle_BuildTranslationMatrix(void *, f32, f32, f32);
-extern u32 func_802337D0_de(CShakeAxis*);
+extern u32 Weapon_UpdateShakeAxis(CShakeAxis*);
 extern void Rsp_MultiplyAffineMatrices(f32*,f32*,f32*);
 /* The camera position is passed as a three-word CVector3 value. */
 
@@ -106,9 +106,9 @@ void Camera_BuildShakenViewTransform(void *cameraTransform) {
             result.y = zero;
             result.z = zero;
             Camera_AccumulateDistanceScaledShake(&actor->effect, actor->effect.m_vPos, &result);
-            func_802337D0_de(&actor->effect.x);
-            func_802337D0_de(&actor->effect.y);
-            func_802337D0_de(&actor->effect.z);
+            Weapon_UpdateShakeAxis(&actor->effect.x);
+            Weapon_UpdateShakeAxis(&actor->effect.y);
+            Weapon_UpdateShakeAxis(&actor->effect.z);
             if (cameraTransform != &D_80141008) {
                 effect = ((TransformWorld*)(void*)&D_80141008)->effects;
                 if (effect != 0) {

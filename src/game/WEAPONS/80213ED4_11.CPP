@@ -3,14 +3,14 @@
 #include "COMMON/EXTERNS_6.H"
 #include "WEAPONS/80213ED4_19.H"
 
-void Weapons_ApplyClampedTurn(void *arg0, s32 unused1, f32 arg2, f32 arg3) {
+void Weapons_ApplyClampedTurn(void *actor, s32 unused1, f32 turnLimit, f32 desiredTurn) {
     f32 f0;
     f32 f1;
     f32 f2;
     f32 f3;
 
-    f0 = arg2;
-    f1 = arg3;
+    f0 = turnLimit;
+    f1 = desiredTurn;
     f3 = f1;
     if (f0 < f1 || (f0 = -f0, f1 < f0)) {
         f1 = f0;
@@ -28,5 +28,5 @@ void Weapons_ApplyClampedTurn(void *arg0, s32 unused1, f32 arg2, f32 arg3) {
 clamp:
         f1 = f3;
     }
-    func_80217074_de(arg0, f1);
+    Barrel_AddActorYaw(actor, f1);
 }

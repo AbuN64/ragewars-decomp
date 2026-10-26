@@ -52,7 +52,7 @@ static inline s32 advancePropKey(void) {
     return D_800D0910;
 }
 
-void func_8024F960_eu(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing) {
+void StaticInstance_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing) {
     char matrix[0x40];
     CVector3 position;
     PropGeometry *model;

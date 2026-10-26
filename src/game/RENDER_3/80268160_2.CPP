@@ -106,7 +106,7 @@ typedef struct SoundSource {
 } SoundSource;
 extern f32 D_800C4478_de;
 extern f32 D_800C447C;
-extern s32 func_8024E968_de(void *);
+extern s32 InstHdr_GetActorMotionIndex(void *);
 extern s32 func_8025DEC0_de(s32, CVector3, s32, s32, f32);
 
 void Render_PlayTeamEffect(SoundActor *actor, SoundSource *source, s32 unused,
@@ -114,7 +114,7 @@ void Render_PlayTeamEffect(SoundActor *actor, SoundSource *source, s32 unused,
     f32 gain = D_800C4478_de;
     s32 owner = -1;
     u8 kind;
-    if (D_80145088.status[7] == 0 && func_8024E968_de(actor) == params.team) {
+    if (D_80145088.status[7] == 0 && InstHdr_GetActorMotionIndex(actor) == params.team) {
         kind = source->kind;
         switch (kind) {
         case 0:

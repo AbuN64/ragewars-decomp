@@ -48,7 +48,7 @@ extern f32 Particle_GetActorHeight(Instance8020CD74 *);
 
 extern CollisionState D_801041F0;
 
-extern int func_8024E968_de(void *record);
+extern int InstHdr_GetActorMotionIndex(void *record);
 
 /* Spawns and initializes an actor with model, transforms, collision body, effects and default bounds. */
 
@@ -88,7 +88,7 @@ extern void func_802193C8_de(char *, s32, char *);
 
 extern void Instance_LoadModel(char *, s32, s32, s32);
 
-extern s32 func_80250BF0_de(void);
+extern s32 StaticInstance_AdvanceResourceKey(void);
 
 static inline void *body_setup(char *obj) {
     u32 kind;
@@ -188,9 +188,9 @@ s32 func_80246558_de(Instance8020CD74 *actorState, CVector3 position, CollisionI
     return !collisions;
 }
 
-/** Thin wrapper around func_8024E968_de, discarding its result. */
-void func_80246684_de(void *record) {
-    func_8024E968_de(record);
+/** Thin wrapper around InstHdr_GetActorMotionIndex, discarding its result. */
+void GameObject_ReadActorMotionIndex(void *record) {
+    InstHdr_GetActorMotionIndex(record);
 }
 
 void func_802466A0_de(char *obj, s32 model, s32 kind, s32 unused, void *info, s32 effect, s32 owner, f32 heading,
@@ -256,7 +256,7 @@ Nav_InitSpawnedActor
         ((LevelActor *)obj)->animationTime = delay;
         ((LevelActor *)obj)->flags &= ~0x400;
     }
-    ((LevelActor *)obj)->flags2E4 = func_80250BF0_de() << 10;
+    ((LevelActor *)obj)->flags2E4 = StaticInstance_AdvanceResourceKey() << 10;
     if (((LevelActor *)obj)->flags & 8) {
         ((LevelActor *)obj)->update = D_0024A7A0;
         ((LevelActor *)obj)->lighting[0] = D_800D0EF8;

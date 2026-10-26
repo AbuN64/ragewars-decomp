@@ -47,9 +47,9 @@ extern void func_8029A650_de(void *arg0);
 
 
 
-void Render_ResetControllerPak(ControllerProfile *arg0) {
+void Render_ResetControllerPak(ControllerProfile *pakProfile) {
 
-    u32 address=(u32)arg0;
+    u32 address=(u32)pakProfile;
     char *o=(char *)address;
 
     if (D_800CBC10 != 0 && ((Obj80264124 *)address)->flags != 0) {
@@ -62,7 +62,7 @@ void Render_ResetControllerPak(ControllerProfile *arg0) {
         ((Obj80264124 *)o)->amount = 0;
         ((Obj80264124 *)o)->timer = 0;
         Render_InitPoolNodes(o + 0x140, o + 0x16C, 3);
-        func_802B7FD8_de(&D_8010FC00, o + 0xD8, arg0->port);
+        func_802B7FD8_de(&D_8010FC00, o + 0xD8, pakProfile->port);
         
 #if defined(VERSION_EU)
 func_802B7EF0_eu
@@ -109,7 +109,7 @@ func_802B7C50_de
 #endif
 #endif
 (((Obj80264124 *)o)->status);
-        if (func_802B7FD8_de(&D_8010FC00, o + 0xD8, arg0->port) == 0) {
+        if (func_802B7FD8_de(&D_8010FC00, o + 0xD8, pakProfile->port) == 0) {
             ((Obj80264124 *)o)->active = 1;
         }
         D_8010BBB8 = 2;
@@ -124,7 +124,7 @@ int Control_IsStartPressed(Shared_Effect *object) {
     return flags != 0;
 }
 
-int func_8026436C_de(Shared_Effect *effect) {
+int Control_IsStartButtonSet(Shared_Effect *effect) {
     int flag = effect->state & 0x1000;
     return flag != 0;
 }
@@ -156,16 +156,16 @@ int Render_IsNavDown(void *controllerProfile) {
     return flag != 0;
 }
 
-int func_802643E8_de(Shared_Effect *effect) {
+int Control_IsButtonBSet(Shared_Effect *effect) {
     int flag = effect->state & 0x4000;
     return flag != 0;
 }
 
-int func_802643F8_de(struct ControllerProfile *controllerProfile) {
+int Control_IsButtonAPressed(struct ControllerProfile *controllerProfile) {
     return ((u8)(controllerProfile->pressedButtons >> 8)) >> 7;
 }
 
-void func_80264404_de(void) {
+void Control_CommitControllerInputs(void) {
     s32 i;
     ControllerProfile *p;
     s32 temp;
@@ -176,7 +176,7 @@ void func_80264404_de(void) {
         one = 1;
         p = D_8010F328;
         for (; i < 4; i++, p += 1) {
-            func_802644A8_de(p);
+            Control_CommitProfileInput(p);
             temp = func_802A23B4_de();
             if (temp != one) {
                 continue;
@@ -186,12 +186,12 @@ void func_80264404_de(void) {
             }
             func_8029A650_de(p);
         }
-        func_802644A8_de(&D_8010B0E0);
+        Control_CommitProfileInput(&D_8010B0E0);
     }
 }
 
 /** Shift the trailing state-history slots down and clear the newest slot. */
-void func_802644A8_de(void *controllerProfile) {
+void Control_CommitProfileInput(void *controllerProfile) {
     ControllerProfile *o = controllerProfile;
     u8 t_c4;
     u8 t_c5;
@@ -264,7 +264,7 @@ int Control_IsControllerConnected(int arg0) {
     return ((D_8010FBE3[arg0 * 4] >> 3) ^ 1) & 1;
 }
 
-int func_80264634_de(int arg0) {
+int Control_IsControllerPakPresent(int arg0) {
     return D_8010BBE2[arg0 * 4] & 1;
 }
 
@@ -297,7 +297,7 @@ s32 Render_CountConnectedControllers(void) {
     return count;
 }
 
-s32 func_802646D4_de(s32 arg0) {
+s32 Control_FindConnectedControllerPort(s32 arg0) {
     s32 var_a1;
     s32 var_v1;
 
@@ -317,7 +317,7 @@ loop_1:
     return var_v1;
 }
 
-s32 func_80264728_de(void) {
+s32 Control_IsAnyControllerPakEnabled(void) {
     s32 i = 0;
     while (1) {
         if (D_8010B308[i] == 0) {
@@ -343,7 +343,7 @@ void Render_DisableControllerPak(int controllerPort) {
     D_8010B308[controllerPort] = 0;
 }
 
-void func_8026479C_de(void)
+void Control_EnableAllControllerPaks(void)
 {
   int new_var2;
   s8 *new_var;
@@ -362,7 +362,7 @@ void func_8026479C_de(void)
   while (var_v1 >= 0);
 }
 
-void func_802647C4_de(void) {
+void Control_DisableAllControllerPaks(void) {
     s32 var_v1;
     s8 *var_v0;
     var_v1 = 3;

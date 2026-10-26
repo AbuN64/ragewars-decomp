@@ -81,8 +81,8 @@ CQuatern GameObject_BuildTargetAimOrientation(char *actor, CVector3 point) {
             return result;
         }
     }
-    origin = ((Actor_func_80214310_de *)(target))->position;
-    origin.y += ((Actor_func_80214310_de *)(target))->eye;
+    origin = ((ActorBarrelIsTargetInViewCone *)(target))->position;
+    origin.y += ((ActorBarrelIsTargetInViewCone *)(target))->eye;
     origin.y += Particle_GetActorHeight(target) * 0.75f;
     Particle_SubtractVectors(&dir, &origin, &point);
     Particle_NormalizeVec3(&dir);

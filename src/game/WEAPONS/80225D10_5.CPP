@@ -106,7 +106,7 @@ extern void Scene_UnlockResource(s32 arg0, s32 arg1);
 
 /* Draws the per-player overlays for one view between Render_BeginModelBatch and Render_FlushModelBatch: for each player
    in the list from 0x20 it draws the scope model 0xC84 or 0xC85 (by the zoom mode at 0x120C) at the
-   player's view matrix while zoomed in at 0x11FC, the player's display through func_8022F770_de when it
+   player's view matrix while zoomed in at 0x11FC, the player's display through Weapon_DrawRedMarkerQuad when it
    belongs to this view and is enabled at 0x1210, and in team games (0x24 or 0x78 of D_801468A0) a
    teammate marker through func_80229D28_de for every other player on the viewing player's team. */
 
@@ -428,7 +428,7 @@ void func_80228958_de(ObjRecAt20V2 *game, s32 view) {
             }
         }
         if (((ObjectLinks16E4 *)(player))->unk_5DC != 0 && ((ObjectLinks16E4 *)(player))->unk_1210 != 0 && ((ObjectLinks16E4 *)(player))->unk_5DC == view) {
-            func_8022F770_de(player + 0x2E8, (char *)player + 0x458);
+            Weapon_DrawRedMarkerQuad(player + 0x2E8, (char *)player + 0x458);
         }
         if ((D_801468A0->teams != 0 || D_801468A0->teamRule != 0)
             && ((struct Record *) ((ObjectLinks16E4 *) player)->unk_5D8)->team == team && Camera_FindScreenMessage(view) != player) {

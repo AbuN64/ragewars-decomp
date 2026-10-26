@@ -104,7 +104,7 @@ void World_InitSimpleInstance(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 
     inst->f1C4 = 0;
 }
 
-/* Draws a static object through its cached display list, building the cache on first use: emits a branch placeholder, loads the object's model, builds its rotation (the shared D_8013B190 angle for type 8), scale and position raised by its height offset into the current matrix slot, draws the model with its material through func_8026DA4C_de and func_8024ED90_de unless the type is 12, ends the list, patches the placeholder to skip past it and calls the cached list. The display list writes match only as block-scoped initialisers taking D_80110634++. */
+/* Draws a static object through its cached display list, building the cache on first use: emits a branch placeholder, loads the object's model, builds its rotation (the shared D_8013B190 angle for type 8), scale and position raised by its height offset into the current matrix slot, draws the model with its material through func_8026DA4C_de and SimpleInstance_SpawnModelEffect unless the type is 12, ends the list, patches the placeholder to skip past it and calls the cached list. The display list writes match only as block-scoped initialisers taking D_80110634++. */
 
 
 
@@ -124,7 +124,7 @@ extern void TranslateMatrix(MatrixF *, f32, f32, f32);
 extern void SwapMatrixUpForward(MatrixF *);
 extern void Rsp_ConvertMatrixToFixed(MatrixF *, char *);
 
-extern void func_8024ED90_de(StaticObject *, void **);
+extern void SimpleInstance_SpawnModelEffect(StaticObject *, void **);
 
 void func_8024EB90_de(StaticObject *obj) {
     MatrixF matrix;
@@ -155,7 +155,7 @@ void func_8024EB90_de(StaticObject *obj) {
     Rsp_ConvertMatrixToFixed(&matrix, obj->matrices[D_800D297C]);
     if (*obj->type != 12) {
         func_8026DA4C_de(resource, obj->matrices[D_800D297C], 0, obj->lights, 0, obj->material);
-        func_8024ED90_de(obj, resource);
+        SimpleInstance_SpawnModelEffect(obj, resource);
     }
     gSPEndDisplayList(g_displayListCursor++);
     gSPBranchList(obj->cached++, (unsigned int)g_displayListCursor);

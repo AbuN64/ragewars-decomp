@@ -46,57 +46,57 @@ void Player_SetProfileValue14(void *arg0, unsigned char arg1) {
 }
 
 /** Advance the byte at offset 0x14 by ten. */
-void func_8022F31C_de(void *object) {
+void Player_AddTenToProfileValue14(void *object) {
     ((ObjCode8022E938 *)object)->value14 += 10;
 }
 
 /** Read the byte at object offset 0x14. */
-unsigned char func_8022F32C_de(ObjCode8022E938 *arg0) {
+unsigned char Player_GetProfileValue14(ObjCode8022E938 *arg0) {
     return arg0->value14;
 }
 
 /** Store a byte in the object field at offset 0x15. */
-void func_8022F338_de(void *object, unsigned char value) {
+void Player_SetProfileValue15(void *object, unsigned char value) {
     ((ObjCode8022E938 *)object)->value15 = value;
 }
 
-int func_8022F340_de(void *player) {
+int Player_AddFiftyToProfileValue15(void *player) {
     int v = ((ObjCode8022E938 *)player)->value15 + 0x32;
     ((ObjCode8022E938 *)player)->value15 = (unsigned char)v;
     return v;
 }
 
-unsigned char func_8022F350_de(ObjCode8022E938 *arg0) {
+unsigned char Player_GetProfileValue15(ObjCode8022E938 *arg0) {
     return arg0->value15;
 }
 
 /** Store the supplied byte at offset 0x16. */
-void func_8022F35C_de(void *object, unsigned char value) {
+void Player_SetProfileValue16(void *object, unsigned char value) {
     ((ObjCode8022E938 *)object)->value16 = value;
 }
 
-int func_8022F364_de(void *player) {
+int Player_AddFiftyToProfileValue16(void *player) {
     int v = ((ObjCode8022E938 *)player)->value16 + 0x32;
     ((ObjCode8022E938 *)player)->value16 = (unsigned char)v;
     return v;
 }
 
 /** Read the object byte at offset 0x16. */
-unsigned char func_8022F374_de(ObjCode8022E938 *object) {
+unsigned char Player_GetProfileValue16(ObjCode8022E938 *object) {
     return object->value16;
 }
 
-void func_8022F380_de(void *arg0, int arg1) {
+void Player_SetProfileProgress(void *arg0, int arg1) {
     ((ObjCode8022E938 *)arg0)->progress = arg1;
 }
 
 /** Advance the word at offset 0x10 by 0x500. */
-void func_8022F388_de(void *object) {
+void Player_AdvanceProfileProgress(void *object) {
     ((ObjCode8022E938 *)object)->progress += 0x500;
 }
 
 /** Return the word stored at offset 0x10. */
-unsigned int func_8022F398_de(ObjCode8022E938 *object) {
+unsigned int Player_GetProfileProgress(ObjCode8022E938 *object) {
     return object->progress;
 }
 
@@ -104,7 +104,7 @@ unsigned int func_8022F398_de(ObjCode8022E938 *object) {
    slots 11 and 12, and other indices are ignored. */
 
 
-void func_8022F3A4_de(ObjCode8022E938 *obj, int index, char value) {
+void Player_SetProfileSlotValue(ObjCode8022E938 *obj, int index, char value) {
     if (index == 17) {
         goto is17;
     }

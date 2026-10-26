@@ -33,7 +33,7 @@ extern struct Shared_CharInfo *D_800D052C[];
 extern struct Shared_StateInfo D_800CED30[];
 extern struct Shared_StateInfo D_800C9684[];
 extern void Nav_UpdateActorCurrentNode(void *, void *);
-extern void func_80213CF8_de(void *, void *);
+extern void Nav_ApplySupportingPlatformMotion(void *, void *);
 extern void Weapons_FillDamagePacket(void *, s32, s32, s32, s32, s32);
 extern void Team_UpdateDraftPanel(void *, void *, void *);
 extern void func_80218B84_de(void *, void *, void *);
@@ -56,14 +56,14 @@ extern s32 Camera_MoveActorWithCollision(void *, CVector3, s32 *);
 struct MotionSurface;
 extern s32 Camera_SweepActorMotion(void *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
 extern void func_80245D30_de(void *, void *, void *, s32);
-extern void func_80246684_de(void *);
+extern void GameObject_ReadActorMotionIndex(void *);
 extern s32 func_80246A08_de(void *, s32, s32);
 extern void func_80246E44_de(void *);
 extern void func_80247004_de(void *);
 extern s32 func_8024B6A0_de(void *, s32, s32);
 
 extern f32 Sound_GetActorReach(void *);
-extern s32 func_8024E62C_de(void *);
+extern s32 InstHdr_GetActorMotionState(void *);
 extern struct Shared_Surface *Sound_FindActorModelEntry(void *);
 extern s32 Render_PlaySoundAtPosition(s16, CVector3, s32, s32);
 extern void func_8025E418_de(s32);
@@ -223,7 +223,7 @@ void func_80220ED4_de(SharedPlayer *player)
   }
   if (((u16) player->views5E8.view650_16.state) >= 2)
   {
-    func_80213CF8_de(actor, &actor->views1C.view170_23.unk170);
+    Nav_ApplySupportingPlatformMotion(actor, &actor->views1C.view170_23.unk170);
   }
   net = &D_801462C8.counters;
   if (((net->m_bFragTagOn != 0) && (net->m_FragTagFlipTimer == 0)) && (player->views5D8.view5D8_9.profile->remote == 1))
@@ -287,10 +287,10 @@ void func_80220ED4_de(SharedPlayer *player)
     player->views5E8.view758_87.unk758 += player->views5E8.view6C8_57.speed * 0.00010000000474974513f;
     player->views5E8.view6E8_79.unk6E8 = actor->views0.view8_3.pos;
     player->views5E8.view658_31.stateTime += D_800D2988;
-    ground = func_8024E62C_de(actor);
+    ground = InstHdr_GetActorMotionState(actor);
     if (((ground != 0) && (player->views5E8.view6D0_71.onGround == 0)) && (player->views5E8.view6CC_70.lastVelY < (-51.19999694824219f)))
     {
-      func_80246684_de(actor);
+      GameObject_ReadActorMotionIndex(actor);
     }
     player->views5E8.view6D0_71.onGround = ground;
     player->views5E8.view6CC_70.lastVelY = actor->views1C.view20_2.velY;
@@ -616,7 +616,7 @@ void func_80220ED4_de(SharedPlayer *player)
   {
     Render_PlacePlayerAtSpawnPoint(player, player->views5E8.view5EC_5.unk5EC, 0, 0);
   }
-  if (func_8024E62C_de(actor) != 0)
+  if (InstHdr_GetActorMotionState(actor) != 0)
   {
     player->views5E8.view6F8_84.unk6F8 = actor->views0.view8_3.pos;
   }

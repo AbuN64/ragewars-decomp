@@ -3,7 +3,7 @@
 #if defined(VERSION_EU)
 #include "COMMON/SHAREDCALLBACK5.H"
 
-void func_80212D80_eu(AiTarget *pThis) {
+void Nav_ResetTargetFollowStateEu(AiTarget *pThis) {
     AiController *controller = pThis->player->controller;
     controller->handlerIndex = 0;
     Nav_ResetBehaviorState(controller);
@@ -12,22 +12,22 @@ void func_80212D80_eu(AiTarget *pThis) {
 #endif
 
 #if defined(VERSION_EU)
-extern void func_80211020_de(AiController *);
+extern void Nav_RunBehaviorHandler(AiController *);
 extern void Nav_SteerAlongRoute(AiController *);
 extern void Nav_UpdatePlayerSteering(AiController *);
 
-void func_80212DB4_eu(AiTarget *pThis) {
+void Nav_UpdateTargetRouteFollowEu(AiTarget *pThis) {
     AiController *controller = pThis->player->controller;
     s32 current;
     if (controller->target == 0) {
-        func_80211020_de(controller);
+        Nav_RunBehaviorHandler(controller);
     } else {
         current = controller->target->player->controller->current;
         if (current != controller->fallback) {
             controller->fallback = current;
         }
         Nav_SteerAlongRoute(controller);
-        func_80211020_de(controller);
+        Nav_RunBehaviorHandler(controller);
         Nav_UpdatePlayerSteering(controller);
     }
 }

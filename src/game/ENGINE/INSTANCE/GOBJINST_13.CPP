@@ -15,7 +15,7 @@ extern void MatrixFromQuaternion(void *arg0, void *arg1);
 
 
 
-extern void func_802164A8_de(void *a, void *b);
+extern void Barrel_UpdateActorController(void *a, void *b);
 
 extern void **func_8024BFD4_de(void *arg0, s32 arg1);
 
@@ -89,9 +89,9 @@ float func_8024BE2C_de(void) {
     return D_800C8C44;
 }
 
-/** Thin wrapper forwarding arg0 and an offset of it to func_802164A8_de. */
+/** Thin wrapper forwarding arg0 and an offset of it to Barrel_UpdateActorController. */
 void func_8024BE3C_de(void *base) {
-    func_802164A8_de(base, (char *)base + 0x170);
+    Barrel_UpdateActorController(base, (char *)base + 0x170);
 }
 
 /** Set or clear status bit two according to the supplied boolean. */

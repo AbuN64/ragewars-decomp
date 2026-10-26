@@ -35,15 +35,15 @@ extern s32 D_8013B2BC;
 
 extern u8 *func_8024E6A0_de(void *arg0);
 
-extern void func_8024E6D8_de(u8 *arg0, CVector3 *arg1);
+extern void InstHdr_GetActorTargetOffset(u8 *arg0, CVector3 *arg1);
 
 /* Phase1 source candidate; contract holds and immutable inputs in per-function JSON. */
 
 
 
-extern s32 func_8024E62C_de(void *arg0);
+extern s32 InstHdr_GetActorMotionState(void *arg0);
 
-extern f32 func_8024E678_de(void *arg0, s32 arg1);
+extern f32 InstHdr_GetShadowGroundHeight(void *arg0, s32 arg1);
 
 
 
@@ -116,7 +116,7 @@ void func_8022CA14_de(Player *player, void *bodyActor) {
         scale * ((Resource_u1 *)((LevelActor *)bodyActor)->definition)->value20;
     result = func_8024E6A0_de(bodyActor);
     if (result != 0) {
-        func_8024E6D8_de(result, &vector);
+        InstHdr_GetActorTargetOffset(result, &vector);
         Particle_AddVec3(&((LevelActor *)bodyActor)->position1,
                       &((LevelActor *)bodyActor)->position1, &vector);
     }
@@ -192,16 +192,16 @@ void func_8022CC34_de(void *player, void *body) {
         func_802233F0_de(player, body, &D_800C94EC_de);
     }
     if (((LevelActor *)body)->position1.y <= 0.0f) {
-        if (func_8024E62C_de(body) != 0) {
+        if (InstHdr_GetActorMotionState(body) != 0) {
             Weapons_SetPlayerState(player, body, 2);
         }
     }
     if (((LevelActor *)body)->position1.y <= 0.0f) {
-        if (func_8024E678_de(body, 0) < 0.0f) {
-            if (-func_8024E678_de(body, 0) < D_800C2D78_de[0]) {
+        if (InstHdr_GetShadowGroundHeight(body, 0) < 0.0f) {
+            if (-InstHdr_GetShadowGroundHeight(body, 0) < D_800C2D78_de[0]) {
                 goto set_value;
             }
-        } else if (func_8024E678_de(body, 0) < D_800C2D78_de[1]) {
+        } else if (InstHdr_GetShadowGroundHeight(body, 0) < D_800C2D78_de[1]) {
 set_value:
             if (((Player *)player)->animationTable == &D_800CED30) {
                 ((Player *)player)->animation = 0x5E2E;
@@ -240,7 +240,7 @@ void func_8022CE78_de(s32 player, s32 body) {
     Weapons_UpdateViewAngles((void *)player, (void *)body, &D_800CE7E4);
     func_802233F0_de((void *)player, (void *)body, &D_800C9558_de);
     if (((LevelActor *)body)->position1.y <= 0.0f) {
-        if (func_8024E62C_de((void *) body) != 0) {
+        if (InstHdr_GetActorMotionState((void *) body) != 0) {
             Weapons_SetPlayerState((void *) player, (void *) body, 2);
         }
     }

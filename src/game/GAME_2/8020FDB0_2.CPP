@@ -6,16 +6,16 @@
 #include "COMMON/OBJECTLINKS1458.H"
 #include "COMMON/SELF.H"
 
-void func_802100E0_de(void *brain) {
+void Nav_RequestRandomArmedWeapon(void *brain) {
     AiController *controller = brain;
-    s32 temp_v0;
+    s32 chosenWeapon;
 
     if ((Nav_NextRandom() % 100) < 0x15) {
         do {
-            temp_v0 = Weapons_PickRandomArmedWeapon(controller->player);
-        } while (temp_v0 >= 0x10);
-        ((Shared_ActorView *)controller->player)->nextWeapon = temp_v0;
-        if (temp_v0 != ((Shared_ActorView *)controller->player)->selectedAction) {
+            chosenWeapon = Weapons_PickRandomArmedWeapon(controller->player);
+        } while (chosenWeapon >= 0x10);
+        ((Shared_ActorView *)controller->player)->nextWeapon = chosenWeapon;
+        if (chosenWeapon != ((Shared_ActorView *)controller->player)->selectedAction) {
             controller->unk2E4 = 0;
         }
     }

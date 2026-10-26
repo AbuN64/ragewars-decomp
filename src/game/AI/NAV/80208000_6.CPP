@@ -217,7 +217,7 @@ void Nav_AssignPlatformEndpoints(CNavData *graph) {
 #include "COMMON/OBJECTLINKS14.H"
 typedef struct NavigationCollisionQuery { s32 flags, word4, word8, wordC, word10, word14, word18; } NavigationCollisionQuery;
 extern NavigationCollisionQuery D_80103FF0, D_80104050, D_80104070, D_801040D0;
-s32 func_8024E62C_de(Player *);
+s32 InstHdr_GetActorMotionState(Player *);
 s32 func_8024DEE0_de(Player *);
 s32 func_8024DF5C_de(Player *);
 s32 func_8024DFA0_de(Player *);
@@ -304,7 +304,7 @@ void Nav_UpdateActorCurrentNode(CNavData *graph, Player *actor) {
     }
     best = actor->controller->current;
     if (actor->computer != 0 && actor->controller->queue[0] != -1) {
-        busy = func_8024E62C_de(actor);
+        busy = InstHdr_GetActorMotionState(actor);
         hanging = actor->pose == 15;
         release = busy && !actor->active;
         if (busy || hanging || climbing) {

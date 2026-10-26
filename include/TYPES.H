@@ -52,9 +52,9 @@ struct AiController;
 
 extern s32 Nav_SelectStationaryObjectGoal(struct AiController *arg0);
 
-extern void func_80212FDC_eu(void *object);
+extern void Nav_ResetPatrolRouteSelection(void *object);
 
-extern void func_80213340_de(void *arg0);
+extern void Nav_SelectFlaggedRoamingGoal(void *arg0);
 
 struct AimPlayer;
 

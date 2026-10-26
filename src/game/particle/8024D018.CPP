@@ -104,13 +104,13 @@ s32 func_8024D160_de(InteractionActor *actor) {
 }
 
 
-f32 func_8024E3C4_de(Actor_u1 *actor);
+f32 InstHdr_GetInactiveActorHeight(Actor_u1 *actor);
 
 f32 Particle_GetActorHeight(Actor_u1 *actor) {
     Resource_u1 *resource;
 
     if (actor->kind == 1 && actor->active <= 0) {
-        return func_8024E3C4_de(actor);
+        return InstHdr_GetInactiveActorHeight(actor);
     }
     switch (actor->resource->kind) {
     case 11:

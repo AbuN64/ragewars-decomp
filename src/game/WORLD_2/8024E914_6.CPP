@@ -19,17 +19,17 @@ extern char D_8011D8D0;
 
 
 
-extern f32 Particle_GetActorHeight(Actor_func_8024ED90_de *actor);
+extern f32 Particle_GetActorHeight(ActorSimpleInstanceSpawnModelEffect *actor);
 
 #include "particle/8027A0F4_8.H"
 extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 extern EffectRecAt154 *func_802830B8_de(void *system);
 
-extern f32 Particle_GetActorRadius(Actor_func_8024ED90_de *actor);
+extern f32 Particle_GetActorRadius(ActorSimpleInstanceSpawnModelEffect *actor);
 
 /* Places an actor's ground shadow: the shadow size is the smaller of half the vertical offset from
- * func_8024E2FC_de and that minus a tenth of the actor's height above its ground height at 0x40, vanishing
+ * InstHdr_GetActorShadowRadius and that minus a tenth of the actor's height above its ground height at 0x40, vanishing
  * when negative; a transform is built from the actor's orientation, scaled flat by the shadow size,
  * positioned at the ground under the actor, stored as the actor's per-frame matrix and submitted through
  * func_8026992C_de. */
@@ -67,7 +67,7 @@ extern char g_simpModelsIndexText[];
 
 extern char g_simpModelText[];
 
-void func_8024ED90_de(Actor_func_8024ED90_de *actor, void **resource) {
+void SimpleInstance_SpawnModelEffect(ActorSimpleInstanceSpawnModelEffect *actor, void **resource) {
     CVector3 position;
     CQuatern rotation;
     EffectRecAt154 *effect;
@@ -94,7 +94,7 @@ void func_8024ED90_de(Actor_func_8024ED90_de *actor, void **resource) {
     }
 }
 
-void func_8024EF28_de(void *actor) {
+void SimpleInstance_DrawGroundShadow(void *actor) {
     f32 matrix[16];
     CVector3 position;
     CQuatern rotation;
@@ -103,8 +103,8 @@ void func_8024EF28_de(void *actor) {
     f32 size;
     ground = ((Shared_Func80243A80Actor *)actor)->groundY;
     height = ((Shared_Func80243A80Actor *)actor)->y - ground;
-    if (!(RW_MIN_LT(func_8024E2FC_de(actor) * 0.5f, func_8024E2FC_de(actor) * 0.5f - height * 0.1f) < 0.0f)) {
-        size = RW_MIN_LT(func_8024E2FC_de(actor) * 0.5f, func_8024E2FC_de(actor) * 0.5f - height * 0.1f);
+    if (!(RW_MIN_LT(InstHdr_GetActorShadowRadius(actor) * 0.5f, InstHdr_GetActorShadowRadius(actor) * 0.5f - height * 0.1f) < 0.0f)) {
+        size = RW_MIN_LT(InstHdr_GetActorShadowRadius(actor) * 0.5f, InstHdr_GetActorShadowRadius(actor) * 0.5f - height * 0.1f);
     } else {
         size = 0.0f;
     }
@@ -120,8 +120,8 @@ void func_8024EF28_de(void *actor) {
     func_8026992C_de((char *)actor + ((D_800D297C << 6) + 0xE8), 1, 0x96);
 }
 
-void func_8024F108_de(StaticObject *staticObject) {
-    void *sp28;
+void SimpleInstance_RefreshModelResourceUsage(StaticObject *staticObject) {
+    void *variantDirectory;
     void **resource;
     s32 key;
     s32 found;
@@ -135,10 +135,10 @@ void func_8024F108_de(StaticObject *staticObject) {
         if (resource != 0) {
             key = Render_GetDirectoryEntry(*resource, staticObject->animationKey, 1);
             Scene_ReleaseResource(0, resource);
-            found = func_802540F4_de(0, &sp28, key, g_simpModelsIndexText, 1);
+            found = func_802540F4_de(0, &variantDirectory, key, g_simpModelsIndexText, 1);
             if (found != 0) {
-                staticObject->resource = Render_LocatePackSection((s32)sp28, key,
-                                                    index % *(s32 *)sp28,
+                staticObject->resource = Render_LocatePackSection((s32)variantDirectory, key,
+                                                    index % *(s32 *)variantDirectory,
                                                     &staticObject->resourceSize);
                 staticObject->animation = index;
                 Scene_ReleaseResource(0, (void *)found);

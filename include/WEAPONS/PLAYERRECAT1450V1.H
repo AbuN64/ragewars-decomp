@@ -43,17 +43,17 @@ typedef struct ObjectState140 ObjectState140;
 
 extern float D_800C3018_de;
 
-struct Source_func_80232F8C_de;
-struct Source_func_80232F8C_de {
+struct SourceWeaponApplyScaledSideYaw;
+struct SourceWeaponApplyScaledSideYaw {
     char pad[0x294];
     float speed;
 };
 struct Event;
-struct Source_func_80232F8C_de;
+struct SourceWeaponApplyScaledSideYaw;
 struct Event {
     int unk0;
     int side;
-    struct Source_func_80232F8C_de *source;
+    struct SourceWeaponApplyScaledSideYaw *source;
 };
 
 extern float D_800C3028_de;
@@ -93,7 +93,7 @@ typedef struct Event Event;
 struct func_80232A38_S1;
 typedef struct func_80232A38_S1 func_80232A38_S1;
 
-extern s32 func_802327D4_de(s32 arg0);
+extern s32 Weapon_IsSpecialSwitchGroup(s32 arg0);
 
 struct Shared_ActorView;
 struct WeaponFireState;
@@ -117,15 +117,15 @@ struct ObjectState140 {
     s32 unk_13C;
 };
 
-extern s32 func_80232780_de(s32 arg0);
+extern s32 Weapon_IsPrimarySwitchGroup(s32 arg0);
 
 struct Dest;
 struct Lookup;
-extern void func_8023293C_de(void *arg0, struct Dest *arg1, struct Lookup *arg2);
+extern void Weapon_DrawWeaponLookupModel(void *arg0, struct Dest *arg1, struct Lookup *arg2);
 
 extern float D_800C2FC8_de;
 
-extern void func_8022FDAC_de(void *arg0, void *arg1);
+extern void Weapon_InitializeSwitchAndRequestIdle(void *arg0, void *arg1);
 
 
 extern void YawMatrixLocal(void *, float);

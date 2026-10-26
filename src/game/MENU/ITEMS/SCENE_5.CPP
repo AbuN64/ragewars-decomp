@@ -45,11 +45,11 @@ extern s32 Items_FindNearestPlacedObject(World *world, void *data, s32 group, vo
 
 extern const char D_800C5210_de[];
 
-extern void func_8024F294_de(ObjB *obj, s32 arg1);
+extern void SimpleInstance_RegisterModelVariantResources(ObjB *obj, s32 arg1);
 
 extern void *func_8024F6EC_de(ObjB *obj, s32 type);
 
-extern void func_802509A8_de(ObjA *obj, s32 arg1);
+extern void StaticInstance_RegisterGeometryResources(ObjA *obj, s32 arg1);
 
 extern void *Instance_AcquireGeometry(ResourceOwner *owner,s32 index);
 
@@ -276,7 +276,7 @@ void Items_LoadGridCells(Level_func_8044CD8C_de *level) {
                 for (i = 0; i < n; i++) {
                     a = &objsA[i];
                     a->block = block;
-                    func_802509A8_de(a, 0);
+                    StaticInstance_RegisterGeometryResources(a, 0);
                     handle = Instance_AcquireGeometry(a, a->type);
                     if (handle != 0) {
                         func_8026E158_de(handle);
@@ -289,7 +289,7 @@ void Items_LoadGridCells(Level_func_8044CD8C_de *level) {
                 for (i = 0; i < m; i++) {
                     b = &objsB[i];
                     b->block = block;
-                    func_8024F294_de(b, 0);
+                    SimpleInstance_RegisterModelVariantResources(b, 0);
                     handle = func_8024F6EC_de(b, b->type);
                     if (handle != 0) {
                         func_8026E158_de(handle);

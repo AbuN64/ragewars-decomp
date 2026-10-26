@@ -234,7 +234,7 @@ extern void func_802761EC_de(s32, f32);
  * 0x800C6C30 = 0.5 (float, D_800C6C30 in this cartridge's tables)
  * 0x800C6C34 = 0.3 (float, D_800C6C34 in this cartridge's tables)
  * 0x800C6C38 = 15.0 (float, D_800C6C38 in this cartridge's tables)
- * 0x800D2988 = 1.0 (float, D_800D2988 in this cartridge's tables; not a literal: a variable, its value in the image, since D_800D2988: `swc1` at %lo(D_800D2988) in func_80213ED4_de.s)
+ * 0x800D2988 = 1.0 (float, D_800D2988 in this cartridge's tables; not a literal: a variable, its value in the image, since D_800D2988: `swc1` at %lo(D_800D2988) in Nav_UpdateActorStateAnimation.s)
  * 0x800C6C3C = 1.0 (float, D_800C6C3C in this cartridge's tables)
  * 0x800C6C40 = 3.1415927 (float, D_800C6C40 in this cartridge's tables)
  * 0x800C6C44 = 0.5 (float, D_800C6C44 in this cartridge's tables)

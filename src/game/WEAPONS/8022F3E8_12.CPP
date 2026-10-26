@@ -27,7 +27,7 @@ extern MatchRewardsRecord D_80102B00[];
 extern s32 D_800D30BC;
 
 
-extern s16 func_8022F96C_de(void *);
+extern s16 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
@@ -61,14 +61,14 @@ static inline s32 can_fire(char *player) {
     return ammo;
 }
 
-void func_80231BB0_de(Shared_Actor *actor, void *attack) {
+void Weapon_TryEnterAlternateStateEight(Shared_Actor *actor, void *attack) {
     char *player;
     s32 action;
 
     player = actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
     if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
-        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
+        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = Weapon_FindNextUsableWeapon(player);
         return;
     }
     if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player)) {

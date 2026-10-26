@@ -27,7 +27,7 @@ extern char D_00250C2C;
 
 extern char D_800C3E40_de[];
 
-void func_80250274_de(void *);
+void StaticInstance_DrawDistanceFadedModel(void *);
 
 void Instance_DrawModel(void *);
 
@@ -45,13 +45,13 @@ extern void Render_QueueModelInstance(void **, void *, s32, void *, void *, s32)
 
 extern void Scene_UnlockResource(s32, s32);
 
-int func_80250938_de(void *wanted,int key) {
+int StaticInstance_FindPlacedPropIndex(void *wanted,int key) {
  int result=-1; int i,count,offset; char *entries;
  LevelNode *h=Render_GetPackSection(key,0);
  count=h->count; entries=(char *)h->records;
 i=0; if(count>0) {offset=i; do {if(entries+offset!=wanted) {i++;offset+=232;} else {result=i;break;}}while(i<count);}return result;}
 
-void func_802509A8_de(void *owner) {
+void StaticInstance_RegisterGeometryResources(void *owner) {
     struct ResourceBinding *o = (struct ResourceBinding *) owner;
     void *temp_v0;
     CachedResource *ret2;
@@ -83,44 +83,44 @@ signed char Scene_GetPropGeometryIndex(struct PlacedProp *object) {
     return ((signed char *)linked)[0xE];
 }
 
-void func_80250A9C_de(void *owner) {
+void StaticInstance_DrawForGameMode(void *owner) {
     if (D_801462C8.local != 0) {
         Instance_DrawModel(owner);
         return;
     }
-    func_80250274_de(owner);
+    StaticInstance_DrawDistanceFadedModel(owner);
 }
 
-void func_80250AD4_de(void *resourceBinding) {
+void StaticInstance_RefreshResourceUsage(void *resourceBinding) {
     struct ResourceBinding *binding = resourceBinding;
     if (!(binding->status & 0x40) && (binding->colorFrame != (u8)D_800D2978)) {
         func_80253F8C_de(0, binding->registrationFlags | D_800CD3F0);
     }
 }
 
-s32 *Scene_CollectPropResources(void *prop, s32 model, s32 arg2, s32 *nextResource) {
+s32 *Scene_CollectPropResources(void *prop, s32 model, s32 geometryVariant, s32 *nextResource) {
     struct ResourceBinding *o = (struct ResourceBinding *) prop;
-    void *temp_v0;
-    s32 *var_s1;
+    void *geometryResource;
+    s32 *resourceCursor;
     CachedResource *ret2;
 
-    var_s1 = nextResource;
-    temp_v0 = Instance_AcquireGeometry(prop, arg2);
-    if (temp_v0 != 0) {
-        o->loadedResource = temp_v0;
-        *var_s1 = (s32) temp_v0;
-        var_s1 = func_8026E27C_de(temp_v0, model, var_s1 + 1);
-        ret2 = func_80251F6C_de(0, o->registrationFlags | D_800CD3F0, temp_v0, (CachedResource *)o->resource, 8, prop, &D_00250C2C, D_800C3E40_de, 1);
+    resourceCursor = nextResource;
+    geometryResource = Instance_AcquireGeometry(prop, geometryVariant);
+    if (geometryResource != 0) {
+        o->loadedResource = geometryResource;
+        *resourceCursor = (s32) geometryResource;
+        resourceCursor = func_8026E27C_de(geometryResource, model, resourceCursor + 1);
+        ret2 = func_80251F6C_de(0, o->registrationFlags | D_800CD3F0, geometryResource, (CachedResource *)o->resource, 8, prop, &D_00250C2C, D_800C3E40_de, 1);
         if (ret2 != 0) {
-            *var_s1 = (s32)ret2;
-            var_s1 += 1;
+            *resourceCursor = (s32)ret2;
+            resourceCursor += 1;
         }
     }
-    return var_s1;
+    return resourceCursor;
 }
 
 /** Advance the wrapping counter D_800D0910, resetting to 0x380000 at 0x3FFFFF. */
-int func_80250BF0_de(void) {
+int StaticInstance_AdvanceResourceKey(void) {
     int temp_v0;
 
     temp_v0 = D_800D0910 + 1;
@@ -131,7 +131,7 @@ int func_80250BF0_de(void) {
     return D_800D0910;
 }
 
-void func_80250C2C_de(void *arg0, s32 **arg1)
+void StaticInstance_BuildLitGeometryResource(void *arg0, s32 **arg1)
 {
   struct ResourceBinding *binding = arg0;
   s32 new_var;
@@ -139,7 +139,7 @@ void func_80250C2C_de(void *arg0, s32 **arg1)
   func_80253E64_de(0, arg1, Actors_BuildLitModel(new_var, *binding->resource, binding->runtimeState, (s32)binding->transform, 0, arg0));
 }
 
-void func_80250C84_de(Owner_func_80250C84_de *owner, s32 unused, s32 remaining, s32 key) {
+void StaticInstance_DrawGeometryVariant(OwnerStaticInstanceDrawGeometryVariant *owner, s32 unused, s32 remaining, s32 key) {
     void *instance;
     CachedResource *resource;
     s32 *header;
@@ -177,7 +177,7 @@ void func_80250C84_de(Owner_func_80250C84_de *owner, s32 unused, s32 remaining, 
 }
 
 /** Select one of two signed bytes according to a doubled nested count. */
-int func_80250DE0_de(void *object) {
+int StaticInstance_SelectDistanceVariant(void *object) {
     LevelActor *actor = object;
     struct ResourceFadeDefinition *nested = (struct ResourceFadeDefinition *)actor->definition;
     if ((u32)actor->resourceState <
@@ -187,7 +187,7 @@ int func_80250DE0_de(void *object) {
     return nested->farValue;
 }
 
-s8 func_80250E14_de(LevelActor *actor) {
+s8 StaticInstance_SelectGameModeVariant(LevelActor *actor) {
     void *definition;
 
     if (D_801462C8.local != 0) {

@@ -132,7 +132,7 @@ void *func_802ACA20_de(s32 arg0) {
     return 0;
 }
 
-extern int func_8024E924_de(void *arg0);
+extern int InstHdr_GetActorType(void *arg0);
 extern s32 func_802AB6EC_de(void *arg0, void *arg1, s32 arg2);
 extern void func_80290548_de(void *arg0);
 extern void func_8028B898_de(void *arg0, void *arg1, s32 arg2);
@@ -153,7 +153,7 @@ void func_802ACA54_de(void *arg0, void *arg1) {
         }
     } else if (!(temp_v1 & 1)) {
 block_4:
-        if (func_802AB6EC_de(arg0, arg1, func_8024E924_de(arg1)) != 0) {
+        if (func_802AB6EC_de(arg0, arg1, InstHdr_GetActorType(arg1)) != 0) {
             temp_v0 = ((struct Shared_ProjectileView *)(arg1))->flags | 1;
             ((struct Shared_ProjectileView *)(arg1))->flags = temp_v0;
             if (temp_v0 & 8) {

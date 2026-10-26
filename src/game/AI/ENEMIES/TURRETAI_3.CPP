@@ -28,7 +28,7 @@ void Turret_Move(struct Owner *owner, Rider *rider, s32 mode, SharedPlayer *targ
 
 void Weapons_SetLoopingSound(void *arg0, void *arg1, s32 arg2);
 
-void func_80217388_de(void *arg0, void *arg1);
+void Barrel_StopActorLoopingSound(void *arg0, void *arg1);
 
 f32 Nav_ApproachValue(f32 arg0, f32 arg1, f32 arg2);
 
@@ -163,7 +163,7 @@ block_12:
     if(riderState->nav.speed != desiredSpeed) {
 changed:
         Weapons_SetLoopingSound(actor,riderState,0xC3F);
-    } else func_80217388_de(actor,riderState);
+    } else Barrel_StopActorLoopingSound(actor,riderState);
     /* The second ABI word is the actual rider pointer, used as such by this callee. */
     ((void (*)(void *,void *,f32,f32))Weapons_ApplyClampedTurn)(actor,riderState, turret->rate, aimError);
     riderState->nav.speed = Nav_ApproachValue(riderState->nav.speed, desiredSpeed, turret->rate);

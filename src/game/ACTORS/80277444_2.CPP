@@ -345,13 +345,13 @@ s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
 /* Filters the 0xC0-byte hit records held in table slot 2 of arg1: keeps those whose box
    (six floats at record offset 0xA0) intersects the given bounds, and which either have no
    byte set at record offset 0xBD, are paired with arg4, or list the key that
-   func_80250938_de(arg4, arg1) finds inside the id list at slot arg1-table index of the list
+   StaticInstance_FindPlacedPropIndex(arg4, arg1) finds inside the id list at slot arg1-table index of the list
    table in slot 3. Writes the accepted record pointers into arg2 (at most 0x40 of them),
    reports their number through arg3, and returns 1 when any accepted record has its byte at
    record offset 0xBA set. With no table (arg1 null) it defers to Actors_QueryWorldLightVolumes. */
 
 extern s32 Actors_QueryWorldLightVolumes(Bounds *bounds, void **out, s32 *countOut);
-extern s32 func_80250938_de(void *wanted, void *table);
+extern s32 StaticInstance_FindPlacedPropIndex(void *wanted, void *table);
 
 typedef struct IdList {
     u16 count;
@@ -397,7 +397,7 @@ s32 Actors_QueryLightVolumes(Bounds *bounds, void *table, void **out, s32 *count
                         ids = (s16 *)list;
                         len = list->count;
                         ids++;
-                        key = func_80250938_de(wanted, table);
+                        key = StaticInstance_FindPlacedPropIndex(wanted, table);
                         for (n = 0; n < len; n++) {
                             id = *ids;
                             if (id >= 0x1770) {

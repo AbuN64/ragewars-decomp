@@ -3,7 +3,7 @@
 
 #if defined(VERSION_EU)
 #ifdef NON_MATCHING
-#define func_80212E30_eu_x Nav_UpdatePatrolRouteEu
+#define Nav_UpdatePatrolRoute Nav_UpdatePatrolRouteEu
 #include "COMMON/ROUTE_CHASE_RECORDS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/TRIPLE.H"
@@ -14,7 +14,7 @@
    or random roaming (-2) when there are none; once within D_800C23B0_eu_x of its goal node it advances the
    route position at 0x228 (wrapping at the route length) and drops the goal; a dropped goal is then
    taken from the route through Engine_GetPlatformRoutePoint and func_8020CB3C_de, or a random node of D_8013B364 when
-   roaming; finally runs Nav_SteerAlongRoute, func_80211020_de and Nav_UpdatePlayerSteering. */
+   roaming; finally runs Nav_SteerAlongRoute, Nav_RunBehaviorHandler and Nav_UpdatePlayerSteering. */
 
 
 
@@ -39,10 +39,10 @@ extern void *Nav_GetGraphPoint(RoutePatrolNodes *list, s32 index);
 extern void *Nav_GetControllerPosition(PatrolBot *bot);
 extern f32 Particle_GetPointDistance(void *a, void *b);
 extern void Nav_SteerAlongRoute(PatrolBot *bot);
-extern void func_80211020_de(PatrolBot *bot);
+extern void Nav_RunBehaviorHandler(PatrolBot *bot);
 extern void Nav_UpdatePlayerSteering(PatrolBot *bot);
 
-void func_80212E30_eu_x(PatrolActor *actor)
+void Nav_UpdatePatrolRoute(PatrolActor *actor)
 {
     PatrolBot *bot = actor->player->bot;
     RoutePatrolNodes *nodes = &D_8013B364;
@@ -83,7 +83,7 @@ void func_80212E30_eu_x(PatrolActor *actor)
         }
     }
     Nav_SteerAlongRoute(bot);
-    func_80211020_de(bot);
+    Nav_RunBehaviorHandler(bot);
     Nav_UpdatePlayerSteering(bot);
 }
 #else
@@ -93,7 +93,7 @@ INCLUDE_ASM("span_1000", Nav_UpdatePatrolRouteEu);
 
 #if !(defined(VERSION_DE))
 /* Reset the two bot state words reached through the actor and player records. */
-void func_80212FDC_eu(void *object) {
+void Nav_ResetPatrolRouteSelection(void *object) {
     RouteChaseActor *actor = object;
     RouteChaseBot *bot = actor->player->bot;
     bot->resetWord220 = 0;

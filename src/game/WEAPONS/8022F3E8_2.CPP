@@ -54,24 +54,24 @@ s32 Player_HasProfileUnlockFlag(u8 *arg0, s32 arg1)
   return func_80265650_de(arg0 + 0x79, arg1);
 }
 
-void Weapons_SetAchievementFlagByIndex(Profile *player, s32 arg1) {
-    u8 *var_a0;
-    s32 var_a1 = arg1;
+void Weapons_SetAchievementFlagByIndex(Profile *player, s32 achievementIndex) {
+    u8 *achievementBits;
+    s32 mappedAchievementIndex = achievementIndex;
 
-    switch (var_a1) {
+    switch (mappedAchievementIndex) {
     case 16:
-        var_a0 = &player->achievementFlags[0x2E];
-        var_a1 = 0;
+        achievementBits = &player->achievementFlags[0x2E];
+        mappedAchievementIndex = 0;
         break;
     case 17:
-        var_a0 = &player->achievementFlags[0x2E];
-        var_a1 = 1;
+        achievementBits = &player->achievementFlags[0x2E];
+        mappedAchievementIndex = 1;
         break;
     default:
-        var_a0 = &player->achievementFlags[0x31];
+        achievementBits = &player->achievementFlags[0x31];
         break;
     }
-    func_80265688_de(var_a0, var_a1, 1);
+    func_80265688_de(achievementBits, mappedAchievementIndex, 1);
 }
 
 s32 Player_GetProfileAchievementFlag(Profile *profile, s32 arg1) {
@@ -103,7 +103,7 @@ void Weapons_TestAchievementFlag7(Profile *record, s32 index) {
     func_80265650_de(&record->achievementFlags[7], index);
 }
 
-void func_8022F5E0_de(char *arg0) {
+void Player_BuildWeaponHandTransform(char *arg0) {
     CVector3 position;
     Matrix worldMatrix;
     CVector3 scaledOffset;
