@@ -1,4 +1,3 @@
-
 #if defined(VERSION_EU)
 unsigned char D_auto_func_80285258_eu_padding_85E58[8] = { 0x00, 0x00, 0x10, 0x21, 0x08, 0x0A, 0x00, 0xA2 };
 #endif
