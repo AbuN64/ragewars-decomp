@@ -574,3 +574,16 @@ void Achieve_CreateGermanResultsScreen(void) {
 INCLUDE_ASM("ovl_80400000", Achieve_CreateGermanResultsScreen);
 #endif
 #endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_formats_8043829C_E2B44_us_rev1.c */
+const unsigned char D_blob_83fae0a1897e2dffd396[3] = {
+    0x25, 0x64, 0x00,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+unsigned char rodata_unresolved_800E1F47[1] = {
+    0x00,
+};
+#endif

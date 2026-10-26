@@ -26360,7 +26360,7 @@ SECTIONS
         src/game/ACHIEVE/80424E30.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/ACHIEVE/80424E30_2.CPP.o */;
         src/game/ACHIEVE/80424E30_2.CPP.o(.rodata .rdata);
-        src/game/DATA/OVLTAB9/800E195C.CPP.o(.data);
+        src/game/ACHIEVE/80424E30_3.CPP.o(.data);
         . = ALIGN(8) /* src/game/ACHIEVE/80424E30_3.CPP.o */;
         src/game/ACHIEVE/80424E30_3.CPP.o(.rodata .rdata);
         src/game/DATA/OVLTAB9/800E19AC.CPP.o(.data);
@@ -26438,8 +26438,8 @@ SECTIONS
         src/game/FRONTEND/8042E080_16.CPP.o(.rodata .rdata);
         src/game/DATA/OVLTAB9/800E1F34.CPP.o(.data);
         src/game/MENU/EVENT/800E1F40.CPP.o(.rodata .rdata);
-        src/game/MENU/EVENT/800E1F44.CPP.o(.rodata .rdata);
-        src/game/MENU/EVENT/800E1F44.CPP.o(.data);
+        src/game/ACHIEVE/80437A50.CPP.o(.rodata .rdata);
+        src/game/ACHIEVE/80437A50.CPP.o(.data);
         src/game/MENU/EVENT/800E1F48.CPP.o(.rodata .rdata);
         src/game/MENU/EVENT/800E1F48.CPP.o(.data);
         src/game/ACHIEVE/80437C30.CPP.o(.rodata .rdata);
@@ -26952,7 +26952,6 @@ SECTIONS
         src/game/ACHIEVE/804245C0.CPP.o(.bss .sbss COMMON);
         src/game/ACHIEVE/80424E30.CPP.o(.bss .sbss COMMON);
         src/game/ACHIEVE/80424E30_2.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVLTAB9/800E195C.CPP.o(.bss .sbss COMMON);
         src/game/ACHIEVE/80424E30_3.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTAB9/800E19AC.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/80423280_5.CPP.o(.bss .sbss COMMON);
@@ -27001,7 +27000,7 @@ SECTIONS
         src/game/FRONTEND/8042E080_16.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTAB9/800E1F34.CPP.o(.bss .sbss COMMON);
         src/game/MENU/EVENT/800E1F40.CPP.o(.bss .sbss COMMON);
-        src/game/MENU/EVENT/800E1F44.CPP.o(.bss .sbss COMMON);
+        src/game/ACHIEVE/80437A50.CPP.o(.bss .sbss COMMON);
         src/game/MENU/EVENT/800E1F48.CPP.o(.bss .sbss COMMON);
         src/game/ACHIEVE/80437C30.CPP.o(.bss .sbss COMMON);
         src/game/MENU/EVENT/800E1F68.CPP.o(.bss .sbss COMMON);
