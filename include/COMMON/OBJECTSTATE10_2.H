@@ -9,8 +9,6 @@ typedef struct ObjectState10_2 ObjectState10_2;
 extern float D_800C7340_de;
 
 
-struct CopyDest802B3998;
-typedef struct CopyDest802B3998 CopyDest802B3998;
 
 
 
@@ -86,17 +84,6 @@ struct ALCMidiHdr;
 typedef struct ALCMidiHdr ALCMidiHdr;
 
 
-struct CopySource802B3998;
-struct CopySource802B3998 {
-    int word0;
-    int word4;
-    int word8;
-    int wordsC[16];
-    int words4C[16];
-    unsigned char bytes8C[16];
-    unsigned char bytes9C[16];
-    int wordsAC[16];
-};
 
 
 struct Node_func_802AFD6C_de;
@@ -206,23 +193,7 @@ struct ObjectLinks4_5 {
 };
 
 
-struct CopySource802B3998;
-typedef struct CopySource802B3998 CopySource802B3998;
 
-struct CopyDest802B3998;
-struct CopyDest802B3998 {
-    int pad0;
-    int word4;
-    int pad8;
-    int wordC;
-    int word10;
-    int pad14;
-    int words18[16];
-    int words58[16];
-    unsigned char bytes98[16];
-    unsigned char bytesA8[16];
-    int wordsB8[16];
-};
 
 
 

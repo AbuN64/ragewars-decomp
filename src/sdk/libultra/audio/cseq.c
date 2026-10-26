@@ -283,33 +283,33 @@ u32 func_802AE824_de(void **sequenceHandle, f32 seconds, s32 microsecondsPerQuar
     return converted;
 }
 
-void func_802AE8C8_de(CopyDest802B3998 *dst, CopySource802B3998 *src) {
+void func_802AE8C8_de(ALCSeq_s *dst, ALCSeqMarker *src) {
     int i;
 
-    dst->word4 = src->word0;
-    dst->wordC = src->word4;
-    dst->word10 = src->word8;
+    dst->validTracks = src->validTracks;
+    dst->lastTicks = src->lastTicks;
+    dst->lastDeltaTicks = src->lastDeltaTicks;
     for (i = 0; i < 16; i++) {
-        dst->words18[i] = src->wordsC[i];
-        dst->words58[i] = src->words4C[i];
-        dst->bytes98[i] = src->bytes8C[i];
-        dst->bytesA8[i] = src->bytes9C[i];
-        dst->wordsB8[i] = src->wordsAC[i];
+        dst->curLoc[i] = src->curLoc[i];
+        dst->curBUPtr[i] = src->curBUPtr[i];
+        dst->curBULen[i] = src->curBULen[i];
+        dst->lastStatus[i] = src->lastStatus[i];
+        dst->evtDeltaTicks[i] = src->evtDeltaTicks[i];
     }
 }
 
-void func_802AE93C_de(CopyDest802B3998 *src, CopySource802B3998 *dst) {
+void func_802AE93C_de(ALCSeq_s *src, ALCSeqMarker *dst) {
     s32 i;
 
-    dst->word0 = src->word4;
-    dst->word4 = src->wordC;
-    dst->word8 = src->word10;
+    dst->validTracks = src->validTracks;
+    dst->lastTicks = src->lastTicks;
+    dst->lastDeltaTicks = src->lastDeltaTicks;
     for (i = 0; i < 16; i++) {
-        dst->wordsC[i] = src->words18[i];
-        dst->words4C[i] = src->words58[i];
-        dst->bytes8C[i] = src->bytes98[i];
-        dst->bytes9C[i] = src->bytesA8[i];
-        dst->wordsAC[i] = src->wordsB8[i];
+        dst->curLoc[i] = src->curLoc[i];
+        dst->curBUPtr[i] = src->curBUPtr[i];
+        dst->curBULen[i] = src->curBULen[i];
+        dst->lastStatus[i] = src->lastStatus[i];
+        dst->evtDeltaTicks[i] = src->evtDeltaTicks[i];
     }
 }
 
