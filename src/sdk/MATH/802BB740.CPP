@@ -42,7 +42,6 @@ void func_802B6670_de(void *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az,
 
 extern f32 Math_Sqrtf(f32);
 
-extern f32 D_800C7878_de, D_800C787C_de;
 
 void func_802B6900_de(f32 matrix[4][4], f32 eyeX, f32 eyeY, f32 eyeZ,
                       f32 atX, f32 atY, f32 atZ, f32 upX, f32 upY, f32 upZ) {

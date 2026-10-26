@@ -665,7 +665,6 @@ s32 func_80267528_de(char *actor, char *target)
 #include "TYPES.H"
 #include "COMMON/AIPROFILE.H"
 extern f32 Math_Sqrtf(f32);
-extern f32 D_800C46E8_eu;
 extern void Particle_SubtractVectors(void *, void *, void *);
 typedef struct PushStrength { u16 value; u16 pad; } PushStrength;
 typedef struct PushScale { s8 value; u8 pad[3]; } PushScale;

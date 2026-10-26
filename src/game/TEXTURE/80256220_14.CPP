@@ -186,8 +186,6 @@ extern void func_8025B758_de(void *, void *);
 extern void func_8025D158_de(void *, void *);
 extern s32 D_800CD8C0_de;
 extern s32 D_800CB724;
-extern s32 D_800CB720;
-extern s32 D_801076A0;
 s32 func_80265964_de(s32 arg0);
 void *func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2);
 static inline void LockEnter(MenuRules *lock) {

@@ -7,7 +7,6 @@
 
 typedef struct Queue Queue;
 
-extern s32 D_800D4360;
 extern s32 func_802BB160_de(Queue *, void *, s32);
 
 

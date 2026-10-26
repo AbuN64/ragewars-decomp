@@ -25,7 +25,6 @@ extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 extern f32 Math_Sqrtf(f32);
 
 /* Copies a 4x4 float matrix while scaling its first three rows by three per-row factors, zeroing their fourth column and setting the last element to the canonical unit constant. Adapted from CopyMatrix with the row scaling, the zeroed column and the constant corner changed. */
-extern f32 D_800C48F4_de;
 
 /* Expands a 4x4 transform into an affine 4x4 matrix with its second and third rows swapped, a zero last column and the pooled corner D_800C99F0[1]. */
 

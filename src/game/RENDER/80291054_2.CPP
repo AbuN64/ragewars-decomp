@@ -92,7 +92,6 @@ extern s32 D_80146CCC;
 extern s32 D_80146CD0;
 extern s32 D_8011B9F4;
 extern s32 D_80142C30;
-extern s32 D_801428D8;
 #if defined(VERSION_US_REV1)
 extern char D_002953FC_us_rev1[];
 extern char D_801053E8_us_rev1[];

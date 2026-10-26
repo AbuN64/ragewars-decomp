@@ -11,8 +11,7 @@
 #if defined(VERSION_EU)
 #include "COMMON/OSVISCALE.H"
 #include "sdk/os.h"
-extern s32 D_800CD708, D_800CD70C, D_800E28D8;
-extern f32 D_800C5350_de;
+extern s32 D_800CD70C, D_800E28D8;
 extern OSViMode D_800D47B0, D_800D4530;
 extern void osViSetYScale(f32);
 extern void osViSetMode(OSViMode *);

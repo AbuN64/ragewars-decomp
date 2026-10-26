@@ -148,7 +148,6 @@ s32 func_8028597C_de(s32 arg0) {
     return result;
 }
 
-extern f32 D_800C4ECC_de;
 f32 func_802859D0_de(f32 *arg0, u32 arg1, u32 arg2, u32 arg3) {
     f32 magnitude;
     f32 dx;

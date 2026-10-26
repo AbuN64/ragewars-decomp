@@ -15,7 +15,6 @@ s32 func_8043D25C_de(void) {
 #endif
 
 #if defined(VERSION_US_REV1)
-extern s32 D_800E63AC;
 
 s32 func_8043D25C_de(void) {
     D_800E63AC ^= 1;

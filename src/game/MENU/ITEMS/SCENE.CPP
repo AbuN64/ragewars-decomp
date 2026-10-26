@@ -8,7 +8,6 @@ extern s32 func_8028B21C_de(struct Shared_World *, s32);
 extern s32 func_8028C198_de(void *, s32);
 extern s32 Render_GetDirectoryEntry(s32 *, s32, s32);
 extern s32 Render_LocatePackSection(void *, s32, s32, s32 *);
-extern char D_0026D7F4;
 typedef struct { u32 w[7]; } Blk28;
 void func_8044B600_de(void *level, void *buffer, s32 name) {
     void *table;

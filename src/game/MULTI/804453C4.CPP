@@ -132,7 +132,6 @@ void Multi_SetupNameSpinner(MenuRecAt20V1 *menu) {
 #endif
 
 #if defined(VERSION_US_REV1)
-extern f32 D_800E2810;
 s32 func_80445964_de(void *unused, MenuRecAt20V1 *menu) {
     s32 i;
     f32 t;

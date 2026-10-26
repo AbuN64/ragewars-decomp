@@ -23,7 +23,6 @@ extern void func_8026FC9C_de(void *, void *);
 
 extern s32 D_800CC380;
 
-extern s32 D_80110620;
 
 
 

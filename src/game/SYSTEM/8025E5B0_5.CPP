@@ -20,11 +20,10 @@ static __inline__ f32 unsignedFloat(u32 value,const f64 *bias) {
 #include "SYSTEM/802609CC_3.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern f32 D_800C4090_de;
 
 /* Fills a three-float sample for an animation track: either the stored constant vector or a linear blend
  * of the two keys around the time. */
-extern f64 D_800C4040_de, D_800C4048_de, D_800C4050_de, D_800C4058_de, D_800C4060_de, D_800C4068_de, D_800C4070_de, D_800C4078_de, D_800C4080_de, D_800C4088_de;
+extern f64 D_800C4050_de, D_800C4058_de, D_800C4060_de, D_800C4068_de, D_800C4070_de, D_800C4078_de, D_800C4080_de, D_800C4088_de;
 
 
 void System_SampleVectorTrack(AnimRef *anim, s32 index, f32 time, CVector3 *out) {
@@ -106,7 +105,6 @@ extern void func_80270AAC_de(CQuatern *out, f32 t, CQuatern *from, CQuatern *to)
 
 
 
-extern s32 D_8010AC78;
 
 
 
@@ -233,7 +231,6 @@ void func_8025EF34_de(u32 *stream, Output8025EF54 *out, s32 count) {
 #define func_8025F074_us func_8025F0C4_eu_x
 #endif
 #ifdef NON_MATCHING
-extern f32 D_800C91F8;
 extern char D_00261180_de[], D_0025EF34_de[], D_00261238_de[];
 /* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through func_802741A4_de. */
 void func_8025F074_us(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
@@ -324,7 +321,6 @@ INCLUDE_ASM("span_1000", func_8025F094_eu);
 
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
-extern f32 D_800C91F8;
 extern char D_00261180_de[], D_0025EF34_de[], D_00261238_de[];
 /* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through func_802741A4_de. */
 void func_8025F0D4_de(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
@@ -402,7 +398,6 @@ INCLUDE_ASM("span_1000", func_8025F0D4_de);
 
 #include "COMMON/STREAM.H"
 #include "SYSTEM/802609CC_3.H"
-extern f32 D_800C91F8;
 
 /* Expand each encoded track, optionally smooth its four channels in place,
  * then normalize quaternion samples. */

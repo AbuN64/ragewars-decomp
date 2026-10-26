@@ -27,11 +27,9 @@
 
 s32 func_802A7AA4_de(void *);
 
-extern s32 D_800CDEB4;
 
 s32 func_802AA70C_de(void *, s32 *);
 
-extern s32 D_800CDEC8;
 
 extern int func_802A23B4_de(void);
 

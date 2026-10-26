@@ -137,7 +137,6 @@ typedef struct PakSetupProfile {
 } PakSetupProfile;
 
 
-extern s32 D_800E54A0;
 extern s32 D_800DF4C0;
 extern s32 D_800DF4C4;
 extern PakSetupProfile D_80102B00[];

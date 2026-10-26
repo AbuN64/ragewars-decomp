@@ -20,7 +20,6 @@
    16-bit textures turns the lookup table off; returns 0. */
 
 
-extern Gfx *g_displayListCursor;
 
 extern void *D_800E32D8;
 

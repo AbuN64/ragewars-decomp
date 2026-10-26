@@ -27,7 +27,6 @@ int func_802934F8_de(void);
 u8 *func_8043F290(TextBoundsText *);
 f32 Pak_MeasureLine(u8 *, f32, f32);
 void *Items_GetListContext(s8 *);
-extern s32 D_800E28D0;
 extern f32 D_800DE448;
 extern f32 D_800E247C;
 extern f32 D_800DE450_de;

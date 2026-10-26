@@ -122,7 +122,6 @@ extern void *Scene_AllocateMemory(s32 size);
    argument, sits 24 bytes further on, so both are fields of one 52-byte record. */
 
 /* Returns the word in the 52-byte record D_800E2B2C selected by the first byte of a record. */
-extern s32 D_800E2B2C[];
 
 u32 func_80412D94_de(u32 value, s32 from, s32 to) {
     return encode(decode(value, &D_800E2B20[from]), &D_800E2B20[to]);

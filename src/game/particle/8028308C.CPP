@@ -29,12 +29,9 @@ extern void Render_DetachParticleSwooshes(void *arg0, void *arg1);
 
 
 
-extern char D_801379C0;
-
-extern char D_8013B1A8;
 
 
-extern s32 D_8011ADB0;
+
 
 extern char D_8011D8D0;
 
@@ -44,7 +41,6 @@ extern CVector3 D_801042C8;
 
 extern Params D_80100290;
 
-extern Triple D_801002B8;
 
 /* Apply resource indices and dispatch the optional object effect. */
 

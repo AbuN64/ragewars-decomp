@@ -11,7 +11,7 @@
 #include "RENDER_4/8028FD2C_6.H"
 #if defined(VERSION_US)
 #include "COMMON/EXTERNS_18.H"
-extern s32 D_800CD708, D_800CD70C;
+extern s32 D_800CD70C;
 extern void osViSetYScale(f32);
 extern void osViSetMode(void *);
 extern void osViBlack(s32);

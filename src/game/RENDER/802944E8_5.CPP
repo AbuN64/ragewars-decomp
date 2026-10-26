@@ -11,7 +11,6 @@ void func_80294AA8_de(void) {
 extern s32 D_800E28D8;
 extern char D_auto_800D3460[], D_800D4530[];
 extern f32 rodata_func_8029499C_us_800C5410;
-extern s32 D_80142CA8;
 extern void *D_auto_rodata_unresolved_800CD698[];
 extern void osViSetMode(void *);
 extern void osViSetYScale(f32);

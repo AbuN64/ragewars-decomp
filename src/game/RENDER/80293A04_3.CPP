@@ -6,7 +6,6 @@
 #include "RENDER/80291054_3.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern void *D_800E0B34[];
 /* The EU builds pick the text for the current menu language. */
 #define LINES_TEXT D_800E0B34[g_languageIndex]
 #else

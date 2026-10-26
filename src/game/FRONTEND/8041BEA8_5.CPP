@@ -68,7 +68,6 @@ extern void func_8041C244_de(void);
 extern void func_80434FB4_de(s32);
 
 
-extern s32 D_800E28CC;
 
 #if defined(VERSION_DE)
 extern char g_noteCountIntFormat[];
@@ -140,7 +139,6 @@ extern void func_80286AA8_de(void *, s32, s32);
    more than five ticks have passed runs func_802A2360_de and func_8041C244_de; always returns 0. */
 
 
-extern int D_800E28E0;
 
 /* The slot-error scalar is real external storage in every ROM version: the de cart writes
    800DF4C4, eu writes 800EFB34, eu-x writes 800EACF4, us writes 800DE174, us-rev1 800E3514. */

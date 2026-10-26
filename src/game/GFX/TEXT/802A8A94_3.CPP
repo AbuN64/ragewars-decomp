@@ -104,7 +104,6 @@ void func_802A8F28_de(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 sha
    and alpha-dither mode words, the alpha dither chosen by D_800E28D8. */
 
 extern Gfx *g_displayListCursor;
-extern s32 D_800E28D8;
 
 extern void Render_SetCombineMode(s32 arg0);
 extern void Render_SetModePreset(s32 arg0);
@@ -169,7 +168,6 @@ void func_802A9CD0_de(void *pTexture, int XPos, int YPos, int TextureWidth, int 
 /* Appends display-list commands to D_80110634 that load a 4-bit texture block of the given size and draw it as a texture rectangle at a floating-point position, stretched by the given horizontal and vertical scales with the texture steps divided by them. Adapted from func_802A9CD0_de with the position made floating point, the rectangle corners scaled by D_800C61BC_de and the scale factors applied to the extent and the texture step. */
 
 extern Gfx *g_displayListCursor;
-extern f32 D_800C61BC_de;
 void func_802A9EE8_de(void *pTexture, f32 XPos, f32 YPos, int TextureWidth, int TextureHeight, f32 ScaleX, f32 ScaleY) {
     int dsdx;
     int dtdy;

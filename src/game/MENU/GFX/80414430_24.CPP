@@ -25,7 +25,6 @@ void Gfx_EmitMatrix(void *source) {
 
 
 
-extern s32 D_800E32F0;
 
 extern s32 func_80413608_de(u8 *record);
 

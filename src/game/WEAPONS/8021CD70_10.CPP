@@ -25,7 +25,6 @@
 
 
 extern void *func_802AC950_de(s32);
-extern s32 D_800CE3E8[];
 
 
 
@@ -90,7 +89,6 @@ s32 Weapons_AddAmmo(void *player, s32 slot, s32 amount) {
 
 
 extern void *func_802AC950_de(s32);
-extern s32 D_800CE3E8[];
 
 
 

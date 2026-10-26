@@ -29,11 +29,9 @@ extern void func_802954E0_us_rev1(void);
 
 extern void Items_SetSelection(void *arg0, s32 arg1, s32 arg2);
 
-extern s32 D_800D2970;
 
 extern s32 D_800CD730;
 
-extern f32 D_800CD740_de;
 extern s32 Render_IsSnapshotActive(void);
 extern void func_80264B8C_de(void);
 extern void func_80293334_de(void *session, s32 count, s32 force_active);

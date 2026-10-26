@@ -44,7 +44,6 @@ extern char D_8014561C[];
 extern void Pak_OpenDialog(void *, void *, s32, s32, s32);
 
 /* Stores 1 in D_80153730 and 0 in D_80153774. */
-extern s32 D_80153730;
 
 
 

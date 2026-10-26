@@ -343,7 +343,6 @@ void Render_ResetPlayerWeapons(struct Player *player) {
 #include "COMMON/LEVEL_TRACK.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/SHAREDCALLBACK5.H"
-extern f32 D_800C2340_de;
 extern s32 D_801371D4;
 extern char D_8013B364[];
 extern void Items_ReleaseObjectHandles(void *);

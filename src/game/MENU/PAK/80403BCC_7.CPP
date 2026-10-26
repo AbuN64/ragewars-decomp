@@ -10,9 +10,7 @@ extern void Scene_ReleaseResource(void *arg0, void *arg1);
 extern void func_80253908_de(int);
 
 
-extern int D_800E2850;
 
-extern int D_800E2854;
 
 
 extern void Render_ReadControllerStates(void);

@@ -14,22 +14,16 @@ extern f32 D_800C4960_de[2];
 
 extern f32 D_800D2988;
 
-extern f32 D_800C4968_de[2];
 
-extern f32 D_800C4970_de[2];
 
 extern f32 Math_Sqrtf(f32);
 
-extern char D_800C49A0_de;
 
-extern f32 D_800C49A4_de;
 
 /* Builds a look-at view matrix (ultralib guLookAtF) from an eye, a target and an up vector,
    substituting a fallback x component when the up vector is parallel to the view direction.
    Adapted from ultralib gu/lookat.c with single-precision const extern constants, the degenerate check and the 1.0 held in a temporary. */
-extern const float D_800C49A8_de;
 
-extern const float D_800C49B0_de;
 
 
 extern float Math_Sqrtf(float);
@@ -38,11 +32,8 @@ extern float Math_Sqrtf(float);
 
 
 
-extern int D_80115E00;
 
-extern int D_800CD3E0;
 
-extern int D_800CD3E4;
 
 extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 

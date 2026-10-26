@@ -545,7 +545,7 @@ s32 Frontend_OpenResultsScreen(void *root) {
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 extern func_8042CE54_S1 *D_800E53C0;
 extern ResourceBank D_800E12D2[];
-extern s32 D_800E01B0_de[],D_800FF140_de[],D_800FEAE0[];
+extern s32 D_800FF140_de[],D_800FEAE0[];
 extern s32 Frontend_FindKeyIndex(s32);
 extern char *func_802A0494_de(char *);
 extern char *Resmgr_CopyString(char *,char *);

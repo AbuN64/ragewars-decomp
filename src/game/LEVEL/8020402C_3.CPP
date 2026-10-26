@@ -13,7 +13,6 @@
 #include "LEVEL/8020402C_3.H"
 #include "WEAPONS/80213ED4.H"
 
-extern f32 D_800C6B74;
 extern void Render_SetActorStateBit(Shared_World *, void *, s32);
 extern void func_80267198_de(void *, void *, s32, CVector3, ResourceManagerState);
 typedef struct BreakableContactRule {

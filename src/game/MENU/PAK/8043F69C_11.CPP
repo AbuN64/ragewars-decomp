@@ -124,7 +124,6 @@ typedef struct PakModelContext {
 extern Gfx *g_displayListCursor;
 extern s32 D_800D297C, D_800E28D0, D_800CD730;
 extern f32 literals_Engine_GetPlatformRoutePoint;
-extern s32 D_800CE430[];
 extern u8 D_00443128[], D_00443104[];
 extern void Resmgr_FillMemory(void *, s32, s32);
 extern u8 *func_8028CFA0_de(void *, s32, s32);

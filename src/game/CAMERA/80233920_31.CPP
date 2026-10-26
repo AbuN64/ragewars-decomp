@@ -36,7 +36,6 @@ extern f32 Anim_GetPolygonHeight(s32 arg0, f32 arg1, f32 arg2);
 
 extern void *Scene_AllocateResource(int a, int b, int c, void *d);
 
-extern int D_800C32D0_de;
 
 void *Scene_AllocateResource(int a, int b, int c, void *d);
 

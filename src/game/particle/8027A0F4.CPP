@@ -140,8 +140,8 @@ block_21:
 #ifndef FIELD
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 #endif
-extern f32 D_800C4B78_de, D_800C4B7C_de, D_800C4B80_de, D_800C4B84_de, D_800C4B88_de, D_800C4B8C_de;
-extern f32 D_800C4B90_de, D_800C4B94_de, D_800C4B98_de, D_800C4B9C_de, D_800C4BA0_de, D_800C4BA4_de;
+extern f32 D_800C4B80_de, D_800C4B84_de, D_800C4B88_de, D_800C4B8C_de;
+extern f32 D_800C4B98_de, D_800C4B9C_de, D_800C4BA0_de, D_800C4BA4_de;
 extern char D_8011D8D0[];
 extern void func_8022B09C_de(void *, CVector3 *);
 extern void func_80283D50_de(void *);

@@ -61,7 +61,6 @@ void Render_SetCombineMode(u32 mode) {
 }
 
 
-extern s32 D_800CC364;
 
 
 
@@ -263,7 +262,6 @@ sw_mode_default:
 
 extern Gfx *g_displayListCursor;
 extern Gfx D_800CC018_de[], D_800CC0A0[];
-extern s32 D_800CC364;
 extern void System_ResetTextureCache(void);
 /* Emits a 16 by 16 intensity texture, white tint, matrix and the selected pass list. */
 void func_8026992C_de(void *matrix, s32 pass, u32 alpha) {
@@ -317,16 +315,7 @@ struct Shared_GfxMaterial {
 };
 
 extern Gfx *g_displayListCursor;
-extern s32 D_80110620;
 extern u32 D_800CD730;
-extern s32 D_800CC378;
-extern s32 D_800CC37C;
-extern u8 D_800CC3A8;
-extern u8 D_800CC3A9;
-extern u8 D_800CC3AA;
-extern u8 D_800CC3AB;
-extern u8 D_800CC3AC;
-extern u8 D_800CC3AD;
 
 void *func_80295F14_de(s32 *, s32);
 void func_80295F78_de(void *, struct Shared_AnimInfo *);
