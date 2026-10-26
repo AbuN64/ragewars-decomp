@@ -78,7 +78,7 @@ s32 Menu_UpdateSoundOptionsScreen(void) {
         options[-1] = value;
         track = 0;
         if ((u8)value >= 5) {
-            if (func_8025E2C4_de(0) != 0) {
+            if (func_8025E2C4_de() != 0) {
                 return 0;
             }
             track = 0x34;
