@@ -1,4 +1,3 @@
-
 #if defined(VERSION_DE)
 unsigned char D_auto_func_802AD368_de_padding_ADF68[8] = { 0x8F, 0xB9, 0x00, 0x14, 0x20, 0x0F, 0xFF, 0xFF };
 #endif
