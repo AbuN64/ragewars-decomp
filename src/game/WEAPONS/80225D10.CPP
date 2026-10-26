@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "include_asm.h"
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -24,7 +25,6 @@ typedef struct { u8 pad0[0x6C]; f32 yaw; u8 pad70[0x2E4]; f32 bodyYaw; u8 pad358
 extern f32 D_800C2AE0_de, D_800C2AE4_de, D_800C2AE8_de, D_800C2AEC_de, D_800C2AF0_de;
 
 extern void Weapons_UpdateViewAngles(void *, void *, void *);
-extern void Weapons_SetPlayerState(void *, void *, s32);
 
 void func_80225D34_de(TravelPlayer *player, void *body) {
     f32 yaw, targetYaw, distance, otherDistance, alternate, duration, t;

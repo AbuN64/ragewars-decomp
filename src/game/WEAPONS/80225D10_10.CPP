@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/OBJRECV5.H"
 #include "COMMON/VECTOR4F.H"
@@ -29,7 +30,6 @@ extern int Camera_IsSequenceActive(void);
 
 extern struct Shape_func_8021A2D4_de_2 D_801427FC;
 
-extern void Weapons_SetPlayerState(Node_Weapons_EndRound *arg0, Node_Weapons_EndRound *arg1, s32 arg2);
 
 extern void Render_FreeAllPoolNodes(s32 *);
 

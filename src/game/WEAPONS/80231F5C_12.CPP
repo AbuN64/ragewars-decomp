@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "WEAPONS/PLAYERRECAT1450V1.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "WEAPONS/MEASUREDRECAT1D8V3.H"
@@ -26,7 +27,6 @@ extern struct Shape_func_8020AF9C_de_2 D_80140FF8;
 
 
 
-extern void Weapons_SetPlayerState(void *, void *, s32);
 
 
 extern s16 func_8022F96C_de(void *arg0);

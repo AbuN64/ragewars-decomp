@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -138,7 +139,6 @@ s32 func_80222D64_de(void *context, s32 arg1) {
    enters state 0xA. Returns whether a state was entered. */
 
 extern f32 D_800C7948[];
-extern s32 Weapons_SetPlayerState(void *, void *, s32);
 
 
 

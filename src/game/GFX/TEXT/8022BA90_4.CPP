@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/OBJECTSTATE90.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -9,7 +10,6 @@
 #include "TYPES.H"
 #include "GFX/TEXT/8022BA90_4.H"
 
-extern void Weapons_SetPlayerState(void *, void *, s32);
 
 /* Initialises an object: clears the words at 0x8, 0x9C, 0xA4, 0xA8, 0xB4 and 0xB8, sets the words at
    0x0 and 0x4 to -1, writes the two constants at D_800C2D48_de into the floats at 0xAC and 0xB0, the two

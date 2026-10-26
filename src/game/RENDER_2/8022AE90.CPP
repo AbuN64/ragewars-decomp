@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/INTEGERSTATE1250.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/WORLD.H"
@@ -6,7 +7,6 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "TYPES.H"
-extern s32 Weapons_SetPlayerState(SharedPlayer *player, void *target, s32 state);
 
 extern void *func_8025C95C_de(void *, s32, CVector3 *, void *, s32);
 

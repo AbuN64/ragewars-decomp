@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "WEAPONS/PLAYERRECAT1450V1.H"
 #include "WEAPONS/MEASUREDRECAT1D8V2.H"
 #include "COMMON/VECTOR4F.H"
@@ -14,7 +15,6 @@ extern s32 func_802301F4_de();
 #include "WEAPONS/80213ED4.H"
 #include "COMMON/OBJB.H"
 extern void Items_ReleaseObjectHandles(ResourceHandleOwner *object);
-extern s32 Weapons_SetPlayerState(SharedPlayer *player, void *target, s32 state);
 
 extern s32 func_802301F4_de(void *, void *);
 

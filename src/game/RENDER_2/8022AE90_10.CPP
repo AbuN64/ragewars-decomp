@@ -1,8 +1,8 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/INTEGERSTATE1250.H"
 #include "TYPES.H"
 
-extern void Weapons_SetPlayerState(void *, void *, s32);
 
 
 

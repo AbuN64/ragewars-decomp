@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RESOURCELOADSTATE.H"
@@ -25,7 +26,6 @@ extern s32 func_80283228_de(void *, s32);
 
 extern s32 func_8024E62C_de(void *arg0);
 
-extern void Weapons_SetPlayerState(void *, void *, s32);
 
 
 

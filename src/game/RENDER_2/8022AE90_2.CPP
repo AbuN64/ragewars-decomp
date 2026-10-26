@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "include_asm.h"
 #include "COMMON/INTEGERSTATE1250.H"
 #include "RENDER_2/8022AE90.H"
@@ -10,7 +11,6 @@
 #include "RENDER_2/8025DE50_5.H"
 #include "particle/80271B18_3.H"
 
-extern unsigned int Weapons_SetPlayerState(void *arg0, void *arg1, s32 arg2);
 
 
 extern void func_802732D0_de(char *, f32 *);

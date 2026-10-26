@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/LONE/D_80103FCC.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -11,7 +12,6 @@ typedef struct Owner Owner;
 extern void *func_802833D0_de(void *arg0);
 extern s32 func_8022B178_de(void *arg0);
 extern void Weapons_GiveAmmoWithMessage(void *arg0, s32 arg1, s32 arg2);
-extern void Weapons_SetPlayerState(void *, void *, s32);
 
 
 

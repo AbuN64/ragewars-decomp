@@ -1,8 +1,8 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/INTEGERSTATE1250.H"
 #include "RENDER_2/8022AE90.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
-extern s32 Weapons_SetPlayerState(SharedPlayer *player, void *target, s32 state);
 
 void func_8022B9C4_de(void *actor) {
     if ((((struct IntegerState1218 *) ((s8 *) actor))->unk_1210) != 0) {

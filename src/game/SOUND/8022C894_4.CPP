@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/INTEGERSTATE244.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -22,7 +23,6 @@ extern void func_80218464_de();
 
 extern void func_80225F44_de(void *, void *);
 
-extern void Weapons_SetPlayerState(void *arg0, void *arg1, int arg2);
 
 void func_8022D60C_de(void *arg0) { func_8022D57C_de(arg0); }
 

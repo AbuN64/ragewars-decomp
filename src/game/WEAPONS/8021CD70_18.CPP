@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "TYPES.H"
@@ -27,7 +28,6 @@ extern void Weapons_UpdateViewAngles(SharedPlayer *, Body_func_80224F5C_de *, ch
 extern void func_802238E0_de(SharedPlayer *, Body_func_80224F5C_de *, Tuning *);
 extern void func_80218464_de(char *);
 extern s32 Render_PlaySoundAtPosition(s16, s32, s32, s32, s32, s32);
-extern void Weapons_SetPlayerState(SharedPlayer *, Body_func_80224F5C_de *, s32);
 
 
 void func_80224F5C_de(SharedPlayer *player, Body_func_80224F5C_de *body) {

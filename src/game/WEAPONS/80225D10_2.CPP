@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_80103FD0.H"
@@ -32,7 +33,6 @@
 #include "DATA/OVLDAT6/800CF230.H"
 
 extern void Camera_StartEmitter(char *, f32, f32, f32, f32, s32, Triple);
-extern void Weapons_SetPlayerState(SharedPlayer *, SharedPlayer *, s32);
 extern void Weapons_FillDamagePacket(Slot *, Held *, s32, f32, s32, s32);
 extern void func_80219A40_de(SharedPlayer *, char *, Slot *);
 

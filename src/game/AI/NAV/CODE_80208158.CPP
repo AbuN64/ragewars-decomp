@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/NAVIGATION_GRAPH.H"
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -27,7 +28,6 @@ extern void func_802095F8_de(Brain *);
 extern s32 Weapons_GetMaxHealth(SharedPlayer *);
 extern void func_802AA79C_de(char *, s32);
 extern void Fx_ClearControllerInput(char *);
-extern void Weapons_SetPlayerState(SharedPlayer *, SharedPlayer *, s32);
 extern void func_80209CD8_de(Brain *, SharedPlayer *);
 
 void func_80208158_de(Brain *brain) {

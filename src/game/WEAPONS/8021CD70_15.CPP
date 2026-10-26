@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -6,7 +7,6 @@
 #include "COMMON/WORLD.H"
 #include "TYPES.H"
 #include "COMMON/CHANNEL.H"
-extern s32 Weapons_SetPlayerState(void *, void *, s32);
 
 extern f32 D_800D2988;
 

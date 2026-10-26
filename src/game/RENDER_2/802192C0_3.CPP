@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "RENDER_2/802192C0_3.H"
 #include "include_asm.h"
 #include "COMMON/SHAREDPLAYER.H"
@@ -17,7 +18,6 @@
 #include "FX/802631D0.H"
 
 extern char D_8010F328[];
-extern void Weapons_SetPlayerState(void *, void *, s32);
 void func_8021A78C_de(void *arg0) {
     char *object = arg0;
     void *attributes;

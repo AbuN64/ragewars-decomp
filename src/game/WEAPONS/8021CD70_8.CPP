@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/GAMEPLAY_MOVEMENT.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/WORLD.H"
@@ -40,7 +41,6 @@ extern void func_80219480_de(void *, void *);
 extern void func_80219A40_de(void *, void *, void *);
 extern void Weapons_UpdatePlayerEffectLights(void *, void *);
 extern void func_80220D44_de(void *);
-extern s32 Weapons_SetPlayerState(void *, void *, s32);
 extern void func_80222908_de(void *, void *, ObjectState54 *);
 extern void func_80222EA4_de(void *, void *);
 extern void func_80222FE0_de(void *, void *, s32 *);

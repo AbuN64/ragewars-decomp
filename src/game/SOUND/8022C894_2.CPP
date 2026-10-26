@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/INTEGERSTATE244.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -27,7 +28,6 @@ extern void Weapons_UpdateViewAngles(void *, void *, void *);
 
 extern void func_802238E0_de(void *, void *, void *);
 
-extern s32 Weapons_SetPlayerState(void *, void *, s32);
 
 
 

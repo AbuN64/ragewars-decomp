@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "include_asm.h"
 #include "COMMON/INTEGERSTATE244.H"
@@ -22,7 +23,6 @@
 
 
 
-extern s32 Weapons_SetPlayerState(void *, void *, s32);
 
 
 

@@ -1,3 +1,4 @@
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "include_asm.h"
 #include "COMMON/UNUSED.H"
 #include "COMMON/VECTOR4F.H"
@@ -32,7 +33,6 @@ typedef struct {
 } StunProtectionRules;
 
 extern StunProtectionRules D_801468A0[];
-extern void Weapons_SetPlayerState(SharedPlayer *, SharedPlayer *, s32);
 
 extern void Camera_StartFade(ViewRecAt54D *, s32, s32, s32, s32, s32, s32, s32);
 
