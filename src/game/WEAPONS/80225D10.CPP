@@ -14,7 +14,6 @@ extern void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, Share
 extern s32 Nav_RequestActorState(void *arg0, void *arg1, s32 arg2);
 extern void GraphU64_TransformPoint(void *arg0, void *arg1, void *arg2);
 
-#if defined(VERSION_US_REV1) || defined(NON_MATCHING)
 #include "TYPES.H"
 #include "WEAPONS/80213ED4.H"
 #include "particle/80271B18_3.H"
@@ -67,9 +66,6 @@ void func_80225D34_de(TravelPlayer *player, void *body) {
     }
     Player_SetPlayerState(player, body, 2);
 }
-#else
-INCLUDE_ASM("span_1000", func_80225D34_de);
-#endif
 
 extern void Player_UpdateViewAngles(void *,void *,void *);
 extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
