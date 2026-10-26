@@ -82,9 +82,7 @@ extern void *Nav_FindSearchNode(char *, s32);
 
 extern void Nav_ReconstructSearchPath(void *arg0, void *arg1, s32 arg2);
 
-extern void *Nav_GetGraphPoint(void *, s32);
 
-extern void Nav_AddGoalNode(struct ObjNavAddGoalNode *, int);
 
 extern s32 Player_GetWeaponClassId(Player *, s32);
 

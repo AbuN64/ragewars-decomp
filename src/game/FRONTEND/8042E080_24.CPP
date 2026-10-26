@@ -104,9 +104,6 @@ void Frontend_StartFragTagMatch(void) {
 /* Applies the selected rule settings and refreshes the menu state. */
 
 
-extern void Frontend_InitGameStatus(f32,s32,s32,s32,s32,s32,s32);
-extern s32 Frontend_GetStageTransitionResource(void);
-extern void Ovlgame_StartMatchTransition(GameSession *, s32);
 void Frontend_StartCaptureTheFlagMatch(void) {
  Shared_Game *g=&D_801462C8;
  if(g->controllerMode != 0) Frontend_InitGameStatus((f32)D_800E4680->time,0,D_800E4680->score,D_800E4680->other,0,1,1);
@@ -117,9 +114,6 @@ void Frontend_StartCaptureTheFlagMatch(void) {
 /* Applies the selected rule settings and refreshes the menu state. */
 
 
-extern void Frontend_InitGameStatus(f32,s32,s32,s32,s32,s32,s32);
-extern s32 Frontend_GetStageTransitionResource(void);
-extern void Ovlgame_StartMatchTransition(GameSession *, s32);
 void Frontend_StartTeamMatch(void) {
  Shared_Game *g=&D_801462C8;
  if(g->controllerMode != 0) Frontend_InitGameStatus((f32)D_800E4680->time,D_800E4680->limit,D_800E4680->score,D_800E4680->other,0,1,0);
@@ -131,9 +125,6 @@ void Frontend_StartTeamMatch(void) {
 
 
 extern Active *D_800E4680;
-extern void Frontend_InitGameStatus(f32,s32,s32,s32,s32,s32,s32);
-extern s32 Frontend_GetStageTransitionResource(void);
-extern void Ovlgame_StartMatchTransition(GameSession *, s32);
 void Frontend_StartIndividualMatch(void) {
  Shared_Game *g=&D_801462C8;
  if(g->controllerMode != 0) Frontend_InitGameStatus((f32)D_800E4680->time,D_800E4680->score,D_800E4680->score,D_800E4680->other,0,0,0);

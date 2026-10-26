@@ -459,7 +459,6 @@ f32 Nav_EstimateGoalDistance(CNavData *graph, NavigationSearchNode *node)
 extern const f32 D_800C1D80_de;
 extern f32 D_800C1D84_de, D_800C1D88_de;
 extern f32 Nav_EstimateGoalDistance(CNavData *, NavigationSearchNode *);
-extern f32 GraphU64_GetPointDistance(f32 *, f32 *);
 
 static inline s32 navHasOpenNode(CNavData *graph, s32 status) {
     NavigationSearchNode *node = graph->nodes;

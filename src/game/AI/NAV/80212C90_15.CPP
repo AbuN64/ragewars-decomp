@@ -103,7 +103,6 @@ store_c:
 
 
 
-extern void *Nav_GetGraphPoint(void *, s32);
 
 
 
@@ -165,7 +164,6 @@ store_c:
 }
 
 
-extern void *Nav_GetGraphPoint(void *, s32);
 
 
 

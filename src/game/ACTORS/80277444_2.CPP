@@ -163,7 +163,6 @@ void Lighting_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, V
 }
 
 
-extern void GraphU64_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
 extern void GraphU64_TransformDirection(void *, void *, void *);
 void Lighting_AccumulateDirectionalLighting(Vertices38 *data, PackedMatrixWords *matrices, CVector3 *output, s32 skin) {
     CVector3 light;
