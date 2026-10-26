@@ -62,8 +62,6 @@ typedef struct ObjectState4C ObjectState4C;
 struct ObjRecAt8V3;
 typedef struct ObjRecAt8V3 ObjRecAt8V3;
 
-struct ResourceTable;
-typedef struct ResourceTable ResourceTable;
 
 struct DecodeResult_func_802AE6BC_de;
 struct DecodeResult_func_802AE6BC_de {
@@ -111,26 +109,8 @@ struct ObjectLinks54_2 {
 };
 
 
-struct RuntimeState;
-typedef struct RuntimeState RuntimeState;
 
-struct ValueSet;
-typedef struct ValueSet ValueSet;
 
-struct RuntimeState;
-struct RuntimeState {
-    void *resources;
-    u32 active;
-    u32 scale;
-    u32 total;
-    u32 previous;
-    u32 first;
-    u8 *objects[16];
-    u32 values[16];
-    u8 flags98[16];
-    u8 flagsA8[16];
-    u32 results[16];
-};
 
 struct InitParams;
 typedef struct InitParams InitParams;
@@ -176,16 +156,6 @@ struct ALCSeq_s {
 
 
 
-struct ValueSet;
-struct ValueSet {
-    char pad0[4];
-    u32 mask;
-    char pad8[8];
-    u32 amount;
-    s32 active;
-    char pad18[0xA0];
-    u32 values[16];
-};
 
 struct ObjectLinks4_5;
 struct ObjectLinks4_5 {
@@ -221,26 +191,7 @@ typedef struct ALCSeqMarker ALCSeqMarker;
 struct DecodeResult;
 typedef struct DecodeResult DecodeResult;
 
-struct ResourceTable;
-struct ResourceTable {
-    u32 entries[17];
-};
 
-struct ResourceTable;
-struct RuntimeStateRecAtB8;
-struct RuntimeStateRecAtB8 {
-    struct ResourceTable *resources;
-    u32 active;
-    f32 scale;
-    u32 unkC;
-    u32 unk10;
-    u32 one14;
-    void *objects[16];
-    u32 unk58[16];
-    s8 flags98[16];
-    s8 flagsA8[16];
-    u32 results[16];
-};
 
 extern double D_800C7328_de;
 
@@ -252,6 +203,4 @@ struct ObjectState4C {
     char unk_48;
 };
 
-struct RuntimeStateRecAtB8;
-typedef struct RuntimeStateRecAtB8 RuntimeStateRecAtB8;
 #endif

@@ -3,10 +3,10 @@
 #include "sdk/MEASUREDRECAT18.H"
 
 extern s32 func_802AE500_de(s32, s32);
-extern u32 __readVarLen(RuntimeState *, u32);
+extern u32 __readVarLen(ALCSeq_s *, u32);
 
 
-s32 func_802AE030_de(RuntimeState *state, u32 index, DecodeResult *result) {
+s32 func_802AE030_de(ALCSeq_s *state, u32 index, DecodeResult *result) {
     u8 first;
     u8 command;
     u32 first_value;
@@ -24,10 +24,10 @@ s32 func_802AE030_de(RuntimeState *state, u32 index, DecodeResult *result) {
             result->extra1 = func_802AE500_de(state, index);
             ((u8 *)&result->extra2)[0] = func_802AE500_de(state, index);
             ((u8 *)&result->extra2)[1] = func_802AE500_de(state, index);
-            state->flagsA8[index] = 0;
+            state->lastStatus[index] = 0;
         } else if (command_value == 0x2F) {
-            u32 active = state->active ^ (1U << index);
-            state->active = active;
+            u32 active = state->validTracks ^ (1U << index);
+            state->validTracks = active;
             if (active != 0) {
                 result->type = 0x12;
             } else {
@@ -36,7 +36,7 @@ s32 func_802AE030_de(RuntimeState *state, u32 index, DecodeResult *result) {
         } else if (command_value == 0x2E) {
             func_802AE500_de(state, index);
             func_802AE500_de(state, index);
-            state->flagsA8[index] = 0;
+            state->lastStatus[index] = 0;
             result->type = 0x13;
         } else if (command_value == 0x2D) {
             void *base;
@@ -76,7 +76,7 @@ s32 func_802AE030_de(RuntimeState *state, u32 index, DecodeResult *result) {
                                    (byte2 << 8) + byte3);
             }
             ((struct MeasuredRecAt18 *)(base))->value = next;
-            state->flagsA8[index] = 0;
+            state->lastStatus[index] = 0;
             result->type = 0x14;
         }
     } else {
@@ -84,9 +84,9 @@ s32 func_802AE030_de(RuntimeState *state, u32 index, DecodeResult *result) {
         if (first & 0x80) {
             result->status = first;
             result->first_data = func_802AE500_de(state, index);
-            state->flagsA8[index] = first;
+            state->lastStatus[index] = first;
         } else {
-            u8 running_status = state->flagsA8[index];
+            u8 running_status = state->lastStatus[index];
             result->first_data = first;
             result->status = running_status;
         }

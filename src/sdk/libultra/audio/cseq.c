@@ -9,7 +9,7 @@
 #include "include_asm.h"
 #include "sdk/libgultra_inferred/802B3AFC.H"
 
-s32 __readVarLen(s32 arg0, s32 arg1);
+s32 __readVarLen(ALCSeq_s *seq, s32 track);
 extern u32 func_802AE030_de(ALCSeq_s *, u32, ALEvent *);
 
 /* alCSeqNewMarker, drafted from ultralib src/audio/cseq.c: fill a compressed-sequence marker
@@ -149,41 +149,41 @@ u8 func_802AE500_de(ALCSeq_s *seq, u32 track)
     return theByte;
 }
 
-void func_802AE5B8_de(RuntimeStateRecAtB8 *state, u32 base) {
+void func_802AE5B8_de(ALCSeq_s *state, ALCMidiHdr *base) {
     f64 converted;
     s32 count;
     u32 entry;
     u32 i;
 
     i = 0;
-    state->resources = (ResourceTable *)base;
-    state->active = 0;
-    state->unk10 = 0;
-    state->unkC = 0;
-    state->one14 = 1;
+    state->base = base;
+    state->validTracks = 0;
+    state->lastDeltaTicks = 0;
+    state->lastTicks = 0;
+    state->deltaFlag = 1;
     do {
-        state->flagsA8[i] = 0;
-        state->unk58[i] = 0;
-        state->flags98[i] = 0;
-        entry = state->resources->entries[i];
+        state->lastStatus[i] = 0;
+        state->curBUPtr[i] = 0;
+        state->curBULen[i] = 0;
+        entry = state->base->trackOffset[i];
         if (entry != 0) {
-            state->active |= 1U << i;
-            state->objects[i] = (void *)(base + entry);
-            state->results[i] = __readVarLen((ALCSeq_s *)state, i);
+            state->validTracks |= 1U << i;
+            state->curLoc[i] = (u8 *)base + entry;
+            state->evtDeltaTicks[i] = __readVarLen(state, i);
         } else {
-            state->objects[i] = 0;
+            state->curLoc[i] = 0;
         }
         i++;
     } while (i < 16U);
-    count = state->resources->entries[16];
+    count = state->base->division;
     converted = (f64)count;
     if (count < 0) {
         converted += D_800C7300_de;
     }
-    state->scale = D_800C7308_de / (f32)converted;
+    state->qnpt = D_800C7308_de / (f32)converted;
 }
 
-void func_802AE6BC_de(RuntimeState *state, DecodeResult_func_802AE6BC_de *result) {
+void func_802AE6BC_de(ALCSeq_s *state, DecodeResult_func_802AE6BC_de *result) {
     u32 minimum;
     u32 index;
     u32 selected;
@@ -191,31 +191,31 @@ void func_802AE6BC_de(RuntimeState *state, DecodeResult_func_802AE6BC_de *result
 
     minimum = -1;
     index = 0;
-    decrement = state->previous;
+    decrement = state->lastDeltaTicks;
     do {
-        if ((state->active >> index) & 1) {
-            if (state->first != 0) {
-                state->results[index] -= decrement;
+        if ((state->validTracks >> index) & 1) {
+            if (state->deltaFlag != 0) {
+                state->evtDeltaTicks[index] -= decrement;
             }
-            if (state->results[index] < minimum) {
-                minimum = state->results[index];
+            if (state->evtDeltaTicks[index] < minimum) {
+                minimum = state->evtDeltaTicks[index];
                 selected = index;
             }
         }
         index++;
     } while (index < 16);
 
-    func_802AE030_de((ALCSeq_s *)state, selected, (ALEvent *)result);
+    func_802AE030_de(state, selected, (ALEvent *)result);
     result->value = minimum;
-    state->previous = minimum;
-    state->total += minimum;
+    state->lastDeltaTicks = minimum;
+    state->lastTicks += minimum;
     if (result->type != 0x12) {
         u32 delta;
 
-        delta = __readVarLen((ALCSeq_s *)state, selected);
-        state->results[selected] += delta;
+        delta = __readVarLen(state, selected);
+        state->evtDeltaTicks[selected] += delta;
     }
-    state->first = 1;
+    state->deltaFlag = 1;
 }
 
 int func_802AE7B0_de(void *arg0) {
@@ -313,36 +313,36 @@ void func_802AE93C_de(ALCSeq_s *src, ALCSeqMarker *dst) {
     }
 }
 
-s32 func_802AE9B0_de(ValueSet *set, u32 *result) {
+s32 func_802AE9B0_de(ALCSeq_s *seq, u32 *result) {
     u32 amount;
     u32 minimum;
     u32 i;
 
-    amount = set->amount;
+    amount = seq->lastDeltaTicks;
     minimum = -1;
-    if (set->mask == 0) {
+    if (seq->validTracks == 0) {
         return 0;
     }
 
     for (i = 0; i < 16; i++) {
-        if ((set->mask >> i) & 1) {
-            if (set->active != 0) {
-                set->values[i] -= amount;
+        if ((seq->validTracks >> i) & 1) {
+            if (seq->deltaFlag != 0) {
+                seq->evtDeltaTicks[i] -= amount;
             }
-            if (set->values[i] < minimum) {
-                minimum = set->values[i];
+            if (seq->evtDeltaTicks[i] < minimum) {
+                minimum = seq->evtDeltaTicks[i];
             }
         }
     }
 
-    set->active = 0;
+    seq->deltaFlag = 0;
     *result = minimum;
     return 1;
 }
 
 u8 func_802AE500_de(ALCSeq_s *seq, u32 track);
 
-s32 __readVarLen(s32 seq, s32 track) {
+s32 __readVarLen(ALCSeq_s *seq, s32 track) {
     s32 temp_v0;
     s32 decodedValue;
 
