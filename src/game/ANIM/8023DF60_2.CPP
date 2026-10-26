@@ -43,7 +43,7 @@ static inline s32 accepts(Ray_func_8023E178_de *ray, Polygon_func_8023E178_de *p
     return 1;
 }
 
-extern Output *D_80103FCC;
+extern CCollisionResults *D_80103FCC;
 
 s32 func_8023E178_de(Ray_func_8023E178_de *ray, CVector3 *center, f32 radius, f32 top, f32 bottom, s32 clip, Polygon_func_8023E178_de *poly, s32 keep) {
     CVector3 delta;

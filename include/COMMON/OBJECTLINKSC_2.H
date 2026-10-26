@@ -33,10 +33,10 @@ struct IntegerState90;
 
 extern float D_800C61B8_de;
 
-struct Mover;
-typedef struct Mover Mover;
+struct COverlay;
+typedef struct COverlay COverlay;
 
-struct Mover;
+struct COverlay;
 
 extern float D_800C61F0_de;
 

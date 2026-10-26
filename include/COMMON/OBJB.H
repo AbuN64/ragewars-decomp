@@ -44,8 +44,8 @@ typedef struct func_8044B27C_S1 func_8044B27C_S1;
 
 
 
-struct Bucket;
-typedef struct Bucket Bucket;
+struct CActiveLink;
+typedef struct CActiveLink CActiveLink;
 
 struct SceneRecAt1B2B4;
 typedef struct SceneRecAt1B2B4 SceneRecAt1B2B4;
@@ -57,10 +57,10 @@ typedef struct CDLight_t CDLight;
 
 typedef IntrusiveList ListRec;
 
-struct Bucket;
-struct Bucket {
-    struct Bucket *prev;
-    struct Bucket *next;
+struct CActiveLink;
+struct CActiveLink {
+    struct CActiveLink *prev;
+    struct CActiveLink *next;
     struct Record14 *object;
     f32 remaining;
 };
@@ -143,7 +143,7 @@ struct WorldRecAt1B40C {
     struct Face *edges;
     IntrusiveList listA;
     IntrusiveList listB;
-    Bucket buckets[0x30];
+    CActiveLink buckets[0x30];
     char pad1500[0x1B40C - 0x1500];
     s32 group;
 };

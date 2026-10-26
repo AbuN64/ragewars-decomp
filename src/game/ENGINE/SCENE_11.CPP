@@ -70,17 +70,17 @@ s32 Scene_QueueTriggerTimer(WorldRecAt1B40C *arg0, Record14 *arg1) {
     if (rec != 0) {
         func_80255ED8_de(&arg0->listB, rec);
         func_80255CB8_de(&arg0->listA, rec);
-        ((Bucket *)(rec))->object = arg1;
+        ((CActiveLink *)(rec))->object = arg1;
     } else {
         rec = arg0->listA.tail;
-        Link_DispatchTrigger(((Bucket *)(rec))->object);
-        ((Bucket *)(rec))->object = arg1;
+        Link_DispatchTrigger(((CActiveLink *)(rec))->object);
+        ((CActiveLink *)(rec))->object = arg1;
     }
     val = recordValue((s32) arg1->lifetime);
-    ((Bucket *)(rec))->remaining = val;
+    ((CActiveLink *)(rec))->remaining = val;
     flag = arg1->flags & 2;
     if (flag != 0) {
-        ((Bucket *)(rec))->remaining = val * D_800C52E8_de;
+        ((CActiveLink *)(rec))->remaining = val * D_800C52E8_de;
     }
     return flag;
 }
@@ -108,12 +108,12 @@ void Scene_UpdateTriggerTimers(void *arg0) {
     if (node != 0) {
         zero = 0.0f;
         do {
-            object = ((Bucket *)(node))->object;
-            next = ((Bucket *)(node))->next;
+            object = ((CActiveLink *)(node))->object;
+            next = ((CActiveLink *)(node))->next;
             expired = remove;
             if (((Record14 *)(object))->flags & 2) {
-                value = ((Bucket *)(node))->remaining - D_800D2988;
-                ((Bucket *)(node))->remaining = value;
+                value = ((CActiveLink *)(node))->remaining - D_800D2988;
+                ((CActiveLink *)(node))->remaining = value;
                 if (value <= zero) {
                     expired = 1;
                     remove = 1;

@@ -45,7 +45,7 @@ extern f32 D_800CB3B0;
 
 void OnScreen_InitMover(void *arg0, s16 arg1, s16 arg2)
 {
-  Mover *mover = arg0;
+  COverlay *mover = arg0;
   mover->handle = -1;
   mover->active = 0;
   mover->state = 0;

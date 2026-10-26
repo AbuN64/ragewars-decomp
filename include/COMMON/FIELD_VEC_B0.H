@@ -60,8 +60,8 @@ struct s_CTargetInfo {
 
 
 
-struct OffsetResult;
-struct OffsetResult {
+struct CAIMovementInfo;
+struct CAIMovementInfo {
     CVector3 first;
     CVector3 first_normalized;
     f32 first_length;
@@ -244,8 +244,8 @@ struct DestBarrelUpdateActorController {
 struct ObjectLinks1230;
 typedef struct ObjectLinks1230 ObjectLinks1230;
 
-struct OffsetResult;
-typedef struct OffsetResult OffsetResult;
+struct CAIMovementInfo;
+typedef struct CAIMovementInfo CAIMovementInfo;
 
 
 

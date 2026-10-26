@@ -14,7 +14,7 @@ extern f32 Math_Sqrtf(f32);
 
 
 
-void Barrel_ComputeTargetOffset(Player *player, ActorMotionState *motionState, OffsetResult *result) {
+void Barrel_ComputeTargetOffset(Player *player, ActorMotionState *motionState, CAIMovementInfo *result) {
     GraphU64_SubtractVectors(&result->first, &player->pos,
                   &motionState->position);
     result->first_normalized = result->first;

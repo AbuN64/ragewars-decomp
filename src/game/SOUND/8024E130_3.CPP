@@ -97,7 +97,7 @@ void *func_8024E6A0_de(struct ItemCode8024E130 *item) {
 }
 
 void InstHdr_GetActorTargetOffset(u8 *arg0, void *vector) {
-    OffsetResult offset;
+    CAIMovementInfo offset;
 
     if (*arg0 == 1) {
         Barrel_ComputeTargetOffset(arg0, arg0 + 0x170, &offset);
@@ -110,7 +110,7 @@ void InstHdr_GetActorTargetOffset(u8 *arg0, void *vector) {
 }
 
 f32 InstHdr_GetActorTargetHeight(u8 *arg0) {
-    OffsetResult offset;
+    CAIMovementInfo offset;
     if (*arg0 == 1) {
         Barrel_ComputeTargetOffset(arg0, arg0 + 0x170, &offset);
         return offset.height;

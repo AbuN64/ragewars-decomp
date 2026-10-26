@@ -35,7 +35,7 @@ extern void Geometry_SetCombineMode(s32 arg0);
 
 extern s32 Geometry_SetModePreset(s32);
 
-void OnScreen_UpdateMoverScript(Mover *m) {
+void OnScreen_UpdateMoverScript(COverlay *m) {
     s32 next;
     f32 dx;
     f32 dy;

@@ -19,7 +19,7 @@ struct IntegerState90 {
     s32 unk_88;
     s32 unk_8C;
 };
-struct Mover {
+struct COverlay {
     s32 active;
     s32 *script;
     s32 state;

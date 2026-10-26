@@ -3,8 +3,8 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct Output;
-typedef struct Output Output;
+struct CCollisionResults;
+typedef struct CCollisionResults CCollisionResults;
 
 struct World;
 
@@ -170,8 +170,8 @@ struct Range {
 
 
 struct Instance;
-struct Output;
-struct Output {
+struct CCollisionResults;
+struct CCollisionResults {
     struct Instance *instance0;
     s32 instanceValue4;
     Triple vec8;
