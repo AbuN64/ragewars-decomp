@@ -34,7 +34,7 @@
 
 extern char D_801011B8[];
 
-extern void func_8023CB60_de(Field_void_4 *base, Slot_func_8023B9C0_eu *slot);
+extern void Virtual_AppendPageChainNode(Field_void_4 *base, SlotVirtualInitializePagerEuroExtended *slot);
 extern void func_8025637C_de(void *dst, void *rom, void *size, u32 extra);
 extern u32 System_GetMemorySize(void);
 extern void func_802AD370_de(s32 arg0, s32 arg1, s32 arg2, u32 addr, s32 arg4, s32 arg5);
@@ -51,7 +51,7 @@ static inline void fill(void *dst, u8 value, s32 n) {
     }
 }
 
-void func_8023B9C0_eu(void) {
+void Virtual_InitializePagerEuroExtended(void) {
     u32 extra;
     u32 i;
 
@@ -73,7 +73,7 @@ void func_8023B9C0_eu(void) {
     for (i = 0; i < 24; i++) {
         D_800FF230.slots[i].a = 0;
         D_800FF230.slots[i].b = 0;
-        func_8023CB60_de((Field_void_4 *)&D_800FF230.head, &D_800FF230.slots[i]);
+        Virtual_AppendPageChainNode((Field_void_4 *)&D_800FF230.head, &D_800FF230.slots[i]);
         D_800FF230.slots[i].index = i;
     }
     osCreateMesgQueue(&D_800FF230.completion, D_800FF230.list0Data, 0x21);
@@ -103,14 +103,14 @@ void func_8023B9C0_eu(void) {
     osStartThread(D_800FF230.queue);
 }
 #else
-INCLUDE_ASM("span_1000", func_8023B9C0_eu);
+INCLUDE_ASM("span_1000", Virtual_InitializePagerEuroExtended);
 #endif
 #endif
 
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 /* Fuzzy draft: inline-asm carrier of the original instructions (no C written yet). */
-void func_8023B9B0_de(void) {
+void Virtual_InitializePagerGerman(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
@@ -193,7 +193,7 @@ void func_8023B9B0_de(void) {
         "lui        $at, %hi(D_8010FB54)\n"
         "addu       $at, $at, $s0\n"
         "sw         $zero, %lo(D_8010FB54)($at)\n"
-        "jal        func_8023CB60_de\n"
+        "jal        Virtual_AppendPageChainNode\n"
         "addu      $a1, $s2, $zero\n"
         "lui        $at, %hi(D_8010FB5A)\n"
         "addu       $at, $at, $s0\n"
@@ -303,7 +303,7 @@ void func_8023B9B0_de(void) {
     );
 }
 #else
-INCLUDE_ASM("span_1000", func_8023B9B0_de);
+INCLUDE_ASM("span_1000", Virtual_InitializePagerGerman);
 #endif
 #endif
 
@@ -328,7 +328,7 @@ static __inline__ void writeLink(ResourcePageMapping **where, ResourcePageMappin
 
 
 
-int func_8023BC74_de(void) {
+int Virtual_RecycleTlbSlot(void) {
     u16 previous;
     s16 index;
     previous = D_800FFFA0[0];
@@ -348,7 +348,7 @@ int func_8023BC74_de(void) {
     return index;
 }
 
-void func_8023BD34_de(s16 flags, ResourcePageMapping *item, s32 unused, u8 *out) {
+void Virtual_MapResourcePage(s16 flags, ResourcePageMapping *item, s32 unused, u8 *out) {
     extern void func_802AD370_de(s32, s32, s32, u32, s32, s32);
     u8 *pair;
     s32 mapped;
@@ -365,7 +365,7 @@ void func_8023BD34_de(s16 flags, ResourcePageMapping *item, s32 unused, u8 *out)
         slot = D_800FFB5B.marks[pair[1] * 16];
         D_80103F28[(s16)slot].team = item->index;
     } else {
-        slot = func_8023BC74_de();
+        slot = Virtual_RecycleTlbSlot();
         if (flags & 1) {
             D_80103F28[(s16)slot].slot = item->index;
             if (pair[0] != 0xFF) {
@@ -413,7 +413,7 @@ void func_8023BD34_de(s16 flags, ResourcePageMapping *item, s32 unused, u8 *out)
         D_80103F28[(s16)slot].slot != 0xFF ? ((u32)&D_8014E000 & 0x3FFFFFF) + (D_80103F28[(s16)slot].slot << 12) : -1, 7);
 }
 
-void func_8023C084_de(ResourcePageMapping *mapping) {
+void Virtual_UnmapResourcePage(ResourcePageMapping *mapping) {
     extern void func_802AD370_de(s32, s32, s32, u32, s32, s32);
     s32 slot;
 
@@ -447,7 +447,7 @@ void func_8023C084_de(ResourcePageMapping *mapping) {
 extern s32 D_800CB3F8_de;
 extern f32 D_800C3610_de, D_800C3614_de, D_800C3618_de, D_800C361C_de;
 u64 func_802BADC0_de(void);
-void *func_8023CBC0_de(u16);
+void *Virtual_FindRegionForPage(u16);
 void osWritebackDCacheAll(void);
 void func_802BD170_de(s32);
 void osStartThread(void *);
@@ -510,7 +510,7 @@ void Virtual_HandleResourcePageRequest(void) {
                 mapping = &D_800FF230.slots[*slot].chain;
                 if (mapping->slot == 0xFF) {
                     detachPage(mapping);
-                    func_8023BD34_de(page, mapping, thread->slot, slot);
+                    Virtual_MapResourcePage(page, mapping, thread->slot, slot);
                     appendPage((Field_void_4 *)&D_800FFE20, mapping);
                 }
                 thread->state = 2;
@@ -523,9 +523,9 @@ void Virtual_HandleResourcePageRequest(void) {
             job->size = 4096;
             mapping = oldestPage((PageList *)&D_800FFE20);
             detachPage(mapping);
-            func_8023C084_de(mapping);
+            Virtual_UnmapResourcePage(mapping);
             if (mapping->id != 0xFFFF) {
-                Region *previousRegion = func_8023CBC0_de(mapping->id);
+                Region *previousRegion = Virtual_FindRegionForPage(mapping->id);
                 previousRegion->map[mapping->id - previousRegion->start] = 0xFF;
                 mapping->id = 0xFFFF;
             }

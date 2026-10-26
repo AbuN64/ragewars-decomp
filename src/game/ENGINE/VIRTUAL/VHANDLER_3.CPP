@@ -30,7 +30,7 @@ void **Scene_AllocateResource(s32 arg0, s32 arg1, s32 arg2, void *arg3);
 
 
 
-void func_8023C6BC_de(void) {
+void Virtual_UpdatePagerStatistics(void) {
     u32 var_a2;
     u32 var_a3;
     s32 var_a1;
@@ -77,11 +77,11 @@ void func_8023C6BC_de(void) {
     __builtin_memcpy(&out[-1], &D_800FFE20->unkC, sizeof(s32));
 }
 
-void func_8023C750_de(void) {
+void Virtual_MapBootstrapAddressRange(void) {
     func_802AD370_de(0x1F, 0x1FE000, 0x200000, 0, 0x100000, 7);
 }
 
-void *func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2)
+void *Virtual_AllocateVirtualRegion(s32 arg0, s32 arg1_unused, s32 arg2)
 {
   char sp10[0x18];
   int new_var2;
@@ -114,9 +114,9 @@ void *func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2)
   return sp3C;
 }
 
-void func_8023C85C_de(s32 arg0) {
+void Virtual_FreeVirtualRegion(s32 arg0) {
     char sp10[0x18];
-    Block_func_8023C85C_de block;
+    BlockVirtualFreeVirtualRegion block;
     s32 sp38;
     void *sp3C;
 
@@ -129,20 +129,20 @@ void func_8023C85C_de(s32 arg0) {
     Scene_ReleaseResource(0, ((Draw *)(sp3C))->model);
 }
 
-void func_8023C8D4_de(struct PagerCounters *arg0) {
+void Virtual_GetPagerCounters(struct PagerCounters *arg0) {
     *arg0 = D_800FF230.counters;
 }
 
 /* Resource manager thread setup and loop: fills a 0x200-byte stack with a marker, creates and starts the
  * thread object at D_80103720 (entry D_0023CA24, stack top D_800FFB50), then forever receives request
- * messages and dispatches on the request type to Virtual_HandleResourcePageRequest, Sched_FinishPageJob, func_8023CCD4_de or
- * func_8023CDD4_de. */
+ * messages and dispatches on the request type to Virtual_HandleResourcePageRequest, Sched_FinishPageJob, Virtual_ReleaseVirtualRegion or
+ * Virtual_AssignVirtualRegion. */
 extern char D_0023CA24[];
 extern void osCreateThread(void *, s32, void *, void *, void *, s32);
 extern void osStartThread(void *);
 extern void Sched_FinishPageJob(struct ResourcePageJob *job);
 
-void func_8023C924_de(void) {
+void Virtual_RunPagerDispatcher(void) {
     OSMesg request;
 
     Resmgr_FillMemory(D_800FF230.pool2, 0x62, sizeof(D_800FF230.pool2));
@@ -158,10 +158,10 @@ void func_8023C924_de(void) {
             Sched_FinishPageJob(request);
             break;
         case 3:
-            func_8023CDD4_de(request);
+            Virtual_AssignVirtualRegion(request);
             break;
         case 2:
-            func_8023CCD4_de(request);
+            Virtual_ReleaseVirtualRegion(request);
             break;
         }
     }
@@ -176,7 +176,7 @@ extern void func_802BD010_de(void *addr, s32 size);
 /* Resource page reader thread: takes page jobs from the pending queue, reads the page from the cartridge
  * into its slot of the page array, writes the data cache back and invalidates the instruction cache, then
  * returns the job to the manager. */
-void func_8023CA14_de(void *unused) {
+void Virtual_RunPageLoadWorker(void *unused) {
     OSMesgQueue queue;
     OSMesg queueMessage;
     OSMesg message;
@@ -201,7 +201,7 @@ typedef struct PageChain {
 } PageChain;
 
 /* Unlinks a mapping from a doubly linked chain. */
-void func_8023CB0C_de(PageChain *list, ResourcePageMapping *node) {
+void Virtual_RemovePageChainNode(PageChain *list, ResourcePageMapping *node) {
     if (node->prev != 0) {
         node->prev->next = node->next;
     } else {

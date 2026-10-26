@@ -30,59 +30,59 @@ s32 func_80255D14_de(IntrusiveList *list, void *node) {
     return count;
 }
 
-void func_80255D70_de(void *arg0, s32 arg1, s32 arg2) {
-    char *o = (char *) arg0;
-    s32 next = *(s32 *) (arg1 + ((IntrusiveList *)o)->prevOffset);
+void func_80255D70_de(void *list, s32 anchorNode, s32 insertedNode) {
+    char *o = (char *) list;
+    s32 next = *(s32 *) (anchorNode + ((IntrusiveList *)o)->prevOffset);
     s32 v0;
 
     if (next != 0) {
         s32 off8;
-        *(s32 *) (next + ((IntrusiveList *)o)->nextOffset) = arg2;
+        *(s32 *) (next + ((IntrusiveList *)o)->nextOffset) = insertedNode;
         off8 = ((IntrusiveList *)o)->prevOffset;
-        *(s32 *) (arg2 + off8) = *(s32 *) (arg1 + off8);
-        *(s32 *) (arg1 + ((IntrusiveList *)o)->prevOffset) = arg2;
-        *(s32 *) (arg2 + ((IntrusiveList *)o)->nextOffset) = arg1;
+        *(s32 *) (insertedNode + off8) = *(s32 *) (anchorNode + off8);
+        *(s32 *) (anchorNode + ((IntrusiveList *)o)->prevOffset) = insertedNode;
+        *(s32 *) (insertedNode + ((IntrusiveList *)o)->nextOffset) = anchorNode;
         v0 = ((IntrusiveList *)o)->count + 1;
     } else {
         s32 tail = ((IntrusiveList *)o)->head;
         if (tail != 0) {
-            *(s32 *) (arg2 + ((IntrusiveList *)o)->nextOffset) = tail;
-            *(s32 *) (((IntrusiveList *)o)->head + ((IntrusiveList *)o)->prevOffset) = arg2;
+            *(s32 *) (insertedNode + ((IntrusiveList *)o)->nextOffset) = tail;
+            *(s32 *) (((IntrusiveList *)o)->head + ((IntrusiveList *)o)->prevOffset) = insertedNode;
         } else {
-            *(s32 *) (arg2 + ((IntrusiveList *)o)->nextOffset) = 0;
-            ((IntrusiveList *)o)->tail = arg2;
+            *(s32 *) (insertedNode + ((IntrusiveList *)o)->nextOffset) = 0;
+            ((IntrusiveList *)o)->tail = insertedNode;
         }
-        *(s32 *) (arg2 + ((IntrusiveList *)o)->prevOffset) = 0;
-        ((IntrusiveList *)o)->head = arg2;
+        *(s32 *) (insertedNode + ((IntrusiveList *)o)->prevOffset) = 0;
+        ((IntrusiveList *)o)->head = insertedNode;
         v0 = ((IntrusiveList *)o)->count + 1;
     }
     ((IntrusiveList *)o)->count = v0;
 }
 
-void func_80255E24_de(void *arg0, s32 arg1, s32 arg2) {
-    char *o = (char *) arg0;
-    s32 next = *(s32 *) (arg1 + ((IntrusiveList *)o)->nextOffset);
+void func_80255E24_de(void *list, s32 anchorNode, s32 insertedNode) {
+    char *o = (char *) list;
+    s32 next = *(s32 *) (anchorNode + ((IntrusiveList *)o)->nextOffset);
     s32 v0;
 
     if (next != 0) {
         s32 offC;
-        *(s32 *) (next + ((IntrusiveList *)o)->prevOffset) = arg2;
+        *(s32 *) (next + ((IntrusiveList *)o)->prevOffset) = insertedNode;
         offC = ((IntrusiveList *)o)->nextOffset;
-        *(s32 *) (arg2 + offC) = *(s32 *) (arg1 + offC);
-        *(s32 *) (arg1 + ((IntrusiveList *)o)->nextOffset) = arg2;
-        *(s32 *) (arg2 + ((IntrusiveList *)o)->prevOffset) = arg1;
+        *(s32 *) (insertedNode + offC) = *(s32 *) (anchorNode + offC);
+        *(s32 *) (anchorNode + ((IntrusiveList *)o)->nextOffset) = insertedNode;
+        *(s32 *) (insertedNode + ((IntrusiveList *)o)->prevOffset) = anchorNode;
         v0 = ((IntrusiveList *)o)->count + 1;
     } else {
         s32 head = ((IntrusiveList *)o)->tail;
         if (head != 0) {
-            *(s32 *) (arg2 + ((IntrusiveList *)o)->prevOffset) = head;
-            *(s32 *) (((IntrusiveList *)o)->tail + ((IntrusiveList *)o)->nextOffset) = arg2;
+            *(s32 *) (insertedNode + ((IntrusiveList *)o)->prevOffset) = head;
+            *(s32 *) (((IntrusiveList *)o)->tail + ((IntrusiveList *)o)->nextOffset) = insertedNode;
         } else {
-            *(s32 *) (arg2 + ((IntrusiveList *)o)->prevOffset) = 0;
-            ((IntrusiveList *)o)->head = arg2;
+            *(s32 *) (insertedNode + ((IntrusiveList *)o)->prevOffset) = 0;
+            ((IntrusiveList *)o)->head = insertedNode;
         }
-        *(s32 *) (arg2 + ((IntrusiveList *)o)->nextOffset) = 0;
-        ((IntrusiveList *)o)->tail = arg2;
+        *(s32 *) (insertedNode + ((IntrusiveList *)o)->nextOffset) = 0;
+        ((IntrusiveList *)o)->tail = insertedNode;
         v0 = ((IntrusiveList *)o)->count + 1;
     }
     ((IntrusiveList *)o)->count = v0;
@@ -112,96 +112,96 @@ void func_80255ED8_de(void *list, void *node) {
 }
 
 /** Advance the cursor by its stride and decrement its remaining count. */
-void func_80255F70_de(IntrusiveList *arg0) {
-    char *cursor = arg0->head;
-    int stride = arg0->nextOffset;
+void func_80255F70_de(IntrusiveList *list) {
+    char *cursor = list->head;
+    int stride = list->nextOffset;
     int value = *(int *)(cursor + stride);
-    int count = arg0->count - 1;
-    arg0->count = count;
-    arg0->head = value;
+    int count = list->count - 1;
+    list->count = count;
+    list->head = value;
 }
 
 /** Advance the cursor by its stride and decrement its remaining count. */
-void func_80255F94_de(IntrusiveList *arg0) {
-    char *cursor = arg0->tail;
-    int stride = arg0->prevOffset;
+void func_80255F94_de(IntrusiveList *list) {
+    char *cursor = list->tail;
+    int stride = list->prevOffset;
     int value = *(int *)(cursor + stride);
-    int count = arg0->count - 1;
-    arg0->count = count;
-    arg0->tail = value;
+    int count = list->count - 1;
+    list->count = count;
+    list->tail = value;
 }
 
-void func_80255FB8_de(void *arg0, s32 arg1) {
-    char *o = (char *)arg0;
+void func_80255FB8_de(void *list, s32 nodeToMove) {
+    char *o = (char *)list;
     s32 next;
     s32 prev;
     s32 head;
 
-    next = *(s32 *)(arg1 + ((IntrusiveList *)o)->prevOffset);
+    next = *(s32 *)(nodeToMove + ((IntrusiveList *)o)->prevOffset);
     if (next != 0) {
         s32 off = ((IntrusiveList *)o)->nextOffset;
-        *(s32 *)(next + off) = *(s32 *)(arg1 + off);
+        *(s32 *)(next + off) = *(s32 *)(nodeToMove + off);
     }
-    prev = *(s32 *)(arg1 + ((IntrusiveList *)o)->nextOffset);
+    prev = *(s32 *)(nodeToMove + ((IntrusiveList *)o)->nextOffset);
     if (prev != 0) {
         s32 off = ((IntrusiveList *)o)->prevOffset;
-        *(s32 *)(prev + off) = *(s32 *)(arg1 + off);
+        *(s32 *)(prev + off) = *(s32 *)(nodeToMove + off);
     }
-    if (((IntrusiveList *)o)->head == arg1) {
-        ((IntrusiveList *)o)->head = *(s32 *)(arg1 + ((IntrusiveList *)o)->nextOffset);
+    if (((IntrusiveList *)o)->head == nodeToMove) {
+        ((IntrusiveList *)o)->head = *(s32 *)(nodeToMove + ((IntrusiveList *)o)->nextOffset);
     }
-    if (((IntrusiveList *)o)->tail == arg1) {
-        ((IntrusiveList *)o)->tail = *(s32 *)(arg1 + ((IntrusiveList *)o)->prevOffset);
+    if (((IntrusiveList *)o)->tail == nodeToMove) {
+        ((IntrusiveList *)o)->tail = *(s32 *)(nodeToMove + ((IntrusiveList *)o)->prevOffset);
     }
     ((IntrusiveList *)o)->count = ((IntrusiveList *)o)->count - 1;
 
     head = ((IntrusiveList *)o)->head;
     if (head != 0) {
-        *(s32 *)(arg1 + ((IntrusiveList *)o)->nextOffset) = head;
-        *(s32 *)(((IntrusiveList *)o)->head + ((IntrusiveList *)o)->prevOffset) = arg1;
+        *(s32 *)(nodeToMove + ((IntrusiveList *)o)->nextOffset) = head;
+        *(s32 *)(((IntrusiveList *)o)->head + ((IntrusiveList *)o)->prevOffset) = nodeToMove;
     } else {
-        *(s32 *)(arg1 + ((IntrusiveList *)o)->nextOffset) = 0;
-        ((IntrusiveList *)o)->tail = arg1;
+        *(s32 *)(nodeToMove + ((IntrusiveList *)o)->nextOffset) = 0;
+        ((IntrusiveList *)o)->tail = nodeToMove;
     }
-    *(s32 *)(arg1 + ((IntrusiveList *)o)->prevOffset) = 0;
-    ((IntrusiveList *)o)->head = arg1;
+    *(s32 *)(nodeToMove + ((IntrusiveList *)o)->prevOffset) = 0;
+    ((IntrusiveList *)o)->head = nodeToMove;
     ((IntrusiveList *)o)->count = ((IntrusiveList *)o)->count + 1;
 }
 
-void func_802560A4_de(void *arg0, s32 arg1) {
-    char *o = (char *)arg0;
+void func_802560A4_de(void *list, s32 nodeToMove) {
+    char *o = (char *)list;
     s32 next;
     s32 prev;
     s32 tail;
 
-    next = *(s32 *)(arg1 + ((IntrusiveList *)o)->prevOffset);
+    next = *(s32 *)(nodeToMove + ((IntrusiveList *)o)->prevOffset);
     if (next != 0) {
         s32 off = ((IntrusiveList *)o)->nextOffset;
-        *(s32 *)(next + off) = *(s32 *)(arg1 + off);
+        *(s32 *)(next + off) = *(s32 *)(nodeToMove + off);
     }
-    prev = *(s32 *)(arg1 + ((IntrusiveList *)o)->nextOffset);
+    prev = *(s32 *)(nodeToMove + ((IntrusiveList *)o)->nextOffset);
     if (prev != 0) {
         s32 off = ((IntrusiveList *)o)->prevOffset;
-        *(s32 *)(prev + off) = *(s32 *)(arg1 + off);
+        *(s32 *)(prev + off) = *(s32 *)(nodeToMove + off);
     }
-    if (((IntrusiveList *)o)->head == arg1) {
-        ((IntrusiveList *)o)->head = *(s32 *)(arg1 + ((IntrusiveList *)o)->nextOffset);
+    if (((IntrusiveList *)o)->head == nodeToMove) {
+        ((IntrusiveList *)o)->head = *(s32 *)(nodeToMove + ((IntrusiveList *)o)->nextOffset);
     }
-    if (((IntrusiveList *)o)->tail == arg1) {
-        ((IntrusiveList *)o)->tail = *(s32 *)(arg1 + ((IntrusiveList *)o)->prevOffset);
+    if (((IntrusiveList *)o)->tail == nodeToMove) {
+        ((IntrusiveList *)o)->tail = *(s32 *)(nodeToMove + ((IntrusiveList *)o)->prevOffset);
     }
     ((IntrusiveList *)o)->count = ((IntrusiveList *)o)->count - 1;
 
     tail = ((IntrusiveList *)o)->tail;
     if (tail != 0) {
-        *(s32 *)(arg1 + ((IntrusiveList *)o)->prevOffset) = tail;
-        *(s32 *)(((IntrusiveList *)o)->tail + ((IntrusiveList *)o)->nextOffset) = arg1;
+        *(s32 *)(nodeToMove + ((IntrusiveList *)o)->prevOffset) = tail;
+        *(s32 *)(((IntrusiveList *)o)->tail + ((IntrusiveList *)o)->nextOffset) = nodeToMove;
     } else {
-        *(s32 *)(arg1 + ((IntrusiveList *)o)->prevOffset) = 0;
-        ((IntrusiveList *)o)->head = arg1;
+        *(s32 *)(nodeToMove + ((IntrusiveList *)o)->prevOffset) = 0;
+        ((IntrusiveList *)o)->head = nodeToMove;
     }
-    *(s32 *)(arg1 + ((IntrusiveList *)o)->nextOffset) = 0;
-    ((IntrusiveList *)o)->tail = arg1;
+    *(s32 *)(nodeToMove + ((IntrusiveList *)o)->nextOffset) = 0;
+    ((IntrusiveList *)o)->tail = nodeToMove;
     ((IntrusiveList *)o)->count = ((IntrusiveList *)o)->count + 1;
 }
 
@@ -231,10 +231,10 @@ void *func_80256190_de(void *intrusiveList) {
     return node;
 }
 
-void func_80256214_de(IntrusiveList *arg0) {
-    s32 node = arg0->head;
+void func_80256214_de(IntrusiveList *list) {
+    s32 node = list->head;
     if (node != 0) {
-        s32 offset = arg0->nextOffset;
+        s32 offset = list->nextOffset;
         node = *(s32 *)(node + offset);
         while (node != 0) {
             node = *(s32 *)(node + offset);
@@ -242,14 +242,14 @@ void func_80256214_de(IntrusiveList *arg0) {
     }
 }
 
-int func_8025623C_de(IntrusiveList *arg0, int arg1) {
-    int node = arg0->head;
+int func_8025623C_de(IntrusiveList *list, int wantedNode) {
+    int node = list->head;
     if (node != 0) {
         do {
-            if (node == arg1) {
+            if (node == wantedNode) {
                 return 1;
             }
-            node = *(int *)(node + arg0->nextOffset);
+            node = *(int *)(node + list->nextOffset);
         } while (node != 0);
     }
     return 0;

@@ -50,7 +50,7 @@ void func_80254990_de(void *unused, struct IntrusiveList *resource) {
     }
 }
 
-void *func_80254A28_de(s32 unused0, s32 arg1) {
+void *func_80254A28_de(s32 unused0, s32 requestFlags) {
     extern void **D_80100564;
     struct ResourceCacheEntry *cacheEntry;
     struct Pool *pool = (struct Pool *)&D_8010513C;
@@ -68,7 +68,7 @@ void *func_80254A28_de(s32 unused0, s32 arg1) {
     cacheEntry->owner = 0;
     cacheEntry->lastUsed = pool->field44;
     func_80255CB8_de((char *)pool - 0xBCC, cacheEntry);
-    cacheEntry->flags |= (arg1 & 0xC);
+    cacheEntry->flags |= (requestFlags & 0xC);
     return cacheEntry;
 }
 

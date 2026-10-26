@@ -24,7 +24,7 @@
 
 extern char D_801011B8[];
 
-extern void func_8023CB60_de(Field_void_4 *base, Slot_func_8023B9C0_eu *slot);
+extern void Virtual_AppendPageChainNode(Field_void_4 *base, SlotVirtualInitializePagerEuroExtended *slot);
 extern void func_8025637C_de(void *dst, void *rom, void *size, u32 extra);
 extern u32 System_GetMemorySize(void);
 extern void func_802AD370_de(s32 arg0, s32 arg1, s32 arg2, u32 addr, s32 arg4, s32 arg5);
@@ -41,7 +41,7 @@ static inline void fill(void *dst, u8 value, s32 n) {
     }
 }
 
-void func_8023B9C0_eu(void) {
+void Virtual_InitializePagerEuroExtended(void) {
     u32 extra;
     u32 i;
 
@@ -63,7 +63,7 @@ void func_8023B9C0_eu(void) {
     for (i = 0; i < 24; i++) {
         D_800FF230.slots[i].a = 0;
         D_800FF230.slots[i].b = 0;
-        func_8023CB60_de((Field_void_4 *)&D_800FF230.head, &D_800FF230.slots[i]);
+        Virtual_AppendPageChainNode((Field_void_4 *)&D_800FF230.head, &D_800FF230.slots[i]);
         D_800FF230.slots[i].index = i;
     }
     osCreateMesgQueue(&D_800FF230.completion, D_800FF230.list0Data, 0x21);

@@ -12,8 +12,8 @@ extern int Render_TestActorStateBit(char *a, int b);
 extern void func_80267198_de(void *, void *, s32, CVector3, ResourceManagerState);
 
 
-int func_80204E78_de(int arg0) {
-    return Render_TestActorStateBit(&g_world, arg0) == 1;
+int func_80204E78_de(int actor) {
+    return Render_TestActorStateBit(&g_world, actor) == 1;
 }
 
 /** Submit an object's three-word record, then attach it in mode one. */

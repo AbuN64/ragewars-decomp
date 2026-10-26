@@ -37,12 +37,12 @@ void Anim_BuildBoxFace5(struct Quad *quad, CVector3 *points) {
     quad_normal(quad);
 }
 
-s32 func_80241260_de(void *plane, CVector3 *arg1) {
+s32 func_80241260_de(void *plane, CVector3 *testPoint) {
     Plane *object = plane;
     CVector3 offset;
     s32 outside;
 
-    Particle_SubtractVectors(&offset, arg1, &object->pos);
+    Particle_SubtractVectors(&offset, testPoint, &object->pos);
     outside = 0;
     if (!((object->normal.x * offset.x) + (object->normal.y * offset.y) + (object->normal.z * offset.z) >= 0.0f)) {
         outside = 1;

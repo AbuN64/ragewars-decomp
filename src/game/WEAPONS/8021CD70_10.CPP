@@ -95,14 +95,14 @@ extern void *func_802AC950_de(s32);
 
 
 
-s32 func_80222D64_de(void *context, s32 arg1) {
+s32 func_80222D64_de(void *context, s32 pickupType) {
     void *pickup;
     s32 slot;
     s16 *count;
     s32 cap;
     s32 base;
 
-    pickup = func_802AC950_de(arg1);
+    pickup = func_802AC950_de(pickupType);
     if (pickup == 0) {
         return 0;
     }
@@ -143,11 +143,11 @@ extern f32 D_800C7948[];
 
 
 
-s32 func_80222EA4_de(void *player, void *arg1) {
+s32 func_80222EA4_de(void *player, void *bodyActor) {
     s16 state;
     s32 hit;
 
-    if (((Actor_func_802238E0_de *)(arg1))->inputFlags & 0x1000) {
+    if (((Actor_func_802238E0_de *)(bodyActor))->inputFlags & 0x1000) {
         state = ((Shared_ActorView *)(player))->action;
         if (state != 0xB) {
             if (state != 0xC) {
@@ -163,7 +163,7 @@ s32 func_80222EA4_de(void *player, void *arg1) {
                                 ((Shared_ActorView *)(player))->unk_0x0038 |= 0x1000;
                                 return 0;
                             }
-                            Weapons_SetPlayerState(player, arg1, 0xC);
+                            Weapons_SetPlayerState(player, bodyActor, 0xC);
                             return 1;
                         }
                     }
@@ -180,13 +180,13 @@ s32 func_80222EA4_de(void *player, void *arg1) {
     if (hit) {
         return 0;
     }
-    if ((((Actor_func_802238E0_de *)(arg1))->inputFlags & 0x2003) != 0x2000) {
+    if ((((Actor_func_802238E0_de *)(bodyActor))->inputFlags & 0x2003) != 0x2000) {
         return 0;
     }
-    if (!(((Actor_func_802238E0_de *)(arg1))->unk20 <= 0.0f)) {
+    if (!(((Actor_func_802238E0_de *)(bodyActor))->unk20 <= 0.0f)) {
         return 0;
     }
-    if (!(D_800C7948[1] < ((Actor_func_802238E0_de *)(arg1))->unk20)) {
+    if (!(D_800C7948[1] < ((Actor_func_802238E0_de *)(bodyActor))->unk20)) {
         return 0;
     }
     state = ((Shared_ActorView *)(player))->action;
@@ -205,7 +205,7 @@ s32 func_80222EA4_de(void *player, void *arg1) {
     if (state == 0x26) {
         return 0;
     }
-    Weapons_SetPlayerState(player, arg1, 0xA);
+    Weapons_SetPlayerState(player, bodyActor, 0xA);
     return 1;
 }
 

@@ -7,9 +7,9 @@
 
 
 
-void func_80240C8C_de(void *arg0)
+void func_80240C8C_de(void *contactStorage)
 {
-    ObjRecAtCC *arg0_record = arg0;
+    ObjRecAtCC *arg0_record = contactStorage;
   int new_var;
   f32 new_var2;
   new_var2 = (f32) D_800C373C_de;

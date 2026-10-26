@@ -67,46 +67,46 @@ void func_8025C8D8_de(void *soundVoicePool, CLoopingSoundData *arg1, s32 arg2) {
     ((SoundVoicePool *)soundVoicePool)->state = 0;
 }
 
-void *func_8025C95C_de(void *arg0, s32 arg1, CVector3 *arg2, void *position, s32 fallback) {
+void *func_8025C95C_de(void *voicePool, s32 soundId, CVector3 *soundPosition, void *position, s32 fallback) {
     CLoopingSoundData *node;
     s32 result;
 
-    node = ((SoundVoicePool *)arg0)->available.head;
+    node = ((SoundVoicePool *)voicePool)->available.head;
     if (node != 0) {
-        func_80255ED8_de(arg0, node);
-        func_80255D14_de(&((SoundVoicePool *)arg0)->playing, node);
+        func_80255ED8_de(voicePool, node);
+        func_80255D14_de(&((SoundVoicePool *)voicePool)->playing, node);
         node->state = -1;
         node->value = -1;
-        result = Render_PlaySoundAtPosition((s16)arg1, *arg2,
+        result = Render_PlaySoundAtPosition((s16)soundId, *soundPosition,
                                 (s32)position, fallback);
         node->value = result;
         D_800CBB10 = result;
-        node->state = arg1;
-        node->m_vSoundPos = *arg2;
+        node->state = soundId;
+        node->m_vSoundPos = *soundPosition;
         node->m_vSoundPosPtr = position;
     }
     return node;
 }
 
-s32 func_8025CA24_de(void *work, void *arg1) {
-    void *var_s0;
+s32 func_8025CA24_de(void *work, void *wantedNode) {
+    void *playingNode;
 
-    if (arg1 == 0) {
+    if (wantedNode == 0) {
         return 0;
     }
 
-    var_s0 = ((SoundVoicePool *)work)->playing.head;
-    if (var_s0 != 0) {
+    playingNode = ((SoundVoicePool *)work)->playing.head;
+    if (playingNode != 0) {
         do {
-            if (var_s0 == arg1) {
-                func_8025E174_de(((CLoopingSoundData *)var_s0)->value);
-                D_800CBB14 = ((CLoopingSoundData *)var_s0)->value;
-                func_80255ED8_de(&((SoundVoicePool *)work)->playing, var_s0);
-                func_80255D14_de(work, var_s0);
+            if (playingNode == wantedNode) {
+                func_8025E174_de(((CLoopingSoundData *)playingNode)->value);
+                D_800CBB14 = ((CLoopingSoundData *)playingNode)->value;
+                func_80255ED8_de(&((SoundVoicePool *)work)->playing, playingNode);
+                func_80255D14_de(work, playingNode);
                 return 1;
             }
-            var_s0 = ((CLoopingSoundData *)var_s0)->next;
-        } while (var_s0 != 0);
+            playingNode = ((CLoopingSoundData *)playingNode)->next;
+        } while (playingNode != 0);
     }
     return 0;
 }
@@ -129,20 +129,20 @@ void func_8025CAB0_de(void *arg0) {
 }
 
 void func_8025CB0C_de(SoundVoicePool *soundVoicePool) {
-    s32 temp_v0;
-    CLoopingSoundData *var_s0;
+    s32 playbackHandle;
+    CLoopingSoundData *playingNode;
 
-    var_s0 = soundVoicePool->playing.head;
-    if (var_s0 != 0) {
+    playingNode = soundVoicePool->playing.head;
+    if (playingNode != 0) {
         do {
-            temp_v0 = Render_PlaySoundAtPosition((s16)var_s0->state,
-                                     var_s0->m_vSoundPos,
-                                     (s32)var_s0->m_vSoundPosPtr,
+            playbackHandle = Render_PlaySoundAtPosition((s16)playingNode->state,
+                                     playingNode->m_vSoundPos,
+                                     (s32)playingNode->m_vSoundPosPtr,
                                      -1);
-            var_s0->value = temp_v0;
-            var_s0 = var_s0->next;
-            D_800CBB1C = temp_v0;
-        } while (var_s0 != 0);
+            playingNode->value = playbackHandle;
+            playingNode = playingNode->next;
+            D_800CBB1C = playbackHandle;
+        } while (playingNode != 0);
     }
     soundVoicePool->state = 0;
 }

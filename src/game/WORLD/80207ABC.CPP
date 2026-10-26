@@ -53,7 +53,7 @@ void func_80207ABC_de(void *object, void *state) {
     }
 }
 
-void func_80207B5C_de(void *object, u32 *arg1) {
+void func_80207B5C_de(void *object, u32 *stateFlags) {
     Player *player = object;
     ActorMotionResource *resource;
     ActorMotionDefinition *motionDefinition;
@@ -62,7 +62,7 @@ void func_80207B5C_de(void *object, u32 *arg1) {
     motionDefinition = &resource->motion;
     func_80278D78_de(player, 0x10000, player);
     if (!(motionDefinition->transitionFlags & 0x40)) {
-        *arg1 &= 0xFFFEFFFF;
+        *stateFlags &= 0xFFFEFFFF;
     }
 }
 
@@ -72,22 +72,22 @@ void func_80207BB8_de(void *object, void *state) {
     ActorMotionResource *resource;
     ActorMotionDefinition *motionDefinition;
     s32 transitionFlags;
-    s32 var_v1;
+    s32 progressAllowed;
 
     resource = player->definition;
     motionDefinition = &resource->motion;
     transitionFlags = motionDefinition->transitionFlags;
-    var_v1 = 1;
+    progressAllowed = 1;
     if (transitionFlags & 0x10000) {
-        var_v1 = (u32)(player->movementFlags & 0x40) < (u32)var_v1;
+        progressAllowed = (u32)(player->movementFlags & 0x40) < (u32)progressAllowed;
     }
     if ((transitionFlags & 0x4000) && !(player->movementFlags & 0x40)) {
-        var_v1 = 0;
+        progressAllowed = 0;
     }
     if (player->movementFlags & 8) {
-        var_v1 = 0;
+        progressAllowed = 0;
     }
-    if (var_v1 != 0) {
+    if (progressAllowed != 0) {
         motionState->speed = motionState->speed + (D_800D2988 / motionDefinition->transitionTime);
     }
     if (motionState->speed >= D_800C1BA0_de) {
@@ -95,9 +95,9 @@ void func_80207BB8_de(void *object, void *state) {
     }
 }
 
-void func_80207C68_de(void *arg0, s32 *arg1) {
-    if (!((((struct func_8020D1FC_S1 *) ((s8 *) ((struct ObjRecAt18V5 *) ((s8 *) arg0))->unk18))->unk38) & 0x80)) {
-        *arg1 &= 0xFFFDFFFF;
+void func_80207C68_de(void *actor, s32 *stateFlags) {
+    if (!((((struct func_8020D1FC_S1 *) ((s8 *) ((struct ObjRecAt18V5 *) ((s8 *) actor))->unk18))->unk38) & 0x80)) {
+        *stateFlags &= 0xFFFDFFFF;
     }
 }
 
@@ -107,24 +107,24 @@ void func_80207C94_de(void *object, void *state) {
     s32 transitionFlags;
     ActorMotionResource *resource;
     ActorMotionDefinition *motionDefinition;
-    s32 var_v1;
-    s32 temp_v0;
+    s32 transitionAllowed;
+    s32 requiredCloseFlag;
 
     resource = player->definition;
     motionDefinition = &resource->motion;
     transitionFlags = motionDefinition->transitionFlags;
-    var_v1 = 1;
+    transitionAllowed = 1;
     if (transitionFlags & 0x20) {
-        temp_v0 = motionState->flags & 0x20000;
-        var_v1 = (u32)0 < (u32)temp_v0;
+        requiredCloseFlag = motionState->flags & 0x20000;
+        transitionAllowed = (u32)0 < (u32)requiredCloseFlag;
     }
     if ((transitionFlags & 0x200) && !(player->movementFlags & 0x40)) {
-        var_v1 = 0;
+        transitionAllowed = 0;
     }
     if ((motionDefinition->transitionFlags & 0x800) && (player->movementFlags & 0x40)) {
-        var_v1 = 0;
+        transitionAllowed = 0;
     }
-    if (var_v1 != 0) {
+    if (transitionAllowed != 0) {
         if (motionState->timer >= motionDefinition->closeThreshold) {
             Weapons_RequestActorState(player, motionState, 3);
         }
@@ -133,7 +133,7 @@ void func_80207C94_de(void *object, void *state) {
     }
 }
 
-void func_80207D34_de(void *object, u32 *arg1) {
+void func_80207D34_de(void *object, u32 *stateFlags) {
     Player *player = object;
     ActorMotionResource *resource;
     ActorMotionDefinition *motionDefinition;
@@ -142,7 +142,7 @@ void func_80207D34_de(void *object, u32 *arg1) {
     motionDefinition = &resource->motion;
     func_80278D78_de(player, 0x20000, player);
     if (!(motionDefinition->transitionFlags & 0x80)) {
-        *arg1 &= 0xFFFDFFFF;
+        *stateFlags &= 0xFFFDFFFF;
     }
 }
 
@@ -152,22 +152,22 @@ void func_80207D90_de(void *object, void *state) {
     ActorMotionResource *resource;
     ActorMotionDefinition *motionDefinition;
     s32 transitionFlags;
-    s32 var_v1;
+    s32 progressAllowed;
 
     resource = player->definition;
     motionDefinition = &resource->motion;
     transitionFlags = motionDefinition->transitionFlags;
-    var_v1 = 1;
+    progressAllowed = 1;
     if (transitionFlags & 0x20000) {
-        var_v1 = (u32)(player->movementFlags & 0x40) < (u32)var_v1;
+        progressAllowed = (u32)(player->movementFlags & 0x40) < (u32)progressAllowed;
     }
     if ((transitionFlags & 0x8000) && !(player->movementFlags & 0x40)) {
-        var_v1 = 0;
+        progressAllowed = 0;
     }
     if (player->movementFlags & 8) {
-        var_v1 = 0;
+        progressAllowed = 0;
     }
-    if (var_v1 != 0) {
+    if (progressAllowed != 0) {
         motionState->speed = motionState->speed - (D_800D2988 / motionDefinition->transitionTime);
     }
     if (motionState->speed <= 0.0f) {
@@ -175,16 +175,16 @@ void func_80207D90_de(void *object, void *state) {
     }
 }
 
-void func_80207E3C_de(struct Shared_Actor *actor, int *arg1) {
+void func_80207E3C_de(struct Shared_Actor *actor, int *motionFlags) {
     actor->weaponFlags |= 0x2100;
-    *arg1 |= 0x10000;
-    Weapons_RequestActorState(actor, arg1, 1);
+    *motionFlags |= 0x10000;
+    Weapons_RequestActorState(actor, motionFlags, 1);
 }
 
-void func_80207E74_de(struct Shared_Actor *actor, int *arg1) {
+void func_80207E74_de(struct Shared_Actor *actor, int *motionFlags) {
     actor->weaponFlags |= 0x2100;
-    *arg1 |= 0x20000;
-    Weapons_RequestActorState(actor, arg1, 3);
+    *motionFlags |= 0x20000;
+    Weapons_RequestActorState(actor, motionFlags, 3);
 }
 
 void func_80207EAC_de(struct Shared_Actor *actor) {
@@ -230,11 +230,11 @@ void func_80207FC4_de(char *object, unsigned int *flags) {
 
 s32 func_80207FE4_de(void *player) {
     Player *actor = player;
-    s32 temp_v0;
+    s32 updatedFlags;
 
-    temp_v0 = actor->weaponFlags & ~0x2000;
-    actor->weaponFlags = temp_v0;
-    return temp_v0;
+    updatedFlags = actor->weaponFlags & ~0x2000;
+    actor->weaponFlags = updatedFlags;
+    return updatedFlags;
 }
 
 #if defined(VERSION_EU_X)

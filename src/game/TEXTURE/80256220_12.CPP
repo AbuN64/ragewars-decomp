@@ -21,11 +21,11 @@ extern void func_802558B4_de(void *, void *, s32);
 extern void func_802550F0_de(void *, s32);
 extern void func_80256280_de(void *, s32);
 #if defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-extern void func_8023B9C0_eu(s32, s32);
+extern void Virtual_InitializePagerEuroExtended(s32, s32);
 #elif defined(VERSION_EU_X)
-extern void func_8023B9F0_eu_x(s32, s32);
+extern void Virtual_InitializePagerEuroExtended(s32, s32);
 #else
-extern void func_8023B9B0_de(s32, s32);
+extern void Virtual_InitializePagerGerman(s32, s32);
 #endif
 extern void Scene_InitializeResourceCache(s32, s32);
 
@@ -47,11 +47,11 @@ void Texture_InitHeap(void) {
     func_80256280_de(D_801011B8, 4);
     
 #if defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-func_8023B9C0_eu
+Virtual_InitializePagerEuroExtended
 #elif defined(VERSION_EU_X)
-func_8023B9F0_eu_x
+Virtual_InitializePagerEuroExtended
 #else
-func_8023B9B0_de
+Virtual_InitializePagerGerman
 #endif
 (0, 0);
     Scene_InitializeResourceCache(0, 5);

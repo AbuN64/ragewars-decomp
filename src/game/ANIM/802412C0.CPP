@@ -9,18 +9,18 @@
 #include "COMMON/BALLISTICPARAMS.H"
 #include "ANIM/802412C0.H"
 
-f32 func_802417C4_de(f32 *arg0) {
+f32 func_802417C4_de(f32 *contactRecord) {
     f32 magnitude;
     f32 result;
     f32 zero;
 
-    magnitude = Math_Sqrtf((arg0[18] * arg0[18]) + (arg0[20] * arg0[20]));
+    magnitude = Math_Sqrtf((contactRecord[18] * contactRecord[18]) + (contactRecord[20] * contactRecord[20]));
     zero = 0.0f;
     if (magnitude == zero) {
         return zero;
     }
-    result = Nav_ArcCos(arg0[20] / magnitude);
-    if (!(zero < arg0[18])) {
+    result = Nav_ArcCos(contactRecord[20] / magnitude);
+    if (!(zero < contactRecord[18])) {
         result = -result;
     }
     return result;

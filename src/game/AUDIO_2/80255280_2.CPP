@@ -47,46 +47,46 @@ void func_802553B4_de(u32 key, struct ResourceLoadRequest *value) {
  slot->key=key;slot->value=value;tail->next=slot;
 }
 
-void func_80255488_de(s32 arg0) {
+void func_80255488_de(s32 resourceKey) {
     s32 key;
-    EntryRecAtCV1 *temp_v0;
-    EntryRecAtCV1 *var_a0;
-    EntryRecAtCV1 *var_a2;
-    EntryRecAtCV1 *var_v1;
+    EntryRecAtCV1 *preservedEntry;
+    EntryRecAtCV1 *successorEntry;
+    EntryRecAtCV1 *previousEntry;
+    EntryRecAtCV1 *entryToClear;
 
-    key = arg0;
-    var_v1 = D_80101194 + (((key << 5) ^ ((u32)key >> 1) ^
+    key = resourceKey;
+    entryToClear = D_80101194 + (((key << 5) ^ ((u32)key >> 1) ^
                             ((u32)key >> 9) ^ ((u32)key >> 0x11)) &
                            D_80101190);
-    var_a2 = 0;
-    if (var_v1->key != key) {
+    previousEntry = 0;
+    if (entryToClear->key != key) {
 loop:
-        var_a2 = var_v1;
-        var_v1 = var_v1->next;
-        if (var_v1 != 0) {
-            if (var_v1->key == key) {
+        previousEntry = entryToClear;
+        entryToClear = entryToClear->next;
+        if (entryToClear != 0) {
+            if (entryToClear->key == key) {
                 goto found;
             }
             goto loop;
         }
     } else {
 found:
-        if (var_v1 != 0) {
-            var_a0 = var_v1->next;
-            if (var_a0 != 0) {
-                var_v1->value = var_a0->value;
-                var_v1->key = var_a0->key;
-                var_v1->next = var_a0->next;
-                temp_v0 = var_v1;
-                var_v1 = var_a0;
-                var_a0 = temp_v0;
+        if (entryToClear != 0) {
+            successorEntry = entryToClear->next;
+            if (successorEntry != 0) {
+                entryToClear->value = successorEntry->value;
+                entryToClear->key = successorEntry->key;
+                entryToClear->next = successorEntry->next;
+                preservedEntry = entryToClear;
+                entryToClear = successorEntry;
+                successorEntry = preservedEntry;
             }
-            if (var_a2 != 0) {
-                var_a2->next = var_a0;
+            if (previousEntry != 0) {
+                previousEntry->next = successorEntry;
             }
-            var_v1->value = 0;
-            var_v1->key = 0;
-            var_v1->next = 0;
+            entryToClear->value = 0;
+            entryToClear->key = 0;
+            entryToClear->next = 0;
         }
     }
 }
@@ -115,40 +115,40 @@ s32 func_80255540_de(s32 mask) {
 }
 
 void func_8025558C_de(void) {
-    s32 var_a1;
-    s32 var_v1;
+    s32 maximumChainLength;
+    s32 scanCount;
     u32 i;
     u32 j;
     u32 limit;
-    Shared_HashLink *var_v0;
+    Shared_HashLink *chainEntry;
     Shared_HashLink *buckets;
 
-    var_a1 = 0;
-    i = var_a1;
+    maximumChainLength = 0;
+    i = maximumChainLength;
     limit = D_800CB6F0;
     if (limit != 0) {
-        var_v1 = limit;
+        scanCount = limit;
         do {
             i += 1;
-        } while (i < (u32)var_v1);
+        } while (i < (u32)scanCount);
     }
     j = 0;
     if (D_800CB6F0 != 0) {
         buckets = (Shared_HashLink *)D_80101194;
         do {
-            var_v0 = &buckets[j];
-            var_v1 = 0;
-            if (var_v0 != 0) {
+            chainEntry = &buckets[j];
+            scanCount = 0;
+            if (chainEntry != 0) {
                 do {
-                    var_v0 = var_v0->next;
-                    var_v1 += 1;
-                } while (var_v0 != 0);
+                    chainEntry = chainEntry->next;
+                    scanCount += 1;
+                } while (chainEntry != 0);
             }
-            if (var_v1 < var_a1) {
-                var_v1 = var_a1;
+            if (scanCount < maximumChainLength) {
+                scanCount = maximumChainLength;
             }
             j += 1;
-            var_a1 = var_v1;
+            maximumChainLength = scanCount;
         } while (j < D_800CB6F0);
     }
     if (D_800CB6F8 != 0) {

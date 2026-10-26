@@ -12,10 +12,10 @@ extern ResourcePageMapping *D_800FFE20;
 extern Region D_80103F88;
 
 
-extern Node_func_8023CC08_de *func_8023CBC0_de(u32 arg0);
+extern NodeVirtualAcquireRecycledPage *Virtual_FindRegionForPage(u32 arg0);
 
 /* Releases the resource node whose id matches the handle's upper bits: unlinks it from the D_80103F88
- * list, frees each slot it holds through func_8023C084_de and marks the slot unused, then posts the node
+ * list, frees each slot it holds through Virtual_UnmapResourcePage and marks the slot unused, then posts the node
  * back to the handle's message queue. */
 
 
@@ -35,9 +35,9 @@ extern Node_func_8023CC08_de *func_8023CBC0_de(u32 arg0);
 
 
 
-ResourcePageMapping *func_8023CC08_de(void) {
+ResourcePageMapping *Virtual_AcquireRecycledPage(void) {
     ResourcePageMapping *entry;
-    Node_func_8023CC08_de *node;
+    NodeVirtualAcquireRecycledPage *node;
 
     entry = D_800FFE20;
     if (entry->prev != 0) {
@@ -53,9 +53,9 @@ ResourcePageMapping *func_8023CC08_de(void) {
         (*(ResourcePageMapping * volatile *)&entry->prev)->next = 0;
     }
 
-    func_8023C084_de(entry);
+    Virtual_UnmapResourcePage(entry);
     if (entry->id != 0xFFFF) {
-        node = func_8023CBC0_de(entry->id);
+        node = Virtual_FindRegionForPage(entry->id);
         node->data[entry->id - node->start] = 0xFF;
         entry->id = 0xFFFF;
     }
@@ -63,7 +63,7 @@ ResourcePageMapping *func_8023CC08_de(void) {
     return entry;
 }
 
-void func_8023CCD4_de(OwnerRecAt8V2 *arg0) {
+void Virtual_ReleaseVirtualRegion(OwnerRecAt8V2 *arg0) {
     Region *node;
     Region *prev;
     u8 *slot;
@@ -84,7 +84,7 @@ void func_8023CCD4_de(OwnerRecAt8V2 *arg0) {
     slot = node->map;
     for (i = 0; i < node->pages; i++) {
         if (*slot != 0xFF) {
-            func_8023C084_de(&D_800FFB50[*slot]);
+            Virtual_UnmapResourcePage(&D_800FFB50[*slot]);
             D_800FFB50[*slot].id = 0xFFFF;
         }
         slot++;
@@ -92,7 +92,7 @@ void func_8023CCD4_de(OwnerRecAt8V2 *arg0) {
     osSendMesg(arg0->queue, node, 1);
 }
 
-void func_8023CDD4_de(RegionDesc *desc)
+void Virtual_AssignVirtualRegion(RegionDesc *desc)
 {
     Region *p;
     Region *prev;
@@ -157,7 +157,7 @@ void Sched_FinishPageJob(ResourcePageJob *req) {
         if (D_800FFE20 == 0) {
             D_800FFE20 = link;
         }
-        func_8023BD34_de(req->page, req->mapping, req->thread->slot, req->slot);
+        Virtual_MapResourcePage(req->page, req->mapping, req->thread->slot, req->slot);
         func_802BCF70_de(req->page << 12, 0x1000);
         func_802BD010_de(req->page << 12, 0x1000);
     } else {

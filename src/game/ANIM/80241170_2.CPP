@@ -15,91 +15,91 @@ s32 func_80271FC8_de(CVector3 *, u32, void *, void *);
  /* extern */
 void Particle_CrossVectors(f32 *, void *, f32 *);
 
-s32 func_802412D0_de(void *poly, void *start, void *arg2, f32 *arg3) {
+s32 func_802412D0_de(void *poly, void *start, void *segmentEnd, f32 *outputFraction) {
     extern void Particle_SubtractVectors(f32 *, void *, void *);
-    f32 sp10[3];
-    f32 sp20[3];
-    f32 temp_f20;
-    f32 var_f0;
+    f32 segmentDirection[3];
+    f32 planeToStart[3];
+    f32 normalDotDirection;
+    f32 hitFraction;
     s32 result;
 
     if (((struct MeasuredRecAt8V3 *)(poly))->value == 0) {
         return 0;
     }
-    Particle_SubtractVectors(sp10, arg2, start);
-    temp_f20 = (((struct MeasuredRecAt48V1 *)(poly))->value * sp10[0]) + (((struct Measured *)(poly))->value * sp10[1]) + (((struct Measured_func_802412D0_de_48a8d17d95e2 *)(poly))->value * sp10[2]);
+    Particle_SubtractVectors(segmentDirection, segmentEnd, start);
+    normalDotDirection = (((struct MeasuredRecAt48V1 *)(poly))->value * segmentDirection[0]) + (((struct Measured *)(poly))->value * segmentDirection[1]) + (((struct Measured_func_802412D0_de_48a8d17d95e2 *)(poly))->value * segmentDirection[2]);
     result = 0;
-    if (!(temp_f20 >= (f32)0)) {
-        Particle_SubtractVectors(sp20, start, poly + 0x18);
+    if (!(normalDotDirection >= (f32)0)) {
+        Particle_SubtractVectors(planeToStart, start, poly + 0x18);
         result = 1;
-        var_f0 = -((((struct MeasuredRecAt48V1 *)(poly))->value * sp20[0]) + (((struct Measured *)(poly))->value * sp20[1]) + (((struct Measured_func_802412D0_de_48a8d17d95e2 *)(poly))->value * sp20[2])) / temp_f20;
+        hitFraction = -((((struct MeasuredRecAt48V1 *)(poly))->value * planeToStart[0]) + (((struct Measured *)(poly))->value * planeToStart[1]) + (((struct Measured_func_802412D0_de_48a8d17d95e2 *)(poly))->value * planeToStart[2])) / normalDotDirection;
     } else {
-        var_f0 = D_800C3740_de;
+        hitFraction = D_800C3740_de;
     }
-    *arg3 = var_f0;
+    *outputFraction = hitFraction;
     return result;
 }
 
-s32 func_802413C8_de(void *arg0, void *arg1, void *arg2, void *arg3) {
+s32 func_802413C8_de(void *contactPlane, void *segmentStart, void *segmentEnd, void *outputPoint) {
     extern void Particle_SubtractVectors(f32 *, void *, void *);
-    f32 sp10[3];
-    f32 sp20[3];
-    f32 sp30;
-    f32 temp_f20;
-    s32 var_v0;
+    f32 segmentDirection[3];
+    f32 planeToStart[3];
+    f32 hitFraction;
+    f32 normalDotDirection;
+    s32 intersectsPlane;
 
-    if (((struct MeasuredRecAt8V4 *)(arg0))->value == 0) {
-        var_v0 = 0;
+    if (((struct MeasuredRecAt8V4 *)(contactPlane))->value == 0) {
+        intersectsPlane = 0;
     } else {
-        Particle_SubtractVectors(sp10, arg2, arg1);
-        temp_f20 = (((struct MeasuredRecAt48V2 *)(arg0))->value * sp10[0]) + (((struct Measured *)(arg0))->value * sp10[1]) + (((struct Measured_func_802413C8_de_48a8d17d95e2 *)(arg0))->value * sp10[2]);
-        var_v0 = 0;
-        if (temp_f20 >= (f32)0) {
-            sp30 = D_800C3744_de;
+        Particle_SubtractVectors(segmentDirection, segmentEnd, segmentStart);
+        normalDotDirection = (((struct MeasuredRecAt48V2 *)(contactPlane))->value * segmentDirection[0]) + (((struct Measured *)(contactPlane))->value * segmentDirection[1]) + (((struct Measured_func_802413C8_de_48a8d17d95e2 *)(contactPlane))->value * segmentDirection[2]);
+        intersectsPlane = 0;
+        if (normalDotDirection >= (f32)0) {
+            hitFraction = D_800C3744_de;
         } else {
-            Particle_SubtractVectors(sp20, arg1, arg0 + 0x18);
-            var_v0 = 1;
-            sp30 = -((((struct MeasuredRecAt48V2 *)(arg0))->value * sp20[0]) + (((struct Measured *)(arg0))->value * sp20[1]) + (((struct Measured_func_802413C8_de_48a8d17d95e2 *)(arg0))->value * sp20[2])) / temp_f20;
+            Particle_SubtractVectors(planeToStart, segmentStart, contactPlane + 0x18);
+            intersectsPlane = 1;
+            hitFraction = -((((struct MeasuredRecAt48V2 *)(contactPlane))->value * planeToStart[0]) + (((struct Measured *)(contactPlane))->value * planeToStart[1]) + (((struct Measured_func_802413C8_de_48a8d17d95e2 *)(contactPlane))->value * planeToStart[2])) / normalDotDirection;
         }
     }
-    if (var_v0 != 0) {
-        func_80271FC8_de(arg3, *(u32 *)&sp30, arg1, arg2);
+    if (intersectsPlane != 0) {
+        func_80271FC8_de(outputPoint, *(u32 *)&hitFraction, segmentStart, segmentEnd);
         return 1;
     }
     return 0;
 }
 
 /* extern */
-s32 func_802414F4_de(func_80204468_S3 *poly, void *arg1) {
+s32 func_802414F4_de(func_80204468_S3 *poly, void *testPoint) {
     void Particle_SubtractVectors(f32 *, void *, void *);
-    f32 sp10[3];
-    f32 sp20[3];
-    f32 sp30[3];
-    s32 temp_v1;
-    void *var_s1;
-    s32 var_s0;
-    void *var_s2;
-    temp_v1 = ((Polygon_func_8023E8D4_de *)poly)->vertexCount;
-    if (temp_v1 == 1) {
+    f32 edgePlaneNormal[3];
+    f32 edgeVector[3];
+    f32 vertexToPoint[3];
+    s32 vertexTotal;
+    void *vertexCursor;
+    s32 remainingEdges;
+    void *previousVertex;
+    vertexTotal = ((Polygon_func_8023E8D4_de *)poly)->vertexCount;
+    if (vertexTotal == 1) {
         return 1;
     }
-    var_s2 = (char *)poly + ((temp_v1 * 0xC) + 0xC);
-    var_s1 = ((Polygon_func_8023E8D4_de *)poly)->vertices;
-    var_s0 = temp_v1;
-    var_s0 = var_s0 - 1;
-    for (; var_s0 != -1; var_s1 += 0xC, var_s0--) {
-        Particle_SubtractVectors(sp20, var_s1, var_s2);
-        Particle_CrossVectors(sp10, &((Polygon_func_8023E8D4_de *)poly)->normal, sp20);
-        Particle_SubtractVectors(sp30, arg1, var_s2);
-        var_s2 = var_s1;
-        if (sp10[0]*sp30[0]+sp10[1]*sp30[1]+sp10[2]*sp30[2] > 0.0f) return 0;
+    previousVertex = (char *)poly + ((vertexTotal * 0xC) + 0xC);
+    vertexCursor = ((Polygon_func_8023E8D4_de *)poly)->vertices;
+    remainingEdges = vertexTotal;
+    remainingEdges = remainingEdges - 1;
+    for (; remainingEdges != -1; vertexCursor += 0xC, remainingEdges--) {
+        Particle_SubtractVectors(edgeVector, vertexCursor, previousVertex);
+        Particle_CrossVectors(edgePlaneNormal, &((Polygon_func_8023E8D4_de *)poly)->normal, edgeVector);
+        Particle_SubtractVectors(vertexToPoint, testPoint, previousVertex);
+        previousVertex = vertexCursor;
+        if (edgePlaneNormal[0]*vertexToPoint[0]+edgePlaneNormal[1]*vertexToPoint[1]+edgePlaneNormal[2]*vertexToPoint[2] > 0.0f) return 0;
     }
     return 1;
 }
 
-s32 func_80241614_de(void *poly, void *point, f32 radius, void *arg3) {
+s32 func_80241614_de(void *poly, void *point, f32 radius, void *testPoint) {
     CVector3 *first = point;
-    CVector3 *second = arg3;
+    CVector3 *second = testPoint;
     f32 dx = first->x - second->x;
     f32 dz = first->z - second->z;
     s32 result = 1;

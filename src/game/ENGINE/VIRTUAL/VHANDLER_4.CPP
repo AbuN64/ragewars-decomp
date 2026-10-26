@@ -4,9 +4,9 @@
 #include "TYPES.H"
 #include "ENGINE/VIRTUAL/VHANDLER_4.H"
 
-extern Node_func_8023CBC0_de D_80103F88;
+extern NodeVirtualFindRegionForPage D_80103F88;
 
-void func_8023CB60_de(Field_void_4 *arg0, void *arg1) {
+void Virtual_AppendPageChainNode(Field_void_4 *arg0, void *arg1) {
     void *temp_v0;
 
     *(void **)arg1 = 0;
@@ -21,7 +21,7 @@ void func_8023CB60_de(Field_void_4 *arg0, void *arg1) {
     }
 }
 
-void func_8023CB90_de(Field_void_4 *arg0, Field_void_4 *arg1) {
+void Virtual_PrependPageChainNode(Field_void_4 *arg0, Field_void_4 *arg1) {
     void *temp_v0;
 
     arg1->value = 0;
@@ -36,8 +36,8 @@ void func_8023CB90_de(Field_void_4 *arg0, Field_void_4 *arg1) {
     }
 }
 
-Node_func_8023CBC0_de *func_8023CBC0_de(u32 arg0) {
-    Node_func_8023CBC0_de *var_v1;
+NodeVirtualFindRegionForPage *Virtual_FindRegionForPage(u32 arg0) {
+    NodeVirtualFindRegionForPage *var_v1;
     u16 temp_a1;
 
     var_v1 = &D_80103F88;

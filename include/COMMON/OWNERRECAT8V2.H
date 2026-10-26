@@ -5,15 +5,15 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 
-struct Block_func_8023C85C_de;
-typedef struct Block_func_8023C85C_de Block_func_8023C85C_de;
+struct BlockVirtualFreeVirtualRegion;
+typedef struct BlockVirtualFreeVirtualRegion BlockVirtualFreeVirtualRegion;
 
 struct OwnerRecAt8V2;
 
 struct OwnerRecAt8V2;
 typedef struct OwnerRecAt8V2 OwnerRecAt8V2;
 
-extern void func_8023CCD4_de(OwnerRecAt8V2 *arg0);
+extern void Virtual_ReleaseVirtualRegion(OwnerRecAt8V2 *arg0);
 
 struct Channels;
 typedef struct Channels Channels;
@@ -25,8 +25,8 @@ struct Shape_typemap_110;
 
 
 
-struct Node_func_8023CC08_de;
-typedef struct Node_func_8023CC08_de Node_func_8023CC08_de;
+struct NodeVirtualAcquireRecycledPage;
+typedef struct NodeVirtualAcquireRecycledPage NodeVirtualAcquireRecycledPage;
 
 
 struct Block10;
@@ -67,31 +67,31 @@ struct RegionDesc;
 struct RegionDesc;
 typedef struct RegionDesc RegionDesc;
 
-extern void func_8023CDD4_de(RegionDesc *desc);
+extern void Virtual_AssignVirtualRegion(RegionDesc *desc);
 
 
-struct Slot_func_8023B9C0_eu;
-typedef struct Slot_func_8023B9C0_eu Slot_func_8023B9C0_eu;
+struct SlotVirtualInitializePagerEuroExtended;
+typedef struct SlotVirtualInitializePagerEuroExtended SlotVirtualInitializePagerEuroExtended;
 
 struct ResourcePageMapping;
 typedef struct ResourcePageMapping ResourcePageMapping;
 
-struct Block_func_8023C85C_de;
+struct BlockVirtualFreeVirtualRegion;
 
 struct Channels;
 struct Channels {
     char pad0[0x1C];
 };
 
-struct Slot_func_8023B9C0_eu;
-struct Slot_func_8023B9C0_eu {
+struct SlotVirtualInitializePagerEuroExtended;
+struct SlotVirtualInitializePagerEuroExtended {
     union {
         struct { s32 a; s32 b; char pad8[2]; u8 index; char padB[5]; };
         ResourcePageMapping chain;
     };
 };
 
-/* The first 0x20 bytes of the resource pager state: request statistics, copied out whole by func_8023C8D4_de. */
+/* The first 0x20 bytes of the resource pager state: request statistics, copied out whole by Virtual_GetPagerCounters. */
 struct PagerCounters {
     s32 requests;
     s32 misses;
@@ -105,14 +105,14 @@ union ObjectState1000;
 typedef union ObjectState1000 ObjectState1000;
 
 /* D_800FFB50: the page mappings of the resource pager */
-typedef struct ResourcePageMapping Slot_func_8023CCD4_de;
+typedef struct ResourcePageMapping SlotVirtualReleaseVirtualRegion;
 
-struct Node_func_8023CBC0_de;
-typedef struct Node_func_8023CBC0_de Node_func_8023CBC0_de;
+struct NodeVirtualFindRegionForPage;
+typedef struct NodeVirtualFindRegionForPage NodeVirtualFindRegionForPage;
 
-struct Node_func_8023CBC0_de;
-struct Node_func_8023CBC0_de {
-    struct Node_func_8023CBC0_de *next;
+struct NodeVirtualFindRegionForPage;
+struct NodeVirtualFindRegionForPage {
+    struct NodeVirtualFindRegionForPage *next;
     u16 f4;
     u16 f6;
 };
@@ -127,9 +127,9 @@ typedef struct PagerState PagerState;
 struct Block10;
 
 
-struct Node_func_8023CC08_de;
-struct Node_func_8023CC08_de {
-    struct Node_func_8023CC08_de *next;
+struct NodeVirtualAcquireRecycledPage;
+struct NodeVirtualAcquireRecycledPage {
+    struct NodeVirtualAcquireRecycledPage *next;
     u16 start;
     u16 size;
     char pad8[8];

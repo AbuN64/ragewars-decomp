@@ -102,9 +102,9 @@ extern void func_80255F70_de(IntrusiveList *arg0);
 
 struct RecordD90;
 
-extern s32 func_8025B920_de(struct RecordD90 *record, s16 value, s16 id);
+extern s32 Audio_ReleaseMatchingExclusiveVoice(struct RecordD90 *record, s16 value, s16 id);
 
-extern void func_8025BB7C_de(void *arg0, int arg1);
+extern void Audio_SetVoiceTrackId(void *arg0, int arg1);
 
 extern void func_8025E11C_de(s32 arg0);
 

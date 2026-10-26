@@ -24,24 +24,24 @@ extern void Render_QueueModelInstance(void **, void *, s32, void *, void *, s32)
 
 extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
 
-void func_802054E0_de(Obj54E0 *arg0, void *responseContext) {
+void func_802054E0_de(Obj54E0 *actor, void *responseContext) {
     Rec54E0 *rec;
 
-    rec = &arg0->holder->r;
-    arg0->flags = arg0->flags & 0xFFFEFFFF;
-    func_80278D78_de(arg0, 0x40000, arg0);
+    rec = &actor->holder->r;
+    actor->flags = actor->flags & 0xFFFEFFFF;
+    func_80278D78_de(actor, 0x40000, actor);
     if (rec->unk2C == 0) {
-        arg0->flags &= ~0x2000;
-        arg0->flags &= ~0x100;
+        actor->flags &= ~0x2000;
+        actor->flags &= ~0x100;
     }
     if (g_world.mode == 4) {
         if (rec->unk34.whole != -1) {
-            Render_PlaySoundAtPosition(rec->unk34.half.id, arg0->pos.v, 0, -1);
+            Render_PlaySoundAtPosition(rec->unk34.half.id, actor->pos.v, 0, -1);
         }
         if (rec->unk30 != -1) {
-            Weapons_SpawnActorEffect(arg0, rec->unk30, arg0->pos.t, 0);
+            Weapons_SpawnActorEffect(actor, rec->unk30, actor->pos.t, 0);
         }
-        Weapons_SpawnFlaggedEffects(arg0, responseContext, 8, rec->unk38, rec->unk3C);
+        Weapons_SpawnFlaggedEffects(actor, responseContext, 8, rec->unk38, rec->unk3C);
     }
 }
 

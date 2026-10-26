@@ -25,12 +25,12 @@ extern void func_80243920_de(void *arg0);
 s32 func_8023D158_de(ActorMotion *object) {
     s32 *flags = &object->surface->flags;
     f32 magnitude;
-    f32 var_f0;
-    f32 var_f1;
-    f32 var_f0_2;
-    f32 var_f1_2;
-    f32 var_f2;
-    f32 var_f0_3;
+    f32 minimumX;
+    f32 maximumX;
+    f32 minimumY;
+    f32 maximumY;
+    f32 minimumZ;
+    f32 maximumZ;
 
     func_80240C8C_de(&object->collisionState);
     Particle_SubtractVectors(&object->velocity,
@@ -53,38 +53,38 @@ s32 func_8023D158_de(ActorMotion *object) {
         object->direction = object->velocity;
     }
 
-    var_f0 = object->end.x;
-    if (!(var_f0 <= object->start.x)) {
-        var_f0 = object->start.x;
+    minimumX = object->end.x;
+    if (!(minimumX <= object->start.x)) {
+        minimumX = object->start.x;
     }
-    object->boundsMin.x = var_f0;
-    var_f1 = object->end.x;
-    if (!(object->start.x <= var_f1)) {
-        var_f1 = object->start.x;
+    object->boundsMin.x = minimumX;
+    maximumX = object->end.x;
+    if (!(object->start.x <= maximumX)) {
+        maximumX = object->start.x;
     }
-    object->boundsMax.x = var_f1;
+    object->boundsMax.x = maximumX;
 
-    var_f0_2 = object->end.y;
-    if (!(var_f0_2 <= object->start.y)) {
-        var_f0_2 = object->start.y;
+    minimumY = object->end.y;
+    if (!(minimumY <= object->start.y)) {
+        minimumY = object->start.y;
     }
-    object->boundsMin.y = var_f0_2;
-    var_f1_2 = object->end.y;
-    if (!(object->start.y <= var_f1_2)) {
-        var_f1_2 = object->start.y;
+    object->boundsMin.y = minimumY;
+    maximumY = object->end.y;
+    if (!(object->start.y <= maximumY)) {
+        maximumY = object->start.y;
     }
-    object->boundsMax.y = var_f1_2;
+    object->boundsMax.y = maximumY;
 
-    var_f2 = object->end.z;
-    if (!(var_f2 <= object->start.z)) {
-        var_f2 = object->start.z;
+    minimumZ = object->end.z;
+    if (!(minimumZ <= object->start.z)) {
+        minimumZ = object->start.z;
     }
-    object->boundsMin.z = var_f2;
-    var_f0_3 = object->end.z;
-    if (!(object->start.z <= var_f0_3)) {
-        var_f0_3 = object->start.z;
+    object->boundsMin.z = minimumZ;
+    maximumZ = object->end.z;
+    if (!(object->start.z <= maximumZ)) {
+        maximumZ = object->start.z;
     }
-    object->boundsMax.z = var_f0_3;
+    object->boundsMax.z = maximumZ;
 
     object->horizontalBounds[0] = object->boundsMin.x;
     object->horizontalBounds[2] = object->boundsMax.x;

@@ -89,31 +89,31 @@ s32 *func_80256E6C_de(s32 **arg0) {
     return &D_002571F0;
 }
 
-s32 func_80256EA8_de(Work56EC8 *arg0, u32 unused)
+s32 func_80256EA8_de(Work56EC8 *audioTask, u32 unused)
 {
   s32 completed;
   s32 event;
   s32 value;
   void *item;
-  func_80256FC0_de(arg0);
-  value = func_802BBBC0_de(arg0->owner);
-  arg0->id = (u16)D_80107E98;
+  func_80256FC0_de(audioTask);
+  value = func_802BBBC0_de(audioTask->owner);
+  audioTask->id = (u16)D_80107E98;
   func_8025E48C_de();
-  item = func_802B3A44_de(D_80107E20[D_800CB708], &completed, value, arg0->id);
+  item = func_802B3A44_de(D_80107E20[D_800CB708], &completed, value, audioTask->id);
   func_8025E4B0_de();
   if (completed != 0)
   {
-    arg0->base = D_80107E20[D_800CB708];
-    arg0->offset = ((((s32) item) - ((s32) D_80107E20[D_800CB708])) >> 3) << 3;
+    audioTask->base = D_80107E20[D_800CB708];
+    audioTask->offset = ((((s32) item) - ((s32) D_80107E20[D_800CB708])) >> 3) << 3;
     osWritebackDCacheAll();
-    Render_SendSchedulerTask(&D_80142928, arg0->payload);
+    Render_SendSchedulerTask(&D_80142928, audioTask->payload);
     D_800CB708 ^= 1;
     func_8025E23C_de();
     osRecvMesg(&D_80107E80, &event, 1);
-    func_802B7400_de(arg0->owner, arg0->id << 2);
+    func_802B7400_de(audioTask->owner, audioTask->id << 2);
     return 1;
   }
-  if (completed || arg0->id)
+  if (completed || audioTask->id)
   {
     return 0;
   }

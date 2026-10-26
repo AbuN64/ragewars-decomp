@@ -57,7 +57,7 @@ extern void func_802B2F10_de(void *arg0, s16 arg1);
 
 extern void alSndpSetPitch(void *arg0, f32 arg1);
 
-void func_8025B5F0_de(RecordRecAt4V6 *record, s32 value)
+void Audio_StopVoicesExceptKey(RecordRecAt4V6 *record, s32 value)
 {
   s32 i;
   s32 active;
@@ -103,7 +103,7 @@ void func_8025B5F0_de(RecordRecAt4V6 *record, s32 value)
 
 
 
-void func_8025B6F8_de(void *arg0, int owner, int arg2) {
+void Audio_InitializeVoiceRecord(void *arg0, int owner, int arg2) {
     RecordCode8025A3EC *slot = arg0;
     float k = D_800C9068;
 
@@ -128,7 +128,7 @@ void func_8025B6F8_de(void *arg0, int owner, int arg2) {
     slot->fB8 = k;
 }
 
-void func_8025B758_de(s32 *arg0, s32 arg1) {
+void Audio_InitializeVoicePool(s32 *arg0, s32 arg1) {
     s32 i;
     s32 idx;
     f32 t;
@@ -185,21 +185,21 @@ void func_8025B758_de(s32 *arg0, s32 arg1) {
     } while (i < 0x11);
 }
 
-s32 Audio_GetVoiceSoundState(SlotRecAtB8 *arg0, s16 arg1)
+s32 Audio_GetVoiceSoundState(SlotRecAtB8 *voicePool, s16 slotIndex)
 {
-  s32 temp_v0;
-  s32 temp_v1;
-  void *temp_s0;
+  s32 voiceAddress;
+  s32 ownerAddress;
+  void *soundPlayer;
   RecordCode8025A3EC *slot;
   OwnerCode8025A3EC8025B5F0 *owner;
-  temp_v0 = (arg1 * 0xCC) + (s32)arg0;
-  temp_v0 = temp_v0 + 4;
-  slot = (RecordCode8025A3EC *)temp_v0;
-  temp_v1 = slot->owner;
-  owner = (OwnerCode8025A3EC8025B5F0 *)temp_v1;
-  temp_s0 = owner->sound;
-  func_802B2F00_de(temp_s0, owner->samples[slot->index]);
-  return func_802B2620_de(temp_s0);
+  voiceAddress = (slotIndex * 0xCC) + (s32)voicePool;
+  voiceAddress = voiceAddress + 4;
+  slot = (RecordCode8025A3EC *)voiceAddress;
+  ownerAddress = slot->owner;
+  owner = (OwnerCode8025A3EC8025B5F0 *)ownerAddress;
+  soundPlayer = owner->sound;
+  func_802B2F00_de(soundPlayer, owner->samples[slot->index]);
+  return func_802B2620_de(soundPlayer);
 }
 
 void Audio_PlayVoiceSound(SlotRecAtB8 *base, s16 index)
@@ -214,7 +214,7 @@ void Audio_PlayVoiceSound(SlotRecAtB8 *base, s16 index)
   selected->flags |= 8;
 }
 
-s32 func_8025B920_de(RecordD90 *record, s16 value, s16 id) {
+s32 Audio_ReleaseMatchingExclusiveVoice(RecordD90 *record, s16 value, s16 id) {
     s32 i;
     SlotCC *cur = record->slots;
 
@@ -230,7 +230,7 @@ s32 func_8025B920_de(RecordD90 *record, s16 value, s16 id) {
 
 /* Returns whether any of the sixteen occupied slots of a record, other than the one its header marks as local, holds the given value at slot offset 0xA8. */
 
-s32 func_8025BA4C_de(RecordRecAt4V3 *record, s32 value) {
+s32 Audio_HasVoiceWithKey(RecordRecAt4V3 *record, s32 value) {
     s32 i;
     SlotRecAtA8 *slot = record->slots;
 
@@ -242,7 +242,7 @@ s32 func_8025BA4C_de(RecordRecAt4V3 *record, s32 value) {
     return 0;
 }
 
-void func_8025BA9C_de(s32 arg0, s16 arg1) {
+void Audio_StopVoiceSlot(s32 arg0, s16 arg1) {
     s32 base;
     s32 a0;
     void *s1;
@@ -264,7 +264,7 @@ void func_8025BA9C_de(s32 arg0, s16 arg1) {
     }
 }
 
-void func_8025BB3C_de(s32 a) {
+void Audio_ClearVoiceFlags(s32 a) {
     s32 var_v0;
     void *var_a0;
     var_a0 = a + 4;
@@ -276,16 +276,16 @@ void func_8025BB3C_de(s32 a) {
     } while (var_v0 >= 0);
 }
 
-void func_8025BB5C_de(void *arg0, void *arg1, int arg2) {
+void Audio_SetVoicePositionTracking(void *arg0, void *arg1, int arg2) {
     ((struct View_func_8025AE1C_de *)(arg0))->position = *(Triple *)arg1;
     ((struct View_func_8025AE1C_de *)(arg0))->tracked = (Triple *)arg2;
 }
 
-void func_8025BB7C_de(void *arg0, int arg1) {
+void Audio_SetVoiceTrackId(void *arg0, int arg1) {
     ((struct View_func_8025AE1C_de *)(arg0))->trackId = arg1;
 }
 
-void func_8025BB84_de(void *arg0, void *desc, s32 extra) {
+void Audio_InitializeVoiceParameters(void *arg0, void *desc, s32 extra) {
     f32 first;
     s16 index;
     s16 value;
@@ -326,7 +326,7 @@ store_value:
     }
 }
 
-void func_8025BD00_de(void **arg0) {
+void Audio_UpdateVoicePool(void **arg0) {
     s32 i;
     s32 var_s2;
     char *view;
@@ -356,7 +356,7 @@ void func_8025BD00_de(void **arg0) {
 
 
 
-int func_8025BDAC_de(ObjRecAtCV4 *obj, int keyA, int keyB) {
+int Audio_FindVoiceByKeyPair(ObjRecAtCV4 *obj, int keyA, int keyB) {
     int i;
     int *keys = &obj->slots[0].keyB;
 
@@ -369,7 +369,7 @@ int func_8025BDAC_de(ObjRecAtCV4 *obj, int keyA, int keyB) {
     return -1;
 }
 
-void func_8025BE08_de(RecordRecAt4V6 *record, s32 value) {
+void Audio_StopVoicesByKey(RecordRecAt4V6 *record, s32 value) {
     s32 i;
     SlotRecAtB0 *slot = record->slots;
 
@@ -449,7 +449,7 @@ f32 func_8025C10C_de(f32 *a, f32 *b) {
     return D_800C3F88_de - (distSq / D_800D0D10);
 }
 
-/* Returns whether any of the seventeen occupied slots of a record, other than the one its header marks as local, holds the given value at slot offset 0xA8. Adapted from func_8025BA4C_de with the slot count changed from 16 to 17. */
+/* Returns whether any of the seventeen occupied slots of a record, other than the one its header marks as local, holds the given value at slot offset 0xA8. Adapted from Audio_HasVoiceWithKey with the slot count changed from 16 to 17. */
 
 
 

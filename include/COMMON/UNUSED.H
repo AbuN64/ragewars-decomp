@@ -1527,7 +1527,7 @@ extern char D_0022FC20;
 
 extern s32 D_80111310;
 
-extern Slot_func_8023CCD4_de D_800FFB50[];
+extern SlotVirtualReleaseVirtualRegion D_800FFB50[];
 
 extern void (*D_80153CDC)(void);
 

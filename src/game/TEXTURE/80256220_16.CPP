@@ -37,8 +37,8 @@ extern void *Camera_FindNearestCamera(MenuMatchGlobals *arg0, CVector3 *arg1);
 
 
 
-s32 func_8025842C_de(void *arg0) {
-    char *object = arg0;
+s32 func_8025842C_de(void *context) {
+    char *object = context;
     u8 *bytes = &D_801462C8.volume[1];
     char *queue;
     u32 mask;
@@ -59,7 +59,7 @@ s32 func_8025842C_de(void *arg0) {
         __osRestoreInt(mask);
     }
 
-    func_8025BD00_de(&((struct ContextRecAt2BC0 *)(object))->menu[0]);
+    Audio_UpdateVoicePool(&((struct ContextRecAt2BC0 *)(object))->menu[0]);
     {
         char *queue2 = object + 0x110;
         u32 mask2 = __osDisableInt();
@@ -109,71 +109,71 @@ extern s32 func_80259AB8_de(void *arg0, s32 arg1);
 
 
 
-s32 func_802585F4_de(struct ContextRecAt2BC0 *arg0, s32 arg1) {
+s32 func_802585F4_de(struct ContextRecAt2BC0 *context, s32 queryValue) {
     {
-        MenuRules *temp_s0;
-        s32 temp_v1;
+        MenuRules *contextLock;
+        s32 lockClaimCount;
         u32 mask;
 
-        temp_s0 = &arg0->lock;
+        contextLock = &context->lock;
         mask = __osDisableInt();
-        temp_v1 = temp_s0->locked + 1;
-        temp_s0->locked = temp_v1;
-        if (temp_v1 != 1) {
+        lockClaimCount = contextLock->locked + 1;
+        contextLock->locked = lockClaimCount;
+        if (lockClaimCount != 1) {
             __osRestoreInt(mask);
-            osRecvMesg(temp_s0, 0, 1);
+            osRecvMesg(contextLock, 0, 1);
         } else {
             __osRestoreInt(mask);
         }
     }
-    if (func_8025C17C_de(&arg0->menu[0], arg1) != 0) {
-        MenuRules *temp_s0;
-        s32 temp_v1;
-        u32 temp_v0;
+    if (func_8025C17C_de(&context->menu[0], queryValue) != 0) {
+        MenuRules *contextLock;
+        s32 lockClaimCount;
+        u32 releaseInterruptMask;
 
-        temp_s0 = &arg0->lock;
-        temp_v0 = __osDisableInt();
-        temp_v1 = temp_s0->locked - 1;
-        temp_s0->locked = temp_v1;
-        if (temp_v1 != 0) {
-            __osRestoreInt(temp_v0);
-            osSendMesg(temp_s0, 0, 1);
+        contextLock = &context->lock;
+        releaseInterruptMask = __osDisableInt();
+        lockClaimCount = contextLock->locked - 1;
+        contextLock->locked = lockClaimCount;
+        if (lockClaimCount != 0) {
+            __osRestoreInt(releaseInterruptMask);
+            osSendMesg(contextLock, 0, 1);
         } else {
-            __osRestoreInt(temp_v0);
+            __osRestoreInt(releaseInterruptMask);
         }
         return 1;
     }
-    if (func_80259AB8_de(&arg0->view[0], arg1) != 0) {
-        MenuRules *temp_s0;
-        s32 temp_v1;
-        u32 temp_v0;
+    if (func_80259AB8_de(&context->view[0], queryValue) != 0) {
+        MenuRules *contextLock;
+        s32 lockClaimCount;
+        u32 releaseInterruptMask;
 
-        temp_s0 = &arg0->lock;
-        temp_v0 = __osDisableInt();
-        temp_v1 = temp_s0->locked - 1;
-        temp_s0->locked = temp_v1;
-        if (temp_v1 != 0) {
-            __osRestoreInt(temp_v0);
-            osSendMesg(temp_s0, 0, 1);
+        contextLock = &context->lock;
+        releaseInterruptMask = __osDisableInt();
+        lockClaimCount = contextLock->locked - 1;
+        contextLock->locked = lockClaimCount;
+        if (lockClaimCount != 0) {
+            __osRestoreInt(releaseInterruptMask);
+            osSendMesg(contextLock, 0, 1);
         } else {
-            __osRestoreInt(temp_v0);
+            __osRestoreInt(releaseInterruptMask);
         }
         return 1;
     }
     {
-        MenuRules *temp_s0;
-        s32 temp_v1;
-        u32 temp_v0;
+        MenuRules *contextLock;
+        s32 lockClaimCount;
+        u32 releaseInterruptMask;
 
-        temp_s0 = &arg0->lock;
-        temp_v0 = __osDisableInt();
-        temp_v1 = temp_s0->locked - 1;
-        temp_s0->locked = temp_v1;
-        if (temp_v1 != 0) {
-            __osRestoreInt(temp_v0);
-            osSendMesg(temp_s0, 0, 1);
+        contextLock = &context->lock;
+        releaseInterruptMask = __osDisableInt();
+        lockClaimCount = contextLock->locked - 1;
+        contextLock->locked = lockClaimCount;
+        if (lockClaimCount != 0) {
+            __osRestoreInt(releaseInterruptMask);
+            osSendMesg(contextLock, 0, 1);
         } else {
-            __osRestoreInt(temp_v0);
+            __osRestoreInt(releaseInterruptMask);
         }
     }
     return 0;
@@ -188,14 +188,14 @@ extern u32 __osDisableInt(void);
 
 void func_80258740_de(s32 *engine) {
     MenuRules *menuRules;
-    s32 temp_v1;
+    s32 claimCount;
     u32 mask;
 
     menuRules = &((struct ContextRecAt2BC0 *)(engine))->lock;
     mask = __osDisableInt();
-    temp_v1 = menuRules->locked + 1;
-    menuRules->locked = temp_v1;
-    if (temp_v1 != 1) {
+    claimCount = menuRules->locked + 1;
+    menuRules->locked = claimCount;
+    if (claimCount != 1) {
         __osRestoreInt(mask);
         osRecvMesg(menuRules, 0, 1);
         return;
@@ -212,14 +212,14 @@ extern u32 __osDisableInt(void);
 
 void func_802587A4_de(s32 *engine) {
     MenuRules *menuRules;
-    s32 temp_v1;
+    s32 remainingClaims;
     u32 mask;
 
     menuRules = &((struct ContextRecAt2BC0 *)(engine))->lock;
     mask = __osDisableInt();
-    temp_v1 = menuRules->locked - 1;
-    menuRules->locked = temp_v1;
-    if (temp_v1 != 0) {
+    remainingClaims = menuRules->locked - 1;
+    menuRules->locked = remainingClaims;
+    if (remainingClaims != 0) {
         __osRestoreInt(mask);
         osSendMesg(menuRules, 0, 1);
         return;

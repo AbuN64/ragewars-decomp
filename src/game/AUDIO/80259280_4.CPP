@@ -4,12 +4,12 @@
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
 #include "TEXTURE/80256220_16.H"
-extern void func_8025B6F8_de(void *arg0, int arg1, int arg2);
+extern void Audio_InitializeVoiceRecord(void *arg0, int arg1, int arg2);
 
 /* Starts a sound instance from a description: when the scene's free node list is not empty it takes the
  * first node under the audio lock (func_80258740_de/func_802587A4_de), unlinks it, gives it the next handle, the
  * volume, sample, priority, pan and pitch fields decoded from the description, full gain, the scene frame
- * and the position, prepares its channel through func_8025BB7C_de and func_8025BB84_de and inserts it into the
+ * and the position, prepares its channel through Audio_SetVoiceTrackId and Audio_InitializeVoiceParameters and inserts it into the
  * active list ahead of the first lower-priority node; returns the handle or -1 when no node is free. */
 
 
@@ -22,7 +22,7 @@ extern void func_8025B6F8_de(void *arg0, int arg1, int arg2);
 
 
 
-extern void func_8025BB84_de(void *, void *, s32);
+extern void Audio_InitializeVoiceParameters(void *, void *, s32);
 
 
 extern s8 func_8025E518_de(void *);
@@ -97,9 +97,9 @@ s32 func_80259260_de(ManagerRecAtD8V1 *manager, void *desc, Vec3Words *position,
         node->position = *position;
         node->pad58 = 0;
         node->padB4 = 0;
-        func_8025BB7C_de(node->channel, ((struct ContextRecAt2BC0 *)manager->scene)->selectedSound);
+        Audio_SetVoiceTrackId(node->channel, ((struct ContextRecAt2BC0 *)manager->scene)->selectedSound);
         node->mix = manager->scene[0x2BAC / 4];
-        func_8025BB84_de(node->channel, desc, extra);
+        Audio_InitializeVoiceParameters(node->channel, desc, extra);
         at = manager->active.next;
         priority = node->priority;
         while (at != (NodeRecAtC8 *)&manager->active) {
@@ -178,14 +178,14 @@ void func_80259440_de(Cache *cache) {
     func_802587A4_de(cache->context);
 }
 
-void func_8025966C_de(void *arg0, s32 owner) {
-    (((struct ObjectLinks8 *) ((s8 *) arg0))->unk_4) = arg0;
-    (((struct ObjectLinks8 *) ((s8 *) arg0))->unk_0) = arg0;
-    func_8025B6F8_de(arg0 + 8, owner, -1);
+void func_8025966C_de(void *sentinel, s32 owner) {
+    (((struct ObjectLinks8 *) ((s8 *) sentinel))->unk_4) = sentinel;
+    (((struct ObjectLinks8 *) ((s8 *) sentinel))->unk_0) = sentinel;
+    Audio_InitializeVoiceRecord(sentinel + 8, owner, -1);
 }
 
-void *func_80259694_de(LinkPair *arg0) {
-    arg0->first[1] = (void *) arg0->second;
-    arg0->second[0] = (void *) arg0->first;
-    return arg0;
+void *func_80259694_de(LinkPair *channelNode) {
+    channelNode->first[1] = (void *) channelNode->second;
+    channelNode->second[0] = (void *) channelNode->first;
+    return channelNode;
 }

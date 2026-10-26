@@ -26,21 +26,21 @@ void func_8020520C_de(LevelActor *source, void *dest) {
     ((SpawnDispatchOwner *)dest)->remaining = source->field3;
 }
 
-void func_8020524C_de(LevelActor *actor, void *arg1) {
+void func_8020524C_de(LevelActor *actor, void *requestContext) {
     if (Render_TestActorStateBit(&g_world, actor) == 1) {
-        Weapons_RequestActorState(actor, arg1, 1);
+        Weapons_RequestActorState(actor, requestContext, 1);
     } else {
-        Weapons_RequestActorState(actor, arg1, 0);
+        Weapons_RequestActorState(actor, requestContext, 0);
         actor->flags |= 0x10000;
     }
 }
 
-void func_802052C4_de(void *arg0, Shared_CallbackOwner *callbackOwner) {
+void func_802052C4_de(void *callbackContext, Shared_CallbackOwner *callbackOwner) {
     void *obj = callbackOwner->hook;
     if (obj != 0) {
         FuncPtr fn = ((Shared_CallbackHook *)(obj))->callback;
         if (fn != 0) {
-            ((void (*)(void *, Shared_CallbackOwner *))fn)(arg0, callbackOwner);
+            ((void (*)(void *, Shared_CallbackOwner *))fn)(callbackContext, callbackOwner);
         }
     }
 }
@@ -54,51 +54,51 @@ int func_802052F8_de(void *owner) {
     return 0x5334;
 }
 
-int func_80205314_de(void *arg0) {
-    return ((Obj5324 *)arg0)->holder->r.unk18;
+int func_80205314_de(void *actor) {
+    return ((Obj5324 *)actor)->holder->r.unk18;
 }
 
-void func_80205324_de(Obj5324 *arg0, s32 *arg1) {
+void func_80205324_de(Obj5324 *actor, s32 *activationContext) {
     s32 mode;
     Rec5324 *rec;
     Shared_World *pFlag;
 
-    rec = &arg0->holder->r;
+    rec = &actor->holder->r;
     pFlag = &g_world;
-    Render_SetActorStateBit(pFlag, arg0, 1);
-    func_80278D78_de(arg0, 0x40000, arg0);
-    if (arg1[1] == 0) {
-        arg0->flags = arg0->flags & 0xFFFEFFFF;
+    Render_SetActorStateBit(pFlag, actor, 1);
+    func_80278D78_de(actor, 0x40000, actor);
+    if (activationContext[1] == 0) {
+        actor->flags = actor->flags & 0xFFFEFFFF;
     }
     if (rec->unk18 == 0) {
-        arg0->flags &= ~0x2000;
-        arg0->flags &= ~0x100;
+        actor->flags &= ~0x2000;
+        actor->flags &= ~0x100;
     }
     mode = pFlag->mode;
     if (mode == 4) {
         if (rec->unk20.whole != -1) {
-            Render_PlaySoundAtPosition(rec->unk20.half.id, arg0->pos.v, 0, -1);
+            Render_PlaySoundAtPosition(rec->unk20.half.id, actor->pos.v, 0, -1);
         }
         if (rec->unk1C != -1) {
-            Weapons_SpawnActorEffect(arg0, rec->unk1C, arg0->pos.t, 0);
+            Weapons_SpawnActorEffect(actor, rec->unk1C, actor->pos.t, 0);
         }
-        Weapons_SpawnFlaggedEffects(arg0, arg1, 4, rec->unk24, rec->unk28);
+        Weapons_SpawnFlaggedEffects(actor, activationContext, 4, rec->unk24, rec->unk28);
         /* func_802A5D38_de unlinks the walker by the object's 32-bit identity;
          * the registry holds those identities as s32. */
-        func_802A5D38_de(&D_801379C0, (s32)arg0);
+        func_802A5D38_de(&D_801379C0, (s32)actor);
         if (pFlag->mode != mode) {
             goto block_10;
         }
     } else {
 block_10:
-        arg0->flags = (arg0->flags & ~0x100) | 0x08000000;
+        actor->flags = (actor->flags & ~0x100) | 0x08000000;
     }
 }
 
 /** Clear two flags when the controlling byte and nested flag are set. */
-void func_80205494_de(BreakableHitContext *breakableHitContext, ObjectStateCC *arg1) {
+void func_80205494_de(BreakableHitContext *breakableHitContext, ObjectStateCC *hitState) {
     char *nested = breakableHitContext->unk_18;
-    if (arg1->unk_CB != 0 &&
+    if (hitState->unk_CB != 0 &&
         (((struct Descriptor *)nested)->damage.flags & 0x4) != 0) {
         unsigned int flags = breakableHitContext->unk_100;
         flags &= ~0x2000;

@@ -19,7 +19,7 @@
 
 extern s32 func_8022C460_de(void *player);
 
-s32 Weapons_SetPlayerState(SharedPlayer *player, void *arg1, s32 state) {
+s32 Weapons_SetPlayerState(SharedPlayer *player, void *stateContext, s32 state) {
     void (*enter)(void *, void *);
     s32 parameter;
 
@@ -32,7 +32,7 @@ s32 Weapons_SetPlayerState(SharedPlayer *player, void *arg1, s32 state) {
     player->views1C.view100_9.flags &= ~0x800000;
     enter = player->views13B4.view13B4_1.states[state].enter;
     if (enter != 0) {
-        enter(player, arg1);
+        enter(player, stateContext);
     }
     player->views5E8.view664_28.timer = player->views13B4.view13B4_1.states[player->views5E8.view650_16.state].timer;
     parameter = player->views13B4.view13B4_1.states[player->views5E8.view650_16.state].parameter;
@@ -69,14 +69,14 @@ extern s32 func_8024E62C_de(void *);
 
 
 
-void func_80222908_de(void *actorView, void *arg1, ObjectState54 *ground) {
+void func_80222908_de(void *actorView, void *bodyActor, ObjectState54 *ground) {
     u8 *options;
 
     if ((u16)((Shared_ActorView *)actorView)->action < 2) {
         ((Shared_ActorView *)actorView)->speedFactor = D_800C2848_de[0];
         return;
     }
-    ((Shared_ActorView *)actorView)->speedFactor = ((MovementDescriptor *)(((ObjectLinks3C *)arg1)->unk_18))->speed;
+    ((Shared_ActorView *)actorView)->speedFactor = ((MovementDescriptor *)(((ObjectLinks3C *)bodyActor)->unk_18))->speed;
     if (((Shared_ActorView *)actorView)->remote != 0) {
         switch (((Shared_ActorView *)actorView)->controls->difficulty) {
         default:
@@ -109,8 +109,8 @@ void func_80222908_de(void *actorView, void *arg1, ObjectState54 *ground) {
     if (options[0x1D] != 0) {
         ((Shared_ActorView *)actorView)->speedFactor *= ((Shared_Game *)options)->speedFactor;
     }
-    if (!(((ObjectLinks3C *)(arg1))->unk_38 & 3) && ground != 0
-        && (func_8024E62C_de(arg1) != 0 || (ground->unk_52 & 0x800))) {
+    if (!(((ObjectLinks3C *)(bodyActor))->unk_38 & 3) && ground != 0
+        && (func_8024E62C_de(bodyActor) != 0 || (ground->unk_52 & 0x800))) {
         ((Shared_ActorView *)actorView)->speedFactor *= ground->unk_30;
     }
 }

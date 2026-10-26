@@ -106,7 +106,7 @@ extern void func_80267198_de(void *arg0, void *arg1, s32 arg2,
 
 extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
 
-void Level_ResolveBreakableHit(void *breakableHitContext, ObjectStateCC *arg1) {
+void Level_ResolveBreakableHit(void *breakableHitContext, ObjectStateCC *hitState) {
     ResourceManagerState local;
     s8 factor;
     f32 scale;
@@ -121,10 +121,10 @@ void Level_ResolveBreakableHit(void *breakableHitContext, ObjectStateCC *arg1) {
     if (((BreakableHitContext *)(breakableHitContext))->unk_E6 == 1) {
         destroy = 1;
     } else {
-        team = arg1->unk_CA;
+        team = hitState->unk_CA;
         if (((BreakableHitContext *)(breakableHitContext))->unk_108 != team || ((BreakableHitContext *)(breakableHitContext))->unk_10A != team) {
             destroy = 0;
-        } else if (arg1->unk_CB != 0 && !(((BreakableHitContext *)(breakableHitContext))->unk_100 & 0x400)) {
+        } else if (hitState->unk_CB != 0 && !(((BreakableHitContext *)(breakableHitContext))->unk_100 & 0x400)) {
             destroy = 1;
         } else if (((BreakableHitContext *)(breakableHitContext))->unk_10C < 3 && (((BreakableHitContext *)(breakableHitContext))->unk_100 & 0x400)) {
             destroy = ((BreakableHitContext *)(breakableHitContext))->unk_12C * scale <= ((BreakableHitContext *)(breakableHitContext))->unk_134;
@@ -144,41 +144,41 @@ void Level_SetEnterHandler(void *unused0, Dest *arg1) {
     arg1->enter = &D_00204C34;
 }
 
-void func_80204BD0_de(void *arg0, void *arg1) {
-    s32 different = Render_TestActorStateBit(&g_world, arg0) != 1;
+void func_80204BD0_de(void *actor, void *requestContext) {
+    s32 different = Render_TestActorStateBit(&g_world, actor) != 1;
 
     if (different == 0) {
-        Weapons_RequestActorState(arg0, arg1, 0);
+        Weapons_RequestActorState(actor, requestContext, 0);
     } else {
-        Weapons_RequestActorState(arg0, arg1, 1);
+        Weapons_RequestActorState(actor, requestContext, 1);
     }
 }
 
-void func_80204C34_de(void *arg0, Shared_CallbackOwner *callbackOwner) {
+void func_80204C34_de(void *callbackContext, Shared_CallbackOwner *callbackOwner) {
     Shared_CallbackHook *obj = callbackOwner->hook;
     if (obj != 0) {
         Shared_VoidCallback fn = obj->callback;
         if (fn != 0) {
-            ((void (*)(void *, Shared_CallbackOwner *))fn)(arg0, callbackOwner);
+            ((void (*)(void *, Shared_CallbackOwner *))fn)(callbackContext, callbackOwner);
         }
     }
 }
 
 extern void func_802A5D38_de(SceneRecAt95A8 *, s32);
-void func_80204C68_de(void *arg0, ActorMotionState *motionState) {
+void func_80204C68_de(void *actor, ActorMotionState *motionState) {
     ResourceManagerState local;
     Shared_World *flag;
 
     local.active = 0;
     flag = &g_world;
-    Render_SetActorStateBit(flag, arg0, 1);
-    func_80278D78_de(arg0, 0x4000, arg0);
+    Render_SetActorStateBit(flag, actor, 1);
+    func_80278D78_de(actor, 0x4000, actor);
     motionState->speed = 0;
-    func_802A5D38_de(&D_801379C0, (s32)arg0);
+    func_802A5D38_de(&D_801379C0, (s32)actor);
     if (flag->mode != 4) {
-        func_80267198_de(arg0, arg0, 6,
-                      ((LevelActor *)arg0)->position0, local);
-        ((LevelActor *)arg0)->flags |= 0x08000000;
+        func_80267198_de(actor, actor, 6,
+                      ((LevelActor *)actor)->position0, local);
+        ((LevelActor *)actor)->flags |= 0x08000000;
     }
 }
 

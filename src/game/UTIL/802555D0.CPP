@@ -10,88 +10,88 @@
 #include "stddef.h"
 #include "UTIL/802555D0.H"
 
-s32 func_80255630_de(s8 *arg0, void *arg1, s32 arg2) {
-    s32 temp_a2;
-    s32 temp_v0_3;
-    u32 temp_a2_2;
-    u32 temp_a2_4;
-    u32 temp_v1_2;
-    u32 var_v0;
-    void *temp_a0;
-    void *temp_a2_3;
-    void *temp_t0;
-    void *temp_t1;
-    void *temp_v0;
-    void *temp_v1;
-    void *temp_v1_3;
-    void *var_a3;
-    temp_a2 = (arg2 + 0x2F) & ~0xF;
-    temp_v1 = ((struct MeasuredRecAt8V2 *)(arg0))->value;
-    if (temp_v1 != NULL) {
-        var_a3 = temp_v1;
-        while (((struct MeasuredRecAt4V4 *)(var_a3))->value != 0) {
-            temp_v1_2 = ((struct MeasuredRecAt4V4 *)(var_a3))->value;
-            if (temp_v1_2 >= (u32) arg1) {
+s32 func_80255630_de(s8 *arena, void *requestedAddress, s32 requestedBytes) {
+    s32 alignedBlockBytes;
+    s32 leadingFreeBytes;
+    u32 followingFreeAddress;
+    u32 unlinkSuccessorAddress;
+    u32 candidateNextAddress;
+    u32 replacementTailAddress;
+    void *nextPhysicalBlock;
+    void *previousFreeBlock;
+    void *allocationEnd;
+    void *freeSpanEnd;
+    void *freeSpanStart;
+    void *firstFreeBlock;
+    void *allocationHeader;
+    void *containingBlock;
+    alignedBlockBytes = (requestedBytes + 0x2F) & ~0xF;
+    firstFreeBlock = ((struct MeasuredRecAt8V2 *)(arena))->value;
+    if (firstFreeBlock != NULL) {
+        containingBlock = firstFreeBlock;
+        while (((struct MeasuredRecAt4V4 *)(containingBlock))->value != 0) {
+            candidateNextAddress = ((struct MeasuredRecAt4V4 *)(containingBlock))->value;
+            if (candidateNextAddress >= (u32) requestedAddress) {
                 break;
             }
-            var_a3 = (void *) temp_v1_2;
+            containingBlock = (void *) candidateNextAddress;
         }
-        temp_v0 = var_a3 + ((struct MeasuredRecAt10V3 *)(var_a3))->value;
-        temp_t1 = temp_v0 + ((struct MeasuredRecAt14V3 *)(var_a3))->value;
-        temp_v1_3 = arg1 - 0x20;
-        temp_t0 = temp_v1_3 + temp_a2;
-        if ((u32) temp_v1_3 >= (u32) temp_v0) {
-            if ((u32) temp_t1 >= (u32) temp_t0) {
-                s32 temp_v0_2 = temp_t1 - temp_t0;
-                ((struct MeasuredRecAt10V3 *)(temp_v1_3))->value = temp_a2;
-                ((struct MeasuredRecAt14V3 *)(temp_v1_3))->value = temp_v0_2;
-                if (temp_v0_2 != 0) {
-                    ((struct MeasuredRecAt4V3 *)(arg1))[-1].value = var_a3;
-                    temp_a2_2 = ((struct MeasuredRecAt4V4 *)(var_a3))->value;
-                    ((struct MeasuredRecAt4V4 *)(temp_v1_3))->value = temp_a2_2;
-                    if (((struct MeasuredRecAt4V4 *)(var_a3))->value != 0) {
-                        *(void **) temp_a2_2 = temp_v1_3;
+        freeSpanStart = containingBlock + ((struct MeasuredRecAt10V3 *)(containingBlock))->value;
+        freeSpanEnd = freeSpanStart + ((struct MeasuredRecAt14V3 *)(containingBlock))->value;
+        allocationHeader = requestedAddress - 0x20;
+        allocationEnd = allocationHeader + alignedBlockBytes;
+        if ((u32) allocationHeader >= (u32) freeSpanStart) {
+            if ((u32) freeSpanEnd >= (u32) allocationEnd) {
+                s32 trailingFreeBytes = freeSpanEnd - allocationEnd;
+                ((struct MeasuredRecAt10V3 *)(allocationHeader))->value = alignedBlockBytes;
+                ((struct MeasuredRecAt14V3 *)(allocationHeader))->value = trailingFreeBytes;
+                if (trailingFreeBytes != 0) {
+                    ((struct MeasuredRecAt4V3 *)(requestedAddress))[-1].value = containingBlock;
+                    followingFreeAddress = ((struct MeasuredRecAt4V4 *)(containingBlock))->value;
+                    ((struct MeasuredRecAt4V4 *)(allocationHeader))->value = followingFreeAddress;
+                    if (((struct MeasuredRecAt4V4 *)(containingBlock))->value != 0) {
+                        *(void **) followingFreeAddress = allocationHeader;
                     }
-                    ((struct MeasuredRecAt4V4 *)(var_a3))->value = (u32) temp_v1_3;
-                    if (((struct MeasuredRecAtCV2 *)(arg0))->value == var_a3) {
-                        ((struct MeasuredRecAtCV2 *)(arg0))->value = temp_v1_3;
+                    ((struct MeasuredRecAt4V4 *)(containingBlock))->value = (u32) allocationHeader;
+                    if (((struct MeasuredRecAtCV2 *)(arena))->value == containingBlock) {
+                        ((struct MeasuredRecAtCV2 *)(arena))->value = allocationHeader;
                     }
                 } else {
-                    ((struct MeasuredRecAt4V3 *)(arg1))[-1].value = NULL;
-                    ((struct MeasuredRecAt4V4 *)(temp_v1_3))->value = 0U;
+                    ((struct MeasuredRecAt4V3 *)(requestedAddress))[-1].value = NULL;
+                    ((struct MeasuredRecAt4V4 *)(allocationHeader))->value = 0U;
                 }
-                temp_v0_3 = temp_v1_3 - (var_a3 + ((struct MeasuredRecAt10V3 *)(var_a3))->value);
-                ((struct MeasuredRecAt14V3 *)(var_a3))->value = temp_v0_3;
-                if (temp_v0_3 == 0) {
-                    temp_a2_3 = ((struct MeasuredRecAt0V2 *)(var_a3))->value;
-                    if (temp_a2_3 != NULL) {
-                        ((struct MeasuredRecAt4V4 *)(temp_a2_3))->value = ((struct MeasuredRecAt4V4 *)(var_a3))->value;
+                leadingFreeBytes = allocationHeader - (containingBlock + ((struct MeasuredRecAt10V3 *)(containingBlock))->value);
+                ((struct MeasuredRecAt14V3 *)(containingBlock))->value = leadingFreeBytes;
+                if (leadingFreeBytes == 0) {
+                    previousFreeBlock = ((struct MeasuredRecAt0V2 *)(containingBlock))->value;
+                    if (previousFreeBlock != NULL) {
+                        ((struct MeasuredRecAt4V4 *)(previousFreeBlock))->value = ((struct MeasuredRecAt4V4 *)(containingBlock))->value;
                     }
-                    temp_a2_4 = ((struct MeasuredRecAt4V4 *)(var_a3))->value;
-                    if (temp_a2_4 != 0) {
-                        *(void **) temp_a2_4 = ((struct MeasuredRecAt0V2 *)(var_a3))->value;
+                    unlinkSuccessorAddress = ((struct MeasuredRecAt4V4 *)(containingBlock))->value;
+                    if (unlinkSuccessorAddress != 0) {
+                        *(void **) unlinkSuccessorAddress = ((struct MeasuredRecAt0V2 *)(containingBlock))->value;
                     }
-                    if (((struct MeasuredRecAt8V2 *)(arg0))->value == var_a3) {
-                        ((struct MeasuredRecAt8V2 *)(arg0))->value = ((struct MeasuredRecAt4V2 *)(var_a3))->value;
+                    if (((struct MeasuredRecAt8V2 *)(arena))->value == containingBlock) {
+                        ((struct MeasuredRecAt8V2 *)(arena))->value = ((struct MeasuredRecAt4V2 *)(containingBlock))->value;
                     }
-                    if (((struct MeasuredRecAtCV2 *)(arg0))->value == var_a3) {
-                        var_v0 = ((struct MeasuredRecAt4V4 *)(var_a3))->value;
-                        if (var_v0 == 0) {
-                            var_v0 = (u32) ((struct MeasuredRecAt0V2 *)(var_a3))->value;
+                    if (((struct MeasuredRecAtCV2 *)(arena))->value == containingBlock) {
+                        replacementTailAddress = ((struct MeasuredRecAt4V4 *)(containingBlock))->value;
+                        if (replacementTailAddress == 0) {
+                            replacementTailAddress = (u32) ((struct MeasuredRecAt0V2 *)(containingBlock))->value;
                         }
-                        ((struct MeasuredRecAtCV2 *)(arg0))->value = (void *) var_v0;
+                        ((struct MeasuredRecAtCV2 *)(arena))->value = (void *) replacementTailAddress;
                     }
-                    ((struct MeasuredRecAt0V2 *)(var_a3))->value = NULL;
-                    ((struct MeasuredRecAt4V4 *)(var_a3))->value = 0U;
+                    ((struct MeasuredRecAt0V2 *)(containingBlock))->value = NULL;
+                    ((struct MeasuredRecAt4V4 *)(containingBlock))->value = 0U;
                 }
-                ((struct MeasuredRecAt8V2 *)(temp_v1_3))->value = var_a3;
-                temp_a0 = ((struct MeasuredRecAtCV2 *)(var_a3))->value;
-                ((struct MeasuredRecAtCV2 *)(temp_v1_3))->value = temp_a0;
-                if (((struct MeasuredRecAtCV2 *)(var_a3))->value != NULL) {
-                    ((struct MeasuredRecAt8V2 *)(temp_a0))->value = temp_v1_3;
+                ((struct MeasuredRecAt8V2 *)(allocationHeader))->value = containingBlock;
+                nextPhysicalBlock = ((struct MeasuredRecAtCV2 *)(containingBlock))->value;
+                ((struct MeasuredRecAtCV2 *)(allocationHeader))->value = nextPhysicalBlock;
+                if (((struct MeasuredRecAtCV2 *)(containingBlock))->value != NULL) {
+                    ((struct MeasuredRecAt8V2 *)(nextPhysicalBlock))->value = allocationHeader;
                 }
-                ((struct MeasuredRecAtCV2 *)(var_a3))->value = temp_v1_3;
-                return (s32) arg1;
+                ((struct MeasuredRecAtCV2 *)(containingBlock))->value = allocationHeader;
+                return (s32) requestedAddress;
             }
         }
     }
@@ -109,7 +109,7 @@ s32 func_80255630_de(s8 *arg0, void *arg1, s32 arg2) {
 
 
 
-void func_80255780_de(Pool80255720 *arg0)
+void func_80255780_de(Pool80255720 *arena)
 {
     Block80255720 *block;
     Block80255720 *header;
@@ -117,8 +117,8 @@ void func_80255780_de(Pool80255720 *arg0)
     Block80255720 *scan;
     Block80255720 *next;
 
-    while (arg0->anchor->next_phys != 0) {
-        header = arg0->anchor->next_phys;
+    while (arena->anchor->next_phys != 0) {
+        header = arena->anchor->next_phys;
         block = header->prev_phys;
         if (block->size == 0) {
             other = header->prev;
@@ -145,18 +145,18 @@ void func_80255780_de(Pool80255720 *arg0)
                 next->prev = block;
             }
             other->next = block;
-            if (arg0->tail == other) {
-                arg0->tail = block;
+            if (arena->tail == other) {
+                arena->tail = block;
             }
             goto merge;
 insert_head:
-            block->next = arg0->head;
-            if (arg0->head != 0) {
-                arg0->head->prev = block;
+            block->next = arena->head;
+            if (arena->head != 0) {
+                arena->head->prev = block;
             } else {
-                arg0->tail = block;
+                arena->tail = block;
             }
-            arg0->head = block;
+            arena->head = block;
         }
 
 merge:
@@ -173,8 +173,8 @@ merge:
             if (header->next != 0) {
                 header->next->prev = header->prev;
             }
-            if (arg0->tail == header) {
-                arg0->tail = header->prev;
+            if (arena->tail == header) {
+                arena->tail = header->prev;
             }
         }
     }
@@ -328,14 +328,14 @@ void *func_80255A34_de(HeapRecAtC *heap, s32 request)
     return 0;
 }
 
-s32 func_80255B2C_de(Pool80255ACC *arena, char *arg1) {
+s32 func_80255B2C_de(Pool80255ACC *arena, char *dataToFree) {
     Block80255720 *block;
     Block80255720 *header;
     Block80255720 *other;
     Block80255720 *scan;
     u32 next;
 
-    header = (Block80255720 *)(arg1 - 0x20);
+    header = (Block80255720 *)(dataToFree - 0x20);
     block = header->prev_phys;
     if (block->size == 0) {
         other = header->prev;
@@ -397,24 +397,24 @@ merge:
     return block->size - 0x20;
 }
 
-void func_80255C4C_de(Pool80255ACC *arg0, s32 *arg1, u32 *arg2) {
-    u32 temp_a0;
-    u32 var_v1;
-    void *var_a3;
+void func_80255C4C_de(Pool80255ACC *arena, s32 *totalBytesOut, u32 *largestBlockBytesOut) {
+    u32 previousLargestBytes;
+    u32 largestBytes;
+    void *freeBlockCursor;
 
-    *arg1 = 0;
-    *arg2 = 0;
-    var_a3 = arg0->head;
-    if (var_a3 != 0) {
+    *totalBytesOut = 0;
+    *largestBlockBytesOut = 0;
+    freeBlockCursor = arena->head;
+    if (freeBlockCursor != 0) {
         do {
-            *arg1 += (u32)((Block80255720 *)var_a3)->size;
-            var_v1 = (u32)((Block80255720 *)var_a3)->size;
-            temp_a0 = *arg2;
-            if (var_v1 < temp_a0) {
-                var_v1 = temp_a0;
+            *totalBytesOut += (u32)((Block80255720 *)freeBlockCursor)->size;
+            largestBytes = (u32)((Block80255720 *)freeBlockCursor)->size;
+            previousLargestBytes = *largestBlockBytesOut;
+            if (largestBytes < previousLargestBytes) {
+                largestBytes = previousLargestBytes;
             }
-            *arg2 = var_v1;
-            var_a3 = ((Block80255720 *)var_a3)->next;
-        } while (var_a3 != 0);
+            *largestBlockBytesOut = largestBytes;
+            freeBlockCursor = ((Block80255720 *)freeBlockCursor)->next;
+        } while (freeBlockCursor != 0);
     }
 }

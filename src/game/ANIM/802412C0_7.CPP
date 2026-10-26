@@ -24,10 +24,10 @@ extern void *func_8028B2F8_de(Shared_World *, u16 *);
 extern void func_80240CAC_de(QueryE0 *arg0);
 
 /** Swap two pairs of words. */
-void func_80243814_de(Hit8 *arg0, Hit8 *arg1) {
-    Hit8 temporary = *arg0;
-    *arg0 = *arg1;
-    *arg1 = temporary;
+void func_80243814_de(Hit8 *leftHit, Hit8 *rightHit) {
+    Hit8 temporary = *leftHit;
+    *leftHit = *rightHit;
+    *rightHit = temporary;
 }
 
 s32 func_80243850_de(Hit8 *a, Hit8 *b) {
@@ -40,27 +40,27 @@ s32 func_80243850_de(Hit8 *a, Hit8 *b) {
 }
 
 void func_80243874_de(void *contextAddress) {
-    void *temp_a1;
+    void *collisionElement;
     void **temp_s0;
-    void *temp_s0_2;
-    s32 *temp_v0;
-    s32 temp_s1;
+    void *meshData;
+    s32 *displayListTable;
+    s32 displayListCount;
     s32 index;
 
-    temp_a1 = ((ContextB0 *)contextAddress)->element;
-    temp_s0 = ((ElementE8 *)temp_a1)->resource;
+    collisionElement = ((ContextB0 *)contextAddress)->element;
+    temp_s0 = ((ElementE8 *)collisionElement)->resource;
     if (temp_s0 != 0) {
-        Rsp_MultiplyAffineMatrices(&((ContextB0 *)contextAddress)->transform, &((ElementE8 *)temp_a1)->transform, (char *) contextAddress + 0xC);
-        temp_s0_2 = *temp_s0;
-        ((ContextB0 *)contextAddress)->vertices = Render_GetPackSection(temp_s0_2, 0);
-        temp_v0 = Render_GetPackSection(temp_s0_2, 2);
-        temp_s1 = *temp_v0;
+        Rsp_MultiplyAffineMatrices(&((ContextB0 *)contextAddress)->transform, &((ElementE8 *)collisionElement)->transform, (char *) contextAddress + 0xC);
+        meshData = *temp_s0;
+        ((ContextB0 *)contextAddress)->vertices = Render_GetPackSection(meshData, 0);
+        displayListTable = Render_GetPackSection(meshData, 2);
+        displayListCount = *displayListTable;
         index = 0;
-        if (temp_s1 > 0) {
+        if (displayListCount > 0) {
             do {
-                Anim_TraceMeshDisplayList(contextAddress, Render_GetPackSection((void *) temp_v0, index));
+                Anim_TraceMeshDisplayList(contextAddress, Render_GetPackSection((void *) displayListTable, index));
                 index += 1;
-            } while (index < temp_s1);
+            } while (index < displayListCount);
         }
     }
 }

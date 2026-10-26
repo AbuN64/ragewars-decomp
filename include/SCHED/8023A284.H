@@ -51,7 +51,7 @@ struct Reusable {
     char padB8[0xC];
     s32 unkC4;
 };
-struct Block_func_8023C85C_de {
+struct BlockVirtualFreeVirtualRegion {
     s16 type;
     s16 pad;
     s32 value;
@@ -65,15 +65,15 @@ struct PagerState {
     char list0Data[0xC0 - 0x3C];
     char queue[0x2F0 - 0xC0]; /* thread 1 (osCreateThread) */
     char pool[0x4F0 - 0x2F0]; /* its stack */
-    char queueData[0x720 - 0x4F0]; /* thread 2 (func_8023C924_de); its address is also thread 1's stack top */
+    char queueData[0x720 - 0x4F0]; /* thread 2 (Virtual_RunPagerDispatcher); its address is also thread 1's stack top */
     char pool2[0x920 - 0x720]; /* thread 2's stack */
-    Slot_func_8023B9C0_eu slots[24];
+    SlotVirtualInitializePagerEuroExtended slots[24];
     OSMesgQueue jobs;
     char list1Data[0xAD8 - 0xAB8];
     OSMesgQueue pending;
     char list2Data[0xB10 - 0xAF0];
     Channels channels[8];
-    ResourcePageMapping *head; /* pager LRU list (head, tail), appended by func_8023CB60_de; = D_800FFE20 */
+    ResourcePageMapping *head; /* pager LRU list (head, tail), appended by Virtual_AppendPageChainNode; = D_800FFE20 */
     union { s32 fBF4; ResourcePageMapping *tail; };
     u8 lookup[0x100];
     EntryRecAt3 entries[24];

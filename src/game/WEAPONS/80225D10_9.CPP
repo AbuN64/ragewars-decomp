@@ -298,75 +298,75 @@ void func_80229D28_de(Player16C0 *player) {
     }
 }
 
-void func_80229FA0_de(Obj_func_80229FA0_de *arg0, Damage_func_80229FA0_de *arg1) {
+void func_80229FA0_de(Obj_func_80229FA0_de *damagedPlayer, Damage_func_80229FA0_de *damagePacket) {
     f32 var_f0;
-    f32 var_f1;
-    u8 temp_v1;
-    u8 temp_v1_2;
-    Obj_func_80229FA0_de *temp_a2;
-    Obj_func_80229FA0_de *temp_a2_2;
-    Obj_func_80229FA0_de *var_a3;
+    f32 scaledDamage;
+    u8 sourceKind;
+    u8 difficulty;
+    Obj_func_80229FA0_de *damageSource;
+    Obj_func_80229FA0_de *projectileOwner;
+    Obj_func_80229FA0_de *creditedPlayer;
 
-    temp_a2 = arg1->unk0;
-    var_a3 = 0;
-    if (temp_a2 != 0) {
-        temp_v1 = temp_a2->unk0;
-        if (temp_v1 != 1) {
-            if (temp_v1 == 2) {
-                temp_a2_2 = temp_a2->unk12C;
-                if ((temp_a2_2 != 0) && (temp_a2_2->unk0 == 1)) {
-                    if (temp_a2_2->unk100 & 0x300000) {
-                        var_a3 = temp_a2_2;
-                        if (var_a3 == arg0) {
-                            arg1->unk4 = (s32) ((f32) arg1->unk4 * D_800C2CC4_de * D_800C7DB8 * D_800C2CCC_de);
+    damageSource = damagePacket->unk0;
+    creditedPlayer = 0;
+    if (damageSource != 0) {
+        sourceKind = damageSource->unk0;
+        if (sourceKind != 1) {
+            if (sourceKind == 2) {
+                projectileOwner = damageSource->unk12C;
+                if ((projectileOwner != 0) && (projectileOwner->unk0 == 1)) {
+                    if (projectileOwner->unk100 & 0x300000) {
+                        creditedPlayer = projectileOwner;
+                        if (creditedPlayer == damagedPlayer) {
+                            damagePacket->unk4 = (s32) ((f32) damagePacket->unk4 * D_800C2CC4_de * D_800C7DB8 * D_800C2CCC_de);
                         }
-                    } else if (temp_a2_2->unkE4 == 0x40C) {
-                        var_a3 = temp_a2_2->unk1D8;
+                    } else if (projectileOwner->unkE4 == 0x40C) {
+                        creditedPlayer = projectileOwner->unk1D8;
                     }
                 }
             }
-        } else if (temp_a2->unk100 & 0x300000) {
-            var_a3 = temp_a2->unk1D8;
+        } else if (damageSource->unk100 & 0x300000) {
+            creditedPlayer = damageSource->unk1D8;
         }
     } else {
-        var_a3 = arg0;
+        creditedPlayer = damagedPlayer;
     }
-    if (var_a3 != 0) {
-        if (var_a3->unk1450 != 0) {
-            temp_v1_2 = var_a3->unk5D8->unk93;
-            switch (temp_v1_2) { /* irregular */
+    if (creditedPlayer != 0) {
+        if (creditedPlayer->unk1450 != 0) {
+            difficulty = creditedPlayer->unk5D8->unk93;
+            switch (difficulty) { /* irregular */
             case 2:
                 break;
             default:
-                var_a3->unk5D8->unk93 = 0U;
+                creditedPlayer->unk5D8->unk93 = 0U;
                 /* fallthrough */
             case 0:
-                var_f1 = (f32) arg1->unk4 * D_800C7DC0;
-                var_f1 *= D_800C2CD4_de;
-                arg1->unk4 = (s32) (var_f1 * D_800C2CE0_de);
+                scaledDamage = (f32) damagePacket->unk4 * D_800C7DC0;
+                scaledDamage *= D_800C2CD4_de;
+                damagePacket->unk4 = (s32) (scaledDamage * D_800C2CE0_de);
                 break;
             case 1:
-                var_f1 = (f32) arg1->unk4 * D_800C7DC8;
-                var_f1 *= D_800C2CDC_de;
-                arg1->unk4 = (s32) (var_f1 * D_800C2CE0_de);
+                scaledDamage = (f32) damagePacket->unk4 * D_800C7DC8;
+                scaledDamage *= D_800C2CDC_de;
+                damagePacket->unk4 = (s32) (scaledDamage * D_800C2CE0_de);
                 break;
             }
         }
         { CGameStatus *state=(&D_801462C8.counters);
-        if ((state->teams != 0) && (((unsigned char *)state)[-0x5B0] == 0) && ((var_a3->unk1450 == 0) || (arg0->unk1450 == 0)) && (arg0->unk5D8->unk92 == var_a3->unk5D8->unk92)) {
-            arg1->unk4 = 0;
+        if ((state->teams != 0) && (((unsigned char *)state)[-0x5B0] == 0) && ((creditedPlayer->unk1450 == 0) || (damagedPlayer->unk1450 == 0)) && (damagedPlayer->unk5D8->unk92 == creditedPlayer->unk5D8->unk92)) {
+            damagePacket->unk4 = 0;
         }}
     }
 }
 
-void func_8022A170_de(struct CPlayerPool_t *arg0) {
+void func_8022A170_de(struct CPlayerPool_t *playerPool) {
     void *node;
 
-    if (*(void **)arg0 != 0) {
-        Scene_MarkResourceInUse(0, *(void **)arg0);
+    if (*(void **)playerPool != 0) {
+        Scene_MarkResourceInUse(0, *(void **)playerPool);
     }
 
-    node = arg0->m_ActiveList.head;
+    node = playerPool->m_ActiveList.head;
     if (node != 0) {
         u8 *base = (u8 *)&D_801462C8;
 
@@ -382,14 +382,14 @@ void func_8022A170_de(struct CPlayerPool_t *arg0) {
     }
 }
 
-void func_8022A1FC_de(struct CPlayerPool_t *arg0, void *world) {
+void func_8022A1FC_de(struct CPlayerPool_t *playerPool, void *world) {
     void *node;
     int scale;
     s32 count1;
     s32 count2;
     char *entry;
 
-    node = arg0->m_ActiveList.head;
+    node = playerPool->m_ActiveList.head;
     if (node != 0) {
         do {
             ((ObjectLinks16E4_2 *)(node))->unk_70 = 0;
@@ -417,13 +417,13 @@ void func_8022A1FC_de(struct CPlayerPool_t *arg0, void *world) {
     }
 }
 
-void func_8022A2A0_de(void *arg0, void *view) {
+void func_8022A2A0_de(void *world, void *view) {
     func_80228774_S1 *object;
     func_80207B5C_S2 *argument;
     func_8022A274_S2 *cur;
 
     Render_BeginModelBatch();
-    object = arg0;
+    object = world;
     cur = object->unk20;
     if (cur != 0) {
         do {
@@ -440,62 +440,62 @@ void func_8022A2A0_de(void *arg0, void *view) {
 }
 
 /* Removes entity from list if owned by specific owner, with version-specific check. */
-void func_8022A328_de(void *arg0, void *view) {
+void func_8022A328_de(void *world, void *view) {
     func_80228774_S1 *object;
     func_80207B5C_S2 *argument;
-    ObjRecAt16E0V3 *var_s0;
+    ObjRecAt16E0V3 *viewPlayer;
 
 #if defined(VERSION_US_REV1)
     if (D_800D0EBC != 0) {
-        object = arg0;
-        object = arg0;
-    var_s0 = object->unk20;
-        if (var_s0 != 0) {
+        object = world;
+        object = world;
+    viewPlayer = object->unk20;
+        if (viewPlayer != 0) {
             do {
                 argument = view;
-                if (var_s0->unk5DC == view &&
+                if (viewPlayer->unk5DC == view &&
                     argument->unk24 == 0 &&
-                    var_s0->unkE4 != D_800CE47C) {
-                    func_8021CBD0_de(var_s0, view);
+                    viewPlayer->unkE4 != D_800CE47C) {
+                    func_8021CBD0_de(viewPlayer, view);
                 }
-                var_s0 = var_s0->unk16E0;
-            } while (var_s0 != 0);
+                viewPlayer = viewPlayer->unk16E0;
+            } while (viewPlayer != 0);
         }
     }
 #else
-    object = arg0;
-    var_s0 = object->unk20;
-    if (var_s0 != 0) {
+    object = world;
+    viewPlayer = object->unk20;
+    if (viewPlayer != 0) {
         do {
             argument = view;
-            if (var_s0->unk5DC == view &&
+            if (viewPlayer->unk5DC == view &&
                 argument->unk24 == 0 &&
-                var_s0->unkE4 != D_800CE47C) {
-                func_8021CBD0_de(var_s0, view);
+                viewPlayer->unkE4 != D_800CE47C) {
+                func_8021CBD0_de(viewPlayer, view);
             }
-            var_s0 = var_s0->unk16E0;
-        } while (var_s0 != 0);
+            viewPlayer = viewPlayer->unk16E0;
+        } while (viewPlayer != 0);
     }
 #endif
 }
 
 /* Notifies the entity list associated with arg0 about arg1 and calls a handler for each owner. */
-void func_8022A398_de(void *arg0, void *entity) {
-    Round *round = arg0;
-    Shared_ActorView *var_s0;
+void func_8022A398_de(void *roundContext, void *entity) {
+    Round *round = roundContext;
+    Shared_ActorView *viewPlayer;
 
 #if defined(VERSION_US_REV1)
     if (D_800D0EBC != 0) {
 #endif
         Camera_LoadProjectionMatrix(entity);
-        var_s0 = round->players;
-        if (var_s0 != 0) {
+        viewPlayer = round->players;
+        if (viewPlayer != 0) {
             do {
-                if (var_s0->message == entity) {
-                    func_8021EEFC_de(var_s0, entity);
+                if (viewPlayer->message == entity) {
+                    func_8021EEFC_de(viewPlayer, entity);
                 }
-                var_s0 = var_s0->next;
-            } while (var_s0 != 0);
+                viewPlayer = viewPlayer->next;
+            } while (viewPlayer != 0);
         }
 #if defined(VERSION_US_REV1)
     }

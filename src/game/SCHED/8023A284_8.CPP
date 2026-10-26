@@ -7,33 +7,33 @@
 
 
 
-void func_8023B8F8_de(s32 arg0, s32 arg1) {
-    func_80255ED8_de(arg0 + 0x8B4, arg1);
-    func_80255CB8_de(arg0 + 0x8A0, arg1);
+void func_8023B8F8_de(s32 sceneAddress, s32 effectNode) {
+    func_80255ED8_de(sceneAddress + 0x8B4, effectNode);
+    func_80255CB8_de(sceneAddress + 0x8A0, effectNode);
 }
 
 /** Swap the two words pointed to by arg0 and arg1. */
-void func_8023B938_de(int *arg0, int *arg1) {
+void func_8023B938_de(int *leftEntry, int *rightEntry) {
     int temp;
 
-    temp = *arg0;
-    *arg0 = *arg1;
-    *arg1 = temp;
+    temp = *leftEntry;
+    *leftEntry = *rightEntry;
+    *rightEntry = temp;
 }
 
 s32 func_8023B94C_de(void **arg0, void **arg1)
 {
   f32 new_var2;
   int new_var;
-  s32 var_v0;
-  var_v0 = 1;
+  s32 comparisonResult;
+  comparisonResult = 1;
   new_var2 = ((struct ObjRecAt210 *) ((s8 *) (*arg0)))->unk210;
   if ((((struct ObjRecAt210 *) ((s8 *) (*arg1)))->unk210) < new_var2)
   {
     new_var = 1;
-    var_v0 = -new_var;
+    comparisonResult = -new_var;
   }
-  return var_v0;
+  return comparisonResult;
 }
 
 /** Compare two records by the float at nested offset 0x210. */

@@ -5498,7 +5498,7 @@ segments:
       - [0xD1510, data, data_800C/data_writable_800D0910]
       - [0xD1564, data, data_800C/D_d0_bcfb6118f48bd816]
       - [0xD162C, data, data_800C/D_blob_c0b269715a2542e369bd]
-      - [0xD1630, data, data_800C/D_800CB7F0]
+      - [0xD1630, data, data_800C/g_soundVolumeScales]
       - [0xD1728, rodata, data_800C/D_blob_025949d948ec1c48aaa6]
       - [0xD172C, data, data_800C/D_auto_src_ragewars_interpolated_ratio_curve_us_rev1]
       - [0xD1910, data, data_800C/D_blob_phase2_4ae27cab82365d99a51e]

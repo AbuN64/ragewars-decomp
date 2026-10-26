@@ -52,16 +52,16 @@ void func_8022B09C_de(void *player, CVector3 *point) {
     Particle_TransformPoint(matrix_ptr, input_ptr, point);
 }
 
-void func_8022B11C_de(void *arg0, s32 arg1) {
-    u16 temp_v0;
-    u16 var_v1;
-    temp_v0 = (((struct ObjectState16DA *) ((s8 *) arg0))->unk_16D8) + arg1;
-    var_v1 = temp_v0;
-    (((struct ObjectState16DA *) ((s8 *) arg0))->unk_16D8) = temp_v0;
-    if ((u32) (var_v1 & 0xFFFF) >= 0x65U) {
-        var_v1 = 0x64;
+void func_8022B11C_de(void *player, s32 increment) {
+    u16 wrappedSum;
+    u16 cappedCounter;
+    wrappedSum = (((struct ObjectState16DA *) ((s8 *) player))->unk_16D8) + increment;
+    cappedCounter = wrappedSum;
+    (((struct ObjectState16DA *) ((s8 *) player))->unk_16D8) = wrappedSum;
+    if ((u32) (cappedCounter & 0xFFFF) >= 0x65U) {
+        cappedCounter = 0x64;
     }
-    (((struct ObjectState16DA *) ((s8 *) arg0))->unk_16D8) = var_v1;
+    (((struct ObjectState16DA *) ((s8 *) player))->unk_16D8) = cappedCounter;
 }
 
 void func_8022B144_de(void *player, f32 *origin) {

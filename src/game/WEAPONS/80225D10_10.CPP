@@ -87,18 +87,18 @@ void *Weapons_FindNearestPlayer(void *world, s32 point, s32 pointYBits, s32 poin
     return result;
 }
 
-void *Weapons_FindNearestLivePlayer(struct Context *context, CVector3 position, void *arg4) {
-    f32 var_f3;
+void *Weapons_FindNearestLivePlayer(struct Context *context, CVector3 position, void *excludedPlayer) {
+    f32 nearestDistanceSquared;
     Shared_ActorView *actor;
-    void *var_a1;
+    void *nearestPlayer;
     f32 dx, dy, dz, distSq;
 
-    var_f3 = D_800C2CE8_de;
+    nearestDistanceSquared = D_800C2CE8_de;
     actor = (void *)context->head;
-    var_a1 = 0;
+    nearestPlayer = 0;
     if (actor != 0) {
         do {
-            if (actor->health != 0 && actor != arg4) {
+            if (actor->health != 0 && actor != excludedPlayer) {
                 dx = ((LevelActor *)actor)->position0.x - position.x;
                 dx = dx * dx;
                 dy = ((LevelActor *)actor)->position0.y - position.y;
@@ -106,15 +106,15 @@ void *Weapons_FindNearestLivePlayer(struct Context *context, CVector3 position, 
                 dz = ((LevelActor *)actor)->position0.z - position.z;
                 dz = dz * dz;
                 distSq = (dx + dy) + dz;
-                if (distSq < var_f3) {
-                    var_f3 = distSq;
-                    var_a1 = actor;
+                if (distSq < nearestDistanceSquared) {
+                    nearestDistanceSquared = distSq;
+                    nearestPlayer = actor;
                 }
             }
             actor = actor->next;
         } while (actor != 0);
     }
-    return var_a1;
+    return nearestPlayer;
 }
 
 s32 Weapons_GetPlayerIndex(void *world, unsigned int playerAddress)
@@ -357,8 +357,8 @@ f32 func_8022AA44_de(SharedRecAt848 *arg0) {
     return 1.0f - value;
 }
 
-s32 func_8022AA9C_de(AimPlayer *aimPlayer, s32 arg1) {
-    void *p = D_800D052C[arg1];
+s32 func_8022AA9C_de(AimPlayer *aimPlayer, s32 weaponId) {
+    void *p = D_800D052C[weaponId];
     if (aimPlayer->unk594 == 1) {
         return ((GlobalState *)p)->field20;
     }
@@ -407,23 +407,23 @@ s16 Weapons_GetWeaponAmmo(void *actor, s32 weaponId) {
 }
 
 s32 func_8022AB9C_de(void *player) {
-    s16 *var_v0;
-    s32 temp_v1;
+    s16 *selectedClassEntry;
+    s32 ammoClassId;
     WeaponInfo *weapon;
 
     weapon = D_800D052C[((Shared_ActorView *)player)->selectedAction];
     if (((Player *)player)->gear == 1) {
-        var_v0 = weapon->weaponClass;
+        selectedClassEntry = weapon->weaponClass;
     } else {
-        var_v0 = weapon->alternateClass;
+        selectedClassEntry = weapon->alternateClass;
     }
-    if (var_v0 != 0) {
-        temp_v1 = *var_v0;
+    if (selectedClassEntry != 0) {
+        ammoClassId = *selectedClassEntry;
     } else {
-        temp_v1 = -1;
+        ammoClassId = -1;
     }
-    if (temp_v1 != -1) {
-        return D_800CB348_de[temp_v1];
+    if (ammoClassId != -1) {
+        return D_800CB348_de[ammoClassId];
     }
     return -1;
 }

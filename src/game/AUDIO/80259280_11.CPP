@@ -127,7 +127,7 @@ void func_80259C5C_de(ViewRecAtB0 *view, ControllerCode802591C0 *controller, s32
 }
 
 /* Starts or retunes a voice's pan: seeds the gain from the sound table (the id compared with each entry of the
- * 0x1F pairs at D_800CB7F0 gives its scale), halves it when the shared flag says so, takes the pan angles from the
+ * 0x1F pairs at g_soundVolumeScales gives its scale), halves it when the shared flag says so, takes the pan angles from the
  * preset or the controller yaw, measures how loudly the listener hears it (squared distance falloff raised to the
  * power the voice kind asks for) and writes the left and right levels, interpolating the pan over the given
  * steps when the controller asks for a ramp. */
@@ -152,7 +152,7 @@ typedef struct SoundMixParameters {
 } SoundMixParameters;
 
 typedef struct VoiceScaleEntry { f32 soundId, scale; } VoiceScaleEntry;
-extern VoiceScaleEntry D_800CB7F0[];
+extern VoiceScaleEntry g_soundVolumeScales[];
 extern float D_800C3F34_de;
 extern SoundEnvelope *Audio_GetMetadataSectionThreeEntry(ContextRecAt2BC0 *context, int index);
 static inline s32 lookupPanValue(s32 panAngle) {
@@ -183,8 +183,8 @@ void Audio_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s32
     voice->volumeScale = D_800C3F20_de;
     if (voice->soundId < 0x100) {
         for (i = 0; i < 0x1F; i++) {
-            if (voice->soundId == (s32)D_800CB7F0[i].soundId) {
-                voice->volumeScale = D_800CB7F0[i].scale;
+            if (voice->soundId == (s32)g_soundVolumeScales[i].soundId) {
+                voice->volumeScale = g_soundVolumeScales[i].scale;
                 break;
             }
         }

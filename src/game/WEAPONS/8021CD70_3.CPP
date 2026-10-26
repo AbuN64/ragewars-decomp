@@ -47,11 +47,11 @@ void func_8021D774_de(AimPlayer *player) {
     CVector3 direction;
     AimActor *lockedTarget, *probeTarget;
     CVector3 *aimOffsetOutput, *temp_s2, *temp_s2_2, *var_a1, *temp_s0_2, *temp_s1;
-    f32 temp_fs0, temp_fs1f, temp_fs2, temp_fv0, temp_fv0_2, var_fs0f, var_fs1;
-    s16 temp_v1, temp_v1_2;
+    f32 smoothingFactor, temp_fs1f, temp_fs2, temp_fv0, temp_fv0_2, var_fs0f, var_fs1;
+    s16 selectedWeapon, temp_v1_2;
     s32 var_s4;
     s32 temp_v1_3, var_s0, var_s5;
-    AimActor *temp_a1, *target;
+    AimActor *rayHitActor, *target;
     AimView *view;
     lockedTarget = NULL;
     view = player->view;
@@ -75,10 +75,10 @@ void func_8021D774_de(AimPlayer *player) {
     localForward.z = D_800C23C0_de;
     Particle_TransformPoint(matrix, &localForward, &desired);
     if (player->enabled != 0) {
-        if ((func_802444A4_de((char *)player, current, desired, (s32) &D_801000F0) != 0) && (temp_a1 = D_80103FCC->actor, (temp_a1 != NULL))) {
-            if (temp_a1->kind == 1) {
-                if (temp_a1->flags & 0x300000) {
-                    Particle_SubtractVectors((CVector3 *)&aimRotation, &temp_a1->pos, &player->unk8);
+        if ((func_802444A4_de((char *)player, current, desired, (s32) &D_801000F0) != 0) && (rayHitActor = D_80103FCC->actor, (rayHitActor != NULL))) {
+            if (rayHitActor->kind == 1) {
+                if (rayHitActor->flags & 0x300000) {
+                    Particle_SubtractVectors((CVector3 *)&aimRotation, &rayHitActor->pos, &player->unk8);
                     temp_fv0 = Math_Sqrtf((aimRotation.x * aimRotation.x) + (aimRotation.y * aimRotation.y) + (aimRotation.z * aimRotation.z));
                     direction = localForward;
                     Particle_NormalizeVec3(&direction);
@@ -106,10 +106,10 @@ block_15:
     } else {
         weapon=D_800D052C[player->unk62E]; var_s4=weapon->idle;
     }
-    temp_v1 = player->unk62E;
+    selectedWeapon = player->unk62E;
     var_s5 = var_s4 + 0x64;
     var_s0 = 1;
-    if ((temp_v1 == 1) || (temp_v1 == 0x12)) {
+    if ((selectedWeapon == 1) || (selectedWeapon == 0x12)) {
         var_fs0f = D_800C23C4_de;
         var_fs1 = var_fs0f;
     } else {
@@ -178,13 +178,13 @@ block_15:
         player->smoothVelocity.z = 0;
     }
     temp_s2 = &player->smooth;
-    temp_fs0 = D_800C23CC_de;
+    smoothingFactor = D_800C23CC_de;
     Particle_SubtractVectors(&smoothOffset, &aimResult.xyz, temp_s2);
-    Particle_ScaleVector(&smoothOffset, &smoothOffset, temp_fs1f * temp_fs0);
+    Particle_ScaleVector(&smoothOffset, &smoothOffset, temp_fs1f * smoothingFactor);
     temp_s0_2 = &player->smoothVelocity;
     Particle_AddVec3(temp_s0_2, temp_s0_2, &smoothOffset);
     Particle_AddVec3(temp_s2, temp_s2, temp_s0_2);
-    Particle_ScaleVector(temp_s0_2, temp_s0_2, temp_fs2 * temp_fs0);
+    Particle_ScaleVector(temp_s0_2, temp_s0_2, temp_fs2 * smoothingFactor);
     if (lockedTarget != NULL) {
         weapon=D_800D052C[player->unk62E]; player->unk7B8=weapon->locked+0x64;
     } else {

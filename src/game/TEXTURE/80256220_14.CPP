@@ -182,12 +182,12 @@ extern void func_802B2650_de(void *, void *);
 extern void func_8025768C_de(ContextRecAt2BC0 *);
 extern void func_8025D844_de(void *, void *);
 extern void func_802596B4_de(void *, void *);
-extern void func_8025B758_de(void *, void *);
+extern void Audio_InitializeVoicePool(void *, void *);
 extern void func_8025D158_de(void *, void *);
 extern s32 D_800CD8C0_de;
 extern s32 D_800CB724;
 s32 func_80265964_de(s32 arg0);
-void *func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2);
+void *Virtual_AllocateVirtualRegion(s32 arg0, s32 arg1_unused, s32 arg2);
 static inline void LockEnter(MenuRules *lock) {
     u32 mask = __osDisableInt();
     if (++lock->locked != 1) {
@@ -237,7 +237,7 @@ void func_80257360_de(ContextRecAt2BC0 *ctx) {
     Texture_InitializeAudioWorker(&config, D_800CD8C0_de, &timing);
     D_801076A0 = func_80265964_de(8);
     size = func_80265964_de(4) - func_80265964_de(0);
-    loaded = func_8023C78C_de(size, 0, func_80265964_de(0));
+    loaded = Virtual_AllocateVirtualRegion(size, 0, func_80265964_de(0));
     ctx->field1D6C = loaded->table;
     ctx->resource = loaded->bankFile;
     ctx->font = ctx->resource->bankArray[0];
@@ -274,7 +274,7 @@ void func_80257360_de(ContextRecAt2BC0 *ctx) {
     ctx->field2BB8 = 0;
     ctx->field2B9C = 0;
     func_802596B4_de(ctx->view, ctx);
-    func_8025B758_de(ctx->menu, ctx);
+    Audio_InitializeVoicePool(ctx->menu, ctx);
     ctx->red = D_801462C8.volume[1] * D_800C3ED0_de;
     ctx->green = D_801462C8.volume[0] * D_800C3ED0_de;
     ctx->blue = D_801462C8.volume[2] * D_800C3ED0_de;
@@ -291,7 +291,7 @@ void func_80257360_de(ContextRecAt2BC0 *ctx) {
 #include "COMMON/EXTERNS_14.H"
 #include "TYPES.H"
 s32 func_80265964_de(s32 arg0);
-void *func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2);
+void *Virtual_AllocateVirtualRegion(s32 arg0, s32 arg1_unused, s32 arg2);
 void func_8025768C_de(ContextRecAt2BC0 *ctx) {
     s32 total;
     s32 *index;
@@ -305,7 +305,7 @@ void func_8025768C_de(ContextRecAt2BC0 *ctx) {
     void *section;
 
     total = func_80265964_de(0x14) - func_80265964_de(0x10);
-    ctx->soundData = func_8023C78C_de(total, 0, func_80265964_de(0x10));
+    ctx->soundData = Virtual_AllocateVirtualRegion(total, 0, func_80265964_de(0x10));
     section = Render_GetPackSection(ctx->soundData, 0);
     Render_GetPackSection(ctx->soundData, 1);
     tables = Render_GetPackSection(section, 0);

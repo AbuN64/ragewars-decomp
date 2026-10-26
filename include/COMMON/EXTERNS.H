@@ -6,10 +6,10 @@
 
 
 #include "COMMON/SHAREDPLAYER.H"
-extern void func_802591A0_de(void *arg0, s16 arg1);
+extern void Audio_ResolveInstrumentSectionZero(void *arg0, s16 arg1);
 
 #include "COMMON/LISTNODE.H"
-extern int func_80259200_de(ObjRecAt1E64 *obj, int id);
+extern int Audio_IsSoundInstanceLimitReached(ObjRecAt1E64 *obj, int id);
 
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 

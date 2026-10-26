@@ -113,7 +113,7 @@ func_802BD200_eu_x
     *(Quad_func_802A1BE0_de *)0x80000180 = *D_002BBC70;
     func_802BD280_de((void *)0x80000000, 0x80000180 - 0x80000000 + sizeof(Quad_func_802A1BE0_de));
     func_802BD010_de((void *)0x80000000, 0x80000180 - 0x80000000 + sizeof(Quad_func_802A1BE0_de));
-    func_8023C750_de();
+    Virtual_MapBootstrapAddressRange();
     func_802B9B20_de(4, &clock);
     clock &= ~0xf;
     if (clock != 0) {

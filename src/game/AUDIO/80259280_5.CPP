@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "AUDIO/80259280_5.H"
 
-extern void func_8025B6F8_de(Header *header, s32 owner, s32 arg2);
+extern void Audio_InitializeVoiceRecord(Header *header, s32 owner, s32 arg2);
 
 static inline void func_802596D4_linkInit(ListLink *link) {
     link->prev = link;
@@ -21,7 +21,7 @@ static inline void func_802596D4_insertAfter(ListLink *at, ListLink *link) {
 
 static inline void func_802596D4_voiceInit(VoiceRecAt8 *voice, s32 owner) {
     func_802596D4_linkInit(&voice->link);
-    func_8025B6F8_de(&voice->header, owner, -1);
+    Audio_InitializeVoiceRecord(&voice->header, owner, -1);
 }
 
 /* Starts a copy of a sound table entry when that entry is idle: takes the first node of the free list at
@@ -49,9 +49,9 @@ void func_802596B4_de(ChannelSet *set, s32 owner) {
 
     set->owner = owner;
     func_802596D4_linkInit(&set->free);
-    func_8025B6F8_de(&set->freeHeader, owner, -1);
+    Audio_InitializeVoiceRecord(&set->freeHeader, owner, -1);
     func_802596D4_linkInit(&set->active);
-    func_8025B6F8_de(&set->activeHeader, owner, -1);
+    Audio_InitializeVoiceRecord(&set->activeHeader, owner, -1);
     for (i = 0; i < 32; i++) {
         func_802596D4_voiceInit(&set->voices[i], owner);
         func_802596D4_insertAfter(set->active.prev, &set->voices[i].link);

@@ -158,13 +158,13 @@ s32 func_8023B718_de(Rotor *rotor, s32 mask, f32 fallback, s32 boosting, f32 boo
     return 0;
 }
 
-void *func_8023B8AC_de(struct IntegerState8A4 *arg0) {
+void *func_8023B8AC_de(struct IntegerState8A4 *sceneOwner) {
     void *head;
 
-    head = arg0->unk_8A0.head;
+    head = sceneOwner->unk_8A0.head;
     if (head != 0) {
-        func_80255ED8_de(&arg0->unk_8A0, head);
-        func_80255D14_de(&arg0->unk_8B4, head);
+        func_80255ED8_de(&sceneOwner->unk_8A0, head);
+        func_80255D14_de(&sceneOwner->unk_8B4, head);
     }
     return head;
 }

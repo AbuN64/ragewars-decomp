@@ -34,7 +34,7 @@ struct Lists;
 struct VoiceRecAt8;
 typedef struct VoiceRecAt8 VoiceRecAt8;
 
-extern void func_802591D0_de(void *arg0, s16 arg1);
+extern void Audio_ResolveInstrumentSectionOne(void *arg0, s16 arg1);
 
 struct ManagerRecAtD8V2;
 typedef struct ManagerRecAtD8V2 ManagerRecAtD8V2;
@@ -144,8 +144,8 @@ struct ContextCode802591C0 {
     char cells[1];
 };
 
-struct Slot_func_80259200_de;
-struct Slot_func_80259200_de {
+struct SlotAudioIsSoundInstanceLimitReached;
+struct SlotAudioIsSoundInstanceLimitReached {
     int id;
     char pad[0xC8];
 };
@@ -164,15 +164,15 @@ struct Node_func_802598B4_de {
 };
 
 
-struct Slot_func_80259200_de;
-typedef struct Slot_func_80259200_de Slot_func_80259200_de;
+struct SlotAudioIsSoundInstanceLimitReached;
+typedef struct SlotAudioIsSoundInstanceLimitReached SlotAudioIsSoundInstanceLimitReached;
 
 struct ObjRecAt1E64;
 struct ObjRecAt1E64 {
     char pad[0x102];
     short owner;
     char pad104[0x1E64 - 0x104];
-    Slot_func_80259200_de slots[17];
+    SlotAudioIsSoundInstanceLimitReached slots[17];
 };
 
 

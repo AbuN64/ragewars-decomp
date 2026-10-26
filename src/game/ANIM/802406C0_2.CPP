@@ -37,17 +37,17 @@ static inline void quad_normal(struct Quad *quad) {
 
 void func_80240CAC_de(void *query) {
     QueryE0 *object = query;
-    CVector3 sp10;
-    CVector3 sp20;
-    CVector3 *temp_s1;
-    CVector3 *temp_s0;
+    CVector3 firstEdge;
+    CVector3 secondEdge;
+    CVector3 *middleVertex;
+    CVector3 *outputNormal;
 
-    temp_s1 = &object->vectors[1];
-    Particle_SubtractVectors(&sp10, temp_s1, &object->vectors[0]);
-    Particle_SubtractVectors(&sp20, &object->vectors[2], temp_s1);
-    temp_s0 = &object->result;
-    Particle_CrossVectors(temp_s0, &sp20, &sp10);
-    Particle_NormalizeVec3(temp_s0);
+    middleVertex = &object->vectors[1];
+    Particle_SubtractVectors(&firstEdge, middleVertex, &object->vectors[0]);
+    Particle_SubtractVectors(&secondEdge, &object->vectors[2], middleVertex);
+    outputNormal = &object->result;
+    Particle_CrossVectors(outputNormal, &secondEdge, &firstEdge);
+    Particle_NormalizeVec3(outputNormal);
 }
 
 void Anim_BuildBoxFace0(struct Quad *quad, CVector3 *points) {

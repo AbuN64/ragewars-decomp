@@ -30,19 +30,19 @@ extern s32 func_802BB160_de(OSMesgQueue *queue, void *message, s32 block);
 
 
 
-s32 func_80255170_de(ResourceLoadWorker *arg0, ResourceLoadRequest *message) {
-    OSMesgQueue sp10;
-    s32 sp28;
-    void *sp2C;
+s32 func_80255170_de(ResourceLoadWorker *worker, ResourceLoadRequest *message) {
+    OSMesgQueue completionQueue;
+    s32 replyMessageStorage;
+    void *completedRequest;
     s32 temp;
 
-    osCreateMesgQueue(&sp10, &sp28, 1);
+    osCreateMesgQueue(&completionQueue, &replyMessageStorage, 1);
     temp = D_800CD8B8_de;
-    message->replyQueue = &sp10;
+    message->replyQueue = &completionQueue;
     D_800CD704 = 2;
-    func_802BB5F0_de(arg0, temp);
-    func_802BB160_de(&arg0->requests, message, 1);
-    osRecvMesg(&sp10, &sp2C, 1);
+    func_802BB5F0_de(worker, temp);
+    func_802BB160_de(&worker->requests, message, 1);
+    osRecvMesg(&completionQueue, &completedRequest, 1);
     return 1;
 }
 

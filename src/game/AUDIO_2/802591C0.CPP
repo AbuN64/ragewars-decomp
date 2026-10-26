@@ -24,7 +24,7 @@ extern u32 __osDisableInt(void);
 
 
 
-extern void func_8025BE08_de(void *arg0, s32 arg1);
+extern void Audio_StopVoicesByKey(void *arg0, s32 arg1);
 
 extern void func_8025BF08_de(void *, s32);
 
@@ -39,7 +39,7 @@ extern s32 func_802934F8_de(void);
 
 extern void *Camera_FindNearestCamera(MenuMatchGlobals *arg0, CVector3 *arg1);
 
-extern void func_8025B5F0_de(void *arg0, s32 arg1);
+extern void Audio_StopVoicesExceptKey(void *arg0, s32 arg1);
 
 extern void func_80259918_de(void *arg0, s32 arg1);
 
@@ -49,7 +49,7 @@ extern void func_8025DB34_de(Track *a);
 
 extern void func_8025DB44_de(Track *a);
 
-extern void func_8025BB3C_de(int a);
+extern void Audio_ClearVoiceFlags(int a);
 
 /* Picks a weighted random entry from the range func_80265550_de finds for an id in a scene's table: -1 when
  * the scene has no table or no range, the single entry when the range has one; otherwise each entry weighs
@@ -77,7 +77,7 @@ void func_80258800_de(ContextRecAt2BC0 *context, s32 matchValue) {
             __osRestoreInt(mask);
         }
     }
-    func_8025BE08_de(&context->menu[0], matchValue);
+    Audio_StopVoicesByKey(&context->menu[0], matchValue);
     func_80259988_de(&context->view[0], matchValue);
     {
         s32 *contextLock;
@@ -195,11 +195,11 @@ void Audio_PlayPeriodicTrackSound(ContextRecAt2BC0 *arg0) {
     }
 }
 
-void func_80258B8C_de(ContextRecAt2BC0 *arg0, float arg1) {
+void Audio_SetVolumeSettingOne(ContextRecAt2BC0 *arg0, float arg1) {
     arg0->red = arg1;
 }
 
-void func_80258B94_de(ContextRecAt2BC0 *arg0, int arg1) {
+void Audio_SetVolumeSettingZero(ContextRecAt2BC0 *arg0, int arg1) {
     double d = (double)arg1;
     if (arg1 < 0) {
         d = d + D_800C3EE8_de;
@@ -208,7 +208,7 @@ void func_80258B94_de(ContextRecAt2BC0 *arg0, int arg1) {
 }
 
 /** Store the second argument at byte offset 0x2BA8 in the first argument. */
-void func_80258BBC_de(ContextRecAt2BC0 *object, float value) {
+void Audio_SetDialogVolume(ContextRecAt2BC0 *object, float value) {
     object->blue = value;
 }
 
@@ -243,7 +243,7 @@ void func_80258C0C_de(void *context, s32 matchValue) {
             __osRestoreInt(mask);
         }
     }
-    func_8025B5F0_de(&((ContextRecAt2BC0 *)(context))->menu[0], matchValue);
+    Audio_StopVoicesExceptKey(&((ContextRecAt2BC0 *)(context))->menu[0], matchValue);
     func_80259918_de(&((ContextRecAt2BC0 *)(context))->view[0], matchValue);
     {
         s32 *contextLock;
@@ -262,7 +262,7 @@ void func_80258C0C_de(void *context, s32 matchValue) {
             __osRestoreInt(releaseInterruptMask);
         }
     }
-    func_8025D1BC_de((char *)context + 0x2BC0);
+    Audio_StopDialogPlayer((char *)context + 0x2BC0);
 }
 
 /** Thin wrapper forwarding an offset argument to func_8025DACC_de. */
@@ -295,7 +295,7 @@ int Audio_GetSpatialPanMode(void *object) {
 }
 
 /** Store the supplied word at object offset 0x2BB0. */
-void func_80258D38_de(ContextRecAt2BC0 *arg0, int arg1) {
+void Audio_SetSpatialPanMode(ContextRecAt2BC0 *arg0, int arg1) {
     arg0->field2BB0 = arg1;
 }
 
@@ -390,9 +390,9 @@ void func_80258ED8_de(int contextAddress) {
     func_8025DB44_de(contextAddress + 0x1D64);
 }
 
-/** Thin wrapper forwarding an offset argument to func_8025BB3C_de. */
+/** Thin wrapper forwarding an offset argument to Audio_ClearVoiceFlags. */
 void func_80258EF4_de(int contextAddress) {
-    func_8025BB3C_de(contextAddress + 0x1DB8);
+    Audio_ClearVoiceFlags(contextAddress + 0x1DB8);
 }
 
 int Audio_PlayDialogGroup(ContextRecAt2BC0 *arg0, int group) {
@@ -404,13 +404,13 @@ int Audio_PlayDialogGroup(ContextRecAt2BC0 *arg0, int group) {
     return func_8025CED0_de(&arg0->dialog[0], group, scale, 0x40);
 }
 
-/** Thin wrapper forwarding an offset argument to func_8025D1BC_de. */
+/** Thin wrapper forwarding an offset argument to Audio_StopDialogPlayer. */
 void func_80258F50_de(int contextAddress) {
-    func_8025D1BC_de(contextAddress + 0x2BC0);
+    Audio_StopDialogPlayer(contextAddress + 0x2BC0);
 }
 
 /** Sort the table's word entries into ascending unsigned order. */
-void func_80258F6C_de(SortTable *table) {
+void Audio_SortTableEntries(SortTable *table) {
     int i;
     int j;
     u32 right;
@@ -434,7 +434,7 @@ void func_80258F6C_de(SortTable *table) {
 
 
 
-int func_80258FF4_de(char *context, int id) {
+int Audio_FindVoiceSlotById(char *context, int id) {
     Voice *slot;
     int i;
     slot = ((ContextRecAt2BC0 *)context)->voices;
@@ -449,7 +449,7 @@ int func_80258FF4_de(char *context, int id) {
     return -1;
 }
 
-s32 func_80259038_de(SceneRecAt2B5C *scene, s16 id, s16 avoid) {
+s32 Audio_ChooseWeightedSoundVariant(SceneRecAt2B5C *scene, s16 id, s16 avoid) {
     s32 first;
     s32 last;
     s32 total;
@@ -488,11 +488,11 @@ s32 func_80259038_de(SceneRecAt2B5C *scene, s16 id, s16 avoid) {
     return -1;
 }
 
-void func_802591A0_de(void *arg0, s16 index) {
+void Audio_ResolveInstrumentSectionZero(void *arg0, s16 index) {
     Render_GetPackSection(Render_GetPackSection((((struct ObjectLinks2B50 *) ((s8 *) arg0))->unk_2B4C), (s32) index), 0);
 }
 
-void func_802591D0_de(void *arg0, s16 index) {
+void Audio_ResolveInstrumentSectionOne(void *arg0, s16 index) {
     Render_GetPackSection(Render_GetPackSection((((struct ObjectLinks2B50 *) ((s8 *) arg0))->unk_2B4C), (s32) index), 1);
 }
 
@@ -502,7 +502,7 @@ void func_802591D0_de(void *arg0, s16 index) {
 
 
 
-int func_80259200_de(ObjRecAt1E64 *obj, int id) {
+int Audio_IsSoundInstanceLimitReached(ObjRecAt1E64 *obj, int id) {
     int count;
     int i;
 

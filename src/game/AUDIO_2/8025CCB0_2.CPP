@@ -108,7 +108,7 @@ void func_8025D158_de(struct Shape_typemap_110 *record, s32 resource) {
     record->field_1C = func_802B2510_de(Audio_GetSoundPlayer(record->field_0), D_800D0D78);
 }
 
-void func_8025D1BC_de(void *arg0) {
+void Audio_StopDialogPlayer(void *arg0) {
 
     PlayerRecAt1E *player = arg0;
     void *soundPlayer;
