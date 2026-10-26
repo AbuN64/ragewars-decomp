@@ -19,7 +19,6 @@ extern s32 func_802BADA0_de(struct OSThread_s *);
 extern void func_802BB5F0_de(struct OSThread_s *, s32);
 extern void osCreateThread(struct OSThread_s *, s32, void (*)(void *), void *, void *, s32);
 extern void osStartThread(struct OSThread_s *);
-extern u32 __osDisableInt(void);
 
 void func_802B8DC8_de(s32 pri, OSMesgQueue *cmdQ, void **cmdBuf, s32 cmdMsgCnt)
 {
