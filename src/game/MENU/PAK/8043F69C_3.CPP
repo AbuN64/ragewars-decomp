@@ -6,22 +6,8 @@
 #include "COMMON/UNUSED.H"
 #include "MENU/8043F69C.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
+#include "COMMON/MENU_ABBDC_VERSIONS.H"
 
-#if defined(VERSION_EU)
-const unsigned int rodata_func_8043F52C_de_800E2460[6] = {
-    0x00440434, 0x00440818, 0x00440924, 0x00440B48, 0x004406D8, 0x00440434,
-};
-#endif
-
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-#ifdef NON_MATCHING
-/* Drafted below with the other versions' body. */
-#else
-INCLUDE_ASM("ovl_80400000", Pak_MeasureMenuText);
-#endif
-#endif
-
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
 u32 Defs_GetMemorySize(void);
 int SetN64_IsModeThirteen(void);
 u8 *func_8043F290(TextBoundsText *);
@@ -49,6 +35,7 @@ static __inline__ TextBoundsFont *textBoundsFont(TextBoundsText *text) {
     case 0x2000: style = 8; break;
     default: style = 0; break;
     }
+    style += MENU_LANGUAGE * 9;
     return &D_800E1E24_de[style];
 }
 
@@ -76,7 +63,7 @@ void Pak_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
             if (text->mode == 5) {
                 string = func_8043F290(text);
             } else {
-                string = ((u8 **)text->text)[0];
+                string = ((u8 **)text->text)[MENU_LANGUAGE];
             }
             w = Pak_MeasureLine(string, size, size);
         } else {
@@ -84,7 +71,7 @@ void Pak_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
             if (text->mode == 5) {
                 string = func_8043F290(text);
             } else {
-                string = ((u8 **)text->text)[0];
+                string = ((u8 **)text->text)[MENU_LANGUAGE];
             }
             while (string != 0 && *string != 0 && *string != '\n') {
                 string++;
@@ -176,4 +163,3 @@ void Pak_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
     }
     metrics->m_Bottom = metrics->m_Top + metrics->height * metrics->m_ScaleY;
 }
-#endif

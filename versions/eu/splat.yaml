@@ -4672,7 +4672,7 @@ segments:
       - [0xEF618, rodata, data_800C/literals_func_8043F120_de]
       - [0xEF6A8, rodata, data_800C/D_8043F52C_E3058]
       - [0xEF6AC, rodata, data_800C/rodata_unresolved_800EEAAC]
-      - [0xEF6B0, rodata, data_800C/rodata_func_8043F52C_de_800E2460]
+      - [0xEF6B0, rodata, data_800C/literals_Pak_MeasureMenuText]
       - [0xEF6C8, rodata, data_800C/D_auto_rodata_func_8043F52C_de_800EEAC8]
       - [0xEF6E0, rodata, data_800C/literals_Pak_DrawStyledMenuText]
       - [0xEF6FC, rodata, data_800C/D_804402DC_E30AC]
