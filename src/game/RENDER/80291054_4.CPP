@@ -66,7 +66,7 @@ void func_80292308_de(TimingWorld *world) {
     func_8026D844_de();
     Render_BeginFrameDisplayList(world);
     func_80265DD0_de();
-    func_80263C24_de();
+    Control_TrackControllerPakChanges();
     Camera_UpdateViewportLayoutAndBounds(&world->viewport);
     func_80293268_de(world);
     draw = D_800CD790[world->unk26DB8].draw;

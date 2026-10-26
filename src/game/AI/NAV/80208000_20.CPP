@@ -15,7 +15,7 @@ extern f32 func_8029DD3C_de(f32);
 
 f32 func_80285630_de(s32 arg0);
 
-s32 func_8020E674_de(ActorRec *actor, f32 scale, f32 lateral);
+s32 Nav_IsBallisticArcObstructed(ActorRec *actor, f32 scale, f32 lateral);
 
 
 extern World *D_80103FCC;
@@ -25,7 +25,7 @@ extern s32 func_802444A4_de(InstanceHdr *arg0, CVector3 current, CVector3 desire
 
 /* Refine a launch angle by testing a ballistic arc against the destination.
  * State 0 initializes the bounds; later calls bisect the chosen quadrant. */
-s32 func_8020DDF4_eu(ActorRec *actor) {
+s32 Nav_RefineBallisticAim(ActorRec *actor) {
     CVector3 current;
     CVector3 delta;
     s32 first, last;
@@ -206,7 +206,7 @@ block_43:
                     temp_fs0_2 = temp_fv0_4 * temp_fv0_4;
                     temp_fv0f_2 = (func_8029DD3C_de(actor->field278 * 0.0174532942f) * horizontalDistance) + ((lateral * (horizontalDistance * horizontalDistance)) / (2.0f * (scale * scale) * temp_fs0_2));
                     if (((heightDelta - 1.0f) <= temp_fv0f_2) && (temp_fv0f_2 <= (heightDelta + 1.0f))) {
-                        if (func_8020E674_de(actor, scale, lateral) != 0) {
+                        if (Nav_IsBallisticArcObstructed(actor, scale, lateral) != 0) {
                             temp_v0_6 = actor->field284;
                             if (temp_v0_6 > 0) {
                                 actor->field284--;
@@ -309,7 +309,7 @@ block_88:
     }
 }
 
-s32 func_8020E674_de(ActorRec *actor, f32 scale, f32 lateral) {
+s32 Nav_IsBallisticArcObstructed(ActorRec *actor, f32 scale, f32 lateral) {
     CVector3 current;
     CVector3 desired;
     CVector3 delta;

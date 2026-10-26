@@ -5,7 +5,7 @@
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 /* Fuzzy draft: inline-asm carrier of the original instructions (no C written yet). */
-void func_80212E10_de(void) {
+void Nav_UpdatePatrolRouteDe(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
@@ -130,12 +130,12 @@ void func_80212E10_de(void) {
     );
 }
 #else
-INCLUDE_ASM("span_1000", func_80212E10_de);
+INCLUDE_ASM("span_1000", Nav_UpdatePatrolRouteDe);
 #endif
 #endif
 
 #if (defined(VERSION_DE)) && !defined(NON_MATCHING)
-INCLUDE_ASM("span_1000", func_80212FBC_de);
+INCLUDE_ASM("span_1000", Nav_UpdateObjectArrivalChase);
 #endif
 
 #if !(defined(VERSION_DE)) || defined(NON_MATCHING)
@@ -173,7 +173,7 @@ extern f32 Particle_GetPointDistance(CVector3 *a, CVector3 *b);
 extern s32 Nav_CollectDirectedNeighbors(RouteChaseGraph *graph, s32 from, s32 to, s32 *path, s32 flags);
 extern void Nav_ClearNodeQueue(RouteChaseBot *bot);
 
-void func_80212FBC_de(RouteChaseActor *actor)
+void Nav_UpdateObjectArrivalChase(RouteChaseActor *actor)
 {
     s32 path[64];
     RouteChaseBot *bot = actor->player->bot;

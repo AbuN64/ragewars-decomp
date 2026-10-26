@@ -151,7 +151,7 @@ extern void *func_80419E54_de(s32, s32);
 extern void Frontend_RelabelSlotRows(s32);
 extern void Frontend_RefreshPlayerPanel(s32);
 extern void Render_EnableControllerPak(s32);
-extern void func_8022EF30_de(Profile *);
+extern void Player_InitializeProfile(Profile *);
 extern void Pak_ProbeStatus(s32);
 extern s32 Pak_GetStatus(s32);
 extern void Frontend_RequestScreenMode(s32);
@@ -265,7 +265,7 @@ s32 func_8042F130_us_rev1(void *screen) {
         Frontend_RefreshPlayerPanel(i);
         Render_EnableControllerPak(i);
         for (j = 0; j < 4; j++) {
-            func_8022EF30_de(&D_800E54A4->players[i].records[j]);
+            Player_InitializeProfile(&D_800E54A4->players[i].records[j]);
         }
         for (j = 0; j < 16; j++) {
             Resmgr_FillMemory(D_800E54A4->players[i].noteTexts[j].name, 0, 0x14);

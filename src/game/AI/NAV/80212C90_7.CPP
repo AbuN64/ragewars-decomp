@@ -3,7 +3,7 @@
 
 #if defined(VERSION_EU)
 #ifdef NON_MATCHING
-#define func_80212E30_eu_x func_80212E30_eu
+#define func_80212E30_eu_x Nav_UpdatePatrolRouteEu
 #include "COMMON/ROUTE_CHASE_RECORDS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/TRIPLE.H"
@@ -87,7 +87,7 @@ void func_80212E30_eu_x(PatrolActor *actor)
     Nav_UpdatePlayerSteering(bot);
 }
 #else
-INCLUDE_ASM("span_1000", func_80212E30_eu);
+INCLUDE_ASM("span_1000", Nav_UpdatePatrolRouteEu);
 #endif
 #endif
 

@@ -39,7 +39,7 @@ extern void Frontend_SetWidgetFlag08(void *, s32);
 
 extern s32 Pak_DeleteNote(s32, s32);
 
-extern void func_8022EF30_de(void *);
+extern void Player_InitializeProfile(void *);
 extern void Pak_ProbeStatus(s32);
 extern void func_80433610_de(s32);
 extern void Frontend_RelabelSlotRows(s32);
@@ -418,7 +418,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                     for (j = 0; j < 4; j++) {
                         found = func_804358C0_de(D_800E54A4->players[p].profile, D_800E54A4->players[p].records[j].owner);
                         if (found != -1) {
-                            func_8022EF30_de(&((Profile *) D_80102B00)[found]);
+                            Player_InitializeProfile(&((Profile *) D_80102B00)[found]);
                         }
                     }
                 }
@@ -453,9 +453,9 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             i = D_800E54A4->players[p].choice;
             other = func_804358C0_de(D_800E54A4->players[p].profile, D_800E54A4->players[p].records[i].owner);
             if (other != -1) {
-                func_8022EF30_de(&((Profile *) D_80102B00)[other]);
+                Player_InitializeProfile(&((Profile *) D_80102B00)[other]);
             }
-            func_8022EF30_de(&D_800E54A4->players[p].records[i]);
+            Player_InitializeProfile(&D_800E54A4->players[p].records[i]);
             if (Frontend_SavePlayerRecords(p) == 1) {
                 if (D_800E54A4->players[p].sub == 5) {
                     switch (D_800E54A4->phase) {
@@ -969,7 +969,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
 #else
         case 0x2A8:
 #endif
-            func_8022F204_de(0);
+            Player_InitializeProfileSlot(0);
             MarkMenuEventHandled();
             func_8043577C_de(9);
             return 0;

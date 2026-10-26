@@ -46,8 +46,8 @@ f32 Render_GetSpatialEffectLevel(func_80285D00_S1 *pool, CVector3 position) {
                 amount = 0.0f;
             }
             amount *= node->unk1C;
-            first = func_80264EE0_de(&node->amplitudeCurve);
-            second = func_80264EE0_de(&node->lifetimeCurve);
+            first = Control_SampleEffectCurve(&node->amplitudeCurve);
+            second = Control_SampleEffectCurve(&node->lifetimeCurve);
             value += amount * first * second;
             node = node->next;
         }
@@ -82,7 +82,7 @@ INCLUDE_ASM("span_1000", func_80285634);
 
 static inline void bind(NodeCode8028469C *node, s32 offset, s32 id) {
 
-    func_80264DE0_de((char *)node + offset, func_8028CE78_de(&g_world, id));
+    Control_InitializeCurvePlayer((char *)node + offset, func_8028CE78_de(&g_world, id));
 }
 
 static inline void init(NodeCode8028469C *node, Clip *key, CVector3 position, f32 value0, f32 value1, NodeCode8028469C **owner) {
@@ -113,9 +113,9 @@ void func_802858B0_de(NodeCode8028469C *arg0, Clip *arg1, CVector3 arg2,
     if (arg7 != 0) {
         *arg7 = arg0;
     }
-    func_80264DE0_de(&arg0->amplitudeHandle,
+    Control_InitializeCurvePlayer(&arg0->amplitudeHandle,
                   (unsigned int)func_8028CE78_de(&g_world, arg1->mode));
-    func_80264DE0_de(&arg0->lifetimeHandle,
+    Control_InitializeCurvePlayer(&arg0->lifetimeHandle,
                   (unsigned int)func_8028CE78_de(&g_world, arg1->frames));
 }
 
@@ -138,9 +138,9 @@ s32 func_8028597C_de(s32 arg0) {
     s32 result;
 
     result = 0;
-    if (func_80264DF0_de(arg0 + 0x20) != 0) {
+    if (Control_AdvanceEffectCurve(arg0 + 0x20) != 0) {
         result = 1;
-    } else if (func_80264DF0_de(arg0 + 0x2C) != 0) {
+    } else if (Control_AdvanceEffectCurve(arg0 + 0x2C) != 0) {
         result = 1;
     }
     return result;
@@ -168,8 +168,8 @@ f32 func_802859D0_de(f32 *arg0, u32 arg1, u32 arg2, u32 arg3) {
         }
     }
     factor *= arg0[7];
-    first = func_80264EE0_de(&arg0[8]);
-    return factor * first * func_80264EE0_de(&arg0[11]);
+    first = Control_SampleEffectCurve(&arg0[8]);
+    return factor * first * Control_SampleEffectCurve(&arg0[11]);
 }
 
 void Render_InitPoolNodes(void *arg0, void *arg1, s32 arg2) {
@@ -222,7 +222,7 @@ void func_80285C78_de(void *pool) {
     for (node = (*active_list(pool)).head; node != 0; node = next) {
         next = node->next;
         flag = 0;
-        if (func_80264DF0_de(&node->amplitudeHandle) != 0 || func_80264DF0_de(&node->lifetimeHandle) != 0) {
+        if (Control_AdvanceEffectCurve(&node->amplitudeHandle) != 0 || Control_AdvanceEffectCurve(&node->lifetimeHandle) != 0) {
             flag = 1;
         }
         if (flag == 0) {

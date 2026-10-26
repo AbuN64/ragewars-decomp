@@ -372,14 +372,14 @@ struct ObjCode8022E938 {
     s32 counters[36]; /* 0x94 */
     u8 pad124[0x190 - 0x124];
 };
-extern void func_8022ED48_de(ActorRecAt16E0 *arg0);
-extern void func_8022EC3C_de(ActorRecAt16E0 *object);
-extern void func_8022EDA4_de(ResourceLoadState *arg0);
+extern void Player_ResetMotionAndSelectIdleAnimation(ActorRecAt16E0 *arg0);
+extern void Player_SelectMovementAnimation(ActorRecAt16E0 *object);
+extern void Player_ReleasePlayerResource(ResourceLoadState *arg0);
 extern void func_8022ECC4_de(void);
-extern void func_8022E948_de(Player *arg0);
-extern void func_8022ECCC_de(void);
+extern void Player_ToggleActionFlagMode(Player *arg0);
+extern void Player_AdvanceCurrentRunEndState(void);
 extern void func_8022EDF4_de(void);
 extern void func_8022EB04_de(void);
-extern void func_8022ED24_de(void);
-extern s32 func_8022EF04_de(s32 arg0, s32 arg1);
+extern void Player_UpdateStoredRunEndPlayer(void);
+extern s32 Player_CountTrailingSpaces(s32 arg0, s32 arg1);
 #endif

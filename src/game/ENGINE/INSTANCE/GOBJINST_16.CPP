@@ -31,8 +31,8 @@ extern void System_DeliverContactEffect(char *, char *, u16, s32, CVector3, stru
 extern void Scene_UnlockResource(s32 arg0, s32 arg1);
 extern void System_SampleVectorTrack(AnimChannel *, s32, f32, f32 *);
 
-void *func_8024C104_de(Triple *arg0, void *arg1, AnimChannel *anim) {
-    char *o1 = (char *) arg1;
+void *func_8024C104_de(Triple *outOffset, void *actor, AnimChannel *anim) {
+    char *o1 = (char *) actor;
     char mtx[0x40];
     f32 spVec[3];
     f32 inVec[3];
@@ -47,8 +47,8 @@ void *func_8024C104_de(Triple *arg0, void *arg1, AnimChannel *anim) {
     outVec[0] *= ((LevelActor *)o1)->scale.x;
     outVec[1] *= ((LevelActor *)o1)->scale.y;
     outVec[2] *= ((LevelActor *)o1)->scale.z;
-    *arg0 = *(Triple *) outVec;
-    return arg0;
+    *outOffset = *(Triple *) outVec;
+    return outOffset;
 }
 
 void func_8024C1C4_de(char *obj, void *anim)
@@ -70,18 +70,18 @@ void func_8024C1C4_de(char *obj, void *anim)
     }
 }
 
-s32 func_8024C294_de(LevelActor *actor, s32 arg1) {
-    void *temp_v0;
-    Table *temp_v1;
-    s32 temp_s0;
+s32 func_8024C294_de(LevelActor *actor, s32 deltaIndex) {
+    void *modelResource;
+    Table *deltaTable;
+    s32 sectionDelta;
 
     if (actor->flags & 0x40000) {
-        temp_v0 = Scene_RequestResource(0, actor->resource, actor->resource, actor->resourceFlags, 4, 0, 0, &D_800C3830_de, 1);
-        if (temp_v0 != 0) {
-            temp_v1 = Render_GetPackSection(*(void **) temp_v0, 1);
-            temp_s0 = temp_v1->deltas[arg1];
-            Scene_UnlockResource(0, (s32) temp_v0);
-            return temp_s0;
+        modelResource = Scene_RequestResource(0, actor->resource, actor->resource, actor->resourceFlags, 4, 0, 0, &D_800C3830_de, 1);
+        if (modelResource != 0) {
+            deltaTable = Render_GetPackSection(*(void **) modelResource, 1);
+            sectionDelta = deltaTable->deltas[deltaIndex];
+            Scene_UnlockResource(0, (s32) modelResource);
+            return sectionDelta;
         }
     }
     return -1;
@@ -91,13 +91,13 @@ int func_8024C344_de(void) {
     return 0;
 }
 
-void func_8024C34C_de(LevelActor *actor, AnimChannel *arg1) {
+void func_8024C34C_de(LevelActor *actor, AnimChannel *animation) {
     Scratch scratch;
     f32 zero;
 
     zero = 0.0f;
-    System_SampleVectorTrack(arg1, 0, zero, scratch.first);
-    System_SampleVectorTrack(arg1, 0, arg1->time, scratch.second);
+    System_SampleVectorTrack(animation, 0, zero, scratch.first);
+    System_SampleVectorTrack(animation, 0, animation->time, scratch.second);
     scratch.in[0] = scratch.second[0] - scratch.first[0];
     scratch.in[1] = zero;
     scratch.in[2] = scratch.second[1] - scratch.first[1];

@@ -2,14 +2,14 @@
 #include "TYPES.H"
 
 /* Two-word value setter; live func_802171BC_de uses the same word-array representation. */
-void func_802630E0_de(s32 *value, s32 word) {
+void AnimPool_InitializeBitReader(s32 *value, s32 word) {
     value[0] = word;
     value[1] = 0;
 }
 
 s32 func_80263154_de(BitReader *arg0, s32 arg1);
 
-s32 func_802630EC_de(BitReader *arg0, s32 arg1) {
+s32 AnimPool_ReadSignedBits(BitReader *arg0, s32 arg1) {
     s32 val;
     s32 i;
     s32 mask;

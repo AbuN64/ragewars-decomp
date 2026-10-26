@@ -19,53 +19,53 @@ extern s32 func_802624D8_de(void *arg0);
 
 extern ResourceEntry g_animationText[];
 
-void func_802625F0_de(AnimRef *arg0, f32 arg1) {
+void func_802625F0_de(AnimRef *animationState, f32 framePosition) {
     s16 *base;
     s32 count;
-    s32 temp_f2;
-    s32 temp_a0;
-    s32 var_v1;
+    s32 currentAngleFrame;
+    s32 followingAngleFrame;
+    s32 nextAngleFrame;
     f32 b_term;
     f32 e_term;
 
-    base = (s16 *)((ResidentDataChunk *)Render_GetPackSection(func_8026049C_de(arg0), 0))->data;
-    count = (s16)arg0->count;
-    var_v1 = count - 1;
-    temp_f2 = (s32) arg1;
-    temp_a0 = temp_f2 + 1;
-    if (temp_a0 < var_v1) {
-        var_v1 = temp_a0;
+    base = (s16 *)((ResidentDataChunk *)Render_GetPackSection(func_8026049C_de(animationState), 0))->data;
+    count = (s16)animationState->count;
+    nextAngleFrame = count - 1;
+    currentAngleFrame = (s32) framePosition;
+    followingAngleFrame = currentAngleFrame + 1;
+    if (followingAngleFrame < nextAngleFrame) {
+        nextAngleFrame = followingAngleFrame;
     }
-    b_term = (f32) base[temp_f2] * D_800C4258_de;
-    e_term = (f32) base[var_v1] * D_800C4258_de;
-    func_80273EE4_de(arg1 - (f32) temp_f2, b_term, e_term);
+    b_term = (f32) base[currentAngleFrame] * D_800C4258_de;
+    e_term = (f32) base[nextAngleFrame] * D_800C4258_de;
+    func_80273EE4_de(framePosition - (f32) currentAngleFrame, b_term, e_term);
 }
 
-s32 func_8026269C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    AnimRef *out = arg0;
+s32 func_8026269C_de(void *animationState, s32 resourceTable, s32 resourceGroup, s32 animationId) {
+    AnimRef *out = animationState;
     void *resource;
     ResourceEntry *entry;
     u16 value;
     s32 key;
-    s32 sp28;
+    s32 resourceBytes;
 
-    if (arg3 == -1) {
+    if (animationId == -1) {
         out->data = 0;
         return 0;
     }
 
-    key = Render_LocatePackSection(arg1, arg2, arg3, &sp28);
-    resource = Scene_RequestResource(0, key, key, sp28, 4, arg0,
+    key = Render_LocatePackSection(resourceTable, resourceGroup, animationId, &resourceBytes);
+    resource = Scene_RequestResource(0, key, key, resourceBytes, 4, animationState,
                             &D_0025F56C, g_animationText, 0);
     out->data = resource;
-    if (!func_802624D8_de(arg0)) {
+    if (!func_802624D8_de(animationState)) {
         return 0;
     }
 
-    resource = func_8026049C_de(arg0);
+    resource = func_8026049C_de(animationState);
     entry = Render_GetPackSection(resource, 0);
     value = entry->unk6;
-    out->id = arg3;
+    out->id = animationId;
     out->count = value;
     resource = Render_GetPackSection(resource, 3);
     out->span = ((ResourceEntry *)Render_GetPackSection(resource, 0))->unk2;

@@ -114,7 +114,7 @@ static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
     }
     handle = Scene_AllocateResource(0, blocks, 0x23, g_pakReadScratchNoteName);
     buf = *handle;
-    ((void (*)(s32))func_802644FC_de)(1);
+    ((void (*)(s32))Control_AcquireControllerLock)(1);
     Render_ReadControllerStates();
     result = D_80153500[ch];
     D_8010BBB8 = 2;
@@ -168,7 +168,7 @@ s32 Pak_DeleteNote(s32 ch, s32 index) {
     if (D_801534F0[ch] != 3) {
         return -2;
     }
-    ((void (*)(s32))func_802644FC_de)(1);
+    ((void (*)(s32))Control_AcquireControllerLock)(1);
     Render_ReadControllerStates();
     result = D_80153500[ch];
     D_8010BBB8 = 2;

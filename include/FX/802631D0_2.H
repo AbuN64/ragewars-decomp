@@ -4,5 +4,5 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
-extern s32 func_802636E8_de(s32 arg0);
+extern s32 ContPad_SwapButtonPairs(s32 arg0);
 #endif

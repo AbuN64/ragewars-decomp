@@ -164,7 +164,7 @@ extern WeaponActionRecord D_800CE8DC[];
 extern char D_80102B00[];
 
 extern s16 func_8022F96C_de(void *);
-extern s32 func_8022F55C_de(void *, s16);
+extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -182,7 +182,7 @@ static inline s32 can_fire(Player *player) {
     if (D_801462C8.controllerMode != 1) {
         return 1;
     }
-    ammo = func_8022F55C_de(&D_80102B00[player->slot * 0x190], player->selectedAction);
+    ammo = Player_GetProfileAchievementFlag(&D_80102B00[player->slot * 0x190], player->selectedAction);
     if (ammo == 0) {
         Render_PlayFlatSound(0xD4D);
         if (player->camera != 0) {

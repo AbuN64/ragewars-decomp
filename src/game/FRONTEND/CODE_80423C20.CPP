@@ -31,7 +31,7 @@ extern void MarkMenuEventHandled(void);
 
 extern s32 func_80299A08_de(void);
 
-extern void func_8022EF30_de(char *);
+extern void Player_InitializeProfile(char *);
 
 extern void func_80434FB4_de(s32);
 
@@ -69,7 +69,7 @@ extern void Frontend_SetWidgetFlag100(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void func_8041B110_de(s32);
 extern void Frontend_AdvanceActiveSlot(int *);
-extern s32 func_80264614_de(s32);
+extern s32 Control_IsControllerConnected(s32);
 extern void *func_8041A280_de(s32, s32);
 extern void func_8041A488_de(void *);
 extern MenuWidget *func_80419E54_de(s32, s32);
@@ -103,7 +103,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     }
     for (i = 0; i < 4; i++) {
         if (D_80102B00[i].player >= 0 && D_800FEB0E[i * sizeof(Profile)] == 1) {
-            func_8022EF30_de((char *)&D_80102B00[i]);
+            Player_InitializeProfile((char *)&D_80102B00[i]);
             D_80102B00[i].player = -1;
             D_800FEB0E[i * sizeof(Profile)] = 0;
         }
@@ -163,8 +163,8 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     if (i < 0) {
         Frontend_SetWidgetFlag100(func_8040EC30_de(menu, 0x4C), 1);
     }
-    mode = func_80264614_de(0);
-    if (mode != 1 || func_80264614_de(1) != mode) {
+    mode = Control_IsControllerConnected(0);
+    if (mode != 1 || Control_IsControllerConnected(1) != mode) {
         Frontend_SetWidgetFlag100(func_8040EC30_de(menu, 0x49), 1);
     }
     D_800E4600->music = func_8041A280_de(0x42, 0x24);
@@ -219,7 +219,7 @@ s32 Frontend_ApplyModeChoice(void) {
             status[i].enabled = 1;
             status[i].slot = i;
             if (D_80102B00[i].player < 0) {
-                func_8022F204_de(i);
+                Player_InitializeProfileSlot(i);
             }
         }
         break;
@@ -231,7 +231,7 @@ s32 Frontend_ApplyModeChoice(void) {
         status = D_801462C8.playerSettings;
         status->enabled = 1;
         status[0].slot = 0;
-        func_8022EF30_de((char *)D_80102B00);
+        Player_InitializeProfile((char *)D_80102B00);
         func_80434FB4_de(7);
         D_800E4600->nextScreen = 0x13;
         D_801462C8.controllerMode = 1;
@@ -267,7 +267,7 @@ s32 Frontend_ApplyModeChoice(void) {
         status->enabled = 1;
         status[0].slot = 0;
         if (D_80102B00[0].player < 0) {
-            func_8022F204_de(0);
+            Player_InitializeProfileSlot(0);
             for (i = 0; i < 20; i++) {
                 Weapons_SetAchievementFlag7((char *)D_80102B00, i);
             }
@@ -284,7 +284,7 @@ s32 Frontend_ApplyModeChoice(void) {
         status->enabled = 1;
         status[0].slot = 0;
         if (D_80102B00[0].player < 0) {
-            func_8022F204_de(0);
+            Player_InitializeProfileSlot(0);
         }
         D_801462C8.controllerMode = 4;
         D_800E4680 = 0;

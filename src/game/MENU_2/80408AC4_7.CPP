@@ -17,7 +17,7 @@ extern func_802077F4_S2 *Items_GetWidgetStyle(void *, s32);
 
 extern void func_8044208C_de(void *, ItemRecAt20V1 *, void *, MenuStyle *);
 
-/* Steps the menu spinner in D_800E5CA0: advances its repeat timer by D_800D2988, wrapping at the second entry of D_800E2280, and while the menu is active (state 2) decrements its value above zero when func_80264388_de reports the decrease input, or else increments it below its maximum when func_802643A0_de reports the increase input, restarting the timer on a change. Returns zero. */
+/* Steps the menu spinner in D_800E5CA0: advances its repeat timer by D_800D2988, wrapping at the second entry of D_800E2280, and while the menu is active (state 2) decrements its value above zero when Control_IsLeftPressed reports the decrease input, or else increments it below its maximum when Control_IsRightPressed reports the increase input, restarting the timer on a change. Returns zero. */
 
 
 
@@ -72,10 +72,10 @@ s32 func_8043CB30_de(void *unused, MenuRecAt20V4 *menu) {
         D_800E5CA0.timer = t - D_800E2280[1];
     }
     if (menu->state == 2) {
-        if (((s32 (*)(s32))func_80264388_de)(menu->input) != 0 && D_800E5CA0.value > 0) {
+        if (((s32 (*)(s32))Control_IsLeftPressed)(menu->input) != 0 && D_800E5CA0.value > 0) {
             D_800E5CA0.value--;
             D_800E5CA0.timer = 0.0f;
-        } else if (((s32 (*)(s32))func_802643A0_de)(menu->input) != 0) {
+        } else if (((s32 (*)(s32))Control_IsRightPressed)(menu->input) != 0) {
             if (D_800E5CA0.value < D_800E5CA0.count) {
                 D_800E5CA0.value++;
                 D_800E5CA0.timer = 0.0f;

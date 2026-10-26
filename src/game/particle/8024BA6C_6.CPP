@@ -75,26 +75,26 @@ void func_8024C454_de(Actor_func_8024A1D0_de *actor, LookupRecAtC *lookup) {
     }
 }
 
-void func_8024C5D4_de(void *arg0, void *arg1, s32 arg2, s32 arg3)
+void func_8024C5D4_de(void *actor, void *modelPack, s32 attachmentMaskIndex, s32 boneMatrices)
 {
-    ObjRecAt17C *object = arg0;
-  func_8024C5C4_S2 *temp_v0;
-  s32 temp_s1;
-  s32 mask = 1 << arg2;
+    ObjRecAt17C *object = actor;
+  func_8024C5C4_S2 *attachmentTable;
+  s32 attachmentCount;
+  s32 mask = 1 << attachmentMaskIndex;
   char *new_var;
   if ((object->unk17C) & mask)
   {
-    temp_v0 = Render_GetPackSection(arg1, 3);
-    temp_s1 = temp_v0->unk4;
-    if (temp_s1 != 0)
+    attachmentTable = Render_GetPackSection(modelPack, 3);
+    attachmentCount = attachmentTable->unk4;
+    if (attachmentCount != 0)
     {
-      new_var = &temp_v0->unk8;
-      Fx_DispatchAttachmentEffects(new_var, temp_s1, arg3, arg0, Render_GetPackSection(arg1, 5));
+      new_var = &attachmentTable->unk8;
+      Fx_DispatchAttachmentEffects(new_var, attachmentCount, boneMatrices, actor, Render_GetPackSection(modelPack, 5));
     }
   }
 }
 
-void *func_8024C664_de(char *arg0)
+void *func_8024C664_de(char *actorStorage)
 {
     s32 type;
     s32 i;
@@ -103,7 +103,7 @@ void *func_8024C664_de(char *arg0)
     char *object;
     ObjectList *list;
 
-    ObjRecAt18V2 *actor = (void *)arg0;
+    ObjRecAt18V2 *actor = (void *)actorStorage;
 
     type = *actor->unk18;
     if ((unsigned int)type >= 15) {
@@ -117,10 +117,10 @@ void *func_8024C664_de(char *arg0)
             limit = count;
             object = list->objects;
             do {
-                if (object == arg0) {
+                if (object == actorStorage) {
                     return 0;
                 }
-                if (object + 0x2E8 == arg0) {
+                if (object + 0x2E8 == actorStorage) {
                     return D_800CA8C4_de;
                 }
                 i++;
@@ -168,8 +168,8 @@ void func_8024C6E8_de(s32 unused, SourceRecAt18 *source, Body_func_8024C6E8_de *
 }
 
 /** Lerp a 3-component vector: out = a + t * (b - a). */
-void func_8024C874_de(void *arg0, f32 t, void *a, void *b) {
-    CVector3 *out = arg0;
+void func_8024C874_de(void *outVector, f32 t, void *a, void *b) {
+    CVector3 *out = outVector;
     CVector3 *start = a;
     CVector3 *end = b;
     out->x = start->x + (t * (end->x - start->x));
@@ -189,9 +189,9 @@ void func_8024C8C4_de(void *cQuatern, f32 t, void *a, void *b) {
     out->w = left->w + (t * (right->w - left->w));
 }
 
-void func_8024C92C_de(void *arg0, s32 arg1, void *arg2) {
-    ObjectLinks24 *o = arg0;
-    CVector3 *out = arg2;
+void func_8024C92C_de(void *poseTrack, s32 boneIndex, void *outTranslation) {
+    ObjectLinks24 *o = poseTrack;
+    CVector3 *out = outTranslation;
     ObjRecAt2V1 *indices = (void *)o->unk_0;
     s16 idx;
     CROMInitialOrientation_t *recs;
@@ -199,10 +199,10 @@ void func_8024C92C_de(void *arg0, s32 arg1, void *arg2) {
     f32 *a;
     f32 scale;
 
-    idx = indices[arg1].translation;
+    idx = indices[boneIndex].translation;
     if (idx == -1) {
         recs = (void *)o->unk_4;
-        *out = recs[arg1].position;
+        *out = recs[boneIndex].position;
         return;
     }
     base = Render_GetPackSection(o->translationFrames, (s32) idx);
@@ -216,22 +216,22 @@ void func_8024C92C_de(void *arg0, s32 arg1, void *arg2) {
     out->z = a[2] + scale * (base[2] - a[2]);
 }
 
-void func_8024CA10_de(void *arg0, s32 arg1, CQuatern *arg2) {
-    char *o = (char *)arg0;
+void func_8024CA10_de(void *poseTrack, s32 boneIndex, CQuatern *outRotation) {
+    char *o = (char *)poseTrack;
     s16 idx;
     char *rec;
     void *base;
     char *a;
 
-    idx = ((struct ObjRecAt2V1 *) (((ObjectLinks24 *) o)->unk_0 + (arg1 * 4)))->unk2;
+    idx = ((struct ObjRecAt2V1 *) (((ObjectLinks24 *) o)->unk_0 + (boneIndex * 4)))->unk2;
     if (idx == -1) {
         f32 scale;
-        rec = ((ObjectLinks24 *)(o))->unk_4 + arg1 * 0x14;
+        rec = ((ObjectLinks24 *)(o))->unk_4 + boneIndex * 0x14;
         scale = (3.0518509447574615e-05f);
-        arg2->x = (f32)(((CROMInitialOrientation_t *)(rec))->unk_C) * scale;
-        arg2->y = (f32)(((CROMInitialOrientation_t *)(rec))->m_RotY) * scale;
-        arg2->z = (f32)(((CROMInitialOrientation_t *)(rec))->unk_10) * scale;
-        arg2->w = (f32)(((CROMInitialOrientation_t *)(rec))->unk_12) * scale;
+        outRotation->x = (f32)(((CROMInitialOrientation_t *)(rec))->unk_C) * scale;
+        outRotation->y = (f32)(((CROMInitialOrientation_t *)(rec))->m_RotY) * scale;
+        outRotation->z = (f32)(((CROMInitialOrientation_t *)(rec))->unk_10) * scale;
+        outRotation->w = (f32)(((CROMInitialOrientation_t *)(rec))->unk_12) * scale;
         return;
     }
     base = Render_GetPackSection(((ObjectLinks24 *)(o))->unk_C, (s32)idx);
@@ -240,14 +240,14 @@ void func_8024CA10_de(void *arg0, s32 arg1, CQuatern *arg2) {
     {
         f32 scale;
         scale = ((ObjectLinks24 *)(o))->unk_20;
-        arg2->x = ((CQuatern *)(a))->x + scale * (((CQuatern *)(base))->x - ((CQuatern *)(a))->x);
-        arg2->y = ((CQuatern *)(a))->y + scale * (((CQuatern *)(base))->y - ((CQuatern *)(a))->y);
-        arg2->z = ((CQuatern *)(a))->z + scale * (((CQuatern *)(base))->z - ((CQuatern *)(a))->z);
-        arg2->w = ((CQuatern *)(a))->w + scale * (((CQuatern *)(base))->w - ((CQuatern *)(a))->w);
+        outRotation->x = ((CQuatern *)(a))->x + scale * (((CQuatern *)(base))->x - ((CQuatern *)(a))->x);
+        outRotation->y = ((CQuatern *)(a))->y + scale * (((CQuatern *)(base))->y - ((CQuatern *)(a))->y);
+        outRotation->z = ((CQuatern *)(a))->z + scale * (((CQuatern *)(base))->z - ((CQuatern *)(a))->z);
+        outRotation->w = ((CQuatern *)(a))->w + scale * (((CQuatern *)(base))->w - ((CQuatern *)(a))->w);
     }
 }
 
-void func_8024CB4C_de(ObjectLinks24_2 *arg0, s32 arg1, CQuatern *arg2) {
+void GameObject_SampleInterpolatedBoneRotation(ObjectLinks24_2 *arg0, s32 arg1, CQuatern *arg2) {
     ObjectLinks24_2 *o = arg0;
     ObjRecAt2V1 *indices;
     s16 idx;
@@ -273,7 +273,7 @@ void func_8024CB4C_de(ObjectLinks24_2 *arg0, s32 arg1, CQuatern *arg2) {
 }
 
 /* Converts the twelve used entries of a 4x4 float matrix to unsigned integers, splitting each pair into the high and low halfword arrays of a packed matrix and setting the final high word's low bit. Adapted from Rsp_ConvertMatrixToFixed with the per-entry scale multiplies removed, the converted value scoped to each conversion block, and the D_800C8C70 thresholds changed. */
-void func_8024CC30_de(f32 *src, PackedMatrixWords *dst) {
+void GameObject_PackAffineMatrixWords(f32 *src, PackedMatrixWords *dst) {
     u32 *upper = dst->upper;
     u32 *lower = dst->lower;
     s32 a;

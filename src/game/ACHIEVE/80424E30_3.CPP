@@ -17,7 +17,7 @@
 
 extern s32 func_80265650_de(void *, s32);
 extern void func_80265688_de(u8 *, s32, s32);
-extern s32 func_8022F4DC_de(u8 *, s32);
+extern s32 Player_HasProfileUnlockFlag(u8 *, s32);
 extern s32 Weapons_TestAchievementFlag7(Profile *, s32);
 extern void Weapons_SetAchievementFlag7(Profile *, s32);
 
@@ -373,7 +373,7 @@ void func_80426090_de(Arg *arg0) {
                 temp_s0 = model->slots[i];
                 if (temp_s0 >= 0x4C3) {
                     temp_s0 = temp_s0 - 0x4C3;
-                    temp_v0 = func_8022F4DC_de(temp_s3 + D_80102B00->name, temp_s0);
+                    temp_v0 = Player_HasProfileUnlockFlag(temp_s3 + D_80102B00->name, temp_s0);
                     if (temp_v0 == 1) {
                         arg0->slots[temp_s0].available = temp_v0;
                         arg0->slots[temp_s0].slot = i;

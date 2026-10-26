@@ -146,12 +146,12 @@ void Render_PollControllerPaks(void) {
 
 
 
-void func_80263C24_de(void)
+void Control_TrackControllerPakChanges(void)
 {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        if (func_8026475C_de(i) != 0) {
+        if (Control_IsControllerPakEnabled(i) != 0) {
             if (func_80264634_de(i) != 0) {
                 D_8010B310[i] = 1;
                 if (D_8010BC28[i] != 0) {

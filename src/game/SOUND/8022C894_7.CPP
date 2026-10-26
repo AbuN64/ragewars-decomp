@@ -20,7 +20,7 @@ extern f32 D_800C7F08;
 
 
 
-void func_8022E6A4_de(Shared_ActorView *player, LevelActor *actor) {
+void Player_RecoverOutOfBoundsActor(Shared_ActorView *player, LevelActor *actor) {
     void *temp_v0;
 
     temp_v0 = Sound_FindActorModelEntry(actor);

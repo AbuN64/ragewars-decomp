@@ -72,7 +72,7 @@ typedef struct {
 
 
 
-int func_80264614_de(int);
+int Control_IsControllerConnected(int);
 u8 * Resmgr_CopyString(u8 *, u8 *);
 char * func_80411D78_de(s32);
 void Menu_SetSlotValue(void *, s32, s32);
@@ -546,7 +546,7 @@ case27_one:
 case27_two:
         var_s0 = CHECK_2_ID;
 case27_selected:
-        slot_active = func_80264614_de(temp_s2);
+        slot_active = Control_IsControllerConnected(temp_s2);
         temp_s2 += 1;
         if (slot_active == 1) {
             goto case27_found;

@@ -86,5 +86,5 @@ extern u8 *D_800D7DD8;
 extern u8 *D_800D3DB0;
 extern u8 *D_800D3DB4;
 
-s32 func_8026435C_de(Shared_Effect *);
+s32 Control_IsStartPressed(Shared_Effect *);
 #endif

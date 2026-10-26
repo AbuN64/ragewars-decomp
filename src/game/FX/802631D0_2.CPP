@@ -22,7 +22,7 @@ void Fx_ClearControllerInput(void *object) {
     input->unk34 = 0;
 }
 
-s32 func_802636E8_de(s32 arg0)
+s32 ContPad_SwapButtonPairs(s32 arg0)
 {
   int new_var;
   s32 var_v1;

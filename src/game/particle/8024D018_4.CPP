@@ -15,9 +15,9 @@
 
 /* Returns a player's body lean on the ground: a controlled player on an accepted floor (func_802757E4_de) that
  * is not held (flag 1) nor in states 1 or 2 computes a tilt toward the floor normal from func_80275C94_de by
- * three eighths of its slope (at most 25 degrees), which the body tilt from func_8024D728_de then replaces,
+ * three eighths of its slope (at most 25 degrees), which the body tilt from GameObject_BuildActorDirectionTilt then replaces,
  * and leans along its heading by three quarters of the ground slope ahead from func_80240A98_de (at most 25),
- * blending lean and tilt halfway through func_80270CD0_de; other players take func_8024D728_de's tilt, and
+ * blending lean and tilt halfway through func_80270CD0_de; other players take GameObject_BuildActorDirectionTilt's tilt, and
  * objects without a floor or held players get the identity. The sine is kept in D_80115DEC. */
 
 
@@ -28,7 +28,7 @@ extern void Nav_GetNodeNormal(CVector3 *, s32);
 extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
-extern CQuatern func_8024D728_de(char *);
+extern CQuatern GameObject_BuildActorDirectionTilt(char *);
 
 extern f32 func_80240A98_de(Probe *, f32, f32, f32, f32);
 
@@ -64,7 +64,7 @@ extern s32 func_8028FFD0_de(s32, s32, s32, CVector3, CVector3, s32, f32);
 
 /* Callers write the lean through a pointer (the MIPS hidden result pointer); a native host cannot call a
  * struct-returning function that way, so the host entry takes the pointer and the body stays by value. */
-CQuatern func_8024D870_de(char *obj) {
+CQuatern InstHdr_BuildActorGroundRotation(char *obj) {
     CVector3 normal;
     CVector3 up;
     CVector3 axis;
@@ -101,7 +101,7 @@ CQuatern func_8024D870_de(char *obj) {
                 tilt.y = axis.y * D_80115DEC;
                 tilt.z = axis.z * D_80115DEC;
                 tilt.w = Math_Cosf(RW_MIN(slope, 0.43633235f) * 0.375f);
-                tilt = func_8024D728_de(obj);
+                tilt = GameObject_BuildActorDirectionTilt(obj);
                 sine = Math_Sinf(((LevelActor *)(self))->yaw);
                 cosine = Math_Cosf(((LevelActor *)(self))->yaw);
                 probe.dir = ((LevelActor *)(self))->floorDirection;
@@ -122,7 +122,7 @@ CQuatern func_8024D870_de(char *obj) {
                 return result;
             }
         }
-        return func_8024D728_de(obj);
+        return GameObject_BuildActorDirectionTilt(obj);
     }
 identity:
     tilt.x = tilt.y = tilt.z = 0.0f;
@@ -130,7 +130,7 @@ identity:
     return tilt;
 }
 
-void func_8024DBC0_de(void *actor, CVector3 pos, s32 sound, f32 volume) {
+void InstHdr_PlayActorGraphSound(void *actor, CVector3 pos, s32 sound, f32 volume) {
     CVector3 up;
     CVector3 dir;
     CVector3 velocity;
@@ -157,15 +157,15 @@ void func_8024DBC0_de(void *actor, CVector3 pos, s32 sound, f32 volume) {
 }
 
 /** Reset three byte-sized fields. */
-void func_8024DD10_de(signed char *prop) {
+void InstHdr_ResetInstanceRenderIndices(signed char *prop) {
     prop[3] = -1;
     prop[1] = 0;
     prop[2] = 0;
 }
 
-s32 func_8024DD24_de(void *arg0)
+s32 func_8024DD24_de(void *actorStorage)
 {
-    struct Object *object = arg0;
+    struct Object *object = actorStorage;
     struct Model *model;
     s32 kind;
 
@@ -177,9 +177,9 @@ s32 func_8024DD24_de(void *arg0)
     return 0;
 }
 
-s32 func_8024DD58_de(void *arg0)
+s32 func_8024DD58_de(void *actorStorage)
 {
-    struct Object *object = arg0;
+    struct Object *object = actorStorage;
     struct Model *model;
     s32 kind;
 
@@ -209,8 +209,8 @@ int func_8024DD8C_de(void *other) {
     }
 }
 
-int func_8024DDB4_de(void *arg0) {
-    Actor_u1 *actor = arg0;
+int func_8024DDB4_de(void *actorStorage) {
+    Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
     if (resource->kind != 1) {
@@ -223,9 +223,9 @@ int func_8024DDB4_de(void *arg0) {
     }
 }
 
-s32 func_8024DDDC_de(void *arg0)
+s32 func_8024DDDC_de(void *actorStorage)
 {
-    struct Object *object = arg0;
+    struct Object *object = actorStorage;
     struct Model *model;
     s32 kind;
 
@@ -241,9 +241,9 @@ s32 func_8024DDDC_de(void *arg0)
     return 0;
 }
 
-s32 func_8024DE10_de(void *arg0)
+s32 func_8024DE10_de(void *actorStorage)
 {
-    struct Object *object = arg0;
+    struct Object *object = actorStorage;
     struct Model *model;
     s32 kind;
 
@@ -255,8 +255,8 @@ s32 func_8024DE10_de(void *arg0)
     return 0;
 }
 
-int func_8024DE44_de(void *arg0) {
-    Actor_u1 *actor = arg0;
+int func_8024DE44_de(void *actorStorage) {
+    Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
     if (resource->kind != 1) {
@@ -269,9 +269,9 @@ int func_8024DE44_de(void *arg0) {
     }
 }
 
-s32 Particle_HasActorTerritory(void *arg0)
+s32 Particle_HasActorTerritory(void *actorStorage)
 {
-    struct Object *object = arg0;
+    struct Object *object = actorStorage;
     struct Model *model;
     s32 kind;
 
@@ -287,20 +287,20 @@ s32 Particle_HasActorTerritory(void *arg0)
     return 0;
 }
 
-s32 func_8024DEA0_de(void *arg0) {
-    void *temp_a0;
-    temp_a0 = (((struct ObjRecAt18V5 *) ((s8 *) arg0))->unk18);
-    if ((((struct ObjRecAt14V3 *) ((s8 *) temp_a0))->unk0) == 0xB) {
+s32 func_8024DEA0_de(void *actorStorage) {
+    void *actorDefinition;
+    actorDefinition = (((struct ObjRecAt18V5 *) ((s8 *) actorStorage))->unk18);
+    if ((((struct ObjRecAt14V3 *) ((s8 *) actorDefinition))->unk0) == 0xB) {
         if (D_801462C8.local != 0) {
-            return (((struct ObjRecAt14V3 *) ((s8 *) temp_a0))->unk14) & 1;
+            return (((struct ObjRecAt14V3 *) ((s8 *) actorDefinition))->unk14) & 1;
         }
         return 1;
     }
     return 0;
 }
 
-int func_8024DEE0_de(void *arg0) {
-    Actor_u1 *actor = arg0;
+int func_8024DEE0_de(void *actorStorage) {
+    Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
     if (resource->kind != 1) {
@@ -315,10 +315,10 @@ int func_8024DEE0_de(void *arg0) {
 
 s32 func_8024DF08_de(LevelActor *actor) {
     void *definition = actor->definition;
-    s32 temp_v1 = ((ModelBlend *)definition)->kind;
+    s32 actorKind = ((ModelBlend *)definition)->kind;
 
-    if (temp_v1 != 1) {
-        if (temp_v1 != 0xB) {
+    if (actorKind != 1) {
+        if (actorKind != 0xB) {
             goto ret0;
         }
         return 1;
@@ -349,8 +349,8 @@ s32 func_8024DF5C_de(void *actor) {
     return 0;
 }
 
-int func_8024DFA0_de(void *arg0) {
-    Actor_u1 *actor = arg0;
+int func_8024DFA0_de(void *actorStorage) {
+    Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
     if (resource->kind != 1) {
@@ -378,24 +378,24 @@ s32 func_8024DFC8_de(LevelActor *actor) {
     return 0;
 }
 
-s32 func_8024E00C_de(void *arg0)
+s32 func_8024E00C_de(void *actorStorage)
 {
-    Actor_u1 *actor = arg0;
+    Actor_u1 *actor = actorStorage;
   unsigned int new_var;
-  Resource_u1 *temp_a0;
-  temp_a0 = actor->resource;
+  Resource_u1 *actorDefinition;
+  actorDefinition = actor->resource;
   new_var = 0;
-  if ((temp_a0->kind) != 1)
+  if ((actorDefinition->kind) != 1)
   {
     return new_var;
   }
   if (new_var)
   {
-    return (temp_a0->flags4C) & 0x1000;
+    return (actorDefinition->flags4C) & 0x1000;
   }
   else
   {
-    return (temp_a0->flags4C) & 0x1000;
+    return (actorDefinition->flags4C) & 0x1000;
   }
 }
 
@@ -414,8 +414,8 @@ s32 func_8024E034_de(LevelActor *actor) {
     return 0;
 }
 
-int func_8024E078_de(void *arg0) {
-    Actor_u1 *actor = arg0;
+int func_8024E078_de(void *actorStorage) {
+    Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
     if (resource->kind != 1) {
@@ -428,25 +428,25 @@ int func_8024E078_de(void *arg0) {
     }
 }
 
-s32 func_8024E0A0_de(void *arg0)
+s32 func_8024E0A0_de(void *actorStorage)
 {
-    Actor_u1 *actor = arg0;
-  Resource_u1 *temp_a0;
+    Actor_u1 *actor = actorStorage;
+  Resource_u1 *actorDefinition;
   int new_var;
-  temp_a0 = actor->resource;
+  actorDefinition = actor->resource;
   new_var = 1;
-  if ((temp_a0->kind) != new_var)
+  if ((actorDefinition->kind) != new_var)
   {
     return 0;
   }
   if (new_var)
   {
-    return (temp_a0->flags4C) & 0x200;
+    return (actorDefinition->flags4C) & 0x200;
   }
 }
 
-int func_8024E0C8_de(void *arg0) {
-    Actor_u1 *actor = arg0;
+int func_8024E0C8_de(void *actorStorage) {
+    Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
     if (resource->kind != 1) {
@@ -459,17 +459,17 @@ int func_8024E0C8_de(void *arg0) {
     }
 }
 
-s32 func_8024E0F0_de(void *arg0)
+s32 func_8024E0F0_de(void *actorStorage)
 {
-    Actor_u1 *actor = arg0;
+    Actor_u1 *actor = actorStorage;
   Resource_u1 *new_var2;
   int new_var;
-  Resource_u1 *temp_a0;
-  temp_a0 = actor->resource;
-  new_var2 = temp_a0;
+  Resource_u1 *actorDefinition;
+  actorDefinition = actor->resource;
+  new_var2 = actorDefinition;
   if ((new_var2->kind) != 1)
   {
-    if (temp_a0 || new_var)
+    if (actorDefinition || new_var)
     {
       return 0;
     }
@@ -479,11 +479,11 @@ s32 func_8024E0F0_de(void *arg0)
     }
   }
   new_var = 0x4C;
-  return (temp_a0->flags4C) & 0x2000;
+  return (actorDefinition->flags4C) & 0x2000;
 }
 
-int func_8024E118_de(void *arg0) {
-    Actor_u1 *actor = arg0;
+int func_8024E118_de(void *actorStorage) {
+    Actor_u1 *actor = actorStorage;
     Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
     if (resource->kind != 1) {

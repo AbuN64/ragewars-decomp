@@ -3,7 +3,7 @@
 #include "AI/NAV/8020EAE0_5.H"
 
 #if defined(VERSION_EU)
-int func_8020EF80_eu(void *self) {
+int Nav_SelectPickupGoalEu(void *self) {
     PickupGoalObj8020EF60 *arg0 = self;
     s32 buffer[30];
     s32 count;
@@ -66,7 +66,7 @@ int func_8020EF80_eu(void *self) {
             Nav_ClearGoalList(base);
 
             key = &arg0->unk_4;
-            if (func_8020F150_de(buffer) == 0) {
+            if (Nav_AddPickupGoalsByObjectIds(buffer) == 0) {
                 arg0->unk_68 = 0;
                 arg0->unk_BC = -1U;
                 return 1;

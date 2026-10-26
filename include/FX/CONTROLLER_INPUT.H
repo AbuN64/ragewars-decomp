@@ -4,7 +4,7 @@
 
 struct ControllerProfile;
 
-/* One entry of the controller button remap table D_800CBB70: a controller
+/* One entry of the controller button remap table g_controllerButtonRemap: a controller
    button mask and the input bit it sets. A zero source ends the table. */
 typedef struct ButtonRemap {
     s32 source; /* 0x0 */
@@ -30,6 +30,6 @@ struct ControllerInput {
 };
 typedef struct ControllerInput ControllerInput;
 
-extern ButtonRemap D_800CBB70[];
+extern ButtonRemap g_controllerButtonRemap[];
 
 #endif

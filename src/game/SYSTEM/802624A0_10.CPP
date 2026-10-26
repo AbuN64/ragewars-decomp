@@ -58,9 +58,9 @@ static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref) 
 
 extern f32 D_801031F8;
 
-extern void func_8028C934_de(s32, Effect_func_80262E88_de *);
+extern void func_8028C934_de(s32, EffectAnimPoolUpdateSceneEffects *);
 
-static inline s32 overlaps(Effect_func_80262E88_de *effect, f32 *max) {
+static inline s32 overlaps(EffectAnimPoolUpdateSceneEffects *effect, f32 *max) {
     if (max[0] > effect->min[0] && max[-3] < effect->max[0] && max[2] > effect->min[2] &&
         max[-1] < effect->max[2] && max[1] > effect->min[1] && max[-2] < effect->max[1]) {
         return 1;
@@ -68,7 +68,7 @@ static inline s32 overlaps(Effect_func_80262E88_de *effect, f32 *max) {
     return 0;
 }
 
-SceneEffect *func_80262CE0_de(struct SceneEffectPool *scene, s32 id, s32 variant, s32 count, s32 owner, CVector3 position, f32 scale,
+SceneEffect *AnimPool_SpawnSceneEffect(struct SceneEffectPool *scene, s32 id, s32 variant, s32 count, s32 owner, CVector3 position, f32 scale,
                       CVector3 direction, CVector3 color, s32 *ref) {
     SceneEffect *effect;
 
@@ -93,9 +93,9 @@ SceneEffect *func_80262CE0_de(struct SceneEffectPool *scene, s32 id, s32 variant
     return effect;
 }
 
-void func_80262E88_de(struct SceneEffectPool *scene, s32 arg1) {
-    Effect_func_80262E88_de *effect;
-    Effect_func_80262E88_de *next;
+void AnimPool_UpdateSceneEffects(struct SceneEffectPool *scene, s32 arg1) {
+    EffectAnimPoolUpdateSceneEffects *effect;
+    EffectAnimPoolUpdateSceneEffects *next;
     f32 *max;
 
     effect = scene->UsedList.head;
@@ -128,20 +128,20 @@ void func_80262E88_de(struct SceneEffectPool *scene, s32 arg1) {
     }
 }
 
-void *func_80262FF8_de(s32 arg0, s32 *arg1) {
-    void *temp_s0;
+void *AnimPool_AcquireSceneEffect(s32 effectPool, s32 *referenceCount) {
+    void *acquiredEffect;
 
-    if ((g_world.visibilityEnabled != 0) || ((u32)((struct ObjectLinks5F28 *) arg0)->unk_5F24 < 3)) {
-        temp_s0 = ((struct ObjectLinks5F28 *) arg0)->unk_5F00;
-        if (temp_s0 != 0) {
-            func_80255ED8_de((void *)(arg0 + 0x5F00), temp_s0);
-            func_80255CB8_de((void *)(arg0 + 0x5F14), temp_s0);
-            ((SceneEffect *)(temp_s0))->ref = arg1;
-            if (arg1 != 0) {
-                *arg1 += 1;
+    if ((g_world.visibilityEnabled != 0) || ((u32)((struct ObjectLinks5F28 *) effectPool)->unk_5F24 < 3)) {
+        acquiredEffect = ((struct ObjectLinks5F28 *) effectPool)->unk_5F00;
+        if (acquiredEffect != 0) {
+            func_80255ED8_de((void *)(effectPool + 0x5F00), acquiredEffect);
+            func_80255CB8_de((void *)(effectPool + 0x5F14), acquiredEffect);
+            ((SceneEffect *)(acquiredEffect))->ref = referenceCount;
+            if (referenceCount != 0) {
+                *referenceCount += 1;
             }
         }
-        return temp_s0;
+        return acquiredEffect;
     }
     return 0;
 }

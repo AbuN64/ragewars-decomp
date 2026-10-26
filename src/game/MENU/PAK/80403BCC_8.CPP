@@ -109,7 +109,7 @@ s32 Pak_ReadNoteData(s32 slot, s32 arg1, s32 arg2, s32 length)
   }
   buf = Scene_AllocateResource(0, size, 0x23, g_pakReadScratchNoteName);
   addr = *buf;
-  ((void (*)(s32))func_802644FC_de)(1);
+  ((void (*)(s32))Control_AcquireControllerLock)(1);
   Render_ReadControllerStates();
   result = D_80153500[slot];
   D_8010BBB8 = 2;
@@ -171,7 +171,7 @@ s32 func_804051D4_de(s32 channel) {
     if (D_801534F0[channel] != 3) {
         return -2;
     }
-    ((void (*)(s32))func_802644FC_de)(1);
+    ((void (*)(s32))Control_AcquireControllerLock)(1);
     Render_ReadControllerStates();
     result = D_80153500[channel];
     D_8010BBB8 = 2;
@@ -191,7 +191,7 @@ s32 func_80405290_de(s32 channel) {
     if (D_801534F0[channel] != 3) {
         return -2;
     }
-    ((void (*)(s32))func_802644FC_de)(1);
+    ((void (*)(s32))Control_AcquireControllerLock)(1);
     Render_ReadControllerStates();
     D_8010BBB8 = 2;
     result = func_80447F30_de(&D_8014D280[channel]);

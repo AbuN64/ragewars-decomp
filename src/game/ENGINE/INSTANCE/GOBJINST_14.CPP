@@ -25,16 +25,16 @@ f32 func_8024BEDC_de(void *target) {
     return Math_Sqrtf(((scaleX * scaleX) + (scaleY * scaleY) + (scaleZ * scaleZ)) * (0.3333333432674408f));
 }
 
-f32 func_8024BF24_de(void *arg0) {
+f32 func_8024BF24_de(void *actor) {
     f32 result;
-    void **temp_s0;
+    void **modelResource;
 
     result = D_800C3B5C;
-    if (((LevelActor *)arg0)->flags & 0x40000) {
-        temp_s0 = Scene_RequestResource(0, ((LevelActor *)arg0)->resource, ((LevelActor *)arg0)->resource, ((LevelActor *)arg0)->resourceFlags, 4, 0, 0, &D_800C3AE8_de, 1);
-        if (temp_s0 != 0) {
-            result = RW_BITS_TO_FLOAT((s32) ((ActorResourceHeader *)Render_GetPackSection(*temp_s0, 0))->particleScale);
-            Scene_UnlockResource(0, temp_s0);
+    if (((LevelActor *)actor)->flags & 0x40000) {
+        modelResource = Scene_RequestResource(0, ((LevelActor *)actor)->resource, ((LevelActor *)actor)->resource, ((LevelActor *)actor)->resourceFlags, 4, 0, 0, &D_800C3AE8_de, 1);
+        if (modelResource != 0) {
+            result = RW_BITS_TO_FLOAT((s32) ((ActorResourceHeader *)Render_GetPackSection(*modelResource, 0))->particleScale);
+            Scene_UnlockResource(0, modelResource);
         }
     }
     return result;

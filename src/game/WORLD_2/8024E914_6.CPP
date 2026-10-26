@@ -35,7 +35,7 @@ extern f32 Particle_GetActorRadius(Actor_func_8024ED90_de *actor);
  * func_8026992C_de. */
 
 
-extern CQuatern func_8024D870_de(void *);
+extern CQuatern InstHdr_BuildActorGroundRotation(void *);
 
 extern void Particle_LimitVectorLength(CVector3 *, f32);
 
@@ -108,7 +108,7 @@ void func_8024EF28_de(void *actor) {
     } else {
         size = 0.0f;
     }
-    rotation = func_8024D870_de(actor);
+    rotation = InstHdr_BuildActorGroundRotation(actor);
     position.x = ((Shared_Func80243A80Actor *)actor)->x;
     position.z = ((Shared_Func80243A80Actor *)actor)->z;
     position.y = ground;

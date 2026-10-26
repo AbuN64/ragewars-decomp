@@ -28,7 +28,7 @@ void func_8024F960_eu(void) {
         "lwc1       $f21, 0x98($sp)\n"
         "sw         $ra, 0x70($sp)\n"
         "sdc1       $f20, 0x78($sp)\n"
-        "jal        func_8024DD10_de\n"
+        "jal        InstHdr_ResetInstanceRenderIndices\n"
         "addu      $s3, $a3, $zero\n"
         "sb         $zero, 0x0($s1)\n"
         "lhu        $v1, 0x8($s2)\n"
@@ -314,7 +314,7 @@ extern s32 func_8024E924_de(PlacedProp *);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #endif
 
-extern void func_8024DD10_de(PlacedProp *, PlacedPropRecord *, s32, char *);
+extern void InstHdr_ResetInstanceRenderIndices(PlacedProp *, PlacedPropRecord *, s32, char *);
 extern PropGeometry *Engine_GetActorDefinition(void *, s32);
 extern void MatrixFromQuaternion(f32 *, char *);
 extern void ScaleMatrixLocal(char *, f32, f32, f32);
@@ -335,7 +335,7 @@ void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner,
     f32 rotation[4];
     char matrix[0x40];
     PropGeometry *model;
-    func_8024DD10_de(prop, record, owner, segments);
+    InstHdr_ResetInstanceRenderIndices(prop, record, owner, segments);
     prop->state = 0;
     prop->id = record->id;
     prop->owner = owner;

@@ -70,7 +70,7 @@ s32 func_8043E658_de(void *unused0, Handle8043E788 *arg1) {
     return 1;
 }
 
-/* Steps the selection D_800E1DF8_de through Pak_AdjustValue (a second step when func_802643A0_de or
+/* Steps the selection D_800E1DF8_de through Pak_AdjustValue (a second step when Control_IsRightPressed or
    func_8026437C_de reports the object's controller busy), then sets D_80142228 to the chosen entry of the
    float table D_00450854 plus the offset in D_800E2358, clamped between D_800DE330_de and (2.0f). */
 
@@ -93,7 +93,7 @@ s32 func_8043E6A4_de(void *arg0, struct Shape_typemap_114 *obj)
     f32 scale;
 
     D_800E1DF8_de = Pak_AdjustValue(obj, D_800E1DF8_de, 1, 0, 15, 0);
-    if (((s32 (*)(s32))func_802643A0_de)(obj->field_20) != 0 || Render_IsAButtonPressed(obj->field_20) != 0) {
+    if (((s32 (*)(s32))Control_IsRightPressed)(obj->field_20) != 0 || Render_IsAButtonPressed(obj->field_20) != 0) {
         Pak_AdjustValue(obj, D_800E1DF8_de, 1, 0, 15, 0);
     }
     scale = D_00450854[D_800E1DF8_de] + D_800E2358.scale;

@@ -7,7 +7,7 @@
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "COMMON/AIPROFILE.H"
 #include "TYPES.H"
-extern void func_8024DD10_de(signed char *arg0);
+extern void InstHdr_ResetInstanceRenderIndices(signed char *arg0);
 
 extern f32 D_800CB430_de[],D_800D2988[];
 
@@ -136,7 +136,7 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
     actor->current.y += (v10.y-actor->current.y)*0.2f;
 }
 
-/* Resets an object through func_8024DD10_de, then clears its words from 0x1C to 0x38 and at 0x40, 0x44
+/* Resets an object through InstHdr_ResetInstanceRenderIndices, then clears its words from 0x1C to 0x38 and at 0x40, 0x44
    and 0x4C, sets the word at 0x3C to -1 and stores D_800C8914 in the float at 0x48. */
 
 
@@ -145,7 +145,7 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
 void Camera_ResetActorMotion(void *levelActor) {
     float k;
 
-    func_8024DD10_de(levelActor);
+    InstHdr_ResetInstanceRenderIndices(levelActor);
     k = D_800C8914;
     ((LevelActor *)levelActor)->position1.x = 0;
     ((LevelActor *)levelActor)->position1.y = 0;

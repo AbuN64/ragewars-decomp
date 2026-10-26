@@ -35,12 +35,12 @@ struct EffectDesc {
     u16 variant;
 };
 
-extern SceneEffect *func_80262A9C_de(struct SceneEffectPool *scene, EffectDesc *desc);
+extern SceneEffect *AnimPool_SpawnDescribedSceneEffect(struct SceneEffectPool *scene, EffectDesc *desc);
 
-extern void *func_80262FF8_de(s32 arg0, s32 *arg1);
+extern void *AnimPool_AcquireSceneEffect(s32 arg0, s32 *arg1);
 
-struct Record_func_802627A0_de;
-struct Record_func_802627A0_de {
+struct RecordAnimPoolSpawnAnimationObject;
+struct RecordAnimPoolSpawnAnimationObject {
     char pad0[0x1C];
     u16 count;
     u16 angle;
@@ -52,8 +52,8 @@ typedef struct ObjRecAt10V1 ObjRecAt10V1;
 struct ResourceEntry;
 typedef struct ResourceEntry ResourceEntry;
 
-struct Effect_func_80262E88_de;
-typedef struct Effect_func_80262E88_de Effect_func_80262E88_de;
+struct EffectAnimPoolUpdateSceneEffects;
+typedef struct EffectAnimPoolUpdateSceneEffects EffectAnimPoolUpdateSceneEffects;
 
 struct ObjRecAt10V1;
 struct ObjRecAt10V1 {
@@ -90,8 +90,8 @@ struct ObjectLinks5F28 {
 };
 
 
-struct Effect_func_80262E88_de;
-struct Effect_func_80262E88_de {
+struct EffectAnimPoolUpdateSceneEffects;
+struct EffectAnimPoolUpdateSceneEffects {
     char pad0[0xE8];
     f32 min[3];
     f32 max[3];
@@ -100,18 +100,18 @@ struct Effect_func_80262E88_de {
     char pad104[0x70];
     s32 busy;
     char pad178[0x2EC - 0x178];
-    struct Effect_func_80262E88_de *next;
+    struct EffectAnimPoolUpdateSceneEffects *next;
     s32 *ref;
 };
 
-struct Effect_func_80262E88_de;
+struct EffectAnimPoolUpdateSceneEffects;
 
 
 struct ObjectLinks5F28;
 typedef struct ObjectLinks5F28 ObjectLinks5F28;
 
-struct Record_func_802627A0_de;
-typedef struct Record_func_802627A0_de Record_func_802627A0_de;
+struct RecordAnimPoolSpawnAnimationObject;
+typedef struct RecordAnimPoolSpawnAnimationObject RecordAnimPoolSpawnAnimationObject;
 
 
 extern void func_802624A8_de(void *arg0);
@@ -165,7 +165,7 @@ struct ResourceEntry {
 struct Six;
 typedef struct Six Six;
 
-/* The list func_80262C88_de appends its record to. */
+/* The list AnimPool_ReleaseSceneEffect appends its record to. */
 
 
 /* Shared object layout established by effect-pool consumers. */

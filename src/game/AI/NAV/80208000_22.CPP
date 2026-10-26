@@ -24,7 +24,7 @@ extern s32 D_801468A0;
 
 
 
-s32 func_8020EA10_de(void **controller) {
+s32 Nav_ShouldSeekUnclaimedTeamMarker(void **controller) {
     char *base;
     f32 temp_f20;
 

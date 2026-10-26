@@ -28,7 +28,7 @@ extern s32 D_800D30BC;
 
 
 extern s16 func_8022F96C_de(void *);
-extern s32 func_8022F55C_de(void *, s16);
+extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
 
@@ -44,7 +44,7 @@ static inline s32 can_fire(char *player) {
     if (D_801462C8.controllerMode != 1) {
         return 1;
     }
-    ammo = func_8022F55C_de(&D_80102B00[((SharedPlayer *)(player))->views1C.view5D4_45.unk5D4], ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E);
+    ammo = Player_GetProfileAchievementFlag(&D_80102B00[((SharedPlayer *)(player))->views1C.view5D4_45.unk5D4], ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E);
     if (ammo == 0) {
         Render_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {

@@ -15,7 +15,7 @@
    speed at 0x128 decays, the spin angle at 0x124 advances by twice the speed per frame, and the
    holder's model animation speed at 0x168 follows the spin speed, capped at 1; while the fire input
    0x4000 is held and the holder is not stunned, a single player game (D_801462D5) without infinite
-   ammunition at 0x1450 checks the ammunition through func_8022F55C_de and, when it is empty, clicks
+   ammunition at 0x1450 checks the ammunition through Player_GetProfileAchievementFlag and, when it is empty, clicks
    (sound 0xD4D) and shows the empty message on the holder's view; with ammunition and a loaded
    weapon at 0x5F6 it plays the wind-up sound 0x7BC unless already firing, sets the firing flags
    0x18400 and restarts the firing timer at 0x1230 at 25. Written with the fire check as the static
@@ -30,7 +30,7 @@ extern char D_80145040[];
 #include "WEAPONS/8022F3E8_8.H"
 
 extern s16 func_8022F96C_de(void *);
-extern s32 func_8022F55C_de(void *, s16);
+extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern s32 Weapons_GetPlayerIndex(void *, void *);
 extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 
@@ -45,7 +45,7 @@ static inline s32 can_fire(char *player) {
     if (D_801462C8.controllerMode != 1) {
         return 1;
     }
-    ammo = func_8022F55C_de(&D_80102B00[((SharedPlayer *)(player))->views1C.view5D4_45.unk5D4 * 0x190], ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E);
+    ammo = Player_GetProfileAchievementFlag(&D_80102B00[((SharedPlayer *)(player))->views1C.view5D4_45.unk5D4 * 0x190], ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E);
     if (ammo == 0) {
         Render_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {

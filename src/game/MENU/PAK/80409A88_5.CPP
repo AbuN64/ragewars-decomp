@@ -106,7 +106,7 @@ s32 func_80409DCC_de(struct RecordRecAt20V1 *record) {
 s32 func_80409E10_de(void *menu) {
     if (D_80146D60 == 0) {
         func_80293268_de(&D_8011FAC0);
-        func_80263C24_de();
+        Control_TrackControllerPakChanges();
         if (D_80146D60 == 0) {
             if (D_8014AD9C != 0) {
                 D_8014ADA0 = 1;

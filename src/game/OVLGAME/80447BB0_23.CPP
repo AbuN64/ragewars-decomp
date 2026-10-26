@@ -401,7 +401,7 @@ extern int func_802934F8_de(void);
 extern void Render_ResetPlayerWeapons(struct RespawnPlayer *);
 extern void World_ResetPlayerState(void *);
 extern void func_80217388_de(LevelActor *, s32 *);
-extern void func_80262C88_de(LevelActor *);
+extern void AnimPool_ReleaseSceneEffect(LevelActor *);
 static inline void releaseState(LevelActor *carried, s32 *state) {
     if (state != 0) {
         func_80217388_de(carried, state);
@@ -462,7 +462,7 @@ void Ovlgame_ResetRespawnedPlayer(struct RespawnPlayer *player) {
         releaseState(carried, &carried->behaviorFlags);
         carried->flags &= ~0x2000;
         carried->flags &= ~0x100;
-        func_80262C88_de(player->carried);
+        AnimPool_ReleaseSceneEffect(player->carried);
         player->carried = 0;
     }
 }

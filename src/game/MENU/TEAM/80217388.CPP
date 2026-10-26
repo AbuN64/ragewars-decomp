@@ -110,7 +110,7 @@ void func_80217594_de(Player *arg0, s32 unused1, s32 arg2, s32 *entry) {
     if (entry[0] != 0) {
         do {
             if ((arg2 & entry[0]) != 0) {
-                func_8024DBC0_de(arg0,
+                InstHdr_PlayActorGraphSound(arg0,
                               arg0->pos,
                               entry[1],
                               Nav_RandomBetween(D_800C21EC_de, D_800C21F0_de));

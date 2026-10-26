@@ -5,7 +5,7 @@
 #include "FRONTEND/8042E080_35.H"
 
 /* Reorders the four 400-byte player records D_80102B00 by the players' choices: copies all four to
-   the buffer at 0x2E28 of the block D_800E54A4 points to and resets each through func_8022EF30_de,
+   the buffer at 0x2E28 of the block D_800E54A4 points to and resets each through Player_InitializeProfile,
    copies back the record each player chose (index at 0xB28 of its 2920-byte record at 0x58) into
    that player's place, and then places every unchosen buffered record whose owner byte 0xD is not
    negative into the first place whose owner byte is still negative, all through Resmgr_CopyBytes. */
@@ -17,7 +17,7 @@
 
 
 extern struct Record_func_804347CC_de D_80102B00[];
-extern void func_8022EF30_de(struct Record_func_804347CC_de *);
+extern void Player_InitializeProfile(struct Record_func_804347CC_de *);
 
 void func_804347CC_de(void) {
     s32 used[4];
@@ -29,7 +29,7 @@ void func_804347CC_de(void) {
     size = 400;
     Resmgr_CopyBytes(D_800E54A4->packet.saved, D_80102B00, 0x640);
     for (i = 0; i < 4; i++) {
-        func_8022EF30_de(&D_80102B00[i]);
+        Player_InitializeProfile(&D_80102B00[i]);
         used[i] = 0;
     }
     for (i = 0; i < 4; i++) {

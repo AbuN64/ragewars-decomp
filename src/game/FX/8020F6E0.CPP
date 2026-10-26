@@ -59,16 +59,16 @@ s32 Fx_UpdateTargetSelection(void *object) {
         alternateDistance = 0.0f;
     }
     if (Nav_MatchesBehaviorStateFilter(controller) == 0 || linked == NULL) {
-        if (func_8020F93C_de(controller) == 0) {
+        if (Fx_CountAcceptedTargets(controller) == 0) {
             controller->target = NULL;
             return 1;
         }
-        if (alternate != NULL && func_8020F8F0_de(controller) != 0) {
+        if (alternate != NULL && Fx_IsPreferredTargetAccepted(controller) != 0) {
             controller->target = (AiTarget *)alternate;
             controller->targetPosition.x = alternate->pos.x;
             target = (AiTarget *)alternate;
         } else {
-            index = func_8020F984_de(controller);
+            index = Fx_FindNearestFlaggedTarget(controller);
             target = setSelectedTarget(controller, controller->candidates[index]);
             controller->targetPosition.x = target->position.x;
         }
@@ -77,7 +77,7 @@ s32 Fx_UpdateTargetSelection(void *object) {
         controller->targetPosition.x = alternate->pos.x;
         target = (AiTarget *)alternate;
     } else {
-        index = func_8020F984_de(controller);
+        index = Fx_FindNearestFlaggedTarget(controller);
         if (index != -1 && (f32)controller->candidateDistances[index] < linkedDistance) {
             target = setSelectedTarget(controller, controller->candidates[index]);
             controller->targetPosition.x = target->position.x;
@@ -95,7 +95,7 @@ s32 Fx_UpdateTargetSelection(void *object) {
 }
 
 /* Returns 1 when the preferred target is one of the accepted candidates. */
-s32 func_8020F8F0_de(AiController *controller) {
+s32 Fx_IsPreferredTargetAccepted(AiController *controller) {
     s32 i;
 
     if (controller->preferred == NULL) {
@@ -110,7 +110,7 @@ s32 func_8020F8F0_de(AiController *controller) {
 }
 
 /* Counts the candidate slots that hold a target and are accepted. */
-s32 func_8020F93C_de(AiController *controller) {
+s32 Fx_CountAcceptedTargets(AiController *controller) {
     s32 count;
     s32 i;
 
@@ -129,7 +129,7 @@ s32 func_8020F93C_de(AiController *controller) {
 }
 
 /* Returns the index of the nearest accepted candidate whose flags allow targeting, or -1. */
-s32 func_8020F984_de(AiController *controller) {
+s32 Fx_FindNearestFlaggedTarget(AiController *controller) {
     f32 distance;
     f32 unset;
     f32 nearest;

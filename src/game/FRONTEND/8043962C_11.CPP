@@ -11,7 +11,7 @@
 #include "COMMON/PLAYERPROFILES.H"
 
 #if defined(VERSION_US_REV1)
-extern void func_8022EF30_de(void *);
+extern void Player_InitializeProfile(void *);
 extern Pulse *D_800E5950;
 
 /* Initialize the pulse screen, its shared menu state, and player profiles. */
@@ -44,7 +44,7 @@ s32 func_804396C0_us_rev1(MenuWidget *tree) {
     settings->laps = 10;
     settings->players = 10;
     for (i = 0; i < 4; i++) {
-        func_8022EF30_de(&D_80102B00[i]);
+        Player_InitializeProfile(&D_80102B00[i]);
     }
     func_802A2400_de(0.0f);
     return 0;

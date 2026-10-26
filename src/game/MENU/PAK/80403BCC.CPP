@@ -146,7 +146,7 @@ void func_804041F0_de(void) {
     s32 channel;
     s32 present;
     PakRecord *record;
-    func_802644FC_de(1);
+    Control_AcquireControllerLock(1);
     Render_ReadControllerStates();
     D_8010BBB8 = 2;
     for (channel = 0; channel < 4; channel++) {
@@ -182,7 +182,7 @@ s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, 
     if (D_801534F0[ch] != 3) {
         return -2;
     }
-    ((void (*)(s32))func_802644FC_de)(1);
+    ((void (*)(s32))Control_AcquireControllerLock)(1);
     Render_ReadControllerStates();
     result = D_80153500[ch];
     D_8010BBB8 = 2;

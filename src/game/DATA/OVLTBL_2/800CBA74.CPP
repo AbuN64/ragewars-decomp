@@ -4,7 +4,7 @@
 unsigned int D_auto_rodata_unresolved_800CBA74[3] = {
     0x0000000F, 0x000A0004, 0x0000001A,
 };
-ButtonRemap D_800CBB70[19] = {
+ButtonRemap g_controllerButtonRemap[19] = {
     { 0x8000, 0x8000 },
     { 0x4000, 0x4000 },
     { 0x20, 0x10 },

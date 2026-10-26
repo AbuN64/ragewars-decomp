@@ -8,7 +8,7 @@
 /* Selects the nodes of D_8013B364's list whose flagged record matches one of thirty ids: every match
    whose owner at 0x34 is active at 0x294 is selected through Nav_AddGoalNode, and when none was, every
    matching node is selected regardless of owner. Returns the number of selections. Written from its
-   own assembly in the style of func_8020EEA4_de. */
+   own assembly in the style of Nav_AddPickupCategoryCosts. */
 
 
 
@@ -22,7 +22,7 @@ extern void Nav_AddGoalNode(s32 *, s32);
 
 
 
-s32 func_8020F150_de(s32 *ids) {
+s32 Nav_AddPickupGoalsByObjectIds(s32 *ids) {
     s32 *base;
     Node8020BC50 *node;
     void *record;

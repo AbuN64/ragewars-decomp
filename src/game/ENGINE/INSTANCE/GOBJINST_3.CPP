@@ -20,7 +20,7 @@ extern void func_80247004_de(Obj_func_80247004_de *);
 extern void Scene_UnlockResource(void *, Node80253610 *);
 
 /* Update or blend object rotation when the movement state permits it. */
-CQuatern func_8024D870_de(void *);
+CQuatern InstHdr_BuildActorGroundRotation(void *);
 
  /* extern */
 s32 func_8024E29C_de(void *);
@@ -91,7 +91,7 @@ void func_80247004_de(Obj_func_80247004_de *actor) {
     void *rotationDestination;
     actorFlags = actor->unk100;
     flags = actorFlags & 0x300000;
-    if (!(actorFlags & 1) && (rotationState = func_8024E62C_de(actor), (actor->unk14 != NULL)) && (vec = func_8024D870_de(actor), resetRotationFlag = actor->unk14->unk2 & 1, (func_8024E29C_de(actor) != 0))) {
+    if (!(actorFlags & 1) && (rotationState = func_8024E62C_de(actor), (actor->unk14 != NULL)) && (vec = InstHdr_BuildActorGroundRotation(actor), resetRotationFlag = actor->unk14->unk2 & 1, (func_8024E29C_de(actor) != 0))) {
         if (resetRotationFlag != 0) {
             vec.x = vec.y = vec.z = 0.0f;
             vec.w = D_800C3924_de;

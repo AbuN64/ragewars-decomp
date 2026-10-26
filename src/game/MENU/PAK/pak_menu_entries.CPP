@@ -188,10 +188,10 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
         }
     }
     if (selectionFlags == 0) {
-        if (func_80264388_de(menu->input) != 0) {
+        if (Control_IsLeftPressed(menu->input) != 0) {
             func_804410AC_de(menu, 0x10);
         }
-        if (func_802643A0_de(menu->input) != 0) {
+        if (Control_IsRightPressed(menu->input) != 0) {
             func_804410AC_de(menu, 0x11);
         }
     } else if (menu->input->buttons & 0x60303) {
@@ -209,8 +209,8 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
         return 0;
     }
     if (Render_IsAButtonPressed(menu->input) != 0 ||
-        (func_80264388_de(menu->input) != 0 && selectionFlags != 0) ||
-        (func_802643A0_de(menu->input) != 0 && selectionFlags != 0)) {
+        (Control_IsLeftPressed(menu->input) != 0 && selectionFlags != 0) ||
+        (Control_IsRightPressed(menu->input) != 0 && selectionFlags != 0)) {
         callback = entry->cls->confirm;
         if (callback != 0 && callback(entry, menu, context) == 0) {
             return 0;

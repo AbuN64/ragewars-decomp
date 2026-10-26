@@ -32,111 +32,111 @@ void func_8022D644_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); 
 
 void func_8022D660_de(void *a, void *b) { func_80225B98_de(a, b, 0x1E); }
 
-void func_8022D67C_de(void *arg0) { func_8022D57C_de(arg0); }
+void func_8022D67C_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
 void func_8022D698_de(void *a, void *b) { func_80225B98_de(a, b, 0x28); }
 
-void func_8022D6B4_de(void *arg0) { func_8022D57C_de(arg0); }
+void func_8022D6B4_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
 void func_8022D6D0_de(void *a, void *b) { func_80225B98_de(a, b, 0xB); }
 
-void func_8022D6EC_de(void *arg0) { func_8022D57C_de(arg0); }
+void func_8022D6EC_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
 void func_8022D708_de(void *a, void *b) { func_80225B98_de(a, b, 0xC); }
 
-void func_8022D724_de(void *arg0) { func_8022D57C_de(arg0); }
+void func_8022D724_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
 void func_8022D740_de(void *a, void *b) { func_80225B98_de(a, b, 0xD); }
 
-void func_8022D75C_de(void *arg0) { func_8022D57C_de(arg0); }
+void func_8022D75C_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
 void func_8022D778_de(void *a, void *b) { func_80225B98_de(a, b, 0xE); }
 
-void func_8022D794_de(void *arg0) { func_8022D57C_de(arg0); }
+void func_8022D794_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
 void func_8022D7B0_de(void *a, void *b) { func_80225B98_de(a, b, 0xF); }
 
-void func_8022D7CC_de(void *arg0) { func_8022D57C_de(arg0); }
+void func_8022D7CC_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
 void func_8022D7E8_de(void *a, void *b) { func_80225B98_de(a, b, 0x14); }
 
-void func_8022D804_de(void *arg0) { func_8022D57C_de(arg0); }
+void func_8022D804_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
 void func_8022D820_de(void *a, void *b) { func_80225B98_de(a, b, 0x46); }
 
-void func_8022D83C_de(void *arg0) { func_8022D57C_de(arg0); }
+void func_8022D83C_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D858_de(void *a, void *b) { func_80225B98_de(a, b, 0x3C); }
+void Player_StartPlayerSequence60(void *a, void *b) { func_80225B98_de(a, b, 0x3C); }
 
-void func_8022D874_de(void *arg0) { func_8022D57C_de(arg0); }
+void Player_UpdateSequence60RunEndPose(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D890_de(void *a, void *b) { func_80225B98_de(a, b, 0x47); }
+void Player_StartPlayerSequence71(void *a, void *b) { func_80225B98_de(a, b, 0x47); }
 
 /** Thin wrapper around func_8022D57C_de. */
-void func_8022D8AC_de(void *arg0) {
-    func_8022D57C_de(arg0);
+void Player_UpdateSequence71RunEndPose(void *sequencePlayer) {
+    func_8022D57C_de(sequencePlayer);
 }
 
 /** Thin wrapper around func_80225B98_de with a fixed third argument. */
-void func_8022D8C8_de(void *a, void *b) {
+void Player_StartPlayerSequence72(void *a, void *b) {
     func_80225B98_de(a, b, 0x48);
 }
 
 /** Thin wrapper around func_8022D57C_de. */
-void func_8022D8E4_de(void *arg0) {
-    func_8022D57C_de(arg0);
+void Player_UpdateSequence72RunEndPose(void *sequencePlayer) {
+    func_8022D57C_de(sequencePlayer);
 }
 
 /** Thin wrapper around func_80225B98_de with a fixed third argument. */
-void func_8022D900_de(void *a, void *b) {
+void Player_StartPlayerSequence73(void *a, void *b) {
     func_80225B98_de(a, b, 0x49);
 }
 
 /** Thin wrapper around func_8022D57C_de. */
-void func_8022D91C_de(void *arg0) {
-    func_8022D57C_de(arg0);
+void Player_UpdateSequence73RunEndPose(void *sequencePlayer) {
+    func_8022D57C_de(sequencePlayer);
 }
 
 /** Thin wrapper around func_80225B98_de with a fixed third argument. */
-void func_8022D938_de(void *a, void *b) {
+void Player_StartPlayerSequence74(void *a, void *b) {
     func_80225B98_de(a, b, 0x4A);
 }
 
 /** Thin wrapper around func_8022D57C_de. */
-void func_8022D954_de(void *arg0) {
-    func_8022D57C_de(arg0);
+void Player_UpdateSequence74RunEndPose(void *sequencePlayer) {
+    func_8022D57C_de(sequencePlayer);
 }
 
-void func_8022D970_de(void *arg0, void *arg1) {
-    char *o = (char *)arg0;
-    char *a1 = (char *)arg1;
-    s32 temp_v0;
-    CVector3 sp10;
-    CVector3 sp20;
+void Player_InitializeActorModelEffect(void *effectPlayerState, void *sourceActor) {
+    char *o = (char *)effectPlayerState;
+    char *a1 = (char *)sourceActor;
+    s32 actorModelEntry;
+    CVector3 modelEffectOffset;
+    CVector3 effectDisplacement;
 
-    temp_v0 = Sound_FindActorModelEntry(arg1);
-    ((Shared_ActorView *)o)->effectModel = (void *)temp_v0;
-    if (temp_v0 != 0) {
+    actorModelEntry = Sound_FindActorModelEntry(sourceActor);
+    ((Shared_ActorView *)o)->effectModel = (void *)actorModelEntry;
+    if (actorModelEntry != 0) {
         ((Shared_ActorView *)o)->modelState = 0;
         ((Shared_ActorView *)o)->effectPosition.x = ((LevelActor *)a1)->position0.x;
         ((Shared_ActorView *)o)->effectPosition.y = ((LevelActor *)a1)->position0.y;
         ((Shared_ActorView *)o)->effectPosition.z = ((LevelActor *)a1)->position0.z;
-        sp10.x = ((ModelBlend *)temp_v0)->effectOffset.x;
-        sp10.y = ((ModelBlend *)temp_v0)->effectOffset.y;
-        sp10.z = ((ModelBlend *)temp_v0)->effectOffset.z;
-        Particle_SubtractVectors(&sp20, &sp10, &((Shared_ActorView *)o)->effectPosition);
-        sp20.y = 0.0f;
-        ((Shared_ActorView *)o)->modelDistance = Particle_GetHorizontalAngle(&sp20);
+        modelEffectOffset.x = ((ModelBlend *)actorModelEntry)->effectOffset.x;
+        modelEffectOffset.y = ((ModelBlend *)actorModelEntry)->effectOffset.y;
+        modelEffectOffset.z = ((ModelBlend *)actorModelEntry)->effectOffset.z;
+        Particle_SubtractVectors(&effectDisplacement, &modelEffectOffset, &((Shared_ActorView *)o)->effectPosition);
+        effectDisplacement.y = 0.0f;
+        ((Shared_ActorView *)o)->modelDistance = Particle_GetHorizontalAngle(&effectDisplacement);
     }
 }
 
-void func_8022DA04_de(void *arg0) {
-    struct Player *player = arg0;
+void Player_ClearPlayerWeaponLock(void *lockedPlayerState) {
+    struct Player *player = lockedPlayerState;
     func_80218464_de(&player->weaponBusy);
     player->locked = 0;
 }
 
-void func_8022DA30_de(void *player, void *body) {
+void Player_EnterMovingSequenceState(void *player, void *body) {
     struct SharedPlayer *a0 = player;
     void *a1 = body;
 
@@ -146,13 +146,13 @@ void func_8022DA30_de(void *player, void *body) {
     }
 }
 
-void func_8022DA84_de(void *arg0) {
-    struct Player *player = arg0;
+void Player_ResetPlayerWeaponLock(void *lockedPlayerState) {
+    struct Player *player = lockedPlayerState;
     func_80218464_de(&player->weaponBusy);
     player->locked = 0;
 }
 
-void func_8022DAB0_de(void *player, void *body) {
+void Player_EnterStoppedSequenceState(void *player, void *body) {
     struct SharedPlayer *a0 = player;
     void *a1 = body;
 
@@ -162,7 +162,7 @@ void func_8022DAB0_de(void *player, void *body) {
     }
 }
 
-void func_8022DB04_de(Actor126 *actor, Object126 *arg1) {
+void Player_OffsetActorForState15(Actor126 *actor, Object126 *positionedObject) {
     Object126 *object;
     f32 angle;
     f32 object_angle;
@@ -172,7 +172,7 @@ void func_8022DB04_de(Actor126 *actor, Object126 *arg1) {
     actor->flags |= 0x800000;
     actor->value1D4 = D_800C2DC8_de;
     if (actor->state652 == 15) {
-        object = arg1;
+        object = positionedObject;
         object_angle = object->angle;
         angle = D_800C2DCC_de;
         sine = Math_Sinf(object_angle + angle);

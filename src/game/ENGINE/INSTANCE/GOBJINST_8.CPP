@@ -31,7 +31,7 @@ static inline void spawn(LevelActor *actor) {
                   actor->position1, actor->rotation, position, 0, -1, 0);
 }
 
-void func_8024A7A0_de(LevelActor *actor, s32 arg1, Lookup *params) {
+void func_8024A7A0_de(LevelActor *actor, s32 unusedShadowContext, Lookup *params) {
     EffectRecAt154 *effect;
     f32 scale;
     s32 *node;
@@ -41,7 +41,7 @@ void func_8024A7A0_de(LevelActor *actor, s32 arg1, Lookup *params) {
 
     actor->mask = 1 << actor->team;
     if (params->unk4 != 0) {
-        func_8024AA18_de(actor, arg1, params);
+        func_8024AA18_de(actor, unusedShadowContext, params);
     }
     if (params->unk0 == 0) {
         return;

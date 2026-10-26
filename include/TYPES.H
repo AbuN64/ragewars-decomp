@@ -44,13 +44,13 @@ extern void Nav_ResetBehaviorState(void *arg0);
 
 struct CloseAttackBrain;
 
-extern s32 func_8020F2A8_de(struct CloseAttackBrain *arg0);
+extern s32 Nav_SelectCloseAttackPickupGoal(struct CloseAttackBrain *arg0);
 
-extern s32 func_8020F388_de(void *arg0);
+extern s32 Nav_SelectChaseObjectGoal(void *arg0);
 
 struct AiController;
 
-extern s32 func_8020F444_de(struct AiController *arg0);
+extern s32 Nav_SelectStationaryObjectGoal(struct AiController *arg0);
 
 extern void func_80212FDC_eu(void *object);
 
@@ -80,7 +80,7 @@ extern void func_8022D164_de(void *arg0, struct LevelActor *arg1);
 
 extern void func_8022D188_de(void *unused, void *object);
 
-extern void func_8022F204_de(s32 arg0);
+extern void Player_InitializeProfileSlot(s32 arg0);
 
 extern void Camera_SetResponse(float arg0);
 
@@ -114,13 +114,13 @@ extern void func_8025E2D4_de(s32 a);
 
 extern void func_8025E440_de(f32 arg0);
 
-extern int func_80264388_de(struct ControllerProfile *object);
+extern int Control_IsLeftPressed(struct ControllerProfile *object);
 
-extern int func_802643A0_de(struct ControllerProfile *object);
+extern int Control_IsRightPressed(struct ControllerProfile *object);
 
-extern s32 func_802644FC_de(s32 arg0);
+extern s32 Control_AcquireControllerLock(s32 arg0);
 
-extern int func_8026475C_de(int arg0);
+extern int Control_IsControllerPakEnabled(int arg0);
 
 extern void Render_SetControllerMode(s32 a);
 

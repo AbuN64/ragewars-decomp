@@ -74,7 +74,7 @@ extern s32 func_8028B21C_de(struct Shared_World *, s32);
 
 extern void Camera_ResetActorMotion(char *);
 
-extern CQuatern func_8024D870_de(char *);
+extern CQuatern InstHdr_BuildActorGroundRotation(char *);
 
 extern void func_80262480_de(char *);
 
@@ -217,7 +217,7 @@ void func_802466A0_de(char *obj, s32 model, s32 kind, s32 unused, void *info, s3
     ((LevelActor *)obj)->scale = extent;
     ((LevelActor *)obj)->position1 = offset;
     ((LevelActor *)obj)->type = kind;
-    ((LevelActor *)obj)->rotation = func_8024D870_de(obj);
+    ((LevelActor *)obj)->rotation = InstHdr_BuildActorGroundRotation(obj);
     ((LevelActor *)obj)->eyeHeight = 0;
     ((LevelActor *)obj)->stateE6 = 0;
     ((LevelActor *)obj)->stateE7 = 0;

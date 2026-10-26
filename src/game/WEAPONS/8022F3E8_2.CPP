@@ -30,11 +30,11 @@ extern void Rsp_MultiplyAffineMatrices(void *, void *, void *);
 
 extern s32 func_80265650_de(void *, s32);
 extern void func_80265688_de(u8 *, s32, s32);
-void Weapons_SetAchievementFlag2F(Profile *player, s32 arg1) {
-    func_80265688_de(&player->achievementFlags[0x2F], arg1, 1);
+void Weapons_SetAchievementFlag2F(Profile *player, s32 achievementIndex) {
+    func_80265688_de(&player->achievementFlags[0x2F], achievementIndex, 1);
 }
 
-s32 func_8022F4DC_de(u8 *arg0, s32 arg1)
+s32 Player_HasProfileUnlockFlag(u8 *arg0, s32 arg1)
 {
   if (arg1 == 0x10)
   {
@@ -74,7 +74,7 @@ void Weapons_SetAchievementFlagByIndex(Profile *player, s32 arg1) {
     func_80265688_de(var_a0, var_a1, 1);
 }
 
-s32 func_8022F55C_de(Profile *profile, s32 arg1) {
+s32 Player_GetProfileAchievementFlag(Profile *profile, s32 arg1) {
     u8 *var_a0;
     s32 index = arg1;
 
@@ -94,8 +94,8 @@ s32 func_8022F55C_de(Profile *profile, s32 arg1) {
     return func_80265650_de(var_a0, index);
 }
 
-void Weapons_SetAchievementFlag7(Profile *record, s32 arg1) {
-    func_80265688_de(&record->achievementFlags[7], arg1, 1);
+void Weapons_SetAchievementFlag7(Profile *record, s32 achievementIndex) {
+    func_80265688_de(&record->achievementFlags[7], achievementIndex, 1);
 }
 
 /** Thin wrapper forwarding an offset argument to func_80265650_de. */

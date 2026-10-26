@@ -43,7 +43,7 @@ enum { SLOT_RESOURCE_962 = 962, SLOT_RESOURCE_966 = 966, SLOT_RESOURCE_968 = 968
 
 #endif
 
-extern s32 func_80264614_de(s32);
+extern s32 Control_IsControllerConnected(s32);
 
 extern void func_80298368_de(s32);
 
@@ -192,7 +192,7 @@ void func_8041BE90_de(void) {
     Frontend_SetWidgetFlag08(D_800E3518->unavailable, 0);
     var_s1 = 1;
     Frontend_SetWidgetFlag08(D_800E3518->prompt, 0);
-    temp_v0 = func_80264614_de(0);
+    temp_v0 = Control_IsControllerConnected(0);
     if (temp_v0 == 1) {
         func_8041C19C_de();
         if (D_800E3518->ready == 1) {

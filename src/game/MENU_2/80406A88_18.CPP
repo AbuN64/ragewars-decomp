@@ -6,7 +6,7 @@
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/WORLD.H"
 extern void *Scene_AllocateMemory(s32);
-extern void func_8022EF30_de(Profile *);
+extern void Player_InitializeProfile(Profile *);
 extern Pulse *D_800E5950;
 extern Shared_MenuData D_80145040;
 extern void Items_ResetActorPools(void *, s32);
@@ -48,7 +48,7 @@ s32 func_8043A4E0_eu_x(MenuWidget *tree) {
     settings->laps = 10;
     settings->players = 10;
     for (i = 0; i < 4; i++) {
-        func_8022EF30_de(&D_80102B00[i]);
+        Player_InitializeProfile(&D_80102B00[i]);
     }
     func_802A2400_de(0.0f);
     return 0;

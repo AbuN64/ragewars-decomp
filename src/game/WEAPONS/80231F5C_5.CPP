@@ -77,7 +77,7 @@ s32 func_802327D4_de(s32 arg0) {
 extern Shared_MenuData D_80145040;
 extern char *D_800E0D44[];
 extern char *D_800DCC68[];
-extern s32 func_8022F55C_de(Profile *, s32);
+extern s32 Player_GetProfileAchievementFlag(Profile *, s32);
 extern s32 Weapons_GetPlayerIndex(Shared_MenuData *, PlayerRecAt1450V1 *);
 extern void Camera_PostTargetedScreenMessage(Shared_MenuObject *, void *, char *, s32, f32);
 
@@ -94,7 +94,7 @@ s32 func_80232790_eu(PlayerRecAt1450V1 *pThis) {
     if (settings->controllerMode != 1) {
         return 1;
     }
-    result = func_8022F55C_de(&D_80102B00[pThis->character], pThis->weapon);
+    result = Player_GetProfileAchievementFlag(&D_80102B00[pThis->character], pThis->weapon);
     if (result == 0) {
         Render_PlayFlatSound(0xD4D);
         if (pThis->hud != 0) {

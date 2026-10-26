@@ -7,7 +7,7 @@
 
 
 
-void func_80263080_de(struct SceneEffectPool *arg0, struct SceneEffect *arg1) {
+void AnimPool_ReleasePooledEffect(struct SceneEffectPool *arg0, struct SceneEffect *arg1) {
     s32 *temp_v1;
 
     temp_v1 = arg1->ref;

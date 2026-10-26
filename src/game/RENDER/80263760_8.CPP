@@ -66,9 +66,9 @@ extern s32 func_8028B350_de(Shared_World *table, s32 id);
 
 
 
-void Render_SetProfileMode(ControllerProfile *slot, s32 arg1) {
-    slot->mode = arg1;
-    if (arg1 == 0) {
+void Render_SetProfileMode(ControllerProfile *slot, s32 profileMode) {
+    slot->mode = profileMode;
+    if (profileMode == 0) {
         Render_ResetControllerPak(slot);
     }
 }
@@ -107,30 +107,30 @@ void Render_SetControllerMode(s32 a) {
 
 void Render_SaveControllerSetup(void)
 {
-  s32 temp_v0;
-  s32 temp_v1;
-  s32 var_a0;
-  s32 var_a1;
-  s32 var_s1;
-  ControllerProfile *var_s0;
-  var_a0 = 0;
-  var_a1 = 0;
+  s32 savedValueOffset;
+  s32 profileValue;
+  s32 profileIndex;
+  s32 profileByteOffset;
+  s32 profilesReset;
+  ControllerProfile *profileCursor;
+  profileIndex = 0;
+  profileByteOffset = 0;
   do
   {
-    temp_v1 = *((s32 *) ((&D_8010B3F4) + var_a1));
- do { temp_v0 = var_a0 * 4; var_a0 += 1; *((s32 *) (((u8 *) D_8010BC18) + temp_v0)) = temp_v1; var_a1 += 0x224; } while (0);
+    profileValue = *((s32 *) ((&D_8010B3F4) + profileByteOffset));
+ do { savedValueOffset = profileIndex * 4; profileIndex += 1; *((s32 *) (((u8 *) D_8010BC18) + savedValueOffset)) = profileValue; profileByteOffset += 0x224; } while (0);
   }
-  while (var_a0 < 4);
-  var_s1 = 0;
+  while (profileIndex < 4);
+  profilesReset = 0;
   Render_FreeAllPoolNodes(&D_8010EC90);
-  var_s0 = D_8010F328;
+  profileCursor = D_8010F328;
   do
   {
-    Render_ResetControllerPak(var_s0);
-    var_s1 += 1;
-    var_s0 += 1;
+    Render_ResetControllerPak(profileCursor);
+    profilesReset += 1;
+    profileCursor += 1;
   }
-  while (var_s1 < 4);
+  while (profilesReset < 4);
   D_800CBC18 = 1;
 }
 
@@ -138,8 +138,8 @@ void Render_RestoreControllerSetup(void) {
     ControllerProfile *slot;
     s32 i;
     s32 j;
-    s32 var_a0;
-    s32 temp_v0;
+    s32 profileByteOffset;
+    s32 savedProfileValue;
 
     if (D_800CBC18 != 0) {
         i = 0;
@@ -150,12 +150,12 @@ void Render_RestoreControllerSetup(void) {
             slot += 1;
         } while (i < 4);
         j = 0;
-        var_a0 = 0;
+        profileByteOffset = 0;
         do {
-            temp_v0 = D_8010BC18[j];
+            savedProfileValue = D_8010BC18[j];
             j += 1;
-            *(s32 *)(&D_8010B3F4 + var_a0) = temp_v0;
-            var_a0 += 0x224;
+            *(s32 *)(&D_8010B3F4 + profileByteOffset) = savedProfileValue;
+            profileByteOffset += 0x224;
         } while (j < 4);
         Render_FreeAllPoolNodes(&D_8010EC90);
         D_800CBC18 = 0;
@@ -241,7 +241,7 @@ void func_80264B7C_de(void) {
     D_8010BC40.active = 0;
 }
 
-void func_80264B8C_de(void) {
+void Control_RestoreActorSnapshot(void) {
     s32 i;
     ActorRecAt5E0 *actor;
     Snapshot *snapshot;
@@ -291,13 +291,13 @@ void func_80264CE0_de(void) {
 }
 
 /** Initialize a three-word record with a value and two zero words. */
-void func_80264DE0_de(unsigned int *record, unsigned int value) {
+void Control_InitializeCurvePlayer(unsigned int *record, unsigned int value) {
     record[0] = value;
     record[1] = 0;
     record[2] = 0;
 }
 
-s32 func_80264DF0_de(void *arg0) {
+s32 Control_AdvanceEffectCurve(void *arg0) {
     PlayerRecAt8 *player = arg0;
     f32 temp_f1;
     f32 temp_f1_2;
@@ -342,7 +342,7 @@ block_7:
 
 
 
-float func_80264EE0_de(PlayerRecAt8 *p) {
+float Control_SampleEffectCurve(PlayerRecAt8 *p) {
     SampledCurve *c = p->curve;
 
     switch (c->type) {

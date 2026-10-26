@@ -106,8 +106,8 @@ s32 Render_IsAButtonPressed(s32); /* extern */
  /* extern */
 
 s32 Pak_AdjustValue(func_8022A404_S1 *menu,s32 value,s32 step,s32 minimum,s32 maximum,s32 wrap) {
- if(((s32 (*)(s32))func_80264388_de)(menu->unk20))value-=step;
- if(((s32 (*)(s32))func_802643A0_de)(menu->unk20)||Render_IsAButtonPressed(menu->unk20))value+=step;
+ if(((s32 (*)(s32))Control_IsLeftPressed)(menu->unk20))value-=step;
+ if(((s32 (*)(s32))Control_IsRightPressed)(menu->unk20)||Render_IsAButtonPressed(menu->unk20))value+=step;
  if(value<minimum) {
   value=minimum;if(wrap)value=maximum;
  } else if(value>maximum) {
@@ -127,7 +127,7 @@ s32 Pak_StepValue(func_8022A404_S1 *menu, s32 value, s32 step, s32 minimum, s32 
     s32 result;
 
     current = value;
-    if (((s32 (*)(s32))func_80264388_de)(menu->unk20) != 0) {
+    if (((s32 (*)(s32))Control_IsLeftPressed)(menu->unk20) != 0) {
         current -= step;
         if (current < minimum) {
             current = minimum;
@@ -137,7 +137,7 @@ s32 Pak_StepValue(func_8022A404_S1 *menu, s32 value, s32 step, s32 minimum, s32 
         }
     }
     result = current;
-    if (((s32 (*)(s32))func_802643A0_de)(menu->unk20) != 0) {
+    if (((s32 (*)(s32))Control_IsRightPressed)(menu->unk20) != 0) {
         stepped = current + step;
         result = stepped;
         if (maximum < stepped) {

@@ -17,17 +17,17 @@ extern s8 D_800FEC8D[];
 extern u8 g_playerSettings[];
 extern s32 D_800D34E0;
 
-extern void func_8022EF30_de(void *arg0);
+extern void Player_InitializeProfile(void *arg0);
 extern void func_802A0C08_de(void *arg0, s32 arg1, s32 arg2);
 
-void func_8022F204_de(s32 arg0) {
+void Player_InitializeProfileSlot(s32 arg0) {
     s32 offset;
     u8 *entry;
     u8 *config;
 
     offset = arg0 * 0x190;
     entry = D_80102B00 + offset;
-    func_8022EF30_de(entry);
+    Player_InitializeProfile(entry);
     *(s32 *)(D_80102B08 + offset) = 0;
     D_80102B0D[offset] = arg0;
     D_800FEB0C[offset] = 0;
@@ -41,7 +41,7 @@ void func_8022F204_de(s32 arg0) {
     D_800FEC8D[offset] = config[0x82];
 }
 
-void func_8022F314_de(void *arg0, unsigned char arg1) {
+void Player_SetProfileValue14(void *arg0, unsigned char arg1) {
     ((ObjCode8022E938 *)arg0)->value14 = arg1;
 }
 

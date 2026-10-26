@@ -12,7 +12,7 @@ extern SettingsE D_801462C8;
 extern char D_80102B00[][0x190];
 
 extern int D_800D30BC;
-extern int func_8022F55C_de(char *, int);
+extern int Player_GetProfileAchievementFlag(char *, int);
 extern int Weapons_GetPlayerIndex(void *, PlayerRecAt1450V1 *);
 extern void Camera_PostTargetedScreenMessage(void *, void *, int, int, float);
 
@@ -30,7 +30,7 @@ int func_802327F4_de(PlayerRecAt1450V1 *player) {
     if (rules->players != 1) {
         return 1;
     }
-    result = func_8022F55C_de(D_80102B00[player->character], player->weapon);
+    result = Player_GetProfileAchievementFlag(D_80102B00[player->character], player->weapon);
     if (result == 0) {
         Render_PlayFlatSound(0xD4D);
         if (player->hud != 0) {

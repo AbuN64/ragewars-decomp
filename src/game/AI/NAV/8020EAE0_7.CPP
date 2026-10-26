@@ -19,7 +19,7 @@ extern void Nav_ResetSearchState(void *arg0);
 
 extern void Nav_ClearGoalList(s32);
 
-extern s32 func_8020F150_de(void *arg0);
+extern s32 Nav_AddPickupGoalsByObjectIds(void *arg0);
 
 extern void Nav_SearchPathByKey(void *arg0, s32 arg1);
 
@@ -33,7 +33,7 @@ extern void Nav_AddGoalNode(void *, s32);
 
 extern s32 Weapons_GetWeaponClassId(Player *, s32);
 
-s32 func_8020F2A8_de(CloseAttackBrain *closeAttackBrain) {
+s32 Nav_SelectCloseAttackPickupGoal(CloseAttackBrain *closeAttackBrain) {
     s32 data[30];
     s32 *cursor;
     s32 count;
@@ -53,7 +53,7 @@ s32 func_8020F2A8_de(CloseAttackBrain *closeAttackBrain) {
         cursor--;
     } while (count >= 0);
     data[0] = 0xBD7;
-    if (func_8020F150_de(data) == 0) {
+    if (Nav_AddPickupGoalsByObjectIds(data) == 0) {
         closeAttackBrain->routeObject = 0;
         closeAttackBrain->routeState = -1;
         return 1;
@@ -74,7 +74,7 @@ s32 func_8020F2A8_de(CloseAttackBrain *closeAttackBrain) {
     return 1;
 }
 
-s32 func_8020F388_de(void *arg0) {
+s32 Nav_SelectChaseObjectGoal(void *arg0) {
     s32 data[30];
     s32 *cursor;
     s32 count;
@@ -93,7 +93,7 @@ s32 func_8020F388_de(void *arg0) {
         cursor--;
     } while (count >= 0);
     data[0] = 0x653;
-    if (func_8020F150_de(data) == 0) {
+    if (Nav_AddPickupGoalsByObjectIds(data) == 0) {
         ((RouteChaseBot *)arg0)->target = 0;
         ((RouteChaseBot *)arg0)->targetId = -1;
         return 1;
@@ -109,7 +109,7 @@ s32 func_8020F388_de(void *arg0) {
     return 1;
 }
 
-s32 func_8020F444_de(AiController *controller) {
+s32 Nav_SelectStationaryObjectGoal(AiController *controller) {
     CNavData *global;
     CNavData *scanbase;
     NavigationSearchNode *node;
@@ -165,9 +165,9 @@ s32 func_8020F55C_de(s32 field0E) {
 }
 
 /** Return whether arg0 is within the range [0xBC4, 0xBCA). */
-s32 func_8020F57C_de(s32 arg0) {
-    if (arg0 < 0xBCA) {
-        if (arg0 >= 0xBC4) {
+s32 func_8020F57C_de(s32 objectId) {
+    if (objectId < 0xBCA) {
+        if (objectId >= 0xBC4) {
             return 1;
         }
     }
@@ -179,7 +179,7 @@ int func_8020F59C_de(void) {
     return 0;
 }
 
-s32 func_8020F5A4_de(void **arg0) {
+s32 Nav_GetWeaponPickupGoalClass(void **arg0) {
     s32 temp_v0;
     void *temp_a0;
 
@@ -197,7 +197,7 @@ s32 func_8020F5A4_de(void **arg0) {
     }
 }
 
-s32 func_8020F614_de(void) {
+s32 Nav_AddInactiveObjectGoals(void) {
     s32 *base;
     NavigationSearchNode *node;
     void *result;

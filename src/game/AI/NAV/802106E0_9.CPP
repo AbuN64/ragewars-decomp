@@ -3,7 +3,7 @@
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 /* Fuzzy draft: inline-asm carrier of the original instructions (no C written yet). */
-void func_80211120_de(void) {
+void Nav_UpdatePursuitStrafeDe(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
@@ -238,14 +238,14 @@ void func_80211120_de(void) {
     );
 }
 #else
-INCLUDE_ASM("span_1000", func_80211120_de);
+INCLUDE_ASM("span_1000", Nav_UpdatePursuitStrafeDe);
 #endif
 #endif
 
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 /* Fuzzy draft: inline-asm carrier of the original instructions (no C written yet). */
-void func_80211470_de(void) {
+void Nav_UpdateRangedCombatDe(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
@@ -666,14 +666,14 @@ void func_80211470_de(void) {
     );
 }
 #else
-INCLUDE_ASM("span_1000", func_80211470_de);
+INCLUDE_ASM("span_1000", Nav_UpdateRangedCombatDe);
 #endif
 #endif
 
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 /* Fuzzy draft: inline-asm carrier of the original instructions (no C written yet). */
-void func_80211A7C_de(void) {
+void Nav_UpdateCloseCombatDe(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
@@ -1095,14 +1095,14 @@ void func_80211A7C_de(void) {
     );
 }
 #else
-INCLUDE_ASM("span_1000", func_80211A7C_de);
+INCLUDE_ASM("span_1000", Nav_UpdateCloseCombatDe);
 #endif
 #endif
 
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 /* Fuzzy draft: inline-asm carrier of the original instructions (no C written yet). */
-void func_80212088_de(void) {
+void Nav_UpdateVisiblePursuitDe(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
@@ -1339,7 +1339,7 @@ void func_80212088_de(void) {
     );
 }
 #else
-INCLUDE_ASM("span_1000", func_80212088_de);
+INCLUDE_ASM("span_1000", Nav_UpdateVisiblePursuitDe);
 #endif
 #endif
 

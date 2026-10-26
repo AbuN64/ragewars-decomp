@@ -62,7 +62,7 @@ extern void func_8042854C_de(s32, s32, s32);
 /* Rebuilds the item list for the player D_800E4690 selects: clears it through func_80428700_de, looks
    up that player's model in D_8011FE88, and for each of the model's eight slot ids at 0x4C that is
    at least 0x4C3 adds the nonzero id less 0x4C3 as the next row through func_8042854C_de when
-   func_8022F4DC_de accepts it for the player's 400-byte record in D_80102B00. */
+   Player_HasProfileUnlockFlag accepts it for the player's 400-byte record in D_80102B00. */
 
 
 
@@ -75,7 +75,7 @@ extern char D_80102B00[];
 
 extern struct Model *func_8028CFA0_de(Shared_World *, s32, s32);
 
-extern s32 func_8022F4DC_de(char *, s32);
+extern s32 Player_HasProfileUnlockFlag(char *, s32);
 
 /* Rebuilds the weapon menu for the player D_800E4690 selects: clears it through func_80428700_de, then
    for each of the 0x16 weapon ids (excluding id 0) whose owned flag in D_801462C8 (offset 0x11C,
@@ -182,7 +182,7 @@ void func_80428300_de(void) {
         id = model->slots[i];
         if (id >= 0x4C3) {
             id -= 0x4C3;
-            if (func_8022F4DC_de(&D_80102B00[player * 400], id) == 1 && id != 0) {
+            if (Player_HasProfileUnlockFlag(&D_80102B00[player * 400], id) == 1 && id != 0) {
                 func_8042854C_de(row, id, 0);
                 row++;
             }

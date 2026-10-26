@@ -16,7 +16,7 @@
 s32 func_80263154_de(BitReader *, s32);
 
 #if defined(NON_MATCHING) || !defined(VERSION_EU_X)
-extern void func_802630E0_de(BitReader *, void *);
+extern void AnimPool_InitializeBitReader(BitReader *, void *);
 /* Decode a 17-by-17 region grid, then replace variable cells with stream offsets. */
 void System_DecodeRegionGrid(ResourceBitGrid *grid, s32 originX, s32 originZ,
                    DraftStreamData *source, CVector3 *position) {
@@ -29,7 +29,7 @@ void System_DecodeRegionGrid(ResourceBitGrid *grid, s32 originX, s32 originZ,
     streamCount = *streamTable;
     streamIndex = 1;
     while (streamIndex < streamCount) {
-        func_802630E0_de(&grid->reader, Render_GetPackSection(streamTable, streamIndex));
+        AnimPool_InitializeBitReader(&grid->reader, Render_GetPackSection(streamTable, streamIndex));
         *(s32 *)&minimum.x = func_80263154_de(&grid->reader, 32);
         *(s32 *)&minimum.y = func_80263154_de(&grid->reader, 32);
         *(s32 *)&minimum.z = func_80263154_de(&grid->reader, 32);
@@ -42,7 +42,7 @@ void System_DecodeRegionGrid(ResourceBitGrid *grid, s32 originX, s32 originZ,
         streamIndex++;
     }
     if (streamIndex == streamCount) {
-        func_802630E0_de(&grid->reader, Render_GetPackSection(streamTable, 0));
+        AnimPool_InitializeBitReader(&grid->reader, Render_GetPackSection(streamTable, 0));
     }
     for (index = row = 0; row < 17; row++) {
         for (column = 0; column < 17; column++, index++) {

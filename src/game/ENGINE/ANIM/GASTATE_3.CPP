@@ -22,13 +22,13 @@ void func_80262480_de(void *record) {
     record_record->unk10 = 0;
 }
 
-void func_802624A8_de(void *arg0) {
-    Scene_UnlockResource(0, (struct Node80253610 *)(((struct func_8022BC04_S3 *) ((s8 *) arg0))->unk10));
-    (((struct func_8022BC04_S3 *) ((s8 *) arg0))->unk10) = 0;
+void func_802624A8_de(void *animationState) {
+    Scene_UnlockResource(0, (struct Node80253610 *)(((struct func_8022BC04_S3 *) ((s8 *) animationState))->unk10));
+    (((struct func_8022BC04_S3 *) ((s8 *) animationState))->unk10) = 0;
 }
 
-s32 func_802624D8_de(void *arg0) {
-    func_8020D0CC_S2 *arg0_record = arg0;
+s32 func_802624D8_de(void *animationState) {
+    func_8020D0CC_S2 *arg0_record = animationState;
     void *temp = arg0_record->unk10;
     if (temp == 0) {
         return 0;
@@ -36,8 +36,8 @@ s32 func_802624D8_de(void *arg0) {
     return func_802532F4_de(temp) != 0;
 }
 
-void func_80262504_de(void *arg0, Six *arg1) {
-    Six *result = (Six *)Render_GetPackSection((void *)func_8026049C_de(arg0), 6);
+void func_80262504_de(void *animationState, Six *recordOut) {
+    Six *result = (Six *)Render_GetPackSection((void *)func_8026049C_de(animationState), 6);
 
-    *arg1 = *result;
+    *recordOut = *result;
 }

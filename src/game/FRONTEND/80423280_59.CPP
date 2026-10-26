@@ -61,7 +61,7 @@ extern void MarkMenuEventHandled(void);
 
 
 
-/* When the fourth argument is one, calls MarkMenuEventHandled, advances the word at 0x20 of the object D_800E5430 holds while func_80264614_de reports one for it and it is below func_80264690_de's limit, formats that word into the object's text at 0x14 through func_802A0C08_de with D_800E1B60, and plays sound 0xE81 through Render_PlayFlatSound; returns zero.
+/* When the fourth argument is one, calls MarkMenuEventHandled, advances the word at 0x20 of the object D_800E5430 holds while Control_IsControllerConnected reports one for it and it is below func_80264690_de's limit, formats that word into the object's text at 0x14 through func_802A0C08_de with D_800E1B60, and plays sound 0xE81 through Render_PlayFlatSound; returns zero.
    Adapted from func_80422340_de with the object chain changed to a guarded counter increment, text format and sound call. */
 
 
@@ -139,7 +139,7 @@ int func_8042DC04_de(void) {
         slot->active = 1;
         slot->index = i;
         if (D_80102B0D[i * 400] < 0) {
-            func_8022F204_de(i);
+            Player_InitializeProfileSlot(i);
         }
     }
     return 0;
@@ -162,7 +162,7 @@ s32 func_8042DD00_de(void *a0, void *a1, void *a2, s32 press) {
         return 0;
     }
     MarkMenuEventHandled();
-    if (func_80264614_de(D_800E5430->count) == press) {
+    if (Control_IsControllerConnected(D_800E5430->count) == press) {
         object = D_800E5430;
         if (object->count < Render_CountConnectedControllers()) {
             D_800E5430->count++;

@@ -152,7 +152,7 @@ extern void func_802684E8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
 extern void func_802689BC_de(LevelActor *arg0, int arg1, int arg2, Blast blast);
 
 typedef CVector3 Vec3f;
-extern struct SceneEffect *func_802627A0_de(struct SceneEffectPool *scene, s32 variant, s32 owner, CVector3 position, f32 scale, CVector3 direction,
+extern struct SceneEffect *AnimPool_SpawnAnimationObject(struct SceneEffectPool *scene, s32 variant, s32 owner, CVector3 position, f32 scale, CVector3 direction,
                       CVector3 color, s32 *ref);
 
 #endif

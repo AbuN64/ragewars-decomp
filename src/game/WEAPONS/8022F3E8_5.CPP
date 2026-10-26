@@ -37,7 +37,7 @@ INCLUDE_ASM("span_1000", func_802301F4_de);
 
 
 
-extern s32 func_8022F55C_de(void *, s16);
+extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 
 
@@ -99,7 +99,7 @@ static inline s32 can_fire(char *player) {
     if (D_801462C8.controllerMode != 1) {
         return 1;
     }
-    ammo = func_8022F55C_de(&D_80102B00[((AttackTriggerPlayer *)(player))->unk5D4], ((AttackTriggerPlayer *)(player))->unk62E);
+    ammo = Player_GetProfileAchievementFlag(&D_80102B00[((AttackTriggerPlayer *)(player))->unk5D4], ((AttackTriggerPlayer *)(player))->unk62E);
     if (ammo == 0) {
         Render_PlayFlatSound(0xD4D);
         if (((AttackTriggerPlayer *)(player))->unk5DC != 0) {
@@ -159,7 +159,7 @@ static inline s32 can_toggle_mode(Player *player) {
     if (player->cooldown > 0.0f) return 0;
     if (player->computer != 0) return 1;
     if (D_801462C8.controllerMode != 1) return 1;
-    allowed = func_8022F55C_de(&D_80102B00[player->slot], player->selectedAction);
+    allowed = Player_GetProfileAchievementFlag(&D_80102B00[player->slot], player->selectedAction);
     if (allowed == 0) {
         Render_PlayFlatSound(0xD4D);
         if (player->camera) {

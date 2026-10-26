@@ -9,13 +9,13 @@
 #include "COMMON/OBJRECAT5F14.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
-/* Spawns an effect of the given kind for an object through func_802627A0_de at the object's position with its velocity (none when the object is inactive) and a uniform scale; kind 0x40C instead starts at the camera with no velocity and, once spawned, follows the camera's target through func_802833D0_de, and kinds 0x474 to 0x477 attach to the host's partner effect for active flagged hosts, otherwise the effect is started through func_80262C88_de. */
+/* Spawns an effect of the given kind for an object through AnimPool_SpawnAnimationObject at the object's position with its velocity (none when the object is inactive) and a uniform scale; kind 0x40C instead starts at the camera with no velocity and, once spawned, follows the camera's target through func_802833D0_de, and kinds 0x474 to 0x477 attach to the host's partner effect for active flagged hosts, otherwise the effect is started through AnimPool_ReleaseSceneEffect. */
 
 extern Camera_func_8026851C_de *D_80103FCC;
 
 extern s32 func_802833D0_de(void *host);
 
-extern s32 func_80262C88_de(void *effect);
+extern s32 AnimPool_ReleaseSceneEffect(void *effect);
 
 /* Forwards a position read from an object to func_8028FFD0_de on the global D_80131600 with a zero offset and a zero trailing weight, returning its result. Adapted from func_8028BFD8_de with the base argument, the source vector, the trailing arguments passed as a by-value struct and the return value changed. */
 
@@ -58,7 +58,7 @@ void func_8026851C_de(SourceRecAt1C *source, Shared_ParticleOwner *host, s32 unu
         velocity.y = 0;
         velocity.z = 0;
     }
-    storage = func_802627A0_de(&D_80131150, spawn.kind, source->id, spawn.position, 0.0f, velocity, scale, 0);
+    storage = AnimPool_SpawnAnimationObject(&D_80131150, spawn.kind, source->id, spawn.position, 0.0f, velocity, scale, 0);
     effect = storage;
     if (effect == 0) {
         return;
@@ -76,7 +76,7 @@ void func_8026851C_de(SourceRecAt1C *source, Shared_ParticleOwner *host, s32 unu
                 effect->scale = partner->scale;
             }
         } else {
-            func_80262C88_de(effect);
+            AnimPool_ReleaseSceneEffect(effect);
         }
     }
 }

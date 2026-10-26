@@ -33,7 +33,7 @@ extern void Items_SetSelection(void *arg0, s32 arg1, s32 arg2);
 extern s32 D_800CD730;
 
 extern s32 Render_IsSnapshotActive(void);
-extern void func_80264B8C_de(void);
+extern void Control_RestoreActorSnapshot(void);
 extern void func_80293334_de(void *session, s32 count, s32 force_active);
 
 void func_802944F4_de(s32 session) {
@@ -114,7 +114,7 @@ void Render_StartRound(GameSession *session) {
     game->mode1E = 8;
     func_80293334_de(session, session->arena, 0);
     if (Render_IsSnapshotActive() != 0) {
-        func_80264B8C_de();
+        Control_RestoreActorSnapshot();
     }
     func_8023EE00_de();
     resetRoundExtra();

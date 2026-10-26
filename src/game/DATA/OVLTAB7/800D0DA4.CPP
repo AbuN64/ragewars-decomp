@@ -5,7 +5,7 @@ unsigned int D_d0_17d69b582942ad4a[3] = {
     0x3F8AD4AA, 0x3F8AB06C, 0x3F8A8C29,
 };
 
-ButtonRemap D_800CBB70[19] = {
+ButtonRemap g_controllerButtonRemap[19] = {
     { 0x8000, 0x8000 },
     { 0x4000, 0x4000 },
     { 0x20, 0x10 },

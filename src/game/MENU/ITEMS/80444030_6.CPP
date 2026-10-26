@@ -158,14 +158,14 @@ char *func_804441F4_de(struct ActorRecAt1C *actor) {
 }
 
 s32 func_8044421C_de(void) {
- if(((s32 (*)(char *))func_80264388_de)(&D_8010B0E0)) {
+ if(((s32 (*)(char *))Control_IsLeftPressed)(&D_8010B0E0)) {
  switch(D_801462C8.sceneMask) {
  case 8: D_801462C8.sceneMask=32; break;
  case 16: D_801462C8.sceneMask=8; break;
  case 32: D_801462C8.sceneMask=16; break;
  }
  }
- if(((s32 (*)(char *))func_802643A0_de)(&D_8010B0E0) || Render_IsAButtonPressed(&D_8010B0E0)) {
+ if(((s32 (*)(char *))Control_IsRightPressed)(&D_8010B0E0) || Render_IsAButtonPressed(&D_8010B0E0)) {
  switch(D_801462C8.sceneMask) {
  case 8: D_801462C8.sceneMask=16; break;
  case 16: D_801462C8.sceneMask=32; break;

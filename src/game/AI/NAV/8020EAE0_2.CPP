@@ -19,7 +19,7 @@ extern CNavData D_8013B364;
 
 extern void *Nav_GetGraphPoint(void *, s32);
 
-s32 func_8020ED50_de(Func8020ED50Arg *owner) {
+s32 Nav_UpdateRouteIntermediateGoal(Func8020ED50Arg *owner) {
     s32 *base;
 
     base = &D_8013B364;
@@ -37,7 +37,7 @@ s32 func_8020ED50_de(Func8020ED50Arg *owner) {
     return 1;
 }
 
-void func_8020EDCC_de(char *arg0) {
+void Nav_SetLinkedActorNodeCosts(char *arg0) {
     CNavData *table = &D_8013B364;
     int i;
     float value;
@@ -53,7 +53,7 @@ void func_8020EDCC_de(char *arg0) {
     }
 }
 
-void func_8020EE50_de(void) {
+void Nav_AccumulateNodeTickCosts(void) {
     NavigationSearchNode *node;
     f32 k;
 
@@ -69,7 +69,7 @@ void func_8020EE50_de(void) {
     }
 }
 
-void func_8020EEA4_de(void) {
+void Nav_AddPickupCategoryCosts(void) {
     CNavData *base;
     NavigationSearchNode *node;
     NavigationPoint *result;
@@ -100,7 +100,7 @@ INCLUDE_ASM("span_1000", func_8020EF54_us);
 #if defined(VERSION_US)
 #ifdef NON_MATCHING
 /* Fuzzy draft: inline-asm carrier of the original instructions (no C written yet). */
-void func_8020EF64_us(void) {
+void Nav_SelectPickupGoalUs(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
@@ -192,7 +192,7 @@ void func_8020EF64_us(void) {
         "addu      $a0, $s2, $zero\n"
         "jal        Nav_ClearGoalList\n"
         "addu      $a0, $s2, $zero\n"
-        "jal        func_8020F150_de\n"
+        "jal        Nav_AddPickupGoalsByObjectIds\n"
         "addiu     $a0, $sp, 0x10\n"
         "bnez       $v0, .Lauto_8020F0D8\n"
         "addiu     $s0, $zero, -0x1\n"
@@ -239,7 +239,7 @@ void func_8020EF64_us(void) {
     );
 }
 #else
-INCLUDE_ASM("span_1000", func_8020EF64_us);
+INCLUDE_ASM("span_1000", Nav_SelectPickupGoalUs);
 #endif
 #endif
 

@@ -119,7 +119,7 @@ func_802B7C50_de
 }
 
 /** Report whether flag 0x1000 is set in the word at offset 0xB4. */
-int func_8026435C_de(Shared_Effect *object) {
+int Control_IsStartPressed(Shared_Effect *object) {
     int flags = object->state & 0x1000;
     return flags != 0;
 }
@@ -135,12 +135,12 @@ unsigned int Render_IsAButtonPressed(struct ControllerProfile *profile) {
 }
 
 /** Report whether any of the selected object flag bytes are set. */
-int func_80264388_de(struct ControllerProfile *object) {
+int Control_IsLeftPressed(struct ControllerProfile *object) {
     return (object->buttonState & 0x20202) != 0;
 }
 
 /** Report whether any selected status bit is set. */
-int func_802643A0_de(struct ControllerProfile *object) {
+int Control_IsRightPressed(struct ControllerProfile *object) {
     return (object->buttonState & 0x40101) != 0;
 }
 
@@ -224,7 +224,7 @@ void func_802644A8_de(void *controllerProfile) {
     o->buttonState = t_28;
 }
 
-s32 func_802644FC_de(s32 arg0) {
+s32 Control_AcquireControllerLock(s32 arg0) {
 
     s32 result;
 
@@ -242,25 +242,25 @@ void Render_ReleasePakLock(void) {
 }
 
 /** Fetch-and-clear: return the old slot value, then zero it. */
-s32 Render_TakePakChange(s32 arg0) {
+s32 Render_TakePakChange(s32 controllerPort) {
     s32 old;
 
-    if (func_8026475C_de(arg0) == 0) {
+    if (Control_IsControllerPakEnabled(controllerPort) == 0) {
         return 0;
     }
-    old = D_8010BBF0[arg0];
-    D_8010BBF0[arg0] = 0;
+    old = D_8010BBF0[controllerPort];
+    D_8010BBF0[controllerPort] = 0;
     return old;
 }
 
-s32 Render_PeekPakChange(s32 arg0) {
-    if (func_8026475C_de(arg0) == 0) {
+s32 Render_PeekPakChange(s32 controllerPort) {
+    if (Control_IsControllerPakEnabled(controllerPort) == 0) {
         return 0;
     }
-    return D_8010BBF0[arg0];
+    return D_8010BBF0[controllerPort];
 }
 
-int func_80264614_de(int arg0) {
+int Control_IsControllerConnected(int arg0) {
     return ((D_8010FBE3[arg0 * 4] >> 3) ^ 1) & 1;
 }
 
@@ -331,16 +331,16 @@ s32 func_80264728_de(void) {
     }
 }
 
-int func_8026475C_de(int arg0) {
+int Control_IsControllerPakEnabled(int arg0) {
     return D_8010B308[arg0];
 }
 
-void Render_EnableControllerPak(int arg0) {
-    D_8010B308[arg0] = 1;
+void Render_EnableControllerPak(int controllerPort) {
+    D_8010B308[controllerPort] = 1;
 }
 
-void Render_DisableControllerPak(int arg0) {
-    D_8010B308[arg0] = 0;
+void Render_DisableControllerPak(int controllerPort) {
+    D_8010B308[controllerPort] = 0;
 }
 
 void func_8026479C_de(void)

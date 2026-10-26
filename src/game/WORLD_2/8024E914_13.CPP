@@ -11,7 +11,7 @@ extern s32 D_800D2978;
 
 
 
-extern void func_8024DD10_de(PlacedProp *, PlacedPropRecord *, s32, char *);
+extern void InstHdr_ResetInstanceRenderIndices(PlacedProp *, PlacedPropRecord *, s32, char *);
 extern PropGeometry *Engine_GetActorDefinition(void *, s32);
 
 extern void MatrixFromQuaternion(f32 *, char *);
@@ -38,7 +38,7 @@ void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner,
     char matrix[0x40];
     PropGeometry *model;
 
-    func_8024DD10_de(prop, record, owner, segments);
+    InstHdr_ResetInstanceRenderIndices(prop, record, owner, segments);
     prop->state = 0;
     prop->id = record->id;
     prop->owner = owner;

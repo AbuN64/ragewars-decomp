@@ -33,7 +33,7 @@ extern s32 D_800CD8D0[];
 
 
 
-extern void func_8024DD10_de(PlacedProp *, RecordRecAt1A *, s32, char *);
+extern void InstHdr_ResetInstanceRenderIndices(PlacedProp *, RecordRecAt1A *, s32, char *);
 extern PropGeometry *Engine_GetActorDefinition(void *, s32);
 extern void ScaleMatrixLocal(char *, f32, f32, f32);
 extern void TranslateMatrix(char *, f32, f32, f32);
@@ -60,7 +60,7 @@ void func_8024F960_eu(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *
     f32 x;
     f32 z;
 
-    func_8024DD10_de(prop, record, owner, segments);
+    InstHdr_ResetInstanceRenderIndices(prop, record, owner, segments);
     prop->state = 0;
     prop->id = record->id;
     prop->owner = owner;

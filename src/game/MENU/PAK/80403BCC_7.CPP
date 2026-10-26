@@ -55,7 +55,7 @@ void Pak_ProbeStatus(s32 kind)
     u8 *cur;
     s32 ready;
 
-    ((void (*)(s32))func_802644FC_de)(1);
+    ((void (*)(s32))Control_AcquireControllerLock)(1);
     Render_ReadControllerStates();
     D_8010BBB8 = 2;
 

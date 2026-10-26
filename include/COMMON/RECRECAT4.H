@@ -127,5 +127,5 @@ extern char D_800DD9D0_de[];
 extern void func_8042E9B4_de(char *, char *, char *);
 
 
-extern s32 func_80264614_de(s32);
+extern s32 Control_IsControllerConnected(s32);
 #endif

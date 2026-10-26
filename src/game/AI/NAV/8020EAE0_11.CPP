@@ -11,8 +11,8 @@ s32 Nav_SetBehaviourState(void *, s32);
 s32 Nav_MatchesBehaviorStateFilter(void *);
 s32 func_80209AD8_de(void *);
 f32 Nav_GetScaledAggression(void *);
-s32 func_8020EA10_de(void *);
-s32 func_8020F5A4_de(void *);
+s32 Nav_ShouldSeekUnclaimedTeamMarker(void *);
+s32 Nav_GetWeaponPickupGoalClass(void *);
 s32 Weapons_GetWeaponClassId(void *, s16);
 s32 Weapons_GetWeaponAmmo(void *, s16);
 s32 Weapons_GetMaxHealth(void *);
@@ -88,7 +88,7 @@ s32 Nav_SelectPlayerState(AiController *controller) {
         return 1;
     }
     if (func_80209AD8_de(controller) == 0 && ammoPercent < 10.0f) {
-        controller->routeState = func_8020F5A4_de(controller);
+        controller->routeState = Nav_GetWeaponPickupGoalClass(controller);
         nextState = 8;
         Nav_SetBehaviourState(controller, nextState);
         return 1;
@@ -105,7 +105,7 @@ s32 Nav_SelectPlayerState(AiController *controller) {
         Nav_SetBehaviourState(controller, nextState);
         return 1;
     }
-    if (func_8020EA10_de(controller) != 0 && (state = controller->state) != 9) {
+    if (Nav_ShouldSeekUnclaimedTeamMarker(controller) != 0 && (state = controller->state) != 9) {
         if (state == 1 || state == 2) {
             nextState = 9;
             Nav_SetBehaviourState(controller, nextState);

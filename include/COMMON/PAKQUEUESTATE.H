@@ -78,7 +78,7 @@ struct ObjectState30 {
     s8 unk_2F;
 };
 
-extern void func_80263C24_de();
+extern void Control_TrackControllerPakChanges();
 
 
 

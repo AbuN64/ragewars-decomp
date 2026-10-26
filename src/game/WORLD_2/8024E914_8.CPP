@@ -19,9 +19,9 @@ void func_8024F470_de(void *staticObject) {
     ((StaticObject *)(staticObject))->cached = 0;
 }
 
-CQuatern func_8024D870_de(void *);
+CQuatern InstHdr_BuildActorGroundRotation(void *);
 CQuatern func_8024F478_de(void *actor) {
-    return func_8024D870_de(actor);
+    return InstHdr_BuildActorGroundRotation(actor);
 }
 
 

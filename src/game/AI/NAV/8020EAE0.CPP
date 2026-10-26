@@ -15,9 +15,9 @@
 extern s32 D_8013B364;
 extern s32 Nav_FindLinkIndex(s32 *, s32, s32);
 extern void Nav_ResetSearchState(s32 *);
-extern void func_8020EDCC_de(void *);
-extern void func_8020EE50_de(void *);
-extern void func_8020EEA4_de(void *);
+extern void Nav_SetLinkedActorNodeCosts(void *);
+extern void Nav_AccumulateNodeTickCosts(void *);
+extern void Nav_AddPickupCategoryCosts(void *);
 extern void Nav_ClearGoalList(s32 *);
 extern void Nav_AddGoalNode(s32 *, s32);
 extern void Nav_SearchPathByKey(s32 *, s32);
@@ -26,7 +26,7 @@ extern void Nav_ReconstructSearchPath(s32 *, s32 *, s32);
 
 
 
-s32 func_8020EAE0_de(void *arg0) {
+s32 Nav_RebuildRequestedGoalRoute(void *arg0) {
     s32 *base;
     s32 requested;
     s32 current;
@@ -57,13 +57,13 @@ s32 func_8020EAE0_de(void *arg0) {
     }
     Nav_ResetSearchState(base);
     if (((Func8020ED50Arg *)arg0)->releaseFlags[0] != 0) {
-        func_8020EDCC_de(arg0);
+        Nav_SetLinkedActorNodeCosts(arg0);
     }
     if (((Func8020ED50Arg *)arg0)->releaseFlags[1] != 0) {
-        func_8020EE50_de(arg0);
+        Nav_AccumulateNodeTickCosts(arg0);
     }
     if (((Func8020ED50Arg *)arg0)->releaseFlags[2] != 0) {
-        func_8020EEA4_de(arg0);
+        Nav_AddPickupCategoryCosts(arg0);
     }
     Nav_SetPickupGoalWeights(arg0);
     Nav_ClearGoalList(base);

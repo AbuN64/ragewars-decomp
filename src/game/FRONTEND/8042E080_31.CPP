@@ -5,7 +5,7 @@
 #include "FRONTEND/8040B45C_33.H"
 
 /* Updates the four player control rows, their visibility, and the selected player label. */
-extern s32 func_80264614_de(s32);
+extern s32 Control_IsControllerConnected(s32);
 extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 extern struct Shared_Item *Menu_GetSlotValue(void *, s32);
 void Frontend_UpdatePlayerControlRows(s32 player) {
@@ -64,7 +64,7 @@ void Frontend_UpdatePlayerControlRows(s32 player) {
 #endif
     row_done:
         item = func_8040EC30_de(D_800E54A4->window, id);
-        if (func_80264614_de(i) == 1) {
+        if (Control_IsControllerConnected(i) == 1) {
             Frontend_SetWidgetFlag100(item, 0);
         } else {
             Frontend_SetWidgetFlag100(item, 1);

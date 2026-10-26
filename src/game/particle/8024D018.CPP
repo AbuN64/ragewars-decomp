@@ -9,7 +9,7 @@
 
 
 
-void func_8024D028_de(f32 *m, f32 *q, f32 *t)
+void GameObject_BuildQuaternionTranslationMatrix(f32 *m, f32 *q, f32 *t)
 {
     f32 x = q[0];
     f32 xx = x * x;
@@ -52,7 +52,7 @@ extern void func_80253E64_de(int a, int **b, int c);
 
 
 
-void func_8024D108_de(void *levelActor, int **arg1) {
+void GameObject_BuildLitActorResource(void *levelActor, int **arg1) {
     struct LevelActor *object = levelActor;
     int *deref1;
     int deref2;

@@ -20,7 +20,7 @@ extern void Render_PlayFlatSound(s32 id);
 extern void Pak_AllocateMenu(s32 a, void *obj, void *res);
 extern s32 Pak_StepValue(void *obj, s32 value, s32 a, s32 b, s32 c, s32 d);
 extern void Pak_SelectPreviewModel(s32 a, s32 b, s32 c);
-/* Steps the choice byte at 0x80 of the slot the record at 0x1C of arg1 points to: while the player passes func_8026437C_de it plays the sound for the record's style and runs the resource D_0044FA6C; otherwise Pak_StepValue moves the choice and the remapping tables D_auto_800C9237 (func_80264388_de) and D_auto_800C9233 (func_802643A0_de or func_8026437C_de) are applied before the display is refreshed; returns 1 or 0. */
+/* Steps the choice byte at 0x80 of the slot the record at 0x1C of arg1 points to: while the player passes func_8026437C_de it plays the sound for the record's style and runs the resource D_0044FA6C; otherwise Pak_StepValue moves the choice and the remapping tables D_auto_800C9237 (Control_IsLeftPressed) and D_auto_800C9233 (Control_IsRightPressed or func_8026437C_de) are applied before the display is refreshed; returns 1 or 0. */
 s32 func_8043DB50_de(s32 arg0, Func_8043DB50_Obj *arg1, s32 arg2) {
     Func_8043DB50_Rec *rec = arg1->rec;
     Func_8043DB50_Slot *slot = rec->slot;
@@ -31,10 +31,10 @@ s32 func_8043DB50_de(s32 arg0, Func_8043DB50_Obj *arg1, s32 arg2) {
         return 1;
     }
     slot->choice = Pak_StepValue(arg1, slot->choice, 1, 0, 0x12, 1);
-    if (func_80264388_de(arg1->player) != 0) {
+    if (Control_IsLeftPressed(arg1->player) != 0) {
         slot->choice = D_auto_800C9237[slot->choice][0];
     }
-    if (func_802643A0_de(arg1->player) != 0 || Render_IsAButtonPressed(arg1->player) != 0) {
+    if (Control_IsRightPressed(arg1->player) != 0 || Render_IsAButtonPressed(arg1->player) != 0) {
         slot->choice = D_auto_800C9233[slot->choice][0];
     }
     Items_StartPlayerAnimation(rec, slot->choice);

@@ -7,10 +7,10 @@ struct SharedPlayer;
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
-extern f32 func_8022DBC4_de(f32 arg0);
+extern f32 Player_EvaluateCubicComplement(f32 arg0);
 
 struct Shared_ActorView;
-extern s32 func_8022DC1C_de(struct Shared_ActorView *arg0);
+extern s32 Player_IsSpeedAboveThreshold(struct Shared_ActorView *arg0);
 
 
 struct Shape_typemap_14;
@@ -23,10 +23,10 @@ struct Marker;
 typedef struct Marker Marker;
 
 
-extern void func_8022E0B0_de(void *arg0, void *arg1);
+extern void Player_ApplyRangedPitchToMatrix(void *arg0, void *arg1);
 
-struct Entry_func_8022E130_de;
-struct Entry_func_8022E130_de {
+struct EntryPlayerHasLinkedWorldFlagSix;
+struct EntryPlayerHasLinkedWorldFlagSix {
     char pad[0x52];
     u16 flags;
 };
@@ -38,9 +38,9 @@ typedef struct Object126 Object126;
 
 
 
-extern int func_8022E694_de(struct SharedPlayer *arg0);
+extern int Player_IsStateFifteen(struct SharedPlayer *arg0);
 
-extern float func_8022E588_de(void * arg0, float * arg1);
+extern float Player_SumActivePlayerDistances(void * arg0, float * arg1);
 
 struct ObjRecAt724;
 typedef struct ObjRecAt724 ObjRecAt724;
@@ -52,7 +52,7 @@ extern void func_8022DC14_de(void);
 
 extern float D_800C7EF8;
 
-extern u8 func_8022E758_de(s32 arg0, s32 arg1);
+extern u8 Player_GetImpactSoundEnabled(s32 arg0, s32 arg1);
 
 struct Actor126;
 typedef struct Actor126 Actor126;
@@ -61,14 +61,14 @@ extern float D_800C7EC0;
 
 
 
-extern void func_8022D954_de(void *);
+extern void Player_UpdateSequence74RunEndPose(void *);
 
 extern float D_801370C4;
 
 struct ObjRecAt1AV1;
 typedef struct ObjRecAt1AV1 ObjRecAt1AV1;
 
-extern void func_8022DA84_de(void *arg0);
+extern void Player_ResetPlayerWeaponLock(void *arg0);
 
 extern float D_800C7F10;
 
@@ -83,7 +83,7 @@ struct ObjRecAt724 {
 
 
 struct Player;
-extern void func_8022DC00_de(struct Player *arg0);
+extern void Player_InitializeStateBlendToZero(struct Player *arg0);
 
 
 struct ObjRecAt1AV1;
@@ -119,9 +119,9 @@ extern void func_8022E940_de(void);
 
 extern float D_800C7EE0;
 
-extern void func_8022DA04_de(void *arg0);
+extern void Player_ClearPlayerWeaponLock(void *arg0);
 
-extern void func_8022DBE4_de(struct Player *arg0);
+extern void Player_InitializeStateBlendTarget(struct Player *arg0);
 
 
 struct Marker;
@@ -176,9 +176,9 @@ struct ObjectLinks87C {
 
 extern float D_800C2DC8_de;
 
-extern s32 func_8022E640_de(struct SharedPlayer *arg0);
+extern s32 Player_IsStateThreeLowerAnimationGroup(struct SharedPlayer *arg0);
 
-extern void func_8022E260_de(void * arg0, int arg1, int arg2);
+extern void Player_ApplyLinkedProjectileStatus(void * arg0, int arg1, int arg2);
 
 struct Object126;
 struct Object126 {
@@ -190,33 +190,33 @@ struct Object126 {
     f32 angle;
 };
 
-extern void func_8022DB04_de(Actor126 *actor, Object126 *arg1);
+extern void Player_OffsetActorForState15(Actor126 *actor, Object126 *arg1);
 
 
 
 
 struct func_80204468_S3;
-extern s32 func_8022E130_de(struct func_80204468_S3 *object);
+extern s32 Player_HasLinkedWorldFlagSix(struct func_80204468_S3 *object);
 
 extern float D_800C7EC8;
 
 
 
-extern void func_8022E890_de(void *unused0, s32 *arg1);
+extern void Player_ReleaseMarkerSlot(void *unused0, s32 *arg1);
 
 
 
-extern s32 func_8022E5EC_de(struct SharedPlayer *arg0);
+extern s32 Player_IsStateThreeUpperAnimationGroup(struct SharedPlayer *arg0);
 
 struct ObjRecAt1CV2;
 typedef struct ObjRecAt1CV2 ObjRecAt1CV2;
 
-extern void func_8022DD94_de(struct Shared_ActorView *arg0);
+extern void Player_UpdateActionTransitionBlend(struct Shared_ActorView *arg0);
 
 extern float D_800C7EF4;
 
 
-extern void func_8022DFA8_de(void *arg0);
+extern void Player_UpdateWeaponEffectBlend(void *arg0);
 
 #endif
 #endif

@@ -54,7 +54,7 @@ extern void func_80219480_de(void *, void *);
 
 
 
-extern struct Entry_func_8022E130_de *func_8028B2F8_de(Shared_World *, s32);
+extern struct EntryPlayerHasLinkedWorldFlagSix *func_8028B2F8_de(Shared_World *, s32);
 
 /* Returns the constant after D_800C7EC0 less the cube of its difference from the argument. */
 
@@ -63,12 +63,12 @@ extern struct Entry_func_8022E130_de *func_8028B2F8_de(Shared_World *, s32);
 
 
 
-f32 func_8022DBC4_de(f32 arg0) {
-    f32 temp = D_800C2DD4_de - arg0;
+f32 Player_EvaluateCubicComplement(f32 curveInput) {
+    f32 temp = D_800C2DD4_de - curveInput;
     return D_800C2DD4_de - (temp * temp * temp);
 }
 
-void func_8022DBE4_de(Player *player) {
+void Player_InitializeStateBlendTarget(Player *player) {
     float temp = player->state708;
     float k = D_800C7EC8;
     player->state714 = 0;
@@ -76,7 +76,7 @@ void func_8022DBE4_de(Player *player) {
     player->state710 = k;
 }
 
-void func_8022DC00_de(Player *player) {
+void Player_InitializeStateBlendToZero(Player *player) {
     float temp = player->state708;
     player->state710 = 0;
     player->state714 = 0;
@@ -96,7 +96,7 @@ void func_8022DC14_de(void) {
 
 
 
-s32 func_8022DC1C_de(Shared_ActorView *actor) {
+s32 Player_IsSpeedAboveThreshold(Shared_ActorView *actor) {
     f32 field = actor->speed;
     f32 konst = D_800C2DDC_de;
     s32 result = 1;
@@ -106,7 +106,7 @@ s32 func_8022DC1C_de(Shared_ActorView *actor) {
     return result;
 }
 
-void func_8022DC44_de(Player *player, LevelActor *actor, s32 unused, s32 *flags) {
+void Player_UpdateCrouchClearance(Player *player, LevelActor *actor, s32 unused, s32 *flags) {
     s32 held;
     s32 crouch;
     f32 target;
@@ -152,7 +152,7 @@ void func_8022DC44_de(Player *player, LevelActor *actor, s32 unused, s32 *flags)
     }
 }
 
-void func_8022DD94_de(Shared_ActorView *actor) {
+void Player_UpdateActionTransitionBlend(Shared_ActorView *actor) {
     f32 sp10;
     f32 var_f1;
     f32 var_f2;
@@ -175,7 +175,7 @@ clamp:
     actor->transitionBlend = actor->transitionBlend + var_f2;
 }
 
-void func_8022DE58_de(Player *player, LevelActor *actor) {
+void Player_AdjustHeightForCollision(Player *player, LevelActor *actor) {
     CVector3 next;
     f32 temp_f0;
     f32 temp_f1;
@@ -209,7 +209,7 @@ void func_8022DE58_de(Player *player, LevelActor *actor) {
     player->heightDelta += var_f23;
 }
 
-void func_8022DFA8_de(void *arg0) {
+void Player_UpdateWeaponEffectBlend(void *arg0) {
     f32 target;
     char *effect;
     s32 state;
@@ -239,7 +239,7 @@ void func_8022DFA8_de(void *arg0) {
     }
 }
 
-void func_8022E0B0_de(void *matrix, void *arg1) {
+void Player_ApplyRangedPitchToMatrix(void *matrix, void *arg1) {
     ObjRecAt1AV1 *range;
     ObjRecAt724 *actor;
     s32 value;
@@ -266,8 +266,8 @@ void func_8022E0B0_de(void *matrix, void *arg1) {
     PitchMatrix(matrix, amount / (f32)range->unk1A);
 }
 
-s32 func_8022E130_de(struct func_80204468_S3 *object) {
-    struct Entry_func_8022E130_de *entry;
+s32 Player_HasLinkedWorldFlagSix(struct func_80204468_S3 *object) {
+    struct EntryPlayerHasLinkedWorldFlagSix *entry;
 
     if (object->unk14 != 0) {
         entry = func_8028B2F8_de(&g_world, object->unk14);

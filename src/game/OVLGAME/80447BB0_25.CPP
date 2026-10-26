@@ -254,7 +254,7 @@ void func_80449E18_de(CPlayerPool *pool) {
     struct IntPair *temp_v1_2;
     Shared_ActorView *actor;
     if ((func_802934F8_de() != 0) && (Render_IsSnapshotActive() != 0)) {
-        func_80264B8C_de();
+        Control_RestoreActorSnapshot();
         func_80264B7C_de();
     }
     actor = pool->m_ActiveList.head;

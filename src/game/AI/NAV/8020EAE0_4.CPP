@@ -3,7 +3,7 @@
 #include "AI/NAV/8020EAE0_4.H"
 
 #if !(defined(VERSION_EU) || defined(VERSION_US))
-s32 func_8020EF80_eu_x(PickupGoalObj8020EF60 *arg0) {
+s32 Nav_SelectPickupGoal(PickupGoalObj8020EF60 *arg0) {
     s32 buffer[30];
     s32 count;
     Shared_PickupGoalNode *record;
@@ -65,7 +65,7 @@ s32 func_8020EF80_eu_x(PickupGoalObj8020EF60 *arg0) {
             Nav_ClearGoalList(base);
 
             key = &arg0->unk_4;
-            if (func_8020F150_de(buffer) == 0) {
+            if (Nav_AddPickupGoalsByObjectIds(buffer) == 0) {
                 arg0->unk_68 = 0;
                 arg0->unk_BC = -1U;
                 return 1;

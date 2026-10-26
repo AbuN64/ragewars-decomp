@@ -34,7 +34,7 @@ extern f32 Particle_GetActorHeight(void *);
 
 extern func_80204468_S3 *D_800D052C[];
 
-u8 func_8022E758_de(s32 unused0, s32 arg1) {
+u8 Player_GetImpactSoundEnabled(s32 unused0, s32 arg1) {
     u8 *ptr;
 
     if (arg1 == 0x2DA) {
@@ -46,7 +46,7 @@ u8 func_8022E758_de(s32 unused0, s32 arg1) {
     return 1;
 }
 
-void func_8022E78C_de(Player *actor, Marker **slot, s32 kind, f32 distance) {
+void Player_UpdateOffsetMarker(Player *actor, Marker **slot, s32 kind, f32 distance) {
     Marker *marker;
     CVector3 offset;
     CVector3 pos;
@@ -71,7 +71,7 @@ void func_8022E78C_de(Player *actor, Marker **slot, s32 kind, f32 distance) {
     marker->scale = D_800C7F10;
 }
 
-void func_8022E890_de(void *unused0, s32 *arg1) {
+void Player_ReleaseMarkerSlot(void *unused0, s32 *arg1) {
     s32 temp;
 
     temp = *arg1;
@@ -81,7 +81,7 @@ void func_8022E890_de(void *unused0, s32 *arg1) {
     }
 }
 
-int func_8022E8D0_de(short id, int mode) {
+int Player_HasWeaponModeFlag(short id, int mode) {
     switch (mode) {
     case 0:
         if (!(D_800D052C[id]->unk14 & 1)) {

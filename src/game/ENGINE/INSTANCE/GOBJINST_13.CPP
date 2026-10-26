@@ -34,7 +34,7 @@ void *func_8024BC94_de(void *outVector, void *actor, struct IntPair localVector)
     return outVector;
 }
 
-s32 func_8024BD08_de(Shared_Func80243A80Actor *arg0) {
+s32 func_8024BD08_de(Shared_Func80243A80Actor *actor) {
     CVector3 direction;
     Node75 *node;
     f32 upper;
@@ -44,7 +44,7 @@ s32 func_8024BD08_de(Shared_Func80243A80Actor *arg0) {
     f32 sine;
     f32 cosine;
 
-    node = (void *)arg0->collision;
+    node = (void *)actor->collision;
     if (node != 0) {
         upper = node->cur->y;
         if (node->prev->y <= upper) {
@@ -66,14 +66,14 @@ s32 func_8024BD08_de(Shared_Func80243A80Actor *arg0) {
         } else {
             lowerNext = lower;
         }
-        if (upperNext < arg0->y) {
+        if (upperNext < actor->y) {
             return 0;
         }
-        if (arg0->y < lowerNext) {
+        if (actor->y < lowerNext) {
             return 0;
         }
-        sine = Math_Sinf(arg0->angle);
-        cosine = Math_Cosf(arg0->angle);
+        sine = Math_Sinf(actor->angle);
+        cosine = Math_Cosf(actor->angle);
         Nav_GetNodeEdgeCross(&direction, node);
         if (direction.x * -sine + direction.z * -cosine < 0.0f) {
             return 1;

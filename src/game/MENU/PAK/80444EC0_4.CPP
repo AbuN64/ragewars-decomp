@@ -31,7 +31,7 @@ s32 func_80444FA0_us_rev1(OptionEditState *arg0, OptionEditState *arg1, s32 arg2
     ResourceManagerState *temp_v0_2;
     char *var_a0;
     var_s1 = 0;
-    if (func_8026435C_de(arg1->unk_20) != 0) {
+    if (Control_IsStartPressed(arg1->unk_20) != 0) {
         return func_80442384_de(arg0, arg1, arg2);
     }
     temp_v0 = arg1->unk_1C;

@@ -11,7 +11,7 @@
 #include "LISTS/80279520.H"
 
 extern s32 Camera_IsSequenceInWindow(void);
-extern CQuatern func_8024D728_de(void *arg1);
+extern CQuatern GameObject_BuildActorDirectionTilt(void *arg1);
 
 
 extern void MultiplyQuaternions(CQuatern *arg0, CQuatern *arg1, CQuatern *arg2);
@@ -37,7 +37,7 @@ void func_8024B53C_de(void *levelActor) {
     copy = ((struct LevelActor *)(levelActor))->rotation;
     copy_ptr = &copy;
     if (Camera_IsSequenceInWindow() != 0) {
-        copy = func_8024D728_de(levelActor);
+        copy = GameObject_BuildActorDirectionTilt(levelActor);
     }
 
     angle = ((struct LevelActor *)(levelActor))->yaw;
@@ -77,11 +77,11 @@ void func_8024B65C_de(void *actorStorage, unsigned int animationIndex)
   }
 }
 
-void func_8024B67C_de(void *arg0) {
-    (((struct ObjectState110 *) ((s8 *) arg0))->unk_10F) = 1;
-    (((struct ObjectState110 *) ((s8 *) arg0))->unk_104) = 0;
-    (((struct ObjectState110 *) ((s8 *) arg0))->unk_10E) = 0;
-    (((struct ObjectState110 *) ((s8 *) arg0))->unk_100) = (s32) ((((struct ObjectState110 *) ((s8 *) arg0))->unk_100) & ~0x400);
+void func_8024B67C_de(void *actorAnimationState) {
+    (((struct ObjectState110 *) ((s8 *) actorAnimationState))->unk_10F) = 1;
+    (((struct ObjectState110 *) ((s8 *) actorAnimationState))->unk_104) = 0;
+    (((struct ObjectState110 *) ((s8 *) actorAnimationState))->unk_10E) = 0;
+    (((struct ObjectState110 *) ((s8 *) actorAnimationState))->unk_100) = (s32) ((((struct ObjectState110 *) ((s8 *) actorAnimationState))->unk_100) & ~0x400);
 }
 
 extern s32 func_80246A08_de(void *, s32, s32);
@@ -179,25 +179,25 @@ extern s32 D_800D297C;
 extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 extern void func_8024C454_de(void *arg0, void *arg1);
 
-void func_8024B8EC_de(void *actor, void *arg1, void *arg2) {
+void func_8024B8EC_de(void *actor, void *unusedShadowContext, void *renderSettings) {
     s8 index;
     s32 one;
 
     index = ((struct LevelActor *)(actor))->team;
     if (index != -1) {
         ((struct LevelActor *)(actor))->mask = 1 << index;
-        if (((struct ActorRenderSettings *)(arg2))->drawShadow != 0) {
-            func_8024AA18_de(actor, arg1, arg2);
+        if (((struct ActorRenderSettings *)(renderSettings))->drawShadow != 0) {
+            func_8024AA18_de(actor, unusedShadowContext, renderSettings);
         }
-        if (*(s32 *)arg2 != 0) {
+        if (*(s32 *)renderSettings != 0) {
             one = 1;
-            func_8026DA4C_de(((struct ActorRenderSettings *)(arg2))->view,
+            func_8026DA4C_de(((struct ActorRenderSettings *)(renderSettings))->view,
                           ((struct LevelActor *)(actor))->fieldB4, one,
                           (char *)actor
                               + ((((D_800D297C << one) + D_800D297C) << 3)
                                  + 0x140),
                           0, ((struct LevelActor *)(actor))->field3);
-            func_8024C454_de(actor, arg2);
+            func_8024C454_de(actor, renderSettings);
         }
     }
 }

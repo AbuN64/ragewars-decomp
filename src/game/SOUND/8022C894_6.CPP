@@ -29,7 +29,7 @@ extern s32 Camera_MoveActorWithCollision(Instance8020CD74 *, CVector3, Collision
 
 extern f32 Particle_GetPointDistance(f32 *a, f32 *b);
 
-void func_8022E260_de(void *arg0, s32 arg1, s32 arg2) {
+void Player_ApplyLinkedProjectileStatus(void *arg0, s32 arg1, s32 arg2) {
     func_8021C45C_de((((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link), arg0, arg1, arg2);
 }
 
@@ -87,7 +87,7 @@ void func_8022E290_de(void *player) {
     object->previousTarget = object->pos;
 }
 
-s32 func_8022E3C4_de(Player *player, s32 arg1, s32 arg2) {
+s32 Player_HasWeaponClassType(Player *player, s32 arg1, s32 arg2) {
     s16 **entry;
     s16 **scan;
     WeaponInfo *resource;
@@ -128,7 +128,7 @@ mismatch:
     return 0;
 }
 
-s32 func_8022E43C_de(Instance8020CD74 *arg0, CVector3 *arg1) {
+s32 Player_ProbeCollisionAdjustedPosition(Instance8020CD74 *arg0, CVector3 *arg1) {
     Instance8020CD74 saved;
     s32 moved;
 
@@ -146,7 +146,7 @@ s32 func_8022E43C_de(Instance8020CD74 *arg0, CVector3 *arg1) {
     return moved;
 }
 
-f32 func_8022E588_de(void *arg0, f32 *arg1) {
+f32 Player_SumActivePlayerDistances(void *arg0, f32 *arg1) {
     f32 result;
     Round *round = arg0;
     Shared_ActorView *var_s0;
@@ -166,7 +166,7 @@ f32 func_8022E588_de(void *arg0, f32 *arg1) {
 
 /* Returns whether a record in state 3 carries type 0x5E2A or 0x5E5A, or a type in the range 0x7DF to 0x7E3. */
 
-s32 func_8022E5EC_de(struct SharedPlayer *player) {
+s32 Player_IsStateThreeUpperAnimationGroup(struct SharedPlayer *player) {
     s32 type;
 
     if (player->views5E8.view650_15.unk650 == 3) {
@@ -178,9 +178,9 @@ s32 func_8022E5EC_de(struct SharedPlayer *player) {
     return player->views5E8.view650_15.unk650 == 3 && player->views5E8.view86C_125.unk86C >= 0x7DF && player->views5E8.view86C_125.unk86C < 0x7E4;
 }
 
-/* Returns whether a record in state 3 carries type 0x5E29 or 0x5E59, or a type in the range 0x7DA to 0x7DE. Adapted from func_8022E5EC_de with the type constants changed. */
+/* Returns whether a record in state 3 carries type 0x5E29 or 0x5E59, or a type in the range 0x7DA to 0x7DE. Adapted from Player_IsStateThreeUpperAnimationGroup with the type constants changed. */
 
-s32 func_8022E640_de(struct SharedPlayer *player) {
+s32 Player_IsStateThreeLowerAnimationGroup(struct SharedPlayer *player) {
     s32 type;
 
     if (player->views5E8.view650_15.unk650 == 3) {
@@ -192,6 +192,6 @@ s32 func_8022E640_de(struct SharedPlayer *player) {
     return player->views5E8.view650_15.unk650 == 3 && player->views5E8.view86C_125.unk86C >= 0x7DA && player->views5E8.view86C_125.unk86C < 0x7DF;
 }
 
-int func_8022E694_de(struct SharedPlayer *player) {
+int Player_IsStateFifteen(struct SharedPlayer *player) {
     return player->views5E8.view650_15.unk650 == 0xF;
 }

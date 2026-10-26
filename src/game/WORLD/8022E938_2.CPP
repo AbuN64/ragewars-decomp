@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "RESMGR/802A0888.H"
 
-extern void func_8022F314_de(void *, u8);
+extern void Player_SetProfileValue14(void *, u8);
 extern void func_8022F338_de(void *, u8);
 extern void func_8022F35C_de(void *, u8);
 extern void func_8022F380_de(void *, s32);
@@ -16,14 +16,14 @@ extern void Weapons_SetAchievementFlag2F(s32, s32);
 
 
 
-void func_8022EF30_de(void *arg0) {
+void Player_InitializeProfile(void *arg0) {
     u8 *object = (u8 *)arg0;
     s32 i;
     u8 *cursor;
 
     Resmgr_FillMemory((s32)object, 0, 8);
     object[0xE] = 0;
-    func_8022F314_de(object, 0);
+    Player_SetProfileValue14(object, 0);
     func_8022F338_de(object, 0);
     func_8022F35C_de(object, 0);
     func_8022F380_de(object, 0);

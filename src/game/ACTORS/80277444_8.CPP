@@ -84,7 +84,7 @@ extern void Menu_RequestTrackByIds(s32, s32);
 
 extern void func_80217388_de(void);
 
-extern void func_80262C88_de(struct Shared_Actor *arg0);
+extern void AnimPool_ReleaseSceneEffect(struct Shared_Actor *arg0);
 
 
 
@@ -190,7 +190,7 @@ void func_802790C0_de(struct Shared_Actor *actor, s32 *stateFlags) {
     flags = flags & ~0x100;
     actor->weaponFlags = flags;
     if (flags & 0x80000) {
-        func_80262C88_de(actor);
+        AnimPool_ReleaseSceneEffect(actor);
     }
 }
 

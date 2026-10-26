@@ -65,7 +65,7 @@ struct Snapshot;
 extern s32 func_802646D4_de(s32 arg0);
 
 
-extern void func_80264B8C_de();
+extern void Control_RestoreActorSnapshot();
 
 
 extern void func_80264CB8_de();
@@ -91,7 +91,7 @@ extern void func_80264B44_de();
 extern void Render_RestoreControllerSetup();
 
 
-extern s32 func_80264DF0_de(void *arg0);
+extern s32 Control_AdvanceEffectCurve(void *arg0);
 
 struct SampledCurve;
 typedef struct SampledCurve SampledCurve;

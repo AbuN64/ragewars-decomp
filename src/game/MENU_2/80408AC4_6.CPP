@@ -357,7 +357,7 @@ void func_8043C688_de(void) {
         "addiu     $v0, $zero, 0x1\n"
         ".Lauto_8043C7B8:\n"
         "lw         $a0, 0x20($s1)\n"
-        "jal        func_80264388_de\n"
+        "jal        Control_IsLeftPressed\n"
         "nop\n"
         "beqz       $v0, .Lauto_8043C89C\n"
         "addu      $a0, $zero, $zero\n"
@@ -421,7 +421,7 @@ void func_8043C688_de(void) {
         "addu      $v0, $v1, $zero\n"
         ".Lauto_8043C89C:\n"
         "lw         $a0, 0x20($s1)\n"
-        "jal        func_802643A0_de\n"
+        "jal        Control_IsRightPressed\n"
         "nop\n"
         "beqz       $v0, .Lauto_8043C984\n"
         "addu      $v0, $zero, $zero\n"
@@ -641,9 +641,9 @@ s32 func_8043C688_de(s32 arg0, Shared_MenuInput *pad) {
         return 1;
     }
 
-    if (((s32 (*)(s32))func_80264388_de)(pad->buttons) != 0) {
+    if (((s32 (*)(s32))Control_IsLeftPressed)(pad->buttons) != 0) {
         D_80154034 = findUnlocked(D_80154034, -1);
-    } else if (((s32 (*)(s32))func_802643A0_de)(pad->buttons) != 0) {
+    } else if (((s32 (*)(s32))Control_IsRightPressed)(pad->buttons) != 0) {
         D_80154034 = findUnlocked(D_80154034, 1);
     }
     return 0;

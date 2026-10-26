@@ -18,7 +18,7 @@ void Weapons_SpawnFlaggedEffects(Player *actor, s32 *arg1, s32 arg2, s32 arg3, s
     if (entry[0] != 0) {
         do {
             if ((arg3 & entry[0]) != 0) {
-                func_8024DBC0_de(actor,
+                InstHdr_PlayActorGraphSound(actor,
                               actor->pos,
                               entry[1],
                               Nav_RandomBetween(D_800C21D8_de, D_800C21DC_de));
@@ -31,7 +31,7 @@ void Weapons_SpawnFlaggedEffects(Player *actor, s32 *arg1, s32 arg2, s32 arg3, s
     if (entry[0] != 0) {
         do {
             if ((arg4 & entry[0]) != 0) {
-                func_8024DBC0_de(actor,
+                InstHdr_PlayActorGraphSound(actor,
                               actor->pos,
                               entry[1],
                               Nav_RandomBetween(D_800C21E0_de, D_800C21E4_de));

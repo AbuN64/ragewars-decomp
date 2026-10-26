@@ -16,7 +16,7 @@ extern void Render_SetActorStateBit(Shared_World *, void *, s32);
 
 extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
 
-s32 func_80262C88_de(void *);
+s32 AnimPool_ReleaseSceneEffect(void *);
 
 extern s32 Render_TestActorStateBit(void *, void *);
 
@@ -54,7 +54,7 @@ void Turret_Setup_DEATH(void *actor, void *state) {
 
 void Turret_Code_DEATH(LevelActor *actor, ActorMotionState *state) {
     if ((state->actionPending != 0) && (actor->flags & 0x80000)) {
-        func_80262C88_de(actor);
+        AnimPool_ReleaseSceneEffect(actor);
     }
 }
 

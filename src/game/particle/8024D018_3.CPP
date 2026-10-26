@@ -41,7 +41,7 @@ extern void MultiplyQuaternions(CQuatern *, CQuatern *, CQuatern *);
 extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
-CQuatern func_8024D4AC_de(char *actor, CVector3 point) {
+CQuatern GameObject_BuildTargetAimOrientation(char *actor, CVector3 point) {
     CVector3 origin;
     CVector3 dir;
     CVector3 forward;
@@ -103,7 +103,7 @@ CQuatern func_8024D4AC_de(char *actor, CVector3 point) {
     return result;
 }
 
-CQuatern func_8024D728_de(InputRecAt44 *input) {
+CQuatern GameObject_BuildActorDirectionTilt(InputRecAt44 *input) {
     CVector3 source;
     CVector3 up;
     CVector3 axis;

@@ -48,7 +48,7 @@ extern void func_80218464_de(void *arg0);
 
 extern void Weapons_InitializePlayerHealth(void *arg0);
 
-void func_8022E948_de(Player *player) {
+void Player_ToggleActionFlagMode(Player *player) {
     u8 *ptr;
 
     ptr = &D_80145088.settings.local;
@@ -70,7 +70,7 @@ void func_8022E948_de(Player *player) {
     player->toggle = 1;
 }
 
-void func_8022E9A8_de(Player *player) {
+void Player_SelectAlternateWeapon(Player *player) {
     u8 *ptr;
     WeaponInfo *temp_v0;
     s16 alternate;
@@ -104,7 +104,7 @@ void func_8022E9A8_de(Player *player) {
     }
 }
 
-void func_8022EA3C_de(void *surface, CVector3 *arg1) {
+void Player_UpdateSurfaceHeightEffect(void *surface, CVector3 *arg1) {
     f32 first;
     f32 amount;
 
@@ -127,15 +127,15 @@ void func_8022EB04_de(void) {
 }
 
 /** Test whether an actor satisfies the condition selected by an entry type. */
-s32 World_PlayerHasAmmoForWeapon(void *player, s32 arg1) {
+s32 World_PlayerHasAmmoForWeapon(void *player, s32 requestedWeaponType) {
     void *entry;
     s16 *condition;
     char *indexed;
     s32 offset;
 
-    entry = D_800D052C[arg1];
+    entry = D_800D052C[requestedWeaponType];
     {
-        s32 sw_arg1_value = arg1;
+        s32 sw_arg1_value = requestedWeaponType;
         if ((unsigned int)sw_arg1_value > 21) {
             goto sw_arg1_default;
         }
@@ -204,12 +204,12 @@ s32 World_PlayerHasAmmoForWeapon(void *player, s32 arg1) {
     } while (0);
 }
 
-int func_8022EBC4_de(void) {
+int Player_ReturnZero(void) {
     char pad[0x10];
     return 0;
 }
 
-s32 func_8022EBD4_de(void *player, LevelActor *actor) {
+s32 Player_TryEnterLandedState(void *player, LevelActor *actor) {
     if (actor->position1.y <= 0.0f && func_8024E62C_de(actor) != 0) {
         Weapons_SetPlayerState(player, actor, 2);
         return 1;
@@ -225,7 +225,7 @@ s32 func_8022EBD4_de(void *player, LevelActor *actor) {
 
 
 
-void func_8022EC3C_de(ActorRecAt16E0 *object) {
+void Player_SelectMovementAnimation(ActorRecAt16E0 *object) {
     int suppress = 0;
     float value;
 
@@ -250,11 +250,11 @@ void func_8022EC3C_de(ActorRecAt16E0 *object) {
     }
 }
 
-/** Empty adjacent entry point included in func_8022EC3C_de's Splat span. */
+/** Empty adjacent entry point included in Player_SelectMovementAnimation's Splat span. */
 void func_8022ECC4_de(void) {
 }
 
-void func_8022ECCC_de(void) {
+void Player_AdvanceCurrentRunEndState(void) {
     if (D_800FE9F0->unk5EA == 1) {
         Ovlgame_UpdateRunEndPlayer((s32)D_800FE9F0);
     } else {
@@ -264,11 +264,11 @@ void func_8022ECCC_de(void) {
     D_800C9FE4 = 0;
 }
 
-void func_8022ED24_de(void) {
+void Player_UpdateStoredRunEndPlayer(void) {
     Ovlgame_UpdateRunEndPlayer(D_80102A48);
 }
 
-void func_8022ED48_de(ActorRecAt16E0 *arg0)
+void Player_ResetMotionAndSelectIdleAnimation(ActorRecAt16E0 *arg0)
 {
   s32 temp_v0;
   temp_v0 = arg0->flags & 0xFF7FFFFF;
@@ -288,7 +288,7 @@ void func_8022ED48_de(ActorRecAt16E0 *arg0)
   arg0->unk_0x086C = 1;
 }
 
-void func_8022EDA4_de(ResourceLoadState *resourceLoadState) {
+void Player_ReleasePlayerResource(ResourceLoadState *resourceLoadState) {
     s32 handle;
 
     Render_SetControllerMode(0);
@@ -306,7 +306,7 @@ void func_8022EDA4_de(ResourceLoadState *resourceLoadState) {
 void func_8022EDF4_de(void) {
 }
 
-void func_8022EDFC_de(void *player) {
+void Player_RespawnFragTagPlayer(void *player) {
     s32 mode;
 
     ((Shared_ActorView *)player)->controls->transientFlag = 1;
@@ -335,7 +335,7 @@ void func_8022EDFC_de(void *player) {
     Weapons_InitializePlayerHealth(player);
 }
 
-s32 func_8022EF04_de(s32 arg0, s32 arg1) {
+s32 Player_CountTrailingSpaces(s32 arg0, s32 arg1) {
     s32 var_a1;
     s32 result;
     s32 space;

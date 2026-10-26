@@ -44,7 +44,7 @@ extern EquipEntry D_800E5B44[];
 extern HudStatusShared_Settings D_801462C8;
 
 
-extern s32 func_8022F4DC_de(s32 record, s32 item);
+extern s32 Player_HasProfileUnlockFlag(s32 record, s32 item);
 
 /* Enters player p's loadout panel on the screen D_800E59E0: marks the entry open, hides the panel
    item D_800E59E6[p][0], then by the entry's mode at 0x4D4 either hides column item
@@ -156,7 +156,7 @@ void func_8043AE5C_de(s32 player, s32 step) {
             if (valid == 1 && (category == 2 || category == 3) &&
                 D_800E5B44[value].kind == 15 &&
                 !(D_801462C8.flags & 0x10000000) &&
-                !func_8022F4DC_de((s32)&D_80102B00[player], 15)) {
+                !Player_HasProfileUnlockFlag((s32)&D_80102B00[player], 15)) {
                 value += step;
                 valid = 0;
             }

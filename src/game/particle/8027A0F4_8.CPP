@@ -31,7 +31,7 @@ extern f32 D_800CD6B0;
 
 extern void Particle_TransformDirection(MatrixF *, CVector3 *, CVector3 *);
 extern void Particle_IdentityMatrix(MatrixF *);
-extern CQuatern func_8024D4AC_de(EffectActor *, CVector3);
+extern CQuatern GameObject_BuildTargetAimOrientation(EffectActor *, CVector3);
 extern void BuildDirectionMatrix(MatrixF *, CVector3 *);
 extern void Rsp_ConvertMatrixToFloat(MatrixF *, PackedMatrixWords *);
 extern void ScaleMatrixLocal(MatrixF *, f32, f32, f32);
@@ -339,7 +339,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 Particle_IdentityMatrix(&mtx);
             } else {
                 if (entry->flags & 0x40000) {
-                    quat = func_8024D4AC_de(owner, pos);
+                    quat = GameObject_BuildTargetAimOrientation(owner, pos);
                 } else {
                     quat = rotation;
                 }

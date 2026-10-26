@@ -5,7 +5,7 @@
 #include "COMMON/OBJRECAT5F14.H"
 #include "COMMON/VERSION_CALLS.H"
 
-/* Spawns the effect of an item variant: resolves the variant's effect id, loads its descriptor and first record, takes the effect count from the record's model and turns the colour vector by the record's angle, then spawns the effect through the inline spawner of func_80262A9C_de with the given owner, position, scale, direction and counted reference, releasing both resources. Adapted from func_80262A9C_de with the descriptor loading added. */
+/* Spawns the effect of an item variant: resolves the variant's effect id, loads its descriptor and first record, takes the effect count from the record's model and turns the colour vector by the record's angle, then spawns the effect through the inline spawner of AnimPool_SpawnDescribedSceneEffect with the given owner, position, scale, direction and counted reference, releasing both resources. Adapted from AnimPool_SpawnDescribedSceneEffect with the descriptor loading added. */
 #include "TYPES.H"
 #include "SCENE/802508E0_4.H"
 #include "SCENE/802508E0_9.H"
@@ -64,14 +64,14 @@ static inline SceneEffect *spawn_effect(struct SceneEffectPool *scene, s32 id, s
     func_8024B2D0_de(effect);
     return effect;
 }
-SceneEffect *func_802627A0_de(struct SceneEffectPool *scene, s32 variant, s32 owner, CVector3 position, f32 scale, CVector3 direction,
+SceneEffect *AnimPool_SpawnAnimationObject(struct SceneEffectPool *scene, s32 variant, s32 owner, CVector3 position, f32 scale, CVector3 direction,
                       CVector3 color, s32 *ref) {
     SceneEffect *effect;
     s32 id;
     s32 key;
     void **descriptor;
     void **resource;
-    Record_func_802627A0_de *record;
+    RecordAnimPoolSpawnAnimationObject *record;
     s32 count;
     s32 size;
     s32 clip;

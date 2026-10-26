@@ -65,7 +65,7 @@ extern void func_8022C490_de(SharedPlayer *);
 extern void func_80220ED4_de(SharedPlayer *);
 extern void Weapons_UpdatePlayerCamera(SharedPlayer *, SharedPlayer *);
 
-extern s32 func_8026435C_de(Shared_Effect *);
+extern s32 Control_IsStartPressed(Shared_Effect *);
 
 extern s32 func_802A23B4_de(void);
 extern s32 Pak_CountLiveNodes(MenuWeaponsUpdateWorldPlayers *);
@@ -103,7 +103,7 @@ void Weapons_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
         for (player = world->players; player != 0; player = player->views16E0.view16E0_2.next) {
             if (Camera_IsSequenceActive() != 0 && (player->views5E8.view6B0_48.state & 0x8000)) {
                 func_8024570C_de();
-            } else if (func_8026435C_de(player->views5E8.view698_36.controller) != 0) {
+            } else if (Control_IsStartPressed(player->views5E8.view698_36.controller) != 0) {
                 if (Camera_IsSequenceActive() != 0 || func_8024576C_de() != 0) {
                     func_8024570C_de();
                 } else if (func_802A23B4_de() == 0 && Pak_CountLiveNodes(&D_8014561C) == 0 && player->views5E4.view5E4_3.alive != 0

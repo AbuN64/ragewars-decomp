@@ -10,7 +10,7 @@
 extern void Fx_ClearControllerInput(void *object);
 
 
-/* Builds the player's analog input from its controller: remaps the buttons through D_800CBB70 when the
+/* Builds the player's analog input from its controller: remaps the buttons through g_controllerButtonRemap when the
    profile asks for it (control modes 0 and 1), turns stick and C buttons into turn, pitch, strafe and
    forward for the profile's control mode (pitch steps scale with the profile sensitivity, the frame time
    D_800D2988 and the player's 0x7EC damping; mode 1 recentres the pitch through Nav_DecayToZero while
@@ -52,16 +52,16 @@ void Fx_BuildControllerState(ControllerInput *input, Player *player) {
     pitchStep *= D_800D2988 * (sensitivity * 0.1f);
     switch (profile->controlMode) {
     case 0:
-        remap = D_800CBB70;
+        remap = g_controllerButtonRemap;
         break;
     case 1:
-        remap = D_800CBB70;
+        remap = g_controllerButtonRemap;
         break;
     }
     remap = NULL;
     if (profile->controlMode < 2) {
         if (profile->controlMode >= 0 && profile->remap == 1) {
-            remap = D_800CBB70;
+            remap = g_controllerButtonRemap;
         }
     }
     if (remap != NULL) {

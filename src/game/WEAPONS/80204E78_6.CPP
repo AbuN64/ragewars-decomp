@@ -37,7 +37,7 @@ extern int Weapons_GetFirstPlayer(void *arg0);
 
 extern void func_8027985C_de(WeightedTable *object);
 
-extern SceneEffect *func_80262CE0_de(void *scene, s32 id, s32 variant, s32 count, s32 owner, CVector3 position, f32 scale, CVector3 direction, CVector3 color, s32 *ref);
+extern SceneEffect *AnimPool_SpawnSceneEffect(void *scene, s32 id, s32 variant, s32 count, s32 owner, CVector3 position, f32 scale, CVector3 direction, CVector3 color, s32 *ref);
 
 extern s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 arg4, s32 kind, CVector3 arg6, CQuatern rotation, CVector3 pos, CVector3 *aim, s32 arg10, s32 arg11);
 
@@ -172,7 +172,7 @@ static __inline__ void spawnSelected(SpawnDispatchObject *object, SpawnDispatchO
 
 static __inline__ void spawnParticles(SpawnDispatchObject *object, SpawnDispatchOwner *owner,
         CVector3 position, CVector3 velocity, s32 type, s32 *entry, void *world) {
-    if (func_80262CE0_de(&D_80131150, type, 0, (s32)entry, (s32)world, position,
+    if (AnimPool_SpawnSceneEffect(&D_80131150, type, 0, (s32)entry, (s32)world, position,
             object->scale, object->rotation, velocity, &owner->spawn)) {
         owner->remaining--;
     }
