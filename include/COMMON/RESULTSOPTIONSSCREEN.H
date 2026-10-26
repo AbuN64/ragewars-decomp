@@ -64,12 +64,6 @@ struct RowRecAt54 {
 
 
 
-struct Screen_func_80426788_de;
-struct Screen_func_80426788_de {
-    char pad0[0xA58];
-    s32 wordA58;
-};
-
 
 struct ScreenFrontendMarkLinkedTrialsAvailable;
 struct ScreenFrontendMarkLinkedTrialsAvailable {
