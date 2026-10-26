@@ -4,6 +4,7 @@
 #include "COMMON/TRIPLE.H"
 #include "COMMON/EXTERNS_16.H"
 #include "sdk/MATH/802BC3B0.H"
+#include "COMMON/EXTERNS_2.H"
 
  /* 0.5, followed by 2^31 */
 
@@ -51,5 +52,18 @@ converted:
 #if defined(VERSION_US)
 unsigned int rodata_unresolved_802B7328[2] = {
     0x00B80000, 0x00080006,
+};
+#endif
+
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_802B72E0_CD770[4] = {
+    0x41F00000, 0x00000000, 0x3F000000, 0x4F000000,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_802B72E0_CD770_us_rev1.c */
+const unsigned int D_blob_e630d11a26deb6c27e70[4] = {
+    0x41F00000, 0x00000000, 0x3F000000, 0x4F000000,
 };
 #endif

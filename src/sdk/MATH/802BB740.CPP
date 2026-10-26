@@ -6,6 +6,7 @@
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/TRIPLE.H"
 #include "sdk/lib_802BB630/802BBC50.H"
+#include "COMMON/EXTERNS_2.H"
 
 void func_802B6CBC_de(f32 *arg0, s32 *arg1);
 void func_802B6670_de(void *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az, f32 ux, f32 uy, f32 uz)
@@ -92,4 +93,30 @@ void func_802B6900_de(f32 matrix[4][4], f32 eyeX, f32 eyeY, f32 eyeZ,
 #if defined(VERSION_US)
 char rodata_unresolved_802B6AA8[8] =
     "ODER\000\000\001\000";
+#endif
+
+#if !(defined(VERSION_US) || defined(VERSION_US_REV1))
+#if defined(VERSION_DE)
+const unsigned int D_802B6664_CD6C0[1] = {
+    0xBF800000,
+};
+#endif
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+const unsigned int D_802B6664_CD6C0[2] = {
+    0xBF800000, 0x3F800000,
+};
+#endif
+#endif
+
+#if defined(VERSION_DE)
+const unsigned int rodata_func_802B6664_de_800C7874[1] = {
+    0x3F800000,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded us-rev1 data; explicit withholding in other holders. */
+const unsigned int D_blob_70cd42de207f8964de31[2] = {
+    0xBF800000, 0x3F800000,
+};
 #endif
