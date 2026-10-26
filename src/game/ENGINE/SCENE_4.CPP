@@ -146,7 +146,6 @@ typedef struct CScene_t {
     char pad1B92C[0x1B930 - 0x1B92C];
 } CScene_t;
 
-extern Gfx *g_displayListCursor;
 extern s32 D_800D2AE0;
 extern s32 D_800CD730;
 extern Shared_func_80234FDC_S1 *Sky_FindScreenMessage(GameplayCamera *camera);

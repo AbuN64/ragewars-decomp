@@ -81,7 +81,6 @@ typedef struct LightVolumeRecord {
     u8 data[0x4C];
 } LightVolumeRecord;
 
-extern s32 SetN64_GetPackSectionSize(void *table, s32 index);
 extern s32 SetN64_GetPackSize(void *table);
 extern s32 SetN64_GetDirectoryEntry(s32 *directory, s32 bank, s32 type);
 extern void *Cache_AllocResourceBlock(s32 pool, void *handle, s32 size);

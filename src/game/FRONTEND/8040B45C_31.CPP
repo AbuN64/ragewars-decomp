@@ -378,7 +378,6 @@ typedef struct DraftWidget {
     struct DraftWidget *disabled;
 } DraftWidget;
 
-extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 extern void Frontend_DrawVisibleSiblings(void *, sm_dldc);
 extern s32 Smos_GetElementHandlerFlags(s32);
 extern void N64Eng_ResetRenderState(void);

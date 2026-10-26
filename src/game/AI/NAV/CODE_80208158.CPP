@@ -433,7 +433,6 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/OBJECTLINKS14.H"
 #include "COMMON/REC.H"
-extern CNavData D_8013B364;
 float GraphU64_GetPointDistance(void *, void *);
 void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 float Nav_SteerTowardPoint(AiController *, CVector3 *,float,float);
