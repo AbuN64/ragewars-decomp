@@ -1,43 +1,13 @@
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-typedef void (*Shared_ContextCallback)(void *);
-typedef void (*Shared_MenuVoidCallback)(void);
+
+
 struct SharedTrackObject;
-typedef struct Shared_MenuContext Shared_MenuContext;
-struct Shared_MenuContext {
-    void *owner;
-    s32 resource;
-    u32 unknown08;
-    Shared_MenuVoidCallback onClose;
-    Shared_MenuVoidCallback callback10;
-    u32 unknown14;
-    struct SharedTrackObject *target;
-    f32 time;
-    u32 unknown20[4];
-    f32 start;
-    f32 end;
-    s32 active;
-    s32 state3C;
-    u32 unknown40;
-    s32 initialized44;
-    s32 closed;
-    u32 unknown4C[5];
-    u32 unknown60;
-    u32 unknown64[4];
-    u32 flags;
-    u32 unknown78[26];
-    s32 requestE0;
-    Shared_ContextCallback callbackE4;
-    Shared_MenuVoidCallback callbackE8;
-    u32 unknownEC;
-    CVector3 position;
-    f32 yaw;
-    u32 unknown100[6];
-    char messages[5][0x28];
-    s32 messageCount;
-};
+
+
 
 
 /* The copied prefix is exactly 0x50 bytes. */

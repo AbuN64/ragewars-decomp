@@ -5,30 +5,8 @@
 
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
-typedef struct Shared_OptionsScreen Shared_OptionsScreen;
-struct Shared_OptionsScreen {
-    u32 unknown00[7];
-    s32 cursor;
-    MenuWidget *leftTab;
-    s32 leftStep;
-    MenuWidget *rightTab;
-    s32 rightStep;
-    s32 page;
-    s32 pages;
-    void *title;
-    MenuWidget *marker;
-    MenuWidget *header;
-    MenuWidget *footer;
-    MenuWidget *pakIcon;
-    MenuWidget *rumbleIcon;
-    void *slider;
-    struct MenuListWidget *firstList;
-    struct MenuListWidget *secondList;
-    s32 state;
-    s32 selection;
-    s32 sound;
-    MenuWidget *prompt;
-};
+#include "MENU/OPTIONS_TYPES.H"
+
 typedef struct Shared_MenuReply Shared_MenuReply;
 struct Shared_MenuReply {
     s32 value;

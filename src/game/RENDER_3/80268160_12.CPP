@@ -1,3 +1,4 @@
+#include "ANIM/ANIMATION_FRAME.H"
 #include "COMMON/EXTERNS_9.H"
 #include "COMMON/LONE/D_800CC384.H"
 #include "RENDER_4/8026AC38.H"
@@ -283,19 +284,8 @@ void func_8026992C_de(void *matrix, s32 pass, u32 alpha) {
 }
 
 
-struct Shared_AnimFrame {
-    u8 kind;
-    u8 unknown1;
-    u8 shiftS;
-    u8 shiftT;
-    u8 unk4;
-    u8 unk5;
-};
-struct Shared_AnimInfo {
-    s32 count;
-    s32 unk4;
-    struct Shared_AnimFrame *frame;
-};
+
+
 struct Shared_GfxMaterial {
     u32 flags;
     u8 pad4[3];

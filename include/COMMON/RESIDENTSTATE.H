@@ -71,12 +71,8 @@ extern s32 D_auto_800D2AFC;
 
 
 /* Texture animation metadata returned to material and texture consumers. */
-struct Shared_AnimFrame;
-typedef struct Shared_AnimInfo {
-    s32 count;
-    s32 unk4;
-    struct Shared_AnimFrame *frame;
-} Shared_AnimInfo;
+#include "ANIM/ANIMATION_FRAME.H"
+
 
 
 extern void func_802955EC_us_rev1(s32 resource, s32 **data);

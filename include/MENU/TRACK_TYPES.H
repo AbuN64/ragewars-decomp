@@ -25,6 +25,4 @@ typedef struct SharedTrackCamera {
 
 struct SharedTrackConstants { f32 amplitude; f32 unit; };
 
-union SharedVectorBits { Triple words; CVector3 vector; };
-
 #endif

@@ -129,30 +129,8 @@ INCLUDE_ASM("ovl_80400000", func_80422C58_eu);
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "MENU_2/SCROLL.H"
 #include "TYPES.H"
-typedef struct Shared_OptionsScreen Shared_OptionsScreen;
-struct Shared_OptionsScreen {
-    u32 unknown00[7];
-    s32 cursor;
-    MenuWidget *leftTab;
-    s32 leftStep;
-    MenuWidget *rightTab;
-    s32 rightStep;
-    s32 page;
-    s32 pages;
-    s32 title;
-    MenuWidget *marker;
-    MenuWidget *header;
-    MenuWidget *footer;
-    MenuWidget *pakIcon;
-    MenuWidget *rumbleIcon;
-    s32 slider;
-    MenuListWidget *firstList;
-    MenuListWidget *secondList;
-    s32 state;
-    s32 selection;
-    s32 sound;
-    MenuWidget *prompt;
-};
+#include "MENU/OPTIONS_TYPES.H"
+
 
 
 #include "COMMON/SHARED_GAMESLOT.H"

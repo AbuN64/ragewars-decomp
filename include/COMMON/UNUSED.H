@@ -579,8 +579,6 @@ extern char D_800D77D0[];
 
 extern u8 D_800CBCA0[];
 
-extern f32 D_800C6224_de;
-
 extern char *D_800E2014[];
 
 extern char *D_800E1FC4_eu[];
@@ -947,8 +945,6 @@ extern s32 D_80142898;
 extern char D_8010B304[];
 
 extern char D_800D382C[];
-
-extern f32 D_800C6214_de;
 
 extern char D_800E6090[];
 
@@ -1580,8 +1576,6 @@ extern s32 D_800CBC1C;
 extern ResourceCacheEntry *D_80104574;
 
 extern char g_pakSingleSaveBlockName[];
-
-extern f32 D_800C621C_de;
 
 extern s32 D_801468C4;
 
@@ -2923,7 +2917,7 @@ typedef struct OSIoMesgHdr OSIoMesgHdr;
 struct OSPiHandle_s;
 
 struct OSTimer_s;
-typedef struct OSTimer_s OSTimer_s;
+#include "sdk/OS_TIMER.H"
 
 
 struct ObjRecAt174;
@@ -3365,7 +3359,7 @@ struct func_8043D2D0_S;
 typedef struct func_8043D2D0_S func_8043D2D0_S;
 
 struct func_8043DD30_S1;
-typedef struct func_8043DD30_S1 func_8043DD30_S1;
+#include "MENU/OPTION_TEXT_TYPE.H"
 
 
 typedef short ADPCM_STATE[16];
@@ -3961,18 +3955,8 @@ struct Entry_func_8044D794_de {
 };
 struct FrameSequence;
 struct ObjRecAt2CV2;
-struct FrameSequence {
-    char pad0[0x44];
-    struct ObjRecAt2CV2 *target;
-    s32 *frames;
-    s32 frame;
-    s32 count;
-    s32 elapsed;
-    s32 duration;
-    s32 flags;
-    s32 loops;
-};
-typedef struct FrameSequence FrameSequence;
+
+#include "MENU/FRAME_SEQUENCE.H"
 struct SlotRecAt0V2;
 struct SlotRecAt0V2 {
     s32 item;
@@ -4218,14 +4202,7 @@ struct OSIoMesg {
     void *piHandle;
 };
 struct OSTimer_s;
-struct OSTimer_s {
-    struct OSTimer_s *next;
-    struct OSTimer_s *prev;
-    u64 interval;
-    u64 value;
-    Opaque_OSMesgQueue *mq;
-    void * msg;
-};
+
 struct Link_func_80283A80_de;
 struct ObjRecAt174;
 struct ObjRecAt174 {
@@ -4516,28 +4493,7 @@ struct Selection {
     u8 pad1C4[4];
     s32 matches;
 };
-struct Opaque_Body;
-struct Opaque_Character;
-struct Opaque_Controller;
-struct Opaque_Ctrl;
-struct Opaque_Held;
-struct Opaque_Mode;
-struct Opaque_Model;
-struct Opaque_Mount;
-struct Opaque_Profile;
-struct Opaque_Record;
-struct Opaque_Rider;
-struct Opaque_Shared_Body;
-struct Opaque_Shared_Hud;
-struct Opaque_Shared_Model;
-struct Opaque_Shared_Profile;
-struct Opaque_Shared_StateInfo;
-struct Opaque_Shared_Voice;
-struct Opaque_StateInfo;
-struct Opaque_TeamInfo;
-struct Opaque_View;
 struct Settings580;
-struct func_8022E3B4_S3;
 struct ObjRecAt8F;
 struct Body;
 struct Character;
@@ -4900,11 +4856,7 @@ struct func_8043D2D0_S {
     s32 **value;
 };
 struct func_8043DD30_S1;
-struct func_8043DD30_S1 {
-    s32 unk0;
-    char pad0[0x10];
-    char **unk14;
-};
+
 struct ActorCode80443868;
 typedef struct ActorCode80443868 ActorCode80443868;
 struct Actor_func_8044560C_de;

@@ -11,16 +11,7 @@
 
 
 
-typedef struct AimPlayer {
-    s8 unk0; char pad1[7]; CVector3 unk8; char pad14[0x580]; s32 unk594;
-    char pad598[0x40]; AimController *unk5D8; AimView *view;
-    char pad5E0[0x4e]; s16 unk62E; char pad630[0x158]; s32 unk788;
-    f32 unk78C; char pad790[4]; AimActor *unk794; s32 unk798;
-    CVector3 out; CVector3 velocity; AimActor *unk7B4; s32 unk7B8; char pad7BC[4];
-    CVector3 smooth; CVector3 smoothVelocity; CQuatern rotation; s32 unk7E8;
-    char pad7EC[0xa24]; s32 enabled; char pad1214[0x244];
-    CVector3 aim; CVector3 aim2; CVector3 normal; AimActor *target;
-} AimPlayer;
+
 extern const f32 D_800C23B4_de, D_800C23B8_de, D_800C23BC_de, D_800C23C0_de;
 extern const f32 D_800C23C4_de, D_800C23C8_de, D_800C23CC_de, D_800C23D0_de;
 extern f32 D_800D2988;

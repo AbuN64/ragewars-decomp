@@ -1,3 +1,4 @@
+#include "ANIM/ANIMATION_FRAME.H"
 #include "include_asm.h"
 #include "COMMON/EFFECTCONTRIBUTION.H"
 #include "RENDER_3/CODE_802A35C0.H"
@@ -530,12 +531,7 @@ void Render_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
 }
 
 extern float D_800C5DF8_de, D_800C5DFC, D_800C5E00_de, D_800C5E04_de;
-struct Shared_AnimFrame {
-    u8 kind;
-    u8 unknown1;
-    u8 shiftS;
-    u8 shiftT;
-};
+
 void *func_80295F14_de(s32 *, s32);
 void func_80295F78_de(void *, struct Shared_AnimInfo *);
 #if defined(VERSION_US_REV1)

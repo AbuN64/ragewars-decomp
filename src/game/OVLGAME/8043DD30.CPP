@@ -20,12 +20,8 @@ extern char *D_800D3D44;
 extern char *D_800D3D48;
 extern char *D_800D3D4C;
 extern char *D_800D3D50;
-typedef struct func_8043DD30_S1 func_8043DD30_S1;
-struct func_8043DD30_S1 {
-    s32 unk0;
-    char pad0[0x10];
-    char **unk14;
-};
+#include "MENU/OPTION_TEXT_TYPE.H"
+
 
 s32 func_8043DD30_us_rev1(func_8043DD30_S1 *arg0) {
     s32 temp_v0;

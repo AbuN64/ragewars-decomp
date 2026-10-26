@@ -2,16 +2,10 @@
 /* __osInsertTimer, drafted from ultralib src/os/timerintr.c. */
 #include "TYPES.H"
 #include "sdk/os.h"
+#include "sdk/OS_TIMER.H"
 
 
-typedef struct OSTimer_s {
-    struct OSTimer_s *next;
-    struct OSTimer_s *prev;
-    u64 interval;
-    u64 value;
-    OSMesgQueue *mq;
-    OSMesg msg;
-} OSTimer;
+
 
 extern OSTimer *D_800D5280;
 extern u32 __osDisableInt(void);

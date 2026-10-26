@@ -1,3 +1,4 @@
+#include "ANIM/ANIMATION_FRAME.H"
 #include "COMMON/OBJECTSTATE18.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/UNUSED.H"
@@ -8,17 +9,8 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "particle/8027A0F4_4.H"
 
-struct Shared_AnimFrame {
-    u8 kind;
-    u8 unknown1;
-    u8 shiftS;
-    u8 shiftT;
-};
-struct Shared_AnimInfo {
-    s32 count;
-    s32 unk4;
-    struct Shared_AnimFrame *frame;
-};
+
+
 
 struct Shared_AnimInfo;
 
