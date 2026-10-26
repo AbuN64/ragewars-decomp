@@ -138,18 +138,7 @@ typedef struct SoundEnvelopeControl {
     u16 reservedA;
 } SoundEnvelopeControl;
 
-typedef struct SoundMixParameters {
-    s32 frame, reserved4;
-    s32 left, right;
-    u8 reserved10[0xC];
-    f32 attenuation, baseAttenuation, field24;
-    s16 priority, channel;
-    u8 reserved2C[8];
-    CVector3 position;
-    void *tracked;
-    s8 curve;
-    u8 reserved45[0x1F];
-} SoundMixParameters;
+#include "AUDIO/VOLUME_MIX.H"
 
 typedef struct VoiceScaleEntry { f32 soundId, scale; } VoiceScaleEntry;
 extern VoiceScaleEntry g_soundVolumeScales[];
@@ -161,7 +150,7 @@ static inline s32 lookupPanValue(s32 panAngle) {
 }
 
 void Audio_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s32 unused2) {
-    SoundMixParameters *mix;
+    AudioVolumeMix *mix;
     SoundEnvelopeControl *envelope;
     u8 *gainRange;
     s32 i;
@@ -178,7 +167,7 @@ void Audio_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s32
     s32 scaledPan;
     SoundEnvelope *preset;
 
-    mix = (SoundMixParameters *)voice->reserved10;
+    mix = (AudioVolumeMix *)voice->reserved10;
     gainRange = voice->context->selectedEntry;
     voice->volumeScale = D_800C3F20_de;
     if (voice->soundId < 0x100) {

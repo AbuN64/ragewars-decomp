@@ -194,8 +194,8 @@ found4:;
 /* Updates the selected player's appearance and creates its results-screen model. */
 #include "TYPES.H"
 #include "FRONTEND/8041BEA8_6.H"
-typedef struct Entry { char pad[0x80]; s8 kind; char tail[0x15]; } Entry;
-typedef struct PreviewSettings { char pad[13]; u8 mode; char padE[0xC2]; Entry entries[4]; } PreviewSettings;
+
+typedef struct PreviewSettings { char pad[13]; u8 mode; char padE[0xC2]; struct Entry_func_804279B8_de entries[4]; } PreviewSettings;
 typedef struct PreviewScreen { char pad[0x20]; char preview[0xA24]; s32 record; char padA48[0x14]; s32 player; } PreviewScreen;
 typedef struct PreviewRecord { char pad[4]; u8 kind; } PreviewRecord;
 typedef struct PreviewRow { s32 pad; f32 scale[4],distance[4]; CVector3 position[4]; s32 light[4]; char tail[12]; } PreviewRow;
@@ -212,7 +212,7 @@ void func_804279B8_de(void) {
     s32 record;
     s32 index;
     u8 kind;
-    Entry *entry;
+    struct Entry_func_804279B8_de *entry;
     PreviewSettings *settings = (PreviewSettings *)&D_801462C8;
     if (settings->mode == 4) {
         record = (*(ResultsOptionsScreen **)&D_800E4690)->selection;

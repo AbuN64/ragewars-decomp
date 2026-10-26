@@ -20,18 +20,7 @@ int Camera_IsSequenceActive(void);
 f32 Nav_ApproachValue(f32 arg0, f32 arg1, f32 arg2);
 void func_802B2F10_de(void *arg0, s16 arg1);
 /* Spatial mix and runtime envelope controls embedded in a sound voice. */
-typedef struct AudioVolumeMix {
-    s32 frame, reserved4;
-    s32 left, right;
-    u8 reserved10[0xC];
-    f32 attenuation, baseAttenuation, field24;
-    s16 priority, channel;
-    u8 reserved2C[8];
-    CVector3 position;
-    void *tracked;
-    s8 curve;
-    u8 reserved45[0x1F];
-} AudioVolumeMix;
+#include "AUDIO/VOLUME_MIX.H"
 
 typedef struct AudioVolumeControl {
     u16 levels[3];
