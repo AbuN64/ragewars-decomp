@@ -14,8 +14,8 @@
 extern struct ResourceRecAt6 *D_8014D988;
 extern EntryRecAt18V1 *D_80153C10;
 extern FileState D_801539B0;
-extern void Resmgr_CloseStream(s32 file);
-extern void *Scene_AllocateMemory(s32 size);
+extern void XStdio_CloseStream(s32 file);
+extern void *Cache_AllocateMemory(s32 size);
 extern void func_80413720_de(s32 id, s32 format, s16 width, s16 height, s32 stride, s32 rows, s32 a6, s32 size, void *pixels, s32 a9, s32 paletteBytes, void *palette, s32 colors);
 
 /* Tears down the UI resource set: releases eligible entries, closes active
@@ -140,10 +140,10 @@ void func_804101BC_de(void) {
     }
     func_8040F580_de();
     state = &D_801539B0;
-    if (state->unk0) Resmgr_CloseStream(state->unk0);
+    if (state->unk0) XStdio_CloseStream(state->unk0);
     func_804118E4_de(1);
     func_80410E1C_de(1);
-    if (state->entries) Scene_FreeMemory(state->entries);
+    if (state->entries) Cache_FreeMemory(state->entries);
     i_chunks = 0;
     func_80411D18_de();
     offset_chunks = 0;
@@ -151,32 +151,32 @@ void func_804101BC_de(void) {
         do {
             block = ((struct ChunkRecAt48C *)(offset_chunks + (s32)D_80153C28))->optional;
             if (block) {
-                Scene_FreeMemory(*block);
-                Scene_FreeMemory(((struct ChunkRecAt48C *)(offset_chunks + (s32)D_80153C28))->optional);
+                Cache_FreeMemory(*block);
+                Cache_FreeMemory(((struct ChunkRecAt48C *)(offset_chunks + (s32)D_80153C28))->optional);
             }
             i_chunks++;
-            Scene_FreeMemory(*((struct ChunkRecAt48C *)(offset_chunks + (s32)D_80153C28))->primary);
+            Cache_FreeMemory(*((struct ChunkRecAt48C *)(offset_chunks + (s32)D_80153C28))->primary);
             block = ((struct ChunkRecAt48C *)(offset_chunks + (s32)D_80153C28))->primary;
             offset_chunks += 0x49C;
-            Scene_FreeMemory(block);
+            Cache_FreeMemory(block);
         } while (i_chunks < D_80153C20);
     }
     tables = D_8014D98C;
-    if (tables[0]) Scene_FreeMemory(tables[0]);
+    if (tables[0]) Cache_FreeMemory(tables[0]);
     first = tables + 3;
-    if (tables[3]) Scene_FreeMemory(tables[3]);
+    if (tables[3]) Cache_FreeMemory(tables[3]);
     second = tables + 2;
-    if (tables[2]) Scene_FreeMemory(tables[2]);
-    if (tables[13]) Scene_FreeMemory(tables[13]);
-    if (tables[-1]) Scene_FreeMemory(tables[-1]);
-    if (tables[10]) Scene_FreeMemory(tables[10]);
-    if (tables[11]) Scene_FreeMemory(tables[11]);
-    if (tables[-2]) Scene_FreeMemory(tables[-2]);
-    if (tables[12]) Scene_FreeMemory(tables[12]);
-    if (tables[7]) Scene_FreeMemory(tables[7]);
-    if (first[5]) Scene_FreeMemory(first[5]);
-    if (second[3]) Scene_FreeMemory(second[3]);
-    Resmgr_FillBytes((char *)tables - 0x26C, 0, 0x2A8);
+    if (tables[2]) Cache_FreeMemory(tables[2]);
+    if (tables[13]) Cache_FreeMemory(tables[13]);
+    if (tables[-1]) Cache_FreeMemory(tables[-1]);
+    if (tables[10]) Cache_FreeMemory(tables[10]);
+    if (tables[11]) Cache_FreeMemory(tables[11]);
+    if (tables[-2]) Cache_FreeMemory(tables[-2]);
+    if (tables[12]) Cache_FreeMemory(tables[12]);
+    if (tables[7]) Cache_FreeMemory(tables[7]);
+    if (first[5]) Cache_FreeMemory(first[5]);
+    if (second[3]) Cache_FreeMemory(second[3]);
+    XPlus_FillBytes((char *)tables - 0x26C, 0, 0x2A8);
 }
 
 void func_80410448_de(void) {
@@ -248,7 +248,7 @@ s32 Frontend_GetImageTexture(s32 index, s32 mode) {
     id = D_80153C10[index].unk0;
     stride = 0;
     func_802A18CC_de();
-    ((FileState *)((char *)&D_8014D724 - 4))->unk0 = Resmgr_OpenStream(&D_8014D724, &D_800DD0B0);
+    ((FileState *)((char *)&D_8014D724 - 4))->unk0 = XStdio_OpenStream(&D_8014D724, &D_800DD0B0);
     entry = &D_8014D724.unk25C[index];
     transparent = 0;
     if (entry->unk8 == 8) {
@@ -261,14 +261,14 @@ s32 Frontend_GetImageTexture(s32 index, s32 mode) {
     func_804133E4_de(id);
     texture = id;
     size = stride * entry->unkC * entry->unk8 / 8;
-    pixels = Scene_AllocateMemory(size);
-    Resmgr_SeekStream(D_801539B0.unk0, D_801539B0.unk248 + entry->unk14, 0);
-    Resmgr_ReadStream(pixels, size, 1, D_801539B0.unk0);
+    pixels = Cache_AllocateMemory(size);
+    XStdio_SeekStream(D_801539B0.unk0, D_801539B0.unk248 + entry->unk14, 0);
+    XStdio_ReadStream(pixels, size, 1, D_801539B0.unk0);
     if (entry->unkE > 0) {
         paletteBytes = entry->unkE * 2;
-        palette = Scene_AllocateMemory(paletteBytes);
-        Resmgr_SeekStream(D_801539B0.unk0, D_801539B0.unk248 + entry->unk18, 0);
-        Resmgr_ReadStream(palette, paletteBytes, 1, D_801539B0.unk0);
+        palette = Cache_AllocateMemory(paletteBytes);
+        XStdio_SeekStream(D_801539B0.unk0, D_801539B0.unk248 + entry->unk18, 0);
+        XStdio_ReadStream(palette, paletteBytes, 1, D_801539B0.unk0);
         for (i = 0; i < entry->unkE; i++) {
             if (!(palette[i] & 1)) {
                 transparent = 1;
@@ -305,7 +305,7 @@ s32 Frontend_GetImageTexture(s32 index, s32 mode) {
                   palette, entry->unkE);
     func_80419640_de(texture, id);
     D_80153C10[index].unk4 |= 1;
-    Resmgr_CloseStream(D_801539B0.unk0);
+    XStdio_CloseStream(D_801539B0.unk0);
     D_801539B0.unk0 = 0;
     func_802A18CC_de();
     touch(index, mode);
@@ -330,7 +330,7 @@ void func_80410B14_de(s32 index, s32 output) {
     palette = 0;
     paletteBytes = 0;
     stride = 0;
-    ((FileState *)((char *)&D_8014D724 - 4))->unk0 = Resmgr_OpenStream(&D_8014D724, &D_800DD0B0);
+    ((FileState *)((char *)&D_8014D724 - 4))->unk0 = XStdio_OpenStream(&D_8014D724, &D_800DD0B0);
     entry = &D_8014D724.unk25C[index];
     transparent = 0;
     if (entry->unk8 == 8) {
@@ -341,14 +341,14 @@ void func_80410B14_de(s32 index, s32 output) {
         stride = (entry->unkA + 3) & -4;
     }
     size = stride * entry->unkC * entry->unk8 / 8;
-    pixels = Scene_AllocateMemory(size);
-    Resmgr_SeekStream(D_801539B0.unk0, D_801539B0.unk248 + entry->unk14, 0);
-    Resmgr_ReadStream(pixels, size, 1, D_801539B0.unk0);
+    pixels = Cache_AllocateMemory(size);
+    XStdio_SeekStream(D_801539B0.unk0, D_801539B0.unk248 + entry->unk14, 0);
+    XStdio_ReadStream(pixels, size, 1, D_801539B0.unk0);
     if (entry->unkE > 0) {
         paletteBytes = entry->unkE * 2;
-        palette = Scene_AllocateMemory(paletteBytes);
-        Resmgr_SeekStream(D_801539B0.unk0, D_801539B0.unk248 + entry->unk18, 0);
-        Resmgr_ReadStream(palette, paletteBytes, 1, D_801539B0.unk0);
+        palette = Cache_AllocateMemory(paletteBytes);
+        XStdio_SeekStream(D_801539B0.unk0, D_801539B0.unk248 + entry->unk18, 0);
+        XStdio_ReadStream(palette, paletteBytes, 1, D_801539B0.unk0);
         for (i = 0; i < entry->unkE; i++) {
             if (!(palette[i] & 0xFF000000)) {
                 transparent = 1;
@@ -383,6 +383,6 @@ void func_80410B14_de(s32 index, s32 output) {
     }
     func_80413720_de(output, format, entry->unkA, entry->unkC, stride, entry->unkC, 1, size, pixels, 1, paletteBytes,
                   palette, entry->unkE);
-    Resmgr_CloseStream(D_801539B0.unk0);
+    XStdio_CloseStream(D_801539B0.unk0);
     D_801539B0.unk0 = 0;
 }

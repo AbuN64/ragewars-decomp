@@ -13,7 +13,7 @@ extern s32 func_80419E54_de(s32, s32);
 s32 func_80438F0C_de(void) {
     s32 cue;
     void *memory;
-    memory = Scene_AllocateMemory(0x1C);
+    memory = Cache_AllocateMemory(0x1C);
     D_800E58A0 = memory;
 #if defined(VERSION_DE)
     D_800E58A0->handle = func_8041A280_de(0x6A, 0x6B);
@@ -74,7 +74,7 @@ s32 func_80438F0C_de(void) {
     s32 cue;
 
     /* the hub's allocation helper returns its SelectionScreenState view; this unit keeps its own HudCue view */
-    D_800E58A0 = (struct HudCue *) Scene_AllocateMemory(0x1C);
+    D_800E58A0 = (struct HudCue *) Cache_AllocateMemory(0x1C);
     D_800E58A0->handle = func_8041A280_de(0x6C, 0x6D);
     cue = func_8041A580_de(0x6F, 0x70, 0xFF);
     D_800E58A0->cue0 = cue;

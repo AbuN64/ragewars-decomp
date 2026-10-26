@@ -23,9 +23,9 @@ void func_80294AB0_de(void *gameSession) {
         index = ((struct GameSession *)gameSession)->target;
         ((struct GameSession *)gameSession)->transitionTime = 0;
         ((struct GameSession *)gameSession)->mode = index;
-        Camera_EndSequence();
+        Cinema_EndSequence();
         func_8025E214_de(-1);
-        Render_SetControllerMode(0);
+        Control_SetControllerMode(0);
         callback = D_800CD788[((struct GameSession *)gameSession)->mode].callback;
         if (callback != 0) {
             callback(gameSession);

@@ -24,14 +24,14 @@
 extern f32 D_800C2CE0_de[2];
 
 /** Start the round-end sequence once no menu or transition is active and any player is flagged. */
-extern int Camera_IsSequenceInWindow(void);
+extern int Cinema_IsSequenceInWindow(void);
 
-extern int Camera_IsSequenceActive(void);
+extern int Cinema_IsSequenceActive(void);
 
 extern struct Shape_func_8021A2D4_de_2 D_801427FC;
 
 
-extern void Render_FreeAllPoolNodes(s32 *);
+extern void Rumble_FreeAllPoolNodes(s32 *);
 
 
 extern void func_8024BE3C_de(void *arg0);
@@ -53,7 +53,7 @@ extern void func_80246E44_de(char *);
 
 
 
-extern f32 Particle_GetActorHeight(void);
+extern f32 GameObject_GetActorHeight(void);
 
 
 void *Weapons_FindNearestPlayer(void *world, s32 point, s32 pointYBits, s32 pointZBits) {
@@ -183,13 +183,13 @@ void *func_8022A634_de(struct Context *context, u32 viewPlayerIndex) {
     return result;
 }
 
-int Weapons_BeginRoundEnd(char *forcePlayerList) {
+int Player_BeginRoundEnd(char *forcePlayerList) {
     Shared_ActorView *p;
     int count;
     CGameStatus *s;
     CGameStatus *t;
 
-    if (Camera_IsSequenceInWindow() != 0 || Camera_IsSequenceActive() != 0 || g_world.frozen != 0) {
+    if (Cinema_IsSequenceInWindow() != 0 || Cinema_IsSequenceActive() != 0 || g_world.frozen != 0) {
         return 0;
     }
     t = &D_801462C8.counters;
@@ -221,7 +221,7 @@ void Weapons_EndRound(void *roundContext) {
         return;
     }
 
-    Render_SetControllerMode(0);
+    Control_SetControllerMode(0);
     if (state->teams != 0) {
         if (state->round == 0) {
             state->round = 1;
@@ -267,7 +267,7 @@ void Weapons_ResetPlayerControllers(struct Context *object) {
     Shared_ActorView *record = (void *)object->head;
     if (record != 0) {
         do {
-            Render_FreeAllPoolNodes((char *)record->controller + 0x140);
+            Rumble_FreeAllPoolNodes((char *)record->controller + 0x140);
             ((struct IntegerStateD4 *)record->controller)->unk_D0 = 0;
             record = record->next;
         } while (record != 0);
@@ -496,7 +496,7 @@ f32 Weapons_GetObjectOwnerHeight(void *actorObject) {
 
 f32 func_8022ADF0_de(LevelActor *actor) {
     if (actor->definition != 0) {
-        return Particle_GetActorHeight();
+        return GameObject_GetActorHeight();
     } else {
         return D_800C2D08_de;
     }

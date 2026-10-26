@@ -33,8 +33,8 @@
 #include "sdk/os.h"
 extern void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *);
 extern void func_8029311C_de(void *, u8 *, s32,s32,s32,s32);
-extern void Render_ClearDepthRect(void *, s32,s32,s32,s32,s32);
-extern void Render_SubmitFrameTasks(TimingWorld *,Frame *);
+extern void SetN64_ClearDepthRect(void *, s32,s32,s32,s32,s32);
+extern void SetN64_SubmitFrameTasks(TimingWorld *,Frame *);
 static __inline__ s32 hasFadeMode(u8 *mode) { return *mode != 0; }
 void func_80292308_de(TimingWorld *world) {
     u8 color[4];
@@ -62,9 +62,9 @@ void func_80292308_de(TimingWorld *world) {
     startTime = start;
     D_80146CD8 = D_8011FAC0.ring.current;
     func_802539EC_de(0, D_800D297C);
-    System_ResetTextureCache();
+    TextLoad_ResetTextureCache();
     func_8026D844_de();
-    Render_BeginFrameDisplayList(world);
+    SetN64_BeginFrameDisplayList(world);
     func_80265DD0_de();
     Control_TrackControllerPakChanges();
     Camera_UpdateViewportLayoutAndBounds(&world->viewport);
@@ -95,7 +95,7 @@ void func_80292308_de(TimingWorld *world) {
         if (D_800E28E0 == 0x14) {
             func_8040C09C_de();
         }
-        Render_ClearDepthRect(world, 0, 0x1E0, 0, 0x168, 0);
+        SetN64_ClearDepthRect(world, 0, 0x1E0, 0, 0x168, 0);
         gDPSetScissorFrac(g_displayListCursor++,0,0,0,0x77C,0x59C);
         gDPSetColorImage(g_displayListCursor++,G_IM_FMT_RGBA,G_IM_SIZ_16b,480,D_80146CD8->colorImage);
         gDPSetCycleType(g_displayListCursor++,G_CYC_FILL);
@@ -121,7 +121,7 @@ void func_80292308_de(TimingWorld *world) {
     elapsed = (f32)duration;
     rwFrameBuildSeconds = elapsed * D_800C5450_de;
     if (func_80253AD4_de(0) != 0) {
-        Render_SubmitFrameTasks(world, D_80146CD8);
+        SetN64_SubmitFrameTasks(world, D_80146CD8);
     } else {
         osSendMesg(&D_801428C0, &D_80146CD8->done, 1);
     }

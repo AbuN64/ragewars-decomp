@@ -63,7 +63,7 @@ extern s32 D_auto_800D2AF4;
 
 extern s32 D_auto_800D2AF8;
 
-extern void Engine_LoadSelectedTexture(void);
+extern void TEngine_LoadSelectedTexture(void);
 extern u8 s_artsendActivatedText[0x14];
 extern u8 s_artsendDeactivatedText[0x14];
 extern f32 D_auto_800CA634;

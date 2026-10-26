@@ -10,7 +10,7 @@
 #include "TYPES.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
-extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 /* Spawns an emitter record: takes the head of the free list at 0x11D8 into the active list at 0x11EC (or reuses the record at 0x11F0 when none is free) and fills its position, scale, shared value and three rates converted by D_800C8630. */
 
@@ -31,7 +31,7 @@ static inline void set_emitter(CShake *node, f32 a, f32 b, f32 c, f32 scale, s32
     node->z.value = c;
 }
 
-extern s32 Particle_LimitVectorLength(f32 *arg0, f32 arg1);
+extern s32 GraphU64_LimitVectorLength(f32 *arg0, f32 arg1);
 
 extern f32 Math_Sqrtf(f32);
 
@@ -108,7 +108,7 @@ static inline CCameraText *post_lines(void *owner, void *pool, u8 *text, s32 kin
     return message;
 }
 
-void Camera_StartEmitter(char *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, CVector3 pos)
+void Sky_StartEmitter(char *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, CVector3 pos)
 {
     RaceViewportState *state = (void *)obj;
     CShake *node = state->freeEffects.head;
@@ -124,14 +124,14 @@ void Camera_StartEmitter(char *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, C
     set_emitter(node, a * k, b * k, c * k, scale, value, pos);
 }
 
-void *Camera_FindNearestCamera(MenuMatchGlobals *menuMatchGlobals, CVector3 *zero) {
+void *Sky_FindNearestCamera(MenuMatchGlobals *menuMatchGlobals, CVector3 *zero) {
     CVector3 position;
     GameplayCamera *node;
     void *bestNode;
     f32 bestDist;
     f32 distSq;
 
-    Particle_LimitVectorLength(&zero->x, 20000.0f);
+    GraphU64_LimitVectorLength(&zero->x, 20000.0f);
     if (menuMatchGlobals->useFallbackCamera != 0) {
         return &menuMatchGlobals->fallbackCamera;
     }
@@ -140,7 +140,7 @@ void *Camera_FindNearestCamera(MenuMatchGlobals *menuMatchGlobals, CVector3 *zer
     bestNode = 0;
     if (node != 0) {
         do {
-            Particle_SubtractVectors(&position, zero, &node->position);
+            GraphU64_SubtractVectors(&position, zero, &node->position);
             distSq = (position.x * position.x) +
                      (position.y * position.y) +
                      (position.z * position.z);
@@ -171,7 +171,7 @@ f32 func_80239678_de(Race *viewOwner, void *targetPosition) {
     sum = 0.0f;
     if (node != 0) {
         do {
-            Particle_SubtractVectors(&position, &((GameplayCamera *)node)->position, targetPosition);
+            GraphU64_SubtractVectors(&position, &((GameplayCamera *)node)->position, targetPosition);
             sum += Math_Sqrtf(
                 (position.x * position.x) +
                 (position.y * position.y) +
@@ -195,6 +195,6 @@ void *func_80239740_de(struct ScreenMessageOwner *owner, struct ScreenMessagePoo
     return message;
 }
 
-CCameraText *Camera_PostScaledScreenMessage(void *owner, void *pool, u8 *text, f32 size) {
+CCameraText *Sky_PostScaledScreenMessage(void *owner, void *pool, u8 *text, f32 size) {
     return post_lines(owner, pool, text, 2, size, -1);
 }

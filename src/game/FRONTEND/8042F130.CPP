@@ -141,16 +141,16 @@ extern s32 D_800DF4C0;
 extern s32 D_800DF4C4;
 extern PakSetupProfile D_80102B00[];
 
-extern void *Scene_AllocateMemory(s32);
+extern void *Cache_AllocateMemory(s32);
 extern void func_8043C210_de(void *, s32, s32, s32, s32);
-extern void *Menu_CreateOverlayNode(void *, s32);
-extern void Menu_ShowSlotById(void *, s32, s32);
+extern void *SmpOverlay_CreateOverlayNode(void *, s32);
+extern void SmpOverlay_ShowSlotById(void *, s32, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern void *func_80419E54_de(s32, s32);
-extern void Frontend_RelabelSlotRows(s32);
-extern void Frontend_RefreshPlayerPanel(s32);
-extern void Render_EnableControllerPak(s32);
+extern void PAKInterface_RelabelSlotRows(s32);
+extern void PAKInterface_RefreshPlayerPanel(s32);
+extern void Control_EnableControllerPak(s32);
 extern void Player_InitializeProfile(Profile *);
 extern void Pak_ProbeStatus(s32);
 extern s32 Pak_GetStatus(s32);
@@ -167,15 +167,15 @@ s32 func_8042F130_us_rev1(void *screen) {
     s32 i;
     s32 j;
 
-    block = Scene_AllocateMemory(sizeof(PakMenuController));
+    block = Cache_AllocateMemory(sizeof(PakMenuController));
     D_800E54A4 = block;
     block->window = screen;
     func_8043C210_de(block->menu, 0x67, 0, 0, 0);
-    D_800E54A4->list = Menu_CreateOverlayNode(screen, 4);
-    Menu_ShowSlotById(screen, 0, SPRITE_285);
-    Menu_ShowSlotById(screen, 1, SPRITE_285);
-    Menu_ShowSlotById(screen, 2, SPRITE_285);
-    Menu_ShowSlotById(screen, 3, SPRITE_285);
+    D_800E54A4->list = SmpOverlay_CreateOverlayNode(screen, 4);
+    SmpOverlay_ShowSlotById(screen, 0, SPRITE_285);
+    SmpOverlay_ShowSlotById(screen, 1, SPRITE_285);
+    SmpOverlay_ShowSlotById(screen, 2, SPRITE_285);
+    SmpOverlay_ShowSlotById(screen, 3, SPRITE_285);
     for (i = 0; i < 4; i++) {
         D_800E54A4->selected[i] = 0;
     }
@@ -248,7 +248,7 @@ s32 func_8042F130_us_rev1(void *screen) {
                 }
             }
         }
-        Frontend_RelabelSlotRows(-1);
+        PAKInterface_RelabelSlotRows(-1);
         break;
     case 7:
         break;
@@ -262,18 +262,18 @@ s32 func_8042F130_us_rev1(void *screen) {
         D_800E54A4->players[i].state = 0;
         D_800E54A4->players[i].menu = 0;
         D_800E54A4->players[i].back = -1;
-        Frontend_RefreshPlayerPanel(i);
-        Render_EnableControllerPak(i);
+        PAKInterface_RefreshPlayerPanel(i);
+        Control_EnableControllerPak(i);
         for (j = 0; j < 4; j++) {
             Player_InitializeProfile(&D_800E54A4->players[i].records[j]);
         }
         for (j = 0; j < 16; j++) {
-            Resmgr_FillMemory(D_800E54A4->players[i].noteTexts[j].name, 0, 0x14);
-            Resmgr_FillMemory(D_800E54A4->players[i].noteTexts[j].size, 0, 0xA);
+            XPlus_FillMemory(D_800E54A4->players[i].noteTexts[j].name, 0, 0x14);
+            XPlus_FillMemory(D_800E54A4->players[i].noteTexts[j].size, 0, 0xA);
         }
-        Resmgr_FillMemory(D_800E54A4->players[i].codes[2], 0, 0xA);
-        Resmgr_FillMemory(D_800E54A4->players[i].codes[1], 0, 0xA);
-        Resmgr_FillMemory(D_800E54A4->players[i].codes[0], 0, 0xA);
+        XPlus_FillMemory(D_800E54A4->players[i].codes[2], 0, 0xA);
+        XPlus_FillMemory(D_800E54A4->players[i].codes[1], 0, 0xA);
+        XPlus_FillMemory(D_800E54A4->players[i].codes[0], 0, 0xA);
         D_800E54A4->players[i].slot = 0;
         D_800E54A4->players[i].choice = 0;
         for (j = 0; j < 4; j++) {
@@ -303,7 +303,7 @@ s32 func_8042F130_us_rev1(void *screen) {
             }
         }
         for (i = 0; i < 4; i++) {
-            Frontend_RefreshPlayerPanel(i);
+            PAKInterface_RefreshPlayerPanel(i);
         }
         break;
     case 6:
@@ -318,7 +318,7 @@ s32 func_8042F130_us_rev1(void *screen) {
                     D_800E54A4->players[i].back = 2;
                     D_800E54A4->players[i].state = 2;
                     D_800E54A4->players[i].next = 4;
-                    Frontend_RefreshPlayerPanel(i);
+                    PAKInterface_RefreshPlayerPanel(i);
                     break;
                 }
             }
@@ -332,7 +332,7 @@ s32 func_8042F130_us_rev1(void *screen) {
                 D_800E54A4->players[D_800DF4C0].back = 2;
                 D_800E54A4->players[D_800DF4C0].state = 2;
                 D_800E54A4->players[D_800DF4C0].next = 4;
-                Frontend_RefreshPlayerPanel(D_800DF4C0);
+                PAKInterface_RefreshPlayerPanel(D_800DF4C0);
                 break;
             }
         }
@@ -342,13 +342,13 @@ s32 func_8042F130_us_rev1(void *screen) {
         D_800E54A4->players[0].state = 2;
         D_800E54A4->players[0].next = 0xD;
         D_800E54A4->players[0].sub = 6;
-        Frontend_RefreshPlayerPanel(0);
+        PAKInterface_RefreshPlayerPanel(0);
         break;
     }
     Frontend_RequestScreenMode(0);
     func_802A2394_de();
     func_802A2418_de(0);
-    Render_PlayFlatSound(0xE78);
+    SoundElement_PlayFlatSound(0xE78);
     return 0;
 }
 #endif

@@ -19,7 +19,7 @@ extern s32 GetMenuScreenOwner(void);
 extern void *Frontend_GetScreenData(s32 index);
 
 
-extern Animation *Scene_AllocateMemory(s32 size);
+extern Animation *Cache_AllocateMemory(s32 size);
 
 
 extern void func_80419A18_de(Animation *anim, s32 value);
@@ -32,7 +32,7 @@ extern void func_80419A04_de(Animation *anim, s32 value);
 
 extern void func_8040EDE4_de(s32 widget, Animation *anim);
 
-void Menu_RegisterFrameAnimClass(void) {
+void SmpFrameAnim_RegisterFrameAnimClass(void) {
     func_802982C4_de(0xB5F, D_00419A4C, D_00419ADC, 3);
 }
 
@@ -42,8 +42,8 @@ Animation *func_804198CC_de(s32 id, s32 *frames) {
 
     widget = (s32)func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), (u16)id);
     Frontend_GetScreenData(GetMenuScreenOwner());
-    anim = Scene_AllocateMemory(0x64);
-    Resmgr_FillBytes(anim, 0, 0x64);
+    anim = Cache_AllocateMemory(0x64);
+    XPlus_FillBytes(anim, 0, 0x64);
     anim->kindB = 0xB5F;
     anim->flags = 8;
     anim->kindA = 0xB5F;

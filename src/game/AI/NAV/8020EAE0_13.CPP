@@ -39,7 +39,7 @@ typedef struct Chaser {
 } Chaser;
 
 Racer *Weapons_GetPlayerByIndex(MatchWorld *arg0, u32 arg1);
-f32 Particle_GetPointDistance(void *arg0, void *arg1);
+f32 GraphU64_GetPointDistance(void *arg0, void *arg1);
 s32 Nav_EvaluateAttackTarget(AiController *brain, s32 index);
 
 s32 Nav_CollectEnemyTargets(Chaser *self) {
@@ -64,7 +64,7 @@ s32 Nav_CollectEnemyTargets(Chaser *self) {
             && (rules->teams == 0 || other->team->id != self->self->team->id)
             && (other->stateBits >> 8) > 0) {
             self->target[count] = other;
-            self->dist[count] = Particle_GetPointDistance(&self->self->pos, &other->pos);
+            self->dist[count] = GraphU64_GetPointDistance(&self->self->pos, &other->pos);
             self->cost[count] = Nav_EvaluateAttackTarget((AiController *)self, count);
             count++;
         }

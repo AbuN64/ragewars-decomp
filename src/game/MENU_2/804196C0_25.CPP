@@ -12,7 +12,7 @@
 
 extern void MarkMenuEventHandled();
 
-extern void Menu_ShowSlotNode(struct sm_dlmultiuser_t *, s32, void *);
+extern void SmpOverlay_ShowSlotNode(struct sm_dlmultiuser_t *, s32, void *);
 
 /* After MarkMenuEventHandled, forwards an event for a channel to func_802995D4_de with the channel's handler id
    (short at 0xC of the handler at 0x4C) when the channel is not muted (word at 0x5C) and has a handler;
@@ -24,7 +24,7 @@ extern void Menu_ShowSlotNode(struct sm_dlmultiuser_t *, s32, void *);
 extern void MarkMenuEventHandled(void);
 
 
-/* Calls Scene_FreeMemory with the arguments it was given and returns zero. */
+/* Calls Cache_FreeMemory with the arguments it was given and returns zero. */
 
 s32 func_8041BB3C_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind) {
     struct Child *child;
@@ -46,7 +46,7 @@ s32 func_8041BB3C_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 
     if (child->target == 0) {
         return 0;
     }
-    Menu_ShowSlotNode(owner, (u16)slot, child->target);
+    SmpOverlay_ShowSlotNode(owner, (u16)slot, child->target);
     return 0;
 }
 
@@ -70,7 +70,7 @@ s32 func_8041BBD0_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 
     if (child->target == 0) {
         return 0;
     }
-    Menu_ShowSlotNode(owner, (u16)slot, child->target);
+    SmpOverlay_ShowSlotNode(owner, (u16)slot, child->target);
     return 0;
 }
 
@@ -94,7 +94,7 @@ s32 func_8041BC64_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 
     if (child->target == 0) {
         return 0;
     }
-    Menu_ShowSlotNode(owner, (u16)slot, child->target);
+    SmpOverlay_ShowSlotNode(owner, (u16)slot, child->target);
     return 0;
 }
 
@@ -118,7 +118,7 @@ s32 func_8041BCF8_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 
     if (child->target == 0) {
         return 0;
     }
-    Menu_ShowSlotNode(owner, (u16)slot, child->target);
+    SmpOverlay_ShowSlotNode(owner, (u16)slot, child->target);
     return 0;
 }
 
@@ -138,6 +138,6 @@ int func_8041BD8C_de(Mixer *mixer, int unused, int channel, int value, int extra
 }
 
 s32 func_8041BE08_de(void *arg0) {
-    Scene_FreeMemory(arg0);
+    Cache_FreeMemory(arg0);
     return 0;
 }

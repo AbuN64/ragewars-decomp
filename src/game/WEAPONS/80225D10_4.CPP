@@ -64,7 +64,7 @@ void func_80218464_de(void *);
 
 void Weapons_InitializePlayerHealth(void *);
 
-s32 Weapons_CheckTotalScoreWin(void *);
+s32 Player_CheckTotalScoreWin(void *);
 
 void * Weapons_GetPlayerByIndex(void *, u32);
 
@@ -94,8 +94,8 @@ void * func_8022C55C_de(void *, u32);
 
 
 
-/* Advances an elimination round when rule D_80146918 is on and not paused (Camera_IsSequenceActive,
-   Camera_IsSequenceInWindow): counts the players still in, clears D_800F7D10 while one is waiting, then by the
+/* Advances an elimination round when rule D_80146918 is on and not paused (Cinema_IsSequenceActive,
+   Cinema_IsSequenceInWindow): counts the players still in, clears D_800F7D10 while one is waiting, then by the
    round state at 0x84 of D_801468A0 revives the first waiting player (crediting a point in state 1,
    scheduling D_80146924 = 3 otherwise) or moves to state 2, and ends the round through Weapons_EndRound
    when func_802282EC_de reports it over. */
@@ -104,7 +104,7 @@ void * func_8022C55C_de(void *, u32);
 
 
 
-s32 Weapons_CheckTeamPointWin(Round *arg0);
+s32 Player_CheckTeamPointWin(Round *arg0);
 
 
 
@@ -178,8 +178,8 @@ void func_80227038_de(s8 *world) {
     func_80227014_S19 *priorFlipProfile;
     func_80227014_S22 *flippedProfile;
 
-    if ((Camera_IsSequenceActive() == 0) && (Camera_IsSequenceInWindow() == 0) && ((initial_rules = &D_801462C8.counters)->m_bFragTagOn != 0)) {
-        if ((Weapons_CheckTotalScoreWin(world) != 0) && (initial_rules->elapsed == 0)) {
+    if ((Cinema_IsSequenceActive() == 0) && (Cinema_IsSequenceInWindow() == 0) && ((initial_rules = &D_801462C8.counters)->m_bFragTagOn != 0)) {
+        if ((Player_CheckTotalScoreWin(world) != 0) && (initial_rules->elapsed == 0)) {
             Weapons_EndRound(world);
             return;
         }
@@ -198,7 +198,7 @@ void func_80227038_de(s8 *world) {
                 if (eligiblePlayerCount > 0) {
                     selectionMode = (select_rules = &D_801462C8.counters)->m_FragTagSelectionType;
                     if (selectionMode == 3) {
-                        ruleOrRandomValue = Nav_NextRandom();
+                        ruleOrRandomValue = GraphU64_NextRandom();
                         randomPlayerQuotient = ruleOrRandomValue / eligiblePlayerCount;
                         if (eligiblePlayerCount == 0) {
 
@@ -247,7 +247,7 @@ void func_80227038_de(s8 *world) {
                             if (playerProfile->unk90 == 0) {
                                 allPlayersView = player->unk5DC;
                                 if ((allPlayersView != 0) && (allPlayersView->unk564 == 0)) {
-                                    Text_SetupSpriteMode((s32) D_801462DE);
+                                    OnScreen_SetupSpriteMode((s32) D_801462DE);
                                     allPlayersViewWidth = allPlayersView->unk29C;
                                     allPlayersViewHeight = allPlayersView->unk2A0;
                                     scaled5x = allPlayersViewWidth * banner_half;
@@ -259,19 +259,19 @@ void func_80227038_de(s8 *world) {
                                 player->unk5D8->unk8F = 1;
                                 switch (D_80142850) {
                                 case 0:
-                                    Render_PlaySoundAtPosition(0x18A1, player->position, (s32)&player->position, -1);
+                                    SoundElement_PlaySoundAtPosition(0x18A1, player->position, (s32)&player->position, -1);
                                     break;
                                 case 1:
-                                    Render_PlaySoundAtPosition(0x1969, player->position, (s32)&player->position, -1);
+                                    SoundElement_PlaySoundAtPosition(0x1969, player->position, (s32)&player->position, -1);
                                     break;
                                 case 2:
-                                    Render_PlaySoundAtPosition(0x1905, player->position, (s32)&player->position, -1);
+                                    SoundElement_PlaySoundAtPosition(0x1905, player->position, (s32)&player->position, -1);
                                     break;
                                 }
                                 func_80218464_de(&player->unk938);
                                 player->unk11B4 = 0;
                                 Weapons_RequestActorState(&player->unk2E8, &player->unk458, 1);
-                                Render_PlacePlayerAtSpawnPoint(player, player->unk5EC, 0, 1);
+                                Player_PlacePlayerAtSpawnPoint(player, player->unk5EC, 0, 1);
                                 Weapons_InitializePlayerHealth(player);
                                 player->unk5E4 = (s32) D_8014284C;
                             } else {
@@ -316,7 +316,7 @@ void func_80227038_de(s8 *world) {
                 rotatingPlayer = func_8022C55C_de(world, (u32) ((s32) case3_entry->m_FragTagPlayerPos % eligiblePlayerCount));
                 rotatingView = rotatingPlayer->unk5DC;
                 if ((rotatingView != 0) && (rotatingView->unk564 == 0)) {
-                    Text_SetupSpriteMode((s32) D_801462DE);
+                    OnScreen_SetupSpriteMode((s32) D_801462DE);
                     rotatingViewWidth = rotatingView->unk29C;
                     rotatingViewHeight = rotatingView->unk2A0;
                     scaled_x = rotatingViewWidth * D_800C2BA8_de;
@@ -333,19 +333,19 @@ void func_80227038_de(s8 *world) {
                     rotatingPlayer->unk5D8->unk8F = 1U;
                     switch (D_80142850) {
                     case 0:
-                        Render_PlaySoundAtPosition(0x18A1, rotatingPlayer->position, (s32)&rotatingPlayer->position, -1);
+                        SoundElement_PlaySoundAtPosition(0x18A1, rotatingPlayer->position, (s32)&rotatingPlayer->position, -1);
                         break;
                     case 1:
-                        Render_PlaySoundAtPosition(0x1969, rotatingPlayer->position, (s32)&rotatingPlayer->position, -1);
+                        SoundElement_PlaySoundAtPosition(0x1969, rotatingPlayer->position, (s32)&rotatingPlayer->position, -1);
                         break;
                     case 2:
-                        Render_PlaySoundAtPosition(0x1905, rotatingPlayer->position, (s32)&rotatingPlayer->position, -1);
+                        SoundElement_PlaySoundAtPosition(0x1905, rotatingPlayer->position, (s32)&rotatingPlayer->position, -1);
                         break;
                     }
                     func_80218464_de(&rotatingPlayer->unk938);
                     rotatingPlayer->unk11B4 = 0;
                     Weapons_RequestActorState(&rotatingPlayer->unk2E8, &rotatingPlayer->unk458, 1);
-                    Render_PlacePlayerAtSpawnPoint(rotatingPlayer, rotatingPlayer->unk5EC, 0, 1);
+                    Player_PlacePlayerAtSpawnPoint(rotatingPlayer, rotatingPlayer->unk5EC, 0, 1);
                     Weapons_InitializePlayerHealth(rotatingPlayer);
                 }
                 playerIndex = 0;
@@ -397,7 +397,7 @@ void func_80227038_de(s8 *world) {
                 chosenPlayer = func_8022C55C_de(world, (u32) ((s32) case4_entry->m_FragTagPlayerPos % eligiblePlayerCount));
                 chosenView = chosenPlayer->unk5DC;
                 if ((chosenView != 0) && (chosenView->unk564 == 0)) {
-                    Text_SetupSpriteMode((s32) D_801462DE);
+                    OnScreen_SetupSpriteMode((s32) D_801462DE);
                     chosenViewWidth = chosenView->unk29C;
                     chosenViewHeight = chosenView->unk2A0;
                     scaled_x4 = chosenViewWidth * D_800C2BB0_de;
@@ -414,19 +414,19 @@ void func_80227038_de(s8 *world) {
                     chosenPlayer->unk5D8->unk8F = 1U;
                     switch (D_80142850) {
                     case 0:
-                        Render_PlaySoundAtPosition(0x18A1, chosenPlayer->position, (s32)&chosenPlayer->position, -1);
+                        SoundElement_PlaySoundAtPosition(0x18A1, chosenPlayer->position, (s32)&chosenPlayer->position, -1);
                         break;
                     case 1:
-                        Render_PlaySoundAtPosition(0x1969, chosenPlayer->position, (s32)&chosenPlayer->position, -1);
+                        SoundElement_PlaySoundAtPosition(0x1969, chosenPlayer->position, (s32)&chosenPlayer->position, -1);
                         break;
                     case 2:
-                        Render_PlaySoundAtPosition(0x1905, chosenPlayer->position, (s32)&chosenPlayer->position, -1);
+                        SoundElement_PlaySoundAtPosition(0x1905, chosenPlayer->position, (s32)&chosenPlayer->position, -1);
                         break;
                     }
                     func_80218464_de(&chosenPlayer->unk938);
                     chosenPlayer->unk11B4 = 0;
                     Weapons_RequestActorState(&chosenPlayer->unk2E8, &chosenPlayer->unk458, 1);
-                    Render_PlacePlayerAtSpawnPoint(chosenPlayer, chosenPlayer->unk5EC, 0, 1);
+                    Player_PlacePlayerAtSpawnPoint(chosenPlayer, chosenPlayer->unk5EC, 0, 1);
                     Weapons_InitializePlayerHealth(chosenPlayer);
                 }
                 playerIndex = 0;
@@ -485,7 +485,7 @@ void func_80227038_de(s8 *world) {
                             if (priorFlipProfile->unk8F == 0) {
                                 flippedView = flippedPlayer->unk5DC;
                                 if ((flippedView != 0) && (flippedView->unk564 == 0)) {
-                                    Text_SetupSpriteMode((s32) D_801462DE);
+                                    OnScreen_SetupSpriteMode((s32) D_801462DE);
                                     flippedViewWidth = flippedView->unk29C;
                                     flippedViewHeight = flippedView->unk2A0;
                                     scaled6x = flippedViewWidth * banner_half;
@@ -497,24 +497,24 @@ void func_80227038_de(s8 *world) {
                                 flippedPlayer->unk5D8->unk8F = 1U;
                                 switch (D_80142850) {
                                 case 0:
-                                    Render_PlaySoundAtPosition(0x18A1, flippedPlayer->position, (s32)&flippedPlayer->position, -1);
+                                    SoundElement_PlaySoundAtPosition(0x18A1, flippedPlayer->position, (s32)&flippedPlayer->position, -1);
                                     break;
                                 case 1:
-                                    Render_PlaySoundAtPosition(0x1969, flippedPlayer->position, (s32)&flippedPlayer->position, -1);
+                                    SoundElement_PlaySoundAtPosition(0x1969, flippedPlayer->position, (s32)&flippedPlayer->position, -1);
                                     break;
                                 case 2:
-                                    Render_PlaySoundAtPosition(0x1905, flippedPlayer->position, (s32)&flippedPlayer->position, -1);
+                                    SoundElement_PlaySoundAtPosition(0x1905, flippedPlayer->position, (s32)&flippedPlayer->position, -1);
                                     break;
                                 }
                                 func_80218464_de(&flippedPlayer->unk938);
                                 flippedPlayer->unk11B4 = 0;
                                 Weapons_RequestActorState(&flippedPlayer->unk2E8, &flippedPlayer->unk458, 1);
-                                Render_PlacePlayerAtSpawnPoint(flippedPlayer, flippedPlayer->unk5EC, 0, 1);
+                                Player_PlacePlayerAtSpawnPoint(flippedPlayer, flippedPlayer->unk5EC, 0, 1);
                                 Weapons_InitializePlayerHealth(flippedPlayer);
                             } else {
                                 priorFlipProfile->unk90 = 0;
                                 flippedPlayer->unk5D8->unk8F = 0U;
-                                Render_PlacePlayerAtSpawnPoint(flippedPlayer, flippedPlayer->unk5EC, 0, 1);
+                                Player_PlacePlayerAtSpawnPoint(flippedPlayer, flippedPlayer->unk5EC, 0, 1);
                             }
                             flippedProfile = flippedPlayer->unk5D8;
                             if (flippedProfile->unk8F != 0) {
@@ -587,7 +587,7 @@ void Weapons_ReleaseWaitingPlayer(Round *round) {
     ActorNode *node;
     CGameStatus *state;
     s32 waiting;
-    if ((D_801462C8.counters.m_bCTFOn != 0) && (Camera_IsSequenceActive() == 0) && (Camera_IsSequenceInWindow() == 0)) {
+    if ((D_801462C8.counters.m_bCTFOn != 0) && (Cinema_IsSequenceActive() == 0) && (Cinema_IsSequenceInWindow() == 0)) {
         count = Weapons_CountPlayersIn(round);
         if (count > 0) {
             waiting = Weapons_FindWaitingPlayer(round) != 0;
@@ -621,7 +621,7 @@ void Weapons_ReleaseWaitingPlayer(Round *round) {
             case 3:
                 break;
             }
-            if ((Weapons_CheckTeamPointWin(round) != 0) && (D_801462C8.counters.elapsed == 0)) {
+            if ((Player_CheckTeamPointWin(round) != 0) && (D_801462C8.counters.elapsed == 0)) {
                 Weapons_EndRound(round);
             }
         }
@@ -638,13 +638,13 @@ static inline CGameStatus *gameStatus(void) {
 /* Returns 1 when a team (team rounds) or a player has reached the score limit. With a controller
    mode set, humanWon records whether the human team or a human player got there; in mode 1 a
    computer winner does not end the round. */
-s32 Weapons_CheckScoreLimit(Round *round) {
+s32 Player_CheckScoreLimit(Round *round) {
     Shared_Game *game;
     ActorNode *player;
     u32 team, i;
     u32 slot;
     u8 mode;
-    if (Camera_IsSequenceActive() || Camera_IsSequenceInWindow()
+    if (Cinema_IsSequenceActive() || Cinema_IsSequenceInWindow()
 #if !defined(VERSION_US)
         || gameStatus()->mode == 0
 #endif

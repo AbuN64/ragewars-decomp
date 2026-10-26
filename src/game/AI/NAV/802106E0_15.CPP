@@ -14,13 +14,13 @@ void Nav_InitRangedCombat(CloseAttackActor *arg0) {
     inner->state = 0;
     Nav_ResetBehaviorState(inner);
 
-    r1 = Nav_NextRandom();
+    r1 = GraphU64_NextRandom();
     inner->timer = r1 % 4 + 0xC;
 
-    r2 = Nav_NextRandom();
+    r2 = GraphU64_NextRandom();
     inner->pattern = r2 % 2;
 
-    r3 = Nav_NextRandom();
+    r3 = GraphU64_NextRandom();
     inner->fireTimer = -1;
     inner->frames = 0;
     inner->visible = 0;
@@ -36,13 +36,13 @@ void Nav_InitCloseCombat(CloseAttackActor *arg0) {
 
     inner->state = 0;
 
-    r1 = Nav_NextRandom();
+    r1 = GraphU64_NextRandom();
     inner->timer = r1 % 4 + 2;
 
-    r2 = Nav_NextRandom();
+    r2 = GraphU64_NextRandom();
     inner->pattern = r2 % 2;
 
-    r3 = Nav_NextRandom();
+    r3 = GraphU64_NextRandom();
     inner->distance = r3 % 32400 + 0x2710;
 
     Nav_ResetBehaviorState(inner);
@@ -60,10 +60,10 @@ void Nav_InitVisiblePursuit(CloseAttackActor *arg0) {
     inner->state = 0;
     Nav_ResetBehaviorState(inner);
 
-    r1 = Nav_NextRandom();
+    r1 = GraphU64_NextRandom();
     inner->timer = r1 % 4 + 0xC;
 
-    r2 = Nav_NextRandom();
+    r2 = GraphU64_NextRandom();
     inner->pattern = r2 % 2;
 }
 #endif

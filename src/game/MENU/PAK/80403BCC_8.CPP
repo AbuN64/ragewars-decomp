@@ -5,7 +5,7 @@
 #include "stddef.h"
 #include "TYPES.H"
 #include "MENU/PAK/80403BCC_8.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Loads a page-aligned resource into the selected device slot and reports the result. */
 
@@ -17,7 +17,7 @@ extern void Scene_ReleaseResource(void *arg0, void *arg1);
 extern s8 D_8010BBB8;
 
 
-extern s32 *Scene_AllocateResource(s32, s32, s32, void *);
+extern s32 *Cache_AllocateResource(s32, s32, s32, void *);
 
 
 extern void func_80253908_de(s32);
@@ -26,9 +26,9 @@ extern void func_8025476C_de(s32);
 
 extern s32 func_8025477C_de(void);
 
-extern void Render_ReadControllerStates(void);
+extern void Control_ReadControllerStates(void);
 
-extern void Render_ReleasePakLock(void);
+extern void Control_ReleasePakLock(void);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
@@ -42,11 +42,11 @@ extern s32 func_80447AF0_de(Device *, s32, s32, s32, s32, s32);
 
 
 /* Refreshes a controller slot and resolves its pending device state. */
-void Render_ReadControllerStates();
+void Control_ReadControllerStates();
 
  /* extern */
  /* extern */
-void Render_ReleasePakLock();
+void Control_ReleasePakLock();
 
  /* extern */
 void Pak_UpdateStatus(s32);
@@ -72,7 +72,7 @@ s32 func_80447F30_de(void *);
 
 
 
-/* Reports through the third argument the size in 256-byte units, per Ovlgame_BytesToPakPages, of entry j of
+/* Reports through the third argument the size in 256-byte units, per Pak_BytesToPakPages, of entry j of
    record i in the table D_800E2854 points to, returning zero, or returns -2 when record i's state in
    D_801534F0 is not 3. */
 
@@ -82,7 +82,7 @@ s32 func_80447F30_de(void *);
 
 
 
-extern s32 Ovlgame_BytesToPakPages(s32);
+extern s32 Pak_BytesToPakPages(s32);
 
 extern PakDirectory *D_800E2854;
 
@@ -107,10 +107,10 @@ s32 Pak_ReadNoteData(s32 slot, s32 arg1, s32 arg2, s32 length)
   {
     func_8025476C_de(one);
   }
-  buf = Scene_AllocateResource(0, size, 0x23, g_pakReadScratchNoteName);
+  buf = Cache_AllocateResource(0, size, 0x23, g_pakReadScratchNoteName);
   addr = *buf;
   ((void (*)(s32))Control_AcquireControllerLock)(1);
-  Render_ReadControllerStates();
+  Control_ReadControllerStates();
   result = D_80153500[slot];
   D_8010BBB8 = 2;
   if (result == 0)
@@ -125,11 +125,11 @@ s32 Pak_ReadNoteData(s32 slot, s32 arg1, s32 arg2, s32 length)
       func_802BD3A0_de(arg2, addr, length);
     }
   }
-  Render_ReleasePakLock();
+  Control_ReleasePakLock();
   func_80253908_de(zero);
   if (buf != ((void *) 0))
   {
-    Scene_ReleaseResource(0, buf);
+    Cache_ReleaseResource(0, buf);
   }
   return result;
 }
@@ -172,7 +172,7 @@ s32 func_804051D4_de(s32 channel) {
         return -2;
     }
     ((void (*)(s32))Control_AcquireControllerLock)(1);
-    Render_ReadControllerStates();
+    Control_ReadControllerStates();
     result = D_80153500[channel];
     D_8010BBB8 = 2;
     if (result == -4) {
@@ -182,7 +182,7 @@ s32 func_804051D4_de(s32 channel) {
         }
         Pak_UpdateStatus(channel);
     }
-    Render_ReleasePakLock();
+    Control_ReleasePakLock();
     return result;
 }
 
@@ -192,14 +192,14 @@ s32 func_80405290_de(s32 channel) {
         return -2;
     }
     ((void (*)(s32))Control_AcquireControllerLock)(1);
-    Render_ReadControllerStates();
+    Control_ReadControllerStates();
     D_8010BBB8 = 2;
     result = func_80447F30_de(&D_8014D280[channel]);
     if (result != 0) {
         result = -1;
     }
     Pak_UpdateStatus(channel);
-    Render_ReleasePakLock();
+    Control_ReleasePakLock();
     return result;
 }
 
@@ -223,6 +223,6 @@ s32 func_804053E0_de(s32 index, s32 entry, s32 *out) {
     if (D_801534F0[index] != 3) {
         return -2;
     }
-    *out = Ovlgame_BytesToPakPages(D_800E2854[index].notes[entry].file_size);
+    *out = Pak_BytesToPakPages(D_800E2854[index].notes[entry].file_size);
     return 0;
 }

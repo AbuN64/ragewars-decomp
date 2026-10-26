@@ -11,7 +11,7 @@
 
 extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
-void Render_SetActorStateBit(Shared_World *world, void *actor, s32 arg2) {
+void Rumble_SetActorStateBit(Shared_World *world, void *actor, s32 arg2) {
     LevelActor *entry;
     struct Def *cond;
     void *field80;
@@ -54,10 +54,10 @@ void Render_SetActorStateBit(Shared_World *world, void *actor, s32 arg2) {
         }
     }
     field80 = world->bitSections;
-    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(field80, 0), field1B40C), 0);
-    Render_GetPackSection(table, 0);
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 0);
+    SetN64_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    base1 = (u8 *) Render_GetPackSection(table, 1);
+    base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (index & 7);
     if (arg2 != 0) {
@@ -75,7 +75,7 @@ void Render_SetActorStateBit(Shared_World *world, void *actor, s32 arg2) {
     base2[idx2 >> 3] &= ~mask;
 }
 
-s32 Render_TestActorStateBit(void *arg0, void *arg1) {
+s32 Rumble_TestActorStateBit(void *arg0, void *arg1) {
     Shared_World *world = arg0;
     LevelActor *actor = arg1;
     void *field80;
@@ -106,10 +106,10 @@ s32 Render_TestActorStateBit(void *arg0, void *arg1) {
     }
     field80 = world->bitSections;
     field1B40C = world->level;
-    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(field80, 0), field1B40C), 0);
-    Render_GetPackSection(table, 0);
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 0);
+    SetN64_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    base = (u8 *) Render_GetPackSection(table, 1);
+    base = (u8 *) SetN64_GetPackSection(table, 1);
     mask = 1 << (index & 7);
     i = index;
     if (i < 0) {

@@ -178,7 +178,7 @@ s16 func_80279798_de(s16 *arg0) {
             entry += 2;
         } while (*entry != -1);
     }
-    random = Nav_NextRandom();
+    random = GraphU64_NextRandom();
     entry = start;
     value = random % total;
     total = 0;
@@ -227,7 +227,7 @@ s16 func_802798A8_de(WeightedTable *weightedTable) {
             entry += 2;
         } while (*entry != -1);
     }
-    random = Nav_NextRandom();
+    random = GraphU64_NextRandom();
     entry = start;
     value = random % total;
     total = 0;

@@ -81,7 +81,7 @@ extern char D_8011D8D0;
 extern char D_801041F0;
 extern CQuatern func_80271818_de(CVector3 *);
 extern void BuildRollMatrix(f32 *matrix, s32 angle);
-extern void Particle_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void GraphU64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 #include "particle/8027A0F4_8.H"
 
 static inline f32 offset_x(Actor_func_80279B40_de *actor) {
@@ -98,7 +98,7 @@ static inline f32 offset_y(Actor_func_80279B40_de *actor) {
     return actor->offsetY;
 }
 
-void Render_SpawnChildEffect(Actor_func_80279B40_de *actor, s32 model, s32 arg2, s32 flags) {
+void Particle_SpawnChildEffect(Actor_func_80279B40_de *actor, s32 model, s32 arg2, s32 flags) {
     CQuatern rotation;
     CVector3 direction;
     CVector3 offset;
@@ -123,14 +123,14 @@ void Render_SpawnChildEffect(Actor_func_80279B40_de *actor, s32 model, s32 arg2,
         offset.y = -offset_y(actor);
         offset.z = 0.0f;
         BuildRollMatrix(matrix, actor->angle);
-        Particle_TransformPoint(matrix, &offset, &turned);
+        GraphU64_TransformPoint(matrix, &offset, &turned);
         parent = Particle_ParentTransform((struct Shared_Particle *)actor, 0);
         if (parent != 0) {
-            Particle_TransformPoint(parent, &turned, &carried);
+            GraphU64_TransformPoint(parent, &turned, &carried);
         } else {
             carried = turned;
         }
-        Particle_AddVec3(&moved, &carried, &actor->position);
+        GraphU64_AddVec3(&moved, &carried, &actor->position);
         D_80103FCC = scratch;
         point = moved;
         D_80103FCC = &D_801041F0;

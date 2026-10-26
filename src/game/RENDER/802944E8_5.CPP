@@ -15,7 +15,7 @@ extern void *D_auto_rodata_unresolved_800CD698[];
 extern void osViSetMode(void *);
 extern void osViSetYScale(f32);
 extern void func_802BA700_de(s32);
-extern void Camera_EndSequence(void);
+extern void Cinema_EndSequence(void);
 extern void func_8025E214_de(s32);
 #define SCR_W(state, off) (*(s32 *)((char *)(state) + (off)))
 /* Per-frame screen step: when the flag at 0x26DD0 is set it switches the video mode (label chosen by D_800E28D8, Y scale from a constant, mode 2); in state 2 of D_80142CA8 with that flag clear it latches 0x26DBC into 0x26DB8, clears 0x26DB0, runs the reset calls and dispatches the 12-byte table row D_auto_rodata_unresolved_800CD698 for that value. */
@@ -35,9 +35,9 @@ void func_802949A0_us(char *state) {
         mode = SCR_W(state, 0x26DBC);
         SCR_W(state, 0x26DB0) = 0;
         SCR_W(state, 0x26DB8) = mode;
-        Camera_EndSequence();
+        Cinema_EndSequence();
         func_8025E214_de(-1);
-        Render_SetControllerMode(0);
+        Control_SetControllerMode(0);
         handler = (void (*)(char *))D_auto_rodata_unresolved_800CD698[SCR_W(state, 0x26DB8) * 3];
         if (handler != 0) {
             handler(state);

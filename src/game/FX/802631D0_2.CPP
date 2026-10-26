@@ -5,7 +5,7 @@
 #include "FX/802631D0_2.H"
 
 /** Clear the object's fields, preserving the field at offset 0x10. */
-void Fx_ClearControllerInput(void *object) {
+void ContPad_ClearControllerInput(void *object) {
     Shared_Input *input = object;
     input->word0 = 0;
     input->word4 = 0;

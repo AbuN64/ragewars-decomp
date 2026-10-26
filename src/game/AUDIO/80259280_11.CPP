@@ -17,7 +17,7 @@
 
 /* Returns the stereo pan of a sound at a position for a listener: centre (0x40) without a listener, when
  * the sound is horizontally within a small radius or straight ahead; otherwise the horizontal direction
- * in listener space is compared with the forward axis through Nav_ArcCos and func_802B7130_de, given the
+ * in listener space is compared with the forward axis through GraphU64_ArcCos and func_802B7130_de, given the
  * side's sign, and scaled around the centre by D_800C8FF8. */
 
 extern void func_80272BCC_de(void *, CVector3 *, CVector3 *);
@@ -33,7 +33,7 @@ s16 func_80259B10_de(CVector3 *position, GameplayCamera *listener) {
     if (listener == 0) {
         return 0x40;
     }
-    Particle_SubtractVectors(&offset, &listener->position, position);
+    GraphU64_SubtractVectors(&offset, &listener->position, position);
     if (offset.x * offset.x + offset.z * offset.z < D_800C3F00_de) {
         return 0x40;
     }
@@ -41,8 +41,8 @@ s16 func_80259B10_de(CVector3 *position, GameplayCamera *listener) {
     local.y = 0.0f;
     forward.x = forward.y = local.y;
     forward.z = (&D_800C3F00_de)[1];
-    Particle_NormalizeVec3(&local.x);
-    pan = Math_Sinf(Nav_ArcCos(local.x * forward.x + local.y * forward.y + local.z * forward.z));
+    GraphU64_NormalizeVec3(&local.x);
+    pan = Math_Sinf(GraphU64_ArcCos(local.x * forward.x + local.y * forward.y + local.z * forward.z));
     if (local.x == 0.0f) {
         return 0x40;
     }
@@ -56,7 +56,7 @@ s16 func_80259B10_de(CVector3 *position, GameplayCamera *listener) {
     return pan * D_800C8FF8 + D_800C8FF8;
 }
 
-/* Updates a view's heading from its controller: clears its turn rates, takes the base angles from the controller's preset (or the heading from its default yaw), adds the stick turn derived from Nav_RandomBetween of the two stick axes, nudges it up for flag 0x40 and down for flag 0x80, caps it at the limit, optionally records the heading and the pitch step over the step count and the current pitch, and finally maps the heading through the 60-entry curve table D_800CB8EC with linear interpolation. The turn is truncated to 16 bits into an int, and the next table index is its own s16. */
+/* Updates a view's heading from its controller: clears its turn rates, takes the base angles from the controller's preset (or the heading from its default yaw), adds the stick turn derived from GraphU64_RandomBetween of the two stick axes, nudges it up for flag 0x40 and down for flag 0x80, caps it at the limit, optionally records the heading and the pitch step over the step count and the current pitch, and finally maps the heading through the 60-entry curve table D_800CB8EC with linear interpolation. The turn is truncated to 16 bits into an int, and the next table index is its own s16. */
 extern struct Bytes12 *Audio_GetMetadataSectionFourEntry(ContextRecAt2BC0 *, s32);
 extern s16 func_802AD270_de(f32);
 
@@ -91,7 +91,7 @@ void func_80259C5C_de(ViewRecAtB0 *view, ControllerCode802591C0 *controller, s32
     y = func_8025E590_de(controller);
     fy = y;
     fx = x;
-    turn = (s16)(s32)(fx + ((Nav_RandomBetween(fy, fx)) < 0.0f ? -(Nav_RandomBetween(fy, fx)) : (Nav_RandomBetween(fy, fx))));
+    turn = (s16)(s32)(fx + ((GraphU64_RandomBetween(fy, fx)) < 0.0f ? -(GraphU64_RandomBetween(fy, fx)) : (GraphU64_RandomBetween(fy, fx))));
     angles->heading = func_802AD270_de(RW_BITS_TO_FLOAT(angles->heading) + turn);
     if (flags & 0x40) {
         angles->heading = func_802AD270_de(RW_BITS_TO_FLOAT(angles->heading) + D_800C3F0C_de);
@@ -149,7 +149,7 @@ static inline s32 lookupPanValue(s32 panAngle) {
     return D_80107FA0[panAngle];
 }
 
-void Audio_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s32 unused2) {
+void Channel_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s32 unused2) {
     AudioVolumeMix *mix;
     SoundEnvelopeControl *envelope;
     u8 *gainRange;
@@ -178,7 +178,7 @@ void Audio_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s32
             }
         }
     }
-    if (Camera_IsSequenceInWindow()) {
+    if (Cinema_IsSequenceInWindow()) {
         voice->volumeScale = voice->volumeScale * D_800C3F24_de;
     }
     envelope = (SoundEnvelopeControl *)voice->envelope;
@@ -193,7 +193,7 @@ void Audio_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s32
         maximumGain = (f32)gainRange[1] * D_800C3F28_de;
         if (minimumGain == D_800C3F2C_de) gain = D_800C3F2C_de;
         else if (maximumGain == minimumGain) gain = minimumGain;
-        else gain = minimumGain + Nav_RandomFloat(maximumGain - minimumGain);
+        else gain = minimumGain + GraphU64_RandomFloat(maximumGain - minimumGain);
         sourcePosition = &mix->position;
         listenerPosition = &voice->context->field2B98->position;
         dx = sourcePosition->x - listenerPosition->x;

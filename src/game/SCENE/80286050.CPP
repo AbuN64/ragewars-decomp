@@ -47,14 +47,14 @@ void func_80286080_de(void *arg0) {
     state->counter120 = 0;
     state->counter124 = 0;
     func_80279990_de(state->system128);
-    Scene_MarkResourceInUse(0, state->resource);
+    Cache_MarkResourceInUse(0, state->resource);
     {
         void *manager;
 
         manager = &D_801379C0;
         func_802A56FC_de(manager);
         func_8022A170_de(&D_80145040);
-        Engine_UpdateActorVisibility(state);
+        Scene_UpdateActorVisibility(state);
         func_80288470_de(state);
         func_8028D61C_de(state);
 
@@ -86,7 +86,7 @@ extern void func_8024BE3C_de(void *arg0);
 extern void func_80246E44_de(char *);
 extern s32 func_802934F8_de(void);
 extern void Weapons_UpdateWorldPlayers(void *arg0);
-extern s32 Weapons_BeginRoundEnd(void *arg0);
+extern s32 Player_BeginRoundEnd(void *arg0);
 
 
 
@@ -149,7 +149,7 @@ first_pass_done:
     if (func_802934F8_de()) {
         Weapons_UpdateWorldPlayers(&D_80145040);
     }
-    if (Weapons_BeginRoundEnd(&D_80145040)) {
+    if (Player_BeginRoundEnd(&D_80145040)) {
         func_8025E2D4_de(0x34);
         {
         s32 sw_mode_value = ((GlobalMode *)&D_80145040)->mode;
@@ -199,7 +199,7 @@ first_pass_done:
 extern Gfx *g_displayListCursor;
 extern char D_0028DFE4[], D_0028E044[];
 typedef struct SortEntry { void *object; f32 distance; } SortEntry;
-extern void Camera_GetObjectPositionAt260(void *, void *);
+extern void Sky_GetObjectPositionAt260(void *, void *);
 extern void func_802852C0_de(void *, s32, s32, void *, void *);
 extern void StaticInstance_DrawForGameMode(void *, void *);
 extern void func_8024EB90_de(void *);
@@ -235,11 +235,11 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
     gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_1);
     gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_1);
     gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_1);
-    Camera_GetObjectPositionAt260(&jitter, camera);
+    Sky_GetObjectPositionAt260(&jitter, camera);
     ox = jitter.x * -2.0f;
-    Camera_GetObjectPositionAt260(&jitter, camera);
+    Sky_GetObjectPositionAt260(&jitter, camera);
     oy = jitter.y * -2.0f;
-    Camera_GetObjectPositionAt260(&jitter, camera);
+    Sky_GetObjectPositionAt260(&jitter, camera);
     oz = jitter.z * -2.0f;
     for (i = 0; i < count; i++) {
         f32 x;
@@ -264,7 +264,7 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
         entries[i].distance = x * x + y * y + z * z;
     }
     func_802852C0_de(entries, count, 8, D_0028E044, D_0028DFE4);
-    Render_BeginModelBatch();
+    Geometry_BeginModelBatch();
     for (i = 0; i < count; i++) {
         object = entries[i].object;
         switch (object->kind) {
@@ -279,15 +279,15 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
             break;
         }
     }
-    Render_FlushModelBatch();
+    Geometry_FlushModelBatch();
 }
 
 
 #include "COMMON/APPROACHLOCATION.H"
 #include "COMMON/WORLD.H"
 #include "stddef.h"
-f32 Anim_GetPolygonHeight(Node75 *node, f32 x, f32 z);
-f32 Nav_GetTrianglePlaneHeight(Node75 *node, f32 x, f32 z);
+f32 Region_GetPolygonHeight(Node75 *node, f32 x, f32 z);
+f32 GraphU64_GetTrianglePlaneHeight(Node75 *node, f32 x, f32 z);
 
 /* The floor polygon under pos: a volume polygon (flag 0x40) that holds pos, else the one nearest in height. */
 /* Finds the containing solid volume, or the nearest floor polygon, as a legacy 32-bit handle. */
@@ -312,13 +312,13 @@ s32 Scene_FindFloorPolygon(Shared_World *world, CVector3 *pos) {
     if (D_800CD764_de == 0) {
         return 0;
     }
-    polygonTable = Render_GetPackSection(world->modelSections, 2);
+    polygonTable = SetN64_GetPackSection(world->modelSections, 2);
     polys = polygonTable->polygons;
     index = 0;
     i = 0;
     bestDist = 0.0f;
     best = NULL;
-    grid = Render_GetPackSection(world->modelSections, 3);
+    grid = SetN64_GetPackSection(world->modelSections, 3);
     cellCount = grid->cellCount;
     cells = grid->cells;
     if (cellCount > 0) {
@@ -333,10 +333,10 @@ s32 Scene_FindFloorPolygon(Shared_World *world, CVector3 *pos) {
                 /* Preserve the index-first address add emitted by the original compiler. */
                 poly = polys - -index;
                 do {
-                    if (Nav_IsPointInTriangleXZ(poly, pos->x, pos->z) != 0) {
-                        floor = Anim_GetPolygonHeight(poly, pos->x, pos->z);
+                    if (Region_IsPointInTriangleXZ(poly, pos->x, pos->z) != 0) {
+                        floor = Region_GetPolygonHeight(poly, pos->x, pos->z);
                         if (poly->flags & 0x40) {
-                            ceiling = Nav_GetTrianglePlaneHeight(poly, pos->x, pos->z);
+                            ceiling = GraphU64_GetTrianglePlaneHeight(poly, pos->x, pos->z);
                             if (floor <= pos->y && pos->y <= ceiling) {
                                 return (s32)poly;
                             }

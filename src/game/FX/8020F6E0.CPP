@@ -7,7 +7,7 @@
 
 extern CVector3 *Nav_GetControllerPosition(AiController *controller);
 extern s32 Nav_MatchesBehaviorStateFilter(AiController *controller);
-extern f32 Particle_GetPointDistance(f32 *a, f32 *b);
+extern f32 GraphU64_GetPointDistance(f32 *a, f32 *b);
 
 static inline AiTarget *setSelectedTarget(AiController *controller, AiTarget *target) {
     controller->target = target;
@@ -42,7 +42,7 @@ s32 Fx_UpdateTargetSelection(void *object) {
         }
         if (controller->target != NULL) {
             linked = controller->target->player;
-            linkedDistance = Particle_GetPointDistance(&position->x, &linked->pos.x);
+            linkedDistance = GraphU64_GetPointDistance(&position->x, &linked->pos.x);
         } else {
             linked = NULL;
             linkedDistance = 0.0f;
@@ -53,7 +53,7 @@ s32 Fx_UpdateTargetSelection(void *object) {
     }
     if (controller->preferred != NULL && (controller->preferred->flags & 0x300000)) {
         alternate = controller->preferred->player;
-        alternateDistance = Particle_GetPointDistance(&position->x, &alternate->pos.x);
+        alternateDistance = GraphU64_GetPointDistance(&position->x, &alternate->pos.x);
     } else {
         alternate = NULL;
         alternateDistance = 0.0f;

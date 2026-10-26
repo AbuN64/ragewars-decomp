@@ -32,7 +32,7 @@ void Camera_BlendEnvironmentColors(View *self) {
         if (&g_world == 0 || g_world.mode == 0) {
             return;
         }
-        rec = (void *)(Render_GetPackSection(g_world.modelSections, 0) + 8);
+        rec = (void *)(SetN64_GetPackSection(g_world.modelSections, 0) + 8);
     } else {
         rec = func_8028B2F8_de(&g_world, key);
         if (rec == 0) {

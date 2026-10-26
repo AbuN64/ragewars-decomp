@@ -12,10 +12,10 @@ void func_80295F78_de(s32 **arg0, Shared_AnimInfo *animInfo) {
 
     temp_s0 = *arg0;
     if (*temp_s0 != 0) {
-        animInfo->frame = Render_GetPackSection(temp_s0, 0);
-        tmp = Render_GetPackSection(temp_s0, 1);
+        animInfo->frame = SetN64_GetPackSection(temp_s0, 0);
+        tmp = SetN64_GetPackSection(temp_s0, 1);
         animInfo->count = *tmp;
-        tmp = Render_GetPackSection(temp_s0, 2);
+        tmp = SetN64_GetPackSection(temp_s0, 2);
         animInfo->unk4 = *tmp;
         return;
     }

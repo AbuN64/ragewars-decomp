@@ -7,7 +7,7 @@
 #include "FX_2/80271B18.H"
 
 static inline s32 playerHasForce(ForcePlayer *player, f32 zero) { s32 value = 0; if (zero < player->strength) value = 1; return value; }
-void Weapons_ApplyPlayerForces(void *listObject, void *bodyObject) {
+void Player_ApplyPlayerForces(void *listObject, void *bodyObject) {
     ForcePlayerList *list = listObject;
     ForceBody *body = bodyObject;
     ForcePlayer *player;
@@ -22,32 +22,32 @@ void Weapons_ApplyPlayerForces(void *listObject, void *bodyObject) {
         one = D_800C2C14_de;
     do {
         if (player->active != 0 && playerHasForce(player, zero)) {
-            Particle_SubtractVectors(&delta, &player->origin, &body->position);
+            GraphU64_SubtractVectors(&delta, &player->origin, &body->position);
             distance = (delta.x * delta.x + delta.y * delta.y) + delta.z * delta.z;
-            Particle_NormalizeVec3(&delta);
+            GraphU64_NormalizeVec3(&delta);
             changed = 1;
             if (D_800C2C18_de < distance) {
                 force = D_800C2C1C_de / distance;
                 if (D_800D2988 < one) force *= D_800D2988;
                 if (player->attract == 0) force = -force;
                 direction = body->velocity;
-                Particle_NormalizeVec3(&direction);
+                GraphU64_NormalizeVec3(&direction);
                 dot = delta.x * direction.x + delta.y * direction.y;
                 dot += delta.z * direction.z;
                 if (dot < zero) dot = -dot;
                 dot += one;
                 dot *= D_800C2C20_de;
                 force *= dot;
-                Particle_ScaleVector(&delta, &delta, force);
+                GraphU64_ScaleVector(&delta, &delta, force);
             }
-            Particle_AddVec3(&body->velocity, &body->velocity, &delta);
+            GraphU64_AddVec3(&body->velocity, &body->velocity, &delta);
         }
         player = player->next;
     } while (player != 0);
     }
     if (changed != 0) {
         delta = body->velocity;
-        Particle_NormalizeVec3(&delta);
+        GraphU64_NormalizeVec3(&delta);
         body->direction = delta;
     }
 }

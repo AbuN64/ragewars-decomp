@@ -113,7 +113,7 @@ typedef struct ObjRecAt7C ObjRecAt7C;
 
 /* Clip section 1 has a stride/count header and 0x38-byte pose records.
  * Position is used to select the nearest frame; the remaining pose data is
- * consumed by the animation routines reached through Engine_GetPlatformRoutePoint. */
+ * consumed by the animation routines reached through Scene_GetPlatformRoutePoint. */
 typedef struct AnimationPoseFrame {
     CVector3 position;
     u8 poseData[0x38 - sizeof(CVector3)];

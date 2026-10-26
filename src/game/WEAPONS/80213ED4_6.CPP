@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 
-/* The call sites in func_8026835C_de, Fx_DispatchAttachmentEffects and func_8026740C_de
+/* The call sites in func_8026835C_de, Ghot_DispatchAttachmentEffects and func_8026740C_de
  * pass a fourth incoming slot; the callee never reads it. The signature here
  * is the one those callers and this definition agree on across the ROM. */
 

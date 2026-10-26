@@ -39,7 +39,7 @@ void func_80419F24_de(void *);
 
 s32 func_80419F38_de(void *);
 
-void Menu_StartFlicker(void *, int);
+void SmpFlicker_StartFlicker(void *, int);
 
 void func_80298368_de(s32);
 
@@ -99,9 +99,9 @@ block_7:
         temp_v0_2 = D_800E4F60->unk_3E0 - 1;
         D_800E4F60->unk_3E0 = temp_v0_2;
         if (temp_v0_2 <= 0) {
-            Render_PlayFlatSound(0xE79);
+            SoundElement_PlayFlatSound(0xE79);
             Frontend_SetWidgetFlag08(D_800E4F60->unk_3E8, 1);
-            Menu_StartFlicker(D_800E4F60->text3E4, 4);
+            SmpFlicker_StartFlicker(D_800E4F60->text3E4, 4);
             D_800E4F60->unk_3DC = 4;
             D_800E4F60->unk_3E0 = 4;
         }
@@ -154,7 +154,7 @@ block_7:
         D_800E4F60->unk_3DC = 2;
         D_800E4F60->unk_3E0 = 4;
         Frontend_SetWidgetFlag08(D_800E4F60->unk_448, 0);
-        Render_PlayFlatSound(0xE78);
+        SoundElement_PlayFlatSound(0xE78);
         break;
     case 8:
         temp_v0 = ((ListScreenItem *)func_8040EC30_de(root, 0x316U))->alpha;

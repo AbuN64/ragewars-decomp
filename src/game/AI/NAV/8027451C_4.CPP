@@ -8,10 +8,10 @@ extern f32 D_800C49F0_de;
 
 extern s32 D_800CD3E8;
 
-extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 /* Returns the normalised cross product of a path node's two edge vectors, cached in D_80115E20 for the last node seen, with a default up vector for a null node.
-   Adapted from func_802750B0_de with the edge vectors computed through the Particle_SubtractVectors subtract helper, the cross product arguments in forward order, and the cache globals changed. */
+   Adapted from func_802750B0_de with the edge vectors computed through the GraphU64_SubtractVectors subtract helper, the cross product arguments in forward order, and the cache globals changed. */
 
 
 
@@ -23,7 +23,7 @@ extern float D_800C49F8_de;
 extern int D_800CD3E8;
 
 extern int D_800CD3EC;
-extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
@@ -35,16 +35,16 @@ static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
         D_80115E10.z = 0;
         D_80115E10.y = D_800C49F8_de;
     } else if ((int)node != D_800CD3E8) {
-        Particle_SubtractVectors(&a, node->cur, node->prev);
-        Particle_SubtractVectors(&b, node->next, node->cur);
-        Particle_CrossVectors(&D_80115E10, &a, &b);
+        GraphU64_SubtractVectors(&a, node->cur, node->prev);
+        GraphU64_SubtractVectors(&b, node->next, node->cur);
+        GraphU64_CrossVectors(&D_80115E10, &a, &b);
     }
     D_800CD3E8 = (int)node;
     *out = D_80115E10;
     return out;
 }
 
-void Nav_ScaleWordsToFloats(void *arg0) {
+void Region_ScaleWordsToFloats(void *arg0) {
     s32 *ip = (s32 *)arg0;
     f32 *fp = (f32 *)arg0;
     f32 scale = D_800C49EC_de;
@@ -61,7 +61,7 @@ void Nav_ScaleWordsToFloats(void *arg0) {
 
 
 
-void Nav_DecodePackedRegion(CGameRegion *dst, Packed *src, char *base, int unused, char *extra) {
+void Region_DecodePackedRegion(CGameRegion *dst, Packed *src, char *base, int unused, char *extra) {
     int i;
 
     dst->unk0 = src->unk0;
@@ -77,7 +77,7 @@ void Nav_DecodePackedRegion(CGameRegion *dst, Packed *src, char *base, int unuse
     }
 }
 
-s32 Nav_IsPointInTriangleXZ(Node75 *triangle, f32 x, f32 z) {
+s32 Region_IsPointInTriangleXZ(Node75 *triangle, f32 x, f32 z) {
     s32 i;
     CVector3 *vertexA;
     CVector3 *vertexB;
@@ -102,7 +102,7 @@ s32 Nav_IsPointInTriangleXZ(Node75 *triangle, f32 x, f32 z) {
     return 1;
 }
 
-CVector3 *Nav_GetNodeEdgeCross(CVector3 *out, Node75 *node) {
+CVector3 *Region_GetNodeEdgeCross(CVector3 *out, Node75 *node) {
     CVector3 a;
     CVector3 b;
     CVector3 *b_ptr;
@@ -112,24 +112,24 @@ CVector3 *Nav_GetNodeEdgeCross(CVector3 *out, Node75 *node) {
         D_80115E10.z = 0;
         D_80115E10.y = D_800C49F0_de;
     } else if ((s32)node != D_800CD3E8) {
-        Particle_SubtractVectors(&a, node->cur, node->prev);
+        GraphU64_SubtractVectors(&a, node->cur, node->prev);
         b_ptr = &b;
-        Particle_SubtractVectors(b_ptr, node->next, node->cur);
-        Particle_CrossVectors(&D_80115E10, &a, b_ptr);
+        GraphU64_SubtractVectors(b_ptr, node->next, node->cur);
+        GraphU64_CrossVectors(&D_80115E10, &a, b_ptr);
     }
     *out = D_80115E10;
     D_800CD3E8 = (s32)node;
     return out;
 }
 
-CVector3 *Nav_GetNodeNormal(CVector3 *out, Node75 *node) {
+CVector3 *Region_GetNodeNormal(CVector3 *out, Node75 *node) {
     if (node == 0) {
         D_80115E20.x = 0;
         D_80115E20.z = 0;
         D_80115E20.y = D_800C49F4_de;
     } else if ((int)node != D_800CD3EC) {
         cross_edges(&D_80115E20, node);
-        Particle_NormalizeVec3(&D_80115E20);
+        GraphU64_NormalizeVec3(&D_80115E20);
     }
     *out = D_80115E20;
     D_800CD3EC = (int)node;

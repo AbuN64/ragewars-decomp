@@ -21,7 +21,7 @@ void Weapons_SpawnFlaggedEffects(Player *actor, s32 *emittedFlags, s32 emissionF
                 InstHdr_PlayActorGraphSound(actor,
                               actor->pos,
                               entry[1],
-                              Nav_RandomBetween(D_800C21D8_de, D_800C21DC_de));
+                              GraphU64_RandomBetween(D_800C21D8_de, D_800C21DC_de));
             }
             entry += 2;
         } while (entry[0] != 0);
@@ -34,7 +34,7 @@ void Weapons_SpawnFlaggedEffects(Player *actor, s32 *emittedFlags, s32 emissionF
                 InstHdr_PlayActorGraphSound(actor,
                               actor->pos,
                               entry[1],
-                              Nav_RandomBetween(D_800C21E0_de, D_800C21E4_de));
+                              GraphU64_RandomBetween(D_800C21E0_de, D_800C21E4_de));
             }
             entry += 2;
         } while (entry[0] != 0);

@@ -123,11 +123,11 @@ typedef struct PakModelContext {
 } PakModelContext;
 extern Gfx *g_displayListCursor;
 extern s32 D_800D297C, D_800E28D0, D_800CD730;
-extern f32 literals_Engine_GetPlatformRoutePoint;
+extern f32 literals_Scene_GetPlatformRoutePoint;
 extern u8 D_00443128[], D_00443104[];
-extern void Resmgr_FillMemory(void *, s32, s32);
+extern void XPlus_FillMemory(void *, s32, s32);
 extern u8 *func_8028CFA0_de(void *, s32, s32);
-extern void Particle_TransformPoint(void *, CVector3 *, CVector3 *);
+extern void GraphU64_TransformPoint(void *, CVector3 *, CVector3 *);
 extern void func_802466A0_de(u8 *, s32, s32, s32, u8 *, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
 extern void func_8024B2D0_de(u8 *);
 extern s32 func_8025477C_de(void);
@@ -135,9 +135,9 @@ extern void func_8025476C_de(s32);
 extern void func_8028B274_de(void *, u8 *, s32, s32);
 extern void func_8024B8C4_de(u8 *);
 extern void func_80246E44_de(u8 *);
-extern void Render_BeginModelBatch(void);
+extern void Geometry_BeginModelBatch(void);
 extern void func_80249E28_de(void *object, void *camera);
-extern void Render_FlushModelBatch(void);
+extern void Geometry_FlushModelBatch(void);
 static inline PreviewWidget *pakLoadModel(PakModelEntry *entry, s32 id, s32 variant) {
     StateRecAt47C *owner = entry->state;
     PreviewWidget *source = (PreviewWidget *)func_8028CFA0_de(&g_world, id, variant);
@@ -173,7 +173,7 @@ void Pak_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unused
     f32 ratioX;
     f32 ratioY;
     f32 wobble, opacity;
-    Resmgr_FillMemory(&zero, 0, 0xC);
+    XPlus_FillMemory(&zero, 0, 0xC);
     selectedWidget = entry->state;
     if (selectedWidget == 0) return;
     widget = selectedWidget;
@@ -197,7 +197,7 @@ void Pak_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unused
     }
     offset = def->offset;
     offset.y = offset.y - widget->size * scaled.y * 0.8f;
-    Particle_TransformPoint(&context->screen->camera, &offset, &placed);
+    GraphU64_TransformPoint(&context->screen->camera, &offset, &placed);
     if (link != 0 && !(entry->flags & 0x2000000)) {
         func_802466A0_de(draw, -1, def->kind, D_800CD8D0, link, -1, 0,
                          context->screen->heading + RW_PI_F6, placed, 0,
@@ -233,19 +233,19 @@ void Pak_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unused
     draw->position0 = placed;
     draw->referencePosition = placed;
     func_80246E44_de(draw);
-    draw->yaw = draw->yaw + def->rotationSpeed * literals_Engine_GetPlatformRoutePoint;
+    draw->yaw = draw->yaw + def->rotationSpeed * literals_Scene_GetPlatformRoutePoint;
     draw->position0 = placed;
     draw->referencePosition = placed;
-    Render_BeginModelBatch();
+    Geometry_BeginModelBatch();
     func_80249E28_de(draw, context->screen);
-    Render_FlushModelBatch();
+    Geometry_FlushModelBatch();
 }
 
 #include "MENU/OBJECT1C8.H"
 #include "MENU/MENU_BOX.H"
-extern void *Items_GetListContext(s8 *member);
-extern void Items_StopMenuPulse(struct Object1C8 *object);
-extern void Items_StartMenuPulse(struct Object1C8 *object);
+extern void *Pak_GetListContext(s8 *member);
+extern void Pak_StopMenuPulse(struct Object1C8 *object);
+extern void Pak_StartMenuPulse(struct Object1C8 *object);
 typedef struct MenuBuildState MenuBuildState;
 typedef struct MenuBuildEntry MenuBuildEntry;
 /* One row of a menu definition's item table (0x24 bytes). */
@@ -367,7 +367,7 @@ void Pak_InitializeMenu(MenuBuildState *menu, void **allocation, MenuBuildDefini
     menu->value34 = 0;
     menu->value38 = 1;
     menu->value3C = 0;
-    menu->context = Items_GetListContext((s8 *)owner);
+    menu->context = Pak_GetListContext((s8 *)owner);
     menu->owner = owner;
     for (bank = 0; bank < 2; bank++) {
         for (i = 0; i < 8; i++) {
@@ -385,8 +385,8 @@ void Pak_InitializeMenu(MenuBuildState *menu, void **allocation, MenuBuildDefini
     input->field_B0 = 0;
     input->field_B4 = 0;
     input->field_BC = 0;
-    Items_StopMenuPulse((struct Object1C8 *)menu);
-    Items_StartMenuPulse((struct Object1C8 *)menu);
+    Pak_StopMenuPulse((struct Object1C8 *)menu);
+    Pak_StartMenuPulse((struct Object1C8 *)menu);
     if (definition->initialize != 0) definition->initialize(menu, owner);
     i = menu->count;
     entry = menu->entries;

@@ -30,7 +30,7 @@ extern s32 GetMenuScreenOwner(void);
 extern void *Frontend_GetScreenData(s32 index);
 extern void Frontend_ReplaceNodeRefs(NodeRecAt44 *node, void *from, void *to);
 extern MenuWidget *func_8040EC30_de(void *root, s32 id);
-extern void *Scene_AllocateMemory(s32 size);
+extern void *Cache_AllocateMemory(s32 size);
 
 /* Appends to a menu: passes the next free 20-byte entry at offset 0x48, selected by the count at
    0x114, to func_802A025C_de and increments the count. func_8041AD10_de selects an entry. */
@@ -38,7 +38,7 @@ extern void *Scene_AllocateMemory(s32 size);
 
 
 
-extern u8 *Resmgr_CopyString(u8 *, u8 *);
+extern u8 *XPlus_CopyString(u8 *, u8 *);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3400, an actor kind at D_800E3404 and a handler at D_800E3408: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
 
@@ -84,7 +84,7 @@ extern void Frontend_DrawVisibleSiblings(void *, Args);
 
 
 
-/* Calls Scene_FreeMemory with the arguments it was given and returns zero. */
+/* Calls Cache_FreeMemory with the arguments it was given and returns zero. */
 
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3460, an actor kind at D_800E3464 and a handler at D_800E3468: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
@@ -94,11 +94,11 @@ extern void Frontend_DrawVisibleSiblings(void *, Args);
 
 
 
-/* Calls Render_PlayFlatSound with 0xE74 and sets the byte at 0x10 of every child in the list at 0x8 of arg0 whose halfword at 0xE is not 8 to 100, returning zero. Adapted from func_802A1E5C_de with both stores to 0x5C and 0x48 removed. */
+/* Calls SoundElement_PlayFlatSound with 0xE74 and sets the byte at 0x10 of every child in the list at 0x8 of arg0 whose halfword at 0xE is not 8 to 100, returning zero. Adapted from func_802A1E5C_de with both stores to 0x5C and 0x48 removed. */
 
 
 
-/* Releases the supplied object through Scene_FreeMemory and returns zero. */
+/* Releases the supplied object through Cache_FreeMemory and returns zero. */
 
 
 MenuListWidget *func_8041ABC0_de(s32 arg0, s32 arg1) {
@@ -109,8 +109,8 @@ MenuListWidget *func_8041ABC0_de(s32 arg0, s32 arg1) {
 
     source = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());
-    result = Scene_AllocateMemory(0x118);
-    Resmgr_FillBytes(result, 0, 0x118);
+    result = Cache_AllocateMemory(0x118);
+    XPlus_FillBytes(result, 0, 0x118);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB64;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
@@ -137,13 +137,13 @@ s32 func_8041AD04_de(s32 *record) {
 
 
 
-void Menu_SelectListEntry(struct MenuListWidget *menu, s32 index) {
+void SmpButton_SelectListEntry(struct MenuListWidget *menu, s32 index) {
     menu->index = index;
     menu->owner->selected = &menu->entries[index];
 }
 
-void Menu_AppendListText(struct MenuListWidget *menu, u8 *text) {
-    Resmgr_CopyString(menu->entries[menu->count].text, text);
+void SmpButton_AppendListText(struct MenuListWidget *menu, u8 *text) {
+    XPlus_CopyString(menu->entries[menu->count].text, text);
     menu->count++;
 }
 
@@ -173,7 +173,7 @@ s32 func_8041AD7C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return 0;
 }
 
-void Menu_DrawListWidget(Shared_Item *widget, Args args) {
+void SmpButton_DrawListWidget(Shared_Item *widget, Args args) {
     Quad_func_802A1BE0_de first;
     Quad_func_802A1BE0_de basis;
     Quad_func_802A1BE0_de value;
@@ -234,7 +234,7 @@ s32 func_8041AF70_de(struct MenuRecAt54 *menu) {
 s32 func_8041AFA0_de(struct MenuRecAt54 *arg0) {
     struct ItemRecAt10 *p;
 
-    Render_PlayFlatSound(0xE74);
+    SoundElement_PlayFlatSound(0xE74);
     p = arg0->items;
     if (p != 0) {
         do {
@@ -256,7 +256,7 @@ s32 func_8041AFF8_de(struct MenuRecAt114 *menu, void *second, void *third, s32 a
             menu->index = 0;
         }
         owner->selected = &menu->entries[menu->index];
-        Render_PlayFlatSound(0xE81);
+        SoundElement_PlayFlatSound(0xE81);
         return 0;
     }
     return 0;
@@ -271,18 +271,18 @@ s32 func_8041B05C_de(struct MenuRecAt114 *menu, void *second, void *third, s32 a
             menu->index = menu->count - 1;
         }
         owner->selected = &menu->entries[menu->index];
-        Render_PlayFlatSound(0xE81);
+        SoundElement_PlayFlatSound(0xE81);
         return 0;
     }
     return 0;
 }
 
 s32 func_8041B0C0_de(void *arg0) {
-    Scene_FreeMemory(arg0);
+    Cache_FreeMemory(arg0);
     return 0;
 }
 
-void Menu_RegisterButtonClass(void) {
+void SmpButton_RegisterButtonClass(void) {
     func_802982C4_de(0xB61, D_0041B340, D_0041B3D0, 3);
 }
 
@@ -293,8 +293,8 @@ void func_8041B110_de(s32 arg0) {
 
     source = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());
-    result = Scene_AllocateMemory(0x44);
-    Resmgr_FillBytes(result, 0, 0x44);
+    result = Cache_AllocateMemory(0x44);
+    XPlus_FillBytes(result, 0, 0x44);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB61;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
@@ -311,8 +311,8 @@ void func_8041B22C_de(Record_func_8041B22C_de *source) {
         return;
     }
     context = Frontend_GetScreenData(GetMenuScreenOwner());
-    result = Scene_AllocateMemory(0x44);
-    Resmgr_FillBytes(result, 0, 0x44);
+    result = Cache_AllocateMemory(0x44);
+    XPlus_FillBytes(result, 0, 0x44);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB61;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
@@ -347,7 +347,7 @@ s32 func_8041B340_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return 0;
 }
 
-void Menu_DrawButtonWidget(Shared_Item *widget, Args args) {
+void SmpButton_DrawButtonWidget(Shared_Item *widget, Args args) {
     Quad_func_802A1BE0_de first;
     Quad_func_802A1BE0_de basis;
     Quad_func_802A1BE0_de value;
@@ -408,7 +408,7 @@ s32 func_8041B534_de(struct MenuRecAt54 *menu) {
 s32 func_8041B564_de(OwnerRecAt44 *arg0) {
     void *p;
 
-    Render_PlayFlatSound(0xE74);
+    SoundElement_PlayFlatSound(0xE74);
     p = arg0->root;
     if (p != 0) {
         do {
@@ -423,7 +423,7 @@ s32 func_8041B564_de(OwnerRecAt44 *arg0) {
 
 int func_8041B5BC_de(void *object)
 {
-    Scene_FreeMemory(object);
+    Cache_FreeMemory(object);
     return 0;
 }
 

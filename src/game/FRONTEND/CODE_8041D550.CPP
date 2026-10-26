@@ -197,11 +197,11 @@ void Frontend_AdvanceActiveSlot(int *cursor) {
 }
 
 
-/* Releases the object D_800E3590 holds through Scene_FreeMemory, clears D_800E3590 and returns zero.
+/* Releases the object D_800E3590 holds through Cache_FreeMemory, clears D_800E3590 and returns zero.
  * The hub names D_800E3590 as the menu block it points at; the release helper takes a plain pointer
  * and the clear stores a null word. */
 s32 Frontend_FreeMenuBlock(void) {
-    Scene_FreeMemory(D_800E3590);
+    Cache_FreeMemory(D_800E3590);
     D_800E3590 = 0;
     return 0;
 }

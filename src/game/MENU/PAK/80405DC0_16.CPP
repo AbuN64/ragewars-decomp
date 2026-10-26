@@ -7,7 +7,7 @@
 #include "TYPES.H"
 #include "MENU/PAK/80405DC0_16.H"
 #include "RESMGR/802A0888.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Returns the address of block n, n times 256; block zero is the area 0x610 bytes into the
    buffer D_8011FECC points to. */
@@ -17,11 +17,11 @@ extern char *D_8011FECC;
 extern void func_80253908_de(s32 a);
 
 
-extern void **Scene_AllocateResource(s32, s32, s32, char *);
+extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
 
 /* Releases the two active resources and clears their associated state. */
-void Scene_ReleaseResource(void *, void *);
+void Cache_ReleaseResource(void *, void *);
 
  /* extern */
 void func_80253908_de(s32);
@@ -65,18 +65,18 @@ void func_804098CC_de(void ***handle, void **data, s32 units) {
 
     if (*handle != 0) {
         func_80253908_de(0);
-        Scene_ReleaseResource(0, *handle);
+        Cache_ReleaseResource(0, *handle);
     }
     if (units != 0) {
         units <<= 8;
     } else {
         units = (s32)(D_8011FECC + 0x610);
     }
-    block = Scene_AllocateResource(0, units, 0x33, g_pakSingleSaveBlockName);
+    block = Cache_AllocateResource(0, units, 0x33, g_pakSingleSaveBlockName);
     *handle = block;
     first = *block;
     *data = first;
-    Resmgr_FillMemory(first, 0, units);
+    XPlus_FillMemory(first, 0, units);
 }
 
 void func_80409964_de(void) {
@@ -84,10 +84,10 @@ void func_80409964_de(void) {
         func_80253908_de(0);
     }
     if (D_800DE860_de != 0) {
-        Scene_ReleaseResource(0, D_800DE860_de);
+        Cache_ReleaseResource(0, D_800DE860_de);
     }
     if (D_800DE864_de != 0) {
-        Scene_ReleaseResource(0, D_800DE864_de);
+        Cache_ReleaseResource(0, D_800DE864_de);
     }
     D_800DE860_de = 0;
     D_800DE864_de = 0;

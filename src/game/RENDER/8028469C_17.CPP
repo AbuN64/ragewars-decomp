@@ -27,12 +27,12 @@ static inline f32 distanceToNode(func_80285880_S1 *node, CVector3 from) {
 }
 /* Sums the strength of every source in the pool at the given position (inverse-distance falloff scaled by each
  * source's two curves), clamped to 0..1; the pool is read with interrupts disabled. */
-f32 Render_GetSpatialEffectLevel(func_80285D00_S1 *pool, CVector3 position) {
+f32 Rumble_GetSpatialEffectLevel(func_80285D00_S1 *pool, CVector3 position) {
     f32 value = pool->baseLevel;
     s32 mask = __osDisableInt();
     func_80285880_S1 *node;
     f32 distance, amount, first, second, limit;
-    if (D_801462C8.counters.transitionActive == 1 || Camera_IsSequenceInWindow() != 0) {
+    if (D_801462C8.counters.transitionActive == 1 || Cinema_IsSequenceInWindow() != 0) {
         value = 0.0f;
     } else {
         node = pool->unk14.head;
@@ -172,7 +172,7 @@ f32 func_802859D0_de(f32 *arg0, u32 arg1, u32 arg2, u32 arg3) {
     return factor * first * Control_SampleEffectCurve(&arg0[11]);
 }
 
-void Render_InitPoolNodes(void *arg0, void *arg1, s32 arg2) {
+void Rumble_InitPoolNodes(void *arg0, void *arg1, s32 arg2) {
 
     s32 i;
     NodeCode8028469C *p;
@@ -238,7 +238,7 @@ void func_80285C78_de(void *pool) {
     __osRestoreInt(saved);
 }
 
-void Render_FreeAllPoolNodes(void *arg0) {
+void Rumble_FreeAllPoolNodes(void *arg0) {
 
     void *node;
     void *next;

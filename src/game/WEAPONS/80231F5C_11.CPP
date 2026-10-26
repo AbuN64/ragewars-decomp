@@ -14,7 +14,7 @@ extern s32 func_802301F4_de();
 #include "WEAPONS/80231F5C_11.H"
 #include "WEAPONS/80213ED4.H"
 #include "COMMON/OBJB.H"
-extern void Items_ReleaseObjectHandles(ResourceHandleOwner *object);
+extern void Ovlgame_ReleaseObjectHandles(ResourceHandleOwner *object);
 
 extern s32 func_802301F4_de(void *, void *);
 
@@ -42,7 +42,7 @@ extern s32 D_80140FF8;
 void Weapon_ReleaseHandlesAndExitState39(void *arg0) {
     s32 temp_s0;
     temp_s0 = (((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link);
-    Items_ReleaseObjectHandles(temp_s0);
+    Ovlgame_ReleaseObjectHandles(temp_s0);
     if ((((struct ObjRecAt650 *) ((s8 *) temp_s0))->unk650) == 0x27) {
         Weapons_SetPlayerState((void *) temp_s0, (void *) temp_s0, 2);
     }

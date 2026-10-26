@@ -12,5 +12,5 @@
 #define LINES_TEXT D_800D3038
 #endif
 void func_80294158_de(void *state) {
-    Render_DrawTextLines(state, 1, LINES_TEXT, D_800E28D0 / 2, 5, 0xA, 0.75f, 1.0f);
+    SetN64_DrawTextLines(state, 1, LINES_TEXT, D_800E28D0 / 2, 5, 0xA, 0.75f, 1.0f);
 }

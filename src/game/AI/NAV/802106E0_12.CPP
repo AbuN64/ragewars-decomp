@@ -68,9 +68,9 @@ void Nav_UpdateCloseCombat(CloseAttackActor *actor) {
             speed = Nav_ScaleCharacterSettingByDifficulty(brain);
             strafe = speed;
             if (--brain->timer <= 0) {
-                brain->timer = Nav_NextRandom() % 4 + 2;
-                brain->pattern = Nav_NextRandom() % 2;
-                brain->distance = Nav_NextRandom() % 32400 + 10000;
+                brain->timer = GraphU64_NextRandom() % 4 + 2;
+                brain->pattern = GraphU64_NextRandom() % 2;
+                brain->distance = GraphU64_NextRandom() % 32400 + 10000;
             }
             pos = &target->pos;
             Nav_SteerTowardPoint(brain, pos, 2.0f, Nav_UpdateDifficultyAimJitter(brain));
@@ -156,11 +156,11 @@ halt:
                 brain->player->strafe = 0.0f;
             }
             brain->routeNodes[0] = -1;
-            if (--brain->fireTimer == 0 && (Nav_NextRandom() % 100) < (s32)speed) {
+            if (--brain->fireTimer == 0 && (GraphU64_NextRandom() % 100) < (s32)speed) {
                 brain->player->buttons |= 0x10;
             }
             if (brain->fireTimer < 0) {
-                brain->fireTimer = ((Nav_NextRandom() % 1) + 2) * 0xF;
+                brain->fireTimer = ((GraphU64_NextRandom() % 1) + 2) * 0xF;
             }
             Nav_DispatchActorBehavior(brain);
         } else {

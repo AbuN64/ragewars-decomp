@@ -11,9 +11,9 @@
 /* Opens the idle-time prompt when allowed and reports whether the pause input remains active. */
 
 
-s32 Camera_IsSequenceInWindow();                                /* extern */
+s32 Cinema_IsSequenceInWindow();                                /* extern */
 s32 func_80245850_de();                                /* extern */
-s32 Camera_GetSequenceRequest();                                /* extern */
+s32 Cinema_GetSequenceRequest();                                /* extern */
 void func_804037D4_de(void *);                            /* extern */
 s32 Pak_CountLiveNodes(void *);                             
 
@@ -24,8 +24,8 @@ s32 func_80294B9C_de(ObjRecAt26DD4 *arg0) {
     s32 var_v0;
     Prompt *prompt;
 
-    if ((Pak_CountLiveNodes(&D_8014561C) == 0) && (Camera_IsSequenceInWindow() != 0)) {
-        if (Camera_GetSequenceRequest() == 0x78) {
+    if ((Pak_CountLiveNodes(&D_8014561C) == 0) && (Cinema_IsSequenceInWindow() != 0)) {
+        if (Cinema_GetSequenceRequest() == 0x78) {
             prompt = &D_8014561C.unk1284;
             if (prompt->unk88 == 0) {
                 if (arg0->unk26DD4 == 0) {
@@ -47,10 +47,10 @@ block_7:
 
 struct Context;
 s32 Weapons_ResetPlayerControllers(struct Context *);
-s32 Render_FreeAllPoolNodes(s32 *);
+s32 Rumble_FreeAllPoolNodes(s32 *);
 extern char D_80145040;
 void func_80294C50_de(void) {
-    Render_FreeAllPoolNodes(&D_8010EC90);
+    Rumble_FreeAllPoolNodes(&D_8010EC90);
     Weapons_ResetPlayerControllers(&D_80145040);
 }
 

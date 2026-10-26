@@ -8,7 +8,7 @@
 #include "FRONTEND/80423280_3.H"
 #include "SCENE/802508E0_13.H"
 
-/* Releases the object D_800E4514 holds through Scene_FreeMemory, calls func_802A2360_de, clears
+/* Releases the object D_800E4514 holds through Cache_FreeMemory, calls func_802A2360_de, clears
    D_800E4514 and returns zero. */
 
 
@@ -45,11 +45,11 @@ extern FieldRow D_800E4568[];
 
 extern Handler80423930 D_800E456C;
 
-/* Releases the object D_800E4518 holds through Scene_FreeMemory, calls func_802A2360_de, clears D_800E4518, calls
+/* Releases the object D_800E4518 holds through Cache_FreeMemory, calls func_802A2360_de, clears D_800E4518, calls
    func_80245B28_de and returns zero. */
 
 
-extern void Camera_ReleaseSequenceContext();
+extern void Cinema_ReleaseSequenceContext();
 
 /* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled, for its MESSAGE_COUNT messages from
    FIRST_MESSAGE (0x377 to 0x380 on us) through jtbl_800E1668: one reopens screen D_800E4518 (marking it shown with timer -1 and
@@ -70,7 +70,7 @@ extern void func_8043C278_de(struct MessageScreen *);
 
 extern void Frontend_SetWidgetFlag08(void *object, int enabled);
 
-extern void Camera_ReleaseSequenceContext(void);
+extern void Cinema_ReleaseSequenceContext(void);
 
 extern s32 func_8042ACD8_de(void);
 
@@ -85,7 +85,7 @@ extern FieldRow D_800E45B0[];
 extern Handler80423B88 D_800E45B4;
 
 s32 func_804235E8_de(void) {
-    Scene_FreeMemory(D_800E4514);
+    Cache_FreeMemory(D_800E4514);
     func_802A2360_de();
     D_800E4514 = 0;
     return 0;
@@ -190,10 +190,10 @@ s32 func_80423758_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 s32 func_804237E8_de(void) {
-    Scene_FreeMemory(D_800E4518);
+    Cache_FreeMemory(D_800E4518);
     func_802A2360_de();
     D_800E4518 = 0;
-    Camera_ReleaseSequenceContext();
+    Cinema_ReleaseSequenceContext();
     return 0;
 }
 
@@ -249,7 +249,7 @@ reopen:
     D_800E4518->timer = -1;
     Frontend_SetWidgetFlag08(D_800E4518->window, 1);
     Frontend_SetWidgetFlag08(D_800E4518->second_window, 1);
-    Camera_ReleaseSequenceContext();
+    Cinema_ReleaseSequenceContext();
     goto done;
 code_17:
     func_8042E988_de(0x17);

@@ -6,7 +6,7 @@
 
 
 struct Trigger;
-extern void Actors_DispatchTrigger(struct Trigger *);
+extern void Link_DispatchTrigger(struct Trigger *);
 #if defined(VERSION_EU)
 #else
 #endif

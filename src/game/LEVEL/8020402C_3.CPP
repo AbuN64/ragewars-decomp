@@ -14,7 +14,7 @@
 #include "WEAPONS/80213ED4.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 
-extern void Render_SetActorStateBit(Shared_World *, void *, s32);
+extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
 extern void func_80267198_de(void *, void *, s32, CVector3, ResourceManagerState);
 typedef struct BreakableContactRule {
     u32 flags;
@@ -33,7 +33,7 @@ typedef struct BreakableContactState {
 } BreakableContactState;
 
 /* Apply the descriptor hit rule, then update the contact response timer. */
-void Level_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *hit) {
+void Action_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *hit) {
     BreakableContactRule *rule = (BreakableContactRule *)(ctx->unk_18 + 0x14);
     ResourceManagerState eventState;
     f32 damageScale;
@@ -60,7 +60,7 @@ void Level_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *h
         if (triggerResponse) {
             eventState.active = 0;
             func_80267198_de(ctx, ctx, 6, ctx->unk_8, eventState);
-            Render_SetActorStateBit(&g_world, ctx, 1);
+            Rumble_SetActorStateBit(&g_world, ctx, 1);
         }
     }
     if ((rule->flags & 1) && hit->active != 0) {
@@ -93,19 +93,19 @@ void Level_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *h
 
 
 
-extern s32 Render_TestActorStateBit(void *, void *);
+extern s32 Rumble_TestActorStateBit(void *, void *);
 
 
 extern void func_80278D78_de(struct Shared_Actor *arg0, s32 arg1, void *arg2);
 
-extern void Render_SetActorStateBit(Shared_World *arg0, void *arg1, s32 arg2);
+extern void Rumble_SetActorStateBit(Shared_World *arg0, void *arg1, s32 arg2);
 
 extern void func_80267198_de(void *arg0, void *arg1, s32 arg2,
                           CVector3 arg3, ResourceManagerState arg4);
 
 extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
 
-void Level_ResolveBreakableHit(void *breakableHitContext, ObjectStateCC *hitState) {
+void Action_ResolveBreakableHit(void *breakableHitContext, ObjectStateCC *hitState) {
     ResourceManagerState local;
     s8 factor;
     f32 scale;
@@ -134,17 +134,17 @@ void Level_ResolveBreakableHit(void *breakableHitContext, ObjectStateCC *hitStat
     if (destroy) {
         local.active = 0;
         func_80267198_de(breakableHitContext, breakableHitContext, 7, ((BreakableHitContext *)(breakableHitContext))->unk_8, local);
-        Render_SetActorStateBit(&g_world, breakableHitContext, 0);
+        Rumble_SetActorStateBit(&g_world, breakableHitContext, 0);
     }
 }
 
-void Level_SetEnterHandler(void *unused0, Dest *arg1) {
+void Action_SetEnterHandler(void *unused0, Dest *arg1) {
     arg1->table = &D_800C8380_de;
     arg1->enter = &D_00204C34;
 }
 
 void func_80204BD0_de(void *actor, void *requestContext) {
-    s32 different = Render_TestActorStateBit(&g_world, actor) != 1;
+    s32 different = Rumble_TestActorStateBit(&g_world, actor) != 1;
 
     if (different == 0) {
         Weapons_RequestActorState(actor, requestContext, 0);
@@ -170,7 +170,7 @@ void func_80204C68_de(void *actor, ActorMotionState *motionState) {
 
     local.active = 0;
     flag = &g_world;
-    Render_SetActorStateBit(flag, actor, 1);
+    Rumble_SetActorStateBit(flag, actor, 1);
     func_80278D78_de(actor, 0x4000, actor);
     motionState->speed = 0;
     func_802A5D38_de(&D_801379C0, (s32)actor);
@@ -187,7 +187,7 @@ void func_80204D2C_de(BreakableHitContext *breakableHitContext) {
 
     local.active = 0;
     flag = &g_world;
-    Render_SetActorStateBit(flag, breakableHitContext, 0);
+    Rumble_SetActorStateBit(flag, breakableHitContext, 0);
     func_80278D78_de(breakableHitContext, 0x8000, breakableHitContext);
     func_802A5D38_de(&D_801379C0, (s32)breakableHitContext);
     if (flag->mode != 4) {
@@ -211,12 +211,12 @@ void func_80204E48_de(Trigger *trigger) {
     func_8028B670_de(&g_world, trigger->owner, trigger->actor, 0);
 }
 
-extern s32 Render_TestActorStateBit(void *, void *);
+extern s32 Rumble_TestActorStateBit(void *, void *);
 
 
 
 int func_80204E78_de(int actor) {
-    return Render_TestActorStateBit(&g_world, actor) == 1;
+    return Rumble_TestActorStateBit(&g_world, actor) == 1;
 }
 
 /** Submit an object's three-word record, then attach it in mode one. */
@@ -225,7 +225,7 @@ void func_80204EA8_de(LevelActor *actor) {
 
     pair.active = 0;
     func_80267198_de(actor, actor, 6, actor->position0, pair);
-    Render_SetActorStateBit(&g_world, actor, 1);
+    Rumble_SetActorStateBit(&g_world, actor, 1);
 }
 
 /** Submit an object's three-word record, then attach it to the global owner. */
@@ -234,7 +234,7 @@ void func_80204F10_de(LevelActor *actor) {
 
     pair.active = 0;
     func_80267198_de(actor, actor, 7, actor->position0, pair);
-    Render_SetActorStateBit(&g_world, actor, 0);
+    Rumble_SetActorStateBit(&g_world, actor, 0);
 }
 
 /** Update the floating state at offsets 0x40 and 0x64 under its range rules. */

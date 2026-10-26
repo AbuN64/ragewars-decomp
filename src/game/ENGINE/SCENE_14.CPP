@@ -17,11 +17,11 @@
 #include "SCENE/802508E0_4.H"
 #include "SYSTEM_3/80265370.H"
 #include "RENDER_4/8028FD2C_6.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
-extern void Particle_SubtractVectors(CVector3 *out, void *arg1, void *arg2);
+extern void GraphU64_SubtractVectors(CVector3 *out, void *arg1, void *arg2);
 
-extern s32 Render_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);
+extern s32 SetN64_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);
 
 extern s32 func_80254284_de(s32 arg0, s32 *arg1, s32 arg2, void *arg3);
 
@@ -35,13 +35,13 @@ extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 extern void func_8028DA74_de(void *arg0);
 
 
-extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
+extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
 extern s32 D_00285160;
 
 
 
-extern void Scene_UnlockResource(s32 arg0, s32 arg1);
+extern void Cache_UnlockResource(s32 arg0, s32 arg1);
 
 s32 func_8029076C_de(s32, s32);
 
@@ -51,23 +51,23 @@ s32 func_8029076C_de(s32, s32);
 extern void StaticInstance_DispatchAttachmentEvents(s32, s32);
 
 
-/* Releases the resource of each of the owner's listed entries through Scene_UnlockResource, then clears the counters at 0x944, 0xC4C and 0x10BC, and moves the entry count to 0x1500 and zeroes it. */
+/* Releases the resource of each of the owner's listed entries through Cache_UnlockResource, then clears the counters at 0x944, 0xC4C and 0x10BC, and moves the entry count to 0x1500 and zeroes it. */
 
 
 
 
 
-extern void Scene_UnlockResource(s32, s32);
+extern void Cache_UnlockResource(s32, s32);
 
 
 
-void *Engine_GetPlatformRoutePoint(void *a, s32 b, s32 c) {
+void *Scene_GetPlatformRoutePoint(void *a, s32 b, s32 c) {
     void *r1;
     ResidentDataChunk *r2;
     s32 field;
 
-    r1 = Render_GetPackSection(((Shared_World *)a)->routeCount, b);
-    r2 = Render_GetPackSection(r1, 1);
+    r1 = SetN64_GetPackSection(((Shared_World *)a)->routeCount, b);
+    r2 = SetN64_GetPackSection(r1, 1);
     field = r2->width;
     return r2->data + (c * field);
 }
@@ -86,12 +86,12 @@ s32 func_8028D28C_de(void *arg0, s32 arg1, void *arg2) {
     bestIndex = D_800C5300_de;
     bestDist = 0.0f;
     index = 0;
-    list = Render_GetPackSection(Render_GetPackSection(world->routeCount, arg1), 1);
+    list = SetN64_GetPackSection(SetN64_GetPackSection(world->routeCount, arg1), 1);
     count = list->count;
     item = list->frames;
     if (count > 0) {
         do {
-            Particle_SubtractVectors(&position, arg2, item);
+            GraphU64_SubtractVectors(&position, arg2, item);
             distSq = (position.x * position.x) +
                      (position.y * position.y) +
                      (position.z * position.z);
@@ -113,7 +113,7 @@ void func_8028D380_de(Shared_World *world, s32 type, void *levelName, s32 arg3) 
     CachedResource *node;
     s32 count;
 
-    tempv0 = Render_GetDirectoryEntry(world->resourceDirectory, world->resourceBank, type);
+    tempv0 = SetN64_GetDirectoryEntry(world->resourceDirectory, world->resourceBank, type);
     temps2 = func_80254284_de(0, &specialTable, tempv0, g_levelIndexText);
     node = func_80254408_de(0, specialTable, 8, tempv0, (s32)world, 0, &D_800C5280_de + 4);
     count = node->unk04;
@@ -121,9 +121,9 @@ void func_8028D380_de(Shared_World *world, s32 type, void *levelName, s32 arg3) 
         count = arg3;
     }
     func_802BD3A0_de(levelName, node->data, count);
-    Scene_ReleaseResource(0, (s32)node);
+    Cache_ReleaseResource(0, (s32)node);
     if (world->level != type) {
-        Scene_ReleaseResource(0, temps2);
+        Cache_ReleaseResource(0, temps2);
     }
 }
 
@@ -139,16 +139,16 @@ void *func_8028D474_de(void *world, s32 record) {
         if (((struct MeasuredRecAtCV4 *)(world))->value != 0) {
             size = 0x10;
             one = 1;
-            resource = Scene_RequestResource(0, ((struct MeasuredRecAtCV4 *)(world))->value,
+            resource = Cache_RequestResource(0, ((struct MeasuredRecAtCV4 *)(world))->value,
                                      ((struct MeasuredRecAtCV4 *)(world))->value,
                                      ((struct MeasuredRecAt10V1 *)(world))->value, size, 0, 0,
                                      D_800C5290_de, one);
             if (resource != 0) {
-                key = Render_LocatePackSection((s32)*resource, ((struct MeasuredRecAtCV4 *)(world))->value,
+                key = SetN64_LocatePackSection((s32)*resource, ((struct MeasuredRecAtCV4 *)(world))->value,
                                     record, &sp28);
-                Scene_ReleaseResource(0, resource);
+                Cache_ReleaseResource(0, resource);
                 if ((((struct MeasuredRecAt14V1 *)(world))->value =
-                     Scene_RequestResource(0, key, key, sp28, size, 0,
+                     Cache_RequestResource(0, key, key, sp28, size, 0,
                                    &D_00285160, D_800C52BC, one)) != 0) {
                     ((struct MeasuredCode8028B64C *)(world))->value = record;
                 } else {
@@ -169,15 +169,15 @@ void func_8028D59C_de(void *arg0) {
     s32 val;
 
     if (object->loaded != 0) {
-        list = (s32 *) Render_GetPackSection(object->model, 0);
+        list = (s32 *) SetN64_GetPackSection(object->model, 0);
         if (*list != 0) {
             do {
                 val = *list;
                 list += 1;
-                Scene_UnlockResource(0, val);
+                Cache_UnlockResource(0, val);
             } while (*list != 0);
         }
-        Scene_ReleaseResource(0, object->loaded);
+        Cache_ReleaseResource(0, object->loaded);
         object->loaded = 0;
         object->model = 0;
     }
@@ -293,7 +293,7 @@ void func_8028D888_de(Owner_func_8028D888_de *owner) {
     n = owner->count;
     entries = owner->entries;
     for (i = 0; i < n; i++) {
-        Scene_UnlockResource(0, entries[i].x);
+        Cache_UnlockResource(0, entries[i].x);
     }
     count = owner->count;
     owner->unk944 = 0;
@@ -308,7 +308,7 @@ void func_8028D90C_de(void) {
     s32 var_a1;
 
     func_80245A20_de(0);
-    Camera_SetResponse(D_800C5338_de);
+    Cinema_SetResponse(D_800C5338_de);
     var_a0 = 0x1E0;
     if (D_800E28D8 == 0) {
         var_a0 = 0x17C;
@@ -331,16 +331,16 @@ void func_8028D964_de(void *world, s32 arg1) {
         if (((struct MeasuredRecAtCV3 *)(world))->value != 0) {
             size = 0x10;
             one = 1;
-            resource = Scene_RequestResource(0, ((struct MeasuredRecAtCV3 *)(world))->value,
+            resource = Cache_RequestResource(0, ((struct MeasuredRecAtCV3 *)(world))->value,
                                      ((struct MeasuredRecAtCV3 *)(world))->value,
                                      ((struct MeasuredRecAt10V2 *)(world))->value, size, 0, 0,
                                      D_800C5290_de, one);
             if (resource != 0) {
-                key = Render_LocatePackSection((s32)*resource, ((struct MeasuredRecAtCV3 *)(world))->value,
+                key = SetN64_LocatePackSection((s32)*resource, ((struct MeasuredRecAtCV3 *)(world))->value,
                                     arg1, &sp28);
-                Scene_ReleaseResource(0, resource);
+                Cache_ReleaseResource(0, resource);
                 if ((((struct MeasuredRecAt14V6 *)(world))->value =
-                     Scene_RequestResource(0, key, key, sp28, size, 0,
+                     Cache_RequestResource(0, key, key, sp28, size, 0,
                                    &D_00285160, D_800C52BC, one)) != 0) {
                     ((struct MeasuredCode8028B64C *)(world))->value = arg1;
                 }

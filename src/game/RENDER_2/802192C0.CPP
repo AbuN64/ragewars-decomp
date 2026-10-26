@@ -21,14 +21,14 @@
 
 
 
-extern Clip *Engine_GetPlatformRoute(char *, s32);
+extern Clip *Scene_GetPlatformRoute(char *, s32);
 
 void func_802192C0_de(Cursor *cursor) {
     Clip *clip;
     s32 frames;
     s32 state;
 
-    clip = Engine_GetPlatformRoute(&g_world, cursor->clip);
+    clip = Scene_GetPlatformRoute(&g_world, cursor->clip);
     frames = clip->frames;
     state = cursor->state;
     cursor->previous = cursor->frame;
@@ -79,24 +79,24 @@ void func_802193C8_de(Struct802193C8 *cursorState, s8 initialState) {
     cursorState->field4 = 0;
 }
 
-extern void *Engine_GetPlatformRoutePoint(char *a, unsigned char b, short c);
+extern void *Scene_GetPlatformRoutePoint(char *a, unsigned char b, short c);
 
 
 
 
 
 void *func_80219408_de(Cursor *cursor) {
-    return Engine_GetPlatformRoutePoint(&g_world, cursor->clip, cursor->frame);
+    return Scene_GetPlatformRoutePoint(&g_world, cursor->clip, cursor->frame);
 }
 
-extern void *Engine_GetPlatformRoutePoint(char *a, unsigned char b, short c);
+extern void *Scene_GetPlatformRoutePoint(char *a, unsigned char b, short c);
 
 
 
 
 
 void func_80219434_de(Cursor *cursor) {
-    Engine_GetPlatformRoutePoint(&g_world, cursor->clip, cursor->previous);
+    Scene_GetPlatformRoutePoint(&g_world, cursor->clip, cursor->previous);
 }
 
 /** Initialize the compact state record to its default values. */
@@ -120,14 +120,14 @@ extern char D_800CBC90;
 
 
 
-extern void Render_ClearDepthRect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
+extern void SetN64_ClearDepthRect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);
 extern void func_80272CB0_de(void *arg0, f32 arg1, f32 arg2, f32 arg3);
 extern void TranslateMatrix(char *object, f32 x, f32 y, f32 z);
 extern void SwapMatrixUpForward(void *object);
 extern void CopyMatrix(f32 *arg0, f32 *arg1);
 extern void func_802735A8_de(void *arg0, s32 arg1, f32 arg2, f32 arg3);
-extern void Rsp_ConvertMatrixToFixed(void *arg0, void *arg1);
+extern void GraphU64_ConvertMatrixToFixed(void *arg0, void *arg1);
 extern void func_8026DF30_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 
@@ -152,20 +152,20 @@ void func_80219490_de(char *object, char *camera) {
         return;
     }
 
-    Render_SetColorDither(0xC0);
+    Geometry_SetColorDither(0xC0);
     func_8026E378_de(1, 0x20);
 
     command = g_displayListCursor++;
     gDPSetTexturePersp(command, G_TP_PERSP);
     command = g_displayListCursor++;
     gDPSetTextureFilter(command, G_TF_BILERP);
-    Render_BeginModelBatch();
+    Geometry_BeginModelBatch();
 
     x = ((GameplayCamera *)(camera))->viewLeft;
     y = ((GameplayCamera *)(camera))->viewTop;
     z = ((GameplayCamera *)(camera))->viewHeight + y;
     w = ((GameplayCamera *)(camera))->viewWidth + x;
-    Render_ClearDepthRect(&D_8011FAC0, (s32)x, (s32)w, (s32)y, (s32)z, 0);
+    SetN64_ClearDepthRect(&D_8011FAC0, (s32)x, (s32)w, (s32)y, (s32)z, 0);
 
     func_80272CB0_de(first, ((AnimationSprite *)(object))->scaleX,
                    ((AnimationSprite *)(object))->scaleY, ((AnimationSprite *)(object))->scaleZ);
@@ -182,16 +182,16 @@ void func_80219490_de(char *object, char *camera) {
     }
     {
         s32 offset = (D_800D297C << 6) + 0x10;
-        Rsp_ConvertMatrixToFixed(matrix, object + offset);
+        GraphU64_ConvertMatrixToFixed(matrix, object + offset);
     }
-    Particle_TransformPoint(first, object + 0xA8, output);
+    GraphU64_TransformPoint(first, object + 0xA8, output);
     {
         s32 offset = (D_800D297C << 6) + 0x10;
         func_8026DF30_de(((AnimationSprite *)(object))->model, (s32)(object + offset),
                        (s32)&D_800CBC90, 0, -1);
     }
-    Render_FlushModelBatch();
-    Render_SetColorDither(0);
+    Geometry_FlushModelBatch();
+    Geometry_SetColorDither(0);
     func_8026E378_de(0, 0x20);
 }
 
@@ -207,14 +207,14 @@ static inline char *reactionText(char **text, MenuSettings *settings) { return t
 extern char *D_800D3A40, *D_800D3A44, *D_800D3A48, *D_800D3A54, *D_800D3A58;
 static inline char *reactionText(char *text, MenuSettings *settings) { return text; }
 #endif
-extern void Render_CopyString(char *,const char *);
-extern void Camera_PostScaledScreenMessage(void *,void *,char *,f32);
+extern void SetN64_CopyString(char *,const char *);
+extern void Sky_PostScaledScreenMessage(void *,void *,char *,f32);
 static inline void nextMessage(s32 *next) {
     (*next)++;
     *next %= 4;
 }
 
-void Render_PostKillMessages(Shared_ReactionPlayer *a,Shared_ReactionPlayer *b,Shared_ReactionInteraction *unused) {
+void Player_PostKillMessages(Shared_ReactionPlayer *a,Shared_ReactionPlayer *b,Shared_ReactionInteraction *unused) {
     MenuSettings *settings = &D_80145088.settings;
     MatchModes *modes;
     if (!settings->local) return;
@@ -222,28 +222,28 @@ void Render_PostKillMessages(Shared_ReactionPlayer *a,Shared_ReactionPlayer *b,S
         if (!a->unk5D8->unk8F) return;
         modes = &D_80145088.modes;
         if (modes->tag) {
-            Render_CopyString(a->messages[a->messageNext], reactionText(D_800D3A40, settings));
-            Render_CopyString(a->messages[a->messageNext]+10, b->unk5D8->name);
-            if (a->owner) Camera_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
+            SetN64_CopyString(a->messages[a->messageNext], reactionText(D_800D3A40, settings));
+            SetN64_CopyString(a->messages[a->messageNext]+10, b->unk5D8->name);
+            if (a->owner) Sky_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
             nextMessage(&a->messageNext);
-            Render_CopyString(b->messages[b->messageNext], reactionText(D_800D3A44, settings));
-            Render_CopyString(b->messages[b->messageNext]+11, a->unk5D8->name);
-            if (b->owner) Camera_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
+            SetN64_CopyString(b->messages[b->messageNext], reactionText(D_800D3A44, settings));
+            SetN64_CopyString(b->messages[b->messageNext]+11, a->unk5D8->name);
+            if (b->owner) Sky_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
         } else {
             if (!modes->captureFlag) return;
-            Render_CopyString(a->messages[a->messageNext], reactionText(D_800D3A48, settings));
-            Render_CopyString(a->messages[a->messageNext]+10, b->unk5D8->name);
-            if (a->owner) Camera_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
+            SetN64_CopyString(a->messages[a->messageNext], reactionText(D_800D3A48, settings));
+            SetN64_CopyString(a->messages[a->messageNext]+10, b->unk5D8->name);
+            if (a->owner) Sky_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
             nextMessage(&a->messageNext);
-            Render_CopyString(a->messages[a->messageNext], reactionText(D_800D3A54, settings));
-            if (a->owner) Camera_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
+            SetN64_CopyString(a->messages[a->messageNext], reactionText(D_800D3A54, settings));
+            if (a->owner) Sky_PostScaledScreenMessage(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
             nextMessage(&a->messageNext);
-            Render_CopyString(b->messages[b->messageNext], reactionText(D_800D3A44, settings));
-            Render_CopyString(b->messages[b->messageNext]+11, a->unk5D8->name);
-            if (b->owner) Camera_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
+            SetN64_CopyString(b->messages[b->messageNext], reactionText(D_800D3A44, settings));
+            SetN64_CopyString(b->messages[b->messageNext]+11, a->unk5D8->name);
+            if (b->owner) Sky_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
             nextMessage(&b->messageNext);
-            Render_CopyString(b->messages[b->messageNext], reactionText(D_800D3A58, settings));
-            if (b->owner) Camera_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
+            SetN64_CopyString(b->messages[b->messageNext], reactionText(D_800D3A58, settings));
+            if (b->owner) Sky_PostScaledScreenMessage(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
         }
     }
     nextMessage(&b->messageNext);

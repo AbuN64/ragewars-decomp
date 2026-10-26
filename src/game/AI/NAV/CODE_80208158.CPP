@@ -27,7 +27,7 @@ extern char D_801376F8[];
 extern void Nav_UpdateTargetPitch(Brain *);
 extern s32 Weapons_GetMaxHealth(SharedPlayer *);
 extern void func_802AA79C_de(char *, s32);
-extern void Fx_ClearControllerInput(char *);
+extern void ContPad_ClearControllerInput(char *);
 extern void Nav_HandlePlayerTimeout(Brain *, SharedPlayer *);
 
 void Nav_UpdateComputerPlayerStatus(Brain *brain) {
@@ -83,7 +83,7 @@ void Nav_UpdateComputerPlayerStatus(Brain *brain) {
                 func_802AA794_de(D_801376F8, (f32)tutorial->m_nBastilleShield);
                 if (tutorial->m_nBastilleTimer > 0) {
                     tutorial->m_nBastilleTimer--;
-                    Fx_ClearControllerInput((char *)brain->player + 0x688);
+                    ContPad_ClearControllerInput((char *)brain->player + 0x688);
                     brain->w23C = 0;
                     brain->w240 = 0;
                 }
@@ -108,8 +108,8 @@ void Nav_UpdateComputerPlayerStatus(Brain *brain) {
 }
 
 extern CNavData D_8013B364;
-float Particle_GetPointDistance(void *, void *);
-void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+float GraphU64_GetPointDistance(void *, void *);
+void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 float Nav_SteerTowardPoint(AiController *, CVector3 *,float,float);
 void Nav_SetPitchFromAngle(AiController *,float,s32);
 void Nav_DispatchActorBehavior(AiController *);
@@ -161,7 +161,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
         if (controller->queue[0] != -1) {
                 point = Nav_GetGraphPoint(graph, controller->queue[0]);
                 pos = &controller->player->pos;
-                distance = Particle_GetPointDistance(pos, point);
+                distance = GraphU64_GetPointDistance(pos, point);
                 controller->unk304 = (navigation_attributes(point) & 0x300000) != 0;
                 if (controller->queue[0] == controller->current) {
                     link = Nav_FindLinkIndex(graph, controller->previous, controller->queue[0]);
@@ -174,7 +174,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                         controller->unk30C = 1;
                     }
                     if (portal->kind == 8) {
-                        Particle_GetPointDistance(pos, Nav_GetGraphPoint(graph, controller->current));
+                        GraphU64_GetPointDistance(pos, Nav_GetGraphPoint(graph, controller->current));
                         goal = Nav_GetGraphPoint(graph, controller->queue[0]);
                         controller->unk308 = 1;
                         if (link != controller->unk32C) {
@@ -183,7 +183,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                         }
                         if (controller->unk314 == 0) {
                             start = Nav_GetGraphPoint(graph, controller->current);
-                            Particle_SubtractVectors(&delta, pos, &start->position);
+                            GraphU64_SubtractVectors(&delta, pos, &start->position);
                             if (!(Math_Sqrtf(delta.x * delta.x + delta.z * delta.z) < D_800C1BB8_de)) {
                                 controller->destination = start->position;
                                 return;
@@ -235,7 +235,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                     } else if (portal->kind == 5) {
                         if (controller->unk314 == 0) {
                             entry = Nav_GetGraphPoint(graph, controller->current);
-                            if (!(Particle_GetPointDistance(pos, entry) < D_800C1BC4_de)) {
+                            if (!(GraphU64_GetPointDistance(pos, entry) < D_800C1BC4_de)) {
                                 controller->destination = entry->position;
                                 return;
                             }
@@ -243,7 +243,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                         }
                         if (controller->unk314 == 1) {
                             node = Nav_FindSearchNode(graph, controller->current);
-                            if (Particle_GetPointDistance(&node->platform->pos, &node->endpoint) < D_800C1BC8_de) {
+                            if (GraphU64_GetPointDistance(&node->platform->pos, &node->endpoint) < D_800C1BC8_de) {
                                 controller->destination = node->platform->pos;
                                 player->actionFlags |= 0x10;
                                 controller->unk314 = 2;
@@ -258,7 +258,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                             if (ground != 0) {
                                 riding = ground->resource->kind == 2;
                             }
-                            Particle_SubtractVectors(&delta, pos, &Nav_FindSearchNode(graph, controller->current)->platform->pos);
+                            GraphU64_SubtractVectors(&delta, pos, &Nav_FindSearchNode(graph, controller->current)->platform->pos);
                             gap = Math_Sqrtf(delta.x * delta.x + delta.z * delta.z);
                             if (riding != 0 && gap < D_800C1BCC_de) {
                                 controller->unk314 = 3;
@@ -278,7 +278,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                             }
                             point = Nav_GetGraphPoint(graph, controller->queue[0]);
                             node = Nav_FindSearchNode(graph, controller->queue[0]);
-                            if (Particle_GetPointDistance(&node->platform->pos, &node->endpoint) < D_800C1BD0_de) {
+                            if (GraphU64_GetPointDistance(&node->platform->pos, &node->endpoint) < D_800C1BD0_de) {
                                 controller->destination = point->position;
                                 player->actionFlags |= 0x10;
                             } else {
@@ -368,7 +368,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
         player = controller->player;
         position = &player->pos;
         falling = player->movementFlags & 0x1000;
-        Particle_SubtractVectors(&delta, destination, position);
+        GraphU64_SubtractVectors(&delta, destination, position);
         distance = Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
         graph = &D_8013B364;
         if (falling) {
@@ -434,8 +434,8 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
 #include "COMMON/OBJECTLINKS14.H"
 #include "COMMON/REC.H"
 extern CNavData D_8013B364;
-float Particle_GetPointDistance(void *, void *);
-void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+float GraphU64_GetPointDistance(void *, void *);
+void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 float Nav_SteerTowardPoint(AiController *, CVector3 *,float,float);
 void Nav_SetPitchFromAngle(AiController *,float,s32);
 void Nav_DispatchActorBehavior(AiController *);
@@ -487,7 +487,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
         player = controller->player;
         position = &player->pos;
         falling = player->movementFlags & 0x1000;
-        Particle_SubtractVectors(&delta, destination, position);
+        GraphU64_SubtractVectors(&delta, destination, position);
         distance = Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
         graph = &D_8013B364;
         if (falling) {
@@ -526,7 +526,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
             steer.x = desired.x + tangent.x;
             steer.y = 0.0f;
             steer.z = desired.z + tangent.z;
-            Particle_NormalizeVec3(&steer);
+            GraphU64_NormalizeVec3(&steer);
             player->forward = steer.x * facing.x + steer.y * facing.y + steer.z * facing.z;
             navigationTurnRight(&facing);
             player->strafe = steer.x * facing.x + steer.z * facing.z;

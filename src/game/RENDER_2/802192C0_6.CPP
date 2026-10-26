@@ -20,9 +20,9 @@
 extern s32 D_801468F4;
 
 
-extern f32 Particle_GetActorHeight(void *arg0);
+extern f32 GameObject_GetActorHeight(void *arg0);
 
-extern void Engine_SampleWorldLighting(void *arg0, void *arg1, void *arg2);
+extern void Scene_SampleWorldLighting(void *arg0, void *arg1, void *arg2);
 
 extern void func_80249E28_de(void *arg0, void *arg1);
 
@@ -31,7 +31,7 @@ extern void func_8021C698_de(void *arg0, void *arg1);
 
 #include "COMMON/GAME_SESSION.H"
 
-extern void Render_ClearDepthRect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
+extern void SetN64_ClearDepthRect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);
 
 void func_8021C9D8_de(void *player, void *camera) {
@@ -41,8 +41,8 @@ void func_8021C9D8_de(void *player, void *camera) {
 
     pos = ((LevelActor *)player)->position0;
     pos.y += ((LevelActor *)player)->eyeHeight;
-    pos.y += Particle_GetActorHeight(player) * ((D_800C7470_Pair *)&D_800C22B0_us)->second;
-    Engine_SampleWorldLighting(&g_world, &pos,
+    pos.y += GameObject_GetActorHeight(player) * ((D_800C7470_Pair *)&D_800C22B0_us)->second;
+    Scene_SampleWorldLighting(&g_world, &pos,
                   &((LevelActor *)player)->lighting[D_800D297C]);
 
     value = 0x66;
@@ -104,7 +104,7 @@ void func_8021CBD0_de(void *player, WeaponMenuView *camera) {
         right = entry->scopeBounds[2] * x + rect[2];
         top = entry->scopeBounds[1] * y + rect[3];
         bottom = entry->scopeBounds[3] * y + rect[3];
-        Render_ClearDepthRect(&D_8011FAC0, (s32)left, (s32)right, (s32)top,
+        SetN64_ClearDepthRect(&D_8011FAC0, (s32)left, (s32)right, (s32)top,
                       (s32)bottom, camera->clipMode);
 
         gSPGeometryMode(g_displayListCursor++, 0, G_FOG);
@@ -112,8 +112,8 @@ void func_8021CBD0_de(void *player, WeaponMenuView *camera) {
         gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 12, 1);
         gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 20, 0xFFFF);
         gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 28, 0xFFFF);
-        Render_BeginModelBatch();
+        Geometry_BeginModelBatch();
         func_80249E28_de(&((Shared_ActorView *)player)->weapon, camera);
-        Render_FlushModelBatch();
+        Geometry_FlushModelBatch();
     }
 }

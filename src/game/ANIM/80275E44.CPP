@@ -10,7 +10,7 @@
 #include "COMMON/UNUSED.H"
 
 /* Returns the height of a path node's triangle plane at (x, z) from the cached edge cross product in D_80115E10, or the mean vertex height when the plane is vertical.
-   Adapted from func_8027525C_de with the edge vectors computed through the Particle_SubtractVectors subtract helper inside a static inline helper, the vertex read as a whole vector with y at offset 4, the null result a rodata constant, and the cache globals changed. */
+   Adapted from func_8027525C_de with the edge vectors computed through the GraphU64_SubtractVectors subtract helper inside a static inline helper, the vertex read as a whole vector with y at offset 4, the null result a rodata constant, and the cache globals changed. */
 
 
 
@@ -21,17 +21,17 @@
 extern int D_800CD3E8;
 
 
-extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 static inline void cross_edges(Node75 *node) {
     CVector3 a;
     CVector3 b;
 
-    Particle_SubtractVectors(&a, node->cur, node->prev);
-    Particle_SubtractVectors(&b, node->next, node->cur);
-    Particle_CrossVectors(&D_80115E10, &a, &b);
+    GraphU64_SubtractVectors(&a, node->cur, node->prev);
+    GraphU64_SubtractVectors(&b, node->next, node->cur);
+    GraphU64_CrossVectors(&D_80115E10, &a, &b);
 }
 
 
@@ -43,7 +43,7 @@ extern f32 Math_Sqrtf(f32);
 
 extern void func_80276510_de(void *arg0, s32 arg1, void *arg2);
 
-f32 Anim_GetPolygonHeight(Node75 *node, f32 x, f32 z) {
+f32 Region_GetPolygonHeight(Node75 *node, f32 x, f32 z) {
     CVector3 normal;
     CVector3 point;
 
@@ -93,7 +93,7 @@ CVector3 *func_80275F28_de(CVector3 *out, Node75 *node) {
         p = node->next;
         q = node->cur;
         b.z = p->z - q->z;
-        Particle_CrossVectors(&D_80111D30, &b, &a);
+        GraphU64_CrossVectors(&D_80111D30, &b, &a);
     }
     *out = D_80111D30;
     D_800CD3E0 = (int)node;
@@ -116,7 +116,7 @@ u8 func_80276088_de(s32 modelId) {
     return blend->byte59;
 }
 
-f32 Anim_GetTriangleEdgeAngle(void *triangle, s32 arg1) {
+f32 Region_GetTriangleEdgeAngle(void *triangle, s32 arg1) {
     Triangle *polygon = triangle;
     CVector3 *v0;
     CVector3 *v1;
@@ -132,7 +132,7 @@ f32 Anim_GetTriangleEdgeAngle(void *triangle, s32 arg1) {
     if (mag == 0.0f) {
         return 0.0f;
     }
-    result = Nav_ArcCos(dx / mag);
+    result = GraphU64_ArcCos(dx / mag);
     if (!(dz < 0.0f)) {
         result = -result;
     }

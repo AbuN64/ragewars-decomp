@@ -24,7 +24,7 @@ extern s32 D_800D297C;
 extern f32 D_800D2988;
 extern char D_800CBCC0;
 extern char D_800CBCF0_de;
-extern void Scene_MarkResourceInUse(s32, s32);
+extern void Cache_MarkResourceInUse(s32, s32);
 extern void Camera_SetupViewportAndFog(Racer *);
 extern void Camera_DrawWorldViewLayers(Racer *, s32);
 extern void func_80239FD4_de(Racer *, s32);
@@ -32,10 +32,10 @@ extern void Camera_DrawViewportOverlays(Racer *);
 extern void Camera_DrawAndAdvanceMessages(Race *, Racer *);
 extern void func_804429D4_de(void *);
 extern void Camera_DrawViewportBorder(Racer *);
-extern s32 Camera_IsSequenceActive(void);
-extern s32 Camera_IsSequenceInWindow(void);
+extern s32 Cinema_IsSequenceActive(void);
+extern s32 Cinema_IsSequenceInWindow(void);
 extern void func_8022A3F8_de(WorldCameraDrawActiveViews *, Racer *);
-/* Per-frame race update: clears three per-frame flags of the race's own racer, passes the race's first word to Scene_MarkResourceInUse, runs the 30-frame flash timer (restarted while D_80146894 is set or in mode 3) and while it runs clears the screen with a full-screen viewport, scissor and fill before func_8026D8F8_de, then updates every racer in the list until it ends or Camera_IsSequenceActive or Camera_IsSequenceInWindow reports, updates the race's own racer, hands the list to func_8022A3F8_de when the replay flag of D_80145040 is set, and passes the own racer's block at 0x554 to func_804429D4_de. */
+/* Per-frame race update: clears three per-frame flags of the race's own racer, passes the race's first word to Cache_MarkResourceInUse, runs the 30-frame flash timer (restarted while D_80146894 is set or in mode 3) and while it runs clears the screen with a full-screen viewport, scissor and fill before func_8026D8F8_de, then updates every racer in the list until it ends or Cinema_IsSequenceActive or Cinema_IsSequenceInWindow reports, updates the race's own racer, hands the list to func_8022A3F8_de when the replay flag of D_80145040 is set, and passes the own racer's block at 0x554 to func_804429D4_de. */
 void Camera_DrawActiveViews(Race *race, s32 world)
 {
     Racer *racer;
@@ -43,7 +43,7 @@ void Camera_DrawActiveViews(Race *race, s32 world)
     race->self.boost = 0;
     race->self.spin = 0;
     if (race->header.music != 0) {
-        Scene_MarkResourceInUse(0, race->header.music);
+        Cache_MarkResourceInUse(0, race->header.music);
     }
     if (D_8011FAC0.clockPaused != 0 || race->header.views.count == 3) {
         D_800FF224_de = 30.0f;
@@ -85,7 +85,7 @@ void Camera_DrawActiveViews(Race *race, s32 world)
         Camera_DrawAndAdvanceMessages(race, racer);
         func_804429D4_de(racer->sound);
         Camera_DrawViewportBorder(racer);
-        if (Camera_IsSequenceActive() != 0 || Camera_IsSequenceInWindow() != 0) {
+        if (Cinema_IsSequenceActive() != 0 || Cinema_IsSequenceInWindow() != 0) {
             racer = 0;
         } else {
             racer = racer->next;
@@ -144,7 +144,7 @@ void Camera_DrawViewportBorder(Racer *racer) {
                     x + width, (y + height) - 1.0f);
 }
 
-/* Posts a text as on-screen messages, one per line: when Camera_IsSequenceActive reports it, the messages already in
+/* Posts a text as on-screen messages, one per line: when Cinema_IsSequenceActive reports it, the messages already in
  * the pool's list at 0xE40 are flagged kind 4 and the new ones get kind 1, otherwise kind 2; the text (or
  * D_800D7028 when given D_800D7034) is split at newlines and for each non-empty line the oldest message node
  * of the owner's list at 0xF24 is recycled and set up centred horizontally 80 pixels above the bottom of the
@@ -159,7 +159,7 @@ extern func_80237E70_G1 D_800D7034;
 
 extern s32 D_800E28D0;
 extern void func_80239CE0_de(void *arg0);
-extern s32 Camera_IsSequenceActive(void);
+extern s32 Cinema_IsSequenceActive(void);
 
 
 
@@ -235,7 +235,7 @@ CCameraText *Camera_PostScreenMessage(struct ScreenMessageOwner *owner, struct S
     if (pool == 0) {
         return 0;
     }
-    if (Camera_IsSequenceActive() != 0) {
+    if (Cinema_IsSequenceActive() != 0) {
         pending = pool->freeMessages.head;
         if (pending != 0) {
             kind = 1;
@@ -345,7 +345,7 @@ void Camera_DrawAndAdvanceMessages(Race *race, Racer *racer) {
     f32 left;
     s32 centered;
 
-    if (Camera_IsSequenceInWindow() != 0) {
+    if (Cinema_IsSequenceInWindow() != 0) {
         Camera_UpdateScreenMessages((struct ScreenMessageOwner *)race, (struct ScreenMessagePool *)racer);
         return;
     }

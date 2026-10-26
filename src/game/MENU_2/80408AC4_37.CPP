@@ -5,7 +5,7 @@
 #include "COMMON/OBJECTRECAT28.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/WORLD.H"
-extern void *Scene_AllocateMemory(s32);
+extern void *Cache_AllocateMemory(s32);
 extern void Player_InitializeProfile(Profile *);
 extern Pulse *D_800E5950;
 extern Shared_MenuData D_80145040;
@@ -25,7 +25,7 @@ s32 func_804394E0_de(MenuWidget *tree) {
     Shared_PlayerSettingsRecord *record;
     Shared_MenuObject *object;
 
-    D_800E5950 = Scene_AllocateMemory(sizeof(*D_800E5950));
+    D_800E5950 = Cache_AllocateMemory(sizeof(*D_800E5950));
     object = &D_80145040.object;
     Items_ResetActorPools(object, 0);
     func_804499B0_de(&D_80145040, 0, 0);

@@ -35,7 +35,7 @@ extern struct Shared_StateInfo D_800C9684[];
 extern void Nav_UpdateActorCurrentNode(void *, void *);
 extern void Nav_ApplySupportingPlatformMotion(void *, void *);
 extern void Weapons_FillDamagePacket(void *, s32, s32, s32, s32, s32);
-extern void Team_UpdateDraftPanel(void *, void *, void *);
+extern void TeamSelect_UpdateDraftPanel(void *, void *, void *);
 extern void func_80218B84_de(void *, void *, void *);
 extern void func_80219480_de(void *, void *);
 extern void func_80219A40_de(void *, void *, void *);
@@ -52,9 +52,9 @@ extern void func_8022BD94_de(void *, void *, void *);
 extern void func_8022C080_de(void *, void *);
 extern void func_8022C6E4_de(void *, void *);
 extern s32 func_8022C760_de(void *, void *);
-extern s32 Camera_MoveActorWithCollision(void *, CVector3, s32 *);
+extern s32 Unicol_MoveActorWithCollision(void *, CVector3, s32 *);
 struct MotionSurface;
-extern s32 Camera_SweepActorMotion(void *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
+extern s32 Unicol_SweepActorMotion(void *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
 extern void func_80245D30_de(void *, void *, void *, s32);
 extern void GameObject_ReadActorMotionIndex(void *);
 extern s32 func_80246A08_de(void *, s32, s32);
@@ -62,21 +62,21 @@ extern void func_80246E44_de(void *);
 extern void func_80247004_de(void *);
 extern s32 func_8024B6A0_de(void *, s32, s32);
 
-extern f32 Sound_GetActorReach(void *);
+extern f32 InstHdr_GetActorReach(void *);
 extern s32 InstHdr_GetActorMotionState(void *);
-extern struct Shared_Surface *Sound_FindActorModelEntry(void *);
-extern s32 Render_PlaySoundAtPosition(s16, CVector3, s32, s32);
+extern struct Shared_Surface *InstHdr_FindActorModelEntry(void *);
+extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 extern void func_8025E418_de(s32);
 
 
-extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
-extern f32 Nav_GetTrianglePlaneHeight(struct Shared_Model *, f32, f32);
-extern f32 Anim_GetPolygonHeight(struct Shared_Model *, f32, f32);
+extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
+extern f32 GraphU64_GetTrianglePlaneHeight(struct Shared_Model *, f32, f32);
+extern f32 Region_GetPolygonHeight(struct Shared_Model *, f32, f32);
 extern void func_80278D78_de(void *, s32, void *);
 extern void func_80278E04_de(struct Shared_Model *, s32, void *);
 
 
-extern void System_UpdateToggleMenu(void *, void *);
+extern void ItemMenu_UpdateToggleMenu(void *, void *);
 extern void func_802ACA54_de(void *, void *);
 #include "COMMON/LEVEL_TRACK.H"
 void func_80220ED4_de(SharedPlayer *player)
@@ -159,7 +159,7 @@ void func_80220ED4_de(SharedPlayer *player)
   }
   human = player->views1C.view5D0_43.unk5D0 == 2;
   actor = player;
-  if (Camera_IsSequenceInWindow() != 0)
+  if (Cinema_IsSequenceInWindow() != 0)
   {
     human = 1;
   }
@@ -260,13 +260,13 @@ void func_80220ED4_de(SharedPlayer *player)
     player->views5E8.view654_25.prevState = (u16) player->views5E8.view650_16.state;
     player->views5E8.view65C_32.unk65C = player->views5E8.view664_27.unk664;
     model = actor->views0.view14_6.model;
-    func_80222908_de(player, actor, Sound_FindActorModelEntry(actor));
+    func_80222908_de(player, actor, InstHdr_FindActorModelEntry(actor));
     if (D_80145088.settings.local == 0)
     {
       pos = &player->views0.view8_3.pos;
       if (((model != 0) && (pos != 0)) && (model->flags & 0x40))
       {
-        amount = (f32) ((s32) (Nav_GetTrianglePlaneHeight(model, pos->x, pos->z) - Anim_GetPolygonHeight(model, pos->x, pos->z)));
+        amount = (f32) ((s32) (GraphU64_GetTrianglePlaneHeight(model, pos->x, pos->z) - Region_GetPolygonHeight(model, pos->x, pos->z)));
         if (amount < 1024.0f)
         {
           func_8025E440_de(1.0f - (amount * 0.0009765625f));
@@ -333,13 +333,13 @@ void func_80220ED4_de(SharedPlayer *player)
       }
       player->views5E8.view7F0_133.unk7F0 = target;
       func_80219480_de(&player->views5E8.view878_158.effect, player);
-      Nav_EaseValueToward(&player->views5E8.view7EC_132.unk7EC, target, 0.5f);
+      GraphU64_EaseValueToward(&player->views5E8.view7EC_132.unk7EC, target, 0.5f);
       if ((target == 0.0f) && (player->views5E8.view7EC_132.unk7EC < 0.01f))
       {
         player->views5E8.view7EC_132.unk7EC = 0.0f;
       }
     }
-    if ((Camera_IsSequenceInWindow() == 0) || (((u32) (((u16) player->views5E8.view650_16.state) - 22)) < 12))
+    if ((Cinema_IsSequenceInWindow() == 0) || (((u32) (((u16) player->views5E8.view650_16.state) - 22)) < 12))
     {
       update = player->views13B4.view13B4_5.states[player->views5E8.view650_16.state].update;
       if (update != 0)
@@ -347,7 +347,7 @@ void func_80220ED4_de(SharedPlayer *player)
         update(player, actor);
       }
     }
-    material = Sound_FindActorModelEntry(actor);
+    material = InstHdr_FindActorModelEntry(actor);
     if (material != 0)
     {
       func_80245D30_de(actor, material, &player->views5E8.view6E8_79.unk6E8, 1);
@@ -389,7 +389,7 @@ void func_80220ED4_de(SharedPlayer *player)
       goal = 40.96f;
     }
     depth = player->views5E8.view718_70.crouch;
-    Nav_EaseValueToward(&depth, goal, 0.25f);
+    GraphU64_EaseValueToward(&depth, goal, 0.25f);
     do
     {
       change = depth - player->views5E8.view718_70.crouch;
@@ -429,7 +429,7 @@ void func_80220ED4_de(SharedPlayer *player)
         target = 66.56f;
       }
       swim = player->views5E8.view720_90.swim;
-      Nav_EaseValueToward(&swim, target, 0.25f);
+      GraphU64_EaseValueToward(&swim, target, 0.25f);
       step = swim - player->views5E8.view720_90.swim;
       if (step < 0.0f)
       {
@@ -450,14 +450,14 @@ void func_80220ED4_de(SharedPlayer *player)
     rise = (((player->views18.view18_5.body->ceiling - player->views5E8.view780_116.unk780) - player->views5E8.view718_70.crouch) - player->views5E8.view720_90.swim) - player->views5E8.view6F4_83.unk6F4;
     if (rise > 0.0f)
     {
-      f22 = Sound_GetActorReach(actor);
-      f21 = Particle_GetActorRadius(actor);
-      f20 = Particle_GetActorHeight(actor);
-      f0 = Sound_GetActorBaseOffset(actor);
+      f22 = InstHdr_GetActorReach(actor);
+      f21 = GameObject_GetActorRadius(actor);
+      f20 = GameObject_GetActorHeight(actor);
+      f0 = InstHdr_GetActorBaseOffset(actor);
       scratch.views0.view0_1.to.x = actor->views0.view8_3.pos.x;
       scratch.views0.view0_1.to.y = actor->views0.view8_3.pos.y + rise;
       scratch.views0.view0_1.to.z = actor->views0.view8_3.pos.z;
-      if (Camera_SweepActorMotion(actor, actor->views0.view8_3.pos, scratch.views0.view0_1.to, &D_801000F0, f22, f21, f20, f0) != 0)
+      if (Unicol_SweepActorMotion(actor, actor->views0.view8_3.pos, scratch.views0.view0_1.to, &D_801000F0, f22, f21, f20, f0) != 0)
       {
         floor = D_80103FCC->y - actor->views0.view8_3.pos.y;
         player->views5E8.view6E8_79.unk6E8.y -= rise - floor;
@@ -477,7 +477,7 @@ void func_80220ED4_de(SharedPlayer *player)
     Weapons_UpdatePlayerEffectLights(player, actor);
     oldModel = actor->views0.view14_6.model;
     prev = actor->views0.view8_3.pos;
-    before = Sound_FindActorModelEntry(actor);
+    before = InstHdr_FindActorModelEntry(actor);
     if (player->views5E8.view5EA_2.unk5EA != 0)
     {
       actor->views1C.view100_8.unk100 |= 0x10000;
@@ -485,7 +485,7 @@ void func_80220ED4_de(SharedPlayer *player)
       {
         player->views5E8.view6E8_79.unk6E8 = player->views0.view8_3.pos;
       }
-      hit = Camera_MoveActorWithCollision(actor, player->views5E8.view6E8_79.unk6E8, stateFlags);
+      hit = Unicol_MoveActorWithCollision(actor, player->views5E8.view6E8_79.unk6E8, stateFlags);
       actor->views1C.view100_8.unk100 &= ~0x10000;
     }
     else
@@ -493,7 +493,7 @@ void func_80220ED4_de(SharedPlayer *player)
       hit = 0;
     }
     newModel = actor->views0.view14_6.model;
-    after = Sound_FindActorModelEntry(actor);
+    after = InstHdr_FindActorModelEntry(actor);
     if (before != after)
     {
       func_80278E04_de(oldModel, linkFlags | 2, actor);
@@ -560,7 +560,7 @@ void func_80220ED4_de(SharedPlayer *player)
           diff.z = player->views0.view8_3.pos.z - entry->pos.z;
           if (((f32) ((s32) Math_Sqrtf(((diff.x * diff.x) + (diff.y * diff.y)) + (diff.z * diff.z)))) < def->radius)
           {
-            if (Items_FindPlacedObjectsByKey(&g_world, -1, def->item, &found, 1) != 0)
+            if (OvlScene_FindPlacedObjectsByKey(&g_world, -1, def->item, &found, 1) != 0)
             {
               world->offset.x = player->views0.view8_3.pos.x - found.pos.x;
               world->offset.y = player->views0.view8_3.pos.y - found.pos.y;
@@ -570,8 +570,8 @@ void func_80220ED4_de(SharedPlayer *player)
             {
               world->offset = diff;
             }
-            Render_PlaySoundAtPosition(0x230, player->views0.view8_3.pos, 0, -1);
-            Render_PlacePlayerAtSpawnPoint(player, def->item, 0, 0);
+            SoundElement_PlaySoundAtPosition(0x230, player->views0.view8_3.pos, 0, -1);
+            Player_PlacePlayerAtSpawnPoint(player, def->item, 0, 0);
             break;
           }
         }
@@ -606,7 +606,7 @@ void func_80220ED4_de(SharedPlayer *player)
       player->views5E8.view11E0_186.unk11E0 = fade;
     }
   }
-  under = Sound_FindActorModelEntry(actor);
+  under = InstHdr_FindActorModelEntry(actor);
   if ((under != 0) && (under->flags & 0x4000))
   {
     actor->views1C.view20_2.velY = 0.0f;
@@ -614,7 +614,7 @@ void func_80220ED4_de(SharedPlayer *player)
   else
     if (actor->views0.view8_3.pos.y < (D_801370C4 - 5120.0f))
   {
-    Render_PlacePlayerAtSpawnPoint(player, player->views5E8.view5EC_5.unk5EC, 0, 0);
+    Player_PlacePlayerAtSpawnPoint(player, player->views5E8.view5EC_5.unk5EC, 0, 0);
   }
   if (InstHdr_GetActorMotionState(actor) != 0)
   {
@@ -638,7 +638,7 @@ void func_80220ED4_de(SharedPlayer *player)
     ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&g_world, player, sound, player->views5E8.view86C_125.unk86C);
     if (player->views5E8.view870_157.unk870 != player->views5E8.view86C_125.unk86C)
     {
-      if ((func_8024B6A0_de(actor, player->views5E8.view86C_125.unk86C, 0) == 0) && (Camera_IsSequenceInWindow() != 0))
+      if ((func_8024B6A0_de(actor, player->views5E8.view86C_125.unk86C, 0) == 0) && (Cinema_IsSequenceInWindow() != 0))
       {
         func_8024B6A0_de(actor, 7000, 0);
       }
@@ -659,7 +659,7 @@ void func_80220ED4_de(SharedPlayer *player)
     {
       if (actor->views1C.view108_16.anim == low)
       {
-        if (Nav_RandomFloat(100.0f) < 0.4f)
+        if (GraphU64_RandomFloat(100.0f) < 0.4f)
         {
           func_8024B6F4_de(actor, flag, 0);
           actor->views1C.view10E_20.animPending = 0;
@@ -718,7 +718,7 @@ void func_80220ED4_de(SharedPlayer *player)
       player->pendingBonus = count - drain;
     }
   }
-  Team_UpdateDraftPanel(&player->views5E8.view938_162.unk938, player, &player->views1C.view458_40.unk458);
+  TeamSelect_UpdateDraftPanel(&player->views5E8.view938_162.unk938, player, &player->views1C.view458_40.unk458);
   func_80218B84_de(&player->views5E8.viewCCC_164.unkCCC, player, &player->views1C.view458_40.unk458);
   if (player->views5E8.view62E_17.character == 0)
   {
@@ -728,7 +728,7 @@ void func_80220ED4_de(SharedPlayer *player)
   {
     player->views13B4.view13B4_5.states = D_800C9684;
   }
-  System_UpdateToggleMenu(&player->views5E8.viewD40_165.unkD40, player);
+  ItemMenu_UpdateToggleMenu(&player->views5E8.viewD40_165.unkD40, player);
   if (player->views5E8.view11D8_147.unk11D8 > 0.0f)
   {
     player->views5E8.view11D8_147.unk11D8 -= D_800D2988;

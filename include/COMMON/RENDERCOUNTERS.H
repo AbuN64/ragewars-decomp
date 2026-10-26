@@ -17,7 +17,7 @@ typedef struct CGameStatus_t {
     s32 m_FragTagLimit; /* +0x58: func_8042ED70_de stores its third argument here */
     s32 m_FragTagPlayerPos;
     s32 m_FragTagPlayerChosen;
-    s32 m_FragTagSelectionType; /* +0x64: Render_StartRound stores 3 */
+    s32 m_FragTagSelectionType; /* +0x64: SetN64_StartRound stores 3 */
     s32 m_FragTagFlipTimer; /* +0x68 */
     s32 mask;
     s32 m_nFragTagSkin; /* +0x70: lw in func_8022CA14_de, lbu at +0x73 in func_80228FB8_de */

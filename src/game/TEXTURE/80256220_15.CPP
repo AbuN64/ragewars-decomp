@@ -97,17 +97,17 @@ s32 func_80257A14_de(void *context, s32 id) {
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "AUDIO/80259280_5.H"
 
-extern void *Camera_FindNearestCamera(MenuMatchGlobals *, CVector3 *);
+extern void *Sky_FindNearestCamera(MenuMatchGlobals *, CVector3 *);
 extern s32 Audio_HasVoiceWithKey(void *, s32);
 extern f32 Audio_ComputeDistanceAttenuation(CVector3 *, void *);
 extern s32 Audio_FindVoiceByKeyPair(void *, s32, s32);
 extern s32 func_80259260_de(void *, Item57BD4 *, CVector3 *, s32, s32);
 
-extern void *Audio_StartNoteVoice(void *, Item57BD4 *, s32, s32);
+extern void *Channel_StartNoteVoice(void *, Item57BD4 *, s32, s32);
 extern void Audio_SetVoicePositionTracking(void *, CVector3 *, s32);
 
 extern void Audio_InitializeVoiceParameters(void *, Item57BD4 *, s32);
-extern void Texture_UpdateSoundSlot(void *, void *, s32, CVector3 *);
+extern void Audio_UpdateSoundSlot(void *, void *, s32, CVector3 *);
 extern u32 __osDisableInt(void);
 
 
@@ -117,11 +117,11 @@ extern u32 __osDisableInt(void);
 
 
 
-s32 Texture_StartSoundRecord(void *context, Item57BD4 *soundRecord, CVector3 *position, s32 playbackValue,
+s32 Audio_StartSoundRecord(void *context, Item57BD4 *soundRecord, CVector3 *position, s32 playbackValue,
                   s32 voiceUserData, s32 arg5, s32 trackedPosition) {
     void *node;
 
-    ((ContextRecAt2BC0 *)(context))->field2B98 = Camera_FindNearestCamera(&D_80145088, position);
+    ((ContextRecAt2BC0 *)(context))->field2B98 = Sky_FindNearestCamera(&D_80145088, position);
     if (soundRecord->flags & 1) {
         if (Audio_HasVoiceWithKey(&((ContextRecAt2BC0 *)(context))->menu[0], ((ContextRecAt2BC0 *)(context))->selectedSound) != 0) {
             return -1;
@@ -142,7 +142,7 @@ s32 Texture_StartSoundRecord(void *context, Item57BD4 *soundRecord, CVector3 *po
     if (soundRecord->flags & 0x40) {
         Audio_ReleaseMatchingExclusiveVoice(&((ContextRecAt2BC0 *)(context))->menu[0], ((ContextRecAt2BC0 *)(context))->selectedSound, soundRecord->field0);
     }
-    node = Audio_StartNoteVoice(&((ContextRecAt2BC0 *)(context))->menu[0], soundRecord, playbackValue, voiceUserData);
+    node = Channel_StartNoteVoice(&((ContextRecAt2BC0 *)(context))->menu[0], soundRecord, playbackValue, voiceUserData);
     if (node == 0) {
         return -1;
     }
@@ -162,7 +162,7 @@ s32 Texture_StartSoundRecord(void *context, Item57BD4 *soundRecord, CVector3 *po
             __osRestoreInt(token);
         }
     }
-    Texture_UpdateSoundSlot(context, ((Draw *)(node))->model, 0, position);
+    Audio_UpdateSoundSlot(context, ((Draw *)(node))->model, 0, position);
     {
         char *queue = &((ContextRecAt2BC0 *)(context))->lock;
         u32 token = __osDisableInt();
@@ -226,7 +226,7 @@ static inline s32 selectSoundVariant(ContextRecAt2BC0 *context, s32 sound, s16 a
             for (i = first; i <= last; i++) {
                 total += context->envelopeData[i] * 10;
             }
-            threshold = Nav_NextRandom() % total;
+            threshold = GraphU64_NextRandom() % total;
             total = 0;
             for (index = first; index < last; index++) {
                 total += context->envelopeData[index] * 10;
@@ -271,7 +271,7 @@ static inline s32 soundVoiceLimitReached(ContextRecAt2BC0 *context, s32 sound) {
  * 0x100 avoid repeating the previous variant and get a random pan), records the entry, sound and owner as
  * the current selection, hands out a play id under the recursive lock and starts every voice record of the
  * variant; returns the play id, or -1 when nothing was started. */
-s32 Texture_PlaySoundAtPosition(ContextRecAt2BC0 *context, s32 sound, CVector3 position, s32 spatialMode, s32 owner) {
+s32 Audio_PlaySoundAtPosition(ContextRecAt2BC0 *context, s32 sound, CVector3 position, s32 spatialMode, s32 owner) {
     SoundVoiceGroup *group;
     u32 count;
     u32 i;
@@ -283,15 +283,15 @@ s32 Texture_PlaySoundAtPosition(ContextRecAt2BC0 *context, s32 sound, CVector3 p
     }
     if (sound < 0x100) {
         index = selectSoundVariant(context, sound, context->lastInstrument);
-        context->randomPan = (s32)Nav_RandomFloat(127.0f);
+        context->randomPan = (s32)GraphU64_RandomFloat(127.0f);
     } else {
         index = selectSoundVariant(context, sound, 0);
     }
     if (index != -1) {
-        context->selectedEntry = Render_GetPackSection(Render_GetPackSection(context->instrumentIndex, (s16)index), 0);
+        context->selectedEntry = SetN64_GetPackSection(SetN64_GetPackSection(context->instrumentIndex, (s16)index), 0);
         context->selectedSound = sound;
         context->selectedOwner = owner;
-        group = Render_GetPackSection(Render_GetPackSection(context->instrumentIndex, (s16)index), 1);
+        group = SetN64_GetPackSection(SetN64_GetPackSection(context->instrumentIndex, (s16)index), 1);
         count = group->count;
         if (count != 0) {
             soundAcquireLock(&context->lock);
@@ -304,7 +304,7 @@ s32 Texture_PlaySoundAtPosition(ContextRecAt2BC0 *context, s32 sound, CVector3 p
             playId = -1;
         }
         for (i = 0; i < count; i++) {
-            Texture_StartSoundRecord(context, (Item57BD4 *)((u8 *)(group + 1) + i * group->stride), &position, index,
+            Audio_StartSoundRecord(context, (Item57BD4 *)((u8 *)(group + 1) + i * group->stride), &position, index,
                                      playId, 0, spatialMode);
         }
         context->selectedOwner = -1;
@@ -315,9 +315,9 @@ s32 Texture_PlaySoundAtPosition(ContextRecAt2BC0 *context, s32 sound, CVector3 p
 
 /* Starts a sound-bank entry: looks up the entry's record in the bank table at 0x2B4C, resets the current
  * selection (0x2B88/0x2B8C/0x2B90), takes the recursive lock at 0x110 to hand out a new play id (counter
- * at 0x10C), then starts every voice record of the entry through Texture_StartSoundRecord at the given position;
+ * at 0x10C), then starts every voice record of the entry through Audio_StartSoundRecord at the given position;
  * returns the play id, or -1 for an out-of-range index or an empty entry. */
-s32 Texture_PlayInstrumentAtPosition(ContextRecAt2BC0 *self, s32 index, CVector3 position, s32 voiceParameter) {
+s32 Audio_PlayInstrumentAtPosition(ContextRecAt2BC0 *self, s32 index, CVector3 position, s32 voiceParameter) {
     SoundVoiceGroup *group;
     u32 count;
     u32 i;
@@ -325,10 +325,10 @@ s32 Texture_PlayInstrumentAtPosition(ContextRecAt2BC0 *self, s32 index, CVector3
     if (index >= self->instrumentCount) {
         return -1;
     }
-    self->selectedEntry = Render_GetPackSection(Render_GetPackSection(self->instrumentIndex, (s16)index), 0);
+    self->selectedEntry = SetN64_GetPackSection(SetN64_GetPackSection(self->instrumentIndex, (s16)index), 0);
     self->selectedSound = 0x100;
     self->selectedOwner = -1;
-    group = Render_GetPackSection(Render_GetPackSection(self->instrumentIndex, (s16)index), 1);
+    group = SetN64_GetPackSection(SetN64_GetPackSection(self->instrumentIndex, (s16)index), 1);
     count = group->count;
     if (count != 0) {
         soundAcquireLock(&self->lock);
@@ -338,7 +338,7 @@ s32 Texture_PlayInstrumentAtPosition(ContextRecAt2BC0 *self, s32 index, CVector3
         playId = -1;
     }
     for (i = 0; i < count; i++) {
-        Texture_StartSoundRecord(self, (Item57BD4 *)((u8 *)(group + 1) + i * group->stride), &position, index, playId, 0, voiceParameter);
+        Audio_StartSoundRecord(self, (Item57BD4 *)((u8 *)(group + 1) + i * group->stride), &position, index, playId, 0, voiceParameter);
     }
     return playId;
 }

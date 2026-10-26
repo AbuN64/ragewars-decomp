@@ -18,7 +18,7 @@ extern OSMesgQueue D_8010FBC0;
 
 /* The four controller profiles, one per port. */
 extern struct ControllerProfile D_8010F328[4];
-/* The combined input record of all four controllers (Render_ReadControllerStates). */
+/* The combined input record of all four controllers (Control_ReadControllerStates). */
 extern struct ControllerProfile D_8010B0E0;
 
 
@@ -55,10 +55,10 @@ extern int Control_IsStartButtonSet(Shared_Effect *arg0);
 struct ObjectState224;
 typedef struct ObjectState224 ObjectState224;
 
-extern int Render_CountConnectedControllers();
+extern int Control_CountConnectedControllers();
 
 
-extern void Render_ReleasePakLock();
+extern void Control_ReleasePakLock();
 
 
 
@@ -83,14 +83,14 @@ extern void Control_TrackControllerPakChanges();
 
 
 
-extern void Render_PollControllerPaks();
+extern void Control_PollControllerPaks();
 
 
 
 
 
 extern int Control_IsButtonAPressed(struct ControllerProfile *arg0);
-extern void Render_ResetControllerPak(struct ControllerProfile *arg0);
+extern void Control_ResetControllerPak(struct ControllerProfile *arg0);
 
 extern int Control_IsControllerPakPresent(int arg0);
 
@@ -142,9 +142,9 @@ struct ObjectState224 {
 
 extern void Control_CommitControllerInputs();
 
-extern f32 Render_GetSpatialEffectLevel(void *arg0, s32 arg1, s32 arg2, s32 arg3);
+extern f32 Rumble_GetSpatialEffectLevel(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 
-extern void Render_ReadControllerStates(void);
+extern void Control_ReadControllerStates(void);
 extern void Control_CommitProfileInput(void *arg0);
 extern s32 func_802A23A4_de(void);
 

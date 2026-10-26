@@ -17,7 +17,7 @@
 #include "COMMON/OBJECTLINKS14C.H"
 #include "WEAPONS/80213ED4.H"
 
-extern void Render_QueueModelInstance(void **, void *, s32, void *, void *, s32);
+extern void Geometry_QueueModelInstance(void **, void *, s32, void *, void *, s32);
 
 
 
@@ -36,7 +36,7 @@ void func_802054E0_de(Obj54E0 *actor, void *responseContext) {
     }
     if (g_world.mode == 4) {
         if (rec->unk34.whole != -1) {
-            Render_PlaySoundAtPosition(rec->unk34.half.id, actor->pos.v, 0, -1);
+            SoundElement_PlaySoundAtPosition(rec->unk34.half.id, actor->pos.v, 0, -1);
         }
         if (rec->unk30 != -1) {
             Weapons_SpawnActorEffect(actor, rec->unk30, actor->pos.t, 0);
@@ -68,14 +68,14 @@ void func_80205628_de(void *levelActor, void *spawnDispatchOwner, void *modelLoo
 
     actor->mask = 1 << owner->spawn;
     if (lookup->unk0 != 0) {
-        Render_QueueModelInstance(lookup->value, actor->fieldB4, 1,
+        Geometry_QueueModelInstance(lookup->value, actor->fieldB4, 1,
                         &actor->lighting[D_800D297C], 0, owner->remaining);
     }
 }
 
 void func_80205694_de(void *actor, void *requestContext) {
     Weapons_RequestActorState(actor, requestContext, 1);
-    Render_SetActorStateBit(&g_world, actor, 1);
+    Rumble_SetActorStateBit(&g_world, actor, 1);
 }
 
 void func_802056D0_de(Trigger *trigger) {

@@ -12,7 +12,7 @@
 #include "FRONTEND/8042E080_23.H"
 #include "FRONTEND/8042E080_25.H"
 
-extern u8 *Resmgr_CopyString(u8 *dst, u8 *name);
+extern u8 *XPlus_CopyString(u8 *dst, u8 *name);
 
 /* Seats a joining player (request: kind+1, team, rank) in the highest free player slot, filling its index, kind (random for 20), team (random for 3, at most 2), rank and name (per language on the European cartridges); returns the slot or -1 when all are taken. */
 s32 func_8042E460_de(u8 *request) {
@@ -44,7 +44,7 @@ s32 func_8042E460_de(u8 *request) {
         }
         team = request[1];
         if (team == 3) {
-            player->team = Nav_NextRandom() % 3;
+            player->team = GraphU64_NextRandom() % 3;
         } else {
             player->team = team;
         }
@@ -64,7 +64,7 @@ s32 func_8042E460_de(u8 *request) {
             name = joinTeamName((u8)player->team * 17 + Frontend_FindKeyIndex(player->character));
             break;
         }
-        Resmgr_CopyString(player->name, name);
+        XPlus_CopyString(player->name, name);
         result = i;
     }
     return result;
@@ -91,14 +91,14 @@ void Frontend_SetupRandomTeams(void) {
     arenas[2] = 0x1B;
     arenas[3] = 1;
     for (i = 0; i < 100; i++) {
-        firstIndex = Nav_NextRandom() % 4;
-        secondIndex = Nav_NextRandom() % 4;
+        firstIndex = GraphU64_NextRandom() % 4;
+        secondIndex = GraphU64_NextRandom() % 4;
         swappedCharacter = characters[firstIndex];
         characters[firstIndex] = characters[secondIndex];
         characters[secondIndex] = swappedCharacter;
     }
-    playerCount = Nav_NextRandom() % 3 + 2;
-    unlockedCount = Nav_NextRandom() % playerCount + 1;
+    playerCount = GraphU64_NextRandom() % 3 + 2;
+    unlockedCount = GraphU64_NextRandom() % playerCount + 1;
     if (unlockedCount == 3) {
         unlockedCount = 2;
     }
@@ -116,8 +116,8 @@ void Frontend_SetupRandomTeams(void) {
         player->character = characters[i];
         player->locked = 0;
         player->team = 2;
-        player->variant = Nav_NextRandom() % 3;
-        Resmgr_CopyString(player->name, joinTeamName((s8)player->variant * 17 + Frontend_FindKeyIndex(player->character)));
+        player->variant = GraphU64_NextRandom() % 3;
+        XPlus_CopyString(player->name, joinTeamName((s8)player->variant * 17 + Frontend_FindKeyIndex(player->character)));
     }
     for (i = 0; i < playerCount - unlockedCount; i++) {
         player = &game->playerSettings[4 + unlockedCount + i];
@@ -125,8 +125,8 @@ void Frontend_SetupRandomTeams(void) {
         player->character = characters[i + unlockedCount];
         player->locked = 1;
         player->team = 2;
-        player->variant = Nav_NextRandom() % 3;
-        Resmgr_CopyString(player->name, joinTeamName((s8)player->variant * 17 + Frontend_FindKeyIndex(player->character)));
+        player->variant = GraphU64_NextRandom() % 3;
+        XPlus_CopyString(player->name, joinTeamName((s8)player->variant * 17 + Frontend_FindKeyIndex(player->character)));
     }
     for (i = 0; i < 8; i++) {
         player = &game->playerSettings[i];
@@ -142,5 +142,5 @@ void Frontend_SetupRandomTeams(void) {
     game->players = 0;
     levelGoal = &D_8014DD98;
     levelGoal->kind = 2;
-    levelGoal->goal = arenas[Nav_NextRandom() % 4];
+    levelGoal->goal = arenas[GraphU64_NextRandom() % 4];
 }

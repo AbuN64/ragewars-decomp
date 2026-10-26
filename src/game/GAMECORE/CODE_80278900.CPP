@@ -107,7 +107,7 @@ void func_80278A08_de(ObjectRecAt8 *object, u8 *colors) {
     }
 }
 
-/* Sums the size field of the record Render_GetPackSection returns for each entry of the D_8011FE88 table and returns the total.
+/* Sums the size field of the record SetN64_GetPackSection returns for each entry of the D_8011FE88 table and returns the total.
    Adapted from func_802AFFC0_de with the loop over the global entry table and the accumulated return changed. */
 
 
@@ -129,7 +129,7 @@ s32 func_80278ABC_de(void) {
     char *base = (char *)&g_world;
 
     for (i = 0; i < ((IntegerState1504 *)(base))->unk_1500; i++) {
-        total += ((struct Shape_typemap_13 *)Render_GetPackSection(*((struct ObjectLinks150C *) (base + (i * 0xC)))->unk_1508, 2))->field_4;
+        total += ((struct Shape_typemap_13 *)SetN64_GetPackSection(*((struct ObjectLinks150C *) (base + (i * 0xC)))->unk_1508, 2))->field_4;
     }
     return total;
 }
@@ -145,7 +145,7 @@ void func_80278B3C_de(s32 arg0, s32 count, CVector3 *vtx) {
     s32 dy;
     s32 dz;
 
-    t = Render_GetPackSection(arg0, 1);
+    t = SetN64_GetPackSection(arg0, 1);
     if (t->unk4 != 0) {
         zero = 0;
         i = zero;

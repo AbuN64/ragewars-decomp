@@ -40,7 +40,7 @@ extern char D_48B38;
 extern char D_800C4388_de;
 
 
-extern void Scene_UnlockResource(s32, void *);
+extern void Cache_UnlockResource(s32, void *);
 
 /* Loads the scene's point lights into the display list: with no light in D_8013B1A8 it clears geometry mode bit 0x80, otherwise it sets it and fills eight light slots from the light list, transforming each active light's position into the view, storing its negated view direction, its colour scaled by its intensity, its falloff and a fixed range, marking unused slots off, and emits the light-move command for each slot, then advances the light buffer. The first direction component is truncated into a local before negating. */
 extern Gfx *g_displayListCursor;
@@ -56,7 +56,7 @@ extern LightNode *func_80268CBC_de(void *);
 extern LightNode *func_80268CC8_de(void *, LightNode *);
 
 
-u32 System_GetMemorySize(void) {
+u32 Defs_GetMemorySize(void) {
     if (D_80000318 > 0x7FFFFFU) {
         return 0x700000;
     }
@@ -289,7 +289,7 @@ void func_802656DC_de(s32 arg0, s32 arg1)
   *temp_a1_2 ^= new_var;
 }
 
-f32 System_CosineEase(f32 arg0)
+f32 Defs_CosineEase(f32 arg0)
 {
   f32 var_f1;
   f32 var_f0;
@@ -370,18 +370,18 @@ s32 func_80265964_de(s32 arg0) {
     s32 result;
 
 #if defined(VERSION_DE)
-    resource = Scene_RequestResource(0, 0x28BB00, 0x28BB00, 0x20, 0x10, 0, 0, &D_800C4388_de, 1);
+    resource = Cache_RequestResource(0, 0x28BB00, 0x28BB00, 0x20, 0x10, 0, 0, &D_800C4388_de, 1);
 #elif defined(VERSION_EU_X)
-    resource = Scene_RequestResource(0, 0x290384, 0x290384, 0x20, 0x10, 0, 0, &D_800C4388_de, 1);
+    resource = Cache_RequestResource(0, 0x290384, 0x290384, 0x20, 0x10, 0, 0, &D_800C4388_de, 1);
 #else
-    resource = Scene_RequestResource(0, 0x28B244, 0x28B244, 0x20, 0x10, 0, 0, &D_800C4388_de, 1);
+    resource = Cache_RequestResource(0, 0x28B244, 0x28B244, 0x20, 0x10, 0, 0, &D_800C4388_de, 1);
 #endif
     result = *(s32 *)((char *)*resource + arg0);
-    Scene_UnlockResource(0, resource);
+    Cache_UnlockResource(0, resource);
     return result;
 }
 
-void System_SetupPointLights(char *view) {
+void Defs_SetupPointLights(char *view) {
     LightNode *node;
     LightData *data;
     f32 position[4];
@@ -403,7 +403,7 @@ void System_SetupPointLights(char *view) {
             position[0] = node->position[0];
             position[1] = node->position[1];
             position[2] = node->position[2];
-            Particle_TransformPoint(view + 0x220, position, out);
+            GraphU64_TransformPoint(view + 0x220, position, out);
             x = out[0];
             D_8010C0A0[i + D_8010C4A0].dir[0] = -x;
             D_8010C0A0[i + D_8010C4A0].dir[1] = out[1];

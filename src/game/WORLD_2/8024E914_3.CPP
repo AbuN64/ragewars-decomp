@@ -22,7 +22,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-void *Engine_GetActorDefinition(void *arg0, s32 arg1);
+void *Scene_GetActorDefinition(void *arg0, s32 arg1);
 typedef struct SimpleRecordIn {
     s32 visBits;
     CVector3 position;
@@ -86,7 +86,7 @@ void World_InitSimpleInstance(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 
     if (rec->variation == 0xFFFF) {
         inst->variation = &g_defaultEffectDefinition;
     } else {
-        inst->variation = Engine_GetActorDefinition(&g_world, rec->variation);
+        inst->variation = Scene_GetActorDefinition(&g_world, rec->variation);
     }
     if (rec->region == 0xFFFF) {
         inst->region = 0;
@@ -98,7 +98,7 @@ void World_InitSimpleInstance(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 
     inst->f1A4 = 0;
     inst->id = rec->id;
     v.x = inst->position.x;
-    v.y = inst->position.y + Particle_GetActorHeight(inst) * 0.5f;
+    v.y = inst->position.y + GameObject_GetActorHeight(inst) * 0.5f;
     v.z = inst->position.z;
     inst->light = D_800CBC90[0];
     inst->f1C4 = 0;
@@ -119,10 +119,10 @@ void World_InitSimpleInstance(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 
 
 extern void **func_8024F6EC_de(StaticObject *, s32);
 extern void ScaleMatrixLocal(MatrixF *, f32, f32, f32);
-extern s32 Particle_LimitVectorLength(CVector3 *, f32);
+extern s32 GraphU64_LimitVectorLength(CVector3 *, f32);
 extern void TranslateMatrix(MatrixF *, f32, f32, f32);
 extern void SwapMatrixUpForward(MatrixF *);
-extern void Rsp_ConvertMatrixToFixed(MatrixF *, char *);
+extern void GraphU64_ConvertMatrixToFixed(MatrixF *, char *);
 
 extern void SimpleInstance_SpawnModelEffect(StaticObject *, void **);
 
@@ -132,7 +132,7 @@ void func_8024EB90_de(StaticObject *obj) {
     Gfx *branch;
 
     func_8026D8F8_de();
-    System_ResetTextureCache();
+    TextLoad_ResetTextureCache();
     if (obj->cached != 0) {
         gSPDisplayList(g_displayListCursor++, (unsigned int)obj->cached);
         return;
@@ -149,10 +149,10 @@ void func_8024EB90_de(StaticObject *obj) {
         BuildYawMatrix(&matrix, obj->angle);
     }
     ScaleMatrixLocal(&matrix, obj->scale, obj->scale, obj->scale);
-    Particle_LimitVectorLength(&obj->position, 20000.0f);
+    GraphU64_LimitVectorLength(&obj->position, 20000.0f);
     TranslateMatrix(&matrix, obj->position.x, obj->position.y + obj->height, obj->position.z);
     SwapMatrixUpForward(&matrix);
-    Rsp_ConvertMatrixToFixed(&matrix, obj->matrices[D_800D297C]);
+    GraphU64_ConvertMatrixToFixed(&matrix, obj->matrices[D_800D297C]);
     if (*obj->type != 12) {
         func_8026DA4C_de(resource, obj->matrices[D_800D297C], 0, obj->lights, 0, obj->material);
         SimpleInstance_SpawnModelEffect(obj, resource);
@@ -160,5 +160,5 @@ void func_8024EB90_de(StaticObject *obj) {
     gSPEndDisplayList(g_displayListCursor++);
     gSPBranchList(obj->cached++, (unsigned int)g_displayListCursor);
     gSPDisplayList(g_displayListCursor++, (unsigned int)obj->cached);
-    Scene_UnlockResource(0, resource);
+    Cache_UnlockResource(0, resource);
 }

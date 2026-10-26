@@ -21,7 +21,7 @@ extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 
 
-void Render_TransposeRecords(void *arg0, void *arg1, s32 arg2)
+void SetN64_TransposeRecords(void *arg0, void *arg1, s32 arg2)
 {
   char *data = &((ResidentDataChunk *)(arg0))->data[0];
   s32 temp_a2;
@@ -69,11 +69,11 @@ void Render_TransposeRecords(void *arg0, void *arg1, s32 arg2)
 /* Spawns a pooled object and registers its bounds and height. */
 
 
-void Camera_ResetActorMotion(void *);
-f32 Particle_GetActorHeight(void *);
+void GameObject_ResetActorMotion(void *);
+f32 GameObject_GetActorHeight(void *);
 s32 func_8028B21C_de(struct Shared_World *, s32);
 s32 func_8028C198_de(void *, s32);
-void Engine_SampleWorldLighting(void *, CVector3 *, void *);
+void Scene_SampleWorldLighting(void *, CVector3 *, void *);
 void func_80290950_de(void *, void *);
 
 
@@ -121,7 +121,7 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVect
     ((WorldRecAt3C08 *)(arg0))->tail = temp_s0;
   }
   ((SceneEffect *)(temp_s0))->state = (s32) ((((SceneEffect *)(temp_s0))->state) | 1);
-  Camera_ResetActorMotion(temp_s0);
+  GameObject_ResetActorMotion(temp_s0);
   ((SceneEffect *)(temp_s0))->lifetime = 0;
   temp_v1_2 = func_8028C198_de(&g_world, temp_v0);
   ((SceneEffect *)(temp_s0))->counter = arg1;
@@ -164,9 +164,9 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVect
   ((SceneEffect *)(temp_s0))->rotation = rotation;
   ((SceneEffect *)(temp_s0))->effectState = 0;
   center.x = ((SceneEffect *)(temp_s0))->position.x;
-  center.y = (((SceneEffect *)(temp_s0))->position.y) + (Particle_GetActorHeight(temp_s0) * 0.5f);
+  center.y = (((SceneEffect *)(temp_s0))->position.y) + (GameObject_GetActorHeight(temp_s0) * 0.5f);
   center.z = ((SceneEffect *)(temp_s0))->position.z;
-  Engine_SampleWorldLighting(&g_world, &center, (char *)temp_s0 + 0x1A8);
+  Scene_SampleWorldLighting(&g_world, &center, (char *)temp_s0 + 0x1A8);
   return temp_s0;
 }
 
@@ -255,7 +255,7 @@ extern char D_80100438;
 
 extern f32 D_800C53A4_de;
 extern void func_8024F4A0_de(SceneEffect *);
-extern void Camera_MoveActorWithCollision(SceneEffect *, f32, f32, f32, void *);
+extern void Unicol_MoveActorWithCollision(SceneEffect *, f32, f32, f32, void *);
 
 void func_80290424_de(SceneEffect *arg0)
 {
@@ -282,7 +282,7 @@ void func_80290424_de(SceneEffect *arg0)
     arg0->rotation.y = 0.0f;
     arg0->rotation.z = 0.0f;
   }
-  Camera_MoveActorWithCollision(arg0, arg0->position.x, arg0->position.y, arg0->position.z, var_s1);
+  Unicol_MoveActorWithCollision(arg0, arg0->position.x, arg0->position.y, arg0->position.z, var_s1);
   x = arg0->position.x;
   radius = D_800C53A4_de;
   arg0->minX = (f32) (x - radius);

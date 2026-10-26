@@ -13,7 +13,7 @@ typedef struct Func_8042D9F0_State {
 typedef struct { char pad0[0x10]; u8 unk10; char pad11[0x27]; void *unk38; } Func_8042D9F0_Part;
 extern Func_8042D9F0_State *D_800E5430;
 extern char D_800E1B60[];
-extern void *Scene_AllocateMemory(s32 size);
+extern void *Cache_AllocateMemory(s32 size);
 extern void func_802A2360_de(void);
 extern void *func_8041A280_de(s32 a, s32 b);
 extern void func_8041A47C_de(void *p);
@@ -24,7 +24,7 @@ extern void func_802A0C08_de(void *a, void *b, s32 c);
 /* Builds the 0x24-byte state D_800E5430 from the resources 0x392 to 0x397, hooks its list at 0x14 into the part func_8040EC30_de returns for 0x397 and registers it with func_802A0C08_de; returns zero. */
 s32 func_8042D9F0_de(s32 root) {
     Func_8042D9F0_Part *part;
-    D_800E5430 = (Func_8042D9F0_State *)Scene_AllocateMemory(0x24);
+    D_800E5430 = (Func_8042D9F0_State *)Cache_AllocateMemory(0x24);
     func_802A2360_de();
     D_800E5430->list = func_8041A280_de(0x392, 0x393);
     func_8041A47C_de(D_800E5430->list);

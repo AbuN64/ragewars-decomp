@@ -58,7 +58,7 @@ extern s32 Pak_ReadNoteInfo(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s
 
 extern s32 func_804057BC_de(u8 *name, s32 size);
 
-extern void Resmgr_CopyString(u8 *dst, char *src);
+extern void XPlus_CopyString(u8 *dst, char *src);
 
 /* Native resident constant storage; absolute access symbols retain their addresses. */
 #if defined(VERSION_US)
@@ -81,9 +81,9 @@ extern u8 *D_800D7E14;
 
 extern s32 Pak_GetFreePages(s32 ch, s32 *freeSpace);
 
-extern s32 Ovlgame_BytesToPakPages(s32 size);
+extern s32 Pak_BytesToPakPages(s32 size);
 
-static inline int space_required(int size) {size += 0x610; return Ovlgame_BytesToPakPages(size);}
+static inline int space_required(int size) {size += 0x610; return Pak_BytesToPakPages(size);}
 
 extern char D_8014561C[];
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -135,7 +135,7 @@ static inline s32 findNote(s32 ch, s32 *found)
     for (i = 0; i < 16; i++) {
         Pak_GetNoteGameName(ch, i, &state);
         func_80405648_de(state, name, 16);
-        if (Resmgr_CompareStrings(name, game) == 0) {
+        if (XPlus_CompareStrings(name, game) == 0) {
             if (found != 0) {
                 *found = i;
             }
@@ -175,19 +175,19 @@ s32 func_80407F6C_de(PakNoteTextEntry *entry, PakNotesMenu *menu) {
     if (exists != 0 && result == 0) {
         if (func_804057BC_de(name, 16) != 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-            Resmgr_CopyString(name, D_800E27B4[g_languageIndex]);
+            XPlus_CopyString(name, D_800E27B4[g_languageIndex]);
 #else
-            Resmgr_CopyString(name, D_800D3758);
+            XPlus_CopyString(name, D_800D3758);
 #endif
         }
     } else {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        Resmgr_CopyString(name, D_800E27C4_eu[D_801462C8.language]);
-        Resmgr_CopyString(ext, D_800E27C4_eu[D_801462C8.language]);
+        XPlus_CopyString(name, D_800E27C4_eu[D_801462C8.language]);
+        XPlus_CopyString(ext, D_800E27C4_eu[D_801462C8.language]);
 #else
         placeholder = &D_800D375C;
-        Resmgr_CopyString(name, *placeholder);
-        Resmgr_CopyString(ext, *placeholder);
+        XPlus_CopyString(name, *placeholder);
+        XPlus_CopyString(ext, *placeholder);
 #endif
         size = 0;
     }
@@ -242,7 +242,7 @@ s32 func_80408118_de(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
     if (D_8014D4C0_de != 0) {
         entry->text = &D_800D3754;
         if (Pak_GetFreePages(ch, &freeSpace) == 0) {
-            if (D_8014D4EC_de) need=Ovlgame_BytesToPakPages(0x18); else need=space_required(D_8011FECC);
+            if (D_8014D4EC_de) need=Pak_BytesToPakPages(0x18); else need=space_required(D_8011FECC);
             text = ENTRY_TEXT(entry);
             func_802658E4_de(digits.c, g_pakFormatInt3, freeSpace);
             text += 14;
@@ -263,7 +263,7 @@ s32 func_80408118_de(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
     fill:
         entry->text = header;
         result = Pak_GetFreePages(ch, &freeSpace);
-        need = Ovlgame_BytesToPakPages(D_8011FECC + 0x610);
+        need = Pak_BytesToPakPages(D_8011FECC + 0x610);
         text = ENTRY_TEXT(entry);
         if (result == 0) {
             text += 14;

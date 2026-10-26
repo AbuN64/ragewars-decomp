@@ -14,8 +14,8 @@
 
 extern s32 *func_8025CC6C_de(void);
 extern s32 func_8025CA24_de(void *,void *);
-static inline void makeImpulse(CVector3 *input,f32 scale,CVector3 *out){Particle_ScaleVector(out,input,scale);}
-static inline void addImpulse(CVector3 *v,CVector3 *impulse){Particle_AddVec3(v,v,impulse);}
+static inline void makeImpulse(CVector3 *input,f32 scale,CVector3 *out){GraphU64_ScaleVector(out,input,scale);}
+static inline void addImpulse(CVector3 *v,CVector3 *impulse){GraphU64_AddVec3(v,v,impulse);}
 void func_8027A084_de(void *particle) {
     SteeringParticle *arg0=particle;
     CVector3 sp18;
@@ -75,7 +75,7 @@ block_7:
             temp_fv0_2 = Math_Sqrtf((temp_fv0f * temp_fv0f) + (temp_fv0 * temp_fv0) + (temp_fa0 * temp_fa0));
             
             sp18 = target->position;
-            Particle_SubtractVectors(&sp28, &sp18, &arg0->position);
+            GraphU64_SubtractVectors(&sp28, &sp18, &arg0->position);
             amount = Math_Sqrtf((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
             if (amount < D_800C4B50_de) {
                 sp68 = func_80271818_de(&sp28);
@@ -83,16 +83,16 @@ block_7:
                 sp38.x = 0;
                 sp38.y = 0;
                 sp38.z = D_800C4B54_de;
-                Particle_TransformPoint(&sp78, &sp38, temp_s2);
-                Particle_ScaleVector(&arg0->velocity, temp_s2, temp_fv0_2);
+                GraphU64_TransformPoint(&sp78, &sp38, temp_s2);
+                GraphU64_ScaleVector(&arg0->velocity, temp_s2, temp_fv0_2);
                 return;
             }
             if (D_800C4B58_de < amount) {
                 sp18.y += D_800C4B50_de;
-                Particle_SubtractVectors(&sp28, &sp18, &arg0->position);
+                GraphU64_SubtractVectors(&sp28, &sp18, &arg0->position);
                 amount = Math_Sqrtf((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
             }
-            Particle_NormalizeVec3(&sp28.x);
+            GraphU64_NormalizeVec3(&sp28.x);
             sp58 = func_80271818_de(&sp28);
             if (amount < D_800C4B5C_de) {
                 temp_fv0f_2 = amount - D_800C4B60_de;
@@ -113,8 +113,8 @@ block_7:
             sp38.x = 0;
             sp38.y = 0;
             sp38.z = D_800C4B74_de;
-            Particle_TransformPoint(&sp78, &sp38, temp_s0_2);
-            Particle_ScaleVector(&arg0->velocity, temp_s0_2, temp_fv0_2);
+            GraphU64_TransformPoint(&sp78, &sp38, temp_s0_2);
+            GraphU64_ScaleVector(&arg0->velocity, temp_s0_2, temp_fv0_2);
             goto block_21;
         }
 block_21:
@@ -130,7 +130,7 @@ block_21:
             temp_fs0 = Math_Sqrtf((temp_fv0f_3 * temp_fv0f_3) + (temp_fv0_4 * temp_fv0_4) + (temp_fa0_2 * temp_fa0_2));
             temp_fv0_5 = func_802B2350((s32) arg0->descriptor->motion->speed);
             if (scale > 0.0f) {if (!(temp_fv0_5 < temp_fs0)) goto after_clamp;} else {if (!(temp_fs0 < temp_fv0_5)) goto after_clamp;}
-            Particle_ScaleVector(temp_s0_3, &spC8, temp_fv0_5);
+            GraphU64_ScaleVector(temp_s0_3, &spC8, temp_fv0_5);
             after_clamp:;
         }
         func_80279DD0_de(arg0, 1.0f);
@@ -146,7 +146,7 @@ extern char D_8011D8D0[];
 extern void func_8022B09C_de(void *, CVector3 *);
 extern void func_80283D50_de(void *);
 extern void Particle_Release(void *, void *);
-extern f32 Nav_ArcCos(f32);
+extern f32 GraphU64_ArcCos(f32);
 /* Steers a homing particle (sound 0x8AC) at its target, or straight ahead when it has none: keeps its loop
  * sound alive, drops the target after D_800C4B78_de seconds, ends the particle when it gets close enough,
  * otherwise turns the direction toward the target by a blend rate chosen from the turn angle and age,
@@ -203,7 +203,7 @@ create_sound:
         v58.y = 0;
         v58.z = D_800C4B7C_de;
         func_8022B09C_de(owner, &v58);
-        Particle_SubtractVectors(&v68, &v58, &arg0->position);
+        GraphU64_SubtractVectors(&v68, &v58, &arg0->position);
         distance = Math_Sqrtf(v68.x * v68.x + v68.y * v68.y + v68.z * v68.z);
         if (distance < D_800C4B80_de && arg0->time > D_800C4B84_de) {
             func_80283D50_de(arg0);
@@ -213,18 +213,18 @@ create_sound:
         }
     } else {
         v18 = FIELD(CVector3, FIELD(void *, arg0, 0x134), 0x8);
-        v18.y += Particle_GetActorHeight(FIELD(void *, arg0, 0x134)) * D_800C4B88_de;
-        Particle_SubtractVectors(&v68, &v18, &arg0->position);
+        v18.y += GameObject_GetActorHeight(FIELD(void *, arg0, 0x134)) * D_800C4B88_de;
+        GraphU64_SubtractVectors(&v68, &v18, &arg0->position);
     }
     v28 = v68;
-    Particle_NormalizeVec3(&v28);
+    GraphU64_NormalizeVec3(&v28);
     q88 = func_80271818_de(&v28);
     func_802741A4_de(&q88);
     func_802741A4_de(&q78);
-    Particle_NormalizeVec3(&v28);
+    GraphU64_NormalizeVec3(&v28);
     v38 = arg0->direction;
-    Particle_NormalizeVec3(&v38);
-    angle = Nav_ArcCos(v28.x * v38.x + v28.y * v38.y + v28.z * v38.z);
+    GraphU64_NormalizeVec3(&v38);
+    angle = GraphU64_ArcCos(v28.x * v38.x + v28.y * v38.y + v28.z * v38.z);
     rate = 0.0f;
     if (!(arg0->time < D_800C4B8C_de)) {
         rate = D_800C4B94_de;
@@ -238,9 +238,9 @@ create_sound:
     v48.x = 0;
     v48.y = 0;
     v48.z = D_800C4BA0_de;
-    Particle_TransformPoint(&mA8, &v48, direction);
+    GraphU64_TransformPoint(&mA8, &v48, direction);
     velocity = &arg0->velocity;
-    Particle_ScaleVector(velocity, direction, speed);
+    GraphU64_ScaleVector(velocity, direction, speed);
     if (arg0->time >= D_800C4BA4_de) {
         FIELD(s8, arg0, 0x1B9) = 0;
         FIELD(s8, arg0, 0x1BA) = 0;
@@ -258,7 +258,7 @@ create_sound:
         } else {
             if (!(speed2 < limit)) goto after_clamp;
         }
-        Particle_ScaleVector(velocity, &vF8, limit);
+        GraphU64_ScaleVector(velocity, &vF8, limit);
     after_clamp:;
     }
     func_80279DD0_de(arg0, 1.0f);
@@ -285,13 +285,13 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
     f32 limit;
     AccelSteeringVec *vel;
 
-    Particle_SubtractVectors(&offset, goal, &particle->position);
+    GraphU64_SubtractVectors(&offset, goal, &particle->position);
     distance = Math_Sqrtf((offset.x * offset.x) + (offset.y * offset.y) + (offset.z * offset.z));
     if (distance <= 51.199997f) {
         particle->position = *goal;
         return;
     }
-    Particle_NormalizeVec3(&offset.x);
+    GraphU64_NormalizeVec3(&offset.x);
     wanted = func_80271818_de(&offset.x);
     current = func_80271818_de(&particle->direction.x);
     speed = Math_Sqrtf((particle->velocity.x * particle->velocity.x) + (particle->velocity.y * particle->velocity.y) + (particle->velocity.z * particle->velocity.z));
@@ -311,8 +311,8 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
     forward.x = 0.0f;
     forward.y = 0.0f;
     forward.z = 1.0f;
-    Particle_TransformPoint(rotation, &forward, &particle->direction);
-    Particle_ScaleVector(&particle->velocity, &particle->direction, speed);
+    GraphU64_TransformPoint(rotation, &forward, &particle->direction);
+    GraphU64_ScaleVector(&particle->velocity, &particle->direction, speed);
     acceleration = func_802B2350(particle->link->params->accel);
     vel = &particle->velocity;
     if (acceleration != 0.0f) {
@@ -324,7 +324,7 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
         if (acceleration > 0.0f) {
             if (!(limit < newSpeed)) goto skip;
         } else if (!(newSpeed < limit)) goto skip;
-        Particle_ScaleVector(vel, &heading, limit);
+        GraphU64_ScaleVector(vel, &heading, limit);
     skip:;
     }
     func_80279DD0_de(particle, 1.0f);

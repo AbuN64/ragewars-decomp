@@ -43,7 +43,7 @@ CVector3 func_802723FC_de(CVector3 *remaining, CVector3 *arg1) {
     return projected;
 }
 
-s32 Particle_LimitVectorLength(f32 *arg0, f32 arg1) {
+s32 GraphU64_LimitVectorLength(f32 *arg0, f32 arg1) {
     f32 magSq;
     f32 mag;
     f32 scale;
@@ -66,7 +66,7 @@ s32 Particle_LimitVectorLength(f32 *arg0, f32 arg1) {
 void func_802725F4_de(void) {
 }
 
-f32 Particle_GetVerticalAngle(f32 *delta) {
+f32 GraphU64_GetVerticalAngle(f32 *delta) {
     f32 y;
     f32 zero;
     f32 x;
@@ -92,7 +92,7 @@ f32 Particle_GetVerticalAngle(f32 *delta) {
     if (D_800C48B8_de < ratio) {
         goto return_zero;
     }
-    return Nav_ArcCos(ratio) - *(&D_800C48B8_de + 1);
+    return GraphU64_ArcCos(ratio) - *(&D_800C48B8_de + 1);
 
 return_zero:
     return zero;
@@ -105,7 +105,7 @@ f32 func_802726BC_de(f32 *a, f32 *b) {
     return (dx * dx) + (dy * dy) + (dz * dz);
 }
 
-f32 Particle_GetPointDistance(f32 *a, f32 *b) {
+f32 GraphU64_GetPointDistance(f32 *a, f32 *b) {
     f32 dx = a[0] - b[0];
     f32 dy = a[1] - b[1];
     f32 dz = a[2] - b[2];
@@ -128,7 +128,7 @@ void func_80272748_de(CVector3 *motion, f32 arg1) {
 }
 
 /** Reset the matrix to identity-diagonal * D_800C99B0, zeroing the rest. */
-void Particle_IdentityMatrix(void *arg0) {
+void GraphU64_IdentityMatrix(void *arg0) {
     Matrix *matrix = arg0;
     f32 zero = 0.0f;
 
@@ -150,7 +150,7 @@ void Particle_IdentityMatrix(void *arg0) {
     matrix->m[1] = zero;
 }
 
-void Particle_ClampMatrixToFixedRange(f32 *arg0) {
+void GraphU64_ClampMatrixToFixedRange(f32 *arg0) {
     f32 *var_a0;
     f32 *var_v1;
     f32 temp_f0;
@@ -181,7 +181,7 @@ void Particle_ClampMatrixToFixedRange(f32 *arg0) {
     } while (j < 4);
 }
 
-void Particle_TransformPoint(void *matrix, void *arg1, void *arg2) {
+void GraphU64_TransformPoint(void *matrix, void *arg1, void *arg2) {
     Matrix *m = matrix;
     CVector3 *v = arg1;
     CVector3 *out = arg2;
@@ -216,7 +216,7 @@ void func_80272944_de(f32 *m, f32 *in, f32 *out, u32 count) {
     }
 }
 
-void Particle_ProjectPoint(void *matrix, void *arg1, CVector3 *localDirection) {
+void GraphU64_ProjectPoint(void *matrix, void *arg1, CVector3 *localDirection) {
     Matrix *m = matrix;
     CVector3 *v = arg1;
     f32 w;
@@ -246,7 +246,7 @@ void Particle_ProjectPoint(void *matrix, void *arg1, CVector3 *localDirection) {
     }
 }
 
-void Particle_TransformDirection(void *matrix, void *arg1, void *arg2) {
+void GraphU64_TransformDirection(void *matrix, void *arg1, void *arg2) {
     Matrix *m = matrix;
     CVector3 *v = arg1;
     CVector3 *out = arg2;
@@ -278,7 +278,7 @@ void func_80272BCC_de(void *matrix, void *arg1, void *arg2) {
                        + (m->m[10] * v->z);
 }
 
-void Particle_BuildTranslationMatrix(void *matrix, f32 arg1, f32 arg2, f32 arg3) {
+void GraphU64_BuildTranslationMatrix(void *matrix, f32 arg1, f32 arg2, f32 arg3) {
     Matrix *o = matrix;
     f32 val = D_800C48D0_de;
     f32 zero = 0.0f;
@@ -361,7 +361,7 @@ void func_80272D00_de(f32 (*mfThis)[4], f32 Theta, f32 X, f32 Y, f32 Z) {
     mfThis[0][1] = ab + Z;
 }
 
-void Particle_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z)
+void GraphU64_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z)
 {
   f32 zero;
   f32 ax = Math_Sinf(x);

@@ -34,12 +34,12 @@ extern s32 D_800CD8D0[];
 
 
 extern void InstHdr_ResetInstanceRenderIndices(PlacedProp *, RecordRecAt1A *, s32, char *);
-extern PropGeometry *Engine_GetActorDefinition(void *, s32);
+extern PropGeometry *Scene_GetActorDefinition(void *, s32);
 extern void ScaleMatrixLocal(char *, f32, f32, f32);
 extern void TranslateMatrix(char *, f32, f32, f32);
 extern void SwapMatrixUpForward(char *);
 extern void CopyMatrix(char *, char *);
-extern void Rsp_ConvertMatrixToFixed(char *, char *);
+extern void GraphU64_ConvertMatrixToFixed(char *, char *);
 
 static inline s32 advancePropKey(void) {
     s32 next;
@@ -69,7 +69,7 @@ void StaticInstance_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record
     prop->fieldB0 = 0;
     prop->fieldB4 = 0;
     turn = 0.0f;
-    prop->model = Engine_GetActorDefinition(&g_world, record->model);
+    prop->model = Scene_GetActorDefinition(&g_world, record->model);
     prop->fade = 16;
     prop->fieldDC = 0;
     model = prop->model;
@@ -122,7 +122,7 @@ void StaticInstance_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record
         prop->fieldD4 = record->value;
     }
     CopyMatrix(prop->matrix, matrix);
-    Rsp_ConvertMatrixToFixed(matrix, prop->transform);
+    GraphU64_ConvertMatrixToFixed(matrix, prop->transform);
     prop->position = position;
     if (record->segment == 0xFFFF) {
         prop->segment = 0;

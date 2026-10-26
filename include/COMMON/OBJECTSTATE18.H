@@ -78,7 +78,7 @@ struct Node_func_8026BC60_de {
     struct Node_func_8026BC60_de *right;
 };
 
-extern void Render_BeginModelBatch();
+extern void Geometry_BeginModelBatch();
 
 struct Material;
 typedef struct Material Material;
@@ -90,7 +90,7 @@ typedef struct ItemRecAt1C ItemRecAt1C;
 
 extern u32 D_800CC360;
 
-extern void Render_SelectEffectModes();
+extern void Geometry_SelectEffectModes();
 
 extern float D_800C4668_de;
 
@@ -120,7 +120,7 @@ extern void func_8026D83C_de(void);
 
 extern void func_8026D844_de();
 
-extern void Render_FlushModelBatch();
+extern void Geometry_FlushModelBatch();
 
 struct ObjectState18;
 

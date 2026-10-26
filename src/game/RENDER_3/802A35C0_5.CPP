@@ -71,7 +71,7 @@ void func_802A4A60_de(Animator *a) {
             op0 = *a->script++;
             op1 = *a->script++;
             a->mode = 1;
-            a->time = Nav_RandomBetween(op0, op1);
+            a->time = GraphU64_RandomBetween(op0, op1);
             break;
         case 3:
             next = 1;
@@ -141,7 +141,7 @@ typedef struct FillFade {
 } FillFade;
 #define FILL_FADE ((FillFade *)&D_800D15F0)
 
-void Render_UpdateFillMode(void) {
+void Fx_UpdateFillMode(void) {
     f32 target;
     f32 alpha;
 

@@ -9,7 +9,7 @@
 typedef struct CollisionInfo CollisionInfo;
 
 extern CollisionInfo D_80103FD0;
-extern f32 Particle_GetActorHeight(Instance8020CD74 *);
+extern f32 GameObject_GetActorHeight(Instance8020CD74 *);
 extern s32 func_802444A4_de(Instance8020CD74 *arg0, CVector3 current, CVector3 desired, CollisionInfo *arg3);
 
 s32 Barrel_TestFlaggedAimObstruction(Instance8020CD74 *arg0, void *unused, Instance8020CD74 *target) {
@@ -19,11 +19,11 @@ s32 Barrel_TestFlaggedAimObstruction(Instance8020CD74 *arg0, void *unused, Insta
 
     saved = *arg0;
     scale = D_800C21CC_de;
-    ((DraftAimPlayer *)arg0)->position.y += Particle_GetActorHeight(arg0) * scale;
+    ((DraftAimPlayer *)arg0)->position.y += GameObject_GetActorHeight(arg0) * scale;
     ((DraftAimPlayer *)arg0)->position.y += ((DraftAimPlayer *)arg0)->height;
 
     desired = ((ActorBarrelIsTargetInViewCone *)(target))->position;
-    desired.y += Particle_GetActorHeight(target) * scale;
+    desired.y += GameObject_GetActorHeight(target) * scale;
     desired.y += ((ActorBarrelIsTargetInViewCone *)(target))->eye;
 
     func_802444A4_de(arg0, ((Player *)(arg0))->pos, desired, &D_80103FD0);

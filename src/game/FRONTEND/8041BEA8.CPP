@@ -20,8 +20,8 @@ extern void func_802998A8_de(void);
 
 extern void func_80419F24_de(s32 fade);
 extern s32 func_80419F38_de(s32 fade);
-extern void Menu_StartFlicker(s32 fade, s32 speed);
-extern Node_func_8041D134_de *Menu_GetSlotValue(void *handle, s32 arg1);
+extern void SmpFlicker_StartFlicker(s32 fade, s32 speed);
+extern Node_func_8041D134_de *SmpOverlay_GetSlotValue(void *handle, s32 arg1);
 
 /* Frontend_ShowUnlockedEntries is declared by span code_8041BEA8.h; no local extern needed. */
 
@@ -33,11 +33,11 @@ s32 func_8041D134_de(s32 unused0, s32 unused1, s32 arg2) {
         ((MenuRecAt108 *) D_800E3590)->left->x += ((MenuRecAt108 *) D_800E3590)->leftStep;
         ((MenuRecAt108 *) D_800E3590)->right->x -= ((MenuRecAt108 *) D_800E3590)->rightStep;
         if (--((MenuRecAt108 *) D_800E3590)->timer <= 0) {
-            Render_PlayFlatSound(0xE79);
+            SoundElement_PlayFlatSound(0xE79);
             /* Node_func_8041D134_de is the hub Item view's twin (style at 0x10, x/y at 0x14/0x16);
                E8D8 speaks Item, so the node slots cast to it here. */
             Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupA, 1);
-            Menu_StartFlicker(((MenuRecAt108 *) D_800E3590)->fade, 4);
+            SmpFlicker_StartFlicker(((MenuRecAt108 *) D_800E3590)->fade, 4);
             ((MenuRecAt108 *) D_800E3590)->state = 4;
             ((MenuRecAt108 *) D_800E3590)->timer = 4;
         }
@@ -62,7 +62,7 @@ s32 func_8041D134_de(s32 unused0, s32 unused1, s32 arg2) {
         }
         break;
     case 5:
-        Render_PlayFlatSound(0xE78);
+        SoundElement_PlayFlatSound(0xE78);
         ((MenuRecAt108 *) D_800E3590)->state = 2;
         ((MenuRecAt108 *) D_800E3590)->timer = 4;
         Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupB, 0);
@@ -87,9 +87,9 @@ s32 func_8041D134_de(s32 unused0, s32 unused1, s32 arg2) {
     if (((MenuRecAt108 *) D_800E3590)->state == 3) {
         ((MenuRecAt108 *) D_800E3590)->clock += arg2;
         ((MenuRecAt108 *) D_800E3590)->cursor->style = Math_Cosf((f32) ((MenuRecAt108 *) D_800E3590)->clock * 0.0033333334f) * 30.0f + 220.0f;
-        node = Menu_GetSlotValue(((MenuRecAt108 *) D_800E3590)->handle, 0);
+        node = SmpOverlay_GetSlotValue(((MenuRecAt108 *) D_800E3590)->handle, 0);
         if (node != ((MenuRecAt108 *) D_800E3590)->focus) {
-            Render_PlayFlatSound(0xE7E);
+            SoundElement_PlayFlatSound(0xE7E);
             if (((MenuRecAt108 *) D_800E3590)->focus != 0) {
                 ((MenuRecAt108 *) D_800E3590)->focus->style = 0x6E;
             }

@@ -26,19 +26,19 @@ void func_8023ECBC_de(void *, u16 *);
 
 f32 func_802417C4_de(f32 *);
 
-f32 Particle_GetActorHeight(void *);
+f32 GameObject_GetActorHeight(void *);
 
-f32 Sound_GetActorBaseOffset(void *);
+f32 InstHdr_GetActorBaseOffset(void *);
 
-f32 Sound_GetActorReach(void *);
+f32 InstHdr_GetActorReach(void *);
 
 f32 func_80273F94_de(f32, f32);
 
-extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
+extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
 
-f32 Nav_GetTrianglePlaneHeight(void *, f32, f32);
+f32 GraphU64_GetTrianglePlaneHeight(void *, f32, f32);
 
-f32 Anim_GetPolygonHeight(void *, f32, f32);
+f32 Region_GetPolygonHeight(void *, f32, f32);
 
 void * func_8028C050_de(void *, CVector3 *);
 
@@ -75,7 +75,7 @@ extern void func_8023E838_de(void *arg0);
 
 extern void func_8023E45C_de(void *arg0);
 
-s32 Camera_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos, u32 *motionSettings) {
+s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos, u32 *motionSettings) {
     s32 func_8023D380_de();
     Func80243A80Frame frame;
     f32 headingCosine;
@@ -118,10 +118,10 @@ s32 Camera_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
         motionContinuation = (u32) motionContinuation < (actor->status & 0x300000);
     }
     frame.sp1C = motionContinuation;
-    actorReach = Sound_GetActorReach(actor);
-    count = Particle_GetActorRadius(actor);
-    high = Particle_GetActorHeight(actor);
-    func_8023E690_de(&frame.sp18, actorReach, count, high, Sound_GetActorBaseOffset(actor));
+    actorReach = InstHdr_GetActorReach(actor);
+    count = GameObject_GetActorRadius(actor);
+    high = GameObject_GetActorHeight(actor);
+    func_8023E690_de(&frame.sp18, actorReach, count, high, InstHdr_GetActorBaseOffset(actor));
     *(Func80243A80Vec3 *)&frame.sp5C = *(Func80243A80Vec3 *)&actor->x;
     __builtin_memcpy(&frame.sp68, &pos, 12);
     __builtin_memcpy(&frame.sp8C, &actor->room, 12);
@@ -323,7 +323,7 @@ block_71:
                     frame.sp54 |= 0x100;
                     func_8023EBFC_de(&frame.sp18, &frame.spC8);
                     if (actor->type == 1) {
-                        Nav_EaseValueToward(&frame.sp2C8, frame.sp2C8 - func_80273F94_de(frame.sp2C8, func_802417C4_de((f32 *) &frame.spC8)), 0.9f);
+                        GraphU64_EaseValueToward(&frame.sp2C8, frame.sp2C8 - func_80273F94_de(frame.sp2C8, func_802417C4_de((f32 *) &frame.spC8)), 0.9f);
                         actor->angle = frame.sp2C8;
                     }
                 }
@@ -334,8 +334,8 @@ block_71:
         if (*motionSettings & 0x80000) {
             surface = func_8028C050_de(frame.spC4, &actor->x);
             frame.sp54 &= ~0x5000;
-            if ((surface != 0) && ((((Func80243A80Collision *)surface)->flags & 0x41) == 0x41) && (Anim_GetPolygonHeight(surface, actor->x, actor->z) <= actor->y)) {
-                surfaceCeilingHeight = Nav_GetTrianglePlaneHeight(surface, actor->x, actor->z);
+            if ((surface != 0) && ((((Func80243A80Collision *)surface)->flags & 0x41) == 0x41) && (Region_GetPolygonHeight(surface, actor->x, actor->z) <= actor->y)) {
+                surfaceCeilingHeight = GraphU64_GetTrianglePlaneHeight(surface, actor->x, actor->z);
                 if (actor->y <= surfaceCeilingHeight) {
                     frame.sp54 |= 0x4000;
                 }
@@ -510,7 +510,7 @@ s32 func_802446E0_de(char *actorStorage, CVector3 startPosition, CVector3 endPos
     return count;
 }
 
-s32 Camera_SweepActorMotion(char *actorStorage, CVector3 startPosition, CVector3 endPosition, MotionSurface *motionSettings,
+s32 Unicol_SweepActorMotion(char *actorStorage, CVector3 startPosition, CVector3 endPosition, MotionSurface *motionSettings,
                   CVector3 motionExtents, f32 baseOffset) {
     extern s32 func_8023D380_de(void *actorStorage);
     Work80244494 work;

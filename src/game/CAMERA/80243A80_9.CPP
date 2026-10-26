@@ -12,7 +12,7 @@
 
 
 #include "MENU_2/80400000_16.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Calls func_80402BA0_de when the globally selected record's word at 0x38 is non-zero. */
 
@@ -22,9 +22,9 @@ extern void func_80402BA0_de(void);
 /** Clear the global word at VRAM 0x800E2838. */
 
 
-/* Reports whether Camera_IsSequenceInWindow accepts the globally selected record and bit 2 of its word at 0x74
+/* Reports whether Cinema_IsSequenceInWindow accepts the globally selected record and bit 2 of its word at 0x74
    is set. */
-extern int Camera_IsSequenceInWindow(void);
+extern int Cinema_IsSequenceInWindow(void);
 
 /* Returns the globally selected record's word at 0xAC while its word at 0x38 is non-zero, and 0
    otherwise. */
@@ -41,7 +41,7 @@ extern f32 Menu_EvaluateTrackScalar(f32 arg0);
 
 
 
-extern void Resmgr_CopyString(void *arg0, int arg1);
+extern void XPlus_CopyString(void *arg0, int arg1);
 
 /* Returns the globally selected record's float at 0xA0 scaled by D_800C88CC. */
 
@@ -55,7 +55,7 @@ extern void Resmgr_CopyString(void *arg0, int arg1);
 s32 func_80245814_de(void) {
     s32 result;
     result = 0;
-    if (Camera_IsSequenceActive() == 0) {
+    if (Cinema_IsSequenceActive() == 0) {
         result = func_8024576C_de() == 0;
     }
     return result;
@@ -66,7 +66,7 @@ unsigned int func_80245850_de(void) {
     return D_800E2830->state3C;
 }
 
-void Camera_UpdateSequenceTrack(void *camera) {
+void Cinema_UpdateSequenceTrack(void *camera) {
     Shared_MenuContext *record = D_800E2830;
     if (record->active != 0) {
         Menu_UpdateTrackCamera(camera);
@@ -100,7 +100,7 @@ void func_802458F8_de(void) {
 
 int func_80245908_de(void) {
     Shared_MenuContext *record;
-    if (Camera_IsSequenceInWindow() == 0) {
+    if (Cinema_IsSequenceInWindow() == 0) {
         return 0;
     }
     record = D_800E2830;
@@ -154,11 +154,11 @@ f32 func_802459A0_de(void) {
     return response;
 }
 
-void Camera_SetResponse(float responseValue) {
+void Cinema_SetResponse(float responseValue) {
     D_800E2830->response = responseValue;
 }
 
-void Camera_ClearResponse(void) {
+void Cinema_ClearResponse(void) {
     D_800E2830->response = 0.0f;
 }
 
@@ -186,15 +186,15 @@ void func_80245A5C_de(int viewportWidth, int viewportHeight, int viewportLeft, i
     record->unknown104[4] = viewportTop;
 }
 
-void Camera_AddMessage(int goal) {
+void Cinema_AddMessage(int goal) {
     Shared_MenuContext *record = D_800E2830;
     int idx = record->messageCount;
-    Resmgr_CopyString(record->messages[idx], goal);
+    XPlus_CopyString(record->messages[idx], goal);
     record = D_800E2830;
     record->messageCount = record->messageCount + 1;
 }
 
-void Camera_ClearMessageCount(void) {
+void Cinema_ClearMessageCount(void) {
     D_800E2830->messageCount = 0;
 }
 
@@ -208,7 +208,7 @@ unsigned int func_80245AF8_de(void) {
     return D_800E2830->spec.unknown48;
 }
 
-s32 Camera_GetSequenceRequest(void) {
+s32 Cinema_GetSequenceRequest(void) {
     return D_800E2830->requestE0;
 }
 
@@ -219,11 +219,11 @@ struct UnresolvedRec;
 static void func_80245B20_de(void) {
 }
 
-void Camera_ReleaseSequenceContext(void) {
+void Cinema_ReleaseSequenceContext(void) {
     int owner = (s32)D_800E2830->owner;
     Shared_MenuContext *record;
     if (owner != 0) {
-        Scene_ReleaseResource(0, owner);
+        Cache_ReleaseResource(0, owner);
     }
     record = D_800E2830;
     record->owner = 0;

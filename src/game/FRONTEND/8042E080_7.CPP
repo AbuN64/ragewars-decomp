@@ -4,7 +4,7 @@
 #include "FRONTEND/8042E080_34.H"
 
 extern void MarkMenuEventHandled(void);
-extern void Frontend_RefreshPlayerPanel(s32 player);
+extern void PAKInterface_RefreshPlayerPanel(s32 player);
 
 /* Dispatch player-slot events using the current shared menu controller and
  * its measured 0xB68-byte player records. */
@@ -21,7 +21,7 @@ s32 func_8042FB48_de(s32 a,s32 b,u32 event,s32 key){
                     D_800E54A4->players[index].back=2;
                     D_800E54A4->players[index].state=2;
                     D_800E54A4->players[index].next=state;
-                    Frontend_RefreshPlayerPanel(index);
+                    PAKInterface_RefreshPlayerPanel(index);
                 }
             }
             break;
@@ -34,7 +34,7 @@ s32 func_8042FB48_de(s32 a,s32 b,u32 event,s32 key){
                     D_800E54A4->players[index].back=2;
                     D_800E54A4->players[index].state=2;
                     D_800E54A4->players[index].next=4;
-                    Frontend_RefreshPlayerPanel(index);
+                    PAKInterface_RefreshPlayerPanel(index);
                 }
                 break;
                 case 10:
@@ -46,7 +46,7 @@ s32 func_8042FB48_de(s32 a,s32 b,u32 event,s32 key){
                         D_800E54A4->players[index].back=2;
                         D_800E54A4->players[index].state=2;
                         D_800E54A4->players[index].next=state;
-                        Frontend_RefreshPlayerPanel(index);
+                        PAKInterface_RefreshPlayerPanel(index);
                     }
                     break;
                 }
@@ -59,7 +59,7 @@ s32 func_8042FB48_de(s32 a,s32 b,u32 event,s32 key){
                     D_800E54A4->players[index].back=2;
                     D_800E54A4->players[index].state=2;
                     D_800E54A4->players[index].next=12;
-                    Frontend_RefreshPlayerPanel(index);
+                    PAKInterface_RefreshPlayerPanel(index);
                 }
             }
             break;
@@ -71,7 +71,7 @@ s32 func_8042FB48_de(s32 a,s32 b,u32 event,s32 key){
                     D_800E54A4->players[index].state=2;
                     D_800E54A4->players[index].next=13;
                     D_800E54A4->players[index].sub=5;
-                    Frontend_RefreshPlayerPanel(index);
+                    PAKInterface_RefreshPlayerPanel(index);
                 }
             }
             break;
@@ -86,7 +86,7 @@ s32 func_8042FB48_de(s32 a,s32 b,u32 event,s32 key){
                         D_800E54A4->players[index].next=13;
                         D_800E54A4->players[index].sub=6;
                     }
-                    Frontend_RefreshPlayerPanel(index);
+                    PAKInterface_RefreshPlayerPanel(index);
                 }
             }
             break;
@@ -101,7 +101,7 @@ s32 func_8042FB48_de(s32 a,s32 b,u32 event,s32 key){
                         D_800E54A4->players[index].next=13;
                         D_800E54A4->players[index].sub=3;
                     }
-                    Frontend_RefreshPlayerPanel(index);
+                    PAKInterface_RefreshPlayerPanel(index);
                 }
             }
             break;

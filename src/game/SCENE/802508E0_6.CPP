@@ -108,8 +108,8 @@ extern Gfx *g_displayListCursor;
 extern struct Shape_func_8021A2D4_de_2 D_80105180;
 extern Manager D_801047E0;
 extern u32 __osDisableInt(void);
-extern void Render_SetCombineMode(s32);
-extern void Render_SetModePreset(s32);
+extern void Geometry_SetCombineMode(s32);
+extern void Geometry_SetModePreset(s32);
 
 /* The main heap (its other users declare D_801051A0 as a plain byte); its block list is read through this view. */
 static inline struct Heap *mainHeap(void) {
@@ -151,7 +151,7 @@ static inline void unlock(void) {
  * band (yellow, red, blue or green by its flags) with a darker bottom edge, entries outside the locked set in the
  * first pass and locked ones in the second; an entry that is not locked or loading and was unused for 5+ frames
  * also gets a white inset band. Runs under the resource lock. */
-void Scene_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom) {
+void Cache_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom) {
     struct BlockRecAt20 *span;
     Node80254C10 *node;
     u32 total;
@@ -166,11 +166,11 @@ void Scene_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom)
 
     gDPPipeSync(g_displayListCursor++);
     gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
-    Render_SetCombineMode(0x19);
-    Render_SetModePreset(0x15);
+    Geometry_SetCombineMode(0x19);
+    Geometry_SetModePreset(0x15);
     gDPSetPrimColor(g_displayListCursor++, 0, 0, 0xA0, 0xA0, 0xA0, 0x00);
     gDPFillRectangle(g_displayListCursor++, left - 1, top - 1, right + 1, bottom + 1);
-    Render_SetModePreset(0x1B);
+    Geometry_SetModePreset(0x1B);
     gDPSetPrimColor(g_displayListCursor++, 0, 0, 0xA0, 0xA0, 0xA0, 0xFF);
     gDPFillRectangle(g_displayListCursor++, left, top, right, bottom);
 

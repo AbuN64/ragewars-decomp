@@ -15,12 +15,12 @@ extern StatusStep D_80142622[];
 
 extern PlayerSettings g_playerSettings[];
 
-extern s32 Render_IsAButtonPressed(ControllerProfile *);
+extern s32 Control_IsAButtonPressed(ControllerProfile *);
 
 /* Finds the first of the four slots in D_8010F328 that func_8026437C_de accepts, writing its index to out and returning it, or writing -1 and returning NULL when none does. */
 
 
-extern s32 Render_IsAButtonPressed(ControllerProfile *slot);
+extern s32 Control_IsAButtonPressed(ControllerProfile *slot);
 
 /** Count how many of the 4 flagged entries in D_8010F328 also have a nonzero unk148 in the
  *  matching D_801462C8 record, returning 0 early on the first flagged entry that does not. */
@@ -55,10 +55,10 @@ void Weapons_EndRound(void *arg0);
 
 
 
-extern void Render_DisableControllerPak(s8);
+extern void Control_DisableControllerPak(s8);
 
 
-extern void Render_SetProfileMode(PakMenuSlot *, s32);
+extern void Control_SetProfileMode(PakMenuSlot *, s32);
 
 /** Report whether the tutorial-progress flags (at 0x1c, 0x20, 0x28) hold any nonzero bit. */
 
@@ -84,7 +84,7 @@ void func_8043DFC8_de(void) {
     active = 1;
     settings = g_playerSettings;
     for (; i < 4; i++) {
-        if (Render_IsAButtonPressed(&D_8010F328[i]) != 0) {
+        if (Control_IsAButtonPressed(&D_8010F328[i]) != 0) {
             settings[i].active = active;
             settings[i].selected = i;
             break;
@@ -98,7 +98,7 @@ ControllerProfile *func_8043E05C_de(s32 *out) {
     i = 0;
     s = D_8010F328;
     while (i < 4) {
-        if (Render_IsAButtonPressed(s) != 0) {
+        if (Control_IsAButtonPressed(s) != 0) {
             *out = i;
             return s;
         }
@@ -188,9 +188,9 @@ s32 func_8043E1F8_de(s32 unused0, MenuRecAt20V2 *menu) {
 
     D_801462C8.counters.m_FragTagMode = 0;
     slot = &menu->widget;
-    Render_DisableControllerPak((*slot)->unk4);
-    Render_ResetControllerPak(*slot);
-    Render_SetProfileMode(*slot, 1);
+    Control_DisableControllerPak((*slot)->unk4);
+    Control_ResetControllerPak(*slot);
+    Control_SetProfileMode(*slot, 1);
     menu->owner->unk85C = 0;
     return 1;
 }

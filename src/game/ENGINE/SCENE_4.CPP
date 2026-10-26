@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-/* Draws a scene through cached display lists: loads the scene if needed (returning if that fails), calls the model's base list, and on first use records two lists in the frame's command stream, one for objects without flag 4 and one for objects with it, each drawn through Instance_DrawModel inside a Render_BeginModelBatch pass and preceded by a branch past its end; finally calls the first cached list. */
+/* Draws a scene through cached display lists: loads the scene if needed (returning if that fails), calls the model's base list, and on first use records two lists in the frame's command stream, one for objects without flag 4 and one for objects with it, each drawn through StaticInstance_DrawModel inside a Geometry_BeginModelBatch pass and preceded by a branch past its end; finally calls the first cached list. */
 
 
 
@@ -18,7 +18,7 @@ extern void func_80253908_de(s32 heap);
 extern void Scene_BuildCachedGeometry(Scene_func_80288EA8_de *scene);
 
 
-extern void Instance_DrawModel(Object_func_80288EA8_de *object, void *camera);
+extern void StaticInstance_DrawModel(Object_func_80288EA8_de *object, void *camera);
 
 void func_80288EA8_de(Scene_func_80288EA8_de *scene, void *camera) {
     Object_func_80288EA8_de **objects;
@@ -33,29 +33,29 @@ void func_80288EA8_de(Scene_func_80288EA8_de *scene, void *camera) {
             return;
         }
     }
-    gSPDisplayList(g_displayListCursor++, (unsigned int)Render_GetPackSection(scene->model, 2));
+    gSPDisplayList(g_displayListCursor++, (unsigned int)SetN64_GetPackSection(scene->model, 2));
     if (scene->lists[0] == 0) {
         for (pass = 0; pass < 2; pass++) {
             scene->lists[pass] = g_displayListCursor;
             gSPBranchList(g_displayListCursor++, 0);
-            Render_BeginModelBatch();
-            objects = Render_GetPackSection(scene->model, 1);
+            Geometry_BeginModelBatch();
+            objects = SetN64_GetPackSection(scene->model, 1);
             while (*objects != 0) {
                 object = *objects++;
                 switch (pass) {
                 case 0:
                     if (!(object->flags & 4)) {
-                        Instance_DrawModel(object, camera);
+                        StaticInstance_DrawModel(object, camera);
                     }
                     break;
                 case 1:
                     if (object->flags & 4) {
-                        Instance_DrawModel(object, camera);
+                        StaticInstance_DrawModel(object, camera);
                     }
                     break;
                 }
             }
-            Render_FlushModelBatch();
+            Geometry_FlushModelBatch();
             gSPEndDisplayList(g_displayListCursor++);
             gSPBranchList(scene->lists[pass]++, (unsigned int)g_displayListCursor);
         }
@@ -72,7 +72,7 @@ void func_80288EA8_de(Scene_func_80288EA8_de *scene, void *camera) {
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ACTOR_DEFINITION.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* One sector of the world: its model resource, its x/z extent and its cell in the streaming grid. */
 /* Views of the SN debug records this pass reads, with their original member names: CScene_t (0x1B930 bytes),
@@ -148,9 +148,9 @@ typedef struct CScene_t {
 extern Gfx *g_displayListCursor;
 extern s32 D_800D2AE0;
 extern s32 D_800CD730;
-extern Shared_func_80234FDC_S1 *Camera_FindScreenMessage(GameplayCamera *camera);
-extern void Scene_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
-extern void Scene_UnlockResource(void *heap, struct Node80253610 *resource);
+extern Shared_func_80234FDC_S1 *Sky_FindScreenMessage(GameplayCamera *camera);
+extern void Cache_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
+extern void Cache_UnlockResource(void *heap, struct Node80253610 *resource);
 extern s32 func_80296390_de(void *grid, s32 x, s32 z, s32 index);
 extern s32 func_80296B74_de(void *planes, void *bounds);
 extern void StaticInstance_RegisterGeometryResources(CGameStaticInstance_t *prop, GameplayCamera *camera);
@@ -203,7 +203,7 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
         func_80288EA8_de(world, camera);
         return;
     }
-    player = Camera_FindScreenMessage(camera);
+    player = Sky_FindScreenMessage(camera);
     shipModel = SceneFindShip(world->m_pusObjectTypes);
     showShip = 0;
     if (player != NULL && shipModel != -1) {
@@ -212,7 +212,7 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
     gDPPipeSync(g_displayListCursor++);
     gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
     scene = world;
-    Render_BeginModelBatch();
+    Geometry_BeginModelBatch();
     scene->m_nTransparentInstances = 0;
     if (player != NULL && (player->unk664 & 0x100)) {
         gSPMoveWord(g_displayListCursor++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_1);
@@ -233,9 +233,9 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
               sector->m_pBoundsRect->m_MaxZ > camera->clipBounds[0].z && sector->m_pBoundsRect->m_MinZ < camera->clipBounds[1].z)) {
             continue;
         }
-        Scene_MarkResourceInUse(0, sector->m_pmeGridSection);
+        Cache_MarkResourceInUse(0, sector->m_pmeGridSection);
         model = sector->m_pmeGridSection->field0;
-        propSection = Render_GetPackSection(model, 0);
+        propSection = SetN64_GetPackSection(model, 0);
         propCount = propSection->count;
         props = propSection->props;
         for (i = 0; i < propCount; i++) {
@@ -286,7 +286,7 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
                 prop->m_wFlags |= 0x200;
             }
         }
-        staticSection = Render_GetPackSection(model, 1);
+        staticSection = SetN64_GetPackSection(model, 1);
         staticCount = staticSection->count;
         statics = staticSection->statics;
         for (i = 0; i < staticCount; i++) {
@@ -309,9 +309,9 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
             }
         }
     }
-    Render_FlushModelBatch();
+    Geometry_FlushModelBatch();
     if (scene->m_bVisibilityValid != 0) {
-        Scene_UnlockResource(NULL, scene->m_pmeVisibilityData);
-        Scene_ReleaseResource(NULL, scene->m_pmeVisibilityData);
+        Cache_UnlockResource(NULL, scene->m_pmeVisibilityData);
+        Cache_ReleaseResource(NULL, scene->m_pmeVisibilityData);
     }
 }

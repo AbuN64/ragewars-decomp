@@ -43,7 +43,7 @@ extern s32 Player_GetProfileAchievementFlag(void *, s16);
 
 extern s32 Weapons_GetPlayerIndex(void *, void *);
 
-extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
+extern void Sky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 
 extern s32 func_802301F4_de(void *, void *);
 
@@ -65,9 +65,9 @@ static inline s32 can_fire(char *player) {
     }
     ammo = Player_GetProfileAchievementFlag(&D_80102B00[((SharedPlayer *)(player))->views1C.view5D4_45.unk5D4 * 0x190], ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E);
     if (ammo == 0) {
-        Render_PlayFlatSound(0xD4D);
+        SoundElement_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-            Camera_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Weapons_GetPlayerIndex(D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Weapons_GetPlayerIndex(D_80145040, player),
                           1.0f);
         }
     }
@@ -89,7 +89,7 @@ extern s32 Weapons_GetWeaponAmmo(void *arg0, s16 arg1);
 extern s32 D_80140FF8;
 
 
-extern s32 Render_PlaySoundAtPosition(s16, CVector3, void *, s32);
+extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, void *, s32);
 
 
 static inline s32 released(void *actor, char *player) {
@@ -128,9 +128,9 @@ void Weapon_UpdateSpinAndAlternateFire(Shared_Actor *actor, WeaponFireState *fir
             Weapons_RequestActorState(actor, fire, 5);
             fire->mode = 2;
         } else {
-            Render_PlayFlatSound(0xD4D);
+            SoundElement_PlayFlatSound(0xD4D);
             if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-                Camera_PostTargetedScreenMessage((D_80145040 + 0x48), ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, (u8)D_80145040[0x1809]),
+                Sky_PostTargetedScreenMessage((D_80145040 + 0x48), ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, (u8)D_80145040[0x1809]),
                               Weapons_GetPlayerIndex(D_80145040, player), 1.0f);
             }
             fire->mode = 1;
@@ -216,11 +216,11 @@ void Weapon_UpdateChargeAndRepeatCue(LevelActor *actor, Dest *attack) {
         Weapons_RequestActorState(actor, attack, 2);
         func_8022AF40_de(player);
         func_8022B00C_de(player);
-        Render_PlaySoundAtPosition(0x794, *position, position, -1);
-        Nav_EaseValueToward(&attack->charge, (f32)D_800CA2D8_de * D_800C2F1C_de, 0.4f);
+        SoundElement_PlaySoundAtPosition(0x794, *position, position, -1);
+        GraphU64_EaseValueToward(&attack->charge, (f32)D_800CA2D8_de * D_800C2F1C_de, 0.4f);
         return;
     }
-    Nav_EaseValueToward(&attack->charge, (f32)D_800CA2D8_de * D_800C2F20_de, 0.4f);
+    GraphU64_EaseValueToward(&attack->charge, (f32)D_800CA2D8_de * D_800C2F20_de, 0.4f);
     attack->cueTimer -= D_800D2988;
     if (attack->cueTimer <= 0.0f) {
         attack->cueTimer += D_800C2F24_de;

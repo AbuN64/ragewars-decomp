@@ -85,10 +85,10 @@ void Weapon_UpdateSpinAndRepeatCue(Shared_Actor *actor, WeaponFireState *attack)
         Weapons_RequestActorState(actor, attack, 2);
         func_8022AF40_de(player);
         func_8022B00C_de(player);
-        Render_PlaySoundAtPosition(0x978, *position, (s32)position, -1);
+        SoundElement_PlaySoundAtPosition(0x978, *position, (s32)position, -1);
         return;
     }
-    Nav_EaseValueToward(&attack->spin, (f32)D_800CA37C * D_800C2F60_de, 0.4f);
+    GraphU64_EaseValueToward(&attack->spin, (f32)D_800CA37C * D_800C2F60_de, 0.4f);
     attack->cueTimer -= D_800D2988;
     if (attack->cueTimer <= 0.0f) {
         attack->cueTimer = D_800C2F64_de;
@@ -113,7 +113,7 @@ void Weapon_SettleSpinToThirdTurn(Shared_Actor *actor, WeaponFireState *fireStat
     if (fireState->variant != 4) {
         spin = fireState->spin;
         if (spin > 0.0f) {
-            fireState->spin = Nav_DecayToZero(spin, D_800C2F68_de);
+            fireState->spin = GraphU64_DecayToZero(spin, D_800C2F68_de);
         } else {
             f32 value = fireState->spinStep;
             f32 period = D_800C2F6C_de;
@@ -126,13 +126,13 @@ void Weapon_SettleSpinToThirdTurn(Shared_Actor *actor, WeaponFireState *fireStat
             }
             period = fireState->spinStep;
             if (period < D_800C2F70_de) {
-                Nav_EaseValueToward(&fireState->spinStep, 0.0f, 0.125f);
+                GraphU64_EaseValueToward(&fireState->spinStep, 0.0f, 0.125f);
             } else if (period < D_800C2F74_de) {
-                Nav_EaseValueToward(&fireState->spinStep, 2.0943952f, 0.125f);
+                GraphU64_EaseValueToward(&fireState->spinStep, 2.0943952f, 0.125f);
             } else if (period < D_800C2F78_de) {
-                Nav_EaseValueToward(&fireState->spinStep, 4.1887903f, 0.125f);
+                GraphU64_EaseValueToward(&fireState->spinStep, 4.1887903f, 0.125f);
             } else {
-                Nav_EaseValueToward(&fireState->spinStep, 6.2831855f, 0.125f);
+                GraphU64_EaseValueToward(&fireState->spinStep, 6.2831855f, 0.125f);
             }
         }
     }
@@ -165,7 +165,7 @@ extern char D_80102B00[];
 
 extern s16 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
-extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
+extern void Sky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #elif defined(VERSION_EU)
@@ -184,9 +184,9 @@ static inline s32 can_fire(Player *player) {
     }
     ammo = Player_GetProfileAchievementFlag(&D_80102B00[player->slot * 0x190], player->selectedAction);
     if (ammo == 0) {
-        Render_PlayFlatSound(0xD4D);
+        SoundElement_PlayFlatSound(0xD4D);
         if (player->camera != 0) {
-            Camera_PostTargetedScreenMessage(&D_80145088, player->camera, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Weapons_GetPlayerIndex(&D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, player->camera, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex), Weapons_GetPlayerIndex(&D_80145040, player),
                           1.0f);
         }
     }
@@ -214,9 +214,9 @@ void Weapon_UpdateAnimatedFiringMode(Shared_Actor *actor, WeaponFireState *fireS
         if (fireState->mode == single) {
             fireState->mode = 2;
             if (Weapons_HasAmmoForMode(player, player->selectedAction) == 0) {
-                Render_PlayFlatSound(0xD4D);
+                SoundElement_PlayFlatSound(0xD4D);
                 if (player->camera != 0) {
-                    Camera_PostTargetedScreenMessage(&D_80145040.object, player->camera, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80145040.object.language),
+                    Sky_PostTargetedScreenMessage(&D_80145040.object, player->camera, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80145040.object.language),
                                   Weapons_GetPlayerIndex(&D_80145040, player), 1.0f);
                 }
                 fireState->mode = single;

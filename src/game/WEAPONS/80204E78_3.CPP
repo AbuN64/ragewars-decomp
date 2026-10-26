@@ -210,7 +210,7 @@ unsigned int rodata_unresolved_800C1A98[2] = {
 };
 #endif
 
-extern s32 Render_TestActorStateBit(void *, void *);
+extern s32 Rumble_TestActorStateBit(void *, void *);
 
 
 typedef struct Owner Owner;
@@ -226,7 +226,7 @@ void func_8020520C_de(LevelActor *source, void *dest) {
 }
 
 void func_8020524C_de(LevelActor *actor, void *requestContext) {
-    if (Render_TestActorStateBit(&g_world, actor) == 1) {
+    if (Rumble_TestActorStateBit(&g_world, actor) == 1) {
         Weapons_RequestActorState(actor, requestContext, 1);
     } else {
         Weapons_RequestActorState(actor, requestContext, 0);
@@ -264,7 +264,7 @@ void func_80205324_de(Obj5324 *actor, s32 *activationContext) {
 
     rec = &actor->holder->r;
     pFlag = &g_world;
-    Render_SetActorStateBit(pFlag, actor, 1);
+    Rumble_SetActorStateBit(pFlag, actor, 1);
     func_80278D78_de(actor, 0x40000, actor);
     if (activationContext[1] == 0) {
         actor->flags = actor->flags & 0xFFFEFFFF;
@@ -276,7 +276,7 @@ void func_80205324_de(Obj5324 *actor, s32 *activationContext) {
     mode = pFlag->mode;
     if (mode == 4) {
         if (rec->unk20.whole != -1) {
-            Render_PlaySoundAtPosition(rec->unk20.half.id, actor->pos.v, 0, -1);
+            SoundElement_PlaySoundAtPosition(rec->unk20.half.id, actor->pos.v, 0, -1);
         }
         if (rec->unk1C != -1) {
             Weapons_SpawnActorEffect(actor, rec->unk1C, actor->pos.t, 0);

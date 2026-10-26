@@ -23,7 +23,7 @@ extern void func_8028D380_de(Shared_World *, s32, char *, s32);
 
 extern s32 func_802A0494_de(char *);
 
-extern void Resmgr_CopyString(void *, s32);
+extern void XPlus_CopyString(void *, s32);
 
 /* Returns the index of the entry among the 0x24 28-byte entries of D_800E4694 whose identifier
    matches, or zero when none does. */
@@ -103,7 +103,7 @@ void func_804280BC_de(void) {
     char buffer[0x40];
 
     func_8028D380_de(&g_world, D_800E4690->selection, buffer, 0x3F);
-    Resmgr_CopyString(D_800E4690->text, func_802A0494_de(buffer));
+    XPlus_CopyString(D_800E4690->text, func_802A0494_de(buffer));
     D_800E4690->owner->unk38 = D_800E4690->text;
 }
 

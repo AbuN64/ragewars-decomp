@@ -18,11 +18,11 @@ static inline void rectangle(s32 x0,s32 y0,s32 x1,s32 y1,s32 r,s32 g,s32 b,s32 a
     gDPFillRectangle(g_displayListCursor++, x0>0?x0:0,y0>0?y0:0,x1>0?x1:0,y1>0?y1:0);
 }
 
-/* Draws a signed integer of up to four digits with the font sprite set from Render_StartWorldEffect: splits the magnitude into thousands, hundreds, tens and ones, draws a leading minus sign through func_802AAC28_de when negative, then draws at least minDigits digits through Text_DrawTileGrid, advancing 13 units per digit (0.7 of that for a one) scaled by the size, laid out right to left when rightAlign is set, and releases the sprite set. */
+/* Draws a signed integer of up to four digits with the font sprite set from Scene_StartWorldEffect: splits the magnitude into thousands, hundreds, tens and ones, draws a leading minus sign through func_802AAC28_de when negative, then draws at least minDigits digits through Text_DrawTileGrid, advancing 13 units per digit (0.7 of that for a one) scaled by the size, laid out right to left when rightAlign is set, and releases the sprite set. */
 
 
 
-extern s32 Render_StartWorldEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3);
+extern s32 Scene_StartWorldEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 
 extern void Text_DrawTileGrid(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
 
@@ -31,9 +31,9 @@ extern void Text_DrawTileGrid(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, 
 
 #include "GFX/TEXT/802A8A94_6.H"
 
-extern void Render_SetCombineMode(s32 arg0);
+extern void Geometry_SetCombineMode(s32 arg0);
 
-extern s32 Render_SetModePreset(s32);
+extern s32 Geometry_SetModePreset(s32);
 
 void func_802A7AA4_de(Mover *m) {
     s32 next;
@@ -133,7 +133,7 @@ void func_802A7AA4_de(Mover *m) {
     } while (next);
 }
 
-void Text_DrawBevelBox(s32 x0,s32 y0,s32 x1,s32 y1,s32 border,s32 invert,s32 red,s32 green,s32 blue,s32 alpha) {
+void OnScreen_DrawBevelBox(s32 x0,s32 y0,s32 x1,s32 y1,s32 border,s32 invert,s32 red,s32 green,s32 blue,s32 alpha) {
     u8 r=red,g=green,b=blue,a=alpha;
     s32 lightR,lightG,lightB,darkR,darkG,darkB;
     lightR=invert ? r>>1 : r<<1;
@@ -164,7 +164,7 @@ void func_802A822C_de(s32 value, f32 x, f32 y, f32 size, f32 scaleY, s32 arg5, s
     f32 width;
     f32 scale;
 
-    sprites = Render_StartWorldEffect(&g_world, 4, 0x10, 1);
+    sprites = Scene_StartWorldEffect(&g_world, 4, 0x10, 1);
     if (sprites == 0) {
         return;
     }
@@ -232,7 +232,7 @@ void func_802A822C_de(s32 value, f32 x, f32 y, f32 size, f32 scaleY, s32 arg5, s
         }
     }
 release:
-    Scene_UnlockResource(0, (struct Node80253610 *)sprites);
+    Cache_UnlockResource(0, (struct Node80253610 *)sprites);
 }
 
 void func_802A84F8_de(void) {
@@ -249,8 +249,8 @@ void func_802A84F8_de(void) {
             gDPSetCycleType(cmd, G_CYC_2CYCLE);
         }
 
-        Render_SetCombineMode(0x1A);
-        Render_SetModePreset(0x15);
+        Geometry_SetCombineMode(0x1A);
+        Geometry_SetModePreset(0x15);
 
         D_80147150 = 0;
         {

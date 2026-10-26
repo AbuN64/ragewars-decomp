@@ -30,7 +30,7 @@ void Weapons_SetLoopingSound(void *arg0, void *arg1, s32 arg2);
 
 void Barrel_StopActorLoopingSound(void *arg0, void *arg1);
 
-f32 Nav_ApproachValue(f32 arg0, f32 arg1, f32 arg2);
+f32 GraphU64_ApproachValue(f32 arg0, f32 arg1, f32 arg2);
 
 typedef union NavRider { RiderRecAt130V1 target; Rider rider; struct { char pad0[0x9C]; f32 heading; char padA0[0x124-0xA0]; f32 speed; char pad128[8]; CVector3 aim; } nav; } NavRider;
 
@@ -41,7 +41,7 @@ static inline void navRotation(CQuatern *q,CVector3 *aim) {
     ((void (*)(CQuatern *,CVector3 *))CVector3_GetDirectionRotation2)(q,aim); }
 typedef union NavResult { Result result; Output80216D3C output; struct { s32 kind; void *target; f32 projection; char padC[0x88-0xC]; } workspace; } NavResult;
 
-static inline void navProject(f32 *matrix,CVector3 *local,CVector3 *out,CVector3 *to,CVector3 *from) { Particle_SubtractVectors(local,to,from); func_80272BCC_de(matrix,local,out); }
+static inline void navProject(f32 *matrix,CVector3 *local,CVector3 *out,CVector3 *to,CVector3 *from) { GraphU64_SubtractVectors(local,to,from); func_80272BCC_de(matrix,local,out); }
 
 
 typedef struct NavWork {
@@ -66,7 +66,7 @@ typedef struct NavWork {
 
 
 
-extern s32 Render_TestActorStateBit(void *, void *);
+extern s32 Rumble_TestActorStateBit(void *, void *);
 
 /** Run the object's update hook, then advance its timer and fire the expiry action when due. */
 
@@ -106,10 +106,10 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
     if ((target != NULL) && (work.result.result.distance <= turret->m_SightRadius)) {
         heightScale = D_800C1A28;
         work.origin.v=actor->player.views0.view8_2.unk8;
-        desiredSpeed=Particle_GetActorHeight(&actor->player);
+        desiredSpeed=GameObject_GetActorHeight(&actor->player);
         work.origin.v.y+=desiredSpeed*heightScale;
         work.destination.v=target->views0.view8_2.unk8;
-        desiredSpeed=Particle_GetActorHeight(target);
+        desiredSpeed=GameObject_GetActorHeight(target);
         work.destination.v.y+=desiredSpeed*heightScale;
         work.aim.v.x = riderState->nav.aim.x;
         work.aim.v.y = riderState->nav.aim.y;
@@ -118,9 +118,9 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
         navRotation(&work.rotation,&work.aim.v);
         MatrixFromQuaternion(&work.rotation.x,work.matrix);
         navProject(work.matrix,&work.local.v,&work.destination.v,&work.destination.v,&work.origin.v);
-        Particle_AddVec3(&work.destination.v, &work.destination.v, &work.origin.v);
-        Particle_SubtractVectors(&work.relative.v, &work.destination.v, &work.origin.v);
-        desiredSpeed = Particle_GetVerticalAngle(&work.relative.v.x);
+        GraphU64_AddVec3(&work.destination.v, &work.destination.v, &work.origin.v);
+        GraphU64_SubtractVectors(&work.relative.v, &work.destination.v, &work.origin.v);
+        desiredSpeed = GraphU64_GetVerticalAngle(&work.relative.v.x);
         aimError = Weapons_GetSignedAngleToPoint(&actor->actor,work.destination.v);
         work.result.workspace.projection = aimError;
         if (work.result.result.distance <= turret->range) {
@@ -165,8 +165,8 @@ changed:
         Weapons_SetLoopingSound(actor,riderState,0xC3F);
     } else Barrel_StopActorLoopingSound(actor,riderState);
     /* The second ABI word is the actual rider pointer, used as such by this callee. */
-    ((void (*)(void *,void *,f32,f32))Weapons_ApplyClampedTurn)(actor,riderState, turret->rate, aimError);
-    riderState->nav.speed = Nav_ApproachValue(riderState->nav.speed, desiredSpeed, turret->rate);
+    ((void (*)(void *,void *,f32,f32))Barrel_ApplyClampedTurn)(actor,riderState, turret->rate, aimError);
+    riderState->nav.speed = GraphU64_ApproachValue(riderState->nav.speed, desiredSpeed, turret->rate);
     return inFireCone;
 }
 
@@ -209,7 +209,7 @@ void Turret_Setup(LevelActor *actor, struct RecordRecAt13C *turret) {
     turret->pad128 = 0;
     turret->threshold = record->eventThreshold;
 
-    if (Render_TestActorStateBit(&g_world, actor) == 0) {
+    if (Rumble_TestActorStateBit(&g_world, actor) == 0) {
         if (record->flags & 0x1000) {
             flags = actor->flags & ~0x2000;
             flags = flags & ~0x100;

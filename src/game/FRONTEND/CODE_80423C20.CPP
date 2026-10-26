@@ -62,7 +62,7 @@ extern void func_8042AFC0_de(int);
 extern void func_8042E9A0_de(s32, s32);
 extern void func_802A2400_de(f32);
 extern void func_802A2360_de(void);
-extern void *Scene_AllocateMemory(s32);
+extern void *Cache_AllocateMemory(s32);
 extern s32 func_80265650_de(u8 *, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void Frontend_SetWidgetFlag100(void *, s32);
@@ -107,9 +107,9 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
             D_80102B00[i].player = -1;
             D_800FEB0E[i * sizeof(Profile)] = 0;
         }
-        Resmgr_FillMemory((char *)&D_80102B00[i] + 0x83, 0, 5);
+        XPlus_FillMemory((char *)&D_80102B00[i] + 0x83, 0, 5);
     }
-    D_800E4600 = Scene_AllocateMemory(0x1C);
+    D_800E4600 = Cache_AllocateMemory(0x1C);
     func_802A2360_de();
     groupA = 0;
     groupB = 0;
@@ -297,7 +297,7 @@ s32 Frontend_ApplyModeChoice(void) {
 }
 
 s32 func_8042418C_de(void) {
-    Scene_FreeMemory(D_800E4600);
+    Cache_FreeMemory(D_800E4600);
     D_800E4600 = 0;
     return 0;
 }

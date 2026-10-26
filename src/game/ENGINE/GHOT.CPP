@@ -13,13 +13,13 @@
 #include "particle/80271B18_3.H"
 
 extern char D_8011D8D0;
-extern void Particle_ScaleVector(void *, void *, f32);
+extern void GraphU64_ScaleVector(void *, void *, f32);
 extern void InstHdr_CopyActorPositionAndModel(void *, Triple, Triple *, s32 *, s32, s32);
 extern struct Shape_typemap_165 func_80271818_de(Triple *);
 #include "particle/8027A0F4_8.H"
-extern void System_DeliverContactEffect(void *, void *, s32, s32, Triple, AttachmentEffectArgs);
+extern void Events_DeliverContactEffect(void *, void *, s32, s32, Triple, AttachmentEffectArgs);
 
-void Fx_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct MatrixF *arg2, func_8026E5E0_S3 *actor, AttachmentTable *arg4) {
+void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct MatrixF *arg2, func_8026E5E0_S3 *actor, AttachmentTable *arg4) {
     Triple pos;
     Triple mapped;
     Triple zero;
@@ -44,8 +44,8 @@ void Fx_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct Matri
                 temp_a0 = var_s3->unk4;
                 node = arg4->bytes + temp_a0 * arg4->stride;
                 temp_s0 = (*node == 5) * 2;
-                Particle_TransformPoint(&arg2[temp_a0], arg0, &pos);
-                Particle_ScaleVector(&pos, &pos, 0.000015258789f);
+                GraphU64_TransformPoint(&arg2[temp_a0], arg0, &pos);
+                GraphU64_ScaleVector(&pos, &pos, 0.000015258789f);
                 var_s2 = 0;
                 temp_v1 = var_s3->unk0;
                 switch (temp_v1) {                  /* irregular */
@@ -196,7 +196,7 @@ void Fx_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct Matri
                     lifetime *= D_800C4968_eu;
 #endif
                     params.fields.lifeBase = (s16)(s32)lifetime;
-                    System_DeliverContactEffect(actor, actor, 3, -1, pos, params);
+                    Events_DeliverContactEffect(actor, actor, 3, -1, pos, params);
                 }
             }
             arg0++;

@@ -4,7 +4,7 @@
 #include "COMMON/OBJECTLINKSC_2.H"
 #include "TYPES.H"
 #include "GFX/TEXT/802A8A94_5.H"
-extern void Text_SetupSpriteMode(s32 color);
+extern void OnScreen_SetupSpriteMode(s32 color);
 
 /* Draws one of the two gauges of the head-up panel, the first at hud->bars[0] and the second at
    hud->bars[1]: steps the gauge's scripted mover, walks its shown amount toward the gauge's target
@@ -20,7 +20,7 @@ extern void Text_SetupSpriteMode(s32 color);
 
 
 
-extern s32 Camera_IsSequenceInWindow(void);
+extern s32 Cinema_IsSequenceInWindow(void);
 extern s32 func_802934F8_de(void);
 extern s32 Frontend_GetScreenMode(void);
 
@@ -48,7 +48,7 @@ void func_802A7660_de(Hud *hud, s32 which) {
     u8 *fade;
     s32 value;
 
-    if (Camera_IsSequenceInWindow() != 0) {
+    if (Cinema_IsSequenceInWindow() != 0) {
         return;
     }
     if (func_802934F8_de() == 0) {
@@ -79,7 +79,7 @@ void func_802A7660_de(Hud *hud, s32 which) {
     }
     x = (s32) bar->x;
     y = (s32) (bar->y + (f32) offset * scale);
-    Text_SetupFillMode();
+    OnScreen_SetupFillMode();
     func_802A7AA4_de(bar);
     if (bar->state == 1) {
         value = bar->fill;
@@ -105,7 +105,7 @@ void func_802A7660_de(Hud *hud, s32 which) {
                   left + ((right - left) * bar->fill) / 100,
                   (s32) ((f32) y + scale * 15.0f), red, green, blue,
                   (u8) (*fade * 180 / 255));
-    Text_SetupSpriteMode(*fade);
+    OnScreen_SetupSpriteMode(*fade);
     if (which == 1) {
         shift = scale * 27.0f;
         func_802AAC28_de(0x202, 0, (s16) (x + 0x46), (s16) (s32) (bar->y + shift), 1.0f, scale * 1.5f, which);

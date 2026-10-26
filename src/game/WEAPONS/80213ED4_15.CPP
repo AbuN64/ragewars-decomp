@@ -12,7 +12,7 @@ typedef struct CollisionInfo CollisionInfo;
 
 extern CollisionInfo D_80100030;
 extern Instance8020CD74 *D_801041F0;
-extern f32 Particle_GetActorHeight(Instance8020CD74 *arg0);
+extern f32 GameObject_GetActorHeight(Instance8020CD74 *arg0);
 extern s32 func_802444A4_de(Instance8020CD74 *arg0, CVector3 current, CVector3 desired, CollisionInfo *arg3);
 
 
@@ -28,11 +28,11 @@ s32 Barrel_TestTargetEyeObstruction(Instance8020CD74 *attacker, void *unused, In
     s32 collisions;
 
     saved = *attacker;
-    ((struct Actor_func_80214DD4_de *)attacker)->pos.y += Particle_GetActorHeight(attacker);
+    ((struct Actor_func_80214DD4_de *)attacker)->pos.y += GameObject_GetActorHeight(attacker);
     ((struct Actor_func_80214DD4_de *)attacker)->pos.y += ((ActorBarrelIsTargetInViewCone *)(target))->eye;
 
     desired = ((ActorBarrelIsTargetInViewCone *)(target))->position;
-    desired.y += Particle_GetActorHeight(target);
+    desired.y += GameObject_GetActorHeight(target);
     desired.y += ((ActorBarrelIsTargetInViewCone *)(target))->eye;
 
     collisions = func_802444A4_de(attacker, ((struct Actor_func_80214DD4_de *)attacker)->pos, desired, &D_80100030);

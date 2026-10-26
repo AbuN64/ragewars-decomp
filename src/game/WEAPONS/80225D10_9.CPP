@@ -29,9 +29,9 @@ extern s32 func_802A23B4_de(void);
 
 extern void func_8026D8F8_de(void);
 
-extern void Render_SetModePreset(s32);
+extern void Geometry_SetModePreset(s32);
 
-extern void Render_SetCombineMode(s32);
+extern void Geometry_SetCombineMode(s32);
 
 /* Scales damage by ownership and player state and suppresses friendly damage when configured. */
 
@@ -40,7 +40,7 @@ extern void Render_SetCombineMode(s32);
 extern f32 D_800C2CC4_de, D_800C7DB8, D_800C2CCC_de, D_800C7DC0, D_800C2CD4_de, D_800C7DC8, D_800C2CDC_de, D_800C2CE0_de;
 
 
-extern void Scene_MarkResourceInUse(s32 arg0, void *arg1);
+extern void Cache_MarkResourceInUse(s32 arg0, void *arg1);
 
 extern void func_8024B8C4_de(void *arg0);
 
@@ -55,7 +55,7 @@ extern s32 func_80245908_de(void);
 #if defined(VERSION_US_REV1)
 #endif
 
-extern void Camera_LoadProjectionMatrix(void *arg0);
+extern void Sky_LoadProjectionMatrix(void *arg0);
 
 extern void func_8021EEFC_de(void *arg0, void *arg1);
 
@@ -234,8 +234,8 @@ void func_80229D28_de(Player16C0 *player) {
         }
         gDPPipeSync(g_displayListCursor++);
         func_8026D8F8_de();
-        Render_SetModePreset(0xE);
-        Render_SetCombineMode(0x1C);
+        Geometry_SetModePreset(0xE);
+        Geometry_SetCombineMode(0x1C);
         green = 200;
         alpha = 150;
         gSPGeometryMode(g_displayListCursor++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);
@@ -363,7 +363,7 @@ void func_8022A170_de(struct CPlayerPool_t *playerPool) {
     void *node;
 
     if (*(void **)playerPool != 0) {
-        Scene_MarkResourceInUse(0, *(void **)playerPool);
+        Cache_MarkResourceInUse(0, *(void **)playerPool);
     }
 
     node = playerPool->m_ActiveList.head;
@@ -422,7 +422,7 @@ void func_8022A2A0_de(void *world, void *view) {
     func_80207B5C_S2 *argument;
     func_8022A274_S2 *cur;
 
-    Render_BeginModelBatch();
+    Geometry_BeginModelBatch();
     object = world;
     cur = object->unk20;
     if (cur != 0) {
@@ -436,7 +436,7 @@ void func_8022A2A0_de(void *world, void *view) {
             cur = cur->unk16E0;
         } while (cur != 0);
     }
-    Render_FlushModelBatch();
+    Geometry_FlushModelBatch();
 }
 
 /* Removes entity from list if owned by specific owner, with version-specific check. */
@@ -487,7 +487,7 @@ void func_8022A398_de(void *roundContext, void *entity) {
 #if defined(VERSION_US_REV1)
     if (D_800D0EBC != 0) {
 #endif
-        Camera_LoadProjectionMatrix(entity);
+        Sky_LoadProjectionMatrix(entity);
         viewPlayer = round->players;
         if (viewPlayer != 0) {
             do {

@@ -77,7 +77,7 @@ s32 func_802A2374_eu_x();
 s32 InitFrontendMenus();
 #endif
 s32 func_8041EA70_de();
-void Resmgr_InitFrontendOnce(void) {
+void Tsmos_InitFrontendOnce(void) {
     if (D_800D2C98 == 0) {
         func_8041EA70_de();
 #if defined(VERSION_DE)

@@ -83,12 +83,12 @@ extern void Control_CycleActorSnapshotMode(void);
 struct ActorList;
 typedef struct ActorList ActorList;
 
-extern void Render_ResetControllerProfiles();
+extern void Control_ResetControllerProfiles();
 
 extern void Control_ResetActorSnapshot();
 
 
-extern void Render_RestoreControllerSetup();
+extern void Control_RestoreControllerSetup();
 
 
 extern s32 Control_AdvanceEffectCurve(void *arg0);

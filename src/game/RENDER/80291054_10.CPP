@@ -11,7 +11,7 @@
 #include "COMMON/TRIPLE.H"
 extern f32 D_800C5498_de;
 
-void Render_BeginModeTransition(GameSession *session, s32 arg1) {
+void SetN64_BeginModeTransition(GameSession *session, s32 arg1) {
     s32 saved;
 
     saved = session->mode;
@@ -20,13 +20,13 @@ void Render_BeginModeTransition(GameSession *session, s32 arg1) {
     session->mode = 0x14;
     session->target = arg1;
     session->previousMode = saved;
-    if (Render_IsSnapshotActive() != 0) {
+    if (Control_IsSnapshotActive() != 0) {
         session->timer = D_800C5498_de;
     }
 }
 
 /** Set the state byte and linked value in a large object. */
-void Render_SetTransitionTarget(GameSession *object, int value) {
+void SetN64_SetTransitionTarget(GameSession *object, int value) {
     object->phase = 2;
     object->target = value;
 }
@@ -34,14 +34,14 @@ void Render_SetTransitionTarget(GameSession *object, int value) {
 typedef void (*Handler8029382C)(void *);
 
 
-extern void Render_UpdateFrameTiming(void *arg0);
+extern void SetN64_UpdateFrameTiming(void *arg0);
 
 
 
 
 
 
-void Render_UpdateGameMode(void *session) {
+void SetN64_UpdateGameMode(void *session) {
     s32 field;
     Handler8029382C fn;
 
@@ -57,7 +57,7 @@ void Render_UpdateGameMode(void *session) {
     }
     if (field != 0x14 && D_80142CA8 != 0) {
         D_80142CA8 -= 1;
-        Render_UpdateFrameTiming(session);
+        SetN64_UpdateFrameTiming(session);
     }
     D_800CD734 += 1;
 }

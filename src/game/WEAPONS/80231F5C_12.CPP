@@ -47,7 +47,7 @@ extern char D_8011D8D0;
 
 
 
-extern f32 Nav_ApproachValue(f32, f32, s32);
+extern f32 GraphU64_ApproachValue(f32, f32, s32);
 
 
 void Weapon_EnterChargeStateWithCues(Shared_ActorView *arg0, WeaponFireState *fireState) {
@@ -184,9 +184,9 @@ void Weapon_EaseSpinForActionFive(struct MeasuredRecAt1D8V3 *arg0, void *arg1) {
 
     value = arg0->value;
     if (((struct MeasuredRecAt34 *)(arg1))->value == 5) {
-        Nav_EaseValueToward(arg1 + 0x128, (f32) D_800CA2D8_de * D_800C3058_de, 0.4f);
+        GraphU64_EaseValueToward(arg1 + 0x128, (f32) D_800CA2D8_de * D_800C3058_de, 0.4f);
     } else {
-        Nav_EaseValueToward(arg1 + 0x128, 0.0f, 0.4f);
+        GraphU64_EaseValueToward(arg1 + 0x128, 0.0f, 0.4f);
     }
     temp_f1 = ((struct MeasuredRecAt128 *)(arg1))->value;
     temp_v0 = ((struct MeasuredRecAt698V1 *)(value))->value;
@@ -209,7 +209,7 @@ void Weapon_ApproachSpinPhaseAndRelease(void *arg0, struct WeaponFireState *fire
     f32 target;
 
     target = D_800C3078_de;
-    temp_f0 = Nav_ApproachValue(fireState->spinStep, target, D_800CA7A0_de);
+    temp_f0 = GraphU64_ApproachValue(fireState->spinStep, target, D_800CA7A0_de);
     fireState->spinStep = temp_f0;
     if (target <= temp_f0) {
         Weapons_RequestActorState(arg0, fireState, 2);

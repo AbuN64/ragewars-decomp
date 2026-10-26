@@ -17,7 +17,7 @@ extern f32 D_800C1D34_de;
 
 /* Find the nearest world object matching each active target ID, clearing its active flag when no object is close enough. */
 
-f32 Particle_GetPointDistance(void *arg0, void *arg1);
+f32 GraphU64_GetPointDistance(void *arg0, void *arg1);
 
 s32 func_8028B25C_de(void *arg0, s16 arg1);
 
@@ -80,7 +80,7 @@ void Nav_LinkNavigationObjects(Shared_Arg0 *arg0)
               compare:
               if (var_v0 == compare_id)
               {
-                temp_f0 = Particle_GetPointDistance(temp_s1, &temp_s0->unk8);
+                temp_f0 = GraphU64_GetPointDistance(temp_s1, &temp_s0->unk8);
                 if ((temp_f0 < var_f20) || (var_f20 == var_f21))
                 {
                   if (temp_s1)
@@ -125,9 +125,9 @@ void Nav_LinkNavigationObjects(Shared_Arg0 *arg0)
 #include "COMMON/LISTHEADER.H"
 #include "COMMON/OBJECTLINKS14.H"
 #include "COMMON/WORLD.H"
-extern PlatformRoute *Engine_GetPlatformRoute(void *, s32);
-extern CVector3 *Engine_GetPlatformRoutePoint(void *, s32, s32);
-extern f32 Particle_GetPointDistance(void *, void *);
+extern PlatformRoute *Scene_GetPlatformRoute(void *, s32);
+extern CVector3 *Scene_GetPlatformRoutePoint(void *, s32, s32);
+extern f32 GraphU64_GetPointDistance(void *, void *);
 /* Give every platform-flagged (0x200) search node the nearest moving platform (object 0x642) and the
  * nearest point on it: a route platform (mode 4) offers each of its route points, any other platform
  * its base and its top (base + height, pushed out by radius along heading when radial). A node with
@@ -168,11 +168,11 @@ void Nav_AssignPlatformEndpoints(CNavData *graph) {
                 motion = &actor->motion;
                 definition = &actor->resource->motion;
                 if (motion->mode == 4) {
-                    route = Engine_GetPlatformRoute(&g_world, motion->route);
+                    route = Scene_GetPlatformRoute(&g_world, motion->route);
                     if (route != 0) {
                         for (j = 0; j < route->count; j++) {
-                            position = Engine_GetPlatformRoutePoint(&g_world, motion->route, j);
-                            distance = Particle_GetPointDistance(point, position);
+                            position = Scene_GetPlatformRoutePoint(&g_world, motion->route, j);
+                            distance = GraphU64_GetPointDistance(point, position);
                             if (distance < best || best == -1.0f) {
                                 chosen = platforms[i];
                                 best = distance;
@@ -188,13 +188,13 @@ void Nav_AssignPlatformEndpoints(CNavData *graph) {
                         end.x += definition->radius * Math_Sinf(definition->heading);
                         end.z += definition->radius * Math_Cosf(definition->heading);
                     }
-                    distance = Particle_GetPointDistance(point, &start);
+                    distance = GraphU64_GetPointDistance(point, &start);
                     if (distance < best || best == -1.0f) {
                         chosen = platforms[i];
                         best = distance;
                         chosenPosition = start;
                     }
-                    distance = Particle_GetPointDistance(point, &end);
+                    distance = GraphU64_GetPointDistance(point, &end);
                     if (distance < best || best == -1.0f) {
                         chosen = platforms[i];
                         best = distance;
@@ -221,8 +221,8 @@ s32 InstHdr_GetActorMotionState(Player *);
 s32 func_8024DEE0_de(Player *);
 s32 func_8024DF5C_de(Player *);
 s32 func_8024DFA0_de(Player *);
-s32 Camera_MoveActorWithCollision(Player *, CVector3, NavigationCollisionQuery *);
-void Particle_SubtractVectors(CVector3 *, void *, CVector3 *);
+s32 Unicol_MoveActorWithCollision(Player *, CVector3, NavigationCollisionQuery *);
+void GraphU64_SubtractVectors(CVector3 *, void *, CVector3 *);
 
 /* Collisions the actor would meet moving to a point (61.44 above it), without committing the move: the actor's 0x50-byte header is saved and
  * restored around the trial move. */
@@ -245,7 +245,7 @@ static __inline__ s32 navigationBlocked(Player *actor, CNavData *graph, s32 inde
     }
     query.flags = 0x4000;
     __builtin_memcpy(saved, actor, sizeof(saved));
-    result = Camera_MoveActorWithCollision(actor, position, &query);
+    result = Unicol_MoveActorWithCollision(actor, position, &query);
     __builtin_memcpy(actor, saved, sizeof(saved));
     return result;
 }
@@ -291,7 +291,7 @@ void Nav_UpdateActorCurrentNode(CNavData *graph, Player *actor) {
     found = 0;
     climbing = actor->movementFlags & 0x2000;
     swimming = actor->movementFlags & 0x1000;
-    Particle_SubtractVectors(&delta, navigationRecord(graph->points, actor->controller->current), &actor->pos);
+    GraphU64_SubtractVectors(&delta, navigationRecord(graph->points, actor->controller->current), &actor->pos);
     if (climbing || swimming) {
         dist = delta.x * delta.x + delta.y * delta.y + delta.z * delta.z;
     } else {
@@ -314,7 +314,7 @@ void Nav_UpdateActorCurrentNode(CNavData *graph, Player *actor) {
                     target = actor->controller->mode;
                 }
                 point = navigationRecord(graph->points, target);
-                Particle_SubtractVectors(&delta, &point->position, &actor->pos);
+                GraphU64_SubtractVectors(&delta, &point->position, &actor->pos);
                 if (climbing || swimming || (navigation_point_flags(point) & 0x200)) {
                     dist = delta.x * delta.x + delta.y * delta.y + delta.z * delta.z;
                 } else {
@@ -338,7 +338,7 @@ void Nav_UpdateActorCurrentNode(CNavData *graph, Player *actor) {
         point = navigationRecord(graph->points, target);
         portal = navigationRecord(graph->m_pusNavLinks, portalIds[i]);
         if (!(navigation_attributes(point) & 0x300000) || swimming || climbing) {
-            Particle_SubtractVectors(&delta, &point->position, &actor->pos);
+            GraphU64_SubtractVectors(&delta, &point->position, &actor->pos);
             if (climbing || swimming) {
                 dist = delta.x * delta.x + delta.y * delta.y + delta.z * delta.z;
             } else {

@@ -11,20 +11,20 @@ struct RangeNode;
 typedef struct AiProfile {
     u8 pad0[0x79];
     u8 yawSensitivity; /* 0x79: Weapons_UpdateViewAngles */
-    u8 sensitivity; /* 0x7A: Fx_BuildControllerState */
+    u8 sensitivity; /* 0x7A: ContPad_BuildControllerState */
     s8 controlMode; /* 0x7B */
     u8 remap; /* 0x7C */
     u8 pitchMode; /* 0x7D */
     u8 pad7E[2];
     s8 character; /* 0x80 */
-    s8 variant; /* 0x81: Render_DrawCharacterEffectParts */
+    s8 variant; /* 0x81: Geometry_DrawCharacterEffectParts */
     u8 pad82[0xD];
-    u8 bonus; /* 0x8F: Render_DrawCharacterEffectParts, Ovlgame_UpdateRunEndPlayer */
+    u8 bonus; /* 0x8F: Geometry_DrawCharacterEffectParts, Ovlgame_UpdateRunEndPlayer */
     s8 state90; /* 0x90 */
     u8 pad91[1];
     u8 team; /* 0x92: Fx_UpdateTargetSelection (team play) */
     u8 difficulty; /* 0x93 */
-    u8 enabled; /* 0x94: Render_DrawCharacterEffectParts */
+    u8 enabled; /* 0x94: Geometry_DrawCharacterEffectParts */
 } AiProfile;
 
 
@@ -70,7 +70,7 @@ struct Player {
     s32 state; /* 0x5E0 */
     s32 health; /* 0x5E4 */
     u8 pad5E8[4];
-    s32 model; /* 0x5EC: Ovlgame_UpdateRunEndPlayer passes it to Render_PlacePlayerAtSpawnPoint */
+    s32 model; /* 0x5EC: Ovlgame_UpdateRunEndPlayer passes it to Player_PlacePlayerAtSpawnPoint */
     u8 pad5F0[4];
     s16 ammo[7]; /* 0x5F4 */
     s8 actions[22][2]; /* 0x602 */
@@ -119,7 +119,7 @@ struct Player {
     s32 forceCrouch; /* 0x71C */
     f32 eyeOffset; /* 0x720 */
     f32 pitchOffset; /* 0x724 */
-    f32 kickYaw; /* 0x728: Weapons_BuildPlayerViewTransform adds it to the heading */
+    f32 kickYaw; /* 0x728: Player_BuildPlayerViewTransform adds it to the heading */
     f32 lean; /* 0x72C: kick roll */
     f32 sway[3]; /* 0x730: pitch, yaw, roll sway angles */
     f32 sideOffset; /* 0x73C: weapon side offset (x) */
@@ -138,7 +138,7 @@ struct Player {
     s32 controllerMode; /* 0x788 */
     f32 controllerTimer; /* 0x78C */
     u8 pad790[0x58];
-    s32 state7E8; /* 0x7E8: Fx_BuildControllerState */
+    s32 state7E8; /* 0x7E8: ContPad_BuildControllerState */
     f32 state7EC; /* 0x7EC */
     u8 pad7F0[0x1C];
     s32 controllerEnabled; /* 0x80C */
@@ -149,7 +149,7 @@ struct Player {
     u8 pad93C[0x37C];
     s32 weaponLocked; /* 0xCB8 */
     u8 padCBC[4];
-    s32 pendingWeapon; /* 0xCC0: weapon to switch to (func_80222BE8_de, Menu_HandlePowerWeaponPickup) */
+    s32 pendingWeapon; /* 0xCC0: weapon to switch to (func_80222BE8_de, Pickup_HandlePowerWeaponPickup) */
     u8 padCC4[0x4F0];
     s32 locked; /* 0x11B4 */
     s32 lockState; /* 0x11B8 */
@@ -160,7 +160,7 @@ struct Player {
     u8 pad11DC[8];
     f32 pending; /* 0x11E4 */
     u8 pad11E8[4];
-    f32 glow; /* 0x11EC: Render_DrawCharacterEffectParts */
+    f32 glow; /* 0x11EC: Geometry_DrawCharacterEffectParts */
     u8 pad11F0[4];
     f32 fireSpin; /* 0x11F4 */
     s32 fireFrame; /* 0x11F8 */
@@ -171,7 +171,7 @@ struct Player {
     u8 pad1214[0x18];
     s32 reactionFlags; /* 0x122C */
     u8 pad1230[0xC];
-    u8 color[3]; /* 0x123C: Render_DrawPlayerBodyAndWeapon */
+    u8 color[3]; /* 0x123C: Player_DrawPlayerBodyAndWeapon */
     u8 pad123F;
     f32 opacity; /* 0x1240 */
     u8 pad1244[0xF8];
@@ -180,7 +180,7 @@ struct Player {
     u8 pad1344[0x70];
     void *animationTable; /* 0x13B4 */
     u8 pad13B8[0x10];
-    s32 overkill; /* 0x13C8: Render_ApplyPlayerDamage, Render_DrawPlayerBodyAndWeapon */
+    s32 overkill; /* 0x13C8: Player_ApplyPlayerDamage, Player_DrawPlayerBodyAndWeapon */
     u8 pad13CC[8];
     s32 toggle; /* 0x13D4 */
     void *reactionOwner; /* 0x13D8 */

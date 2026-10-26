@@ -5,7 +5,7 @@
 extern void func_8042AFC0_de(int);
 extern void func_8042AFD0_de(int);
 extern void func_8042AFE0_de();
-extern void Frontend_HideArenaCatalogueWidgets();
+extern void ScenarioSetup_HideArenaCatalogueWidgets();
 extern void func_8042B080_de();
 extern s32 func_8042AFB8_de();
 #endif

@@ -17,7 +17,7 @@ extern void func_8022B144_de(void *, f32 *);
 
 extern void World_ResetPlayerState(s32 *state);
 
-f32 Particle_GetPointDistance(f32 *, f32 *);
+f32 GraphU64_GetPointDistance(f32 *, f32 *);
 
 extern void *Nav_GetGraphPoint(void *, s32);
 
@@ -157,7 +157,7 @@ CVector3 *Nav_GetControllerPosition(AiController *controller) {
 }
 
 f32 Nav_DistanceToNode(AiController *controller, s32 nodeId) {
-    return Particle_GetPointDistance(&controller->player->pos.x, Nav_GetGraphPoint(&D_8013B364, nodeId));
+    return GraphU64_GetPointDistance(&controller->player->pos.x, Nav_GetGraphPoint(&D_8013B364, nodeId));
 }
 
 /** Reset three state words and set the final state to one. */
@@ -404,7 +404,7 @@ f32 Nav_UpdateDifficultyAimJitter(void *aiController) {
         break;
     }
     aim = brain->aim;
-    if (aim < Nav_RandomBetween(-aimLimit, aimLimit)) {
+    if (aim < GraphU64_RandomBetween(-aimLimit, aimLimit)) {
         aim += D_800C1CC0_de;
     } else {
         aim -= D_800C1CC4_de;

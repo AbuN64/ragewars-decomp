@@ -177,7 +177,7 @@ typedef struct AudioBankHeader {
 extern void func_802567A4_de(MenuRules *lock);
 extern u32 __osDisableInt(void);
 extern void __osRestoreInt(u32);
-extern void Texture_InitializeAudioWorker(ALSynConfig *, s32, AudioInitializeTiming *);
+extern void AudioMgr_InitializeAudioWorker(ALSynConfig *, s32, AudioInitializeTiming *);
 extern void func_802B2650_de(void *, void *);
 extern void func_8025768C_de(ContextRecAt2BC0 *);
 extern void Audio_InitializeMusicPlayer(void *, void *);
@@ -234,7 +234,7 @@ void func_80257360_de(ContextRecAt2BC0 *ctx) {
     config.dmaproc = 0;
     config.heap = ctx->frames;
     timing.samples = 0x800;
-    Texture_InitializeAudioWorker(&config, D_800CD8C0_de, &timing);
+    AudioMgr_InitializeAudioWorker(&config, D_800CD8C0_de, &timing);
     D_801076A0 = func_80265964_de(8);
     size = func_80265964_de(4) - func_80265964_de(0);
     loaded = Virtual_AllocateVirtualRegion(size, 0, func_80265964_de(0));
@@ -306,36 +306,36 @@ void func_8025768C_de(ContextRecAt2BC0 *ctx) {
 
     total = func_80265964_de(0x14) - func_80265964_de(0x10);
     ctx->soundData = Virtual_AllocateVirtualRegion(total, 0, func_80265964_de(0x10));
-    section = Render_GetPackSection(ctx->soundData, 0);
-    Render_GetPackSection(ctx->soundData, 1);
-    tables = Render_GetPackSection(section, 0);
-    names = Render_GetPackSection(section, 1);
-    index = Render_GetPackSection(section, 2);
+    section = SetN64_GetPackSection(ctx->soundData, 0);
+    SetN64_GetPackSection(ctx->soundData, 1);
+    tables = SetN64_GetPackSection(section, 0);
+    names = SetN64_GetPackSection(section, 1);
+    index = SetN64_GetPackSection(section, 2);
     ctx->instrumentIndex = index;
     ctx->instrumentCount = *index;
     ctx->instrumentData = tables + 2;
     ctx->envelopeData = names + 2;
-    rest = Render_GetPackSection(section, 3);
-    refs = Render_GetPackSection(section, 4);
-    sounds = Render_GetPackSection(section, 5);
+    rest = SetN64_GetPackSection(section, 3);
+    refs = SetN64_GetPackSection(section, 4);
+    sounds = SetN64_GetPackSection(section, 5);
     ctx->tableCount2B7C = rest[1];
     ctx->table2B70 = rest + 2;
     ctx->tableCount2B80 = refs[1];
     ctx->table2B74 = refs + 2;
     ctx->tableCount2B84 = sounds[1];
     ctx->table2B78 = sounds + 2;
-    group = Render_GetPackSection(ctx->soundData, 1);
-    seq = Render_GetPackSection(group, 0);
+    group = SetN64_GetPackSection(ctx->soundData, 1);
+    seq = SetN64_GetPackSection(group, 0);
     ctx->sequenceData = seq + 2;
     ctx->sequenceCount = seq[1];
-    ctx->sequenceIndex = Render_GetPackSection(group, 1);
+    ctx->sequenceIndex = SetN64_GetPackSection(group, 1);
 }
 
 /* Refreshes the voice playing sound id: an unknown id returns -1, slot 16 is handed to the spatial voice
  * update with the passed-through position, a finished voice is flagged and the selection cleared; otherwise
  * pitch, volume, pan and gain are pushed to the player. The not-found path has a dead conditional store:
  * flow deletes it but its label stays until jump2, so the -1 return value is hoisted above the test. */
-/* The voice mix block at +0x10 of each Voice (Audio_InitializeVoiceMix views it the same way). */
+/* The voice mix block at +0x10 of each Voice (Channel_InitializeVoiceMix views it the same way). */
 typedef struct VoiceMix {
     s32 frame, reserved4;
     s32 left, right;
@@ -361,7 +361,7 @@ static inline s32 findVoiceById(ContextRecAt2BC0 *context, s32 id) {
     }
     return -1;
 }
-s32 Texture_UpdateSoundSlot(ContextRecAt2BC0 *context, s32 id, s32 unused, CVector3 *position) {
+s32 Audio_UpdateSoundSlot(ContextRecAt2BC0 *context, s32 id, s32 unused, CVector3 *position) {
     s16 index;
     VoiceMix *mix;
     ALSndPlayer *player;
@@ -377,7 +377,7 @@ s32 Texture_UpdateSoundSlot(ContextRecAt2BC0 *context, s32 id, s32 unused, CVect
         return -1;
     }
     if (index == 16) {
-        Audio_StartSpatialVoice((ManagerRecAtD8V2 *)context->view, index, id, position);
+        AudioWorld_StartSpatialVoice((ManagerRecAtD8V2 *)context->view, index, id, position);
         return -1;
     }
     mix = (VoiceMix *)context->voices[index].reserved10;

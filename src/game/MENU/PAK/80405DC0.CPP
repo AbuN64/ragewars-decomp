@@ -51,7 +51,7 @@ extern char D_8014561C[];
 
 extern SharedPlayer *Weapons_FindPlayerByController(char *pool, PakMenuSlot *slot);
 
-extern void Items_StartPlayerAnimation(SharedPlayer *player, s32 team);
+extern void Ovlgame_StartPlayerAnimation(SharedPlayer *player, s32 team);
 
 extern void Pak_AllocateMenu(char *text, Menu_func_80408C4C_de *menu, char *format);
 
@@ -90,11 +90,11 @@ extern char D_0044E4D4[];
 extern char D_0044FFA4[];
 
 
-extern void Render_SetProfileMode(PakMenuSlot *slot, s32 mode);
+extern void Control_SetProfileMode(PakMenuSlot *slot, s32 mode);
 
-extern void Render_DisableControllerPak(s32 ch);
+extern void Control_DisableControllerPak(s32 ch);
 
-extern void Items_SetSelection(char *, s32, s32);
+extern void OvlScene_SetSelection(char *, s32, s32);
 
 struct GameSession;
 extern void func_8044DDD4_de(struct GameSession *);
@@ -103,7 +103,7 @@ extern void Pak_ProbeStatus(s32 ch);
 
 extern s32 Pak_GetStatus(s32 ch);
 
-extern s32 Render_TakePakChange(s32 ch);
+extern s32 Control_TakePakChange(s32 ch);
 
 extern s32 D_80153778;
 
@@ -145,7 +145,7 @@ s32 func_80408C4C_de(void *unused, Menu_func_80408C4C_de *menu) {
         for (i = 0; i < 8; i++) {
             profile->name[i] = D_8014D4B4[i];
         }
-        Items_StartPlayerAnimation(player, D_8014D490);
+        Ovlgame_StartPlayerAnimation(player, D_8014D490);
         Pak_AllocateMenu(player->views5DC.view5DC_7.messages + 0x554, menu, D_0044FA6C);
         return 1;
     }
@@ -167,8 +167,8 @@ s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu) {
         return 0;
     }
     if (D_80153788 == 9 || D_80153788 == 5) {
-        Render_ResetControllerPak(menu->slot);
-        Render_SetProfileMode(menu->slot, 1);
+        Control_ResetControllerPak(menu->slot);
+        Control_SetProfileMode(menu->slot, 1);
     }
     if (D_80153788 == 9) {
         if (D_80153760 != 0 && D_8014D4EC_de == 0 && D_80153758 == 0) {
@@ -177,8 +177,8 @@ s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu) {
             } else {
                 ch = menu->slot->unk4;
             }
-            Render_DisableControllerPak(ch);
-            Items_SetSelection(&g_world, menu->player->menu, 2);
+            Control_DisableControllerPak(ch);
+            OvlScene_SetSelection(&g_world, menu->player->menu, 2);
             return 1;
         }
         func_8044DDD4_de(&D_8011FAC0);
@@ -190,8 +190,8 @@ s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu) {
         ch = menu->slot->unk4;
     }
     if (D_80153788 == 5) {
-        Render_DisableControllerPak(ch);
-        Items_SetSelection(&g_world, g_world.selectionValues[3], 2);
+        Control_DisableControllerPak(ch);
+        OvlScene_SetSelection(&g_world, g_world.selectionValues[3], 2);
     }
     if (D_8015375C != 0 && D_80153788 == 6) {
         D_8014ADA0 = 1;
@@ -199,7 +199,7 @@ s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu) {
     if (D_80153788 == 4 && D_80153760 != 0 && D_8014D4EC_de == 0) {
         Pak_ProbeStatus(ch);
         status = Pak_GetStatus(ch);
-        connected = Render_TakePakChange(ch);
+        connected = Control_TakePakChange(ch);
         if ((status == 0 || connected != 0) && status != -2 && menu->prompt == (char *)1) {
             Pak_OpenDialog(D_8014561C, D_0044E4B0, menu->player, menu->slot, 0);
         } else {
@@ -208,7 +208,7 @@ s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu) {
     } else if (D_80153788 == 3 && D_8014D4D4 != 0) {
         Pak_ProbeStatus(ch);
         status = Pak_GetStatus(ch);
-        connected = Render_TakePakChange(ch);
+        connected = Control_TakePakChange(ch);
         if ((status == 0 || connected != 0) && status != -2 && menu->prompt == (char *)1) {
             Pak_OpenDialog(D_8014561C, D_0044E4D4, menu->player, menu->slot, 0);
         }

@@ -81,10 +81,10 @@ void func_8025FFB0_de(Segment8025FFD0 *curve, u32 *stream) {
     } else {
         first = func_802607B8_de(&bits, 6);
         second = func_802607B8_de(&bits, 6);
-        lo = System_UnpackUnitValue((f32)first, 6);
-        hi = System_UnpackUnitValue((f32)second, 6);
-        lo = ((f32 (*)(f32, f32, s32))System_ScaleToRange)(lo, D_8010AC7C, D_8010AC80);
-        hi = ((f32 (*)(f32, f32, s32))System_ScaleToRange)(hi, D_8010AC7C, D_8010AC80);
+        lo = PolyTrak_UnpackUnitValue((f32)first, 6);
+        hi = PolyTrak_UnpackUnitValue((f32)second, 6);
+        lo = ((f32 (*)(f32, f32, s32))PolyTrak_ScaleToRange)(lo, D_8010AC7C, D_8010AC80);
+        hi = ((f32 (*)(f32, f32, s32))PolyTrak_ScaleToRange)(hi, D_8010AC7C, D_8010AC80);
     }
     curve->unk4 = lo;
     curve->unk8 = hi - lo;
@@ -98,7 +98,7 @@ void func_8025FFB0_de(Segment8025FFD0 *curve, u32 *stream) {
     *stream = bits;
 }
 
-float System_EvaluateAnimationCurve(Stream *stream, float time) {
+float PolyTrak_EvaluateAnimationCurve(Stream *stream, float time) {
     seek(stream, (u32)time);
     return evaluate(*(Poly *)&stream->coeff[0], time - stream->unk24);
 }

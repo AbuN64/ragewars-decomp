@@ -65,9 +65,9 @@ void Nav_UpdateVisiblePursuit(Self *actor) {
         }
         speed = Nav_ScaleCharacterSettingByDifficulty(brain) * 0.4f;
         if (--brain->timer <= 0) {
-            brain->timer = Nav_NextRandom() % 4 + 12;
-            brain->pattern = Nav_NextRandom() % 2;
-            roll = Nav_NextRandom();
+            brain->timer = GraphU64_NextRandom() % 4 + 12;
+            brain->pattern = GraphU64_NextRandom() % 2;
+            roll = GraphU64_NextRandom();
             if (roll / 2 * 2 == roll - 1) {
                 brain->pattern = 2;
             }

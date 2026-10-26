@@ -21,7 +21,7 @@ extern s32 func_80419E54_de(s32, s32);
 s32 func_80437304_de(void *arg0) {
     void *obj;
 
-    D_800E5780 = (Shared_MenuWidgetState *)Scene_AllocateMemory(0x18);
+    D_800E5780 = (Shared_MenuWidgetState *)Cache_AllocateMemory(0x18);
     D_800E5780->list = func_8041A280_de(0x136, 0x137);
     D_800E5780->unk14 = 0;
 

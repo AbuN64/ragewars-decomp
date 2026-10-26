@@ -19,8 +19,8 @@
 
 extern func_80203E78_S1 *D_800E2830;
 
-extern void Particle_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
-extern void Particle_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
+extern void GraphU64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 
 CVector3 func_80401564_de(f32 t) {
     s32 *track;
@@ -31,7 +31,7 @@ CVector3 func_80401564_de(f32 t) {
     CVector3 a;
     CVector3 b;
 
-    track = Render_GetPackSection(D_800E2830->unk4, 1);
+    track = SetN64_GetPackSection(D_800E2830->unk4, 1);
     count = track[1];
     key = (PositionKey *)(track + 2);
     if (count == 0) {
@@ -60,9 +60,9 @@ CVector3 func_80401564_de(f32 t) {
         b.x = key->x;
         b.y = key->y;
         b.z = key->z;
-        Particle_ScaleVector(&a, &a, (1.0f) - u);
-        Particle_ScaleVector(&b, &b, u);
-        Particle_AddVec3(&result, &a, &b);
+        GraphU64_ScaleVector(&a, &a, (1.0f) - u);
+        GraphU64_ScaleVector(&b, &b, u);
+        GraphU64_AddVec3(&result, &a, &b);
     }
     return result;
 }

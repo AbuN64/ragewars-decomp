@@ -124,7 +124,7 @@ func_802BD200_eu_x
     rate = &D_80149B00;
     *rate = *rate * 3 / 4;
     if (D_8000030C == 0) {
-        Resmgr_FillMemory(D_8000031C, 0, 0x40);
+        XPlus_FillMemory(D_8000031C, 0, 0x40);
     }
     if (D_80000300 == 0) {
         D_800D5250 = 0x2F5B2D2;

@@ -44,7 +44,7 @@ extern s32 func_8024DFA0_de(Instance8020CD74 *);
 typedef struct CollisionInfo CollisionInfo;
 
 
-extern f32 Particle_GetActorHeight(Instance8020CD74 *);
+extern f32 GameObject_GetActorHeight(Instance8020CD74 *);
 
 extern CollisionState D_801041F0;
 
@@ -72,7 +72,7 @@ extern void D_0024A7A0();
 struct Shared_World;
 extern s32 func_8028B21C_de(struct Shared_World *, s32);
 
-extern void Camera_ResetActorMotion(char *);
+extern void GameObject_ResetActorMotion(char *);
 
 extern CQuatern InstHdr_BuildActorGroundRotation(char *);
 
@@ -80,13 +80,13 @@ extern void func_80262480_de(char *);
 
 extern void func_8024B65C_de(char *, s32);
 
-extern void Particle_IdentityMatrix(char *);
+extern void GraphU64_IdentityMatrix(char *);
 
 extern void Nav_InitSpawnedActor(char *, char *, void *);
 
 extern void func_802193C8_de(char *, s32, char *);
 
-extern void Instance_LoadModel(char *, s32, s32, s32);
+extern void GameObject_LoadModel(char *, s32, s32, s32);
 
 extern s32 StaticInstance_AdvanceResourceKey(void);
 
@@ -149,7 +149,7 @@ s32 func_802462E8_de(Instance8020CD74 *actorState, CVector3 position, char **out
         *out = set;
     }
     saved = *actorState;
-    collisions = Camera_MoveActorWithCollision(actorState, position, set);
+    collisions = Unicol_MoveActorWithCollision(actorState, position, set);
     *actorState = saved;
     return collisions;
 }
@@ -163,10 +163,10 @@ s32 func_8024643C_de(Instance8020CD74 *from, Instance8020CD74 *to) {
 
     savedFrom = *from;
     scale = D_800C3828_de;
-    ((struct Actor_func_80214DD4_de *)from)->pos.y += Particle_GetActorHeight(from) * scale;
+    ((struct Actor_func_80214DD4_de *)from)->pos.y += GameObject_GetActorHeight(from) * scale;
     desired = ((struct Actor_func_80214DD4_de *)to)->pos;
-    desired.y += Particle_GetActorHeight(to) * scale;
-    collisions = Camera_MoveActorWithCollision(from, desired, &D_80103FD0);
+    desired.y += GameObject_GetActorHeight(to) * scale;
+    collisions = Unicol_MoveActorWithCollision(from, desired, &D_80103FD0);
     *from = savedFrom;
 
     return collisions == 0;
@@ -181,7 +181,7 @@ s32 func_80246558_de(Instance8020CD74 *actorState, CVector3 position, CollisionI
     collision_info = *collisionSettings;
     collision_info.ground_behavior = 0;
     collision_info.instance_behavior = 1;
-    Camera_MoveActorWithCollision(actorState, position, &collision_info);
+    Unicol_MoveActorWithCollision(actorState, position, &collision_info);
     *actorState = saved;
 
     collisions = D_801041F0.active0 || D_801041F0.active9c;
@@ -206,7 +206,7 @@ void func_802466A0_de(char *obj, s32 model, s32 kind, s32 unused, void *info, s3
             return;
         }
     }
-    Camera_ResetActorMotion(obj);
+    GameObject_ResetActorMotion(obj);
     *(u8 *)obj = 1;
     ((LevelActor *)obj)->modelIndex = model;
     ((LevelActor *)obj)->definition = info;
@@ -228,7 +228,7 @@ void func_802466A0_de(char *obj, s32 model, s32 kind, s32 unused, void *info, s3
     func_80262480_de((char *)obj + 0x118);
     func_8024B65C_de(obj, 0);
     ((LevelActor *)obj)->flags = (((LevelActor *)obj)->flags & ~0x400) | 0x2100;
-    Particle_IdentityMatrix((char *)obj + 0x74);
+    GraphU64_IdentityMatrix((char *)obj + 0x74);
     ((LevelActor *)obj)->fieldB4 = 0;
     ((LevelActor *)obj)->fieldB8 = 0;
     ((LevelActor *)obj)->shadow = 0;
@@ -251,7 +251,7 @@ Nav_InitSpawnedActor
         func_802193C8_de(obj + 0x204, effect, (char *)obj + 0x8);
     }
     world = &g_world;
-    Instance_LoadModel(obj, (s32)world->indexedDirectory, world->indexedBank, lean);
+    GameObject_LoadModel(obj, (s32)world->indexedDirectory, world->indexedBank, lean);
     if (delay != 0) {
         ((LevelActor *)obj)->animationTime = delay;
         ((LevelActor *)obj)->flags &= ~0x400;
@@ -276,13 +276,13 @@ s32 func_80246A08_de(LevelActor *owner, s32 animationKind, s32 excludedEntry) {
     if (!(owner->flags & 0x40000)) {
         goto fail;
     }
-    resource = Scene_RequestResource(0, ((struct Access_s32_C4 *)(owner))->field,
+    resource = Cache_RequestResource(0, ((struct Access_s32_C4 *)(owner))->field,
                              ((struct Access_s32_C4 *)(owner))->field, ((struct Access_s32_D0 *)(owner))->field,
                              0, 0, 0, D_800C3864_de, 1);
     if (resource == 0) {
         goto fail;
     }
-    data = Render_GetPackSection(*resource, 1);
+    data = SetN64_GetPackSection(*resource, 1);
     entries = &((struct func_80254D70_S2 *)(data))->unk8;
     total = ((struct func_80203E78_S1 *)(data))->unk4;
     count = func_802654E8_de(entries, ((struct Access_s8_E6 *)(owner))->field, animationKind);
@@ -313,7 +313,7 @@ s32 func_80246A08_de(LevelActor *owner, s32 animationKind, s32 excludedEntry) {
         }
         count = func_802798A8_de(&table);
     }
-    Scene_UnlockResource(0, resource);
+    Cache_UnlockResource(0, resource);
     return count;
 
 fail:

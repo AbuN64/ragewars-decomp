@@ -8,7 +8,7 @@
 
 /* Clears a record: the words at offsets 0, 4, 8, 0x18 and 0x1C, and the three-word array at 0xC
    from its last entry down. */
-void Ovlgame_ClearRenderRecord(struct RecordRecAt1C *record) {
+void Pak_ClearRenderRecord(struct RecordRecAt1C *record) {
     s32 i;
     record->ready = 0;
     record->displayLists = 0;
@@ -20,25 +20,25 @@ void Ovlgame_ClearRenderRecord(struct RecordRecAt1C *record) {
     }
 }
 /* Releases every resource handle the render buffer record holds and clears the record. */
-void Ovlgame_ReleaseRenderBuffers(struct RecordRecAt1C *record) {
+void Pak_ReleaseRenderBuffers(struct RecordRecAt1C *record) {
     s32 j;
     s32 k;
 
     if (record->displayLists != NULL) {
-        Scene_ReleaseResource(NULL, record->displayLists);
+        Cache_ReleaseResource(NULL, record->displayLists);
     }
     if (record->fifo != NULL) {
-        Scene_ReleaseResource(NULL, record->fifo);
+        Cache_ReleaseResource(NULL, record->fifo);
     }
     if (record->zBuffer != NULL) {
-        Scene_ReleaseResource(NULL, record->zBuffer);
+        Cache_ReleaseResource(NULL, record->zBuffer);
     }
     if (record->audioHeap != NULL) {
-        Scene_ReleaseResource(NULL, record->audioHeap);
+        Cache_ReleaseResource(NULL, record->audioHeap);
     }
     for (j = 0; j < 3; j++) {
         if (record->frameBuffers[j] != NULL) {
-            Scene_ReleaseResource(NULL, record->frameBuffers[j]);
+            Cache_ReleaseResource(NULL, record->frameBuffers[j]);
         }
     }
     record->ready = 0;

@@ -7,15 +7,15 @@
 /* Sets the resource transition state and sound, while its adjacent helper refreshes the controller-option bit. */
 
 
-extern void Items_LoadSceneLight(void);
-void Items_SetSelection(ItemsSelectionState *state,int selection,int mode) {
+extern void OvlScene_LoadSceneLight(void);
+void OvlScene_SetSelection(ItemsSelectionState *state,int selection,int mode) {
  state->active=1;
  state->mode=mode;
  state->selection=selection;
- if(mode==2 && selection!=999)Render_PlayFlatSound(0x21C);
+ if(mode==2 && selection!=999)SoundElement_PlayFlatSound(0x21C);
 }
 void func_8044D580_de(ItemsSelectionState *state) {
- Items_LoadSceneLight();
+ OvlScene_LoadSceneLight();
  D_800CC380=(state->input->value>>2)&1;
 }
 
@@ -25,7 +25,7 @@ void func_802458C4_de();                                  /* extern */
 void func_802458D8_de();                                  /* extern */
 void func_8028787C_de(void *, s32);                       /* extern */
 
-void Items_UpdatePendingObjects(ItemsPendingState *arg0) {
+void OvlScene_UpdatePendingObjects(ItemsPendingState *arg0) {
  s32 i,n;
  func_802458D8_de();
  n=arg0->unk11C0;

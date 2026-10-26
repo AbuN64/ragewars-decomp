@@ -21,7 +21,7 @@ static inline void dispatchEffect(void *object, void *source, s32 effect, CVecto
  * on the target alone or on every other object -- the scene's object array or its registered list
  * and then the player list chained at 0x16E0 -- skipping the target.
  * Byte-exact for us-rev1 (index-addressed actor loop). */
-void System_DeliverContactEffect(void *target, void *source, s32 effect, s32 unused, CVector3 position, ContactEffectStyle style) {
+void Events_DeliverContactEffect(void *target, void *source, s32 effect, s32 unused, CVector3 position, ContactEffectStyle style) {
     s32 i;
     s32 count;
     LevelActor *actor;

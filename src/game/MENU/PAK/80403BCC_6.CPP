@@ -29,9 +29,9 @@ extern u8 D_8010BBB8;
 
 extern u8 D_800DE80C[0x42];
 
-extern void Render_ReadControllerStates(void);
+extern void Control_ReadControllerStates(void);
 
-extern void Render_ReleasePakLock(void);
+extern void Control_ReleasePakLock(void);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
@@ -83,7 +83,7 @@ extern u8 *D_800E25C4[], *D_800E25C4[];
 
 
 
-extern void **Scene_AllocateResource(s32, s32, s32, char *);
+extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
 extern void func_80253908_de(s32);
 
@@ -112,10 +112,10 @@ static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
     if (func_8025477C_de() == 0) {
         func_8025476C_de(1);
     }
-    handle = Scene_AllocateResource(0, blocks, 0x23, g_pakReadScratchNoteName);
+    handle = Cache_AllocateResource(0, blocks, 0x23, g_pakReadScratchNoteName);
     buf = *handle;
     ((void (*)(s32))Control_AcquireControllerLock)(1);
-    Render_ReadControllerStates();
+    Control_ReadControllerStates();
     result = D_80153500[ch];
     D_8010BBB8 = 2;
     if (result == 0) {
@@ -126,10 +126,10 @@ static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
             func_802BD3A0_de(dst, buf, size);
         }
     }
-    Render_ReleasePakLock();
+    Control_ReleasePakLock();
     func_80253908_de(0);
     if (handle != 0) {
-        Scene_ReleaseResource(0, handle);
+        Cache_ReleaseResource(0, handle);
     }
     return result;
 }
@@ -169,7 +169,7 @@ s32 Pak_DeleteNote(s32 ch, s32 index) {
         return -2;
     }
     ((void (*)(s32))Control_AcquireControllerLock)(1);
-    Render_ReadControllerStates();
+    Control_ReadControllerStates();
     result = D_80153500[ch];
     D_8010BBB8 = 2;
     if (result == 0) {
@@ -182,7 +182,7 @@ s32 Pak_DeleteNote(s32 ch, s32 index) {
         }
         Pak_UpdateStatus(ch);
     }
-    Render_ReleasePakLock();
+    Control_ReleasePakLock();
     return result;
 }
 
@@ -198,7 +198,7 @@ s32 Pak_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
     if (D_801534F0[ch] != 3) {
         return -2;
     }
-    handle = Scene_AllocateResource(0, blocks, 0x23, g_pakWriteScratchNoteName);
+    handle = Cache_AllocateResource(0, blocks, 0x23, g_pakWriteScratchNoteName);
     buf = *handle;
     for (tries = 0; tries < 4; tries++) {
         result = func_804042F0_de(ch, size, data, name, &file_no, ext, RW_LOCALIZED_TEXT(D_800D36DC, D_800E25C4, D_800E25C4, g_languageIndex), code);
@@ -214,7 +214,7 @@ s32 Pak_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
     }
     func_80253908_de(0);
     if (handle != 0) {
-        Scene_ReleaseResource(0, handle);
+        Cache_ReleaseResource(0, handle);
     }
     return result;
 }
@@ -241,7 +241,7 @@ s32 Pak_FindNoteByName(void *name, s32 channel, s32 *noteIndex) {
     for (note = 0; note < 16; note++) {
         Pak_PeekNoteGameName(channel, note, &encodedName);
         Pak_DecodeNoteName(encodedName, decodedName, 16);
-        if (Resmgr_CompareStrings(decodedName, name) == 0) {
+        if (XPlus_CompareStrings(decodedName, name) == 0) {
             if (noteIndex != NULL) {
                 *noteIndex = note;
             }

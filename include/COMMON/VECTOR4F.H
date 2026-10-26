@@ -823,7 +823,7 @@ struct SharedPlayer {
         struct {
             char pad[0x11C];
             f32 unk704;
-            f32 viewPitch; /* +0x708: Weapons_BuildPlayerViewTransform */
+            f32 viewPitch; /* +0x708: Player_BuildPlayerViewTransform */
         } view704_67;
         struct {
             char pad[0x11C];

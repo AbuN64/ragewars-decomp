@@ -12,22 +12,22 @@
 #include "RESMGR/802A0888.H"
 
 /** Allocate and clear the player array and its per-player state blocks, linking each player to its block. */
-extern void **Scene_AllocateResource(int, int, int, char *);
+extern void **Cache_AllocateResource(int, int, int, char *);
 
-void Weapons_AllocPlayerList(PlayerList *list, int count) {
+void Player_AllocPlayerList(PlayerList *list, int count) {
     int playerSize = count * sizeof(Players);
     int stateSize = count * 0x330;
     char *states;
     void **handle;
     int i;
 
-    handle = Scene_AllocateResource(0, playerSize + stateSize, 0x23, s_playersText);
+    handle = Cache_AllocateResource(0, playerSize + stateSize, 0x23, s_playersText);
     list->handle = handle;
     list->count = count;
     list->players = *handle;
     states = (char *)list->players + playerSize;
-    Resmgr_FillMemory(list->players, 0, playerSize);
-    Resmgr_FillMemory(states, 0, stateSize);
+    XPlus_FillMemory(list->players, 0, playerSize);
+    XPlus_FillMemory(states, 0, stateSize);
     for (i = 0; i < count; i++) {
         list->players[i].state = states + i * 0x330;
     }
@@ -35,7 +35,7 @@ void Weapons_AllocPlayerList(PlayerList *list, int count) {
 
 /* Updates every player in a world for one frame unless the game state D_8014687C is 8 or 11: turns
    the world's spin at 0x40 by 5 degrees, then for each player in the list from 0x20 runs its body
-   through Fx_BuildControllerState (restoring the frame time D_800D2988 it may change), its team logic through
+   through ContPad_BuildControllerState (restoring the frame time D_800D2988 it may change), its team logic through
    func_8022C490_de when either team rule is set, its controls through func_80220ED4_de unless input is
    frozen by D_80146894, and its camera through func_80220A80_de; a second pass opens the pause menu
    through func_8024570C_de for a paused player or one whose controller at 0x698 asks while a menu is
@@ -90,7 +90,7 @@ void Weapons_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
         }
         rules = &D_8014687C.rules;
         for (player = world->players; player != 0; player = player->views16E0.view16E0_2.next) {
-            Fx_BuildControllerState((struct ControllerInput *)player->views5E8.view688_33.body, (Player *)player);
+            ContPad_BuildControllerState((struct ControllerInput *)player->views5E8.view688_33.body, (Player *)player);
             D_800D2988 = frameTime;
             if (rules->teams != 0 || rules->teamRule != 0) {
                 func_8022C490_de(player);
@@ -101,10 +101,10 @@ void Weapons_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
             Weapons_UpdatePlayerCamera(player, player);
         }
         for (player = world->players; player != 0; player = player->views16E0.view16E0_2.next) {
-            if (Camera_IsSequenceActive() != 0 && (player->views5E8.view6B0_48.state & 0x8000)) {
+            if (Cinema_IsSequenceActive() != 0 && (player->views5E8.view6B0_48.state & 0x8000)) {
                 func_8024570C_de();
             } else if (Control_IsStartPressed(player->views5E8.view698_36.controller) != 0) {
-                if (Camera_IsSequenceActive() != 0 || func_8024576C_de() != 0) {
+                if (Cinema_IsSequenceActive() != 0 || func_8024576C_de() != 0) {
                     func_8024570C_de();
                 } else if (func_802A23B4_de() == 0 && Pak_CountLiveNodes(&D_8014561C) == 0 && player->views5E4.view5E4_3.alive != 0
                            && player->views5DC.view5DC_2.view != 0 && player->views5DC.view5DC_2.view->unk564 == 0
@@ -136,7 +136,7 @@ void Weapons_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
 
 extern void MultiplyQuaternions(CQuatern *out, CQuatern *a, CQuatern *b);
 
-void Weapons_BuildPlayerOrientation(Player *player, CQuatern *output)
+void Player_BuildPlayerOrientation(Player *player, CQuatern *output)
 {
     CQuatern pitchRotation;
     CQuatern yawRotation;
@@ -180,14 +180,14 @@ void Weapons_BuildPlayerOrientation(Player *player, CQuatern *output)
 #include "COMMON/VECTOR4F.H"
 extern void MultiplyQuaternions(CQuatern *out, CQuatern *a, CQuatern *b);
 extern void MatrixFromQuaternion(CQuatern *rotation, f32 matrix[4][4]);
-extern void Particle_BuildTranslationMatrix(f32 matrix[4][4], f32 x, f32 y, f32 z);
-extern void Rsp_MultiplyAffineMatrices(f32 out[4][4], f32 a[4][4], f32 b[4][4]);
+extern void GraphU64_BuildTranslationMatrix(f32 matrix[4][4], f32 x, f32 y, f32 z);
+extern void GraphU64_MultiplyAffineMatrices(f32 out[4][4], f32 a[4][4], f32 b[4][4]);
 /* Builds a player view matrix: the eye height (base height plus camera offset less the crouch depth,
    at least 40.96) and the view pitch, yaw and roll (each with its kick and sway, the pitch less the
    head bob) become one half-angle quaternion per axis, combined roll * (pitch * yaw), then the
    matrix is rotation * eye-height lift * body orientation * translation to the player position plus
    its side and forward weapon offsets. */
-void Weapons_BuildPlayerViewTransform(Player *player, f32 out[4][4])
+void Player_BuildPlayerViewTransform(Player *player, f32 out[4][4])
 {
     CQuatern pitchRotation;
     CQuatern yawRotation;
@@ -235,10 +235,10 @@ void Weapons_BuildPlayerViewTransform(Player *player, f32 out[4][4])
     MultiplyQuaternions(&pitchYaw, &pitchRotation, &yawRotation);
     MultiplyQuaternions(&rotation, &rollRotation, &pitchYaw);
     MatrixFromQuaternion(&rotation, viewRotation);
-    Particle_BuildTranslationMatrix(lift, 0.0f, height, 0.0f);
+    GraphU64_BuildTranslationMatrix(lift, 0.0f, height, 0.0f);
     MatrixFromQuaternion(&orientation, bodyRotation);
-    Rsp_MultiplyAffineMatrices(lifted, viewRotation, lift);
-    Rsp_MultiplyAffineMatrices(oriented, lifted, bodyRotation);
-    Particle_BuildTranslationMatrix(placement, x, y, z);
-    Rsp_MultiplyAffineMatrices(out, oriented, placement);
+    GraphU64_MultiplyAffineMatrices(lifted, viewRotation, lift);
+    GraphU64_MultiplyAffineMatrices(oriented, lifted, bodyRotation);
+    GraphU64_BuildTranslationMatrix(placement, x, y, z);
+    GraphU64_MultiplyAffineMatrices(out, oriented, placement);
 }

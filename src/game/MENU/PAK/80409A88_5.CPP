@@ -53,7 +53,7 @@ extern void func_80293268_de(void *arg0);
    and 2. */
 
 
-extern void Render_DisableControllerPak(void *);
+extern void Control_DisableControllerPak(void *);
 
 
 /* Searches the sixteen controller-pak notes for the requested name and returns the matching index when requested. */
@@ -85,7 +85,7 @@ extern void Pak_GetNoteGameName(s32,s32,s32 *),func_80405648_de(s32,void *,s32);
 s32 func_80409CEC_de(struct Shared_PakMenu *record) {
     if (D_80153784 == 0) {
         if (func_80409BDC_de(record) != -1) {
-            if (Render_PeekPakChange(func_80409BDC_de(record)) != 0) {
+            if (Control_PeekPakChange(func_80409BDC_de(record)) != 0) {
                 if (Pak_CheckStatusPrompt(record, func_80409BDC_de(record), 0) != 0) {
                     D_80153784 = 1;
                 }
@@ -116,7 +116,7 @@ s32 func_80409E10_de(void *menu) {
         }
     }
     if (D_80153784 == 0) {
-        if ((D_800E28C8 != -1) && (Render_PeekPakChange(D_800E28C8) != 0) && (Pak_CheckStatusPrompt(menu, D_800E28C8, 0) != 0)) {
+        if ((D_800E28C8 != -1) && (Control_PeekPakChange(D_800E28C8) != 0) && (Pak_CheckStatusPrompt(menu, D_800E28C8, 0) != 0)) {
             D_8014AD94 = 0;
             D_80153784 = 1;
         }
@@ -151,8 +151,8 @@ void func_80409F2C_de(struct Shared_PakMenu *record) {
 }
 
 void func_80409F6C_de(void *unused, void *object) {
-    Render_DisableControllerPak(object);
-    Items_SetSelection(&g_world, g_world.selectionValues[3], 2);
+    Control_DisableControllerPak(object);
+    OvlScene_SetSelection(&g_world, g_world.selectionValues[3], 2);
 }
 
 s32 func_80409FA0_de(void *unused, void *arg1, s32 arg2, s32 *arg3) {
@@ -162,7 +162,7 @@ s32 func_80409FA0_de(void *unused, void *arg1, s32 arg2, s32 *arg3) {
     for(note_index=0;note_index<16;note_index++) {
         Pak_GetNoteGameName(arg2,note_index,&game_ref);
         func_80405648_de(game_ref,&game_name,16);
-        if(Resmgr_CompareStrings(&game_name,arg1)==0) {
+        if(XPlus_CompareStrings(&game_name,arg1)==0) {
             if(arg3) *arg3=note_index;
             return 1;
         }

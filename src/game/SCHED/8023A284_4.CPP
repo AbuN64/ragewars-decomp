@@ -16,8 +16,8 @@
 #include "TEXTURE/80294C64_15.H"
 #include "COMMON/WORLD.H"
 
-extern void Scene_UnlockResource(void *, Node80253610 *);
-extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void Cache_UnlockResource(void *, Node80253610 *);
+extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 /* Clip and draw a textured translucent fan at the object's depth. */
 void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
@@ -67,7 +67,7 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
             switch (format) {
             case 2:
             default:
-                Render_SetCombineMode(32);
+                Geometry_SetCombineMode(32);
                 gDPSetEnvColor(g_displayListCursor++, descriptor->envRed, descriptor->envGreen, descriptor->envBlue, 255);
                 center[0] = descriptor->red;
                 center[1] = descriptor->green;
@@ -77,7 +77,7 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
                 rim[2] = descriptor->blue;
                 break;
             case 0: case 1:
-                Render_SetCombineMode(33);
+                Geometry_SetCombineMode(33);
                 center[0] = 255; center[1] = 255; center[2] = 255;
                 rim[0] = 255; rim[1] = 255; rim[2] = 255;
                 break;
@@ -122,9 +122,9 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
                 triangle[0] = points[first];
                 triangle[1] = points[second];
                 triangle[2] = points[third];
-                Particle_SubtractVectors(&edge0, &triangle[1], &triangle[0]);
-                Particle_SubtractVectors(&edge1, &triangle[2], &triangle[1]);
-                Particle_CrossVectors(&normal, &edge0, &edge1);
+                GraphU64_SubtractVectors(&edge0, &triangle[1], &triangle[0]);
+                GraphU64_SubtractVectors(&edge1, &triangle[2], &triangle[1]);
+                GraphU64_CrossVectors(&normal, &edge0, &edge1);
                 if (normal.y <= 0.0f) {
                     if (below != 1) goto draw_face;
                 } else {
@@ -181,7 +181,7 @@ draw_face:
                 }
             }
         }
-        Scene_UnlockResource(0, resource);
+        Cache_UnlockResource(0, resource);
     }
 }
 
@@ -204,8 +204,8 @@ extern DescriptorRecAt29 *D_801370C8;
 extern s32 D_801370CC;
 extern f32 D_800D2988;
 extern Shared_ReactionFlags *func_8028B2F8_de(void *, void *);
-extern f32 Anim_GetPolygonHeight(void *, s32, s32);
-extern void Camera_GetObjectPositionAt260(CVector3 *, void *);
+extern f32 Region_GetPolygonHeight(void *, s32, s32);
+extern void Sky_GetObjectPositionAt260(CVector3 *, void *);
 extern void func_80295E84_de(s32 *, s32);
 extern void func_80255ED8_de(void *, void *);
 extern void func_80255D14_de(void *, void *);
@@ -264,7 +264,7 @@ static inline s32 updateSceneEffect(ObjectRecAt220 *object, HostView8023AFF0 *ho
     return 0;
 }
 
-void Sched_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
+void Sky_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
     CVector3 anchor;
     CVector3 probe;
     Shared_ReactionFlags *entry;
@@ -290,19 +290,19 @@ void Sched_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
         return;
     }
     hostDepth = 0.0f;
-    limit = Anim_GetPolygonHeight(resource, host->field38, host->field40);
+    limit = Region_GetPolygonHeight(resource, host->field38, host->field40);
     below = 0;
     if (entry->flags & 1) {
-        Camera_GetObjectPositionAt260(&anchor, host);
+        Sky_GetObjectPositionAt260(&anchor, host);
         fadeLimit = 0.5f;
         value = (entry->height - anchor.y) * fadeLimit;
         if (20.48f < value) {
             fadeLimit = 20.48f;
         } else {
-            Camera_GetObjectPositionAt260(&probe, host);
+            Sky_GetObjectPositionAt260(&probe, host);
             fadeLimit = (entry->height - probe.y) * fadeLimit;
         }
-        Camera_GetObjectPositionAt260(&anchor, host);
+        Sky_GetObjectPositionAt260(&anchor, host);
         if (!(anchor.y < entry->height)) {
             below = 0;
         } else {

@@ -44,7 +44,7 @@ extern void func_80298368_de(s32 arg0);
 
 void func_802941B8_de(void) {
     D_80141128 = 0;
-    System_SetTextureEffect(0U);
+    TextLoad_SetTextureEffect(0U);
 }
 
 void func_802941DC_de(struct GameSession *session) {
@@ -64,14 +64,14 @@ void func_80294200_de(void) {
     gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)D_8011BDC0->colorImage);
     func_802AA950_de(0x389, 0, &width, &height);
     if ((width != 0) && (height != 0)) {
-        Text_SetupSpriteMode(0xFA);
+        OnScreen_SetupSpriteMode(0xFA);
         func_802AAC28_de(0x389, 0, 0, 0, (f32)D_800E28D0 / (f32)width, (f32)D_800E28D4 / (f32)height, 1);
     }
 }
 
 void func_802942F0_de(s32 arg0) {
     func_8028D90C_de();
-    ((s32 (*)(s32, s32))Render_ResetPlayerItems)(arg0, 0x5A);
+    ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(arg0, 0x5A);
 }
 
 void func_80294320_de(s32 session) {
@@ -128,8 +128,8 @@ void func_80294418_de(GameSession *session) {
 void func_80294434_de(s32 arg0) {
     D_800CD770 += 1;
     func_8028D90C_de();
-    Camera_SetResponse(0.5f);
-    Render_ResetPlayerItems(arg0, 0x6F);
+    Cinema_SetResponse(0.5f);
+    SetN64_ResetPlayerItems(arg0, 0x6F);
 }
 
 void func_80294488_de(s32 session) {
@@ -142,5 +142,5 @@ void func_802944A8_de(void *session) {
 
 void func_802944C4_de(s32 arg0) {
     func_8028D90C_de();
-    ((s32 (*)(s32, s32))Render_ResetPlayerItems)(arg0, 0x6F);
+    ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(arg0, 0x6F);
 }

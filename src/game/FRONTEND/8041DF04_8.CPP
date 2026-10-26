@@ -35,7 +35,7 @@ void func_8041E81C_de(s32 count, s32 level) {
     }
     i = 0;
     while (budget > 0) {
-        entry = &points[Nav_NextRandom() % count];
+        entry = &points[GraphU64_NextRandom() % count];
         value = *entry;
         if (value < 20 && budget >= value) {
             *entry = value * 2;
@@ -51,14 +51,14 @@ void func_8041E81C_de(s32 count, s32 level) {
         D_80153F80[i].variant = tier;
         D_80153F80[i].variantC = tier;
         do {
-            pick = Nav_NextRandom() % 17;
+            pick = GraphU64_NextRandom() % 17;
             D_80153F80[i].id = D_800E381C[tier][pick].field_0;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
             name = D_80153F80[i].name;
             game = &D_801462C8;
-            Resmgr_CopyString(name, ((char **)D_800E381C[tier][pick].field_4)[game->language]);
+            XPlus_CopyString(name, ((char **)D_800E381C[tier][pick].field_4)[game->language]);
 #else
-            Resmgr_CopyString(D_80153F80[i].name, *(char **)D_800E381C[tier][pick].field_4);
+            XPlus_CopyString(D_80153F80[i].name, *(char **)D_800E381C[tier][pick].field_4);
 #endif
         } while (D_80153F80[i].id == -1);
     }
@@ -90,8 +90,8 @@ extern s32 D_800E37B8[];
 extern Prize D_800E381C[][17];
 extern Reward D_80153F80[];
 
-extern s32 Nav_NextRandom(void);
-extern void Resmgr_CopyString(char *dst, char *src);
+extern s32 GraphU64_NextRandom(void);
+extern void XPlus_CopyString(char *dst, char *src);
 
 void func_8041E81C_de(s32 count, s32 level) {
     s32 points[3];
@@ -122,7 +122,7 @@ void func_8041E81C_de(s32 count, s32 level) {
     }
     i = 0;
     while (budget > 0) {
-        entry = &points[Nav_NextRandom() % count];
+        entry = &points[GraphU64_NextRandom() % count];
         value = *entry;
         if (value < 20 && budget >= value) {
             *entry = value * 2;
@@ -138,9 +138,9 @@ void func_8041E81C_de(s32 count, s32 level) {
         D_80153F80[i].tier = tier;
         D_80153F80[i].shown = tier;
         do {
-            pick = Nav_NextRandom() % 17;
+            pick = GraphU64_NextRandom() % 17;
             D_80153F80[i].id = D_800E381C[tier][pick].id;
-            Resmgr_CopyString(D_80153F80[i].name, *D_800E381C[tier][pick].name);
+            XPlus_CopyString(D_80153F80[i].name, *D_800E381C[tier][pick].name);
         } while (D_80153F80[i].id == -1);
     }
 }

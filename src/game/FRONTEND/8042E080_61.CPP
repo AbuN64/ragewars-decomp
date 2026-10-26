@@ -15,12 +15,12 @@
 
 extern struct PlayerRecord D_80102B00[];
 extern void Player_InitializeProfile(struct PlayerRecord *);
-extern void Frontend_RelabelSlotRows(s32);
+extern void PAKInterface_RelabelSlotRows(s32);
 
 void func_80435844_de(s32 index) {
     if (D_800E54A4->links[index].state == 1) {
         Player_InitializeProfile(&D_80102B00[index]);
         D_800E54A4->links[index].state = 2;
-        Frontend_RelabelSlotRows(-1);
+        PAKInterface_RelabelSlotRows(-1);
     }
 }

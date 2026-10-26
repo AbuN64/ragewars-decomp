@@ -8,7 +8,7 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
 #include "MENU/PAK/8043F69C_11.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Returns the address 0x190 bytes into the block at offset 0x20 of an object, or null when the
    object has no block. */
@@ -101,13 +101,13 @@ s32 func_804423AC_de(struct Outer *outer) {
 
 /* Adjusts a value from controller input and clamps or wraps it between its limits. */
 
-s32 Render_IsAButtonPressed(s32); /* extern */
+s32 Control_IsAButtonPressed(s32); /* extern */
  /* extern */
  /* extern */
 
 s32 Pak_AdjustValue(func_8022A404_S1 *menu,s32 value,s32 step,s32 minimum,s32 maximum,s32 wrap) {
  if(((s32 (*)(s32))Control_IsLeftPressed)(menu->unk20))value-=step;
- if(((s32 (*)(s32))Control_IsRightPressed)(menu->unk20)||Render_IsAButtonPressed(menu->unk20))value+=step;
+ if(((s32 (*)(s32))Control_IsRightPressed)(menu->unk20)||Control_IsAButtonPressed(menu->unk20))value+=step;
  if(value<minimum) {
   value=minimum;if(wrap)value=maximum;
  } else if(value>maximum) {
@@ -157,10 +157,10 @@ void func_80442544_de(void *object) {
     ((MessageList *)object)->rotation = 0;
 }
 
-/* Allocates a block sized for the entries of a list through Scene_AllocateResource, builds it with Pak_InitializeMenu from a zero and three arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_AllocateMenu with the list and three values passed as arguments and a zero as the first value changed. */
+/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Pak_InitializeMenu from a zero and three arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_AllocateMenu with the list and three values passed as arguments and a zero as the first value changed. */
 
 extern char g_menuText[];
-extern void **Scene_AllocateResource(s32, s32, s32, char *);
+extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
 void *Pak_OpenDialog(void *parent, struct Dialog *list, s32 player, s32 controller, s32 d) {
     struct func_8025E5B0_S1 *owner;
@@ -176,7 +176,7 @@ void *Pak_OpenDialog(void *parent, struct Dialog *list, s32 player, s32 controll
         }
         size += extra;
     }
-    block = Scene_AllocateResource(0, size, 0x3B, g_menuText);
+    block = Cache_AllocateResource(0, size, 0x3B, g_menuText);
     if (block == 0) {
         return 0;
     }
@@ -193,9 +193,9 @@ void *Pak_OpenDialog(void *parent, struct Dialog *list, s32 player, s32 controll
     return first;
 }
 
-/* Allocates a block sized for the entries of a list (forty bytes each plus 0x480 for every entry of type three, over a 0x1D8 header) through Scene_AllocateResource, builds it with Pak_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. */
+/* Allocates a block sized for the entries of a list (forty bytes each plus 0x480 for every entry of type three, over a 0x1D8 header) through Cache_AllocateResource, builds it with Pak_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. */
 extern char g_menuText[];
-extern void **Scene_AllocateResource(s32, s32, s32, char *);
+extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
 void *func_80442690_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *params, struct Dialog *list) {
     s32 a = params->a;
@@ -214,7 +214,7 @@ void *func_80442690_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *p
         }
         size += extra;
     }
-    block = Scene_AllocateResource(0, size, 0x3B, g_menuText);
+    block = Cache_AllocateResource(0, size, 0x3B, g_menuText);
     if (block == 0) {
         return 0;
     }
@@ -230,9 +230,9 @@ void *func_80442690_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *p
     return first;
 }
 
-/* Allocates a block sized for the entries of a list through Scene_AllocateResource, builds it with Pak_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_80442690_de with the first parameter read from offset 0x14 instead of 0x18. */
+/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Pak_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_80442690_de with the first parameter read from offset 0x14 instead of 0x18. */
 extern char g_menuText[];
-extern void **Scene_AllocateResource(s32, s32, s32, char *);
+extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
 void *Pak_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateMenu *params, struct Dialog *list) {
     s32 a = params->a;
@@ -251,7 +251,7 @@ void *Pak_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateM
         }
         size += extra;
     }
-    block = Scene_AllocateResource(0, size, 0x3B, g_menuText);
+    block = Cache_AllocateResource(0, size, 0x3B, g_menuText);
     if (block == 0) {
         return 0;
     }
@@ -272,7 +272,7 @@ void *Pak_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateM
    0x10 is set, and for each remaining node asks Pak_UpdateMenuEntries whether it may go; when it may, calls
    the node's optional handler at 0xC of its table at 0x14, clears the three words at 0xB0, 0xB4 and
    0xBC of the state it owns at 0x20, unlinks it with func_80255ED8_de and releases its handle at 0x8
-   through Scene_ReleaseResource. */
+   through Cache_ReleaseResource. */
 extern MessageList D_8014561C;
 extern s32 Pak_UpdateMenuEntries(CMenu *, MessageList *);
 
@@ -294,7 +294,7 @@ void Pak_UpdateDialogList(MessageList *list) {
                 state->field_B4 = 0;
                 state->field_BC = 0;
                 func_80255ED8_de(list, node);
-                Scene_ReleaseResource(0, node->handle);
+                Cache_ReleaseResource(0, node->handle);
             }
         }
         node = next;

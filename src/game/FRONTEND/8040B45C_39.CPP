@@ -18,7 +18,7 @@ extern Manager_func_80411D18_de D_80153C20;
 extern EntryRecAt18V1 *D_80153C10;
 /* Releases the buffers of the pool at D_80153C40: every entry holding a buffer that is not locked
    (flag 1) unless force is set has its reference count forced to one and dropped, and when it
-   reaches zero the buffer is freed through Scene_FreeMemory, along with the entry's secondary buffer
+   reaches zero the buffer is freed through Cache_FreeMemory, along with the entry's secondary buffer
    when secondary buffers are in use (D_800E2AC4), and the entry is cleared. Pool fields read as one struct at D_80153C40, as in func_80410E1C_de. */
 
 
@@ -107,7 +107,7 @@ extern void Frontend_LoadLanguageStrings(s32);
 
 
 
-/* Clears the 0x2A8-byte block D_801539B0 through Resmgr_FillBytes, sets D_800E2AC0 and clears
+/* Clears the 0x2A8-byte block D_801539B0 through XPlus_FillBytes, sets D_800E2AC0 and clears
    D_800E2AC4. */
 
 extern s32 D_800E2AC0;
@@ -160,10 +160,10 @@ void func_804118E4_de(s32 force) {
             D_80153C40.refs[i] = 1;
             D_80153C40.refs[i]--;
             if (D_80153C40.primary[i].unk8 != 0 && D_80153C40.refs[i] == 0) {
-                Scene_FreeMemory(D_80153C40.primary[i].unk8);
+                Cache_FreeMemory(D_80153C40.primary[i].unk8);
                 if (D_800E2AC4 != 0 && D_80153C40.secondary != 0 &&
                     D_80153C40.secondary[i].unk8 != 0) {
-                    Scene_FreeMemory(D_80153C40.secondary[i].unk8);
+                    Cache_FreeMemory(D_80153C40.secondary[i].unk8);
                 }
                 D_80153C40.primary[i].unk8 = 0;
             }
@@ -303,17 +303,17 @@ s32 Frontend_IsValidScreenIndex(s32 index) {
 void func_80411E18_de(s32 i) {
     D_80153C40.refs[i]--;
     if (D_80153C40.primary[i].unk8 != 0 && D_80153C40.refs[i] == 0) {
-        Scene_FreeMemory(D_80153C40.primary[i].unk8);
+        Cache_FreeMemory(D_80153C40.primary[i].unk8);
         if (D_800E2AC4 != 0 && D_80153C40.secondary != 0 &&
             D_80153C40.secondary[i].unk8 != 0) {
-            Scene_FreeMemory(D_80153C40.secondary[i].unk8);
+            Cache_FreeMemory(D_80153C40.secondary[i].unk8);
         }
         D_80153C40.primary[i].unk8 = 0;
     }
 }
 
 void func_80411EEC_de(void) {
-    Resmgr_FillBytes(&D_801539B0, 0, sizeof(D_801539B0));
+    XPlus_FillBytes(&D_801539B0, 0, sizeof(D_801539B0));
     D_800E2AC0 = 1;
     D_800E2AC4 = 0;
 }

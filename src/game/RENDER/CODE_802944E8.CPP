@@ -27,12 +27,12 @@ extern void func_8023EE00_de(void);
 
 extern void func_802954E0_us_rev1(void);
 
-extern void Items_SetSelection(void *arg0, s32 arg1, s32 arg2);
+extern void OvlScene_SetSelection(void *arg0, s32 arg1, s32 arg2);
 
 
 extern s32 D_800CD730;
 
-extern s32 Render_IsSnapshotActive(void);
+extern s32 Control_IsSnapshotActive(void);
 extern void Control_RestoreActorSnapshot(void);
 extern void func_80293334_de(void *session, s32 count, s32 force_active);
 
@@ -40,29 +40,29 @@ void func_802944F4_de(s32 session) {
     func_80293A20_de(session, 0xC, 0xC);
 }
 
-void Render_DrawMode11Session(void *session) { func_80293B28_de(session); }
+void SetN64_DrawMode11Session(void *session) { func_80293B28_de(session); }
 
 void func_80294530_de(s32 arg0) {
     func_8028D90C_de();
-    ((s32 (*)(s32, s32))Render_ResetPlayerItems)(arg0, 0x6F);
+    ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(arg0, 0x6F);
 }
 
 void func_80294560_de(s32 session) {
     func_80293A20_de(session, 0xD, 8);
 }
 
-void Render_DrawMode10Session(void *session) { func_80293B28_de(session); }
+void SetN64_DrawMode10Session(void *session) { func_80293B28_de(session); }
 
 void func_8029459C_de(int arg0) {
     func_8028D90C_de();
-    Render_ResetPlayerItems(arg0, ((ObjRecAt26DD8 *)arg0)->unk26DD8 + 0x259);
+    SetN64_ResetPlayerItems(arg0, ((ObjRecAt26DD8 *)arg0)->unk26DD8 + 0x259);
 }
 
 void func_802945D8_de(s32 session) {
     func_80293A20_de(session, 0xD, 0xD);
 }
 
-void Render_DrawMode12Session(void *session) { func_80293B28_de(session); }
+void SetN64_DrawMode12Session(void *session) { func_80293B28_de(session); }
 
 struct func_802077F4_S2;
 
@@ -91,19 +91,19 @@ void func_80294614_de(GameSession *arg0) {
     D_800CD744_de = f;
     D_800D298C = f;
     D_800CD740_de = f;
-    Items_SetSelection(dst, field, 0);
+    OvlScene_SetSelection(dst, field, 0);
     arg0->mode = 0xD;
     D_80154048 = 0;
 }
 
 /* Prepares a session for a new round: clears the round flag, resets the round state, records the round seed when func_80264B6C_de allows, resets the scoreboard and player slot, restarts the arena with the session's arena setting, resets the camera timers and reloads the session's sound bank and music. */
-void Render_StartRound(GameSession *session) {
+void SetN64_StartRound(GameSession *session) {
     CGameStatus *counters;
     Shared_Game *game;
 
     D_800CD730 = 0;
     func_80293268_de(session);
-    if (Render_IsSnapshotActive() != 0) {
+    if (Control_IsSnapshotActive() != 0) {
         session->selector = Control_GetSnapshotActorId();
     }
     counters = &D_801462C8.counters;
@@ -113,7 +113,7 @@ void Render_StartRound(GameSession *session) {
     game->local = 1;
     game->mode1E = 8;
     func_80293334_de(session, session->arena, 0);
-    if (Render_IsSnapshotActive() != 0) {
+    if (Control_IsSnapshotActive() != 0) {
         Control_RestoreActorSnapshot();
     }
     func_8023EE00_de();
@@ -122,8 +122,8 @@ void Render_StartRound(GameSession *session) {
     D_800CD744_de = roundTimerConstant();
     D_800D298C = roundTimerConstant();
     D_800CD740_de = roundTimerConstant();
-    Items_InitPreview(&g_world, session->resource);
-    Items_SetSelection(&g_world, session->selector, 0);
+    OvlScene_InitPreview(&g_world, session->resource);
+    OvlScene_SetSelection(&g_world, session->selector, 0);
 }
 
 #if !(defined(VERSION_US_REV1))

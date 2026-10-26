@@ -38,7 +38,7 @@ extern void func_8025476C_de(s32);
 extern void func_8042E988_de(s32);
 extern void func_802998A8_de(void);
 
-s32 Menu_HandleMatchMessage(void) {
+s32 Frontend_HandleMatchMessage(void) {
     MarkMenuEventHandled();
     switch (func_80299A08_de()) {
     default:

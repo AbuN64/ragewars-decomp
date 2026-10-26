@@ -6,8 +6,8 @@
 
 extern s32 func_8028B21C_de(struct Shared_World *, s32);
 extern s32 func_8028C198_de(void *, s32);
-extern s32 Render_GetDirectoryEntry(s32 *, s32, s32);
-extern s32 Render_LocatePackSection(void *, s32, s32, s32 *);
+extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
+extern s32 SetN64_LocatePackSection(void *, s32, s32, s32 *);
 typedef struct { u32 w[7]; } Blk28;
 void func_8044B600_de(void *level, void *buffer, s32 name) {
     void *table;
@@ -26,23 +26,23 @@ void func_8044B600_de(void *level, void *buffer, s32 name) {
         ((u32 *)buffer)[2] = 0;
     } else {
         size = func_8028C198_de(level, index);
-        header = Scene_RequestResource(0, size, size, 0x18, 0, 0, 0, g_constructMapObjectIndex, 1);
+        header = Cache_RequestResource(0, size, size, 0x18, 0, 0, 0, g_constructMapObjectIndex, 1);
         if (header != 0) {
-            key = Render_GetDirectoryEntry(*header, size, 1);
+            key = SetN64_GetDirectoryEntry(*header, size, 1);
             resource = func_802540F4_de(0, &table, key, g_constructMapSimpModelsIndex, 1);
             if (resource != 0) {
-                shapeKey = Render_LocatePackSection(table, key, 0, &bytes);
-                shape = Scene_RequestResource(0, shapeKey, shapeKey, bytes, 0, 0, &D_0026D7F4, g_constructMapSimpleModel, 1);
+                shapeKey = SetN64_LocatePackSection(table, key, 0, &bytes);
+                shape = Cache_RequestResource(0, shapeKey, shapeKey, bytes, 0, 0, &D_0026D7F4, g_constructMapSimpleModel, 1);
                 if (shape != 0) {
-                    first = Render_GetPackSection(*shape, 2);
-                    first = Render_GetPackSection(first, 0);
-                    source = Render_GetPackSection(first, 0);
+                    first = SetN64_GetPackSection(*shape, 2);
+                    first = SetN64_GetPackSection(first, 0);
+                    source = SetN64_GetPackSection(first, 0);
                     *(Blk28 *)buffer = *(Blk28 *)source;
-                    Scene_ReleaseResource(0, shape);
+                    Cache_ReleaseResource(0, shape);
                 }
-                Scene_ReleaseResource(0, resource);
+                Cache_ReleaseResource(0, resource);
             }
-            Scene_ReleaseResource(0, header);
+            Cache_ReleaseResource(0, header);
         }
     }
 }

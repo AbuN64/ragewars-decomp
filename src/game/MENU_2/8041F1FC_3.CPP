@@ -124,7 +124,7 @@ extern CharacterScreenCell D_800E029E[][9];
 
 extern unsigned char D_800FEB0F[];
 
-extern void Menu_SetSlotValue(void *, int, int);
+extern void SmpOverlay_SetSlotValue(void *, int, int);
 
 extern void func_8041CE10_de(void *, int);
 
@@ -144,7 +144,7 @@ extern void func_80298368_de(int);
 
 extern s_CharacterData D_800E3A50[];
 
-extern s32 Nav_NextRandom(void);
+extern s32 GraphU64_NextRandom(void);
 
 extern s32 Frontend_ListHasFlag100(void *widget);
 
@@ -267,7 +267,7 @@ void func_804201A4_de(s32 player) {
 void func_80420308_de(s32 player) {
     MenuWidget *frame;
 
-    Menu_ShowSlotById(D_800E42D0->screen, player, (s16)D_800E42D4[player].kind);
+    SmpOverlay_ShowSlotById(D_800E42D0->screen, player, (s16)D_800E42D4[player].kind);
     D_800E42D0->players[player].highlight = func_8040EC30_de(D_800E42D0->screen, D_800E42D4[player].cursor);
     frame = func_8040EC30_de(D_800E42D0->screen, (u16)D_800E42D4[player].kind);
     D_800E42D0->players[player].highlight->x = frame->x - 2;
@@ -315,7 +315,7 @@ void Menu_ApplySlotValueGfx(int player, int choice) {
     int kind;
 
     D_800E42D0->players[player].unkC = 3;
-    Menu_SetSlotValue(D_800E42D0->unk4, player, 1);
+    SmpOverlay_SetSlotValue(D_800E42D0->unk4, player, 1);
     D_800E42D0->players[player].unk4C0 = 1;
     for (i = 0; i < 3; i++) {
         Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E42D0->screen, D_800E029E[player][i].id), 1);
@@ -363,7 +363,7 @@ void Menu_RandomizeCharacterPreview(s32 player) {
     tries = 0;
     done = 0;
     do {
-        id = D_800E3A50[Nav_NextRandom() % 17].id;
+        id = D_800E3A50[GraphU64_NextRandom() % 17].id;
         if (Frontend_ListHasFlag100(func_8040EC30_de(D_800E42D0->screen, (u16)id)) == 0 && D_800E42D0->players[player].kind != id) {
             done = 1;
         } else if (++tries > 5000) {
@@ -393,7 +393,7 @@ void Menu_RandomizeCharacterPreview(s32 player) {
     if (costumes <= 0) {
         costumes = 1;
     }
-    D_800E42D0->players[player].choice = Nav_NextRandom() % costumes;
+    D_800E42D0->players[player].choice = GraphU64_NextRandom() % costumes;
 }
 
 s32 func_80420AD4_de(void) {

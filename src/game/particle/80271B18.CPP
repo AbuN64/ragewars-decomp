@@ -7,9 +7,9 @@
 
 #include "COMMON/MATH_HELPERS.H"
 extern f32 Math_Sqrtf(f32);
-extern f32 Nav_ArcCos(f32);
+extern f32 GraphU64_ArcCos(f32);
 /** Heading of a direction in the XZ plane: acos of the dominant axis, clamped to [-1, 1]. */
-f32 Particle_GetHorizontalAngle(CVector3 *direction) {
+f32 GraphU64_GetHorizontalAngle(CVector3 *direction) {
     f32 x = direction->x;
     f32 z = direction->z;
     f32 length = x * x + z * z;
@@ -25,7 +25,7 @@ f32 Particle_GetHorizontalAngle(CVector3 *direction) {
     if (RW_ABS(x) < RW_ABS(z)) {
         x /= length;
         x = RW_MAX_GT(-1.0f, RW_MIN(x, 1.0f));
-        a = Nav_ArcCos(x);
+        a = GraphU64_ArcCos(x);
         angle = -a;
         if (z < 0.0f) {
             angle = a;
@@ -34,7 +34,7 @@ f32 Particle_GetHorizontalAngle(CVector3 *direction) {
     } else {
         z /= length;
         z = RW_MAX_GT(-1.0f, RW_MIN(z, 1.0f));
-        a = Nav_ArcCos(-z);
+        a = GraphU64_ArcCos(-z);
         angle = -a;
         if (x < 0.0f) {
             angle = a;
@@ -59,7 +59,7 @@ static inline f32 WrapAngle(f32 angle) {
 }
 #define ANGLE_ABS(a) (-(a) < 0.0f ? (a) : -(a))
 /** Absolute angle between two headings, each wrapped into [-pi, pi]. */
-f32 Particle_GetAngleDistance(f32 target, f32 current) {
+f32 GraphU64_GetAngleDistance(f32 target, f32 current) {
     return ANGLE_ABS(WrapAngle(target - WrapAngle(current)));
 }
 
@@ -71,21 +71,21 @@ void func_80271F00_de(CVector3 *result, CVector3 *left, CVector3 *right) {
 }
 
 /** Add two three-component vectors. */
-void Particle_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right) {
+void GraphU64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right) {
     result->x = left->x + right->x;
     result->y = left->y + right->y;
     result->z = left->z + right->z;
 }
 
 /** Subtract the right vector from the left vector. */
-void Particle_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2) {
+void GraphU64_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2) {
     arg0->x = arg1->x - arg2->x;
     arg0->y = arg1->y - arg2->y;
     arg0->z = arg1->z - arg2->z;
 }
 
 /** Scale a 3-vector (arg1) by a scalar (arg2), store into arg0. */
-void Particle_ScaleVector(void *arg0, void *arg1, f32 arg2) {
+void GraphU64_ScaleVector(void *arg0, void *arg1, f32 arg2) {
     ((CVector3 *)(arg0))->x = ((CVector3 *)(arg1))->x * arg2;
     ((CVector3 *)(arg0))->y = ((CVector3 *)(arg1))->y * arg2;
     ((CVector3 *)(arg0))->z = ((CVector3 *)(arg1))->z * arg2;
@@ -101,13 +101,13 @@ void func_80271FC8_de(CVector3 *arg0, f32 t, void *a, void *b) {
 struct CVector3_t;
 
 /** Cross product of two vectors, written directly to the output (no aliasing guard). */
-void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b) {
+void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b) {
     out->x = (a->y * b->z) - (a->z * b->y);
     out->y = (a->z * b->x) - (a->x * b->z);
     out->z = (a->x * b->y) - (a->y * b->x);
 }
 
-void Particle_NormalizeVec3(f32 *arg0) {
+void GraphU64_NormalizeVec3(f32 *arg0) {
     f32 mag;
     f32 scale;
 

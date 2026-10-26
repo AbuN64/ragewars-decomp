@@ -18,7 +18,7 @@ f32 Menu_EvaluateTrackScalar(f32 t) {
     s32 count;
     s32 i;
     f32 u;
-    track = Render_GetPackSection(D_800E2830->resource, 3);
+    track = SetN64_GetPackSection(D_800E2830->resource, 3);
     key = (D_800C7470_Pair *)(track + 2);
     count = track[1];
     for (i = 0; i < count; i++) {
@@ -43,19 +43,19 @@ f32 Menu_EvaluateTrackScalar(f32 t) {
 #include "COMMON/WORLD.H"
 extern f32 D_800DCB40[];
 extern u8 D_80100030[];
-extern s32 Camera_IsSequenceInWindow(void);
+extern s32 Cinema_IsSequenceInWindow(void);
 extern void func_802453D4_de(void);
 extern CVector3 Menu_GetTrackEyePosition(f32);
 extern CVector3 Menu_GetTrackTargetPosition(f32);
-extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
-extern void Particle_IdentityMatrix(void *);
-extern void Particle_MatrixFromEulerXYZ(void *, f32, f32, f32);
-extern void Particle_TransformPoint(void *, CVector3 *, CVector3 *);
+extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void GraphU64_IdentityMatrix(void *);
+extern void GraphU64_MatrixFromEulerXYZ(void *, f32, f32, f32);
+extern void GraphU64_TransformPoint(void *, CVector3 *, CVector3 *);
 extern void func_80288470_de(void *);
-extern s32 Camera_MoveActorWithCollision(SharedTrackObject *, f32, f32, f32, void *);
+extern s32 Unicol_MoveActorWithCollision(SharedTrackObject *, f32, f32, f32, void *);
 extern void func_8028D888_de(void *);
-extern f32 Particle_GetHorizontalAngle(CVector3 *);
-extern f32 Particle_GetVerticalAngle(CVector3 *);
+extern f32 GraphU64_GetHorizontalAngle(CVector3 *);
+extern f32 GraphU64_GetVerticalAngle(CVector3 *);
 /* Follow the keyframe camera and keep the collision result across world cleanup. */
 void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
     CVector3 eye;
@@ -73,7 +73,7 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
     if (D_800E2830->active == 0) {
         return;
     }
-    if (Camera_IsSequenceInWindow() == 0) {
+    if (Cinema_IsSequenceInWindow() == 0) {
         return;
     }
     if (D_800E2830->time < D_800E2830->start || D_800E2830->end < D_800E2830->time) {
@@ -85,10 +85,10 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
     eye = Menu_GetTrackEyePosition(D_800E2830->time);
     target = Menu_GetTrackTargetPosition(D_800E2830->time);
     scale = D_800DCB40[0];
-    Particle_ScaleVector(&eye, &eye, scale);
-    Particle_ScaleVector(&target, &target, scale);
+    GraphU64_ScaleVector(&eye, &eye, scale);
+    GraphU64_ScaleVector(&target, &target, scale);
     camera->distance = 0.0f;
-    Particle_SubtractVectors(&delta, &target, &eye);
+    GraphU64_SubtractVectors(&delta, &target, &eye);
     if (((D_800E2830->spec.flags & 1) && D_800E2830->target != 0) || (D_800E2830->spec.flags & 2)) {
         actor = D_80145060.actorList;
         if ((D_800E2830->spec.flags & 1) && D_800E2830->target != 0) {
@@ -106,20 +106,20 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
                 D_800E2830->yaw = 0.0f;
             }
         }
-        Particle_IdentityMatrix(matrix);
-        Particle_MatrixFromEulerXYZ(matrix, 0.0f, D_800E2830->yaw, 0.0f);
-        Particle_TransformPoint(matrix, &target, &rotated);
+        GraphU64_IdentityMatrix(matrix);
+        GraphU64_MatrixFromEulerXYZ(matrix, 0.0f, D_800E2830->yaw, 0.0f);
+        GraphU64_TransformPoint(matrix, &target, &rotated);
         target = rotated;
-        Particle_TransformPoint(matrix, &eye, &rotated);
+        GraphU64_TransformPoint(matrix, &eye, &rotated);
         eye = rotated;
-        Particle_AddVec3(&target, &target, &D_800E2830->position);
-        Particle_AddVec3(&eye, &eye, &D_800E2830->position);
-        Particle_SubtractVectors(&delta, &target, &eye);
+        GraphU64_AddVec3(&target, &target, &D_800E2830->position);
+        GraphU64_AddVec3(&eye, &eye, &D_800E2830->position);
+        GraphU64_SubtractVectors(&delta, &target, &eye);
         if (actor != 0) {
             saved = actor->prefix;
             actor->prefix.position = target;
             func_80288470_de(&g_world);
-            collisionHit = Camera_MoveActorWithCollision(actor, eye.x, eye.y, eye.z, D_80100030);
+            collisionHit = Unicol_MoveActorWithCollision(actor, eye.x, eye.y, eye.z, D_80100030);
             func_8028D888_de(&g_world);
             actor->prefix = saved;
             if (collisionHit != 0) {
@@ -127,8 +127,8 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
             }
         }
     }
-    yaw = Particle_GetHorizontalAngle(&delta);
-    pitch = Particle_GetVerticalAngle(&delta);
+    yaw = GraphU64_GetHorizontalAngle(&delta);
+    pitch = GraphU64_GetVerticalAngle(&delta);
     camera->distance += yaw;
     camera->pitch = -pitch;
     camera->position = eye;

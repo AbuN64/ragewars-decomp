@@ -25,33 +25,33 @@ extern Triangle *D_800CD3EC;
 
 
 
-extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
-extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
-extern void Particle_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
+extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
 extern f32 Math_Sqrtf(f32);
 
 static inline void edge(CVector3 *out, CVector3 *a, CVector3 *b) {
-    Particle_SubtractVectors(out, a, b);
+    GraphU64_SubtractVectors(out, a, b);
 }
 
 static inline void normalize_copy(CVector3 *out, CVector3 *in) {
     *out = *in;
-    Particle_NormalizeVec3(out);
+    GraphU64_NormalizeVec3(out);
 }
 
 
 
 extern void func_802750B0_de(CVector3 *);
 
-extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern void Particle_ScaleVector(CVector3 *, CVector3 *, float);
+extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, float);
 
-CQuatern *Nav_GetPolygonUpQuat(CQuatern *out, Triangle *polygon) {
+CQuatern *Region_GetPolygonUpQuat(CQuatern *out, Triangle *polygon) {
     CVector3 normal;
     CVector3 up;
     CVector3 axis;
@@ -75,7 +75,7 @@ CQuatern *Nav_GetPolygonUpQuat(CQuatern *out, Triangle *polygon) {
         } else if (polygon != D_800CD3E8) {
             edge(&edge0, polygon->vertices[1], polygon->vertices[0]);
             edge(&edge1, polygon->vertices[2], polygon->vertices[1]);
-            Particle_CrossVectors(&D_80115E10, &edge0, &edge1);
+            GraphU64_CrossVectors(&D_80115E10, &edge0, &edge1);
         }
         D_800CD3E8 = polygon;
         normalize_copy(&D_80115E20, &D_80115E10);
@@ -86,7 +86,7 @@ CQuatern *Nav_GetPolygonUpQuat(CQuatern *out, Triangle *polygon) {
     up.x = 0.0f;
     up.y = one;
     up.z = 0.0f;
-    Particle_CrossVectors(&axis, &up, &normal);
+    GraphU64_CrossVectors(&axis, &up, &normal);
     len = Math_Sqrtf(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
     if (len == 0.0f) {
         result.z = 0.0f;
@@ -94,8 +94,8 @@ CQuatern *Nav_GetPolygonUpQuat(CQuatern *out, Triangle *polygon) {
         result.x = 0.0f;
         result.w = one;
     } else {
-        Particle_ScaleVector(&axis, &axis, one / len);
-        angle = Nav_ArcCos(up.x * normal.x + up.y * normal.y + up.z * normal.z);
+        GraphU64_ScaleVector(&axis, &axis, one / len);
+        angle = GraphU64_ArcCos(up.x * normal.x + up.y * normal.y + up.z * normal.z);
         angle *= 0.5f;
         scale = Math_Sinf(angle);
         result.x = axis.x * scale;
@@ -108,7 +108,7 @@ CQuatern *Nav_GetPolygonUpQuat(CQuatern *out, Triangle *polygon) {
     return out;
 }
 
-CQuatern *Nav_GetCachedUpQuat(CQuatern *out, Triangle *polygon) {
+CQuatern *Region_GetCachedUpQuat(CQuatern *out, Triangle *polygon) {
     CVector3 a;
     CVector3 up;
     CVector3 axis;
@@ -123,7 +123,7 @@ CQuatern *Nav_GetCachedUpQuat(CQuatern *out, Triangle *polygon) {
     up.x = 0;
     up.y = one;
     up.z = 0;
-    Particle_CrossVectors(&axis, &up, &a);
+    GraphU64_CrossVectors(&axis, &up, &a);
     len = Math_Sqrtf(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
     if (len == 0) {
         result.z = 0;
@@ -131,8 +131,8 @@ CQuatern *Nav_GetCachedUpQuat(CQuatern *out, Triangle *polygon) {
         result.x = 0;
         result.w = one;
     } else {
-        Particle_ScaleVector(&axis, &axis, one / len);
-        angle = Nav_ArcCos(up.x * a.x + up.y * a.y + up.z * a.z);
+        GraphU64_ScaleVector(&axis, &axis, one / len);
+        angle = GraphU64_ArcCos(up.x * a.x + up.y * a.y + up.z * a.z);
         angle *= D_800C49E0_de;
         scale = Math_Sinf(angle);
         result.x = axis.x * scale;

@@ -37,7 +37,7 @@ extern s32 Nav_HasLineOfSight(Brain *, void *);
 extern void UpdateCloseAttack(Brain *arg0);
 extern void *Nav_GetControllerPosition(Brain *arg0);
 extern void *Nav_GetGraphPoint(char *, s32);
-extern f32 Particle_GetPointDistance(void *, void *);
+extern f32 GraphU64_GetPointDistance(void *, void *);
 
 s32 Nav_CheckCloseAttackRoute(Brain *brain) {
     void *pos;
@@ -52,7 +52,7 @@ s32 Nav_CheckCloseAttackRoute(Brain *brain) {
         return 1;
     }
     pos = Nav_GetControllerPosition(brain);
-    if (Particle_GetPointDistance(pos, Nav_GetGraphPoint(D_8013B364, brain->node)) < 100.0f) {
+    if (GraphU64_GetPointDistance(pos, Nav_GetGraphPoint(D_8013B364, brain->node)) < 100.0f) {
         UpdateCloseAttack(brain);
     }
     return 1;

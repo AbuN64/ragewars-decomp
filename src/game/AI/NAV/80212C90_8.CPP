@@ -30,7 +30,7 @@ void Nav_UpdatePatrolRouteDe(void) {
         "addiu     $v0, $zero, -0x2\n"
         "sw         $zero, 0x224($s1)\n"
         "lw         $a1, 0x224($s1)\n"
-        "jal        Engine_GetPlatformRoute\n"
+        "jal        Scene_GetPlatformRoute\n"
         "sw        $zero, 0x228($s1)\n"
         "j          .Lauto_80212E80\n"
         "addiu     $v0, $zero, -0x1\n"
@@ -52,7 +52,7 @@ void Nav_UpdatePatrolRouteDe(void) {
         "jal        Nav_GetGraphPoint\n"
         "addu      $s0, $v0, $zero\n"
         "addu       $a0, $s0, $zero\n"
-        "jal        Particle_GetPointDistance\n"
+        "jal        GraphU64_GetPointDistance\n"
         "addu      $a1, $v0, $zero\n"
         "lui        $at, %hi(D_800C23B0_eu_x)\n"
         "lwc1       $f1, %lo(D_800C23B0_eu_x)($at)\n"
@@ -65,7 +65,7 @@ void Nav_UpdatePatrolRouteDe(void) {
         "addiu     $v0, $zero, -0x1\n"
         "lui        $a0, %hi(g_world)\n"
         "addiu      $a0, $a0, %lo(g_world)\n"
-        "jal        Engine_GetPlatformRoute\n"
+        "jal        Scene_GetPlatformRoute\n"
         "nop\n"
         "lw         $v1, 0x228($s1)\n"
         "addiu      $v1, $v1, 0x1\n"
@@ -85,7 +85,7 @@ void Nav_UpdatePatrolRouteDe(void) {
         "lw         $a1, 0x224($s1)\n"
         "bne        $a1, $v0, .Lauto_80212F68\n"
         "nop\n"
-        "jal        Nav_NextRandom\n"
+        "jal        GraphU64_NextRandom\n"
         "nop\n"
         "lw         $v1, 0x4($s2)\n"
         "div $zero,$v0,$v1\n"
@@ -107,7 +107,7 @@ void Nav_UpdatePatrolRouteDe(void) {
         "lw         $a2, 0x228($s1)\n"
         "lui        $a0, %hi(g_world)\n"
         "addiu      $a0, $a0, %lo(g_world)\n"
-        "jal        Engine_GetPlatformRoutePoint\n"
+        "jal        Scene_GetPlatformRoutePoint\n"
         "nop\n"
         "addu       $a0, $s2, $zero\n"
         "jal        Nav_FindNearestPointIndex\n"
@@ -169,7 +169,7 @@ extern void Nav_RunBehaviorHandler(RouteChaseBot *bot);
 extern f32 Nav_DistanceToNode(RouteChaseBot *bot, s32 node);
 extern void Nav_SteerAlongRoute(RouteChaseBot *bot);
 extern void Nav_UpdateTargetSteering(RouteChaseBot *bot);
-extern f32 Particle_GetPointDistance(CVector3 *a, CVector3 *b);
+extern f32 GraphU64_GetPointDistance(CVector3 *a, CVector3 *b);
 extern s32 Nav_CollectDirectedNeighbors(RouteChaseGraph *graph, s32 from, s32 to, s32 *path, s32 flags);
 extern void Nav_ClearNodeQueue(RouteChaseBot *bot);
 
@@ -203,7 +203,7 @@ void Nav_UpdateObjectArrivalChase(RouteChaseActor *actor)
     Nav_RunBehaviorHandler(bot);
     if (bot->target != 0) {
         Nav_UpdateTargetSteering(bot);
-        if (Particle_GetPointDistance(&bot->self->pos, &bot->target->pos) < D_800C2384_eu && bot->arrived == 0) {
+        if (GraphU64_GetPointDistance(&bot->self->pos, &bot->target->pos) < D_800C2384_eu && bot->arrived == 0) {
             bot->arrived = 1;
             none = -1;
             for (i = 63; i >= 0; i--) {

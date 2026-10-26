@@ -14,7 +14,7 @@ extern char D_800CE8DC;
 
 
 extern s16 Weapon_FindNextUsableWeapon(void *arg0);
-extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
+extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
 
@@ -58,17 +58,17 @@ void Weapon_UpdateIdleWeaponSelection(LevelActor *arg0, void *arg1) {
             mode = audio->m_nFragTagSkin;
             switch (mode) {
             case 0:
-                Render_PlaySoundAtPosition(0x18A1,
+                SoundElement_PlaySoundAtPosition(0x18A1,
                               ((Shared_ActorView *)actor)->position.vector,
                               (s32)&((Player *)actor)->pos, -1);
                 break;
             case 1:
-                Render_PlaySoundAtPosition(0x1969,
+                SoundElement_PlaySoundAtPosition(0x1969,
                               ((Shared_ActorView *)actor)->position.vector,
                               (s32)&((Player *)actor)->pos, -1);
                 break;
             case 2:
-                Render_PlaySoundAtPosition(0x1905,
+                SoundElement_PlaySoundAtPosition(0x1905,
                               ((Shared_ActorView *)actor)->position.vector,
                               (s32)&((Player *)actor)->pos, -1);
                 break;

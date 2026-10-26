@@ -45,11 +45,11 @@ s32 Weapons_SetPlayerState(void *, void *, s32);
 #ifndef NON_MATCHING
 void *Camera_PostScreenMessage(void *, void *, u8 *);
 #endif
-void *Camera_PostScaledScreenMessage(void *, void *, void *, f32); CQuatern func_8024796C_de(char *);
+void *Sky_PostScaledScreenMessage(void *, void *, void *, f32); CQuatern func_8024796C_de(char *);
 s32 func_8024BE80_de(void *);
 void InstHdr_CopyActorPositionAndModel(void *, Triple, void *, s32 *, s32, s32); /* extern */
-s32 Render_PlaySoundAtPosition(s16, CVector3, s32, s32); /* extern */
-void Render_SetProfileMode(void *, s32);
+s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32); /* extern */
+void Control_SetProfileMode(void *, s32);
 void func_80278D78_de(void *, s32, void *);
 void func_80278E04_de(s32, s32, void *);
 s32 func_802800C0_de(void *, void *, void *, s32 *, s32, s32, CVector3, CQuatern, CVector3, CVector3 *, s32, s32); /* extern */
@@ -62,7 +62,7 @@ void func_80290548_de(struct ListNode80290528 *);
 s32 func_802A01E8_de(void);
 s32 Ovlgame_ResetPlayerForRound(void *, s8, s32);         /* extern */
 void func_8044972C_de(void *);
-void Items_ReleaseObjectHandles(void *);
+void Ovlgame_ReleaseObjectHandles(void *);
 
 
 extern s32 D_8011D8D0;
@@ -153,13 +153,13 @@ void func_8021B468_de(struct Shared_ActorView *player, void *attacker, s32 damag
     void *resetMessageActor;
     void *childActor;
 
-    Render_SetProfileMode(((struct Shared_ActorView *)player)->controller, 0);
+    Control_SetProfileMode(((struct Shared_ActorView *)player)->controller, 0);
     if (((struct Shared_ActorView *)player)->action == 0x27) {
         Weapons_SetPlayerState(player, attacker, 2);
     }
     ((struct Shared_ActorView *)player)->field1218 = 0;
     func_80278D78_de(attacker, 1, attacker);
-    Items_ReleaseObjectHandles(player);
+    Ovlgame_ReleaseObjectHandles(player);
     func_8022B530_de((s32)player);
     ((struct Shared_ActorView *)player)->stun = 0;
     ((struct Shared_ActorView *)player)->marker.time = 0;
@@ -184,7 +184,7 @@ settings_loop:
                     roundPlayerModel = ((struct Shared_ActorView *)roundPlayer)->model;
                     ((struct Shared_ModelView *)roundPlayerModel)->flags = (s32) (((struct Shared_ModelView *)roundPlayerModel)->flags & ~4);
                     Weapons_RequestActorState(&((struct Shared_ActorView *)roundPlayer)->weapon, &((struct Shared_ActorView *)roundPlayer)->weapon.behaviorFlags, 2);
-                    Render_PlacePlayerAtSpawnPoint(roundPlayer, ((struct Shared_PlayerSettingsView *)settingsBase)->effect, 0, 0);
+                    Player_PlacePlayerAtSpawnPoint(roundPlayer, ((struct Shared_PlayerSettingsView *)settingsBase)->effect, 0, 0);
                     func_80255ED8_de(playersGlobal->controller, roundPlayer);
                     func_80255CB8_de(&playersGlobal->effects, roundPlayer);
                     } else if (((struct Shared_PlayerSettingsView *)settingsBase)->state < 3) {
@@ -354,7 +354,7 @@ case 7:
                     Weapons_RequestActorState(D_800F3D08, ((struct Shared_SpecialObjectView *)D_800F3D08)->segment, 1);
                     ((struct Shared_SpecialObjectView *)D_800F3D08)->reset = 0;
                     laterFlow->reset = 0;
-                    Render_PlayFlatSound(0x2D0);
+                    SoundElement_PlayFlatSound(0x2D0);
                     resetMessageActor = D_80145060.actorList;
                     if (resetMessageActor != 0) {
                         messageContext = &D_80145060.messageContext;
@@ -381,7 +381,7 @@ case 7:
                         ((struct Shared_ActorView *)childActor)->pending = 0;
                         ((struct Shared_ActorView *)childActor)->parent = 0;
                         if (releaseMessageTarget != 0) {
-                            Camera_PostScaledScreenMessage(gameplayMessageContext(messageContext), releaseMessageTarget, gameplayReleaseMessage(localization->language), 1.0f);
+                            Sky_PostScaledScreenMessage(gameplayMessageContext(messageContext), releaseMessageTarget, gameplayReleaseMessage(localization->language), 1.0f);
                         }
                     }
                     childActor = ((struct Shared_ActorView *)childActor)->next;
@@ -403,11 +403,11 @@ case 7:
             if (state != 0x1F) {
                 deathSound = func_80229C0C_de(player, 0x1397);
             }
-            Render_PlaySoundAtPosition(deathSound, player->position.vector, (s32)&player->position.vector, -1);
+            SoundElement_PlaySoundAtPosition(deathSound, player->position.vector, (s32)&player->position.vector, -1);
         } else {
-            Render_PlaySoundAtPosition(0x9FB, player->position.vector, (s32)&player->position.vector, -1);
+            SoundElement_PlaySoundAtPosition(0x9FB, player->position.vector, (s32)&player->position.vector, -1);
         }
-        Render_PlayFlatSound(0x212);
+        SoundElement_PlayFlatSound(0x212);
         if ((((struct Shared_ActorView *)player)->special != 0) || (deathEffectActorKind = ((struct Shared_ActorView *)player)->kind, (deathEffectActorKind == D_800C9228_de[0])) || (deathEffectActorKind == D_800C9228_de[1])) {
             spawnVector.x = player->position.vector.x;
             spawnVector.y = player->position.vector.y + D_800C2608_eu.projectile;
@@ -516,11 +516,11 @@ extern void func_80239194_de(void *, s32, s32);
 extern void func_8022B11C_de(void *, u16);
 /* Applies damage to a player: ignored while the game is paused, the player is protected or the damage
  * source is not allowed; scales the amount by one fifth with armour (0x80C); when the health stays above
- * zero and drops through half of the maximum it respawns the weapon (Render_PlacePlayerAtSpawnPoint); lowers the health
+ * zero and drops through half of the maximum it respawns the weapon (Player_PlacePlayerAtSpawnPoint); lowers the health
  * (with a flash sound at random), starts the knock-back and the hit effect scaled by the damage, and on death
  * reports the kill through func_8021B468_de. */
 /* Exact for us and us-rev1; de/eu/eu-x add extra checks (0x1450, 0x94) and keep their asm. */
-void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3, s32 kind) {
+void Player_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3, s32 kind) {
     s32 oldHealth = FIELD(s32, player, 0x5E4);
     s32 health;
     s32 threshold;
@@ -534,7 +534,7 @@ void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
     s32 shifted;
     char *state;
     s32 remaining;
-    if (Camera_IsSequenceActive() != 0 || func_8022C460_de(player) != 0 || g_world.frozen != 0) {
+    if (Cinema_IsSequenceActive() != 0 || func_8022C460_de(player) != 0 || g_world.frozen != 0) {
         return;
     }
     if ((FIELD(u32, &D_801462C8, 0) & 1) && kind != 0x20) {
@@ -565,7 +565,7 @@ void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
             }
         }
         if (found != 0) {
-            Render_PlacePlayerAtSpawnPoint(player, FIELD(s32, player, 0x5EC), 0, 1);
+            Player_PlacePlayerAtSpawnPoint(player, FIELD(s32, player, 0x5EC), 0, 1);
         }
     }
     state = D_801468A0;
@@ -596,12 +596,12 @@ void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
         remaining = 0;
     }
     FIELD(s32, player, 0x5E4) = remaining;
-    roll = Nav_NextRandom();
+    roll = GraphU64_NextRandom();
     if ((roll % 2) == 1) {
         if (FIELD(s32, player, 0x5E4) > 0) {
             s32 id = func_80229C0C_de((struct Shared_ActorView *)player, 0x138D);
             if (func_8025E4D4_de(id) == 0) {
-                Render_PlaySoundAtPosition((s16)id, FIELD(CVector3, player, 0x8), (s32)((char *)player + 8), -1);
+                SoundElement_PlaySoundAtPosition((s16)id, FIELD(CVector3, player, 0x8), (s32)((char *)player + 8), -1);
             }
         }
     }
@@ -648,7 +648,7 @@ void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
     return;
 }
 #else
-INCLUDE_ASM("span_1000", Render_ApplyPlayerDamage);
+INCLUDE_ASM("span_1000", Player_ApplyPlayerDamage);
 #endif
 
 #include "COMMON/FIELD_VEC_B0.H"

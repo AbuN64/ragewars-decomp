@@ -20,18 +20,18 @@ extern Triangle *D_800CD3EC;
 
 
 
-extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
-extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
 static inline void edge(CVector3 *out, CVector3 *a, CVector3 *b) {
-    Particle_SubtractVectors(out, a, b);
+    GraphU64_SubtractVectors(out, a, b);
 }
 
 static inline void normalize_copy(CVector3 *out, CVector3 *in) {
     *out = *in;
-    Particle_NormalizeVec3(out);
+    GraphU64_NormalizeVec3(out);
 }
 
 s32 func_802757E4_de(Triangle *polygon) {
@@ -57,7 +57,7 @@ s32 func_802757E4_de(Triangle *polygon) {
         } else if (polygon != D_800CD3E8) {
             edge(&edge0, polygon->vertices[1], polygon->vertices[0]);
             edge(&edge1, polygon->vertices[2], polygon->vertices[1]);
-            Particle_CrossVectors(&D_80115E10, &edge0, &edge1);
+            GraphU64_CrossVectors(&D_80115E10, &edge0, &edge1);
         }
         D_800CD3E8 = polygon;
         normalize_copy(&D_80115E20, &D_80115E10);
@@ -70,7 +70,7 @@ s32 func_802757E4_de(Triangle *polygon) {
     return 0;
 }
 
-void Nav_ComputePointBounds(f32 *arg0, s32 arg1, CVector3 *arg2)
+void Region_ComputePointBounds(f32 *arg0, s32 arg1, CVector3 *arg2)
 {
     s32 i;
 

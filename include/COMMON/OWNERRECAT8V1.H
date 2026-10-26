@@ -79,7 +79,7 @@ struct SlotsRecAt5CV1 {
     s32 values[1];
 };
 
-extern void Menu_RegisterButtonClass();
+extern void SmpButton_RegisterButtonClass();
 
 struct NodeMenuShowSlotById;
 typedef struct NodeMenuShowSlotById NodeMenuShowSlotById;
@@ -156,7 +156,7 @@ struct ChildRecAt2C;
 struct Record_func_8041B110_de;
 typedef struct Record_func_8041B110_de Record_func_8041B110_de;
 
-extern void Menu_RegisterOverlayClass();
+extern void SmpOverlay_RegisterOverlayClass();
 
 struct Mixer;
 struct Mixer {

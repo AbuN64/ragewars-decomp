@@ -13,9 +13,9 @@ extern f32 D_800CB430_de[],D_800D2988[];
 
 extern s32 InstHdr_GetActorMotionState(Actor_func_80245D30_de *);
 
-extern f32 Particle_GetHorizontalAngle(CVector3 *);
+extern f32 GraphU64_GetHorizontalAngle(CVector3 *);
 
-extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 
  extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
 
@@ -72,7 +72,7 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
         strength = (f32) material->strength;
         speed=strength * 3.0f;
         currentYawStep = (strength + 1.0f) * 0.00872664712369442f;
-        Particle_ScaleVector(&v10,&v10,speed);
+        GraphU64_ScaleVector(&v10,&v10,speed);
         flags = material->flags;
         if (flags & 0x600) {
             if (flags & 0x400) {
@@ -86,7 +86,7 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
             rider=actor;
             v20=v10;
             v20.y = 0.0f;
-            currentHeading = Particle_GetHorizontalAngle(&v20);
+            currentHeading = GraphU64_GetHorizontalAngle(&v20);
             actorYaw = actor->yaw;
             currentTargetYaw = currentHeading;
             blendedYaw = actorYaw;
@@ -142,7 +142,7 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
 
 
 
-void Camera_ResetActorMotion(void *levelActor) {
+void GameObject_ResetActorMotion(void *levelActor) {
     float k;
 
     InstHdr_ResetInstanceRenderIndices(levelActor);
@@ -164,24 +164,24 @@ void Camera_ResetActorMotion(void *levelActor) {
 
 
 extern CollisionInfo8020CD74 D_801040D0;
-extern f32 Anim_GetPolygonHeight(s32, f32, f32);
-extern s32 Camera_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, s32 *);
+extern f32 Region_GetPolygonHeight(s32, f32, f32);
+extern s32 Unicol_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, s32 *);
 
-void Camera_MoveToXZKeepHeight(Shared_ParticleInstance *actor, f32 x, f32 z) {
+void GameObject_MoveToXZKeepHeight(Shared_ParticleInstance *actor, f32 x, f32 z) {
     CVector3 saved;
     CVector3 position;
     s32 keep;
     f32 height;
 
-    height = actor->pos.y - Anim_GetPolygonHeight(actor->unk14, actor->pos.x, actor->pos.z);
+    height = actor->pos.y - Region_GetPolygonHeight(actor->unk14, actor->pos.x, actor->pos.z);
     saved = actor->velocity;
     actor->velocity.x = actor->velocity.y = actor->velocity.z = 0.0f;
     position.x = x;
     position.y = actor->pos.y;
     position.z = z;
     keep = D_801040D0.w[0];
-    Camera_MoveActorWithCollision(actor, position, D_801040D0.w);
+    Unicol_MoveActorWithCollision(actor, position, D_801040D0.w);
     D_801040D0.w[0] = keep;
     actor->velocity = saved;
-    actor->pos.y = Anim_GetPolygonHeight(actor->unk14, actor->pos.x, actor->pos.z) + height;
+    actor->pos.y = Region_GetPolygonHeight(actor->unk14, actor->pos.x, actor->pos.z) + height;
 }

@@ -33,12 +33,12 @@ extern void func_8025E384_de(void);
 extern void Frontend_SetWidgetFlag100(MenuWidget *, s32);
 extern void func_8041B110_de(s32);
 extern MenuListWidget *func_8041ABC0_de(s32, s32);
-extern void Menu_AppendListText(MenuListWidget *, char *);
-extern void Menu_SelectListEntry(MenuListWidget *, s32);
-extern s32 System_GetMemorySize(void);
+extern void SmpButton_AppendListText(MenuListWidget *, char *);
+extern void SmpButton_SelectListEntry(MenuListWidget *, s32);
+extern s32 Defs_GetMemorySize(void);
 extern s32 func_8041A580_de(s32, s32, s32);
 extern void func_8041A6EC_de(s32, s32);
-extern s32 Frontend_IsCupSelected(void);
+extern s32 ScenarioSetup_IsCupSelected(void);
 extern void func_8043C210_de(Shared_OptionsScreen *, s32, s32, s32, s32);
 extern void func_8043C278_de(Shared_OptionsScreen *);
 
@@ -56,7 +56,7 @@ s32 func_804224E0_de(void *node) {
     s32 i;
     s32 rem;
 
-    { void *memory = Scene_AllocateMemory(0x6C); D_800E4518 = memory; }
+    { void *memory = Cache_AllocateMemory(0x6C); D_800E4518 = memory; }
     D_800E4518->sound = func_8025E2C4_de();
     func_8025E2D4_de(0x34);
     func_8025E384_de();
@@ -94,19 +94,19 @@ s32 func_804224E0_de(void *node) {
     settings = &D_801462C8;
     secondListHandle = func_8041ABC0_de(0x377, 0x378);
     D_800E4518->secondList = secondListHandle;
-    Menu_AppendListText(secondListHandle, D_auto_800D3488);
-    if (System_GetMemorySize() != 0x400000) {
-        Menu_AppendListText(D_800E4518->secondList, D_auto_800D348C);
-        Menu_AppendListText(D_800E4518->secondList, D_auto_800D3490);
+    SmpButton_AppendListText(secondListHandle, D_auto_800D3488);
+    if (Defs_GetMemorySize() != 0x400000) {
+        SmpButton_AppendListText(D_800E4518->secondList, D_auto_800D348C);
+        SmpButton_AppendListText(D_800E4518->secondList, D_auto_800D3490);
     }
-    Menu_SelectListEntry(D_800E4518->secondList, settings->slots[7].secondListMode);
+    SmpButton_SelectListEntry(D_800E4518->secondList, settings->slots[7].secondListMode);
     slider = func_8041A580_de(0x371, 0x372, 0x80);
     D_800E4518->slider = slider;
 
     func_8041A6EC_de(slider, settings->buttons);
     switch (settings->controllerMode) {
     case 0:
-        if (Frontend_IsCupSelected() == 0) {
+        if (ScenarioSetup_IsCupSelected() == 0) {
             Frontend_SetWidgetFlag100(func_8040EC30_de(node, 0x374), 1);
         }
         handle = func_8040EC30_de(node, 0x376);

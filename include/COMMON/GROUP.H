@@ -70,7 +70,7 @@ typedef struct GameState GameState;
 
 extern int func_80245764_de();
 
-extern void Camera_EndSequence();
+extern void Cinema_EndSequence();
 
 
 

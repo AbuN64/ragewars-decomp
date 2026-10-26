@@ -8,7 +8,7 @@
 /* Copies the records player p owns into p's block record: for each of the four 400-byte records of
    D_80102B00 whose byte 0xE is clear and whose owner byte 0xD is p, when the matching 150-byte
    status record at 0xD0 of D_801462C8 has byte 0x78 equal to one and byte 0x91 clear, copies the whole record
-   through Resmgr_CopyBytes into slot [byte 0xC] of the 400-byte slots at 0x18 of p's 2920-byte
+   through XPlus_CopyBytes into slot [byte 0xC] of the 400-byte slots at 0x18 of p's 2920-byte
    record at 0x58 of the block D_800E54A4 points to. */
 
 
@@ -34,7 +34,7 @@ void func_80434B08_de(s32 player) {
     for (i = 0; i < 4; i++) {
         if (D_800FEB0E[i * 400] == 0 && D_80102B0D[i * 400] == player &&
             globals->status[i].active == 1 && globals->status[i].m_IsBot == 0) {
-            Resmgr_CopyBytes(D_800E54A4->players[player].slots[D_800FEB0C[i * 400]],
+            XPlus_CopyBytes(D_800E54A4->players[player].slots[D_800FEB0C[i * 400]],
                           &D_80102B00[i * 400], size);
         }
     }

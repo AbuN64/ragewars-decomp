@@ -125,7 +125,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
     CVector3 right;
     f32 length;
 
-    Particle_SubtractVectors(&forward, target, eye);
+    GraphU64_SubtractVectors(&forward, target, eye);
     length = Math_Sqrtf(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z);
     if (0.001f < length) {
         length = -1.0f / length;
@@ -138,7 +138,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
         forward.z = 0.0f;
     }
 
-    Particle_CrossVectors(&right, up, &forward);
+    GraphU64_CrossVectors(&right, up, &forward);
     length = Math_Sqrtf(right.x * right.x + right.y * right.y + right.z * right.z);
     if (0.001f < length) {
         length = 1.0f / length;
@@ -151,7 +151,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
         right.z = 0.0f;
     }
 
-    Particle_CrossVectors(&upward, &forward, &right);
+    GraphU64_CrossVectors(&upward, &forward, &right);
     length = 1.0f / Math_Sqrtf(upward.x * upward.x + upward.y * upward.y + upward.z * upward.z);
     upward.x *= length;
     upward.y *= length;
@@ -177,7 +177,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
 #else
 INCLUDE_ASM("span_1000", func_8026F368_de);
 #endif
-void Rsp_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right)
+void GraphU64_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right)
 {
     out[0] = (left[0] * right[0]) + (left[1] * right[4]) + (left[2] * right[8]);
     out[1] = (left[0] * right[1]) + (left[1] * right[5]) + (left[2] * right[9]);
@@ -236,7 +236,7 @@ void func_8026FC9C_de(f32 *src, PackedMatrixWords *dst) {
 INCLUDE_ASM("span_1000", func_8026FC9C_de);
 #endif
 #ifdef NON_MATCHING
-void Rsp_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst) {
+void GraphU64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst) {
     u32 *upper = dst->upper;
     u32 *lower = dst->lower;
     f32 value;
@@ -293,7 +293,7 @@ void Rsp_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst) {
     *lower = a << 16;
 }
 #else
-INCLUDE_ASM("span_1000", Rsp_ConvertMatrixToFixed);
+INCLUDE_ASM("span_1000", GraphU64_ConvertMatrixToFixed);
 #endif
 void func_80270700_de(f32 *dst, PackedMatrixWords *src) {
     u32 upper;
@@ -309,7 +309,7 @@ void func_80270700_de(f32 *dst, PackedMatrixWords *src) {
     upper = src->upper[6]; lower = src->lower[6]; dst[(6) * 2] = (f32)(s32)((upper & 0xFFFF0000) | (lower >> 16)) * scale; dst[(6) * 2 + 1] = (f32)(s32)((upper << 16) | (lower & 0xFFFF)) * scale;
     upper = src->upper[7]; lower = src->lower[7]; dst[(7) * 2] = (f32)(s32)((upper & 0xFFFF0000) | (lower >> 16)) * scale; dst[(7) * 2 + 1] = (f32)(s32)((upper << 16) | (lower & 0xFFFF)) * scale;
 }
-void Rsp_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src) {
+void GraphU64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src) {
     u32 upper;
     u32 lower;
     f32 scale = D_800C98C4;
@@ -355,7 +355,7 @@ void func_80270AAC_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
         other = &negative;
     }
 
-    angle = Nav_ArcCos(dot);
+    angle = GraphU64_ArcCos(dot);
     sine = Math_Sinf(angle);
     if (sine == 0.0f) {
         *out = *a;
@@ -418,7 +418,7 @@ void func_80270CD0_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
             out->w *= scale;
         }
     } else {
-        angle = Nav_ArcCos(dot);
+        angle = GraphU64_ArcCos(dot);
         sine = Math_Sinf(angle);
         if (sine == 0.0f) {
             *out = *a;
@@ -447,9 +447,9 @@ CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
     f32 inputMagnitude;
     f32 inputScale;
 
-    random.x = (f32)((Nav_NextRandom() % 20000) - 0x2710);
-    random.y = (f32)((Nav_NextRandom() % 20000) - 0x2710);
-    random.z = (f32)((Nav_NextRandom() % 20000) - 0x2710);
+    random.x = (f32)((GraphU64_NextRandom() % 20000) - 0x2710);
+    random.y = (f32)((GraphU64_NextRandom() % 20000) - 0x2710);
+    random.z = (f32)((GraphU64_NextRandom() % 20000) - 0x2710);
     randomPtr = &random;
 
     randomMagnitude = Math_Sqrtf((randomPtr->x * randomPtr->x) +
@@ -488,7 +488,7 @@ CVector3 func_80271248_de(CVector3 *in, f32 amount) {
     f32 inputMagnitude;
     f32 inputScale;
 
-    random.x = (f32)((Nav_NextRandom() % 20000) - 0x2710) *
+    random.x = (f32)((GraphU64_NextRandom() % 20000) - 0x2710) *
                D_800C47F4_de;
     random.y = in->y;
     random.z = in->z;
@@ -529,7 +529,7 @@ CVector3 func_80271430_de(CVector3 *in, f32 amount) {
     f32 inputScale;
 
     random.x = in->x;
-    random.y = ((f32)(Nav_NextRandom() % 20000) - D_800C4800_de) * D_800C4804_de;
+    random.y = ((f32)(GraphU64_NextRandom() % 20000) - D_800C4800_de) * D_800C4804_de;
     random.z = in->z;
     randomPtr = &random;
 
@@ -565,7 +565,7 @@ CVector3 *func_80271624_de(CVector3 *out, CVector3 *in, f32 amount) {
 
     random.x = in->x;
     random.y = in->y;
-    random.z = ((f32)(Nav_NextRandom() % 20000) - D_800C4810_de) *
+    random.z = ((f32)(GraphU64_NextRandom() % 20000) - D_800C4810_de) *
                D_800C4814_de;
 
     randomPtr = &random;
@@ -659,7 +659,7 @@ general:
             f32 halfAngle;
             f32 scale;
 
-            angle = Nav_ArcCos((normalized.x * basis.x) +
+            angle = GraphU64_ArcCos((normalized.x * basis.x) +
                                   (normalized.y * basis.y) +
                                   (normalized.z * basis.z));
             axis.x = (basis.y * normalized.z) - (basis.z * normalized.y);
@@ -834,8 +834,8 @@ void func_8026EF58_de(f32 *out, f32 *m) {
 
 /* Builds a look-at view matrix from an eye position, a target and an up vector: the forward axis is the normalised direction from the target back to the eye, the right axis the normalised cross product of up and forward, the true up axis their normalised cross product, each written as a matrix column with the negated eye projections as the translation row, falling back to the x axis when forward or right degenerate. */
 
-extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
-extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 extern f32 Math_Sqrtf(f32);
 
 void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *up) {
@@ -844,7 +844,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
     CVector3 right;
     f32 length;
 
-    Particle_SubtractVectors(&forward, target, eye);
+    GraphU64_SubtractVectors(&forward, target, eye);
     length = Math_Sqrtf(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z);
     if (0.001f < length) {
         length = -1.0f / length;
@@ -857,7 +857,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
         forward.z = 0.0f;
     }
 
-    Particle_CrossVectors(&right, up, &forward);
+    GraphU64_CrossVectors(&right, up, &forward);
     length = Math_Sqrtf(right.x * right.x + right.y * right.y + right.z * right.z);
     if (0.001f < length) {
         length = 1.0f / length;
@@ -870,7 +870,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
         right.z = 0.0f;
     }
 
-    Particle_CrossVectors(&upward, &forward, &right);
+    GraphU64_CrossVectors(&upward, &forward, &right);
     length = 1.0f / Math_Sqrtf(upward.x * upward.x + upward.y * upward.y + upward.z * upward.z);
     upward.x *= length;
     upward.y *= length;
@@ -895,7 +895,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
 }
 
 /** Multiply two affine 4x4 matrices into the output matrix. */
-void Rsp_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right)
+void GraphU64_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right)
 {
     out[(0) * 4 + (0)] = (left[(0) * 4] * right[(0)]) + (left[(0) * 4 + 1] * right[4 + (0)]) + (left[(0) * 4 + 2] * right[8 + (0)]);
     out[(0) * 4 + (1)] = (left[(0) * 4] * right[(1)]) + (left[(0) * 4 + 1] * right[4 + (1)]) + (left[(0) * 4 + 2] * right[8 + (1)]);
@@ -952,7 +952,7 @@ void func_8026FC9C_de(f32 *src, PackedMatrixWords *dst) {
     value = (src[(7) * 2]) * (D_800C4760_de); if (!(*(&(D_800C4760_de) + 1) <= value)) { (a) = (s32)value; } else { (a) = (s32)(value - *(&(D_800C4760_de) + 1)); (a) |= 0x80000000; }; value = (src[(7) * 2 + 1]) * (D_800C4768_de); if (!(*(&(D_800C4768_de) + 1) <= value)) { (b) = (s32)value; } else { (b) = (s32)(value - *(&(D_800C4768_de) + 1)); (b) |= 0x80000000; }; *upper = (a & 0xFFFF0000) | ((u32)b >> 16); *lower = (a << 16) | (b & 0xFFFF); upper++; lower++;
 }
 
-void Rsp_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst) {
+void GraphU64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst) {
     u32 *upper = dst->upper;
     u32 *lower = dst->lower;
     f32 value;
@@ -1026,7 +1026,7 @@ void func_80270700_de(f32 *dst, PackedMatrixWords *src) {
 
 /* Unpacks a fixed-point 4x4 matrix held as separate integer and fraction halves into floats scaled by D_800C98C4, zeroing the fourth column and setting the last element to D_800C98C8. Adapted from func_80270700_de with the fourth column replaced by zeros and the constant at D_800C98C8, the third-column integer word used unmasked in the first three rows, the scale constant changed, and the last row computed into a local before the corner store. */
 
-void Rsp_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src) {
+void GraphU64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src) {
     u32 upper;
     u32 lower;
     f32 scale = D_800C98C4;
@@ -1076,7 +1076,7 @@ void func_80270AAC_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
         other = &negative;
     }
 
-    angle = Nav_ArcCos(dot);
+    angle = GraphU64_ArcCos(dot);
     sine = Math_Sinf(angle);
     if (sine == 0.0f) {
         *out = *a;
@@ -1144,7 +1144,7 @@ void func_80270CD0_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
             out->w *= scale;
         }
     } else {
-        angle = Nav_ArcCos(dot);
+        angle = GraphU64_ArcCos(dot);
         sine = Math_Sinf(angle);
         if (sine == 0.0f) {
             *out = *a;
@@ -1165,7 +1165,7 @@ void func_80270CD0_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
     }
 }
 
-extern s32 Nav_NextRandom(void);
+extern s32 GraphU64_NextRandom(void);
 extern f32 Math_Sqrtf(f32);
 
 CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
@@ -1177,9 +1177,9 @@ CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
     f32 inputMagnitude;
     f32 inputScale;
 
-    random.x = (f32)((Nav_NextRandom() % 20000) - 0x2710);
-    random.y = (f32)((Nav_NextRandom() % 20000) - 0x2710);
-    random.z = (f32)((Nav_NextRandom() % 20000) - 0x2710);
+    random.x = (f32)((GraphU64_NextRandom() % 20000) - 0x2710);
+    random.y = (f32)((GraphU64_NextRandom() % 20000) - 0x2710);
+    random.z = (f32)((GraphU64_NextRandom() % 20000) - 0x2710);
     randomPtr = &random;
 
     randomMagnitude = Math_Sqrtf((randomPtr->x * randomPtr->x) +
@@ -1208,7 +1208,7 @@ CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
     return result;
 }
 
-extern s32 Nav_NextRandom(void);
+extern s32 GraphU64_NextRandom(void);
 extern f32 Math_Sqrtf(f32);
 
 CVector3 func_80271248_de(CVector3 *in, f32 amount) {
@@ -1220,7 +1220,7 @@ CVector3 func_80271248_de(CVector3 *in, f32 amount) {
     f32 inputMagnitude;
     f32 inputScale;
 
-    random.x = (f32)((Nav_NextRandom() % 20000) - 0x2710) *
+    random.x = (f32)((GraphU64_NextRandom() % 20000) - 0x2710) *
                *(&D_800C47F0_de + 1);
     random.y = in->y;
     random.z = in->z;
@@ -1252,7 +1252,7 @@ CVector3 func_80271248_de(CVector3 *in, f32 amount) {
     return result;
 }
 
-extern s32 Nav_NextRandom(void);
+extern s32 GraphU64_NextRandom(void);
 extern f32 Math_Sqrtf(f32);
 
 CVector3 func_80271430_de(CVector3 *in, f32 amount) {
@@ -1265,7 +1265,7 @@ CVector3 func_80271430_de(CVector3 *in, f32 amount) {
     f32 inputScale;
 
     random.x = in->x;
-    random.y = ((f32)(Nav_NextRandom() % 20000) - D_800C4800_de) * *(&D_800C4800_de + 1);
+    random.y = ((f32)(GraphU64_NextRandom() % 20000) - D_800C4800_de) * *(&D_800C4800_de + 1);
     random.z = in->z;
     randomPtr = &random;
 
@@ -1295,7 +1295,7 @@ CVector3 func_80271430_de(CVector3 *in, f32 amount) {
     return result;
 }
 
-extern s32 Nav_NextRandom(void);
+extern s32 GraphU64_NextRandom(void);
 extern f32 Math_Sqrtf(f32);
 
 CVector3 *func_80271624_de(CVector3 *out, CVector3 *in, f32 amount) {
@@ -1305,7 +1305,7 @@ CVector3 *func_80271624_de(CVector3 *out, CVector3 *in, f32 amount) {
 
     random.x = in->x;
     random.y = in->y;
-    random.z = ((f32)(Nav_NextRandom() % 20000) - D_800C4810_de) *
+    random.z = ((f32)(GraphU64_NextRandom() % 20000) - D_800C4810_de) *
                *(&D_800C4810_de + 1);
 
     randomPtr = &random;
@@ -1406,7 +1406,7 @@ general:
             f32 halfAngle;
             f32 scale;
 
-            angle = Nav_ArcCos((normalized.x * basis.x) +
+            angle = GraphU64_ArcCos((normalized.x * basis.x) +
                                   (normalized.y * basis.y) +
                                   (normalized.z * basis.z));
             axis.x = (basis.y * normalized.z) - (basis.z * normalized.y);

@@ -6,7 +6,7 @@
 /* Points the frame heap at buffer D_800CD964[D_80147050_de]: low end = base, high end = base + size, mark stack
  * [0] = base at depth 0; free space = size, low and high usage = 0. Called after the buffers are allocated and on
  * each buffer swap. */
-void Math_ResetFrameHeap(void) {
+void ESmem_ResetFrameHeap(void) {
     f32 size;
     size = (f32)D_80147054;
     D_801470A8 = D_800CD964[D_80147050_de];

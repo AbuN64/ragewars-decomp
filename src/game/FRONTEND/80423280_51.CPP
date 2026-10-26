@@ -103,7 +103,7 @@ s32 func_8042ACD8_de(void) {
         found = 0;
         size = cup_stages(D_80154010.index) - 1;
         while (!found) {
-            stage = Nav_NextRandom() % size + 1;
+            stage = GraphU64_NextRandom() % size + 1;
             if (func_80265650_de(D_80154010.played, stage) == 0) {
                 found = 1;
                 func_80265688_de(D_80154010.played, stage, found);
@@ -121,7 +121,7 @@ s32 func_8042ACD8_de(void) {
 
 /* Returns whether D_80154010 holds anything other than -1; func_8042AFC0_de stores it. */
 
-s32 Frontend_IsCupSelected(void) {
+s32 ScenarioSetup_IsCupSelected(void) {
     return D_80154010.index != -1;
 }
 

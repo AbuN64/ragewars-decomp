@@ -20,7 +20,7 @@ extern void Barrel_UpdateActorController(void *a, void *b);
 extern void **func_8024BFD4_de(void *arg0, s32 arg1);
 
 
-extern void Scene_UnlockResource(void *arg0, void *arg1);
+extern void Cache_UnlockResource(void *arg0, void *arg1);
 
 void *func_8024BC94_de(void *outVector, void *actor, struct IntPair localVector) {
     CQuatern aimOrientation;
@@ -29,7 +29,7 @@ void *func_8024BC94_de(void *outVector, void *actor, struct IntPair localVector)
 
     aimOrientation = func_8024796C_de(actor);
     MatrixFromQuaternion(&aimOrientation, aimMatrix);
-    Particle_TransformPoint(aimMatrix, &localVector, &transformedVector);
+    GraphU64_TransformPoint(aimMatrix, &localVector, &transformedVector);
     *(Triple *)outVector = transformedVector;
     return outVector;
 }
@@ -74,7 +74,7 @@ s32 func_8024BD08_de(Shared_Func80243A80Actor *actor) {
         }
         sine = Math_Sinf(actor->angle);
         cosine = Math_Cosf(actor->angle);
-        Nav_GetNodeEdgeCross(&direction, node);
+        Region_GetNodeEdgeCross(&direction, node);
         if (direction.x * -sine + direction.z * -cosine < 0.0f) {
             return 1;
         }
@@ -113,9 +113,9 @@ s32 func_8024BE80_de(void *typedActor) {
     result = -1;
     modelResource = func_8024BFD4_de(typedActor, ((LevelActor *)typedActor)->team);
     if (modelResource != 0) {
-        modelMetadata = Render_GetPackSection((int *)*modelResource, 5);
+        modelMetadata = SetN64_GetPackSection((int *)*modelResource, 5);
         result = ((struct ActorFrameMetadata *)modelMetadata)->renderMode;
-        Scene_UnlockResource(0, modelResource);
+        Cache_UnlockResource(0, modelResource);
     }
     return result;
 }

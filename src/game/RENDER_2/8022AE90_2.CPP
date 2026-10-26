@@ -19,7 +19,7 @@ extern char D_8011D8D0;
 
 extern void Particle_ReleaseOwnerEmitters(void *arg0, s32 arg1);
 
-void Render_SetPlayerResetPosition(void *actorObject, CVector3 *newResetPosition)
+void Player_SetPlayerResetPosition(void *actorObject, CVector3 *newResetPosition)
 {
   Shared_ActorView *player = actorObject;
   void *new_var;
@@ -28,7 +28,7 @@ void Render_SetPlayerResetPosition(void *actorObject, CVector3 *newResetPosition
   Weapons_SetPlayerState(new_var, new_var, 0x11);
 }
 
-extern void Weapons_BuildPlayerViewTransform(void *, MatrixF *);
+extern void Player_BuildPlayerViewTransform(void *, MatrixF *);
 void func_8022B09C_de(void *player, CVector3 *point) {
     CVector3 input;
     MatrixF matrix;
@@ -46,10 +46,10 @@ void func_8022B09C_de(void *player, CVector3 *point) {
         owner = (void *)matrix_ptr;
         matrix_ptr = &owner->unk160;
     } else {
-        Weapons_BuildPlayerViewTransform(player, &matrix);
+        Player_BuildPlayerViewTransform(player, &matrix);
         matrix_ptr = &matrix;
     }
-    Particle_TransformPoint(matrix_ptr, input_ptr, point);
+    GraphU64_TransformPoint(matrix_ptr, input_ptr, point);
 }
 
 void func_8022B11C_de(void *player, s32 increment) {
@@ -66,7 +66,7 @@ void func_8022B11C_de(void *player, s32 increment) {
 
 void func_8022B144_de(void *player, f32 *origin) {
     MatrixF viewTransform;
-    Weapons_BuildPlayerViewTransform(player, &viewTransform);
+    Player_BuildPlayerViewTransform(player, &viewTransform);
     func_802732D0_de((char *)&viewTransform, origin);
 }
 
@@ -89,33 +89,33 @@ void func_8022B190_de(s32 actor) {
 #include "COMMON/CHANNEL.H"
 extern u8 *D_800D311C, *D_800D3120, *D_800D3124;
 extern void BuildDirectionMatrix(Matrix *, CVector3 *);
-extern void Particle_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
-extern void Particle_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
+extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
+extern void GraphU64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void TranslateMatrix(Matrix *, f32 x, f32 y, f32 z);
 extern void SwapMatrixUpForward(Matrix *);
-extern void Rsp_ConvertMatrixToFixed(Matrix *src, void *dst);
-/* Copy of Render_BuildForceMarkerTransform: orients the marker matrix along the aim normal, moves it to the marker origin
+extern void GraphU64_ConvertMatrixToFixed(Matrix *src, void *dst);
+/* Copy of Player_BuildForceMarkerTransform: orients the marker matrix along the aim normal, moves it to the marker origin
  * pushed 5.12 units off the surface and packs it into the player's marker transform. */
 static inline void buildForceMarkerTransform(Shared_ActorView *player, s32 attract, CVector3 *normal) {
     Matrix matrix;
     CVector3 offset;
     BuildDirectionMatrix(&matrix, normal);
-    Particle_ScaleVector(&offset, normal, 5.12f);
-    Particle_AddVec3(&offset, &offset, &player->targetPosition);
+    GraphU64_ScaleVector(&offset, normal, 5.12f);
+    GraphU64_AddVec3(&offset, &offset, &player->targetPosition);
     TranslateMatrix(&matrix, offset.x, offset.y, offset.z);
     SwapMatrixUpForward(&matrix);
-    Rsp_ConvertMatrixToFixed(&matrix, player->transform1600);
+    GraphU64_ConvertMatrixToFixed(&matrix, player->transform1600);
 }
 /* Toggles the player's attract/repulse marker while the aim ray hits something: a live marker is removed
  * ("ATTRACT REMOVED"); otherwise a new one is placed at the aim point for 150 frames, pulling when
  * attract is set ("ATTRACT MARKED") and pushing otherwise ("REPULSE MARKED"). */
-void Render_ToggleForceMarker(Shared_ActorView *player, s32 attract) {
+void Player_ToggleForceMarker(Shared_ActorView *player, s32 attract) {
     void *screen;
     u8 *text;
     if (player->aimTarget != 0) {
         if (player->marker.time > 0.0f) {
             player->marker.time = 0;
-            Render_PlayFlatSound(0x578);
+            SoundElement_PlayFlatSound(0x578);
             screen = player->message;
             if (screen == 0) return;
             text = D_800D311C;
@@ -124,7 +124,7 @@ void Render_ToggleForceMarker(Shared_ActorView *player, s32 attract) {
             player->attract = attract;
             player->marker.time = 150.0f;
             buildForceMarkerTransform(player, attract, &player->aimNormal);
-            Render_PlayFlatSound(0x578);
+            SoundElement_PlayFlatSound(0x578);
             screen = player->message;
             if (screen == 0) return;
             if (attract != 0) text = D_800D3120;

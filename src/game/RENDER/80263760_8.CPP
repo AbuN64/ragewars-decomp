@@ -14,7 +14,7 @@
 #include "RENDER/80263760_8.H"
 
 
-extern void Render_FreeAllPoolNodes(s32 *);
+extern void Rumble_FreeAllPoolNodes(s32 *);
 
 
 
@@ -66,27 +66,27 @@ extern s32 func_8028B350_de(Shared_World *table, s32 id);
 
 
 
-void Render_SetProfileMode(ControllerProfile *slot, s32 profileMode) {
+void Control_SetProfileMode(ControllerProfile *slot, s32 profileMode) {
     slot->mode = profileMode;
     if (profileMode == 0) {
-        Render_ResetControllerPak(slot);
+        Control_ResetControllerPak(slot);
     }
 }
 
-void Render_ResetControllerProfiles(void) {
+void Control_ResetControllerProfiles(void) {
     ControllerProfile *slot;
     s32 i;
 
     i = 0;
     slot = D_8010F328;
     do {
-        Render_ResetControllerPak(slot);
+        Control_ResetControllerPak(slot);
         i += 1;
         slot += 1;
     } while (i < 4);
 }
 
-void Render_SetControllerMode(s32 a) {
+void Control_SetControllerMode(s32 a) {
     ControllerProfile *slot;
     s32 i;
 
@@ -95,17 +95,17 @@ void Render_SetControllerMode(s32 a) {
     do {
         slot->mode = a;
         if (a == 0) {
-            Render_ResetControllerPak(slot);
+            Control_ResetControllerPak(slot);
         }
         i += 1;
         slot += 1;
     } while (i < 4);
     if (a == 0) {
-        Render_FreeAllPoolNodes(&D_8010EC90);
+        Rumble_FreeAllPoolNodes(&D_8010EC90);
     }
 }
 
-void Render_SaveControllerSetup(void)
+void Control_SaveControllerSetup(void)
 {
   s32 savedValueOffset;
   s32 profileValue;
@@ -122,11 +122,11 @@ void Render_SaveControllerSetup(void)
   }
   while (profileIndex < 4);
   profilesReset = 0;
-  Render_FreeAllPoolNodes(&D_8010EC90);
+  Rumble_FreeAllPoolNodes(&D_8010EC90);
   profileCursor = D_8010F328;
   do
   {
-    Render_ResetControllerPak(profileCursor);
+    Control_ResetControllerPak(profileCursor);
     profilesReset += 1;
     profileCursor += 1;
   }
@@ -134,7 +134,7 @@ void Render_SaveControllerSetup(void)
   D_800CBC18 = 1;
 }
 
-void Render_RestoreControllerSetup(void) {
+void Control_RestoreControllerSetup(void) {
     ControllerProfile *slot;
     s32 i;
     s32 j;
@@ -145,7 +145,7 @@ void Render_RestoreControllerSetup(void) {
         i = 0;
         slot = D_8010F328;
         do {
-            Render_ResetControllerPak(slot);
+            Control_ResetControllerPak(slot);
             i += 1;
             slot += 1;
         } while (i < 4);
@@ -157,7 +157,7 @@ void Render_RestoreControllerSetup(void) {
             *(s32 *)(&D_8010B3F4 + profileByteOffset) = savedProfileValue;
             profileByteOffset += 0x224;
         } while (j < 4);
-        Render_FreeAllPoolNodes(&D_8010EC90);
+        Rumble_FreeAllPoolNodes(&D_8010EC90);
         D_800CBC18 = 0;
     }
 }
@@ -233,7 +233,7 @@ s32 Control_GetSnapshotActorId(void) {
     return D_8010BC40.savedActorId;
 }
 
-int Render_IsSnapshotActive(void) {
+int Control_IsSnapshotActive(void) {
     return D_8010BC40.active;
 }
 
@@ -324,7 +324,7 @@ s32 Control_AdvanceEffectCurve(void *arg0) {
         if (temp_f1_2 <= 0.0f) {
             player->time =
                 temp_f1_2 + random->period;
-            player->value = Nav_RandomBetween(
+            player->value = GraphU64_RandomBetween(
                 (f32)random->minimum * D_800C4318_de.unk0,
                 (f32)random->maximum * D_800C4318_de.unk0);
         }

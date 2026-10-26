@@ -314,7 +314,7 @@ void func_8043C688_de(void) {
         "addiu      $s0, $zero, 0x1F40\n"
         ".Lauto_8043C718:\n"
         "lw         $a0, 0x20($s1)\n"
-        "jal        Render_IsAButtonPressed\n"
+        "jal        Control_IsAButtonPressed\n"
         "nop\n"
         "beqz       $v0, .Lauto_8043C7B8\n"
         "addiu     $v0, $zero, 0x1F40\n"
@@ -326,7 +326,7 @@ void func_8043C688_de(void) {
         "addu      $a0, $s1, $zero\n"
         "lui        $a0, %hi(D_8011FAC0)\n"
         "addiu      $a0, $a0, %lo(D_8011FAC0)\n"
-        "jal        Render_SetTransitionTarget\n"
+        "jal        SetN64_SetTransitionTarget\n"
         "addiu     $a1, $zero, 0x11\n"
         "j          .Lauto_8043C984\n"
         "addiu     $v0, $zero, 0x1\n"
@@ -337,7 +337,7 @@ void func_8043C688_de(void) {
         "addu      $a1, $s0, $zero\n"
         "lui        $a0, %hi(g_world)\n"
         "addiu      $a0, $a0, %lo(g_world)\n"
-        "jal        Items_SetSelection\n"
+        "jal        OvlScene_SetSelection\n"
         "addiu     $a2, $zero, 0x2\n"
         "j          .Lauto_8043C984\n"
         "addu      $v0, $zero, $zero\n"
@@ -513,14 +513,14 @@ INCLUDE_ASM("ovl_80400000", func_8043C688_de);
 #include "OVLGAME/SHAREDRECAT224.H"
 
 
-extern s32 Render_IsAButtonPressed(s32 buttons);
+extern s32 Control_IsAButtonPressed(s32 buttons);
 
 
 struct GameSession;
 extern void func_80293284_de(struct GameSession *menu, s32 target);
 extern s32 func_802934F8_de(void);
 
-extern void Items_SetSelection(void *menu, s32 target, s32 arg2);
+extern void OvlScene_SetSelection(void *menu, s32 target, s32 arg2);
 
 static inline s32 levelBit(s32 level) {
     s32 bit;
@@ -622,15 +622,15 @@ s32 func_8043C688_de(s32 arg0, Shared_MenuInput *pad) {
         break;
     }
 
-    if (Render_IsAButtonPressed(pad->buttons) != 0) {
+    if (Control_IsAButtonPressed(pad->buttons) != 0) {
         if (target == 8000) {
             D_801462C8.mode1E = 1;
             Ovlgame_SelectConfirmingController(pad);
-            Render_SetTransitionTarget(&D_8011FAC0, 0x11);
+            SetN64_SetTransitionTarget(&D_8011FAC0, 0x11);
             return 1;
         }
         if (func_802934F8_de() != 0) {
-            Items_SetSelection(&g_world, target, 2);
+            OvlScene_SetSelection(&g_world, target, 2);
             return 0;
         }
         rules = &D_801462C8;

@@ -8,7 +8,7 @@
    the buffer at 0x2E28 of the block D_800E54A4 points to and resets each through Player_InitializeProfile,
    copies back the record each player chose (index at 0xB28 of its 2920-byte record at 0x58) into
    that player's place, and then places every unchosen buffered record whose owner byte 0xD is not
-   negative into the first place whose owner byte is still negative, all through Resmgr_CopyBytes. */
+   negative into the first place whose owner byte is still negative, all through XPlus_CopyBytes. */
 
 
 
@@ -27,7 +27,7 @@ void func_804347CC_de(void) {
     s32 j;
 
     size = 400;
-    Resmgr_CopyBytes(D_800E54A4->packet.saved, D_80102B00, 0x640);
+    XPlus_CopyBytes(D_800E54A4->packet.saved, D_80102B00, 0x640);
     for (i = 0; i < 4; i++) {
         Player_InitializeProfile(&D_80102B00[i]);
         used[i] = 0;
@@ -35,7 +35,7 @@ void func_804347CC_de(void) {
     for (i = 0; i < 4; i++) {
         chosen = D_800E54A4->players[i].port;
         if (chosen >= 0) {
-            Resmgr_CopyBytes(&D_80102B00[i], &D_800E54A4->packet.saved[chosen], size);
+            XPlus_CopyBytes(&D_80102B00[i], &D_800E54A4->packet.saved[chosen], size);
             used[chosen] = 1;
         }
     }
@@ -45,7 +45,7 @@ void func_804347CC_de(void) {
         }
         for (j = 0; j < 4; j++) {
             if (D_80102B00[j].owner < 0) {
-                Resmgr_CopyBytes(&D_80102B00[j], &D_800E54A4->packet.saved[i], size);
+                XPlus_CopyBytes(&D_80102B00[j], &D_800E54A4->packet.saved[i], size);
                 break;
             }
         }

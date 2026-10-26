@@ -193,9 +193,9 @@ struct ActorFrameMetadata {
 };
 
 extern void func_8026F898_de(f32 *, f32 *, f32 *);
-extern void Render_DrawResourceModel(s32, s32, void *, s32, void *, s32, s32);
+extern void Geometry_DrawResourceModel(s32, s32, void *, s32, void *, s32, s32);
 
-extern CVector3 *Nav_GetNodeEdgeCross(CVector3 *out, Node75 *node);
+extern CVector3 *Region_GetNodeEdgeCross(CVector3 *out, Node75 *node);
 
 extern char D_800C3AE8_de;
 extern char D_0026D814;

@@ -204,10 +204,10 @@ void func_80299468_de(void) {
         D_8014D080->callback(0xE05, 0, 0, 0);
     }
     if (D_8014D080->cache != 0) {
-        Scene_FreeMemory(D_8014D080->cache);
+        Cache_FreeMemory(D_8014D080->cache);
     }
-    Scene_FreeMemory(D_8014D080->screens);
-    Scene_FreeMemory(D_8014D080);
+    Cache_FreeMemory(D_8014D080->screens);
+    Cache_FreeMemory(D_8014D080);
     D_8014D080 = 0;
     func_8029AAAC_de();
     func_8040F568_de();

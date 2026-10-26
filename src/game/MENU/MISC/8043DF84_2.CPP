@@ -86,14 +86,14 @@ extern f32 D_00450854[];
 
 extern s32 Pak_AdjustValue(struct Shape_typemap_114 *, s32, s32, s32, s32, s32);
 
-extern s32 Render_IsAButtonPressed(s32);
+extern s32 Control_IsAButtonPressed(s32);
 
 s32 func_8043E6A4_de(void *arg0, struct Shape_typemap_114 *obj)
 {
     f32 scale;
 
     D_800E1DF8_de = Pak_AdjustValue(obj, D_800E1DF8_de, 1, 0, 15, 0);
-    if (((s32 (*)(s32))Control_IsRightPressed)(obj->field_20) != 0 || Render_IsAButtonPressed(obj->field_20) != 0) {
+    if (((s32 (*)(s32))Control_IsRightPressed)(obj->field_20) != 0 || Control_IsAButtonPressed(obj->field_20) != 0) {
         Pak_AdjustValue(obj, D_800E1DF8_de, 1, 0, 15, 0);
     }
     scale = D_00450854[D_800E1DF8_de] + D_800E2358.scale;

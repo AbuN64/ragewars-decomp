@@ -139,5 +139,5 @@ void func_8028EACC_de(OSSched *sc) {
         if (work->queue->validCount < 2) osSendMesg(work->queue, sc, 0);
         work = work->next;
     }
-    Render_PollControllerPaks();
+    Control_PollControllerPaks();
 }

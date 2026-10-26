@@ -241,7 +241,7 @@ extern char s_selectTeamText[];
 
 struct TeamWeaponPlayer;
 typedef struct TeamWeaponPlayer TeamWeaponPlayer;
-extern void Team_InitWeaponChoices(CBarrel *barrel, s32 buttonAWheel, TeamWeaponPlayer *player);
+extern void TeamSelect_InitWeaponChoices(CBarrel *barrel, s32 buttonAWheel, TeamWeaponPlayer *player);
 
 extern void func_8025E1C4_de(s32);
 #endif

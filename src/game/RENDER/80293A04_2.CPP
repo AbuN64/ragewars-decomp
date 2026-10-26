@@ -22,7 +22,7 @@ extern void func_80293334_de(void *session, s32 count, s32 force_active);
 extern u8 D_801468A0;
 
 
-extern u32 System_GetMemorySize(void);
+extern u32 Defs_GetMemorySize(void);
 
 /* Emits a set-color-image display list command for the current frame buffer, then draws image 0x388
  * scaled to fill the screen dimensions over the image's returned width and height, when both are nonzero. */
@@ -57,7 +57,7 @@ void func_80293DF0_de(GameSession *gameSession) {
 
 void func_80293E6C_de(void *arg0) {
     if (D_8014ADA0 != 0) {
-        Render_SetTransitionTarget(arg0, 1);
+        SetN64_SetTransitionTarget(arg0, 1);
         Control_DisableAllControllerPaks();
     }
 }
@@ -85,7 +85,7 @@ void func_80293EB8_de(void *arg0) {
     p2 = ((s8 *)(&D_801468A0)) - 0x1818;
     Items_ResetActorPools(p2, 1);
     ((IntegerState164 *)(p2))->unk_160 = 0;
-    System_SetTextureEffect(0);
+    TextLoad_SetTextureEffect(0);
 }
 
 struct ObjRecV2;
@@ -95,7 +95,7 @@ void func_80293F44_de(GameSession *session) {
     s32 call_result;
     u32 result;
 
-    result = System_GetMemorySize();
+    result = Defs_GetMemorySize();
     var_a2 = 4;
     if ((result > 0x400000U) && (D_800D29C8 != 0)) {
         var_a2 = 3;
@@ -123,7 +123,7 @@ void func_80293FF0_de(void) {
     gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)D_8011BDC0->colorImage);
     func_802AA950_de(0x388, 0, &width, &height);
     if ((width != 0) && (height != 0)) {
-        Text_SetupSpriteMode(0xFA);
+        OnScreen_SetupSpriteMode(0xFA);
         func_802AAC28_de(0x388, 0, 0, 0, (f32)D_800E28D0 / (f32)width, (f32)D_800E28D4 / (f32)height, 1);
     }
 }

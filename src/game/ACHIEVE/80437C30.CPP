@@ -37,7 +37,7 @@ extern void func_804259E0_de(s32);
 extern s32 func_80425674_de(s32);
 extern s32 Frontend_FindKeyIndex(s32);
 extern void func_802A0C08_de(char *, char *, ...);
-extern void Resmgr_CopyString(char *, char *);
+extern void XPlus_CopyString(char *, char *);
 extern void Frontend_SetWidgetFlag100(MenuWidget *, s32);
 extern void func_8041B110_de(s32);
 extern void func_8028D380_de(Shared_World *, s32, char *, s32);
@@ -61,7 +61,7 @@ s32 func_80437C30_us_rev1(MenuWidget *menu) {
     s32 *level;
     s32 i;
 
-    D_800E5830 = (ModelPreviewScreen *)Scene_AllocateMemory(sizeof(ModelPreviewScreen));
+    D_800E5830 = (ModelPreviewScreen *)Cache_AllocateMemory(sizeof(ModelPreviewScreen));
     D_800E5830->window = menu;
     Frontend_SetWidgetFlag08(menu, 0);
     func_8043C210_de(D_800E5830, 0x67, 0, 0, 0);
@@ -131,7 +131,7 @@ done:
             }
             if (D_8015402C >= 0x23) {
                 func_80265688_de(D_80102B00[D_800E5830->player].kindFlags, g_playerSettings[D_800E5830->player].kind, 1);
-                Resmgr_FillMemory(D_80102B00[D_800E5830->player].levelFlags[0], 0, 5);
+                XPlus_FillMemory(D_80102B00[D_800E5830->player].levelFlags[0], 0, 5);
                 character = func_80425674_de(D_800E5830->player);
                 if (character >= 0) {
                     func_802A0C08_de(D_800E5830->resultText, D_800D3578, *D_800DFA6C[Frontend_FindKeyIndex(character)].name);
@@ -142,7 +142,7 @@ done:
                 }
             }
         } else {
-            Resmgr_CopyString(D_800E5830->resultText, D_800D357C);
+            XPlus_CopyString(D_800E5830->resultText, D_800D357C);
             item = func_8040EC30_de(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             Frontend_SetWidgetFlag08(item, 1);
@@ -168,7 +168,7 @@ done:
                 item->text = D_800D3598;
             }
         } else {
-            Resmgr_CopyString(D_800E5830->resultText, D_800D357C);
+            XPlus_CopyString(D_800E5830->resultText, D_800D357C);
             item = func_8040EC30_de(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             Frontend_SetWidgetFlag08(item, 1);
@@ -185,7 +185,7 @@ done:
                 item->text = D_800D3594;
             }
         } else {
-            Resmgr_CopyString(D_800E5830->resultText, D_800D357C);
+            XPlus_CopyString(D_800E5830->resultText, D_800D357C);
             item = func_8040EC30_de(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
             item->alpha = 0xAF;
             Frontend_SetWidgetFlag08(item, 1);
@@ -214,7 +214,7 @@ done:
     }
     item = func_8040EC30_de(menu, 0x26C + PREVIEW_ID_SHIFT);
     func_8028D380_de(&g_world, D_8015402C, levelName, 0x3F);
-    Resmgr_CopyString(D_800E5830->nameText, func_802A0494_de(levelName));
+    XPlus_CopyString(D_800E5830->nameText, func_802A0494_de(levelName));
     item->text = D_800E5830->nameText;
     D_800E5830->item24 = func_8040EC30_de(menu, 0x274 + PREVIEW_ID_SHIFT);
     D_800E5830->ready = 1;

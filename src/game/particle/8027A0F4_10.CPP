@@ -104,12 +104,12 @@ extern char D_8011D8D0;
 
 
 
-extern s32 Render_PlaySoundAtPosition(s16, CVector3, s32, s32);
+extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 extern void func_8022B550_de(void *, f32, f32, void *, s32);
 extern void func_8028CE94_de(void *, void *, s32, Triple, f32, f32);
 
-extern void System_DeliverContactEffect(void *, void *, s32, s32, CVector3, struct IntPair);
-extern void Render_SpawnChildEffect(void *, s32, s8, s32);
+extern void Events_DeliverContactEffect(void *, void *, s32, s32, CVector3, struct IntPair);
+extern void Particle_SpawnChildEffect(void *, s32, s8, s32);
 extern void Particle_Release(void *, void *);
 
 
@@ -139,9 +139,9 @@ void func_80282E98_de(void *particle, void *player) {
     void *temp_v0_2;
     void *temp_v1;
 
-    Resmgr_FillMemory(&scratch, 0, 0xC);
+    XPlus_FillMemory(&scratch, 0, 0xC);
     if (((Shared_Particle *)particle)->inst.type == 0x40F) {
-        Render_PlaySoundAtPosition(0xCDA, ((Shared_ActorView *)player)->position.vector,
+        SoundElement_PlaySoundAtPosition(0xCDA, ((Shared_ActorView *)player)->position.vector,
                       (s32)&((Shared_ActorView *)player)->position.vector, -1);
         func_8022B550_de(player, 30.0f, 3.0f,
                      ((Shared_Particle *)particle)->owner, 0);
@@ -166,14 +166,14 @@ void func_80282E98_de(void *particle, void *player) {
     pair = events->parameters[var_a0];
     temp_s3 = temp_s1->events->sounds[var_a0];
     if (temp_a2 != 0xFFFF) {
-        System_DeliverContactEffect(particle, particle, temp_a2, -1,
+        Events_DeliverContactEffect(particle, particle, temp_a2, -1,
                      ((Shared_Particle *)particle)->inst.pos, pair);
     }
     if (model != 0xFFFF) {
-        Render_SpawnChildEffect(particle, model, ((Shared_Particle *)particle)->space, 1);
+        Particle_SpawnChildEffect(particle, model, ((Shared_Particle *)particle)->space, 1);
     }
     if (temp_s3 != 0xFFFF) {
-        Render_PlaySoundAtPosition((s16)temp_s3, ((Shared_Particle *)particle)->inst.pos, 0, -1);
+        SoundElement_PlaySoundAtPosition((s16)temp_s3, ((Shared_Particle *)particle)->inst.pos, 0, -1);
     }
     Particle_Release(&D_8011D8D0, particle);
     Particle_StopSound(particle);

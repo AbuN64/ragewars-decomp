@@ -10,7 +10,7 @@
 #include "COMMON/RESIDENTSTATE.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern void Scene_MarkResourceInUse(s32 heap, void **resource);
+extern void Cache_MarkResourceInUse(s32 heap, void **resource);
 extern Gfx D_800D0FA0[], D_800D1020[], D_800D10A0[], D_800D1138[], D_800D11D0[];
 
 
@@ -28,13 +28,13 @@ void func_80295FB4_us_rev1(s32 *output, void **resource, s32 frame, s32 secondar
     s32 tile;
     Gfx *list;
 
-    Scene_MarkResourceInUse(0, resource);
+    Cache_MarkResourceInUse(0, resource);
     header = *resource;
-    info = Render_GetPackSection(header, 0);
-    texture = Render_GetPackSection(Render_GetPackSection(header, 1), frame);
-    entries = Render_GetPackSection(header, 2);
+    info = SetN64_GetPackSection(header, 0);
+    texture = SetN64_GetPackSection(SetN64_GetPackSection(header, 1), frame);
+    entries = SetN64_GetPackSection(header, 2);
     if (*(s32 *)entries != 0) {
-        palette = Render_GetPackSection(entries, secondary);
+        palette = SetN64_GetPackSection(entries, secondary);
         paletteChanged = 0;
         if (D_800CD890 != (s32)resource || D_8014D074 != secondary) paletteChanged = 1;
     } else {

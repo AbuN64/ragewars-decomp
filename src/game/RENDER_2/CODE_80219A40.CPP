@@ -25,12 +25,12 @@
 
 /* Reaction thresholds are loaded from the cartridge's shared float table. */
 void * Nav_FindSearchNode(char *, s32);
-void Weapons_ApplyStun(void *, f32);
+void Player_ApplyStun(void *, f32);
 void func_80229FA0_de(void *, void *);
 s32 Weapons_GetPlayerIndex(void *, unsigned int);
 s32 Weapons_GetMaxHealth(void *);
 int func_8022B178_de(void *);
-int Camera_IsSequenceActive(void);
+int Cinema_IsSequenceActive(void);
 void func_802830CC_de(void *, s32);
 void * func_8028B2F8_de(Shared_World *, u16 *);
 s32 func_802A01E8_de(void);
@@ -110,7 +110,7 @@ void func_80219A40_de(struct Shared_ReactionActor *attacker, void *arg1, struct 
 
     creditedPlayer = 0;
     kind = -1;
-    if ((Camera_IsSequenceInWindow() == 0) && (Camera_IsSequenceActive() == 0) && !(D_801462C8.flags & 1)) {
+    if ((Cinema_IsSequenceInWindow() == 0) && (Cinema_IsSequenceActive() == 0) && !(D_801462C8.flags & 1)) {
         damagedPlayer = attacker->unk1D8;
         sourceHandle = damagedPlayer->unk14;
         wasAlive = damagedPlayer->unk5E4 > 0;
@@ -183,7 +183,7 @@ flag_done:
                 goto block_47;
 block_early_return:
                 if (damagedPlayer->unk5E4 > 0) {
-                    Weapons_ApplyStun(damagedPlayer, 2.5f);
+                    Player_ApplyStun(damagedPlayer, 2.5f);
                 }
                 return;
 block_33:
@@ -220,7 +220,7 @@ block_46:
         } else {
 block_47:
             func_80229FA0_de(damagedPlayer, packet);
-            Render_ApplyPlayerDamage(damagedPlayer, attacker, packet->unk4, packet->unkC, kind);
+            Player_ApplyPlayerDamage(damagedPlayer, attacker, packet->unk4, packet->unkC, kind);
 
             damageSource = packet->unk0;
             if (damageSource != 0) {
@@ -324,7 +324,7 @@ block_88:
                             } else {
                                 creditedPlayer->unk5D8->deaths_normal[victimPlayerIndex]++;
                             }
-                            Render_PostKillMessages(damagedPlayer, creditedPlayer, packet);
+                            Player_PostKillMessages(damagedPlayer, creditedPlayer, packet);
                             if (creditedPlayer != 0) {
                                 previousKillHistoryCursor = creditedPlayer->unk1338;
                                 nextKillHistoryCursor = previousKillHistoryCursor + 1;
@@ -460,8 +460,8 @@ extern const f32 D_800C22E4_de, D_800C22E8_de, D_800C22EC_de, D_800C22F0_de;
 extern WeaponInfo *D_800D052C[];
 extern void Weapons_DrawTintedPlayer(LevelActor *, s32, Draw *);
 extern void **func_8024BFD4_de(LevelActor *, s32);
-extern void Scene_UnlockResource(s32, void *);
-void Render_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
+extern void Cache_UnlockResource(s32, void *);
+void Player_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
 {
     PlayerCode80225D10 *player;
     void **resource;
@@ -486,7 +486,7 @@ void Render_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
         D_800D15E4[4] = D_800C22F0_de;
         if (D_801468A0->countRule && player->controls->unk8F) actor->team = D_801468A0->teamColour;
         else actor->team = (u8)actor->definition->first;
-        Render_DrawActorModelParts(context->model, player, actor->fieldB4, 1,
+        Geometry_DrawActorModelParts(context->model, player, actor->fieldB4, 1,
                        &actor->lighting[D_800D297C], 0, actor->field3);
         D_800D15E0 = 0;
         if (temporaryFlag) player->flags &= ~0x8000;
@@ -510,7 +510,7 @@ void Render_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
         else {
             if (D_801468A0->countRule && player->controls->unk8F) actor->team = D_801468A0->teamColour;
             else actor->team = (u8)actor->definition->first;
-            Render_DrawActorModelParts(context->model, player, actor->fieldB4, 1,
+            Geometry_DrawActorModelParts(context->model, player, actor->fieldB4, 1,
                            &actor->lighting[D_800D297C], 0, actor->field3);
             if (0.0f < player->opacity) {
                 func_8026D4F0_de(context->model, player, actor->fieldB4, 1,
@@ -534,7 +534,7 @@ weapon:
         if (resource) {
             func_8026DA4C_de(resource, actor->fieldB4, 1,
                             &actor->lighting[D_800D297C], 0, actor->field3);
-            Scene_UnlockResource(0, resource);
+            Cache_UnlockResource(0, resource);
         }
     }
 }

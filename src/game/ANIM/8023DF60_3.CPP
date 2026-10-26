@@ -10,7 +10,7 @@ extern f32 func_80241728_de(struct Query *, f32, f32);
 
 extern f32 Math_Sqrtf(f32);
 
-extern void Particle_ScaleVector(void *, void *, f32);
+extern void GraphU64_ScaleVector(void *, void *, f32);
 
 
 /* Tests a ray against a polygon: intersects the ray from 0x44 to 0x50 with the polygon's plane through
@@ -97,7 +97,7 @@ void func_8023E6EC_de(SegmentCode8023A284 *segment, struct Query *query) {
     } else {
         fade = 1.0f - limit;
     }
-    Particle_ScaleVector(target, node, fade);
+    GraphU64_ScaleVector(target, node, fade);
 }
 
 /** Thin wrapper around func_8023E854_de. */

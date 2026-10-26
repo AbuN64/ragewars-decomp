@@ -21,7 +21,7 @@ void Gfx_EmitMatrix(void *source) {
 /* Rewrites an image's pixel rows in place when row fixing is enabled (D_800E32F0): the row length
    in 8-byte pixel groups comes from the image width and the bit depth reported by func_80413608_de
    (4, 8 or 16 bits), odd rows swap the two words of each group and even rows are copied to the
-   write position through Resmgr_CopyBytes when source and destination differ. */
+   write position through XPlus_CopyBytes when source and destination differ. */
 
 
 
@@ -66,7 +66,7 @@ void Gfx_SwizzleImage(Image_func_80419490_de *image) {
             }
         } else {
             if (src != dst) {
-                Resmgr_CopyBytes(dst, src, groups * 8);
+                XPlus_CopyBytes(dst, src, groups * 8);
             }
             dst += groups * 2;
             src += groups * 2;

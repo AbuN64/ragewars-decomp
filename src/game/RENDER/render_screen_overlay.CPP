@@ -9,27 +9,27 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 
-/* Clears the depth buffer over a rectangle: switches the colour image to the depth buffer D_801536E8 in fill mode after setting render mode 0x14 through Render_SetModePreset, fills the rectangle with the far depth value (or, for interlaced output, alternate lines with the far value and the remaining lines with 0, by single lines or by line pairs as D_800E28D8 selects), then restores the frame's colour image and one-cycle mode. Written with libultra-style display-list macros. */
+/* Clears the depth buffer over a rectangle: switches the colour image to the depth buffer D_801536E8 in fill mode after setting render mode 0x14 through Geometry_SetModePreset, fills the rectangle with the far depth value (or, for interlaced output, alternate lines with the far value and the remaining lines with 0, by single lines or by line pairs as D_800E28D8 selects), then restores the frame's colour image and one-cycle mode. Written with libultra-style display-list macros. */
 
 
 
 
-extern void Render_SetModePreset(s32 mode);
-
-
-
-
-
+extern void Geometry_SetModePreset(s32 mode);
 
 
 
 
 
-void Render_ClearDepthRect(void *unused, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced) {
+
+
+
+
+
+void SetN64_ClearDepthRect(void *unused, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced) {
     s32 y;
 
     gDPPipeSync(g_displayListCursor++);
-    Render_SetModePreset(0x14);
+    Geometry_SetModePreset(0x14);
     gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)((D_801536E8)));
     gDPPipeSync(g_displayListCursor++);
     gDPSetCycleType(g_displayListCursor++, G_CYC_FILL);
@@ -69,14 +69,14 @@ extern void func_802AAB3C_de(s32, s32, s32, s32, s32, s32);
 extern void func_802AAB68_de(f32, f32);
 
 /* Draw a null-terminated list of scaled strings, with an optional full-screen backdrop. */
-void Render_DrawTextLines(void *state, s32 drawBackdrop, char **lines, s32 x, s32 y, s32 lineStep, f32 scaleX, f32 scaleY) {
+void SetN64_DrawTextLines(void *state, s32 drawBackdrop, char **lines, s32 x, s32 y, s32 lineStep, f32 scaleX, f32 scaleY) {
     Frame *frame = D_8011FAC0.ring.current;
     s32 i;
     char *text;
 
     y = y * D_800E28D4 / 222;
     if (drawBackdrop) {
-        Render_ClearDepthRect(state, 0, D_800E28D0, 0, D_800E28D4, 0);
+        SetN64_ClearDepthRect(state, 0, D_800E28D0, 0, D_800E28D4, 0);
         gDPSetScissor(g_displayListCursor++, G_SC_NON_INTERLACE, 0, 0, D_800E28D0 - 1, D_800E28D4 - 1);
         gDPSetColorImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)frame->colorImage);
         gDPSetCycleType(g_displayListCursor++, G_CYC_FILL);

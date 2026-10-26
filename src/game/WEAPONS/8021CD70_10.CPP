@@ -29,7 +29,7 @@ extern void *func_802AC950_de(s32);
 
 
 
-s32 Weapons_AddAmmo(void *player, s32 slot, s32 amount) {
+s32 Player_AddAmmo(void *player, s32 slot, s32 amount) {
     s16 *count;
     s32 cap;
     s32 room;
@@ -234,12 +234,12 @@ s32 func_80222FE0_de(void *playerObject, void *positionObject, s32 *unused) {
         actor->vy = player->speed * D_800C2868_de;
         actor->vz = player->speed * Math_Cosf(position->angle + offset) * scale;
         if (player->effect)
-            Camera_StartScaledShake(player->effect, D_800C2870_de, 100.0f, D_800C2870_de, D_800C286C_de, kind, position->pos);
+            Sky_StartScaledShake(player->effect, D_800C2870_de, 100.0f, D_800C2870_de, D_800C286C_de, kind, position->pos);
         if (selected->state.kind == 0x2E) actor->state.flags |= 0x200;
         actor->state.timer = -1;
         Weapons_RequestActorState(actor, &actor->state, 0x34);
     } else if (player->effect)
-        Camera_StartScaledShake(player->effect, D_800C2878_de, 60.0f, D_800C2878_de, D_800C2874_de, kind, position->pos);
+        Sky_StartScaledShake(player->effect, D_800C2878_de, 60.0f, D_800C2878_de, D_800C2874_de, kind, position->pos);
     return 1;
 invalid:
     return 0;
@@ -261,8 +261,8 @@ typedef struct SurfaceView {
     u8 pad0[0x50];
     u32 flags; /* 0x50 */
 } SurfaceView;
-extern void *Sound_FindActorModelEntry(void *);
-extern void Nav_EaseValueToward(f32 *, f32, f32);
+extern void *InstHdr_FindActorModelEntry(void *);
+extern void GraphU64_EaseValueToward(f32 *, f32, f32);
 /* Smooths a player's view: the turn and look rates are the tuning table's rates damped by the state
    at 0x7EC and scaled by the profile's yaw and pitch sensitivities (128 = centre); control mode 1
    locks the look rate at 0.5 and mode 0 without the pitch option at 0.8. Unless the body stands on
@@ -289,19 +289,19 @@ void Weapons_UpdateViewAngles(Player *player, Player *body, ViewTuning *tuning) 
     if (profile->controlMode != 0) {
         if (profile->controlMode == 1) pitchRate = 0.5f;
     } else if (profile->pitchMode == 0) pitchRate = 0.8f;
-    surface = Sound_FindActorModelEntry(body);
+    surface = InstHdr_FindActorModelEntry(body);
     if (surface == 0 || (surface->flags & 0x6000) != 0x2000) {
         if (tuning->yawScale != 0.0f) {
             yawDelta = player->steer;
             yawDelta *= 80.0f;
             yawDelta = yawDelta * tuning->yawScale;
             yawDelta = yawDelta * 0.017453294f;
-            Nav_EaseValueToward(&body->heading, body->heading + yawDelta, yawRate);
+            GraphU64_EaseValueToward(&body->heading, body->heading + yawDelta, yawRate);
         }
     }
     input = -player->pitch * 80.0f;
     if (input < 0.0f) value = input * -0.71619713f * tuning->downScale;
     else value = input * 0.71619713f * tuning->upScale;
     value = value * 0.017453294f;
-    Nav_EaseValueToward(&player->pitchOffset, value, pitchRate);
+    GraphU64_EaseValueToward(&player->pitchOffset, value, pitchRate);
 }

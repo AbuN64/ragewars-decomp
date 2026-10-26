@@ -14,12 +14,12 @@
 #include "COMMON/AIPROFILE.H"
 
 extern void BuildDirectionMatrix(void *matrix, CVector3 *direction);
-extern f32 Anim_GetPolygonHeight(Node75 *node, f32 x, f32 z);
-extern CQuatern *Nav_GetPolygonUpQuat(CQuatern *out, Triangle *polygon);
-extern CQuatern *Nav_GetCachedUpQuat(CQuatern *out, Triangle *polygon);
+extern f32 Region_GetPolygonHeight(Node75 *node, f32 x, f32 z);
+extern CQuatern *Region_GetPolygonUpQuat(CQuatern *out, Triangle *polygon);
+extern CQuatern *Region_GetCachedUpQuat(CQuatern *out, Triangle *polygon);
 extern void MatrixFromQuaternion(void *quaternion, f32 *matrix);
-extern void Rsp_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right);
-extern f32 Anim_GetTriangleEdgeAngle(void *triangle, s32 edge);
+extern void GraphU64_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right);
+extern f32 Region_GetTriangleEdgeAngle(void *triangle, s32 edge);
 
 
 
@@ -54,27 +54,27 @@ f32 *Particle_ParentTransform(Shared_Particle *particle, GameplayCamera *camera)
         }
         return camera->faceScreen;
     case PARTICLE_ALIGN_FLOOR:
-        value = Anim_GetPolygonHeight(0, particle->inst.pos.x, particle->inst.pos.z);
+        value = Region_GetPolygonHeight(0, particle->inst.pos.x, particle->inst.pos.z);
         if (particle->inst.pos.y - value <= 0.01f) {
-            Nav_GetPolygonUpQuat(&up, 0);
+            Region_GetPolygonUpQuat(&up, 0);
             MatrixFromQuaternion(&up, tilt);
             matrix = D_8011AD70;
-            Rsp_MultiplyAffineMatrices(matrix, D_8011AF38, tilt);
+            GraphU64_MultiplyAffineMatrices(matrix, D_8011AF38, tilt);
             return matrix;
         }
         /* off the floor it lies flat */
     case PARTICLE_ALIGN_FLAT:
         return D_8011AF38;
     case PARTICLE_ALIGN_CEILING:
-        Nav_GetCachedUpQuat(&up, 0);
+        Region_GetCachedUpQuat(&up, 0);
         MatrixFromQuaternion(&up, tilt);
         matrix = D_8011AD70;
-        Rsp_MultiplyAffineMatrices(matrix, D_8011AF38, tilt);
+        GraphU64_MultiplyAffineMatrices(matrix, D_8011AF38, tilt);
         return matrix;
     case PARTICLE_ALIGN_EDGE_0:
     case PARTICLE_ALIGN_EDGE_1:
     case PARTICLE_ALIGN_EDGE_2:
-        value = Anim_GetTriangleEdgeAngle(0, particle->space);
+        value = Region_GetTriangleEdgeAngle(0, particle->space);
         BuildYawMatrix(D_8011AD70, value);
         return D_8011AD70;
     }
@@ -87,9 +87,9 @@ f32 *Particle_ParentTransform(Shared_Particle *particle, GameplayCamera *camera)
  * matrices) and clears its region; a particle carried by its owner (flag 0x400000) places its local position through
  * the owner's orientation, or for a player owner (flags 0x300000) through its camera's view orientation, or the
  * player view transform when the player has no camera. */
-extern void Rsp_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
-extern void Particle_TransformDirection(void *matrix, CVector3 *in, CVector3 *out);
-extern void Weapons_BuildPlayerViewTransform(Player *player, f32 out[4][4]);
+extern void GraphU64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
+extern void GraphU64_TransformDirection(void *matrix, CVector3 *in, CVector3 *out);
+extern void Player_BuildPlayerViewTransform(Player *player, f32 out[4][4]);
 void Particle_Attach(Shared_Particle *particle, CVector3 *outPosition, CVector3 *outDirection) {
     f32 matrix[16];
     CVector3 position;
@@ -117,9 +117,9 @@ void Particle_Attach(Shared_Particle *particle, CVector3 *outPosition, CVector3 
             case 0x41E:
                 drawMatrices = target->drawMatrices;
                 if (drawMatrices != 0) {
-                    Rsp_ConvertMatrixToFloat(matrix, &drawMatrices[particle->collisionNode]);
-                    Particle_TransformPoint(matrix, &particle->attachmentPosition, &position);
-                    Particle_TransformDirection(matrix, &particle->inst.velocity, &direction);
+                    GraphU64_ConvertMatrixToFloat(matrix, &drawMatrices[particle->collisionNode]);
+                    GraphU64_TransformPoint(matrix, &particle->attachmentPosition, &position);
+                    GraphU64_TransformDirection(matrix, &particle->inst.velocity, &direction);
                     particle->inst.pos = position;
                     particle->direction = direction;
                 } else {
@@ -136,13 +136,13 @@ void Particle_Attach(Shared_Particle *particle, CVector3 *outPosition, CVector3 
             if (owner->player->camera != 0) {
                 transform = owner->player->camera->viewOrient;
             } else {
-                Weapons_BuildPlayerViewTransform(owner->player, viewTransform);
+                Player_BuildPlayerViewTransform(owner->player, viewTransform);
                 transform = viewTransform[0];
             }
         } else {
             transform = owner->orient;
         }
-        Particle_TransformPoint(transform, &particle->attachmentPosition, &position);
+        GraphU64_TransformPoint(transform, &particle->attachmentPosition, &position);
         particle->inst.pos = position;
     }
     if (outPosition != 0) {
@@ -164,21 +164,21 @@ void Particle_Attach(Shared_Particle *particle, CVector3 *outPosition, CVector3 
 #include "particle/CAMERA_SCALE.H"
 #include "ENGINE/SCENE_11.H"
 
-void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
-void Particle_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z);
-void Particle_IdentityMatrix(void *matrix);
+void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+void GraphU64_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z);
+void GraphU64_IdentityMatrix(void *matrix);
 void BuildRollMatrix(void *matrix, f32 angle);
 void TranslateMatrix(void *matrix, f32 x, f32 y, f32 z);
-f32 Nav_GetTrianglePlaneHeight(void *node, f32 x, f32 z);
-s32 Particle_LimitVectorLength(f32 *vector, f32 limit);
+f32 GraphU64_GetTrianglePlaneHeight(void *node, f32 x, f32 z);
+s32 GraphU64_LimitVectorLength(f32 *vector, f32 limit);
 void ScaleMatrixLocal(void *matrix, f32 sx, f32 sy, f32 sz);
 void SwapMatrixUpForward(void *matrix);
 void CopyMatrix(f32 *dst, f32 *src);
-void Particle_BuildTranslationMatrix(void *matrix, f32 x, f32 y, f32 z);
+void GraphU64_BuildTranslationMatrix(void *matrix, f32 x, f32 y, f32 z);
 void YawMatrix(void *matrix, f32 angle);
 void PitchMatrix(void *matrix, f32 angle);
-void Particle_ClampMatrixToFixedRange(f32 *matrix);
-void Rsp_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst);
+void GraphU64_ClampMatrixToFixedRange(f32 *matrix);
+void GraphU64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst);
 
 
 
@@ -265,18 +265,18 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
                 up.x = 0;
                 up.z = 0;
                 up.y = 1.0f;
-                Particle_CrossVectors(&side, &up, &travel);
-                Particle_ScaleVector(&offset, &side, Math_Sinf(particle->sineAngleX) * -particle->sineAmplitudeX * wobbleFade);
-                Particle_AddVec3(&position, &position, &offset);
+                GraphU64_CrossVectors(&side, &up, &travel);
+                GraphU64_ScaleVector(&offset, &side, Math_Sinf(particle->sineAngleX) * -particle->sineAmplitudeX * wobbleFade);
+                GraphU64_AddVec3(&position, &position, &offset);
             }
             if (particle->sineAmplitudeY < 0.0f) {
                 up.x = 0;
                 up.z = 0;
                 up.y = 1.0f;
-                Particle_CrossVectors(&across, &up, &travel);
-                Particle_CrossVectors(&side, &across, &travel);
-                Particle_ScaleVector(&offset, &side, Math_Sinf(particle->sineAngleY) * -particle->sineAmplitudeY * wobbleFade);
-                Particle_AddVec3(&position, &position, &offset);
+                GraphU64_CrossVectors(&across, &up, &travel);
+                GraphU64_CrossVectors(&side, &across, &travel);
+                GraphU64_ScaleVector(&offset, &side, Math_Sinf(particle->sineAngleY) * -particle->sineAmplitudeY * wobbleFade);
+                GraphU64_AddVec3(&position, &position, &offset);
             }
         }
     }
@@ -284,22 +284,22 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         if (particle->space == PARTICLE_ALIGN_WORLD) {
             /* A free model points its Z axis along the direction it was attached with (else its travel), its X axis
              * level, and turns by its rotation on top, a quarter turn pitched up. */
-            Particle_MatrixFromEulerXYZ(orientation, particle->rot.x + RW_PI_F6 / 2, particle->rot.y, particle->rot.z);
+            GraphU64_MatrixFromEulerXYZ(orientation, particle->rot.x + RW_PI_F6 / 2, particle->rot.y, particle->rot.z);
             if ((attachedDirection.x == 0.0f) && (attachedDirection.y == 0.0f) && (attachedDirection.z == 0.0f)) {
                 axisZ = particle->direction;
             } else {
                 axisZ = attachedDirection;
             }
-            Particle_NormalizeVec3(&axisZ.x);
+            GraphU64_NormalizeVec3(&axisZ.x);
             up.x = 0;
             up.z = 0;
             up.y = 1.0f;
-            Particle_CrossVectors(&axisX, &up, &axisZ);
-            Particle_CrossVectors(&axisY, &axisX, &axisZ);
-            Particle_IdentityMatrix(basis);
-            Particle_NormalizeVec3(&axisX.x);
-            Particle_NormalizeVec3(&axisY.x);
-            Particle_NormalizeVec3(&axisZ.x);
+            GraphU64_CrossVectors(&axisX, &up, &axisZ);
+            GraphU64_CrossVectors(&axisY, &axisX, &axisZ);
+            GraphU64_IdentityMatrix(basis);
+            GraphU64_NormalizeVec3(&axisX.x);
+            GraphU64_NormalizeVec3(&axisY.x);
+            GraphU64_NormalizeVec3(&axisZ.x);
             basis[0] = axisX.x;
             basis[1] = axisX.y;
             basis[2] = axisX.z;
@@ -309,11 +309,11 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
             basis[8] = axisZ.x;
             basis[9] = axisZ.y;
             basis[10] = axisZ.z;
-            Rsp_MultiplyAffineMatrices(local, orientation, basis);
+            GraphU64_MultiplyAffineMatrices(local, orientation, basis);
         } else {
-            Particle_MatrixFromEulerXYZ(local, particle->rot.x, particle->rot.y + RW_PI_F6, particle->rot.z);
+            GraphU64_MatrixFromEulerXYZ(local, particle->rot.x, particle->rot.y + RW_PI_F6, particle->rot.z);
         }
-        Engine_SampleWorldLighting(&g_world, &particle->inst.pos, &particle->lighting[D_800D297C]);
+        Scene_SampleWorldLighting(&g_world, &particle->inst.pos, &particle->lighting[D_800D297C]);
     } else if ((particle->rot.x == 0.0f) && (particle->rot.y == 0.0f)) {
         BuildRollMatrix(local, particle->rot.z);
     } else {
@@ -345,11 +345,11 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         break;
     case PARTICLE_ALIGN_FLAT:
         if (desc->wallBehavior != 0) {
-            position.y = RW_MAX_GT(position.y, Anim_GetPolygonHeight(0, position.x, position.z) + PARTICLE_SURFACE_GAP);
+            position.y = RW_MAX_GT(position.y, Region_GetPolygonHeight(0, position.x, position.z) + PARTICLE_SURFACE_GAP);
         }
         break;
     case PARTICLE_ALIGN_FLOOR:
-        floorHeight = Anim_GetPolygonHeight(0, position.x, position.z);
+        floorHeight = Region_GetPolygonHeight(0, position.x, position.z);
         if (desc->flags & PARTICLE_EFFECT_SETTLES) {
             if (position.y < floorHeight + PARTICLE_LANDING_HEIGHT) {
                 position.y = floorHeight;
@@ -362,7 +362,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         break;
     case PARTICLE_ALIGN_CEILING:
         if (desc->wallBehavior != 0) {
-            position.y = RW_MIN_LT(position.y, Nav_GetTrianglePlaneHeight(0, position.x, position.z) - PARTICLE_SURFACE_GAP);
+            position.y = RW_MIN_LT(position.y, GraphU64_GetTrianglePlaneHeight(0, position.x, position.z) - PARTICLE_SURFACE_GAP);
         }
         break;
     case PARTICLE_ALIGN_BILLBOARD_UPRIGHT:
@@ -376,7 +376,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     case PARTICLE_ALIGN_EDGE_2:
         break;
     }
-    Particle_LimitVectorLength(&position.x, PARTICLE_MAX_DISTANCE);
+    GraphU64_LimitVectorLength(&position.x, PARTICLE_MAX_DISTANCE);
     if ((desc->flags & PARTICLE_EFFECT_OPACITY_SIZE) && (desc->playback == 1)) {
         scale = scale * ((f32)particle->opacity / 255.0f);
     }
@@ -395,7 +395,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     }
     parent = Particle_ParentTransform(particle, camera);
     if (parent != 0) {
-        Rsp_MultiplyAffineMatrices(world, local, parent);
+        GraphU64_MultiplyAffineMatrices(world, local, parent);
     } else {
         CopyMatrix(world, local);
     }
@@ -406,17 +406,17 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         strength = (f32)quiver * (1.0f / PARTICLE_QUIVER_STRENGTH_MAX);
         strengthSq = strength * strength;
         swing = strengthSq * PARTICLE_QUIVER_SWING;
-        Particle_BuildTranslationMatrix(quivering, 0.0f, 0.0f, -PARTICLE_QUIVER_PIVOT);
+        GraphU64_BuildTranslationMatrix(quivering, 0.0f, 0.0f, -PARTICLE_QUIVER_PIVOT);
         yawWave = Math_Sinf(strengthSq * (6 * RW_PI_F6)) * 0.25f;
         YawMatrix(quivering, swing * yawWave);
         PitchMatrix(quivering, swing * Math_Sinf(strengthSq * (14 * RW_PI_F6)));
         TranslateMatrix(quivering, 0.0f, 0.0f, PARTICLE_QUIVER_PIVOT);
-        Rsp_MultiplyAffineMatrices(orientation, quivering, world);
-        Particle_ClampMatrixToFixedRange(orientation);
+        GraphU64_MultiplyAffineMatrices(orientation, quivering, world);
+        GraphU64_ClampMatrixToFixedRange(orientation);
         final = orientation;
     } else {
-        Particle_ClampMatrixToFixedRange(world);
+        GraphU64_ClampMatrixToFixedRange(world);
         final = world;
     }
-    Rsp_ConvertMatrixToFixed(final, out);
+    GraphU64_ConvertMatrixToFixed(final, out);
 }

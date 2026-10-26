@@ -20,8 +20,8 @@ extern s32 D_801462C8;
 extern void *func_8041A280_de(s32, s32);
 extern void func_8041B110_de(s32);
 extern void *func_8041ABC0_de(s32, s32);
-extern void Menu_AppendListText(void *, void *);
-extern void Menu_SelectListEntry(void *, s32);
+extern void SmpButton_AppendListText(void *, void *);
+extern void SmpButton_SelectListEntry(void *, s32);
 extern void func_80421234_de(void);
 
 #if defined(VERSION_DE)
@@ -35,7 +35,7 @@ s32 func_80420E20_de(void *window) {
     struct OptionsOpenScreen *screen;
     void *button;
 
-    screen = (struct OptionsOpenScreen *) Scene_AllocateMemory(0x3C);
+    screen = (struct OptionsOpenScreen *) Cache_AllocateMemory(0x3C);
     D_800E4400 = screen;
     screen->window = window;
     screen->full = 0;
@@ -46,42 +46,42 @@ s32 func_80420E20_de(void *window) {
 
     button = func_8041ABC0_de(ID(0x3B4), ID(0x3B5));
     D_800E4400->buttons[0] = button;
-    Menu_AppendListText(button, D_800D3470_de[0]);
-    Menu_AppendListText(D_800E4400->buttons[0], D_800D3474[0]);
+    SmpButton_AppendListText(button, D_800D3470_de[0]);
+    SmpButton_AppendListText(D_800E4400->buttons[0], D_800D3474[0]);
     if (D_801462C8 & 0x8000000) {
-        Menu_SelectListEntry(D_800E4400->buttons[0], 1);
+        SmpButton_SelectListEntry(D_800E4400->buttons[0], 1);
     } else {
-        Menu_SelectListEntry(D_800E4400->buttons[0], 0);
+        SmpButton_SelectListEntry(D_800E4400->buttons[0], 0);
     }
 
     button = func_8041ABC0_de(ID(0x3B1), ID(0x3B2));
     D_800E4400->buttons[1] = button;
-    Menu_AppendListText(button, D_800D3470_de[0]);
-    Menu_AppendListText(D_800E4400->buttons[1], D_800D3474[0]);
+    SmpButton_AppendListText(button, D_800D3470_de[0]);
+    SmpButton_AppendListText(D_800E4400->buttons[1], D_800D3474[0]);
     if (D_801462C8 & 0x10000000) {
-        Menu_SelectListEntry(D_800E4400->buttons[1], 1);
+        SmpButton_SelectListEntry(D_800E4400->buttons[1], 1);
     } else {
-        Menu_SelectListEntry(D_800E4400->buttons[1], 0);
+        SmpButton_SelectListEntry(D_800E4400->buttons[1], 0);
     }
 
     button = func_8041ABC0_de(ID(0x3AD), ID(0x3AE));
     D_800E4400->buttons[2] = button;
-    Menu_AppendListText(button, D_800D3470_de[0]);
-    Menu_AppendListText(D_800E4400->buttons[2], D_800D3474[0]);
+    SmpButton_AppendListText(button, D_800D3470_de[0]);
+    SmpButton_AppendListText(D_800E4400->buttons[2], D_800D3474[0]);
     if (D_801462C8 & 0x8) {
-        Menu_SelectListEntry(D_800E4400->buttons[2], 1);
+        SmpButton_SelectListEntry(D_800E4400->buttons[2], 1);
     } else {
-        Menu_SelectListEntry(D_800E4400->buttons[2], 0);
+        SmpButton_SelectListEntry(D_800E4400->buttons[2], 0);
     }
 
     button = func_8041ABC0_de(ID(0x3AF), ID(0x3B0));
     D_800E4400->buttons[3] = button;
-    Menu_AppendListText(button, D_800D3470_de[0]);
-    Menu_AppendListText(D_800E4400->buttons[3], D_800D3474[0]);
+    SmpButton_AppendListText(button, D_800D3470_de[0]);
+    SmpButton_AppendListText(D_800E4400->buttons[3], D_800D3474[0]);
     if (D_801462C8 & 0x20000000) {
-        Menu_SelectListEntry(D_800E4400->buttons[3], 1);
+        SmpButton_SelectListEntry(D_800E4400->buttons[3], 1);
     } else {
-        Menu_SelectListEntry(D_800E4400->buttons[3], 0);
+        SmpButton_SelectListEntry(D_800E4400->buttons[3], 0);
     }
 
     func_8041B110_de(ID(0x3AC));

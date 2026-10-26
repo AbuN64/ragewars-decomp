@@ -8,9 +8,9 @@
 #include "SYSTEM/80255C40_7.H"
 #include "include_asm.h"
 
-extern void Particle_ScaleVector(void *, void *, f32);
+extern void GraphU64_ScaleVector(void *, void *, f32);
 
-extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 extern void *func_8028B00C_de(struct Shared_World *object, int index);
 
@@ -57,10 +57,10 @@ void func_80268A40_de(RangeNode **arg0, u32 arg1, u32 arg2, u32 arg3,
                     delta.y = (f32)node->y - *(f32 *)&arg2;
                     delta.z = (f32)node->z - *(f32 *)&arg3;
                     temp_f20 = D_800C4490_de - (var_f2_3 / temp_f3);
-                    Particle_NormalizeVec3(&delta);
+                    GraphU64_NormalizeVec3(&delta);
                     temp_f20_2 = temp_f20 * D_800C4494_de;
-                    Particle_ScaleVector(&delta, &delta, temp_f20_2);
-                    Particle_AddVec3(arg4, arg4, &delta);
+                    GraphU64_ScaleVector(&delta, &delta, temp_f20_2);
+                    GraphU64_AddVec3(arg4, arg4, &delta);
                     *arg5 -= temp_f20_2;
                 }
             }
@@ -86,7 +86,7 @@ void *func_80268C1C_de(void *intrusiveList, void *arg1) {
     return temp_s0;
 }
 
-void Render_ReleaseLight(void *a, s32 b) {
+void DynLight_ReleaseLight(void *a, s32 b) {
     (((struct Limit *) ((s8 *) b))->limit) = 0;
     func_80255ED8_de(a, b);
     func_80255CB8_de(a + 0x14, b);

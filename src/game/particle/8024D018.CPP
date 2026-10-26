@@ -46,7 +46,7 @@ void GameObject_BuildQuaternionTranslationMatrix(f32 *m, f32 *q, f32 *t)
     m[15] = D_800C8CA0;
 }
 
-extern int Actors_BuildLitModel(int a, int b, void *c, void *d, int e, void *f);
+extern int Lighting_BuildLitModel(int a, int b, void *c, void *d, int e, void *f);
 extern void func_80253E64_de(int a, int **b, int c);
 
 
@@ -60,7 +60,7 @@ void GameObject_BuildLitActorResource(void *levelActor, int **arg1) {
 
     deref1 = *arg1;
     deref2 = *deref1;
-    ret = Actors_BuildLitModel(deref2, 0, &object->bounds, object->fieldB4, 1, levelActor);
+    ret = Lighting_BuildLitModel(deref2, 0, &object->bounds, object->fieldB4, 1, levelActor);
     func_80253E64_de(0, arg1, ret);
 }
 
@@ -106,7 +106,7 @@ s32 func_8024D160_de(InteractionActor *actor) {
 
 f32 InstHdr_GetInactiveActorHeight(Actor_u1 *actor);
 
-f32 Particle_GetActorHeight(Actor_u1 *actor) {
+f32 GameObject_GetActorHeight(Actor_u1 *actor) {
     Resource_u1 *resource;
 
     if (actor->kind == 1 && actor->active <= 0) {

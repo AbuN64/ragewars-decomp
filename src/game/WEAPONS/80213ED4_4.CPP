@@ -11,7 +11,7 @@
 /* Picks an actor's target (the tracked enemy when the aim point is chosen, else the nearest permitted target from Weapons_SelectCombatTarget), classifies it into one of eight kinds, and fills the target record with the kind, target, height difference, position, direction and distance, both in full and flattened to the horizontal plane. */
 extern void *Weapons_SelectCombatTarget(void *,void *,s32,s32), *func_80219408_de(void *);
 extern f32 Weapons_GetSignedAngleToPoint(void *,f32,f32,f32),Math_Sqrtf(f32);
-extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 static inline s32 func_80215410_kind(Actor_func_80214DD4_de *self, Tracker *ctx, Actor_func_80214DD4_de *target) {
     if (ctx->active == 0) {
         return 6;
@@ -85,7 +85,7 @@ void Barrel_FillAnchorTargetInfo(Actor_func_80214DD4_de *arg0, Tracker *tracker,
         }
     }
     func_80274020_de(&height);
-    Particle_SubtractVectors(&delta, &pos, &arg0->pos);
+    GraphU64_SubtractVectors(&delta, &pos, &arg0->pos);
     arg3->m_DeltaAngle = height;
     arg3->kind = kind;
     arg3->target = target;
@@ -105,7 +105,7 @@ extern s32 func_802462E8_de(Actor_u1 *, CVector3, char **);
 
 /* Aim toward a point; when obstructed, try progressively wider left/right
  * directions and choose the first clear probe. */
-extern f32 Particle_GetActorRadius(Actor_u1 *);
+extern f32 GameObject_GetActorRadius(Actor_u1 *);
 #include "COMMON/MATH_HELPERS.H"
 static inline f32 Weapons_ProbeHeading(Actor_u1 *actor, CVector3 point) {
     f32 dx;
@@ -128,7 +128,7 @@ static inline f32 Weapons_ProbeHeading(Actor_u1 *actor, CVector3 point) {
     c = -Math_Cosf(actor->yaw);
     dot = (dx * -s + dz * c) / dist;
     dot = ((RW_MIN(dot, 1.0f)) < (-1.0f) ? (-1.0f) : (RW_MIN(dot, 1.0f)));
-    angle = Nav_ArcCos(dot);
+    angle = GraphU64_ArcCos(dot);
     if (!(dx * c + dz * s > 0.0f)) {
         angle = -angle;
     }
@@ -156,9 +156,9 @@ f32 Weapons_FindClearAimAngle(Actor_u1 *actor, CVector3 point, s32 target, f32 d
                     bias = (-RW_PI_F6 / 12.0f);
                 }
                 cosine = Math_Sinf(actor->yaw + 3.1415927f + angle);
-                probe.x = actor->position.x + cosine * (distance * Particle_GetActorRadius(actor));
+                probe.x = actor->position.x + cosine * (distance * GameObject_GetActorRadius(actor));
                 sine = Math_Cosf(actor->yaw + 3.1415927f + angle);
-                probe.z = actor->position.z + sine * (distance * Particle_GetActorRadius(actor));
+                probe.z = actor->position.z + sine * (distance * GameObject_GetActorRadius(actor));
                 if (!func_802462E8_de(actor, probe, 0)) {
                     angle += bias;
                     func_80274020_de(&angle);
@@ -171,9 +171,9 @@ f32 Weapons_FindClearAimAngle(Actor_u1 *actor, CVector3 point, s32 target, f32 d
 }
 
 #include "COMMON/MATH_HELPERS.H"
-extern void Particle_NormalizeVec3(CVector3 *);
+extern void GraphU64_NormalizeVec3(CVector3 *);
 extern void func_8024BC94_de(CVector3 *out, void *actor, CVector3 offset);
-extern f32 Particle_GetActorHeight(void *);
+extern f32 GameObject_GetActorHeight(void *);
 
 /* Weapons_GetSignedAngleToPoint's body: the signed angle between the actor's facing and the direction to the point. */
 static inline f32 angleTo(Actor_func_80214DD4_de *actor, CVector3 point) {
@@ -197,7 +197,7 @@ static inline f32 angleTo(Actor_func_80214DD4_de *actor, CVector3 point) {
     c = -Math_Cosf(actor->heading);
     dot = (dx * -s + dz * c) / dist;
     dot = ((RW_MIN(dot, 1.0f)) < ((-1.0f)) ? ((-1.0f)) : (RW_MIN(dot, 1.0f)));
-    angle = Nav_ArcCos(dot);
+    angle = GraphU64_ArcCos(dot);
     if (!(dx * c + dz * s > 0.0f)) {
         angle = -angle;
     }
@@ -250,9 +250,9 @@ s32 Weapons_GetFacingSide(Actor_func_80214DD4_de *self, void *unused, Actor_func
         }
     }
     low = self->pos.y + self->height;
-    high = low + Particle_GetActorHeight(self);
+    high = low + GameObject_GetActorHeight(self);
     to.x = target->pos.x;
-    to.y = target->pos.y + target->height + Particle_GetActorHeight(target) * 0.9f;
+    to.y = target->pos.y + target->height + GameObject_GetActorHeight(target) * 0.9f;
     to.z = target->pos.z;
     from.x = self->pos.x;
     from.z = self->pos.z;
@@ -267,13 +267,13 @@ s32 Weapons_GetFacingSide(Actor_func_80214DD4_de *self, void *unused, Actor_func
     if (angle > 70.0f * RW_PI_F6 / 180.0f && angle < 110.0f * RW_PI_F6 / 180.0f) {
         return 0;
     }
-    Particle_SubtractVectors(&dir, &from, &to);
-    Particle_NormalizeVec3(&dir);
+    GraphU64_SubtractVectors(&dir, &from, &to);
+    GraphU64_NormalizeVec3(&dir);
     forward.x = 0.0f;
     forward.y = 0.0f;
     forward.z = 1.0f;
     func_8024BC94_de(&facing, target, forward);
-    if (Nav_ArcCos(dir.x * facing.x + dir.y * facing.y + dir.z * facing.z) < cone * 0.5f) {
+    if (GraphU64_ArcCos(dir.x * facing.x + dir.y * facing.y + dir.z * facing.z) < cone * 0.5f) {
         if (dir.x * -facing.z + dir.z * facing.x < 0.0f) {
             return -1;
         }

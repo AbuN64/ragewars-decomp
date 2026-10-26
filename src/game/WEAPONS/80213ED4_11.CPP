@@ -3,7 +3,7 @@
 #include "COMMON/EXTERNS_6.H"
 #include "WEAPONS/80213ED4_19.H"
 
-void Weapons_ApplyClampedTurn(void *actor, s32 unused1, f32 turnLimit, f32 desiredTurn) {
+void Barrel_ApplyClampedTurn(void *actor, s32 unused1, f32 turnLimit, f32 desiredTurn) {
     f32 f0;
     f32 f1;
     f32 f2;

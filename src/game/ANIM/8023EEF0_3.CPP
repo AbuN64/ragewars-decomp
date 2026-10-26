@@ -11,9 +11,9 @@
 #include "RENDER_2/8022AE90_5.H"
 
 s32 func_8023E8D4_de(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly, s32 keep);
-void Items_ReleaseObjectHandles(struct ItemsHandleOwner *);
+void Ovlgame_ReleaseObjectHandles(struct ItemsHandleOwner *);
 void func_80271FC8_de(CVector3 *, f32, void *, void *);
-void System_DeliverContactEffect(void *, void *, s32, s32, CVector3, ContactEffectStyle);
+void Events_DeliverContactEffect(void *, void *, s32, s32, CVector3, ContactEffectStyle);
 s32 func_802833D0_de(void *);
 
 s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, CVector3 *origin,
@@ -32,31 +32,31 @@ s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, C
         case 0:
             corners[0] = &vertices[7]; corners[1] = &vertices[6];
             corners[2] = &vertices[5]; corners[3] = &vertices[4];
-            Particle_SubtractVectors(&normal, &vertices[4], &vertices[0]); break;
+            GraphU64_SubtractVectors(&normal, &vertices[4], &vertices[0]); break;
         case 1:
             corners[0] = &vertices[4]; corners[1] = &vertices[5];
             corners[2] = &vertices[1]; corners[3] = &vertices[0];
-            Particle_SubtractVectors(&normal, &vertices[0], &vertices[3]); break;
+            GraphU64_SubtractVectors(&normal, &vertices[0], &vertices[3]); break;
         case 2:
             corners[0] = &vertices[7]; corners[1] = &vertices[4];
             corners[2] = &vertices[0]; corners[3] = &vertices[3];
-            Particle_SubtractVectors(&normal, &vertices[3], &vertices[2]); break;
+            GraphU64_SubtractVectors(&normal, &vertices[3], &vertices[2]); break;
         case 3:
             corners[0] = &vertices[6]; corners[1] = &vertices[7];
             corners[2] = &vertices[3]; corners[3] = &vertices[2];
-            Particle_SubtractVectors(&normal, &vertices[2], &vertices[1]); break;
+            GraphU64_SubtractVectors(&normal, &vertices[2], &vertices[1]); break;
         case 4:
             corners[0] = &vertices[5]; corners[1] = &vertices[6];
             corners[2] = &vertices[2]; corners[3] = &vertices[1];
-            Particle_SubtractVectors(&normal, &vertices[1], &vertices[0]); break;
+            GraphU64_SubtractVectors(&normal, &vertices[1], &vertices[0]); break;
         case 5:
             corners[0] = &vertices[0]; corners[1] = &vertices[1];
             corners[2] = &vertices[2]; corners[3] = &vertices[3];
-            Particle_SubtractVectors(&normal, &vertices[3], &vertices[7]); break;
+            GraphU64_SubtractVectors(&normal, &vertices[3], &vertices[7]); break;
         }
         denominator = (normal.x * ray->direction.x + normal.y * ray->direction.y + normal.z * ray->direction.z);
         if (denominator == 0.0f) continue;
-        Particle_SubtractVectors(&delta, origin, corners[0]);
+        GraphU64_SubtractVectors(&delta, origin, corners[0]);
         distance = (delta.x * normal.x + delta.y * normal.y + delta.z * normal.z);
         if (distance == 0.0f) continue;
         fraction = -distance / denominator;
@@ -68,8 +68,8 @@ s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, C
         for (i = 0; i < 4; i++) {
             next = i == 3 ? 0 : i + 1;
             current = corners[i];
-            Particle_SubtractVectors(&edge, corners[next], current);
-            Particle_SubtractVectors(&offset, &hit, current);
+            GraphU64_SubtractVectors(&edge, corners[next], current);
+            GraphU64_SubtractVectors(&offset, &hit, current);
             if ((edge.x * offset.x + edge.y * offset.y + edge.z * offset.z) < 0.0f) { inside = 0; break; }
         }
         if (!inside) continue;
@@ -86,7 +86,7 @@ s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, C
         projectile = ray->projectile;
         if (projectile->type != 2 || (projectile->kind != 0x414 && projectile->kind != 0x42D)) continue;
         if (projectile->owner == actor) {
-            Items_ReleaseObjectHandles(actor->widget);
+            Ovlgame_ReleaseObjectHandles(actor->widget);
             ray->projectile->contactState = found;
             return 0;
         }
@@ -98,7 +98,7 @@ s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, C
         style.red = ray->projectile->color.x;
         style.green = ray->projectile->color.y;
         style.blue = ray->projectile->color.z;
-        System_DeliverContactEffect(actor, ray->projectile, 2, -1, effectPosition, style);
+        Events_DeliverContactEffect(actor, ray->projectile, 2, -1, effectPosition, style);
         if (*actor->kind == 11 && ray->projectile->kind == 0x42D) {
             func_802833D0_de(ray->projectile);
             func_8022B730_de(actor, 2.0f);

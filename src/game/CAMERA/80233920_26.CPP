@@ -6,7 +6,7 @@
 
 extern Gfx *g_displayListCursor;
 
-void Camera_LoadProjectionMatrix(u32 cameraAddress) {
+void Sky_LoadProjectionMatrix(u32 cameraAddress) {
     Gfx *cmd;
     u32 offset;
 

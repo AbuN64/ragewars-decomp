@@ -31,7 +31,7 @@ Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount
 /* alEnvmixerPull: walk the envelope mixer's control list up to outCount samples, pulling the
    source for the span before each update, applying it (voice start/stop/free, volume, pan, fx
    mix, or passing it down the chain), freeing it, then pulling the remainder of the frame. */
-Acmd *Libultra_PullEnvelope(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
+Acmd *Audio_PullEnvelope(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
     ALEnvMixer *e = (ALEnvMixer *)filter;

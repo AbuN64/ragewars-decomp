@@ -82,7 +82,7 @@ extern void func_8022D188_de(void *unused, void *object);
 
 extern void Player_InitializeProfileSlot(s32 arg0);
 
-extern void Camera_SetResponse(float arg0);
+extern void Cinema_SetResponse(float arg0);
 
 extern void func_80245A20_de(int arg0);
 
@@ -122,23 +122,23 @@ extern s32 Control_AcquireControllerLock(s32 arg0);
 
 extern int Control_IsControllerPakEnabled(int arg0);
 
-extern void Render_SetControllerMode(s32 a);
+extern void Control_SetControllerMode(s32 a);
 
-extern void Render_ReleaseLight(void *a, s32 b);
+extern void DynLight_ReleaseLight(void *a, s32 b);
 
 extern void func_80274020_de(f32 *value);
 
 extern void func_802741A4_de(f32 *arg0);
 
-extern f32 Nav_RandomFloat(f32 arg0);
+extern f32 GraphU64_RandomFloat(f32 arg0);
 
-extern f32 Nav_ArcCos(f32 arg0);
+extern f32 GraphU64_ArcCos(f32 arg0);
 
 extern f32 func_802746A0_de(f32 arg0, f32 arg1, f32 arg2);
 
-extern f32 Nav_DecayToZero(f32 arg0, f32 arg1);
+extern f32 GraphU64_DecayToZero(f32 arg0, f32 arg1);
 
-extern f32 Nav_RandomBetween(f32 arg0, f32 arg1);
+extern f32 GraphU64_RandomBetween(f32 arg0, f32 arg1);
 
 extern void func_80276968_de(u8 amount, u8 r, u8 g, u8 b, u8 *outR, u8 *outG, u8 *outB);
 
@@ -168,9 +168,9 @@ extern int func_80293440_de(u8 *a, u8 *b);
 
 struct GameSession;
 
-extern void Render_SetTransitionTarget(struct GameSession *object, int value);
+extern void SetN64_SetTransitionTarget(struct GameSession *object, int value);
 
-extern void Render_ResetPlayerItems(s32 arg0, s32 arg1);
+extern void SetN64_ResetPlayerItems(s32 arg0, s32 arg1);
 
 extern void func_80293DF0_de(struct GameSession *arg0);
 

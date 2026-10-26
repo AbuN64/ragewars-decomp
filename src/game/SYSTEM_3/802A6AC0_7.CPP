@@ -40,7 +40,7 @@ static inline void clear_entry(EntryRecAt34 *e) {
     e->unk1C = 0;
 }
 
-/* Soft-resets the game: checks the "systembootdone" marker (copied from s_systembootdoneText and zero-padded with the memset Resmgr_FillMemory) through func_80293440_de (recording the result in D_801470B0 and re-arming it through func_802934C0_de), and on a cold boot copies the resident code and data back from the cartridge word by word after each PI idle wait, then clears the BSS from D_800E4000 to D_80166000, in both passes skipping the marker, its flag and, when not cold booting, the preserved save, settings and pad regions; finally reinitialises through func_802BAE40_de and func_80292F24_de. */
+/* Soft-resets the game: checks the "systembootdone" marker (copied from s_systembootdoneText and zero-padded with the memset XPlus_FillMemory) through func_80293440_de (recording the result in D_801470B0 and re-arming it through func_802934C0_de), and on a cold boot copies the resident code and data back from the cartridge word by word after each PI idle wait, then clears the BSS from D_800E4000 to D_80166000, in both passes skipping the marker, its flag and, when not cold booting, the preserved save, settings and pad regions; finally reinitialises through func_802BAE40_de and func_80292F24_de. */
 extern Marker_func_802A71C0_de s_systembootdoneText;
 
 
@@ -56,7 +56,7 @@ extern s32 D_800E4000;
 
 extern s32 D_80166000;
 
-extern void Render_CopyString(char *marker, char *name);
+extern void SetN64_CopyString(char *marker, char *name);
 
 static inline s32 is_restorable(u32 address) {
     if (address >= (u32)&D_800CDD10 && address < (u32)&D_800CDD10 + 0x10) {
@@ -337,12 +337,12 @@ s32 func_802A71C0_de(void) {
     u32 *piStatus;
     char name[16];
     *(Marker_func_802A71C0_de *)name = s_systembootdoneText;
-    Resmgr_FillMemory(&name[15], 0, 1);
+    XPlus_FillMemory(&name[15], 0, 1);
     if (((s32 (*)(char *, char *))func_80293440_de)(&D_800CDD10, name) == 0) {
         D_801470B0 = 0;
     } else {
         D_801470B0 = 1;
-        Render_CopyString(&D_800CDD10, name);
+        SetN64_CopyString(&D_800CDD10, name);
     }
     if (D_801470B0 == 0) {
         src = (u32 *)0xB0001000;

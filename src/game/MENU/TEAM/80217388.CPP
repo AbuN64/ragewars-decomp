@@ -42,10 +42,10 @@ void Barrel_StopActorLoopingSound(void *arg0, void *arg1) {
     }
 }
 
-extern void Particle_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 *right);
-extern f32 Particle_GetActorRadius(void *arg0);
-extern void Particle_ScaleVector(void *result, void *vector, f32 scale);
-extern void Particle_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
+extern void GraphU64_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 *right);
+extern f32 GameObject_GetActorRadius(void *arg0);
+extern void GraphU64_ScaleVector(void *result, void *vector, f32 scale);
+extern void GraphU64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void InstHdr_CopyActorPositionAndModel(void *arg0, CVector3 value, void *arg4, s32 *arg5,
                           s32 arg6, s32 arg7);
 
@@ -55,30 +55,30 @@ extern void InstHdr_CopyActorPositionAndModel(void *arg0, CVector3 value, void *
 
 
 
-void func_8021740C_de(void *arg0, s32 unused, void *arg2, Player *arg3,
+void Barrel_FindOffsetApproachPosition(void *arg0, s32 unused, void *arg2, Player *arg3,
                    void *arg4, s32 *arg5) {
     CVector3 offset;
     CVector3 position;
     f32 distance;
 
     if (arg3 != 0) {
-        Particle_SubtractVectors(&offset, &((Player *)(arg2))->pos,
+        GraphU64_SubtractVectors(&offset, &((Player *)(arg2))->pos,
                        &arg3->pos);
         offset.y = 0.0f;
-        Particle_NormalizeVec3(&offset.x);
+        GraphU64_NormalizeVec3(&offset.x);
     } else {
         offset.x = 0.0f;
         offset.y = 0.0f;
         offset.z = 0.0f;
     }
 
-    distance = Particle_GetActorRadius(arg2) + Particle_GetActorRadius(arg0) + D_800C21E8_de;
-    Particle_ScaleVector(&offset, &offset, distance);
-    Particle_AddVec3(&position, &((Player *)(arg2))->pos, &offset);
+    distance = GameObject_GetActorRadius(arg2) + GameObject_GetActorRadius(arg0) + D_800C21E8_de;
+    GraphU64_ScaleVector(&offset, &offset, distance);
+    GraphU64_AddVec3(&position, &((Player *)(arg2))->pos, &offset);
     InstHdr_CopyActorPositionAndModel(arg2, position, arg4, arg5, 0, 0);
 }
 
-void func_802174E4_de(Shared_ActorView *arg0, void *unused1, Output80216D3C *arg2) {
+void Barrel_ClearTargetInfo(Shared_ActorView *arg0, void *unused1, Output80216D3C *arg2) {
     Triple local1;
     Triple local2;
 
@@ -106,14 +106,14 @@ void func_802174E4_de(Shared_ActorView *arg0, void *unused1, Output80216D3C *arg
 
 
 
-void func_80217594_de(Player *arg0, s32 unused1, s32 arg2, s32 *entry) {
+void Barrel_SpawnEffectsFromMask(Player *arg0, s32 unused1, s32 arg2, s32 *entry) {
     if (entry[0] != 0) {
         do {
             if ((arg2 & entry[0]) != 0) {
                 InstHdr_PlayActorGraphSound(arg0,
                               arg0->pos,
                               entry[1],
-                              Nav_RandomBetween(D_800C21EC_de, D_800C21F0_de));
+                              GraphU64_RandomBetween(D_800C21EC_de, D_800C21F0_de));
             }
             entry += 2;
         } while (entry[0] != 0);

@@ -12,15 +12,15 @@
 
 extern char D_8011D8D0;
 
-extern f32 Particle_GetActorHeight(Actor_func_8024A1D0_de *actor);
+extern f32 GameObject_GetActorHeight(Actor_func_8024A1D0_de *actor);
 
 #include "particle/8027A0F4_8.H"
 
 extern EffectRecAt154 *func_802830B8_de(void *system);
 
-extern f32 Particle_GetActorRadius(Actor_func_8024A1D0_de *actor);
+extern f32 GameObject_GetActorRadius(Actor_func_8024A1D0_de *actor);
 
-extern void Fx_DispatchAttachmentEffects(void *arg0, s32 arg1, s32 arg2, void *arg3, void *arg4);
+extern void Ghot_DispatchAttachmentEffects(void *arg0, s32 arg1, s32 arg2, void *arg3, void *arg4);
 
 
 extern void *D_800CB440_de[];
@@ -29,7 +29,7 @@ extern void *D_800CB440_de[];
 /* Applies a blast from a source to a body when an owner is given: the strength comes from the falloff table
  * D_800D06C0 indexed by the source's remaining charges, times 0.5 and 0.3 and the kind (-2 for kind 5);
  * the body's reversed velocity is placed in its offset transform, an impulse at the source position is
- * built by func_80272D00_de and applied through Rsp_MultiplyAffineMatrices, the velocity is restored onto the body, and
+ * built by func_80272D00_de and applied through GraphU64_MultiplyAffineMatrices, the velocity is restored onto the body, and
  * the source spends a charge when its owner matches. */
 
 
@@ -41,13 +41,13 @@ extern void *D_800CB440_de[];
 
 extern void CopyMatrix(f32 *, Body_func_8024C6E8_de *);
 
-extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 
 extern void TranslateMatrix(void *, f32, f32, f32);
 
 extern void func_80272D00_de(f32 *, f32, f32, f32, f32);
 
-extern void Rsp_MultiplyAffineMatrices(Body_func_8024C6E8_de *, f32 *, f32 *);
+extern void GraphU64_MultiplyAffineMatrices(Body_func_8024C6E8_de *, f32 *, f32 *);
 
 extern void func_80270AAC_de(void *arg0, s32 arg1, void *arg2, void *arg3);
 
@@ -58,18 +58,18 @@ void func_8024C454_de(Actor_func_8024A1D0_de *actor, LookupRecAtC *lookup) {
     s32 *node;
 
     if (func_8026E340_de() != 0) {
-        node = Render_GetPackSection(*lookup->value, 2);
+        node = SetN64_GetPackSection(*lookup->value, 2);
         if ((*node != 0) &&
-            (*((s32 *)Render_GetPackSection(Render_GetPackSection(node, 0), 0)) & 0x8000)) {
+            (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
             position = actor->position0;
-            position.y += Particle_GetActorHeight(actor) * D_800C3B60_de;
+            position.y += GameObject_GetActorHeight(actor) * D_800C3B60_de;
             func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                           actor->position1, actor->rotation, position, 0, -1, 0);
             effect = func_802830B8_de(&D_8011D8D0);
             if (effect != 0) {
                 scale = *(&D_800C3B60_de + 1);
-                effect->field150 = Particle_GetActorRadius(actor) * scale;
-                effect->field154 = Particle_GetActorHeight(actor) * scale;
+                effect->field150 = GameObject_GetActorRadius(actor) * scale;
+                effect->field154 = GameObject_GetActorHeight(actor) * scale;
             }
         }
     }
@@ -84,12 +84,12 @@ void func_8024C5D4_de(void *actor, void *modelPack, s32 attachmentMaskIndex, s32
   char *new_var;
   if ((object->unk17C) & mask)
   {
-    attachmentTable = Render_GetPackSection(modelPack, 3);
+    attachmentTable = SetN64_GetPackSection(modelPack, 3);
     attachmentCount = attachmentTable->unk4;
     if (attachmentCount != 0)
     {
       new_var = &attachmentTable->unk8;
-      Fx_DispatchAttachmentEffects(new_var, attachmentCount, boneMatrices, actor, Render_GetPackSection(modelPack, 5));
+      Ghot_DispatchAttachmentEffects(new_var, attachmentCount, boneMatrices, actor, SetN64_GetPackSection(modelPack, 5));
     }
   }
 }
@@ -156,11 +156,11 @@ void func_8024C6E8_de(s32 unused, SourceRecAt18 *source, Body_func_8024C6E8_de *
     }
     CopyMatrix(transform, body);
     reverse = -1.0f;
-    Particle_ScaleVector(&velocity, &velocity, reverse);
+    GraphU64_ScaleVector(&velocity, &velocity, reverse);
     TranslateMatrix(transform, velocity.x, velocity.y, velocity.z);
     func_80272D00_de(impulse, strength, position.x, position.y, position.z);
-    Rsp_MultiplyAffineMatrices(body, transform, impulse);
-    Particle_ScaleVector(&velocity, &velocity, reverse);
+    GraphU64_MultiplyAffineMatrices(body, transform, impulse);
+    GraphU64_ScaleVector(&velocity, &velocity, reverse);
     TranslateMatrix(body, velocity.x, velocity.y, velocity.z);
     if (source->owner == owner) {
         source->charges--;
@@ -205,7 +205,7 @@ void func_8024C92C_de(void *poseTrack, s32 boneIndex, void *outTranslation) {
         *out = recs[boneIndex].position;
         return;
     }
-    base = Render_GetPackSection(o->translationFrames, (s32) idx);
+    base = SetN64_GetPackSection(o->translationFrames, (s32) idx);
     a = base + o->translationFirst;
     base = base + o->translationNext;
 
@@ -234,7 +234,7 @@ void func_8024CA10_de(void *poseTrack, s32 boneIndex, CQuatern *outRotation) {
         outRotation->w = (f32)(((CROMInitialOrientation_t *)(rec))->unk_12) * scale;
         return;
     }
-    base = Render_GetPackSection(((ObjectLinks24 *)(o))->unk_C, (s32)idx);
+    base = SetN64_GetPackSection(((ObjectLinks24 *)(o))->unk_C, (s32)idx);
     a = (char *)base + (((ObjectLinks24 *)(o))->unk_10) * 4;
     base = (char *)base + (((ObjectLinks24 *)(o))->unk_14) * 4;
     {
@@ -266,13 +266,13 @@ void GameObject_SampleInterpolatedBoneRotation(ObjectLinks24_2 *arg0, s32 arg1, 
         arg2->w = (f32)rec->unk_12 * scale;
         return;
     }
-    base = Render_GetPackSection(o->unk_C, (s32)idx);
+    base = SetN64_GetPackSection(o->unk_C, (s32)idx);
     func_80270AAC_de(arg2, o->unk_20,
                     (char *)base + o->unk_10 * 4,
                     (char *)base + o->unk_14 * 4);
 }
 
-/* Converts the twelve used entries of a 4x4 float matrix to unsigned integers, splitting each pair into the high and low halfword arrays of a packed matrix and setting the final high word's low bit. Adapted from Rsp_ConvertMatrixToFixed with the per-entry scale multiplies removed, the converted value scoped to each conversion block, and the D_800C8C70 thresholds changed. */
+/* Converts the twelve used entries of a 4x4 float matrix to unsigned integers, splitting each pair into the high and low halfword arrays of a packed matrix and setting the final high word's low bit. Adapted from GraphU64_ConvertMatrixToFixed with the per-entry scale multiplies removed, the converted value scoped to each conversion block, and the D_800C8C70 thresholds changed. */
 void GameObject_PackAffineMatrixWords(f32 *src, PackedMatrixWords *dst) {
     u32 *upper = dst->upper;
     u32 *lower = dst->lower;

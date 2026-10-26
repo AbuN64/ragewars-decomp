@@ -73,7 +73,7 @@ s32 func_8028C568_de(WorldRecAt1B40C *arg0, Record14 *arg1) {
         ((Bucket *)(rec))->object = arg1;
     } else {
         rec = arg0->listA.tail;
-        Actors_DispatchTrigger(((Bucket *)(rec))->object);
+        Link_DispatchTrigger(((Bucket *)(rec))->object);
         ((Bucket *)(rec))->object = arg1;
     }
     val = recordValue((s32) arg1->lifetime);
@@ -120,7 +120,7 @@ void func_8028C60C_de(void *arg0) {
                 }
             }
             if (expired != 0) {
-                Actors_DispatchTrigger(object);
+                Link_DispatchTrigger(object);
             }
             if (remove != 0) {
                 func_80255ED8_de(&((WorldRecAt1B40C *)(arg0))->listA, node);
@@ -145,24 +145,24 @@ void func_8028C60C_de(void *arg0) {
 
 
 
-extern void Engine_FindLightVolumes(Shared_World *world, CVector3 *point, ObjectRecAtBC **volumes, s32 *total);
+extern void Scene_FindLightVolumes(Shared_World *world, CVector3 *point, ObjectRecAtBC **volumes, s32 *total);
 static inline s32 worldHasLightVolumes(Shared_World *world) {
     s32 i;
     for (i = 0; i < world->sectorCount; i++) {
-        if (((LightVolumeList *)Render_GetPackSection(world->sectors[i].resource->pack, 2))->count != 0) {
+        if (((LightVolumeList *)SetN64_GetPackSection(world->sectors[i].resource->pack, 2))->count != 0) {
             return 1;
         }
     }
     return 0;
 }
-void Engine_SampleWorldLighting(Shared_World *world, CVector3 *position, Shared_ParticleLighting *out) {
+void Scene_SampleWorldLighting(Shared_World *world, CVector3 *position, Shared_ParticleLighting *out) {
     ObjectRecAtBC *volumes[10];
     s32 count;
     if (!worldHasLightVolumes(world) || D_800D2850 == 0) {
         *out = D_800CBC90[0];
     } else {
-        Engine_FindLightVolumes(world, position, volumes, &count);
-        Engine_SampleVolumeLighting(volumes, count, position, out);
+        Scene_FindLightVolumes(world, position, volumes, &count);
+        Scene_SampleVolumeLighting(volumes, count, position, out);
     }
 }
 
@@ -218,7 +218,7 @@ Player *func_8028C834_de(WorldRecAt1B6A4 *world) {
     nearest = 0;
     for (i = 0; i < world->count; i++) {
         object = world->objects[i];
-        Particle_SubtractVectors(&delta, &object->pos, &player->pos);
+        GraphU64_SubtractVectors(&delta, &object->pos, &player->pos);
         distance = Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
         if (distance <= best) {
             nearest = object;

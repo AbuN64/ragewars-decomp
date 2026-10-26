@@ -38,7 +38,7 @@ extern void func_802515F0_de(s32, s32);
 
 extern s32 D_80101134[];
 
-struct Shape_typemap_165 *Scene_AllocateResource(s32 arg0, s32 byteCount, u32 allocationFlags, void *arg3) {
+struct Shape_typemap_165 *Cache_AllocateResource(s32 arg0, s32 byteCount, u32 allocationFlags, void *arg3) {
     extern OSMesgQueue D_80101140;
     struct Shape_typemap_165 *resource;
     s32 lockUsers;
@@ -74,7 +74,7 @@ struct Shape_typemap_165 *Scene_AllocateResource(s32 arg0, s32 byteCount, u32 al
     return resource;
 }
 
-struct Shape_typemap_165 *Scene_AllocateResourceAt(void *arg0, void *requestedAddress, s32 byteCount, char *name) {
+struct Shape_typemap_165 *Cache_AllocateResourceAt(void *arg0, void *requestedAddress, s32 byteCount, char *name) {
     extern OSMesgQueue D_80101140;
     struct Shape_typemap_165 *allocatedResource;
     s32 allocatedAddress;
@@ -117,7 +117,7 @@ struct Shape_typemap_165 *Scene_AllocateResourceAt(void *arg0, void *requestedAd
     return allocatedResource;
 }
 
-void Scene_LockResource(void *arg0, Node80253610 *resource) {
+void Cache_LockResource(void *arg0, Node80253610 *resource) {
     extern OSMesgQueue D_80101140;
     s32 lockUsers;
     s32 remainingLockUsers;
@@ -149,7 +149,7 @@ void Scene_LockResource(void *arg0, Node80253610 *resource) {
     __osRestoreInt(unlockInterruptMask);
 }
 
-void Scene_UnlockResource(void *arg0, Node80253610 *resource) {
+void Cache_UnlockResource(void *arg0, Node80253610 *resource) {
     extern OSMesgQueue D_80101140;
     s32 lockUsers;
     s32 remainingLockUsers;
@@ -182,7 +182,7 @@ void Scene_UnlockResource(void *arg0, Node80253610 *resource) {
     __osRestoreInt(unlockInterruptMask);
 }
 
-void Scene_ReleaseResource(void *arg0, void *resource) {
+void Cache_ReleaseResource(void *arg0, void *resource) {
     extern OSMesgQueue D_80101140;
     s32 lockUsers;
     s32 remainingLockUsers;
@@ -303,7 +303,7 @@ s32 func_80253AD4_de(void) {
     return result;
 }
 
-void Scene_MarkResourceInUse(s32 unused0, Node80253610 *resource) {
+void Cache_MarkResourceInUse(s32 unused0, Node80253610 *resource) {
     extern OSMesgQueue D_80101140;
     s32 index;
     s32 mask;

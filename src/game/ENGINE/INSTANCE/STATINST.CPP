@@ -13,7 +13,7 @@
 #include "particle/80271B18_3.H"
 extern s32 D_800D2978;
 
-extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern f32 D_800C3E50_de[];
 
 /* Draws an owner model with timed descriptor selection and fade setup/reset; a named descriptor-slot reference preserves reload scheduling. */
@@ -28,13 +28,13 @@ extern f32 D_800C3E50_de[];
 
 
 
-extern void *Instance_AcquireGeometry(ResourceOwner *owner,s32 index);
+extern void *StaticInstance_AcquireGeometry(ResourceOwner *owner,s32 index);
 
 
 
 extern void func_8027892C_de(void *object, void *colors);
 
-extern void Render_QueueModelInstance(void **, void *, s32, void *, void *, s32);
+extern void Geometry_QueueModelInstance(void **, void *, s32, void *, void *, s32);
 
 static inline int select_key(DescriptorRecAt24 *descriptor, u32 timer) {
  int key;
@@ -65,10 +65,10 @@ extern char D_800C8F60[];
 #endif
 
 
-extern s32 Render_LocatePackSection(s32 *, s32, s32, s32 *);
+extern s32 SetN64_LocatePackSection(s32 *, s32, s32, s32 *);
 
 
-extern void System_DeliverContactEffect(void *, void *, s32, s32, Triple, ResourceManagerState);
+extern void Events_DeliverContactEffect(void *, void *, s32, s32, Triple, ResourceManagerState);
 
 s32 StaticInstance_UpdateDistanceFade(void *prop, s32 arg1) {
     OwnerStaticInstanceDrawDistanceFadedModel *owner = prop;
@@ -84,7 +84,7 @@ s32 StaticInstance_UpdateDistanceFade(void *prop, s32 arg1) {
     u8 next_timer;
     DescriptorRecAt24 *descriptor;
 
-    Particle_SubtractVectors(&sp10, &camera->position,
+    GraphU64_SubtractVectors(&sp10, &camera->position,
                   &owner->position);
     temp_f0 = sp10.x * sp10.x + sp10.y * sp10.y + sp10.z * sp10.z;
     threshold = D_800C3E50_de[0];
@@ -173,12 +173,12 @@ void StaticInstance_DrawDistanceFadedModel(OwnerStaticInstanceDrawDistanceFadedM
         }
         D_800D15E4[3] = alpha;
     }
-    instance = Instance_AcquireGeometry(owner, key);
+    instance = StaticInstance_AcquireGeometry(owner, key);
     if (instance != 0) {
         resource = func_80251F6C_de(0, owner->flagsD0 | D_800CD3F0, instance, (CachedResource *)owner->field20, 8, owner, &D_00250C2C,
                                  D_800C3E40_de, 0);
         if (resource != 0) {
-            Scene_MarkResourceInUse(0, resource);
+            Cache_MarkResourceInUse(0, resource);
             header = (s32 *)resource->data;
             if (header[0] == 1) {
                 char *object = (char *)header + header[1];
@@ -194,18 +194,18 @@ void StaticInstance_DrawDistanceFadedModel(OwnerStaticInstanceDrawDistanceFadedM
             if (D_800D15E0 != 0) {
                 func_8026DA4C_de(instance, owner->transform, 0, 0, data, remaining);
             } else {
-                Render_QueueModelInstance(instance, owner->transform, 0, 0, data, remaining);
+                Geometry_QueueModelInstance(instance, owner->transform, 0, 0, data, remaining);
             }
-            Scene_UnlockResource(0, resource);
+            Cache_UnlockResource(0, resource);
         }
-        Scene_UnlockResource(0, instance);
+        Cache_UnlockResource(0, instance);
         owner->colorFrame = (u8)D_800D2978;
     }
     D_800D15E0 = 0;
     D_800D15E4[3] = D_800C3E58_de;
 }
 
-void Instance_DrawModel(ModelOwner *owner) {
+void StaticInstance_DrawModel(ModelOwner *owner) {
     s32 remaining;
     void *instance;
     CachedResource *resource;
@@ -216,14 +216,14 @@ void Instance_DrawModel(ModelOwner *owner) {
         return;
     }
     remaining = owner->descriptor->argument;
-    instance = Instance_AcquireGeometry(owner, owner->descriptor->key);
+    instance = StaticInstance_AcquireGeometry(owner, owner->descriptor->key);
     if (instance == 0) {
         return;
     }
     resource = func_80251F6C_de(0, owner->flagsD0 | D_800CD3F0, instance, (CachedResource *)owner->field20, 8, owner, &D_00250C2C,
                              D_800C3E40_de, 0);
     if (resource != 0) {
-        Scene_MarkResourceInUse(0, resource);
+        Cache_MarkResourceInUse(0, resource);
         header = (s32 *)resource->data;
         if (header[0] == 1) {
             char *object = (char *)header + header[1];
@@ -239,11 +239,11 @@ void Instance_DrawModel(ModelOwner *owner) {
         if (D_800D15E0 != 0) {
             func_8026DA4C_de(instance, owner->transform, 0, 0, data, remaining);
         } else {
-            Render_QueueModelInstance(instance, owner->transform, 0, 0, data, remaining);
+            Geometry_QueueModelInstance(instance, owner->transform, 0, 0, data, remaining);
         }
-        Scene_UnlockResource(0, resource);
+        Cache_UnlockResource(0, resource);
     }
-    Scene_UnlockResource(0, instance);
+    Cache_UnlockResource(0, instance);
     owner->colorFrame = (u8)D_800D2978;
 }
 
@@ -259,22 +259,22 @@ void StaticInstance_DispatchAttachmentEvents(void *object, s32 all) {
     s32 count;
     s32 i;
 
-    model = Scene_RequestResource(0, ((PlacedProp *)object)->owner, ((PlacedProp *)object)->owner, 0x18, 4, 0, 0,
+    model = Cache_RequestResource(0, ((PlacedProp *)object)->owner, ((PlacedProp *)object)->owner, 0x18, 4, 0, 0,
                           &g_statObjectIndexText, 0);
     if (model == 0) {
         return;
     }
-    name = Render_LocatePackSection(*model, ((PlacedProp *)object)->owner, 3, &size);
+    name = SetN64_LocatePackSection(*model, ((PlacedProp *)object)->owner, 3, &size);
 #if defined(VERSION_DE)
-    table = Scene_RequestResource(0, name, name, size, 0, 0, 0, D_800C3E70, 0);
+    table = Cache_RequestResource(0, name, name, size, 0, 0, 0, D_800C3E70, 0);
 #elif defined(VERSION_EU)
-    table = Scene_RequestResource(0, name, name, size, 0, 0, 0, D_800C4120, 0);
+    table = Cache_RequestResource(0, name, name, size, 0, 0, 0, D_800C4120, 0);
 #elif defined(VERSION_EU_X)
-    table = Scene_RequestResource(0, name, name, size, 0, 0, 0, D_800C4160, 0);
+    table = Cache_RequestResource(0, name, name, size, 0, 0, 0, D_800C4160, 0);
 #elif defined(VERSION_US)
-    table = Scene_RequestResource(0, name, name, size, 0, 0, 0, D_800C3DA0, 0);
+    table = Cache_RequestResource(0, name, name, size, 0, 0, 0, D_800C3DA0, 0);
 #else
-    table = Scene_RequestResource(0, name, name, size, 0, 0, 0, D_800C8F60, 0);
+    table = Cache_RequestResource(0, name, name, size, 0, 0, 0, D_800C8F60, 0);
 #endif
     if (table != 0) {
         header = *table;
@@ -283,11 +283,11 @@ void StaticInstance_DispatchAttachmentEvents(void *object, s32 all) {
         for (i = 0; i < count; i++) {
             attachment = &entries[i];
             if (all != 0 || attachment->type == 8) {
-                Particle_TransformPoint(((PlacedProp *)object)->matrix, &attachment->offset, &position);
-                System_DeliverContactEffect(object, object, attachment->type, -1, position, attachment->params);
+                GraphU64_TransformPoint(((PlacedProp *)object)->matrix, &attachment->offset, &position);
+                Events_DeliverContactEffect(object, object, attachment->type, -1, position, attachment->params);
             }
         }
-        Scene_UnlockResource(0, table);
+        Cache_UnlockResource(0, table);
     }
-    Scene_UnlockResource(0, model);
+    Cache_UnlockResource(0, model);
 }

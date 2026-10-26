@@ -16,13 +16,13 @@ s32 func_8041DFC0_us(void *arg0) {
     MenuWidget *item;
     s32 row;
 
-    { void *memory = Scene_AllocateMemory(0x20); D_800E39C0 = memory; }
+    { void *memory = Cache_AllocateMemory(0x20); D_800E39C0 = memory; }
     D_800E39C0->handle = arg0;
-    D_800E39C0->mode = Menu_CreateOverlayNode((s32) arg0, 4);
-    Menu_ShowSlotById((s32) arg0, 0, 0x389);
-    Menu_ShowSlotById((s32) arg0, 1, 0x389);
-    Menu_ShowSlotById((s32) arg0, 2, 0x389);
-    Menu_ShowSlotById((s32) arg0, 3, 0x389);
+    D_800E39C0->mode = SmpOverlay_CreateOverlayNode((s32) arg0, 4);
+    SmpOverlay_ShowSlotById((s32) arg0, 0, 0x389);
+    SmpOverlay_ShowSlotById((s32) arg0, 1, 0x389);
+    SmpOverlay_ShowSlotById((s32) arg0, 2, 0x389);
+    SmpOverlay_ShowSlotById((s32) arg0, 3, 0x389);
 
     item = func_8040EC30_de(arg0, 0x38B);
     item->alpha = 0x8C;
@@ -60,7 +60,7 @@ extern struct TextEntry D_800E381C[][17];
 extern void MarkMenuEventHandled(void);
 extern s32 func_802999A0_de(s32);
 extern s32 func_8041EC44_de(s32, s32);
-extern void Resmgr_CopyString(char *, char *);
+extern void XPlus_CopyString(char *, char *);
 extern void func_8041E408_de(s32);
 
 s32 func_8041E170_us(void *sender, void *context, void *argument, s32 event) {
@@ -84,11 +84,11 @@ s32 func_8041E170_us(void *sender, void *context, void *argument, s32 event) {
     } while (id == -1);
     D_80153F80[D_800E39C0->selection].variant = variant;
     D_80153F80[D_800E39C0->selection].id = id;
-    Resmgr_CopyString(D_80153F80[D_800E39C0->selection].name,
+    XPlus_CopyString(D_80153F80[D_800E39C0->selection].name,
                     *D_800E381C[variant][id].text);
     D_80153F80[D_800E39C0->selection].variantC = variant;
     func_8041E408_de(D_800E39C0->selection);
-    Render_PlayFlatSound(0xE81);
+    SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
 #endif
@@ -179,7 +179,7 @@ void func_8041E2F0_us(void) {
         "lw         $a1, 0x0($v0)\n"
         "lui        $v0, %hi(D_8014DD00)\n"
         "addiu      $v0, $v0, %lo(D_8014DD00)\n"
-        "jal        Resmgr_CopyString\n"
+        "jal        XPlus_CopyString\n"
         "addu      $a0, $a0, $v0\n"
         "lui        $a0, %hi(D_800E39C0)\n"
         "lw         $a0, %lo(D_800E39C0)($a0)\n"
@@ -193,7 +193,7 @@ void func_8041E2F0_us(void) {
         "lw         $a0, 0x14($a0)\n"
         "jal        func_8041E408_de\n"
         "nop\n"
-        "jal        Render_PlayFlatSound\n"
+        "jal        SoundElement_PlayFlatSound\n"
         "addiu     $a0, $zero, 0xE81\n"
         ".Lauto_8041E464:\n"
         "addu       $v0, $zero, $zero\n"

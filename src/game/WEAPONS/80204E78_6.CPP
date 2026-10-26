@@ -24,9 +24,9 @@
 /* Dispatch configured object, particle, or weighted-choice spawns and update the owner count. */
 
 
-extern f32 Anim_GetPolygonHeight(Node75 *node, f32 x, f32 z);
+extern f32 Region_GetPolygonHeight(Node75 *node, f32 x, f32 z);
 
-extern void *Engine_GetActorDefinition(void *arg0, s32 arg1);
+extern void *Scene_GetActorDefinition(void *arg0, s32 arg1);
 
 extern int func_8028B25C_de(void *arg0, int arg1);
 
@@ -190,7 +190,7 @@ static __inline__ void spawnGroup(SpawnDispatchObject *object, SpawnDispatchOwne
 
 
 
-extern s32 Render_TestActorStateBit(void *, void *);
+extern s32 Rumble_TestActorStateBit(void *, void *);
 
 /* Retained ROM words preceding this unit's generated jump table. */
 #if defined(VERSION_EU)
@@ -219,14 +219,14 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
     position = object->position;
     world = object->world;
     if (world) {
-        height = Anim_GetPolygonHeight(world, object->position.x, object->position.z);
+        height = Region_GetPolygonHeight(world, object->position.x, object->position.z);
         if (position.y < height) {
             position.y = height;
         }
     }
     switch (definition->kind) {
     case 0:
-        entry = Engine_GetActorDefinition(&g_world, definition->selector);
+        entry = Scene_GetActorDefinition(&g_world, definition->selector);
         switch (*entry) {
         case 8:
             id = func_8028B25C_de(&g_world, definition->id);
@@ -343,7 +343,7 @@ void func_80205F18_de(Actor_func_80205F18_de *actor, Action *action) {
         actor->flags &= ~0x100;
         return;
     }
-    action->delay = Nav_RandomBetween(D_800C1AC8_de, D_800C1ACC_de);
+    action->delay = GraphU64_RandomBetween(D_800C1AC8_de, D_800C1ACC_de);
     action->timer = 0;
     action->duration = info->duration;
     if (actor->model == 0x644 || (info->flags & 8)) actor->flags &= ~0x2000;
@@ -356,7 +356,7 @@ void func_80206018_de(void *actor, EventRecAt30 *callbackRecord) {
     CallbackHolder *holder;
     s32 different;
 
-    different = Render_TestActorStateBit(&g_world, actor) != 1;
+    different = Rumble_TestActorStateBit(&g_world, actor) != 1;
     if (different == 0) {
         holder = callbackRecord->holder;
         if ((holder != 0) && (holder->callback != 0)) {

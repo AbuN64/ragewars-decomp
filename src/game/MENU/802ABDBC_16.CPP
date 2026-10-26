@@ -14,7 +14,7 @@
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 
-extern void Weapons_AddAmmo(void *, s16, s16);
+extern void Player_AddAmmo(void *, s16, s16);
 
 
 
@@ -25,15 +25,15 @@ s32 func_802ACFB0_de(Actor_func_802AB400_de *arg0, MultiChannelItemEffect *arg1)
     s32 sound;
     s32 callback;
 
-    Weapons_AddAmmo(arg0, 0, arg1->effect.index);
-    Weapons_AddAmmo(arg0, 1, arg1->effect.argument);
-    Weapons_AddAmmo(arg0, 2, arg1->third);
+    Player_AddAmmo(arg0, 0, arg1->effect.index);
+    Player_AddAmmo(arg0, 1, arg1->effect.argument);
+    Player_AddAmmo(arg0, 2, arg1->third);
 
     resource = arg1->effect.resource;
     sound = arg1->effect.sound;
     callback = arg1->effect.callback;
     if (arg0->owner != 0) {
-        Camera_StartFade(arg0->owner,
+        Sky_StartFade(arg0->owner,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&D_80145088,
@@ -46,7 +46,7 @@ s32 func_802ACFB0_de(Actor_func_802AB400_de *arg0, MultiChannelItemEffect *arg1)
         }
     }
     if (sound != 0) {
-        Render_PlaySoundAtPosition(sound,
+        SoundElement_PlaySoundAtPosition(sound,
                       arg0->position, 0, -1);
     }
     if (callback != 0) {
@@ -77,7 +77,7 @@ void *func_802AD0B0_de(s32 arg0) {
 /** Apply optional resource, sound, and callback effects for an actor. */
 void func_802AD0E4_de(void *arg0, void *resource, s32 sound, s32 callback) {
     if (((Shared_ActorView *)arg0)->message != 0) {
-        Camera_StartFade(((Shared_ActorView *)arg0)->message,
+        Sky_StartFade(((Shared_ActorView *)arg0)->message,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&D_80145088,
@@ -90,7 +90,7 @@ void func_802AD0E4_de(void *arg0, void *resource, s32 sound, s32 callback) {
         }
     }
     if (sound != 0) {
-        Render_PlaySoundAtPosition((s16)sound,
+        SoundElement_PlaySoundAtPosition((s16)sound,
                       ((LevelActor *)arg0)->position0, 0, -1);
     }
     if (callback != 0) {
@@ -109,14 +109,14 @@ s32 func_802AD1B4_de(Shared_ActorView *arg0) {
     if (arg0->message != 0) {
         input = D_800C62E0;
         ((Racer *)arg0->message)->pad124 = 0;
-        value = Nav_RandomFloat(input);
+        value = GraphU64_RandomFloat(input);
         threshold = (&D_800C62E0)[1];
         if (!(threshold <= value)) {
             converted = (s32)value;
         } else {
             converted = (s32)(value - threshold) | 0x80000000;
         }
-        Camera_StartFade(arg0->message, 0xFF, 0xFF, 0xFF,
+        Sky_StartFade(arg0->message, 0xFF, 0xFF, 0xFF,
                       0xFF, (u8)converted, 1, 0);
     }
     return 1;

@@ -19,7 +19,7 @@ f32 func_802417C4_de(f32 *contactRecord) {
     if (magnitude == zero) {
         return zero;
     }
-    result = Nav_ArcCos(contactRecord[20] / magnitude);
+    result = GraphU64_ArcCos(contactRecord[20] / magnitude);
     if (!(zero < contactRecord[18])) {
         result = -result;
     }

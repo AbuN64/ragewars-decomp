@@ -15,7 +15,7 @@
 /* Runs a player's weapon menu each frame: the menu button (0x8000 of the controller at 0x698) counts
    only while func_8022C460_de allows and the controller is not paused through D_801468F4, which instead
    closes the menu (state 3), as does holding the button while the value at 0x4 is positive; from a
-   closed state holding it clears the pending weapon at 0xCC0, rebuilds the menu through Team_InitWeaponChoices
+   closed state holding it clears the pending weapon at 0xCC0, rebuilds the menu through TeamSelect_InitWeaponChoices
    and opens it, while releasing it with a weapon pending outside category 8 rebuilds it and marks it
    open; with no category the slot under the cursor from func_80217B3C_de, when it changes, plays sound
    0xD4D for an unowned weapon, forgets an empty slot, moves the cursor at 0x37C and requests the
@@ -55,13 +55,13 @@ void func_80217D74_de(s32 *menu, void *player, s32 unused2) {
     if (menu[0] == 0 || menu[0] == 3) {
         if (!held) {
             if (((ObjectLinks11B8 *)(player))->unk_CC0 != -1 && menu[0x388 / 4] != 8) {
-                Team_InitWeaponChoices((CBarrel *)menu, 0, player);
+                TeamSelect_InitWeaponChoices((CBarrel *)menu, 0, player);
                 menu[0] = 1;
             }
             return;
         }
         ((ObjectLinks11B8 *)(player))->unk_CC0 = -1;
-        Team_InitWeaponChoices((CBarrel *)menu, held, player);
+        TeamSelect_InitWeaponChoices((CBarrel *)menu, held, player);
         ((ObjectLinks11B8 *)(player))->unk_11B4 = 1;
         menu[0] = 1;
     }
@@ -77,7 +77,7 @@ void func_80217D74_de(s32 *menu, void *player, s32 unused2) {
         entry = (Entry34 *)&((Block24 *)menu)[slot];
         weapon = entry->weapon;
         if (entry->owned == 0) {
-            Render_PlayFlatSound(0xD4D);
+            SoundElement_PlayFlatSound(0xD4D);
             return;
         }
         if (weapon < 0) {
@@ -122,12 +122,12 @@ typedef struct DraftState17F4C {
 s32 func_8021846C_de(void *, void *);
 s16 Weapons_NextAvailableWeapon(void *);
 s32 func_80285974_de(s32, s32);
-void Team_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *player, s32 arg2)
+void TeamSelect_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *player, s32 arg2)
 {
     if ((u32)(player->type - 17) < 2) return;
     if (player->blocked) return;
     if (player->delay > 0.0f) return;
-    if (Camera_IsSequenceActive()) return;
+    if (Cinema_IsSequenceActive()) return;
     state->mode = player->config->mode == 1;
     if (player->type == 14) {
         if (!player->enabled) return;
@@ -183,7 +183,7 @@ extern s32 World_PlayerHasAmmoForWeapon(void *player, s32 weapon);
    allows that slot (-1 every slot, 3, 7 or 4 only that slot, else that slot and the next), with its D_800D052C
    record, whether the player has ammo for it and a rotation of 45 degrees per slot, and m_Selected lands on the
    current weapon; any other slot is empty (-1). */
-void Team_InitWeaponChoices(CBarrel *barrel, s32 buttonAWheel, TeamWeaponPlayer *player) {
+void TeamSelect_InitWeaponChoices(CBarrel *barrel, s32 buttonAWheel, TeamWeaponPlayer *player) {
     s32 choice;
     s32 weapon;
     s32 displaySlot;

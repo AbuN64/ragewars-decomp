@@ -7,7 +7,7 @@
 #include "MATH/math_stream_lifecycle.H"
 #include "SCENE/802508E0_13.H"
 struct Record;
-extern struct Record *Scene_AllocateMemory(s32 size);
+extern struct Record *Cache_AllocateMemory(s32 size);
 
 
 s32 func_80253908_de(s32);
@@ -22,13 +22,13 @@ void StreamBufferRead(StreamBuffer *arg0, void *arg1, s32 arg2)
   new_var2 = arg0->data;
   new_var2 = new_var2 + arg0->readPosition;
   new_var = new_var2;
-  Resmgr_CopyBytes(arg1, new_var, arg2);
+  XPlus_CopyBytes(arg1, new_var, arg2);
   arg0->readPosition = arg0->readPosition + arg2;
 }
 
 void StreamBufferAllocate(StreamBuffer *streamBuffer, s32 arg1) {
     if (streamBuffer->data == 0) {
-        void *allocation = Scene_AllocateMemory(arg1);
+        void *allocation = Cache_AllocateMemory(arg1);
         streamBuffer->data = allocation;
         streamBuffer->writePosition = 0;
         streamBuffer->capacity = arg1;
@@ -39,7 +39,7 @@ void StreamBufferFree(StreamBuffer *streamBuffer) {
     void *temp_a0;
     temp_a0 = streamBuffer->data;
     if (temp_a0 != 0) {
-        Scene_FreeMemory(temp_a0);
+        Cache_FreeMemory(temp_a0);
         streamBuffer->data = 0;
     }
     streamBuffer->writePosition = 0;

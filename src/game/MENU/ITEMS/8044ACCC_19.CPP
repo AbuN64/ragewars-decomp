@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "RESMGR/802A0888.H"
 
-/* Resets a 0x1208-byte actor: clears it through Resmgr_FillMemory, initialises its three lists at 0xC,
+/* Resets a 0x1208-byte actor: clears it through XPlus_FillMemory, initialises its three lists at 0xC,
    0x20 and 0xF24 through func_80255CA0_de, sets its words at 0x1200 and 0x38 to 1 and 2, clears those at
    0 to 8 and 0xF18 to 0xF20, and resets the parts at offset 0x40 through func_8044A170_de and
    Camera_UpdateViewProjectionAndEffects. */
@@ -23,7 +23,7 @@ extern void Items_InitEntryPool(char *);
 void Items_ResetPlayers(func_8044B27C_S1 *actor) {
     char *parts;
 
-    Resmgr_FillMemory(actor, 0, 0x1208);
+    XPlus_FillMemory(actor, 0, 0x1208);
     func_80255CA0_de(&actor->unkC, 0, 4);
     func_80255CA0_de(&actor->unk20, 0, 4);
     func_80255CA0_de(&actor->unkF24, 0, 4);

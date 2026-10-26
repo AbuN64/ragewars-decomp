@@ -17,7 +17,7 @@
 extern s32 Pak_ReadNoteInfo(s32 ch, s32 index, s32 *exists, char *gameName, u8 *ext, s32 *size,
                          char *companyCode, char *gameCode);
 
-s32 Ovlgame_FindFreeNoteExtension(s32 ch, u8 *ext) {
+s32 Pak_FindFreeNoteExtension(s32 ch, u8 *ext) {
     char companyCode[8];
     char gameCode[8];
     char gameName[16];
@@ -166,13 +166,13 @@ s32 func_804057BC_de(u8 *text, s32 count) {
 
 /* Rounds a byte count up to whole 256-byte units; func_80435384_de passes it the 0x648-byte size
    that func_80435424_de returns. */
-u32 Ovlgame_BytesToPakPages(u32 bytes) {
+u32 Pak_BytesToPakPages(u32 bytes) {
     return (bytes + 0xFF) >> 8;
 }
 
 /* Computes the CRC-32 with polynomial 0xEDB88320 of arg1 bytes at arg0, continuing from the running value arg2, from a 256-entry table built on the stack. Adapted from func_802A08B8_de. */
 
-u32 Ovlgame_Crc32(u8 *arg0, u32 arg1, u32 arg2) {
+u32 Pak_Crc32(u8 *arg0, u32 arg1, u32 arg2) {
     u32 table[256];
     u32 i;
     u32 j;
@@ -214,9 +214,9 @@ s32 func_804058A0_de(void) {
 #include "COMMON/DISPLAY.H"
 #include "COMMON/SHAREDPLAYER.H"
 typedef struct Shape_typemap_165 Handle;
-extern void Scene_ReleaseResource(void *heap, Handle *handle);
-extern u32 System_GetMemorySize(void);
-extern Handle *Scene_AllocateResourceAt(void *heap, u32 address, u32 size, char *name);
+extern void Cache_ReleaseResource(void *heap, Handle *handle);
+extern u32 Defs_GetMemorySize(void);
+extern Handle *Cache_AllocateResourceAt(void *heap, u32 address, u32 size, char *name);
 extern char s_bufferText[9];  /* "Z-Buffer" */
 extern char s_displayBufferText[15];    /* "Display Buffer" */
 extern char D_800DCD1C[31];    /* "color frame buffers + z buffer" */
@@ -228,7 +228,7 @@ extern char s_audioHeapText[11];    /* "audio heap" */
    the expansion pak gives 6 MB or more; otherwise the count in D_800DE850 plus one 0x1ECC0-byte buffer,
    the extra one holding the z-buffer, below 4 MB), clears them, allocates the display lists, the RSP fifo
    and the audio heap, publishes their addresses in the render globals and marks the record ready. */
-int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
+int Pak_AllocateRenderBuffers(struct RecordRecAt1C *record) {
     u32 megabyte = 0x100000;
     u32 bufferBytes;
     u32 memoryEnd;
@@ -240,20 +240,20 @@ int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
     s32 k;
 
     if (record->displayLists != NULL) {
-        Scene_ReleaseResource(NULL, record->displayLists);
+        Cache_ReleaseResource(NULL, record->displayLists);
     }
     if (record->fifo != NULL) {
-        Scene_ReleaseResource(NULL, record->fifo);
+        Cache_ReleaseResource(NULL, record->fifo);
     }
     if (record->zBuffer != NULL) {
-        Scene_ReleaseResource(NULL, record->zBuffer);
+        Cache_ReleaseResource(NULL, record->zBuffer);
     }
     if (record->audioHeap != NULL) {
-        Scene_ReleaseResource(NULL, record->audioHeap);
+        Cache_ReleaseResource(NULL, record->audioHeap);
     }
     for (j = 0; j < 3; j++) {
         if (record->frameBuffers[j] != NULL) {
-            Scene_ReleaseResource(NULL, record->frameBuffers[j]);
+            Cache_ReleaseResource(NULL, record->frameBuffers[j]);
         }
     }
     record->ready = 0;
@@ -265,15 +265,15 @@ int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
         record->frameBuffers[k] = NULL;
     }
 
-    if (System_GetMemorySize() >= 6 * megabyte) {
+    if (Defs_GetMemorySize() >= 6 * megabyte) {
         bufferBytes = 0x54600;
-        memoryEnd = System_GetMemorySize() | 0x80000000;
+        memoryEnd = Defs_GetMemorySize() | 0x80000000;
         D_800DE850 = 3;
-        zBuffer = Scene_AllocateResourceAt(NULL, memoryEnd - megabyte, 0x54600, s_bufferText);
-        frameBuffers = Scene_AllocateResourceAt(NULL, memoryEnd - 2 * megabyte, D_800DE850 * bufferBytes,
+        zBuffer = Cache_AllocateResourceAt(NULL, memoryEnd - megabyte, 0x54600, s_bufferText);
+        frameBuffers = Cache_AllocateResourceAt(NULL, memoryEnd - 2 * megabyte, D_800DE850 * bufferBytes,
                                                 s_displayBufferText);
-        Resmgr_FillMemory(frameBuffers->data, 0, 0xFD200);
-        Resmgr_FillMemory(zBuffer->data, 0, 0x54600);
+        XPlus_FillMemory(frameBuffers->data, 0, 0xFD200);
+        XPlus_FillMemory(zBuffer->data, 0, 0x54600);
         record->zBuffer = zBuffer;
         record->frameBuffers[0] = frameBuffers;
         D_801536E8 = record->zBuffer->data;
@@ -283,7 +283,7 @@ int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
     } else {
         bufferBytes = 0x1ECC0;
         memoryEnd = 0x80400000;
-        buffers = Scene_AllocateResourceAt(NULL, memoryEnd - (D_800DE850 + 1) * bufferBytes,
+        buffers = Cache_AllocateResourceAt(NULL, memoryEnd - (D_800DE850 + 1) * bufferBytes,
                                            (D_800DE850 + 1) * bufferBytes, D_800DCD1C);
         record->frameBuffers[0] = buffers;
         for (i = 0; i < D_800DE850; i++) {
@@ -292,13 +292,13 @@ int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
         D_801536E8 = (u8 *)buffers->data + bufferBytes * i;
     }
     for (i = 0; i < D_800DE850; i++) {
-        Resmgr_FillMemory(D_8014D468_de[i], 0, bufferBytes);
+        XPlus_FillMemory(D_8014D468_de[i], 0, bufferBytes);
     }
-    Resmgr_FillMemory(D_801536E8, 0, bufferBytes);
+    XPlus_FillMemory(D_801536E8, 0, bufferBytes);
 
-    record->displayLists = Scene_AllocateResource(0, (D_800E28A4 + D_800DE858) * 2 * sizeof(Gfx), 0x23, s_displayListsText);
-    record->fifo = Scene_AllocateResource(0, 0x8000, 0x23, s_fifoText);
-    record->audioHeap = Scene_AllocateResource(0, 0x22000, 0x23, s_audioHeapText);
+    record->displayLists = Cache_AllocateResource(0, (D_800E28A4 + D_800DE858) * 2 * sizeof(Gfx), 0x23, s_displayListsText);
+    record->fifo = Cache_AllocateResource(0, 0x8000, 0x23, s_fifoText);
+    record->audioHeap = Cache_AllocateResource(0, 0x22000, 0x23, s_audioHeapText);
     D_8014D424 = 0x8000;
     D_8014D45C = 0x22000;
     D_8014D460 = record->displayLists->data;

@@ -10,17 +10,17 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/SCENERECAT10C0.H"
 #include "COMMON/ACTOR_DEFINITION.H"
-extern void *Render_GetDirectoryEntry(void *, void *, s32);
-extern void *Render_LocatePackSection(void *, void *, s32, s32 *);
-extern void *Engine_GetActorDefinition(void *, u16);
-extern void Instance_LoadModel(void *, void *, void *, s32);
+extern void *SetN64_GetDirectoryEntry(void *, void *, s32);
+extern void *SetN64_LocatePackSection(void *, void *, s32, s32 *);
+extern void *Scene_GetActorDefinition(void *, u16);
+extern void GameObject_LoadModel(void *, void *, void *, s32);
 typedef struct FrontendModelHeader {
     u8 prefix[0x1C];
     u16 definitionIndex;
 } FrontendModelHeader;
 /* Scans the world's preview model id table for entries equal to id. For each one it loads the model's index and info
  * resources; when the model's actor definition has the expected character and the preview's kind, it binds model i to
- * the preview (Instance_LoadModel with extra) and stops. */
+ * the preview (GameObject_LoadModel with extra) and stops. */
 void Frontend_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected) {
     Obj8041CAD8At190 *previewState = &preview->sub190;
     Shared_World *scene = &g_world;
@@ -40,22 +40,22 @@ void Frontend_SelectMatchingPreviewModel(Obj8041CAD8 *preview, s32 id, s32 extra
         Shared_World *world = &g_world;
 
         if (entries[i] == id) {
-            modelName = Render_GetDirectoryEntry(world->indexedDirectory, (void *)world->indexedBank, i);
-            indexResource = Scene_RequestResource(0, (u32)modelName, (u32)modelName, 0x18, 0, 0, 0, "anim object index", 1);
+            modelName = SetN64_GetDirectoryEntry(world->indexedDirectory, (void *)world->indexedBank, i);
+            indexResource = Cache_RequestResource(0, (u32)modelName, (u32)modelName, 0x18, 0, 0, 0, "anim object index", 1);
             if (indexResource != 0) {
-                modelData = Render_LocatePackSection(*indexResource, modelName, 0, &modelSize);
-                modelResource = Scene_RequestResource(0, (u32)modelData, (u32)modelData, modelSize, 0, 0, 0, "anim object info", 1);
+                modelData = SetN64_LocatePackSection(*indexResource, modelName, 0, &modelSize);
+                modelResource = Cache_RequestResource(0, (u32)modelData, (u32)modelData, modelSize, 0, 0, 0, "anim object info", 1);
                 if (modelResource != 0) {
-                    definition = Engine_GetActorDefinition(world, ((FrontendModelHeader *)Render_GetPackSection(*modelResource, 0))->definitionIndex);
+                    definition = Scene_GetActorDefinition(world, ((FrontendModelHeader *)SetN64_GetPackSection(*modelResource, 0))->definitionIndex);
                     if (definition->character == expected && definition->kind == preview->unk0) {
                         previewState->modelIndex = i;
                         previewState->type = id;
-                        Instance_LoadModel(previewState, world->indexedDirectory, (void *)world->indexedBank, extra);
+                        GameObject_LoadModel(previewState, world->indexedDirectory, (void *)world->indexedBank, extra);
                         found = 1;
                     }
-                    Scene_UnlockResource(0, (struct Node80253610 *)modelResource);
+                    Cache_UnlockResource(0, (struct Node80253610 *)modelResource);
                 }
-                Scene_UnlockResource(0, (struct Node80253610 *)indexResource);
+                Cache_UnlockResource(0, (struct Node80253610 *)indexResource);
             }
         }
     }
@@ -131,7 +131,7 @@ void Frontend_DrawModelPreview(Obj8041CAD8 *self) {
             gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);
         }
         local10 = self->unk48C;
-        Particle_TransformPoint(&view->camera, &local10, &local20);
+        GraphU64_TransformPoint(&view->camera, &local10, &local20);
         if (func_8025477C_de() == 0) {
             func_8025476C_de(1);
         }
@@ -155,11 +155,11 @@ void Frontend_DrawModelPreview(Obj8041CAD8 *self) {
         draw->unk6C = self->unk498 * 0.017453294f;
         draw->unk8 = local20;
         draw->unk1C4 = local20;
-        Render_BeginModelBatch();
+        Geometry_BeginModelBatch();
         func_80249E28_de(draw, view);
         draw->unk140 = D_800DF520;
         draw->unk158 = D_800DF520;
-        Render_FlushModelBatch();
+        Geometry_FlushModelBatch();
         D_800CC380 = saved;
     }
 }
@@ -183,7 +183,7 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 modelKind, s32 ar
     Gfx *g;
     f32 ratio;
     Ret8028CFA0 *source;
-    Resmgr_FillMemory(&local60, 0, sizeof(local60));
+    XPlus_FillMemory(&local60, 0, sizeof(local60));
     g = g_displayListCursor++;
     view = D_80141008;
     gSPMatrix(g, &view->matrices[D_800D297C], G_MTX_LOAD | G_MTX_PROJECTION);
@@ -213,7 +213,7 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 modelKind, s32 ar
     scales.y = self->unk480.y * (view->height / (f32)D_800E28D4);
     draw->unk50 = scales;
     local70 = self->unk48C;
-    Particle_TransformPoint(&view->camera, &local70, &local80);
+    GraphU64_TransformPoint(&view->camera, &local70, &local80);
     func_802466A0_de(draw, -1, arg3, D_800CD8D0, &self->copy4, -1, 0, self->unk498 * 0.017453294f, local80, 0,
                      self->unk480, local60, 0);
     func_8024B2D0_de(draw);

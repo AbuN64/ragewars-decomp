@@ -36,7 +36,7 @@ extern char D_801011B8[];
 
 extern void Virtual_AppendPageChainNode(Field_void_4 *base, SlotVirtualInitializePagerEuroExtended *slot);
 extern void func_8025637C_de(void *dst, void *rom, void *size, u32 extra);
-extern u32 System_GetMemorySize(void);
+extern u32 Defs_GetMemorySize(void);
 extern void func_802AD370_de(s32 arg0, s32 arg1, s32 arg2, u32 addr, s32 arg4, s32 arg5);
 extern void osCreateThread(void *queue, s32 count, void *arg2, s32 arg3, void *data, s32 arg5);
 extern void osSetEventMesg(s32 count, void *list, s16 *arg2);
@@ -55,7 +55,7 @@ void Virtual_InitializePagerEuroExtended(void) {
     u32 extra;
     u32 i;
 
-    extra = System_GetMemorySize() + 0x80000000;
+    extra = Defs_GetMemorySize() + 0x80000000;
     if (extra <= 0x80400000) {
         extra = 0;
     }
@@ -85,7 +85,7 @@ void Virtual_InitializePagerEuroExtended(void) {
     D_800FF230.regions.next = 0;
     D_800FF230.regions.source = (u8 (*)[4096])((u32) D_176000 | 0xB0000000);
     D_800FF230.fD72 = 0;
-    if (System_GetMemorySize() > 0x4FFFFF) {
+    if (Defs_GetMemorySize() > 0x4FFFFF) {
         func_8025637C_de(D_801011B8, D_176000, D_52BF0, extra);
     }
     if (extra != 0) {
@@ -98,7 +98,7 @@ void Virtual_InitializePagerEuroExtended(void) {
     }
     D_800FF230.f20 = 0;
     osSetEventMesg(0xC, &D_800FF230.completion, &D_800FF230.f20);
-    Resmgr_FillMemory(D_800FF230.pool, 0x63, 0x200);
+    XPlus_FillMemory(D_800FF230.pool, 0x63, 0x200);
     osCreateThread(D_800FF230.queue, 0x63, D_0023C934, 0, D_800FF230.queueData, 0x93);
     osStartThread(D_800FF230.queue);
 }
@@ -120,7 +120,7 @@ void Virtual_InitializePagerGerman(void) {
         "sw         $s3, 0x24($sp)\n"
         "sw         $s2, 0x20($sp)\n"
         "sw         $s1, 0x1C($sp)\n"
-        "jal        System_GetMemorySize\n"
+        "jal        Defs_GetMemorySize\n"
         "sw        $s0, 0x18($sp)\n"
         "lui        $v1, (0x80000000 >> 16)\n"
         "addu       $s4, $v0, $v1\n"
@@ -228,7 +228,7 @@ void Virtual_InitializePagerGerman(void) {
         "or         $v0, $s2, $v0\n"
         "sw         $zero, 0xD34($s1)\n"
         "sw         $v0, 0xD3C($s1)\n"
-        "jal        System_GetMemorySize\n"
+        "jal        Defs_GetMemorySize\n"
         "sh        $zero, 0xD4E($s1)\n"
         "lui        $v1, (0x4FFFFF >> 16)\n"
         "ori        $v1, $v1, (0x4FFFFF & 0xFFFF)\n"
@@ -277,7 +277,7 @@ void Virtual_InitializePagerGerman(void) {
         "sh        $zero, -0xA80($s2)\n"
         "addiu      $a0, $s2, -0x7B0\n"
         "addiu      $a1, $zero, 0x63\n"
-        "jal        Resmgr_FillMemory\n"
+        "jal        XPlus_FillMemory\n"
         "addiu     $a2, $zero, 0x200\n"
         "addiu      $s0, $s2, -0x9E0\n"
         "addu       $a0, $s0, $zero\n"

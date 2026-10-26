@@ -105,7 +105,7 @@ extern s32 Libsn_ReadPortWord(s32 address);
 /* Copy the block the debugger host announced (address at 0xB1FFFFF4, byte size at 0xB1FFFFF8) from its
  * 0xB1xxxxxx window onto the matching 0xB0xxxxxx address one word at a time, once the host signals ready at
  * 0xB0000010; the word index doubles as the ready poll result. */
-void Io_CopyHostBlockToCart(void) {
+void Libsn_CopyHostBlockToCart(void) {
     u32 address;
     u32 size;
     u32 index;

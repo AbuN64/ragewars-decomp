@@ -16,7 +16,7 @@
 #include "LISTS/80279520.H"
 
 /* Detaches an entity from linked effects while preserving their transforms and lifetimes; the unsigned offset-to-pointer cast preserves matrix-address scheduling and addition operand order. */
-extern void Rsp_ConvertMatrixToFixed(void *,void *),Rsp_ConvertMatrixToFloat(void *,void *),Particle_ClampMatrixToFixedRange(void *),func_802732D0_de(void *,void *),func_802732EC_de(void *,void *),ScaleMatrixLocal(void *,f32,f32,f32),func_802A25D0_de(void *,Node44 *,void *);
+extern void GraphU64_ConvertMatrixToFixed(void *,void *),GraphU64_ConvertMatrixToFloat(void *,void *),GraphU64_ClampMatrixToFixedRange(void *),func_802732D0_de(void *,void *),func_802732EC_de(void *,void *),ScaleMatrixLocal(void *,f32,f32,f32),func_802A25D0_de(void *,Node44 *,void *);
 
 void func_802A3DD4_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *camera) {
     Morph storage;
@@ -111,11 +111,11 @@ s32 func_802A4134_de(AnimationFrameState *state,
         }
         break;
     case 4:
-        *selected = Nav_NextRandom() % *frame_count;
+        *selected = GraphU64_NextRandom() % *frame_count;
         break;
     case 5:
         if (state->cached_frame == -1) {
-            state->cached_frame = Nav_NextRandom() % *frame_count;
+            state->cached_frame = GraphU64_NextRandom() % *frame_count;
         }
         *selected = state->cached_frame;
         break;
@@ -123,7 +123,7 @@ s32 func_802A4134_de(AnimationFrameState *state,
     return frame;
 }
 
-void Render_DetachParticleSwooshes(Root752C *arg0, Entity1DC *arg1) {
+void Fx_DetachParticleSwooshes(Root752C *arg0, Entity1DC *arg1) {
     f32 sp10[16];
     f32 temp_f1;
     f32 scale;
@@ -152,18 +152,18 @@ loop_4:
                                 ((struct ObjectState68 *) (((char *) var_s0) + (D_800D297C << 6)))->unk_28=((struct ObjectState68 *) (((char *) var_s0) + ((D_800D297C ^ 1) << 6)))->unk_28;
                                 var_s0->unk_B0 = 0;
                             } else {
-                                Rsp_ConvertMatrixToFloat(&sp10, (char *)arg1 + ((D_800D297C << 6) + 0x60));
+                                GraphU64_ConvertMatrixToFloat(&sp10, (char *)arg1 + ((D_800D297C << 6) + 0x60));
                                 scale = D_800C5E28_de;
                                 if (arg1->unk_118->unk14 != 0) {
                                     scale = D_800C5E2C_de;
                                 }
                                 ScaleMatrixLocal(&sp10, scale, scale, scale);
-                                Particle_ClampMatrixToFixedRange(&sp10);
+                                GraphU64_ClampMatrixToFixedRange(&sp10);
                                 func_802732D0_de(&sp10, var_s0->pos);
                                 if (var_s1->unk_3C & 4) {
                                     func_802732EC_de(&sp10, var_s0->rot);
                                 } else {
-                                    Rsp_ConvertMatrixToFixed(&sp10, (char *)var_s0 + ((D_800D297C << 6) + 0x28));
+                                    GraphU64_ConvertMatrixToFixed(&sp10, (char *)var_s0 + ((D_800D297C << 6) + 0x28));
                                 }
                             }
                             var_s0->unk_8 = (f32) var_s1->unk_8->unk_8;
@@ -182,13 +182,13 @@ loop_4:
                     matrix += (unsigned int)arg1;
                     matrix += 0x60;
                     if (var_s1->unk_24 > 0.0f) {
-                    Rsp_ConvertMatrixToFloat(&sp10, matrix);
+                    GraphU64_ConvertMatrixToFloat(&sp10, matrix);
                     var_f0_2 = D_800C5E30_de;
                     if (arg1->unk_118->unk14 != 0) {
                         var_f0_2 = D_800C5E34_de;
                     }
                     ScaleMatrixLocal(&sp10, var_f0_2, var_f0_2, var_f0_2);
-                    Particle_ClampMatrixToFixedRange(&sp10);
+                    GraphU64_ClampMatrixToFixedRange(&sp10);
                     func_802A25D0_de(&D_801379C0, var_s1, &sp10);
                 }
                 }
@@ -243,7 +243,7 @@ extern EffectResource *func_8028AFEC_de(void *, s32);
 extern void Lists_ClearHeader(void *);
 extern void func_80295E84_de(void *, s32);
 extern void func_80283064_de(void *, void *);
-extern void Particle_IdentityMatrix(void *);
+extern void GraphU64_IdentityMatrix(void *);
 
 static inline EffectNode *FX_FIND_NODE(EffectWorld *world, FxActor *actor) {
     EffectNode *it;
@@ -301,7 +301,7 @@ void func_802A4598_de(EffectWorld *world, FxActor *actor, s32 resourceId) {
     if (node) {
     ++actor->references;
     if (*actor->flags & 0x10000) {
-        Particle_IdentityMatrix(matrix);
+        GraphU64_IdentityMatrix(matrix);
         instance = ((EffectInstance *(*)(void *, void *, void *))func_802A25D0_de)(world, node, matrix);
         if (instance) instance->actor = actor;
     }
@@ -312,8 +312,8 @@ INCLUDE_ASM("span_1000", func_802A4598_de);
 #endif
 
 extern void func_8026D8F8_de(void);
-extern void System_ResetTextureCache(void);
-extern void Render_UpdateLinkedNodeTransforms(RibbonActor *ribbon);
+extern void TextLoad_ResetTextureCache(void);
+extern void Smp_UpdateLinkedNodeTransforms(RibbonActor *ribbon);
 extern void func_802A339C_de(RibbonActor *ribbon, GameplayCamera *camera);
 extern void func_802A3718_de(VertexArena *pool, RibbonActor *ribbon, GameplayCamera *camera);
 /* The ribbon arena keeps its built display list at 0 and its ribbon list at 0x7528 (Owner802A697C/Root752C
@@ -326,7 +326,7 @@ struct VertexArena {
 /* Updates one ribbon's linked transforms and points, then draws it once it has at least two points. */
 static inline void Render_DrawLinkedRibbon(VertexArena *pool, RibbonActor *ribbon, GameplayCamera *camera) {
     if (ribbon->flags & 8) {
-        Render_UpdateLinkedNodeTransforms(ribbon);
+        Smp_UpdateLinkedNodeTransforms(ribbon);
     }
     if (ribbon->flags & 4) {
         func_802A339C_de(ribbon, camera);
@@ -342,10 +342,10 @@ static inline void Render_DrawLinkedRibbon(VertexArena *pool, RibbonActor *ribbo
 /* Builds the arena's ribbon display list once and replays it afterwards: the first call opens a branch list
  * (patched at the end to jump over the body), sets the fixed render state, then updates and draws every ribbon,
  * those with a negative layer first and positive layers second. */
-void Render_DrawLinkedGeometry(VertexArena *pool, GameplayCamera *camera) {
+void Fx_DrawLinkedGeometry(VertexArena *pool, GameplayCamera *camera) {
     RibbonActor *ribbon;
     func_8026D8F8_de();
-    System_ResetTextureCache();
+    TextLoad_ResetTextureCache();
     if (pool->displayList != 0) {
         gSPDisplayList(g_displayListCursor++, pool->displayList);
         return;
@@ -353,8 +353,8 @@ void Render_DrawLinkedGeometry(VertexArena *pool, GameplayCamera *camera) {
     pool->displayList = g_displayListCursor;
     gSPBranchList(g_displayListCursor++, 0);
     gDPPipeSync(g_displayListCursor++);
-    Render_SetModePreset(0xE);
-    Render_SetCombineMode(0x1C);
+    Geometry_SetModePreset(0xE);
+    Geometry_SetCombineMode(0x1C);
     /* 0x80 has no F3DEX2 geometry-mode name. */
     gSPGeometryMode(g_displayListCursor++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);
     gSPGeometryMode(g_displayListCursor++, 0, G_SHADE | G_SHADING_SMOOTH);

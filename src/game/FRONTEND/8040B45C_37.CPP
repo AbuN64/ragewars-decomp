@@ -92,8 +92,8 @@ typedef struct {
 } File;
 extern File D_801539B0;
 extern s32 D_800DD0B0;
-extern s32 Scene_AllocateMemory(s32 size);
-extern void Resmgr_CloseStream(s32 handle);
+extern s32 Cache_AllocateMemory(s32 size);
+extern void XStdio_CloseStream(s32 handle);
 extern s32 func_802A1934_de(void);
 extern void func_804133E4_de(Texture *texture);
 extern void func_80413404_de(Texture *texture);
@@ -171,12 +171,12 @@ void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
         Tables *tables = &D_801539B0.tables;
 
         bank = &tables->banks[group];
-        D_801539B0.handle = Resmgr_OpenStream(&D_801539B0.name, &D_800DD0B0);
+        D_801539B0.handle = XStdio_OpenStream(&D_801539B0.name, &D_800DD0B0);
         size = bank->image->size;
         i = 0;
-        bank->offsets[0] = Scene_AllocateMemory(size);
-        Resmgr_SeekStream(D_801539B0.handle, D_801539B0.tables.base + bank->image->base, 0);
-        Resmgr_ReadStream(D_801539B0.tables.banks[group].offsets[0], size, 1, D_801539B0.handle);
+        bank->offsets[0] = Cache_AllocateMemory(size);
+        XStdio_SeekStream(D_801539B0.handle, D_801539B0.tables.base + bank->image->base, 0);
+        XStdio_ReadStream(D_801539B0.tables.banks[group].offsets[0], size, 1, D_801539B0.handle);
         do {
             sizes[i] = bank->tiles[i].wid * bank->tiles[i].siz;
             sizes[i] = sizes[i] * code / 8;
@@ -201,7 +201,7 @@ void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
             }
             i += 1;
         } while (i < 0x60);
-        Resmgr_CloseStream(D_801539B0.handle);
+        XStdio_CloseStream(D_801539B0.handle);
         D_801539B0.handle = 0;
         bank->loaded = 1;
     }

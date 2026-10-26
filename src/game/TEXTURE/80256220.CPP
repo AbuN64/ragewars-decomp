@@ -44,7 +44,7 @@ void func_80256280_de(s32 workerAddress, s32 count) {
         s1 += 1;
         s0 += 0x20;
     } while (s1 < 0x210);
-    Resmgr_FillMemory(workerAddress + 0xA68, count, 0x400);
+    XPlus_FillMemory(workerAddress + 0xA68, count, 0x400);
     osCreateThread(workerAddress, count, &D_0025657C, workerAddress, workerAddress + 0xE68, D_800CD8C4_de);
     osStartThread(workerAddress);
 }

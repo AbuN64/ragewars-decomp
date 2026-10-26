@@ -32,7 +32,7 @@ extern s32 GetMenuScreenOwner(void);
 
 extern void *Frontend_GetScreenData(s32 index);
 
-extern void *Scene_AllocateMemory(s32);
+extern void *Cache_AllocateMemory(s32);
 
 
 extern void func_8040ED38_de(s32 arg0, s32 arg1, MenuWidget *arg2, MenuWidget *arg3);
@@ -52,7 +52,7 @@ extern void func_804121F0_de(void *);
 
 extern void MarkMenuEventHandled();
 
-/* Releases an object through Scene_FreeMemory, first releasing the object it holds at offset 0x44
+/* Releases an object through Cache_FreeMemory, first releasing the object it holds at offset 0x44
    when there is one, and returns zero. */
 
 
@@ -80,8 +80,8 @@ s32 func_80412710_de(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 a
 
     source = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());
-    result = Scene_AllocateMemory(0x60);
-    Resmgr_FillBytes(result, 0, 0x60);
+    result = Cache_AllocateMemory(0x60);
+    XPlus_FillBytes(result, 0, 0x60);
     *(Header44 *)result = *(Header44 *)source;
     result->kind = 0xB;
     result->field_4B = arg4;
@@ -95,9 +95,9 @@ s32 func_80412710_de(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 a
     result->field_4D = arg6;
     result->field_4C = arg5;
     size = arg3 * arg4 * 8;
-    cells = Scene_AllocateMemory(size);
+    cells = Cache_AllocateMemory(size);
     result->field_44 = cells;
-    Resmgr_FillBytes(cells, 0, size);
+    XPlus_FillBytes(cells, 0, size);
     func_8040ED38_de(context, 0, source, result);
     return 1;
 }
@@ -194,8 +194,8 @@ s32 func_80412CA0_de(struct Object_func_80412CA0_de *object) {
     struct Object_func_80412CA0_de *self = object;
 
     if (object->child != 0) {
-        Scene_FreeMemory(object->child);
+        Cache_FreeMemory(object->child);
     }
-    Scene_FreeMemory(self);
+    Cache_FreeMemory(self);
     return 0;
 }

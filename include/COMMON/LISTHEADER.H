@@ -171,7 +171,7 @@ struct IntegerState5AC {
 
 struct ActorMotionState;
 struct Player;
-extern s32 Level_ShowTriggerMessage(struct NavigationPlatform *object, struct ActorMotionState *guard, struct Player *actor);
+extern s32 Action_ShowTriggerMessage(struct NavigationPlatform *object, struct ActorMotionState *guard, struct Player *actor);
 
 extern void func_8025E1C4_de(s32);
 extern CVector3 D_801042C8;

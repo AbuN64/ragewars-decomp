@@ -32,8 +32,8 @@ void func_802954E0_us_rev1(void) {
     D_8014CFE4 = 0;
     D_8014D068 = 0;
 
-    Resmgr_FillMemory((s32) ((char *) base + 0x24), 0, 0x2000);
-    Resmgr_FillMemory((s32) ((char *) base + 0x2024), 0xFF, 0x100);
+    XPlus_FillMemory((s32) ((char *) base + 0x24), 0, 0x2000);
+    XPlus_FillMemory((s32) ((char *) base + 0x2024), 0xFF, 0x100);
 
     *base = *D_8011FED8;
 }

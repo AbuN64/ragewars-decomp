@@ -12,7 +12,7 @@
 #include "FRONTEND/8043A0B0_11.H"
 
 extern struct Screen42 *D_800E59E0;
-extern void Menu_SetSlotValue(struct SlotsRecAt5CV1 *, s32, s32);
+extern void SmpOverlay_SetSlotValue(struct SlotsRecAt5CV1 *, s32, s32);
 extern void func_8041CE10_de(struct Object49C *, s32);
 s32 func_8043AB40_de(void *unused0, void *unused1, s32 arg2) {
     s32 player;
@@ -26,7 +26,7 @@ s32 func_8043AB40_de(void *unused0, void *unused1, s32 arg2) {
     if (D_800E59E0->entries[player].selection != 5) return 0;
     {
         D_800E59E0->entries[player].state = 2;
-        Menu_SetSlotValue(D_800E59E0->entries[0].slots, player, 1);
+        SmpOverlay_SetSlotValue(D_800E59E0->entries[0].slots, player, 1);
         for (i = 0; i < 6; i++) {
             Frontend_SetWidgetFlag08(func_8040EC30_de(D_800E59E0->entries[0].window, D_800E59EE[player][i].value), 1);
         }

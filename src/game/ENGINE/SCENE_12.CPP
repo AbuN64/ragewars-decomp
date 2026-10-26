@@ -56,7 +56,7 @@ void func_8028CD68_de(void *arg0) {
             if (field != three) {
                 i += 1;
             } else {
-                Render_SetActorStateBit(arg0, entry, 1);
+                Rumble_SetActorStateBit(arg0, entry, 1);
                 i += 1;
             }
             offset += 0x2E8;
@@ -86,7 +86,7 @@ void func_8028CDF0_de(void *arg0) {
             if (field != three) {
                 i += 1;
             } else {
-                Render_SetActorStateBit(arg0, entry, 0);
+                Rumble_SetActorStateBit(arg0, entry, 0);
                 i += 1;
             }
             offset += 0x2E8;
@@ -117,13 +117,13 @@ void func_8028CE94_de(Object_func_8028CE94_de *arg0,s32 resource,s32 arg2,Triple
  }
 }
 
-void *Engine_GetActorDefinition(void *world, s32 index) {
+void *Scene_GetActorDefinition(void *world, s32 index) {
     void *result;
 
     if (index == -1) {
         goto ret_null;
     }
-    result = Render_GetPackSection(((struct ObjRecAt78V1 *) ((s8 *) world))->unk78, index);
+    result = SetN64_GetPackSection(((struct ObjRecAt78V1 *) ((s8 *) world))->unk78, index);
     goto end;
 ret_null:
     result = 0;
@@ -140,7 +140,7 @@ void *func_8028CFA0_de(Shared_World *world, s32 selection, s32 modelKind) {
     descriptor = world->actorDefinitions;
     count = *descriptor;
     for (i = 0; i < count; i++) {
-        entry = Render_GetPackSection(world->actorDefinitions, i);
+        entry = SetN64_GetPackSection(world->actorDefinitions, i);
         if (selection != -1 && entry->kind != selection) {
             continue;
         }

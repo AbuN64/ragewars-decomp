@@ -15,7 +15,7 @@
 
 extern void func_8022BF04_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 
-extern s32 Sound_FindActorModelEntry(void *);
+extern s32 InstHdr_FindActorModelEntry(void *);
 
 extern f32 D_800D2988;
 
@@ -41,21 +41,21 @@ extern u8 D_801462DE;
 extern s32 D_800E28D0;
 
 
-void Text_SetupSpriteMode(u8 arg0);
+void OnScreen_SetupSpriteMode(u8 arg0);
 
 extern const struct D_800C7470_Pair D_800C2D40_de;
 
 
 
-extern void Weapons_BuildPlayerViewTransform(Player1680 *, Matrix *);
+extern void Player_BuildPlayerViewTransform(Player1680 *, Matrix *);
 
 extern void func_802732D0_de(Matrix *, CVector3 *);
 
-extern void Particle_IdentityMatrix(Matrix *);
+extern void GraphU64_IdentityMatrix(Matrix *);
 
 extern void TranslateMatrix(Matrix *, float, float, float);
 
-extern void Rsp_ConvertMatrixToFixed(Matrix *, void *);
+extern void GraphU64_ConvertMatrixToFixed(Matrix *, void *);
 
 static inline void getEye(Player1680 *player, CVector3 *pos) {
     Matrix frame;
@@ -63,7 +63,7 @@ static inline void getEye(Player1680 *player, CVector3 *pos) {
     if (player->mount != 0) {
         *pos = player->mount->unk128;
     } else {
-        Weapons_BuildPlayerViewTransform(player, &frame);
+        Player_BuildPlayerViewTransform(player, &frame);
         func_802732D0_de(&frame, pos);
     }
 }
@@ -83,7 +83,7 @@ void func_8022C080_de(void *actorView, void *bodyActor) {
     f32 t0;
     f32 t1;
 
-    result = (void *)Sound_FindActorModelEntry(bodyActor);
+    result = (void *)InstHdr_FindActorModelEntry(bodyActor);
     if (result != 0) {
         t0 = ((ModelBlend *)result)->blend;
         t1 = ((Shared_ActorView *)actorView)->modelBlend;
@@ -133,7 +133,7 @@ void func_8022C1E8_de(char *player, char *view) {
     f32 w;
     f32 screenX, screenY;
 
-    Text_SetupSpriteMode(D_801462DE);
+    OnScreen_SetupSpriteMode(D_801462DE);
 
     x = ((Shared_HudView *)view)->width;
     sx = x / (f32) D_800E28D0;
@@ -165,7 +165,7 @@ void func_8022C2B4_de(void *arg0, struct ScreenRectangle *viewport)
   f32 by;
   f32 screenX;
   f32 screenY;
-  Text_SetupSpriteMode(D_801462DE);
+  OnScreen_SetupSpriteMode(D_801462DE);
   x = viewport->x;
   ax = x * D_800C2D30_de;
   y = viewport->y;
@@ -187,7 +187,7 @@ void func_8022C37C_de(char *player, char *view) {
     f32 w;
     f32 screenX, screenY;
 
-    Text_SetupSpriteMode(D_801462DE);
+    OnScreen_SetupSpriteMode(D_801462DE);
 
     x = ((Shared_HudView *)view)->width;
     sx = x / (f32) D_800E28D0;
@@ -231,10 +231,10 @@ void func_8022C490_de(Player1680 *player) {
     CVector3 pos;
 
     getEye(player, &pos);
-    Particle_IdentityMatrix(&mtx);
+    GraphU64_IdentityMatrix(&mtx);
     BuildYawMatrix(&mtx, getYaw());
     TranslateMatrix(&mtx, pos.x, pos.y + D_800C2D40_de.second, pos.z);
-    Rsp_ConvertMatrixToFixed(&mtx, &player->views[D_800D297C]);
+    GraphU64_ConvertMatrixToFixed(&mtx, &player->views[D_800D297C]);
 }
 
 void *func_8022C55C_de(void *playerWorld, u32 eligiblePlayerIndex) {

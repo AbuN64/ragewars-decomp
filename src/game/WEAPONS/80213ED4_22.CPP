@@ -12,7 +12,7 @@
 #include "WEAPONS/80213ED4_22.H"
 
 /** Read the next u16 from the cursor stream, wrapping back to base on the -1 sentinel. */
-s16 func_802171C8_de(Cursor802171C8 *arg0) {
+s16 Barrel_ReadLoopingSequenceValue(Cursor802171C8 *arg0) {
     u16 *cur;
     u16 value;
 
@@ -35,16 +35,16 @@ void Weapons_RunDamageHook(void *actor, struct CallbackState114 *callbackState, 
     }
 }
 
-extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 
 
-/** Subtract obj->y from arg2 in-place via Particle_SubtractVectors, then return the squared length of (arg1, arg2', arg3). */
+/** Subtract obj->y from arg2 in-place via GraphU64_SubtractVectors, then return the squared length of (arg1, arg2', arg3). */
 f32 Weapons_GetEyeDistanceSquared(void *candidate, CVector3 v) {
     f32 eyeDeltaY;
 
-    Particle_SubtractVectors(&v, &v, &((ActorBarrelIsTargetInViewCone *)(candidate))->position);
+    GraphU64_SubtractVectors(&v, &v, &((ActorBarrelIsTargetInViewCone *)(candidate))->position);
     eyeDeltaY = v.y - ((ActorBarrelIsTargetInViewCone *)(candidate))->eye;
     v.y = eyeDeltaY;
     return (v.x * v.x) + (eyeDeltaY * eyeDeltaY) + (v.z * v.z);

@@ -147,5 +147,5 @@ typedef struct DraftStreamViewer {
 typedef struct DraftStreamPair { f32 first, second; } DraftStreamPair;
 extern DraftStreamPair D_800FF200;
 struct ResourceBitGrid;
-extern void System_DecodeRegionGrid(struct ResourceBitGrid *, s32, s32, DraftStreamData *, CVector3 *);
+extern void VisData_DecodeRegionGrid(struct ResourceBitGrid *, s32, s32, DraftStreamData *, CVector3 *);
 #endif

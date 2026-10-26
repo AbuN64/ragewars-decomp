@@ -49,7 +49,7 @@ s32 Ovlgame_InitParticleQuad(void) {
 extern char D_8010EC90[];
 extern char D_80145040[];
 
-extern void Render_FreeAllPoolNodes(void *);
+extern void Rumble_FreeAllPoolNodes(void *);
 struct Context;
 extern void Weapons_ResetPlayerControllers(struct Context *);
 
@@ -59,8 +59,8 @@ extern void Weapons_ResetPlayerControllers(struct Context *);
 void func_8044DD50_de(char *match) {
     CGameStatus *state;
 
-    Render_SetControllerMode(0);
-    Render_FreeAllPoolNodes(D_8010EC90);
+    Control_SetControllerMode(0);
+    Rumble_FreeAllPoolNodes(D_8010EC90);
     Weapons_ResetPlayerControllers(D_80145040);
     state = &D_801462C8.counters;
     state->teams = 0;

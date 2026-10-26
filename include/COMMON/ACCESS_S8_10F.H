@@ -22,13 +22,13 @@ typedef struct CollisionInfoCode80243A80 CollisionInfoCode80243A80;
 
 
 
-extern void Camera_ClearResponse(void);
+extern void Cinema_ClearResponse(void);
 
 struct Access_s32_C4;
 typedef struct Access_s32_C4 Access_s32_C4;
 
 
-extern void Camera_ClearMessageCount();
+extern void Cinema_ClearMessageCount();
 
 struct CollisionInfoCode80243A80;
 
@@ -53,7 +53,7 @@ extern float D_800C3828_de;
 
 extern float D_800C37D4_de;
 
-extern void Camera_ReleaseSequenceContext();
+extern void Cinema_ReleaseSequenceContext();
 
 
 

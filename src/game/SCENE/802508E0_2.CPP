@@ -71,7 +71,7 @@ struct ResMgr {
 };
 extern s32 func_80255920_de(void *, s32);
 extern s32 func_802567A4_de(OSMesgQueue *);
-extern u32 System_GetMemorySize(void);
+extern u32 Defs_GetMemorySize(void);
 extern s32 osCreateThread(void *, s32, void *, s32, void *, s32);
 extern s32 osStartThread(void *);
 extern void func_80255CA0_de(IntrusiveList *, s32, s32);
@@ -84,7 +84,7 @@ extern int D_800CB6E0;
 extern Manager D_801047E0;
 extern struct ResMgr D_80100560;
 
-void Scene_InitializeResourceCache(s32 unused, s32 count) {
+void Cache_InitializeResourceCache(s32 unused, s32 count) {
     u32 mask;
     u32 unlockMask;
     u32 i;
@@ -99,7 +99,7 @@ void Scene_InitializeResourceCache(s32 unused, s32 count) {
         __osRestoreInt(mask);
     }
     D_800CB6E0 = 0x400;
-    if (System_GetMemorySize() > 0x400000) {
+    if (Defs_GetMemorySize() > 0x400000) {
         D_800CB6E0 *= 2;
     }
     D_80100560.nodes = (struct ResourceCacheEntry *)func_80255920_de(&D_801051A0, D_800CB6E0 * sizeof(struct ResourceCacheEntry));
@@ -147,7 +147,7 @@ void Scene_InitializeResourceCache(s32 unused, s32 count) {
         __osRestoreInt(unlockMask);
     }
     /* thread block D_801008F8 - 0x348 followed by its 0x800-byte stack at D_801008F8 */
-    Resmgr_FillMemory(&D_801008F8, count, 0x800);
+    XPlus_FillMemory(&D_801008F8, count, 0x800);
     thread = (char *)&D_801008F8 - 0x348;
     osCreateThread(thread, count, &D_002524B0, 0, (char *)&D_801008F8 + 0x800, D_800CD8BC);
     osStartThread(thread);

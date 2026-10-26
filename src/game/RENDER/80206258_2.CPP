@@ -19,7 +19,7 @@
 
 extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
 
-extern int Camera_IsSequenceInWindow(void);
+extern int Cinema_IsSequenceInWindow(void);
 
 /** For each of the object's child slots, attach the child to the record and spawn its effect. */
 extern int D_800D297C;
@@ -32,20 +32,20 @@ extern void func_802472F0_de(void *);
 extern void Menu_RequestTrackByIds(s32, void *);
 
 void func_8020676C_de(void *actor, void *motionState, Trigger *trigger) {
-    extern void Render_SetActorStateBit(Shared_World *a, void *b, int c);
+    extern void Rumble_SetActorStateBit(Shared_World *a, void *b, int c);
     func_802065C0_de(actor, motionState, trigger->unk6);
     ((LevelActor *)actor)->flags = ((LevelActor *)actor)->flags | 0x2100;
     func_802472F0_de(actor);
-    Render_SetActorStateBit(&g_world, actor, 0);
+    Rumble_SetActorStateBit(&g_world, actor, 0);
 }
 
 void func_802067BC_de(Shared_Actor *actor) {
-    extern void Render_SetActorStateBit(Shared_World *, void *, s32);
+    extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
     s32 v = actor->weaponFlags;
     v &= ~0x2000;
     v &= ~0x100;
     actor->weaponFlags = v;
-    Render_SetActorStateBit(&g_world, actor, 1);
+    Rumble_SetActorStateBit(&g_world, actor, 1);
 }
 
 void func_802067FC_de(Trigger *trigger) {
@@ -53,13 +53,13 @@ void func_802067FC_de(Trigger *trigger) {
 }
 
 void func_8020682C_de(Shared_Actor *actor, s32 *sequenceFlags) {
-    extern void Render_SetActorStateBit(Shared_World *, void *, s32);
+    extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
     actor->weaponFlags |= 0x2100;
-    if (Camera_IsSequenceInWindow() != 0) {
+    if (Cinema_IsSequenceInWindow() != 0) {
         *sequenceFlags |= 0x200;
     }
     func_802472F0_de(actor);
-    Render_SetActorStateBit(&g_world, actor, 0);
+    Rumble_SetActorStateBit(&g_world, actor, 0);
 }
 
 void func_80206898_de(Trigger *trigger) {
@@ -67,10 +67,10 @@ void func_80206898_de(Trigger *trigger) {
 }
 
 void func_802068C8_de(struct Shared_Actor *actor, s32 arg1, s32 trackRequest) {
-    extern void Render_SetActorStateBit(Shared_World *, void *, s32);
+    extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
     Menu_RequestTrackByIds((s32)actor, (void *)trackRequest);
     actor->weaponFlags |= 0x2100;
-    Render_SetActorStateBit(&g_world, actor, 0);
+    Rumble_SetActorStateBit(&g_world, actor, 0);
 }
 
 void func_80206910_de(s32 trackRequest) {
@@ -106,7 +106,7 @@ extern f32 D_800D2988;
 
 /* Advance triggered shaking and vertical motion, invalidating animation on a state change. */
 /* A hold segment keeps the motion until the input is held. */
-void Render_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode80206258 *motion) {
+void Device_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode80206258 *motion) {
     SegmentRecAt5C *segment;
     s32 oldState;
     s32 release;
@@ -143,9 +143,9 @@ void Render_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802062
     case 3:
         shakeMin = -0.512f;
         shakeMax = 0.512f;
-        motion->shake.x = Nav_RandomBetween(shakeMin, shakeMax);
-        motion->shake.y = Nav_RandomBetween(shakeMin, shakeMax);
-        motion->shake.z = Nav_RandomBetween(shakeMin, shakeMax);
+        motion->shake.x = GraphU64_RandomBetween(shakeMin, shakeMax);
+        motion->shake.y = GraphU64_RandomBetween(shakeMin, shakeMax);
+        motion->shake.z = GraphU64_RandomBetween(shakeMin, shakeMax);
         motion->timer += D_800D2988;
         if (45.0f < motion->timer) {
             motion->timer = 0.0f;
@@ -177,7 +177,7 @@ void Render_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802062
             }
         }
         if (segment->duration > 0.0f) {
-            motion->shake.y = -segment->displacement * System_CosineEase(motion->timer / segment->duration);
+            motion->shake.y = -segment->displacement * Defs_CosineEase(motion->timer / segment->duration);
         } else {
             motion->shake.y = -segment->displacement;
         }
@@ -190,7 +190,7 @@ void Render_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802062
             motion->triggerTime = 0.0f;
         }
         if (segment->duration > 0.0f) {
-            motion->shake.y = -segment->displacement * System_CosineEase(motion->timer / segment->duration);
+            motion->shake.y = -segment->displacement * Defs_CosineEase(motion->timer / segment->duration);
         } else {
             motion->shake.y = -segment->displacement;
         }
@@ -200,7 +200,7 @@ void Render_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802062
             motion->timer += D_800D2988;
         }
         if (segment->duration > 0.0f) {
-            motion->shake.y = -segment->displacement * System_CosineEase(motion->timer / segment->duration);
+            motion->shake.y = -segment->displacement * Defs_CosineEase(motion->timer / segment->duration);
         } else {
             motion->shake.y = -segment->displacement;
         }
@@ -214,12 +214,12 @@ void Render_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802062
     }
 }
 
-/* Places a rider along its path for the frame: clamps the throttle to 0..1 (eased through System_CosineEase unless the segment is linear), offsets its base by the segment's rise and circle point, moves the rider there through func_80271FC8_de, adds a bob to its height (one wave or a sum of four detuned waves by the segment's bob mode), applies its shake offsets, turns the actor by the segment's yaw mode (interpolated, constant spin unless held, or constant spin) and, for free segments, snaps the actor to the ground through Anim_GetPolygonHeight and func_802761EC_de. */
+/* Places a rider along its path for the frame: clamps the throttle to 0..1 (eased through Defs_CosineEase unless the segment is linear), offsets its base by the segment's rise and circle point, moves the rider there through func_80271FC8_de, adds a bob to its height (one wave or a sum of four detuned waves by the segment's bob mode), applies its shake offsets, turns the actor by the segment's yaw mode (interpolated, constant spin unless held, or constant spin) and, for free segments, snaps the actor to the ground through Region_GetPolygonHeight and func_802761EC_de. */
 
 
 extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
 
-extern f32 Anim_GetPolygonHeight(s32, f32, f32);
+extern f32 Region_GetPolygonHeight(s32, f32, f32);
 
 extern void func_802761EC_de(s32, f32);
 
@@ -251,7 +251,7 @@ extern void func_802761EC_de(s32, f32);
  * 0x800C6C70 = 0.017453294 (float, D_800C6C70 in this cartridge's tables)
  * 0x800C6C74 = 0.1 (float, unnamed in this cartridge's tables)
  */
-void Weapons_ApplyClampedTurn(void *, s32, f32, f32);
+void Barrel_ApplyClampedTurn(void *, s32, f32, f32);
 
 void func_802192C0_de(void *);
 
@@ -259,7 +259,7 @@ void * func_80219408_de(struct Cursor *);
 
 void *func_80219434_de(struct Cursor *);
 
-void Particle_SubtractVectors(void *, void *, void *);
+void GraphU64_SubtractVectors(void *, void *, void *);
 
 
 f32 Math_Sqrtf(f32);
@@ -302,7 +302,7 @@ void func_80206DD4_de(Actor_func_80206DD4_de *actor, RiderCode80206258 *rider) {
         t = 1.0f;
     }
     if (segment->linear == 0) {
-        t = System_CosineEase(t);
+        t = Defs_CosineEase(t);
     }
     owner = actor;
     point = rider->base;
@@ -342,7 +342,7 @@ void func_80206DD4_de(Actor_func_80206DD4_de *actor, RiderCode80206258 *rider) {
         break;
     }
     if (segment->moving == 0) {
-        func_802761EC_de(owner->model, Anim_GetPolygonHeight(owner->model, owner->x, owner->z) + rider->pos.y - owner->y);
+        func_802761EC_de(owner->model, Region_GetPolygonHeight(owner->model, owner->x, owner->z) + rider->pos.y - owner->y);
     }
 }
 
@@ -383,7 +383,7 @@ void func_802070D0_de(func_802070D0_S3 *actor, func_802070D0_S1 *pathState) {
     pathCursor = (void *) &pathState->unk94;
     targetNode = func_80219408_de(pathCursor);
     initial = targetNode->pos;
-    Particle_SubtractVectors(&vec0, &initial, &actor->unk8);
+    GraphU64_SubtractVectors(&vec0, &initial, &actor->unk8);
     segmentNode = func_80219434_de(pathCursor);
     targetDistance = Math_Sqrtf(vec0.x * vec0.x + vec0.y * vec0.y + vec0.z * vec0.z);
     arrivalRadius = targetNode->unk1C;
@@ -416,30 +416,30 @@ void func_802070D0_de(func_802070D0_S3 *actor, func_802070D0_S1 *pathState) {
             }
         }
         if (segmentNode == targetNode) {
-            Particle_SubtractVectors(&vec1, segmentNode, &actor->unk8);
+            GraphU64_SubtractVectors(&vec1, segmentNode, &actor->unk8);
         } else {
-            Particle_SubtractVectors(&vec1, targetNode, segmentNode);
+            GraphU64_SubtractVectors(&vec1, targetNode, segmentNode);
         }
-        Particle_NormalizeVec3(&vec1);
+        GraphU64_NormalizeVec3(&vec1);
         ;
         vec1.x = pathState->unk140 + pathState->unk14C * (vec1.x - pathState->unk140);
         segmentDirectionY = pathState->unk144;
         vec1.y = segmentDirectionY + pathState->unk14C * (vec1.y - segmentDirectionY);
         segmentDirectionZ = pathState->unk148;
         vec1.z = segmentDirectionZ + pathState->unk14C * (vec1.z - segmentDirectionZ);
-        Particle_NormalizeVec3(&vec1);
+        GraphU64_NormalizeVec3(&vec1);
         if (pathState->unk14C >= 1.0f) {
             goto block_17;
         }
     } else {
-        Particle_NormalizeVec3(&vec0);
+        GraphU64_NormalizeVec3(&vec0);
         ;
         vec1.x = pathState->unk140 + blendRate * (vec0.x - pathState->unk140);
         previousDirectionY = pathState->unk144;
         vec1.y = previousDirectionY + blendRate * (vec0.y - previousDirectionY);
         previousDirectionZ = pathState->unk148;
         vec1.z = previousDirectionZ + blendRate * (vec0.z - previousDirectionZ);
-        Particle_NormalizeVec3(&vec1);
+        GraphU64_NormalizeVec3(&vec1);
         block_17:
         pathState->unk140 = vec1.x;
         pathState->unk144 = vec1.y;
@@ -490,7 +490,7 @@ void func_802070D0_de(func_802070D0_S3 *actor, func_802070D0_S1 *pathState) {
             actor->unk6C = (f32) (currentHeading + (segmentNode->unk10 * 0.017453294f - currentHeading) * 0.1f);
         }
     } else {
-        Weapons_ApplyClampedTurn(actor, (s32) pathState, 10.0f, Weapons_GetSignedAngleToPoint(actor, *(CVector3 *) &pathState->unk54));
+        Barrel_ApplyClampedTurn(actor, (s32) pathState, 10.0f, Weapons_GetSignedAngleToPoint(actor, *(CVector3 *) &pathState->unk54));
     }
     if (segmentNode->unk14.half & 4) {
         if ((segmentNode->unk14.word & 0x220000) == 0x220000) {
@@ -543,9 +543,9 @@ s32 func_80207738_de(void *context, struct InputRecAt37 *option) {
     return result;
 }
 
-extern s32 Render_TestActorStateBit(void *, void *);
+extern s32 Rumble_TestActorStateBit(void *, void *);
 void func_802077CC_de(int actorHandle) {
-    Render_TestActorStateBit(&g_world, (void *)actorHandle);
+    Rumble_TestActorStateBit(&g_world, (void *)actorHandle);
 }
 
 void func_802077F4_de(void *object, void *state)
@@ -595,7 +595,7 @@ void func_80207890_de(void *object, void *state) {
         motionState->destination = motionState->start;
         Weapons_RequestActorState(player, motionState, 4);
     }
-    if (Render_TestActorStateBit(&g_world, player) == 0) {
+    if (Rumble_TestActorStateBit(&g_world, player) == 0) {
         player->weaponFlags &= ~0x100;
     }
 }

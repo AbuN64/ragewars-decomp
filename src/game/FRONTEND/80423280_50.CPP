@@ -22,7 +22,7 @@ extern s32 func_8042B1B8_de(s32, s32);
 
 /* Sets the alpha of every catalogue icon on the screen D_800E4F60: for categories 0 to 3 (tables
    D_800E5240, D_800E5214, D_800E51F8 and D_800E51E4) it walks the count func_8042B154_de gives for the
-   category's list Frontend_CategoryToList and, for the first of the forty 16-byte icon records D_800E4F64
+   category's list ScenarioSetup_CategoryToList and, for the first of the forty 16-byte icon records D_800E4F64
    whose key matches the entry, sets the alpha of the item its key names (and of the item its second
    word names unless that is -1) and shows them through func_8040E8D8_de while the alpha is at least
    12. */
@@ -42,7 +42,7 @@ extern s32 func_8042B154_de(s32 index);
    the selection at 0x438 names in the 4-byte table D_800E5240, D_800E5214, D_800E51F8 or
    D_800E51E4 from the window into 0x43C, copies the selection's name into the text at 0x3F4 (the
    default label for selection 0, otherwise the resource name func_8028D380_de reads from
-   D_8011FE88 for the entry func_8042B1B8_de finds in the category's list Frontend_CategoryToList), points the
+   D_8011FE88 for the entry func_8042B1B8_de finds in the category's list ScenarioSetup_CategoryToList), points the
    label at 0x3EC to that text and calls func_80245B28_de. */
 
 
@@ -54,7 +54,7 @@ extern void func_8028D380_de(Shared_World *, s32, char *, s32);
 
 extern char *func_802A0494_de(char *);
 
-extern void Resmgr_CopyString(char *, char *);
+extern void XPlus_CopyString(char *, char *);
 
 
 /* Resets the selection screen: maps the menu mode at 0x434 to a category (0 to 2, 1 to 3, 2 to 1,
@@ -130,7 +130,7 @@ void func_8042A7B4_de(s32 alpha) {
             return;
         }
         do {
-            count = func_8042B154_de(Frontend_CategoryToList(list));
+            count = func_8042B154_de(ScenarioSetup_CategoryToList(list));
             for (i = 0; i < count; i++) {
                 found = 0;
                 j = 0;
@@ -177,18 +177,18 @@ void func_8042A990_de(void) {
     D_800E4F60->item = func_8040EC30_de(D_800E4F60->window, (u16)table[D_800E4F60->selection]);
     if (D_800E4F60->selection == 0) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        Resmgr_CopyString(D_800E4F60->text, D_800D34D4_de[0]);
+        XPlus_CopyString(D_800E4F60->text, D_800D34D4_de[0]);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-        Resmgr_CopyString(D_800E4F60->text, D_800E1DA4[g_languageIndex]);
+        XPlus_CopyString(D_800E4F60->text, D_800E1DA4[g_languageIndex]);
 #endif
     } else {
         func_8028D380_de(&g_world,
-                      func_8042B1B8_de(Frontend_CategoryToList(D_800E4F60->category), D_800E4F60->selection),
+                      func_8042B1B8_de(ScenarioSetup_CategoryToList(D_800E4F60->category), D_800E4F60->selection),
                       buffer, 0x3F);
-        Resmgr_CopyString(D_800E4F60->text, func_802A0494_de(buffer));
+        XPlus_CopyString(D_800E4F60->text, func_802A0494_de(buffer));
     }
     D_800E4F60->label->text = D_800E4F60->text;
-    Camera_ReleaseSequenceContext();
+    Cinema_ReleaseSequenceContext();
 }
 
 void func_8042AAD0_de(void) {
@@ -211,7 +211,7 @@ void func_8042AAD0_de(void) {
     Frontend_SetWidgetFlag08(D_800E4F60->widgetD, 0);
     Frontend_SetWidgetFlag08(D_800E4F60->label, 0);
     Frontend_SetWidgetFlag08(D_800E4F60->widgetB, 0);
-    Frontend_ClearFlagBits();
+    ScenarioSetup_ClearFlagBits();
     if (D_800E4F60->selection == 0) {
         func_8042AFC0_de(category);
         func_8042AFD0_de(0);

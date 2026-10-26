@@ -30,7 +30,7 @@ OSPiHandle_s *func_802B8F48_de(void)
     h->domain = 0;
     h->speed = 0;
 
-    Resmgr_FillMemory(&h->transferInfo, 0, sizeof(h->transferInfo));
+    XPlus_FillMemory(&h->transferInfo, 0, sizeof(h->transferInfo));
 
     saveMask = __osDisableInt();
     table = &D_800D437C;

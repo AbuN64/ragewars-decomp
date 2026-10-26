@@ -37,7 +37,7 @@ extern f32 D_800C3EE0_de[];
 
 extern s32 func_802934F8_de(void);
 
-extern void *Camera_FindNearestCamera(MenuMatchGlobals *arg0, CVector3 *arg1);
+extern void *Sky_FindNearestCamera(MenuMatchGlobals *arg0, CVector3 *arg1);
 
 extern void Audio_StopVoicesExceptKey(void *arg0, s32 arg1);
 
@@ -167,7 +167,7 @@ void Audio_StopAudioByMask(ContextRecAt2BC0 *context, s32 matchMask) {
 
 void Audio_PlayPositionedSoundWithScale(ContextRecAt2BC0 *arg0, s32 track, CVector3 arg2, s32 arg3, s32 arg4, f32 arg5) {
     arg0->alpha = arg5;
-    Texture_PlaySoundAtPosition(arg0, track, arg2, arg3, arg4);
+    Audio_PlaySoundAtPosition(arg0, track, arg2, arg3, arg4);
     arg0->alpha = D_800C3EE0_de[1];
 }
 
@@ -187,10 +187,10 @@ void Audio_PlayPeriodicTrackSound(ContextRecAt2BC0 *arg0) {
             zero.y = value;
             zero.x = value;
         }
-        result = Camera_FindNearestCamera(&D_80145088, &zero);
+        result = Sky_FindNearestCamera(&D_80145088, &zero);
         vec = &((struct SharedRecAt564V1 *)(result))->position;
         if ((arg0->frame & 3) == 0) {
-            Texture_PlaySoundAtPosition(arg0, arg0->track, *vec, 0, -1);
+            Audio_PlaySoundAtPosition(arg0, arg0->track, *vec, 0, -1);
         }
     }
 }
@@ -467,7 +467,7 @@ s32 Audio_ChooseWeightedSoundVariant(SceneRecAt2B5C *scene, s16 id, s16 avoid) {
             for (i = first; i <= last; i++) {
                 total += scene->weights[i] * 10;
             }
-            draw = Nav_NextRandom() % total;
+            draw = GraphU64_NextRandom() % total;
             total = 0;
             for (entry = first; entry < last; entry++) {
                 total += scene->weights[entry] * 10;
@@ -489,11 +489,11 @@ s32 Audio_ChooseWeightedSoundVariant(SceneRecAt2B5C *scene, s16 id, s16 avoid) {
 }
 
 void Audio_ResolveInstrumentSectionZero(void *arg0, s16 index) {
-    Render_GetPackSection(Render_GetPackSection((((struct ObjectLinks2B50 *) ((s8 *) arg0))->unk_2B4C), (s32) index), 0);
+    SetN64_GetPackSection(SetN64_GetPackSection((((struct ObjectLinks2B50 *) ((s8 *) arg0))->unk_2B4C), (s32) index), 0);
 }
 
 void Audio_ResolveInstrumentSectionOne(void *arg0, s16 index) {
-    Render_GetPackSection(Render_GetPackSection((((struct ObjectLinks2B50 *) ((s8 *) arg0))->unk_2B4C), (s32) index), 1);
+    SetN64_GetPackSection(SetN64_GetPackSection((((struct ObjectLinks2B50 *) ((s8 *) arg0))->unk_2B4C), (s32) index), 1);
 }
 
 /* Returns 1 when the object's owner at 0x102 is set, or when the id is below 256 and at least six of

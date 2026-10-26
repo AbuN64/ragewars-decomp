@@ -12,7 +12,7 @@
 #include "GAME/CODE_8027302C.H"
 extern void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMovement *tuning);
 extern s32 Weapons_RequestActorState(void *arg0, void *arg1, s32 arg2);
-extern void Particle_TransformPoint(void *arg0, void *arg1, void *arg2);
+extern void GraphU64_TransformPoint(void *arg0, void *arg1, void *arg2);
 
 #if defined(VERSION_US_REV1) || defined(NON_MATCHING)
 #include "TYPES.H"
@@ -72,7 +72,7 @@ INCLUDE_ASM("span_1000", func_80225D34_de);
 #endif
 
 extern void Weapons_UpdateViewAngles(void *,void *,void *);
-extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
+extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
 extern f32 D_800C9514_de;
 extern f32 D_800C9FE8;
 extern Triple D_800C94DC_de;
@@ -92,9 +92,9 @@ void func_80225F44_de(SharedPlayer *player,func_802165F8_S1 *body) {
     unit=D_800C2B08_de;
     yaw=body->unk6C;
     sway*=unit;force=yaw+sway;
-    Nav_EaseValueToward(&body->unk6C,force,0.9f);
+    GraphU64_EaseValueToward(&body->unk6C,force,0.9f);
     yaw=((yaw-body->unk6C)+player->views5E8.view69C_40.stick*D_800C2B0C_de)*unit;
-    Nav_EaseValueToward(&player->views5E8.view72C_76.kickRoll,yaw,0.1f);
+    GraphU64_EaseValueToward(&player->views5E8.view72C_76.kickRoll,yaw,0.1f);
     Weapons_UpdateViewAngles(player,body,&D_800C95D0);
     offset=0;
     if(player->views5E8.view6B8_50.input&8) {
@@ -126,7 +126,7 @@ void func_80225F44_de(SharedPlayer *player,func_802165F8_S1 *body) {
         if(forward<0.0f)force=-forward*D_800C2B18_de;
         else force=forward*D_800C2B1C_de;
         if(D_800C2B20_de<force)force=D_800C2B20_de;
-        if(player->views5DC.view5DC_6.storage)Camera_StartScaledShake(player->views5DC.view5DC_6.storage,0.0f,force,0.0f,D_800C2B24_de,1,body->unk8);
+        if(player->views5DC.view5DC_6.storage)Sky_StartScaledShake(player->views5DC.view5DC_6.storage,0.0f,force,0.0f,D_800C2B24_de,1,body->unk8);
     }
     if(0.0f<player->views5E8.view6C0_51.unk6C0)func_802233F0_de(player,body,&D_800C9510_de[0]);
     else func_802233F0_de(player,body,&D_800C9510_de[1]);
@@ -138,7 +138,7 @@ void func_80225F44_de(SharedPlayer *player,func_802165F8_S1 *body) {
     }
     if(offset) {
         BuildYawMatrix(&rotation,body->unk6C);
-        Particle_TransformPoint(&rotation,offset,&player->views5E8.view73C_82.weapon);
-        Particle_ScaleVector(&player->views5E8.view73C_82.weapon,&player->views5E8.view73C_82.weapon,10.24f);
+        GraphU64_TransformPoint(&rotation,offset,&player->views5E8.view73C_82.weapon);
+        GraphU64_ScaleVector(&player->views5E8.view73C_82.weapon,&player->views5E8.view73C_82.weapon,10.24f);
     }
 }

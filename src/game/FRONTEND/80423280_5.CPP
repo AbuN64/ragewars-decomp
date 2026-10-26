@@ -67,7 +67,7 @@ extern s32 D_80154020[];
 extern void func_80298368_de(s32);
 
 
-extern void Menu_StartFlicker(void *, s32);
+extern void SmpFlicker_StartFlicker(void *, s32);
 
 extern void func_802A2360_de(void);
 
@@ -96,9 +96,9 @@ s32 func_80426918_de(void *unused0, void *unused1, s32 delta) {
         if (--D_800E4690->timer > 0) {
             break;
         }
-        Render_PlayFlatSound(0xE79);
+        SoundElement_PlayFlatSound(0xE79);
         Frontend_SetWidgetFlag08(D_800E4690->button, 1);
-        Menu_StartFlicker(D_800E4690->prompt, 4);
+        SmpFlicker_StartFlicker(D_800E4690->prompt, 4);
         D_800E4690->state = 4;
         D_800E4690->timer = 4;
         break;
@@ -130,7 +130,7 @@ s32 func_80426918_de(void *unused0, void *unused1, s32 delta) {
         }
         break;
     case 5:
-        Render_PlayFlatSound(0xE78);
+        SoundElement_PlayFlatSound(0xE78);
         Frontend_SetWidgetFlag08(D_800E4690->button, 0);
         switch (D_801462C8.controllerMode) {
         case 1:

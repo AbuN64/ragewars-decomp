@@ -39,7 +39,7 @@ void func_80293A20_de(GameSession *session, s32 arg1, s32 target) {
         session->mode = 0x14;
         session->target = arg1;
         session->previousMode = mode;
-        if (Render_IsSnapshotActive() != 0) {
+        if (Control_IsSnapshotActive() != 0) {
             session->timer = (1.0f);
         }
     }
@@ -59,7 +59,7 @@ extern void InitFrontendMenus(void);
 #else
 #endif
 extern void func_80298368_de(s32 arg0);
-extern void Render_BeginModeTransition(GameSession *arg0, s32 arg1);
+extern void SetN64_BeginModeTransition(GameSession *arg0, s32 arg1);
 extern void func_802394B4_de(void *arg0);
 extern void func_80293394_de(struct GameSession *arg0);
 
@@ -90,7 +90,7 @@ func_802A2224_de
 ();
                 func_80298368_de(2);
                 Frontend_RequestScreenMode(0);
-                Render_BeginModeTransition(state, 1);
+                SetN64_BeginModeTransition(state, 1);
                 state->transitionTime = 0;
             } else if (D_8010B0E0.buttons != 0) {
                 D_8014288C = 0;
@@ -106,7 +106,7 @@ func_802A2224_de
 #endif
 ();
                 func_80298368_de(2);
-                Render_BeginModeTransition(state, 8);
+                SetN64_BeginModeTransition(state, 8);
                 state->transitionTime = 0;
             }
         }
@@ -161,7 +161,7 @@ extern f32 D_800C54B8_de, D_800C54BC_de;
 extern void func_80286080_de(void *);
 extern void func_802394B4_de(void *);
 extern void func_80298368_de(s32);
-extern void Render_BeginModeTransition(GameSession *, s32);
+extern void SetN64_BeginModeTransition(GameSession *, s32);
 extern void func_80293394_de(GameSession *);
 extern void func_802AA7A4_de(void *);
 
@@ -176,13 +176,13 @@ void func_80293CE4_de(GameSession *session) {
                 stopRoundPlatform();
                 func_80298368_de(2);
                 Frontend_RequestScreenMode(0);
-                Render_BeginModeTransition(session, 1);
+                SetN64_BeginModeTransition(session, 1);
                 session->transitionTime = 0;
             } else if (D_8010B0E0.buttons != 0) {
                 counters->transitionActive = 0;
                 stopRoundPlatform();
                 func_80298368_de(2);
-                Render_BeginModeTransition(session, 8);
+                SetN64_BeginModeTransition(session, 8);
                 session->transitionTime = 0;
             }
         }

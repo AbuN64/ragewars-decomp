@@ -83,7 +83,7 @@ f32 InstHdr_GetInactiveActorHeight(Actor_u1 *actor) {
     }
 }
 
-f32 Sound_GetActorBaseOffset(void *actorStorage) {
+f32 InstHdr_GetActorBaseOffset(void *actorStorage) {
     Resource_u1 *nested;
     if (*(u8 *)actorStorage == 1) {
         return ((LevelActor *)actorStorage)->eyeHeight;
@@ -132,7 +132,7 @@ struct MeasureObject {
     MeasureOwner *owner;
 };
 
-f32 Sound_GetActorReach(MeasureObject *object) {
+f32 InstHdr_GetActorReach(MeasureObject *object) {
     MeasureDefinition *definition;
 top:
     definition = object->definition;

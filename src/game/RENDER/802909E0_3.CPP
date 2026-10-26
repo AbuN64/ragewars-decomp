@@ -19,7 +19,7 @@ void func_80290A14_de(void *frame, void *arg1) {
     Frame *view = frame;
     CVector3 *direction = arg1;
     view->direction = *direction;
-    Particle_NormalizeVec3(&view->direction.x);
+    GraphU64_NormalizeVec3(&view->direction.x);
 }
 
 /** Copy four scalar fields from the source into output pointers. */

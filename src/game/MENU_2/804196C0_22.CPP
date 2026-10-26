@@ -11,7 +11,7 @@
 #include "RENDER_2/8025DE50_5.H"
 #include "SCENE/802508E0_13.H"
 
-/* Sets the word at 0x54 of arg0 to 2, calls Render_PlayFlatSound with 0xE74, and sets the byte at 0x10 of every child in the list at 0x8 whose halfword at 0xE is not 8 to 100, returning zero. Adapted from func_802A1E5C_de with the two stores to 0x5C and 0x48 replaced by a single store of 2 to 0x54. */
+/* Sets the word at 0x54 of arg0 to 2, calls SoundElement_PlayFlatSound with 0xE74, and sets the byte at 0x10 of every child in the list at 0x8 whose halfword at 0xE is not 8 to 100, returning zero. Adapted from func_802A1E5C_de with the two stores to 0x5C and 0x48 replaced by a single store of 2 to 0x54. */
 
 
 /* Marks a menu's state word at offset 0x54 as 2 when func_8029DB58_de's value for the fifth argument
@@ -34,13 +34,13 @@ extern void func_8041A8E8_de(struct func_8022FD9C_Record *menu);
 
 extern void func_8041A910_de(struct func_8022FD9C_Record *menu);
 
-/* Calls Scene_FreeMemory with the arguments it was given and returns zero. */
+/* Calls Cache_FreeMemory with the arguments it was given and returns zero. */
 
 s32 func_8041A9B0_de(struct CommandListMenu *commandListMenu) {
     struct LinkedCommandEntry *p;
 
     commandListMenu->state = 2;
-    Render_PlayFlatSound(0xE74);
+    SoundElement_PlayFlatSound(0xE74);
     p = commandListMenu->entries;
     if (p != 0) {
         do {
@@ -106,10 +106,10 @@ s32 func_8041AB1C_de(struct func_8022FD9C_Record *menu)
 }
 
 s32 func_8041AB70_de(void *arg0) {
-    Scene_FreeMemory(arg0);
+    Cache_FreeMemory(arg0);
     return 0;
 }
 
-void Menu_RegisterListClass(void) {
+void SmpList_RegisterListClass(void) {
     func_802982C4_de(0xB64, D_0041AD7C, D_0041AE0C, 3);
 }

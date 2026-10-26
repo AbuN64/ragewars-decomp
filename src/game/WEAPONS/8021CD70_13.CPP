@@ -15,7 +15,7 @@
 
 
 
-extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
+extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
 
 
 
@@ -28,20 +28,20 @@ void func_80223E34_de(SharedPlayer *player, func_80203908_S4 *camera) {
     f32 amount;
 
     if (!(player->views5E8.view11D8_148.recoil > 0.0f)) {
-        Nav_EaseValueToward(&player->views5E8.view72C_76.kickRoll, 0.0f, 0.25f);
-        Nav_EaseValueToward(&player->views5E8.view728_74.kickPitch, 0.0f, 0.5f);
+        GraphU64_EaseValueToward(&player->views5E8.view72C_76.kickRoll, 0.0f, 0.25f);
+        GraphU64_EaseValueToward(&player->views5E8.view728_74.kickPitch, 0.0f, 0.5f);
         step = 0.08726647496f;
-        player->views5E8.view730_79.sway[0] = Nav_DecayToZero(player->views5E8.view730_79.sway[0], step);
-        player->views5E8.view730_79.sway[1] = Nav_DecayToZero(player->views5E8.view730_79.sway[1], step);
-        player->views5E8.view730_79.sway[2] = Nav_DecayToZero(player->views5E8.view730_79.sway[2], step);
+        player->views5E8.view730_79.sway[0] = GraphU64_DecayToZero(player->views5E8.view730_79.sway[0], step);
+        player->views5E8.view730_79.sway[1] = GraphU64_DecayToZero(player->views5E8.view730_79.sway[1], step);
+        player->views5E8.view730_79.sway[2] = GraphU64_DecayToZero(player->views5E8.view730_79.sway[2], step);
         if (21.0f < player->views5E8.view75C_90.bobSpeed) {
             player->views5E8.view75C_90.bobSpeed = 21.0f;
         }
         if (0.1f < player->views5E8.view758_88.bobStrength) {
             player->views5E8.view758_88.bobStrength = 0.1f;
         }
-        player->views5E8.view75C_90.bobSpeed = Nav_DecayToZero(player->views5E8.view75C_90.bobSpeed, 0.11666667f);
-        player->views5E8.view758_88.bobStrength = Nav_DecayToZero(player->views5E8.view758_88.bobStrength, 0.00055555557f);
+        player->views5E8.view75C_90.bobSpeed = GraphU64_DecayToZero(player->views5E8.view75C_90.bobSpeed, 0.11666667f);
+        player->views5E8.view758_88.bobStrength = GraphU64_DecayToZero(player->views5E8.view758_88.bobStrength, 0.00055555557f);
         if (player->views5E8.view758_88.bobStrength < 0.06f) {
             player->views5E8.view75C_90.bobSpeed = player->views5E8.view758_88.bobStrength = 0.0f;
         }
@@ -52,9 +52,9 @@ void func_80223E34_de(SharedPlayer *player, func_80203908_S4 *camera) {
             height = 82.94399261f;
         }
         rate = 0.5f;
-        Nav_EaseValueToward(&player->views5E8.view740_84.height, height + player->views5E8.view758_88.bobStrength * (Math_Sinf(phase) * 10.24f), rate);
+        GraphU64_EaseValueToward(&player->views5E8.view740_84.height, height + player->views5E8.view758_88.bobStrength * (Math_Sinf(phase) * 10.24f), rate);
         amount = player->views5E8.view758_88.bobStrength * (Math_Cosf(phase) * 8.192f);
-        Nav_EaseValueToward(&player->views5E8.view73C_81.side, -Math_Sinf(camera->unk6C + 3.1415927f) * amount, rate);
-        Nav_EaseValueToward(&player->views5E8.view744_86.forward, -Math_Cosf(camera->unk6C + 3.1415927f) * amount, rate);
+        GraphU64_EaseValueToward(&player->views5E8.view73C_81.side, -Math_Sinf(camera->unk6C + 3.1415927f) * amount, rate);
+        GraphU64_EaseValueToward(&player->views5E8.view744_86.forward, -Math_Cosf(camera->unk6C + 3.1415927f) * amount, rate);
     }
 }

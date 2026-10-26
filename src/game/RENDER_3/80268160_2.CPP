@@ -109,7 +109,7 @@ extern f32 D_800C447C;
 extern s32 InstHdr_GetActorMotionIndex(void *);
 extern s32 func_8025DEC0_de(s32, CVector3, s32, s32, f32);
 
-void Render_PlayTeamEffect(SoundActor *actor, SoundSource *source, s32 unused,
+void Events_PlayTeamEffect(SoundActor *actor, SoundSource *source, s32 unused,
                      CVector3 position, ParamsRecAt4 params) {
     f32 gain = D_800C4478_de;
     s32 owner = -1;

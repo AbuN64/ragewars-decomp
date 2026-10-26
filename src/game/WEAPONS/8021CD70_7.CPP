@@ -33,7 +33,7 @@ void func_8021EA54_de(Shared_HudPlayer *, Shared_HudView *);
 void func_8022C1E8_de(Shared_HudPlayer *, Shared_HudView *);
 void func_8022C37C_de(Shared_HudPlayer *, Shared_HudView *);
 s32 func_80283228_de(void *, Shared_HudPlayer *);
-s16 **Render_StartWorldEffect(void *, s32, s32, s32);
+s16 **Scene_StartWorldEffect(void *, s32, s32, s32);
 void func_802A6900_de(void *, Shared_HudPlayer *);
 void func_802A7AA4_de(void *);
 
@@ -99,7 +99,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
         func_802183E8_de(player->strokes, view, player);
         func_80218F08_de(player->trails, view, player);
         func_802A6900_de(player->marks, player);
-        Text_SetupSpriteMode(D_801462C8.hudFade);
+        OnScreen_SetupSpriteMode(D_801462C8.hudFade);
         sx = view->width / (f32) D_800E28D0;
         sy = view->height / (f32) D_800E28D4;
         if (D_800E28D8 == 0) {
@@ -163,7 +163,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             }
             y = view->x + view->width * 0.5f;
             x = view->y + view->height * 0.5f;
-            Text_SetupSpriteMode(0xFA);
+            OnScreen_SetupSpriteMode(0xFA);
             gDPSetEnvColor(g_displayListCursor++, (r), (g), (b), 250);
             for (k = 0; k < 4; k++) {
                 func_802AAC28_de(0x208, k, y + scaleX * D_800C9F64_de[k + 4], x + scaleY * D_800C9F74_de[k + 4], sx,
@@ -217,7 +217,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             }
             x = player->livesX * scaleX + view->x;
             y = player->livesY * scaleY + view->y;
-            Text_SetupSpriteMode(player->alpha);
+            OnScreen_SetupSpriteMode(player->alpha);
             func_802A822C_de(n, x, y + scaleY * 22.0f, scaleX, scaleY, 1, 0, 0);
             func_802AAC28_de(0x1F6, 0, x + scaleX * 20.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
             if (D_801462C8.counters.enabled != 0) {
@@ -250,20 +250,20 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             if (player->scoreAnim != 0 && player->scoreState != 0) {
                 frames = 1;
                 if (D_801462C8.counters.teams != 0) {
-                    res = Render_StartWorldEffect(&g_world, 0x204, 0, 1);
+                    res = Scene_StartWorldEffect(&g_world, 0x204, 0, 1);
                 } else {
-                    res = Render_StartWorldEffect(&g_world, 0x1FA, 0, 1);
+                    res = Scene_StartWorldEffect(&g_world, 0x1FA, 0, 1);
                 }
                 if (res != NULL) {
                     frames = (*res != NULL) ? **res : 1;
-                    Scene_UnlockResource(0, res);
+                    Cache_UnlockResource(0, res);
                 }
                 x = player->scoreX * scaleX + view->x + view->width;
                 y = player->scoreY * scaleY + view->y;
                 if (x > 200.0f) {
                     x -= 12.0f;
                 }
-                Text_SetupSpriteMode(player->alpha);
+                OnScreen_SetupSpriteMode(player->alpha);
                 func_802A822C_de(player->scoreLast, x + scaleX * 48.0f, y + scaleY * 22.0f, scaleX, scaleY, 1, 0, 0);
                 if (player->scoreState < 2) {
                     if (hudRules()->enabled != 0) {
@@ -363,19 +363,19 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                 player->countAnim = 1;
                 if (player->countState != 0) {
                     n = 1;
-                    res = Render_StartWorldEffect(&g_world, 0x1FD, 0, 1);
+                    res = Scene_StartWorldEffect(&g_world, 0x1FD, 0, 1);
                     if (res != NULL) {
                         if (*res != NULL) {
                             n = **res;
                         }
-                        Scene_UnlockResource(0, res);
+                        Cache_UnlockResource(0, res);
                     }
                     x = player->countX * scaleX + view->x + view->width;
                     y = player->countY * scaleY + view->y;
                     if (x > 200.0f) {
                         x -= 12.0f;
                     }
-                    Text_SetupSpriteMode(player->alpha);
+                    OnScreen_SetupSpriteMode(player->alpha);
                     func_802A822C_de(player->owner->count, x + scaleX * 48.0f, y + scaleY * 20.0f, scaleX, scaleY, 1,
                                   0, 0);
                     if (player->countState < 2) {
@@ -408,19 +408,19 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                 player->squadAnim = 1;
                 if (player->squadState != 0) {
                     frames = 1;
-                    res = Render_StartWorldEffect(&g_world, 0x201, 0, 1);
+                    res = Scene_StartWorldEffect(&g_world, 0x201, 0, 1);
                     if (res != NULL) {
                         if (*res != NULL) {
                             frames = **res;
                         }
-                        Scene_UnlockResource(0, res);
+                        Cache_UnlockResource(0, res);
                     }
                     x = player->squadX * scaleX + view->x + view->width;
                     y = player->squadY * scaleY + view->y;
                     if (x > 200.0f) {
                         x -= 12.0f;
                     }
-                    Text_SetupSpriteMode(player->alpha);
+                    OnScreen_SetupSpriteMode(player->alpha);
                     func_802A822C_de(score, x + scaleX * 48.0f, y + scaleY * 20.0f, scaleX, scaleY, 1, 0, 0);
                     if (player->squadState < 2) {
                         func_802AAC28_de(0x201, 0, x + scaleX * 8.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
@@ -448,7 +448,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                 if (icon > 0.0f) {
                     x = view->x + view->width * 0.5f;
                     y = view->y + view->height * 0.5f;
-                    Text_SetupSpriteMode(icon);
+                    OnScreen_SetupSpriteMode(icon);
                     func_802AAC28_de(0x209, 0, x - scaleX * 31.0f, y - scaleY * 32.0f, scaleX, scaleY, 1);
                 } else {
                     player->iconState = 0;
@@ -486,7 +486,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                     if (player->boost > 0.0f) {
                         level = 1;
                     }
-                    Text_SetupSpriteMode(player->statusAlpha);
+                    OnScreen_SetupSpriteMode(player->statusAlpha);
                     func_802AAC28_de(0x20C, level, x - scaleX * 70.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
                 } else {
                     /* Clears the icon state, not the status state. */
@@ -509,7 +509,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             } else {
                 level = 0;
             }
-            Text_SetupSpriteMode(0xFF);
+            OnScreen_SetupSpriteMode(0xFF);
             func_802AAC28_de(0x20B, level, x + scaleX * 10.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
         } else if (zoom > 1.0f) {
             stepOut = (D_800C9190_de[0] - 1.0f) * 0.25f;
@@ -524,7 +524,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             } else {
                 level = 0;
             }
-            Text_SetupSpriteMode(0xFF);
+            OnScreen_SetupSpriteMode(0xFF);
             func_802AAC28_de(0x20A, level, x + scaleX * 10.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
         }
         if (player->weapon == 0xC && player->kind != D_800CE47C) {
@@ -535,7 +535,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             x = view->x + view->width * 0.5f;
             y = view->y + view->height * 0.5f;
             for (i = 0; i < 3; i++, ammo--) {
-                Text_SetupSpriteMode(ammo > 0 ? 0xFF : 0x40);
+                OnScreen_SetupSpriteMode(ammo > 0 ? 0xFF : 0x40);
                 func_802AAC28_de(0x2F4, 0, x + D_800CAB78_eu[i] * scaleX, y + scaleY * 64.0f, scaleX, scaleY, 1);
             }
         }

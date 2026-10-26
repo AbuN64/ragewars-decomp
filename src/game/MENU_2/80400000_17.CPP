@@ -72,10 +72,10 @@ void func_80402BA0_de(ScreenRectangle *rectangle) {
     if(D_800DE7F4_de)Menu_DrawLetterboxBands();
 }
 
-/* When the entry table is available, loads it through Render_LocatePackSection and Scene_RequestResource, finds the
+/* When the entry table is available, loads it through SetN64_LocatePackSection and Cache_RequestResource, finds the
    last 0x4C-byte entry whose ids match the object's u16 ids at 4 and 0xA, and on a match records
    the owner, the id, the entry index and a pending flag in the current record; the loaded table
-   is then released through Scene_UnlockResource. */
+   is then released through Cache_UnlockResource. */
 
 
 
@@ -88,7 +88,7 @@ void func_80402BA0_de(ScreenRectangle *rectangle) {
 
 extern char g_cinemaDirectoryText[];
 
-extern s32 Render_LocatePackSection(s32 *, s32, s32, s32 *);
+extern s32 SetN64_LocatePackSection(s32 *, s32, s32, s32 *);
 
 
 
@@ -123,11 +123,11 @@ void Menu_RequestTrackByIds(struct SharedTrackObject *owner, func_8020478C_S1 *o
     if (D_800DE7E8 != 0) {
         id4 = obj->unk4;
         idA = obj->unkA;
-        key = Render_LocatePackSection(D_8011FEFC, D_8011BDFC, 0, &size);
+        key = SetN64_LocatePackSection(D_8011FEFC, D_8011BDFC, 0, &size);
         if (key == 0) {
             table = 0;
         } else {
-            table = Scene_RequestResource(0, key, key, size, 0x33, 0, 0, g_cinemaDirectoryText, 1);
+            table = Cache_RequestResource(0, key, key, size, 0x33, 0, 0, g_cinemaDirectoryText, 1);
         }
         n = *D_8011FEFC - 1;
         entry = (EntryRecAt4V2 *)(*table + 2);
@@ -142,7 +142,7 @@ void Menu_RequestTrackByIds(struct SharedTrackObject *owner, func_8020478C_S1 *o
             D_800E2830->resourceDC = found;
             D_800E2830->field58 = 1;
         }
-        Scene_UnlockResource(0, table);
+        Cache_UnlockResource(0, table);
     }
 }
 
@@ -157,11 +157,11 @@ s32 func_804030E0_de(s32 key) {
     if (D_800DE7E8 == 0) {
         return 0;
     }
-    loaded = Render_LocatePackSection(D_8011FEFC, D_8011BDFC, 0, &size);
+    loaded = SetN64_LocatePackSection(D_8011FEFC, D_8011BDFC, 0, &size);
     if (loaded == 0) {
         table = 0;
     } else {
-        table = Scene_RequestResource(0, loaded, loaded, size, 0x33, 0, 0, g_cinemaDirectoryText, 1);
+        table = Cache_RequestResource(0, loaded, loaded, size, 0x33, 0, 0, g_cinemaDirectoryText, 1);
     }
     i = 0;
     entries = (EntryRecAt48 *)(*table + 2);
@@ -177,8 +177,8 @@ s32 func_804030E0_de(s32 key) {
             break;
         }
     }
-    Scene_UnlockResource(0, table);
-    Camera_ClearMessageCount();
+    Cache_UnlockResource(0, table);
+    Cinema_ClearMessageCount();
     return D_800E2830->targetD8;
 }
 
@@ -192,11 +192,11 @@ void func_80403200_de(char *name) {
     EntryRecAt18V5 *entries;
 
     if (D_800DE7E8 != 0) {
-        loaded = Render_LocatePackSection(D_8011FEFC, D_8011BDFC, 0, &size);
+        loaded = SetN64_LocatePackSection(D_8011FEFC, D_8011BDFC, 0, &size);
         if (loaded == 0) {
             table = 0;
         } else {
-            table = Scene_RequestResource(0, loaded, loaded, size, 0x33, 0, 0, g_cinemaDirectoryText, 1);
+            table = Cache_RequestResource(0, loaded, loaded, size, 0x33, 0, 0, g_cinemaDirectoryText, 1);
         }
         i = 0;
         entries = (EntryRecAt18V5 *)(*table + 2);
@@ -211,7 +211,7 @@ void func_80403200_de(char *name) {
                 break;
             }
         }
-        Scene_UnlockResource(0, table);
+        Cache_UnlockResource(0, table);
     }
 }
 
@@ -226,7 +226,7 @@ s32 func_8040332C_de(void) {
 
     Shared_World *tables;
     found = 0;
-    track = Render_GetPackSection(D_800E2830->resource, 2);
+    track = SetN64_GetPackSection(D_800E2830->resource, 2);
     n = track[1];
     refs = (Triple *)(track + 2);
     for (i = 0; i < n; i++) {

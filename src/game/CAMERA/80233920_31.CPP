@@ -11,7 +11,7 @@
 #include "TYPES.H"
 #include "CAMERA/80233920_31.H"
 #include "RESMGR/802A0888.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Produces a random shake offset for an object: looks up the object's model entry in D_8011FE88 and
  * zeroes the offset when there is none; otherwise eases the horizontal and vertical shake amplitudes
@@ -29,15 +29,15 @@ extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 extern void *func_8028B2F8_de(Shared_World *, u16 *);
 
-extern s32 Camera_IsSequenceInWindow(void);
+extern s32 Cinema_IsSequenceInWindow(void);
 
-extern f32 Anim_GetPolygonHeight(s32 arg0, f32 arg1, f32 arg2);
-
-
-extern void *Scene_AllocateResource(int a, int b, int c, void *d);
+extern f32 Region_GetPolygonHeight(s32 arg0, f32 arg1, f32 arg2);
 
 
-void *Scene_AllocateResource(int a, int b, int c, void *d);
+extern void *Cache_AllocateResource(int a, int b, int c, void *d);
+
+
+void *Cache_AllocateResource(int a, int b, int c, void *d);
 
 
 extern void func_8025E3F0_de(s32 arg0);
@@ -70,10 +70,10 @@ void func_80239EA4_de(void *gameplayCamera, CVector3 *out) {
     scale = D_800C3584_de.unk0;
     o->shakeHorizontal = value;
     o->shakeVertical += (targetY - o->shakeVertical) * D_800C3588_de.unk0;
-    out->x = Nav_RandomBetween(-o->shakeHorizontal * scale, o->shakeHorizontal * scale);
-    out->y = Nav_RandomBetween(0.0f, o->shakeVertical * D_800C358C_de.unk0);
+    out->x = GraphU64_RandomBetween(-o->shakeHorizontal * scale, o->shakeHorizontal * scale);
+    out->y = GraphU64_RandomBetween(0.0f, o->shakeVertical * D_800C358C_de.unk0);
     value = -o->shakeHorizontal * scale;
-    out->z = Nav_RandomBetween(value, o->shakeHorizontal * scale);
+    out->z = GraphU64_RandomBetween(value, o->shakeHorizontal * scale);
 }
 
 /** Preserve the empty hook at VRAM 0x80239FBC. */
@@ -92,7 +92,7 @@ void func_80239FDC_de(void *gameplayCamera) {
     f32 z;
     f32 w;
 
-    if (Camera_IsSequenceInWindow() != 0) {
+    if (Cinema_IsSequenceInWindow() != 0) {
         camera->floorPoly = (Shared_func_80234FDC_S8 *)Scene_FindFloorPolygon(&g_world, &camera->unk38);
     }
     object = (s32)camera->floorPoly;
@@ -101,14 +101,14 @@ void func_80239FDC_de(void *gameplayCamera) {
     z = camera->unk40;
     w = camera->unk44;
     camera->floorSurface = D_800CD8D0;
-    if (object != 0 && Camera_IsSequenceInWindow() == 0) {
-        value = ((y + w) - Anim_GetPolygonHeight(object, x, z)) * D_800C3590_de;
+    if (object != 0 && Cinema_IsSequenceInWindow() == 0) {
+        value = ((y + w) - Region_GetPolygonHeight(object, x, z)) * D_800C3590_de;
         if (value < D_800C3594_de && D_800C3598_de < value) {
             Shared_func_80234FDC_S8 *surface = (Shared_func_80234FDC_S8 *)object;
             camera->floorSurface = surface->unk1C;
         }
     }
-    if (Camera_IsSequenceInWindow() != 0) {
+    if (Cinema_IsSequenceInWindow() != 0) {
         camera->floorSurface = D_800CD8D0;
     }
     if (camera->zoomBlend > 0.0f) {
@@ -124,11 +124,11 @@ void func_8023A114_de(void *messageBuffer, s32 count) {
 
     bytes = count * 0xED8;
     buffer->count = count;
-    allocation = Scene_AllocateResource(0, bytes, 0x23, (char *)&D_800C32D0_de + 4);
+    allocation = Cache_AllocateResource(0, bytes, 0x23, (char *)&D_800C32D0_de + 4);
     buffer->allocation = allocation;
     firstBlock = *allocation;
     buffer->first = firstBlock;
-    Resmgr_FillMemory(firstBlock, 0, bytes);
+    XPlus_FillMemory(firstBlock, 0, bytes);
 }
 
 void func_8023A190_de(void *screenMessageOwner, int count) {
@@ -138,11 +138,11 @@ void func_8023A190_de(void *screenMessageOwner, int count) {
     int firstBlock;
     bytes = count << 6;
     owner->storage.count = count;
-    allocation = Scene_AllocateResource(0, bytes, 0x23, &D_800C32DC_de);
+    allocation = Cache_AllocateResource(0, bytes, 0x23, &D_800C32DC_de);
     owner->storage.allocation = allocation;
     firstBlock = *allocation;
     owner->storage.first = firstBlock;
-    Resmgr_FillMemory(firstBlock, 0, bytes);
+    XPlus_FillMemory(firstBlock, 0, bytes);
 }
 
 void func_8023A1F4_de(struct ScreenMessageOwner *owner) {
@@ -153,7 +153,7 @@ void func_8023A1F4_de(struct ScreenMessageOwner *owner) {
     func_80253908_de(0);
     allocation = owner->allocation;
     if (allocation != 0) {
-        Scene_ReleaseResource(0, allocation);
+        Cache_ReleaseResource(0, allocation);
         owner->allocation = 0;
         owner->allocationSize = 0;
         owner->count = 0;

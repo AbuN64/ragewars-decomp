@@ -25,7 +25,7 @@ extern s32 D_800CD730;
 
 
 
-void Weapons_ApplyWeaponSwitch(void *part, void *body) {
+void Weapon_ApplyWeaponSwitch(void *part, void *body) {
     s16 index;
     u16 unsigned_index;
     void *owner;

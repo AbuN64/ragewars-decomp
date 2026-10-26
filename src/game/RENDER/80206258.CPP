@@ -18,7 +18,7 @@
 
 extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
 
-extern void Render_SetActorStateBit(Shared_World *a, void *b, int c);
+extern void Rumble_SetActorStateBit(Shared_World *a, void *b, int c);
 
 /* Spawns effect kind at an actor's position through func_8028FFD0_de in D_80131600's list: kind 0xBD7
    is skipped while both of D_801468A0's flags at 0x78 and 0x80 are set, and kind 0x1388 is offset by
@@ -56,7 +56,7 @@ extern void func_8024B6A0_de(void *a, s32 c, s32 flag);
 
 extern void func_802472F0_de(void *arg0);
 
-extern s32 Camera_GetSequenceRequest(void);
+extern s32 Cinema_GetSequenceRequest(void);
 
 
 
@@ -64,14 +64,14 @@ extern s32 Camera_GetSequenceRequest(void);
 extern func_80206604_G1 D_801462E5;
 
 
-extern s32 Render_TestActorStateBit(void *, void *);
+extern s32 Rumble_TestActorStateBit(void *, void *);
 
 void func_80206258_de(Trigger *trigger) {
     func_8028B670_de(&g_world, trigger->owner, trigger->actor, 1);
 }
 
 void func_80206288_de(void *actor) {
-    Render_SetActorStateBit(&g_world, actor, 0);
+    Rumble_SetActorStateBit(&g_world, actor, 0);
 }
 
 void func_802062B0_de(Trigger *trigger) {
@@ -164,7 +164,7 @@ void func_80206604_de(LevelActor *actor, ActorMotionState *motionState) {
     if (D_801462E5.unk0 == 0) {
         actor->flags = flags2 | 0x10000000;
     }
-    if ((actor->type == 0x453) && (Camera_GetSequenceRequest() == 0x6F)) {
+    if ((actor->type == 0x453) && (Cinema_GetSequenceRequest() == 0x6F)) {
         motionState->secondaryUpdate = &D_0020694C;
     }
 }
@@ -174,7 +174,7 @@ void func_802066A4_de(LevelActor *actor, Dest *deviceState) {
     Weapons_RequestActorState(actor, deviceState, 0);
     deviceState->charge = D_800C1AE0_de;
     deviceState->field12C = D_800C1AE0_de;
-    if (Render_TestActorStateBit(&g_world, actor) == 1) {
+    if (Rumble_TestActorStateBit(&g_world, actor) == 1) {
         actor->flags &= ~0x2000;
         actor->flags &= ~0x100;
     }

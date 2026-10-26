@@ -78,7 +78,7 @@ struct Shared_MenuAmountColumn {
 typedef struct SharedRecAt13E0 SharedRecAt13E0;
 struct SharedRecAt13E0 {
     char pad0[0x8];
-    CVector3 position; /* +0x8: passed by value to Render_PlaySoundAtPosition */
+    CVector3 position; /* +0x8: passed by value to SoundElement_PlaySoundAtPosition */
     char pad14[0x4];
     struct SharedRecAtC * unk18; /* +0x18: src/func_802ACBCC.c */
     char pad1C[0x5B8];
@@ -683,13 +683,13 @@ command_done:
         temp_s1 = arg1->unk6;
         temp_s3 = arg1->unk8;
         if (arg0->unk5DC != 0) {
-            Camera_StartFade(arg0->unk5DC, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+            Sky_StartFade(arg0->unk5DC, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
             if (temp_s0_2 != 0) {
                 Camera_PostScreenMessage(&D_80145088, arg0->unk5DC, *temp_s0_2);
             }
         }
         if (temp_s1 != 0) {
-            Render_PlaySoundAtPosition(temp_s1, arg0->position, 0, -1);
+            SoundElement_PlaySoundAtPosition(temp_s1, arg0->position, 0, -1);
         }
         if (temp_s3 != 0) {
             func_8025E11C_de((s32) temp_s3);
@@ -714,7 +714,7 @@ typedef struct PowerupEntry {
 } PowerupEntry;
 /* Team ids that may always pick up items (func_802AB400_de reads the same pair). */
 extern s32 D_800CE474[2];
-extern void Weapons_AddAmmo(void *, s16, s16);
+extern void Player_AddAmmo(void *, s16, s16);
 /* Pickup feedback: flash the player's view, post the entry's message in the current language,
    play its sound at the player and raise its event. */
 static inline void announcePowerup(struct Player *player, PowerupEntry *entry)
@@ -723,17 +723,17 @@ static inline void announcePowerup(struct Player *player, PowerupEntry *entry)
     s32 sound = entry->sound;
     s32 event = entry->event;
     if (player->camera) {
-        Camera_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        Sky_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&D_80145088, player->camera, text[MENU_LANGUAGE]);
     }
-    if (sound) Render_PlaySoundAtPosition(sound, player->pos, 0, -1);
+    if (sound) SoundElement_PlaySoundAtPosition(sound, player->pos, 0, -1);
     if (event) func_8025E11C_de(event);
 }
 /* Powerup pickup handler (D_800D31D0 rows). A powerup the player already holds, or any pickup in a tag match by a
    player not on one of the D_800CE474 teams, only gives the pickup feedback. Otherwise the powerup takes weapon key
    3 or 7, whichever no action slot uses yet (none free: refused, returns 0); outside tag matches it becomes the
    pending weapon. Then the feedback plays and the entry's ammunition is added. Returns 1 when taken. */
-s32 Menu_HandlePowerWeaponPickup(struct Player *player, PowerupEntry *entry)
+s32 Pickup_HandlePowerWeaponPickup(struct Player *player, PowerupEntry *entry)
 {
     s32 key3Free = 1, key7Free = 1, i;
     s32 skipAmmo = 0;
@@ -756,7 +756,7 @@ s32 Menu_HandlePowerWeaponPickup(struct Player *player, PowerupEntry *entry)
             return 0;
         }
         announcePowerup(player, entry);
-        if (!skipAmmo) Weapons_AddAmmo(player, entry->ammoSlot, entry->ammoCount);
+        if (!skipAmmo) Player_AddAmmo(player, entry->ammoSlot, entry->ammoCount);
     }
     return 1;
 }
@@ -782,10 +782,10 @@ s32 func_802ACB98_eu_x(struct Player *player, PowerupEntry *pickup, void *obj) {
     case 3: func_802A6FB8_de((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, D_002AD44C_eu, D_002AD4FC_eu); break;
     }
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
-        Camera_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        Sky_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&D_80145088, player->camera, ((char **)text)[g_languageIndex]);
     }
-    if (sound) Render_PlaySoundAtPosition(sound, player->pos, 0, -1);
+    if (sound) SoundElement_PlaySoundAtPosition(sound, player->pos, 0, -1);
     if (event) func_8025E11C_de(event);
     return 1;
 }
@@ -815,10 +815,10 @@ s32 func_802ACB58_eu(struct Player *player, PowerupEntry *pickup, void *obj) {
     case 3: func_802A6FB8_de((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, D_002AD44C_eu, D_002AD4FC_eu); break;
     }
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
-        Camera_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        Sky_StartFade(player->camera, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&D_80145088, player->camera, ((char **)text)[g_languageIndex]);
     }
-    if (sound) Render_PlaySoundAtPosition(sound, player->pos, 0, -1);
+    if (sound) SoundElement_PlaySoundAtPosition(sound, player->pos, 0, -1);
     if (event) func_8025E11C_de(event);
     return 1;
 }

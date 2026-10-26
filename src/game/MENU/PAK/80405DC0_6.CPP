@@ -15,8 +15,8 @@ extern Copy584 D_801462C8;
 extern f32 D_801468A0[];
 extern u8 D_800F91F0[];
 extern void func_80253908_de(s32);
-extern SaveSnapshot **Scene_AllocateResource(s32, s32, s32, void *);
-extern void Resmgr_FillMemory(void *, s32, s32);
+extern SaveSnapshot **Cache_AllocateResource(s32, s32, s32, void *);
+extern void XPlus_FillMemory(void *, s32, s32);
 extern void func_802BD3A0_de(void *, void *, s32);
 /* eu-x splits this function one word late (its leading lui sits in the
  * preceding data blob), so that version keeps the split asm. */
@@ -28,13 +28,13 @@ void Pak_CreateSaveSnapshot(u8 *player) {
     SaveSnapshot *snapshot;
     if (D_800DE860_de != 0) {
         func_80253908_de(0);
-        Scene_ReleaseResource(0, D_800DE860_de);
+        Cache_ReleaseResource(0, D_800DE860_de);
     }
     allocationSize = D_8011FECC + 0x610;
-    snapshotHandle = Scene_AllocateResource(0, allocationSize, 0x33, g_pakSingleSaveBlockName);
+    snapshotHandle = Cache_AllocateResource(0, allocationSize, 0x33, g_pakSingleSaveBlockName);
     D_800DE868 = *snapshotHandle;
     D_800DE860_de = snapshotHandle;
-    Resmgr_FillMemory(D_800DE868, 0, allocationSize);
+    XPlus_FillMemory(D_800DE868, 0, allocationSize);
     D_800DE868->player = *(Copy70 *)(player + 0x5E0);
     D_800DE868->world = D_801462C8;
     snapshot = D_800DE868;
@@ -111,7 +111,7 @@ void Pak_MarkSaveNotes(Shared_PakMenu *menu) {
             switch (D_800DE874) {
                 case 1:
                     if (func_802A0238_de(code) == 4 && func_802A0238_de(company) == 2 &&
-                        Resmgr_CompareStrings(code, PAK_CODE) == 0 && Resmgr_CompareStrings(company, PAK_COMPANY) == 0) {
+                        XPlus_CompareStrings(code, PAK_CODE) == 0 && XPlus_CompareStrings(company, PAK_COMPANY) == 0) {
                         match = 1;
                     } else {
                         match = 0;
@@ -120,7 +120,7 @@ void Pak_MarkSaveNotes(Shared_PakMenu *menu) {
                     break;
                 case 2:
                     if (func_802A0238_de(code) == 4 && func_802A0238_de(company) == 2 &&
-                        Resmgr_CompareStrings(code, PAK_CODE) == 0 && Resmgr_CompareStrings(company, PAK_COMPANY) == 0) {
+                        XPlus_CompareStrings(code, PAK_CODE) == 0 && XPlus_CompareStrings(company, PAK_COMPANY) == 0) {
                         match = 1;
                     } else {
                         match = 0;
@@ -132,7 +132,7 @@ void Pak_MarkSaveNotes(Shared_PakMenu *menu) {
                     other = 0;
                     goto done;
             }
-            if (Resmgr_CompareStrings(name, title) == 0 && match != 0) {
+            if (XPlus_CompareStrings(name, title) == 0 && match != 0) {
                 other = 0;
             }
         }
@@ -167,7 +167,7 @@ extern char D_8014561C[], D_0044FFA4[], D_0044FB50[];
 extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
 extern char D_0044EA98[], D_0044E9C0[], D_0044EA2C[], D_0044EA08[], D_0044E9E4[];
 extern void Pak_ProbeStatus(s32);
-extern s32 Pak_GetStatus(s32), Pak_IsChannelReady(s32), func_80405598_de(s32), Render_TakePakChange(s32);
+extern s32 Pak_GetStatus(s32), Pak_IsChannelReady(s32), func_80405598_de(s32), Control_TakePakChange(s32);
 extern void Pak_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
 s32 Pak_CheckStatusPrompt(Menu_func_804066BC_de *menu, s32 channel, s32 quiet)
 {
@@ -189,7 +189,7 @@ s32 Pak_CheckStatusPrompt(Menu_func_804066BC_de *menu, s32 channel, s32 quiet)
     } else if (D_8015375C) sel = D_0044E4F8;
     prompt = sel;
     if (!prompt) return 0;
-    busy = Render_TakePakChange(channel);
+    busy = Control_TakePakChange(channel);
     if ((result == 0 || busy != 0) && result != -2) {
         if (busy) {
             Pak_OpenDialog(D_8014561C, D_0044EA98, menu->player, menu->slot, prompt);
@@ -215,7 +215,7 @@ s32 Pak_CheckStatusPrompt(Menu_func_804066BC_de *menu, s32 channel, s32 quiet)
 }
 
 #include "COMMON/SHAREDPLAYER.H"
-extern void Scene_ReleaseResource(s32, void *);
+extern void Cache_ReleaseResource(s32, void *);
 extern s32 D_8014D4C0_de, D_8014D4DC, D_80153760, D_8014D4EC_de, D_800DE874, D_80153784, D_8015375C, D_800E28C0, D_800E28C8;
 extern struct Saved D_80153738;
 extern struct { u8 value; } D_8014D4B0_de;
@@ -228,7 +228,7 @@ extern void Pak_ProbeStatus(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
 extern s32 Pak_IsChannelReady(s32 ch);
 extern s32 func_80405598_de(s32 ch);
-extern u32 Ovlgame_Crc32(void *data, u32 size, u32 seed);
+extern u32 Pak_Crc32(void *data, u32 size, u32 seed);
 
 
 /* Enters pak menu mode 1 on the selected channel: shows the pending message (D_800E28C0) with the channel's
@@ -276,7 +276,7 @@ void Pak_BeginProfileSave(Shared_PakMenu *menu) {
         for (i = 0; i < 8; i++) {
             D_8014D4B4[i] = profile->name[i];
         }
-        D_80153738.checksum = Ovlgame_Crc32(&D_80153738, 0x14, 4);
+        D_80153738.checksum = Pak_Crc32(&D_80153738, 0x14, 4);
         Pak_MarkSaveNotes(menu);
         return;
     }

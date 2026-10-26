@@ -10,7 +10,7 @@
 #include "sdk/AUDIO_2/802BF7F0.H"
 
 /* Selects the video mode and applies framebuffer and display configuration; the mode-to-word-array cast preserves configuration-store and mode-load scheduling. */
-s32 System_GetMemorySize(); /* extern */
+s32 Defs_GetMemorySize(); /* extern */
                                  /* extern */
 void Frontend_SetVideoModeAndViewports(s32, s32, s32, s32, s32, s32); /* extern */
 extern s32 D_800CC374;
@@ -45,7 +45,7 @@ void func_8040BBB0_de(void) {
     var_s0 = NULL;
     D_80141000 = 2;
     if (D_800E28D8 == -1) {
-        if (System_GetMemorySize() != 0x400000) {
+        if (Defs_GetMemorySize() != 0x400000) {
             D_800E28D8 = 1;
         } else {
             D_800E28D8 = 0;

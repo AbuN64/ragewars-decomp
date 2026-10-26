@@ -10,9 +10,9 @@
 
 
 
-extern s32 Camera_IsSequenceInWindow(void);
+extern s32 Cinema_IsSequenceInWindow(void);
 
-extern f32 Anim_GetPolygonHeight(s32 arg0, f32 arg1, f32 arg2);
+extern f32 Region_GetPolygonHeight(s32 arg0, f32 arg1, f32 arg2);
 
 
 
@@ -46,7 +46,7 @@ void func_80238F24_de(GameplayCamera *camera, s32 bobSuppression, f32 arg2, f32 
     camera->floorPoly = (void *)floorPolygon;
     camera->zoomBlend = requestedZoomBlend;
     camera->zoomFov = requestedZoomFov;
-    if (Camera_IsSequenceInWindow() != 0) {
+    if (Cinema_IsSequenceInWindow() != 0) {
         camera->floorPoly = (void *)Scene_FindFloorPolygon(&g_world, &camera->unk38);
     }
     object = (s32)camera->floorPoly;
@@ -55,13 +55,13 @@ void func_80238F24_de(GameplayCamera *camera, s32 bobSuppression, f32 arg2, f32 
     z = camera->unk40;
     w = camera->unk44;
     camera->floorSurface = D_800CD8D0;
-    if (object != 0 && Camera_IsSequenceInWindow() == 0) {
-        value = ((y + w) - Anim_GetPolygonHeight(object, x, z)) * D_800C8610;
+    if (object != 0 && Cinema_IsSequenceInWindow() == 0) {
+        value = ((y + w) - Region_GetPolygonHeight(object, x, z)) * D_800C8610;
         if (value < D_800C3524_de && D_800C3528_de < value) {
             camera->floorSurface = ((MenuRules *)(object))->locked;
         }
     }
-    if (Camera_IsSequenceInWindow() != 0) {
+    if (Cinema_IsSequenceInWindow() != 0) {
         camera->floorSurface = D_800CD8D0;
     }
     if (camera->zoomBlend > 0.0f) {

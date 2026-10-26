@@ -74,10 +74,10 @@ void Audio_UpdateDialogPlayer(PlayerRecAt24 *player) {
             ((u8 *)D_80108064)[4] = 2;
             ((s32 *)D_80108064)[2] = 0;
             index = player->song * 2;
-            header = Render_GetPackSection(player->bank->songs, index);
+            header = SetN64_GetPackSection(player->bank->songs, index);
             player->tempoScale = header->tempo * 0.01f;
             player->volume = header->volume;
-            sequence = Render_GetPackSection(player->bank->songs, index | 1);
+            sequence = SetN64_GetPackSection(player->bank->songs, index | 1);
             ((void **)D_80108064)[-1] = sequence;
             D_800D0D78->unk4 = func_802C00B0_de(sequence, 0x5622, &rate);
             player->state = 3;

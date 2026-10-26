@@ -28,7 +28,7 @@ extern char D_00450B18;
 extern char D_00450B3C;
 extern char D_80145040;
 
-extern void Items_ReleaseObjectHandles(void *);
+extern void Ovlgame_ReleaseObjectHandles(void *);
 extern void Pak_OpenDialog(char *, char *, SharedPlayer *, void *, s32);
 extern SharedPlayer *Weapons_GetPlayerByIndex(char *, s32);
 extern void func_8044972C_de(SharedPlayer *);
@@ -43,7 +43,7 @@ void Weapons_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
     body->motion[0] = 0;
     body->motion[1] = 0;
     body->motion[2] = 0;
-    Items_ReleaseObjectHandles(player);
+    Ovlgame_ReleaseObjectHandles(player);
     if (D_801462C8.local != 0) {
         if (player->views1450.view1450_2.infinite == 0) {
             switch (player->views1C.view5D4_46.slot) {

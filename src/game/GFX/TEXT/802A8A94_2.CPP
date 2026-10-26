@@ -11,9 +11,9 @@
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "MENU/PAK/8043F69C_6.H"
 
-extern Node80253610 *Render_StartWorldEffect(Shared_World *, s32, s32, s32);
+extern Node80253610 *Scene_StartWorldEffect(Shared_World *, s32, s32, s32);
 extern void Text_DrawTileGrid(Node80253610 *, s32, s16, s16, f32, f32, s32);
-extern void Scene_UnlockResource(void *, Node80253610 *);
+extern void Cache_UnlockResource(void *, Node80253610 *);
 
 /* The advance and kerning scale follow the currently selected font. */
 static inline f32 fontGlyphWidth(void)
@@ -56,7 +56,7 @@ void func_802A88F0_de(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow,
     case 4: case 5: resource = 5; break;
     case 6: resource = 7; break;
     }
-    font = Render_StartWorldEffect(&g_world, resource, 0x10, 1);
+    font = Scene_StartWorldEffect(&g_world, resource, 0x10, 1);
     if (font) {
         while (text && (ch = *text) && ch != 10) {
             next = text[1];
@@ -107,7 +107,7 @@ void func_802A88F0_de(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow,
             x += advance * sx;
             text++;
         }
-        Scene_UnlockResource(0, font);
+        Cache_UnlockResource(0, font);
     }
 }
 

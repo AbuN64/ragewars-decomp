@@ -13,7 +13,7 @@ extern void func_804199DC_de(struct FrameSequence *, s32);
 extern void func_80419A18_de(struct FrameSequence *, s32);
 extern void func_80419A28_de(struct FrameSequence *, s32);
 extern s32 func_80419A3C_de(struct FrameSequence *, s32);
-s32 Menu_UpdateFrameSequence(struct FrameSequence *sequence, s32 unused, s32 elapsed) {
+s32 SmpFrameAnim_UpdateFrameSequence(struct FrameSequence *sequence, s32 unused, s32 elapsed) {
     if (func_80419A3C_de(sequence, 4) == 0) {
         sequence->elapsed += elapsed;
         sequence->target->unk2C = sequence->frames[sequence->frame];

@@ -10,7 +10,7 @@
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
 #include "MENU/PAK_LOAD.H"
 
-/* Starts a player's run: in a multiplayer session (D_801462E5) picks the lap count from the chosen track through func_8022F454_de in mode 1 or from the loaded course in mode 4 for a human player, sets the run type at 0x5EA (1, or 3 in single player), clears 0x13C8 and 0x85C around Ovlgame_ResetRespawnedPlayer, then starts its vehicle through Render_PlacePlayerAtSpawnPoint with model 0xC1D for a computer player in state 12 during stage 9 and its own model otherwise, doubled when D_80145048 is two or more. */
+/* Starts a player's run: in a multiplayer session (D_801462E5) picks the lap count from the chosen track through func_8022F454_de in mode 1 or from the loaded course in mode 4 for a human player, sets the run type at 0x5EA (1, or 3 in single player), clears 0x13C8 and 0x85C around Ovlgame_ResetRespawnedPlayer, then starts its vehicle through Player_PlacePlayerAtSpawnPoint with model 0xC1D for a computer player in state 12 during stage 9 and its own model otherwise, doubled when D_80145048 is two or more. */
 
 
 
@@ -46,9 +46,9 @@ void func_8044972C_de(SharedPlayer *player) {
     Ovlgame_ResetRespawnedPlayer(player);
     player->views5E8.view85C_120.w85C = 0;
     if (player->views5DC.view5E0_9.state == 12 && player->views1450.view1450_1.computer != 0 && D_801371D4 == 9) {
-        Render_PlacePlayerAtSpawnPoint(player, 0xC1D, scale, 1);
+        Player_PlacePlayerAtSpawnPoint(player, 0xC1D, scale, 1);
     } else {
-        Render_PlacePlayerAtSpawnPoint(player, player->views5E8.view5EC_6.model, scale, 1);
+        Player_PlacePlayerAtSpawnPoint(player, player->views5E8.view5EC_6.model, scale, 1);
     }
 }
 
@@ -81,7 +81,7 @@ void Ovlgame_UpdateRunEndPlayer(struct Player *player)
                 }
                 Weapons_SetPlayerState(player, player, 0x12);
             } else {
-                Render_PlacePlayerAtSpawnPoint(player, player->model, modelScale, 1);
+                Player_PlacePlayerAtSpawnPoint(player, player->model, modelScale, 1);
                 Ovlgame_ResetRespawnedPlayer(player);
             }
         } else {

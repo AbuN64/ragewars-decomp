@@ -18,13 +18,13 @@ extern struct ControllerProfile D_8010F328[4];
 #include "COMMON/GAME_SESSION.H"
 
 
-extern s32 Render_IsAButtonPressed(struct ControllerProfile *);
+extern s32 Control_IsAButtonPressed(struct ControllerProfile *);
 
 extern void func_8025E384_de(void);
 
 extern void Ovlgame_StartMatchTransition(GameSession *, s32);
 
-extern s32 Render_CountConnectedControllers(void);
+extern s32 Control_CountConnectedControllers(void);
 
 /* Sets the option bytes at 0x1D and 0x1E of D_801462C8 to 1 and 4, clears the first byte of each
    of the eight 150-byte player records at 0x148, then calls Pak_AllocateMenu with the third argument,
@@ -71,7 +71,7 @@ void Multi_SelectInitialController(void *unused0, struct ObjRecAt20V2 *menu) {
     settings = &D_80146302;
     for (; i < 4; i++) {
         profile = &D_8010F328[i];
-        if (Render_IsAButtonPressed(profile) != 0) {
+        if (Control_IsAButtonPressed(profile) != 0) {
             settings->active = 1;
             D_801462C8.defaults.slot = i;
             menu->unk20 = profile;
@@ -85,7 +85,7 @@ void Multi_SelectInitialController(void *unused0, struct ObjRecAt20V2 *menu) {
 
 /** Clears or sets bit 24 of arg1's record's flags depending on how many of func_80264690_de's four slots are active, and demotes arg1->unk0 from state 2 to 1 in the low-count case. */
 s32 func_8043EB70_de(void *unused0, Obj8043ECE8 *arg1) {
-    if (Render_CountConnectedControllers() < 2) {
+    if (Control_CountConnectedControllers() < 2) {
         arg1->unkC->unk58 &= 0xFEFFFFFF;
         if (arg1->unk0 == 2) {
             arg1->unk0 = 1;
@@ -141,7 +141,7 @@ s32 func_8043ED48_de(void) {
 }
 
 s32 func_8043ED50_de(void) {
-    Render_SetTransitionTarget(&D_8011FAC0, 8);
+    SetN64_SetTransitionTarget(&D_8011FAC0, 8);
     return 1;
 }
 

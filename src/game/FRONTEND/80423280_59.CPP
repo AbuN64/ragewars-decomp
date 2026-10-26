@@ -12,7 +12,7 @@
 extern SettingsScreenState *D_800E5430;
 extern void func_8041A430_de(void *, s32);
 
-/* Releases the object D_800E5430 holds through Scene_FreeMemory, clears D_800E5430 and returns zero. */
+/* Releases the object D_800E5430 holds through Cache_FreeMemory, clears D_800E5430 and returns zero. */
 
 
 
@@ -61,7 +61,7 @@ extern void MarkMenuEventHandled(void);
 
 
 
-/* When the fourth argument is one, calls MarkMenuEventHandled, advances the word at 0x20 of the object D_800E5430 holds while Control_IsControllerConnected reports one for it and it is below func_80264690_de's limit, formats that word into the object's text at 0x14 through func_802A0C08_de with D_800E1B60, and plays sound 0xE81 through Render_PlayFlatSound; returns zero.
+/* When the fourth argument is one, calls MarkMenuEventHandled, advances the word at 0x20 of the object D_800E5430 holds while Control_IsControllerConnected reports one for it and it is below func_80264690_de's limit, formats that word into the object's text at 0x14 through func_802A0C08_de with D_800E1B60, and plays sound 0xE81 through SoundElement_PlayFlatSound; returns zero.
    Adapted from func_80422340_de with the object chain changed to a guarded counter increment, text format and sound call. */
 
 
@@ -90,7 +90,7 @@ typedef s32 (*Handler8042DFF0)(void *, s32, s32, s32, s32);
 extern Handler8042DFF0 D_800E543C;
 
 s32 func_8042DAC8_de(void) {
-    Scene_FreeMemory(D_800E5430);
+    Cache_FreeMemory(D_800E5430);
     D_800E5430 = 0;
     return 0;
 }
@@ -164,12 +164,12 @@ s32 func_8042DD00_de(void *a0, void *a1, void *a2, s32 press) {
     MarkMenuEventHandled();
     if (Control_IsControllerConnected(D_800E5430->count) == press) {
         object = D_800E5430;
-        if (object->count < Render_CountConnectedControllers()) {
+        if (object->count < Control_CountConnectedControllers()) {
             D_800E5430->count++;
         }
     }
     func_802A0C08_de(D_800E5430->text, D_800E1B60, D_800E5430->count);
-    Render_PlayFlatSound(0xE81);
+    SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
 
@@ -185,7 +185,7 @@ s32 func_8042DDA8_de(void *first, void *second, void *third, s32 fourth) {
         D_800E5430->count = value - 1;
     }
     func_802A0C08_de(D_800E5430->text, D_800E1B60, D_800E5430->count);
-    Render_PlayFlatSound(0xE81);
+    SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
 

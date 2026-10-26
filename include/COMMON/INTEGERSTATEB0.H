@@ -65,12 +65,12 @@ extern float D_800C54B4_de;
 
 
 extern void Frontend_RequestScreenMode(s32 arg0);
-extern void System_SetTextureEffect(unsigned int value);
+extern void TextLoad_SetTextureEffect(unsigned int value);
 extern s32 D_800CD77C;
 
 
 extern s32 D_800CC380;
 
-extern s32 Render_IsSnapshotActive(void);
+extern s32 Control_IsSnapshotActive(void);
 extern void func_802AA7A4_de(void *arg0);
 #endif

@@ -18,7 +18,7 @@ s32 func_80263154_de(BitReader *, s32);
 #if defined(NON_MATCHING) || !defined(VERSION_EU_X)
 extern void AnimPool_InitializeBitReader(BitReader *, void *);
 /* Decode a 17-by-17 region grid, then replace variable cells with stream offsets. */
-void System_DecodeRegionGrid(ResourceBitGrid *grid, s32 originX, s32 originZ,
+void VisData_DecodeRegionGrid(ResourceBitGrid *grid, s32 originX, s32 originZ,
                    DraftStreamData *source, CVector3 *position) {
     CVector3 minimum, maximum;
     u32 streamCount, streamIndex;
@@ -29,7 +29,7 @@ void System_DecodeRegionGrid(ResourceBitGrid *grid, s32 originX, s32 originZ,
     streamCount = *streamTable;
     streamIndex = 1;
     while (streamIndex < streamCount) {
-        AnimPool_InitializeBitReader(&grid->reader, Render_GetPackSection(streamTable, streamIndex));
+        AnimPool_InitializeBitReader(&grid->reader, SetN64_GetPackSection(streamTable, streamIndex));
         *(s32 *)&minimum.x = func_80263154_de(&grid->reader, 32);
         *(s32 *)&minimum.y = func_80263154_de(&grid->reader, 32);
         *(s32 *)&minimum.z = func_80263154_de(&grid->reader, 32);
@@ -42,7 +42,7 @@ void System_DecodeRegionGrid(ResourceBitGrid *grid, s32 originX, s32 originZ,
         streamIndex++;
     }
     if (streamIndex == streamCount) {
-        AnimPool_InitializeBitReader(&grid->reader, Render_GetPackSection(streamTable, 0));
+        AnimPool_InitializeBitReader(&grid->reader, SetN64_GetPackSection(streamTable, 0));
     }
     for (index = row = 0; row < 17; row++) {
         for (column = 0; column < 17; column++, index++) {
@@ -85,16 +85,16 @@ static inline int offset(int v){return v+9;}
 
 
 
-extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
-extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 static inline void make_plane(PlaneEquation *plane, CVector3 *from, CVector3 *through, CVector3 *to, CVector3 *point) {
     CVector3 a;
     CVector3 b;
 
-    Particle_SubtractVectors(&a, through, from);
-    Particle_SubtractVectors(&b, to, through);
-    Particle_CrossVectors(&plane->normal, &b, &a);
-    Particle_NormalizeVec3(&plane->normal);
+    GraphU64_SubtractVectors(&a, through, from);
+    GraphU64_SubtractVectors(&b, to, through);
+    GraphU64_CrossVectors(&plane->normal, &b, &a);
+    GraphU64_NormalizeVec3(&plane->normal);
     plane->distance = plane->normal.x * point->x + plane->normal.y * point->y + plane->normal.z * point->z;
 }
 
@@ -199,10 +199,10 @@ void func_80296878_de(void *planeEquation, void *arg1, void *arg2, void *arg3) {
     CVector3 *point = arg1;
     CVector3 sp10;
     CVector3 sp20;
-    Particle_SubtractVectors(&sp10, arg2, arg1);
-    Particle_SubtractVectors(&sp20, arg3, arg2);
-    Particle_CrossVectors(planeEquation, &sp20, &sp10);
-    Particle_NormalizeVec3(planeEquation);
+    GraphU64_SubtractVectors(&sp10, arg2, arg1);
+    GraphU64_SubtractVectors(&sp20, arg3, arg2);
+    GraphU64_CrossVectors(planeEquation, &sp20, &sp10);
+    GraphU64_NormalizeVec3(planeEquation);
     plane->distance = (plane->normal.x * point->x)
                                   + (plane->normal.y * point->y)
                                   + (plane->normal.z * point->z);

@@ -11,9 +11,9 @@
 
 extern s32 D_801462C8;
 
-extern int Render_TestActorStateBit(char *a, int b);
+extern int Rumble_TestActorStateBit(char *a, int b);
 
-extern void Render_SetActorStateBit(Shared_World *a, void *b, int c);
+extern void Rumble_SetActorStateBit(Shared_World *a, void *b, int c);
 
 void func_80206080_de(void *levelActor, void *actorMotionState) {
     LevelActor *actor = levelActor;
@@ -29,7 +29,7 @@ void func_80206080_de(void *levelActor, void *actorMotionState) {
 
     resource = (void *)actor->definition;
     base = &resource->trigger;
-    result = Nav_RandomBetween(base->delayMinimum, base->delayMaximum);
+    result = GraphU64_RandomBetween(base->delayMinimum, base->delayMaximum);
     motion->speed = result;
     ctx = (char *) &D_801462C8;
     if (((ObjectState1E_2 *)(ctx))->unk_1D != 0) {
@@ -94,9 +94,9 @@ void func_802061D8_de(void *a, struct WeaponEventSource *b) {
 }
 
 int func_80206200_de(int actor) {
-    return Render_TestActorStateBit(&g_world, actor) == 1;
+    return Rumble_TestActorStateBit(&g_world, actor) == 1;
 }
 
 void func_80206230_de(void *actor) {
-    Render_SetActorStateBit(&g_world, actor, 1);
+    Rumble_SetActorStateBit(&g_world, actor, 1);
 }

@@ -68,7 +68,7 @@ loop:
 
 s32 func_8028480C_de(s32 arg0) {
     if (arg0 != 0) {
-        return Nav_NextRandom() % (arg0 + 1);
+        return GraphU64_NextRandom() % (arg0 + 1);
     }
     return 0;
 }
@@ -76,7 +76,7 @@ s32 func_8028480C_de(s32 arg0) {
 
 void func_80284870_de(f32 arg0) {
     if (arg0 != 0.0f) {
-        ((s32 (*)())Nav_RandomFloat)();
+        ((s32 (*)())GraphU64_RandomFloat)();
     }
 }
 
@@ -211,12 +211,12 @@ void func_802849F0_de(ParticleEffect *effect)
     f32 x, y, z;
     CVector3 *velocity;
 
-    Weapons_ApplyPlayerForces(&D_80145040, effect);
+    Player_ApplyPlayerForces(&D_80145040, effect);
     acceleration = func_802B2350(effect->entry->motion->acceleration);
     if (acceleration != 0.0f) {
         direction = effect->direction;
-        Particle_ScaleVector(&delta, &direction, acceleration);
-        Particle_AddVec3(&effect->velocity, &effect->velocity, &delta);
+        GraphU64_ScaleVector(&delta, &direction, acceleration);
+        GraphU64_AddVec3(&effect->velocity, &effect->velocity, &delta);
         velocity = &effect->velocity;
         x = effect->velocity.x;
         y = effect->velocity.y;
@@ -228,7 +228,7 @@ void func_802849F0_de(ParticleEffect *effect)
         } else {
             if (!(speed < limit)) goto finished;
         }
-        Particle_ScaleVector(velocity, &direction, limit);
+        GraphU64_ScaleVector(velocity, &direction, limit);
 finished:
         ;
     }

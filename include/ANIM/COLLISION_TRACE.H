@@ -17,7 +17,7 @@
 #define MESH_CMD_TRI2 0x06
 #define MESH_CMD_ENDDL 0xDF
 
-extern void Anim_TraceMeshTriangle(ContextB0 *, CollisionVertex **);
+extern void PolyCol_TraceMeshTriangle(ContextB0 *, CollisionVertex **);
 
 /* Traces one triangle whose three vertex indices (doubled) sit in the low three bytes of a command
  * word; reversed meshes trace it a second time with the winding flipped. TRI2 visits its second
@@ -29,12 +29,12 @@ extern void Anim_TraceMeshTriangle(ContextB0 *, CollisionVertex **);
     if ((triangle[0]->clipFlags & \
          triangle[1]->clipFlags & \
          triangle[2]->clipFlags) == 0) { \
-        Anim_TraceMeshTriangle(context, triangle); \
+        PolyCol_TraceMeshTriangle(context, triangle); \
         if (reverse) { \
             saved = triangle[0]; \
             triangle[0] = triangle[2]; \
             triangle[2] = saved; \
-            Anim_TraceMeshTriangle(context, triangle); \
+            PolyCol_TraceMeshTriangle(context, triangle); \
         } \
     }
 

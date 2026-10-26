@@ -24,7 +24,7 @@ extern void func_802732D0_de(char *object, f32 *output);
 
 extern void func_802732EC_de(void *arg0, f32 *arg1);
 
-extern void Particle_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
+extern void GraphU64_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
 
 extern f32 Math_Sqrtf(f32);
 
@@ -84,20 +84,20 @@ extern void func_802A5780_de(s32, State_func_802A2FA4_de *, Nodes *);
 
 extern void func_802A5FF0_de(State_func_802A2FA4_de *);
 
-extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
-extern void Particle_TransformDirection(void *, void *, void *);
+extern void GraphU64_TransformDirection(void *, void *, void *);
 
-extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern void Particle_IdentityMatrix(void *);
+extern void GraphU64_IdentityMatrix(void *);
 
 extern void func_80272CB0_de(void *, f32, f32, f32);
 
 extern void func_802A31E8_de(Node438C *, Node438C *, struct GameplayCamera *, void *);
-extern void Particle_ScaleVector(void *, void *, f32);
-extern void Rsp_ConvertMatrixToFixed(void *, f32 *);
+extern void GraphU64_ScaleVector(void *, void *, f32);
+extern void GraphU64_ConvertMatrixToFixed(void *, f32 *);
 
 void *func_802A25D0_de(void *arg0, void *arg1, void *local) {
     CVector3 sp10;
@@ -118,14 +118,14 @@ void *func_802A25D0_de(void *arg0, void *arg1, void *local) {
         if (((ObjectLinks54 *)(arg1))->unk_3C & 4) {
             func_802732EC_de(local, &((ObjectLinksB4 *)(var_s0))->unk_1C);
         } else {
-            Rsp_ConvertMatrixToFixed(local, &((ObjectLinksB4 *)(var_s0))->unk_28);
-            Rsp_ConvertMatrixToFixed(local, &((ObjectLinksB4 *)(var_s0))->unk_68);
+            GraphU64_ConvertMatrixToFixed(local, &((ObjectLinksB4 *)(var_s0))->unk_28);
+            GraphU64_ConvertMatrixToFixed(local, &((ObjectLinksB4 *)(var_s0))->unk_68);
         }
         temp_s1 = *(void **)var_s0;
         ((ObjectLinksB4 *)(var_s0))->unk_AC.v0 = 0;
         ((ObjectLinksB4 *)(var_s0))->unk_A8 = 0.0f;
         if (temp_s1 != 0) {
-            Particle_SubtractVectors(&sp10, &((ObjectLinksB4 *)(var_s0))->unk_10.v1, &((ObjectStateB0 *)(temp_s1))->unk_10);
+            GraphU64_SubtractVectors(&sp10, &((ObjectLinksB4 *)(var_s0))->unk_10.v1, &((ObjectStateB0 *)(temp_s1))->unk_10);
             temp_f0 = Math_Sqrtf((sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z));
             ((ObjectStateB0 *)(temp_s1))->unk_AC = temp_f0;
             ((ObjectLinks54 *)(arg1))->unk_4C += temp_f0;
@@ -176,8 +176,8 @@ void func_802A274C_de(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, Morph *
     t = 1.0f - weight;
     while (--count != -1) {
         key = &morph->second[blend->second];
-        Particle_ScaleVector(a, &morph->first[blend->first], morph->firstFrame);
-        Particle_ScaleVector(b, key, morph->secondFrame);
+        GraphU64_ScaleVector(a, &morph->first[blend->first], morph->firstFrame);
+        GraphU64_ScaleVector(b, key, morph->secondFrame);
         out->x = (s16) (a[0] + t * (b[0] - a[0]));
         out->y = (s16) (a[1] + t * (b[1] - a[1]));
         out->z = (s16) (a[2] + t * (b[2] - a[2]));
@@ -228,8 +228,8 @@ void func_802A2B58_de(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, f32 sca
     t = 1.0f - weight;
     while (--count != -1) {
         key = &morph->second[blend->second];
-        Particle_ScaleVector(a, &morph->first[blend->first], morph->firstFrame);
-        Particle_ScaleVector(b, key, morph->secondFrame);
+        GraphU64_ScaleVector(a, &morph->first[blend->first], morph->firstFrame);
+        GraphU64_ScaleVector(b, key, morph->secondFrame);
         out->x = (s16) (a[0] + t * (b[0] - a[0]));
         out->y = (s16) (a[1] + t * (b[1] - a[1]));
         out->z = (s16) (a[2] + t * (b[2] - a[2]));
@@ -347,27 +347,27 @@ void func_802A31E8_de(Node438C *arg0, Node438C *arg1, GameplayCamera *camera, vo
     f32 neg_y;
     f32 neg_z;
 
-    Particle_SubtractVectors(&first, &arg0->position,
+    GraphU64_SubtractVectors(&first, &arg0->position,
                   &arg1->position);
-    Particle_NormalizeVec3(&first);
+    GraphU64_NormalizeVec3(&first);
     setup[0] = 0;
     setup[1] = 0;
     setup[2] = D_800C5DE8_de[1];
-    Particle_TransformDirection(camera->inverseViewOrient, setup, &basis);
+    GraphU64_TransformDirection(camera->inverseViewOrient, setup, &basis);
     neg_y = -basis.y;
     neg_z = -basis.z;
     basis.y = neg_y;
     basis.z = neg_z;
-    Particle_ScaleVector(&cross, &basis,
+    GraphU64_ScaleVector(&cross, &basis,
                   basis.x * first.x + neg_y * first.y + neg_z * first.z);
-    Particle_SubtractVectors(&cross, &first, &cross);
-    Particle_NormalizeVec3(&cross);
-    Particle_CrossVectors(&result, &basis, &cross);
-    Particle_NormalizeVec3(&result);
-    Particle_ScaleVector(&result, &result, arg0->a);
-    Particle_ScaleVector(&cross, &cross, arg0->b);
-    Particle_ScaleVector(&basis, &basis, arg0->c);
-    Particle_IdentityMatrix(matrix);
+    GraphU64_SubtractVectors(&cross, &first, &cross);
+    GraphU64_NormalizeVec3(&cross);
+    GraphU64_CrossVectors(&result, &basis, &cross);
+    GraphU64_NormalizeVec3(&result);
+    GraphU64_ScaleVector(&result, &result, arg0->a);
+    GraphU64_ScaleVector(&cross, &cross, arg0->b);
+    GraphU64_ScaleVector(&basis, &basis, arg0->c);
+    GraphU64_IdentityMatrix(matrix);
     ((Matrix *)matrix)->m[0] = result.x;
     ((Matrix *)matrix)->m[1] = result.y;
     ((Matrix *)matrix)->m[2] = result.z;
@@ -399,7 +399,7 @@ void func_802A339C_de(void *arg0, void *camera) {
     if (first != 0) {
         func_80272CB0_de(matrix, first->a, first->b, first->c);
     } else {
-        Particle_IdentityMatrix(matrix);
+        GraphU64_IdentityMatrix(matrix);
     }
 
     while (first != 0) {
@@ -442,7 +442,7 @@ no_pair:
             matrix[14] = first->position.z;
         }
 apply:
-        Rsp_ConvertMatrixToFixed(matrix, first->matrices[D_800D297C]);
+        GraphU64_ConvertMatrixToFixed(matrix, first->matrices[D_800D297C]);
         first = next;
         next = first->next;
     }
@@ -450,13 +450,13 @@ apply:
     matrix[12] = first->position.x;
     matrix[13] = first->position.y;
     matrix[14] = first->position.z;
-    Rsp_ConvertMatrixToFixed(matrix, first->matrices[D_800D297C]);
+    GraphU64_ConvertMatrixToFixed(matrix, first->matrices[D_800D297C]);
 }
 
 extern f32 D_800C5DF0_de, D_800C5DF4_de;
-extern void Rsp_ConvertMatrixToFloat(void *, void *);
+extern void GraphU64_ConvertMatrixToFloat(void *, void *);
 extern void ScaleMatrixLocal(void *, f32, f32, f32);
-extern void Particle_ClampMatrixToFixedRange(void *);
+extern void GraphU64_ClampMatrixToFixedRange(void *);
 typedef struct LinkNode802A {
     struct LinkNode802A *parent; /* 0x00 */
     struct LinkNode802A *next;   /* 0x04 */
@@ -483,21 +483,21 @@ typedef struct LinkOwner802A {
 static inline void Render_UpdateLinkedSource(LinkOwner802A *owner, LinkNode802A *node, void *source) {
     f32 matrix[16];
     f32 scale;
-    Rsp_ConvertMatrixToFloat(matrix, (char *)source + (D_800D297C * 64 + 0x60));
+    GraphU64_ConvertMatrixToFloat(matrix, (char *)source + (D_800D297C * 64 + 0x60));
     scale = D_800C5DF0_de;
     if (*(s32 *)(*(char **)((char *)source + 0x118) + 0x14) != 0) {
         scale = D_800C5DF4_de;
     }
     ScaleMatrixLocal(matrix, scale, scale, scale);
-    Particle_ClampMatrixToFixedRange(matrix);
+    GraphU64_ClampMatrixToFixedRange(matrix);
     func_802732D0_de((char *)matrix, &node->pos.x);
     if (owner->flags & 4) {
         func_802732EC_de(matrix, (f32 *)((char *)node + 0x1C));
     } else {
-        Rsp_ConvertMatrixToFixed(matrix, node->matrices[D_800D297C].m);
+        GraphU64_ConvertMatrixToFixed(matrix, node->matrices[D_800D297C].m);
     }
 }
-void Render_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
+void Smp_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
     LinkNode802A *node;
     LinkNode802A *parent;
     void *source;
@@ -519,7 +519,7 @@ void Render_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
         parent = node->parent;
         if (parent != 0) {
             f32 length;
-            Particle_SubtractVectors((CVector3 *)delta, &node->pos, &parent->pos);
+            GraphU64_SubtractVectors((CVector3 *)delta, &node->pos, &parent->pos);
             length = Math_Sqrtf(delta[0] * delta[0] + delta[1] * delta[1] + delta[2] * delta[2]);
             parent->length = length;
             owner->totalLength += length;
@@ -539,7 +539,7 @@ void func_80295FB4_us_rev1(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #else
 void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
-void Scene_UnlockResource(s32, void *);
+void Cache_UnlockResource(s32, void *);
 s32 func_802A4134_de(AnimationFrameState *state, AnimationFrameDefinition *definition, s32 *frame_count);
 /* Draws a textured ribbon: spaces the texture along the tail by length, picks the animation frame, sets the
  * combiner and colours (greyscale on a monochrome camera), then emits two vertex rows per clock node and the
@@ -587,7 +587,7 @@ void func_802A3718_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *cam
     gDPPipeSync(g_displayListCursor++);
     switch (info.frame->kind) {
     case 3:
-        Render_SetCombineMode(0x29);
+        Geometry_SetCombineMode(0x29);
         if (camera->monochrome) {
             grey = track->env[0] + track->env[1] + track->env[2];
             gDPSetEnvColor(g_displayListCursor++, 0, 0, grey / 3, 255);
@@ -600,10 +600,10 @@ void func_802A3718_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *cam
         break;
     case 0:
     case 1:
-        Render_SetCombineMode(0x28);
+        Geometry_SetCombineMode(0x28);
         break;
     }
-    Render_SetModePreset(0xD);
+    Geometry_SetModePreset(0xD);
     clock = actor->clock;
     count = track->count;
     next = clock->next;
@@ -643,5 +643,5 @@ void func_802A3718_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *cam
         clock = next;
         next = clock->next;
     }
-    Scene_UnlockResource(0, model);
+    Cache_UnlockResource(0, model);
 }

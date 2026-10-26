@@ -59,7 +59,7 @@ void func_8021E2A0_de(SharedPlayer *player, void *view) {
             player->views5E8.view7BC_102.timer = 0.0f;
         }
     }
-    Text_SetupSpriteMode(0xFF);
+    OnScreen_SetupSpriteMode(0xFF);
 
     icon = player->views5E8.view7B8_100.target;
     show = 1;
@@ -160,8 +160,8 @@ extern f32 D_800C25C0_de;
 extern char PLAYER_EFFECT_LIGHT_PATTERN[], D_800C91C8_de[], PLAYER_MODE_LIGHT_PATTERN[], D_800C91D8_de[];
 extern void *func_80268C1C_de(void *, void *);
 extern void func_8024BC94_de(CVector3 *, void *, CVector3);
-extern s32 Nav_NextRandom(void);
-extern f32 Particle_GetActorHeight(void *);
+extern s32 GraphU64_NextRandom(void);
+extern f32 GameObject_GetActorHeight(void *);
 /* Position one effect light, reading its scale and radius at their use sites. */
 static inline void placePlayerLight(struct Player *player, struct PlayerEffectLight *light,
                                     f32 offsetZ, const f32 *heightScale, const f32 *radius) {
@@ -171,10 +171,10 @@ static inline void placePlayerLight(struct Player *player, struct PlayerEffectLi
     offset.y = 0.0f;
     offset.z = offsetZ;
     func_8024BC94_de(&position, player, offset);
-    Particle_AddVec3(&position, &position, &player->pos);
+    GraphU64_AddVec3(&position, &position, &player->pos);
     light->active = 1;
     light->x = (s16)position.x;
-    light->y = (s16)(position.y + Particle_GetActorHeight(player) * *heightScale);
+    light->y = (s16)(position.y + GameObject_GetActorHeight(player) * *heightScale);
     light->z = (s16)position.z;
     light->radius = *radius;
 }
@@ -185,7 +185,7 @@ void Weapons_UpdatePlayerEffectLights(struct Player *player) {
     if (D_801462C8.flags & 0x4000) {
         player->rangeTimer = 0.0f;
     } else if (player->rangeNodes[2] != 0) {
-        Render_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[2]);
+        DynLight_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[2]);
         player->rangeNodes[2] = 0;
     }
     if (player->rangeTimer != 0.0f) {
@@ -208,9 +208,9 @@ void Weapons_UpdatePlayerEffectLights(struct Player *player) {
         if (player->rangeTimer < D_800C25B4_de) {
             flicker = 1;
             if (player->rangeTimer < D_800C25B8_de) {
-                flicker ^= (Nav_NextRandom() % 100) < 50;
+                flicker ^= (GraphU64_NextRandom() % 100) < 50;
             } else {
-                if ((Nav_NextRandom() % 100) < 15) {
+                if ((GraphU64_NextRandom() % 100) < 15) {
                     flicker = 0;
                 }
             }
@@ -223,11 +223,11 @@ void Weapons_UpdatePlayerEffectLights(struct Player *player) {
         }
     } else {
         if (player->rangeNodes[0] != 0) {
-            Render_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[0]);
+            DynLight_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[0]);
             player->rangeNodes[0] = 0;
         }
         if (player->rangeNodes[1] != 0) {
-            Render_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[1]);
+            DynLight_ReleaseLight(&D_8013B1A8, (s32)player->rangeNodes[1]);
             player->rangeNodes[1] = 0;
         }
     }

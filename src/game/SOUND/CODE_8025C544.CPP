@@ -139,7 +139,7 @@ struct func_8025C6F4_S4 {
     s32 unk2B98;
 };
 
-void Sound_InitVoiceVolume(func_8025C6F4_S1 *voiceRecord, func_8025C6F4_S2 *soundDescriptor) {
+void Audio_InitVoiceVolume(func_8025C6F4_S1 *voiceRecord, func_8025C6F4_S2 *soundDescriptor) {
     f32 first;
     s16 index;
     s16 value;

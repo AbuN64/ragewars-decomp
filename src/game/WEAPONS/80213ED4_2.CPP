@@ -16,7 +16,7 @@
 
 
 
-extern f32 Particle_GetActorHeight(ActorBarrelIsTargetInViewCone *);
+extern f32 GameObject_GetActorHeight(ActorBarrelIsTargetInViewCone *);
 extern f32 Math_Sqrtf(f32);
 extern CQuatern func_8024796C_de(ActorBarrelIsTargetInViewCone *);
 extern void MatrixFromQuaternion(CQuatern *, Matrix *);
@@ -41,11 +41,11 @@ s32 Barrel_IsTargetInViewCone(ActorBarrelIsTargetInViewCone *viewer, ActorBarrel
   f32 zero;
   from = viewer->position;
   from.y += viewer->eye;
-  from.y += Particle_GetActorHeight(viewer) * 0.9f;
+  from.y += GameObject_GetActorHeight(viewer) * 0.9f;
   to = target->position;
   to.y += target->eye;
-  to.y += Particle_GetActorHeight(target) * 0.9f;
-  Particle_SubtractVectors(&dir, &to, &from);
+  to.y += GameObject_GetActorHeight(target) * 0.9f;
+  GraphU64_SubtractVectors(&dir, &to, &from);
   distance = Math_Sqrtf(((dir.x * dir.x) + (dir.y * dir.y)) + (dir.z * dir.z));
   if (range < distance)
   {
@@ -56,7 +56,7 @@ s32 Barrel_IsTargetInViewCone(ActorBarrelIsTargetInViewCone *viewer, ActorBarrel
   ahead.x = 0.0f;
   ahead.y = 0.0f;
   ahead.z = distance;
-  Particle_TransformPoint(&matrix, &ahead, &forward);
+  GraphU64_TransformPoint(&matrix, &ahead, &forward);
   across *= 0.5f;
   up *= 0.5f;
   flatDir.x = dir.x;
@@ -86,7 +86,7 @@ s32 Barrel_IsTargetInViewCone(ActorBarrelIsTargetInViewCone *viewer, ActorBarrel
     flatForward.x /= forwardLength;
     flatForward.z /= forwardLength;
   }
-  angle = Nav_ArcCos(((flatDir.x * flatForward.x) + (flatDir.y * flatForward.y)) + (flatDir.z * flatForward.z));
+  angle = GraphU64_ArcCos(((flatDir.x * flatForward.x) + (flatDir.y * flatForward.y)) + (flatDir.z * flatForward.z));
   if (angle < zero)
   {
     angle = -angle;
@@ -98,12 +98,12 @@ s32 Barrel_IsTargetInViewCone(ActorBarrelIsTargetInViewCone *viewer, ActorBarrel
   *((volatile f32 *) (&pitchDir.x)) = 0.0f;
   pitchDir.z = dirLength;
   pitchDir.y = dir.y;
-  Particle_NormalizeVec3(&pitchDir);
+  GraphU64_NormalizeVec3(&pitchDir);
   *((volatile f32 *) (&pitchForward.x)) = 0.0f;
   pitchForward.z = forwardLength;
   pitchForward.y = forward.y;
-  Particle_NormalizeVec3(&pitchForward);
-  angle = Nav_ArcCos(((pitchDir.x * pitchForward.x) + (pitchDir.y * pitchForward.y)) + (pitchDir.z * pitchForward.z));
+  GraphU64_NormalizeVec3(&pitchForward);
+  angle = GraphU64_ArcCos(((pitchDir.x * pitchForward.x) + (pitchDir.y * pitchForward.y)) + (pitchDir.z * pitchForward.z));
   if (up < ((angle < 0.0f) ? (-angle) : (angle)))
   {
     return 0;
@@ -170,13 +170,13 @@ s32 Weapons_UpdateTrackerAim(Actor_func_80214624_de *actor, Plan *tracker, Actor
         break;
     }
     if (func_80240660_de(actor, pos, room, tracker->unk30->unkC, &hit) != 0) {
-        if (Nav_IsPointInTriangleXZ(actor->unk14, hit.x, hit.z) != 0) {
+        if (Region_IsPointInTriangleXZ(actor->unk14, hit.x, hit.z) != 0) {
             tracker->unk90 = hit.y;
         } else {
             tracker->unk90 = (f32) (hit.y + D_800C2160_de[0]);
         }
-        Particle_SubtractVectors(&hit, &hit, &actor->pos);
-        tracker->unk8C = (f32) (Particle_GetHorizontalAngle(&hit) + D_800C2160_de[1]);
+        GraphU64_SubtractVectors(&hit, &hit, &actor->pos);
+        tracker->unk8C = (f32) (GraphU64_GetHorizontalAngle(&hit) + D_800C2160_de[1]);
         return 1;
     }
     if (targetKind == 1) {
@@ -192,15 +192,15 @@ extern f32 D_800C2168_de;
 extern CollisionInfo D_80100030;
 extern Instance8020CD74 *D_801041F0;
 extern char D_80145040[];
-extern s32 Camera_IsSequenceInWindow(void);
-extern s32 Camera_GetSequenceRequest(void);
+extern s32 Cinema_IsSequenceInWindow(void);
+extern s32 Cinema_GetSequenceRequest(void);
 extern Actor_func_80214DD4_de *Weapons_FindNearestLivePlayer(void *players, CVector3 point, void *exclude);
 extern Actor_func_80214DD4_de *Weapons_FindNearestPlayer(void *players, CVector3 point);
-extern s32 Sound_FindActorModelEntry(void *actor);
+extern s32 InstHdr_FindActorModelEntry(void *actor);
 extern f32 Weapons_GetEyeDistanceSquared(void *candidate, CVector3 point);
 extern f32 Weapons_GetFlatDistanceSquared(void *candidate, CVector3 point);
-extern s32 Particle_HasActorTerritory(void *actor);
-extern f32 Sound_GetActorTerritoryRadius(void *actor);
+extern s32 InstHdr_HasActorTerritory(void *actor);
+extern f32 InstHdr_GetActorTerritoryRadius(void *actor);
 extern s32 func_802444A4_de(void *actor, CVector3 from, CVector3 to, CollisionInfo *info);
 
 /* The two player-record fields the picker reads from a found player (lives 0x5EA, state 0x650). */
@@ -240,10 +240,10 @@ Actor_func_80214DD4_de *Weapons_SelectCombatTarget(Actor_func_80214DD4_de *actor
     count = 0;
     best = 0;
     ok = 1;
-    if (Camera_IsSequenceInWindow() != 0) {
+    if (Cinema_IsSequenceInWindow() != 0) {
         ok = 0;
-        if (Camera_GetSequenceRequest() >= 10) {
-            ok = Camera_GetSequenceRequest() < 61;
+        if (Cinema_GetSequenceRequest() >= 10) {
+            ok = Cinema_GetSequenceRequest() < 61;
         }
     }
     if (ok != 0) {
@@ -263,7 +263,7 @@ Actor_func_80214DD4_de *Weapons_SelectCombatTarget(Actor_func_80214DD4_de *actor
                 /* i and best are both reset again before the loop */
                 i = 1;
                 if (((CombatPlayerView *)candidate)->lives != 0 && ((CombatPlayerView *)candidate)->state != 1) {
-                    if (Sound_FindActorModelEntry(candidate) != 0) {
+                    if (InstHdr_FindActorModelEntry(candidate) != 0) {
                         best = candidate;
                     } else {
                         i = 0;
@@ -286,10 +286,10 @@ Actor_func_80214DD4_de *Weapons_SelectCombatTarget(Actor_func_80214DD4_de *actor
                 if (actor->kind[0] == 1 && tracker->unk37 == 0) {
                     continue;
                 }
-                if (Particle_HasActorTerritory(actor) != 0) {
+                if (InstHdr_HasActorTerritory(actor) != 0) {
                     f32 reach = Weapons_GetFlatDistanceSquared(candidate, tracker->homePos);
-                    f32 range = Sound_GetActorTerritoryRadius(actor);
-                    if (range * Sound_GetActorTerritoryRadius(actor) <= reach) {
+                    f32 range = InstHdr_GetActorTerritoryRadius(actor);
+                    if (range * InstHdr_GetActorTerritoryRadius(actor) <= reach) {
                         continue;
                     }
                 }
@@ -300,10 +300,10 @@ Actor_func_80214DD4_de *Weapons_SelectCombatTarget(Actor_func_80214DD4_de *actor
             }
             if (lineOfSight != 0) {
                 saved = *(Instance8020CD74 *)actor;
-                actor->pos.y += Particle_GetActorHeight((ActorBarrelIsTargetInViewCone *)actor);
+                actor->pos.y += GameObject_GetActorHeight((ActorBarrelIsTargetInViewCone *)actor);
                 actor->pos.y += candidate->height;
                 target = candidate->pos;
-                target.y += Particle_GetActorHeight((ActorBarrelIsTargetInViewCone *)candidate);
+                target.y += GameObject_GetActorHeight((ActorBarrelIsTargetInViewCone *)candidate);
                 target.y += candidate->height;
                 blocked = func_802444A4_de(actor, actor->pos, target, &D_80100030);
                 if (D_801041F0 == (Instance8020CD74 *)candidate) {

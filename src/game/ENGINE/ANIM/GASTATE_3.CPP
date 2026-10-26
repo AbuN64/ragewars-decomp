@@ -23,7 +23,7 @@ void func_80262480_de(void *record) {
 }
 
 void func_802624A8_de(void *animationState) {
-    Scene_UnlockResource(0, (struct Node80253610 *)(((struct func_8022BC04_S3 *) ((s8 *) animationState))->unk10));
+    Cache_UnlockResource(0, (struct Node80253610 *)(((struct func_8022BC04_S3 *) ((s8 *) animationState))->unk10));
     (((struct func_8022BC04_S3 *) ((s8 *) animationState))->unk10) = 0;
 }
 
@@ -37,7 +37,7 @@ s32 func_802624D8_de(void *animationState) {
 }
 
 void func_80262504_de(void *animationState, Six *recordOut) {
-    Six *result = (Six *)Render_GetPackSection((void *)func_8026049C_de(animationState), 6);
+    Six *result = (Six *)SetN64_GetPackSection((void *)func_8026049C_de(animationState), 6);
 
     *recordOut = *result;
 }

@@ -12,9 +12,9 @@
 
 struct ObjB;
 extern CachedResource *func_80251F6C_de(s32, s32, CachedResource *, CachedResource *, s32, void *, void *, void *, s32);
-extern s32 Render_GetDirectoryEntry(s32 *, s32, s32);
-extern s32 Render_LocatePackSection(void *, s32, s32, s32 *);
-extern void Scene_UnlockResource(void *, Node80253610 *);
+extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
+extern s32 SetN64_LocatePackSection(void *, s32, s32, s32 *);
+extern void Cache_UnlockResource(void *, Node80253610 *);
 extern void func_8026E158_de(void **);
 void SimpleInstance_RegisterModelVariantResources(struct ObjB *object, s32 unused) {
     void *memory = object;
@@ -28,21 +28,21 @@ void SimpleInstance_RegisterModelVariantResources(struct ObjB *object, s32 unuse
     s32 index;
     index = obj->type;
     if (index != obj->loadedType) {
-        resource = Scene_RequestResource(0, obj->model, obj->model, 0x18, 0, 0, 0, g_simpObjectIndexText, 1);
+        resource = Cache_RequestResource(0, obj->model, obj->model, 0x18, 0, 0, 0, g_simpObjectIndexText, 1);
         if (resource != 0) {
-            key = Render_GetDirectoryEntry(*resource, obj->model, 1);
-            Scene_ReleaseResource(0, resource);
+            key = SetN64_GetDirectoryEntry(*resource, obj->model, 1);
+            Cache_ReleaseResource(0, resource);
             found = func_802540F4_de(0, &header, key, g_simpModelsIndexText, 1);
             if (found != 0) {
                 table = header;
-                obj->resourceName = Render_LocatePackSection(table, key, index % table[0], &obj->resourceSize);
+                obj->resourceName = SetN64_LocatePackSection(table, key, index % table[0], &obj->resourceSize);
                 obj->loadedType = index;
-                Scene_ReleaseResource(0, found);
+                Cache_ReleaseResource(0, found);
             }
         }
     }
     if (obj->resourceName != 0) {
-        resource = Scene_RequestResource(0, obj->resourceName, obj->resourceName, obj->resourceSize, 0, 0, &D_0026D7F4, g_simpModelText, 0);
+        resource = Cache_RequestResource(0, obj->resourceName, obj->resourceName, obj->resourceSize, 0, 0, &D_0026D7F4, g_simpModelText, 0);
     } else {
         resource = 0;
     }
@@ -50,8 +50,8 @@ void SimpleInstance_RegisterModelVariantResources(struct ObjB *object, s32 unuse
         func_8026E158_de(resource);
         block = func_80251F6C_de(0, D_800CD3F0, (void *)resource, obj->blockNode, 8, obj, &D_0024F8DC, &s_litVerticesText, 0);
         if (block != 0) {
-            Scene_UnlockResource(0, (void *)block);
+            Cache_UnlockResource(0, (void *)block);
         }
-        Scene_UnlockResource(0, (void *)resource);
+        Cache_UnlockResource(0, (void *)resource);
     }
 }

@@ -10,7 +10,7 @@ typedef struct Shared_func_80261EB8_S1 SharedRecAt10V1;
 typedef struct Shared_func_80261EB8_S2 SharedRecAt20;
 typedef StridedTable ObjRecV1;
 
-void System_PrepareAnimationFrames(SharedRecAt10V1 *state, SharedRecAt20 *frames) {
+void AnimState_PrepareAnimationFrames(SharedRecAt10V1 *state, SharedRecAt20 *frames) {
     f32 frameScale;
     f32 scaledCurrentLoopStart;
     f32 scaledNextLoopStart;
@@ -44,18 +44,18 @@ void System_PrepareAnimationFrames(SharedRecAt10V1 *state, SharedRecAt20 *frames
     }
     if (resourceReady != 0) {
         resource = *state->unk10;
-        positions = Render_GetPackSection(resource, 1);
-        channels = Render_GetPackSection(resource, 5);
-        Render_GetPackSection(channels, 0);
+        positions = SetN64_GetPackSection(resource, 1);
+        channels = SetN64_GetPackSection(resource, 5);
+        SetN64_GetPackSection(channels, 0);
         loopStart = state->unkC;
         framePosition = state->unk0;
         frameCount = (f32) state->unk8;
         frames->unk0 = positions->data;
-        section = Render_GetPackSection(resource, 2);
+        section = SetN64_GetPackSection(resource, 2);
         frames->unk4 = section->data;
-        frames->unk8 = Render_GetPackSection(channels, 1);
+        frames->unk8 = SetN64_GetPackSection(channels, 1);
         frameScale = 1.0f;
-        frames->unkC = Render_GetPackSection(channels, 2);
+        frames->unkC = SetN64_GetPackSection(channels, 2);
         if (framePosition >= 0.0f) {
             floorFrameIndex = (s32) framePosition;
             goto block_8;

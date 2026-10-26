@@ -33,7 +33,7 @@ s32 func_802AA70C_de(void *, s32 *);
 
 extern int func_802A23B4_de(void);
 
-extern void Text_SetupSpriteMode(s32);
+extern void OnScreen_SetupSpriteMode(s32);
 
 extern void func_802A7660_de(void *arg0, int arg1);
 
@@ -91,13 +91,13 @@ void func_802AA7A4_de(void *arg0) {
     if (func_802A23B4_de() == 1) {
         func_802A2090_de();
         func_8026D8F8_de();
-        System_ResetTextureCache();
+        TextLoad_ResetTextureCache();
     }
     func_802A84F8_de();
     func_802A8710_de();
     func_802AAB68_de(D_800C61F0_de, D_800C61F0_de);
     func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
-    Text_SetupSpriteMode(D_801462C8.hudFade);
+    OnScreen_SetupSpriteMode(D_801462C8.hudFade);
     if (((Hud *)arg0)->bars[0].enabled != 0) {
         func_802A7660_de(arg0, 1);
     }
@@ -166,10 +166,10 @@ void func_802AA8EC_de(Table802AB8DC **handle, s32 index, void **out, u8 *tag) {
 
 extern Gfx *g_displayListCursor;
 
-extern s32 Render_StartWorldEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3);
-extern void Scene_UnlockResource(s32 arg0, s32 arg1);
-extern void Render_SetModePreset(u32);
-extern void Render_SetCombineMode(u32);
+extern s32 Scene_StartWorldEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3);
+extern void Cache_UnlockResource(s32 arg0, s32 arg1);
+extern void Geometry_SetModePreset(u32);
+extern void Geometry_SetCombineMode(u32);
 
 #if defined(VERSION_EU_X)
 void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
@@ -180,21 +180,21 @@ void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
   s32 temp_v0;
   if (D_800CD764_de != 0)
   {
-    temp_v0 = Render_StartWorldEffect(&g_world, arg0, 0, 1);
+    temp_v0 = Scene_StartWorldEffect(&g_world, arg0, 0, 1);
     if (temp_v0 != 0)
     {
       func_802AA8EC_de(temp_v0, arg1, &sp10, &sp14);
       imageData = sp10;
       *arg2 = ((ImageSet *)sp10)->width;
       *arg3 = ((ImageSet *)imageData)->height;
-      Scene_UnlockResource(0, temp_v0);
+      Cache_UnlockResource(0, temp_v0);
     }
   }
 }
 #endif
 
 #if defined(VERSION_EU_X)
-void Text_SetupFillMode(void) {
+void OnScreen_SetupFillMode(void) {
 
     Gfx *gfx;
 
@@ -202,8 +202,8 @@ void Text_SetupFillMode(void) {
     gDPPipeSync(gfx);
     gfx = g_displayListCursor++;
     gDPSetCycleType(gfx, G_CYC_1CYCLE);
-    Render_SetModePreset(0x15);
-    Render_SetCombineMode(0x19);
+    Geometry_SetModePreset(0x15);
+    Geometry_SetCombineMode(0x19);
 }
 #endif
 
@@ -217,8 +217,8 @@ void func_802AAA54_de(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
 #endif
 
 #if defined(VERSION_EU_X)
-extern s32 Render_StartWorldEffect(void *,s32,s32,s32);
-extern void Scene_UnlockResource(s32,s32);
+extern s32 Scene_StartWorldEffect(void *,s32,s32,s32);
+extern void Cache_UnlockResource(s32,s32);
 
 void func_802AAB3C_de(int arg0, int arg1, int arg2, int alpha, int arg4, int arg5) {
     D_801376F8.envR = arg0;
@@ -254,11 +254,11 @@ s32 func_802AAC28_de(s32 icon, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5,
 
     if ((u32)(D_800E28A4 - (((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) >> 3)) < 0x3E8
         || D_800CD764_de == 0
-        || (temp_v0 = Render_StartWorldEffect(&g_world, icon, 0, 1), temp_v0 == 0)) {
+        || (temp_v0 = Scene_StartWorldEffect(&g_world, icon, 0, 1), temp_v0 == 0)) {
         return 0;
     }
     Text_DrawTileGrid(temp_v0, arg1, arg2, arg3, arg4, arg5, which);
-    Scene_UnlockResource(0, temp_v0);
+    Cache_UnlockResource(0, temp_v0);
     return 1;
 }
 #else
@@ -269,7 +269,7 @@ INCLUDE_ASM("span_1000", func_802AAC28_de);
 #if !(defined(VERSION_EU_X))
 
 /* Appends a pipe synchronisation and an other-mode setting to the display list D_80110634 points
-   into, then calls Render_SetModePreset with 0x15 and func_80268CE0_de with 0x19. */
+   into, then calls Geometry_SetModePreset with 0x15 and func_80268CE0_de with 0x19. */
 
 /* Emits pipe sync, primitive color and a rectangle with nonnegative coordinates. */
 
@@ -283,19 +283,19 @@ void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
   s32 temp_v0;
   if (D_800CD764_de != 0)
   {
-    temp_v0 = Render_StartWorldEffect(&g_world, arg0, 0, 1);
+    temp_v0 = Scene_StartWorldEffect(&g_world, arg0, 0, 1);
     if (temp_v0 != 0)
     {
       func_802AA8EC_de(temp_v0, arg1, &sp10, &sp14);
       new_var = sp10;
       *arg2 = ((ImageSet *)sp10)->width;
       *arg3 = ((ImageSet *)new_var)->height;
-      Scene_UnlockResource(0, temp_v0);
+      Cache_UnlockResource(0, temp_v0);
     }
   }
 }
 
-void Text_SetupFillMode(void) {
+void OnScreen_SetupFillMode(void) {
 
     Gfx *gfx;
 
@@ -303,8 +303,8 @@ void Text_SetupFillMode(void) {
     gDPPipeSync(gfx);
     gfx = g_displayListCursor++;
     gDPSetCycleType(gfx, G_CYC_1CYCLE);
-    Render_SetModePreset(0x15);
-    Render_SetCombineMode(0x19);
+    Geometry_SetModePreset(0x15);
+    Geometry_SetCombineMode(0x19);
 }
 
 void func_802AAA54_de(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
@@ -342,11 +342,11 @@ s32 func_802AAC28_de(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5,
 
     if ((u32)(D_800E28A4 - (((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) >> 3)) < 0x3E8
         || D_800CD764_de == 0
-        || (temp_v0 = Render_StartWorldEffect(&g_world, arg0, 0, 1), temp_v0 == 0)) {
+        || (temp_v0 = Scene_StartWorldEffect(&g_world, arg0, 0, 1), temp_v0 == 0)) {
         return 0;
     }
     Text_DrawTileGrid(temp_v0, arg1, arg2, arg3, arg4, arg5, arg6);
-    Scene_UnlockResource(0, temp_v0);
+    Cache_UnlockResource(0, temp_v0);
     return 1;
 }
 #endif
@@ -367,7 +367,7 @@ void func_802AAD14_de(void) {
     void *result;
     void *base;
     D_800D2F90 = 0;
-    handle = Render_StartWorldEffect(&g_world, 2, 0, 1);
+    handle = Scene_StartWorldEffect(&g_world, 2, 0, 1);
     if (handle != 0) {
         table = *handle;
         view.data = 0;
@@ -383,7 +383,7 @@ void func_802AAD14_de(void) {
             view.data += 0x10;
         }
         func_802BD3A0_de(D_801470C0_de, view.data, 0x90);
-        Scene_UnlockResource(0, handle);
+        Cache_UnlockResource(0, handle);
         D_800D2F90 = D_801470C0_de;
     }
 }
@@ -431,11 +431,11 @@ void func_802AADCC_de(u16 *grid, s16 x0, s32 y) {
 
 /* Draws a grid of 16-bit image tiles with a 4-bit mask scaled by sx and sy: the header holds the column
    and row counts, each tile holds its width, height, two bytes per pixel and then half a byte per pixel
-   of mask, and every tile goes to Text_DrawScaledMaskedImage at the running float position, advancing x by the
+   of mask, and every tile goes to OnScreen_DrawScaledMaskedImage at the running float position, advancing x by the
    scaled tile width and y by the scaled last tile height per row. Scaled counterpart of
    func_802AADCC_de; the float counters count down with `rows-- != 0.0f` as in func_802AB1B0_de. */
-extern void Text_DrawScaledMaskedImage(void *pTexture, void *pOpacity, float XPos, float YPos, int TextureWidth, int TextureHeight, float ScaleX, float ScaleY);
-void Text_DrawScaledMaskedTileGrid(u16 *grid, f32 x0, f32 y, f32 sx, f32 sy) {
+extern void OnScreen_DrawScaledMaskedImage(void *pTexture, void *pOpacity, float XPos, float YPos, int TextureWidth, int TextureHeight, float ScaleX, float ScaleY);
+void OnScreen_DrawScaledMaskedTileGrid(u16 *grid, f32 x0, f32 y, f32 sx, f32 sy) {
     u32 *tile;
     f32 rows;
     f32 cols;
@@ -454,7 +454,7 @@ void Text_DrawScaledMaskedTileGrid(u16 *grid, f32 x0, f32 y, f32 sx, f32 sy) {
             w = tile[0];
             h = tile[1];
             area = w * h;
-            Text_DrawScaledMaskedImage(tile + 2, (char *)tile + (area * 2 + 8), x, y, w, h, sx, sy);
+            OnScreen_DrawScaledMaskedImage(tile + 2, (char *)tile + (area * 2 + 8), x, y, w, h, sx, sy);
             x += w * sx;
             tile = (u32 *)((char *)tile + (area * 2 + (area >> 1)));
             tile += 2;

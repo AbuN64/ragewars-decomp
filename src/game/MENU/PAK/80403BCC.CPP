@@ -41,9 +41,9 @@ extern s32 Pak_UpdateStatus(s32);
 
 extern u8 D_800DE80C[];
 
-extern void Render_ReadControllerStates(void);
+extern void Control_ReadControllerStates(void);
 
-extern void Render_ReleasePakLock(void);
+extern void Control_ReleasePakLock(void);
 
 extern s32 func_802A05A0_de(s32 c);
 
@@ -147,7 +147,7 @@ void func_804041F0_de(void) {
     s32 present;
     PakRecord *record;
     Control_AcquireControllerLock(1);
-    Render_ReadControllerStates();
+    Control_ReadControllerStates();
     D_8010BBB8 = 2;
     for (channel = 0; channel < 4; channel++) {
         record = &D_80153330[channel];
@@ -162,7 +162,7 @@ void func_804041F0_de(void) {
         else if (Pak_UpdateStatus(channel) != 0) D_801534F0[channel] = 3;
         else D_801534F0[channel] = 1;
     }
-    Render_ReleasePakLock();
+    Control_ReleasePakLock();
 }
 
 s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name, u8 *company, u8 *code);
@@ -183,7 +183,7 @@ s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, 
         return -2;
     }
     ((void (*)(s32))Control_AcquireControllerLock)(1);
-    Render_ReadControllerStates();
+    Control_ReadControllerStates();
     result = D_80153500[ch];
     D_8010BBB8 = 2;
     if (result == 0) {
@@ -208,6 +208,6 @@ s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, 
         }
         Pak_UpdateStatus(ch);
     }
-    Render_ReleasePakLock();
+    Control_ReleasePakLock();
     return result;
 }

@@ -12,7 +12,7 @@
 
 /* Unloads entry index of the pool at D_80153C20: releases the data of every loaded slot (flag 1) in
    each of the entry's slot ns (the n count comes from the entry's definition) through
-   Gfx_ReleaseImage and clears the flag, frees the entry's buffer through Scene_FreeMemory and clears the
+   Gfx_ReleaseImage and clears the flag, frees the entry's buffer through Cache_FreeMemory and clears the
    buffer table when one is held, and marks the entry inactive. */
 
 
@@ -41,7 +41,7 @@ void func_80411518_de(s32 index) {
         }
     }
     if (D_80153C20.entries[index].buffers[0] != 0) {
-        Scene_FreeMemory(D_80153C20.entries[index].buffers[0]);
+        Cache_FreeMemory(D_80153C20.entries[index].buffers[0]);
         D_80153C20.entries[index].buffers[0] = 0;
         for (n = 0; n < 0x60; n++) {
             D_80153C20.entries[index].buffers[n] = 0;
@@ -50,10 +50,10 @@ void func_80411518_de(s32 index) {
     D_80153C20.entries[index].active = 0;
 }
 
-extern void *Scene_AllocateMemory(s32);
+extern void *Cache_AllocateMemory(s32);
 
 extern void func_8040F6DC_de(void *, void *, s32);
-extern void Resmgr_CloseStream(s32);
+extern void XStdio_CloseStream(s32);
 
 /* Loads entry index of the menu archive into memory and counts the use: in cache mode 1 an entry
    already loaded is restored from its saved copy and rebased; otherwise an entry not yet loaded is
@@ -64,22 +64,22 @@ void Frontend_AcquireArchiveEntry(s32 index) {
     D_801539B0.RefCount[index]++;
     if (D_801539B0.NeverFreeResources == 1) {
         if (D_801539B0.Screen[index].data == 0) goto load;
-        Resmgr_CopyBytes(D_801539B0.Screen[index].data, D_801539B0.ScreenOriginal[index].data, D_801539B0.Screen[index].size);
+        XPlus_CopyBytes(D_801539B0.Screen[index].data, D_801539B0.ScreenOriginal[index].data, D_801539B0.Screen[index].size);
         data = D_801539B0.Screen[index].data;
         func_8040F6DC_de(data, data, D_801539B0.Screen[index].offset - D_801539B0.Screen[0].offset);
     }
     if (D_801539B0.Screen[index].data != 0) return;
 load:
     func_802A18CC_de();
-    D_801539B0.Screen[index].data = Scene_AllocateMemory(D_801539B0.Screen[index].size);
-    D_801539B0.In = Resmgr_OpenStream(D_801539B0.Name, &D_800DD0B0);
-    Resmgr_SeekStream(D_801539B0.In, D_801539B0.Header.ScreenData + D_801539B0.Screen[index].offset, 0);
-    Resmgr_ReadStream(D_801539B0.Screen[index].data, D_801539B0.Screen[index].size, 1, D_801539B0.In);
+    D_801539B0.Screen[index].data = Cache_AllocateMemory(D_801539B0.Screen[index].size);
+    D_801539B0.In = XStdio_OpenStream(D_801539B0.Name, &D_800DD0B0);
+    XStdio_SeekStream(D_801539B0.In, D_801539B0.Header.ScreenData + D_801539B0.Screen[index].offset, 0);
+    XStdio_ReadStream(D_801539B0.Screen[index].data, D_801539B0.Screen[index].size, 1, D_801539B0.In);
     if (D_800E2AC4 != 0) {
-        D_801539B0.ScreenOriginal[index].data = Scene_AllocateMemory(D_801539B0.Screen[index].size);
-        Resmgr_CopyBytes(D_801539B0.ScreenOriginal[index].data, D_801539B0.Screen[index].data, D_801539B0.Screen[index].size);
+        D_801539B0.ScreenOriginal[index].data = Cache_AllocateMemory(D_801539B0.Screen[index].size);
+        XPlus_CopyBytes(D_801539B0.ScreenOriginal[index].data, D_801539B0.Screen[index].data, D_801539B0.Screen[index].size);
     }
-    Resmgr_CloseStream(D_801539B0.In);
+    XStdio_CloseStream(D_801539B0.In);
     D_801539B0.In = 0;
     data = D_801539B0.Screen[index].data;
     func_8040F6DC_de(data, data, D_801539B0.Screen[index].offset - D_801539B0.Screen[0].offset);

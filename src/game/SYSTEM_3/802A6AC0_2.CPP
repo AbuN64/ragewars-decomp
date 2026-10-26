@@ -24,19 +24,19 @@ typedef struct Image Image;
 
 extern s32 D_800D297C;
 
-extern void Rsp_ConvertMatrixToFloat(f32 *, s32);
+extern void GraphU64_ConvertMatrixToFloat(f32 *, s32);
 
 extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
-extern void Particle_ClampMatrixToFixedRange(f32 *arg0);
+extern void GraphU64_ClampMatrixToFixedRange(f32 *arg0);
 
 extern void func_802732D0_de(char *object, float *output);
 
 extern void func_802732EC_de(void *arg0, f32 *arg1);
 
-extern void Rsp_ConvertMatrixToFixed(void *arg0, s32 arg1);
+extern void GraphU64_ConvertMatrixToFixed(void *arg0, s32 arg1);
 
-extern void Render_UpdateLinkedNodeTransforms(void *arg0);
+extern void Smp_UpdateLinkedNodeTransforms(void *arg0);
 
 extern void func_802A339C_de(void *, void *);
 
@@ -235,18 +235,18 @@ void func_802A6174_de(Node44 *arg0, void *arg1) {
             ((ChildB4 *)arg1)->mat[D_800D297C] = ((ChildB4 *)arg1)->mat[D_800D297C ^ 1];
             ((ChildB4 *)arg1)->unk_B0 = 0;
         } else {
-            Rsp_ConvertMatrixToFloat(local, entry + ((D_800D297C << 6) + 0x60));
+            GraphU64_ConvertMatrixToFloat(local, entry + ((D_800D297C << 6) + 0x60));
             scale = D_800C5EB8_de;
             if (((ParticleEffect *)entry)->entry->unk14 != 0) {
                 scale = D_800C5EBC_de;
             }
             ScaleMatrixLocal(local, scale, scale, scale);
-            Particle_ClampMatrixToFixedRange(local);
+            GraphU64_ClampMatrixToFixedRange(local);
             func_802732D0_de((char *)local, &((ChildB4 *)arg1)->pos[0]);
             if (arg0->unk_3C & 4) {
                 func_802732EC_de(local, &((ChildB4 *)arg1)->rot[0]);
             } else {
-                Rsp_ConvertMatrixToFixed(local, arg1 + ((D_800D297C << 6) + 0x28));
+                GraphU64_ConvertMatrixToFixed(local, arg1 + ((D_800D297C << 6) + 0x28));
             }
         }
         ((ChildB4 *)arg1)->unk_8 = arg0->unk_8->unk_8;
@@ -276,7 +276,7 @@ void func_802A62BC_de(void *arg0) {
 void func_802A6304_de(s32 pool, void *arg1, s32 camera) {
     State802A6DF8 *state = arg1;
     if (state->flags & 8) {
-        Render_UpdateLinkedNodeTransforms(arg1);
+        Smp_UpdateLinkedNodeTransforms(arg1);
     }
     if (state->flags & 4) {
         func_802A339C_de(arg1, camera);
@@ -298,13 +298,13 @@ void func_802A63A4_de(void *arg0, void *arg1, void *arg2, s32 arg3) {
 
     entry = state->object;
     if (entry == arg2 && state->value > 0.0f) {
-        Rsp_ConvertMatrixToFloat(local, arg3);
+        GraphU64_ConvertMatrixToFloat(local, arg3);
         scale = D_800C5EC0_de;
         if (entry->desc->renderModel != 0) {
             scale = D_800C5EC4_de;
         }
         ScaleMatrixLocal(local, scale, scale, scale);
-        Particle_ClampMatrixToFixedRange(local);
+        GraphU64_ClampMatrixToFixedRange(local);
         func_802A25D0_de(arg0, state, local);
     }
 }
@@ -333,7 +333,7 @@ void func_802A6490_de(void *pool, void *camera) {
     while (node != 0) {
         if (node->renderMode < 0) {
             if (node->flags & 8) {
-                Render_UpdateLinkedNodeTransforms(node);
+                Smp_UpdateLinkedNodeTransforms(node);
             }
             if (node->flags & 4) {
                 func_802A339C_de(node, camera);
@@ -353,7 +353,7 @@ void func_802A6490_de(void *pool, void *camera) {
     while (node != 0) {
         if (node->renderMode > 0) {
             if (node->flags & 8) {
-                Render_UpdateLinkedNodeTransforms(node);
+                Smp_UpdateLinkedNodeTransforms(node);
             }
             if (node->flags & 4) {
                 func_802A339C_de(node, camera);

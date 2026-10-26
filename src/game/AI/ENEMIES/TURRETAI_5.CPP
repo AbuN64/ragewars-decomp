@@ -12,18 +12,18 @@
 #include "AI/ENEMIES/TURRETAI.H"
 #include "WEAPONS/80213ED4.H"
 
-extern s32 Render_TestActorStateBit(void *arg0, void *arg1);
+extern s32 Rumble_TestActorStateBit(void *arg0, void *arg1);
 
 extern void Turret_LinkEffect_MakeVisible(void *arg0, void *arg1, s32 arg2);
 
 extern CQuatern CVector3_GetDirectionRotation2(f32 *);
 extern void MatrixFromQuaternion(f32 *, f32 *);
 
-extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void func_80272BCC_de(f32 *, CVector3 *, CVector3 *);
 
-extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 static inline void build_rotation(struct RotationObject *object, f32 *matrix) {
     CQuatern rotation;
@@ -59,12 +59,12 @@ extern Player **D_80103FCC;
 
 extern char D_80103FD0[];
 
-extern f32 Particle_GetActorHeight(Player *);
+extern f32 GameObject_GetActorHeight(Player *);
 
 extern s32 func_802444A4_de(Player *, CVector3, CVector3, char *);
 
 void Turret_LinkEffect_Activate(void *actor, WeaponFireState *state, s32 unusedArg) {
-    if ((Render_TestActorStateBit(&g_world, actor) == 0) &&
+    if ((Rumble_TestActorStateBit(&g_world, actor) == 0) &&
         (state->variant == 0)) {
         Turret_LinkEffect_MakeVisible(actor, state, unusedArg);
         Weapons_RequestActorState(actor, state, 1);
@@ -87,9 +87,9 @@ void Turret_MoveTargetIntoTurretSpace(void *unused, struct RotationObject *objec
     CVector3 offset;
 
     build_rotation(object, matrix);
-    Particle_SubtractVectors(&offset, point, pivot);
+    GraphU64_SubtractVectors(&offset, point, pivot);
     func_80272BCC_de(matrix, &offset, point);
-    Particle_AddVec3(point, point, pivot);
+    GraphU64_AddVec3(point, point, pivot);
 }
 
 void Turret_SpecialEffects(void *actor, ObjRecAt8V1 *event) {
@@ -140,15 +140,15 @@ s32 AI_DynTurretCanSeePlayer(Player *player, RiderRecAt130V2 *rider, Player *oth
     f32 lift;
     s32 blocked;
 
-    Particle_SubtractVectors(&to, &other->pos, &player->pos);
+    GraphU64_SubtractVectors(&to, &other->pos, &player->pos);
     lift = 0.5f;
     from.x = rider->aim.x;
     from.y = rider->aim.y;
     from.z = rider->aim.z;
     from = player->pos;
-    from.y += Particle_GetActorHeight(player) * lift;
+    from.y += GameObject_GetActorHeight(player) * lift;
     to = other->pos;
-    to.y += Particle_GetActorHeight(other) * lift;
+    to.y += GameObject_GetActorHeight(other) * lift;
     blocked = func_802444A4_de(player, from, to, D_80103FD0);
     if (blocked != 0 && *D_80103FCC != other) {
         return 0;

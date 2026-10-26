@@ -27,12 +27,12 @@
 #include "RESMGR/802A2230_6.H"
 #include "TEXTURE/80256220_12.H"
 
-void Render_InitFrameRing(RenderState *state) {
+void SetN64_InitFrameRing(RenderState *state) {
     u32 i, count, previous, next;
     CGameStatus *counters;
     Frame *view;
     osCreateMesgQueue(&D_801428C0, (s32)D_80142CB8, 0x1000);
-    Resmgr_FillMemory(D_800EFC80_de, 7, 0x2000);
+    XPlus_FillMemory(D_800EFC80_de, 7, 0x2000);
     func_8028F754_de((void *)&D_80142928, (s32)(D_800EFC80_de + 0x2000), D_800CD8C8_de, 0, 1);
     osScAddClient(&D_80142928, &D_80146CC0, &D_801428C0);
     state->handle = -1;
@@ -104,15 +104,15 @@ extern void func_8023EE00_de(void);
 extern s32 func_80265964_de(s32 size);
 extern void Items_ResetActorPools(void *players, s32 arg1);
 extern void func_804499B0_de(void *menu, s32 arg1, s32 arg2);
-extern void Items_LoadSceneResources(Shared_World *world, s32 resource);
+extern void OvlScene_LoadSceneResources(Shared_World *world, s32 resource);
 extern void func_8044AE70_de(void);
 extern void Ovlgame_ResetHudCharTables(void *hud);
 extern void Pak_AllocateScratchBuffer(void);
 extern void func_80298368_de(s32 arg0);
 extern void Control_EnableAllControllerPaks(void);
-extern void Render_BeginModeTransition(GameSession *session, s32 arg1);
-extern void Render_UpdateGameMode(void *session);
-extern void Render_UpdateFrameTiming(void *session);
+extern void SetN64_BeginModeTransition(GameSession *session, s32 arg1);
+extern void SetN64_UpdateGameMode(void *session);
+extern void SetN64_UpdateFrameTiming(void *session);
 /* The game settings record and its round counters. */
 static inline Shared_Game *currentGame(void) {
     return &D_801462C8;
@@ -122,10 +122,10 @@ static inline CGameStatus *gameStatus(void) {
 }
 /* Main game thread: brings up video and the overlays, clears the frame buffers, starts the menu and
    player state, then serves the scheduler's messages forever. */
-void Render_RunGameLoop(GameSession *session) {
+void SetN64_RunGameLoop(GameSession *session) {
     u32 i;
     s16 *msg;
-    Texture_InitHeap();
+    AudioMgr_InitHeap();
 #if defined(VERSION_EU)
     func_802BA5F0_eu(0xFE);
 #else
@@ -140,8 +140,8 @@ void Render_RunGameLoop(GameSession *session) {
         for (;;) {
         }
     }
-    Ovlgame_ClearRenderRecord(&D_8014D438);
-    Ovlgame_AllocateRenderBuffers(&D_8014D438);
+    Pak_ClearRenderRecord(&D_8014D438);
+    Pak_AllocateRenderBuffers(&D_8014D438);
     osViSwapBuffer((s32)D_8014D468_de[0]);
     osViBlack(0);
     if (D_80000300 == 0) {
@@ -162,13 +162,13 @@ void Render_RunGameLoop(GameSession *session) {
     D_8011B9F4 = 0;
     D_80142C38[0] = 0.0f;
     D_80142C30 = 0;
-    Render_InitFrameRing((RenderState *)session);
+    SetN64_InitFrameRing((RenderState *)session);
 #if defined(VERSION_US_REV1)
     func_802B155C_us_rev1(D_002953FC_us_rev1);
     osSendMesg((OSMesgQueue *)D_801053E8_us_rev1, (OSMesg)0xBEEFDEAD, 0);
 #endif
     for (i = 0; i < D_800DE850; i++) {
-        Resmgr_FillMemory(D_8014D468_de[i], 0, D_800E28D0 * D_800E28D4 * 2);
+        XPlus_FillMemory(D_8014D468_de[i], 0, D_800E28D0 * D_800E28D4 * 2);
     }
     Items_ResetPlayers(session->players);
     Ovlgame_ResetMenuPool(session->menu);
@@ -176,13 +176,13 @@ void Render_RunGameLoop(GameSession *session) {
     session->resource = func_80265964_de(0x18) & 0x3FFFFFFF;
     Items_ResetActorPools(session->players, 0);
     func_804499B0_de(session->menu, 0, 0);
-    Items_LoadSceneResources(&g_world, session->resource);
+    OvlScene_LoadSceneResources(&g_world, session->resource);
     if (D_800CBC11[0] == 0) {
         func_8044AE70_de();
     }
     Ovlgame_ResetHudCharTables(&session->hud);
     Pak_AllocateScratchBuffer();
-    Resmgr_InitFrontendOnce();
+    Tsmos_InitFrontendOnce();
     func_80298368_de(2);
     D_801428D8 = 3;
     D_8014AD94 = 0;
@@ -192,14 +192,14 @@ void Render_RunGameLoop(GameSession *session) {
     D_80142CAC = 0;
     Control_EnableAllControllerPaks();
     gameStatus()->transitionActive = 0;
-    Render_BeginModeTransition(session, 0);
+    SetN64_BeginModeTransition(session, 0);
     for (;;) {
         Shared_Game *game = currentGame();
         osRecvMesg(&D_801428C0, (OSMesg *)&D_80146CBC, 1);
         msg = D_80146CBC;
         switch (*msg) {
         case 1:
-            Render_UpdateGameMode(session);
+            SetN64_UpdateGameMode(session);
             break;
         case 2:
             if (msg == &session->ring.frames[0].done.type) {
@@ -212,7 +212,7 @@ void Render_RunGameLoop(GameSession *session) {
             if (session->mode == 0x14) {
                 D_80142CA8++;
             } else {
-                Render_UpdateFrameTiming(session);
+                SetN64_UpdateFrameTiming(session);
             }
             /* The ROM keeps only the hoisted &D_801462C8 of this test: the store is dead (the next receive overwrites msg). */
             if (game->flags) {
@@ -221,11 +221,11 @@ void Render_RunGameLoop(GameSession *session) {
             break;
         case 4:
             D_800CDD10 = 0;
-            Render_ResetControllerProfiles();
-            Render_SetControllerMode(0);
+            Control_ResetControllerProfiles();
+            Control_SetControllerMode(0);
             session->fastFade = 1;
             session->transitionBlocked = 1;
-            Render_SetTransitionTarget(session, 0x14);
+            SetN64_SetTransitionTarget(session, 0x14);
             break;
         }
     }
@@ -246,7 +246,7 @@ extern s32 D_800D297C;
 #include "COMMON/VIDEO_DIMENSIONS.H"
 /* Starts the frame display list in the current ring buffer: segment 0, the two setup lists, the depth image, a
  * full-screen viewport (SCREEN_WD x SCREEN_HT) in D_80142C40[D_800D297C] and a full-screen scissor. */
-void Render_BeginFrameDisplayList(void *world) {
+void SetN64_BeginFrameDisplayList(void *world) {
     UnitVp *viewport;
     g_displayListCursor = D_8011FAC0.ring.current->commands;
     gSPSegment(g_displayListCursor++, 0, 0);
@@ -271,10 +271,10 @@ extern u64 rspbootTextStart[], rspbootTextEnd[], D_800D8CE0[], D_800DC020_de[], 
 extern u32 D_800D2978, D_800CD730;
 extern s32 D_800D297C;
 extern void osWritebackDCacheAll(void);
-extern void Render_SendSchedulerTask(void *, OSScTask_s *);
+extern void Sched_SendSchedulerTask(void *, OSScTask_s *);
 /* Fills the frame's graphics task (and the second one when the frame is dual), hands them to the scheduler,
    then advances the ring and gives the next frame the other pair of command buffers. */
-void Render_SubmitFrameTasks(Display *display, Frame *frame)
+void SetN64_SubmitFrameTasks(Display *display, Frame *frame)
 {
     OSScTask_s *task;
     task = &frame->task;
@@ -336,8 +336,8 @@ void Render_SubmitFrameTasks(Display *display, Frame *frame)
         task->framebuffer = frame->colorImage;
     }
     osWritebackDCacheAll();
-    Render_SendSchedulerTask(&D_80142928, &frame->task);
-    if (frame->dual) Render_SendSchedulerTask(&D_80142928, &frame->secondTask);
+    Sched_SendSchedulerTask(&D_80142928, &frame->task);
+    if (frame->dual) Sched_SendSchedulerTask(&D_80142928, &frame->secondTask);
     D_800D2978++;
     D_800CD730++;
     D_800D297C ^= 1;

@@ -25,7 +25,7 @@ static inline s32 Weapons_TargetShielded(func_8021CD70_S2 *target) {
     return view->unk564 != 0;
 }
 /* Checks whether the player's current weapon can lock onto the target. Kind 0 and 7 targets never lock. */
-s32 Weapons_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target) {
+s32 Player_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target) {
     s16 weapon;
     s8 mode;
     s32 canLock;
@@ -83,12 +83,12 @@ s32 Weapons_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target) 
 extern void *func_8024BC94_de(void *arg0, s32 unused1, struct IntPair arg2);
 struct func_8021CD70_S1;
 struct func_8021CD70_S2;
-extern s32 Weapons_CanLockTarget(func_8021CD70_S1 *, func_8021CD70_S2 *);
-extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern s32 Player_CanLockTarget(func_8021CD70_S1 *, func_8021CD70_S2 *);
+extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 extern CQuatern func_8024796C_de(char *);
 extern void MultiplyQuaternions(void *, void *, void *);
 
-CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **target,
+CQuatern Player_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **target,
                             CVector3 *targetPosition)
 {
     CVector3 candidate, direction, origin;
@@ -130,15 +130,15 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
                 firstSpecial = 0x12;
                 scale = D_800C2394_de;
                 do {
-                if (Weapons_CanLockTarget((void *)player, (void *)other) && other != player) {
+                if (Player_CanLockTarget((void *)player, (void *)other) && other != player) {
                     if (player->weapon == firstSpecial) candidate = other->specialAim;
                     else {
                         candidate = other->position;
                         candidate.y += other->height;
-                        candidate.y += Particle_GetActorHeight(other) * scale;
+                        candidate.y += GameObject_GetActorHeight(other) * scale;
                     }
-                    Particle_SubtractVectors(&direction, &candidate, &origin);
-                    Particle_NormalizeVec3(&direction.x);
+                    GraphU64_SubtractVectors(&direction, &candidate, &origin);
+                    GraphU64_NormalizeVec3(&direction.x);
                     dot = forward.x * direction.x + forward.y * direction.y +
                           forward.z * direction.z;
                     if (threshold < dot) {
@@ -157,15 +157,15 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
             scale = D_800C2398_de;
             do {
             other = (void *)D_8011CA18[i];
-            if (Weapons_CanLockTarget((void *)player, (void *)other)) {
+            if (Player_CanLockTarget((void *)player, (void *)other)) {
                 if (player->weapon == secondSpecial) candidate = other->specialAim;
                 else {
                     candidate = other->position;
                     candidate.y += other->height;
-                    candidate.y += Particle_GetActorHeight(other) * scale;
+                    candidate.y += GameObject_GetActorHeight(other) * scale;
                 }
-                Particle_SubtractVectors(&direction, &candidate, &origin);
-                Particle_NormalizeVec3(&direction.x);
+                GraphU64_SubtractVectors(&direction, &candidate, &origin);
+                GraphU64_NormalizeVec3(&direction.x);
                 dot = forward.x * direction.x + forward.y * direction.y +
                       forward.z * direction.z;
                 if (threshold < dot) {
@@ -182,10 +182,10 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
     *target = best;
     *targetPosition = bestPosition;
     if (best) {
-        Particle_CrossVectors(&axis, &forward, &bestDirection);
-        Particle_NormalizeVec3(&axis.x);
+        GraphU64_CrossVectors(&axis, &forward, &bestDirection);
+        GraphU64_NormalizeVec3(&axis.x);
         scale = D_800C239C_de;
-        threshold = Nav_ArcCos(threshold);
+        threshold = GraphU64_ArcCos(threshold);
         amount = Math_Sqrtf(D_800C23A0_de - threshold / (angle * scale));
         amount = Math_Sqrtf(amount);
         threshold *= amount;

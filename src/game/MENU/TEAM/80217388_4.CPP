@@ -10,11 +10,11 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "gbi.h"
-extern void Particle_TransformPoint(void *arg0, void *arg1, void *arg2);
+extern void GraphU64_TransformPoint(void *arg0, void *arg1, void *arg2);
 
 extern Gfx *g_displayListCursor;
 extern s32 World_PlayerHasAmmoForWeapon(Player *player, s32 weapon);
-void Team_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *player) {
+void TeamSelect_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *player) {
     s32 width;
     s32 height;
     f32 fade;
@@ -67,7 +67,7 @@ void Team_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *player)
    weapon it eases the slot's scale toward its target (1.3 times larger under the cursor at 0x37C),
    turns an offset raised by the menu's opening by the slot's angle to place it, and lists it with its
    weapon's icon from D_800D052C (no icon for weapons outside 0 to 21), then passes the list to
-   Team_DrawWeaponIcons. */
+   TeamSelect_DrawWeaponIcons. */
 
 
 
@@ -84,9 +84,9 @@ void Team_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *player)
 
 extern ObjRecAt6V1 *D_800D052C[];
 
-extern f32 Nav_ApproachValue(f32, f32, f32);
+extern f32 GraphU64_ApproachValue(f32, f32, f32);
 
-extern void Particle_IdentityMatrix(Matrix *);
+extern void GraphU64_IdentityMatrix(Matrix *);
 
 extern void RollMatrix(Matrix *, f32);
 
@@ -120,10 +120,10 @@ void func_80217928_de(CBarrel *menu, s32 arg1, s32 viewPlayer) {
                     target = *(&D_800C9138_de + 1);
                 }
                 size = 1.0f;
-                slot->m_Scale = Nav_ApproachValue(slot->m_Scale, target, *(&D_800C9138_de + 1) * 0.1f);
-                Particle_IdentityMatrix(&matrix);
+                slot->m_Scale = GraphU64_ApproachValue(slot->m_Scale, target, *(&D_800C9138_de + 1) * 0.1f);
+                GraphU64_IdentityMatrix(&matrix);
                 RollMatrix(&matrix, slot->m_Rot);
-                Particle_TransformPoint(&matrix, &offset, &position);
+                GraphU64_TransformPoint(&matrix, &offset, &position);
                 weapon = menu->m_WeaponList[i].m_Weapon;
                 if (weapon < 0) {
                     goto no_icon;
@@ -148,7 +148,7 @@ void func_80217928_de(CBarrel *menu, s32 arg1, s32 viewPlayer) {
                 item->icon = item->width = 0;
             }
         }
-        Team_DrawWeaponIcons(menu, items, count, (Player *)viewPlayer);
+        TeamSelect_DrawWeaponIcons(menu, items, count, (Player *)viewPlayer);
     }
 }
 

@@ -16,7 +16,7 @@ extern u8 D_801051A0[];
 extern u8 D_80106248[];
 extern u8 D_801011B8[];
 
-extern s32 System_GetMemorySize(void);
+extern s32 Defs_GetMemorySize(void);
 extern void func_802558B4_de(void *, void *, s32);
 extern void func_802550F0_de(void *, s32);
 extern void func_80256280_de(void *, s32);
@@ -27,21 +27,21 @@ extern void Virtual_InitializePagerEuroExtended(s32, s32);
 #else
 extern void Virtual_InitializePagerGerman(s32, s32);
 #endif
-extern void Scene_InitializeResourceCache(s32, s32);
+extern void Cache_InitializeResourceCache(s32, s32);
 
-void Texture_InitHeap(void) {
+void AudioMgr_InitHeap(void) {
     u8 *heapStart;
     s32 heapEnd;
     s32 size;
 
     heapEnd = 0x80400000;
     heapStart = D_80166000;
-    if (System_GetMemorySize() != 0x400000) {
-        heapEnd = System_GetMemorySize() | 0x80000000;
+    if (Defs_GetMemorySize() != 0x400000) {
+        heapEnd = Defs_GetMemorySize() | 0x80000000;
     }
 
     size = heapEnd - (s32)heapStart;
-    Resmgr_FillMemory(heapStart, 0, size);
+    XPlus_FillMemory(heapStart, 0, size);
     func_802558B4_de(D_801051A0, heapStart, size);
     func_802550F0_de(D_80106248, 3);
     func_80256280_de(D_801011B8, 4);
@@ -54,7 +54,7 @@ Virtual_InitializePagerEuroExtended
 Virtual_InitializePagerGerman
 #endif
 (0, 0);
-    Scene_InitializeResourceCache(0, 5);
+    Cache_InitializeResourceCache(0, 5);
 }
 
 #include "COMMON/AUDIO_INITIALIZE.H"
@@ -80,7 +80,7 @@ void osCreateThread(void *, s32, void (*)(void), void *, void *, s32);
 void osStartThread(void *);
 
 /* Reset the DMA cache, allocate sample/task buffers, then start the audio worker. */
-void Texture_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioInitializeTiming *timing) {
+void AudioMgr_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioInitializeTiming *timing) {
     u32 i;
     f32 samplesPerFrame;
     D_80107DF0.initialized = 0;
@@ -120,7 +120,7 @@ void Texture_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioIniti
     osSetEventMesg(6, &D_80107E00, 7);
     D_80107DFC = 0;
     D_80107EA0 = config->heap;
-    Resmgr_FillMemory(D_800E5400, 8, sizeof(D_800E5400));
+    XPlus_FillMemory(D_800E5400, 8, sizeof(D_800E5400));
     osCreateThread(D_801076F8, 8, (void (*)(void))&D_00256C90, 0, D_800E5400 + sizeof(D_800E5400), priority);
     osStartThread(D_801076F8);
     osSendMesg(&D_80107E00, (OSMesg)7, 0);

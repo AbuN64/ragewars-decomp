@@ -57,7 +57,7 @@ extern s32 Nav_HasLineOfSight(Brain *, Actor *);
 extern void Nav_SetBehaviourState(Brain *, s32);
 extern f32 func_802726BC_de(CVector3 *, CVector3 *);
 extern f32 Nav_ScaleCharacterSettingByDifficulty(Brain *arg0);
-extern s32 Nav_NextRandom(void);
+extern s32 GraphU64_NextRandom(void);
 extern f32 Nav_UpdateDifficultyAimJitter(Brain *arg0);
 extern f32 Nav_SteerTowardPoint(Brain *, CVector3 *, f32, f32);
 extern s32 Nav_GetDirectionSector(f32);
@@ -99,9 +99,9 @@ void Nav_UpdatePursuitStrafe(Actor *actor) {
             }
             speed = Nav_ScaleCharacterSettingByDifficulty(brain) * 0.4f;
             if (--brain->timer <= 0) {
-                brain->timer = Nav_NextRandom() % 4 + 12;
-                brain->pattern = Nav_NextRandom() % 2;
-                if (Nav_NextRandom() % 2 == 1) {
+                brain->timer = GraphU64_NextRandom() % 4 + 12;
+                brain->pattern = GraphU64_NextRandom() % 2;
+                if (GraphU64_NextRandom() % 2 == 1) {
                     brain->pattern = 2;
                 }
             }

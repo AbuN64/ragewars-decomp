@@ -9,8 +9,8 @@
 
 
 
-extern f32 Nav_ApproachValue(f32, f32, f32);
-extern void Particle_IdentityMatrix(Matrix *);
+extern f32 GraphU64_ApproachValue(f32, f32, f32);
+extern void GraphU64_IdentityMatrix(Matrix *);
 extern void RollMatrix(Matrix *, f32);
 extern void func_802185D0_de(Menu_func_80218F9C_de *, ItemRecAt18V1 *, s32, void *);
 
@@ -36,10 +36,10 @@ void func_80218F9C_de(Menu_func_80218F9C_de *menu, s32 unused1, void *player) {
             } else {
                 target = *(&D_800C9178_de + 1);
             }
-            slot->scale = Nav_ApproachValue(slot->scale, target, *(&D_800C9178_de + 1) * 0.1f);
-            Particle_IdentityMatrix(&matrix);
+            slot->scale = GraphU64_ApproachValue(slot->scale, target, *(&D_800C9178_de + 1) * 0.1f);
+            GraphU64_IdentityMatrix(&matrix);
             RollMatrix(&matrix, slot->angle);
-            Particle_TransformPoint(&matrix, &offset, &position);
+            GraphU64_TransformPoint(&matrix, &offset, &position);
             item->slot = i;
             item->position = position;
             item->icon = i + 0xC1C;

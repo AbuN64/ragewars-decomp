@@ -69,7 +69,7 @@ void func_8022C8FC_de(struct SharedPlayer *player, void *bodyActor) {
 
     Weapons_EaseOwnerHeightEffect(player, bodyActor);
     zero = 0.0f;
-    Nav_EaseValueToward(&player->views5E8.view72C_75.unk72C, zero, 0.25f);
+    GraphU64_EaseValueToward(&player->views5E8.view72C_75.unk72C, zero, 0.25f);
     Weapons_UpdateViewAngles(player, bodyActor, &D_800CE7FC);
     func_802233F0_de(player, bodyActor, &D_800CE7C0);
     if (!(player->views5E8.view6AC_45.unk6AC & 0x10)) {
@@ -117,7 +117,7 @@ void func_8022CA14_de(Player *player, void *bodyActor) {
     result = func_8024E6A0_de(bodyActor);
     if (result != 0) {
         InstHdr_GetActorTargetOffset(result, &vector);
-        Particle_AddVec3(&((LevelActor *)bodyActor)->position1,
+        GraphU64_AddVec3(&((LevelActor *)bodyActor)->position1,
                       &((LevelActor *)bodyActor)->position1, &vector);
     }
 
@@ -128,17 +128,17 @@ void func_8022CA14_de(Player *player, void *bodyActor) {
             mode = audio->m_nFragTagSkin;
             switch (mode) {
         case 0:
-            Render_PlaySoundAtPosition(0x18A1,
+            SoundElement_PlaySoundAtPosition(0x18A1,
                           player->pos,
                           (s32)&player->pos, -1);
             break;
         case 1:
-            Render_PlaySoundAtPosition(0x1969,
+            SoundElement_PlaySoundAtPosition(0x1969,
                           player->pos,
                           (s32)&player->pos, -1);
             break;
         case 2:
-            Render_PlaySoundAtPosition(0x1905,
+            SoundElement_PlaySoundAtPosition(0x1905,
                           player->pos,
                           (s32)&player->pos, -1);
             break;
@@ -186,7 +186,7 @@ finish:
 void func_8022CC34_de(void *player, void *body) {
     s32 value;
 
-    Nav_EaseValueToward(&((Player *)player)->lean, 0.0f, 0.25f);
+    GraphU64_EaseValueToward(&((Player *)player)->lean, 0.0f, 0.25f);
     Weapons_UpdateViewAngles(player, body, &D_800CE7E4);
     if (!(((Player *)player)->flags660 & 0x8000)) {
         func_802233F0_de(player, body, &D_800C94EC_de);
@@ -236,7 +236,7 @@ void func_8022CDBC_de(void *player, LevelActor *actor) {
 }
 
 void func_8022CE78_de(s32 player, s32 body) {
-    Nav_EaseValueToward(player + 0x72C, 0.0f, 0.25f);
+    GraphU64_EaseValueToward(player + 0x72C, 0.0f, 0.25f);
     Weapons_UpdateViewAngles((void *)player, (void *)body, &D_800CE7E4);
     func_802233F0_de((void *)player, (void *)body, &D_800C9558_de);
     if (((LevelActor *)body)->position1.y <= 0.0f) {

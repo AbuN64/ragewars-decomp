@@ -16,9 +16,9 @@
 #include "FX_2/80271B18.H"
 #include "particle/80271B18_3.H"
 
-extern void Particle_CrossVectors(CVector3*,CVector3*,CVector3*);
+extern void GraphU64_CrossVectors(CVector3*,CVector3*,CVector3*);
 
-void Anim_TraceMeshTriangle(ContextB0 *mesh,CollisionVertex **points) {
+void PolyCol_TraceMeshTriangle(ContextB0 *mesh,CollisionVertex **points) {
     extern s32 func_8023E8D4_de(CapsuleSweep*,Polygon_func_8023E8D4_de*,s32);
     CVector3 vertex;
     CVector3 edgeA;
@@ -49,15 +49,15 @@ void Anim_TraceMeshTriangle(ContextB0 *mesh,CollisionVertex **points) {
         vertex.x=(f32)position[0];
         vertex.y=(f32)position[1];
         vertex.z=(f32)position[2];
-        Particle_TransformPoint(&mesh->element->transform,&vertex,(char *)base+byteOffset);
+        GraphU64_TransformPoint(&mesh->element->transform,&vertex,(char *)base+byteOffset);
         byteOffset+=(s32)sizeof(polygon.vertices[0]);
         cursor++;
         i++;
     } while(i<3);
-    Particle_SubtractVectors(&edgeA,&polygon.vertices[1],&polygon.vertices[0]);
-    Particle_SubtractVectors(&edgeB,&polygon.vertices[2],&polygon.vertices[1]);
-    Particle_CrossVectors(&polygon.normal,&edgeB,&edgeA);
-    Particle_NormalizeVec3(&polygon.normal);
+    GraphU64_SubtractVectors(&edgeA,&polygon.vertices[1],&polygon.vertices[0]);
+    GraphU64_SubtractVectors(&edgeB,&polygon.vertices[2],&polygon.vertices[1]);
+    GraphU64_CrossVectors(&polygon.normal,&edgeB,&edgeA);
+    GraphU64_NormalizeVec3(&polygon.normal);
     surface=ray->surface;
     polygon.input=mesh->element;
     polygon.index=-1;

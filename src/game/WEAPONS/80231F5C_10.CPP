@@ -14,7 +14,7 @@ extern s32 func_802301F4_de(void *, void *);
 #include "WEAPONS/80213ED4.H"
 
 
-s32 Items_ReleaseObjectHandles(s32);
+s32 Ovlgame_ReleaseObjectHandles(s32);
 
 
 extern void func_8022AF74_de(Shared_ActorView *arg0, s32 arg1);
@@ -61,7 +61,7 @@ s32 Weapon_IsTriggerReleasedOrBlocked(LevelActor *actor, void *arg1, Shared_Acto
 }
 
 void Weapon_ReleaseLinkedActorHandles(void *arg0) {
-    Items_ReleaseObjectHandles((((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link));
+    Ovlgame_ReleaseObjectHandles((((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link));
 }
 
 void Weapon_InitializeChargeForWeaponEight(Shared_ActorView *arg0, WeaponFireState *fireState) {
@@ -87,7 +87,7 @@ void Weapon_UpdateTriggerReleaseState(void *actor, void *attack) {
         } else {
             switch (state->selectedAction) {
             case 8:
-                Render_PlaySoundAtPosition(0xA3E, state->pos,
+                SoundElement_PlaySoundAtPosition(0xA3E, state->pos,
                               (s32)&state->pos, -1);
             case 0:
             case 14:

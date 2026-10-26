@@ -13,7 +13,7 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "SCENE/802508E0_4.H"
 #include "particle/80271B18_3.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Draws an actor's ground shadow: probes the ground under the actor through func_80243A90_de into D_801041F0, and when ground is found tilts the shadow model from D_8011FFB0 to the ground normal, scales it by the actor's size shrinking with height above the ground, fades it with height (and with lost health for actors flagged 1), places it on the ground and draws it through func_8026992C_de between render-mode commands. */
 extern char D_8011FFB0;
@@ -25,13 +25,13 @@ extern Ground D_801041F0;
 
 extern Gfx *g_displayListCursor;
 
-extern s32 Camera_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, void *);
+extern s32 Unicol_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, void *);
 
 extern CQuatern func_80271818_de(CVector3 *);
 
 extern void MultiplyQuaternions(CQuatern *out, CQuatern *a, CQuatern *b);
 
-extern s32 Particle_LimitVectorLength(CVector3 *, f32);
+extern s32 GraphU64_LimitVectorLength(CVector3 *, f32);
 
 extern void MatrixFromQuaternion(CQuatern *, f32 *);
 
@@ -39,7 +39,7 @@ extern void ScaleMatrixLocal(f32 *, f32, f32, f32);
 
 extern void TranslateMatrix(f32 *, f32, f32, f32);
 
-extern void Rsp_ConvertMatrixToFixed(f32 *, void *);
+extern void GraphU64_ConvertMatrixToFixed(f32 *, void *);
 
 extern void func_8026992C_de(void *model, s32 pass, u8 alpha);
 
@@ -57,16 +57,16 @@ extern char D_0026D7F4;
 
 
 
-extern s32 Render_GetDirectoryEntry(s32 *, s32, s32);
+extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 
 
 extern s32 func_802540F4_de(s32, void **, s32, void *, s32);
 
-extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
+extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
-extern void Render_QueueModelInstance(void **, void *, s32, void *, void *, s32);
+extern void Geometry_QueueModelInstance(void **, void *, s32, void *, void *, s32);
 
-extern void Scene_UnlockResource(s32, void *);
+extern void Cache_UnlockResource(s32, void *);
 extern void *func_802799C0_de(void *, s32);
 
 void func_8027E784_de(Shared_Particle *actor, GameplayCamera *view) {
@@ -98,7 +98,7 @@ void func_8027E784_de(Shared_Particle *actor, GameplayCamera *view) {
     point.x = probe.pos.x;
     point.y = probe.pos.y - 102400.0f;
     point.z = probe.pos.z;
-    Camera_MoveActorWithCollision(&probe, point, &D_80100030);
+    Unicol_MoveActorWithCollision(&probe, point, &D_80100030);
     ground = &D_801041F0;
     if (ground->found == 0) {
         return;
@@ -129,11 +129,11 @@ void func_8027E784_de(Shared_Particle *actor, GameplayCamera *view) {
     point.x = actor->inst.pos.x;
     point.z = actor->inst.pos.z;
     point.y = floor;
-    Particle_LimitVectorLength(&point, 20000.0f);
+    GraphU64_LimitVectorLength(&point, 20000.0f);
     MatrixFromQuaternion(&rotation, matrix);
     ScaleMatrixLocal(matrix, size, 1.0f, size);
     TranslateMatrix(matrix, point.x, point.y, point.z);
-    Rsp_ConvertMatrixToFixed(matrix, model);
+    GraphU64_ConvertMatrixToFixed(matrix, model);
     {
         Gfx *cmd = g_displayListCursor++;
         gDPPipeSync(cmd);
@@ -167,7 +167,7 @@ void Particle_DrawModel(Shared_Particle *particle, GameplayCamera *view) {
         if (matrix == 0) {
             return;
         }
-        Particle_TransformPoint(view->worldToView, &particle->inst.pos, &delta);
+        GraphU64_TransformPoint(view->worldToView, &particle->inst.pos, &delta);
         amount = delta.z;
         if (amount < 0.0f) {
             amount = -amount;
@@ -176,19 +176,19 @@ void Particle_DrawModel(Shared_Particle *particle, GameplayCamera *view) {
     }
 
     if (particle->resource == 0) {
-        resource = Scene_RequestResource(0, particle->desc->renderModel,
+        resource = Cache_RequestResource(0, particle->desc->renderModel,
                                 particle->desc->renderModel, 0x18,
                                 0, 0, 0, &D_800C4D38_de, 1);
         if (resource != 0) {
-            key = Render_GetDirectoryEntry(*resource,
+            key = SetN64_GetDirectoryEntry(*resource,
                                 particle->desc->renderModel, 1);
-            Scene_ReleaseResource(0, resource);
+            Cache_ReleaseResource(0, resource);
             found = func_802540F4_de(0, &modelTable, key, &D_800C4D50_de, 1);
             if (found != 0) {
-                particle->resource = Render_LocatePackSection(
+                particle->resource = SetN64_LocatePackSection(
                     (s32)modelTable, key, index % *(s32 *)modelTable,
                     &particle->resourceSize);
-                Scene_ReleaseResource(0, (void *)found);
+                Cache_ReleaseResource(0, (void *)found);
             }
         }
         if (particle->resource == 0) {
@@ -196,12 +196,12 @@ void Particle_DrawModel(Shared_Particle *particle, GameplayCamera *view) {
         }
     }
 
-    resource = Scene_RequestResource(0, particle->resource,
+    resource = Cache_RequestResource(0, particle->resource,
                             particle->resource, particle->resourceSize,
                             0, 0, &D_0026D7F4, &s_simpPartModelText, 1);
     if (resource != 0) {
-        Render_QueueModelInstance(resource, matrix, 0,
+        Geometry_QueueModelInstance(resource, matrix, 0,
                       (char *)particle + (((D_800D297C * 3) << 3) + 0xE0), 0, -1);
-        Scene_UnlockResource(0, resource);
+        Cache_UnlockResource(0, resource);
     }
 }

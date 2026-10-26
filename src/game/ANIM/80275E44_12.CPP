@@ -9,16 +9,16 @@
 #define SK_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 typedef struct SkelVec { f32 x; f32 y; f32 z; } SkelVec;
 extern s32 D_801462C8;
-extern void Particle_IdentityMatrix(void *);
+extern void GraphU64_IdentityMatrix(void *);
 extern void RollMatrix(void *, f32);
 extern void YawMatrix(void *, f32);
-extern void Particle_ProjectPoint(void *, void *, void *);
+extern void GraphU64_ProjectPoint(void *, void *, void *);
 extern void func_802735A8_de(void *, f32, f32, f32);
 extern void PitchMatrix(void *, f32);
 extern void TranslateMatrix(void *, f32, f32, f32);
 extern void func_8026EF58_de(void *, void *);
-extern void Nav_ComputePointBounds(void *, s32, void *);
-void Anim_DecodeBoxTransform(u8 *self, u8 *src) {
+extern void Region_ComputePointBounds(void *, s32, void *);
+void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
     SkelVec translation;
     SkelVec rotation;
     SkelVec scale;
@@ -48,10 +48,10 @@ void Anim_DecodeBoxTransform(u8 *self, u8 *src) {
         tilt.y = SK_FIELD(src, s32, 0x10) * 9.31322575e-09f;
         tilt.z = SK_FIELD(src, s32, 0x14) * 9.31322575e-09f;
         matrix = self + 0x60;
-        Particle_IdentityMatrix(matrix);
+        GraphU64_IdentityMatrix(matrix);
         RollMatrix(matrix, tilt.x);
         YawMatrix(matrix, tilt.y);
-        Particle_ProjectPoint(matrix, &up, self + 0x14);
+        GraphU64_ProjectPoint(matrix, &up, self + 0x14);
         rotation.x = 0;
         rotation.y = 0;
         rotation.z = 0;
@@ -88,7 +88,7 @@ void Anim_DecodeBoxTransform(u8 *self, u8 *src) {
     SK_FIELD(self, u8, 0xB8) = SK_FIELD(src, u8, 0x37);
     SK_FIELD(self, u8, 0xBA) = SK_FIELD(src, u8, 0x3B);
     SK_FIELD(self, u8, 0xBD) = SK_FIELD(src, u8, 0x4B);
-    Particle_IdentityMatrix(matrix);
+    GraphU64_IdentityMatrix(matrix);
     func_802735A8_de(matrix, scale.x, scale.y, scale.z);
     RollMatrix(matrix, rotation.z);
     YawMatrix(matrix, rotation.y);
@@ -111,9 +111,9 @@ void Anim_DecodeBoxTransform(u8 *self, u8 *src) {
         probe.x = x;
         probe.y = y;
         probe.z = z;
-        Particle_ProjectPoint(self + 0x60, &probe, &corners[i]);
+        GraphU64_ProjectPoint(self + 0x60, &probe, &corners[i]);
     }
-    Nav_ComputePointBounds(self + 0xA0, 8, corners);
+    Region_ComputePointBounds(self + 0xA0, 8, corners);
 }
 
 
@@ -194,7 +194,7 @@ shared:
         } else {
             *arg4 = arg1;
         }
-        Particle_NormalizeVec3(arg4);
+        GraphU64_NormalizeVec3(arg4);
         *arg5 = var_f20;
         return 1;
     } else {

@@ -16,7 +16,7 @@
 #include "ANIM/802412C0_7.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern void Rsp_MultiplyAffineMatrices(void *, void *, void *);
+extern void GraphU64_MultiplyAffineMatrices(void *, void *, void *);
 
 
 extern void *func_8028B2F8_de(Shared_World *, u16 *);
@@ -50,15 +50,15 @@ void func_80243874_de(void *contextAddress) {
     collisionElement = ((ContextB0 *)contextAddress)->element;
     temp_s0 = ((ElementE8 *)collisionElement)->resource;
     if (temp_s0 != 0) {
-        Rsp_MultiplyAffineMatrices(&((ContextB0 *)contextAddress)->transform, &((ElementE8 *)collisionElement)->transform, (char *) contextAddress + 0xC);
+        GraphU64_MultiplyAffineMatrices(&((ContextB0 *)contextAddress)->transform, &((ElementE8 *)collisionElement)->transform, (char *) contextAddress + 0xC);
         meshData = *temp_s0;
-        ((ContextB0 *)contextAddress)->vertices = Render_GetPackSection(meshData, 0);
-        displayListTable = Render_GetPackSection(meshData, 2);
+        ((ContextB0 *)contextAddress)->vertices = SetN64_GetPackSection(meshData, 0);
+        displayListTable = SetN64_GetPackSection(meshData, 2);
         displayListCount = *displayListTable;
         index = 0;
         if (displayListCount > 0) {
             do {
-                Anim_TraceMeshDisplayList(contextAddress, Render_GetPackSection((void *) displayListTable, index));
+                PolyCol_TraceMeshDisplayList(contextAddress, SetN64_GetPackSection((void *) displayListTable, index));
                 index += 1;
             } while (index < displayListCount);
         }

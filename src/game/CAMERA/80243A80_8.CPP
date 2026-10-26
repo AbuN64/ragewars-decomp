@@ -3,9 +3,9 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "TYPES.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
-extern int Camera_IsSequenceActive(void);
+extern int Cinema_IsSequenceActive(void);
 
 extern void func_80245BC0_de(void);
 
@@ -19,8 +19,8 @@ extern f32 D_800C37D0_de;
    value at 0x1C lies between the bounds at 0x30 and 0x34. */
 
 
-void Camera_EndSequence(void) {
-    if (Camera_IsSequenceActive() != 0) {
+void Cinema_EndSequence(void) {
+    if (Cinema_IsSequenceActive() != 0) {
         s32 owner;
         Shared_MenuContext *record;
 
@@ -28,7 +28,7 @@ void Camera_EndSequence(void) {
         func_80245BC0_de();
         owner = (s32)D_800E2830->owner;
         if (owner != 0) {
-            Scene_ReleaseResource(0, owner);
+            Cache_ReleaseResource(0, owner);
         }
         record = D_800E2830;
         record->owner = 0;
@@ -40,7 +40,7 @@ void Camera_EndSequence(void) {
 }
 
 void func_8024570C_de(void) {
-    if (Camera_IsSequenceActive() != 0 && func_80245764_de() != 0 && D_800E2830->unknown60 == 0) {
+    if (Cinema_IsSequenceActive() != 0 && func_80245764_de() != 0 && D_800E2830->unknown60 == 0) {
         f32 temp = D_800C37D0_de;
         D_800E2830->unknown60 = 1;
         D_800E2830->fade = temp;
@@ -56,12 +56,12 @@ int func_8024576C_de(void) {
     return D_800E2830->resourceDC != -1;
 }
 
-int Camera_IsSequenceActive(void) {
+int Cinema_IsSequenceActive(void) {
     Shared_MenuContext *record = D_800E2830;
     return record->active;
 }
 
-int Camera_IsSequenceInWindow(void) {
+int Cinema_IsSequenceInWindow(void) {
     Shared_MenuContext *record = D_800E2830;
     float time;
     int inSequenceWindow = 0;

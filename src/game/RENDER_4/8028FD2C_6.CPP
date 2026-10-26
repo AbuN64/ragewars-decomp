@@ -6,12 +6,12 @@
 #include "RENDER_4/8028FD2C_6.H"
 
 /** Return the byte address named by an indexed word offset from the base. */
-void *Render_GetPackSection(void *table, s32 index) {
+void *SetN64_GetPackSection(void *table, s32 index) {
     s32 *entry = (s32 *)table + index;
     return (char *)table + entry[1];
 }
 
-s32 Render_GetSizedPackSection(s32 arg0, s32 arg1, s32 *arg2) {
+s32 SetN64_GetSizedPackSection(s32 arg0, s32 arg1, s32 *arg2) {
     
     s32 *next = (s32 *)(arg0 + ((arg1 + 1) * 4));
     s32 *entry = (s32 *)(arg0 + (arg1 * 4));

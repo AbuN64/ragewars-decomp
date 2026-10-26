@@ -20,7 +20,7 @@
 
 extern Record_func_80403458_de *D_800E2830;
 
-extern s32 Camera_IsSequenceActive(void);
+extern s32 Cinema_IsSequenceActive(void);
 extern void Menu_RequestTrackByIds(s32 mode, ItemRecAt12 *item);
 extern void func_80278E7C_de(ItemRecAt12 *item);
 extern void func_8028BB1C_de(Shared_World *world, ItemRecAt12 *item, s32 mode);
@@ -38,13 +38,13 @@ void func_80403458_de(void) {
 
     time = D_800E2830->time;
     late = 0;
-    if (Camera_IsSequenceActive() == 0) {
+    if (Cinema_IsSequenceActive() == 0) {
         return;
     }
     if (D_800E2830->active == 0) {
         return;
     }
-    track = Render_GetPackSection(D_800E2830->resource, 2);
+    track = SetN64_GetPackSection(D_800E2830->resource, 2);
     n = track[1];
     entry = (EntryRecAt8V4 *)(track + 2);
     if (n == 0) {

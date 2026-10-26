@@ -8,17 +8,17 @@
 #include "COMMON/OBJECTLINKS150C.H"
 #include "TYPES.H"
 #include "SYSTEM_3/80265370.H"
-extern s32 Render_LocatePackSection(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
+extern s32 SetN64_LocatePackSection(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
 
 extern void func_8028FFD0_de(s32, s32, s32, Triple, Triple, s32, f32);
 
-extern s32 Nav_IsPointInTriangleXZ(Node75 *arg0, f32 arg1, f32 arg2);
+extern s32 Region_IsPointInTriangleXZ(Node75 *arg0, f32 arg1, f32 arg2);
 
-extern f32 Anim_GetPolygonHeight(void *, f32, f32);
+extern f32 Region_GetPolygonHeight(void *, f32, f32);
 
-extern f32 Nav_GetTrianglePlaneHeight(void *arg0, f32 arg1, f32 arg2);
+extern f32 GraphU64_GetTrianglePlaneHeight(void *arg0, f32 arg1, f32 arg2);
 
-extern s32 Render_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);
+extern s32 SetN64_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);
 
 extern void func_80278E7C_de(void *arg0);
 
@@ -37,14 +37,14 @@ void *func_8028C050_de(void *triangle, CVector3 *arg1) {
     f32 value;
 
     if (triangle != 0 &&
-        Nav_IsPointInTriangleXZ(triangle, arg1->x,
+        Region_IsPointInTriangleXZ(triangle, arg1->x,
                           arg1->z) != 0) {
         if (!(((Triangle *)triangle)->flags & 0x40)) {
             return triangle;
         }
-        lower = Anim_GetPolygonHeight(triangle,
+        lower = Region_GetPolygonHeight(triangle,
             arg1->x, arg1->z);
-        upper = Nav_GetTrianglePlaneHeight(triangle,
+        upper = GraphU64_GetTrianglePlaneHeight(triangle,
             arg1->x, arg1->z);
         value = arg1->y;
         if (lower <= value && value <= upper) {
@@ -76,14 +76,14 @@ EntryRecAt18V4 *func_8028C108_de(World *world, s32 id) {
 }
 
 void func_8028C15C_de(void *arg0, s32 arg1, s32 *arg2, s32 *arg3) {
-    *arg2 = Render_LocatePackSection((((struct IntegerState54 *) ((s8 *) arg0))->unk_50), (((struct IntegerState54 *) ((s8 *) arg0))->unk_20), arg1, arg3);
+    *arg2 = SetN64_LocatePackSection((((struct IntegerState54 *) ((s8 *) arg0))->unk_50), (((struct IntegerState54 *) ((s8 *) arg0))->unk_20), arg1, arg3);
 }
 
 s32 func_8028C198_de(Shared_World *world, s32 type) {
     s32 *directory = world->indexedDirectory;
 
     if (type < *directory) {
-        return Render_GetDirectoryEntry(directory, world->indexedBank, type);
+        return SetN64_GetDirectoryEntry(directory, world->indexedBank, type);
     }
     return 0;
 }

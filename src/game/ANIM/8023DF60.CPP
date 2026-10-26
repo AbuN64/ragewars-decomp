@@ -5,7 +5,7 @@
 /* Tests a swept sphere against a polygon: shifts the ray from 0x44 to 0x50 back along the polygon normal by
  * the radius (plus an optional offset), intersects the shifted ray with the polygon's plane through
  * func_802412D0_de under the same acceptance rules as func_8023E8D4_de, requires the shifted hit point to pass
- * Anim_TestPointNearPolygon at that radius, then places the hit on the unshifted ray and optionally keeps the polygon
+ * Plane_TestPointNearPolygon at that radius, then places the hit on the unshifted ray and optionally keeps the polygon
  * as the ray's nearest hit. Adapted from func_8023E8D4_de with its static acceptance helper.
  */
 
@@ -19,9 +19,9 @@ extern f32 D_800C3690_de;
 
 extern s32 func_802412D0_de(Polygon *, CVector3 *, CVector3 *, f32 *);
 extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
-extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
-extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
-extern s32 Anim_TestPointNearPolygon(Polygon *, CVector3 *, f32);
+extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern s32 Plane_TestPointNearPolygon(Polygon *, CVector3 *, f32);
 
 static inline s32 accepts(CapsuleSweep *ray, Polygon *poly) {
     if (poly->t <= 0.0f) {
@@ -48,15 +48,15 @@ s32 func_8023DF70_de(CapsuleSweep *ray, CVector3 *offset, f32 radius, Polygon *p
     CVector3 hit;
 
     if (offset != 0) {
-        Particle_ScaleVector(&shift, &poly->normal, -radius);
-        Particle_AddVec3(&shift, &shift, offset);
+        GraphU64_ScaleVector(&shift, &poly->normal, -radius);
+        GraphU64_AddVec3(&shift, &shift, offset);
     } else {
         shift.x = 0.0f;
         shift.y = 0.0f;
         shift.z = 0.0f;
     }
-    Particle_AddVec3(&start, &ray->start, &shift);
-    Particle_AddVec3(&end, &ray->end, &shift);
+    GraphU64_AddVec3(&start, &ray->start, &shift);
+    GraphU64_AddVec3(&end, &ray->end, &shift);
     if (func_802412D0_de(poly, &start, &end, &poly->t) == 0) {
         return 0;
     }
@@ -64,7 +64,7 @@ s32 func_8023DF70_de(CapsuleSweep *ray, CVector3 *offset, f32 radius, Polygon *p
         return 0;
     }
     func_80271FC8_de(&hit, poly->t, &start, &end);
-    if (Anim_TestPointNearPolygon(poly, &hit, radius) == 0) {
+    if (Plane_TestPointNearPolygon(poly, &hit, radius) == 0) {
         return 0;
     }
     func_80271FC8_de(&poly->hit, poly->t, &ray->start, &ray->end);

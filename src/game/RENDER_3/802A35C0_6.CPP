@@ -20,13 +20,13 @@
 
 extern f32 D_80115DEC;
 
-extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 extern f32 Math_Sqrtf(f32);
 
-extern void Particle_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
+extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
-/* Draws the scene's ten particle lists unless the free list holds exactly 100 particles: sets the render state and the shared particle texture D_800D14B0 (a 16x16 texture drawn in grey at alpha 200 through D_800D2E60), then for every particle inside the view box ending at D_801031F8 + 4 loads its matrix and draws the shared quad g_particleQuadVertices, while particles outside it are unlinked (func_80255ED8_de) and returned to the free list (func_80255D14_de); finally restores the render state through func_8026D8F8_de and System_ResetTextureCache. */
+/* Draws the scene's ten particle lists unless the free list holds exactly 100 particles: sets the render state and the shared particle texture D_800D14B0 (a 16x16 texture drawn in grey at alpha 200 through D_800D2E60), then for every particle inside the view box ending at D_801031F8 + 4 loads its matrix and draws the shared quad g_particleQuadVertices, while particles outside it are unlinked (func_80255ED8_de) and returned to the free list (func_80255D14_de); finally restores the render state through func_8026D8F8_de and TextLoad_ResetTextureCache. */
 
 
 
@@ -62,11 +62,11 @@ extern void CopyMatrix(f32 *arg0, f32 *arg1);
 
 extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
-extern void Particle_ClampMatrixToFixedRange(f32 *arg0);
+extern void GraphU64_ClampMatrixToFixedRange(f32 *arg0);
 
 extern void func_802A25D0_de(void *arg0, void *arg1, f32 *arg2);
 
-extern void Rsp_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
+extern void GraphU64_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
 
 extern f32 D_800C5EA0_de;
 
@@ -83,7 +83,7 @@ CQuatern *func_802A5020_de(CQuatern *out, u32 bx, u32 by, u32 bz) {
     axis.x = 0.0f;
     axis.y = one;
     axis.z = 0.0f;
-    Particle_CrossVectors(&cross, &axis, (CVector3 *)&bx);
+    GraphU64_CrossVectors(&cross, &axis, (CVector3 *)&bx);
 
     magnitude = Math_Sqrtf((cross.x * cross.x) +
                               (cross.y * cross.y) +
@@ -94,8 +94,8 @@ CQuatern *func_802A5020_de(CQuatern *out, u32 bx, u32 by, u32 bz) {
         result.x = 0.0f;
         result.w = one;
     } else {
-        Particle_ScaleVector(&cross, &cross, one / magnitude);
-        angle = Nav_ArcCos((axis.x * *(f32 *)&bx) +
+        GraphU64_ScaleVector(&cross, &cross, one / magnitude);
+        angle = GraphU64_ArcCos((axis.x * *(f32 *)&bx) +
                               (axis.y * *(f32 *)&by) +
                               (axis.z * *(f32 *)&bz));
         angle *= ((struct func_802077F4_S2 *) ((f32 *) (&D_800C5E88_de)))->unk4;
@@ -156,7 +156,7 @@ void func_802A5180_de(SceneRecAt95A8 *scene) {
         }
     }
     func_8026D8F8_de();
-    System_ResetTextureCache();
+    TextLoad_ResetTextureCache();
 }
 
 void func_802A5498_de(u32 arg0) {
@@ -200,7 +200,7 @@ void func_802A5498_de(u32 arg0) {
     gSP2Triangles(cmd, 0, 1, 2, 0, 2, 3, 0, 0);
 
     func_8026D8F8_de();
-    System_ResetTextureCache();
+    TextLoad_ResetTextureCache();
 }
 
 void func_802A5680_de(s32 owner) {
@@ -269,7 +269,7 @@ void func_802A57E0_de(Owner802A6DF8 *arg0, s32 actor, char *arg2) {
             if ((s32)node->object == actor && node->value > zero) {
                 CopyMatrix(sp10, (f32 *)(arg2 + (node->node->matrixIndex << 6)));
                 ScaleMatrixLocal(sp10, temp, temp, temp);
-                Particle_ClampMatrixToFixedRange(sp10);
+                GraphU64_ClampMatrixToFixedRange(sp10);
                 func_802A25D0_de(arg0, node, sp10);
             }
             node = node->next;
@@ -290,13 +290,13 @@ void func_802A58B0_de(ObjRecAt7528 *arg0, Shared_Particle *particle, PackedMatri
             if (node->unk1C == particle &&
                 node->unk24 > zero &&
                 node->unk24 > zero) {
-                Rsp_ConvertMatrixToFloat(local, packedMatrixWords);
+                GraphU64_ConvertMatrixToFloat(local, packedMatrixWords);
                 scale = D_800C5E98_de;
                 if (particle->desc->renderModel != 0) {
                     scale = D_800C5E9C_de;
                 }
                 ScaleMatrixLocal(local, scale, scale, scale);
-                Particle_ClampMatrixToFixedRange(local);
+                GraphU64_ClampMatrixToFixedRange(local);
                 func_802A25D0_de(arg0, node, local);
             }
             node = node->unk4;

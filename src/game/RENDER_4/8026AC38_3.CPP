@@ -15,22 +15,22 @@ extern Group18 *D_8010C56C,*D_8010C584;
 
 extern Gfx *g_displayListCursor;
 
-extern s32 Render_SetupMaterial(Material18 *,s8);
+extern s32 Geometry_SetupMaterial(Material18 *,s8);
 
-extern void Render_ApplyMaterialLighting(u32,u32,Material18 *),func_8026AC38_de(void);
+extern void Geometry_ApplyMaterialLighting(u32,u32,Material18 *),func_8026AC38_de(void);
 
-void Scene_LockResource(void *, void *);
+void Cache_LockResource(void *, void *);
 
-void Scene_UnlockResource(void *, void *);
+void Cache_UnlockResource(void *, void *);
 
 void **func_802540F4_de(s32, void **, s32, void *, s32);
 
 void func_8026BC60_de(void);
 
 
-int Render_GetDirectoryEntry(int *, int, int);
+int SetN64_GetDirectoryEntry(int *, int, int);
 
-s32 Render_LocatePackSection(s32, s32, s32, s32 *);
+s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
 
  /* extern */
@@ -52,10 +52,10 @@ void func_8026C020_de(void) {
  Mesh *mesh;u16 scaleS,scaleT;u32 cmd;
  if(group)do {
   mesh=group->meshes;
-  if(mesh && Render_SetupMaterial(group->material,group->mode)) {
+  if(mesh && Geometry_SetupMaterial(group->material,group->mode)) {
    scaleT=0;scaleS=0;
    do {
-    Render_ApplyMaterialLighting(mesh->matrix,mesh->aux,group->material);
+    Geometry_ApplyMaterialLighting(mesh->matrix,mesh->aux,group->material);
     if(mesh->segmented){gSPSegment(g_displayListCursor++, 1, ((mesh->matrix)));}else{gSPMatrix(g_displayListCursor++, ((mesh->matrix)), G_MTX_LOAD);}
     gSPSegment(g_displayListCursor++, 2, ((mesh->vertices)));
     if(mesh->scaleS) {
@@ -80,7 +80,7 @@ void func_8026C020_de(void) {
    if(mesh) {
     gDPSetPrimColor(g_displayListCursor++, 0, 0, 0, 0, 0, group->material->alpha);
     do {
-     Render_ApplyMaterialLighting(mesh->matrix,mesh->aux,group->material);
+     Geometry_ApplyMaterialLighting(mesh->matrix,mesh->aux,group->material);
      if(mesh->segmented){gSPSegment(g_displayListCursor++, 1, ((mesh->matrix)));}else{gSPMatrix(g_displayListCursor++, ((mesh->matrix)), G_MTX_LOAD);}
      gSPSegment(g_displayListCursor++, 2, ((mesh->vertices)));
      gSPDisplayList(g_displayListCursor++, ((mesh->list)));
@@ -93,10 +93,10 @@ void func_8026C020_de(void) {
  group=D_8010C584;
  if(group)do {
   mesh=group->meshes;
-  if(mesh && Render_SetupMaterial(group->material,group->mode)) {
+  if(mesh && Geometry_SetupMaterial(group->material,group->mode)) {
    scaleT=0;scaleS=0;
    do {
-    Render_ApplyMaterialLighting(mesh->matrix,mesh->aux,group->material);
+    Geometry_ApplyMaterialLighting(mesh->matrix,mesh->aux,group->material);
     if(mesh->segmented){gSPSegment(g_displayListCursor++, 1, ((mesh->matrix)));}else{gSPMatrix(g_displayListCursor++, ((mesh->matrix)), G_MTX_LOAD);}
     gSPSegment(g_displayListCursor++, 2, ((mesh->vertices)));
     if(mesh->scaleS) {
@@ -127,22 +127,22 @@ void func_8026C484_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 
         s32 temp_v1;
         s8 *temp_s1_2;
         ObjRecAtCV2 *temp_v1_2;
-        temp_v0 = Scene_RequestResource(0, arg0, arg0, 0x18, 0, 0, 0, &s_simpObjectIndexText, 1);
+        temp_v0 = Cache_RequestResource(0, arg0, arg0, 0x18, 0, 0, 0, &s_simpObjectIndexText, 1);
         if (temp_v0 != 0) {
-                temp_s1 = Render_GetDirectoryEntry(*temp_v0, arg0, 1);
-                Scene_UnlockResource(0, temp_v0);
+                temp_s1 = SetN64_GetDirectoryEntry(*temp_v0, arg0, 1);
+                Cache_UnlockResource(0, temp_v0);
                 temp_v0_2 = func_802540F4_de(0, (void **) &sp28, temp_s1, &s_simpModelsIndexText, 1);
                 if (temp_v0_2 != 0) {
                         temp_v0_3 = *sp28;
-                        temp_s0 = Render_LocatePackSection((s32) sp28, temp_s1, arg3 % temp_v0_3, &sp2C);
-                        Scene_UnlockResource(0, (void *) temp_v0_2);
-                        resource = Scene_RequestResource(0, temp_s0, temp_s0, sp2C, 0, 0, &D_0026D7F4, &s_simpModelText, direct);
+                        temp_s0 = SetN64_LocatePackSection((s32) sp28, temp_s1, arg3 % temp_v0_3, &sp2C);
+                        Cache_UnlockResource(0, (void *) temp_v0_2);
+                        resource = Cache_RequestResource(0, temp_s0, temp_s0, sp2C, 0, 0, &D_0026D7F4, &s_simpModelText, direct);
                         if (resource != 0) {
-                                temp_s1_2 = Render_GetPackSection(*resource, 0);
+                                temp_s1_2 = SetN64_GetPackSection(*resource, 0);
                                 if (D_8011064C != resource || D_8010C564 != arg4 || D_80110640 == 0x20) {
                                         func_8026BC60_de();
                                         if (D_80111310 != 0x100) {
-                                                Scene_LockResource(0, resource);
+                                                Cache_LockResource(0, resource);
                                                 D_80111318[D_80111310] = resource;
                                                 D_80111310 += 1;
                                                 goto block_11;
@@ -160,7 +160,7 @@ void func_8026C484_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 
                                         temp_v1_2->unk4 = arg2;
                                         temp_v1_2->unk8 = temp_s1_2;
                                 }
-                                Scene_UnlockResource(0, resource);
+                                Cache_UnlockResource(0, resource);
                         }
                 }
         }
@@ -171,14 +171,14 @@ void func_8026C484_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 
 #include "COMMON/DISPLAY.H"
 
 #include "COMMON/LONE/D_800CC384.H"
-extern void Scene_MarkResourceInUse(s32, void **);
+extern void Cache_MarkResourceInUse(s32, void **);
 
 /* Draws a pack resource model as a translucent decal: skips when fewer than 3000 display-list commands are
  * left, loads the matrix (or segment 1), points segment 2 at the textures (the sixth argument overrides the
  * texture section of the pack), sets a primitive-alpha combine with the fog render mode bits and the global
  * geometry mode, then emits the display list of each part; the cached texture and combine states are
  * invalidated before and after. The fifth and seventh arguments are unused. */
-void Render_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
+void Geometry_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
                      s32 segment, void *unusedLighting, s32 textureAddress, s32 unusedMode) {
     void *resourceHeader;
     void *textures;
@@ -195,7 +195,7 @@ void Render_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
         return;
     }
     resourceHeader = *(void **)resource;
-    Scene_MarkResourceInUse(0, (void **)resource);
+    Cache_MarkResourceInUse(0, (void **)resource);
     if (segment != 0) {
         gSPSegment(g_displayListCursor++, 1, matrix);
     } else {
@@ -203,10 +203,10 @@ void Render_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
     }
     textures = (void *)textureAddress;
     if (textures == 0) {
-        textures = Render_GetPackSection(resourceHeader, 0);
+        textures = SetN64_GetPackSection(resourceHeader, 0);
     }
     gSPSegment(g_displayListCursor++, 2, (u32)textures);
-    partTable = Render_GetPackSection(resourceHeader, 2);
+    partTable = SetN64_GetPackSection(resourceHeader, 2);
     D_800CC360 = -1;
     D_800CC364 = -1;
     syncCommand = g_displayListCursor++;
@@ -224,9 +224,9 @@ void Render_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
     geometryMode |= G_CULL_BACK;
     gSPGeometryMode(g_displayListCursor++, 0, geometryMode);
     for (partIndex = 0; partIndex < partCount; partIndex++) {
-        partHeader = Render_GetPackSection(partTable, partIndex);
-        Render_GetPackSection(partHeader, 0);
-        displayList = Render_GetPackSection(partHeader, 1);
+        partHeader = SetN64_GetPackSection(partTable, partIndex);
+        SetN64_GetPackSection(partHeader, 0);
+        displayList = SetN64_GetPackSection(partHeader, 1);
         gSPDisplayList(g_displayListCursor++, (u32)displayList);
     }
     D_800CC364 = -1;

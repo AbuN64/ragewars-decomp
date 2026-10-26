@@ -15,8 +15,8 @@ extern char D_80102B00[];
 extern s8 D_80102B0D[];
 extern struct ItemFrontendRelabelSlotRows *func_8040EC30_de(void *, s32);
 extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
-extern struct ItemFrontendRelabelSlotRows *Menu_GetSlotValue(void *, s32);
-void Frontend_RelabelSlotRows(s32 player) {
+extern struct ItemFrontendRelabelSlotRows *SmpOverlay_GetSlotValue(void *, s32);
+void PAKInterface_RelabelSlotRows(s32 player) {
     struct ItemFrontendRelabelSlotRows *item;
     struct func_8028469C_S2 *label;
     s32 id;
@@ -63,7 +63,7 @@ void Frontend_RelabelSlotRows(s32 player) {
         item = func_8040EC30_de(D_800E54A4->window, id);
         Frontend_SetWidgetFlag100(item, 0);
         label = item->label;
-        if (player != -1 && item == Menu_GetSlotValue(D_800E54A4->list, player)) {
+        if (player != -1 && item == SmpOverlay_GetSlotValue(D_800E54A4->list, player)) {
             label->unk38 = D_800E54A4->players[player].slots[D_800E54A4->players[player].chosen];
         } else if (D_80102B0D[i * 400] >= 0) {
             label->unk38 = &D_80102B00[i * 400];

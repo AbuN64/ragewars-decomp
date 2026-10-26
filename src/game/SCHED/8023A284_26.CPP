@@ -30,7 +30,7 @@ s32 func_8023D380_de(ActorMotion *a) {
     s32 i, active, type, timer;
     settings=a->surface;
     if (a->collisionState!=0) {
-    Particle_NormalizeVec3(&a->normal.x);
+    GraphU64_NormalizeVec3(&a->normal.x);
     step=D_800CB404_de*D_800C3634_de;
     a->position=a->end;
     a->projectedOrientation=a->orientation;
@@ -97,17 +97,17 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
             func_80272180_de(&rotation,&a->orientation,&a->normal,settings->response);
             a->projectedOrientation=rotation;
             damping=a->damping;
-            Particle_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3670_de-damping);
+            GraphU64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3670_de-damping);
         }
         if(active==0)return 1;
         remainingFraction=a->blend;
         scale=D_800C3674_de;
         remainingFraction=scale-remainingFraction;
-        Particle_ScaleVector(&remaining,&a->velocity,remainingFraction);
+        GraphU64_ScaleVector(&remaining,&a->velocity,remainingFraction);
         delta=&slide;
         func_80272180_de(delta,&remaining,&a->normal,settings->response);
-        Particle_ScaleVector(delta,delta,scale-a->damping);
-        Particle_AddVec3(&a->position,&a->interpolated,delta);
+        GraphU64_ScaleVector(delta,delta,scale-a->damping);
+        GraphU64_AddVec3(&a->position,&a->interpolated,delta);
         return 1;
     }
     case 2: {
@@ -116,18 +116,18 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
             func_80272214_de(&rotation,&a->orientation,&a->normal);
             a->projectedOrientation=rotation;
             damping=a->damping;
-            Particle_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3678_de-damping);
+            GraphU64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3678_de-damping);
         }
         if(active==0)return 1;
         remainingFraction=a->blend;
         scale=D_800C367C_de;
         remainingFraction=scale-remainingFraction;
-        Particle_ScaleVector(&remaining,&a->velocity,remainingFraction);
+        GraphU64_ScaleVector(&remaining,&a->velocity,remainingFraction);
         func_80272214_de(&bounce,&remaining,&a->normal);
-        Particle_ScaleVector(&bounce,&bounce,scale-a->damping);
-    Particle_AddVec3(&a->position,&a->interpolated,&bounce);
-    Particle_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
-    Particle_AddVec3(&a->position,&a->position,&gravity);
+        GraphU64_ScaleVector(&bounce,&bounce,scale-a->damping);
+    GraphU64_AddVec3(&a->position,&a->interpolated,&bounce);
+    GraphU64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
+    GraphU64_AddVec3(&a->position,&a->position,&gravity);
     return 1;
 
     }
@@ -135,11 +135,11 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
         if(a->orientationActive!=0) {rotation=func_802723FC_de(&a->orientation,&a->normal);a->projectedOrientation=rotation;}
         if(active==0)return 1;
         fraction=a->blend;
-        Particle_ScaleVector(&remaining,&a->velocity,D_800C3680_de-fraction);
+        GraphU64_ScaleVector(&remaining,&a->velocity,D_800C3680_de-fraction);
         bounce=func_802723FC_de(&remaining,&a->normal);
-        Particle_AddVec3(&a->position,&a->interpolated,&bounce);
-    Particle_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
-    Particle_AddVec3(&a->position,&a->position,&gravity);
+        GraphU64_AddVec3(&a->position,&a->interpolated,&bounce);
+    GraphU64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
+    GraphU64_AddVec3(&a->position,&a->position,&gravity);
     return 1;
 
     case 5: {
@@ -149,20 +149,20 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
             projected=func_802723FC_de(&a->orientation,&a->normal);
             func_80271FC8_de(&a->projectedOrientation,0.25f,&reflection,&projected);
             damping=a->damping;
-            Particle_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3684_de-damping);
+            GraphU64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3684_de-damping);
         }
         if(active==0)return 1;
         remainingFraction=a->blend;
         scale=D_800C3688_de;
         remainingFraction=scale-remainingFraction;
-        Particle_ScaleVector(&remaining,&a->velocity,remainingFraction);
+        GraphU64_ScaleVector(&remaining,&a->velocity,remainingFraction);
         func_80272214_de(&reflection,&remaining,&a->normal);
         projected=func_802723FC_de(&remaining,&a->normal);
         func_80271FC8_de(&bounce,0.25f,&reflection,&projected);
-        Particle_ScaleVector(&bounce,&bounce,scale-a->damping);
-    Particle_AddVec3(&a->position,&a->interpolated,&bounce);
-    Particle_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
-    Particle_AddVec3(&a->position,&a->position,&gravity);
+        GraphU64_ScaleVector(&bounce,&bounce,scale-a->damping);
+    GraphU64_AddVec3(&a->position,&a->interpolated,&bounce);
+    GraphU64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
+    GraphU64_AddVec3(&a->position,&a->position,&gravity);
     return 1;
 
     }

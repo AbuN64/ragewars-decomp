@@ -22,9 +22,9 @@
 extern void MarkMenuEventHandled();
 extern void func_8043577C_de(s32);
 extern s32 func_804355B4_de();
-extern void Frontend_RelabelSlotRows(s32);
-extern void Frontend_UpdatePlayerControlRows(s32);
-extern void Frontend_RefreshPlayerPanel(s32);
+extern void PAKInterface_RelabelSlotRows(s32);
+extern void PAKInterface_UpdatePlayerControlRows(s32);
+extern void PAKInterface_RefreshPlayerPanel(s32);
 
 s32 func_80432158_de(void *unused0, void *unused1, u16 player) {
     MarkMenuEventHandled();
@@ -46,15 +46,15 @@ s32 func_80432158_de(void *unused0, void *unused1, u16 player) {
         break;
     case 0x16:
         MarkMenuEventHandled();
-        Frontend_RelabelSlotRows(-1);
+        PAKInterface_RelabelSlotRows(-1);
         D_800E54A4->players[player].state = 0xD;
-        Frontend_RefreshPlayerPanel(player);
+        PAKInterface_RefreshPlayerPanel(player);
         break;
     case 0x1B:
         MarkMenuEventHandled();
-        Frontend_UpdatePlayerControlRows(-1);
+        PAKInterface_UpdatePlayerControlRows(-1);
         D_800E54A4->players[player].state = 0xD;
-        Frontend_RefreshPlayerPanel(player);
+        PAKInterface_RefreshPlayerPanel(player);
         break;
     default:
         return 0;

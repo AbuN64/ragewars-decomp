@@ -15,7 +15,7 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
 #include "WEAPONS/80213ED4.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 extern char D_8010F328[];
 
@@ -26,13 +26,13 @@ extern char D_801468A0[];
 extern void func_80253908_de(s32);
 
 
-extern void Weapons_AllocPlayerList(CPlayerPool *, s32);
+extern void Player_AllocPlayerList(CPlayerPool *, s32);
 extern s32 D_800C9684[];
 extern void Ovlgame_ResetPlayerForRound(void *actor, s32 character, s32 active);
 
 
 
-/* Resets a 0x44-byte record: clears it through Resmgr_FillMemory, initialises the two lists at offsets
+/* Resets a 0x44-byte record: clears it through XPlus_FillMemory, initialises the two lists at offsets
    0xC and 0x20 through func_80255CA0_de with 0x16DC and 0x16E0, and clears the words at 0 to 8 and
    0x34 to 0x40. */
 
@@ -43,7 +43,7 @@ extern void Ovlgame_ResetPlayerForRound(void *actor, s32 character, s32 active);
 void Weapons_UpdatePlayerCamera(Shared_ActorView *, Shared_ActorView *);
 
                  /* extern */
-void Camera_UpdateSequenceTrack(void *);
+void Cinema_UpdateSequenceTrack(void *);
 
                             /* extern */
 
@@ -58,7 +58,7 @@ void Ovlgame_InitActorHudState(Shared_ActorView *);
 
 /* Sets the byte at offset 0x78 of the object at 0x5D8 of an actor, calls Ovlgame_ResetPlayerForRound with the
    actor, its second argument and one, then func_80214178_de on offsets 0x2E8 and 0x458 with two and
-   Render_PlacePlayerAtSpawnPoint with D_80146898, zero and one. */
+   Player_PlacePlayerAtSpawnPoint with D_80146898, zero and one. */
 
 
 
@@ -84,12 +84,12 @@ void func_804499B0_de(CPlayerPool *pool, s32 count, s32 force_active) {
 
     func_80255CA0_de(&pool->m_FreeList, 0x16DC, 0x16E0);
     func_80255CA0_de(&pool->m_ActiveList, 0x16DC, 0x16E0);
-    Render_SetControllerMode(0);
+    Control_SetControllerMode(0);
     func_80253908_de(0);
     global = D_801462C8;
 
     if (pool->m_pmePlayers != 0) {
-        Scene_ReleaseResource(0, pool->m_pmePlayers);
+        Cache_ReleaseResource(0, pool->m_pmePlayers);
         pool->m_pmePlayers = 0;
         pool->m_Players = 0;
         pool->count = 0;
@@ -99,7 +99,7 @@ void func_804499B0_de(CPlayerPool *pool, s32 count, s32 force_active) {
         return;
     }
 
-    Weapons_AllocPlayerList(pool, count);
+    Player_AllocPlayerList(pool, count);
     for (i = 0; i < pool->count; i++) {
         func_80255D14_de(&pool->m_FreeList, pool->m_Players + i * 0x16E8);
     }
@@ -127,10 +127,10 @@ initialize_object:
             ((struct Shared_ActorView *)(object))->remote = ((ObjectState96 *)(entry))->m_IsBot;
             ((struct Shared_ActorView *)(object))->actorState = 0;
             if (((struct Shared_ActorView *)(object))->remote != 0) {
-                Fx_InitControllerInput(object + 0x688, D_8010EEB8);
+                ContPad_InitControllerInput(object + 0x688, D_8010EEB8);
                 ((struct Shared_ActorView *)(object))->mode = ((ObjectState96 *)(entry))->m_nController;
             } else {
-                Fx_InitControllerInput(object + 0x688, D_8010F328 + attribute_offset);
+                ContPad_InitControllerInput(object + 0x688, D_8010F328 + attribute_offset);
                 ((struct Shared_ActorView *)(object))->mode = i;
             }
             owner = ((struct Shared_ActorView *)(object))->owner;
@@ -183,10 +183,10 @@ initialize_object:
         ((struct Shared_ActorView *)(object))->remote = ((ObjectState96 *)(entry))->m_IsBot;
         ((struct Shared_ActorView *)(object))->actorState = 0;
         if (((struct Shared_ActorView *)(object))->remote != 0) {
-            Fx_InitControllerInput(object + 0x688, D_8010EEB8);
+            ContPad_InitControllerInput(object + 0x688, D_8010EEB8);
             ((struct Shared_ActorView *)(object))->mode = ((ObjectState96 *)(entry))->m_nController;
         } else {
-            Fx_InitControllerInput(object + 0x688, D_8010F328 + roster_index * 0x224);
+            ContPad_InitControllerInput(object + 0x688, D_8010F328 + roster_index * 0x224);
             ((struct Shared_ActorView *)(object))->mode = roster_index;
         }
         owner = ((struct Shared_ActorView *)(object))->owner;
@@ -233,7 +233,7 @@ initialized:
 }
 
 void Ovlgame_ResetMenuPool(struct RecordCode80447BB0 *record) {
-    Resmgr_FillMemory(record, 0, 0x44);
+    XPlus_FillMemory(record, 0, 0x44);
     func_80255CA0_de(&record->m_FreeList, 0x16DC, 0x16E0);
     func_80255CA0_de(&record->m_ActiveList, 0x16DC, 0x16E0);
     record->m_pmePlayers = 0;
@@ -253,7 +253,7 @@ void func_80449E18_de(CPlayerPool *pool) {
     struct IntPair *model;
     struct IntPair *temp_v1_2;
     Shared_ActorView *actor;
-    if ((func_802934F8_de() != 0) && (Render_IsSnapshotActive() != 0)) {
+    if ((func_802934F8_de() != 0) && (Control_IsSnapshotActive() != 0)) {
         Control_RestoreActorSnapshot();
         Control_DeactivateActorSnapshot();
     }
@@ -267,7 +267,7 @@ void func_80449E18_de(CPlayerPool *pool) {
             Weapons_UpdatePlayerCamera(actor, actor);
             message = actor->message;
             if (message != 0) {
-                Camera_UpdateSequenceTrack(message);
+                Cinema_UpdateSequenceTrack(message);
             }
             model = actor->model;
             model->field_4 = model->field_4 & ~4;
@@ -287,10 +287,10 @@ void func_80449EE4_de(char *player, s32 slot, RecordCode80447BB080449EE4 *record
     ((Shared_ActorView *)player)->actorState = 0;
     ((Shared_ActorView *)player)->remote = computer;
     if (computer != 0) {
-        Fx_InitControllerInput(player + 0x688, D_8010EEB8);
+        ContPad_InitControllerInput(player + 0x688, D_8010EEB8);
         ((Shared_ActorView *)player)->mode = record->slot;
     } else {
-        Fx_InitControllerInput(player + 0x688, D_8010F328 + slot * 0x224);
+        ContPad_InitControllerInput(player + 0x688, D_8010F328 + slot * 0x224);
         ((Shared_ActorView *)player)->mode = slot;
     }
     ((Shared_ActorView *)player)->controls = (void *)record;
@@ -330,5 +330,5 @@ void func_8044A020_de(struct ActorCode80447BB0 *actor, s32 character) {
     actor->part->active = 1;
     Ovlgame_ResetPlayerForRound(actor, character, 1);
     Weapons_RequestActorState(&actor->firstEffect, &actor->secondEffect, 2);
-    Render_PlacePlayerAtSpawnPoint(actor, D_8011FAC0.selector, 0, 1);
+    Player_PlacePlayerAtSpawnPoint(actor, D_8011FAC0.selector, 0, 1);
 }

@@ -9,11 +9,11 @@
 #include "COMMON/GLOBALS.H"
 #include "COMMON/ANIMATION.H"
 
-int Camera_IsSequenceInWindow(void);
+int Cinema_IsSequenceInWindow(void);
 void func_8025476C_de(unsigned int);
 void func_802991D4_de(s32);
 void func_802A2360_de(void);
-void Menu_StartFlicker(void *, int);
+void SmpFlicker_StartFlicker(void *, int);
 s32 func_8043C308_de(Shared_OptionsScreen *);
 void func_804499B0_de(void *, s32, s32);
 void Items_ResetActorPools(void *, s32);

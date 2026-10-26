@@ -21,7 +21,7 @@ extern s32 D_800D2B84;
 
 extern struct CartridgeReadWorker D_801011B8;
 
-extern Record *Scene_AllocateMemory(s32 arg0);
+extern Record *Cache_AllocateMemory(s32 arg0);
 
 extern void func_8025637C_de(struct CartridgeReadWorker *worker, u32 source, s32 bytes, void *destination);
 
@@ -121,7 +121,7 @@ s32 func_802A0C38_de(void *stream, const char *format, ...) {
     return total;
 }
 
-void Resmgr_InitializeStreams(void) {
+void XStdio_InitializeStreams(void) {
     void *v0;
     s32 one;
 
@@ -138,7 +138,7 @@ void Resmgr_InitializeStreams(void) {
 #else
         D_800CD940_de.size = 0x8B245;
 #endif
-        v0 = Scene_AllocateMemory(read_resource_word(&D_800CD940_de.size));
+        v0 = Cache_AllocateMemory(read_resource_word(&D_800CD940_de.size));
         write_resource_buffer(&D_800CD940_de.data, v0);
         func_8025637C_de(&D_801011B8, 0x200000, read_resource_word(&D_800CD940_de.size), v0);
         write_resource_word(&D_800CD940_de.opened,0);
@@ -147,24 +147,24 @@ void Resmgr_InitializeStreams(void) {
     func_802A1050_de(D_002A1158, (s32) &D_002A1188, D_002A1198, (s32) &D_002A11EC, D_002A11F4, (s32) &D_002A1220, (s32) &D_002A1230);
 }
 
-void Resmgr_ShutdownStreams(void) {
+void XStdio_ShutdownStreams(void) {
     D_800D2B80--;
     if (D_800CD940_de.data != 0) {
-        Scene_FreeMemory(D_800CD940_de.data);
+        Cache_FreeMemory(D_800CD940_de.data);
     }
     clear_resource_state();
 }
 
 /* Forward both open arguments and return the callback's stream handle. */
-s32 Resmgr_OpenStream(const void *name, const void *mode) {
+s32 XStdio_OpenStream(const void *name, const void *mode) {
     return D_800CD924_de(name, mode);
 }
 
-void Resmgr_CloseStream(void) {
+void XStdio_CloseStream(void) {
     D_800CD928_de();
 }
 
-s32 Resmgr_ReadStream(void *destination, s32 elementSize, s32 count, s32 handle) {
+s32 XStdio_ReadStream(void *destination, s32 elementSize, s32 count, s32 handle) {
     s32 totalBytes;
     s32 result;
 

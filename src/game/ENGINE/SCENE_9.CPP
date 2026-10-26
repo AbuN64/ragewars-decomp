@@ -11,7 +11,7 @@
 
 extern s32 func_802654E8_de(void *arg0, s32 arg1, s32 arg2);
 
-extern s32 Render_LocatePackSection(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
+extern s32 SetN64_LocatePackSection(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
 
 
 extern s32 D_00285160;
@@ -21,9 +21,9 @@ s32 func_8028BDAC_de(void *world, s32 arg1) {
     void *temp_v0;
     u8 *result;
 
-    temp_v0 = Render_GetPackSection((((struct Field_void_80 *) ((s8 *) world))->value), 1);
-    Render_GetPackSection(temp_v0, 0);
-    result = (u8 *)((char *)Render_GetPackSection(temp_v0, 1)) + arg1;
+    temp_v0 = SetN64_GetPackSection((((struct Field_void_80 *) ((s8 *) world))->value), 1);
+    SetN64_GetPackSection(temp_v0, 0);
+    result = (u8 *)((char *)SetN64_GetPackSection(temp_v0, 1)) + arg1;
     return *result == 0;
 }
 
@@ -38,16 +38,16 @@ void *func_8028BE08_de(Shared_World *world, s32 arg1, s32 mode, s32 direct) {
     if (idx == -1) {
         return 0;
     }
-    result = Render_LocatePackSection(world->lookupDirectory, world->lookupBank, idx, &sp28);
-    return Scene_RequestResource(0, result, result, sp28, mode, 0, &D_00285160, &s_binaryBlockText, direct);
+    result = SetN64_LocatePackSection(world->lookupDirectory, world->lookupBank, idx, &sp28);
+    return Cache_RequestResource(0, result, result, sp28, mode, 0, &D_00285160, &s_binaryBlockText, direct);
 }
 
 /* Starts a sound effect from the world's sound table: looks the id up (0 or unknown returns 0),
  * picks the effect's behaviour table (ids 5 and 7 have their own, everything else the default), sets
- * the loop/priority bits 0x4 or 0x18 from the id's range, and queues it through Scene_RequestResource. */
+ * the loop/priority bits 0x4 or 0x18 from the id's range, and queues it through Cache_RequestResource. */
 extern s32 D_00285160, D_0028E4A4, D_0028E5D0;
 extern s32 s_graphicsetText;
-s32 Render_StartWorldEffect(Shared_World *world, s32 id, s32 flags, s32 extra) {
+s32 Scene_StartWorldEffect(Shared_World *world, s32 id, s32 flags, s32 extra) {
     s32 index;
     s32 *behaviour;
     s32 handle;
@@ -90,6 +90,6 @@ s32 Render_StartWorldEffect(Shared_World *world, s32 id, s32 flags, s32 extra) {
         flags |= 4;
         break;
     }
-    handle = Render_LocatePackSection(world->resourceKindDirectory, world->resourceKindBank, index, &out);
-    return Scene_RequestResource(0, handle, handle, out, flags, world, behaviour, &s_graphicsetText, extra);
+    handle = SetN64_LocatePackSection(world->resourceKindDirectory, world->resourceKindBank, index, &out);
+    return Cache_RequestResource(0, handle, handle, out, flags, world, behaviour, &s_graphicsetText, extra);
 }

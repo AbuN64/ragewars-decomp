@@ -47,7 +47,7 @@ struct Shared_PakMenu;
 s32 func_8040A300_de(struct LayeredText *field, struct Shared_PakMenu *holder);
 #endif
 
-extern s32 Render_PeekPakChange(s32);
+extern s32 Control_PeekPakChange(s32);
 
 extern void Pak_ProbeStatus(s32);
 void Pak_ProbeStatus(s32);

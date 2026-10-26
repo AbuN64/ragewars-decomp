@@ -60,7 +60,7 @@ s32 func_80443464_de(void *first, void *second, void *third) {
     func_8025E384_de();
     func_8025CB0C_de(func_8025CC6C_de());
     if (D_801540F0 == 0) {
-        Render_RestoreControllerSetup();
+        Control_RestoreControllerSetup();
         return 1;
     }
     func_80442384_de(first, second, third);

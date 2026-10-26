@@ -26,10 +26,10 @@ extern void func_802587A4_de(s32 *arg0);
 extern short func_8025E500_de(void *arg0);
 
 
-extern s32 Camera_FindNearestCamera(MenuMatchGlobals *, Triple *);
+extern s32 Sky_FindNearestCamera(MenuMatchGlobals *, Triple *);
 extern void func_802B2D80_de(char *);
 extern void func_802B25D0_de(char *, s32);
-extern void Audio_UpdateVoiceVolume(View_func_8025AE1C_de *);
+extern void Channel_UpdateVoiceVolume(View_func_8025AE1C_de *);
 extern void func_8025A844_de(View_func_8025AE1C_de *);
 extern void func_8025AB94_de(View_func_8025AE1C_de *);
 
@@ -47,7 +47,7 @@ void func_8025AE1C_de(View_func_8025AE1C_de *view) {
     Slots *slots;
     s32 playing;
 
-    view->context->result = Camera_FindNearestCamera(&D_80145088, &view->position);
+    view->context->result = Sky_FindNearestCamera(&D_80145088, &view->position);
     playing = func_802B2620_de(selectChannel(view->context, view->slot));
     if (view->time <= D_800C3F68_de || ((view->flags & 4) && view->finished == 0)) {
         view->done = 1;
@@ -95,7 +95,7 @@ void func_8025AE1C_de(View_func_8025AE1C_de *view) {
     if (view->tracked != 0) {
         view->position = *view->tracked;
     }
-    Audio_UpdateVoiceVolume(view);
+    Channel_UpdateVoiceVolume(view);
     func_8025A844_de(view);
     func_8025AB94_de(view);
 }
@@ -103,7 +103,7 @@ void func_8025AE1C_de(View_func_8025AE1C_de *view) {
 /* Picks the voice slot for a new sound of the given priority: the first of the sixteen slots with no sound, else the
  * lowest-priority voice below the new priority (priority 100 voices are never taken). A taken voice is released and the
  * call returns 16 (the spare voice) when that one is free, else -1. -1 also when no voice is low enough. */
-s16 Audio_SelectVoiceSlot(RecordD90 *record, s32 variant, s32 count, s16 priority, s32 unused) {
+s16 Channel_SelectVoiceSlot(RecordD90 *record, s32 variant, s32 count, s16 priority, s32 unused) {
     ContextCode8025A3EC *context;
     Slots *slots;
     SlotCC *voice;
@@ -218,10 +218,10 @@ extern s32 func_8025E524_de(void *);
 extern s32 func_8025E548_de(void *);
 extern s32 func_8025E578_de(void *);
 extern s16 func_802B2510_de(void *, s32);
-/* Starts a note on a free voice: picks the voice with Audio_SelectVoiceSlot, asks the sound set for its sample, and
+/* Starts a note on a free voice: picks the voice with Channel_SelectVoiceSlot, asks the sound set for its sample, and
  * fills in the voice record (volume, pan, pitch, which categories its effect belongs to). Returns the voice, or
  * 0 when the note's set is too small, the chance roll fails, or no voice or sample is available. */
-SoundVoice *Audio_StartNoteVoice(SoundPlayer *player, ControllerCode802591C0 *note, s32 variant, s32 userData) {
+SoundVoice *Channel_StartNoteVoice(SoundPlayer *player, ControllerCode802591C0 *note, s32 variant, s32 userData) {
     SoundEngine *engine;
     SoundVoice *voice;
     s16 *slots;
@@ -254,7 +254,7 @@ SoundVoice *Audio_StartNoteVoice(SoundPlayer *player, ControllerCode802591C0 *no
             goto fail;
         }
     }
-    index = Audio_SelectVoiceSlot((RecordD90 *)player, (s16)variant, count, priority, (s16)func_8025E578_de(note));
+    index = Channel_SelectVoiceSlot((RecordD90 *)player, (s16)variant, count, priority, (s16)func_8025E578_de(note));
     if (index == -1) {
         goto fail;
     }

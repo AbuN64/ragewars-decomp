@@ -19,7 +19,7 @@
 extern CVector3 D_800C46C0_de[2];
 
 
-extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
 extern f32 Math_Sqrtf(f32);
@@ -146,13 +146,13 @@ void BuildDirectionMatrix(Mtx *m, CVector3 *direction) {
         m->right.z = 0;
         m->right.x = D_800C48EC_de;
     } else {
-        Particle_CrossVectors(&m->right, &up, direction);
+        GraphU64_CrossVectors(&m->right, &up, direction);
     }
-    Particle_CrossVectors(&m->up, &m->right, direction);
+    GraphU64_CrossVectors(&m->up, &m->right, direction);
     m->forward = *direction;
-    Particle_NormalizeVec3(&m->right);
-    Particle_NormalizeVec3(&m->up);
-    Particle_NormalizeVec3(&m->forward);
+    GraphU64_NormalizeVec3(&m->right);
+    GraphU64_NormalizeVec3(&m->up);
+    GraphU64_NormalizeVec3(&m->forward);
     m->m03 = m->m13 = m->m23 = m->m30 = m->m31 = m->m32 = 0.0f;
     m->m33 = D_800C48F0_de;
 }
@@ -733,7 +733,7 @@ void func_80274380_de(CQuatern *rotation, CQuatern *target) {
     f32 blend;
     f32 t;
 
-    angle = Nav_ArcCos((rotation->x * target->x) + (rotation->y * target->y) + (rotation->z * target->z) + (rotation->w * target->w));
+    angle = GraphU64_ArcCos((rotation->x * target->x) + (rotation->y * target->y) + (rotation->z * target->z) + (rotation->w * target->w));
     if (angle != 0.0f) {
         t = 1.0f - ((angle - (((angle * 0.1388889f) + 1.7453293e-4f) * D_800D2988)) / angle);
         if ((1.0f < t) || !(t < 0.0f)) {

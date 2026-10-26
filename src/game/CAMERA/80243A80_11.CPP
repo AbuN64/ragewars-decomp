@@ -7,7 +7,7 @@
 #include "CAMERA/80243A80_11.H"
 #include "CAMERA/80243A80_6.H"
 
-extern int Camera_IsSequenceActive(void);
+extern int Cinema_IsSequenceActive(void);
 
 extern u32 func_80245850_de(void);
 
@@ -21,7 +21,7 @@ void func_80245C38_de(void) {
     f32 limit;
     Shared_MenuContext *record;
 
-    if (Camera_IsSequenceActive() != 0) {
+    if (Cinema_IsSequenceActive() != 0) {
         if (func_80245850_de() != 0) {
             D_800E2830->time20 = D_800E2830->time;
             return;

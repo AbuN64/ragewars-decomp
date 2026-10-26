@@ -3,9 +3,9 @@
 #if defined(VERSION_DE)
 typedef struct { s32 owner; void *list; void *w8[3]; void *w14; s32 sel; s32 unk1C; } Func_8041DF50_State;
 extern Func_8041DF50_State *D_800E39C0;
-extern void *Scene_AllocateMemory(s32);
-extern void *Menu_CreateOverlayNode(s32, s32);
-extern void Menu_ShowSlotById(s32, s32, s32);
+extern void *Cache_AllocateMemory(s32);
+extern void *SmpOverlay_CreateOverlayNode(s32, s32);
+extern void SmpOverlay_ShowSlotById(s32, s32, s32);
 extern u8 *func_8040EC30_de(s32, s32);
 extern s32 func_802999A0_de(s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
@@ -16,13 +16,13 @@ extern void func_8041E408_de(s32);
 s32 func_8041DF50_de(s32 owner) {
     u8 *widget;
     s32 i;
-    D_800E39C0 = (Func_8041DF50_State *)Scene_AllocateMemory(0x20);
+    D_800E39C0 = (Func_8041DF50_State *)Cache_AllocateMemory(0x20);
     D_800E39C0->owner = owner;
-    D_800E39C0->list = Menu_CreateOverlayNode(owner, 4);
-    Menu_ShowSlotById(owner, 0, 0x383);
-    Menu_ShowSlotById(owner, 1, 0x383);
-    Menu_ShowSlotById(owner, 2, 0x383);
-    Menu_ShowSlotById(owner, 3, 0x383);
+    D_800E39C0->list = SmpOverlay_CreateOverlayNode(owner, 4);
+    SmpOverlay_ShowSlotById(owner, 0, 0x383);
+    SmpOverlay_ShowSlotById(owner, 1, 0x383);
+    SmpOverlay_ShowSlotById(owner, 2, 0x383);
+    SmpOverlay_ShowSlotById(owner, 3, 0x383);
     widget = func_8040EC30_de(owner, 0x385);
     widget[0x10] = 0x8C;
     if (func_802999A0_de(0) == 0x16) {

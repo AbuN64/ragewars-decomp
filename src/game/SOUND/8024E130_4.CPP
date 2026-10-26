@@ -27,7 +27,7 @@ void InstHdr_CopyActorPositionAndModel(void *levelActor, Triple t, void *arg4, s
     *arg5 = ((LevelActor *)levelActor)->model;
 }
 
-int Sound_FindActorModelEntry(void *actorStorage) {
+int InstHdr_FindActorModelEntry(void *actorStorage) {
     int actorModel = ((LevelActor *)actorStorage)->model;
     int result = 0;
     if (actorModel != 0) {

@@ -38,7 +38,7 @@ s32 func_802A0238_de(u8 *string) {
     return (cursor - string) - 1;
 }
 
-u8 *Resmgr_CopyString(u8 *destination, u8 *source) {
+u8 *XPlus_CopyString(u8 *destination, u8 *source) {
     u8 *destCursor;
     u8 c;
 
@@ -131,7 +131,7 @@ u8 *func_802A0324_de(u8 *destination, u8 *source, s32 count) {
     return destination;
 }
 
-s32 Resmgr_CompareStrings(const void *arg0, const void *arg1) {
+s32 XPlus_CompareStrings(const void *arg0, const void *arg1) {
     const u8 *a = arg0;
     const u8 *b = arg1;
     s32 difference;
@@ -344,7 +344,7 @@ void func_802A066C_de(s32 n, char *s) {
     s[len] = '\0';
 }
 
-void *Resmgr_CopyBytes(void *destination, const void *source, s32 bytes) {
+void *XPlus_CopyBytes(void *destination, const void *source, s32 bytes) {
     void *result = destination;
     if (bytes != 0) {
         result = func_8029F470_de(destination, source, bytes);
@@ -352,8 +352,8 @@ void *Resmgr_CopyBytes(void *destination, const void *source, s32 bytes) {
     return result;
 }
 
-/* Fills arg2 bytes at arg0 with the byte arg1, storing single bytes up to word alignment, replicated words through the middle and single bytes at the tail, and returns arg0. Adapted from Resmgr_FillMemory. */
-void *Resmgr_FillBytes(void *destination, int value, u32 count) {
+/* Fills arg2 bytes at arg0 with the byte arg1, storing single bytes up to word alignment, replicated words through the middle and single bytes at the tail, and returns arg0. Adapted from XPlus_FillMemory. */
+void *XPlus_FillBytes(void *destination, int value, u32 count) {
     u8 *start;
     u8 *end;
     u8 *cur;

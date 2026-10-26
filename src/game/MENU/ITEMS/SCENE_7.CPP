@@ -15,30 +15,30 @@
 /* Loads the preview resource into the sound buffer when idle, while the adjacent helper resets a changed selection. */
 
 extern char D_00285160[],g_gamePersistentData[],D_800F41F0[];
-extern int Render_IsSnapshotActive(void);
-extern void func_802BD3A0_de(void *,int,int),Items_SetSelection(ItemsPreviewStateB *,int,int);
+extern int Control_IsSnapshotActive(void);
+extern void func_802BD3A0_de(void *,int,int),OvlScene_SetSelection(ItemsPreviewStateB *,int,int);
 void Items_LoadPreviewBufferB(ItemsPreviewStateB *state) {
  int *resource;
  int id;
- if(Render_IsSnapshotActive()==0) {
-  resource=Scene_RequestResource(0,state->resource,state->resource,state->bank,0,0,D_00285160,g_gamePersistentData,1);
+ if(Control_IsSnapshotActive()==0) {
+  resource=Cache_RequestResource(0,state->resource,state->resource,state->bank,0,0,D_00285160,g_gamePersistentData,1);
   func_802BD3A0_de(D_800F41F0,*resource,0x5000);
-  Scene_ReleaseResource(0,resource);
+  Cache_ReleaseResource(0,resource);
  }
 }
 
 /* Loads the preview resource into the sound buffer when idle, while the adjacent helper resets a changed selection. */
 
 extern char D_00285160[],g_gamePersistentData[],D_800F41F0[];
-extern int Render_IsSnapshotActive(void);
+extern int Control_IsSnapshotActive(void);
 extern void func_802BD3A0_de(void *,int,int);
-extern void Items_SetSelection(ItemsPreviewStateB *,int,int);
+extern void OvlScene_SetSelection(ItemsPreviewStateB *,int,int);
 
 
 void func_8044D178_de(ItemsPreviewStateB *state,int selection) {
  if(selection!=state->selection) {
   state->changed=0;
-  Items_SetSelection(state,~selection,0);
+  OvlScene_SetSelection(state,~selection,0);
  }
 }
 
@@ -66,7 +66,7 @@ void func_8044D1B4_de(char *state) {
 
 extern Node_Items_FindPlacedObjectsByKey *func_80256190_de(ListRec *);
 
-s32 Items_FindPlacedObjectsByKey(void *world, s32 kind, s32 key, Shared_Placed *out, s32 max) {
+s32 OvlScene_FindPlacedObjectsByKey(void *world, s32 kind, s32 key, Shared_Placed *out, s32 max) {
     Shared_World *track = world;
     ListRec list;
     Node_Items_FindPlacedObjectsByKey nodes[64];
@@ -82,9 +82,9 @@ s32 Items_FindPlacedObjectsByKey(void *world, s32 kind, s32 key, Shared_Placed *
     s32 count;
 
     found = 0;
-    count = (keys = Render_GetPackSection(track->placedObjectTable, 0))[1];
+    count = (keys = SetN64_GetPackSection(track->placedObjectTable, 0))[1];
     keys += 2;
-    objectTable = Render_GetPackSection(track->placedObjectTable, 1);
+    objectTable = SetN64_GetPackSection(track->placedObjectTable, 1);
     objects = (Shared_Placed *)(objectTable + 2);
     if (func_80265550_de(keys, count, key, &first, &last) != 0) {
         func_80255CA0_de(&list, 4, 8);
@@ -112,7 +112,7 @@ s32 Items_FindPlacedObjectsByKey(void *world, s32 kind, s32 key, Shared_Placed *
     return found;
 }
 
-/* Render_GetPackSection sections of Shared_World.placedObjectTable: 0 holds one key per placed object,
+/* SetN64_GetPackSection sections of Shared_World.placedObjectTable: 0 holds one key per placed object,
    1 the placed objects in the same order. */
 typedef struct PlacedObjectKeys {
     s32 tag;
@@ -124,10 +124,10 @@ typedef struct PlacedObjectList {
     s32 count;
     Shared_Placed objects[1];
 } PlacedObjectList;
-extern f32 Particle_GetPointDistance(f32 *a, f32 *b);
+extern f32 GraphU64_GetPointDistance(f32 *a, f32 *b);
 /* Finds the placed object of the given kind nearest to position, copies it to out and returns its key; returns 0
    when none is found or the nearest is object 0 (index 0 doubles as "none"). */
-s32 Items_FindNearestPlacedObject(Shared_World *world, f32 *position, s32 kind, Shared_Placed *out) {
+s32 OvlScene_FindNearestPlacedObject(Shared_World *world, f32 *position, s32 kind, Shared_Placed *out) {
     s32 i;
     s32 nearest;
     PlacedObjectKeys *keys;
@@ -137,16 +137,16 @@ s32 Items_FindNearestPlacedObject(Shared_World *world, f32 *position, s32 kind, 
     s32 count;
     f32 distance;
     f32 nearestDistance;
-    keys = Render_GetPackSection(world->placedObjectTable, 0);
+    keys = SetN64_GetPackSection(world->placedObjectTable, 0);
     count = keys->count;
     key = keys->keys;
-    list = Render_GetPackSection(world->placedObjectTable, 1);
+    list = SetN64_GetPackSection(world->placedObjectTable, 1);
     nearestDistance = 3.4028235e+38f;
     objects = list->objects;
     nearest = 0;
     for (i = 0; i < count; i++) {
         if (objects[i].kind == kind) {
-            distance = Particle_GetPointDistance(&objects[i].pos.x, position);
+            distance = GraphU64_GetPointDistance(&objects[i].pos.x, position);
             if (distance < nearestDistance) {
                 nearestDistance = distance;
                 nearest = i;

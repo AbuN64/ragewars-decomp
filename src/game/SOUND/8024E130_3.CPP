@@ -10,9 +10,9 @@
 
 extern void InstHdr_CopyActorPositionAndModel(void *arg0, TripleRecAt8 t, void *arg4, s32 *arg5, s32 arg6, s32 arg7);
 
-extern f32 Anim_GetPolygonHeight(struct Node75 *node, f32 x, f32 z);
+extern f32 Region_GetPolygonHeight(struct Node75 *node, f32 x, f32 z);
 
-extern void Weapons_ComputeTargetOffset(void *arg0, void *arg1, void *arg2);
+extern void Barrel_ComputeTargetOffset(void *arg0, void *arg1, void *arg2);
 
 /** Return a nested float field when the nested record type is one, else zero. */
 float func_8024E544_de(void *object) {
@@ -25,7 +25,7 @@ float func_8024E544_de(void *object) {
 }
 
 /** Return a nested float field when the nested record type is one, else zero. */
-float Sound_GetActorTerritoryRadius(void *object) {
+float InstHdr_GetActorTerritoryRadius(void *object) {
     Actor_u1 *actor = object;
     Resource_u1 *nested = actor->resource;
     if (nested->kind == 1) {
@@ -44,7 +44,7 @@ void InstHdr_ProjectPositionToActorGround(void *actor, void *arg1, void *arg2) {
     t.b = 0;
     t.c = source->z;
     InstHdr_CopyActorPositionAndModel(actor, t, arg2, &sp30, 0, 0);
-    output->y = Anim_GetPolygonHeight((struct Node75 *)sp30, output->x, output->z);
+    output->y = Region_GetPolygonHeight((struct Node75 *)sp30, output->x, output->z);
 }
 
 /** Return offset 0x34 only when the type byte at offset 0 is 1. */
@@ -100,7 +100,7 @@ void InstHdr_GetActorTargetOffset(u8 *arg0, void *vector) {
     OffsetResult offset;
 
     if (*arg0 == 1) {
-        Weapons_ComputeTargetOffset(arg0, arg0 + 0x170, &offset);
+        Barrel_ComputeTargetOffset(arg0, arg0 + 0x170, &offset);
         *(CVector3 *)vector = offset.first;
         return;
     }
@@ -112,7 +112,7 @@ void InstHdr_GetActorTargetOffset(u8 *arg0, void *vector) {
 f32 InstHdr_GetActorTargetHeight(u8 *arg0) {
     OffsetResult offset;
     if (*arg0 == 1) {
-        Weapons_ComputeTargetOffset(arg0, arg0 + 0x170, &offset);
+        Barrel_ComputeTargetOffset(arg0, arg0 + 0x170, &offset);
         return offset.height;
     }
     return 0.0f;

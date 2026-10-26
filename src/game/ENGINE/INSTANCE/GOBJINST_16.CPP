@@ -23,13 +23,13 @@
 extern CROMEventEntry *func_80262598_de(void *);
 
 
-extern void System_DeliverContactEffect(char *, char *, u16, s32, CVector3, struct IntPair);
+extern void Events_DeliverContactEffect(char *, char *, u16, s32, CVector3, struct IntPair);
 
 
 
 
-extern void Scene_UnlockResource(s32 arg0, s32 arg1);
-extern void System_SampleVectorTrack(AnimChannel *, s32, f32, f32 *);
+extern void Cache_UnlockResource(s32 arg0, s32 arg1);
+extern void PolyTrak_SampleVectorTrack(AnimChannel *, s32, f32, f32 *);
 
 void *func_8024C104_de(Triple *outOffset, void *actor, AnimChannel *anim) {
     char *o1 = (char *) actor;
@@ -38,12 +38,12 @@ void *func_8024C104_de(Triple *outOffset, void *actor, AnimChannel *anim) {
     f32 inVec[3];
     f32 outVec[3];
 
-    System_SampleVectorTrack(anim, 0, anim->time, spVec);
+    PolyTrak_SampleVectorTrack(anim, 0, anim->time, spVec);
     inVec[0] = spVec[0];
     inVec[1] = spVec[2];
     inVec[2] = spVec[1];
     BuildYawMatrix(mtx, ((LevelActor *)o1)->yaw);
-    Particle_TransformPoint(mtx, inVec, outVec);
+    GraphU64_TransformPoint(mtx, inVec, outVec);
     outVec[0] *= ((LevelActor *)o1)->scale.x;
     outVec[1] *= ((LevelActor *)o1)->scale.y;
     outVec[2] *= ((LevelActor *)o1)->scale.z;
@@ -64,8 +64,8 @@ void func_8024C1C4_de(char *obj, void *anim)
         switch (e[i].effect) {
         case 6:
         case 7:
-            Particle_TransformPoint(obj + 0x74, &e[i].local, &pos);
-            System_DeliverContactEffect(obj, obj, e[i].effect, -1, pos, e[i].params);
+            GraphU64_TransformPoint(obj + 0x74, &e[i].local, &pos);
+            Events_DeliverContactEffect(obj, obj, e[i].effect, -1, pos, e[i].params);
         }
     }
 }
@@ -76,11 +76,11 @@ s32 func_8024C294_de(LevelActor *actor, s32 deltaIndex) {
     s32 sectionDelta;
 
     if (actor->flags & 0x40000) {
-        modelResource = Scene_RequestResource(0, actor->resource, actor->resource, actor->resourceFlags, 4, 0, 0, &D_800C3830_de, 1);
+        modelResource = Cache_RequestResource(0, actor->resource, actor->resource, actor->resourceFlags, 4, 0, 0, &D_800C3830_de, 1);
         if (modelResource != 0) {
-            deltaTable = Render_GetPackSection(*(void **) modelResource, 1);
+            deltaTable = SetN64_GetPackSection(*(void **) modelResource, 1);
             sectionDelta = deltaTable->deltas[deltaIndex];
-            Scene_UnlockResource(0, (s32) modelResource);
+            Cache_UnlockResource(0, (s32) modelResource);
             return sectionDelta;
         }
     }
@@ -96,13 +96,13 @@ void func_8024C34C_de(LevelActor *actor, AnimChannel *animation) {
     f32 zero;
 
     zero = 0.0f;
-    System_SampleVectorTrack(animation, 0, zero, scratch.first);
-    System_SampleVectorTrack(animation, 0, animation->time, scratch.second);
+    PolyTrak_SampleVectorTrack(animation, 0, zero, scratch.first);
+    PolyTrak_SampleVectorTrack(animation, 0, animation->time, scratch.second);
     scratch.in[0] = scratch.second[0] - scratch.first[0];
     scratch.in[1] = zero;
     scratch.in[2] = scratch.second[1] - scratch.first[1];
     BuildYawMatrix(scratch.matrix, actor->yaw);
-    Particle_TransformPoint(scratch.matrix, scratch.in, scratch.out);
+    GraphU64_TransformPoint(scratch.matrix, scratch.in, scratch.out);
     scratch.position.x = actor->position0.x +
                           (scratch.out[0] * actor->scale.x);
     scratch.position.y = actor->position0.y;

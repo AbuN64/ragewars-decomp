@@ -10,8 +10,8 @@ extern float D_800D2988[];
 
 
 
-extern s32 Camera_IsSequenceActive(void);
-extern void Render_PlaySoundAtPosition(s16,CVector3,s32,s32),Particle_AddVec3(CVector3 *,CVector3 *,CVector3 *),Particle_ScaleVector(CVector3 *,CVector3 *,f32),func_80272748_de(CVector3 *,f32);
+extern s32 Cinema_IsSequenceActive(void);
+extern void SoundElement_PlaySoundAtPosition(s16,CVector3,s32,s32),GraphU64_AddVec3(CVector3 *,CVector3 *,CVector3 *),GraphU64_ScaleVector(CVector3 *,CVector3 *,f32),func_80272748_de(CVector3 *,f32);
 
 void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMovement *movementProfile) {
     CVector3 motion;
@@ -40,7 +40,7 @@ void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMoveme
     s32 boostReady;
     CVector3 *movementOutput;
 
-    if (Camera_IsSequenceActive() == 0) {
+    if (Cinema_IsSequenceActive() == 0) {
         boostApplied = 0;
         if (player->views5E8.view11B8_137.unk11B8 == 0) {
             boostCooldown = player->views5E8.view6DC_60.unk6DC;
@@ -51,11 +51,11 @@ void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMoveme
             }
             forwardSpeed=player->views5E8.view6C0_51.unk6C0; forwardSpeedLimit=movementProfile->unk4;
             if (forwardSpeed < 0.0f ? forwardSpeedLimit < -forwardSpeed : forwardSpeedLimit < forwardSpeed) {
-                player->views5E8.view6C0_51.unk6C0=Nav_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8*0.5f);
+                player->views5E8.view6C0_51.unk6C0=GraphU64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8*0.5f);
             } else if(player->views5E8.view6A8_43.unk6A8 != 0.0f && player->views5E8.view7E8_105.unk7E8 != 2) {
                 player->views5E8.view6C0_51.unk6C0=func_802746A0_de(player->views5E8.view6C0_51.unk6C0,player->views5E8.view6A8_43.unk6A8*movementProfile->unk0,(player->views5E8.view6A8_43.unk6A8<0.0f?-player->views5E8.view6A8_43.unk6A8:player->views5E8.view6A8_43.unk6A8)*movementProfile->unk4);
             } else {
-                player->views5E8.view6C0_51.unk6C0=Nav_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8);
+                player->views5E8.view6C0_51.unk6C0=GraphU64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8);
             }
             forwardMotionX = player->views5E8.view6C0_51.unk6C0 * Math_Sinf(body->unk6C + 3.1415927f);
             motion.y = 0;
@@ -63,11 +63,11 @@ void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMoveme
             motion.z = player->views5E8.view6C0_51.unk6C0 * Math_Cosf(body->unk6C + 3.1415927f);
             strafeSpeed=player->views5E8.view6C4_54.unk6C4; strafeSpeedLimit=movementProfile->unk10;
             if (strafeSpeed < 0.0f ? strafeSpeedLimit < -strafeSpeed : strafeSpeedLimit < strafeSpeed) {
-                player->views5E8.view6C4_54.unk6C4=Nav_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk14*0.5f);
+                player->views5E8.view6C4_54.unk6C4=GraphU64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk14*0.5f);
             } else if(player->views5E8.view6A4_41.unk6A4 != 0.0f) {
                 player->views5E8.view6C4_54.unk6C4=func_802746A0_de(player->views5E8.view6C4_54.unk6C4,player->views5E8.view6A4_41.unk6A4*movementProfile->unkC,(player->views5E8.view6A4_41.unk6A4<0.0f?-player->views5E8.view6A4_41.unk6A4:player->views5E8.view6A4_41.unk6A4)*movementProfile->unk10);
             } else {
-                player->views5E8.view6C4_54.unk6C4=Nav_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk14);
+                player->views5E8.view6C4_54.unk6C4=GraphU64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk14);
             }
             motion.x += player->views5E8.view6C4_54.unk6C4 * Math_Sinf(body->unk6C - 1.5707964f);
             motion.z += player->views5E8.view6C4_54.unk6C4 * Math_Cosf(body->unk6C - 1.5707964f);
@@ -102,7 +102,7 @@ block_36:
                 }
             } else {
 block_42:
-                forwardBoostSpeed = Nav_DecayToZero(player->views5E8.view6D4_58.unk6D4, movementProfile->unk1C);
+                forwardBoostSpeed = GraphU64_DecayToZero(player->views5E8.view6D4_58.unk6D4, movementProfile->unk1C);
             }
             player->views5E8.view6D4_58.unk6D4 = forwardBoostSpeed;
             motion.x += player->views5E8.view6D4_58.unk6D4 * Math_Sinf(body->unk6C + 3.1415927f);
@@ -115,16 +115,16 @@ block_42:
                 player->views5E8.view6D8_59.unk6D8 = -movementProfile->unk18*0.75f;
                 boostApplied=1;
             } else {
-                player->views5E8.view6D8_59.unk6D8=Nav_DecayToZero(player->views5E8.view6D8_59.unk6D8,movementProfile->unk1C*0.75f);
+                player->views5E8.view6D8_59.unk6D8=GraphU64_DecayToZero(player->views5E8.view6D8_59.unk6D8,movementProfile->unk1C*0.75f);
             }
             motion.x += player->views5E8.view6D8_59.unk6D8 * Math_Sinf(body->unk6C - 1.5707964f);
             motion.z += player->views5E8.view6D8_59.unk6D8 * Math_Cosf(body->unk6C - 1.5707964f);
-            Particle_ScaleVector(&motion, &motion, player->views5E8.view66C_29.unk66C);
+            GraphU64_ScaleVector(&motion, &motion, player->views5E8.view66C_29.unk66C);
             movementOutput = &player->views5E8.view6E8_63.unk6E8;
-            Particle_AddVec3(movementOutput, movementOutput, &motion);
+            GraphU64_AddVec3(movementOutput, movementOutput, &motion);
             if (boostApplied != 0) {
                 player->views5E8.view6DC_60.unk6DC = (f32) (player->views5E8.view6DC_60.unk6DC + 7.5f);
-                Render_PlaySoundAtPosition(movementProfile->unk22, body->unk8, 0, -1);
+                SoundElement_PlaySoundAtPosition(movementProfile->unk22, body->unk8, 0, -1);
             }
         }
     }

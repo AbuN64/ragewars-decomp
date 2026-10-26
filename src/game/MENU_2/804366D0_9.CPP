@@ -8,7 +8,7 @@ extern struct State_func_80437444_de *D_800E5780;
 extern void func_8041A430_de(void *, s32);
 extern s32 func_80265650_de(void *, s32);
 
-/* Releases the object D_800E5780 holds through Scene_FreeMemory, clears D_800E5780 and returns zero. */
+/* Releases the object D_800E5780 holds through Cache_FreeMemory, clears D_800E5780 and returns zero. */
 
 #if defined(VERSION_DE)
 enum { MENU_RESOURCE = 0x139 };
@@ -54,7 +54,7 @@ extern void func_80298368_de(s32);
  
 
 s32 func_804373E4_de(void) {
-    Scene_FreeMemory(D_800E5780);
+    Cache_FreeMemory(D_800E5780);
     D_800E5780 = 0;
     return 0;
 }

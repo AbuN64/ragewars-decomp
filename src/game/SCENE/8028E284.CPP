@@ -106,7 +106,7 @@ void func_8028E390_de(void *unused0, void *table, u8 *remap) {
 
 
 extern u8 D_800D2910[];
-extern s32 Render_UnpackResource(void *resource, s32 flags);
+extern s32 PpDecom_UnpackResource(void *resource, s32 flags);
 
 void func_8028E4A4_de(void *unused0, void **resource) {
     s32 i;
@@ -126,7 +126,7 @@ void func_8028E4A4_de(void *unused0, void **resource) {
     s32 width;
     s32 height;
 
-    end = Render_UnpackResource(resource, 0) == 0;
+    end = PpDecom_UnpackResource(resource, 0) == 0;
     if (end) {
         return;
     }
@@ -197,7 +197,7 @@ void func_8028E5D0_de(void *unused0, void **resource) {
     s32 width;
     s32 height;
 
-    end = Render_UnpackResource(resource, 0) == 0;
+    end = PpDecom_UnpackResource(resource, 0) == 0;
     if (end) {
         return;
     }
@@ -273,7 +273,7 @@ s32 func_8028E6FC_de(Shared_World *arg0)
   do
   {
     field = arg0->sectors[i].resource;
-    ret = Render_GetPackSection(*((s32 *) field), 2);
+    ret = SetN64_GetPackSection(*((s32 *) field), 2);
     if ((((struct IntPair *)ret)->field_4) != 0)
     {
       if (arg0 || i)
@@ -300,7 +300,7 @@ void *func_8028E770_de(struct Shared_World *object, int index) {
     return base + (index * stride + 8);
 }
 
-extern void Particle_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
+extern void GraphU64_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
 
 
 
@@ -310,7 +310,7 @@ s32 func_8028E78C_de(struct ObjectRecAt1A4 *arg0, CVector3 *arg1) {
     f32 magnitude;
     u16 type;
 
-    Particle_SubtractVectors(&vector, &arg0->x, arg1);
+    GraphU64_SubtractVectors(&vector, &arg0->x, arg1);
     magnitude = (vector.x * vector.x) + (vector.y * vector.y) + (vector.z * vector.z);
     if (*arg0->kind != 1) {
         return 0;
@@ -344,7 +344,7 @@ s32 func_8028E860_de(ObjRecAtE4V2 *player, CVector3 *arg1) {
     u16 type;
 
     if (player->unk0 == 1 && *player->unk18 == 7) {
-        Particle_SubtractVectors(&delta, &((Player *)(player))->pos, arg1);
+        GraphU64_SubtractVectors(&delta, &((Player *)(player))->pos, arg1);
         delta.y = 0;
         if (262144.0f < delta.x * delta.x + delta.z * delta.z) {
             return 0;

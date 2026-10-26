@@ -99,7 +99,7 @@ void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *state) {
     view->viewHeight = (f32) D_800E28D4;
     view->viewLeft = 0;
     view->viewTop = 0;
-    if ((Camera_IsSequenceInWindow() == 0) && (Camera_IsSequenceActive() == 0)) {
+    if ((Cinema_IsSequenceInWindow() == 0) && (Cinema_IsSequenceActive() == 0)) {
         mode = (u32) state->header.views.count;
         view = state->header.views.head;
         switch (mode) {
@@ -222,7 +222,7 @@ void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *state) {
         if ((D_80145088.status[7] != 0) || (func_80245850_de() != 0)) {
             Camera_UpdateViewProjectionAndEffects(view);
         }
-        if ((Camera_IsSequenceInWindow() != 0) || (Camera_IsSequenceActive() != 0)) {
+        if ((Cinema_IsSequenceInWindow() != 0) || (Cinema_IsSequenceActive() != 0)) {
             Camera_UpdateViewProjectionAndEffects(view);
         }
         memcpy(&D_800FF208, view->clipBounds, sizeof(D_800FF208));

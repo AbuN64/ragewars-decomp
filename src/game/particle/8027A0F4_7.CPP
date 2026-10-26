@@ -10,7 +10,7 @@
 
 extern void func_80279A00_de(void *arg0);
 extern void Particle_UpdateMatrix(void *);
-extern void Render_DetachParticleSwooshes(void *arg0, void *arg1);
+extern void Fx_DetachParticleSwooshes(void *arg0, void *arg1);
 
 
 
@@ -52,11 +52,11 @@ void func_8027FF58_de(void *arg0) {
                     func_80279A00_de(temp_s0);
                     if (temp_s0->unk1D9 != 0) {
                         Particle_UpdateMatrix(temp_s0);
-                        Render_DetachParticleSwooshes(&D_801379C0, temp_s0);
+                        Fx_DetachParticleSwooshes(&D_801379C0, temp_s0);
                     }
                     temp_a1 = temp_s0->unk138;
                     if (temp_a1 != 0) {
-                        Render_ReleaseLight(&D_8013B1A8, temp_a1);
+                        DynLight_ReleaseLight(&D_8013B1A8, temp_a1);
                         temp_s0->unk138 = 0;
                     }
                     temp_v1_2 = temp_s0->refCount;

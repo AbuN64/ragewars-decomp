@@ -205,7 +205,7 @@ void func_802560A4_de(void *list, s32 nodeToMove) {
     ((IntrusiveList *)o)->count = ((IntrusiveList *)o)->count + 1;
 }
 
-extern s32 Nav_NextRandom(void);
+extern s32 GraphU64_NextRandom(void);
 
 
 
@@ -219,7 +219,7 @@ void *func_80256190_de(void *intrusiveList) {
     if (node == 0) {
         return 0;
     }
-    index = Nav_NextRandom() % (u32)((IntrusiveList *)intrusiveList)->count;
+    index = GraphU64_NextRandom() % (u32)((IntrusiveList *)intrusiveList)->count;
     index--;
     if (index != -1) {
         offset = ((IntrusiveList *)intrusiveList)->nextOffset;

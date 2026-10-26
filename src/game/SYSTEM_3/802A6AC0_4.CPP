@@ -23,7 +23,7 @@ static inline void toggle(ToggleMenu *menu, MenuItem *item) {
     }
 }
 
-void System_UpdateToggleMenu(ToggleMenu *menu, Input_func_802A65E0_de *input) {
+void ItemMenu_UpdateToggleMenu(ToggleMenu *menu, Input_func_802A65E0_de *input) {
     s16 bounce;
     s32 i;
     menu->frame++;

@@ -16,8 +16,8 @@
 #include "COMMON/SHAREDRECV4.H"
 #include "COMMON/TRIPLE.H"
 #include "stddef.h"
-int Camera_IsSequenceActive(void);
-f32 Nav_ApproachValue(f32 arg0, f32 arg1, f32 arg2);
+int Cinema_IsSequenceActive(void);
+f32 GraphU64_ApproachValue(f32 arg0, f32 arg1, f32 arg2);
 void func_802B2F10_de(void *arg0, s16 arg1);
 /* Spatial mix and runtime envelope controls embedded in a sound voice. */
 #include "AUDIO/VOLUME_MIX.H"
@@ -57,7 +57,7 @@ static inline void apply_volume(AudioVolumeVoice *voice, f32 level) {
 }
 
 /* Updates spatial attenuation and the volume envelope, then applies the scaled level. */
-void Audio_UpdateVoiceVolume(AudioVolumeVoice *voice) {
+void Channel_UpdateVoiceVolume(AudioVolumeVoice *voice) {
     AudioVolumeMix *mix;
     u16 *envelope;
     ContextRecAt2BC0 *context;
@@ -125,8 +125,8 @@ void Audio_UpdateVoiceVolume(AudioVolumeVoice *voice) {
             level = 0.0f;
             break;
         }
-        if (Camera_IsSequenceActive() != 0) {
-            mix->attenuation = Nav_ApproachValue(mix->attenuation, level, 0.017f);
+        if (Cinema_IsSequenceActive() != 0) {
+            mix->attenuation = GraphU64_ApproachValue(mix->attenuation, level, 0.017f);
         } else {
             mix->attenuation = level;
         }

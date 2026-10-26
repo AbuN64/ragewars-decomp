@@ -6,7 +6,7 @@
 #include "gbi.h"
 #include "abi.h"
 struct Node80253610;
-extern void Scene_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
+extern void Cache_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
 
 /* Draws a text string in the current font style D_801376F8: when centring, measures it through Pak_MeasureLine at the style size scaled by the language-dependent factors for D_80147150, shrinks the scale so it fits 44 pixels inside the screen width D_800E28D0 and shifts x left by half the width; then sets the environment colour from the style with the given alpha and the primitive colour from the style, and draws the string through func_802A88F0_de, first as a shadow when requested. */
 
@@ -99,20 +99,20 @@ void func_802A8F28_de(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 sha
 }
 
 /* Emits the render-state display-list prologue for a flat colour pass: pipeline sync, one-cycle
-   mode, the two combiner/mode presets through func_80268CE0_de and Render_SetModePreset, the environment
+   mode, the two combiner/mode presets through func_80268CE0_de and Geometry_SetModePreset, the environment
    colour from the argument with full alpha bits, texture enable and the texture-filter, colour-dither
    and alpha-dither mode words, the alpha dither chosen by D_800E28D8. */
 
 extern Gfx *g_displayListCursor;
 
-extern void Render_SetCombineMode(s32 arg0);
-extern void Render_SetModePreset(s32 arg0);
+extern void Geometry_SetCombineMode(s32 arg0);
+extern void Geometry_SetModePreset(s32 arg0);
 
-void Text_SetupSpriteMode(s32 color) {
+void OnScreen_SetupSpriteMode(s32 color) {
     gDPPipeSync(g_displayListCursor++);
     gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
-    Render_SetCombineMode(0x1B);
-    Render_SetModePreset(0x19);
+    Geometry_SetCombineMode(0x1B);
+    Geometry_SetModePreset(0x19);
     {
         Gfx *cmd = g_displayListCursor++;
         gDPSetEnvColor(cmd, 255, 255, 255, color);
@@ -135,7 +135,7 @@ void func_802A9364_de(void *pTexture, void *pOpacity, int XPos, int YPos, int Te
 
 extern Gfx *g_displayListCursor;
 
-void Text_DrawScaledMaskedImage(void *pTexture, void *pOpacity, float XPos, float YPos, int TextureWidth, int TextureHeight, float ScaleX, float ScaleY) {
+void OnScreen_DrawScaledMaskedImage(void *pTexture, void *pOpacity, float XPos, float YPos, int TextureWidth, int TextureHeight, float ScaleX, float ScaleY) {
  int dsdx=1024,dtdy; int xl,yl,xh,yh;
  if(ScaleX!=0.0f) dsdx=dsdx/ScaleX;
  dtdy=1024;
@@ -204,7 +204,7 @@ void func_802A9EE8_de(void *pTexture, f32 XPos, f32 YPos, int TextureWidth, int 
 void func_802AA8EC_de(Table802AB8DC **handle, s32 index, void **out, u8 *tag);
 void func_802A9EE8_de(void *pTexture, f32 XPos, f32 YPos, int TextureWidth, int TextureHeight, f32 ScaleX, f32 ScaleY);
 void func_802A9CD0_de(void *pTexture, int XPos, int YPos, int TextureWidth, int TextureHeight);
-void Text_DrawScaledMaskedImage(void *pTexture, void *pOpacity, float XPos, float YPos, int TextureWidth, int TextureHeight, float ScaleX, float ScaleY);
+void OnScreen_DrawScaledMaskedImage(void *pTexture, void *pOpacity, float XPos, float YPos, int TextureWidth, int TextureHeight, float ScaleX, float ScaleY);
 void func_802A9364_de(void *pTexture, void *pOpacity, int XPos, int YPos, int TextureWidth, int TextureHeight);
 extern f64 D_800CB358;
 #include "GFX/TEXTURE_TILE_TYPES.H"
@@ -291,7 +291,7 @@ void Text_DrawTileGrid(void *handle, s32 index, s32 initialX, s16 initialY, f32 
                         while(column-- != 0.0f) {
                             height=tile->height;
                             width=tile->width;
-                            Text_DrawScaledMaskedImage(tile->pixels,tile->pixels+width*height*2,x,y,width,height,scaleX,scaleY);
+                            OnScreen_DrawScaledMaskedImage(tile->pixels,tile->pixels+width*height*2,x,y,width,height,scaleX,scaleY);
                             x+=(f32)width*scaleX;
                             tile=(TextureTileBlock *)((u8 *)tile+(width*height*2+(width*height>>1)));
                             tile++;
@@ -328,7 +328,7 @@ void Text_DrawTileGrid(void *handle, s32 index, s32 initialX, s16 initialY, f32 
                     }
                 }
             }
-            Scene_MarkResourceInUse(0,handle);
+            Cache_MarkResourceInUse(0,handle);
         }
     }
 }

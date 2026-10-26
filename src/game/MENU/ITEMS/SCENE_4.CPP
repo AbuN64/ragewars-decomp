@@ -14,8 +14,8 @@
 #include "MENU/8044ACCC.H"
 #include "RENDER_4/8028FD2C_6.H"
 struct Shape_typemap_165;
-extern struct Shape_typemap_165 *Scene_AllocResourceBlock(s32 arg0, void *arg1, s32 arg2);
-extern void Scene_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_typemap_165 *arg2);
+extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32 arg0, void *arg1, s32 arg2);
+extern void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_typemap_165 *arg2);
 
 
 
@@ -29,7 +29,7 @@ extern void Scene_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **ar
 
 
 
-extern s32 Render_GetSizedPackSection(s32 node, s32 index, s32 *size);
+extern s32 SetN64_GetSizedPackSection(s32 node, s32 index, s32 *size);
 extern s32 func_8028FDF8_de(s32 *node, s32 arg1);
 
 static inline s32 testBit(s32 n, u8 *bits) {
@@ -70,32 +70,32 @@ void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **han
     s32 index;
     u8 *bits;
 
-    if (Render_UnpackResource((void*)handle, 1) != 0) {
+    if (PpDecom_UnpackResource((void*)handle, 1) != 0) {
         node = (*handle)->payload.data;
-        first = ((void *(*)(int *,s32,s32 *))Render_GetSizedPackSection)(node, 0, &size0);
-        vlist = ((void *(*)(int *,s32,s32 *))Render_GetSizedPackSection)(node, 1, &size1);
-        flist = (void*)Render_GetPackSection(node, 2);
+        first = ((void *(*)(int *,s32,s32 *))SetN64_GetSizedPackSection)(node, 0, &size0);
+        vlist = ((void *(*)(int *,s32,s32 *))SetN64_GetSizedPackSection)(node, 1, &size1);
+        flist = (void*)SetN64_GetPackSection(node, 2);
         ntris = flist->count;
-        chunk = ((void *(*)(int *,s32,s32 *))Render_GetSizedPackSection)(node, 3, &size3);
+        chunk = ((void *(*)(int *,s32,s32 *))SetN64_GetSizedPackSection)(node, 3, &size3);
         tableSize = (ntris << 5) | 8;
-        block = (void*)Scene_AllocResourceBlock(0, handle, size0 + 0x18 + size1 + tableSize + size3);
+        block = (void*)Cache_AllocResourceBlock(0, handle, size0 + 0x18 + size1 + tableSize + size3);
         if (block != 0) {
             offset = 0x18;
             hdr = block->payload.data;
             i = 0;
             hdr->count = 0;
             hdr->offsets[0] = offset;
-            Render_TransposeRecords(first, (char *) hdr + offset, 0);
+            SetN64_TransposeRecords(first, (char *) hdr + offset, 0);
             hdr->count = 1;
             offset += size0;
             vdst = (char *) hdr + offset;
             hdr->offsets[1] = offset;
-            Render_TransposeRecords(vlist, vdst, 0);
+            SetN64_TransposeRecords(vlist, vdst, 0);
             hdr->count = 2;
             offset += size1;
             dst = (char *) hdr + offset;
             hdr->offsets[2] = offset;
-            Render_TransposeRecords(flist, dst, 1);
+            SetN64_TransposeRecords(flist, dst, 1);
             face = flist->items;
             copiedTriangles=(void*)dst;
             copiedTriangles->kind = 0x20;
@@ -106,12 +106,12 @@ void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **han
             copiedVertices=(void*)vdst;
             verts = copiedVertices->items;
             for (i = 0; i < nverts; i++) {
-                Nav_ScaleWordsToFloats(&verts[i]);
+                Region_ScaleWordsToFloats(&verts[i]);
             }
             for (j = 0; j < ntris; j++) {
                 tri = &tris[j];
                 /* The caller supplies a sixth bounds value; the decoder uses the first five. */
-                ((void (*)(CGameRegion *,Packed *,char *,int,char *,int))Nav_DecodePackedRegion)(&tri->canonical, &face[j], (char*)verts, nverts, (char*)tris, ntris);
+                ((void (*)(CGameRegion *,Packed *,char *,int,char *,int))Region_DecodePackedRegion)(&tri->canonical, &face[j], (char*)verts, nverts, (char*)tris, ntris);
                 for (i = 0; i < 3; i++) {
                     y = tri->fields.v[i]->y;
                     if (!(y <= world->minY)) {
@@ -120,17 +120,17 @@ void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **han
                     world->minY = y;
                 }
                 index = world->group;
-                group = (void*)Render_GetPackSection((void*)Render_GetPackSection((void*)Render_GetPackSection(world->tree, 0), index), 0);
-                Render_GetPackSection(group, 0);
+                group = (void*)SetN64_GetPackSection((void*)SetN64_GetPackSection((void*)SetN64_GetPackSection(world->tree, 0), index), 0);
+                SetN64_GetPackSection(group, 0);
                 func_8028FDF8_de(group, 1);
-                bits = (void*)Render_GetPackSection(group, 1);
+                bits = (void*)SetN64_GetPackSection(group, 1);
                 if (testBit(j, bits)) {
                     tri->fields.flags |= 0x400;
                 }
                 if (!(tri->fields.mask & D_800CD8D0)) {
                     tri->fields.mask = D_800CD8D0;
                 }
-                if (Camera_IsSequenceInWindow() != 0) {
+                if (Cinema_IsSequenceInWindow() != 0) {
                     tri->fields.mask = D_800CD8D0;
                 }
                 if (tri->fields.flags & 0x2000) {
@@ -148,11 +148,11 @@ void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **han
             offset += tableSize;
             hdr->count = 3;
             hdr->offsets[3] = offset;
-            Render_TransposeRecords(chunk, base + offset, 0);
+            SetN64_TransposeRecords(chunk, base + offset, 0);
             hdr->count = 4;
             offset += size3;
             hdr->offsets[4] = offset;
         }
-        Scene_ReplaceResourceBlock(0, (void*)handle, (void*)block);
+        Cache_ReplaceResourceBlock(0, (void*)handle, (void*)block);
     }
 }

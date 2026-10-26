@@ -10,11 +10,11 @@
 #include "SCENE/802508E0_13.H"
 extern s32 *D_800E44A0;
 extern s32 func_8043C308_de(s32 *record);
-extern void *Scene_AllocateMemory(s32 size);
+extern void *Cache_AllocateMemory(s32 size);
 extern void func_8043C210_de(s32 *, s32, s32, s32, s32);
 
 s32 func_80422228_de(void) {
-    s32 *record = Scene_AllocateMemory(0x24);
+    s32 *record = Cache_AllocateMemory(0x24);
     D_800E44A0 = record;
     record[7] = 0;
     record[8] = 0;
@@ -22,7 +22,7 @@ s32 func_80422228_de(void) {
     return 0;
 }
 
-/* Releases the object D_800E44A0 holds through Scene_FreeMemory, clears D_800E44A0 and returns zero. */
+/* Releases the object D_800E44A0 holds through Cache_FreeMemory, clears D_800E44A0 and returns zero. */
 
 
 
@@ -59,7 +59,7 @@ extern void func_802A2360_de();
 
 extern void func_802A2394_de();
 
-extern void Camera_ReleaseSequenceContext();
+extern void Cinema_ReleaseSequenceContext();
 
 extern void func_8042B2E4_de();
 
@@ -86,7 +86,7 @@ extern void MarkMenuEventHandled();
 
 
 s32 func_80422278_de(void) {
-    Scene_FreeMemory(D_800E44A0);
+    Cache_FreeMemory(D_800E44A0);
     D_800E44A0 = 0;
     return 0;
 }
@@ -113,7 +113,7 @@ func_8042201C_de
 ();
 #endif
         func_8042DEA0_de();
-        Render_SetControllerMode(1);
+        Control_SetControllerMode(1);
     }
     return 0;
 }
@@ -130,7 +130,7 @@ s32 func_80422340_de(void) {
     }
     func_802A2394_de();
     if (D_801462C8.controllerMode == 0) {
-        Camera_ReleaseSequenceContext();
+        Cinema_ReleaseSequenceContext();
         func_8042B2E4_de();
     }
     func_8043C278_de(D_800E44A0);

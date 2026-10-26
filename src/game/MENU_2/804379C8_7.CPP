@@ -29,20 +29,20 @@ typedef s32 (*Handler80439390)(void *, s32, s32, s32, s32);
 
 extern Handler80439390 D_800E58B0;
 
-/* Builds a two-slider menu: allocates eight bytes into D_800E58A4 through Scene_AllocateMemory, creates the
+/* Builds a two-slider menu: allocates eight bytes into D_800E58A4 through Cache_AllocateMemory, creates the
    sliders VALUE_1D5/VALUE_1D5+1 and VALUE_1D5+2/VALUE_1D5+3 through func_8041A580_de, stores them in the block and sets them
    to the option bytes D_801462E0[0] and [1] through func_8041A6EC_de, then calls func_8041B110_de with
    VV_01D3. Returns zero. */
 
 
 
-extern void **Scene_AllocateMemory(s32);
+extern void **Cache_AllocateMemory(s32);
 
 extern void *func_8041A580_de(s32, s32, s32);
 
 extern void func_8041A6EC_de(void *, s32);
 
-/* Releases the object D_800E58A4 holds through Scene_FreeMemory, clears D_800E58A4 and returns zero. */
+/* Releases the object D_800E58A4 holds through Cache_FreeMemory, clears D_800E58A4 and returns zero. */
 
 
 
@@ -96,7 +96,7 @@ s32 func_804391B0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 s32 func_80439240_de(void) {
     u8 *options;
     void *slider;
-    D_800E58A4 = Scene_AllocateMemory(8);
+    D_800E58A4 = Cache_AllocateMemory(8);
 #if defined(VERSION_DE)
     slider = func_8041A580_de(0x1D1, 0x1D1 + 1, 0xFF);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -127,7 +127,7 @@ s32 func_80439240_de(void) {
 }
 
 s32 func_804392D0_de(void) {
-    Scene_FreeMemory(D_800E58A4);
+    Cache_FreeMemory(D_800E58A4);
     D_800E58A4 = 0;
     return 0;
 }
@@ -145,7 +145,7 @@ int func_80439308_de(void) {
  int sound;
  value=func_8041A6E0_de(D_800E58A4[1]);
  options=D_801462E1;
- if(value!=options[0]){options[0]=value;Render_PlayFlatSound(0x460);}
+ if(value!=options[0]){options[0]=value;SoundElement_PlayFlatSound(0x460);}
  value=func_8041A6E0_de(D_800E58A4[0]);
  if(value!=options[-1]){
   options[-1]=value;

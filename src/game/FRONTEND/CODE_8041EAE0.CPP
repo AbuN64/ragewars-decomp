@@ -40,7 +40,7 @@ extern s32 D_800E37B8[];
 
 extern struct IntPair D_800E381C[][17];
 
-/* Releases the object D_800E39C0 holds through Scene_FreeMemory, clears D_800E39C0 and returns zero. */
+/* Releases the object D_800E39C0 holds through Cache_FreeMemory, clears D_800E39C0 and returns zero. */
 
 
 
@@ -189,7 +189,7 @@ s32 func_8041EC44_de(s32 row, s32 id) {
 }
 
 s32 func_8041EC84_de(void) {
-    Scene_FreeMemory(D_800E39C0);
+    Cache_FreeMemory(D_800E39C0);
     D_800E39C0 = 0;
     return 0;
 }
@@ -255,7 +255,7 @@ s32 func_8041EE08_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
         newItem->alpha = 0xFF;
         Frontend_SetWidgetFlag08(newItem, 1);
         D_800E39C0->timer = 0;
-        Render_PlayFlatSound(0xE80);
+        SoundElement_PlayFlatSound(0xE80);
         return 0;
     }
     return 0;
@@ -281,7 +281,7 @@ s32 func_8041EED0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
         newItem->alpha = 0xFF;
         Frontend_SetWidgetFlag08(newItem, 1);
         D_800E39C0->timer = 0;
-        Render_PlayFlatSound(0xE80);
+        SoundElement_PlayFlatSound(0xE80);
         return 0;
     }
     return 0;

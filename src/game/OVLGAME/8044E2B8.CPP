@@ -53,7 +53,7 @@ void func_8044D794_de(OwnerCode8044E2B8 *arg0) {
     entry = arg0->active;
     while (entry != 0) {
         next = entry->next;
-        Actors_DispatchTrigger(entry->handle);
+        Link_DispatchTrigger(entry->handle);
         func_80255ED8_de(&arg0->active, entry);
         func_80255CB8_de(&arg0->spare, entry);
         entry = next;
@@ -68,13 +68,13 @@ void func_8044D804_de(s32 arg0, void ***arg1) {
     s32 count;
     s32 i;
 
-    if (Render_UnpackResource(arg1, 0) != 0) {
+    if (PpDecom_UnpackResource(arg1, 0) != 0) {
         obj = **arg1;
-        group = Render_GetPackSection(obj, 2);
+        group = SetN64_GetPackSection(obj, 2);
         count = group->count;
         piece = group->pieces;
         i = 0;
-        base = (s32) Render_GetPackSection(obj, i);
+        base = (s32) SetN64_GetPackSection(obj, i);
         if (count > 0) {
             do {
                 if (piece[i].tag == -1) {
@@ -105,11 +105,11 @@ void func_8044D934_de(s32 unused0, void ***arg1) {
     s32 i;
 
     scale = D_800C5304_de;
-    if (Render_UnpackResource(arg1, 0) != 0) {
+    if (PpDecom_UnpackResource(arg1, 0) != 0) {
         obj = **arg1;
         count = *(s32 *) obj;
         for (i = 0; i < count; i++) {
-            ent = Render_GetPackSection(obj, i);
+            ent = SetN64_GetPackSection(obj, i);
             switch (ent->kind) {
             case 1:
                 ent->unk28 = ent->unk28 * scale;
@@ -152,11 +152,11 @@ void func_8044DA54_de(OwnerCode8044E2B8 *arg0, void ***arg1) {
     s32 j;
     s32 index;
 
-    if (Render_UnpackResource(arg1, 0) != 0) {
+    if (PpDecom_UnpackResource(arg1, 0) != 0) {
         obj = **arg1;
         count = *(s32 *) obj;
         for (i = 0; i < count; i++) {
-            frame = Render_GetPackSection(Render_GetPackSection(obj, i), 1);
+            frame = SetN64_GetPackSection(SetN64_GetPackSection(obj, i), 1);
             inner = frame->count;
             j = 0;
             if (j < inner) {
@@ -164,7 +164,7 @@ void func_8044DA54_de(OwnerCode8044E2B8 *arg0, void ***arg1) {
                 do {
                     index = slot->item;
                     if (index != -1) {
-                        bank = Render_GetPackSection(arg0->unk6C, 2);
+                        bank = SetN64_GetPackSection(arg0->unk6C, 2);
                         items = bank->items;
                         if ((index < 0) || (index >= bank->count)) {
                             item = 0;

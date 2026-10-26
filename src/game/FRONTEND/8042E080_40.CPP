@@ -2,14 +2,14 @@
 #include "FRONTEND/PAKMENU.H"
 #include "TYPES.H"
 
-extern void *Menu_GetSlotValue(s32, s32);
+extern void *SmpOverlay_GetSlotValue(s32, s32);
 
 /* Advances the selected name character, wrapping past Z to a space. */
 void func_80434E34_de(s32 player) {
     u8 value;
 
     D_800E54A4->selected[player] = 0;
-    Menu_GetSlotValue(D_800E54A4->root, player);
+    SmpOverlay_GetSlotValue(D_800E54A4->root, player);
     if (D_800E54A4->players[player].name[D_800E54A4->players[player].nameCursor].available == 0) {
         D_800E54A4->players[player].name[D_800E54A4->players[player].nameCursor].available = 0x41;
     }

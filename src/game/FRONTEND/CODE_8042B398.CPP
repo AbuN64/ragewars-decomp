@@ -52,7 +52,7 @@ s32 func_8042B1B8_de(s32 arg0, s32 arg1) {
     return result;
 }
 
-s32 Frontend_CategoryToList(s32 category) {
+s32 ScenarioSetup_CategoryToList(s32 category) {
     s32 list;
     switch (category) {
     default:
@@ -91,7 +91,7 @@ void func_8042B2E4_de(void) {
 extern void func_80265688_de(void *, s32, s32);
 
 /* Clears the first 0x28 bits of the bit set D_80154018 (bit i set to 0 through func_80265688_de). */
-void Frontend_ClearFlagBits(void) {
+void ScenarioSetup_ClearFlagBits(void) {
     s32 i;
 
     for (i = 0; i < 0x28; i++) {
@@ -101,10 +101,10 @@ void Frontend_ClearFlagBits(void) {
 
 extern void func_80422020_de(void);
 
-/* Closes the setup screen D_800E4F60: releases it through Scene_FreeMemory, runs func_802A2360_de and
+/* Closes the setup screen D_800E4F60: releases it through Cache_FreeMemory, runs func_802A2360_de and
    func_80422020_de, then clears the pointer. Returns zero. */
-s32 Frontend_CloseSetupScreen(void) {
-    Scene_FreeMemory(D_800E4F60);
+s32 ScenarioSetup_CloseSetupScreen(void) {
+    Cache_FreeMemory(D_800E4F60);
     func_802A2360_de();
     func_80422020_de();
     D_800E4F60 = 0;
@@ -120,7 +120,7 @@ s32 func_8042B3D4_de(void) {
 extern void func_8042A7B4_de(s32);
 
 /** Begin setup confirmation when the pending state and input event permit it. */
-s32 Frontend_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
+s32 ScenarioSetup_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
 {
     s32 v = D_800E4F60->unk3DC;
 
@@ -148,7 +148,7 @@ s32 Frontend_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
     Frontend_SetWidgetFlag08(D_800E4F60->unk3F0, 0);
 
     D_800E4F60->unk44C->alpha = 0x5A;
-    Render_PlayFlatSound(0xE7C);
+    SoundElement_PlayFlatSound(0xE7C);
 
     return 0;
 }
@@ -171,7 +171,7 @@ s32 func_8042B4D4_de(void *unused0, void *unused1, void *unused2, s32 event) {
             SCR4D4->selection = SCR4D4->selection - 1;
         }
     } else if (SCR4D4->selection >= 11) {
-        s32 next = func_8042B154_de(Frontend_CategoryToList(0));
+        s32 next = func_8042B154_de(ScenarioSetup_CategoryToList(0));
         if (SCR4D4->selection + 1 < next) {
             changed = 1;
             SCR4D4->selection = SCR4D4->selection + 1;
@@ -183,7 +183,7 @@ s32 func_8042B4D4_de(void *unused0, void *unused1, void *unused2, s32 event) {
     if (changed != 1) {
         return 0;
     }
-    Render_PlayFlatSound(0xE7D);
+    SoundElement_PlayFlatSound(0xE7D);
     func_8042B2E4_de();
     SCR4D4->word45C = 0;
     SCR4D4->word464 = 0;
@@ -205,7 +205,7 @@ extern s32 func_8042B154_de(s32 index);
 extern void func_8042B2E4_de(void);
 
 /** Select the next setup item, reversing the displayed order on the second page. */
-s32 Frontend_SelectNextSetupItem(void *unused0, void *unused1, void *unused2, s32 event) {
+s32 ScenarioSetup_SelectNextSetupItem(void *unused0, void *unused1, void *unused2, s32 event) {
     SetupScreen *screen;
     s32 changed;
     s32 count;
@@ -217,7 +217,7 @@ s32 Frontend_SelectNextSetupItem(void *unused0, void *unused1, void *unused2, s3
         return 0;
     }
     changed = 0;
-    count = func_8042B154_de(Frontend_CategoryToList(D_800E4F60->category));
+    count = func_8042B154_de(ScenarioSetup_CategoryToList(D_800E4F60->category));
     screen = D_800E4F60;
     if (screen->category != 0) {
         next = screen->selection + 1;
@@ -230,7 +230,7 @@ s32 Frontend_SelectNextSetupItem(void *unused0, void *unused1, void *unused2, s3
             next = screen->selection - 1;
             limit = 10;
         } else {
-            limit = func_8042B154_de(Frontend_CategoryToList(0));
+            limit = func_8042B154_de(ScenarioSetup_CategoryToList(0));
             screen = D_800E4F60;
             next = screen->selection + 1;
             if (next == limit) {
@@ -247,7 +247,7 @@ moved:
     if (changed != 1) {
         return 0;
     }
-    Render_PlayFlatSound(0xE7D);
+    SoundElement_PlayFlatSound(0xE7D);
     func_8042B2E4_de();
     D_800E4F60->unk45C = 0;
     D_800E4F60->unk464 = 0;
@@ -276,7 +276,7 @@ s32 func_8042B78C_de(void *unused0, void *unused1, void *unused2, s32 event) {
         SCR78C->category = SCR78C->category - 1;
     } else if ((u32)(SCR78C->selection - 5) < 6) {
         mirror = 21 - SCR78C->selection;
-        if (mirror < func_8042B154_de(Frontend_CategoryToList(0))) {
+        if (mirror < func_8042B154_de(ScenarioSetup_CategoryToList(0))) {
             changed = 1;
             SCR78C->selection = mirror;
         }
@@ -284,12 +284,12 @@ s32 func_8042B78C_de(void *unused0, void *unused1, void *unused2, s32 event) {
     if (changed != 1) {
         return 0;
     }
-    Render_PlayFlatSound(0xE7D);
+    SoundElement_PlayFlatSound(0xE7D);
     func_8042B2E4_de();
     SCR78C->word45C = 0;
     SCR78C->word464 = 0;
     SCR78C->item->alpha = 0x41;
-    count = func_8042B154_de(Frontend_CategoryToList(SCR78C->category));
+    count = func_8042B154_de(ScenarioSetup_CategoryToList(SCR78C->category));
     if (SCR78C->selection >= count) {
         SCR78C->selection = count - 1;
     }
@@ -330,12 +330,12 @@ s32 func_8042B904_de(void *unused0, void *unused1, void *unused2, s32 event) {
     if (changed != 1) {
         return 0;
     }
-    Render_PlayFlatSound(0xE7D);
+    SoundElement_PlayFlatSound(0xE7D);
     func_8042B2E4_de();
     SCR904->word45C = 0;
     SCR904->word464 = 0;
     SCR904->item->alpha = 0x41;
-    count = func_8042B154_de(Frontend_CategoryToList(SCR904->category));
+    count = func_8042B154_de(ScenarioSetup_CategoryToList(SCR904->category));
     if (SCR904->selection >= count) {
         SCR904->selection = count - 1;
     }
@@ -349,7 +349,7 @@ s32 func_8042B904_de(void *unused0, void *unused1, void *unused2, s32 event) {
 }
 #undef SCR904
 
-s32 Frontend_EndSetupInput(void) {
+s32 ScenarioSetup_EndSetupInput(void) {
     MarkMenuEventHandled();
     if (D_800E4F60->unk3DC == 3) {
         D_800E4F60->unk3DC = 5;
@@ -360,7 +360,7 @@ s32 Frontend_EndSetupInput(void) {
 }
 
 /* Calls func_8042AAD0_de while the setup screen D_800E4F60 is in mode 3, and returns zero. */
-s32 Frontend_RefreshSetupScreen(void) {
+s32 ScenarioSetup_RefreshSetupScreen(void) {
     if (D_800E4F60->unk3DC == 3) {
         func_8042AAD0_de();
         return 0;
@@ -415,21 +415,21 @@ extern s8 D_80102B0D[], D_800FEB0E[];
 extern void func_8043C210_de(s32 *, s32, s32, s32, s32);
 extern void func_8043C278_de(s32 *);
 extern void func_80424B90_de(void);
-extern void Frontend_SortResultsPlayers(void);
+extern void ScenarioSetup_SortResultsPlayers(void);
 extern void Achieve_UpdateMatchCounters(void *, s32);
 extern void func_80425D14_de(s32);
-extern void Frontend_FillResultRows(void);
+extern void ScenarioSetup_FillResultRows(void);
 extern void func_8042CE74_de(void);
 
 extern void Frontend_SetWidgetFlag100(void *, s32);
 extern s32 Frontend_ListHasFlag100(void *);
-extern s32 Frontend_IsCupSelected(void);
+extern s32 ScenarioSetup_IsCupSelected(void);
 extern s32 func_8042AFB8_de(void);
 extern void func_8028D380_de(Shared_World *, s32, void *, s32);
 extern char *func_802A0494_de(char *);
-extern char *Resmgr_CopyString(char *, char *);
+extern char *XPlus_CopyString(char *, char *);
 
-s32 Frontend_OpenResultsScreen(void *root) {
+s32 ScenarioSetup_OpenResultsScreen(void *root) {
     char buffer[64];
     MenuWidget *item;
     func_8042CE54_S1 *screen;
@@ -438,7 +438,7 @@ s32 Frontend_OpenResultsScreen(void *root) {
     Shared_PlayerSettingsRecord *config;
     s32 i, offset;
 
-    D_800E53C0 = (void *)Scene_AllocateMemory(0x330);
+    D_800E53C0 = (void *)Cache_AllocateMemory(0x330);
     D_800E53C0->unkE0 = root;
     Frontend_SetWidgetFlag08(root, 0);
     func_8043C210_de(D_800E53C0->transition, 0x67, 0, 0, 0);
@@ -454,7 +454,7 @@ s32 Frontend_OpenResultsScreen(void *root) {
         screen->icons[i][1] = -1;
     }
     D_800E53C0->selection = -1;
-    Frontend_SortResultsPlayers();
+    ScenarioSetup_SortResultsPlayers();
     game = &D_801462C8;
     switch (game->controllerMode) {
     case 0:
@@ -476,7 +476,7 @@ s32 Frontend_OpenResultsScreen(void *root) {
     slot = &D_801462C8;
     switch (slot->controllerMode) {
     case 0:
-        Frontend_FillResultRows();
+        ScenarioSetup_FillResultRows();
         break;
     case 2:
         screen = D_800E53C0;
@@ -496,7 +496,7 @@ s32 Frontend_OpenResultsScreen(void *root) {
             Frontend_SetWidgetFlag08(func_8040EC30_de(root, RESULTS_RIGHT_ITEM), 0);
             func_8042CE74_de();
         } else {
-            Frontend_FillResultRows();
+            ScenarioSetup_FillResultRows();
         }
         break;
     }
@@ -514,7 +514,7 @@ s32 Frontend_OpenResultsScreen(void *root) {
         }
         offset += 400;
     } while (i < 4);
-    if (Frontend_ListHasFlag100(func_8040EC30_de(root, 0x238 + RESULTS_MENU_SHIFT)) == 0 && Frontend_IsCupSelected() == 1 && func_8042AFB8_de() == 0) {
+    if (Frontend_ListHasFlag100(func_8040EC30_de(root, 0x238 + RESULTS_MENU_SHIFT)) == 0 && ScenarioSetup_IsCupSelected() == 1 && func_8042AFB8_de() == 0) {
         Frontend_SetWidgetFlag100(func_8040EC30_de(root, 0x238 + RESULTS_MENU_SHIFT), 1);
     }
     item = func_8040EC30_de(D_800E53C0->unkE0, RESULTS_HEADING1);
@@ -529,7 +529,7 @@ s32 Frontend_OpenResultsScreen(void *root) {
     }
     item = func_8040EC30_de(root, 0x235 + RESULTS_MENU_SHIFT);
     func_8028D380_de(&g_world, D_8015402C, buffer, 63);
-    Resmgr_CopyString(D_800E53C0->name, func_802A0494_de(buffer));
+    XPlus_CopyString(D_800E53C0->name, func_802A0494_de(buffer));
     item->text = D_800E53C0->name;
     D_800E53C0->buttonAddress = (s32)func_8040EC30_de(root, 0x23D + RESULTS_MENU_SHIFT);
     D_800E53C0->dirty = 1;
@@ -548,12 +548,12 @@ extern ResourceBank D_800E12D2[];
 extern s32 D_800FEAE0[];
 extern s32 Frontend_FindKeyIndex(s32);
 extern char *func_802A0494_de(char *);
-extern char *Resmgr_CopyString(char *,char *);
+extern char *XPlus_CopyString(char *,char *);
 extern char *func_80424DE8_de(s32);
 extern s32 func_802A0C08_de(void *,const char *,...);
 extern void func_8042D304_de(s32,s32,u16);
 /* Fill the four visible player rows of the match results screen. */
-void Frontend_FillResultRows(void) {
+void ScenarioSetup_FillResultRows(void) {
     s32 row, player, attempts, percent;
     func_8041F2A0_Config *record;
     MenuWidget *widget, *pending;
@@ -582,7 +582,7 @@ void Frontend_FillResultRows(void) {
             widget->text = D_80102B00[player].name;
         } else {
             name = record->name;
-            Resmgr_CopyString(name, func_802A0494_de(name));
+            XPlus_CopyString(name, func_802A0494_de(name));
             widget->text = name;
         }
 
@@ -685,7 +685,7 @@ static inline Shared_PlayerSettingsRecord *playerSettings(void) { return results
 /* Order the joined players for the results screen: in team games (goal kinds 0 and 3) teams by
  * total, players by their team's total, then players within each team by the mode's score; otherwise
  * players by the mode's score. Ties fall back to the kill score. */
-void Frontend_SortResultsPlayers(void) {
+void ScenarioSetup_SortResultsPlayers(void) {
     s32 groups[5];
     s32 i, j, k, mode, temp, leftTotal, rightTotal, group, a, b, leftKills, rightKills, leftScore, rightScore, nextTotal;
 
@@ -807,7 +807,7 @@ extern s32 D_800E5240[];
 
 extern void func_80265688_de(void *, s32, s32);
 
-/* Releases the object D_800E4F60 holds through Scene_FreeMemory, calls func_802A2360_de and
+/* Releases the object D_800E4F60 holds through Cache_FreeMemory, calls func_802A2360_de and
    func_80422020_de, clears D_800E4F60 and returns zero. */
 
 
@@ -840,7 +840,7 @@ extern void func_8042A7B4_de(s32 a0);
    0x41 and refreshes through func_8042A990_de, and when the selection is then 0 it shows the items at
    0x440 and 0x448, moves the marker at 0x448 to x 0x7C plus 34 per category, hides the item at
    0x444 and shows model 0xEA6 plus the category in the view at 0x308. Returns zero. Adapted from
-   Frontend_SelectNextSetupItem with the step direction, page handling and final item updates changed. */
+   ScenarioSetup_SelectNextSetupItem with the step direction, page handling and final item updates changed. */
 
 
 

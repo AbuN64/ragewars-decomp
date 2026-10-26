@@ -14,10 +14,10 @@ void Nav_InitPursuitStrafe(void *closeAttackActor) {
     inner->state = 0;
     Nav_ResetBehaviorState(inner);
 
-    r1 = Nav_NextRandom();
+    r1 = GraphU64_NextRandom();
     inner->timer = r1 % 4 + 0xC;
 
-    r2 = Nav_NextRandom();
+    r2 = GraphU64_NextRandom();
     inner->pattern = r2 % 2;
 }
 #endif

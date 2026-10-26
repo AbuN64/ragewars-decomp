@@ -10,15 +10,15 @@
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "WEAPONS/8022F3E8_2.H"
 
-extern void Particle_ScaleVector(void *, void *, f32);
+extern void GraphU64_ScaleVector(void *, void *, f32);
 
 extern void func_80272CB0_de(void *, f32, f32, f32);
 
 extern void func_802732D0_de(char *, f32 *);
 
-extern void Weapons_BuildPlayerViewTransform(char *, Matrix *);
+extern void Player_BuildPlayerViewTransform(char *, Matrix *);
 
-extern void Weapons_BuildPlayerOrientation(char *object, CQuatern *output);
+extern void Player_BuildPlayerOrientation(char *object, CQuatern *output);
 
 extern void MatrixFromQuaternion(void *, void *);
 
@@ -26,7 +26,7 @@ extern void TranslateMatrix(char *, f32, f32, f32);
 
 extern void SwapMatrixUpForward(void *);
 
-extern void Rsp_MultiplyAffineMatrices(void *, void *, void *);
+extern void GraphU64_MultiplyAffineMatrices(void *, void *, void *);
 
 extern s32 func_80265650_de(void *, s32);
 extern void func_80265688_de(u8 *, s32, s32);
@@ -125,22 +125,22 @@ void Player_BuildWeaponHandTransform(char *arg0) {
     if (D_800CA048 != 0) {
         handOffset.z = -handOffset.z;
     }
-    Particle_ScaleVector(&scaledOffset, &((ObjectLinks1DC *)(arg0))->unk_50, 0.1f);
+    GraphU64_ScaleVector(&scaledOffset, &((ObjectLinks1DC *)(arg0))->unk_50, 0.1f);
     func_80272CB0_de(&offsetMatrix, scaledOffset.x, scaledOffset.y, scaledOffset.z);
-    Particle_ScaleVector(&handOffset, &handOffset, -10.24f);
+    GraphU64_ScaleVector(&handOffset, &handOffset, -10.24f);
     if (((ObjectState630 *)(object))->unk_5DC.v0 != 0) {
         func_802732D0_de(((ObjectState630 *)(object))->unk_5DC.v1 + 0x160, &position);
         MatrixFromQuaternion((CQuatern *)(((ObjectState630 *)(object))->unk_5DC.v1 + 0x140),
                       &worldMatrix);
     } else {
-        Weapons_BuildPlayerViewTransform(object, &viewMatrix);
-        Weapons_BuildPlayerOrientation(object, &viewOrientation);
+        Player_BuildPlayerViewTransform(object, &viewMatrix);
+        Player_BuildPlayerOrientation(object, &viewOrientation);
         func_802732D0_de((char *)&viewMatrix, &position);
         MatrixFromQuaternion(&viewOrientation, &worldMatrix);
     }
     orientation = arg0 + 0x74;
     TranslateMatrix(&offsetMatrix, handOffset.x, handOffset.y, handOffset.z);
     SwapMatrixUpForward(&offsetMatrix);
-    Rsp_MultiplyAffineMatrices((Matrix *)orientation, &offsetMatrix, &worldMatrix);
+    GraphU64_MultiplyAffineMatrices((Matrix *)orientation, &offsetMatrix, &worldMatrix);
     TranslateMatrix((Matrix *)orientation, position.x, position.y, position.z);
 }

@@ -143,7 +143,7 @@ extern void osStartThread(void *);
 
 static __inline__ void writeLink(ResourcePageMapping **where, ResourcePageMapping *value) { *where = value; }
 
-void Sched_FinishPageJob(ResourcePageJob *req) {
+void Virtual_FinishPageJob(ResourcePageJob *req) {
     ResourcePageMapping *link;
 
     if (*req->slot == 0xFF) {

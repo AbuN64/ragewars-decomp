@@ -8,7 +8,7 @@
  * into the trace space and record per-vertex clip bits, TRI1/TRI2 commands trace every triangle whose
  * vertices are not all outside one clip plane, ENDDL stops. Section 0 of the resource holds the mesh
  * flags, section 1 the commands. */
-void Anim_TraceMeshDisplayList(ContextB0 *context, void *resource) {
+void PolyCol_TraceMeshDisplayList(ContextB0 *context, void *resource) {
     CollisionVertex vertices[32];
     CollisionVertex *triangle[3];
     CVector3 point;
@@ -21,7 +21,7 @@ void Anim_TraceMeshDisplayList(ContextB0 *context, void *resource) {
     s32 count;
     s16 *source;
     Ray180 *ray;
-    flags = Render_GetPackSection(commands, 0);
+    flags = SetN64_GetPackSection(commands, 0);
     ray = context->ray;
     context->flags = *flags;
     reverse = *flags & 4;
@@ -32,7 +32,7 @@ void Anim_TraceMeshDisplayList(ContextB0 *context, void *resource) {
         reverse = 1;
         break;
     }
-    commands = Render_GetPackSection(commands, 1);
+    commands = SetN64_GetPackSection(commands, 1);
     do {
         opcode = ((u8 *)commands)[COMMAND_HIGH];
         switch (opcode) {

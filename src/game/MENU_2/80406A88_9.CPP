@@ -8,7 +8,7 @@
 extern char *D_auto_800DDB08[];
 extern void MarkMenuEventHandled(void *);
 extern void *func_8040EC30_de(void *, s32);
-extern void Render_PlayFlatSound(s32);
+extern void SoundElement_PlayFlatSound(s32);
 typedef struct { u8 pad0[0x38]; char *text; } LangItemEu;
 /* Language selector, previous entry: on the confirm press (arg3 == 1) steps the language byte down (0 wraps to 2), shows the
    new language's label in item 0x5E and plays sound 0xE81. */
@@ -17,7 +17,7 @@ s32 func_80423D30_eu_x(void *window, s32 b, s32 c, s32 press) {
     if (press == 1) {
         D_801462C8.language = D_801462C8.language == 0 ? 2 : D_801462C8.language - 1;
         ((LangItemEu *)func_8040EC30_de(window, 0x5E))->text = D_auto_800DDB08[g_languageIndex];
-        Render_PlayFlatSound(0xE81);
+        SoundElement_PlayFlatSound(0xE81);
     }
     return 0;
 }
@@ -34,7 +34,7 @@ s32 func_80423DB0_eu_x(void *window, s32 b, s32 c, s32 press) {
     if (press == 1) {
         D_801462C8.language = D_801462C8.language == 2 ? 0 : D_801462C8.language + 1;
         ((LangItemEu *)func_8040EC30_de(window, 0x5E))->text = D_auto_800DDB08[g_languageIndex];
-        Render_PlayFlatSound(0xE81);
+        SoundElement_PlayFlatSound(0xE81);
     }
     return 0;
 }

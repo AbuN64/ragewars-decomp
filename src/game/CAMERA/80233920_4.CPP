@@ -13,9 +13,9 @@
 
 extern s32 D_80141008;
 extern void MultiplyQuaternions(void*,void*,void*);
-extern void Particle_BuildTranslationMatrix(void *, f32, f32, f32);
+extern void GraphU64_BuildTranslationMatrix(void *, f32, f32, f32);
 extern u32 Weapon_UpdateShakeAxis(CShakeAxis*);
-extern void Rsp_MultiplyAffineMatrices(f32*,f32*,f32*);
+extern void GraphU64_MultiplyAffineMatrices(f32*,f32*,f32*);
 /* The camera position is passed as a three-word CVector3 value. */
 
 /* Actor transform and camera-effect subobjects. */
@@ -66,7 +66,7 @@ void Camera_BuildShakenViewTransform(void *cameraTransform) {
     if (actor->enabled != 0) {
         adjustedPitch = actor->pitch;
         adjustedRoll = actor->roll;
-        if (Camera_IsSequenceInWindow() == 0) {
+        if (Cinema_IsSequenceInWindow() == 0) {
             func_80239EA4_de(cameraTransform, &viewMotionOffsets);
             adjustedRoll += viewMotionOffsets.z;
             gameplayAngleScale = D_800C31F8_de;
@@ -100,7 +100,7 @@ void Camera_BuildShakenViewTransform(void *cameraTransform) {
             MultiplyQuaternions(q58.f, q38.f, q48.f);
             MatrixFromQuaternion(q58.f, m68);
             zero=0.0f;
-            Particle_BuildTranslationMatrix(mA8, zero, actor->height, zero);
+            GraphU64_BuildTranslationMatrix(mA8, zero, actor->height, zero);
             MatrixFromQuaternion(baseQuaternion, mE8);
             result.x = zero;
             result.y = zero;
@@ -118,16 +118,16 @@ void Camera_BuildShakenViewTransform(void *cameraTransform) {
                     } while (effect != 0);
                 }
             }
-            Rsp_MultiplyAffineMatrices(m168, m68, mE8);
-            Particle_TransformPoint(m168, &result, &transformed);
-            Rsp_MultiplyAffineMatrices(m168, m68, mA8);
+            GraphU64_MultiplyAffineMatrices(m168, m68, mE8);
+            GraphU64_TransformPoint(m168, &result, &transformed);
+            GraphU64_MultiplyAffineMatrices(m168, m68, mA8);
             matrix = m1A8;
-            Rsp_MultiplyAffineMatrices(matrix, m168, mE8);
-            Particle_BuildTranslationMatrix(m128,
+            GraphU64_MultiplyAffineMatrices(matrix, m168, mE8);
+            GraphU64_BuildTranslationMatrix(m128,
                 actor->position.value.x + transformed.x,
                 actor->position.value.y + viewMotionOffsets.y + transformed.y,
                 actor->position.value.z + transformed.z);
-            Rsp_MultiplyAffineMatrices(actor->matrix, matrix, m128);
+            GraphU64_MultiplyAffineMatrices(actor->matrix, matrix, m128);
         } else {
             cosineInput = actor->roll;
             sequenceAngleScale = D_800C31FC_de;
@@ -156,8 +156,8 @@ void Camera_BuildShakenViewTransform(void *cameraTransform) {
             actor->combined=q48;
             MultiplyQuaternions(actor->rotation.f, q38.f, actor->combined.f);
             MatrixFromQuaternion(q48.f, m68);
-            Particle_BuildTranslationMatrix(m128,actor->position.value.x,actor->position.value.y,actor->position.value.z);
-            Rsp_MultiplyAffineMatrices(actor->matrix, m68, m128);
+            GraphU64_BuildTranslationMatrix(m128,actor->position.value.x,actor->position.value.y,actor->position.value.z);
+            GraphU64_MultiplyAffineMatrices(actor->matrix, m68, m128);
         }
 
         actor->cached.x = adjustedPitch;

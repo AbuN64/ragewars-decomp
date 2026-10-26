@@ -21,7 +21,7 @@ extern s8 D_8010BBB8;
 extern char D_8010FC00;
 
 
-extern s32 Render_InitPoolNodes(void *, void *, s32);
+extern s32 Rumble_InitPoolNodes(void *, void *, s32);
 
 extern s32 func_802B7FD8_de(void *, void *, s32);
 
@@ -47,7 +47,7 @@ extern void func_8029A650_de(void *arg0);
 
 
 
-void Render_ResetControllerPak(ControllerProfile *pakProfile) {
+void Control_ResetControllerPak(ControllerProfile *pakProfile) {
 
     u32 address=(u32)pakProfile;
     char *o=(char *)address;
@@ -56,12 +56,12 @@ void Render_ResetControllerPak(ControllerProfile *pakProfile) {
         if (osRecvMesg(&D_8010FBC0, 0, 1) == 0) {
             D_800CBC1C = func_802BAD80_de(0);
         }
-        Render_ReadControllerStates();
+        Control_ReadControllerStates();
         D_8010BBB8 = 2;
         ((Obj80264124 *)o)->state = 0;
         ((Obj80264124 *)o)->amount = 0;
         ((Obj80264124 *)o)->timer = 0;
-        Render_InitPoolNodes(o + 0x140, o + 0x16C, 3);
+        Rumble_InitPoolNodes(o + 0x140, o + 0x16C, 3);
         func_802B7FD8_de(&D_8010FC00, o + 0xD8, pakProfile->port);
         
 #if defined(VERSION_EU)
@@ -130,7 +130,7 @@ int Control_IsStartButtonSet(Shared_Effect *effect) {
 }
 
 /** Return the high bit of the byte at object offset 0xB6. */
-unsigned int Render_IsAButtonPressed(struct ControllerProfile *profile) {
+unsigned int Control_IsAButtonPressed(struct ControllerProfile *profile) {
     return ((u8)(profile->pressedButtons >> 8)) >> 7;
 }
 
@@ -144,13 +144,13 @@ int Control_IsRightPressed(struct ControllerProfile *object) {
     return (object->buttonState & 0x40101) != 0;
 }
 
-int Render_IsNavUp(void *controllerProfile) {
+int Control_IsNavUp(void *controllerProfile) {
     ControllerProfile *profile = controllerProfile;
     int flag = profile->buttonState & 0x10808;
     return flag != 0;
 }
 
-int Render_IsNavDown(void *controllerProfile) {
+int Control_IsNavDown(void *controllerProfile) {
     ControllerProfile *profile = controllerProfile;
     int flag = profile->buttonState & 0x80404;
     return flag != 0;
@@ -235,14 +235,14 @@ s32 Control_AcquireControllerLock(s32 arg0) {
     return result;
 }
 
-void Render_ReleasePakLock(void) {
+void Control_ReleasePakLock(void) {
 
     D_800CBC1C = -1;
     osSendMesg(&D_8010FBC0, 0, 1);
 }
 
 /** Fetch-and-clear: return the old slot value, then zero it. */
-s32 Render_TakePakChange(s32 controllerPort) {
+s32 Control_TakePakChange(s32 controllerPort) {
     s32 old;
 
     if (Control_IsControllerPakEnabled(controllerPort) == 0) {
@@ -253,7 +253,7 @@ s32 Render_TakePakChange(s32 controllerPort) {
     return old;
 }
 
-s32 Render_PeekPakChange(s32 controllerPort) {
+s32 Control_PeekPakChange(s32 controllerPort) {
     if (Control_IsControllerPakEnabled(controllerPort) == 0) {
         return 0;
     }
@@ -268,7 +268,7 @@ int Control_IsControllerPakPresent(int arg0) {
     return D_8010BBE2[arg0 * 4] & 1;
 }
 
-s32 Render_AnyControllerConnected(void) {
+s32 Control_AnyControllerConnected(void) {
     s32 i = 0;
     while (1) {
         if (!(((D_8010FBE3[i * 4] >> 3) ^ 1) & 1)) {
@@ -282,7 +282,7 @@ s32 Render_AnyControllerConnected(void) {
     }
 }
 
-s32 Render_CountConnectedControllers(void) {
+s32 Control_CountConnectedControllers(void) {
     s32 count;
     s32 i;
 
@@ -335,11 +335,11 @@ int Control_IsControllerPakEnabled(int arg0) {
     return D_8010B308[arg0];
 }
 
-void Render_EnableControllerPak(int controllerPort) {
+void Control_EnableControllerPak(int controllerPort) {
     D_8010B308[controllerPort] = 1;
 }
 
-void Render_DisableControllerPak(int controllerPort) {
+void Control_DisableControllerPak(int controllerPort) {
     D_8010B308[controllerPort] = 0;
 }
 

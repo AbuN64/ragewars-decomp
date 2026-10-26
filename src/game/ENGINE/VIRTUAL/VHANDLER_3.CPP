@@ -23,7 +23,7 @@ extern void func_802AD370_de(int a0, int a1, int a2, int a3, int a4, int a5);
 
 
 
-void **Scene_AllocateResource(s32 arg0, s32 arg1, s32 arg2, void *arg3);
+void **Cache_AllocateResource(s32 arg0, s32 arg1, s32 arg2, void *arg3);
 
 
 
@@ -103,7 +103,7 @@ void *Virtual_AllocateVirtualRegion(s32 arg0, s32 arg1_unused, s32 arg2)
     blk.f34 = (void **) sp10;
     new_var2 = temp_s1 * 4;
     rounded = new_var + 0x18;
-    temp_v0 = Scene_AllocateResource(0, new_var2 + rounded, 3, &s_virtualRegionText);
+    temp_v0 = Cache_AllocateResource(0, new_var2 + rounded, 3, &s_virtualRegionText);
     temp_v1 = *temp_v0;
     blk.f30 = temp_v1;
     temp_v1->model = temp_v0;
@@ -126,7 +126,7 @@ void Virtual_FreeVirtualRegion(s32 arg0) {
     block.data = sp10;
     osSendMesg(&D_800FF230.completion, &block, 1);
     osRecvMesg(sp10, &sp3C, 1);
-    Scene_ReleaseResource(0, ((Draw *)(sp3C))->model);
+    Cache_ReleaseResource(0, ((Draw *)(sp3C))->model);
 }
 
 void Virtual_GetPagerCounters(struct PagerCounters *arg0) {
@@ -135,17 +135,17 @@ void Virtual_GetPagerCounters(struct PagerCounters *arg0) {
 
 /* Resource manager thread setup and loop: fills a 0x200-byte stack with a marker, creates and starts the
  * thread object at D_80103720 (entry D_0023CA24, stack top D_800FFB50), then forever receives request
- * messages and dispatches on the request type to Virtual_HandleResourcePageRequest, Sched_FinishPageJob, Virtual_ReleaseVirtualRegion or
+ * messages and dispatches on the request type to Virtual_HandleResourcePageRequest, Virtual_FinishPageJob, Virtual_ReleaseVirtualRegion or
  * Virtual_AssignVirtualRegion. */
 extern char D_0023CA24[];
 extern void osCreateThread(void *, s32, void *, void *, void *, s32);
 extern void osStartThread(void *);
-extern void Sched_FinishPageJob(struct ResourcePageJob *job);
+extern void Virtual_FinishPageJob(struct ResourcePageJob *job);
 
 void Virtual_RunPagerDispatcher(void) {
     OSMesg request;
 
-    Resmgr_FillMemory(D_800FF230.pool2, 0x62, sizeof(D_800FF230.pool2));
+    XPlus_FillMemory(D_800FF230.pool2, 0x62, sizeof(D_800FF230.pool2));
     osCreateThread(D_800FF230.queueData, 0x62, D_0023CA24, 0, D_800FF230.pool2 + sizeof(D_800FF230.pool2), 0x94);
     osStartThread(D_800FF230.queueData);
     for (;;) {
@@ -155,7 +155,7 @@ void Virtual_RunPagerDispatcher(void) {
             Virtual_HandleResourcePageRequest();
             break;
         case 1:
-            Sched_FinishPageJob(request);
+            Virtual_FinishPageJob(request);
             break;
         case 3:
             Virtual_AssignVirtualRegion(request);

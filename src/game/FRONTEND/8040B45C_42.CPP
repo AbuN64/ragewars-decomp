@@ -96,7 +96,7 @@ static inline u32 encode(u32 color, Format *format) {
 
 extern void *D_80153C70,*D_80153C64;
 
-/* Releases a resource object's buffers through Scene_FreeMemory (the one at 0x18 when flag 1 is set, the
+/* Releases a resource object's buffers through Cache_FreeMemory (the one at 0x18 when flag 1 is set, the
    one at 0x14 when flag 2 is set and its size at 0x10 is positive) and clears its 32 bytes. */
 
 
@@ -114,7 +114,7 @@ extern s32 func_804136A8_de(OwnedImage *image);
 
 extern s32 func_8041369C_de(OwnedImage *image);
 
-extern void *Scene_AllocateMemory(s32 size);
+extern void *Cache_AllocateMemory(s32 size);
 
 
 /* The argument is a pointer into 0x8068xxxx whose first byte the debugger read as 0x14, and the
@@ -193,17 +193,17 @@ void func_80412F54_de(ImageDescriptor *destination, ImageDescriptor *source) {
 }
 
 void func_804133E4_de(int value) {
-    Resmgr_FillBytes(value, 0, 0x20);
+    XPlus_FillBytes(value, 0, 0x20);
 }
 
 void func_80413404_de(OwnedImage *res) {
     if (res->flags & 1) {
-        Scene_FreeMemory(res->pixels);
+        Cache_FreeMemory(res->pixels);
     }
     if ((res->flags & 2) && res->paletteCount > 0) {
-        Scene_FreeMemory(res->palette);
+        Cache_FreeMemory(res->palette);
     }
-    Resmgr_FillBytes(res, 0, 32);
+    XPlus_FillBytes(res, 0, 32);
 }
 
 /** Report false. */
@@ -215,12 +215,12 @@ s32 func_80413480_de(OwnedImage *dst, OwnedImage *src) {
     s32 size;
 
     if (dst->flags & 1) {
-        Scene_FreeMemory(dst->pixels);
+        Cache_FreeMemory(dst->pixels);
     }
     if ((dst->flags & 2) && dst->paletteCount > 0) {
-        Scene_FreeMemory(dst->palette);
+        Cache_FreeMemory(dst->palette);
     }
-    Resmgr_FillBytes(dst, 0, 0x20);
+    XPlus_FillBytes(dst, 0, 0x20);
     *dst = *src;
     if (dst->paletteCount == 0) {
         dst->palette = 0;
@@ -230,18 +230,18 @@ s32 func_80413480_de(OwnedImage *dst, OwnedImage *src) {
         dst->flags = 3;
     }
     size = func_804136A8_de(src);
-    if ((dst->pixels = Scene_AllocateMemory(size)) == 0) {
+    if ((dst->pixels = Cache_AllocateMemory(size)) == 0) {
         return 1;
     }
-    Resmgr_CopyBytes(dst->pixels, src->pixels, size);
+    XPlus_CopyBytes(dst->pixels, src->pixels, size);
     if (src->paletteCount != 0) {
         size = func_8041369C_de(src);
-        if ((dst->palette = Scene_AllocateMemory(size)) == 0) {
-            Scene_FreeMemory(dst->pixels);
-            Resmgr_FillBytes(dst, 0, 0x20);
+        if ((dst->palette = Cache_AllocateMemory(size)) == 0) {
+            Cache_FreeMemory(dst->pixels);
+            XPlus_FillBytes(dst, 0, 0x20);
             return 1;
         }
-        Resmgr_CopyBytes(dst->palette, src->palette, size);
+        XPlus_CopyBytes(dst->palette, src->palette, size);
     }
     return 0;
 }

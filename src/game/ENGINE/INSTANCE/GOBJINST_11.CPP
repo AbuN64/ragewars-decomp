@@ -10,14 +10,14 @@
 #include "RENDER_4/8028FD2C_6.H"
 #include "LISTS/80279520.H"
 
-extern s32 Camera_IsSequenceInWindow(void);
+extern s32 Cinema_IsSequenceInWindow(void);
 extern CQuatern GameObject_BuildActorDirectionTilt(void *arg1);
 
 
 extern void MultiplyQuaternions(CQuatern *arg0, CQuatern *arg1, CQuatern *arg2);
 extern void MatrixFromQuaternion(void *, void *);
 extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
-extern s32 Particle_LimitVectorLength(f32 *arg0, f32 arg1);
+extern s32 GraphU64_LimitVectorLength(f32 *arg0, f32 arg1);
 extern void TranslateMatrix(char *, f32, f32, f32);
 extern void SwapMatrixUpForward(void *);
 
@@ -36,7 +36,7 @@ void func_8024B53C_de(void *levelActor) {
 
     copy = ((struct LevelActor *)(levelActor))->rotation;
     copy_ptr = &copy;
-    if (Camera_IsSequenceInWindow() != 0) {
+    if (Cinema_IsSequenceInWindow() != 0) {
         copy = GameObject_BuildActorDirectionTilt(levelActor);
     }
 
@@ -57,7 +57,7 @@ void func_8024B53C_de(void *levelActor) {
     ScaleMatrixLocal(transform, ((struct LevelActor *)(levelActor))->scale.x,
                     ((struct LevelActor *)(levelActor))->scale.y,
                     ((struct LevelActor *)(levelActor))->scale.z);
-    Particle_LimitVectorLength(&((struct LevelActor *)(levelActor))->position0.x, 20000.0f);
+    GraphU64_LimitVectorLength(&((struct LevelActor *)(levelActor))->position0.x, 20000.0f);
     TranslateMatrix(transform, ((struct LevelActor *)(levelActor))->position0.x,
                    ((struct LevelActor *)(levelActor))->position0.y,
                    ((struct LevelActor *)(levelActor))->position0.z);
@@ -130,7 +130,7 @@ s16 func_8024B738_de(void *actor, s16 *callback, s32 excludedAnimation) {
 
 extern s32 *func_8024BFD4_de(void *arg0, s8 arg1);
 extern s32 func_802484B0_de(void *arg0, s32 arg1, void *arg2);
-extern void Scene_UnlockResource(s32 arg0, s32 arg1);
+extern void Cache_UnlockResource(s32 arg0, s32 arg1);
 
 s32 func_8024B7E4_de(void *actorStorage, s32 resourceRequestMode)
 {
@@ -143,11 +143,11 @@ s32 func_8024B7E4_de(void *actorStorage, s32 resourceRequestMode)
   {
     if (resource)
     {
-      resource = Scene_RequestResource(0, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resourceFlags, 0, 0, 0, (&D_800C39E0_de) + 4, resourceRequestMode);
+      resource = Cache_RequestResource(0, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resourceFlags, 0, 0, 0, (&D_800C39E0_de) + 4, resourceRequestMode);
     }
     else
     {
-      resource = Scene_RequestResource(0, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resourceFlags, 0, 0, 0, (&D_800C39E0_de) + 4, resourceRequestMode);
+      resource = Cache_RequestResource(0, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resource, ((struct LevelActor *)(actorStorage))->resourceFlags, 0, 0, 0, (&D_800C39E0_de) + 4, resourceRequestMode);
     }
     if (resource == 0)
     {
@@ -157,10 +157,10 @@ s32 func_8024B7E4_de(void *actorStorage, s32 resourceRequestMode)
     if (entry != 0)
     {
       value = *entry;
-      result = func_802484B0_de(actorStorage, value, Render_GetPackSection(*((void **) resource), 0));
-      Scene_UnlockResource(0, (s32) entry);
+      result = func_802484B0_de(actorStorage, value, SetN64_GetPackSection(*((void **) resource), 0));
+      Cache_UnlockResource(0, (s32) entry);
     }
-    Scene_UnlockResource(0, (s32) resource);
+    Cache_UnlockResource(0, (s32) resource);
   }
   return result;
 }

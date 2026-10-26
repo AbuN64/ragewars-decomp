@@ -7,19 +7,19 @@
    before it through Items_ResetActorPools and func_804499B0_de, releases resource 0x24 of D_8011FE88 through
    func_80286AA8_de, calls func_8025476C_de with one when func_8025477C_de reports nothing, then calls
    func_80245A10_de, func_80245A20_de with zero and func_80245A30_de. */
-extern void Camera_ReleaseSequenceContext();
+extern void Cinema_ReleaseSequenceContext();
 extern void Items_ResetActorPools(void *, s32);
 extern void func_804499B0_de(void *, s32, s32);
 extern void func_80286AA8_de(void *, s32, s32);
 extern s32 func_8025477C_de();
-extern void Camera_ClearResponse();
+extern void Cinema_ClearResponse();
 
 extern void func_80245A30_de();
 
 void func_80422020_de(void) {
     char *object;
 
-    Camera_ReleaseSequenceContext();
+    Cinema_ReleaseSequenceContext();
     object = &D_80145088;
     Items_ResetActorPools(object, 0);
     func_804499B0_de(object - 0x48, 0, 0);
@@ -27,7 +27,7 @@ void func_80422020_de(void) {
     if (func_8025477C_de() == 0) {
         func_8025476C_de(1);
     }
-    Camera_ClearResponse();
+    Cinema_ClearResponse();
     func_80245A20_de(0);
     func_80245A30_de();
 }
@@ -43,7 +43,7 @@ void func_804220A8_de(int key) {
  o->viewWidth = state->a; o->viewHeight = state->b; o->viewLeft = state->c; o->viewTop = state->d;
  selection = func_804030E0_de(key);
  if (!func_8025477C_de()) func_8025476C_de(1);
- Items_SetSelection(&g_world, ~selection, 0);
+ OvlScene_SetSelection(&g_world, ~selection, 0);
  g->width = width; width = height; g->height = width;
 }
 

@@ -11,7 +11,7 @@ typedef struct ButtonRemap {
     s32 mapped; /* 0x4 */
 } ButtonRemap;
 
-/* The per-player input block at Player+0x688 that Fx_BuildControllerState
+/* The per-player input block at Player+0x688 that ContPad_BuildControllerState
    fills from the player's controller once per frame. */
 struct ControllerInput {
     f32 turn; /* 0x00: stick X */

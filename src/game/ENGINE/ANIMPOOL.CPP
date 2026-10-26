@@ -12,11 +12,11 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
 #include "RENDER_4/8028FD2C_6.H"
-extern s32 Render_GetDirectoryEntry(s32, s32, s32);
-extern s32 Render_LocatePackSection(void *, s32, s32, s32 *);
-extern s32 Engine_GetActorDefinition(void *, s32);
+extern s32 SetN64_GetDirectoryEntry(s32, s32, s32);
+extern s32 SetN64_LocatePackSection(void *, s32, s32, s32 *);
+extern s32 Scene_GetActorDefinition(void *, s32);
 extern f32 func_802B2350(s32);
-extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 struct Shared_World;
 extern s32 func_8028B21C_de(struct Shared_World *, s32);
 extern s32 func_8028B25C_de(void *, s32);
@@ -78,19 +78,19 @@ SceneEffect *AnimPool_SpawnAnimationObject(struct SceneEffectPool *scene, s32 va
     effect = 0;
     id = func_8028B21C_de(&g_world, variant);
     if (id != -1) {
-        key = Render_GetDirectoryEntry((s32)g_world.indexedDirectory, g_world.indexedBank, id);
-        descriptor = Scene_RequestResource(0, key, key, 0x18, 0, 0, 0, &s_animObjectIndexText, 1);
+        key = SetN64_GetDirectoryEntry((s32)g_world.indexedDirectory, g_world.indexedBank, id);
+        descriptor = Cache_RequestResource(0, key, key, 0x18, 0, 0, 0, &s_animObjectIndexText, 1);
         if (descriptor != 0) {
-            clip = Render_LocatePackSection(*descriptor, key, 0, &size);
-            resource = Scene_RequestResource(0, clip, clip, size, 0, 0, 0, &s_animObjectInfoText, 1);
+            clip = SetN64_LocatePackSection(*descriptor, key, 0, &size);
+            resource = Cache_RequestResource(0, clip, clip, size, 0, 0, 0, &s_animObjectInfoText, 1);
             if (resource != 0) {
-                record = Render_GetPackSection(*resource, 0);
-                count = Engine_GetActorDefinition(&g_world, record->count);
-                Particle_ScaleVector(&color, &color, func_802B2350(record->angle));
+                record = SetN64_GetPackSection(*resource, 0);
+                count = Scene_GetActorDefinition(&g_world, record->count);
+                GraphU64_ScaleVector(&color, &color, func_802B2350(record->angle));
                 effect = spawn_effect(scene, id, variant, count, owner, position, scale, direction, color, ref);
-                Scene_UnlockResource(0, resource);
+                Cache_UnlockResource(0, resource);
             }
-            Scene_UnlockResource(0, descriptor);
+            Cache_UnlockResource(0, descriptor);
         }
     }
     return effect;

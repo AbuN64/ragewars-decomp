@@ -10,7 +10,7 @@
 
 /* Selects a cached RDP color-combiner mode and emits the corresponding display-list command. */
 extern Gfx *g_displayListCursor;
-void Render_SetCombineMode(u32 mode) {
+void Geometry_SetCombineMode(u32 mode) {
  if (D_800CC360 != mode) {
  D_800CC360=mode;
  switch(mode) {
@@ -67,7 +67,7 @@ void Render_SetCombineMode(u32 mode) {
 
 extern Gfx *g_displayListCursor;
 
-s32 Render_SetModePreset(s32 tailEnum) {
+s32 Geometry_SetModePreset(s32 tailEnum) {
 
     if (D_800CC364 == tailEnum) {
         return 0;
@@ -263,7 +263,7 @@ sw_mode_default:
 
 extern Gfx *g_displayListCursor;
 extern Gfx D_800CC018_de[], D_800CC0A0[];
-extern void System_ResetTextureCache(void);
+extern void TextLoad_ResetTextureCache(void);
 /* Emits a 16 by 16 intensity texture, white tint, matrix and the selected pass list. */
 void func_8026992C_de(void *matrix, s32 pass, u32 alpha) {
     Gfx *list;
@@ -280,7 +280,7 @@ void func_8026992C_de(void *matrix, s32 pass, u32 alpha) {
     gSPDisplayList(g_displayListCursor++, ({ if (pass != 0) list = D_800CC0A0; list; }));
     D_800CC364 = -1;
     D_800CC360 = -1;
-    System_ResetTextureCache();
+    TextLoad_ResetTextureCache();
 }
 
 
@@ -314,12 +314,12 @@ void func_80295FB4_us_rev1(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #else
 void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
-void Render_SetCombineMode(u32);
-s32 Render_SetModePreset(s32);
-void Scene_UnlockResource(s32, void *);
-s32 Nav_NextRandom(void);
+void Geometry_SetCombineMode(u32);
+s32 Geometry_SetModePreset(s32);
+void Cache_UnlockResource(s32, void *);
+s32 GraphU64_NextRandom(void);
 
-s32 Render_SetupMaterial(struct Shared_GfxMaterial *mat, s32 pass) {
+s32 Geometry_SetupMaterial(struct Shared_GfxMaterial *mat, s32 pass) {
     struct Shared_AnimInfo info;
     void *node;
     u32 flags;
@@ -356,7 +356,7 @@ s32 Render_SetupMaterial(struct Shared_GfxMaterial *mat, s32 pass) {
                 }
                 idx = (u8)(D_800CD730 / info.frame->unknown1);
                 if (mat->unk7 != idx) {
-a = Nav_NextRandom() % info.count;
+a = GraphU64_NextRandom() % info.count;
  if (info.unk4 != 0) { b = a; if (b >= info.unk4) { b = 0; } } else { b = 0; }
                     mat->unk7 = idx;
                 } else {
@@ -419,101 +419,101 @@ a = Nav_NextRandom() % info.count;
             }
             if (flags & 2) {
                 if (!(flags & 0x1000)) {
-                    Render_SetCombineMode(2);
+                    Geometry_SetCombineMode(2);
                 } else if (D_800D15E0 == 0) {
-                    Render_SetCombineMode(0);
+                    Geometry_SetCombineMode(0);
                 } else {
-                    Render_SetCombineMode(1);
+                    Geometry_SetCombineMode(1);
                 }
             } else if (!(flags & 0x1000)) {
-                Render_SetCombineMode(4);
+                Geometry_SetCombineMode(4);
             } else {
-                Render_SetCombineMode(3);
+                Geometry_SetCombineMode(3);
             }
-            Scene_UnlockResource(0, node);
+            Cache_UnlockResource(0, node);
         } else if (flags & 2) {
             if (flags & 0x2000) {
                 switch (info.frame->unk5) {
                     case 4:
                     case 5:
                         gDPSetEnvColor(g_displayListCursor++, mat->unk14, mat->unk15, mat->unk16, mat->unk17);
-                        Render_SetCombineMode(0x23);
+                        Geometry_SetCombineMode(0x23);
                         break;
                     default:
-                        Render_SetCombineMode(5);
+                        Geometry_SetCombineMode(5);
                         break;
                 }
             } else if (D_800D15E0 == 0) {
-                Render_SetCombineMode(6);
+                Geometry_SetCombineMode(6);
             } else {
                 gDPSetEnvColor(g_displayListCursor++, D_800D15E4[0], D_800D15E4[1], D_800D15E4[2], D_800D15E4[3]);
                 switch (D_800D15E0) {
                     case 1:
                     case 2:
-                        Render_SetCombineMode(7);
+                        Geometry_SetCombineMode(7);
                         break;
                     case 3:
-                        Render_SetCombineMode(8);
+                        Geometry_SetCombineMode(8);
                         break;
                     case 7:
-                        Render_SetCombineMode(9);
+                        Geometry_SetCombineMode(9);
                         break;
                     case 4:
                     case 5:
-                        Render_SetCombineMode(10);
+                        Geometry_SetCombineMode(10);
                         break;
                     case 6:
                         gDPSetPrimColor(g_displayListCursor++, 0, 0, mat->unk10, mat->unk11, mat->unk12, D_800D15E4[4]);
-                        Render_SetCombineMode(0xB);
+                        Geometry_SetCombineMode(0xB);
                         break;
                     default:
                         break;
                 }
             }
-            Scene_UnlockResource(0, node);
+            Cache_UnlockResource(0, node);
         } else {
             if (flags & 0x2000) {
                 switch (info.frame->unk5) {
                     case 4:
                         gDPSetEnvColor(g_displayListCursor++, mat->unk14, mat->unk15, mat->unk16, mat->unk17);
-                        Render_SetCombineMode(0x25);
+                        Geometry_SetCombineMode(0x25);
                         break;
                     case 5:
                         gDPSetEnvColor(g_displayListCursor++, mat->unk14, mat->unk15, mat->unk16, mat->unk17);
-                        Render_SetCombineMode(0x24);
+                        Geometry_SetCombineMode(0x24);
                         break;
                     default:
-                        Render_SetCombineMode(0xC);
+                        Geometry_SetCombineMode(0xC);
                         break;
                 }
             } else if (D_800D15E0 == 0) {
-                Render_SetCombineMode(0xD);
+                Geometry_SetCombineMode(0xD);
             } else {
                 gDPSetEnvColor(g_displayListCursor++, D_800D15E4[0], D_800D15E4[1], D_800D15E4[2], D_800D15E4[3]);
                 switch (D_800D15E0) {
                     case 1:
                     case 2:
-                        Render_SetCombineMode(0xE);
+                        Geometry_SetCombineMode(0xE);
                         break;
                     case 3:
-                        Render_SetCombineMode(0xF);
+                        Geometry_SetCombineMode(0xF);
                         break;
                     case 7:
-                        Render_SetCombineMode(9);
+                        Geometry_SetCombineMode(9);
                         break;
                     case 4:
                     case 5:
-                        Render_SetCombineMode(0x10);
+                        Geometry_SetCombineMode(0x10);
                         break;
                     case 6:
                         gDPSetPrimColor(g_displayListCursor++, 0, 0, mat->unk10, mat->unk11, mat->unk12, D_800D15E4[4]);
-                        Render_SetCombineMode(0x11);
+                        Geometry_SetCombineMode(0x11);
                         break;
                     default:
                         break;
                 }
             }
-            Scene_UnlockResource(0, node);
+            Cache_UnlockResource(0, node);
         }
     } else {
         gDPPipeSync(g_displayListCursor++);
@@ -536,29 +536,29 @@ a = Nav_NextRandom() % info.count;
         }
         gSPTexture(g_displayListCursor++, 0, 0, 0, 0, 0);
         if (flags & 2) {
-            Render_SetCombineMode(0x12);
+            Geometry_SetCombineMode(0x12);
         } else if (D_800D15E0 == 0) {
-            Render_SetCombineMode(0x13);
+            Geometry_SetCombineMode(0x13);
         } else {
             gDPSetEnvColor(g_displayListCursor++, D_800D15E4[0], D_800D15E4[1], D_800D15E4[2], D_800D15E4[3]);
             switch (D_800D15E0) {
                 case 1:
                 case 2:
-                    Render_SetCombineMode(0x14);
+                    Geometry_SetCombineMode(0x14);
                     break;
                 case 3:
-                    Render_SetCombineMode(0x15);
+                    Geometry_SetCombineMode(0x15);
                     break;
                 case 7:
-                    Render_SetCombineMode(0x16);
+                    Geometry_SetCombineMode(0x16);
                     break;
                 case 4:
                 case 5:
-                    Render_SetCombineMode(0x17);
+                    Geometry_SetCombineMode(0x17);
                     break;
                 case 6:
                     gDPSetPrimColor(g_displayListCursor++, 0, 0, mat->unk10, mat->unk11, mat->unk12, D_800D15E4[4]);
-                    Render_SetCombineMode(0x11);
+                    Geometry_SetCombineMode(0x11);
                     break;
                 default:
                     break;
@@ -581,7 +581,7 @@ a = Nav_NextRandom() % info.count;
             }
         }
     } else if (flags & 0x80) {
-        Render_SetModePreset(6);
+        Geometry_SetModePreset(6);
     } else {
         tailEnum = 7;
         if (!(flags & 0x200)) {
@@ -599,7 +599,7 @@ a = Nav_NextRandom() % info.count;
         }
     }
     if (tailEnum != -1) {
-        Render_SetModePreset(tailEnum);
+        Geometry_SetModePreset(tailEnum);
     }
     mode = 0x260404;
     if (flags & 0x1000) {

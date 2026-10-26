@@ -10,7 +10,7 @@ void Nav_RequestRandomArmedWeapon(void *brain) {
     AiController *controller = brain;
     s32 chosenWeapon;
 
-    if ((Nav_NextRandom() % 100) < 0x15) {
+    if ((GraphU64_NextRandom() % 100) < 0x15) {
         do {
             chosenWeapon = Weapons_PickRandomArmedWeapon(controller->player);
         } while (chosenWeapon >= 0x10);

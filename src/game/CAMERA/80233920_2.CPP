@@ -38,7 +38,7 @@ void Camera_AnimateViewColorsAndLight(View *actor) {
     direction.x = Math_Sinf((f32) (D_800CD730 * 6) * 0.01745329424738884f);
     direction.y = Math_Sinf((f32) (D_800CD730 * 8) * 0.01745329424738884f);
     direction.z = Math_Cosf((f32) (D_800CD730 * 10) * 0.01745329424738884f);
-    Particle_NormalizeVec3(&direction);
+    GraphU64_NormalizeVec3(&direction);
     direction.x *= 120.0f;
     direction.y *= 120.0f;
     direction.z *= 120.0f;

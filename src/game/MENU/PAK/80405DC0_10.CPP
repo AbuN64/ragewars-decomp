@@ -18,12 +18,12 @@ extern s32 D_8015375C;
 s32 Pak_ReadNoteInfo(s32, s32, s32 *, u8 *, u8 *, s32 *, u8 *, u8 *);
 s32 func_802A0238_de(u8 *);
 s32 Pak_ReadNoteData(s32, s32, s32, s32);
-u32 Ovlgame_Crc32(u8 *, u32, u32);
+u32 Pak_Crc32(u8 *, u32, u32);
 s32 func_804057BC_de(u8 *, s32);
-u8 *Resmgr_CopyString(u8 *, u8 *);
+u8 *XPlus_CopyString(u8 *, u8 *);
 void *Pak_OpenDialog(struct func_8025E5B0_S1 *, struct Dialog *, s32, s32, s32);
 s32 Pak_CheckStatusPrompt(void *, s32, s32);
-static __inline__ s32 pak_note_has_game_id(u8 *company, u8 *code) { if ((func_802A0238_de(code) == 4) && (func_802A0238_de(company) == 2) && (Resmgr_CompareStrings(code, rw_pak_game_code(&D_80145040.game)) == 0) && (Resmgr_CompareStrings(company, rw_pak_company(&D_80145040.game)) == 0)) return 1; return 0; }
+static __inline__ s32 pak_note_has_game_id(u8 *company, u8 *code) { if ((func_802A0238_de(code) == 4) && (func_802A0238_de(company) == 2) && (XPlus_CompareStrings(code, rw_pak_game_code(&D_80145040.game)) == 0) && (XPlus_CompareStrings(company, rw_pak_company(&D_80145040.game)) == 0)) return 1; return 0; }
 static __inline__ s32 pak_block_has_size(u8 *data,s32 expected) { return *(s32 *)data==expected; }
 /* Load a Controller Pak note, validate its profile or save-block
  * checksum, and open the corresponding selection or error dialog. */
@@ -78,8 +78,8 @@ s32 func_80407748_de(s32 *selection, Shared_PakMenu *menu) {
         gameNote = pak_note_has_game_id(company,code);
         if (gameNote != 0) {
             Shared_Game *settings = &D_80145040.game;
-            profileMatches = Resmgr_CompareStrings(name, rw_pak_profile_name(settings)) == 0;
-            blockState = Resmgr_CompareStrings(name, rw_pak_block_name(settings)) == 0;
+            profileMatches = XPlus_CompareStrings(name, rw_pak_profile_name(settings)) == 0;
+            blockState = XPlus_CompareStrings(name, rw_pak_block_name(settings)) == 0;
         } else {
             profileMatches = 0;
             blockState = 0;
@@ -90,7 +90,7 @@ s32 func_80407748_de(s32 *selection, Shared_PakMenu *menu) {
                     profileMatches=0;
                     goto profile_failed;
                 }
-                if (Ovlgame_Crc32((u8 *)&D_80153738,0x14,4)!=D_80153738.checksum) {
+                if (Pak_Crc32((u8 *)&D_80153738,0x14,4)!=D_80153738.checksum) {
                     profileMatches=0;
                     goto profile_failed;
                 }
@@ -105,20 +105,20 @@ profile_failed:
                 blockState = pages;
                 if (D_800DE864_de != 0) {
                     func_80253908_de(0);
-                    Scene_ReleaseResource(0, D_800DE864_de);
+                    Cache_ReleaseResource(0, D_800DE864_de);
                 }
                 if (blockState != 0) blockState <<= 8;
                 else {
                     blockState = D_8011FECC + 0x610;
                 }
-                handle = Scene_AllocateResource(0, blockState, 0x33U, g_pakSingleSaveBlockName);
+                handle = Cache_AllocateResource(0, blockState, 0x33U, g_pakSingleSaveBlockName);
                 payload = handle->data;
                 D_800DE864_de = handle;
                 D_800E28BC = payload;
-                Resmgr_FillMemory(payload, 0, (u32) blockState);
+                XPlus_FillMemory(payload, 0, (u32) blockState);
                 if (Pak_ReadNoteData(channel, noteIndex, (s32)D_800E28BC, pages << 8)==0 &&
                     pak_block_has_size(D_800E28BC,expectedSize) &&
-                    Ovlgame_Crc32(D_800E28BC,*(s32 *)D_800E28BC-4,11)==*(s32 *)(D_800E28BC+(*(s32 *)D_800E28BC-4)) &&
+                    Pak_Crc32(D_800E28BC,*(s32 *)D_800E28BC-4,11)==*(s32 *)(D_800E28BC+(*(s32 *)D_800E28BC-4)) &&
                     D_8011FECC==((s32 *)D_800E28BC)[1]) {
                     D_8014D4FC=noteIndex;
                     Pak_OpenDialog(&D_80145040.dialogOwner, rw_pak_selected_block_dialog(), (s32)menu->player, (s32)menu->slot, (s32)menu->dialogData);
@@ -134,7 +134,7 @@ profile_failed:
                     text = rw_pak_note_text(settings);
                     D_8014D4FC = noteIndex;
                     if (func_804057BC_de(name, 0x10) != 0) {
-                        Resmgr_CopyString(name, (u8 *)rw_pak_invalid_name(settings));
+                        XPlus_CopyString(name, (u8 *)rw_pak_invalid_name(settings));
                     }
                     copying = 1;
                     i = 0;
@@ -178,12 +178,12 @@ profile_failed:
         if ((D_8014D4EC_de != 0) && (readError == 0)) {
             if (((status=Pak_ReadNoteInfo(channel, noteIndex, &exists, name, extension, &pages, company, code)) == 0) && (exists != 0)) {
                 Shared_Game *settings = &D_80145040.game;
-                if (Resmgr_CompareStrings(name,rw_pak_profile_name(settings)) == 0) {
+                if (XPlus_CompareStrings(name,rw_pak_profile_name(settings)) == 0) {
                 if (Pak_ReadNoteData(channel, noteIndex, (s32)&D_80153738, 0x18)!=0) {
                     readError=1;
                     goto done;
                 }
-                if (Ovlgame_Crc32((u8 *)&D_80153738,0x14,4)!=D_80153738.checksum) {
+                if (Pak_Crc32((u8 *)&D_80153738,0x14,4)!=D_80153738.checksum) {
                     readError=1;
                     goto done;
                 }
@@ -197,24 +197,24 @@ profile_failed:
         if ((D_80153760 != 0) && (D_8014D4EC_de == 0)) {
             if (readError != 0) goto show_error;
             {
-                if (((status=Pak_ReadNoteInfo(channel, noteIndex, &exists, name, extension, &pages, company, code)) == 0) && (exists != 0) && (Resmgr_CompareStrings(name, rw_pak_block_name(&D_80145040.game)) == 0)) {
+                if (((status=Pak_ReadNoteInfo(channel, noteIndex, &exists, name, extension, &pages, company, code)) == 0) && (exists != 0) && (XPlus_CompareStrings(name, rw_pak_block_name(&D_80145040.game)) == 0)) {
                     allocationSize = pages;
                     if (D_800DE864_de != 0) {
                         func_80253908_de(0);
-                        Scene_ReleaseResource(0, D_800DE864_de);
+                        Cache_ReleaseResource(0, D_800DE864_de);
                     }
                     if (allocationSize != 0) allocationSize <<= 8;
                     else {
                         allocationSize = D_8011FECC + 0x610;
                     }
-                    handle2 = Scene_AllocateResource(0, allocationSize, 0x33U, g_pakSingleSaveBlockName);
+                    handle2 = Cache_AllocateResource(0, allocationSize, 0x33U, g_pakSingleSaveBlockName);
                     payload2 = handle2->data;
                     D_800DE864_de = handle2;
                     D_800E28BC = payload2;
-                    Resmgr_FillMemory(payload2, 0, (u32) allocationSize);
+                    XPlus_FillMemory(payload2, 0, (u32) allocationSize);
                     if (Pak_ReadNoteData(channel, noteIndex, (s32)D_800E28BC, pages << 8) == 0) {
                         length = *(s32 *)D_800E28BC;
-                        if ((length == expectedSize) && (Ovlgame_Crc32(D_800E28BC, length - 4, 0xBU) == *(s32 *)(D_800E28BC+(*(s32 *)D_800E28BC-4))) && (D_8011FECC == ((s32 *)D_800E28BC)[1])) {
+                        if ((length == expectedSize) && (Pak_Crc32(D_800E28BC, length - 4, 0xBU) == *(s32 *)(D_800E28BC+(*(s32 *)D_800E28BC-4))) && (D_8011FECC == ((s32 *)D_800E28BC)[1])) {
                             Pak_OpenDialog(&D_80145040.dialogOwner, rw_pak_loaded_block_dialog(), (s32)menu->player, (s32)menu->slot, 0);
                         return 1;
                         }
@@ -224,10 +224,10 @@ profile_failed:
                         func_80253908_de(0);
                     }
                     if (D_800DE860_de != 0) {
-                        Scene_ReleaseResource(0, D_800DE860_de);
+                        Cache_ReleaseResource(0, D_800DE860_de);
                     }
                     if (D_800DE864_de != 0) {
-                        Scene_ReleaseResource(0, D_800DE864_de);
+                        Cache_ReleaseResource(0, D_800DE864_de);
                     }
                     D_800DE860_de = 0;
                     D_800DE864_de = 0;

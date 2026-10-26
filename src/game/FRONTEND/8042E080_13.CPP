@@ -16,8 +16,8 @@ extern s32 func_80434638_de(s32, s32);
 extern s32 func_80435128_de(s32);
 extern s32 func_80435184_de(s32);
 extern s32 func_8043590C_de(s32);
-extern s32 Nav_NextRandom(void);
-extern void Frontend_RefreshPlayerPanel(s32);
+extern s32 GraphU64_NextRandom(void);
+extern void PAKInterface_RefreshPlayerPanel(s32);
 void func_80433610_de(s32 player)
 {
   s32 random;
@@ -100,7 +100,7 @@ void func_80433610_de(s32 player)
           case 1:
 
           case 7:
-            random = Nav_NextRandom();
+            random = GraphU64_NextRandom();
             D_800E54A4->players[player].state = 15;
             D_800E54A4->players[player].profile = (random % 9999999) + 1;
             break;
@@ -136,5 +136,5 @@ void func_80433610_de(s32 player)
 
   }
   while (done == 0);
-  Frontend_RefreshPlayerPanel(player);
+  PAKInterface_RefreshPlayerPanel(player);
 }

@@ -12,7 +12,7 @@
 
 extern f32 func_80273EE4_de(f32, f32, f32);
 
-extern s32 Render_LocatePackSection(s32 arg0, s32 arg1, s32 arg2, s32 *arg3);
+extern s32 SetN64_LocatePackSection(s32 arg0, s32 arg1, s32 arg2, s32 *arg3);
 
 
 extern s32 func_802624D8_de(void *arg0);
@@ -28,7 +28,7 @@ void func_802625F0_de(AnimRef *animationState, f32 framePosition) {
     f32 b_term;
     f32 e_term;
 
-    base = (s16 *)((ResidentDataChunk *)Render_GetPackSection(func_8026049C_de(animationState), 0))->data;
+    base = (s16 *)((ResidentDataChunk *)SetN64_GetPackSection(func_8026049C_de(animationState), 0))->data;
     count = (s16)animationState->count;
     nextAngleFrame = count - 1;
     currentAngleFrame = (s32) framePosition;
@@ -54,8 +54,8 @@ s32 func_8026269C_de(void *animationState, s32 resourceTable, s32 resourceGroup,
         return 0;
     }
 
-    key = Render_LocatePackSection(resourceTable, resourceGroup, animationId, &resourceBytes);
-    resource = Scene_RequestResource(0, key, key, resourceBytes, 4, animationState,
+    key = SetN64_LocatePackSection(resourceTable, resourceGroup, animationId, &resourceBytes);
+    resource = Cache_RequestResource(0, key, key, resourceBytes, 4, animationState,
                             &D_0025F56C, g_animationText, 0);
     out->data = resource;
     if (!func_802624D8_de(animationState)) {
@@ -63,12 +63,12 @@ s32 func_8026269C_de(void *animationState, s32 resourceTable, s32 resourceGroup,
     }
 
     resource = func_8026049C_de(animationState);
-    entry = Render_GetPackSection(resource, 0);
+    entry = SetN64_GetPackSection(resource, 0);
     value = entry->unk6;
     out->id = animationId;
     out->count = value;
-    resource = Render_GetPackSection(resource, 3);
-    out->span = ((ResourceEntry *)Render_GetPackSection(resource, 0))->unk2;
+    resource = SetN64_GetPackSection(resource, 3);
+    out->span = ((ResourceEntry *)SetN64_GetPackSection(resource, 0))->unk2;
     return 1;
 }
 

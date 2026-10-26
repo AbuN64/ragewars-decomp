@@ -7,8 +7,8 @@
 /* Updates the four player control rows, their visibility, and the selected player label. */
 extern s32 Control_IsControllerConnected(s32);
 extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
-extern struct Shared_Item *Menu_GetSlotValue(void *, s32);
-void Frontend_UpdatePlayerControlRows(s32 player) {
+extern struct Shared_Item *SmpOverlay_GetSlotValue(void *, s32);
+void PAKInterface_UpdatePlayerControlRows(s32 player) {
     struct Shared_Item *item;
     struct func_8028469C_S2 *label;
     u16 id;
@@ -70,7 +70,7 @@ void Frontend_UpdatePlayerControlRows(s32 player) {
             Frontend_SetWidgetFlag100(item, 1);
         }
         label = item->label;
-        if (player != -1 && item == Menu_GetSlotValue(D_800E54A4->list, player)) {
+        if (player != -1 && item == SmpOverlay_GetSlotValue(D_800E54A4->list, player)) {
             label->unk38 = D_800E54A4->players[player].slots[D_800E54A4->players[player].chosen];
         } else {
             label->unk38 = 0;

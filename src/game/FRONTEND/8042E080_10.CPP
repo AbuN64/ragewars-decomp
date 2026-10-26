@@ -26,11 +26,11 @@ extern u8 g_playerSettings[];
 
 extern void MarkMenuEventHandled(void);
 extern s32 func_8041B810_de(s32, s32);
-extern void Menu_SetSlotValue(s32, s32, s32);
-extern void Frontend_RefreshPlayerPanel(s32);
+extern void SmpOverlay_SetSlotValue(s32, s32, s32);
+extern void PAKInterface_RefreshPlayerPanel(s32);
 extern void func_80434D70_de(s32);
 extern s32 func_80435384_de(s32, s32 *);
-extern s32 Frontend_SavePlayerRecords(s32);
+extern s32 PAKInterface_SavePlayerRecords(s32);
 extern s32 func_80435128_de(s32);
 extern void func_8043599C_de(s32, s32, s32);
 extern void func_804356BC_de(s32);
@@ -42,7 +42,7 @@ extern s32 Pak_DeleteNote(s32, s32);
 extern void Player_InitializeProfile(void *);
 extern void Pak_ProbeStatus(s32);
 extern void func_80433610_de(s32);
-extern void Frontend_RelabelSlotRows(s32);
+extern void PAKInterface_RelabelSlotRows(s32);
 
 
 extern s32 func_80405290_de(s32);
@@ -80,7 +80,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
 #endif
             D_800E54A4->players[p].back = 2;
             D_800E54A4->players[p].state = 2;
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
         case 0x2D1:
@@ -97,7 +97,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             case 5:
             case 6:
                 D_800E54A4->players[p].state = 0xE;
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
                 break;
             case 2:
                 if (D_800E54A4->players[p].host == 1) {
@@ -105,12 +105,12 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 } else {
                     D_800E54A4->players[p].state = 0xE;
                 }
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
                 break;
             case 7:
                 D_800E54A4->players[p].state = 0x1A;
                 D_800E54A4->players[p].next = 1;
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
                 break;
             }
             break;
@@ -133,12 +133,12 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             case 5:
             case 6:
                 D_800E54A4->players[p].state = 0xE;
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
                 break;
             case 7:
                 D_800E54A4->players[p].state = 0x1A;
                 D_800E54A4->players[p].next = 1;
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
                 break;
             case 2:
                 if (D_800E54A4->players[p].host == 1) {
@@ -146,7 +146,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 } else {
                     D_800E54A4->players[p].state = 0xE;
                 }
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
                 break;
             }
             break;
@@ -158,7 +158,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         case 0x2BC:
 #endif
             D_800E54A4->players[p].state = 0x1C;
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
         case 0x2D6:
@@ -169,7 +169,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
 #endif
             D_800E54A4->players[p].back = 2;
             D_800E54A4->players[p].state = 2;
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
         }
         break;
@@ -192,7 +192,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 D_800E54A4->players[p].back = 2;
                 D_800E54A4->players[p].state = 2;
             }
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
         case 0x2C5:
@@ -207,7 +207,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             } else {
                 D_800E54A4->players[p].state = 0xE;
             }
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
         }
         break;
@@ -231,7 +231,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 D_800E54A4->players[p].records[D_800E54A4->players[p].record].setting[3] = settings[0x7A];
                 D_800E54A4->players[p].records[D_800E54A4->players[p].record].setting[4] = settings[0x82];
             }
-            if (Frontend_SavePlayerRecords(p) == 1) {
+            if (PAKInterface_SavePlayerRecords(p) == 1) {
                 switch (D_800E54A4->phase) {
                 case 0:
                     if (func_80435128_de(p) >= 0) {
@@ -250,7 +250,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                     D_800E54A4->players[p].state = 0xD;
                     break;
                 }
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
             }
             break;
 #if defined(VERSION_DE)
@@ -274,7 +274,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 D_800E54A4->players[p].state = 0xD;
                 break;
             }
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
         }
         break;
@@ -308,7 +308,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         } else {
             D_800E54A4->players[p].state = 3;
         }
-        Frontend_RefreshPlayerPanel(p);
+        PAKInterface_RefreshPlayerPanel(p);
         break;
     case 11:
         switch (event) {
@@ -320,7 +320,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         case 0x2D2:
 #endif
             D_800E54A4->players[p].state = 4;
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
         case 0x2D4:
@@ -336,7 +336,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             case 4:
             case 5:
                 D_800E54A4->players[p].state = 0xE;
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
                 break;
             case 2:
                 if (D_800E54A4->players[p].host == 1) {
@@ -344,12 +344,12 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 } else {
                     D_800E54A4->players[p].state = 0xE;
                 }
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
                 break;
             case 7:
                 D_800E54A4->players[p].state = 0x1A;
                 D_800E54A4->players[p].next = 0xB;
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
                 break;
             }
             break;
@@ -382,7 +382,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 D_800E54A4->players[p].state = 0xE;
                 break;
             }
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
         case 0x2E7:
@@ -394,7 +394,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             i = D_800E54A4->players[p].slot;
             if (func_802A05D0_de(D_800E54A4->players[p].names[i].text) > 0) {
                 D_800E54A4->players[p].state = 8;
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
             }
             break;
         }
@@ -423,7 +423,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                     }
                 }
                 D_800E54A4->players[p].state = 4;
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
             } else {
                 Pak_ProbeStatus(p);
                 func_80433610_de(p);
@@ -437,7 +437,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         case 0x2CF:
 #endif
             D_800E54A4->players[p].state = 4;
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
         }
         break;
@@ -456,7 +456,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 Player_InitializeProfile(&((Profile *) D_80102B00)[other]);
             }
             Player_InitializeProfile(&D_800E54A4->players[p].records[i]);
-            if (Frontend_SavePlayerRecords(p) == 1) {
+            if (PAKInterface_SavePlayerRecords(p) == 1) {
                 if (D_800E54A4->players[p].sub == 5) {
                     switch (D_800E54A4->phase) {
                     case 0:
@@ -478,7 +478,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 } else {
                     D_800E54A4->players[p].state = 0xD;
                 }
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
             }
             break;
 #if defined(VERSION_DE)
@@ -489,7 +489,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         case 0x2CC:
 #endif
             D_800E54A4->players[p].state = 0xD;
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
         }
         break;
@@ -504,14 +504,14 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
 #endif
             slot = func_80435128_de(p);
             if (slot >= 0) {
-                Resmgr_CopyBytes(&D_800E54A4->players[p].records[slot],
+                XPlus_CopyBytes(&D_800E54A4->players[p].records[slot],
                                  &D_800E54A4->players[D_800E54A4->links[0].player].records[D_800E54A4->links[0].entry],
                                  0x190);
                 D_800E54A4->players[p].record = slot;
                 D_800E54A4->players[p].records[slot].owner = slot;
                 D_800E54A4->players[p].records[slot].time = D_800E54A4->players[p].profile;
             }
-            if (Frontend_SavePlayerRecords(p) == 1) {
+            if (PAKInterface_SavePlayerRecords(p) == 1) {
                 if (D_800E54A4->phase == 2) {
                     if (D_800E54A4->players[p].host == 1) {
                         func_80434D70_de(p);
@@ -521,7 +521,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 } else {
                     D_800E54A4->players[p].state = 0xD;
                 }
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
             }
             break;
 #if defined(VERSION_DE)
@@ -540,7 +540,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             } else {
                 D_800E54A4->players[p].state = 0xD;
             }
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
         }
         break;
@@ -562,7 +562,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                     D_800E54A4->players[q].state = 2;
                     D_800E54A4->players[q].next = 0xD;
                     D_800E54A4->players[q].sub = 3;
-                    Frontend_RefreshPlayerPanel(q);
+                    PAKInterface_RefreshPlayerPanel(q);
                 }
                 break;
             case 6:
@@ -575,7 +575,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                         D_800E54A4->players[q].state = 2;
                         D_800E54A4->players[q].next = 0xD;
                         D_800E54A4->players[q].sub = sub;
-                        Frontend_RefreshPlayerPanel(q);
+                        PAKInterface_RefreshPlayerPanel(q);
                     }
                     break;
                 case 7:
@@ -608,7 +608,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 }
                 break;
             }
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
         }
         i = 0;
@@ -649,7 +649,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 func_8043599C_de(p, i, 0);
                 D_800E54A4->players[p].choice = i;
                 D_800E54A4->players[p].state = 0x1B;
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
             }
             break;
         case 6:
@@ -658,7 +658,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 if (D_800E54A4->players[p].used[i] == 1) {
                     D_800E54A4->players[p].choice = i;
                     D_800E54A4->players[p].state = 0x16;
-                    Frontend_RefreshPlayerPanel(p);
+                    PAKInterface_RefreshPlayerPanel(p);
                 }
                 break;
             case 7:
@@ -680,7 +680,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 if (D_800E54A4->players[p].used[i] != 2) {
                     D_800E54A4->players[p].choice = i;
                     D_800E54A4->players[p].state = 7;
-                    Frontend_RefreshPlayerPanel(p);
+                    PAKInterface_RefreshPlayerPanel(p);
                 }
                 break;
             }
@@ -747,9 +747,9 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         D_800E54A4->players[p].used[D_800E54A4->players[p].choice] = 0;
         D_800E54A4->links[i].state = 0;
         D_800E54A4->players[p].port = i;
-        Frontend_RelabelSlotRows(p);
+        PAKInterface_RelabelSlotRows(p);
         D_800E54A4->players[p].state = 0xD;
-        Frontend_RefreshPlayerPanel(p);
+        PAKInterface_RefreshPlayerPanel(p);
         break;
     case 27:
         switch (event) {
@@ -800,16 +800,16 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             break;
         }
         if (i != p) {
-            Menu_SetSlotValue(D_800E54A4->root, p, 1);
+            SmpOverlay_SetSlotValue(D_800E54A4->root, p, 1);
             D_800E54A4->players[i].back = 2;
             D_800E54A4->players[i].state = 2;
             D_800E54A4->players[i].next = 9;
             D_800E54A4->players[i].sub = 3;
             D_800E54A4->players[i].host = 1;
-            Frontend_RefreshPlayerPanel(i);
+            PAKInterface_RefreshPlayerPanel(i);
         } else {
             D_800E54A4->players[p].state = 9;
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
         }
         break;
     case 6:
@@ -822,7 +822,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         case 0x2E9:
 #endif
             D_800E54A4->players[p].state = 0xE;
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
         case 0x2AF:
@@ -832,9 +832,9 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         case 0x2E8:
 #endif
             func_80434B08_de(p);
-            if (Frontend_SavePlayerRecords(p) == 1) {
+            if (PAKInterface_SavePlayerRecords(p) == 1) {
                 D_800E54A4->players[p].state = 0xE;
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
             }
             break;
         }
@@ -856,7 +856,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             case 4:
             case 5:
                 D_800E54A4->players[p].state = 0xE;
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
                 break;
             }
             break;
@@ -869,7 +869,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
 #endif
             D_800E54A4->players[p].back = 2;
             D_800E54A4->players[p].state = 2;
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
         }
         break;
@@ -883,7 +883,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         case 0x2AD:
 #endif
             D_800E54A4->players[p].state = 0xC;
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
         case 0x2B9:
@@ -898,7 +898,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             } else {
                 D_800E54A4->players[p].state = 0xE;
             }
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
         }
         break;
@@ -913,7 +913,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
 #endif
             D_800E54A4->players[p].state = 0xD;
             D_800E54A4->players[p].sub = 5;
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
         case 0x2BD:
@@ -927,7 +927,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             } else {
                 D_800E54A4->players[p].state = 0xE;
             }
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
         }
         break;
@@ -944,7 +944,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             } else {
                 D_800E54A4->players[p].state = 0xE;
             }
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
         }
         break;
     case 26:
@@ -960,7 +960,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             D_800E54A4->players[0].state = 2;
             D_800E54A4->players[0].next = 0xD;
             D_800E54A4->players[0].sub = 6;
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
 #if defined(VERSION_DE)
         case 0x2C1:
@@ -985,7 +985,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         case 0x2A2:
             D_800E54A4->players[p].back = 2;
             D_800E54A4->players[p].state = 2;
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
         case 0x2A3:
 #elif defined(VERSION_EU_X)
@@ -994,24 +994,24 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         case 0x2DF:
             D_800E54A4->players[p].back = 2;
             D_800E54A4->players[p].state = 2;
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
         case 0x2E0:
 #endif
             if (func_80405290_de(p) != 0) {
                 D_800E54A4->players[p].state = 0x1D;
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
             } else {
                 D_800E54A4->players[p].back = 2;
                 D_800E54A4->players[p].state = 2;
-                Frontend_RefreshPlayerPanel(p);
+                PAKInterface_RefreshPlayerPanel(p);
             }
             break;
 #if defined(VERSION_EU_X)
         case 0x2CF:
             D_800E54A4->players[p].back = 2;
             D_800E54A4->players[p].state = 2;
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
             break;
 #else
 #endif
@@ -1031,7 +1031,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
 #endif
             D_800E54A4->players[p].back = 2;
             D_800E54A4->players[p].state = 2;
-            Frontend_RefreshPlayerPanel(p);
+            PAKInterface_RefreshPlayerPanel(p);
         }
         break;
     }

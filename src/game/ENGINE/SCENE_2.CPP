@@ -6,14 +6,14 @@
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-/* Spawns an entity through Actors_DispatchTrigger when its bit is set in the current level's placement mask and it either names no flag or its flag in the global flag table D_8011FF08 is clear. */
+/* Spawns an entity through Link_DispatchTrigger when its bit is set in the current level's placement mask and it either names no flag or its flag in the global flag table D_8011FF08 is clear. */
 
 
 
 
 
 extern s32 func_8028FDF8_de(void *table, s32 index);
-extern void Actors_DispatchTrigger(Entity *entity);
+extern void Link_DispatchTrigger(Entity *entity);
 
 void func_8028787C_de(World_func_8028787C_de *world, Entity *entity) {
     s32 index;
@@ -26,21 +26,21 @@ void func_8028787C_de(World_func_8028787C_de *world, Entity *entity) {
 
     index = entity->index;
     level = world->level;
-    mask = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(world->levels, 0), level), 2);
-    Render_GetPackSection(mask, 0);
+    mask = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(world->levels, 0), level), 2);
+    SetN64_GetPackSection(mask, 0);
     func_8028FDF8_de(mask, 1);
-    bits = Render_GetPackSection(mask, 1);
+    bits = SetN64_GetPackSection(mask, 1);
     bit = 1 << (index & 7);
     if (bits[index / 8] & bit) {
         if (entity->flag != 0) {
             flag = entity->flag;
-            flags = Render_GetPackSection(g_world.bitSections, 1);
-            Render_GetPackSection(flags, 0);
-            if (((unsigned char *)Render_GetPackSection(flags, 1))[flag] != 0) {
+            flags = SetN64_GetPackSection(g_world.bitSections, 1);
+            SetN64_GetPackSection(flags, 0);
+            if (((unsigned char *)SetN64_GetPackSection(flags, 1))[flag] != 0) {
                 return;
             }
         }
-        Actors_DispatchTrigger(entity);
+        Link_DispatchTrigger(entity);
     }
 }
 
@@ -96,17 +96,17 @@ typedef struct LightVolumeRecord {
 } LightVolumeRecord;
 
 extern s32 func_8028FDF8_de(void *table, s32 index);
-extern s32 Render_GetPackSize(void *table);
-extern s32 Render_GetDirectoryEntry(s32 *directory, s32 bank, s32 type);
-extern void *Scene_AllocResourceBlock(s32 pool, void *handle, s32 size);
-extern void Scene_ReplaceResourceBlock(s32 pool, void *handle, void *block);
-extern void Render_TransposeRecords(void *src, void *dst, s32 arg2);
+extern s32 SetN64_GetPackSize(void *table);
+extern s32 SetN64_GetDirectoryEntry(s32 *directory, s32 bank, s32 type);
+extern void *Cache_AllocResourceBlock(s32 pool, void *handle, s32 size);
+extern void Cache_ReplaceResourceBlock(s32 pool, void *handle, void *block);
+extern void SetN64_TransposeRecords(void *src, void *dst, s32 arg2);
 extern void func_802BD3A0_de(void *dst, void *src, s32 size);
 extern void StaticInstance_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing);
 extern void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments);
 extern void World_InitSimpleInstance(SimpleInstance *instance, SimpleInstanceRecord *record, s32 owner, char *segments);
-extern void Anim_DecodeBoxTransform(ObjectRecAtBC *volume, LightVolumeRecord *record);
-extern f32 Particle_GetActorHeight(void *);
+extern void Lighting_DecodeBoxTransform(ObjectRecAtBC *volume, LightVolumeRecord *record);
+extern f32 GameObject_GetActorHeight(void *);
 
 #define ALIGN8(size) (((size) + 7) & ~7)
 
@@ -123,10 +123,10 @@ static inline s32 Engine_TestInstanceBit(Shared_World *world, SimpleInstance *in
     index = instance->id;
     sections = world->bitSections;
     level = world->level;
-    mask = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(sections, 0), level), 1);
-    Render_GetPackSection(mask, 0);
+    mask = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(sections, 0), level), 1);
+    SetN64_GetPackSection(mask, 0);
     func_8028FDF8_de(mask, 1);
-    bits = Render_GetPackSection(mask, 1);
+    bits = SetN64_GetPackSection(mask, 1);
     bit = 1 << (index & 7);
     return (bits[index / 8] & bit) != 0;
 }
@@ -134,7 +134,7 @@ static inline s32 Engine_TestInstanceBit(Shared_World *world, SimpleInstance *in
 /* Builds a level's placed instances into one pool block of five sections: props (efficient then static records),
  * simple instances (flagged when the level's instance mask has their bit), light volumes, and a copy of the bit set.
  * Each simple instance then takes its lighting from the volumes at half its actor height. */
-void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
+void Scene_BuildPlacedInstances(Shared_World *world, void ***handle) {
     ObjectRecAtBC *volumeList[128];
     CVector3 position;
     BlockSet *bitSet;
@@ -170,22 +170,22 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
     ObjectRecAtBC *volumes;
     void *objects;
 
-    if (Render_UnpackResource(handle, 1) != 0) {
+    if (PpDecom_UnpackResource(handle, 1) != 0) {
         source = **handle;
-        efficientSet = Render_GetPackSection(source, 0);
+        efficientSet = SetN64_GetPackSection(source, 0);
         efficientCount = efficientSet->count;
-        staticSet = Render_GetPackSection(source, 1);
+        staticSet = SetN64_GetPackSection(source, 1);
         staticCount = staticSet->count;
         staticSize = ALIGN8((efficientCount + staticCount) * sizeof(PlacedProp) + sizeof(RecordSet));
-        simpleSet = Render_GetPackSection(source, 2);
+        simpleSet = SetN64_GetPackSection(source, 2);
         simpleCount = simpleSet->count;
         simpleSize = ALIGN8(simpleCount * sizeof(SimpleInstance) + sizeof(RecordSet));
-        volumeSet = Render_GetPackSection(source, 3);
+        volumeSet = SetN64_GetPackSection(source, 3);
         volumeCount = volumeSet->count;
         volumeSize = ALIGN8(volumeCount * sizeof(ObjectRecAtBC) + sizeof(RecordSet));
-        bitSet = Render_GetPackSection(source, 4);
+        bitSet = SetN64_GetPackSection(source, 4);
         bitSize = ALIGN8(bitSet->count * sizeof(s32) + sizeof(RecordSet));
-        block = Scene_AllocResourceBlock(0, handle, staticSize + 0x18 + simpleSize + volumeSize + bitSize);
+        block = Cache_AllocResourceBlock(0, handle, staticSize + 0x18 + simpleSize + volumeSize + bitSize);
         if (block != 0) {
             n = 0;
             offset = 0x18;
@@ -193,38 +193,38 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
             dst = (char *)blocks + offset;
             blocks->count = n++;
             blocks->offsets[blocks->count] = offset;
-            Render_TransposeRecords(efficientSet, dst, 1);
-            Render_TransposeRecords(staticSet, dst, 1);
+            SetN64_TransposeRecords(efficientSet, dst, 1);
+            SetN64_TransposeRecords(staticSet, dst, 1);
             ((RecordSet *)dst)->size = sizeof(PlacedProp);
             ((RecordSet *)dst)->count = efficientCount + staticCount;
             efficient = (RecordRecAt1A *)(efficientSet + 1);
-            objects = Render_GetPackSection(world->modelSections, 2);
+            objects = SetN64_GetPackSection(world->modelSections, 2);
             statics = (PlacedPropRecord *)(staticSet + 1);
             props = (PlacedProp *)(dst + 8);
             base = (char *)blocks;
             segments = (char *)objects + 8;
             for (i = 0; i < efficientCount; i++) {
                 StaticInstance_InitializePlacedProp(&props[i], &efficient[i],
-                                 Render_GetDirectoryEntry(world->indexedDirectory, world->indexedBank, efficient[i].id),
+                                 SetN64_GetDirectoryEntry(world->indexedDirectory, world->indexedBank, efficient[i].id),
                                  segments, world->levelInfo->m_GridDistance);
             }
             for (j = 0; j < staticCount; j++) {
                 World_InitPlacedProp(&props[j + efficientCount], &statics[j],
-                                 Render_GetDirectoryEntry(world->indexedDirectory, world->indexedBank, statics[j].id),
+                                 SetN64_GetDirectoryEntry(world->indexedDirectory, world->indexedBank, statics[j].id),
                                  segments);
             }
 
             offset += staticSize;
             blocks->count = n++;
             blocks->offsets[blocks->count] = offset;
-            Render_TransposeRecords(simpleSet, base + offset, 1);
+            SetN64_TransposeRecords(simpleSet, base + offset, 1);
             ((RecordSet *)(base + offset))->size = sizeof(SimpleInstance);
             ((RecordSet *)(base + offset))->count = simpleCount;
             simpleRecords = (SimpleInstanceRecord *)(simpleSet + 1);
             simples = (SimpleInstance *)(base + offset + 8);
             for (k = 0; k < simpleCount; k++) {
                 World_InitSimpleInstance(&simples[k], &simpleRecords[k],
-                                 Render_GetDirectoryEntry(world->indexedDirectory, world->indexedBank, simpleRecords[k].type),
+                                 SetN64_GetDirectoryEntry(world->indexedDirectory, world->indexedBank, simpleRecords[k].type),
                                  segments);
                 if (Engine_TestInstanceBit(world, &simples[k])) {
                     simples[k].flags |= 1;
@@ -234,19 +234,19 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
             offset += simpleSize;
             blocks->count = n++;
             blocks->offsets[blocks->count] = offset;
-            Render_TransposeRecords(volumeSet, base + offset, 1);
+            SetN64_TransposeRecords(volumeSet, base + offset, 1);
             ((RecordSet *)(base + offset))->size = sizeof(ObjectRecAtBC);
             ((RecordSet *)(base + offset))->count = volumeCount;
             volumeRecords = (LightVolumeRecord *)(volumeSet + 1);
             volumes = (ObjectRecAtBC *)(base + offset + 8);
             for (i = 0; i < volumeCount; i++) {
-                Anim_DecodeBoxTransform(&volumes[i], &volumeRecords[i]);
+                Lighting_DecodeBoxTransform(&volumes[i], &volumeRecords[i]);
             }
 
             offset += volumeSize;
             blocks->count = n++;
             blocks->offsets[blocks->count] = offset;
-            func_802BD3A0_de(base + offset, bitSet, Render_GetPackSize(bitSet));
+            func_802BD3A0_de(base + offset, bitSet, SetN64_GetPackSize(bitSet));
 
             blocks->count = n++;
             offset += bitSize;
@@ -257,12 +257,12 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
             }
             for (k = 0; k < simpleCount; k++) {
                 position.x = simples[k].position.x;
-                position.y = simples[k].position.y + Particle_GetActorHeight(&simples[k]) * 0.5f;
+                position.y = simples[k].position.y + GameObject_GetActorHeight(&simples[k]) * 0.5f;
                 position.z = simples[k].position.z;
-                Engine_SampleVolumeLighting(volumeList, volumeCount, &position, &simples[k].light);
+                Scene_SampleVolumeLighting(volumeList, volumeCount, &position, &simples[k].light);
             }
         }
-        Scene_ReplaceResourceBlock(0, handle, block);
+        Cache_ReplaceResourceBlock(0, handle, block);
     }
 }
 
@@ -276,12 +276,12 @@ extern Shared_MenuData D_80145040;
 extern Box D_801031F0;
 extern s32 D_800CD6E0_de;
 extern f32 D_800C520C;
-extern s32 Camera_IsSequenceInWindow(void);
+extern s32 Cinema_IsSequenceInWindow(void);
 extern void func_8022A1FC_de(void *pool, void *world);
 extern s32 func_8024D160_de(void *actor);
 extern s32 func_8024E1B4_de(void *actor);
 extern void func_8024B8C4_de(void *actor);
-extern f32 Camera_GetDistanceTo(void *camera, CVector3 *position);
+extern f32 Sky_GetDistanceTo(void *camera, CVector3 *position);
 extern s32 func_80296B74_de(void *planes, void *bounds);
 extern void AnimPool_UpdateSceneEffects(struct SceneEffectPool *scene, void *world);
 
@@ -303,7 +303,7 @@ typedef struct SceneVisibilitySettings {
  * per-model actors from the actors that are visible this frame (inside the clip box and the camera frustum, or within
  * range for kind 14), copies each actor's visible bit into bit 15 of its flags, then culls the scene's effects. */
 
-void Engine_UpdateActorVisibility(Shared_World *world) {
+void Scene_UpdateActorVisibility(Shared_World *world) {
     SceneVisibilitySettings *settings;
     LevelActor *actors;
     LevelActor *actor;
@@ -328,7 +328,7 @@ void Engine_UpdateActorVisibility(Shared_World *world) {
         camera = *(GameplayCamera **)((u8 *)settings - 0x1228);
     }
     cull = 0;
-    if (Camera_IsSequenceInWindow() == 0) {
+    if (Cinema_IsSequenceInWindow() == 0) {
         cull = world->visibilityEnabled == 0;
     }
     i = world->actorCapacity;
@@ -362,7 +362,7 @@ void Engine_UpdateActorVisibility(Shared_World *world) {
             }
             if (definition->kind == 14) {
             distance_visible:
-                if (Camera_GetDistanceTo(camera, &actor->position0) < D_800C520C) {
+                if (Sky_GetDistanceTo(camera, &actor->position0) < D_800C520C) {
                     visible = 1;
                 }
             } else {
@@ -370,7 +370,7 @@ void Engine_UpdateActorVisibility(Shared_World *world) {
             }
         }
     visibility_ready:
-        if (Camera_IsSequenceInWindow() && D_800CD6E0_de) {
+        if (Cinema_IsSequenceInWindow() && D_800CD6E0_de) {
             if (!(definition->gate & 0x200)) {
                 visible = 0;
             }

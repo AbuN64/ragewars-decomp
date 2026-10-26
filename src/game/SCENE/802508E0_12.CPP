@@ -23,7 +23,7 @@ extern void func_80254AD0_de(s32 arg0, s32 arg1);
 
 /** Read the global word at VRAM 0x8010513C. */
 
-struct Shape_typemap_165 *Scene_AllocResourceBlock(s32 arg0, void *handle, s32 total) {
+struct Shape_typemap_165 *Cache_AllocResourceBlock(s32 arg0, void *handle, s32 total) {
     struct Shape_typemap_165 *node;
     s32 result;
     s32 counter;

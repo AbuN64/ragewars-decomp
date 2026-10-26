@@ -33,7 +33,7 @@ extern u8 func_8025E548_de(void *);
 extern s16 func_8025E578_de(void *);
 
 
-/* Services the pending glyph requests of a text cache: each request still counting down its delay is ticked and, when it reaches zero, stamped with the current frame and the next sequence number; a request older than sixteen frames is moved to the done list, otherwise it reserves a cell for its glyph and a texture for its bitmap, stopping when none is free, copies itself into the cell, uploads the cell through Texture_UpdateSoundSlot and moves to the done list. The slot address is written as the doubled slot plus the table address because the cartridge adds the scaled index first; array indexing puts the table first (1 word). */
+/* Services the pending glyph requests of a text cache: each request still counting down its delay is ticked and, when it reaches zero, stamped with the current frame and the next sequence number; a request older than sixteen frames is moved to the done list, otherwise it reserves a cell for its glyph and a texture for its bitmap, stopping when none is free, copies itself into the cell, uploads the cell through Audio_UpdateSoundSlot and moves to the done list. The slot address is written as the doubled slot plus the table address because the cartridge adds the scaled index first; array indexing puts the table first (1 word). */
 
 
 
@@ -56,7 +56,7 @@ extern s16 func_802B2510_de(char *, s32);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
-extern void Texture_UpdateSoundSlot(ContextCode802591C0 *, s32, s32, char *);
+extern void Audio_UpdateSoundSlot(ContextCode802591C0 *, s32, s32, char *);
 
 static inline void append(ListHead *head, Entry_func_80259440_de *entry) {
     entry->prev = head->prev;
@@ -149,7 +149,7 @@ void func_80259440_de(Cache *cache) {
             append(&cache->done, entry);
             continue;
         }
-        slot = Audio_SelectVoiceSlot((struct RecordD90 *)cache->context->cells, entry->style, entry->font, entry->glyph, 0);
+        slot = Channel_SelectVoiceSlot((struct RecordD90 *)cache->context->cells, entry->style, entry->font, entry->glyph, 0);
         if (slot == -1 || slot == 16) {
             break;
         }
@@ -168,7 +168,7 @@ void func_80259440_de(Cache *cache) {
         cell->texture = *cursor;
         cell->frame = cache->context->frame;
         cell->index = slot;
-        Texture_UpdateSoundSlot(cache->context, cell->sequence, 0, cell->data);
+        Audio_UpdateSoundSlot(cache->context, cell->sequence, 0, cell->data);
         entry->sequence = free;
         entry->glyph = free;
         entry->prev->next = entry->next;

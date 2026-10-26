@@ -3,7 +3,7 @@
 #include "COMMON/REC.H"
 #include "WORLD/INTEGERSTATE170.H"
 
-extern void Render_BuildPlayerMatrix(void *arg0, void *arg1);
+extern void Device_BuildPlayerMatrix(void *arg0, void *arg1);
 extern void func_80207A90_de(void *arg0, s32 *arg1);
 
 extern void func_80207EEC_de(void *arg0);

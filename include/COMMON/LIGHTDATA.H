@@ -42,7 +42,7 @@ typedef struct LightNode LightNode;
 
 extern float D_800C43A0_de;
 
-extern f32 System_CosineEase(f32 arg0);
+extern f32 Defs_CosineEase(f32 arg0);
 
 extern void func_802658DC_de(void);
 #endif

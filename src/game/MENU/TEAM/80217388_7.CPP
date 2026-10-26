@@ -37,7 +37,7 @@ void func_8021836C_de(CBarrel *menu) {
 void func_802183E8_de(s32 menu, s32 arg1, s32 player) {
     Gfx *cmd;
 
-    Text_SetupSpriteMode(0xFF);
+    OnScreen_SetupSpriteMode(0xFF);
     gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
     func_80217928_de((CBarrel *)menu, arg1, player);
 }

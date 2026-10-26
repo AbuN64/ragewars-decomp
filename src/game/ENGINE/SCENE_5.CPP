@@ -16,7 +16,7 @@
 
 /* Collects up to 10 light volumes holding a point from the world sector whose x/z extent holds it, returning their
  * count through total (0 outside every sector). */
-void Engine_FindLightVolumes(Shared_World *world, CVector3 *point, ObjectRecAtBC **volumes, s32 *total) {
+void Scene_FindLightVolumes(Shared_World *world, CVector3 *point, ObjectRecAtBC **volumes, s32 *total) {
     WorldSector *sector;
     s32 i, found, sectorCount, volumeCount;
     f32 x, z;
@@ -37,7 +37,7 @@ void Engine_FindLightVolumes(Shared_World *world, CVector3 *point, ObjectRecAtBC
     if (sector == 0) {
         *total = 0;
     } else {
-        list = Render_GetPackSection(sector->resource->pack, 2);
+        list = SetN64_GetPackSection(sector->resource->pack, 2);
         volumeCount = list->count;
         base = list->volumes;
         for (i = 0; i < volumeCount; i++) {
@@ -59,10 +59,10 @@ void Engine_FindLightVolumes(Shared_World *world, CVector3 *point, ObjectRecAtBC
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 extern s32 func_80277128_de(ObjectRecAtBC *, f32, f32, f32, CVector3 *, f32 *);
-extern void Particle_ProjectPoint(void *, CVector3 *, CVector3 *);
+extern void GraphU64_ProjectPoint(void *, CVector3 *, CVector3 *);
 extern f32 func_80278890_de(void *);
 static inline f32 sampleDot(CVector3 *a, f32 *b, s32 index) { f32 *d=b+index+128; return a->x*d[0] + a->y*d[1] + a->z*d[2]; }
-void Engine_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *position, Shared_ParticleLighting *lighting) {
+void Scene_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *position, Shared_ParticleLighting *lighting) {
     Shared_Game *settings;
     /* The first 128 floats are weights; the remaining 384 hold XYZ directions. */
     f32 samples[512];
@@ -136,39 +136,39 @@ void Engine_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *p
         do {
             sampleDirection = directions + sampleIndex * 3;
             volume = volumes[sampleIndex];
-            Particle_TransformPoint(volume->inverse, position, &transformed);
+            GraphU64_TransformPoint(volume->inverse, position, &transformed);
             if (func_80277128_de(volume, transformed.x, transformed.y, transformed.z, &localDirection, &weights[sampleIndex]) != 0) {
-                Particle_AddVec3(&translatedDirection, &localDirection, &transformed);
-                Particle_ProjectPoint(volume->transform, &translatedDirection, &localDirection);
-                Particle_SubtractVectors(sampleDirection, position, &localDirection);
-                Particle_NormalizeVec3(sampleDirection);
+                GraphU64_AddVec3(&translatedDirection, &localDirection, &transformed);
+                GraphU64_ProjectPoint(volume->transform, &translatedDirection, &localDirection);
+                GraphU64_SubtractVectors(sampleDirection, position, &localDirection);
+                GraphU64_NormalizeVec3(sampleDirection);
                 color = volume->direction;
                 if (volume->animatedLight != 0) {
                     level = func_80278890_de(volume);
                     animationColor.x = level;
                     animationColor.y = level;
                     animationColor.z = level;
-                    Particle_ScaleVector(&contribution, &animationColor, weights[sampleIndex] * volume->value);
+                    GraphU64_ScaleVector(&contribution, &animationColor, weights[sampleIndex] * volume->value);
                     animatedVolume = volume;
                     if (volume->flagB8 != 0) {
-                        Particle_ScaleVector(&contribution, &contribution, -1.0f);
+                        GraphU64_ScaleVector(&contribution, &contribution, -1.0f);
                     }
-                    Particle_AddVec3(&ambient, &ambient, &contribution);
+                    GraphU64_AddVec3(&ambient, &ambient, &contribution);
                 }
                 amount = volume->value * 0.5f;
                 scale = 1.0f - amount;
-                Particle_ScaleVector(&contribution, &color, weights[sampleIndex] * amount);
+                GraphU64_ScaleVector(&contribution, &color, weights[sampleIndex] * amount);
                 if (volume->flagB8 != 0) {
-                    Particle_ScaleVector(&contribution, &contribution, -1.0f);
+                    GraphU64_ScaleVector(&contribution, &contribution, -1.0f);
                 }
-                Particle_AddVec3(&ambient, &ambient, &contribution);
+                GraphU64_AddVec3(&ambient, &ambient, &contribution);
                 weights[sampleIndex] *= scale;
                 amount = color.x; if (amount < 0.0f) amount = -amount;
                 if (color.y < 0.0f) amount = amount - color.y; else amount = amount + color.y;
                 if (color.z < 0.0f) scale = amount - color.z; else scale = amount + color.z;
-                Particle_ScaleVector(&contribution, sampleDirection, weights[sampleIndex]);
-                Particle_ScaleVector(&contribution, &contribution, scale);
-                Particle_AddVec3(&combinedDirection, &combinedDirection, &contribution);
+                GraphU64_ScaleVector(&contribution, sampleDirection, weights[sampleIndex]);
+                GraphU64_ScaleVector(&contribution, &contribution, scale);
+                GraphU64_AddVec3(&combinedDirection, &combinedDirection, &contribution);
                 if (volume->flagB8 != 0) {
                     weights[sampleIndex] = -weights[sampleIndex];
                 }
@@ -184,7 +184,7 @@ void Engine_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *p
 
         } while (sampleIndex < count);
     }
-    Particle_NormalizeVec3(&combinedDirection);
+    GraphU64_NormalizeVec3(&combinedDirection);
     sampleIndex = 0;
     if (sampleIndex < count) {
         one = 1.0f;
@@ -201,22 +201,22 @@ void Engine_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *p
                 animationColor.x = pulse;
                 animationColor.y = pulse;
                 animationColor.z = pulse;
-                Particle_ScaleVector(&animatedContribution, &animationColor, scale * samples[sampleIndex]);
-                Particle_AddVec3(&diffuse, &diffuse, &animatedContribution);
-                Particle_ScaleVector(&animatedContribution, &animationColor, backScale * samples[sampleIndex]);
-                Particle_AddVec3(&backLight, &backLight, &animatedContribution);
+                GraphU64_ScaleVector(&animatedContribution, &animationColor, scale * samples[sampleIndex]);
+                GraphU64_AddVec3(&diffuse, &diffuse, &animatedContribution);
+                GraphU64_ScaleVector(&animatedContribution, &animationColor, backScale * samples[sampleIndex]);
+                GraphU64_AddVec3(&backLight, &backLight, &animatedContribution);
             }
-            Particle_ScaleVector(&contribution, &color, scale * samples[sampleIndex]);
-            Particle_AddVec3(&diffuse, &diffuse, &contribution);
+            GraphU64_ScaleVector(&contribution, &color, scale * samples[sampleIndex]);
+            GraphU64_AddVec3(&diffuse, &diffuse, &contribution);
 
 
-            Particle_ScaleVector(&contribution, &color, backScale * samples[sampleIndex]);
-            Particle_AddVec3(&backLight, &backLight, &contribution);
+            GraphU64_ScaleVector(&contribution, &color, backScale * samples[sampleIndex]);
+            GraphU64_AddVec3(&backLight, &backLight, &contribution);
             sampleIndex++;
         } while (sampleIndex < count);
     }
-    Particle_ScaleVector(&backLight, &backLight, 0.5f);
-    Particle_AddVec3(&ambient, &ambient, &backLight);
+    GraphU64_ScaleVector(&backLight, &backLight, 0.5f);
+    GraphU64_AddVec3(&ambient, &ambient, &backLight);
     if (ambient.x < 0.0f) {
         diffuse.x += ambient.x;
     }
@@ -270,7 +270,7 @@ void Engine_SampleVolumeLighting(ObjectRecAtBC **volumes, s32 count, CVector3 *p
 #include "COMMON/OBJECTLINKS180_2.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/LEVEL_ACTOR.H"
-s32 Level_ShowTriggerMessage(void *, void *, void *);
+s32 Action_ShowTriggerMessage(void *, void *, void *);
 typedef struct SceneTriggerDefinition {
     ActorDefinitionHeader header;
     char pad18[8];
@@ -317,8 +317,8 @@ void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVecto
     kind = actor->definition->kind;
     isKindB = kind == 0xB;
     isKind1 = kind == 1;
-    bottom = actor->position0.y + Sound_GetActorBaseOffset(actor);
-    top = bottom + Particle_GetActorHeight(actor);
+    bottom = actor->position0.y + InstHdr_GetActorBaseOffset(actor);
+    top = bottom + GameObject_GetActorHeight(actor);
     for (i = 0; i < world->flaggedCount; i++) {
         trigger = world->flagged[i];
         if (trigger == actor) {
@@ -326,8 +326,8 @@ void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVecto
         }
         ring = 0;
         checkHeight = 0;
-        triggerBottom = trigger->position0.y + Sound_GetActorBaseOffset(trigger);
-        triggerTop = triggerBottom + Particle_GetActorHeight(trigger);
+        triggerBottom = trigger->position0.y + InstHdr_GetActorBaseOffset(trigger);
+        triggerTop = triggerBottom + GameObject_GetActorHeight(trigger);
         definition = (SceneTriggerDefinition *)trigger->definition;
         switch (definition->header.kind) {
         case 6:
@@ -410,7 +410,7 @@ void Scene_UpdateMovementTriggers(Shared_World *world, LevelActor *actor, CVecto
                 }
                 if (hit) {
                     if (trigger->definition->kind == 10 && enterMode == 1) {
-                        hit = Level_ShowTriggerMessage(trigger, &trigger->behaviorFlags, actor);
+                        hit = Action_ShowTriggerMessage(trigger, &trigger->behaviorFlags, actor);
                     }
                     if (hit) {
                         Weapons_RequestActorState(trigger, &trigger->behaviorFlags, enterMode);
@@ -453,7 +453,7 @@ extern u8 *D_800D3A9C;
 extern void func_804037D4_de(void), func_804030E0_de(s32);
 extern s32 func_802934F8_de(void);
 extern void func_80286AA8_de(void *, s32, s32);
-extern struct CCameraText_t *Camera_PostScaledScreenMessage(void *, void *, u8 *, f32);
+extern struct CCameraText_t *Sky_PostScaledScreenMessage(void *, void *, u8 *, f32);
 static inline s32 transitionId(Shared_World *scene) {
     if (scene->selectionFlags != 0) return scene->selectionSpawn.kind;
     return scene->selectionValues[1];
@@ -472,16 +472,16 @@ void Scene_UpdateSelectionTransition(Shared_World *scene)
             if (scene->selectionState == 0) scene->frozen = 0;
             else scene->frozen = 2;
             if (scene->selectionValues[1] < 0) { scene->selectionValues[1] = ~scene->selectionValues[1]; scene->selectionFlags = 0; }
-            else scene->selectionFlags = Items_FindPlacedObjectsByKey(scene, -1, scene->selectionValues[1], &scene->selectionSpawn, 1);
+            else scene->selectionFlags = OvlScene_FindPlacedObjectsByKey(scene, -1, scene->selectionValues[1], &scene->selectionSpawn, 1);
             scene->selectionValues[0] = scene->selectionValues[1];
             id = transitionId(scene);
             func_80286AA8_de(scene, id, scene->selectionFlags);
             settings = &D_80145088.settings;
             if (scene->previewStart != settings->optionFlags && func_802934F8_de()) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                Camera_PostScaledScreenMessage(&D_80145088, &D_80145088.fallbackCamera, D_800D3A9C[settings->language], 4.0f);
+                Sky_PostScaledScreenMessage(&D_80145088, &D_80145088.fallbackCamera, D_800D3A9C[settings->language], 4.0f);
 #else
-                Camera_PostScaledScreenMessage(&D_80145088, &D_80145088.fallbackCamera, D_800D3A9C, 4.0f);
+                Sky_PostScaledScreenMessage(&D_80145088, &D_80145088.fallbackCamera, D_800D3A9C, 4.0f);
 #endif
                 scene->previewStart = settings->optionFlags;
             }
@@ -505,7 +505,7 @@ void Scene_UpdateSelectionTransition(Shared_World *scene)
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENU_TEXT.H"
 #include "COMMON/RESULTS_TEXT.H"
-extern void Scene_ReleaseResource(s32, void *);
+extern void Cache_ReleaseResource(s32, void *);
 typedef struct ResultsText {
     char *text;
     s32 length;
@@ -532,17 +532,17 @@ extern char *D_800D3304, *D_800D3334, *D_800D3338, *D_800D333C, *D_800D3340, *D_
     *D_800D3354, *D_800D3358, *D_800D335C, *D_800D3360, *D_800D3364, *D_800D3368_de, *D_800D336C,
     *D_800D3370, *D_800D3374, *D_800D3378, *D_800D337C, *D_800D3380, *D_800D3384, *D_800D3388,
     *D_800D338C, *D_800D3390_de, *D_800D3394, *D_800D3398;
-extern void Camera_ClearMessageCount(void);
-extern void Camera_AddMessage(char *);
-extern s32 Render_GetDirectoryEntry(s32 *, s32, s32);
+extern void Cinema_ClearMessageCount(void);
+extern void Cinema_AddMessage(char *);
+extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 extern void *func_80254284_de(s32, void **, s32, void *);
 extern ResultsText *func_80254408_de(s32, void *, s32, s32, void *, s32, void *);
 extern void func_802BD3A0_de(void *, const void *, s32);
 extern s32 func_802A0C08_de(char *, const char *, ...);
 extern u8 Weapons_GetLevelProgress(Profile *, s32);
 extern void func_8028DA74_de(Shared_World *);
-extern void *Scene_RequestResource(s32, u32, u32, u32, u32, s32, void *, const char *, u32);
-extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
+extern void *Cache_RequestResource(s32, u32, u32, u32, u32, s32, void *, const char *, u32);
+extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 extern s32 Frontend_FindKeyIndex(s32);
 static inline void copyLevelName(Shared_World *world, s32 level, char *out, s32 limit) {
     void *handle;
@@ -551,7 +551,7 @@ static inline void copyLevelName(Shared_World *world, s32 level, char *out, s32 
     ResultsText *name;
     s32 length;
 
-    entry = Render_GetDirectoryEntry(world->resourceDirectory, world->resourceBank, level);
+    entry = SetN64_GetDirectoryEntry(world->resourceDirectory, world->resourceBank, level);
     bank = func_80254284_de(0, &handle, entry, g_levelIndexText);
     name = func_80254408_de(0, handle, 8, entry, world, 0, g_levelNameText);
     length = name->length;
@@ -559,9 +559,9 @@ static inline void copyLevelName(Shared_World *world, s32 level, char *out, s32 
         length = limit;
     }
     func_802BD3A0_de(out, name->text, length);
-    Scene_ReleaseResource(0, name);
+    Cache_ReleaseResource(0, name);
     if (world->level != level) {
-        Scene_ReleaseResource(0, bank);
+        Cache_ReleaseResource(0, bank);
     }
 }
 static inline LevelChallenge *findLevelChallenge(Shared_World *world, s32 level) {
@@ -576,13 +576,13 @@ static inline LevelChallenge *findLevelChallenge(Shared_World *world, s32 level)
         if (world->challengeFile != 0) {
             mode = 0x10;
             direct = 1;
-            index = Scene_RequestResource(0, world->challengeFile, world->challengeFile, world->challengeFileSize, mode,
+            index = Cache_RequestResource(0, world->challengeFile, world->challengeFile, world->challengeFileSize, mode,
                                      0, 0, D_800C5290_de, direct);
             if (index != 0) {
-                file = Render_LocatePackSection((s32)*index, world->challengeFile, level, &size);
-                Scene_ReleaseResource(0, index);
+                file = SetN64_LocatePackSection((s32)*index, world->challengeFile, level, &size);
+                Cache_ReleaseResource(0, index);
                 if ((world->resourceHandle =
-                         Scene_RequestResource(0, file, file, size, mode, 0, D_00285160, D_800C52BC, direct)) == 0) {
+                         Cache_RequestResource(0, file, file, size, mode, 0, D_00285160, D_800C52BC, direct)) == 0) {
                     goto missing;
                 }
                 world->resourceKey = level;
@@ -608,9 +608,9 @@ void Scene_ShowResultsGoal(void) {
     LevelChallenge *challenge;
     ResultsHeadingCharacter *character;
 
-    Camera_ClearMessageCount();
+    Cinema_ClearMessageCount();
     copyLevelName(&g_world, D_8015402C, name, 63);
-    Camera_AddMessage(name);
+    Cinema_AddMessage(name);
     if (currentGame()->controllerMode == 0) {
         return;
     }
@@ -671,17 +671,17 @@ void Scene_ShowResultsGoal(void) {
     mode = currentGame()->controllerMode;
     switch (mode) {
     case 1:
-        Camera_AddMessage(goal);
+        Cinema_AddMessage(goal);
         players = (Weapons_GetLevelProgress(D_80102B00, D_80102B00[0].slot) >> 1) + 1;
         if (players < 2) {
             func_802A0C08_de(name, RESULTS_TEXT(D_800D3388, D_800E1874), players);
         } else {
             func_802A0C08_de(name, RESULTS_TEXT(D_800D338C, D_800E1884), players);
         }
-        Camera_AddMessage(name);
+        Cinema_AddMessage(name);
         break;
     case 3:
-        Camera_AddMessage(goal);
+        Cinema_AddMessage(goal);
         if (D_800E4680->timeLimit <= 60) {
             func_802A0C08_de(name, RESULTS_TEXT(D_800D3374, D_800E1824), D_800E4680->timeLimit);
         } else {
@@ -702,31 +702,31 @@ void Scene_ShowResultsGoal(void) {
                 }
             }
         }
-        Camera_AddMessage(name);
+        Cinema_AddMessage(name);
         break;
     case 4:
         challenge = findLevelChallenge(&g_world, D_8015402C);
         character = &RESULTS_CHARACTERS[Frontend_FindKeyIndex(challenge->character)];
         func_802A0C08_de(name, RESULTS_NAME_FORMAT, character->name[RESULTS_LANGUAGE].text);
-        Camera_AddMessage(name);
-        Camera_AddMessage(goal);
+        Cinema_AddMessage(name);
+        Cinema_AddMessage(goal);
         if (D_800E4680->lives < 2) {
             func_802A0C08_de(name, RESULTS_TEXT(D_800D3388, D_800E1874), D_800E4680->lives);
         } else {
             func_802A0C08_de(name, RESULTS_TEXT(D_800D338C, D_800E1884), D_800E4680->lives);
         }
-        Camera_AddMessage(name);
+        Cinema_AddMessage(name);
         break;
     case 2:
-        Camera_AddMessage(goal);
+        Cinema_AddMessage(goal);
         switch (D_8014DD98.kind) {
         case 0:
             break;
         case 1:
-            Camera_AddMessage(RESULTS_TEXT(D_800D3398, D_800E18B4_eu));
+            Cinema_AddMessage(RESULTS_TEXT(D_800D3398, D_800E18B4_eu));
             break;
         case 2:
-            Camera_AddMessage(RESULTS_TEXT(D_800D3398, D_800E18B4_eu));
+            Cinema_AddMessage(RESULTS_TEXT(D_800D3398, D_800E18B4_eu));
             break;
         }
         break;

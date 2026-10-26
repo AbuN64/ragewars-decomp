@@ -57,7 +57,7 @@ static inline f32 decode(u32 *stream, Func802608ECResult range) {
     return result;
 }
 
-extern f32 System_EvaluateAnimationCurve(Stream *stream, f32 time);
+extern f32 PolyTrak_EvaluateAnimationCurve(Stream *stream, f32 time);
 
 /* Opens the next entry of a packed file: finds the last filled slot before the 0xDEADBEEF end marker in the offset table, records the following slot's offset as that slot's offset plus the given size, optionally hands the slot's data to func_802BD3A0_de, and returns a pointer to it. */
 
@@ -104,8 +104,8 @@ void func_8026107C_de(int *bitCursor, int bitCount) {
 }
 
 /** Samples the parsed animation track at the supplied frame time. */
-f32 System_SampleAnimationCurve(Track_func_80261180_de *track, f32 time, s32 unusedFirst, s32 unusedSecond) {
-    return System_EvaluateAnimationCurve((Stream *)track, time);
+f32 PolyTrak_SampleAnimationCurve(Track_func_80261180_de *track, f32 time, s32 unusedFirst, s32 unusedSecond) {
+    return PolyTrak_EvaluateAnimationCurve((Stream *)track, time);
 }
 
 void func_802610A8_de(void *packBuffer, s32 sectionCount) {

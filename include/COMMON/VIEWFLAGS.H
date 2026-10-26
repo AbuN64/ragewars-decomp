@@ -183,12 +183,12 @@ extern float D_800C3528_de;
 
 extern float D_800C3524_de;
 
-extern void Camera_StartFade(void *view, s32 red, s32 green, s32 blue, s32 mode, s32 alpha, s32 duration, s32 delay);
+extern void Sky_StartFade(void *view, s32 red, s32 green, s32 blue, s32 mode, s32 alpha, s32 duration, s32 delay);
 
 
 extern f32 D_800D05D0;
 
 extern Box D_800FF208;
 
-extern s32 Camera_IsSequenceActive(void);
+extern s32 Cinema_IsSequenceActive(void);
 #endif

@@ -36,10 +36,10 @@ void func_8028B670_de(void *arg0, s32 index, s32 arg2, s32 arg3) {
         }
     }
     field80 = ((Shared_World *)arg0)->bitSections;
-    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(field80, 0), (s32) index), 0);
-    Render_GetPackSection(table, 0);
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), (s32) index), 0);
+    SetN64_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    base1 = (u8 *) Render_GetPackSection(table, 1);
+    base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (arg2 & 7);
     if (arg3 != 0) {
@@ -65,10 +65,10 @@ void func_8028B7B4_de(Field_void_80 *arg0, s32 index, s32 arg2, s32 arg3) {
     s32 idx;
     s32 idx2;
 
-    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(arg0->value, 0), index), 1);
-    Render_GetPackSection(table, 0);
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(arg0->value, 0), index), 1);
+    SetN64_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    base1 = (u8 *) Render_GetPackSection(table, 1);
+    base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (arg2 & 7);
     if (arg3 != 0) {
@@ -100,10 +100,10 @@ void func_8028B898_de(void *arg0, struct LevelBitRecord *levelBitRecord, s32 arg
     bitIndex = levelBitRecord->bitIndex;
     field80 = ((World_func_8028787C_de *)(arg0))->levels;
     field1B40C = ((World_func_8028787C_de *)(arg0))->level;
-    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(field80, 0), field1B40C), 1);
-    Render_GetPackSection(table, 0);
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 1);
+    SetN64_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    base1 = (u8 *) Render_GetPackSection(table, 1);
+    base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (bitIndex & 7);
     if (arg2 != 0) {
@@ -132,10 +132,10 @@ s32 func_8028B988_de(void *arg0, struct LevelBitRecord *levelBitRecord) {
     bitIndex = levelBitRecord->bitIndex;
     field80 = ((World_func_8028787C_de *)(arg0))->levels;
     field1B40C = ((World_func_8028787C_de *)(arg0))->level;
-    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(field80, 0), field1B40C), 1);
-    Render_GetPackSection(table, 0);
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 1);
+    SetN64_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    temp_a0 = (u8 *) Render_GetPackSection(table, 1);
+    temp_a0 = (u8 *) SetN64_GetPackSection(table, 1);
     mask = 1 << (bitIndex & 7);
     if (bitIndex < 0) {
         bitIndex += 7;
@@ -151,10 +151,10 @@ void func_8028BA38_de(Field_void_80 *arg0, s32 index, s32 arg2, s32 arg3) {
     s32 idx;
     s32 idx2;
 
-    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(arg0->value, 0), index), 2);
-    Render_GetPackSection(table, 0);
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(arg0->value, 0), index), 2);
+    SetN64_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    base1 = (u8 *) Render_GetPackSection(table, 1);
+    base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (arg2 & 7);
     if (arg3 != 0) {
@@ -187,10 +187,10 @@ void func_8028BB1C_de(void *world, void *trigger, s32 arg2) {
     bitIndex = item->bitIndex;
     field80 = ((World_func_8028787C_de *)(world))->levels;
     field1B40C = ((World_func_8028787C_de *)(world))->level;
-    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(field80, 0), field1B40C), 2);
-    Render_GetPackSection(table, 0);
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 2);
+    SetN64_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    base1 = (u8 *) Render_GetPackSection(table, 1);
+    base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (bitIndex & 7);
     if (arg2 != 0) {
@@ -219,10 +219,10 @@ s32 func_8028BC0C_de(Shared_World *world, void *trigger) {
     bitIndex = ((Record14 *)trigger)->reserved13;
     field80 = world->bitSections;
     field1B40C = world->level;
-    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(field80, 0), field1B40C), 2);
-    Render_GetPackSection(table, 0);
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 2);
+    SetN64_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    temp_a0 = (u8 *) Render_GetPackSection(table, 1);
+    temp_a0 = (u8 *) SetN64_GetPackSection(table, 1);
     mask = 1 << (bitIndex & 7);
     if (bitIndex < 0) {
         bitIndex += 7;
@@ -240,9 +240,9 @@ s32 func_8028BCBC_de(ObjectRecAtB0 *arg0, s32 arg1) {
 
     for (i = 0; i < count; i++) {
         if (ids[i] == arg1) {
-            record = Render_GetPackSection(arg0->resource, 1);
-            Render_GetPackSection(record, 0);
-            return ((u8 *)Render_GetPackSection(record, 1))[i];
+            record = SetN64_GetPackSection(arg0->resource, 1);
+            SetN64_GetPackSection(record, 0);
+            return ((u8 *)SetN64_GetPackSection(record, 1))[i];
         }
     }
     return -1;

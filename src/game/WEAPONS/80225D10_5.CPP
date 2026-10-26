@@ -30,11 +30,11 @@ extern int Weapons_GetPlayerIndex(Root *,ObjRecAt16E0V1 *);
    in humanWon whether that team is the human side's and, when it is not, keeps looking. */
 
 
-/* Ends a match when its conditions are met, unless a menu or pause is up (Camera_IsSequenceActive,
-   Camera_IsSequenceInWindow), the match is locked at 0x1C of the rules D_801468A0 or the game D_8014561C disallows
+/* Ends a match when its conditions are met, unless a menu or pause is up (Cinema_IsSequenceActive,
+   Cinema_IsSequenceInWindow), the match is locked at 0x1C of the rules D_801468A0 or the game D_8014561C disallows
    it at 0xCC9: outside a cutscene (func_80442A28_de) the time limit at 0x14 of the rules counts down by
    the frame time while func_8022C650_de says the clock runs and ends the match when it expires (clearing
-   humanWon at 0xA8 of the rules in trial kind 3); outside a cutscene a score limit reached through Weapons_CheckScoreLimit
+   humanWon at 0xA8 of the rules in trial kind 3); outside a cutscene a score limit reached through Player_CheckScoreLimit
    ends it while the rules' limit at 0x18 is set and 0x54 is clear; and when D_80146938 asks, it counts
    the active players among the first eight and how many of them are out, ending the match once all
    are out, directly or, when a mode 14 player takes part, only after the rules' round count at 0x9C
@@ -55,7 +55,7 @@ extern int Weapons_GetPlayerIndex(Root *,ObjRecAt16E0V1 *);
 
 
 
-extern s32 Camera_IsSequenceInWindow(void);
+extern s32 Cinema_IsSequenceInWindow(void);
 
 extern s32 Pak_CountLiveNodes(GameSession *);
 
@@ -63,7 +63,7 @@ extern s32 func_8022C650_de(World_func_802283B8_de *);
 
 extern void Weapons_EndRound(World_func_802283B8_de *);
 
-extern s32 Weapons_CheckScoreLimit(World_func_802283B8_de *);
+extern s32 Player_CheckScoreLimit(World_func_802283B8_de *);
 
 static inline SharedPlayer *player_at(World_func_802283B8_de *world, u32 index) {
     SharedPlayer *player;
@@ -100,11 +100,11 @@ extern void func_80246E44_de(char *);
 
 
 
-extern void Instance_DrawBlobShadow(void *arg0, CVector3 *arg1, s32 arg2);
+extern void GameObject_DrawBlobShadow(void *arg0, CVector3 *arg1, s32 arg2);
 
-extern void Scene_UnlockResource(s32 arg0, s32 arg1);
+extern void Cache_UnlockResource(s32 arg0, s32 arg1);
 
-/* Draws the per-player overlays for one view between Render_BeginModelBatch and Render_FlushModelBatch: for each player
+/* Draws the per-player overlays for one view between Geometry_BeginModelBatch and Geometry_FlushModelBatch: for each player
    in the list from 0x20 it draws the scope model 0xC84 or 0xC85 (by the zoom mode at 0x120C) at the
    player's view matrix while zoomed in at 0x11FC, the player's display through Weapon_DrawRedMarkerQuad when it
    belongs to this view and is enabled at 0x1210, and in team games (0x24 or 0x78 of D_801468A0) a
@@ -114,7 +114,7 @@ extern void Scene_UnlockResource(s32 arg0, s32 arg1);
 
 
 
-extern void *Camera_FindScreenMessage(s32);
+extern void *Sky_FindScreenMessage(s32);
 
 extern s32 func_8028B21C_de(struct Shared_World *, s32);
 
@@ -141,7 +141,7 @@ extern s32 D_80140FF8;
 
 
 
-s32 Weapons_CheckTotalScoreWin(Root *root) {
+s32 Player_CheckTotalScoreWin(Root *root) {
     GameRules *initial=D_801468A0; GameRules *state;
  ObjRecAt16E0V1 *node; int i,sum,skip; unsigned char *settings;
  if(initial->totalScoreTarget==0) return 0;
@@ -167,7 +167,7 @@ s32 Weapons_CheckTotalScoreWin(Root *root) {
  return 0;
 }
 
-s32 Weapons_CheckTeamPointWin(struct World *world) {
+s32 Player_CheckTeamPointWin(struct World *world) {
     GameRules *target;
     GameRules *rules;
     Settings580 *settings;
@@ -217,7 +217,7 @@ void func_802283B8_de(World_func_802283B8_de *world) {
     s32 out;
     s32 special;
 
-    if (Camera_IsSequenceActive() == 0 && Camera_IsSequenceInWindow() == 0) {
+    if (Cinema_IsSequenceActive() == 0 && Cinema_IsSequenceInWindow() == 0) {
         rules = &D_8014561C.rules;
         if (rules->locked != 0 || D_8014561C.settings.allowed == 0) {
             return;
@@ -235,7 +235,7 @@ void func_802283B8_de(World_func_802283B8_de *world) {
             }
         }
         game = &D_8014561C;
-        if (Pak_CountLiveNodes(game) == 0 && Weapons_CheckScoreLimit(world) != 0) {
+        if (Pak_CountLiveNodes(game) == 0 && Player_CheckScoreLimit(world) != 0) {
             limits = &game->rules;
             if (limits->locked == 0 && game->paused == 0 && limits->scoreLimit > 0 && limits->sudden == 0) {
                 Weapons_EndRound(world);
@@ -281,7 +281,7 @@ void func_802285E8_de(char *game) {
     }
     actor = ((ObjRecAt20V2 *)(game))->unk20;
     while (actor != 0) {
-        if (Camera_IsSequenceInWindow() != 0 || ((ObjRecV5 *)(actor))->unk5EA == 0) {
+        if (Cinema_IsSequenceInWindow() != 0 || ((ObjRecV5 *)(actor))->unk5EA == 0) {
             void *work;
 
             work = func_8025CC6C_de();
@@ -349,7 +349,7 @@ void func_80228798_de(void *game, void *view) {
                         if (((ObjRecAt1D8V3 *)(actor))->unk100 & 0x40000) {
                             void *resource;
 
-                            resource = Scene_RequestResource(
+                            resource = Cache_RequestResource(
                                 0, ((ObjRecAt1D8V3 *)(actor))->unkC4,
                                 ((ObjRecAt1D8V3 *)(actor))->unkC4,
                                 ((ObjRecAt1D8V3 *)(actor))->unkD0,
@@ -359,7 +359,7 @@ void func_80228798_de(void *game, void *view) {
                                 void *temp;
 
                                 linked = ((ObjRecAt1D8V3 *)(actor))->unk1D8;
-                                func_8024B4F4_de(actor, (s32)Render_GetPackSection(*(void **)resource, 0));
+                                func_8024B4F4_de(actor, (s32)SetN64_GetPackSection(*(void **)resource, 0));
                                 temp = ((func_80228774_S5 *)(linked))->unk5DC;
                                 if (temp != 0) {
                                     CVector3 delta;
@@ -369,9 +369,9 @@ void func_80228798_de(void *game, void *view) {
                                     delta.y = 0.0f;
                                     delta.z = ((ObjRecAt130 *)(((func_80228774_S5 *)(linked))->unk5DC))->unk130 -
                                               ((ObjRecAt1D8V3 *)(actor))->unk10;
-                                    Instance_DrawBlobShadow(actor, &delta, 1);
+                                    GameObject_DrawBlobShadow(actor, &delta, 1);
                                 }
-                                Scene_UnlockResource(0, (s32)resource);
+                                Cache_UnlockResource(0, (s32)resource);
                             }
                         }
                     } else {
@@ -382,14 +382,14 @@ generic:
                     if (((ObjRecAt16E0V2 *)(node))->unk100 & 0x40000) {
                         void *resource;
 
-                        resource = Scene_RequestResource(
+                        resource = Cache_RequestResource(
                             0, ((ObjRecAt16E0V2 *)(node))->unkC4,
                             ((ObjRecAt16E0V2 *)(node))->unkC4,
                             ((ObjRecAt16E0V2 *)(node))->unkD0,
                             4, 0, 0, D_800C2BC0_de, 1);
                         if (resource != 0) {
-                            func_8024B4F4_de(node, (s32)Render_GetPackSection(*(void **)resource, 0));
-                            Scene_UnlockResource(0, (s32)resource);
+                            func_8024B4F4_de(node, (s32)SetN64_GetPackSection(*(void **)resource, 0));
+                            Cache_UnlockResource(0, (s32)resource);
                         }
                     }
                 }
@@ -409,9 +409,9 @@ void func_80228958_de(ObjRecAt20V2 *game, s32 view) {
     match = D_801468A0;
     team = -1;
     if (match->teams != 0 || match->teamRule != 0) {
-        team = ((struct Record *) ((struct OwnerRecAt5D8V2 *) Camera_FindScreenMessage(view))->settings)->team;
+        team = ((struct Record *) ((struct OwnerRecAt5D8V2 *) Sky_FindScreenMessage(view))->settings)->team;
     }
-    Render_BeginModelBatch();
+    Geometry_BeginModelBatch();
     for (player = game->unk20; player != 0; player = ((ObjectLinks16E4 *)(player))->unk_16E0) {
         zoomed = 0;
         if (((ObjectLinks16E4 *)(player))->unk_11FC > 0.0f) {
@@ -431,11 +431,11 @@ void func_80228958_de(ObjRecAt20V2 *game, s32 view) {
             Weapon_DrawRedMarkerQuad(player + 0x2E8, (char *)player + 0x458);
         }
         if ((D_801468A0->teams != 0 || D_801468A0->teamRule != 0)
-            && ((struct Record *) ((ObjectLinks16E4 *) player)->unk_5D8)->team == team && Camera_FindScreenMessage(view) != player) {
+            && ((struct Record *) ((ObjectLinks16E4 *) player)->unk_5D8)->team == team && Sky_FindScreenMessage(view) != player) {
             func_80229D28_de(player);
         }
     }
-    Render_FlushModelBatch();
+    Geometry_FlushModelBatch();
 }
 
 void func_80228AF4_de(void *arg0, ViewState *viewState) {
@@ -448,14 +448,14 @@ void func_80228AF4_de(void *arg0, ViewState *viewState) {
     f32 position;
     HudGlobals *hud;
 
-    if (Camera_IsSequenceActive() != 0) {
+    if (Cinema_IsSequenceActive() != 0) {
         return;
     }
-    if (Camera_IsSequenceInWindow() != 0) {
+    if (Cinema_IsSequenceInWindow() != 0) {
         return;
     }
     hud = &D_801462DE;
-    Text_SetupSpriteMode(hud->fade);
+    OnScreen_SetupSpriteMode(hud->fade);
     if (((HudState *)&hud->state)->timer <= 0.0f) {
         return;
     }
@@ -500,9 +500,9 @@ void func_80228AF4_de(void *arg0, ViewState *viewState) {
 #ifdef NON_MATCHING
 #define EUF(p, t, o) (*(t *)((u8 *)(p) + (o)))
 extern f32 D_800C2EB4_eu;
-extern void Render_PlayFlatSound(s32), Camera_PostScreenMessage(void *, void *, void *);
-extern void BuildDirectionMatrix(void *, void *), Particle_AddVec3(void *, void *, void *);
-extern void TranslateMatrix(void *, f32, f32, f32), SwapMatrixUpForward(void *), Rsp_ConvertMatrixToFixed(void *, void *);
+extern void SoundElement_PlayFlatSound(s32), Camera_PostScreenMessage(void *, void *, void *);
+extern void BuildDirectionMatrix(void *, void *), GraphU64_AddVec3(void *, void *, void *);
+extern void TranslateMatrix(void *, f32, f32, f32), SwapMatrixUpForward(void *), GraphU64_ConvertMatrixToFixed(void *, void *);
 /* Pulse of the player's ring effect: with the timer at 0x11FC running it only plays sound 0x578 and re-shows the text of the
    active language, otherwise it rebuilds the ring matrix at 0x1600 from the vectors at 0x1458/0x1470/0x1200 first. */
 void func_80228E60_eu(u8 *player, s32 flag) {
@@ -516,7 +516,7 @@ void func_80228E60_eu(u8 *player, s32 flag) {
     }
     if (EUF(player, f32, 0x11FC) > 0.0f) {
         EUF(player, f32, 0x11FC) = 0.0f;
-        Render_PlayFlatSound(0x578);
+        SoundElement_PlayFlatSound(0x578);
         ui = EUF(player, void *, 0x5DC);
         if (ui == 0) {
             return;
@@ -529,12 +529,12 @@ void func_80228E60_eu(u8 *player, s32 flag) {
         EUF(player, s32, 0x120C) = flag;
         EUF(player, f32, 0x11FC) = D_800C2EB4_eu;
         BuildDirectionMatrix(mtx, player + 0x1470);
-        Particle_ScaleVector((void *)vec, (void *)(player + 0x1470), 5.12f);
-        Particle_AddVec3(vec, vec, player + 0x1200);
+        GraphU64_ScaleVector((void *)vec, (void *)(player + 0x1470), 5.12f);
+        GraphU64_AddVec3(vec, vec, player + 0x1200);
         TranslateMatrix(mtx, vec[0], vec[1], vec[2]);
         SwapMatrixUpForward(mtx);
-        Rsp_ConvertMatrixToFixed(mtx, player + 0x1600);
-        Render_PlayFlatSound(0x578);
+        GraphU64_ConvertMatrixToFixed(mtx, player + 0x1600);
+        SoundElement_PlayFlatSound(0x578);
         ui = EUF(player, void *, 0x5DC);
         if (ui == 0) {
             return;

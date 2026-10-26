@@ -13,7 +13,7 @@
 #include "sdk/AUDIO/802BD1A8_19.H"
 #include "TYPES.H"
 #include "stddef.h"
-u32 Render_LocatePackSection(s32, s32, s32, u32 *);
+u32 SetN64_LocatePackSection(s32, s32, s32, u32 *);
 s32 func_802BD400_de(const char *);
 extern s32 D_00295B90_us_rev1;
 /* Separate-object views of the menu state words (each access has its own lui; DATA-FRAME-O1 F2b). */
@@ -22,7 +22,7 @@ extern s32 D_8014AED0;
 extern s32 D_8014AED4;
 /* Releases the previous texture viewer entry, loads entry D_8014AEB0.selectionIndex from the resident pack,
    wraps the frame selection into its texture/palette tables and prints the "tex N frm F of C" title. */
-void Engine_LoadSelectedTexture(void) {
+void TEngine_LoadSelectedTexture(void) {
     u32 size;
     u32 key;
     struct Node80253610 *resource;
@@ -37,33 +37,33 @@ void Engine_LoadSelectedTexture(void) {
     Shared_World *world = &g_world;
 
     if (D_8014AECC != NULL) {
-        Scene_UnlockResource(NULL, D_8014AECC);
+        Cache_UnlockResource(NULL, D_8014AECC);
     }
     D_8014AECC = NULL;
     D_8014AED4 = 0;
     D_8014AED8 = 0;
     D_8014AED0 = 0;
-    key = Render_LocatePackSection(world->unk50, world->unk20, D_8014AEB0.selectionIndex, &size);
-    resource = Scene_RequestResource(0, key - 1, key, size, 9, -1, &D_00295B90_us_rev1, "Artsend Texture", 1);
+    key = SetN64_LocatePackSection(world->unk50, world->unk20, D_8014AEB0.selectionIndex, &size);
+    resource = Cache_RequestResource(0, key - 1, key, size, 9, -1, &D_00295B90_us_rev1, "Artsend Texture", 1);
     entries = (s32 *)resource->field0;
-    textures = Render_GetPackSection(entries, 1);
-    palettes = Render_GetPackSection(entries, 2);
+    textures = SetN64_GetPackSection(entries, 1);
+    palettes = SetN64_GetPackSection(entries, 2);
     while (D_8014AEB0.selectionValue < 0) {
         D_8014AEB0.selectionValue += *textures;
     }
     texture = D_8014AEB0.selectionValue % *textures;
     palette = D_8014AEB0.selectionValue % *palettes;
     D_8014AEB0.resource = resource;
-    D_8014AEB0.textureOverride = Render_GetPackSection(textures, texture);
-    D_8014AEB0.paletteOverride = Render_GetPackSection(palettes, palette);
-    D_8014AEB0.selector = Render_GetPackSection(entries, 0);
+    D_8014AEB0.textureOverride = SetN64_GetPackSection(textures, texture);
+    D_8014AEB0.paletteOverride = SetN64_GetPackSection(palettes, palette);
+    D_8014AEB0.selector = SetN64_GetPackSection(entries, 0);
     D_8014AEB0.overridesOff = 0;
     D_8014AEB0.entryTable = entries;
     D_8014AEB0.textureTable = textures;
     D_8014AEB0.paletteTable = palettes;
     frame = texture;
     if (*entries == 4) {
-        name = Render_GetPackSection(entries, 3);
+        name = SetN64_GetPackSection(entries, 3);
         for (i = 0; i < func_802BD400_de((char *)name); i++) {
             if (name[i] == '.') {
                 name[i] = '\0';
@@ -244,7 +244,7 @@ void func_80294F1C_us_rev1(void) {
         }
         D_8014AEB0.frameCount += 1;
         if (D_8014AEB0.titleWasShown != 0) {
-            Engine_LoadSelectedTexture();
+            TEngine_LoadSelectedTexture();
             D_8014AEB0.titleWasShown = 0;
         }
         func_802A84F8_de();

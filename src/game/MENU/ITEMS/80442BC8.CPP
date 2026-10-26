@@ -12,7 +12,7 @@
 #include "SYSTEM/80255C40_7.H"
 #include "GFX/TEXT/802A8A94_5.H"
 
-/* Removes every item from a list until its head is null, running each item's optional callback, clearing three words of its state, unlinking it through func_80255ED8_de and releasing its resource through Scene_ReleaseResource. Adapted from func_8044334C_de with its body wrapped as an inline helper called in a loop over the list head changed. */
+/* Removes every item from a list until its head is null, running each item's optional callback, clearing three words of its state, unlinking it through func_80255ED8_de and releasing its resource through Cache_ReleaseResource. Adapted from func_8044334C_de with its body wrapped as an inline helper called in a loop over the list head changed. */
 
 
 
@@ -34,7 +34,7 @@ static inline void remove_item(struct List_func_80442A60_de *list, struct ItemRe
     state->b = 0;
     state->c = 0;
     func_80255ED8_de(list, item);
-    Scene_ReleaseResource(0, item->resource);
+    Cache_ReleaseResource(0, item->resource);
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -52,11 +52,11 @@ extern void * func_8043F114_de(struct ObjectRecAt14 *);
 
 extern void Pak_MeasureLine(void *, f32, f32);
 
-/* Draws a pulsing sprite for an active menu element: when the word at 0x1CC is set, it takes the frame at 0x1C8 folded back after 23, sets up drawing through func_802A84F8_de and Render_SetModePreset, emits a yellow environment and primitive colour to the display list and draws sprite 0x67 at the owner's rectangle scaled to the screen through func_802AAC28_de. Adapted from func_8022C2B4_de. */
+/* Draws a pulsing sprite for an active menu element: when the word at 0x1CC is set, it takes the frame at 0x1C8 folded back after 23, sets up drawing through func_802A84F8_de and Geometry_SetModePreset, emits a yellow environment and primitive colour to the display list and draws sprite 0x67 at the owner's rectangle scaled to the screen through func_802AAC28_de. Adapted from func_8022C2B4_de. */
 
 
 
-extern void Render_SetModePreset(s32);
+extern void Geometry_SetModePreset(s32);
 
 /* Selects the descriptor for a single masked category bit; on eu and eu-x the slot is
    additionally offset by nine descriptors per local player, read from the byte after D_80146848. */
@@ -66,7 +66,7 @@ extern char D_800E1E24_de[];
 
 /* Steps a pointer back 0x554 bytes: callers pass the pointer held at offset 0x44 of an object and
    get back the start of the structure whose member at offset 0x554 it addresses. */
-void *Items_GetListContext(s8 *member) {
+void *Pak_GetListContext(s8 *member) {
     return member - 0x554;
 }
 
@@ -107,7 +107,7 @@ func_8043F114_de
    tests the word at 0x1CC. */
 
 
-void Items_StopMenuPulse(struct Object1C8 *object) {
+void Pak_StopMenuPulse(struct Object1C8 *object) {
     object->second = 0;
     object->first = 0;
 }
@@ -116,7 +116,7 @@ void Items_StopMenuPulse(struct Object1C8 *object) {
    at 0x1C8; func_80442B34_de clears both. */
 
 
-void Items_StartMenuPulse(struct Object1C8 *object) {
+void Pak_StartMenuPulse(struct Object1C8 *object) {
     if (object->second == 0) {
         object->second = 1;
         object->first = 0;
@@ -127,7 +127,7 @@ void Items_StartMenuPulse(struct Object1C8 *object) {
    the counter reaches 0x30. */
 
 
-void Items_StepSpriteFrame(struct Object1C8 *object) {
+void Pak_StepSpriteFrame(struct Object1C8 *object) {
     object->first += object->second;
     if (object->first >= 0x30) {
         object->first = 0;
@@ -162,7 +162,7 @@ void func_80442BA8_de(MenuSpriteElement *e) {
             frame = 0x2F - e->frame;
         }
         func_802A84F8_de();
-        Render_SetModePreset(0x15);
+        Geometry_SetModePreset(0x15);
         o = e->owner;
         gfx = g_displayListCursor++;
         w = o->width;
@@ -213,7 +213,7 @@ void func_80442D10_de(CMenuItem *w, WidgetDescriptor *d, char **arena, int id, i
  }
 }
 
-void *Items_GetWidgetStyle(ObjRecAt8V4 *arg0) {
+void *Pak_GetWidgetStyle(ObjRecAt8V4 *arg0) {
  s32 index=0;
  switch(arg0->flags & 0x3fe0) {
  case 0x20: break;

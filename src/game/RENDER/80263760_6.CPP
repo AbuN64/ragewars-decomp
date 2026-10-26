@@ -8,7 +8,7 @@
 
 
 
-extern void Render_FreeAllPoolNodes(s32 *);
+extern void Rumble_FreeAllPoolNodes(s32 *);
 
 #if defined(VERSION_EU)
 extern unsigned int func_802B80B4_eu(void *arg0);
@@ -46,12 +46,12 @@ void Control_UpdateControllerRumble(Obj80264124 *arg0) {
         if ((*global != 0) || (g_world.frozen != 0) || (global[-6] != 13)) {
 reset:
             arg0->amount = 0.0f;
-            Render_FreeAllPoolNodes(arg0->object);
+            Rumble_FreeAllPoolNodes(arg0->object);
         } else {
             object = arg0->object;
             func_80285C78_de(object);
-            first = Render_GetSpatialEffectLevel(&D_8010EC90, arg0->x, arg0->y, arg0->z);
-            arg0->amount = first + Render_GetSpatialEffectLevel(object, zero.x, zero.y, zero.z);
+            first = Rumble_GetSpatialEffectLevel(&D_8010EC90, arg0->x, arg0->y, arg0->z);
+            arg0->amount = first + Rumble_GetSpatialEffectLevel(object, zero.x, zero.y, zero.z);
         }
         if (arg0->active != 0) {
             if (arg0->amount != 0.0f) {

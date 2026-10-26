@@ -13,7 +13,7 @@
 
 
 
-extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
+extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
 
 
@@ -31,10 +31,10 @@ f32 func_8024BF24_de(void *actor) {
 
     result = D_800C3B5C;
     if (((LevelActor *)actor)->flags & 0x40000) {
-        modelResource = Scene_RequestResource(0, ((LevelActor *)actor)->resource, ((LevelActor *)actor)->resource, ((LevelActor *)actor)->resourceFlags, 4, 0, 0, &D_800C3AE8_de, 1);
+        modelResource = Cache_RequestResource(0, ((LevelActor *)actor)->resource, ((LevelActor *)actor)->resource, ((LevelActor *)actor)->resourceFlags, 4, 0, 0, &D_800C3AE8_de, 1);
         if (modelResource != 0) {
-            result = RW_BITS_TO_FLOAT((s32) ((ActorResourceHeader *)Render_GetPackSection(*modelResource, 0))->particleScale);
-            Scene_UnlockResource(0, modelResource);
+            result = RW_BITS_TO_FLOAT((s32) ((ActorResourceHeader *)SetN64_GetPackSection(*modelResource, 0))->particleScale);
+            Cache_UnlockResource(0, modelResource);
         }
     }
     return result;
@@ -47,20 +47,20 @@ void **func_8024BFD4_de(MenuPanelRoot *actor, s32 variantIndex) {
         return 0;
     }
     if (variantIndex != actor->selected) {
-        resource = Scene_RequestResource(0, actor->resource,
+        resource = Cache_RequestResource(0, actor->resource,
                                  actor->resource, actor->resourceSize,
                                  0, 0, 0, &s_animModelIndexText, 1);
         if (resource != 0) {
-            actor->selectedResource = Render_LocatePackSection((s32)*resource,
+            actor->selectedResource = SetN64_LocatePackSection((s32)*resource,
                                                 actor->resource,
                                                 variantIndex % *(s32 *)*resource,
                                                 &actor->window);
             actor->selected = variantIndex;
-            Scene_UnlockResource(0, resource);
+            Cache_UnlockResource(0, resource);
         }
     }
     if (actor->selectedResource != 0) {
-        return Scene_RequestResource(0, actor->selectedResource,
+        return Cache_RequestResource(0, actor->selectedResource,
                              actor->selectedResource, actor->window,
                              0, 0, &D_0026D814, &s_animatedModelText, 0);
     }

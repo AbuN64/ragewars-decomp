@@ -36,7 +36,7 @@ f32 func_8040170C_de(f32 t) {
     f32 u;
     f32 v;
 
-    track = Render_GetPackSection(D_800E2830->resource, 1);
+    track = SetN64_GetPackSection(D_800E2830->resource, 1);
     count = track[1];
     key = (KeyRecAt10 *)(track + 2);
     if (count == 0) {

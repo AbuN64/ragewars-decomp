@@ -64,7 +64,7 @@ static inline s32 read_scaled_delta(s32 width, s32 shift) {
 /* Decodes count samples: each group of 4 takes a 6-bit predictor code (2-bit coefficient pair
  * index, 4-bit shift) from the control stream, each sample a 3-bit delta from the sample stream.
  * The scaled delta plus the two-tap prediction is integrated into a running sample clamped to 16 bits. */
-void Render_DecodeThreeBitSamples(s16 *out, s32 count) {
+void Curve_DecodeThreeBitSamples(s16 *out, s32 count) {
     s32 previous = 0;
     s32 older = 0;
     s32 sample;
@@ -149,7 +149,7 @@ s32 Curve_DecodePackedChannels(s32 destinations, void *encoded, s32 channel_coun
         D_8010C078 = cursor;
         tail <<= 24;
         D_8010C070 |= tail;
-        Render_DecodeThreeBitSamples((s16 *)channels[i], sample_count);
+        Curve_DecodeThreeBitSamples((s16 *)channels[i], sample_count);
     }
     return sample_count;
 }

@@ -38,30 +38,30 @@ void func_80295FB4_us_rev1(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #else
 void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
-Shared_ParticleInstance *Camera_FindScreenMessage(GameplayCamera *);
-s32 Camera_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, void *);
+Shared_ParticleInstance *Sky_FindScreenMessage(GameplayCamera *);
+s32 Unicol_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, void *);
 void *func_802799C0_de(void *, s32);
-void Render_SetCombineMode(s32);
-void Render_SetModePreset(s32);
-void Scene_UnlockResource(s32, void *);
-s32 Nav_NextRandom(void);
+void Geometry_SetCombineMode(s32);
+void Geometry_SetModePreset(s32);
+void Cache_UnlockResource(s32, void *);
+s32 GraphU64_NextRandom(void);
 
 static inline s32 func_8027ED6C_de_occluded(Shared_Particle *particle, GameplayCamera *view) {
     Shared_ParticleInstance *inst;
     s32 hit;
 
-    inst = Camera_FindScreenMessage(view);
+    inst = Sky_FindScreenMessage(view);
     if (inst != 0 && view->unk24 == 0) {
         Shared_ParticleInstance saved;
         saved = *inst;
         inst->pos = view->position;
-        hit = Camera_MoveActorWithCollision(inst, particle->inst.pos, &D_80100030);
+        hit = Unicol_MoveActorWithCollision(inst, particle->inst.pos, &D_80100030);
         *inst = saved;
     } else {
         Shared_ParticleInstance probe;
         probe = particle->inst;
         probe.pos = view->position;
-        hit = Camera_MoveActorWithCollision(&probe, particle->inst.pos, &D_80100030);
+        hit = Unicol_MoveActorWithCollision(&probe, particle->inst.pos, &D_80100030);
     }
     return hit;
 }
@@ -138,7 +138,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
         }
         particle->opacity = alpha;
         if (alpha == 0.0f) {
-            Scene_UnlockResource(0, model);
+            Cache_UnlockResource(0, model);
             return;
         }
     }
@@ -201,11 +201,11 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
             }
             break;
         case 4:
-            frame = Nav_NextRandom() % info.count;
+            frame = GraphU64_NextRandom() % info.count;
             break;
         case 5:
             if (particle->unk14F == -1) {
-                particle->unk14F = Nav_NextRandom() % info.count;
+                particle->unk14F = GraphU64_NextRandom() % info.count;
             }
             frame = particle->unk14F;
             break;
@@ -216,7 +216,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
             GameplayCamera *camera = D_80140FE8_de.camera;
             CVector3 local;
             f32 depth;
-            Particle_TransformPoint(camera->worldToView, &particle->inst.pos, &local);
+            GraphU64_TransformPoint(camera->worldToView, &particle->inst.pos, &local);
             depth = local.z;
             if (depth < 0.0f) {
                 depth = -depth;
@@ -228,7 +228,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
         particle->unk14E = frame;
         particle->flags |= 0x100000;
     }
-    Particle_TransformPoint(view->worldToView, &particle->inst.pos, &viewPos);
+    GraphU64_TransformPoint(view->worldToView, &particle->inst.pos, &viewPos);
     dist = viewPos.z;
     if (dist < 0.0f) {
         dist = -dist;
@@ -238,7 +238,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
     } else {
         mtx = func_802799C0_de(&D_8011FFB0, 1);
         if (mtx == 0) {
-            Scene_UnlockResource(0, model);
+            Cache_UnlockResource(0, model);
             return;
         }
         Particle_BuildMatrix(particle, mtx, view, dist);
@@ -256,23 +256,23 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
     switch (info.frame->kind) {
         case 0:
         case 1:
-            Render_SetCombineMode(0x18);
+            Geometry_SetCombineMode(0x18);
             break;
         case 3:
-            Render_SetCombineMode(0x1D);
+            Geometry_SetCombineMode(0x1D);
             break;
     }
     if (textured) {
-        Render_SetModePreset(0xF);
+        Geometry_SetModePreset(0xF);
         {
             gSPTextureL(g_displayListCursor++, shiftS, shiftT, 0, 0xFF, 0, G_ON);
         }
     } else if ((desc->flags & 0x400) && desc->fade->unkE != 4) {
-        Render_SetModePreset(0xF);
+        Geometry_SetModePreset(0xF);
     } else if (desc->flags & 0x4000) {
-        Render_SetModePreset(!(D_801462C8 & 0x200) ? 0xD : 0x11);
+        Geometry_SetModePreset(!(D_801462C8 & 0x200) ? 0xD : 0x11);
     } else {
-        Render_SetModePreset((D_801462C8 & 0x200) ? 0x12 : 0x13);
+        Geometry_SetModePreset((D_801462C8 & 0x200) ? 0x12 : 0x13);
     }
 
     alpha = 0xFF;
@@ -342,5 +342,5 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
             break;
     }
     gSP2Triangles(g_displayListCursor++, 0, 1, 2, 0, 2, 3, 0, 0);
-    Scene_UnlockResource(0, model);
+    Cache_UnlockResource(0, model);
 }

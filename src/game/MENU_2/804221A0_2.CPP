@@ -12,7 +12,7 @@
 extern void Items_ResetActorPools(void *, s32);
 extern void func_804499B0_de(void *, s32, s32);
 extern s32 func_804030E0_de(s32);
-extern void Items_SetSelection(void *, s32, s32);
+extern void OvlScene_SetSelection(void *, s32, s32);
 extern s32 func_8025477C_de();
 extern void func_8025476C_de(s32);
 
@@ -23,7 +23,7 @@ void func_80422170_de(void) {
     object = &D_80145088;
     Items_ResetActorPools(object, 1);
     func_804499B0_de(object - 0x48, 1, 0);
-    Items_SetSelection(&g_world, ~func_804030E0_de(0x27D), 0);
+    OvlScene_SetSelection(&g_world, ~func_804030E0_de(0x27D), 0);
     if (func_8025477C_de() == 0) {
         func_8025476C_de(1);
     }
@@ -37,6 +37,6 @@ void func_80422170_de(void) {
 
 void func_804221E8_de(void) {
     func_80245A20_de(1);
-    Camera_SetResponse((45.0f));
+    Cinema_SetResponse((45.0f));
     func_80245A5C_de(0x43, 0x4F, 0x12, 0x80);
 }

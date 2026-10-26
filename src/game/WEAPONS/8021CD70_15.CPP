@@ -11,11 +11,11 @@
 extern f32 D_800D2988;
 
 
-extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
+extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
 
-extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 
-extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 /* Runs a player's standing and walking state for its body: settles the weapon sway through
    func_80223E34_de, turns the view through Weapons_UpdateViewAngles with the crouching tuning D_800CE7FC while the
@@ -67,11 +67,11 @@ void func_8022409C_de(void *player, void *bodyActor) {
     ((func_80224078_Arg0 *)player)->unk72C = 0;
 
     held = (&D_800C2960_de)[1];
-    Nav_EaseValueToward(&((func_80224078_Arg1 *)(bodyActor))->unk6C,
+    GraphU64_EaseValueToward(&((func_80224078_Arg1 *)(bodyActor))->unk6C,
                   ((func_80224078_Arg1 *)bodyActor)->unk6C +
                       (f32)((ControllerRecAtC7 *)((func_80224078_Arg0 *)player)->unk698)->x * D_800C2960_de,
                   held);
-    Nav_EaseValueToward(&((func_80224078_Arg0 *)(player))->unk724,
+    GraphU64_EaseValueToward(&((func_80224078_Arg0 *)(player))->unk724,
                   ((func_80224078_Arg0 *)player)->unk724 +
                       (f32)-((ControllerRecAtC7 *)((func_80224078_Arg0 *)player)->unk698)->y * D_800C2968_de,
                   held);
@@ -90,7 +90,7 @@ void func_8022409C_de(void *player, void *bodyActor) {
             func_802746A0_de(((func_80224078_Arg0 *)player)->unk6C0, step, limit);
     } else {
         ((func_80224078_Arg0 *)player)->unk6C0 =
-            Nav_DecayToZero(((func_80224078_Arg0 *)player)->unk6C0, D_800C2978_de);
+            GraphU64_DecayToZero(((func_80224078_Arg0 *)player)->unk6C0, D_800C2978_de);
     }
 
     value = ((func_80224078_Arg0 *)player)->unk6A4;
@@ -107,7 +107,7 @@ void func_8022409C_de(void *player, void *bodyActor) {
             func_802746A0_de(((func_80224078_Arg0 *)player)->unk6C4, step, limit);
     } else {
         ((func_80224078_Arg0 *)player)->unk6C4 =
-            Nav_DecayToZero(((func_80224078_Arg0 *)player)->unk6C4, D_800C2988_de);
+            GraphU64_DecayToZero(((func_80224078_Arg0 *)player)->unk6C4, D_800C2988_de);
     }
 
     flags = ((func_80224078_Arg0 *)player)->unk6AC;
@@ -119,7 +119,7 @@ void func_8022409C_de(void *player, void *bodyActor) {
             func_802746A0_de(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C2990_de, 71.68f);
     } else {
         ((func_80224078_Arg1 *)bodyActor)->unk20 =
-            Nav_DecayToZero(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C2994_de);
+            GraphU64_DecayToZero(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C2994_de);
     }
 
     {
@@ -137,8 +137,8 @@ void func_8022409C_de(void *player, void *bodyActor) {
     direction.z += ((func_80224078_Arg0 *)player)->unk6C4 *
                    Math_Cosf(((func_80224078_Arg1 *)bodyActor)->unk6C - held);
 
-    Particle_ScaleVector(&direction, &direction, D_800D2988);
-    Particle_AddVec3(&((func_80224078_Arg0 *)(player))->unk6E8,
+    GraphU64_ScaleVector(&direction, &direction, D_800D2988);
+    GraphU64_AddVec3(&((func_80224078_Arg0 *)(player))->unk6E8,
                   &((func_80224078_Arg0 *)(player))->unk6E8, &direction);
     result = Scene_FindFloorPolygon(&g_world, &((func_80224078_Arg1 *)bodyActor)->unk8);
     if (result != 0) {

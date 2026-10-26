@@ -8,7 +8,7 @@ extern struct SoundOptionsScreen *D_800E58A0;
 #include "RENDER_2/8025DE50_5.H"
 #include "SCENE/802508E0_13.H"
 
-/* Releases the object D_800E58A0 holds through Scene_FreeMemory, clears D_800E58A0 and returns zero. */
+/* Releases the object D_800E58A0 holds through Cache_FreeMemory, clears D_800E58A0 and returns zero. */
 
 
 
@@ -40,7 +40,7 @@ extern void func_80298368_de(s32);
 
 
 s32 func_80438FE0_de(void) {
-    Scene_FreeMemory(D_800E58A0);
+    Cache_FreeMemory(D_800E58A0);
     D_800E58A0 = 0;
     return 0;
 }
@@ -72,7 +72,7 @@ s32 func_80439018_de(void) {
     options = &D_801462C8.volume[1];
     if (value != options[0]) {
         options[0] = value;
-        Render_PlayFlatSound(0x460);
+        SoundElement_PlayFlatSound(0x460);
     }
     value = func_8041A6E0_de(D_800E58A0->music);
     if (value != options[-1]) {

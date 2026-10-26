@@ -38,7 +38,7 @@ INCLUDE_ASM("span_1000", func_802301F4_de);
 
 
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
-extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
+extern void Sky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 
 
 
@@ -101,9 +101,9 @@ static inline s32 can_fire(char *player) {
     }
     ammo = Player_GetProfileAchievementFlag(&D_80102B00[((AttackTriggerPlayer *)(player))->unk5D4], ((AttackTriggerPlayer *)(player))->unk62E);
     if (ammo == 0) {
-        Render_PlayFlatSound(0xD4D);
+        SoundElement_PlayFlatSound(0xD4D);
         if (((AttackTriggerPlayer *)(player))->unk5DC != 0) {
-            Camera_PostTargetedScreenMessage(&D_80145088, ((AttackTriggerPlayer *)(player))->unk5DC, D_800D30BC[0], Weapons_GetPlayerIndex(&D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, ((AttackTriggerPlayer *)(player))->unk5DC, D_800D30BC[0], Weapons_GetPlayerIndex(&D_80145040, player),
                           D_800C2EE4_de);
         }
     }
@@ -161,9 +161,9 @@ static inline s32 can_toggle_mode(Player *player) {
     if (D_801462C8.controllerMode != 1) return 1;
     allowed = Player_GetProfileAchievementFlag(&D_80102B00[player->slot], player->selectedAction);
     if (allowed == 0) {
-        Render_PlayFlatSound(0xD4D);
+        SoundElement_PlayFlatSound(0xD4D);
         if (player->camera) {
-            Camera_PostTargetedScreenMessage(&D_80145088, player->camera, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex),
+            Sky_PostTargetedScreenMessage(&D_80145088, player->camera, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex),
                                              Weapons_GetPlayerIndex(&D_80145040, player), 1.0f);
         }
     }
@@ -189,9 +189,9 @@ void Weapons_UpdateAlternateFire(void *actor, void *attack) {
         if (((AttackTriggerAction *)attack)->unk13C == 1) {
             ((AttackTriggerAction *)attack)->unk13C = 2;
             if (!Weapons_HasAmmoForMode(player, player->selectedAction)) {
-                Render_PlayFlatSound(0xD4D);
+                SoundElement_PlayFlatSound(0xD4D);
                 if (player->camera) {
-                    Camera_PostTargetedScreenMessage((char *)&D_80145040 + 0x48, player->camera,
+                    Sky_PostTargetedScreenMessage((char *)&D_80145040 + 0x48, player->camera,
                                                      RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80145040.game.language),
                                                      Weapons_GetPlayerIndex(&D_80145040, player), 1.0f);
                 }
@@ -228,7 +228,7 @@ INCLUDE_ASM("span_1000", Weapons_UpdateAlternateFire);
 
 
 extern s16 Weapon_FindNextUsableWeapon(void *arg0);
-extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
+extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
 
@@ -272,17 +272,17 @@ void Weapon_UpdateIdleWeaponSelection(LevelActor *arg0, void *arg1) {
             mode = audio->m_nFragTagSkin;
             switch (mode) {
             case 0:
-                Render_PlaySoundAtPosition(0x18A1,
+                SoundElement_PlaySoundAtPosition(0x18A1,
                               ((Shared_ActorView *)actor)->position.vector,
                               (s32)&((Player *)actor)->pos, -1);
                 break;
             case 1:
-                Render_PlaySoundAtPosition(0x1969,
+                SoundElement_PlaySoundAtPosition(0x1969,
                               ((Shared_ActorView *)actor)->position.vector,
                               (s32)&((Player *)actor)->pos, -1);
                 break;
             case 2:
-                Render_PlaySoundAtPosition(0x1905,
+                SoundElement_PlaySoundAtPosition(0x1905,
                               ((Shared_ActorView *)actor)->position.vector,
                               (s32)&((Player *)actor)->pos, -1);
                 break;

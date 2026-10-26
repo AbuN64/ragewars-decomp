@@ -68,8 +68,8 @@ void Audio_UpdateMusicPlayback(Track *queue) {
             temp_s0 = temp_v0_3;
             if (temp_s0 != -1) {
                 temp_s0 *= 2;
-                temp_s0_2 = Render_GetPackSection(queue->unk0->unk2B50, temp_s0 | 1);
-                temp_v0_4 = Render_GetPackSection(queue->unk0->unk2B50, temp_s0);
+                temp_s0_2 = SetN64_GetPackSection(queue->unk0->unk2B50, temp_s0 | 1);
+                temp_v0_4 = SetN64_GetPackSection(queue->unk0->unk2B50, temp_s0);
                 queue->unk24 = (s32) temp_v0_4->unk0;
                 temp_f0 = func_802B2350(temp_v0_4->unk4);
                 queue->unk30 = temp_f0;

@@ -22,7 +22,7 @@ extern char D_801379C0, D_8013B1A8;
 
 
 extern SharedPlayer *D_80145060;
-extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 void func_80281A9C_de(s32 unused, Actor_func_80281A9C_de *actor, Actor_func_80281A9C_de **others, s32 count) {
     CVector3 delta;
@@ -35,7 +35,7 @@ void func_80281A9C_de(s32 unused, Actor_func_80281A9C_de *actor, Actor_func_8028
     objectCount = world->kind1Count;
     for (i = 0; i < objectCount; i++) {
         if (world->kind1[i]->active > 0) {
-            Particle_SubtractVectors(&delta, &world->kind1[i]->position0, &actor->position);
+            GraphU64_SubtractVectors(&delta, &world->kind1[i]->position0, &actor->position);
             if (delta.x * delta.x + delta.y * delta.y + delta.z * delta.z <= 65536.0f) {
                 actor->crowded = 1;
                 return;
@@ -44,7 +44,7 @@ void func_80281A9C_de(s32 unused, Actor_func_80281A9C_de *actor, Actor_func_8028
     }
     for (player = D_80145060; player != 0; player = player->views16E0.view16E0_1.next) {
         if (actor->owner != player && player->views5E4.view5E4_2.health > 0) {
-            Particle_SubtractVectors(&delta, &player->views0.view8_4.position, &actor->position);
+            GraphU64_SubtractVectors(&delta, &player->views0.view8_4.position, &actor->position);
             if (delta.x * delta.x + delta.y * delta.y + delta.z * delta.z <= 65536.0f) {
                 actor->crowded = 1;
                 return;
@@ -53,7 +53,7 @@ void func_80281A9C_de(s32 unused, Actor_func_80281A9C_de *actor, Actor_func_8028
     }
     for (i = 0; i < count; i++) {
         if (others[i] != actor && (others[i]->type == 0xC || others[i]->type == 0x22)) {
-            Particle_SubtractVectors(&delta, &others[i]->position, &actor->position);
+            GraphU64_SubtractVectors(&delta, &others[i]->position, &actor->position);
             if (delta.x * delta.x + delta.y * delta.y + delta.z * delta.z <= 262144.0f) {
                 actor->crowded = 1;
                 return;
@@ -122,10 +122,10 @@ typedef struct CParticleSystem_t {
 extern const f32 D_800C4E4C_de,D_800C4E50_de;
 extern Box D_801031F0;
 extern void Particle_Update(void *),func_80279A00_de(void *),Particle_UpdateMatrix(void *);
-extern void Render_DetachParticleSwooshes(void *,void *),Render_ReleaseLight(void *,s32);
-extern void Render_SpawnChildEffect(void *,s32,s32,s32);
-extern void Render_PlaySoundAtPosition(s16,CVector3,s32,s32);
-extern void Particle_SubtractVectors(CVector3 *,CVector3 *,CVector3 *);
+extern void Fx_DetachParticleSwooshes(void *,void *),DynLight_ReleaseLight(void *,s32);
+extern void Particle_SpawnChildEffect(void *,s32,s32,s32);
+extern void SoundElement_PlaySoundAtPosition(s16,CVector3,s32,s32);
+extern void GraphU64_SubtractVectors(CVector3 *,CVector3 *,CVector3 *);
 /* Frees a particle: runs its end hook (and its swoosh teardown when it has swooshes), hands its dynamic light back to
  * D_8013B1A8, drops one owner count, unlinks it from its active list onto the free list and, when flagged, from the
  * draw list. */
@@ -133,10 +133,10 @@ static __inline__ void Particle_Free(CParticleSystem_t *world, CParticle_t *p) {
     func_80279A00_de(p);
     if (p->m_ActiveSwooshes) {
         Particle_UpdateMatrix(p);
-        Render_DetachParticleSwooshes(&D_801379C0, p);
+        Fx_DetachParticleSwooshes(&D_801379C0, p);
     }
     if (p->m_pDLight) {
-        Render_ReleaseLight(&D_8013B1A8, (s32)p->m_pDLight);
+        DynLight_ReleaseLight(&D_8013B1A8, (s32)p->m_pDLight);
         p->m_pDLight = 0;
     }
     if (p->m_pOwnerCount) {
@@ -227,13 +227,13 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
             value = effect->m_pImpact->m_ImpactEventValue[event];
             soundType = effect->m_pImpact->m_ImpactSoundType[event];
             if (eventType != 0xFFFF) {
-                System_DeliverContactEffect(p, p, eventType, -1, p->m_vPos, value);
+                Events_DeliverContactEffect(p, p, eventType, -1, p->m_vPos, value);
             }
             if (particleType != 0xFFFF) {
-                Render_SpawnChildEffect(p, particleType, p->m_Alignment, 1);
+                Particle_SpawnChildEffect(p, particleType, p->m_Alignment, 1);
             }
             if (soundType != 0xFFFF) {
-                Render_PlaySoundAtPosition(soundType, p->m_vPos, 0, -1);
+                SoundElement_PlaySoundAtPosition(soundType, p->m_vPos, 0, -1);
             }
             if (!(p->m_dwFlags & 0x100)) {
                 continue;
@@ -264,7 +264,7 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
                 for (j = 0; j < pairCount; j++) {
                     p = begin[j];
                     if (p->m_nObjType != 87) {
-                        Particle_SubtractVectors(&delta, &p->m_vPos, &focus->m_vPos);
+                        GraphU64_SubtractVectors(&delta, &p->m_vPos, &focus->m_vPos);
                         if (delta.x * delta.x + delta.y * delta.y + delta.z * delta.z <= D_800C4E50_de) {
                             p->m_nFrames = 1;
                         }
@@ -301,7 +301,7 @@ extern Gfx *g_displayListCursor;
 extern Globals_func_804220A8_de D_80140FE8_de;
 extern s32 D_80140FF8, D_800D297C;
 extern float D_800C4E54_de;
-extern void Render_SetColorDither(s32 arg0);
+extern void Geometry_SetColorDither(s32 arg0);
 extern s32 func_80296B74_de(CQuatern *planes, Box *box);
 extern void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view);
 extern void func_802A58B0_de(ObjRecAt7528 *arg0, Shared_Particle *arg1, PackedMatrixWords *matrix);
@@ -318,7 +318,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
     if (world->render.head != 0) {
         gDPPipeSync(g_displayListCursor++);
         gDPSetAlphaDither(g_displayListCursor++, G_AD_NOISE);
-        Render_SetColorDither(0x80);
+        Geometry_SetColorDither(0x80);
         gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
         gSPGeometryMode(g_displayListCursor++, 0x60400, 0);
         for (node = world->render.head; node != 0; node = node->next) {
@@ -359,7 +359,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
                     if (!built) {
                         if (D_80140FF8 == 1) {
                             camera = D_80140FE8_de.camera;
-                            Particle_TransformPoint(camera->worldToView, &node->particle.inst.pos, &transformed);
+                            GraphU64_TransformPoint(camera->worldToView, &node->particle.inst.pos, &transformed);
                             depth = transformed.z;
                             if (depth < 0.0f) depth = -depth;
                             Particle_BuildMatrix(&node->particle, &node->particle.mtx[D_800D297C], camera, depth);
@@ -379,7 +379,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
                     if (!node->particle.drawWhenHidden || built) break;
                     if (D_80140FF8 == 1) {
                         camera = D_80140FE8_de.camera;
-                        Particle_TransformPoint(camera->worldToView, &node->particle.inst.pos, &transformed);
+                        GraphU64_TransformPoint(camera->worldToView, &node->particle.inst.pos, &transformed);
                         depth = transformed.z;
                         if (depth < 0.0f) depth = -depth;
                         Particle_BuildMatrix(&node->particle, &node->particle.mtx[D_800D297C], camera, depth);
@@ -396,7 +396,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
         }
         gDPPipeSync(g_displayListCursor++);
         gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
-        Render_SetColorDither(0);
+        Geometry_SetColorDither(0);
         gDPSetAlphaDither(g_displayListCursor++, G_AD_NOTPATTERN);
     }
 }
@@ -415,8 +415,8 @@ typedef struct DraftActor827C8 {
     u8 pad1DA[0xA]; void *list; u8 pad1E8[4]; struct DraftActor827C8 *next;
 } DraftActor827C8;
 typedef struct DraftWorld827C8 { u8 pad[0xFC00]; u8 freeList[0x14], activeList[0x14], padFC28[0x14]; DraftActor827C8 *actors; } DraftWorld827C8;
-extern void Render_SpawnChildEffect(void *, s32, s32, s32), func_80279A00_de(void *), Particle_UpdateMatrix(void *);
-extern void Render_DetachParticleSwooshes(void *, void *);
+extern void Particle_SpawnChildEffect(void *, s32, s32, s32), func_80279A00_de(void *), Particle_UpdateMatrix(void *);
+extern void Fx_DetachParticleSwooshes(void *, void *);
 void Particle_ReleaseOwnerEmitters(DraftWorld827C8 *world, s32 owner)
 {
   DraftActor827C8 *actor;
@@ -445,15 +445,15 @@ void Particle_ReleaseOwnerEmitters(DraftWorld827C8 *world, s32 owner)
       sound = model->actions->sound[index];
       if (effect != 0xFFFF)
       {
-        System_DeliverContactEffect(actor, actor, effect, -1, actor->position, params);
+        Events_DeliverContactEffect(actor, actor, effect, -1, actor->position, params);
       }
       if (animation != 0xFFFF)
       {
-        Render_SpawnChildEffect(actor, animation, actor->animation, 1);
+        Particle_SpawnChildEffect(actor, animation, actor->animation, 1);
       }
       if (sound != 0xFFFF)
       {
-        Render_PlaySoundAtPosition((s16) sound, actor->position, 0, -1);
+        SoundElement_PlaySoundAtPosition((s16) sound, actor->position, 0, -1);
       }
       actor->flags |= 0x100;
       if (actor->flags & 0x100)
@@ -464,11 +464,11 @@ void Particle_ReleaseOwnerEmitters(DraftWorld827C8 *world, s32 owner)
         if (actor->linked)
         {
           Particle_UpdateMatrix(actor);
-          Render_DetachParticleSwooshes(&D_801379C0, actor);
+          Fx_DetachParticleSwooshes(&D_801379C0, actor);
         }
         if (actor->effect)
         {
-          Render_ReleaseLight(&D_8013B1A8, actor->effect);
+          DynLight_ReleaseLight(&D_8013B1A8, actor->effect);
           actor->effect = 0;
         }
         if (actor->refs)
@@ -492,8 +492,8 @@ void Particle_ReleaseOwnerEmitters(DraftWorld827C8 *world, s32 owner)
 
   if (count)
   {
-    Render_PlayFlatSound(0x91A);
-    Render_PlayFlatSound(0x91A);
+    SoundElement_PlayFlatSound(0x91A);
+    SoundElement_PlayFlatSound(0x91A);
   }
 }
 
@@ -522,10 +522,10 @@ typedef struct ActorWorld {
     char pad00[0xFC00]; IntrusiveList active, secondary;
     char padFC28[0x14]; Actor *head;
 } ActorWorld;
-extern void Render_SpawnChildEffect(void *, s32, s32, s32);
+extern void Particle_SpawnChildEffect(void *, s32, s32, s32);
 extern void func_80279A00_de(void *);
 extern void Particle_UpdateMatrix(void *);
-extern void Render_DetachParticleSwooshes(void *, void *);
+extern void Fx_DetachParticleSwooshes(void *, void *);
 
 void Particle_RetireOwnedActors(ActorWorld *world, void *owner) {
     Actor *actor, *next;
@@ -545,20 +545,20 @@ void Particle_RetireOwnedActors(ActorWorld *world, void *owner) {
             pair = definition->effects->pairs[index];
             sound = definition->effects->sounds[index];
             if (effect != 0xFFFF)
-                System_DeliverContactEffect(actor, actor, effect, -1, actor->position, pair);
+                Events_DeliverContactEffect(actor, actor, effect, -1, actor->position, pair);
             if (animation != 0xFFFF)
-                Render_SpawnChildEffect(actor, animation, actor->channel, 1);
+                Particle_SpawnChildEffect(actor, animation, actor->channel, 1);
             if (sound != 0xFFFF)
-                Render_PlaySoundAtPosition((s16)sound, actor->position, 0, -1);
+                SoundElement_PlaySoundAtPosition((s16)sound, actor->position, 0, -1);
             if (actor->flags & 0x100) {
                 if (!(actor->flags & 0x800)) {
                     func_80279A00_de(actor);
                     if (actor->linked) {
                         Particle_UpdateMatrix(actor);
-                        Render_DetachParticleSwooshes(&D_801379C0, actor);
+                        Fx_DetachParticleSwooshes(&D_801379C0, actor);
                     }
                     if (actor->handle) {
-                        Render_ReleaseLight(&D_8013B1A8, actor->handle);
+                        DynLight_ReleaseLight(&D_8013B1A8, actor->handle);
                         actor->handle = 0;
                     }
                     if (actor->counter) --*actor->counter;

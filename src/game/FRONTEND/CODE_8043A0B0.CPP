@@ -15,9 +15,9 @@ extern Shared_PlayerSettingsRecord g_playerSettings[];
 extern struct RowRecAt54 D_800E3A58[];
 extern struct StateFlags D_800E59E6[][19];
 extern f32 D_800DDF90_de;
-extern void *Scene_AllocateMemory(s32);
-extern void *Menu_CreateOverlayNode(void *, s32);
-extern void Menu_ShowSlotById(void *, s32, s32);
+extern void *Cache_AllocateMemory(s32);
+extern void *SmpOverlay_CreateOverlayNode(void *, s32);
+extern void SmpOverlay_ShowSlotById(void *, s32, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern s32 Frontend_FindKeyIndex(s32);
@@ -28,7 +28,7 @@ extern void func_802A2394_de(void);
 extern struct StateFlags D_800E5A06[][19];
 extern s32 func_80419F38_de(void *);
 extern void func_80419F24_de(void *);
-extern void Menu_StartFlicker(void *, int);
+extern void SmpFlicker_StartFlicker(void *, int);
 extern void func_80298368_de(s32);
 extern void func_802A2360_de(void);
 extern void MarkMenuEventHandled(void);
@@ -54,13 +54,13 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
     CVector3 scale;
     Shared_PlayerSettingsRecord *config;
 
-    D_800E59E0 = Scene_AllocateMemory(sizeof(struct FourPlayerResultsScreen));
+    D_800E59E0 = Cache_AllocateMemory(sizeof(struct FourPlayerResultsScreen));
     D_800E59E0->window = window;
-    D_800E59E0->menu = Menu_CreateOverlayNode(window, 4);
-    Menu_ShowSlotById(window, 0, slotResource);
-    Menu_ShowSlotById(window, 1, slotResource);
-    Menu_ShowSlotById(window, 2, slotResource);
-    Menu_ShowSlotById(window, 3, slotResource);
+    D_800E59E0->menu = SmpOverlay_CreateOverlayNode(window, 4);
+    SmpOverlay_ShowSlotById(window, 0, slotResource);
+    SmpOverlay_ShowSlotById(window, 1, slotResource);
+    SmpOverlay_ShowSlotById(window, 2, slotResource);
+    SmpOverlay_ShowSlotById(window, 3, slotResource);
     scale.x = D_800DDF90_de;
     scale.y = D_800DDF90_de;
     scale.z = D_800DDF90_de;
@@ -178,7 +178,7 @@ s32 Frontend_StartFourPlayerResults(void) {
             position.y = D_800DDFAC_de;
             break;
         }
-        rotation.y = (f32)(baseAngle + Nav_NextRandom() % 10);
+        rotation.y = (f32)(baseAngle + GraphU64_NextRandom() % 10);
         baseAngle += 0x2D;
         func_80439B5C_de((u8 *)D_800E59E0 + badgeOffset, 0, scale, position);
         func_80439BE0_de((u8 *)D_800E59E0 + badgeOffset, rotation);
@@ -207,7 +207,7 @@ s32 Frontend_StartFourPlayerResults(void) {
             }
         }
     }
-    Render_PlayFlatSound(0xE78);
+    SoundElement_PlayFlatSound(0xE78);
     return 0;
 }
 #else
@@ -227,9 +227,9 @@ s32 Frontend_UpdateFourPlayerResults(void) {
         D_800E59E0->rightArrow->x = (u16)D_800E59E0->rightArrow->x - (u16)D_800E59E0->rightStep;
         D_800E59E0->timer--;
         if (D_800E59E0->timer <= 0) {
-            Render_PlayFlatSound(0xE79);
+            SoundElement_PlayFlatSound(0xE79);
             Frontend_SetWidgetFlag08(D_800E59E0->message, 1);
-            Menu_StartFlicker(D_800E59E0->resource, 4);
+            SmpFlicker_StartFlicker(D_800E59E0->resource, 4);
             D_800E59E0->state = 4;
             D_800E59E0->timer = 4;
         }
@@ -266,7 +266,7 @@ s32 Frontend_UpdateFourPlayerResults(void) {
         }
         return 0;
     case 5:
-        Render_PlayFlatSound(0xE78);
+        SoundElement_PlayFlatSound(0xE78);
         D_800E59E0->state = 2;
         D_800E59E0->timer = 4;
         Frontend_SetWidgetFlag08(D_800E59E0->message, 0);

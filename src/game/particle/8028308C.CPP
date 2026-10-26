@@ -25,7 +25,7 @@ extern void Particle_UpdateMatrix(void *);
 
 extern void func_80279A00_de(void *arg0);
 
-extern void Render_DetachParticleSwooshes(void *arg0, void *arg1);
+extern void Fx_DetachParticleSwooshes(void *arg0, void *arg1);
 
 
 
@@ -58,24 +58,24 @@ void func_802A4598_de(void *, void *, s8);
 
 f32 Math_Sqrtf(f32);
 
-void Particle_ScaleVector(CVector3 *,CVector3 *,f32);
+void GraphU64_ScaleVector(CVector3 *,CVector3 *,f32);
 
- void Particle_AddVec3(CVector3 *,CVector3 *,CVector3 *);
+ void GraphU64_AddVec3(CVector3 *,CVector3 *,CVector3 *);
 
 /* Transform the measured attachment position and direction into the target frame. */
 extern ParticleAttachmentState D_801041F0;
 
-extern void Rsp_ConvertMatrixToFloat(f32 *out, void *in);
+extern void GraphU64_ConvertMatrixToFloat(f32 *out, void *in);
 
 extern void func_8026EF58_de(f32 *out, f32 *m);
 
 
 
-extern void Particle_TransformDirection(void *matrix, void *input, void *output);
+extern void GraphU64_TransformDirection(void *matrix, void *input, void *output);
 
-extern void System_DeliverContactEffect(void *, void *, s32, s32, CVector3, struct IntPair);
+extern void Events_DeliverContactEffect(void *, void *, s32, s32, CVector3, struct IntPair);
 
-extern void Render_SpawnChildEffect(void *, s32, s8, s32);
+extern void Particle_SpawnChildEffect(void *, s32, s8, s32);
 
 /** Return the word at offset 0xFC68. */
 int func_802830B8_de(struct EffectSystem *effectSystem) {
@@ -101,11 +101,11 @@ void func_802830CC_de(struct EffectSystem *effectSystem, s32 arg1) {
                     func_80279A00_de(var_s0);
                     if (var_s0->unk1D9 != 0) {
                         Particle_UpdateMatrix(var_s0);
-                        Render_DetachParticleSwooshes(&D_801379C0, var_s0);
+                        Fx_DetachParticleSwooshes(&D_801379C0, var_s0);
                     }
                     temp_a1 = var_s0->unk138;
                     if (temp_a1 != 0) {
-                        Render_ReleaseLight(&D_8013B1A8, temp_a1);
+                        DynLight_ReleaseLight(&D_8013B1A8, temp_a1);
                         var_s0->unk138 = 0;
                     }
                     temp_v1_3 = var_s0->refCount;
@@ -166,11 +166,11 @@ void func_80283278_de(struct EffectSystem *effectSystem, s32 arg1) {
                     func_80279A00_de(var_s0);
                     if (var_s0->unk1D9 != 0) {
                         Particle_UpdateMatrix(var_s0);
-                        Render_DetachParticleSwooshes(&D_801379C0, var_s0);
+                        Fx_DetachParticleSwooshes(&D_801379C0, var_s0);
                     }
                     temp_a1 = var_s0->unk138;
                     if (temp_a1 != 0) {
-                        Render_ReleaseLight(&D_8013B1A8, temp_a1);
+                        DynLight_ReleaseLight(&D_8013B1A8, temp_a1);
                         var_s0->unk138 = 0;
                     }
                     temp_v1_3 = var_s0->refCount;
@@ -229,7 +229,7 @@ void func_80283448_de(void *object) {
 #include "particle/8027A0F4_8.H"
 extern CQuatern func_80271818_de(CVector3 *);
 extern Triple D_801002A8;
-extern s32 Render_PlaySoundAtPosition(s16, CVector3, s32, s32);
+extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 void func_80283480_de(Obj_func_80283920_de *source, s32 kind) {
     CQuatern q;
     CVector3 pos;
@@ -319,7 +319,7 @@ void func_80283920_de(Obj_func_80283920_de *actor, Params_func_80283920_de *arg1
         case 0x22: case 0x5f: case 0x60:
             func_802843B8_de(actor,temp_t0); break;
         default:
-            Render_PlaySoundAtPosition(temp_t0, *(CVector3 *)&actor->unk8, 0, -1); break;
+            SoundElement_PlaySoundAtPosition(temp_t0, *(CVector3 *)&actor->unk8, 0, -1); break;
         }
     }
 }
@@ -329,11 +329,11 @@ void func_80283A1C_de(void *arg0) {
 
     if (((Obj_func_80283920_de *)arg0)->active1D9 != 0) {
         Particle_UpdateMatrix(arg0);
-        Render_DetachParticleSwooshes(&D_801379C0, arg0);
+        Fx_DetachParticleSwooshes(&D_801379C0, arg0);
     }
     temp = ((Obj_func_80283920_de *)arg0)->unk138;
     if (temp != 0) {
-        Render_ReleaseLight(&D_8013B1A8, temp);
+        DynLight_ReleaseLight(&D_8013B1A8, temp);
         ((Obj_func_80283920_de *)arg0)->unk138 = 0;
     }
 }
@@ -347,12 +347,12 @@ void func_80283A80_de(ObjRecAt174 *arg0) {
  if(accel != 0.0f) {
  dir=&direction;
  direction=arg0->direction;
- Particle_ScaleVector(&delta,dir,accel);
+ GraphU64_ScaleVector(&delta,dir,accel);
  velocity=&arg0->velocity;
- Particle_AddVec3(velocity,velocity,&delta);
+ GraphU64_AddVec3(velocity,velocity,&delta);
  length=Math_Sqrtf(arg0->velocity.x*arg0->velocity.x+arg0->velocity.y*arg0->velocity.y+arg0->velocity.z*arg0->velocity.z);
  limit=RW_BITS_TO_FLOAT(arg0->link->params->limit);
- if(accel>0.0f) { if(!(limit<length)) goto done; } else { if(!(length<limit)) goto done; } Particle_ScaleVector(velocity,dir,limit); done:;
+ if(accel>0.0f) { if(!(limit<length)) goto done; } else { if(!(length<limit)) goto done; } GraphU64_ScaleVector(velocity,dir,limit); done:;
  }
 }
 
@@ -385,17 +385,17 @@ void func_80283C1C_de(void *arg0, f32 *arg1, s32 arg2) {
     if (arg1 != 0) {
         func_8026EF58_de(matrix, arg1);
     } else {
-        Rsp_ConvertMatrixToFloat(source,
+        GraphU64_ConvertMatrixToFloat(source,
             &current->drawMatrices[D_801041F0.frame]);
         func_8026EF58_de(matrix, source);
     }
     matrix_ptr = matrix;
     scene = &D_801001F8;
-    Particle_TransformPoint(matrix_ptr, scene, &((Shared_Particle *)actor)->attachmentPosition);
+    GraphU64_TransformPoint(matrix_ptr, scene, &((Shared_Particle *)actor)->attachmentPosition);
     direction_ptr = &direction;
     direction = scene->direction;
-    Particle_NormalizeVec3((f32 *)direction_ptr);
-    Particle_TransformDirection(matrix_ptr, direction_ptr, &((Shared_Particle *)actor)->inst.velocity);
+    GraphU64_NormalizeVec3((f32 *)direction_ptr);
+    GraphU64_TransformDirection(matrix_ptr, direction_ptr, &((Shared_Particle *)actor)->inst.velocity);
     ((Shared_Particle *)actor)->target = current;
     ((Shared_Particle *)actor)->flags |= 0x10000;
     ((Shared_Particle *)actor)->collisionNode = scene->actor_byte;
@@ -439,14 +439,14 @@ void func_80283D50_de(void *actor) {
     pair = events->parameters[var_a0];
     temp_s3 = temp_s1->events->sounds[var_a0];
     if (temp_a2 != 0xFFFF) {
-        System_DeliverContactEffect(actor, actor, temp_a2, -1,
+        Events_DeliverContactEffect(actor, actor, temp_a2, -1,
                      ((Shared_Particle *)actor)->inst.pos, pair);
     }
     if (model != 0xFFFF) {
-        Render_SpawnChildEffect(actor, model, ((Shared_Particle *)actor)->space, 1);
+        Particle_SpawnChildEffect(actor, model, ((Shared_Particle *)actor)->space, 1);
     }
     if (temp_s3 != 0xFFFF) {
-        Render_PlaySoundAtPosition((s16)temp_s3,
+        SoundElement_PlaySoundAtPosition((s16)temp_s3,
                       ((Shared_Particle *)actor)->inst.pos, 0, -1);
     }
 }
@@ -478,14 +478,14 @@ void func_80283E58_de(void *particle) {
     pair = events->parameters[var_a0];
     temp_s3 = temp_s1->events->sounds[var_a0];
     if (temp_a2 != 0xFFFF) {
-        System_DeliverContactEffect(particle, particle, temp_a2, -1,
+        Events_DeliverContactEffect(particle, particle, temp_a2, -1,
                      ((Shared_Particle *)particle)->inst.pos, pair);
     }
     if (temp_s2 != 0xFFFF) {
-        Render_SpawnChildEffect(particle, temp_s2, ((Shared_Particle *)particle)->space, 1);
+        Particle_SpawnChildEffect(particle, temp_s2, ((Shared_Particle *)particle)->space, 1);
     }
     if (temp_s3 != 0xFFFF) {
-        Render_PlaySoundAtPosition((s16)temp_s3,
+        SoundElement_PlaySoundAtPosition((s16)temp_s3,
                       ((Shared_Particle *)particle)->inst.pos,
                       (s32)&((Shared_Particle *)particle)->inst.pos, (s32)particle);
     }
@@ -518,14 +518,14 @@ void func_80283F60_de(void *particle) {
     pair = events->parameters[var_a0];
     temp_s3 = temp_s1->events->sounds[var_a0];
     if (temp_a2 != 0xFFFF) {
-        System_DeliverContactEffect(particle, particle, temp_a2, -1,
+        Events_DeliverContactEffect(particle, particle, temp_a2, -1,
                      ((Shared_Particle *)particle)->inst.pos, pair);
     }
     if (temp_s2 != 0xFFFF) {
-        Render_SpawnChildEffect(particle, temp_s2, ((Shared_Particle *)particle)->space, 1);
+        Particle_SpawnChildEffect(particle, temp_s2, ((Shared_Particle *)particle)->space, 1);
     }
     if (temp_s3 != 0xFFFF) {
-        Render_PlaySoundAtPosition((s16)temp_s3,
+        SoundElement_PlaySoundAtPosition((s16)temp_s3,
                       ((Shared_Particle *)particle)->inst.pos, 0, -1);
     }
 }

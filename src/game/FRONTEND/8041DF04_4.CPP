@@ -13,13 +13,13 @@ s32 func_8041DFC0_us_rev1(void *root) {
     func_8041F2A0_Item *item;
     s32 row;
 
-    { void *memory = Scene_AllocateMemory(0x20); D_800E39C0 = memory; }
+    { void *memory = Cache_AllocateMemory(0x20); D_800E39C0 = memory; }
     D_800E39C0->handle = root;
-    D_800E39C0->mode = Menu_CreateOverlayNode((s32) root, 4);
-    Menu_ShowSlotById((s32) root, 0, 0x389);
-    Menu_ShowSlotById((s32) root, 1, 0x389);
-    Menu_ShowSlotById((s32) root, 2, 0x389);
-    Menu_ShowSlotById((s32) root, 3, 0x389);
+    D_800E39C0->mode = SmpOverlay_CreateOverlayNode((s32) root, 4);
+    SmpOverlay_ShowSlotById((s32) root, 0, 0x389);
+    SmpOverlay_ShowSlotById((s32) root, 1, 0x389);
+    SmpOverlay_ShowSlotById((s32) root, 2, 0x389);
+    SmpOverlay_ShowSlotById((s32) root, 3, 0x389);
 
     item = func_8040EC30_de(root, 0x38B);
     item->alpha = 0x8C;

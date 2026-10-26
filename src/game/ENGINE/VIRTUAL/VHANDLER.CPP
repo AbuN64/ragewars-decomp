@@ -26,7 +26,7 @@ extern char D_801011B8[];
 
 extern void Virtual_AppendPageChainNode(Field_void_4 *base, SlotVirtualInitializePagerEuroExtended *slot);
 extern void func_8025637C_de(void *dst, void *rom, void *size, u32 extra);
-extern u32 System_GetMemorySize(void);
+extern u32 Defs_GetMemorySize(void);
 extern void func_802AD370_de(s32 arg0, s32 arg1, s32 arg2, u32 addr, s32 arg4, s32 arg5);
 extern void osCreateThread(void *queue, s32 count, void *arg2, s32 arg3, void *data, s32 arg5);
 extern void osSetEventMesg(s32 count, void *list, s16 *arg2);
@@ -45,7 +45,7 @@ void Virtual_InitializePagerEuroExtended(void) {
     u32 extra;
     u32 i;
 
-    extra = System_GetMemorySize() + 0x80000000;
+    extra = Defs_GetMemorySize() + 0x80000000;
     if (extra <= 0x80400000) {
         extra = 0;
     }
@@ -75,7 +75,7 @@ void Virtual_InitializePagerEuroExtended(void) {
     D_800FF230.regions.next = 0;
     D_800FF230.regions.source = (u8 (*)[4096])((u32) D_176000 | 0xB0000000);
     D_800FF230.fD72 = 0;
-    if (System_GetMemorySize() > 0x4FFFFF) {
+    if (Defs_GetMemorySize() > 0x4FFFFF) {
         func_8025637C_de(D_801011B8, D_176000, D_52BF0, extra);
     }
     if (extra != 0) {
@@ -88,7 +88,7 @@ void Virtual_InitializePagerEuroExtended(void) {
     }
     D_800FF230.f20 = 0;
     osSetEventMesg(0xC, &D_800FF230.completion, &D_800FF230.f20);
-    Resmgr_FillMemory(D_800FF230.pool, 0x63, 0x200);
+    XPlus_FillMemory(D_800FF230.pool, 0x63, 0x200);
     osCreateThread(D_800FF230.queue, 0x63, D_0023C934, 0, D_800FF230.queueData, 0x93);
     osStartThread(D_800FF230.queue);
 }

@@ -95,7 +95,7 @@ s32 Weapons_PickRandomArmedWeapon(void *player) {
     s32 remainingArmedSteps;
 
     weapon = ((Shared_ActorView *)player)->selectedAction;
-    remainingArmedSteps = Nav_NextRandom() % 22;
+    remainingArmedSteps = GraphU64_NextRandom() % 22;
     if (remainingArmedSteps >= 0) {
         do {
             weapon += 1;

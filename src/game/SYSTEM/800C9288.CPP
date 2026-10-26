@@ -30,7 +30,7 @@ const unsigned int D_blob_d39bcb9851fad48bdbd2[1] = {
 
 extern void func_8025FFB0_de(Track_func_80261180_de *track, char **cursor);
 
-extern f32 System_SampleAnimationCurve(Track_func_80261180_de *track, f32 time, s32 unusedFirst, s32 unusedSecond);
+extern f32 PolyTrak_SampleAnimationCurve(Track_func_80261180_de *track, f32 time, s32 unusedFirst, s32 unusedSecond);
 
 
 
@@ -41,7 +41,7 @@ extern s32 func_8025F0C4_eu_x(void *, void *, s32, s32, s32, s32);
 #elif defined(VERSION_US)
 extern s32 func_8025F074_us(void *, void *, s32, s32, s32, s32);
 #elif defined(VERSION_US_REV1)
-extern s32 System_ExpandAnimationTracks(void *, void *, s32, s32, s32, s32);
+extern s32 PolyTrak_ExpandAnimationTracks(void *, void *, s32, s32, s32, s32);
 #else
 extern s32 func_8025F0D4_de(void *, void *, s32, s32, s32, s32);
 #endif
@@ -68,7 +68,7 @@ void func_80261180_de(char **stream, f32 *out, s32 frames)
     cursor = *stream;
     func_8025FFB0_de(&track, &cursor);
     for (i = 0; i < frames; i++) {
-        *out = System_SampleAnimationCurve(&track, i, 0, 0);
+        *out = PolyTrak_SampleAnimationCurve(&track, i, 0, 0);
         out += 4;
     }
     cursor += track.stride * (track.keys * 4 + 6);
@@ -105,11 +105,11 @@ s32 func_802612A8_de(void *sourceMotionPack, void *destinationMotionPack) {
     void *d;
     s32 one;
 
-    first = Render_GetPackSection(sourceMotionPack, 0);
-    a = Render_GetPackSection(sourceMotionPack, 1);
-    b = Render_GetPackSection(sourceMotionPack, 2);
-    c = Render_GetPackSection(destinationMotionPack, 1);
-    d = Render_GetPackSection(destinationMotionPack, 2);
+    first = SetN64_GetPackSection(sourceMotionPack, 0);
+    a = SetN64_GetPackSection(sourceMotionPack, 1);
+    b = SetN64_GetPackSection(sourceMotionPack, 2);
+    c = SetN64_GetPackSection(destinationMotionPack, 1);
+    d = SetN64_GetPackSection(destinationMotionPack, 2);
 
     one = 1;
     D_8010AC78 = one;
@@ -125,7 +125,7 @@ func_8025F0C4_eu_x
 #elif defined(VERSION_US)
 func_8025F074_us
 #elif defined(VERSION_US_REV1)
-System_ExpandAnimationTracks
+PolyTrak_ExpandAnimationTracks
 #else
 func_8025F0D4_de
 #endif
@@ -145,7 +145,7 @@ func_8025F0C4_eu_x
 #elif defined(VERSION_US)
 func_8025F074_us
 #elif defined(VERSION_US_REV1)
-System_ExpandAnimationTracks
+PolyTrak_ExpandAnimationTracks
 #else
 func_8025F0D4_de
 #endif

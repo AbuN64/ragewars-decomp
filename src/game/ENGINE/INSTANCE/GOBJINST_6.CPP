@@ -36,8 +36,8 @@ extern s32 func_8026E340_de(void);
 extern EffectRecAt154 *func_802830B8_de(void *system);
 
 #include "particle/8027A0F4_8.H"
-extern f32 Particle_GetActorRadius(void *actor);
-extern f32 Particle_GetActorHeight(void *actor);
+extern f32 GameObject_GetActorRadius(void *actor);
+extern f32 GameObject_GetActorHeight(void *actor);
 static inline void func_8024A1C0_spawn(Actor_func_8024A1D0_de *actor, Lookup *lookup) {
     CVector3 position;
     EffectRecAt154 *effect;
@@ -45,18 +45,18 @@ static inline void func_8024A1C0_spawn(Actor_func_8024A1D0_de *actor, Lookup *lo
     s32 *node;
 
     if (func_8026E340_de() != 0) {
-        node = Render_GetPackSection(*lookup->value, 2);
+        node = SetN64_GetPackSection(*lookup->value, 2);
         if ((*node != 0) &&
-            (*((s32 *)Render_GetPackSection(Render_GetPackSection(node, 0), 0)) & 0x8000)) {
+            (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
             position = actor->position0;
-            position.y += Particle_GetActorHeight(actor) * D_800C8B38[1];
+            position.y += GameObject_GetActorHeight(actor) * D_800C8B38[1];
             func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                           actor->position1, actor->rotation, position, 0, -1, 0);
             effect = func_802830B8_de(&D_8011D8D0);
             if (effect != 0) {
                 scale = D_800C3A50_de;
-                effect->field150 = Particle_GetActorRadius(actor) * scale;
-                effect->field154 = Particle_GetActorHeight(actor) * scale;
+                effect->field150 = GameObject_GetActorRadius(actor) * scale;
+                effect->field154 = GameObject_GetActorHeight(actor) * scale;
             }
         }
     }
@@ -66,7 +66,7 @@ static inline void spawn(LevelActor *actor) {
     CVector3 position;
 
     position = actor->position0;
-    position.y += Particle_GetActorHeight(actor) * *(&D_800C3A50_de + 1);
+    position.y += GameObject_GetActorHeight(actor) * *(&D_800C3A50_de + 1);
     func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                   actor->position1, actor->rotation, position, 0, -1, 0);
 }
@@ -96,17 +96,17 @@ void func_8024A3B0_de(LevelActor *actor, PlayerCode80225D10 *player, s32 animati
         func_8024AA18_de(actor, animationContext, params);
     }
     if (params->drawModel != 0) {
-        Render_DrawActorModelParts(params->model, player, actor->fieldB4, 1, &actor->lighting[D_800D297C], 0, actor->field3);
+        Geometry_DrawActorModelParts(params->model, player, actor->fieldB4, 1, &actor->lighting[D_800D297C], 0, actor->field3);
         if (func_8026E340_de() != 0) {
-            node = Render_GetPackSection(*params->model, 2);
+            node = SetN64_GetPackSection(*params->model, 2);
             if ((*node != 0) &&
-                (*((s32 *)Render_GetPackSection(Render_GetPackSection(node, 0), 0)) & 0x8000)) {
+                (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
                 spawn(actor);
                 effect = func_802830B8_de(&D_8011D8D0);
                 if (effect != 0) {
                     scale = D_800C8B48;
-                    effect->field150 = Particle_GetActorRadius(actor) * scale;
-                    effect->field154 = Particle_GetActorHeight(actor) * scale;
+                    effect->field150 = GameObject_GetActorRadius(actor) * scale;
+                    effect->field154 = GameObject_GetActorHeight(actor) * scale;
                 }
             }
         }

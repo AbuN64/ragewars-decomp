@@ -32,7 +32,7 @@ extern char D_80145040[];
 extern s16 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern s32 Weapons_GetPlayerIndex(void *, void *);
-extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
+extern void Sky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 
 static inline s32 can_fire(char *player) {
     s32 ammo;
@@ -47,9 +47,9 @@ static inline s32 can_fire(char *player) {
     }
     ammo = Player_GetProfileAchievementFlag(&D_80102B00[((SharedPlayer *)(player))->views1C.view5D4_45.unk5D4 * 0x190], ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E);
     if (ammo == 0) {
-        Render_PlayFlatSound(0xD4D);
+        SoundElement_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-            Camera_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC, D_800E0D44, D_800DCC68, g_languageIndex), Weapons_GetPlayerIndex(D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC, D_800E0D44, D_800DCC68, g_languageIndex), Weapons_GetPlayerIndex(D_80145040, player),
                           1.0f);
         }
     }
@@ -60,7 +60,7 @@ void Weapon_DecaySpinAndActivateEffect(Shared_Actor *actor, WeaponFireState *wea
     char *model;
     player = actor->entity;
     if (weapon->variant != 4) {
-        weapon->spin = Nav_DecayToZero(weapon->spin, 0.013613569f);
+        weapon->spin = GraphU64_DecayToZero(weapon->spin, 0.013613569f);
     }
     weapon->spinStep += weapon->spin * D_800D2988 * 2.0f;
     model = ((SharedPlayer *)(player))->views5E8.view698_37.emitter;
@@ -76,7 +76,7 @@ void Weapon_DecaySpinAndActivateEffect(Shared_Actor *actor, WeaponFireState *wea
     }
     if ((((SharedPlayer *)(player))->views5E8.view6AC_45.unk6AC & 0x4000) && can_fire(player) && ((SharedPlayer *)(player))->views5E8.chargeView.charge > 0) {
         if (!(((SharedPlayer *)(player))->views122C.view122C_2.options & 0x18400)) {
-            Render_PlayFlatSound(0x7BC);
+            SoundElement_PlayFlatSound(0x7BC);
         }
         ((SharedPlayer *)(player))->views122C.view122C_2.options |= 0x18400;
         ((SharedPlayer *)(player))->fxTime = 25.0f;

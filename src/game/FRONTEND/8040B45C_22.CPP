@@ -12,7 +12,7 @@ extern int D_800E28DC;
 extern int D_800E28E4;
 extern ModeRecAt8 D_800DE8A8[2][5];
 extern int D_800E28D0;
-extern int System_GetMemorySize(void);
+extern int Defs_GetMemorySize(void);
 void func_8040C09C_de(void)
 {
   int region = 0;
@@ -31,7 +31,7 @@ void func_8040C09C_de(void)
       break;
   }
   mode = (int *) (&D_800DE8A8[region][D_800E28D8]);
-  memory = System_GetMemorySize();
+  memory = Defs_GetMemorySize();
   budget = 0xF660;
   if (memory != 0x400000)
   {
@@ -77,7 +77,7 @@ void Frontend_StartScreenModeFade(void) {
     }
 }
 /* Detects the storage configuration and updates the cached selection. */
-s32 System_GetMemorySize(); /* extern */
+s32 Defs_GetMemorySize(); /* extern */
                                   /* extern */
 extern s32 D_800E28D8;
 extern s32 D_800E28DC;
@@ -85,7 +85,7 @@ extern s32 D_800E28E0;
 extern u8 D_80146848;
 void Frontend_UpdateScreenMode(void) {
     if (D_800E28D8 == -1) {
-        if (System_GetMemorySize() != 0x400000) {
+        if (Defs_GetMemorySize() != 0x400000) {
             D_800E28D8 = 1;
         } else {
             D_800E28D8 = 0;

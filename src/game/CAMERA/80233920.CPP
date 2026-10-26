@@ -7,7 +7,7 @@
 #include "TYPES.H"
 #include "CAMERA/80233920.H"
 
-extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern f32 Math_Sqrtf(f32);
 
 
@@ -18,12 +18,12 @@ void Camera_AccumulateDistanceScaledShake(CShake *shake, CVector3 position, CVec
     f32 value;
     AxisWave *wave;
 
-    Particle_SubtractVectors(&position, &position, &shake->m_vPos);
+    GraphU64_SubtractVectors(&position, &position, &shake->m_vPos);
     distance = Math_Sqrtf((position.x * position.x) +
                              (position.y * position.y) +
                              (position.z * position.z));
     if (distance < shake->m_Radius) {
-        distance = System_CosineEase(D_800C3090_de - (distance / shake->m_Radius));
+        distance = Defs_CosineEase(D_800C3090_de - (distance / shake->m_Radius));
 
         wave = &shake->x;
         if (wave->mode == 0) goto x_sine;
@@ -31,7 +31,7 @@ void Camera_AccumulateDistanceScaledShake(CShake *shake, CVector3 position, CVec
         value = Math_Sinf(wave->m_Angle * D_800C3094_de) * wave->m_Amp;
         goto x_done;
 x_sine:
-        value = Nav_RandomBetween(-wave->m_Amp, wave->m_Amp);
+        value = GraphU64_RandomBetween(-wave->m_Amp, wave->m_Amp);
         goto x_done;
 x_zero:
         value = 0.0f;
@@ -44,7 +44,7 @@ x_done:
         value = Math_Sinf(wave->m_Angle * D_800C3098_de) * wave->m_Amp;
         goto y_done;
 y_sine:
-        value = Nav_RandomBetween(-wave->m_Amp, wave->m_Amp);
+        value = GraphU64_RandomBetween(-wave->m_Amp, wave->m_Amp);
         goto y_done;
 y_zero:
         value = 0.0f;
@@ -57,7 +57,7 @@ y_done:
         value = Math_Sinf(wave->m_Angle * D_800C309C_de) * wave->m_Amp;
         goto z_done;
 z_sine:
-        value = Nav_RandomBetween(-wave->m_Amp, wave->m_Amp);
+        value = GraphU64_RandomBetween(-wave->m_Amp, wave->m_Amp);
         goto z_done;
 z_zero:
         value = 0.0f;
@@ -111,7 +111,7 @@ void Camera_AdvanceOverlayFade(Overlay *overlay) {
 /* Finishes an entity for the frame: when a player in the D_80145060 list owns it, draws its rectangle
  * through func_8029311C_de if that player shows outlines (flag 0x1000), using the entity's colour (or the
  * override colour D_800FEAD8 when D_800C9FE4 is set, darkened when option 0x4000 is set); it then
- * notifies the player list through func_8022A398_de when Camera_IsSequenceInWindow is clear and func_802934F8_de is set,
+ * notifies the player list through func_8022A398_de when Cinema_IsSequenceInWindow is clear and func_802934F8_de is set,
  * and finishes the entity through func_80245894_de. */
 
 
@@ -124,7 +124,7 @@ extern s32 D_801462C8;
 #include "COMMON/GAME_SESSION.H"
 extern char D_80145040;
 extern void func_8029311C_de(void *, u8 *, s32, s32, s32, s32);
-extern s32 Camera_IsSequenceInWindow(void);
+extern s32 Cinema_IsSequenceInWindow(void);
 extern s32 func_802934F8_de(void);
 extern void func_8022A398_de(void *, View *);
 extern void func_80245894_de(View *);
@@ -167,7 +167,7 @@ void Camera_DrawViewportOverlays(View *entity) {
         func_8029311C_de(&D_8011FAC0, color, entity->viewport[2], entity->viewport[3], entity->viewport[2] + entity->viewport[0],
                       entity->viewport[3] + entity->viewport[1]);
     }
-    if (Camera_IsSequenceInWindow() == 0 && func_802934F8_de() != 0) {
+    if (Cinema_IsSequenceInWindow() == 0 && func_802934F8_de() != 0) {
         func_8022A398_de(&D_80145040, entity);
     }
     func_80245894_de(entity);

@@ -11,7 +11,7 @@
 
 extern func_80284AF4_G2 D_80145060;
 
-extern f32 Particle_GetActorHeight(void *arg0);
+extern f32 GameObject_GetActorHeight(void *arg0);
 extern f32 func_802726BC_de(f32 *arg0, f32 *arg1);
 extern void func_80282E98_de(void *arg0, void *arg1);
 
@@ -51,7 +51,7 @@ void func_80284B20_de(Shared_Particle *particle) {
         point = ((Shared_ActorView *)node)->position.vector;
         stop = 0;
         if (particle->inst.type != actor_id) {
-            point.y += Particle_GetActorHeight(node) * height_scale;
+            point.y += GameObject_GetActorHeight(node) * height_scale;
         }
         if (func_802726BC_de(&particle->inst.pos.x, point_ptr) < radius_sq) {
             func_80282E98_de(particle, node);
@@ -78,37 +78,37 @@ typedef struct CollisionInfo CollisionInfo;
 
 
 extern CollisionInfo D_80100030;
-extern Instance8020CD74 *Camera_FindScreenMessage(Arg1 *arg0);
-extern s32 Camera_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo *);
+extern Instance8020CD74 *Sky_FindScreenMessage(Arg1 *arg0);
+extern s32 Unicol_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo *);
 
 s32 func_80284C48_de(Instance8020CD74 *arg0, Arg1 *arg1) {
     Instance8020CD74 saved;
     Instance8020CD74 *instance;
     s32 collisions;
 
-    instance = Camera_FindScreenMessage(arg1);
+    instance = Sky_FindScreenMessage(arg1);
     if (instance != 0 && arg1->field24 == 0) {
         saved = *instance;
         instance->position = arg1->position128;
-        collisions = Camera_MoveActorWithCollision(instance, arg0->position, &D_80100030);
+        collisions = Unicol_MoveActorWithCollision(instance, arg0->position, &D_80100030);
         *instance = saved;
     } else {
         saved = *arg0;
         saved.position = arg1->position128;
-        collisions = Camera_MoveActorWithCollision(&saved, arg0->position, &D_80100030);
+        collisions = Unicol_MoveActorWithCollision(&saved, arg0->position, &D_80100030);
     }
     return collisions == 0;
 }
 
 /* Marks nearby objects other than type 87 as active. */
 
-extern void Particle_SubtractVectors(f32 *, f32 *, f32 *);
+extern void GraphU64_SubtractVectors(f32 *, f32 *, f32 *);
 void func_80284DC4_de(s32 unused, Obj_func_80284DC4_de *center, Obj_func_80284DC4_de **objects, s32 count) {
  f32 d[3]; s32 i; Obj_func_80284DC4_de *o;
  for(i=0;i<count;i++) {
   o=objects[i];
   if(o->unk4 != 0x57) {
-   Particle_SubtractVectors(d,o->pos,center->pos);
+   GraphU64_SubtractVectors(d,o->pos,center->pos);
    if(d[0]*d[0]+d[1]*d[1]+d[2]*d[2]<=65536.0f) o->unk14C=1;
   }
  }
@@ -116,13 +116,13 @@ void func_80284DC4_de(s32 unused, Obj_func_80284DC4_de *center, Obj_func_80284DC
 
 /* Checks object proximity through type-specific handlers and marks nearby objects active. */
 
-extern void Particle_SubtractVectors(f32 *, f32 *, f32 *);
+extern void GraphU64_SubtractVectors(f32 *, f32 *, f32 *);
 static inline void nearby(s32 unused, Obj_func_80284DC4_de *center, Obj_func_80284DC4_de **objects, s32 count) {
  f32 d[3]; s32 i; Obj_func_80284DC4_de *o;
  for(i=0;i<count;i++) {
   o=objects[i];
   if(o->unk4 != 0x57) {
-   Particle_SubtractVectors(d,o->pos,center->pos);
+   GraphU64_SubtractVectors(d,o->pos,center->pos);
    if(d[0]*d[0]+d[1]*d[1]+d[2]*d[2]<=65536.0f) o->unk14C=1;
   }
  }

@@ -68,8 +68,8 @@ void *func_8025DB80_de(Track *state, s32 index) {
     selection = func_802654E8_de(state->unk0->unk2B60, state->unk0->unk2B64, index);
     if (selection != -1) {
         selection *= 2;
-        result = Render_GetPackSection(state->unk0->unk2B50, selection | 1);
-        command = Render_GetPackSection(state->unk0->unk2B50, selection);
+        result = SetN64_GetPackSection(state->unk0->unk2B50, selection | 1);
+        command = SetN64_GetPackSection(state->unk0->unk2B50, selection);
         state->unk24 = command->unk0;
         #if defined(VERSION_EU)
         duration = func_802AD520_eu(command->unk4);

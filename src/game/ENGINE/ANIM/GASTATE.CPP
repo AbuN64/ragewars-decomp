@@ -21,7 +21,7 @@
 
 extern char g_animationText;
 
-extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
+extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
 
 extern s32 func_802624D8_de(Anim *);
@@ -36,19 +36,19 @@ static inline s32 load(Anim *anim, s32 table, s32 key, s32 id) {
         anim->resource = 0;
         return 0;
     }
-    clip = Render_LocatePackSection(table, key, id, &size);
-    anim->resource = Scene_RequestResource(0, clip, clip, size, 4, anim, &D_0025F56C, &g_animationText, 0);
+    clip = SetN64_LocatePackSection(table, key, id, &size);
+    anim->resource = Cache_RequestResource(0, clip, clip, size, 4, anim, &D_0025F56C, &g_animationText, 0);
     if (func_802624D8_de(anim) == 0) {
         return 0;
     }
     header = func_8026049C_de(anim);
-    anim->frames = ((u16 *)Render_GetPackSection(header, 0))[3];
+    anim->frames = ((u16 *)SetN64_GetPackSection(header, 0))[3];
     anim->current = id;
-    anim->length = ((u16 *)Render_GetPackSection(Render_GetPackSection(header, 3), 0))[1];
+    anim->length = ((u16 *)SetN64_GetPackSection(SetN64_GetPackSection(header, 3), 0))[1];
     return 1;
 }
 
-extern void System_SampleVectorTrack(void *,s32,f32,CVector3 *);
+extern void PolyTrak_SampleVectorTrack(void *,s32,f32,CVector3 *);
 
 extern f32 D_800C41BC_de;
 
@@ -69,7 +69,7 @@ static __inline__ f64 unsignedDouble(u32 value,const f64 *bias) {
 static __inline__ f32 wrapAngle(AnimChannel *anim,f32 time) {
     s16 *keys;
     s32 first,next,last;
-    keys=((AngleKeys *)Render_GetPackSection(func_8026049C_de(anim),0))->keys;
+    keys=((AngleKeys *)SetN64_GetPackSection(func_8026049C_de(anim),0))->keys;
     first=(s32)time;
     next=first+1;
     last=anim->frames-1;
@@ -164,11 +164,11 @@ void func_8026193C_de(AnimChannel *animationChannel, CVector3 *translationDeltaO
         func_802476C8_de((char *)rootMotionActor, animationChannel, 0.0f, forcedEndFrame);
         rootMotionActor->flags = (s32) (rootMotionActor->flags & 0xF7FFFFFF);
     }
-    rootMotionClip = Render_GetPackSection(header,3);
-    rootMotionClip = Render_GetPackSection(rootMotionClip,0);
-    System_SampleVectorTrack(animationChannel, 0, animationChannel->time, &startRootPosition);
+    rootMotionClip = SetN64_GetPackSection(header,3);
+    rootMotionClip = SetN64_GetPackSection(rootMotionClip,0);
+    PolyTrak_SampleVectorTrack(animationChannel, 0, animationChannel->time, &startRootPosition);
     angleSample = animationChannel->time;
-    startAngleKeys = ((AngleKeys *)Render_GetPackSection(func_8026049C_de(animationChannel), 0))->keys;
+    startAngleKeys = ((AngleKeys *)SetN64_GetPackSection(func_8026049C_de(animationChannel), 0))->keys;
     nextStartAngleFrame = animationChannel->frames - 1;
     startAngleFrame = (s32) angleSample;
     followingAngleFrame = startAngleFrame + 1;
@@ -185,8 +185,8 @@ void func_8026193C_de(AnimChannel *animationChannel, CVector3 *translationDeltaO
     lastFrameIndex = animationChannel->frames - 1;
     lastFramePosition = (f32) lastFrameIndex;
     if (lastFramePosition < animationChannel->time) {
-        System_SampleVectorTrack(animationChannel, 0, lastFramePosition, &endRootPosition);
-        endAngleKeys = ((AngleKeys *)Render_GetPackSection(func_8026049C_de(animationChannel), 0))->keys;
+        PolyTrak_SampleVectorTrack(animationChannel, 0, lastFramePosition, &endRootPosition);
+        endAngleKeys = ((AngleKeys *)SetN64_GetPackSection(func_8026049C_de(animationChannel), 0))->keys;
         endAngleFrame = (s32) lastFramePosition;
         followingEndAngleFrame = endAngleFrame + 1;
         nextEndAngleFrame = animationChannel->frames - 1;
@@ -194,8 +194,8 @@ void func_8026193C_de(AnimChannel *animationChannel, CVector3 *translationDeltaO
             nextEndAngleFrame = followingEndAngleFrame;
         }
         angleSample = func_80273EE4_de(lastFramePosition - (f32) endAngleFrame, (f32) endAngleKeys[endAngleFrame] * angleScale, (f32) endAngleKeys[nextEndAngleFrame] * angleScale);
-        Particle_AddVec3(translationDeltaOut, translationDeltaOut, &endRootPosition);
-        Particle_SubtractVectors(translationDeltaOut, translationDeltaOut, &startRootPosition);
+        GraphU64_AddVec3(translationDeltaOut, translationDeltaOut, &endRootPosition);
+        GraphU64_SubtractVectors(translationDeltaOut, translationDeltaOut, &startRootPosition);
         *angleDeltaOut += func_80273F94_de(angleSample, startRootAngle);
         loopStartFrame = rootMotionClip->loopStart;
         restartFrame = 0;
@@ -215,13 +215,13 @@ void func_8026193C_de(AnimChannel *animationChannel, CVector3 *translationDeltaO
         eventLoopStart = unsignedDouble(restartFrame, &D_800C41D8_de);
         func_802476C8_de((char *)rootMotionActor, animationChannel, (f32) eventLoopStart, animationChannel->time);
         positionLoopStart = unsignedDouble(restartFrame, &D_800C41E0_de);
-        System_SampleVectorTrack(animationChannel, 0, (f32) positionLoopStart, &startRootPosition);
+        PolyTrak_SampleVectorTrack(animationChannel, 0, (f32) positionLoopStart, &startRootPosition);
         startRootAngle = wrapAngle(animationChannel,(f32)unsignedDouble(restartFrame,&D_800C41E8_de));
         animationChannel->active = 1;
     }
-    System_SampleVectorTrack(animationChannel, 0, animationChannel->time, &endRootPosition);
+    PolyTrak_SampleVectorTrack(animationChannel, 0, animationChannel->time, &endRootPosition);
     angleSample = animationChannel->time;
-    currentAngleKeys = ((AngleKeys *)Render_GetPackSection(func_8026049C_de(animationChannel), 0))->keys;
+    currentAngleKeys = ((AngleKeys *)SetN64_GetPackSection(func_8026049C_de(animationChannel), 0))->keys;
     nextCurrentAngleFrame = animationChannel->frames - 1;
     currentAngleFrame = (s32) angleSample;
     followingCurrentAngleFrame = currentAngleFrame + 1;
@@ -229,7 +229,7 @@ void func_8026193C_de(AnimChannel *animationChannel, CVector3 *translationDeltaO
         nextCurrentAngleFrame = followingCurrentAngleFrame;
     }
     angleSample = func_80273EE4_de(angleSample - (f32) currentAngleFrame, (f32) currentAngleKeys[currentAngleFrame] * D_800C41F4_de, (f32) currentAngleKeys[nextCurrentAngleFrame] * D_800C41F4_de);
-    Particle_AddVec3(translationDeltaOut, translationDeltaOut, &endRootPosition);
-    Particle_SubtractVectors(translationDeltaOut, translationDeltaOut, &startRootPosition);
+    GraphU64_AddVec3(translationDeltaOut, translationDeltaOut, &endRootPosition);
+    GraphU64_SubtractVectors(translationDeltaOut, translationDeltaOut, &startRootPosition);
     *angleDeltaOut += func_80273F94_de(angleSample, startRootAngle);
 }

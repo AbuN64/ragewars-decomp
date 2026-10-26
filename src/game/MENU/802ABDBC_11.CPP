@@ -169,8 +169,8 @@ block_4:
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
-extern void Weapons_AddAmmo(void *, s16, s16);
-extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
+extern void Player_AddAmmo(void *, s16, s16);
+extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
 /** Apply an effect descriptor's optional setup, resource, sound, and callback. */
@@ -179,7 +179,7 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
     s32 sound;
     s32 callback;
     if (((struct EntryRecAtE *)(arg1))->index != -1) {
-        Weapons_AddAmmo(arg0, ((struct EntryRecAtE *)(arg1))->index,
+        Player_AddAmmo(arg0, ((struct EntryRecAtE *)(arg1))->index,
                       ((struct EntryRecAtE *)(arg1))->argument);
     }
 
@@ -187,7 +187,7 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
     sound = ((struct EntryRecAtE *)(arg1))->sound;
     callback = ((struct EntryRecAtE *)(arg1))->callback;
     if (((struct Actor_func_802AB400_de *)(arg0))->owner != 0) {
-        Camera_StartFade(((struct Actor_func_802AB400_de *)(arg0))->owner,
+        Sky_StartFade(((struct Actor_func_802AB400_de *)(arg0))->owner,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&D_80145088,
@@ -200,7 +200,7 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
         }
     }
     if (sound != 0) {
-        Render_PlaySoundAtPosition(sound,
+        SoundElement_PlaySoundAtPosition(sound,
                       ((Actor_func_802AB400_de *)arg0)->position, 0, -1);
     }
     if (callback != 0) {
@@ -212,7 +212,7 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 extern s32 Weapons_GetMaxHealth(void *arg0);
-extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
+extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
 /** Advance a timed effect and apply its optional resource, sound, and callback. */
@@ -242,7 +242,7 @@ s32 func_802ACC04_de(void *arg0, void *arg1) {
         sound = ((struct TimedItemEffect *)(arg1))->sound;
         callback = ((struct TimedItemEffect *)(arg1))->callback;
         if (((struct Actor_func_802AB400_de *)(arg0))->owner != 0) {
-            Camera_StartFade(((struct Actor_func_802AB400_de *)(arg0))->owner,
+            Sky_StartFade(((struct Actor_func_802AB400_de *)(arg0))->owner,
                           0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
             if (resource != 0) {
                 Camera_PostScreenMessage(&D_80145088,
@@ -255,7 +255,7 @@ s32 func_802ACC04_de(void *arg0, void *arg1) {
             }
         }
         if (sound != 0) {
-            Render_PlaySoundAtPosition(sound,
+            SoundElement_PlaySoundAtPosition(sound,
                           ((Actor_func_802AB400_de *)arg0)->position, 0, -1);
         }
         if (callback != 0) {
@@ -267,7 +267,7 @@ s32 func_802ACC04_de(void *arg0, void *arg1) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
-extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
+extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
 
@@ -294,7 +294,7 @@ s32 func_802ACD28_de(void *arg0, void *arg1) {
     sound = ((struct EntryRecAtE *)(arg1))->sound;
     callback = ((struct EntryRecAtE *)(arg1))->callback;
     if (((struct Actor_func_802AB400_de *)(arg0))->owner != 0) {
-        Camera_StartFade(((struct Actor_func_802AB400_de *)(arg0))->owner,
+        Sky_StartFade(((struct Actor_func_802AB400_de *)(arg0))->owner,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&D_80145088,
@@ -307,7 +307,7 @@ s32 func_802ACD28_de(void *arg0, void *arg1) {
         }
     }
     if (sound != 0) {
-        Render_PlaySoundAtPosition(sound,
+        SoundElement_PlaySoundAtPosition(sound,
                       ((Actor_func_802AB400_de *)arg0)->position, 0, -1);
     }
     if (callback != 0) {
@@ -324,7 +324,7 @@ extern void D_002AD264(void);
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 extern void func_802A6FB8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5, s32 arg6, void (*arg7)(void), void (*arg8)(void));
-extern void Camera_StartFade(void *, s32, s32, s32, s32, s32, s32, s32);
+extern void Sky_StartFade(void *, s32, s32, s32, s32, s32, s32, s32);
 
 typedef struct func_802ADE28_S1 func_802ADE28_S1;
 typedef struct func_802ADE28_S2 func_802ADE28_S2;
@@ -401,7 +401,7 @@ s32 func_802ACE38_de(ActivationActor *arg0, ActivationSlot *arg1, func_802ADE28_
     sound = arg1->unk6;
     callback = arg1->unk8;
     if (arg0->unk5DC != 0) {
-        Camera_StartFade(arg0->unk5DC,
+        Sky_StartFade(arg0->unk5DC,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&D_80145088,
@@ -410,7 +410,7 @@ s32 func_802ACE38_de(ActivationActor *arg0, ActivationSlot *arg1, func_802ADE28_
         }
     }
     if (sound != 0) {
-        Render_PlaySoundAtPosition(sound,
+        SoundElement_PlaySoundAtPosition(sound,
                       *(CVector3 *)&arg0->unk8, 0, -1);
     }
     if (callback != 0) {

@@ -20,7 +20,7 @@
  * 0x800E24A4 = 255.0 (float, D_800E24A4 in this cartridge's tables)
  * 0x800E24A8 = 1.0 (float, D_800E24A8 in this cartridge's tables)
  */
-u32 System_GetMemorySize(void);
+u32 Defs_GetMemorySize(void);
 
 int func_802934F8_de(void);
 
@@ -39,9 +39,9 @@ void Pak_DrawMenuPanel(func_8043FFAC_S2 *menu, TextBoundsText *text, s32 relativ
 
 extern CMenuFontInfo D_800E1E24_de[];
 
-void Text_SetupSpriteMode(s32);
+void OnScreen_SetupSpriteMode(s32);
 
-void Text_SetupFillMode(void);
+void OnScreen_SetupFillMode(void);
 
 /* unable to generate initializer: unknown type */
 
@@ -67,7 +67,7 @@ void func_8043FE3C_de(func_80254D70_S2 *arg0, func_8043FFAC_S5 *entry, s32 arg2,
     if ((func_802934F8_de() == 0) || !(arg0->unk8 & 0x40000000)) {
         if (D_80145088.settings.local != 0) {
             if (arg0->unk8 < 0) {
-                if (System_GetMemorySize() == 0x400000) {
+                if (Defs_GetMemorySize() == 0x400000) {
                     goto block_5;
                 }
             }
@@ -177,12 +177,12 @@ void func_804402DC_de(MenuOption *arg0, MenuOptionBox *box, s32 dir, MenuOptionF
     f32 height;
     s32 *active;
 
-    if (((func_802934F8_de() != 0) && (arg0->flags & 0x40000000)) || ((D_80145088.settings.local != 0) && (arg0->flags < 0) && (System_GetMemorySize() == 0x400000))) {
+    if (((func_802934F8_de() != 0) && (arg0->flags & 0x40000000)) || ((D_80145088.settings.local != 0) && (arg0->flags < 0) && (Defs_GetMemorySize() == 0x400000))) {
         arg3->highlighted = 1;
         if (D_800E1E20 != 3) {
             D_800E1E20 = 3;
         }
-        Text_SetupFillMode();
+        OnScreen_SetupFillMode();
         width = (f32)box->width * box->scaleX;
         height = (f32)box->height * box->scaleY;
         bottom = (f32)box->top;
@@ -201,12 +201,12 @@ void func_804402DC_de(MenuOption *arg0, MenuOptionBox *box, s32 dir, MenuOptionF
         } else {
             var_v1 = 0x80;
         }
-        Text_DrawBevelBox(box->left, box->top, (s32)right, (s32)bottom, 1, 0, 0, 0, 0, var_v1);
+        OnScreen_DrawBevelBox(box->left, box->top, (s32)right, (s32)bottom, 1, 0, 0, 0, 0, var_v1);
         return;
     }
     if (D_800E1E20 != 3) {
         D_800E1E20 = 3;
-        Text_SetupSpriteMode((s32) (arg3->fade * (arg3->alpha * D_800DE47C_de)));
+        OnScreen_SetupSpriteMode((s32) (arg3->fade * (arg3->alpha * D_800DE47C_de)));
     }
     func_802AAC28_de(arg0->resource, 0, (s16)box->left, (s16)box->top, box->scaleX, box->scaleY, 1);
 }

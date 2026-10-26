@@ -22,19 +22,19 @@ typedef struct MotionHeader {
     f32 frameStep;
 } MotionHeader;
 
-extern s32 Render_UnpackResource(void **, s32);
+extern s32 PpDecom_UnpackResource(void **, s32);
 
-extern s32 Render_GetSizedPackSection(s32, s32, s32 *);
+extern s32 SetN64_GetSizedPackSection(s32, s32, s32 *);
 
 
-extern void *Scene_AllocResourceBlock(s32, void *, s32);
+extern void *Cache_AllocResourceBlock(s32, void *, s32);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 
-extern void Scene_ReplaceResourceBlock(s32, void **, void *);
+extern void Cache_ReplaceResourceBlock(s32, void **, void *);
 
-extern s32 System_ExpandAnimationTracks(void *, void *, s32, s32, s32, s32);
+extern s32 PolyTrak_ExpandAnimationTracks(void *, void *, s32, s32, s32, s32);
 
 extern const f32 D_800C411C_de, D_800C4120_de, D_800C4124_de;
 
@@ -43,7 +43,7 @@ extern const f32 D_800C4128_de, D_800C412C_de;
 extern f32 D_8010AC70, D_8010AC7C;
 
 #include "COMMON/STREAM.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *arg1);
 extern s32 D_8010AC74, D_8010AC78;
 
 static inline void resource_begin(ResourceBlock *block, s32 count, s32 bytes) {
@@ -114,20 +114,20 @@ void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
     s32 success;
     f32 count;
 
-    if (Render_UnpackResource((void **)handle, 1)) {
+    if (PpDecom_UnpackResource((void **)handle, 1)) {
         source = (*handle)->block;
         sourceBytes = (*handle)->bytes;
-        section0 = (void *)Render_GetSizedPackSection((s32)source, 0, &bytes0);
-        section1 = (void *)Render_GetSizedPackSection((s32)source, 1, &bytes1);
-        section2 = (void *)Render_GetSizedPackSection((s32)source, 2, &bytes2);
-        section3 = (void *)Render_GetSizedPackSection((s32)source, 3, &bytes3);
-        section4 = (void *)Render_GetSizedPackSection((s32)source, 4, &bytes4);
-        motion = (ResourceBlock *)Render_GetSizedPackSection((s32)source, 5, &bytes5);
-        header = (MotionHeader *)Render_GetPackSection((s32 *)motion, 0);
-        Render_GetSizedPackSection((s32)motion, 1, &fetchedRotationBytes);
-        Render_GetSizedPackSection((s32)motion, 2, &fetchedTranslationBytes);
-        section6 = (void *)Render_GetSizedPackSection((s32)source, 6, &bytes6);
-        Render_GetPackSection(section3, 0);
+        section0 = (void *)SetN64_GetSizedPackSection((s32)source, 0, &bytes0);
+        section1 = (void *)SetN64_GetSizedPackSection((s32)source, 1, &bytes1);
+        section2 = (void *)SetN64_GetSizedPackSection((s32)source, 2, &bytes2);
+        section3 = (void *)SetN64_GetSizedPackSection((s32)source, 3, &bytes3);
+        section4 = (void *)SetN64_GetSizedPackSection((s32)source, 4, &bytes4);
+        motion = (ResourceBlock *)SetN64_GetSizedPackSection((s32)source, 5, &bytes5);
+        header = (MotionHeader *)SetN64_GetPackSection((s32 *)motion, 0);
+        SetN64_GetSizedPackSection((s32)motion, 1, &fetchedRotationBytes);
+        SetN64_GetSizedPackSection((s32)motion, 2, &fetchedTranslationBytes);
+        section6 = (void *)SetN64_GetSizedPackSection((s32)source, 6, &bytes6);
+        SetN64_GetPackSection(section3, 0);
         sourceFrames = header->frames;
         D_8010AC84 = sourceFrames;
         D_8010AC88 = sourceFrames;
@@ -140,7 +140,7 @@ void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
         rotationBytes = motion_storage(header->translations, D_8010AC88);
         translationBytes = motion_storage(header->rotations, D_8010AC88);
         motionBytes = translationBytes + rotationBytes + 0x38;
-        output = Scene_AllocResourceBlock(0, handle, sourceBytes - bytes5 + motionBytes + bytes6);
+        output = Cache_AllocResourceBlock(0, handle, sourceBytes - bytes5 + motionBytes + bytes6);
         if (output != 0) {
             result = output->block;
             resource_begin(result, 7, 0x28);
@@ -155,17 +155,17 @@ void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
             resource_reserve(newMotion, rotationBytes);
             resource_reserve(newMotion, translationBytes);
             resource_copy(result, section6, bytes6);
-            newHeader = (MotionHeader *)Render_GetPackSection((s32 *)motion, 0);
-            rotations = Render_GetPackSection((s32 *)motion, 1);
-            translations = Render_GetPackSection((s32 *)motion, 2);
-            newRotations = Render_GetPackSection((s32 *)newMotion, 1);
-            newTranslations = Render_GetPackSection((s32 *)newMotion, 2);
+            newHeader = (MotionHeader *)SetN64_GetPackSection((s32 *)motion, 0);
+            rotations = SetN64_GetPackSection((s32 *)motion, 1);
+            translations = SetN64_GetPackSection((s32 *)motion, 2);
+            newRotations = SetN64_GetPackSection((s32 *)newMotion, 1);
+            newTranslations = SetN64_GetPackSection((s32 *)newMotion, 2);
             D_8010AC78 = 1;
             D_8010AC74 = 0;
             D_8010AC7C = D_800C4120_de;
             D_8010AC80 = D_800C4124_de;
             D_8010AC70 = newHeader->duration;
-            if (System_ExpandAnimationTracks(rotations, newRotations, newHeader->translations, 3, newHeader->channels, newHeader->flags) == 0) {
+            if (PolyTrak_ExpandAnimationTracks(rotations, newRotations, newHeader->translations, 3, newHeader->channels, newHeader->flags) == 0) {
                 success = 0;
             } else {
                 D_8010AC78 = 0;
@@ -173,17 +173,17 @@ void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
                 D_8010AC7C = D_800C4128_de;
                 D_8010AC80 = D_800C412C_de;
                 D_8010AC70 = newHeader->duration;
-                success = System_ExpandAnimationTracks(translations, newTranslations, newHeader->rotations, 4, newHeader->channels, newHeader->flags) != 0;
+                success = PolyTrak_ExpandAnimationTracks(translations, newTranslations, newHeader->rotations, 4, newHeader->channels, newHeader->flags) != 0;
             }
             if (success == 0) {
-                Scene_ReleaseResource(0, output);
-                Scene_ReplaceResourceBlock(0, (void **)handle, 0);
+                Cache_ReleaseResource(0, output);
+                Cache_ReplaceResourceBlock(0, (void **)handle, 0);
             } else {
                 goto replace_output;
             }
         } else {
 replace_output:
-            Scene_ReplaceResourceBlock(0, (void **)handle, output);
+            Cache_ReplaceResourceBlock(0, (void **)handle, output);
         }
     }
 }

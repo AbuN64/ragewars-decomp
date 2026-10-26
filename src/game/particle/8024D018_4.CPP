@@ -23,9 +23,9 @@
 
 extern s32 func_802757E4_de(s32);
 
-extern void Nav_GetNodeNormal(CVector3 *, s32);
+extern void Region_GetNodeNormal(CVector3 *, s32);
 
-extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 extern CQuatern GameObject_BuildActorDirectionTilt(char *);
@@ -57,7 +57,7 @@ extern s32 Nav_FindNearestPointIndex(void *, void *);
 
 extern CVector3 *Nav_GetGraphPoint(void *, s32);
 
-extern void Particle_ScaleVector(void *, void *, f32);
+extern void GraphU64_ScaleVector(void *, void *, f32);
 
 extern s32 func_8028FFD0_de(s32, s32, s32, CVector3, CVector3, s32, f32);
 
@@ -89,13 +89,13 @@ CQuatern InstHdr_BuildActorGroundRotation(char *obj) {
                 if (func_802757E4_de(((LevelActor *)(obj))->model) != 0) {
                     goto identity;
                 }
-                Nav_GetNodeNormal(&normal, ((LevelActor *)(obj))->model);
+                Region_GetNodeNormal(&normal, ((LevelActor *)(obj))->model);
                 up.x = 0.0f;
                 up.y = 1.0f;
                 up.z = 0.0f;
-                Particle_CrossVectors(&axis, &up, &normal);
-                Particle_NormalizeVec3(&axis);
-                slope = Nav_ArcCos(up.x * normal.x + up.y * normal.y + up.z * normal.z);
+                GraphU64_CrossVectors(&axis, &up, &normal);
+                GraphU64_NormalizeVec3(&axis);
+                slope = GraphU64_ArcCos(up.x * normal.x + up.y * normal.y + up.z * normal.z);
                 D_80115DEC = Math_Sinf(RW_MIN(slope, 0.43633235f) * 0.375f);
                 tilt.x = axis.x * D_80115DEC;
                 tilt.y = axis.y * D_80115DEC;
@@ -149,9 +149,9 @@ void InstHdr_PlayActorGraphSound(void *actor, CVector3 pos, s32 sound, f32 volum
     up.y = D_800C3CD0_de[1];
     up.z = 0.0f;
     dir.x = dir.y = dir.z = up.x;
-    Particle_NormalizeVec3(&dir);
+    GraphU64_NormalizeVec3(&dir);
     if (sound != 0xBD7) {
-        Particle_ScaleVector(&velocity, &dir, 409.59998f);
+        GraphU64_ScaleVector(&velocity, &dir, 409.59998f);
     }
     func_8028FFD0_de((s32)&D_80131600, 0, sound, velocity, at, request.owner, volume);
 }
@@ -269,7 +269,7 @@ int func_8024DE44_de(void *actorStorage) {
     }
 }
 
-s32 Particle_HasActorTerritory(void *actorStorage)
+s32 InstHdr_HasActorTerritory(void *actorStorage)
 {
     struct Object *object = actorStorage;
     struct Model *model;

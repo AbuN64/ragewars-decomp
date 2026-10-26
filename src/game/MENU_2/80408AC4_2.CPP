@@ -37,9 +37,9 @@ s32 func_8042A2B0_de(void *root, s32 unused, s32 delta) {
         D_800E4F60->left->x += (u16)D_800E4F60->leftCount;
         D_800E4F60->right->x -= (u16)D_800E4F60->rightCount;
         if (--D_800E4F60->unk3E0 <= 0) {
-            Render_PlayFlatSound(0xE79);
+            SoundElement_PlayFlatSound(0xE79);
             Frontend_SetWidgetFlag08(D_800E4F60->unk3E8, 1);
-            Menu_StartFlicker(D_800E4F60->text3E4, 4);
+            SmpFlicker_StartFlicker(D_800E4F60->text3E4, 4);
             D_800E4F60->unk3DC = 4;
             D_800E4F60->unk3E0 = 4;
         }
@@ -84,7 +84,7 @@ s32 func_8042A2B0_de(void *root, s32 unused, s32 delta) {
         D_800E4F60->unk3DC = 2;
         D_800E4F60->unk3E0 = 4;
         Frontend_SetWidgetFlag08(D_800E4F60->unk448, 0);
-        Render_PlayFlatSound(0xE78);
+        SoundElement_PlayFlatSound(0xE78);
         break;
     case 6: case 7: break;
     case 8:

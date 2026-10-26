@@ -6,7 +6,7 @@
 
 extern void func_80279A00_de(void *arg0);
 extern void Particle_UpdateMatrix(void *);
-extern void Render_DetachParticleSwooshes(void *arg0, void *arg1);
+extern void Fx_DetachParticleSwooshes(void *arg0, void *arg1);
 
 
 void Particle_Release(EffectSystem *owner, ParticleEffect *arg1) {
@@ -20,11 +20,11 @@ void Particle_Release(EffectSystem *owner, ParticleEffect *arg1) {
             func_80279A00_de(arg1);
             if (arg1->unk1D9 != 0) {
                 Particle_UpdateMatrix(arg1);
-                Render_DetachParticleSwooshes(&D_801379C0, arg1);
+                Fx_DetachParticleSwooshes(&D_801379C0, arg1);
             }
             temp_a1 = arg1->unk138;
             if (temp_a1 != 0) {
-                Render_ReleaseLight(&D_8013B1A8, temp_a1);
+                DynLight_ReleaseLight(&D_8013B1A8, temp_a1);
                 arg1->unk138 = 0;
             }
             temp_v1 = arg1->refCount;

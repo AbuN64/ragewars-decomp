@@ -292,7 +292,7 @@ void Audio_InitializeVoiceParameters(void *arg0, void *desc, s32 extra) {
     void *record;
 
     func_80259C5C_de(arg0, desc, extra);
-    Audio_InitializeVoiceMix(arg0, desc, extra);
+    Channel_InitializeVoiceMix(arg0, desc, extra);
     ((struct View_func_8025AE1C_de *)(arg0))->priority = 0x40;
     index = ((struct Shared_Body *)(desc))->kind;
     if (index != -1) {
@@ -495,9 +495,9 @@ s16 Audio_RandomizeSignedRange(s16 arg0, s16 arg1) {
     f32 temp_f21;
     temp_f21 = (f32)arg1;
     temp_f20 = (f32)arg0;
-    return (s16)(s32)(Nav_RandomBetween(temp_f21, temp_f20) < 0.0f
-                          ? temp_f20 - Nav_RandomBetween(temp_f21, temp_f20)
-                          : temp_f20 + Nav_RandomBetween(temp_f21, temp_f20));
+    return (s16)(s32)(GraphU64_RandomBetween(temp_f21, temp_f20) < 0.0f
+                          ? temp_f20 - GraphU64_RandomBetween(temp_f21, temp_f20)
+                          : temp_f20 + GraphU64_RandomBetween(temp_f21, temp_f20));
 }
 
 f32 Audio_RandomizeScaledByteRange(u8 arg0, u8 arg1) {
@@ -512,7 +512,7 @@ f32 Audio_RandomizeScaledByteRange(u8 arg0, u8 arg1) {
     if (second == first) {
         return first;
     }
-    return first + Nav_RandomFloat(second - first);
+    return first + GraphU64_RandomFloat(second - first);
 }
 
 f32 Audio_ComputeSpatialAttenuationCurve(char *source, char *listener)

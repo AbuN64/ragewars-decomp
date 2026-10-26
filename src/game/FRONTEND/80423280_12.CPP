@@ -50,7 +50,7 @@ extern s32 func_8042ACD8_de();
 
 extern void func_8042DEA0_de();
 
-/* Reports why a match ended: time running out on a timed match, the score limit (Weapons_CheckScoreLimit),
+/* Reports why a match ended: time running out on a timed match, the score limit (Player_CheckScoreLimit),
    the rule set's own target (func_802282EC_de for rule set 0, the Frag Tag limit func_802281F0_de for
    rule set 1), or otherwise whether the last-player-standing check reached its end. */
 
@@ -58,11 +58,11 @@ extern Game_func_8042D060_de D_8014561C;
 
 
 
-extern s32 Weapons_CheckScoreLimit(World *world);
+extern s32 Player_CheckScoreLimit(World *world);
 
-extern s32 Weapons_CheckTotalScoreWin(World *world);
+extern s32 Player_CheckTotalScoreWin(World *world);
 
-extern s32 Weapons_CheckTeamPointWin(World *world);
+extern s32 Player_CheckTeamPointWin(World *world);
 
 /* For each of the 8 occupied slots without the pending-remove flag, runs its two release callbacks. */
 
@@ -121,7 +121,7 @@ enum { ITEM0 = 625, ITEM1 = 624, ITEM2 = 623, ITEM3 = 622 };
 enum { ITEM0 = 621, ITEM1 = 620, ITEM2 = 619, ITEM3 = 618 };
 #endif
 
-/* Releases the object D_800E53C0 holds through Scene_FreeMemory, clears D_800E53C0 and returns zero. */
+/* Releases the object D_800E53C0 holds through Cache_FreeMemory, clears D_800E53C0 and returns zero. */
 
 
 
@@ -208,7 +208,7 @@ void func_8042CFDC_de(void) {
 
     state->m_bCTFOn = 0;
     state->m_bFragTagOn = 0;
-    if (Frontend_IsCupSelected() == 0 || func_8042ACD8_de() == 0) {
+    if (ScenarioSetup_IsCupSelected() == 0 || func_8042ACD8_de() == 0) {
         func_80298368_de(0x14);
     } else {
         func_8042DEA0_de();
@@ -229,17 +229,17 @@ s32 Frontend_GetMatchEndReason(void) {
     if (settings->timeSetting > 0 && D_8014561C.rules.timeLeft == 0.0f) {
         return MATCH_END_TIME_UP;
     }
-    if (Weapons_CheckScoreLimit((World *)&D_80145040) != 0) {
+    if (Player_CheckScoreLimit((World *)&D_80145040) != 0) {
         return MATCH_END_SCORE_LIMIT;
     }
     switch (D_8014DD98.kind) {
     case 0:
-        if (Weapons_CheckTeamPointWin((World *)&D_80145040) != 0) {
+        if (Player_CheckTeamPointWin((World *)&D_80145040) != 0) {
             return MATCH_END_POINT_TARGET;
         }
         break;
     case 1:
-        if (Weapons_CheckTotalScoreWin((World *)&D_80145040) != 0) {
+        if (Player_CheckTotalScoreWin((World *)&D_80145040) != 0) {
             return MATCH_END_TAG_LIMIT;
         }
         break;
@@ -410,7 +410,7 @@ void func_8042D418_de(s32 arg0) {
 }
 
 s32 func_8042D4CC_de(void) {
-    Scene_FreeMemory(D_800E53C0);
+    Cache_FreeMemory(D_800E53C0);
     D_800E53C0 = 0;
     return 0;
 }
@@ -447,7 +447,7 @@ s32 func_8042D4FC_de(void *window, void *unused1, s32 event) {
             if (D_801462C8.controllerMode == 0) {
                 D_80146918 = 0;
                 D_801468F4 = 0;
-                if (Frontend_IsCupSelected() != 0 && func_8042ACD8_de() != 0) {
+                if (ScenarioSetup_IsCupSelected() != 0 && func_8042ACD8_de() != 0) {
                     func_8042DEA0_de();
                     return 0;
                 }

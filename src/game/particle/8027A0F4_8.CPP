@@ -29,18 +29,18 @@ extern s32 D_80140FF8;
 
 extern f32 D_800CD6B0;
 
-extern void Particle_TransformDirection(MatrixF *, CVector3 *, CVector3 *);
-extern void Particle_IdentityMatrix(MatrixF *);
+extern void GraphU64_TransformDirection(MatrixF *, CVector3 *, CVector3 *);
+extern void GraphU64_IdentityMatrix(MatrixF *);
 extern CQuatern GameObject_BuildTargetAimOrientation(EffectActor *, CVector3);
 extern void BuildDirectionMatrix(MatrixF *, CVector3 *);
-extern void Rsp_ConvertMatrixToFloat(MatrixF *, PackedMatrixWords *);
+extern void GraphU64_ConvertMatrixToFloat(MatrixF *, PackedMatrixWords *);
 extern void ScaleMatrixLocal(MatrixF *, f32, f32, f32);
 extern void TranslateMatrix(MatrixF *, f32, f32, f32);
-extern s32 Nav_NextRandom(void);
+extern s32 GraphU64_NextRandom(void);
 extern void Particle_Release(EffectSystem *, ParticleEffect *);
 extern void func_80255D70_de(IntrusiveList *, ParticleEffect *, ParticleEffect *);
 extern void func_80295E84_de(u32 *, s32);
-extern void Camera_ResetActorMotion(ParticleEffect *);
+extern void GameObject_ResetActorMotion(ParticleEffect *);
 extern f32 func_80285630_de(CharacterScreenCell);
 
 #if defined(VERSION_EU)
@@ -53,13 +53,13 @@ extern void func_8022B040_de(s32, ParticleEffect *);
 extern void func_802A4598_de(void *, ParticleEffect *, s32);
 extern s32 func_80268BE0_de(void *, s32);
 extern void func_802843B8_de(ParticleEffect *, s32);
-extern void Render_PlaySoundAtPosition(s16, CVector3, s32, s32);
+extern void SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 extern void func_802765B0_de(s8, u8, u8, u8, u8 *, u8 *, u8 *);
 
 extern void func_80276B44_de(u8, u8, u8, u8, u8 *, u8 *, u8 *);
 
 static inline s32 effect_spawn_random_count(s32 range) {
-    return range != 0 ? Nav_NextRandom() % (range + 1) : 0;
+    return range != 0 ? GraphU64_NextRandom() % (range + 1) : 0;
 }
 
 static inline ParticleEffect *effect_spawn_find_owned(IntrusiveList *list, void *ownerId, EffectEntry *entry) {
@@ -120,12 +120,12 @@ static inline void effect_spawn_aim(ParticleEffect *effect, EffectTarget *aimTar
         effect->mode = -4;
         targetActor = D_801041F0.actor;
         targetTeam = aimTarget->victimTeam;
-        Rsp_ConvertMatrixToFloat(&targetMtx, &targetActor->u60.link.matrixArray[D_801041F0.matrixIndex]);
+        GraphU64_ConvertMatrixToFloat(&targetMtx, &targetActor->u60.link.matrixArray[D_801041F0.matrixIndex]);
         func_8026EF58_de(targetInv.m[0], targetMtx.m[0]);
-        Particle_TransformPoint(&targetInv, &aimTarget->pos, &effect->startPosition);
+        GraphU64_TransformPoint(&targetInv, &aimTarget->pos, &effect->startPosition);
         up = D_801042C8;
-        Particle_NormalizeVec3(&up.x);
-        Particle_TransformDirection(&targetInv, &up, vel);
+        GraphU64_NormalizeVec3(&up.x);
+        GraphU64_TransformDirection(&targetInv, &up, vel);
         effect->followedActor = (s32) targetActor;
         effect->flags |= 0x10000;
         effect->boundMatrixIndex = D_801041F0.matrixIndex;
@@ -192,10 +192,10 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
     resource = sys->resource;
     D_80103FCC = &target;
     sys->last = 0;
-    block = Render_GetPackSection(resource, 1);
+    block = SetN64_GetPackSection(resource, 1);
     numEntries = block->count;
     if (func_80265550_de(block->entries, numEntries, kind, &first, &last) != 0) {
-        entries = ((EffectBlock *)Render_GetPackSection(resource, 2))->entries;
+        entries = ((EffectBlock *)SetN64_GetPackSection(resource, 2))->entries;
         anchor = 0;
         if (D_80145060.actorList != 0) {
             anchor = D_80145060.actorList;
@@ -226,7 +226,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 }
             }
             if (anchor != 0) {
-                Particle_SubtractVectors(&delta, &pos, &anchor->pos);
+                GraphU64_SubtractVectors(&delta, &pos, &anchor->pos);
             } else {
                 delta.x = delta.y = delta.z = 0.0f;
             }
@@ -292,7 +292,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 }
             }
             if (entry->params->chance != 100) {
-                if (Nav_NextRandom() % 1000 + 1 > entry->params->chance * 10) {
+                if (GraphU64_NextRandom() % 1000 + 1 > entry->params->chance * 10) {
                     ok = 0;
                 }
             }
@@ -306,7 +306,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                         if (!(source->flags & 0x100000)) {
                             if (D_80140FF8 == 1) {
                                 camera = D_80140FE8_de.camera;
-                                Particle_TransformPoint(camera->worldToView, &source->pos, &aimDelta);
+                                GraphU64_TransformPoint(camera->worldToView, &source->pos, &aimDelta);
                                 depth = aimDelta.z;
                                 if (depth < 0.0f) {
                                     depth = -depth;
@@ -317,7 +317,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                             }
                             source->flags |= 0x100000;
                         }
-                        Rsp_ConvertMatrixToFloat(&mtx, &source->u60.matrices[D_800D297C]);
+                        GraphU64_ConvertMatrixToFloat(&mtx, &source->u60.matrices[D_800D297C]);
                         scale = 0.09765625f;
                         if (source->model->unk14 != 0) {
                             scale = 2.857143f;
@@ -332,11 +332,11 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                         func_80272CB0_de(&mtx, -1.0f, 1.0f, -1.0f);
                         break;
                     default:
-                        Particle_BuildTranslationMatrix(&mtx, source->pos.x, source->pos.y, source->pos.z);
+                        GraphU64_BuildTranslationMatrix(&mtx, source->pos.x, source->pos.y, source->pos.z);
                         break;
                 }
             } else if (entry->flags & 0x1000000) {
-                Particle_IdentityMatrix(&mtx);
+                GraphU64_IdentityMatrix(&mtx);
             } else {
                 if (entry->flags & 0x40000) {
                     quat = GameObject_BuildTargetAimOrientation(owner, pos);
@@ -357,7 +357,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 }
                 count++;
                 func_80295E84_de(&effect->unk11C, entry->unk4);
-                Camera_ResetActorMotion(effect);
+                GameObject_ResetActorMotion(effect);
                 effect->unk110 = 0;
                 effect->unk114 = 0;
                 effect->kind = kind;
@@ -413,15 +413,15 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     dir.x = func_80285630_de(entry->direction[0]);
                     dir.y = func_80285630_de(entry->direction[1]);
                     dir.z = func_80285630_de(entry->direction[2]);
-                    Particle_NormalizeVec3(&dir.x);
+                    GraphU64_NormalizeVec3(&dir.x);
                     if (dir.x != 0.0f || dir.y != 0.0f || dir.z != 0.0f) {
-                        Particle_TransformPoint(&mtx, &dir, &dirOut);
+                        GraphU64_TransformPoint(&mtx, &dir, &dirOut);
                     } else {
                         dirOut = dir;
                     }
                     if (mode == -8) {
                         effect->direction = D_801002E0;
-                        Particle_NormalizeVec3(&effect->direction.x);
+                        GraphU64_NormalizeVec3(&effect->direction.x);
                     } else {
                         effect->direction = dirOut;
                     }
@@ -460,26 +460,26 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 offset.y = func_80285630_de(entry->offset[1]);
                 offset.z = func_80285630_de(entry->offset[2]);
                 if (offset.x != 0.0f || offset.y != 0.0f || offset.z != 0.0f) {
-                    Particle_TransformPoint(&mtx, &offset, &offsetOut);
+                    GraphU64_TransformPoint(&mtx, &offset, &offsetOut);
                     if (!(entry->flags & 0x8000)) {
-                        Particle_AddVec3(&offsetOut, &pos, &offsetOut);
+                        GraphU64_AddVec3(&offsetOut, &pos, &offsetOut);
                     }
                     effect->pos = offsetOut;
                 }
                 if (aim != 0) {
-                    Particle_SubtractVectors(&aimDelta, aim, &effect->pos);
-                    Particle_NormalizeVec3(&aimDelta.x);
+                    GraphU64_SubtractVectors(&aimDelta, aim, &effect->pos);
+                    GraphU64_NormalizeVec3(&aimDelta.x);
                     BuildDirectionMatrix(&mtx, &aimDelta);
                     if (mode == -8) {
                         effect->direction = D_801002E0;
-                        Particle_NormalizeVec3(&effect->direction.x);
+                        GraphU64_NormalizeVec3(&effect->direction.x);
                     } else {
                         dir.x = func_80285630_de(entry->direction[0]);
                         dir.y = func_80285630_de(entry->direction[1]);
                         dir.z = func_80285630_de(entry->direction[2]);
-                        Particle_NormalizeVec3(&dir.x);
+                        GraphU64_NormalizeVec3(&dir.x);
                         if (dir.x != 0.0f || dir.y != 0.0f || dir.z != 0.0f) {
-                            Particle_TransformPoint(&mtx, &dir, &dirOut);
+                            GraphU64_TransformPoint(&mtx, &dir, &dirOut);
                         } else {
                             dirOut = dir;
                         }
@@ -488,16 +488,16 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 }
                 effect->unk168 = effect->pos;
                 effect->startPosition = effect->pos;
-                Particle_ScaleVector(&effect->velocity, &dirOut, func_80285630_de(entry->motion->speed));
+                GraphU64_ScaleVector(&effect->velocity, &dirOut, func_80285630_de(entry->motion->speed));
                 if (entry->flags & 0x20) {
-                    Particle_AddVec3(&effect->velocity, &effect->velocity, &arg6);
+                    GraphU64_AddVec3(&effect->velocity, &effect->velocity, &arg6);
                 }
                 hue = 0;
                 if (entry->color->m_RandomizeHue != 0) {
-                    hue = Nav_NextRandom() % (entry->color->m_RandomizeHue * 2) - (u8) entry->color->m_RandomizeHue;
+                    hue = GraphU64_NextRandom() % (entry->color->m_RandomizeHue * 2) - (u8) entry->color->m_RandomizeHue;
                 }
-                sat = entry->color->m_RandomizeSaturation != 0 ? Nav_NextRandom() % entry->color->m_RandomizeSaturation : 0;
-                val = entry->color->unkE != 0 ? Nav_NextRandom() % entry->color->unkE : 0;
+                sat = entry->color->m_RandomizeSaturation != 0 ? GraphU64_NextRandom() % entry->color->m_RandomizeSaturation : 0;
+                val = entry->color->unkE != 0 ? GraphU64_NextRandom() % entry->color->unkE : 0;
                 r = entry->color->m_WhiteColor[0];
                 g = entry->color->m_WhiteColor[1];
                 b = entry->color->m_WhiteColor[2];
@@ -571,7 +571,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     render->flags |= 0x20000;
                 }
                 vel = &effect->velocity;
-                Particle_ScaleVector(vel, vel, D_800CD6B0);
+                GraphU64_ScaleVector(vel, vel, D_800CD6B0);
                 if ((kind == 0x2D || kind == 0x4F) && (sourceType = source->type) == 2) {
                     aimTarget = &D_801041F0;
                     if (aimTarget->actor != 0) {
@@ -596,7 +596,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                             func_802843B8_de(effect, sound);
                             break;
                         default:
-                            Render_PlaySoundAtPosition(sound, effect->pos, 0, -1);
+                            SoundElement_PlaySoundAtPosition(sound, effect->pos, 0, -1);
                             break;
                     }
                 }

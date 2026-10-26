@@ -32,10 +32,10 @@ extern float D_800DDF58;
 extern float D_800DDF50_de;
 extern float D_800DDF58;
 #endif
-extern void Particle_BuildTranslationMatrix(void *, f32, f32, f32);
+extern void GraphU64_BuildTranslationMatrix(void *, f32, f32, f32);
 extern void PitchMatrixLocal(Matrix *,f32); extern void YawMatrixLocal(Matrix *,f32); extern void RollMatrixLocal(Matrix *,f32);
 extern void ScaleMatrixLocal(Matrix *,f32,f32,f32); extern void SwapMatrixUpForward(Matrix *);
-extern s32 func_802A1934_de(void); extern void Rsp_ConvertMatrixToFixed(Matrix *,void *);
+extern s32 func_802A1934_de(void); extern void GraphU64_ConvertMatrixToFixed(Matrix *,void *);
 extern s32 func_8028C198_de(void *,s32);
 extern void func_8026DF30_de(s32,void *,void *,s32,s32);
 void func_804399D0(MenuModelItem *item) {
@@ -54,8 +54,8 @@ void func_804399D0(MenuModelItem *item) {
   func_8026D844_de();
   {Gfx *g=g_displayListCursor++; char *address=(char *)(u32)(D_800D297C<<6); address+=0x380; address+=(u32)D_80141008; gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);}
   position=item->position;
-  Particle_TransformPoint(&D_80141008[0].camera,&position,&transformed);
-  Particle_BuildTranslationMatrix(&matrix, transformed.x, transformed.y, transformed.z);
+  GraphU64_TransformPoint(&D_80141008[0].camera,&position,&transformed);
+  GraphU64_BuildTranslationMatrix(&matrix, transformed.x, transformed.y, transformed.z);
   time=func_802A1934_de();
   if(item->speed.x!=0.0f)PitchMatrixLocal(&matrix,time*item->speed.x*D_800DDF50_de);
 #if defined(VERSION_DE)
@@ -78,10 +78,10 @@ void func_804399D0(MenuModelItem *item) {
   scale.z=item->scale.z*ratio;
   scale.y=item->scale.y*(D_80141008[0].height/(f32)*(&D_800E28D0+1));
   ScaleMatrixLocal(&matrix,scale.x,scale.y,scale.z);SwapMatrixUpForward(&matrix);
-  Rsp_ConvertMatrixToFixed(&matrix,(char *)item+((D_800D297C<<6)+0x38));
-  model=func_8028C198_de(&g_world,item->model);Render_BeginModelBatch();
+  GraphU64_ConvertMatrixToFixed(&matrix,(char *)item+((D_800D297C<<6)+0x38));
+  model=func_8028C198_de(&g_world,item->model);Geometry_BeginModelBatch();
   func_8026DF30_de(model,(char *)item+((D_800D297C<<6)+0x38),&D_800D0EF8,0,item->flags);
-  Render_FlushModelBatch();
+  Geometry_FlushModelBatch();
  }
  D_800CC380=saved;
 }

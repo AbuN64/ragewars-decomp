@@ -21,8 +21,8 @@ extern void func_80254C70_de(s32 unused, void *object);
 
 extern void func_80254AD0_de(s32 arg0, s32 arg1);
 
-/* Frees a block from Scene_AllocateMemory: releases the heap node stored 16 bytes before it under the heap lock. */
-void Scene_FreeMemory(void *allocation) {
+/* Frees a block from Cache_AllocateMemory: releases the heap node stored 16 bytes before it under the heap lock. */
+void Cache_FreeMemory(void *allocation) {
     s32 lockUsers;
     s32 remainingLockUsers;
     u32 mask;

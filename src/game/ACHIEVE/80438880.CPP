@@ -15,10 +15,10 @@ extern s8 D_80102B0D[], D_800FEB0E[];
 extern char *D_auto_800E2054[], *D_auto_800E20B4[], *D_auto_800E20A4[], *D_800E2044_eu[], *D_800E2074_eu[], *D_800E2094_eu[], *D_800E2084[], *D_auto_800E2034[];
 extern u8 D_800FEB0F[], D_800FEB17[], D_800FEB4A[], D_800FEB54[], D_80102C24[], D_8010EB7D[], D_80142358[];
 extern s32 D_8010EB94[], D_80146894;
-extern void *Scene_AllocateMemory(), *func_8040EC30_de(), *func_80425C70_de(), *Achieve_GetResultText();
+extern void *Cache_AllocateMemory(), *func_8040EC30_de(), *func_80425C70_de(), *Achieve_GetResultText();
 extern s32 func_80265650_de(), func_80425014_de(), func_80425674_de(), Frontend_FindKeyIndex();
 extern void Frontend_SetWidgetFlag08(), Frontend_SetWidgetFlag100(), func_8043C210_de(), func_8043C278_de(), func_80438A88_de(), func_80425D14_de();
-extern void func_80265688_de(), Resmgr_FillMemory(), func_804259E0_de(), func_802A0C08_de(), Resmgr_CopyString(), Achieve_UpdatePlayerPreviewStats(), func_80438614_de();
+extern void func_80265688_de(), XPlus_FillMemory(), func_804259E0_de(), func_802A0C08_de(), XPlus_CopyString(), Achieve_UpdatePlayerPreviewStats(), func_80438614_de();
 extern void func_8041B110_de(), func_8028D380_de(), func_802A2394_de();
 extern char *func_802A0494_de();
 extern u8 D_800F00DC_raw[];
@@ -34,7 +34,7 @@ s32 func_80438880_eu(void *root) {
     u8 mode;
     u8 buf[0x40];
 
-    g = Scene_AllocateMemory(0x1C8);
+    g = Cache_AllocateMemory(0x1C8);
     D_800E5830 = g;
     SG(g, void *, 0x20) = root;
     Frontend_SetWidgetFlag08(root, 0);
@@ -90,7 +90,7 @@ s32 func_80438880_eu(void *root) {
                 }
                 if (D_8015402C >= 0x23) {
                     func_80265688_de(D_800FEB54 + SG(g, s32, 0x94) * 0x98, D_80142358[SG(g, s32, 0x94) * 0x8C], 1);
-                    Resmgr_FillMemory(D_800FEB54 + 0x2A + SG(g, s32, 0x94) * 0x98, 0, 5);
+                    XPlus_FillMemory(D_800FEB54 + 0x2A + SG(g, s32, 0x94) * 0x98, 0, 5);
                     v = func_80425674_de(SG(g, s32, 0x94));
                     if (v >= 0) {
                         i = Frontend_FindKeyIndex(v);
@@ -125,7 +125,7 @@ s32 func_80438880_eu(void *root) {
         Frontend_SetWidgetFlag100(func_8040EC30_de(root, CS(0x273)), 0);
         goto tail;
     }
-    Resmgr_CopyString(g + 0x18C, D_800E2044_eu[lang]);
+    XPlus_CopyString(g + 0x18C, D_800E2044_eu[lang]);
     it = func_8040EC30_de(SG(g, void *, 0x20), CS(0x283));
     Frontend_SetWidgetFlag08(it, 1);
     SG(it, u8, 0x10) = 0xAF;
@@ -153,7 +153,7 @@ tail:
     }
     it = func_8040EC30_de(root, CS(0x270));
     func_8028D380_de(g_world, D_8015402C, buf, 0x3F);
-    Resmgr_CopyString(g + 0x50, func_802A0494_de(buf));
+    XPlus_CopyString(g + 0x50, func_802A0494_de(buf));
     SG(it, u8 *, 0x38) = g + 0x50;
     SG(g, void *, 0x24) = func_8040EC30_de(root, CS(0x278));
     SG(g, s32, 0x1C0) = 1;

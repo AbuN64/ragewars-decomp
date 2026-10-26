@@ -12,15 +12,15 @@ extern f32 Weapons_FindClearAimAngle(Actor_func_80214DD4_de *arg0, CVector3 pos,
 extern f32 Weapons_GetSignedAngleToPoint(Actor_func_80214DD4_de *arg0, CVector3 pos);
 struct Cursor;
 extern Location *func_80219408_de(struct Cursor *slot);
-extern f32 Particle_GetActorHeight(Actor_func_80214DD4_de *arg0);
-extern f32 Particle_GetActorRadius(Actor_func_80214DD4_de *arg0);
-extern f32 Sound_GetActorReach(Actor_func_80214DD4_de *arg0);
+extern f32 GameObject_GetActorHeight(Actor_func_80214DD4_de *arg0);
+extern f32 GameObject_GetActorRadius(Actor_func_80214DD4_de *arg0);
+extern f32 InstHdr_GetActorReach(Actor_func_80214DD4_de *arg0);
 extern void InstHdr_CopyActorPositionAndModel(Actor_func_80214DD4_de *arg0, CVector3 pos, CVector3 *outPos, s32 *outRoom, s32 arg4, s32 arg5);
 extern f32 func_8024E80C_de(Actor_func_80214DD4_de *arg0);
-extern f32 Particle_GetHorizontalAngle(CVector3 *arg0);
-extern void Particle_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
-extern void Particle_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 *right);
-extern void Particle_ScaleVector(CVector3 *result, CVector3 *vec, f32 scale);
+extern f32 GraphU64_GetHorizontalAngle(CVector3 *arg0);
+extern void GraphU64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
+extern void GraphU64_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 *right);
+extern void GraphU64_ScaleVector(CVector3 *result, CVector3 *vec, f32 scale);
 
 
 extern f32 Math_Sqrtf(f32 value);
@@ -29,16 +29,16 @@ static inline void Weapons_PlaceGoalBeside(Actor_func_80214DD4_de *actor, Actor_
     CVector3 dir;
     CVector3 goal;
     if (anchor != 0) {
-        Particle_SubtractVectors(&dir, &target->pos, &anchor->pos);
+        GraphU64_SubtractVectors(&dir, &target->pos, &anchor->pos);
         dir.y = 0.0f;
-        Particle_NormalizeVec3(&dir);
+        GraphU64_NormalizeVec3(&dir);
     } else {
         dir.x = 0.0f;
         dir.y = 0.0f;
         dir.z = 0.0f;
     }
-    Particle_ScaleVector(&dir, &dir, Particle_GetActorRadius(target) + Particle_GetActorRadius(actor) + D_800C216C_de);
-    Particle_AddVec3(&goal, &target->pos, &dir);
+    GraphU64_ScaleVector(&dir, &dir, GameObject_GetActorRadius(target) + GameObject_GetActorRadius(actor) + D_800C216C_de);
+    GraphU64_AddVec3(&goal, &target->pos, &dir);
     InstHdr_CopyActorPositionAndModel(target, goal, outPos, outRoom, 0, 0);
 }
 /** Picks what the tracker aims at (its target, itself, a slot or home point, or the actor) and
@@ -102,10 +102,10 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
             pos = target->pos;
             room = target->room;
             if (mode == 1) {
-                pos.y += target->height + Particle_GetActorHeight(target) * D_800C2170_de;
+                pos.y += target->height + GameObject_GetActorHeight(target) * D_800C2170_de;
             }
         }
-        gap = Particle_GetActorRadius(target) + Particle_GetActorRadius(actor);
+        gap = GameObject_GetActorRadius(target) + GameObject_GetActorRadius(actor);
         switch (kind) {
             case 2:
                 gap += D_800C2174_de;
@@ -119,7 +119,7 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
                 break;
         }
     } else {
-        gap = Particle_GetActorRadius(actor);
+        gap = GameObject_GetActorRadius(actor);
         switch (kind) {
             case 4:
                 loc = func_80219408_de(&tracker->slot);
@@ -144,10 +144,10 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
                 break;
         }
     }
-    Particle_AddVec3(&pos, &pos, &tracker->offset);
+    GraphU64_AddVec3(&pos, &pos, &tracker->offset);
     if (gap > 0.0f) {
-        Particle_SubtractVectors(&away, &actor->pos, &pos);
-        angle = Particle_GetHorizontalAngle(&away);
+        GraphU64_SubtractVectors(&away, &actor->pos, &pos);
+        angle = GraphU64_GetHorizontalAngle(&away);
         pos.x -= gap * Math_Sinf(angle);
         pos.z -= gap * Math_Cosf(angle);
     }
@@ -155,7 +155,7 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
         pos.y = RW_MIN_LT(pos.y, func_8024E80C_de(actor));
     }
     if (boost) {
-        reach = Sound_GetActorReach(actor);
+        reach = InstHdr_GetActorReach(actor);
         probe.x = actor->pos.x + reach * Math_Sinf(tracker->angle);
         probe.y = tracker->height;
         probe.z = actor->pos.z + reach * Math_Cosf(tracker->angle);
@@ -164,7 +164,7 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
     } else {
         range = Weapons_GetSignedAngleToPoint(actor, pos);
     }
-    Particle_SubtractVectors(&delta, &pos, &actor->pos);
+    GraphU64_SubtractVectors(&delta, &pos, &actor->pos);
     out->kind = kind;
     out->target = target;
     out->m_DeltaAngle = range;

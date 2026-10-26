@@ -12,7 +12,7 @@ extern Shared_Entry D_800E5CA0;
 
 
 
-extern func_802077F4_S2 *Items_GetWidgetStyle(void *, s32);
+extern func_802077F4_S2 *Pak_GetWidgetStyle(void *, s32);
 
 
 extern void func_8044208C_de(void *, ItemRecAt20V1 *, void *, MenuStyle *);
@@ -44,7 +44,7 @@ s32 func_802BD400_de(u8 *);
 
 extern u8 D_800E5CAC[0x64];
 
-/* Draws the D_800E5CA0 spinner: during the first part of its blink period it fills a two-pixel white bar below the item under the digit its value selects, placed from the item's x by the character width func_80442DDC_de reports scaled to the screen, with the style's alpha, through Text_SetupFillMode and Text_DrawBevelBox; then draws the item through func_8044208C_de. */
+/* Draws the D_800E5CA0 spinner: during the first part of its blink period it fills a two-pixel white bar below the item under the digit its value selects, placed from the item's x by the character width func_80442DDC_de reports scaled to the screen, with the style's alpha, through OnScreen_SetupFillMode and OnScreen_DrawBevelBox; then draws the item through func_8044208C_de. */
 void func_8043C9AC_de(void *menu, ItemRecAt20V1 *item, void *third, MenuStyle *style) {
     f32 width;
     f32 alpha;
@@ -52,12 +52,12 @@ void func_8043C9AC_de(void *menu, ItemRecAt20V1 *item, void *third, MenuStyle *s
     unsigned int bits;
 
     if (D_800E5CA0.timer <= (6.0f)) {
-        width = Items_GetWidgetStyle(menu, 0)->unk4 * (f32)D_800E28D0 * (0.0035211266949772835f);
+        width = Pak_GetWidgetStyle(menu, 0)->unk4 * (f32)D_800E28D0 * (0.0035211266949772835f);
         x = (f32)item->x + (f32)D_800E5CA0.value * width;
         D_800E1E20 = -1;
         alpha = style->alpha * (style->fade * (128.0f));
-        Text_SetupFillMode();
-        Text_DrawBevelBox(x, item->y, (f32)x + width, item->y + 2, 0, 0, 0xFF, 0xFF, 0xFF,
+        OnScreen_SetupFillMode();
+        OnScreen_DrawBevelBox(x, item->y, (f32)x + width, item->y + 2, 0, 0, 0xFF, 0xFF, 0xFF,
                       (u8)(bits = !((2147483648.0f) <= alpha) ? (s32)alpha : (bits = (s32)(alpha - (2147483648.0f))) | 0x80000000));
     }
     func_8044208C_de(menu, item, third, style);

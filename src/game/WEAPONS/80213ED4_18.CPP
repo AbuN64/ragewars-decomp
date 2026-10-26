@@ -6,7 +6,7 @@
 /* Returns the signed angle between an actor's facing and the direction to a point on the ground plane:
    normalises the offset from the actor at 0x8 to the point, takes its dot product with the facing
    built from the sine and cosine of the yaw at 0x6C, clamps it to -1..1, converts it through the arc
-   cosine Nav_ArcCos and negates it when the point lies on the other side, or returns zero when the
+   cosine GraphU64_ArcCos and negates it when the point lies on the other side, or returns zero when the
    point is at the actor. Scheduler lever, disclosed: the sine read sits in a do-while(0) block. */
 extern f32 Math_Sqrtf(f32);
 
@@ -32,7 +32,7 @@ f32 Weapons_GetSignedAngleToPoint(void *actor, CVector3 point) {
     c = -Math_Cosf(((struct Actor_func_80214DD4_de *)actor)->heading);
     dot = (dx * -s + dz * c) / dist;
     dot = ((RW_MIN(dot, 1.0f))<((-1.0f))?((-1.0f)):(RW_MIN(dot, 1.0f)));
-    angle = Nav_ArcCos(dot);
+    angle = GraphU64_ArcCos(dot);
     if (dx * c + dz * s > 0.0f) {
         return angle;
     }

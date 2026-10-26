@@ -38,7 +38,7 @@ void func_8021A78C_de(void *playerObject) {
         attributes = (void *)((s32)attributes << 2);
         attributes = D_8010F328 + (s32)attributes;
     }
-    Fx_InitControllerInput(state, attributes);
+    ContPad_InitControllerInput(state, attributes);
     ((ObjectLinks16D8 *)(object))->unk_6C0 = 0;
     ((ObjectLinks16D8 *)(object))->unk_6C4 = 0;
     ((ObjectLinks16D8 *)(object))->unk_6C8 = 0;
@@ -246,7 +246,7 @@ extern s32 func_80426090_de(struct Player *);
 extern s32 func_80426174_de(struct Player *);
 extern s32 func_804261DC_de(struct Player *);
 
-void Render_ResetPlayerWeapons(struct Player *player) {
+void Player_ResetPlayerWeapons(struct Player *player) {
     Shared_Game *game;
     s32 i;
     s32 j;
@@ -345,18 +345,18 @@ void Render_ResetPlayerWeapons(struct Player *player) {
 #include "COMMON/SHAREDCALLBACK5.H"
 extern s32 D_801371D4;
 extern char D_8013B364[];
-extern void Items_ReleaseObjectHandles(void *);
-extern void Items_SetSelection(void *, s32, s32);
-extern f32 Particle_GetPointDistance(void *, void *);
+extern void Ovlgame_ReleaseObjectHandles(void *);
+extern void OvlScene_SetSelection(void *, s32, s32);
+extern f32 GraphU64_GetPointDistance(void *, void *);
 extern s32 Nav_FindNearestPointIndex(void *, void *);
-extern void Render_SetProfileMode(void *, s32);
+extern void Control_SetProfileMode(void *, s32);
 extern void Ovlgame_InitActorHudState(void *);
 /* Places the player at the matching level spawn. In multiplayer, choose the last
  * point tied for the greatest distance to its nearest player. Fall back when no
  * point is available, then update the controller's current cell. The single-player arm opens with a dead
  * conditional store: its join label ends cse's path, so the mismatch call keeps passing world (s1) instead
  * of being cross-jumped into the fallback's &D_8011FE88 call; flow and jump2 remove it. */
-void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale, s32 reset) {
+void Player_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale, s32 reset) {
     Shared_World *world;
     Shared_Placed single;
     Shared_Placed points[32];
@@ -368,21 +368,21 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
     Shared_ActorView *other;
     s32 floor;
     s32 cell;
-    Items_ReleaseObjectHandles(player);
-    Render_SetProfileMode(((Shared_ActorView *)player)->controller, 0);
+    Ovlgame_ReleaseObjectHandles(player);
+    Control_SetProfileMode(((Shared_ActorView *)player)->controller, 0);
     world = &g_world;
     if (reset) {
         ((Shared_ActorView *)player)->field864 = 0;
         ((Shared_ActorView *)player)->field868 = 0;
     }
     if (D_80145088.settings.local) {
-        count = Items_FindPlacedObjectsByKey(world, -1, model, points, 32);
+        count = OvlScene_FindPlacedObjectsByKey(world, -1, model, points, 32);
         best = -1;
         bestDistance = 0.0f;
         for (i = 0; i < count; i++) {
             distance = D_800C2340_de;
             for (other = D_80145060.actorList; other; other = other->next) {
-                f32 d = Particle_GetPointDistance(&points[i].pos, &other->position.vector);
+                f32 d = GraphU64_GetPointDistance(&points[i].pos, &other->position.vector);
                 if (d < distance) distance = d;
             }
             if (bestDistance <= distance) {
@@ -399,11 +399,11 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
         if (model != 0 && player != 0) {
             floor = 0;
         }
-        if (Items_FindPlacedObjectsByKey(world, -1, model, &single, 1) == 0) {
+        if (OvlScene_FindPlacedObjectsByKey(world, -1, model, &single, 1) == 0) {
             goto fallback;
         }
         if (single.kind != D_801371D4) {
-            Items_SetSelection(world, model, scale);
+            OvlScene_SetSelection(world, model, scale);
             goto done;
         }
         ((Shared_ActorView *)player)->weapon.position0 = single.pos;
@@ -416,7 +416,7 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
     Ovlgame_InitActorHudState(player);
     goto done;
 fallback:
-    Items_SetSelection(&g_world, model, scale);
+    OvlScene_SetSelection(&g_world, model, scale);
 done:
     cell = Nav_FindNearestPointIndex(D_8013B364, &((Shared_ActorView *)player)->position.vector);
     ((AiController *)((Shared_ActorView *)player)->owner)->current = cell;

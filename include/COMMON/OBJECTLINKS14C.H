@@ -175,8 +175,8 @@ typedef struct MarkerNode { u8 pad0[0x1214]; s32 active; u8 pad1218[0x264]; s32 
 typedef struct MarkerActor { u8 pad0[0x1D8]; MarkerNode *node; } MarkerActor;
 extern s32 D_800D297C;
 extern struct UnitVtx D_800FF1B0_de[];
-extern s32 Render_SetModePreset(s32);
-extern void Render_SetCombineMode(u32);
+extern s32 Geometry_SetModePreset(s32);
+extern void Geometry_SetCombineMode(u32);
 extern void func_802A5498_de(u32);
 
 extern s32 Weapon_IsSecondarySwitchGroup(s32);

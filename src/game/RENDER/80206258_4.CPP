@@ -24,19 +24,19 @@ extern void CopyMatrix(float *arg0, float *arg1);
 
 extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
-extern s32 Particle_LimitVectorLength(f32 *arg0, f32 arg1);
+extern s32 GraphU64_LimitVectorLength(f32 *arg0, f32 arg1);
 
 extern void TranslateMatrix(f32 *, f32, f32, f32);
 
 extern void SwapMatrixUpForward(void *);
 
-s32 Render_TestActorStateBit(void *, void *);
+s32 Rumble_TestActorStateBit(void *, void *);
 
-void Render_UpdateTriggeredMotion(Player *mover, ActorMotionState *rider);
+void Device_UpdateTriggeredMotion(Player *mover, ActorMotionState *rider);
 
 void func_80206DD4_de(Actor_func_80206DD4_de *, RiderCode80206258 *);
 
-void Render_BuildPlayerMatrix(void *object, void *state) {
+void Device_BuildPlayerMatrix(void *object, void *state) {
     Player *player = object;
     ActorMotionState *motionState = state;
     f32 orientationMatrix[16];
@@ -48,7 +48,7 @@ void Render_BuildPlayerMatrix(void *object, void *state) {
     matrix = player->matrix;
     CopyMatrix(matrix, orientationMatrix);
     ScaleMatrixLocal(matrix, player->scale.x, player->scale.y, player->scale.z);
-    Particle_LimitVectorLength(&player->pos.x, 20000.0f);
+    GraphU64_LimitVectorLength(&player->pos.x, 20000.0f);
     TranslateMatrix(matrix, player->pos.x, player->pos.y, player->pos.z);
     SwapMatrixUpForward(matrix);
 }
@@ -57,7 +57,7 @@ void func_802079B0_de(Player *mover, ActorMotionState *rider) {
     ActorMotionResource *resource = mover->definition;
     ActorMotionDefinition *body = &resource->motion;
 
-    if (Render_TestActorStateBit(&g_world, mover) == 0) {
+    if (Rumble_TestActorStateBit(&g_world, mover) == 0) {
         mover->weaponFlags &= ~0x10000;
         mover->weaponFlags &= ~0x100;
         return;
@@ -67,7 +67,7 @@ void func_802079B0_de(Player *mover, ActorMotionState *rider) {
         rider->hooks->onStep(mover, rider);
     }
     rider->progress += body->progressScale * D_800D2988;
-    Render_UpdateTriggeredMotion(mover, rider);
+    Device_UpdateTriggeredMotion(mover, rider);
     if (rider->mode != 4) {
         func_80206DD4_de((void *)mover, (void *)rider);
     }
@@ -84,7 +84,7 @@ typedef struct Owner Owner;
 extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
 
 
-extern void Render_SetActorStateBit(Shared_World *, void *, s32);
+extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
 
 extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
 
@@ -255,7 +255,7 @@ void func_80207E74_de(struct Shared_Actor *actor, int *motionFlags) {
 }
 
 void func_80207EAC_de(struct Shared_Actor *actor) {
-    Render_SetActorStateBit(&g_world, actor, 1);
+    Rumble_SetActorStateBit(&g_world, actor, 1);
     actor->weaponFlags |= 0x100;
 }
 
@@ -265,7 +265,7 @@ void func_80207EEC_de(void *event) {
 }
 
 void func_80207F1C_de(struct Shared_Actor *actor) {
-    Render_SetActorStateBit(&g_world, actor, 0);
+    Rumble_SetActorStateBit(&g_world, actor, 0);
     actor->weaponFlags &= ~0x100;
 }
 

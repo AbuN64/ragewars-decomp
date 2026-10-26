@@ -11,7 +11,7 @@
 #include "CAMERA/80243A80_6.H"
 #include "MENU_2/80400000_4.H"
 #include "MENU_2/80400000_7.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Starts the round once: unless already started, optionally resets the lead player (func_8022E290_de and its
  * three counters) and the player group, then when a new target id is pending selects it through
@@ -48,15 +48,15 @@ extern void func_8022E290_de(void *);
 
 extern void func_80239B64_de(void *);
 
-extern void Render_FreeAllPoolNodes(void *);
+extern void Rumble_FreeAllPoolNodes(void *);
 
-extern s32 Items_FindNearestPlacedObject(void *, Vec3Words *, s32, void *);
+extern s32 OvlScene_FindNearestPlacedObject(void *, Vec3Words *, s32, void *);
 
 extern void func_80286AA8_de(void *, s32, s32);
 
 extern s32 func_8040332C_de(void);
 
-extern s32 Camera_IsSequenceActive(void);
+extern s32 Cinema_IsSequenceActive(void);
 
 extern u32 func_80245850_de(void);
 
@@ -103,7 +103,7 @@ void func_80244E58_de(void) {
             player->weaponReset = 0;
         }
         func_80239B64_de(group->members);
-        Render_FreeAllPoolNodes(&D_8010EC90);
+        Rumble_FreeAllPoolNodes(&D_8010EC90);
     }
     if (target != -1) {
         table = &g_world;
@@ -111,7 +111,7 @@ void func_80244E58_de(void) {
             origin.w[0] = 0;
             origin.w[1] = 0;
             origin.w[2] = 0;
-            found = Items_FindNearestPlacedObject(table, &origin, target, &D_801371E8);
+            found = OvlScene_FindNearestPlacedObject(table, &origin, target, &D_801371E8);
             D_8013B2BC.field_0 = found;
             D_801371E4.field_0 = found != 0;
             func_80286AA8_de(table, target, found != 0);
@@ -142,7 +142,7 @@ s32 func_80244FB4_de(void) {
     }
     func_804009F4_de(D_800E2830->resourceDC);
     D_800E2830->resourceDC = none;
-    if (Camera_IsSequenceActive() != 0) {
+    if (Cinema_IsSequenceActive() != 0) {
         if (func_80245850_de() != 0) {
             D_800E2830->time20 = D_800E2830->time;
         } else {
@@ -181,7 +181,7 @@ void func_802450CC_de(void) {
     }
     D_800CB420_de = D_800D2978;
     if (func_80244FB4_de() == 0) {
-        if (Camera_IsSequenceActive() != 0) {
+        if (Cinema_IsSequenceActive() != 0) {
             if (func_80245850_de() != 0) {
                 D_800E2830->time20 = D_800E2830->time;
             } else {
@@ -212,11 +212,11 @@ void func_802450CC_de(void) {
     if (D_800E2830->unknown60 != 0 && (D_800E2830->fade -= 2.0f * (D_800D2988 * 0.06666667f)) < -0.5f) {
         D_800E2830->unknown60 = 0;
         D_800E2830->fade = 0.0f;
-        if (Camera_IsSequenceActive() != 0) {
+        if (Cinema_IsSequenceActive() != 0) {
             func_80245B74_de(1);
             func_80245BC0_de();
             if (D_800E2830->owner != 0) {
-                Scene_ReleaseResource(0, D_800E2830->owner);
+                Cache_ReleaseResource(0, D_800E2830->owner);
             }
             D_800E2830->owner = 0;
             D_800E2830->resource = 0;
@@ -227,7 +227,7 @@ void func_802450CC_de(void) {
         return;
     }
     func_80244FB4_de();
-    if (Camera_IsSequenceActive() != 0 && func_80245850_de() == 0 && D_80140FB4.busy == 0 && D_80140FB4.paused == 0 &&
+    if (Cinema_IsSequenceActive() != 0 && func_80245850_de() == 0 && D_80140FB4.busy == 0 && D_80140FB4.paused == 0 &&
         D_800E2830->unknown104[0] == 0) {
         if (D_800E2830->time >= D_800E2830->end && D_800E2830->initialized44 == 0) {
             FuncPtr cue = D_800E2830->callback10;
@@ -240,7 +240,7 @@ void func_802450CC_de(void) {
         }
         if (D_800E2830->time >= D_800E2830->clipEnd && D_800E2830->closed == 0) {
             if (D_800E2830->owner != 0) {
-                Scene_ReleaseResource(0, D_800E2830->owner);
+                Cache_ReleaseResource(0, D_800E2830->owner);
             }
             {
                 FuncPtr end = D_800E2830->onClose;

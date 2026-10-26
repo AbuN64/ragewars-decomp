@@ -21,7 +21,7 @@ struct Screen_func_8042B78C_de {
     s32 word464;
 };
 
-extern void Frontend_ClearFlagBits();
+extern void ScenarioSetup_ClearFlagBits();
 
 struct Label;
 struct Screen_func_8042AFE0_de;

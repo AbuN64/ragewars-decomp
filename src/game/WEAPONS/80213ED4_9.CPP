@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "FX_2/80271B18.H"
 
-extern void Particle_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
+extern void GraphU64_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
 extern f32 Math_Sqrtf(f32);
 
 
@@ -14,11 +14,11 @@ extern f32 Math_Sqrtf(f32);
 
 
 
-void Weapons_ComputeTargetOffset(Player *player, ActorMotionState *motionState, OffsetResult *result) {
-    Particle_SubtractVectors(&result->first, &player->pos,
+void Barrel_ComputeTargetOffset(Player *player, ActorMotionState *motionState, OffsetResult *result) {
+    GraphU64_SubtractVectors(&result->first, &player->pos,
                   &motionState->position);
     result->first_normalized = result->first;
-    Particle_NormalizeVec3(&result->first_normalized.x);
+    GraphU64_NormalizeVec3(&result->first_normalized.x);
     result->first_length = Math_Sqrtf(
         result->first.x * result->first.x +
         result->first.y * result->first.y +
@@ -27,7 +27,7 @@ void Weapons_ComputeTargetOffset(Player *player, ActorMotionState *motionState, 
     result->flat.y = 0.0f;
     result->flat.z = result->first.z;
     result->flat_normalized = result->flat;
-    Particle_NormalizeVec3(&result->flat_normalized.x);
+    GraphU64_NormalizeVec3(&result->flat_normalized.x);
     result->flat_length = Math_Sqrtf(
         result->flat.x * result->flat.x +
         result->flat.y * result->flat.y +

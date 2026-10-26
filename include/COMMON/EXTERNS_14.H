@@ -2,5 +2,5 @@
 #define COMMON_EXTERNS_14_H
 #include "TYPES.H"
 
-extern s32 Render_UnpackResource(void ***, s32);
+extern s32 PpDecom_UnpackResource(void ***, s32);
 #endif

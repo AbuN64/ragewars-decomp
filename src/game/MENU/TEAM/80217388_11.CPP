@@ -10,7 +10,7 @@ extern void func_80218F9C_de(s32 arg0, s32 arg1, s32 arg2);
 void func_80218F08_de(s32 menu, s32 arg1, s32 player) {
     Gfx *cmd;
 
-    Text_SetupSpriteMode(0xFF);
+    OnScreen_SetupSpriteMode(0xFF);
     gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
     func_80218F9C_de(menu, arg1, player);
 }

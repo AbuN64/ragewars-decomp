@@ -9,16 +9,16 @@ struct CShakeAxis_t;
 extern u32 Weapon_UpdateShakeAxis(struct CShakeAxis_t *state);
 
 void Camera_UpdateFrustumBounds(char *);
-int Camera_IsSequenceInWindow(void);
-void Camera_UpdateSequenceTrack(void *);
+int Cinema_IsSequenceInWindow(void);
+void Cinema_UpdateSequenceTrack(void *);
 f32 func_802459A0_de(void *);
 float func_80245AD8_de(void);
 void func_8026EF58_de(f32 *, f32 *);
-void Rsp_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
+void GraphU64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 void func_8026F898_de(f32 *, f32 *, f32 *);
 void func_8026FC9C_de(f32 *, void *);
-void Particle_IdentityMatrix(void *);
-void Particle_ClampMatrixToFixedRange(f32 *);
+void GraphU64_IdentityMatrix(void *);
+void GraphU64_ClampMatrixToFixedRange(f32 *);
 void func_80272CB0_de(void *, f32, f32, f32);
 void CopyMatrix(float *, float *);
 void func_802732D0_de(char *, float *);
@@ -27,8 +27,8 @@ void PitchMatrix(void *, f32);
 void YawMatrix(void *, f32);
 void MatrixFromQuaternion(f32 *, f32 *);
 
-extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
-f32 Anim_GetPolygonHeight(void *, f32, f32);
+extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
+f32 Region_GetPolygonHeight(void *, f32, f32);
 int func_802A23B4_de(void);
 int func_802A23F0_de(void);
 
@@ -38,7 +38,7 @@ f32 Math_Sqrtf(f32);
 void Pak_UpdateDialogList(void *);
 s32 Camera_BlendEnvironmentColors();                        /* extern */
 void Camera_BuildShakenViewTransform(void *);                        /* extern */
-void Sched_UpdateSceneEffects(void *scene, void *host);                  /* extern */
+void Sky_UpdateSceneEffects(void *scene, void *host);                  /* extern */
                /* extern */
 s32 func_802B6900_de(f32 *, f32, f32, f32, f32, f32, f32, f32, f32, f32); /* extern */
 
@@ -138,7 +138,7 @@ actor_found:
     camera->elapsed = (f32) (camera->elapsed + D_800D2988);
     Camera_BlendEnvironmentColors(camera);
     camera->dirty = 1;
-    if (Camera_IsSequenceInWindow() == 0) {
+    if (Cinema_IsSequenceInWindow() == 0) {
         temp_v0 = D_800CB384_de[camera->mode].fn;
         if (temp_v0 != 0) {
             temp_v0(camera);
@@ -146,13 +146,13 @@ actor_found:
     }
     frameLights = &camera->lights[D_800D297C];
     func_802B6900_de(referenceViewMatrix, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f);
-    if ((Camera_IsSequenceInWindow() != 0) && (camera != &D_80141008)) {
-        Camera_UpdateSequenceTrack(camera);
+    if ((Cinema_IsSequenceInWindow() != 0) && (camera != &D_80141008)) {
+        Cinema_UpdateSequenceTrack(camera);
     }
     temp_f24 = camera->zoomBlend;
     initial_zoom = camera->zoomFov;
     Camera_BuildShakenViewTransform(camera);
-    if (Camera_IsSequenceInWindow() == 0) {
+    if (Cinema_IsSequenceInWindow() == 0) {
         Weapon_UpdateShakeAxis(camera->unkB8);
         Weapon_UpdateShakeAxis(camera->unkCC);
         Weapon_UpdateShakeAxis(camera->unkE0);
@@ -161,11 +161,11 @@ actor_found:
     func_802732D0_de(viewOrientationMatrix, &camera->position.x);
     func_8026EF58_de(camera->inverseViewOrient, (f32 *) viewOrientationMatrix);
     BuildYawMatrix(halfTurnMatrix, 3.1415927f);
-    Rsp_MultiplyAffineMatrices(composedViewMatrix, halfTurnMatrix, (f32 *) viewOrientationMatrix);
+    GraphU64_MultiplyAffineMatrices(composedViewMatrix, halfTurnMatrix, (f32 *) viewOrientationMatrix);
     func_8026EF58_de(inverseRotatedView, composedViewMatrix);
-    Rsp_MultiplyAffineMatrices(worldToViewMatrix, inverseRotatedView, referenceViewMatrix);
+    GraphU64_MultiplyAffineMatrices(worldToViewMatrix, inverseRotatedView, referenceViewMatrix);
     CopyMatrix(camera->worldToView, worldToViewMatrix);
-    if ((cameraOwner != 0) && (cameraOwner->unk664 & 0x40) && (camera->unk24 == 0) && (Camera_IsSequenceInWindow() == 0)) {
+    if ((cameraOwner != 0) && (cameraOwner->unk664 & 0x40) && (camera->unk24 == 0) && (Cinema_IsSequenceInWindow() == 0)) {
         f32 inverseBobRateBlend; 
         horizontalStretch = (((camera->bobAmplitudeX * 0.5f * (Math_Sinf(camera->bobPhaseX) + 1.0f)) + 0.8f) > 1.0f) ? 1.0f : ((camera->bobAmplitudeX * 0.5f * (Math_Sinf(camera->bobPhaseX) + 1.0f)) + 0.8f);
         camera->stretchX = horizontalStretch;
@@ -178,11 +178,11 @@ actor_found:
         if ((bobRateBlend < 0.0f) || (bobBlendLimit = 1.0f, (bobRateBlend > 1.0f))) {
             bobRateBlend = bobBlendLimit;
         }
-        Nav_EaseValueToward(&camera->bobAmplitudeX, 0.1f, 0.5f);
-        Nav_EaseValueToward(&camera->bobAmplitudeY, 0.05f, 0.5f);
+        GraphU64_EaseValueToward(&camera->bobAmplitudeX, 0.1f, 0.5f);
+        GraphU64_EaseValueToward(&camera->bobAmplitudeY, 0.05f, 0.5f);
         inverseBobRateBlend = 1.0f - bobRateBlend;
-        Nav_EaseValueToward(&camera->bobRateX, (bobRateBlend * 0.104719765f) + (inverseBobRateBlend * 0.06981318f), 0.16666667f);
-        Nav_EaseValueToward(&camera->bobRateY, (bobRateBlend * 0.087266475f) + (inverseBobRateBlend * 0.03490659f), 0.16666667f);
+        GraphU64_EaseValueToward(&camera->bobRateX, (bobRateBlend * 0.104719765f) + (inverseBobRateBlend * 0.06981318f), 0.16666667f);
+        GraphU64_EaseValueToward(&camera->bobRateY, (bobRateBlend * 0.087266475f) + (inverseBobRateBlend * 0.03490659f), 0.16666667f);
     } else {
         camera->stretchY = 1.0f;
         camera->stretchX = 1.0f;
@@ -205,7 +205,7 @@ actor_found:
         }
         camera->kickStep = clampedKickStep;
     }
-    if (Camera_IsSequenceInWindow() != 0) {
+    if (Cinema_IsSequenceInWindow() != 0) {
         fovy = func_802459A0_de(camera);
     } else {
         fovOverrideState = func_802A23B4_de();
@@ -217,7 +217,7 @@ actor_found:
             fovy = 75.0f;
         }
     }
-    if ((Camera_IsSequenceInWindow() != 0) && (camera != &D_80141008)) {
+    if ((Cinema_IsSequenceInWindow() != 0) && (camera != &D_80141008)) {
         aspect = camera->viewWidth / camera->viewHeight;
     } else if (D_80140FF8.unk0 == 2) {
         aspect = 0.6666667f;
@@ -235,7 +235,7 @@ actor_found:
     verticalSlope = verticalSlope / camera->stretchY;
     horizontalSlope = baseHorizontalSlope / camera->stretchX;
     projectionOrFloorScale = 1.0f; 
-    fovy = Nav_ArcCos(Math_Sqrtf(projectionOrFloorScale / ((verticalSlope * verticalSlope) + 1.0f)));
+    fovy = GraphU64_ArcCos(Math_Sqrtf(projectionOrFloorScale / ((verticalSlope * verticalSlope) + 1.0f)));
     fovy = fovy * 57.295776f; 
     farPlaneDistance = camera->farPlane;
     aspect = horizontalSlope / verticalSlope;
@@ -243,7 +243,7 @@ actor_found:
     camera->fovY = fovy;
     camera->farHalfWidth = (f32) (farPlaneDistance * horizontalSlope);
     camera->farHalfHeight = (f32) (farPlaneDistance * verticalSlope);
-    if (Camera_IsSequenceInWindow() != 0) {
+    if (Cinema_IsSequenceInWindow() != 0) {
         sequenceFarPlane = (s32) func_80245AD8_de();
         if (sequenceFarPlane > 0) {
             camera->farPlane = (f32) sequenceFarPlane;
@@ -254,7 +254,7 @@ actor_found:
     func_8026F898_de(composedViewMatrix, worldToViewMatrix, (f32 *) right);
     viewProjectionMatrix = (s8 *)camera->viewProjection;
     func_8026F898_de((f32 *) viewProjectionMatrix, composedViewMatrix, horizontalFlipMatrix);
-    Particle_ClampMatrixToFixedRange((f32 *) viewProjectionMatrix);
+    GraphU64_ClampMatrixToFixedRange((f32 *) viewProjectionMatrix);
     func_8026FC9C_de((f32 *) viewProjectionMatrix, camera->projection[D_800D297C]);
     CopyMatrix(matrix, worldToViewMatrix);
     state = &D_80140FF8.state;
@@ -262,7 +262,7 @@ actor_found:
         PitchMatrix(matrix, camera->elapsed * 0.010908309f);
         YawMatrix(matrix, camera->elapsed * 0.008726647f);
     }
-    Particle_ClampMatrixToFixedRange(matrix);
+    GraphU64_ClampMatrixToFixedRange(matrix);
     lightZeroDirectionX = matrix[0] * 128.0f;
     if (!(lightZeroDirectionX <= 127.0f)) {
         lightZeroDirectionX = 127.0f;
@@ -314,16 +314,16 @@ actor_found:
     BuildYawMatrix(camera->faceScreenUpright, camera->roll);
     if (D_80140FF8.unk8 != 0) {
         func_802B6F9C_de(right, &camera->hudPerspNorm, 47.5f, (f32) ((s32) D_800E28D0 / D_800E28D4), 16.0f, 7168.0f, 1.0f);
-        Particle_IdentityMatrix(worldToViewMatrix);
+        GraphU64_IdentityMatrix(worldToViewMatrix);
         func_8026F898_de(composedViewMatrix, worldToViewMatrix, (f32 *) right);
         func_80272CB0_de(horizontalFlipMatrix, -1.0f, 1.0f, 1.0f);
         func_8026F898_de(hudProjectionMatrix, composedViewMatrix, horizontalFlipMatrix);
-        Particle_ClampMatrixToFixedRange(hudProjectionMatrix);
+        GraphU64_ClampMatrixToFixedRange(hudProjectionMatrix);
         func_8026FC9C_de(hudProjectionMatrix, camera->hudProjection[D_800D297C]);
     }
-    Sched_UpdateSceneEffects(&camera->sceneEffects, camera);
+    Sky_UpdateSceneEffects(&camera->sceneEffects, camera);
     Pak_UpdateDialogList(&camera->messageList);
-    if (Camera_IsSequenceInWindow() != 0) {
+    if (Cinema_IsSequenceInWindow() != 0) {
         camera->floorPoly = ((void *(*)())Scene_FindFloorPolygon)(&g_world, &camera->unk38);
     }
     captured_state = D_800CD8D0;
@@ -333,13 +333,13 @@ actor_found:
     floorSampleY = camera->unk3C;
     floorSampleZ = camera->unk40;
     floorHeightOffset = camera->unk44;
-    if ((floorPolygon != 0) && (Camera_IsSequenceInWindow() == 0)) {
-        projectionOrFloorScale = ((floorSampleY + floorHeightOffset) - Anim_GetPolygonHeight(floorPolygon, ground_x, floorSampleZ)) * 0.09765625f;
+    if ((floorPolygon != 0) && (Cinema_IsSequenceInWindow() == 0)) {
+        projectionOrFloorScale = ((floorSampleY + floorHeightOffset) - Region_GetPolygonHeight(floorPolygon, ground_x, floorSampleZ)) * 0.09765625f;
         if ((projectionOrFloorScale < 11.0f) && (projectionOrFloorScale > 5.0f)) {
             camera->floorSurface = (s32) floorPolygon->unk1C;
         }
     }
-    if (Camera_IsSequenceInWindow() != 0) {
+    if (Cinema_IsSequenceInWindow() != 0) {
         camera->floorSurface = (s32) D_800CD8D0;
     }
     if (camera->zoomBlend > 0.0f) {
@@ -359,17 +359,17 @@ extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
 extern Shared_func_80234FDC_S4 D_80140FF8;
 #include "COMMON/GAME_SESSION.H"
-extern void Rsp_SetViewEffect(s32);
-extern void System_SetTextureEffect(s32);
-extern void Render_SelectEffectModes(void);
-extern void System_ResetTextureCache(void);
+extern void Geometry_SetViewEffect(s32);
+extern void TextLoad_SetTextureEffect(s32);
+extern void Geometry_SelectEffectModes(void);
+extern void TextLoad_ResetTextureCache(void);
 extern s32 func_802A23B4_de(void), GetMenuScreenOwner(void);
-extern s32 Render_SetModePreset(s32);
-extern void Render_ClearDepthRect(void *, s32, s32, s32, s32, s32);
-extern s32 Camera_IsSequenceInWindow(void);
+extern s32 Geometry_SetModePreset(s32);
+extern void SetN64_ClearDepthRect(void *, s32, s32, s32, s32, s32);
+extern s32 Cinema_IsSequenceInWindow(void);
 extern u32 func_80245AF8_de(void);
-extern void Render_SetColorDither(s32);
-extern void System_SetupPointLights(void *);
+extern void Geometry_SetColorDither(s32);
+extern void Defs_SetupPointLights(void *);
 /* Splits a 0x00BBGGRR fade color into its three fog/fill channels. */
 static inline void Camera_UnpackColor(u32 color, u8 *red, u8 *green, u8 *blue) {
     *blue = color >> 16;
@@ -433,21 +433,21 @@ void Camera_SetupViewportAndFog(Racer *view) {
     gDPSetScissor((*gfx)++, G_SC_NON_INTERLACE, ulx, uly, lrx, lry);
     gSPLookAtX((*gfx)++, &view->lights[frame][0]);
     gSPLookAtY((*gfx)++, &view->lights[frame][4]);
-    Rsp_SetViewEffect(view->effect);
+    Geometry_SetViewEffect(view->effect);
     if (view != &D_80140FF8.view) {
-        System_SetTextureEffect(view->effect);
+        TextLoad_SetTextureEffect(view->effect);
     }
-    Render_SelectEffectModes();
-    System_ResetTextureCache();
+    Geometry_SelectEffectModes();
+    TextLoad_ResetTextureCache();
     gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
     flag = 0;
     if (func_802A23B4_de() != 0) {
         flag = GetMenuScreenOwner() != 2;
     }
     if (view != &D_80140FF8.view || D_80140FF8.unk0 == 0 || flag != 0) {
-        Render_SetModePreset(20);
+        Geometry_SetModePreset(20);
         gDPPipeSync(g_displayListCursor++);
-        Render_ClearDepthRect(&D_8011FAC0, ulx, lrx, uly, lry, view->effect);
+        SetN64_ClearDepthRect(&D_8011FAC0, ulx, lrx, uly, lry, view->effect);
         gDPSetCycleType(g_displayListCursor++, G_CYC_FILL);
         if (D_801462C8.flags & 0x4000) {
             red = 0;
@@ -458,7 +458,7 @@ void Camera_SetupViewportAndFog(Racer *view) {
             green = view->boost & 0xF8;
             blue = view->spin & 0xF8;
         }
-        if (Camera_IsSequenceInWindow() != 0) {
+        if (Cinema_IsSequenceInWindow() != 0) {
             color = func_80245AF8_de();
             if (color != 0xFF00) {
                 Camera_UnpackColor(color, &red, &green, &blue);
@@ -484,11 +484,11 @@ void Camera_SetupViewportAndFog(Racer *view) {
         }
     }
     gDPPipeSync(g_displayListCursor++);
-    Render_SetColorDither(0);
+    Geometry_SetColorDither(0);
     gDPSetAlphaDither(g_displayListCursor++, G_AD_NOTPATTERN);
     gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
     if (view != &D_80140FF8.view) {
-        System_SetupPointLights(view);
+        Defs_SetupPointLights(view);
     }
     gDPPipeSync(g_displayListCursor++);
 }

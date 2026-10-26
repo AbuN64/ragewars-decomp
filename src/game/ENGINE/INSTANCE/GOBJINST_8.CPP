@@ -5,7 +5,7 @@
 #include "COMMON/UNUSED.H"
 #include "RENDER_4/8028FD2C_6.H"
 struct Node80253610;
-extern void Scene_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
+extern void Cache_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
 
 extern char D_0024D108;
 extern char D_800C3A64_de;
@@ -17,7 +17,7 @@ extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 extern s32 func_80251F6C_de(s32, s32, void *, s32, s32, void *, void *, void *, s32);
 extern void func_8027892C_de(void *object, void *colors);
 
-extern void Scene_UnlockResource(s32, s32);
+extern void Cache_UnlockResource(s32, s32);
 extern s32 func_8026E340_de(void);
 #include "particle/8027A0F4_8.H"
 extern EffectRecAt154 *func_802830B8_de(void *system);
@@ -26,7 +26,7 @@ static inline void spawn(LevelActor *actor) {
     CVector3 position;
 
     position = actor->position0;
-    position.y += Particle_GetActorHeight(actor) * D_800C3A74_de;
+    position.y += GameObject_GetActorHeight(actor) * D_800C3A74_de;
     func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                   actor->position1, actor->rotation, position, 0, -1, 0);
 }
@@ -51,7 +51,7 @@ void func_8024A7A0_de(LevelActor *actor, s32 unusedShadowContext, Lookup *params
     if (resource == 0) {
         return;
     }
-    Scene_MarkResourceInUse(0, resource);
+    Cache_MarkResourceInUse(0, resource);
     header = *(s32 **)resource;
     if (header[0] == 1) {
         char *object = (char *)header + header[1];
@@ -63,17 +63,17 @@ void func_8024A7A0_de(LevelActor *actor, s32 unusedShadowContext, Lookup *params
     }
     func_8026DA4C_de(params->value, actor->fieldB4, 1, 0, data, actor->field3);
     if (func_8026E340_de() != 0) {
-        node = Render_GetPackSection(*params->value, 2);
+        node = SetN64_GetPackSection(*params->value, 2);
         if ((*node != 0) &&
-            (*((s32 *)Render_GetPackSection(Render_GetPackSection(node, 0), 0)) & 0x8000)) {
+            (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
             spawn(actor);
             effect = func_802830B8_de(&D_8011D8D0);
             if (effect != 0) {
                 scale = D_800C3A78_de;
-                effect->field150 = Particle_GetActorRadius(actor) * scale;
-                effect->field154 = Particle_GetActorHeight(actor) * scale;
+                effect->field150 = GameObject_GetActorRadius(actor) * scale;
+                effect->field154 = GameObject_GetActorHeight(actor) * scale;
             }
         }
     }
-    Scene_UnlockResource(0, resource);
+    Cache_UnlockResource(0, resource);
 }

@@ -51,14 +51,14 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     MenuWidget *wRight;
     MenuWidget *wHead;
     MenuWidget *wItem;
-    screen = Scene_AllocateMemory(0xA80);
+    screen = Cache_AllocateMemory(0xA80);
     D_800E4690 = screen;
     screen->root = arg0;
-    D_800E4690->nodes = Menu_CreateOverlayNode(arg0, 4);
-    Menu_ShowSlotById(arg0, 0, 0x13E);
-    Menu_ShowSlotById(arg0, 1, 0x13E);
-    Menu_ShowSlotById(arg0, 2, 0x13E);
-    Menu_ShowSlotById(arg0, 3, 0x13E);
+    D_800E4690->nodes = SmpOverlay_CreateOverlayNode(arg0, 4);
+    SmpOverlay_ShowSlotById(arg0, 0, 0x13E);
+    SmpOverlay_ShowSlotById(arg0, 1, 0x13E);
+    SmpOverlay_ShowSlotById(arg0, 2, 0x13E);
+    SmpOverlay_ShowSlotById(arg0, 3, 0x13E);
     for (i = 0; i < 0x24; i++) {
         func_80265688_de(D_800E4690->owned, i, 0);
         func_80265688_de(D_800E4690->pending, i, 0);
@@ -143,7 +143,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     if (D_801462D0.mode != 2) {
         func_80427B08_de();
     }
-    Render_PlayFlatSound(0xE78);
+    SoundElement_PlayFlatSound(0xE78);
     return 0;
 }
 #endif

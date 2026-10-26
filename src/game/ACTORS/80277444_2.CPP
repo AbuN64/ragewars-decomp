@@ -13,14 +13,14 @@
 #include "RENDER_4/8028FD2C_6.H"
 #include "particle/80271B18_3.H"
 
-extern void Particle_TransformDirection(void *arg0, void *arg1, void *arg2);
+extern void GraphU64_TransformDirection(void *arg0, void *arg1, void *arg2);
 extern s32 func_80277128_de(ObjectRecAtBC *volume, CVector3 point, CVector3 *normal, f32 *amount);
 
 
 
 
 
-s32 Actors_EvaluateLightVolume(ObjectRecAtBC *arg0, CVector3 arg1, CVector3 arg4, f32 *arg7,
+s32 Lighting_EvaluateLightVolume(ObjectRecAtBC *arg0, CVector3 arg1, CVector3 arg4, f32 *arg7,
                   CVector3 *arg8, f32 *arg9) {
     CVector3 second;
     CVector3 first;
@@ -41,10 +41,10 @@ s32 Actors_EvaluateLightVolume(ObjectRecAtBC *arg0, CVector3 arg1, CVector3 arg4
         second.y = arg4.y * arg7[5];
         second.z = arg4.z * arg7[10];
     } else {
-        Particle_TransformPoint(arg7, &arg1.x, &first);
-        Particle_TransformDirection(arg7, &arg4.x, &second);
+        GraphU64_TransformPoint(arg7, &arg1.x, &first);
+        GraphU64_TransformDirection(arg7, &arg4.x, &second);
     }
-    Particle_NormalizeVec3(&second.x);
+    GraphU64_NormalizeVec3(&second.x);
     if (func_80277128_de(arg0, first, &normal, &amount) == 0) {
         return 0;
     }
@@ -67,13 +67,13 @@ s32 Actors_EvaluateLightVolume(ObjectRecAtBC *arg0, CVector3 arg1, CVector3 arg4
         if (arg9 != 0) {
             *arg9 = amount;
         }
-        Particle_ScaleVector(arg8, &arg0->direction, amount);
+        GraphU64_ScaleVector(arg8, &arg0->direction, amount);
     }
     return 1;
 }
 
-extern void Rsp_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
-void Actors_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, Vertices38 *mesh,
+extern void GraphU64_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
+void Lighting_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, Vertices38 *mesh,
                      PackedMatrixWords *matrices, CVector3 *output, s32 multiple)
 {
     f32 matrix[16];
@@ -87,7 +87,7 @@ void Actors_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, Ver
 
     count = mesh->count;
     base = mesh->vertices;
-    Rsp_ConvertMatrixToFloat(matrix, matrices);
+    GraphU64_ConvertMatrixToFloat(matrix, matrices);
     drawn = 0;
     for (i = 0; i < count; i++) {
         vertex = &base[i];
@@ -99,16 +99,16 @@ void Actors_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, Ver
             continue;
         }
         if (multiple) {
-            Rsp_ConvertMatrixToFloat(matrix, &matrices[vertex->flags >> 8]);
+            GraphU64_ConvertMatrixToFloat(matrix, &matrices[vertex->flags >> 8]);
         }
         position.x = vertex->px;
         position.y = vertex->py;
         position.z = vertex->pz;
-        Particle_TransformPoint(matrix, &position, &worldPosition);
+        GraphU64_TransformPoint(matrix, &position, &worldPosition);
         normal.x = vertex->x;
         normal.y = vertex->y;
         normal.z = vertex->z;
-        Particle_TransformDirection(matrix, &normal, &worldNormal);
+        GraphU64_TransformDirection(matrix, &normal, &worldNormal);
         sum.x = 0.0f;
         sum.y = 0.0f;
         sum.z = 0.0f;
@@ -123,14 +123,14 @@ void Actors_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, Ver
                 light->bounds.min.x <= worldPosition.x &&
                 light->bounds.min.y <= worldPosition.y &&
                 light->bounds.min.z <= worldPosition.z &&
-                Actors_EvaluateLightVolume(light, worldPosition, worldNormal,
+                Lighting_EvaluateLightVolume(light, worldPosition, worldNormal,
                                 light->inverse, &contribution, &amount)) {
                 if (light->animatedLight) {
                     mode = light->animatedLight;
                     colour = light->animationSeed;
                     selectedAmount = amount;
                 }
-                Particle_AddVec3(&sum, &sum, &contribution);
+                GraphU64_AddVec3(&sum, &sum, &contribution);
             }
         }
         if (mode) {
@@ -163,9 +163,9 @@ void Actors_AccumulateVertexLighting(ObjectRecAtBC **lights, s32 lightCount, Ver
 }
 
 
-extern void Rsp_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
-extern void Particle_TransformDirection(void *, void *, void *);
-void Actors_AccumulateDirectionalLighting(Vertices38 *data, PackedMatrixWords *matrices, CVector3 *output, s32 skin) {
+extern void GraphU64_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
+extern void GraphU64_TransformDirection(void *, void *, void *);
+void Lighting_AccumulateDirectionalLighting(Vertices38 *data, PackedMatrixWords *matrices, CVector3 *output, s32 skin) {
     CVector3 light;
     f32 matrix[16];
     CVector3 normal, transformed;
@@ -177,23 +177,23 @@ void Actors_AccumulateDirectionalLighting(Vertices38 *data, PackedMatrixWords *m
     f32 dot, intensity;
     count = data->count;
     base = data->vertices;
-    Rsp_ConvertMatrixToFloat(matrix, matrices);
+    GraphU64_ConvertMatrixToFloat(matrix, matrices);
     source = D_80137078;
     light.x = source->x;
     light.y = source->y;
     light.z = source->z;
-    Particle_NormalizeVec3(&light);
+    GraphU64_NormalizeVec3(&light);
     drawn = 0;
     for (i = 0; i < count; i++) {
         vertex = &base[i];
         dest = &output[drawn];
         if (!(vertex->flags & 0x80)) {
             f32 red, green, blue;
-            if (skin) Rsp_ConvertMatrixToFloat(matrix, &matrices[vertex->flags >> 8]);
+            if (skin) GraphU64_ConvertMatrixToFloat(matrix, &matrices[vertex->flags >> 8]);
             normal.x = vertex->x;
             normal.y = vertex->y;
             normal.z = vertex->z;
-            Particle_TransformDirection(matrix, &normal, &transformed);
+            GraphU64_TransformDirection(matrix, &normal, &transformed);
             dot = transformed.x * light.x + transformed.y * light.y + transformed.z * light.z;
             intensity = ((dot < 0.0f) ? 0.2196078598f : (dot + 0.2196078598f)) * 255.0f;
             dot = intensity;
@@ -243,7 +243,7 @@ typedef struct HitBoxTable {
    pack section 2 of each such sector whose bounds intersect box go to out (at most 64, with
    duplicates across sectors dropped by their summed signature words). Writes their number to
    outCount and returns 1 when any accepted box has flagBA set. */
-s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
+s32 Lighting_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
     u32 keys[0x40];
     /* A query may intersect every world sector; accepted volumes are capped at 64. */
     WorldSector *sectors[128];
@@ -272,7 +272,7 @@ s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
     }
     if (matches == 1) {
         sector = sectors[0];
-        table = Render_GetPackSection(sector->resource->pack, 2);
+        table = SetN64_GetPackSection(sector->resource->pack, 2);
         n = table->count;
         n--;
         entry = table->boxes;
@@ -296,7 +296,7 @@ s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
     } else {
         for (i = 0; i < matches; i++) {
             sector = sectors[i];
-            table = Render_GetPackSection(sector->resource->pack, 2);
+            table = SetN64_GetPackSection(sector->resource->pack, 2);
             n = table->count;
             n--;
             entry = table->boxes;
@@ -348,9 +348,9 @@ s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
    StaticInstance_FindPlacedPropIndex(arg4, arg1) finds inside the id list at slot arg1-table index of the list
    table in slot 3. Writes the accepted record pointers into arg2 (at most 0x40 of them),
    reports their number through arg3, and returns 1 when any accepted record has its byte at
-   record offset 0xBA set. With no table (arg1 null) it defers to Actors_QueryWorldLightVolumes. */
+   record offset 0xBA set. With no table (arg1 null) it defers to Lighting_QueryWorldLightVolumes. */
 
-extern s32 Actors_QueryWorldLightVolumes(Bounds *bounds, void **out, s32 *countOut);
+extern s32 Lighting_QueryWorldLightVolumes(Bounds *bounds, void **out, s32 *countOut);
 extern s32 StaticInstance_FindPlacedPropIndex(void *wanted, void *table);
 
 typedef struct IdList {
@@ -358,7 +358,7 @@ typedef struct IdList {
     s16 ids[1];
 } IdList;
 
-s32 Actors_QueryLightVolumes(Bounds *bounds, void *table, void **out, s32 *countOut, u8 *wanted) {
+s32 Lighting_QueryLightVolumes(Bounds *bounds, void *table, void **out, s32 *countOut, u8 *wanted) {
     s32 foundCount;
     s32 result;
     s32 idx;
@@ -376,9 +376,9 @@ s32 Actors_QueryLightVolumes(Bounds *bounds, void *table, void **out, s32 *count
     foundCount = 0;
     result = 0;
     if (table == NULL) {
-        return Actors_QueryWorldLightVolumes(bounds, out, countOut);
+        return Lighting_QueryWorldLightVolumes(bounds, out, countOut);
     }
-    boxTable = Render_GetPackSection(table, 2);
+    boxTable = SetN64_GetPackSection(table, 2);
     idx = boxTable->count;
     idx--;
     box = boxTable->boxes;
@@ -391,9 +391,9 @@ s32 Actors_QueryLightVolumes(Bounds *bounds, void *table, void **out, s32 *count
                 if (*wanted == 1) {
                     found = 1;
                 } else {
-                    idTable = Render_GetPackSection(table, 3);
+                    idTable = SetN64_GetPackSection(table, 3);
                     if (*idTable > 0) {
-                        list = Render_GetPackSection(idTable, idx);
+                        list = SetN64_GetPackSection(idTable, idx);
                         ids = (s16 *)list;
                         len = list->count;
                         ids++;
@@ -455,7 +455,7 @@ static inline f32 clampIntensity(f32 c) {
 /* Writes the accumulated lighting into the mesh's vertex colours: each channel is clamped to 5..255, blended toward
  * white by the brightness setting (brightness / 255, at most 1) and stored clamped to a byte, except on vertices
  * with flag 0x80. With setting flag 0x4000 the colours are masked to black instead. */
-void Actors_ApplyVertexColors(ColorMesh *mesh, VertexColor *colors) {
+void Lighting_ApplyVertexColors(ColorMesh *mesh, VertexColor *colors) {
     u8 colorMask = 0;
     f32 whiteBlend;
     VertexColor color;
@@ -498,8 +498,8 @@ void Actors_ApplyVertexColors(ColorMesh *mesh, VertexColor *colors) {
 extern char D_800C4B1C_de[13]; /* "Lit Vertices": allocation tag */
 extern CVector3 D_80111D70[];
 extern s32 D_800D2850;
-extern s32 Render_GetSizedPackSection(s32 pack, s32 index, s32 *size);
-extern u8 **Scene_AllocateResource(s32, s32, u32, void *);
+extern s32 SetN64_GetSizedPackSection(s32 pack, s32 index, s32 *size);
+extern u8 **Cache_AllocateResource(s32, s32, u32, void *);
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 /* A lit model vertex: the Vtx_t layout, colour bytes at 0xC. */
 typedef struct LitVertex {
@@ -524,7 +524,7 @@ static inline void clampLitColor(u8 *dest, LitVertex *vertex) {
  * allocation (with a colour trailer section when the bounds query found light volumes that need it), adds the model's
  * packed RGB lighting, then directional or volume lighting, applies it to the vertex colours and, for the trailer,
  * stores each vertex colour clamped to 30..225. Returns the allocation handle, or 0 when allocation fails. */
-s32 Actors_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bounds, PackedMatrixWords *matrices, s32 skinned,
+s32 Lighting_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bounds, PackedMatrixWords *matrices, s32 skinned,
                          u8 *wanted) {
     void *lights[0x40];
     s32 lightCount;
@@ -540,8 +540,8 @@ s32 Actors_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bounds,
     s32 worldLightCount;
     s32 packedColor;
     s32 *pack;
-    needsColors = Actors_QueryLightVolumes(bounds, lightResource, lights, &lightCount, wanted);
-    model = (Vertices38 *)Render_GetSizedPackSection(modelResource, 0, &modelBytes);
+    needsColors = Lighting_QueryLightVolumes(bounds, lightResource, lights, &lightCount, wanted);
+    model = (Vertices38 *)SetN64_GetSizedPackSection(modelResource, 0, &modelBytes);
     modelVertexCount = model->count;
     for (clearIndex = 0; clearIndex < modelVertexCount; clearIndex++) {
         D_80111D70[clearIndex].x = 0;
@@ -549,7 +549,7 @@ s32 Actors_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bounds,
         D_80111D70[clearIndex].z = 0;
     }
     if (needsColors != 0) {
-        allocation = Scene_AllocateResource(0, modelBytes + 4 * sizeof(s32) + model->count * 4, 0, D_800C4B1C_de);
+        allocation = Cache_AllocateResource(0, modelBytes + 4 * sizeof(s32) + model->count * 4, 0, D_800C4B1C_de);
         if (allocation == 0) {
             return 0;
         }
@@ -563,7 +563,7 @@ s32 Actors_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bounds,
         colors = *allocation + pack[2];
         func_802BD3A0_de(copiedModel, model, modelBytes);
     } else {
-        allocation = Scene_AllocateResource(0, modelBytes + 8, 0, D_800C4B1C_de);
+        allocation = Cache_AllocateResource(0, modelBytes + 8, 0, D_800C4B1C_de);
         if (allocation == 0) {
             return 0;
         }
@@ -571,7 +571,7 @@ s32 Actors_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bounds,
         copiedModel = (Vertices38 *)(*allocation + 8);
         func_802BD3A0_de(copiedModel, model, modelBytes);
     }
-    table = Render_GetPackSection((void *)modelResource, 1);
+    table = SetN64_GetPackSection((void *)modelResource, 1);
     if (table->count != 0) {
         s32 *packed = table->packed;
         for (colorIndex = 0; colorIndex < modelVertexCount; colorIndex++) {
@@ -587,20 +587,20 @@ s32 Actors_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bounds,
         }
     }
     if (D_800D2850 == 0) {
-        Actors_AccumulateDirectionalLighting(copiedModel, matrices, D_80111D70, skinned);
+        Lighting_AccumulateDirectionalLighting(copiedModel, matrices, D_80111D70, skinned);
     } else if (lightCount == 0) {
         Shared_World *world = &g_world;
         worldLightCount = 0;
         for (sectorIndex = 0; sectorIndex < world->sectorEntryCount; sectorIndex++) {
-            worldLightCount += ((HitBoxTable *)Render_GetPackSection(*(void **)world->sectors[sectorIndex].resource, 2))->count;
+            worldLightCount += ((HitBoxTable *)SetN64_GetPackSection(*(void **)world->sectors[sectorIndex].resource, 2))->count;
         }
         if (worldLightCount == 0) {
-            Actors_AccumulateDirectionalLighting(copiedModel, matrices, D_80111D70, skinned);
+            Lighting_AccumulateDirectionalLighting(copiedModel, matrices, D_80111D70, skinned);
         }
     } else {
-        Actors_AccumulateVertexLighting((ObjectRecAtBC **)lights, lightCount, copiedModel, matrices, D_80111D70, skinned);
+        Lighting_AccumulateVertexLighting((ObjectRecAtBC **)lights, lightCount, copiedModel, matrices, D_80111D70, skinned);
     }
-    Actors_ApplyVertexColors((void *)copiedModel, (void *)D_80111D70);
+    Lighting_ApplyVertexColors((void *)copiedModel, (void *)D_80111D70);
     if (needsColors != 0) {
         s32 vertexCount = copiedModel->count;
         s32 colorSlot = 0;

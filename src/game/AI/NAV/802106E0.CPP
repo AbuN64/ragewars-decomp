@@ -7,16 +7,16 @@
 #include "TYPES.H"
 
 /* Probes one of a vehicle's eight wheel rays: casts from the vehicle position to its scaled wheel offset
- * through Camera_SweepActorMotion and stores the wheel's reach as the XZ distance to whatever was hit (diagonals
+ * through Unicol_SweepActorMotion and stores the wheel's reach as the XZ distance to whatever was hit (diagonals
  * scaled by 1/sqrt 2, components tested against the zeroed y), or the full ray length on a miss. */
 extern CVector3 D_800C88A0_de[8];
 extern SweepHit *D_80103FCC;
 extern MotionSurface D_80103FD0;
-extern f32 Sound_GetActorReach(Player *);
-extern f32 Particle_GetActorRadius(Player *);
-extern f32 Particle_GetActorHeight(Player *);
-extern f32 Sound_GetActorBaseOffset(Player *);
-extern s32 Camera_SweepActorMotion(Player *, CVector3, CVector3, MotionSurface *, f32, f32, f32, f32);
+extern f32 InstHdr_GetActorReach(Player *);
+extern f32 GameObject_GetActorRadius(Player *);
+extern f32 GameObject_GetActorHeight(Player *);
+extern f32 InstHdr_GetActorBaseOffset(Player *);
+extern s32 Unicol_SweepActorMotion(Player *, CVector3, CVector3, MotionSurface *, f32, f32, f32, f32);
 void Nav_MeasureWheelReach(Player *player, s32 wheel) {
     CVector3 from;
     CVector3 to;
@@ -33,10 +33,10 @@ void Nav_MeasureWheelReach(Player *player, s32 wheel) {
     to.y += from.y;
     to.z += from.z;
     from.y += 61.44f;
-    a = Sound_GetActorReach(player);
-    b = Particle_GetActorRadius(player);
-    c = Particle_GetActorHeight(player);
-    if (Camera_SweepActorMotion(player, from, to, &D_80103FD0, a, b, c, Sound_GetActorBaseOffset(player))) {
+    a = InstHdr_GetActorReach(player);
+    b = GameObject_GetActorRadius(player);
+    c = GameObject_GetActorHeight(player);
+    if (Unicol_SweepActorMotion(player, from, to, &D_80103FD0, a, b, c, InstHdr_GetActorBaseOffset(player))) {
         delta = D_80103FCC->pos;
         delta.x -= from.x;
         delta.y = 0.0f;
@@ -60,7 +60,7 @@ static inline void storeClearance(Player *player, s32 wheel, s32 i, f32 reach) {
     player->controller->clearance[wheel] = (i - 1 >= 0 ? i - 1 : 0) * reach;
 }
 /* Walks wheel ray WHEEL outward from the vehicle in steps of 2.25 x its reach, probing the ground under
- * each step (Camera_SweepActorMotion), and stores in the clearance table the distance covered before a probe
+ * each step (Unicol_SweepActorMotion), and stores in the clearance table the distance covered before a probe
  * misses, lands on a kind 5/6 surface or drops more than 100; it stays 100 when the ray is shorter
  * than the reach. */
 void Nav_MeasureWheelClearance(Player *player, s32 wheel) {
@@ -76,7 +76,7 @@ void Nav_MeasureWheelClearance(Player *player, s32 wheel) {
     s32 steps;
     s32 i;
     player->controller->clearance[wheel] = 100.0f;
-    reach = Sound_GetActorReach(player);
+    reach = InstHdr_GetActorReach(player);
     length = player->controller->clearance[wheel];
     if (length < reach) {
         return;
@@ -86,9 +86,9 @@ void Nav_MeasureWheelClearance(Player *player, s32 wheel) {
     step.x = step.x * 2.25f * reach;
     step.z = step.z * 2.25f * reach;
     i = 0;
-    radius = Particle_GetActorRadius(player);
-    height = Particle_GetActorHeight(player);
-    base = Sound_GetActorBaseOffset(player);
+    radius = GameObject_GetActorRadius(player);
+    height = GameObject_GetActorHeight(player);
+    base = InstHdr_GetActorBaseOffset(player);
     position = player->pos;
     surface.flags = 0xC008;
     surface.enabled = 1;
@@ -105,7 +105,7 @@ void Nav_MeasureWheelClearance(Player *player, s32 wheel) {
         position.z += step.z;
         below = position;
         below.y -= 5 * 61.44f;
-        if (!Camera_SweepActorMotion(player, position, below, &surface, reach, radius, height, base)) {
+        if (!Unicol_SweepActorMotion(player, position, below, &surface, reach, radius, height, base)) {
             storeClearance(player, wheel, i, reach);
             return;
         }

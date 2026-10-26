@@ -37,7 +37,7 @@ extern void func_80256FC0_de(Work56EC8 *arg0);
 
 extern void *func_802B3A44_de(void *arg0, s32 *arg1, s32 arg2, s16 arg3);
 
-extern void Render_SendSchedulerTask(void *arg0, void *arg1);
+extern void Sched_SendSchedulerTask(void *arg0, void *arg1);
 
 extern void func_802B7400_de(void *arg0, s32 arg1);
 
@@ -106,7 +106,7 @@ s32 func_80256EA8_de(Work56EC8 *audioTask, u32 unused)
     audioTask->base = D_80107E20[D_800CB708];
     audioTask->offset = ((((s32) item) - ((s32) D_80107E20[D_800CB708])) >> 3) << 3;
     osWritebackDCacheAll();
-    Render_SendSchedulerTask(&D_80142928, audioTask->payload);
+    Sched_SendSchedulerTask(&D_80142928, audioTask->payload);
     D_800CB708 ^= 1;
     func_8025E23C_de();
     osRecvMesg(&D_80107E80, &event, 1);

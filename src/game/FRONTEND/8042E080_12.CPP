@@ -10,7 +10,7 @@
 
 
 
-extern Resource_func_80419E54_de *Menu_GetSlotValue(s32, s32);
+extern Resource_func_80419E54_de *SmpOverlay_GetSlotValue(s32, s32);
 extern void func_80434E34_de(s32);
 extern void func_80434EF4_de(s32);
 
@@ -39,7 +39,7 @@ void func_80433398_de(s32 arg0) {
             func_80434FC4_de(player);
             break;
         case 0xC:
-            temp_s0 = Menu_GetSlotValue(D_800E54A4->root, player);
+            temp_s0 = SmpOverlay_GetSlotValue(D_800E54A4->root, player);
             temp_v0_4 = (Blk *)((char *)D_800E54A4 + (player * 4));
             bobValue = (Math_Cosf((f32)player + ((f32)temp_v0_4->unk2C * 0.005f)) * 100.0f) + 150.0f;
             temp_s0->value = bobValue;

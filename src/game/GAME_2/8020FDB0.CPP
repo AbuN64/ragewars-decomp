@@ -87,14 +87,14 @@ void Nav_SelectAvailableWeapon(BrainCode8020EAE0 *brain, s32 *ammo) {
         if (func_80283228_de(D_8011D8D0, brain->player) > 0) {
             return;
         }
-        if (Nav_NextRandom() % 100 >= 21) {
+        if (GraphU64_NextRandom() % 100 >= 21) {
             return;
         }
     }
     if (count == 0) {
         return;
     }
-    pick = choices[Nav_NextRandom() % count];
+    pick = choices[GraphU64_NextRandom() % count];
     brain->player->views5E8.view770_92.nextWeapon = pick;
     if (pick != brain->player->views5E8.view62E_14.weapon) {
         brain->switchTimer = 0;

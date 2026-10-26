@@ -64,7 +64,7 @@ int func_80293440_de(u8 *a, u8 *b) {
  return 0;
 }
 
-u8 *Render_CopyString(u8 *arg0, u8 *arg1)
+u8 *SetN64_CopyString(u8 *arg0, u8 *arg1)
 {
   u8 *var_a1;
   u8 *var_v1;
@@ -98,7 +98,7 @@ void func_8029350C_de(s32 arg0) {
 void func_80293534_de(void) {
     func_802BD320_de(D_80146CE8, D_800C5400_de, D_800C5408_de, D_800C5414_de);
     func_802BD160_de(func_802BCF10_de() | 0x400);
-    Render_RunGameLoop(&D_8011FAC0);
+    SetN64_RunGameLoop(&D_8011FAC0);
 }
 
 /** Reset three large-offset fields and mark the record active. */
@@ -112,7 +112,7 @@ void func_80293590_de(void *gameSession) {
 /* Steps the session's screen fade by the frame time D_800D2988 (fastFade picks the fast rate). Phase 2 fades out: the
  * timer falls to zero, then keeps counting below it until -4 before the session switches to mode 0x14 and fades back
  * in. Phase 1 fades in, at least half the rate per frame, until the timer reaches one. */
-void Render_UpdateFadeTransition(GameSession *session) {
+void SetN64_UpdateFadeTransition(GameSession *session) {
     f32 step;
     f32 rate;
     f32 timer;

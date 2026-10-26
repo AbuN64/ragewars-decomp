@@ -13,7 +13,7 @@
 /* Runs a computer player's patrol step: starts its route at 0x224 on the first route of D_8011FE88,
    or random roaming (-2) when there are none; once within D_800C23B0_eu_x of its goal node it advances the
    route position at 0x228 (wrapping at the route length) and drops the goal; a dropped goal is then
-   taken from the route through Engine_GetPlatformRoutePoint and func_8020CB3C_de, or a random node of D_8013B364 when
+   taken from the route through Scene_GetPlatformRoutePoint and func_8020CB3C_de, or a random node of D_8013B364 when
    roaming; finally runs Nav_SteerAlongRoute, Nav_RunBehaviorHandler and Nav_UpdatePlayerSteering. */
 
 
@@ -32,12 +32,12 @@ extern RoutePatrolNodes D_8013B364;
 
 
 
-extern Clip *Engine_GetPlatformRoute(PatrolRouteSet *set, s32 route);
-extern s32 Engine_GetPlatformRoutePoint(PatrolRouteSet *set, s32 route, s32 pos);
+extern Clip *Scene_GetPlatformRoute(PatrolRouteSet *set, s32 route);
+extern s32 Scene_GetPlatformRoutePoint(PatrolRouteSet *set, s32 route, s32 pos);
 extern s32 Nav_FindNearestPointIndex(RoutePatrolNodes *list, s32 id);
 extern void *Nav_GetGraphPoint(RoutePatrolNodes *list, s32 index);
 extern void *Nav_GetControllerPosition(PatrolBot *bot);
-extern f32 Particle_GetPointDistance(void *a, void *b);
+extern f32 GraphU64_GetPointDistance(void *a, void *b);
 extern void Nav_SteerAlongRoute(PatrolBot *bot);
 extern void Nav_RunBehaviorHandler(PatrolBot *bot);
 extern void Nav_UpdatePlayerSteering(PatrolBot *bot);
@@ -55,7 +55,7 @@ void Nav_UpdatePatrolRoute(PatrolActor *actor)
         if (*routes->routeCount > 0) {
             bot->route = 0;
             bot->routePos = 0;
-            Engine_GetPlatformRoute(routes, bot->route);
+            Scene_GetPlatformRoute(routes, bot->route);
         } else {
             bot->route = -2;
             bot->routePos = -1;
@@ -64,9 +64,9 @@ void Nav_UpdatePatrolRoute(PatrolActor *actor)
     }
     if (bot->node == bot->goal) {
         pos = Nav_GetControllerPosition(bot);
-        if (Particle_GetPointDistance(pos, Nav_GetGraphPoint(nodes, bot->goal)) < D_800C23B0_eu_x) {
+        if (GraphU64_GetPointDistance(pos, Nav_GetGraphPoint(nodes, bot->goal)) < D_800C23B0_eu_x) {
             if (bot->route >= 0) {
-                route = Engine_GetPlatformRoute(&g_world, bot->route);
+                route = Scene_GetPlatformRoute(&g_world, bot->route);
                 bot->routePos++;
                 if (bot->routePos == route->frames) {
                     bot->routePos = 0;
@@ -77,9 +77,9 @@ void Nav_UpdatePatrolRoute(PatrolActor *actor)
     }
     if (bot->goal == -1) {
         if (bot->route == -2) {
-            bot->goal = Nav_NextRandom() % nodes->count;
+            bot->goal = GraphU64_NextRandom() % nodes->count;
         } else {
-            bot->goal = Nav_FindNearestPointIndex(nodes, Engine_GetPlatformRoutePoint(&g_world, bot->route, bot->routePos));
+            bot->goal = Nav_FindNearestPointIndex(nodes, Scene_GetPlatformRoutePoint(&g_world, bot->route, bot->routePos));
         }
     }
     Nav_SteerAlongRoute(bot);

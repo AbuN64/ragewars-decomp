@@ -19,7 +19,7 @@ typedef struct Owner Owner;
 
 extern f32 Math_Sqrtf(f32);
 
-extern f32 Nav_ApproachValue(f32, f32, f32);
+extern f32 GraphU64_ApproachValue(f32, f32, f32);
 
 
 extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
@@ -42,11 +42,11 @@ extern char D_80103FD0[];
 
 extern f32 func_802726BC_de(CVector3 *, CVector3 *);
 
-extern f32 Particle_GetActorHeight(SharedPlayer *);
+extern f32 GameObject_GetActorHeight(SharedPlayer *);
 
 extern s32 func_802444A4_de(SharedPlayer *, CVector3, CVector3, char *);
 
-extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
     Segment *segment;
     f32 throttle;
@@ -73,7 +73,7 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
         if (rider->direction == mode) {
             step = -step;
         }
-        rider->change = Nav_ApproachValue(rider->change, step, 0.25f);
+        rider->change = GraphU64_ApproachValue(rider->change, step, 0.25f);
         throttle += rider->change;
         if (rider->direction == 0) {
             if (throttle > 1.0f) {
@@ -88,9 +88,9 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
     case 2:
         if (target != 0) {
             if (segment->angle != 0.0f) {
-                Particle_SubtractVectors(&offset, &target->views0.view8_3.pos, &rider->base);
+                GraphU64_SubtractVectors(&offset, &target->views0.view8_3.pos, &rider->base);
                 BuildYawMatrix(matrix, -segment->angle);
-                Particle_TransformPoint(matrix, &offset, &local);
+                GraphU64_TransformPoint(matrix, &offset, &local);
                 goal = local.z / segment->radius;
             } else {
                 goal = 0.0f;
@@ -101,7 +101,7 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
             } else if (step < -limit) {
                 step = -limit;
             }
-            rider->change = Nav_ApproachValue(rider->change, step, 0.25f);
+            rider->change = GraphU64_ApproachValue(rider->change, step, 0.25f);
             throttle += rider->change;
         }
         break;
@@ -149,14 +149,14 @@ void AI_DynTurretGetTargetInfo(SharedPlayer *player, RiderRecAt130V1 *rider, Res
                     }
                 }
                 if (enemy) {
-                    Particle_SubtractVectors(&to, &other->views0.view8_3.pos, &player->views0.view8_3.pos);
+                    GraphU64_SubtractVectors(&to, &other->views0.view8_3.pos, &player->views0.view8_3.pos);
                     from.x = rider->aim.x;
                     from.y = rider->aim.y;
                     from.z = rider->aim.z;
                     from = player->views0.view8_3.pos;
-                    from.y += Particle_GetActorHeight(player) * lift;
+                    from.y += GameObject_GetActorHeight(player) * lift;
                     to = other->views0.view8_3.pos;
-                    to.y += Particle_GetActorHeight(other) * lift;
+                    to.y += GameObject_GetActorHeight(other) * lift;
                     blocked = func_802444A4_de(player, from, to, D_80103FD0);
                     valid = 1;
                     if (blocked != 0) {

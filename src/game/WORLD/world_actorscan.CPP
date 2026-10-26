@@ -10,9 +10,9 @@
 
 s32 func_8028DF90_de(Shared_World *world, s32 arg1) {
     void *temp_v0;
-    temp_v0 = Render_GetPackSection(world->bitSections, 1);
-    Render_GetPackSection(temp_v0, 0);
-    return Render_GetPackSection(temp_v0, 1) + arg1;
+    temp_v0 = SetN64_GetPackSection(world->bitSections, 1);
+    SetN64_GetPackSection(temp_v0, 0);
+    return SetN64_GetPackSection(temp_v0, 1) + arg1;
 }
 
 void func_8028DFE4_de(WorldSortEntry *arg0, WorldSortEntry *arg1) {

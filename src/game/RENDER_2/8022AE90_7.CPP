@@ -62,7 +62,7 @@ void func_8022B7F8_de(void *actor, void *effectSource) {
         return;
     }
 
-    Render_PlayFlatSound(0xB45);
+    SoundElement_PlayFlatSound(0xB45);
     state->pending = D_800C2D1C_de;
     state->parent = source;
     owner = state->message;

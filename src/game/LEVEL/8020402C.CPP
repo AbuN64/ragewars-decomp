@@ -43,7 +43,7 @@ INCLUDE_ASM("span_1000", func_80204030_de);
 #elif defined(VERSION_EU_X)
 #define LV_FN func_80204030_eu_x
 #else
-#define LV_FN Level_UpdateBreakableProximity
+#define LV_FN Action_UpdateBreakableProximity
 #endif
 #define LV_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 extern s32 D_auto_800D70DC;
@@ -77,7 +77,7 @@ void LV_FN(u8 *self, u8 *hit) {
                     LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x90) = 1;
                     LV_FIELD(table, s32, 0x74) = 1;
                     LV_FIELD(hit, s32, 0x12C) = 1;
-                    Render_PlayFlatSound(0xE0D);
+                    SoundElement_PlayFlatSound(0xE0D);
                 }
             }
         }
@@ -107,19 +107,19 @@ void LV_FN(u8 *self, u8 *hit) {
             LV_FIELD(table2, s32, 0x80) = 0;
             switch (LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x92)) {
             case 0:
-                Render_PlayFlatSound(0x2E6);
+                SoundElement_PlayFlatSound(0x2E6);
                 break;
             case 1:
-                Render_PlayFlatSound(0x2E4);
+                SoundElement_PlayFlatSound(0x2E4);
                 break;
             case 2:
-                Render_PlayFlatSound(0x2E8);
+                SoundElement_PlayFlatSound(0x2E8);
                 break;
             case 3:
-                Render_PlayFlatSound(0x2EC);
+                SoundElement_PlayFlatSound(0x2EC);
                 break;
             case 4:
-                Render_PlayFlatSound(0x2EA);
+                SoundElement_PlayFlatSound(0x2EA);
                 break;
             }
             for (node = *(u8 **)&D_80145060; node != 0; node = LV_FIELD(node, u8 *, 0x16E0)) {
@@ -156,12 +156,12 @@ typedef struct SoundActor {
 } SoundActor;
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 extern char D_80141008;
-extern void Camera_PostTargetedScreenMessage(void *, void *, s32, void *, f32);
+extern void Sky_PostTargetedScreenMessage(void *, void *, s32, void *, f32);
 #include "COMMON/OBJECTLINKS14.H"
 /* EU/EU-X: this body is 56/57 words; reorg picks beqz (target beql) for the flags check, so those versions
  * keep their asm. */
 #if (!defined(VERSION_EU) && !defined(VERSION_EU_X)) || defined(NON_MATCHING)
-s32 Level_ShowTriggerMessage(struct NavigationPlatform *object, ActorMotionState *guard, struct Player *player) {
+s32 Action_ShowTriggerMessage(struct NavigationPlatform *object, ActorMotionState *guard, struct Player *player) {
     ActorMotionDefinition *record;
     SoundParent *parent;
     void *emitter, *fallback;
@@ -178,14 +178,14 @@ s32 Level_ShowTriggerMessage(struct NavigationPlatform *object, ActorMotionState
     emitter = parent->emitter;
     fallback = &D_80141008;
     if (emitter != 0) fallback = emitter;
-    Camera_PostTargetedScreenMessage(&D_80145088, fallback, gameplaySoundValue(index), object, gameplaySoundWeight());
+    Sky_PostTargetedScreenMessage(&D_80145088, fallback, gameplaySoundValue(index), object, gameplaySoundWeight());
     index = record->soundIndex;
     callback = gameplaySoundHook(index);
     if (callback != 0) func_8025E11C_de(callback);
     return 0;
 }
 #else
-INCLUDE_ASM("span_1000", Level_ShowTriggerMessage);
+INCLUDE_ASM("span_1000", Action_ShowTriggerMessage);
 #endif
 
 typedef struct Owner Owner;
@@ -193,9 +193,9 @@ typedef struct Owner Owner;
 
 
 
-extern s32 Render_TestActorStateBit(void *, void *);
+extern s32 Rumble_TestActorStateBit(void *, void *);
 
-extern void Render_SetActorStateBit(Shared_World *, void *, s32);
+extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
 
 extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
 
@@ -225,7 +225,7 @@ extern void func_8024A1D0_de(Actor_func_8024A1D0_de *, void *, Lookup *);
 
 
 
-void Level_CopyTrackBytes(char *ownerRecord, char *eventRecord) {
+void Action_CopyTrackBytes(char *ownerRecord, char *eventRecord) {
     Owner *owner = (void *)ownerRecord;
     ObjRecAt30 *event = (void *)eventRecord;
     char *base = owner->track + 0x14;
@@ -243,7 +243,7 @@ void Level_CopyTrackBytes(char *ownerRecord, char *eventRecord) {
     }
 }
 
-void Level_InitBreakableMotion(LevelActor *actor, ActorMotionState *motionState) {
+void Action_InitBreakableMotion(LevelActor *actor, ActorMotionState *motionState) {
     motionState->table = &D_800C8274;
     motionState->update = &D_002043E0;
     motionState->unk124 = 0;
@@ -257,10 +257,10 @@ void Level_InitBreakableMotion(LevelActor *actor, ActorMotionState *motionState)
 }
 
 /** Update actor state and clear flags for the relevant actor classes. */
-void Level_ActivateBreakableState(SharedPlayer *actor, void *state) {
+void Action_ActivateBreakableState(SharedPlayer *actor, void *state) {
     s32 flags;
 
-    if (Render_TestActorStateBit(&g_world, actor) == 1) {
+    if (Rumble_TestActorStateBit(&g_world, actor) == 1) {
         Weapons_RequestActorState(actor, state, 1);
         switch (actor->views1C.viewE4_7.kind) {
         case 0x64C:
@@ -280,7 +280,7 @@ void Level_ActivateBreakableState(SharedPlayer *actor, void *state) {
 }
 
 /* The kind-10 actor initializer installs the state table containing this callback. */
-s32 Level_UpdateTriggerFlag(LevelActor *actor) {
+s32 Action_UpdateTriggerFlag(LevelActor *actor) {
     void *resource = actor->definition;
     BreakableDefinition *definition = resource;
     s32 val;
@@ -294,14 +294,14 @@ s32 Level_UpdateTriggerFlag(LevelActor *actor) {
     return val;
 }
 
-void Level_ClearBreakableState(void *arg0, void *actorMotionState) {
+void Action_ClearBreakableState(void *arg0, void *actorMotionState) {
     ActorMotionState *state = actorMotionState;
-    Render_SetActorStateBit(&g_world, arg0, 0);
+    Rumble_SetActorStateBit(&g_world, arg0, 0);
     func_80278D78_de(arg0, 0x200000, arg0);
     state->unk12C = 0;
 }
 
-s32 Level_UpdateHealthFlag(LevelActor *actor) {
+s32 Action_UpdateHealthFlag(LevelActor *actor) {
     s32 val;
 
     val = ((BreakableDefinition *)actor->definition)->health;
@@ -315,7 +315,7 @@ s32 Level_UpdateHealthFlag(LevelActor *actor) {
     return val;
 }
 
-void Level_SetBreakableState(void *arg0) {
+void Action_SetBreakableState(void *arg0) {
     BreakableDefinition *breakableDefinition;
     s32 hitFlags;
     s32 masked;
@@ -323,7 +323,7 @@ void Level_SetBreakableState(void *arg0) {
 
     breakableDefinition = (BreakableDefinition *)((LevelActor *)arg0)->definition;
     pFlag = &g_world;
-    Render_SetActorStateBit(pFlag, arg0, 1);
+    Rumble_SetActorStateBit(pFlag, arg0, 1);
     if (D_800C8270_de == 0) {
         func_80278D78_de(arg0, 0x80000, arg0);
     }
@@ -342,13 +342,13 @@ void Level_SetBreakableState(void *arg0) {
     }
 }
 
-void Level_SetDrawHandler(void *unused0, void *motionState) {
+void Action_SetDrawHandler(void *unused0, void *motionState) {
     Dest *state = motionState;
     state->draw = &D_00204808;
 }
 
 /** Clear two flag groups when the object's 0x1B0 field exceeds a tunable. */
-void Level_ClearMotionFlags(LevelActor *object) {
+void Action_ClearMotionFlags(LevelActor *object) {
     if (object->motionThreshold > D_800C1A70_de) {
         int flags = object->flags;
         flags &= ~0x2000;
@@ -357,21 +357,21 @@ void Level_ClearMotionFlags(LevelActor *object) {
     }
 }
 
-void Level_RequestStateOn(void *a, void *b) {
+void Action_RequestStateOn(void *a, void *b) {
     Weapons_RequestActorState(a, b, 0x1); }
 
-void Level_EnableTrigger(Trigger *trigger) {
+void Action_EnableTrigger(Trigger *trigger) {
     func_8028B670_de(&g_world, trigger->owner, trigger->actor, 1);
 }
 
-void Level_RequestStateOff(void *a, void *b) {
+void Action_RequestStateOff(void *a, void *b) {
     Weapons_RequestActorState(a, b, 0x0); }
 
-void Level_DisableTrigger(Trigger *trigger) {
+void Action_DisableTrigger(Trigger *trigger) {
     func_8028B670_de(&g_world, trigger->owner, trigger->actor, 0);
 }
 
-void Level_DrawFadedActor(Actor_func_8024A1D0_de *actor, struct InputRecAt40 *input, Lookup *lookup) {
+void Action_DrawFadedActor(Actor_func_8024A1D0_de *actor, struct InputRecAt40 *input, Lookup *lookup) {
     f32 remaining = D_800C1A78_de - input->strength * D_800C1A74_de;
     D_800D15E0 = 1;
     if (remaining < 0.0f) {

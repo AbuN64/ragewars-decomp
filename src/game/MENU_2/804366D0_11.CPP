@@ -4,13 +4,13 @@
 extern struct Menu_func_80437718_de *D_800E5784;
 #include "SCENE/802508E0_13.H"
 
-/* Builds a three-item menu: allocates 0x14 bytes into D_800E5784 through Scene_AllocateMemory, creates the
+/* Builds a three-item menu: allocates 0x14 bytes into D_800E5784 through Cache_AllocateMemory, creates the
    title 0x3CC/0x3CD through func_8041A280_de and the button 0x3CF through func_80419E54_de with 0x6E,
    finds entry 0x3CE of the list through func_8040EC30_de and sets its byte at 0x10 to 0xF, and stores
    the three with 3 and -1 in the block. Returns zero. */
 
 
-extern struct Menu_func_80437718_de *Scene_AllocateMemory(s32);
+extern struct Menu_func_80437718_de *Cache_AllocateMemory(s32);
 
 extern void *func_8041A280_de(s32, s32);
 
@@ -18,13 +18,13 @@ extern void *func_80419E54_de(s32, s32);
 
 extern struct Resource_func_80419E54_de *func_8040EC30_de(void *, s32);
 
-/* Releases the object D_800E5784 holds through Scene_FreeMemory, clears D_800E5784 and returns zero. */
+/* Releases the object D_800E5784 holds through Cache_FreeMemory, clears D_800E5784 and returns zero. */
 
 
 
 s32 func_80437718_de(void *list) {
     struct Resource_func_80419E54_de *item;
-    D_800E5784 = Scene_AllocateMemory(0x14);
+    D_800E5784 = Cache_AllocateMemory(0x14);
 #if defined(VERSION_DE)
     D_800E5784->title = func_8041A280_de(0x3C6, 0x3C6 + 1);
     D_800E5784->button = func_80419E54_de(0x3C6 + 3, 0x6E);
@@ -46,7 +46,7 @@ s32 func_80437718_de(void *list) {
 }
 
 s32 func_804377B8_de(void) {
-    Scene_FreeMemory(D_800E5784);
+    Cache_FreeMemory(D_800E5784);
     D_800E5784 = 0;
     return 0;
 }

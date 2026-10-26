@@ -136,7 +136,7 @@ struct RecordCode80447BB0;
 
 extern short D_800CF198[];
 
-s32 Render_IsSnapshotActive(void);
+s32 Control_IsSnapshotActive(void);
 
 extern s32 func_80448BB4_de(u16 *ptr, u16 *csum, u16 *icsum);
 extern s32 func_80447130_de(OSPfs *pfs);

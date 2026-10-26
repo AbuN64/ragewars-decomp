@@ -18,7 +18,7 @@
 
 
 extern s32 Pak_ReadNoteData(s32, s32, PakSavePacket *, s32);
-extern s32 Ovlgame_Crc32(PakSavePacket *, s32, s32);
+extern s32 Pak_Crc32(PakSavePacket *, s32, s32);
 extern void Pak_DeleteNote(s32, s32);
 
 s32 func_80434638_de(s32 player, s32 channel) {
@@ -28,8 +28,8 @@ s32 func_80434638_de(s32 player, s32 channel) {
     received = 0;
     packet = &D_800E54A4->packet;
     if (Pak_ReadNoteData(player, channel, packet, 0x648) == 0) {
-        if (Ovlgame_Crc32(packet, 0x640, 7) == packet->checksum) {
-            Resmgr_CopyBytes(D_800E54A4->players[player].slots, &D_800E54A4->packet, 0x640);
+        if (Pak_Crc32(packet, 0x640, 7) == packet->checksum) {
+            XPlus_CopyBytes(D_800E54A4->players[player].slots, &D_800E54A4->packet, 0x640);
             received = 1;
             D_800E54A4->players[player].profile = D_800E54A4->packet.savedProfile;
         } else {

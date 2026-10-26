@@ -22,11 +22,11 @@ INCLUDE_ASM("ovl_80400000", Pak_MeasureMenuText);
 #endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
-u32 System_GetMemorySize(void);
+u32 Defs_GetMemorySize(void);
 int func_802934F8_de(void);
 u8 *func_8043F290(TextBoundsText *);
 f32 Pak_MeasureLine(u8 *, f32, f32);
-void *Items_GetListContext(s8 *);
+void *Pak_GetListContext(s8 *);
 extern f32 D_800DE448;
 extern f32 D_800E247C;
 extern f32 D_800DE450_de;
@@ -64,7 +64,7 @@ void Pak_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
     s32 count, width;
     f32 size, w, boxW, boxH, sx, sy, x, y;
 
-    data = Items_GetListContext(text->descriptor->unk_44);
+    data = Pak_GetListContext(text->descriptor->unk_44);
     metrics->m_ScaleY = D_800DE428;
     metrics->m_ScaleX = D_800DE428;
     switch (text->mode) {
@@ -109,7 +109,7 @@ void Pak_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
         break;
     case 1:
         if ((func_802934F8_de() != 0 && (text->flags & 0x40000000)) ||
-            (D_80145088.settings.local != 0 && text->flags < 0 && System_GetMemorySize() == 0x400000)) {
+            (D_80145088.settings.local != 0 && text->flags < 0 && Defs_GetMemorySize() == 0x400000)) {
             metrics->width = 284;
             metrics->height = 222;
         } else {

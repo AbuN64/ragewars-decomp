@@ -75,7 +75,7 @@ typedef struct FrameCallback {
 } FrameCallback;
 extern FrameCallback D_800CD790[];
 extern u64 func_802BADC0_de(void);
-extern s32 Camera_GetSequenceRequest(void);
+extern s32 Cinema_GetSequenceRequest(void);
 extern u32 func_80245850_de(void);
 extern s32 Pak_CountLiveNodes(Node_Pak_CountLiveNodes **);
 struct GameSession;
@@ -94,7 +94,7 @@ extern f32 D_800C5468;
 extern void func_802539EC_de(s32,s32);
 extern void func_80293268_de(void *);
 
-extern int Render_IsSnapshotActive(void);
+extern int Control_IsSnapshotActive(void);
 
 extern s32 func_802BCF10_de(void);
 extern char D_80146CE8[];

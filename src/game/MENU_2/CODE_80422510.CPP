@@ -26,11 +26,11 @@ struct MenuResourceWidget;
 extern struct MenuResourceWidget *func_80419E54_de(s32, s32);
 #include "COMMON/SHARED_GAMESLOT.H"
 
-/* Builds the options-commit state: allocates its 0x28 bytes through Scene_AllocateMemory and keeps the
+/* Builds the options-commit state: allocates its 0x28 bytes through Cache_AllocateMemory and keeps the
    record at g_optionsPage, creates the fade widget 0x4D/0x4E and the title object 0x4F/0x6E, then builds
    the three option lists 0x59/0x5A, 0x55/0x56 and 0x51/0x52, appends their localized labels, and
    selects the entry named by the game settings D_801462C8 bytes 0x1B, 0x1F and 0x580 - the third list
-   gains the labels at 0x800D74B8 and 0x800D74BC only when System_GetMemorySize does not return 0x400000.
+   gains the labels at 0x800D74B8 and 0x800D74BC only when Defs_GetMemorySize does not return 0x400000.
    The 0x80-step slider 0x53/0x54 is created and positioned at the settings' position byte, menu nodes
    0x57, 0x58 and 0x50 are released, and the record is finally armed with a selection value of -1 and
    commit state 3, returning zero. */
@@ -46,13 +46,13 @@ extern u8 *D_800D2138;
 extern u8 *D_800D213C;
 extern u8 *D_auto_800D74B0;
 
-extern void *Scene_AllocateMemory(s32);
+extern void *Cache_AllocateMemory(s32);
 extern struct MenuFadeWidget *func_8041A280_de(s32, s32);
 
-extern s32 System_GetMemorySize(void);
+extern s32 Defs_GetMemorySize(void);
 extern MenuListWidget *func_8041ABC0_de(s32, s32);
-extern void Menu_AppendListText(struct MenuListWidget *, u8 *);
-extern void Menu_SelectListEntry(struct MenuListWidget *, s32);
+extern void SmpButton_AppendListText(struct MenuListWidget *, u8 *);
+extern void SmpButton_SelectListEntry(struct MenuListWidget *, s32);
 extern MenuSliderWidget *func_8041A580_de(s32, s32, s32);
 extern void func_8041A6EC_de(Scroll *, s32);
 
@@ -64,30 +64,30 @@ s32 Menu_CreateOptionsPage(void) {
     void *title;
     void *slider;
 
-    g_optionsPage = Scene_AllocateMemory(0x28);
+    g_optionsPage = Cache_AllocateMemory(0x28);
     g_optionsPage->menu = func_8041A280_de(0x4D, 0x4E);
     func_8041B110_de(0x57);
     func_8041B110_de(0x58);
     firstList = func_8041ABC0_de(0x59, 0x5A);
     g_optionsPage->unk_C = firstList;
-    Menu_AppendListText(firstList, D_800D3470_de[0]);
-    Menu_AppendListText(g_optionsPage->unk_C, D_800D2124);
-    Menu_AppendListText(g_optionsPage->unk_C, D_800D2128);
+    SmpButton_AppendListText(firstList, D_800D3470_de[0]);
+    SmpButton_AppendListText(g_optionsPage->unk_C, D_800D2124);
+    SmpButton_AppendListText(g_optionsPage->unk_C, D_800D2128);
     settings = &D_801462C8;
-    Menu_SelectListEntry(g_optionsPage->unk_C, settings->firstListMode);
+    SmpButton_SelectListEntry(g_optionsPage->unk_C, settings->firstListMode);
     secondList = func_8041ABC0_de(0x55, 0x56);
     g_optionsPage->unk_10 = secondList;
-    Menu_AppendListText(secondList, D_auto_800D74AC[0]);
-    Menu_AppendListText(g_optionsPage->unk_10, D_auto_800D74B0);
-    Menu_SelectListEntry(g_optionsPage->unk_10, settings->unknown1F);
+    SmpButton_AppendListText(secondList, D_auto_800D74AC[0]);
+    SmpButton_AppendListText(g_optionsPage->unk_10, D_auto_800D74B0);
+    SmpButton_SelectListEntry(g_optionsPage->unk_10, settings->unknown1F);
     thirdList = func_8041ABC0_de(0x51, 0x52);
     g_optionsPage->unk_14 = thirdList;
-    Menu_AppendListText(thirdList, D_800D2134[0]);
-    if (System_GetMemorySize() != 0x400000) {
-        Menu_AppendListText(g_optionsPage->unk_14, D_800D2138);
-        Menu_AppendListText(g_optionsPage->unk_14, D_800D213C);
+    SmpButton_AppendListText(thirdList, D_800D2134[0]);
+    if (Defs_GetMemorySize() != 0x400000) {
+        SmpButton_AppendListText(g_optionsPage->unk_14, D_800D2138);
+        SmpButton_AppendListText(g_optionsPage->unk_14, D_800D213C);
     }
-    Menu_SelectListEntry(g_optionsPage->unk_14, settings->reserved580);
+    SmpButton_SelectListEntry(g_optionsPage->unk_14, settings->reserved580);
     slider = func_8041A580_de(0x53, 0x54, 0x80);
     g_optionsPage->unk_8 = slider;
     func_8041A6EC_de(slider, settings->buttons);
@@ -110,7 +110,7 @@ extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void Frontend_SetWidgetFlag100(void *, s32);
 extern void func_8025E384_de(void);
-extern s32 Frontend_IsCupSelected(void);
+extern s32 ScenarioSetup_IsCupSelected(void);
 extern void func_804221E8_de(void);
 extern void func_802A2394_de(void);
 extern void func_8043C210_de(Shared_OptionsScreen *, s32, s32, s32, s32);
@@ -129,7 +129,7 @@ s32 Menu_OpenOptionsScreen(void *node) {
     s32 i;
     s32 rem;
 
-    D_800E4518 = Scene_AllocateMemory(0x6C);
+    D_800E4518 = Cache_AllocateMemory(0x6C);
     D_800E4518->sound = func_8025E2C4_de();
     func_8025E2D4_de(0x34);
     func_8025E384_de();
@@ -166,26 +166,26 @@ s32 Menu_OpenOptionsScreen(void *node) {
     func_8041B110_de(0x37C);
     firstListHandle = func_8041ABC0_de(0x375, 0x376);
     D_800E4518->firstList = firstListHandle;
-    Menu_AppendListText(firstListHandle, D_800D3470_de[0]);
-    Menu_AppendListText(D_800E4518->firstList, D_800D2124);
-    Menu_AppendListText(D_800E4518->firstList, D_800D2128);
+    SmpButton_AppendListText(firstListHandle, D_800D3470_de[0]);
+    SmpButton_AppendListText(D_800E4518->firstList, D_800D2124);
+    SmpButton_AppendListText(D_800E4518->firstList, D_800D2128);
     settings = &D_801462C8;
-    Menu_SelectListEntry(D_800E4518->firstList, settings->firstListMode);
+    SmpButton_SelectListEntry(D_800E4518->firstList, settings->firstListMode);
     secondListHandle = func_8041ABC0_de(0x378, 0x379);
     D_800E4518->secondList = secondListHandle;
-    Menu_AppendListText(secondListHandle, D_800D2134[0]);
-    if (System_GetMemorySize() != 0x400000) {
-        Menu_AppendListText(D_800E4518->secondList, D_800D2138);
-        Menu_AppendListText(D_800E4518->secondList, D_800D213C);
+    SmpButton_AppendListText(secondListHandle, D_800D2134[0]);
+    if (Defs_GetMemorySize() != 0x400000) {
+        SmpButton_AppendListText(D_800E4518->secondList, D_800D2138);
+        SmpButton_AppendListText(D_800E4518->secondList, D_800D213C);
     }
-    Menu_SelectListEntry(D_800E4518->secondList, settings->slots[7].secondListMode);
+    SmpButton_SelectListEntry(D_800E4518->secondList, settings->slots[7].secondListMode);
     slider = func_8041A580_de(0x37A, 0x37B, 0x80);
     D_800E4518->slider = slider;
 
     func_8041A6EC_de(slider, settings->buttons);
     switch (settings->controllerMode) {
     case 0:
-        if (Frontend_IsCupSelected() == 0) {
+        if (ScenarioSetup_IsCupSelected() == 0) {
             Frontend_SetWidgetFlag100(func_8040EC30_de(node, 0x37E), 1);
         }
         handle = func_8040EC30_de(node, 0x380);

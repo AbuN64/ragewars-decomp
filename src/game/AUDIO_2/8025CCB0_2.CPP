@@ -40,7 +40,7 @@ static inline s32 pick(BankAudioStartDialogGroup *bank, s32 group) {
         for (i = first; i <= last; i++) {
             total += 100;
         }
-        roll = Nav_NextRandom() % total;
+        roll = GraphU64_NextRandom() % total;
         total = 0;
         for (i = first; i < last; i++) {
             total += 100;
@@ -144,7 +144,7 @@ s32 Audio_ChooseSequenceVariant(void **arg0, s16 id, s16 avoid) {
         for (entry = first; entry <= last; entry++) {
             total += 100;
         }
-        draw = Nav_NextRandom() % total;
+        draw = GraphU64_NextRandom() % total;
         total = 0;
         for (entry = first; entry < last; entry++) {
             total += 100;
@@ -170,7 +170,7 @@ void Audio_LoadDialogMetadata(void *arg0, s32 songIndex) {
     s32 tempo;
     SongHeader *song;
 
-    song = Render_GetPackSection(player->bank->songs, songIndex * 2);
+    song = SetN64_GetPackSection(player->bank->songs, songIndex * 2);
     tempo = song->tempo;
     tempoValue = (f64) tempo;
     if (tempo < 0) {
@@ -178,7 +178,7 @@ void Audio_LoadDialogMetadata(void *arg0, s32 songIndex) {
     }
     player->tempoScale = (f32) tempoValue * D_800C3FC0_de;
     player->volume = (f32) song->volume;
-    Render_GetPackSection(player->bank->songs, (songIndex * 2) | 1);
+    SetN64_GetPackSection(player->bank->songs, (songIndex * 2) | 1);
 }
 
 void Audio_StopDialogPlayerUnlocked(void *arg0) {

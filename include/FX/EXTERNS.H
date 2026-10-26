@@ -6,7 +6,7 @@
 #include "COMMON/UNUSED.H"
 struct ControllerInput;
 struct Player;
-extern void Fx_BuildControllerState(struct ControllerInput *input, struct Player *player);
+extern void ContPad_BuildControllerState(struct ControllerInput *input, struct Player *player);
 
 
 extern f32 D_800C46B0;

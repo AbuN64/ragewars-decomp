@@ -57,7 +57,7 @@ void func_804410AC_de(struct MenuRecAt10 *menu, u8 dir) {
 }
 
 /* Update entry callbacks, animate opening/closing, and handle the selected entry. */
-extern f32 literals_Engine_GetPlatformRoutePoint;
+extern f32 literals_Scene_GetPlatformRoutePoint;
 extern const f32 g_pakMenuAnimationLimits[4];
 extern f32 D_800DE4A8, D_800DE4AC, D_800DE4B0_de;
 typedef struct PakMenu PakMenu;
@@ -124,33 +124,33 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
         entry++;
     }
     entry = menu->entries + menu->selected;
-    menu->fade += literals_Engine_GetPlatformRoutePoint;
+    menu->fade += literals_Scene_GetPlatformRoutePoint;
     selectionFlags = entry->flags & 0x400000;
-    Items_StepSpriteFrame(menu);
+    Pak_StepSpriteFrame(menu);
     switch (menu->state) {
     case 0:
-        menu->openA += literals_Engine_GetPlatformRoutePoint;
+        menu->openA += literals_Scene_GetPlatformRoutePoint;
         if (menu->openA >= g_pakMenuAnimationLimits[0]) {
             menu->openA = g_pakMenuAnimationLimits[0];
             menu->state = 1;
         }
         break;
     case 1:
-        menu->openB += literals_Engine_GetPlatformRoutePoint * D_800DE4A8;
+        menu->openB += literals_Scene_GetPlatformRoutePoint * D_800DE4A8;
         if (menu->openB >= D_800DE4AC) {
             menu->openB = D_800DE4AC;
             menu->state = 2;
         }
         break;
     case 3:
-        menu->openB -= literals_Engine_GetPlatformRoutePoint * D_800DE4B0_de;
+        menu->openB -= literals_Scene_GetPlatformRoutePoint * D_800DE4B0_de;
         if (menu->openB <= 0.0f) {
             menu->openB = 0.0f;
             menu->state = 4;
         }
         break;
     case 4:
-        menu->openA -= literals_Engine_GetPlatformRoutePoint;
+        menu->openA -= literals_Scene_GetPlatformRoutePoint;
         if (menu->openA <= 0.0f) {
             menu->openA = 0.0f;
             return 1;
@@ -198,17 +198,17 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
         allowRepeat = 0;
     }
     if (allowRepeat != 0) {
-        if (Render_IsNavUp(menu->input) != 0) {
+        if (Control_IsNavUp(menu->input) != 0) {
             func_804410AC_de(menu, 0x12);
         }
-        if (Render_IsNavDown(menu->input) != 0) {
+        if (Control_IsNavDown(menu->input) != 0) {
             func_804410AC_de(menu, 0x13);
         }
     }
     if (menu->state != 2) {
         return 0;
     }
-    if (Render_IsAButtonPressed(menu->input) != 0 ||
+    if (Control_IsAButtonPressed(menu->input) != 0 ||
         (Control_IsLeftPressed(menu->input) != 0 && selectionFlags != 0) ||
         (Control_IsRightPressed(menu->input) != 0 && selectionFlags != 0)) {
         callback = entry->cls->confirm;
@@ -221,7 +221,7 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
 }
 
 
-extern void *Items_GetListContext(s8 *);
+extern void *Pak_GetListContext(s8 *);
 extern void Pak_MeasureMenuText(TextBoundsText *, CItemInfo *);
 extern u32 D_800CD730;
 extern const f32 g_menuCenterFraction;
@@ -234,7 +234,7 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
     s32 i;
     f32 centerX, centerY, top, bottom, alpha;
 
-    data = Items_GetListContext(member);
+    data = Pak_GetListContext(member);
     bounds.left = 1024;
     bounds.right = -1024;
     bounds.m_Top = 1024;
@@ -324,13 +324,13 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
                     bottom = placed.m_Bottom;
                     /* Preserve the highlight extent calculation and its float rounding. */
                     bottom = top + (bottom - top);
-                    Text_SetupFillMode();
+                    OnScreen_SetupFillMode();
                     alpha = menu->alpha * menu->fade *
                         ((Math_Sinf((f32)(D_800CD730 * 10) * 0.017453294f) + 1.0f) * 50.0f + 50.0f);
                     if (entry->flags & 0x10) {
-                        Text_DrawBevelBox(placed.left - 4, top, placed.right + 4, bottom, 0, 0, 255, 0, 10, (u8)alpha);
+                        OnScreen_DrawBevelBox(placed.left - 4, top, placed.right + 4, bottom, 0, 0, 255, 0, 10, (u8)alpha);
                     } else {
-                        Text_DrawBevelBox(placed.left - 4, top, placed.right + 4, bottom, 0, 0, 255, 0, 10, (u8)alpha);
+                        OnScreen_DrawBevelBox(placed.left - 4, top, placed.right + 4, bottom, 0, 0, 255, 0, 10, (u8)alpha);
                     }
                     D_800E1E20 = -1;
                 }
@@ -414,6 +414,6 @@ void Pak_DrawMenuPanel(func_8043FFAC_S2 *menu, TextBoundsText *text, s32 relativ
     panel.m_Top = top;
     panel.m_Bottom = top + height;
     panel.height = panel.m_Bottom - panel.m_Top;
-    Text_SetupFillMode();
-    Text_DrawBevelBox(panel.left, panel.m_Top, panel.right, panel.m_Bottom, 1, 0, 0, 0, 0, (u8)(u32)(menu->alpha * 192.0f));
+    OnScreen_SetupFillMode();
+    OnScreen_DrawBevelBox(panel.left, panel.m_Top, panel.right, panel.m_Bottom, 1, 0, 0, 0, 0, (u8)(u32)(menu->alpha * 192.0f));
 }

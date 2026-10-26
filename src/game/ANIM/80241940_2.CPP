@@ -5,20 +5,20 @@
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
 
-extern f32 Particle_GetActorRadius(CollisionProbe *);
+extern f32 GameObject_GetActorRadius(CollisionProbe *);
 
-extern f32 Sound_GetActorReach(CollisionProbe *);
+extern f32 InstHdr_GetActorReach(CollisionProbe *);
 
-extern f32 Particle_GetActorHeight(CollisionProbe *);
+extern f32 GameObject_GetActorHeight(CollisionProbe *);
 
-extern f32 Sound_GetActorBaseOffset(CollisionProbe *);
+extern f32 InstHdr_GetActorBaseOffset(CollisionProbe *);
 
 extern f32 func_80241728_de(SurfaceHit *, f32, f32);
 
 struct MotionSurface;
-extern s32 Camera_SweepActorMotion(CollisionProbe *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
+extern s32 Unicol_SweepActorMotion(CollisionProbe *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
 
-extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 
 
@@ -26,12 +26,12 @@ extern char D_80100338;
 
 extern void func_80241950_de(OwnerRecAt18 *, Bounds *, Actor_func_80242288_de *, OwnerRecAt18 *);
 
-extern void Anim_BuildBoxFace5(void *, Bounds *);
-extern void Anim_BuildBoxFace4(void *, Bounds *);
-extern void Anim_BuildBoxFace3(void *, Bounds *);
-extern void Anim_BuildBoxFace2(void *, Bounds *);
-extern void Anim_BuildBoxFace1(void *, Bounds *);
-extern void Anim_BuildBoxFace0(void *, Bounds *);
+extern void Plane_BuildBoxFace5(void *, Bounds *);
+extern void Plane_BuildBoxFace4(void *, Bounds *);
+extern void Plane_BuildBoxFace3(void *, Bounds *);
+extern void Plane_BuildBoxFace2(void *, Bounds *);
+extern void Plane_BuildBoxFace1(void *, Bounds *);
+extern void Plane_BuildBoxFace0(void *, Bounds *);
 extern s32 func_8023EA44_de(void *, void *, void *, f32, s32);
 extern s32 func_8023E8D4_de(void *, void *, s32);
 extern s32 func_8023E178_de(void *, void *, f32, f32, f32, s32, void *, s32);
@@ -48,20 +48,20 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
 
     if (actor->movement.y > 0.0f) {
         query->word0 = 3;
-        Anim_BuildBoxFace0(query, bounds);
+        Plane_BuildBoxFace0(query, bounds);
         if (func_8023E8D4_de(actor, query, 0)) {
             saved_collision = D_80103FCC;
             D_80103FCC = collision;
             hit_y = func_80241728_de(query, input->x, input->z);
             input->owner = owner;
-            extent0 = Sound_GetActorReach(input);
-            extent1 = Particle_GetActorRadius(input);
-            extent2 = Particle_GetActorHeight(input);
-            extent3 = Sound_GetActorBaseOffset(input);
+            extent0 = InstHdr_GetActorReach(input);
+            extent1 = GameObject_GetActorRadius(input);
+            extent2 = GameObject_GetActorHeight(input);
+            extent3 = InstHdr_GetActorBaseOffset(input);
             next.x = input->x;
             next.y = hit_y + D_800C3758_de[0];
             next.z = input->z;
-            if (Camera_SweepActorMotion(input, *(CVector3 *)&input->x, next, &D_801000F0,
+            if (Unicol_SweepActorMotion(input, *(CVector3 *)&input->x, next, &D_801000F0,
                               extent0, extent1, extent2, extent3)) {
                 actor->saved_query = *query;
                 actor->flags |= 8;
@@ -82,7 +82,7 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
     }
     if (actor->movement.y < 0.0f) {
         query->word0 = 2;
-        Anim_BuildBoxFace1(query, bounds);
+        Plane_BuildBoxFace1(query, bounds);
         if (func_8023E8D4_de(actor, query, 1)) {
             actor->flags |= 8;
             input->flags38 |= 0x10;
@@ -90,17 +90,17 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
     }
     if (actor->movement.x != 0.0f || actor->movement.z != 0.0f) {
         query->word0 = 3;
-        Anim_BuildBoxFace2(query, bounds);
+        Plane_BuildBoxFace2(query, bounds);
         hit = func_8023E8D4_de(actor, query, 1);
-        Anim_BuildBoxFace3(query, bounds);
+        Plane_BuildBoxFace3(query, bounds);
         hit |= func_8023E8D4_de(actor, query, 1);
-        Anim_BuildBoxFace4(query, bounds);
+        Plane_BuildBoxFace4(query, bounds);
         hit |= func_8023E8D4_de(actor, query, 1);
-        Anim_BuildBoxFace5(query, bounds);
+        Plane_BuildBoxFace5(query, bounds);
         hit |= func_8023E8D4_de(actor, query, 1);
         if (hit) {
             actor->flags |= 8;
-            Particle_AddVec3(&((LevelActor *)input)->position1,
+            GraphU64_AddVec3(&((LevelActor *)input)->position1,
                           &((LevelActor *)input)->position1,
                           &actor->movement);
         }
@@ -122,23 +122,23 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
 
     owner_data = &((LevelActor *)owner)->position0;
     entry = owner->entries + 0x14;
-    height = ((ShapeRecAt18V1 *)entry)->radius + Particle_GetActorRadius(input);
+    height = ((ShapeRecAt18V1 *)entry)->radius + GameObject_GetActorRadius(input);
     if (actor->movement.y > 0.0f) {
         query->word0 = 3;
-        Anim_BuildBoxFace0(query, bounds);
+        Plane_BuildBoxFace0(query, bounds);
         if (func_8023EA44_de(actor, query, owner_data, height, 0)) {
             saved_collision = D_80103FCC;
             D_80103FCC = collision;
             hit_y = func_80241728_de(query, input->x, input->z);
             input->owner = owner;
-            extent0 = Sound_GetActorReach(input);
-            extent1 = Particle_GetActorRadius(input);
-            extent2 = Particle_GetActorHeight(input);
-            extent3 = Sound_GetActorBaseOffset(input);
+            extent0 = InstHdr_GetActorReach(input);
+            extent1 = GameObject_GetActorRadius(input);
+            extent2 = GameObject_GetActorHeight(input);
+            extent3 = InstHdr_GetActorBaseOffset(input);
             next.x = input->x;
             next.y = hit_y + D_800C3758_de[1];
             next.z = input->z;
-            if (Camera_SweepActorMotion(input, *(CVector3 *)&input->x, next, &D_801000F0,
+            if (Unicol_SweepActorMotion(input, *(CVector3 *)&input->x, next, &D_801000F0,
                               extent0, extent1, extent2, extent3)) {
                 actor->saved_query = *query;
                 actor->flags |= 8;
@@ -159,7 +159,7 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
     }
     if (actor->movement.y < 0.0f) {
         query->word0 = 2;
-        Anim_BuildBoxFace1(query, bounds);
+        Plane_BuildBoxFace1(query, bounds);
         if (func_8023EA44_de(actor, query, owner_data, height, 1)) {
             actor->flags |= 8;
             input->flags38 |= 0x10;
@@ -171,7 +171,7 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
                           bounds->corners[0].y, bounds->corners[4].y,
                           1, query, 1)) {
             actor->flags |= 8;
-            Particle_AddVec3(&((LevelActor *)input)->position1,
+            GraphU64_AddVec3(&((LevelActor *)input)->position1,
                           &((LevelActor *)input)->position1,
                           &actor->movement);
         }
@@ -209,12 +209,12 @@ void func_80242288_de(Actor_func_80242288_de *actor, OwnerRecAt18 *owner) {
             }
             if (actor->field60 > 0.0f) {
                 *word = 2;
-                Anim_BuildBoxFace1(word, &bounds);
+                Plane_BuildBoxFace1(word, &bounds);
                 func_8023EA44_de(actor, word, owner_data, value, 1);
             }
             if (actor->field60 < 0.0f) {
                 *word = 9;
-                Anim_BuildBoxFace0(word, &bounds);
+                Plane_BuildBoxFace0(word, &bounds);
                 func_8023EA44_de(actor, word, owner_data, value, 1);
                 return;
             }
@@ -229,23 +229,23 @@ void func_80242288_de(Actor_func_80242288_de *actor, OwnerRecAt18 *owner) {
             zero = *(f32 *)&query.word4;
             if (zero < movement) {
                 *word = 2;
-                Anim_BuildBoxFace1(word, &bounds);
+                Plane_BuildBoxFace1(word, &bounds);
                 func_8023E8D4_de(actor, word, 1);
             }
             if ((actor->field5C != zero) || (actor->field64 != zero)) {
                 *word = 3;
-                Anim_BuildBoxFace2(word, &bounds);
+                Plane_BuildBoxFace2(word, &bounds);
                 func_8023E8D4_de(actor, word, 1);
-                Anim_BuildBoxFace3(word, &bounds);
+                Plane_BuildBoxFace3(word, &bounds);
                 func_8023E8D4_de(actor, word, 1);
-                Anim_BuildBoxFace4(word, &bounds);
+                Plane_BuildBoxFace4(word, &bounds);
                 func_8023E8D4_de(actor, word, 1);
-                Anim_BuildBoxFace5(word, &bounds);
+                Plane_BuildBoxFace5(word, &bounds);
                 func_8023E8D4_de(actor, word, 1);
             }
             if (actor->field60 < 0.0f) {
                 *word = 9;
-                Anim_BuildBoxFace0(word, &bounds);
+                Plane_BuildBoxFace0(word, &bounds);
                 func_8023E8D4_de(actor, word, 1);
             }
             break;

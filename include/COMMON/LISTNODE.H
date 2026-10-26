@@ -339,5 +339,5 @@ extern s16 func_8025E500_de(void *);
 extern s16 func_8025E50C_de(void *);
 extern s8 func_8025E554_de(void *);
 struct RecordD90;
-extern s16 Audio_SelectVoiceSlot(struct RecordD90 *, s32, s32, s16, s32);
+extern s16 Channel_SelectVoiceSlot(struct RecordD90 *, s32, s32, s16, s32);
 #endif

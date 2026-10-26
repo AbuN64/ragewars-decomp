@@ -2,7 +2,7 @@
 #include "TYPES.H"
 #include "COMMON/PROBE.H"
 
-f32 Particle_GetActorRadius(Actor_u1 *actor)
+f32 GameObject_GetActorRadius(Actor_u1 *actor)
 {
     Resource_u1 *resource;
     f32 a;

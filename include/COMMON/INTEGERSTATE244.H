@@ -151,7 +151,7 @@ extern void func_8022D198_de(void);
 
 extern void func_8022D3EC_de(void);
 
-extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
+extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
 extern void func_8022CE78_de(s32 arg0, s32 arg1);
 
 extern void Ovlgame_UpdateRunEndPlayer(void *);

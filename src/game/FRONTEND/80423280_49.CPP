@@ -11,7 +11,7 @@ extern void func_8042B080_de(void);
    items of the window with their alpha and visibility, resets the selection and the counters at
    D_80154024, clears the pending flag at 0x91 of the eight D_80146398 records, places the four
    character models (ids 0xEA6 to 0xEA9, x 0, -6, -13, -19) and a fifth model 0xEA6, then issues
-   request 0xE78 through Render_PlayFlatSound and calls func_80422170_de; returns zero. */
+   request 0xE78 through SoundElement_PlayFlatSound and calls func_80422170_de; returns zero. */
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 
@@ -102,13 +102,13 @@ s32 func_80429A24_de(void *window) {
     s32 x;
     s32 id;
 
-    D_800E4F60 = Scene_AllocateMemory(sizeof(SetupScreen));
+    D_800E4F60 = Cache_AllocateMemory(sizeof(SetupScreen));
     D_800E4F60->window = window;
-    D_800E4F60->list = Menu_CreateOverlayNode(window, 4);
-    Menu_ShowSlotById(window, 0, ID_2FF);
-    Menu_ShowSlotById(window, 1, ID_2FF);
-    Menu_ShowSlotById(window, 2, ID_2FF);
-    Menu_ShowSlotById(window, 3, ID_2FF);
+    D_800E4F60->list = SmpOverlay_CreateOverlayNode(window, 4);
+    SmpOverlay_ShowSlotById(window, 0, ID_2FF);
+    SmpOverlay_ShowSlotById(window, 1, ID_2FF);
+    SmpOverlay_ShowSlotById(window, 2, ID_2FF);
+    SmpOverlay_ShowSlotById(window, 3, ID_2FF);
     D_800E4F60->unk3DC = 1;
     D_800E4F60->unk45C = 0;
     D_800E4F60->unk3E0 = 4;
@@ -226,7 +226,7 @@ s32 func_80429A24_de(void *window) {
     func_80439B5C_de(&D_800E4F60->models[4].initial, 0xEA6, scale.words, position.words);
     func_80439BE0_de(&D_800E4F60->models[4].rotation, rotation.words);
     func_80439C30_de(&D_800E4F60->models[4].offset, offset.words);
-    Render_PlayFlatSound(0xE78);
+    SoundElement_PlayFlatSound(0xE78);
     func_80422170_de();
     return 0;
 }

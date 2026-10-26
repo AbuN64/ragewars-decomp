@@ -17,7 +17,7 @@
 extern void func_80247004_de(Obj_func_80247004_de *);
 
 
-extern void Scene_UnlockResource(void *, Node80253610 *);
+extern void Cache_UnlockResource(void *, Node80253610 *);
 
 /* Update or blend object rotation when the movement state permits it. */
 CQuatern InstHdr_BuildActorGroundRotation(void *);
@@ -42,7 +42,7 @@ extern CollisionInfo D_801003D8;
 
 extern func_80237E70_G1 D_801041F0;
 
-extern s32 Camera_MoveActorWithCollision(void *arg0, CVector3 arg1, CollisionInfo *arg2);
+extern s32 Unicol_MoveActorWithCollision(void *arg0, CVector3 arg1, CollisionInfo *arg2);
 
 extern void func_80278E04_de(s32 arg0, s32 arg1, void *arg2);
 
@@ -62,20 +62,20 @@ void func_80246E44_de(Actor36 *actor) {
     after = actor->position;
     actor->position = before;
     if (mode == 0 && *actor->kind != 0) {
-        Particle_SubtractVectors(&after, &after, &before);
-        Particle_AddVec3(&after, &after, &actor->displacement);
+        GraphU64_SubtractVectors(&after, &after, &before);
+        GraphU64_AddVec3(&after, &after, &actor->displacement);
         func_8024715C_de((void *)actor, &after);
         if (*actor->kind == 1) {
             Scene_UpdateMovementTriggers(&g_world, actor, &before, &actor->position);
         }
     }
     func_80247004_de((void *)actor);
-    resource = Scene_RequestResource(0, actor->size, actor->size, actor->alignment, 0, 0, 0, D_800C38F4_de, 1);
+    resource = Cache_RequestResource(0, actor->size, actor->size, actor->alignment, 0, 0, 0, D_800C38F4_de, 1);
     if (resource != 0) {
-        box = Render_GetPackSection(*resource, 0);
+        box = SetN64_GetPackSection(*resource, 0);
         actor->update(actor, actor->state);
         func_8026EE20_de(actor->matrix, box, &actor->box);
-        Scene_UnlockResource(0, (void *)resource);
+        Cache_UnlockResource(0, (void *)resource);
     }
 }
 
@@ -133,7 +133,7 @@ void func_8024715C_de(char *actor, CVector3 *destination) {
             ((ObjectStateC *)(collision))->unk_8.v1 = 0;
         }
         old_contact = ((ObjectLinks23C *)(actor))->unk_14;
-        collided = Camera_MoveActorWithCollision(actor, *destination, collision);
+        collided = Unicol_MoveActorWithCollision(actor, *destination, collision);
         if (old_contact != ((ObjectLinks23C *)(actor))->unk_14) {
             ((ObjectLinks23C *)(actor))->unk_1F4 = old_contact;
         }

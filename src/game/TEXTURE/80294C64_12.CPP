@@ -4,11 +4,11 @@
 
 extern s32 D_800CD894_de;
 
-extern s32 Render_UnpackResource(void *, s32);
-extern u16 *Render_GetSizedPackSection(void *, s32, u32 *);
+extern s32 PpDecom_UnpackResource(void *, s32);
+extern u16 *SetN64_GetSizedPackSection(void *, s32, u32 *);
 extern s32 func_8028FDF8_de(void *, s32);
-extern s32 **Scene_AllocResourceBlock(s32, void *, s32);
-extern void Scene_ReplaceResourceBlock(s32, void *, s32 **);
+extern s32 **Cache_AllocResourceBlock(s32, void *, s32);
+extern void Cache_ReplaceResourceBlock(s32, void *, s32 **);
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 typedef struct {
@@ -41,21 +41,21 @@ void func_80294C8C_de(s32 arg0, Resource *handle) {
     s32 *hdr;
     s32 *entry;
 
-    if (Render_UnpackResource(handle, arg0 >= 0) == 0) {
+    if (PpDecom_UnpackResource(handle, arg0 >= 0) == 0) {
         return;
     }
     obj = *handle->handle;
     if (*obj == 0) {
         return;
     }
-    list2 = Render_GetPackSection(obj, 2);
+    list2 = SetN64_GetPackSection(obj, 2);
     count = *list2;
     if (count != 0) {
         rem2 = arg0 % count;
     } else {
         rem2 = 0;
     }
-    list1 = Render_GetPackSection(obj, 1);
+    list1 = SetN64_GetPackSection(obj, 1);
     rem1 = arg0 % *list1;
     if (D_800CD894_de != 0) {
         mode = 4;
@@ -63,10 +63,10 @@ void func_80294C8C_de(s32 arg0, Resource *handle) {
         mode = handle->flags >> 30;
     }
     if (mode != 0) {
-        kind = *(u8 *)Render_GetPackSection(obj, 0);
+        kind = *(u8 *)SetN64_GetPackSection(obj, 0);
         if (kind < 2) if (kind >= 0) {
             for (i = 0; i < count; i++) {
-                u16 *data = Render_GetSizedPackSection(list2, i, &size);
+                u16 *data = SetN64_GetSizedPackSection(list2, i, &size);
                 n = size >> 1;
                 for (j = 0; j < n; j++) {
                     u32 r = (data[j] >> 8) & 0xF8;
@@ -106,36 +106,36 @@ void func_80294C8C_de(s32 arg0, Resource *handle) {
     total += (len1 + 7) & ~7;
     off2 = total;
     total += (len2 + 7) & ~7;
-    res = Scene_AllocResourceBlock(0, handle, total);
+    res = Cache_AllocResourceBlock(0, handle, total);
     if (res != 0) {
         hdr = *res;
         hdr[0] = 3;
         hdr[1] = 0x18;
         hdr[2] = off1;
         hdr[3] = off2;
-        func_802BD3A0_de(Render_GetPackSection(hdr, 0), Render_GetPackSection(obj, 0), func_8028FDF8_de(obj, 0));
-        entry = Render_GetPackSection(hdr, 1);
+        func_802BD3A0_de(SetN64_GetPackSection(hdr, 0), SetN64_GetPackSection(obj, 0), func_8028FDF8_de(obj, 0));
+        entry = SetN64_GetPackSection(hdr, 1);
         entry[0] = 1;
         entry[1] = 0x10;
-        func_802BD3A0_de(Render_GetPackSection(entry, 0), Render_GetPackSection(list1, rem1), func_8028FDF8_de(list1, rem1));
-        entry = Render_GetPackSection(hdr, 2);
+        func_802BD3A0_de(SetN64_GetPackSection(entry, 0), SetN64_GetPackSection(list1, rem1), func_8028FDF8_de(list1, rem1));
+        entry = SetN64_GetPackSection(hdr, 2);
         if (count != 0) {
             entry[0] = 1;
             entry[1] = 0x10;
-            func_802BD3A0_de(Render_GetPackSection(entry, 0), Render_GetPackSection(list2, rem2), func_8028FDF8_de(list2, rem2));
+            func_802BD3A0_de(SetN64_GetPackSection(entry, 0), SetN64_GetPackSection(list2, rem2), func_8028FDF8_de(list2, rem2));
         } else {
             entry[0] = 0;
         }
     }
-    Scene_ReplaceResourceBlock(0, handle, res);
+    Cache_ReplaceResourceBlock(0, handle, res);
 }
 
 #if !(defined(VERSION_US_REV1))
 #ifdef NON_MATCHING
 extern s32 D_800CD890, D_80146DF0, D_80146DF4, D_80146DF8, D_80146DFC;
 extern u32 *g_displayListCursor;
-extern void Scene_MarkResourceInUse(s32);
-extern void *Render_GetPackSection(void *, s32);
+extern void Cache_MarkResourceInUse(s32);
+extern void *SetN64_GetPackSection(void *, s32);
 extern u8 D_800CBD50_de[];
 #define DLW(a, b) do { g_displayListCursor[0] = (u32)(a); g_displayListCursor[1] = (u32)(b); g_displayListCursor += 2; } while (0)
 /* Texture state setter (the gDP texture-load sequence of a texture-header object): looks up the header, bitmap and palette
@@ -153,12 +153,12 @@ void func_802950B4_de(s32 unused, void **obj, s32 frame, s32 tile, u32 wrap, u32
     s32 words;
     u32 t3 = 0, t0 = 0;
 
-    Scene_MarkResourceInUse(0);
-    hdr = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(obj[0], 0), 1), frame);
-    bits = Render_GetPackSection(obj[0], 2);
+    Cache_MarkResourceInUse(0);
+    hdr = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(obj[0], 0), 1), frame);
+    bits = SetN64_GetPackSection(obj[0], 2);
     palette = 0;
     if (*(s32 *)bits != 0) {
-        palette = Render_GetPackSection(bits, tile);
+        palette = SetN64_GetPackSection(bits, tile);
     }
     needLoad = (D_800CD890 != (s32)obj || D_80146DF0 != frame || D_80146DF8 != (s32)wrap || D_80146DFC != (s32)maskS ||
                 D_80146DF4 != tile);

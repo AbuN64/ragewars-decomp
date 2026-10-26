@@ -87,7 +87,7 @@ extern void Items_InitEntryPool(int a);
 
 extern u32 Weapon_UpdateShakeAxis(s32);
 
-CCameraText *Camera_PostTargetedScreenMessage(void *owner, void *pool, u8 *text, s32 target, f32 size) {
+CCameraText *Sky_PostTargetedScreenMessage(void *owner, void *pool, u8 *text, s32 target, f32 size) {
     CCameraText *pending;
     CCameraText *next;
 
@@ -213,7 +213,7 @@ void func_80239D00_de(struct Channel *channel, float inputLevel, int waveMode) {
 }
 
 /* Evaluates a wave: kind 1 returns func_802B7130_de of the phase at 0x10 scaled by D_800C865C, times
-   the amplitude at 0xC; kind 0 returns Nav_RandomBetween over minus to plus the amplitude; any other
+   the amplitude at 0xC; kind 0 returns GraphU64_RandomBetween over minus to plus the amplitude; any other
    kind returns zero. */
 
 
@@ -226,7 +226,7 @@ f32 func_80239D1C_de(struct Wave *wave) {
     case 1:
         return Math_Sinf(wave->phase * D_800C865C) * wave->amplitude;
     case 0:
-        return Nav_RandomBetween(-wave->amplitude, wave->amplitude);
+        return GraphU64_RandomBetween(-wave->amplitude, wave->amplitude);
     }
     return 0.0f;
 }

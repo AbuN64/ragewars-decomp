@@ -19,14 +19,14 @@ extern char D_8011D8D0;
 
 
 
-extern f32 Particle_GetActorHeight(ActorSimpleInstanceSpawnModelEffect *actor);
+extern f32 GameObject_GetActorHeight(ActorSimpleInstanceSpawnModelEffect *actor);
 
 #include "particle/8027A0F4_8.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 extern EffectRecAt154 *func_802830B8_de(void *system);
 
-extern f32 Particle_GetActorRadius(ActorSimpleInstanceSpawnModelEffect *actor);
+extern f32 GameObject_GetActorRadius(ActorSimpleInstanceSpawnModelEffect *actor);
 
 /* Places an actor's ground shadow: the shadow size is the smaller of half the vertical offset from
  * InstHdr_GetActorShadowRadius and that minus a tenth of the actor's height above its ground height at 0x40, vanishing
@@ -37,7 +37,7 @@ extern f32 Particle_GetActorRadius(ActorSimpleInstanceSpawnModelEffect *actor);
 
 extern CQuatern InstHdr_BuildActorGroundRotation(void *);
 
-extern void Particle_LimitVectorLength(CVector3 *, f32);
+extern void GraphU64_LimitVectorLength(CVector3 *, f32);
 
 extern void MatrixFromQuaternion(f32 *, f32 *);
 
@@ -45,7 +45,7 @@ extern void ScaleMatrixLocal(f32 *, f32, f32, f32);
 
 extern void TranslateMatrix(f32 *, f32, f32, f32);
 
-extern void Rsp_ConvertMatrixToFixed(f32 *, void *);
+extern void GraphU64_ConvertMatrixToFixed(f32 *, void *);
 
 extern void func_8026992C_de(void *, s32, s32);
 
@@ -53,11 +53,11 @@ extern void func_8026992C_de(void *, s32, s32);
 
 extern s32 func_802540F4_de(s32, void **, s32, void *, s32);
 
-extern s32 Render_GetDirectoryEntry(s32 *, s32, s32);
+extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 
-extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
+extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
-extern void Scene_UnlockResource(s32, void *);
+extern void Cache_UnlockResource(s32, void *);
 
 extern char D_0026D7F4;
 
@@ -77,18 +77,18 @@ void SimpleInstance_SpawnModelEffect(ActorSimpleInstanceSpawnModelEffect *actor,
     if (func_8026E340_de() != 0) {
         rotation.x = rotation.y = rotation.z = 0.0f;
         rotation.w = D_800C3D90_de;
-        node = Render_GetPackSection(*resource, 2);
+        node = SetN64_GetPackSection(*resource, 2);
         if ((*node != 0) &&
-            (*((s32 *)Render_GetPackSection(Render_GetPackSection(node, 0), 0)) & 0x8000)) {
+            (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
             position = actor->position0;
-            position.y += Particle_GetActorHeight(actor) * *(&D_800C3D90_de + 1);
+            position.y += GameObject_GetActorHeight(actor) * *(&D_800C3D90_de + 1);
             func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                           actor->position1, rotation, position, 0, -1, 0);
             effect = func_802830B8_de(&D_8011D8D0);
             if (effect != 0) {
                 scale = D_800C3D98_de;
-                effect->field150 = Particle_GetActorRadius(actor) * scale;
-                effect->field154 = Particle_GetActorHeight(actor) * scale;
+                effect->field150 = GameObject_GetActorRadius(actor) * scale;
+                effect->field154 = GameObject_GetActorHeight(actor) * scale;
             }
         }
     }
@@ -112,11 +112,11 @@ void SimpleInstance_DrawGroundShadow(void *actor) {
     position.x = ((Shared_Func80243A80Actor *)actor)->x;
     position.z = ((Shared_Func80243A80Actor *)actor)->z;
     position.y = ground;
-    Particle_LimitVectorLength(&position, 20000.0f);
+    GraphU64_LimitVectorLength(&position, 20000.0f);
     MatrixFromQuaternion(&rotation.x, matrix);
     ScaleMatrixLocal(matrix, size, 1.0f, size);
     TranslateMatrix(matrix, position.x, position.y, position.z);
-    Rsp_ConvertMatrixToFixed(matrix, (char *)actor + ((D_800D297C << 6) + 0xE8));
+    GraphU64_ConvertMatrixToFixed(matrix, (char *)actor + ((D_800D297C << 6) + 0xE8));
     func_8026992C_de((char *)actor + ((D_800D297C << 6) + 0xE8), 1, 0x96);
 }
 
@@ -129,24 +129,24 @@ void SimpleInstance_RefreshModelResourceUsage(StaticObject *staticObject) {
 
     index = staticObject->model;
     if (index != staticObject->animation) {
-        resource = Scene_RequestResource(0, staticObject->animationKey,
+        resource = Cache_RequestResource(0, staticObject->animationKey,
                                 staticObject->animationKey, 0x18,
                                 0, 0, 0, &D_800C3DA8_de + 4, 1);
         if (resource != 0) {
-            key = Render_GetDirectoryEntry(*resource, staticObject->animationKey, 1);
-            Scene_ReleaseResource(0, resource);
+            key = SetN64_GetDirectoryEntry(*resource, staticObject->animationKey, 1);
+            Cache_ReleaseResource(0, resource);
             found = func_802540F4_de(0, &variantDirectory, key, g_simpModelsIndexText, 1);
             if (found != 0) {
-                staticObject->resource = Render_LocatePackSection((s32)variantDirectory, key,
+                staticObject->resource = SetN64_LocatePackSection((s32)variantDirectory, key,
                                                     index % *(s32 *)variantDirectory,
                                                     &staticObject->resourceSize);
                 staticObject->animation = index;
-                Scene_ReleaseResource(0, (void *)found);
+                Cache_ReleaseResource(0, (void *)found);
             }
         }
     }
     if (staticObject->resource != 0) {
-        resource = Scene_RequestResource(0, staticObject->resource,
+        resource = Cache_RequestResource(0, staticObject->resource,
                                 staticObject->resource, staticObject->resourceSize,
                                 0, 0, &D_0026D7F4, g_simpModelText, 0);
     } else {
@@ -154,6 +154,6 @@ void SimpleInstance_RefreshModelResourceUsage(StaticObject *staticObject) {
     }
     if (resource != 0) {
         func_8026E1F8_de(resource);
-        Scene_UnlockResource(0, resource);
+        Cache_UnlockResource(0, resource);
     }
 }

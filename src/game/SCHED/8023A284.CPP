@@ -14,7 +14,7 @@
 
 
 f32 func_8023A294_de(s32 unused0, f32 value, f32 target, f32 step) {
-    if (Render_IsSnapshotActive() != 0) {
+    if (Control_IsSnapshotActive() != 0) {
         value = target;
     }
     if (value < target) {
@@ -69,7 +69,7 @@ static inline CCameraText *recycle(void *owner, void *pool) {
     return oldest;
 }
 
-CCameraText *Sched_PostScreenMessage(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target) {
+CCameraText *Sky_PostScreenMessage(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target) {
     CCameraText *message;
     u8 *line;
     u8 *p;

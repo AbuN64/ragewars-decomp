@@ -23,11 +23,11 @@ typedef struct CollisionInfo CollisionInfo;
 
 extern CollisionInfo D_80100030;
 
-extern f32 Particle_GetActorHeight(Instance8020CD74 *);
+extern f32 GameObject_GetActorHeight(Instance8020CD74 *);
 
-extern s32 Camera_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo *);
+extern s32 Unicol_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo *);
 
-extern f32 Particle_GetPointDistance(f32 *a, f32 *b);
+extern f32 GraphU64_GetPointDistance(f32 *a, f32 *b);
 
 void Player_ApplyLinkedProjectileStatus(void *arg0, s32 arg1, s32 arg2) {
     func_8021C45C_de((((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link), arg0, arg1, arg2);
@@ -50,7 +50,7 @@ void func_8022E290_de(void *player) {
         attributes = (void *)((s32)attributes << 2);
         attributes = D_8010F328 + (s32)attributes;
     }
-    Fx_InitControllerInput(state, attributes);
+    ContPad_InitControllerInput(state, attributes);
 
     object->stick = 0;
     object->state6C4 = 0;
@@ -133,9 +133,9 @@ s32 Player_ProbeCollisionAdjustedPosition(Instance8020CD74 *arg0, CVector3 *arg1
     s32 moved;
 
     saved = *arg0;
-    ((struct Actor_func_80214DD4_de *)arg0)->pos.y += Particle_GetActorHeight(arg0) * (&D_800C2E10_de)[1];
+    ((struct Actor_func_80214DD4_de *)arg0)->pos.y += GameObject_GetActorHeight(arg0) * (&D_800C2E10_de)[1];
     ((struct Actor_func_80214DD4_de *)arg0)->pos.y += ((struct Actor_func_80214DD4_de *)arg0)->height;
-    Camera_MoveActorWithCollision(arg0, *arg1, &D_80100030);
+    Unicol_MoveActorWithCollision(arg0, *arg1, &D_80100030);
 
     moved = (arg1->x != ((struct Actor_func_80214DD4_de *)arg0)->pos.x) ||
             (arg1->y != ((struct Actor_func_80214DD4_de *)arg0)->pos.y) ||
@@ -156,7 +156,7 @@ f32 Player_SumActivePlayerDistances(void *arg0, f32 *arg1) {
     if (var_s0 != 0) {
         do {
             if (var_s0->message != 0) {
-                result += Particle_GetPointDistance(arg1, &var_s0->position.vector.x);
+                result += GraphU64_GetPointDistance(arg1, &var_s0->position.vector.x);
             }
             var_s0 = (Shared_ActorView *)var_s0->next;
         } while (var_s0 != 0);

@@ -7,7 +7,7 @@
 #include "MENU/80405DC0.H"
 #include "TYPES.H"
 #include "MENU/PAK/80405DC0_12.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Releases temporary profile buffers and opens the controller-pak prompt for the selected player and channel, labelling the port prompt by channel. */
 
@@ -53,10 +53,10 @@ s32 func_804085E0_de(void *unused, MenuRecAt20V3 *menu) {
         func_80253908_de(0);
     }
     if (D_800DE860_de != 0) {
-        Scene_ReleaseResource(0, D_800DE860_de);
+        Cache_ReleaseResource(0, D_800DE860_de);
     }
     if (D_800DE864_de != 0) {
-        Scene_ReleaseResource(0, D_800DE864_de);
+        Cache_ReleaseResource(0, D_800DE864_de);
     }
     D_800DE860_de = 0;
     D_800DE864_de = 0;

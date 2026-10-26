@@ -4,9 +4,9 @@
 #include "RESMGR/802A23A4_7.H"
 
 void func_802A17C4_de(void) {
-    void Math_ResetFrameHeap(void);
+    void ESmem_ResetFrameHeap(void);
     D_80147050_de = 1 - D_80147050_de;
-    Math_ResetFrameHeap();
+    ESmem_ResetFrameHeap();
 }
 
 void func_802A17F8_de(void) {

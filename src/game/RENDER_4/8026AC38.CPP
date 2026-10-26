@@ -22,13 +22,13 @@ extern char D_0044B180;
 
 extern u32 D_800CC384;
 
-extern s32 Render_SetModePreset(s32);
+extern s32 Geometry_SetModePreset(s32);
 
-s32 Render_GetSizedPackSection(s32 arg0, s32 arg1, s32 *arg2);
+s32 SetN64_GetSizedPackSection(s32 arg0, s32 arg1, s32 *arg2);
 
-extern struct Shape_typemap_165 *Scene_AllocResourceBlock(s32, void *, s32);
+extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32, void *, s32);
 
-void Scene_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_typemap_165 *arg2);
+void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_typemap_165 *arg2);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
@@ -44,13 +44,13 @@ extern void func_802732D0_de(f32 *matrix, CVector3 *position);
 
 extern char *Weapons_GetFirstPlayer(void *players);
 
-extern void Particle_SubtractVectors(CVector3 *out, void *a, CVector3 *b);
+extern void GraphU64_SubtractVectors(CVector3 *out, void *a, CVector3 *b);
 
 
 void func_8026AC38_de(void) {
     Gfx *cmd;
 
-    System_ResetTextureCache();
+    TextLoad_ResetTextureCache();
 
     cmd = g_displayListCursor++;
     gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, &D_0044B180);
@@ -73,7 +73,7 @@ void func_8026AC38_de(void) {
     cmd = g_displayListCursor++;
     gSPGeometryMode(cmd, 0, D_800CC384 | 0x00260404);
 
-    Render_SetModePreset(0x1D);
+    Geometry_SetModePreset(0x1D);
 }
 
 /* Expand packed geometry commands into display lists while rebuilding resource offsets. */
@@ -102,7 +102,7 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
     s32 materialBytes = 32;
     void *dstData;
     void *copySource4, *copySource5, *copySource3, *copySource2, *copySource1, *copySource0;
-    if (Render_UnpackResource(res, 1) != 0) {
+    if (PpDecom_UnpackResource(res, 1) != 0) {
         parts = 6;
         if (extra == 0) {
             parts = 3;
@@ -110,19 +110,19 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
         }
         size = (parts * 4 + 15) & ~7;
         old = (*res)->pack;
-        Render_GetSizedPackSection(old, 0, &len0);
+        SetN64_GetSizedPackSection(old, 0, &len0);
         size += len0;
-        Render_GetSizedPackSection(old, 1, &len1);
+        SetN64_GetSizedPackSection(old, 1, &len1);
         size += len1;
-        oldList = Render_GetPackSection(old, 2);
+        oldList = SetN64_GetPackSection(old, 2);
         count = oldList->count;
         i = 0;
         size += (count * 4 + 15) & ~7;
         if (count > 0) do {
-            srcEntry = Render_GetPackSection(oldList, i);
+            srcEntry = SetN64_GetPackSection(oldList, i);
             size += 16;
             size += materialBytes;
-            input = Render_GetPackSection(srcEntry, 1);
+            input = SetN64_GetPackSection(srcEntry, 1);
             {
                 s32 countTag;
                 commandSize = 0;
@@ -146,34 +146,34 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
             i++;
         } while (i < count);
         if (extra != 0) {
-            Render_GetSizedPackSection(old, 3, &len3);
+            SetN64_GetSizedPackSection(old, 3, &len3);
             size += len3;
-            Render_GetSizedPackSection(old, 4, &len4);
+            SetN64_GetSizedPackSection(old, 4, &len4);
             size += len4;
-            Render_GetSizedPackSection(old, 5, &len5);
+            SetN64_GetSizedPackSection(old, 5, &len5);
             size += len5;
         }
         if (sentinel != 0) size += 8;
-        allocation = Scene_AllocResourceBlock(0, res, size);
+        allocation = Cache_AllocResourceBlock(0, res, size);
         if (allocation != 0) {
             offset = (parts * 4 + 15) & ~7;
             old = (*res)->pack;
             dst = allocation->pack;
             dst->count = parts;
             dst->offsets[0] = offset;
-            copySource0 = Render_GetSizedPackSection(old, 0, &len0);
+            copySource0 = SetN64_GetSizedPackSection(old, 0, &len0);
             vertexCount = 0;
-            vertices = Render_GetPackSection(dst, 0);
+            vertices = SetN64_GetPackSection(dst, 0);
             func_802BD3A0_de(vertices, copySource0, len0);
             offset += len0;
             dst->offsets[1] = offset;
-            copySource1 = Render_GetSizedPackSection(old, 1, &len1);
-            dstData = Render_GetPackSection(dst, 1);
+            copySource1 = SetN64_GetSizedPackSection(old, 1, &len1);
+            dstData = SetN64_GetPackSection(dst, 1);
             func_802BD3A0_de(dstData, copySource1, len1);
             offset += len1;
             dst->offsets[2] = offset;
-            oldList = Render_GetPackSection(old, 2);
-            newList = Render_GetPackSection(dst, 2);
+            oldList = SetN64_GetPackSection(old, 2);
+            newList = SetN64_GetPackSection(dst, 2);
             count = oldList->count;
             i = 0;
             newList->count = count;
@@ -182,18 +182,18 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
             if (count > 0) {
                 vertexData = vertices + 8;
                 do {
-                    srcEntry = Render_GetPackSection(oldList, i);
-                    dstEntry = Render_GetPackSection(newList, i);
+                    srcEntry = SetN64_GetPackSection(oldList, i);
+                    dstEntry = SetN64_GetPackSection(newList, i);
                     block = (srcEntry->count * 4 + 15) & ~7;
                     dstEntry->count = srcEntry->count;
                     dstEntry->offsets[0] = block;
-                    copySource2 = Render_GetPackSection(srcEntry, 0);
-                    dstData = Render_GetPackSection(dstEntry, 0);
+                    copySource2 = SetN64_GetPackSection(srcEntry, 0);
+                    dstData = SetN64_GetPackSection(dstEntry, 0);
                     func_80285570_de(dstData, copySource2);
                     block += materialBytes;
                     dstEntry->offsets[1] = block;
-                    input = Render_GetPackSection(srcEntry, 1);
-                    output = Render_GetPackSection(dstEntry, 1);
+                    input = SetN64_GetPackSection(srcEntry, 1);
+                    output = SetN64_GetPackSection(dstEntry, 1);
                     if ((tag = *input) != 0) {
                         do {
                             commandSize = tag & 0x60;
@@ -258,7 +258,7 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
                         } while (tag != 0);
                     }
                     gSPEndDisplayList(output++);
-                    dstData = Render_GetPackSection(dstEntry, 1);
+                    dstData = SetN64_GetPackSection(dstEntry, 1);
                     commandSize = (u8 *)output - (u8 *)dstData;
                     block += (commandSize + 7) & ~7;
                     total += block;
@@ -270,37 +270,37 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
             offset += total;
             dst->offsets[3] = offset;
             if (extra != 0) {
-                copySource3 = Render_GetSizedPackSection(old, 3, &len3);
-                dstData = Render_GetPackSection(dst, 3);
+                copySource3 = SetN64_GetSizedPackSection(old, 3, &len3);
+                dstData = SetN64_GetPackSection(dst, 3);
                 func_802BD3A0_de(dstData, copySource3, len3);
                 offset += len3;
                 dst->offsets[4] = offset;
-                copySource4 = Render_GetSizedPackSection(old, 4, &len4);
-                dstData = Render_GetPackSection(dst, 4);
+                copySource4 = SetN64_GetSizedPackSection(old, 4, &len4);
+                dstData = SetN64_GetPackSection(dst, 4);
                 func_802BD3A0_de(dstData, copySource4, len4);
                 offset += len4;
                 dst->offsets[5] = offset;
-                copySource5 = Render_GetSizedPackSection(old, 5, &len5);
-                dstData = Render_GetPackSection(dst, 5);
+                copySource5 = SetN64_GetSizedPackSection(old, 5, &len5);
+                dstData = SetN64_GetPackSection(dst, 5);
                 func_802BD3A0_de(dstData, copySource5, len5);
                 offset += len5;
                 dst->offsets[6] = offset;
             }
             if (sentinel != 0) {
-                Gfx *sentinelData = Render_GetPackSection(dst, 3);
+                Gfx *sentinelData = SetN64_GetPackSection(dst, 3);
                 offset += 8;
                 sentinelData->words.w0 = -1;
                 sentinelData->words.w1 = 0;
                 dst->offsets[4] = offset;
             }
         }
-        Scene_ReplaceResourceBlock(0, res, allocation);
+        Cache_ReplaceResourceBlock(0, res, allocation);
     }
 }
 
 typedef struct { s32 flagWord; char pad4[2]; u8 flags; } ModelMaterial;
 
-s32 Render_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *material) {
+s32 Geometry_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *material) {
     CVector3 direction;
     CVector3 position;
     f32 matrix[4][4];
@@ -308,8 +308,8 @@ s32 Render_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *mater
     if (D_80110620 != 0 && (material->flagWord & 0x8000)) {
         func_80270700_de((f32 *)matrix, model);
         func_802732D0_de((f32 *)matrix, &position);
-        Particle_SubtractVectors(&direction, Weapons_GetFirstPlayer(&D_80145040) + 0x6E8, &position);
-        Particle_NormalizeVec3(&direction);
+        GraphU64_SubtractVectors(&direction, Weapons_GetFirstPlayer(&D_80145040) + 0x6E8, &position);
+        GraphU64_NormalizeVec3(&direction);
         {
             Gfx *cmd;
             Gfx *light;
@@ -339,12 +339,12 @@ s32 Render_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *mater
 #include "COMMON/DISPLAY.H"
 extern u32 D_800E28A4;
 extern CGameStatus D_801468A0;
-extern void Scene_MarkResourceInUse(s32 heap, void **resource);
-extern s32 Render_SetupMaterial(void *material, s32 pass);
+extern void Cache_MarkResourceInUse(s32 heap, void **resource);
+extern s32 Geometry_SetupMaterial(void *material, s32 pass);
 /* Draws an actor model's parts, choosing each part by the 0x38 bits of its material byte 6: on the special
  * character 0x12 the part must equal the bits for its variant (or be a fade/bonus part whose flag is set),
  * otherwise the 0x38/0x30/0x10 groups are drawn only when the matching flag (fade, bonus, glow) is set. */
-void Render_DrawActorModelParts(void **resource, struct Player *owner, void *matrix, s32 segment, Shared_ParticleLighting *lights, void *textures, s32 pass) {
+void Geometry_DrawActorModelParts(void **resource, struct Player *owner, void *matrix, s32 segment, Shared_ParticleLighting *lights, void *textures, s32 pass) {
     struct Pack *header;
     void *base;
     struct Pack *parts;
@@ -377,7 +377,7 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
         bonus = 1;
     }
     header = *resource;
-    Scene_MarkResourceInUse(0, resource);
+    Cache_MarkResourceInUse(0, resource);
     if (segment != 0) {
         gSPSegment(g_displayListCursor++, 1, matrix);
     } else {
@@ -385,17 +385,17 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
     }
     base = textures;
     if (base == 0) {
-        base = Render_GetPackSection(header, 0);
+        base = SetN64_GetPackSection(header, 0);
     }
     gSPSegment(g_displayListCursor++, 2, (unsigned int)base);
-    parts = Render_GetPackSection(header, 2);
+    parts = SetN64_GetPackSection(header, 2);
     count = parts->count;
     for (i = 0; i < count; i++) {
         AiProfile *state;
-        part = Render_GetPackSection(parts, i);
-        material = Render_GetPackSection(part, 0);
+        part = SetN64_GetPackSection(parts, i);
+        material = SetN64_GetPackSection(part, 0);
         if (i == 0) {
-            Render_ApplyMaterialLighting(matrix, lights, material);
+            Geometry_ApplyMaterialLighting(matrix, lights, material);
         }
         state = owner->profile;
         if (state->character == 0x12 && (D_801468A0.m_bFragTagOn == 0 || state->bonus == 0)) {
@@ -410,8 +410,8 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
             }
             bits = material->mode & 0x38;
             if (bits == wanted || (bits == 0x38 && hide != 0) || (bits == 0x30 && bonus != 0)) {
-                if (Render_SetupMaterial(material, pass) != 0) {
-                    void *list = Render_GetPackSection(part, 1);
+                if (Geometry_SetupMaterial(material, pass) != 0) {
+                    void *list = SetN64_GetPackSection(part, 1);
                     gSPDisplayList(g_displayListCursor++, list);
                 }
             }
@@ -420,8 +420,8 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
             if (bits == 0x38 && hide == 0) continue;
             if (bits == 0x30 && bonus == 0) continue;
             if (bits == 0x10 && glow == 0) continue;
-            if (Render_SetupMaterial(material, pass) != 0) {
-                void *list = Render_GetPackSection(part, 1);
+            if (Geometry_SetupMaterial(material, pass) != 0) {
+                void *list = SetN64_GetPackSection(part, 1);
                 gSPDisplayList(g_displayListCursor++, list);
             }
         }

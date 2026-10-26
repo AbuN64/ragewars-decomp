@@ -34,8 +34,8 @@ void Weapon_DrawRedMarkerQuad(void *object, void *unused) {
         gSPMatrix(g_displayListCursor++, (u32)&node->matrices[D_800D297C], G_MTX_LOAD);
         gDPPipeSync(g_displayListCursor++);
         func_8026D8F8_de();
-        Render_SetModePreset(0xE);
-        Render_SetCombineMode(0x1C);
+        Geometry_SetModePreset(0xE);
+        Geometry_SetCombineMode(0x1C);
         red=200; alpha=150;
         gSPGeometryMode(g_displayListCursor++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);
         gSPGeometryMode(g_displayListCursor++, 0, G_SHADE | G_SHADING_SMOOTH);
@@ -190,7 +190,7 @@ s32 Weapons_NextAvailableWeapon(ObjectWeaponsNextAvailableWeapon *player) {
         }
         number++;
     }
-    Render_PlayFlatSound(0xD4D);
+    SoundElement_PlayFlatSound(0xD4D);
     result = player->selected;
     return result;
 }
@@ -286,7 +286,7 @@ extern s32 D_800CD730;
 
 
 
-void Weapons_ApplyWeaponSwitch(void *part, void *body) {
+void Weapon_ApplyWeaponSwitch(void *part, void *body) {
     s16 index;
     u16 unsigned_index;
     void *owner;
@@ -318,6 +318,6 @@ void Weapons_ApplyWeaponSwitch(void *part, void *body) {
     }
 }
 #else
-INCLUDE_ASM("span_1000", Weapons_ApplyWeaponSwitch);
+INCLUDE_ASM("span_1000", Weapon_ApplyWeaponSwitch);
 #endif
 #endif

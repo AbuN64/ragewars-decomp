@@ -1,7 +1,7 @@
 #include "COMMON/OBJRECAT5F14.H"
 #include "TYPES.H"
 
-/* Two-word value setter; live func_802171BC_de uses the same word-array representation. */
+/* Two-word value setter; live Barrel_FillWordPair uses the same word-array representation. */
 void AnimPool_InitializeBitReader(s32 *value, s32 word) {
     value[0] = word;
     value[1] = 0;

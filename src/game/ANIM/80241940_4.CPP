@@ -12,25 +12,25 @@
 
 extern s32 func_8023E8D4_de(void *, s32 *, s32);
 
-extern void Anim_BuildBoxFace0(s32 *, void *);
+extern void Plane_BuildBoxFace0(s32 *, void *);
 
-extern void Anim_BuildBoxFace1(s32 *, void *);
+extern void Plane_BuildBoxFace1(s32 *, void *);
 
-extern void Anim_BuildBoxFace2(s32 *, void *);
+extern void Plane_BuildBoxFace2(s32 *, void *);
 
-extern void Anim_BuildBoxFace3(s32 *, void *);
+extern void Plane_BuildBoxFace3(s32 *, void *);
 
-extern void Anim_BuildBoxFace4(s32 *, void *);
+extern void Plane_BuildBoxFace4(s32 *, void *);
 
-extern void Anim_BuildBoxFace5(s32 *, void *);
+extern void Plane_BuildBoxFace5(s32 *, void *);
 
 s32 func_8023E178_de(void *, void *, f32, s32, f32, s32, s32 *, s32);
 
 s32 func_8023EA44_de(void *, s32 *, void *, f32, s32);
 
-void Anim_BuildBoxFace0(s32 *, void *);
+void Plane_BuildBoxFace0(s32 *, void *);
 
-void Anim_BuildBoxFace1(s32 *, void *);
+void Plane_BuildBoxFace1(s32 *, void *);
 
 /* Gathers the pieces a ray sweeps through: for each entry of the counted table in D_8011CD20 whose
  * rectangle, grown by the ray's radius, overlaps the ray's rectangle and is hit by it, each visible element
@@ -57,23 +57,23 @@ s32 func_80242920_de(void *ray, void *arg1, void *corners, s32 *quad) {
     result = 0;
     if (((struct FloatState68 *) ray)->unk_60 > 0.0f) {
         *quad = 2;
-        Anim_BuildBoxFace1(quad, corners);
+        Plane_BuildBoxFace1(quad, corners);
         result = func_8023E8D4_de(ray, quad, 1);
     }
     if ((((struct FloatState68 *) ray)->unk_5C != 0.0f) || (((struct FloatState68 *) ray)->unk_64 != 0.0f)) {
         *quad = 3;
-        Anim_BuildBoxFace2(quad, corners);
+        Plane_BuildBoxFace2(quad, corners);
         result |= func_8023E8D4_de(ray, quad, 1);
-        Anim_BuildBoxFace3(quad, corners);
+        Plane_BuildBoxFace3(quad, corners);
         result |= func_8023E8D4_de(ray, quad, 1);
-        Anim_BuildBoxFace4(quad, corners);
+        Plane_BuildBoxFace4(quad, corners);
         result |= func_8023E8D4_de(ray, quad, 1);
-        Anim_BuildBoxFace5(quad, corners);
+        Plane_BuildBoxFace5(quad, corners);
         result |= func_8023E8D4_de(ray, quad, 1);
     }
     if (((struct FloatState68 *) ray)->unk_60 < 0.0f) {
         *quad = 9;
-        Anim_BuildBoxFace0(quad, corners);
+        Plane_BuildBoxFace0(quad, corners);
         result |= func_8023E8D4_de(ray, quad, 1);
     }
     return result;
@@ -93,12 +93,12 @@ s32 func_80242A94_de(void *ray, void *platform, void *corners, s32 *contactPolyg
     }
     if (((struct FloatState68_2 *) ray)->unk_60 > 0.0f) {
         *contactPolygon = 2;
-        Anim_BuildBoxFace1(contactPolygon, corners);
+        Plane_BuildBoxFace1(contactPolygon, corners);
         hitFound |= func_8023EA44_de(ray, contactPolygon, point, radius, 1);
     }
     if (((struct FloatState68_2 *) ray)->unk_60 < 0.0f) {
         *contactPolygon = 9;
-        Anim_BuildBoxFace0(contactPolygon, corners);
+        Plane_BuildBoxFace0(contactPolygon, corners);
         hitFound |= func_8023EA44_de(ray, contactPolygon, point, radius, 1);
     }
     return hitFound;
@@ -148,7 +148,7 @@ void func_80242BF0_de(Ray180 *ray) {
         rect.w = table[i].rect->w + ray->radius;
         if (ray->rect.x < rect.z && rect.x < ray->rect.z && ray->rect.y < rect.w &&
             rect.y < ray->rect.w && func_8023DDC4_de(ray, &rect, &t) != 0) {
-            model = Render_GetPackSection(*table[i].resource, 0);
+            model = SetN64_GetPackSection(*table[i].resource, 0);
             remaining = model->count;
             element = model->elements;
             while (--remaining != -1) {

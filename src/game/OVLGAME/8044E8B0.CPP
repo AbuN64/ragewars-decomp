@@ -16,7 +16,7 @@ void func_8044DC60_de(RenderSettings *state) {
     state->direction.x = D_800C53B0_de;
     state->direction.y = D_800C53B4_de;
     state->direction.z = D_800C53B8_de;
-    Particle_NormalizeVec3(&state->direction.x);
+    GraphU64_NormalizeVec3(&state->direction.x);
     state->ready = 1;
 }
 

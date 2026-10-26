@@ -15,7 +15,7 @@ s32 func_80279420_de(void *trigger, struct Player *player) {
         if (player != 0) {
             platform = &D_8011BF00[object->unk4];
             if ((object->unk11 == 0xA) && (object->unk12 == 1)) {
-                return Level_ShowTriggerMessage(platform, &platform->motion, player);
+                return Action_ShowTriggerMessage(platform, &platform->motion, player);
             }
         }
         return 1;

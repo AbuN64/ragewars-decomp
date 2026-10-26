@@ -8,7 +8,7 @@
 struct Shared_Pickup;
 struct Record14;
 struct LevelActor;
-/* A world sector's model: its first word is the pack table Render_GetPackSection reads
+/* A world sector's model: its first word is the pack table SetN64_GetPackSection reads
    (section 2 holds the sector's light volumes). */
 typedef struct WorldSectorModel {
     void *pack;
@@ -36,7 +36,7 @@ typedef struct Shared_World {
     s32 unk20;
     s32 indexedBank; /* 0x24 */
     s32 lookupBank; /* 0x28 */
-    s32 resourceKindBank; /* +0x2C: Render_StartWorldEffect */
+    s32 resourceKindBank; /* +0x2C: Scene_StartWorldEffect */
     u8 unknown30[4];
     s32 trackLookup; /* 0x34 */
     u8 unknown38[0xC];
@@ -46,7 +46,7 @@ typedef struct Shared_World {
     s32 unk50;
     s32 *indexedDirectory; /* 0x54 */
     s32 *lookupDirectory; /* 0x58 */
-    s32 *resourceKindDirectory; /* +0x5C: Render_StartWorldEffect */
+    s32 *resourceKindDirectory; /* +0x5C: Scene_StartWorldEffect */
     u8 unknown60[0xC];
     s32 *modelSections; /* 0x6C */
     s32 *objectSections; /* 0x70 */

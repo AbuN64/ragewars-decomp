@@ -35,7 +35,7 @@ extern float Math_Sqrtf(float);
 
 
 
-extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
@@ -67,7 +67,7 @@ static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
         p = node->next;
         q = node->cur;
         b.z = ((CollisionBuildVertex *)p)->z - ((CollisionBuildVertex *)q)->z;
-        Particle_CrossVectors(&D_80111D30, &b, &a);
+        GraphU64_CrossVectors(&D_80111D30, &b, &a);
     }
     D_800CD3E0 = (int)node;
     *out = D_80111D30;
@@ -84,7 +84,7 @@ void func_802744B4_de(void) {
     D_80111D28 = 0xE3F635E3;
 }
 
-s32 Nav_NextRandom(void) {
+s32 GraphU64_NextRandom(void) {
     u32 seed;
 
     seed = (D_80111D24 * 0xA84A5B53) + 0x58348C2D;
@@ -101,7 +101,7 @@ s32 func_8027451C_de(void) {
 }
 
 /** LCG PRNG step scaled into [0, arg0 * D_800C9A38) as a float. */
-f32 Nav_RandomFloat(f32 range) {
+f32 GraphU64_RandomFloat(f32 range) {
     f64 value;
     s32 randomBits;
     u32 seed;
@@ -116,7 +116,7 @@ f32 Nav_RandomFloat(f32 range) {
     return (f32)value * range * D_800C9A38;
 }
 
-f32 Nav_ArcCos(f32 arg0) {
+f32 GraphU64_ArcCos(f32 arg0) {
     f32 temp_f1;
     f32 temp_f2;
     f32 temp_f2_2;
@@ -172,7 +172,7 @@ f32 func_802746A0_de(f32 value, f32 velocity, f32 limit) {
     return value;
 }
 
-f32 Nav_DecayToZero(f32 value, f32 rate) {
+f32 GraphU64_DecayToZero(f32 value, f32 rate) {
     f32 zero;
 
     zero = 0.0f;
@@ -190,7 +190,7 @@ f32 Nav_DecayToZero(f32 value, f32 rate) {
     return value;
 }
 
-f32 Nav_ApproachValue(f32 current, f32 target, f32 rate) {
+f32 GraphU64_ApproachValue(f32 current, f32 target, f32 rate) {
     f32 value;
     value = current;
     if (value < target) {
@@ -208,7 +208,7 @@ f32 Nav_ApproachValue(f32 current, f32 target, f32 rate) {
     return value;
 }
 
-void Nav_EaseValueToward(f32 *value, f32 target, f32 rate) {
+void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate) {
     f32 current;
     f32 next;
 
@@ -316,7 +316,7 @@ f32 func_802749B4_de(f32 angleA, f32 angleB) {
     return -difference;
 }
 
-f32 Nav_RandomBetween(f32 shakeMin, f32 arg1) {
+f32 GraphU64_RandomBetween(f32 shakeMin, f32 arg1) {
     f32 blend;
     u32 seed;
     s32 randomValue;
@@ -521,14 +521,14 @@ CVector3 *func_802750B0_de(CVector3 *out, Node75 *node) {
         ((CVector3 *)&D_80115E00)->y = D_800C49C0_de;
     } else if ((int)node != D_800CD3E4) {
         cross_edges((CVector3 *)&D_80115E00, node);
-        Particle_NormalizeVec3((CVector3 *)&D_80115E00);
+        GraphU64_NormalizeVec3((CVector3 *)&D_80115E00);
     }
     *out = *(CVector3 *)&D_80115E00;
     D_800CD3E4 = (int)node;
     return out;
 }
 
-f32 Nav_GetTrianglePlaneHeight(Node75 *node, f32 x, f32 z) {
+f32 GraphU64_GetTrianglePlaneHeight(Node75 *node, f32 x, f32 z) {
     CVector3 normal;
     CVector3 point;
     CVector3 a;
@@ -558,7 +558,7 @@ f32 Nav_GetTrianglePlaneHeight(Node75 *node, f32 x, f32 z) {
         p = node->next;
         q = node->cur;
         b.z = ((CollisionBuildVertex *)p)->z - ((CollisionBuildVertex *)q)->z;
-        Particle_CrossVectors(&D_80111D30, &b, &a);
+        GraphU64_CrossVectors(&D_80111D30, &b, &a);
     }
     normal = D_80111D30;
     D_800CD3E0 = (int)node;

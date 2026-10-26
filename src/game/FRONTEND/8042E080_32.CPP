@@ -61,13 +61,13 @@ void func_80434250_de(s32 player, s32 direction) {
 extern s32 Pak_DeleteNote(s32, s32);
 extern s32 Pak_GetFreePages(s32, s32 *);
 extern s32 Pak_CountFreeNotes(s32, s32 *);
-extern s32 Frontend_GetRecordsNoteSize(void);
-extern s32 Ovlgame_BytesToPakPages(s32);
-extern s32 Ovlgame_FindFreeNoteExtension(s32, char *);
-extern u32 Ovlgame_Crc32(void *, u32, u32);
-extern char *Resmgr_CopyString(char *, char *);
+extern s32 PAKInterface_GetRecordsNoteSize(void);
+extern s32 Pak_BytesToPakPages(s32);
+extern s32 Pak_FindFreeNoteExtension(s32, char *);
+extern u32 Pak_Crc32(void *, u32, u32);
+extern char *XPlus_CopyString(char *, char *);
 extern s32 Pak_SaveNote(s32, s32, void *, char *, char *, char *);
-extern void Frontend_RefreshPlayerPanel(s32);
+extern void PAKInterface_RefreshPlayerPanel(s32);
 /* The save view of the menu block: the four player records staged at 0x2E28, then the profile and
  * checksum stored behind them, written to the pak as one 0x648-byte note. */
 static __inline__ PakMenuController *pakRecordSave(void) {
@@ -82,7 +82,7 @@ static __inline__ PakMenuController *pakRecordSave(void) {
 /* Replace or create the selected port's four-profile Controller Pak note: delete the old note if
  * there is one, else check that a free note and enough pages exist; then stage the port's records,
  * profile and CRC and save them. On failure the port's panel goes back to state 2. */
-s32 Frontend_SavePlayerRecords(s32 channel)
+s32 PAKInterface_SavePlayerRecords(s32 channel)
 {
     char extension[8];
     char name[16];
@@ -100,7 +100,7 @@ s32 Frontend_SavePlayerRecords(s32 channel)
         if (status == 0) {
             status = Pak_CountFreeNotes(channel, &space.freeNotes);
             if (status == 0) {
-                required = Ovlgame_BytesToPakPages(Frontend_GetRecordsNoteSize());
+                required = Pak_BytesToPakPages(PAKInterface_GetRecordsNoteSize());
                 if (space.freeNotes == 0 || space.freePages < required) space.fits = 0;
                 else space.fits = 1;
             }
@@ -112,22 +112,22 @@ s32 Frontend_SavePlayerRecords(s32 channel)
     }
     if (success == 1) {
         success = 0;
-        if (Ovlgame_FindFreeNoteExtension(channel, extension) == 0) {
+        if (Pak_FindFreeNoteExtension(channel, extension) == 0) {
             staged = pakRecordSave()->packet.saved;
-            Resmgr_CopyBytes(staged, pakRecordSave()->players[channel].records, 0x640);
+            XPlus_CopyBytes(staged, pakRecordSave()->players[channel].records, 0x640);
             pakRecordSave()->packet.savedProfile = pakRecordSave()->players[channel].profile;
-            checksum = Ovlgame_Crc32(staged, 0x640, 7);
+            checksum = Pak_Crc32(staged, 0x640, 7);
             pakRecordSave()->packet.checksum = checksum;
             data = pakRecordSave()->packet.saved;
             for (i = 0; i < 16; i++) name[i] = 0;
-            Resmgr_CopyString(name, RW_PAK_RECORD_TITLE);
+            XPlus_CopyString(name, RW_PAK_RECORD_TITLE);
             if (Pak_SaveNote(channel, 0x648, data, name, extension, RECORDS_NOTE_CODE) == 0) success = 1;
         }
     }
     if (!success) {
         pakRecordSave()->players[channel].back = 2;
         pakRecordSave()->players[channel].state = 2;
-        Frontend_RefreshPlayerPanel(channel);
+        PAKInterface_RefreshPlayerPanel(channel);
     }
     return success;
 }

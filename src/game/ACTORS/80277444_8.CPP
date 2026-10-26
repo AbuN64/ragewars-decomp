@@ -9,7 +9,7 @@
 #include "TYPES.H"
 #include "ACTORS/80277444_8.H"
 #include "COMMON/EXTERNS_10.H"
-extern s32 Render_PlayFlatSound(s32 arg0);
+extern s32 SoundElement_PlayFlatSound(s32 arg0);
 
 #if defined(VERSION_US_REV1) || defined(NON_MATCHING)
 #include "COMMON/GAMEPLAY_SOUND_TABLE.H"
@@ -27,9 +27,9 @@ extern void *D_800CD730;
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 extern s32 D_801371D4;
 
-extern void Camera_PostTargetedScreenMessage(void *, void *, s32, void *, f32);
+extern void Sky_PostTargetedScreenMessage(void *, void *, s32, void *, f32);
 extern s32 func_804030E0_de(s32);
-void Actors_DispatchTrigger(Trigger *trigger) {
+void Link_DispatchTrigger(Trigger *trigger) {
     NavCallbackPair *table;
     void *fallback;
     u8 index;
@@ -45,7 +45,7 @@ void Actors_DispatchTrigger(Trigger *trigger) {
         if (g_world.mode == 4) {
             index = trigger->sound;
             if (index != 0) {
-                Camera_PostTargetedScreenMessage(&D_80145088, fallback, gameplaySoundValue(index), D_800CD730, triggerSoundWeight());
+                Sky_PostTargetedScreenMessage(&D_80145088, fallback, gameplaySoundValue(index), D_800CD730, triggerSoundWeight());
                 callback = gameplaySoundHook(trigger->sound);
                 if (callback != 0) func_8025E11C_de(callback);
             }
@@ -66,7 +66,7 @@ void Actors_DispatchTrigger(Trigger *trigger) {
     }
 }
 #else
-INCLUDE_ASM("span_1000", Actors_DispatchTrigger);
+INCLUDE_ASM("span_1000", Link_DispatchTrigger);
 #endif
 
 extern s32 func_80279204_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, void *arg6);
@@ -121,7 +121,7 @@ void func_80278E7C_de(void *trigger) {
         func_8028C568_de(&g_world, trigger);
         return;
     }
-    Actors_DispatchTrigger(trigger);
+    Link_DispatchTrigger(trigger);
 }
 
 void func_80278F00_de(Record14 *trigger) {
@@ -133,7 +133,7 @@ void func_80278F00_de(Record14 *trigger) {
         copy = *trigger;
         ((u8 *)&copy)[0x12] = 2;
         ((u8 *)&copy)[0x10] = 0;
-        Actors_DispatchTrigger(&copy);
+        Link_DispatchTrigger(&copy);
     }
 }
 
@@ -196,7 +196,7 @@ void func_802790C0_de(struct Shared_Actor *actor, s32 *stateFlags) {
 
 void func_80279138_de(int unused0, int unused1, void *arg2) {
     ObjRecAt6V2 *arg2_record = arg2;
-    Render_PlayFlatSound(arg2_record->unk6);
+    SoundElement_PlayFlatSound(arg2_record->unk6);
 }
 
 void func_80279158_de(void *arg0) {
@@ -204,5 +204,5 @@ void func_80279158_de(void *arg0) {
 }
 
 void func_80279178_de(void *arg0) {
-    Render_PlayFlatSound((((struct ObjRecAt6V2 *) ((s8 *) arg0))->unk6));
+    SoundElement_PlayFlatSound((((struct ObjRecAt6V2 *) ((s8 *) arg0))->unk6));
 }

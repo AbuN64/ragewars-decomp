@@ -29,14 +29,14 @@ void func_804431E4_de(struct ObjectRecAt20 *object) {
     state->c = 0;
 }
 
-/* Allocates a block sized for the entries of a list through Scene_AllocateResource, builds it with Pak_InitializeMenu from four arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_AllocateMenu with the list and all four values passed as arguments instead of read from a parameter block changed. */
+/* Allocates a block sized for the entries of a list through Cache_AllocateResource, builds it with Pak_InitializeMenu from four arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_AllocateMenu with the list and all four values passed as arguments instead of read from a parameter block changed. */
 
 
 
 
 
 
-extern void **Scene_AllocateResource(s32, s32, s32, char *);
+extern void **Cache_AllocateResource(s32, s32, s32, char *);
 extern char g_menuText[];
 
 void *Items_CreateMenu(struct func_8025E5B0_S1 *owner, struct Dialog *list, s32 a, s32 b, s32 c, s32 d) {
@@ -52,7 +52,7 @@ void *Items_CreateMenu(struct func_8025E5B0_S1 *owner, struct Dialog *list, s32 
         }
         size += extra;
     }
-    block = Scene_AllocateResource(0, size, 0x3B, g_menuText);
+    block = Cache_AllocateResource(0, size, 0x3B, g_menuText);
     if (block == 0) {
         return 0;
     }
@@ -70,7 +70,7 @@ void *Items_CreateMenu(struct func_8025E5B0_S1 *owner, struct Dialog *list, s32 
 
 /* Removes an item from a list: runs the item's optional callback at offset 0xC of its handler table
    with the item and the list, clears three words of its state at 0x20, unlinks it through
-   func_80255ED8_de and releases its resource at offset 8 through Scene_ReleaseResource. */
+   func_80255ED8_de and releases its resource at offset 8 through Cache_ReleaseResource. */
 
 
 
@@ -89,7 +89,7 @@ void Items_DestroyMenu(void *list, struct ItemRecAt20V2 *item) {
     state->b = 0;
     state->c = 0;
     func_80255ED8_de(list, item);
-    Scene_ReleaseResource(0, item->resource);
+    Cache_ReleaseResource(0, item->resource);
 }
 
 #if defined(VERSION_EU)

@@ -32,7 +32,7 @@
 #include "COMMON/INTEGERSTATE244.H"
 #include "DATA/OVLDAT6/800CF230.H"
 
-extern void Camera_StartEmitter(char *, f32, f32, f32, f32, s32, Triple);
+extern void Sky_StartEmitter(char *, f32, f32, f32, f32, s32, Triple);
 extern void Weapons_FillDamagePacket(Slot *, Held *, s32, f32, s32, s32);
 extern void func_80219A40_de(SharedPlayer *, char *, Slot *);
 
@@ -43,12 +43,12 @@ void func_80226340_de(SharedPlayer *player) {
     f32 alpha;
     s32 level;
 
-    if (player->views5DC.view5DC_2.view != 0 && 80.0f < Nav_RandomFloat(100.0f)) {
+    if (player->views5DC.view5DC_2.view != 0 && 80.0f < GraphU64_RandomFloat(100.0f)) {
         view = player->views5DC.view5DC_2.view;
-        alpha = Nav_RandomFloat(7.5f);
+        alpha = GraphU64_RandomFloat(7.5f);
         level = (u32) alpha;
-        Camera_StartFade(view, 0xFF, 0xFF, 0, 0, (u8) level, 3, 7);
-        Camera_StartEmitter(&D_80145088, 0.0f, 204.79999f, 0.0f, 512.0f, 0, view->position);
+        Sky_StartFade(view, 0xFF, 0xFF, 0, 0, (u8) level, 3, 7);
+        Sky_StartEmitter(&D_80145088, 0.0f, 204.79999f, 0.0f, 512.0f, 0, view->position);
     }
     player->views1C.view1D4_21.holdTime -= D_800D2988;
     if (player->views1C.view1D4_21.holdTime <= 0.0f || player->views5E4.view5E4_4.holding == 0) {
@@ -78,11 +78,11 @@ extern void **D_80103FCC;
 
 
 extern void Weapons_UpdateViewAngles(void *, void *, void *);
-extern Shared_Quad Weapons_ComputeAimRotation(void *, void **, Shared_Quad *);
-extern f32 Particle_GetPointDistance(f32 *, f32 *);
+extern Shared_Quad Player_ComputeAimRotation(void *, void **, Shared_Quad *);
+extern f32 GraphU64_GetPointDistance(f32 *, f32 *);
 extern s32 func_802444A4_de(void *, CVector3, CVector3, void *);
-extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
-extern f32 Particle_GetHorizontalAngle(CVector3 *);
+extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern f32 GraphU64_GetHorizontalAngle(CVector3 *);
 
 
 
@@ -105,16 +105,16 @@ void func_80226548_de(void *player, void *body) {
 
     Weapons_UpdateViewAngles(player, body, &D_800CE7E4);
     if (((Shared_ActorView *)player)->targeting != 0) {
-        aimRotation = Weapons_ComputeAimRotation(player, &aimTarget, &aimWords);
+        aimRotation = Player_ComputeAimRotation(player, &aimTarget, &aimWords);
         if (aimTarget != 0) {
             position = &((Shared_ActorView *)player)->position.vector.x;
-            if (!(D_800C2B48_de[1] < Particle_GetPointDistance(position, &((Shared_ActorView *)aimTarget)->position.vector.x))) {
+            if (!(D_800C2B48_de[1] < GraphU64_GetPointDistance(position, &((Shared_ActorView *)aimTarget)->position.vector.x))) {
                 if (func_802444A4_de(player, ((Shared_ActorView *)player)->position.vector,
                                      ((Shared_ActorView *)aimTarget)->position.vector,
                                      &D_80103FD0) == 0 ||
                     *D_80103FCC == aimTarget) {
-                    Particle_SubtractVectors(&toTarget, &((Shared_ActorView *)aimTarget)->position.vector, (CVector3 *)position);
-                    targetAngle = Particle_GetHorizontalAngle(&toTarget);
+                    GraphU64_SubtractVectors(&toTarget, &((Shared_ActorView *)aimTarget)->position.vector, (CVector3 *)position);
+                    targetAngle = GraphU64_GetHorizontalAngle(&toTarget);
                     func_80274020_de(&targetAngle);
                     func_80274020_de(&((LevelActor *)body)->yaw);
                     comparisonAngle = ((LevelActor *)body)->yaw;
@@ -133,7 +133,7 @@ positive:
                                 ((LevelActor *)body)->yaw + D_800C2B64_de;
                         }
                     }
-                    Nav_EaseValueToward(&((LevelActor *)body)->yaw, targetAngle, D_800C9FEC);
+                    GraphU64_EaseValueToward(&((LevelActor *)body)->yaw, targetAngle, D_800C9FEC);
                 }
             }
         }

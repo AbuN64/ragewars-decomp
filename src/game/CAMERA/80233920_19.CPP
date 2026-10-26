@@ -6,7 +6,7 @@ extern void *D_80145060;
 
 
 
-void *Camera_FindScreenMessage(int messageId) {
+void *Sky_FindScreenMessage(int messageId) {
     Shared_ActorView *node = D_80145060;
     if (node != 0) {
         do {

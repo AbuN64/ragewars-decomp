@@ -29,7 +29,7 @@ extern s32 func_8024D160_de(void *arg0);
 
 extern void func_80290950_de(void *arg0, void *arg1);
 
-extern void Camera_ResetActorMotion(void *arg0);
+extern void GameObject_ResetActorMotion(void *arg0);
 
 /** Unlink an active node and return it to the global free list. */
 void func_80290548_de(ListNode80290528 *node) {
@@ -68,7 +68,7 @@ void func_802905F4_de(char *arg0, char *view) {
     f32 scale;
     f32 zero;
 
-    Render_BeginModelBatch();
+    Geometry_BeginModelBatch();
     entry = world->head;
     if (entry != 0) {
         zero = 0.0f;
@@ -94,7 +94,7 @@ void func_802905F4_de(char *arg0, char *view) {
             entry = entry->next;
         } while (entry != 0);
     }
-    Render_FlushModelBatch();
+    Geometry_FlushModelBatch();
 }
 
 void func_8029076C_de(ContainerRecAt3C04 *arg0, Results *results) {
@@ -158,7 +158,7 @@ void *func_802908C0_de(ObjectLinks3C0C *arg0)
     arg0->unk_3C08 = node;
   }
   ((ObjectLinks1E0 *)(node))->unk_1D0 |= 1;
-  Camera_ResetActorMotion(node);
+  GameObject_ResetActorMotion(node);
   ((ObjectLinks1E0 *)(node))->unk_1C8 = 0;
   return node;
 }

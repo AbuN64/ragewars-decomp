@@ -13,7 +13,7 @@
 #include "FRONTEND/8041BEA8_6.H"
 
 extern s32 Frontend_ListHasFlag100(struct WidgetNode *);
-extern struct WidgetNode *Menu_GetSlotValue(struct SlotsCode804196C0 *, s32);
+extern struct WidgetNode *SmpOverlay_GetSlotValue(struct SlotsCode804196C0 *, s32);
 
 /* Advances the selection panels, cursor highlight and character previews. */
 s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
@@ -47,9 +47,9 @@ s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
         temp_v0_2 = D_800E42D0->timer - 1;
         D_800E42D0->timer = temp_v0_2;
         if (temp_v0_2 <= 0) {
-            Render_PlayFlatSound(0xE79);
+            SoundElement_PlayFlatSound(0xE79);
             Frontend_SetWidgetFlag08(D_800E42D0->promptItem, 1);
-            Menu_StartFlicker(D_800E42D0->prompt, 4);
+            SmpFlicker_StartFlicker(D_800E42D0->prompt, 4);
             D_800E42D0->phase = 4;
             D_800E42D0->timer = 4;
         }
@@ -82,7 +82,7 @@ s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
         }
         break;
     case 5:
-        Render_PlayFlatSound(0xE78);
+        SoundElement_PlayFlatSound(0xE78);
         D_800E42D0->phase = 2;
         D_800E42D0->timer = 4;
         Frontend_SetWidgetFlag08(D_800E42D0->promptItem, 0);
@@ -111,10 +111,10 @@ s32 Menu_UpdateCharacterPreview(s32 arg0,s32 arg1,s32 arg2) {
                         highlight = D_800E42D0->players[i].highlight;
                         highlight->alpha=(unsigned int)temp_f0;
                     }
-                    widgetNode = Menu_GetSlotValue(D_800E42D0->unk4, i);
+                    widgetNode = SmpOverlay_GetSlotValue(D_800E42D0->unk4, i);
                     highlightWidget = D_800E42D0->players[i].highlight;
                     if ((highlightWidget->x != (widgetNode->x - 2)) || (highlightWidget->y != (widgetNode->y - 2))) {
-                        Render_PlayFlatSound(0xE7F);
+                        SoundElement_PlayFlatSound(0xE7F);
                         if (Frontend_ListHasFlag100(widgetNode) == 0) {
                             resource = widgetNode->resource;
                             if (resource != empty_slot) {

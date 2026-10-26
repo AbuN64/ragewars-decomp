@@ -27,7 +27,7 @@ extern void func_804201A4_de(int, EntryRecAt14V1 *);
 void MarkMenuEventHandled(void);
 
                            /* extern */
-void Menu_SetSlotValue(s32, s32, s32, State_func_80420C10_de *);
+void SmpOverlay_SetSlotValue(s32, s32, s32, State_func_80420C10_de *);
 
          /* extern */
 void func_8041CE10_de(void *, s32);
@@ -43,7 +43,7 @@ void MarkMenuEventHandled();
 s32 Frontend_ListHasFlag100(s32);
 
                              /* extern */
-s32 Menu_GetSlotValue(s32, s32);
+s32 SmpOverlay_GetSlotValue(s32, s32);
 
                         /* extern */
 s32 func_8041B810_de(s32, s32);
@@ -80,7 +80,7 @@ int func_80420B78_de(int unused0, int unused1, unsigned int message, int extra) 
         e = &((EntryRecAt14V1 *)D_800E42D0)[index];
         if (e->active == 1 && e->target != -1) {
             func_804201A4_de(index, e);
-            Render_PlayFlatSound(0xE7C);
+            SoundElement_PlayFlatSound(0xE7C);
         }
     }
     return 0;
@@ -136,7 +136,7 @@ s32 func_80420C10_de(s32 unused0, s32 unused1, s32 arg2) {
         break;
     case 3:
         temp_a3->unk14 = 1;
-        Menu_SetSlotValue(D_800E42D0->unk4, entryIndex, 0, temp_a3);
+        SmpOverlay_SetSlotValue(D_800E42D0->unk4, entryIndex, 0, temp_a3);
         func_8041CE10_de(&((PanelRecord *)(temp_s1 + (s32)D_800E42D0))->target, 1);
         func_80420438_de(entryIndex);
         break;
@@ -156,7 +156,7 @@ s32 Menu_ReadSelectionSlot(s32 arg0, s32 arg1, s32 arg2) {
     characterSelectionRoot = (CharacterSelectionRoot *)((char *)D_800E42D0 + (entryIndex * 0x4C8));
     if (characterSelectionRoot->phase == 1) {
         if (choice == SPECIAL_CHAR) Menu_ApplySlotValueGfx(entryIndex,characterSelectionRoot->choice);
-        else if (Frontend_ListHasFlag100(Menu_GetSlotValue(D_800E42D0->unk4,entryIndex)) == 0) Menu_ApplySlotValueGfx(entryIndex,choice);
+        else if (Frontend_ListHasFlag100(SmpOverlay_GetSlotValue(D_800E42D0->unk4,entryIndex)) == 0) Menu_ApplySlotValueGfx(entryIndex,choice);
     }
     return 0;
 }

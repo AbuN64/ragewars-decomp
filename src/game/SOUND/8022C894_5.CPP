@@ -17,7 +17,7 @@
 
 /* Eases a player's crouch depth at 0x718: the target is D_800C7ED0[0] while input bits 0xC0000 are
    held or crouching is forced at 0x71C (which also enters state 4 unless already in it) and zero
-   otherwise; the depth moves a quarter of the way through Nav_EaseValueToward, steps smaller than
+   otherwise; the depth moves a quarter of the way through GraphU64_EaseValueToward, steps smaller than
    D_800C7ED0[1] downward or D_800C7ED8[0] upward are dropped, and bit 0x80 of the flags is set while
    D_800C7ED8[1] less the depth lies within D_800C7EE0 to (&D_800C7EE0)[1], cleared otherwise. */
 
@@ -26,12 +26,12 @@
 
 
 
-extern f32 Sound_GetActorReach(void *arg0);
+extern f32 InstHdr_GetActorReach(void *arg0);
 
 
 
 struct MotionSurface;
-extern s32 Camera_SweepActorMotion(void *arg0, CVector3 arg1, CVector3 arg2, struct MotionSurface *arg3,
+extern s32 Unicol_SweepActorMotion(void *arg0, CVector3 arg1, CVector3 arg2, struct MotionSurface *arg3,
                          f32 arg4, f32 arg5, f32 arg6, f32 arg7);
 
 extern char D_80103FCC[];
@@ -40,7 +40,7 @@ extern char D_80103FCC[];
    current weapon's entry in D_800D052C has no ammunition, the charge is off, or D_801468F4 is set with
    the player's controller flag at 0x8F; while the button at 0x5E4 is held and charging it targets
    D_800C7EF4, then runs the effect through func_80219480_de, eases the level toward the target by half
-   through Nav_EaseValueToward and clears a level below D_800C7EF8 once the target is zero. */
+   through GraphU64_EaseValueToward and clears a level below D_800C7EF8 once the target is zero. */
 
 
 
@@ -129,7 +129,7 @@ void Player_UpdateCrouchClearance(Player *player, LevelActor *actor, s32 unused,
         target = D_800C7ED0[0];
     }
     depth = player->crouchDepth;
-    Nav_EaseValueToward(&depth, target, 0.25f);
+    GraphU64_EaseValueToward(&depth, target, 0.25f);
     do {
         step = depth - player->crouchDepth;
         if (step < 0.0f) {
@@ -162,7 +162,7 @@ void Player_UpdateActionTransitionBlend(Shared_ActorView *actor) {
         var_f1 = D_800C2DF8_de[0];
     }
     sp10 = actor->transitionBlend;
-    Nav_EaseValueToward(&sp10, var_f1, 0.25f);
+    GraphU64_EaseValueToward(&sp10, var_f1, 0.25f);
     var_f2 = sp10 - actor->transitionBlend;
     if (var_f2 < 0.0f) {
         if (-var_f2 < D_800C2DF8_de[1]) {
@@ -190,14 +190,14 @@ void Player_AdjustHeightForCollision(Player *player, LevelActor *actor) {
                   player->eyeOffset) -
                  player->heightDelta;
     if (var_f23 > 0.0f) {
-        temp_f22 = Sound_GetActorReach(actor);
-        temp_f21 = Particle_GetActorRadius(actor);
-        temp_f20 = Particle_GetActorHeight(actor);
-        temp_f0 = Sound_GetActorBaseOffset(actor);
+        temp_f22 = InstHdr_GetActorReach(actor);
+        temp_f21 = GameObject_GetActorRadius(actor);
+        temp_f20 = GameObject_GetActorHeight(actor);
+        temp_f0 = InstHdr_GetActorBaseOffset(actor);
         next.x = actor->position0.x;
         next.y = actor->position0.y + var_f23;
         next.z = actor->position0.z;
-        if (Camera_SweepActorMotion(actor, actor->position0, next,
+        if (Unicol_SweepActorMotion(actor, actor->position0, next,
                            &D_801000F0, temp_f22, temp_f21, temp_f20,
                            temp_f0) != 0) {
             temp_f1 = ((Shared_Floor *)(*(void **)D_80103FCC))->y -
@@ -233,7 +233,7 @@ void Player_UpdateWeaponEffectBlend(void *arg0) {
     }
     ((ObjectLinks87C *)(arg0))->unk_7F0 = target;
     func_80219480_de(&((ObjectLinks87C *)(arg0))->unk_878, arg0);
-    Nav_EaseValueToward(&((ObjectLinks87C *)(arg0))->unk_7EC, target, 0.5f);
+    GraphU64_EaseValueToward(&((ObjectLinks87C *)(arg0))->unk_7EC, target, 0.5f);
     if (target == 0.0f && ((ObjectLinks87C *)(arg0))->unk_7EC < D_800C7EF8) {
         ((ObjectLinks87C *)(arg0))->unk_7EC = 0.0f;
     }

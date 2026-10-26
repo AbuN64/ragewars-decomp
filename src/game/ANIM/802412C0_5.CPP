@@ -3,7 +3,7 @@
 #include "COMMON/LEVEL_ACTOR.H"
 #include "ANIM/802412C0_5.H"
 
-extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 /** Set flag 8 in the first object and flag 0x10 in the second. */
 void func_802428D0_de(void *first, void *second) {
@@ -18,5 +18,5 @@ void func_802428EC_de(void *platformMotion, void *levelActor) {
     LevelActor *target = levelActor;
     CVector3 *position = &target->position1;
     actor->flags |= 8;
-    Particle_AddVec3(position, position, &actor->movement);
+    GraphU64_AddVec3(position, position, &actor->movement);
 }

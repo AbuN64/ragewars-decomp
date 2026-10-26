@@ -37,11 +37,11 @@ extern Carrier D_801041F0;
 
 extern s32 func_8024B06C_de(Actor_func_802676EC_de *, CVector3, Shield *);
 
-extern f32 Particle_GetActorHeight(Actor_func_802676EC_de *);
+extern f32 GameObject_GetActorHeight(Actor_func_802676EC_de *);
 
-extern f32 Particle_GetActorRadius(Actor_func_802676EC_de *);
+extern f32 GameObject_GetActorRadius(Actor_func_802676EC_de *);
 
-extern f32 Particle_GetPointDistance(CVector3 *, CVector3 *);
+extern f32 GraphU64_GetPointDistance(CVector3 *, CVector3 *);
 
 /* Spawns a hit effect when the target has a rider: turns the negated hit direction into the victim's frame through func_8022B09C_de, makes it relative to the victim rider's centre and converts it to a rotation, resolves the hit position on the attacker through InstHdr_CopyActorPositionAndModel, spawns effect 0xE9 there raised by D_800C9538 (size 3 for kind 5, otherwise 1), and starts effect 3 on the victim's emitter. */
 
@@ -133,7 +133,7 @@ have:
         } else {
             body = self->position;
             bottom = self->position.y + self->height;
-            top = bottom + Particle_GetActorHeight(self);
+            top = bottom + GameObject_GetActorHeight(self);
             if (top < position.y) {
                 body.y = top;
             } else if (position.y < bottom) {
@@ -141,8 +141,8 @@ have:
             } else {
                 body.y = position.y;
             }
-            reach = radius + Particle_GetActorRadius(self);
-            distance = Particle_GetPointDistance(&position, &body);
+            reach = radius + GameObject_GetActorRadius(self);
+            distance = GraphU64_GetPointDistance(&position, &body);
             if (reach < distance) {
                 return 0.0f;
             }
@@ -230,7 +230,7 @@ void func_80267CE4_de(s32 unused0, s32 unused1, s32 unused2, Triple arg3, CEvent
     node = D_80140FE8_de;
     while (node != 0) {
         if (func_802393AC_de(node, arg3) != 0) {
-            Camera_StartFade(node, arg6.a, arg6.b, arg6.c, arg6.m_u8_Value4,
+            Sky_StartFade(node, arg6.a, arg6.b, arg6.c, arg6.m_u8_Value4,
                           arg6.m_u8_Value5, arg6.f, arg6.m_u8_Value7);
         }
         node = node->next;

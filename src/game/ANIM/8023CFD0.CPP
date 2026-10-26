@@ -7,9 +7,9 @@
 #include "ANIM/8023EEF0_16.H"
 #include "ANIM/8023F740.H"
 
-extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern f32 Math_Sqrtf(f32);
-extern void Particle_ScaleVector(void *, void *, f32);
+extern void GraphU64_ScaleVector(void *, void *, f32);
 extern void func_8023F43C_de(void *arg0);
 extern void func_80242BF0_de(void *arg0);
 extern void func_80243920_de(void *arg0);
@@ -33,7 +33,7 @@ s32 func_8023D158_de(ActorMotion *object) {
     f32 maximumZ;
 
     func_80240C8C_de(&object->collisionState);
-    Particle_SubtractVectors(&object->velocity,
+    GraphU64_SubtractVectors(&object->velocity,
                   &object->end,
                   &object->start);
     magnitude = Math_Sqrtf(
@@ -46,7 +46,7 @@ s32 func_8023D158_de(ActorMotion *object) {
     }
 
     if (object->distance != 0.0f) {
-        Particle_ScaleVector(&object->direction,
+        GraphU64_ScaleVector(&object->direction,
                       &object->velocity,
                       D_800C3630_de / object->distance);
     } else {
@@ -96,7 +96,7 @@ s32 func_8023D158_de(ActorMotion *object) {
     }
     if (object->distance != 0.0f) {
         if (*flags & 0x10000) {
-            Anim_ProcessEntityContacts(object);
+            InstCol_ProcessEntityContacts(object);
         }
         if (*flags & 0x4000) {
             func_80242BF0_de(object);

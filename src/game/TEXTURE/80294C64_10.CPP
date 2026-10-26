@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "TEXTURE/80294C64_10.H"
 struct Node80253610;
-extern void Scene_UnlockResource(void *heap, struct Node80253610 *resource);
+extern void Cache_UnlockResource(void *heap, struct Node80253610 *resource);
 
 #if defined(VERSION_US_REV1)
 
@@ -39,7 +39,7 @@ void func_802957EC_us_rev1(void) {
 
 void func_80295890_us_rev1(void) {
     if (D_8014AEB0.resource != 0) {
-        Scene_UnlockResource(0, D_8014AEB0.resource);
+        Cache_UnlockResource(0, D_8014AEB0.resource);
     }
     D_8014AEB0.resource = 0;
     D_8014AEB0.textureOverride = 0;

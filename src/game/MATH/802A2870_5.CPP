@@ -80,7 +80,7 @@ s32 func_802A1E5C_de(struct CommandListController *commandListController) {
 
     commandListController->state = 2;
     commandListController->progress = 0;
-    Render_PlayFlatSound(0xE74);
+    SoundElement_PlayFlatSound(0xE74);
     p = commandListController->entries;
     if (p != 0) {
         do {
@@ -107,7 +107,7 @@ s32 func_802A1EC0_de(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 arg4) {
     }
     object->field_5C = arg3;
     func_802A1D7C_de(object);
-    Render_PlayFlatSound(0xE81);
+    SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
 
@@ -125,7 +125,7 @@ s32 func_802A1F3C_de(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 arg4) {
     }
     object->field_5C = 0;
     func_802A1D14_de(object);
-    Render_PlayFlatSound(0xE81);
+    SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
 

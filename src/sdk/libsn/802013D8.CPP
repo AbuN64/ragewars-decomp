@@ -34,7 +34,7 @@ extern void Libgultra_TrwSetSr(int);
 extern s32 Libsn_ReadPortWord(s32);
 extern void Libsn_SpinDelay(s32);
 extern void Libsn_TransferHostMemoryRanges(u32);
-extern void Io_CopyHostBlockToCart(void);
+extern void Libsn_CopyHostBlockToCart(void);
 extern u32 D_800F32A8;
 
 /* Host-command service loop: poll the command word at 0xB1FFFFF0, acknowledge it and run it. */
@@ -91,7 +91,7 @@ void Libsn_ServiceHostCommands(void) {
             Libsn_TransferHostMemoryRanges(1);
             break;
         case 0x19:
-            Io_CopyHostBlockToCart();
+            Libsn_CopyHostBlockToCart();
             break;
         }
         Libsn_WritePortWord(0xB1FFFFFC, 0);

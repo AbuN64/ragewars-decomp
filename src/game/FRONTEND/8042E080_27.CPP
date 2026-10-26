@@ -10,7 +10,7 @@
    sets the word at 0xBA0 to 2, clears 0xBA4, drops one from the count at 0xB9C, stamps 0x41 on
    that count's two-byte slot at 0xB8C when the slot is free, silences the sound handle taken from
    the player's entry of the slot array at 4 of the block, and reports the cancel through
-   Render_PlayFlatSound. Records 13 and above are left alone; the function always returns zero. */
+   SoundElement_PlayFlatSound. Records 13 and above are left alone; the function always returns zero. */
 
 
 
@@ -20,7 +20,7 @@
 
 
 
-extern void *Menu_GetSlotValue(s32 root, s32 player);
+extern void *SmpOverlay_GetSlotValue(s32 root, s32 player);
 
 s32 func_80430028_de(s32 unused0, s32 unused1, s32 arg2, s32 arg3) {
     struct Resource_func_80419E54_de *sound;
@@ -42,7 +42,7 @@ s32 func_80430028_de(s32 unused0, s32 unused1, s32 arg2, s32 arg3) {
         return 0;
     }
     if (state == 0xC && arg3 == 1) {
-        sound = Menu_GetSlotValue(D_800E54A4->root, index);
+        sound = SmpOverlay_GetSlotValue(D_800E54A4->root, index);
         row = (struct RowRecAtBA4 *)(index * 0xB68 + (char *)D_800E54A4);
         row->phase = 2;
         count = row->count;
@@ -57,7 +57,7 @@ s32 func_80430028_de(s32 unused0, s32 unused1, s32 arg2, s32 arg3) {
             *mark = 0x41;
         }
         sound->value = 0xFF;
-        Render_PlayFlatSound(0xE74);
+        SoundElement_PlayFlatSound(0xE74);
     }
     return 0;
 }
@@ -66,9 +66,9 @@ s32 func_80430028_de(s32 unused0, s32 unused1, s32 arg2, s32 arg3) {
 #include "COMMON/NAME.H"
 s32 func_80299B4C_de();                                /* extern */
 s32 Frontend_ListHasFlag100(void *);                          /* extern */
-void Menu_ShowSlotNode(s32, s32, void *);                  /* extern */
-void Frontend_RelabelSlotRows(s32);                               /* extern */
-void Frontend_UpdatePlayerControlRows(s32);                               /* extern */
+void SmpOverlay_ShowSlotNode(s32, s32, void *);                  /* extern */
+void PAKInterface_RelabelSlotRows(s32);                               /* extern */
+void PAKInterface_UpdatePlayerControlRows(s32);                               /* extern */
 void func_80434250_de(s32, s32);                            /* extern */
 void func_80434EF4_de(s32);                               /* extern */
 extern PakMenuController *D_800E54A4;                    
@@ -94,7 +94,7 @@ s32 func_80430118_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
             MarkMenuEventHandled();
             func_80434EF4_de(player);
             D_800E54A4->players[player].namePhase = 0;
-            Render_PlayFlatSound(0xE81);
+            SoundElement_PlayFlatSound(0xE81);
             return 0;
         }
         return 0;
@@ -103,46 +103,46 @@ s32 func_80430118_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
             MarkMenuEventHandled();
             func_80434250_de(player, 1);
             D_800E54A4->selected[player] = 0;
-            Render_PlayFlatSound(0xE74);
+            SoundElement_PlayFlatSound(0xE74);
             return 0;
         }
         return 0;
     case 13:
         if ((D_800E54A4->players[player].sub == 6) && (arg3 == 1)) {
             MarkMenuEventHandled();
-            var_s0 = ((MenuWidget *)Menu_GetSlotValue(D_800E54A4->root, player))->next;
+            var_s0 = ((MenuWidget *)SmpOverlay_GetSlotValue(D_800E54A4->root, player))->next;
 loop_11:
             if (Frontend_ListHasFlag100(var_s0) != 0) {
                 var_s0 = var_s0->next;
                 goto loop_11;
             }
-            Menu_ShowSlotNode((D_800E54A4->root), player, var_s0);
-            Render_PlayFlatSound(0xE74);
+            SmpOverlay_ShowSlotNode((D_800E54A4->root), player, var_s0);
+            SoundElement_PlayFlatSound(0xE74);
             return 0;
         }
         return 0;
     case 22:
         if (arg3 == 1) {
-            var_s0_2 = ((MenuWidget *)Menu_GetSlotValue(D_800E54A4->root, player))->next;
+            var_s0_2 = ((MenuWidget *)SmpOverlay_GetSlotValue(D_800E54A4->root, player))->next;
 loop_16:
             if (Frontend_ListHasFlag100(var_s0_2) != 0) {
                 var_s0_2 = var_s0_2->next;
                 goto loop_16;
             }
-            Menu_ShowSlotNode((D_800E54A4->root), player, var_s0_2);
-            Frontend_RelabelSlotRows(player);
+            SmpOverlay_ShowSlotNode((D_800E54A4->root), player, var_s0_2);
+            PAKInterface_RelabelSlotRows(player);
         }
         goto block_24;
     case 27:
         if (arg3 == 1) {
-            var_s0_3 = ((MenuWidget *)Menu_GetSlotValue(D_800E54A4->root, player))->next;
+            var_s0_3 = ((MenuWidget *)SmpOverlay_GetSlotValue(D_800E54A4->root, player))->next;
 loop_21:
             if (Frontend_ListHasFlag100(var_s0_3) != 0) {
                 var_s0_3 = var_s0_3->next;
                 goto loop_21;
             }
-            Menu_ShowSlotNode((D_800E54A4->root), player, var_s0_3);
-            Frontend_UpdatePlayerControlRows(player);
+            SmpOverlay_ShowSlotNode((D_800E54A4->root), player, var_s0_3);
+            PAKInterface_UpdatePlayerControlRows(player);
         }
 block_24:
         MarkMenuEventHandled();
@@ -156,12 +156,12 @@ extern s32 func_80299B4C_de(void);
 extern s32 func_8029DB58_de(s32);
 extern void MarkMenuEventHandled(void);
 extern s32 Frontend_ListHasFlag100(void *);
-extern void Menu_ShowSlotNode(s32, s32, void *);
-extern void Frontend_RelabelSlotRows(s32);
-extern void Frontend_UpdatePlayerControlRows(s32);
+extern void SmpOverlay_ShowSlotNode(s32, s32, void *);
+extern void PAKInterface_RelabelSlotRows(s32);
+extern void PAKInterface_UpdatePlayerControlRows(s32);
 extern void func_80434250_de(s32, s32);
 extern void func_80434E34_de(s32);
-s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, s32 arg4) {
+s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, s32 arg4) {
     NodeRecAt44 *node;
     s32 player;
 
@@ -176,7 +176,7 @@ s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, 
             MarkMenuEventHandled();
             D_800E54A4->players[player].namePhase = arg3;
             func_80434E34_de(player);
-            Render_PlayFlatSound(0xE81);
+            SoundElement_PlayFlatSound(0xE81);
         }
         return 0;
     case 4:
@@ -184,42 +184,42 @@ s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, 
             MarkMenuEventHandled();
             func_80434250_de(player, 0);
             D_800E54A4->selected[player] = 0;
-            Render_PlayFlatSound(0xE74);
+            SoundElement_PlayFlatSound(0xE74);
         }
         return 0;
     case 13:
         if (D_800E54A4->players[player].sub == 6 && arg3 == 1) {
             MarkMenuEventHandled();
-            node = Menu_GetSlotValue(D_800E54A4->root, player);
+            node = SmpOverlay_GetSlotValue(D_800E54A4->root, player);
             node = node->ref2C;
             while (Frontend_ListHasFlag100(node) != 0) {
                 node = node->ref2C;
             }
-            Menu_ShowSlotNode(D_800E54A4->root, player, node);
-            Render_PlayFlatSound(0xE74);
+            SmpOverlay_ShowSlotNode(D_800E54A4->root, player, node);
+            SoundElement_PlayFlatSound(0xE74);
         }
         return 0;
     case 22:
         if (arg3 == 1) {
-            node = Menu_GetSlotValue(D_800E54A4->root, player);
+            node = SmpOverlay_GetSlotValue(D_800E54A4->root, player);
             node = node->ref2C;
             while (Frontend_ListHasFlag100(node) != 0) {
                 node = node->ref2C;
             }
-            Menu_ShowSlotNode(D_800E54A4->root, player, node);
-            Frontend_RelabelSlotRows(player);
+            SmpOverlay_ShowSlotNode(D_800E54A4->root, player, node);
+            PAKInterface_RelabelSlotRows(player);
         }
         MarkMenuEventHandled();
         break;
     case 27:
         if (arg3 == 1) {
-            node = Menu_GetSlotValue(D_800E54A4->root, player);
+            node = SmpOverlay_GetSlotValue(D_800E54A4->root, player);
             node = node->ref2C;
             while (Frontend_ListHasFlag100(node) != 0) {
                 node = node->ref2C;
             }
-            Menu_ShowSlotNode(D_800E54A4->root, player, node);
-            Frontend_UpdatePlayerControlRows(player);
+            SmpOverlay_ShowSlotNode(D_800E54A4->root, player, node);
+            PAKInterface_UpdatePlayerControlRows(player);
         }
         MarkMenuEventHandled();
         break;

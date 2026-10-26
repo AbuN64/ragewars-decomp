@@ -3,12 +3,12 @@
 #include "TYPES.H"
 #include "SCENE/802508E0_13.H"
 
-/* Computes the second derivatives of a natural cubic spline through n points (ys over xs) into out: builds the tridiagonal diagonal, interval widths and right-hand side in three scratch arrays from Scene_AllocateMemory, eliminates forward, zeroes out and back-substitutes unless a zero diagonal or width was replaced by one, then frees the arrays through Scene_FreeMemory. */
+/* Computes the second derivatives of a natural cubic spline through n points (ys over xs) into out: builds the tridiagonal diagonal, interval widths and right-hand side in three scratch arrays from Cache_AllocateMemory, eliminates forward, zeroes out and back-substitutes unless a zero diagonal or width was replaced by one, then frees the arrays through Cache_FreeMemory. */
 
-extern f32 *Scene_AllocateMemory(s32 size);
+extern f32 *Cache_AllocateMemory(s32 size);
 
 
-extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 extern f32 Math_Sqrtf(f32 value);
 
@@ -26,9 +26,9 @@ void func_80400000_de(s32 n, f32 *ys, f32 *xs, f32 *out) {
         out[0] = 0;
         return;
     }
-    diagonal = Scene_AllocateMemory(n * 4);
-    rhs = Scene_AllocateMemory(n * 4);
-    width = Scene_AllocateMemory(n * 4);
+    diagonal = Cache_AllocateMemory(n * 4);
+    rhs = Cache_AllocateMemory(n * 4);
+    width = Cache_AllocateMemory(n * 4);
     for (i = 1; i < n - 1; i++) {
         diagonal[i] = 2.0f * (xs[i + 1] - xs[i - 1]);
         if (diagonal[i] == 0.0f) {
@@ -58,9 +58,9 @@ void func_80400000_de(s32 n, f32 *ys, f32 *xs, f32 *out) {
             out[i] = (rhs[i] - width[i] * out[i + 1]) / diagonal[i];
         }
     }
-    Scene_FreeMemory(diagonal);
-    Scene_FreeMemory(rhs);
-    Scene_FreeMemory(width);
+    Cache_FreeMemory(diagonal);
+    Cache_FreeMemory(rhs);
+    Cache_FreeMemory(width);
 }
 
 void func_804002D8_de(s32 count, CVector3 *points, f32 *weights, Spline *spline) {
@@ -72,9 +72,9 @@ void func_804002D8_de(s32 count, CVector3 *points, f32 *weights, Spline *spline)
     f32 length;
     s32 i;
 
-    ys = Scene_AllocateMemory(count * 4);
-    xs = Scene_AllocateMemory(count * 4);
-    d2 = Scene_AllocateMemory(count * 4);
+    ys = Cache_AllocateMemory(count * 4);
+    xs = Cache_AllocateMemory(count * 4);
+    d2 = Cache_AllocateMemory(count * 4);
     nodes = spline->nodes;
     length = 0.0f;
     spline->nodeSize = 0x24;
@@ -101,7 +101,7 @@ void func_804002D8_de(s32 count, CVector3 *points, f32 *weights, Spline *spline)
         if (i == count - 1) {
             break;
         }
-        Particle_SubtractVectors(&delta, &nodes[i].p, &nodes[i + 1].p);
+        GraphU64_SubtractVectors(&delta, &nodes[i].p, &nodes[i + 1].p);
         length += Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
     }
     for (i = 0; i < count; i++) {
@@ -136,7 +136,7 @@ void func_804002D8_de(s32 count, CVector3 *points, f32 *weights, Spline *spline)
     for (i = 0; i < count; i++) {
         nodes[i].d2s = d2[i];
     }
-    Scene_FreeMemory(ys);
-    Scene_FreeMemory(xs);
-    Scene_FreeMemory(d2);
+    Cache_FreeMemory(ys);
+    Cache_FreeMemory(xs);
+    Cache_FreeMemory(d2);
 }

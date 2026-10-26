@@ -33,7 +33,7 @@ extern void func_8043C278_de(void *);
 extern void func_80298368_de(s32);
 
 /* When the fourth argument is one, calls MarkMenuEventHandled and, while the counter at offset 0xE8 of
-   the object D_800E53C0 points to is positive, decrements it and calls Frontend_FillResultRows. Returns zero. */
+   the object D_800E53C0 points to is positive, decrements it and calls ScenarioSetup_FillResultRows. Returns zero. */
 
 
 
@@ -41,7 +41,7 @@ extern void func_80298368_de(s32);
 
 /* When the fourth argument is one, calls MarkMenuEventHandled and, while the position at offset 0xE8 of
    the object D_800E53C0 points to is more than four below the limit at 0xEC, advances it and calls
-   Frontend_FillResultRows. Returns zero. */
+   ScenarioSetup_FillResultRows. Returns zero. */
 
 
 
@@ -98,7 +98,7 @@ s32 func_8042D788_de(void) {
 #elif defined(VERSION_EU_X)
     case 0x23E + 3:
 #endif
-        if (Frontend_IsCupSelected() == 1) {
+        if (ScenarioSetup_IsCupSelected() == 1) {
             func_8042E988_de(0x21);
             return 0;
         }
@@ -127,7 +127,7 @@ s32 func_8042D8C4_de(void *first, void *second, void *third, s32 fourth) {
         state = D_800E53C0;
         if (state->first > 0) {
             state->first--;
-            Frontend_FillResultRows();
+            ScenarioSetup_FillResultRows();
             return 0;
         }
     }
@@ -144,7 +144,7 @@ s32 func_8042D908_de(void *first, void *second, void *third, s32 fourth) {
         position = state->first;
         if (position + 4 < state->count) {
             state->first = position + 1;
-            Frontend_FillResultRows();
+            ScenarioSetup_FillResultRows();
             return 0;
         }
     }

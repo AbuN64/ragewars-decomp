@@ -80,7 +80,7 @@ void func_80443734_de(ObjRecAt1CV1 *arg0, CaptionEntry *arg1, s32 arg2, MenuStyl
     } else {
         amount = (s32) ((f32) phase * arg3->alpha * arg3->fade);
     }
-    Text_SetupSpriteMode(amount);
+    OnScreen_SetupSpriteMode(amount);
     drop = 0x50;
     half = arg1->width >> 1;
     if (D_800E28D8 == 0) {

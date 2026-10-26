@@ -14,7 +14,7 @@
 extern struct {s32 *unk0;} D_8013B364;
 
 
-extern void Particle_SubtractVectors(CVector3 *out, void *arg1, void *arg2);
+extern void GraphU64_SubtractVectors(CVector3 *out, void *arg1, void *arg2);
 
 /** Return the index of the link joining two nodes, accepting reversed links of two-way types, or -1. */
 
@@ -47,7 +47,7 @@ extern s32 func_8024DF5C_de(void *);
 
 extern s32 func_8024DFA0_de(void *);
 
-extern s32 Camera_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo8020CD74 *);
+extern s32 Unicol_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo8020CD74 *);
 
 /** Return an indexed record from the table referenced by the input. */
 void *Nav_GetGraphPoint(void *table, int index) {
@@ -119,12 +119,12 @@ void Nav_InitSearchNode(void *searchNode, s32 nodeKey)
   flags = navigation_point_flags(entry);
   if (flags & 0x40)
   {
-    node->ticks = (Nav_NextRandom() % 5) + 5;
+    node->ticks = (GraphU64_NextRandom() % 5) + 5;
   }
   flags = navigation_point_flags(entry);
   if (flags & 0x80)
   {
-    node->delay = (Nav_NextRandom() % 5) + 5;
+    node->delay = (GraphU64_NextRandom() % 5) + 5;
   }
 }
 
@@ -144,7 +144,7 @@ s32 Nav_FindNearestPointIndex(struct Obj8020BC50 *pointSet, void *point) {
         do {
             items = pointSet->records;
             stride = *(s32 *)items;
-            Particle_SubtractVectors(&offset, point, (char *)items + (index * stride + 8));
+            GraphU64_SubtractVectors(&offset, point, (char *)items + (index * stride + 8));
             distanceSq = (offset.x * offset.x) + (offset.y * offset.y) + (offset.z * offset.z);
             if ((bestIndex < 0) || (distanceSq < bestDistanceSq)) {
                 bestIndex = index;
@@ -243,7 +243,7 @@ s32 Nav_IsNodeMovementBlocked(s32 **arg0, Instance8020CD74 *arg1, s32 arg2) {
     }
     collision.w[0] = 0x4000;
     saved = *arg1;
-    result = Camera_MoveActorWithCollision(arg1, position, &collision);
+    result = Unicol_MoveActorWithCollision(arg1, position, &collision);
     *arg1 = saved;
     return result == 0;
 }

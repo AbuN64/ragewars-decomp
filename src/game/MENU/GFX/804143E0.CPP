@@ -8,11 +8,11 @@
 #include "RESMGR/resmgr_stream_io.H"
 
 void func_80414360_de(void) {
-    Resmgr_InitializeStreams();
+    XStdio_InitializeStreams();
     func_8029D8A0_de();
 }
 
-/* Calls the per-version setup entry and then Resmgr_ShutdownStreams. */
+/* Calls the per-version setup entry and then XStdio_ShutdownStreams. */
 
 
 
@@ -38,7 +38,7 @@ func_8029D7E8_auto
 #else
     func_8029D8A8_de();
 #endif
-    Resmgr_ShutdownStreams();
+    XStdio_ShutdownStreams();
 }
 
 #if defined(VERSION_US)

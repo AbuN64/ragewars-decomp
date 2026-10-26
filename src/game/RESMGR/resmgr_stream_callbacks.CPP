@@ -27,7 +27,7 @@ extern s32 D_800CD928_de;
 /* Allocates the resource once and marks its five-word state ready. */
 extern struct CartridgeReadWorker D_801011B8;
 
-extern Record *Scene_AllocateMemory(s32 arg0);
+extern Record *Cache_AllocateMemory(s32 arg0);
 
 extern void func_8025637C_de(struct CartridgeReadWorker *worker, u32 source, s32 bytes, void *destination);
 
@@ -44,7 +44,7 @@ int func_802A0F58_de(void) {
 }
 
 /* Forward every seek argument and return the configured callback status. */
-s32 Resmgr_SeekStream(s32 handle, s32 offset, s32 origin) {
+s32 XStdio_SeekStream(s32 handle, s32 offset, s32 origin) {
     return D_800CD934_de(handle, offset, origin);
 }
 
@@ -88,19 +88,19 @@ void func_802A1050_de(ResourceOpenCallback arg0, s32 arg1, ResourceReadCallback 
     D_800CD93C_de = arg6;
 }
 
-void Resmgr_LoadMemoryStream(void) {
+void XStdio_LoadMemoryStream(void) {
     void *buffer;
     IntegerState14_2 *stream;
     if (D_800CD940_de.ready != 1) {
 #if defined(VERSION_DE)
         D_800CD940_de.size = 0x8BB01;
-        buffer = Scene_AllocateMemory(0x8BB01);
+        buffer = Cache_AllocateMemory(0x8BB01);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
         D_800CD940_de.size = 0x8B245;
-        buffer = Scene_AllocateMemory(0x8B245);
+        buffer = Cache_AllocateMemory(0x8B245);
 #elif defined(VERSION_EU_X)
         D_800CD940_de.size = 0x90385;
-        buffer = Scene_AllocateMemory(0x90385);
+        buffer = Cache_AllocateMemory(0x90385);
 #endif
         D_800CD940_de.data = buffer;
         func_8025637C_de(&D_801011B8, 0x200000, D_800CD940_de.size, buffer);
@@ -110,9 +110,9 @@ void Resmgr_LoadMemoryStream(void) {
     }
 }
 
-void Resmgr_FreeMemoryStream(void) {
+void XStdio_FreeMemoryStream(void) {
     if (D_800CD940_de.data != 0) {
-        Scene_FreeMemory(D_800CD940_de.data);
+        Cache_FreeMemory(D_800CD940_de.data);
     }
     D_800CD940_de.data = 0;
     D_800CD940_de.opened = 0;
@@ -120,7 +120,7 @@ void Resmgr_FreeMemoryStream(void) {
 }
 
 /* Reset the memory stream and return its single valid handle. */
-s32 Resmgr_OpenMemoryStream(const void *name, const void *mode) {
+s32 XStdio_OpenMemoryStream(const void *name, const void *mode) {
     const u8 *modeCursor = mode;
     while (*modeCursor != 0) {
         modeCursor++;
@@ -137,9 +137,9 @@ void func_802A1188_de(void) {
     D_800CD940_de.opened = 0;
 }
 
-s32 Resmgr_ReadMemoryStream(s32 handle, void *destination, s32 bytes) {
+s32 XStdio_ReadMemoryStream(s32 handle, void *destination, s32 bytes) {
     IntegerState14_2 *stream = &D_800CD940_de;
-    Resmgr_CopyBytes(destination, stream->data + stream->cursor, bytes);
+    XPlus_CopyBytes(destination, stream->data + stream->cursor, bytes);
     stream->cursor = stream->cursor + bytes;
     return 1;
 }
@@ -149,7 +149,7 @@ int func_802A11EC_de(void) {
     return 0;
 }
 
-s32 Resmgr_SeekMemoryStream(s32 handle, s32 offset, s32 origin) {
+s32 XStdio_SeekMemoryStream(s32 handle, s32 offset, s32 origin) {
 
     if (origin == 0) {
         D_800CD940_de.cursor = 0;
@@ -159,6 +159,6 @@ s32 Resmgr_SeekMemoryStream(s32 handle, s32 offset, s32 origin) {
 }
 
 /** Return the first global state word. */
-unsigned int Resmgr_TellMemoryStream(void) {
+unsigned int XStdio_TellMemoryStream(void) {
     return D_800CD940_de.cursor;
 }

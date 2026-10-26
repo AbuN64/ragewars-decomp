@@ -57,7 +57,7 @@ void Nav_SelectFlaggedRoamingGoal(void *arg0)
             candidate = ((Brain_func_80212D78_eu_x *)arg0)->goal;
 loop:
             if (tries < 10) {
-                candidate = Nav_NextRandom() % table[1];
+                candidate = GraphU64_NextRandom() % table[1];
                 if (navigation_point_flags((NavigationPoint *)Nav_GetGraphPoint(table, candidate)) & 0x400) {
                     candidate = ((Brain_func_80212D78_eu_x *)arg0)->goal;
                 }
@@ -78,7 +78,7 @@ store_both:
 store_c:
         ((Brain_func_80212D78_eu_x *)arg0)->nextNode = candidate;
     } else {
-        result = choices[Nav_NextRandom() % count];
+        result = choices[GraphU64_NextRandom() % count];
     }
 
     ((Brain_func_80212D78_eu_x *)arg0)->goal = result;

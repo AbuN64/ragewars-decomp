@@ -75,36 +75,36 @@ extern Shared_FrameProfile D_80100530;
 
 extern s32 D_801462C8;
 
-extern s32 Camera_IsSequenceInWindow(void);
+extern s32 Cinema_IsSequenceInWindow(void);
 extern void func_80247F18_de(Shared_PoseActor *, Shared_PosePart *, PoseMatrix, CVector3, CVector3, s32);
 extern void func_802480F0_de(Shared_PoseActor *, s32, PoseMatrix);
-extern f32 Particle_GetActorHeight(Shared_PoseActor *);
+extern f32 GameObject_GetActorHeight(Shared_PoseActor *);
 extern void func_80261670_de(Shared_AnimState *, s32, s32, s32, s32, s32);
-extern void System_PrepareAnimationFrames();
+extern void AnimState_PrepareAnimationFrames();
 extern void func_802624A8_de(Shared_AnimState *);
 extern s32 func_802624D8_de(Shared_AnimState *);
-extern void Fx_DispatchAttachmentEffects(u8 *, s32, PoseMatrix *, Shared_PoseActor *, void *);
-extern void Rsp_MultiplyAffineMatrices(PoseMatrix, PoseMatrix, PoseMatrix);
-extern void Rsp_ConvertMatrixToFloat(PoseMatrix, u8 *);
+extern void Ghot_DispatchAttachmentEffects(u8 *, s32, PoseMatrix *, Shared_PoseActor *, void *);
+extern void GraphU64_MultiplyAffineMatrices(PoseMatrix, PoseMatrix, PoseMatrix);
+extern void GraphU64_ConvertMatrixToFloat(PoseMatrix, u8 *);
 extern void func_80270AAC_de(CQuatern *, f32, CQuatern *, CQuatern *);
-extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void func_80272D00_de(PoseMatrix, f32, f32, f32, f32);
 extern void CopyMatrix(PoseMatrix, PoseMatrix);
 extern void TranslateMatrix(PoseMatrix, f32, f32, f32);
 extern void ScaleMatrixLocal(PoseMatrix, f32, f32, f32);
-extern s32 Nav_NextRandom(void);
-extern f32 Nav_GetTrianglePlaneHeight(StateFlags *, f32, f32);
+extern s32 GraphU64_NextRandom(void);
+extern f32 GraphU64_GetTrianglePlaneHeight(StateFlags *, f32, f32);
 extern s32 func_802799C0_de(void *, s32);
-extern void Engine_SampleWorldLighting(void *, CVector3 *, u8 *);
+extern void Scene_SampleWorldLighting(void *, CVector3 *, u8 *);
 extern void func_802A57E0_de(Owner802A6DF8 *, Shared_PoseActor *, PoseMatrix *);
 extern u32 func_802BCF00_de(void);
 
 static inline CVector3 randVec(void) {
     CVector3 v;
 
-    v.x = Nav_NextRandom() % 100;
-    v.y = Nav_NextRandom() % 100;
-    v.z = Nav_NextRandom() % 100;
+    v.x = GraphU64_NextRandom() % 100;
+    v.y = GraphU64_NextRandom() % 100;
+    v.z = GraphU64_NextRandom() % 100;
     return v;
 }
 
@@ -124,11 +124,11 @@ static inline void twistPart(Shared_PosePart *part, PoseMatrix cur, s32 n, s32 i
         angle *= 0.3f;
         angle *= (n == 5 ? -2.0f : (f32)n);
         CopyMatrix(inv, cur);
-        Particle_ScaleVector(&turn, &turn, -1.0f);
+        GraphU64_ScaleVector(&turn, &turn, -1.0f);
         TranslateMatrix(inv, turn.x, turn.y, turn.z);
         func_80272D00_de(rotm, angle, axis.x, axis.y, axis.z);
-        Rsp_MultiplyAffineMatrices(cur, inv, rotm);
-        Particle_ScaleVector(&turn, &turn, -1.0f);
+        GraphU64_MultiplyAffineMatrices(cur, inv, rotm);
+        GraphU64_ScaleVector(&turn, &turn, -1.0f);
         TranslateMatrix(cur, turn.x, turn.y, turn.z);
         if (part->unk_14[0] == i) {
             part->unk_12--;
@@ -140,7 +140,7 @@ static inline void trackPos(Shared_PoseTrack *t, s32 i, CVector3 *out) {
     if (t->joints[i].pos == -1) {
         *out = t->frames[i].pos;
     } else {
-        f32 *data = Render_GetPackSection(t->posTable, t->joints[i].pos);
+        f32 *data = SetN64_GetPackSection(t->posTable, t->joints[i].pos);
         f32 *a = &data[t->posFrame0];
         f32 *b = &data[t->posFrame1];
 
@@ -162,7 +162,7 @@ static inline void trackRot(Shared_PoseTrack *t, s32 i, CQuatern *out, s32 slerp
             z = frame->rot[2] * (1.0f / 32767.0f);
             goto default_frame;
         } else {
-            f32 *data = Render_GetPackSection(t->rotTable, t->joints[i].rot);
+            f32 *data = SetN64_GetPackSection(t->rotTable, t->joints[i].rot);
 
             func_80270AAC_de(out, t->blend, (CQuatern *)&data[t->rotFrame0], (CQuatern *)&data[t->rotFrame1]);
         }
@@ -177,7 +177,7 @@ static inline void trackRot(Shared_PoseTrack *t, s32 i, CQuatern *out, s32 slerp
         out->z = z;
         out->w = frame->rot[3] * (1.0f / 32767.0f);
     } else {
-        f32 *data = Render_GetPackSection(t->rotTable, t->joints[i].rot);
+        f32 *data = SetN64_GetPackSection(t->rotTable, t->joints[i].rot);
         f32 *a = &data[t->rotFrame0];
         f32 *b = &data[t->rotFrame1];
 
@@ -297,7 +297,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
     u32 dt;
 
     world = 0;
-    ctx.parts = Render_GetPackSection(modelPack, 5);
+    ctx.parts = SetN64_GetPackSection(modelPack, 5);
     count = ctx.parts->count;
     actor->handle = func_802799C0_de(&D_8011FFB0, count);
     if (actor->handle == 0) {
@@ -306,7 +306,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
     ret = 0;
     isRoot = actor->flags & 1;
     isKind9 = actor->model->kind == 9;
-    mem = Scene_RequestResource(0, actor->unk_C8, actor->unk_C8, ((actor->unk_E6 * 4) + 0xF) & ~7, 4, 0, 0, &D_800C3930_de + 4, 0);
+    mem = Cache_RequestResource(0, actor->unk_C8, actor->unk_C8, ((actor->unk_E6 * 4) + 0xF) & ~7, 4, 0, 0, &D_800C3930_de + 4, 0);
     skip = ret;
     if (mem != 0) {
         animA = &actor->animA;
@@ -327,8 +327,8 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
             ctx.animA = animA;
             ctx.animB = animB;
             f.frame = (!isRoot || isKind9) && !skip;
-            System_PrepareAnimationFrames(&actor->animA, &tracks[0], f.frame);
-            System_PrepareAnimationFrames(&actor->animB, &tracks[1]);
+            AnimState_PrepareAnimationFrames(&actor->animA, &tracks[0], f.frame);
+            AnimState_PrepareAnimationFrames(&actor->animB, &tracks[1]);
             kind = actor->model->kind;
             scaled = 0;
             scale.x = 1.0f;
@@ -353,11 +353,11 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
                 } else {
                     f.frame = 0;
                 }
-                if (Camera_IsSequenceInWindow()) {
+                if (Cinema_IsSequenceInWindow()) {
                     f.frame = 0;
                 }
             }
-            if (!Camera_IsSequenceInWindow() && ((animA->unk_B == 0 && animB->unk_B == 0) || kind == 1)) {
+            if (!Cinema_IsSequenceInWindow() && ((animA->unk_B == 0 && animB->unk_B == 0) || kind == 1)) {
                 f.mode = 0;
             } else {
                 f.mode = 1;
@@ -380,7 +380,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
                 }
                 if (D_801462C8 & 0x80) {
                     scaled = 1;
-                    Particle_ScaleVector(&scale, &scale, 0.5f);
+                    GraphU64_ScaleVector(&scale, &scale, 0.5f);
                 }
             } else {
                 id0 = -1;
@@ -441,7 +441,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
                 if (actor->callback != 0) {
                     ((PoseCallback)actor->callback)(m, &ctx);
                 }
-                Rsp_MultiplyAffineMatrices(*cur, m, *parent);
+                GraphU64_MultiplyAffineMatrices(*cur, m, *parent);
                 if (actor->part.unk_12) {
                     s32 n = 0;
                     if (actor->part.unk_14[0] == i) {
@@ -465,7 +465,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
                         PoseMatrix bone;
                         CVector3 r = randVec();
 
-                        Rsp_ConvertMatrixToFloat(bone, actor->unk_B8 + i * 64);
+                        GraphU64_ConvertMatrixToFloat(bone, actor->unk_B8 + i * 64);
                         func_80247F18_de(actor, &actor->part, bone, actor->pos, r, i);
                     }
                     world->unk_1218 = 0;
@@ -521,14 +521,14 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
                     break;
                 case 1:
                 case 11: {
-                    f32 h = Particle_GetActorHeight(actor);
+                    f32 h = GameObject_GetActorHeight(actor);
 
                     actor->unk_70 = mtx[1][3][1] * (1.0f / 65536.0f) - actor->pos.y - h * 0.5f;
                     if (actor->unk_70 < 0.0f) {
                         actor->unk_70 = 0.0f;
                     }
                     if ((actor->flags & 0x20000000) && actor->surface != 0 && (actor->surface->flags & 0x40)) {
-                        f32 ground = Nav_GetTrianglePlaneHeight(actor->surface, actor->pos.x, actor->pos.z);
+                        f32 ground = GraphU64_GetTrianglePlaneHeight(actor->surface, actor->pos.x, actor->pos.z);
                         f32 d = actor->pos.y + actor->unk_70 + h;
 
                         d -= ground;
@@ -548,13 +548,13 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
                 s32 bit = 1 << actor->unk_1;
 
                 if (actor->part.unk_C & bit) {
-                    Shared_PosePartTable *table = Render_GetPackSection(modelPack, 3);
+                    Shared_PosePartTable *table = SetN64_GetPackSection(modelPack, 3);
                     s32 n = table->count;
 
                     if (n != 0) {
                         u8 *data = table->data;
 
-                        Fx_DispatchAttachmentEffects(data, n, &mtx[1], actor, Render_GetPackSection(modelPack, 5));
+                        Ghot_DispatchAttachmentEffects(data, n, &mtx[1], actor, SetN64_GetPackSection(modelPack, 5));
                     }
                 }
             }
@@ -564,13 +564,13 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
             if (!(actor->flags & 8)) {
                 pos = actor->pos;
                 pos.y += actor->unk_70;
-                pos.y += Particle_GetActorHeight(actor) * 0.5f;
-                Engine_SampleWorldLighting(&g_world, &pos, actor->unk_140[D_800D297C]);
+                pos.y += GameObject_GetActorHeight(actor) * 0.5f;
+                Scene_SampleWorldLighting(&g_world, &pos, actor->unk_140[D_800D297C]);
             }
             ret = 1;
             actor->flags |= 0x200;
         }
-        Scene_UnlockResource(0, mem);
+        Cache_UnlockResource(0, mem);
     }
     if (!ret) {
         actor->handle = 0;
@@ -622,7 +622,7 @@ struct SceneObject {
 extern void *func_8024BFD4_de(SceneObject *, s32);
 extern s32 func_80296B74_de(void *, void *);
 extern void func_8026D8F8_de(void);
-extern void System_ResetTextureCache(void);
+extern void TextLoad_ResetTextureCache(void);
 /* Draws one scene object: loads its model, culls its bounding box against the camera's clip box and plane test,
  * then records the object's draw callback into a display list cached on the object (a branch placeholder is
  * patched at the end) or replays the cached list.
@@ -645,11 +645,11 @@ void func_80249E28_de(SceneObject *object, struct Racer *camera) {
         object->flags &= ~0x200;
         return;
     }
-    mem = Scene_RequestResource(0, object->resource, object->resource, object->resourceFlags, 0, 0, 0, D_800C3A20_de, 1);
+    mem = Cache_RequestResource(0, object->resource, object->resource, object->resourceFlags, 0, 0, 0, D_800C3A20_de, 1);
     if (mem == 0) {
         return;
     }
-    model = Render_GetPackSection(*mem, 0);
+    model = SetN64_GetPackSection(*mem, 0);
     if (D_8011FAC0.clockPaused != 0) {
         object->update(object, &object->behaviorFlags);
         func_8026EE20_de(object->transform, (s32)model, &object->bounds);
@@ -673,24 +673,24 @@ void func_80249E28_de(SceneObject *object, struct Racer *camera) {
         second_needed = visible;
     }
     if (visible == 0 && second_needed == 0) {
-        Scene_UnlockResource(0, mem);
+        Cache_UnlockResource(0, mem);
         return;
     }
     func_8026D8F8_de();
-    System_ResetTextureCache();
+    TextLoad_ResetTextureCache();
     if (object->cached != 0) {
         gSPDisplayList(g_displayListCursor++, (unsigned int)object->cached);
-        Scene_UnlockResource(0, mem);
+        Cache_UnlockResource(0, mem);
         return;
     }
     first = func_8024BFD4_de(object, object->firstKey);
     if (first == 0) {
-        Scene_UnlockResource(0, mem);
+        Cache_UnlockResource(0, mem);
         return;
     }
     if ((object->flags & 0x200) == 0 && func_802484B0_de(object, *(void **)first, (s32)model) == 0) {
-        Scene_UnlockResource(0, first);
-        Scene_UnlockResource(0, mem);
+        Cache_UnlockResource(0, first);
+        Cache_UnlockResource(0, mem);
         return;
     }
     offset[0] = offset[1] = offset[2] = 0.0f;
@@ -713,9 +713,9 @@ void func_80249E28_de(SceneObject *object, struct Racer *camera) {
     gSPEndDisplayList(g_displayListCursor++);
     gSPBranchList(object->cached++, (unsigned int)g_displayListCursor);
     gSPDisplayList(g_displayListCursor++, (unsigned int)object->cached);
-    Scene_UnlockResource(0, first);
+    Cache_UnlockResource(0, first);
     if (second != 0) {
-        Scene_UnlockResource(0, second);
+        Cache_UnlockResource(0, second);
     }
-    Scene_UnlockResource(0, mem);
+    Cache_UnlockResource(0, mem);
 }

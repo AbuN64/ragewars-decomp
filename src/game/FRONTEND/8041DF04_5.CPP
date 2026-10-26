@@ -28,7 +28,7 @@ extern struct TextEntry D_800E381C[][17];
 extern void MarkMenuEventHandled();
 extern s32 func_802999A0_de(s32);
 extern s32 func_8041EC44_de(s32, s32);
-extern void Resmgr_CopyString(char *, char *);
+extern void XPlus_CopyString(char *, char *);
 extern void func_8041E408_de(s32);
 
 s32 func_8041E100_de(void *unused0, void *unused1, void *unused2, s32 event) {
@@ -58,7 +58,7 @@ s32 func_8041E100_de(void *unused0, void *unused1, void *unused2, s32 event) {
     } while (id == -1);
     D_80153F80[D_800E39C0->unk14].variant = variant;
     D_80153F80[D_800E39C0->unk14].id = id;
-    Resmgr_CopyString(D_80153F80[D_800E39C0->unk14].name, 
+    XPlus_CopyString(D_80153F80[D_800E39C0->unk14].name, 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         D_800E381C[variant][id].text[g_languageIndex]
 #else
@@ -67,7 +67,7 @@ s32 func_8041E100_de(void *unused0, void *unused1, void *unused2, s32 event) {
     );
     D_80153F80[D_800E39C0->unk14].variantC = variant;
     func_8041E408_de(D_800E39C0->unk14);
-    Render_PlayFlatSound(0xE81);
+    SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
 
@@ -93,7 +93,7 @@ extern struct TextEntry D_800E381C[][17];
 extern void MarkMenuEventHandled();
 extern s32 func_802999A0_de(s32);
 extern s32 func_8041EC44_de(s32, s32);
-extern void Resmgr_CopyString(char *, char *);
+extern void XPlus_CopyString(char *, char *);
 extern void func_8041E408_de(s32);
 
 s32 func_8041E280_de(void *unused0, void *unused1, void *unused2, s32 event) {
@@ -123,7 +123,7 @@ s32 func_8041E280_de(void *unused0, void *unused1, void *unused2, s32 event) {
     } while (id == -1);
     D_80153F80[D_800E39C0->unk14].variant = variant;
     D_80153F80[D_800E39C0->unk14].id = id;
-    Resmgr_CopyString(D_80153F80[D_800E39C0->unk14].name, 
+    XPlus_CopyString(D_80153F80[D_800E39C0->unk14].name, 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         D_800E381C[variant][id].text[g_languageIndex]
 #else
@@ -133,7 +133,7 @@ s32 func_8041E280_de(void *unused0, void *unused1, void *unused2, s32 event) {
     D_80153F80[D_800E39C0->unk14].variantC = variant;
     id = D_800E39C0->unk14;
     func_8041E408_de(id);
-    Render_PlayFlatSound(0xE81);
+    SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
 #endif

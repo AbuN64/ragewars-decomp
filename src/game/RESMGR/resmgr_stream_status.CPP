@@ -3,7 +3,7 @@
 #include "COMMON/INTEGERSTATE14_2.H"
 #include "RESMGR/resmgr_stream_status.H"
 
-int Resmgr_IsMemoryStreamAtEnd(void) {
+int XStdio_IsMemoryStreamAtEnd(void) {
     return D_800CD940_de.cursor == D_800CD940_de.size;
 }
 

@@ -27,16 +27,16 @@ extern char D_8011D8D0;
 
 extern SharedPlayer *D_80145060;
 
-s32 Camera_MoveActorWithCollision(Shared_Particle *particle, CVector3 pos, s32 *flags);
+s32 Unicol_MoveActorWithCollision(Shared_Particle *particle, CVector3 pos, s32 *flags);
 
-f32 Particle_GetActorHeight(SharedPlayer *player);
+f32 GameObject_GetActorHeight(SharedPlayer *player);
 
-void Particle_SubtractVectors(CVector3 *normal, CVector3 *pos, void *surface);
+void GraphU64_SubtractVectors(CVector3 *normal, CVector3 *pos, void *surface);
 
 
 f32 func_802726BC_de(CVector3 *a, CVector3 *b);
 
-s32 Nav_NextRandom(void);
+s32 GraphU64_NextRandom(void);
 
 void func_8027AD4C_de(Shared_Particle *particle);
 
@@ -72,7 +72,7 @@ static inline f32 func_8027B790_distance(Shared_Particle *particle, SharedPlayer
     CVector3 pos;
     pos = player->views0.view8_3.pos;
     if (particle->inst.type != 0x40F) {
-        pos.y += Particle_GetActorHeight(player) * 0.5f;
+        pos.y += GameObject_GetActorHeight(player) * 0.5f;
     }
     return func_802726BC_de(&particle->inst.pos, &pos);
 }
@@ -83,16 +83,16 @@ extern CVector3 D_801042C8;
 
 extern s32 func_80276088_de(s32);
 
-extern void System_DeliverContactEffect(void *, void *, u16, s32, CVector3, struct IntPair);
+extern void Events_DeliverContactEffect(void *, void *, u16, s32, CVector3, struct IntPair);
 extern struct Shape_typemap_165 func_80271818_de(CVector3 *);
 
 #include "particle/8027A0F4_8.H"
 
-extern s32 Render_PlaySoundAtPosition(s16, CVector3, s32, s32);
+extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 
-extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void Particle_Release(void *, void *);
-/* Picks an animation slot from a global mode, then plays the slot's effect, spawns its object at the owner or a fixed position, plays its sound, and flags the owner. Adapted from func_8027C9CC_de, with the slot chosen by a switch on D_801042C4 (the extra case below 7 that shares the default body is needed for the decision tree; its value is not recoverable), the constant triple, one argument, the dropped Particle_ScaleVector call, and the final test changed. */
+/* Picks an animation slot from a global mode, then plays the slot's effect, spawns its object at the owner or a fixed position, plays its sound, and flags the owner. Adapted from func_8027C9CC_de, with the slot chosen by a switch on D_801042C4 (the extra case below 7 that shares the default body is needed for the decision tree; its value is not recoverable), the constant triple, one argument, the dropped GraphU64_ScaleVector call, and the final test changed. */
 
 
 
@@ -250,7 +250,7 @@ void Particle_Update(Shared_Particle *particle) {
             particle->time = 0.0f;
             particle->space = -7;
             particle->flags = (particle->flags & ~0x30000) | 0x40000;
-            particle->rot.z = (f32)(Nav_NextRandom() % 360) * 0.017453294f;
+            particle->rot.z = (f32)(GraphU64_NextRandom() % 360) * 0.017453294f;
             particle->inst.velocity.y = 0.0f;
             if (particle->flags & 0x4000000) {
                 particle->inst.velocity.x = -particle->direction.x;
@@ -267,7 +267,7 @@ void Particle_Update(Shared_Particle *particle) {
         }
     }
     if (particle->flags & 0x40000) {
-        if (Camera_MoveActorWithCollision(particle, particle->inst.pos, &particle->unk1B4) && D_801041F0.unkB4 != 0) {
+        if (Unicol_MoveActorWithCollision(particle, particle->inst.pos, &particle->unk1B4) && D_801041F0.unkB4 != 0) {
             particle->space = -3;
         }
         if (particle->inst.unk38 & 0x1000) {
@@ -337,7 +337,7 @@ void Particle_Update(Shared_Particle *particle) {
         return;
     }
     if (!(particle->flags & 0x72000)) {
-        die = Camera_MoveActorWithCollision(particle, particle->inst.pos, &particle->unk1B4);
+        die = Unicol_MoveActorWithCollision(particle, particle->inst.pos, &particle->unk1B4);
         if (particle->inst.unk38 & 0x1000) {
             particle->flags |= 4;
         } else {
@@ -348,20 +348,20 @@ void Particle_Update(Shared_Particle *particle) {
         }
         if (die) {
             if (D_801041F0.current != NULL) {
-                Particle_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.origin);
+                GraphU64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.origin);
             } else if (D_801041F0.unk88 != 0) {
-                Particle_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unk90);
+                GraphU64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unk90);
             } else if (D_801041F0.unk9C != 0) {
-                Particle_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkA0);
+                GraphU64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkA0);
             } else if (D_801041F0.unkB4 != 0) {
-                Particle_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkB8);
+                GraphU64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkB8);
                 if (particle->space == -7) {
                     particle->space = -3;
                 }
             } else if (D_801041F0.unkC4 != 0) {
-                Particle_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkC8);
+                GraphU64_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkC8);
             }
-            Particle_NormalizeVec3(&particle->direction);
+            GraphU64_NormalizeVec3(&particle->direction);
         }
         func_8027B428_de(particle);
         if (D_801041F0.unkC4 != 0) {
@@ -439,7 +439,7 @@ void func_8027C274_de(Shared_Particle *particle) {
         pair = *temp_v0_2;
         sound = desc->events->sounds[temp_a1];
         if (temp_a2 != 0xFFFF) {
-            System_DeliverContactEffect(particle, particle, temp_a2, -1, D_80100290, pair);
+            Events_DeliverContactEffect(particle, particle, temp_a2, -1, D_80100290, pair);
         }
         if (kind != 0xFFFF) {
             if ((particle->desc->flags & 0x10) != 0) {
@@ -457,11 +457,11 @@ void func_8027C274_de(Shared_Particle *particle) {
                           (particle->flags & 0x200006) | 1);
         }
         if (sound != 0xFFFF) {
-            Render_PlaySoundAtPosition((s16)sound, D_80100290, 0, -1);
+            SoundElement_PlaySoundAtPosition((s16)sound, D_80100290, 0, -1);
         }
     }
 skip_effects:
-    Particle_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
+    GraphU64_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
                   particle->rotationScale);
     particle->flags |= 0x400;
     if (particle->unk1B9 == 1) {
@@ -504,7 +504,7 @@ void func_8027C4F0_de(Shared_Particle *particle) {
     pair = *temp_v0_2;
     sound = desc->events->sounds[temp_a1];
     if (temp_a2 != 0xFFFF) {
-        System_DeliverContactEffect(particle, particle, temp_a2, -1, D_801002B8, pair);
+        Events_DeliverContactEffect(particle, particle, temp_a2, -1, D_801002B8, pair);
     }
     if (kind != 0xFFFF) {
         if ((particle->desc->flags & 0x10) != 0) {
@@ -522,7 +522,7 @@ void func_8027C4F0_de(Shared_Particle *particle) {
                       (particle->flags & 0x200006) | 1);
     }
     if (sound != 0xFFFF) {
-        Render_PlaySoundAtPosition((s16)sound, D_801002B8, 0, -1);
+        SoundElement_PlaySoundAtPosition((s16)sound, D_801002B8, 0, -1);
     }
     particle->flags |= 0x200;
     if ((particle->desc->flags & 0x20000) != 0) {
@@ -561,7 +561,7 @@ void func_8027C758_de(Shared_Particle *particle) {
     pair = *temp_v0_2;
     sound = desc->events->sounds[temp_a1];
     if (temp_a2 != 0xFFFF) {
-        System_DeliverContactEffect(particle, particle, temp_a2, -1, D_801002A8, pair);
+        Events_DeliverContactEffect(particle, particle, temp_a2, -1, D_801002A8, pair);
     }
     if (kind != 0xFFFF) {
         if ((particle->desc->flags & 0x10) != 0) {
@@ -579,9 +579,9 @@ void func_8027C758_de(Shared_Particle *particle) {
                       (particle->flags & 0x200006) | 1);
     }
     if (sound != 0xFFFF) {
-        Render_PlaySoundAtPosition((s16)sound, D_801002A8, 0, -1);
+        SoundElement_PlaySoundAtPosition((s16)sound, D_801002A8, 0, -1);
     }
-    Particle_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
+    GraphU64_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
                   particle->rotationScale);
     particle->flags |= 0x200;
     if (particle->unk1BA == 1) {
@@ -616,7 +616,7 @@ void func_8027C9CC_de(Shared_Particle *particle) {
     pair = *temp_v0_2;
     sound = desc->events->sounds[temp_a1];
     if (temp_a2 != 0xFFFF) {
-        System_DeliverContactEffect(particle, particle, temp_a2, -1, D_801002A8, pair);
+        Events_DeliverContactEffect(particle, particle, temp_a2, -1, D_801002A8, pair);
     }
     if (kind != 0xFFFF) {
         if ((particle->desc->flags & 0x10) != 0) {
@@ -634,9 +634,9 @@ void func_8027C9CC_de(Shared_Particle *particle) {
                       (particle->flags & 0x200006) | 1);
     }
     if (sound != 0xFFFF) {
-        Render_PlaySoundAtPosition((s16)sound, D_801002A8, 0, -1);
+        SoundElement_PlaySoundAtPosition((s16)sound, D_801002A8, 0, -1);
     }
-    Particle_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
+    GraphU64_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
                   particle->rotationScale);
     particle->flags |= 0x200;
     if (particle->unk1BA == 1) {
@@ -717,7 +717,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "lw         $a1, 0x0($s0)\n"
         "lw         $v0, 0xB8($s1)\n"
         "sll        $a1, $a1, 6\n"
-        "jal        Rsp_ConvertMatrixToFloat\n"
+        "jal        GraphU64_ConvertMatrixToFloat\n"
         "addu      $a1, $v0, $a1\n"
         "lw         $v0, 0x100($s1)\n"
         "lui        $v1, (0x1000000 >> 16)\n"
@@ -794,7 +794,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "addiu      $a0, $sp, 0xB8\n"
         "lui        $a1, %hi(D_801001F8)\n"
         "addiu      $a1, $a1, %lo(D_801001F8)\n"
-        "jal        Particle_TransformPoint\n"
+        "jal        GraphU64_TransformPoint\n"
         "addiu     $a2, $s2, 0x50\n"
         "lui        $t3, %hi(D_801042C8)\n"
         "addiu      $t3, $t3, %lo(D_801042C8)\n"
@@ -804,11 +804,11 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "sw         $t0, 0xF8($sp)\n"
         "sw         $t1, 0xFC($sp)\n"
         "sw         $t2, 0x100($sp)\n"
-        "jal        Particle_NormalizeVec3\n"
+        "jal        GraphU64_NormalizeVec3\n"
         "addiu     $a0, $sp, 0xF8\n"
         "addiu      $a0, $sp, 0xB8\n"
         "addiu      $a1, $sp, 0xF8\n"
-        "jal        Particle_TransformDirection\n"
+        "jal        GraphU64_TransformDirection\n"
         "addiu     $a2, $s2, 0x1C\n"
         "lw         $v0, 0x5C($s2)\n"
         "lui        $v1, (0x10000 >> 16)\n"
@@ -835,7 +835,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "addu      $a0, $s2, $zero\n"
         "lui        $a0, %hi(D_801379C0)\n"
         "addiu      $a0, $a0, %lo(D_801379C0)\n"
-        "jal        Render_DetachParticleSwooshes\n"
+        "jal        Fx_DetachParticleSwooshes\n"
         "addu      $a1, $s2, $zero\n"
         ".Lauto_8027CED8:\n"
         "lw         $a1, 0x138($s2)\n"
@@ -843,7 +843,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "addiu     $v0, $zero, 0x5\n"
         "lui        $a0, %hi(D_8013B1A8)\n"
         "addiu      $a0, $a0, %lo(D_8013B1A8)\n"
-        "jal        Render_ReleaseLight\n"
+        "jal        DynLight_ReleaseLight\n"
         "nop\n"
         "j          .Lauto_8027CF08\n"
         "sw        $zero, 0x138($s2)\n"
@@ -952,7 +952,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "lw         $t1, 0x2C($sp)\n"
         "sw         $t0, 0x1C($sp)\n"
         "sw         $t1, 0x20($sp)\n"
-        "jal        System_DeliverContactEffect\n"
+        "jal        Events_DeliverContactEffect\n"
         "addiu     $a3, $zero, -0x1\n"
         ".Lauto_8027D078:\n"
         "addiu      $v0, $zero, 0x4\n"
@@ -1004,7 +1004,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "lw         $t2, 0x34($sp)\n"
         "sw         $t1, 0x1C($sp)\n"
         "sw         $t2, 0x20($sp)\n"
-        "jal        System_DeliverContactEffect\n"
+        "jal        Events_DeliverContactEffect\n"
         "addiu     $a3, $zero, -0x1\n"
         ".Lauto_8027D13C:\n"
         "ori        $s5, $zero, 0xFFFF\n"
@@ -1013,7 +1013,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "addu      $a0, $s2, $zero\n"
         "addu       $a1, $s0, $zero\n"
         "lw         $a3, 0x10C($sp)\n"
-        "jal        Render_SpawnChildEffect\n"
+        "jal        Particle_SpawnChildEffect\n"
         "addiu     $a2, $zero, -0x8\n"
         ".Lauto_8027D158:\n"
         "beq        $s4, $s5, .Lauto_8027D260\n"
@@ -1065,14 +1065,14 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "lw         $t2, 0x7C($sp)\n"
         "sw         $t1, 0x1C($sp)\n"
         "sw         $t2, 0x20($sp)\n"
-        "jal        System_DeliverContactEffect\n"
+        "jal        Events_DeliverContactEffect\n"
         "addiu     $a3, $zero, -0x1\n"
         ".Lauto_8027D21C:\n"
         "beq        $s4, $s5, .Lauto_8027D234\n"
         "addu      $a0, $s2, $zero\n"
         "addu       $a1, $s4, $zero\n"
         "lb         $a2, 0x1D0($s2)\n"
-        "jal        Render_SpawnChildEffect\n"
+        "jal        Particle_SpawnChildEffect\n"
         "addiu     $a3, $zero, 0x1\n"
         ".Lauto_8027D234:\n"
         "beq        $s0, $s5, .Lauto_8027D260\n"
@@ -1085,7 +1085,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "lw         $a3, 0x10($s2)\n"
         "sra        $a0, $a0, 16\n"
         ".Lauto_8027D258:\n"
-        "jal        Render_PlaySoundAtPosition\n"
+        "jal        SoundElement_PlaySoundAtPosition\n"
         "nop\n"
         ".Lauto_8027D260:\n"
         "lw         $v0, 0x5C($s2)\n"
@@ -1124,7 +1124,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "lw         $a1, %lo(D_80100204)($a1)\n"
         "lw         $v0, 0xB8($s1)\n"
         "sll        $a1, $a1, 6\n"
-        "jal        Rsp_ConvertMatrixToFloat\n"
+        "jal        GraphU64_ConvertMatrixToFloat\n"
         "addu      $a1, $v0, $a1\n"
         "addiu      $s0, $sp, 0x38\n"
         ".Lauto_8027D2FC:\n"
@@ -1147,7 +1147,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "lw         $a1, %lo(D_80100204)($a1)\n"
         "lw         $v0, 0xB8($s1)\n"
         "sll        $a1, $a1, 6\n"
-        "jal        Rsp_ConvertMatrixToFloat\n"
+        "jal        GraphU64_ConvertMatrixToFloat\n"
         "addu      $a1, $v0, $a1\n"
         ".Lauto_8027D350:\n"
         "lui        $v0, %hi(D_80103FCC)\n"
@@ -1174,7 +1174,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "addiu      $a0, $sp, 0xB8\n"
         "lui        $a1, %hi(D_801001F8)\n"
         "addiu      $a1, $a1, %lo(D_801001F8)\n"
-        "jal        Particle_TransformPoint\n"
+        "jal        GraphU64_TransformPoint\n"
         "addiu     $a2, $s1, 0x50\n"
         "lui        $t1, %hi(D_801042C8)\n"
         "addiu      $t1, $t1, %lo(D_801042C8)\n"
@@ -1184,11 +1184,11 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "sw         $t2, 0xF8($sp)\n"
         "sw         $t3, 0xFC($sp)\n"
         "sw         $t0, 0x100($sp)\n"
-        "jal        Particle_NormalizeVec3\n"
+        "jal        GraphU64_NormalizeVec3\n"
         "addiu     $a0, $sp, 0xF8\n"
         "addiu      $a0, $sp, 0xB8\n"
         "addiu      $a1, $sp, 0xF8\n"
-        "jal        Particle_TransformDirection\n"
+        "jal        GraphU64_TransformDirection\n"
         "addiu     $a2, $s1, 0x1C\n"
         "lw         $v0, 0x5C($s1)\n"
         "lui        $v1, (0x10000 >> 16)\n"
@@ -1252,18 +1252,18 @@ extern ImpactContext D_801001F8;
 extern char D_801379C0, D_8013B1A8;
 extern s32 Weapons_GetImpactSlot(void *);
 extern void Particle_UpdateMatrix(void *);
-extern void Render_DetachParticleSwooshes(void *, void *);
-extern void Render_SpawnChildEffect(void *, s32, s32, s32);
+extern void Fx_DetachParticleSwooshes(void *, void *);
+extern void Particle_SpawnChildEffect(void *, s32, s32, s32);
 #if !(defined(VERSION_DE))
 #include "FX_2/PARTICLE_LIFECYCLE.H"
 extern LiveParticle *D_8013D538;
 extern u8 D_8011026D;
 
 s32 func_8024E2C4_de(void *);
-void Rsp_ConvertMatrixToFloat(f32 *, void *);
+void GraphU64_ConvertMatrixToFloat(f32 *, void *);
 void func_80247F18_de(void *, void *, void *, CVector3, CVector3, s32);
 void func_8026EF58_de(f32 *, f32 *);
-void Particle_TransformDirection(f32 *, CVector3 *, CVector3 *);
+void GraphU64_TransformDirection(f32 *, CVector3 *, CVector3 *);
 s32 func_8024E140_de(void *);
 void PitchMatrixLocal(f32 *, f32);
 static __inline__ void attachParticle(Shared_Particle *particle, f32 *transform, s32 action) {
@@ -1275,14 +1275,14 @@ static __inline__ void attachParticle(Shared_Particle *particle, f32 *transform,
     attached=D_801041F0.current;
     if (transform) func_8026EF58_de(inverse, transform);
     else {
-        Rsp_ConvertMatrixToFloat(localTransform, &attached->drawMatrices[D_801041F0.frame]);
+        GraphU64_ConvertMatrixToFloat(localTransform, &attached->drawMatrices[D_801041F0.frame]);
         func_8026EF58_de(inverse, localTransform);
     }
     scene=&D_801041F0;
-    Particle_TransformPoint(inverse, &scene->origin, &particle->attachmentPosition);
+    GraphU64_TransformPoint(inverse, &scene->origin, &particle->attachmentPosition);
     direction=scene->direction;
-    Particle_NormalizeVec3(&direction);
-    Particle_TransformDirection(inverse, &direction, &particle->inst.velocity);
+    GraphU64_NormalizeVec3(&direction);
+    GraphU64_TransformDirection(inverse, &direction, &particle->inst.velocity);
     particle->flags|=0x10000;
     particle->target=attached;
     particle->collisionNode=D_801041F0.frame;
@@ -1316,7 +1316,7 @@ void Particle_HitTarget(void *particle) {
             if (actor->particle.inst.type==13) action=4;
             owner=D_801041F0.current;
             if (owner->flags&0x3000000) {
-                Rsp_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
+                GraphU64_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
                 hasMatrix=1;
                 if (owner->flags&0x1000000) {
                     func_80247F18_de(owner, &owner->unk170, boneMatrix, D_801041F0.origin, D_801041F0.direction, D_801041F0.frame);
@@ -1334,10 +1334,10 @@ void Particle_HitTarget(void *particle) {
                         attachParticle(&actor->particle, boneMatrix, action);
                         if (actor->particle.drawWhenHidden) {
                             Particle_UpdateMatrix(actor);
-                            Render_DetachParticleSwooshes(&D_801379C0, actor);
+                            Fx_DetachParticleSwooshes(&D_801379C0, actor);
                         }
                         handle=actor->particle.handle;
-                        if (handle) { Render_ReleaseLight(&D_8013B1A8, handle); actor->particle.handle=0; }
+                        if (handle) { DynLight_ReleaseLight(&D_8013B1A8, handle); actor->particle.handle=0; }
                     }
                 }
             }
@@ -1361,7 +1361,7 @@ void Particle_HitTarget(void *particle) {
         }
         other=source;
         if (D_800CC130[effect].flags&2) other=actor;
-        System_DeliverContactEffect(other, actor, effect, -1, D_801001F8.position, primary.words);
+        Events_DeliverContactEffect(other, actor, effect, -1, D_801001F8.position, primary.words);
     }
     if (action!=4) {
         draw=1;
@@ -1377,20 +1377,20 @@ void Particle_HitTarget(void *particle) {
                 if (D_800CC130[extraEffect].flags&4) {
                     other=source;
                     if (D_800CC130[extraEffect].flags&2) other=actor;
-                    System_DeliverContactEffect(other, actor, extraEffect, -1, D_801001F8.position, secondary.words);
+                    Events_DeliverContactEffect(other, actor, extraEffect, -1, D_801001F8.position, secondary.words);
                 }
             }
         }
     }
-    if (model!=0xffff) Render_SpawnChildEffect(actor, model, -8, enabled);
-    if (sound!=0xffff) Render_PlaySoundAtPosition((s16)sound, D_801001F8.position, 0, (s32)actor);
+    if (model!=0xffff) Particle_SpawnChildEffect(actor, model, -8, enabled);
+    if (sound!=0xffff) SoundElement_PlaySoundAtPosition((s16)sound, D_801001F8.position, 0, (s32)actor);
     if (!(actor->particle.flags&0x30000)) {
         if (actor->particle.inst.type==0x3ef && D_8013D538 && owner->bones && D_8013D538->particle.inst.type==0x41e && action!=9) {
             D_8013D538->particle.rot=D_80103FCC->point;
-            if (!hasMatrix) Rsp_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
+            if (!hasMatrix) GraphU64_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
             PitchMatrixLocal(boneMatrix, 3.141593f);
             if (D_80103FCC->current->kind==1) {
-                if (*D_80103FCC->current->category==2) Rsp_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
+                if (*D_80103FCC->current->category==2) GraphU64_ConvertMatrixToFloat(boneMatrix, &owner->bones[D_801041F0.frame]);
                 hit=D_80103FCC->current;
                 if (hit->kind==1 && (hit->flags&0x300000 || *hit->category==2)) {
                     attachParticle(&D_8013D538->particle, boneMatrix, action);
@@ -1406,9 +1406,9 @@ void Particle_HitTarget(void *particle) {
 #endif
 
 extern u32 D_801002F0;
-extern void System_SpawnImpactMark(void *, CVector3, CVector3, s32, s32);
-extern void Render_SetPlayerResetPosition(void *, CVector3 *);
-extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void Fx_SpawnImpactMark(void *, CVector3, CVector3, s32, s32);
+extern void Player_SetPlayerResetPosition(void *, CVector3 *);
+extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 /* Reacts to a particle striking the current attachment target. The target picks the impact slot (slot 5 becomes slot 4
  * and sets flag 2). Under the controlled-impact mode (D_801462E5) descriptor slot 12 or 10 fires its event, particle
@@ -1445,13 +1445,13 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
         controlledParams = controlledDesc->events->parameters[event];
         soundType = controlledDesc->events->sounds[event];
         if (eventType != 0xFFFF) {
-            System_DeliverContactEffect(particle, particle, eventType, -1, particle->inst.pos, controlledParams);
+            Events_DeliverContactEffect(particle, particle, eventType, -1, particle->inst.pos, controlledParams);
         }
         if (particleType != 0xFFFF) {
-            Render_SpawnChildEffect(particle, particleType, particle->space, 1);
+            Particle_SpawnChildEffect(particle, particleType, particle->space, 1);
         }
         if (soundType != 0xFFFF) {
-            Render_PlaySoundAtPosition(soundType, particle->inst.pos, 0, -1);
+            SoundElement_PlaySoundAtPosition(soundType, particle->inst.pos, 0, -1);
         }
     } else {
         switch (hit) {
@@ -1459,7 +1459,7 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
         case 2:
         case 3:
             if (desc->flags & 0x800000) {
-                System_SpawnImpactMark(&D_801379C0, D_801001F8.position, D_801001F8.normal, hit, 0);
+                Fx_SpawnImpactMark(&D_801379C0, D_801001F8.position, D_801001F8.normal, hit, 0);
             }
             break;
         }
@@ -1468,7 +1468,7 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
                 particle->flags |= 0x20000;
                 particle->inst.pos = D_801001F8.position;
                 particle->inst.velocity = D_801042C8;
-                Render_SetPlayerResetPosition(particle->owner->player, &particle->inst.pos);
+                Player_SetPlayerResetPosition(particle->owner->player, &particle->inst.pos);
             } else {
                 particle->life = 1;
             }
@@ -1480,17 +1480,17 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
             particle->inst.velocity = D_801042C8;
             if (particle->drawWhenHidden) {
                 Particle_UpdateMatrix(particle);
-                Render_DetachParticleSwooshes(&D_801379C0, particle);
+                Fx_DetachParticleSwooshes(&D_801379C0, particle);
             }
             if (particle->handle) {
-                Render_ReleaseLight(&D_8013B1A8, particle->handle);
+                DynLight_ReleaseLight(&D_8013B1A8, particle->handle);
                 particle->handle = 0;
             }
         }
         normal = D_801001F8.normal;
-        Particle_NormalizeVec3(&normal.x);
-        Particle_ScaleVector(&normal, &normal, 1.024f);
-        Particle_AddVec3(&particle->inst.pos, &particle->inst.pos, &normal);
+        GraphU64_NormalizeVec3(&normal.x);
+        GraphU64_ScaleVector(&normal, &normal, 1.024f);
+        GraphU64_AddVec3(&particle->inst.pos, &particle->inst.pos, &normal);
         model = desc->events->particles[hit];
         effect = desc->events->effects[hit];
         params = desc->events->parameters[hit];
@@ -1500,13 +1500,13 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
             if (D_800CC130[effect].flags & 2) {
                 eventSource = particle;
             }
-            System_DeliverContactEffect(eventSource, particle, effect, -1, D_801001F8.position, params);
+            Events_DeliverContactEffect(eventSource, particle, effect, -1, D_801001F8.position, params);
         }
         if (model != 0xFFFF) {
-            Render_SpawnChildEffect(particle, model, -8, 1);
+            Particle_SpawnChildEffect(particle, model, -8, 1);
         }
         if (sound != 0xFFFF) {
-            Render_PlaySoundAtPosition(sound, D_801001F8.position, 0, (s32)particle);
+            SoundElement_PlaySoundAtPosition(sound, D_801001F8.position, 0, (s32)particle);
         }
         if (particle->flags & 0x30000) {
             return;

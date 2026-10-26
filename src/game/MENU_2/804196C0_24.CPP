@@ -22,7 +22,7 @@
 
 
 
-extern NodeMenuCreateOverlayNode *Scene_AllocateMemory(s32 size);
+extern NodeMenuCreateOverlayNode *Cache_AllocateMemory(s32 size);
 
 
 extern void func_8040EDE4_de(NodeMenuCreateOverlayNode *parent, NodeMenuCreateOverlayNode *node);
@@ -73,15 +73,15 @@ extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape
 
 extern void Frontend_DrawVisibleSiblings(void *, Args);
 
-void Menu_RegisterOverlayClass(void) {
+void SmpOverlay_RegisterOverlayClass(void) {
     func_802982C4_de(0x7D5, D_0041B970, D_0041BA00, 3);
 }
 
-NodeMenuCreateOverlayNode *Menu_CreateOverlayNode(OwnerRecAt44 *owner, s32 value) {
+NodeMenuCreateOverlayNode *SmpOverlay_CreateOverlayNode(OwnerRecAt44 *owner, s32 value) {
     NodeMenuCreateOverlayNode *node;
 
-    node = Scene_AllocateMemory(0x70);
-    Resmgr_FillBytes(node, 0, 0x70);
+    node = Cache_AllocateMemory(0x70);
+    XPlus_FillBytes(node, 0, 0x70);
     *(Header44 *)node = *(Header44 *)owner->root;
     node->kind = 0x7D5;
     node->flags = 8;
@@ -93,7 +93,7 @@ NodeMenuCreateOverlayNode *Menu_CreateOverlayNode(OwnerRecAt44 *owner, s32 value
     return owner->overlay = node;
 }
 
-void Menu_ShowSlotById(OwnerRecAt8V1 *owner, s32 index, s32 id) {
+void SmpOverlay_ShowSlotById(OwnerRecAt8V1 *owner, s32 index, s32 id) {
     sm_dlmultiuser *context;
     NodeMenuShowSlotById *node;
     s32 i;
@@ -120,7 +120,7 @@ void Menu_ShowSlotById(OwnerRecAt8V1 *owner, s32 index, s32 id) {
    the parallel array at offset 0x4C. */
 
 
-void Menu_SetSlotValue(struct SlotsRecAt5CV1 *object, s32 index, s32 value) {
+void SmpOverlay_SetSlotValue(struct SlotsRecAt5CV1 *object, s32 index, s32 value) {
     object->values[index] = value;
 }
 
@@ -144,7 +144,7 @@ s32 func_8041B7C4_de(struct SlotsRecAt5CV2 *object) {
    parallel array at offset 0x5C. */
 
 
-struct WidgetNode *Menu_GetSlotValue(struct SlotsCode804196C0 *object, s32 index) {
+struct WidgetNode *SmpOverlay_GetSlotValue(struct SlotsCode804196C0 *object, s32 index) {
     return object->values[index];
 }
 
@@ -178,7 +178,7 @@ void func_8041B828_de(sm_dlmultiuser *context, s32 index, s32 id) {
     }
 }
 
-void Menu_ShowSlotNode(sm_dlmultiuser *context, s32 index, NodeMenuShowSlotById *node) {
+void SmpOverlay_ShowSlotNode(sm_dlmultiuser *context, s32 index, NodeMenuShowSlotById *node) {
     s32 i;
 
     if (context->locked[index] == 0) {
@@ -254,7 +254,7 @@ D_800E34A8
     return 0;
 }
 
-void Menu_DrawOverlayWidget(Shared_Item *widget, Args args) {
+void SmpOverlay_DrawOverlayWidget(Shared_Item *widget, Args args) {
     Quad_func_802A1BE0_de first;
     Quad_func_802A1BE0_de basis;
     Quad_func_802A1BE0_de value;

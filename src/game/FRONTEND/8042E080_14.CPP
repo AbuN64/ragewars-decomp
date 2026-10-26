@@ -18,12 +18,12 @@ extern char g_noteInfoIntFormat[];
 #endif
 extern s32 Pak_ReadNoteInfo(s32, s32, s32 *, char *, u8 *, s32 *, char *, char *);
 extern s32 func_804057BC_de(char *, s32);
-extern void Resmgr_CopyString(char *, char *);
+extern void XPlus_CopyString(char *, char *);
 extern void func_802A0C08_de(char *, char *, ...);
 extern s32 Pak_GetFreePages(s32, s32 *);
-extern s32 Frontend_GetRecordsNoteSize(void);
-extern s32 Ovlgame_BytesToPakPages(s32);
-extern void Frontend_RefreshPlayerPanel(s32, s32);
+extern s32 PAKInterface_GetRecordsNoteSize(void);
+extern s32 Pak_BytesToPakPages(s32);
+extern void PAKInterface_RefreshPlayerPanel(s32, s32);
 extern void func_80434250_de(s32, s32);
 
 /* Builds a player's controller pak note list: each of the sixteen notes gets its name (a default when unnamed), its size and a numbered label with the extension when it has one, or empty entries once the pak cannot be read; then the free and used page counts are formatted into their menu items, and on any read failure the slot is marked failed instead of opening the note menu. */
@@ -81,14 +81,14 @@ void func_80433EA0_de(s32 player)
             if (status == 1) {
                 if (func_804057BC_de(name, 16) == 1) {
 #if defined(VERSION_EU)
-                    Resmgr_CopyString(name, ((D_800E27B4)[settings->language]));
+                    XPlus_CopyString(name, ((D_800E27B4)[settings->language]));
 #elif defined(VERSION_EU_X)
-                    Resmgr_CopyString(name, ((D_800DE03C)[settings->language]));
+                    XPlus_CopyString(name, ((D_800DE03C)[settings->language]));
 #else
-                    Resmgr_CopyString(name, (D_800D3758));
+                    XPlus_CopyString(name, (D_800D3758));
 #endif
                 }
-                Resmgr_CopyString(D_800E54A4->players[player].noteTexts[i].name, name);
+                XPlus_CopyString(D_800E54A4->players[player].noteTexts[i].name, name);
                 func_802A0C08_de(D_800E54A4->players[player].noteTexts[i].size,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800DDEC0,
@@ -113,11 +113,11 @@ controller_pak_note_label_format,
             failed = 1;
         }
 #if defined(VERSION_EU)
-        Resmgr_CopyString(D_800E54A4->players[player].noteTexts[i].name, ((D_800E1394)[settings->language]));
+        XPlus_CopyString(D_800E54A4->players[player].noteTexts[i].name, ((D_800E1394)[settings->language]));
 #elif defined(VERSION_EU_X)
-        Resmgr_CopyString(D_800E54A4->players[player].noteTexts[i].name, ((D_800DD124)[settings->language]));
+        XPlus_CopyString(D_800E54A4->players[player].noteTexts[i].name, ((D_800DD124)[settings->language]));
 #else
-        Resmgr_CopyString(D_800E54A4->players[player].noteTexts[i].name, ((char *)D_800D3250[0]));
+        XPlus_CopyString(D_800E54A4->players[player].noteTexts[i].name, ((char *)D_800D3250[0]));
 #endif
         func_802A0C08_de(D_800E54A4->players[player].noteTexts[i].size,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -149,14 +149,14 @@ g_noteInfoIntFormat,
  size);
             item->text = D_800E54A4->players[player].freeText;
             item = (Label *)func_8040EC30_de(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2D7);
-            size = Frontend_GetRecordsNoteSize();
+            size = PAKInterface_GetRecordsNoteSize();
             func_802A0C08_de(D_800E54A4->players[player].usedText,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800DDEC0,
 #else
 g_noteInfoIntFormat,
 #endif
- Ovlgame_BytesToPakPages(size));
+ Pak_BytesToPakPages(size));
             item->text = D_800E54A4->players[player].usedText;
         } else {
             failed = 1;
@@ -164,7 +164,7 @@ g_noteInfoIntFormat,
     }
     if (failed == 1) {
         D_800E54A4->players[player].state = failed;
-        Frontend_RefreshPlayerPanel(player, PAK_RESOURCE_2DB);
+        PAKInterface_RefreshPlayerPanel(player, PAK_RESOURCE_2DB);
         return;
     }
     D_800E54A4->players[player].slot = -1;

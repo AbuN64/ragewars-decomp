@@ -76,7 +76,7 @@ typedef struct ObjRecV6 ObjRecV6;
 struct SubActor;
 struct SubActor {
     char pad0[4];
-    s16 score; /* +0x04: Weapons_CheckScoreLimit tests it against the score limit */
+    s16 score; /* +0x04: Player_CheckScoreLimit tests it against the score limit */
     char pad6[0x8F - 6];
     u8 unk8F;
     u8 unk90;

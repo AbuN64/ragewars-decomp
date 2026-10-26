@@ -21,7 +21,7 @@ extern s32 D_80154100;
 
 
 /* Updates the selected menu option in response to the current input state. */
-s32 Render_IsAButtonPressed(char *);
+s32 Control_IsAButtonPressed(char *);
 
  /* extern */
  /* extern */
@@ -165,7 +165,7 @@ s32 func_8044421C_de(void) {
  case 32: D_801462C8.sceneMask=16; break;
  }
  }
- if(((s32 (*)(char *))Control_IsRightPressed)(&D_8010B0E0) || Render_IsAButtonPressed(&D_8010B0E0)) {
+ if(((s32 (*)(char *))Control_IsRightPressed)(&D_8010B0E0) || Control_IsAButtonPressed(&D_8010B0E0)) {
  switch(D_801462C8.sceneMask) {
  case 8: D_801462C8.sceneMask=16; break;
  case 16: D_801462C8.sceneMask=32; break;

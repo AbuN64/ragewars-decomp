@@ -98,7 +98,7 @@ extern s32 Pak_GetNoteGameName(s32 ch, s32 index, u8 **state);
 extern void func_80405648_de(u8 *state, u8 *name, s32 size);
 extern s32 Pak_GetFreePages(s32 ch, s32 *freeSpace);
 extern s32 Pak_CountFreeNotes(s32 ch, s32 *noteCount);
-extern u32 Ovlgame_BytesToPakPages(u32 size);
+extern u32 Pak_BytesToPakPages(u32 size);
 
 s32 Pak_EvaluateSaveChannel(void *unused, s32 ch, s32 *bestCh, s32 *bestScore) {
     u8 name[16];
@@ -121,7 +121,7 @@ s32 Pak_EvaluateSaveChannel(void *unused, s32 ch, s32 *bestCh, s32 *bestScore) {
     for (i = 0; i < 16; i++) {
         Pak_GetNoteGameName(ch, i, &state0);
         func_80405648_de(state0, name, 16);
-        if (Resmgr_CompareStrings(name, wanted) == 0) {
+        if (XPlus_CompareStrings(name, wanted) == 0) {
             found0 = 1;
             goto search1;
         }
@@ -136,7 +136,7 @@ search1:
     for (i = 0; i < 16; i++) {
         Pak_GetNoteGameName(ch, i, &state1);
         func_80405648_de(state1, name, 16);
-        if (Resmgr_CompareStrings(name, wanted) == 0) {
+        if (XPlus_CompareStrings(name, wanted) == 0) {
             found1 = 1;
             goto check;
         }
@@ -152,7 +152,7 @@ check:
     if (result == 0) {
         result = Pak_CountFreeNotes(D_800E28C8, &noteCount);
         if (result == 0) {
-            need = Ovlgame_BytesToPakPages(D_8011FECC + 0x610);
+            need = Pak_BytesToPakPages(D_8011FECC + 0x610);
             if (noteCount == 0 || freeSpace < need) {
                 if (*bestScore < need) {
                     *bestScore = need;

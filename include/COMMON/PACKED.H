@@ -14,7 +14,7 @@ struct Packed {
 
 struct Packed;
 typedef struct Packed Packed;
-/* Cached path-node plane normals (Particle_CrossVectors edge cross products). */
+/* Cached path-node plane normals (GraphU64_CrossVectors edge cross products). */
 extern CVector3 D_80115E10;
 extern CVector3 D_80115E20;
 
@@ -29,10 +29,10 @@ struct CGameRegion_t {
 
 struct CGameRegion_t;
 typedef struct CGameRegion_t CGameRegion;
-/* Cached path-node plane normal (Particle_CrossVectors edge cross product). */
+/* Cached path-node plane normal (GraphU64_CrossVectors edge cross product). */
 extern CVector3 D_80111D30;
 
-extern void Nav_DecodePackedRegion(CGameRegion *dst, Packed *src, char *base, int unused, char *extra);
+extern void Region_DecodePackedRegion(CGameRegion *dst, Packed *src, char *base, int unused, char *extra);
 
 extern float D_800C4980_de;
 
@@ -45,7 +45,7 @@ extern void func_802744AC_de(void);
 
 
 
-extern void Nav_ScaleWordsToFloats(void *arg0);
+extern void Region_ScaleWordsToFloats(void *arg0);
 
 extern float D_800C4978_de;
 

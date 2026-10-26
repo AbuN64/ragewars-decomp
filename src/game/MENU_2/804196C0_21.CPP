@@ -17,7 +17,7 @@
 #include "FRONTEND/8040B45C_33.H"
 
 /* Stores a mode at offset 0x58 of an object and plays sound 0xE77 for mode 1 or 0xE76 for mode 2
-   through Render_PlayFlatSound. */
+   through SoundElement_PlayFlatSound. */
 
 
 
@@ -28,7 +28,7 @@
 
 
 
-/* Calls Scene_FreeMemory with the arguments it was given and returns zero. */
+/* Calls Cache_FreeMemory with the arguments it was given and returns zero. */
 
 /* Allocates and zeroes a 0x58-byte record, copies the header and five-word block of the record func_8040EC30_de finds for the low half of the first argument, links the record func_8040EC30_de finds for the second into it with its halfword at 0x18, stores the third argument, and registers it through func_8040EEA4_de and func_8040EF84_de.
    Adapted from func_802A1990_de with the record size, tag 0xB63, the tail fields and the dropped func_802A1B24_de call changed. */
@@ -46,7 +46,7 @@ extern s32 GetMenuScreenOwner(void);
 extern void *Frontend_GetScreenData(s32 index);
 
 
-extern MenuSliderWidget *Scene_AllocateMemory(s32);
+extern MenuSliderWidget *Cache_AllocateMemory(s32);
 
 
 
@@ -84,10 +84,10 @@ void func_8041A430_de(struct func_8022FD9C_S4 *object, s32 mode) {
     object->modeState = mode;
     switch (mode) {
     case 1:
-        Render_PlayFlatSound(0xE77);
+        SoundElement_PlayFlatSound(0xE77);
         break;
     case 2:
-        Render_PlayFlatSound(0xE76);
+        SoundElement_PlayFlatSound(0xE76);
         break;
     }
 }
@@ -152,11 +152,11 @@ void func_8041A520_de(void *target, const char *format, ...)
 }
 
 s32 func_8041A530_de(void *arg0) {
-    Scene_FreeMemory(arg0);
+    Cache_FreeMemory(arg0);
     return 0;
 }
 
-void Menu_RegisterSliderClass(void) {
+void SmpSlider_RegisterSliderClass(void) {
     func_802982C4_de(0xB63, D_0041A724, D_0041A7B4, 3);
 }
 
@@ -168,8 +168,8 @@ MenuSliderWidget *func_8041A580_de(s32 arg0, s32 arg1, s32 arg2) {
 
     source = func_8040EC30_de(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());
-    result = Scene_AllocateMemory(0x58);
-    Resmgr_FillBytes(result, 0, 0x58);
+    result = Cache_AllocateMemory(0x58);
+    XPlus_FillBytes(result, 0, 0x58);
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB63;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
@@ -228,7 +228,7 @@ s32 func_8041A724_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return 0;
 }
 
-void Menu_DrawSliderWidget(void *widget, Args args) {
+void SmpSlider_DrawSliderWidget(void *widget, Args args) {
     Quad_func_802A1BE0_de first;
     Quad_func_802A1BE0_de basis;
     Quad_func_802A1BE0_de value;

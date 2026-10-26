@@ -14,9 +14,9 @@ typedef struct { char pad0[0x1C]; Func_8043DB50_Rec *rec; struct ControllerProfi
 extern s16 D_auto_800E1DAA[][2];
 extern u8 D_auto_800C9237[][4];
 extern u8 D_auto_800C9233[][4];
-extern s32 Render_IsAButtonPressed(struct ControllerProfile *object);
-extern void Items_StartPlayerAnimation(void *rec, s32 choice);
-extern void Render_PlayFlatSound(s32 id);
+extern s32 Control_IsAButtonPressed(struct ControllerProfile *object);
+extern void Ovlgame_StartPlayerAnimation(void *rec, s32 choice);
+extern void SoundElement_PlayFlatSound(s32 id);
 extern void Pak_AllocateMenu(s32 a, void *obj, void *res);
 extern s32 Pak_StepValue(void *obj, s32 value, s32 a, s32 b, s32 c, s32 d);
 extern void Pak_SelectPreviewModel(s32 a, s32 b, s32 c);
@@ -24,9 +24,9 @@ extern void Pak_SelectPreviewModel(s32 a, s32 b, s32 c);
 s32 func_8043DB50_de(s32 arg0, Func_8043DB50_Obj *arg1, s32 arg2) {
     Func_8043DB50_Rec *rec = arg1->rec;
     Func_8043DB50_Slot *slot = rec->slot;
-    if (Render_IsAButtonPressed(arg1->player) != 0) {
-        Items_StartPlayerAnimation(rec, slot->choice);
-        Render_PlayFlatSound(D_auto_800E1DAA[rec->style][0]);
+    if (Control_IsAButtonPressed(arg1->player) != 0) {
+        Ovlgame_StartPlayerAnimation(rec, slot->choice);
+        SoundElement_PlayFlatSound(D_auto_800E1DAA[rec->style][0]);
         Pak_AllocateMenu(arg2, arg1, D_0044FA6C);
         return 1;
     }
@@ -34,10 +34,10 @@ s32 func_8043DB50_de(s32 arg0, Func_8043DB50_Obj *arg1, s32 arg2) {
     if (Control_IsLeftPressed(arg1->player) != 0) {
         slot->choice = D_auto_800C9237[slot->choice][0];
     }
-    if (Control_IsRightPressed(arg1->player) != 0 || Render_IsAButtonPressed(arg1->player) != 0) {
+    if (Control_IsRightPressed(arg1->player) != 0 || Control_IsAButtonPressed(arg1->player) != 0) {
         slot->choice = D_auto_800C9233[slot->choice][0];
     }
-    Items_StartPlayerAnimation(rec, slot->choice);
+    Ovlgame_StartPlayerAnimation(rec, slot->choice);
     Pak_SelectPreviewModel(arg0, 0xB, slot->choice);
     return 0;
 }

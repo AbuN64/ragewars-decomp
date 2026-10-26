@@ -32,7 +32,7 @@ extern u8 *D_800D30BC[];
 extern s32 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s32);
 extern s32 Weapons_GetPlayerIndex(void *, void *);
-extern CCameraText *Camera_PostTargetedScreenMessage(void *, void *, u8 *, s32, f32);
+extern CCameraText *Sky_PostTargetedScreenMessage(void *, void *, u8 *, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
 
 #if defined(VERSION_EU_X)
@@ -54,14 +54,14 @@ static inline s32 can_fire(char *player, f32 *scale) {
     }
     ammo = Player_GetProfileAchievementFlag(&D_80102B00[((SharedPlayer *)(player))->views1C.view5D4_45.unk5D4], ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E);
     if (ammo == 0) {
-        Render_PlayFlatSound(0xD4D);
+        SoundElement_PlayFlatSound(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
 #if defined(VERSION_EU)
-            Camera_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800E0D44)[g_languageIndex]), Weapons_GetPlayerIndex(&D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800E0D44)[g_languageIndex]), Weapons_GetPlayerIndex(&D_80145040, player),
 #elif defined(VERSION_EU_X)
-            Camera_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800DCC68)[g_languageIndex]), Weapons_GetPlayerIndex(&D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800DCC68)[g_languageIndex]), Weapons_GetPlayerIndex(&D_80145040, player),
 #else
-            Camera_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, D_800D30BC[0], Weapons_GetPlayerIndex(&D_80145040, player),
+            Sky_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, D_800D30BC[0], Weapons_GetPlayerIndex(&D_80145040, player),
 #endif
                           *scale);
         }
@@ -85,7 +85,7 @@ void Weapon_UpdateForceMarkerTrigger(Shared_Actor *actor, WeaponFireState *attac
 #if defined(VERSION_EU_X)
             func_80228E60_eu(player, 0);
 #else
-            Render_ToggleForceMarker(player, 0);
+            Player_ToggleForceMarker(player, 0);
 #endif
 
             attack->alternate = 1;
@@ -96,7 +96,7 @@ void Weapon_UpdateForceMarkerTrigger(Shared_Actor *actor, WeaponFireState *attac
 #if defined(VERSION_EU_X)
             func_80228E60_eu(player, 1);
 #else
-            Render_ToggleForceMarker(player, 1);
+            Player_ToggleForceMarker(player, 1);
 #endif
 
         } else {
@@ -158,7 +158,7 @@ void Weapons_UpdateHeldFire(Shared_Actor *actor, WeaponFireState *attack) {
         } else {
             if (state->mode == 5) {
                 func_8022B00C_de(state);
-                Render_PlaySoundAtPosition(0x460, state->position, &state->position, -1);
+                SoundElement_PlaySoundAtPosition(0x460, state->position, &state->position, -1);
             }
             if (state->mode == 3 && can_fire((char *)state, &D_800C2FD0_de) != 0 && state->mode594 == 2) {
                 Weapons_RequestActorState(actor, attack, 0xB);

@@ -14,11 +14,11 @@
 #include "WORLD/8022E938.H"
 #include "WEAPONS/80213ED4.H"
 #include "RENDER_2/802192C0_3.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
-extern f32 Nav_GetTrianglePlaneHeight(void *arg0, f32 arg1, f32 arg2);
+extern f32 GraphU64_GetTrianglePlaneHeight(void *arg0, f32 arg1, f32 arg2);
 
-extern f32 Anim_GetPolygonHeight(s32, f32, f32);
+extern f32 Region_GetPolygonHeight(s32, f32, f32);
 
 extern char D_8011D8D0;
 
@@ -40,7 +40,7 @@ extern void func_80253908_de(s32 a);
 
 
 
-extern s32 Render_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
+extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 extern void func_80218464_de(void *arg0);
 
@@ -110,9 +110,9 @@ void Player_UpdateSurfaceHeightEffect(void *surface, CVector3 *arg1) {
 
     if (surface != 0 && arg1 != 0 &&
         (((Shared_Func80243A80Collision *)surface)->flags & 0x40)) {
-        first = Nav_GetTrianglePlaneHeight(surface,
+        first = GraphU64_GetTrianglePlaneHeight(surface,
             arg1->x, arg1->z);
-        amount = (f32)(s32)(first - Anim_GetPolygonHeight(surface,
+        amount = (f32)(s32)(first - Region_GetPolygonHeight(surface,
             arg1->x, arg1->z));
         if (amount < D_800C2E24_de) {
             func_8025E440_de(D_800C2E2C_de - (amount * D_800C2E28_de));
@@ -291,11 +291,11 @@ void Player_ResetMotionAndSelectIdleAnimation(ActorRecAt16E0 *arg0)
 void Player_ReleasePlayerResource(ResourceLoadState *resourceLoadState) {
     s32 handle;
 
-    Render_SetControllerMode(0);
+    Control_SetControllerMode(0);
     func_80253908_de(0);
     handle = resourceLoadState->handle;
     if (handle != 0) {
-        Scene_ReleaseResource(0, handle);
+        Cache_ReleaseResource(0, handle);
         resourceLoadState->handle = 0;
         resourceLoadState->state4 = 0;
         resourceLoadState->state8 = 0;
@@ -313,17 +313,17 @@ void Player_RespawnFragTagPlayer(void *player) {
     mode = D_801462C8.counters.m_nFragTagSkin;
     switch (mode) {
     case 0:
-        Render_PlaySoundAtPosition(0x18A1,
+        SoundElement_PlaySoundAtPosition(0x18A1,
                       ((Shared_ActorView *)player)->position.vector,
                       (s32)((char *)player + 8), -1);
         break;
     case 1:
-        Render_PlaySoundAtPosition(0x1969,
+        SoundElement_PlaySoundAtPosition(0x1969,
                       ((Shared_ActorView *)player)->position.vector,
                       (s32)((char *)player + 8), -1);
         break;
     case 2:
-        Render_PlaySoundAtPosition(0x1905,
+        SoundElement_PlaySoundAtPosition(0x1905,
                       ((Shared_ActorView *)player)->position.vector,
                       (s32)((char *)player + 8), -1);
         break;
@@ -331,7 +331,7 @@ void Player_RespawnFragTagPlayer(void *player) {
     func_80218464_de((char *)player + 0x938);
     ((ActorRecAt16E0 *)player)->unk_0x11B4 = 0;
     Weapons_RequestActorState(&((Shared_ActorView *)player)->weapon, &((Shared_ActorView *)player)->weapon.behaviorFlags, 1);
-    Render_PlacePlayerAtSpawnPoint(player, ((Shared_ActorView *)player)->spawn, 0, 1);
+    Player_PlacePlayerAtSpawnPoint(player, ((Shared_ActorView *)player)->spawn, 0, 1);
     Weapons_InitializePlayerHealth(player);
 }
 

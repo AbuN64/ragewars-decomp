@@ -38,7 +38,7 @@ void func_802947C8_de(void *arg0, s32 arg1) {
     s32 selectionValues;
 
     selectionValues = arg1;
-    if (Items_FindPlacedObjectsByKey(&g_world, -1, selectionValues, &spawn, 1) == 0) {
+    if (OvlScene_FindPlacedObjectsByKey(&g_world, -1, selectionValues, &spawn, 1) == 0) {
         selectionValues = 0;
     }
     object->phase = 2;
@@ -55,7 +55,7 @@ void func_80294848_de(s32 arg0) {
     Weapons_GetFirstPlayer(&D_80145040);
     D_800CD784_de = 0;
     func_8028D90C_de();
-    Render_ResetPlayerItems(arg0, 0x82);
+    SetN64_ResetPlayerItems(arg0, 0x82);
 }
 
 void func_802948C0_de(s32 session) {
@@ -91,7 +91,7 @@ void func_8029496C_de(s32 arg0) {
     Weapons_GetFirstPlayer(base - 0x1288);
     D_800CD784_de = 0;
     func_8028D90C_de();
-    Render_ResetPlayerItems(arg0, 0x82);
+    SetN64_ResetPlayerItems(arg0, 0x82);
     D_800CD780 = 1;
     D_800CD784_de = 0;
 }

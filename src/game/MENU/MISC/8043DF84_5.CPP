@@ -29,7 +29,7 @@ extern void Pak_AllocateMenu(void *arg0, void *arg1, void *arg2);
 
 extern s32 D_800E28C0;
 
-extern void Render_EnableControllerPak(s32 kind);
+extern void Control_EnableControllerPak(s32 kind);
 
 /* Returns whether any of the words at offsets 0x28, 0x1C and 0x20 of D_801468A0 is set. */
 
@@ -88,11 +88,11 @@ s32 func_8043E494_de(ObjRecAt14V1 *arg0, Menu_func_8043E494_de *menu) {
 
 /** Forwards the pointed-to inner byte field on to func_80264770_de. */
 void func_8043E4E0_de(Outer8043E56C *arg0) {
-    Render_EnableControllerPak(arg0->unk20->unk4);
+    Control_EnableControllerPak(arg0->unk20->unk4);
 }
 
 void func_8043E504_de(struct Shared_PakMenu *arg0) {
-    Render_EnableControllerPak(arg0->owner->unk4);
+    Control_EnableControllerPak(arg0->owner->unk4);
     D_800E28C0 = 0;
 }
 

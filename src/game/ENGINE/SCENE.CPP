@@ -48,7 +48,7 @@
 #include "AI/NAV/80208000_8.H"
 #include "OVLGAME/8044E2B8.H"
 #include "SCHED/8023A284_29.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
+extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Unknown data types are explicit unresolved contracts, never guessed s32. */
 
@@ -57,11 +57,11 @@ extern void Nav_AssignPlatformEndpoints();
 extern s32 Nav_FindNearestPointIndex();
 extern void * Weapons_GetPlayerByIndex();
 extern void Camera_UpdateViewportLayoutAndBounds();
-extern int Camera_IsSequenceActive();
+extern int Cinema_IsSequenceActive();
 extern void func_80246E44_de();
 extern void func_8024B2D0_de();
 extern void func_8024BE3C_de();
-extern struct Shape_typemap_165 * Scene_AllocateResource();
+extern struct Shape_typemap_165 * Cache_AllocateResource();
 extern void func_80253908_de();
 extern s32 func_80254284_de();
 extern void **func_80254408_de(s32 arg0, void *handle, s32 arg2, s32 tempv0, void *world, void *arg5, void *arg6);
@@ -76,7 +76,7 @@ extern void func_8028D64C_de();
 extern void func_8028D888_de();
 extern void func_8028D90C_de();
 extern void func_8028DA74_de();
-extern int Render_GetDirectoryEntry();
+extern int SetN64_GetDirectoryEntry();
 extern s32 func_802A01E8_de();
 extern s32 func_802AA730_de();
 extern void func_802AA760_de();
@@ -87,9 +87,9 @@ extern void func_8044ADF0_de();
 extern void func_8044B0E0_de();
 extern void Items_InitEntryBatch();
 extern void Items_InitSlotPool();
-extern void Items_LoadSceneLight();
-extern void Items_FreeSceneResources();
-extern void Items_UpdatePendingObjects();
+extern void OvlScene_LoadSceneLight();
+extern void OvlScene_FreeSceneResources();
+extern void OvlScene_UpdatePendingObjects();
 extern void func_8044D668_de();
 extern void Ovlgame_InitEffectPool();
 extern void func_8044DF60_de();
@@ -256,7 +256,7 @@ void func_80286AA8_de(void *table, s32 target, s32 arg2) {
         func_8044D794_de(table);
     }
     (((struct SharedRecAt1B92C *)(table))->unk1B6AC) = 0;
-    if ((Camera_IsSequenceActive() == 0) && (var_s5 != 0) && ((((struct SharedRecAt1B92C *)(table))->unk1B41C) != 0) && (D_801462C8.counters.transitionActive == 0)) {
+    if ((Cinema_IsSequenceActive() == 0) && (var_s5 != 0) && ((((struct SharedRecAt1B92C *)(table))->unk1B41C) != 0) && (D_801462C8.counters.transitionActive == 0)) {
         func_8028D90C_de();
         temp_v0 = (((struct SharedRecAt1B92C *)(table))->unk1B434);
         if ((u32) (temp_v0 - 0xBC2) < 0x15FU) {
@@ -270,7 +270,7 @@ void func_80286AA8_de(void *table, s32 target, s32 arg2) {
     func_8028DA74_de(table);
     func_80253908_de(0);
     if ((((struct SharedRecAt1B92C *)(table))->unk1B40C) != -1) {
-        Items_FreeSceneResources(table);
+        OvlScene_FreeSceneResources(table);
     }
     func_80253908_de(0);
     D_800CD730 = 0;
@@ -409,10 +409,10 @@ scene_size_done:
         count += 0x200;
     }
     func_80253908_de(0);
-    temp_v0_4 = Scene_AllocateResource(0, count << 6, 3, &s_matricesText);
+    temp_v0_4 = Cache_AllocateResource(0, count << 6, 3, &s_matricesText);
     (((struct SharedRecAt1B92C *)(table))->unkE8) = (void *)temp_v0_4;
     Items_InitEntryBatch(&((struct SharedRecAt1B92C *)table)->address128, temp_v0_4->field_0, count);
-    resourceKey = Render_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->unk4C), (((struct SharedRecAt1B92C *)(table))->unk1C), var_s6);
+    resourceKey = SetN64_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->unk4C), (((struct SharedRecAt1B92C *)(table))->unk1C), var_s6);
     (((struct SharedRecAt1B92C *)(table))->unkB8) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->sceneResources, resourceKey, g_levelIndexText);
     temp_v0_6 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 1, resourceKey, table, &D_0044C3D4, &s_collisionText);
     (((struct SharedRecAt1B92C *)(table))->unkBC) = temp_v0_6;
@@ -420,17 +420,17 @@ scene_size_done:
     temp_v0_7 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 4, resourceKey, table, &D_00285160, &D_800C5128_de);
     (((struct SharedRecAt1B92C *)(table))->unkC0) = temp_v0_7;
     (((struct SharedRecAt1B92C *)(table))->unk68) = (void *) *temp_v0_7;
-    temp_v0_8 = Render_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->sceneResources), resourceKey, 5);
+    temp_v0_8 = SetN64_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->sceneResources), resourceKey, 5);
     (((struct SharedRecAt1B92C *)(table))->unk30) = temp_v0_8;
     (((struct SharedRecAt1B92C *)(table))->unkC4) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->address64, temp_v0_8, &D_800C5134_de);
     if (*(((struct SharedRecAt1B92C *)(table))->sceneResources) >= 0xD) {
-        temp_v0_9 = Render_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->sceneResources), resourceKey, 0xC);
+        temp_v0_9 = SetN64_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->sceneResources), resourceKey, 0xC);
         (((struct SharedRecAt1B92C *)(table))->unk40) = temp_v0_9;
         (((struct SharedRecAt1B92C *)(table))->unk100) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->unk8C, temp_v0_9, &s_visibilityText);
         temp_v0_10 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk8C), 0, (((struct SharedRecAt1B92C *)(table))->unk40), table, 0, &D_800C5154_de);
         temp_v1_5 = *temp_v0_10;
         *(struct SharedRecAt14 *)&((struct SharedRecAt1B92C *)table)->unk1B910 = *temp_v1_5;
-        Scene_ReleaseResource(0, temp_v0_10);
+        Cache_ReleaseResource(0, temp_v0_10);
         if ((((struct SharedRecAt1B92C *)(table))->unk1B920) != 0 || (((struct SharedRecAt1B92C *)(table))->unk1B924) != 0) {
             (((struct SharedRecAt1B92C *)(table))->unk1B92C) = 1;
         } else {
@@ -444,7 +444,7 @@ scene_size_done:
     temp_v0_11 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 0, resourceKey, table, 0, &s_levelInfoText);
     (((struct SharedRecAt1B92C *)(table))->unkC8) = temp_v0_11;
     (((struct SharedRecAt1B92C *)(table))->unk1B2B0) = (void *) *temp_v0_11;
-    Items_LoadSceneLight(table);
+    OvlScene_LoadSceneLight(table);
     resource_count = *(((struct SharedRecAt1B92C *)(table))->sceneResources);
     D_800CC380 = ((u8) (((struct SharedRecAt10V2 *)(((struct SharedRecAt1B92C *)(table))->unk1B2B0))->unk10) >> 2) & 1;
     if (resource_count >= 9) {
@@ -461,7 +461,7 @@ scene_size_done:
         func_80255CA0_de(&((struct SharedRecAt1B92C *)table)->address1B500, 0xC, 0x10);
         temp_v0_16 = (((struct SharedRecAt1B92C *)(table))->unk1B4E0);
         if (temp_v0_16 > 0) {
-            record = Scene_AllocateMemory(temp_v0_16 * 0x50);
+            record = Cache_AllocateMemory(temp_v0_16 * 0x50);
             
             var_s2 = 0;
             if ((((struct SharedRecAt1B92C *)(table))->unk1B4E0) > 0) {
@@ -648,7 +648,7 @@ block_122:
         D_801462C8.counters.m_nFragTagSkin = func_802A01E8_de(var_a0_3) % 3;
     }
     (((struct SharedRecAt1B92C *)(table))->unk0) = 2;
-    Items_UpdatePendingObjects(table);
+    OvlScene_UpdatePendingObjects(table);
     temp_s4 = (((struct SharedRecAt1B92C *)(table))->unk140);
     var_s1_3 = (((struct SharedRecAt1B92C *)(table))->unk13C);
     (((struct SharedRecAt1B92C *)(table))->unk0) = 3;

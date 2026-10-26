@@ -30,7 +30,7 @@ s32 func_804235A8_eu(void) {
             return 0;
         }
         temp_s0 = D_800E2830->state3C;
-        if ((temp_s0 == 1) && (Camera_IsSequenceInWindow() == temp_s0)) {
+        if ((temp_s0 == 1) && (Cinema_IsSequenceInWindow() == temp_s0)) {
             Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->prompt), 0);
             Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->footer), 0);
             Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->rumbleIcon), 0);
@@ -64,7 +64,7 @@ block_11:
             if (temp_v0_2 <= 0) {
                 Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->marker), 1);
                 Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->pakIcon), 1);
-                Menu_StartFlicker((((Shared_OptionsScreen *)(D_800E4518))->title), 4);
+                SmpFlicker_StartFlicker((((Shared_OptionsScreen *)(D_800E4518))->title), 4);
                 finish = (Shared_OptionsScreen *)D_800E4518;
                 finish->page = 4;
                 finish->pages = 4;
@@ -110,7 +110,7 @@ block_11:
             }
             break;
         case 5:
-            Render_PlayFlatSound(0xE78);
+            SoundElement_PlayFlatSound(0xE78);
             Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->marker), 0);
             Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->pakIcon), 0);
             Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->footer), 1);

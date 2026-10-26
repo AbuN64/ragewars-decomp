@@ -8,7 +8,7 @@
 
 /* Marks a player's record as ready for the next round: clears its pending counters, and on mode 1 advances its tier, gives the newly reached tier its default entry and flags the acquired handle for the notice sent to 0xE74. */
 
-extern void *Menu_GetSlotValue(s32, s32);
+extern void *SmpOverlay_GetSlotValue(s32, s32);
 
 
 
@@ -23,7 +23,7 @@ s32 func_8042FF40_de(s32 unusedA, s32 unusedB, s32 index, s32 mode)
   void *handle;
   if ((D_800E54A4->players[slot].state) == 0xC)
   {
-    handle = Menu_GetSlotValue((s32)D_800E54A4->list, slot);
+    handle = SmpOverlay_GetSlotValue((s32)D_800E54A4->list, slot);
     D_800E54A4->players[slot].nameTimer = 0;
     D_800E54A4->players[slot].namePhase = 2;
     if (mode == 1)
@@ -39,7 +39,7 @@ s32 func_8042FF40_de(s32 unusedA, s32 unusedB, s32 index, s32 mode)
         }
       }
       ((struct Shape_typemap_21 *)(handle))->field_10 = 0xFF;
-      Render_PlayFlatSound(0xE74);
+      SoundElement_PlayFlatSound(0xE74);
     }
   }
  do { return 0; } while (0);

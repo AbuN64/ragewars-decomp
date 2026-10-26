@@ -28,14 +28,14 @@ extern s32 *func_8024BFD4_de(char *, s8);
 
 
 
-extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
-extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
+extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 
-extern void Rsp_ConvertMatrixToFloat(f32 *, char *);
+extern void GraphU64_ConvertMatrixToFloat(f32 *, char *);
 
 
-extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 extern TypeEntry *D_800CB440_de[];
@@ -43,9 +43,9 @@ extern TypeEntry *D_800CB440_de[];
 extern char *D_80140F84;
 
 
-extern void *Engine_GetActorDefinition(void *, s32);
+extern void *Scene_GetActorDefinition(void *, s32);
 
-extern s32 Render_TestActorStateBit(void *, void *);
+extern s32 Rumble_TestActorStateBit(void *, void *);
 
 extern void func_802466A0_de(void *, u16, u16, s32, void *, s32, s32, f32,
                           CVector3, u8, CVector3, CVector3, s32);
@@ -76,7 +76,7 @@ s32 func_8024B06C_de(char *obj, CVector3 point, Box70 *out) {
     if (resource == 0) {
         return 0;
     }
-    table = Render_GetPackSection(*resource, 5);
+    table = SetN64_GetPackSection(*resource, 5);
     count = table->field_4;
     bestDist = 3.4028235e38f;
     best = 0;
@@ -85,12 +85,12 @@ s32 func_8024B06C_de(char *obj, CVector3 point, Box70 *out) {
         if (box->mask & ((struct ObjectLinks180_2 *) obj)->unk_17C) {
             center = box->corners[0];
             for (j = 1; j < 8; j++) {
-                Particle_AddVec3(&center, &center, &box->corners[j]);
+                GraphU64_AddVec3(&center, &center, &box->corners[j]);
             }
-            Particle_ScaleVector(&center, &center, 0.125f);
-            Rsp_ConvertMatrixToFloat(matrix, bones + i * 0x40);
-            Particle_TransformPoint(matrix, &center, &diff);
-            Particle_SubtractVectors(&diff, &diff, &point);
+            GraphU64_ScaleVector(&center, &center, 0.125f);
+            GraphU64_ConvertMatrixToFloat(matrix, bones + i * 0x40);
+            GraphU64_TransformPoint(matrix, &center, &diff);
+            GraphU64_SubtractVectors(&diff, &diff, &point);
             dist = diff.x * diff.x + diff.y * diff.y + diff.z * diff.z;
             if (dist < bestDist) {
                 best = box;
@@ -104,7 +104,7 @@ s32 func_8024B06C_de(char *obj, CVector3 point, Box70 *out) {
             ((struct Shield *) ((char *) out))->factor = 1.0f;
         }
     }
-    Scene_UnlockResource(0, resource);
+    Cache_UnlockResource(0, resource);
     return best != 0;
 }
 
@@ -166,7 +166,7 @@ void func_8024B3A8_de(void *actorStorage, InputRecAt27 *placement, s32 mode, s32
     f32 amount;
     CVector3 zero;
 
-    resource0 = Engine_GetActorDefinition(&g_world, placement->resource22);
+    resource0 = Scene_GetActorDefinition(&g_world, placement->resource22);
     if (placement->resource20 == 0xFFFF) {
         resource1 = 0;
     } else {
@@ -176,7 +176,7 @@ void func_8024B3A8_de(void *actorStorage, InputRecAt27 *placement, s32 mode, s32
     fzero = 0.0f;
     amount = amountRaw * D_800C3B48_de[1];
     zero.x = zero.y = zero.z = fzero;
-    lookup = Render_TestActorStateBit(&g_world, actorStorage);
+    lookup = Rumble_TestActorStateBit(&g_world, actorStorage);
     func_802466A0_de(actorStorage, placement->unk1C, placement->unk1E, placement->unk0,
                   resource0, placement->unk27 == 0xFF ? -1 : placement->unk27,
                   resource1, amount, *(CVector3 *)placement->vec4, placement->unk26,

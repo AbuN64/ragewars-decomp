@@ -6,7 +6,7 @@ extern void func_8026EF58_de(f32 *out, f32 *m);
 extern f32 D_800C46C0_de;
 extern f32 D_80115DEC;
 extern f32 Math_Sqrtf(f32 value);
-extern s32 Nav_NextRandom(void);
+extern s32 GraphU64_NextRandom(void);
 extern f32 D_800C47DC_de;
 extern f32 D_800C47E4_de;
 #endif

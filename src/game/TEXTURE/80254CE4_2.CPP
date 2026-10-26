@@ -15,7 +15,7 @@ extern void osStartThread(void *thread);
 
 void func_802550F0_de(ResourceLoadWorker *worker, s32 id) {
     osCreateMesgQueue(&worker->requests, worker->messages, 0x80);
-    Resmgr_FillMemory(worker->stack, id, 0x1000);
+    XPlus_FillMemory(worker->stack, id, 0x1000);
     osCreateThread(worker, id, &D_00255280, worker,
                      worker->stack + sizeof(worker->stack), D_800CD8AC_de);
     osStartThread(worker);

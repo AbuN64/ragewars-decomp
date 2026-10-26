@@ -11,7 +11,7 @@
 #include "TYPES.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 #include "SYSTEM_2/CODE_802661FC.H"
-extern void Particle_NormalizeVec3(f32 *arg0);
+extern void GraphU64_NormalizeVec3(f32 *arg0);
 
 typedef struct DamageDefinition { s32 kind; } DamageDefinition;
 typedef struct DamageActor {
@@ -54,7 +54,7 @@ static inline s32 canDamage(DamageActor *source, DamageActor *actor) {
     }
     return 0;
 }
-s32 System_CanDamageActor(DamageActor *source, DamageActor *target) {
+s32 Events_CanDamageActor(DamageActor *source, DamageActor *target) {
     DamageActor *owner;
     DamageActor *standIn;
     if (source == target) {
@@ -178,7 +178,7 @@ static inline void applyShieldReaction(ReactionActor *target, ReactionPlayer *pl
 /* Applies a hit's reaction: a player victim gets its hit flag, the attacker's screen shake, and (when the hit is
  * absorbed) a reflect-shield spark plus sound with the impulse cancelled; walking/flying attackers then take the
  * impulse and optionally turn toward the target. */
-void System_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 absorbImpulse, CVector3 position, CVector3 impulse,
+void Events_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 absorbImpulse, CVector3 position, CVector3 impulse,
                       s32 applyTurn, ReactionShield *shield, u32 hitFlags) {
     ReactionActor *source = (ReactionActor *)sourceObject;
     ReactionActor *target = (ReactionActor *)targetObject;
@@ -189,10 +189,10 @@ void System_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 abso
         target->eventFlags |= 0x8000;
         if ((source->flags & 0x300000) && source->player->display) {
             if (target->effectFlags & 0x4000) {
-                Camera_StartScaledShake((char *)source->player->display, D_800C43C4_de,
+                Sky_StartScaledShake((char *)source->player->display, D_800C43C4_de,
                                  100.0f, D_800C43C4_de, D_800C43C0_de, 1, position);
             } else if (target->effectFlags & 0x2000) {
-                Camera_StartScaledShake((char *)source->player->display, D_800C43CC_de,
+                Sky_StartScaledShake((char *)source->player->display, D_800C43CC_de,
                                  50.0f, D_800C43CC_de, D_800C43C8_de, 1, position);
             }
         }
@@ -208,7 +208,7 @@ void System_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 abso
         }
     }
     if (source->definition->kind == 1 || source->definition->kind == 11) {
-        Particle_AddVec3(&source->velocity, &source->velocity, &impulse);
+        GraphU64_AddVec3(&source->velocity, &source->velocity, &impulse);
         if (applyTurn) {
             angle = Weapons_GetSignedAngleToPoint((Actor_func_80214624_de *)source, target->position);
             source->turn += angle * D_800C43DC_de;
@@ -223,9 +223,9 @@ extern const f32 D_800C43E0_de[16];
 /* Forwards the actor, event value and three-component input with a zero final flag. */
 extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
 extern f32 func_8024BEDC_de(void *);
-extern f32 Particle_GetActorHeight(void *);
+extern f32 GameObject_GetActorHeight(void *);
 extern s32 func_8024B06C_de(void *, CVector3, Shield *);
-extern f32 Particle_GetPointDistance(CVector3 *, CVector3 *);
+extern f32 GraphU64_GetPointDistance(CVector3 *, CVector3 *);
 extern f32 func_802672D0_de(u8 *);
 extern f32 Math_Sqrtf(f32);
 extern void Weapons_FillDamagePacket(CDamageInfo *, void *, s32, f32, s32, Shield *);
@@ -272,7 +272,7 @@ static inline s32 adjustHit(Shared_ReactionActor *target, CVector3 *position) {
                 body = (*position);
                 origin = owner->position;
                 func_80271FC8_de(&(*position), 0.75f, &body, &origin);
-                (*position).y += Particle_GetActorHeight(owner) * D_800C43E0_de[0];
+                (*position).y += GameObject_GetActorHeight(owner) * D_800C43E0_de[0];
                 adjusted = 1;
             }
         }
@@ -299,11 +299,11 @@ static inline void hitImpulse(Shared_ReactionActor *source, Shared_ReactionActor
         source->unk174 != 0 &&
 #endif
         target->category == 2) {
-        Particle_SubtractVectors(&direction, &source->position, &target->position);
+        GraphU64_SubtractVectors(&direction, &source->position, &target->position);
         distance = Math_Sqrtf(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
-        Particle_NormalizeVec3(&direction);
+        GraphU64_NormalizeVec3(&direction);
         if (!(radius <= distance)) {
-            Particle_ScaleVector(out, &direction, (f32)copied.impulse * (((radius - distance) / radius) * D_800C43E0_de[7]));
+            GraphU64_ScaleVector(out, &direction, (f32)copied.impulse * (((radius - distance) / radius) * D_800C43E0_de[7]));
         }
     }
 }
@@ -353,7 +353,7 @@ have:
         } else {
             body = self->position;
             bottom = self->position.y + self->height;
-            top = bottom + Particle_GetActorHeight(self);
+            top = bottom + GameObject_GetActorHeight(self);
             if (top < position.y) {
                 body.y = top;
             } else if (position.y < bottom) {
@@ -361,8 +361,8 @@ have:
             } else {
                 body.y = position.y;
             }
-            reach = radius + Particle_GetActorRadius(self);
-            distance = Particle_GetPointDistance(&position, &body);
+            reach = radius + GameObject_GetActorRadius(self);
+            distance = GraphU64_GetPointDistance(&position, &body);
             if (reach < distance) {
                 return 0.0f;
             }
@@ -400,7 +400,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
     if (source->flags & 0x300000) {
         attacker = source->unk1D8;
     }
-    if (System_CanDamageActor(source, target) != 0) {
+    if (Events_CanDamageActor(source, target) != 0) {
         adjusted = adjustHit(target, &position);
         radius = (f32) params.radius * D_800C43E0_de[1];
         radius *= hitSize(target);
@@ -508,7 +508,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
             }
             if (damage != 0.0f) {
                 Weapons_RunDamageHook(source, &source->unk170, &hit);
-                System_ApplyDamageReaction(source, target, adjusted, position, impulse, knockback, shield, flags);
+                Events_ApplyDamageReaction(source, target, adjusted, position, impulse, knockback, shield, flags);
             }
         }
     }
@@ -523,7 +523,7 @@ extern f32 func_8024BEDC_de(void *arg0);
 
 
 
-extern f32 Particle_GetActorHeight(void *arg0);
+extern f32 GameObject_GetActorHeight(void *arg0);
 
 /* Decides whether one actor may affect another: always when the override D_801462E5 is set; never for actors of the same kind or a target lacking flags 0x310000, nor, while D_8013B290 is set, when neither actor carries 0x300000; otherwise only when the target is in state 1, 4, 7 or 11. */
 
@@ -625,7 +625,7 @@ s32 func_80267444_de(void *levelActor, CVector3 *arg1) {
                 first = *arg1;
                 second = ((LevelActor *)actor)->position0;
                 func_80271FC8_de(arg1, 0.75f, &first, &second);
-                arg1->y += Particle_GetActorHeight(actor) * D_800C4430_de;
+                arg1->y += GameObject_GetActorHeight(actor) * D_800C4430_de;
                 result = 1;
             }
         }
@@ -665,7 +665,7 @@ s32 func_80267528_de(char *actor, char *target)
 #include "TYPES.H"
 #include "COMMON/AIPROFILE.H"
 extern f32 Math_Sqrtf(f32);
-extern void Particle_SubtractVectors(void *, void *, void *);
+extern void GraphU64_SubtractVectors(void *, void *, void *);
 typedef struct PushStrength { u16 value; u16 pad; } PushStrength;
 typedef struct PushScale { s8 value; u8 pad[3]; } PushScale;
 extern f32 D_800C4434_de;
@@ -683,11 +683,11 @@ void func_802675C8_de(struct Player *actor, u8 *other, PushStrength strength, Pu
 #else
     if (*other == 2) {
 #endif
-        Particle_SubtractVectors(&offset, &actor->pos, &((struct Player *)other)->pos);
+        GraphU64_SubtractVectors(&offset, &actor->pos, &((struct Player *)other)->pos);
         distance = Math_Sqrtf(offset.x * offset.x + offset.y * offset.y + offset.z * offset.z);
-        Particle_NormalizeVec3(&offset.x);
+        GraphU64_NormalizeVec3(&offset.x);
         if (!(radius <= distance)) {
-            Particle_ScaleVector(out, &offset, (f32)scale.value * (((radius - distance) / radius) * D_800C46E8_eu));
+            GraphU64_ScaleVector(out, &offset, (f32)scale.value * (((radius - distance) / radius) * D_800C46E8_eu));
         }
     }
 }

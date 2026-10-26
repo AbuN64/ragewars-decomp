@@ -58,16 +58,16 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *owner) {
     s32 k;
     u8 currentControllerMode;
 
-    screen = Scene_AllocateMemory(0xA80);
+    screen = Cache_AllocateMemory(0xA80);
     (*(ResultsOptionsScreen **)&D_800E4690) = screen;
     screen->root = owner;
     i = 0;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((void * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2420))) = Menu_CreateOverlayNode(owner, 4);
-    Menu_ShowSlotById(owner, 0, 0x13E);
-    Menu_ShowSlotById(owner, 1, 0x13E);
-    Menu_ShowSlotById(owner, 2, 0x13E);
-    Menu_ShowSlotById(owner, 3, 0x13E);
+    (*((void * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2420))) = SmpOverlay_CreateOverlayNode(owner, 4);
+    SmpOverlay_ShowSlotById(owner, 0, 0x13E);
+    SmpOverlay_ShowSlotById(owner, 1, 0x13E);
+    SmpOverlay_ShowSlotById(owner, 2, 0x13E);
+    SmpOverlay_ShowSlotById(owner, 3, 0x13E);
     var_a1 = 0;
     do {
         func_80265688_de((*(ResultsOptionsScreen **)&D_800E4690)->owned, var_a1, 0);
@@ -198,7 +198,7 @@ loop_7:
     if (D_801462C8.controllerMode != 2) {
         func_80427B08_de();
     }
-    Render_PlayFlatSound(0xE78);
+    SoundElement_PlayFlatSound(0xE78);
     return 0;
 }
 #undef D_800E4690

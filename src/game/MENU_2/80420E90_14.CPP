@@ -51,7 +51,7 @@ s32 func_80421AE8_de(s32 root) {
     MenuWidget *window;
 
     /* the hub's allocation helper returns its SelectionScreenState view; this unit keeps its own screen state type */
-    D_800E4450 = (struct ScreenState *) Scene_AllocateMemory(0x14);
+    D_800E4450 = (struct ScreenState *) Cache_AllocateMemory(0x14);
     func_802A2360_de();
     screen = func_8041A280_de(ID_SCREEN, ID_SCREEN_B);
     D_800E4450->screen = screen;

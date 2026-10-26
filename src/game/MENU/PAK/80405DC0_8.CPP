@@ -17,7 +17,7 @@
 #define Pak_CheckControllerPak func_80406A90_eu_x
 #endif
 /* Selects a usable Controller Pak, checks its notes and free space, and opens the appropriate prompt. */
-s32 Render_AnyControllerConnected(void);
+s32 Control_AnyControllerConnected(void);
 void func_80293268_de(s32);
 void Pak_ProbeStatus(s32);
 s32 Pak_GetStatus(s32);
@@ -26,7 +26,7 @@ int Pak_GetFreePages(int, int *);
 s32 Pak_GetNoteGameName(s32, s32, char **);
 s32 func_80405598_de(s32);
 void func_80405648_de(u8 *, u8 *, s32);
-u32 Ovlgame_BytesToPakPages(u32);
+u32 Pak_BytesToPakPages(u32);
 s32 Pak_EvaluateSaveChannel(void *, s32, s32 *, s32 *);
 void * Pak_OpenDialog(void *, void *, s32, s32, s32);
 extern s32 D_0044E4F8;
@@ -89,7 +89,7 @@ static inline s32 Pak_HasNamedNote(char *name, s32 channel) {
     for (index = 0; index < 16; index++) {
         Pak_GetNoteGameName(channel, index, &note);
         func_80405648_de((u8 *)note, text, 16);
-        if (Resmgr_CompareStrings(text, name) == 0) {
+        if (XPlus_CompareStrings(text, name) == 0) {
             return 1;
         }
     }
@@ -115,7 +115,7 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
     D_800DE874 = 0;
     D_80153784 = 0;
     D_8015375C = 1;
-    if (Render_AnyControllerConnected() == 0) {
+    if (Control_AnyControllerConnected() == 0) {
         D_80153784 = 1;
         D_8014AD9C = 0;
 #if defined(VERSION_DE)
@@ -210,8 +210,8 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
             if (error == 0) {
                 error = Pak_CountFreeNotes(D_800E28C8, &freeNotes);
                 if (error == 0) {
-                    maxBytes = Ovlgame_BytesToPakPages(D_8011FECC + sizeof(SaveSnapshot));
-                    minBytes = Ovlgame_BytesToPakPages(0x18U);
+                    maxBytes = Pak_BytesToPakPages(D_8011FECC + sizeof(SaveSnapshot));
+                    minBytes = Pak_BytesToPakPages(0x18U);
                     if (freeNotes != 0) {
                         if (freeBytes >= (s32)minBytes && freeBytes < (s32)maxBytes) {
                             D_80153784 = 1;
@@ -274,7 +274,7 @@ extern s32 Pak_GetStatus(s32 ch);
 extern s32 Pak_IsChannelReady(s32 ch);
 extern s32 func_80405598_de(s32 ch);
 extern void Pak_CreateSaveSnapshot(ObjRecAt5DC *);
-extern u32 Ovlgame_Crc32(void *data, u32 size, u32 seed);
+extern u32 Pak_Crc32(void *data, u32 size, u32 seed);
 void *Pak_OpenDialog(void *, void *, s32, s32, s32);
 /* The channel the pak menu works on: the scanned channel D_800E28C8 while D_8015375C is set, else the slot's. */
 static __inline__ void pakGetChannel(Shared_PakMenu *menu, s32 *channel) {
@@ -316,7 +316,7 @@ void Pak_BeginSnapshotSave(Shared_PakMenu *menu) {
     }
     if (!Pak_GetStatus(channel)) {
         Pak_CreateSaveSnapshot(player);
-        pakSetChecksum((s32)D_800DE868, Ovlgame_Crc32(D_800DE868, D_8011FECC + 0x60C, 11));
+        pakSetChecksum((s32)D_800DE868, Pak_Crc32(D_800DE868, D_8011FECC + 0x60C, 11));
         Pak_MarkSaveNotes(menu);
         return;
     }

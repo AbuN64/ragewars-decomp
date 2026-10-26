@@ -12,7 +12,7 @@
 #include "sdk/OS_2/802BC630_2.H"
 /* Reads the four controllers once per frame and folds them into the combined input record D_8010B0E0.
  * State 0 starts a read through the message queue, converts the pads to the four per-player input
- * records (Render_UpdateControllerInput), ORs their button words into the combined record, adds the stick
+ * records (Control_UpdateControllerInput), ORs their button words into the combined record, adds the stick
  * bytes, and rescales the combined sticks by D_800C42F0_de. States 1 and 3 restart or query the
  * controllers, state 2 does nothing. */
 extern u8 D_8010BBB8;
@@ -20,7 +20,7 @@ extern char D_8010FC00;
 extern ContPad D_8010AEA0[4];
 extern void func_802B7538_de(void *);
 extern void func_802B7740_de(void *, void *);
-void Render_ReadControllerStates(void) {
+void Control_ReadControllerStates(void) {
     ControllerProfile *summary;
     s32 i;
     f32 scale;
@@ -49,7 +49,7 @@ void Render_ReadControllerStates(void) {
         D_8010B0E0.inputHistory[2] = 0;
         summary = &D_8010B0E0;
         for (i = 0; i < 4; i++) {
-            Render_UpdateControllerInput(&D_8010F328[i], D_8010AEA0[i].stick_x, D_8010AEA0[i].stick_y,
+            Control_UpdateControllerInput(&D_8010F328[i], D_8010AEA0[i].stick_x, D_8010AEA0[i].stick_y,
                              D_8010AEA0[i].button);
             summary->connected |= D_8010F328[i].connected;
             summary->stickX += D_8010F328[i].stickX;
@@ -104,7 +104,7 @@ extern void Control_UpdateControllerRumble(void *);
 extern void func_802B74B0_de(void *);
 extern void func_802B7560_de(void *);
 
-void Render_PollControllerPaks(void) {
+void Control_PollControllerPaks(void) {
     s32 locked;
     s32 i;
 
@@ -114,7 +114,7 @@ void Render_PollControllerPaks(void) {
             D_800CBC1C = func_802BAD80_de(0);
         }
         if (locked) {
-            Render_ReadControllerStates();
+            Control_ReadControllerStates();
             for (i = 0; i < 4; i++) {
                 Control_UpdateControllerRumble(&D_8010F328[i]);
             }
@@ -169,7 +169,7 @@ void Control_TrackControllerPakChanges(void)
     }
 }
 
-extern s32 Render_InitPoolNodes(void *arg0, void *arg1, s32 arg2);
+extern s32 Rumble_InitPoolNodes(void *arg0, void *arg1, s32 arg2);
 
 
 
@@ -214,12 +214,12 @@ void Control_RefreshControllerConnection(void *arg0) {
         ((ObjectState224 *)(o))->unk_D0 = 0;
         ((ObjectState224 *)(o))->unk_D4 = 0;
         ((ObjectState224 *)(o))->unk_0 = bit2;
-        Render_InitPoolNodes(o + 0x140, o + 0x16C, 3);
+        Rumble_InitPoolNodes(o + 0x140, o + 0x16C, 3);
     }
     ((ObjectState224 *)(o))->unk_0 = bit;
 }
 
-void Render_UpdateControllerInput(ControllerProfile *state, s8 x, s8 y, u32 buttons) {
+void Control_UpdateControllerInput(ControllerProfile *state, s8 x, s8 y, u32 buttons) {
     f32 fx, fy;
     u32 old, pressed, mask;
     ControllerButtonHistory *button;

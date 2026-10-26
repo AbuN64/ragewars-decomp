@@ -29,16 +29,16 @@ extern void MatrixFromQuaternion(CQuatern *, f32 *);
 
 extern char *Weapons_FindNearestPlayer(void *, CVector3);
 
-extern f32 Particle_GetActorHeight(char *);
+extern f32 GameObject_GetActorHeight(char *);
 
-extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
-extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void MultiplyQuaternions(CQuatern *, CQuatern *, CQuatern *);
 
-extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
 CQuatern GameObject_BuildTargetAimOrientation(char *actor, CVector3 point) {
@@ -64,7 +64,7 @@ CQuatern GameObject_BuildTargetAimOrientation(char *actor, CVector3 point) {
         local.x = 0.0f;
         local.y = 0.0f;
         local.z = 1.0f;
-        Particle_TransformPoint(matrix, &local, &forward);
+        GraphU64_TransformPoint(matrix, &local, &forward);
     } else {
         forward.x = 0.0f;
         forward.y = 0.0f;
@@ -83,12 +83,12 @@ CQuatern GameObject_BuildTargetAimOrientation(char *actor, CVector3 point) {
     }
     origin = ((ActorBarrelIsTargetInViewCone *)(target))->position;
     origin.y += ((ActorBarrelIsTargetInViewCone *)(target))->eye;
-    origin.y += Particle_GetActorHeight(target) * 0.75f;
-    Particle_SubtractVectors(&dir, &origin, &point);
-    Particle_NormalizeVec3(&dir);
-    Particle_CrossVectors(&axis, &forward, &dir);
-    Particle_NormalizeVec3(&axis);
-    angle = Nav_ArcCos(forward.x * dir.x + forward.y * dir.y + forward.z * dir.z) * 0.5f;
+    origin.y += GameObject_GetActorHeight(target) * 0.75f;
+    GraphU64_SubtractVectors(&dir, &origin, &point);
+    GraphU64_NormalizeVec3(&dir);
+    GraphU64_CrossVectors(&axis, &forward, &dir);
+    GraphU64_NormalizeVec3(&axis);
+    angle = GraphU64_ArcCos(forward.x * dir.x + forward.y * dir.y + forward.z * dir.z) * 0.5f;
     scale = Math_Sinf(angle);
     turn.x = axis.x * scale;
     turn.y = axis.y * scale;
@@ -134,10 +134,10 @@ source_ready:
     up.x = 0.0f;
     up.y = D_800C3C9C_de;
     up.z = 0.0f;
-    Particle_CrossVectors(&axis, &up, &source);
-    Particle_NormalizeVec3(&axis);
+    GraphU64_CrossVectors(&axis, &up, &source);
+    GraphU64_NormalizeVec3(&axis);
 
-    angle = Nav_ArcCos((up.x * source.x) +
+    angle = GraphU64_ArcCos((up.x * source.x) +
                           (up.y * source.y) +
                           (up.z * source.z));
     angle *= D_800C3CA0_de;

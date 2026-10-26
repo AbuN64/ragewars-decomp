@@ -18,11 +18,11 @@
 #include "SCENE/802508E0_4.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern struct Shape_typemap_165 *Scene_AllocResourceBlock(s32,void *,s32);
+extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32,void *,s32);
 
 extern void func_804002D8_de(s32,CVector3 *,f32 *,Spline *);
 
-extern void Scene_ReplaceResourceBlock(s32,struct Shape_typemap_165 **,struct Shape_typemap_165 *);
+extern void Cache_ReplaceResourceBlock(s32,struct Shape_typemap_165 **,struct Shape_typemap_165 *);
 
 /* The pack append API tests the second ABI word for a nonzero preparation flag. */
 static inline char *packAppend(Pack *pack,void *prepare,s32 size) { return func_802610F0_de(pack,(s32)prepare,size); }
@@ -31,9 +31,9 @@ static inline s32 splineRecordSize(s32 left,s32 right) { s32 a=left*9,b=right*9;
 
 extern char g_cinemaDirectoryText[];
 
-extern s32 Render_LocatePackSection(void *,s32,s32,s32 *);
+extern s32 SetN64_LocatePackSection(void *,s32,s32,s32 *);
 
-extern void Scene_UnlockResource(void *,Node80253610 *);
+extern void Cache_UnlockResource(void *,Node80253610 *);
 
 static inline void minTime(f32 *dest,f32 *src) {
     if(*dest>*src)*dest=*src;
@@ -58,27 +58,27 @@ void func_8040067C_de(s32 unused, struct Shape_typemap_165 **handle) {
     SplineSourceCursor p,q,r,s;
     s32 count, i, size, sa, sb, sc, np, nr, byteP, byteR;
     void *dp, *dr;
-    if (!Render_UnpackResource((void **)handle, 1)) return;
+    if (!PpDecom_UnpackResource((void **)handle, 1)) return;
     source = (*handle)->pack;
-    parts = Render_GetPackSection(source, 0);
-    a = Render_GetPackSection(source, 1);
-    b = Render_GetPackSection(source, 2);
-    c = Render_GetPackSection(source, 3);
+    parts = SetN64_GetPackSection(source, 0);
+    a = SetN64_GetPackSection(source, 1);
+    b = SetN64_GetPackSection(source, 2);
+    c = SetN64_GetPackSection(source, 3);
     count = parts->count;
     size = (count * 4 + 15) & ~7;
     for (i = 0; i < parts->count; i++) {
         SplineSource *firstP,*firstR;
         void *firstPart;
         s32 byteP,byteR;
-        firstPart = Render_GetPackSection(parts, i);
-        firstP = Render_GetPackSection(firstPart, 0);
-        firstR = Render_GetPackSection(firstPart, 2);
+        firstPart = SetN64_GetPackSection(parts, i);
+        firstP = SetN64_GetPackSection(firstPart, 0);
+        firstR = SetN64_GetPackSection(firstPart, 2);
         size += splineRecordSize(firstP->count,firstR->count);
     }
     sc = func_8028FEB8_de(c);
     sa = func_8028FEB8_de(a);
     sb = func_8028FEB8_de(b);
-    output = Scene_AllocResourceBlock(0, handle, size + sa + sb + sc + 24);
+    output = Cache_AllocResourceBlock(0, handle, size + sa + sb + sc + 24);
     if (output == 0) return;
     pack = output->pack;
     func_802610A8_de(pack, 4);
@@ -90,18 +90,18 @@ void func_8040067C_de(s32 unused, struct Shape_typemap_165 **handle) {
     for (i = 0; i < count; i++) {
         s32 byteP,byteR;
         SplineSource *sizeP,*sizeR;
-        part = Render_GetPackSection(parts, i);
-        sizeP = Render_GetPackSection(part, 0);
-        sizeR = Render_GetPackSection(part, 2);
+        part = SetN64_GetPackSection(parts, i);
+        sizeP = SetN64_GetPackSection(part, 0);
+        sizeR = SetN64_GetPackSection(part, 2);
         byteP = sizeP->count * 9;
         byteR = sizeR->count * 9;
         dest = (void *)packAppend(table, 0, (byteR + byteP)*4 + 48);
         func_802610A8_de(dest, 3);
-        p.header = Render_GetPackSection(part, 0);
-        q.header = Render_GetPackSection(part, 1);
-        r.header = Render_GetPackSection(part, 2);
-        s.header = Render_GetPackSection(part, 3);
-        extra = Render_GetPackSection(part, 4);
+        p.header = SetN64_GetPackSection(part, 0);
+        q.header = SetN64_GetPackSection(part, 1);
+        r.header = SetN64_GetPackSection(part, 2);
+        s.header = SetN64_GetPackSection(part, 3);
+        extra = SetN64_GetPackSection(part, 4);
         np = p.header->count;
         nr = r.header->count;
         { s32 pointBytes,otherBytes;
@@ -118,7 +118,7 @@ void func_8040067C_de(s32 unused, struct Shape_typemap_165 **handle) {
         func_804002D8_de(np, p.points, q.weights, dp);
         func_804002D8_de(nr, r.points, s.weights, dr);
     }
-    Scene_ReplaceResourceBlock(0, handle, output);
+    Cache_ReplaceResourceBlock(0, handle, output);
 }
 
 s32 func_804009F4_de(s32 index) {
@@ -139,9 +139,9 @@ s32 func_804009F4_de(s32 index) {
         return 0;
     }
     else {
-        if(D_800E2830->active!=0)Camera_ReleaseSequenceContext();
-        loaded=Render_LocatePackSection(resources->trackBundle,resources->trackLookup,index+1,&size);
-        owner=Scene_RequestResource(0,loaded,loaded,size,0x33,0,D_0040067C,s_cinemaText,1);
+        if(D_800E2830->active!=0)Cinema_ReleaseSequenceContext();
+        loaded=SetN64_LocatePackSection(resources->trackBundle,resources->trackLookup,index+1,&size);
+        owner=Cache_RequestResource(0,loaded,loaded,size,0x33,0,D_0040067C,s_cinemaText,1);
         if(owner==0)goto failed;
         D_800E2830->owner=owner;
         D_800E2830->resource=*owner;
@@ -176,9 +176,9 @@ s32 func_804009F4_de(s32 index) {
         }
         setTimes(&D_800E2830->time,&D_800E2830->time20,&D_800E2830->time24,&D_800E2830->clipStart);
         previous=D_800E2830->spec.id8;
-        loaded=Render_LocatePackSection(D_8011FEFC,D_8011BDFC,0,&size2);
+        loaded=SetN64_LocatePackSection(D_8011FEFC,D_8011BDFC,0,&size2);
         if(loaded==0)table=0;
-        else table=Scene_RequestResource(0,loaded,loaded,size2,0x33,0,0,g_cinemaDirectoryText,1);
+        else table=Cache_RequestResource(0,loaded,loaded,size2,0x33,0,0,g_cinemaDirectoryText,1);
          {
             Shared_TrackTable *entries=*table;
             EntryRecAt48 *base=entries->entries;
@@ -207,7 +207,7 @@ s32 func_804009F4_de(s32 index) {
                 D_800E2830->yaw=0.0f;
             }
         }
-        Scene_UnlockResource(0,(void *)table);
+        Cache_UnlockResource(0,(void *)table);
         if(pending) {
             void (*first)();
             Shared_MenuVoidCallback second;

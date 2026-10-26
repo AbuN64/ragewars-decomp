@@ -42,7 +42,7 @@ void StaticInstance_InitializePlacedProp(void) {
         "lhu        $a1, 0xE($s2)\n"
         "lui        $a0, %hi(g_world)\n"
         "addiu      $a0, $a0, %lo(g_world)\n"
-        "jal        Engine_GetActorDefinition\n"
+        "jal        Scene_GetActorDefinition\n"
         "nop\n"
         "sw         $v0, 0x18($s1)\n"
         "addu       $a0, $v0, $zero\n"
@@ -241,7 +241,7 @@ void StaticInstance_InitializePlacedProp(void) {
         "jal        CopyMatrix\n"
         "addiu     $a1, $sp, 0x10\n"
         "addiu      $a0, $sp, 0x10\n"
-        "jal        Rsp_ConvertMatrixToFixed\n"
+        "jal        GraphU64_ConvertMatrixToFixed\n"
         "addiu     $a1, $s1, 0x28\n"
         "lw         $t0, 0x50($sp)\n"
         "lw         $t1, 0x54($sp)\n"
@@ -315,13 +315,13 @@ extern s32 InstHdr_GetActorType(PlacedProp *);
 #endif
 
 extern void InstHdr_ResetInstanceRenderIndices(PlacedProp *, PlacedPropRecord *, s32, char *);
-extern PropGeometry *Engine_GetActorDefinition(void *, s32);
+extern PropGeometry *Scene_GetActorDefinition(void *, s32);
 extern void MatrixFromQuaternion(f32 *, char *);
 extern void ScaleMatrixLocal(char *, f32, f32, f32);
 extern void TranslateMatrix(char *, f32, f32, f32);
 extern void SwapMatrixUpForward(char *);
 extern void CopyMatrix(char *, char *);
-extern void Rsp_ConvertMatrixToFixed(char *, char *);
+extern void GraphU64_ConvertMatrixToFixed(char *, char *);
 static inline s32 StaticInstance_AdvanceResourceKey(void) {
     s32 next;
     next = D_800D0910 + 1;
@@ -343,7 +343,7 @@ void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner,
     prop->fieldAC = 0;
     prop->fieldB0 = 0;
     prop->fieldB4 = 0;
-    prop->model = Engine_GetActorDefinition(&g_world, record->model);
+    prop->model = Scene_GetActorDefinition(&g_world, record->model);
     prop->fade = 16;
     prop->fieldDC = 0;
     model = prop->model;
@@ -372,7 +372,7 @@ void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner,
         prop->fieldD4 = record->value;
     }
     CopyMatrix(prop->matrix, matrix);
-    Rsp_ConvertMatrixToFixed(matrix, prop->transform);
+    GraphU64_ConvertMatrixToFixed(matrix, prop->transform);
     prop->position = record->position;
     if (record->segment == 0xFFFF) {
         prop->segment = 0;

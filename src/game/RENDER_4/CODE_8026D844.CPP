@@ -48,19 +48,19 @@ extern s32 D_8011064C;
 
 
 
-extern s32 Render_ApplyMaterialLighting(void *matrix, void *lights, void *material);
+extern s32 Geometry_ApplyMaterialLighting(void *matrix, void *lights, void *material);
 
-extern s32 Render_SetupMaterial(void *material, s32 pass);
+extern s32 Geometry_SetupMaterial(void *material, s32 pass);
 
 
 extern ObjRecAtCV2 D_801157D8[];
 
 
-extern void Scene_LockResource(s32, s32);
+extern void Cache_LockResource(s32, s32);
 
 extern void func_8026C484_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 arg5);
 
-extern void Render_SetModePreset(s32 mode);
+extern void Geometry_SetModePreset(s32 mode);
 
 
 extern void **func_80295EAC_de(void *arg0, s32 arg1);
@@ -73,7 +73,7 @@ void func_8026D844_de(void) {
     func_8026FC9C_de(local, &D_8010C520);
 }
 
-void Render_SelectEffectModes(void) {
+void Geometry_SelectEffectModes(void) {
     if (D_800CC380 != 0 || D_80110620 != 0) {
         D_800CC384 = 0x10000;
         D_800CC388 = 0xC4000000;
@@ -91,11 +91,11 @@ void func_8026D8F8_de(void) {
     D_800CC360 = -1;
 }
 
-void Render_SetColorDither(s32 arg0) {
+void Geometry_SetColorDither(s32 arg0) {
     if (D_80110620 == 0) gDPSetColorDither(g_displayListCursor++, arg0) else gDPSetColorDither(g_displayListCursor++, G_CD_NOISE);
 }
 
-void Render_BeginModelBatch(void) {
+void Geometry_BeginModelBatch(void) {
     D_8011064C = 0;
     D_80110640 = 0;
     D_8010C578 = 0;
@@ -107,7 +107,7 @@ void Render_BeginModelBatch(void) {
     D_8010C57C = 0;
 }
 
-void Render_FlushModelBatch(void) {
+void Geometry_FlushModelBatch(void) {
     s32 temp_s0;
     s32 i;
 
@@ -117,8 +117,8 @@ void Render_FlushModelBatch(void) {
     if (D_80111310 > 0) {
         do {
             temp_s0 = D_80111318[i];
-            Scene_MarkResourceInUse(0, temp_s0);
-            Scene_UnlockResource(0, temp_s0);
+            Cache_MarkResourceInUse(0, temp_s0);
+            Cache_UnlockResource(0, temp_s0);
             i += 1;
         } while (i < D_80111310);
     }
@@ -137,24 +137,24 @@ void func_8026DA4C_de(void **resource, void *matrix, s32 segment, void *lights, 
         return;
     }
     header = *resource;
-    Scene_MarkResourceInUse(0, resource);
+    Cache_MarkResourceInUse(0, resource);
     if (segment != 0) { gSPSegment(g_displayListCursor++, 1, matrix); } else { gSPMatrix(g_displayListCursor++, matrix, G_MTX_LOAD); }
     base = textures;
     if (base == 0) {
-        base = Render_GetPackSection(header, 0);
+        base = SetN64_GetPackSection(header, 0);
     }
     gSPSegment(g_displayListCursor++, 2, (unsigned int)base);
-    parts = Render_GetPackSection(header, 2);
+    parts = SetN64_GetPackSection(header, 2);
     count = *(s32 *)parts;
     for (i = 0; i < count; i++) {
-        part = Render_GetPackSection(parts, i);
-        material = Render_GetPackSection(part, 0);
+        part = SetN64_GetPackSection(parts, i);
+        material = SetN64_GetPackSection(part, 0);
         if (i == 0) {
-            Render_ApplyMaterialLighting(matrix, lights, material);
+            Geometry_ApplyMaterialLighting(matrix, lights, material);
         }
-        if (Render_SetupMaterial(material, pass) != 0) {
+        if (Geometry_SetupMaterial(material, pass) != 0) {
             Gfx *cmd;
-            void *list = Render_GetPackSection(part, 1);
+            void *list = SetN64_GetPackSection(part, 1);
 
             cmd = g_displayListCursor++;
             gSPDisplayList(cmd, (unsigned int)list);
@@ -162,7 +162,7 @@ void func_8026DA4C_de(void **resource, void *matrix, s32 segment, void *lights, 
     }
 }
 
-void Render_QueueModelInstance(void **a, void *b, s32 c, void *d, void *e, s32 f) {
+void Geometry_QueueModelInstance(void **a, void *b, s32 c, void *d, void *e, s32 f) {
     s32 temp_v0;
     void *var_s0;
     ObjRecAtCV2 *temp_v1_2;
@@ -174,12 +174,12 @@ void Render_QueueModelInstance(void **a, void *b, s32 c, void *d, void *e, s32 f
     temp_a0 = *a;
     var_s0 = e;
     if (var_s0 == 0) {
-        var_s0 = Render_GetPackSection(temp_a0, 0);
+        var_s0 = SetN64_GetPackSection(temp_a0, 0);
     }
     if ((D_8011064C != (s32)a) || (D_8010C564 != f) || (D_80110640 == 0x20)) {
         func_8026BC60_de();
         if (D_80111310 != 0x100) {
-            Scene_LockResource(0, (s32)a);
+            Cache_LockResource(0, (s32)a);
             countp = &D_80111310;
             count = *countp;
             D_80111318[count] = (s32)a;
@@ -215,24 +215,24 @@ void func_8026DD50_de(void **resource, s32 unused, s32 matrix, s32 segment, s32 
         return;
     }
     header = *resource;
-    Scene_MarkResourceInUse(0, resource);
+    Cache_MarkResourceInUse(0, resource);
     if (segment != 0) { gSPSegment(g_displayListCursor++, 1, matrix); } else { gSPMatrix(g_displayListCursor++, matrix, G_MTX_LOAD); }
     base = textures;
     if (base == 0) {
-        base = Render_GetPackSection(header, 0);
+        base = SetN64_GetPackSection(header, 0);
     }
     gSPSegment(g_displayListCursor++, 2, (unsigned int)base);
-    parts = Render_GetPackSection(header, 2);
+    parts = SetN64_GetPackSection(header, 2);
     count = *(s32 *)parts;
     for (i = 0; i < count; i++) {
-        part = Render_GetPackSection(parts, i);
-        material = Render_GetPackSection(part, 0);
+        part = SetN64_GetPackSection(parts, i);
+        material = SetN64_GetPackSection(part, 0);
         if (i == 0) {
-            Render_ApplyMaterialLighting(matrix, lights, material);
+            Geometry_ApplyMaterialLighting(matrix, lights, material);
         }
-        if ((((unsigned char *)material)[6] & 0x38) == 0x38 && Render_SetupMaterial(material, pass) != 0) {
+        if ((((unsigned char *)material)[6] & 0x38) == 0x38 && Geometry_SetupMaterial(material, pass) != 0) {
             Gfx *cmd;
-            void *list = Render_GetPackSection(part, 1);
+            void *list = SetN64_GetPackSection(part, 1);
 
             cmd = g_displayListCursor++;
             gSPDisplayList(cmd, (unsigned int)list);
@@ -260,31 +260,31 @@ void func_8026DF7C_de(void *shared, s32 mode, void **resource, s32 matrix, s32 s
     if (D_800E28A4 - ((u32)g_displayListCursor - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
-    if (Render_SetupMaterial(shared, pass) == 0) {
+    if (Geometry_SetupMaterial(shared, pass) == 0) {
         return;
     }
     if (segment != 0) { gSPSegment(g_displayListCursor++, 1, matrix); } else { gSPMatrix(g_displayListCursor++, matrix, G_MTX_LOAD); }
     if (mode != -1) {
-        Render_SetModePreset(mode);
+        Geometry_SetModePreset(mode);
     }
-    Scene_MarkResourceInUse(0, resource);
+    Cache_MarkResourceInUse(0, resource);
     header = *resource;
     base = textures;
     if (base == 0) {
-        base = Render_GetPackSection(header, 0);
+        base = SetN64_GetPackSection(header, 0);
     }
     gSPSegment(g_displayListCursor++, 2, (unsigned int)base);
-    parts = Render_GetPackSection(header, 2);
+    parts = SetN64_GetPackSection(header, 2);
     count = *(s32 *)parts;
     for (i = 0; i < count; i++) {
-        part = Render_GetPackSection(parts, i);
-        material = Render_GetPackSection(part, 0);
+        part = SetN64_GetPackSection(parts, i);
+        material = SetN64_GetPackSection(part, 0);
         if (i == 0) {
-            Render_ApplyMaterialLighting(matrix, lights, material);
+            Geometry_ApplyMaterialLighting(matrix, lights, material);
         }
         {
             Gfx *cmd;
-            void *list = Render_GetPackSection(part, 1);
+            void *list = SetN64_GetPackSection(part, 1);
 
             cmd = g_displayListCursor++;
             gSPDisplayList(cmd, (unsigned int)list);
@@ -299,10 +299,10 @@ void func_8026E158_de(void **arg0) {
     void *rec;
     s32 result;
 
-    temp_v0 = Render_GetPackSection(*arg0, 2);
+    temp_v0 = SetN64_GetPackSection(*arg0, 2);
     count = *(s32 *)temp_v0;
     for (i = 0; i < count; i++) {
-        rec = Render_GetPackSection(Render_GetPackSection(temp_v0, i), 0);
+        rec = SetN64_GetPackSection(SetN64_GetPackSection(temp_v0, i), 0);
         if (((ResourceSectionReference *)rec)->resource == 0) {
             continue;
         }
@@ -310,6 +310,6 @@ void func_8026E158_de(void **arg0) {
         if (result == 0) {
             continue;
         }
-        Scene_UnlockResource(0, result);
+        Cache_UnlockResource(0, result);
     }
 }

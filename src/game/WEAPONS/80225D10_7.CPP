@@ -28,7 +28,7 @@
 extern Gfx *g_displayListCursor;
 extern RulesWeaponsDrawTintedPlayer D_801468A0[];
 extern s32 D_800D297C;
-extern void Render_SetCombineMode(s32);
+extern void Geometry_SetCombineMode(s32);
 extern void func_8024A3B0_de(LevelActor *, PlayerCode80225D10 *, s32, Draw *);
 
 void Weapons_DrawTintedPlayer(LevelActor *actor, s32 arg1, Draw *draw) {
@@ -39,7 +39,7 @@ void Weapons_DrawTintedPlayer(LevelActor *actor, s32 arg1, Draw *draw) {
         player = actor->controller;
         if (player != 0) {
             gDPSetRenderMode(g_displayListCursor++, 0xC4404B50, 0);
-            Render_SetCombineMode(2);
+            Geometry_SetCombineMode(2);
             if (D_801468A0->teams != 0 && player->controls->unk8F != 0) {
                 actor->team = D_801468A0->colour;
             } else {
@@ -142,7 +142,7 @@ void func_802292B8_de(void *actor) {
 
 /* Transfers a randomly selected inventory quantity into an empty recipient slot. */
 
-s32 Nav_NextRandom(); /* extern */
+s32 GraphU64_NextRandom(); /* extern */
 
 void func_80229468_de(Inventory *inventory, Receiver *receiver) {
  s32 amount;
@@ -151,11 +151,11 @@ void func_80229468_de(Inventory *inventory, Receiver *receiver) {
  void *scan;
  if (receiver->amount == 0) {
   amount=15;
-  index=Nav_NextRandom()%3;
+  index=GraphU64_NextRandom()%3;
   value=inventory->items[index];
   if(value<16) amount=value;
   if(amount==0) {
-   Nav_NextRandom();
+   GraphU64_NextRandom();
    scan=inventory;
    for(index=0;index<3;index++) {
     s16 item=inventory->items[index];
@@ -177,7 +177,7 @@ void func_80229468_de(Inventory *inventory, Receiver *receiver) {
    unlimited at 0x1450), and the message "<amount> <type name>" with a plural suffix for more than one
    is built and shown through func_8022B75C_de. */
 
-extern void Resmgr_CopyString(char *, char *);
+extern void XPlus_CopyString(char *, char *);
 extern void func_802A02E8_de(char *, char *);
 extern char *Weapon_GetIndexedTableValue(s32);
 extern void func_8022B75C_de(SharedPlayer *, char *, f32);
@@ -212,7 +212,7 @@ void Weapons_GiveAmmoWithMessage(SharedPlayer *player, s32 type, s32 amount) {
     if (amount != 0) {
         player->views5E8.view5F4_12.ammo[type] = ((player->views5E8.view5F4_12.ammo[type] + amount) < (max_ammo(player, type)) ? (player->views5E8.view5F4_12.ammo[type] + amount) : (max_ammo(player, type)));
         func_802A066C_de(amount, number);
-        Resmgr_CopyString(message, number);
+        XPlus_CopyString(message, number);
         func_802A02E8_de(message, D_800C2C50_de);
         func_802A02E8_de(message, Weapon_GetIndexedTableValue(type));
         if (amount >= 2) {

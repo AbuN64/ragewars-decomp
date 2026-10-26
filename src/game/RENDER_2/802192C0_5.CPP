@@ -21,8 +21,8 @@
 
 extern s32 D_800D297C;
 
-extern void Render_SetModePreset(s32);
-extern void Render_SetCombineMode(s32);
+extern void Geometry_SetModePreset(s32);
+extern void Geometry_SetCombineMode(s32);
 extern void func_802A5498_de(UnitMtx *, s32, s32, s32);
 
 void func_8021C698_de(PlayerCode802192C0 *player) {
@@ -34,8 +34,8 @@ void func_8021C698_de(PlayerCode802192C0 *player) {
         gSPMatrix(g_displayListCursor++, &player->views[D_800D297C], G_MTX_LOAD);
         gDPPipeSync(g_displayListCursor++);
         func_8026D8F8_de();
-        Render_SetModePreset(0xE);
-        Render_SetCombineMode(0x1C);
+        Geometry_SetModePreset(0xE);
+        Geometry_SetCombineMode(0x1C);
         red = 200;
         low = 100;
         high = 150;

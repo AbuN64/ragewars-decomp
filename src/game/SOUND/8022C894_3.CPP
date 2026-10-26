@@ -10,7 +10,7 @@
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/OBJB.H"
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
-extern void Items_ReleaseObjectHandles(ResourceHandleOwner *object);
+extern void Ovlgame_ReleaseObjectHandles(ResourceHandleOwner *object);
 
 extern s32 D_800CED30;
 
@@ -28,7 +28,7 @@ extern void Weapons_UpdateViewAngles(s32, s32, void *);
 
 
 
-extern void Fx_ClearControllerInput(void *arg0);
+extern void ContPad_ClearControllerInput(void *arg0);
 
 s32 func_80245618_de(s32, s32, s32 *);
 
@@ -39,7 +39,7 @@ void func_8022D290_de(Shared_ActorView *widget) {
     s32 clearedActorFlags;
 
     widget->unk_0x0860 = 0;
-    Items_ReleaseObjectHandles((s32) widget);
+    Ovlgame_ReleaseObjectHandles((s32) widget);
     clearedActorFlags = widget->flags & 0xFF7FFFFF;
     widget->flags = clearedActorFlags;
     widget->unk_0x001C = 0;
@@ -108,7 +108,7 @@ void func_8022D428_de(void *player) {
     Shared_ActorView *actor = player;
     if (actor->unk_0x0850 == 0) {
         if ((actor->unk_0x0664 & 0x8000) == 0) {
-            Nav_EaseValueToward(&actor->unk_0x072C, 1.308997f, 0.25f);
+            GraphU64_EaseValueToward(&actor->unk_0x072C, 1.308997f, 0.25f);
         }
         if (actor->actionTimer > D_800C2DB8_de) {
             Ovlgame_UpdateRunEndPlayer(player);
@@ -143,7 +143,7 @@ void func_8022D4BC_de(void *runEndPlayer)
     ((ObjectLinks1458_2 *)(runEndPlayer))->unk_58 = D_800C2DC0_de;
     return;
   }
-  Fx_ClearControllerInput(((Shared_ActorView *)runEndPlayer)->profile);
+  ContPad_ClearControllerInput(((Shared_ActorView *)runEndPlayer)->profile);
   ((struct IntegerState244 *) ((char *) ((ObjectLinks1458_2 *) runEndPlayer)->unk_1454))->unk_23C = 0;
   ((struct IntegerState244 *) ((char *) ((ObjectLinks1458_2 *) runEndPlayer)->unk_1454))->unk_240 = 0;
 }
@@ -161,7 +161,7 @@ void func_8022D57C_de(void *player) {
         return;
     }
     if ((actor->unk_0x0664 & 0x8000) == 0) {
-        Nav_EaseValueToward(&actor->unk_0x072C, 1.308997f, 0.25f);
+        GraphU64_EaseValueToward(&actor->unk_0x072C, 1.308997f, 0.25f);
     }
     value = actor->actionTimer;
     if (D_800C2DC4_de < value) {

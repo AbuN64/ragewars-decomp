@@ -8,7 +8,7 @@
 
 /* Builds the eight world-space corners of an object's collision box: the extents come from the shape at
  * 0x18 + 0x14 (half width and depth, or the radius for a cylinder of kind 1), grown by the optional
- * attachment's sizes from Particle_GetActorRadius, Particle_GetActorHeight and func_8024E420_de; the box is turned by the object's
+ * attachment's sizes from GameObject_GetActorRadius, GameObject_GetActorHeight and func_8024E420_de; the box is turned by the object's
  * rest matrix from 0x2A4 and its heading 0x6C composed with its orientation at 0x5C, moved to its position
  * and, for shapes flagged 1, its bottom corners are dropped to the ground height of the given floor. */
 
@@ -18,15 +18,15 @@
 
 
 
-extern f32 Particle_GetActorRadius(s32);
-extern f32 Particle_GetActorHeight(s32);
-extern f32 Sound_GetActorBaseOffset(s32);
+extern f32 GameObject_GetActorRadius(s32);
+extern f32 GameObject_GetActorHeight(s32);
+extern f32 InstHdr_GetActorBaseOffset(s32);
 
 
 extern void BuildPitchMatrix(f32 *, f32);
 extern void MultiplyQuaternions(CQuatern *, CQuatern *, CQuatern *);
 extern void MatrixFromQuaternion(CQuatern *, f32 *);
-extern void Rsp_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
+extern void GraphU64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 extern void TranslateMatrix(f32 *, f32, f32, f32);
 extern void func_80272944_de(f32 *, CVector3 *, CVector3 *, s32);
 
@@ -64,9 +64,9 @@ void func_80241950_de(char *obj, CVector3 *corners, char *floor, s32 attachment)
     anim = obj + 0x170;
     shape = (ShapeRecAt18V1 *)((u8 *)((LevelActor *)obj)->definition + 0x14);
     if (attachment != 0) {
-        grow = Particle_GetActorRadius(attachment);
-        lift = Particle_GetActorHeight(attachment);
-        extra = Sound_GetActorBaseOffset(attachment);
+        grow = GameObject_GetActorRadius(attachment);
+        lift = GameObject_GetActorHeight(attachment);
+        extra = InstHdr_GetActorBaseOffset(attachment);
     } else {
         lift = 0.0f;
         grow = 0.0f;
@@ -122,7 +122,7 @@ void func_80241950_de(char *obj, CVector3 *corners, char *floor, s32 attachment)
     yaw.w = Math_Cosf(angle);
     MultiplyQuaternions(&orient, &yaw, &((LevelActor *)obj)->rotation);
     MatrixFromQuaternion(&orient, turn);
-    Rsp_MultiplyAffineMatrices(matrix, rest, turn);
+    GraphU64_MultiplyAffineMatrices(matrix, rest, turn);
     TranslateMatrix(matrix, ((LevelActor *)obj)->position0.x, ((LevelActor *)obj)->position0.y, ((LevelActor *)obj)->position0.z);
     func_80272944_de(matrix, corners, corners, 8);
     if (shape->flags & 1) {

@@ -12,9 +12,9 @@ extern u8 D_0024B52C_us_rev1[], D_0022E0A0_us_rev1[], D_00219A40_us_rev1[], D_00
 extern u8 D_0021A2D4_us_rev1[], D_0022F5D0_us_rev1[];
 extern void func_8024B3A8_de(void *, void *, void *, s32);
 extern void Weapons_RequestActorState(void *, void *, s32);
-extern void Weapons_ApplyWeaponSwitch(void *, void *);
+extern void Weapon_ApplyWeaponSwitch(void *, void *);
 extern void Weapons_UpdatePlayerCamera(void *, void *);
-extern void Camera_UpdateSequenceTrack(void *);
+extern void Cinema_UpdateSequenceTrack(void *);
 #include "MENU/INITVIEW.H"
 /* Initialises an actor and its embedded part at 0x2E8: sets the shared table pointers and flag bits (one flag
  * depends on D_80145088.settings.local), runs the part setup calls, then copies the view's position into the actor. */
@@ -71,10 +71,10 @@ void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s
     record->selection = -1;
     record->part[1].flags &= 0xFFFEFFFF;
     Weapons_RequestActorState((actor + 0x2E8), (actor + 0x458), 0);
-    Weapons_ApplyWeaponSwitch((actor + 0x2E8), (actor + 0x458));
+    Weapon_ApplyWeaponSwitch((actor + 0x2E8), (actor + 0x458));
     Weapons_UpdatePlayerCamera(actor, actor);
     if (record->auxiliary != 0) {
-        Camera_UpdateSequenceTrack(record->auxiliary);
+        Cinema_UpdateSequenceTrack(record->auxiliary);
     }
     record->part[0].x = (record->part[0].view)->x;
     record->part[0].y = (record->part[0].view)->y;
@@ -90,12 +90,12 @@ extern char D_80102B00[];
 extern void *D_800E4680;
 extern char D_0044FC04[], D_0044FB2C[], D_0044FF80[];
 struct RespawnPlayer;
-extern s32 Render_IsSnapshotActive(void);
+extern s32 Control_IsSnapshotActive(void);
 extern void *Items_RecycleModel(void *);
 extern void func_8021836C_de(void *);
 extern void func_80218E98_de(void *);
 extern u32 Weapons_GetLevelProgress(void *, s32);
-extern void Render_ResetPlayerWeapons(struct RespawnPlayer *);
+extern void Player_ResetPlayerWeapons(struct RespawnPlayer *);
 extern void Ovlgame_ResetRespawnedPlayer(struct RespawnPlayer *);
 extern void Pak_OpenDialog(void *, void *, void *, s32, s32);
 /* Resets a player/actor record for a new run: marks it active, stores the character, picks up the HUD
@@ -119,7 +119,7 @@ void Ovlgame_ResetPlayerForRound(void *actor, s32 character) {
     unsigned long counterAddress;
     s32 openFlag = 0;
     char *globals;
-    Render_IsSnapshotActive();
+    Control_IsSnapshotActive();
     FIELD(s32, actor, 0x5D0) = 1;
     FIELD(s32, actor, 0x5E0) = character;
     if (FIELD(s32, actor, 0x1450) == 0) {
@@ -158,7 +158,7 @@ void Ovlgame_ResetPlayerForRound(void *actor, s32 character) {
         FIELD(s16, actor, 0x5EA) = 3;
     }
     FIELD(s32, actor, 0x13C8) = 0;
-    Render_ResetPlayerWeapons((struct RespawnPlayer *)actor);
+    Player_ResetPlayerWeapons((struct RespawnPlayer *)actor);
     FIELD(s32, actor, 0x670) = 0;
     FIELD(s32, actor, 0x674) = 0;
     FIELD(s32, actor, 0x86C) = -1;
@@ -218,12 +218,12 @@ INCLUDE_ASM("ovl_80400000", Ovlgame_ResetPlayerForRound);
 extern char D_800C9278_de[], D_800C92E8_de[], D_800C9358[], D_auto_800CE480[], D_800C93C8_de[];
 extern char D_auto_rodata_unresolved_800CE410_unclaimed_CF230[], D_800C942C_de[], D_800C9458[], D_800C9494_de[];
 extern u32 D_8013B2BC;
-extern void Text_LoadActorModel(void *actor);
+extern void Player_LoadActorModel(void *actor);
 extern void func_8022BB80_de(void *);
 extern void func_80426090_de(void *);
 extern void func_802AA6D0_de(void *, s32, s32);
 extern void func_8021A78C_de(void *);
-extern s32 Camera_IsSequenceActive(void);
+extern s32 Cinema_IsSequenceActive(void);
 extern void func_802458D8_de(void);
 extern void func_802458C4_de(void);
 extern void func_80278E04_de(void *, s32, void *);
@@ -237,7 +237,7 @@ void Ovlgame_InitActorHudState(void *actor) {
     char *widget;
     s32 enabled;
     if (FIELD(u8, session, 0x1D) != 0) {
-        Text_LoadActorModel(actor);
+        Player_LoadActorModel(actor);
         func_8022BB80_de(actor);
         if (FIELD(u8, FIELD(void *, actor, 0x5D8), 0x91) == 0 && FIELD(u8, session, 0xD) == 1) {
             func_80426090_de(actor);
@@ -259,7 +259,7 @@ void Ovlgame_InitActorHudState(void *actor) {
     FIELD(f32, hud, 0x98) = 0.25f;
     FIELD(f32, hud, 0xA0) = 1.5707965f;
     FIELD(s32, actor, 0x11B0) = 0;
-    Render_SetProfileMode((void *)FIELD(s32, actor, 0x698), 1);
+    Control_SetProfileMode((void *)FIELD(s32, actor, 0x698), 1);
     FIELD(s32, actor, 0x678) = 0;
     FIELD(s32, actor, 0x67C) = 0;
     FIELD(s32, actor, 0x680) = 0;
@@ -303,7 +303,7 @@ void Ovlgame_InitActorHudState(void *actor) {
     }
     func_8021A78C_de(actor);
     enabled = 0;
-    if (Camera_IsSequenceActive() == 0) {
+    if (Cinema_IsSequenceActive() == 0) {
         enabled = enabled < (u32)(D_8013B2BC ^ 0x3E7);
     }
     if (g_world.visibilityEnabled != 0) {
@@ -393,11 +393,11 @@ extern unsigned int D_800CD730;
 
 
 extern void func_8022B510_de(struct RespawnPlayer *);
-extern void Render_SetProfileMode(void *, int);
+extern void Control_SetProfileMode(void *, int);
 extern void Weapons_InitializePlayerHealth(struct RespawnPlayer *);
 extern int func_802934F8_de(void);
 
-extern void Render_ResetPlayerWeapons(struct RespawnPlayer *);
+extern void Player_ResetPlayerWeapons(struct RespawnPlayer *);
 extern void World_ResetPlayerState(void *);
 extern void Barrel_StopActorLoopingSound(LevelActor *, s32 *);
 extern void AnimPool_ReleaseSceneEffect(LevelActor *);
@@ -415,7 +415,7 @@ void Ovlgame_ResetRespawnedPlayer(struct RespawnPlayer *player) {
     func_8022B510_de(player);
     player->moving = 0;
     player->fade = D_800C2338_de;
-    Render_SetProfileMode(player->anim, 1);
+    Control_SetProfileMode(player->anim, 1);
     if (D_80145088.settings.local != 0) {
         Weapons_InitializePlayerHealth(player);
     } else {
@@ -442,7 +442,7 @@ void Ovlgame_ResetRespawnedPlayer(struct RespawnPlayer *player) {
         func_8025E11C_de(D_800CF198[player->state]);
     }
     if (isOnline()) {
-        Render_ResetPlayerWeapons(player);
+        Player_ResetPlayerWeapons(player);
     }
     player->field11B4 = 0;
     player->field11B8 = 0;

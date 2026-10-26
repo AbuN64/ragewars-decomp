@@ -27,7 +27,7 @@ extern void Weapons_UpdateViewAngles(SharedPlayer *, Body_func_80224F5C_de *, ch
 
 extern void func_802238E0_de(SharedPlayer *, Body_func_80224F5C_de *, Tuning *);
 extern void func_80218464_de(char *);
-extern s32 Render_PlaySoundAtPosition(s16, s32, s32, s32, s32, s32);
+extern s32 SoundElement_PlaySoundAtPosition(s16, s32, s32, s32, s32, s32);
 
 
 void func_80224F5C_de(SharedPlayer *player, Body_func_80224F5C_de *body) {
@@ -46,7 +46,7 @@ void func_80224F5C_de(SharedPlayer *player, Body_func_80224F5C_de *body) {
     if (!(body->flags & 0x1000) && 2.0f < player->views5E8.view658_24.swimTime) {
         func_80218464_de(player->views5E8.view938_129.strokes);
         body->stroke = 0;
-        Render_PlaySoundAtPosition(0x2DE, body->x, body->y, body->z, 0, -1);
+        SoundElement_PlaySoundAtPosition(0x2DE, body->x, body->y, body->z, 0, -1);
         player->views5E8.view840_118.surfaced = 0;
         if (body->flags & 3) {
             Weapons_SetPlayerState(player, body, 2);
@@ -71,8 +71,8 @@ void func_80224F5C_de(SharedPlayer *player, Body_func_80224F5C_de *body) {
     }
     player->views5E8.view11C4_144.soundTime += D_800D2988;
     if (5.12f < player->views5E8.view6C8_57.speed && 45.0f < player->views5E8.view11C4_144.soundTime) {
-        player->views5E8.view11C4_144.soundTime = Nav_RandomFloat(15.0f);
-        Render_PlaySoundAtPosition(D_800CE850.strokeSound, body->x, body->y, body->z, 0, -1);
-        Render_PlaySoundAtPosition(0x2E0, body->x, body->y, body->z, 0, -1);
+        player->views5E8.view11C4_144.soundTime = GraphU64_RandomFloat(15.0f);
+        SoundElement_PlaySoundAtPosition(D_800CE850.strokeSound, body->x, body->y, body->z, 0, -1);
+        SoundElement_PlaySoundAtPosition(0x2E0, body->x, body->y, body->z, 0, -1);
     }
 }

@@ -8,19 +8,19 @@
 #include "COMMON/OBJRECV5.H"
 #include "TYPES.H"
 
-extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
+extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void BuildDirectionMatrix(Matrix *, CVector3 *);
 
-extern void Particle_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
+extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
-extern void Particle_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
+extern void GraphU64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 
 extern void TranslateMatrix(Matrix *object, f32 x, f32 y, f32 z);
 
 extern void SwapMatrixUpForward(Matrix *object);
 
-extern void Rsp_ConvertMatrixToFixed(Matrix *src, void *dst);
+extern void GraphU64_ConvertMatrixToFixed(Matrix *src, void *dst);
 
 extern s32 func_8028B21C_de(struct Shared_World *arg0, s32 arg1);
 
@@ -42,7 +42,7 @@ void *func_8022B304_de(ForcePlayerList *forcePlayerList, void *position) {
         do {
             if (node->actorState != 0 &&
                 node->marker.time != 0.0f) {
-                Particle_SubtractVectors(&markerDelta, position, &node->targetPosition);
+                GraphU64_SubtractVectors(&markerDelta, position, &node->targetPosition);
                 distSq = markerDelta.x * markerDelta.x + markerDelta.y * markerDelta.y + markerDelta.z * markerDelta.z;
                 if (bestNode == 0 || distSq < bestDist) {
                     bestNode = node;
@@ -55,17 +55,17 @@ void *func_8022B304_de(ForcePlayerList *forcePlayerList, void *position) {
     return bestNode;
 }
 
-void Render_BuildForceMarkerTransform(char *actorView, s32 unused1, CVector3 *direction) {
+void Player_BuildForceMarkerTransform(char *actorView, s32 unused1, CVector3 *direction) {
     Shared_ActorView *actor = (Shared_ActorView *)actorView;
     Matrix matrix;
     CVector3 offset;
 
     BuildDirectionMatrix(&matrix, direction);
-    Particle_ScaleVector(&offset, direction, 5.12f);
-    Particle_AddVec3(&offset, &offset, &actor->targetPosition);
+    GraphU64_ScaleVector(&offset, direction, 5.12f);
+    GraphU64_AddVec3(&offset, &offset, &actor->targetPosition);
     TranslateMatrix(&matrix, offset.x, offset.y, offset.z);
     SwapMatrixUpForward(&matrix);
-    Rsp_ConvertMatrixToFixed(&matrix, actor->transform1600);
+    GraphU64_ConvertMatrixToFixed(&matrix, actor->transform1600);
 }
 
 /** Report whether the floating field at offset 0x11FC is positive. */

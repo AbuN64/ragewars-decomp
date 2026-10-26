@@ -26,7 +26,7 @@ extern u8 D_800FEC8C[];
 extern u8 D_800FEC8D[];
 
 
-extern void Menu_SelectListEntry(void *, s32);
+extern void SmpButton_SelectListEntry(void *, s32);
 
 extern void func_8041A6EC_de(void *, s32);
 
@@ -36,7 +36,7 @@ extern s32 func_8041AD04_de(void *);
 
 extern s32 func_8041A6E0_de(void *);
 
-/* Releases the object D_800E5690 holds through Scene_FreeMemory, clears D_800E5690 and returns zero. */
+/* Releases the object D_800E5690 holds through Cache_FreeMemory, clears D_800E5690 and returns zero. */
 
 
 
@@ -63,11 +63,11 @@ void func_804368F8_de(s32 entryIndex) {
     u8 *slot = &D_801462C8.playerSettings[entryIndex].slot;
 
     *slot = entryIndex;
-    Menu_SelectListEntry(D_800E5694->a, D_80102C89[entryIndex * 0x190]);
-    Menu_SelectListEntry(D_800E5694->b, D_800FEC8A[entryIndex * 0x190]);
+    SmpButton_SelectListEntry(D_800E5694->a, D_80102C89[entryIndex * 0x190]);
+    SmpButton_SelectListEntry(D_800E5694->b, D_800FEC8A[entryIndex * 0x190]);
     func_8041A6EC_de(D_800E5694->c, D_800FEC8B[entryIndex * 0x190]);
     func_8041A6EC_de(D_800E5694->d, D_800FEC8C[entryIndex * 0x190]);
-    Menu_SelectListEntry(D_800E5694->e, D_800FEC8D[entryIndex * 0x190]);
+    SmpButton_SelectListEntry(D_800E5694->e, D_800FEC8D[entryIndex * 0x190]);
 }
 
 void func_804369E8_de(s32 arg0) {
@@ -89,7 +89,7 @@ void func_804369E8_de(s32 arg0) {
 }
 
 s32 func_80436B38_de(void) {
-    Scene_FreeMemory(D_800E5690);
+    Cache_FreeMemory(D_800E5690);
     D_800E5690 = 0;
     return 0;
 }

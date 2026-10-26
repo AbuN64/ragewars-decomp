@@ -10,13 +10,13 @@
 #include "RENDER_4/8026AC38_2.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-/* Draws the parts of a model resource that the owner has enabled, when the frame command buffer still has 3000 commands free: each part material's low two bits of byte 6 pick an owner flag at 0x102 (0x100, 0x8 or 0x2, 0x80 or 0x20 by bit 4) that must be set before Render_SetupMaterial accepts the material and its display list is emitted. Adapted from func_8026DA4C_de with the owner argument and the per-material flag switch added. */
+/* Draws the parts of a model resource that the owner has enabled, when the frame command buffer still has 3000 commands free: each part material's low two bits of byte 6 pick an owner flag at 0x102 (0x100, 0x8 or 0x2, 0x80 or 0x20 by bit 4) that must be set before Geometry_SetupMaterial accepts the material and its display list is emitted. Adapted from func_8026DA4C_de with the owner argument and the per-material flag switch added. */
 
 extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
-extern void Scene_MarkResourceInUse(s32 heap, void **resource);
-extern s32 Render_ApplyMaterialLighting(s32 matrix, s32 lights, void *material);
-extern s32 Render_SetupMaterial(void *material, s32 pass);
+extern void Cache_MarkResourceInUse(s32 heap, void **resource);
+extern s32 Geometry_ApplyMaterialLighting(s32 matrix, s32 lights, void *material);
+extern s32 Geometry_SetupMaterial(void *material, s32 pass);
 
 void func_8026B9EC_de(void **resource, struct Owner104 *owner, s32 matrix, s32 segment, s32 lights, void *textures, s32 pass) {
     void *header;
@@ -32,21 +32,21 @@ void func_8026B9EC_de(void **resource, struct Owner104 *owner, s32 matrix, s32 s
         return;
     }
     header = *resource;
-    Scene_MarkResourceInUse(0, resource);
+    Cache_MarkResourceInUse(0, resource);
     if (segment != 0) { gSPSegment(g_displayListCursor++, 1, matrix); }
     else { gSPMatrix(g_displayListCursor++, matrix, G_MTX_LOAD); }
     base = textures;
     if (base == 0) {
-        base = Render_GetPackSection(header, 0);
+        base = SetN64_GetPackSection(header, 0);
     }
     gSPSegment(g_displayListCursor++, 2, (unsigned int)base);
-    parts = Render_GetPackSection(header, 2);
+    parts = SetN64_GetPackSection(header, 2);
     count = *(s32 *)parts;
     for (i = 0; i < count; i++) {
-        part = Render_GetPackSection(parts, i);
-        material = Render_GetPackSection(part, 0);
+        part = SetN64_GetPackSection(parts, i);
+        material = SetN64_GetPackSection(part, 0);
         if (i == 0) {
-            Render_ApplyMaterialLighting(matrix, lights, material);
+            Geometry_ApplyMaterialLighting(matrix, lights, material);
         }
         visible = 1;
         switch (((struct Material *)material)->flags & 3) {
@@ -78,9 +78,9 @@ void func_8026B9EC_de(void **resource, struct Owner104 *owner, s32 matrix, s32 s
             }
             break;
         }
-        if (visible && Render_SetupMaterial(material, pass) != 0) {
+        if (visible && Geometry_SetupMaterial(material, pass) != 0) {
             Gfx *cmd;
-            void *list = Render_GetPackSection(part, 1);
+            void *list = SetN64_GetPackSection(part, 1);
 
             cmd = g_displayListCursor++;
             gSPDisplayList(cmd, (unsigned int)list);
@@ -133,11 +133,11 @@ void func_8026BC60_de(void) {
     struct Shape_typemap_165 *param;
 
     if (D_80110640 != 0) {
-        list = Render_GetPackSection(*D_8011064C, 2);
+        list = SetN64_GetPackSection(*D_8011064C, 2);
         count = *list;
         for (i = 0; i < count; i++) {
-            entry = Render_GetPackSection(list, i);
-            source = Render_GetPackSection(entry, 0);
+            entry = SetN64_GetPackSection(list, i);
+            source = SetN64_GetPackSection(entry, 0);
             key = (source->id << 8) | (u8)D_8010C564;
             if (source->flags & 0x700) {
                 parent = find_node(D_8010C57C, key);
@@ -225,7 +225,7 @@ void func_8026BC60_de(void) {
                     }
                 }
             }
-            data = Render_GetPackSection(entry, 1);
+            data = SetN64_GetPackSection(entry, 1);
             for (j = 0; j < D_80110640; j++) {
                 param = &D_801157D8[j];
                 if (D_8010C570 != 500) {

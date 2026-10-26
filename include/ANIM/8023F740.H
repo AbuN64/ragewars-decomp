@@ -1,5 +1,5 @@
 #ifndef ANIM_8023F740_H
 #define ANIM_8023F740_H
 #include "COMMON/DESCRIPTORRECAT29.H"
-extern void Anim_ProcessEntityContacts(void *arg0);
+extern void InstCol_ProcessEntityContacts(void *arg0);
 #endif

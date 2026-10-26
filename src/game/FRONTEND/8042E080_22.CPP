@@ -38,9 +38,9 @@ extern void func_802A230C_de(void);
 
 
 
-extern void Resmgr_CopyString(char *, char *);
+extern void XPlus_CopyString(char *, char *);
 extern void Frontend_RequestScreenMode(s32);
-extern s32 Nav_NextRandom(void);
+extern s32 GraphU64_NextRandom(void);
 
 
 void func_8042DEA0_de(void) {
@@ -112,7 +112,7 @@ void func_8042DEA0_de(void) {
     for (i = 0; i < 4; i++) {
         status = (struct StatusRecAt95 *)(settings + 0xD0 + i * 0x96);
         if (status->joined == 1 && status->computer == 0) {
-            Resmgr_CopyString(status->name, D_80102B00[i].name);
+            XPlus_CopyString(status->name, D_80102B00[i].name);
             if (settings[0xD] != 0) {
                 status->team = 0;
             } else {
@@ -132,7 +132,7 @@ void func_8042DEA0_de(void) {
         Frontend_RequestScreenMode(config[0x580]);
     }
     if (func_8025E2C4_de() != 0) {
-        func_8025E2D4_de(Nav_NextRandom() % 4 + 0x38);
+        func_8025E2D4_de(GraphU64_NextRandom() % 4 + 0x38);
     }
 }
 

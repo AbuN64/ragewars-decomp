@@ -25,7 +25,7 @@ struct RecordCode8025A3EC {
     s16 f3A;
     char pad3C[4];
     s32 f40;
-    CVector3 position; /* +0x44, Audio_InitializeVoiceMix */
+    CVector3 position; /* +0x44, Channel_InitializeVoiceMix */
     u8 reserved50[8];
     s32 f58;
     s32 f5C;

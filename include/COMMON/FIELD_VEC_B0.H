@@ -164,7 +164,7 @@ struct Cursor802171C8 {
     u16 *cur;
 };
 
-extern s16 func_802171C8_de(Cursor802171C8 *arg0);
+extern s16 Barrel_ReadLoopingSequenceValue(Cursor802171C8 *arg0);
 
 
 

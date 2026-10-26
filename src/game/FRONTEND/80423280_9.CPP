@@ -42,7 +42,7 @@ extern s32 func_8043C308_de(void *);
 
 extern void func_802A1B24_de(void *arg0, s32 arg1);
 
-extern void Menu_SelectListEntry(void *arg0, s32 arg1);
+extern void SmpButton_SelectListEntry(void *arg0, s32 arg1);
 
 
 /* Refreshes the entry list of screen D_800E4EF0: reads the selection of its cursor at 0x20 through
@@ -57,7 +57,7 @@ extern void Menu_SelectListEntry(void *arg0, s32 arg1);
 extern void func_8041EA70_de(void);
 
 
-/* Releases the object D_800E4EF0 holds through Scene_FreeMemory, clears D_800E4EF0 and returns zero. */
+/* Releases the object D_800E4EF0 holds through Cache_FreeMemory, clears D_800E4EF0 and returns zero. */
 
 
 
@@ -124,8 +124,8 @@ void func_80429560_de(void) {
         count = D_800E4EF0->countDefault;
     }
     func_802A1B24_de(D_800E4EF0->widget34, count);
-    Menu_SelectListEntry(D_800E4EF0->selectWidget, opts->unknown28[0]);
-    Menu_SelectListEntry(D_800E4EF0->cursorWidget, func_8041E720_de());
+    SmpButton_SelectListEntry(D_800E4EF0->selectWidget, opts->unknown28[0]);
+    SmpButton_SelectListEntry(D_800E4EF0->cursorWidget, func_8041E720_de());
 }
 
 void func_80429654_de(s32 force) {
@@ -145,7 +145,7 @@ void func_80429654_de(s32 force) {
 }
 
 s32 func_804296F4_de(void) {
-    Scene_FreeMemory(D_800E4EF0);
+    Cache_FreeMemory(D_800E4EF0);
     D_800E4EF0 = 0;
     return 0;
 }

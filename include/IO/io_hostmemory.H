@@ -4,5 +4,5 @@
 extern void Libsn_FillPortBytes(s32 address, s32 value, u32 count);
 extern void Libsn_CopyPortBytes(s32 address, s32 port, s32 count);
 extern void Libsn_TransferHostMemoryRanges(u32 mode);
-extern void Io_CopyHostBlockToCart(void);
+extern void Libsn_CopyHostBlockToCart(void);
 #endif

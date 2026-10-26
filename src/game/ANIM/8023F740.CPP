@@ -20,13 +20,13 @@ s32 func_8023DAA0_de(Ray *ray, Box *box, f32 *out);
 
 void **func_8024BFD4_de(MenuPanelRoot *arg0, s32 arg1);
 
-void Rsp_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
+void GraphU64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
 
 void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
 void func_80272944_de(f32 *m, f32 *in, f32 *out, u32 count);
 
-void Scene_UnlockResource(void *arg0, Node80253610 *arg1);
+void Cache_UnlockResource(void *arg0, Node80253610 *arg1);
 
 void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *origin, Box *bounds) {
     CVector3 vertices[8];
@@ -73,7 +73,7 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
         if (!(big <= size)) {
             size = big;
         }
-        table = Render_GetPackSection(*resource, 5);
+        table = SetN64_GetPackSection(*resource, 5);
         count = table->count;
         for (i = 0; i < count; i++) {
             part = (BoxContactTransform *)((char *)table + (i * table->stride + 8));
@@ -104,7 +104,7 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
             if (bounds->min.x < box.max.x && box.min.x < bounds->max.x && bounds->min.z < box.max.z &&
                 box.min.z < bounds->max.z && bounds->min.y < box.max.y && box.min.y < bounds->max.y &&
                 func_8023DAA0_de(ray, &box, &t)) {
-                Rsp_ConvertMatrixToFloat(matrix, &actor->bones[i]);
+                GraphU64_ConvertMatrixToFloat(matrix, &actor->bones[i]);
                 if (soft) {
                     ScaleMatrixLocal(matrix, 1.5f, 1.5f, 1.5f);
                 }
@@ -112,12 +112,12 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
                 func_8023F750_de(ray, bounds, actor, origin, vertices, part, i);
             }
         }
-        Scene_UnlockResource(0, resource);
+        Cache_UnlockResource(0, resource);
         return;
     }
-    shape = Scene_RequestResource(0, actor->shapeId, actor->shapeId, actor->shapeBank, 4, 0, 0, "anim object info", 1);
+    shape = Cache_RequestResource(0, actor->shapeId, actor->shapeId, actor->shapeBank, 4, 0, 0, "anim object info", 1);
     if (shape != 0) {
-        extent = Render_GetPackSection(*shape, 0);
+        extent = SetN64_GetPackSection(*shape, 0);
         corners[0].x = extent[0];
         corners[0].y = extent[1];
         corners[0].z = extent[2];
@@ -143,7 +143,7 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
         corners[7].y = extent[4];
         corners[7].z = extent[5];
         func_80272944_de(actor->transform, corners, vertices, 8);
-        Scene_UnlockResource(0, shape);
+        Cache_UnlockResource(0, shape);
     } else {
         own = &actor->box;
         corner = vertices;
@@ -204,7 +204,7 @@ extern LevelActor **D_80103FCC;
 extern char D_002405FC[], D_00240638[];
 extern void func_802852C0_de();
 extern void func_8023F644_de(void *, void *);
-void Anim_ProcessEntityContacts(HitSelf *self) {
+void InstCol_ProcessEntityContacts(HitSelf *self) {
     HitState *state = self->state;
     u8 scratch[0x30];
     SortedCandidate list[0x20];
@@ -274,7 +274,7 @@ void Anim_ProcessEntityContacts(HitSelf *self) {
         candidate = entry->object;
         if ((candidate->flags & 0x300000) && (game = &D_801462C8)->local == 0) {
             func_8023F644_de(self, scratch);
-            Anim_TestEntityContact(self, scratch, candidate);
+            InstCol_TestEntityContact(self, scratch, candidate);
         } else {
             func_8023FD18_de(self, candidate, ownerPosition, &self->box);
         }

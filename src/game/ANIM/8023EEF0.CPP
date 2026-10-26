@@ -8,9 +8,9 @@
 #include "TYPES.H"
 
 #if !(defined(VERSION_EU))
-extern f32 Particle_GetActorRadius(void *);
-extern f32 Sound_GetActorBaseOffset(void *);
-extern f32 Particle_GetActorHeight(void *);
+extern f32 GameObject_GetActorRadius(void *);
+extern f32 InstHdr_GetActorBaseOffset(void *);
+extern f32 GameObject_GetActorHeight(void *);
 extern void func_80242550_de(void *, void *);
 extern void func_80242288_de(void *, void *);
 extern s32 func_802AB400_de(void *, void *);
@@ -30,7 +30,7 @@ static inline s8 Anim_GetSurfaceKind(LevelActor *entity) {
     return 7;
 }
 
-void Anim_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelActor *entity) {
+void InstCol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelActor *entity) {
     LevelActor *owner;
     MotionSurface *surface;
     f32 bounds[4];
@@ -51,7 +51,7 @@ void Anim_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelActor
 
     entityX = entity->position0.x;
     entityZ = entity->position0.z;
-    radius = Particle_GetActorRadius(entity);
+    radius = GameObject_GetActorRadius(entity);
     bounds[0] = entityX - radius;
     bounds[2] = entityX + radius;
     bounds[1] = entityZ - radius;
@@ -88,8 +88,8 @@ void Anim_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelActor
     contact.valid = 1;
     contact.actor = (BoxContactActor *)entity;
     contact.index = -1;
-    bottom = entity->position0.y + Sound_GetActorBaseOffset(entity);
-    top = Particle_GetActorHeight(entity) + bottom;
+    bottom = entity->position0.y + InstHdr_GetActorBaseOffset(entity);
+    top = GameObject_GetActorHeight(entity) + bottom;
     if (sweep->flag != 0) {
         normal.x = normal.z = 0.0f;
     }
@@ -162,7 +162,7 @@ typedef struct Query Query;
 /* Queries the registered entities an object may collide with: when the object's shape is enabled and is
  * not the null shape, a query holds the object's radius, its vertical span and that span offset by the
  * shape heights at 0x48 and 0x54, its horizontal bounds widened by the radius and the shape's 0x400 flag;
- * then Anim_TestEntityContact is run for every entity other than the object itself, except type 1 entities without
+ * then InstCol_TestEntityContact is run for every entity other than the object itself, except type 1 entities without
  * a body at 0x174 when the shape is flagged 1 and type 3 entities when the shape is not flagged 0x20. */
 
 
@@ -171,7 +171,7 @@ typedef struct Query Query;
 
 
 
-extern void Anim_TestEntityContact(ActorMotion *, Query *, LevelActor *);
+extern void InstCol_TestEntityContact(ActorMotion *, Query *, LevelActor *);
 
 
 
@@ -246,7 +246,7 @@ void func_8023F43C_de(char *obj) {
             }
             break;
         }
-        Anim_TestEntityContact(obj, &query, entity);
+        InstCol_TestEntityContact(obj, &query, entity);
     }
 }
 
