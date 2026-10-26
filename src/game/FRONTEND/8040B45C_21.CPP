@@ -19,10 +19,6 @@ extern s32 D_800E28D8;
 extern struct ShapeRecAt18V2 D_800DE8A8[];
 extern struct ShapeRecAt18V2 D_800DE934[];
 extern Rec_func_8024C92C_de D_800DE9C0[];
-extern char D_800E2A14;
-extern char D_800E2A18;
-extern char D_800E2A1C;
-extern char D_800E2A20;
 extern u8 D_80146848;
 static inline void set_config(int a,int b,int c,int d,int e) {
         D_800DE898 = a;

@@ -19,7 +19,7 @@ extern f32 D_800C3EE0_de;
 #include "AUDIO/8025A3EC_4.H"
 #include "AUDIO_2/8025D470_2.H"
 
-extern u32 __osDisableInt(void);
+#include "COMMON/EXTERNS_11.H"
 
 extern void func_80259440_de(void *arg0);
 extern void Audio_UpdateDialogPlayer(void *arg0);
@@ -100,7 +100,6 @@ s32 func_8025842C_de(void *context) {
     return ++((struct ContextRecAt2BC0 *)(object))->frame;
 }
 
-extern u32 __osDisableInt(void);
 extern s32 Audio_HasVoiceOrReservedSlotWithKey(void *arg0, s32 arg1);
 extern s32 func_80259AB8_de(void *arg0, s32 arg1);
 
@@ -179,7 +178,6 @@ s32 func_802585F4_de(struct ContextRecAt2BC0 *context, s32 queryValue) {
     return 0;
 }
 
-extern u32 __osDisableInt(void);
 
 
 
@@ -203,7 +201,6 @@ void func_80258740_de(s32 *engine) {
     __osRestoreInt(mask);
 }
 
-extern u32 __osDisableInt(void);
 
 
 

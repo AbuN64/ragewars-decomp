@@ -55,8 +55,7 @@ const unsigned int D_blob_713397d39e7015fa86e1[2] = {
 
 extern f32 D_800C4030_de;
 extern s32 Defs_FindSortedValue(s32, s32, s32);
-extern f32 func_802B2350(s32);
-extern f32 func_802AD520_eu(s32);
+#include "COMMON.H"
 extern f32 D_800C401C_de;
 
 void *func_8025DB80_de(Track *state, s32 index) {

@@ -20,8 +20,7 @@
 #include "stddef.h"
 #include "RENDER_4/8028FD2C_6.H"
 extern s32 Defs_FindSortedValue(s32, s32, s32);
-extern f32 func_802B2350(s32);
-extern f32 func_802AD520_eu(s32);
+#include "COMMON.H"
 extern f32 D_800C4008_de;
 
 s32 Audio_LoadMusicSequence(Track *state, s32 index) {

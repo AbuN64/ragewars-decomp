@@ -20,7 +20,7 @@
 #include "SYSTEM_3/80265370.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern u32 __osDisableInt(void);
+#include "COMMON/EXTERNS_11.H"
 
 
 

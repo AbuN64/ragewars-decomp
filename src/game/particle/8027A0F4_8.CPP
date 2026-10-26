@@ -44,9 +44,8 @@ extern void GameObject_ResetActorMotion(ParticleEffect *);
 extern f32 Rumble_SamplePackedFloatRange(CharacterScreenCell);
 
 #if defined(VERSION_EU)
-extern f32 func_802AD520_eu(s32);
+#include "COMMON.H"
 #else
-extern f32 func_802B2350(s32);
 #endif
 
 extern void func_8022B040_de(s32, ParticleEffect *);

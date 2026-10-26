@@ -24,7 +24,7 @@ extern void func_802598B4_de(ChannelSet *arg0, s32 arg1);
 
 
 
-extern u32 __osDisableInt(void);
+#include "COMMON/EXTERNS_11.H"
 
 extern void Audio_StopVoiceSlot(void *, s16);
 
@@ -108,7 +108,6 @@ extern void Audio_SetVoicePositionTracking(void *, CVector3 *, s32);
 
 extern void Audio_InitializeVoiceParameters(void *, Item57BD4 *, s32);
 extern void Audio_UpdateSoundSlot(void *, void *, s32, CVector3 *);
-extern u32 __osDisableInt(void);
 
 
 

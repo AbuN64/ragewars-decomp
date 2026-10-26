@@ -97,7 +97,7 @@ extern f32 GraphU64_GetTrianglePlaneHeight(StateFlags *, f32, f32);
 extern s32 Map_ReserveEntries(void *, s32);
 extern void Scene_SampleWorldLighting(void *, CVector3 *, u8 *);
 extern void func_802A57E0_de(Owner802A6DF8 *, Shared_PoseActor *, PoseMatrix *);
-extern u32 func_802BCF00_de(void);
+#include "COMMON/EXTERNS_11.H"
 
 static inline CVector3 randVec(void) {
     CVector3 v;

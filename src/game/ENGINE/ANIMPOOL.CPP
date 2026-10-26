@@ -15,7 +15,7 @@
 extern s32 SetN64_GetDirectoryEntry(s32, s32, s32);
 extern s32 SetN64_LocatePackSection(void *, s32, s32, s32 *);
 extern s32 Scene_GetActorDefinition(void *, s32);
-extern f32 func_802B2350(s32);
+#include "COMMON.H"
 extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 struct Shared_World;
 extern s32 Scene_FindModelIdIndex(struct Shared_World *, s32);

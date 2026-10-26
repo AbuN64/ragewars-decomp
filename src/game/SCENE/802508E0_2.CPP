@@ -26,7 +26,7 @@ extern s32 func_80255B2C_de(void *, s32);
 extern s32 D_801051A0[3];
 extern char D_80100570;
 extern ResourceCacheEntry *D_80100568;
-extern u32 __osDisableInt(void);
+#include "COMMON/EXTERNS_11.H"
 
 #include "COMMON/ENTRYRECAT18V3.H"
 /* The resource manager record at D_80100560: node array, free-slot stack, link records, lists and its lock queue.
@@ -153,7 +153,6 @@ void Cache_InitializeResourceCache(s32 unused, s32 count) {
 
 
 
-extern u32 __osDisableInt(void);
 
 
 /* Reclaims one pool node: finds the first unlocked node (none of flags 0x702) in the D_80104574 list that

@@ -3,7 +3,6 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/RECORD.H"
 
-extern s32 Cache_AllocateMemory(s32 arg0);
 
 
 s32 ESmem_AllocateFrameHeapHigh(s32 arg0) {

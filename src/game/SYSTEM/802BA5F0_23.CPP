@@ -2,6 +2,7 @@
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/UNUSED.H"
+#include "COMMON/EXTERNS_11.H"
 #include "SYSTEM/802BA5F0.H"
 #include "TYPES.H"
 #include "sdk/os.h"
@@ -12,7 +13,6 @@
 #if defined(VERSION_EU)
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-#include "COMMON/EXTERNS_11.H"
 #include "COMMON/NODERECAT1C.H"
 void osSetEventMesg(s32 event, OSMesgQueue *queue, void *message);
 s32 func_802BADA0_de(OSThread_s *thread);
@@ -73,7 +73,6 @@ extern u16 D_80148840;
 
 extern struct __OSViContext *func_802BA640_de(void);
 
-extern u32 func_802BCF00_de(void);
 extern void func_802BB8B0_de(void);
 
 static inline u16 *viRetrace(void)

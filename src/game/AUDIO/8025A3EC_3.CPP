@@ -21,8 +21,7 @@
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 struct ALSndPlayer;
 extern void func_802B2ED0_de(struct ALSndPlayer *player, short index, unsigned char value);
-extern void func_80258740_de(s32 *arg0);
-extern void func_802587A4_de(s32 *arg0);
+#include "TEXTURE/80256220_16.H"
 extern short func_8025E500_de(void *arg0);
 
 
