@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "SCENE/SIMPLE_INSTANCE_RECORD.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SCENERECAT10C0.H"
@@ -64,18 +65,6 @@ typedef struct RecordSet {
 } RecordSet;
 
 /* A simple (animated, unlit-by-grid) instance as the level resource stores it. */
-typedef struct SimpleInstanceRecord {
-    s32 visBits;
-    CVector3 position;
-    f32 maxRadius;
-    u16 type;
-    u16 region;
-    u16 flags;
-    u16 id;
-    u16 variation;
-    s8 rotY;
-    u8 pad;
-} SimpleInstanceRecord;
 
 /* A simple instance in the game: the header's position, its flags and id, and the lighting baked from the level's
  * light volumes. */

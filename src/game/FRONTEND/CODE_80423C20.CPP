@@ -15,12 +15,6 @@ INCLUDE_ASM("ovl_80400000", Frontend_InitPlayModeMenu);
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "COMMON/ALAUXBUS_S.H"
-struct CompactOptionsScreen {
-    s32 slider;
-    s32 first_list;
-    s32 second_list;
-    s32 state;
-};
 
 extern s32 D_800E4680;
 

@@ -1,6 +1,7 @@
 #include "COMMON/ACTOR_DEFINITION.H"
 #include "COMMON/MODEL_RENDER.H"
 #include "include_asm.h"
+#include "SCENE/SIMPLE_INSTANCE_RECORD.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/PROPGEOMETRY.H"
@@ -23,18 +24,6 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 void *Scene_GetActorDefinition(void *arg0, s32 arg1);
-typedef struct SimpleRecordIn {
-    s32 visBits;
-    CVector3 position;
-    f32 maxRadius;
-    u16 type;
-    u16 region;
-    u16 flags;
-    u16 id;
-    u16 variation;
-    s8 rotY;
-    u8 pad;
-} SimpleRecordIn;
 typedef struct SimpleInstanceOut {
     s8 kind;
     u8 pad1[3];
@@ -63,7 +52,7 @@ typedef struct SimpleInstanceOut {
     s32 visBits;
     s32 f1C4;
 } SimpleInstanceOut;
-void World_InitSimpleInstance(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 owner, char *segments) {
+void World_InitSimpleInstance(SimpleInstanceOut *inst, SimpleInstanceRecord *rec, s32 owner, char *segments) {
     CVector3 v;
     inst->kind = 3;
     inst->type = rec->type;
