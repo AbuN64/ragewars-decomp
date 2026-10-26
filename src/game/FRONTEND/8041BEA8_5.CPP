@@ -13,6 +13,7 @@
 #include "COMMON/NAME.H"
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
+#include "COMMON/RECORDRECATCV1.H"
 #include "FRONTEND/8041BEA8_5.H"
 #include "FRONTEND/8042E080_42.H"
 #include "FRONTEND/8040B45C_32.H"
@@ -57,11 +58,9 @@ extern s32 XStdio_FormatBuffer(void *, const char *, ...);
 
 extern s32 Pak_FindNoteByName(s32, s32, s32 *);
 
-extern s32 Pak_GetStatus(s32);
 
 extern s32 PAKInterface_CheckRecordsNoteCapacity(s32,u32 *);
 
-extern void Pak_ProbeStatus(s32);
 
 extern void SmpOverlay_AdvancePakDialogPort(void);
 
@@ -102,9 +101,7 @@ extern void Tsmos_DeactivateControllerState();
 
 
 
-extern void Pak_ProbeStatus(s32 port);
 
-extern s32 Pak_GetStatus(s32 port);
 
 /* Advances the slot-dialog retry counter. Before the fourth attempt it updates
  * the dialog; later attempts start the transition and mark it active. */

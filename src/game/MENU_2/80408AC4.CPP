@@ -21,6 +21,8 @@ s32 Frontend_ClearGermanLoadingHints(void) {
 #include "FRONTEND/MATCH_MENU_MESSAGE_IDS.H"
 #include "MENU/PAK_LOAD.H"
 #include "COMMON/GAME_SESSION.H"
+#include "COMMON/MENULISTSCREEN.H"
+#include "COMMON/REQUESTRECAT10.H"
 
 /* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled. 0x1D5: when
    Smos_GetPreviousScreenOwner(0) reports 0x16 it stops the menu object and the menu data D_80145040, releases
@@ -28,13 +30,11 @@ s32 Frontend_ClearGermanLoadingHints(void) {
    and sends Frontend_SetMenuChoiceResult 20, 10, 15 or 10 by the controller mode (3 for any other mode); otherwise
    it sends 3. 0x1D6 sends 11 when Smos_GetPreviousScreenOwner(0) reports 11 and -1 otherwise. Either then calls
    Smos_ReturnToPreviousScreen. Returns zero. */
-extern s32 Smos_GetPreviousScreenOwner(s32);
 extern void Items_ResetActorPools(void *, s32);
 extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(s32);
-extern void Frontend_SetMenuChoiceResult(s32);
 extern void Smos_ReturnToPreviousScreen(void);
 
 s32 Frontend_HandleMatchMessage(void) {

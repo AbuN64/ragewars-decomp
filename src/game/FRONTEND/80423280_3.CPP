@@ -5,6 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "TYPES.H"
+#include "COMMON/MENULISTSCREEN.H"
 #include "FRONTEND/80423280_25.H"
 #include "FRONTEND/80423280_3.H"
 #include "SCENE/802508E0_13.H"
@@ -27,7 +28,6 @@ extern void Tsmos_ActivateControllerState();
    and Smos_ReturnToPreviousScreen. Returns zero. */
 
 
-extern void Frontend_SetMenuChoiceResult(s32);
 
 extern void Smos_ReturnToPreviousScreen(void);
 
