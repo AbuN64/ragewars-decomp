@@ -4,6 +4,7 @@ vram	name	basis
 0x8028F9FC	osScRemoveClient	machine code
 0x802B00DC	__setUsptFromTempo	machine code
 0x802B05F0	alCopy	machine code
+0x802B80F4	osMotorStart	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/io/motor.c; reviewed source identity and discriminating SDK operations (func_802B80F4_eu_x)
 0x802B06B0	alCSPNew	machine code
 0x802B4684	alLoadNew	machine code
 0x802B4734	alMainBusNew	machine code
