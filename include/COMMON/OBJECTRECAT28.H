@@ -24,15 +24,11 @@ struct ObjectRecAt10 {
 struct ObjectRecAt10;
 struct Triple;
 
-struct Shape_func_80299E74_de_2;
-struct Shape_func_80299E74_de_2 {
-    unsigned char padding_0[16];
-    unsigned char field_10;
-};
+struct Shape_typemap_21;
 struct Pulse;
-struct Shape_func_80299E74_de_2;
+struct Shape_typemap_21;
 struct Pulse {
-    union { struct Shape_func_80299E74_de_2 *light; struct MenuWidget *widget; };
+    union { struct Shape_typemap_21 *light; struct MenuWidget *widget; };
     s32 phase;
 };
 

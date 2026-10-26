@@ -10,8 +10,4 @@ struct Player1680 {
     char pad5E0[0x1640 - 0x5E0];
     Mtx views[1];
 };
-struct World24 {
-    char pad0[0x20];
-    SharedPlayer *players;
-};
 #endif

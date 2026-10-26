@@ -3290,8 +3290,6 @@ struct Slider;
 struct WindowMenuCreateSixChoiceMenu;
 typedef struct WindowMenuCreateSixChoiceMenu WindowMenuCreateSixChoiceMenu;
 
-struct World24;
-typedef struct World24 World24;
 
 struct _Pft;
 typedef struct _Pft _Pft;
@@ -3589,7 +3587,6 @@ struct Binding {
     char pad8[16];
     void *(*storage)(void);
 };
-struct Shape_func_80299E74_de_2;
 struct Block12;
 struct Block12 {
     u8 bytes[12];
@@ -4812,7 +4809,6 @@ struct t_dldc;
 typedef signed int ( *WidgetCallback)(void *, struct t_dldc);
 struct EntrySmosSetFocusedElement;
 struct Slider;
-struct World24;
 typedef unsigned int size_t;
 struct _Pft;
 struct _Pft {

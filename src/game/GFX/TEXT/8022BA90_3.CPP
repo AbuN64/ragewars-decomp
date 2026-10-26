@@ -238,7 +238,7 @@ void func_8022C490_de(Player1680 *player) {
 }
 
 void *func_8022C55C_de(void *playerWorld, u32 eligiblePlayerIndex) {
-    struct World24 *world = playerWorld;
+    struct World_func_802283B8_de *world = playerWorld;
     Shared_ActorView *actor;
     s32 eligibleOrdinal;
 
@@ -262,7 +262,7 @@ void *func_8022C55C_de(void *playerWorld, u32 eligiblePlayerIndex) {
 }
 
 void func_8022C5AC_de(char *object) {
-    struct World24 *world = (void *)object;
+    struct World_func_802283B8_de *world = (void *)object;
     Shared_ActorView *record = (void *)world->players;
     while (record != 0) {
         Shared_ControlView *nested = record->controls;
@@ -274,7 +274,7 @@ void func_8022C5AC_de(char *object) {
 }
 
 void func_8022C5DC_de(void *object) {
-    struct World24 *world = (void *)object;
+    struct World_func_802283B8_de *world = (void *)object;
     Shared_ActorView *record = (void *)world->players;
     if (record != 0) {
         do {
@@ -286,7 +286,7 @@ void func_8022C5DC_de(void *object) {
 }
 
 s32 func_8022C620_de(char *object) {
-    struct World24 *world = (void *)object;
+    struct World_func_802283B8_de *world = (void *)object;
     Shared_ActorView *record = (void *)world->players;
     s32 count = 0;
     while (record != 0) {
@@ -300,7 +300,7 @@ s32 func_8022C620_de(char *object) {
 }
 
 s32 func_8022C650_de(char *object) {
-    struct World24 *world = (void *)object;
+    struct World_func_802283B8_de *world = (void *)object;
     Shared_ActorView *record = (void *)world->players;
     s32 count = 0;
     while (record != 0) {
