@@ -1,4 +1,0 @@
-
-#if defined(VERSION_EU_X)
-unsigned char D_auto_func_802567B8_eu_x_padding_573B8[8] = { 0x24, 0x05, 0x00, 0x01, 0x0C, 0x0A, 0x3F, 0xBD };
-#endif
