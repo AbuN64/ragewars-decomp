@@ -239,7 +239,12 @@ MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int arg0, int arg1)
   p->owner.value = arg1;
   p->c = 8;
   p->a = kind;
+#if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+  /* The low byte of the owner word sits at its address on a little-endian host, not 3 bytes in. */
+  p->resource->value = p->owner.bytes[0];
+#else
   p->resource->value = p->owner.bytes[3];
+#endif
   SmpFlicker_InitFlicker(p, -1);
   SmpFlicker_EnableFlicker(p);
   Frontend_InsertWidgetBefore(r, p);
@@ -278,7 +283,12 @@ void SmpFlicker_EnableFlicker(struct StateBlock *object) {
 
 void SmpFlicker_RestoreFlickerValue(struct SourceRecAt84 *source) {
     struct ResourceSmpFlickerCreateFlickerWidget *target = source->target;
+#if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+    /* value is the low byte of the word at 0x80, which a little-endian host holds at 0x80. */
+    u8 value = *((u8 *) source + 0x80);
+#else
     u8 value = source->value;
+#endif
 
     source->pending = 0;
     target->value = value;
