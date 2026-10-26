@@ -44,7 +44,7 @@ Acmd *alAuxBusPull(ALAuxBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffset
 
 #if defined(VERSION_US)
 
-Acmd *func_802B3D30_us(ALAuxBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) {
+Acmd *alAuxBusPull(ALAuxBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) {
     Acmd *ptr = p;
     ALAuxBus_s *m = filter;
     ALFilter_s14 **sources = m->sources;
