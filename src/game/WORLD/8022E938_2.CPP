@@ -373,9 +373,9 @@ void Player_SetAchievementFlag7(Profile *record, s32 achievementIndex) {
     Defs_SetBitValue(&record->achievementFlags[7], achievementIndex, 1);
 }
 
-/** Thin wrapper forwarding an offset argument to Defs_TestBit. */
-void Player_TestAchievementFlag7(Profile *record, s32 index) {
-    Defs_TestBit(&record->achievementFlags[7], index);
+/** Tests bit index of the profile achievement flags at +7 (the character unlocks). */
+s32 Player_TestAchievementFlag7(Profile *record, s32 index) {
+    return Defs_TestBit(&record->achievementFlags[7], index);
 }
 
 void Player_BuildWeaponHandTransform(char *arg0) {
