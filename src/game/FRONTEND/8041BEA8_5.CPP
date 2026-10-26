@@ -64,7 +64,6 @@ extern s32 PAKInterface_CheckRecordsNoteCapacity(s32,u32 *);
 
 extern void SmpOverlay_AdvancePakDialogPort(void);
 
-extern void PAKInterface_SetScreenPhase(s32);
 
 
 
@@ -92,7 +91,6 @@ extern s32 D_800E3514;
 /* Calls Tsmos_DeactivateControllerState and MarkMenuEventHandled, then SmXlate_SwitchScreen with 2, sets D_8014ADA0 and returns
    one. */
 
-extern void Tsmos_DeactivateControllerState();
 
 
 /* Refreshes each of the four ports through Pak_ProbeStatus and sets field 0x1C of D_800E3518 as soon as one reports status 0, -1, -3 or -4 through Pak_GetStatus, clearing it otherwise. */

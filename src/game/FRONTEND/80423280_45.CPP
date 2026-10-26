@@ -24,7 +24,6 @@ extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(s32);
-extern void Smos_ReturnToPreviousScreen(void);
 
 
 

@@ -94,7 +94,6 @@ extern File g_frontendResourceState;
 extern s32 D_800DD0B0;
 extern s32 Cache_AllocateMemory(s32 size);
 extern void XStdio_CloseStream(s32 handle);
-extern s32 N64Eng_GetFrameCounter(void);
 extern void Frontend_ClearOwnedImage(Texture *texture);
 extern void Frontend_ReleaseOwnedImageBuffers(Texture *texture);
 extern void Frontend_ConfigureOwnedImage(Texture *texture, s32 kind, s8 fmt, s8 siz, s32 wid, s32 siz2, s32 zero,

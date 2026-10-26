@@ -72,7 +72,6 @@ extern void Frontend_ResetJoinRequestEntries(void);
 
 
 
-extern void Smos_ReturnToPreviousScreen(void);
 
 
 
