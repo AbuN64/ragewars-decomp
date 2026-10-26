@@ -1420,7 +1420,7 @@ extern char D_800D386C[];
 
 extern ListNode80290528 *D_80131144;
 
-extern char D_80153D60[];
+extern char g_uiFormattedMessage[];
 
 extern char *D_800D75FC;
 

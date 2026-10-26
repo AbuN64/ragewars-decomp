@@ -17,18 +17,18 @@ s32 Gfx_FormatDiagnosticMessage(char *name, s32 number, char *format, ...) {
     if (format != 0) {
         va_start(arguments, format);
         if (name != 0) {
-            length = XStdio_FormatBuffer(D_80153D60, D_800DD0C0, name, number);
+            length = XStdio_FormatBuffer(g_uiFormattedMessage, D_800DD0C0, name, number);
         } else {
-            length = XStdio_FormatBuffer(D_80153D60, D_800DD0C0, D_800DD0D0_de, number);
+            length = XStdio_FormatBuffer(g_uiFormattedMessage, D_800DD0C0, D_800DD0D0_de, number);
         }
-        Gfx_FormatArgumentList(D_80153D60 + length, format, arguments);
+        Gfx_FormatArgumentList(g_uiFormattedMessage + length, format, arguments);
         va_end(arguments);
     }
     return 1;
 }
 
-/* Returns the address of the table D_80153D60. */
+/* Returns the address of the table g_uiFormattedMessage. */
 
 char *Gfx_GetDiagnosticMessage(void) {
-    return D_80153D60;
+    return g_uiFormattedMessage;
 }
