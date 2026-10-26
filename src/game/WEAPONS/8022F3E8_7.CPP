@@ -96,22 +96,22 @@ static inline s32 released(void *actor, char *player) {
     char *control;
     s32 latch;
 
-    if (((Actor_func_8022D290_de *)player)->unk_0x11D8 > D_800C8008) {
+    if (((Shared_ActorView *)player)->stun > D_800C8008) {
         return 1;
     }
-    if ((((LevelActor *)actor)->flags & 0x300000) && ((Actor_func_8022D290_de *)player)->unk_0x1450 != 0) {
-        control = ((Actor_func_8022D290_de *)player)->unk_0x1454;
+    if ((((LevelActor *)actor)->flags & 0x300000) && ((Shared_ActorView *)player)->remote != 0) {
+        control = ((Shared_ActorView *)player)->owner;
         latch = ((Brain_func_80212D78_eu_x *)control)->triggerLatch;
         ((Brain_func_80212D78_eu_x *)control)->triggerLatch = 0;
         return latch == 0;
     }
-    if (!(((Actor_func_8022D290_de *)player)->unk_0x06AC & 0x2000)) {
+    if (!(((Shared_ActorView *)player)->actionFlags & 0x2000)) {
         return 1;
     }
-    if (((Actor_func_8022D290_de *)player)->unk_0x11B4 != 0) {
+    if (((Shared_ActorView *)player)->actionState != 0) {
         return 1;
     }
-    return Weapons_HasAmmoForMode(player, ((Actor_func_8022D290_de *)player)->unk_0x062E) == 0;
+    return Weapons_HasAmmoForMode(player, ((Shared_ActorView *)player)->selectedAction) == 0;
 }
 
 void func_802307FC_de(Shared_Actor *actor, WeaponFireState *fire) {
@@ -206,7 +206,7 @@ void func_80230BC8_de(LevelActor *actor, Dest *attack) {
     char *target;
 
     player = actor->controller;
-    target = ((Actor_func_8022D290_de *)player)->unk_0x05DC;
+    target = ((Shared_ActorView *)player)->message;
     if (target != 0) {
         position = &((SharedRecAt564V1 *)target)->position;
     } else {
@@ -224,7 +224,7 @@ void func_80230BC8_de(LevelActor *actor, Dest *attack) {
     attack->cueTimer -= D_800D2988;
     if (attack->cueTimer <= 0.0f) {
         attack->cueTimer += D_800C2F24_de;
-        if (((Actor_func_8022D290_de *)player)->unk_0x1450 == 0 && D_80140FF8 == 1) {
+        if (((Shared_ActorView *)player)->remote == 0 && D_80140FF8 == 1) {
             func_8021A9A4_de(actor->controller, 0x3F9);
         } else {
             func_8021A9A4_de(actor->controller, 0x4CB);

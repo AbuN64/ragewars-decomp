@@ -36,20 +36,20 @@ s32 Weapons_AddAmmo(void *player, s32 slot, s32 amount) {
     s32 total;
     s32 have;
 
-    count = (&((Actor_func_8022D290_de *)(player))->unk_0x05F4 + slot);
+    count = (&((Shared_ActorView *)(player))->ammo[0] + slot);
     if (slot == -1) {
         cap = 0;
     } else if (D_801462C8.controllerMode != 1) {
-        cap = ((Desc *)((Actor_func_8022D290_de *)(player))->field_0x18)->caps[slot];
+        cap = ((Desc *)((Shared_ActorView *)(player))->model)->caps[slot];
     } else {
         cap = D_800CE3E8[slot];
-        if (((Actor_func_8022D290_de *)(player))->unk_0x1450 == 0) {
+        if (((Shared_ActorView *)(player))->remote == 0) {
             if (slot == 0) {
-                cap += D_80102B00[((Actor_func_8022D290_de *)(player))->unk_0x05D4].bonus0;
+                cap += D_80102B00[((Shared_ActorView *)(player))->mode].bonus0;
             } else if (slot == 1) {
-                cap += D_80102B00[((Actor_func_8022D290_de *)(player))->unk_0x05D4].bonus1;
+                cap += D_80102B00[((Shared_ActorView *)(player))->mode].bonus1;
             } else if (slot == 2) {
-                cap += D_80102B00[((Actor_func_8022D290_de *)(player))->unk_0x05D4].bonus2;
+                cap += D_80102B00[((Shared_ActorView *)(player))->mode].bonus2;
             }
         }
     }
@@ -59,13 +59,13 @@ s32 Weapons_AddAmmo(void *player, s32 slot, s32 amount) {
         if (have == 0 && amount > 0) {
             switch (slot) {
             case 0:
-                ((Actor_func_8022D290_de *)(player))->unk_0x0CC0 = 1;
+                ((Shared_ActorView *)(player))->strokes.word.unk_0x0CC0 = 1;
                 break;
             case 1:
-                ((Actor_func_8022D290_de *)(player))->unk_0x0CC0 = 5;
+                ((Shared_ActorView *)(player))->strokes.word.unk_0x0CC0 = 5;
                 break;
             case 2:
-                ((Actor_func_8022D290_de *)(player))->unk_0x0CC0 = 4;
+                ((Shared_ActorView *)(player))->strokes.word.unk_0x0CC0 = 4;
                 break;
             }
         }
@@ -107,21 +107,21 @@ s32 func_80222D64_de(void *context, s32 arg1) {
         return 0;
     }
     slot = ((AmmoPickupDefinition *)(pickup))->slot;
-    count = (&((Actor_func_8022D290_de *)(context))->unk_0x05F4 + slot);
+    count = (&((Shared_ActorView *)(context))->ammo[0] + slot);
     if (slot == -1) {
         cap = 0;
     } else {
         if (D_801462C8.controllerMode != 1) {
-            base = ((Desc *)((Actor_func_8022D290_de *)(context))->field_0x18)->caps[slot];
+            base = ((Desc *)((Shared_ActorView *)(context))->model)->caps[slot];
         } else {
             base = D_800CE3E8[slot];
-            if (((Actor_func_8022D290_de *)(context))->unk_0x1450 == 0) {
+            if (((Shared_ActorView *)(context))->remote == 0) {
                 if (slot == 0) {
-                    base += D_80102B00[((Actor_func_8022D290_de *)(context))->unk_0x05D4].bonus0;
+                    base += D_80102B00[((Shared_ActorView *)(context))->mode].bonus0;
                 } else if (slot == 1) {
-                    base += D_80102B00[((Actor_func_8022D290_de *)(context))->unk_0x05D4].bonus1;
+                    base += D_80102B00[((Shared_ActorView *)(context))->mode].bonus1;
                 } else if (slot == 2) {
-                    base += D_80102B00[((Actor_func_8022D290_de *)(context))->unk_0x05D4].bonus2;
+                    base += D_80102B00[((Shared_ActorView *)(context))->mode].bonus2;
                 }
             }
         }
@@ -148,7 +148,7 @@ s32 func_80222EA4_de(void *player, void *arg1) {
     s32 hit;
 
     if (((Actor_func_802238E0_de *)(arg1))->inputFlags & 0x1000) {
-        state = ((Actor_func_8022D290_de *)(player))->unk_0x0650;
+        state = ((Shared_ActorView *)(player))->action;
         if (state != 0xB) {
             if (state != 0xC) {
                 if (state != 9) {
@@ -160,7 +160,7 @@ s32 func_80222EA4_de(void *player, void *arg1) {
                                 hit = 0;
                             }
                             if (hit) {
-                                ((Actor_func_8022D290_de *)(player))->unk_0x0038 |= 0x1000;
+                                ((Shared_ActorView *)(player))->unk_0x0038 |= 0x1000;
                                 return 0;
                             }
                             Weapons_SetPlayerState(player, arg1, 0xC);
@@ -171,7 +171,7 @@ s32 func_80222EA4_de(void *player, void *arg1) {
             }
         }
     }
-    state = ((Actor_func_8022D290_de *)(player))->unk_0x0650;
+    state = ((Shared_ActorView *)(player))->action;
     if (state == 0x15 || state == 0x13 || state == 0x14) {
         hit = 1;
     } else {
@@ -189,7 +189,7 @@ s32 func_80222EA4_de(void *player, void *arg1) {
     if (!(D_800C7948[1] < ((Actor_func_802238E0_de *)(arg1))->unk20)) {
         return 0;
     }
-    state = ((Actor_func_8022D290_de *)(player))->unk_0x0650;
+    state = ((Shared_ActorView *)(player))->action;
     if (state == 0xB) {
         return 0;
     }

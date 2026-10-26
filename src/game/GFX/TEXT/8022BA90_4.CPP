@@ -42,7 +42,7 @@ void func_8022C67C_de(void *arg0) {
 }
 
 s32 func_8022C6E4_de(void *player, void *arg1) {
-    s16 state = ((Actor_func_8022D290_de *)player)->unk_0x0650;
+    s16 state = ((Shared_ActorView *)player)->action;
     s32 blocked;
 
     if ((state == 0x15) || (state == 0x13) || (state == 0x14)) {
@@ -54,10 +54,10 @@ s32 func_8022C6E4_de(void *player, void *arg1) {
         if ((((LevelActor *)arg1)->motionState & 0x20000) == 0) {
             return 0;
         }
-        if (((Actor_func_8022D290_de *)player)->unk_0x0650 == 0xD) {
+        if (((Shared_ActorView *)player)->action == 0xD) {
             return 0;
         }
-        if (((Actor_func_8022D290_de *)player)->unk_0x0650 == 0xE) {
+        if (((Shared_ActorView *)player)->action == 0xE) {
             return 0;
         }
         Weapons_SetPlayerState(player, arg1, 0xD);
@@ -67,7 +67,7 @@ s32 func_8022C6E4_de(void *player, void *arg1) {
 }
 
 s32 func_8022C760_de(void *player, void *arg1) {
-    s16 state = ((Actor_func_8022D290_de *)player)->unk_0x0650;
+    s16 state = ((Shared_ActorView *)player)->action;
     s32 blocked;
     s32 flags;
 
@@ -78,10 +78,10 @@ s32 func_8022C760_de(void *player, void *arg1) {
     }
     if (blocked == 0) {
         if (((MovementDescriptor *)((LevelActor *)arg1)->definition)->body.header.flags & 1) {
-            if (((Actor_func_8022D290_de *)player)->unk_0x0650 == 0x26) {
+            if (((Shared_ActorView *)player)->action == 0x26) {
                 return 0;
             }
-            if (((Actor_func_8022D290_de *)player)->unk_0x0664 & 0x8000) {
+            if (((Shared_ActorView *)player)->unk_0x0664 & 0x8000) {
                 return 0;
             }
             flags = ((LevelActor *)arg1)->motionState;
@@ -101,12 +101,12 @@ fire:
 s32 func_8022C7F8_de(void *player, LevelActor *actor) {
     f32 field6E4;
 
-    if (((Actor_func_8022D290_de *)player)->unk_0x07E8 == 0) {
-        field6E4 = ((Actor_func_8022D290_de *)player)->unk_0x06E4;
+    if (((Shared_ActorView *)player)->unk_0x07E8 == 0) {
+        field6E4 = ((Shared_ActorView *)player)->unk_0x06E4;
         if (!(D_800C2D5C_de < field6E4)) {
             if (!(actor->motionState & 0xC0000)) {
                 if (((MovementDescriptor *)actor->definition)->body.header.flags & 2) {
-                    if ((((Actor_func_8022D290_de *)player)->unk_0x06B0 & 0x10) && (((Actor_func_8022D290_de *)player)->unk_0x11D8 <= 0.0f)) {
+                    if ((((Shared_ActorView *)player)->unk_0x06B0 & 0x10) && (((Shared_ActorView *)player)->stun <= 0.0f)) {
                         Weapons_SetPlayerState(player, actor, 5);
                         return 1;
                     }

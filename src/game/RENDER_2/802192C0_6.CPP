@@ -57,7 +57,7 @@ void func_8021C9D8_de(void *player, void *camera) {
         }
     }
     ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&g_world, player, value,
-                  ((Actor_func_8022D290_de *)player)->unk_0x086C);
+                  ((Shared_ActorView *)player)->effectId);
 
     cmd = g_displayListCursor++;
     gDPPipeSync(cmd);
@@ -75,7 +75,7 @@ void func_8021C9D8_de(void *player, void *camera) {
     gSPMoveWord(cmd, G_MW_CLIP, 28, 0xFFFE);
 
     func_80249E28_de(player, camera);
-    if (((Actor_func_8022D290_de *)player)->unk_0x1210 != 0) {
+    if (((Shared_ActorView *)player)->targeting != 0) {
         func_8021C698_de(player, camera);
     }
 }

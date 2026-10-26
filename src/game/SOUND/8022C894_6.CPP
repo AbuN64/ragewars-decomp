@@ -149,16 +149,16 @@ s32 func_8022E43C_de(Instance8020CD74 *arg0, CVector3 *arg1) {
 f32 func_8022E588_de(void *arg0, f32 *arg1) {
     f32 result;
     Round *round = arg0;
-    Actor_func_8022D290_de *var_s0;
+    Shared_ActorView *var_s0;
 
     var_s0 = round->players;
     result = 0.0f;
     if (var_s0 != 0) {
         do {
-            if (var_s0->unk_0x05DC != 0) {
-                result += Particle_GetPointDistance(arg1, &var_s0->posX);
+            if (var_s0->message != 0) {
+                result += Particle_GetPointDistance(arg1, &var_s0->position.vector.x);
             }
-            var_s0 = (Actor_func_8022D290_de *)var_s0->unk_0x16E0;
+            var_s0 = (Shared_ActorView *)var_s0->next;
         } while (var_s0 != 0);
     }
     return result;

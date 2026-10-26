@@ -249,26 +249,26 @@ void func_80230630_de(LevelActor *arg0, void *arg1) {
 
     actor = arg0->controller;
     state = *(s16 *)((char *)D_800CE8DC +
-                     (((Actor_func_8022D290_de *)actor)->unk_0x0650 * 0x18));
+                     (((Shared_ActorView *)actor)->action * 0x18));
     if ((s8)((Dest *)arg1)->count != 0) {
-        if (Weapons_HasAmmoForMode(actor, ((Actor_func_8022D290_de *)actor)->unk_0x062E) == 0) {
+        if (Weapons_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
             if (((Dest *)arg1)->field13C == 2) {
                 ((Dest *)arg1)->field13C = 1;
-                if (Weapons_HasAmmoForMode(actor, ((Actor_func_8022D290_de *)actor)->unk_0x062E) == 0) {
-                    ((Actor_func_8022D290_de *)actor)->unk_0x0770 = func_8022F96C_de(actor);
+                if (Weapons_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
+                    ((Shared_ActorView *)actor)->nextWeapon = func_8022F96C_de(actor);
                 }
             }
         }
     }
     func_8022B9C4_de(actor);
-    ((Actor_func_8022D290_de *)actor)->unk_0x11FC = 0;
+    ((Shared_ActorView *)actor)->marker.word = 0;
     ((WeaponAnimationState *)((Shared_ActorView *)actor)->controller)->speed = 0;
     ((Dest *)arg1)->field138 = 0;
 
     audio = &D_801462C8.counters;
     if ((audio->m_bFragTagOn != 0) &&
         (((Shared_ActorView *)actor)->controls->transientFlag != 0)) {
-        if (((Actor_func_8022D290_de *)actor)->unk_0x06B0 & 0x2000) {
+        if (((Shared_ActorView *)actor)->unk_0x06B0 & 0x2000) {
             mode = audio->m_nFragTagSkin;
             switch (mode) {
             case 0:

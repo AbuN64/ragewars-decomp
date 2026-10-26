@@ -106,15 +106,15 @@ void func_80232FF8_de(void *actor, ObjectState140 *attack) {
     s16 idx;
     s32 action;
 
-    temp_s0 = (void *)((Actor_func_8022D290_de *)o)->self;
-    idx = ((Actor_func_8022D290_de *)temp_s0)->unk_0x0650;
+    temp_s0 = (void *)((Shared_ActorView *)o)->self;
+    idx = ((Shared_ActorView *)temp_s0)->action;
     action = D_800CE8DC[idx].action;
 
-    if (Weapons_HasAmmoForMode(temp_s0, ((Actor_func_8022D290_de *)temp_s0)->unk_0x062E) == 0) {
-        ((Actor_func_8022D290_de *)temp_s0)->unk_0x0770 = func_8022F96C_de(temp_s0);
+    if (Weapons_HasAmmoForMode(temp_s0, ((Shared_ActorView *)temp_s0)->selectedAction) == 0) {
+        ((Shared_ActorView *)temp_s0)->nextWeapon = func_8022F96C_de(temp_s0);
     } else {
         attack->unk_13C = 1;
-        if (func_802301F4_de(actor, attack) == 0 && !(((Actor_func_8022D290_de *)o)->flags & 0x400)) {
+        if (func_802301F4_de(actor, attack) == 0 && !(((Shared_ActorView *)o)->flags & 0x400)) {
             Weapons_RequestActorState(actor, attack, action);
         }
     }

@@ -48,19 +48,19 @@ void func_80209E80_de(void *arg0)
     void *state;
     s32 mode;
     s32 type;
-    Actor_func_8022D290_de *actor;
+    Shared_ActorView *actor;
 
     state = arg0;
     if (state == 0) {
         return;
     }
-    actor = *(Actor_func_8022D290_de **)state;
-    if (0.0f < actor->unk_0x11D8) {
+    actor = *(Shared_ActorView **)state;
+    if (0.0f < actor->stun) {
         return;
     }
 
-    mode = actor->unk_0x0594;
-    type = actor->unk_0x062E;
+    mode = actor->weapon.field2AC;
+    type = actor->selectedAction;
     mode -= 1;
     {
         u32 dispatch = *(&D_800C87F0 + mode + type * 2);
@@ -102,8 +102,8 @@ case_8:
 dispatched:
 
     if (((ObjectLinks2EC *)state)->unk_240 > 0) {
-        ((Actor_func_8022D290_de *)(*(void **)state))->unk_0x06B0 |= 0x4000;
-        ((Actor_func_8022D290_de *)(*(void **)state))->unk_0x06AC |= 0x4000;
+        ((Shared_ActorView *)(*(void **)state))->unk_0x06B0 |= 0x4000;
+        ((Shared_ActorView *)(*(void **)state))->actionFlags |= 0x4000;
         ((ObjectLinks2EC *)state)->unk_240 -= 1;
     }
 }

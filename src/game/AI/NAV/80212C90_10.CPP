@@ -44,14 +44,14 @@ void func_8021321C_de(Root802131E0 *arg0)
     u32 flags;
 
     state = arg0->unk1D8->unk1454;
-    if (((Shared_ControlView *)((Brain_func_80212D78_eu_x *)state)->player->unk_0x05D8)->transientFlag == 0) {
+    if (((Shared_ControlView *)((Brain_func_80212D78_eu_x *)state)->player->controls)->transientFlag == 0) {
         Nav_SetBehaviourState(state, 2);
         return;
     }
 
     func_80211020_de(state);
     if (--((Brain_func_80212D78_eu_x *)state)->jumpTimer == 0) {
-        actor_state = ((Brain_func_80212D78_eu_x *)state)->player->unk_0x0650;
+        actor_state = ((Brain_func_80212D78_eu_x *)state)->player->action;
         flags = ((Brain_func_80212D78_eu_x *)state)->player->unk_0x0038;
         actor_state ^= 15;
         flags = (flags & 0x3000) != 0;

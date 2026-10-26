@@ -76,10 +76,10 @@ void func_8022CF38_de(void *arg0, LevelActor *actor) {
 
 
 void func_8022D010_de(void *arg0, void *levelActor) {
-    Actor_func_8022D290_de *actor = arg0;
+    Shared_ActorView *actor = arg0;
     LevelActor *other = levelActor;
-    actor->unk_0x06C0 = actor->unk_0x06C0 * (D_800C7E90);
-    actor->unk_0x06C4 = actor->unk_0x06C4 * (D_800C7E90);
+    actor->forwardSpeed = actor->forwardSpeed * (D_800C7E90);
+    actor->lateralSpeed = actor->lateralSpeed * (D_800C7E90);
     other->position1.y = other->position1.y * (D_800C7E90);
 }
 
@@ -177,10 +177,10 @@ void func_8022D254_de(void) {
 
 /** Reset two object fields and replace the control word's mode bit. */
 void func_8022D25C_de(void *arg0) {
-    Actor_func_8022D290_de *actor = arg0;
+    Shared_ActorView *actor = arg0;
     actor->flags &= 0xFF7FFFFF;
-    actor->unk_0x11D8 = 0;
-    actor->unk_0x11FC = 0;
+    actor->stun = 0;
+    actor->marker.word = 0;
     actor->flags |= 0x01000000;
 }
 

@@ -256,7 +256,7 @@ typedef struct func_8024C5C4_S2 func_8024C5C4_S2;
 
 struct Brain_func_80212D78_eu_x;
 struct Brain_func_80212D78_eu_x {
-    struct Actor_func_8022D290_de *player;
+    struct Shared_ActorView *player;
     s32 node;
     char pad8[4];
     s32 nextNode;

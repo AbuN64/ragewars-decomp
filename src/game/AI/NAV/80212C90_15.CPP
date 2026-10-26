@@ -40,7 +40,7 @@ extern void Nav_UpdatePlayerSteering(void *);
 
 
 void func_80213500_de(Shared_Actor *arg0) {
-    void *actor = ((Actor_func_8022D290_de *)(arg0->entity))->unk_0x1454;
+    void *actor = ((Shared_ActorView *)(arg0->entity))->owner;
     void *player;
     s32 busy;
     s32 held;
@@ -48,7 +48,7 @@ void func_80213500_de(Shared_Actor *arg0) {
 
     if (((Brain_func_80212D78_eu_x *)(actor))->node == ((Brain_func_80212D78_eu_x *)(actor))->goal
         || !(((Brain_func_80212D78_eu_x *)(actor))->goal < D_8013B368)) {
-        void *data = ((Actor_func_8022D290_de *)(*(void **) actor))->unk_0x05D8;
+        void *data = ((Shared_ActorView *)(*(void **) actor))->controls;
         if (((RecordRecAt94 *)(data))->display && ((RecordRecAt94 *)(data))->kind == 12) {
             func_80213340_de(actor);
         } else {
@@ -85,11 +85,11 @@ store_c:
     }
     if (--((Brain_func_80212D78_eu_x *)(actor))->jumpTimer == 0) {
         player = *(void **) actor;
-        state = ((Actor_func_8022D290_de *)(player))->unk_0x0650 != 0xF;
+        state = ((Shared_ActorView *)(player))->action != 0xF;
         busy = ((Brain_func_80212D78_eu_x *)(actor))->busy != 0;
-        held = (((Actor_func_8022D290_de *)(player))->unk_0x0038 & 0x3000) != 0;
+        held = (((Shared_ActorView *)(player))->unk_0x0038 & 0x3000) != 0;
         if (state && !held && !busy) {
-            ((Actor_func_8022D290_de *)(player))->unk_0x06B0 |= 0x10;
+            ((Shared_ActorView *)(player))->unk_0x06B0 |= 0x10;
         }
     }
     if (((Brain_func_80212D78_eu_x *)(actor))->jumpTimer < 0) {
@@ -122,11 +122,11 @@ extern void *Nav_GetGraphPoint(void *, s32);
 
 void func_802136EC_de(Shared_Actor *arg0)
 {
-    void *actor = ((Actor_func_8022D290_de *)(arg0->entity))->unk_0x1454;
+    void *actor = ((Shared_ActorView *)(arg0->entity))->owner;
 
     ((Brain_func_80212D78_eu_x *)(actor))->unk220 = 0;
     {
-        void *data = ((Actor_func_8022D290_de *)(*(void **)actor))->unk_0x05D8;
+        void *data = ((Shared_ActorView *)(*(void **)actor))->controls;
         if (((RecordRecAt94 *)(data))->display && ((RecordRecAt94 *)(data))->kind == 12) {
             func_80213340_de(actor);
         } else {

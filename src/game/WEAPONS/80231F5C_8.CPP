@@ -21,7 +21,7 @@ void func_8023293C_de(void *arg0, Dest *arg1, Lookup *lookup) {
     s16 state;
 
     actor = ((LevelActor *)arg0)->controller;
-    resource = ((Actor_func_8022D290_de *)actor)->unk_0x05DC;
+    resource = ((Shared_ActorView *)actor)->message;
     result = -1;
     if (resource == 0) {
         return;
@@ -31,7 +31,7 @@ void func_8023293C_de(void *arg0, Dest *arg1, Lookup *lookup) {
             return;
         }
     }
-    state = ((Actor_func_8022D290_de *)actor)->unk_0x062E;
+    state = ((Shared_ActorView *)actor)->selectedAction;
     one = 1;
     if ((state == one) && (arg1->field144 == 0)) {
         return;
@@ -39,9 +39,9 @@ void func_8023293C_de(void *arg0, Dest *arg1, Lookup *lookup) {
     if ((state >= 0x12) && (Weapons_GetWeaponAmmo(actor, state) <= 0)) {
         return;
     }
-    state = ((Actor_func_8022D290_de *)actor)->unk_0x062E;
+    state = ((Shared_ActorView *)actor)->selectedAction;
     if ((state == 0xE) || (state == one) || (state == 0)) {
-        result = ((Actor_func_8022D290_de *)actor)->unk_0x11F8;
+        result = ((Shared_ActorView *)actor)->unk_0x11F8;
     }
     func_8026DA4C_de(lookup->value,
                   ((LevelActor *)arg0)->fieldB4, 1,
