@@ -85,7 +85,7 @@ extern s32 D_8014DCF8[];
 
 extern unsigned char D_8014DCFB[];
 
-extern void MarkMenuEventHandled(void),Frontend_UpdateJoinRequestDisplay(s32);
+extern void MarkMenuEventHandled(void);
 extern struct CourseOptionsScreen *D_800E39C0;
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 

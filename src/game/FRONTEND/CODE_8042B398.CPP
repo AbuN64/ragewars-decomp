@@ -95,7 +95,6 @@ void ScenarioSetup_ClearFlagBits(void) {
     }
 }
 
-extern void Menu_ReleaseOptionsScene(void);
 
 /* Closes the setup screen D_800E4F60: releases it through Cache_FreeMemory, runs Tsmos_ActivateControllerState and
    Menu_ReleaseOptionsScene, then clears the pointer. Returns zero. */
@@ -113,7 +112,6 @@ s32 ScenarioSetup_ReturnSetupEventZeroAlt(void) {
     return 0;
 }
 
-extern void ScenarioSetup_SetCatalogueAlpha(s32);
 
 /** Begin setup confirmation when the pending state and input event permit it. */
 s32 ScenarioSetup_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
@@ -150,7 +148,6 @@ s32 ScenarioSetup_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
 }
 
 
-extern void MarkMenuEventHandled();
 extern void Frontend_SetPreviewModel(void *, s32);
 #define SCR4D4 ((struct ScreenScenarioSetupSelectPreviousCatalogueItem *)D_800E4F60)
 s32 ScenarioSetup_SelectPreviousCatalogueItem(void *unused0, void *unused1, void *unused2, s32 event) {
@@ -198,7 +195,6 @@ s32 ScenarioSetup_SelectPreviousCatalogueItem(void *unused0, void *unused1, void
 #undef SCR4D4
 
 extern s32 ScenarioSetup_GetCategoryEntryCount(s32 index);
-extern void ScenarioSetup_ResetSelectionIndicators(void);
 
 /** Select the next setup item, reversing the displayed order on the second page. */
 s32 ScenarioSetup_SelectNextSetupItem(void *unused0, void *unused1, void *unused2, s32 event) {
@@ -419,7 +415,6 @@ extern void ScenarioSetup_InitResultModelPreview(void);
 
 extern void Frontend_SetWidgetFlag100(void *, s32);
 extern s32 Frontend_ListHasFlag100(void *);
-extern s32 ScenarioSetup_IsCupSelected(void);
 extern s32 ScenarioSetup_ReturnResultsGateTrue(void);
 extern void Scene_CopyLevelName(Shared_World *, s32, void *, s32);
 extern char *XPlus_UppercaseString(char *);
@@ -658,7 +653,6 @@ void ScenarioSetup_FillResultRows(void) {
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 
-extern s32 Frontend_GetMatchEndReason(void);
 
 /* The game settings record. */
 static inline Shared_Game *resultsGame(void) { return &D_801462C8; }
@@ -799,7 +793,6 @@ void ScenarioSetup_SortResultsPlayers(void) {
 
 
 
-extern void Tsmos_ActivateControllerState();
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #else
@@ -816,7 +809,6 @@ extern void Tsmos_ActivateControllerState();
 
 
 
-extern void ScenarioSetup_SetCatalogueAlpha(s32 a0);
 
 
 /* Moves the selection of the screen D_800E4F60 back on event 1: calls MarkMenuEventHandled and steps the

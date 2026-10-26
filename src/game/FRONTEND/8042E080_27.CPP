@@ -72,7 +72,6 @@ void PAKInterface_RelabelSlotRows(s32);                               /* extern 
 void PAKInterface_UpdatePlayerControlRows(s32);                               /* extern */
 void PAKInterface_ScrollNoteList(s32, s32);                            /* extern */
 void PAKInterface_DecrementNameCharacter(s32);                               /* extern */
-extern PakMenuController *D_800E54A4;                    
 
 s32 PAKInterface_HandleNextPanelSelection(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 temp_s0;

@@ -14,7 +14,6 @@
 #include "WEAPONS/80213ED4.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 
-extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
 extern void Events_DispatchCallback(void *, void *, s32, CVector3, ResourceManagerState);
 typedef struct BreakableContactRule {
     u32 flags;
@@ -97,7 +96,6 @@ extern s32 Rumble_TestActorStateBit(void *, void *);
 
 
 
-extern void Rumble_SetActorStateBit(Shared_World *arg0, void *arg1, s32 arg2);
 
 extern void Events_DispatchCallback(void *arg0, void *arg1, s32 arg2,
                           CVector3 arg3, ResourceManagerState arg4);
@@ -162,7 +160,6 @@ void func_80204C34_de(void *callbackContext, Shared_CallbackOwner *callbackOwner
     }
 }
 
-extern void Fx_RecycleOwnerParticles(SceneRecAt95A8 *, s32);
 void func_80204C68_de(void *actor, ActorMotionState *motionState) {
     ResourceManagerState local;
     Shared_World *flag;
