@@ -1,5 +1,4 @@
-
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 /* Data separated from executable functions by the legacy split layout. */
-unsigned int func_8044C4D8_eu_x[2] = { 0x02002821U, 0x14A0FFFBU };
+unsigned int func_80447304_eu_x[3] = { 0xAFB30064U, 0x00C09821U, 0xAFBF0068U };
 #endif
