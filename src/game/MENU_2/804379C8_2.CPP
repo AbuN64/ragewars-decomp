@@ -15,24 +15,24 @@ void MarkMenuEventHandled();
 void func_802998A8_de(void);
 
  /* extern */
-s32 func_8041A470_de(void *);
+s32 SmpSlider_GetTransitionMode(void *);
 
  /* extern */
 
 
 /* Calls MarkMenuEventHandled, then sets the word at offset 0x10 of the object D_800E5784 points to to -1 and
-   calls func_8041A430_de on the object's first word with 2, returning zero. */
+   calls SmpSlider_SetTransitionMode on the object's first word with 2, returning zero. */
 
 
 
 
 extern void MarkMenuEventHandled();
 
-extern void func_8041A430_de(void *, s32);
+extern void SmpSlider_SetTransitionMode(void *, s32);
 
 /* Calls MarkMenuEventHandled; when func_80299A08_de reports 0x3D0 it sets the word at 0x10 of the menu block
    D_800E5784 points to to 7 and clears five bytes at D_80102B7E through XPlus_FillMemory, for 0x3D1 it
-   sets that word to -1; then it calls func_8041A430_de on the block's first word with 2. Returns
+   sets that word to -1; then it calls SmpSlider_SetTransitionMode on the block's first word with 2. Returns
    zero. */
 
 
@@ -56,7 +56,7 @@ s32 func_80437810_de(void) {
     s32 temp_v0_2;
     CellRecAt1A *temp_a0;
     CellRecAt1A *temp_v1;
-    temp_v0 = func_8041A470_de(D_800E5784->unk0);
+    temp_v0 = SmpSlider_GetTransitionMode(D_800E5784->unk0);
     switch (temp_v0) { /* irregular */
     case 3:
         temp_v0_2 = D_800E5784->unkC - 1;
@@ -92,7 +92,7 @@ s32 func_804378F4_de(void) {
     MarkMenuEventHandled();
     state = D_800E5784;
     state->unk10 = -1;
-    func_8041A430_de(state->unk0, 2);
+    SmpSlider_SetTransitionMode(state->unk0, 2);
     return 0;
 }
 
@@ -110,6 +110,6 @@ s32 func_80437930_de(void) {
         XPlus_FillMemory(D_80102B7E, 0, 5);
         break;
     }
-    func_8041A430_de(D_800E5784->unk0, 2);
+    SmpSlider_SetTransitionMode(D_800E5784->unk0, 2);
     return 0;
 }

@@ -8,7 +8,7 @@
 #include "RENDER_2/8025DE50_5.H"
 
 #if defined(VERSION_DE)
-s32 func_8042A2B0_de(void *root, s32 unused, s32 delta) {
+s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
     MenuWidget *item;
     f32 alpha;
     s32 fade;
@@ -70,17 +70,17 @@ s32 func_8042A2B0_de(void *root, s32 unused, s32 delta) {
         if (count >= 0) count = previous - (previous >= count);
         else count = 0;
         countdown->unk3E0 = count;
-        if (D_800E4F60->unk3E0 <= 0 && func_80419F38_de(D_800E4F60->text3E4)) {
-            func_80419F24_de(D_800E4F60->text3E4);
-            func_8042A7B4_de(10);
+        if (D_800E4F60->unk3E0 <= 0 && SmpFlicker_IsFlickerIdle(D_800E4F60->text3E4)) {
+            SmpFlicker_RestoreFlickerValue(D_800E4F60->text3E4);
+            ScenarioSetup_SetCatalogueAlpha(10);
             D_800E4F60->unk3DC = 9;
         }
         break;
     case 5:
         Frontend_SetWidgetFlag08(D_800E4F60->unk458, 1);
         Frontend_SetWidgetFlag08(D_800E4F60->unk3E8, 0);
-        func_8042B2E4_de();
-        func_8042A7B4_de(0);
+        ScenarioSetup_ResetSelectionIndicators();
+        ScenarioSetup_SetCatalogueAlpha(0);
         D_800E4F60->unk3DC = 2;
         D_800E4F60->unk3E0 = 4;
         Frontend_SetWidgetFlag08(D_800E4F60->unk448, 0);
@@ -90,7 +90,7 @@ s32 func_8042A2B0_de(void *root, s32 unused, s32 delta) {
     case 8:
         level = Frontend_FindWidgetByResourceId(root, 0x312)->alpha;
         fade = level >> 1;
-        func_8042A7B4_de(fade);
+        ScenarioSetup_SetCatalogueAlpha(fade);
         if (fade < 10) {
             D_800E4F60->unk3DC = 3;
             func_8042E988_de(11);
@@ -101,7 +101,7 @@ s32 func_8042A2B0_de(void *root, s32 unused, s32 delta) {
         fade = Frontend_FindWidgetByResourceId(root, 0x312)->alpha;
         fade = (fade + 1) * 2;
         if (fade > 65) { fade = 65; D_800E4F60->unk3DC = 3; }
-        func_8042A7B4_de(fade);
+        ScenarioSetup_SetCatalogueAlpha(fade);
         if (D_800E4F60->selection == 0) Frontend_SetWidgetFlag08(D_800E4F60->unk448, 1);
         break;
     }

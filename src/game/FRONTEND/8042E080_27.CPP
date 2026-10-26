@@ -23,7 +23,7 @@
 extern void *SmpOverlay_GetSlotValue(s32 root, s32 player);
 
 s32 func_80430028_de(s32 unused0, s32 unused1, s32 arg2, s32 arg3) {
-    struct Resource_func_80419E54_de *sound;
+    struct ResourceSmpFlickerCreateFlickerWidget *sound;
     struct RowRecAtBA4 *row;
     char *base;
     u8 *mark;

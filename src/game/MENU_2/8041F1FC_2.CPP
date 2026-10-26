@@ -74,8 +74,8 @@ s32 Menu_UpdateCharacterPreview(s32 unusedFirst,s32 unusedSecond,s32 elapsedTick
     case 4:
         D_800E42D0->timer = D_800E42D0->timer - 1 < 0 ? 0 :
             D_800E42D0->timer - 1 > D_800E42D0->timer ? D_800E42D0->timer : D_800E42D0->timer - 1;
-        if ((D_800E42D0->timer <= 0) && (func_80419F38_de(D_800E42D0->prompt) != 0)) {
-            func_80419F24_de(D_800E42D0->prompt);
+        if ((D_800E42D0->timer <= 0) && (SmpFlicker_IsFlickerIdle(D_800E42D0->prompt) != 0)) {
+            SmpFlicker_RestoreFlickerValue(D_800E42D0->prompt);
             D_800E42D0->phase = 6;
             D_800E42D0->timer = 4;
             Frontend_SetWidgetFlag08(D_800E42D0->pulse, 1);

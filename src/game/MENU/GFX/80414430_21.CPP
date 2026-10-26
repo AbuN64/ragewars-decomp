@@ -20,7 +20,7 @@ extern void Gfx_SetRenderMode(s32 mode);
 
 extern void Gfx_SetCombineMode(s32 mode);
 
-extern void func_80416ECC_de(s32 mode);
+extern void Gfx_SetPrimitiveVertexMode(s32 mode);
 
 
 
@@ -54,10 +54,10 @@ static inline void beginFrame(void) {
 }
 
 void Gfx_DrawRect(f32 x, f32 y, f32 unused, f32 width, f32 height, u32 color) {
-    func_80417B20_de(x, y, unused, width, height, 0.0f, 0.0f, D_800DD410_de, D_800DD410_de, color);
+    Gfx_DrawClippedImageRectangle(x, y, unused, width, height, 0.0f, 0.0f, D_800DD410_de, D_800DD410_de, color);
 }
 
-void func_80418DE0_de(f32 x, f32 y, s32 unused, f32 z, f32 a4, s32 a5, s32 a6, s32 a7, s32 a8) {
+void Gfx_DrawGradientRectangle(f32 x, f32 y, s32 unused, f32 z, f32 a4, s32 a5, s32 a6, s32 a7, s32 a8) {
     D_800DF290 = 0;
     D_800E32E4 = 0;
     Gfx_SetRenderMode(0xC);
@@ -73,8 +73,8 @@ void func_80418DE0_de(f32 x, f32 y, s32 unused, f32 z, f32 a4, s32 a5, s32 a6, s
         emit(0xD7000000, 0x80008000);
     }
     if (D_80153F60.x == 0) {
-        func_80416ECC_de(9);
-        func_80415C90_de(x, y, z, a4, a5, a6, a7, a8);
+        Gfx_SetPrimitiveVertexMode(9);
+        Gfx_DrawClippedGradientQuad(x, y, z, a4, a5, a6, a7, a8);
     }
 }
 
@@ -93,7 +93,7 @@ void Gfx_ResetRenderState(void) {
     }
 }
 
-void func_80418FF4_de(s32 mode) {
+void Gfx_SetTexturePerspectiveMode(s32 mode) {
     if (mode != D_800DF274) {
         D_800DF274 = mode;
         if (D_800E32E4 == 0) {

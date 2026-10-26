@@ -12,7 +12,7 @@ extern void Frontend_SetWidgetFlag08(void *arg0, s32 arg1);
 
 
 /** Load four banks of ten resources, then activate the two resources used by the set. */
-void func_8042CC74_de(void)
+void ScenarioSetup_HideResultCatalogueWidgets(void)
 {
     s32 bank;
     s32 offset;
@@ -46,14 +46,14 @@ void func_8042CC74_de(void)
     } while (bank < 4);
 
 #if defined(VERSION_DE)
-    func_8042D418_de(0x264);
-    func_8042D418_de(0x269);
+    Frontend_HideResultBadgeGroup(0x264);
+    Frontend_HideResultBadgeGroup(0x269);
 #elif defined(VERSION_EU_X)
-    func_8042D418_de(0x26D);
-    func_8042D418_de(0x272);
+    Frontend_HideResultBadgeGroup(0x26D);
+    Frontend_HideResultBadgeGroup(0x272);
 #else
-    func_8042D418_de(0x269);
-    func_8042D418_de(0x26E);
+    Frontend_HideResultBadgeGroup(0x269);
+    Frontend_HideResultBadgeGroup(0x26E);
 #endif
 }
 
@@ -77,7 +77,7 @@ extern void func_80439B5C_de(void *, s32, CVector3, CVector3);
 extern void func_80439BE0_de(void *, CVector3);
 extern void func_80439C30_de(void *, CVector3);
 extern void func_80439C80_de(void *, s32);
-void func_8042CE74_de(void) {
+void ScenarioSetup_InitResultModelPreview(void) {
     struct MenuWidget *item;
     CVector3 scale;
     CVector3 offset;

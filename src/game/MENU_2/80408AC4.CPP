@@ -9,9 +9,9 @@ unsigned int data_unresolved_800DDA24[3] = {
 #if defined(VERSION_DE)
 #include "COMMON/OWNERRECAT8V1.H"
 
-s32 func_80428FA0_de(void) {
-    func_8041B110_de(0x1D5);
-    func_8041B110_de(0x1D6);
+s32 Frontend_ClearGermanLoadingHints(void) {
+    SmpButton_WrapButtonWidget(0x1D5);
+    SmpButton_WrapButtonWidget(0x1D6);
     return 0;
 }
 #endif

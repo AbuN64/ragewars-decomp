@@ -20,9 +20,9 @@
 
 extern func_8024E8F0_S1 *D_801041F0;
 
-extern void Link_DispatchActorLinks(func_8024E8F0_S1 *state, s32 bits, Actor_func_8027B428_de *actor);
+extern void Link_DispatchActorLinks(func_8024E8F0_S1 *state, s32 bits, ActorParticleDispatchOwnerContactLinks *actor);
 
-static inline s32 is_group_a(Actor_func_8027B428_de *actor) {
+static inline s32 is_group_a(ActorParticleDispatchOwnerContactLinks *actor) {
     switch (actor->type) {
         case 2:
         case 0x56:
@@ -33,7 +33,7 @@ static inline s32 is_group_a(Actor_func_8027B428_de *actor) {
     return 0;
 }
 
-static inline s32 is_group_b(Actor_func_8027B428_de *actor) {
+static inline s32 is_group_b(ActorParticleDispatchOwnerContactLinks *actor) {
     switch (actor->type) {
         case 5:
         case 6:
@@ -49,7 +49,7 @@ static inline s32 is_group_b(Actor_func_8027B428_de *actor) {
     return 0;
 }
 
-static inline s32 is_group_c(Actor_func_8027B428_de *actor) {
+static inline s32 is_group_c(ActorParticleDispatchOwnerContactLinks *actor) {
     switch (actor->type) {
         case 8:
         case 0xD:
@@ -59,7 +59,7 @@ static inline s32 is_group_c(Actor_func_8027B428_de *actor) {
     return 0;
 }
 
-void func_8027ABF4_de(AccelSteeringObj *particle) {
+void Particle_UpdateTargetedAcceleration(AccelSteeringObj *particle) {
     AccelSteeringVec delta, direction;
     AccelSteeringVec *velocity;
     f32 accel, length, limit;
@@ -125,79 +125,79 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
   f32 temp_f1_3;
   f32 temp_f1_4;
   f32 temp_f1_5;
-  f32 temp_f20;
+  f32 neighborInfluence;
   f32 nearby_height;
   f32 nearby_scale;
   f32 nearby_random_max;
   f32 tracking_min;
   f32 tracking_max;
-  f32 temp_f20_2;
+  f32 specialSpeed;
   f32 temp_f20_3;
-  f32 temp_f20_4;
+  f32 acceleratedSpeed;
   f32 var_f2;
-  s32 temp_v1;
-  void *temp_a0;
-  func_8027ADBC_S3 *temp_s0;
+  s32 particleType;
+  void *particleDescriptor;
+  func_8027ADBC_S3 *attractionTarget;
   void *temp_s0_2; 
   func_8027ADBC_S6 *temp_s0_4;
   void *temp_s0_5;
   void *temp_s2; 
   void *var_a0;
-  SharedRecAt16E0V2 *var_s0;
-  temp_v1 = arg0->inst.type;
-  if (temp_v1 == 0x127)
+  SharedRecAt16E0V2 *nearbyActor;
+  particleType = arg0->inst.type;
+  if (particleType == 0x127)
   {
     goto block_26;
   }
-  if (temp_v1 < 0x128)
+  if (particleType < 0x128)
   {
-    if (temp_v1 == 46)
+    if (particleType == 46)
     {
       goto block_46;
     }
-    if (temp_v1 < 47)
+    if (particleType < 47)
     {
-      if (temp_v1 == 11)
+      if (particleType == 11)
       {
         goto block_24;
       }
-      if (temp_v1 == 14)
+      if (particleType == 14)
       {
         goto block_26;
       }
       goto block_common;
     }
-    if (temp_v1 >= 97)
+    if (particleType >= 97)
     {
       goto block_common;
     }
-    if (temp_v1 >= 95)
+    if (particleType >= 95)
     {
       goto block_26;
     }
     goto block_common;
   }
-  if (temp_v1 == 0x414)
+  if (particleType == 0x414)
   {
     goto block_540;
   }
-  if (temp_v1 < 0x415)
+  if (particleType < 0x415)
   {
-    if (temp_v1 == 0x129)
+    if (particleType == 0x129)
     {
       goto block_24;
     }
-    if (temp_v1 == 0x3EC)
+    if (particleType == 0x3EC)
     {
       goto block_26;
     }
     goto block_common;
   }
-  if (temp_v1 == 0x42D)
+  if (particleType == 0x42D)
   {
     goto block_540;
   }
-  if (temp_v1 == 0x4B4)
+  if (particleType == 0x4B4)
   {
     goto block_26;
   }
@@ -213,31 +213,31 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
       nearby_scale = D_800C4BCC_de;
       nearby_random_max = D_800C4BD0_de;
     } while (0);
-    var_s0 = var_a0;
+    nearbyActor = var_a0;
     do
     {
-      nearby_height = var_s0->unk70;
-      sp20 = var_s0->pos;
+      nearby_height = nearbyActor->unk70;
+      sp20 = nearbyActor->pos;
       sp20.y += nearby_height;
       sp20.y += GameObject_GetActorHeight(var_a0) * nearby_scale;
       GraphU64_SubtractVectors(&sp10, nearby_position, &arg0->inst.pos);
-      temp_f20 = Math_Sqrtf(((sp10.x * sp10.x) + (sp10.y * sp10.y)) + (sp10.z * sp10.z));
-      if (temp_f20 < D_800C4BD4_de)
+      neighborInfluence = Math_Sqrtf(((sp10.x * sp10.x) + (sp10.y * sp10.y)) + (sp10.z * sp10.z));
+      if (neighborInfluence < D_800C4BD4_de)
       {
-        temp_f20 = D_800C4BDC_de - (temp_f20 * D_800C4BD8_de);
-        sp10.x *= temp_f20 * GraphU64_RandomBetween(nearby_scale, nearby_random_max);
-        sp10.y *= temp_f20 * GraphU64_RandomBetween(nearby_scale, nearby_random_max);
-        sp10.z *= temp_f20 * GraphU64_RandomBetween(nearby_scale, nearby_random_max);
+        neighborInfluence = D_800C4BDC_de - (neighborInfluence * D_800C4BD8_de);
+        sp10.x *= neighborInfluence * GraphU64_RandomBetween(nearby_scale, nearby_random_max);
+        sp10.y *= neighborInfluence * GraphU64_RandomBetween(nearby_scale, nearby_random_max);
+        sp10.z *= neighborInfluence * GraphU64_RandomBetween(nearby_scale, nearby_random_max);
         GraphU64_SubtractVectors(temp_s2, temp_s2, &sp10);
       }
-      var_a0 = var_s0->unk16E0;
-      var_s0 = var_a0;
+      var_a0 = nearbyActor->unk16E0;
+      nearbyActor = var_a0;
     }
     while (var_a0 != ((void *) 0));
   }
-  temp_s0 = arg0->target;
-  temp_f0_2 = InstHdr_GetActorBaseOffset(temp_s0);
-  sp20 = temp_s0->pos;
+  attractionTarget = arg0->target;
+  temp_f0_2 = InstHdr_GetActorBaseOffset(attractionTarget);
+  sp20 = attractionTarget->pos;
   sp20.y += temp_f0_2;
   GraphU64_SubtractVectors(&sp10, &sp20, &arg0->inst.pos);
   tracking_min = D_800C4BE0_de;
@@ -279,7 +279,7 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
     temp_f1 = arg0->inst.velocity.x;
     temp_f0_4 = arg0->inst.velocity.y;
     temp_f12 = arg0->inst.velocity.z;
-    temp_f20_2 = Math_Sqrtf(((temp_f1 * temp_f1) + (temp_f0_4 * temp_f0_4)) + (temp_f12 * temp_f12));
+    specialSpeed = Math_Sqrtf(((temp_f1 * temp_f1) + (temp_f0_4 * temp_f0_4)) + (temp_f12 * temp_f12));
 #if defined(VERSION_EU)
     temp_f0_5 = func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
 #else
@@ -287,13 +287,13 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
 #endif
     if (temp_f0_3 > 0.0f)
     {
-      if (!(temp_f0_5 < temp_f20_2))
+      if (!(temp_f0_5 < specialSpeed))
       {
         goto after_special_clamp;
       }
     }
     else
-      if (!(temp_f20_2 < temp_f0_5))
+      if (!(specialSpeed < temp_f0_5))
     {
       goto after_special_clamp;
     }
@@ -308,7 +308,7 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
   block_common:
   temp_s0_4 = arg0->target;
 
-  temp_a0 = arg0->desc;
+  particleDescriptor = arg0->desc;
   if (((temp_s0_4 != ((void *) 0)) && (arg0->desc->flags & 0x40000)) && (((BallisticParamsHolder *)arg0->desc)->unkE != 0))
   {
     temp_f0_6 = InstHdr_GetActorBaseOffset(temp_s0_4);
@@ -359,7 +359,7 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
       temp_f1_5 = arg0->inst.velocity.x;
       temp_f0_10 = arg0->inst.velocity.y;
       temp_f12_3 = arg0->inst.velocity.z;
-      temp_f20_4 = Math_Sqrtf(((temp_f1_5 * temp_f1_5) + (temp_f0_10 * temp_f0_10)) + (temp_f12_3 * temp_f12_3));
+      acceleratedSpeed = Math_Sqrtf(((temp_f1_5 * temp_f1_5) + (temp_f0_10 * temp_f0_10)) + (temp_f12_3 * temp_f12_3));
 #if defined(VERSION_EU)
       temp_f0_11 = func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
 #else
@@ -367,13 +367,13 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
 #endif
       if (temp_f0_9 > 0.0f)
       {
-        if (!(temp_f0_11 < temp_f20_4))
+        if (!(temp_f0_11 < acceleratedSpeed))
         {
           goto after_normal_clamp;
         }
       }
       else
-        if (!(temp_f20_4 < temp_f0_11))
+        if (!(acceleratedSpeed < temp_f0_11))
       {
         goto after_normal_clamp;
       }
@@ -390,7 +390,7 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
   }
 }
 
-void func_8027B428_de(Actor_func_8027B428_de *actor) {
+void Particle_DispatchOwnerContactLinks(ActorParticleDispatchOwnerContactLinks *actor) {
     func_8024E8F0_S1 *owner;
 
     if (D_801041F0 == 0 || D_801041F0->unk0 != 1) {

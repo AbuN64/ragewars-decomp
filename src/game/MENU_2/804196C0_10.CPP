@@ -11,7 +11,7 @@ extern s32 Frontend_GetImagePaletteByteCount(Image *image);
 extern s32 Frontend_GetImagePixelByteCount(Image *image);
 extern void Gfx_SwizzleImage(Image *image);
 
-s32 func_80419640_de(Image *dst, Image *src) {
+s32 Smp_CopyAndSwizzleImage(Image *dst, Image *src) {
     s32 palette;
     s32 size;
     s32 fix;
@@ -36,6 +36,6 @@ s32 func_80419640_de(Image *dst, Image *src) {
 }
 
 
-void func_804196C8_de(int value) {
+void Smp_SetImageStateWord(int value) {
     D_800E32F0 = value;
 }

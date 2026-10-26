@@ -8,7 +8,7 @@ extern void func_8029412C_de(void);
 extern void func_80293DE8_de(s32 session);
 extern void func_80294134_de(struct GameSession *arg0);
 extern void func_80293FF0_de(void);
-extern s32 func_80293904_de(struct GameSession *session, f32 limit, s32 arg2, s32 arg3);
+extern s32 SetN64_CheckTimedSessionTransition(struct GameSession *session, f32 limit, s32 arg2, s32 arg3);
 extern void Scene_ResetTransitionViewport(void);
-extern void func_80293B28_de(void *session);
+extern void SetN64_DrawSessionWithAttractTimeout(void *session);
 #endif

@@ -10,7 +10,7 @@ s32 Menu_HandleExtraOptionsChoice(void) {
     } else {
         switch (func_80299A08_de()) {
         case 0x3AC:
-            func_8041A430_de(D_800E4400->dialog, 2);
+            SmpSlider_SetTransitionMode(D_800E4400->dialog, 2);
             Menu_ApplyExtraOptionFlags();
             break;
         case 0x3B6:

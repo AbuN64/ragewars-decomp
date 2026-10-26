@@ -104,8 +104,8 @@ block_11:
                 var_v0 = 0;
             }
             timer->pages = var_v0;
-            if (((((Shared_OptionsScreen *)(D_800E4518))->pages) <= 0) && (func_80419F38_de((((Shared_OptionsScreen *)(D_800E4518))->title)) != 0)) {
-                func_80419F24_de((((Shared_OptionsScreen *)(D_800E4518))->title));
+            if (((((Shared_OptionsScreen *)(D_800E4518))->pages) <= 0) && (SmpFlicker_IsFlickerIdle((((Shared_OptionsScreen *)(D_800E4518))->title)) != 0)) {
+                SmpFlicker_RestoreFlickerValue((((Shared_OptionsScreen *)(D_800E4518))->title));
                 (((Shared_OptionsScreen *)(D_800E4518))->page) = 3;
             }
             break;

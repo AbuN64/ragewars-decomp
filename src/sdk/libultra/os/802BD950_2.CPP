@@ -8,7 +8,7 @@
 
 extern u32 func_802B8C40_de(u32 arg0);
 
-void func_802B8AA0_de(s32 arg0, s32 arg1, u8 *arg2) {
+void func_802B8AA0_de(s32 channel, s32 blockAddress, u8 *inputData) {
     Block40 packet;
     u8 *dst;
     s32 i;
@@ -23,22 +23,22 @@ void func_802B8AA0_de(s32 arg0, s32 arg1, u8 *arg2) {
     packet.bytes[1] = 0x23;
     packet.bytes[2] = 1;
     packet.bytes[3] = 3;
-    checksum = func_802B8C40_de(arg1 & 0xFFFF);
-    shifted = arg1 << 5;
+    checksum = func_802B8C40_de(blockAddress & 0xFFFF);
+    shifted = blockAddress << 5;
     *(u16 *)&packet.bytes[4] = (checksum & 0xFF) | shifted;
     packet.bytes[0x26] = tail;
     i = 0;
     do {
-        ((Block40 *)((u8 *)&packet + i))->bytes[6] = *arg2++;
+        ((Block40 *)((u8 *)&packet + i))->bytes[6] = *inputData++;
         i++;
     } while (i < 0x20);
-    if (arg0 != 0) {
+    if (channel != 0) {
         i = 0;
-        if (arg0 > 0) {
+        if (channel > 0) {
             do {
                 *dst++ = 0;
                 i++;
-            } while (i < arg0);
+            } while (i < channel);
         }
     }
     *(Block40 *)dst = packet;

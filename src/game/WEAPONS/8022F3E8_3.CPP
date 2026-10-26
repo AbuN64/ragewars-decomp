@@ -82,7 +82,7 @@ void Weapon_DrawRedMarkerQuad(void *object, void *unused) {
         gSPVertex(g_displayListCursor++, (u32)D_800FF1B0_de, 4, 0);
         gSP1Triangle(g_displayListCursor++, 0, 1, 2, 0);
         gSP1Triangle(g_displayListCursor++, 1, 2, 3, 0);
-        if(node->extra) func_802A5498_de((u32)&node->extraMatrices[D_800D297C]);
+        if(node->extra) Fx_DrawRedParticleQuad((u32)&node->extraMatrices[D_800D297C]);
     }
 }
 

@@ -8,8 +8,8 @@
    at 0x14 of its 2920-byte record at 0x58 down and, when one expires, marks it -1 and resets that
    player through Pak_ProbeStatus and func_80433610_de between Tsmos_DeactivateControllerState and Tsmos_ActivateControllerState; then it
    advances the menu at 0x8 with Frontend_DrawMenuImage and func_8043C2A4_de while func_8043C308_de reports 1, and
-   once it reports 2 in phase 5 at 0x54 calls MarkMenuEventHandled and moves on through func_8042CFDC_de,
-   func_8042D034_de or func_804389F0_de as the cartridge's jump table jtbl_800E1BB0 chooses for option
+   once it reports 2 in phase 5 at 0x54 calls MarkMenuEventHandled and moves on through Frontend_ContinueCupOrOpenResults,
+   Frontend_OpenControllerModeResults or func_804389F0_de as the cartridge's jump table jtbl_800E1BB0 chooses for option
    byte D_801462D5 up to 4. Returns zero. */
 
 
@@ -24,8 +24,8 @@ extern s32 func_8043C308_de(void *);
 extern void Frontend_DrawMenuImage(void *);
 extern void func_8043C2A4_de(void *);
 extern void MarkMenuEventHandled();
-extern void func_8042CFDC_de();
-extern void func_8042D034_de();
+extern void Frontend_ContinueCupOrOpenResults();
+extern void Frontend_OpenControllerModeResults();
 extern void func_804389F0_de();
 
 s32 func_8042F7A8_de(void *unused0, void *unused1, s32 event) {
@@ -70,10 +70,10 @@ s32 func_8042F7A8_de(void *unused0, void *unused1, s32 event) {
         case 4: goto option_c;
         }
 option_a:
-    func_8042CFDC_de();
+    Frontend_ContinueCupOrOpenResults();
     return 0;
 option_b:
-    func_8042D034_de();
+    Frontend_OpenControllerModeResults();
     return 0;
 option_c:
     func_804389F0_de();

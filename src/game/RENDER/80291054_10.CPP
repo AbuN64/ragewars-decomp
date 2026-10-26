@@ -11,14 +11,14 @@
 #include "COMMON/TRIPLE.H"
 extern f32 D_800C5498_de;
 
-void SetN64_BeginModeTransition(GameSession *session, s32 arg1) {
+void SetN64_BeginModeTransition(GameSession *session, s32 targetMode) {
     s32 saved;
 
     saved = session->mode;
     session->phase = 1;
     session->timer = 0;
     session->mode = 0x14;
-    session->target = arg1;
+    session->target = targetMode;
     session->previousMode = saved;
     if (Control_IsSnapshotActive() != 0) {
         session->timer = D_800C5498_de;
@@ -62,7 +62,7 @@ void SetN64_UpdateGameMode(void *session) {
     D_800CD734 += 1;
 }
 
-s32 func_80293904_de(ObjRecAt26DC1 *arg0, f32 arg1, s32 eight, s32 arg3) {
+s32 SetN64_CheckTimedSessionTransition(ObjRecAt26DC1 *arg0, f32 arg1, s32 eight, s32 arg3) {
     s32 *flag = (s32 *)&D_8010B0E0.pressedButtons;
 
     if ((*flag != 0) && (arg3 != -1)) {

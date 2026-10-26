@@ -2,12 +2,12 @@
 #include "TYPES.H"
 
 #if !(defined(VERSION_DE) || defined(VERSION_EU_X))
-/* Calls func_8041B110_de with 0x3D0 and then 0x3D1, and returns zero. */
-extern void func_8041B110_de(s32);
+/* Calls SmpButton_WrapButtonWidget with 0x3D0 and then 0x3D1, and returns zero. */
+extern void SmpButton_WrapButtonWidget(s32);
 
 s32 func_80438618_eu(void) {
-    func_8041B110_de(0x3D0);
-    func_8041B110_de(0x3D1);
+    SmpButton_WrapButtonWidget(0x3D0);
+    SmpButton_WrapButtonWidget(0x3D1);
     return 0;
 }
 #endif

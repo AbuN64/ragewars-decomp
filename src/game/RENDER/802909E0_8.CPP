@@ -105,7 +105,7 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
 extern void SetN64_ClearDepthRect(void *arg0, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced);
 
 extern void OnScreen_SetupSpriteMode(s32 alpha);
-void func_80290C24_de(void *arg0) {
+void SetN64_DrawFullscreenBackdrop(void *arg0) {
     Frame *frame = D_8011FAC0.ring.current;
     s32 width;
     s32 height;

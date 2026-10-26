@@ -147,7 +147,7 @@ extern void *SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
-extern void *func_80419E54_de(s32, s32);
+extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern void PAKInterface_RelabelSlotRows(s32);
 extern void PAKInterface_RefreshPlayerPanel(s32);
 extern void Control_EnableControllerPak(s32);
@@ -192,7 +192,7 @@ s32 func_8042F130_us_rev1(void *screen) {
     rest = D_800E54A4->bottom->w - D_800E54A4->bottomStep * 4;
     D_800E54A4->bottom->x -= rest;
     Frontend_FindWidgetByResourceId(screen, SPRITE_286)->alpha = 0x6E;
-    D_800E54A4->music = func_80419E54_de(SPRITE_287, 0xFF);
+    D_800E54A4->music = SmpFlicker_CreateFlickerWidget(SPRITE_287, 0xFF);
     D_800E54A4->title = Frontend_FindWidgetByResourceId(screen, SPRITE_287);
     Frontend_SetWidgetFlag08(D_800E54A4->title, 0);
     D_800E54A4->players[0].sprite = Frontend_FindWidgetByResourceId(screen, SPRITE_2FC);

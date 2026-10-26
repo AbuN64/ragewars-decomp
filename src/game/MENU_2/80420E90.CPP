@@ -8,7 +8,7 @@ extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 
 /* Copies the four checkboxes at 0xC to 0x18 of the screen D_800E4400 into the game flags word
    D_801462C8, setting or clearing bits 0x08000000, 0x10000000, 0x8 and 0x20000000 as
-   func_8041AD04_de reports each box checked. */
+   SmpButton_GetListSelection reports each box checked. */
 
 
 
@@ -16,7 +16,7 @@ extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 
 extern struct Shape_func_8021A2D4_de_2 D_801462C8;
 
-extern s32 func_8041AD04_de(void *);
+extern s32 SmpButton_GetListSelection(void *);
 
 /* Updates the limit markers of the screen D_800E4400: totals Achieve_CountEarnedAchievements over the four 400-byte
    records of D_80102B00 whose owner byte 0xD is not negative (or takes 40 when the word at 0x38 is
@@ -60,22 +60,22 @@ enum { MENU_8042144C_939 = 939, MENU_8042144C_952 = 952, MENU_8042144C_953 = 953
 #endif
 
 void Menu_ApplyExtraOptionFlags(void) {
-    if (func_8041AD04_de(D_800E4400->buttons[0]) == 0) {
+    if (SmpButton_GetListSelection(D_800E4400->buttons[0]) == 0) {
         D_801462C8.field_0 &= ~0x08000000;
     } else {
         D_801462C8.field_0 |= 0x08000000;
     }
-    if (func_8041AD04_de(D_800E4400->buttons[1]) == 0) {
+    if (SmpButton_GetListSelection(D_800E4400->buttons[1]) == 0) {
         D_801462C8.field_0 &= ~0x10000000;
     } else {
         D_801462C8.field_0 |= 0x10000000;
     }
-    if (func_8041AD04_de(D_800E4400->buttons[2]) == 0) {
+    if (SmpButton_GetListSelection(D_800E4400->buttons[2]) == 0) {
         D_801462C8.field_0 &= ~0x8;
     } else {
         D_801462C8.field_0 |= 0x8;
     }
-    if (func_8041AD04_de(D_800E4400->buttons[3]) == 0) {
+    if (SmpButton_GetListSelection(D_800E4400->buttons[3]) == 0) {
         D_801462C8.field_0 &= ~0x20000000;
     } else {
         D_801462C8.field_0 |= 0x20000000;

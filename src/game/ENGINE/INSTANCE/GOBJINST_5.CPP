@@ -96,7 +96,7 @@ extern s32 GraphU64_NextRandom(void);
 extern f32 GraphU64_GetTrianglePlaneHeight(StateFlags *, f32, f32);
 extern s32 Map_ReserveEntries(void *, s32);
 extern void Scene_SampleWorldLighting(void *, CVector3 *, u8 *);
-extern void func_802A57E0_de(Owner802A6DF8 *, Shared_PoseActor *, PoseMatrix *);
+extern void Fx_AddActorRibbonSamples(Owner802A6DF8 *, Shared_PoseActor *, PoseMatrix *);
 #include "COMMON/EXTERNS_11.H"
 
 static inline CVector3 randVec(void) {
@@ -559,7 +559,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
                 }
             }
             if (actor->unk_13B) {
-                func_802A57E0_de(&D_801379C0, actor, &mtx[1]);
+                Fx_AddActorRibbonSamples(&D_801379C0, actor, &mtx[1]);
             }
             if (!(actor->flags & 8)) {
                 pos = actor->pos;

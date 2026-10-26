@@ -10,7 +10,7 @@
 #include "RENDER_2/8025DE50_5.H"
 #include "SCENE/802508E0_13.H"
 extern SettingsScreenState *D_800E5430;
-extern void func_8041A430_de(void *, s32);
+extern void SmpSlider_SetTransitionMode(void *, s32);
 
 /* Releases the object D_800E5430 holds through Cache_FreeMemory, clears D_800E5430 and returns zero. */
 
@@ -34,7 +34,7 @@ extern void Tsmos_DeactivateControllerState();
 
 extern void Tsmos_ActivateControllerState();
 
-extern s32 func_8041A470_de(struct MenuFrontendUpdatePlayModeMenu *);
+extern s32 SmpSlider_GetTransitionMode(struct MenuFrontendUpdatePlayModeMenu *);
 
 extern void MarkMenuEventHandled();
 
@@ -56,7 +56,7 @@ extern s8 D_80102B0D[];
 extern void MarkMenuEventHandled(void);
 
 /* Calls MarkMenuEventHandled, then sets the word at offset 0x10 of the object D_800E5430 points to to -1 and
-   calls func_8041A430_de on the object's first word with 2, returning zero. */
+   calls SmpSlider_SetTransitionMode on the object's first word with 2, returning zero. */
 
 
 
@@ -103,7 +103,7 @@ s32 func_8042DAF8_de(void) {
         return 0;
     }
     Tsmos_ActivateControllerState();
-    switch (result = func_8041A470_de(D_800E5430->head.menu)) {
+    switch (result = SmpSlider_GetTransitionMode(D_800E5430->head.menu)) {
     case 3:
         if (--D_800E5430->head.delay <= 0) {
             D_800E5430->head.list->unk16--;
@@ -133,7 +133,7 @@ int func_8042DC04_de(void) {
 
     MarkMenuEventHandled();
     D_800E5430->head.target = 7;
-    func_8041A430_de(D_800E5430->head.menu, 2);
+    SmpSlider_SetTransitionMode(D_800E5430->head.menu, 2);
     for (i = 0; i < D_800E5430->count; i++) {
         slot = &g_playerSettings[i];
         slot->active = 1;
@@ -151,7 +151,7 @@ s32 func_8042DCC4_de(void) {
     MarkMenuEventHandled();
     state = D_800E5430;
     state->head.target = -1;
-    func_8041A430_de(state->head.menu, 2);
+    SmpSlider_SetTransitionMode(state->head.menu, 2);
     return 0;
 }
 

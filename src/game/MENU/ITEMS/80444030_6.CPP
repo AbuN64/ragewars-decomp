@@ -338,7 +338,7 @@ s32 func_804447A0_de(void *first, void *second) {
 s32 func_804447F0_de(StateRecAt14 *arg0) {
     s32 var_v0;
 
-    if ((func_802934F8_de() != 0) && (D_801462C8.local == 0)) {
+    if ((SetN64_IsModeThirteen() != 0) && (D_801462C8.local == 0)) {
         arg0->unk8 = arg0->unk8 & 0xFEFFFFFF;
     } else {
         arg0->unk8 = arg0->unk8 | 0x01000000;

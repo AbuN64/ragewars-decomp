@@ -52,14 +52,14 @@ void Scene_UpdateAndDrawWorld(void *arg0) {
         void *manager;
 
         manager = &D_801379C0;
-        func_802A56FC_de(manager);
+        Fx_ResetRibbonVertexPool(manager);
         func_8022A170_de(&D_80145040);
         Scene_UpdateActorVisibility(state);
         Scene_RequestVisibleGridSections(state);
         Scene_CollectVisibleEffects(state);
 
         if ((state->frozen == 0) && (D_80145088.status[7] == 0)) {
-            func_802A5680_de(manager);
+            Fx_UpdateEffectLists(manager);
             Scene_UpdateActorsAndRoundState(state);
             SetN64_UpdateEffectPool(&state->system11778);
             state->elapsed += D_800D2988 * D_800C50E4_de;
@@ -84,7 +84,7 @@ void Scene_UpdateAndDrawWorld(void *arg0) {
 
 extern void func_8024BE3C_de(void *arg0);
 extern void func_80246E44_de(char *);
-extern s32 func_802934F8_de(void);
+extern s32 SetN64_IsModeThirteen(void);
 extern void Player_UpdateWorldPlayers(void *arg0);
 extern s32 Player_BeginRoundEnd(void *arg0);
 
@@ -146,7 +146,7 @@ void Scene_UpdateActorsAndRoundState(void *arg0) {
     }
 
 first_pass_done:
-    if (func_802934F8_de()) {
+    if (SetN64_IsModeThirteen()) {
         Player_UpdateWorldPlayers(&D_80145040);
     }
     if (Player_BeginRoundEnd(&D_80145040)) {
@@ -167,7 +167,7 @@ first_pass_done:
     do {
         sw_mode_0:
         sw_mode_2:
-            func_8042CFB0_de();
+            Frontend_InitMatchResultsMenu();
             break;
         sw_mode_1:
         sw_mode_3:

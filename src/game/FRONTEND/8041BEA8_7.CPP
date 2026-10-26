@@ -62,7 +62,7 @@ s32 Frontend_CreateSlotSelectionMenu(void *arg0) {
     D_800E3590->item491->x = D_800E3590->item491->x - adjust;
 
     Frontend_FindWidgetByResourceId(arg0, 488)->alpha = 110;
-    D_800E3590->lookup486 = func_80419E54_de(486, 255);
+    D_800E3590->lookup486 = SmpFlicker_CreateFlickerWidget(486, 255);
 
     item = Frontend_FindWidgetByResourceId(arg0, 486);
     D_800E3590->item486 = item;

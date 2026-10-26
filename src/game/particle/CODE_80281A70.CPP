@@ -303,7 +303,7 @@ extern float D_800C4E54_de;
 extern void Geometry_SetColorDither(s32 arg0);
 extern s32 func_80296B74_de(CQuatern *planes, Box *box);
 extern void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view);
-extern void func_802A58B0_de(ObjRecAt7528 *arg0, Shared_Particle *arg1, PackedMatrixWords *matrix);
+extern void Fx_AddParticleRibbonSamples(ObjRecAt7528 *arg0, Shared_Particle *arg1, PackedMatrixWords *matrix);
 void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
     Box box;
     CVector3 transformed;
@@ -389,7 +389,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
                     skipAttached = node->particle.desc->flags & 0x10000;
                 }
                 if (!skipAttached) {
-                    func_802A58B0_de(&D_801379C0, &node->particle, &node->particle.mtx[D_800D297C]);
+                    Fx_AddParticleRibbonSamples(&D_801379C0, &node->particle, &node->particle.mtx[D_800D297C]);
                 }
             } while (0);
         }

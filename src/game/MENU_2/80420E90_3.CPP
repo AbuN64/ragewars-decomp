@@ -10,7 +10,7 @@
 #include "MENU_2/80420E90_3.H"
 #include "SCENE/802508E0_13.H"
 extern StateCode80420E90 *D_800E4450;
-extern void func_8041A430_de(void *, s32);
+extern void SmpSlider_SetTransitionMode(void *, s32);
 
 /* Releases the object D_800E4450 holds through Cache_FreeMemory, clears D_800E4450 and returns zero. */
 
@@ -32,7 +32,7 @@ void Tsmos_ActivateControllerState();
 void Tsmos_DeactivateControllerState();
 
                                   /* extern */
-s32 func_8041A470_de(void *);
+s32 SmpSlider_GetTransitionMode(void *);
 
                           /* extern */
 
@@ -42,7 +42,7 @@ s32 func_8041A470_de(void *);
 /* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled, for messages 0x3A2 to 0x3A7
    through jtbl_800E1610: five pick option 0, 1, 3, 4 or 2, pass it to func_80434FB4_de and set the
    result word at offset 0x10 of the screen D_800E4450 to 0x13; the sixth sets it to -1. Both then
-   close the screen's first word through func_8041A430_de with 2. Returns zero. */
+   close the screen's first word through SmpSlider_SetTransitionMode with 2. Returns zero. */
 
 
 extern void MarkMenuEventHandled(void);
@@ -50,7 +50,7 @@ extern void MarkMenuEventHandled(void);
 extern s32 func_80299A08_de(void);
 
 /* Calls MarkMenuEventHandled, then sets the word at offset 0x10 of the object D_800E4450 points to to -1 and
-   calls func_8041A430_de on the object's first word with 2, returning zero. */
+   calls SmpSlider_SetTransitionMode on the object's first word with 2, returning zero. */
 
 
 
@@ -104,7 +104,7 @@ s32 Menu_UpdateSixChoiceMenu(void) {
         return 0;
     }
     Tsmos_ActivateControllerState();
-    temp_v0 = func_8041A470_de(D_800E4450->unk0);
+    temp_v0 = SmpSlider_GetTransitionMode(D_800E4450->unk0);
     switch (temp_v0) {                              /* irregular */
     case 3:
         temp_v0_2 = D_800E4450->unkC - 1;
@@ -185,7 +185,7 @@ choose:
 cancel:
     D_800E4450->unk10 = -1;
 close:
-    func_8041A430_de(D_800E4450->unk0, 2);
+    SmpSlider_SetTransitionMode(D_800E4450->unk0, 2);
 done:
     return 0;
 }
@@ -196,7 +196,7 @@ s32 Menu_CancelSixChoiceMenu(void) {
     MarkMenuEventHandled();
     state = D_800E4450;
     state->unk10 = -1;
-    func_8041A430_de(state->unk0, 2);
+    SmpSlider_SetTransitionMode(state->unk0, 2);
     return 0;
 }
 
@@ -249,7 +249,7 @@ void Menu_SetFadeMeterDirection(struct Triple *timer, s32 mode) {
 }
 
 s32 Menu_AdvanceFadeMeter(struct Meter *meter, s32 step) {
-    struct Resource_func_80419E54_de *bar;
+    struct ResourceSmpFlickerCreateFlickerWidget *bar;
     s32 level;
     f32 value;
 

@@ -78,7 +78,7 @@ void SetN64_UpdateFrameTiming(TimingWorld *world) {
 #endif
     D_801428A0 = nowTicks;
     if (Tsmos_IsFrontendActive() == 0) {
-        if (func_802934F8_de() == 0) {
+        if (SetN64_IsModeThirteen() == 0) {
             world->unk26DD4 = 0;
         } else {
             world->unk26DD4 = Pak_CountLiveNodes(&world->viewport.self.messageList.head);
@@ -118,7 +118,7 @@ block_10:
 #endif
     func_80253344_de(0);
     D_80146CD8 = D_8011FAC0.ring.current;
-    func_80292308_de(world);
+    SetN64_BuildAndSubmitSessionFrame(world);
     world->unk26DB0 = world->unk26DB0 + D_800D2988;
     func_80293C34_de(world);
     idle=idlePause(world);

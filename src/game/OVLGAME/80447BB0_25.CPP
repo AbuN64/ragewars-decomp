@@ -51,7 +51,7 @@ void Cinema_UpdateSequenceTrack(void *);
                            /* extern */
                            /* extern */
                     /* extern */
-s32 func_802934F8_de(void);
+s32 SetN64_IsModeThirteen(void);
 
                             /* extern */
 void Ovlgame_InitActorHudState(Shared_ActorView *);
@@ -253,7 +253,7 @@ void func_80449E18_de(CPlayerPool *pool) {
     struct IntPair *model;
     struct IntPair *temp_v1_2;
     Shared_ActorView *actor;
-    if ((func_802934F8_de() != 0) && (Control_IsSnapshotActive() != 0)) {
+    if ((SetN64_IsModeThirteen() != 0) && (Control_IsSnapshotActive() != 0)) {
         Control_RestoreActorSnapshot();
         Control_DeactivateActorSnapshot();
     }

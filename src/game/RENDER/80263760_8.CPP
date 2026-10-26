@@ -21,7 +21,7 @@ extern void Rumble_FreeAllPoolNodes(s32 *);
 
 
 
-/* Advances the replay mode: when replays are possible (func_802934F8_de, D_80145070 and the handle table) it
+/* Advances the replay mode: when replays are possible (SetN64_IsModeThirteen, D_80145070 and the handle table) it
  * cycles the mode 0 -> 1 -> 2 -> 0, snapshots the actors and records the camera target, promoting mode 1
  * to 2 when the player's target changed or the player is in states 0x16 to 0x21 and recording the player's
  * target instead; otherwise the mode is cleared. An active mode arms the 240-frame timer. */
@@ -36,7 +36,7 @@ extern s32 D_8013B2BC;
 
 extern ObjectState1E_2 D_801462C8;
 
-extern s32 func_802934F8_de(void);
+extern s32 SetN64_IsModeThirteen(void);
 
 extern void *Player_GetFirstPlayer(void *);
 
@@ -176,7 +176,7 @@ void Control_CycleActorSnapshotMode(void) {
     s32 enabled;
     ObjectState1E_2 *options;
 
-    enabled = func_802934F8_de() != 0;
+    enabled = SetN64_IsModeThirteen() != 0;
     snapshot = &D_8010BC40;
     if (D_80145070 == 0) {
         enabled = 0;

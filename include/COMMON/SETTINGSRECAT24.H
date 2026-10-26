@@ -32,10 +32,10 @@ struct Game_func_8042D060_de {
 };
 
 
-extern void func_8042CC74_de();
+extern void ScenarioSetup_HideResultCatalogueWidgets();
 
 
-extern void func_8042D1C8_de();
+extern void Frontend_AwardResultMilestones();
 
 struct Shared_Rec3;
 struct Shared_Rec3 {
@@ -61,7 +61,7 @@ struct IntPair;
 struct SlotRecAt7F;
 typedef struct SlotRecAt7F SlotRecAt7F;
 
-extern void func_8042CFDC_de(void);
+extern void Frontend_ContinueCupOrOpenResults(void);
 
 struct MatchScoreScreen;
 typedef struct MatchScoreScreen MatchScoreScreen;
@@ -97,11 +97,11 @@ struct MatchScoreScreen {
 struct Shared_Rec3;
 typedef struct Shared_Rec3 Shared_Rec3;
 
-extern void func_8042D118_de();
+extern void Frontend_AwardResultAchievements();
 
 
 
-extern void func_8042D034_de(void);
+extern void Frontend_OpenControllerModeResults(void);
 
 
 struct Game_func_8042D060_de;
@@ -109,7 +109,7 @@ typedef struct Game_func_8042D060_de Game_func_8042D060_de;
 
 
 
-extern void func_8042D418_de(s32 arg0);
+extern void Frontend_HideResultBadgeGroup(s32 arg0);
 
 
 extern s32 Frontend_GetMatchEndReason();
@@ -124,7 +124,7 @@ struct SlotRecAt7F {
 };
 
 
-extern void func_8042CFB0_de(void);
+extern void Frontend_InitMatchResultsMenu(void);
 
 /* Results-screen group identifiers from each native menu resource set. */
 #if defined(VERSION_DE)

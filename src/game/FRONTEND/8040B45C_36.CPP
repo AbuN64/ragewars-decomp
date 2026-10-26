@@ -62,7 +62,7 @@ extern void Frontend_ReleaseUnprotectedBuffers(s32), Frontend_UpdateImageRelease
 extern s32 N64Eng_GetFrameCounter(void);
 
 
-/* Returns a texture's resource id, first loading its pixel and 16-bit palette data, detecting a transparent palette entry and creating the texture resource when it is not yet loaded, and in both cases updates the texture's usage record for the requested mode (1 stamps the next expiry time, 2 pins it, 3 counts a reference); the opened file handle is stored through the header symbol as in the paletted texture loader, and the resource id is held in two locals (the second passed to func_80419640_de), which reproduces the cartridge's three stack slots. */
+/* Returns a texture's resource id, first loading its pixel and 16-bit palette data, detecting a transparent palette entry and creating the texture resource when it is not yet loaded, and in both cases updates the texture's usage record for the requested mode (1 stamps the next expiry time, 2 pins it, 3 counts a reference); the opened file handle is stored through the header symbol as in the paletted texture loader, and the resource id is held in two locals (the second passed to Smp_CopyAndSwizzleImage), which reproduces the cartridge's three stack slots. */
 
 
 
@@ -81,7 +81,7 @@ extern s32 N64Eng_GetFrameCounter(void);
 
 extern void Frontend_ClearOwnedImage(s32 id);
 
-extern void func_80419640_de(s32 texture, s32 id);
+extern void Smp_CopyAndSwizzleImage(s32 texture, s32 id);
 
 static inline void touch(s32 index, s32 mode) {
     switch (mode) {
@@ -303,7 +303,7 @@ s32 Frontend_GetImageTexture(s32 index, s32 mode) {
     }
     Frontend_ConfigureOwnedImage(id, format, entry->unkA, entry->unkC, stride, entry->unkC, 1, size, pixels, 1, paletteBytes,
                   palette, entry->unkE);
-    func_80419640_de(texture, id);
+    Smp_CopyAndSwizzleImage(texture, id);
     D_80153C10[index].unk4 |= 1;
     XStdio_CloseStream(D_801539B0.unk0);
     D_801539B0.unk0 = 0;

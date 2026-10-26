@@ -6,8 +6,8 @@
 
 
 struct MenuMarker;
-struct Screen_func_8042B78C_de;
-struct Screen_func_8042B78C_de {
+struct ScreenScenarioSetupSelectPreviousCatalogueCategory;
+struct ScreenScenarioSetupSelectPreviousCatalogueCategory {
     char pad0[0x308];
     char view[0x434 - 0x308];
     s32 category;
@@ -24,8 +24,8 @@ struct Screen_func_8042B78C_de {
 extern void ScenarioSetup_ClearFlagBits();
 
 struct Label;
-struct Screen_func_8042AFE0_de;
-struct Screen_func_8042AFE0_de {
+struct ScreenScenarioSetupLoadSetupArenaLabel;
+struct ScreenScenarioSetupLoadSetupArenaLabel {
     s32 field0;
     char pad4[0x3EC - 4];
     struct Label *widget;
@@ -47,10 +47,10 @@ struct G {
     s32 unk440;
     s32 unk444;
     s32 unk448;
-    Resource_func_80419E54_de *unk44C;
+    ResourceSmpFlickerCreateFlickerWidget *unk44C;
 };
 
-struct Resource_func_80419E54_de;
+struct ResourceSmpFlickerCreateFlickerWidget;
 struct VersusResultsScreen;
 struct VersusResultsScreen {
     char pad0[0x8];
@@ -61,19 +61,19 @@ struct VersusResultsScreen {
     s32 winnerSlot;
     s32 winner;
     char pad43C[0x450 - 0x43C];
-    struct Resource_func_80419E54_de *bannerShadow;
-    struct Resource_func_80419E54_de *banner;
+    struct ResourceSmpFlickerCreateFlickerWidget *bannerShadow;
+    struct ResourceSmpFlickerCreateFlickerWidget *banner;
     char pad458[0x464 - 0x458];
     s32 frames;
     s32 blinkDelay;
     s32 blinking;
 };
 
-struct Resource_func_80419E54_de;
+struct ResourceSmpFlickerCreateFlickerWidget;
 
 struct MenuMarker;
-struct Screen_func_8042B4D4_de;
-struct Screen_func_8042B4D4_de {
+struct ScreenScenarioSetupSelectPreviousCatalogueItem;
+struct ScreenScenarioSetupSelectPreviousCatalogueItem {
     char pad0[0x308];
     char view[0x434 - 0x308];
     s32 category;
@@ -103,7 +103,7 @@ extern struct Cup D_80154010;
 struct G;
 typedef struct G G;
 
-struct Resource_func_80419E54_de;
+struct ResourceSmpFlickerCreateFlickerWidget;
 
 
 
@@ -115,8 +115,8 @@ struct RecordRecAtCV2 {
 };
 
 struct Label;
-struct Screen_func_8042A990_de;
-struct Screen_func_8042A990_de {
+struct ScreenScenarioSetupRefreshSelectedArenaLabel;
+struct ScreenScenarioSetupRefreshSelectedArenaLabel {
     void *window;
     char pad4[0x3EC - 0x4];
     struct Label *label;
@@ -130,7 +130,7 @@ struct Screen_func_8042A990_de {
     void *widgetE;
 };
 
-extern void func_8042B2E4_de();
+extern void ScenarioSetup_ResetSelectionIndicators();
 
 struct MenuRenderFill;
 struct MenuRenderFill {
@@ -139,7 +139,7 @@ struct MenuRenderFill {
 };
 
 
-extern s32 func_8042BAD0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 ScenarioSetup_DispatchCatalogueEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 
 struct Icon;

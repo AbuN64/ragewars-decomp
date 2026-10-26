@@ -12,7 +12,7 @@
    0x44 (clearing its word at 0x20 and setting 0x24 to D_800E1474) and the item at 0x48, sets both
    scales at 0x4C and 0x50 to D_800E1470, copies the item's two colours at 0x2C and 0x30 to 0x60,
    stores the green and red differences between them over 75 steps at 0x70 and 0x74, marks it
-   active at 0x78, starts it through func_8041A47C_de and func_8041A430_de(1) and attaches it to the
+   active at 0x78, starts it through SmpSlider_EnableTransition and SmpSlider_SetTransitionMode(1) and attaches it to the
    frame through Frontend_InsertWidgetBefore. Returns the widget. */
 
 
@@ -23,11 +23,11 @@
 
 extern void *Frontend_GetScreenData(s32 index);
 extern MenuFadeWidget *Cache_AllocateMemory(s32);
-extern void func_8041A47C_de(MenuFadeWidget *);
-extern void func_8041A430_de(MenuFadeWidget *, s32);
+extern void SmpSlider_EnableTransition(MenuFadeWidget *);
+extern void SmpSlider_SetTransitionMode(MenuFadeWidget *, s32);
 extern void Frontend_InsertWidgetBefore(MenuFadeWidget *, MenuFadeWidget *);
 
-MenuFadeWidget *func_8041A280_de(s32 frameId, s32 itemId) {
+MenuFadeWidget *SmpFade_CreateFadeWidget(s32 frameId, s32 itemId) {
     MenuFadeWidget *frame;
     s32 context;
     MenuFadeWidget *result;
@@ -53,8 +53,8 @@ MenuFadeWidget *func_8041A280_de(s32 frameId, s32 itemId) {
                          ((result->item->colours[0] & 0xFF0000) >> 16)) / 75;
     result->redStep = (((u8 *)result->item->colours)[0] - ((u8 *)result->item->colours)[4]) / 75U;
     result->active = 1;
-    func_8041A47C_de(result);
-    func_8041A430_de(result, 1);
+    SmpSlider_EnableTransition(result);
+    SmpSlider_SetTransitionMode(result, 1);
     Frontend_InsertWidgetBefore(frame, result);
     return result;
 }

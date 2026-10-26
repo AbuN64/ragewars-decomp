@@ -34,6 +34,6 @@ typedef struct CGameStatus_t {
     s32 m_nBastilleShield; /* +0xA0 */
     s32 m_nBastilleTimer; /* +0xA4 */
     s32 humanWon;
-    s32 transitionActive; /* +0xAC: func_80293CE4_de */
+    s32 transitionActive; /* +0xAC: SetN64_DrawSessionWithRoundTimeout */
 } CGameStatus;
 #endif

@@ -49,7 +49,7 @@ extern f32 Rumble_SamplePackedFloatRange(CharacterScreenCell);
 #endif
 
 extern void func_8022B040_de(s32, ParticleEffect *);
-extern void func_802A4598_de(void *, ParticleEffect *, s32);
+extern void Fx_AttachActorRibbon(void *, ParticleEffect *, s32);
 extern s32 DynLight_AllocateWorldLight(void *, s32);
 extern void func_802843B8_de(ParticleEffect *, s32);
 extern void SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
@@ -580,7 +580,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 effect->unk1E0 = D_800CD6B4;
                 Particle_Attach((Shared_Particle *)effect, 0, 0);
                 if (entry->unk6 != -1) {
-                    func_802A4598_de(&D_801379C0, effect, entry->unk6);
+                    Fx_AttachActorRibbon(&D_801379C0, effect, entry->unk6);
                 }
                 if (entry->unk7 != -1) {
                     effect->unk138 = DynLight_AllocateWorldLight(&D_8013B1A8, entry->unk7);

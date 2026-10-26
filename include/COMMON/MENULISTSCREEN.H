@@ -15,11 +15,11 @@ struct State_func_80437444_de {
 };
 
 struct Menu_func_80437718_de;
-struct Resource_func_80419E54_de;
+struct ResourceSmpFlickerCreateFlickerWidget;
 struct Menu_func_80437718_de {
     void *title;
     void *button;
-    struct Resource_func_80419E54_de *item;
+    struct ResourceSmpFlickerCreateFlickerWidget *item;
     s32 count;
     s32 selection;
 };

@@ -9,12 +9,12 @@
 #include "RENDER/80291054_9.H"
 #include "sdk/AUDIO/802BD1A8_19.H"
 
-extern void func_8029311C_de(void *arg0, s8 *arg1, s32 arg2, s32 arg3,
+extern void SetN64_DrawColorRectangle(void *arg0, s8 *arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);
 
 extern f32 D_800D2988; /* frame time scale (Particle code saves and rescales it) */
 
-s32 func_80292FC0_de(s32 *, s32);
+s32 SetN64_StartGameThreadAndIdle(s32 *, s32);
 
 #include "COMMON/GAME_SESSION.H"
 
@@ -28,7 +28,7 @@ extern void func_802BD160_de(s32 arg0);
 
 
 
-void func_80293394_de(struct GameSession *session) {
+void SetN64_DrawSessionFade(struct GameSession *session) {
     s8 color[4];
     f32 value;
     s32 alpha;
@@ -48,11 +48,11 @@ void func_80293394_de(struct GameSession *session) {
         }
     }
     color[3] = alpha;
-    func_8029311C_de(session, color, 0, 0, SCREEN_WD, SCREEN_HT);
+    SetN64_DrawColorRectangle(session, color, 0, 0, SCREEN_WD, SCREEN_HT);
 }
 
 /* Compares two byte strings lexicographically, returning -1 for either null pointer. */
-int func_80293440_de(u8 *a, u8 *b) {
+int SetN64_CompareByteStrings(u8 *a, u8 *b) {
  if (!a || !b) return -1;
  while (*a && *b) {
   if (*a < *b) return -1;
@@ -64,35 +64,35 @@ int func_80293440_de(u8 *a, u8 *b) {
  return 0;
 }
 
-u8 *SetN64_CopyString(u8 *arg0, u8 *arg1)
+u8 *SetN64_CopyString(u8 *destination, u8 *source)
 {
-  u8 *var_a1;
-  u8 *var_v1;
-  u8 temp_v0;
-  u8 temp_v0_2;
- do { temp_v0 = *arg1; var_a1 = arg1 + 1; } while (0);
-  *arg0 = temp_v0;
-  var_v1 = arg0 - -1;
-  if (temp_v0 & 0xFF)
+  u8 *readCursor;
+  u8 *writeCursor;
+  u8 firstByte;
+  u8 copiedByte;
+ do { firstByte = *source; readCursor = source + 1; } while (0);
+  *destination = firstByte;
+  writeCursor = destination - -1;
+  if (firstByte & 0xFF)
   {
     do
     {
-      temp_v0_2 = *var_a1;
-      var_a1 += 1;
-      *var_v1 = temp_v0_2;
-      var_v1 += 1;
+      copiedByte = *readCursor;
+      readCursor += 1;
+      *writeCursor = copiedByte;
+      writeCursor += 1;
     }
-    while (temp_v0_2 & 0xFF);
+    while (copiedByte & 0xFF);
   }
-  return arg0;
+  return destination;
 }
 
-int func_802934F8_de(void) {
+int SetN64_IsModeThirteen(void) {
     return D_8011FAC0.mode == 0xD;
 }
 
 void func_8029350C_de(s32 arg0) {
-    func_80292FC0_de(&D_8011FAC0, arg0);
+    SetN64_StartGameThreadAndIdle(&D_8011FAC0, arg0);
 }
 
 void func_80293534_de(void) {

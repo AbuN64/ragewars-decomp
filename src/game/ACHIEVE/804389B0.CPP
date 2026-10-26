@@ -19,7 +19,7 @@ extern void *Cache_AllocateMemory(), *Frontend_FindWidgetByResourceId(), *Achiev
 extern s32 Defs_TestBit(), Achieve_ApplyLevelCompletionReward(), Achieve_AwardCharacterCompletionUnlock(), Frontend_FindKeyIndex();
 extern void Frontend_SetWidgetFlag08(), Frontend_SetWidgetFlag100(), func_8043C210_de(), func_8043C278_de(), func_80438A88_de(), Achieve_MarkLevelPlayed();
 extern void Defs_SetBitValue(), XPlus_FillMemory(), Achieve_UpdateUnlockTiers(), XStdio_FormatBuffer(), XPlus_CopyString(), Achieve_UpdatePlayerPreviewStats(), func_80438614_de();
-extern void func_8041B110_de(), Scene_CopyLevelName(), Tsmos_DeactivateControllerState();
+extern void SmpButton_WrapButtonWidget(), Scene_CopyLevelName(), Tsmos_DeactivateControllerState();
 extern char *XPlus_UppercaseString();
 extern u8 D_800F00DC_raw[];
 extern char g_world[];
@@ -134,9 +134,9 @@ s32 func_804389B0_eu_x(void *root) {
     Achieve_UpdatePlayerPreviewStats();
     func_80438614_de();
 tail:
-    func_8041B110_de(CS(0x272));
-    func_8041B110_de(CS(0x273));
-    func_8041B110_de(CS(0x277));
+    SmpButton_WrapButtonWidget(CS(0x272));
+    SmpButton_WrapButtonWidget(CS(0x273));
+    SmpButton_WrapButtonWidget(CS(0x277));
     Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, CS(0x273)), 1);
     for (i = 0; i < 4; i++) {
         if (D_80102B0D[i * 0x190] >= 0 && D_800FEB0E[i * 0x190] == 0) {

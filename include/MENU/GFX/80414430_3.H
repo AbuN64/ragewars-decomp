@@ -3,5 +3,5 @@
 #include "COMMON/RECTANGLE_DRAW.H"
 void Gfx_SetRenderMode(s32 mode);
 void Gfx_SetCombineMode(s32 mode);
-void func_80416ECC_de(s32 mode);
+void Gfx_SetPrimitiveVertexMode(s32 mode);
 #endif

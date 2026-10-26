@@ -25,7 +25,7 @@ extern void func_80259440_de(void *arg0);
 extern void Audio_UpdateDialogPlayer(void *arg0);
 
 extern void Audio_UpdateMusicPlayback(void *arg0);
-extern s32 func_802934F8_de(void);
+extern s32 SetN64_IsModeThirteen(void);
 extern void *Sky_FindNearestCamera(MenuMatchGlobals *arg0, CVector3 *arg1);
 
 
@@ -82,7 +82,7 @@ s32 func_8025842C_de(void *context) {
 
     if (D_800CB720 != 0 &&
         ((struct ContextRecAt2BC0 *)(object))->field2BB4 != 0 &&
-        func_802934F8_de() != 0 &&
+        SetN64_IsModeThirteen() != 0 &&
         ((struct ContextRecAt2BC0 *)(object))->track > 0) {
         CVector3 zero;
         void *result;

@@ -18,7 +18,7 @@ void Tsmos_ShutdownFrontend(void) {
     func_80299468_de();
     Frontend_CloseResourceArchive();
     ESmem_FreeFrameHeaps();
-    func_80414384_de();
+    Gfx_ShutdownFrontendServices();
     selected = &D_800D2C90.z;
     *selected = 0;
     Tsmos_DeactivateControllerState();

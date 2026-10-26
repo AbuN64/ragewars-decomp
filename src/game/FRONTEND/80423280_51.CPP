@@ -5,9 +5,9 @@
 #include "TYPES.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/SELF.H"
-extern s32 func_8042AF3C_de(void);
+extern s32 ScenarioSetup_IsCupComplete(void);
 
-/* Starts the next stage of the current cup D_80154010 unless func_8042AF3C_de reports the cup over:
+/* Starts the next stage of the current cup D_80154010 unless ScenarioSetup_IsCupComplete reports the cup over:
    draws random stage numbers below the cup's size (5, 7, 17 or 11 stages) until one not yet marked
    in the played set at D_80154018 turns up (giving up after 15000 draws), marks it, counts the stage in
    D_80154014, maps it through the cup's stage table to an arena id, finds that id among the 40
@@ -88,7 +88,7 @@ static inline s32 stage_arena(s32 cup, s32 stage) {
     return value;
 }
 
-s32 func_8042ACD8_de(void) {
+s32 ScenarioSetup_StartRandomCupStage(void) {
     s32 started;
     s32 found;
     s32 stage;
@@ -96,7 +96,7 @@ s32 func_8042ACD8_de(void) {
     s32 size;
 
     started = 0;
-    if (func_8042AF3C_de() == 0) {
+    if (ScenarioSetup_IsCupComplete() == 0) {
         started = 1;
         stage = 0;
         draws = 0;
@@ -119,14 +119,14 @@ s32 func_8042ACD8_de(void) {
     return started;
 }
 
-/* Returns whether D_80154010 holds anything other than -1; func_8042AFC0_de stores it. */
+/* Returns whether D_80154010 holds anything other than -1; ScenarioSetup_SetCupCategory stores it. */
 
 s32 ScenarioSetup_IsCupSelected(void) {
     return D_80154010.index != -1;
 }
 
 
-s32 func_8042AF3C_de(void) {
+s32 ScenarioSetup_IsCupComplete(void) {
     s32 complete = 1;
     if (D_80154010.index >= 0) {
         complete = cup_stages(D_80154010.index);

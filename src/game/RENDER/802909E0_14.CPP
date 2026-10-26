@@ -13,7 +13,7 @@ extern void func_802AAB7C_de(char *, f32, f32, f32, f32, s32, s32, s32);
 
 
 
-void func_80290E6C_de(void) {
+void SetN64_DrawCreditsLines(void) {
     s32 line;
     f32 y;
     char *text;

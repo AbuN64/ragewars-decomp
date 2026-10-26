@@ -35,7 +35,7 @@ extern void func_80259A50_de(void *arg0, s32 arg1);
 
 extern f32 D_800C3EE0_de[];
 
-extern s32 func_802934F8_de(void);
+extern s32 SetN64_IsModeThirteen(void);
 
 extern void *Sky_FindNearestCamera(MenuMatchGlobals *arg0, CVector3 *arg1);
 
@@ -177,7 +177,7 @@ void Audio_PlayPeriodicTrackSound(ContextRecAt2BC0 *arg0) {
 
     if (D_800CB720 != 0 &&
         arg0->field2BB4 != 0 &&
-        func_802934F8_de() != 0 &&
+        SetN64_IsModeThirteen() != 0 &&
         arg0->track > 0) {
         {
             register f32 value = 0.0f;

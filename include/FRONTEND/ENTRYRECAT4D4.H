@@ -60,7 +60,7 @@ typedef struct FourPlayerResultsScreen FourPlayerResultsScreen;
 
 
 
-struct Resource_func_80419E54_de;
+struct ResourceSmpFlickerCreateFlickerWidget;
 
 struct ResultsPlayerPanel;
 struct FourPlayerResultsScreen;

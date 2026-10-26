@@ -83,7 +83,7 @@ s32 Frontend_HandleMatchMenuMessage(void) {
    and -1 otherwise, then calls func_802998A8_de. Returns zero. */
 extern void MarkMenuEventHandled();
 
-s32 func_804290F4_de(void) {
+s32 Frontend_CloseMatchMenu(void) {
     MarkMenuEventHandled();
     func_8042E988_de(func_802999A0_de(0) == 0xB ? 0xB : -1);
     func_802998A8_de();

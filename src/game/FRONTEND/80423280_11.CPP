@@ -22,7 +22,7 @@
 
 
 
-/* The values func_8042AE60_eu loads by address:
+/* The values ScenarioSetup_UpdateSetupTransition loads by address:
  * 0x800E1AF4 = 0.0033333334 (float, D_800EE144 in this cartridge's tables)
  * 0x800E1AF8 = 100.0 (float, D_800EE148 in this cartridge's tables)
  * 0x800E1AFC = 150.0 (float, unnamed in this cartridge's tables)
@@ -35,9 +35,9 @@
 
 void Tsmos_ActivateControllerState(void);
 
-void func_80419F24_de(void *);
+void SmpFlicker_RestoreFlickerValue(void *);
 
-s32 func_80419F38_de(void *);
+s32 SmpFlicker_IsFlickerIdle(void *);
 
 void SmpFlicker_StartFlicker(void *, int);
 
@@ -47,7 +47,7 @@ extern MenuTransitionSignal D_80154020;
 
 extern ListScreenScreen *D_800E4F60;
 
-s32 func_8042AE60_eu(void *root, s32 arg1, s32 arg2) {
+s32 ScenarioSetup_UpdateSetupTransition(void *root, s32 arg1, s32 arg2) {
     ListScreenScreen *countdown;
     f32 var_f0;
     s32 temp_a2;
@@ -140,17 +140,17 @@ block_7:
         }
         countdown->unk_3E0 = var_v0;
         
-        if ((((ListScreenScreen *) D_800E4F60)->unk_3E0 <= 0) && (func_80419F38_de(D_800E4F60->text3E4) != 0)) {
-            func_80419F24_de(D_800E4F60->text3E4);
-            func_8042A7B4_de(0xA);
+        if ((((ListScreenScreen *) D_800E4F60)->unk_3E0 <= 0) && (SmpFlicker_IsFlickerIdle(D_800E4F60->text3E4) != 0)) {
+            SmpFlicker_RestoreFlickerValue(D_800E4F60->text3E4);
+            ScenarioSetup_SetCatalogueAlpha(0xA);
             D_800E4F60->unk_3DC = 9;
         }
         break;
     case 5:
         Frontend_SetWidgetFlag08(D_800E4F60->unk_458, 1);
         Frontend_SetWidgetFlag08(D_800E4F60->unk_3E8, 0);
-        func_8042B2E4_de();
-        func_8042A7B4_de(0);
+        ScenarioSetup_ResetSelectionIndicators();
+        ScenarioSetup_SetCatalogueAlpha(0);
         D_800E4F60->unk_3DC = 2;
         D_800E4F60->unk_3E0 = 4;
         Frontend_SetWidgetFlag08(D_800E4F60->unk_448, 0);
@@ -159,7 +159,7 @@ block_7:
     case 8:
         temp_v0 = ((ListScreenItem *)Frontend_FindWidgetByResourceId(root, 0x316U))->alpha;
         temp_s0 = temp_v0 >> 1;
-        func_8042A7B4_de(temp_s0);
+        ScenarioSetup_SetCatalogueAlpha(temp_s0);
         if (temp_s0 < 0xA) {
             D_800E4F60->unk_3DC = 3;
             func_8042E988_de(0xB);
@@ -173,7 +173,7 @@ block_7:
             temp_s0 = 0x41;
             D_800E4F60->unk_3DC = 3;
         }
-        func_8042A7B4_de(temp_s0);
+        ScenarioSetup_SetCatalogueAlpha(temp_s0);
         var_a1 = 1;
         if (D_800E4F60->selection == 0) {
             var_a0_3 = D_800E4F60->unk_448;

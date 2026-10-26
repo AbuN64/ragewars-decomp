@@ -54,9 +54,9 @@ typedef s32 (*Handler8042DB38)(void *, s32, s32, s32, s32);
 
 extern Handler8042DB38 D_800E53CC;
 
-extern s32 D_80146894; /* MIXED func_8042D788_de */
-extern s32 D_801468F4; /* MIXED func_8042D788_de */
-s32 func_8042D788_de(void) {
+extern s32 D_80146894; /* MIXED Frontend_ActivateResultsAction */
+extern s32 D_801468F4; /* MIXED Frontend_ActivateResultsAction */
+s32 Frontend_ActivateResultsAction(void) {
     s32 *paused;
     MarkMenuEventHandled();
     if (func_8043C308_de(D_800E53C0) == 1) {
@@ -114,12 +114,12 @@ s32 func_8042D788_de(void) {
     return 0;
 }
 
-s32 func_8042D8A4_de(void) {
+s32 Frontend_ConsumeResultsEvent(void) {
     MarkMenuEventHandled();
     return 0;
 }
 
-s32 func_8042D8C4_de(void *first, void *second, void *third, s32 fourth) {
+s32 Frontend_ScrollResultsBackward(void *first, void *second, void *third, s32 fourth) {
     MatchScoreScreen *state;
 
     if (fourth == 1) {
@@ -134,7 +134,7 @@ s32 func_8042D8C4_de(void *first, void *second, void *third, s32 fourth) {
     return 0;
 }
 
-s32 func_8042D908_de(void *first, void *second, void *third, s32 fourth) {
+s32 Frontend_ScrollResultsForward(void *first, void *second, void *third, s32 fourth) {
     MatchScoreScreen *state;
     s32 position;
 
@@ -151,7 +151,7 @@ s32 func_8042D908_de(void *first, void *second, void *third, s32 fourth) {
     return 0;
 }
 
-s32 func_8042D958_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchResultsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler8042DB38 *entry;
     s32 index;
     s32 wildcard;

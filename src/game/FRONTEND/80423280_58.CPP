@@ -12,8 +12,8 @@
 
 extern struct State_func_8042D9E8_de *D_800E5430;
 
-extern s32 func_8041A280_de(s32, s32);
-extern void func_8041A47C_de(s32);
+extern s32 SmpFade_CreateFadeWidget(s32, s32);
+extern void SmpSlider_EnableTransition(s32);
 extern void XStdio_FormatBuffer(void *, void *, s32);
 
 s32 func_8042DBD0_us_rev1(s32 arg0) {
@@ -25,17 +25,17 @@ s32 func_8042DBD0_us_rev1(s32 arg0) {
     /* the hub's allocation helper returns its SelectionScreenState view; this unit keeps its own state type */
     D_800E5430 = (struct State_func_8042D9E8_de *) Cache_AllocateMemory(0x24);
     Tsmos_ActivateControllerState();
-    handle = func_8041A280_de(0x398, 0x399);
+    handle = SmpFade_CreateFadeWidget(0x398, 0x399);
     state = D_800E5430;
     state->menu = handle;
-    func_8041A47C_de(handle);
-    func_8041B110_de(0x39C);
+    SmpSlider_EnableTransition(handle);
+    SmpButton_WrapButtonWidget(0x39C);
     /* the MenuWidget view names the alpha byte at +0x10 and the text pointer at +0x34 that the hub's Item omits */
     node = (struct MenuWidget *) Frontend_FindWidgetByResourceId((void *) arg0, 0x39A);
     state = D_800E5430;
     state->window = node;
     node->alpha = 0xF;
-    handle = func_80419E54_de(0x39B, 0x6E);
+    handle = SmpFlicker_CreateFlickerWidget(0x39B, 0x6E);
     state = D_800E5430;
     state->button = handle;
     state->delay = 3;

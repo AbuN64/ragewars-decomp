@@ -7,7 +7,7 @@ extern void Lists_ClearHeader(void *list);
 extern s32 Lists_Append(void *list, void *node);
 extern void func_80255CA0_de(void *list, s32 nextOffset, s32 prevOffset);
 extern void func_80255D14_de(void *list, void *node);
-extern void func_802A5680_de(void *world);
+extern void Fx_UpdateEffectLists(void *world);
 extern void func_802AAD14_de(void);
 extern void func_802AB35C_de(int unused, unsigned char *pairs, int count, unsigned char *table);
 extern void func_802AA6D0_de(void *mover, s16 x, s16 y);
@@ -52,7 +52,7 @@ typedef struct PanelMovers {
 
 /* Initialises the actor world: builds the two list pools (0x20 shapes of 0x54 bytes, 3 tails of 0x1C), links the
  * 96 actors of 0xB8 bytes into the actor list, empties the record list and its 10 cells, links the 100 records of
- * 0x50 bytes into it, clears the mode and cursor words and finishes through func_802A5680_de. */
+ * 0x50 bytes into it, clears the mode and cursor words and finishes through Fx_UpdateEffectLists. */
 void func_8044DF60_de(ActorWorld *world) {
     s32 i;
 
@@ -71,7 +71,7 @@ void func_8044DF60_de(ActorWorld *world) {
     }
     world->mode = 0;
     world->cursor = 0;
-    func_802A5680_de(world);
+    Fx_UpdateEffectLists(world);
 }
 
 /* Resets the hud: clears the four words at 0x90, runs func_8044E0CC_de and func_802AAD14_de, then fills the two

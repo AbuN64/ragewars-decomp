@@ -109,9 +109,9 @@ void Camera_AdvanceOverlayFade(Overlay *overlay) {
 }
 
 /* Finishes an entity for the frame: when a player in the D_80145060 list owns it, draws its rectangle
- * through func_8029311C_de if that player shows outlines (flag 0x1000), using the entity's colour (or the
+ * through SetN64_DrawColorRectangle if that player shows outlines (flag 0x1000), using the entity's colour (or the
  * override colour D_800FEAD8 when D_800C9FE4 is set, darkened when option 0x4000 is set); it then
- * notifies the player list through func_8022A398_de when Cinema_IsSequenceInWindow is clear and func_802934F8_de is set,
+ * notifies the player list through func_8022A398_de when Cinema_IsSequenceInWindow is clear and SetN64_IsModeThirteen is set,
  * and finishes the entity through func_80245894_de. */
 
 
@@ -123,9 +123,9 @@ extern u8 D_800FEAD8[4];
 extern s32 D_801462C8;
 #include "COMMON/GAME_SESSION.H"
 extern char D_80145040;
-extern void func_8029311C_de(void *, u8 *, s32, s32, s32, s32);
+extern void SetN64_DrawColorRectangle(void *, u8 *, s32, s32, s32, s32);
 extern s32 Cinema_IsSequenceInWindow(void);
-extern s32 func_802934F8_de(void);
+extern s32 SetN64_IsModeThirteen(void);
 extern void func_8022A398_de(void *, View *);
 extern void func_80245894_de(View *);
 
@@ -164,10 +164,10 @@ void Camera_DrawViewportOverlays(View *entity) {
             color[1] >>= 3;
             color[2] >>= 3;
         }
-        func_8029311C_de(&D_8011FAC0, color, entity->viewport[2], entity->viewport[3], entity->viewport[2] + entity->viewport[0],
+        SetN64_DrawColorRectangle(&D_8011FAC0, color, entity->viewport[2], entity->viewport[3], entity->viewport[2] + entity->viewport[0],
                       entity->viewport[3] + entity->viewport[1]);
     }
-    if (Cinema_IsSequenceInWindow() == 0 && func_802934F8_de() != 0) {
+    if (Cinema_IsSequenceInWindow() == 0 && SetN64_IsModeThirteen() != 0) {
         func_8022A398_de(&D_80145040, entity);
     }
     func_80245894_de(entity);

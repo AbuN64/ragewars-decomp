@@ -331,7 +331,7 @@ void func_8043C688_de(void) {
         "j          .Lauto_8043C984\n"
         "addiu     $v0, $zero, 0x1\n"
         ".Lauto_8043C75C:\n"
-        "jal        func_802934F8_de\n"
+        "jal        SetN64_IsModeThirteen\n"
         "nop\n"
         "beqz       $v0, .Lauto_8043C784\n"
         "addu      $a1, $s0, $zero\n"
@@ -351,7 +351,7 @@ void func_8043C688_de(void) {
         "sb        $v0, 0x1E($v1)\n"
         "lui        $a0, %hi(D_8011FAC0)\n"
         "addiu      $a0, $a0, %lo(D_8011FAC0)\n"
-        "jal        func_80293284_de\n"
+        "jal        SetN64_SelectSpawnAndStartSession\n"
         "addu      $a1, $s0, $zero\n"
         "j          .Lauto_8043C984\n"
         "addiu     $v0, $zero, 0x1\n"
@@ -517,8 +517,8 @@ extern s32 Control_IsAButtonPressed(s32 buttons);
 
 
 struct GameSession;
-extern void func_80293284_de(struct GameSession *menu, s32 target);
-extern s32 func_802934F8_de(void);
+extern void SetN64_SelectSpawnAndStartSession(struct GameSession *menu, s32 target);
+extern s32 SetN64_IsModeThirteen(void);
 
 extern void OvlScene_SetSelection(void *menu, s32 target, s32 arg2);
 
@@ -629,7 +629,7 @@ s32 func_8043C688_de(s32 arg0, Shared_MenuInput *pad) {
             SetN64_SetTransitionTarget(&D_8011FAC0, 0x11);
             return 1;
         }
-        if (func_802934F8_de() != 0) {
+        if (SetN64_IsModeThirteen() != 0) {
             OvlScene_SetSelection(&g_world, target, 2);
             return 0;
         }
@@ -637,7 +637,7 @@ s32 func_8043C688_de(s32 arg0, Shared_MenuInput *pad) {
         rules->local = 0;
         rules->mode1E = 1;
         Ovlgame_SelectConfirmingController(pad);
-        func_80293284_de(&D_8011FAC0, target);
+        SetN64_SelectSpawnAndStartSession(&D_8011FAC0, target);
         return 1;
     }
 

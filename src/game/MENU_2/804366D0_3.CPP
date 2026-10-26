@@ -11,7 +11,7 @@ extern struct MenuStepState *D_800E5690;
 #include "MENU_2/804366D0_3.H"
 #include "SCENE/802508E0_13.H"
 
-/* Stores arg0 into its own D_80146417 entry and pushes the five settings of slot arg0 of the D_80102C89 table into the objects D_800E5694 holds through func_8041AD10_de and func_8041A6EC_de. Adapted from func_804366B8_de with D_800E5690 changed to D_800E5694 and the object fields moved down by eight bytes. */
+/* Stores arg0 into its own D_80146417 entry and pushes the five settings of slot arg0 of the D_80102C89 table into the objects D_800E5694 holds through func_8041AD10_de and SmpSlider_SetSliderItem. Adapted from func_804366B8_de with D_800E5690 changed to D_800E5694 and the object fields moved down by eight bytes. */
 
 
 extern struct State_func_804368F8_de *D_800E5694;
@@ -28,13 +28,13 @@ extern u8 D_800FEC8D[];
 
 extern void SmpButton_SelectListEntry(void *, s32);
 
-extern void func_8041A6EC_de(void *, s32);
+extern void SmpSlider_SetSliderItem(void *, s32);
 
 extern u8 g_playerSettings[];
 
-extern s32 func_8041AD04_de(void *);
+extern s32 SmpButton_GetListSelection(void *);
 
-extern s32 func_8041A6E0_de(void *);
+extern s32 SmpSlider_GetSliderItem(void *);
 
 /* Releases the object D_800E5690 holds through Cache_FreeMemory, clears D_800E5690 and returns zero. */
 
@@ -47,14 +47,14 @@ extern s32 func_8041A6E0_de(void *);
 
 
 
-extern s32 func_8041A470_de(void *);
+extern s32 SmpSlider_GetTransitionMode(void *);
 
 extern void MarkMenuEventHandled();
 
 
 
 /* Calls MarkMenuEventHandled; when func_80299A08_de reports 0x60, passes the word at offset 0x28 of the object
-   D_800E5690 points to to func_804367A8_de, then sets its word at 0x20 to -1 and calls func_8041A430_de
+   D_800E5690 points to to func_804367A8_de, then sets its word at 0x20 to -1 and calls SmpSlider_SetTransitionMode
    on its first word with 2. Returns zero. */
 
 
@@ -65,8 +65,8 @@ void func_804368F8_de(s32 entryIndex) {
     *slot = entryIndex;
     SmpButton_SelectListEntry(D_800E5694->a, D_80102C89[entryIndex * 0x190]);
     SmpButton_SelectListEntry(D_800E5694->b, D_800FEC8A[entryIndex * 0x190]);
-    func_8041A6EC_de(D_800E5694->c, D_800FEC8B[entryIndex * 0x190]);
-    func_8041A6EC_de(D_800E5694->d, D_800FEC8C[entryIndex * 0x190]);
+    SmpSlider_SetSliderItem(D_800E5694->c, D_800FEC8B[entryIndex * 0x190]);
+    SmpSlider_SetSliderItem(D_800E5694->d, D_800FEC8C[entryIndex * 0x190]);
     SmpButton_SelectListEntry(D_800E5694->e, D_800FEC8D[entryIndex * 0x190]);
 }
 
@@ -74,12 +74,12 @@ void func_804369E8_de(s32 arg0) {
     u8 *config;
 
     config = g_playerSettings + arg0 * 0x96;
-    D_80102C89[arg0 * 0x190] = func_8041AD04_de(D_800E5694->a);
+    D_80102C89[arg0 * 0x190] = SmpButton_GetListSelection(D_800E5694->a);
     do {
-        D_800FEC8A[arg0 * 0x190] = func_8041AD04_de(D_800E5694->b);
-        D_800FEC8B[arg0 * 0x190] = func_8041A6E0_de(D_800E5694->c);
-        D_800FEC8C[arg0 * 0x190] = func_8041A6E0_de(D_800E5694->d);
-        D_800FEC8D[arg0 * 0x190] = func_8041AD04_de(D_800E5694->e);
+        D_800FEC8A[arg0 * 0x190] = SmpButton_GetListSelection(D_800E5694->b);
+        D_800FEC8B[arg0 * 0x190] = SmpSlider_GetSliderItem(D_800E5694->c);
+        D_800FEC8C[arg0 * 0x190] = SmpSlider_GetSliderItem(D_800E5694->d);
+        D_800FEC8D[arg0 * 0x190] = SmpButton_GetListSelection(D_800E5694->e);
     } while (0);
     config[0x7B] = D_80102C89[arg0 * 0x190];
     config[0x7D] = D_800FEC8A[arg0 * 0x190];
@@ -101,7 +101,7 @@ s32 func_80436B68_de(void) {
 }
 
 s32 func_80436B70_de(void) {
-    switch (func_8041A470_de(D_800E5690->menu)) {
+    switch (SmpSlider_GetTransitionMode(D_800E5690->menu)) {
     case 3:
         break;
     case 4:
@@ -135,7 +135,7 @@ s32 func_80436BF4_de(void) {
         func_804367A8_de(D_800E5690->item);
         state = D_800E5690;
         state->value = -1;
-        func_8041A430_de(state->menu, 2);
+        SmpSlider_SetTransitionMode(state->menu, 2);
     }
     return 0;
 }

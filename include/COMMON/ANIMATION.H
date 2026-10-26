@@ -14,7 +14,7 @@ struct func_80419D04_S1 {
     s32 unk4C[5];
     s32 unk60[5];
     s32 unk74;
-    struct Resource_func_80419E54_de *unk78;
+    struct ResourceSmpFlickerCreateFlickerWidget *unk78;
     s32 unk7C;
     s32 unk80;
     s32 unk84;
@@ -50,14 +50,14 @@ struct Animation;
 typedef struct Animation Animation;
 
 struct ObjectCode804196C0;
-struct Resource_func_80419E54_de;
+struct ResourceSmpFlickerCreateFlickerWidget;
 struct ObjectCode804196C0 {
     char pad0[0x44];
     s32 busy;
     char pad48[0x4C - 0x48];
     s32 entries[(0x74 - 0x4C) / 4];
     s32 index;
-    struct Resource_func_80419E54_de *target;
+    struct ResourceSmpFlickerCreateFlickerWidget *target;
 };
 
 extern float D_800E1470;
@@ -101,7 +101,7 @@ typedef struct MenuFadeWidget MenuFadeWidget;
 
 
 struct ObjectRecAt84;
-extern s32 func_80419F38_de(struct ObjectRecAt84 *object);
+extern s32 SmpFlicker_IsFlickerIdle(struct ObjectRecAt84 *object);
 
 
 struct Triple;
@@ -109,11 +109,11 @@ struct Triple;
 struct FrameSequence;
 
 
-struct Resource_func_80419E54_de;
+struct ResourceSmpFlickerCreateFlickerWidget;
 struct SourceRecAt84;
 struct SourceRecAt84 {
     char pad[0x78];
-    struct Resource_func_80419E54_de *target;
+    struct ResourceSmpFlickerCreateFlickerWidget *target;
     char pad7C[0x83 - 0x7C];
     u8 value;
     s32 pending;
@@ -123,10 +123,10 @@ struct Triple;
 
 struct MenuResourceWidget;
 typedef struct MenuResourceWidget MenuResourceWidget;
-extern MenuResourceWidget *func_80419E54_de(s32, s32);
+extern MenuResourceWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
 
 struct SourceRecAt84;
-extern void func_80419F24_de(struct SourceRecAt84 *source);
+extern void SmpFlicker_RestoreFlickerValue(struct SourceRecAt84 *source);
 
 struct func_80419D04_S1;
 typedef struct func_80419D04_S1 func_80419D04_S1;
@@ -134,7 +134,7 @@ typedef struct func_80419D04_S1 func_80419D04_S1;
 struct FrameSequence;
 
 struct MenuResourceWidget;
-struct Resource_func_80419E54_de;
+struct ResourceSmpFlickerCreateFlickerWidget;
 struct MenuResourceWidget {
     char pad0[0xC];
     short a;
@@ -142,7 +142,7 @@ struct MenuResourceWidget {
     short pad1;
     short c;
     char pad2[0x64];
-    struct Resource_func_80419E54_de *resource;
+    struct ResourceSmpFlickerCreateFlickerWidget *resource;
     int pad3;
     union
   {

@@ -9,7 +9,7 @@
 /* Draws a player's marker when it is enabled at 0x1214: loads the player's matrix for the current view
    D_800D297C from its table at 0x1500, sets the render and geometry modes, fills the eight vertices of
    a red prism in D_80102A58 (alpha 150 on the upper and 100 on the lower corners), emits them with the
-   eight triangles joining them, and passes the same colour and alphas to func_802A5498_de with the
+   eight triangles joining them, and passes the same colour and alphas to Fx_DrawRedParticleQuad with the
    matrix from the table at 0x1580 when 0x147C is set. */
 
 
@@ -23,7 +23,7 @@ extern s32 D_800D297C;
 
 extern void Geometry_SetModePreset(s32);
 extern void Geometry_SetCombineMode(s32);
-extern void func_802A5498_de(UnitMtx *, s32, s32, s32);
+extern void Fx_DrawRedParticleQuad(UnitMtx *, s32, s32, s32);
 
 void func_8021C698_de(PlayerCode802192C0 *player) {
     s32 red;
@@ -131,7 +131,7 @@ void func_8021C698_de(PlayerCode802192C0 *player) {
         gSP1Triangle(g_displayListCursor++, 3, 0, 7, 0);
         gSP1Triangle(g_displayListCursor++, 0, 7, 4, 0);
         if (player->second != 0) {
-            func_802A5498_de(&player->markers[D_800D297C], red, low, high);
+            Fx_DrawRedParticleQuad(&player->markers[D_800D297C], red, low, high);
         }
     }
 }

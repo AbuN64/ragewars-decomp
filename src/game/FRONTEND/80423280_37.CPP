@@ -76,7 +76,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     D_800E4690->rightStep = D_800E4690->rightPanel->width / 4;
     d = D_800E4690->rightPanel->width - D_800E4690->rightStep * 4;
     D_800E4690->rightPanel->x -= d;
-    D_800E4690->resource = func_80419E54_de(0x141, 0x6E);
+    D_800E4690->resource = SmpFlicker_CreateFlickerWidget(0x141, 0x6E);
     wHead = Frontend_FindWidgetByResourceId(arg0, 0x13F);
     D_800E4690->focusItem = wHead;
     Frontend_SetWidgetFlag08(wHead, 0);

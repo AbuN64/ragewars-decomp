@@ -3,9 +3,9 @@
 #include "COMMON/UNUSED.H"
 #include "RENDER_2/8025DE50_5.H"
 
-extern void func_8042A990_de(void);
-extern void func_8042AFE0_de(void);
-extern void func_8042B080_de(void);
+extern void ScenarioSetup_RefreshSelectedArenaLabel(void);
+extern void ScenarioSetup_LoadSetupArenaLabel(void);
+extern void ScenarioSetup_HideSetupCatalogue(void);
 
 /* Opens the screen D_800E4F60: allocates its 0x470-byte state for the window, sets up the list,
    the left and right arrows (shifted by their width and snapped to 4 pixels), the labels and
@@ -134,17 +134,17 @@ s32 func_80429A24_de(void *window) {
     D_800E4F60->unk448 = item3;
     item3->alpha = 0x41;
     Frontend_SetWidgetFlag08(D_800E4F60->unk448, 0);
-    D_800E4F60->text3E4 = func_80419E54_de(ID_303, 0x6E);
+    D_800E4F60->text3E4 = SmpFlicker_CreateFlickerWidget(ID_303, 0x6E);
     item4 = Frontend_FindWidgetByResourceId(window, ID_301);
     D_800E4F60->unk3E8 = item4;
     Frontend_SetWidgetFlag08(item4, 0);
     D_800E4F60->label = Frontend_FindWidgetByResourceId(window, ID_30E);
     D_800E4F60->unk3F0 = Frontend_FindWidgetByResourceId(window, ID_310);
-    func_8042B080_de();
+    ScenarioSetup_HideSetupCatalogue();
     D_800E4F60->selection = 0;
     D_800E4F60->category = 0;
-    func_8042A990_de();
-    func_8042AFE0_de();
+    ScenarioSetup_RefreshSelectedArenaLabel();
+    ScenarioSetup_LoadSetupArenaLabel();
     D_80154020.ready = 0;
     D_80154020.value = -1;
     D_800E4F60->unk454 = Frontend_FindWidgetByResourceId(window, ID_308);

@@ -11,7 +11,7 @@ extern s32 D_800CBC14;
 extern struct Triple D_800D2C90;
 extern s32 func_80255228_de(s32 *);
 extern void func_80253908_de(s32);
-extern void func_80414360_de(void);
+extern void Gfx_InitializeFrontendServices(void);
 extern void ESmem_InitializeFrameHeaps(s32);
 extern void func_80297FA0_de(s32, s32);
 extern void Frontend_OpenResourceArchive(char *);
@@ -30,7 +30,7 @@ extern void Tsmos_ActivateControllerState(void);
 void InitFrontendMenus(void) {
     func_80255228_de(&D_80106248);
     func_80253908_de(0);
-    func_80414360_de();
+    Gfx_InitializeFrontendServices();
     ESmem_InitializeFrameHeaps(0x3000);
     func_80297FA0_de(0x23, (s32)D_0043C500);
     Frontend_OpenResourceArchive(D_800C6080_eu_x);

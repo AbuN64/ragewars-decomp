@@ -3,5 +3,5 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-extern s32 func_80414400_de(u8 *buf, f64 value, s32 ch, s32 width, s32 prec);
+extern s32 Gfx_FormatFloatingPoint(u8 *buf, f64 value, s32 ch, s32 width, s32 prec);
 #endif

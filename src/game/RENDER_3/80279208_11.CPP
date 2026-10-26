@@ -67,7 +67,7 @@ reset_state:
     }
 }
 
-/* Spawns an effect for an actor through func_802800C0_de: the rotation comes from the fixed direction D_801042C8 or the actor's own facing, and the spawn point is the actor's position, or when the actor carries a horizontal offset the negated offset turned by the actor's angle, carried through its parent transform when it has one, and added to the position; the flags passed are the given flags with the actor's bits 0x200006. Adapted from func_8027C274_de with the offset reads as static inline getters and a stack state briefly made current in D_80103FCC. */
+/* Spawns an effect for an actor through func_802800C0_de: the rotation comes from the fixed direction D_801042C8 or the actor's own facing, and the spawn point is the actor's position, or when the actor carries a horizontal offset the negated offset turned by the actor's angle, carried through its parent transform when it has one, and added to the position; the flags passed are the given flags with the actor's bits 0x200006. Adapted from Particle_HandleInitialMaterialContact with the offset reads as static inline getters and a stack state briefly made current in D_80103FCC. */
 
 
 

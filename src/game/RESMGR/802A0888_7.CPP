@@ -23,7 +23,7 @@ int *XStdio_FormatGermanScratchBuffer(int format, ...) {
 #endif
     va_list args;
     va_start(args, format);
-    D_800CD918 = func_80414CCC_de(&D_8014D0D0, format, (int)args);
+    D_800CD918 = Gfx_FormatArgumentList(&D_8014D0D0, format, (int)args);
     va_end(args);
     return &D_8014D0D0;
 }
@@ -36,7 +36,7 @@ s32 XStdio_PrintText(s32 arg0, ...) {
     char *args;
 
     args = __builtin_next_arg(arg0);
-    D_800CD918 = func_80414CCC_de(&D_8014D0D0, arg0, (s32) args);
+    D_800CD918 = Gfx_FormatArgumentList(&D_8014D0D0, arg0, (s32) args);
     if (D_800CD91C != 0) {
         ((s32 (*)(s32 *)) D_800CD91C)(&D_8014D0D0);
     }
@@ -47,7 +47,7 @@ s32 XStdio_PrintTextWithArguments(s32 arg0, s32 arg1, s32 arg2, ...) {
     char *args;
 
     args = __builtin_next_arg(arg2);
-    D_800CD918 = func_80414CCC_de(&D_8014D0D0, arg2, (s32) args);
+    D_800CD918 = Gfx_FormatArgumentList(&D_8014D0D0, arg2, (s32) args);
     ((s32 (*)(s32 *, s32, s32)) D_800CD920_de)(&D_8014D0D0, arg0, arg1);
     return D_800CD918;
 }

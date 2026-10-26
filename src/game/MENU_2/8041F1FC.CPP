@@ -67,7 +67,7 @@ s32 func_8041F2A0_us_rev1(s32 screen)
   D_800E42D0->footer->x -= rest;
   Frontend_FindWidgetByResourceId((void *) screen, 0x76)->alpha = 0x6E;
   Frontend_FindWidgetByResourceId((void *) screen, 0x79)->alpha = 0x19;
-  D_800E42D0->prompt = func_80419E54_de(0x74, 0xFF);
+  D_800E42D0->prompt = SmpFlicker_CreateFlickerWidget(0x74, 0xFF);
   item = Frontend_FindWidgetByResourceId((void *) screen, 0x74);
   D_800E42D0->promptItem = item;
   Frontend_SetWidgetFlag08(item, 0);
@@ -160,7 +160,7 @@ s32 func_8041F2A0_us(void *screen)
   D_800E42D0->footer->x -= rest;
   Frontend_FindWidgetByResourceId(screen, 0x76)->alpha = 0x6E;
   Frontend_FindWidgetByResourceId(screen, 0x79)->alpha = 0x19;
-  D_800E42D0->prompt = func_80419E54_de(0x74, 0xFF);
+  D_800E42D0->prompt = SmpFlicker_CreateFlickerWidget(0x74, 0xFF);
   item = Frontend_FindWidgetByResourceId(screen, 0x74);
   D_800E42D0->promptItem = item;
   Frontend_SetWidgetFlag08(item, 0);
@@ -253,7 +253,7 @@ s32 func_8041F6E0_eu(void *screen)
   D_800E42D0->footer->x -= rest;
   Frontend_FindWidgetByResourceId(screen, 0x76)->alpha = 0x6E;
   Frontend_FindWidgetByResourceId(screen, 0x79)->alpha = 0x19;
-  D_800E42D0->prompt = func_80419E54_de(0x74, 0xFF);
+  D_800E42D0->prompt = SmpFlicker_CreateFlickerWidget(0x74, 0xFF);
   item = Frontend_FindWidgetByResourceId(screen, 0x74);
   D_800E42D0->promptItem = item;
   Frontend_SetWidgetFlag08(item, 0);
@@ -346,7 +346,7 @@ s32 func_8041F6E0_eu_x(void *screen)
   D_800E42D0->footer->x -= rest;
   Frontend_FindWidgetByResourceId(screen, 0x7a)->alpha = 0x6E;
   Frontend_FindWidgetByResourceId(screen, 0x7d)->alpha = 0x19;
-  D_800E42D0->prompt = func_80419E54_de(0x78, 0xFF);
+  D_800E42D0->prompt = SmpFlicker_CreateFlickerWidget(0x78, 0xFF);
   item = Frontend_FindWidgetByResourceId(screen, 0x78);
   D_800E42D0->promptItem = item;
   Frontend_SetWidgetFlag08(item, 0);
@@ -439,7 +439,7 @@ s32 func_8041F230_de(void *screen)
   D_800E42D0->footer->x -= rest;
   Frontend_FindWidgetByResourceId(screen, 0x74)->alpha = 0x6E;
   Frontend_FindWidgetByResourceId(screen, 0x77)->alpha = 0x19;
-  D_800E42D0->prompt = func_80419E54_de(0x72, 0xFF);
+  D_800E42D0->prompt = SmpFlicker_CreateFlickerWidget(0x72, 0xFF);
   item = Frontend_FindWidgetByResourceId(screen, 0x72);
   D_800E42D0->promptItem = item;
   Frontend_SetWidgetFlag08(item, 0);

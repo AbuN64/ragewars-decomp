@@ -18,7 +18,7 @@
 extern u32 func_80446D80_de(s32 arg0, s32 arg1);
 
 
-u32 func_802B8880_de(s32 arg0, s32 arg1, u16 arg2, u8 *arg3, s32 arg4) {
+u32 func_802B8880_de(s32 completionQueue, s32 channel, u16 blockAddress, u8 *inputData, s32 forceWrite) {
     Block40 saved;
     u8 *source;
     s32 i;
@@ -26,32 +26,32 @@ u32 func_802B8880_de(s32 arg0, s32 arg1, u16 arg2, u8 *arg3, s32 arg4) {
     u32 result;
 
     retries = 2;
-    if (arg4 != 1 && arg2 < 7 && arg2 != 0) {
+    if (forceWrite != 1 && blockAddress < 7 && blockAddress != 0) {
         return 0;
     }
     func_802B9C14_de();
     D_8014D4B0 = 3;
-    func_802B8AA0_de(arg1, arg2 & 0xFFFF, arg3);
+    func_802B8AA0_de(channel, blockAddress & 0xFFFF, inputData);
     result = __osSiRawStartDma(1, (u8 *)&D_80154110);
-    osRecvMesg(arg0, 0, 1);
+    osRecvMesg(completionQueue, 0, 1);
     do {
         result = __osSiRawStartDma(0, (u8 *)&D_80154110);
-        osRecvMesg(arg0, 0, 1);
+        osRecvMesg(completionQueue, 0, 1);
         source = (u8 *)&D_80154110;
-        if (arg1 != 0) {
+        if (channel != 0) {
             i = 0;
-            if (arg1 > 0) {
+            if (channel > 0) {
                 do {
                     i++;
                     source++;
-                } while (i < arg1);
+                } while (i < channel);
             }
         }
         saved = *(Block40 *)source;
         result = (saved.bytes[2] & 0xC0) >> 4;
         if (result == 0) {
-            if ((func_802B8C88_de(arg3) & 0xFF) != saved.bytes[0x26]) {
-                result = func_80446D80_de(arg0, arg1);
+            if ((func_802B8C88_de(inputData) & 0xFF) != saved.bytes[0x26]) {
+                result = func_80446D80_de(completionQueue, channel);
                 if (result != 0) {
                     break;
                 }

@@ -8,57 +8,45 @@
 #ifdef NON_MATCHING
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-#define func_8041A280_de fz_func_8041A280_de
-#define func_8041B110_de fz_func_8041B110_de
-#define func_8041ABC0_de fz_func_8041ABC0_de
-#define func_8041A580_de fz_func_8041A580_de
-#define func_8041A6EC_de fz_func_8041A6EC_de
-#define func_80419E54_de fz_func_80419E54_de
 typedef struct EuOptsPage_eu { void *title; void *list; void *bar; void *rowC; void *row10; void *row14; s32 pad18, pad1C, sel, count; } EuOptsPage_eu;
 extern EuOptsPage_eu *g_optionsPage;
 extern char *D_800E1C14[], *D_800E1C34[], *D_800E1C44[], *D_auto_800E1C54[], *D_auto_800E1C64[], *D_800D2134[], *D_800D2138[], *D_800D213C[];
-extern void *Cache_AllocateMemory(); extern void *func_8041A280_de(); extern void func_8041B110_de(); extern void *func_8041ABC0_de();
-extern void SmpButton_AppendListText(); extern void SmpButton_SelectListEntry(); extern u32 Defs_GetMemorySize(); extern void *func_8041A580_de();
-extern void func_8041A6EC_de(); extern void *func_80419E54_de(); extern void *Frontend_FindWidgetByResourceId();
+extern void *Cache_AllocateMemory(); extern void *SmpFade_CreateFadeWidget(); extern void SmpButton_WrapButtonWidget(); extern void *SmpButton_CreateListWidget();
+extern void SmpButton_AppendListText(); extern void SmpButton_SelectListEntry(); extern u32 Defs_GetMemorySize(); extern void *SmpSlider_CreateSliderWidget();
+extern void SmpSlider_SetSliderItem(); extern void *SmpFlicker_CreateFlickerWidget(); extern void *Frontend_FindWidgetByResourceId();
 extern char *D_auto_800DDB08[];
 /* Builds the options page (0x28-byte state g_optionsPage): title, the three toggle rows (ids 0x59/0x55/0x51) labelled in the
    current language and set from the option bytes 0x1B, 0x1F and 0x580 of D_801462C8, the volume bar 0x53 and its list. Returns 0. */
 s32 func_804229E0_eu(void) {
     u8 lang = D_801462C8.language;
     g_optionsPage = Cache_AllocateMemory(0x28);
-    g_optionsPage->title = func_8041A280_de(0x4D, 0x4E);
-    func_8041B110_de(0x57);
-    func_8041B110_de(0x58);
-    g_optionsPage->rowC = func_8041ABC0_de(0x59, 0x5A);
+    g_optionsPage->title = SmpFade_CreateFadeWidget(0x4D, 0x4E);
+    SmpButton_WrapButtonWidget(0x57);
+    SmpButton_WrapButtonWidget(0x58);
+    g_optionsPage->rowC = SmpButton_CreateListWidget(0x59, 0x5A);
     SmpButton_AppendListText(g_optionsPage->rowC, D_800E1C14[lang]);
     SmpButton_AppendListText(g_optionsPage->rowC, D_800E1C34[lang]);
     SmpButton_AppendListText(g_optionsPage->rowC, D_800E1C44[lang]);
     SmpButton_SelectListEntry(g_optionsPage->rowC, *((u8 *)&D_801462C8 + 0x1B));
-    g_optionsPage->row10 = func_8041ABC0_de(0x55, 0x56);
+    g_optionsPage->row10 = SmpButton_CreateListWidget(0x55, 0x56);
     SmpButton_AppendListText(g_optionsPage->row10, D_auto_800E1C54[lang]);
     SmpButton_AppendListText(g_optionsPage->row10, D_auto_800E1C64[lang]);
     SmpButton_SelectListEntry(g_optionsPage->row10, *((u8 *)&D_801462C8 + 0x1F));
-    g_optionsPage->row14 = func_8041ABC0_de(0x51, 0x52);
+    g_optionsPage->row14 = SmpButton_CreateListWidget(0x51, 0x52);
     SmpButton_AppendListText(g_optionsPage->row14, D_800D2134[lang]);
     if (Defs_GetMemorySize() != 0x400000) {
         SmpButton_AppendListText(g_optionsPage->row14, D_800D2138[lang]);
         SmpButton_AppendListText(g_optionsPage->row14, D_800D213C[lang]);
         SmpButton_SelectListEntry(g_optionsPage->row14, *((u8 *)&D_801462C8 + 0x580));
     }
-    g_optionsPage->bar = func_8041A580_de(0x53, 0x54, 0x80);
-    func_8041A6EC_de(g_optionsPage->bar, *(s32 *)((u8 *)&D_801462C8 + 0x10));
-    func_8041B110_de(0x50);
-    g_optionsPage->list = func_80419E54_de(0x4F, 0x6E);
+    g_optionsPage->bar = SmpSlider_CreateSliderWidget(0x53, 0x54, 0x80);
+    SmpSlider_SetSliderItem(g_optionsPage->bar, *(s32 *)((u8 *)&D_801462C8 + 0x10));
+    SmpButton_WrapButtonWidget(0x50);
+    g_optionsPage->list = SmpFlicker_CreateFlickerWidget(0x4F, 0x6E);
     g_optionsPage->count = 3;
     g_optionsPage->sel = -1;
     return 0;
 }
-#undef func_8041A280_de
-#undef func_8041B110_de
-#undef func_8041ABC0_de
-#undef func_8041A580_de
-#undef func_8041A6EC_de
-#undef func_80419E54_de
 #else
 INCLUDE_ASM("ovl_80400000", func_804229E0_eu);
 #endif
@@ -72,12 +60,12 @@ INCLUDE_ASM("ovl_80400000", func_804229E0_eu);
 #include "MENU_2/SCROLL.H"
 #include "COMMON/OWNERRECAT8V1.H"
 #include "TYPES.H"
-extern MenuListWidget *func_8041ABC0_de(s32, s32);
+extern MenuListWidget *SmpButton_CreateListWidget(s32, s32);
 extern void SmpButton_AppendListText(); /* draft callers pass the list, and the second draft also a text */
 extern void SmpButton_SelectListEntry(MenuListWidget *, s32);
 extern s32 Defs_GetMemorySize(void);
-extern s32 func_8041A580_de(s32, s32, s32);
-extern void func_8041A6EC_de(s32, s32);
+extern s32 SmpSlider_CreateSliderWidget(s32, s32, s32);
+extern void SmpSlider_SetSliderItem(s32, s32);
 extern SelectionScreenState *D_800E4514;
 
 s32 func_80422C58_eu(void) {
@@ -86,15 +74,15 @@ s32 func_80422C58_eu(void) {
     void *temp_v0;
 
     D_800E4514 = Cache_AllocateMemory(0x10);
-    func_8041B110_de(0x1BD);
-    func_8041B110_de(0x1C2);
-    temp_v0 = func_8041ABC0_de(0x1BB, 0x1BC);
+    SmpButton_WrapButtonWidget(0x1BD);
+    SmpButton_WrapButtonWidget(0x1C2);
+    temp_v0 = SmpButton_CreateListWidget(0x1BB, 0x1BC);
     D_800E4514->unk4 = temp_v0;
     SmpButton_AppendListText(temp_v0);
     SmpButton_AppendListText(D_800E4514->unk4);
     SmpButton_AppendListText(D_800E4514->unk4);
     SmpButton_SelectListEntry(D_800E4514->unk4, (s32) D_801462C8.firstListMode);
-    widget = func_8041ABC0_de(0x1BE, 0x1BF);
+    widget = SmpButton_CreateListWidget(0x1BE, 0x1BF);
     D_800E4514->players[0].highlight = widget;
     SmpButton_AppendListText(widget);
     if (Defs_GetMemorySize() != 0x400000) {
@@ -102,11 +90,11 @@ s32 func_80422C58_eu(void) {
         SmpButton_AppendListText(D_800E4514->players[0].highlight);
     }
     SmpButton_SelectListEntry(D_800E4514->players[0].highlight, (s32) D_801462C8.slots[7].secondListMode);
-    scroll = func_8041A580_de(0x1C0, 0x1C1, 0x80);
+    scroll = SmpSlider_CreateSliderWidget(0x1C0, 0x1C1, 0x80);
     D_800E4514->screen = scroll;
-    func_8041A6EC_de(scroll, D_801462C8.buttons);
-    func_8041B110_de(0x1C3);
-    func_8041B110_de(0x1C4);
+    SmpSlider_SetSliderItem(scroll, D_801462C8.buttons);
+    SmpButton_WrapButtonWidget(0x1C3);
+    SmpButton_WrapButtonWidget(0x1C4);
     D_800E4514->players[0].unk4 = 0;
     Tsmos_DeactivateControllerState();
     return 0;
@@ -145,7 +133,7 @@ extern s32 D_80154020[2];
 extern void func_8025E384_de(void);
 
 extern void Frontend_SetWidgetFlag100(MenuWidget *, s32);
-extern void func_8041B110_de(s32);
+extern void SmpButton_WrapButtonWidget(s32);
 extern s32 ScenarioSetup_IsCupSelected(void);
 extern void func_8043C210_de(Shared_OptionsScreen *, s32, s32, s32, s32);
 extern void func_8043C278_de(Shared_OptionsScreen *);
@@ -181,7 +169,7 @@ s32 func_80422E34_eu(void *node) {
     D_800E4518->rightStep = D_800E4518->rightTab->width / 4;
     rem = D_800E4518->rightTab->width - D_800E4518->rightStep * 4;
     D_800E4518->rightTab->x -= rem;
-    D_800E4518->title = func_80419E54_de(0x373, 0x6E);
+    D_800E4518->title = SmpFlicker_CreateFlickerWidget(0x373, 0x6E);
     marker = Frontend_FindWidgetByResourceId(node, 0x372);
     D_800E4518->marker = marker;
     Frontend_SetWidgetFlag08(marker, 0);
@@ -197,16 +185,16 @@ s32 func_80422E34_eu(void *node) {
     pak = Frontend_FindWidgetByResourceId(node, 0x374);
     D_800E4518->pakIcon = pak;
     Frontend_SetWidgetFlag08(pak, 0);
-    func_8041B110_de(0x377);
-    func_8041B110_de(0x37C);
-    firstListHandle = func_8041ABC0_de(0x375, 0x376);
+    SmpButton_WrapButtonWidget(0x377);
+    SmpButton_WrapButtonWidget(0x37C);
+    firstListHandle = SmpButton_CreateListWidget(0x375, 0x376);
     D_800E4518->firstList = firstListHandle;
     SmpButton_AppendListText(firstListHandle, D_800E1C14[g_languageIndex]);
     SmpButton_AppendListText(D_800E4518->firstList, D_800E1C34[g_languageIndex]);
     SmpButton_AppendListText(D_800E4518->firstList, D_800E1C44[g_languageIndex]);
     settings = &D_801462C8;
     SmpButton_SelectListEntry(D_800E4518->firstList, settings->firstListMode);
-    secondListHandle = func_8041ABC0_de(0x378, 0x379);
+    secondListHandle = SmpButton_CreateListWidget(0x378, 0x379);
     D_800E4518->secondList = secondListHandle;
     SmpButton_AppendListText(secondListHandle, D_800D2134[g_languageIndex]);
     if (Defs_GetMemorySize() != 0x400000) {
@@ -214,10 +202,10 @@ s32 func_80422E34_eu(void *node) {
         SmpButton_AppendListText(D_800E4518->secondList, D_800D213C[g_languageIndex]);
     }
     SmpButton_SelectListEntry(D_800E4518->secondList, settings->slots[7].secondListMode);
-    slider = func_8041A580_de(0x37A, 0x37B, 0x80);
+    slider = SmpSlider_CreateSliderWidget(0x37A, 0x37B, 0x80);
     D_800E4518->slider = slider;
 
-    func_8041A6EC_de(slider, settings->buttons);
+    SmpSlider_SetSliderItem(slider, settings->buttons);
     switch (settings->controllerMode) {
     case 0:
         if (ScenarioSetup_IsCupSelected() == 0) {
@@ -240,10 +228,10 @@ s32 func_80422E34_eu(void *node) {
         Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x37E), 1);
         break;
     }
-    func_8041B110_de(0x380);
-    func_8041B110_de(0x37D);
-    func_8041B110_de(0x37E);
-    func_8041B110_de(0x37F);
+    SmpButton_WrapButtonWidget(0x380);
+    SmpButton_WrapButtonWidget(0x37D);
+    SmpButton_WrapButtonWidget(0x37E);
+    SmpButton_WrapButtonWidget(0x37F);
     D_800E4518->state = 0;
     Tsmos_DeactivateControllerState();
     func_8043C210_de(D_800E4518, 0x67, 0, 0, 0);

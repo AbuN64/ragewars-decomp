@@ -32,11 +32,11 @@
 #include "SYSTEM_3/80265370_3.H"
 #include "sdk/os.h"
 extern void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *);
-extern void func_8029311C_de(void *, u8 *, s32,s32,s32,s32);
+extern void SetN64_DrawColorRectangle(void *, u8 *, s32,s32,s32,s32);
 extern void SetN64_ClearDepthRect(void *, s32,s32,s32,s32,s32);
 extern void SetN64_SubmitFrameTasks(TimingWorld *,Frame *);
 static __inline__ s32 hasFadeMode(u8 *mode) { return *mode != 0; }
-void func_80292308_de(TimingWorld *world) {
+void SetN64_BuildAndSubmitSessionFrame(TimingWorld *world) {
     u8 color[4];
     void (*draw)(TimingWorld *);
     f32 updatedFade;
@@ -68,7 +68,7 @@ void func_80292308_de(TimingWorld *world) {
     Defs_ToggleSavedFlag();
     Control_TrackControllerPakChanges();
     Camera_UpdateViewportLayoutAndBounds(&world->viewport);
-    func_80293268_de(world);
+    SetN64_CommitSessionInputs(world);
     draw = D_800CD790[world->unk26DB8].draw;
     if (draw != 0) {
         draw(world);
@@ -89,7 +89,7 @@ void func_80292308_de(TimingWorld *world) {
             }
         }
         color[3] = alpha;
-        func_8029311C_de(world, &color[0], 0, 0, D_800E28D0, D_800E28D4);
+        SetN64_DrawColorRectangle(world, &color[0], 0, 0, D_800E28D0, D_800E28D4);
     }
     if (D_800E28E0 != 0) {
         if (D_800E28E0 == 0x14) {

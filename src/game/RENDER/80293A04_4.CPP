@@ -28,9 +28,9 @@ extern s32 D_800E28D0;
 
 
 
-extern void func_80293A20_de(s32 arg0, s32 arg1, s32 arg2);
+extern void SetN64_HandleSessionTransitionInput(s32 arg0, s32 arg1, s32 arg2);
 
-extern void func_80293334_de(void *session, s32 count, s32 force_active);
+extern void SetN64_ResetSessionPlayerPools(void *session, s32 count, s32 force_active);
 
 extern void Scene_LoadLevelResources(void *, void *, void *);
 
@@ -50,7 +50,7 @@ void func_802941B8_de(void) {
 void func_802941DC_de(struct GameSession *session) {
     s32 eight;
     eight = 8;
-    func_80293904_de(session, 12.0f, eight, eight);
+    SetN64_CheckTimedSessionTransition(session, 12.0f, eight, eight);
 }
 
 void func_80294200_de(void) {
@@ -75,11 +75,11 @@ void func_802942F0_de(s32 arg0) {
 }
 
 void func_80294320_de(s32 session) {
-    func_80293A20_de(session, 7, 7);
+    SetN64_HandleSessionTransitionInput(session, 7, 7);
 }
 
 void func_80294340_de(s32 session) {
-    func_80293B28_de(session);
+    SetN64_DrawSessionWithAttractTimeout(session);
     func_80293DE8_de(session);
 }
 
@@ -101,11 +101,11 @@ void func_80294384_de(void) {
 }
 
 void func_802943A0_de(struct GameSession *session) {
-    func_80293904_de(session, 20.0f, 9, 8);
+    SetN64_CheckTimedSessionTransition(session, 20.0f, 9, 8);
 }
 
 void func_802943C4_de(void *arg0) {
-    func_80293334_de(arg0, 0, 0);
+    SetN64_ResetSessionPlayerPools(arg0, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
     D_801462C8.counters.transitionActive = 0;
     func_80298368_de(0x18);
@@ -115,9 +115,9 @@ void func_802943C4_de(void *arg0) {
 void func_80294410_de(void) {
 }
 
-/** Thin wrapper around func_80293CE4_de. */
+/** Thin wrapper around SetN64_DrawSessionWithRoundTimeout. */
 void func_80294418_de(GameSession *session) {
-    func_80293CE4_de(session);
+    SetN64_DrawSessionWithRoundTimeout(session);
 }
 
 /* func_80293998_de: types.abi.declared: reuse existing C; propagated semantic conflicts remain named */
@@ -133,11 +133,11 @@ void func_80294434_de(s32 arg0) {
 }
 
 void func_80294488_de(s32 session) {
-    func_80293A20_de(session, 7, 8);
+    SetN64_HandleSessionTransitionInput(session, 7, 8);
 }
 
 void func_802944A8_de(void *session) {
-    func_80293B28_de(session);
+    SetN64_DrawSessionWithAttractTimeout(session);
 }
 
 void func_802944C4_de(s32 arg0) {

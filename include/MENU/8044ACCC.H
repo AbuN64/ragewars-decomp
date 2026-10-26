@@ -100,7 +100,7 @@ struct ObjA {
 };
 struct ItemsSelectionState {
     char pad[0x1B2B0];
-    Resource_func_80419E54_de *input;
+    ResourceSmpFlickerCreateFlickerWidget *input;
     char pad1b2b4[0x15C];
     int mode;
     int active;

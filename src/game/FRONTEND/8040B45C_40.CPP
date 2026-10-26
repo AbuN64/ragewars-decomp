@@ -20,7 +20,7 @@ extern void Frontend_ConfigureScrolledTableCell(GridList *list, UnitMtx *cell, u
 
 
 /* Allocates and zeroes a 0x60-byte record, copies the header of the record Frontend_FindWidgetByResourceId finds for the low half of the first argument, tags it 0xB, stores four byte arguments and three alternating pairs of the last two, allocates and zeroes a width-by-height table of eight-byte cells at 0x44, and registers the record through Frontend_ReplaceWidgetLinks.
-   Adapted from func_8041A580_de with the record size, tag 0xB, the byte fields, the cell table and the Frontend_ReplaceWidgetLinks registration changed. */
+   Adapted from SmpSlider_CreateSliderWidget with the record size, tag 0xB, the byte fields, the cell table and the Frontend_ReplaceWidgetLinks registration changed. */
 
 
 

@@ -451,7 +451,7 @@ extern u8 *D_800D3A9C[];
 extern u8 *D_800D3A9C;
 #endif
 extern void func_804037D4_de(void), func_804030E0_de(s32);
-extern s32 func_802934F8_de(void);
+extern s32 SetN64_IsModeThirteen(void);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern struct CCameraText_t *Sky_PostScaledScreenMessage(void *, void *, u8 *, f32);
 static inline s32 transitionId(Shared_World *scene) {
@@ -477,7 +477,7 @@ void Scene_UpdateSelectionTransition(Shared_World *scene)
             id = transitionId(scene);
             Scene_LoadLevelResources(scene, id, scene->selectionFlags);
             settings = &D_80145088.settings;
-            if (scene->previewStart != settings->optionFlags && func_802934F8_de()) {
+            if (scene->previewStart != settings->optionFlags && SetN64_IsModeThirteen()) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
                 Sky_PostScaledScreenMessage(&D_80145088, &D_80145088.fallbackCamera, D_800D3A9C[settings->language], 4.0f);
 #else

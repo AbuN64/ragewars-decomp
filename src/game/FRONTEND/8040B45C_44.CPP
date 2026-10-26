@@ -6,7 +6,7 @@
 
 /* Reads the pixel at (x, y) of the current image D_80153D54 as a 0xAARRGGBB colour: seeks to
    x + y * width through the format's seek hook D_80153CD8, fetches through D_80153CD0 and converts
-   the value with the format's channel masks and shifts like func_804139E0_de. */
+   the value with the format's channel masks and shifts like Frontend_ReadSourceColorEntry. */
 
 
 
@@ -41,7 +41,7 @@ extern s32 D_80153C80;
 extern s32 D_80153C60;
 
 /* Writes a 0xAARRGGBB colour to the pixel at (x, y) of the current target image D_80153D58:
-   converts the colour to the format's packed value like func_80413CE0_de, then stores it and the
+   converts the colour to the format's packed value like Frontend_WriteDestinationColorEntry, then stores it and the
    index x + y * width for the format's store hook D_80153CD4 and calls it. */
 
 
@@ -154,7 +154,7 @@ extern u8 *D_80153C7C;
 extern u8 *D_80153C88;
 
 
-u32 func_804137F8_de(s32 x, s32 y) {
+u32 Frontend_ReadSourcePixelColor(s32 x, s32 y) {
     extern ShapeCode802B54A0 *D_80153D54;
     u32 r;
     u32 g;
@@ -190,14 +190,14 @@ u32 func_804137F8_de(s32 x, s32 y) {
     return (a << 24) | (r << 16) | (g << 8) | b;
 }
 
-s32 func_80413994_de(s32 x, s32 y) {
+s32 Frontend_ReadSourcePixelIndex(s32 x, s32 y) {
     extern struct ShapeCode802B54A0 *D_80153D54;
     D_80153C78 = x + y * D_80153D54->unk8;
     D_80153CD8();
     return D_80153C80;
 }
 
-u32 func_804139E0_de(s32 index) {
+u32 Frontend_ReadSourceColorEntry(s32 index) {
     u32 r;
     u32 g;
     u32 b;
@@ -231,7 +231,7 @@ u32 func_804139E0_de(s32 index) {
     return (a << 24) | (r << 16) | (g << 8) | b;
 }
 
-void func_80413B54_de(s32 x, s32 y, u32 color) {
+void Frontend_WriteDestinationPixelColor(s32 x, s32 y, u32 color) {
     extern ShapeCode802B54A0 *D_80153D58;
     u32 r;
     u32 g;
@@ -270,14 +270,14 @@ void func_80413B54_de(s32 x, s32 y, u32 color) {
     D_80153CD4();
 }
 
-void func_80413C94_de(s32 x, s32 y, s32 value) {
+void Frontend_WriteDestinationPixelIndex(s32 x, s32 y, s32 value) {
     extern struct ShapeCode802B54A0 *D_80153D58;
     D_80153C8C = value;
     D_80153C84 = x + y * D_80153D58->unk8;
     D_80153CDC();
 }
 
-void func_80413CE0_de(s32 index, u32 color) {
+void Frontend_WriteDestinationColorEntry(s32 index, u32 color) {
     u32 r;
     u32 g;
     u32 b;
@@ -315,49 +315,49 @@ void func_80413CE0_de(s32 index, u32 color) {
     D_80153CD4();
 }
 
-u32 func_80413E08_de(u32 color, s32 format) {
+u32 Frontend_EncodePixelColor(u32 color, s32 format) {
     return encode(color, &D_800E2B20[format]);
 }
 
-u32 func_80413EE0_de(u32 value, s32 format) {
+u32 Frontend_DecodePixelColor(u32 value, s32 format) {
     return decode(value, &D_800E2B20[format]);
 }
 
-void func_80413FCC_de(void) {
+void Frontend_ReadSourceHalfwordPixel(void) {
     D_80153C68 = ((u16 *)D_80153C64)[D_80153C60];
 }
 
-void func_80413FF8_de(void) {
+void Frontend_ReadSourceWordPixel(void) {
     D_80153C68 = ((s32 *)D_80153C64)[D_80153C60];
 }
 
-void func_80414024_de(void) {
+void Frontend_ReadSourceThreeBytePixel(void) {
     D_80153C68 = (((u8 *)D_80153C64)[D_80153C60 * 3] << 16) | (((u8 *)D_80153C64)[D_80153C60 * 3 + 1] << 8) |
                  ((u8 *)D_80153C64)[D_80153C60 * 3 + 2];
 }
 
-void func_8041406C_de(void) {
+void Frontend_WriteDestinationHalfwordPixel(void) {
     ((u16 *)D_80153C70)[D_80153C6C] = (u16)D_80153C74;
 }
 
-void func_80414094_de(void) {
+void Frontend_WriteDestinationWordPixel(void) {
     ((s32 *)D_80153C70)[D_80153C6C] = D_80153C74;
 }
 
-void func_804140BC_de(void) {
+void Frontend_WriteDestinationThreeBytePixel(void) {
     ((u8 *)D_80153C70)[D_80153C6C * 3] = D_80153C75;
     ((u8 *)D_80153C70)[D_80153C6C * 3 + 1] = D_80153C76;
     ((u8 *)D_80153C70)[D_80153C6C * 3 + 2] = D_80153C77;
 }
 
-void func_80414138_de(void) {
+void Frontend_ReadSourceByteIndex(void) {
     s32 value = D_80153C7C[D_80153C78];
 
     D_80153C80 = value;
     D_80153C60 = value;
 }
 
-void func_80414168_de(void) {
+void Frontend_ReadSourceNibbleIndex(void) {
     s32 index = D_80153C78;
     s32 value;
 
@@ -370,32 +370,32 @@ void func_80414168_de(void) {
     D_80153C60 = value;
 }
 
-void func_804141C0_de(void) {
+void Frontend_UseHalfwordPixelOffset(void) {
     s32 value = D_80153C78;
 
     D_80153C80 = value;
     D_80153C60 = value;
 }
 
-void func_804141E0_de(void) {
+void Frontend_UseThreeBytePixelOffset(void) {
     s32 value = D_80153C78;
 
     D_80153C80 = value;
     D_80153C60 = value;
 }
 
-void func_80414200_de(void) {
+void Frontend_UseWordPixelOffset(void) {
     s32 value = D_80153C78;
 
     D_80153C80 = value;
     D_80153C60 = value;
 }
 
-void func_80414220_de(void) {
+void Frontend_WriteDestinationByteIndex(void) {
     D_80153C88[D_80153C84] = (u8)D_80153C8C;
 }
 
-void func_80414244_de(void) {
+void Frontend_WriteDestinationNibbleIndex(void) {
     s32 index = D_80153C84;
 
     if (index & 1) {

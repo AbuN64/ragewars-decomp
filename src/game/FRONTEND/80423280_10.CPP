@@ -35,11 +35,11 @@ extern void func_804399D0(char *);
 #else
 #endif
 
-extern s32 func_8042B1B8_de(s32, s32);
+extern s32 ScenarioSetup_ResolveArenaFromSelection(s32, s32);
 
-extern void Frontend_SetWidgetFlag08(struct Resource_func_80419E54_de *, s32);
+extern void Frontend_SetWidgetFlag08(struct ResourceSmpFlickerCreateFlickerWidget *, s32);
 
-s32 func_80429FF0_de(void *unused0, void *unused1, s32 event) {
+s32 Frontend_DrawSetupResultPanels(void *unused0, void *unused1, s32 event) {
     s32 i;
     s32 alpha;
 
@@ -99,7 +99,7 @@ func_804397E8_de
     if (event == 0 && GetMenuScreenOwner() != 0x19) {
         if (D_800E4F60->frames < 20) {
             if (++D_800E4F60->frames == 20 && D_800E4F60->winner > 0) {
-                Menu_SetOptionsSceneSelection(func_8042B1B8_de(ScenarioSetup_CategoryToList(D_800E4F60->winnerSlot), D_800E4F60->winner) + 0x259);
+                Menu_SetOptionsSceneSelection(ScenarioSetup_ResolveArenaFromSelection(ScenarioSetup_CategoryToList(D_800E4F60->winnerSlot), D_800E4F60->winner) + 0x259);
                 D_800E4F60->blinkDelay = 0;
             }
         }

@@ -15,7 +15,7 @@ extern Handler8042931C D_800E4EC8;
 
 struct ObjRecAtCV1;
 
-s32 func_8042931C_us_rev1(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchMatchMenuEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler8042931C *entry;
     s32 index;
     s32 wildcard;

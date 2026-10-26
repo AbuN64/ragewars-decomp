@@ -14,13 +14,13 @@
 #include "SCENE/802508E0_13.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 extern struct MatchOptionsScreen *D_800E4EF0;
-extern s32 func_8041AD04_de(void *);
+extern s32 SmpButton_GetListSelection(void *);
 extern s32 N64Eng_GetNumericWidgetValue(void *);
 extern s32 func_8043C308_de(void *);
 
 /* Refreshes the option block D_801462C8 from the menu D_800E4EF0 points to: the bytes at 0x24 to
    0x27 from the values N64Eng_GetNumericWidgetValue reports for its items at 0x28, 0x24, 0x2C and 0x30, and the
-   byte at 0x28 from the selection func_8041AD04_de reports for its item at 0x1C. */
+   byte at 0x28 from the selection SmpButton_GetListSelection reports for its item at 0x1C. */
 
 
 
@@ -46,7 +46,7 @@ extern void SmpButton_SelectListEntry(void *arg0, s32 arg1);
 
 
 /* Refreshes the entry list of screen D_800E4EF0: reads the selection of its cursor at 0x20 through
-   func_8041AD04_de and the entry count of its list at 0x34 through N64Eng_GetNumericWidgetValue. With no entries it
+   SmpButton_GetListSelection and the entry count of its list at 0x34 through N64Eng_GetNumericWidgetValue. With no entries it
    clears the list through Frontend_ResetJoinRequestEntries; otherwise, when the count differs from what
    func_8041EB50_de shows or force is 1, it clears the list and rebuilds it for the count and
    selection through Frontend_RandomizeJoinRequestEntries. */
@@ -64,8 +64,8 @@ extern void Frontend_ResetJoinRequestEntries(void);
 
 
 /* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled unless func_8043C308_de reports
-   screen D_800E4EF0 busy: 0x36B closes the menu through func_804294C4_de, sends code -1 to
-   func_8042E988_de and calls func_802998A8_de; 0x369 does the same with page reset func_80429654_de(0)
+   screen D_800E4EF0 busy: 0x36B closes the menu through Frontend_StoreMatchOptionWidgets, sends code -1 to
+   func_8042E988_de and calls func_802998A8_de; 0x369 does the same with page reset Frontend_SyncMatchJoinSlots(0)
    and code 0x17 when N64Eng_GetNumericWidgetValue reports the screen's list at 0x34 non-empty; 0x36A always does
    it with Frontend_SeatJoinRequests and code 0x19, then calls Tsmos_DeactivateControllerState. Returns zero. */
 
@@ -77,7 +77,7 @@ extern void func_802998A8_de(void);
 
 
 /* Calls MarkMenuEventHandled and, unless func_8043C308_de reports one for the object D_800E4EF0 holds, calls
-   func_804294C4_de, func_8042E988_de with -1 and func_802998A8_de. Returns zero. */
+   Frontend_StoreMatchOptionWidgets, func_8042E988_de with -1 and func_802998A8_de. Returns zero. */
 
 
 extern void MarkMenuEventHandled();
@@ -91,7 +91,7 @@ typedef s32 (*Handler80429B74)(void *, s32, s32, s32, s32);
 
 extern Handler80429B74 D_800E4EFC;
 
-void func_804294C4_de(void) {
+void Frontend_StoreMatchOptionWidgets(void) {
     Shared_Game *options;
     s32 value;
 
@@ -101,10 +101,10 @@ void func_804294C4_de(void) {
     options->players = N64Eng_GetNumericWidgetValue(D_800E4EF0->widget24);
     options->trialOther = N64Eng_GetNumericWidgetValue(D_800E4EF0->widget2C);
     options->trialScore = N64Eng_GetNumericWidgetValue(D_800E4EF0->widget30);
-    options->unknown28[0] = func_8041AD04_de(D_800E4EF0->selectWidget);
+    options->unknown28[0] = SmpButton_GetListSelection(D_800E4EF0->selectWidget);
 }
 
-void func_80429560_de(void) {
+void Frontend_LoadMatchOptionWidgets(void) {
     Shared_Game *opts;
     s32 count;
     s32 cap;
@@ -127,11 +127,11 @@ void func_80429560_de(void) {
     SmpButton_SelectListEntry(D_800E4EF0->cursorWidget, Frontend_GetJoinRequestRank());
 }
 
-void func_80429654_de(s32 force) {
+void Frontend_SyncMatchJoinSlots(s32 force) {
     s32 selection;
     s32 count;
 
-    selection = func_8041AD04_de(D_800E4EF0->cursorWidget);
+    selection = SmpButton_GetListSelection(D_800E4EF0->cursorWidget);
     count = N64Eng_GetNumericWidgetValue(D_800E4EF0->widget34);
     if (count <= 0) {
         Frontend_ResetJoinRequestEntries();
@@ -143,7 +143,7 @@ void func_80429654_de(s32 force) {
     }
 }
 
-s32 func_804296F4_de(void) {
+s32 Frontend_DestroyMatchOptions(void) {
     Cache_FreeMemory(D_800E4EF0);
     D_800E4EF0 = 0;
     return 0;
@@ -151,11 +151,11 @@ s32 func_804296F4_de(void) {
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */
-s32 func_80429724_de(void) {
+s32 Frontend_ReturnMatchOptionsEventZero(void) {
     return 0;
 }
 
-s32 func_8042972C_de(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
+s32 Frontend_ResetMatchOptionOnEvent(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
     u32 kind;
     void *widget;
     s32 value;
@@ -224,7 +224,7 @@ s32 func_8042972C_de(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
     return 0;
 }
 
-s32 func_804297F8_de(void) {
+s32 Frontend_ActivateMatchOptionAction(void) {
     MarkMenuEventHandled();
     if (func_8043C308_de(D_800E4EF0) == 1) {
         return 0;
@@ -237,7 +237,7 @@ s32 func_804297F8_de(void) {
 #elif defined(VERSION_EU_X)
     case 0x36F:
 #endif
-        func_804294C4_de();
+        Frontend_StoreMatchOptionWidgets();
         func_8042E988_de(-1);
         func_802998A8_de();
         break;
@@ -249,8 +249,8 @@ s32 func_804297F8_de(void) {
     case 0x36D:
 #endif
         if (N64Eng_GetNumericWidgetValue(D_800E4EF0->widget34) > 0) {
-            func_804294C4_de();
-            func_80429654_de(0);
+            Frontend_StoreMatchOptionWidgets();
+            Frontend_SyncMatchJoinSlots(0);
             func_8042E988_de(0x17);
             func_802998A8_de();
         }
@@ -262,8 +262,8 @@ s32 func_804297F8_de(void) {
 #elif defined(VERSION_EU_X)
     case 0x36E:
 #endif
-        func_804294C4_de();
-        func_80429654_de(0);
+        Frontend_StoreMatchOptionWidgets();
+        Frontend_SyncMatchJoinSlots(0);
         Frontend_SeatJoinRequests();
         func_8042E988_de(0x19);
         func_802998A8_de();
@@ -273,34 +273,34 @@ s32 func_804297F8_de(void) {
     return 0;
 }
 
-s32 func_804298F8_de(void) {
+s32 Frontend_ExitMatchOptions(void) {
     MarkMenuEventHandled();
     if (func_8043C308_de(D_800E4EF0) == 1) {
         return 0;
     }
-    func_804294C4_de();
+    Frontend_StoreMatchOptionWidgets();
     func_8042E988_de(-1);
     func_802998A8_de();
     return 0;
 }
 
-s32 func_8042994C_de(void *first, void *second, void *third, s32 fourth) {
+s32 Frontend_RefreshMatchSlotsOnZeroEvent(void *first, void *second, void *third, s32 fourth) {
     if (fourth == 0) {
-        func_80429654_de(1);
+        Frontend_SyncMatchJoinSlots(1);
         return 0;
     }
     return 0;
 }
 
-s32 func_80429970_de(void *first, void *second, void *third, s32 fourth) {
+s32 Frontend_RefreshMatchSlotsOnZeroEventAlt(void *first, void *second, void *third, s32 fourth) {
     if (fourth == 0) {
-        func_80429654_de(1);
+        Frontend_SyncMatchJoinSlots(1);
         return 0;
     }
     return 0;
 }
 
-s32 func_80429994_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchMatchOptionsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler80429B74 *entry;
     s32 index;
     s32 wildcard;

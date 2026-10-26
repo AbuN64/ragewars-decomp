@@ -6,14 +6,14 @@
 #include "FRONTEND/80423280_33.H"
 
 /* On event 3 with value 0xA, calls MarkMenuEventHandled, sets the word at offset 0x18 of the object
-   D_800E4600 points to to 0x1C and calls func_8041A430_de on its first word with 2. Returns zero. */
+   D_800E4600 points to to 0x1C and calls SmpSlider_SetTransitionMode on its first word with 2. Returns zero. */
 
 
 extern struct StateFrontendHandlePlayModeShortcut *D_800E4600;
 
 extern void MarkMenuEventHandled();
 
-extern void func_8041A430_de(void *, s32);
+extern void SmpSlider_SetTransitionMode(void *, s32);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4604, an actor kind at D_800E4608 and a handler at D_800E460C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
@@ -28,7 +28,7 @@ s32 Frontend_HandlePlayModeShortcut(void *first, void *second, u32 event, s32 va
         MarkMenuEventHandled();
         state = D_800E4600;
         state->value = 0x1C;
-        func_8041A430_de(state->first, 2);
+        SmpSlider_SetTransitionMode(state->first, 2);
     }
     return 0;
 }

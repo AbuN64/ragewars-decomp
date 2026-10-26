@@ -34,7 +34,7 @@
    and D_8015402C is at least 35, in which case it leaves for screen 7 when option D_801462D5 is 1
    and screen 3 otherwise; choice 1 calls func_8040C428_de(0), shows the window argument, stops the
    objects at D_80145088 and 0x48 before it, releases D_8011FE88 through Scene_LoadLevelResources and sets the
-   word at 0x17F0 of D_80145088 to 8. Returns zero. Adapted from func_8042D4FC_de with the option cases written in the order that reproduces the
+   word at 0x17F0 of D_80145088 to 8. Returns zero. Adapted from Frontend_UpdateMatchResultsTransition with the option cases written in the order that reproduces the
    cartridge's decision tree. */
 
 

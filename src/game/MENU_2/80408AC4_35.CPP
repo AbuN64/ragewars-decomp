@@ -3,17 +3,17 @@
 #include "TYPES.H"
 
 #if defined(VERSION_DE)
-/* Calls func_8041B110_de with 0x3D0 and then 0x3D1, and returns zero. */
+/* Calls SmpButton_WrapButtonWidget with 0x3D0 and then 0x3D1, and returns zero. */
 s32 func_804377E8_de(void) {
 #if defined(VERSION_DE)
-    func_8041B110_de(0x3CA);
-    func_8041B110_de(0x3CB);
+    SmpButton_WrapButtonWidget(0x3CA);
+    SmpButton_WrapButtonWidget(0x3CB);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    func_8041B110_de(0x3D0);
-    func_8041B110_de(0x3D1);
+    SmpButton_WrapButtonWidget(0x3D0);
+    SmpButton_WrapButtonWidget(0x3D1);
 #elif defined(VERSION_EU_X)
-    func_8041B110_de(0x3D4);
-    func_8041B110_de(0x3D5);
+    SmpButton_WrapButtonWidget(0x3D4);
+    SmpButton_WrapButtonWidget(0x3D5);
 #endif
     return 0;
 }

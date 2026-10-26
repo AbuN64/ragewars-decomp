@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "SCENE/802508E0_13.H"
 extern struct State_func_80437444_de *D_800E5780;
-extern void func_8041A430_de(void *, s32);
+extern void SmpSlider_SetTransitionMode(void *, s32);
 extern s32 Defs_TestBit(void *, s32);
 
 /* Releases the object D_800E5780 holds through Cache_FreeMemory, clears D_800E5780 and returns zero. */
@@ -30,7 +30,7 @@ enum { MENU_RESOURCE = 0x13b };
 
 extern u8 D_80102B00[];
 
-extern s32 func_8041A470_de(struct MenuFrontendUpdatePlayModeMenu *);
+extern s32 SmpSlider_GetTransitionMode(struct MenuFrontendUpdatePlayModeMenu *);
 
 extern void func_802991D4_de(s32);
 
@@ -39,7 +39,7 @@ extern void MarkMenuEventHandled();
 extern void func_80298368_de(s32);
 
 /* Calls MarkMenuEventHandled, then sets the word at offset 0x10 of the object D_800E5780 points to to -1 and
-   calls func_8041A430_de on the object's first word with 2, returning zero. */
+   calls SmpSlider_SetTransitionMode on the object's first word with 2, returning zero. */
 
 /* Handles menu selection and updates the active menu state. */
 
@@ -59,20 +59,20 @@ s32 func_804373E4_de(void) {
     return 0;
 }
 
-/* Calls func_8041B110_de with 0x13B, 0x13A and 0x13C in turn and returns zero. */
+/* Calls SmpButton_WrapButtonWidget with 0x13B, 0x13A and 0x13C in turn and returns zero. */
 s32 func_80437414_de(void) {
 #if defined(VERSION_DE)
-    func_8041B110_de(0x139);
-    func_8041B110_de(0x138);
-    func_8041B110_de(0x13A);
+    SmpButton_WrapButtonWidget(0x139);
+    SmpButton_WrapButtonWidget(0x138);
+    SmpButton_WrapButtonWidget(0x13A);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    func_8041B110_de(0x13B);
-    func_8041B110_de(0x13A);
-    func_8041B110_de(0x13C);
+    SmpButton_WrapButtonWidget(0x13B);
+    SmpButton_WrapButtonWidget(0x13A);
+    SmpButton_WrapButtonWidget(0x13C);
 #elif defined(VERSION_EU_X)
-    func_8041B110_de(0x13F);
-    func_8041B110_de(0x13E);
-    func_8041B110_de(0x140);
+    SmpButton_WrapButtonWidget(0x13F);
+    SmpButton_WrapButtonWidget(0x13E);
+    SmpButton_WrapButtonWidget(0x140);
 #endif
     return 0;
 }
@@ -81,7 +81,7 @@ s32 func_80437444_de(void) {
     s32 result;
     s32 target;
 
-    switch (result = func_8041A470_de(D_800E5780->menu)) {
+    switch (result = SmpSlider_GetTransitionMode(D_800E5780->menu)) {
     case 1:
         if (D_800E5780->seen != 0) {
             return 0;
@@ -121,7 +121,7 @@ s32 func_80437574_de(void) {
     MarkMenuEventHandled();
     state = D_800E5780;
     state->target = -1;
-    func_8041A430_de(state->menu, 2);
+    SmpSlider_SetTransitionMode(state->menu, 2);
     return 0;
 }
 
@@ -164,6 +164,6 @@ s32 func_804375B0_de(void) {
         D_800E5780->target = 0xA;
         break;
     }
-    func_8041A430_de(D_800E5780->menu, 2);
+    SmpSlider_SetTransitionMode(D_800E5780->menu, 2);
     return 0;
 }

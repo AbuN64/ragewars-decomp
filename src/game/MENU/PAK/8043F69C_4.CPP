@@ -22,7 +22,7 @@
  */
 u32 Defs_GetMemorySize(void);
 
-int func_802934F8_de(void);
+int SetN64_IsModeThirteen(void);
 
 void Pak_DrawMenuPanel(func_8043FFAC_S2 *menu, TextBoundsText *text, s32 relative);
 
@@ -64,7 +64,7 @@ void func_8043FE3C_de(func_80254D70_S2 *arg0, func_8043FFAC_S5 *entry, s32 arg2,
     CMenuFontInfo *temp_s1;
 
     var_s5 = 1;
-    if ((func_802934F8_de() == 0) || !(arg0->unk8 & 0x40000000)) {
+    if ((SetN64_IsModeThirteen() == 0) || !(arg0->unk8 & 0x40000000)) {
         if (D_80145088.settings.local != 0) {
             if (arg0->unk8 < 0) {
                 if (Defs_GetMemorySize() == 0x400000) {
@@ -177,7 +177,7 @@ void func_804402DC_de(MenuOption *arg0, MenuOptionBox *box, s32 dir, MenuOptionF
     f32 height;
     s32 *active;
 
-    if (((func_802934F8_de() != 0) && (arg0->flags & 0x40000000)) || ((D_80145088.settings.local != 0) && (arg0->flags < 0) && (Defs_GetMemorySize() == 0x400000))) {
+    if (((SetN64_IsModeThirteen() != 0) && (arg0->flags & 0x40000000)) || ((D_80145088.settings.local != 0) && (arg0->flags < 0) && (Defs_GetMemorySize() == 0x400000))) {
         arg3->highlighted = 1;
         if (D_800E1E20 != 3) {
             D_800E1E20 = 3;

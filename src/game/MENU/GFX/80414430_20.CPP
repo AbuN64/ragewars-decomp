@@ -98,7 +98,7 @@ s32 Gfx_LoadPalette(s32 bits, void *palette) {
     return result;
 }
 
-void func_804174F4_de(Texture *arg0) {
+void Gfx_BindImageTexture(Texture *arg0) {
  s32 paletteSame,flags,size;
  Texture *tex=arg0;
  if (arg0 == 0) {
@@ -148,7 +148,7 @@ void func_804174F4_de(Texture *arg0) {
  }
 }
 
-void func_80417B20_de(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, u32 arg9) {
+void Gfx_DrawClippedImageRectangle(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, u32 arg9) {
     s32 sp20;
     s32 sp24;
     s32 sp28;
@@ -212,8 +212,8 @@ void func_80417B20_de(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
             
         }
         if (D_80153F60.x == 0) {
-            func_80416ECC_de(9);
-            func_80415C90_de(temp_fs3, temp_fs3f, var_fs2f, var_fs2, (u32) arg9, (u32) arg9, (u32) arg9, (u32) arg9);
+            Gfx_SetPrimitiveVertexMode(9);
+            Gfx_DrawClippedGradientQuad(temp_fs3, temp_fs3f, var_fs2f, var_fs2, (u32) arg9, (u32) arg9, (u32) arg9, (u32) arg9);
         }
     } else if (D_80153F60.x == 0) {
         D_800E32E4 = 0;
@@ -301,7 +301,7 @@ void func_80417B20_de(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
         } else {
 block_51:
             if ((var_fs1 < var_fs0) || (var_fs1f < var_fs0f) || (D_800DF260_de != 0)) {
-                func_804181A4_de(var_s0, var_s1, var_s2, var_s3, var_fs0, var_fs0f, var_fs1, var_fs1f);
+                Gfx_DrawTextureRectangleChunks(var_s0, var_s1, var_s2, var_s3, var_fs0, var_fs0f, var_fs1, var_fs1f);
             } else {
                 Gfx_EmitTextureRect(var_s0, var_s1, var_s2, var_s3, var_fs0, var_fs0f, var_fs1, var_fs1f);
             }
@@ -309,7 +309,7 @@ block_51:
     }
 }
 
-void func_804181A4_de(s32 x0, s32 y0, s32 x1, s32 y1, f32 u0, f32 v0, f32 u1, f32 v1) {
+void Gfx_DrawTextureRectangleChunks(s32 x0, s32 y0, s32 x1, s32 y1, f32 u0, f32 v0, f32 u1, f32 v1) {
     s32 scale;
     s32 dsdx;
     s32 dtdy;

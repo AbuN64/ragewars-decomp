@@ -92,7 +92,7 @@ extern u32 D_800CD884;
 extern f32 rwFrameBuildSeconds;
 extern f32 D_800C5468;
 extern void func_802539EC_de(s32,s32);
-extern void func_80293268_de(void *);
+extern void SetN64_CommitSessionInputs(void *);
 
 extern int Control_IsSnapshotActive(void);
 

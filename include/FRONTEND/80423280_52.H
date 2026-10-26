@@ -2,10 +2,10 @@
 #define FRONTEND_80423280_52_H
 #include "COMMON/RECRECAT4.H"
 #include "COMMON/CONTROL.H"
-extern void func_8042AFC0_de(int);
-extern void func_8042AFD0_de(int);
-extern void func_8042AFE0_de();
+extern void ScenarioSetup_SetCupCategory(int);
+extern void ScenarioSetup_SetCupStageCount(int);
+extern void ScenarioSetup_LoadSetupArenaLabel();
 extern void ScenarioSetup_HideArenaCatalogueWidgets();
-extern void func_8042B080_de();
-extern s32 func_8042AFB8_de();
+extern void ScenarioSetup_HideSetupCatalogue();
+extern s32 ScenarioSetup_ReturnResultsGateTrue();
 #endif

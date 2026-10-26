@@ -17,7 +17,7 @@
 #include "SCENE/802508E0_4.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern void func_8029311C_de(void *,u8 *,s32,s32,s32,s32);
+extern void SetN64_DrawColorRectangle(void *,u8 *,s32,s32,s32,s32);
 static inline u32 toUnsigned(f32 v,f32 limit) { u32 result; if(!(limit<=v)) result=(u32)(s32)v; else { v-=limit; result=(u32)(s32)v; result|=0x80000000; } return result; }
 static inline f32 unsignedWidth(u32 v) { f64 d=(s32)v; if((s32)v<0)d+=D_800DCC30; return (f32)d; }
 static inline f32 unsignedHeight(u32 v) { f64 d=(s32)v; if((s32)v<0)d+=D_800DCC40_de; return (f32)d; }
@@ -67,7 +67,7 @@ void func_80402BA0_de(ScreenRectangle *rectangle) {
         if(!(0.0f<=value))value=0.0f;
         rgba[3]=(u8)toUnsigned(value,((f32 *)&D_800DCC4C_de)[8]);
         value=0.0f;
-        func_8029311C_de(&D_8011FAC0,rgba,width,height,right,bottom);
+        SetN64_DrawColorRectangle(&D_8011FAC0,rgba,width,height,right,bottom);
     }
     if(D_800DE7F4_de)Menu_DrawLetterboxBands();
 }
@@ -202,7 +202,7 @@ void func_80403200_de(char *name) {
         entries = (EntryRecAt18V5 *)(*table + 2);
         n = *D_8011FEFC - 1;
         for (; i < n; i++) {
-            if (((s32 (*)(char *, char *))func_80293440_de)(name, entries[i].name) == 0) {
+            if (((s32 (*)(char *, char *))SetN64_CompareByteStrings)(name, entries[i].name) == 0) {
                 D_800E2830->requestE0 = entries[i].id8;
                 id = entries[i].id0;
                 D_800E2830->resourceDC = i;

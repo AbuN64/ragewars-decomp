@@ -7,7 +7,7 @@ extern int D_8014DA28;
 
 extern int D_8014DA38;
 
-extern int func_804136CC_de(void *object);
+extern int Frontend_HasOwnedImagePalette(void *object);
 
 struct Format;
 struct Format {
@@ -22,7 +22,7 @@ struct Format {
 
 struct Format;
 extern struct Format D_800E2B20[];
-extern void func_8041379C_de(s32 index, struct Format *out);
+extern void Frontend_GetPixelFormatDescriptor(s32 index, struct Format *out);
 
 
 extern int D_8014DA24;
@@ -47,12 +47,12 @@ extern unsigned char D_80153C75;
 
 extern int D_8014DA2C;
 
-extern s32 func_804136C0_de(s32 *record);
+extern s32 Frontend_GetOwnedImagePalette(s32 *record);
 
 struct Format;
 typedef struct Format Format;
 
-extern u8 func_80413714_de(u8 *record);
+extern u8 Frontend_OwnsImagePixels(u8 *record);
 
 extern int D_8014DA3C;
 
@@ -78,7 +78,7 @@ struct Config {
     int g;
 };
 
-extern u8 func_80413704_de(u8 *record);
+extern u8 Frontend_OwnsImagePalette(u8 *record);
 
 
 extern int D_8014DA30;

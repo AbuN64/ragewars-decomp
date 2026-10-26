@@ -26,7 +26,7 @@ extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape
 /* Flushes the queued text sprite batches: when any are queued it selects render mode 0x53333 if
    not already active, saves the clip rectangle and applies the queue's own, then walks the texture
    pages from the lowest first page to the highest last page among the batches, loading each page
-   once through Frontend_GetBankTileTexture and func_804174F4_de (stopping the page when it cannot load) and drawing
+   once through Frontend_GetBankTileTexture and Gfx_BindImageTexture (stopping the page when it cannot load) and drawing
    every batch's run of sprites on that page at depth 10 through Gfx_DrawRect; finally it restores
    the clip rectangle and empties the queue. */
 
@@ -45,7 +45,7 @@ extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape
 
 extern s32 Frontend_GetBankTileTexture(s32 page, s32 a, s32 b);
 
-extern void func_804174F4_de(s32 texture);
+extern void Gfx_BindImageTexture(s32 texture);
 
 static inline void func_8040CB30_restore(struct Shape_typemap_165 *clip) {
     N64Eng_SetClipBounds(clip->field_0, clip->field_8, clip->field_4, clip->field_C);
@@ -69,7 +69,7 @@ static inline s32 func_8040CDD0_overlaps(struct Shape_typemap_165 *area) {
     return 0;
 }
 
-extern void func_80418DE0_de(f32 x, f32 y, f32 z, f32 width, f32 height, u32 c0, u32 c1, u32 c2, u32 c3);
+extern void Gfx_DrawGradientRectangle(f32 x, f32 y, f32 z, f32 width, f32 height, u32 c0, u32 c1, u32 c2, u32 c3);
 
 static inline s32 func_8040D00C_overlaps(struct Shape_typemap_165 *area) {
     BatchRec *batch;
@@ -141,7 +141,7 @@ void Frontend_FlushTextBatches(void) {
     last = 0;
     if (D_800DEA6C != 0x53333 || D_800E2AB8 == 0) {
         D_800DEA6C = 0x53333;
-        func_80417138_de(0x53333);
+        Gfx_ConfigurePrimitiveRenderFlags(0x53333);
         D_800E2AB8 = 1;
     }
     N64Eng_GetClipBounds(&clip.field_0, &clip.field_8, &clip.field_4, &clip.field_C);
@@ -171,7 +171,7 @@ void Frontend_FlushTextBatches(void) {
                         i = D_8014D570;
                         break;
                     }
-                    func_804174F4_de(texture);
+                    Gfx_BindImageTexture(texture);
                     loaded = 1;
                 }
                 Gfx_DrawRect(sprite->x, sprite->y, 10.0f, sprite->width, sprite->height, sprite->color);
@@ -213,10 +213,10 @@ void Frontend_DrawImageWidget(WidgetFrontendDrawImageWidget *widget, sm_dldc arg
     color = (args.alpha << 24) | 0xFFFFFF;
     if (D_800DEA6C != 0x53333 || D_800E2AB8 == 0) {
         D_800DEA6C = 0x53333;
-        func_80417138_de(0x53333);
+        Gfx_ConfigurePrimitiveRenderFlags(0x53333);
         D_800E2AB8 = 1;
     }
-    func_804174F4_de(texture);
+    Gfx_BindImageTexture(texture);
     Gfx_DrawRect(area.field_0, area.field_8, 0.0f, area.field_4 - area.field_0 + 1, area.field_C - area.field_8 + 1, color);
     if (clipped) {
         N64Eng_SetClipBounds(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
@@ -252,11 +252,11 @@ void Frontend_DrawGradientWidget(WidgetLayout *widget, sm_dldc args) {
     }
     if (D_800DEA6C != 0x53533 || D_800E2AB8 == 0) {
         D_800DEA6C = 0x53533;
-        func_80417138_de(0x53533);
+        Gfx_ConfigurePrimitiveRenderFlags(0x53533);
         D_800E2AB8 = 1;
     }
-    func_804174F4_de(0);
-    func_80418DE0_de(area.field_0, area.field_8, 0.0f, area.field_4 - area.field_0 + 1, area.field_C - area.field_8 + 1,
+    Gfx_BindImageTexture(0);
+    Gfx_DrawGradientRectangle(area.field_0, area.field_8, 0.0f, area.field_4 - area.field_0 + 1, area.field_C - area.field_8 + 1,
                   (widget->colors[0] & 0xFFFFFF) | ((args.alpha * (u8)(widget->colors[0] >> 24) / 255) << 24),
                   (widget->colors[1] & 0xFFFFFF) | ((args.alpha * (u8)(widget->colors[1] >> 24) / 255) << 24),
                   (widget->colors[2] & 0xFFFFFF) | ((args.alpha * (u8)(widget->colors[2] >> 24) / 255) << 24),

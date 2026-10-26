@@ -8,9 +8,9 @@
 #include "FRONTEND/8043962C_3.H"
 
 #if defined(VERSION_EU_X)
-extern void func_8041B110_de(int id);
+extern void SmpButton_WrapButtonWidget(int id);
 
-int func_8043AD30_eu_x(void) { func_8041B110_de(0x3DE); func_8041B110_de(0x3DF); return 0; }
+int func_8043AD30_eu_x(void) { SmpButton_WrapButtonWidget(0x3DE); SmpButton_WrapButtonWidget(0x3DF); return 0; }
 #endif
 
 /* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled: 0x3DA waits through

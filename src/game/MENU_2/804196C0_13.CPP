@@ -9,7 +9,7 @@
 /* Creates a frame animation for widget id of the current screen: finds the widget through
    Frontend_FindWidgetByResourceId, allocates and clears a 0x64-byte animation, sets its type fields, widget and
    -1-terminated frame list, counts the frames, initialises its playback state through
-   func_80419A18_de, func_804199DC_de, func_804199E4_de and func_80419A04_de, attaches it to the widget through
+   func_80419A18_de, SmpFrameAnim_SetSequenceFrame, SmpFrameAnim_SetSequenceDuration and func_80419A04_de, attaches it to the widget through
    Frontend_InsertWidgetBefore and returns it. */
 
 
@@ -23,9 +23,9 @@ extern Animation *Cache_AllocateMemory(s32 size);
 
 extern void func_80419A18_de(Animation *anim, s32 value);
 
-extern void func_804199DC_de(Animation *anim, s32 value);
+extern void SmpFrameAnim_SetSequenceFrame(Animation *anim, s32 value);
 
-extern void func_804199E4_de(Animation *anim, s32 value);
+extern void SmpFrameAnim_SetSequenceDuration(Animation *anim, s32 value);
 
 extern void func_80419A04_de(Animation *anim, s32 value);
 
@@ -55,8 +55,8 @@ Animation *func_804198CC_de(s32 id, s32 *frames) {
         anim->count++;
     }
     func_80419A18_de(anim, 1);
-    func_804199DC_de(anim, 0);
-    func_804199E4_de(anim, 0);
+    SmpFrameAnim_SetSequenceFrame(anim, 0);
+    SmpFrameAnim_SetSequenceDuration(anim, 0);
     func_80419A04_de(anim, 0);
     Frontend_InsertWidgetBefore(widget, anim);
     return anim;

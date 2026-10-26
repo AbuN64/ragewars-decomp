@@ -6,9 +6,9 @@
 #include "COMMON/OWNERRECAT8V1.H"
 
 
-s32 func_80429B00_eu(void) {
-    func_8041B110_de(0x1D9);
-    func_8041B110_de(0x1DA);
+s32 Frontend_ClearEuLoadingHints(void) {
+    SmpButton_WrapButtonWidget(0x1D9);
+    SmpButton_WrapButtonWidget(0x1DA);
     return 0;
 }
 #endif

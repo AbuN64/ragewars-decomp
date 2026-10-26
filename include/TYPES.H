@@ -164,7 +164,7 @@ extern void __scAppendList(struct OSSched *arg0, void *arg1);
 
 extern void __scYield(void *arg0);
 
-extern int func_80293440_de(u8 *a, u8 *b);
+extern int SetN64_CompareByteStrings(u8 *a, u8 *b);
 
 struct GameSession;
 

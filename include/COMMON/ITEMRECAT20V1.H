@@ -382,8 +382,8 @@ struct Actor_func_8024A1D0_de {
     Shared_ParticleLighting lighting[2];
 };
 
-struct Resource_func_80419E54_de;
-struct Resource_func_80419E54_de {
+struct ResourceSmpFlickerCreateFlickerWidget;
+struct ResourceSmpFlickerCreateFlickerWidget {
     char pad[0x10];
     unsigned char value;
     char pad11[0x1B];
@@ -526,8 +526,8 @@ struct ObjRecAtB0 {
 };
 
 
-struct Resource_func_80419E54_de;
-typedef struct Resource_func_80419E54_de Resource_func_80419E54_de;
+struct ResourceSmpFlickerCreateFlickerWidget;
+typedef struct ResourceSmpFlickerCreateFlickerWidget ResourceSmpFlickerCreateFlickerWidget;
 
 struct IntPair;
 struct IntPair {
@@ -936,7 +936,7 @@ struct Draw;
 typedef struct Draw Draw;
 
 
-struct State_func_8042D8C4_de;
+struct StateFrontendScrollResultsBackward;
 
 
 struct ALMIDIEvent;

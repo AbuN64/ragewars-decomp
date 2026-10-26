@@ -8,11 +8,11 @@ extern SliderPopupEu *D_800E5430;
 extern char D_800E1B60[];
 extern void *Cache_AllocateMemory(s32);
 extern void Tsmos_ActivateControllerState(void);
-extern void *func_8041A280_de(s32, s32);
-extern void func_8041A47C_de(void *);
-extern void func_8041B110_de(s32);
+extern void *SmpFade_CreateFadeWidget(s32, s32);
+extern void SmpSlider_EnableTransition(void *);
+extern void SmpButton_WrapButtonWidget(s32);
 extern void *Frontend_FindWidgetByResourceId(void *, s32);
-extern void *func_80419E54_de(s32, s32);
+extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern void XStdio_FormatBuffer(char *, char *, ...);
 /* Builds a three-row slider popup in its 0x24-byte state D_800E5430: title/list from the ids at 0x39C, the numeric
    readout item at 0x39D showing the text at +0x14 formatted with D_800E1B60. Returns 0. */
@@ -22,14 +22,14 @@ s32 func_8042E790_eu_x(void *window) {
 
     D_800E5430 = Cache_AllocateMemory(0x24);
     Tsmos_ActivateControllerState();
-    title = func_8041A280_de(0x39C, 0x39D);
+    title = SmpFade_CreateFadeWidget(0x39C, 0x39D);
     D_800E5430->list = title;
-    func_8041A47C_de(title);
-    func_8041B110_de(0x3A0);
+    SmpSlider_EnableTransition(title);
+    SmpButton_WrapButtonWidget(0x3A0);
     item = Frontend_FindWidgetByResourceId(window, 0x39E);
     D_800E5430->item = item;
     item->alpha = 0xF;
-    D_800E5430->resourceWidget = func_80419E54_de(0x39F, 0x6E);
+    D_800E5430->resourceWidget = SmpFlicker_CreateFlickerWidget(0x39F, 0x6E);
     D_800E5430->unkC = 3;
     item = Frontend_FindWidgetByResourceId(window, 0x3A1);
     item->text = D_800E5430->text14;

@@ -16,7 +16,7 @@
 
 extern s32 func_80245814_de(s32 *flags);
 
-void func_80293A20_de(GameSession *session, s32 arg1, s32 target) {
+void SetN64_HandleSessionTransitionInput(GameSession *session, s32 arg1, s32 target) {
     s32 pending;
     s32 *flags;
 
@@ -61,13 +61,13 @@ extern void InitFrontendMenus(void);
 extern void func_80298368_de(s32 arg0);
 extern void SetN64_BeginModeTransition(GameSession *arg0, s32 arg1);
 extern void func_802394B4_de(void *arg0);
-extern void func_80293394_de(struct GameSession *arg0);
+extern void SetN64_DrawSessionFade(struct GameSession *arg0);
 
 
 
 
 
-void func_80293B28_de(void *session) {
+void SetN64_DrawSessionWithAttractTimeout(void *session) {
     GameSession *state;
     f32 value;
 
@@ -114,12 +114,12 @@ func_802A2224_de
     Scene_UpdateAndDrawWorld(&state->world);
     func_802394B4_de(state->players);
     func_802AA7A4_de(&state->hud);
-    /* Only us-rev1 makes this call: us, eu, eu-x and de go straight on to func_80293394_de, two
+    /* Only us-rev1 makes this call: us, eu, eu-x and de go straight on to SetN64_DrawSessionFade, two
        instructions shorter, as each cartridge's own bytes show. */
 #ifdef VERSION_US_REV1
     func_80294F1C_us_rev1();
 #endif
-    func_80293394_de(state);
+    SetN64_DrawSessionFade(state);
 }
 
 #include "COMMON/SESSIONHANDLERROW.H"
@@ -161,9 +161,9 @@ extern f32 D_800C54B8_de, D_800C54BC_de;
 extern void func_802394B4_de(void *);
 extern void func_80298368_de(s32);
 extern void SetN64_BeginModeTransition(GameSession *, s32);
-extern void func_80293394_de(GameSession *);
+extern void SetN64_DrawSessionFade(GameSession *);
 
-void func_80293CE4_de(GameSession *session) {
+void SetN64_DrawSessionWithRoundTimeout(GameSession *session) {
     CGameStatus *counters = &D_801462C8.counters;
     f32 time;
     if (counters->transitionActive == 1) {
@@ -191,5 +191,5 @@ void func_80293CE4_de(GameSession *session) {
 #ifdef VERSION_US_REV1
     func_80294F1C_us_rev1();
 #endif
-    func_80293394_de(session);
+    SetN64_DrawSessionFade(session);
 }

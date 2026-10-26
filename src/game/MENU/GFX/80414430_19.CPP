@@ -28,7 +28,7 @@ static inline void sync(void) {
     }
 }
 
-void func_80417138_de(s32 flags) {
+void Gfx_ConfigurePrimitiveRenderFlags(s32 flags) {
     s32 plain;
     Rec_func_8024C92C_de groups;
     s32 mode;

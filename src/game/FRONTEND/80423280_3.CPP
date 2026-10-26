@@ -53,7 +53,7 @@ extern void Cinema_ReleaseSequenceContext();
 
 /* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled, for its MESSAGE_COUNT messages from
    FIRST_MESSAGE (0x377 to 0x380 on us) through jtbl_800E1668: one reopens screen D_800E4518 (marking it shown with timer -1 and
-   refreshing its two windows at 0x44 and 0x4C) and calls func_80245B28_de; one tries func_8042ACD8_de
+   refreshing its two windows at 0x44 and 0x4C) and calls func_80245B28_de; one tries ScenarioSetup_StartRandomCupStage
    and on failure sets the screen's modes 5 and 4 with timer 20, else reopens it with timer 0; the
    others pass codes 0x17, 13, 12 and 14 to func_8042E988_de. Any handled message then runs
    Menu_CommitTabOptionsPage. Returns zero. */
@@ -72,7 +72,7 @@ extern void Frontend_SetWidgetFlag08(void *object, int enabled);
 
 extern void Cinema_ReleaseSequenceContext(void);
 
-extern s32 func_8042ACD8_de(void);
+extern s32 ScenarioSetup_StartRandomCupStage(void);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E45AC, an actor kind at D_800E45B0 and a handler at D_800E45B4: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
@@ -256,7 +256,7 @@ code_17:
     goto done;
 retry:
     Tsmos_DeactivateControllerState();
-    if (func_8042ACD8_de() == 0) {
+    if (ScenarioSetup_StartRandomCupStage() == 0) {
         D_800E4518->mode = 5;
         D_800E4518->next_mode = 4;
         D_800E4518->timer = 20;

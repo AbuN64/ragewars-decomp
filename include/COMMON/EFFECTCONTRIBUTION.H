@@ -46,8 +46,8 @@ struct Node438C;
 
 struct ObjectLinks54;
 
-struct State_func_802A2FA4_de;
-typedef struct State_func_802A2FA4_de State_func_802A2FA4_de;
+struct StateSmpUpdateRibbonLifetime;
+typedef struct StateSmpUpdateRibbonLifetime StateSmpUpdateRibbonLifetime;
 
 
 struct ObjectState68;
@@ -95,7 +95,7 @@ struct Transform {
 
 extern void func_802A57D8_de(void);
 
-extern void func_802A5A24_de(EffectContribution *arg0, s32 arg1);
+extern void Fx_ResetEffectContribution(EffectContribution *arg0, s32 arg1);
 
 
 struct Entity1DC;
@@ -286,8 +286,8 @@ typedef struct Owner802A697C Owner802A697C;
 struct ObjectLinksB4;
 
 struct Nodes;
-struct State_func_802A2FA4_de;
-struct State_func_802A2FA4_de {
+struct StateSmpUpdateRibbonLifetime;
+struct StateSmpUpdateRibbonLifetime {
     u8 pad0[0x1C];
     void *object;
     u8 pad20[4];
@@ -323,7 +323,7 @@ typedef struct Vtx Vtx;
 
 struct ObjectState20;
 
-extern void func_802A598C_de(Owner802A697C *owner, int object);
+extern void Fx_DetachEffectOwner(Owner802A697C *owner, int object);
 
 
 struct ObjectLinksB4;
@@ -355,7 +355,7 @@ typedef struct Nodes Nodes;
 
 extern float D_800C5E88_de;
 
-/* The ribbon vertex arena func_802A56C4_de allocates from; only passed through here. */
+/* The ribbon vertex arena Fx_AllocateRibbonVertices allocates from; only passed through here. */
 struct VertexArena;
 
 struct IntegerState6A94;
@@ -363,7 +363,7 @@ struct IntegerState6A94;
 struct ObjectState20;
 typedef struct ObjectState20 ObjectState20;
 
-extern CQuatern *func_802A5020_de(CQuatern *out, u32 bx, u32 by, u32 bz);
+extern CQuatern *Fx_BuildUpAxisQuaternion(CQuatern *out, u32 bx, u32 by, u32 bz);
 
 
 extern f32 D_800C5E28_de;

@@ -15,7 +15,7 @@
 #include "SCENE/802508E0_13.H"
 #include "RESMGR/resmgr_string_memory.H"
 
-/* Allocates and zeroes a 0x118-byte record, copies the header and five-word block of the record Frontend_FindWidgetByResourceId finds for the low half of the first argument, links the record Frontend_FindWidgetByResourceId finds for the second into it, clears the words at 0x110 and 0x114, and registers it through func_8040EEA4_de and func_8040EF84_de. Adapted from func_8041A580_de with the record size 0x118, the tag 0xB64 and the tail fields changed. */
+/* Allocates and zeroes a 0x118-byte record, copies the header and five-word block of the record Frontend_FindWidgetByResourceId finds for the low half of the first argument, links the record Frontend_FindWidgetByResourceId finds for the second into it, clears the words at 0x110 and 0x114, and registers it through func_8040EEA4_de and func_8040EF84_de. Adapted from SmpSlider_CreateSliderWidget with the record size 0x118, the tag 0xB64 and the tail fields changed. */
 
 
 
@@ -100,7 +100,7 @@ extern void Frontend_DrawVisibleSiblings(void *, Args);
 /* Releases the supplied object through Cache_FreeMemory and returns zero. */
 
 
-MenuListWidget *func_8041ABC0_de(s32 arg0, s32 arg1) {
+MenuListWidget *SmpButton_CreateListWidget(s32 arg0, s32 arg1) {
     MenuListWidget *source;
     void *context;
     MenuListWidget *result;
@@ -124,12 +124,12 @@ MenuListWidget *func_8041ABC0_de(s32 arg0, s32 arg1) {
 }
 
 /* Returns the word at offset 0x110 of a record. */
-s32 func_8041AD04_de(s32 *record) {
+s32 SmpButton_GetListSelection(s32 *record) {
     return record[0x110 / 4];
 }
 
 /* Selects entry i of the 20-byte records at offset 0x48 of an object: records the index at 0x110
-   and points word 0x38 of the object at 0x44 to that record. func_8041AD04_de returns the index. */
+   and points word 0x38 of the object at 0x44 to that record. SmpButton_GetListSelection returns the index. */
 
 
 
@@ -285,10 +285,10 @@ void SmpButton_RegisterButtonClass(void) {
     func_802982C4_de(0xB61, D_0041B340, D_0041B3D0, 3);
 }
 
-void func_8041B110_de(s32 arg0) {
-    Record_func_8041B110_de *source;
+void SmpButton_WrapButtonWidget(s32 arg0) {
+    RecordSmpButtonWrapButtonWidget *source;
     void *context;
-    Record_func_8041B110_de *result;
+    RecordSmpButtonWrapButtonWidget *result;
 
     source = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 0xFFFF);
     context = Frontend_GetScreenData(GetMenuScreenOwner());

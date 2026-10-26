@@ -12,7 +12,7 @@
 extern u32 func_80446D80_de(s32 arg0, s32 arg1);
 
 
-u32 func_802B84C0_de(s32 arg0, s32 arg1, u16 arg2, u8 *arg3) {
+u32 func_802B84C0_de(s32 completionQueue, s32 channel, u16 blockAddress, u8 *outputData) {
     Block40 saved;
     u8 *source;
     s32 i;
@@ -23,27 +23,27 @@ u32 func_802B84C0_de(s32 arg0, s32 arg1, u16 arg2, u8 *arg3) {
     retries = 2;
     func_802B9C14_de();
     D_8014D4B0 = 2;
-    func_802B86F0_de(arg1, arg2 & 0xFFFF);
+    func_802B86F0_de(channel, blockAddress & 0xFFFF);
     __osSiRawStartDma(1, (u8 *)&D_80154110);
-    osRecvMesg(arg0, 0, 1);
+    osRecvMesg(completionQueue, 0, 1);
     do {
         __osSiRawStartDma(0, (u8 *)&D_80154110);
-        osRecvMesg(arg0, 0, 1);
+        osRecvMesg(completionQueue, 0, 1);
         source = (u8 *)&D_80154110;
-        if (arg1 != 0) {
+        if (channel != 0) {
             i = 0;
-            if (arg1 > 0) {
+            if (channel > 0) {
                 do {
                     i++;
                     source++;
-                } while (i < arg1);
+                } while (i < channel);
             }
         }
         saved = *(Block40 *)source;
         result = (saved.bytes[2] & 0xC0) >> 4;
         if (result == 0) {
             if ((func_802B8C88_de(&saved.bytes[6]) & 0xFF) != saved.bytes[0x26]) {
-                result = func_80446D80_de(arg0, arg1);
+                result = func_80446D80_de(completionQueue, channel);
                 if (result != 0) {
                     break;
                 }
@@ -51,7 +51,7 @@ u32 func_802B84C0_de(s32 arg0, s32 arg1, u16 arg2, u8 *arg3) {
             } else {
                 i = 0;
                 do {
-                    *arg3++ = ((Block40 *)((u8 *)&saved + i))->bytes[6];
+                    *outputData++ = ((Block40 *)((u8 *)&saved + i))->bytes[6];
                     i++;
                 } while (i < 0x20);
             }

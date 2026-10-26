@@ -15,7 +15,7 @@
 
 s32 Control_DisableAllControllerPaks();
 
-extern void func_80293334_de(void *session, s32 count, s32 force_active);
+extern void SetN64_ResetSessionPlayerPools(void *session, s32 count, s32 force_active);
 
 
 
@@ -37,7 +37,7 @@ extern Gfx *g_displayListCursor;
 
 
 
-/* Clears D_800D29C8 when func_80293904_de accepts its argument with 4.0 and two fours. */
+/* Clears D_800D29C8 when SetN64_CheckTimedSessionTransition accepts its argument with 4.0 and two fours. */
 
 /** Perform no work for callers at VRAM 0x80293DDC. */
 void func_80293DE8_de(s32 session) {
@@ -62,9 +62,9 @@ void func_80293E6C_de(void *arg0) {
     }
 }
 
-/** Thin wrapper around func_80293CE4_de. */
+/** Thin wrapper around SetN64_DrawSessionWithRoundTimeout. */
 void func_80293E9C_de(GameSession *session) {
-    func_80293CE4_de(session);
+    SetN64_DrawSessionWithRoundTimeout(session);
 }
 
 void func_80293EB8_de(void *arg0) {
@@ -80,7 +80,7 @@ void func_80293EB8_de(void *arg0) {
     p1[0xB2] = 1;
     p1[0x1D] = 0;
     p1[0x1E] = 1;
-    func_80293334_de(arg0, 0, 0);
+    SetN64_ResetSessionPlayerPools(arg0, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
     p2 = ((s8 *)(&D_801468A0)) - 0x1818;
     Items_ResetActorPools(p2, 1);
@@ -104,9 +104,9 @@ void func_80293F44_de(GameSession *session) {
         D_800CD77C = 0;
     }
     if (D_800CD77C != 0) {
-        call_result = func_80293904_de(session, 12.0f, var_a2, -1);
+        call_result = SetN64_CheckTimedSessionTransition(session, 12.0f, var_a2, -1);
     } else {
-        call_result = func_80293904_de(session, 12.0f, var_a2, var_a2);
+        call_result = SetN64_CheckTimedSessionTransition(session, 12.0f, var_a2, var_a2);
     }
     if (call_result != 0) {
         D_800CD77C = 0;
@@ -129,11 +129,11 @@ void func_80293FF0_de(void) {
 }
 
 void func_802940D8_de(void *arg0) {
-    func_80293334_de(arg0, 0, 0);
+    SetN64_ResetSessionPlayerPools(arg0, 0, 0);
 }
 
 void func_802940F8_de(struct GameSession *value) {
-    if (func_80293904_de(value, 4.0f, 4, 4) != 0) {
+    if (SetN64_CheckTimedSessionTransition(value, 4.0f, 4, 4) != 0) {
         D_800D29C8 = 0;
     }
 }
@@ -146,5 +146,5 @@ void func_80294134_de(struct GameSession *arg0)
 {
   s32 five;
   five = 5;
-  func_80293904_de(arg0, 14.0f, five, five);
+  SetN64_CheckTimedSessionTransition(arg0, 14.0f, five, five);
 }

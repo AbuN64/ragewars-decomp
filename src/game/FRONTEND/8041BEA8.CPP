@@ -18,8 +18,8 @@
 extern void MarkMenuEventHandled(void);
 extern void func_802998A8_de(void);
 
-extern void func_80419F24_de(s32 fade);
-extern s32 func_80419F38_de(s32 fade);
+extern void SmpFlicker_RestoreFlickerValue(s32 fade);
+extern s32 SmpFlicker_IsFlickerIdle(s32 fade);
 extern void SmpFlicker_StartFlicker(s32 fade, s32 speed);
 extern NodeFrontendAnimateSlotSelectionMenu *SmpOverlay_GetSlotValue(void *handle, s32 arg1);
 
@@ -53,8 +53,8 @@ s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 arg2) {
         }
         break;
     case 4:
-        if (func_80419F38_de(((MenuRecAt108 *) D_800E3590)->fade) != 0) {
-            func_80419F24_de(((MenuRecAt108 *) D_800E3590)->fade);
+        if (SmpFlicker_IsFlickerIdle(((MenuRecAt108 *) D_800E3590)->fade) != 0) {
+            SmpFlicker_RestoreFlickerValue(((MenuRecAt108 *) D_800E3590)->fade);
             ((MenuRecAt108 *) D_800E3590)->state = 6;
             ((MenuRecAt108 *) D_800E3590)->timer = 4;
             Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupB, 1);

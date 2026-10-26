@@ -13,15 +13,15 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
 
-extern void func_80293A20_de(s32 arg0, s32 arg1, s32 arg2);
+extern void SetN64_HandleSessionTransitionInput(s32 arg0, s32 arg1, s32 arg2);
 extern void Scene_ResetTransitionViewport(void);
 
-extern void func_80293B28_de(void *session);
+extern void SetN64_DrawSessionWithAttractTimeout(void *session);
 
 /* Resets the menu viewport and selects the row identified by the owner's current index. */
 
 
-extern void func_80293268_de(void *arg0);
+extern void SetN64_CommitSessionInputs(void *arg0);
 
 extern void func_8023EE00_de(void);
 
@@ -33,13 +33,13 @@ extern void OvlScene_SetSelection(void *arg0, s32 arg1, s32 arg2);
 extern s32 D_800CD730;
 
 extern void Control_RestoreActorSnapshot(void);
-extern void func_80293334_de(void *session, s32 count, s32 force_active);
+extern void SetN64_ResetSessionPlayerPools(void *session, s32 count, s32 force_active);
 
 void func_802944F4_de(s32 session) {
-    func_80293A20_de(session, 0xC, 0xC);
+    SetN64_HandleSessionTransitionInput(session, 0xC, 0xC);
 }
 
-void SetN64_DrawMode11Session(void *session) { func_80293B28_de(session); }
+void SetN64_DrawMode11Session(void *session) { SetN64_DrawSessionWithAttractTimeout(session); }
 
 void func_80294530_de(s32 arg0) {
     Scene_ResetTransitionViewport();
@@ -47,10 +47,10 @@ void func_80294530_de(s32 arg0) {
 }
 
 void func_80294560_de(s32 session) {
-    func_80293A20_de(session, 0xD, 8);
+    SetN64_HandleSessionTransitionInput(session, 0xD, 8);
 }
 
-void SetN64_DrawMode10Session(void *session) { func_80293B28_de(session); }
+void SetN64_DrawMode10Session(void *session) { SetN64_DrawSessionWithAttractTimeout(session); }
 
 void func_8029459C_de(int arg0) {
     Scene_ResetTransitionViewport();
@@ -58,10 +58,10 @@ void func_8029459C_de(int arg0) {
 }
 
 void func_802945D8_de(s32 session) {
-    func_80293A20_de(session, 0xD, 0xD);
+    SetN64_HandleSessionTransitionInput(session, 0xD, 0xD);
 }
 
-void SetN64_DrawMode12Session(void *session) { func_80293B28_de(session); }
+void SetN64_DrawMode12Session(void *session) { SetN64_DrawSessionWithAttractTimeout(session); }
 
 struct func_802077F4_S2;
 
@@ -72,7 +72,7 @@ void func_80294614_de(GameSession *arg0) {
 
     D_801462C8.counters.first = 0;
     D_800CD730 = 0;
-    func_80293268_de(arg0);
+    SetN64_CommitSessionInputs(arg0);
     func_8023EE00_de();
 #if defined(VERSION_US_REV1)
     func_802954E0_us_rev1();
@@ -101,7 +101,7 @@ void SetN64_StartRound(GameSession *session) {
     Shared_Game *game;
 
     D_800CD730 = 0;
-    func_80293268_de(session);
+    SetN64_CommitSessionInputs(session);
     if (Control_IsSnapshotActive() != 0) {
         session->selector = Control_GetSnapshotActorId();
     }
@@ -111,7 +111,7 @@ void SetN64_StartRound(GameSession *session) {
     game = &D_801462C8;
     game->local = 1;
     game->mode1E = 8;
-    func_80293334_de(session, session->arena, 0);
+    SetN64_ResetSessionPlayerPools(session, session->arena, 0);
     if (Control_IsSnapshotActive() != 0) {
         Control_RestoreActorSnapshot();
     }

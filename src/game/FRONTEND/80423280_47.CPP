@@ -41,9 +41,9 @@ extern s32 Frontend_CountOpenPlayerSlots(void);
 extern void *Frontend_FindWidgetByResourceId(void *root, s32 identifier);
 extern void Frontend_SetWidgetFlag100(void *record, s32 enable);
 extern void *N64Eng_CreateNumericWidget(s32, s32, s32, s32, s32);
-extern void *func_8041ABC0_de(s32, s32);
+extern void *SmpButton_CreateListWidget(s32, s32);
 extern void SmpButton_AppendListText(void *, char *);
-extern void func_8041B110_de(s32);
+extern void SmpButton_WrapButtonWidget(s32);
 
 s32 Frontend_CreateMatchOptions(void *root) {
     struct MatchOptionsScreen *screen;
@@ -79,12 +79,12 @@ s32 Frontend_CreateMatchOptions(void *root) {
     }
     D_800E4EF0->widget34 = N64Eng_CreateNumericWidget(OPTIONS_TEXT + 13, OPTIONS_TEXT + 14, D_800E4EF0->countDefault,
                                             D_800E4EF0->countCap, 1);
-    widget = func_8041ABC0_de(OPTIONS_TEXT + 8, OPTIONS_TEXT + 9);
+    widget = SmpButton_CreateListWidget(OPTIONS_TEXT + 8, OPTIONS_TEXT + 9);
     slot = &D_800E4EF0->selectWidget;
     *slot = widget;
     SmpButton_AppendListText(widget, MO_TEXT(0, D_800D3494, D_auto_800E1CA4));
     SmpButton_AppendListText(D_800E4EF0->selectWidget, MO_TEXT(1, D_800D3498, D_auto_800E1CB4));
-    widget = func_8041ABC0_de(OPTIONS_TEXT + 15, OPTIONS_TEXT + 16);
+    widget = SmpButton_CreateListWidget(OPTIONS_TEXT + 15, OPTIONS_TEXT + 16);
     slot = &D_800E4EF0->cursorWidget;
     *slot = widget;
     SmpButton_AppendListText(widget, MO_TEXT(2, D_800D349C, D_auto_800E1CC4));
@@ -92,12 +92,12 @@ s32 Frontend_CreateMatchOptions(void *root) {
     SmpButton_AppendListText(D_800E4EF0->cursorWidget, MO_TEXT(4, D_800D34A4, D_800E1CE4));
     SmpButton_AppendListText(D_800E4EF0->cursorWidget, MO_TEXT(5, D_800D34A8, D_auto_800E1CF4));
     SmpButton_AppendListText(D_800E4EF0->cursorWidget, MO_TEXT(6, D_800D34AC, D_auto_800E1D04));
-    func_8041B110_de(OPTIONS_TEXT + 10);
-    func_8041B110_de(OPTIONS_TEXT + 11);
-    func_8041B110_de(OPTIONS_TEXT + 12);
-    func_80429560_de();
-    func_80429654_de(0);
-    func_80429560_de();
+    SmpButton_WrapButtonWidget(OPTIONS_TEXT + 10);
+    SmpButton_WrapButtonWidget(OPTIONS_TEXT + 11);
+    SmpButton_WrapButtonWidget(OPTIONS_TEXT + 12);
+    Frontend_LoadMatchOptionWidgets();
+    Frontend_SyncMatchJoinSlots(0);
+    Frontend_LoadMatchOptionWidgets();
     return 0;
 }
 #endif

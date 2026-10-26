@@ -40,7 +40,7 @@ static inline void clear_entry(EntryRecAt34 *e) {
     e->unk1C = 0;
 }
 
-/* Soft-resets the game: checks the "systembootdone" marker (copied from s_systembootdoneText and zero-padded with the memset XPlus_FillMemory) through func_80293440_de (recording the result in D_801470B0 and re-arming it through func_802934C0_de), and on a cold boot copies the resident code and data back from the cartridge word by word after each PI idle wait, then clears the BSS from D_800E4000 to D_80166000, in both passes skipping the marker, its flag and, when not cold booting, the preserved save, settings and pad regions; finally reinitialises through func_802BAE40_de and func_80292F24_de. */
+/* Soft-resets the game: checks the "systembootdone" marker (copied from s_systembootdoneText and zero-padded with the memset XPlus_FillMemory) through SetN64_CompareByteStrings (recording the result in D_801470B0 and re-arming it through func_802934C0_de), and on a cold boot copies the resident code and data back from the cartridge word by word after each PI idle wait, then clears the BSS from D_800E4000 to D_80166000, in both passes skipping the marker, its flag and, when not cold booting, the preserved save, settings and pad regions; finally reinitialises through func_802BAE40_de and SetN64_StartSessionThreads. */
 
 
 
@@ -320,7 +320,7 @@ void func_802A7180_de(void *arg0, void *arg1) {
     (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_4) = temp_v0;
     if (temp_v0 != 0) {
         (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_18) = 5;
-        (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_1C) = (s32) (((struct State_func_8042D8C4_de *) ((s8 *) arg1))->count);
+        (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_1C) = (s32) (((struct StateFrontendScrollResultsBackward *) ((s8 *) arg1))->count);
         (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_20) = (f32) (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_28);
         (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_24) = (s32) (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_2C);
         return;
@@ -337,7 +337,7 @@ s32 func_802A71C0_de(void) {
     char name[16];
     *(Marker_func_802A71C0_de *)name = s_systembootdoneText;
     XPlus_FillMemory(&name[15], 0, 1);
-    if (((s32 (*)(char *, char *))func_80293440_de)(&D_800CDD10, name) == 0) {
+    if (((s32 (*)(char *, char *))SetN64_CompareByteStrings)(&D_800CDD10, name) == 0) {
         D_801470B0 = 0;
     } else {
         D_801470B0 = 1;
@@ -365,7 +365,7 @@ s32 func_802A71C0_de(void) {
         }
     }
     func_802BAE40_de();
-    func_80292F24_de();
+    SetN64_StartSessionThreads();
     return 0;
 }
 

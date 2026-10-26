@@ -27,11 +27,11 @@ s32 Frontend_GetOwnedImagePixels(s32 *record) {
 }
 
 /* Returns the word at offset 0x14 of a record. */
-s32 func_804136C0_de(s32 *record) {
+s32 Frontend_GetOwnedImagePalette(s32 *record) {
     return record[0x14 / 4];
 }
 
-int func_804136CC_de(void *object) {
+int Frontend_HasOwnedImagePalette(void *object) {
     func_8022BC04_S3 *record = object;
     return record->unk10 > 0;
 }
@@ -40,13 +40,13 @@ s32 Frontend_HasImageFormatMaskComponent(u8 *record) {
     return D_800E2B40[*record][0] != 0;
 }
 
-/* Returns bit 1 of the flag byte at offset 1 of a record; func_80413714_de returns bit 0. */
-u8 func_80413704_de(u8 *record) {
+/* Returns bit 1 of the flag byte at offset 1 of a record; Frontend_OwnsImagePixels returns bit 0. */
+u8 Frontend_OwnsImagePalette(u8 *record) {
     return (record[1] >> 1) & 1;
 }
 
-/* Returns bit 0 of the flag byte at offset 1 of a record; func_80413704_de returns bit 1. */
-u8 func_80413714_de(u8 *record) {
+/* Returns bit 0 of the flag byte at offset 1 of a record; Frontend_OwnsImagePalette returns bit 1. */
+u8 Frontend_OwnsImagePixels(u8 *record) {
     return record[1] & 1;
 }
 
@@ -72,6 +72,6 @@ void Frontend_ConfigureOwnedImage(struct Config *out, unsigned char type, short 
     }
 }
 
-void func_8041379C_de(s32 index, struct Format *out) {
+void Frontend_GetPixelFormatDescriptor(s32 index, struct Format *out) {
     *out = D_800E2B20[index];
 }

@@ -14,11 +14,11 @@ extern void Items_LoadPreviewBufferB(void *arg0);
 
 
 
-void SetN64_ResetPlayerItems(s32 arg0, s32 arg1) {
-    ObjRecAt255C8 *object = (void *)arg0;
+void SetN64_ResetPlayerItems(s32 sessionAddress, s32 selectionKey) {
+    ObjRecAt255C8 *object = (void *)sessionAddress;
     Items_ResetActorPools(&object->unk255C8, 1);
     func_804499B0_de(&object->unk25580, (void *)1, 0);
-    OvlScene_SetSelection(&g_world, ~func_804030E0_de(arg1), 0);
+    OvlScene_SetSelection(&g_world, ~func_804030E0_de(selectionKey), 0);
     Items_LoadPreviewBufferA(&g_world);
     Items_LoadPreviewBufferB(&g_world);
 }

@@ -51,9 +51,9 @@ extern struct Model *Scene_FindActorDefinition(Shared_World *, s32, s32);
 
 extern struct StateFlags D_800E5A06[];
 
-extern struct Resource_func_80419E54_de *Frontend_FindWidgetByResourceId(void *, s32);
+extern struct ResourceSmpFlickerCreateFlickerWidget *Frontend_FindWidgetByResourceId(void *, s32);
 
-extern void Frontend_SetWidgetFlag08(struct Resource_func_80419E54_de *, s32);
+extern void Frontend_SetWidgetFlag08(struct ResourceSmpFlickerCreateFlickerWidget *, s32);
 
 
 /* Releases the object D_800E59E0 holds through Cache_FreeMemory, clears D_800E59E0, calls
@@ -161,7 +161,7 @@ s32 func_8043BA24_de(void) {
 }
 
 void func_8043BA5C_de(s32 player, s32 column) {
-    struct Resource_func_80419E54_de *item;
+    struct ResourceSmpFlickerCreateFlickerWidget *item;
 
     if (column != 5) {
         item = Frontend_FindWidgetByResourceId(D_800E59E0->window, D_800E5A06[player * 19 + column].value);

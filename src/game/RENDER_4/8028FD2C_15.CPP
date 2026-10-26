@@ -3,7 +3,7 @@
 #include "RENDER_4/8028FD2C_15.H"
 
 /** Perform the no-op callback at VRAM 0x802909D0. */
-void func_802909F0_de(void) {
+void SetN64_OnWorldViewDraw(void) {
 }
 
 #if defined(VERSION_US)

@@ -86,7 +86,7 @@ s32 XStdio_FormatBuffer(void *goal, s32 arg1, ...) {
     char *args;
 
     args = __builtin_next_arg(arg1);
-    result = func_80414CCC_de(goal, arg1, (s32)args);
+    result = Gfx_FormatArgumentList(goal, arg1, (s32)args);
     D_800CD918 = result;
     return result;
 }
@@ -97,7 +97,7 @@ s32 XStdio_PrintStream(void *stream, const char *format, ...) {
     s32 length;
     s32 total;
 
-    func_80414CCC_de(&D_8014D0D0, format, __builtin_next_arg(format));
+    Gfx_FormatArgumentList(&D_8014D0D0, format, __builtin_next_arg(format));
     run = &D_8014D0D0;
     p = run;
     length = 0;

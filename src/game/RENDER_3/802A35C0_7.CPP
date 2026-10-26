@@ -8,14 +8,14 @@
 
 
 
-void func_802A5A54_de(void *animator, int arg1) {
+void Fx_SetAnimatorScript(void *animator, int arg1) {
     Animator *animation = animator;
     animation->mode = 0;
     animation->loop = (f32 *)arg1;
     animation->script = (f32 *)arg1;
 }
 
-void func_802A5A64_de(EffectContribution *effectContribution) {
+void Fx_ApplyEffectContribution(EffectContribution *effectContribution) {
     if (effectContribution->weight != 0.0f) {
         D_800D15E4[0] = effectContribution->x;
         D_800D15E4[1] = effectContribution->y;

@@ -29,7 +29,7 @@ void Menu_AdvanceTextRows(void *, void *);
 
 
 
-/* Polls the dialog of screen D_800E4400 through func_8041A470_de: state 3 opens the screen through
+/* Polls the dialog of screen D_800E4400 through SmpSlider_GetTransitionMode: state 3 opens the screen through
    Menu_ScrollOptionsKeypad while its word at 0x34 is zero, and otherwise, when D_8010B0E0.buttons is 0x433, marks the
    screen confirmed at 0x38 and calls Menu_RefreshExtraOptionLocks; state 4 calls MarkMenuEventHandled and waits 3
    through func_80298368_de. Returns zero. */
@@ -38,7 +38,7 @@ void Menu_AdvanceTextRows(void *, void *);
 
 
 
-extern s32 func_8041A470_de(s32);
+extern s32 SmpSlider_GetTransitionMode(s32);
 
 extern void MarkMenuEventHandled(void);
 
@@ -89,7 +89,7 @@ s32 Menu_DestroyExtraOptionsMenu(void) {
 }
 
 s32 Menu_UpdateExtraOptionsMenu(void) {
-    switch (func_8041A470_de(D_800E4400->dialog)) {
+    switch (SmpSlider_GetTransitionMode(D_800E4400->dialog)) {
     case 3:
         if (D_800E4400->open == 0) {
             Menu_ScrollOptionsKeypad();

@@ -74,7 +74,7 @@ int func_802A1004_de(void) {
 }
 
 s32 *XStdio_FormatScratchArgumentList(s32 arg0, s32 arg1) {
-    D_800CD918 = func_80414CCC_de(&D_8014D0D0, arg0, arg1);
+    D_800CD918 = Gfx_FormatArgumentList(&D_8014D0D0, arg0, arg1);
     return &D_8014D0D0;
 }
 

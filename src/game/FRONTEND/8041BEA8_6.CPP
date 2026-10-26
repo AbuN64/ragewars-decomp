@@ -135,7 +135,7 @@ void Frontend_DrawModelPreview(Obj8041CAD8 *self) {
         if (func_8025477C_de() == 0) {
             func_8025476C_de(1);
         }
-        func_80417138_de(0x33335);
+        Gfx_ConfigurePrimitiveRenderFlags(0x33335);
         gDPPipeSync(g_displayListCursor++);
         gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
         gDPSetTexturePersp(g_displayListCursor++, G_TP_PERSP);

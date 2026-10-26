@@ -23,7 +23,7 @@ INCLUDE_ASM("ovl_80400000", Pak_MeasureMenuText);
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
 u32 Defs_GetMemorySize(void);
-int func_802934F8_de(void);
+int SetN64_IsModeThirteen(void);
 u8 *func_8043F290(TextBoundsText *);
 f32 Pak_MeasureLine(u8 *, f32, f32);
 void *Pak_GetListContext(s8 *);
@@ -108,7 +108,7 @@ void Pak_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
         metrics->height = font->height * D_800E28D4 * D_800E2484;
         break;
     case 1:
-        if ((func_802934F8_de() != 0 && (text->flags & 0x40000000)) ||
+        if ((SetN64_IsModeThirteen() != 0 && (text->flags & 0x40000000)) ||
             (D_80145088.settings.local != 0 && text->flags < 0 && Defs_GetMemorySize() == 0x400000)) {
             metrics->width = 284;
             metrics->height = 222;

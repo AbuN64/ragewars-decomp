@@ -17,8 +17,8 @@ extern struct OptionsOpenScreen *D_800E4400;
 extern s32 D_801462C8;
 
 /* The hub spells the allocator, the window item lookup and the list builder; these helpers stay. */
-extern void *func_8041A280_de(s32, s32);
-extern void *func_8041ABC0_de(s32, s32);
+extern void *SmpFade_CreateFadeWidget(s32, s32);
+extern void *SmpButton_CreateListWidget(s32, s32);
 extern void SmpButton_AppendListText(void *, void *);
 extern void SmpButton_SelectListEntry(void *, s32);
 extern void Menu_RefreshExtraOptionLocks(void);
@@ -40,10 +40,10 @@ s32 func_80420E20_de(void *window) {
     screen->full = 0;
     /* the hub's item type carries no color; this unit's options view names the byte at +0x1A */
     ((OptionsOpenItem *) Frontend_FindWidgetByResourceId(window, ID(0x3A8)))->color = COLOR;
-    D_800E4400->title = func_8041A280_de(ID(0x3A8), ID(0x3A9));
-    func_8041B110_de(ID(0x3B6));
+    D_800E4400->title = SmpFade_CreateFadeWidget(ID(0x3A8), ID(0x3A9));
+    SmpButton_WrapButtonWidget(ID(0x3B6));
 
-    button = func_8041ABC0_de(ID(0x3B4), ID(0x3B5));
+    button = SmpButton_CreateListWidget(ID(0x3B4), ID(0x3B5));
     D_800E4400->buttons[0] = button;
     SmpButton_AppendListText(button, D_800D3470_de[0]);
     SmpButton_AppendListText(D_800E4400->buttons[0], D_800D3474[0]);
@@ -53,7 +53,7 @@ s32 func_80420E20_de(void *window) {
         SmpButton_SelectListEntry(D_800E4400->buttons[0], 0);
     }
 
-    button = func_8041ABC0_de(ID(0x3B1), ID(0x3B2));
+    button = SmpButton_CreateListWidget(ID(0x3B1), ID(0x3B2));
     D_800E4400->buttons[1] = button;
     SmpButton_AppendListText(button, D_800D3470_de[0]);
     SmpButton_AppendListText(D_800E4400->buttons[1], D_800D3474[0]);
@@ -63,7 +63,7 @@ s32 func_80420E20_de(void *window) {
         SmpButton_SelectListEntry(D_800E4400->buttons[1], 0);
     }
 
-    button = func_8041ABC0_de(ID(0x3AD), ID(0x3AE));
+    button = SmpButton_CreateListWidget(ID(0x3AD), ID(0x3AE));
     D_800E4400->buttons[2] = button;
     SmpButton_AppendListText(button, D_800D3470_de[0]);
     SmpButton_AppendListText(D_800E4400->buttons[2], D_800D3474[0]);
@@ -73,7 +73,7 @@ s32 func_80420E20_de(void *window) {
         SmpButton_SelectListEntry(D_800E4400->buttons[2], 0);
     }
 
-    button = func_8041ABC0_de(ID(0x3AF), ID(0x3B0));
+    button = SmpButton_CreateListWidget(ID(0x3AF), ID(0x3B0));
     D_800E4400->buttons[3] = button;
     SmpButton_AppendListText(button, D_800D3470_de[0]);
     SmpButton_AppendListText(D_800E4400->buttons[3], D_800D3474[0]);
@@ -83,13 +83,13 @@ s32 func_80420E20_de(void *window) {
         SmpButton_SelectListEntry(D_800E4400->buttons[3], 0);
     }
 
-    func_8041B110_de(ID(0x3AC));
+    SmpButton_WrapButtonWidget(ID(0x3AC));
     D_800E4400->cursor = (OptionsOpenItem *) Frontend_FindWidgetByResourceId(window, ID(0x3B7));
     D_800E4400->unk_28 = 0;
     D_800E4400->unk_2C = 0;
     D_800E4400->unk_34 = 1;
     /* the hub publishes the list builder as returning the word naming the list; the member stores it */
-    D_800E4400->list = (void *) func_80419E54_de(ID(0x3AA), 0x6E);
+    D_800E4400->list = (void *) SmpFlicker_CreateFlickerWidget(ID(0x3AA), 0x6E);
     Menu_RefreshExtraOptionLocks();
     return 0;
 }

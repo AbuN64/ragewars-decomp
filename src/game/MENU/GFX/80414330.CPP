@@ -10,7 +10,7 @@ extern char D_800DD0C0[];
 extern char D_800DD0D0_de[];
 extern s32 XStdio_FormatBuffer(char *, char *, ...);
 
-s32 func_804142AC_de(char *name, s32 number, char *format, ...) {
+s32 Gfx_FormatDiagnosticMessage(char *name, s32 number, char *format, ...) {
     va_list arguments;
     s32 length;
 
@@ -21,7 +21,7 @@ s32 func_804142AC_de(char *name, s32 number, char *format, ...) {
         } else {
             length = XStdio_FormatBuffer(D_80153D60, D_800DD0C0, D_800DD0D0_de, number);
         }
-        func_80414CCC_de(D_80153D60 + length, format, arguments);
+        Gfx_FormatArgumentList(D_80153D60 + length, format, arguments);
         va_end(arguments);
     }
     return 1;
@@ -29,6 +29,6 @@ s32 func_804142AC_de(char *name, s32 number, char *format, ...) {
 
 /* Returns the address of the table D_80153D60. */
 
-char *func_80414348_de(void) {
+char *Gfx_GetDiagnosticMessage(void) {
     return D_80153D60;
 }

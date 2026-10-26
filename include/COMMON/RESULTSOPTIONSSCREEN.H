@@ -4,7 +4,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
-struct Resource_func_80419E54_de;
+struct ResourceSmpFlickerCreateFlickerWidget;
 
 struct ResultsOptionsScreen;
 struct func_8028469C_S2;
@@ -93,7 +93,7 @@ struct RecordRecAt8D {
 struct ResultsOptionsScreen;
 
 
-struct Resource_func_80419E54_de;
+struct ResourceSmpFlickerCreateFlickerWidget;
 
 
 
@@ -132,7 +132,7 @@ struct Data801462C8 {
 };
 
 
-struct Resource_func_80419E54_de;
+struct ResourceSmpFlickerCreateFlickerWidget;
 
 
 struct MenuMarker;

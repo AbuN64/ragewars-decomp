@@ -26,7 +26,7 @@ extern f32 Math_Sqrtf(f32);
 
 extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
-/* Draws the scene's ten particle lists unless the free list holds exactly 100 particles: sets the render state and the shared particle texture D_800D14B0 (a 16x16 texture drawn in grey at alpha 200 through D_800D2E60), then for every particle inside the view box ending at D_801031F8 + 4 loads its matrix and draws the shared quad g_particleQuadVertices, while particles outside it are unlinked (func_80255ED8_de) and returned to the free list (func_80255D14_de); finally restores the render state through Geometry_InvalidateMaterialKeys and TextLoad_ResetTextureCache. */
+/* Draws the scene's ten particle lists unless the free list holds exactly 100 particles: sets the render state and the shared particle texture D_800D14B0 (a 16x16 texture drawn in grey at alpha 200 through g_particleQuadRenderSetup), then for every particle inside the view box ending at D_801031F8 + 4 loads its matrix and draws the shared quad g_particleQuadVertices, while particles outside it are unlinked (func_80255ED8_de) and returned to the free list (func_80255D14_de); finally restores the render state through Geometry_InvalidateMaterialKeys and TextLoad_ResetTextureCache. */
 
 
 
@@ -42,7 +42,7 @@ extern f32 D_801031F8;
 
 extern char D_800D14B0;
 
-extern char D_800D2E60;
+extern char g_particleQuadRenderSetup;
 
 
 
@@ -64,13 +64,13 @@ extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
 extern void GraphU64_ClampMatrixToFixedRange(f32 *arg0);
 
-extern void func_802A25D0_de(void *arg0, void *arg1, f32 *arg2);
+extern void Smp_AppendRibbonSegment(void *arg0, void *arg1, f32 *arg2);
 
 extern void GraphU64_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
 
 extern f32 D_800C5EA0_de;
 
-CQuatern *func_802A5020_de(CQuatern *out, u32 bx, u32 by, u32 bz) {
+CQuatern *Fx_BuildUpAxisQuaternion(CQuatern *out, u32 bx, u32 by, u32 bz) {
     CVector3 axis;
     CVector3 cross;
     CQuatern result;
@@ -110,7 +110,7 @@ CQuatern *func_802A5020_de(CQuatern *out, u32 bx, u32 by, u32 bz) {
     return out;
 }
 
-void func_802A5180_de(SceneRecAt95A8 *scene) {
+void Fx_DrawBoundedParticleQuads(SceneRecAt95A8 *scene) {
     Particle *particle;
     Particle *next;
     f32 *max;
@@ -131,7 +131,7 @@ void func_802A5180_de(SceneRecAt95A8 *scene) {
     gDPSetTile(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_8b, 2, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
     gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, 60, 60);
     gDPSetPrimColor(g_displayListCursor++, 0, 0, 255, 255, 255, 200);
-    gSPDisplayList(g_displayListCursor++, (u32)&D_800D2E60);
+    gSPDisplayList(g_displayListCursor++, (u32)&g_particleQuadRenderSetup);
     for (i = 0; i < 10; i++) {
         max = (&D_801031F8 + 1);
         list = &scene->lists[i];
@@ -159,7 +159,7 @@ void func_802A5180_de(SceneRecAt95A8 *scene) {
     TextLoad_ResetTextureCache();
 }
 
-void func_802A5498_de(u32 arg0) {
+void Fx_DrawRedParticleQuad(u32 arg0) {
     DrawMatrixScratch local;
     Gfx *cmd;
 
@@ -203,7 +203,7 @@ void func_802A5498_de(u32 arg0) {
     TextLoad_ResetTextureCache();
 }
 
-void func_802A5680_de(s32 owner) {
+void Fx_UpdateEffectLists(s32 owner) {
     D_800CDBE8 = 0;
     if (D_8011FAC0.clockPaused == 0) {
         func_802A5E08_de((void *)owner);
@@ -211,7 +211,7 @@ void func_802A5680_de(s32 owner) {
     }
 }
 
-s32 func_802A56C4_de(void *arg0, s32 arg1)
+s32 Fx_AllocateRibbonVertices(void *arg0, s32 arg1)
 {
     struct RibbonVertexPool *pool = arg0;
     s32 avail;
@@ -228,7 +228,7 @@ s32 func_802A56C4_de(void *arg0, s32 arg1)
 }
 
 /** Reset the object and compute its trailing-data end pointer. */
-void func_802A56FC_de(void *object) {
+void Fx_ResetRibbonVertexPool(void *object) {
     struct RibbonVertexPool *pool = object;
     u32 index = D_800D297C;
     pool->state = 0;
@@ -236,7 +236,7 @@ void func_802A56FC_de(void *object) {
     pool->next = pool->vertices[index];
 }
 
-s32 func_802A5734_de(void *arg0, s32 arg1) {
+s32 Fx_AllocateRibbonSegment(void *arg0, s32 arg1) {
     s32 actors;
     actors = (((struct IntegerState6A94 *) ((s8 *) arg0))->unk_6A90);
     if (actors != 0) {
@@ -246,7 +246,7 @@ s32 func_802A5734_de(void *arg0, s32 arg1) {
     return actors;
 }
 
-void func_802A5780_de(s32 arg0, void *arg1, void *actors) {
+void Fx_FreeRibbonSegment(s32 arg0, void *arg1, void *actors) {
     (((struct FloatState50 *) ((s8 *) arg1))->unk_4C) = (f32) ((((struct FloatState50 *) ((s8 *) arg1))->unk_4C) - (((struct FloatStateB0 *) ((s8 *) actors))->unk_AC));
     Lists_Remove(arg1 + 0x40, actors);
     Lists_Append(arg0 + 0x6A90, actors);
@@ -255,7 +255,7 @@ void func_802A5780_de(s32 arg0, void *arg1, void *actors) {
 void func_802A57D8_de(void) {
 }
 
-void func_802A57E0_de(Owner802A6DF8 *arg0, s32 actor, char *arg2) {
+void Fx_AddActorRibbonSamples(Owner802A6DF8 *arg0, s32 actor, char *arg2) {
     f32 sp10[16];
     f32 temp;
     f32 zero;
@@ -270,14 +270,14 @@ void func_802A57E0_de(Owner802A6DF8 *arg0, s32 actor, char *arg2) {
                 CopyMatrix(sp10, (f32 *)(arg2 + (node->node->matrixIndex << 6)));
                 ScaleMatrixLocal(sp10, temp, temp, temp);
                 GraphU64_ClampMatrixToFixedRange(sp10);
-                func_802A25D0_de(arg0, node, sp10);
+                Smp_AppendRibbonSegment(arg0, node, sp10);
             }
             node = node->next;
         } while (node != 0);
     }
 }
 
-void func_802A58B0_de(ObjRecAt7528 *arg0, Shared_Particle *particle, PackedMatrixWords *packedMatrixWords) {
+void Fx_AddParticleRibbonSamples(ObjRecAt7528 *arg0, Shared_Particle *particle, PackedMatrixWords *packedMatrixWords) {
     f32 local[16];
     f32 scale;
     f32 zero;
@@ -297,14 +297,14 @@ void func_802A58B0_de(ObjRecAt7528 *arg0, Shared_Particle *particle, PackedMatri
                 }
                 ScaleMatrixLocal(local, scale, scale, scale);
                 GraphU64_ClampMatrixToFixedRange(local);
-                func_802A25D0_de(arg0, node, local);
+                Smp_AppendRibbonSegment(arg0, node, local);
             }
             node = node->unk4;
         } while (node != 0);
     }
 }
 
-void func_802A598C_de(Owner802A697C *owner, int object) {
+void Fx_DetachEffectOwner(Owner802A697C *owner, int object) {
     float temp_f1;
     u8 temp_v0;
     u8 temp_v0_2;
@@ -343,7 +343,7 @@ void func_802A598C_de(Owner802A697C *owner, int object) {
     }
 }
 
-void func_802A5A24_de(EffectContribution *arg0, s32 arg1)
+void Fx_ResetEffectContribution(EffectContribution *arg0, s32 arg1)
 {
   arg0->scale = (f32) D_800C5EA0_de;
   arg0->id = arg1;

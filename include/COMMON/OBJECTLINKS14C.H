@@ -177,7 +177,7 @@ extern s32 D_800D297C;
 extern struct UnitVtx D_800FF1B0_de[];
 extern s32 Geometry_SetModePreset(s32);
 extern void Geometry_SetCombineMode(u32);
-extern void func_802A5498_de(u32);
+extern void Fx_DrawRedParticleQuad(u32);
 
 extern s32 Weapon_IsSecondarySwitchGroup(s32);
 

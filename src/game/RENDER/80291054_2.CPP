@@ -71,7 +71,7 @@ void SetN64_InitFrameRing(RenderState *state) {
         count = D_800DE850;
 
     } while (i < count);
-    func_80293054_de(&state->ring.display);
+    SetN64_AdvanceDisplayFrame(&state->ring.display);
     func_8025DE30_de();
 }
 

@@ -13,7 +13,7 @@
 
 void func_802B768C_de(void);
 
-s32 func_802B7560_de(s32 arg0) {
+s32 func_802B7560_de(s32 completionQueue) {
     s32 result;
     u8 *p;
 
@@ -22,7 +22,7 @@ s32 func_802B7560_de(s32 arg0) {
     if (*p != 1) {
         func_802B768C_de();
         __osSiRawStartDma(1, &D_8014D470);
-        osRecvMesg(arg0, 0, 1);
+        osRecvMesg(completionQueue, 0, 1);
     }
     result = __osSiRawStartDma(0, &D_8014D470);
     *p = 1;
@@ -83,7 +83,7 @@ void func_802B768C_de(void) {
     *ptr = 0xFE;
 }
 
-s32 func_802B7740_de(s32 arg0, s32 arg1) {
+s32 func_802B7740_de(s32 arg0, s32 controllerStatus) {
     s32 output;
     s32 result;
     u8 *state;
@@ -108,7 +108,7 @@ s32 func_802B7740_de(s32 arg0, s32 arg1) {
     }
     result = __osSiRawStartDma(0, &D_8014D470);
     osRecvMesg(arg0, 0, 1);
-    func_802B7AD8_de(&output, arg1);
+    func_802B7AD8_de(&output, controllerStatus);
     func_802B9C80_de();
     return result;
 }

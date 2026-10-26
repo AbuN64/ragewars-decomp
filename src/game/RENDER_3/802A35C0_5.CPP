@@ -9,7 +9,7 @@
 
 
 
-void func_802A4A60_de(Animator *a) {
+void Fx_UpdateAnimatorScript(Animator *a) {
     s32 next;
     f32 op0;
     f32 op1;

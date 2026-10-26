@@ -117,7 +117,7 @@ enum MatchEnd {
 };
 extern f32 D_800DDB08_de[];
 extern f32 D_800DDB10;
-extern void func_8042D28C_de();
+extern void Frontend_DrawResultSelectionPreview();
 
 extern void Menu_SetOptionsSceneSelection(s32);
 

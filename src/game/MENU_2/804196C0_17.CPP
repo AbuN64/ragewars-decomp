@@ -32,13 +32,13 @@ void func_80419F18_de(struct StateBlock *object) {
 }
 
 /* Copies the byte at offset 0x83 of an object into offset 0x10 of the object at 0x78, and clears
-   the pending word at 0x84 that func_80419F18_de sets and func_80419F38_de tests. */
+   the pending word at 0x84 that func_80419F18_de sets and SmpFlicker_IsFlickerIdle tests. */
 
 
 
 
-void func_80419F24_de(struct SourceRecAt84 *source) {
-    struct Resource_func_80419E54_de *target = source->target;
+void SmpFlicker_RestoreFlickerValue(struct SourceRecAt84 *source) {
+    struct ResourceSmpFlickerCreateFlickerWidget *target = source->target;
     u8 value = source->value;
 
     source->pending = 0;
@@ -46,10 +46,10 @@ void func_80419F24_de(struct SourceRecAt84 *source) {
 }
 
 /* Returns one when nothing is pending at offset 0x84 of an object, and otherwise whether the word
-   at offset 0x44 is zero; func_80419F18_de sets the pending word and func_80419F24_de clears it. */
+   at offset 0x44 is zero; func_80419F18_de sets the pending word and SmpFlicker_RestoreFlickerValue clears it. */
 
 
-s32 func_80419F38_de(struct ObjectRecAt84 *object) {
+s32 SmpFlicker_IsFlickerIdle(struct ObjectRecAt84 *object) {
     if (object->pending == 0) {
         return 1;
     }

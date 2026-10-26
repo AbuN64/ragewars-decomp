@@ -60,7 +60,7 @@ extern MenuResourceWidget *Cache_AllocateMemory(int);
 
 
 
-extern void Frontend_InsertWidgetBefore(Resource_func_80419E54_de *, MenuResourceWidget *);
+extern void Frontend_InsertWidgetBefore(ResourceSmpFlickerCreateFlickerWidget *, MenuResourceWidget *);
 
 extern void *Frontend_GetScreenData(s32 index);
 
@@ -69,22 +69,22 @@ extern void SmpFlicker_InitFlicker(func_80419D04_S1 *arg0, s32 arg1);
 extern void func_80419F18_de(MenuResourceWidget *);
 
 /* Initializes a flicker effect and randomizes each element's intensity. */
-void SmpFlicker_InitFlicker(func_80419D04_S1 *flicker, s32 arg1) {
+void SmpFlicker_InitFlicker(func_80419D04_S1 *flicker, s32 sampleCount) {
     s32 i;
-    s32 var_v1;
+    s32 sampleValue;
     s32 offset;
     int temp;
     flicker->unk44 = 0;
     flicker->unk74 = 0;
-    if (arg1 > 0) {
-        flicker->unk48 = arg1;
+    if (sampleCount > 0) {
+        flicker->unk48 = sampleCount;
     } else {
         flicker->unk48 = (s32) (GraphU64_NextRandom() % 5 + 1);
     }
     for (i = 0; i < flicker->unk48; i++) {
         flicker->unk60[i] = (s32) (GraphU64_NextRandom() % 3 + 1);
-        var_v1 = (offset = GraphU64_NextRandom() % 40 + 30, flicker->unk80 - offset) < 0 ? 0 : ((offset = GraphU64_NextRandom() % 40 + 30, flicker->unk80 - offset) >= 0x100 ? 0xFF : (offset = temp = GraphU64_NextRandom() % 40 + 30, flicker->unk80 - offset));
-        flicker->unk4C[i] = var_v1;
+        sampleValue = (offset = GraphU64_NextRandom() % 40 + 30, flicker->unk80 - offset) < 0 ? 0 : ((offset = GraphU64_NextRandom() % 40 + 30, flicker->unk80 - offset) >= 0x100 ? 0xFF : (offset = temp = GraphU64_NextRandom() % 40 + 30, flicker->unk80 - offset));
+        flicker->unk4C[i] = sampleValue;
     }
 }
 
@@ -92,9 +92,9 @@ void SmpFlicker_RegisterFlickerClass(void) {
     func_802982C4_de(0xB62, D_00419F9C, D_0041A02C, 3);
 }
 
-MenuResourceWidget *func_80419E54_de(int arg0, int arg1)
+MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int arg0, int arg1)
 {
-  Resource_func_80419E54_de *r;
+  ResourceSmpFlickerCreateFlickerWidget *r;
   MenuResourceWidget *p;
   int kind;
   r = Frontend_FindWidgetByResourceId(Frontend_GetScreenData(GetMenuScreenOwner()), arg0 & 65535);

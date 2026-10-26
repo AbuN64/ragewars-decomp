@@ -52,7 +52,7 @@ s32 DynLight_AllocateWorldLight(void *, s8);
 void func_802843B8_de(void *, s32);
 
  /* extern */
-void func_802A4598_de(void *, void *, s8);
+void Fx_AttachActorRibbon(void *, void *, s8);
 
 /* Adds acceleration along a direction and clamps the resulting speed to its configured limit. */
 
@@ -309,7 +309,7 @@ void func_80283920_de(Obj_func_80283920_de *actor, Params_func_80283920_de *arg1
     Particle_Attach((Shared_Particle *)actor, 0, 0);
     resourceId = arg1->unk6;
     if (resourceId != -1) {
-        func_802A4598_de(&D_801379C0, actor, resourceId);
+        Fx_AttachActorRibbon(&D_801379C0, actor, resourceId);
     }
     temp_a1 = arg1->unk7;
     actor->unk138 = temp_a1 == -1 ? 0 : DynLight_AllocateWorldLight(&D_8013B1A8, temp_a1);

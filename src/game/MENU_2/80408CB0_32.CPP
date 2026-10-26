@@ -113,7 +113,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *owner) {
     temp_a2_2 = (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2432)));
     temp_a2_2->x = (u16) temp_a2_2->x - (temp_a2_2->width - (temp_v1_2 * 4));
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((void * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2448))) = func_80419E54_de(0x141, 0x6E);
+    (*((void * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2448))) = SmpFlicker_CreateFlickerWidget(0x141, 0x6E);
     temp_v0_4 = Frontend_FindWidgetByResourceId(owner, 0x13F);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2452))) = temp_v0_4;

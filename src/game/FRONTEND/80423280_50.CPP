@@ -10,7 +10,7 @@
 #include "FRONTEND/80423280_50.H"
 #include "FRONTEND/80423280_52.H"
 #include "FRONTEND/80423280_53.H"
-extern struct Screen_func_8042A990_de *D_800E4F60;
+extern struct ScreenScenarioSetupRefreshSelectedArenaLabel *D_800E4F60;
 extern struct Icon D_800E4F64[];
 extern s32 D_800E5240[];
 extern s32 D_800E5214[];
@@ -18,10 +18,10 @@ extern s32 D_800E51F8[];
 extern s32 D_800E51E4[];
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
-extern s32 func_8042B1B8_de(s32, s32);
+extern s32 ScenarioSetup_ResolveArenaFromSelection(s32, s32);
 
 /* Sets the alpha of every catalogue icon on the screen D_800E4F60: for categories 0 to 3 (tables
-   D_800E5240, D_800E5214, D_800E51F8 and D_800E51E4) it walks the count func_8042B154_de gives for the
+   D_800E5240, D_800E5214, D_800E51F8 and D_800E51E4) it walks the count ScenarioSetup_GetCategoryEntryCount gives for the
    category's list ScenarioSetup_CategoryToList and, for the first of the forty 16-byte icon records D_800E4F64
    whose key matches the entry, sets the alpha of the item its key names (and of the item its second
    word names unless that is -1) and shows them through func_8040E8D8_de while the alpha is at least
@@ -36,13 +36,13 @@ extern s32 func_8042B1B8_de(s32, s32);
 
 
 
-extern s32 func_8042B154_de(s32 index);
+extern s32 ScenarioSetup_GetCategoryEntryCount(s32 index);
 
 /* Refreshes the selection on the screen D_800E4F60: for category 0 to 3 at 0x434 it takes the item
    the selection at 0x438 names in the 4-byte table D_800E5240, D_800E5214, D_800E51F8 or
    D_800E51E4 from the window into 0x43C, copies the selection's name into the text at 0x3F4 (the
    default label for selection 0, otherwise the resource name Scene_CopyLevelName reads from
-   D_8011FE88 for the entry func_8042B1B8_de finds in the category's list ScenarioSetup_CategoryToList), points the
+   D_8011FE88 for the entry ScenarioSetup_ResolveArenaFromSelection finds in the category's list ScenarioSetup_CategoryToList), points the
    label at 0x3EC to that text and calls func_80245B28_de. */
 
 
@@ -58,7 +58,7 @@ extern void XPlus_CopyString(char *, char *);
 
 
 /* Resets the selection screen: maps the menu mode at 0x434 to a category (0 to 2, 1 to 3, 2 to 1,
-   otherwise 0), builds the category list through func_8042B1B8_de, hides the forty controls of the
+   otherwise 0), builds the category list through ScenarioSetup_ResolveArenaFromSelection, hides the forty controls of the
    table D_800E4F64 (and each entry's optional second control), refreshes the list, hides five fixed
    widgets and restores the selection, starting from the first entry when nothing was selected. */
 
@@ -72,7 +72,7 @@ extern void func_8042E9A0_de(int, int);
 
 
 
-extern void func_8042ACD8_de(void);
+extern void ScenarioSetup_StartRandomCupStage(void);
 
 static inline int map_category(int mode) {
     int category;
@@ -96,7 +96,7 @@ static inline int map_category(int mode) {
     return category;
 }
 
-void func_8042A7B4_de(s32 alpha) {
+void ScenarioSetup_SetCatalogueAlpha(s32 alpha) {
     MenuWidget *item;
     s32 *table;
     s32 visible;
@@ -130,7 +130,7 @@ void func_8042A7B4_de(s32 alpha) {
             return;
         }
         do {
-            count = func_8042B154_de(ScenarioSetup_CategoryToList(list));
+            count = ScenarioSetup_GetCategoryEntryCount(ScenarioSetup_CategoryToList(list));
             for (i = 0; i < count; i++) {
                 found = 0;
                 j = 0;
@@ -155,7 +155,7 @@ void func_8042A7B4_de(s32 alpha) {
     }
 }
 
-void func_8042A990_de(void) {
+void ScenarioSetup_RefreshSelectedArenaLabel(void) {
     s32 *table;
     char buffer[0x40];
     switch (D_800E4F60->category) {
@@ -183,7 +183,7 @@ void func_8042A990_de(void) {
 #endif
     } else {
         Scene_CopyLevelName(&g_world,
-                      func_8042B1B8_de(ScenarioSetup_CategoryToList(D_800E4F60->category), D_800E4F60->selection),
+                      ScenarioSetup_ResolveArenaFromSelection(ScenarioSetup_CategoryToList(D_800E4F60->category), D_800E4F60->selection),
                       buffer, 0x3F);
         XPlus_CopyString(D_800E4F60->text, XPlus_UppercaseString(buffer));
     }
@@ -191,13 +191,13 @@ void func_8042A990_de(void) {
     Cinema_ReleaseSequenceContext();
 }
 
-void func_8042AAD0_de(void) {
+void ScenarioSetup_StartSelectedScenario(void) {
     int category;
     int list;
     int i;
 
     category = map_category(D_800E4F60->category);
-    list = func_8042B1B8_de(category, D_800E4F60->selection);
+    list = ScenarioSetup_ResolveArenaFromSelection(category, D_800E4F60->selection);
     for (i = 0; i < 40; i++) {
         Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4F60->window, (u16)D_800E4F64[i].key), 0);
         if (D_800E4F64[i].other != -1) {
@@ -213,11 +213,11 @@ void func_8042AAD0_de(void) {
     Frontend_SetWidgetFlag08(D_800E4F60->widgetB, 0);
     ScenarioSetup_ClearFlagBits();
     if (D_800E4F60->selection == 0) {
-        func_8042AFC0_de(category);
-        func_8042AFD0_de(0);
-        func_8042ACD8_de();
+        ScenarioSetup_SetCupCategory(category);
+        ScenarioSetup_SetCupStageCount(0);
+        ScenarioSetup_StartRandomCupStage();
     } else {
-        func_8042AFC0_de(-1);
-        func_8042AFD0_de(D_800E4F60->selection);
+        ScenarioSetup_SetCupCategory(-1);
+        ScenarioSetup_SetCupStageCount(D_800E4F60->selection);
     }
 }

@@ -31,7 +31,7 @@ extern void func_80285B64_de(s32,void *,Triple,f32,f32,s32);
 
 #include "COMMON/GAME_SESSION.H"
 
-extern void func_8029311C_de(void *arg0, s8 *arg1, s32 arg2, s32 arg3,
+extern void SetN64_DrawColorRectangle(void *arg0, s8 *arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);
 
 void Scene_SetTypeThreeActorStateBits(void *arg0) {
@@ -209,7 +209,7 @@ void Scene_DrawTransitionColorOverlay(Shared_World *world) {
                 converted |= 0x80000000;
             }
             color[3] = converted;
-            func_8029311C_de(&D_8011FAC0, color, 0, 0, D_800E28D0,
+            SetN64_DrawColorRectangle(&D_8011FAC0, color, 0, 0, D_800E28D0,
                           D_800E28D4);
         }
     }

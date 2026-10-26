@@ -47,7 +47,7 @@ extern struct Pair D_800E4A84[];
 
 
 
-extern void Frontend_SetWidgetFlag08(struct Resource_func_80419E54_de *, s32);
+extern void Frontend_SetWidgetFlag08(struct ResourceSmpFlickerCreateFlickerWidget *, s32);
 
 /* Reports every set entry of each ready slot to the handler, stopping after two slots. */
 

@@ -10,7 +10,7 @@
 extern void func_802B7A20_de(s32 arg0);
 
 
-s32 func_802B74B0_de(s32 arg0) {
+s32 func_802B74B0_de(s32 completionQueue) {
     s32 result;
     u8 *p;
 
@@ -19,7 +19,7 @@ s32 func_802B74B0_de(s32 arg0) {
     if (*p != 0) {
         func_802B7A20_de(0);
         __osSiRawStartDma(1, &D_8014D470);
-        osRecvMesg(arg0, 0, 1);
+        osRecvMesg(completionQueue, 0, 1);
     }
     result = __osSiRawStartDma(0, &D_8014D470);
     *p = 0;
@@ -28,7 +28,7 @@ s32 func_802B74B0_de(s32 arg0) {
 }
 
 s32 func_802B7AD8_de(s32 *, s32);
-void func_802B7538_de(s32 arg0) {
-    s32 sp10;
-    func_802B7AD8_de(&sp10, arg0);
+void func_802B7538_de(s32 controllerStatus) {
+    s32 validControllerMask;
+    func_802B7AD8_de(&validControllerMask, controllerStatus);
 }

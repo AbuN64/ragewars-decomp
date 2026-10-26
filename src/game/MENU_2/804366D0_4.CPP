@@ -11,14 +11,14 @@ extern struct MenuStepState *D_800E5690;
 #include "RENDER_2/8025DE50_5.H"
 
 /* Calls MarkMenuEventHandled, then sets the word at offset 0x20 of the object D_800E5690 points to to -1 and
-   calls func_8041A430_de on the object's first word with 2, returning zero. */
+   calls SmpSlider_SetTransitionMode on the object's first word with 2, returning zero. */
 
 
 
 
 extern void MarkMenuEventHandled();
 
-extern void func_8041A430_de(void *, s32);
+extern void SmpSlider_SetTransitionMode(void *, s32);
 
 
                                  /* extern */
@@ -60,7 +60,7 @@ s32 func_80436C58_de(void) {
     MarkMenuEventHandled();
     state = D_800E5690;
     state->value = -1;
-    func_8041A430_de(state->menu, 2);
+    SmpSlider_SetTransitionMode(state->menu, 2);
     return 0;
 }
 

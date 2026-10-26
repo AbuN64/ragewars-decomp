@@ -13,13 +13,13 @@ extern void **D_800E58A4;
 #include "SCENE/802508E0_13.H"
 
 /* Calls MarkMenuEventHandled, then sets the word at offset 0x14 of the object D_800E58A0 points to to -1 and
-   calls func_8041A430_de on the object's first word with 2, returning zero. */
+   calls SmpSlider_SetTransitionMode on the object's first word with 2, returning zero. */
 
 
 
 extern void MarkMenuEventHandled();
 
-extern void func_8041A430_de(void *, s32);
+extern void SmpSlider_SetTransitionMode(void *, s32);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E58A8, an actor kind at D_800E58AC and a handler at D_800E58B0: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
@@ -30,17 +30,17 @@ typedef s32 (*Handler80439390)(void *, s32, s32, s32, s32);
 extern Handler80439390 D_800E58B0;
 
 /* Builds a two-slider menu: allocates eight bytes into D_800E58A4 through Cache_AllocateMemory, creates the
-   sliders VALUE_1D5/VALUE_1D5+1 and VALUE_1D5+2/VALUE_1D5+3 through func_8041A580_de, stores them in the block and sets them
-   to the option bytes D_801462E0[0] and [1] through func_8041A6EC_de, then calls func_8041B110_de with
+   sliders VALUE_1D5/VALUE_1D5+1 and VALUE_1D5+2/VALUE_1D5+3 through SmpSlider_CreateSliderWidget, stores them in the block and sets them
+   to the option bytes D_801462E0[0] and [1] through SmpSlider_SetSliderItem, then calls SmpButton_WrapButtonWidget with
    VV_01D3. Returns zero. */
 
 
 
 extern void **Cache_AllocateMemory(s32);
 
-extern void *func_8041A580_de(s32, s32, s32);
+extern void *SmpSlider_CreateSliderWidget(s32, s32, s32);
 
-extern void func_8041A6EC_de(void *, s32);
+extern void SmpSlider_SetSliderItem(void *, s32);
 
 /* Releases the object D_800E58A4 holds through Cache_FreeMemory, clears D_800E58A4 and returns zero. */
 
@@ -51,7 +51,7 @@ extern void func_8041A6EC_de(void *, s32);
 
 
 
-extern int func_8041A6E0_de(void *slider);
+extern int SmpSlider_GetSliderItem(void *slider);
 
 
 
@@ -61,7 +61,7 @@ s32 func_80439174_de(void) {
     MarkMenuEventHandled();
     state = D_800E58A0;
     state->target = -1;
-    func_8041A430_de(state->menu, 2);
+    SmpSlider_SetTransitionMode(state->menu, 2);
     return 0;
 }
 
@@ -98,30 +98,30 @@ s32 func_80439240_de(void) {
     void *slider;
     D_800E58A4 = Cache_AllocateMemory(8);
 #if defined(VERSION_DE)
-    slider = func_8041A580_de(0x1D1, 0x1D1 + 1, 0xFF);
+    slider = SmpSlider_CreateSliderWidget(0x1D1, 0x1D1 + 1, 0xFF);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    slider = func_8041A580_de(0x1D5, 0x1D5 + 1, 0xFF);
+    slider = SmpSlider_CreateSliderWidget(0x1D5, 0x1D5 + 1, 0xFF);
 #elif defined(VERSION_EU_X)
-    slider = func_8041A580_de(0x1D8, 0x1D8 + 1, 0xFF);
+    slider = SmpSlider_CreateSliderWidget(0x1D8, 0x1D8 + 1, 0xFF);
 #endif
     options = D_801462C8.volume;
     D_800E58A4[0] = slider;
-    func_8041A6EC_de(slider, options[0]);
+    SmpSlider_SetSliderItem(slider, options[0]);
 #if defined(VERSION_DE)
-    slider = func_8041A580_de(0x1D1 + 2, 0x1D1 + 3, 0xFF);
+    slider = SmpSlider_CreateSliderWidget(0x1D1 + 2, 0x1D1 + 3, 0xFF);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    slider = func_8041A580_de(0x1D5 + 2, 0x1D5 + 3, 0xFF);
+    slider = SmpSlider_CreateSliderWidget(0x1D5 + 2, 0x1D5 + 3, 0xFF);
 #elif defined(VERSION_EU_X)
-    slider = func_8041A580_de(0x1D8 + 2, 0x1D8 + 3, 0xFF);
+    slider = SmpSlider_CreateSliderWidget(0x1D8 + 2, 0x1D8 + 3, 0xFF);
 #endif
     D_800E58A4[1] = slider;
-    func_8041A6EC_de(slider, options[1]);
+    SmpSlider_SetSliderItem(slider, options[1]);
 #if defined(VERSION_DE)
-    func_8041B110_de(0x1CF);
+    SmpButton_WrapButtonWidget(0x1CF);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    func_8041B110_de(0x1D3);
+    SmpButton_WrapButtonWidget(0x1D3);
 #elif defined(VERSION_EU_X)
-    func_8041B110_de(0x1DC);
+    SmpButton_WrapButtonWidget(0x1DC);
 #endif
     return 0;
 }
@@ -143,10 +143,10 @@ int func_80439308_de(void) {
  int value;
  unsigned char *options;
  int sound;
- value=func_8041A6E0_de(D_800E58A4[1]);
+ value=SmpSlider_GetSliderItem(D_800E58A4[1]);
  options=D_801462E1;
  if(value!=options[0]){options[0]=value;SoundElement_PlayFlatSound(0x460);}
- value=func_8041A6E0_de(D_800E58A4[0]);
+ value=SmpSlider_GetSliderItem(D_800E58A4[0]);
  if(value!=options[-1]){
   options[-1]=value;
   if((unsigned char)value<5) sound=0;

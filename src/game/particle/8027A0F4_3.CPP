@@ -40,15 +40,15 @@ s32 GraphU64_NextRandom(void);
 
 void Particle_UpdateTypedMotion(Shared_Particle *particle);
 
-void func_8027B428_de(Shared_Particle *particle);
+void Particle_DispatchOwnerContactLinks(Shared_Particle *particle);
 
-void func_8027C274_de(Shared_Particle *particle);
+void Particle_HandleInitialMaterialContact(Shared_Particle *particle);
 
-void func_8027C4F0_de(Shared_Particle *particle);
+void Particle_HandleTypedContact(Shared_Particle *particle);
 
-void func_8027C758_de(Shared_Particle *particle);
+void Particle_HandleSelectedSurfaceContact(Shared_Particle *particle);
 
-void func_8027C9CC_de(Shared_Particle *particle);
+void Particle_HandleMaterialContact(Shared_Particle *particle);
 
 #if defined(VERSION_DE)
 void func_8027CC20_de(Shared_Particle *particle);
@@ -92,7 +92,7 @@ extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 
 extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void Particle_Release(void *, void *);
-/* Picks an animation slot from a global mode, then plays the slot's effect, spawns its object at the owner or a fixed position, plays its sound, and flags the owner. Adapted from func_8027C9CC_de, with the slot chosen by a switch on D_801042C4 (the extra case below 7 that shares the default body is needed for the decision tree; its value is not recoverable), the constant triple, one argument, the dropped GraphU64_ScaleVector call, and the final test changed. */
+/* Picks an animation slot from a global mode, then plays the slot's effect, spawns its object at the owner or a fixed position, plays its sound, and flags the owner. Adapted from Particle_HandleMaterialContact, with the slot chosen by a switch on D_801042C4 (the extra case below 7 that shares the default body is needed for the decision tree; its value is not recoverable), the constant triple, one argument, the dropped GraphU64_ScaleVector call, and the final test changed. */
 
 
 
@@ -363,14 +363,14 @@ void Particle_Update(Shared_Particle *particle) {
             }
             GraphU64_NormalizeVec3(&particle->direction);
         }
-        func_8027B428_de(particle);
+        Particle_DispatchOwnerContactLinks(particle);
         if (D_801041F0.unkC4 != 0) {
-            func_8027C4F0_de(particle);
+            Particle_HandleTypedContact(particle);
         }
         if (particle->flags & 0x100) {
             if (D_801041F0.unk9C != 0) {
                 if (!(particle->desc->flags & 0x10000000)) {
-                    func_8027C274_de(particle);
+                    Particle_HandleInitialMaterialContact(particle);
                 }
                 if (particle->desc->flags & 0x800) {
                     particle->unk1B9 = 1;
@@ -393,9 +393,9 @@ void Particle_Update(Shared_Particle *particle) {
                 }
                 if ((particle->flags & 0x100) && D_801041F0.unkB0 != 0 && !(particle->desc->flags & 0x20000000)) {
                     if (D_801041F0.unkB0 == 1) {
-                        func_8027C758_de(particle);
+                        Particle_HandleSelectedSurfaceContact(particle);
                     } else {
-                        func_8027C9CC_de(particle);
+                        Particle_HandleMaterialContact(particle);
                     }
                 }
             }
@@ -407,7 +407,7 @@ void Particle_Update(Shared_Particle *particle) {
     D_800D2988 = savedStep;
 }
 
-void func_8027C274_de(Shared_Particle *particle) {
+void Particle_HandleInitialMaterialContact(Shared_Particle *particle) {
     struct IntPair pair;
     struct Shape_typemap_165 rotation;
     CVector3 position;
@@ -470,7 +470,7 @@ skip_effects:
     }
 }
 
-void func_8027C4F0_de(Shared_Particle *particle) {
+void Particle_HandleTypedContact(Shared_Particle *particle) {
     struct IntPair pair;
     struct Shape_typemap_165 rotation;
     CVector3 position;
@@ -531,7 +531,7 @@ void func_8027C4F0_de(Shared_Particle *particle) {
     }
 }
 
-void func_8027C758_de(Shared_Particle *particle) {
+void Particle_HandleSelectedSurfaceContact(Shared_Particle *particle) {
     struct IntPair pair;
     struct Shape_typemap_165 rotation;
     CVector3 position;
@@ -590,7 +590,7 @@ void func_8027C758_de(Shared_Particle *particle) {
     }
 }
 
-void func_8027C9CC_de(Shared_Particle *particle) {
+void Particle_HandleMaterialContact(Shared_Particle *particle) {
     struct IntPair pair;
     struct Shape_typemap_165 rotation;
     CVector3 position;

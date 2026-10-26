@@ -15,7 +15,7 @@ void Items_ResetActorPools(void *owner, s32 count);
 
 void func_804499B0_de(void *pool, s32 count, s32 force_active);
 
-void func_8029311C_de(void *unused, u8 *color, s32 left, s32 top, s32 right, s32 bottom) {
+void SetN64_DrawColorRectangle(void *unused, u8 *color, s32 left, s32 top, s32 right, s32 bottom) {
     if (color[3] != 0) {
         gDPPipeSync(g_displayListCursor++);
         gDPSetCycleType(g_displayListCursor++, G_CYC_1CYCLE);
@@ -44,11 +44,11 @@ void func_8029311C_de(void *unused, u8 *color, s32 left, s32 top, s32 right, s32
 }
 
 /** Thin wrapper around Control_CommitControllerInputs. */
-void func_80293268_de(void *unused) {
+void SetN64_CommitSessionInputs(void *unused) {
     Control_CommitControllerInputs();
 }
 
-void func_80293284_de(GameSession *gameSession, s32 target) {
+void SetN64_SelectSpawnAndStartSession(GameSession *gameSession, s32 target) {
     Shared_Placed spawn;
     s32 selectionValues;
 
@@ -67,7 +67,7 @@ void func_80293284_de(GameSession *gameSession, s32 target) {
     gameSession->target = 0xD;
 }
 
-void func_80293334_de(void *owner, s32 count, s32 force_active) {
+void SetN64_ResetSessionPlayerPools(void *owner, s32 count, s32 force_active) {
     GameSession *session = owner;
     Items_ResetActorPools(session->players, count);
     func_804499B0_de(session->menu, count, force_active);

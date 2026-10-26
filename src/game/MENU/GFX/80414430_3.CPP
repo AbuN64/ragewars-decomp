@@ -33,7 +33,7 @@ static inline void put_vertex(s32 index, s32 x, s32 y, u32 color) {
     gSPModifyVertex(g, index, G_MWO_POINT_ST, 0);
 }
 
-void func_80415C90_de(f32 x, f32 y, f32 w, f32 h, u32 col0, u32 col1, u32 col2, u32 col3) {
+void Gfx_DrawClippedGradientQuad(f32 x, f32 y, f32 w, f32 h, u32 col0, u32 col1, u32 col2, u32 col3) {
     s32 left;
     s32 top;
     s32 right_edge;
@@ -153,7 +153,7 @@ extern char D_80141168;
 extern void XMath_SetIdentityMatrix(Matrix *m);
 extern Vtx10 *ESmem_AllocateFrameHeapHigh(s32 size);
 
-void func_80416ECC_de(s32 mode) {
+void Gfx_SetPrimitiveVertexMode(s32 mode) {
     CVector3 point;
     CVector3 projected;
     Matrix identity;
@@ -200,7 +200,7 @@ void func_80416ECC_de(s32 mode) {
    from the cached mode D_800E32CC: flushes through Gfx_ResetRenderState and applies the mode word built
    from the mode's base bits (0x53 or 0x33, with bit 2 when the first switch is set), then 0x300 or
    0x500, 0x3000 or 0x5000 and 0x30000 or 0x50000 chosen by the three further switches, through
-   func_80417138_de. */
+   Gfx_ConfigurePrimitiveRenderFlags. */
 
 extern Triple D_80153F60;
 
@@ -220,11 +220,11 @@ void Gfx_SetRenderMode(s32 mode) {
         Gfx_ResetRenderState();
         bits = D_80153F60.x ? 0x55 : 0x53;
         bits |= D_80153F60.z ? 0x300 : 0x500;
-        func_80417138_de(bits | (D_8014DCDC ? 0x3000 : 0x5000) | (D_8014DCE0 ? 0x30000 : 0x50000));
+        Gfx_ConfigurePrimitiveRenderFlags(bits | (D_8014DCDC ? 0x3000 : 0x5000) | (D_8014DCE0 ? 0x30000 : 0x50000));
     } else if (mode == 12) {
         Gfx_ResetRenderState();
         bits = D_80153F60.x ? 0x35 : 0x33;
         bits |= D_80153F60.z ? 0x300 : 0x500;
-        func_80417138_de(bits | (D_8014DCDC ? 0x3000 : 0x5000) | (D_8014DCE0 ? 0x30000 : 0x50000));
+        Gfx_ConfigurePrimitiveRenderFlags(bits | (D_8014DCDC ? 0x3000 : 0x5000) | (D_8014DCE0 ? 0x30000 : 0x50000));
     }
 }

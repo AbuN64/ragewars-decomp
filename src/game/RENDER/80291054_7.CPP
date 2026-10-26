@@ -30,13 +30,13 @@ extern unsigned int D_800D2978;
 extern int D_800CD730;
 
 
-void func_80292F48_de(void) {
+void SetN64_StartBootstrapThread(void) {
     XPlus_FillMemory((s32)D_800E7C00, 0, 0x80);
     osCreateThread((s32)D_8011B590, 0, D_0029350C, 0, (s32)(D_800E7C00 + 0x80), D_800CD8A4_de);
     osStartThread((s32)D_8011B590);
 }
 
-void func_80292FC0_de(s32 *gameSession, s32 arg1) {
+void SetN64_StartGameThreadAndIdle(s32 *gameSession, s32 arg1) {
     XPlus_FillMemory((s32)D_800E7C80_de, 1, 0x8000);
     osCreateThread((s32)D_8011B7C0, 1, D_00293534, arg1, (s32)D_800EFC80_de, D_800CD8B4);
     osStartThread((s32)D_8011B7C0);
@@ -49,7 +49,7 @@ loop_1:
     goto loop_1;
 }
 
-void func_80293054_de(Display *display) {
+void SetN64_AdvanceDisplayFrame(Display *display) {
  unsigned int index; Frame *frame;
  index=++D_800D2978%D_800DE850;
  D_800CD730++;

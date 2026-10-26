@@ -38,7 +38,7 @@ extern s32 Frontend_FindKeyIndex(s32);
 extern void XStdio_FormatBuffer(char *, char *, ...);
 extern void XPlus_CopyString(char *, char *);
 extern void Frontend_SetWidgetFlag100(MenuWidget *, s32);
-extern void func_8041B110_de(s32);
+extern void SmpButton_WrapButtonWidget(s32);
 extern void Scene_CopyLevelName(Shared_World *, s32, char *, s32);
 extern char *XPlus_UppercaseString(char *);
 extern void Tsmos_DeactivateControllerState(void);
@@ -194,9 +194,9 @@ done:
     }
     Achieve_UpdatePlayerPreviewStats();
     func_80438614_de();
-    func_8041B110_de(0x26E + PREVIEW_ID_SHIFT);
-    func_8041B110_de(0x26F + PREVIEW_ID_SHIFT);
-    func_8041B110_de(0x273 + PREVIEW_ID_SHIFT);
+    SmpButton_WrapButtonWidget(0x26E + PREVIEW_ID_SHIFT);
+    SmpButton_WrapButtonWidget(0x26F + PREVIEW_ID_SHIFT);
+    SmpButton_WrapButtonWidget(0x273 + PREVIEW_ID_SHIFT);
     Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, 0x26F + PREVIEW_ID_SHIFT), 1);
     for (i = 0; i < 4; i++) {
         if (D_80102B00[i].player >= 0 && D_80102B00[i].fresh == 0) {

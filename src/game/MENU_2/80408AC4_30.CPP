@@ -15,7 +15,7 @@ extern FieldRow D_800E0E74_de[];
 
 extern Handler8042931C D_800E0E78_de;
 
-s32 func_8042913C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchGermanMatchMenuEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler8042931C *entry;
     ObjRecAtCV1 *actor;
     s32 index;

@@ -11,9 +11,9 @@
 #include "MATH/802A2870.H"
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-extern f64 func_804147F0_eu_x(void);
+extern f64 Gfx_GetConvertedCounterRatio(void);
 #else
-extern f64 func_804143B0_de(void);
+extern f64 Gfx_GetNormalizedCounter(void);
 #endif
 
 /** Store four arguments in the adjacent global state words. */
@@ -35,9 +35,9 @@ void N64Eng_GetClipBounds(s32 *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
 f64 N64Eng_GetTimeSeconds(void) {
     return 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-func_804147F0_eu_x
+Gfx_GetConvertedCounterRatio
 #else
-func_804143B0_de
+Gfx_GetNormalizedCounter
 #endif
 () - (0.0);
 }

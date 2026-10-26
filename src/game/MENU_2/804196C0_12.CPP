@@ -9,7 +9,7 @@
 
 
 
-extern void func_804199DC_de(struct FrameSequence *, s32);
+extern void SmpFrameAnim_SetSequenceFrame(struct FrameSequence *, s32);
 extern void func_80419A18_de(struct FrameSequence *, s32);
 extern void func_80419A28_de(struct FrameSequence *, s32);
 extern s32 func_80419A3C_de(struct FrameSequence *, s32);
@@ -25,14 +25,14 @@ s32 SmpFrameAnim_UpdateFrameSequence(struct FrameSequence *sequence, s32 unused,
                 } else if (func_80419A3C_de(sequence, 0x10)) {
                     func_80419A28_de(sequence, 1);
                     func_80419A18_de(sequence, 2);
-                    func_804199DC_de(sequence, sequence->count - 2);
+                    SmpFrameAnim_SetSequenceFrame(sequence, sequence->count - 2);
                 } else if (func_80419A3C_de(sequence, 0x20)) {
                     if (sequence->loops > 0) {
                         sequence->loops--;
-                        func_804199DC_de(sequence, 0);
+                        SmpFrameAnim_SetSequenceFrame(sequence, 0);
                     }
                 } else if (func_80419A3C_de(sequence, 8)) {
-                    func_804199DC_de(sequence, 0);
+                    SmpFrameAnim_SetSequenceFrame(sequence, 0);
                 }
             } else {
                 if (sequence->frame > 0) {
@@ -40,14 +40,14 @@ s32 SmpFrameAnim_UpdateFrameSequence(struct FrameSequence *sequence, s32 unused,
                 } else if (func_80419A3C_de(sequence, 0x10)) {
                     func_80419A28_de(sequence, 2);
                     func_80419A18_de(sequence, 1);
-                    func_804199DC_de(sequence, 1);
+                    SmpFrameAnim_SetSequenceFrame(sequence, 1);
                 } else if (func_80419A3C_de(sequence, 0x20)) {
                     if (sequence->loops > 0) {
                         sequence->loops--;
-                        func_804199DC_de(sequence, sequence->count - 1);
+                        SmpFrameAnim_SetSequenceFrame(sequence, sequence->count - 1);
                     }
                 } else if (func_80419A3C_de(sequence, 8)) {
-                    func_804199DC_de(sequence, sequence->count - 1);
+                    SmpFrameAnim_SetSequenceFrame(sequence, sequence->count - 1);
                 }
             }
         }

@@ -71,9 +71,9 @@ extern void SmpFlicker_StartFlicker(void *, s32);
 
 extern void Tsmos_ActivateControllerState(void);
 
-extern s32 func_80419F38_de(void *);
+extern s32 SmpFlicker_IsFlickerIdle(void *);
 
-extern void func_80419F24_de(void *);
+extern void SmpFlicker_RestoreFlickerValue(void *);
 
 s32 Frontend_AnimateResultsOptionsScreen(void *unused0, void *unused1, s32 delta) {
     s32 clock;
@@ -124,8 +124,8 @@ s32 Frontend_AnimateResultsOptionsScreen(void *unused0, void *unused1, s32 delta
         break;
     case 4:
         D_800E4690->timer = RW_CLAMP(D_800E4690->timer - 1, 0, D_800E4690->timer);
-        if (D_800E4690->timer <= 0 && func_80419F38_de(D_800E4690->prompt) != 0) {
-            func_80419F24_de(D_800E4690->prompt);
+        if (D_800E4690->timer <= 0 && SmpFlicker_IsFlickerIdle(D_800E4690->prompt) != 0) {
+            SmpFlicker_RestoreFlickerValue(D_800E4690->prompt);
             D_800E4690->state = 3;
         }
         break;

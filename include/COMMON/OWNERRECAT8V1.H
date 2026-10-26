@@ -71,7 +71,7 @@ struct ChildRecAt38 {
 
 struct ChildRecAt38;
 
-extern void func_8041B110_de(s32 arg0);
+extern void SmpButton_WrapButtonWidget(s32 arg0);
 
 struct SlotsRecAt5CV1;
 struct SlotsRecAt5CV1 {
@@ -136,8 +136,8 @@ struct OwnerRecAt8V1 {
     struct sm_dlmultiuser_t *context;
 };
 
-struct Record_func_8041B110_de;
-struct Record_func_8041B110_de {
+struct RecordSmpButtonWrapButtonWidget;
+struct RecordSmpButtonWrapButtonWidget {
     s32 words_00[3];
     s16 field_0C;
     s16 field_0E;
@@ -153,8 +153,8 @@ extern s32 func_8041B340_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 struct ChildRecAt2C;
 
-struct Record_func_8041B110_de;
-typedef struct Record_func_8041B110_de Record_func_8041B110_de;
+struct RecordSmpButtonWrapButtonWidget;
+typedef struct RecordSmpButtonWrapButtonWidget RecordSmpButtonWrapButtonWidget;
 
 extern void SmpOverlay_RegisterOverlayClass();
 

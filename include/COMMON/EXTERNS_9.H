@@ -30,11 +30,11 @@ extern void Scene_ClearSceneObjectCounts(void *);
 
 struct Node80253610;
 extern void Cache_MarkResourceInUse(s32, struct Node80253610 *);
-extern void func_802A56FC_de(void *);
+extern void Fx_ResetRibbonVertexPool(void *);
 struct CPlayerPool_t;
 extern void func_8022A170_de(struct CPlayerPool_t *);
 extern void Scene_CollectVisibleEffects(void *);
-extern void func_802A5680_de(void *);
+extern void Fx_UpdateEffectLists(void *);
 extern void Scene_UpdateActorsAndRoundState(void *);
 extern void Scene_UpdateTriggerTimers(void *);
 extern void Particle_UpdateSystem(void *);

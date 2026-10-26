@@ -31,7 +31,7 @@ extern void func_80434FB4_de(s32);
 
 extern void Player_SetAchievementFlag7(char *, s32);
 
-extern void func_8041A430_de(void *, s32);
+extern void SmpSlider_SetTransitionMode(void *, s32);
 
 /* Applies the play mode picked on the front-end menu: sets the next screen, the controller mode and which players
  * join, then hands the screen record on. */
@@ -52,7 +52,7 @@ extern OptionsScreen *D_800E4600;
 #if 1
 extern s8 D_800FEB0E[];
 extern u8 D_8010EB7D[];
-extern void func_8042AFC0_de(int);
+extern void ScenarioSetup_SetCupCategory(int);
 extern void func_8042E9A0_de(s32, s32);
 extern void Tsmos_SetIdleTimer(f32);
 extern void Tsmos_ActivateControllerState(void);
@@ -61,12 +61,12 @@ extern s32 Defs_TestBit(u8 *, s32);
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag100(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
-extern void func_8041B110_de(s32);
+extern void SmpButton_WrapButtonWidget(s32);
 extern void Frontend_AdvanceActiveSlot(int *);
 extern s32 Control_IsControllerConnected(s32);
-extern void *func_8041A280_de(s32, s32);
+extern void *SmpFade_CreateFadeWidget(s32, s32);
 extern void func_8041A488_de(void *);
-extern MenuWidget *func_80419E54_de(s32, s32);
+extern MenuWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern u32 func_802999F4_de(void);
 extern void Frontend_RequestScreenMode(s32);
 /* Builds the options screen: clears the per-player settings, retires bots that are no longer wanted, allocates
@@ -84,7 +84,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     s32 groupC;
     s32 mode;
 
-    func_8042AFC0_de(-1);
+    ScenarioSetup_SetCupCategory(-1);
     func_8042E9A0_de(0, 0);
     counters->humanWon = 0;
     Tsmos_SetIdleTimer(0.0f);
@@ -128,7 +128,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     title = Frontend_FindWidgetByResourceId(menu, 0x42);
     switch (layout) {
     case 2:
-        func_8041B110_de(0x48);
+        SmpButton_WrapButtonWidget(0x48);
         widget = Frontend_FindWidgetByResourceId(menu, 0x4A);
         Frontend_SetWidgetFlag100(widget, 1);
         Frontend_SetWidgetFlag08(widget, 0);
@@ -136,8 +136,8 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
         title->height = 0x78;
         break;
     case 3:
-        func_8041B110_de(0x4A);
-        func_8041B110_de(0x48);
+        SmpButton_WrapButtonWidget(0x4A);
+        SmpButton_WrapButtonWidget(0x48);
         title->y = 0x2A;
         title->height = 0x88;
         break;
@@ -161,17 +161,17 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     if (mode != 1 || Control_IsControllerConnected(1) != mode) {
         Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, 0x49), 1);
     }
-    D_800E4600->music = func_8041A280_de(0x42, 0x24);
+    D_800E4600->music = SmpFade_CreateFadeWidget(0x42, 0x24);
     func_8041A488_de(D_800E4600->music);
-    func_8041B110_de(0x45);
-    func_8041B110_de(0x46);
-    func_8041B110_de(0x49);
-    func_8041B110_de(0x4B);
-    func_8041B110_de(0x4C);
-    func_8041B110_de(0x47);
+    SmpButton_WrapButtonWidget(0x45);
+    SmpButton_WrapButtonWidget(0x46);
+    SmpButton_WrapButtonWidget(0x49);
+    SmpButton_WrapButtonWidget(0x4B);
+    SmpButton_WrapButtonWidget(0x4C);
+    SmpButton_WrapButtonWidget(0x47);
     D_800E4600->title = Frontend_FindWidgetByResourceId(menu, 0x43);
     D_800E4600->title->alpha = 0xF;
-    D_800E4600->prompt = func_80419E54_de(0x44, 0x6E);
+    D_800E4600->prompt = SmpFlicker_CreateFlickerWidget(0x44, 0x6E);
     if (func_802999F4_de() == 2) {
         D_800E4600->mode = 9;
     } else {
@@ -286,7 +286,7 @@ s32 Frontend_ApplyModeChoice(void) {
     default:
         return 0;
     }
-    func_8041A430_de(D_800E4600->music, 2);
+    SmpSlider_SetTransitionMode(D_800E4600->music, 2);
     return 0;
 }
 

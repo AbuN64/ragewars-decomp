@@ -5,9 +5,9 @@
 #include "COMMON/MENU_SCREEN_SETUP.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "RENDER_2/8025DE50_5.H"
-extern void func_8042A7B4_de(s32);
+extern void ScenarioSetup_SetCatalogueAlpha(s32);
 extern void func_8042E988_de(s32);
-extern void func_8042B2E4_de(void);
+extern void ScenarioSetup_ResetSelectionIndicators(void);
 
 s32 func_8042AFB0_eu_x(void *root, s32 unused, s32 delta) {
     MenuWidget *item;
@@ -64,17 +64,17 @@ s32 func_8042AFB0_eu_x(void *root, s32 unused, s32 delta) {
     case 4:
         count = D_800E4F60->unk3E0 - 1;
         D_800E4F60->unk3E0 = count < 0 ? 0 : count;
-        if (D_800E4F60->unk3E0 <= 0 && func_80419F38_de(D_800E4F60->text3E4)) {
-            func_80419F24_de(D_800E4F60->text3E4);
-            func_8042A7B4_de(10);
+        if (D_800E4F60->unk3E0 <= 0 && SmpFlicker_IsFlickerIdle(D_800E4F60->text3E4)) {
+            SmpFlicker_RestoreFlickerValue(D_800E4F60->text3E4);
+            ScenarioSetup_SetCatalogueAlpha(10);
             D_800E4F60->unk3DC = 9;
         }
         break;
     case 5:
         Frontend_SetWidgetFlag08(D_800E4F60->unk458, 1);
         Frontend_SetWidgetFlag08(D_800E4F60->unk3E8, 0);
-        func_8042B2E4_de();
-        func_8042A7B4_de(0);
+        ScenarioSetup_ResetSelectionIndicators();
+        ScenarioSetup_SetCatalogueAlpha(0);
         D_800E4F60->unk3DC = 2;
         D_800E4F60->unk3E0 = 4;
         Frontend_SetWidgetFlag08(D_800E4F60->unk448, 0);
@@ -83,7 +83,7 @@ s32 func_8042AFB0_eu_x(void *root, s32 unused, s32 delta) {
     case 6: case 7: break;
     case 8:
         fade = Frontend_FindWidgetByResourceId(root, 0x31A)->alpha >> 1;
-        func_8042A7B4_de(fade);
+        ScenarioSetup_SetCatalogueAlpha(fade);
         if (fade < 10) {
             D_800E4F60->unk3DC = 3;
             func_8042E988_de(11);
@@ -93,7 +93,7 @@ s32 func_8042AFB0_eu_x(void *root, s32 unused, s32 delta) {
     case 9:
         fade = (Frontend_FindWidgetByResourceId(root, 0x31A)->alpha + 1) * 2;
         if (fade > 65) { fade = 65; D_800E4F60->unk3DC = 3; }
-        func_8042A7B4_de(fade);
+        ScenarioSetup_SetCatalogueAlpha(fade);
         if (D_800E4F60->selection == 0) Frontend_SetWidgetFlag08(D_800E4F60->unk448, 1);
         break;
     }

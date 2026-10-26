@@ -73,13 +73,13 @@ extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape
 
 extern void Frontend_DrawVisibleSiblings(void *, Args);
 
-/* Scrolls up: moves a scroll bar to the previous item through func_8041A6EC_de unless it is already
+/* Scrolls up: moves a scroll bar to the previous item through SmpSlider_SetSliderItem unless it is already
    at the first. */
 
 
-extern void func_8041A6EC_de(struct Scroll *, s32);
+extern void SmpSlider_SetSliderItem(struct Scroll *, s32);
 
-void func_8041A430_de(struct func_8022FD9C_S4 *object, s32 mode) {
+void SmpSlider_SetTransitionMode(struct func_8022FD9C_S4 *object, s32 mode) {
     object->modeState = mode;
     switch (mode) {
     case 1:
@@ -92,19 +92,19 @@ void func_8041A430_de(struct func_8022FD9C_S4 *object, s32 mode) {
 }
 
 /* Returns the word at offset 0x58 of a record. */
-s32 func_8041A470_de(s32 *record) {
+s32 SmpSlider_GetTransitionMode(s32 *record) {
     return record[0x58 / 4];
 }
 
 /* Sets the flag word at offset 0x5C that func_8041A488_de clears. */
 
 
-void func_8041A47C_de(struct Access_s32_5C *object) {
+void SmpSlider_EnableTransition(struct Access_s32_5C *object) {
     object->field = 1;
 }
 
-/* Clears the flag word at offset 0x5C that func_8041A47C_de sets to one. Frontend_InitPlayModeMenu calls it on
-   the object func_8041A280_de has just returned. */
+/* Clears the flag word at offset 0x5C that SmpSlider_EnableTransition sets to one. Frontend_InitPlayModeMenu calls it on
+   the object SmpFade_CreateFadeWidget has just returned. */
 
 
 void func_8041A488_de(struct Access_s32_5C *object) {
@@ -159,7 +159,7 @@ void SmpSlider_RegisterSliderClass(void) {
     func_802982C4_de(0xB63, D_0041A724, D_0041A7B4, 3);
 }
 
-MenuSliderWidget *func_8041A580_de(s32 arg0, s32 arg1, s32 arg2) {
+MenuSliderWidget *SmpSlider_CreateSliderWidget(s32 arg0, s32 arg1, s32 arg2) {
     MenuSliderWidget *source;
     s32 context;
     MenuSliderWidget *result;
@@ -185,7 +185,7 @@ MenuSliderWidget *func_8041A580_de(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 /* Returns the word at offset 0x50 of a record. */
-s32 func_8041A6E0_de(s32 *record) {
+s32 SmpSlider_GetSliderItem(s32 *record) {
     return record[0x50 / 4];
 }
 
@@ -196,7 +196,7 @@ s32 func_8041A6E0_de(s32 *record) {
 
 
 
-void func_8041A6EC_de(struct Scroll *scroll, s32 item) {
+void SmpSlider_SetSliderItem(struct Scroll *scroll, s32 item) {
     scroll->item = item;
     scroll->bar->field18 = (f32) item / (f32) scroll->count * (f32) scroll->length;
 }
@@ -252,15 +252,15 @@ void SmpSlider_DrawSliderWidget(void *widget, Args args) {
     }
 }
 
-void func_8041A8E8_de(struct Scroll *scroll) {
+void SmpSlider_DecrementSliderItem(struct Scroll *scroll) {
     if (scroll->item > 0) {
-        func_8041A6EC_de(scroll, scroll->item - 1);
+        SmpSlider_SetSliderItem(scroll, scroll->item - 1);
     }
 }
 
-void func_8041A910_de(struct Scroll *scroll) {
+void SmpSlider_IncrementSliderItem(struct Scroll *scroll) {
     if (scroll->item < scroll->count) {
-        func_8041A6EC_de(scroll, scroll->item + 1);
+        SmpSlider_SetSliderItem(scroll, scroll->item + 1);
     }
 }
 

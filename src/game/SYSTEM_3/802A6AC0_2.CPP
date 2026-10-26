@@ -12,7 +12,7 @@
 #include "SYSTEM/80255C40_7.H"
 
 
-extern s32 func_802A2FA4_de(s32 arg0, State802A6DF8 *state);
+extern s32 Smp_UpdateRibbonLifetime(s32 arg0, State802A6DF8 *state);
 
 extern f32 D_800D2988;
 
@@ -38,13 +38,13 @@ extern void GraphU64_ConvertMatrixToFixed(void *arg0, s32 arg1);
 
 extern void Smp_UpdateLinkedNodeTransforms(void *arg0);
 
-extern void func_802A339C_de(void *, void *);
+extern void Smp_UpdateRibbonMatrices(void *, void *);
 
-extern void func_802A3718_de(s32, void *, s32);
+extern void Smp_DrawTexturedRibbon(s32, void *, s32);
 
-extern void func_802A3DD4_de(s32, void *, s32);
+extern void Fx_DrawColoredRibbon(s32, void *, s32);
 
-extern void func_802A25D0_de(void *arg0, void *arg1, f32 *arg2);
+extern void Smp_AppendRibbonSegment(void *arg0, void *arg1, f32 *arg2);
 
 void func_802A5D38_de(SceneRecAt95A8 *arg0, s32 arg1) {
     s32 count;
@@ -84,7 +84,7 @@ void func_802A5E08_de(Owner802A6DF8 *owner) {
     if (state != 0) {
         do {
             next = state->next;
-            if (func_802A2FA4_de((s32)owner, state) == 0) {
+            if (Smp_UpdateRibbonLifetime((s32)owner, state) == 0) {
                 object = state->object;
                 if (object != 0) {
                     if (state->flags & 1) {
@@ -254,7 +254,7 @@ void func_802A6174_de(Node44 *arg0, void *arg1) {
 }
 
 void func_802A62BC_de(void *arg0) {
-    State_func_802A2FA4_de *state = arg0;
+    StateSmpUpdateRibbonLifetime *state = arg0;
     f32 accum;
     f32 delta;
     ChildB4 *node;
@@ -279,14 +279,14 @@ void func_802A6304_de(s32 pool, void *arg1, s32 camera) {
         Smp_UpdateLinkedNodeTransforms(arg1);
     }
     if (state->flags & 4) {
-        func_802A339C_de(arg1, camera);
+        Smp_UpdateRibbonMatrices(arg1, camera);
     }
     if (state->vertexCount >= 2) {
         if (state->renderMode >= 0) {
-            func_802A3718_de(pool, arg1, camera);
+            Smp_DrawTexturedRibbon(pool, arg1, camera);
             return;
         }
-        func_802A3DD4_de(pool, arg1, camera);
+        Fx_DrawColoredRibbon(pool, arg1, camera);
     }
 }
 
@@ -305,7 +305,7 @@ void func_802A63A4_de(void *arg0, void *arg1, void *arg2, s32 arg3) {
         }
         ScaleMatrixLocal(local, scale, scale, scale);
         GraphU64_ClampMatrixToFixedRange(local);
-        func_802A25D0_de(arg0, state, local);
+        Smp_AppendRibbonSegment(arg0, state, local);
     }
 }
 
@@ -336,13 +336,13 @@ void func_802A6490_de(void *pool, void *camera) {
                 Smp_UpdateLinkedNodeTransforms(node);
             }
             if (node->flags & 4) {
-                func_802A339C_de(node, camera);
+                Smp_UpdateRibbonMatrices(node, camera);
             }
             if (node->vertexCount >= 2) {
                 if (node->renderMode >= 0) {
-                    func_802A3718_de(pool, node, camera);
+                    Smp_DrawTexturedRibbon(pool, node, camera);
                 } else {
-                    func_802A3DD4_de(pool, node, camera);
+                    Fx_DrawColoredRibbon(pool, node, camera);
                 }
             }
         }
@@ -356,13 +356,13 @@ void func_802A6490_de(void *pool, void *camera) {
                 Smp_UpdateLinkedNodeTransforms(node);
             }
             if (node->flags & 4) {
-                func_802A339C_de(node, camera);
+                Smp_UpdateRibbonMatrices(node, camera);
             }
             if (node->vertexCount >= 2) {
                 if (node->renderMode >= 0) {
-                    func_802A3718_de(pool, node, camera);
+                    Smp_DrawTexturedRibbon(pool, node, camera);
                 } else {
-                    func_802A3DD4_de(pool, node, camera);
+                    Fx_DrawColoredRibbon(pool, node, camera);
                 }
             }
         }

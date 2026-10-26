@@ -15,24 +15,24 @@
 
 
 /* Marks a menu's state word at offset 0x54 as 2 when XMath_AbsoluteInteger's value for the fifth argument
-   is below func_80299B4C_de's; then, when the fourth argument is one, stores the fourth argument as the state and scrolls down through func_8041A910_de. Returns zero. */
+   is below func_80299B4C_de's; then, when the fourth argument is one, stores the fourth argument as the state and scrolls down through SmpSlider_IncrementSliderItem. Returns zero. */
 
 
 
 extern s32 func_80299B4C_de();
 
-extern void func_8041A910_de(struct func_8022FD9C_Record *);
+extern void SmpSlider_IncrementSliderItem(struct func_8022FD9C_Record *);
 
-extern void func_8041A8E8_de(struct func_8022FD9C_Record *);
+extern void SmpSlider_DecrementSliderItem(struct func_8022FD9C_Record *);
 
 /* Scrolls a menu one step in the direction its state word at offset 0x54 records: up through
-   func_8041A8E8_de for state 0, down through func_8041A910_de for state 1, and returns zero. */
+   SmpSlider_DecrementSliderItem for state 0, down through SmpSlider_IncrementSliderItem for state 1, and returns zero. */
 
 
 
-extern void func_8041A8E8_de(struct func_8022FD9C_Record *menu);
+extern void SmpSlider_DecrementSliderItem(struct func_8022FD9C_Record *menu);
 
-extern void func_8041A910_de(struct func_8022FD9C_Record *menu);
+extern void SmpSlider_IncrementSliderItem(struct func_8022FD9C_Record *menu);
 
 /* Calls Cache_FreeMemory with the arguments it was given and returns zero. */
 
@@ -59,7 +59,7 @@ s32 func_8041AA10_de(struct func_8022FD9C_Record *menu, void *second, void *thir
     }
     if (active == 1) {
         menu->activeState = active;
-        func_8041A910_de(menu);
+        SmpSlider_IncrementSliderItem(menu);
         return 0;
     }
     return 0;
@@ -71,7 +71,7 @@ s32 func_8041AA80_de(struct func_8022FD9C_Record *menu, void *second, void *thir
     }
     if (active == 1) {
         menu->activeState = 0;
-        func_8041A8E8_de(menu);
+        SmpSlider_DecrementSliderItem(menu);
         return 0;
     }
     return 0;
@@ -94,10 +94,10 @@ s32 func_8041AB1C_de(struct func_8022FD9C_Record *menu)
 
     switch (menu->activeState) {
     case 0:
-        func_8041A8E8_de(menu);
+        SmpSlider_DecrementSliderItem(menu);
         break;
     case 1:
-        func_8041A910_de(target);
+        SmpSlider_IncrementSliderItem(target);
         break;
     case 2:
         break;

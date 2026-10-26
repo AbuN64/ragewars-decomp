@@ -67,13 +67,13 @@ extern struct SliderScreen *D_800E4514;
 typedef struct SliderSettings { char pad0[0x10]; s32 value; char pad14[7]; u8 first; char pad1C[0x564]; u8 second; } SliderSettings;
 extern SliderSettings D_801462C8;
 extern struct SliderScreen *Cache_AllocateMemory(s32);
-extern void func_8041B110_de(s32);
-extern s32 func_8041ABC0_de(s32, s32);
+extern void SmpButton_WrapButtonWidget(s32);
+extern s32 SmpButton_CreateListWidget(s32, s32);
 extern void SmpButton_AppendListText(s32, char *);
 extern void SmpButton_SelectListEntry(s32, s32);
 extern s32 Defs_GetMemorySize(void);
-extern s32 func_8041A580_de(s32, s32, s32);
-extern void func_8041A6EC_de(s32, s32);
+extern s32 SmpSlider_CreateSliderWidget(s32, s32, s32);
+extern void SmpSlider_SetSliderItem(s32, s32);
 extern void Tsmos_DeactivateControllerState(void);
 
 typedef struct func_8042362C_S1 func_8042362C_S1;
@@ -89,10 +89,10 @@ s32 Frontend_CreateGameOptionsScreen(void) {
     s32 slider;
 
     D_800E4514 = Cache_AllocateMemory(0x10);
-    func_8041B110_de((0x1BD - OPTIONS_RESOURCE_SHIFT));
-    func_8041B110_de((0x1C2 - OPTIONS_RESOURCE_SHIFT));
+    SmpButton_WrapButtonWidget((0x1BD - OPTIONS_RESOURCE_SHIFT));
+    SmpButton_WrapButtonWidget((0x1C2 - OPTIONS_RESOURCE_SHIFT));
     if (OPTIONS_HAS_FIRST_LIST) {
-    list = func_8041ABC0_de(0x1BB, 0x1BC);
+    list = SmpButton_CreateListWidget(0x1BB, 0x1BC);
     {s32 *handle = &D_800E4514->first_list; *handle = list;}
     SmpButton_AppendListText(D_800E4514->first_list, gameOptionsLabel(0));
     SmpButton_AppendListText(D_800E4514->first_list, gameOptionsLabel(1));
@@ -100,7 +100,7 @@ s32 Frontend_CreateGameOptionsScreen(void) {
     settings = &D_801462C8;
     SmpButton_SelectListEntry(D_800E4514->first_list, settings->first);
     }
-    list = func_8041ABC0_de((0x1BE - OPTIONS_RESOURCE_SHIFT), (0x1BF - OPTIONS_RESOURCE_SHIFT));
+    list = SmpButton_CreateListWidget((0x1BE - OPTIONS_RESOURCE_SHIFT), (0x1BF - OPTIONS_RESOURCE_SHIFT));
     {s32 *handle = &D_800E4514->second_list; *handle = list;}
     SmpButton_AppendListText(D_800E4514->second_list, gameOptionsLabel(3));
     if (Defs_GetMemorySize() != 0x400000) {
@@ -109,12 +109,12 @@ s32 Frontend_CreateGameOptionsScreen(void) {
     }
     if (!OPTIONS_HAS_FIRST_LIST) settings = &D_801462C8;
     SmpButton_SelectListEntry(D_800E4514->second_list, settings->second);
-    slider = func_8041A580_de((0x1C0 - OPTIONS_RESOURCE_SHIFT), (0x1C1 - OPTIONS_RESOURCE_SHIFT), 0x80);
+    slider = SmpSlider_CreateSliderWidget((0x1C0 - OPTIONS_RESOURCE_SHIFT), (0x1C1 - OPTIONS_RESOURCE_SHIFT), 0x80);
     D_800E4514->slider = slider;
 
-    func_8041A6EC_de(slider, settings->value);
-    func_8041B110_de((0x1C3 - OPTIONS_RESOURCE_SHIFT));
-    func_8041B110_de((0x1C4 - OPTIONS_RESOURCE_SHIFT));
+    SmpSlider_SetSliderItem(slider, settings->value);
+    SmpButton_WrapButtonWidget((0x1C3 - OPTIONS_RESOURCE_SHIFT));
+    SmpButton_WrapButtonWidget((0x1C4 - OPTIONS_RESOURCE_SHIFT));
     D_800E4514->state = 0;
     Tsmos_DeactivateControllerState();
     return 0;

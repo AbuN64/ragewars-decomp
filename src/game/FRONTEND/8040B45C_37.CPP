@@ -100,8 +100,8 @@ extern void Frontend_ReleaseOwnedImageBuffers(Texture *texture);
 extern void Frontend_ConfigureOwnedImage(Texture *texture, s32 kind, s8 fmt, s8 siz, s32 wid, s32 siz2, s32 zero,
                           s32 bytes, void *offset, s32 zero2, s32 pitch, s32 *list, s32 depth);
 extern void Gfx_SwizzleImage(Texture *texture);
-extern void func_80419640_de(Texture *into, Texture *from);
-extern void func_804196C8_de(s32 flag);
+extern void Smp_CopyAndSwizzleImage(Texture *into, Texture *from);
+extern void Smp_SetImageStateWord(s32 flag);
 
 void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
     s32 sizes[0x60];
@@ -209,9 +209,9 @@ void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
     Frontend_ConfigureOwnedImage(texture, kind, tile->fmt, tile->siz, tile->wid, tile->siz, 0,
                   bytes, D_801539B0.tables.banks[group].offsets[which], 0,
                   image->depth * 2, D_801539B0.tables.banks[group].listsByPass[pass], image->depth);
-    func_804196C8_de(0);
-    func_80419640_de(into, texture);
-    func_804196C8_de(1);
+    Smp_SetImageStateWord(0);
+    Smp_CopyAndSwizzleImage(into, texture);
+    Smp_SetImageStateWord(1);
     N64Eng_GetTimeSeconds();
     slot->stamp = N64Eng_GetFrameCounter() + 0xA;
     D_801539B0.tables.banks[group].loads += 1;

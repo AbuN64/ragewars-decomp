@@ -12,7 +12,7 @@ s32 Menu_HandleEuxExtraOptionsChoice(void) {
         message = func_80299A08_de();
         switch (message) {
         case 0x3BA:
-            func_8041A430_de(D_800E4400->dialog, 2);
+            SmpSlider_SetTransitionMode(D_800E4400->dialog, 2);
             Menu_ApplyExtraOptionFlags();
             break;
         case 0x3B2:

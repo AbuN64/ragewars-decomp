@@ -21,7 +21,7 @@
    0x48. func_804198CC_de resets the index through here after counting the frames. */
 
 
-void func_804199DC_de(struct FrameSequence *sequence, s32 frame) {
+void SmpFrameAnim_SetSequenceFrame(struct FrameSequence *sequence, s32 frame) {
     sequence->frame = frame;
 }
 
@@ -29,11 +29,11 @@ void func_804199DC_de(struct FrameSequence *sequence, s32 frame) {
    time accumulated at 0x54 exceeds this. func_804198CC_de clears it when it builds the sequence. */
 
 
-void func_804199E4_de(struct FrameSequence *sequence, s32 duration) {
+void SmpFrameAnim_SetSequenceDuration(struct FrameSequence *sequence, s32 duration) {
     sequence->duration = duration;
 }
 
-/* Returns a frame sequence's current frame index, which func_804199DC_de sets. */
+/* Returns a frame sequence's current frame index, which SmpFrameAnim_SetSequenceFrame sets. */
 
 
 s32 func_804199EC_de(struct FrameSequence *sequence) {

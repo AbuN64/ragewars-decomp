@@ -9,7 +9,7 @@
 #include "COMMON/INTEGERSTATEB0.H"
 #include "TYPES.H"
 #include "RENDER/802944E8_3.H"
-extern void func_80293B28_de(void *);
+extern void SetN64_DrawSessionWithAttractTimeout(void *);
 extern s32 D_800E28D0;
 
 
@@ -23,10 +23,10 @@ extern int Player_GetFirstPlayer(void *arg0);
 
 extern void Scene_ResetTransitionViewport(void);
 
-extern void func_80293A20_de(s32 arg0, s32 arg1, s32 arg2);
+extern void SetN64_HandleSessionTransitionInput(s32 arg0, s32 arg1, s32 arg2);
 
 
-s32 func_80290E6C_de(s32);
+s32 SetN64_DrawCreditsLines(s32);
 
 s32 func_80291074_de(s32);
 
@@ -62,7 +62,7 @@ void func_802948C0_de(s32 session) {
     s32 *p;
 
     if (D_800CD780 != 0) {
-        func_80293A20_de(session, 1, 1);
+        SetN64_HandleSessionTransitionInput(session, 1, 1);
         return;
     }
     p = (s32 *)&D_8010B0E0.pressedButtons;
@@ -74,8 +74,8 @@ void func_802948C0_de(s32 session) {
 }
 
 void func_80294938_de(s32 session) {
-    func_80293B28_de((void *)session);
-    func_80290E6C_de(session);
+    SetN64_DrawSessionWithAttractTimeout((void *)session);
+    SetN64_DrawCreditsLines(session);
     func_80291074_de(session);
 }
 
@@ -98,7 +98,7 @@ void func_8029496C_de(s32 arg0) {
 
 void func_802949FC_de(s32 session) {
     if (D_800CD780 != 0) {
-        func_80293A20_de(session, 1, 1);
+        SetN64_HandleSessionTransitionInput(session, 1, 1);
         return;
     }
     if ((D_8010B194_de & 0x1000) && (D_80142898 == 0)) {
@@ -109,8 +109,8 @@ void func_802949FC_de(s32 session) {
 }
 
 void func_80294A74_de(s32 session) {
-    func_80293B28_de((void *)session);
-    func_80290E6C_de(session);
+    SetN64_DrawSessionWithAttractTimeout((void *)session);
+    SetN64_DrawCreditsLines(session);
     func_80291074_de(session);
 }
 

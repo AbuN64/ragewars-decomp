@@ -23,7 +23,7 @@ unsigned int func_8042250C_us_rev1_padding_19050C[1] = {
 #include "TYPES.H"
 struct MenuFadeWidget;
 struct MenuResourceWidget;
-extern struct MenuResourceWidget *func_80419E54_de(s32, s32);
+extern struct MenuResourceWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
 #include "COMMON/SHARED_GAMESLOT.H"
 
 /* Builds the options-commit state: allocates its 0x28 bytes through Cache_AllocateMemory and keeps the
@@ -47,14 +47,14 @@ extern u8 *D_800D213C;
 extern u8 *D_auto_800D74B0;
 
 extern void *Cache_AllocateMemory(s32);
-extern struct MenuFadeWidget *func_8041A280_de(s32, s32);
+extern struct MenuFadeWidget *SmpFade_CreateFadeWidget(s32, s32);
 
 extern s32 Defs_GetMemorySize(void);
-extern MenuListWidget *func_8041ABC0_de(s32, s32);
+extern MenuListWidget *SmpButton_CreateListWidget(s32, s32);
 extern void SmpButton_AppendListText(struct MenuListWidget *, u8 *);
 extern void SmpButton_SelectListEntry(struct MenuListWidget *, s32);
-extern MenuSliderWidget *func_8041A580_de(s32, s32, s32);
-extern void func_8041A6EC_de(Scroll *, s32);
+extern MenuSliderWidget *SmpSlider_CreateSliderWidget(s32, s32, s32);
+extern void SmpSlider_SetSliderItem(Scroll *, s32);
 
 s32 Menu_CreateOptionsPage(void) {
     Shared_Game *settings;
@@ -65,22 +65,22 @@ s32 Menu_CreateOptionsPage(void) {
     void *slider;
 
     g_optionsPage = Cache_AllocateMemory(0x28);
-    g_optionsPage->menu = func_8041A280_de(0x4D, 0x4E);
-    func_8041B110_de(0x57);
-    func_8041B110_de(0x58);
-    firstList = func_8041ABC0_de(0x59, 0x5A);
+    g_optionsPage->menu = SmpFade_CreateFadeWidget(0x4D, 0x4E);
+    SmpButton_WrapButtonWidget(0x57);
+    SmpButton_WrapButtonWidget(0x58);
+    firstList = SmpButton_CreateListWidget(0x59, 0x5A);
     g_optionsPage->unk_C = firstList;
     SmpButton_AppendListText(firstList, D_800D3470_de[0]);
     SmpButton_AppendListText(g_optionsPage->unk_C, D_800D2124);
     SmpButton_AppendListText(g_optionsPage->unk_C, D_800D2128);
     settings = &D_801462C8;
     SmpButton_SelectListEntry(g_optionsPage->unk_C, settings->firstListMode);
-    secondList = func_8041ABC0_de(0x55, 0x56);
+    secondList = SmpButton_CreateListWidget(0x55, 0x56);
     g_optionsPage->unk_10 = secondList;
     SmpButton_AppendListText(secondList, D_auto_800D74AC[0]);
     SmpButton_AppendListText(g_optionsPage->unk_10, D_auto_800D74B0);
     SmpButton_SelectListEntry(g_optionsPage->unk_10, settings->unknown1F);
-    thirdList = func_8041ABC0_de(0x51, 0x52);
+    thirdList = SmpButton_CreateListWidget(0x51, 0x52);
     g_optionsPage->unk_14 = thirdList;
     SmpButton_AppendListText(thirdList, D_800D2134[0]);
     if (Defs_GetMemorySize() != 0x400000) {
@@ -88,11 +88,11 @@ s32 Menu_CreateOptionsPage(void) {
         SmpButton_AppendListText(g_optionsPage->unk_14, D_800D213C);
     }
     SmpButton_SelectListEntry(g_optionsPage->unk_14, settings->reserved580);
-    slider = func_8041A580_de(0x53, 0x54, 0x80);
+    slider = SmpSlider_CreateSliderWidget(0x53, 0x54, 0x80);
     g_optionsPage->unk_8 = slider;
-    func_8041A6EC_de(slider, settings->buttons);
-    func_8041B110_de(0x50);
-    title = func_80419E54_de(0x4F, 0x6E);
+    SmpSlider_SetSliderItem(slider, settings->buttons);
+    SmpButton_WrapButtonWidget(0x50);
+    title = SmpFlicker_CreateFlickerWidget(0x4F, 0x6E);
     g_optionsPage->state = 3;
     g_optionsPage->title = title;
     g_optionsPage->value = -1;
@@ -146,7 +146,7 @@ s32 Menu_OpenOptionsScreen(void *node) {
     D_800E4518->rightStep = D_800E4518->rightTab->width / 4;
     rem = D_800E4518->rightTab->width - D_800E4518->rightStep * 4;
     D_800E4518->rightTab->x -= rem;
-    D_800E4518->title = func_80419E54_de(0x373, 0x6E);
+    D_800E4518->title = SmpFlicker_CreateFlickerWidget(0x373, 0x6E);
     marker = Frontend_FindWidgetByResourceId(node, 0x372);
     D_800E4518->marker = marker;
     Frontend_SetWidgetFlag08(marker, 0);
@@ -162,16 +162,16 @@ s32 Menu_OpenOptionsScreen(void *node) {
     pak = Frontend_FindWidgetByResourceId(node, 0x374);
     D_800E4518->pakIcon = pak;
     Frontend_SetWidgetFlag08(pak, 0);
-    func_8041B110_de(0x377);
-    func_8041B110_de(0x37C);
-    firstListHandle = func_8041ABC0_de(0x375, 0x376);
+    SmpButton_WrapButtonWidget(0x377);
+    SmpButton_WrapButtonWidget(0x37C);
+    firstListHandle = SmpButton_CreateListWidget(0x375, 0x376);
     D_800E4518->firstList = firstListHandle;
     SmpButton_AppendListText(firstListHandle, D_800D3470_de[0]);
     SmpButton_AppendListText(D_800E4518->firstList, D_800D2124);
     SmpButton_AppendListText(D_800E4518->firstList, D_800D2128);
     settings = &D_801462C8;
     SmpButton_SelectListEntry(D_800E4518->firstList, settings->firstListMode);
-    secondListHandle = func_8041ABC0_de(0x378, 0x379);
+    secondListHandle = SmpButton_CreateListWidget(0x378, 0x379);
     D_800E4518->secondList = secondListHandle;
     SmpButton_AppendListText(secondListHandle, D_800D2134[0]);
     if (Defs_GetMemorySize() != 0x400000) {
@@ -179,10 +179,10 @@ s32 Menu_OpenOptionsScreen(void *node) {
         SmpButton_AppendListText(D_800E4518->secondList, D_800D213C);
     }
     SmpButton_SelectListEntry(D_800E4518->secondList, settings->slots[7].secondListMode);
-    slider = func_8041A580_de(0x37A, 0x37B, 0x80);
+    slider = SmpSlider_CreateSliderWidget(0x37A, 0x37B, 0x80);
     D_800E4518->slider = slider;
 
-    func_8041A6EC_de(slider, settings->buttons);
+    SmpSlider_SetSliderItem(slider, settings->buttons);
     switch (settings->controllerMode) {
     case 0:
         if (ScenarioSetup_IsCupSelected() == 0) {
@@ -205,10 +205,10 @@ s32 Menu_OpenOptionsScreen(void *node) {
         Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x37E), 1);
         break;
     }
-    func_8041B110_de(0x380);
-    func_8041B110_de(0x37D);
-    func_8041B110_de(0x37E);
-    func_8041B110_de(0x37F);
+    SmpButton_WrapButtonWidget(0x380);
+    SmpButton_WrapButtonWidget(0x37D);
+    SmpButton_WrapButtonWidget(0x37E);
+    SmpButton_WrapButtonWidget(0x37F);
     D_800E4518->state = 0;
     Tsmos_DeactivateControllerState();
     func_8043C210_de(D_800E4518, 0x67, 0, 0, 0);

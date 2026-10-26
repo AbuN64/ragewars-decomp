@@ -224,7 +224,7 @@ struct Blk {
     char p3[0xAD4];
     s32 unkB30;
     s32 unkB34;
-    Resource_func_80419E54_de *unkB38;
+    ResourceSmpFlickerCreateFlickerWidget *unkB38;
     char p4[0x64];
     s32 unkBA0;
     s32 unkBA4;

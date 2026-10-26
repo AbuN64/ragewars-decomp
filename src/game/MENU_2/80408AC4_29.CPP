@@ -113,7 +113,7 @@ void func_80426310_de(void) {
         "lhu        $v0, 0x14($a2)\n"
         "subu       $a3, $a3, $v1\n"
         "subu       $v0, $v0, $a3\n"
-        "jal        func_80419E54_de\n"
+        "jal        SmpFlicker_CreateFlickerWidget\n"
         "sh        $v0, 0x14($a2)\n"
         "addu       $a0, $s1, $zero\n"
         "lui        $v1, %hi(D_800E4690)\n"

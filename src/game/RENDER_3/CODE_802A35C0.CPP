@@ -18,7 +18,7 @@
 #include "COMMON/RESIDENTSTATE.H"
 #include "RENDER_3/RIBBON_DRAW.H"
 
-extern void *func_802A5734_de(void *arg0, s32 arg1);
+extern void *Fx_AllocateRibbonSegment(void *arg0, s32 arg1);
 
 extern void GraphU64_GetMatrixTranslation(char *object, f32 *output);
 
@@ -80,9 +80,9 @@ extern f32 Math_Sqrtf(f32);
 
 
 
-extern void func_802A5780_de(s32, State_func_802A2FA4_de *, Nodes *);
+extern void Fx_FreeRibbonSegment(s32, StateSmpUpdateRibbonLifetime *, Nodes *);
 
-extern void func_802A5FF0_de(State_func_802A2FA4_de *);
+extern void func_802A5FF0_de(StateSmpUpdateRibbonLifetime *);
 
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
@@ -95,11 +95,11 @@ extern void GraphU64_IdentityMatrix(void *);
 
 extern void GraphU64_BuildScaleMatrix(void *, f32, f32, f32);
 
-extern void func_802A31E8_de(Node438C *, Node438C *, struct GameplayCamera *, void *);
+extern void Smp_BuildRibbonSegmentMatrix(Node438C *, Node438C *, struct GameplayCamera *, void *);
 extern void GraphU64_ScaleVector(void *, void *, f32);
 extern void GraphU64_ConvertMatrixToFixed(void *, f32 *);
 
-void *func_802A25D0_de(void *arg0, void *arg1, void *local) {
+void *Smp_AppendRibbonSegment(void *arg0, void *arg1, void *local) {
     CVector3 sp10;
     f32 temp_f0;
     f32 temp_f0_2;
@@ -108,7 +108,7 @@ void *func_802A25D0_de(void *arg0, void *arg1, void *local) {
     char *var_s0;
     char *temp_s2;
 
-    temp_s2 = func_802A5734_de(arg0, (s32)arg1);
+    temp_s2 = Fx_AllocateRibbonSegment(arg0, (s32)arg1);
     var_s0 = temp_s2;
     if (temp_s2 != 0) {
         ((ObjectLinks54 *)(arg1))->unk_50 = 0;
@@ -153,7 +153,7 @@ void *func_802A25D0_de(void *arg0, void *arg1, void *local) {
     return temp_s2;
 }
 
-void func_802A274C_de(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, Morph *morph) {
+void Smp_BuildColoredRibbonVertices(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, Morph *morph) {
     f32 a[3];
     f32 b[3];
     f32 weight;
@@ -203,7 +203,7 @@ void func_802A274C_de(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, Morph *
     }
 }
 
-void func_802A2B58_de(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, f32 scale, Morph *morph) {
+void Smp_BuildTexturedRibbonVertices(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, f32 scale, Morph *morph) {
     f32 a[3];
     f32 b[3];
     f32 weight;
@@ -258,7 +258,7 @@ void func_802A2B58_de(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, f32 sca
     }
 }
 
-s32 func_802A2FA4_de(s32 owner, State_func_802A2FA4_de *state) {
+s32 Smp_UpdateRibbonLifetime(s32 owner, StateSmpUpdateRibbonLifetime *state) {
     LevelActor *object;
     Nodes *node;
     Nodes *next;
@@ -306,7 +306,7 @@ s32 func_802A2FA4_de(s32 owner, State_func_802A2FA4_de *state) {
                 updated = value - decay;
                 node->value = updated;
                 if (updated < cutoff) {
-                    func_802A5780_de(owner, state, node);
+                    Fx_FreeRibbonSegment(owner, state, node);
                 }
             } else {
                 updated = value - D_800D2988;
@@ -338,7 +338,7 @@ s32 func_802A2FA4_de(s32 owner, State_func_802A2FA4_de *state) {
     return 1;
 }
 
-void func_802A31E8_de(Node438C *arg0, Node438C *arg1, GameplayCamera *camera, void *matrix) {
+void Smp_BuildRibbonSegmentMatrix(Node438C *arg0, Node438C *arg1, GameplayCamera *camera, void *matrix) {
     f32 setup[4];
     CVector3 first;
     CVector3 basis;
@@ -384,7 +384,7 @@ void func_802A31E8_de(Node438C *arg0, Node438C *arg1, GameplayCamera *camera, vo
 
 struct GameplayCamera;
 
-void func_802A339C_de(void *arg0, void *camera) {
+void Smp_UpdateRibbonMatrices(void *arg0, void *camera) {
     f32 matrix[16];
     Node438C *first;
     Node438C *next;
@@ -432,7 +432,7 @@ z_test:
         goto z_test;
 boundary:
         if (a != 0 && b != 0) {
-            func_802A31E8_de(a, b, camera, matrix);
+            Smp_BuildRibbonSegmentMatrix(a, b, camera, matrix);
             goto apply;
         }
 no_pair:
@@ -540,11 +540,11 @@ void func_80295FB4_us_rev1(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
 void Cache_UnlockResource(s32, void *);
-s32 func_802A4134_de(AnimationFrameState *state, AnimationFrameDefinition *definition, s32 *frame_count);
+s32 Fx_SelectAnimationFrame(AnimationFrameState *state, AnimationFrameDefinition *definition, s32 *frame_count);
 /* Draws a textured ribbon: spaces the texture along the tail by length, picks the animation frame, sets the
  * combiner and colours (greyscale on a monochrome camera), then emits two vertex rows per clock node and the
  * triangle strip between them. */
-void func_802A3718_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *camera) {
+void Smp_DrawTexturedRibbon(VertexArena *pool, RibbonActor *actor, GameplayCamera *camera) {
     struct Shared_AnimInfo info;
     Morph storage;
     struct Shared_AnimInfo *anim;
@@ -607,7 +607,7 @@ void func_802A3718_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *cam
     clock = actor->clock;
     count = track->count;
     next = clock->next;
-    frame = func_802A4134_de((AnimationFrameState *)actor, (AnimationFrameDefinition *)track, &info.count);
+    frame = Fx_SelectAnimationFrame((AnimationFrameState *)actor, (AnimationFrameDefinition *)track, &info.count);
 #if defined(VERSION_US_REV1)
     func_80295FB4_us_rev1(&actor->model, model, frame, 0, 0xFFFF, 0xFFFF, 0, 0, 0);
 #else
@@ -617,17 +617,17 @@ void func_802A3718_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *cam
     gSPMatrix(g_displayListCursor++, &clock->matrix[D_800D297C], G_MTX_LOAD);
     while (clock != 0 && next != 0 && 0.0f < clock->unk8 && 0.0f < next->unk8 && used + count * 2 < 32) {
         f32 scale;
-        vertices = func_802A56C4_de(pool, count);
+        vertices = Fx_AllocateRibbonVertices(pool, count);
         if (vertices == 0) break;
-        func_802A2B58_de(actor, clock, vertices, clock->offset, &storage);
+        Smp_BuildTexturedRibbonVertices(actor, clock, vertices, clock->offset, &storage);
         used += count;
         gSPVertex(g_displayListCursor++, vertices, count, 0);
         gSPMatrix(g_displayListCursor++, &next->matrix[D_800D297C], G_MTX_LOAD);
-        vertices = func_802A56C4_de(pool, count);
+        vertices = Fx_AllocateRibbonVertices(pool, count);
         if (vertices == 0) break;
         scale = next->offset;
         while (clock->offset < scale) scale -= period;
-        func_802A2B58_de(actor, next, vertices, scale, &storage);
+        Smp_BuildTexturedRibbonVertices(actor, next, vertices, scale, &storage);
         used += count;
         gSPVertex(g_displayListCursor++, vertices, count, count);
         for (i = 0; i < edges; i++) {

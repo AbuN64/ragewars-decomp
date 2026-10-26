@@ -46,7 +46,7 @@ extern s32 Pak_CheckStatusPrompt(void *menu, s32 channel, s32 quiet);
 
 #include "COMMON/GAME_SESSION.H"
 
-extern void func_80293268_de(void *arg0);
+extern void SetN64_CommitSessionInputs(void *arg0);
 
 
 /* Calls func_80264788_de on its second argument, then func_8044D528_de on D_8011FE88 with D_8013B2C8
@@ -105,7 +105,7 @@ s32 Pak_LatchControllerRequest(struct RecordRecAt20V1 *record) {
 
 s32 Pak_UpdateManagerStatus(void *menu) {
     if (D_80146D60 == 0) {
-        func_80293268_de(&D_8011FAC0);
+        SetN64_CommitSessionInputs(&D_8011FAC0);
         Control_TrackControllerPakChanges();
         if (D_80146D60 == 0) {
             if (D_8014AD9C != 0) {

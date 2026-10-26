@@ -2,7 +2,7 @@
 #define SYSTEM_3_802A6AC0_H
 #include "COMMON/OBJRECAT18V6.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct State_func_8042D8C4_de {
+struct StateFrontendScrollResultsBackward {
     char pad[0xE8];
     s32 count;
 };

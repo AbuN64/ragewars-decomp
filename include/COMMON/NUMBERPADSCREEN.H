@@ -27,12 +27,12 @@ typedef struct NumberPadScreen NumberPadScreen;
 extern void Menu_OpenOptionsKeypad();
 
 struct Meter;
-struct Resource_func_80419E54_de;
+struct ResourceSmpFlickerCreateFlickerWidget;
 struct Meter {
     s32 amount;
     s32 done;
     s32 falling;
-    struct Resource_func_80419E54_de *bar;
+    struct ResourceSmpFlickerCreateFlickerWidget *bar;
 };
 
 struct Meter;

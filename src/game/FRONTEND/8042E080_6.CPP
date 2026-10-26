@@ -13,10 +13,10 @@
 extern void func_80298368_de(s32);
 extern void MarkMenuEventHandled(void);
 extern void Tsmos_ActivateControllerState(void);
-extern void func_80419F24_de(void *);
+extern void SmpFlicker_RestoreFlickerValue(void *);
 extern void SmpFlicker_StartFlicker(void *, s32);
 
-extern s32 func_80419F38_de(void *);
+extern s32 SmpFlicker_IsFlickerIdle(void *);
 s32 func_8042F91C_de(s32 unused0, s32 unused1, s32 arg2) {
     s32 readyState;
     s32 openFramesLeft;
@@ -67,8 +67,8 @@ s32 func_8042F91C_de(s32 unused0, s32 unused1, s32 arg2) {
             break;
         case 4:
             D_800E54A4->timer = RW_CLAMP(D_800E54A4->timer - 1, 0, D_800E54A4->timer);
-            if ((D_800E54A4->timer <= 0) && (func_80419F38_de(D_800E54A4->music) != 0)) {
-                func_80419F24_de(D_800E54A4->music);
+            if ((D_800E54A4->timer <= 0) && (SmpFlicker_IsFlickerIdle(D_800E54A4->music) != 0)) {
+                SmpFlicker_RestoreFlickerValue(D_800E54A4->music);
                 D_800E54A4->ready = 3;
             }
             break;

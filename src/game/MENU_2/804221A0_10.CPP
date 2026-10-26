@@ -47,7 +47,7 @@ extern void Menu_ReleaseOptionsScene(void);
 extern void func_8042DEA0_de(void);
 
 /* Unless func_8043C308_de reports one for the object D_800E44A0 holds, calls Tsmos_ActivateControllerState and, when
-   the object's word at 0x20 is one, calls Tsmos_DeactivateControllerState, then func_80245B28_de and func_8042B2E4_de unless
+   the object's word at 0x20 is one, calls Tsmos_DeactivateControllerState, then func_80245B28_de and ScenarioSetup_ResetSelectionIndicators unless
    the option byte D_801462D5 is set, and finally resets the object through func_8043C278_de. Returns
    zero. */
 
@@ -61,7 +61,7 @@ extern void Tsmos_DeactivateControllerState();
 
 extern void Cinema_ReleaseSequenceContext();
 
-extern void func_8042B2E4_de();
+extern void ScenarioSetup_ResetSelectionIndicators();
 
 extern void func_8043C278_de(s32 *record);
 
@@ -131,7 +131,7 @@ s32 Menu_StartOptionsImageTransition(void) {
     Tsmos_DeactivateControllerState();
     if (D_801462C8.controllerMode == 0) {
         Cinema_ReleaseSequenceContext();
-        func_8042B2E4_de();
+        ScenarioSetup_ResetSelectionIndicators();
     }
     func_8043C278_de(D_800E44A0);
     return 0;

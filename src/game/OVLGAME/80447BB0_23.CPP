@@ -393,7 +393,7 @@ extern unsigned int D_800CD730;
 extern void func_8022B510_de(struct RespawnPlayer *);
 extern void Control_SetProfileMode(void *, int);
 extern void Player_InitializePlayerHealth(struct RespawnPlayer *);
-extern int func_802934F8_de(void);
+extern int SetN64_IsModeThirteen(void);
 
 extern void Player_ResetPlayerWeapons(struct RespawnPlayer *);
 extern void Nav_ResetPlayerState(void *);
@@ -436,7 +436,7 @@ void Ovlgame_ResetRespawnedPlayer(struct RespawnPlayer *player) {
     player->field13DC = 0;
     player->field13E4 = 0;
     player->field13D4 = 0;
-    if (func_802934F8_de() != 0 && D_80145088.settings.local == 0 && D_800CD730 > 10 && player->state < 11) {
+    if (SetN64_IsModeThirteen() != 0 && D_80145088.settings.local == 0 && D_800CD730 > 10 && player->state < 11) {
         func_8025E11C_de(D_800CF198[player->state]);
     }
     if (isOnline()) {

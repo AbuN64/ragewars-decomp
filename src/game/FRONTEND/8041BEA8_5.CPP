@@ -126,7 +126,7 @@ extern void SmpOverlay_RefreshPakDialog(void);
 extern void Frontend_RequestScreenMode(s32);
 
 
-extern void func_80293334_de(void *, s32, s32);
+extern void SetN64_ResetSessionPlayerPools(void *, s32, s32);
 
 extern void Scene_LoadLevelResources(void *, s32, s32);
 
@@ -373,7 +373,7 @@ s32 func_8041C2AC_de(void *parent) {
     D_800E28C8 = -1;
     D_80146D70 = 0;
     resources = (char *)&D_8011FAC0;
-    func_80293334_de(resources, 0, 0);
+    SetN64_ResetSessionPlayerPools(resources, 0, 0);
     Scene_LoadLevelResources(resources + 0x3C8, 0, 0);
     D_800E3518->ready = 0;
     return 0;

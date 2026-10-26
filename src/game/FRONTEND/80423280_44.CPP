@@ -10,8 +10,8 @@
 
 
 s32 Frontend_ClearLoadingHints(void) {
-    func_8041B110_de(0x1D9);
-    func_8041B110_de(0x1DA);
+    SmpButton_WrapButtonWidget(0x1D9);
+    SmpButton_WrapButtonWidget(0x1DA);
     return 0;
 }
 #endif

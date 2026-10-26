@@ -31,13 +31,13 @@ extern s32 D_80154020[2];
 extern void func_8025E384_de(void);
 
 extern void Frontend_SetWidgetFlag100(MenuWidget *, s32);
-extern void func_8041B110_de(s32);
-extern MenuListWidget *func_8041ABC0_de(s32, s32);
+extern void SmpButton_WrapButtonWidget(s32);
+extern MenuListWidget *SmpButton_CreateListWidget(s32, s32);
 extern void SmpButton_AppendListText(MenuListWidget *, char *);
 extern void SmpButton_SelectListEntry(MenuListWidget *, s32);
 extern s32 Defs_GetMemorySize(void);
-extern s32 func_8041A580_de(s32, s32, s32);
-extern void func_8041A6EC_de(s32, s32);
+extern s32 SmpSlider_CreateSliderWidget(s32, s32, s32);
+extern void SmpSlider_SetSliderItem(s32, s32);
 extern s32 ScenarioSetup_IsCupSelected(void);
 extern void func_8043C210_de(Shared_OptionsScreen *, s32, s32, s32, s32);
 extern void func_8043C278_de(Shared_OptionsScreen *);
@@ -73,7 +73,7 @@ s32 func_804224E0_de(void *node) {
     D_800E4518->rightStep = D_800E4518->rightTab->width / 4;
     rem = D_800E4518->rightTab->width - D_800E4518->rightStep * 4;
     D_800E4518->rightTab->x -= rem;
-    D_800E4518->title = func_80419E54_de(0x36f, 0x6E);
+    D_800E4518->title = SmpFlicker_CreateFlickerWidget(0x36f, 0x6E);
     marker = Frontend_FindWidgetByResourceId(node, 0x36e);
     D_800E4518->marker = marker;
     Frontend_SetWidgetFlag08(marker, 0);
@@ -89,10 +89,10 @@ s32 func_804224E0_de(void *node) {
     pak = Frontend_FindWidgetByResourceId(node, 0x370);
     D_800E4518->pakIcon = pak;
     Frontend_SetWidgetFlag08(pak, 0);
-    func_8041B110_de(0x379);
-    func_8041B110_de(0x37a);
+    SmpButton_WrapButtonWidget(0x379);
+    SmpButton_WrapButtonWidget(0x37a);
     settings = &D_801462C8;
-    secondListHandle = func_8041ABC0_de(0x377, 0x378);
+    secondListHandle = SmpButton_CreateListWidget(0x377, 0x378);
     D_800E4518->secondList = secondListHandle;
     SmpButton_AppendListText(secondListHandle, D_auto_800D3488);
     if (Defs_GetMemorySize() != 0x400000) {
@@ -100,10 +100,10 @@ s32 func_804224E0_de(void *node) {
         SmpButton_AppendListText(D_800E4518->secondList, D_auto_800D3490);
     }
     SmpButton_SelectListEntry(D_800E4518->secondList, settings->slots[7].secondListMode);
-    slider = func_8041A580_de(0x371, 0x372, 0x80);
+    slider = SmpSlider_CreateSliderWidget(0x371, 0x372, 0x80);
     D_800E4518->slider = slider;
 
-    func_8041A6EC_de(slider, settings->buttons);
+    SmpSlider_SetSliderItem(slider, settings->buttons);
     switch (settings->controllerMode) {
     case 0:
         if (ScenarioSetup_IsCupSelected() == 0) {
@@ -126,10 +126,10 @@ s32 func_804224E0_de(void *node) {
         Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(node, 0x374), 1);
         break;
     }
-    func_8041B110_de(0x376);
-    func_8041B110_de(0x373);
-    func_8041B110_de(0x374);
-    func_8041B110_de(0x375);
+    SmpButton_WrapButtonWidget(0x376);
+    SmpButton_WrapButtonWidget(0x373);
+    SmpButton_WrapButtonWidget(0x374);
+    SmpButton_WrapButtonWidget(0x375);
     D_800E4518->state = 0;
     Tsmos_DeactivateControllerState();
     func_8043C210_de(D_800E4518, 0x67, 0, 0, 0);

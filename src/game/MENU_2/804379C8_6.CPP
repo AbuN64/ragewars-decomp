@@ -24,9 +24,9 @@ extern struct SoundOptionsScreen *D_800E58A0;
 
 
 
-extern s32 func_8041A470_de(void *);
+extern s32 SmpSlider_GetTransitionMode(void *);
 
-extern s32 func_8041A6E0_de(void *);
+extern s32 SmpSlider_GetSliderItem(void *);
 
 extern void MarkMenuEventHandled();
 
@@ -36,7 +36,7 @@ extern void func_80298368_de(s32);
 
 
 /* Calls MarkMenuEventHandled; when func_80299A08_de reports 0x73, sets the word at offset 0x14 of the object
-   D_800E58A0 points to to -1 and calls func_8041A430_de on its first word with 2. Returns zero. */
+   D_800E58A0 points to to -1 and calls SmpSlider_SetTransitionMode on its first word with 2. Returns zero. */
 
 
 s32 func_80438FE0_de(void) {
@@ -56,7 +56,7 @@ s32 func_80439018_de(void) {
     s32 value;
     s32 track;
 
-    switch (func_8041A470_de(D_800E58A0->menu)) {
+    switch (SmpSlider_GetTransitionMode(D_800E58A0->menu)) {
     case 3:
         break;
     case 4:
@@ -68,13 +68,13 @@ s32 func_80439018_de(void) {
         func_802998A8_de();
         return 0;
     }
-    value = func_8041A6E0_de(D_800E58A0->effects);
+    value = SmpSlider_GetSliderItem(D_800E58A0->effects);
     options = &D_801462C8.volume[1];
     if (value != options[0]) {
         options[0] = value;
         SoundElement_PlayFlatSound(0x460);
     }
-    value = func_8041A6E0_de(D_800E58A0->music);
+    value = SmpSlider_GetSliderItem(D_800E58A0->music);
     if (value != options[-1]) {
         options[-1] = value;
         track = 0;
@@ -101,7 +101,7 @@ s32 func_80439128_de(void) {
 #endif
         state = D_800E58A0;
         state->target = -1;
-        func_8041A430_de((s32)state->menu, 2);
+        SmpSlider_SetTransitionMode((s32)state->menu, 2);
     }
     return 0;
 }

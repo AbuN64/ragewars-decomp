@@ -7,7 +7,7 @@
 #include "MENU/GFX/804143E0.H"
 #include "RESMGR/resmgr_stream_io.H"
 
-void func_80414360_de(void) {
+void Gfx_InitializeFrontendServices(void) {
     XStdio_InitializeStreams();
     XMath_InitializeMath();
 }
@@ -20,7 +20,7 @@ void func_80414360_de(void) {
 
 
 
-void func_80414384_de(void) {
+void Gfx_ShutdownFrontendServices(void) {
 #if defined(VERSION_US)
     
 #if defined(VERSION_US)

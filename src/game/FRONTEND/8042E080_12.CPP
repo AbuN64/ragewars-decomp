@@ -10,7 +10,7 @@
 
 
 
-extern Resource_func_80419E54_de *SmpOverlay_GetSlotValue(s32, s32);
+extern ResourceSmpFlickerCreateFlickerWidget *SmpOverlay_GetSlotValue(s32, s32);
 extern void func_80434E34_de(s32);
 extern void func_80434EF4_de(s32);
 
@@ -22,7 +22,7 @@ void func_80433398_de(s32 arg0) {
     s32 temp_v1;
     s32 temp_v1_2;
     s32 temp_idx;
-    Resource_func_80419E54_de *temp_s0;
+    ResourceSmpFlickerCreateFlickerWidget *temp_s0;
     s32 player;
     Blk *temp_a0;
     Blk *temp_a0_2;

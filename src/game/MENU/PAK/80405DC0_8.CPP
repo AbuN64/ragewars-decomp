@@ -18,7 +18,7 @@
 #endif
 /* Selects a usable Controller Pak, checks its notes and free space, and opens the appropriate prompt. */
 s32 Control_AnyControllerConnected(void);
-void func_80293268_de(s32);
+void SetN64_CommitSessionInputs(s32);
 void Pak_ProbeStatus(s32);
 s32 Pak_GetStatus(s32);
 s32 Pak_CountFreeNotes(s32, s32 *);
@@ -148,7 +148,7 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
     }
     error = func_80405598_de(D_800E28C8);
     if (error == 0) {
-        func_80293268_de((s32) &D_8011FAC0);
+        SetN64_CommitSessionInputs((s32) &D_8011FAC0);
         if ((menu->slot->unkB0 & 0x1000) && (D_800E28CC == 0)) {
             D_80146D60 = 1;
             D_800E28CC = 1;

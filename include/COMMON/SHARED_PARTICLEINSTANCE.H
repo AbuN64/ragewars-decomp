@@ -24,12 +24,12 @@ struct Shared_ParticleInstance {
 };
 
 
-struct Actor_func_8027B428_de;
-typedef struct Actor_func_8027B428_de Actor_func_8027B428_de;
+struct ActorParticleDispatchOwnerContactLinks;
+typedef struct ActorParticleDispatchOwnerContactLinks ActorParticleDispatchOwnerContactLinks;
 
-struct Actor_func_8027B428_de;
+struct ActorParticleDispatchOwnerContactLinks;
 struct Shape_func_8021A2D4_de_2;
-struct Actor_func_8027B428_de {
+struct ActorParticleDispatchOwnerContactLinks {
     char pad0[4];
     u16 type;
     char pad6[0x12];

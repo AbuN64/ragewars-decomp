@@ -8,7 +8,7 @@ extern void *SmpOverlay_CreateOverlayNode(s32, s32);
 extern void SmpOverlay_ShowSlotById(s32, s32, s32);
 extern void SmpOverlay_SetObjectValue(void *, s32);
 extern u8 *Frontend_FindWidgetByResourceId(s32, s32);
-extern void *func_80419E54_de(s32, s32);
+extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void Frontend_AdvanceActiveSlot(void *);
 extern void Frontend_RefreshProfileStatistics(void);
@@ -42,7 +42,7 @@ s32 Frontend_OpenFourSlotSelection(s32 owner) {
     w = (u8 *)ST_W(0xD0);
     UHW(w, 0x14) = UHW(w, 0x14) - (HW(w, 0x18) - ST_W(0xD4) * 4);
     Frontend_FindWidgetByResourceId(owner, 0x1E4)[0x10] = 0x6E;
-    w = (u8 *)func_80419E54_de(0x1E2, 0xFF);
+    w = (u8 *)SmpFlicker_CreateFlickerWidget(0x1E2, 0xFF);
     ST_W(0xE0) = (s32)w;
     w = Frontend_FindWidgetByResourceId(owner, 0x1E2);
     ST_W(0xE4) = (s32)w;

@@ -40,13 +40,13 @@ extern void Tsmos_DeactivateControllerState();
 extern void func_80298368_de(s32);
 
 /* Clears the words at offsets 0x78 and 0x54 of D_801468A0, then calls func_80298368_de with 0x14
-   unless func_8042AF28_de and func_8042ACD8_de both report something, in which case it calls
+   unless func_8042AF28_de and ScenarioSetup_StartRandomCupStage both report something, in which case it calls
    func_8042DEA0_de. */
 
 
 
 
-extern s32 func_8042ACD8_de();
+extern s32 ScenarioSetup_StartRandomCupStage();
 
 extern void func_8042DEA0_de();
 
@@ -126,10 +126,10 @@ enum { ITEM0 = 621, ITEM1 = 620, ITEM2 = 619, ITEM3 = 618 };
 
 
 /* Handles event 1 on the screen D_800E53C0: unless func_8043C308_de reports its menu in state 1 it
-   calls func_8042D28C_de; otherwise it advances the menu with Frontend_DrawMenuImage and func_8043C2A4_de and,
+   calls Frontend_DrawResultSelectionPreview; otherwise it advances the menu with Frontend_DrawMenuImage and func_8043C2A4_de and,
    once func_8043C308_de reports 2, acts on the choice at 0x1C: choice 0 hides the window argument,
    calls MarkMenuEventHandled, clears D_80146918 and D_801468F4 and leaves for screen 0xF when option
-   D_801462D5 is set, otherwise through func_8042DEA0_de when func_8042AF28_de and func_8042ACD8_de both
+   D_801462D5 is set, otherwise through func_8042DEA0_de when func_8042AF28_de and ScenarioSetup_StartRandomCupStage both
    agree or for screen 0x14; choice 1 calls func_8040C428_de(0), shows the window, stops the objects
    at D_80145088 and 0x48 before it, releases D_8011FE88 through Scene_LoadLevelResources and sets the word at
    0x17F0 of D_80145088 to 8. Returns zero. */
@@ -186,7 +186,7 @@ enum { CONFIRM_MESSAGE = 0x23D, FALLBACK_MESSAGE = 0x23C };
 enum { CONFIRM_MESSAGE = 0x238, FALLBACK_MESSAGE = 0x237 };
 #endif
 
-void func_8042CFB0_de(void) {
+void Frontend_InitMatchResultsMenu(void) {
     
 #if defined(VERSION_EU)
 Tsmos_InitializeEuropeanFrontend
@@ -202,19 +202,19 @@ func_802A2224_de
     func_80298368_de(0x11);
 }
 
-void func_8042CFDC_de(void) {
+void Frontend_ContinueCupOrOpenResults(void) {
     CGameStatus *state = &D_801462C8.counters;
 
     state->m_bCTFOn = 0;
     state->m_bFragTagOn = 0;
-    if (ScenarioSetup_IsCupSelected() == 0 || func_8042ACD8_de() == 0) {
+    if (ScenarioSetup_IsCupSelected() == 0 || ScenarioSetup_StartRandomCupStage() == 0) {
         func_80298368_de(0x14);
     } else {
         func_8042DEA0_de();
     }
 }
 
-void func_8042D034_de(void) {
+void Frontend_OpenControllerModeResults(void) {
     CGameStatus *state = &D_801462C8.counters;
 
     state->m_bCTFOn = 0;
@@ -246,7 +246,7 @@ s32 Frontend_GetMatchEndReason(void) {
     return D_8014561C.rules.lastStanding == 1;
 }
 
-void func_8042D118_de(void)
+void Frontend_AwardResultAchievements(void)
 {
   s32 i;
   MatchScoreScreen *obj;
@@ -274,7 +274,7 @@ void func_8042D118_de(void)
 
 }
 
-void func_8042D1C8_de(void) {
+void Frontend_AwardResultMilestones(void) {
     s32 id;
     s32 i;
     Shared_Rec3 *record;
@@ -294,7 +294,7 @@ void func_8042D1C8_de(void) {
     }
 }
 
-void func_8042D28C_de(void) {
+void Frontend_DrawResultSelectionPreview(void) {
     MatchScoreScreen *state = D_800E53C0;
     f32 *level;
 
@@ -312,7 +312,7 @@ void func_8042D28C_de(void) {
     }
 }
 
-void func_8042D304_de(s32 player, s32 kind, unsigned short group) {
+void Frontend_ShowResultRankBadge(s32 player, s32 kind, unsigned short group) {
     MenuWidget *item;
     MenuWidget *parent;
     Shared_Rec3 *record;
@@ -388,7 +388,7 @@ void func_8042D304_de(s32 player, s32 kind, unsigned short group) {
     item->value = frame;
 }
 
-void func_8042D418_de(s32 arg0) {
+void Frontend_HideResultBadgeGroup(s32 arg0) {
     MenuWidget *root;
     s32 var_a1;
     s32 var_s0;
@@ -408,13 +408,13 @@ void func_8042D418_de(s32 arg0) {
     } while (var_s0 < 4);
 }
 
-s32 func_8042D4CC_de(void) {
+s32 Frontend_DestroyMatchResults(void) {
     Cache_FreeMemory(D_800E53C0);
     D_800E53C0 = 0;
     return 0;
 }
 
-s32 func_8042D4FC_de(void *window, void *unused1, s32 event) {
+s32 Frontend_UpdateMatchResultsTransition(void *window, void *unused1, s32 event) {
     s32 state;
     char *object;
     s32 next;
@@ -446,7 +446,7 @@ s32 func_8042D4FC_de(void *window, void *unused1, s32 event) {
             if (D_801462C8.controllerMode == 0) {
                 D_80146918 = 0;
                 D_801468F4 = 0;
-                if (ScenarioSetup_IsCupSelected() != 0 && func_8042ACD8_de() != 0) {
+                if (ScenarioSetup_IsCupSelected() != 0 && ScenarioSetup_StartRandomCupStage() != 0) {
                     func_8042DEA0_de();
                     return 0;
                 }
@@ -460,12 +460,12 @@ s32 func_8042D4FC_de(void *window, void *unused1, s32 event) {
             return 0;
         }
     } else {
-        func_8042D28C_de();
+        Frontend_DrawResultSelectionPreview();
     }
     return 0;
 }
 
-s32 func_8042D690_de(s32 context) {
+s32 Frontend_HandleResultsConfirmation(s32 context) {
     s32 *choice;
     s32 taken;
     s32 message;

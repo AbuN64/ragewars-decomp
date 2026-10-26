@@ -11,9 +11,9 @@
 extern MenuListScreen *D_800E5694;
 extern MenuListScreen *Cache_AllocateMemory(s32);
 
-extern void *func_8041ABC0_de(s32, s32);
+extern void *SmpButton_CreateListWidget(s32, s32);
 extern void SmpButton_AppendListText(void *, s32);
-extern void *func_8041A580_de(s32, s32, s32);
+extern void *SmpSlider_CreateSliderWidget(s32, s32, s32);
 extern void *Frontend_FindWidgetByResourceId(void *, s32);
 
 #if defined(VERSION_DE)
@@ -26,23 +26,23 @@ s32 Menu_BuildItemLabelList(void *parent) {
     void *list;
 
     D_800E5694 = Cache_AllocateMemory(0x50);
-    func_8041B110_de(MENU_80437074_454);
-    list = func_8041ABC0_de(MENU_80437074_457, MENU_80437074_458);
+    SmpButton_WrapButtonWidget(MENU_80437074_454);
+    list = SmpButton_CreateListWidget(MENU_80437074_457, MENU_80437074_458);
     D_800E5694->listA = list;
     SmpButton_AppendListText(list, D_800D34A4[0]);
     SmpButton_AppendListText(D_800E5694->listA, D_800D34B0[0]);
-    list = func_8041ABC0_de(MENU_80437074_465, MENU_80437074_466);
+    list = SmpButton_CreateListWidget(MENU_80437074_465, MENU_80437074_466);
     D_800E5694->listB = list;
     SmpButton_AppendListText(list, D_800D3470_de[0]);
     SmpButton_AppendListText(D_800E5694->listB, D_800D3474[0]);
-    D_800E5694->panels[0] = func_8041A580_de(MENU_80437074_463, MENU_80437074_464, 0xFF);
-    D_800E5694->panels[1] = func_8041A580_de(MENU_80437074_461, MENU_80437074_462, 0xFF);
-    list = func_8041ABC0_de(MENU_80437074_459, MENU_80437074_460);
+    D_800E5694->panels[0] = SmpSlider_CreateSliderWidget(MENU_80437074_463, MENU_80437074_464, 0xFF);
+    D_800E5694->panels[1] = SmpSlider_CreateSliderWidget(MENU_80437074_461, MENU_80437074_462, 0xFF);
+    list = SmpButton_CreateListWidget(MENU_80437074_459, MENU_80437074_460);
     D_800E5694->listC = list;
     SmpButton_AppendListText(list, D_800D34B4[0]);
     SmpButton_AppendListText(D_800E5694->listC, D_800D34B8[0]);
     SmpButton_AppendListText(D_800E5694->listC, D_800D34BC[0]);
-    func_8041B110_de(MENU_80437074_456);
+    SmpButton_WrapButtonWidget(MENU_80437074_456);
     D_800E5694->window = Frontend_FindWidgetByResourceId(parent, MENU_80437074_455);
     D_800E5694->selection = 0;
     func_804368F8_de(0);

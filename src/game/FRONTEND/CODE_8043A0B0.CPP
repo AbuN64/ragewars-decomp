@@ -21,13 +21,13 @@ extern void SmpOverlay_ShowSlotById(void *, s32, s32);
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern s32 Frontend_FindKeyIndex(s32);
-extern void *func_80419E54_de(s32, s32);
+extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern void func_8043B96C_de(void);
 extern void func_8043B0CC_de(s32);
 extern void Tsmos_DeactivateControllerState(void);
 extern struct StateFlags D_800E5A06[][19];
-extern s32 func_80419F38_de(void *);
-extern void func_80419F24_de(void *);
+extern s32 SmpFlicker_IsFlickerIdle(void *);
+extern void SmpFlicker_RestoreFlickerValue(void *);
 extern void SmpFlicker_StartFlicker(void *, int);
 extern void func_80298368_de(s32);
 extern void Tsmos_ActivateControllerState(void);
@@ -96,7 +96,7 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
     delta = D_800E59E0->rightArrow->width - D_800E59E0->rightStep * 4;
     D_800E59E0->rightArrow->x = (u16)D_800E59E0->rightArrow->x - delta;
     Frontend_FindWidgetByResourceId(window, titleResource)->alpha = 0x6E;
-    D_800E59E0->resource = func_80419E54_de(messageResource, 0xFF);
+    D_800E59E0->resource = SmpFlicker_CreateFlickerWidget(messageResource, 0xFF);
     widget = Frontend_FindWidgetByResourceId(window, messageResource);
     D_800E59E0->message = widget;
     Frontend_SetWidgetFlag08(widget, 0);
@@ -259,8 +259,8 @@ s32 Frontend_UpdateFourPlayerResults(void) {
         }
         screen->timer = left;
         if (D_800E59E0->timer <= 0) {
-            if (func_80419F38_de(D_800E59E0->resource)) {
-                func_80419F24_de(D_800E59E0->resource);
+            if (SmpFlicker_IsFlickerIdle(D_800E59E0->resource)) {
+                SmpFlicker_RestoreFlickerValue(D_800E59E0->resource);
                 D_800E59E0->state = 3;
             }
         }

@@ -11,7 +11,7 @@ extern int D_800CD774;
 struct GameSession;
 #include "COMMON/GAME_SESSION.H"
 
-extern void func_80293CE4_de(GameSession *session);
+extern void SetN64_DrawSessionWithRoundTimeout(GameSession *session);
 
 
 struct IntegerStateB0;

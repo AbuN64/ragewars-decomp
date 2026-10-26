@@ -14,7 +14,7 @@ extern s32 D_800E51F8[];
 extern s32 D_800E5214[];
 extern s32 D_800E5240[];
 extern s32 D_800E0F20[];
-s32 func_8042B1B8_de(s32 arg0, s32 arg1) {
+s32 ScenarioSetup_ResolveArenaFromSelection(s32 arg0, s32 arg1) {
     s32 result = 0;
     s32 *table;
     s32 key;
@@ -73,14 +73,14 @@ s32 ScenarioSetup_CategoryToList(s32 category) {
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */
-s32 func_8042B2DC_de(void) {
+s32 ScenarioSetup_ReturnSetupEventZero(void) {
     return 0;
 }
 
 #include "COMMON/CONTROL.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 
-void func_8042B2E4_de(void) {
+void ScenarioSetup_ResetSelectionIndicators(void) {
     D_800E4F60->unk454->alpha = 0xFF;
     D_800E4F60->unk450->alpha = 0xFF;
     Frontend_SetWidgetFlag08(D_800E4F60->unk450, 1);
@@ -113,11 +113,11 @@ s32 ScenarioSetup_CloseSetupScreen(void) {
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */
-s32 func_8042B3D4_de(void) {
+s32 ScenarioSetup_ReturnSetupEventZeroAlt(void) {
     return 0;
 }
 
-extern void func_8042A7B4_de(s32);
+extern void ScenarioSetup_SetCatalogueAlpha(s32);
 
 /** Begin setup confirmation when the pending state and input event permit it. */
 s32 ScenarioSetup_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
@@ -139,7 +139,7 @@ s32 ScenarioSetup_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
 
     MarkMenuEventHandled();
     D_800E4F60->unk3DC = 8;
-    func_8042A7B4_de(0x41);
+    ScenarioSetup_SetCatalogueAlpha(0x41);
 
     Frontend_SetWidgetFlag08(D_800E4F60->unk440, 0);
     Frontend_SetWidgetFlag08(D_800E4F60->unk444, 0);
@@ -156,8 +156,8 @@ s32 ScenarioSetup_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
 
 extern void MarkMenuEventHandled();
 extern void func_80439C80_de(void *, s32);
-#define SCR4D4 ((struct Screen_func_8042B4D4_de *)D_800E4F60)
-s32 func_8042B4D4_de(void *unused0, void *unused1, void *unused2, s32 event) {
+#define SCR4D4 ((struct ScreenScenarioSetupSelectPreviousCatalogueItem *)D_800E4F60)
+s32 ScenarioSetup_SelectPreviousCatalogueItem(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 changed;
 
     MarkMenuEventHandled();
@@ -171,7 +171,7 @@ s32 func_8042B4D4_de(void *unused0, void *unused1, void *unused2, s32 event) {
             SCR4D4->selection = SCR4D4->selection - 1;
         }
     } else if (SCR4D4->selection >= 11) {
-        s32 next = func_8042B154_de(ScenarioSetup_CategoryToList(0));
+        s32 next = ScenarioSetup_GetCategoryEntryCount(ScenarioSetup_CategoryToList(0));
         if (SCR4D4->selection + 1 < next) {
             changed = 1;
             SCR4D4->selection = SCR4D4->selection + 1;
@@ -184,11 +184,11 @@ s32 func_8042B4D4_de(void *unused0, void *unused1, void *unused2, s32 event) {
         return 0;
     }
     SoundElement_PlayFlatSound(0xE7D);
-    func_8042B2E4_de();
+    ScenarioSetup_ResetSelectionIndicators();
     SCR4D4->word45C = 0;
     SCR4D4->word464 = 0;
     SCR4D4->item->alpha = 0x41;
-    func_8042A990_de();
+    ScenarioSetup_RefreshSelectedArenaLabel();
     if (SCR4D4->selection != 0) {
         return 0;
     }
@@ -201,8 +201,8 @@ s32 func_8042B4D4_de(void *unused0, void *unused1, void *unused2, s32 event) {
 }
 #undef SCR4D4
 
-extern s32 func_8042B154_de(s32 index);
-extern void func_8042B2E4_de(void);
+extern s32 ScenarioSetup_GetCategoryEntryCount(s32 index);
+extern void ScenarioSetup_ResetSelectionIndicators(void);
 
 /** Select the next setup item, reversing the displayed order on the second page. */
 s32 ScenarioSetup_SelectNextSetupItem(void *unused0, void *unused1, void *unused2, s32 event) {
@@ -217,7 +217,7 @@ s32 ScenarioSetup_SelectNextSetupItem(void *unused0, void *unused1, void *unused
         return 0;
     }
     changed = 0;
-    count = func_8042B154_de(ScenarioSetup_CategoryToList(D_800E4F60->category));
+    count = ScenarioSetup_GetCategoryEntryCount(ScenarioSetup_CategoryToList(D_800E4F60->category));
     screen = D_800E4F60;
     if (screen->category != 0) {
         next = screen->selection + 1;
@@ -230,7 +230,7 @@ s32 ScenarioSetup_SelectNextSetupItem(void *unused0, void *unused1, void *unused
             next = screen->selection - 1;
             limit = 10;
         } else {
-            limit = func_8042B154_de(ScenarioSetup_CategoryToList(0));
+            limit = ScenarioSetup_GetCategoryEntryCount(ScenarioSetup_CategoryToList(0));
             screen = D_800E4F60;
             next = screen->selection + 1;
             if (next == limit) {
@@ -248,11 +248,11 @@ moved:
         return 0;
     }
     SoundElement_PlayFlatSound(0xE7D);
-    func_8042B2E4_de();
+    ScenarioSetup_ResetSelectionIndicators();
     D_800E4F60->unk45C = 0;
     D_800E4F60->unk464 = 0;
     D_800E4F60->item->alpha = 0x41;
-    func_8042A990_de();
+    ScenarioSetup_RefreshSelectedArenaLabel();
     Frontend_SetWidgetFlag08(D_800E4F60->unk440, 0);
     Frontend_SetWidgetFlag08(D_800E4F60->unk444, 1);
     Frontend_SetWidgetFlag08(D_800E4F60->unk448, 0);
@@ -260,8 +260,8 @@ moved:
 }
 
 
-#define SCR78C ((struct Screen_func_8042B78C_de *)D_800E4F60)
-s32 func_8042B78C_de(void *unused0, void *unused1, void *unused2, s32 event) {
+#define SCR78C ((struct ScreenScenarioSetupSelectPreviousCatalogueCategory *)D_800E4F60)
+s32 ScenarioSetup_SelectPreviousCatalogueCategory(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 changed;
     s32 count;
     s32 mirror;
@@ -276,7 +276,7 @@ s32 func_8042B78C_de(void *unused0, void *unused1, void *unused2, s32 event) {
         SCR78C->category = SCR78C->category - 1;
     } else if ((u32)(SCR78C->selection - 5) < 6) {
         mirror = 21 - SCR78C->selection;
-        if (mirror < func_8042B154_de(ScenarioSetup_CategoryToList(0))) {
+        if (mirror < ScenarioSetup_GetCategoryEntryCount(ScenarioSetup_CategoryToList(0))) {
             changed = 1;
             SCR78C->selection = mirror;
         }
@@ -285,15 +285,15 @@ s32 func_8042B78C_de(void *unused0, void *unused1, void *unused2, s32 event) {
         return 0;
     }
     SoundElement_PlayFlatSound(0xE7D);
-    func_8042B2E4_de();
+    ScenarioSetup_ResetSelectionIndicators();
     SCR78C->word45C = 0;
     SCR78C->word464 = 0;
     SCR78C->item->alpha = 0x41;
-    count = func_8042B154_de(ScenarioSetup_CategoryToList(SCR78C->category));
+    count = ScenarioSetup_GetCategoryEntryCount(ScenarioSetup_CategoryToList(SCR78C->category));
     if (SCR78C->selection >= count) {
         SCR78C->selection = count - 1;
     }
-    func_8042A990_de();
+    ScenarioSetup_RefreshSelectedArenaLabel();
     if (SCR78C->selection == 0) {
         func_80439C80_de(SCR78C->view, SCR78C->category + 0xEA6);
         Frontend_SetWidgetFlag08(SCR78C->marker, 1);
@@ -303,8 +303,8 @@ s32 func_8042B78C_de(void *unused0, void *unused1, void *unused2, s32 event) {
 }
 #undef SCR78C
 
-#define SCR904 ((struct Screen_func_8042B78C_de *)D_800E4F60)
-s32 func_8042B904_de(void *unused0, void *unused1, void *unused2, s32 event) {
+#define SCR904 ((struct ScreenScenarioSetupSelectPreviousCatalogueCategory *)D_800E4F60)
+s32 ScenarioSetup_SelectNextCatalogueCategory(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 changed;
     s32 count;
 
@@ -331,15 +331,15 @@ s32 func_8042B904_de(void *unused0, void *unused1, void *unused2, s32 event) {
         return 0;
     }
     SoundElement_PlayFlatSound(0xE7D);
-    func_8042B2E4_de();
+    ScenarioSetup_ResetSelectionIndicators();
     SCR904->word45C = 0;
     SCR904->word464 = 0;
     SCR904->item->alpha = 0x41;
-    count = func_8042B154_de(ScenarioSetup_CategoryToList(SCR904->category));
+    count = ScenarioSetup_GetCategoryEntryCount(ScenarioSetup_CategoryToList(SCR904->category));
     if (SCR904->selection >= count) {
         SCR904->selection = count - 1;
     }
-    func_8042A990_de();
+    ScenarioSetup_RefreshSelectedArenaLabel();
     if (SCR904->selection == 0) {
         func_80439C80_de(SCR904->view, SCR904->category + 0xEA6);
         Frontend_SetWidgetFlag08(SCR904->marker, 1);
@@ -359,10 +359,10 @@ s32 ScenarioSetup_EndSetupInput(void) {
     return 0;
 }
 
-/* Calls func_8042AAD0_de while the setup screen D_800E4F60 is in mode 3, and returns zero. */
+/* Calls ScenarioSetup_StartSelectedScenario while the setup screen D_800E4F60 is in mode 3, and returns zero. */
 s32 ScenarioSetup_RefreshSetupScreen(void) {
     if (D_800E4F60->unk3DC == 3) {
-        func_8042AAD0_de();
+        ScenarioSetup_StartSelectedScenario();
         return 0;
     }
     return 0;
@@ -377,7 +377,7 @@ typedef s32 (*Handler8042BCB0)(void *, s32, s32, s32, s32);
 
 
 extern Handler8042BCB0 D_800E528C;
-s32 func_8042BAD0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 ScenarioSetup_DispatchCatalogueEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler8042BCB0 *entry;
     s32 index;
     s32 wildcard;
@@ -419,12 +419,12 @@ extern void ScenarioSetup_SortResultsPlayers(void);
 extern void Achieve_UpdateMatchCounters(void *, s32);
 extern void Achieve_MarkLevelPlayed(s32);
 extern void ScenarioSetup_FillResultRows(void);
-extern void func_8042CE74_de(void);
+extern void ScenarioSetup_InitResultModelPreview(void);
 
 extern void Frontend_SetWidgetFlag100(void *, s32);
 extern s32 Frontend_ListHasFlag100(void *);
 extern s32 ScenarioSetup_IsCupSelected(void);
-extern s32 func_8042AFB8_de(void);
+extern s32 ScenarioSetup_ReturnResultsGateTrue(void);
 extern void Scene_CopyLevelName(Shared_World *, s32, void *, s32);
 extern char *XPlus_UppercaseString(char *);
 extern char *XPlus_CopyString(char *, char *);
@@ -459,13 +459,13 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
     switch (game->controllerMode) {
     case 0:
         Achieve_UpdateMatchCounters(D_800E53C0->data, D_8015402C);
-        func_8042D118_de();
+        Frontend_AwardResultAchievements();
         D_800E53C0->mode = 0;
         break;
     case 2:
         if (game->humanWon == 1) {
             D_800E53C0->mode = 0;
-            func_8042D1C8_de();
+            Frontend_AwardResultMilestones();
             config = game->playerSettings;
             for (i = 0; i < 4; i++) {
                 if (config[i].enabled == 1 && config[i].locked == 0) Achieve_MarkLevelPlayed(i);
@@ -483,7 +483,7 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
         if (screen->mode == 1) {
             screen->first = 0;
             screen->count = 0;
-            func_8042CC74_de();
+            ScenarioSetup_HideResultCatalogueWidgets();
             item = Frontend_FindWidgetByResourceId(root, 0x266 + RESULTS_MENU_SHIFT);
             Frontend_SetWidgetFlag08(item, 1);
             item->alpha = 115;
@@ -492,17 +492,17 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
         } else if (screen->selection != -1) {
             screen->first = 0;
             screen->count = 0;
-            func_8042CC74_de();
+            ScenarioSetup_HideResultCatalogueWidgets();
             Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(root, RESULTS_RIGHT_ITEM), 0);
-            func_8042CE74_de();
+            ScenarioSetup_InitResultModelPreview();
         } else {
             ScenarioSetup_FillResultRows();
         }
         break;
     }
-    func_8041B110_de(0x237 + RESULTS_MENU_SHIFT);
-    func_8041B110_de(0x238 + RESULTS_MENU_SHIFT);
-    func_8041B110_de(0x23C + RESULTS_MENU_SHIFT);
+    SmpButton_WrapButtonWidget(0x237 + RESULTS_MENU_SHIFT);
+    SmpButton_WrapButtonWidget(0x238 + RESULTS_MENU_SHIFT);
+    SmpButton_WrapButtonWidget(0x23C + RESULTS_MENU_SHIFT);
     Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT), 1);
     i = 0;
     offset = 0;
@@ -514,7 +514,7 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
         }
         offset += 400;
     } while (i < 4);
-    if (Frontend_ListHasFlag100(Frontend_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT)) == 0 && ScenarioSetup_IsCupSelected() == 1 && func_8042AFB8_de() == 0) {
+    if (Frontend_ListHasFlag100(Frontend_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT)) == 0 && ScenarioSetup_IsCupSelected() == 1 && ScenarioSetup_ReturnResultsGateTrue() == 0) {
         Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(root, 0x238 + RESULTS_MENU_SHIFT), 1);
     }
     item = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, RESULTS_HEADING1);
@@ -550,7 +550,7 @@ extern char *XPlus_UppercaseString(char *);
 extern char *XPlus_CopyString(char *,char *);
 extern char *Achieve_UpdateRankText(s32);
 extern s32 XStdio_FormatBuffer(void *,const char *,...);
-extern void func_8042D304_de(s32,s32,u16);
+extern void Frontend_ShowResultRankBadge(s32,s32,u16);
 /* Fill the four visible player rows of the match results screen. */
 void ScenarioSetup_FillResultRows(void) {
     s32 row, player, attempts, percent;
@@ -558,7 +558,7 @@ void ScenarioSetup_FillResultRows(void) {
     MenuWidget *widget, *pending;
     char *name;
 
-    func_8042CC74_de();
+    ScenarioSetup_HideResultCatalogueWidgets();
     for (row = 0; row < 4; row++) {
         if (row >= D_800E53C0->count) return;
         player = D_800E53C0->players[D_800E53C0->first + row];
@@ -605,7 +605,7 @@ void ScenarioSetup_FillResultRows(void) {
 
         if (D_8014DD98.kind == 0) {
             Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[12]), 0);
-            func_8042D304_de(player, row, RESULTS_RANK_GROUP);
+            Frontend_ShowResultRankBadge(player, row, RESULTS_RANK_GROUP);
         } else {
             widget = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[12]);
             widget->alpha = 0xAF;
@@ -619,7 +619,7 @@ void ScenarioSetup_FillResultRows(void) {
 
         if (D_8014DD98.kind == 3) {
             Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[14]), 0);
-            func_8042D304_de(player, row, RESULTS_SECONDARY_GROUP);
+            Frontend_ShowResultRankBadge(player, row, RESULTS_SECONDARY_GROUP);
         } else {
             widget = Frontend_FindWidgetByResourceId(D_800E53C0->unkE0, D_800E12D2[row].ids[14]);
             widget->alpha = 0xAF;
@@ -829,14 +829,14 @@ extern void Menu_ReleaseOptionsScene();
 
 
 
-extern void func_8042A7B4_de(s32 a0);
+extern void ScenarioSetup_SetCatalogueAlpha(s32 a0);
 
 
 /* Moves the selection of the screen D_800E4F60 back on event 1: calls MarkMenuEventHandled and steps the
    selection at 0x438 back while it is above 0; in category 0 the second page (11 and up) instead
-   steps forward while below the count func_8042B154_de gives for list 0. When it moved it plays sound
-   0xE7D, calls func_8042B2E4_de, clears the words at 0x45C and 0x464, dims the item at 0x43C to alpha
-   0x41 and refreshes through func_8042A990_de, and when the selection is then 0 it shows the items at
+   steps forward while below the count ScenarioSetup_GetCategoryEntryCount gives for list 0. When it moved it plays sound
+   0xE7D, calls ScenarioSetup_ResetSelectionIndicators, clears the words at 0x45C and 0x464, dims the item at 0x43C to alpha
+   0x41 and refreshes through ScenarioSetup_RefreshSelectedArenaLabel, and when the selection is then 0 it shows the items at
    0x440 and 0x448, moves the marker at 0x448 to x 0x7C plus 34 per category, hides the item at
    0x444 and shows model 0xEA6 plus the category in the view at 0x308. Returns zero. Adapted from
    ScenarioSetup_SelectNextSetupItem with the step direction, page handling and final item updates changed. */
@@ -851,16 +851,16 @@ extern void MarkMenuEventHandled();
 
 
 
-extern s32 func_8042B154_de(s32);
+extern s32 ScenarioSetup_GetCategoryEntryCount(s32);
 
 extern void func_80439C80_de(void *, s32);
 
 /* Moves the selection of the screen D_800E4F60 on event 1: calls MarkMenuEventHandled and steps the
-   selection at 0x438 forward while it stays below the count func_8042B154_de gives for the category's
+   selection at 0x438 forward while it stays below the count ScenarioSetup_GetCategoryEntryCount gives for the category's
    list; in category 0 the first page (below 11) steps forward unless it would reach the count of
    list 0 or 11, and the second page steps back unless it would reach 10. When it moved it plays
-   sound 0xE7D, calls func_8042B2E4_de, clears the words at 0x45C and 0x464, dims the item at 0x43C to
-   alpha 0x41, refreshes through func_8042A990_de, hides the items at 0x440 and 0x448 and shows the
+   sound 0xE7D, calls ScenarioSetup_ResetSelectionIndicators, clears the words at 0x45C and 0x464, dims the item at 0x43C to
+   alpha 0x41, refreshes through ScenarioSetup_RefreshSelectedArenaLabel, hides the items at 0x440 and 0x448 and shows the
    one at 0x444. Returns zero. */
 
 
@@ -871,12 +871,12 @@ extern void func_80439C80_de(void *, s32);
 
 /* Moves the screen D_800E4F60 to its previous category on event 1: calls MarkMenuEventHandled and steps
    the category at 0x434 back unless it is 0; in category 0 a selection at 0x438 from 5 to 10 is
-   mirrored to 21 minus it when that stays below the count func_8042B154_de gives for list 0. When
-   anything changed it plays sound 0xE7D, calls func_8042B2E4_de, clears the words at 0x45C and 0x464,
+   mirrored to 21 minus it when that stays below the count ScenarioSetup_GetCategoryEntryCount gives for list 0. When
+   anything changed it plays sound 0xE7D, calls ScenarioSetup_ResetSelectionIndicators, clears the words at 0x45C and 0x464,
    dims the item at 0x43C to alpha 0x41, clamps the selection below the count for the category's
-   list, refreshes through func_8042A990_de and, when the selection is 0, shows model 0xEA6 plus the
+   list, refreshes through ScenarioSetup_RefreshSelectedArenaLabel and, when the selection is 0, shows model 0xEA6 plus the
    category in the view at 0x308 and moves the marker item at 0x448 to x 0x7C plus 34 per category.
-   Returns zero. Adapted from func_8042B904_de with the step direction and the mirror test changed. */
+   Returns zero. Adapted from ScenarioSetup_SelectNextCatalogueCategory with the step direction and the mirror test changed. */
 
 
 
@@ -887,9 +887,9 @@ extern void func_80439C80_de(void *, s32);
 /* Moves the screen D_800E4F60 to its next category on event 1: calls MarkMenuEventHandled and, unless the
    category at 0x434 is already 3, advances it (from category 0 only while the selection at 0x438
    is below 11, otherwise mirroring the selection to 21 minus it), then plays sound 0xE7D, calls
-   func_8042B2E4_de, clears the words at 0x45C and 0x464, dims the item at 0x43C to alpha 0x41, clamps
-   the selection below the count func_8042B154_de gives for the category's list, refreshes through
-   func_8042A990_de and, when the selection is 0, shows model 0xEA6 plus the category in the view at
+   ScenarioSetup_ResetSelectionIndicators, clears the words at 0x45C and 0x464, dims the item at 0x43C to alpha 0x41, clamps
+   the selection below the count ScenarioSetup_GetCategoryEntryCount gives for the category's list, refreshes through
+   ScenarioSetup_RefreshSelectedArenaLabel and, when the selection is 0, shows model 0xEA6 plus the category in the view at
    0x308 and moves the marker item at 0x448 to x 0x7C plus 34 per category. Returns zero. */
 
 

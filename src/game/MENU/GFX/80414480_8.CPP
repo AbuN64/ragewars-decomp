@@ -6,7 +6,7 @@
 #include "MATH/8029BBA0_5.H"
 #include "MENU/GFX/80414480_8.H"
 
-s32 func_80414400_de(u8 *buf, f64 input, s32 ch, s32 width, s32 precision) {
+s32 Gfx_FormatFloatingPoint(u8 *buf, f64 input, s32 ch, s32 width, s32 precision) {
     u8 fraction[128];
     u8 integer[128];
     u8 exponent[16];

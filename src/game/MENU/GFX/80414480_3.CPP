@@ -76,7 +76,7 @@ static inline u8 *ultoa(u32 val, u8 *endp, s32 base, s32 octzero, const u8 *xdig
     return cp;
 }
 
-s32 func_80414CCC_de(u8 *out, u8 *fmt0, u8 *ap) {
+s32 Gfx_FormatArgumentList(u8 *out, u8 *fmt0, u8 *ap) {
     u8 *fmt;
     u8 ch;
     s32 n;
@@ -245,7 +245,7 @@ reswitch:
             if (flags & 0x40) {
                 width = -width;
             }
-            size = func_80414400_de(buf, dval, ch, width, prec);
+            size = Gfx_FormatFloatingPoint(buf, dval, ch, width, prec);
             n = 0;
             if (flags & 0x80) {
                 while (buf[n] == ' ') {
