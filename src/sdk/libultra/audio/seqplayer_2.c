@@ -16,10 +16,7 @@
  /* 2147483648.0f */
 
 extern void Audio_AdvanceSequenceEvent(ALSeqPlayer *);                        /* __handleNextSeqEvent */
-extern void Audio_HandleSequenceMidiEvent(ALSeqPlayer *, ALEvent *);             /* __handleMIDIMsg */
-extern void func_802B1DEC_de(ALSeqPlayer *, ALEvent *);             /* __handleMetaMsg */
 extern void func_802B1E50_de(ALSeqPlayer *, f32);                   /* __setUsptFromTempo */
-extern void func_802B00D4_de(ALEventQueue *, ALEvent *, ALMicroTime); /* alEvtqPostEvent */
 extern ALMicroTime func_802B003C_de(ALEventQueue *, ALEvent *);    /* alEvtqNextEvent */
 extern void func_802B0258_de(ALEventQueue *, s16);                 /* alEvtqFlushType */
 extern void alSynStopVoice(struct Shape_typemap_71 *, ALVoice_s *);                   /* alSynStopVoice */

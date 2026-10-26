@@ -1,3 +1,4 @@
+#include "SYSTEM_3/80265370.H"
 #include "MENU/OPTIONEDITSTATE.H"
 #include "TYPES.H"
 #include "include_asm.h"
@@ -19,7 +20,6 @@ s32 Pak_AdjustPackedButtonOption(void *first, void *second) {
     return 0;
 }
 
-extern void Defs_FormatIntegerValue(char *buffer, const char *format, s32 value);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"

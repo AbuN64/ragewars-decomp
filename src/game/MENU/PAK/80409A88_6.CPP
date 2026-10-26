@@ -1,3 +1,4 @@
+#include "SYSTEM_3/80265370.H"
 #include "include_asm.h"
 #include "COMMON/LONE/D_80152789.H"
 #include "COMMON/RECORDRECATCV1.H"
@@ -5,7 +6,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-extern void Defs_FormatIntegerValue(char *buffer, const char *format, s32 value);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/PAK_MENU.H"

@@ -49,7 +49,6 @@ extern ALMicroTime __vsDelta(ALVoiceState *, ALMicroTime);
 extern void func_802B35E0_de(void *, ALVoice_s *, void *, f32, s16, u8, u8, ALMicroTime);
 
  /* alSynStartVoiceParams */
-extern void func_802B00D4_de(ALEventQueue *, ALEvent *, ALMicroTime);
 
  /* alEvtqPostEvent */
 extern void func_802B1B14_de(ALSeqPlayer *, ALVoice_s *, ALMicroTime);

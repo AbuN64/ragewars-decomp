@@ -160,7 +160,6 @@ extern f32 PLAYER_SECOND_LIGHT_RADIUS;
 extern char PLAYER_EFFECT_LIGHT_PATTERN[], D_800C91C8_de[], PLAYER_MODE_LIGHT_PATTERN[], D_800C91D8_de[];
 extern void *DynLight_AllocateLightNode(void *, void *);
 extern void func_8024BC94_de(CVector3 *, void *, CVector3);
-extern f32 GameObject_GetActorHeight(void *);
 /* Position one effect light, reading its scale and radius at their use sites. */
 static inline void placePlayerLight(struct Player *player, struct PlayerEffectLight *light,
                                     f32 offsetZ, const f32 *heightScale, const f32 *radius) {

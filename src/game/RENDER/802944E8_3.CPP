@@ -1,3 +1,4 @@
+#include "RENDER/80293A04_2.H"
 #include "include_asm.h"
 #include "COMMON/UNUSED.H"
 #include "COMMON/OBJRECAT26DD8.H"
@@ -9,7 +10,6 @@
 #include "COMMON/INTEGERSTATEB0.H"
 #include "TYPES.H"
 #include "RENDER/802944E8_3.H"
-extern void SetN64_DrawSessionWithAttractTimeout(void *);
 extern s32 D_800E28D0;
 
 
@@ -21,7 +21,6 @@ extern s32 D_800E28D0;
 
 extern int Player_GetFirstPlayer(void *arg0);
 
-extern void Scene_ResetTransitionViewport(void);
 
 extern void SetN64_HandleSessionTransitionInput(s32 arg0, s32 arg1, s32 arg2);
 

@@ -1,3 +1,4 @@
+#include "SCENE/802508E0_9.H"
 #include "COMMON/RESIDENTSTATE.H"
 #include "RENDER/802944E8_10.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -5,7 +6,6 @@
 #include "TYPES.H"
 #include "TEXTURE/80294C64_10.H"
 struct Node80253610;
-extern void Cache_UnlockResource(void *heap, struct Node80253610 *resource);
 
 #if defined(VERSION_US_REV1)
 

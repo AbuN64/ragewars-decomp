@@ -54,7 +54,6 @@ extern void func_802AFFC0_de(ALEventQueue *, ALEventListItem *, s32);
 extern void alSynAddPlayer(ALSynth_func_802B2650_de *, ALPlayer_s14 *);
 
                    /* alSynAddPlayer */
-extern void func_802B00D4_de(ALEventQueue *, ALEvent *, s32);
 
           /* alEvtqPostEvent */
 extern s32 func_802B003C_de(ALEventQueue *, ALEvent *);

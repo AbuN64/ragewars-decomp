@@ -1,3 +1,4 @@
+#include "SCENE/802508E0_9.H"
 #include "include_asm.h"
 #include "COMMON/OBJECTSTATE18.H"
 #include "COMMON/SCENERECAT10C0.H"
@@ -149,8 +150,6 @@ extern Gfx *g_displayListCursor;
 extern s32 D_800D2AE0;
 extern s32 D_800CD730;
 extern Shared_func_80234FDC_S1 *Sky_FindScreenMessage(GameplayCamera *camera);
-extern void Cache_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
-extern void Cache_UnlockResource(void *heap, struct Node80253610 *resource);
 extern s32 VisData_TestVisibilityGridBit(void *grid, s32 x, s32 z, s32 index);
 extern s32 VisData_TestBoxAgainstFrustum(void *planes, void *bounds);
 extern void StaticInstance_RegisterGeometryResources(CGameStaticInstance_t *prop, GameplayCamera *camera);

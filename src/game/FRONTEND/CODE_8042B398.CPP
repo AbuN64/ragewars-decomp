@@ -814,7 +814,6 @@ extern void Defs_SetBitValue(void *, s32, s32);
 extern void Tsmos_ActivateControllerState();
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
-extern void Menu_ReleaseOptionsScene();
 #else
 #endif
 

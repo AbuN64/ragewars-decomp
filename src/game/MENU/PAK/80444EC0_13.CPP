@@ -1,3 +1,4 @@
+#include "SYSTEM_3/80265370.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/MENURECAT20V1.H"
@@ -6,7 +7,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "MENU/OPTIONEDITSTATE.H"
 #include "MENU/PAK/80444EC0_13.H"
-extern void Defs_FormatIntegerValue(char *buffer, const char *format, s32 value);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -38,7 +38,6 @@ s32 Pak_FormatVolumeSlotOne(struct Field *field) {
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
 /* Points a field's text at one of D_800D7DD0, D_800D7DCC or D_800D7DC8 when the option byte D_801462E1 measured from 0x80 in steps of eight is zero, fifteen or minus sixteen, and otherwise at D_800D7DD4 with the step formatted into it, returning zero. Adapted from Pak_UpdateThirdVolumeLabel with D_801462E2 changed to D_801462E1 and the text slots D_800D7DD8..D_800D7DE4 changed to D_800D7DC8..D_800D7DD4. */
 
-extern char *D_800D7DD4;
 extern s32 Pak_CountLineChars(struct Field *);
 
 s32 Pak_FormatVolumeSlotOne(struct Field *field) {

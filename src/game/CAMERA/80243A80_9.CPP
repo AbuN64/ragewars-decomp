@@ -17,7 +17,6 @@ extern void Cache_ReleaseResource(void *arg0, void *arg1);
 /* Calls Menu_DrawTrackOverlay when the globally selected record's word at 0x38 is non-zero. */
 
 
-extern void Menu_DrawTrackOverlay(void);
 
 /** Clear the global word at VRAM 0x800E2838. */
 

@@ -96,7 +96,6 @@ void Action_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *
 extern s32 Rumble_TestActorStateBit(void *, void *);
 
 
-extern void Link_DispatchActorLinks(struct Shared_Actor *arg0, s32 arg1, void *arg2);
 
 extern void Rumble_SetActorStateBit(Shared_World *arg0, void *arg1, s32 arg2);
 

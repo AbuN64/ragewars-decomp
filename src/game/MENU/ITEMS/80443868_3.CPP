@@ -1,3 +1,4 @@
+#include "SYSTEM_3/80265370.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/LONE/D_80152789.H"
@@ -7,7 +8,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 #include "COMMON/MENURECAT20V1.H"
-extern void Defs_FormatIntegerValue(char *buffer, const char *format, s32 value);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
@@ -27,7 +27,6 @@ s32 Items_FormatPlayerResultScore(LayeredText *field, struct MenuRules *holder) 
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char D_800EED80[];
 
 #else
 #endif

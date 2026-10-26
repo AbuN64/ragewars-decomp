@@ -1,3 +1,4 @@
+#include "RENDER/80293A04_2.H"
 #include "include_asm.h"
 #include "COMMON/OBJRECAT26DD8.H"
 #include "COMMON/VECTOR4F.H"
@@ -14,9 +15,7 @@
 #include "COMMON/GAME_SESSION.H"
 
 extern void SetN64_HandleSessionTransitionInput(s32 arg0, s32 arg1, s32 arg2);
-extern void Scene_ResetTransitionViewport(void);
 
-extern void SetN64_DrawSessionWithAttractTimeout(void *session);
 
 /* Resets the menu viewport and selects the row identified by the owner's current index. */
 

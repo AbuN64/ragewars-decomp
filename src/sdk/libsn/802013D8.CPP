@@ -1,3 +1,4 @@
+#include "IO/io_hostmemory.H"
 #include "IO/80200568.H"
 #include "include_asm.h"
 
@@ -32,7 +33,6 @@ extern int Libgultra_TrwGetSr(void);
 extern void Libgultra_TrwSetSr(int);
 extern void Libsn_SpinDelay(s32);
 extern void Libsn_TransferHostMemoryRanges(u32);
-extern void Libsn_CopyHostBlockToCart(void);
 extern u32 D_800F32A8;
 
 /* Host-command service loop: poll the command word at 0xB1FFFFF0, acknowledge it and run it. */

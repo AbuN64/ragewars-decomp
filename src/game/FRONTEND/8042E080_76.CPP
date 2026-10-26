@@ -1,3 +1,4 @@
+#include "SYSTEM_2/8025E280.H"
 #include "COMMON/S1_6.H"
 #include "COMMON/GAME_SESSION.H"
 #include "TYPES.H"
@@ -5,7 +6,6 @@
 /* On event 3 with value 0xD, clears D_80146894 and calls Tsmos_RequestFrontendShutdown and func_8025E384_de. Returns
    zero. */
 extern void Tsmos_RequestFrontendShutdown();
-extern void func_8025E384_de();
 
 s32 Frontend_ResumeMatchOnInput(void *first, void *second, u32 event, s32 value) {
     if ((event >> 16) == 3) {

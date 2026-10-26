@@ -284,8 +284,6 @@ extern void Player_LoadActorModel(void *actor);
 extern void func_8022BB80_de(void *);
 extern void Achieve_ApplyProfileWeaponUnlocks(void *);
 extern void OnScreen_InitMover(void *, s32, s32);
-extern void func_802458D8_de(void);
-extern void func_802458C4_de(void);
 extern void Link_DispatchObjectLinks(void *, s32, void *);
 /* Prepares an actor's per-run HUD state: runs the mode-specific setup when the session byte is set, resets
  * the record at 0x878 to its defaults, lays out the nine on-screen widgets at 0xE2C..0x10C0 (position, then

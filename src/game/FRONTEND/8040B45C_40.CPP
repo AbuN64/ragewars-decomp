@@ -43,7 +43,6 @@ extern void Frontend_ReplaceWidgetLinks(s32 arg0, s32 arg1, MenuWidget *arg2, Me
 
 
 
-extern s32 GetMenuScreenOwner();
 
 /* When the fourth argument is set, lowers the byte at offset 0x4C of an entry by one while it is
    above the minimum at 0x50; then calls Frontend_ClampListCursorAndScroll and MarkMenuEventHandled. Returns zero. */

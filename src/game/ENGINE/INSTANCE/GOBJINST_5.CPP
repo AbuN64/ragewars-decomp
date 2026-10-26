@@ -621,7 +621,6 @@ struct SceneObject {
 };
 extern void *func_8024BFD4_de(SceneObject *, s32);
 extern s32 VisData_TestBoxAgainstFrustum(void *, void *);
-extern void Geometry_InvalidateMaterialKeys(void);
 extern void TextLoad_ResetTextureCache(void);
 /* Draws one scene object: loads its model, culls its bounding box against the camera's clip box and plane test,
  * then records the object's draw callback into a display list cached on the object (a branch placeholder is

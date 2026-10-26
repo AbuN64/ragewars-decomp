@@ -9,7 +9,6 @@
 #include "SYSTEM_3/80265370.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char D_800EED80[];
 
 #else
 #endif

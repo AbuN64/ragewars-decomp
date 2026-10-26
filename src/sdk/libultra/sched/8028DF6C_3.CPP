@@ -1,3 +1,4 @@
+#include "sdk/libgultra/viblack.h"
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/S1_2.H"
@@ -23,7 +24,6 @@ extern void *func_8025CC6C_de(void);
 extern void func_8025CBEC_de(void *arg0);
 
 extern void osViSetMode(void *arg0);
-extern void osViBlack(s32 arg0);
 
 
 

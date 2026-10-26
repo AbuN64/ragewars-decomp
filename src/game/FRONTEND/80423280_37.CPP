@@ -164,7 +164,6 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
 
 
 
-extern void Tsmos_DeactivateControllerState();
 
 s32 Frontend_ShowResultsPlayerModels(void) {
     s32 shown;

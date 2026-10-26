@@ -10,7 +10,6 @@
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/OBJRECV5.H"
 #include "GAME/CODE_8027302C.H"
-extern void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMovement *tuning);
 extern s32 Nav_RequestActorState(void *arg0, void *arg1, s32 arg2);
 extern void GraphU64_TransformPoint(void *arg0, void *arg1, void *arg2);
 

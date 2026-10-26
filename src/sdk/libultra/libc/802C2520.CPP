@@ -242,7 +242,6 @@ case_default:
 extern u8 D_800D5300[];
 extern u8 D_800D5314[];
 
-extern s64 Libc_SignedDivide(s64 numerator, s64 denominator);
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 static inline void lldivInline(LldivResult *result, s64 numerator, s64 denominator) {

@@ -1,3 +1,4 @@
+#include "SCENE/802508E0_9.H"
 #include <stddef.h>
 #include "TYPES.H"
 #include "COMMON/OBJECTLINKSC_2.H"
@@ -5,7 +6,6 @@
 #include "gbi.h"
 
 struct Node80253610;
-extern void Cache_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
 extern Gfx *g_displayListCursor;
 
 void OnScreen_GetImageEntry(Table802AB8DC **handle, s32 index, void **out, u8 *tag);

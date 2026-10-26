@@ -20,7 +20,6 @@ extern void OnScreen_SetupSpriteMode(s32 color);
 
 
 
-extern s32 Cinema_IsSequenceInWindow(void);
 extern s32 SetN64_IsModeThirteen(void);
 
 extern void OnScreen_UpdateMoverScript(void *mover);

@@ -1,3 +1,4 @@
+#include "COMMON/ARG.H"
 #include "include_asm.h"
 #include "COMMON/OBJECTSTATE96.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -7,8 +8,6 @@
 #include "sdk/os_pif.h"
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-extern void func_802B9C14_de(void);
-extern void func_802B9C80_de(void);
 extern void __osPfsRequestData(u8);
 
 s32 Pfs_DetectConnectedPaks(OSMesgQueue *queue, u8 *pattern) {

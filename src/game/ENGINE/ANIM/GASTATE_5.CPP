@@ -10,7 +10,6 @@
 #include "RENDER_4/8028FD2C_6.H"
 
 
-extern f32 GraphU64_InterpolateWrappedValue(f32, f32, f32);
 
 extern s32 SetN64_LocatePackSection(s32 arg0, s32 arg1, s32 arg2, s32 *arg3);
 

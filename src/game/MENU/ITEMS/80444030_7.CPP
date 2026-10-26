@@ -1,3 +1,4 @@
+#include "SYSTEM_3/80265370.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "MENU/HOLDERRECAT1CV2.H"
@@ -6,7 +7,6 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "COMMON/MENURECAT20V1.H"
-extern void Defs_FormatIntegerValue(char *buffer, const char *format, s32 value);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
