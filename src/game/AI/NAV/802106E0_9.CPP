@@ -1,3 +1,4 @@
+#include "RSP/8026E1F8_5.H"
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
@@ -1345,7 +1346,6 @@ INCLUDE_ASM("span_1000", Nav_UpdateVisiblePursuitDe);
 
 #if defined(VERSION_DE)
 #include "COMMON/SELF.H"
-extern s32 GraphU64_NextRandom(void);
 
 void Nav_InitPursuitStrafeDe(CloseAttackActor *actor) {
     CloseAttackBrain *brain = actor->self->brain;

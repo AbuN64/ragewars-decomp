@@ -1,3 +1,4 @@
+#include "COMMON/FRUSTUM.H"
 #include "include_asm.h"
 #include "COMMON/INTEGERSTATE530.H"
 #include "TYPES.H"
@@ -72,7 +73,6 @@ void MoveMenuFocus(s32 direction) {
     }
 }
 
-extern void *Frontend_GetScreenData(s32 index);
 extern Element *FindMenuElement(s32);
 extern void MarkMenuEventHandled(void);
 extern void SmXlate_SwitchScreen(s32);

@@ -1,3 +1,4 @@
+#include "RSP/8026E1F8_5.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/S1.H"
@@ -205,7 +206,6 @@ void func_802560A4_de(void *list, s32 nodeToMove) {
     ((IntrusiveList *)o)->count = ((IntrusiveList *)o)->count + 1;
 }
 
-extern s32 GraphU64_NextRandom(void);
 
 
 

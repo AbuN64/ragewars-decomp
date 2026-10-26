@@ -1,3 +1,4 @@
+#include "COMMON/FRUSTUM.H"
 #include "COMMON/ANIMATION.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "TYPES.H"
@@ -15,7 +16,6 @@
 
 
 
-extern void *Frontend_GetScreenData(s32 index);
 
 
 extern Animation *Cache_AllocateMemory(s32 size);

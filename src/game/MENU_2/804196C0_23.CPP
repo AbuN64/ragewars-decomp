@@ -1,3 +1,4 @@
+#include "COMMON/FRUSTUM.H"
 #include "include_asm.h"
 #include "COMMON/ANIMATION.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -26,7 +27,6 @@
 
 
 
-extern void *Frontend_GetScreenData(s32 index);
 extern void Frontend_ReplaceNodeRefs(NodeRecAt44 *node, void *from, void *to);
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *root, s32 id);
 extern void *Cache_AllocateMemory(s32 size);

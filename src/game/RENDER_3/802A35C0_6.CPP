@@ -1,3 +1,4 @@
+#include "RSP/8026E1F8_5.H"
 #include "COMMON/EFFECTCONTRIBUTION.H"
 #include "COMMON/GAME_SESSION.H"
 #include "RENDER_3/802A35C0.H"
@@ -18,11 +19,9 @@
 #include "LISTS/80279520.H"
 #include "SYSTEM/80255C40_7.H"
 
-extern f32 D_80115DEC;
 
 extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
-extern f32 Math_Sqrtf(f32);
 
 extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 

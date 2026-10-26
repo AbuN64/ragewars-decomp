@@ -1,3 +1,4 @@
+#include "RSP/8026E1F8_5.H"
 #include "include_asm.h"
 #include "COMMON/VIDEO_DIMENSIONS.H"
 #include "COMMON/LONE/D_800E28D4.H"
@@ -143,7 +144,6 @@ extern void SmXlate_SwitchScreen(int);
 
 extern s_CharacterData D_800E3A50[];
 
-extern s32 GraphU64_NextRandom(void);
 
 extern s32 Frontend_ListHasFlag100(void *widget);
 

@@ -1,3 +1,4 @@
+#include "COMMON/FRUSTUM.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "COMMON/ANIMATION.H"
 #include "TYPES.H"
@@ -21,7 +22,6 @@
 
 
 
-extern void *Frontend_GetScreenData(s32 index);
 extern MenuFadeWidget *Cache_AllocateMemory(s32);
 extern void SmpSlider_EnableTransition(MenuFadeWidget *);
 extern void SmpSlider_SetTransitionMode(MenuFadeWidget *, s32);

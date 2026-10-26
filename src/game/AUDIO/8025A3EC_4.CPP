@@ -19,12 +19,9 @@
 
 
 
-extern void func_802B2F00_de(void *sound, s16 sample);
 
 
-extern void alSndpStop(void *sound);
 
-extern void func_802B2F00_de(void *arg0, s16 arg1);
 
 extern s32 func_802B2620_de(void *arg0);
 
@@ -33,7 +30,6 @@ extern s32 func_802B2620_de(void *arg0);
 
 extern void func_802B2D80_de(void *);
 
-extern void alSndpStop(void *arg0);
 
 extern void func_80259C5C_de(void *arg0, void *arg1, s32 arg2);
 

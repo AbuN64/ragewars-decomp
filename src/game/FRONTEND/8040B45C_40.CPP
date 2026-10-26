@@ -1,3 +1,4 @@
+#include "COMMON/FRUSTUM.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "FRONTEND/LAYOUT.H"
@@ -29,7 +30,6 @@ extern void Frontend_ConfigureScrolledTableCell(GridList *list, UnitMtx *cell, u
 
 
 
-extern void *Frontend_GetScreenData(s32 index);
 
 extern void *Cache_AllocateMemory(s32);
 

@@ -1,3 +1,4 @@
+#include "RSP/8026E1F8_5.H"
 #include "include_asm.h"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -90,7 +91,6 @@ extern s32 D_800E37B8[];
 extern Prize D_800E381C[][17];
 extern Reward D_80153F80[];
 
-extern s32 GraphU64_NextRandom(void);
 extern void XPlus_CopyString(char *dst, char *src);
 
 void Frontend_RandomizeJoinRequestEntries(s32 count, s32 level) {

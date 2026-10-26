@@ -1,3 +1,4 @@
+#include "RSP/8026E1F8_5.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/OBJRECAT4V6.H"
@@ -159,7 +160,6 @@ extern f32 PLAYER_SECOND_LIGHT_RADIUS;
 extern char PLAYER_EFFECT_LIGHT_PATTERN[], D_800C91C8_de[], PLAYER_MODE_LIGHT_PATTERN[], D_800C91D8_de[];
 extern void *DynLight_AllocateLightNode(void *, void *);
 extern void func_8024BC94_de(CVector3 *, void *, CVector3);
-extern s32 GraphU64_NextRandom(void);
 extern f32 GameObject_GetActorHeight(void *);
 /* Position one effect light, reading its scale and radius at their use sites. */
 static inline void placePlayerLight(struct Player *player, struct PlayerEffectLight *light,

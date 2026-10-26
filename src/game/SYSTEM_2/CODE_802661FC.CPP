@@ -11,7 +11,6 @@
 #include "TYPES.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 #include "SYSTEM_2/CODE_802661FC.H"
-extern void GraphU64_NormalizeVec3(f32 *arg0);
 
 typedef struct DamageDefinition { s32 kind; } DamageDefinition;
 typedef struct DamageActor {

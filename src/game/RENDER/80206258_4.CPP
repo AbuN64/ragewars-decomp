@@ -1,3 +1,4 @@
+#include "COMMON/EXTERNS_15.H"
 #include "COMMON/REC.H"
 #include "RENDER/80206258.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -16,7 +17,6 @@
 
 extern void BuildRollMatrix(void *arg0, f32 arg1);
 
-extern void PitchMatrix(void *arg0, f32 arg1);
 
 extern void YawMatrix(void *arg0, f32 arg1);
 

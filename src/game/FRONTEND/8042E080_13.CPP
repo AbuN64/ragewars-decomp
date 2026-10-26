@@ -1,3 +1,4 @@
+#include "RSP/8026E1F8_5.H"
 #include "COMMON/NAME.H"
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/VECTOR4F.H"
@@ -13,7 +14,6 @@
 extern s32 Pak_GetStatus(s32);
 extern s32 Pak_FindNoteByName(void *, s32, s32 *);
 extern s32 PAKInterface_ReadRecordsNote(s32, s32);
-extern s32 GraphU64_NextRandom(void);
 extern void PAKInterface_RefreshPlayerPanel(s32);
 void PAKInterface_ResolvePlayerPakState(s32 player)
 {

@@ -1,3 +1,4 @@
+#include "RSP/8026E1F8_5.H"
 #include "include_asm.h"
 #include "COMMON/UNUSED.H"
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -23,7 +24,6 @@ s32 Frontend_GetStageTransitionResource(void) {
 
 extern Shared_PlayerSettingsRecord g_playerSettings[];
 
-extern s32 GraphU64_NextRandom(void);
 
 /* Characters 0 and 5 may appear only once among the eight enabled players. */
 static inline s32 characterAvailable(s32 character, s32 firstUniqueCharacter, s32 secondUniqueCharacter) {

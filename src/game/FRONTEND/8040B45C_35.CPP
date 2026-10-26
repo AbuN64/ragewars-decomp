@@ -1,3 +1,4 @@
+#include "COMMON/FRUSTUM.H"
 #include "MENU/GFX/80414430_24.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/LONE/D_800DEA60.H"
@@ -125,7 +126,6 @@ extern PoolFrontendReleaseActiveChunkImages g_frontendResourceFontCount;
 extern s16 g_frontendResourceTextureCount;
 
 
-extern void *Frontend_GetScreenData(s32 index);
 
 extern void Frontend_AcquireArchiveEntry(u32 index);
 

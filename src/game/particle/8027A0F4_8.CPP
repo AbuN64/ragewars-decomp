@@ -36,7 +36,6 @@ extern void BuildDirectionMatrix(MatrixF *, CVector3 *);
 extern void GraphU64_ConvertMatrixToFloat(MatrixF *, PackedMatrixWords *);
 extern void ScaleMatrixLocal(MatrixF *, f32, f32, f32);
 extern void TranslateMatrix(MatrixF *, f32, f32, f32);
-extern s32 GraphU64_NextRandom(void);
 extern void Particle_Release(EffectSystem *, ParticleEffect *);
 extern void func_80255D70_de(IntrusiveList *, ParticleEffect *, ParticleEffect *);
 extern void TextLoad_LocateTextureResource(u32 *, s32);

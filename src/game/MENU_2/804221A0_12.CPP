@@ -1,3 +1,4 @@
+#include "RSP/8026E1F8_5.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/S1_5.H"
@@ -30,7 +31,6 @@ extern void Frontend_RequestScreenMode(s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void Menu_RequestTrackByKey(s32);
 extern void MarkMenuEventHandled(void);
-extern s32 GraphU64_NextRandom(void);
 
 extern void Tsmos_RequestFrontendShutdown(void);
 extern void Items_ResetActorPools(void *, s32);

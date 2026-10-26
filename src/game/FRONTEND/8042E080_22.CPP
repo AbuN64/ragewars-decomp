@@ -1,3 +1,4 @@
+#include "RSP/8026E1F8_5.H"
 #include "include_asm.h"
 #include "COMMON/LEVEL_GOAL.H"
 #include "COMMON/ACTIVE.H"
@@ -40,7 +41,6 @@ extern void Tsmos_RequestFrontendShutdown(void);
 
 extern void XPlus_CopyString(char *, char *);
 extern void Frontend_RequestScreenMode(s32);
-extern s32 GraphU64_NextRandom(void);
 
 
 void Frontend_StartConfiguredMatch(void) {

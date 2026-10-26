@@ -1,3 +1,4 @@
+#include "RSP/8026E1F8_5.H"
 #include "include_asm.h"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/WORLD.H"
@@ -92,7 +93,6 @@ extern void GraphU64_BuildAxisAngleMatrix(PoseMatrix, f32, f32, f32, f32);
 extern void CopyMatrix(PoseMatrix, PoseMatrix);
 extern void TranslateMatrix(PoseMatrix, f32, f32, f32);
 extern void ScaleMatrixLocal(PoseMatrix, f32, f32, f32);
-extern s32 GraphU64_NextRandom(void);
 extern f32 GraphU64_GetTrianglePlaneHeight(StateFlags *, f32, f32);
 extern s32 Map_ReserveEntries(void *, s32);
 extern void Scene_SampleWorldLighting(void *, CVector3 *, u8 *);

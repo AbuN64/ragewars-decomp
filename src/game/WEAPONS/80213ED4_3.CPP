@@ -1,3 +1,4 @@
+#include "RSP/8026E1F8_5.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/FIELD_VEC_B0.H"
@@ -23,7 +24,6 @@ extern void GraphU64_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 
 extern void GraphU64_ScaleVector(CVector3 *result, CVector3 *vec, f32 scale);
 
 
-extern f32 Math_Sqrtf(f32 value);
 /* Places the goal beside kind-7 targets: pushed away from the anchor by both extents. */
 static inline void Weapons_PlaceGoalBeside(Actor_func_80214DD4_de *actor, Actor_func_80214DD4_de *target, Actor_func_80214DD4_de *anchor, CVector3 *outPos, s32 *outRoom) {
     CVector3 dir;

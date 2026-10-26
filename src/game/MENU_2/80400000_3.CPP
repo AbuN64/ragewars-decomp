@@ -1,3 +1,4 @@
+#include "RSP/8026E1F8_5.H"
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
@@ -10,7 +11,6 @@ extern f32 *Cache_AllocateMemory(s32 size);
 
 extern void GraphU64_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
-extern f32 Math_Sqrtf(f32 value);
 
 extern void Menu_SolveSplineSecondDerivatives(s32 n, f32 *ys, f32 *xs, f32 *out);
 

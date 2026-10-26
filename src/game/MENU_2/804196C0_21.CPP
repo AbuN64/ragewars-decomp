@@ -1,3 +1,4 @@
+#include "COMMON/FRUSTUM.H"
 #include "COMMON/ANIMATION.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -42,7 +43,6 @@
 
 
 
-extern void *Frontend_GetScreenData(s32 index);
 
 
 extern MenuSliderWidget *Cache_AllocateMemory(s32);

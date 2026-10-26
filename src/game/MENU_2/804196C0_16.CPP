@@ -1,3 +1,5 @@
+#include "COMMON/FRUSTUM.H"
+#include "RSP/8026E1F8_5.H"
 #include "include_asm.h"
 #include "COMMON/ANIMATION.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -11,7 +13,6 @@
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 #include "RENDER_2/8025DE50_5.H"
 #include "RESMGR/resmgr_string_memory.H"
-extern s32 GraphU64_NextRandom(void);
 extern void SmpFlicker_InitFlicker(func_80419D04_S1 *, s32);
 /* Per-frame step of a menu widget flicker: while the effect is armed (state 1) the timer counts down to 0 (capped at 50); at 0 a roll below 2 in 100
    starts the flicker (flag set, current entry shown on the widget, sound 0xE75). While flickering each frame spends one hold count of the current
@@ -62,7 +63,6 @@ extern MenuResourceWidget *Cache_AllocateMemory(int);
 
 extern void Frontend_InsertWidgetBefore(ResourceSmpFlickerCreateFlickerWidget *, MenuResourceWidget *);
 
-extern void *Frontend_GetScreenData(s32 index);
 
 extern void SmpFlicker_InitFlicker(func_80419D04_S1 *arg0, s32 arg1);
 
