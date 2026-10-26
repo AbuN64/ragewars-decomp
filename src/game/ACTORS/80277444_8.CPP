@@ -11,7 +11,7 @@
 #include "COMMON/EXTERNS_10.H"
 extern s32 SoundElement_PlayFlatSound(s32 arg0);
 
-#if defined(VERSION_US_REV1) || defined(NON_MATCHING)
+#if defined(VERSION_US_REV1) || defined(VERSION_DE) || defined(VERSION_US)
 #include "COMMON/GAMEPLAY_SOUND_TABLE.H"
 #include "TYPES.H"
 #include "RENDER_2/8025DE50_5.H"
