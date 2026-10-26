@@ -22,7 +22,6 @@
 
 extern s32 D_80100570;
 extern struct { CachedResource **value; } D_80100564;
-extern CachedResource *D_80100568;
 extern u32 D_80101190;
 
 
