@@ -72,6 +72,34 @@ vram	name	basis
 0x802B9580	alAuxBusNew	machine code
 0x802B9668	alSaveNew	machine code
 0x802BA3D0	frexp	machine code
+0x802B5410	alHeapDBAlloc	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/heapalloc.c; reviewed source correspondence (func_802B0340_de)
+0x802B388C	alCSeqTicksToSec	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/cseq.c; reviewed source correspondence (func_802AE7BC_de)
+0x802B38F4	alCSeqSecToTicks	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/cseq.c; reviewed source correspondence (func_802AE824_de)
+0x802C2410	sprintf	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/libc/sprintf.c; reviewed source correspondence (func_802BD320_de)
+0x802C2490	memcpy	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/libc/string.c; reviewed source correspondence (func_802BD3A0_de)
+0x802C24B8	strchr	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/libc/string.c; reviewed source correspondence (func_802BD3C8_de)
+0x802C24F0	strlen	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/libc/string.c; reviewed source correspondence (func_802BD400_de)
+0x802C2A64	_Putfld	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/libc/xprintf.c; reviewed source correspondence (func_802BD974_de)
+0x802BDEA0	osPiGetStatus	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/io/pigetstat.c; reviewed source correspondence (func_802BDEA0_us_rev1)
+0x802B8FAC	alAuxBusParam	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/auxbus.c; reviewed source correspondence (func_802B3EDC_de)
+0x802BB550	alSaveParam	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/save.c; reviewed source correspondence (func_802B6480_de)
+0x802B95DC	alResampleNew	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/drvrNew.c; reviewed source correspondence (func_802B450C_de)
+0x802B96AC	alEnvmixerNew	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/drvrNew.c; reviewed source correspondence (func_802B45DC_de)
+0x802B975C	init_lpfilter	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/drvrNew.c; reviewed source correspondence (func_802B468C_de)
+0x802BA800	alResampleParam	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/resample.c; reviewed source correspondence (func_802B5730_de)
+0x802B3B80	alCSPNew	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/csplayer.c; reviewed source correspondence (func_802AEAB0_de)
+0x802B4DD0	__CSPPostNextSeqEvent	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/csplayer.c; reviewed source correspondence (func_802AFD00_de)
+0x802B4C3C	__CSPHandleMetaMsg	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/csplayer.c; reviewed source correspondence (func_802AFB6C_de)
+0x802B8DA0	_timeToSamples	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/synthesizer.c; reviewed source correspondence (func_802B3CD0_de)
+0x802B8E88	_timeToSamplesNoRound	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/synthesizer.c; reviewed source correspondence (func_802B3DB8_de)
+0x802B8DE0	__nextSampleTime	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/synthesizer.c; reviewed source correspondence (func_802B3D10_de)
+0x802B7720	alSndpNew	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/sndplayer.c; reviewed source correspondence (func_802B2650_de)
+0x802B7C8C	_sndpVoiceHandler	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/sndplayer.c; reviewed source correspondence (func_802B2BBC_de)
+0x802B7D18	_removeEvents	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/sndplayer.c; reviewed source correspondence (func_802B2C48_de)
+0x802B7DC0	_DivS32ByF32	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/sndplayer.c; reviewed source correspondence (func_802B2CF0_de)
+0x802BB450	alSavePull	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/save.c; reviewed source correspondence (func_802B6658_eu_x)
+0x802B80D0	alSynAllocVoice	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/synallocvoice.c; reviewed source correspondence (func_802B3000_de)
+0x802B8200	_allocatePVoice	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/synallocvoice.c; reviewed source correspondence (func_802B3130_de)
 0x802BA4B0	alFilterNew	machine code
 0x802BF400	osViGetCurrentFramebuffer	machine code
 0x802BF7A0	osViSetMode	machine code
