@@ -12,8 +12,10 @@
 #include "sdk/libgultra_inferred/802B3B80_4.H"
 #include "AUDIO_3/802BFD40.H"
 #include "sdk/al_globals.h"
-
-
+#include "COMMON/ALPARAM_S.H"
+#include "COMMON/SHAREDPLAYER.H"
+#include "sdk/libgultra/part_800C7F20/code_802B7520.h"
+#include "include_asm.h"
 
 extern s32 func_802B0340_de(s32, s32, void *, s32, s32);
 
@@ -23,7 +25,7 @@ extern void func_802AFFC0_de(void *, void *, s32);
 extern void alSynAddPlayer(s32, void *);
 
 
-extern void func_802AFB6C_de(void *, ObjectState10_2 *);
+void func_802AFB6C_de(void *arg0, ObjectState10_2 *arg1);
 
 extern void func_802B00D4_de(ALEventQueue *, ALEvent *, s32);
 
@@ -249,3 +251,510 @@ ALMicroTime func_802AEC20_de(ALSeqPlayer *node)
     seqp->curTime += seqp->nextDelta;
     return seqp->nextDelta;
 }
+
+extern void func_802AE6BC_de(s32 arg0, ALEvent *arg1);
+
+extern s32 func_802AE9B0_de(s32 arg0, s32 *arg1);
+
+
+
+
+
+extern void *func_802B16E0_de(void *, s32, s32, s32);
+
+extern void *__mapVoice(void *, u8, u8, u8);
+
+extern ALVoiceState *func_802B1680_de(ALSeqPlayer *, u8, u8);
+
+extern s32 func_802B3000_de(ALSynth_func_802B3000_de *, ALVoice_s_func_802B3000_de *, ALVoiceConfig_s *);
+
+extern s32 func_802B18A4_de(void *, void *);
+
+
+
+extern void func_802B35E0_de(ALSynth_func_802B3000_de *, ALVoice_s_func_802B3000_de *, void *, f32, s16, u8, u8, s32);
+
+
+
+extern void func_802B3350_de(void *, void *, u8);
+
+extern void func_802B32A0_de(void *, void *, u8);
+
+
+extern void __setInstChanState(void *, void *, s32);
+
+/** Dispatch the current object message and forward any resulting value. */
+void func_802AF150_de(void *rawPlayer) {
+    struct ALSeqPlayer *arg0 = rawPlayer;
+    ALEvent message;
+    ALEvent output;
+    s32 value1;
+    s32 value2;
+    s32 value3;
+    s32 field18;
+    s32 value;
+
+    field18 = (s32)arg0->target;
+    if (field18 != 0) {
+        func_802AE6BC_de(field18, &message);
+        {
+        s32 sw_message_value = (s16)((u16)message.type - 1);
+        if ((unsigned int)sw_message_value > 19) {
+            goto sw_message_default;
+        }
+        switch (sw_message_value) {
+        case 0: goto sw_message_0;
+        case 1: goto sw_message_default;
+        case 2: goto sw_message_2;
+        case 3: goto sw_message_3;
+        case 4: goto sw_message_default;
+        case 5: goto sw_message_default;
+        case 6: goto sw_message_default;
+        case 7: goto sw_message_default;
+        case 8: goto sw_message_default;
+        case 9: goto sw_message_default;
+        case 10: goto sw_message_default;
+        case 11: goto sw_message_default;
+        case 12: goto sw_message_default;
+        case 13: goto sw_message_default;
+        case 14: goto sw_message_default;
+        case 15: goto sw_message_default;
+        case 16: goto sw_message_default;
+        case 17: goto sw_message_17;
+        case 18: goto sw_message_17;
+        case 19: goto sw_message_17;
+        }
+    }
+    do {
+        sw_message_0:
+            func_802AF2E0_de(arg0, &message);
+            if (arg0->state == 1) {
+                field18 = (s32)arg0->target;
+                if (field18 != 0 && (func_802AE9B0_de(field18, &value1) & 0xFF)) {
+                    output.type = 0;
+                    value = value1;
+                    goto send_value;
+                }
+            }
+            break;
+        sw_message_2:
+            func_802AFB6C_de(arg0, &message);
+            if (arg0->state == 1) {
+                field18 = (s32)arg0->target;
+                if (field18 != 0 && (func_802AE9B0_de(field18, &value2) & 0xFF)) {
+                    output.type = 0;
+                    value = value2;
+                    goto send_value;
+                }
+            }
+            break;
+        sw_message_3:
+            arg0->state = 2;
+            message.type = 0x10;
+            func_802B00D4_de(&arg0->evtq, &message, 0x7FFFFFFF);
+            break;
+        sw_message_17:
+        sw_message_18:
+        sw_message_19:
+            if (arg0->state == 1) {
+                field18 = (s32)arg0->target;
+                if (field18 != 0 && (func_802AE9B0_de(field18, &value3) & 0xFF)) {
+                    output.type = 0;
+                    value = value3;
+send_value:
+                    func_802B00D4_de(&arg0->evtq, &output,
+                                  value * arg0->uspt);
+                }
+            }
+            break;
+        sw_message_default:
+            Audio_Assert(D_800C7350_de, g_audioCsplayerText, 0x190);
+            break;
+        
+    } while (0);
+    }
+}
+
+/* Apply one compact-sequence MIDI message. The existing event storage and
+ * callee-specific voice/player views share their measured O32 prefixes. */
+void func_802AF2E0_de(void *object, ALEvent *message)
+{
+    ALSeqPlayer *seqp = object;
+    ALEvent *event = (ALEvent *)message;
+    ALVoice_s *voice;
+    ALVoiceState *vs;
+    s32 status;
+    u8 chan;
+    u8 key;
+    u8 vel;
+    u8 byte1;
+    u8 byte2;
+    ALMIDIEvent *midi = &event->msg.midi;
+    s16 vol;
+    ALEvent evt;
+    ALMicroTime deltaTime;
+    ALVoiceState *vstate;
+    u8 pan;
+
+    status = event->msg.midi.status & 0xF0;
+    chan = event->msg.midi.status & 0x0F;
+    byte1 = key = event->msg.midi.byte1;
+    byte2 = vel = event->msg.midi.byte2;
+
+    switch (status) {
+    case 0x90: /* AL_MIDI_NoteOn */
+        if (vel != 0) {
+            ALVoiceConfig_s config;
+            ALSound_s *sound;
+            s16 cents;
+            f32 pitch, oscValue, initialOscValue;
+            u8 fxmix;
+            void *oscState;
+            ALInstrument *inst;
+            s32 tremelo;
+            u8 *tremeloSlot;
+
+            if (seqp->state != 1)
+                break;
+            sound = func_802B16E0_de(seqp, key, vel, chan);
+            if (!sound)
+                return;
+            config.priority = seqp->chanState[chan].priority;
+            config.fxBus = 0;
+            config.unityPitch = 0;
+            vstate = __mapVoice(seqp, key, vel, chan);
+            if (!vstate)
+                return;
+            voice = &vstate->voice;
+            func_802B3000_de(seqp->drvr, (ALVoice_s_func_802B3000_de *)voice, &config);
+            vstate->sound = sound;
+            vstate->envPhase = 0;
+            if (seqp->chanState[chan].sustain > 63)
+                vstate->phase = 2;
+            else
+                vstate->phase = 0;
+            cents = (key - sound->keyMap->keyBase) * 100 + sound->keyMap->detune;
+            vstate->pitch = func_802AFE30_de(cents);
+            initialOscValue = D_800C7420_de;
+            vstate->envGain = sound->envelope->attackVolume;
+            vstate->envEndTime = seqp->curTime + sound->envelope->attackTime;
+            vstate->flags = 0;
+            inst = seqp->chanState[chan].instrument;
+            oscValue = initialOscValue;
+            if (inst->tremType) {
+                if (seqp->initOsc) {
+                    deltaTime = (*seqp->initOsc)(&oscState, &oscValue, inst->tremType,
+                                                 inst->tremRate, inst->tremDepth, inst->tremDelay);
+                    if (deltaTime) {
+                        evt.type = 22; /* AL_TREM_OSC_EVT */
+                        evt.msg.osc.vs = vstate;
+                        evt.msg.osc.oscState = oscState;
+                        func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, deltaTime);
+                        vstate->flags |= 0x01;
+                    }
+                }
+            }
+            tremeloSlot = &vstate->tremelo;
+            if (!(oscValue >= D_800C7424_de)) {
+                tremelo = (s32)oscValue;
+            } else {
+                tremelo = (s32)(oscValue - D_800C7424_de);
+                tremelo |= 0x80000000;
+            }
+            initialOscValue = D_800C7428_de;
+            *tremeloSlot = tremelo;
+            oscValue = initialOscValue;
+            if (inst->vibType) {
+                if (seqp->initOsc) {
+                    deltaTime = (*seqp->initOsc)(&oscState, &oscValue, inst->vibType,
+                                                 inst->vibRate, inst->vibDepth, inst->vibDelay);
+                    if (deltaTime) {
+                        evt.type = 23; /* AL_VIB_OSC_EVT */
+                        evt.msg.osc.vs = vstate;
+                        evt.msg.osc.oscState = oscState;
+                        evt.msg.osc.chan = chan;
+                        func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, deltaTime);
+                        vstate->flags |= 0x02;
+                    }
+                }
+            }
+            vstate->vibrato = oscValue;
+            pitch = vstate->pitch * seqp->chanState[chan].pitchBend * vstate->vibrato;
+            fxmix = seqp->chanState[chan].fxmix;
+            pan = func_802B18A4_de(vstate, seqp);
+            vol = func_802B1814_de((ALVoiceState *)vstate, (ALSeqPlayer *)seqp);
+            deltaTime = sound->envelope->attackTime;
+            func_802B35E0_de(seqp->drvr, (ALVoice_s_func_802B3000_de *)voice, sound->wavetable, pitch, vol, pan, fxmix, deltaTime);
+            evt.type = 6; /* AL_SEQP_ENV_EVT */
+            evt.msg.vol.voice = voice;
+            evt.msg.vol.vol = sound->envelope->decayVolume;
+            evt.msg.vol.delta = sound->envelope->decayTime;
+            func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, deltaTime);
+            if (midi->duration) {
+                evt.type = 21; /* AL_CSP_NOTEOFF_EVT */
+                evt.msg.midi.status = chan | 0x80;
+                evt.msg.midi.byte1 = key;
+                evt.msg.midi.byte2 = 0;
+                deltaTime = seqp->uspt * midi->duration;
+                func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, deltaTime);
+            }
+            break;
+        }
+    case 0x80: /* AL_MIDI_NoteOff */
+        vstate = (ALVoiceState *)func_802B1680_de((ALSeqPlayer *)seqp, key, chan);
+        if (!vstate)
+            return;
+        if (vstate->phase == 2)
+            vstate->phase = 4;
+        else {
+            vstate->phase = 3;
+            func_802B1B14_de(seqp, &vstate->voice, vstate->sound->envelope->releaseTime);
+        }
+        break;
+    case 0xA0: /* AL_MIDI_PolyKeyPressure */
+        vstate = (ALVoiceState *)func_802B1680_de((ALSeqPlayer *)seqp, key, chan);
+        if (!vstate)
+            return;
+        vstate->velocity = byte2;
+        func_802B3480_de(seqp->drvr, &vstate->voice, func_802B1814_de((ALVoiceState *)vstate, (ALSeqPlayer *)seqp),
+                      __vsDelta(vstate, seqp->curTime));
+        break;
+    case 0xD0: /* AL_MIDI_ChannelPressure */
+        for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
+            if (vs->channel == chan) {
+                vs->velocity = byte1;
+                func_802B3480_de(seqp->drvr, &vs->voice, func_802B1814_de((ALVoiceState *)vs, (ALSeqPlayer *)seqp),
+                              __vsDelta(vs, seqp->curTime));
+            }
+        }
+        break;
+    case 0xB0: /* AL_MIDI_ControlChange */
+        switch (byte1) {
+        case 0x0A: /* AL_MIDI_PAN_CTRL */
+            seqp->chanState[chan].pan = byte2;
+            for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
+                if (vs->channel == chan) {
+                    pan = func_802B18A4_de(vs, seqp);
+                    func_802B3350_de(seqp->drvr, &vs->voice, pan);
+                }
+            }
+            break;
+        case 0x07: /* AL_MIDI_VOLUME_CTRL */
+            seqp->chanState[chan].vol = byte2;
+            for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
+                if ((vs->channel == chan) && (vs->envPhase != 3)) {
+                    vol = func_802B1814_de((ALVoiceState *)vs, (ALSeqPlayer *)seqp);
+                    func_802B3480_de(seqp->drvr, &vs->voice, vol, __vsDelta(vs, seqp->curTime));
+                }
+            }
+            break;
+        case 0x10: /* AL_MIDI_PRIORITY_CTRL */
+            seqp->chanState[chan].priority = byte2;
+            break;
+        case 0x40: /* AL_MIDI_SUSTAIN_CTRL */
+            seqp->chanState[chan].sustain = byte2;
+            for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
+                if ((vs->channel == chan) && (vs->phase != 3)) {
+                    if (byte2 > 63) {
+                        if (vs->phase == 0)
+                            vs->phase = 2;
+                    } else {
+                        if (vs->phase == 2)
+                            vs->phase = 0;
+                        else if (vs->phase == 4) {
+                            vs->phase = 3;
+                            func_802B1B14_de(seqp, &vs->voice, vs->sound->envelope->releaseTime);
+                        }
+                    }
+                }
+            }
+            break;
+        case 0x5B: /* AL_MIDI_FX1_CTRL */
+            seqp->chanState[chan].fxmix = byte2;
+            for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
+                if (vs->channel == chan)
+                    func_802B32A0_de(seqp->drvr, &vs->voice, byte2);
+            }
+            break;
+        default:
+            break;
+        }
+        break;
+    case 0xC0: /* AL_MIDI_ProgramChange */
+        if (seqp->bank == 0)
+            Audio_Assert(D_800C7350_de, g_audioCsplayerText, 711);
+        if (key < seqp->bank->instCount) {
+            ALInstrument *inst = seqp->bank->instArray[key];
+            __setInstChanState(seqp, inst, chan);
+        }
+        break;
+    case 0xE0: /* AL_MIDI_PitchBendChange */
+        {
+            s32 bendVal;
+            f32 bendRatio;
+            s32 cents;
+
+            bendVal = ((byte2 << 7) + byte1) - 8192;
+            cents = (seqp->chanState[chan].bendRange * bendVal) / 8192;
+            bendRatio = func_802AFE30_de(cents);
+            seqp->chanState[chan].pitchBend = bendRatio;
+            for (vs = seqp->vAllocHead; vs != 0; vs = vs->next)
+                if (vs->channel == chan)
+                    func_802B33E0_de(seqp->drvr, &vs->voice, vs->pitch * bendRatio * vs->vibrato);
+        }
+        break;
+    default:
+        break;
+    }
+}
+
+void __CSPRepostEvent(void *arg0, Node_func_802AFD6C_de *arg1);
+
+
+
+extern s32 func_802BD170_de(s32);
+
+void func_802AFB6C_de(void *arg0, ObjectState10_2 *arg1) {
+    s32 padding[4];
+    s32 total = 0;
+    Node_func_802AFD6C_de *head = 0;
+    s32 scale;
+    Node_func_802AFD6C_de *node;
+    Node_func_802AFD6C_de *next;
+    if (arg1->unk_8 == 0xFF) {
+        if (arg1->unk_9 != 0x51) {
+            return;
+        }
+        scale = ((ObjectState4C *)(arg0))->unk_24;
+        __setUsptFromTempo(arg0,
+                      (f32)((arg1->unk_B << 16) | (arg1->unk_C << 8) | arg1->unk_D));
+        node = ((struct ObjectLinks54_2 *) ((char *) arg0))->link;
+        while (node != 0) {
+            next = ((struct ObjectLinks4_5 *) ((char *) node))->link;
+            total += node->value;
+            if (node->type == 0x15) {
+                s32 node_total;
+                func_802B2450_de((ListLink *)node);
+                if (head != 0) {
+                    func_802B2480_de(node, head);
+                } else {
+                    head = node;
+                    node->prev = 0;
+                    node->next = 0;
+                }
+                node_total = total;
+                if (next != 0) {
+                    total -= node->value;
+                    next->value += node->value;
+                }
+                node->value = node_total;
+            }
+            node = next;
+        }
+        node = head;
+        while (node != 0) {
+            next = node->prev;
+            node->value = (node->value / scale) * ((ObjectState4C *)(arg0))->unk_24;
+            __CSPRepostEvent(&((ObjectState4C *)(arg0))->unk_48, node);
+            node = next;
+        }
+    }
+}
+
+void func_802AFD00_de(void *arg0) {
+    struct ALSeqPlayer *player = arg0;
+    ALEvent sp10;
+    s32 sp20;
+    s32 field18;
+
+    if (player->state == 1) {
+        field18 = (s32)player->target;
+        if (field18 != 0 && (func_802AE9B0_de(field18, &sp20) & 0xFF)) {
+            sp10.type = 0;
+            func_802B00D4_de(&player->evtq, &sp10, sp20 * player->uspt);
+        }
+    }
+}
+
+void __CSPRepostEvent(void *arg0, Node_func_802AFD6C_de *arg1) {
+    ObjRecAt8V3 *object = arg0;
+    s32 saved;
+    Node_func_802AFD6C_de **link;
+    Node_func_802AFD6C_de *node;
+    s32 value;
+    s32 node_value;
+
+    saved = func_802BD170_de(1);
+    link = &object->unk8;
+    if (link != 0) {
+loop:
+        node = *link;
+        if (node == 0) {
+            goto insert;
+        }
+        value = arg1->value;
+        node_value = node->value;
+        if (value < node_value) {
+            node->value = node_value - value;
+insert:
+            func_802B2480_de(arg1, link);
+            goto done;
+        }
+        arg1->value = value - node_value;
+        link = (Node_func_802AFD6C_de **)*link;
+        if (link != 0) {
+            goto loop;
+        }
+    }
+done:
+    func_802BD170_de(saved);
+}
+
+void __setUsptFromTempo(void *arg0, f32 arg1) {
+    ALSeqPlayer *player = arg0;
+    ALCSeq_s *temp_v0;
+
+    temp_v0 = player->target;
+    if (temp_v0 != 0) {
+        player->uspt = (s32)(arg1 * temp_v0->qnpt);
+        return;
+    }
+    player->uspt = 0x1E8;
+}
+
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_802AF2E0_CD270[3] = {
+    0x42FE0000, 0x4F000000, 0x3F800000,
+};
+#endif
+
+#if defined(VERSION_US)
+unsigned int rodata_unresolved_800C734C[1] = {
+    0x6174615F,
+};
+#endif
+
+#if defined(VERSION_EU_X)
+unsigned int rodata_unresolved_800C89EC[1] = {
+    0x00000000,
+};
+#endif
+
+#if defined(VERSION_EU)
+unsigned int rodata_unresolved_800C801C[1] = {
+    0x4275C28F,
+};
+#endif
+
+#if defined(VERSION_DE)
+unsigned int rodata_unresolved_800C742C[1] = {
+    0xAFB60030,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_802AF2E0_CD270_us_rev1.c */
+const unsigned int D_blob_868e5463195d5f476023[3] = {
+    0x42FE0000, 0x4F000000, 0x3F800000,
+};
+#endif

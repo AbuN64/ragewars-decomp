@@ -6,7 +6,10 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "sdk/libgultra_inferred/802AD870_8.H"
-extern u32 __readVarLen(ALCSeq_s *, u32);
+#include "include_asm.h"
+#include "sdk/libgultra_inferred/802B3AFC.H"
+
+s32 __readVarLen(s32 arg0, s32 arg1);
 extern u32 func_802AE030_de(ALCSeq_s *, u32, ALEvent *);
 
 /* alCSeqNewMarker, drafted from ultralib src/audio/cseq.c: fill a compressed-sequence marker
@@ -336,3 +339,90 @@ s32 func_802AE9B0_de(ValueSet *set, u32 *result) {
     *result = minimum;
     return 1;
 }
+
+u8 func_802AE500_de(ALCSeq_s *seq, u32 track);
+
+s32 __readVarLen(s32 arg0, s32 arg1) {
+    s32 temp_v0;
+    s32 var_s0;
+
+    var_s0 = (u8) func_802AE500_de(arg0, arg1);
+    if (var_s0 & 0x80) {
+        var_s0 &= 0x7F;
+        do {
+            temp_v0 = (u8) func_802AE500_de(arg0, arg1);
+            var_s0 = (var_s0 << 7) + (temp_v0 & 0x7F);
+        } while (temp_v0 & 0x80);
+    }
+    return var_s0;
+}
+
+/** Read the object word at offset 0x2C. */
+int func_802AEAA0_de(void *object) {
+    ObjRecAt2CV2 *record = object;
+    return record->unk2C;
+}
+
+#if defined(VERSION_US)
+unsigned int rodata_unresolved_802AE9DC[1] = {
+    0x4576656E,
+};
+#endif
+
+/* ROM-grounded data: rodata/shared/800CC540 */
+#ifdef VERSION_DE
+const unsigned int D_blob_phase2_c84bcd6fd8b288cdc90d[3] = {
+    0x41F00000, 0x00000000, 0x3F800000,
+};
+#endif
+#ifdef VERSION_EU
+const unsigned int D_blob_phase2_c84bcd6fd8b288cdc90d[3] = {
+    0x41F00000, 0x00000000, 0x3F800000,
+};
+#endif
+#ifdef VERSION_EU_X
+const unsigned int D_blob_phase2_c84bcd6fd8b288cdc90d[2] = {
+    0x41F00000, 0x00000000,
+};
+#endif
+#ifdef VERSION_US
+const unsigned int D_blob_phase2_c84bcd6fd8b288cdc90d[3] = {
+    0x41F00000, 0x00000000, 0x3F800000,
+};
+#endif
+#ifdef VERSION_US_REV1
+const unsigned int D_blob_phase2_c84bcd6fd8b288cdc90d[2] = {
+    0x41F00000, 0x00000000,
+};
+#endif
+
+#if defined(VERSION_EU)
+unsigned int rodata_unresolved_800C7EEC[1] = {
+    0x00000000,
+};
+#endif
+
+#if defined(VERSION_DE)
+unsigned int rodata_unresolved_800C72FC[1] = {
+    0x00000000,
+};
+#endif
+
+#if defined(VERSION_EU_X)
+const unsigned int D_802AE290_CD148[1] = {
+    0x3F800000,
+};
+#endif
+
+#if defined(VERSION_EU_X)
+unsigned int rodata_unresolved_800C88BC[1] = {
+    0x00000000,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_802AE290_CD148_us_rev1.c */
+const unsigned int D_blob_6068a82f1f3c1327b771[1] = {
+    0x3F800000,
+};
+#endif
