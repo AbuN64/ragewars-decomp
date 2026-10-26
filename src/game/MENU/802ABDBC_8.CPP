@@ -7,7 +7,6 @@
 #include "COMMON/EXTERNS_6.H"
 
 /* Returns whether a player actor can use the item picked up through InstHdr_GetActorType: never for non-players or disabled actors, always during a team round when the model says so, and otherwise by the item's table: a D_800D31D0 power-up when the actor's team matches a D_800CE474 entry or its slot is free while not both states 3 and 7 are in use, a D_800D3230 weapon when on those teams or below the level from func_8022ACB8_de, a D_800D32A8 item when func_8022AC00_de exceeds the actor's count at 0x5E4, any D_800D34C0 item, and a D_800D3390 item unless it is item 0xBD6. */
-extern s32 D_800CE474[2];
 extern s32 InstHdr_GetActorType(s32 arg0);
 extern s32 Player_GetAmmoCapacity(ActorPickupCanCollect *actor, s16 index, s32 arg2);
 extern s32 Player_GetMaxHealth(ActorPickupCanCollect *actor, s32 id);

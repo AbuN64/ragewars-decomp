@@ -18,7 +18,6 @@
 
 extern s32 D_800D2C90;
 extern s8 D_8010BBB8;
-extern void Frontend_SetupRandomTeams(void);
 void Tsmos_UpdateFrontend(void) {
     s32 mode;
     s32 value;

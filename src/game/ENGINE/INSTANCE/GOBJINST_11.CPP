@@ -108,7 +108,6 @@ s32 func_8024B6F4_de(void *levelActor, s32 animationIndex, s32 allowDuringBlend)
 
 extern void Lists_ClearWeightedTable(WeightedTable *arg0);
 extern s32 func_80246A08_de(void *arg0, s32 arg1, s32 arg2);
-extern s32 Lists_AppendWeightedEntry(WeightedTable *arg0, s16 arg1, s16 arg2);
 
 s16 func_8024B738_de(void *actor, s16 *callback, s32 excludedAnimation) {
     WeightedTable eligibleKinds;

@@ -92,8 +92,6 @@ extern NodeGeometryGroupModelInstances *D_8010C56C;
 extern NodeGeometryGroupModelInstances *D_8010C57C;
 extern NodeGeometryGroupModelInstances *D_8010C584;
 extern void **D_8011064C;
-extern ItemRecAt1C D_8010C590[];
-extern NodeGeometryGroupModelInstances D_801144D0[];
 extern struct Shape_typemap_165 D_801157D8[];
 
 

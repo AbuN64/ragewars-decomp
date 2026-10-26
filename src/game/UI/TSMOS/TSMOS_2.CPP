@@ -25,7 +25,6 @@ extern void N64Eng_RegisterNumericWidgetClass(void);
 extern void Tsmos_SetIdleTimer(f32 a);
 extern void Tsmos_SetTimerState(s32 a);
 extern void Tsmos_ActivateControllerState(void);
-extern void Tsmos_SetModeOneFlag(s32 a);
 extern void Frontend_LoadLanguageStringsIfAny(s32 a);
 /* Start-up sequence for the title mode: initialises the subsystems in a fixed order, sets D_800CBC14 to 0x3C, then D_800D2C98 to 1 and D_800D2C90 to 0 around the final mode calls. */
 void func_802A2224_de(void) {

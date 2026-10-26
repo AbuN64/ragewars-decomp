@@ -21,10 +21,8 @@
 
 extern struct StateFrontendUpdatePlayModeMenu *D_800E4600;
 extern void Tsmos_DeactivateControllerState();
-extern void Tsmos_ActivateControllerState();
 extern s32 SmpSlider_GetTransitionMode(struct MenuFrontendUpdatePlayModeMenu *);
 extern void SmpSlider_EnableTransition(struct MenuFrontendUpdatePlayModeMenu *);
-extern void MarkMenuEventHandled();
 
 s32 Frontend_UpdatePlayModeMenu(void) {
     s32 result;

@@ -27,7 +27,6 @@ extern void *func_80262564_de(void *);
 
 extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
-extern f32 GraphU64_InterpolateWrappedValue(f32, f32, f32);
 
 
 extern f32 D_800D2988;
@@ -54,7 +53,6 @@ extern char D_800C3930_de;
 
 extern CROMEventEntry *func_80262598_de(void *);
 
-extern s32 func_802625C4_de(void *);
 
 extern s32 *func_8024BFD4_de(char *, s8);
 

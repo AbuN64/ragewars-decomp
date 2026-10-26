@@ -21,8 +21,6 @@
 
 
 
-extern Tuning D_800CE850;
-extern char D_800CE874;
 extern void Player_UpdateViewAngles(SharedPlayer *, Body_func_80224F5C_de *, char *);
 
 extern void func_802238E0_de(SharedPlayer *, Body_func_80224F5C_de *, Tuning *);
