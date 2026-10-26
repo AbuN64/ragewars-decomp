@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "FRONTEND/ENTRYRECAT4D4.H"
 #include "TYPES.H"
 #include "FRONTEND/8043A0B0_12.H"
@@ -62,3 +64,12 @@ void Frontend_SetMenuImageColor(s32 *record, s32 first, s32 second, s32 third) {
 s32 Frontend_GetMenuImageState(s32 *record) {
     return record[0x18 / 4];
 }
+#if VERSION_EU
+INCLUDE_DATA("ovl_80400000", D_auto_func_8043D1F4_eu_padding_1B31F4);
+#endif
+#if VERSION_EU_X
+INCLUDE_DATA("ovl_80400000", D_auto_Menu_GetLocalizedEncodedResource_padding_12D324);
+#endif
+#if VERSION_US
+INCLUDE_DATA("ovl_80400000", D_auto_func_8043C4F4_us_padding_1A04F4);
+#endif

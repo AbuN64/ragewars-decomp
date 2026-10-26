@@ -2610,3 +2610,6 @@ literals_Ovlgame_InitActorHudState = 0x800C25E0; // rom:0xC31E0 size:0x18
 literals_func_8026F368_de = 0x800C49C0; // rom:0xC55C0 size:0x1C
 literals_Text_DrawTileGrid = 0x800C64A0; // rom:0xC70A0 size:0x30
 literals_Pickup_ApplySpecialPickup = 0x800C6540; // rom:0xC7140 size:0x54
+literals_Menu_AnimateTabOptionsMenu = 0x800E8E60; // rom:0xE9A60 size:0x14
+literals_ScenarioSetup_UpdateSetupTransition = 0x800E92E0; // rom:0xE9EE0 size:0x44
+literals_Frontend_HandleMatchMenuMessage = 0x800E9250; // rom:0xE9E50 size:0x14

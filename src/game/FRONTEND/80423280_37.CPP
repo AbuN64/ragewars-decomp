@@ -12,7 +12,19 @@
 #include "FRONTEND/8041BEA8_6.H"
 #include "FRONTEND/RESULTSOPTIONSSCREEN.H"
 
-#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU)
+/* The resource ids of this screen are numbered per version: de two lower than us, eu-x four higher
+   (the same 11 ids at 19 sites, checked word by word against each ROM). */
+static inline s32 resultsRes(s32 id) {
+#if defined(VERSION_DE)
+    return id - 2;
+#elif defined(VERSION_EU_X)
+    return id + 4;
+#else
+    return id;
+#endif
+}
+
+#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_DE) || defined(VERSION_EU_X)
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
@@ -54,34 +66,34 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     D_800E4690 = screen;
     screen->root = arg0;
     D_800E4690->nodes = SmpOverlay_CreateOverlayNode(arg0, 4);
-    SmpOverlay_ShowSlotById(arg0, 0, 0x13E);
-    SmpOverlay_ShowSlotById(arg0, 1, 0x13E);
-    SmpOverlay_ShowSlotById(arg0, 2, 0x13E);
-    SmpOverlay_ShowSlotById(arg0, 3, 0x13E);
+    SmpOverlay_ShowSlotById(arg0, 0, resultsRes(0x13E));
+    SmpOverlay_ShowSlotById(arg0, 1, resultsRes(0x13E));
+    SmpOverlay_ShowSlotById(arg0, 2, resultsRes(0x13E));
+    SmpOverlay_ShowSlotById(arg0, 3, resultsRes(0x13E));
     for (i = 0; i < 0x24; i++) {
         Defs_SetBitValue(D_800E4690->owned, i, 0);
         Defs_SetBitValue(D_800E4690->pending, i, 0);
     }
     D_800E4690->state = 1;
     D_800E4690->slideFrames = 4;
-    wLeft = Frontend_FindWidgetByResourceId(arg0, 0x145);
+    wLeft = Frontend_FindWidgetByResourceId(arg0, resultsRes(0x145));
     D_800E4690->leftPanel = wLeft;
     wLeft->x -= wLeft->width;
     D_800E4690->leftStep = D_800E4690->leftPanel->width / 4;
     d = D_800E4690->leftPanel->width - D_800E4690->leftStep * 4;
     D_800E4690->leftPanel->x += d;
-    wRight = Frontend_FindWidgetByResourceId(arg0, 0x144);
+    wRight = Frontend_FindWidgetByResourceId(arg0, resultsRes(0x144));
     D_800E4690->rightPanel = wRight;
     wRight->x += wRight->width;
     D_800E4690->rightStep = D_800E4690->rightPanel->width / 4;
     d = D_800E4690->rightPanel->width - D_800E4690->rightStep * 4;
     D_800E4690->rightPanel->x -= d;
-    D_800E4690->resource = SmpFlicker_CreateFlickerWidget(0x141, 0x6E);
-    wHead = Frontend_FindWidgetByResourceId(arg0, 0x13F);
+    D_800E4690->resource = SmpFlicker_CreateFlickerWidget(resultsRes(0x141), 0x6E);
+    wHead = Frontend_FindWidgetByResourceId(arg0, resultsRes(0x13F));
     D_800E4690->focusItem = wHead;
     Frontend_SetWidgetFlag08(wHead, 0);
-    D_800E4690->owner = (void *)Frontend_FindWidgetByResourceId(arg0, 0x154);
-    D_800E4690->item155 = Frontend_FindWidgetByResourceId(arg0, 0x155);
+    D_800E4690->owner = (void *)Frontend_FindWidgetByResourceId(arg0, resultsRes(0x154));
+    D_800E4690->item155 = Frontend_FindWidgetByResourceId(arg0, resultsRes(0x155));
     D_800E4690->player = 0;
     for (i = 0; i < 4; i++) {
         if (((struct Status *)g_playerSettings)[i].active == 1) {
@@ -102,7 +114,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     D_80154020.ready = 0;
     D_80154020.value = -1;
     Frontend_InitMenuImage((s32 *)D_800E4690, 0x67, 0, 0, 0);
-    wItem = Frontend_FindWidgetByResourceId(arg0, 0x151);
+    wItem = Frontend_FindWidgetByResourceId(arg0, resultsRes(0x151));
     D_800E4690->item = wItem;
     wItem->alpha = 0xFF;
     D_800E4690->modeFlag = 0;
@@ -120,10 +132,10 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     case 1:
     case 3:
     case 4:
-        D_800E4690->bannerShadow = Frontend_FindWidgetByResourceId(arg0, 0x13D);
+        D_800E4690->bannerShadow = Frontend_FindWidgetByResourceId(arg0, resultsRes(0x13D));
         Menu_InitializeOptionsScene();
-        D_800E4690->banner = Frontend_FindWidgetByResourceId(arg0, 0x147);
-        Frontend_FindWidgetByResourceId(arg0, 0x148)->alpha = 0x6E;
+        D_800E4690->banner = Frontend_FindWidgetByResourceId(arg0, resultsRes(0x147));
+        Frontend_FindWidgetByResourceId(arg0, resultsRes(0x148))->alpha = 0x6E;
         break;
     case 2:
         break;

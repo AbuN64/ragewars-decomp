@@ -10,7 +10,7 @@
 #include "FRONTEND/80423280_50.H"
 #include "RENDER_2/8025DE50_5.H"
 
-#if !(defined(VERSION_DE) || defined(VERSION_EU_X))
+#if !defined(VERSION_DE)
 /* Advances the menu transition state and updates its visual effects. */
 
 
@@ -46,6 +46,15 @@ void SmXlate_SwitchScreen(s32);
 extern MenuTransitionSignal D_80154020;
 
 extern ListScreenScreen *D_800E4F60;
+
+/* Resource ids of this screen are numbered per version (relative to us): eu-x 4. */
+static inline s32 setupRes(s32 id) {
+#if defined(VERSION_EU_X)
+    return id + 4;
+#else
+    return id;
+#endif
+}
 
 s32 ScenarioSetup_UpdateSetupTransition(void *root, s32 arg1, s32 arg2) {
     ListScreenScreen *countdown;
@@ -157,7 +166,7 @@ block_7:
         SoundElement_PlayFlatSound(0xE78);
         break;
     case 8:
-        temp_v0 = ((ListScreenItem *)Frontend_FindWidgetByResourceId(root, 0x316U))->alpha;
+        temp_v0 = ((ListScreenItem *)Frontend_FindWidgetByResourceId(root, setupRes(0x316)))->alpha;
         temp_s0 = temp_v0 >> 1;
         ScenarioSetup_SetCatalogueAlpha(temp_s0);
         if (temp_s0 < 0xA) {
@@ -167,7 +176,7 @@ block_7:
         }
         break;
     case 9:
-        temp_s0 = ((ListScreenItem *)Frontend_FindWidgetByResourceId(root, 0x316U))->alpha;
+        temp_s0 = ((ListScreenItem *)Frontend_FindWidgetByResourceId(root, setupRes(0x316)))->alpha;
         temp_s0 = (temp_s0 + 1) * 2;
         if (temp_s0 >= 0x42) {
             temp_s0 = 0x41;

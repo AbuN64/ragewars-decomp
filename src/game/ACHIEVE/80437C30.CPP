@@ -11,7 +11,7 @@ const unsigned int rodata_func_80438614_de_800E1F50[6] = {
     0x3E99999A, 0x3C1374BC, 0x40400000, 0xC0A00000, 0xC2C80000, 0xC1F00000,
 };
 
-#if defined(VERSION_US) || defined(VERSION_US_REV1)
+#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_DE)
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"

@@ -6,7 +6,17 @@
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "RENDER_2/8025DE50_5.H"
 
-#if !(defined(VERSION_DE) || defined(VERSION_EU_X))
+/* Resource ids of this screen are numbered per version: de -10, eu-x 4 relative to us. */
+static inline s32 tabRes(s32 id) {
+#if defined(VERSION_DE)
+    return id - 10;
+#elif defined(VERSION_EU_X)
+    return id + 4;
+#else
+    return id;
+#endif
+}
+
 s32 Menu_AnimateTabOptionsMenu(void) {
     s32 temp_s0;
     s32 temp_v0;
@@ -48,7 +58,7 @@ s32 Menu_AnimateTabOptionsMenu(void) {
             }
             Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->pakIcon), 1);
             Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->header), 1);
-            Smos_SetFocusedElement(0x37D);
+            Smos_SetFocusedElement(tabRes(0x37D));
             goto block_11;
         }
 block_11:
@@ -127,7 +137,6 @@ block_11:
     }
     return 0;
 }
-#endif
 
 #if defined(VERSION_EU)
 unsigned int rodata_unresolved_800EDCB4[1] = {

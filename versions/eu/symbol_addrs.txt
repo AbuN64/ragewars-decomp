@@ -8387,8 +8387,8 @@ Frontend_IsMenuImageTransitionComplete = 0x8043D1C0; // type:func rom:0x1B31C0
 Frontend_SetMenuImageResource = 0x8043D1D0; // type:func rom:0x1B31D0
 Frontend_SetMenuImageColor = 0x8043D1D8; // type:func rom:0x1B31D8
 Frontend_GetMenuImageState = 0x8043D1E8; // type:func rom:0x1B31E8
-Menu_GetScreenEventTable = 0x8043D1F4; // type:func rom:0x1B31F4
-Menu_UpdateUnlockedLevelSelection = 0x8043D42C; // type:func rom:0x1B342C
+Level_GetScreenEventTable = 0x8043D200; // type:func rom:0x1B3200
+Menu_UpdateLevelSelectionAvailability = 0x8043D430; // type:func rom:0x1B3430
 Menu_HandleUnlockedLevelSelection = 0x8043D568; // type:func rom:0x1B3568
 Menu_ResetTextEntryResult = 0x8043D878; // type:func rom:0x1B3878
 Menu_DrawTextEntryCursor = 0x8043D88C; // type:func rom:0x1B388C
@@ -12497,3 +12497,6 @@ literals_Frontend_DrawFourPlayerResults = 0x800EE64C; // rom:0xEF24C size:0x14
 Frontend_DrawFourPlayerResults = 0x8043B760; // type:func rom:0x1B1760
 literals_Barrel_GetFacingSide = 0x800C2438; // rom:0xC3038 size:0x2C
 literals_Sky_DrawLensFlare = 0x800C3788; // rom:0xC4388 size:0x3C
+
+D_auto_func_8043D1F4_eu_padding_1B31F4 = 0x8043D1F4; // rom:0x1B31F4
+D_auto_func_8043C730_us_rev1_padding_1B342C = 0x8043D42C; // rom:0x1B342C

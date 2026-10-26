@@ -994,7 +994,6 @@ rodata_unresolved_800FE5A0 = 0x800FE5A0;
 rodata_writable_800FF134 = 0x800FF134;
 rodata_writable_800FF15C = 0x800FF15C;
 data_unresolved_80285630 = 0x80285630;
-data_unresolved_802C0160 = 0x802C0160;
 literals_Turret_Move = 0x800C194C; // rom:0xC254C size:0xC
 literals_Turret_LinkEffect_Activate = 0x800C197C; // rom:0xC257C size:0x4
 literals_func_802050C0_eu_x = 0x800C19C0; // rom:0xC25C0 size:0x8

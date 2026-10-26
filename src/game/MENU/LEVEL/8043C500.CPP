@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 
 #if defined(VERSION_US_REV1)
 /* Maps an id from 1 to 33 to the address of its data block, returning 0 for any other id. */
@@ -75,4 +77,28 @@ void *Level_GetScreenEventTable(s32 id) {
         return 0;
     }
 }
+#endif
+#if VERSION_DE
+INCLUDE_ASM("ovl_80400000", Level_GetScreenEventTable);
+#endif
+#if VERSION_US
+INCLUDE_DATA("ovl_80400000", D_auto_func_8043C730_us_rev1_padding_1A072C);
+#endif
+#if VERSION_EU_X
+INCLUDE_DATA("ovl_80400000", D_auto_func_8043C730_us_rev1_padding_12D55C);
+#endif
+#if VERSION_EU
+INCLUDE_DATA("ovl_80400000", D_auto_func_8043C730_us_rev1_padding_1B342C);
+#endif
+#if VERSION_DE
+INCLUDE_DATA("ovl_80400000", D_auto_func_8043C730_us_rev1_padding_1A254C);
+#endif
+#if VERSION_EU
+INCLUDE_ASM("ovl_80400000", Level_GetScreenEventTable);
+#endif
+#if VERSION_EU_X
+INCLUDE_ASM("ovl_80400000", Level_GetScreenEventTable);
+#endif
+#if VERSION_US
+INCLUDE_ASM("ovl_80400000", Level_GetScreenEventTable);
 #endif

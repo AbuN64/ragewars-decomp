@@ -7,7 +7,7 @@
 #include "COMMON/REQUESTRECAT10.H"
 #include "COMMON/MENULISTSCREEN.H"
 
-#if !(defined(VERSION_DE) || defined(VERSION_EU_X))
+#if !defined(VERSION_DE)
 #include "FRONTEND/MATCH_MENU_MESSAGE_IDS.H"
 #include "TYPES.H"
 

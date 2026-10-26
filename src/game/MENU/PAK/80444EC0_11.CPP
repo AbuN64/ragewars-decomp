@@ -10,11 +10,7 @@
 #include "COMMON/GAMEPLAY_SOUND_TABLE.H"
 #include "SYSTEM_3/80265370.H"
 
-#if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_80400000", Pak_UpdateFirstVolumeLabel);
-#endif
-
-#if defined(VERSION_DE) || defined(VERSION_US_REV1) || ((defined(VERSION_EU) || defined(VERSION_EU_X)) && defined(NON_MATCHING))
+#if defined(VERSION_DE) || defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_EU_X)
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
 #define VOLUME_BYTE D_801462C8.volume[0]
@@ -55,7 +51,7 @@ s32 Pak_UpdateFirstVolumeLabel(LayeredText *field) {
     } else if (step > 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         field->text = D_800E40B4;
-        text = (char *)field->text[g_languageIndex];
+        text = (char *)field->text[D_801462C8.language];
         Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800EEE10, step);
 #else
         field->text = (u8 **)&D_800D3D98;
@@ -65,7 +61,7 @@ s32 Pak_UpdateFirstVolumeLabel(LayeredText *field) {
     } else {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         field->text = D_800E40B4;
-        text = (char *)field->text[g_languageIndex];
+        text = (char *)field->text[D_801462C8.language];
         Defs_FormatIntegerValue(text + (Pak_CountLineChars(field) - 4), D_800EEE18, step);
 #else
         field->text = (u8 **)&D_800D3D98;

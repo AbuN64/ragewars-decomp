@@ -18,3 +18,13 @@ unsigned char rodata_unresolved_800DDF17[1] = {
     0x00,
 };
 #endif
+#if defined(VERSION_US_REV1)
+const unsigned char D_blob_83fae0a1897e2dffd396[3] = {
+    0x25, 0x64, 0x00,
+};
+#endif
+#if defined(VERSION_US_REV1)
+unsigned char rodata_unresolved_800E1F47[1] = {
+    0x00,
+};
+#endif
