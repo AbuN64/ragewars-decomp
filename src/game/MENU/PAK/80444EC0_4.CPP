@@ -6,6 +6,9 @@
 #include "COMMON/UNUSED.H"
 #include "sdk/AUDIO/802BD1A8_19.H"
 #include "RENDER_4/8028FD2C_6.H"
+#include "COMMON/S1_2.H"
+#include "MENU/PAK/80444EC0_5.H"
+#include "SYSTEM_2/8025E280.H"
 
 #if defined(VERSION_US_REV1)
 /* Edits a byte, integer, or float option and propagates it to the active resource records. */
@@ -82,5 +85,71 @@ s32 func_80444FA0_us_rev1(OptionEditState *arg0, OptionEditState *arg1, s32 arg2
         }
     }
     return 0;
+}
+#endif
+
+#if !(defined(VERSION_US))
+/* Calls func_8025E2D4_de with -1, func_8025E384_de, func_8025E33C_de and func_8044DD50_de on D_8011FAC0, and
+   returns one. */
+#include "COMMON/GAME_SESSION.H"
+
+extern void func_8044DD50_de(void *);
+
+s32 func_80444E30_de(void) {
+    func_8025E2D4_de(-1);
+    func_8025E384_de();
+    func_8025E33C_de();
+    func_8044DD50_de(&D_8011FAC0);
+    return 1;
+}
+
+/* Stores 4 into the first halfword of a record. */
+void func_80444E70_de(s16 *record) {
+    record[0] = 4;
+}
+#endif
+
+#if defined(VERSION_US_REV1)
+/* Forwards its three arguments to func_80444FA0_us_rev1 with 0, 0, 1, 0xFF and the pooled constant (1.0f). */
+extern s32 func_80444FA0_us_rev1(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
+
+void func_8044524C_us_rev1(void *first, void *second, void *third) {
+    func_80444FA0_us_rev1(first, second, third, 0, 0, 1, 0xFF, (1.0f));
+}
+
+/* Forwards its three arguments to func_80444FA0_us_rev1 with 0, 1, 1, 0xFF and the pooled constant (1.0f). */
+extern s32 func_80444FA0_us_rev1(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
+
+void func_80445288_us_rev1(void *first, void *second, void *third) {
+    func_80444FA0_us_rev1(first, second, third, 0, 1, 1, 0xFF, (1.0f));
+}
+
+/* Forwards its three arguments to func_80444FA0_us_rev1 with 0, 2, 1, 0xFF and the pooled constant (1.0f). */
+extern s32 func_80444FA0_us_rev1(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
+
+void func_804452C4_us_rev1(void *first, void *second, void *third) {
+    func_80444FA0_us_rev1(first, second, third, 0, 2, 1, 0xFF, (1.0f));
+}
+
+/* Forwards its three arguments to func_80444FA0_us_rev1 with 1, 8, 0xA, 0x7D0 and the pooled constant (1.0f). */
+extern s32 func_80444FA0_us_rev1(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
+
+void func_80445304_us_rev1(void *first, void *second, void *third) {
+    func_80444FA0_us_rev1(first, second, third, 1, 8, 0xA, 0x7D0, (1.0f));
+}
+
+/* Forwards its three arguments to func_80444FA0_us_rev1 with 2, 0x10, 0x66, 0xA000 and the pooled constant (10.239999771118164f). */
+extern s32 func_80444FA0_us_rev1(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
+
+void func_80445344_us_rev1(void *first, void *second, void *third) {
+    func_80444FA0_us_rev1(first, second, third, 2, 0x10, 0x66, 0xA000, (10.239999771118164f));
+}
+
+/* Forwards its three arguments to func_80444FA0_us_rev1 with 2, 0x14, 1, 0xB4 and the pooled constant
+   (1.0f). */
+extern s32 func_80444FA0_us_rev1(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
+
+void func_80445384_us_rev1(void *first, void *second, void *third) {
+    func_80444FA0_us_rev1(first, second, third, 2, 0x14, 1, 0xB4, (1.0f));
 }
 #endif
