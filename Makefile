@@ -1,5 +1,5 @@
 # Turok: Rage Wars: matching build.
-# generator: 10f70c9a2e68
+# generator: 0b2490e9f259
 # make check             builds every version ROM from the committed sources and verifies its SHA-1.
 # make check CHECK=tree  verifies only that the committed generated files are present (no ROMs needed).
 # make extract           splits every baserom into asm/<version>/ with splat; a data file's section is its stand-in's.
@@ -1347,12 +1347,15 @@ build/%.i.ok: $$(call src,$$*) $$(pp_flags_changed) | $(STAMPS) $(HDRKEY) $(STAM
 	$(Q)printf '%s\n' $(call shq,$(PP_FLAGS)) > $@.flags
 	$(Q)touch $@
 	$(Q)$(call RECORD,$@)
+# The extracted files an object assembles are an input by their bytes (`.asm`, their sum before the object is made; a make that extracts as it builds reads dates it cached): a different sum removes the object.
 build/%.o: build/%.i.ok asm/$$(call ver,$$*)/.extracted $$(text_size_changed) $$(flags_changed) | $(STAMPS) $(STAMPREC)
 	$(Q)$(call FACTS_CHECK,$(call ver,$*))
+	$(Q)cat /dev/null $(filter-out %/.extracted,$(filter asm/%,$^)) | sha1sum > $@.asm.new; if [ -f $@.asm ] && ! cmp -s $@.asm $@.asm.new; then $(RM) $@; fi
 	$(Q)if [ -z "$(filter-out %.i.ok,$?)$(flags_changed)" ] && [ "x$(file <$@.textsize)" = "x$(TEXTSIZE)" ] && [ -f $@ ] && \
 	[ $(@:.o=.i) -ot $@ ]; then printf '%s\n' $(call shq,$(CC_FLAGS)) > $@.flags; touch $@; \
 	else $(COMPILE_$(TC)) && if [ -f $@.same ]; then rm -f $@.same; else $(if $(TEXTSIZE),$(TRIM_TEXT) $@ $(TEXTSIZE),true) && \
 	printf '%s\n' '$(TEXTSIZE)' > $@.textsize; fi && printf '%s\n' $(call shq,$(CC_FLAGS)) > $@.flags; fi
+	$(Q)mv -f $@.asm.new $@.asm
 	$(Q)$(call RECORD,$@ $(filter-out %/.extracted,$(filter asm/%,$^)))
 build/%.s.o: $$(call src,$$*).s $$(text_size_changed) | $(STAMPS)
 	$(Q)mkdir -p $(@D)
