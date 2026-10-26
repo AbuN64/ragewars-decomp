@@ -167,7 +167,7 @@ void func_8022D214_de(void *widget) {
     Shared_ActorView *player = widget;
     actor->flags &= 0xFF7FFFFF;
     player->stun = 0;
-    player->markerTime = 0.0f;
+    player->marker.time = 0.0f;
     actor->flags |= 0x01000000;
     Items_ReleaseObjectHandles((s32) widget);
 }

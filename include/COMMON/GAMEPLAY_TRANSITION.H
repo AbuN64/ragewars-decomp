@@ -12,7 +12,8 @@ typedef struct Shared_ActionSlot { s8 kind; s8 category; } Shared_ActionSlot;
 
 typedef struct Shared_ActorView Shared_ActorView;
 struct Shared_ActorView {
-    u8 pad0[3];
+    u8 type; /* 0x00 */
+    u8 pad1[2];
     u8 id; /* 0x03 */
     u8 pad4[4];
     /* The actual player position also has a word representation in the published
@@ -20,9 +21,18 @@ struct Shared_ActorView {
     union { CVector3 vector; Triple words; } position;
     s32 modelId; /* +0x14: as LevelActor.model; func_80449E18_de refreshes it */
     void * model; /* +0x18: src/func_8021B468.c */
-    char pad1C[0xC8];
+    s32 unk_0x001C;
+    s32 unk_0x0020;
+    s32 unk_0x0024;
+    u8 pad28[0x10];
+    s32 unk_0x0038;
+    u8 pad3C[0xE4 - 0x3C];
     u16 kind; /* +0xE4: src/func_8021B468.c */
-    u8 padE6[0x1D8 - 0xE6];
+    u8 padE6[0x100 - 0xE6];
+    s32 flags; /* 0x100 */
+    u8 pad104[0xA];
+    s8 unk_0x010E;
+    u8 pad10F[0x1D8 - 0x10F];
     void *self; /* 0x1D8 */
     u8 pad1DC[0x1F0 - 0x1DC];
     s32 frameValue; /* +0x1F0: src/func_8021B468.c */
@@ -48,23 +58,30 @@ struct Shared_ActorView {
     s16 action; /* +0x650: src/func_8021B468.c */
     char pad652[6];
     f32 actionTimer; /* 0x658 */
-    char pad65C[0x688 - 0x65C];
+    char pad65C[8];
+    s32 unk_0x0664;
+    char pad668[0x688 - 0x668];
     char profile[0x10]; /* 0x688 */
     void *controller; /* +0x698: src/func_8021B468.c */
     char pad69C[8];
     f32 lateralInput; /* 0x6A4 */
     char pad6A8[4];
     s32 actionFlags; /* 0x6AC */
-    char pad6B0[0x10];
+    s32 unk_0x06B0;
+    char pad6B4[0xC];
     f32 forwardSpeed; /* 0x6C0 */
     f32 lateralSpeed; /* 0x6C4 */
-    char pad6C8[0x30];
+    char pad6C8[0x1C];
+    f32 unk_0x06E4;
+    char pad6E8[0x10];
     CVector3 contactPosition; /* 0x6F8 */
     char pad704[0x718 - 0x704];
     f32 speed; /* +0x718: src/func_8021B468.c */
     u8 pad71C[4];
     f32 transitionBlend; /* 0x720 */
-    u8 pad724[0x770 - 0x724];
+    u8 pad724[8];
+    f32 unk_0x072C;
+    u8 pad730[0x40];
     s16 nextWeapon; /* 0x770 */
     u8 pad772[0x780 - 0x772];
     f32 modelBlend; /* 0x780 */
@@ -73,7 +90,9 @@ struct Shared_ActorView {
     f32 controllerTimer; /* 0x78C */
     u8 pad790[4];
     void *controllerOwner; /* 0x794 */
-    u8 pad798[0x7F4 - 0x798];
+    u8 pad798[0x50];
+    s32 unk_0x07E8;
+    u8 pad7EC[8];
     s32 modelState; /* 0x7F4 */
     f32 modelDistance; /* 0x7F8 */
     void *effectModel; /* 0x7FC */
@@ -82,12 +101,18 @@ struct Shared_ActorView {
     f32 recoveryTime; /* +0x840; probe 20261019T015002519044Z */
     u8 reserved844[4];
     s32 collisionState; /* 0x848 */
-    u8 pad84C[0x864 - 0x84C];
+    u8 pad84C[4];
+    s32 unk_0x0850;
+    u8 pad854[0xC];
+    s32 unk_0x0860;
     s32 field864;
     s32 field868;
     s32 effectId; /* 0x86C */
     u8 pad870[0x938 - 0x870];
-    char strokes[0xD40 - 0x938]; /* 0x938 */
+    union {
+        char records[0xD40 - 0x938];
+        struct { u8 pad938[0xCC0 - 0x938]; s32 unk_0x0CC0; } word;
+    } strokes; /* 0x938 */
     CItemMenu record; /* 0xD40 */
     u8 padE2C[0xE54 - 0xD40 - sizeof(CItemMenu)];
     f32 effectTransform[16]; /* 0xE54 */
@@ -106,8 +131,9 @@ struct Shared_ActorView {
     f32 pending; /* +0x11E4: src/func_8021B468.c */
     s32 field11E8;
     f32 impactTimer; /* 0x11EC */
-    u8 pad11F0[0xC];
-    f32 markerTime; /* 0x11FC: frames left on the attract/repulse marker, cleared by player reset */
+    u8 pad11F0[8];
+    s32 unk_0x11F8;
+    union { f32 time; s32 word; } marker; /* 0x11FC: timer and integer reset view */
     CVector3 targetPosition; /* 0x1200 */
     s32 attract; /* 0x120C: the force marker pulls (1) or pushes (0) */
     s32 targeting; /* 0x1210 */
