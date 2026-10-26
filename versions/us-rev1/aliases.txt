@@ -3004,3 +3004,4 @@ D_auto_menu_14_untyped_4 = 0x80156704;
 D_auto_menu_17_untyped_2 = 0x80156CCC;
 g_menuSettingsDataPart3 = 0x80156CD8;
 D_auto_menu_17_untyped_4 = 0x80157A10;
+g_menuCheatCodeData = 0x80154D48;

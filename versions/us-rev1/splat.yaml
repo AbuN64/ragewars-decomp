@@ -7828,6 +7828,7 @@ segments:
       - [0x1BCF4C, data, data_8014/g_menuItemFragment12]
       - [0x1BCF94, data, data_8014/g_menuPakOptionsData]
       - [0x1BDB8C, data, data_8014/D_auto_menu_13_untyped_2]
+      - [0x1BDB90, data, data_8014/g_menuCheatCodeData]
       - [0x1BDC50, data, data_8014/g_menuPakOptionsDataPart3]
       - [0x1BE40C, data, data_8014/D_auto_menu_13_untyped_4]
       - [0x1BE410, data, data_8014/g_menuPakOptionsDataPart5]

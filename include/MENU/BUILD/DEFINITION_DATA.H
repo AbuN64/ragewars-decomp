@@ -36,4 +36,13 @@ struct MenuBuildDefinitionData {
     int value;
 };
 
+/* Twelve paged cheat records: Menu_ApplyCheatCode reads code, flags and sound;
+   the result widget reads the label at the second word of each record. */
+struct MenuCheatCodeData {
+    unsigned int code;
+    unsigned int label;
+    unsigned int flags;
+    unsigned int sound;
+};
+
 #endif
