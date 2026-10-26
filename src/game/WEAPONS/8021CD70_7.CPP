@@ -32,10 +32,10 @@ void func_8021E2A0_de(Shared_HudPlayer *, Shared_HudView *);
 void func_8021EA54_de(Shared_HudPlayer *, Shared_HudView *);
 void func_8022C1E8_de(Shared_HudPlayer *, Shared_HudView *);
 void func_8022C37C_de(Shared_HudPlayer *, Shared_HudView *);
-s32 func_80283228_de(void *, Shared_HudPlayer *);
+s32 Particle_CountOwnerListOneEffects(void *, Shared_HudPlayer *);
 s16 **Scene_StartWorldEffect(void *, s32, s32, s32);
-void func_802A6900_de(void *, Shared_HudPlayer *);
-void func_802A7AA4_de(void *);
+void ItemMenu_DrawEntries(void *, Shared_HudPlayer *);
+void OnScreen_UpdateMoverScript(void *);
 
 s32 func_802BD320_de(char *, const char *, ...);
 f32 Pak_MeasureLine(char *, f32, f32);
@@ -83,22 +83,22 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
     s32 width;
     s32 level;
     if (D_801462C8.state != 0xB && D_801462C8.state != 8) {
-        func_802A7AA4_de(player->anim0);
-        func_802A7AA4_de(player->anim1);
-        func_802A7AA4_de(player->anim2);
-        func_802A7AA4_de(player->anim3);
-        func_802A7AA4_de(&player->livesAnim);
-        func_802A7AA4_de(player->anim5);
-        func_802A7AA4_de(&player->scoreAnim);
-        func_802A7AA4_de(&player->countAnim);
-        func_802A7AA4_de(&player->squadAnim);
+        OnScreen_UpdateMoverScript(player->anim0);
+        OnScreen_UpdateMoverScript(player->anim1);
+        OnScreen_UpdateMoverScript(player->anim2);
+        OnScreen_UpdateMoverScript(player->anim3);
+        OnScreen_UpdateMoverScript(&player->livesAnim);
+        OnScreen_UpdateMoverScript(player->anim5);
+        OnScreen_UpdateMoverScript(&player->scoreAnim);
+        OnScreen_UpdateMoverScript(&player->countAnim);
+        OnScreen_UpdateMoverScript(&player->squadAnim);
         func_8021E2A0_de(player, view);
         if (view->flags == 0) {
             func_80219490_de(player->effect, view);
         }
         func_802183E8_de(player->strokes, view, player);
         func_80218F08_de(player->trails, view, player);
-        func_802A6900_de(player->marks, player);
+        ItemMenu_DrawEntries(player->marks, player);
         OnScreen_SetupSpriteMode(D_801462C8.hudFade);
         sx = view->width / (f32) D_800E28D0;
         sy = view->height / (f32) D_800E28D4;
@@ -116,7 +116,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
         x = player->healthX * scaleX + view->x;
         y = player->healthY * scaleY + view->y + view->height;
         if (hudRules()->state == 0) {
-            func_802A822C_de(n, x - scaleX * 3.0f, y - scaleY * 4.0f, scaleX, scaleY, 1, 0, 0);
+            OnScreen_DrawSpriteNumber(n, x - scaleX * 3.0f, y - scaleY * 4.0f, scaleX, scaleY, 1, 0, 0);
         }
         n = player->health;
         if (n != player->flashHealth) {
@@ -208,7 +208,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                 y = player->livesY * sy + view->y;
                 func_802AAC28_de(0x12C, 0, x + sx * 18.0f, y + sy * 28.0f, sx, sy, 1);
                 func_802AAC28_de(0x1F6, 0, x, y, sx, sy, 1);
-                func_802A822C_de(player->lives, x + sx * 30.0f, y + sy * 24.0f, sx, sy, 1, 0, 0);
+                OnScreen_DrawSpriteNumber(player->lives, x + sx * 30.0f, y + sy * 24.0f, sx, sy, 1, 0, 0);
             }
         } else if ((D_801462C8.controllerMode == 1 || D_801462C8.controllerMode == 4) && player->hideLives == 0) {
             n = player->lifeCount - 1;
@@ -218,7 +218,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             x = player->livesX * scaleX + view->x;
             y = player->livesY * scaleY + view->y;
             OnScreen_SetupSpriteMode(player->alpha);
-            func_802A822C_de(n, x, y + scaleY * 22.0f, scaleX, scaleY, 1, 0, 0);
+            OnScreen_DrawSpriteNumber(n, x, y + scaleY * 22.0f, scaleX, scaleY, 1, 0, 0);
             func_802AAC28_de(0x1F6, 0, x + scaleX * 20.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
             if (D_801462C8.counters.enabled != 0) {
                 func_802AAC28_de(0x203, 0, x + scaleX * 40.0f, y + scaleY * 11.0f, scaleX, scaleY * 1.5f, 1);
@@ -264,7 +264,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                     x -= 12.0f;
                 }
                 OnScreen_SetupSpriteMode(player->alpha);
-                func_802A822C_de(player->scoreLast, x + scaleX * 48.0f, y + scaleY * 22.0f, scaleX, scaleY, 1, 0, 0);
+                OnScreen_DrawSpriteNumber(player->scoreLast, x + scaleX * 48.0f, y + scaleY * 22.0f, scaleX, scaleY, 1, 0, 0);
                 if (player->scoreState < 2) {
                     if (hudRules()->enabled != 0) {
                         func_802AAC28_de(0x202, 0, x, y + scaleY * 11.0f, scaleX, scaleY * 1.5f, 1);
@@ -301,7 +301,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                         func_802AAC28_de(0x1FA, player->scoreFrame % frames, x + scaleX * 8.0f, y + scaleY * 16.0f,
                                       scaleX, scaleY * 1.5f, 1);
                     }
-                    func_802A84F8_de();
+                    OnScreen_SetupTextRendering();
                     func_802AAB68_de(1.0f, 1.0f);
                     if (D_801462C8.counters.enabled == 0) {
                         /* Names scroll right to left, each fading out from 0xFF in steps of 6. */
@@ -376,7 +376,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                         x -= 12.0f;
                     }
                     OnScreen_SetupSpriteMode(player->alpha);
-                    func_802A822C_de(player->owner->count, x + scaleX * 48.0f, y + scaleY * 20.0f, scaleX, scaleY, 1,
+                    OnScreen_DrawSpriteNumber(player->owner->count, x + scaleX * 48.0f, y + scaleY * 20.0f, scaleX, scaleY, 1,
                                   0, 0);
                     if (player->countState < 2) {
                         func_802AAC28_de(0x1FD, 0, x + scaleX * 8.0f, y + scaleY * 16.0f, scaleX, scaleY, 1);
@@ -421,7 +421,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                         x -= 12.0f;
                     }
                     OnScreen_SetupSpriteMode(player->alpha);
-                    func_802A822C_de(score, x + scaleX * 48.0f, y + scaleY * 20.0f, scaleX, scaleY, 1, 0, 0);
+                    OnScreen_DrawSpriteNumber(score, x + scaleX * 48.0f, y + scaleY * 20.0f, scaleX, scaleY, 1, 0, 0);
                     if (player->squadState < 2) {
                         func_802AAC28_de(0x201, 0, x + scaleX * 8.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
                     } else {
@@ -528,7 +528,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             func_802AAC28_de(0x20A, level, x + scaleX * 10.0f, y - scaleY * 140.0f, scaleX, scaleY, 1);
         }
         if (player->weapon == 0xC && player->kind != D_800CE47C) {
-            ammo = 3 - func_80283228_de(&D_8011D8D0, player);
+            ammo = 3 - Particle_CountOwnerListOneEffects(&D_8011D8D0, player);
             if (player->ammo < ammo) {
                 ammo = player->ammo;
             }

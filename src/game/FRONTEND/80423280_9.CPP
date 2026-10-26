@@ -65,7 +65,7 @@ extern void Frontend_ResetJoinRequestEntries(void);
 
 /* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled unless func_8043C308_de reports
    screen D_800E4EF0 busy: 0x36B closes the menu through Frontend_StoreMatchOptionWidgets, sends code -1 to
-   func_8042E988_de and calls func_802998A8_de; 0x369 does the same with page reset Frontend_SyncMatchJoinSlots(0)
+   Frontend_SetMenuChoiceResult and calls func_802998A8_de; 0x369 does the same with page reset Frontend_SyncMatchJoinSlots(0)
    and code 0x17 when N64Eng_GetNumericWidgetValue reports the screen's list at 0x34 non-empty; 0x36A always does
    it with Frontend_SeatJoinRequests and code 0x19, then calls Tsmos_DeactivateControllerState. Returns zero. */
 
@@ -77,7 +77,7 @@ extern void func_802998A8_de(void);
 
 
 /* Calls MarkMenuEventHandled and, unless func_8043C308_de reports one for the object D_800E4EF0 holds, calls
-   Frontend_StoreMatchOptionWidgets, func_8042E988_de with -1 and func_802998A8_de. Returns zero. */
+   Frontend_StoreMatchOptionWidgets, Frontend_SetMenuChoiceResult with -1 and func_802998A8_de. Returns zero. */
 
 
 extern void MarkMenuEventHandled();
@@ -238,7 +238,7 @@ s32 Frontend_ActivateMatchOptionAction(void) {
     case 0x36F:
 #endif
         Frontend_StoreMatchOptionWidgets();
-        func_8042E988_de(-1);
+        Frontend_SetMenuChoiceResult(-1);
         func_802998A8_de();
         break;
 #if defined(VERSION_DE)
@@ -251,7 +251,7 @@ s32 Frontend_ActivateMatchOptionAction(void) {
         if (N64Eng_GetNumericWidgetValue(D_800E4EF0->widget34) > 0) {
             Frontend_StoreMatchOptionWidgets();
             Frontend_SyncMatchJoinSlots(0);
-            func_8042E988_de(0x17);
+            Frontend_SetMenuChoiceResult(0x17);
             func_802998A8_de();
         }
         break;
@@ -265,7 +265,7 @@ s32 Frontend_ActivateMatchOptionAction(void) {
         Frontend_StoreMatchOptionWidgets();
         Frontend_SyncMatchJoinSlots(0);
         Frontend_SeatJoinRequests();
-        func_8042E988_de(0x19);
+        Frontend_SetMenuChoiceResult(0x19);
         func_802998A8_de();
         Tsmos_DeactivateControllerState();
         break;
@@ -279,7 +279,7 @@ s32 Frontend_ExitMatchOptions(void) {
         return 0;
     }
     Frontend_StoreMatchOptionWidgets();
-    func_8042E988_de(-1);
+    Frontend_SetMenuChoiceResult(-1);
     func_802998A8_de();
     return 0;
 }

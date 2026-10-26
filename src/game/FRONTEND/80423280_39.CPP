@@ -70,7 +70,7 @@ void func_80427B08_de(void) {
     switch (settings->controllerMode) {
     case 1:
         XPlus_CopyString(D_800E4690->heading, Frontend_GetStringByIndex(NAME_PHRASE));
-        func_8042E9B4_de(D_800E4690->heading, D_800DD9BC,
+        Frontend_ReplaceTextOccurrences(D_800E4690->heading, D_800DD9BC,
                       RES_NAME(Frontend_FindKeyIndex(settings->playerSettings[D_800E4690->record].character)));
         break;
     case 3:
@@ -85,7 +85,7 @@ void func_80427B08_de(void) {
             best = ((struct ResultsHeadingStage *) Achieve_CopyPreset(D_800E4690->stage, 3, 0))->time;
             XStdio_FormatBuffer(buffer, RES_TIMEFMT, (u8)(best / 60), (u8)(best % 60));
         }
-        func_8042E9B4_de(D_800E4690->time, RES_TIMEPOST, buffer);
+        Frontend_ReplaceTextOccurrences(D_800E4690->time, RES_TIMEPOST, buffer);
         XPlus_CopyString(D_800E4690->heading, RES_HEAD3);
         break;
     case 4:

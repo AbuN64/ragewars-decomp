@@ -13,7 +13,7 @@ extern f32 Barrel_GetSignedAngleToPoint(Player *, CVector3);
 
 /* Runs a computer player's engagement timer: while the countdown at 0x2E4 is positive it rerolls the
    wait at 0x2E8 as the config's base at 8 plus a random share (scale D_800C6E00) of its spread at 0xC
-   and counts down; at zero it counts the opponents in range through func_80283228_de (three counting as
+   and counts down; at zero it counts the opponents in range through Particle_CountOwnerListOneEffects (three counting as
    the whole wait) and either flags waiting at 0x23C while fewer than the wait or starts pursuit with
    the countdown at -1 and a wait from the config's 0x24 and 0x28 (scale D_800C6E04); during pursuit
    the wait runs down, ends early once the player is within D_800C6E08 of its target on the target's
@@ -27,15 +27,15 @@ extern f32 Barrel_GetSignedAngleToPoint(Player *, CVector3);
 
 extern char D_8011D8D0;
 
-extern s32 func_80283228_de(char *, void *);
+extern s32 Particle_CountOwnerListOneEffects(char *, void *);
 
 struct EffectSystem;
-extern void func_80284FF4_de(struct EffectSystem *, void *, CVector3 *);
+extern void Particle_AverageOwnerEffectPositions(struct EffectSystem *, void *, CVector3 *);
 
 extern f32 GraphU64_GetSquaredDistance(CVector3 *, CVector3 *);
 
 struct LevelActor;
-extern void func_802850C8_de(struct EffectSystem *arg0, struct LevelActor *arg1, f32 *arg2);
+extern void Particle_FindNearestForeignEffectDistance(struct EffectSystem *arg0, struct LevelActor *arg1, f32 *arg2);
 
 extern f32 Nav_GetEngagementDistance(void *arg0);
 
@@ -202,7 +202,7 @@ void Nav_UpdateCountedEffectAction(ObjectLinks2EC *arg0, IntegerState2C *config)
         return;
     }
     if (arg0->unk_2E4 == 0) {
-        count = func_80283228_de(&D_8011D8D0, *(void **) arg0);
+        count = Particle_CountOwnerListOneEffects(&D_8011D8D0, *(void **) arg0);
         if (count == 3) {
             arg0->unk_2E8 = count;
         }
@@ -220,7 +220,7 @@ void Nav_UpdateCountedEffectAction(ObjectLinks2EC *arg0, IntegerState2C *config)
     }
     arg0->unk_2E8 -= 1;
     target = ((struct ObjRecAt1D8V2 *) arg0->unk_64)->unk1D8;
-    func_80284FF4_de(&D_8011D8D0, *(void **) arg0, &pos);
+    Particle_AverageOwnerEffectPositions(&D_8011D8D0, *(void **) arg0, &pos);
     range = D_800C6E08;
     pos.y = ((Player *)target)->pos.y;
     if (GraphU64_GetSquaredDistance(&pos, &((Player *)(target))->pos) < range) {
@@ -248,7 +248,7 @@ void Nav_UpdateMeterGatedActionBurst(void *object, void *settings) {
     if (timer == 0) {
         f32 value;
 
-        func_802850C8_de(&D_8011D8D0, controller->player, &value);
+        Particle_FindNearestForeignEffectDistance(&D_8011D8D0, controller->player, &value);
         if (value < D_800C1D1C_de) {
             f32 k = D_800C1D24_de;
             f32 threshold = GraphU64_RandomFloat(D_800C1D20_de) + k;

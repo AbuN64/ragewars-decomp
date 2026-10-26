@@ -2,11 +2,11 @@
 #include "FRONTEND/PAKMENU.H"
 #if defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_DE) || defined(VERSION_EU_X)
 #if defined(VERSION_EU)
-#define func_8042F130_us_rev1 func_8042FBF0_eu
+#define Frontend_CreatePakProfileScreen Frontend_CreatePakProfileScreenEu
 #elif defined(VERSION_DE)
-#define func_8042F130_us_rev1 func_8042EF50_de
+#define Frontend_CreatePakProfileScreen Frontend_CreatePakProfileScreenDe
 #elif defined(VERSION_EU_X)
-#define func_8042F130_us_rev1 func_8042FD40_eu_x
+#define Frontend_CreatePakProfileScreen Frontend_CreatePakProfileScreenEux
 #endif
 /* Sprite ids of the setup screen: the first column is the id in the US rev 1 and EU builds. */
 #if defined(VERSION_DE)
@@ -158,7 +158,7 @@ extern void Frontend_RequestScreenMode(s32);
 extern void Tsmos_DeactivateControllerState(void);
 extern void Tsmos_SetTimerState(s32);
 
-s32 func_8042F130_us_rev1(void *screen) {
+s32 Frontend_CreatePakProfileScreen(void *screen) {
     PakMenuController *block;
     Shared_Game *globals;
     MenuWidget *sprite;

@@ -14,7 +14,7 @@ s32 func_8023E8D4_de(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly, s32 keep
 void Ovlgame_ReleaseObjectHandles(struct ItemsHandleOwner *);
 void GraphU64_InterpolateVector(CVector3 *, f32, void *, void *);
 void Events_DeliverContactEffect(void *, void *, s32, s32, CVector3, ContactEffectStyle);
-s32 func_802833D0_de(void *);
+s32 Particle_GetEffectResource(void *);
 
 s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, CVector3 *origin,
                     CVector3 *vertices, BoxContactTransform *transform, s32 index) {
@@ -100,7 +100,7 @@ s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, C
         style.blue = ray->projectile->color.z;
         Events_DeliverContactEffect(actor, ray->projectile, 2, -1, effectPosition, style);
         if (*actor->kind == 11 && ray->projectile->kind == 0x42D) {
-            func_802833D0_de(ray->projectile);
+            Particle_GetEffectResource(ray->projectile);
             func_8022B730_de(actor, 2.0f);
         }
     }

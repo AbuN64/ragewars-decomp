@@ -49,7 +49,7 @@ extern Params D_80100290;
 s32 DynLight_AllocateWorldLight(void *, s8);
 
  /* extern */
-void func_802843B8_de(void *, s32);
+void Particle_PlayAttachedSound(void *, s32);
 
  /* extern */
 void Fx_AttachActorRibbon(void *, void *, s8);
@@ -77,11 +77,11 @@ extern void Events_DeliverContactEffect(void *, void *, s32, s32, CVector3, stru
 extern void Particle_SpawnChildEffect(void *, s32, s8, s32);
 
 /** Return the word at offset 0xFC68. */
-int func_802830B8_de(struct EffectSystem *effectSystem) {
+int Particle_GetLastSpawnedEffect(struct EffectSystem *effectSystem) {
     return (s32)effectSystem->last;
 }
 
-void func_802830CC_de(struct EffectSystem *effectSystem, s32 arg1) {
+void Particle_ReleaseOwnerListOneEffects(struct EffectSystem *effectSystem, s32 arg1) {
     s32 *temp_v1_3;
     s32 temp_a1;
     s32 flags;
@@ -125,7 +125,7 @@ void func_802830CC_de(struct EffectSystem *effectSystem, s32 arg1) {
     }
 }
 
-s32 func_80283228_de(struct EffectSystem *effectSystem, s32 arg1) {
+s32 Particle_CountOwnerListOneEffects(struct EffectSystem *effectSystem, s32 arg1) {
     ParticleEffect *record;
     s32 count;
     u16 v;
@@ -144,7 +144,7 @@ s32 func_80283228_de(struct EffectSystem *effectSystem, s32 arg1) {
     return count;
 }
 
-void func_80283278_de(struct EffectSystem *effectSystem, s32 arg1) {
+void Particle_ReleaseOwnerListTwoEffects(struct EffectSystem *effectSystem, s32 arg1) {
     s32 *temp_v1_3;
     s32 temp_a1;
     s32 flags;
@@ -192,12 +192,12 @@ void func_80283278_de(struct EffectSystem *effectSystem, s32 arg1) {
     }
 }
 
-int func_802833D0_de(void *arg0) {
+int Particle_GetEffectResource(void *arg0) {
     Obj_func_80283920_de *actor = arg0;
     return (int)actor->effectResource;
 }
 
-s32 func_802833DC_de(void *arg0) {
+s32 Particle_GetRenderLayer(void *arg0) {
     Obj_func_80283920_de *object = arg0;
     s32 result;
 
@@ -212,7 +212,7 @@ s32 func_802833DC_de(void *arg0) {
     return result;
 }
 
-void func_80283424_de(void *arg0) {
+void Particle_InitializeObjectLinks(void *arg0) {
     (((struct ObjectLinks1E8 *) ((s8 *) arg0))->unk_18) = &D_8011ADB0;
     (((struct ObjectLinks1E8 *) ((s8 *) arg0))->unk_0) = 2;
     (((struct ObjectLinks1E8 *) ((s8 *) arg0))->unk_5C) = 0;
@@ -220,7 +220,7 @@ void func_80283424_de(void *arg0) {
     (((struct ObjectLinks1E8 *) ((s8 *) arg0))->unk_1E4) = 0;
 }
 
-void func_80283448_de(void *object) {
+void Particle_ReleaseObjectAndSound(void *object) {
     Particle_Release(&D_8011D8D0, object);
     Particle_StopSound(object);
 }
@@ -229,7 +229,7 @@ void func_80283448_de(void *object) {
 extern CQuatern GraphU64_BuildDirectionQuaternion(CVector3 *);
 extern Triple D_801002A8;
 extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
-void func_80283480_de(Obj_func_80283920_de *source, s32 kind) {
+void Particle_SpawnAtSharedContactPoint(Obj_func_80283920_de *source, s32 kind) {
     CQuatern q;
     CVector3 pos;
 
@@ -247,7 +247,7 @@ void func_80283480_de(Obj_func_80283920_de *source, s32 kind) {
                   (source->unk5C & 0x200006) | 1);
 }
 
-void func_802835A8_de(Obj_func_80283920_de *source, s32 kind) {
+void Particle_SpawnWithModeMinusThree(Obj_func_80283920_de *source, s32 kind) {
     CQuatern rotation;
     CVector3 position;
 
@@ -265,7 +265,7 @@ void func_802835A8_de(Obj_func_80283920_de *source, s32 kind) {
                   (source->unk5C & 0x200006) | 1);
 }
 
-void func_802836D0_de(Obj_func_80283920_de *source, s32 kind) {
+void Particle_SpawnWithModeMinusTwo(Obj_func_80283920_de *source, s32 kind) {
     CQuatern rotation;
     CVector3 position;
 
@@ -283,7 +283,7 @@ void func_802836D0_de(Obj_func_80283920_de *source, s32 kind) {
                   (source->unk5C & 0x200006) | 1);
 }
 
-void func_802837F8_de(Obj_func_80283920_de *source, s32 kind) {
+void Particle_SpawnWithModeMinusFive(Obj_func_80283920_de *source, s32 kind) {
     CQuatern rotation;
     CVector3 position;
 
@@ -316,7 +316,7 @@ void func_80283920_de(Obj_func_80283920_de *actor, Params_func_80283920_de *arg1
     if (!(actor->unk5C & 0x200000) && (temp_t0 = arg1->unkC, (temp_t0 != 0))) {
         switch(actor->unk4) {
         case 0x22: case 0x5f: case 0x60:
-            func_802843B8_de(actor,temp_t0); break;
+            Particle_PlayAttachedSound(actor,temp_t0); break;
         default:
             SoundElement_PlaySoundAtPosition(temp_t0, *(CVector3 *)&actor->unk8, 0, -1); break;
         }
@@ -411,7 +411,7 @@ s32 func_80283D38_de(s32 arg0) {
     return arg0;
 }
 
-void func_80283D50_de(void *actor) {
+void Particle_DispatchActorContactEvents(void *actor) {
     struct IntPair pair;
     s32 temp_a1;
     struct Shared_ParticleEvents *events;
@@ -450,7 +450,7 @@ void func_80283D50_de(void *actor) {
     }
 }
 
-void func_80283E58_de(void *particle) {
+void Particle_DispatchSpatialContactEvents(void *particle) {
     struct IntPair pair;
     s32 temp_a1;
     struct Shared_ParticleEvents *events;
@@ -490,7 +490,7 @@ void func_80283E58_de(void *particle) {
     }
 }
 
-void func_80283F60_de(void *particle) {
+void Particle_DispatchParticleContactEvents(void *particle) {
     struct IntPair pair;
     s32 temp_a1;
     struct Shared_ParticleEvents *events;

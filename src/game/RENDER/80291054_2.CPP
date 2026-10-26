@@ -36,7 +36,7 @@ void SetN64_InitFrameRing(RenderState *state) {
     Sched_InitializeSchedulerThread((void *)&D_80142928, (s32)(D_800EFC80_de + 0x2000), D_800CD8C8_de, 0, 1);
     osScAddClient(&D_80142928, &D_80146CC0, &D_801428C0);
     state->handle = -1;
-    func_80293590_de(state);
+    SetN64_BeginSessionFadeIn(state);
     g_displayListCursor = 0;
     func_802B6B80_de((void *)&D_80142C60);
     if (D_801470B0) {

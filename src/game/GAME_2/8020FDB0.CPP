@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "COMMON/SELF.H"
 
-/* Picks a computer player's next weapon: in state 14 defers to Nav_RequestRandomArmedWeapon; otherwise gathers the loaded weapons it carries (slot kinds from 0x4C3, with ammunition and allowed by func_8022EB0C_de), filtering the specials by the record's weapon mode (mode 0 or an unknown mode, reset to 0, skips class-1 weapons and treats kind 6 as 5; modes 0 and 1 skip class-2 weapons; mode 2 allows all), and unless it already holds one of them and should keep it (holding kind 4 in gear 2, func_80283228_de reporting a threat, or a 79 percent roll through func_802744D4_de) chooses one at random into 0x770, clearing the brain's switch timer at 0x2E4 when it changes. */
+/* Picks a computer player's next weapon: in state 14 defers to Nav_RequestRandomArmedWeapon; otherwise gathers the loaded weapons it carries (slot kinds from 0x4C3, with ammunition and allowed by func_8022EB0C_de), filtering the specials by the record's weapon mode (mode 0 or an unknown mode, reset to 0, skips class-1 weapons and treats kind 6 as 5; modes 0 and 1 skip class-2 weapons; mode 2 allows all), and unless it already holds one of them and should keep it (holding kind 4 in gear 2, Particle_CountOwnerListOneEffects reporting a threat, or a 79 percent roll through func_802744D4_de) chooses one at random into 0x770, clearing the brain's switch timer at 0x2E4 when it changes. */
 
 
 
@@ -24,7 +24,7 @@ extern void Nav_RequestRandomArmedWeapon(BrainCode8020EAE0 *);
 
 extern s32 Player_PlayerHasAmmoForWeapon(SharedPlayer *, s32);
 
-extern s32 func_80283228_de(char *, SharedPlayer *);
+extern s32 Particle_CountOwnerListOneEffects(char *, SharedPlayer *);
 
 
 extern void Nav_SelectAvailableWeapon(BrainCode8020EAE0 *, s32 *);
@@ -84,7 +84,7 @@ void Nav_SelectAvailableWeapon(BrainCode8020EAE0 *brain, s32 *ammo) {
         if (brain->player->views5E8.view62E_14.weapon == 4 && brain->player->views1C.view594_39.gear == 2) {
             return;
         }
-        if (func_80283228_de(D_8011D8D0, brain->player) > 0) {
+        if (Particle_CountOwnerListOneEffects(D_8011D8D0, brain->player) > 0) {
             return;
         }
         if (GraphU64_NextRandom() % 100 >= 21) {

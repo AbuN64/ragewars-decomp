@@ -32,7 +32,7 @@ struct Display {
 };
 /* D_8011BDC0 is the session's ring.current (D_8011FAC0 + 0x3C0 in every version). Code reads it as
  * D_8011FAC0.ring.current; this scalar name stays only where the ROM schedules the load as a plain scalar
- * (MIXED: Camera_DrawActiveViews, func_80293FF0_de, func_80294200_de move it across Gfx stores). */
+ * (MIXED: Camera_DrawActiveViews, SetN64_DrawIntroBackdrop, SetN64_DrawMode4Backdrop move it across Gfx stores). */
 extern Frame *D_8011BDC0;
 extern Frame *D_80146CD8; /* the frame being built */
 extern Gfx *D_8014D460, *D_8014D464; /* command buffers, alternating per frame */

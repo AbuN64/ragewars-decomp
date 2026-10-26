@@ -40,10 +40,10 @@ extern Gfx *g_displayListCursor;
 /* Clears D_800D29C8 when SetN64_CheckTimedSessionTransition accepts its argument with 4.0 and two fours. */
 
 /** Perform no work for callers at VRAM 0x80293DDC. */
-void func_80293DE8_de(s32 session) {
+void SetN64_OnMode5DrawComplete(s32 session) {
 }
 
-void func_80293DF0_de(GameSession *gameSession) {
+void SetN64_InitializeFrontendScreenState(GameSession *gameSession) {
     D_800E28C8 = -1;
     D_80146D70 = 0;
     Frontend_RequestScreenMode(0);
@@ -55,7 +55,7 @@ void func_80293DF0_de(GameSession *gameSession) {
     func_80298368_de(0x1D);
 }
 
-void func_80293E6C_de(void *arg0) {
+void SetN64_ExitSessionAndDisablePaks(void *arg0) {
     if (D_8014ADA0 != 0) {
         SetN64_SetTransitionTarget(arg0, 1);
         Control_DisableAllControllerPaks();
@@ -63,11 +63,11 @@ void func_80293E6C_de(void *arg0) {
 }
 
 /** Thin wrapper around SetN64_DrawSessionWithRoundTimeout. */
-void func_80293E9C_de(GameSession *session) {
+void SetN64_DrawRoundTimeoutSession(GameSession *session) {
     SetN64_DrawSessionWithRoundTimeout(session);
 }
 
-void func_80293EB8_de(void *arg0) {
+void SetN64_ResetSceneForIntro(void *arg0) {
     s8 *p1;
     s8 *p2;
     int new_var;
@@ -90,7 +90,7 @@ void func_80293EB8_de(void *arg0) {
 
 struct ObjRecV2;
 
-void func_80293F44_de(GameSession *session) {
+void SetN64_AdvanceIntroForMemorySize(GameSession *session) {
     s32 var_a2;
     s32 call_result;
     u32 result;
@@ -113,7 +113,7 @@ void func_80293F44_de(GameSession *session) {
     }
 }
 
-void func_80293FF0_de(void) {
+void SetN64_DrawIntroBackdrop(void) {
     s32 width;
     s32 height;
     Gfx *cmd;
@@ -128,21 +128,21 @@ void func_80293FF0_de(void) {
     }
 }
 
-void func_802940D8_de(void *arg0) {
+void SetN64_ClearSessionPlayerPools(void *arg0) {
     SetN64_ResetSessionPlayerPools(arg0, 0, 0);
 }
 
-void func_802940F8_de(struct GameSession *value) {
+void SetN64_AdvanceToModeFour(struct GameSession *value) {
     if (SetN64_CheckTimedSessionTransition(value, 4.0f, 4, 4) != 0) {
         D_800D29C8 = 0;
     }
 }
 
 /** Preserve the empty hook at VRAM 0x80294120. */
-void func_8029412C_de(void) {
+void SetN64_InitializeMode2(void) {
 }
 
-void func_80294134_de(struct GameSession *arg0)
+void SetN64_AdvanceToModeFive(struct GameSession *arg0)
 {
   s32 five;
   five = 5;

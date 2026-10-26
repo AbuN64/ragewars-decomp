@@ -13,7 +13,7 @@
 /* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled. 0x1D9: when
    func_802999A0_de(0) reports 0x16 it stops the menu object and the menu data D_80145040, releases
    D_8011FE88, restarts func_8025476C_de when func_8025477C_de reports it idle, sets the menu stage to 8
-   and sends func_8042E988_de 20, 10, 15 or 10 by the controller mode (3 for any other mode); otherwise
+   and sends Frontend_SetMenuChoiceResult 20, 10, 15 or 10 by the controller mode (3 for any other mode); otherwise
    it sends 3. 0x1DA sends 11 when func_802999A0_de(0) reports 11 and -1 otherwise. Either then calls
    func_802998A8_de. Returns zero. */
 #include "MENU/PAK_LOAD.H"
@@ -46,31 +46,31 @@ s32 Frontend_HandleMatchMenuMessage(void) {
             D_80145040.stage = 8;
             switch (D_80145040.game.controllerMode) {
             case 0:
-                func_8042E988_de(20);
+                Frontend_SetMenuChoiceResult(20);
                 break;
             case 1:
-                func_8042E988_de(10);
+                Frontend_SetMenuChoiceResult(10);
                 break;
             case 2:
-                func_8042E988_de(15);
+                Frontend_SetMenuChoiceResult(15);
                 break;
             case 3:
             case 4:
-                func_8042E988_de(10);
+                Frontend_SetMenuChoiceResult(10);
                 break;
             default:
-                func_8042E988_de(3);
+                Frontend_SetMenuChoiceResult(3);
                 break;
             }
         } else {
-            func_8042E988_de(3);
+            Frontend_SetMenuChoiceResult(3);
         }
         break;
     case MENU_804291A8_474:
         if (func_802999A0_de(0) == 11) {
-            func_8042E988_de(11);
+            Frontend_SetMenuChoiceResult(11);
         } else {
-            func_8042E988_de(-1);
+            Frontend_SetMenuChoiceResult(-1);
         }
         break;
     }
@@ -79,13 +79,13 @@ s32 Frontend_HandleMatchMenuMessage(void) {
 }
 #endif
 
-/* Calls MarkMenuEventHandled, then passes 0xB to func_8042E988_de when func_802999A0_de reports 0xB for zero
+/* Calls MarkMenuEventHandled, then passes 0xB to Frontend_SetMenuChoiceResult when func_802999A0_de reports 0xB for zero
    and -1 otherwise, then calls func_802998A8_de. Returns zero. */
 extern void MarkMenuEventHandled();
 
 s32 Frontend_CloseMatchMenu(void) {
     MarkMenuEventHandled();
-    func_8042E988_de(func_802999A0_de(0) == 0xB ? 0xB : -1);
+    Frontend_SetMenuChoiceResult(func_802999A0_de(0) == 0xB ? 0xB : -1);
     func_802998A8_de();
     return 0;
 }

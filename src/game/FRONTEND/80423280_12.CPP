@@ -41,14 +41,14 @@ extern void func_80298368_de(s32);
 
 /* Clears the words at offsets 0x78 and 0x54 of D_801468A0, then calls func_80298368_de with 0x14
    unless func_8042AF28_de and ScenarioSetup_StartRandomCupStage both report something, in which case it calls
-   func_8042DEA0_de. */
+   Frontend_StartConfiguredMatch. */
 
 
 
 
 extern s32 ScenarioSetup_StartRandomCupStage();
 
-extern void func_8042DEA0_de();
+extern void Frontend_StartConfiguredMatch();
 
 /* Reports why a match ended: time running out on a timed match, the score limit (Player_CheckScoreLimit),
    the rule set's own target (func_802282EC_de for rule set 0, the Frag Tag limit func_802281F0_de for
@@ -129,7 +129,7 @@ enum { ITEM0 = 621, ITEM1 = 620, ITEM2 = 619, ITEM3 = 618 };
    calls Frontend_DrawResultSelectionPreview; otherwise it advances the menu with Frontend_DrawMenuImage and func_8043C2A4_de and,
    once func_8043C308_de reports 2, acts on the choice at 0x1C: choice 0 hides the window argument,
    calls MarkMenuEventHandled, clears D_80146918 and D_801468F4 and leaves for screen 0xF when option
-   D_801462D5 is set, otherwise through func_8042DEA0_de when func_8042AF28_de and ScenarioSetup_StartRandomCupStage both
+   D_801462D5 is set, otherwise through Frontend_StartConfiguredMatch when func_8042AF28_de and ScenarioSetup_StartRandomCupStage both
    agree or for screen 0x14; choice 1 calls func_8040C428_de(0), shows the window, stops the objects
    at D_80145088 and 0x48 before it, releases D_8011FE88 through Scene_LoadLevelResources and sets the word at
    0x17F0 of D_80145088 to 8. Returns zero. */
@@ -210,7 +210,7 @@ void Frontend_ContinueCupOrOpenResults(void) {
     if (ScenarioSetup_IsCupSelected() == 0 || ScenarioSetup_StartRandomCupStage() == 0) {
         func_80298368_de(0x14);
     } else {
-        func_8042DEA0_de();
+        Frontend_StartConfiguredMatch();
     }
 }
 
@@ -447,7 +447,7 @@ s32 Frontend_UpdateMatchResultsTransition(void *window, void *unused1, s32 event
                 D_80146918 = 0;
                 D_801468F4 = 0;
                 if (ScenarioSetup_IsCupSelected() != 0 && ScenarioSetup_StartRandomCupStage() != 0) {
-                    func_8042DEA0_de();
+                    Frontend_StartConfiguredMatch();
                     return 0;
                 }
                 next = 0x14;

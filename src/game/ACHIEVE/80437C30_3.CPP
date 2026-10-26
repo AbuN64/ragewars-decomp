@@ -205,7 +205,7 @@ enum { MSG_BACK = 0x273, MSG_HIDE = 0x272, MSG_LEAVE = 0x277 };
 #else
 enum { MSG_BACK = 0x278, MSG_HIDE = 0x277, MSG_LEAVE = 0x27C };
 #endif
-extern void func_80434FB4_de(s32);
+extern void PAKInterface_SetScreenPhase(s32);
 extern void func_8043C278_de(void *);
 
 s32 func_80438D94_de(void) {
@@ -218,11 +218,11 @@ s32 func_80438D94_de(void) {
             D_800E5830->rules.locked = 0;
             break;
         case MSG_BACK:
-            func_80434FB4_de(5);
+            PAKInterface_SetScreenPhase(5);
             func_80298368_de(0x13);
             return 0;
         case MSG_LEAVE:
-            func_8042E988_de(0x21);
+            Frontend_SetMenuChoiceResult(0x21);
             break;
         default:
             return 0;

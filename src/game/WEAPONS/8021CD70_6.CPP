@@ -44,7 +44,7 @@ void func_8021EA54_de(PowerHudPlayer *player, Shared_HudView *view) {
             func_802AAC28_de(0xBEA,0,(s16)(x-halfWidth),(s16)(y-sy*D_800C25D8_de),sx,sy,1);
             x-=sx*D_800C25DC_de;
             y-=sy*D_800C25E0_de;
-            func_802A822C_de(player->first,x,y,sx*numberScale,sy,1,0,0);
+            OnScreen_DrawSpriteNumber(player->first,x,y,sx*numberScale,sy,1,0,0);
         }
         if(player->b.object && player->b.state && player->weapon<18) {
             x=player->b.x*sx+view->x;
@@ -53,7 +53,7 @@ void func_8021EA54_de(PowerHudPlayer *player, Shared_HudView *view) {
             func_802AAC28_de(0xBEB,0,(s16)(x-halfWidth),(s16)(y-sy*D_800C25E4_de),sx,sy,1);
             x-=sx*D_800C25E8_de;
             y-=sy*D_800C25EC_de;
-            func_802A822C_de(player->second,x,y,sx*numberScale,sy,1,0,0);
+            OnScreen_DrawSpriteNumber(player->second,x,y,sx*numberScale,sy,1,0,0);
         }
         if(player->c.object && player->c.state && player->weapon<18) {
             x=player->c.x*sx+view->x;
@@ -62,7 +62,7 @@ void func_8021EA54_de(PowerHudPlayer *player, Shared_HudView *view) {
             func_802AAC28_de(0xBEC,0,(s16)(x-halfWidth),(s16)(y-sy*D_800C25F0_de),sx,sy,1);
             x-=sx*D_800C25F4_de;
             y-=sy*D_800C25F8_de;
-            func_802A822C_de(player->third,x,y,sx*numberScale,sy,1,0,0);
+            OnScreen_DrawSpriteNumber(player->third,x,y,sx*numberScale,sy,1,0,0);
         }
     }
 }

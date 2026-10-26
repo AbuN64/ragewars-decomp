@@ -484,11 +484,11 @@ void func_80228AF4_de(void *arg0, ViewState *viewState) {
         center_y = (f32)(((struct IntPair *)&D_800E28D0)->field_4 - 10) * D_800C2C00_de[1];
     }
 
-    func_802A822C_de((s32)x, center_x - (scale_x * D_800C2C08_de),
+    OnScreen_DrawSpriteNumber((s32)x, center_x - (scale_x * D_800C2C08_de),
                    center_y, scale_x, scale_y, 1, 1, 0);
-    func_802A822C_de((s32)position, center_x + (2.0f * scale_x),
+    OnScreen_DrawSpriteNumber((s32)position, center_x + (2.0f * scale_x),
                    center_y, scale_x, scale_y, 1, 0, 2);
-    func_802A84F8_de();
+    OnScreen_SetupTextRendering();
     func_802A8F28_de(&D_800C2BD8_de,
                   (s32)(center_x - (scale_x * ((D_800C7470_Pair *)&D_800C2C08_de)->second)),
                   (s32)(center_y - (scale_y * D_800C2C10_de[0])),

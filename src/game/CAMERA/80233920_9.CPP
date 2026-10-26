@@ -246,8 +246,8 @@ CCameraText *Camera_PostScreenMessage(struct ScreenMessageOwner *owner, struct S
     return post_lines(owner, pool, text, kind, 1.0f, -1);
 }
 
-extern void func_802A84F8_de(void);
-extern void func_802A8800_de(void);
+extern void OnScreen_SetupTextRendering(void);
+extern void OnScreen_LoadTextTileModeTwo(void);
 extern void func_802A8F28_de(void *text, s32 x, s32 y, s32 alpha, s32 arg4, s32 arg5, f32 scaleX, f32 scaleY);
 void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool) {
     f32 spacing;
@@ -258,8 +258,8 @@ void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct Screen
 
     spacing = 9.0f;
     if (pool != 0) {
-        func_802A84F8_de();
-        func_802A8800_de();
+        OnScreen_SetupTextRendering();
+        OnScreen_LoadTextTileModeTwo();
         node = pool->freeMessages.head;
         if (node != 0) {
             node->y = (f32)D_800E28D4 * 0.81f;
@@ -324,7 +324,7 @@ extern const f32 D_800C3424_de, D_800C3428_de, D_800C342C_de, D_800C3430_de;
 extern const f32 D_800C3434_de, D_800C3438_de, D_800C343C_de, D_800C3440_de;
 extern const f32 D_800C3444_de, D_800C3448_de;
 extern s32 D_800E28D8;
-extern void func_802A84F8_de(void);
+extern void OnScreen_SetupTextRendering(void);
 extern void func_802A8F28_de(void *, s32, s32, s32, s32, s32, f32, f32);
 
 /* Draws and advances the screen messages of one view, retiring finished ones. */
@@ -365,7 +365,7 @@ void Camera_DrawAndAdvanceMessages(Race *race, Racer *racer) {
     for (; message != 0; message = prev) {
         prev = message->prev;
         if (message->kind != 0) {
-            func_802A84F8_de();
+            OnScreen_SetupTextRendering();
             if (small || message->pad20 != 0) {
                 scale = D_800C3424_de;
                 if (D_800E28D8 == 0) {

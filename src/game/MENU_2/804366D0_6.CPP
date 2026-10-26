@@ -70,14 +70,14 @@ extern StyleNextState *D_800E5694;
 
 
 /* Calls MarkMenuEventHandled; when func_80299A08_de reports 0x1C8, passes the word at offset 0x14 of the
-   object D_800E5694 points to to func_804369E8_de, then passes -1 to func_8042E988_de if func_802999A0_de
+   object D_800E5694 points to to func_804369E8_de, then passes -1 to Frontend_SetMenuChoiceResult if func_802999A0_de
    reports 0x16 for zero and 0xB otherwise, and calls func_802998A8_de. Returns zero. */
 
 
 
 
 
-/* Calls MarkMenuEventHandled, then passes -1 to func_8042E988_de when func_802999A0_de reports 0x16 for zero
+/* Calls MarkMenuEventHandled, then passes -1 to Frontend_SetMenuChoiceResult when func_802999A0_de reports 0x16 for zero
    and 0xB otherwise, then calls func_802998A8_de. Returns zero. */
 
 
@@ -132,7 +132,7 @@ s32 func_8043705C_de(void) {
     if (func_80299A08_de() == 0x1CC) {
 #endif
         func_804369E8_de(D_800E5694->item);
-        func_8042E988_de(func_802999A0_de(0) == 0x16 ? -1 : 0xB);
+        Frontend_SetMenuChoiceResult(func_802999A0_de(0) == 0x16 ? -1 : 0xB);
         func_802998A8_de();
     }
     return 0;
@@ -140,7 +140,7 @@ s32 func_8043705C_de(void) {
 
 s32 func_804370CC_de(void) {
     MarkMenuEventHandled();
-    func_8042E988_de(func_802999A0_de(0) == 0x16 ? -1 : 0xB);
+    Frontend_SetMenuChoiceResult(func_802999A0_de(0) == 0x16 ? -1 : 0xB);
     func_802998A8_de();
     return 0;
 }

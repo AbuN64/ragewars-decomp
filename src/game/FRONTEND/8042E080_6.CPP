@@ -17,7 +17,7 @@ extern void SmpFlicker_RestoreFlickerValue(void *);
 extern void SmpFlicker_StartFlicker(void *, s32);
 
 extern s32 SmpFlicker_IsFlickerIdle(void *);
-s32 func_8042F91C_de(s32 unused0, s32 unused1, s32 arg2) {
+s32 Frontend_UpdatePakScreenPanels(s32 unused0, s32 unused1, s32 arg2) {
     s32 readyState;
     s32 openFramesLeft;
     s32 closeFramesLeft;
@@ -79,7 +79,7 @@ s32 func_8042F91C_de(s32 unused0, s32 unused1, s32 arg2) {
             Frontend_SetWidgetFlag08((func_8041F2A0_Item *) D_800E54A4->title, 0);
             break;
         }
-        if (D_800E54A4->ready == 3) func_80433398_de(arg2);
+        if (D_800E54A4->ready == 3) PAKInterface_UpdatePlayerPanelAnimations(arg2);
     }
     return 0;
 }

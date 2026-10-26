@@ -124,7 +124,7 @@ extern void Menu_SetOptionsSceneSelection(s32);
 extern char D_800DD9BC[];
 extern char D_800DD9C8[];
 extern char D_800DD9D0_de[];
-extern void func_8042E9B4_de(char *, char *, char *);
+extern void Frontend_ReplaceTextOccurrences(char *, char *, char *);
 
 
 extern s32 Control_IsControllerConnected(s32);

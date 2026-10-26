@@ -15,12 +15,12 @@ int func_8043AD30_eu_x(void) { SmpButton_WrapButtonWidget(0x3DE); SmpButton_Wrap
 
 /* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled: 0x3DA waits through
    func_80298368_de for a time chosen by setting D_801462D5 through jtbl_800DDF70 (20, 15 or 10, and
-   3 for any other setting); 0x3DB sends code -1 to func_8042E988_de and calls func_802998A8_de.
+   3 for any other setting); 0x3DB sends code -1 to Frontend_SetMenuChoiceResult and calls func_802998A8_de.
    Returns zero. */
 extern void MarkMenuEventHandled(void);
 extern s32 func_80299A08_de(void);
 extern void func_80298368_de(s32);
-extern void func_8042E988_de(s32);
+extern void Frontend_SetMenuChoiceResult(s32);
 extern void func_802998A8_de(void);
 
 #if defined(VERSION_DE)
@@ -56,19 +56,19 @@ s32 Frontend_UpdateTimedTransition(void) {
         func_80298368_de(time);
         return 0;
     case MENU_80439F38_987:
-        func_8042E988_de(-1);
+        Frontend_SetMenuChoiceResult(-1);
         func_802998A8_de();
         return 0;
     }
     return 0;
 }
 
-/* Calls MarkMenuEventHandled, then func_8042E988_de with -1, then func_802998A8_de, and returns zero. */
+/* Calls MarkMenuEventHandled, then Frontend_SetMenuChoiceResult with -1, then func_802998A8_de, and returns zero. */
 extern void MarkMenuEventHandled();
 
 s32 func_80439E04_de(void) {
     MarkMenuEventHandled();
-    func_8042E988_de(-1);
+    Frontend_SetMenuChoiceResult(-1);
     func_802998A8_de();
     return 0;
 }

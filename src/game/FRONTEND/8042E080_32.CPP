@@ -23,7 +23,7 @@ enum { PAK_LIST_FIELD = 726 };
 
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 
-void func_80434250_de(s32 player, s32 direction) {
+void PAKInterface_ScrollNoteList(s32 player, s32 direction) {
     s32 i;
     s32 cursor;
 

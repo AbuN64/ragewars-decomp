@@ -6,7 +6,7 @@
 
 /* Runs the block D_800E54A4 points to on event 1: in phase 3 at 0x4C it counts each player's timer
    at 0x14 of its 2920-byte record at 0x58 down and, when one expires, marks it -1 and resets that
-   player through Pak_ProbeStatus and func_80433610_de between Tsmos_DeactivateControllerState and Tsmos_ActivateControllerState; then it
+   player through Pak_ProbeStatus and PAKInterface_ResolvePlayerPakState between Tsmos_DeactivateControllerState and Tsmos_ActivateControllerState; then it
    advances the menu at 0x8 with Frontend_DrawMenuImage and func_8043C2A4_de while func_8043C308_de reports 1, and
    once it reports 2 in phase 5 at 0x54 calls MarkMenuEventHandled and moves on through Frontend_ContinueCupOrOpenResults,
    Frontend_OpenControllerModeResults or func_804389F0_de as the cartridge's jump table jtbl_800E1BB0 chooses for option
@@ -19,7 +19,7 @@
 extern void Tsmos_DeactivateControllerState();
 extern void Tsmos_ActivateControllerState();
 extern void Pak_ProbeStatus(s32);
-extern void func_80433610_de(s32);
+extern void PAKInterface_ResolvePlayerPakState(s32);
 extern s32 func_8043C308_de(void *);
 extern void Frontend_DrawMenuImage(void *);
 extern void func_8043C2A4_de(void *);
@@ -28,7 +28,7 @@ extern void Frontend_ContinueCupOrOpenResults();
 extern void Frontend_OpenControllerModeResults();
 extern void func_804389F0_de();
 
-s32 func_8042F7A8_de(void *unused0, void *unused1, s32 event) {
+s32 Frontend_UpdatePakScreenExit(void *unused0, void *unused1, s32 event) {
     s32 i;
     u32 option;
 
@@ -41,7 +41,7 @@ s32 func_8042F7A8_de(void *unused0, void *unused1, s32 event) {
                 D_800E54A4->players[i].back = -1;
                 Tsmos_DeactivateControllerState();
                 Pak_ProbeStatus(i);
-                func_80433610_de(i);
+                PAKInterface_ResolvePlayerPakState(i);
                 Tsmos_ActivateControllerState();
             }
         }

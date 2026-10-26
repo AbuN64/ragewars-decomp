@@ -7,7 +7,7 @@
 #include "MENU_2/804196C0_14.H"
 #include "SCENE/802508E0_13.H"
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3300, an actor kind at D_800E3304 and a handler at D_800E3308: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at g_smpEventHandlerTables, an actor kind at D_800E3304 and a handler at D_800E3308: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
 
 
@@ -18,7 +18,7 @@
 
 /* func_804196D8_de advances a frame sequence: it adds elapsed time into offset 0x54 and, once that
    exceeds the duration at 0x58, moves the frame index at 0x4C through the -1 terminated array at
-   0x48. func_804198CC_de resets the index through here after counting the frames. */
+   0x48. SmpFrameAnim_CreateFrameSequence resets the index through here after counting the frames. */
 
 
 void SmpFrameAnim_SetSequenceFrame(struct FrameSequence *sequence, s32 frame) {
@@ -26,7 +26,7 @@ void SmpFrameAnim_SetSequenceFrame(struct FrameSequence *sequence, s32 frame) {
 }
 
 /* Sets how long each frame of a sequence is shown; func_804196D8_de advances the frame once the
-   time accumulated at 0x54 exceeds this. func_804198CC_de clears it when it builds the sequence. */
+   time accumulated at 0x54 exceeds this. SmpFrameAnim_CreateFrameSequence clears it when it builds the sequence. */
 
 
 void SmpFrameAnim_SetSequenceDuration(struct FrameSequence *sequence, s32 duration) {
@@ -36,45 +36,45 @@ void SmpFrameAnim_SetSequenceDuration(struct FrameSequence *sequence, s32 durati
 /* Returns a frame sequence's current frame index, which SmpFrameAnim_SetSequenceFrame sets. */
 
 
-s32 func_804199EC_de(struct FrameSequence *sequence) {
+s32 SmpFrameAnim_GetSequenceFrame(struct FrameSequence *sequence) {
     return sequence->frame;
 }
 
-/* Returns how many frames a sequence holds, counted by func_804198CC_de up to the -1 terminator. */
+/* Returns how many frames a sequence holds, counted by SmpFrameAnim_CreateFrameSequence up to the -1 terminator. */
 
 
-s32 func_804199F8_de(struct FrameSequence *sequence) {
+s32 SmpFrameAnim_GetFrameCount(struct FrameSequence *sequence) {
     return sequence->count;
 }
 
 /* Sets how many more times a counted-loop sequence repeats; func_804196D8_de decrements it each
-   time the sequence wraps and stops when it reaches zero. func_804198CC_de clears it on creation. */
+   time the sequence wraps and stops when it reaches zero. SmpFrameAnim_CreateFrameSequence clears it on creation. */
 
 
-void func_80419A04_de(struct FrameSequence *sequence, s32 loops) {
+void SmpFrameAnim_SetLoopCount(struct FrameSequence *sequence, s32 loops) {
     sequence->loops = loops;
 }
 
-/* Returns how many more times a counted-loop sequence repeats, which func_80419A04_de sets. */
+/* Returns how many more times a counted-loop sequence repeats, which SmpFrameAnim_SetLoopCount sets. */
 
 
-s32 func_80419A0C_de(struct FrameSequence *sequence) {
+s32 SmpFrameAnim_GetLoopCount(struct FrameSequence *sequence) {
     return sequence->loops;
 }
 
-/* Sets playback mode bits in a frame sequence; func_804198CC_de sets bit 1 and func_804196D8_de sets
+/* Sets playback mode bits in a frame sequence; SmpFrameAnim_CreateFrameSequence sets bit 1 and func_804196D8_de sets
    bit 2 when it reverses a ping-pong sequence. */
 
 
-void func_80419A18_de(struct FrameSequence *sequence, s32 bits) {
+void SmpFrameAnim_AddSequenceFlags(struct FrameSequence *sequence, s32 bits) {
     sequence->flags |= bits;
 }
 
-/* Clears playback mode bits in a frame sequence; func_80419A18_de sets them and func_804196D8_de clears
+/* Clears playback mode bits in a frame sequence; SmpFrameAnim_AddSequenceFlags sets them and func_804196D8_de clears
    bit 1 or 2 when it reverses a ping-pong sequence. */
 
 
-void func_80419A28_de(struct FrameSequence *sequence, s32 bits) {
+void SmpFrameAnim_ClearSequenceFlags(struct FrameSequence *sequence, s32 bits) {
     sequence->flags &= ~bits;
 }
 
@@ -82,11 +82,11 @@ void func_80419A28_de(struct FrameSequence *sequence, s32 bits) {
    (forward), 0x10 (ping-pong), 0x20 (counted loop) and 8 (loop) on every tick. */
 
 
-s32 func_80419A3C_de(struct FrameSequence *sequence, s32 bits) {
+s32 SmpFrameAnim_HasSequenceFlags(struct FrameSequence *sequence, s32 bits) {
     return (sequence->flags & bits) != 0;
 }
 
-s32 func_80419A4C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 SmpFrameAnim_DispatchEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;
@@ -98,7 +98,7 @@ s32 func_80419A4C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         entry = (char *)&D_800E3308;
         offset = 0;
         do {
-            if (((struct Shape_typemap_3 *) (((char *) (&D_800E3300)) + offset))->field_0 == arg1) {
+            if (((struct Shape_typemap_3 *) (((char *) (&g_smpEventHandlerTables)) + offset))->field_0 == arg1) {
                 actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
                 table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E3304)) + offset))->field_0;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
@@ -116,10 +116,10 @@ s32 func_80419A4C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
    to their home stack slots. */
 
 
-void func_80419ADC_de(s32 unused0, struct Triple unused1) {
+void SmpFrameAnim_IgnoreEvent(s32 unused0, struct Triple unused1) {
 }
 
-s32 func_80419AEC_de(void *arg0) {
+s32 SmpFrameAnim_DestroyController(void *arg0) {
     Cache_FreeMemory(arg0);
     return 0;
 }

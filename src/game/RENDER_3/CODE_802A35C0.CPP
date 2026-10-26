@@ -82,7 +82,7 @@ extern f32 Math_Sqrtf(f32);
 
 extern void Fx_FreeRibbonSegment(s32, StateSmpUpdateRibbonLifetime *, Nodes *);
 
-extern void func_802A5FF0_de(StateSmpUpdateRibbonLifetime *);
+extern void Fx_DetachEffectObject(StateSmpUpdateRibbonLifetime *);
 
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
@@ -322,7 +322,7 @@ s32 Smp_UpdateRibbonLifetime(s32 owner, StateSmpUpdateRibbonLifetime *state) {
     object = state->object;
     if (state->object != 0 && (state->flags & 1) &&
         !(object->flags & 0x200)) {
-        func_802A5FF0_de(state);
+        Fx_DetachEffectObject(state);
     }
     D_800D2988 = saved_step;
 

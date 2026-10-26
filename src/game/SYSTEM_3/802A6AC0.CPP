@@ -13,7 +13,7 @@
 #include "LISTS/80279520.H"
 
 
-void func_802A5AD0_de(ObjRecAt3CV1 *arg0) {
+void Fx_AccumulateEffectComponents(ObjRecAt3CV1 *arg0) {
     if (arg0->unk24 != 0.0f) {
         D_800D15E4[0] += arg0->unk34;
         D_800D15E4[1] += arg0->unk38;
@@ -25,7 +25,7 @@ void func_802A5AD0_de(ObjRecAt3CV1 *arg0) {
 
 extern f32 D_800C5EA0_de[2];
 
-void func_802A5B4C_de(f32 *arg0) {
+void Fx_ClampScalarRange(f32 *arg0) {
     f32 new_var;
     f32 new_var2;
 
@@ -43,7 +43,7 @@ void func_802A5B4C_de(f32 *arg0) {
 
 
 
-void func_802A5B84_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4) {
+void Fx_AddTimedCallback(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4) {
     void *node;
 
     node = Lists_MoveHeadToInactiveList(arg0 + 0x7588);

@@ -17,7 +17,7 @@
 
 extern struct StateFlags *Scene_GetBlLevelData(void *, s32);
 
-s32 func_8042EE34_de(void) {
+s32 Frontend_GetStageTransitionResource(void) {
     return (D_801462C8.controllerMode == 1 ? Scene_GetBlLevelData(&g_world, D_8015402C)->flags : D_8015402C) * 10 + 0xBC2;
 }
 

@@ -69,8 +69,8 @@ s32 Frontend_ListHasFlag100(void *);                          /* extern */
 void SmpOverlay_ShowSlotNode(s32, s32, void *);                  /* extern */
 void PAKInterface_RelabelSlotRows(s32);                               /* extern */
 void PAKInterface_UpdatePlayerControlRows(s32);                               /* extern */
-void func_80434250_de(s32, s32);                            /* extern */
-void func_80434EF4_de(s32);                               /* extern */
+void PAKInterface_ScrollNoteList(s32, s32);                            /* extern */
+void PAKInterface_DecrementNameCharacter(s32);                               /* extern */
 extern PakMenuController *D_800E54A4;                    
 
 s32 func_80430118_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
@@ -92,7 +92,7 @@ s32 func_80430118_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         }
         if (arg3 == 1) {
             MarkMenuEventHandled();
-            func_80434EF4_de(player);
+            PAKInterface_DecrementNameCharacter(player);
             D_800E54A4->players[player].namePhase = 0;
             SoundElement_PlayFlatSound(0xE81);
             return 0;
@@ -101,7 +101,7 @@ s32 func_80430118_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     case 4:
         if (arg3 == 1) {
             MarkMenuEventHandled();
-            func_80434250_de(player, 1);
+            PAKInterface_ScrollNoteList(player, 1);
             D_800E54A4->selected[player] = 0;
             SoundElement_PlayFlatSound(0xE74);
             return 0;
@@ -158,8 +158,8 @@ extern s32 Frontend_ListHasFlag100(void *);
 extern void SmpOverlay_ShowSlotNode(s32, s32, void *);
 extern void PAKInterface_RelabelSlotRows(s32);
 extern void PAKInterface_UpdatePlayerControlRows(s32);
-extern void func_80434250_de(s32, s32);
-extern void func_80434E34_de(s32);
+extern void PAKInterface_ScrollNoteList(s32, s32);
+extern void PAKInterface_IncrementNameCharacter(s32);
 s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, s32 arg4) {
     NodeRecAt44 *node;
     s32 player;
@@ -174,14 +174,14 @@ s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 ar
         if (arg3 == 1) {
             MarkMenuEventHandled();
             D_800E54A4->players[player].namePhase = arg3;
-            func_80434E34_de(player);
+            PAKInterface_IncrementNameCharacter(player);
             SoundElement_PlayFlatSound(0xE81);
         }
         return 0;
     case 4:
         if (arg3 == 1) {
             MarkMenuEventHandled();
-            func_80434250_de(player, 0);
+            PAKInterface_ScrollNoteList(player, 0);
             D_800E54A4->selected[player] = 0;
             SoundElement_PlayFlatSound(0xE74);
         }

@@ -16,7 +16,7 @@ extern s32 SmpFade_CreateFadeWidget(s32, s32);
 extern void SmpSlider_EnableTransition(s32);
 extern void XStdio_FormatBuffer(void *, void *, s32);
 
-s32 func_8042DBD0_us_rev1(s32 arg0) {
+s32 Frontend_CreatePlayerCountScreen(s32 arg0) {
     struct State_func_8042D9E8_de *state;
     s32 handle;
     struct MenuWidget *node;

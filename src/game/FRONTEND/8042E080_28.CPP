@@ -6,7 +6,7 @@
 
 /* Handles a cancel event for the player the low half of the third argument names: calls
    MarkMenuEventHandled and, when the block D_800E54A4 points to is in phase 7 at 0x54, returns to screen 3
-   through func_8043577C_de; otherwise by the player's state at the start of its 2920-byte record at
+   through PAKInterface_BeginScreenExit; otherwise by the player's state at the start of its 2920-byte record at
    0x58: in state 0 it leaves for screen 0x1B unless func_804355B4_de reports something pending, in
    state 0xC it blanks the character at the cursor of the name at 0xB34 of the record, and in
    states 0x16 and 0x1B it closes the keyboard through func_80433BCC_de or func_80433D38_de with -1,
@@ -27,7 +27,7 @@ extern void PAKInterface_RefreshPlayerPanel(s32);
 s32 func_80432158_de(void *unused0, void *unused1, u16 player) {
     MarkMenuEventHandled();
     if (D_800E54A4->phase == 7) {
-        func_8043577C_de(3);
+        PAKInterface_BeginScreenExit(3);
         return 0;
     }
     switch (D_800E54A4->players[player].state) {
@@ -36,7 +36,7 @@ s32 func_80432158_de(void *unused0, void *unused1, u16 player) {
             return 0;
         }
         MarkMenuEventHandled();
-        func_8043577C_de(0x1B);
+        PAKInterface_BeginScreenExit(0x1B);
         return 0;
     case 0xC:
         MarkMenuEventHandled();

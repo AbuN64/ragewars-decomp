@@ -32,7 +32,7 @@ s32 func_80291074_de(s32);
 
 extern s32 D_801462C8;
 
-void func_802947C8_de(void *arg0, s32 arg1) {
+void SetN64_SelectSpawnAfterCredits(void *arg0, s32 arg1) {
     GameSession *object = arg0;
     Shared_Placed spawn;
     s32 selectionValues;
@@ -47,7 +47,7 @@ void func_802947C8_de(void *arg0, s32 arg1) {
 }
 
 /* Initializes the game state for a new game phase with arg0 as the phase identifier. */
-void func_80294848_de(s32 arg0) {
+void SetN64_InitializeMode16Credits(s32 arg0) {
     D_800CD780 = 0;
     D_8011B9F0 = 0;
     D_80146CB8 = (f32)(&D_800E28D0)[1];
@@ -58,7 +58,7 @@ void func_80294848_de(s32 arg0) {
     SetN64_ResetPlayerItems(arg0, 0x82);
 }
 
-void func_802948C0_de(s32 session) {
+void SetN64_HandleMode16CreditsInput(s32 session) {
     s32 *p;
 
     if (D_800CD780 != 0) {
@@ -73,14 +73,14 @@ void func_802948C0_de(s32 session) {
     }
 }
 
-void func_80294938_de(s32 session) {
+void SetN64_DrawMode16Credits(s32 session) {
     SetN64_DrawSessionWithAttractTimeout((void *)session);
     SetN64_DrawCreditsLines(session);
     func_80291074_de(session);
 }
 
 /* Initializes the game state for a new game phase with arg0 and updates the game state flag. */
-void func_8029496C_de(s32 arg0) {
+void SetN64_InitializeMode17Credits(s32 arg0) {
     s8 *base = &D_801462C8;
 
     ((ObjectState1E *)(base))->unk_1D = 0;
@@ -96,7 +96,7 @@ void func_8029496C_de(s32 arg0) {
     D_800CD784_de = 0;
 }
 
-void func_802949FC_de(s32 session) {
+void SetN64_HandleMode17CreditsInput(s32 session) {
     if (D_800CD780 != 0) {
         SetN64_HandleSessionTransitionInput(session, 1, 1);
         return;
@@ -108,7 +108,7 @@ void func_802949FC_de(s32 session) {
     }
 }
 
-void func_80294A74_de(s32 session) {
+void SetN64_DrawMode17Credits(s32 session) {
     SetN64_DrawSessionWithAttractTimeout((void *)session);
     SetN64_DrawCreditsLines(session);
     func_80291074_de(session);

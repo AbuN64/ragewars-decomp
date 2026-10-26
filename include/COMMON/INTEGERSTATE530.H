@@ -202,27 +202,27 @@ extern void D_0040C5C8();
 extern s32 D_004125A4(void *, s32, s32, s32, s32);
 /* D_00412634: Frontend_DrawGridListCells */
 extern void D_00412634();
-/* D_00419A4C: func_80419A4C_de */
+/* D_00419A4C: SmpFrameAnim_DispatchEvent */
 extern s32 D_00419A4C(void *, s32, s32, s32, s32);
-/* D_00419ADC: func_80419ADC_de */
+/* D_00419ADC: SmpFrameAnim_IgnoreEvent */
 extern void D_00419ADC();
-/* D_00419F9C: func_80419F9C_de */
+/* D_00419F9C: SmpFlicker_DispatchEvent */
 extern s32 D_00419F9C(void *, s32, s32, s32, s32);
-/* D_0041A02C: func_8041A02C_de */
+/* D_0041A02C: SmpFlicker_IgnoreEvent */
 extern void D_0041A02C();
-/* D_0041A490: func_8041A490_de */
+/* D_0041A490: SmpSlider_DispatchTransitionEvent */
 extern s32 D_0041A490(void *, s32, s32, s32, s32);
-/* D_0041A520: func_8041A520_de */
+/* D_0041A520: SmpSlider_IgnoreFormattedMessage */
 extern void D_0041A520();
-/* D_0041A724: func_8041A724_de */
+/* D_0041A724: SmpSlider_DispatchSliderEvent */
 extern s32 D_0041A724(void *, s32, s32, s32, s32);
 /* D_0041A7B4: func_8041A7B4_de */
 extern void D_0041A7B4();
-/* D_0041AD7C: func_8041AD7C_de */
+/* D_0041AD7C: SmpButton_DispatchListEvent */
 extern s32 D_0041AD7C(void *, s32, s32, s32, s32);
 /* D_0041AE0C: func_8041AE0C_de */
 extern void D_0041AE0C();
-/* D_0041B340: func_8041B340_de */
+/* D_0041B340: SmpButton_DispatchButtonEvent */
 extern s32 D_0041B340(void *, s32, s32, s32, s32);
 /* D_0041B3D0: func_8041B3D0_de */
 extern void D_0041B3D0();

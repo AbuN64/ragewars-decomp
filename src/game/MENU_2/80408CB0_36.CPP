@@ -16,7 +16,7 @@ extern void *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern void XStdio_FormatBuffer(char *, char *, ...);
 /* Builds a three-row slider popup in its 0x24-byte state D_800E5430: title/list from the ids at 0x398, the numeric
    readout item at 0x39D showing the text at +0x14 formatted with D_800E1B60. Returns 0. */
-s32 func_8042E640_eu(void *window) {
+s32 Frontend_CreatePlayerCountScreenEu(void *window) {
     SliderItemEu *item;
     void *title;
 

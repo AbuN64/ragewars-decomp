@@ -91,8 +91,8 @@ void func_802AB35C_de(int unused, unsigned char *pairs, int count, unsigned char
 void func_802AB3A8_de(void) {
     char pad[256];
     (void)pad;
-    func_802A84F8_de();
-    func_802A8710_de();
+    OnScreen_SetupTextRendering();
+    OnScreen_LoadTextTileModeOne();
     func_802AAB68_de((0.699999988079071f), (0.699999988079071f));
     func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
 }

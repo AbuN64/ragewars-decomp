@@ -4,7 +4,7 @@
 #include "TYPES.H"
 
 /** Perform the no-op callback at VRAM 0x80294ABC. */
-void func_80294AA8_de(void) {
+void SetN64_InitializeTransitionMode(void) {
 }
 
 #if defined(VERSION_US)

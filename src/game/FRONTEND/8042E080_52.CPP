@@ -9,7 +9,7 @@ extern s32 Pak_CountFreeNotes(void *a0, s32 *a1);
 
 extern s32 Pak_BytesToPakPages(s32 a0);
 
-s32 func_80435384_de(void *slot, s32 *out)
+s32 PAKInterface_CheckRecordsNoteCapacity(void *slot, s32 *out)
 {
     s32 a, b;
     s32 ret;

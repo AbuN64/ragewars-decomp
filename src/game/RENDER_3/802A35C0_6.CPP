@@ -49,9 +49,9 @@ extern char g_particleQuadRenderSetup;
 
 extern char D_800CDCA8;
 
-void func_802A5E08_de(void *);
+void Fx_UpdateAttachedEffects(void *);
 
-s32 func_802A5EE0_de(s32);
+s32 Fx_UpdateTimedCallbacks(s32);
 
 extern s32 D_800CDBE8;
 
@@ -206,8 +206,8 @@ void Fx_DrawRedParticleQuad(u32 arg0) {
 void Fx_UpdateEffectLists(s32 owner) {
     D_800CDBE8 = 0;
     if (D_8011FAC0.clockPaused == 0) {
-        func_802A5E08_de((void *)owner);
-        func_802A5EE0_de(owner);
+        Fx_UpdateAttachedEffects((void *)owner);
+        Fx_UpdateTimedCallbacks(owner);
     }
 }
 

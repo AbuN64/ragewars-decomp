@@ -247,9 +247,9 @@ void func_80294F1C_us_rev1(void) {
             TEngine_LoadSelectedTexture();
             D_8014AEB0.titleWasShown = 0;
         }
-        func_802A84F8_de();
+        OnScreen_SetupTextRendering();
         scale = D_auto_800CA634;
-        func_802A8710_de();
+        OnScreen_LoadTextTileModeOne();
         func_802AAB68_de(scale, scale);
         func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
         func_802A8F28_de((char *)&D_8014AEB0.displayData, 0x10, D_800E28D4 - 0x30, 0xFF, 0, 0, scale, scale);

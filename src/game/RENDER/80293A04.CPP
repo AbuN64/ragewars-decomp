@@ -131,7 +131,7 @@ func_802A2224_de
 
 
 
-void func_80293C34_de(GameSession *world) {
+void SetN64_AdvanceGameClock(GameSession *world) {
     f32 t1;
     f32 t2;
     f32 t3;

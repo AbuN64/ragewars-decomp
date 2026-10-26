@@ -142,7 +142,7 @@ block_21:
 #endif
 extern char D_8011D8D0[];
 extern void func_8022B09C_de(void *, CVector3 *);
-extern void func_80283D50_de(void *);
+extern void Particle_DispatchActorContactEvents(void *);
 extern void Particle_Release(void *, void *);
 extern f32 GraphU64_ArcCos(f32);
 /* Steers a homing particle (sound 0x8AC) at its target, or straight ahead when it has none: keeps its loop
@@ -204,7 +204,7 @@ create_sound:
         GraphU64_SubtractVectors(&v68, &v58, &homingParticle->position);
         distance = Math_Sqrtf(v68.x * v68.x + v68.y * v68.y + v68.z * v68.z);
         if (distance < D_800C4B80_de && homingParticle->time > D_800C4B84_de) {
-            func_80283D50_de(homingParticle);
+            Particle_DispatchActorContactEvents(homingParticle);
             Particle_Release(D_8011D8D0, homingParticle);
             Particle_StopSound(homingParticle);
             return;

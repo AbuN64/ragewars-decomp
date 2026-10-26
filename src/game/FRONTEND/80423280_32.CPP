@@ -10,7 +10,7 @@
    the scroll delay at 0x14 down and on expiry scrolls the list at 0x8 back one row, wrapping to
    the menu's own row count, and restarts the delay at 3, and when the menu reports 4 it calls
    MarkMenuEventHandled and leaves through func_80298368_de with the target at 0x18. Returns zero. Adapted
-   from func_8042DAF8_de with the opening delay added, the scroll delay and target moved and the -1
+   from Frontend_UpdatePlayerCountScreen with the opening delay added, the scroll delay and target moved and the -1
    target test removed. */
 
 

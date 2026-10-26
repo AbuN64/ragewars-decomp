@@ -163,7 +163,7 @@ void func_80204C34_de(void *callbackContext, Shared_CallbackOwner *callbackOwner
     }
 }
 
-extern void func_802A5D38_de(SceneRecAt95A8 *, s32);
+extern void Fx_RecycleOwnerParticles(SceneRecAt95A8 *, s32);
 void func_80204C68_de(void *actor, ActorMotionState *motionState) {
     ResourceManagerState local;
     Shared_World *flag;
@@ -173,7 +173,7 @@ void func_80204C68_de(void *actor, ActorMotionState *motionState) {
     Rumble_SetActorStateBit(flag, actor, 1);
     Link_DispatchActorLinks(actor, 0x4000, actor);
     motionState->speed = 0;
-    func_802A5D38_de(&D_801379C0, (s32)actor);
+    Fx_RecycleOwnerParticles(&D_801379C0, (s32)actor);
     if (flag->mode != 4) {
         Events_DispatchCallback(actor, actor, 6,
                       ((LevelActor *)actor)->position0, local);
@@ -189,7 +189,7 @@ void func_80204D2C_de(BreakableHitContext *breakableHitContext) {
     flag = &g_world;
     Rumble_SetActorStateBit(flag, breakableHitContext, 0);
     Link_DispatchActorLinks(breakableHitContext, 0x8000, breakableHitContext);
-    func_802A5D38_de(&D_801379C0, (s32)breakableHitContext);
+    Fx_RecycleOwnerParticles(&D_801379C0, (s32)breakableHitContext);
     if (flag->mode != 4) {
         Events_DispatchCallback(breakableHitContext, breakableHitContext, 7,
                       breakableHitContext->unk_8, local);

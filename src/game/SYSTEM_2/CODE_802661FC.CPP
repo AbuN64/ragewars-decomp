@@ -230,9 +230,9 @@ extern void Barrel_FillDamagePacket(CDamageInfo *, void *, s32, f32, s32, Shield
 extern s32 Player_GetMaxHealth(void *);
 struct CallbackState114;
 extern void Barrel_RunDamageHook(void *, struct CallbackState114 *, CDamageInfo *);
-extern s32 func_80282C8C_de(Shared_ReactionObjectKind *);
-extern s32 func_80282D38_de(Shared_ReactionObjectKind *);
-extern s32 func_80282DEC_de(Shared_ReactionObjectKind *);
+extern s32 Particle_HasKindOneEntry(Shared_ReactionObjectKind *);
+extern s32 Particle_HasKindZeroEntry(Shared_ReactionObjectKind *);
+extern s32 Particle_HasKindTwoEntry(Shared_ReactionObjectKind *);
 extern void *D_801041F0;
 extern s32 D_80100204;
 extern Shield D_80100208;
@@ -430,7 +430,7 @@ void Events_ApplyDamageEvent(Shared_ReactionActor *source, Shared_ReactionActor 
                                 if (attacker->unk122C & 0x10) {
                                     reflectedProjectile(ownerPlayer, target, damage, radius, flags, &shield);
                                 }
-                                if ((attacker != NULL) && (attacker->unk122C & 0x1000) && (func_80282C8C_de(projectile) != 0)) {
+                                if ((attacker != NULL) && (attacker->unk122C & 0x1000) && (Particle_HasKindOneEntry(projectile) != 0)) {
                                     restored2 = attacker->unk5E4 + (s32) damage;
                                     maximum2 = Player_GetMaxHealth(ownerPlayer);
                                     if (restored2 < maximum2) {
@@ -460,7 +460,7 @@ void Events_ApplyDamageEvent(Shared_ReactionActor *source, Shared_ReactionActor 
                         }
                     }
                     if (attacker != NULL) {
-                        if ((attacker->unk122C & 0x800) && ((func_80282D38_de(projectile) != 0) || (func_80282DEC_de(projectile) != 0))) {
+                        if ((attacker->unk122C & 0x800) && ((Particle_HasKindZeroEntry(projectile) != 0) || (Particle_HasKindTwoEntry(projectile) != 0))) {
                             damage = 0.0f;
                         }
                         if ((attacker != NULL) && (attacker->unk122C & 0x400)) {

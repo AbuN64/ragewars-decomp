@@ -12,10 +12,10 @@
 
 extern s32 Pak_GetStatus(s32);
 extern s32 Pak_FindNoteByName(void *, s32, s32 *);
-extern s32 func_80434638_de(s32, s32);
+extern s32 PAKInterface_ReadRecordsNote(s32, s32);
 extern s32 GraphU64_NextRandom(void);
 extern void PAKInterface_RefreshPlayerPanel(s32);
-void func_80433610_de(s32 player)
+void PAKInterface_ResolvePlayerPakState(s32 player)
 {
   s32 random;
   s32 done = 1;
@@ -46,13 +46,13 @@ void func_80433610_de(s32 player)
         if (Pak_FindNoteByName((D_800D36D4), player, &result) == one)
 #endif
       {
-        if (func_80434638_de(player, result) == one)
+        if (PAKInterface_ReadRecordsNote(player, result) == one)
         {
           D_800E54A4->players[player].state = D_800E54A4->players[player].next;
           switch (D_800E54A4->phase)
           {
             case 0:
-              if (func_80435128_de(player) == (-1))
+              if (PAKInterface_FindEmptyProfileSlot(player) == (-1))
             {
               D_800E54A4->players[player].state = 24;
             }
@@ -71,7 +71,7 @@ void func_80433610_de(s32 player)
               D_800E54A4->players[player].state = 25;
             }
             else
-              if ((D_800E54A4->players[player].host == one) && (func_80435128_de(player) == (-1)))
+              if ((D_800E54A4->players[player].host == one) && (PAKInterface_FindEmptyProfileSlot(player) == (-1)))
             {
               D_800E54A4->players[player].state = 24;
             }

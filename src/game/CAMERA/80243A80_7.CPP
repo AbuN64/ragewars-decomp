@@ -26,7 +26,7 @@ void func_802453D4_de(void)
     s32 messageCenterX;
     messageLineHeight = 0x1A;
     messageCenterX = D_800E28D0 / 2;
-    func_802A84F8_de();
+    OnScreen_SetupTextRendering();
     screenScaleX = (f32) (D_800E28D0 / 284);
     messageScaleY = (f32) (D_800E28D4 / 222);
     screenHeight = D_800E28D4;

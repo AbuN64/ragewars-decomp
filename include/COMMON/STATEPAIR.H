@@ -58,5 +58,5 @@ struct CommandListMenu {
 struct Widget;
 void Tsmos_ScaleWidgetTree(struct Widget *, struct Widget *);
 
-extern void func_8042DEA0_de(void);
+extern void Frontend_StartConfiguredMatch(void);
 #endif

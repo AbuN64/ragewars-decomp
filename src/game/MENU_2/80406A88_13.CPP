@@ -6,7 +6,7 @@
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "RENDER_2/8025DE50_5.H"
 extern void ScenarioSetup_SetCatalogueAlpha(s32);
-extern void func_8042E988_de(s32);
+extern void Frontend_SetMenuChoiceResult(s32);
 extern void ScenarioSetup_ResetSelectionIndicators(void);
 
 s32 func_8042AFB0_eu_x(void *root, s32 unused, s32 delta) {
@@ -86,7 +86,7 @@ s32 func_8042AFB0_eu_x(void *root, s32 unused, s32 delta) {
         ScenarioSetup_SetCatalogueAlpha(fade);
         if (fade < 10) {
             D_800E4F60->unk3DC = 3;
-            func_8042E988_de(11);
+            Frontend_SetMenuChoiceResult(11);
             return 0;
         }
         break;

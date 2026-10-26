@@ -84,7 +84,7 @@ void SetN64_DrawTextLines(void *state, s32 drawBackdrop, char **lines, s32 x, s3
         gDPSetFillColor(g_displayListCursor++, 0x00010001);
         gDPFillRectangle(g_displayListCursor++, 0, 0, D_800E28D0, D_800E28D4);
     }
-    func_802A84F8_de();
+    OnScreen_SetupTextRendering();
     func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
     scaleX = scaleX * D_800E28D0 * (1.0f / 284.0f);
     scaleY = scaleY * D_800E28D4 * (1.0f / 222.0f);

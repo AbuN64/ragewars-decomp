@@ -8,7 +8,7 @@
    advances it, and once it reaches state 2 either goes back (choice 0: resets the mode, shows the
    item and queues sound 0x259 past D_8015402C) or starts the match (choice 1: picks the arena,
    clears the pause word, then either sets the mode from the settings and active human players or
-   stops the match objects and calls func_8042DEA0_de). Returns zero. */
+   stops the match objects and calls Frontend_StartConfiguredMatch). Returns zero. */
 
 
 
@@ -36,7 +36,7 @@ extern void Tsmos_RequestFrontendShutdown(void);
 extern void Items_ResetActorPools(void *, s32);
 extern void func_804499B0_de(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
-extern void func_8042DEA0_de(void);
+extern void Frontend_StartConfiguredMatch(void);
 
 
 
@@ -99,7 +99,7 @@ s32 Menu_FinishTabOptionsTransition(void *item, s32 unused1, s32 event) {
             Items_ResetActorPools((u8 *)pause - 0x180C, 0);
             func_804499B0_de((u8 *)pause - 0x1854, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
-            func_8042DEA0_de();
+            Frontend_StartConfiguredMatch();
         }
     }
     return 0;

@@ -24,7 +24,7 @@ extern f32 GameObject_GetActorHeight(ActorSimpleInstanceSpawnModelEffect *actor)
 #include "particle/8027A0F4_8.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
-extern EffectRecAt154 *func_802830B8_de(void *system);
+extern EffectRecAt154 *Particle_GetLastSpawnedEffect(void *system);
 
 extern f32 GameObject_GetActorRadius(ActorSimpleInstanceSpawnModelEffect *actor);
 
@@ -84,7 +84,7 @@ void SimpleInstance_SpawnModelEffect(ActorSimpleInstanceSpawnModelEffect *actor,
             position.y += GameObject_GetActorHeight(actor) * *(&D_800C3D90_de + 1);
             func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                           actor->position1, rotation, position, 0, -1, 0);
-            effect = func_802830B8_de(&D_8011D8D0);
+            effect = Particle_GetLastSpawnedEffect(&D_8011D8D0);
             if (effect != 0) {
                 scale = D_800C3D98_de;
                 effect->field150 = GameObject_GetActorRadius(actor) * scale;

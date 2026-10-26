@@ -327,7 +327,7 @@ void Frontend_DrawMenuImage(MenuImage *menu) {
     if (menu->shown == 1) {
         frame = menu->frame;
         screen = D_80141008;
-        func_802A84F8_de();
+        OnScreen_SetupTextRendering();
         Geometry_SetModePreset(0x15);
         b = 1.0f;
         a = b;

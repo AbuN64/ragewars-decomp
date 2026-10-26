@@ -25,7 +25,7 @@ s32 func_8041F2A0_us_rev1(s32 screen)
   SmpOverlay_ShowSlotById(screen, 1, 0x7A);
   SmpOverlay_ShowSlotById(screen, 2, 0x7A);
   SmpOverlay_ShowSlotById(screen, 3, 0x7A);
-  func_8042E9A0_de(0, 0);
+  Frontend_SetSelectedStage(0, 0);
   D_800E42D0->clock = 0;
   scale.x = 1.0f;
   scale.y = 1.0f;
@@ -118,7 +118,7 @@ s32 func_8041F2A0_us(void *screen)
   SmpOverlay_ShowSlotById((s32) screen, 1, 0x7a);
   SmpOverlay_ShowSlotById((s32) screen, 2, 0x7a);
   SmpOverlay_ShowSlotById((s32) screen, 3, 0x7a);
-  func_8042E9A0_de(0, 0);
+  Frontend_SetSelectedStage(0, 0);
   D_800E42D0->clock = 0;
   scale.x = D_800E1570;
   scale.y = D_800E1570;
@@ -211,7 +211,7 @@ s32 func_8041F6E0_eu(void *screen)
   SmpOverlay_ShowSlotById((s32) screen, 1, 0x7a);
   SmpOverlay_ShowSlotById((s32) screen, 2, 0x7a);
   SmpOverlay_ShowSlotById((s32) screen, 3, 0x7a);
-  func_8042E9A0_de(0, 0);
+  Frontend_SetSelectedStage(0, 0);
   D_800E42D0->clock = 0;
   scale.x = D_800E1570;
   scale.y = D_800E1570;
@@ -304,7 +304,7 @@ s32 func_8041F6E0_eu_x(void *screen)
   SmpOverlay_ShowSlotById((s32) screen, 1, 0x7e);
   SmpOverlay_ShowSlotById((s32) screen, 2, 0x7e);
   SmpOverlay_ShowSlotById((s32) screen, 3, 0x7e);
-  func_8042E9A0_de(0, 0);
+  Frontend_SetSelectedStage(0, 0);
   D_800E42D0->clock = 0;
   scale.x = D_800E1570;
   scale.y = D_800E1570;
@@ -397,7 +397,7 @@ s32 func_8041F230_de(void *screen)
   SmpOverlay_ShowSlotById((s32) screen, 1, 0x78);
   SmpOverlay_ShowSlotById((s32) screen, 2, 0x78);
   SmpOverlay_ShowSlotById((s32) screen, 3, 0x78);
-  func_8042E9A0_de(0, 0);
+  Frontend_SetSelectedStage(0, 0);
   D_800E42D0->clock = 0;
   scale.x = D_800E1570;
   scale.y = D_800E1570;

@@ -88,7 +88,7 @@ s32 Frontend_ActivateResultsAction(void) {
 #elif defined(VERSION_EU_X)
     case 0x23E - 1:
 #endif
-        func_80434FB4_de(5);
+        PAKInterface_SetScreenPhase(5);
         func_80298368_de(0x13);
         break;
 #if defined(VERSION_DE)
@@ -99,7 +99,7 @@ s32 Frontend_ActivateResultsAction(void) {
     case 0x23E + 3:
 #endif
         if (ScenarioSetup_IsCupSelected() == 1) {
-            func_8042E988_de(0x21);
+            Frontend_SetMenuChoiceResult(0x21);
             return 0;
         }
         if (((u8 *)paused)[-0x5BF] == 0) {
@@ -151,7 +151,7 @@ s32 Frontend_ScrollResultsForward(void *first, void *second, void *third, s32 fo
     return 0;
 }
 
-s32 Frontend_DispatchResultsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchResultsEvent(void *arg0, s32 arg1, s32 arg2, s32 eventValue, s32 eventExtra) {
     Handler8042DB38 *entry;
     s32 index;
     s32 wildcard;
@@ -169,7 +169,7 @@ s32 Frontend_DispatchResultsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 
                 actor_kind = actor->unkC;
                 table_kind = D_800E53C8[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*entry)(arg0, arg1, arg2, eventValue, eventExtra);
                 }
             }
             entry += 3;

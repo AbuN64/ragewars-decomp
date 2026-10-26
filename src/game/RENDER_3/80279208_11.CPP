@@ -9,7 +9,7 @@
 
 typedef struct Owner Owner;
 
-extern void *func_802833D0_de(void *arg0);
+extern void *Particle_GetEffectResource(void *arg0);
 extern s32 func_8022B178_de(void *arg0);
 extern void Player_GiveAmmoWithMessage(void *arg0, s32 arg1, s32 arg2);
 
@@ -31,7 +31,7 @@ void Particle_FinishActorEffects(void *arg0) {
 
     if (((ObjectLinks1BC *)(actor))->unk_4 != 0x414) {
         if (((ObjectLinks1BC *)(actor))->unk_4 == 0x42D) {
-            state = func_802833D0_de(actor);
+            state = Particle_GetEffectResource(actor);
             if (((IntegerState5AC *)(state))->unk_5A8 != 0 && func_8022B178_de(state) == 0) {
                 Player_GiveAmmoWithMessage(state, ((IntegerState5AC *)(state))->unk_5A4,
                                ((IntegerState5AC *)(state))->unk_5A8);
@@ -40,7 +40,7 @@ void Particle_FinishActorEffects(void *arg0) {
         }
     } else {
 reset_state:
-        state = func_802833D0_de(actor);
+        state = Particle_GetEffectResource(actor);
         ((IntegerState5AC *)(state))->unk_5A8 = 0;
         if (func_8022B178_de(state) == 0) {
             ((IntegerState5AC *)(state))->unk_59C = 1;

@@ -111,8 +111,8 @@ extern s32 Defs_TestBit(u8 *, s32);
 
 
 /* Calls MarkMenuEventHandled and Frontend_HideTrialCatalogueWidgets, passes the two words after the identifier in the
-   28-byte entry D_800E4690's selection at 0xA44 picks from D_800E4694 to func_8042E9A0_de, then
-   calls func_8042E988_de with 0x19. Returns zero. */
+   28-byte entry D_800E4690's selection at 0xA44 picks from D_800E4694 to Frontend_SetSelectedStage, then
+   calls Frontend_SetMenuChoiceResult with 0x19. Returns zero. */
 
 
 
@@ -124,7 +124,7 @@ extern struct EntryRecAt8V3 D_800E4694[];
    word+2 (the table symbol D_800E0646_de) is only its low half on big-endian MIPS. */
 #define entryWindowKey(index) ((u16)D_800E4694[index].id)
 
-extern void func_8042E9A0_de(s32, s32);
+extern void Frontend_SetSelectedStage(s32, s32);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4D84, an actor kind at D_800E4D88 and a handler at D_800E4D8C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
@@ -340,7 +340,7 @@ s32 func_80428C7C_de(void *parent, s32 unused1, s32 unused2, s32 event) {
 s32 func_80428DE0_de(void) {
     MarkMenuEventHandled();
     Frontend_HideTrialCatalogueWidgets();
-    func_8042E988_de(0xE);
+    Frontend_SetMenuChoiceResult(0xE);
     return 0;
 }
 
@@ -350,8 +350,8 @@ s32 func_80428E10_de(void) {
     MarkMenuEventHandled();
     Frontend_HideTrialCatalogueWidgets();
     selection = D_800E4690->selection;
-    func_8042E9A0_de(D_800E4694[selection].first, D_800E4694[selection].second);
-    func_8042E988_de(0x19);
+    Frontend_SetSelectedStage(D_800E4694[selection].first, D_800E4694[selection].second);
+    Frontend_SetMenuChoiceResult(0x19);
     return 0;
 }
 

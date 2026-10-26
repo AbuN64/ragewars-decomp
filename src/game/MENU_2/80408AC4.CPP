@@ -24,7 +24,7 @@ s32 Frontend_ClearGermanLoadingHints(void) {
 /* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled. 0x1D5: when
    func_802999A0_de(0) reports 0x16 it stops the menu object and the menu data D_80145040, releases
    D_8011FE88, restarts func_8025476C_de when func_8025477C_de reports it idle, sets the menu stage to 8
-   and sends func_8042E988_de 20, 10, 15 or 10 by the controller mode (3 for any other mode); otherwise
+   and sends Frontend_SetMenuChoiceResult 20, 10, 15 or 10 by the controller mode (3 for any other mode); otherwise
    it sends 3. 0x1D6 sends 11 when func_802999A0_de(0) reports 11 and -1 otherwise. Either then calls
    func_802998A8_de. Returns zero. */
 extern void MarkMenuEventHandled(void);
@@ -35,7 +35,7 @@ extern void func_804499B0_de(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(s32);
-extern void func_8042E988_de(s32);
+extern void Frontend_SetMenuChoiceResult(s32);
 extern void func_802998A8_de(void);
 
 s32 Frontend_HandleMatchMessage(void) {
@@ -54,31 +54,31 @@ s32 Frontend_HandleMatchMessage(void) {
             D_80145040.stage = 8;
             switch (D_80145040.game.controllerMode) {
             case 0:
-                func_8042E988_de(20);
+                Frontend_SetMenuChoiceResult(20);
                 break;
             case 1:
-                func_8042E988_de(10);
+                Frontend_SetMenuChoiceResult(10);
                 break;
             case 2:
-                func_8042E988_de(15);
+                Frontend_SetMenuChoiceResult(15);
                 break;
             case 3:
             case 4:
-                func_8042E988_de(10);
+                Frontend_SetMenuChoiceResult(10);
                 break;
             default:
-                func_8042E988_de(3);
+                Frontend_SetMenuChoiceResult(3);
                 break;
             }
         } else {
-            func_8042E988_de(3);
+            Frontend_SetMenuChoiceResult(3);
         }
         break;
     case MENU_804291A8_474:
         if (func_802999A0_de(0) == 11) {
-            func_8042E988_de(11);
+            Frontend_SetMenuChoiceResult(11);
         } else {
-            func_8042E988_de(-1);
+            Frontend_SetMenuChoiceResult(-1);
         }
         break;
     }

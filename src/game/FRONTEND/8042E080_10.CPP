@@ -28,7 +28,7 @@ extern void MarkMenuEventHandled(void);
 extern s32 SmpOverlay_GetSlotNodeId(s32, s32);
 extern void SmpOverlay_SetSlotValue(s32, s32, s32);
 extern void PAKInterface_RefreshPlayerPanel(s32);
-extern s32 func_80435384_de(s32, s32 *);
+extern s32 PAKInterface_CheckRecordsNoteCapacity(s32, s32 *);
 extern s32 PAKInterface_SavePlayerRecords(s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 
@@ -36,7 +36,7 @@ extern s32 Pak_DeleteNote(s32, s32);
 
 extern void Player_InitializeProfile(void *);
 extern void Pak_ProbeStatus(s32);
-extern void func_80433610_de(s32);
+extern void PAKInterface_ResolvePlayerPakState(s32);
 extern void PAKInterface_RelabelSlotRows(s32);
 
 
@@ -96,7 +96,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 break;
             case 2:
                 if (D_800E54A4->players[p].host == 1) {
-                    func_80434D70_de(p);
+                    PAKInterface_BeginLinkedProfileTransfer(p);
                 } else {
                     D_800E54A4->players[p].state = 0xE;
                 }
@@ -137,7 +137,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 break;
             case 2:
                 if (D_800E54A4->players[p].host == 1) {
-                    func_80434D70_de(p);
+                    PAKInterface_BeginLinkedProfileTransfer(p);
                 } else {
                     D_800E54A4->players[p].state = 0xE;
                 }
@@ -177,7 +177,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
 #else
         case 0x2F0:
 #endif
-            if (func_80435384_de(p, &answer) == 0) {
+            if (PAKInterface_CheckRecordsNoteCapacity(p, &answer) == 0) {
                 if (answer == 1) {
                     D_800E54A4->players[p].state = 0xC;
                 } else {
@@ -229,7 +229,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             if (PAKInterface_SavePlayerRecords(p) == 1) {
                 switch (D_800E54A4->phase) {
                 case 0:
-                    if (func_80435128_de(p) >= 0) {
+                    if (PAKInterface_FindEmptyProfileSlot(p) >= 0) {
                         D_800E54A4->players[p].state = 0x17;
                     } else {
                         D_800E54A4->players[p].state = 0xE;
@@ -239,7 +239,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                     func_8043599C_de(p, 0, 0);
                     func_804356BC_de(0);
                     MarkMenuEventHandled();
-                    func_8043577C_de(9);
+                    PAKInterface_BeginScreenExit(9);
                     return 0;
                 default:
                     D_800E54A4->players[p].state = 0xD;
@@ -274,7 +274,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         }
         break;
     case 12:
-        slot = func_80435128_de(p);
+        slot = PAKInterface_FindEmptyProfileSlot(p);
         if (slot >= 0) {
 #if defined(VERSION_DE)
             node = Frontend_FindWidgetByResourceId((void*)D_800E54A4->players[p].menu, 0x2DA);
@@ -335,7 +335,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 break;
             case 2:
                 if (D_800E54A4->players[p].host == 1) {
-                    func_80434D70_de(p);
+                    PAKInterface_BeginLinkedProfileTransfer(p);
                 } else {
                     D_800E54A4->players[p].state = 0xE;
                 }
@@ -411,7 +411,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
 #endif
                                      D_800E54A4->players[p].names[D_800E54A4->players[p].slot].code) == 0) {
                     for (j = 0; j < 4; j++) {
-                        found = func_804358C0_de(D_800E54A4->players[p].profile, D_800E54A4->players[p].records[j].owner);
+                        found = Frontend_FindProfileOwner(D_800E54A4->players[p].profile, D_800E54A4->players[p].records[j].owner);
                         if (found != -1) {
                             Player_InitializeProfile(&((Profile *) D_80102B00)[found]);
                         }
@@ -421,7 +421,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 PAKInterface_RefreshPlayerPanel(p);
             } else {
                 Pak_ProbeStatus(p);
-                func_80433610_de(p);
+                PAKInterface_ResolvePlayerPakState(p);
             }
             break;
 #if defined(VERSION_DE)
@@ -446,7 +446,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         case 0x2CD:
 #endif
             i = D_800E54A4->players[p].choice;
-            other = func_804358C0_de(D_800E54A4->players[p].profile, D_800E54A4->players[p].records[i].owner);
+            other = Frontend_FindProfileOwner(D_800E54A4->players[p].profile, D_800E54A4->players[p].records[i].owner);
             if (other != -1) {
                 Player_InitializeProfile(&((Profile *) D_80102B00)[other]);
             }
@@ -497,7 +497,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
 #else
         case 0x2C9:
 #endif
-            slot = func_80435128_de(p);
+            slot = PAKInterface_FindEmptyProfileSlot(p);
             if (slot >= 0) {
                 XPlus_CopyBytes(&D_800E54A4->players[p].records[slot],
                                  &D_800E54A4->players[D_800E54A4->links[0].player].records[D_800E54A4->links[0].entry],
@@ -509,7 +509,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             if (PAKInterface_SavePlayerRecords(p) == 1) {
                 if (D_800E54A4->phase == 2) {
                     if (D_800E54A4->players[p].host == 1) {
-                        func_80434D70_de(p);
+                        PAKInterface_BeginLinkedProfileTransfer(p);
                     } else {
                         D_800E54A4->players[p].state = 0xE;
                     }
@@ -528,7 +528,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
 #endif
             if (D_800E54A4->phase == 2) {
                 if (D_800E54A4->players[p].host == 1) {
-                    func_80434D70_de(p);
+                    PAKInterface_BeginLinkedProfileTransfer(p);
                 } else {
                     D_800E54A4->players[p].state = 0xE;
                 }
@@ -551,7 +551,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             switch (sub) {
             case 3:
                 D_800E54A4->players[p].state = 0x11;
-                q = ((int (*)(u8 *)) func_80434750_de)((u8 *) D_800E54A4 + p * sizeof(Shared_Player_func_80433F14));
+                q = ((int (*)(u8 *)) PAKInterface_FindReadyTransferPlayer)((u8 *) D_800E54A4 + p * sizeof(Shared_Player_func_80433F14));
                 if (q >= 0) {
                     D_800E54A4->players[q].back = 2;
                     D_800E54A4->players[q].state = 2;
@@ -564,7 +564,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 switch (D_800E54A4->phase) {
                 case 1:
                     D_800E54A4->players[p].state = 0x11;
-                    q = ((int (*)(u8 *)) func_80434750_de)((u8 *) D_800E54A4 + p * sizeof(Shared_Player_func_80433F14));
+                    q = ((int (*)(u8 *)) PAKInterface_FindReadyTransferPlayer)((u8 *) D_800E54A4 + p * sizeof(Shared_Player_func_80433F14));
                     if (q >= 0) {
                         D_800E54A4->players[q].back = 2;
                         D_800E54A4->players[q].state = 2;
@@ -661,7 +661,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                     func_8043599C_de(p, i, 0);
                     func_804356BC_de(0);
                     MarkMenuEventHandled();
-                    func_8043577C_de(9);
+                    PAKInterface_BeginScreenExit(9);
                     return 0;
                 }
                 break;
@@ -727,7 +727,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
 #else
         case 0x28A:
 #endif
-            func_8043577C_de(3);
+            PAKInterface_BeginScreenExit(3);
             return 0;
         }
         func_8043599C_de(p, D_800E54A4->players[p].choice, i);
@@ -755,7 +755,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
 #else
         case 0x298:
 #endif
-            func_8043577C_de(3);
+            PAKInterface_BeginScreenExit(3);
             return 0;
 #if defined(VERSION_DE)
         case 0x296:
@@ -826,7 +826,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
 #else
         case 0x2E8:
 #endif
-            func_80434B08_de(p);
+            PAKInterface_CopyActiveProfilesToPakSlots(p);
             if (PAKInterface_SavePlayerRecords(p) == 1) {
                 D_800E54A4->players[p].state = 0xE;
                 PAKInterface_RefreshPlayerPanel(p);
@@ -918,7 +918,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         case 0x2AA:
 #endif
             if (D_800E54A4->players[p].host == 1) {
-                func_80434D70_de(p);
+                PAKInterface_BeginLinkedProfileTransfer(p);
             } else {
                 D_800E54A4->players[p].state = 0xE;
             }
@@ -935,7 +935,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         if (event == 0x2EB) {
 #endif
             if (D_800E54A4->players[p].host == 1) {
-                func_80434D70_de(p);
+                PAKInterface_BeginLinkedProfileTransfer(p);
             } else {
                 D_800E54A4->players[p].state = 0xE;
             }
@@ -966,7 +966,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
 #endif
             Player_InitializeProfileSlot(0);
             MarkMenuEventHandled();
-            func_8043577C_de(9);
+            PAKInterface_BeginScreenExit(9);
             return 0;
         }
         break;

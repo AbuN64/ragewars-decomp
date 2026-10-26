@@ -9,7 +9,7 @@
    state 2 it calls MarkMenuEventHandled, clears the pause word D_80146894 (0x180C past the match objects
    at D_80145088), stops those objects and the ones 0x48 bytes before them, releases resource 0x24
    of D_8011FE88, restarts func_8025476C_de when func_8025477C_de reports it idle, and calls
-   func_8025E384_de and func_8042DEA0_de. Returns zero. */
+   func_8025E384_de and Frontend_StartConfiguredMatch. Returns zero. */
 
 
 
@@ -23,7 +23,7 @@ extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(s32);
 extern void func_8025E384_de(void);
-extern void func_8042DEA0_de(void);
+extern void Frontend_StartConfiguredMatch(void);
 
 
 
@@ -49,7 +49,7 @@ s32 func_804362A8_de(s32 unused0, s32 unused1, s32 event) {
             func_8025476C_de(1);
         }
         func_8025E384_de();
-        func_8042DEA0_de();
+        Frontend_StartConfiguredMatch();
     }
     return 0;
 }

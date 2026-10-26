@@ -51,7 +51,7 @@ extern f32 Rumble_SamplePackedFloatRange(CharacterScreenCell);
 extern void func_8022B040_de(s32, ParticleEffect *);
 extern void Fx_AttachActorRibbon(void *, ParticleEffect *, s32);
 extern s32 DynLight_AllocateWorldLight(void *, s32);
-extern void func_802843B8_de(ParticleEffect *, s32);
+extern void Particle_PlayAttachedSound(ParticleEffect *, s32);
 extern void SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 extern void Region_ShiftColorHue(s8, u8, u8, u8, u8 *, u8 *, u8 *);
 
@@ -134,8 +134,8 @@ static inline void effect_spawn_aim(ParticleEffect *effect, EffectTarget *aimTar
     }
 }
 
-s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 arg4, s32 kind,
-                  CVector3 arg6, CQuatern rotation, CVector3 pos, CVector3 *aim, s32 arg10, s32 arg11) {
+s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 followTarget, s32 kind,
+                  CVector3 inheritedVelocity, CQuatern rotation, CVector3 pos, CVector3 *aim, s32 requestedMode, s32 spawnFlags) {
     MatrixF mtx;
     CVector3 dir;
     CVector3 dirOut;
@@ -253,11 +253,11 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     mode = -5;
                     break;
                 default:
-                    switch (arg10) {
+                    switch (requestedMode) {
                         case -5:
                         case -3:
                         case -2:
-                            mode = arg10;
+                            mode = requestedMode;
                             break;
                         default:
                             mode = -3;
@@ -265,8 +265,8 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     }
                     break;
                 case 3:
-                    if (0.0f <= (f32) arg10) {
-                        mode = arg10;
+                    if (0.0f <= (f32) requestedMode) {
+                        mode = requestedMode;
                     } else {
                         ok = 0;
                         mode = 0;
@@ -274,14 +274,14 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     break;
                 case 4:
                     if (source->type == 2 && source->unk1D0 == -8) {
-                        arg10 = -8;
+                        requestedMode = -8;
                         D_801002E0 = source->unk174;
                     }
-                    mode = arg10;
+                    mode = requestedMode;
                     break;
             }
             if (entry->flags & 0x2000000) {
-                if (D_801462C8.firstListMode == 0 || !(arg11 & 1)) {
+                if (D_801462C8.firstListMode == 0 || !(spawnFlags & 1)) {
                     ok = 0;
                 }
             }
@@ -373,9 +373,9 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 if (refCount != 0) {
                     (*refCount)++;
                 }
-                effect->followedActor = arg4;
+                effect->followedActor = followTarget;
                 effect->unk13C = 0;
-                effect->flags = (effect->flags & ~0xE600) | (arg11 | extra);
+                effect->flags = (effect->flags & ~0xE600) | (spawnFlags | extra);
                 bits = &effect->unk11C;
                 layer = 0;
                 if (effect->entry->flags & 0x2000000) {
@@ -489,7 +489,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 effect->startPosition = effect->pos;
                 GraphU64_ScaleVector(&effect->velocity, &dirOut, Rumble_SamplePackedFloatRange(entry->motion->speed));
                 if (entry->flags & 0x20) {
-                    GraphU64_AddVec3(&effect->velocity, &effect->velocity, &arg6);
+                    GraphU64_AddVec3(&effect->velocity, &effect->velocity, &inheritedVelocity);
                 }
                 hue = 0;
                 if (entry->color->m_RandomizeHue != 0) {
@@ -592,7 +592,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                         case 0x22:
                         case 0x5F:
                         case 0x60:
-                            func_802843B8_de(effect, sound);
+                            Particle_PlayAttachedSound(effect, sound);
                             break;
                         default:
                             SoundElement_PlaySoundAtPosition(sound, effect->pos, 0, -1);

@@ -10,7 +10,7 @@
 
 
 
-s32 func_804351E4_de(void) {
+s32 PAKInterface_FindEmptyPlayerLink(void) {
     s32 found = -1;
     s32 i;
 

@@ -60,11 +60,11 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle);
 
 void func_80282E98_de(Shared_Particle *particle, SharedPlayer *player);
 
-void func_80283E58_de(Shared_Particle *particle);
+void Particle_DispatchSpatialContactEvents(Shared_Particle *particle);
 
-void func_80283F60_de(Shared_Particle *particle);
+void Particle_DispatchParticleContactEvents(Shared_Particle *particle);
 
-void func_8028422C_de(Shared_Particle *particle);
+void Particle_SpawnInterpolatedTrail(Shared_Particle *particle);
 
 /* Squared distance from the particle to a player's position, raised by half the player's height unless the particle
  * is type 0x40F. */
@@ -297,7 +297,7 @@ void Particle_Update(Shared_Particle *particle) {
         goalSize = RW_MIN(particle->size.z * particle->growth.z, 400.0f);
         particle->size.z += (goalSize - particle->size.z) * D_800D2988;
         if (particle->size.x < 0.0f || particle->size.y < 0.0f || particle->size.z < 0.0f) {
-            func_80283F60_de(particle);
+            Particle_DispatchParticleContactEvents(particle);
             Particle_Release(&D_8011D8D0, particle);
             ((void (*)(Shared_Particle *))Particle_StopSound)(particle);
             D_800D2988 = savedStep;
@@ -308,7 +308,7 @@ void Particle_Update(Shared_Particle *particle) {
     particle->rot.y += particle->rotSpeed.y * D_800D2988;
     particle->rot.z += particle->rotSpeed.z * D_800D2988;
     D_80103FCC->direction = particle->inst.velocity;
-    func_80283E58_de(particle);
+    Particle_DispatchSpatialContactEvents(particle);
     influenceRange = particle->desc->unk10;
     if (!(influenceRange <= 0.0f)) {
         influenceRange *= 10.24f;
@@ -402,7 +402,7 @@ void Particle_Update(Shared_Particle *particle) {
         }
     }
     if ((particle->flags & 0x8100) == 0x100) {
-        func_8028422C_de(particle);
+        Particle_SpawnInterpolatedTrail(particle);
     }
     D_800D2988 = savedStep;
 }

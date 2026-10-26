@@ -25,7 +25,7 @@
 #include "COMMON/ENTRYRECATE.H"
 #include "MENU/802ABDBC_5.H"
 
-s32 func_802A7AA4_de(void *);
+s32 OnScreen_UpdateMoverScript(void *);
 
 
 s32 func_802AA70C_de(void *, s32 *);
@@ -35,7 +35,7 @@ extern int Tsmos_IsFrontendActive(void);
 
 extern void OnScreen_SetupSpriteMode(s32);
 
-extern void func_802A7660_de(void *arg0, int arg1);
+extern void OnScreen_DrawStatusBar(void *arg0, int arg1);
 
 extern f32 D_800CB3A8;
 
@@ -57,7 +57,7 @@ void func_802AA6D0_de(void *arg0, s16 arg1, s16 arg2)
 s32 func_802AA70C_de(void *widget, s32 *arg1) {
     (((struct ObjectLinksC_2 *) ((s8 *) widget))->unk_4) = arg1;
     (((struct ObjectLinksC_2 *) ((s8 *) widget))->unk_8) = 2;
-    return func_802A7AA4_de(widget);
+    return OnScreen_UpdateMoverScript(widget);
 }
 
 s32 func_802AA730_de(void *arg0, s32 arg1, s32 arg2) {
@@ -93,16 +93,16 @@ void func_802AA7A4_de(void *arg0) {
         Geometry_InvalidateMaterialKeys();
         TextLoad_ResetTextureCache();
     }
-    func_802A84F8_de();
-    func_802A8710_de();
+    OnScreen_SetupTextRendering();
+    OnScreen_LoadTextTileModeOne();
     func_802AAB68_de(D_800C61F0_de, D_800C61F0_de);
     func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
     OnScreen_SetupSpriteMode(D_801462C8.hudFade);
     if (((Hud *)arg0)->bars[0].enabled != 0) {
-        func_802A7660_de(arg0, 1);
+        OnScreen_DrawStatusBar(arg0, 1);
     }
     if (((Hud *)arg0)->bars[1].enabled != 0) {
-        func_802A7660_de(arg0, 2);
+        OnScreen_DrawStatusBar(arg0, 2);
     }
 }
 

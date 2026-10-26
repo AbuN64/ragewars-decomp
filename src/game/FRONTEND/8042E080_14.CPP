@@ -23,7 +23,7 @@ extern void XStdio_FormatBuffer(char *, char *, ...);
 extern s32 Pak_GetFreePages(s32, s32 *);
 extern s32 Pak_BytesToPakPages(s32);
 extern void PAKInterface_RefreshPlayerPanel(s32, s32);
-extern void func_80434250_de(s32, s32);
+extern void PAKInterface_ScrollNoteList(s32, s32);
 
 /* Builds a player's controller pak note list: each of the sixteen notes gets its name (a default when unnamed), its size and a numbered label with the extension when it has one, or empty entries once the pak cannot be read; then the free and used page counts are formatted into their menu items, and on any read failure the slot is marked failed instead of opening the note menu. */
 #if defined(VERSION_DE)
@@ -49,7 +49,7 @@ enum { PAK_RESOURCE_2D7 = 727, PAK_RESOURCE_2D8 = 728, PAK_RESOURCE_2DB = 731, P
 static const char controller_pak_note_label_format[] = "%d.%s.%s";
 #endif
 
-void func_80433EA0_de(s32 player)
+void PAKInterface_LoadNoteList(s32 player)
 {
     char name[0x18];
     u8 ext[8];
@@ -171,7 +171,7 @@ g_noteInfoIntFormat,
     D_800E54A4->players[player].labels[0] = Frontend_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2DB);
     D_800E54A4->players[player].labels[1] = Frontend_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2DC);
     D_800E54A4->players[player].labels[2] = Frontend_FindWidgetByResourceId(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2DD);
-    func_80434250_de(player, 1);
+    PAKInterface_ScrollNoteList(player, 1);
 }
 
 #if defined(VERSION_US)

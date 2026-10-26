@@ -164,7 +164,7 @@ s32 func_804057BC_de(u8 *text, s32 count) {
     return 0;
 }
 
-/* Rounds a byte count up to whole 256-byte units; func_80435384_de passes it the 0x648-byte size
+/* Rounds a byte count up to whole 256-byte units; PAKInterface_CheckRecordsNoteCapacity passes it the 0x648-byte size
    that func_80435424_de returns. */
 u32 Pak_BytesToPakPages(u32 bytes) {
     return (bytes + 0xFF) >> 8;

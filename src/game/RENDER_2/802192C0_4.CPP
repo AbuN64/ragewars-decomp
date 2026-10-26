@@ -53,7 +53,7 @@ void Control_SetProfileMode(void *, s32);
 void Link_DispatchActorLinks(void *, s32, void *);
 void Link_DispatchObjectLinks(s32, s32, void *);
 s32 func_802800C0_de(void *, void *, void *, s32 *, s32, s32, CVector3, CQuatern, CVector3, CVector3 *, s32, s32); /* extern */
-void func_80283278_de(void *, s32);
+void Particle_ReleaseOwnerListTwoEffects(void *, s32);
 s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 void Scene_SetLevelRecordStateBit(void *, void *, s32);
 void *SetN64_SpawnModelEffect(void *, s32 *, s32, CVector3, CVector3, s32, f32); /* extern */
@@ -163,7 +163,7 @@ void func_8021B468_de(struct Shared_ActorView *player, void *attacker, s32 damag
     func_8022B530_de((s32)player);
     ((struct Shared_ActorView *)player)->stun = 0;
     ((struct Shared_ActorView *)player)->marker.time = 0;
-    func_80283278_de(&D_8011D8D0, (s32)player);
+    Particle_ReleaseOwnerListTwoEffects(&D_8011D8D0, (s32)player);
     flow = &D_80145060.flow;
     if ((flow->active != 0)
         && gameplayTransitionEnabled(player->controls->germanActive)

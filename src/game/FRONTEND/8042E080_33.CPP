@@ -21,7 +21,7 @@ extern s32 Pak_ReadNoteData(s32, s32, PakSavePacket *, s32);
 extern s32 Pak_Crc32(PakSavePacket *, s32, s32);
 extern void Pak_DeleteNote(s32, s32);
 
-s32 func_80434638_de(s32 player, s32 channel) {
+s32 PAKInterface_ReadRecordsNote(s32 player, s32 channel) {
     PakSavePacket *packet;
     s32 received;
 

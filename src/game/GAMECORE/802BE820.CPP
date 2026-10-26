@@ -11,7 +11,7 @@
 extern OSPiHandle_s *D_800D4380[];
 
 /** Update changed PI timing registers, then write through the uncached transfer address. */
-s32 func_802B9730_de(OSPiHandle_s *handle, u32 arg1, u32 arg2) {
+s32 func_802B9730_de(OSPiHandle_s *handle, u32 deviceOffset, u32 wordValue) {
     OSPiHandle_s *previous;
     s32 index;
 
@@ -49,7 +49,7 @@ s32 func_802B9730_de(OSPiHandle_s *handle, u32 arg1, u32 arg2) {
         }
         D_800D4380[index] = handle;
     }
-    *(volatile u32 *)(handle->baseAddress | arg1 | 0xA0000000) = arg2;
+    *(volatile u32 *)(handle->baseAddress | deviceOffset | 0xA0000000) = wordValue;
     return 0;
 }
 

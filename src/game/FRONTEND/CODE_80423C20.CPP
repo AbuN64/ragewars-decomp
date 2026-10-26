@@ -25,7 +25,7 @@ extern s32 func_80299A08_de(void);
 
 extern void Player_InitializeProfile(char *);
 
-extern void func_80434FB4_de(s32);
+extern void PAKInterface_SetScreenPhase(s32);
 
 extern void Player_SetAchievementFlag7(char *, s32);
 
@@ -49,7 +49,7 @@ extern OptionsScreen *D_800E4600;
 extern s8 D_800FEB0E[];
 extern u8 D_8010EB7D[];
 extern void ScenarioSetup_SetCupCategory(int);
-extern void func_8042E9A0_de(s32, s32);
+extern void Frontend_SetSelectedStage(s32, s32);
 extern void Tsmos_SetIdleTimer(f32);
 extern void Tsmos_ActivateControllerState(void);
 extern void *Cache_AllocateMemory(s32);
@@ -61,7 +61,7 @@ extern void SmpButton_WrapButtonWidget(s32);
 extern void Frontend_AdvanceActiveSlot(int *);
 extern s32 Control_IsControllerConnected(s32);
 extern void *SmpFade_CreateFadeWidget(s32, s32);
-extern void func_8041A488_de(void *);
+extern void SmpSlider_DisableTransition(void *);
 extern MenuWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern u32 func_802999F4_de(void);
 extern void Frontend_RequestScreenMode(s32);
@@ -82,7 +82,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     s32 mode;
 
     ScenarioSetup_SetCupCategory(-1);
-    func_8042E9A0_de(0, 0);
+    Frontend_SetSelectedStage(0, 0);
     counters->humanWon = 0;
     Tsmos_SetIdleTimer(0.0f);
     D_801462C8.local = 1;
@@ -159,7 +159,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
         Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, 0x49), 1);
     }
     D_800E4600->music = SmpFade_CreateFadeWidget(0x42, 0x24);
-    func_8041A488_de(D_800E4600->music);
+    SmpSlider_DisableTransition(D_800E4600->music);
     SmpButton_WrapButtonWidget(0x45);
     SmpButton_WrapButtonWidget(0x46);
     SmpButton_WrapButtonWidget(0x49);
@@ -222,7 +222,7 @@ s32 Frontend_ApplyModeChoice(void) {
         status->enabled = 1;
         status[0].slot = 0;
         Player_InitializeProfile((char *)D_80102B00);
-        func_80434FB4_de(7);
+        PAKInterface_SetScreenPhase(7);
         D_800E4600->nextScreen = 0x13;
         D_801462C8.controllerMode = 1;
         break;

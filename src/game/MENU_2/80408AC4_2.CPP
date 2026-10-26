@@ -93,7 +93,7 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
         ScenarioSetup_SetCatalogueAlpha(fade);
         if (fade < 10) {
             D_800E4F60->unk3DC = 3;
-            func_8042E988_de(11);
+            Frontend_SetMenuChoiceResult(11);
             return 0;
         }
         break;

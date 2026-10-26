@@ -23,13 +23,13 @@ extern void OnScreen_SetupSpriteMode(s32 color);
 extern s32 Cinema_IsSequenceInWindow(void);
 extern s32 SetN64_IsModeThirteen(void);
 
-extern void func_802A7AA4_de(void *mover);
+extern void OnScreen_UpdateMoverScript(void *mover);
 extern void func_802AAA54_de(s32 x0, s32 y0, s32 x1, s32 y1, s32 red, s32 green, s32 blue, u8 alpha);
 
 
 
 
-void func_802A7660_de(Hud *hud, s32 which) {
+void OnScreen_DrawStatusBar(Hud *hud, s32 which) {
     Bar *bar;
     f32 scale;
     f32 wide;
@@ -79,7 +79,7 @@ void func_802A7660_de(Hud *hud, s32 which) {
     x = (s32) bar->x;
     y = (s32) (bar->y + (f32) offset * scale);
     OnScreen_SetupFillMode();
-    func_802A7AA4_de(bar);
+    OnScreen_UpdateMoverScript(bar);
     if (bar->state == 1) {
         value = bar->fill;
         if ((f32) value < target) {
@@ -109,12 +109,12 @@ void func_802A7660_de(Hud *hud, s32 which) {
         shift = scale * 27.0f;
         func_802AAC28_de(0x202, 0, (s16) (x + 0x46), (s16) (s32) (bar->y + shift), 1.0f, scale * 1.5f, which);
         func_802AAC28_de(0x203, 0, (s16) (D_800E28D0 + x - 0x6D), (s16) (s32) (bar->y + shift), 1.0f, scale * 1.5f, which);
-        func_802A84F8_de();
+        OnScreen_SetupTextRendering();
         func_802AAB68_de(0.4f, scale * 0.4f);
         func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
         func_802A8F28_de(hud->bars[0].label, left, y - 2, *fade, 0, 0, 1.0f, 1.0f);
     } else {
-        func_802A84F8_de();
+        OnScreen_SetupTextRendering();
         func_802AAB68_de(0.4f, scale * 0.4f);
         func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
         func_802A8F28_de(hud->bars[1].label, left, y - 2, *fade, 0, 0, 1.0f, 1.0f);

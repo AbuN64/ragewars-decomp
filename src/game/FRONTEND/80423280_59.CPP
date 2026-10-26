@@ -89,13 +89,13 @@ typedef s32 (*Handler8042DFF0)(void *, s32, s32, s32, s32);
 
 extern Handler8042DFF0 D_800E543C;
 
-s32 func_8042DAC8_de(void) {
+s32 Frontend_DestroyPlayerCountScreen(void) {
     Cache_FreeMemory(D_800E5430);
     D_800E5430 = 0;
     return 0;
 }
 
-s32 func_8042DAF8_de(void) {
+s32 Frontend_UpdatePlayerCountScreen(void) {
     s32 result;
 
     if (D_800E28E0 >= 2) {
@@ -127,7 +127,7 @@ s32 func_8042DAF8_de(void) {
     return 0;
 }
 
-int func_8042DC04_de(void) {
+int Frontend_ConfirmPlayerCount(void) {
     int i;
     SlotRecAt7F *slot;
 
@@ -145,7 +145,7 @@ int func_8042DC04_de(void) {
     return 0;
 }
 
-s32 func_8042DCC4_de(void) {
+s32 Frontend_CancelPlayerCount(void) {
     SettingsScreenState *state;
 
     MarkMenuEventHandled();
@@ -155,7 +155,7 @@ s32 func_8042DCC4_de(void) {
     return 0;
 }
 
-s32 func_8042DD00_de(void *a0, void *a1, void *a2, s32 press) {
+s32 Frontend_IncreasePlayerCount(void *a0, void *a1, void *a2, s32 press) {
     SettingsScreenState *object;
 
     if (press != 1) {
@@ -173,7 +173,7 @@ s32 func_8042DD00_de(void *a0, void *a1, void *a2, s32 press) {
     return 0;
 }
 
-s32 func_8042DDA8_de(void *first, void *second, void *third, s32 fourth) {
+s32 Frontend_DecreasePlayerCount(void *first, void *second, void *third, s32 fourth) {
     s32 value;
 
     if (fourth != 1) {
@@ -189,7 +189,7 @@ s32 func_8042DDA8_de(void *first, void *second, void *third, s32 fourth) {
     return 0;
 }
 
-s32 func_8042DE10_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchPlayerCountEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler8042DFF0 *entry;
     s32 index;
     s32 wildcard;

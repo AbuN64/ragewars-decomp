@@ -67,7 +67,7 @@ extern void XPlus_CopyString(char *, char *);
 
 
 
-extern void func_8042E9A0_de(int, int);
+extern void Frontend_SetSelectedStage(int, int);
 
 
 
@@ -204,8 +204,8 @@ void ScenarioSetup_StartSelectedScenario(void) {
             Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E4F60->window, (unsigned short)D_800E4F64[i].other), 0);
         }
     }
-    func_8042E9A0_de(category, list);
-    func_8042E988_de(0x15);
+    Frontend_SetSelectedStage(category, list);
+    Frontend_SetMenuChoiceResult(0x15);
     Frontend_SetWidgetFlag08(D_800E4F60->widgetC, 0);
     Frontend_SetWidgetFlag08(D_800E4F60->widgetE, 0);
     Frontend_SetWidgetFlag08(D_800E4F60->widgetD, 0);

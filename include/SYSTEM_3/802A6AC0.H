@@ -85,7 +85,7 @@ struct ObjectLinks14_2 {
     s32 unk_10;
 };
 struct MenuCode802A6AC0 {
-    Entry_func_802A70D4_de entries[4];
+    EntryItemMenuAdvanceSelection entries[4];
     char padE0[0xE4 - 0xE0];
     u16 cursor;
 };
@@ -103,7 +103,7 @@ struct CallbackState1C {
     unsigned char padding_0[24];
     void (*callback)(void *);
 };
-extern void func_802A5AD0_de(ObjRecAt3CV1 *arg0);
-extern void func_802A5B84_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4);
-extern void func_802A5B4C_de(f32 *arg0);
+extern void Fx_AccumulateEffectComponents(ObjRecAt3CV1 *arg0);
+extern void Fx_AddTimedCallback(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4);
+extern void Fx_ClampScalarRange(f32 *arg0);
 #endif

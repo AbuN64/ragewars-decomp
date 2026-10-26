@@ -88,7 +88,7 @@ static inline s32 is_restorable(u32 address) {
 
 /* Draw active toggle-menu items in activation order, then draw the open menu
 * with a pulsing highlight on its selected item. */
-void func_802A6900_de(ToggleMenu *panel, Input_func_802A65E0_de *player) {
+void ItemMenu_DrawEntries(ToggleMenu *panel, Input_func_802A65E0_de *player) {
     MenuItem *sorted[4];
     s32 width;
     s32 height;
@@ -214,7 +214,7 @@ void func_802A6900_de(ToggleMenu *panel, Input_func_802A65E0_de *player) {
     }
 }
 
-void func_802A6F68_de(CItemMenu *rec) {
+void ItemMenu_ResetEntries(CItemMenu *rec) {
     int i;
     for (i = 0; i < 4; i++) {
         clear_entry(&rec->entries[i]);
@@ -227,7 +227,7 @@ void func_802A6F68_de(CItemMenu *rec) {
 }
 
 /* Finds or allocates one of four records and updates its parameters. */
-s32 func_802A6FB8_de(char *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, f32 arg5, s32 arg6, s32 arg7, s32 arg8) {
+s32 ItemMenu_SetEntry(char *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, f32 arg5, s32 arg6, s32 arg7, s32 arg8) {
     s32 var_a1;
     u32 key;
     char *temp_v1;
@@ -266,7 +266,7 @@ s32 func_802A6FB8_de(char *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, f32 arg
     return 1;
 }
 
-s32 func_802A7098_de(void *arg0)
+s32 ItemMenu_IsSelectedEntryActive(void *arg0)
 {
   s32 var_a1;
   s32 var_a2;
@@ -287,7 +287,7 @@ s32 func_802A7098_de(void *arg0)
 }
 
 /* Moves a menu's cursor at 0xE4 over its four 0x38-byte entries, forward when arg1 is zero and backward otherwise, wrapping around and skipping entries whose word at 0x4 is zero; returns the entry landed on. */
-s32 func_802A70D4_de(MenuCode802A6AC0 *menu, s32 backward) {
+s32 ItemMenu_AdvanceSelection(MenuCode802A6AC0 *menu, s32 backward) {
     u16 cursor;
     if (backward == 0) {
         do {
@@ -306,7 +306,7 @@ s32 func_802A70D4_de(MenuCode802A6AC0 *menu, s32 backward) {
     return cursor;
 }
 
-void func_802A7168_de(EntryRecAt34 *arg0) {
+void ItemMenu_ClearEntry(EntryRecAt34 *arg0) {
     arg0->unk4 = 0;
     arg0->unk0 = 0;
     arg0->unkD = 0;
@@ -314,7 +314,7 @@ void func_802A7168_de(EntryRecAt34 *arg0) {
     arg0->unk1C = 0;
 }
 
-void func_802A7180_de(void *arg0, void *arg1) {
+void ItemMenu_ToggleEntry(void *arg0, void *arg1) {
     s32 temp_v0;
     temp_v0 = (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_4) == 0;
     (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_4) = temp_v0;
@@ -328,14 +328,14 @@ void func_802A7180_de(void *arg0, void *arg1) {
     (((struct ObjectState30_2 *) ((s8 *) arg0))->unk_18) = -5;
 }
 
-s32 func_802A71C0_de(void) {
+s32 ItemMenu_RestoreBootMemory(void) {
     u32 *src;
     u32 *dst;
     s32 count;
     u32 status;
     u32 *piStatus;
     char name[16];
-    *(Marker_func_802A71C0_de *)name = s_systembootdoneText;
+    *(MarkerItemMenuRestoreBootMemory *)name = s_systembootdoneText;
     XPlus_FillMemory(&name[15], 0, 1);
     if (((s32 (*)(char *, char *))SetN64_CompareByteStrings)(&D_800CDD10, name) == 0) {
         D_801470B0 = 0;
@@ -372,7 +372,7 @@ s32 func_802A71C0_de(void) {
 void func_802A754C_de(void) {
 }
 
-s32 func_802A7554_de(u32 address) {
+s32 ItemMenu_IsRestorableAddress(u32 address) {
     address |= 0x80000000;
     if (((address) >= (u32)&(D_800CDD10) && (address) < (u32)&(D_800CDD10) + (0x10)) || address == (u32)&D_801470B0) {
         return 0;

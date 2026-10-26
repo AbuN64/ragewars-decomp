@@ -36,7 +36,7 @@ extern void SmpSlider_IncrementSliderItem(struct func_8022FD9C_Record *menu);
 
 /* Calls Cache_FreeMemory with the arguments it was given and returns zero. */
 
-s32 func_8041A9B0_de(struct CommandListMenu *commandListMenu) {
+s32 SmpList_ResetEntryCommands(struct CommandListMenu *commandListMenu) {
     struct LinkedCommandEntry *p;
 
     commandListMenu->state = 2;
@@ -53,7 +53,7 @@ s32 func_8041A9B0_de(struct CommandListMenu *commandListMenu) {
     return 0;
 }
 
-s32 func_8041AA10_de(struct func_8022FD9C_Record *menu, void *second, void *third, s32 active, s32 fifth) {
+s32 SmpList_HandleIncrementInput(struct func_8022FD9C_Record *menu, void *second, void *third, s32 active, s32 fifth) {
     if (XMath_AbsoluteInteger(fifth) < func_80299B4C_de()) {
         menu->activeState = 2;
     }
@@ -65,7 +65,7 @@ s32 func_8041AA10_de(struct func_8022FD9C_Record *menu, void *second, void *thir
     return 0;
 }
 
-s32 func_8041AA80_de(struct func_8022FD9C_Record *menu, void *second, void *third, s32 active, s32 fifth) {
+s32 SmpList_HandleDecrementInput(struct func_8022FD9C_Record *menu, void *second, void *third, s32 active, s32 fifth) {
     if (XMath_AbsoluteInteger(fifth) < func_80299B4C_de()) {
         menu->activeState = 2;
     }
@@ -81,14 +81,14 @@ s32 func_8041AA80_de(struct func_8022FD9C_Record *menu, void *second, void *thir
    value is 6 or 7, and returns zero. */
 
 
-s32 func_8041AAF0_de(struct func_8022FD9C_Record *object, void *unused, u32 event, s32 value) {
+s32 SmpList_HandleStopEvent(struct func_8022FD9C_Record *object, void *unused, u32 event, s32 value) {
     if ((event >> 16) == 3 && value < 8 && value >= 6) {
         object->activeState = 2;
     }
     return 0;
 }
 
-s32 func_8041AB1C_de(struct func_8022FD9C_Record *menu)
+s32 SmpList_UpdateSliderMotion(struct func_8022FD9C_Record *menu)
 {
     struct func_8022FD9C_Record *target = menu;
 
@@ -105,7 +105,7 @@ s32 func_8041AB1C_de(struct func_8022FD9C_Record *menu)
     return 0;
 }
 
-s32 func_8041AB70_de(void *arg0) {
+s32 SmpList_DestroyController(void *arg0) {
     Cache_FreeMemory(arg0);
     return 0;
 }

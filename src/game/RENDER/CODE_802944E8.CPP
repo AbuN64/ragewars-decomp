@@ -35,29 +35,29 @@ extern s32 D_800CD730;
 extern void Control_RestoreActorSnapshot(void);
 extern void SetN64_ResetSessionPlayerPools(void *session, s32 count, s32 force_active);
 
-void func_802944F4_de(s32 session) {
+void SetN64_HandleMode11Input(s32 session) {
     SetN64_HandleSessionTransitionInput(session, 0xC, 0xC);
 }
 
 void SetN64_DrawMode11Session(void *session) { SetN64_DrawSessionWithAttractTimeout(session); }
 
-void func_80294530_de(s32 arg0) {
+void SetN64_ResetMode10Items(s32 arg0) {
     Scene_ResetTransitionViewport();
     ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(arg0, 0x6F);
 }
 
-void func_80294560_de(s32 session) {
+void SetN64_HandleMode10Input(s32 session) {
     SetN64_HandleSessionTransitionInput(session, 0xD, 8);
 }
 
 void SetN64_DrawMode10Session(void *session) { SetN64_DrawSessionWithAttractTimeout(session); }
 
-void func_8029459C_de(int arg0) {
+void SetN64_ResetMode12Items(int arg0) {
     Scene_ResetTransitionViewport();
     SetN64_ResetPlayerItems(arg0, ((ObjRecAt26DD8 *)arg0)->unk26DD8 + 0x259);
 }
 
-void func_802945D8_de(s32 session) {
+void SetN64_HandleMode12Input(s32 session) {
     SetN64_HandleSessionTransitionInput(session, 0xD, 0xD);
 }
 
@@ -65,7 +65,7 @@ void SetN64_DrawMode12Session(void *session) { SetN64_DrawSessionWithAttractTime
 
 struct func_802077F4_S2;
 
-void func_80294614_de(GameSession *arg0) {
+void SetN64_ResumeSelectedSession(GameSession *arg0) {
     void *dst;
     s32 field;
     f32 f;

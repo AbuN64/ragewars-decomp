@@ -140,7 +140,7 @@ void func_80284E9C_de(int context,Obj_func_80284DC4_de **objects,int count) {
  }
 }
 
-void func_80284FF4_de(EffectSystem *effectSystem, s32 arg1, CVector3 *arg2) {
+void Particle_AverageOwnerEffectPositions(EffectSystem *effectSystem, s32 arg1, CVector3 *arg2) {
     f32 temp_f2;
     s32 count;
     u16 v;
@@ -183,7 +183,7 @@ extern f32 GraphU64_GetSquaredDistance(f32 *a, f32 *b);
 
 
 
-void func_802850C8_de(EffectSystem *arg0, LevelActor *actor, f32 *arg2) {
+void Particle_FindNearestForeignEffectDistance(EffectSystem *arg0, LevelActor *actor, f32 *arg2) {
     f32 temp;
     void *node;
 

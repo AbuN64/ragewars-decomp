@@ -162,7 +162,7 @@ block_7:
         ScenarioSetup_SetCatalogueAlpha(temp_s0);
         if (temp_s0 < 0xA) {
             D_800E4F60->unk_3DC = 3;
-            func_8042E988_de(0xB);
+            Frontend_SetMenuChoiceResult(0xB);
             return 0;
         }
         break;

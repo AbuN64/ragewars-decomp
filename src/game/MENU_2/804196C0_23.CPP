@@ -146,7 +146,7 @@ void SmpButton_AppendListText(struct MenuListWidget *menu, u8 *text) {
     menu->count++;
 }
 
-s32 func_8041AD7C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 SmpButton_DispatchListEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;
@@ -202,7 +202,7 @@ void SmpButton_DrawListWidget(Shared_Item *widget, Args args) {
 
 
 
-s32 func_8041AF40_de(struct MenuRecAt54 *menu) {
+s32 SmpButton_DimListItems(struct MenuRecAt54 *menu) {
     struct ItemRecAt10 *item;
 
     for (item = menu->items; item != 0; item = item->next) {
@@ -219,7 +219,7 @@ s32 func_8041AF40_de(struct MenuRecAt54 *menu) {
 
 
 
-s32 func_8041AF70_de(struct MenuRecAt54 *menu) {
+s32 SmpButton_HighlightListItems(struct MenuRecAt54 *menu) {
     struct ItemRecAt10 *item;
 
     for (item = menu->items; item != 0; item = item->next) {
@@ -230,7 +230,7 @@ s32 func_8041AF70_de(struct MenuRecAt54 *menu) {
     return 0;
 }
 
-s32 func_8041AFA0_de(struct MenuRecAt54 *arg0) {
+s32 SmpButton_DimListItemsWithSound(struct MenuRecAt54 *arg0) {
     struct ItemRecAt10 *p;
 
     SoundElement_PlayFlatSound(0xE74);
@@ -246,7 +246,7 @@ s32 func_8041AFA0_de(struct MenuRecAt54 *arg0) {
     return 0;
 }
 
-s32 func_8041AFF8_de(struct MenuRecAt114 *menu, void *second, void *third, s32 active) {
+s32 SmpButton_SelectNextListEntry(struct MenuRecAt114 *menu, void *second, void *third, s32 active) {
     struct OwnerRecAt38 *owner;
 
     if (active == 1) {
@@ -261,7 +261,7 @@ s32 func_8041AFF8_de(struct MenuRecAt114 *menu, void *second, void *third, s32 a
     return 0;
 }
 
-s32 func_8041B05C_de(struct MenuRecAt114 *menu, void *second, void *third, s32 active) {
+s32 SmpButton_SelectPreviousListEntry(struct MenuRecAt114 *menu, void *second, void *third, s32 active) {
     struct OwnerRecAt38 *owner;
 
     if (active == 1) {
@@ -276,7 +276,7 @@ s32 func_8041B05C_de(struct MenuRecAt114 *menu, void *second, void *third, s32 a
     return 0;
 }
 
-s32 func_8041B0C0_de(void *arg0) {
+s32 SmpButton_DestroyListController(void *arg0) {
     Cache_FreeMemory(arg0);
     return 0;
 }
@@ -302,9 +302,9 @@ void SmpButton_WrapButtonWidget(s32 arg0) {
     Frontend_ReplaceNodeRefs(context, source, result);
 }
 
-void func_8041B22C_de(Record_func_8041B22C_de *source) {
+void SmpButton_EnsureButtonWrapper(RecordSmpButtonEnsureButtonWrapper *source) {
     void *context;
-    Record_func_8041B22C_de *result;
+    RecordSmpButtonEnsureButtonWrapper *result;
 
     if (source->field_0E == 0xB61) {
         return;
@@ -320,7 +320,7 @@ void func_8041B22C_de(Record_func_8041B22C_de *source) {
     Frontend_ReplaceNodeRefs(context, source, result);
 }
 
-s32 func_8041B340_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 SmpButton_DispatchButtonEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;
@@ -376,7 +376,7 @@ void SmpButton_DrawButtonWidget(Shared_Item *widget, Args args) {
 
 
 
-s32 func_8041B504_de(struct MenuRecAt54 *menu) {
+s32 SmpButton_DimButtonItems(struct MenuRecAt54 *menu) {
     struct ItemRecAt10 *item;
 
     for (item = menu->items; item != 0; item = item->next) {
@@ -393,7 +393,7 @@ s32 func_8041B504_de(struct MenuRecAt54 *menu) {
 
 
 
-s32 func_8041B534_de(struct MenuRecAt54 *menu) {
+s32 SmpButton_HighlightButtonItems(struct MenuRecAt54 *menu) {
     struct ItemRecAt10 *item;
 
     for (item = menu->items; item != 0; item = item->next) {
@@ -404,7 +404,7 @@ s32 func_8041B534_de(struct MenuRecAt54 *menu) {
     return 0;
 }
 
-s32 func_8041B564_de(OwnerRecAt44 *arg0) {
+s32 SmpButton_DimButtonItemsWithSound(OwnerRecAt44 *arg0) {
     void *p;
 
     SoundElement_PlayFlatSound(0xE74);
@@ -420,7 +420,7 @@ s32 func_8041B564_de(OwnerRecAt44 *arg0) {
     return 0;
 }
 
-int func_8041B5BC_de(void *object)
+int SmpButton_DestroyButtonController(void *object)
 {
     Cache_FreeMemory(object);
     return 0;

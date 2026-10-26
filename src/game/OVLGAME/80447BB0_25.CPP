@@ -67,7 +67,7 @@ void Ovlgame_InitActorHudState(Shared_ActorView *);
 
 
 void func_804499B0_de(CPlayerPool *pool, s32 count, s32 force_active) {
-    extern void func_802A6F68_de(CItemMenu *);
+    extern void ItemMenu_ResetEntries(CItemMenu *);
     s32 i;
     s32 j;
     s32 entry_offset;
@@ -164,7 +164,7 @@ initialize_object:
             func_8021A78C_de(object);
             ((struct Shared_ActorView *)(object))->field16D4 = 0;
             ((struct Shared_ActorView *)(object))->field16D8 = 0;
-            func_802A6F68_de(&((Shared_ActorView *)object)->record);
+            ItemMenu_ResetEntries(&((Shared_ActorView *)object)->record);
             if (((ObjectState96 *)(entry))->m_Active != 0) {
                 Ovlgame_ResetPlayerForRound(object, ((ObjectState96 *)(entry))->m_nCharacter, 1);
                 func_80255ED8_de(&pool->m_FreeList, object);
@@ -220,7 +220,7 @@ initialize_object:
         func_8021A78C_de(object);
         ((struct Shared_ActorView *)(object))->field16D4 = 0;
         ((struct Shared_ActorView *)(object))->field16D8 = 0;
-        func_802A6F68_de(&((Shared_ActorView *)object)->record);
+        ItemMenu_ResetEntries(&((Shared_ActorView *)object)->record);
         Ovlgame_ResetPlayerForRound(object, ((ObjectState96 *)(entry))->m_nCharacter, force_active);
         func_80255ED8_de(&pool->m_FreeList, object);
         func_80255CB8_de(&pool->m_ActiveList, object);
@@ -278,7 +278,7 @@ void func_80449E18_de(CPlayerPool *pool) {
     }
 }
 void func_80449EE4_de(char *player, s32 slot, RecordCode80447BB080449EE4 *record) {
-    extern void func_802A6F68_de(CItemMenu *);
+    extern void ItemMenu_ResetEntries(CItemMenu *);
     s32 i;
     s32 computer;
     u8 team;
@@ -323,7 +323,7 @@ void func_80449EE4_de(char *player, s32 slot, RecordCode80447BB080449EE4 *record
     func_8021A78C_de(player);
     ((Shared_ActorView *)player)->field16D4 = 0;
     ((Shared_ActorView *)player)->field16D8 = 0;
-    func_802A6F68_de(&((Shared_ActorView *)player)->record);
+    ItemMenu_ResetEntries(&((Shared_ActorView *)player)->record);
 }
 
 void func_8044A020_de(struct ActorCode80447BB0 *actor, s32 character) {

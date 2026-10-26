@@ -37,7 +37,7 @@ extern void func_8022B984_de(void *arg0);
 
 
 
-extern s32 func_80283228_de(void *, s32);
+extern s32 Particle_CountOwnerListOneEffects(void *, s32);
 
 extern WeaponActionRecord D_800CE8DC[];
 
@@ -140,7 +140,7 @@ void Weapon_UpdateSpecialFireAndAmmo(void *arg0, void *attack) {
     }
 
     if (Player_HasAmmoForMode(actor, ((ObjectLinks11DC *)(actor))->unk_62E) == 0) {
-        if (func_80283228_de(&D_8011D8D0, actor) == 0) {
+        if (Particle_CountOwnerListOneEffects(&D_8011D8D0, actor) == 0) {
             ((ObjectLinks11DC *)(actor))->unk_770 = Weapon_FindNextUsableWeapon(actor);
         }
     } else if (func_802301F4_de(arg0, attack) == 0 &&

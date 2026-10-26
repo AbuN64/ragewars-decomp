@@ -18,7 +18,7 @@ extern f32 D_800D2988;
 
 extern void func_80295E84_de(s32 *arg0, s32 arg1);
 
-extern void func_80283064_de(void *arg0, s32 *arg1);
+extern void Particle_EncodeRenderLayer(void *arg0, s32 *arg1);
 
 typedef struct Image Image;
 
@@ -46,7 +46,7 @@ extern void Fx_DrawColoredRibbon(s32, void *, s32);
 
 extern void Smp_AppendRibbonSegment(void *arg0, void *arg1, f32 *arg2);
 
-void func_802A5D38_de(SceneRecAt95A8 *arg0, s32 arg1) {
+void Fx_RecycleOwnerParticles(SceneRecAt95A8 *arg0, s32 arg1) {
     s32 count;
     s32 offset;
     void **slot;
@@ -75,7 +75,7 @@ void func_802A5D38_de(SceneRecAt95A8 *arg0, s32 arg1) {
     }
 }
 
-void func_802A5E08_de(Owner802A6DF8 *owner) {
+void Fx_UpdateAttachedEffects(Owner802A6DF8 *owner) {
     State802A6DF8 *state;
     State802A6DF8 *next;
     u8 *object;
@@ -110,7 +110,7 @@ void func_802A5E08_de(Owner802A6DF8 *owner) {
     }
 }
 
-void func_802A5EE0_de(void *arg0)
+void Fx_UpdateTimedCallbacks(void *arg0)
 {
   void *node;
   char *new_var;
@@ -146,7 +146,7 @@ void func_802A5EE0_de(void *arg0)
   }
 }
 
-void func_802A5F9C_de(void *unused, void *arg1, void *arg2) {
+void Fx_ResolveEntryResource(void *unused, void *arg1, void *arg2) {
     EntryRecAt34 *entry = arg1;
     s32 field34;
     s32 *p;
@@ -156,12 +156,12 @@ void func_802A5F9C_de(void *unused, void *arg1, void *arg2) {
         p = &entry->unk14;
         func_80295E84_de(p, field34);
         if (arg2 != 0) {
-            func_80283064_de(arg2, p);
+            Particle_EncodeRenderLayer(arg2, p);
         }
     }
 }
 
-void func_802A5FF0_de(State802A6FE0 *state) {
+void Fx_DetachEffectObject(State802A6FE0 *state) {
     u8 *object;
 
     object = state->object;
@@ -195,7 +195,7 @@ void func_802A5FF0_de(State802A6FE0 *state) {
 
 
 
-void func_802A6068_de(Image *image, Image *texture, Sprite *sprite) {
+void Fx_ConfigureSpriteImage(Image *image, Image *texture, Sprite *sprite) {
     f32 scale;
     s32 height;
     f32 *unit;
@@ -222,7 +222,7 @@ void func_802A6068_de(Image *image, Image *texture, Sprite *sprite) {
     }
 }
 
-void func_802A6174_de(Node44 *arg0, void *arg1) {
+void Fx_UpdateChildTransform(Node44 *arg0, void *arg1) {
     f32 local[16];
     f32 scale;
     void *entry;
@@ -253,7 +253,7 @@ void func_802A6174_de(Node44 *arg0, void *arg1) {
     }
 }
 
-void func_802A62BC_de(void *arg0) {
+void Fx_UpdateNodeFractions(void *arg0) {
     StateSmpUpdateRibbonLifetime *state = arg0;
     f32 accum;
     f32 delta;
@@ -273,7 +273,7 @@ void func_802A62BC_de(void *arg0) {
     }
 }
 
-void func_802A6304_de(s32 pool, void *arg1, s32 camera) {
+void Fx_DrawEffectGeometry(s32 pool, void *arg1, s32 camera) {
     State802A6DF8 *state = arg1;
     if (state->flags & 8) {
         Smp_UpdateLinkedNodeTransforms(arg1);
@@ -290,7 +290,7 @@ void func_802A6304_de(s32 pool, void *arg1, s32 camera) {
     }
 }
 
-void func_802A63A4_de(void *arg0, void *arg1, void *arg2, s32 arg3) {
+void Fx_AppendAttachedTransform(void *arg0, void *arg1, void *arg2, s32 arg3) {
     State802A6DF8 *state = arg1;
     f32 local[16];
     Shared_Particle *entry;
@@ -309,7 +309,7 @@ void func_802A63A4_de(void *arg0, void *arg1, void *arg2, s32 arg3) {
     }
 }
 
-void *func_802A6450_de(Owner802A6DF8 *arg0, s32 arg1, s32 arg2) {
+void *Fx_FindAttachedEffect(Owner802A6DF8 *arg0, s32 arg1, s32 arg2) {
     State802A6DF8 *node;
 
     node = arg0->lists.inactive.head;
@@ -326,7 +326,7 @@ void *func_802A6450_de(Owner802A6DF8 *arg0, s32 arg1, s32 arg2) {
     return 0;
 }
 
-void func_802A6490_de(void *pool, void *camera) {
+void Fx_DrawEffectPasses(void *pool, void *camera) {
     State802A6DF8 *node;
 
     node = ((Owner802A6DF8 *)pool)->lists.inactive.head;

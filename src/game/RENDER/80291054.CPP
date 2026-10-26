@@ -24,7 +24,7 @@ void func_80291074_de(void *object) {
             Player_GetFirstPlayer(&D_80145040);
             if (D_800CD784_de != 0) {
                 if (D_800CD780 == 0) {
-                    func_802947C8_de(object, 0x7CF);
+                    SetN64_SelectSpawnAfterCredits(object, 0x7CF);
                     return;
                 }
                 goto advance;
@@ -75,7 +75,7 @@ void func_80291074_de(void *arg0) {
             Player_GetFirstPlayer(&D_80145040);
             if (D_800CD784_de != 0) {
                 if (D_800CD780 == 0) {
-                    func_802947C8_de(arg0, 0x7CF);
+                    SetN64_SelectSpawnAfterCredits(arg0, 0x7CF);
                     return;
                 }
                 goto block_6;

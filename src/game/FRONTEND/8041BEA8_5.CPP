@@ -59,13 +59,13 @@ extern s32 Pak_FindNoteByName(s32, s32, s32 *);
 
 extern s32 Pak_GetStatus(s32);
 
-extern s32 func_80435384_de(s32,u32 *);
+extern s32 PAKInterface_CheckRecordsNoteCapacity(s32,u32 *);
 
 extern void Pak_ProbeStatus(s32);
 
 extern void SmpOverlay_AdvancePakDialogPort(void);
 
-extern void func_80434FB4_de(s32);
+extern void PAKInterface_SetScreenPhase(s32);
 
 
 
@@ -200,9 +200,9 @@ void SmpOverlay_RefreshPakDialog(void) {
             switch (temp_v0_2) { /* irregular */
             case 0:
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                if ((Pak_FindNoteByName(((D_800E25A4)[g_languageIndex]), D_800DF4C0, &foundNote) == 0) && (func_80435384_de(D_800DF4C0, &hasRoom) == 0)) {
+                if ((Pak_FindNoteByName(((D_800E25A4)[g_languageIndex]), D_800DF4C0, &foundNote) == 0) && (PAKInterface_CheckRecordsNoteCapacity(D_800DF4C0, &hasRoom) == 0)) {
 #else
-                if ((Pak_FindNoteByName((D_800D36D4), D_800DF4C0, &foundNote) == 0) && (func_80435384_de(D_800DF4C0, &hasRoom) == 0)) {
+                if ((Pak_FindNoteByName((D_800D36D4), D_800DF4C0, &foundNote) == 0) && (PAKInterface_CheckRecordsNoteCapacity(D_800DF4C0, &hasRoom) == 0)) {
 #endif
                     var_s1 = hasRoom > 0U;
                 }
@@ -260,7 +260,7 @@ void SmpOverlay_RefreshPakDialog(void) {
             D_800E3514 = 2;
 #endif
         }
-        func_80434FB4_de(6);
+        PAKInterface_SetScreenPhase(6);
         func_80298368_de(0x13);
         return;
     }
@@ -465,7 +465,7 @@ s32 SmpOverlay_HandlePakDialogChoice(void) {
 #else
         D_800E3514 = 1;
 #endif
-        func_80434FB4_de(6);
+        PAKInterface_SetScreenPhase(6);
         func_80298368_de(0x13);
         break;
     }

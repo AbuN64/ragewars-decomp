@@ -66,7 +66,7 @@ extern void *Frontend_GetScreenData(s32 index);
 
 extern void SmpFlicker_InitFlicker(func_80419D04_S1 *arg0, s32 arg1);
 
-extern void func_80419F18_de(MenuResourceWidget *);
+extern void SmpFlicker_EnableFlicker(MenuResourceWidget *);
 
 /* Initializes a flicker effect and randomizes each element's intensity. */
 void SmpFlicker_InitFlicker(func_80419D04_S1 *flicker, s32 sampleCount) {
@@ -108,7 +108,7 @@ MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int arg0, int arg1)
   p->a = kind;
   p->resource->value = p->owner.bytes[3];
   SmpFlicker_InitFlicker(p, -1);
-  func_80419F18_de(p);
+  SmpFlicker_EnableFlicker(p);
   Frontend_InsertWidgetBefore(r, p);
   return p;
 }

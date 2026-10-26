@@ -199,7 +199,7 @@ extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
 extern void Link_DispatchActorLinks(void *arg0, s32 arg1, void *arg2);
 
 struct SceneRecAt95A8;
-extern void func_802A5D38_de(struct SceneRecAt95A8 *, s32);
+extern void Fx_RecycleOwnerParticles(struct SceneRecAt95A8 *, s32);
 
 extern void Scene_SetLevelActorStateBit(void *a, unsigned short b, unsigned short c, int d);
 
@@ -326,7 +326,7 @@ void Action_SetBreakableState(void *arg0) {
     if (D_800C8270_de == 0) {
         Link_DispatchActorLinks(arg0, 0x80000, arg0);
     }
-    func_802A5D38_de(&D_801379C0, arg0);
+    Fx_RecycleOwnerParticles(&D_801379C0, arg0);
     if (pFlag->mode != 4) {
         hitFlags = ((LevelActor *)arg0)->flags | 0x08000000;
         ((LevelActor *)arg0)->flags = hitFlags;

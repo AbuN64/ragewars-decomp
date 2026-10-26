@@ -22,7 +22,7 @@ extern f32 Region_GetPolygonHeight(s32, f32, f32);
 
 extern char D_8011D8D0;
 
-extern s32 func_80283228_de(void *, s32);
+extern s32 Particle_CountOwnerListOneEffects(void *, s32);
 
 extern s32 InstHdr_GetActorMotionState(void *arg0);
 
@@ -197,7 +197,7 @@ s32 Player_PlayerHasAmmoForWeapon(void *player, s32 requestedWeaponType) {
     sw_arg1_21:
         return 1;
     check_external:
-        return func_80283228_de(&D_8011D8D0, (s32)player);
+        return Particle_CountOwnerListOneEffects(&D_8011D8D0, (s32)player);
     sw_arg1_default:
         return 0;
     

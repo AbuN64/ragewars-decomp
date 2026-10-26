@@ -242,7 +242,7 @@ typedef struct EffectInstance { char pad00[0xB0]; FxActor *actor; } EffectInstan
 extern EffectResource *Scene_GetLinkedResourceSection(void *, s32);
 extern void Lists_ClearHeader(void *);
 extern void func_80295E84_de(void *, s32);
-extern void func_80283064_de(void *, void *);
+extern void Particle_EncodeRenderLayer(void *, void *);
 extern void GraphU64_IdentityMatrix(void *);
 
 static inline EffectNode *FX_FIND_NODE(EffectWorld *world, FxActor *actor) {
@@ -294,7 +294,7 @@ void Fx_AttachActorRibbon(EffectWorld *world, FxActor *actor, s32 resourceId) {
         node->handle = -1;
         if (node->attachment != -1) {
             func_80295E84_de(node->coordinates, node->attachment);
-            if (actor) func_80283064_de(actor, node->coordinates);
+            if (actor) Particle_EncodeRenderLayer(actor, node->coordinates);
         }
         }
     }

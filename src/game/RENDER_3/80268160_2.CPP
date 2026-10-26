@@ -9,11 +9,11 @@
 #include "COMMON/OBJRECAT5F14.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
-/* Spawns an effect of the given kind for an object through AnimPool_SpawnAnimationObject at the object's position with its velocity (none when the object is inactive) and a uniform scale; kind 0x40C instead starts at the camera with no velocity and, once spawned, follows the camera's target through func_802833D0_de, and kinds 0x474 to 0x477 attach to the host's partner effect for active flagged hosts, otherwise the effect is started through AnimPool_ReleaseSceneEffect. */
+/* Spawns an effect of the given kind for an object through AnimPool_SpawnAnimationObject at the object's position with its velocity (none when the object is inactive) and a uniform scale; kind 0x40C instead starts at the camera with no velocity and, once spawned, follows the camera's target through Particle_GetEffectResource, and kinds 0x474 to 0x477 attach to the host's partner effect for active flagged hosts, otherwise the effect is started through AnimPool_ReleaseSceneEffect. */
 
 extern CameraEventsSpawnAttachedEffect *D_80103FCC;
 
-extern s32 func_802833D0_de(void *host);
+extern s32 Particle_GetEffectResource(void *host);
 
 extern s32 AnimPool_ReleaseSceneEffect(void *effect);
 
@@ -64,7 +64,7 @@ void Events_SpawnAttachedEffect(SourceRecAt1C *source, Shared_ParticleOwner *hos
         return;
     }
     if (spawn.kind == 0x40C) {
-        effect->target = func_802833D0_de(host);
+        effect->target = Particle_GetEffectResource(host);
         effect->offset.x = D_80103FCC->offset.x;
         effect->offset.y = D_80103FCC->offset.y;
         effect->offset.z = D_80103FCC->offset.z;

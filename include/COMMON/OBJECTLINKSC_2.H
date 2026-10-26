@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
-extern void func_802A8710_de();
+extern void OnScreen_LoadTextTileModeOne();
 
 struct Table802AB8DC;
 typedef struct Table802AB8DC Table802AB8DC;
@@ -25,7 +25,7 @@ struct FontStyle;
 typedef struct FontStyle FontStyle;
 
 
-extern void func_802A8800_de();
+extern void OnScreen_LoadTextTileModeTwo();
 
 
 struct IntegerState90;

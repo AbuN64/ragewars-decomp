@@ -32,7 +32,7 @@ extern char D_0041C138[];
 extern char D_0041C1CC[];
 extern char D_0041C248[];
 extern char D_0041C268[];
-unsigned int D_800E3300[] = {
+unsigned int g_smpEventHandlerTables[] = {
     0x00000E03, 0x00007530, (unsigned int)D_00419F2C, 0x00000E08, 0x00007530, (unsigned int)D_00419B20, 0x00000000, 0x00000000,
     0x00000000, 0x400B5000, 0x01785822, 0x19600002, 0x00000E03, 0x00007530, (unsigned int)D_0041A47C, 0x00000E08,
     0x00007530, (unsigned int)D_00419F50, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x97340380, 0x0C000489,

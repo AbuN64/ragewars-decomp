@@ -8,7 +8,7 @@ extern void PAKInterface_RefreshPlayerPanel(s32 player);
 
 /* Dispatch player-slot events using the current shared menu controller and
  * its measured 0xB68-byte player records. */
-s32 func_8042FB48_de(s32 a,s32 b,u32 event,s32 key){
+s32 Frontend_HandlePakProfileInput(s32 a,s32 b,u32 event,s32 key){
     s32 index=event&65535;
     if((event>>16)==3){
         switch(D_800E54A4->phase){
@@ -80,7 +80,7 @@ s32 func_8042FB48_de(s32 a,s32 b,u32 event,s32 key){
                 if(D_800E54A4->players[index].state==0){
                     MarkMenuEventHandled();
                     D_800E54A4->players[index].state=14;
-                    if(func_80434750_de()>=0){
+                    if(PAKInterface_FindReadyTransferPlayer()>=0){
                         D_800E54A4->players[index].back=2;
                         D_800E54A4->players[index].state=2;
                         D_800E54A4->players[index].next=13;
@@ -95,7 +95,7 @@ s32 func_8042FB48_de(s32 a,s32 b,u32 event,s32 key){
                 if(D_800E54A4->players[index].state==0){
                     MarkMenuEventHandled();
                     D_800E54A4->players[index].state=14;
-                    if(func_80434750_de()>=0){
+                    if(PAKInterface_FindReadyTransferPlayer()>=0){
                         D_800E54A4->players[index].back=2;
                         D_800E54A4->players[index].state=2;
                         D_800E54A4->players[index].next=13;

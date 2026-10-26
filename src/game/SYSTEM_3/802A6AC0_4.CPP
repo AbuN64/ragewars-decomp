@@ -7,10 +7,10 @@
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "TYPES.H"
 
-/* Steps a four-item toggle menu: counts frames, and once func_802A7098_de allows input opens the menu on button 0x20 or, on release, closes it after running the selected item's select callback (toggling it when that reports 1, or directly when it has none); each frame it settles every item's bounce animation toward zero, toggles the selected item off when an enabled item's update callback fails, advances the blink counter twice, and then either finishes opening, finishes closing, or moves the selection through func_802A70D4_de on buttons 0x100 and 0x200. Toggling an item starts its bounce at +5 with the current frame and its restore values, or at -5 when switching off. */
-extern s32 func_802A7098_de(void *menu);
+/* Steps a four-item toggle menu: counts frames, and once ItemMenu_IsSelectedEntryActive allows input opens the menu on button 0x20 or, on release, closes it after running the selected item's select callback (toggling it when that reports 1, or directly when it has none); each frame it settles every item's bounce animation toward zero, toggles the selected item off when an enabled item's update callback fails, advances the blink counter twice, and then either finishes opening, finishes closing, or moves the selection through ItemMenu_AdvanceSelection on buttons 0x100 and 0x200. Toggling an item starts its bounce at +5 with the current frame and its restore values, or at -5 when switching off. */
+extern s32 ItemMenu_IsSelectedEntryActive(void *menu);
 
-extern void func_802A70D4_de(ToggleMenu *menu, s32 direction);
+extern void ItemMenu_AdvanceSelection(ToggleMenu *menu, s32 direction);
 
 static inline void toggle(ToggleMenu *menu, MenuItem *item) {
     if ((item->on = !item->on) != 0) {
@@ -27,7 +27,7 @@ void ItemMenu_UpdateToggleMenu(ToggleMenu *menu, Input_func_802A65E0_de *input) 
     s16 bounce;
     s32 i;
     menu->frame++;
-    if (func_802A7098_de(menu) == 0) {
+    if (ItemMenu_IsSelectedEntryActive(menu) == 0) {
         return;
     }
     if (menu->state < 2) {
@@ -75,8 +75,8 @@ void ItemMenu_UpdateToggleMenu(ToggleMenu *menu, Input_func_802A65E0_de *input) 
             menu->state = 0;
         }
     } else if (input->pressed & 0x100) {
-        func_802A70D4_de(menu, 0);
+        ItemMenu_AdvanceSelection(menu, 0);
     } else if (input->pressed & 0x200) {
-        func_802A70D4_de(menu, 1);
+        ItemMenu_AdvanceSelection(menu, 1);
     }
 }

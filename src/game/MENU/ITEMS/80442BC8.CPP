@@ -52,7 +52,7 @@ extern void * func_8043F114_de(struct ObjectRecAt14 *);
 
 extern void Pak_MeasureLine(void *, f32, f32);
 
-/* Draws a pulsing sprite for an active menu element: when the word at 0x1CC is set, it takes the frame at 0x1C8 folded back after 23, sets up drawing through func_802A84F8_de and Geometry_SetModePreset, emits a yellow environment and primitive colour to the display list and draws sprite 0x67 at the owner's rectangle scaled to the screen through func_802AAC28_de. Adapted from func_8022C2B4_de. */
+/* Draws a pulsing sprite for an active menu element: when the word at 0x1CC is set, it takes the frame at 0x1C8 folded back after 23, sets up drawing through OnScreen_SetupTextRendering and Geometry_SetModePreset, emits a yellow environment and primitive colour to the display list and draws sprite 0x67 at the owner's rectangle scaled to the screen through func_802AAC28_de. Adapted from func_8022C2B4_de. */
 
 
 
@@ -161,7 +161,7 @@ void func_80442BA8_de(MenuSpriteElement *e) {
         } else {
             frame = 0x2F - e->frame;
         }
-        func_802A84F8_de();
+        OnScreen_SetupTextRendering();
         Geometry_SetModePreset(0x15);
         o = e->owner;
         gfx = g_displayListCursor++;

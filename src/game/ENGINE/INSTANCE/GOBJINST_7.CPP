@@ -30,7 +30,7 @@ extern void Geometry_DrawBlendParts(void **value, s32 arg1, s32 arg2, s32 arg3, 
 extern s32 Geometry_GetViewEffect(void);
 extern f32 GameObject_GetActorHeight(Actor_func_8024A3B0_de *actor);
 #include "particle/8027A0F4_8.H"
-extern EffectRecAt154 *func_802830B8_de(void *system);
+extern EffectRecAt154 *Particle_GetLastSpawnedEffect(void *system);
 extern f32 GameObject_GetActorRadius(Actor_func_8024A3B0_de *actor);
 
 static inline void spawn(Actor_func_8024A3B0_de *actor) {
@@ -57,7 +57,7 @@ void func_8024A5A8_de(Actor_func_8024A3B0_de *actor, s32 drawView, s32 animation
             if ((*node != 0) &&
                 (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
                 spawn(actor);
-                effect = func_802830B8_de(&D_8011D8D0);
+                effect = Particle_GetLastSpawnedEffect(&D_8011D8D0);
                 if (effect != 0) {
                     scale = D_800C8B50;
                     effect->field150 = GameObject_GetActorRadius(actor) * scale;

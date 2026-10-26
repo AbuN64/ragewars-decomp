@@ -14,7 +14,7 @@ extern Entry80294AC4 D_800CD788[];
 
 
 
-void func_80294AB0_de(void *gameSession) {
+void SetN64_EnterPendingSessionMode(void *gameSession) {
     void (*callback)(void *gameSession);
     s32 index;
 

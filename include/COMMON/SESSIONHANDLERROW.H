@@ -79,7 +79,7 @@ extern s32 Cinema_GetSequenceRequest(void);
 extern u32 func_80245850_de(void);
 extern s32 Pak_CountLiveNodes(Node_Pak_CountLiveNodes **);
 struct GameSession;
-extern void func_80293C34_de(struct GameSession *);
+extern void SetN64_AdvanceGameClock(struct GameSession *);
 extern void func_804037D4_de(void);
 extern u32 D_8011B9F8;
 extern u32 D_801428AC;
@@ -102,6 +102,6 @@ extern char D_800C5400_de[];
 extern char D_800C5408_de[];
 extern char D_800C5414_de[];
 
-extern void func_802947C8_de(void *arg0, s32 arg1);
+extern void SetN64_SelectSpawnAfterCredits(void *arg0, s32 arg1);
 
 #endif

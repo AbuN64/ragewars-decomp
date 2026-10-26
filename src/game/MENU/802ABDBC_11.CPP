@@ -322,7 +322,7 @@ s32 func_802ACD28_de(void *arg0, void *arg1) {
 extern void D_002AD1B4(void);
 extern void D_002AD264(void);
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-extern void func_802A6FB8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3,
+extern void ItemMenu_SetEntry(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5, s32 arg6, void (*arg7)(void), void (*arg8)(void));
 
 typedef struct func_802ADE28_S1 func_802ADE28_S1;
@@ -389,7 +389,7 @@ s32 func_802ACE38_de(ActivationActor *arg0, ActivationSlot *arg1, func_802ADE28_
         arg0->unk678 += state_value->amount;
         break;
     case 7:
-        func_802A6FB8_de(&arg0->unkD40, 1, 0, 0x7FD,
+        ItemMenu_SetEntry(&arg0->unkD40, 1, 0, 0x7FD,
                        0, 0, 0, D_002AD1B4, D_002AD264);
         break;
     

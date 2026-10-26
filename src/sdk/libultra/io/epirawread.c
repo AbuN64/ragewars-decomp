@@ -9,47 +9,47 @@
 
 extern OSPiHandle_s *D_800D4380[];
 
-s32 func_802B9590_de(OSPiHandle_s *arg0, u32 arg1, u32 *arg2) {
+s32 func_802B9590_de(OSPiHandle_s *piHandle, u32 deviceOffset, u32 *outputWord) {
     OSPiHandle_s *previous;
     s32 index;
 
-    if (arg2 == 0) {
+    if (outputWord == 0) {
         Audio_Assert(&D_800C7950_de, &s_epirawreadText, 0x2B);
     }
     while (IO_READ_WORD(PI_STATUS_REG) & 3) {
     }
-    index = arg0->domain;
+    index = piHandle->domain;
     previous = D_800D4380[index];
-    if (previous != arg0) {
+    if (previous != piHandle) {
         if (index == 0) {
-            if (previous->latency != arg0->latency) {
-                IO_WRITE(0xA4600014U, arg0->latency);
+            if (previous->latency != piHandle->latency) {
+                IO_WRITE(0xA4600014U, piHandle->latency);
             }
-            if (previous->pageSize != arg0->pageSize) {
-                IO_WRITE(0xA460001CU, arg0->pageSize);
+            if (previous->pageSize != piHandle->pageSize) {
+                IO_WRITE(0xA460001CU, piHandle->pageSize);
             }
-            if (previous->relDuration != arg0->relDuration) {
-                IO_WRITE(0xA4600020U, arg0->relDuration);
+            if (previous->relDuration != piHandle->relDuration) {
+                IO_WRITE(0xA4600020U, piHandle->relDuration);
             }
-            if (previous->pulse != arg0->pulse) {
-                IO_WRITE(0xA4600018U, arg0->pulse);
+            if (previous->pulse != piHandle->pulse) {
+                IO_WRITE(0xA4600018U, piHandle->pulse);
             }
         } else {
-            if (previous->latency != arg0->latency) {
-                IO_WRITE(0xA4600024U, arg0->latency);
+            if (previous->latency != piHandle->latency) {
+                IO_WRITE(0xA4600024U, piHandle->latency);
             }
-            if (previous->pageSize != arg0->pageSize) {
-                IO_WRITE(0xA460002CU, arg0->pageSize);
+            if (previous->pageSize != piHandle->pageSize) {
+                IO_WRITE(0xA460002CU, piHandle->pageSize);
             }
-            if (previous->relDuration != arg0->relDuration) {
-                IO_WRITE(0xA4600030U, arg0->relDuration);
+            if (previous->relDuration != piHandle->relDuration) {
+                IO_WRITE(0xA4600030U, piHandle->relDuration);
             }
-            if (previous->pulse != arg0->pulse) {
-                IO_WRITE(0xA4600028U, arg0->pulse);
+            if (previous->pulse != piHandle->pulse) {
+                IO_WRITE(0xA4600028U, piHandle->pulse);
             }
         }
-        D_800D4380[index] = arg0;
+        D_800D4380[index] = piHandle;
     }
-    *arg2 = IO_READ_WORD(arg0->baseAddress | arg1 | 0xA0000000U);
+    *outputWord = IO_READ_WORD(piHandle->baseAddress | deviceOffset | 0xA0000000U);
     return 0;
 }

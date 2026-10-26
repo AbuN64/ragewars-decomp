@@ -9,16 +9,16 @@
 extern void SmpOverlay_SetSlotValue(s32, s32, s32);
 extern void PAKInterface_RefreshPlayerPanel(s32);
 extern void PAKInterface_UpdatePlayerControlRows(s32);
-void func_80434D70_de(s32 player)
+void PAKInterface_BeginLinkedProfileTransfer(s32 player)
 {
   s32 selected = D_800E54A4->links[0].player;
-  State_func_80434D70_de *slot;
-  State_func_80434D70_de *selected_slot;
+  StatePAKInterfaceBeginLinkedProfileTransfer *slot;
+  StatePAKInterfaceBeginLinkedProfileTransfer *selected_slot;
   SmpOverlay_SetSlotValue(D_800E54A4->root, selected, 0);
-  slot = (State_func_80434D70_de *) (((char *) D_800E54A4) + (player * 0xB68));
+  slot = (StatePAKInterfaceBeginLinkedProfileTransfer *) (((char *) D_800E54A4) + (player * 0xB68));
   slot->state = 17;
   slot->reset = 0;
-  selected_slot = (State_func_80434D70_de *) (((char *) D_800E54A4) + (selected * 0xB68));
+  selected_slot = (StatePAKInterfaceBeginLinkedProfileTransfer *) (((char *) D_800E54A4) + (selected * 0xB68));
   slot = selected_slot;
   slot->display = 2;
   slot->state = 2;

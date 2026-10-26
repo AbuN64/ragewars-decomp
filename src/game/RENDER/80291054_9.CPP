@@ -91,18 +91,18 @@ int SetN64_IsModeThirteen(void) {
     return D_8011FAC0.mode == 0xD;
 }
 
-void func_8029350C_de(s32 arg0) {
+void SetN64_RunBootstrapThread(s32 arg0) {
     SetN64_StartGameThreadAndIdle(&D_8011FAC0, arg0);
 }
 
-void func_80293534_de(void) {
+void SetN64_RunGameThread(void) {
     func_802BD320_de(D_80146CE8, D_800C5400_de, D_800C5408_de, D_800C5414_de);
     func_802BD160_de(func_802BCF10_de() | 0x400);
     SetN64_RunGameLoop(&D_8011FAC0);
 }
 
 /** Reset three large-offset fields and mark the record active. */
-void func_80293590_de(void *gameSession) {
+void SetN64_BeginSessionFadeIn(void *gameSession) {
     struct GameSession *session = gameSession;
     session->phase = 1;
     session->timer = 0;

@@ -20,7 +20,7 @@ extern void Link_AnimateVertexColors(void *object, void *colors);
 extern void Cache_UnlockResource(s32, s32);
 extern s32 Geometry_GetViewEffect(void);
 #include "particle/8027A0F4_8.H"
-extern EffectRecAt154 *func_802830B8_de(void *system);
+extern EffectRecAt154 *Particle_GetLastSpawnedEffect(void *system);
 
 static inline void spawn(LevelActor *actor) {
     CVector3 position;
@@ -67,7 +67,7 @@ void func_8024A7A0_de(LevelActor *actor, s32 unusedShadowContext, Lookup *params
         if ((*node != 0) &&
             (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
             spawn(actor);
-            effect = func_802830B8_de(&D_8011D8D0);
+            effect = Particle_GetLastSpawnedEffect(&D_8011D8D0);
             if (effect != 0) {
                 scale = D_800C3A78_de;
                 effect->field150 = GameObject_GetActorRadius(actor) * scale;

@@ -21,9 +21,9 @@ extern void Fx_DetachParticleSwooshes(void *arg0, void *arg1);
 
 
 
-void func_8027FF58_de(void *arg0) {
-    s32 *temp_v1_2;
-    s32 temp_a1;
+void func_8027FF58_de(void *recycleSystem) {
+    s32 *referenceCount;
+    s32 lightHandle;
     s32 flags;
     s32 i;
     s32 clear_mask;
@@ -31,7 +31,7 @@ void func_8027FF58_de(void *arg0) {
     s32 active_mask;
     s32 flagged_offset;
     s32 head_offset;
-    ParticleEffect *temp_s0;
+    ParticleEffect *effect;
     ParticleEffect *next;
     u8 *head_cursor;
 
@@ -41,34 +41,34 @@ void func_8027FF58_de(void *arg0) {
     active_mask = 0x01000000;
     flagged_offset = 0xFC14;
     do {
-        __builtin_memcpy(&next, &((EffectSystem *)arg0)->lists[i].head, sizeof(next));
+        __builtin_memcpy(&next, &((EffectSystem *)recycleSystem)->lists[i].head, sizeof(next));
         if (next != 0) {
             do {
-                temp_s0 = next;
+                effect = next;
                 next = next->next;
-                flags = temp_s0->flags;
+                flags = effect->flags;
                 if (flags & 0x100) {
                   if (!(flags & 0x800)) {
-                    Particle_FinishActorEffects(temp_s0);
-                    if (temp_s0->unk1D9 != 0) {
-                        Particle_UpdateMatrix(temp_s0);
-                        Fx_DetachParticleSwooshes(&D_801379C0, temp_s0);
+                    Particle_FinishActorEffects(effect);
+                    if (effect->unk1D9 != 0) {
+                        Particle_UpdateMatrix(effect);
+                        Fx_DetachParticleSwooshes(&D_801379C0, effect);
                     }
-                    temp_a1 = temp_s0->unk138;
-                    if (temp_a1 != 0) {
-                        DynLight_ReleaseLight(&D_8013B1A8, temp_a1);
-                        temp_s0->unk138 = 0;
+                    lightHandle = effect->unk138;
+                    if (lightHandle != 0) {
+                        DynLight_ReleaseLight(&D_8013B1A8, lightHandle);
+                        effect->unk138 = 0;
                     }
-                    temp_v1_2 = temp_s0->refCount;
-                    if (temp_v1_2 != 0) {
-                        *temp_v1_2 -= 1;
+                    referenceCount = effect->refCount;
+                    if (referenceCount != 0) {
+                        *referenceCount -= 1;
                     }
-                    temp_s0->flags = temp_s0->flags & clear_mask;
-                    func_80255ED8_de(temp_s0->list, temp_s0);
-                    temp_s0->list = 0;
-                    func_80255CB8_de((char *)arg0 + remove_offset, temp_s0);
-                    if (temp_s0->flags & active_mask) {
-                        func_80255ED8_de((char *)arg0 + flagged_offset, temp_s0);
+                    effect->flags = effect->flags & clear_mask;
+                    func_80255ED8_de(effect->list, effect);
+                    effect->list = 0;
+                    func_80255CB8_de((char *)recycleSystem + remove_offset, effect);
+                    if (effect->flags & active_mask) {
+                        func_80255ED8_de((char *)recycleSystem + flagged_offset, effect);
                     }
                   }
                 }

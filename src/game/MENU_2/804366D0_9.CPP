@@ -26,7 +26,7 @@ enum { MENU_RESOURCE = 0x13b };
    at 0xC down and on expiry scrolls the list at 0x8 back one row, wrapping to the menu's own row
    count, and restarts the delay at 3; when the menu reports 4 it calls MarkMenuEventHandled and leaves
    through func_80298368_de with the target at 0x10, or 3 when that is -1. Returns zero. Adapted from
-   func_8042DAF8_de with the stage test removed, case 1 added and the -1 target mapped to 3. */
+   Frontend_UpdatePlayerCountScreen with the stage test removed, case 1 added and the -1 target mapped to 3. */
 
 extern u8 D_80102B00[];
 

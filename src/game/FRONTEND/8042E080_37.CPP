@@ -24,7 +24,7 @@ extern s8 D_800FEB0E[];
 
 extern struct MatchSetupGlobals D_801462C8;
 
-void func_80434B08_de(s32 player) {
+void PAKInterface_CopyActiveProfilesToPakSlots(s32 player) {
     struct MatchSetupGlobals *globals;
     s32 i;
     s32 size;

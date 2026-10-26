@@ -5,7 +5,7 @@
 extern void *SmpOverlay_GetSlotValue(s32, s32);
 
 /* Steps the selected name character of an entry back by one, wrapping below the printable range to 'Z'. */
-void func_80434EF4_de(s32 player) {
+void PAKInterface_DecrementNameCharacter(s32 player) {
     u8 value;
 
     D_800E54A4->selected[player] = 0;

@@ -172,7 +172,7 @@ extern void SetN64_SetTransitionTarget(struct GameSession *object, int value);
 
 extern void SetN64_ResetPlayerItems(s32 arg0, s32 arg1);
 
-extern void func_80293DF0_de(struct GameSession *arg0);
+extern void SetN64_InitializeFrontendScreenState(struct GameSession *arg0);
 
 extern s32 DispatchElementEvent(s32 id, s32 event, s32, s32, s32);
 

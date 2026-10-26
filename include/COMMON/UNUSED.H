@@ -100,7 +100,7 @@ extern char D_C0DA8;
 
 extern char D_800D3B28[];
 
-extern Marker_func_802A71C0_de s_systembootdoneText;
+extern MarkerItemMenuRestoreBootMemory s_systembootdoneText;
 
 
 extern char D_0044EA2C[];
@@ -566,7 +566,7 @@ extern char D_0044FEA8[];
 
 extern void D_002BC76C(void);
 
-extern s32 D_800E3300;
+extern s32 g_smpEventHandlerTables;
 
 extern char g_pakFormatInt1[];
 

@@ -22,7 +22,7 @@ extern void *Frontend_FindWidgetByResourceId(s32 owner, s32 id);
 extern void *SmpFlicker_CreateFlickerWidget(s32 a, s32 b);
 extern void XStdio_FormatBuffer(void *a, void *b, s32 c);
 /* Builds the 0x24-byte state D_800E5430 from the resources 0x392 to 0x397, hooks its list at 0x14 into the part Frontend_FindWidgetByResourceId returns for 0x397 and registers it with XStdio_FormatBuffer; returns zero. */
-s32 func_8042D9F0_de(s32 root) {
+s32 Frontend_CreatePlayerCountScreenDe(s32 root) {
     Func_8042D9F0_Part *part;
     D_800E5430 = (Func_8042D9F0_State *)Cache_AllocateMemory(0x24);
     Tsmos_ActivateControllerState();

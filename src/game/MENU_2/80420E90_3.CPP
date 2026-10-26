@@ -40,7 +40,7 @@ s32 SmpSlider_GetTransitionMode(void *);
 
 
 /* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled, for messages 0x3A2 to 0x3A7
-   through jtbl_800E1610: five pick option 0, 1, 3, 4 or 2, pass it to func_80434FB4_de and set the
+   through jtbl_800E1610: five pick option 0, 1, 3, 4 or 2, pass it to PAKInterface_SetScreenPhase and set the
    result word at offset 0x10 of the screen D_800E4450 to 0x13; the sixth sets it to -1. Both then
    close the screen's first word through SmpSlider_SetTransitionMode with 2. Returns zero. */
 
@@ -179,7 +179,7 @@ option_4:
 option_2:
     option = 2;
 choose:
-    func_80434FB4_de(option);
+    PAKInterface_SetScreenPhase(option);
     D_800E4450->unk10 = 0x13;
     goto close;
 cancel:

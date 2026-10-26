@@ -1,7 +1,7 @@
 #include "COMMON/ANIMATION.H"
 #include "COMMON/TRIPLE.H"
 
-s32 func_8041A05C_de(MenuFadeWidget *object) {
+s32 Smp_UpdateFadeProgress(MenuFadeWidget *object) {
     MenuFadeWidget *owner = object;
     f32 value, target, result;
     MenuFadeWidget *frame;

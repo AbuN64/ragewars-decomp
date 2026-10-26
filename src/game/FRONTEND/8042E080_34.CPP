@@ -8,7 +8,7 @@
 
 
 
-int func_80434750_de(void) {
+int PAKInterface_FindReadyTransferPlayer(void) {
     int i;
     int state;
 

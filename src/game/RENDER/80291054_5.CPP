@@ -120,7 +120,7 @@ block_10:
     D_80146CD8 = D_8011FAC0.ring.current;
     SetN64_BuildAndSubmitSessionFrame(world);
     world->unk26DB0 = world->unk26DB0 + D_800D2988;
-    func_80293C34_de(world);
+    SetN64_AdvanceGameClock(world);
     idle=idlePause(world);
     if ((idle != 0) && (world->unk26DB8 != 0x10) && (world->unk26DBC != 0x10)) {
         world->unk26DC1 = 2;

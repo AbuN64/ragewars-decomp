@@ -50,7 +50,7 @@ mode_inactive:
 mode_done:
         if ((D_801462C8.counters.transitionActive == 0) && (active == 1) && ((f32)(value * 15) < D_800CDA30_de.value)) {
             Frontend_SetupRandomTeams();
-            func_8042DEA0_de();
+            Frontend_StartConfiguredMatch();
             Tsmos_SetIdleTimer(0.0f);
         }
         D_800CDA30_de.value += D_800D2988;

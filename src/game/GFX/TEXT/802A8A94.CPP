@@ -35,7 +35,7 @@ extern void Geometry_SetCombineMode(s32 arg0);
 
 extern s32 Geometry_SetModePreset(s32);
 
-void func_802A7AA4_de(Mover *m) {
+void OnScreen_UpdateMoverScript(Mover *m) {
     s32 next;
     f32 dx;
     f32 dy;
@@ -149,7 +149,7 @@ void OnScreen_DrawBevelBox(s32 x0,s32 y0,s32 x1,s32 y1,s32 border,s32 invert,s32
     rectangle(x0,y0,x0+border,y1,darkR,darkG,darkB,a);
 }
 
-void func_802A822C_de(s32 value, f32 x, f32 y, f32 size, f32 scaleY, s32 arg5, s32 rightAlign, s32 minDigits) {
+void OnScreen_DrawSpriteNumber(s32 value, f32 x, f32 y, f32 size, f32 scaleY, s32 arg5, s32 rightAlign, s32 minDigits) {
     s32 sprites;
     s32 negative;
     s32 thousands;
@@ -235,7 +235,7 @@ release:
     Cache_UnlockResource(0, (struct Node80253610 *)sprites);
 }
 
-void func_802A84F8_de(void) {
+void OnScreen_SetupTextRendering(void) {
     u8 *texture;
 
     texture = func_802AADBC_de();
@@ -290,7 +290,7 @@ void func_802A84F8_de(void) {
     }
 }
 
-void func_802A8710_de(void) {
+void OnScreen_LoadTextTileModeOne(void) {
     Gfx *cmd;
     u8 *v0;
 
@@ -314,7 +314,7 @@ void func_802A8710_de(void) {
     }
 }
 
-void func_802A8800_de(void) {
+void OnScreen_LoadTextTileModeTwo(void) {
     Gfx *cmd;
     u8 *v0;
 

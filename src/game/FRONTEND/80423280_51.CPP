@@ -11,7 +11,7 @@ extern s32 ScenarioSetup_IsCupComplete(void);
    draws random stage numbers below the cup's size (5, 7, 17 or 11 stages) until one not yet marked
    in the played set at D_80154018 turns up (giving up after 15000 draws), marks it, counts the stage in
    D_80154014, maps it through the cup's stage table to an arena id, finds that id among the 40
-   arena entries at D_800E4F64 and starts the cup with the entry's value through func_8042E9A0_de.
+   arena entries at D_800E4F64 and starts the cup with the entry's value through Frontend_SetSelectedStage.
    Returns 1 when a stage was started, else 0. */
 
 
@@ -114,7 +114,7 @@ s32 ScenarioSetup_StartRandomCupStage(void) {
             }
         }
         D_80154010.stages++;
-        func_8042E9A0_de(D_80154010.index, stage_arena(D_80154010.index, stage));
+        Frontend_SetSelectedStage(D_80154010.index, stage_arena(D_80154010.index, stage));
     }
     return started;
 }

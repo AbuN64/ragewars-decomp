@@ -100,7 +100,7 @@ typedef struct WeaponSlot {
     s32 flag144;
     f32 timer148;
 } WeaponSlot;
-s32 func_80283228_de(s32 *, void *);
+s32 Particle_CountOwnerListOneEffects(s32 *, void *);
 extern s32 D_8011D8D0;
 s32 func_80230058_de(void *owner, void *slot) {
     WeaponOwner *weaponOwner = (WeaponOwner *)owner;
@@ -123,7 +123,7 @@ s32 func_80230058_de(void *owner, void *slot) {
         }
         break;
     case 11:
-        if (func_80283228_de(&D_8011D8D0, player) >= 3) return 0;
+        if (Particle_CountOwnerListOneEffects(&D_8011D8D0, player) >= 3) return 0;
         break;
     case 0:
         if (weaponSlot->flag144 == 0) return 0;

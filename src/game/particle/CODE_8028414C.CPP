@@ -57,7 +57,7 @@ extern void GraphU64_SubtractVectors(Triple *, Triple *, Triple *);
 extern void GraphU64_ScaleVector(Triple *, Triple *, f32);
 extern void GraphU64_AddVec3(Triple *, Triple *, Triple *);
 #include "particle/8027A0F4_8.H"
-void func_8028422C_de(TrailActor *actor) {
+void Particle_SpawnInterpolatedTrail(TrailActor *actor) {
         struct Shape_typemap_165 rotation;
         int temp;
         Triple delta;
@@ -93,7 +93,7 @@ extern void *func_8025CC6C_de(void);
 
 
 
-void func_802843B8_de(void *soundParticle, s32 arg1) {
+void Particle_PlayAttachedSound(void *soundParticle, s32 arg1) {
     void *node;
 
     node = ((SoundParticle *)soundParticle)->sound;

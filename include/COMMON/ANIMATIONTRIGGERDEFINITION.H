@@ -272,7 +272,7 @@ extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 struct Player;
 extern void Barrel_SpawnFlaggedEffects(struct Player *, s32 *, s32, s32, s32);
 struct SceneRecAt95A8;
-extern void func_802A5D38_de(struct SceneRecAt95A8 *, s32);
+extern void Fx_RecycleOwnerParticles(struct SceneRecAt95A8 *, s32);
 
 typedef struct {
     s16 hi;

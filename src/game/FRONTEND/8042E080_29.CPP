@@ -80,7 +80,7 @@ extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 extern void SmpOverlay_ShowSlotNode(s32,s32,MenuWidget *);
 extern MenuWidget *SmpOverlay_GetSlotValue(s32,s32);
 extern s32 Frontend_ListHasFlag100(MenuWidget *);
-void func_80433914_de(s32 player) {
+void PAKInterface_BuildProfileSlotList(s32 player) {
  s32 i;
  MenuWidget *label,*value;
  D_800E54A4->players[player].chosen=0;
@@ -100,7 +100,7 @@ void func_80433914_de(s32 player) {
    D_800E54A4->players[player].used[i]=1;
    if(D_800E54A4->phase==1) {
     Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689),0);
-    if(func_804358C0_de(D_800E54A4->players[player].profile,D_800E54A4->players[player].records[i].owner)!=-1) {
+    if(Frontend_FindProfileOwner(D_800E54A4->players[player].profile,D_800E54A4->players[player].records[i].owner)!=-1) {
      D_800E54A4->players[player].used[i]=0;
      Frontend_SetWidgetFlag100(D_800E54A4->players[player].nodes[i],1);
      Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689),1);

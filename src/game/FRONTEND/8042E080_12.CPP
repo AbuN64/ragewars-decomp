@@ -11,11 +11,11 @@
 
 
 extern ResourceSmpFlickerCreateFlickerWidget *SmpOverlay_GetSlotValue(s32, s32);
-extern void func_80434E34_de(s32);
-extern void func_80434EF4_de(s32);
+extern void PAKInterface_IncrementNameCharacter(s32);
+extern void PAKInterface_DecrementNameCharacter(s32);
 
 
-void func_80433398_de(s32 arg0) {
+void PAKInterface_UpdatePlayerPanelAnimations(s32 arg0) {
     f32 bobValue;
     s32 temp_v0;
     s32 temp_v0_2;
@@ -36,7 +36,7 @@ void func_80433398_de(s32 arg0) {
         temp_v1 = temp_a0->unk58;
         switch (temp_v1) {
         case 0:
-            func_80434FC4_de(player);
+            PAKInterface_PulseIdlePanelLabels(player);
             break;
         case 0xC:
             temp_s0 = SmpOverlay_GetSlotValue(D_800E54A4->root, player);
@@ -50,14 +50,14 @@ void func_80433398_de(s32 arg0) {
                 temp_v0 = temp_a0_2->unkBA4 + 1;
                 temp_a0_2->unkBA4 = temp_v0;
                 if (temp_v0 >= 6) {
-                    func_80434EF4_de(player);
+                    PAKInterface_DecrementNameCharacter(player);
                 }
                 break;
             case 1:
                 temp_v0_2 = temp_a0_2->unkBA4 + 1;
                 temp_a0_2->unkBA4 = temp_v0_2;
                 if (temp_v0_2 >= 6) {
-                    func_80434E34_de(player);
+                    PAKInterface_IncrementNameCharacter(player);
                 }
                 break;
             case 2:

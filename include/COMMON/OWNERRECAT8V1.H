@@ -11,8 +11,8 @@ typedef struct NodeMenuCreateOverlayNode NodeMenuCreateOverlayNode;
 
 extern s32 SmpOverlay_DispatchSlotEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
-struct Record_func_8041B22C_de;
-struct Record_func_8041B22C_de {
+struct RecordSmpButtonEnsureButtonWrapper;
+struct RecordSmpButtonEnsureButtonWrapper {
     s32 words_00[3];
     s16 field_0C;
     u16 field_0E;
@@ -149,7 +149,7 @@ struct RecordSmpButtonWrapButtonWidget {
     s32 field_40;
 };
 
-extern s32 func_8041B340_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 SmpButton_DispatchButtonEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 struct ChildRecAt2C;
 
@@ -167,8 +167,8 @@ struct Mixer {
 
 extern void SmpOverlay_ShowSlotNodeById(sm_dlmultiuser *context, s32 index, s32 id);
 
-struct Record_func_8041B22C_de;
-typedef struct Record_func_8041B22C_de Record_func_8041B22C_de;
+struct RecordSmpButtonEnsureButtonWrapper;
+typedef struct RecordSmpButtonEnsureButtonWrapper RecordSmpButtonEnsureButtonWrapper;
 
 struct Key;
 struct MenuRecAt114;

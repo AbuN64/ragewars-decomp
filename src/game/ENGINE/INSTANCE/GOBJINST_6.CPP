@@ -33,7 +33,7 @@ extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 extern s32 Geometry_GetViewEffect(void);
 
 
-extern EffectRecAt154 *func_802830B8_de(void *system);
+extern EffectRecAt154 *Particle_GetLastSpawnedEffect(void *system);
 
 #include "particle/8027A0F4_8.H"
 extern f32 GameObject_GetActorRadius(void *actor);
@@ -52,7 +52,7 @@ static inline void func_8024A1C0_spawn(Actor_func_8024A1D0_de *actor, Lookup *lo
             position.y += GameObject_GetActorHeight(actor) * D_800C8B38[1];
             func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                           actor->position1, actor->rotation, position, 0, -1, 0);
-            effect = func_802830B8_de(&D_8011D8D0);
+            effect = Particle_GetLastSpawnedEffect(&D_8011D8D0);
             if (effect != 0) {
                 scale = D_800C3A50_de;
                 effect->field150 = GameObject_GetActorRadius(actor) * scale;
@@ -102,7 +102,7 @@ void func_8024A3B0_de(LevelActor *actor, PlayerCode80225D10 *player, s32 animati
             if ((*node != 0) &&
                 (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
                 spawn(actor);
-                effect = func_802830B8_de(&D_8011D8D0);
+                effect = Particle_GetLastSpawnedEffect(&D_8011D8D0);
                 if (effect != 0) {
                     scale = D_800C8B48;
                     effect->field150 = GameObject_GetActorRadius(actor) * scale;

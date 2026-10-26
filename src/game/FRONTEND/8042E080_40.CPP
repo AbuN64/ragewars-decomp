@@ -5,7 +5,7 @@
 extern void *SmpOverlay_GetSlotValue(s32, s32);
 
 /* Advances the selected name character, wrapping past Z to a space. */
-void func_80434E34_de(s32 player) {
+void PAKInterface_IncrementNameCharacter(s32 player) {
     u8 value;
 
     D_800E54A4->selected[player] = 0;

@@ -9,35 +9,35 @@ extern void Particle_UpdateMatrix(void *);
 extern void Fx_DetachParticleSwooshes(void *arg0, void *arg1);
 
 
-void Particle_Release(EffectSystem *owner, ParticleEffect *arg1) {
-    s32 *temp_v1;
-    s32 temp_a1;
+void Particle_Release(EffectSystem *owner, ParticleEffect *releasedEffect) {
+    s32 *releaseReferenceCount;
+    s32 releasedLight;
     s32 flags;
 
-    flags = arg1->flags;
+    flags = releasedEffect->flags;
     if (flags & 0x100) {
         if (!(flags & 0x800)) {
-            Particle_FinishActorEffects(arg1);
-            if (arg1->unk1D9 != 0) {
-                Particle_UpdateMatrix(arg1);
-                Fx_DetachParticleSwooshes(&D_801379C0, arg1);
+            Particle_FinishActorEffects(releasedEffect);
+            if (releasedEffect->unk1D9 != 0) {
+                Particle_UpdateMatrix(releasedEffect);
+                Fx_DetachParticleSwooshes(&D_801379C0, releasedEffect);
             }
-            temp_a1 = arg1->unk138;
-            if (temp_a1 != 0) {
-                DynLight_ReleaseLight(&D_8013B1A8, temp_a1);
-                arg1->unk138 = 0;
+            releasedLight = releasedEffect->unk138;
+            if (releasedLight != 0) {
+                DynLight_ReleaseLight(&D_8013B1A8, releasedLight);
+                releasedEffect->unk138 = 0;
             }
-            temp_v1 = arg1->refCount;
-            if (temp_v1 != 0) {
-                *temp_v1 -= 1;
+            releaseReferenceCount = releasedEffect->refCount;
+            if (releaseReferenceCount != 0) {
+                *releaseReferenceCount -= 1;
             }
-            arg1->flags =
-                arg1->flags & 0xFDFFFEFF;
-            func_80255ED8_de(arg1->list, arg1);
-            arg1->list = 0;
-            func_80255CB8_de(&owner->free, arg1);
-            if (arg1->flags & 0x01000000) {
-                func_80255ED8_de(&owner->groups, arg1);
+            releasedEffect->flags =
+                releasedEffect->flags & 0xFDFFFEFF;
+            func_80255ED8_de(releasedEffect->list, releasedEffect);
+            releasedEffect->list = 0;
+            func_80255CB8_de(&owner->free, releasedEffect);
+            if (releasedEffect->flags & 0x01000000) {
+                func_80255ED8_de(&owner->groups, releasedEffect);
             }
         }
     }

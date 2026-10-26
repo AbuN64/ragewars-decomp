@@ -25,7 +25,7 @@ struct MenuListWidget {
 };
 
 
-extern s32 func_8041AD7C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 SmpButton_DispatchListEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 struct ObjRecAt18V1;
 struct Scroll;

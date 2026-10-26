@@ -112,19 +112,19 @@ block_5:
     if (D_800E1E20 != var_s0) {
         switch (var_s0) {                           /* irregular */
         case 0:
-            func_802A84F8_de();
+            OnScreen_SetupTextRendering();
             break;
         case 1:
-            func_802A84F8_de();
-            func_802A8710_de();
+            OnScreen_SetupTextRendering();
+            OnScreen_LoadTextTileModeOne();
             break;
         case 2:
-            func_802A84F8_de();
-            func_802A8800_de();
+            OnScreen_SetupTextRendering();
+            OnScreen_LoadTextTileModeTwo();
             break;
         case 6:
-            func_802A84F8_de();
-            func_802A8710_de();
+            OnScreen_SetupTextRendering();
+            OnScreen_LoadTextTileModeOne();
             D_80147150 = 1;
             break;
         }

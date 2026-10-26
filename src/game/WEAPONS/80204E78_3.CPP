@@ -282,9 +282,9 @@ void func_80205324_de(Obj5324 *actor, s32 *activationContext) {
             Barrel_SpawnActorEffect(actor, rec->unk1C, actor->pos.t, 0);
         }
         Barrel_SpawnFlaggedEffects(actor, activationContext, 4, rec->unk24, rec->unk28);
-        /* func_802A5D38_de unlinks the walker by the object's 32-bit identity;
+        /* Fx_RecycleOwnerParticles unlinks the walker by the object's 32-bit identity;
          * the registry holds those identities as s32. */
-        func_802A5D38_de(&D_801379C0, (s32)actor);
+        Fx_RecycleOwnerParticles(&D_801379C0, (s32)actor);
         if (pFlag->mode != mode) {
             goto block_10;
         }

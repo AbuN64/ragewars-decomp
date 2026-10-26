@@ -10,7 +10,7 @@ int Frontend_ClearEuxLoadingHints(void) { SmpButton_WrapButtonWidget(0x1DD); Smp
 #ifdef NON_MATCHING
 extern int func_80299A08_de(void), func_802999A0_de(s32);
 extern void MarkMenuEventHandled(void), Items_ResetActorPools(void *, s32), func_804499B0_de(void *, s32, s32);
-extern void Scene_LoadLevelResources(void *, s32, s32), func_8025476C_de(s32), func_8042E988_de(s32), func_802998A8_de(void);
+extern void Scene_LoadLevelResources(void *, s32, s32), func_8025476C_de(s32), Frontend_SetMenuChoiceResult(s32), func_802998A8_de(void);
 extern int func_8025477C_de(void);
 extern u8 D_80145088[], g_world[];
 /* Result handler of the main-menu pop-up: for event 0x1DD with answer 0x16 resets the session record D_80145088 and picks a
@@ -46,7 +46,7 @@ s32 Frontend_HandleMainMenuPopupResult(void) {
     default:
         return 0;
     }
-    func_8042E988_de(next);
+    Frontend_SetMenuChoiceResult(next);
     func_802998A8_de();
     return 0;
 }

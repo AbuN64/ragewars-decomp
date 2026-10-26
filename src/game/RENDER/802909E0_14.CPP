@@ -24,8 +24,8 @@ void SetN64_DrawCreditsLines(void) {
     top = 0.0f;
     line = D_8011B9F0;
     y = D_80146CB8;
-    func_802A84F8_de();
-    func_802A8800_de();
+    OnScreen_SetupTextRendering();
+    OnScreen_LoadTextTileModeTwo();
     func_802AAB68_de(1.0f, 1.0f);
     do {
         #if defined(VERSION_EU) || defined(VERSION_EU_X)

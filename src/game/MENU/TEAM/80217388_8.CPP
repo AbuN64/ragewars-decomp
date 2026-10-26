@@ -18,7 +18,7 @@ extern s32 D_800E28D0;
  /* "Select Team" */
 
 
-extern void func_802A84F8_de(void);
+extern void OnScreen_SetupTextRendering(void);
 
 extern void func_802A8F28_de(void *, s32, s32, s32, s32, s32, f32, f32);
 
@@ -74,7 +74,7 @@ void func_802185D0_de(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 count, We
     }
     scaleY = titleView->viewport[1] / D_800E28D4;
     scaleX = titleView->viewport[0] / D_800E28D0;
-    func_802A84F8_de();
+    OnScreen_SetupTextRendering();
     func_802AAB68_de(0.6f, 0.6f);
     func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
     x = viewport[2] + viewport[0] * 0.5f;

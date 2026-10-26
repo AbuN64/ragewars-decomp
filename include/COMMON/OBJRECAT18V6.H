@@ -2,13 +2,13 @@
 #define COMMON_OBJRECAT18V6_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
-struct Marker_func_802A71C0_de;
-struct Marker_func_802A71C0_de {
+struct MarkerItemMenuRestoreBootMemory;
+struct MarkerItemMenuRestoreBootMemory {
     char text[15];
 };
 
-struct Marker_func_802A71C0_de;
-typedef struct Marker_func_802A71C0_de Marker_func_802A71C0_de;
+struct MarkerItemMenuRestoreBootMemory;
+typedef struct MarkerItemMenuRestoreBootMemory MarkerItemMenuRestoreBootMemory;
 
 
 struct Node802A697C;
@@ -209,15 +209,15 @@ typedef struct State802A6FE0 State802A6FE0;
 
 
 
-struct Entry_func_802A70D4_de;
-struct Entry_func_802A70D4_de {
+struct EntryItemMenuAdvanceSelection;
+struct EntryItemMenuAdvanceSelection {
     char pad0[0x4];
     s32 active;
     char pad8[0x38 - 0x8];
 };
 
-struct Entry_func_802A70D4_de;
-typedef struct Entry_func_802A70D4_de Entry_func_802A70D4_de;
+struct EntryItemMenuAdvanceSelection;
+typedef struct EntryItemMenuAdvanceSelection EntryItemMenuAdvanceSelection;
 
 struct MenuCode802A6AC0;
 

@@ -2,18 +2,18 @@
 #include "COMMON/OBJRECAT26DD8.H"
 #include "RENDER/802944E8_9.H"
 
-void func_80294B64_de(void) {
+void SetN64_DrawTransitionMode(void) {
 }
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-void func_80294B6C_de(void) {
-}
-#endif
-#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-void func_80294B74_de(void) {
+void SetN64_InitializeMode18(void) {
 }
 #endif
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-void func_80294B7C_de(void) {
+void SetN64_UpdateMode18(void) {
+}
+#endif
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
+void SetN64_DrawMode18(void) {
 }
 #endif
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)

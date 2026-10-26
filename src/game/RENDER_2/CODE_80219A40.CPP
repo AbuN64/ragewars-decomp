@@ -31,7 +31,7 @@ s32 Player_GetPlayerIndex(void *, unsigned int);
 s32 Player_GetMaxHealth(void *);
 int func_8022B178_de(void *);
 int Cinema_IsSequenceActive(void);
-void func_802830CC_de(void *, s32);
+void Particle_ReleaseOwnerListOneEffects(void *, s32);
 void * Scene_GetModelRecordByIndexPointer(Shared_World *, u16 *);
 s32 XPlus_NextRandomInteger(void);
 
@@ -439,7 +439,7 @@ block_134:
                             }
 reaction_statistics_done:
                             Particle_RetireOwnedActors(&D_8011D8D0, (s32) damagedPlayer);
-                            func_802830CC_de(&D_8011D8D0, (s32) damagedPlayer);
+                            Particle_ReleaseOwnerListOneEffects(&D_8011D8D0, (s32) damagedPlayer);
                         }
                     }
                 }

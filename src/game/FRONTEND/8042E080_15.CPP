@@ -12,7 +12,7 @@
 
 
 extern void Tsmos_DeactivateControllerState(void);
-void func_8043577C_de(s32 focusEntry) {
+void PAKInterface_BeginScreenExit(s32 focusEntry) {
     s32 var_v0;
 
     Tsmos_DeactivateControllerState();

@@ -8,7 +8,7 @@
 
 extern struct RecordRecAtD D_80102B08[];
 
-s32 func_804358C0_de(s32 id, s32 kind) {
+s32 Frontend_FindProfileOwner(s32 id, s32 kind) {
     s32 i;
 
     for (i = 0; i < 4; i++) {

@@ -27,12 +27,12 @@ extern void SmpFlicker_InitFlicker(struct ObjectCode804196C0 *, s32);
 /* Sets the word at offset 0x84 of an object to one. */
 
 
-void func_80419F18_de(struct StateBlock *object) {
+void SmpFlicker_EnableFlicker(struct StateBlock *object) {
     object->unk84 = 1;
 }
 
 /* Copies the byte at offset 0x83 of an object into offset 0x10 of the object at 0x78, and clears
-   the pending word at 0x84 that func_80419F18_de sets and SmpFlicker_IsFlickerIdle tests. */
+   the pending word at 0x84 that SmpFlicker_EnableFlicker sets and SmpFlicker_IsFlickerIdle tests. */
 
 
 
@@ -46,7 +46,7 @@ void SmpFlicker_RestoreFlickerValue(struct SourceRecAt84 *source) {
 }
 
 /* Returns one when nothing is pending at offset 0x84 of an object, and otherwise whether the word
-   at offset 0x44 is zero; func_80419F18_de sets the pending word and SmpFlicker_RestoreFlickerValue clears it. */
+   at offset 0x44 is zero; SmpFlicker_EnableFlicker sets the pending word and SmpFlicker_RestoreFlickerValue clears it. */
 
 
 s32 SmpFlicker_IsFlickerIdle(struct ObjectRecAt84 *object) {
@@ -62,7 +62,7 @@ void SmpFlicker_StartFlicker(struct ObjectCode804196C0 *object, s32 count) {
     object->target->value = object->entries[object->index];
 }
 
-s32 func_80419F9C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 SmpFlicker_DispatchEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;
@@ -92,10 +92,10 @@ s32 func_80419F9C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
    to their home stack slots. */
 
 
-void func_8041A02C_de(s32 unused0, struct Triple unused1) {
+void SmpFlicker_IgnoreEvent(s32 unused0, struct Triple unused1) {
 }
 
-s32 func_8041A03C_de(void *arg0) {
+s32 SmpFlicker_DestroyController(void *arg0) {
     Cache_FreeMemory(arg0);
     return 0;
 }

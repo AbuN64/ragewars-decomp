@@ -47,12 +47,12 @@ extern struct IntPair D_800E381C[][17];
 /* Advances the join screen's pulse timer by delta and sets byte 0x10 of node 0x392 under the edited request's root to 150 plus 100 times the sine of the timer over 300; returns zero. */
 
 
-/* Calls MarkMenuEventHandled, then passes -1 to func_8042E988_de when func_802999A0_de reports 0x16 for zero
+/* Calls MarkMenuEventHandled, then passes -1 to Frontend_SetMenuChoiceResult when func_802999A0_de reports 0x16 for zero
    and 0x15 otherwise, then calls func_802998A8_de. Returns zero. */
 extern void MarkMenuEventHandled();
 
 
-extern void func_8042E988_de(s32);
+extern void Frontend_SetMenuChoiceResult(s32);
 
 extern void func_802998A8_de();
 
@@ -209,14 +209,14 @@ s32 Frontend_PulseJoinSelectionHighlight(void *unused0, void *unused1, s32 delta
 
 s32 Frontend_RequestJoinOptionsExit(void) {
     MarkMenuEventHandled();
-    func_8042E988_de(func_802999A0_de(0) == 0x16 ? -1 : 0x15);
+    Frontend_SetMenuChoiceResult(func_802999A0_de(0) == 0x16 ? -1 : 0x15);
     func_802998A8_de();
     return 0;
 }
 
 s32 Frontend_RequestJoinOptionsExitAlternate(void) {
     MarkMenuEventHandled();
-    func_8042E988_de(func_802999A0_de(0) == 0x16 ? -1 : 0x15);
+    Frontend_SetMenuChoiceResult(func_802999A0_de(0) == 0x16 ? -1 : 0x15);
     func_802998A8_de();
     return 0;
 }

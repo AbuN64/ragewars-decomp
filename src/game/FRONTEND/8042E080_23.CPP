@@ -15,7 +15,7 @@
 extern u8 *XPlus_CopyString(u8 *dst, u8 *name);
 
 /* Seats a joining player (request: kind+1, team, rank) in the highest free player slot, filling its index, kind (random for 20), team (random for 3, at most 2), rank and name (per language on the European cartridges); returns the slot or -1 when all are taken. */
-s32 func_8042E460_de(u8 *request) {
+s32 Frontend_AddStageOpponent(u8 *request) {
     s32 i;
     s32 kind;
     s32 team;

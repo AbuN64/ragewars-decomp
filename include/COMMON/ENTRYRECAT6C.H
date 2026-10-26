@@ -44,8 +44,8 @@ struct RecordRecAtD {
 
 
 
-struct Entry_func_80434FC4_de;
-struct Entry_func_80434FC4_de {
+struct EntryPAKInterfacePulseIdlePanelLabels;
+struct EntryPAKInterfacePulseIdlePanelLabels {
     char pad0[0x2C];
     s32 phases[1];
     char pad30[0x68 - 0x30];
@@ -101,8 +101,8 @@ struct Triple;
 
 
 
-struct State_func_80434D70_de;
-struct State_func_80434D70_de {
+struct StatePAKInterfaceBeginLinkedProfileTransfer;
+struct StatePAKInterfaceBeginLinkedProfileTransfer {
     char pad0[4];
     s32 window;
     char pad8[0x50];
@@ -124,8 +124,8 @@ extern float D_800E1EF8;
 struct PlayerRecAtBA4;
 typedef struct PlayerRecAtBA4 PlayerRecAtBA4;
 
-struct State_func_80434D70_de;
-typedef struct State_func_80434D70_de State_func_80434D70_de;
+struct StatePAKInterfaceBeginLinkedProfileTransfer;
+typedef struct StatePAKInterfaceBeginLinkedProfileTransfer StatePAKInterfaceBeginLinkedProfileTransfer;
 
 
 

@@ -96,7 +96,7 @@ s32 SmpSlider_GetTransitionMode(s32 *record) {
     return record[0x58 / 4];
 }
 
-/* Sets the flag word at offset 0x5C that func_8041A488_de clears. */
+/* Sets the flag word at offset 0x5C that SmpSlider_DisableTransition clears. */
 
 
 void SmpSlider_EnableTransition(struct Access_s32_5C *object) {
@@ -107,11 +107,11 @@ void SmpSlider_EnableTransition(struct Access_s32_5C *object) {
    the object SmpFade_CreateFadeWidget has just returned. */
 
 
-void func_8041A488_de(struct Access_s32_5C *object) {
+void SmpSlider_DisableTransition(struct Access_s32_5C *object) {
     object->field = 0;
 }
 
-s32 func_8041A490_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 SmpSlider_DispatchTransitionEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;
@@ -141,7 +141,7 @@ s32 func_8041A490_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
    spilling the variable arguments to their home slots. Matched like the variadic stub Events_IgnoreEvent:
    the leftover float test of its compiled-out body makes the compiler fill the return delay slot
    with the last argument spill. */
-void func_8041A520_de(void *target, const char *format, ...)
+void SmpSlider_IgnoreFormattedMessage(void *target, const char *format, ...)
 {
     float enabled;
 
@@ -150,7 +150,7 @@ void func_8041A520_de(void *target, const char *format, ...)
     }
 }
 
-s32 func_8041A530_de(void *arg0) {
+s32 SmpSlider_DestroyController(void *arg0) {
     Cache_FreeMemory(arg0);
     return 0;
 }
@@ -201,7 +201,7 @@ void SmpSlider_SetSliderItem(struct Scroll *scroll, s32 item) {
     scroll->bar->field18 = (f32) item / (f32) scroll->count * (f32) scroll->length;
 }
 
-s32 func_8041A724_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 SmpSlider_DispatchSliderEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;
@@ -270,7 +270,7 @@ void SmpSlider_IncrementSliderItem(struct Scroll *scroll) {
 
 
 
-s32 func_8041A940_de(struct MenuRecAt54 *menu) {
+s32 SmpSlider_DimSliderItems(struct MenuRecAt54 *menu) {
     struct ItemRecAt10 *item;
 
     menu->state = 2;
@@ -288,7 +288,7 @@ s32 func_8041A940_de(struct MenuRecAt54 *menu) {
 
 
 
-s32 func_8041A978_de(struct MenuRecAt54 *menu) {
+s32 SmpSlider_HighlightSliderItems(struct MenuRecAt54 *menu) {
     struct ItemRecAt10 *item;
 
     menu->state = 2;

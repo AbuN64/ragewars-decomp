@@ -28,7 +28,7 @@ s32 Menu_CreateOptionsImageTransition(void) {
 
 /* Event callback for screen D_800E44A0: on event 1 while func_8043C308_de reports the screen in state
    1 it advances the screen through Frontend_DrawMenuImage and func_8043C2A4_de, and when that leaves it in
-   state 2 it tears the match display down through Menu_ReleaseOptionsScene and func_8042DEA0_de and calls
+   state 2 it tears the match display down through Menu_ReleaseOptionsScene and Frontend_StartConfiguredMatch and calls
    func_80264854_de(1). Returns zero. */
 
 
@@ -44,7 +44,7 @@ extern void func_8042201C_de(void);
 
 extern void Menu_ReleaseOptionsScene(void);
 
-extern void func_8042DEA0_de(void);
+extern void Frontend_StartConfiguredMatch(void);
 
 /* Unless func_8043C308_de reports one for the object D_800E44A0 holds, calls Tsmos_ActivateControllerState and, when
    the object's word at 0x20 is one, calls Tsmos_DeactivateControllerState, then func_80245B28_de and ScenarioSetup_ResetSelectionIndicators unless
@@ -112,7 +112,7 @@ func_8042201C_de
 #endif
 ();
 #endif
-        func_8042DEA0_de();
+        Frontend_StartConfiguredMatch();
         Control_SetControllerMode(1);
     }
     return 0;

@@ -145,7 +145,7 @@ s32 Frontend_AnimateResultsOptionsScreen(void *unused0, void *unused1, s32 delta
     case 8:
         D_800E4690->state = 3;
         Frontend_HideTrialCatalogueWidgets();
-        func_8042E988_de(0xB);
+        Frontend_SetMenuChoiceResult(0xB);
         return 0;
     case 9:
         D_800E4690->state = 3;
