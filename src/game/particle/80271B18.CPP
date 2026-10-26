@@ -42,7 +42,6 @@ f32 GraphU64_GetHorizontalAngle(CVector3 *direction) {
     return angle;
 }
 
-extern f32 Math_Sqrtf(f32);
 
 extern f32 D_800C48AC_de;
 
