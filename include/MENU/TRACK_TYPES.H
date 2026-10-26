@@ -23,6 +23,5 @@ typedef struct SharedTrackCamera {
     CVector3 position;
 } SharedTrackCamera;
 
-struct SharedTrackConstants { f32 amplitude; f32 unit; };
 
 #endif

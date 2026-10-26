@@ -24,9 +24,9 @@ struct SharedTrackObject;
 #include "COMMON/UNUSED.H"
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "MENU_2/80400000_15.H"
+#include "COMMON/TRIPLE.H"
 
 extern f32 D_800E2848;
-extern struct SharedTrackConstants D_800DCB28;
 
 
 f32 Menu_EvaluateTrackOpacity(f32 t) {
@@ -50,7 +50,7 @@ f32 Menu_EvaluateTrackOpacity(f32 t) {
             key++;
         }
         u = (t - key[-1].time) / (key->time - key[-1].time);
-        v = key[-1].value * (D_800DCB28.unit - u) + key->value * u;
+        v = key[-1].value * ((*(&D_800DCB28 + 1)) - u) + key->value * u;
     }
     v *= 2.0f * D_800E2848 + D_800E0B60[0];
     v -= D_800E2848;
