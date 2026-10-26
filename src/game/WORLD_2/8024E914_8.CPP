@@ -129,9 +129,6 @@ extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 
 extern char D_0026D7F4;
-extern char D_800C3DA8_de;
-extern char g_simpModelsIndexText[];
-extern char g_simpModelText[];
 
 void **func_8024F6EC_de(void *arg0, s32 arg1) {
     void *sp28;

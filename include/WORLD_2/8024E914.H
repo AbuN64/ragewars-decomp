@@ -90,4 +90,7 @@ typedef struct ResourceObject23 {
     s32 resourceSize;
     CachedResource *blockNode;
 } ResourceObject23;
+extern char D_800C3DA8_de;
+extern char g_simpModelText[];
+extern char g_simpModelsIndexText[];
 #endif

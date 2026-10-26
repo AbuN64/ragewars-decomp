@@ -61,11 +61,8 @@ extern void Cache_UnlockResource(s32, void *);
 
 extern char D_0026D7F4;
 
-extern char D_800C3DA8_de;
 
-extern char g_simpModelsIndexText[];
 
-extern char g_simpModelText[];
 
 void SimpleInstance_SpawnModelEffect(ActorSimpleInstanceSpawnModelEffect *actor, void **resource) {
     CVector3 position;
