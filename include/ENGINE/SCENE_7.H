@@ -26,7 +26,7 @@ struct ObjRecAt7C {
     char pad0[0x7C];
     void * unk7C;
 };
-struct Owner_func_8028D888_de {
+struct OwnerSceneUnlockActiveSectionResources {
     char pad0[0x944];
     s32 unk944;
     char pad948[0xC4C - 0x948];

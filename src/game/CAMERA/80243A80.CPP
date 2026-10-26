@@ -40,7 +40,7 @@ f32 GraphU64_GetTrianglePlaneHeight(void *, f32, f32);
 
 f32 Region_GetPolygonHeight(void *, f32, f32);
 
-void * func_8028C050_de(void *, CVector3 *);
+void * Scene_ResolveFloorPolygon(void *, CVector3 *);
 
 s32 func_8023CFE0_de();
 
@@ -190,7 +190,7 @@ s32 Unicol_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
         collisionOne = 1;
 loop_34:
         if (*motionSettings & loopMask) {
-            frame.spC4 = func_8028C050_de(frame.spC4, &frame.sp68);
+            frame.spC4 = Scene_ResolveFloorPolygon(frame.spC4, &frame.sp68);
         }
         collisionFound = func_8023D158_de((s8 *) &frame.sp18);
         motionContinuation = 0;
@@ -332,7 +332,7 @@ block_71:
             }
         }
         if (*motionSettings & 0x80000) {
-            surface = func_8028C050_de(frame.spC4, &actor->x);
+            surface = Scene_ResolveFloorPolygon(frame.spC4, &actor->x);
             frame.sp54 &= ~0x5000;
             if ((surface != 0) && ((((Func80243A80Collision *)surface)->flags & 0x41) == 0x41) && (Region_GetPolygonHeight(surface, actor->x, actor->z) <= actor->y)) {
                 surfaceCeilingHeight = GraphU64_GetTrianglePlaneHeight(surface, actor->x, actor->z);

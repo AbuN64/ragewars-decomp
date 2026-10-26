@@ -7,7 +7,7 @@
 #include "MENU/GFX/80414480_8.H"
 #include "RESMGR/resmgr_string_memory.H"
 
-extern s32 func_802A0238_de(u8 *arg0);
+extern s32 XPlus_StringLength(u8 *arg0);
 
 static inline void put(u8 **pp, const u8 *p, s32 len) {
     s32 i;
@@ -305,7 +305,7 @@ reswitch:
         case 's':
             cp = VA(ap, u8 *);
             if (prec >= 0) {
-                u8 *p = func_802A07DC_de(cp, 0, prec);
+                u8 *p = XPlus_FindByte(cp, 0, prec);
                 if (p != 0) {
                     size = p - cp;
                     if (size > prec) {
@@ -315,7 +315,7 @@ reswitch:
                     size = prec;
                 }
             } else {
-                size = func_802A0238_de(cp);
+                size = XPlus_StringLength(cp);
             }
             sign = 0;
             break;

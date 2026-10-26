@@ -2,7 +2,7 @@
 
 #include "TYPES.H"
 
-s32 func_802A00B0_de(s32 *index, u8 *base, s32 count, void *key,
+s32 XPlus_SearchSortedArray(s32 *index, u8 *base, s32 count, void *key,
                      s32 stride, s32 (*compare)(void *, void *)) {
     s32 low = 0;
     s32 half = 0;

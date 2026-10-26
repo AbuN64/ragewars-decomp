@@ -23,9 +23,9 @@
 
 
 
-extern s32 func_8028B21C_de(struct Shared_World *, s32);
+extern s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 
-extern s32 func_8028B25C_de(void *, s32);
+extern s32 Scene_GetModelIdAtIndex(void *, s32);
 
 
 extern void func_802466A0_de(SceneEffect *, s32, s32, s32, s32, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
@@ -61,13 +61,13 @@ static inline SceneEffect *spawn_effect(struct SceneEffectPool *scene, s32 id, s
         return 0;
     }
     if (id == -1) {
-        id = func_8028B21C_de(&g_world, variant);
+        id = Scene_FindModelIdIndex(&g_world, variant);
         if (id == -1) {
             return 0;
         }
     }
     if ((unsigned int)(variant + 1) < 2) {
-        variant = func_8028B25C_de(&g_world, id);
+        variant = Scene_GetModelIdAtIndex(&g_world, id);
     }
     effect = take_effect(scene, ref);
     if (effect == 0) {

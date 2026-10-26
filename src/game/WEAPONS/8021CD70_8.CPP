@@ -635,7 +635,7 @@ void func_80220ED4_de(SharedPlayer *player)
         player->views0.view3_2.team = player->views5D8.view5D8_9.profile->team;
       }
     }
-    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&g_world, player, sound, player->views5E8.view86C_125.unk86C);
+    ((void (*)(void *, void *, s32, s32))Scene_ChangeInstanceModel)(&g_world, player, sound, player->views5E8.view86C_125.unk86C);
     if (player->views5E8.view870_157.unk870 != player->views5E8.view86C_125.unk86C)
     {
       if ((func_8024B6A0_de(actor, player->views5E8.view86C_125.unk86C, 0) == 0) && (Cinema_IsSequenceInWindow() != 0))
@@ -768,7 +768,7 @@ void func_80220ED4_de(SharedPlayer *player)
       offset = 23;
     }
   }
-  ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&g_world, &player->views1C.view2E8_37.emitter, D_800D052C[player->views5E8.view62E_17.character]->sound + offset, player->views1C.view484_44.voice->bank);
+  ((void (*)(void *, void *, s32, s32))Scene_ChangeInstanceModel)(&g_world, &player->views1C.view2E8_37.emitter, D_800D052C[player->views5E8.view62E_17.character]->sound + offset, player->views1C.view484_44.voice->bank);
   if (!(player->views1C.view100_8.unk100 & 0x400))
   {
     player->views5E8.view870_157.unk870 = player->views5E8.view86C_125.unk86C;

@@ -22,7 +22,7 @@ extern s32 SetN64_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);
 
 extern void func_80278E7C_de(void *arg0);
 
-void func_8028BFD8_de(s32 arg0, s32 arg1, Triple position, s32 arg5, f32 arg6) {
+void Scene_SpawnUnrotatedEffect(s32 arg0, s32 arg1, Triple position, s32 arg5, f32 arg6) {
     Triple zero;
 
     zero.x = 0;
@@ -31,7 +31,7 @@ void func_8028BFD8_de(s32 arg0, s32 arg1, Triple position, s32 arg5, f32 arg6) {
     func_8028FFD0_de(arg0 + 0x11778, 0, arg5, zero, position, arg1, arg6);
 }
 
-void *func_8028C050_de(void *triangle, CVector3 *arg1) {
+void *Scene_ResolveFloorPolygon(void *triangle, CVector3 *arg1) {
     f32 lower;
     f32 upper;
     f32 value;
@@ -62,7 +62,7 @@ void *func_8028C050_de(void *triangle, CVector3 *arg1) {
 
 
 
-EntryRecAt18V4 *func_8028C108_de(World *world, s32 id) {
+EntryRecAt18V4 *Scene_FindSwitchByDefinitionId(World *world, s32 id) {
     s32 i;
     EntryRecAt18V4 *found = 0;
 
@@ -75,11 +75,11 @@ EntryRecAt18V4 *func_8028C108_de(World *world, s32 id) {
     return found;
 }
 
-void func_8028C15C_de(void *arg0, s32 arg1, s32 *arg2, s32 *arg3) {
+void Scene_LocateTextureResource(void *arg0, s32 arg1, s32 *arg2, s32 *arg3) {
     *arg2 = SetN64_LocatePackSection((((struct IntegerState54 *) ((s8 *) arg0))->unk_50), (((struct IntegerState54 *) ((s8 *) arg0))->unk_20), arg1, arg3);
 }
 
-s32 func_8028C198_de(Shared_World *world, s32 type) {
+s32 Scene_GetIndexedModelResource(Shared_World *world, s32 type) {
     s32 *directory = world->indexedDirectory;
 
     if (type < *directory) {
@@ -88,7 +88,7 @@ s32 func_8028C198_de(Shared_World *world, s32 type) {
     return 0;
 }
 
-s32 func_8028C1D4_de(char *world, u16 *arg1, s32 *arg2, s32 *arg3) {
+s32 Scene_FindAlternateTriggerRange(char *world, u16 *arg1, s32 *arg2, s32 *arg3) {
     s32 sp18;
     s32 sp1C;
     s32 temp_v0_2;
@@ -109,7 +109,7 @@ s32 func_8028C1D4_de(char *world, u16 *arg1, s32 *arg2, s32 *arg3) {
     return temp_v0_2;
 }
 
-void func_8028C26C_de(char *world, void *levelActor, s32 *arg2, s32 *arg3) {
+void Scene_FindActorTriggerRange(char *world, void *levelActor, s32 *arg2, s32 *arg3) {
     s32 sp18;
     s32 sp1C;
     s32 index;
@@ -148,7 +148,7 @@ void func_8028C26C_de(char *world, void *levelActor, s32 *arg2, s32 *arg3) {
     }
 }
 
-void func_8028C370_de(Shared_World *world, s32 arg1) {
+void Scene_ActivateTriggersOfKind(Shared_World *world, s32 arg1) {
     s32 var_s0;
     s32 var_s0_2;
     Record14 *trigger;
@@ -180,7 +180,7 @@ void func_8028C370_de(Shared_World *world, s32 arg1) {
     }
 }
 
-s32 func_8028C424_de(char *object, s32 type) {
+s32 Scene_TestTriggerKindFlags(char *object, s32 type) {
     s32 index;
     Record14 *record;
     u8 *flags;

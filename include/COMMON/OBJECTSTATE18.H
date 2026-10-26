@@ -116,7 +116,7 @@ struct Owner104;
 struct Group18;
 typedef struct Group18 Group18;
 
-extern void func_8026D83C_de(void);
+extern void Geometry_NoOperation(void);
 
 extern void Geometry_InitializeModelRenderState();
 
@@ -127,7 +127,7 @@ struct ObjectState18;
 
 
 struct BankRecAt94;
-struct Object_func_8028B274_de;
+struct ObjectSceneChangeInstanceModel;
 
 struct MeshMaterial;
 struct PackedMeshMaterial;

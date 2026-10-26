@@ -28,7 +28,7 @@ extern f32 Region_GetPolygonHeight(Node75 *node, f32 x, f32 z);
 
 extern void *Scene_GetActorDefinition(void *arg0, s32 arg1);
 
-extern int func_8028B25C_de(void *arg0, int arg1);
+extern int Scene_GetModelIdAtIndex(void *arg0, int arg1);
 
 struct Context;
 extern s32 func_8022A8F0_de(struct Context *arg0);
@@ -229,7 +229,7 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
         entry = Scene_GetActorDefinition(&g_world, definition->selector);
         switch (*entry) {
         case 8:
-            id = func_8028B25C_de(&g_world, definition->id);
+            id = Scene_GetModelIdAtIndex(&g_world, definition->id);
             if (!available(id)) {
                 return;
             }

@@ -202,7 +202,7 @@ block_7:
     }
 }
 
-void func_8026DD50_de(void **resource, s32 unused, s32 matrix, s32 segment, s32 lights, void *textures, s32 pass) {
+void Geometry_DrawBlendParts(void **resource, s32 unused, s32 matrix, s32 segment, s32 lights, void *textures, s32 pass) {
     void *header;
     void *base;
     void **parts;
@@ -244,11 +244,11 @@ void Geometry_QueueDirectModel(s32 model, void *arg1, void *arg2, s32 arg3, s32 
     Geometry_QueueModelById(model, arg1, arg2, arg3, arg4, 1);
 }
 
-void func_8026DF58_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4) {
+void Geometry_QueueDeferredModel(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4) {
     Geometry_QueueModelById(arg0, arg1, arg2, arg3, arg4, 0);
 }
 
-void func_8026DF7C_de(void *shared, s32 mode, void **resource, s32 matrix, s32 segment, s32 lights, void *textures, s32 pass) {
+void Geometry_DrawWithMaterialOverride(void *shared, s32 mode, void **resource, s32 matrix, s32 segment, s32 lights, void *textures, s32 pass) {
     void *header;
     void *base;
     void **parts;

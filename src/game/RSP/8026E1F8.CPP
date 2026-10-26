@@ -13,7 +13,7 @@ extern void func_80253F8C_de(s32 arg0, s32 arg1);
 
 
 
-void func_8026E1F8_de(void **resource) {
+void Geometry_RefreshMaterialResources(void **resource) {
     void *temp_v0;
     s32 count;
     s32 i;
@@ -36,7 +36,7 @@ extern void **func_80295EAC_de(void *arg0, s32 arg1);
 
 
 
-s32 *func_8026E27C_de(void **arg0, s32 variation, s32 *arg2) {
+s32 *Geometry_CollectMaterialResources(void **arg0, s32 variation, s32 *arg2) {
     void *temp_v0;
     s32 count;
     s32 i;
@@ -62,8 +62,8 @@ s32 *func_8026E27C_de(void **arg0, s32 variation, s32 *arg2) {
 }
 
 extern int D_80110620;
-void Geometry_SetViewEffect(int arg0) {
-    D_80110620 = arg0;
+void Geometry_SetViewEffect(int viewEffect) {
+    D_80110620 = viewEffect;
 }
 
 /** Return the global word at D_80110620. */
@@ -79,7 +79,7 @@ int Geometry_GetViewEffect(void) {
 
 
 
-void func_8026E350_de(unsigned char first, unsigned char second,
+void Geometry_SetPrimitiveColorOverride(unsigned char first, unsigned char second,
                    unsigned char third, unsigned char fourth) {
     D_800CC3A8 = first;
     D_800CC3A9 = second;
@@ -89,7 +89,7 @@ void func_8026E350_de(unsigned char first, unsigned char second,
 
 extern unsigned char D_800CC3AC;
 extern unsigned char D_800CC3AD;
-void func_8026E378_de(int arg0, int arg1) {
+void Geometry_SetPrimitiveAlphaOverride(int arg0, int arg1) {
     D_800CC3AC = (unsigned char)arg0;
     D_800CC3AD = (unsigned char)arg1;
 }
@@ -100,7 +100,7 @@ extern char D_DE0A0;
 extern char D_800CBCC0;
 extern char D_800CBCF0_de;
 
-void func_8026E390_de(void) {
+void Geometry_LoadRenderMicrocode(void) {
     Gfx *cmd;
 
     cmd = g_displayListCursor++;
@@ -121,7 +121,7 @@ extern char D_DCD10;
 extern char D_800CBCC0;
 extern char D_800CBCF0_de;
 
-void func_8026E428_de(void) {
+void Geometry_SwitchRenderMicrocode(void) {
     Gfx *cmd;
 
     cmd = g_displayListCursor++;
@@ -137,7 +137,7 @@ void func_8026E428_de(void) {
 }
 
 /** Initialize the two-word state to minus one and zero. */
-void func_8026E4C0_de(int *state) {
+void Geometry_ResetDisplayListState(int *state) {
     state[0] = -1;
     state[1] = 0;
 }
@@ -148,14 +148,14 @@ extern unsigned int D_8010C584;
 extern unsigned int D_8010C57C;
 
 /** Clear four related global state words. */
-void func_8026E4D0_de(void) {
+void Geometry_ClearMaterialGroups(void) {
     D_8010C56C = 0;
     D_8010C568 = 0;
     D_8010C584 = 0;
     D_8010C57C = 0;
 }
 
-void *func_8026E4F8_de(Node8026E4F8 **arg0, u32 arg1)
+void *Geometry_FindMaterialNodeOrParent(Node8026E4F8 **arg0, u32 arg1)
 {
   u32 temp_v1;
   Node8026E4F8 *var_a0;
@@ -202,7 +202,7 @@ void *func_8026E4F8_de(Node8026E4F8 **arg0, u32 arg1)
 }
 
 /** Insert a node adjacent to the supplied node in an intrusive ordered tree. */
-void func_8026E540_de(TreeNode **root, TreeNode **empty_root, TreeNode *node, TreeNode *current) {
+void Geometry_InsertMaterialNode(TreeNode **root, TreeNode **empty_root, TreeNode *node, TreeNode *current) {
     if (current != 0) {
         if (node->key < current->key) {
             current->link18 = node;

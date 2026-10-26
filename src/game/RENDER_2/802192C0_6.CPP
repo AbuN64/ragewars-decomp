@@ -56,7 +56,7 @@ void func_8021C9D8_de(void *player, void *camera) {
                 ((Shared_ActorView *)player)->controls->playerId;
         }
     }
-    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&g_world, player, value,
+    ((void (*)(void *, void *, s32, s32))Scene_ChangeInstanceModel)(&g_world, player, value,
                   ((Shared_ActorView *)player)->effectId);
 
     cmd = g_displayListCursor++;

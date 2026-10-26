@@ -6,7 +6,7 @@
 
 /* Copies n bytes between possibly overlapping buffers and returns the destination: forwards when the destination is below the source and backwards otherwise, aligning to a word boundary with single bytes when both pointers share alignment, then copying whole words and the remaining bytes. */
 
-char *func_8029F470_de(char *dst, const char *src, s32 n) {
+char *XPlus_MoveMemory(char *dst, const char *src, s32 n) {
     char *d;
     s32 count;
 
@@ -78,7 +78,7 @@ char *func_8029F470_de(char *dst, const char *src, s32 n) {
     return dst;
 }
 
-f64 func_8029F5E0_de(u8 *arg0) {
+f64 XPlus_ParseDecimalDouble(u8 *arg0) {
     f64 sign;
     f64 divisor;
     f64 value;

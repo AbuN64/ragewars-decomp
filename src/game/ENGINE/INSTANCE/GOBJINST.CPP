@@ -70,7 +70,7 @@ extern char D_800CA8C4_de;
 extern void D_0024A7A0();
 
 struct Shared_World;
-extern s32 func_8028B21C_de(struct Shared_World *, s32);
+extern s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 
 extern void GameObject_ResetActorMotion(char *);
 
@@ -201,7 +201,7 @@ void func_802466A0_de(char *obj, s32 model, s32 kind, s32 unused, void *info, s3
 
     ((LevelActor *)obj)->flags &= ~0x40000;
     if (model == -1) {
-        model = func_8028B21C_de(&g_world, kind);
+        model = Scene_FindModelIdIndex(&g_world, kind);
         if (model == -1) {
             return;
         }

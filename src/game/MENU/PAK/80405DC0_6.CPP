@@ -83,7 +83,7 @@ extern char *D_800D36E0;
 
 extern s32 Pak_ReadNoteInfo(s32 ch, s32 index, s32 *exists, char *name, char *ext, s32 *size,
                          char *company, char *code);
-extern s32 func_802A0238_de(char *);
+extern s32 XPlus_StringLength(char *);
 
 void Pak_MarkSaveNotes(Shared_PakMenu *menu) {
     s32 ch;
@@ -110,7 +110,7 @@ void Pak_MarkSaveNotes(Shared_PakMenu *menu) {
         if (result == 0 && exists != 0) {
             switch (D_800DE874) {
                 case 1:
-                    if (func_802A0238_de(code) == 4 && func_802A0238_de(company) == 2 &&
+                    if (XPlus_StringLength(code) == 4 && XPlus_StringLength(company) == 2 &&
                         XPlus_CompareStrings(code, PAK_CODE) == 0 && XPlus_CompareStrings(company, PAK_COMPANY) == 0) {
                         match = 1;
                     } else {
@@ -119,7 +119,7 @@ void Pak_MarkSaveNotes(Shared_PakMenu *menu) {
                     title = PAK_TITLE1;
                     break;
                 case 2:
-                    if (func_802A0238_de(code) == 4 && func_802A0238_de(company) == 2 &&
+                    if (XPlus_StringLength(code) == 4 && XPlus_StringLength(company) == 2 &&
                         XPlus_CompareStrings(code, PAK_CODE) == 0 && XPlus_CompareStrings(company, PAK_COMPANY) == 0) {
                         match = 1;
                     } else {

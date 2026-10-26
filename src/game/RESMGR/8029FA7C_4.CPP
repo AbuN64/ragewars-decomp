@@ -244,20 +244,20 @@ void XMath_AddMatrixTranslation(Matrix *matrix, void *arg1) {
 }
 
 /** Combine three column vectors into the first three matrix columns. */
-void XMath_SetMatrixRows(float *arg0, float *arg1, float *arg2, float *arg3) {
+void XMath_SetMatrixRows(float *arg0, float *arg1, float *arg2, float *rowZ) {
     arg0[0] = arg1[0];
     arg0[4] = arg1[1];
     arg0[8] = arg1[2];
     arg0[1] = arg2[0];
     arg0[5] = arg2[1];
     arg0[9] = arg2[2];
-    arg0[2] = arg3[0];
-    arg0[6] = arg3[1];
-    arg0[10] = arg3[2];
+    arg0[2] = rowZ[0];
+    arg0[6] = rowZ[1];
+    arg0[10] = rowZ[2];
 }
 
 /** Split the first three matrix columns into three vectors. */
-void func_8029F080_de(float *arg0, float *arg1, float *arg2, float *arg3) {
+void XMath_GetMatrixRows(float *arg0, float *arg1, float *arg2, float *arg3) {
     arg1[0] = arg0[0];
     arg1[1] = arg0[4];
     arg1[2] = arg0[8];
@@ -270,7 +270,7 @@ void func_8029F080_de(float *arg0, float *arg1, float *arg2, float *arg3) {
 }
 
 /** Write three row vectors into the first three matrix rows. */
-void func_8029F0CC_de(float *arg0, float *arg1, float *arg2, float *arg3) {
+void XMath_SetMatrixColumns(float *arg0, float *arg1, float *arg2, float *arg3) {
     arg0[0] = arg1[0];
     arg0[1] = arg1[1];
     arg0[2] = arg1[2];
@@ -283,7 +283,7 @@ void func_8029F0CC_de(float *arg0, float *arg1, float *arg2, float *arg3) {
 }
 
 /** Split the first three matrix rows into three row vectors. */
-void func_8029F118_de(float *arg0, float *arg1, float *arg2, float *arg3) {
+void XMath_GetMatrixColumns(float *arg0, float *arg1, float *arg2, float *arg3) {
     arg1[0] = arg0[0];
     arg1[1] = arg0[1];
     arg1[2] = arg0[2];
@@ -296,15 +296,15 @@ void func_8029F118_de(float *arg0, float *arg1, float *arg2, float *arg3) {
 }
 
 /** Thin wrapper forwarding arg0 twice (as first and third args) to XMath_MultiplyMatrices. */
-void func_8029F164_de(int arg0, int arg1) {
+void XMath_PremultiplyMatrix(int arg0, int arg1) {
     XMath_MultiplyMatrices(arg0, arg1, arg0);
 }
 
-void func_8029F180_de(s32 arg0, s32 arg1) {
+void XMath_PostmultiplyMatrix(s32 arg0, s32 arg1) {
     XMath_MultiplyMatrices(arg0, arg0, arg1);
 }
 
-void func_8029F1A0_de(void *arg0, void *arg1, void *arg2, s32 arg3) {
+void XMath_TransformPointArray(void *arg0, void *arg1, void *arg2, s32 arg3) {
     u8 *m = (u8 *) arg0;
     s32 i;
     f32 vx, vy, vz;
@@ -326,7 +326,7 @@ void func_8029F1A0_de(void *arg0, void *arg1, void *arg2, s32 arg3) {
     }
 }
 
-void func_8029F254_de(struct MatrixF *matrixF, CVector3 *arg1, f32 arg2) {
+void XMath_BuildAxisAngleMatrix(struct MatrixF *matrixF, CVector3 *arg1, f32 arg2) {
     f32 sine;
     f32 cosine;
     f32 cosine_value;
@@ -381,7 +381,7 @@ void func_8029F254_de(struct MatrixF *matrixF, CVector3 *arg1, f32 arg2) {
     matrixF->m[2][2] = tzz + cosine_value;
 }
 
-void func_8029F368_de(void *matrix, CVector3 *arg1, void *angles, CVector3 *arg3) {
+void XMath_BuildScaleRotationTranslationMatrix(void *matrix, CVector3 *arg1, void *angles, CVector3 *arg3) {
     Matrix *m = matrix;
 
     MatrixFromAngles(matrix, angles);

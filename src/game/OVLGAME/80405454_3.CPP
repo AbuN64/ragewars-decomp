@@ -64,7 +64,7 @@ s32 func_80405598_de(s32 index) {
 }
 
 /* Marks the given controller port's 0x70-byte pak record in D_80153330 present when the port's D_8010FBE3 status byte is clear and func_802B7FD8_de initialises the pak block at offset 8 of the record through D_8010FC00 without error, clearing the mark otherwise, and returns the mark.
-   Adapted from func_8028B2F8_de with the record reached by port index, the status byte guard and the initialisation result stored as a byte flag changed. */
+   Adapted from Scene_GetModelRecordByIndexPointer with the record reached by port index, the status byte guard and the initialisation result stored as a byte flag changed. */
 
 
 
@@ -120,7 +120,7 @@ void func_80405648_de(u8 *arg0, u8 *noteText, s32 arg2) {
     noteText[arg2 - 1] = 0;
 }
 
-extern u8 func_802A05A0_de(u8);
+extern u8 XPlus_UppercaseCharacter(u8);
 extern u8 D_800DE80C[0x42];
 
 /* Maps input bytes through a lookup table and stores results. */
@@ -137,7 +137,7 @@ void func_8040570C_de(u8 *arg0, s8 *arg1, s32 arg2) {
         var_s1 = arg1;
         var_s0 = arg0;
         do {
-            *var_s0 = func_802A05A0_de(*var_s0);
+            *var_s0 = XPlus_UppercaseCharacter(*var_s0);
             for (j = 0; j < 0x42; j += 1) {
                 if (*var_s0 == D_800DE80C[j]) {
                     *var_s1 = (s8)j;
@@ -170,7 +170,7 @@ u32 Pak_BytesToPakPages(u32 bytes) {
     return (bytes + 0xFF) >> 8;
 }
 
-/* Computes the CRC-32 with polynomial 0xEDB88320 of arg1 bytes at arg0, continuing from the running value arg2, from a 256-entry table built on the stack. Adapted from func_802A08B8_de. */
+/* Computes the CRC-32 with polynomial 0xEDB88320 of arg1 bytes at arg0, continuing from the running value arg2, from a 256-entry table built on the stack. Adapted from XPlus_UpdateCrc32. */
 
 u32 Pak_Crc32(u8 *arg0, u32 arg1, u32 arg2) {
     u32 table[256];

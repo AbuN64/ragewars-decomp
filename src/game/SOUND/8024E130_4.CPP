@@ -7,9 +7,9 @@
 #include "COMMON/WORLD.H"
 #include "TYPES.H"
 #include "SOUND/8024E130_4.H"
-extern struct func_8022CA04_S3 *func_8028B2F8_de(Shared_World *, void *);
+extern struct func_8022CA04_S3 *Scene_GetModelRecordByIndexPointer(Shared_World *, void *);
 
-/* Returns the float at offset 0x20 of the entry func_8028B2F8_de finds in D_8011FE88 for an object's
+/* Returns the float at offset 0x20 of the entry Scene_GetModelRecordByIndexPointer finds in D_8011FE88 for an object's
    key at 0x14, when the key's flag halfword at 2 has bit 0 set; zero otherwise. */
 
 
@@ -31,7 +31,7 @@ int InstHdr_FindActorModelEntry(void *actorStorage) {
     int actorModel = ((LevelActor *)actorStorage)->model;
     int result = 0;
     if (actorModel != 0) {
-        result = (int)func_8028B2F8_de(&g_world, (void *)actorModel);
+        result = (int)Scene_GetModelRecordByIndexPointer(&g_world, (void *)actorModel);
     }
     return result;
 }
@@ -40,7 +40,7 @@ f32 func_8024E80C_de(struct Object_func_8024E80C_de *object) {
     struct func_8022CA04_S3 *entry;
 
     if (object->key != 0 && (object->key->flags & 1)) {
-        entry = func_8028B2F8_de(&g_world, object->key);
+        entry = Scene_GetModelRecordByIndexPointer(&g_world, object->key);
         if (entry != 0) {
             return entry->unk20;
         }

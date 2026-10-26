@@ -71,8 +71,8 @@ void SetN64_TransposeRecords(void *arg0, void *arg1, s32 arg2)
 
 void GameObject_ResetActorMotion(void *);
 f32 GameObject_GetActorHeight(void *);
-s32 func_8028B21C_de(struct Shared_World *, s32);
-s32 func_8028C198_de(void *, s32);
+s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
+s32 Scene_GetIndexedModelResource(void *, s32);
 void Scene_SampleWorldLighting(void *, CVector3 *, void *);
 void func_80290950_de(void *, void *);
 
@@ -97,7 +97,7 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVect
   s32 temp_v1_2;
   char *temp_s0;
   char *temp_v1;
-  if (((*D_800CD764_de) == 0) || ((temp_v0 = func_8028B21C_de(&g_world, arg2), temp_v0 == (-1))))
+  if (((*D_800CD764_de) == 0) || ((temp_v0 = Scene_FindModelIdIndex(&g_world, arg2), temp_v0 == (-1))))
   {
     return 0;
   }
@@ -123,7 +123,7 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation, CVect
   ((SceneEffect *)(temp_s0))->state = (s32) ((((SceneEffect *)(temp_s0))->state) | 1);
   GameObject_ResetActorMotion(temp_s0);
   ((SceneEffect *)(temp_s0))->lifetime = 0;
-  temp_v1_2 = func_8028C198_de(&g_world, temp_v0);
+  temp_v1_2 = Scene_GetIndexedModelResource(&g_world, temp_v0);
   ((SceneEffect *)(temp_s0))->counter = arg1;
   if (arg1 != 0)
   {

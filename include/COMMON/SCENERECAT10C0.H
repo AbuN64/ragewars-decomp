@@ -120,15 +120,15 @@ struct GlobalMode;
 typedef struct GlobalMode GlobalMode;
 
 
-struct Object_func_8028B274_de;
+struct ObjectSceneChangeInstanceModel;
 #include "COMMON/MODEL_INSTANCE.H"
 
 struct SceneSceneDrawCachedOpaqueGeometry;
 typedef struct SceneSceneDrawCachedOpaqueGeometry SceneSceneDrawCachedOpaqueGeometry;
 
 
-struct Object_func_8028B274_de;
-typedef struct Object_func_8028B274_de Object_func_8028B274_de;
+struct ObjectSceneChangeInstanceModel;
+typedef struct ObjectSceneChangeInstanceModel ObjectSceneChangeInstanceModel;
 
 
 typedef struct Bounds2D37 { f32 minX,minZ,maxX,maxZ; } Bounds2D37;

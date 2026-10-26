@@ -13,7 +13,7 @@
 #if defined(VERSION_US_REV1)
 /* Edits a byte, integer, or float option and propagates it to the active resource records. */
  /* extern */
-s32 func_8028B2F8_de(Shared_World *, s32); /* extern */
+s32 Scene_GetModelRecordByIndexPointer(Shared_World *, s32); /* extern */
 s32 Pak_CountLineChars(void *); /* extern */
 s32 func_80442384_de(void *, void *, s32); /* extern */
 s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32); /* extern */
@@ -40,7 +40,7 @@ s32 func_80444FA0_us_rev1(OptionEditState *arg0, OptionEditState *arg1, s32 arg2
         if (temp_a1 != NULL) {
             temp_a1_2 = temp_a1->unk_58;
             if (temp_a1_2 != 0) {
-                temp_s0 = func_8028B2F8_de(&g_world, temp_a1_2) + arg4;
+                temp_s0 = Scene_GetModelRecordByIndexPointer(&g_world, temp_a1_2) + arg4;
                 switch (arg3) { /* irregular */
                 case 0:
                     var_s1 = *temp_s0;

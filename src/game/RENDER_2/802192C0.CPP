@@ -69,13 +69,13 @@ void func_802192C0_de(Cursor *cursor) {
     }
 }
 
-extern s16 func_8028D28C_de(char *arg0);
+extern s16 Scene_FindNearestRouteFrame(char *arg0);
 
 
 void func_802193C8_de(Struct802193C8 *cursorState, s8 initialState) {
     cursorState->field0 = 1;
     cursorState->field1 = initialState;
-    cursorState->field2 = func_8028D28C_de(&g_world);
+    cursorState->field2 = Scene_FindNearestRouteFrame(&g_world);
     cursorState->field4 = 0;
 }
 
@@ -152,7 +152,7 @@ void func_80219490_de(char *object, char *camera) {
     }
 
     Geometry_SetColorDither(0xC0);
-    func_8026E378_de(1, 0x20);
+    Geometry_SetPrimitiveAlphaOverride(1, 0x20);
 
     command = g_displayListCursor++;
     gDPSetTexturePersp(command, G_TP_PERSP);
@@ -191,7 +191,7 @@ void func_80219490_de(char *object, char *camera) {
     }
     Geometry_FlushModelBatch();
     Geometry_SetColorDither(0);
-    func_8026E378_de(0, 0x20);
+    Geometry_SetPrimitiveAlphaOverride(0, 0x20);
 }
 
 #include "COMMON/GAMEPLAY_REACTIONS.H"

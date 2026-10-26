@@ -98,7 +98,7 @@ s32 Frontend_OpenPakChannel(s32 unused0, Shared_PakMenu *menu) {
     return 1;
 }
 
-s32 func_8040B58C_de(void *arg0, Shared_PakMenu *menu) {
+s32 Frontend_OpenPakStatusPrompt(void *arg0, Shared_PakMenu *menu) {
     void *buffer;
     ObjRecAt5DC *player;
     s32 channel;
@@ -122,7 +122,7 @@ s32 func_8040B58C_de(void *arg0, Shared_PakMenu *menu) {
     return 1;
 }
 
-s32 func_8040B648_de(s32 unused0, ActionRecAt24 *arg1) {
+s32 Frontend_CancelPakAction(s32 unused0, ActionRecAt24 *arg1) {
     void *var_a0;
     ObjRecAt5DC *temp_v0;
     D_800E28C0 = 1;
@@ -141,7 +141,7 @@ s32 func_8040B648_de(s32 unused0, ActionRecAt24 *arg1) {
     return 1;
 }
 
-s32 func_8040B6CC_de(struct FieldRecAt14 *field) {
+s32 Frontend_SelectPakLoadHeading(struct FieldRecAt14 *field) {
     if (D_80153760 != 0) {
         field->text = D_800D7990;
     } else {
@@ -150,7 +150,7 @@ s32 func_8040B6CC_de(struct FieldRecAt14 *field) {
     return 0;
 }
 
-s32 func_8040B700_de(struct Shared_PakMenu *record) {
+s32 Frontend_CheckPakActionChange(struct Shared_PakMenu *record) {
     if (D_80153770 == 0) {
         if (Pak_GetMenuChannel(record) != -1) {
             if (Control_PeekPakChange(Pak_GetMenuChannel(record)) != 0) {
@@ -163,32 +163,32 @@ s32 func_8040B700_de(struct Shared_PakMenu *record) {
     return D_80153770;
 }
 
-void func_8040B7E0_de(void) {
+void Frontend_SelectPakOperationZero(void) {
     D_80153778 = 0;
     D_80153770 = 0;
 }
 
-void func_8040B7F8_de(void) {
+void Frontend_SelectPakOperationOne(void) {
     D_80153778 = 1;
     D_80153770 = 0;
 }
 
-void func_8040B814_de(void) {
+void Frontend_SelectPakOperationTwo(void) {
     D_80153778 = 2;
     D_80153770 = 0;
 }
 
-void func_8040B830_de(void) {
+void Frontend_SelectPakOperationThree(void) {
     D_80153778 = 3;
     D_80153770 = 0;
 }
 
-void func_8040B84C_de(void) {
+void Frontend_SelectPakOperationFour(void) {
     D_80153778 = 4;
     D_80153770 = 0;
 }
 
-s32 func_8040B868_de(struct FieldRecAt14 *field) {
+s32 Frontend_SelectPakOperationTextOne(struct FieldRecAt14 *field) {
     u32 state = D_80153778;
 
     if (state >= 5) {

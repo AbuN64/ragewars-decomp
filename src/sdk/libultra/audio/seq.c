@@ -111,16 +111,16 @@ int func_802B20C8_de(struct ALSeq_s *arg0) {
     return arg0->lastTicks;
 }
 
-f32 func_802B20D4_de(ObjRecAt18V1 *arg0, s32 arg1, s32 arg2) {
+f32 func_802B20D4_de(ObjRecAt18V1 *sequence, s32 ticks, s32 tempo) {
     f64 v;
     f32 new_var;
 
-    v = (f64)arg2;
-    new_var = (f32)arg1;
-    if (arg2 < 0) {
+    v = (f64)tempo;
+    new_var = (f32)ticks;
+    if (tempo < 0) {
         v = v + D_800C74E8_de;
     }
-    return (new_var * (f32)v) / ((f32)arg0->field18 * D_800CC740);
+    return (new_var * (f32)v) / ((f32)sequence->field18 * D_800CC740);
 }
 
  /* 2147483648.0f */
@@ -196,41 +196,41 @@ void alSeqSetLoc(ALSeq_s *arg0, ALSeqMarker *arg1) {
 }
 
 /** Copy selected fields into the compact destination record. */
-void alSeqGetLoc(void *arg0, void *arg1) {
+void alSeqGetLoc(void *arg0, void *markerObject) {
     struct ALSeq_s *sequence = arg0;
-    struct ALSeqMarker *marker = arg1;
+    struct ALSeqMarker *marker = markerObject;
     marker->curPtr = sequence->curPtr;
     marker->lastStatus = sequence->lastStatus;
     marker->lastTicks = sequence->lastTicks;
 }
 
-s32 func_802B22F4_de(ALSeq_s *arg0, s32 *arg1) {
+s32 func_802B22F4_de(ALSeq_s *sequence, s32 *deltaTicks) {
     u8 *field8;
 
-    field8 = arg0->curPtr;
-    if (!(field8 < (arg0->base + arg0->len))) {
+    field8 = sequence->curPtr;
+    if (!(field8 < (sequence->base + sequence->len))) {
         return 0;
     }
-    *arg1 = func_802B235C_de(arg0);
-    arg0->curPtr = field8;
+    *deltaTicks = func_802B235C_de(sequence);
+    sequence->curPtr = field8;
     return 1;
 }
 
-s32 func_802B235C_de(struct ALSeq_s *arg0) {
+s32 func_802B235C_de(struct ALSeq_s *sequence) {
     u8 *p;
     s32 b;
     s32 val;
 
-    p = arg0->curPtr;
+    p = sequence->curPtr;
     b = *p;
-    arg0->curPtr = p + 1;
+    sequence->curPtr = p + 1;
     val = b;
     if (val & 0x80) {
         val = val & 0x7F;
         do {
-            p = arg0->curPtr;
+            p = sequence->curPtr;
             b = *p;
-            arg0->curPtr = p + 1;
+            sequence->curPtr = p + 1;
             val = (val << 7) + (b & 0x7F);
         } while (b & 0x80);
     }

@@ -5,7 +5,7 @@
 #include "COMMON/PROPGEOMETRY.H"
 #include "TYPES.H"
 
-extern int func_8028B25C_de(void *arg0, int arg1);
+extern int Scene_GetModelIdAtIndex(void *arg0, int arg1);
 
 
 
@@ -14,7 +14,7 @@ int InstHdr_GetActorType(void *prop) {
     if (((LevelActor *)prop)->kind == 1) {
         return ((LevelActor *)prop)->type;
     }
-    return func_8028B25C_de(&g_world, (u16)((LevelActor *)prop)->modelIndex);
+    return Scene_GetModelIdAtIndex(&g_world, (u16)((LevelActor *)prop)->modelIndex);
 }
 
 /** Return the selected record field, or negative one for another type. */

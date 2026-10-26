@@ -12,5 +12,5 @@ void func_80295E78_de(int *value, int first, int second) {
 }
 
 void func_80295E84_de(s32 *arg0, s32 arg1) {
-    func_8028C15C_de(&g_world, arg1, arg0, arg0 + 1);
+    Scene_LocateTextureResource(&g_world, arg1, arg0, arg0 + 1);
 }

@@ -13,8 +13,8 @@ typedef struct Label Label;
 
 
 
-struct Menu_func_8041D960_de;
-typedef struct Menu_func_8041D960_de Menu_func_8041D960_de;
+struct MenuFrontendRefreshUnlockedFocusLabel;
+typedef struct MenuFrontendRefreshUnlockedFocusLabel MenuFrontendRefreshUnlockedFocusLabel;
 
 struct ObjRecAt480;
 struct ObjRecAt480 {
@@ -25,9 +25,9 @@ struct ObjRecAt480 {
 struct ProfileStatisticsScreen;
 typedef struct ProfileStatisticsScreen ProfileStatisticsScreen;
 
-extern void func_8041D960_de();
+extern void Frontend_RefreshUnlockedFocusLabel();
 
-extern void func_8041D6A8_de();
+extern void Frontend_RefreshProfileStatistics();
 
 struct Object49C;
 struct Object49C {
@@ -103,8 +103,8 @@ struct NodeFrontendAnimateSlotSelectionMenu {
 };
 
 struct Label;
-struct Menu_func_8041D960_de;
-struct Menu_func_8041D960_de {
+struct MenuFrontendRefreshUnlockedFocusLabel;
+struct MenuFrontendRefreshUnlockedFocusLabel {
     char pad0[0xEC];
     ObjRecAtCV1 *focus;
     struct Label *label;

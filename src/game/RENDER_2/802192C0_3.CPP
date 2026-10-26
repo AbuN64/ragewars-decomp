@@ -409,7 +409,7 @@ void Player_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
         ((Shared_ActorView *)player)->weapon.position0 = single.pos;
         ((Shared_ActorView *)player)->position.vector = ((Shared_ActorView *)player)->weapon.position0;
         ((LevelActor *)player)->yaw = ((Shared_ActorView *)player)->weapon.yaw = single.unkC;
-        floor = func_8028B394_de(world, single.pad12);
+        floor = Scene_GetModelSectionTwoRecord(world, single.pad12);
     }
     ((Shared_ActorView *)player)->weapon.model = floor;
     ((Shared_ActorView *)player)->modelId = floor;

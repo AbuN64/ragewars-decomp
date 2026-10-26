@@ -53,7 +53,7 @@ extern void GraphU64_MatrixFromEulerXYZ(void *, f32, f32, f32);
 extern void GraphU64_TransformPoint(void *, CVector3 *, CVector3 *);
 extern void Scene_RequestVisibleGridSections(void *);
 extern s32 Unicol_MoveActorWithCollision(SharedTrackObject *, f32, f32, f32, void *);
-extern void func_8028D888_de(void *);
+extern void Scene_UnlockActiveSectionResources(void *);
 extern f32 GraphU64_GetHorizontalAngle(CVector3 *);
 extern f32 GraphU64_GetVerticalAngle(CVector3 *);
 /* Follow the keyframe camera and keep the collision result across world cleanup. */
@@ -120,7 +120,7 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
             actor->prefix.position = target;
             Scene_RequestVisibleGridSections(&g_world);
             collisionHit = Unicol_MoveActorWithCollision(actor, eye.x, eye.y, eye.z, D_80100030);
-            func_8028D888_de(&g_world);
+            Scene_UnlockActiveSectionResources(&g_world);
             actor->prefix = saved;
             if (collisionHit != 0) {
                 eye = *(CVector3 *)&D_801001F8;

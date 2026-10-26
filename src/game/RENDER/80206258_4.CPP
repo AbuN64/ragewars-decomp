@@ -86,7 +86,7 @@ extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
 
 extern void Rumble_SetActorStateBit(Shared_World *, void *, s32);
 
-extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
+extern void Scene_SetLevelActorStateBit(void *a, unsigned short b, unsigned short c, int d);
 
 void func_80207ABC_de(void *object, void *state) {
     Player *player = object;
@@ -261,7 +261,7 @@ void func_80207EAC_de(struct Shared_Actor *actor) {
 
 void func_80207EEC_de(void *event) {
     ActorMotionEvent *actorMotionEvent = event;
-    func_8028B670_de(&g_world, actorMotionEvent->id, actorMotionEvent->key, 1);
+    Scene_SetLevelActorStateBit(&g_world, actorMotionEvent->id, actorMotionEvent->key, 1);
 }
 
 void func_80207F1C_de(struct Shared_Actor *actor) {
@@ -271,7 +271,7 @@ void func_80207F1C_de(struct Shared_Actor *actor) {
 
 void func_80207F60_de(void *event) {
     ActorMotionEvent *actorMotionEvent = event;
-    func_8028B670_de(&g_world, actorMotionEvent->id, actorMotionEvent->key, 0);
+    Scene_SetLevelActorStateBit(&g_world, actorMotionEvent->id, actorMotionEvent->key, 0);
 }
 
 /** Set flags 0x2100 in the word at offset 0x100. */

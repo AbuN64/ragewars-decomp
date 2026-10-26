@@ -21,7 +21,7 @@ extern void func_802458C4_de(void);
 
 extern void Scene_DispatchEnabledEntityTrigger(Level *, Item_func_8044D668_de *);
 
-extern s32 func_8028C198_de(s32, s32);
+extern s32 Scene_GetIndexedModelResource(s32, s32);
 
 void func_8044D668_de(Level *level) {
     s32 i;
@@ -80,7 +80,7 @@ void func_8044D804_de(s32 arg0, void ***arg1) {
                 if (piece[i].tag == -1) {
                     piece[i].tag = 0;
                 } else {
-                    piece[i].tag = func_8028C198_de(arg0, piece[i].tag);
+                    piece[i].tag = Scene_GetIndexedModelResource(arg0, piece[i].tag);
                 }
                 piece[i].unk18 = base + piece[i].unk18;
                 piece[i].unk1C = base + piece[i].unk1C;

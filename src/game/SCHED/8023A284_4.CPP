@@ -203,7 +203,7 @@ typedef struct HostView8023AFF0 {
 extern DescriptorRecAt29 *D_801370C8;
 extern s32 D_801370CC;
 extern f32 D_800D2988;
-extern Shared_ReactionFlags *func_8028B2F8_de(void *, void *);
+extern Shared_ReactionFlags *Scene_GetModelRecordByIndexPointer(void *, void *);
 extern f32 Region_GetPolygonHeight(void *, s32, s32);
 extern void Sky_GetObjectPositionAt260(CVector3 *, void *);
 extern void func_80295E84_de(s32 *, s32);
@@ -285,7 +285,7 @@ void Sky_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
     if (resource == 0) {
         return;
     }
-    entry = func_8028B2F8_de(&g_world, resource);
+    entry = Scene_GetModelRecordByIndexPointer(&g_world, resource);
     if (entry == 0) {
         return;
     }

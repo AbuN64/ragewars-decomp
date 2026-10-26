@@ -4,8 +4,8 @@
 #include "COMMON/OBJB.H"
 #include "COMMON/EXTERNS_8.H"
 
-extern s32 func_8028B21C_de(struct Shared_World *, s32);
-extern s32 func_8028C198_de(void *, s32);
+extern s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
+extern s32 Scene_GetIndexedModelResource(void *, s32);
 extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 extern s32 SetN64_LocatePackSection(void *, s32, s32, s32 *);
 typedef struct { u32 w[7]; } Blk28;
@@ -21,11 +21,11 @@ void func_8044B600_de(void *level, void *buffer, s32 name) {
     void **shape;
     void *first;
     u32 *source;
-    index = func_8028B21C_de(level, name);
+    index = Scene_FindModelIdIndex(level, name);
     if (index == -1) {
         ((u32 *)buffer)[2] = 0;
     } else {
-        size = func_8028C198_de(level, index);
+        size = Scene_GetIndexedModelResource(level, index);
         header = Cache_RequestResource(0, size, size, 0x18, 0, 0, 0, g_constructMapObjectIndex, 1);
         if (header != 0) {
             key = SetN64_GetDirectoryEntry(*header, size, 1);

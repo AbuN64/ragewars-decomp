@@ -15,7 +15,7 @@
 
 
 
-s32 func_8040BA58_de(struct FieldRecAt14 *field) {
+s32 Frontend_SelectPakOperationTextFive(struct FieldRecAt14 *field) {
     u32 state = D_80153778;
 
     if (state >= 5) {

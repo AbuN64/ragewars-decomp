@@ -95,7 +95,7 @@ void func_8028CDF0_de(void *arg0) {
 }
 
 /** Return an indexed record from the world's strided table. */
-void *func_8028CE78_de(Shared_World *world, s32 index) {
+void *Scene_GetEffectCurveRecord(Shared_World *world, s32 index) {
     StridedTable *table = world->stridedRecords;
     void *base = table;
     char *bytes = base;
@@ -131,7 +131,7 @@ end:
     return result;
 }
 
-void *func_8028CFA0_de(Shared_World *world, s32 selection, s32 modelKind) {
+void *Scene_FindActorDefinition(Shared_World *world, s32 selection, s32 modelKind) {
     s32 *descriptor;
     s32 count;
     s32 i;
@@ -177,7 +177,7 @@ s32 func_8028D050_de(Container *container, s32 key0, s32 key1, s32 key2, RecordR
     return count;
 }
 
-void func_8028D108_de(Shared_World *world) {
+void Scene_DrawTransitionColorOverlay(Shared_World *world) {
     s8 color[4];
     s32 state;
     ColorEntry *entry;

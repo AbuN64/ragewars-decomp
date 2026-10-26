@@ -239,7 +239,7 @@ typedef struct EffectNode {
 typedef struct EffectPool { EffectList free, used; } EffectPool;
 typedef struct EffectWorld { char pad00[0x751C]; EffectPool pool; } EffectWorld;
 typedef struct EffectInstance { char pad00[0xB0]; FxActor *actor; } EffectInstance;
-extern EffectResource *func_8028AFEC_de(void *, s32);
+extern EffectResource *Scene_GetLinkedResourceSection(void *, s32);
 extern void Lists_ClearHeader(void *);
 extern void func_80295E84_de(void *, s32);
 extern void func_80283064_de(void *, void *);
@@ -268,7 +268,7 @@ void func_802A4598_de(EffectWorld *world, FxActor *actor, s32 resourceId) {
     if (!node) {
         node = func_8027963C_de(&world->pool);
         if (node) {
-        resource = func_8028AFEC_de(&g_world, resourceId);
+        resource = Scene_GetLinkedResourceSection(&g_world, resourceId);
         first = ((void **)D_800CDBD0)[resource->first];
         second = ((void **)D_800CDBD0)[resource->second];
         Lists_ClearHeader(&node->children);

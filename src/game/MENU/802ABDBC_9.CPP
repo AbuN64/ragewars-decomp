@@ -247,7 +247,7 @@ struct Shared_FullPlayerMenuGlobals {
 void Player_IncrementLevelProgress(void *, int);
 
 
-s32 func_802A01E8_de(void);
+s32 XPlus_NextRandomInteger(void);
 s32 func_804030E0_de(s32);
 typedef CPersistentPlayerData PlayerMenuData;
 extern PlayerMenuData D_80102B00[];
@@ -454,7 +454,7 @@ case_BD8:
                     }
                 } else {
                     temp_fp = arg0->unk122C & 0x6000;
-                    temp_v0 = 1 << (func_802A01E8_de() % 13);
+                    temp_v0 = 1 << (XPlus_NextRandomInteger() % 13);
                     arg0->unk122C = temp_v0;
                     if (temp_v0 & 0x20) {
                         arg0->unk1238 = -1;

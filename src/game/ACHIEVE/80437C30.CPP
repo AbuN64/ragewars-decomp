@@ -39,8 +39,8 @@ extern void func_802A0C08_de(char *, char *, ...);
 extern void XPlus_CopyString(char *, char *);
 extern void Frontend_SetWidgetFlag100(MenuWidget *, s32);
 extern void func_8041B110_de(s32);
-extern void func_8028D380_de(Shared_World *, s32, char *, s32);
-extern char *func_802A0494_de(char *);
+extern void Scene_CopyLevelName(Shared_World *, s32, char *, s32);
+extern char *XPlus_UppercaseString(char *);
 extern void func_802A2394_de(void);
 extern void Achieve_UpdatePlayerPreviewStats(void);
 extern void func_80438614_de(void);
@@ -212,8 +212,8 @@ done:
         item->text = D_800D358C;
     }
     item = func_8040EC30_de(menu, 0x26C + PREVIEW_ID_SHIFT);
-    func_8028D380_de(&g_world, D_8015402C, levelName, 0x3F);
-    XPlus_CopyString(D_800E5830->nameText, func_802A0494_de(levelName));
+    Scene_CopyLevelName(&g_world, D_8015402C, levelName, 0x3F);
+    XPlus_CopyString(D_800E5830->nameText, XPlus_UppercaseString(levelName));
     item->text = D_800E5830->nameText;
     D_800E5830->item24 = func_8040EC30_de(menu, 0x274 + PREVIEW_ID_SHIFT);
     D_800E5830->ready = 1;

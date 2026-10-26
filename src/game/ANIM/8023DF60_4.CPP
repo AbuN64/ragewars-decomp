@@ -53,7 +53,7 @@ static inline s32 accepts(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly) {
 
 extern World *D_80103FCC;
 
-extern void *func_8028B2F8_de(Shared_World *, u16 *);
+extern void *Scene_GetModelRecordByIndexPointer(Shared_World *, u16 *);
 
 s32 func_8023EA44_de(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly, CVector3 *point, f32 radius, s32 keep) {
     if (func_802412D0_de(poly, &ray->start, &ray->end, &poly->t) == 0) {
@@ -139,7 +139,7 @@ void func_8023ECBC_de(void *motionStorage, u16 *surfaceKey)
   ((Shared_Func80243A80Frame *)o)->sp54 = currentMotionFlags & 0xFFFC7FFF;
   if (currentMotionFlags & 0x7000)
   {
-    surfaceRecord = func_8028B2F8_de(&g_world, surfaceKey);
+    surfaceRecord = Scene_GetModelRecordByIndexPointer(&g_world, surfaceKey);
     if (surfaceRecord != 0)
     {
       if ((((ModelBlend *)surfaceRecord)->collisionFlags) & 0x400000)

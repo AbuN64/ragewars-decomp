@@ -7,7 +7,7 @@ struct RecordRecAt20V1 {
 };
 struct RecordRecAtCV1 {
     char pad[0xC];
-    struct Target_func_8040A77C_de *target;
+    struct TargetPakDisablePreviewSelection *target;
 };
 struct RecordRecAt20V2 {
     char pad[0x1C];

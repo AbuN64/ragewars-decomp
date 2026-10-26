@@ -3,13 +3,13 @@
 #include "COMMON/OBJRECAT18V1.H"
 #include "TYPES.H"
 
-void func_802B1E50_de(ALSeqPlayer *arg0, f32 arg1) {
-    ALSeq_s *temp_v0;
+void func_802B1E50_de(ALSeqPlayer *player, f32 tempo) {
+    ALSeq_s *sequence;
 
-    temp_v0 = arg0->target;
-    if (temp_v0 != 0) {
-        arg0->uspt = (s32)(arg1 * temp_v0->qnpt);
+    sequence = player->target;
+    if (sequence != 0) {
+        player->uspt = (s32)(tempo * sequence->qnpt);
         return;
     }
-    arg0->uspt = 0x1E8;
+    player->uspt = 0x1E8;
 }

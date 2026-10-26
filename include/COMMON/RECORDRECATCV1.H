@@ -8,15 +8,15 @@
 
 
 
-struct Target_func_8040A77C_de;
-struct Target_func_8040A77C_de {
+struct TargetPakDisablePreviewSelection;
+struct TargetPakDisablePreviewSelection {
     char pad0[0xA8];
     s32 first;
     char padAC[0xD0 - 0xAC];
     s32 second;
 };
 struct RecordRecAtCV1;
-struct Target_func_8040A77C_de;
+struct TargetPakDisablePreviewSelection;
 
 struct RecordRecAtCV1;
 
@@ -44,7 +44,7 @@ struct Shared_PakMenu;
 
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 func_8040A300_de(struct LayeredText *field, struct Shared_PakMenu *holder);
+s32 Pak_UpdateOwnerChannelLabel(struct LayeredText *field, struct Shared_PakMenu *holder);
 #endif
 
 extern s32 Control_PeekPakChange(s32);

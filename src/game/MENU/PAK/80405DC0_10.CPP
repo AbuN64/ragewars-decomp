@@ -16,14 +16,14 @@ extern u8 *D_800E28BC;
 extern s32 D_8011FECC;
 extern s32 D_8015375C;
 s32 Pak_ReadNoteInfo(s32, s32, s32 *, u8 *, u8 *, s32 *, u8 *, u8 *);
-s32 func_802A0238_de(u8 *);
+s32 XPlus_StringLength(u8 *);
 s32 Pak_ReadNoteData(s32, s32, s32, s32);
 u32 Pak_Crc32(u8 *, u32, u32);
 s32 func_804057BC_de(u8 *, s32);
 u8 *XPlus_CopyString(u8 *, u8 *);
 void *Pak_OpenDialog(struct func_8025E5B0_S1 *, struct Dialog *, s32, s32, s32);
 s32 Pak_CheckStatusPrompt(void *, s32, s32);
-static __inline__ s32 pak_note_has_game_id(u8 *company, u8 *code) { if ((func_802A0238_de(code) == 4) && (func_802A0238_de(company) == 2) && (XPlus_CompareStrings(code, rw_pak_game_code(&D_80145040.game)) == 0) && (XPlus_CompareStrings(company, rw_pak_company(&D_80145040.game)) == 0)) return 1; return 0; }
+static __inline__ s32 pak_note_has_game_id(u8 *company, u8 *code) { if ((XPlus_StringLength(code) == 4) && (XPlus_StringLength(company) == 2) && (XPlus_CompareStrings(code, rw_pak_game_code(&D_80145040.game)) == 0) && (XPlus_CompareStrings(company, rw_pak_company(&D_80145040.game)) == 0)) return 1; return 0; }
 static __inline__ s32 pak_block_has_size(u8 *data,s32 expected) { return *(s32 *)data==expected; }
 /* Load a Controller Pak note, validate its profile or save-block
  * checksum, and open the corresponding selection or error dialog. */

@@ -9,7 +9,7 @@
 
 extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
-void func_8028DA74_de(Shared_World *world) {
+void Scene_ReleaseCachedLevelData(Shared_World *world) {
     void *handle;
 
     handle = world->resourceHandle;

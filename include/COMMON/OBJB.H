@@ -231,7 +231,7 @@ extern char g_linkGroupTypes;
 extern char g_constructBlLevelDataIndex;
 extern char g_bloodlustWeaponData;
 
-extern void func_8026D7F4_de(s32, s32);
+extern void Geometry_ExpandModelWithSentinel(s32, s32);
 extern u8 g_constructMapObjectIndex[];
 extern u8 g_constructMapSimpModelsIndex[];
 extern u8 g_constructMapSimpleModel[];

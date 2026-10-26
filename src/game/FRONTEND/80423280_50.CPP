@@ -41,7 +41,7 @@ extern s32 func_8042B154_de(s32 index);
 /* Refreshes the selection on the screen D_800E4F60: for category 0 to 3 at 0x434 it takes the item
    the selection at 0x438 names in the 4-byte table D_800E5240, D_800E5214, D_800E51F8 or
    D_800E51E4 from the window into 0x43C, copies the selection's name into the text at 0x3F4 (the
-   default label for selection 0, otherwise the resource name func_8028D380_de reads from
+   default label for selection 0, otherwise the resource name Scene_CopyLevelName reads from
    D_8011FE88 for the entry func_8042B1B8_de finds in the category's list ScenarioSetup_CategoryToList), points the
    label at 0x3EC to that text and calls func_80245B28_de. */
 
@@ -50,9 +50,9 @@ extern s32 func_8042B154_de(s32 index);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
 #endif
 
-extern void func_8028D380_de(Shared_World *, s32, char *, s32);
+extern void Scene_CopyLevelName(Shared_World *, s32, char *, s32);
 
-extern char *func_802A0494_de(char *);
+extern char *XPlus_UppercaseString(char *);
 
 extern void XPlus_CopyString(char *, char *);
 
@@ -182,10 +182,10 @@ void func_8042A990_de(void) {
         XPlus_CopyString(D_800E4F60->text, D_800E1DA4[g_languageIndex]);
 #endif
     } else {
-        func_8028D380_de(&g_world,
+        Scene_CopyLevelName(&g_world,
                       func_8042B1B8_de(ScenarioSetup_CategoryToList(D_800E4F60->category), D_800E4F60->selection),
                       buffer, 0x3F);
-        XPlus_CopyString(D_800E4F60->text, func_802A0494_de(buffer));
+        XPlus_CopyString(D_800E4F60->text, XPlus_UppercaseString(buffer));
     }
     D_800E4F60->label->text = D_800E4F60->text;
     Cinema_ReleaseSequenceContext();

@@ -425,8 +425,8 @@ extern void Frontend_SetWidgetFlag100(void *, s32);
 extern s32 Frontend_ListHasFlag100(void *);
 extern s32 ScenarioSetup_IsCupSelected(void);
 extern s32 func_8042AFB8_de(void);
-extern void func_8028D380_de(Shared_World *, s32, void *, s32);
-extern char *func_802A0494_de(char *);
+extern void Scene_CopyLevelName(Shared_World *, s32, void *, s32);
+extern char *XPlus_UppercaseString(char *);
 extern char *XPlus_CopyString(char *, char *);
 
 s32 ScenarioSetup_OpenResultsScreen(void *root) {
@@ -528,8 +528,8 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
     default: item->text = resultsThirdHeading(); break;
     }
     item = func_8040EC30_de(root, 0x235 + RESULTS_MENU_SHIFT);
-    func_8028D380_de(&g_world, D_8015402C, buffer, 63);
-    XPlus_CopyString(D_800E53C0->name, func_802A0494_de(buffer));
+    Scene_CopyLevelName(&g_world, D_8015402C, buffer, 63);
+    XPlus_CopyString(D_800E53C0->name, XPlus_UppercaseString(buffer));
     item->text = D_800E53C0->name;
     D_800E53C0->buttonAddress = (s32)func_8040EC30_de(root, 0x23D + RESULTS_MENU_SHIFT);
     D_800E53C0->dirty = 1;
@@ -547,7 +547,7 @@ extern func_8042CE54_S1 *D_800E53C0;
 extern ResourceBank D_800E12D2[];
 extern s32 D_800FEAE0[];
 extern s32 Frontend_FindKeyIndex(s32);
-extern char *func_802A0494_de(char *);
+extern char *XPlus_UppercaseString(char *);
 extern char *XPlus_CopyString(char *,char *);
 extern char *func_80424DE8_de(s32);
 extern s32 func_802A0C08_de(void *,const char *,...);
@@ -582,7 +582,7 @@ void ScenarioSetup_FillResultRows(void) {
             widget->text = D_80102B00[player].name;
         } else {
             name = record->name;
-            XPlus_CopyString(name, func_802A0494_de(name));
+            XPlus_CopyString(name, XPlus_UppercaseString(name));
             widget->text = name;
         }
 

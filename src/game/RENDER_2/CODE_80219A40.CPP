@@ -32,8 +32,8 @@ s32 Player_GetMaxHealth(void *);
 int func_8022B178_de(void *);
 int Cinema_IsSequenceActive(void);
 void func_802830CC_de(void *, s32);
-void * func_8028B2F8_de(Shared_World *, u16 *);
-s32 func_802A01E8_de(void);
+void * Scene_GetModelRecordByIndexPointer(Shared_World *, u16 *);
+s32 XPlus_NextRandomInteger(void);
 
 
 
@@ -119,7 +119,7 @@ void func_80219A40_de(struct Shared_ReactionActor *attacker, void *arg1, struct 
         }
         
         while (sourceHandle != 0) {
-            sourceFlags = func_8028B2F8_de(&g_world, sourceHandle);
+            sourceFlags = Scene_GetModelRecordByIndexPointer(&g_world, sourceHandle);
             hasSpecialSourceFlag = 0;
             if (sourceFlags == 0) {
                 break;
@@ -339,7 +339,7 @@ block_88:
                             }
                             if (damagedPlayer != 0) {
                                 damagedPlayer->unk12EC = creditedPlayer;
-                                damagedPlayer->unk12F0 = (s32) (func_802A01E8_de() % 7);
+                                damagedPlayer->unk12F0 = (s32) (XPlus_NextRandomInteger() % 7);
                             }
                             if (killerPlayerIndex == victimPlayerIndex) {
                                 suicideStatistics = (void *)damagedPlayer->unk5D8;

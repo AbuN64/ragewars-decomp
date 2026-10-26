@@ -13,7 +13,7 @@ extern void *Frontend_CountUsedSlots(void);
 extern void func_802A2360_de(void);
 extern void func_8041E408_de(s32);
 /* Opens the 0x20-byte screen state D_800E39C0 for owner arg0: a four-row list, the widgets 0x385, 0x386, 0x38F, 0x390 and three 0x38C rows (shown one by one through func_8041E408_de); returns zero. */
-s32 func_8041DF50_de(s32 owner) {
+s32 Menu_CreateGermanCourseOptions(s32 owner) {
     u8 *widget;
     s32 i;
     D_800E39C0 = (Func_8041DF50_State *)Cache_AllocateMemory(0x20);

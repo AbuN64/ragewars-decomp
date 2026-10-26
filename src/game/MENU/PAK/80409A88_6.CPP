@@ -15,7 +15,7 @@ extern s32 D_8015375C;
 extern char *D_800D7E14[];
 extern s32 Pak_CountLineChars(struct Field *);
 
-s32 func_8040A300_de(struct Field *field, Shared_PakMenu *pThis) {
+s32 Pak_UpdateOwnerChannelLabel(struct Field *field, Shared_PakMenu *pThis) {
     char *text;
     char **strings;
     s32 value;
@@ -41,7 +41,7 @@ extern u8 *D_800D7E14[];
 extern s32 Pak_CountLineChars(LayeredText *);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 func_8040A300_de(LayeredText *field, struct Shared_PakMenu *holder) {
+s32 Pak_UpdateOwnerChannelLabel(LayeredText *field, struct Shared_PakMenu *holder) {
     char *text;
     s32 value;
     if (D_8015375C != 0) {

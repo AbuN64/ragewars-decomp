@@ -153,7 +153,7 @@ void SimpleInstance_RefreshModelResourceUsage(StaticObject *staticObject) {
         resource = 0;
     }
     if (resource != 0) {
-        func_8026E1F8_de(resource);
+        Geometry_RefreshMaterialResources(resource);
         Cache_UnlockResource(0, resource);
     }
 }

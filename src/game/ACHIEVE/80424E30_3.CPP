@@ -42,7 +42,7 @@ static inline s32 count_achievements(s32 index) {
     return count;
 }
 
-extern PresetTable *func_8028D474_de(void *table, s32 key);
+extern PresetTable *Scene_GetBlLevelData(void *table, s32 key);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
@@ -253,7 +253,7 @@ void func_804259E0_de(s32 index) {
 Preset *func_80425C70_de(s32 key, s32 row, s32 column) {
     PresetTable *table;
 
-    table = func_8028D474_de(&g_world, key);
+    table = Scene_GetBlLevelData(&g_world, key);
     if (table == 0) {
         return 0;
     }

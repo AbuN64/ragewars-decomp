@@ -49,8 +49,8 @@ extern s32 D_auto_800D7068;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern f32 D_auto_800C5678[2];
 #endif
-extern s32 func_8028B21C_de(void *, s32);
-extern s32 func_8028C198_de(void *, s32);
+extern s32 Scene_FindModelIdIndex(void *, s32);
+extern s32 Scene_GetIndexedModelResource(void *, s32);
 extern void Camera_SetupViewportAndFog(void *);
 extern void GraphU64_BuildTranslationMatrix(void *, f32, f32, f32);
 extern void YawMatrixLocal(void *, f32);
@@ -72,7 +72,7 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
     u8 matrix[0x40];
 
     D_800CC380 = 0;
-    handle = func_8028B21C_de(&g_world, 0xE10);
+    handle = Scene_FindModelIdIndex(&g_world, 0xE10);
     D_800D15E0 = 0;
     D_800D15E4[0] = D_800CA4B0;
     D_800D15E4[1] = D_800CA4B0;
@@ -84,7 +84,7 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
         YawMatrixLocal(matrix, state->unk26DB0 * D_800CA4B4);
         SwapMatrixUpForward(matrix);
         GraphU64_ConvertMatrixToFixed(matrix, VIEW_MATRICES + D_800D297C * 64);
-        h2 = func_8028C198_de(&g_world, handle);
+        h2 = Scene_GetIndexedModelResource(&g_world, handle);
         Geometry_BeginModelBatch();
         Geometry_QueueDirectModel(h2, VIEW_MATRICES + D_800D297C * 64, &D_800D0EF8, 0, -1);
         Geometry_FlushModelBatch();

@@ -11,11 +11,11 @@
 
 
 
-void func_802A01D8_de(int seed) {
+void XPlus_SeedRandomGenerator(int seed) {
     D_800CD900 = seed;
 }
 
-s32 func_802A01E8_de(void) {
+s32 XPlus_NextRandomInteger(void) {
     s32 temp_v0;
 
     temp_v0 = (D_800CD900 * 0x343FD) + 0x269EC3;
@@ -24,7 +24,7 @@ s32 func_802A01E8_de(void) {
 }
 
 /** Return strlen(arg0) (byte count not including the terminating NUL). */
-s32 func_802A0238_de(u8 *string) {
+s32 XPlus_StringLength(u8 *string) {
     u8 *cursor;
     u8 c;
 
@@ -58,7 +58,7 @@ u8 *XPlus_CopyString(u8 *destination, u8 *source) {
 }
 
 /** strncpy: copy up to arg2 bytes from arg1 to arg0, NUL-padding the remainder. */
-u8 *func_802A0294_de(u8 *destination, u8 *source, s32 count) {
+u8 *XPlus_CopyStringBounded(u8 *destination, u8 *source, s32 count) {
     s32 remaining;
     u8 *start;
     u8 *destCursor;
@@ -95,7 +95,7 @@ u8 *func_802A0294_de(u8 *destination, u8 *source, s32 count) {
     return start;
 }
 
-u8 *func_802A02E8_de(u8 *destination, u8 *source) {
+u8 *XPlus_AppendString(u8 *destination, u8 *source) {
     u8 *sourceCursor;
     u8 *destCursor;
     u8 c;
@@ -115,7 +115,7 @@ u8 *func_802A02E8_de(u8 *destination, u8 *source) {
     return destination;
 }
 
-u8 *func_802A0324_de(u8 *destination, u8 *source, s32 count) {
+u8 *XPlus_AppendStringBounded(u8 *destination, u8 *source, s32 count) {
     u8 *end = destination + 1;
     u8 byte;
     if (*destination != 0) {
@@ -131,9 +131,9 @@ u8 *func_802A0324_de(u8 *destination, u8 *source, s32 count) {
     return destination;
 }
 
-s32 XPlus_CompareStrings(const void *arg0, const void *arg1) {
-    const u8 *a = arg0;
-    const u8 *b = arg1;
+s32 XPlus_CompareStrings(const void *leftString, const void *rightString) {
+    const u8 *a = leftString;
+    const u8 *b = rightString;
     s32 difference;
 
     while ((difference = *a - *b) == 0) {
@@ -146,7 +146,7 @@ s32 XPlus_CompareStrings(const void *arg0, const void *arg1) {
     return difference;
 }
 
-s32 func_802A03AC_de(u8 *a, u8 *b, s32 count) {
+s32 XPlus_CompareStringsBounded(u8 *a, u8 *b, s32 count) {
     u8 *aCursor;
     u8 *bCursor;
     u8 c;
@@ -164,7 +164,7 @@ s32 func_802A03AC_de(u8 *a, u8 *b, s32 count) {
     return *aCursor - *bCursor;
 }
 
-s32 func_802A03F4_de(u8 *a, u8 *b)
+s32 XPlus_CompareStringsIgnoreCase(u8 *a, u8 *b)
 {
   s32 c2;
   int letterA;
@@ -192,7 +192,7 @@ s32 func_802A03F4_de(u8 *a, u8 *b)
   {
     if (c2 == c1)
     {
-      return func_802A03F4_de(a, b);
+      return XPlus_CompareStringsIgnoreCase(a, b);
     }
   }
   return c1 - c2;
@@ -200,7 +200,7 @@ s32 func_802A03F4_de(u8 *a, u8 *b)
 
 /* Returns a pointer to the last occurrence of a character in a string, or 0 when it does not occur
    (strrchr). */
-u8 *func_802A0444_de(u8 *s, int c) {
+u8 *XPlus_FindLastCharacter(u8 *s, int c) {
     u8 *start = s;
     while (*s++ != 0) {
     }
@@ -217,7 +217,7 @@ u8 *func_802A0444_de(u8 *s, int c) {
 }
 
 /** In-place ASCII-uppercase a NUL-terminated string; NULL-safe. */
-u8 *func_802A0494_de(u8 *string) {
+u8 *XPlus_UppercaseString(u8 *string) {
     u8 *cursor;
     u8 c;
     cursor = string;
@@ -237,7 +237,7 @@ u8 *func_802A0494_de(u8 *string) {
 }
 
 /** In-place ASCII-lowercase a NUL-terminated string; NULL-safe. */
-u8 *func_802A04E0_de(u8 *string) {
+u8 *XPlus_LowercaseString(u8 *string) {
     u8 *cursor;
     u8 c;
     cursor = string;
@@ -257,7 +257,7 @@ u8 *func_802A04E0_de(u8 *string) {
 }
 
 /* Searches a zero-terminated byte string for a pattern and returns the position just past the first match, or zero when there is none. */
-u8 *func_802A052C_de(u8 *s, u8 *pattern) {
+u8 *XPlus_FindPatternEnd(u8 *s, u8 *pattern) {
     u8 *p;
     while (*s != 0) {
         while (*s != 0 && *s != *pattern) {
@@ -276,7 +276,7 @@ u8 *func_802A052C_de(u8 *s, u8 *pattern) {
 }
 
 /** Convert a lowercase ASCII letter to uppercase. */
-int func_802A05A0_de(int c) {
+int XPlus_UppercaseCharacter(int c) {
     if ((unsigned int)(c - 'a') < 26) {
         c -= 'a' - 'A';
     }
@@ -284,7 +284,7 @@ int func_802A05A0_de(int c) {
 }
 
 /** Convert an uppercase ASCII letter to lowercase. */
-int func_802A05B8_de(int c) {
+int XPlus_LowercaseCharacter(int c) {
     if ((unsigned int)(c - 'A') < 26) {
         c += 'a' - 'A';
     }
@@ -292,7 +292,7 @@ int func_802A05B8_de(int c) {
 }
 
 /* Parses a signed decimal integer from a string, skipping leading spaces and one optional sign (atoi). */
-s32 func_802A05D0_de(u8 *s) {
+s32 XPlus_ParseDecimalInteger(u8 *s) {
     s32 n;
     s32 c;
     u8 sign;
@@ -319,7 +319,7 @@ s32 func_802A05D0_de(u8 *s) {
 }
 
 /* Formats a signed integer as a NUL-terminated decimal string (K&R itoa with the reverse inlined). */
-void func_802A066C_de(s32 n, char *s) {
+void XPlus_FormatDecimalInteger(s32 n, char *s) {
     s32 i;
     s32 j;
     s32 sign;
@@ -347,7 +347,7 @@ void func_802A066C_de(s32 n, char *s) {
 void *XPlus_CopyBytes(void *destination, const void *source, s32 bytes) {
     void *result = destination;
     if (bytes != 0) {
-        result = func_8029F470_de(destination, source, bytes);
+        result = XPlus_MoveMemory(destination, source, bytes);
     }
     return result;
 }
@@ -393,7 +393,7 @@ word_test:
     return start;
 }
 
-u8 *func_802A07DC_de(u8 *buffer, s32 value, s32 length) {
+u8 *XPlus_FindByte(u8 *buffer, s32 value, s32 length) {
     u8 *p;
     s32 count;
     p = buffer;
@@ -415,7 +415,7 @@ loop:
     return p;
 }
 
-s32 func_802A0814_de(u8 *a, u8 *b, s32 count) {
+s32 XPlus_CompareMemory(u8 *a, u8 *b, s32 count) {
     u8 *aCursor;
     u8 *bCursor;
     u8 *end;
@@ -474,7 +474,7 @@ block_17:
 }
 
 /** Compute a CRC-32 over arg1 bytes, continuing from arg2. */
-u32 func_802A08B8_de(u8 *data, u32 length, u32 crc) {
+u32 XPlus_UpdateCrc32(u8 *data, u32 length, u32 crc) {
     u32 table[256];
     u32 i;
     u32 j;
@@ -501,7 +501,7 @@ u32 func_802A08B8_de(u8 *data, u32 length, u32 crc) {
 }
 
 /* Builds a path from drive, directory, filename and extension components. */
-void func_802A0960_de(u8 *path, u8 *drive, u8 *directory, u8 *name, u8 *extensionArg) {
+void XPlus_BuildPath(u8 *path, u8 *drive, u8 *directory, u8 *name, u8 *extensionArg) {
     u8 *extension = extensionArg;
     u8 *out;
     u8 *cursor;
@@ -567,17 +567,17 @@ void func_802A0960_de(u8 *path, u8 *drive, u8 *directory, u8 *name, u8 *extensio
     *out = 0;
 }
 
-void func_802A0A48_de(void *messageSemaphore) {
+void XPlus_InitializeSemaphore(void *messageSemaphore) {
     MessageSemaphore *semaphore = messageSemaphore;
     osCreateMesgQueue(messageSemaphore, &semaphore->message, 1);
     osSendMesg(messageSemaphore, 1, 1);
 }
 
-void func_802A0A84_de(s32 arg0) {
+void XPlus_AcquireSemaphore(s32 arg0) {
     osRecvMesg(arg0, arg0 + 0x18, 1);
 }
 
-void func_802A0AA4_de(s32 *arg0) {
+void XPlus_ReleaseSemaphore(s32 *arg0) {
     osSendMesg(arg0, 1, 1);
 }
 

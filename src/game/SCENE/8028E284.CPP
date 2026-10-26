@@ -18,7 +18,7 @@
 
 
 extern LevelActor *D_800F3CD0[],*D_800F3D0C;
-extern s32 func_802A01E8_de(void);
+extern s32 XPlus_NextRandomInteger(void);
 void func_8028E284_de(SceneRecAt140 *scene) {
  s32 count=0,i=9,offset=36;LevelActor *actor=scene->actors;
  D_800F3D0C=0;
@@ -31,7 +31,7 @@ void func_8028E284_de(SceneRecAt140 *scene) {
   actor++;
 
  }while(++i<scene->count);
- D_801462C8.counters.m_nFragTagSkin=func_802A01E8_de()%3;
+ D_801462C8.counters.m_nFragTagSkin=XPlus_NextRandomInteger()%3;
 }
 
 /* Remaps every 4-bit pixel of every image in each of the 256 entries of a table through the given

@@ -19,42 +19,42 @@ extern struct Shape_typemap_165 func_80271818_de(Triple *);
 #include "particle/8027A0F4_8.H"
 extern void Events_DeliverContactEffect(void *, void *, s32, s32, Triple, AttachmentEffectArgs);
 
-void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct MatrixF *arg2, func_8026E5E0_S3 *actor, AttachmentTable *arg4) {
+void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *effectAttachments, s32 attachmentsRemaining, struct MatrixF *attachmentMatrices, func_8026E5E0_S3 *actor, AttachmentTable *attachmentNodes) {
     Triple pos;
     Triple mapped;
     Triple zero;
     struct Shape_typemap_165 rotation;
     AttachmentEffectArgs params;
     s32 room;
-    f32 temp_f0;
+    f32 actorParticleScale;
     f32 lifetime;
-    s32 temp_a0_2;
-    s32 temp_s0;
-    s32 var_s2;
-    u16 temp_a0;
-    u32 temp_v1;
+    s32 actorDefinitionKind;
+    s32 attachmentEffectFlags;
+    s32 particleLifeRange;
+    u16 attachmentNodeIndex;
+    u32 attachmentMask;
     u8 *node;
-    ObjRecAt4V7 *var_s3;
+    ObjRecAt4V7 *effectBinding;
 
-    arg1 = arg1 - 1;
-    if (arg1 != -1) {
+    attachmentsRemaining = attachmentsRemaining - 1;
+    if (attachmentsRemaining != -1) {
         do {
-            var_s3 = (void *)&arg0->unkC;
-            if (var_s3->unk0 & actor->unk2E0) {
-                temp_a0 = var_s3->unk4;
-                node = arg4->bytes + temp_a0 * arg4->stride;
-                temp_s0 = (*node == 5) * 2;
-                GraphU64_TransformPoint(&arg2[temp_a0], arg0, &pos);
+            effectBinding = (void *)&effectAttachments->unkC;
+            if (effectBinding->unk0 & actor->unk2E0) {
+                attachmentNodeIndex = effectBinding->unk4;
+                node = attachmentNodes->bytes + attachmentNodeIndex * attachmentNodes->stride;
+                attachmentEffectFlags = (*node == 5) * 2;
+                GraphU64_TransformPoint(&attachmentMatrices[attachmentNodeIndex], effectAttachments, &pos);
                 GraphU64_ScaleVector(&pos, &pos, 0.000015258789f);
-                var_s2 = 0;
-                temp_v1 = var_s3->unk0;
-                switch (temp_v1) {                  /* irregular */
+                particleLifeRange = 0;
+                attachmentMask = effectBinding->unk0;
+                switch (attachmentMask) {                  /* irregular */
 #if !defined(VERSION_DE)
                 case 0x2:
-                    Barrel_SpawnActorEffect(actor, 0x51, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0x51, pos, attachmentEffectFlags);
                     break;
                 case 0x8:
-                    Barrel_SpawnActorEffect(actor, 0x5C, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0x5C, pos, attachmentEffectFlags);
                     break;
 #endif
                 case 0x1:
@@ -64,8 +64,8 @@ void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct Mat
                     break;
                 case 0x40:
                     actor->unk248 = pos;
-                    temp_a0_2 = *actor->unk18;
-                    if (((temp_a0_2 == 1) && (actor->unk1A4 == 0x21)) || ((temp_a0_2 == 0xB) && (actor->unk1D8->unk650 == 0x26))) {
+                    actorDefinitionKind = *actor->unk18;
+                    if (((actorDefinitionKind == 1) && (actor->unk1A4 == 0x21)) || ((actorDefinitionKind == 0xB) && (actor->unk1D8->unk650 == 0x26))) {
                         InstHdr_CopyActorPositionAndModel(actor, pos, &mapped, &room, 0, 1);
                         rotation = func_80271818_de(&actor->unk254);
                         zero.x = 0;
@@ -84,90 +84,90 @@ void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct Mat
                             D_800C4960_eu
 #endif
                         ) {
-                            func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0xE6, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, temp_s0 | 1);
+                            func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0xE6, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, attachmentEffectFlags | 1);
                         }
-                        func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x8A, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, temp_s0 | 1);
+                        func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x8A, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, attachmentEffectFlags | 1);
                     }
                     break;
                 case 0x80:
-                    Barrel_SpawnActorEffect(actor, 0xAC, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xAC, pos, attachmentEffectFlags);
                     break;
                 case 0x100:
-                    Barrel_SpawnActorEffect(actor, 0xAD, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xAD, pos, attachmentEffectFlags);
                     break;
                 case 0x200:
-                    Barrel_SpawnActorEffect(actor, 0xAE, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xAE, pos, attachmentEffectFlags);
                     break;
                 case 0x400:
-                    Barrel_SpawnActorEffect(actor, 0xAF, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xAF, pos, attachmentEffectFlags);
                     break;
                 case 0x800:
-                    Barrel_SpawnActorEffect(actor, 0xB0, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB0, pos, attachmentEffectFlags);
                     break;
                 case 0x1000:
-                    Barrel_SpawnActorEffect(actor, 0xB1, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB1, pos, attachmentEffectFlags);
                     break;
                 case 0x2000:
-                    Barrel_SpawnActorEffect(actor, 0xB2, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB2, pos, attachmentEffectFlags);
                     break;
                 case 0x4000:
-                    Barrel_SpawnActorEffect(actor, 0xB3, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB3, pos, attachmentEffectFlags);
                     break;
                 case 0x8000:
-                    Barrel_SpawnActorEffect(actor, 0xB4, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB4, pos, attachmentEffectFlags);
                     break;
                 case 0x10000:
-                    Barrel_SpawnActorEffect(actor, 0xB5, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB5, pos, attachmentEffectFlags);
                     break;
                 case 0x20000:
-                    Barrel_SpawnActorEffect(actor, 0xB6, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB6, pos, attachmentEffectFlags);
                     break;
                 case 0x40000:
-                    Barrel_SpawnActorEffect(actor, 0xB7, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB7, pos, attachmentEffectFlags);
                     break;
                 case 0x80000:
-                    Barrel_SpawnActorEffect(actor, 0xB8, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB8, pos, attachmentEffectFlags);
                     break;
                 case 0x100000:
-                    Barrel_SpawnActorEffect(actor, 0xB9, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xB9, pos, attachmentEffectFlags);
                     break;
                 case 0x200000:
-                    Barrel_SpawnActorEffect(actor, 0xBA, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xBA, pos, attachmentEffectFlags);
                     break;
                 case 0x400000:
-                    Barrel_SpawnActorEffect(actor, 0xBB, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0xBB, pos, attachmentEffectFlags);
                     break;
                 case 0x20000000:
-                    Barrel_SpawnActorEffect(actor, 0x1E9, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0x1E9, pos, attachmentEffectFlags);
                     break;
                 case 0x40000000:
-                    Barrel_SpawnActorEffect(actor, 0x1EA, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0x1EA, pos, attachmentEffectFlags);
                     break;
                 case 0x80000000:
-                    Barrel_SpawnActorEffect(actor, 0x1EB, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0x1EB, pos, attachmentEffectFlags);
                     break;
                 case 0x8000000:
-                    Barrel_SpawnActorEffect(actor, 0x11C, pos, temp_s0);
+                    Barrel_SpawnActorEffect(actor, 0x11C, pos, attachmentEffectFlags);
                     break;
                 case 0x10000000:
                     actor->unk260 = pos;
                     break;
                 case 0x800000:
-                    var_s2 = 5;
+                    particleLifeRange = 5;
                     break;
                 case 0x1000000:
-                    var_s2 = 0xA;
+                    particleLifeRange = 0xA;
                     break;
                 case 0x2000000:
-                    var_s2 = 0xF;
+                    particleLifeRange = 0xF;
                     break;
                 case 0x4000000:
-                    var_s2 = 0x14;
+                    particleLifeRange = 0x14;
                     break;
                 }
-                if (var_s2 != 0) {
-                    temp_f0 = func_8024BF24_de(actor);
-                    params.fields.lifeRange = var_s2 << 8;
+                if (particleLifeRange != 0) {
+                    actorParticleScale = func_8024BF24_de(actor);
+                    params.fields.lifeRange = particleLifeRange << 8;
                     params.fields.countRange = 0;
                     params.fields.countBase = 0;
                     params.fields.modifier = 0;
@@ -183,7 +183,7 @@ void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct Mat
 #else
                     lifetime = D_800C4964_eu;
 #endif
-                    lifetime /= temp_f0;
+                    lifetime /= actorParticleScale;
 #if defined(VERSION_US)
                     lifetime *= D_800C4968_eu;
 #elif defined(VERSION_EU)
@@ -199,9 +199,9 @@ void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct Mat
                     Events_DeliverContactEffect(actor, actor, 3, -1, pos, params);
                 }
             }
-            arg0++;
-            arg1 -= 1;
-        } while (arg1 != -1);
+            effectAttachments++;
+            attachmentsRemaining -= 1;
+        } while (attachmentsRemaining != -1);
     }
 }
 

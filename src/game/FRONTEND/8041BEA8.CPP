@@ -95,7 +95,7 @@ s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 arg2) {
             }
             ((MenuRecAt108 *) D_800E3590)->focus = node;
             node->style = 0xE1;
-            func_8041D960_de();
+            Frontend_RefreshUnlockedFocusLabel();
             Frontend_UpdateFocusCaption();
             ((MenuRecAt108 *) D_800E3590)->cursor->x = node->x - 2;
             ((MenuRecAt108 *) D_800E3590)->cursor->y = node->y;

@@ -12,7 +12,7 @@ extern void GraphU64_ScaleVector(void *, void *, f32);
 
 extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
-extern void *func_8028B00C_de(struct Shared_World *object, int index);
+extern void *Scene_GetStridedWorldRecord(struct Shared_World *object, int index);
 
 void *DynLight_AllocateLightNode(void *intrusiveList, void *arg1);
 
@@ -70,7 +70,7 @@ void DynLight_AccumulateLightDirections(RangeNode **arg0, u32 arg1, u32 arg2, u3
 }
 
 void *DynLight_AllocateWorldLight(s32 arg0, s32 index) {
-    return DynLight_AllocateLightNode(arg0, func_8028B00C_de(&g_world, index));
+    return DynLight_AllocateLightNode(arg0, Scene_GetStridedWorldRecord(&g_world, index));
 }
 
 void *DynLight_AllocateLightNode(void *intrusiveList, void *arg1) {

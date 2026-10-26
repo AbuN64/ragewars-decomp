@@ -17,7 +17,7 @@
 #include "FX_2/80271B18.H"
 #include "WEAPONS/80213ED4.H"
 
-extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
+extern void Scene_SetLevelActorStateBit(void *a, unsigned short b, unsigned short c, int d);
 
 extern int Cinema_IsSequenceInWindow(void);
 
@@ -49,7 +49,7 @@ void func_802067BC_de(Shared_Actor *actor) {
 }
 
 void func_802067FC_de(Trigger *trigger) {
-    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 1);
+    Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 1);
 }
 
 void func_8020682C_de(Shared_Actor *actor, s32 *sequenceFlags) {
@@ -63,7 +63,7 @@ void func_8020682C_de(Shared_Actor *actor, s32 *sequenceFlags) {
 }
 
 void func_80206898_de(Trigger *trigger) {
-    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 0);
+    Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 0);
 }
 
 void func_802068C8_de(struct Shared_Actor *actor, s32 arg1, s32 trackRequest) {

@@ -32,7 +32,7 @@ void func_80426174_de(PlayerRecAt602 *p) {
     }
 }
 
-extern void *func_8028D474_de(void *, s32);
+extern void *Scene_GetBlLevelData(void *, s32);
 
 void func_804261DC_de(WeaponPlayer *player) {
     WeaponStatus *status = player->status;
@@ -42,7 +42,7 @@ void func_804261DC_de(WeaponPlayer *player) {
     s32 active;
 
     if (status->out != 1 && status->active != 0) {
-        void *table = func_8028D474_de(&g_world, D_8015402C);
+        void *table = Scene_GetBlLevelData(&g_world, D_8015402C);
         i = 0;
         active = 1;
         entries = table;

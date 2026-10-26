@@ -32,7 +32,7 @@ extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 
 
-extern void func_8028DA74_de(void *arg0);
+extern void Scene_ReleaseCachedLevelData(void *arg0);
 
 
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
@@ -72,7 +72,7 @@ void *Scene_GetPlatformRoutePoint(void *a, s32 b, s32 c) {
     return r2->data + (c * field);
 }
 
-s32 func_8028D28C_de(void *arg0, s32 arg1, void *arg2) {
+s32 Scene_FindNearestRouteFrame(void *arg0, s32 arg1, void *arg2) {
     CVector3 position;
     AnimationPoseFrameSet *list;
     Shared_World *world = arg0;
@@ -106,7 +106,7 @@ s32 func_8028D28C_de(void *arg0, s32 arg1, void *arg2) {
     return (s32)bestIndex;
 }
 
-void func_8028D380_de(Shared_World *world, s32 type, void *levelName, s32 arg3) {
+void Scene_CopyLevelName(Shared_World *world, s32 type, void *levelName, s32 arg3) {
     s32 specialTable;
     s32 tempv0;
     s32 temps2;
@@ -127,7 +127,7 @@ void func_8028D380_de(Shared_World *world, s32 type, void *levelName, s32 arg3) 
     }
 }
 
-void *func_8028D474_de(void *world, s32 record) {
+void *Scene_GetBlLevelData(void *world, s32 record) {
     s32 sp28;
     void **resource;
     s32 key;
@@ -135,7 +135,7 @@ void *func_8028D474_de(void *world, s32 record) {
     s32 one;
 
     if (((struct MeasuredRecAt14V4 *)(world))->value == 0 || ((struct MeasuredCode8028B64C *)(world))->value != record) {
-        func_8028DA74_de(world);
+        Scene_ReleaseCachedLevelData(world);
         if (((struct MeasuredRecAtCV4 *)(world))->value != 0) {
             size = 0x10;
             one = 1;
@@ -163,7 +163,7 @@ void *func_8028D474_de(void *world, s32 record) {
     return 0;
 }
 
-void func_8028D59C_de(void *arg0) {
+void Scene_ReleaseCachedGeometry(void *arg0) {
     SceneSceneDrawCachedOpaqueGeometry *object = arg0;
     s32 *list;
     s32 val;
@@ -183,7 +183,7 @@ void func_8028D59C_de(void *arg0) {
     }
 }
 
-void func_8028D61C_de(s32 arg0) {
+void Scene_CollectVisibleEffects(s32 arg0) {
     func_8029076C_de(arg0 + 0x11778, arg0);
 }
 
@@ -194,7 +194,7 @@ void func_8028D644_de(void *object) {
 }
 
 /** Clear the scene counters and linked state fields. */
-void func_8028D64C_de(void *object) {
+void Scene_ClearSceneObjectCounts(void *object) {
     ((Shared_World *)object)->interactiveCount = 0;
     ((Shared_World *)object)->moverCount = 0;
     ((Shared_World *)object)->queuedCount = 0;
@@ -208,7 +208,7 @@ void func_8028D64C_de(void *object) {
     ((Shared_World *)object)->sectorCount = 0;
 }
 
-void func_8028D67C_de(State_func_8028D67C_de *arg0)
+void Scene_UpdateStaticEventInstances(StateSceneUpdateStaticEventInstances *arg0)
 {
   f32 temp_f1;
   s32 temp_a0;
@@ -284,7 +284,7 @@ void func_8028D7C4_de(char *world, s32 arg1, s32 arg2, s32 *arg3, s32 *arg4) {
     }
 }
 
-void func_8028D888_de(Owner_func_8028D888_de *owner) {
+void Scene_UnlockActiveSectionResources(OwnerSceneUnlockActiveSectionResources *owner) {
     s32 i;
     s32 n;
     s32 count;
@@ -303,7 +303,7 @@ void func_8028D888_de(Owner_func_8028D888_de *owner) {
     owner->prevCount = count;
 }
 
-void func_8028D90C_de(void) {
+void Scene_ResetTransitionViewport(void) {
     s32 var_a0;
     s32 var_a1;
 
@@ -327,7 +327,7 @@ void func_8028D964_de(void *world, s32 arg1) {
     s32 one;
 
     if (((struct MeasuredRecAt14V2 *)(world))->value == 0 || ((struct MeasuredCode8028B64C *)(world))->value != arg1) {
-        func_8028DA74_de(world);
+        Scene_ReleaseCachedLevelData(world);
         if (((struct MeasuredRecAtCV3 *)(world))->value != 0) {
             size = 0x10;
             one = 1;

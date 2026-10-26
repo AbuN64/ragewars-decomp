@@ -11,7 +11,7 @@
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-/* Draws every part of a model resource with the shared material D_8013B2D8 when the frame's command buffer still has 3000 commands free and Geometry_SetupMaterial accepts the material: sets the render mode, selects blend 2 through func_80268CE0_de, loads the model matrix (or sets it as segment 1), loads an optional two-light block, registers the resource, sets segment 2 to the given texture base or the model's own and emits each part's display list. Adapted from func_8026DF7C_de with the render mode, blend and light commands added and the per-part lighting call removed. */
+/* Draws every part of a model resource with the shared material D_8013B2D8 when the frame's command buffer still has 3000 commands free and Geometry_SetupMaterial accepts the material: sets the render mode, selects blend 2 through func_80268CE0_de, loads the model matrix (or sets it as segment 1), loads an optional two-light block, registers the resource, sets segment 2 to the given texture base or the model's own and emits each part's display list. Adapted from Geometry_DrawWithMaterialOverride with the render mode, blend and light commands added and the per-part lighting call removed. */
 
 
 
@@ -23,7 +23,7 @@ extern void Cache_MarkResourceInUse(s32 heap, void **resource);
 extern s32 Geometry_SetupMaterial(void *material, s32 pass);
 extern void Geometry_SetCombineMode(s32 mode);
 
-void func_8026C978_de(void **resource, s32 matrix, s32 segment, s32 lights, void *textures, s32 pass) {
+void Geometry_DrawSharedMaterialModel(void **resource, s32 matrix, s32 segment, s32 lights, void *textures, s32 pass) {
     void *header;
     void *base;
     void **parts;
@@ -70,7 +70,7 @@ void func_8026C978_de(void **resource, s32 matrix, s32 segment, s32 lights, void
     }
 }
 
-/* Draws every part of a model resource with the shared material D_80137288 when the frame's command buffer still has 3000 commands free and Geometry_SetupMaterial accepts the material: prepares through func_802A01E8_de, flags the material 0x20 and sets D_800D15E0, sets the render mode, loads the model matrix (or sets it as segment 1), loads an optional two-light block, registers the resource, sets segment 2 to the given texture base or the model's own and emits each part's display list, skipping parts whose material blend bits are all set unless the owner's 0x122C flag 0x400 is set. Adapted from func_8026C978_de with the preparation and flag stores added, the blend call removed and the per-part owner test added. */
+/* Draws every part of a model resource with the shared material D_80137288 when the frame's command buffer still has 3000 commands free and Geometry_SetupMaterial accepts the material: prepares through XPlus_NextRandomInteger, flags the material 0x20 and sets D_800D15E0, sets the render mode, loads the model matrix (or sets it as segment 1), loads an optional two-light block, registers the resource, sets segment 2 to the given texture base or the model's own and emits each part's display list, skipping parts whose material blend bits are all set unless the owner's 0x122C flag 0x400 is set. Adapted from Geometry_DrawSharedMaterialModel with the preparation and flag stores added, the blend call removed and the per-part owner test added. */
 
 
 
@@ -78,7 +78,7 @@ void func_8026C978_de(void **resource, s32 matrix, s32 segment, s32 lights, void
 extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
 
-extern void func_802A01E8_de(void);
+extern void XPlus_NextRandomInteger(void);
 extern void Cache_MarkResourceInUse(s32 heap, void **resource);
 extern s32 Geometry_SetupMaterial(void *material, s32 pass);
 
@@ -87,7 +87,7 @@ extern s32 Geometry_SetupMaterial(void *material, s32 pass);
 
 
 
-void func_8026CBA4_de(void **resource, void *owner, void *matrix, s32 segment, Shared_ParticleLighting *lights, void *textures, s32 pass) {
+void Geometry_DrawOwnerFilteredPass(void **resource, void *owner, void *matrix, s32 segment, Shared_ParticleLighting *lights, void *textures, s32 pass) {
     void *header;
     void *base;
     void **parts;
@@ -99,7 +99,7 @@ void func_8026CBA4_de(void **resource, void *owner, void *matrix, s32 segment, S
     Gfx **start;
     u32 used;
 
-    func_802A01E8_de();
+    XPlus_NextRandomInteger();
     start = &D_8011FAC0.ring.current->commands;
     shared = &D_80137288;
     *shared |= 0x20;
@@ -295,7 +295,7 @@ void Geometry_DrawModelWithSharedMaterial(void **resource, void *matrix, s32 seg
     if (matrix == 0) {
         return;
     }
-    func_802A01E8_de();
+    XPlus_NextRandomInteger();
     shared = (MeshMaterial *)&D_8013B2D8;
     flags = shared->flags;
     shared->secondaryColor[0] = 0x80;

@@ -167,7 +167,7 @@ void **func_8024F6EC_de(void *arg0, s32 arg1) {
 
 
 extern s32 D_801462C8;
-extern s32 func_8028B25C_de(void *arg0, s32 arg1);
+extern s32 Scene_GetModelIdAtIndex(void *arg0, s32 arg1);
 
 s32 func_8024F858_de(StaticObject *staticObject) {
     void *obj;
@@ -180,7 +180,7 @@ s32 func_8024F858_de(StaticObject *staticObject) {
     }
 
     value = ((PropGeometry *)(obj))->variant;
-    index = func_8028B25C_de(&g_world, staticObject->id);
+    index = Scene_GetModelIdAtIndex(&g_world, staticObject->id);
     if (index < 0x6AB) {
         if (index < 0x6A9) {
             return value;

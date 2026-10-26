@@ -43,7 +43,7 @@ void Scene_UpdateAndDrawWorld(void *arg0) {
     }
 
     Scene_UpdateSelectionTransition(state);
-    func_8028D64C_de(state);
+    Scene_ClearSceneObjectCounts(state);
     state->counter120 = 0;
     state->counter124 = 0;
     func_80279990_de(state->system128);
@@ -56,14 +56,14 @@ void Scene_UpdateAndDrawWorld(void *arg0) {
         func_8022A170_de(&D_80145040);
         Scene_UpdateActorVisibility(state);
         Scene_RequestVisibleGridSections(state);
-        func_8028D61C_de(state);
+        Scene_CollectVisibleEffects(state);
 
         if ((state->frozen == 0) && (D_80145088.status[7] == 0)) {
             func_802A5680_de(manager);
             Scene_UpdateActorsAndRoundState(state);
             func_80290238_de(&state->system11778);
             state->elapsed += D_800D2988 * D_800C50E4_de;
-            func_8028C60C_de(state);
+            Scene_UpdateTriggerTimers(state);
         }
     }
 
@@ -74,10 +74,10 @@ void Scene_UpdateAndDrawWorld(void *arg0) {
 
     Camera_DrawActiveViews(&D_80145088, state);
     if ((state->frozen == 0) && (D_80145088.status[7] == 0)) {
-        func_8028D67C_de(state);
+        Scene_UpdateStaticEventInstances(state);
     }
-    func_8028D888_de(state);
-    func_8028D108_de(state);
+    Scene_UnlockActiveSectionResources(state);
+    Scene_DrawTransitionColorOverlay(state);
 }
 
 

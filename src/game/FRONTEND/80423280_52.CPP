@@ -17,7 +17,7 @@ extern struct MenuSettings D_801462C8;
 
 /* Refreshes the name label of screen D_800E4F60: with no entry at 0x438 it uses the default text
    D_800D34D4_de; otherwise it formats the entry's name from func_8042B1B8_de on the list ScenarioSetup_CategoryToList
-   returns for 0x434 into a 0x40-byte buffer through D_8011FE88 and takes the text func_802A0494_de
+   returns for 0x434 into a 0x40-byte buffer through D_8011FE88 and takes the text XPlus_UppercaseString
    makes of it. Either text is copied into the screen's label at 0x3F4 through func_802A025C_de, and the
    widget at 0x3EC is pointed at that label. */
 
@@ -30,9 +30,9 @@ extern struct MenuSettings D_801462C8;
 
 extern char *func_8042B1B8_de(s32, s32);
 
-extern void func_8028D380_de(Shared_World *, char *, char *, s32);
+extern void Scene_CopyLevelName(Shared_World *, char *, char *, s32);
 
-extern char *func_802A0494_de(char *);
+extern char *XPlus_UppercaseString(char *);
 
 extern void XPlus_CopyString(char *, char *);
 
@@ -77,9 +77,9 @@ D_800D34D4_de[0]
 #endif
 );
     } else {
-        func_8028D380_de(&g_world, func_8042B1B8_de(ScenarioSetup_CategoryToList(D_800E4F60->list), D_800E4F60->entry),
+        Scene_CopyLevelName(&g_world, func_8042B1B8_de(ScenarioSetup_CategoryToList(D_800E4F60->list), D_800E4F60->entry),
                       buffer, 0x3F);
-        XPlus_CopyString(D_800E4F60->label, func_802A0494_de(buffer));
+        XPlus_CopyString(D_800E4F60->label, XPlus_UppercaseString(buffer));
     }
     D_800E4F60->widget->text = D_800E4F60->label;
 }

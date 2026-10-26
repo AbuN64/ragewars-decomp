@@ -12,13 +12,13 @@ struct LevelBitRecord;
 
 
 
-extern void func_8028CCA4_de(void *arg0, s32 arg1);
+extern void Scene_ClearActorLinksById(void *arg0, s32 arg1);
 
 
 
 
-struct Object_func_8028C934_de;
-typedef struct Object_func_8028C934_de Object_func_8028C934_de;
+struct ObjectSceneRegisterActorInSceneLists;
+typedef struct ObjectSceneRegisterActorInSceneLists ObjectSceneRegisterActorInSceneLists;
 
 struct ObjCode8028B64C;
 struct ObjCode8028B64C {
@@ -30,7 +30,7 @@ struct ObjCode8028B64C {
 struct ObjCode8028B64C;
 typedef struct ObjCode8028B64C ObjCode8028B64C;
 
-extern ActorRecAt1D8V1 *func_8028CC34_de(ObjCode8028B64C *obj, int id);
+extern ActorRecAt1D8V1 *Scene_ResolveActorLinkGroup(ObjCode8028B64C *obj, int id);
 
 
 struct WorldRecAt1B6A4;
@@ -43,7 +43,7 @@ struct WorldRecAt1B6A4 {
 struct ObjectRecAtB0;
 typedef struct ObjectRecAtB0 ObjectRecAtB0;
 
-extern s32 func_8028B988_de(void *arg0, struct LevelBitRecord *arg1);
+extern s32 Scene_TestLevelRecordStateBit(void *arg0, struct LevelBitRecord *arg1);
 
 
 struct World;
@@ -84,19 +84,19 @@ struct ObjectRecAt1A4 {
     u8 pad1A5[0x2E8 - 0x1A5];
 };
 
-struct World_func_8028CAE0_de;
-typedef struct World_func_8028CAE0_de World_func_8028CAE0_de;
+struct WorldSceneFindNearestMatchingActor;
+typedef struct WorldSceneFindNearestMatchingActor WorldSceneFindNearestMatchingActor;
 
 struct ObjectRecAt1A4;
-struct World_func_8028CAE0_de;
-struct World_func_8028CAE0_de {
+struct WorldSceneFindNearestMatchingActor;
+struct WorldSceneFindNearestMatchingActor {
     u8 pad0[0x138];
     struct ObjectRecAt1A4 *objects;
     u8 pad13C[0x4];
     s32 count;
 };
 
-extern ObjectRecAt1A4 *func_8028CAE0_de(World_func_8028CAE0_de *world, ObjectRecAt1A4 *self, s32 team, s32 kind, s32 activeOnly);
+extern ObjectRecAt1A4 *Scene_FindNearestMatchingActor(WorldSceneFindNearestMatchingActor *world, ObjectRecAt1A4 *self, s32 team, s32 kind, s32 activeOnly);
 
 struct EntryRecAt18V4;
 struct EntryRecAt18V4 {
@@ -114,7 +114,7 @@ struct WorldCode8028B64C {
     s32 count;
 };
 
-extern EntryRecAt18V4 *func_8028C7E0_de(WorldCode8028B64C *world, s32 id);
+extern EntryRecAt18V4 *Scene_FindTypeFourteenActorByDefinitionId(WorldCode8028B64C *world, s32 id);
 
 struct IntegerState54;
 struct IntegerState54 {
@@ -145,20 +145,20 @@ struct OwnerCode8028B64C {
 
 struct EntryRecAt10;
 struct OwnerCode8028B64C;
-extern struct EntryRecAt10 *func_8028CBB0_de(struct OwnerCode8028B64C *owner, struct EntryRecAt10 *pos);
+extern struct EntryRecAt10 *Scene_FindNearestListedEntry(struct OwnerCode8028B64C *owner, struct EntryRecAt10 *pos);
 
 
 
 
 struct World;
 
-extern EntryRecAt18V4 *func_8028C108_de(World *world, s32 id);
+extern EntryRecAt18V4 *Scene_FindSwitchByDefinitionId(World *world, s32 id);
 
 
 
-struct Object_func_8028C934_de;
+struct ObjectSceneRegisterActorInSceneLists;
 struct Shape_func_8021A2D4_de_2;
-struct Object_func_8028C934_de {
+struct ObjectSceneRegisterActorInSceneLists {
     char pad0[0x18];
     struct Shape_func_8021A2D4_de_2 *descriptor;
     char pad1C[0xE4 - 0x1C];
@@ -174,23 +174,23 @@ struct Object_func_8028C934_de {
 struct WorldRecAt10B8;
 struct WorldRecAt10B8 {
     char pad0[0x144];
-    Object_func_8028C934_de *listA[512];
+    ObjectSceneRegisterActorInSceneLists *listA[512];
     s32 countA;
-    Object_func_8028C934_de *listB[128];
+    ObjectSceneRegisterActorInSceneLists *listB[128];
     s32 countB;
     char padB4C[0xC50 - 0xB4C];
-    Object_func_8028C934_de *all[128];
+    ObjectSceneRegisterActorInSceneLists *all[128];
     s32 countAll;
-    Object_func_8028C934_de *type1[64];
+    ObjectSceneRegisterActorInSceneLists *type1[64];
     s32 countType1;
     s32 padF58;
-    Object_func_8028C934_de *flagged[32];
+    ObjectSceneRegisterActorInSceneLists *flagged[32];
     s32 countFlagged;
-    Object_func_8028C934_de *type5[16];
+    ObjectSceneRegisterActorInSceneLists *type5[16];
     s32 countType5;
-    Object_func_8028C934_de *model64F[32];
+    ObjectSceneRegisterActorInSceneLists *model64F[32];
     s32 count64F;
-    Object_func_8028C934_de *model64D[4];
+    ObjectSceneRegisterActorInSceneLists *model64D[4];
     s32 count64D;
 };
 
@@ -205,7 +205,7 @@ struct ObjectRecAtB0 {
     Table *list;
 };
 
-extern s32 func_8028BCBC_de(ObjectRecAtB0 *arg0, s32 arg1);
+extern s32 Scene_GetTriggerCounterById(ObjectRecAtB0 *arg0, s32 arg1);
 
 
 struct WorldRecAt10B8;
@@ -218,7 +218,7 @@ typedef struct WorldRecAt10B8 WorldRecAt10B8;
 struct WorldRecAt1B6A4;
 typedef struct WorldRecAt1B6A4 WorldRecAt1B6A4;
 
-extern Player *func_8028C834_de(WorldRecAt1B6A4 *world);
+extern Player *Scene_FindNearestObjectToFirstPlayer(WorldRecAt1B6A4 *world);
 
 
 

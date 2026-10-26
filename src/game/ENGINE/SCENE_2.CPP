@@ -111,7 +111,7 @@ extern f32 GameObject_GetActorHeight(void *);
 #define ALIGN8(size) (((size) + 7) & ~7)
 
 /* Whether the instance's bit is set in the current level's instance mask (section 1 of the level's bit sections).
- * The same body as func_8028B988_de; the ROM inlines it here. */
+ * The same body as Scene_TestLevelRecordStateBit; the ROM inlines it here. */
 static inline s32 Engine_TestInstanceBit(Shared_World *world, SimpleInstance *instance) {
     s32 index;
     void *sections;

@@ -126,13 +126,13 @@ extern s32 D_800D297C, D_800E28D0, D_800CD730;
 extern f32 literals_Scene_GetPlatformRoutePoint;
 extern u8 D_00443128[], D_00443104[];
 extern void XPlus_FillMemory(void *, s32, s32);
-extern u8 *func_8028CFA0_de(void *, s32, s32);
+extern u8 *Scene_FindActorDefinition(void *, s32, s32);
 extern void GraphU64_TransformPoint(void *, CVector3 *, CVector3 *);
 extern void func_802466A0_de(u8 *, s32, s32, s32, u8 *, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
 extern void func_8024B2D0_de(u8 *);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(s32);
-extern void func_8028B274_de(void *, u8 *, s32, s32);
+extern void Scene_ChangeInstanceModel(void *, u8 *, s32, s32);
 extern void func_8024B8C4_de(u8 *);
 extern void func_80246E44_de(u8 *);
 extern void Geometry_BeginModelBatch(void);
@@ -140,7 +140,7 @@ extern void func_80249E28_de(void *object, void *camera);
 extern void Geometry_FlushModelBatch(void);
 static inline PreviewWidget *pakLoadModel(PakModelEntry *entry, s32 id, s32 variant) {
     StateRecAt47C *owner = entry->state;
-    PreviewWidget *source = (PreviewWidget *)func_8028CFA0_de(&g_world, id, variant);
+    PreviewWidget *source = (PreviewWidget *)Scene_FindActorDefinition(&g_world, id, variant);
     if (source == 0) {
         owner->active = 0;
         return 0;
@@ -217,7 +217,7 @@ void Pak_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unused
         func_8025476C_de(1);
     }
     if (widget->selection == 0xB) {
-        func_8028B274_de(&g_world, draw, D_800CE430[draw->definition->character], 1);
+        Scene_ChangeInstanceModel(&g_world, draw, D_800CE430[draw->definition->character], 1);
     }
     if (D_800E1E20 != 4) {
         D_800E1E20 = 4;

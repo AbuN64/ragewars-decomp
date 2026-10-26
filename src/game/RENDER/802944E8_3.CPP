@@ -21,7 +21,7 @@ extern s32 D_800E28D0;
 
 extern int Player_GetFirstPlayer(void *arg0);
 
-extern void func_8028D90C_de(void);
+extern void Scene_ResetTransitionViewport(void);
 
 extern void func_80293A20_de(s32 arg0, s32 arg1, s32 arg2);
 
@@ -54,7 +54,7 @@ void func_80294848_de(s32 arg0) {
     D_80142898 = 0;
     Player_GetFirstPlayer(&D_80145040);
     D_800CD784_de = 0;
-    func_8028D90C_de();
+    Scene_ResetTransitionViewport();
     SetN64_ResetPlayerItems(arg0, 0x82);
 }
 
@@ -90,7 +90,7 @@ void func_8029496C_de(s32 arg0) {
     D_80142898 = 0;
     Player_GetFirstPlayer(base - 0x1288);
     D_800CD784_de = 0;
-    func_8028D90C_de();
+    Scene_ResetTransitionViewport();
     SetN64_ResetPlayerItems(arg0, 0x82);
     D_800CD780 = 1;
     D_800CD784_de = 0;

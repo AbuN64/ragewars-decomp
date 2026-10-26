@@ -9,7 +9,7 @@
 #include "RENDER_4/8028FD2C_6.H"
 
 extern s32 D_800CD730;
-extern void *func_8028B2F8_de(Shared_World *, u16 *);
+extern void *Scene_GetModelRecordByIndexPointer(Shared_World *, u16 *);
 
 void Camera_BlendEnvironmentColors(View *self) {
     u8 target[4];
@@ -34,7 +34,7 @@ void Camera_BlendEnvironmentColors(View *self) {
         }
         rec = (void *)(SetN64_GetPackSection(g_world.modelSections, 0) + 8);
     } else {
-        rec = func_8028B2F8_de(&g_world, key);
+        rec = Scene_GetModelRecordByIndexPointer(&g_world, key);
         if (rec == 0) {
             return;
         }

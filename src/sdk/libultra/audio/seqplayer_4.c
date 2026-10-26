@@ -14,7 +14,7 @@ extern char g_audioSeqplayerText;
 
 
 
-void *func_802B16E0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+void *func_802B16E0_de(void *seqPlayer, s32 noteKey, s32 noteVelocity, s32 channelNumber) {
     s32 high;
     s32 low;
     s32 middle;
@@ -24,7 +24,7 @@ void *func_802B16E0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     ALSound_s *entry;
     u8 *bounds;
 
-    table = ((ALSeqPlayer *)arg0)->chanState[arg3 & 0xFF].instrument;
+    table = ((ALSeqPlayer *)seqPlayer)->chanState[channelNumber & 0xFF].instrument;
     high = table->soundCount;
     low = 1;
     if (table == 0) {
@@ -32,8 +32,8 @@ void *func_802B16E0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
 
     if (high > 0) {
-        x = arg1;
-        y = arg2;
+        x = noteKey;
+        y = noteVelocity;
         do {
             middle = (low + high) / 2;
             entry = table->soundArray[middle - 1];

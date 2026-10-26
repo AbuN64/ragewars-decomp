@@ -9,7 +9,7 @@
 
 extern struct CourseOptionsScreen *D_800E39C0;
 
-s32 func_8041DFC0_us_rev1(void *root) {
+s32 Frontend_CreateCourseOptionsMenu(void *root) {
     func_8041F2A0_Item *item;
     s32 row;
 

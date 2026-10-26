@@ -23,7 +23,7 @@ extern void func_80439B5C_de(char *model, s32 arg1, CVector3 scale, CVector3 pos
 extern void func_80439BE0_de(char *model, CVector3 rotation);
 extern void func_80439C30_de(char *model, CVector3 offset);
 
-s32 func_8041DBCC_de(void) {
+s32 Frontend_PositionSelectionMenuModel(void) {
     CVector3 scale;
     CVector3 position;
     CVector3 rotation;
@@ -79,24 +79,24 @@ s32 Frontend_DrawMenuBlockModel(void *window, void *item, s32 event) {
 
 /* On event 3 with value 0, calls MarkMenuEventHandled, hands func_8041DB30_de the cursor word the hub
    names unk268 at +0x10C of the menu block D_800E3590 points to, calls Frontend_ShowUnlockedEntries with 0x6E,
-   func_8041D6A8_de and func_8041D960_de, and clears the hub's focus word at +0x0EC. Returns zero. */
+   Frontend_RefreshProfileStatistics and Frontend_RefreshUnlockedFocusLabel, and clears the hub's focus word at +0x0EC. Returns zero. */
 
 extern void MarkMenuEventHandled();
 
 
-s32 func_8041DDF4_de(void *first, void *second, u32 event, s32 value) {
+s32 Frontend_HandleNextProfileEvent(void *first, void *second, u32 event, s32 value) {
     if ((event >> 16) == 3 && value == 0) {
         MarkMenuEventHandled();
         Frontend_AdvanceActiveSlot(&D_800E3590->unk268);
         Frontend_ShowUnlockedEntries(0x6E);
-        func_8041D6A8_de();
-        func_8041D960_de();
+        Frontend_RefreshProfileStatistics();
+        Frontend_RefreshUnlockedFocusLabel();
         D_800E3590->focus = 0;
     }
     return 0;
 }
 
-s32 func_8041DE5C_de(void) {
+s32 Frontend_BeginSelectionMenuExit(void) {
     MarkMenuEventHandled();
     D_800E3590->unk216 = 5;
     D_800E3590->unk220 = 4;
@@ -105,7 +105,7 @@ s32 func_8041DE5C_de(void) {
 
 /* Calls MarkMenuEventHandled with the arguments it was given and returns zero. */
 
-s32 func_8041DE94_de(void) {
+s32 Frontend_ConsumeSelectionMenuEvent(void) {
     MarkMenuEventHandled();
     return 0;
 }
@@ -118,7 +118,7 @@ extern s32 D_800E3724;
 extern s32 D_800E3728;
 extern Handler802A2B50 D_800E372C;
 
-s32 func_8041DEB4_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchSelectionMenuEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;

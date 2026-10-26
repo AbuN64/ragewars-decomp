@@ -6,11 +6,11 @@
 extern float D_800C52F8_de;
 
 
-struct State_func_8028D67C_de;
-typedef struct State_func_8028D67C_de State_func_8028D67C_de;
+struct StateSceneUpdateStaticEventInstances;
+typedef struct StateSceneUpdateStaticEventInstances StateSceneUpdateStaticEventInstances;
 
-struct State_func_8028D67C_de;
-struct State_func_8028D67C_de {
+struct StateSceneUpdateStaticEventInstances;
+struct StateSceneUpdateStaticEventInstances {
     char pad[0xB4C];
     s32 values[64];
     s32 unkC4C;
@@ -66,8 +66,8 @@ struct RecordRecAtE4;
 
 
 
-struct Owner_func_8028D888_de;
-typedef struct Owner_func_8028D888_de Owner_func_8028D888_de;
+struct OwnerSceneUnlockActiveSectionResources;
+typedef struct OwnerSceneUnlockActiveSectionResources OwnerSceneUnlockActiveSectionResources;
 
 
 
@@ -103,7 +103,7 @@ typedef struct ObjRecAt78V1 ObjRecAt78V1;
 
 extern float D_800C5300_de;
 
-struct Owner_func_8028D888_de;
+struct OwnerSceneUnlockActiveSectionResources;
 
 
 

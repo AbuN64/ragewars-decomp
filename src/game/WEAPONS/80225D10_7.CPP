@@ -22,7 +22,7 @@
    colours apply to the player, else the model's own at 0xE), and by the player's tint mode at 0x1238
    sets a colour override (flag D_800D15E0, colour D_800D15E4) that fades with the tint time at 0x1230:
    mode 0 draws through func_8024A3B0_de in yellow fading from full alpha and then draws the second pass
-   through func_8026CBA4_de with 255 less twice that alpha, mode 1 draws only the second pass in fading
+   through Geometry_DrawOwnerFilteredPass with 255 less twice that alpha, mode 1 draws only the second pass in fading
    yellow starting at alpha 128, and mode 3 draws through func_8024A3B0_de with an alpha rising with the
    time; the override is switched off afterwards. */
 extern Gfx *g_displayListCursor;
@@ -56,7 +56,7 @@ void Player_DrawTintedPlayer(LevelActor *actor, s32 arg1, Draw *draw) {
                 colour->w = ((255.0f - player->tintTime * 8.533334f) < 0.0f ? 0.0f : (255.0f - player->tintTime * 8.533334f));
                 func_8024A3B0_de(actor, player, arg1, draw);
                 colour->w = ((255.0f - colour->w * 2.0f) < 0.0f ? 0.0f : (255.0f - colour->w * 2.0f));
-                func_8026CBA4_de(draw->model, player, actor->fieldB4, 1,
+                Geometry_DrawOwnerFilteredPass(draw->model, player, actor->fieldB4, 1,
                               &actor->lighting[D_800D297C], 0, -1);
             } else if (player->tintMode == 1) {
                 CQuatern *colour;
@@ -67,7 +67,7 @@ void Player_DrawTintedPlayer(LevelActor *actor, s32 arg1, Draw *draw) {
                 colour->y = ((255.0f - player->tintTime * 17.0f) < 0.0f ? 0.0f : (255.0f - player->tintTime * 17.0f));
                 colour->z = 0.0f;
                 colour->w = ((128.0f - player->tintTime * 8.533334f) < 0.0f ? 0.0f : (128.0f - player->tintTime * 8.533334f));
-                func_8026CBA4_de(draw->model, player, actor->fieldB4, 1,
+                Geometry_DrawOwnerFilteredPass(draw->model, player, actor->fieldB4, 1,
                               &actor->lighting[D_800D297C], 0, -1);
             } else if (player->tintMode == 3) {
                 D_800D15E0 = 1;
@@ -178,7 +178,7 @@ void func_80229468_de(Inventory *inventory, Receiver *receiver) {
    is built and shown through func_8022B75C_de. */
 
 extern void XPlus_CopyString(char *, char *);
-extern void func_802A02E8_de(char *, char *);
+extern void XPlus_AppendString(char *, char *);
 extern char *Weapon_GetIndexedTableValue(s32);
 extern void func_8022B75C_de(SharedPlayer *, char *, f32);
 
@@ -211,12 +211,12 @@ void Player_GiveAmmoWithMessage(SharedPlayer *player, s32 type, s32 amount) {
 
     if (amount != 0) {
         player->views5E8.view5F4_12.ammo[type] = ((player->views5E8.view5F4_12.ammo[type] + amount) < (max_ammo(player, type)) ? (player->views5E8.view5F4_12.ammo[type] + amount) : (max_ammo(player, type)));
-        func_802A066C_de(amount, number);
+        XPlus_FormatDecimalInteger(amount, number);
         XPlus_CopyString(message, number);
-        func_802A02E8_de(message, D_800C2C50_de);
-        func_802A02E8_de(message, Weapon_GetIndexedTableValue(type));
+        XPlus_AppendString(message, D_800C2C50_de);
+        XPlus_AppendString(message, Weapon_GetIndexedTableValue(type));
         if (amount >= 2) {
-            func_802A02E8_de(message, D_800C2C54_de);
+            XPlus_AppendString(message, D_800C2C54_de);
         }
         func_8022B75C_de(player, message, 1.0f);
     }

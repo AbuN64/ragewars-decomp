@@ -26,20 +26,20 @@ extern s32 D_800CD3F4;
 
 struct Shared_World;
 extern void Scene_UpdateSelectionTransition(struct Shared_World *);
-extern void func_8028D64C_de(void *);
+extern void Scene_ClearSceneObjectCounts(void *);
 
 struct Node80253610;
 extern void Cache_MarkResourceInUse(s32, struct Node80253610 *);
 extern void func_802A56FC_de(void *);
 struct CPlayerPool_t;
 extern void func_8022A170_de(struct CPlayerPool_t *);
-extern void func_8028D61C_de(void *);
+extern void Scene_CollectVisibleEffects(void *);
 extern void func_802A5680_de(void *);
 extern void Scene_UpdateActorsAndRoundState(void *);
-extern void func_8028C60C_de(void *);
+extern void Scene_UpdateTriggerTimers(void *);
 extern void Particle_UpdateSystem(void *);
 extern void Camera_DrawActiveViews(void *, void *);
-extern void func_8028D67C_de(void *);
-extern void func_8028D888_de(void *);
-extern void func_8028D108_de(Shared_World *);
+extern void Scene_UpdateStaticEventInstances(void *);
+extern void Scene_UnlockActiveSectionResources(void *);
+extern void Scene_DrawTransitionColorOverlay(Shared_World *);
 #endif

@@ -53,7 +53,7 @@ struct Player {
     u8 pad10F[0x61];
     u8 motion[0x170]; /* 0x170 */
     u8 pad2E0[8];
-    struct Object_func_8028B274_de weaponModel; /* 0x2E8 */
+    struct ObjectSceneChangeInstanceModel weaponModel; /* 0x2E8 */
     u8 pad3CE[0xB6];
     struct AiBehaviourTable *weaponAnimationTable; /* 0x484 */
     u8 pad488[0xF0];

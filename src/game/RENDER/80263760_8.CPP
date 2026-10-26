@@ -47,7 +47,7 @@ extern void *Player_GetFirstPlayer(void *);
 
 /* Restores every actor from the global replay table: copies its 0x70-byte block back to 0x5E0 and, when
  * the table's mode is 1, also restores its position, its value at 0x6C and its identifier resolved from the
- * saved handle through func_8028B394_de. Adapted from the snapshot writer Control_SaveActorSnapshot, reading both tables
+ * saved handle through Scene_GetModelSectionTwoRecord. Adapted from the snapshot writer Control_SaveActorSnapshot, reading both tables
  * through local pointers and re-taking the actor list address in the loop increment. */
 
 
@@ -60,7 +60,7 @@ extern void *Player_GetFirstPlayer(void *);
 
 
 
-extern s32 func_8028B350_de(Shared_World *table, s32 id);
+extern s32 Scene_GetModelSectionTwoIndex(Shared_World *table, s32 id);
 
 
 
@@ -255,7 +255,7 @@ void Control_RestoreActorSnapshot(void) {
         if (snapshot->mode == 1) {
             actor->position = snapshot->positions[i];
             actor->field6C = snapshot->values[i];
-            actor->id = func_8028B394_de(&g_world, snapshot->handles[i]);
+            actor->id = Scene_GetModelSectionTwoRecord(&g_world, snapshot->handles[i]);
         }
     }
 }
@@ -285,7 +285,7 @@ void Control_SaveActorSnapshot(void) {
         snapshot->blocks[i] = actor->block;
         snapshot->positions[i] = actor->position;
         snapshot->values[i] = actor->field6C;
-        snapshot->handles[i] = func_8028B350_de(&g_world, actor->id);
+        snapshot->handles[i] = Scene_GetModelSectionTwoIndex(&g_world, actor->id);
         list = (ActorList *)&D_80145040;
     }
 }

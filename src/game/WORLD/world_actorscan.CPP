@@ -85,7 +85,7 @@ void func_8028E068_de(Shared_World *world) {
 
 extern LevelActor *D_800F3CF8[4];
 extern LevelActor *D_800F3D08;
-extern s32 func_8028B25C_de(Shared_World *world, s32 id);
+extern s32 Scene_GetModelIdAtIndex(Shared_World *world, s32 id);
 void Scene_FindTrackedActors(Shared_World *world) {
     LevelActor *actor = world->actors;
     s32 i;
@@ -96,7 +96,7 @@ void Scene_FindTrackedActors(Shared_World *world) {
     for (i = 0; i < world->actorCount; actor++, i++) {
         struct Def *def = (struct Def *)actor->definition;
         if (def->type == 3) {
-            if (func_8028B25C_de(&g_world, def->id) == 0xBD7) {
+            if (Scene_GetModelIdAtIndex(&g_world, def->id) == 0xBD7) {
                 D_800F3D08 = actor;
                 return;
             }

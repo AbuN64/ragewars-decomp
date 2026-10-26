@@ -53,7 +53,7 @@ extern void **Cache_AllocateResource(s32, s32, s32, char *);
 
 
 
-extern PreviewWidget *func_8028CFA0_de(Shared_World *,int,int);
+extern PreviewWidget *Scene_FindActorDefinition(Shared_World *,int,int);
 
 void *func_80441EB0_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V1 *params) {
     struct Dialog *list = params->list;
@@ -165,7 +165,7 @@ func_8043F114_de
 
 PreviewWidget *Pak_SelectPreviewModel(WidgetRecAt20 *widget,int selection,int kind) {
  StateRecAt47C *state=widget->state;
- PreviewWidget *model=func_8028CFA0_de(&g_world,selection,kind);
+ PreviewWidget *model=Scene_FindActorDefinition(&g_world,selection,kind);
  if(!model){state->active=0;return 0;}
  state->selection=selection;
  state->active=1;

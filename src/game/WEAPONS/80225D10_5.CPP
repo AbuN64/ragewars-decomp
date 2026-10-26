@@ -116,9 +116,9 @@ extern void Cache_UnlockResource(s32 arg0, s32 arg1);
 
 extern void *Sky_FindScreenMessage(s32);
 
-extern s32 func_8028B21C_de(struct Shared_World *, s32);
+extern s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 
-extern void *func_8028C198_de(char *, s32);
+extern void *Scene_GetIndexedModelResource(char *, s32);
 
 extern void Geometry_QueueDirectModel(void *, void *, char *, s32, s32);
 
@@ -419,12 +419,12 @@ void func_80228958_de(ObjRecAt20V2 *game, s32 view) {
         }
         if (zoomed) {
             if (((ObjectLinks16E4 *)(player))->unk_120C != 0) {
-                model = func_8028B21C_de(&g_world, 0xC84);
+                model = Scene_FindModelIdIndex(&g_world, 0xC84);
             } else {
-                model = func_8028B21C_de(&g_world, 0xC85);
+                model = Scene_FindModelIdIndex(&g_world, 0xC85);
             }
             if (model != -1) {
-                Geometry_QueueDirectModel(func_8028C198_de(&g_world, model), player + 0x1600, &D_800D0EF8, 0, -1);
+                Geometry_QueueDirectModel(Scene_GetIndexedModelResource(&g_world, model), player + 0x1600, &D_800D0EF8, 0, -1);
             }
         }
         if (((ObjectLinks16E4 *)(player))->unk_5DC != 0 && ((ObjectLinks16E4 *)(player))->unk_1210 != 0 && ((ObjectLinks16E4 *)(player))->unk_5DC == view) {

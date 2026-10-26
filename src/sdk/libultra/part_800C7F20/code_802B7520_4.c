@@ -5,8 +5,8 @@
 #include "COMMON/PARAMSRECAT8V3.H"
 #include "TYPES.H"
 
-s32 func_802B2620_de(void *arg0) {
-    return (((struct ObjRecAt28V2 *) ((s8 *) ((((struct ObjRecAt40V3 *) ((s8 *) arg0))->unk3C * 0x30) + ((struct ObjRecAt40V3 *) ((s8 *) arg0))->unk40)))->unk28);
+s32 func_802B2620_de(void *soundPlayer) {
+    return (((struct ObjRecAt28V2 *) ((s8 *) ((((struct ObjRecAt40V3 *) ((s8 *) soundPlayer))->unk3C * 0x30) + ((struct ObjRecAt40V3 *) ((s8 *) soundPlayer))->unk40)))->unk28);
 }
 
 #if defined(VERSION_US)

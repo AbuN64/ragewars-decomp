@@ -154,7 +154,7 @@ struct Shared_World;
 struct CVector3_t;
 extern s32 Scene_FindFloorPolygon(struct Shared_World *, struct CVector3_t *);
 
-extern s32 func_8028B394_de(void *arg0, s32 arg1);
+extern s32 Scene_GetModelSectionTwoRecord(void *arg0, s32 arg1);
 
 extern void func_8028EDA0_de(void *arg0);
 
@@ -192,7 +192,7 @@ extern void XMath_EvaluateCosine(f32 arg0);
 
 extern f32 XMath_EvaluateArcSine(f32 x);
 
-extern s32 func_802A05D0_de(u8 *s);
+extern s32 XPlus_ParseDecimalInteger(u8 *s);
 
 extern void func_802A1918_de(int *arg0, int *arg1);
 

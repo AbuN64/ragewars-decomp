@@ -19,7 +19,7 @@ extern f32 D_800C1D34_de;
 
 f32 GraphU64_GetPointDistance(void *arg0, void *arg1);
 
-s32 func_8028B25C_de(void *arg0, s16 arg1);
+s32 Scene_GetModelIdAtIndex(void *arg0, s16 arg1);
 
 
 
@@ -75,7 +75,7 @@ void Nav_LinkNavigationObjects(Shared_Arg0 *arg0)
               {
                 goto advance;
               }
-              var_v0 = func_8028B25C_de(ww, temp_s0->unk18->unk28);
+              var_v0 = Scene_GetModelIdAtIndex(ww, temp_s0->unk18->unk28);
               compare_id = navigation_point_object_id(temp_s1);
               compare:
               if (var_v0 == compare_id)

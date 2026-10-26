@@ -12,7 +12,7 @@
 
 extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
-void func_8028B670_de(void *arg0, s32 index, s32 arg2, s32 arg3) {
+void Scene_SetLevelActorStateBit(void *arg0, s32 index, s32 arg2, s32 arg3) {
     void *entry;
     struct Def *cond;
     void *field80;
@@ -57,7 +57,7 @@ void func_8028B670_de(void *arg0, s32 index, s32 arg2, s32 arg3) {
     base2[idx2 >> 3] &= ~mask;
 }
 
-void func_8028B7B4_de(Field_void_80 *arg0, s32 index, s32 arg2, s32 arg3) {
+void Scene_SetRecordBitForLevel(Field_void_80 *arg0, s32 index, s32 arg2, s32 arg3) {
     void *table;
     u8 *base1;
     u8 *base2;
@@ -86,7 +86,7 @@ void func_8028B7B4_de(Field_void_80 *arg0, s32 index, s32 arg2, s32 arg3) {
     base2[idx2 >> 3] &= ~mask;
 }
 
-void func_8028B898_de(void *arg0, struct LevelBitRecord *levelBitRecord, s32 arg2) {
+void Scene_SetLevelRecordStateBit(void *arg0, struct LevelBitRecord *levelBitRecord, s32 arg2) {
     s32 bitIndex;
     void *field80;
     s32 field1B40C;
@@ -121,7 +121,7 @@ void func_8028B898_de(void *arg0, struct LevelBitRecord *levelBitRecord, s32 arg
     base2[idx2 >> 3] &= ~mask;
 }
 
-s32 func_8028B988_de(void *arg0, struct LevelBitRecord *levelBitRecord) {
+s32 Scene_TestLevelRecordStateBit(void *arg0, struct LevelBitRecord *levelBitRecord) {
     s32 bitIndex;
     void *field80;
     s32 field1B40C;
@@ -143,7 +143,7 @@ s32 func_8028B988_de(void *arg0, struct LevelBitRecord *levelBitRecord) {
     return (temp_a0[bitIndex >> 3] & mask) != 0;
 }
 
-void func_8028BA38_de(Field_void_80 *arg0, s32 index, s32 arg2, s32 arg3) {
+void Scene_SetTriggerBitForLevel(Field_void_80 *arg0, s32 index, s32 arg2, s32 arg3) {
     void *table;
     u8 *base1;
     u8 *base2;
@@ -172,7 +172,7 @@ void func_8028BA38_de(Field_void_80 *arg0, s32 index, s32 arg2, s32 arg3) {
     base2[idx2 >> 3] &= ~mask;
 }
 
-void func_8028BB1C_de(void *world, void *trigger, s32 arg2) {
+void Scene_SetTriggerStateBit(void *world, void *trigger, s32 arg2) {
     struct ItemRecAt12 *item = trigger;
     s32 bitIndex;
     void *field80;
@@ -208,7 +208,7 @@ void func_8028BB1C_de(void *world, void *trigger, s32 arg2) {
     base2[idx2 >> 3] &= ~mask;
 }
 
-s32 func_8028BC0C_de(Shared_World *world, void *trigger) {
+s32 Scene_TestTriggerStateBit(Shared_World *world, void *trigger) {
     s32 bitIndex;
     void *field80;
     s32 field1B40C;
@@ -231,7 +231,7 @@ s32 func_8028BC0C_de(Shared_World *world, void *trigger) {
 }
 
 /* Finds an identifier in the object's list and returns its mapped byte from the resource record, or -1 when absent. */
-s32 func_8028BCBC_de(ObjectRecAtB0 *arg0, s32 arg1) {
+s32 Scene_GetTriggerCounterById(ObjectRecAtB0 *arg0, s32 arg1) {
     s32 i;
     void *record;
     Table *list = arg0->list;

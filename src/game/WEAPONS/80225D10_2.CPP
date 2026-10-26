@@ -153,7 +153,7 @@ typedef struct {
 typedef struct { s32 value; u8 pad4[0x18C]; } PlayerBonus;
 struct World;
 struct Shared_World;
-extern void *func_8028CFA0_de(struct Shared_World *, s32, s32);
+extern void *Scene_FindActorDefinition(struct Shared_World *, s32, s32);
 
 /* D_801468F4 and D_80146938 are game option words, read through an option view. */
 typedef struct { s32 enabled; } GameOption;
@@ -161,7 +161,7 @@ static inline s32 optionEnabled(GameOption *option) {
     return option->enabled;
 }
 static inline ActorTemplate *findModel(s32 kind, s32 id) {
-    return func_8028CFA0_de(&g_world, kind, id);
+    return Scene_FindActorDefinition(&g_world, kind, id);
 }
 static inline s32 startHealth(BonusPlayer *player) {
     s32 health;

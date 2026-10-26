@@ -14,7 +14,7 @@
 #include "COMMON/GAME_SESSION.H"
 
 extern void func_80293A20_de(s32 arg0, s32 arg1, s32 arg2);
-extern void func_8028D90C_de(void);
+extern void Scene_ResetTransitionViewport(void);
 
 extern void func_80293B28_de(void *session);
 
@@ -43,7 +43,7 @@ void func_802944F4_de(s32 session) {
 void SetN64_DrawMode11Session(void *session) { func_80293B28_de(session); }
 
 void func_80294530_de(s32 arg0) {
-    func_8028D90C_de();
+    Scene_ResetTransitionViewport();
     ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(arg0, 0x6F);
 }
 
@@ -54,7 +54,7 @@ void func_80294560_de(s32 session) {
 void SetN64_DrawMode10Session(void *session) { func_80293B28_de(session); }
 
 void func_8029459C_de(int arg0) {
-    func_8028D90C_de();
+    Scene_ResetTransitionViewport();
     SetN64_ResetPlayerItems(arg0, ((ObjRecAt26DD8 *)arg0)->unk26DD8 + 0x259);
 }
 

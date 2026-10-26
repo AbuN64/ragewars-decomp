@@ -17,7 +17,7 @@ extern s32 func_802833D0_de(void *host);
 
 extern s32 AnimPool_ReleaseSceneEffect(void *effect);
 
-/* Forwards a position read from an object to func_8028FFD0_de on the global D_80131600 with a zero offset and a zero trailing weight, returning its result. Adapted from func_8028BFD8_de with the base argument, the source vector, the trailing arguments passed as a by-value struct and the return value changed. */
+/* Forwards a position read from an object to func_8028FFD0_de on the global D_80131600 with a zero offset and a zero trailing weight, returning its result. Adapted from Scene_SpawnUnrotatedEffect with the base argument, the source vector, the trailing arguments passed as a by-value struct and the return value changed. */
 
 
 

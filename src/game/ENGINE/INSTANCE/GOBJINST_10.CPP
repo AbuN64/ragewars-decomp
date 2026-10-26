@@ -170,7 +170,7 @@ void func_8024B3A8_de(void *actorStorage, InputRecAt27 *placement, s32 mode, s32
     if (placement->resource20 == 0xFFFF) {
         resource1 = 0;
     } else {
-        resource1 = func_8028B394_de(&g_world, placement->resource20);
+        resource1 = Scene_GetModelSectionTwoRecord(&g_world, placement->resource20);
     }
     amountRaw = placement->amount24;
     fzero = 0.0f;

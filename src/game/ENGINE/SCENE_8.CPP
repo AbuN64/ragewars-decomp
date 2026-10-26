@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-void func_8028BD4C_de(void *world, s32 arg1) {
+void Scene_DecrementTriggerCounter(void *world, s32 arg1) {
     u8 *temp_v0_2;
     void *temp_v0;
     temp_v0 = SetN64_GetPackSection((((struct Field_void_80 *) ((s8 *) world))->value), 1);

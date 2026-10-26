@@ -202,7 +202,7 @@ extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
 struct SceneRecAt95A8;
 extern void func_802A5D38_de(struct SceneRecAt95A8 *, s32);
 
-extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
+extern void Scene_SetLevelActorStateBit(void *a, unsigned short b, unsigned short c, int d);
 
 /* Supplies the nonnegative blend remaining after the incoming strength is
  * scaled, then applies the actor animation using the original lookup. */
@@ -361,14 +361,14 @@ void Action_RequestStateOn(void *a, void *b) {
     Nav_RequestActorState(a, b, 0x1); }
 
 void Action_EnableTrigger(Trigger *trigger) {
-    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 1);
+    Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 1);
 }
 
 void Action_RequestStateOff(void *a, void *b) {
     Nav_RequestActorState(a, b, 0x0); }
 
 void Action_DisableTrigger(Trigger *trigger) {
-    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 0);
+    Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 0);
 }
 
 void Action_DrawFadedActor(Actor_func_8024A1D0_de *actor, struct InputRecAt40 *input, Lookup *lookup) {

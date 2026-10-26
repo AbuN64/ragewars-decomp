@@ -35,7 +35,7 @@ extern float D_800DDF58;
 extern void PitchMatrixLocal(Matrix *,f32); extern void YawMatrixLocal(Matrix *,f32); extern void RollMatrixLocal(Matrix *,f32);
 extern void ScaleMatrixLocal(Matrix *,f32,f32,f32); extern void SwapMatrixUpForward(Matrix *);
 extern s32 func_802A1934_de(void); extern void GraphU64_ConvertMatrixToFixed(Matrix *,void *);
-extern s32 func_8028C198_de(void *,s32);
+extern s32 Scene_GetIndexedModelResource(void *,s32);
 extern void Geometry_QueueDirectModel(s32,void *,void *,s32,s32);
 void func_804399D0(MenuModelItem *item) {
  Matrix matrix;
@@ -78,7 +78,7 @@ void func_804399D0(MenuModelItem *item) {
   scale.y=item->scale.y*(D_80141008[0].height/(f32)*(&D_800E28D0+1));
   ScaleMatrixLocal(&matrix,scale.x,scale.y,scale.z);SwapMatrixUpForward(&matrix);
   GraphU64_ConvertMatrixToFixed(&matrix,(char *)item+((D_800D297C<<6)+0x38));
-  model=func_8028C198_de(&g_world,item->model);Geometry_BeginModelBatch();
+  model=Scene_GetIndexedModelResource(&g_world,item->model);Geometry_BeginModelBatch();
   Geometry_QueueDirectModel(model,(char *)item+((D_800D297C<<6)+0x38),&D_800D0EF8,0,item->flags);
   Geometry_FlushModelBatch();
  }

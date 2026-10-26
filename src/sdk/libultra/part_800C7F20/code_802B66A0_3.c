@@ -34,18 +34,18 @@ s16 func_802B1814_de(ALVoiceState *vs, ALSeqPlayer *seqp)
 }
 
 /** Clamp (record - arg1) at a lower bound of 0x3E8 for negative results. */
-int __vsDelta(void *arg0, int arg1) {
-    struct ALVoiceState *voice = arg0;
-    int v = voice->envEndTime - arg1;
+int __vsDelta(void *voiceObject, int currentTime) {
+    struct ALVoiceState *voice = voiceObject;
+    int v = voice->envEndTime - currentTime;
     if (v >= 0) {
         return v;
     }
     return 0x3E8;
 }
 
-s32 func_802B18A4_de(void *arg0, void *arg1) {
-    ALVoiceState *voice = arg0;
-    ALSeqPlayer *player = arg1;
+s32 func_802B18A4_de(void *voiceObject, void *playerObject) {
+    ALVoiceState *voice = voiceObject;
+    ALSeqPlayer *player = playerObject;
     s32 pan;
     char center = 0x40;
     pan = player->chanState[voice->channel].pan + (voice->sound->samplePan - center);
@@ -54,33 +54,33 @@ s32 func_802B18A4_de(void *arg0, void *arg1) {
     return pan & 0xFF;
 }
 
-void func_802B18E4_de(void *arg0, void *arg1) {
+void func_802B18E4_de(void *seqPlayer, void *instrumentBank) {
     s32 i;
     ALBank_s *p;
     void *found;
 
-    p = arg1;
+    p = instrumentBank;
     i = 0;
     do {
         found = p->instArray[i];
         i++;
     } while (found == 0);
     i = 0;
-    if (((ALSeqPlayer *)arg0)->maxChannels != 0) {
+    if (((ALSeqPlayer *)seqPlayer)->maxChannels != 0) {
         do {
-            func_802B1A40_de(arg0, i);
-            __setInstChanState(arg0, found, i);
+            func_802B1A40_de(seqPlayer, i);
+            __setInstChanState(seqPlayer, found, i);
             i += 1;
-        } while (i < ((ALSeqPlayer *)arg0)->maxChannels);
+        } while (i < ((ALSeqPlayer *)seqPlayer)->maxChannels);
     }
-    if (((ALBank_s *)arg1)->percussion != 0) {
-        func_802B1A40_de(arg0, i);
-        __setInstChanState(arg0, ((ALBank_s *)arg1)->percussion, 9);
+    if (((ALBank_s *)instrumentBank)->percussion != 0) {
+        func_802B1A40_de(seqPlayer, i);
+        __setInstChanState(seqPlayer, ((ALBank_s *)instrumentBank)->percussion, 9);
     }
 }
 
-void func_802B1990_de(void *arg0) {
-    ALSeqPlayer *player = arg0;
+void func_802B1990_de(void *playerObject) {
+    ALSeqPlayer *player = playerObject;
     s32 i;
     s32 off;
     s32 c40, c7f, c5, cc8;
@@ -110,8 +110,8 @@ void func_802B1990_de(void *arg0) {
 }
 
 /* Initialize one channel of the sequence player's channel table. */
-void func_802B1A40_de(void *arg0, s32 index) {
-    ALSeqPlayer *player = arg0;
+void func_802B1A40_de(void *playerObject, s32 index) {
+    ALSeqPlayer *player = playerObject;
 
     player->chanState[index].fxId = 0;
     player->chanState[index].fxmix = 0;

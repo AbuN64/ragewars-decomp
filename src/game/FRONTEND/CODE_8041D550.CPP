@@ -12,7 +12,7 @@ extern int func_8025477C_de(void);
 extern PlayerRecord D_800FEB4A[];
 extern s32 Defs_TestBit(void *bits, s32 bit);
 
-static __inline__ Menu_func_8041D960_de *screen32(void) {
+static __inline__ MenuFrontendRefreshUnlockedFocusLabel *screen32(void) {
     void *block = D_800E3590;
     return block;
 }
@@ -105,7 +105,7 @@ void Frontend_UpdateFocusCaption(void) {
    screen's text buffers the record's counters at 0x70, 0x6C and 0x74, the value func_80426004_de
    reports and the byte at 0x17 for items 0x1FD, 0x1F4, 0x1F6, 0x1F9 and 0x1FA, making each item
    visible through func_8040E8D8_de. */
-void func_8041D6A8_de(void) {
+void Frontend_RefreshProfileStatistics(void) {
     func_8041F2A0_Item *item;
     s32 score;
 
@@ -141,22 +141,22 @@ void func_8041D6A8_de(void) {
 /* Sets the label text for the focused node: the text of its entry in the 50-entry id table when the
    current player's unlock bit for that entry is set, otherwise the default text; the European
    cartridges hold each entry's text per language and pick the current language's. */
-void func_8041D960_de(void) {
+void Frontend_RefreshUnlockedFocusLabel(void) {
     s32 i;
-    if (((Menu_func_8041D960_de *) D_800E3590)->focus == 0) {
-        ((Menu_func_8041D960_de *) D_800E3590)->label->text = D_800DD4C8 + 4;
+    if (((MenuFrontendRefreshUnlockedFocusLabel *) D_800E3590)->focus == 0) {
+        ((MenuFrontendRefreshUnlockedFocusLabel *) D_800E3590)->label->text = D_800DD4C8 + 4;
         return;
     }
     for (i = 0; i < 50; i++) {
-        if (D_800DF544[i].id == ((Menu_func_8041D960_de *) D_800E3590)->focus->unkC) {
-            if (Defs_TestBit(&D_800FEB4A[((Menu_func_8041D960_de *) D_800E3590)->player], i) == 1) {
+        if (D_800DF544[i].id == ((MenuFrontendRefreshUnlockedFocusLabel *) D_800E3590)->focus->unkC) {
+            if (Defs_TestBit(&D_800FEB4A[((MenuFrontendRefreshUnlockedFocusLabel *) D_800E3590)->player], i) == 1) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-                ((Menu_func_8041D960_de *) D_800E3590)->label->text = D_800DF544[i].text[0];
+                ((MenuFrontendRefreshUnlockedFocusLabel *) D_800E3590)->label->text = D_800DF544[i].text[0];
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-                ((Menu_func_8041D960_de *) D_800E3590)->label->text = D_800DF544[i].text[D_80145088.settings.language];
+                ((MenuFrontendRefreshUnlockedFocusLabel *) D_800E3590)->label->text = D_800DF544[i].text[D_80145088.settings.language];
 #endif
             } else {
-                ((Menu_func_8041D960_de *) D_800E3590)->label->text = D_800DD4C8 + 4;
+                ((MenuFrontendRefreshUnlockedFocusLabel *) D_800E3590)->label->text = D_800DD4C8 + 4;
             }
             return;
         }

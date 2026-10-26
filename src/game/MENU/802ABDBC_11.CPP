@@ -135,7 +135,7 @@ void *func_802ACA20_de(s32 arg0) {
 extern int InstHdr_GetActorType(void *arg0);
 extern s32 func_802AB6EC_de(void *arg0, void *arg1, s32 arg2);
 extern void func_80290548_de(void *arg0);
-extern void func_8028B898_de(void *arg0, void *arg1, s32 arg2);
+extern void Scene_SetLevelRecordStateBit(void *arg0, void *arg1, s32 arg2);
 extern void func_80278E04_de(s32 arg0, s32 arg1, void *arg2);
 
 
@@ -160,7 +160,7 @@ block_4:
                 func_80290548_de(arg1);
                 return;
             }
-            func_8028B898_de(&g_world, arg1, 1);
+            Scene_SetLevelRecordStateBit(&g_world, arg1, 1);
             func_80278E04_de(((struct Shared_ProjectileView *)(arg1))->source, 0x400, arg0);
         }
     }

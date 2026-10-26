@@ -110,9 +110,9 @@ extern u8 D_800FEAD8[];
 
 extern char D_0022ECCC;
 
-extern void *func_8028B2F8_de(Shared_World *, u16 *);
+extern void *Scene_GetModelRecordByIndexPointer(Shared_World *, u16 *);
 extern s32 func_80245618_de(s32 arg0, void *arg1, VoidCallback arg2);
-extern void *func_8028CFA0_de(Shared_World *arg0, s32 arg1, s32 arg2);
+extern void *Scene_FindActorDefinition(Shared_World *arg0, s32 arg1, s32 arg2);
 
 
 
@@ -130,7 +130,7 @@ void func_80225B98_de(ObjectLinks854 *playerActor, void *arg1, s32 sequenceType)
     resource_flags = 0;
 
     if (playerActor->unk_14 != 0) {
-        resource = func_8028B2F8_de(&g_world, playerActor->unk_14);
+        resource = Scene_GetModelRecordByIndexPointer(&g_world, playerActor->unk_14);
         if (resource != 0) {
             resource_flags = ((ObjectState108 *)(resource))->resourceFlagBits;
         }
@@ -180,7 +180,7 @@ void func_80225B98_de(ObjectLinks854 *playerActor, void *arg1, s32 sequenceType)
         func_80245618_de(sequenceType, 0, (VoidCallback)&D_0022ECCC);
     }
 
-    resource = func_8028CFA0_de(&g_world, -1, 0xC45);
+    resource = Scene_FindActorDefinition(&g_world, -1, 0xC45);
     if (resource != 0) {
         playerActor->unk_50 = ((ObjectState108 *)(resource))->unk_FC;
         playerActor->unk_54 = ((ObjectState108 *)(resource))->unk_100;

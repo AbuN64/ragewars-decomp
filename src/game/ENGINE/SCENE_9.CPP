@@ -17,7 +17,7 @@ extern s32 SetN64_LocatePackSection(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
 extern s32 D_00285160;
 
 
-s32 func_8028BDAC_de(void *world, s32 arg1) {
+s32 Scene_TestTriggerCounterZero(void *world, s32 arg1) {
     void *temp_v0;
     u8 *result;
 
@@ -27,7 +27,7 @@ s32 func_8028BDAC_de(void *world, s32 arg1) {
     return *result == 0;
 }
 
-void *func_8028BE08_de(Shared_World *world, s32 arg1, s32 mode, s32 direct) {
+void *Scene_RequestBinaryResourceByKey(Shared_World *world, s32 arg1, s32 mode, s32 direct) {
     StridedTable *table;
     s32 idx;
     s32 sp28;

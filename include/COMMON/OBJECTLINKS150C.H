@@ -93,5 +93,5 @@ typedef struct ObjectRecAtBC ObjectRecAtBC;
 
 
 struct WorldRecAt1B40C;
-extern s32 func_8028C568_de(struct WorldRecAt1B40C *arg0, Record14 *arg1);
+extern s32 Scene_QueueTriggerTimer(struct WorldRecAt1B40C *arg0, Record14 *arg1);
 #endif

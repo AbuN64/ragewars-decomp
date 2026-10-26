@@ -39,7 +39,7 @@ extern void func_80298368_de(s32 arg0);
 
 /* func_80245A00_de: types.abi.declared: reuse existing C; propagated semantic conflicts remain named */
 
-/* func_8028D90C_de: types.declaration: solved callee prototype */
+/* Scene_ResetTransitionViewport: types.declaration: solved callee prototype */
 
 
 void func_802941B8_de(void) {
@@ -70,7 +70,7 @@ void func_80294200_de(void) {
 }
 
 void func_802942F0_de(s32 arg0) {
-    func_8028D90C_de();
+    Scene_ResetTransitionViewport();
     ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(arg0, 0x5A);
 }
 
@@ -127,7 +127,7 @@ void func_80294418_de(GameSession *session) {
 
 void func_80294434_de(s32 arg0) {
     D_800CD770 += 1;
-    func_8028D90C_de();
+    Scene_ResetTransitionViewport();
     Cinema_SetResponse(0.5f);
     SetN64_ResetPlayerItems(arg0, 0x6F);
 }
@@ -141,6 +141,6 @@ void func_802944A8_de(void *session) {
 }
 
 void func_802944C4_de(s32 arg0) {
-    func_8028D90C_de();
+    Scene_ResetTransitionViewport();
     ((s32 (*)(s32, s32))SetN64_ResetPlayerItems)(arg0, 0x6F);
 }

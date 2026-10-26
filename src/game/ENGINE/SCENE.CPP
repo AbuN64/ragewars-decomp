@@ -70,14 +70,14 @@ extern s32 func_80255228_de();
 extern void func_8025C8D8_de();
 extern void Scene_CollectLevelSwitches();
 extern void Scene_ShowResultsGoal();
-extern s32 func_8028B25C_de();
-extern void func_8028D380_de();
-extern void func_8028D64C_de();
-extern void func_8028D888_de();
-extern void func_8028D90C_de();
-extern void func_8028DA74_de();
+extern s32 Scene_GetModelIdAtIndex();
+extern void Scene_CopyLevelName();
+extern void Scene_ClearSceneObjectCounts();
+extern void Scene_UnlockActiveSectionResources();
+extern void Scene_ResetTransitionViewport();
+extern void Scene_ReleaseCachedLevelData();
 extern int SetN64_GetDirectoryEntry();
-extern s32 func_802A01E8_de();
+extern s32 XPlus_NextRandomInteger();
 extern s32 func_802AA730_de();
 extern void func_802AA760_de();
 extern void Menu_TriggerTrackEvent();
@@ -257,17 +257,17 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 arg2) {
     }
     (((struct SharedRecAt1B92C *)(table))->unk1B6AC) = 0;
     if ((Cinema_IsSequenceActive() == 0) && (var_s5 != 0) && ((((struct SharedRecAt1B92C *)(table))->unk1B41C) != 0) && (D_801462C8.counters.transitionActive == 0)) {
-        func_8028D90C_de();
+        Scene_ResetTransitionViewport();
         temp_v0 = (((struct SharedRecAt1B92C *)(table))->unk1B434);
         if ((u32) (temp_v0 - 0xBC2) < 0x15FU) {
             Menu_TriggerTrackEvent(((temp_v0 - 0xBC2) / 10) + 0x259);
         }
         Scene_ShowResultsGoal();
     }
-    func_8028D888_de(table);
+    Scene_UnlockActiveSectionResources(table);
     (((struct SharedRecAt1B92C *)(table))->unk0) = 0;
     func_80255228_de(&D_80106248);
-    func_8028DA74_de(table);
+    Scene_ReleaseCachedLevelData(table);
     func_80253908_de(0);
     if ((((struct SharedRecAt1B92C *)(table))->unk1B40C) != -1) {
         OvlScene_FreeSceneResources(table);
@@ -275,7 +275,7 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 arg2) {
     func_80253908_de(0);
     D_800CD730 = 0;
     func_8025476C_de(8);
-    func_8028D64C_de(table);
+    Scene_ClearSceneObjectCounts(table);
     Items_InitSlotPool(&((struct SharedRecAt1B92C *)table)->address1B08, *(((struct SharedRecAt1B92C *)(table))->unkB4));
     var_s2 = 0;
     Ovlgame_InitEffectPool(&((struct SharedRecAt1B92C *)table)->address11778);
@@ -318,7 +318,7 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 arg2) {
     if (var_s5 == 0) {
         (((struct SharedRecAt1B92C *)(table))->unk1B41C) = 0;
     }
-    func_8028D380_de(table, var_s6, &((struct SharedRecAt1B92C *)table)->address1B2BC, 0x3F);
+    Scene_CopyLevelName(table, var_s6, &((struct SharedRecAt1B92C *)table)->address1B2BC, 0x3F);
     temp_v1_3 = (((struct SharedRecAt1B92C *)(table))->unk1B434);
     if (temp_v1_3 < 0x1CEA) {
         if (temp_v1_3 < 0x1CE8) {
@@ -552,7 +552,7 @@ loop_89:
         temp_v1_7 = ((struct Shared_SceneActorPrefix *)var_s2_3)[-1].definition;
         temp_v0_20 = temp_v1_7->unk0;
         if (temp_v0_20 == actor_type3) {
-            if (func_8028B25C_de(&g_world, temp_v1_7->unk28) != actor_kind_bd7) {
+            if (Scene_GetModelIdAtIndex(&g_world, temp_v1_7->unk28) != actor_kind_bd7) {
                 goto block_108;
             }
             D_800F3CD0.primary.kindBd7 = scene_actor_ptr;
@@ -645,7 +645,7 @@ loop_114:
         }
     } else {
 block_122:
-        D_801462C8.counters.m_nFragTagSkin = func_802A01E8_de(var_a0_3) % 3;
+        D_801462C8.counters.m_nFragTagSkin = XPlus_NextRandomInteger(var_a0_3) % 3;
     }
     (((struct SharedRecAt1B92C *)(table))->unk0) = 2;
     OvlScene_UpdatePendingObjects(table);

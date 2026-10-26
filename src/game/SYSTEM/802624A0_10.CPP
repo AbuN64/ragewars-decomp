@@ -10,8 +10,8 @@
 #include "SYSTEM/80255C40_7.H"
 
 /* Spawns an effect in a scene when effects are enabled and a count is given: resolves a missing effect id
- * from the variant (func_8028B21C_de, giving up when unknown) and a default variant from the id
- * (func_8028B25C_de), takes a node from the scene's free list when allowed (always with D_8013B290, otherwise
+ * from the variant (Scene_FindModelIdIndex, giving up when unknown) and a default variant from the id
+ * (Scene_GetModelIdAtIndex), takes a node from the scene's free list when allowed (always with D_8013B290, otherwise
  * while fewer than three are active), moves it to the active list and attaches the counted reference, then
  * initialises it through func_802466A0_de with the position, scale, direction and colour vectors and starts it
  * with func_8024B2D0_de. Returns the effect or 0. */
@@ -23,9 +23,9 @@
 
 
 
-extern s32 func_8028B21C_de(struct Shared_World *, s32);
+extern s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 
-extern s32 func_8028B25C_de(void *, s32);
+extern s32 Scene_GetModelIdAtIndex(void *, s32);
 
 extern void func_802466A0_de(SceneEffect *, s32, s32, s32, s32, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
 
@@ -50,7 +50,7 @@ static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref) 
 }
 
 /* Culls a scene's active effects against the view box: effects whose bounds overlap the box ending at
- * D_801031F8 + 4 are passed to func_8028C934_de and, when idle, drop their counted reference; the others are
+ * D_801031F8 + 4 are passed to Scene_RegisterActorInSceneLists and, when idle, drop their counted reference; the others are
  * reset, release their reference, and are unlinked from the active list (func_80255ED8_de) and returned to
  * the free list (func_80255D14_de). */
 
@@ -58,7 +58,7 @@ static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref) 
 
 extern f32 D_801031F8;
 
-extern void func_8028C934_de(s32, EffectAnimPoolUpdateSceneEffects *);
+extern void Scene_RegisterActorInSceneLists(s32, EffectAnimPoolUpdateSceneEffects *);
 
 static inline s32 overlaps(EffectAnimPoolUpdateSceneEffects *effect, f32 *max) {
     if (max[0] > effect->min[0] && max[-3] < effect->max[0] && max[2] > effect->min[2] &&
@@ -76,13 +76,13 @@ SceneEffect *AnimPool_SpawnSceneEffect(struct SceneEffectPool *scene, s32 id, s3
         return 0;
     }
     if (id == -1) {
-        id = func_8028B21C_de(&g_world, variant);
+        id = Scene_FindModelIdIndex(&g_world, variant);
         if (id == -1) {
             return 0;
         }
     }
     if ((unsigned int)(variant + 1) < 2) {
-        variant = func_8028B25C_de(&g_world, id);
+        variant = Scene_GetModelIdAtIndex(&g_world, id);
     }
     effect = take_effect(scene, ref);
     if (effect == 0) {
@@ -107,7 +107,7 @@ void AnimPool_UpdateSceneEffects(struct SceneEffectPool *scene, s32 arg1) {
     next_effect:
         next = effect->next;
         if (overlaps(effect, max)) {
-            func_8028C934_de(arg1, effect);
+            Scene_RegisterActorInSceneLists(arg1, effect);
             if (effect->ref != 0 && effect->busy == 0) {
                 *effect->ref -= 1;
                 effect->ref = 0;

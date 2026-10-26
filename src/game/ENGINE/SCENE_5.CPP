@@ -540,7 +540,7 @@ extern ResultsText *func_80254408_de(s32, void *, s32, s32, void *, s32, void *)
 extern void func_802BD3A0_de(void *, const void *, s32);
 extern s32 func_802A0C08_de(char *, const char *, ...);
 extern u8 Player_GetLevelProgress(Profile *, s32);
-extern void func_8028DA74_de(Shared_World *);
+extern void Scene_ReleaseCachedLevelData(Shared_World *);
 extern void *Cache_RequestResource(s32, u32, u32, u32, u32, s32, void *, const char *, u32);
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
 extern s32 Frontend_FindKeyIndex(s32);
@@ -572,7 +572,7 @@ static inline LevelChallenge *findLevelChallenge(Shared_World *world, s32 level)
     s32 direct;
 
     if (world->resourceHandle == 0 || world->resourceKey != level) {
-        func_8028DA74_de(world);
+        Scene_ReleaseCachedLevelData(world);
         if (world->challengeFile != 0) {
             mode = 0x10;
             direct = 1;

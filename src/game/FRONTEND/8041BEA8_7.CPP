@@ -93,7 +93,7 @@ s32 Frontend_CreateSlotSelectionMenu(void *arg0) {
     D_800E3590->player = 0;
     D_800E3590->unk268 = -1;
     Frontend_AdvanceActiveSlot(&D_800E3590->unk268);
-    func_8041D6A8_de();
+    Frontend_RefreshProfileStatistics();
     Frontend_ShowUnlockedEntries(D_800E3590->style);
     func_8040EC30_de(arg0, 493)->alpha = 110;
     D_800E3590->focus = 0;

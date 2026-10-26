@@ -392,7 +392,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         case 0x2D9:
 #endif
             i = D_800E54A4->players[p].slot;
-            if (func_802A05D0_de(D_800E54A4->players[p].names[i].text) > 0) {
+            if (XPlus_ParseDecimalInteger(D_800E54A4->players[p].names[i].text) > 0) {
                 D_800E54A4->players[p].state = 8;
                 PAKInterface_RefreshPlayerPanel(p);
             }
@@ -410,9 +410,9 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
 #endif
             if (Pak_DeleteNote(p, D_800E54A4->players[p].slot) == 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                if (func_802A03F4_de((u8 *)D_800E25A4[g_languageIndex],
+                if (XPlus_CompareStringsIgnoreCase((u8 *)D_800E25A4[g_languageIndex],
 #else
-                if (func_802A03F4_de((u8 *)D_800D36D4,
+                if (XPlus_CompareStringsIgnoreCase((u8 *)D_800D36D4,
 #endif
                                      D_800E54A4->players[p].names[D_800E54A4->players[p].slot].code) == 0) {
                     for (j = 0; j < 4; j++) {

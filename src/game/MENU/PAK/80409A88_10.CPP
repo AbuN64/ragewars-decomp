@@ -6,7 +6,7 @@
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-#define func_8040A83C_us Menu_FormatLocalizedPakName
+#define Pak_FormatRightAlignedPreviewName Menu_FormatLocalizedPakName
 #endif
 /* Select the status text and right-align its nonblank characters. */
 #include "TYPES.H"
@@ -14,7 +14,7 @@
 s32 Pak_CountLineChars(void *); /* extern */
  /* const */
  /* const */
-s32 func_8040A83C_us(struct Field *arg0) {
+s32 Pak_FormatRightAlignedPreviewName(struct Field *arg0) {
     s8 *temp_s0;
     s8 *temp_s0_2;
     s32 var_s1;

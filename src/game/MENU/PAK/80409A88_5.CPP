@@ -155,7 +155,7 @@ void Pak_ReturnToWorldMenu(void *unused, void *object) {
     OvlScene_SetSelection(&g_world, g_world.selectionValues[3], 2);
 }
 
-s32 func_80409FA0_de(void *unused, void *arg1, s32 arg2, s32 *arg3) {
+s32 Pak_FindNoteByGameName(void *unused, void *arg1, s32 arg2, s32 *arg3) {
     char game_name[16];
     s32 game_ref;
     s32 note_index;
@@ -170,7 +170,7 @@ s32 func_80409FA0_de(void *unused, void *arg1, s32 arg2, s32 *arg3) {
     return 0;
 }
 
-char *func_8040A038_de(int unused, int kind) {
+char *Pak_GetPromptByKind(int unused, int kind) {
     switch (kind) {
     case 0:
     default:
@@ -263,7 +263,7 @@ s32 Pak_FindNextAvailableChannel(s32 currentChannel) {
     return channel;
 }
 
-/* The EU builds compile a different original body for func_8040A244_de; each version keeps its own. */
+/* The EU builds compile a different original body for Pak_UpdateManagerChannelLabel; each version keeps its own. */
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 /* Shows D_800D3728 in a field when both D_8014D4EC_de and D_8014D4C0_de are set, D_800D372C when only D_8014D4C0_de is, and otherwise, when D_8015375C is set, points the field at D_800D3764 and formats D_800E28C8 plus one into it with D_800DCD7C one byte before the length Pak_CountLineChars reports, returning zero.
    Adapted from func_8044488C_de with the three flag tests, the texts, the format, the offset and the incremented value changed. */
@@ -272,7 +272,7 @@ s32 Pak_FindNextAvailableChannel(s32 currentChannel) {
 extern s32 D_8015375C;
 extern s32 Pak_CountLineChars(struct Field *);
 
-s32 func_8040A244_de(struct Field *field) {
+s32 Pak_UpdateManagerChannelLabel(struct Field *field) {
     char *text;
     s32 value;
 
@@ -299,7 +299,7 @@ s32 func_8040A244_de(struct Field *field) {
 extern s32 D_8015375C;
 extern s32 Pak_CountLineChars(struct Field *);
 
-s32 func_8040A244_de(struct Field *field) {
+s32 Pak_UpdateManagerChannelLabel(struct Field *field) {
     char **table;
     char *text;
     s32 value;

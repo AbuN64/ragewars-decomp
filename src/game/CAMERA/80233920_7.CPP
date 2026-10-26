@@ -26,13 +26,13 @@ extern s32 Cinema_IsSequenceInWindow(void);
 extern void func_80228798_de(void *, char *);
 extern s32 func_802934F8_de(void);
 extern void func_8022A2A0_de(void *, char *);
-extern void func_8028B028_de(char *, char *);
+extern void Scene_DrawOpaqueActors(char *, char *);
 extern void func_802A5180_de(void *, char *);
 extern void func_802905F4_de(char *, char *);
 extern void Scene_DrawTransparentObjects(char *, char *);
 extern void func_80228958_de(ObjRecAt20V2 *, char *);
 extern void func_8023B3F8_de(char *, char *);
-extern void func_8028B160_de(char *, char *);
+extern void Scene_DrawWorldParticles(char *, char *);
 extern void Fx_DrawLinkedGeometry(void *, char *);
 extern void Sky_DrawObjectFlares(char *);
 extern void func_8022A328_de(void *, char *);
@@ -55,7 +55,7 @@ void Camera_DrawWorldViewLayers(char *view, char *world) {
     if (func_802934F8_de() != 0) {
         func_8022A2A0_de(&D_80145040, view);
     }
-    func_8028B028_de(world, view);
+    Scene_DrawOpaqueActors(world, view);
     func_802A5180_de(&D_801379C0, view);
     if (Cinema_IsSequenceInWindow() == 0) {
         func_802905F4_de(world + 0x11778, view);
@@ -63,7 +63,7 @@ void Camera_DrawWorldViewLayers(char *view, char *world) {
     Scene_DrawTransparentObjects(world, view);
     func_80228958_de(&D_80145040, view);
     func_8023B3F8_de(view + 0x570, view);
-    func_8028B160_de(world, view);
+    Scene_DrawWorldParticles(world, view);
     Fx_DrawLinkedGeometry(&D_801379C0, view);
     Sky_DrawObjectFlares(view);
     if (Cinema_IsSequenceInWindow() == 0 && func_802934F8_de() != 0) {

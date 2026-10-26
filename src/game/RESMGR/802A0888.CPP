@@ -28,7 +28,7 @@ static inline void copy_part(u8 *d, u8 *s, s32 n) {
     }
 }
 
-void func_8029F888_de(u8 *path, u8 *drive, u8 *dir, u8 *name, u8 *ext) {
+void XPlus_SplitPath(u8 *path, u8 *drive, u8 *dir, u8 *name, u8 *ext) {
     u8 *dot;
     u8 *slash;
     u8 *p;
@@ -97,14 +97,14 @@ void func_8029F888_de(u8 *path, u8 *drive, u8 *dir, u8 *name, u8 *ext) {
     }
 }
 
-/* Quick-sorts the elements between base and max for func_8029FE38_de (the qsort helper qst): picks the median of the first, middle and last elements as the pivot when the span reaches the six-element threshold D_8014D0C8, partitions around it with the comparator D_8014D0CC swapping D_8014D0C0 bytes at a time, then recurses into the smaller side and loops on the larger while it spans at least D_8014D0C4 bytes. Written from the BSD qsort qst structure with the halving shift unsigned. */
+/* Quick-sorts the elements between base and max for XPlus_SortArray (the qsort helper qst): picks the median of the first, middle and last elements as the pivot when the span reaches the six-element threshold D_8014D0C8, partitions around it with the comparator D_8014D0CC swapping D_8014D0C0 bytes at a time, then recurses into the smaller side and loops on the larger while it spans at least D_8014D0C4 bytes. Written from the BSD qsort qst structure with the halving shift unsigned. */
 
 
 
 
 
 
-void func_8029FB74_de(char *base, char *max) {
+void XPlus_PartitionSortRange(char *base, char *max) {
     char c;
     char *i;
     char *j;
@@ -172,20 +172,20 @@ swap:
         i = (j = mid) + D_8014D0C0;
         if ((lo = j - base) <= (hi = max - i)) {
             if (lo >= D_8014D0C4) {
-                func_8029FB74_de(base, j);
+                XPlus_PartitionSortRange(base, j);
             }
             base = i;
             lo = hi;
         } else {
             if (hi >= D_8014D0C4) {
-                func_8029FB74_de(i, max);
+                XPlus_PartitionSortRange(i, max);
             }
             max = j;
         }
     } while (lo >= D_8014D0C4);
 }
 
-/* Sorts n elements of the given size with a comparator (qsort): records the element size, the four- and six-element thresholds and the comparator in D_8014D0C0 to D_8014D0CC, quick-sorts arrays of four or more through func_8029FB74_de, swaps the smallest of the first elements into place as a sentinel, and finishes with an insertion sort that shifts bytes. Written from the BSD qsort driver structure. */
+/* Sorts n elements of the given size with a comparator (qsort): records the element size, the four- and six-element thresholds and the comparator in D_8014D0C0 to D_8014D0CC, quick-sorts arrays of four or more through XPlus_PartitionSortRange, swaps the smallest of the first elements into place as a sentinel, and finishes with an insertion sort that shifts bytes. Written from the BSD qsort driver structure. */
 
 
 
@@ -193,7 +193,7 @@ swap:
 
 
 
-void func_8029FE38_de(char *base, s32 n, s32 size, s32 (*compare)(char *a, char *b)) {
+void XPlus_SortArray(char *base, s32 n, s32 size, s32 (*compare)(char *a, char *b)) {
     char c;
     char *i;
     char *j;
@@ -211,7 +211,7 @@ void func_8029FE38_de(char *base, s32 n, s32 size, s32 (*compare)(char *a, char 
     D_8014D0CC = compare;
     max = base + n * size;
     if (n >= 4) {
-        func_8029FB74_de(base, max);
+        XPlus_PartitionSortRange(base, max);
         hi = base + D_8014D0C4;
     } else {
         hi = max;
@@ -243,7 +243,7 @@ void func_8029FE38_de(char *base, s32 n, s32 size, s32 (*compare)(char *a, char 
     }
 }
 
-void *XPlus_FillMemory(void *arg0, int arg1, u32 arg2) {
+void *XPlus_FillMemory(void *destination, int fillValue, u32 byteCount) {
     u8 *start;
     u8 *end;
     u8 *cur;
@@ -251,9 +251,9 @@ void *XPlus_FillMemory(void *arg0, int arg1, u32 arg2) {
     u32 byte;
     u32 word;
 
-    start = arg0;
-    end = start + arg2;
-    byte = arg1 & 0xFF;
+    start = destination;
+    end = start + byteCount;
+    byte = fillValue & 0xFF;
     word = (byte << 24) | (byte << 16) | (byte << 8) | byte;
     cur = start;
 
@@ -264,7 +264,7 @@ align_test:
     if (!((u32)cur & 3)) {
         goto word_test;
     }
-    *cur = arg1;
+    *cur = fillValue;
     cur += 1;
     if (cur < end) {
         goto align_test;
@@ -281,7 +281,7 @@ word_test:
 
     if (cur < end) {
         do {
-            *cur++ = arg1;
+            *cur++ = fillValue;
         } while (cur < end);
     }
     return start;

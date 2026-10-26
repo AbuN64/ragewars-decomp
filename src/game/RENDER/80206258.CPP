@@ -16,7 +16,7 @@
 #include "RENDER/80206258.H"
 #include "WEAPONS/80213ED4.H"
 
-extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
+extern void Scene_SetLevelActorStateBit(void *a, unsigned short b, unsigned short c, int d);
 
 extern void Rumble_SetActorStateBit(Shared_World *a, void *b, int c);
 
@@ -67,7 +67,7 @@ extern func_80206604_G1 D_801462E5;
 extern s32 Rumble_TestActorStateBit(void *, void *);
 
 void func_80206258_de(Trigger *trigger) {
-    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 1);
+    Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 1);
 }
 
 void func_80206288_de(void *actor) {
@@ -75,7 +75,7 @@ void func_80206288_de(void *actor) {
 }
 
 void func_802062B0_de(Trigger *trigger) {
-    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 0);
+    Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 0);
 }
 
 void func_802062E0_de(LevelActor *actor, ActorMotionState *owner, Params params, s32 kind) {

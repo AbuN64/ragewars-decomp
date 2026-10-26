@@ -11,7 +11,7 @@
 extern ResultsOptionsScreen *D_800E4690;
 
 /* Formats the name of entry D_800E4690's word at 0xA44 into a local 0x40-byte buffer through
-   func_8028D380_de from D_8011FE88, passes the length func_802A0494_de measures to func_802A025C_de for the
+   Scene_CopyLevelName from D_8011FE88, passes the length XPlus_UppercaseString measures to func_802A025C_de for the
    text object at offset 0xA04, and points word 0x38 of the object at 0x998 to that text object. */
 
 
@@ -19,9 +19,9 @@ extern ResultsOptionsScreen *D_800E4690;
 
 
 
-extern void func_8028D380_de(Shared_World *, s32, char *, s32);
+extern void Scene_CopyLevelName(Shared_World *, s32, char *, s32);
 
-extern s32 func_802A0494_de(char *);
+extern s32 XPlus_UppercaseString(char *);
 
 extern void XPlus_CopyString(void *, s32);
 
@@ -73,7 +73,7 @@ extern void func_8042854C_de(s32, s32, s32);
 
 extern char D_80102B00[];
 
-extern struct Model *func_8028CFA0_de(Shared_World *, s32, s32);
+extern struct Model *Scene_FindActorDefinition(Shared_World *, s32, s32);
 
 extern s32 Player_HasProfileUnlockFlag(char *, s32);
 
@@ -89,21 +89,21 @@ extern s32 Player_HasProfileUnlockFlag(char *, s32);
 
 extern void func_8042854C_de(s32 arg0, s32 arg1, s32 arg2);
 
-/* Enumerates the eight item identifiers of the record func_8028D474_de finds for a key and registers each nonzero identifier above 0x4C3 through func_8042854C_de, translated by 0x4C3 and numbered in order. */
+/* Enumerates the eight item identifiers of the record Scene_GetBlLevelData finds for a key and registers each nonzero identifier above 0x4C3 through func_8042854C_de, translated by 0x4C3 and numbered in order. */
 
 
 
 
 
-extern Record_func_804284C0_de *func_8028D474_de(void *table, s32 key);
+extern Record_func_804284C0_de *Scene_GetBlLevelData(void *table, s32 key);
 
 extern void func_8042854C_de(s32 slot, s32 item, s32 arg2);
 
 void func_804280BC_de(void) {
     char buffer[0x40];
 
-    func_8028D380_de(&g_world, D_800E4690->selection, buffer, 0x3F);
-    XPlus_CopyString(D_800E4690->text, func_802A0494_de(buffer));
+    Scene_CopyLevelName(&g_world, D_800E4690->selection, buffer, 0x3F);
+    XPlus_CopyString(D_800E4690->text, XPlus_UppercaseString(buffer));
     D_800E4690->owner->unk38 = D_800E4690->text;
 }
 
@@ -176,7 +176,7 @@ void func_80428300_de(void) {
 
     func_80428700_de();
     player = D_800E4690->player;
-    model = func_8028CFA0_de(&g_world, 0xB, D_801462C8.playerSettings[player].character);
+    model = Scene_FindActorDefinition(&g_world, 0xB, D_801462C8.playerSettings[player].character);
     row = 0;
     for (i = 0; i < 8; i++) {
         id = model->slots[i];
@@ -215,7 +215,7 @@ void func_804284C0_de(s32 key) {
     s32 item;
 
     func_80428700_de();
-    record = func_8028D474_de(&g_world, key);
+    record = Scene_GetBlLevelData(&g_world, key);
     count = 0;
     for (i = 0; i < 8; i++) {
         item = record->items[i];

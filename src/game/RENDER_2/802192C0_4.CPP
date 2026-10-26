@@ -54,12 +54,12 @@ void func_80278D78_de(void *, s32, void *);
 void func_80278E04_de(s32, s32, void *);
 s32 func_802800C0_de(void *, void *, void *, s32 *, s32, s32, CVector3, CQuatern, CVector3, CVector3 *, s32, s32); /* extern */
 void func_80283278_de(void *, s32);
-s32 func_8028B21C_de(struct Shared_World *, s32);
-void func_8028B898_de(void *, void *, s32);
+s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
+void Scene_SetLevelRecordStateBit(void *, void *, s32);
 void *func_8028FFD0_de(void *, s32 *, s32, CVector3, CVector3, s32, f32); /* extern */
 struct ListNode80290528;
 void func_80290548_de(struct ListNode80290528 *);
-s32 func_802A01E8_de(void);
+s32 XPlus_NextRandomInteger(void);
 s32 Ovlgame_ResetPlayerForRound(void *, s8, s32);         /* extern */
 void func_8044972C_de(void *);
 void Ovlgame_ReleaseObjectHandles(void *);
@@ -243,7 +243,7 @@ case 7:
                     ammoPickupType = ((struct Shared_ActorView *)player)->projectileIndex + 0xBE7;
                     break;
                 }
-                func_8028B21C_de(&g_world, ammoPickupType);
+                Scene_FindModelIdIndex(&g_world, ammoPickupType);
                 existingAmmoPickup = ((struct Shared_ActorView *)player)->projectiles[((struct Shared_ActorView *)player)->projectileIndex];
                 if (existingAmmoPickup != 0) {
                     ((struct Shared_ProjectileView *)existingAmmoPickup)->flags = (u16) (((struct Shared_ProjectileView *)existingAmmoPickup)->flags | 1);
@@ -251,7 +251,7 @@ case 7:
                     if (((struct Shared_ProjectileView *)retiredAmmoPickup)->flags & 8) {
                         func_80290548_de(retiredAmmoPickup);
                     } else {
-                        func_8028B898_de(&g_world, retiredAmmoPickup, 1);
+                        Scene_SetLevelRecordStateBit(&g_world, retiredAmmoPickup, 1);
                         func_80278E04_de(((struct Shared_ProjectileView *)((struct Shared_ActorView *)player)->projectiles[((struct Shared_ActorView *)player)->projectileIndex])->source, 0x400, player);
                     }
                 }
@@ -261,12 +261,12 @@ case 7:
                 } else if (ammoDropActorKind == D_800CE474[1]) {
                     hasAmmoDrop = 0;
                 } else {
-                    switch (func_802A01E8_de() % 3) {            /* switch 2; irregular */
+                    switch (XPlus_NextRandomInteger() % 3) {            /* switch 2; irregular */
                     case 0:                         /* switch 2 */
                         firstAmmoCount = ((struct Shared_ActorView *)player)->ammo[0];
                         firstAmmoDrop = 0;
                         if (firstAmmoCount != 0) {
-                            firstAmmoRandom = func_802A01E8_de();
+                            firstAmmoRandom = XPlus_NextRandomInteger();
                             firstAmmoQuotient = firstAmmoRandom / firstAmmoCount;
                             if (firstAmmoCount == 0) {
 
@@ -288,7 +288,7 @@ case 7:
                         secondAmmoCount = ((struct Shared_ActorView *)player)->ammo[1];
                         secondAmmoDrop = 0;
                         if (secondAmmoCount != 0) {
-                            secondAmmoRandom = func_802A01E8_de();
+                            secondAmmoRandom = XPlus_NextRandomInteger();
                             secondAmmoQuotient = secondAmmoRandom / secondAmmoCount;
                             if (secondAmmoCount == 0) {
 
@@ -310,7 +310,7 @@ case 7:
                         thirdAmmoCount = ((struct Shared_ActorView *)player)->ammo[2];
                         thirdAmmoDrop = 0;
                         if (thirdAmmoCount != 0) {
-                            thirdAmmoRandom = func_802A01E8_de();
+                            thirdAmmoRandom = XPlus_NextRandomInteger();
                             thirdAmmoQuotient = thirdAmmoRandom / thirdAmmoCount;
                             if (thirdAmmoCount == 0) {
 
@@ -413,19 +413,19 @@ case 7:
             spawnVector.y = player->position.vector.y + D_800C2608_eu.projectile;
             deathEffectFlags = 1;
             spawnVector.z = player->position.vector.z;
-            signedMotionRandomX = func_802A01E8_de();
+            signedMotionRandomX = XPlus_NextRandomInteger();
             motionRandomX = signedMotionRandomX;
             if (motionRandomX < 0) {
                 signedMotionRandomX = motionRandomX + 0x3FF;
             }
             motionVector.x = (f32) (motionRandomX - ((signedMotionRandomX >> 0xA) << 0xA)) - D_800C22A0_us;
-            signedMotionRandomY = func_802A01E8_de();
+            signedMotionRandomY = XPlus_NextRandomInteger();
             motionRandomY = signedMotionRandomY;
             if (motionRandomY < 0) {
                 signedMotionRandomY = motionRandomY + 0x3FF;
             }
             motionVector.y = (f32) (motionRandomY - ((signedMotionRandomY >> 0xA) << 0xA)) - D_800C22A0_us;
-            signedMotionRandomZ = func_802A01E8_de();
+            signedMotionRandomZ = XPlus_NextRandomInteger();
             motionRandomZ = signedMotionRandomZ;
             if (motionRandomZ < 0) {
                 signedMotionRandomZ = motionRandomZ + 0x3FF;

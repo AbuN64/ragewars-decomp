@@ -248,6 +248,6 @@ void func_8022B530_de(s32);
 extern void *D_800F3D08;
 
 extern void Geometry_SetColorDither(s32 arg0);
-extern void func_8026E378_de(s32 arg0, s32 arg1);
+extern void Geometry_SetPrimitiveAlphaOverride(s32 arg0, s32 arg1);
 extern void YawMatrix(void *arg0, f32 arg1);
 #endif

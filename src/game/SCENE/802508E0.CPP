@@ -34,7 +34,7 @@ void StaticInstance_DrawModel(void *);
 
 extern void func_80253F8C_de(s32 arg0, s32 arg1);
 
-extern s32 *func_8026E27C_de(void **arg0, s32 arg1, s32 *arg2);
+extern s32 *Geometry_CollectMaterialResources(void **arg0, s32 arg1, s32 *arg2);
 
 
 extern void Cache_MarkResourceInUse(s32, s32);
@@ -109,7 +109,7 @@ s32 *StaticInstance_CollectPropResources(void *prop, s32 model, s32 geometryVari
     if (geometryResource != 0) {
         o->loadedResource = geometryResource;
         *resourceCursor = (s32) geometryResource;
-        resourceCursor = func_8026E27C_de(geometryResource, model, resourceCursor + 1);
+        resourceCursor = Geometry_CollectMaterialResources(geometryResource, model, resourceCursor + 1);
         ret2 = func_80251F6C_de(0, o->registrationFlags | D_800CD3F0, geometryResource, (CachedResource *)o->resource, 8, prop, &D_00250C2C, D_800C3E40_de, 1);
         if (ret2 != 0) {
             *resourceCursor = (s32)ret2;

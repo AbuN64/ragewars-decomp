@@ -27,7 +27,7 @@ extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 
 
-extern void *func_8028B2F8_de(Shared_World *, u16 *);
+extern void *Scene_GetModelRecordByIndexPointer(Shared_World *, u16 *);
 
 extern s32 Cinema_IsSequenceInWindow(void);
 
@@ -55,7 +55,7 @@ void func_80239EA4_de(void *gameplayCamera, CVector3 *out) {
 
     targetY = 0.0f;
     targetX = targetY;
-    entry = func_8028B2F8_de(&g_world, (u16 *)o->floorPoly);
+    entry = Scene_GetModelRecordByIndexPointer(&g_world, (u16 *)o->floorPoly);
     if (entry == 0) {
         out->x = targetY;
         out->y = targetY;

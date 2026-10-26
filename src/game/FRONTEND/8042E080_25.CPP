@@ -10,15 +10,15 @@
 #include "RESMGR/802A0888.H"
 #include "RENDER_2/8025DE50_5.H"
 
-/* Returns 0xBC2 plus ten times either the halfword at offset 2 of what func_8028D474_de finds for
+/* Returns 0xBC2 plus ten times either the halfword at offset 2 of what Scene_GetBlLevelData finds for
    D_8015402C in D_8011FE88, when the option byte D_801462D5 is one, or D_8015402C itself. */
 
 
 
-extern struct StateFlags *func_8028D474_de(void *, s32);
+extern struct StateFlags *Scene_GetBlLevelData(void *, s32);
 
 s32 func_8042EE34_de(void) {
-    return (D_801462C8.controllerMode == 1 ? func_8028D474_de(&g_world, D_8015402C)->flags : D_8015402C) * 10 + 0xBC2;
+    return (D_801462C8.controllerMode == 1 ? Scene_GetBlLevelData(&g_world, D_8015402C)->flags : D_8015402C) * 10 + 0xBC2;
 }
 
 extern Shared_PlayerSettingsRecord g_playerSettings[];

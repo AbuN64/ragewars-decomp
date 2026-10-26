@@ -103,7 +103,7 @@ extern void Rumble_SetActorStateBit(Shared_World *arg0, void *arg1, s32 arg2);
 extern void Events_DispatchCallback(void *arg0, void *arg1, s32 arg2,
                           CVector3 arg3, ResourceManagerState arg4);
 
-extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
+extern void Scene_SetLevelActorStateBit(void *a, unsigned short b, unsigned short c, int d);
 
 void Action_ResolveBreakableHit(void *breakableHitContext, ObjectStateCC *hitState) {
     ResourceManagerState local;
@@ -201,14 +201,14 @@ void func_80204DE0_de(void *a, void *b) {
     Nav_RequestActorState(a, b, 0x0); }
 
 void func_80204DFC_de(Trigger *trigger) {
-    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 1);
+    Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 1);
 }
 
 void func_80204E2C_de(void *a, void *b) {
     Nav_RequestActorState(a, b, 0x1); }
 
 void func_80204E48_de(Trigger *trigger) {
-    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 0);
+    Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 0);
 }
 
 extern s32 Rumble_TestActorStateBit(void *, void *);

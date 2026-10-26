@@ -200,7 +200,7 @@ typedef struct PreviewScreen { char pad[0x20]; char preview[0xA24]; s32 record; 
 typedef struct PreviewRecord { char pad[4]; u8 kind; } PreviewRecord;
 typedef struct PreviewRow { s32 pad; f32 scale[4],distance[4]; CVector3 position[4]; s32 light[4]; char tail[12]; } PreviewRow;
 extern void func_804284C0_de(s32,PreviewSettings *);
-extern PreviewRecord *func_8028D474_de(void *,s32);
+extern PreviewRecord *Scene_GetBlLevelData(void *,s32);
 typedef struct func_80427B98_S1 func_80427B98_S1;
 struct func_80427B98_S1 {
     char pad0[0x20];
@@ -218,7 +218,7 @@ void func_804279B8_de(void) {
         record = (*(ResultsOptionsScreen **)&D_800E4690)->selection;
         entry = &((PreviewSettings *)&D_801462C8)->entries[(*(ResultsOptionsScreen **)&D_800E4690)->player];
         func_804284C0_de(record, settings);
-        kind = func_8028D474_de(&g_world, record)->kind;
+        kind = Scene_GetBlLevelData(&g_world, record)->kind;
         entry->kind = kind;
         index = Frontend_FindKeyIndex((s8)kind);
         scale.x = D_800E3A58[index].scale[0];

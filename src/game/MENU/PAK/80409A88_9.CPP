@@ -49,7 +49,7 @@ extern void Pak_OpenDialog(void *, void *, s32, s32, s32);
 
 
 
-s32 func_8040A5E8_de(void) {
+s32 Pak_DispatchPreviewHandle(void) {
     
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 func_802B2378
@@ -64,7 +64,7 @@ func_802AD2A8
    truncated to integers, into a field's text with the format D_800DCD84, nine bytes before the
    length Pak_CountLineChars reports. Returns zero. */
 
-s32 func_8040A614_de(struct Field *field) {
+s32 Pak_FormatPreviewDottedTriple(struct Field *field) {
     s32 x = D_800E28BC->x;
     s32 y = D_800E28BC->y;
     s32 z = D_800E28BC->z;
@@ -84,7 +84,7 @@ s32 func_8040A614_de(struct Field *field) {
     return 0;
 }
 
-s32 func_8040A6A8_de(struct FieldRecAt14 *field) {
+s32 Pak_UpdateAlternateActionLabel(struct FieldRecAt14 *field) {
     if (D_80153780 != 0) {
         field->text = D_800D7810;
     } else {
@@ -93,7 +93,7 @@ s32 func_8040A6A8_de(struct FieldRecAt14 *field) {
     return 0;
 }
 
-s32 func_8040A6DC_de(void *unused, struct RecordRecAt24 *record) {
+s32 Pak_OpenSelectedPrompt(void *unused, struct RecordRecAt24 *record) {
     do {
         if (D_80153780 != 0) {
             Pak_OpenDialog(D_8014561C, D_0044E4B0, record->first, record->second, 0);
@@ -104,24 +104,24 @@ s32 func_8040A6DC_de(void *unused, struct RecordRecAt24 *record) {
     return 1;
 }
 
-void func_8040A748_de(void) {
+void Pak_EnableProfilePreview(void) {
     D_80153730 = 1;
     D_80153774 = 0;
 }
 
-void func_8040A764_de(void) {
+void Pak_ClearProfilePreview(void) {
     D_80153730 = 0;
     D_80153774 = 0;
 }
 
-void func_8040A77C_de(struct RecordRecAtCV1 *record) {
+void Pak_DisablePreviewSelection(struct RecordRecAtCV1 *record) {
     record->target->first &= ~0x01800000;
     D_80153730 = 0;
     D_80153774 = 1;
     record->target->second &= ~0x01800000;
 }
 
-s32 func_8040A7BC_de(struct FieldRecAt14 *field) {
+s32 Pak_UpdatePreviewKindLabel(struct FieldRecAt14 *field) {
     if (D_80153730 != 0) {
         field->text = D_800D77EC;
     } else if (D_80153774 != 0) {

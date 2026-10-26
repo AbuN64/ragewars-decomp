@@ -167,10 +167,10 @@ void Frontend_DrawModelPreview(Obj8041CAD8 *self) {
 #include "COMMON/WORLD.H"
 #include "RESMGR/802A0888.H"
 extern s32 D_800E28D0;
-extern void *func_8028CFA0_de(void *, s32, s32, void *);
+extern void *Scene_FindActorDefinition(void *, s32, s32, void *);
 extern void func_802466A0_de(void *, s32, s32, s32, void *, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
 extern void func_8024B2D0_de();
-/* Starts a menu model preview: loads the projection, spawns the model through func_8028CFA0_de, keeps a copy
+/* Starts a menu model preview: loads the projection, spawns the model through Scene_FindActorDefinition, keeps a copy
  * of its record, places it scaled to the screen and runs its first update. Returns the copy, or 0 when no model. */
 void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 modelKind, s32 previewModelId, s32 extra, CVector3 position, CVector3 facing,
                        f32 scale, s32 pitchDegrees) {
@@ -190,7 +190,7 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 modelKind, s32 pr
     self->unk49C = 1;
     self->unk4A0 = pitchDegrees;
     draw = &self->sub190;
-    source = func_8028CFA0_de(&g_world, id, modelKind, g);
+    source = Scene_FindActorDefinition(&g_world, id, modelKind, g);
     if (source == 0) {
         self->unk478 = 0;
         return 0;

@@ -47,14 +47,14 @@ extern char D_80103FCC[];
 extern void func_80219480_de(void *, void *);
 
 
-/* Returns whether the entry func_8028B2F8_de finds in D_8011FE88 for an object's key at 0x14 exists
+/* Returns whether the entry Scene_GetModelRecordByIndexPointer finds in D_8011FE88 for an object's key at 0x14 exists
    and has bit 6 of its flags at 0x52 set. */
 
 
 
 
 
-extern struct EntryPlayerHasLinkedWorldFlagSix *func_8028B2F8_de(Shared_World *, s32);
+extern struct EntryPlayerHasLinkedWorldFlagSix *Scene_GetModelRecordByIndexPointer(Shared_World *, s32);
 
 /* Returns the constant after D_800C7EC0 less the cube of its difference from the argument. */
 
@@ -270,7 +270,7 @@ s32 Player_HasLinkedWorldFlagSix(struct func_80204468_S3 *object) {
     struct EntryPlayerHasLinkedWorldFlagSix *entry;
 
     if (object->unk14 != 0) {
-        entry = func_8028B2F8_de(&g_world, object->unk14);
+        entry = Scene_GetModelRecordByIndexPointer(&g_world, object->unk14);
         if (entry != 0 && (entry->flags & 0x40)) {
             return 1;
         }

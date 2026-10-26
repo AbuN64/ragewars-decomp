@@ -51,7 +51,7 @@ void OvlScene_LoadSceneLight(SceneRecAt1B2B4 *scene) {
 int Player_GetFirstPlayer(void *);
 void func_8025CBEC_de(void *);
 s32 * func_8025CC6C_de(void);
-void func_8028D59C_de(void *);
+void Scene_ReleaseCachedGeometry(void *);
 void Ovlgame_ReleaseObjectHandles(void *);
 /* Shut down the subsystem, free its owned resources, and unlink its list. */
 void OvlScene_FreeSceneResources(func_8044CBE0_S1 *arg0) {
@@ -92,7 +92,7 @@ void OvlScene_FreeSceneResources(func_8044CBE0_S1 *arg0) {
     if (temp_a1_3 != NULL) {
         Cache_ReleaseResource(NULL, temp_a1_3);
     }
-    func_8028D59C_de(arg0);
+    Scene_ReleaseCachedGeometry(arg0);
     temp_s1 = arg0->unk1B500.head;
     var_a1 = temp_s1;
     if (temp_s1 != NULL) {

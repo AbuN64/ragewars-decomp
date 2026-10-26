@@ -2,6 +2,6 @@
 
 #if defined(VERSION_US_REV1)
 /* An empty function. */
-void func_8026D83C_de(void) {
+void Geometry_NoOperation(void) {
 }
 #endif

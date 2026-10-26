@@ -16,7 +16,7 @@ extern float D_800C4710_de;
 
 extern float D_800C4780_de;
 
-extern void func_8026E350_de(unsigned char first, unsigned char second, unsigned char third, unsigned char fourth);
+extern void Geometry_SetPrimitiveColorOverride(unsigned char first, unsigned char second, unsigned char third, unsigned char fourth);
 
 extern float D_800C4828_de;
 
@@ -45,7 +45,7 @@ extern float D_800C47E0_de;
 
 extern float D_800C98C8;
 
-extern void func_8026E428_de(void);
+extern void Geometry_SwitchRenderMicrocode(void);
 
 extern float D_800C4708_de;
 
@@ -78,7 +78,7 @@ extern float D_800C47C0_de;
 
 extern float D_800C4808_de;
 
-extern void func_8026E4D0_de(void);
+extern void Geometry_ClearMaterialGroups(void);
 
 struct Node8026E4F8;
 struct Node8026E4F8 {
@@ -97,7 +97,7 @@ typedef struct TreeNode TreeNode;
 
 extern float D_800C4800_de;
 
-extern void *func_8026E4F8_de(Node8026E4F8 **arg0, u32 arg1);
+extern void *Geometry_FindMaterialNodeOrParent(Node8026E4F8 **arg0, u32 arg1);
 
 extern float D_800C4718_de;
 
@@ -109,7 +109,7 @@ struct func_8026E5E0_S1;
 
 extern float D_800C4750_de;
 
-extern void func_8026E4C0_de(int *state);
+extern void Geometry_ResetDisplayListState(int *state);
 
 extern float D_800C4768_de;
 
@@ -117,7 +117,7 @@ extern float D_800C46F8_de;
 
 extern float D_800C4778_de;
 
-extern void func_8026E390_de(void);
+extern void Geometry_LoadRenderMicrocode(void);
 
 struct func_8026E5E0_S1;
 typedef struct func_8026E5E0_S1 func_8026E5E0_S1;
@@ -126,7 +126,7 @@ extern float D_800C47E8_de;
 
 extern float D_800C47EC_de;
 
-extern void func_8026E1F8_de(void **arg0);
+extern void Geometry_RefreshMaterialResources(void **arg0);
 
 struct BoxRecAtC;
 struct BoxRecAtC {

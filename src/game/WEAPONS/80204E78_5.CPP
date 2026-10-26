@@ -22,7 +22,7 @@ extern void Geometry_QueueModelInstance(void **, void *, s32, void *, void *, s3
 
 
 
-extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
+extern void Scene_SetLevelActorStateBit(void *a, unsigned short b, unsigned short c, int d);
 
 void func_802054E0_de(Obj54E0 *actor, void *responseContext) {
     Rec54E0 *rec;
@@ -79,7 +79,7 @@ void func_80205694_de(void *actor, void *requestContext) {
 }
 
 void func_802056D0_de(Trigger *trigger) {
-    func_8028B670_de(&g_world, trigger->owner, trigger->actor, 1);
+    Scene_SetLevelActorStateBit(&g_world, trigger->owner, trigger->actor, 1);
 }
 
 /** Return the object's 0x200 status bit. */

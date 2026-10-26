@@ -39,7 +39,7 @@ void OvlScene_LoadSceneResources(LevelCode8044ACCC *arg0, s32 arg1) {
     s32 temp_v0_8;
     s32 temp_v1;
 
-    func_8028D64C_de(arg0);
+    Scene_ClearSceneObjectCounts(arg0);
     arg0->unk0 = 0;
     func_8044D1B4_de((char *)arg0);
     arg0->unk4 = 0;

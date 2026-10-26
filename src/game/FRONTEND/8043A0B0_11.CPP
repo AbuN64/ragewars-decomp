@@ -18,7 +18,7 @@ extern FourPlayerResultsScreen *D_800E59E0;
 
 /* Clears the 22 owned bytes at 0x4C of each of the 4 player records (150 bytes apart) in
    D_80146398; for each active player (byte 0x78 == 1) it looks up the player's model kind (byte
-   0x80) through func_8028CFA0_de and marks each of its 8 slot ids at least 0x4C3 as owned (byte 0x4C
+   0x80) through Scene_FindActorDefinition and marks each of its 8 slot ids at least 0x4C3 as owned (byte 0x4C
    plus the id less 0x4C3), then refreshes the player's loadout columns through func_8043B6E8_de. */
 
 
@@ -26,7 +26,7 @@ extern FourPlayerResultsScreen *D_800E59E0;
 
 extern u8 g_playerSettings[];
 
-extern struct Model *func_8028CFA0_de(Shared_World *, s32, s32);
+extern struct Model *Scene_FindActorDefinition(Shared_World *, s32, s32);
 
 /* Counts how many of the four 0x4D0-byte entries D_800E59E0 points to have the word at offset
    0x4B0 equal to one. */
@@ -136,7 +136,7 @@ void func_8043B96C_de(void) {
             entry -= 1;
         } while (i >= 0);
         if (record[0x78] == 1) {
-            model = func_8028CFA0_de(&g_world, 0xB, (s8) record[0x80]);
+            model = Scene_FindActorDefinition(&g_world, 0xB, (s8) record[0x80]);
             for (i = 0; i < 8; i++) {
                 id = model->slots[i];
                 if (id >= 0x4C3) {

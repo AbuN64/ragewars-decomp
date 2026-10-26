@@ -22,9 +22,9 @@ extern void SwapMatrixUpForward(Matrix *object);
 
 extern void GraphU64_ConvertMatrixToFixed(Matrix *src, void *dst);
 
-extern s32 func_8028B21C_de(struct Shared_World *arg0, s32 arg1);
+extern s32 Scene_FindModelIdIndex(struct Shared_World *arg0, s32 arg1);
 
-extern s32 func_8028C198_de(void *arg0, s32 arg1);
+extern s32 Scene_GetIndexedModelResource(void *arg0, s32 arg1);
 
 extern void Geometry_QueueDirectModel(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
@@ -79,12 +79,12 @@ void func_8022B484_de(char *player) {
     s32 index;
 
     if (object->unk120C != 0) {
-        index = func_8028B21C_de(&g_world, 0xC84);
+        index = Scene_FindModelIdIndex(&g_world, 0xC84);
     } else {
-        index = func_8028B21C_de(&g_world, 0xC85);
+        index = Scene_FindModelIdIndex(&g_world, 0xC85);
     }
     if (index != -1) {
-        Geometry_QueueDirectModel(func_8028C198_de(&g_world, index),
+        Geometry_QueueDirectModel(Scene_GetIndexedModelResource(&g_world, index),
                       (s32)((Shared_ActorView *)player)->transform1600, (s32)&D_800D0EF8, 0, -1);
     }
 }

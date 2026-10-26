@@ -28,7 +28,7 @@ extern void func_80278F00_de(Rec_func_8024C92C_de *arg0);
 
 
 
-void func_8028C4B4_de(void *world, s32 arg1) {
+void Scene_DispatchSecondaryTriggersOfKind(void *world, s32 arg1) {
     Rec_func_8024C92C_de *trigger;
     Rec_func_8024C92C_de *var_s1_2;
     s32 var_s0;
@@ -61,7 +61,7 @@ void func_8028C4B4_de(void *world, s32 arg1) {
     }
 }
 
-s32 func_8028C568_de(WorldRecAt1B40C *arg0, Record14 *arg1) {
+s32 Scene_QueueTriggerTimer(WorldRecAt1B40C *arg0, Record14 *arg1) {
     void *rec;
     f32 val;
     s32 flag;
@@ -94,7 +94,7 @@ s32 func_8028C568_de(WorldRecAt1B40C *arg0, Record14 *arg1) {
 
 
 
-void func_8028C60C_de(void *arg0) {
+void Scene_UpdateTriggerTimers(void *arg0) {
     void *node;
     void *next;
     void *object;
@@ -166,7 +166,7 @@ void Scene_SampleWorldLighting(Shared_World *world, CVector3 *position, Shared_P
     }
 }
 
-/* Searches the counted pointer list at offset 0x1B664 of a world record for the first entry whose definition id at 0x18->0xC equals the given id, returning it or null. Adapted from func_8028C108_de with the list offset changed to 0x1B664. */
+/* Searches the counted pointer list at offset 0x1B664 of a world record for the first entry whose definition id at 0x18->0xC equals the given id, returning it or null. Adapted from Scene_FindSwitchByDefinitionId with the list offset changed to 0x1B664. */
 
 
 
@@ -174,7 +174,7 @@ void Scene_SampleWorldLighting(Shared_World *world, CVector3 *position, Shared_P
 
 
 
-EntryRecAt18V4 *func_8028C7E0_de(WorldCode8028B64C *world, s32 id) {
+EntryRecAt18V4 *Scene_FindTypeFourteenActorByDefinitionId(WorldCode8028B64C *world, s32 id) {
     s32 i;
     EntryRecAt18V4 *found = 0;
 
@@ -200,7 +200,7 @@ extern Player *Player_GetFirstPlayer(void *list);
 extern Player *Player_GetFirstPlayer(void *list);
 #endif
 
-Player *func_8028C834_de(WorldRecAt1B6A4 *world) {
+Player *Scene_FindNearestObjectToFirstPlayer(WorldRecAt1B6A4 *world) {
     CVector3 delta;
     Player *player;
     Player *object;
@@ -236,11 +236,11 @@ Player *func_8028C834_de(WorldRecAt1B6A4 *world) {
 
 
 
-extern void func_8024B8C4_de(Object_func_8028C934_de *object);
-extern s32 func_8024D160_de(Object_func_8028C934_de *object);
-extern s32 func_8024E1B4_de(Object_func_8028C934_de *object);
+extern void func_8024B8C4_de(ObjectSceneRegisterActorInSceneLists *object);
+extern s32 func_8024D160_de(ObjectSceneRegisterActorInSceneLists *object);
+extern s32 func_8024E1B4_de(ObjectSceneRegisterActorInSceneLists *object);
 
-void func_8028C934_de(WorldRecAt10B8 *world, Object_func_8028C934_de *object) {
+void Scene_RegisterActorInSceneLists(WorldRecAt10B8 *world, ObjectSceneRegisterActorInSceneLists *object) {
     func_8024B8C4_de(object);
     if (func_8024D160_de(object) != 0) {
         s32 n = world->countA;
@@ -301,7 +301,7 @@ void func_8028C934_de(WorldRecAt10B8 *world, Object_func_8028C934_de *object) {
 }
 
 /* Returns the nearest other object matching the optional team, kind and active filters, by squared distance. */
-ObjectRecAt1A4 *func_8028CAE0_de(World_func_8028CAE0_de *world, ObjectRecAt1A4 *self, s32 team, s32 kind, s32 activeOnly) {
+ObjectRecAt1A4 *Scene_FindNearestMatchingActor(WorldSceneFindNearestMatchingActor *world, ObjectRecAt1A4 *self, s32 team, s32 kind, s32 activeOnly) {
     s32 i;
     ObjectRecAt1A4 *obj;
     ObjectRecAt1A4 *best;
@@ -346,7 +346,7 @@ ObjectRecAt1A4 *func_8028CAE0_de(World_func_8028CAE0_de *world, ObjectRecAt1A4 *
 
 
 
-struct EntryRecAt10 *func_8028CBB0_de(struct OwnerCode8028B64C *owner, struct EntryRecAt10 *pos) {
+struct EntryRecAt10 *Scene_FindNearestListedEntry(struct OwnerCode8028B64C *owner, struct EntryRecAt10 *pos) {
     s32 i;
     struct EntryRecAt10 *best;
     f32 min;
@@ -390,7 +390,7 @@ struct EntryRecAt10 *func_8028CBB0_de(struct OwnerCode8028B64C *owner, struct En
 
 
 
-ActorRecAt1D8V1 *func_8028CC34_de(ObjCode8028B64C *obj, int id) {
+ActorRecAt1D8V1 *Scene_ResolveActorLinkGroup(ObjCode8028B64C *obj, int id) {
     int i;
     ActorRecAt1D8V1 *found;
     int count;
@@ -415,7 +415,7 @@ ActorRecAt1D8V1 *func_8028CC34_de(ObjCode8028B64C *obj, int id) {
     return found;
 }
 
-void func_8028CCA4_de(void *arg0, s32 arg1) {
+void Scene_ClearActorLinksById(void *arg0, s32 arg1) {
     s32 count;
     s32 i;
     void **arr;
@@ -438,7 +438,7 @@ void func_8028CCA4_de(void *arg0, s32 arg1) {
 
 extern void Barrel_FillDamagePacket(CDamageInfo *event, void *target, s32 damage, f32 radius, s32 flags, Shield *shield);
 extern void Barrel_RunDamageHook(LevelActor *actor, s32 *behavior, CDamageInfo *event);
-void func_8028CCDC_de(Shared_World *world, s32 damage, s32 flags) {
+void Scene_ApplyDamageToTypeOneActors(Shared_World *world, s32 damage, s32 flags) {
     CDamageInfo event;
     LevelActor **actors;
     s32 count;

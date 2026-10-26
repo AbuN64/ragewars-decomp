@@ -101,7 +101,7 @@ void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
     f32 dist;
 
     if (PpDecom_UnpackResource(handle, 1) != 0) {
-        mode = func_8028B394_de(world, 0);
+        mode = Scene_GetModelSectionTwoRecord(world, 0);
         node = (*handle)->data;
         n = node->count;
         block = Cache_AllocResourceBlock(0, handle, n * (sizeof(LevelActor)) + 8);

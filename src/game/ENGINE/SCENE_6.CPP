@@ -11,12 +11,12 @@
 #include "ENGINE/SCENE_6.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-char *func_8028AFEC_de(void *arg0, s32 resourceId) {
+char *Scene_GetLinkedResourceSection(void *arg0, s32 resourceId) {
     return SetN64_GetPackSection((((struct ObjectLinks74 *) ((s8 *) arg0))->unk_70), resourceId);
 }
 
 /** Return an indexed record from the table at object offset 0xA0. */
-void *func_8028B00C_de(struct Shared_World *object, int index) {
+void *Scene_GetStridedWorldRecord(struct Shared_World *object, int index) {
     char *base = (char *)object->records;
     int stride = *(int *)base;
     return base + (index * stride + 8);
@@ -34,7 +34,7 @@ extern Gfx *g_displayListCursor;
 
 extern void func_80249E28_de(LevelActor *object, void *camera);
 
-void func_8028B028_de(SceneRecAt10C0 *scene, void *camera) {
+void Scene_DrawOpaqueActors(SceneRecAt10C0 *scene, void *camera) {
     LevelActor *object;
     s32 count;
     s32 i;
@@ -68,7 +68,7 @@ extern Gfx *g_displayListCursor;
 extern void Particle_DrawRenderList(s32 arg0, s32 arg1);
 
 
-void func_8028B160_de(s32 world, s32 view) {
+void Scene_DrawWorldParticles(s32 world, s32 view) {
     Gfx *cmd;
 
     cmd = g_displayListCursor++;
@@ -84,7 +84,7 @@ void func_8028B160_de(s32 world, s32 view) {
     Geometry_FlushModelBatch();
 }
 
-s32 func_8028B21C_de(struct Shared_World *arg0, s32 arg1)
+s32 Scene_FindModelIdIndex(struct Shared_World *arg0, s32 arg1)
 {
   s32 count;
   s32 i;
@@ -117,7 +117,7 @@ s32 func_8028B21C_de(struct Shared_World *arg0, s32 arg1)
 
 }
 
-int func_8028B25C_de(void *world, int arg1) {
+int Scene_GetModelIdAtIndex(void *world, int arg1) {
     unsigned short *base = (unsigned short *)((char *)((struct Shared_World *)(world))->modelIds + 8);
     return base[arg1];
 }
@@ -126,13 +126,13 @@ int func_8028B25C_de(void *world, int arg1) {
 
 
 
-extern void GameObject_LoadModel(Object_func_8028B274_de *,s32,s32,s32);
+extern void GameObject_LoadModel(ObjectSceneChangeInstanceModel *,s32,s32,s32);
 static inline s32 find(TableRecAt8 *table,u16 id) {
  s32 index=0,count; u16 *entry;entry=table->entries;count=table->count;
  if(count>0) { do {if(*entry==id) return index; index++;entry++;} while(index<count); }
  return -1;
 }
-void func_8028B274_de(BankRecAt94 *arg0,Object_func_8028B274_de *draw,s32 arg2,s32 arg3) {
+void Scene_ChangeInstanceModel(BankRecAt94 *arg0,ObjectSceneChangeInstanceModel *draw,s32 arg2,s32 arg3) {
  s32 index=0;
  if(draw->id!=arg2) {
  index=find(arg0->table,arg2);
@@ -141,7 +141,7 @@ void func_8028B274_de(BankRecAt94 *arg0,Object_func_8028B274_de *draw,s32 arg2,s
 }
 
 
-void *func_8028B2F8_de(Shared_World *world, u16 *arg1) {
+void *Scene_GetModelRecordByIndexPointer(Shared_World *world, u16 *arg1) {
     s32 base;
     s32 idx;
 
@@ -154,7 +154,7 @@ void *func_8028B2F8_de(Shared_World *world, u16 *arg1) {
 }
 
 
-u32 func_8028B350_de(Shared_World *world, s32 arg1) {
+u32 Scene_GetModelSectionTwoIndex(Shared_World *world, s32 arg1) {
     s32 offset;
     s32 result;
 
@@ -172,7 +172,7 @@ u32 func_8028B350_de(Shared_World *world, s32 arg1) {
 
 
 
-s32 func_8028B394_de(void *world, s32 arg1) {
+s32 Scene_GetModelSectionTwoRecord(void *world, s32 arg1) {
     s32 raw;
     s32 base;
 
@@ -189,7 +189,7 @@ extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
 
 
-void func_8028B3E4_de(struct Shared_World *world, s32 index, s32 arg2, s32 arg3) {
+void Scene_SetSecondaryLevelBit(struct Shared_World *world, s32 index, s32 arg2, s32 arg3) {
     void *table;
     u8 *base1;
     u8 *base2;
@@ -226,7 +226,7 @@ extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
 
 
-void func_8028B4D0_de(struct Shared_World *world, s32 arg1, s32 arg2) {
+void Scene_SetCurrentSecondaryLevelBit(struct Shared_World *world, s32 arg1, s32 arg2) {
     void *field84;
     s32 field1B40C;
     void *table;
@@ -264,7 +264,7 @@ extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
 
 
-s32 func_8028B5C0_de(struct Shared_World *world, s32 arg1) {
+s32 Scene_TestCurrentSecondaryLevelBit(struct Shared_World *world, s32 arg1) {
     void *field84;
     s32 field1B40C;
     void *table;

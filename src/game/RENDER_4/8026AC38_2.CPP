@@ -18,7 +18,7 @@ extern void Cache_MarkResourceInUse(s32 heap, void **resource);
 extern s32 Geometry_ApplyMaterialLighting(s32 matrix, s32 lights, void *material);
 extern s32 Geometry_SetupMaterial(void *material, s32 pass);
 
-void func_8026B9EC_de(void **resource, struct Owner104 *owner, s32 matrix, s32 segment, s32 lights, void *textures, s32 pass) {
+void Geometry_DrawVisibleOwnerParts(void **resource, struct Owner104 *owner, s32 matrix, s32 segment, s32 lights, void *textures, s32 pass) {
     void *header;
     void *base;
     void **parts;

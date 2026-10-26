@@ -45,7 +45,7 @@ extern void Control_ReadControllerStates(void);
 
 extern void Control_ReleasePakLock(void);
 
-extern s32 func_802A05A0_de(s32 c);
+extern s32 XPlus_UppercaseCharacter(s32 c);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
@@ -59,7 +59,7 @@ static inline void func_804042F0_encode(u8 *dst, u8 *src, s32 n) {
     s32 j;
 
     for (i = 0; i < n; i++) {
-        src[i] = func_802A05A0_de(src[i]);
+        src[i] = XPlus_UppercaseCharacter(src[i]);
         for (j = 0; j < 0x42; j++) {
             if (src[i] == D_800DE80C[j]) {
                 dst[i] = j;

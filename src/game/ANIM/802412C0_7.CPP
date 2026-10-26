@@ -19,7 +19,7 @@
 extern void GraphU64_MultiplyAffineMatrices(void *, void *, void *);
 
 
-extern void *func_8028B2F8_de(Shared_World *, u16 *);
+extern void *Scene_GetModelRecordByIndexPointer(Shared_World *, u16 *);
 
 extern void func_80240CAC_de(QueryE0 *arg0);
 
@@ -77,7 +77,7 @@ void func_80243920_de(ActorB0 *actor) {
     data = actor->data;
     flags = actor->flags;
     if (data != 0) {
-        resource = func_8028B2F8_de(&g_world, (u16 *)data);
+        resource = Scene_GetModelRecordByIndexPointer(&g_world, (u16 *)data);
         if (resource != 0) {
           if ((*flags & 8) != 0) {
            if ((*flags & 0x100000) == 0) {

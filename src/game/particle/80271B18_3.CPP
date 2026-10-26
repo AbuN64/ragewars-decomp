@@ -200,7 +200,7 @@ void GraphU64_TransformPoint(void *matrix, void *arg1, void *arg2) {
            + m->m[14];
 }
 
-/* Transforms a count of points by the affine part of a 4x4 matrix, writing each transformed point to an output array. Adapted from func_8029F1A0_de with the input and output arguments swapped and the indexed loop replaced by a loop counting down an unsigned count while advancing an input and an output pointer. */
+/* Transforms a count of points by the affine part of a 4x4 matrix, writing each transformed point to an output array. Adapted from XMath_TransformPointArray with the input and output arguments swapped and the indexed loop replaced by a loop counting down an unsigned count while advancing an input and an output pointer. */
 void func_80272944_de(f32 *m, f32 *in, f32 *out, u32 count) {
     f32 vx, vy, vz;
 

@@ -86,11 +86,11 @@ static inline s32 func_8040D00C_overlaps(struct Shape_typemap_165 *area) {
     return 0;
 }
 
-s32 func_802A0238_de(u8 *);
+s32 XPlus_StringLength(u8 *);
 
 GlyphBuffer *func_8041200C_de(s32);
 
-void func_8029FE38_de(char *, s32, s32, s32 (*)(char *, char *));
+void XPlus_SortArray(char *, s32, s32, s32 (*)(char *, char *));
 
 static inline void textBegin(u8 font, u8 style) {
     func_802A1898_de(&D_8014D580.field_0, &D_8014D580.field_8,
@@ -291,7 +291,7 @@ void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
         clipped = 1;
         func_802A1870_de(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
     }
-    length = func_802A0238_de(text);
+    length = XPlus_StringLength(text);
     if (args.flags & 0x100) { font=widget->fontSelected; style=widget->styleSelected; }
     else if (args.flags & 0x40) { font=widget->fontAlt; style=widget->styleAlt; }
     else { font=widget->font; style=widget->style; }
@@ -350,7 +350,7 @@ void Frontend_DrawTextWidget(TextWidget *widget, sm_dldc args) {
     if (clipped) func_802A1870_de(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
     if (count>0) {
         D_8014D590[D_8014D570].count=count;
-        func_8029FE38_de((char *)D_8014D590[D_8014D570].cursor, count, sizeof(TextSprite), D_0040F570);
+        XPlus_SortArray((char *)D_8014D590[D_8014D570].cursor, count, sizeof(TextSprite), D_0040F570);
         D_8014D570++;
         if (D_8014D570>=16) Frontend_FlushTextBatches();
     }

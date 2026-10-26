@@ -19,8 +19,8 @@ extern void *Cache_AllocateMemory(), *func_8040EC30_de(), *func_80425C70_de(), *
 extern s32 Defs_TestBit(), func_80425014_de(), func_80425674_de(), Frontend_FindKeyIndex();
 extern void Frontend_SetWidgetFlag08(), Frontend_SetWidgetFlag100(), func_8043C210_de(), func_8043C278_de(), func_80438A88_de(), func_80425D14_de();
 extern void Defs_SetBitValue(), XPlus_FillMemory(), func_804259E0_de(), func_802A0C08_de(), XPlus_CopyString(), Achieve_UpdatePlayerPreviewStats(), func_80438614_de();
-extern void func_8041B110_de(), func_8028D380_de(), func_802A2394_de();
-extern char *func_802A0494_de();
+extern void func_8041B110_de(), Scene_CopyLevelName(), func_802A2394_de();
+extern char *XPlus_UppercaseString();
 extern u8 D_800F00DC_raw[];
 extern char g_world[];
 /* Builds the results screen (0x1C8-byte state D_800E5830): window items, the first active profile, then per screen mode
@@ -152,8 +152,8 @@ tail:
         SG(it, char *, 0x38) = D_800E2084[g_languageIndex];
     }
     it = func_8040EC30_de(root, CS(0x270));
-    func_8028D380_de(g_world, D_8015402C, buf, 0x3F);
-    XPlus_CopyString(g + 0x50, func_802A0494_de(buf));
+    Scene_CopyLevelName(g_world, D_8015402C, buf, 0x3F);
+    XPlus_CopyString(g + 0x50, XPlus_UppercaseString(buf));
     SG(it, u8 *, 0x38) = g + 0x50;
     SG(g, void *, 0x24) = func_8040EC30_de(root, CS(0x278));
     SG(g, s32, 0x1C0) = 1;

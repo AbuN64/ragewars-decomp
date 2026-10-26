@@ -25,13 +25,13 @@ void func_8042E9A0_de(s32 first, s32 second) {
 }
 
 /* Replaces every occurrence of the second string in the first with the third, in place: while
-   func_802A052C_de finds a match (returning the position just past it), it copies the text before
-   the match into a 200-byte buffer, appends the replacement through func_802A02E8_de, appends the
+   XPlus_FindPatternEnd finds a match (returning the position just past it), it copies the text before
+   the match into a 200-byte buffer, appends the replacement through XPlus_AppendString, appends the
    rest of the text, copies the buffer back and searches again. */
 
-extern char *func_802A052C_de(char *, char *);
-extern s32 func_802A0238_de(char *);
-extern void func_802A02E8_de(char *, char *);
+extern char *XPlus_FindPatternEnd(char *, char *);
+extern s32 XPlus_StringLength(char *);
+extern void XPlus_AppendString(char *, char *);
 
 void func_8042E9B4_de(char *text, char *find, char *replacement) {
     char buffer[200];
@@ -43,10 +43,10 @@ void func_8042E9B4_de(char *text, char *find, char *replacement) {
     s32 i;
     s32 j;
 
-    match = func_802A052C_de(text, find);
-    findLength = func_802A0238_de(find);
+    match = XPlus_FindPatternEnd(text, find);
+    findLength = XPlus_StringLength(find);
     while (match != 0) {
-        length = func_802A0238_de(text);
+        length = XPlus_StringLength(text);
         before = match - text - findLength;
         i = 0;
         if (i < before) {
@@ -58,8 +58,8 @@ void func_8042E9B4_de(char *text, char *find, char *replacement) {
             }
         }
         buffer[before] = 0;
-        func_802A02E8_de(buffer, replacement);
-        j = func_802A0238_de(buffer);
+        XPlus_AppendString(buffer, replacement);
+        j = XPlus_StringLength(buffer);
         i = before + findLength;
         if (i < length) {
         copy_after:
@@ -71,7 +71,7 @@ void func_8042E9B4_de(char *text, char *find, char *replacement) {
                 goto copy_after;
             }
         }
-        copied = func_802A0238_de(buffer);
+        copied = XPlus_StringLength(buffer);
         i = 0;
         if (i < copied) {
         copy_back:
@@ -82,7 +82,7 @@ void func_8042E9B4_de(char *text, char *find, char *replacement) {
             }
         }
         text[copied] = 0;
-        match = func_802A052C_de(text, find);
+        match = XPlus_FindPatternEnd(text, find);
     }
 }
 
