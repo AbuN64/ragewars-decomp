@@ -95,7 +95,7 @@ void Camera_DrawActiveViews(Race *race, s32 world)
         Camera_DrawViewportOverlays(&race->self);
     }
     Camera_DrawAndAdvanceMessages(race, &race->self);
-    if (D_80145040.replay != 0) {
+    if (D_80145040.game.local != 0) {
         racer = race->header.views.head;
         if (racer != 0) {
             func_8022A3F8_de(&D_80145040, racer);

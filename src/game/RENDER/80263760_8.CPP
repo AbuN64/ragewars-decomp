@@ -34,7 +34,6 @@ extern void Rumble_FreeAllPoolNodes(s32 *);
 
 extern s32 D_8013B2BC;
 
-extern ObjectState1E_2 D_801462C8;
 
 
 extern void *Player_GetFirstPlayer(void *);
@@ -173,7 +172,7 @@ void Control_CycleActorSnapshotMode(void) {
     Snapshot *snapshot;
     void *player;
     s32 enabled;
-    ObjectState1E_2 *options;
+    Shared_Game *options;
 
     enabled = SetN64_IsModeThirteen() != 0;
     snapshot = &D_8010BC40;
@@ -198,9 +197,9 @@ void Control_CycleActorSnapshotMode(void) {
         }
         Control_SaveActorSnapshot();
         snapshot->savedActorId = D_8013B2BC;
-        options = &D_801462C8;
-        if (options->unk_1D == 0) {
-            player = Player_GetFirstPlayer((char *)options - 0x1288);
+        options = &D_80145040.game;
+        if (options->local == 0) {
+            player = Player_GetFirstPlayer(&D_80145040);
             if (player != 0) {
                 if (snapshot->mode == 1 &&
                     (D_8013B2BC != ((Shared_ActorView *)player)->spawn ||

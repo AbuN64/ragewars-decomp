@@ -29,7 +29,6 @@ s32 SetN64_DrawCreditsLines(s32);
 
 s32 func_80291074_de(s32);
 
-extern s32 D_801462C8;
 
 void SetN64_SelectSpawnAfterCredits(void *arg0, s32 arg1) {
     GameSession *object = arg0;
@@ -80,14 +79,14 @@ void SetN64_DrawMode16Credits(s32 session) {
 
 /* Initializes the game state for a new game phase with arg0 and updates the game state flag. */
 void SetN64_InitializeMode17Credits(s32 arg0) {
-    s8 *base = &D_801462C8;
+    Shared_Game *game = &D_80145040.game;
 
-    ((ObjectState1E *)(base))->unk_1D = 0;
+    game->local = 0;
     D_800CD780 = 0;
     D_8011B9F0 = 0;
     D_80146CB8 = (f32)(&D_800E28D0)[1];
     D_80142898 = 0;
-    Player_GetFirstPlayer(base - 0x1288);
+    Player_GetFirstPlayer(&D_80145040);
     D_800CD784_de = 0;
     Scene_ResetTransitionViewport();
     SetN64_ResetPlayerItems(arg0, 0x82);
