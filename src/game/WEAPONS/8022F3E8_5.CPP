@@ -10,15 +10,6 @@
 #include "RENDER_2/8025DE50_5.H"
 #include "COMMON/PLAYERPROFILES.H"
 
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-#ifdef NON_MATCHING
-/* Drafted from the other version's body in its unit. */
-#else
-INCLUDE_ASM("span_1000", func_802301F4_de);
-#endif
-#endif
-
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
 /* Handles a player's attack trigger: nothing while cooling down past D_800C2EE0_de; the trigger is the
  * controller latch at 0x23C (cleared when read) for a flagged controlled player, else flag 0x2000; when it
  * fires and func_80230058_de accepts the attack, a ranged attack (type 2) that may fire takes action 8 and
@@ -29,6 +20,7 @@ INCLUDE_ASM("span_1000", func_802301F4_de);
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/EXTERNS_13.H"
 #include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/VECTOR4F.H"
 /* func_802301E4_S* are unresolved canonical player/actor/control/attack types. */
 
 
@@ -103,8 +95,8 @@ static inline s32 can_fire(char *player) {
     if (ammo == 0) {
         SoundElement_PlayFlatSound(0xD4D);
         if (((AttackTriggerPlayer *)(player))->unk5DC != 0) {
-            Sky_PostTargetedScreenMessage(&D_80145088, ((AttackTriggerPlayer *)(player))->unk5DC, D_800D30BC[0], Player_GetPlayerIndex(&D_80145040, player),
-                          D_800C2EE4_de);
+            Sky_PostTargetedScreenMessage(&D_80145088, ((AttackTriggerPlayer *)(player))->unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, g_languageIndex),
+                          Player_GetPlayerIndex(&D_80145040, player), D_800C2EE4_de);
         }
     }
     return ammo;
@@ -137,7 +129,6 @@ s32 func_802301F4_de(void *actor, void *attack) {
     }
     return 0;
 }
-#endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
 extern s16 D_800CE8DC[];
