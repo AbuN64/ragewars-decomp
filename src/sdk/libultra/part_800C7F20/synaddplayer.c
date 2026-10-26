@@ -40,7 +40,7 @@ void alSynAddPlayer(void *synth, void *audioPlayer) {
 
                  /* __allocParam */
 
-s32 func_802B3000_de(ALSynth_func_802B3000_de *drvr, ALVoice_s_func_802B3000_de *voice, ALVoiceConfig_s *vc)
+s32 func_802B3000_de(ALSynth_func_802B3000_de *drvr, ALVoice_s *voice, ALVoiceConfig_s *vc)
 {
     PVoice_s_func_802B3000_de *pvoice = 0;
     ALFilter_s_func_802B3000_de *f;

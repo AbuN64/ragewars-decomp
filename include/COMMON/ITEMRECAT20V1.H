@@ -345,9 +345,10 @@ struct ALVoice_s;
 typedef struct ALVoice_s ALVoice_s;
 
 struct ALVoice_s;
+struct PVoice_s_func_802B3000_de;
 struct ALVoice_s {
     ListLink node;
-    void *pvoice;
+    struct PVoice_s_func_802B3000_de *pvoice;
     void *table;
     void *clientPrivate;
     s16 state;
@@ -426,8 +427,6 @@ struct OwnerCode8043DF84 {
     s32 unk85C;
 };
 
-struct ALVoice_s_func_802B3000_de;
-typedef struct ALVoice_s_func_802B3000_de ALVoice_s_func_802B3000_de;
 
 struct UnitMtx;
 typedef struct UnitMtx UnitMtx;
@@ -1788,26 +1787,15 @@ typedef struct Field_u16_14 Field_u16_14;
 
 
 struct ALFilter_s_func_802B3000_de;
-struct ALVoice_s_func_802B3000_de;
 struct PVoice_s_func_802B3000_de;
 struct PVoice_s_func_802B3000_de {
     ListLink node;
-    struct ALVoice_s_func_802B3000_de *vvoice;
+    struct ALVoice_s *vvoice;
     struct ALFilter_s_func_802B3000_de *channelKnob;
     char pad10[0xD8 - 0x10];
     s32 offset;
 };
 
-struct ALVoice_s_func_802B3000_de {
-    ListLink node;
-    struct PVoice_s_func_802B3000_de *pvoice;
-    void *table;
-    void *clientPrivate;
-    s16 state;
-    s16 priority;
-    s16 fxBus;
-    s16 unityPitch;
-};
 
 struct FieldRecAt14;
 struct FieldRecAt14 {
