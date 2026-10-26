@@ -8,6 +8,23 @@
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "TYPES.H"
+struct Opaque_OSMesgQueue;
+typedef struct Opaque_OSMesgQueue Opaque_OSMesgQueue;
+typedef struct OSIoMesgHdr OSIoMesgHdr;
+struct OSIoMesgHdr {
+    u16 type;
+    u8 pri;
+    u8 status;
+    Opaque_OSMesgQueue *retQueue;
+};
+typedef struct OSIoMesg OSIoMesg;
+struct OSIoMesg {
+    OSIoMesgHdr hdr;
+    void *dramAddr;
+    u32 devAddr;
+    u32 size;
+    void *piHandle;
+};
 #include "COMMON/WIDGETRECAT1A.H"
 #include "COMMON/OSPIHANDLE_S.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -186,7 +203,7 @@ extern char *D_800D35FC_de;
 
 extern s32 D_801470A0;
 
-extern double D_800C7840_de;
+extern const double D_800C7840_de;
 
 extern char D_800D3B7C[];
 
@@ -611,7 +628,7 @@ extern s32 D_80107928;
 
 extern char D_800C8420_de;
 
-extern double D_800C78F8_de;
+extern const double D_800C78F8_de;
 
 extern char D_002050A0;
 
@@ -641,7 +658,7 @@ extern FieldRow D_800E54A8[];
 
 extern int D_800E1354[];
 
-extern double D_800C7848_de;
+extern const double D_800C7848_de;
 
 extern int D_800E2B2C[];
 
@@ -651,7 +668,7 @@ extern short D_800CB348_de[];
 
 extern s16 D_B2000018;
 
-extern double D_800C7838_de;
+extern const double D_800C7838_de;
 
 extern char *D_800E1FB4_eu[];
 
@@ -718,7 +735,7 @@ extern char D_800D38E0[];
 
 extern u32 D_80149B08;
 
-extern double D_800C7908_de;
+extern const double D_800C7908_de;
 
 extern char D_800E611C[];
 
@@ -1636,7 +1653,7 @@ extern char D_002BE0D0;
 
 extern char D_800D38D0[];
 
-extern OSIoMesgCode802BA23C D_80149AE0;
+extern OSIoMesg D_80149AE0;
 
 extern char D_800D38EC[];
 
@@ -1877,7 +1894,7 @@ extern s32 D_800CD9B4;
 struct D_800C7470_Pair;
 extern struct D_800C7470_Pair D_800C78C0;
 
-extern double D_800C7900_de;
+extern const double D_800C7900_de;
 
 extern char D_800DD50C[];
 
@@ -2373,7 +2390,7 @@ extern ResourcePageMapping *D_800FFE24;
 
 extern char D_800D782C[];
 
-extern OSIoMesgCode802BA23C D_80149AC0;
+extern OSIoMesg D_80149AC0;
 
 extern ItemRecAt1C D_8010C590[];
 
@@ -2574,8 +2591,6 @@ struct ALEvent;
 struct ALFxCode802BAC64;
 typedef struct ALFxCode802BAC64 ALFxCode802BAC64;
 
-struct ALLoadFilter48;
-typedef struct ALLoadFilter48 ALLoadFilter48;
 
 struct ALRAWWaveInfo;
 typedef struct ALRAWWaveInfo ALRAWWaveInfo;
@@ -2597,8 +2612,6 @@ typedef struct ALSoundState_func_802B2780_de ALSoundState_func_802B2780_de;
 struct ALWaveTable_s;
 typedef struct ALWaveTable_s ALWaveTable_s;
 
-struct ALWaveTableSCode802BE0D0;
-typedef struct ALWaveTableSCode802BE0D0 ALWaveTableSCode802BE0D0;
 
 
 
@@ -2904,15 +2917,9 @@ typedef struct Node_func_8020D364_de Node_func_8020D364_de;
 
 
 
-struct Note;
-typedef struct Note Note;
 
 
-struct OSIoMesg;
-typedef struct OSIoMesg OSIoMesg;
 
-struct OSIoMesgHdr;
-typedef struct OSIoMesgHdr OSIoMesgHdr;
 
 struct OSPiHandle_s;
 
@@ -3427,21 +3434,6 @@ struct ALWaveTable_s {
         ALADPCMWaveInfo adpcmWave;
         ALRAWWaveInfo rawWave;
     } waveInfo;
-};
-struct ALLoadFilter48;
-struct ALLoadFilter48 {
-    ALFilter_s14 filter;
-    ADPCM_STATE *state;
-    ADPCM_STATE *lstate;
-    ALRawLoop loop;
-    ALWaveTable_s *table;
-    s32 bookSize;
-    void *dma;
-    void *dmaState;
-    s32 sample;
-    s32 lastsam;
-    s32 first;
-    s32 memin;
 };
 struct Opaque_ALSeq_s;
 typedef struct Opaque_ALSeq_s Opaque_ALSeq;
@@ -4174,29 +4166,6 @@ struct Node_func_8020D364_de {
     u16 id;
     u8 pad2[2];
     u8 kind;
-};
-struct Note;
-struct Note {
-    char label[0x28];
-    char name[0x14];
-    char size[0xA];
-};
-struct Opaque_OSMesgQueue;
-typedef struct Opaque_OSMesgQueue Opaque_OSMesgQueue;
-struct OSIoMesgHdr;
-struct OSIoMesgHdr {
-    u16 type;
-    u8 pri;
-    u8 status;
-    Opaque_OSMesgQueue *retQueue;
-};
-struct OSIoMesg;
-struct OSIoMesg {
-    OSIoMesgHdr hdr;
-    void *dramAddr;
-    u32 devAddr;
-    u32 size;
-    void *piHandle;
 };
 struct OSTimer_s;
 

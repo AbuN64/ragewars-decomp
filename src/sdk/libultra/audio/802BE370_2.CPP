@@ -29,7 +29,7 @@ Acmd *func_802C31C0(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acm
     s32 bEnd;
     s32 decoded = 0;
     s32 looped = 0;
-    ALLoadFilter_func_802BE514_de *f = (ALLoadFilter_func_802BE514_de *)filter;
+    ALLoadFilter48_2 *f = (ALLoadFilter48_2 *)filter;
     if (outCount == 0)
         return ptr;
     inp = 0;
@@ -113,7 +113,7 @@ Acmd *func_802C31C0(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acm
 #endif
 
 #if defined(VERSION_DE)
-Acmd *func_802BE0D0_de(ALLoadFilter_func_802BE514_de *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
+Acmd *func_802BE0D0_de(ALLoadFilter48_2 *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
     s16 inp;
@@ -130,7 +130,7 @@ Acmd *func_802BE0D0_de(ALLoadFilter_func_802BE514_de *filter, s16 *outp, s32 out
     s32 decoded = 0;
     s32 looped = 0;
 
-    ALLoadFilter_func_802BE514_de *f = filter;
+    ALLoadFilter48_2 *f = filter;
 
     if (outCount == 0)
         return ptr;
@@ -400,7 +400,7 @@ Acmd *func_802BE514_de(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, 
     s32 startZero;
     s32 nSam;
     s32 op;
-    ALLoadFilter_func_802BE514_de *f = (ALLoadFilter_func_802BE514_de *)filter;
+    ALLoadFilter48_2 *f = (ALLoadFilter48_2 *)filter;
     ALFilter_s14 *a = (ALFilter_s14 *)filter;
     if (outCount == 0)
         return ptr;
@@ -473,7 +473,7 @@ Acmd *func_802BE514_de(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, 
     return ptr;
 }
 
-Acmd *func_802C3988(ALLoadFilter_func_802BE514_de *filter, s16 *outp, s32 byteCount, s32 sampleOffset, Acmd *p)
+Acmd *func_802C3988(ALLoadFilter48_2 *filter, s16 *outp, s32 byteCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
     s32 nbytes;
@@ -481,7 +481,7 @@ Acmd *func_802C3988(ALLoadFilter_func_802BE514_de *filter, s16 *outp, s32 byteCo
     s32 dmemAlign;
     s32 nSam;
     s32 op;
-    ALLoadFilter_func_802BE514_de *f = filter;
+    ALLoadFilter48_2 *f = filter;
     s32 *stream;
     op = *outp;
     if (f->table->base == 0) {
@@ -538,7 +538,7 @@ Acmd *func_802C3988(ALLoadFilter_func_802BE514_de *filter, s16 *outp, s32 byteCo
 
 s32 func_802BEAA4_de(void *filter, s32 paramID, struct ALWaveTable_s *param)
 {
-    ALLoadFilter48 *a = (ALLoadFilter48 *)filter;
+    ALLoadFilter48_2 *a = (ALLoadFilter48_2 *)filter;
     ALFilter_s14 *f = (ALFilter_s14 *)filter;
 
     switch (paramID) {

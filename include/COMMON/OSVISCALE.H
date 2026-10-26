@@ -30,14 +30,7 @@ extern float D_800C79D8_de;
 struct __OSViContext_func_802BA6B0_de;
 typedef struct __OSViContext_func_802BA6B0_de __OSViContext_func_802BA6B0_de;
 
-struct OSIoMesgHdr_func_802BA350_de;
 struct OSMesgQueue;
-struct OSIoMesgHdr_func_802BA350_de {
-    u16 type;
-    u8 pri;
-    u8 status;
-    struct OSMesgQueue *retQueue;
-};
 
 struct OSDevMgr_func_802BA350_de;
 struct OSMesgQueue;
@@ -52,8 +45,6 @@ struct OSDevMgr_func_802BA350_de {
     s32 (*edma)(void *, s32, u32, void *, u32);
 };
 
-struct OSIoMesgCode802BA23C;
-typedef struct OSIoMesgCode802BA23C OSIoMesgCode802BA23C;
 
 
 
@@ -75,8 +66,6 @@ typedef struct RecCode802BA23C RecCode802BA23C;
 
 extern double D_800C79D0_de;
 
-struct OSIoMesgHdr_func_802BA350_de;
-typedef struct OSIoMesgHdr_func_802BA350_de OSIoMesgHdr_func_802BA350_de;
 
 struct OSViFieldRegs;
 typedef struct OSViFieldRegs OSViFieldRegs;
@@ -106,14 +95,6 @@ struct __OSViContext_func_802BA6B0_de {
     u32 control;
 };
 
-struct OSIoMesgCode802BA23C;
-struct OSIoMesgCode802BA23C {
-    OSIoMesgHdr_func_802BA350_de hdr;
-    void *dramAddr;
-    u32 devAddr;
-    u32 size;
-    void *piHandle;
-};
 
 
 struct OSViCommonRegs;

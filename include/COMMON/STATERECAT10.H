@@ -39,7 +39,6 @@ extern float D_800C3088_de;
 
 extern float D_800C3064_de;
 
-struct MeasuredRecAt1D8V3;
 
 extern float D_800C3058_de;
 

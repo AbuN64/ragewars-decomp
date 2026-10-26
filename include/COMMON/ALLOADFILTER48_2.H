@@ -37,8 +37,6 @@ struct ALRawLoop {
     u32 count;
 };
 
-struct ALADPCMWaveInfo_func_802BE514_de;
-typedef struct ALADPCMWaveInfo_func_802BE514_de ALADPCMWaveInfo_func_802BE514_de;
 
 struct ALADPCMBook;
 typedef struct ALADPCMBook ALADPCMBook;
@@ -49,44 +47,11 @@ struct ALADPCMBook {
     s32 npredictors;
     s16 book[1];
 };
-struct ALADPCMWaveInfo_func_802BE514_de;
-struct ALADPCMWaveInfo_func_802BE514_de {
-    void *loop;
-    ALADPCMBook *book;
-};
-struct ALWaveTableSCode802BE0D0;
-struct ALWaveTableSCode802BE0D0 {
-    u8 *base;
-    s32 len;
-    u8 type;
-    u8 flags;
-    union {
-        ALADPCMWaveInfo_func_802BE514_de adpcmWave;
-    } waveInfo;
-};
-struct ALLoadFilter_func_802BE514_de;
-struct ALWaveTableSCode802BE0D0;
-struct ALLoadFilter_func_802BE514_de {
-    ALFilter_s14 filter;
-    void *state;
-    void *lstate;
-    ALRawLoop loop;
-    struct ALWaveTableSCode802BE0D0 *table;
-    s32 bookSize;
-    ALDMAproc dma;
-    void *dmaState;
-    s32 sample;
-    s32 lastsam;
-    s32 first;
-    s32 memin;
-};
 
 
 struct Shape_typemap_165;
 
 
-struct ALLoadFilter_func_802BE514_de;
-typedef struct ALLoadFilter_func_802BE514_de ALLoadFilter_func_802BE514_de;
 
 struct ALLoadFilter48_2;
 struct ALLoadFilter48_2 {
@@ -112,7 +77,7 @@ extern float D_800C7CF4_de;
 
 extern float D_800CCF18;
 
-extern Acmd *func_802C3988(ALLoadFilter_func_802BE514_de *filter, s16 *outp, s32 byteCount, s32 sampleOffset, Acmd *p);
+extern Acmd *func_802C3988(ALLoadFilter48_2 *filter, s16 *outp, s32 byteCount, s32 sampleOffset, Acmd *p);
 
 extern float D_800CCF24;
 
