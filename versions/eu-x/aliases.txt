@@ -1132,6 +1132,7 @@ literals_Audio_PullEnvelope = 0x800C8BD0; // rom:0xC97D0 size:0xF8
 literals_func_802B5B94_de = 0x800C8D58; // rom:0xC9958 size:0x20
 literals_func_802B6DF0_de = 0x800C8E74; // rom:0xC9A74 size:0x4
 literals_Libc_FormatToCallback = 0x800C90D8; // rom:0xC9CD8 size:0x150
+D_auto_data_unresolved_800CCD48 = 0x800C90B8;
 literals___floatdisf = 0x800C96E0; // rom:0xCA2E0 size:0x18
 literals_Nav_UpdateTargetPitch = 0x800C9DA0; // rom:0xCA9A0 size:0xC
 literals_Scene_GetPlatformRoutePoint = 0x800CECE8; // rom:0xCF8E8 size:0x4

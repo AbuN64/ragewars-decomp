@@ -6,7 +6,6 @@
 #include "TYPES.H"
 #include "sdk/PRINTF/802C31B0.H"
 
-#if defined(VERSION_US_REV1)
 /* _Printf core of the SDK: scans the format, parses flags, width, precision and size qualifier, and emits each field through prout. */
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -113,9 +112,6 @@ s32 Libc_FormatToCallback(void *(*prout)(void *, const char *, s32), void *arg, 
     }
 }
 
-#else
-INCLUDE_ASM("span_1000", Libc_FormatToCallback);
-#endif
 
 extern size_t func_802BD400_de(const unsigned char *s);
 extern void Libc_FormatInteger(_Pft *px, unsigned char code);
