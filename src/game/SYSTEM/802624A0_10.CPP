@@ -131,8 +131,8 @@ void AnimPool_UpdateSceneEffects(struct CAnimPool *scene, s32 arg1) {
 void *AnimPool_AcquireSceneEffect(s32 effectPool, s32 *referenceCount) {
     void *acquiredEffect;
 
-    if ((g_world.visibilityEnabled != 0) || ((u32)((struct ObjectLinks5F28 *) effectPool)->unk_5F24 < 3)) {
-        acquiredEffect = ((struct ObjectLinks5F28 *) effectPool)->unk_5F00;
+    if ((g_world.visibilityEnabled != 0) || ((u32)((struct CAnimPool *) effectPool)->UsedList.count < 3)) {
+        acquiredEffect = ((struct CAnimPool *) effectPool)->FreeList.head;
         if (acquiredEffect != 0) {
             func_80255ED8_de((void *)(effectPool + 0x5F00), acquiredEffect);
             func_80255CB8_de((void *)(effectPool + 0x5F14), acquiredEffect);

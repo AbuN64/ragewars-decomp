@@ -11,8 +11,6 @@ struct CAnimPool;
 
 
 
-struct ObjRecAt5F14;
-typedef struct ObjRecAt5F14 ObjRecAt5F14;
 
 
 struct EffectDesc;
@@ -81,13 +79,6 @@ struct Six {
     int f;
 };
 
-struct ObjectLinks5F28;
-struct ObjectLinks5F28 {
-    unsigned char padding_0[24320];
-    void *unk_5F00;
-    unsigned char padding_5F04[32];
-    s32 unk_5F24;
-};
 
 
 struct EffectAnimPoolUpdateSceneEffects;
@@ -107,8 +98,6 @@ struct EffectAnimPoolUpdateSceneEffects {
 struct EffectAnimPoolUpdateSceneEffects;
 
 
-struct ObjectLinks5F28;
-typedef struct ObjectLinks5F28 ObjectLinks5F28;
 
 struct RecordAnimPoolSpawnAnimationObject;
 typedef struct RecordAnimPoolSpawnAnimationObject RecordAnimPoolSpawnAnimationObject;
@@ -126,13 +115,6 @@ extern float D_800C4258_de;
 
 
 
-struct ObjRecAt5F14;
-struct ObjRecAt5F14 {
-    SceneEffect effects[0x20];
-    IntrusiveList unk5F00;
-    char pad5F00[0x5F14 - 0x5F00 - sizeof(IntrusiveList)];
-    IntrusiveList unk5F14;
-};
 
 struct BitReader;
 struct BitReader {
