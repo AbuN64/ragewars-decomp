@@ -1,6 +1,5 @@
 #include "include_asm.h"
 
-
 #if defined(VERSION_US)
 char rodata_unresolved_800C3DF8[8] =
     "iMsgT\000\000@";

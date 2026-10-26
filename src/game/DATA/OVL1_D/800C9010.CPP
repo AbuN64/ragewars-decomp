@@ -1,4 +1,3 @@
-
 #if defined(VERSION_US)
 unsigned int D_auto_rodata_unresolved_800C870C_0C9C10[19] = {
     0x00000000, 0x00000000, 0x00000001, 0x00000898, 0x00000000, 0x00000000, 0x71755200, 0x00E60200,

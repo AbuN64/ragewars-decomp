@@ -1,6 +1,5 @@
 #include "include_asm.h"
 
-
 #if defined(VERSION_US)
 unsigned int rodata_unresolved_800C1E48[2] = {
     0x08000000, 0x00001043,

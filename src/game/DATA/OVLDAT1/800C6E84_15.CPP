@@ -1,6 +1,5 @@
 #include "include_asm.h"
 
-
 #if defined(VERSION_US)
 char rodata_unresolved_800C1EB4[12] =
     "LifeTimeR\000\000(";
