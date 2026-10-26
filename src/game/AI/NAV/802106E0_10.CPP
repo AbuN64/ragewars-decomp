@@ -1,5 +1,4 @@
 
-#if !(defined(VERSION_DE))
 /* Runs a computer rider's close attack state: refreshes its view, re-checks line of sight every fourth frame, backs off
    when its target is out of its layer or too close, re-rolls its strafe pattern and steers toward the target. */
 #include "TYPES.H"
@@ -149,4 +148,3 @@ halt:
         }
     }
 }
-#endif

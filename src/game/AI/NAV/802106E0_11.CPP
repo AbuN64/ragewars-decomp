@@ -1,9 +1,10 @@
+#include "include_asm.h"
+
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/SELF.H"
 #include "TYPES.H"
 #include "AI/NAV/802106E0_11.H"
 
-#if !(defined(VERSION_DE))
 /* Drives combat pursuit, retreat and strafing while refreshing target visibility, routes and fire timing. */
 
 
@@ -189,4 +190,3 @@ block_41:
         }
     }
 }
-#endif
