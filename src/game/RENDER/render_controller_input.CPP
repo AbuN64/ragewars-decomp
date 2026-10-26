@@ -97,7 +97,6 @@ void Control_ReadControllerStates(void) {
 
 extern u8 D_800CBC10;
 extern char D_8010EC90;
-extern ControllerProfile D_8010F328[4];
 
 
 extern void Control_UpdateControllerRumble(void *);

@@ -50,11 +50,6 @@ void SetN64_HandleSessionTransitionInput(GameSession *session, s32 arg1, s32 tar
 
 
 
-#if defined(VERSION_EU)
-extern void Tsmos_InitializeEuropeanFrontend(void);
-#else
-extern void InitFrontendMenus(void);
-#endif
 extern void SmXlate_SwitchScreen(s32 arg0);
 extern void SetN64_BeginModeTransition(GameSession *arg0, s32 arg1);
 extern void func_802394B4_de(void *arg0);

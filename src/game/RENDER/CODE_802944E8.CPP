@@ -24,14 +24,12 @@ extern void SetN64_CommitSessionInputs(void *arg0);
 
 extern void func_8023EE00_de(void);
 
-extern void TextLoad_ResetArtsendTextureState(void);
 
 extern void OvlScene_SetSelection(void *arg0, s32 arg1, s32 arg2);
 
 
 extern s32 D_800CD730;
 
-extern void Control_RestoreActorSnapshot(void);
 extern void SetN64_ResetSessionPlayerPools(void *session, s32 count, s32 force_active);
 
 void SetN64_HandleMode11Input(s32 session) {

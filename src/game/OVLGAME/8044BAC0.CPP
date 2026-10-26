@@ -25,7 +25,6 @@ extern char D_8010FC00[];
 
 
 
-extern ControllerProfile D_8010F328[];
 extern signed char D_800CBC10;
 
 extern void Rumble_InitPoolNodes(char *, char *, s32);
