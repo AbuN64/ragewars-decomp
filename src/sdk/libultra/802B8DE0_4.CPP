@@ -41,18 +41,18 @@ Acmd *func_802B40A0_eu(ALAuxBus_s *filter, s16 *outp, s32 outCount, s32 sampleOf
 }
 #endif
 
-s32 func_802B3EDC_de(Obj_func_802B3EDC_de *arg0, s32 arg1, s32 arg2) {
+s32 func_802B3EDC_de(Obj_func_802B3EDC_de *bus, s32 operation, s32 source) {
     int new_var;
     s32 *base;
     s32 count;
 
-    base = arg0->base;
-    if (arg1 == 2) {
-        new_var = arg0->count;
+    base = bus->base;
+    if (operation == 2) {
+        new_var = bus->count;
         count = new_var;
-        base[count] = arg2;
+        base[count] = source;
         new_var = count + 1;
-        arg0->count = new_var;
+        bus->count = new_var;
     }
     return 0;
 }

@@ -9,7 +9,7 @@
 extern void MatrixFromAngles(f32 *matrix, f32 *angles);
 
 
-void func_8029EA7C_de(MatrixRecord *arg0, float arg1, float arg2, float arg3,
+void XMath_SetMatrixElements(MatrixRecord *arg0, float arg1, float arg2, float arg3,
                     float arg4, float arg5, float arg6, float arg7,
                     float arg8, float arg9, float arg10, float arg11,
                     float arg12, float arg13, float arg14, float arg15, float arg16) {
@@ -31,7 +31,7 @@ void func_8029EA7C_de(MatrixRecord *arg0, float arg1, float arg2, float arg3,
     arg0->matrix.m[15] = arg16;
 }
 
-void func_8029EAF4_de(s32 arg0) {
+void XMath_ClearMatrix(s32 arg0) {
     XPlus_FillBytes(arg0, 0, 0x40);
 }
 
@@ -41,7 +41,7 @@ void XMath_SetIdentityMatrix(s32 arg0)
   ((Matrix *)(arg0))->m[15] = (((Matrix *)(arg0))->m[10] = (((Matrix *)(arg0))->m[5] = (((Matrix *)(arg0))->m[0] = (f32) D_800C5CB8_de)));
 }
 
-void func_8029EB58_de(f32 *arg0) {
+void XMath_TransposeMatrix(f32 *arg0) {
     s32 i;
     s32 j;
     s32 offset1;
@@ -61,13 +61,13 @@ void func_8029EB58_de(f32 *arg0) {
 }
 
 /** Scatter three floats from arg1 into arg0's fields. */
-void func_8029EBC8_de(Matrix *matrix, CVector3 *arg1) {
+void XMath_SetMatrixScaleDiagonal(Matrix *matrix, CVector3 *arg1) {
     matrix->m[0] = arg1->x;
     matrix->m[5] = arg1->y;
     matrix->m[10] = arg1->z;
 }
 
-void func_8029EBE4_de(void *arg0, void *arg1) {
+void XMath_ScaleMatrixRows(void *arg0, void *arg1) {
     char *m = (char *) arg0;
     char *v = (char *) arg1;
 
@@ -86,13 +86,13 @@ void func_8029EBE4_de(void *arg0, void *arg1) {
 }
 
 /** Broadcast a float value into three fields of the object. */
-void func_8029ECA8_de(Matrix *matrix, float value) {
+void XMath_SetUniformMatrixScaleDiagonal(Matrix *matrix, float value) {
     matrix->m[0] = value;
     matrix->m[5] = value;
     matrix->m[10] = value;
 }
 
-void func_8029ECBC_de(void *arg0, f32 arg1) {
+void XMath_ScaleMatrixUniformly(void *arg0, f32 arg1) {
     u8 *o = (u8 *)arg0;
 
     ((Matrix *)(o))->m[0] = ((Matrix *)(o))->m[0] * arg1;
@@ -109,7 +109,7 @@ void func_8029ECBC_de(void *arg0, f32 arg1) {
     ((Matrix *)(o))->m[14] = ((Matrix *)(o))->m[14] * arg1;
 }
 
-void func_8029ED54_de(Mtx3x4_8029FD54 *arg0) {
+void XMath_ResetMatrixRotation(Mtx3x4_8029FD54 *arg0) {
     s32 col;
     s32 row;
 
@@ -128,13 +128,13 @@ void func_8029ED54_de(Mtx3x4_8029FD54 *arg0) {
     arg0->m[2][2] = D_800C5CBC_de;
 }
 
-void func_8029EDA0_de(s32 arg0, f32 *angles) {
+void XMath_PremultiplyEulerRotation(s32 arg0, f32 *angles) {
     f32 buf[16];
     MatrixFromAngles(buf, angles);
     XMath_MultiplyMatrices(arg0, buf, arg0);
 }
 
-void func_8029EDD8_de(s32 arg0, f32 arg1) {
+void XMath_PremultiplyPitchRotation(s32 arg0, f32 arg1) {
     Matrix matrix;
     f32 sp50;
     f32 sp54;
@@ -160,7 +160,7 @@ void func_8029EDD8_de(s32 arg0, f32 arg1) {
     }
 }
 
-void func_8029EE78_de(s32 arg0, f32 arg1) {
+void XMath_PremultiplyYawRotation(s32 arg0, f32 arg1) {
     Matrix matrix;
     f32 sp50;
     f32 sp54;
@@ -188,7 +188,7 @@ void func_8029EE78_de(s32 arg0, f32 arg1) {
     }
 }
 
-void func_8029EF18_de(s32 arg0, f32 arg1) {
+void XMath_PremultiplyRollRotation(s32 arg0, f32 arg1) {
     Matrix matrix;
     f32 sp50;
     f32 sp54;
@@ -217,34 +217,34 @@ void func_8029EF18_de(s32 arg0, f32 arg1) {
 }
 
 /** Clear the three words at object offsets 0x30 through 0x38. */
-void func_8029EFB8_de(Matrix *matrix) {
+void XMath_ClearMatrixTranslation(Matrix *matrix) {
     matrix->m[12] = 0;
     matrix->m[13] = 0;
     matrix->m[14] = 0;
 }
 
 /** Copy a three-float vector into object offsets 0x30 through 0x38. */
-void func_8029EFC8_de(Matrix *matrix, float *arg1) {
+void XMath_SetMatrixTranslation(Matrix *matrix, float *arg1) {
     matrix->m[12] = arg1[0];
     matrix->m[13] = arg1[1];
     matrix->m[14] = arg1[2];
 }
 
 /** Copy the three floating components at offset 0x30. */
-void func_8029EFE4_de(char *object, float *output) {
+void XMath_GetMatrixTranslation(char *object, float *output) {
     output[0] = ((Matrix *)(object))->m[12];
     output[1] = ((Matrix *)(object))->m[13];
     output[2] = ((Matrix *)(object))->m[14];
 }
 
-void func_8029F000_de(Matrix *matrix, void *arg1) {
+void XMath_AddMatrixTranslation(Matrix *matrix, void *arg1) {
     (matrix->m[12]) = (f32) ((matrix->m[12]) + (((struct CVector3_t *) ((s8 *) arg1))->x));
     (matrix->m[13]) = (f32) ((matrix->m[13]) + (((struct CVector3_t *) ((s8 *) arg1))->y));
     (matrix->m[14]) = (f32) ((matrix->m[14]) + (((struct CVector3_t *) ((s8 *) arg1))->z));
 }
 
 /** Combine three column vectors into the first three matrix columns. */
-void func_8029F034_de(float *arg0, float *arg1, float *arg2, float *arg3) {
+void XMath_SetMatrixRows(float *arg0, float *arg1, float *arg2, float *arg3) {
     arg0[0] = arg1[0];
     arg0[4] = arg1[1];
     arg0[8] = arg1[2];

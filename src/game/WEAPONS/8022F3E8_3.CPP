@@ -33,7 +33,7 @@ void Weapon_DrawRedMarkerQuad(void *object, void *unused) {
     if(node->active) {
         gSPMatrix(g_displayListCursor++, (u32)&node->matrices[D_800D297C], G_MTX_LOAD);
         gDPPipeSync(g_displayListCursor++);
-        func_8026D8F8_de();
+        Geometry_InvalidateMaterialKeys();
         Geometry_SetModePreset(0xE);
         Geometry_SetCombineMode(0x1C);
         red=200; alpha=150;

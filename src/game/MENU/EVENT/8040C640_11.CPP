@@ -11,7 +11,7 @@ extern Pulse *D_800E5950;
 extern Shared_MenuData D_80145040;
 extern void Items_ResetActorPools(void *, s32);
 extern void func_804499B0_de(void *, s32, s32);
-extern void func_80286AA8_de(void *, s32, s32);
+extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(u32);
 extern void Frontend_RequestScreenMode(s32);
@@ -29,7 +29,7 @@ s32 func_804396C0_us(MenuWidget *tree) {
     object = &D_80145040.object;
     Items_ResetActorPools(object, 0);
     func_804499B0_de(&D_80145040, 0, 0);
-    func_80286AA8_de(&g_world, 0, 0);
+    Scene_LoadLevelResources(&g_world, 0, 0);
     if (func_8025477C_de() == 0) {
         func_8025476C_de(1);
     }

@@ -111,7 +111,7 @@ func_802A2224_de
             }
         }
     }
-    func_80286080_de(&state->world);
+    Scene_UpdateAndDrawWorld(&state->world);
     func_802394B4_de(state->players);
     func_802AA7A4_de(&state->hud);
     /* Only us-rev1 makes this call: us, eu, eu-x and de go straight on to func_80293394_de, two
@@ -185,7 +185,7 @@ void func_80293CE4_de(GameSession *session) {
             }
         }
     }
-    func_80286080_de(&session->world);
+    Scene_UpdateAndDrawWorld(&session->world);
     func_802394B4_de(session->players);
     func_802AA7A4_de(&session->hud);
 #ifdef VERSION_US_REV1

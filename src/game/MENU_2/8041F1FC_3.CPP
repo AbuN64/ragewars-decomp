@@ -126,7 +126,7 @@ extern unsigned char D_800FEB0F[];
 
 extern void SmpOverlay_SetSlotValue(void *, int, int);
 
-extern void func_8041CE10_de(void *, int);
+extern void Frontend_SetPreviewTransformUpdate(void *, int);
 
 extern void func_80298368_de(int);
 
@@ -322,7 +322,7 @@ void Menu_ApplySlotValueGfx(int player, int choice) {
     }
     D_800E42D0->players[player].kind = choice;
     func_8041F18C_de(choice);
-    func_8041CE10_de(D_800E42D0->players[player].model, 0);
+    Frontend_SetPreviewTransformUpdate(D_800E42D0->players[player].model, 0);
 
     count = 0;
     for (j = 0; j < 4; j++) {

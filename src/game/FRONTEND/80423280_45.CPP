@@ -23,7 +23,7 @@ extern s32 func_80299A08_de(void);
 extern s32 func_802999A0_de(s32);
 extern void Items_ResetActorPools(void *, s32);
 extern void func_804499B0_de(void *, s32, s32);
-extern void func_80286AA8_de(void *, s32, s32);
+extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(s32);
 extern void func_8042E988_de(s32);
@@ -41,7 +41,7 @@ s32 Frontend_HandleMatchMenuMessage(void) {
         if (func_802999A0_de(0) == 0x16) {
             Items_ResetActorPools(&D_80145040.object, 0);
             func_804499B0_de(&D_80145040, 0, 0);
-            func_80286AA8_de(&g_world, 0, 0);
+            Scene_LoadLevelResources(&g_world, 0, 0);
             if (func_8025477C_de() == 0) {
                 func_8025476C_de(1);
             }

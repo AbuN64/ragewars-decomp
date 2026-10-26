@@ -10,7 +10,7 @@ extern s32 Pak_CountLineChars(void *);
 extern char D_800E2984_eu[], D_8014B49B[], D_800D2478[], D_8014B494[];
 /* Select the status text and right-align its nonblank characters (the us body with eu addresses; the eu symbol of the
    pointer table is D_8014B49B, of the last status character D_800D2478, of the status characters D_8014B494). */
-s32 func_8040AB70_eu(PakTextEu *entry) {
+s32 Menu_FormatLocalizedPakName(PakTextEu *entry) {
     s32 count = 8;
     u8 *scan;
     char *dst;
@@ -31,7 +31,7 @@ s32 func_8040AB70_eu(PakTextEu *entry) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8040AB70_eu);
+INCLUDE_ASM("ovl_80400000", Menu_FormatLocalizedPakName);
 #endif
 #endif
 
@@ -43,7 +43,7 @@ extern char *D_800E2994[], *D_800E29B4[];
 extern char *D_800E3234[], *D_800E3244[], *D_800E3294[], *D_800E32B4_eu[], *D_800E32C4_eu[];
 /* Pak status line: picks the 11-character status text for the state D_8014D490 in the current language and copies it into
    the entry's line; with D_80153774 set it only selects the heading table. */
-s32 func_8040AC68_eu(PakTextEu *entry) {
+s32 Menu_FormatLocalizedPakStatus(PakTextEu *entry) {
     char **table;
     char *src;
     char *dst;
@@ -70,7 +70,7 @@ s32 func_8040AC68_eu(PakTextEu *entry) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8040AC68_eu);
+INCLUDE_ASM("ovl_80400000", Menu_FormatLocalizedPakStatus);
 #endif
 #endif
 

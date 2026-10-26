@@ -15,14 +15,14 @@
 
 extern Gfx *g_displayListCursor;
 extern void func_80253908_de(s32 heap);
-extern void Scene_BuildCachedGeometry(Scene_func_80288EA8_de *scene);
+extern void Scene_BuildCachedGeometry(SceneSceneDrawCachedOpaqueGeometry *scene);
 
 
-extern void StaticInstance_DrawModel(Object_func_80288EA8_de *object, void *camera);
+extern void StaticInstance_DrawModel(ObjectSceneDrawCachedOpaqueGeometry *object, void *camera);
 
-void func_80288EA8_de(Scene_func_80288EA8_de *scene, void *camera) {
-    Object_func_80288EA8_de **objects;
-    Object_func_80288EA8_de *object;
+void Scene_DrawCachedOpaqueGeometry(SceneSceneDrawCachedOpaqueGeometry *scene, void *camera) {
+    ObjectSceneDrawCachedOpaqueGeometry **objects;
+    ObjectSceneDrawCachedOpaqueGeometry *object;
     Gfx *branch;
     s32 pass;
 
@@ -200,7 +200,7 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
 #else
     if (D_801462C8.local != 0) {
 #endif
-        func_80288EA8_de(world, camera);
+        Scene_DrawCachedOpaqueGeometry(world, camera);
         return;
     }
     player = Sky_FindScreenMessage(camera);

@@ -33,7 +33,7 @@
    D_80146918 and D_801468F4 and leaves through func_80298368_de for screen 0xA unless D_80146948 is 1
    and D_8015402C is at least 35, in which case it leaves for screen 7 when option D_801462D5 is 1
    and screen 3 otherwise; choice 1 calls func_8040C428_de(0), shows the window argument, stops the
-   objects at D_80145088 and 0x48 before it, releases D_8011FE88 through func_80286AA8_de and sets the
+   objects at D_80145088 and 0x48 before it, releases D_8011FE88 through Scene_LoadLevelResources and sets the
    word at 0x17F0 of D_80145088 to 8. Returns zero. Adapted from func_8042D4FC_de with the option cases written in the order that reproduces the
    cartridge's decision tree. */
 
@@ -60,7 +60,7 @@ extern void Items_ResetActorPools(void *, s32);
 
 extern void func_804499B0_de(void *, s32, s32);
 
-extern void func_80286AA8_de(void *, s32, s32);
+extern void Scene_LoadLevelResources(void *, s32, s32);
 
 extern void MarkMenuEventHandled();
 
@@ -127,7 +127,7 @@ s32 func_80438ADC_de(void *window, void *unused1, s32 event) {
             object = &D_80145088;
             Items_ResetActorPools(object, 0);
             func_804499B0_de(object - 0x48, 0, 0);
-            func_80286AA8_de(&g_world, 0, 0);
+            Scene_LoadLevelResources(&g_world, 0, 0);
             ((MatchMenuObjects *)(object))->transition = 8;
         } else {
             MarkMenuEventHandled();

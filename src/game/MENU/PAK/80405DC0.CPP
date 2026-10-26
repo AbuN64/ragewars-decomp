@@ -53,7 +53,7 @@ extern SharedPlayer *Player_FindPlayerByController(char *pool, PakMenuSlot *slot
 
 extern void Ovlgame_StartPlayerAnimation(SharedPlayer *player, s32 team);
 
-extern void Pak_AllocateMenu(char *text, Menu_func_80408C4C_de *menu, char *format);
+extern void Pak_AllocateMenu(char *text, MenuPakConfirmProfileOrDeleteNote *menu, char *format);
 
 extern s32 Pak_DeleteNote(s32 ch, s32 index);
 
@@ -117,7 +117,7 @@ extern s32 func_804051D4_de(s32 ch);
 
 extern s32 Pak_SaveSnapshotAndClose(void *owner, MenuRecAt24 *menu, void *arg);
 
-s32 func_80408C4C_de(void *unused, Menu_func_80408C4C_de *menu) {
+s32 Pak_ConfirmProfileOrDeleteNote(void *unused, MenuPakConfirmProfileOrDeleteNote *menu) {
 
     s32 ch;
     SharedPlayer *player;
@@ -225,7 +225,7 @@ s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu) {
     return 1;
 }
 
-s32 func_80409144_de(void *owner, MenuRecAt24 *menu, void *arg) {
+s32 Pak_ConfirmPendingOperation(void *owner, MenuRecAt24 *menu, void *arg) {
 
     s32 ch;
 

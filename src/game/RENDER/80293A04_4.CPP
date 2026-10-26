@@ -32,7 +32,7 @@ extern void func_80293A20_de(s32 arg0, s32 arg1, s32 arg2);
 
 extern void func_80293334_de(void *session, s32 count, s32 force_active);
 
-extern void func_80286AA8_de(void *, void *, void *);
+extern void Scene_LoadLevelResources(void *, void *, void *);
 
 extern void func_80298368_de(s32 arg0);
 
@@ -106,7 +106,7 @@ void func_802943A0_de(struct GameSession *session) {
 
 void func_802943C4_de(void *arg0) {
     func_80293334_de(arg0, 0, 0);
-    func_80286AA8_de(&g_world, 0, 0);
+    Scene_LoadLevelResources(&g_world, 0, 0);
     D_801462C8.counters.transitionActive = 0;
     func_80298368_de(0x18);
     func_8025E2D4_de(0x34);

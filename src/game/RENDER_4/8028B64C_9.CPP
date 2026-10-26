@@ -20,7 +20,7 @@ void func_8028DA74_de(Shared_World *world) {
     }
 }
 
-void func_8028DAB4_de(struct World_func_8028787C_de *arg0, s32 arg1, s32 index, s32 arg3) {
+void func_8028DAB4_de(struct WorldSceneDispatchEnabledEntityTrigger *arg0, s32 arg1, s32 index, s32 arg3) {
     void *base;
     void *table;
 
@@ -35,7 +35,7 @@ void func_8028DAB4_de(struct World_func_8028787C_de *arg0, s32 arg1, s32 index, 
     SetN64_GetPackSection(table, 1);
 }
 
-void func_8028DB3C_de(struct World_func_8028787C_de *arg0, s32 arg1, s32 index, s32 arg3, s32 arg4, s32 arg5) {
+void func_8028DB3C_de(struct WorldSceneDispatchEnabledEntityTrigger *arg0, s32 arg1, s32 index, s32 arg3, s32 arg4, s32 arg5) {
     void *base;
     void *table;
     u8 *base1;
@@ -70,7 +70,7 @@ void func_8028DB3C_de(struct World_func_8028787C_de *arg0, s32 arg1, s32 index, 
     base2[idx2 >> 3] &= ~mask;
 }
 
-s32 func_8028DC3C_de(struct World_func_8028787C_de *arg0, s32 arg1, s32 index, s32 arg3, s32 arg4) {
+s32 func_8028DC3C_de(struct WorldSceneDispatchEnabledEntityTrigger *arg0, s32 arg1, s32 index, s32 arg3, s32 arg4) {
     void *base;
     void *table;
     u8 *temp_a0;

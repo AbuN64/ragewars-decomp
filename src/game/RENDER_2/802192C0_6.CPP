@@ -94,7 +94,7 @@ void func_8021CBD0_de(void *player, WeaponMenuView *camera) {
         (((Shared_ActorView *)player)->lives != 0)) {
         gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
         gDPSetTexturePersp(g_displayListCursor++, G_TP_PERSP);
-        func_8026D8F8_de();
+        Geometry_InvalidateMaterialKeys();
 
         entry = D_800D052C[((Shared_ActorView *)player)->selectedAction];
         rect = camera->viewport;

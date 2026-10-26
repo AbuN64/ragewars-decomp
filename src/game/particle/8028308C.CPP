@@ -46,7 +46,7 @@ extern Params D_80100290;
 
 
  /* extern */
-s32 func_80268BE0_de(void *, s8);
+s32 DynLight_AllocateWorldLight(void *, s8);
 
  /* extern */
 void func_802843B8_de(void *, s32);
@@ -313,7 +313,7 @@ void func_80283920_de(Obj_func_80283920_de *actor, Params_func_80283920_de *arg1
         func_802A4598_de(&D_801379C0, actor, resourceId);
     }
     temp_a1 = arg1->unk7;
-    actor->unk138 = temp_a1 == -1 ? 0 : func_80268BE0_de(&D_8013B1A8, temp_a1);
+    actor->unk138 = temp_a1 == -1 ? 0 : DynLight_AllocateWorldLight(&D_8013B1A8, temp_a1);
     if (!(actor->unk5C & 0x200000) && (temp_t0 = arg1->unkC, (temp_t0 != 0))) {
         switch(actor->unk4) {
         case 0x22: case 0x5f: case 0x60:

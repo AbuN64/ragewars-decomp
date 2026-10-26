@@ -11,7 +11,7 @@
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-/* Refreshes the actor's animation from the lookup through func_8024AA18_de and func_8026DA4C_de and, when the lookup's third node carries flag 0x8000, spawns a 0x94 effect at the actor scaled by its size, then clears D_800D15E0. Adapted from func_8024C454_de with its body moved into a static inline helper, the func_8024B8EC_de update calls added before it, the D_800C8B38 scale constants and the trailing D_800D15E0 clear changed. */
+/* Refreshes the actor's animation from the lookup through func_8024AA18_de and Geometry_DrawModelResource and, when the lookup's third node carries flag 0x8000, spawns a 0x94 effect at the actor scaled by its size, then clears D_800D15E0. Adapted from func_8024C454_de with its body moved into a static inline helper, the func_8024B8EC_de update calls added before it, the D_800C8B38 scale constants and the trailing D_800D15E0 clear changed. */
 
 
 
@@ -30,7 +30,7 @@ extern char D_8011D8D0;
 
 extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 
-extern s32 func_8026E340_de(void);
+extern s32 Geometry_GetViewEffect(void);
 
 
 extern EffectRecAt154 *func_802830B8_de(void *system);
@@ -44,7 +44,7 @@ static inline void func_8024A1C0_spawn(Actor_func_8024A1D0_de *actor, Lookup *lo
     f32 scale;
     s32 *node;
 
-    if (func_8026E340_de() != 0) {
+    if (Geometry_GetViewEffect() != 0) {
         node = SetN64_GetPackSection(*lookup->value, 2);
         if ((*node != 0) &&
             (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {
@@ -79,7 +79,7 @@ void func_8024A1D0_de(Actor_func_8024A1D0_de *actor, void *context, Lookup *look
     }
     if (lookup->unk0 != 0) {
         one = 1;
-        func_8026DA4C_de(lookup->value, actor->animation, one,
+        Geometry_DrawModelResource(lookup->value, actor->animation, one,
                       &actor->lighting[D_800D297C],
                       0, actor->pass);
         func_8024A1C0_spawn(actor, lookup);
@@ -97,7 +97,7 @@ void func_8024A3B0_de(LevelActor *actor, PlayerCode80225D10 *player, s32 animati
     }
     if (params->drawModel != 0) {
         Geometry_DrawActorModelParts(params->model, player, actor->fieldB4, 1, &actor->lighting[D_800D297C], 0, actor->field3);
-        if (func_8026E340_de() != 0) {
+        if (Geometry_GetViewEffect() != 0) {
             node = SetN64_GetPackSection(*params->model, 2);
             if ((*node != 0) &&
                 (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {

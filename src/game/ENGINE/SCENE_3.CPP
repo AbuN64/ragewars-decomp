@@ -21,7 +21,7 @@ extern void **func_80254408_de(s32, void *, s32, s32, void *, void *, void *);
 extern void Cache_LockResource(void *, Node80253610 *);
 extern void Cache_UnlockResource(void *, Node80253610 *);
 
-void func_80288470_de(DraftStreamWorld *world)
+void Scene_RequestVisibleGridSections(DraftStreamWorld *world)
 {
     s32 xCount, firstX, count;
     DraftStreamCell *cells;
@@ -119,11 +119,11 @@ typedef struct ScenePoint { s16 x, y, z; } ScenePoint;
 extern Gfx *g_displayListCursor;
 extern void Geometry_BeginModelBatch(void), Geometry_FlushModelBatch(void);
 extern struct Shape_typemap_165 *Cache_AllocateResource(s32, s32, u32, void *);
-extern s32 StaticInstance_GetPropModelIndex(Object_func_80288EA8_de *object);
-extern s32 StaticInstance_GetPropGeometryIndex(Object_func_80288EA8_de *object);
-extern DraftStreamHandle **StaticInstance_CollectPropResources(Object_func_80288EA8_de *object, s32 model, s32 index, DraftStreamHandle **nextResource);
-extern void StaticInstance_DrawModel(Object_func_80288EA8_de *object, void *camera);
-extern DraftStreamHandle *StaticInstance_AcquireGeometry(Object_func_80288EA8_de *object, s32 index);
+extern s32 StaticInstance_GetPropModelIndex(ObjectSceneDrawCachedOpaqueGeometry *object);
+extern s32 StaticInstance_GetPropGeometryIndex(ObjectSceneDrawCachedOpaqueGeometry *object);
+extern DraftStreamHandle **StaticInstance_CollectPropResources(ObjectSceneDrawCachedOpaqueGeometry *object, s32 model, s32 index, DraftStreamHandle **nextResource);
+extern void StaticInstance_DrawModel(ObjectSceneDrawCachedOpaqueGeometry *object, void *camera);
+extern DraftStreamHandle *StaticInstance_AcquireGeometry(ObjectSceneDrawCachedOpaqueGeometry *object, s32 index);
 extern void GraphU64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
@@ -131,7 +131,7 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     CVector3 position;
     CVector3 transformed;
     DraftStreamHandle *resources[3000];
-    Object_func_80288EA8_de *props[512];
+    ObjectSceneDrawCachedOpaqueGeometry *props[512];
     s32 resourceSize;
     s32 xCount;
     s32 z;
@@ -140,7 +140,7 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     DraftStreamCell *cells;
     DraftStreamCell *cell;
     s32 propCount;
-    Object_func_80288EA8_de **nextProp;
+    ObjectSceneDrawCachedOpaqueGeometry **nextProp;
     Gfx *firstGfx;
     s32 row;
     DraftStreamHandle **nextResource;
@@ -150,8 +150,8 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     DraftStreamTable *table;
     DraftStreamData *resourceData;
     DraftStreamTable *points;
-    Object_func_80288EA8_de *prop;
-    Object_func_80288EA8_de *objects;
+    ObjectSceneDrawCachedOpaqueGeometry *prop;
+    ObjectSceneDrawCachedOpaqueGeometry *objects;
     ScenePoint *point;
     s32 zCount;
     s32 x;

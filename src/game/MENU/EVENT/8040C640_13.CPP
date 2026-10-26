@@ -229,7 +229,7 @@ static inline s32 firstUnlocked(void) {
     return -1;
 }
 
-void func_8043C72C_us(LevelSelectOwner *owner) {
+void Menu_InitUsLevelSelectionAvailability(LevelSelectOwner *owner) {
     s32 level = firstUnlocked();
     D_80154034 = level;
     if (level != -1) {
@@ -242,6 +242,6 @@ void func_8043C72C_us(LevelSelectOwner *owner) {
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8043C72C_us);
+INCLUDE_ASM("ovl_80400000", Menu_InitUsLevelSelectionAvailability);
 #endif
 #endif

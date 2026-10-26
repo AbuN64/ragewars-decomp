@@ -72,7 +72,7 @@ struct func_8041F2A0_Config {
 };
 typedef struct func_8041F2A0_Config func_8041F2A0_Config;
 
-/* The 528-byte menu block at D_800E3590 that func_8041CEB0_us_rev1 allocates: its owner names each
+/* The 528-byte menu block at D_800E3590 that Frontend_CreateSlotSelectionMenu allocates: its owner names each
    slot it writes, and the neighbouring menu units keep their own view structs over the same block,
    so consumers reach it through casts from this canonical spelling. */
 struct func_8041F2A0_MenuBlock {

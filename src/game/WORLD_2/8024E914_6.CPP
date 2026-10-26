@@ -32,7 +32,7 @@ extern f32 GameObject_GetActorRadius(ActorSimpleInstanceSpawnModelEffect *actor)
  * InstHdr_GetActorShadowRadius and that minus a tenth of the actor's height above its ground height at 0x40, vanishing
  * when negative; a transform is built from the actor's orientation, scaled flat by the shadow size,
  * positioned at the ground under the actor, stored as the actor's per-frame matrix and submitted through
- * func_8026992C_de. */
+ * Geometry_DrawIntensityMask. */
 
 
 extern CQuatern InstHdr_BuildActorGroundRotation(void *);
@@ -47,7 +47,7 @@ extern void TranslateMatrix(f32 *, f32, f32, f32);
 
 extern void GraphU64_ConvertMatrixToFixed(f32 *, void *);
 
-extern void func_8026992C_de(void *, s32, s32);
+extern void Geometry_DrawIntensityMask(void *, s32, s32);
 
 
 
@@ -74,7 +74,7 @@ void SimpleInstance_SpawnModelEffect(ActorSimpleInstanceSpawnModelEffect *actor,
     f32 scale;
     s32 *node;
 
-    if (func_8026E340_de() != 0) {
+    if (Geometry_GetViewEffect() != 0) {
         rotation.x = rotation.y = rotation.z = 0.0f;
         rotation.w = D_800C3D90_de;
         node = SetN64_GetPackSection(*resource, 2);
@@ -117,7 +117,7 @@ void SimpleInstance_DrawGroundShadow(void *actor) {
     ScaleMatrixLocal(matrix, size, 1.0f, size);
     TranslateMatrix(matrix, position.x, position.y, position.z);
     GraphU64_ConvertMatrixToFixed(matrix, (char *)actor + ((D_800D297C << 6) + 0xE8));
-    func_8026992C_de((char *)actor + ((D_800D297C << 6) + 0xE8), 1, 0x96);
+    Geometry_DrawIntensityMask((char *)actor + ((D_800D297C << 6) + 0xE8), 1, 0x96);
 }
 
 void SimpleInstance_RefreshModelResourceUsage(StaticObject *staticObject) {

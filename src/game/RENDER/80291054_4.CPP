@@ -63,7 +63,7 @@ void func_80292308_de(TimingWorld *world) {
     D_80146CD8 = D_8011FAC0.ring.current;
     func_802539EC_de(0, D_800D297C);
     TextLoad_ResetTextureCache();
-    func_8026D844_de();
+    Geometry_InitializeModelRenderState();
     SetN64_BeginFrameDisplayList(world);
     Defs_ToggleSavedFlag();
     Control_TrackControllerPakChanges();

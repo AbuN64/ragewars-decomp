@@ -1234,7 +1234,7 @@ extern float D_800C7744_de;
 
 extern const float D_800CCB18;
 
-extern Node_func_8026BC60_de D_801144D0[];
+extern NodeGeometryGroupModelInstances D_801144D0[];
 
 extern char *D_800D34D4_de[];
 
@@ -2668,8 +2668,8 @@ typedef struct CallbackState114 CallbackState114;
 
 
 
-struct Camera_func_8026851C_de;
-typedef struct Camera_func_8026851C_de Camera_func_8026851C_de;
+struct CameraEventsSpawnAttachedEffect;
+typedef struct CameraEventsSpawnAttachedEffect CameraEventsSpawnAttachedEffect;
 
 
 
@@ -2730,8 +2730,8 @@ typedef struct EffectSystem EffectSystem;
 struct EffectTarget;
 typedef struct EffectTarget EffectTarget;
 
-struct Effect_func_8026851C_de;
-typedef struct Effect_func_8026851C_de Effect_func_8026851C_de;
+struct EffectEventsSpawnAttachedEffect;
+typedef struct EffectEventsSpawnAttachedEffect EffectEventsSpawnAttachedEffect;
 
 struct ParticleEffect;
 typedef struct ParticleEffect ParticleEffect;
@@ -3603,7 +3603,7 @@ struct CallbackState114 {
     VoidCallback callback;
 };
 typedef void ( *ContextCallback)(void *);
-struct Camera_func_8026851C_de;
+struct CameraEventsSpawnAttachedEffect;
 struct Rec_func_8024C92C_de;
 struct ContextRecAt2BC0;
 
@@ -3935,8 +3935,8 @@ struct EffectTarget {
     u8 victimTeam;
     char pad7F[0x89];
 };
-struct Effect_func_8026851C_de;
-struct Effect_func_8026851C_de {
+struct EffectEventsSpawnAttachedEffect;
+struct EffectEventsSpawnAttachedEffect {
     char pad0[0x6C];
     f32 scale;
     char pad70[0x1D8 - 0x70];
@@ -3944,7 +3944,7 @@ struct Effect_func_8026851C_de {
     char pad1DC[0x2A0 - 0x1DC];
     CVector3 offset;
     char pad2AC[0x11E8 - 0x2AC];
-    struct Effect_func_8026851C_de *child;
+    struct EffectEventsSpawnAttachedEffect *child;
 };
 struct Ent;
 struct Entry_func_8044D794_de;
@@ -4009,7 +4009,7 @@ struct Piece {
 };
 struct GroupCode8044E2B8;
 struct PakMenuSlot;
-struct Effect_func_8026851C_de;
+struct EffectEventsSpawnAttachedEffect;
 struct HudCue;
 struct HudCue {
     s32 handle;

@@ -98,8 +98,8 @@ void func_8028B898_de(void *arg0, struct LevelBitRecord *levelBitRecord, s32 arg
     s32 idx2;
 
     bitIndex = levelBitRecord->bitIndex;
-    field80 = ((World_func_8028787C_de *)(arg0))->levels;
-    field1B40C = ((World_func_8028787C_de *)(arg0))->level;
+    field80 = ((WorldSceneDispatchEnabledEntityTrigger *)(arg0))->levels;
+    field1B40C = ((WorldSceneDispatchEnabledEntityTrigger *)(arg0))->level;
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 1);
     SetN64_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
@@ -130,8 +130,8 @@ s32 func_8028B988_de(void *arg0, struct LevelBitRecord *levelBitRecord) {
     s32 mask;
 
     bitIndex = levelBitRecord->bitIndex;
-    field80 = ((World_func_8028787C_de *)(arg0))->levels;
-    field1B40C = ((World_func_8028787C_de *)(arg0))->level;
+    field80 = ((WorldSceneDispatchEnabledEntityTrigger *)(arg0))->levels;
+    field1B40C = ((WorldSceneDispatchEnabledEntityTrigger *)(arg0))->level;
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 1);
     SetN64_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
@@ -185,8 +185,8 @@ void func_8028BB1C_de(void *world, void *trigger, s32 arg2) {
     s32 idx2;
 
     bitIndex = item->bitIndex;
-    field80 = ((World_func_8028787C_de *)(world))->levels;
-    field1B40C = ((World_func_8028787C_de *)(world))->level;
+    field80 = ((WorldSceneDispatchEnabledEntityTrigger *)(world))->levels;
+    field1B40C = ((WorldSceneDispatchEnabledEntityTrigger *)(world))->level;
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 2);
     SetN64_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);

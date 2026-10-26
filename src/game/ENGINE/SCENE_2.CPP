@@ -15,7 +15,7 @@
 extern s32 func_8028FDF8_de(void *table, s32 index);
 extern void Link_DispatchTrigger(Entity *entity);
 
-void func_8028787C_de(World_func_8028787C_de *world, Entity *entity) {
+void Scene_DispatchEnabledEntityTrigger(WorldSceneDispatchEnabledEntityTrigger *world, Entity *entity) {
     s32 index;
     s32 level;
     void *mask;

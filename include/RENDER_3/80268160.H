@@ -11,7 +11,7 @@ struct TripleEventsFireWithinHeightRange {
     f32 y;
     s32 z;
 };
-struct Camera_func_8026851C_de {
+struct CameraEventsSpawnAttachedEffect {
     char pad0[0xE4];
     CVector3 position;
     CVector3 offset;

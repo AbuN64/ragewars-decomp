@@ -532,7 +532,7 @@ weapon:
     if (model >= 0) {
         resource = func_8024BFD4_de(actor, model);
         if (resource) {
-            func_8026DA4C_de(resource, actor->fieldB4, 1,
+            Geometry_DrawModelResource(resource, actor->fieldB4, 1,
                             &actor->lighting[D_800D297C], 0, actor->field3);
             Cache_UnlockResource(0, resource);
         }

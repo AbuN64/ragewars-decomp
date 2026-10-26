@@ -19,7 +19,7 @@ extern void func_80449E18_de(CPlayerPool *);
 extern void func_80253908_de(s32 unusedHeap);
 extern s32 func_80254284_de(s32,void **,s32,void *);
 extern void **func_80254408_de(s32,s32,s32,s32,s32,s32,void *);
-extern void func_80286AA8_de(void *,s32,s32);
+extern void Scene_LoadLevelResources(void *,s32,s32);
 extern int SetN64_GetDirectoryEntry(int *,int,int);
 extern s32 SetN64_LocatePackSection(s32,s32,s32,s32 *);
 extern s32 D_00285160;
@@ -131,5 +131,5 @@ void OvlScene_LoadSceneResources(LevelCode8044ACCC *arg0, s32 arg1) {
     arg0->unk88 = 0;
     arg0->unk120 = 0;
     arg0->unk124 = 0;
-    func_80286AA8_de(arg0, 0, 0);
+    Scene_LoadLevelResources(arg0, 0, 0);
 }

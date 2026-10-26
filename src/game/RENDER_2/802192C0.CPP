@@ -127,7 +127,7 @@ extern void SwapMatrixUpForward(void *object);
 extern void CopyMatrix(f32 *arg0, f32 *arg1);
 extern void func_802735A8_de(void *arg0, s32 arg1, f32 arg2, f32 arg3);
 extern void GraphU64_ConvertMatrixToFixed(void *arg0, void *arg1);
-extern void func_8026DF30_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern void Geometry_QueueDirectModel(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 
 
@@ -146,7 +146,7 @@ void func_80219490_de(char *object, char *camera) {
     f32 w;
     char *matrix;
 
-    func_8026D8F8_de();
+    Geometry_InvalidateMaterialKeys();
     if (((AnimationSprite *)(object))->model == 0 || ((AnimationSprite *)(object))->active == 0) {
         return;
     }
@@ -186,7 +186,7 @@ void func_80219490_de(char *object, char *camera) {
     GraphU64_TransformPoint(first, object + 0xA8, output);
     {
         s32 offset = (D_800D297C << 6) + 0x10;
-        func_8026DF30_de(((AnimationSprite *)(object))->model, (s32)(object + offset),
+        Geometry_QueueDirectModel(((AnimationSprite *)(object))->model, (s32)(object + offset),
                        (s32)&D_800CBC90, 0, -1);
     }
     Geometry_FlushModelBatch();

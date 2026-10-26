@@ -129,7 +129,7 @@ extern void func_802A2394_de(void);
 
 extern void func_80293334_de(void *, s32, s32);
 
-extern void func_80286AA8_de(void *, s32, s32);
+extern void Scene_LoadLevelResources(void *, s32, s32);
 
 /* Releases the object D_800E3518 holds through Cache_FreeMemory, clears D_800E3518 and returns zero. */
 
@@ -375,7 +375,7 @@ s32 func_8041C2AC_de(void *parent) {
     D_80146D70 = 0;
     resources = (char *)&D_8011FAC0;
     func_80293334_de(resources, 0, 0);
-    func_80286AA8_de(resources + 0x3C8, 0, 0);
+    Scene_LoadLevelResources(resources + 0x3C8, 0, 0);
     D_800E3518->ready = 0;
     return 0;
 }

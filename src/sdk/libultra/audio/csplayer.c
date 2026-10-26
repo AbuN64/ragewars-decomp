@@ -50,9 +50,9 @@ extern void func_802B1B14_de(void *, void *, s32);
 
 extern void func_802B18E4_de(void *, void *);
 
-void func_802AEAB0_de(void *arg0, InitParams *arg1) {
+void func_802AEAB0_de(void *arg0, InitParams *config) {
     ALSeqPlayer *obj = arg0;
-    InitParams *params = arg1;
+    InitParams *params = config;
     s32 context = params->context;
     s32 global = (s32)D_800D4070;
     s32 allocation;

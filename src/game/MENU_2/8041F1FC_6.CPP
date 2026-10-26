@@ -30,7 +30,7 @@ void MarkMenuEventHandled(void);
 void SmpOverlay_SetSlotValue(s32, s32, s32, State_func_80420C10_de *);
 
          /* extern */
-void func_8041CE10_de(void *, s32);
+void Frontend_SetPreviewTransformUpdate(void *, s32);
 
                     /* extern */
 void func_80420438_de(s32);
@@ -137,7 +137,7 @@ s32 func_80420C10_de(s32 unused0, s32 unused1, s32 arg2) {
     case 3:
         temp_a3->unk14 = 1;
         SmpOverlay_SetSlotValue(D_800E42D0->unk4, entryIndex, 0, temp_a3);
-        func_8041CE10_de(&((PanelRecord *)(temp_s1 + (s32)D_800E42D0))->target, 1);
+        Frontend_SetPreviewTransformUpdate(&((PanelRecord *)(temp_s1 + (s32)D_800E42D0))->target, 1);
         func_80420438_de(entryIndex);
         break;
     }

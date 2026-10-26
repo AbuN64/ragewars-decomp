@@ -15,7 +15,7 @@
 #include "particle/80271B18_3.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
-/* Draws an actor's ground shadow: probes the ground under the actor through func_80243A90_de into D_801041F0, and when ground is found tilts the shadow model from D_8011FFB0 to the ground normal, scales it by the actor's size shrinking with height above the ground, fades it with height (and with lost health for actors flagged 1), places it on the ground and draws it through func_8026992C_de between render-mode commands. */
+/* Draws an actor's ground shadow: probes the ground under the actor through func_80243A90_de into D_801041F0, and when ground is found tilts the shadow model from D_8011FFB0 to the ground normal, scales it by the actor's size shrinking with height above the ground, fades it with height (and with lost health for actors flagged 1), places it on the ground and draws it through Geometry_DrawIntensityMask between render-mode commands. */
 extern char D_8011FFB0;
 
 extern char D_80100030;
@@ -41,7 +41,7 @@ extern void TranslateMatrix(f32 *, f32, f32, f32);
 
 extern void GraphU64_ConvertMatrixToFixed(f32 *, void *);
 
-extern void func_8026992C_de(void *model, s32 pass, u8 alpha);
+extern void Geometry_DrawIntensityMask(void *model, s32 pass, u8 alpha);
 
 extern s32 D_80140FF8;
 
@@ -140,7 +140,7 @@ void func_8027E784_de(Shared_Particle *actor, GameplayCamera *view) {
         cmd = g_displayListCursor++;
         gDPSetCycleType(cmd, G_CYC_2CYCLE);
     }
-    func_8026992C_de(model, 1, (u32)alpha);
+    Geometry_DrawIntensityMask(model, 1, (u32)alpha);
     {
         Gfx *cmd = g_displayListCursor++;
         gDPPipeSync(cmd);

@@ -10,7 +10,7 @@
 #include "RENDER_4/8026AC38_2.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-/* Draws the parts of a model resource that the owner has enabled, when the frame command buffer still has 3000 commands free: each part material's low two bits of byte 6 pick an owner flag at 0x102 (0x100, 0x8 or 0x2, 0x80 or 0x20 by bit 4) that must be set before Geometry_SetupMaterial accepts the material and its display list is emitted. Adapted from func_8026DA4C_de with the owner argument and the per-material flag switch added. */
+/* Draws the parts of a model resource that the owner has enabled, when the frame command buffer still has 3000 commands free: each part material's low two bits of byte 6 pick an owner flag at 0x102 (0x100, 0x8 or 0x2, 0x80 or 0x20 by bit 4) that must be set before Geometry_SetupMaterial accepts the material and its display list is emitted. Adapted from Geometry_DrawModelResource with the owner argument and the per-material flag switch added. */
 
 extern Gfx *g_displayListCursor;
 #include "COMMON/DISPLAY.H"
@@ -87,19 +87,19 @@ void func_8026B9EC_de(void **resource, struct Owner104 *owner, s32 matrix, s32 s
         }
     }
 }
-extern Node_func_8026BC60_de *D_8010C568;
-extern Node_func_8026BC60_de *D_8010C56C;
-extern Node_func_8026BC60_de *D_8010C57C;
-extern Node_func_8026BC60_de *D_8010C584;
+extern NodeGeometryGroupModelInstances *D_8010C568;
+extern NodeGeometryGroupModelInstances *D_8010C56C;
+extern NodeGeometryGroupModelInstances *D_8010C57C;
+extern NodeGeometryGroupModelInstances *D_8010C584;
 extern void **D_8011064C;
 extern ItemRecAt1C D_8010C590[];
-extern Node_func_8026BC60_de D_801144D0[];
+extern NodeGeometryGroupModelInstances D_801144D0[];
 extern struct Shape_typemap_165 D_801157D8[];
 
 
 /* Returns the node keyed key in the tree under n, or the node a new key would hang from. */
-static inline Node_func_8026BC60_de *find_node(Node_func_8026BC60_de *n, u32 key) {
-    Node_func_8026BC60_de *parent = ((void *) 0);
+static inline NodeGeometryGroupModelInstances *find_node(NodeGeometryGroupModelInstances *n, u32 key) {
+    NodeGeometryGroupModelInstances *parent = ((void *) 0);
 
     while (n != ((void *) 0)) {
         if (n->key == key) {
@@ -118,7 +118,7 @@ static inline Node_func_8026BC60_de *find_node(Node_func_8026BC60_de *n, u32 key
 /* Files each entry of the list the resource D_8011064C holds into one of two keyed trees, allocating a
  * node from D_801144D0 when its key is new, and appends one item per queued parameter in D_801157D8
  * to that node's list; then clears the queue count D_80110640. */
-void func_8026BC60_de(void) {
+void Geometry_GroupModelInstances(void) {
     s32 *list;
     s32 count;
     s32 i;
@@ -126,8 +126,8 @@ void func_8026BC60_de(void) {
     void *entry;
     ResourceSource *source;
     u32 key;
-    Node_func_8026BC60_de *parent;
-    Node_func_8026BC60_de *node;
+    NodeGeometryGroupModelInstances *parent;
+    NodeGeometryGroupModelInstances *node;
     s32 *data;
     ItemRecAt1C *item;
     struct Shape_typemap_165 *param;

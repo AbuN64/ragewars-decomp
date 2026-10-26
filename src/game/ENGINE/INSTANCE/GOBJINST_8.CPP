@@ -18,7 +18,7 @@ extern s32 func_80251F6C_de(s32, s32, void *, s32, s32, void *, void *, void *, 
 extern void func_8027892C_de(void *object, void *colors);
 
 extern void Cache_UnlockResource(s32, s32);
-extern s32 func_8026E340_de(void);
+extern s32 Geometry_GetViewEffect(void);
 #include "particle/8027A0F4_8.H"
 extern EffectRecAt154 *func_802830B8_de(void *system);
 
@@ -61,8 +61,8 @@ void func_8024A7A0_de(LevelActor *actor, s32 unusedShadowContext, Lookup *params
     } else {
         data = (char *)(header + 2);
     }
-    func_8026DA4C_de(params->value, actor->fieldB4, 1, 0, data, actor->field3);
-    if (func_8026E340_de() != 0) {
+    Geometry_DrawModelResource(params->value, actor->fieldB4, 1, 0, data, actor->field3);
+    if (Geometry_GetViewEffect() != 0) {
         node = SetN64_GetPackSection(*params->value, 2);
         if ((*node != 0) &&
             (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {

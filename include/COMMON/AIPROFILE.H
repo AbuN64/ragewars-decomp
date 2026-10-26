@@ -87,7 +87,7 @@ struct Player {
     f32 damageCooldown; /* 0x670 */
     u8 pad674[4];
     f32 rangeTimer; /* 0x678: Player_UpdatePlayerEffectLights */
-    struct RangeNode *rangeNodes[3]; /* 0x67C: created by func_80268C1C_de */
+    struct RangeNode *rangeNodes[3]; /* 0x67C: created by DynLight_AllocateLightNode */
     u8 tuning[0x10]; /* 0x688 */
     void *weaponAnimation; /* 0x698 */
     f32 steer; /* 0x69C */

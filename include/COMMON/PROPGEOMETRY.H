@@ -195,5 +195,5 @@ extern char D_0026D7D4_de[];
 
 extern char D_800C3E70[];
 
-extern s32 func_8026E340_de(void);
+extern s32 Geometry_GetViewEffect(void);
 #endif

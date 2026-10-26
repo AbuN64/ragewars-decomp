@@ -33,7 +33,7 @@ void func_8021C698_de(PlayerCode802192C0 *player) {
     if (player->marker != 0) {
         gSPMatrix(g_displayListCursor++, &player->views[D_800D297C], G_MTX_LOAD);
         gDPPipeSync(g_displayListCursor++);
-        func_8026D8F8_de();
+        Geometry_InvalidateMaterialKeys();
         Geometry_SetModePreset(0xE);
         Geometry_SetCombineMode(0x1C);
         red = 200;

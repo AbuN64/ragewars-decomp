@@ -140,7 +140,7 @@ void Frontend_DrawModelPreview(Obj8041CAD8 *self) {
         gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
         gDPSetTexturePersp(g_displayListCursor++, G_TP_PERSP);
         gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
-        func_8026D844_de();
+        Geometry_InitializeModelRenderState();
         draw->unk8 = local20;
         draw->unk1C4 = local20;
         func_8024B8C4_de(draw);
@@ -172,8 +172,8 @@ extern void func_802466A0_de(void *, s32, s32, s32, void *, s32, s32, f32, CVect
 extern void func_8024B2D0_de();
 /* Starts a menu model preview: loads the projection, spawns the model through func_8028CFA0_de, keeps a copy
  * of its record, places it scaled to the screen and runs its first update. Returns the copy, or 0 when no model. */
-void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 modelKind, s32 arg3, s32 extra, CVector3 position, CVector3 facing,
-                       f32 scale, s32 arg8) {
+void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 modelKind, s32 previewModelId, s32 extra, CVector3 position, CVector3 facing,
+                       f32 scale, s32 pitchDegrees) {
     CVector3 scales;
     CVector3 local60;
     CVector3 local70;
@@ -188,7 +188,7 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 modelKind, s32 ar
     view = D_80141008;
     gSPMatrix(g, &view->matrices[D_800D297C], G_MTX_LOAD | G_MTX_PROJECTION);
     self->unk49C = 1;
-    self->unk4A0 = arg8;
+    self->unk4A0 = pitchDegrees;
     draw = &self->sub190;
     source = func_8028CFA0_de(&g_world, id, modelKind, g);
     if (source == 0) {
@@ -214,11 +214,11 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 modelKind, s32 ar
     draw->unk50 = scales;
     local70 = self->unk48C;
     GraphU64_TransformPoint(&view->camera, &local70, &local80);
-    func_802466A0_de(draw, -1, arg3, D_800CD8D0, &self->copy4, -1, 0, self->unk498 * 0.017453294f, local80, 0,
+    func_802466A0_de(draw, -1, previewModelId, D_800CD8D0, &self->copy4, -1, 0, self->unk498 * 0.017453294f, local80, 0,
                      self->unk480, local60, 0);
     func_8024B2D0_de(draw);
     if (self->unk0 == 9) {
-        Frontend_SelectPreviewModel(self, arg3, extra, modelKind);
+        Frontend_SelectPreviewModel(self, previewModelId, extra, modelKind);
     }
     return &self->copy4;
 }
@@ -229,7 +229,7 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 modelKind, s32 ar
 
 
 
-void func_8041CDB0_de(ObjRecAt480 *arg0, CVector3 v) {
+void Frontend_SetPreviewPosition(ObjRecAt480 *arg0, CVector3 v) {
     arg0->unk480 = v;
 }
 
@@ -239,7 +239,7 @@ void func_8041CDB0_de(ObjRecAt480 *arg0, CVector3 v) {
 
 
 
-void func_8041CDDC_de(ObjRecAt48C *arg0, CVector3 v) {
+void Frontend_SetPreviewFacing(ObjRecAt48C *arg0, CVector3 v) {
     arg0->unk48C = v;
 }
 
@@ -247,7 +247,7 @@ void func_8041CDDC_de(ObjRecAt48C *arg0, CVector3 v) {
 
 
 
-void func_8041CE08_de(ObjRecAt498 *arg0, s32 arg1) {
+void Frontend_SetPreviewAngle(ObjRecAt498 *arg0, s32 arg1) {
     arg0->unk498 = arg1;
 }
 
@@ -255,7 +255,7 @@ void func_8041CE08_de(ObjRecAt498 *arg0, s32 arg1) {
    it with zero, Frontend_InitModelPreview writes the same word directly and Frontend_DrawModelPreview reads it. */
 
 
-void func_8041CE10_de(struct Object49C *object, s32 value) {
+void Frontend_SetPreviewTransformUpdate(struct Object49C *object, s32 value) {
     object->value = value;
 }
 

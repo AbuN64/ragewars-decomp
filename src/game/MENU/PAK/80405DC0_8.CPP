@@ -11,7 +11,7 @@
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
 #if defined(VERSION_EU)
-#define Pak_CheckControllerPak func_80406A90_eu
+#define Pak_CheckControllerPak Pak_CheckEuropeanSaveAvailability
 #endif
 #if defined(VERSION_EU_X)
 #define Pak_CheckControllerPak Pak_CheckLocalizedSaveAvailability
@@ -284,7 +284,7 @@ static __inline__ void pakGetChannel(Shared_PakMenu *menu, s32 *channel) {
         *channel = menu->owner->unk4;
     }
 }
-/* func_804098A4_de's body: store the snapshot checksum after the D_8011FECC bytes of note data. */
+/* Pak_SetSaveTrailerValue's body: store the snapshot checksum after the D_8011FECC bytes of note data. */
 static __inline__ void pakSetChecksum(s32 offset, s32 value) {
     *(s32 *)((u8 *)(D_8011FECC + offset) + 0x60C) = value;
 }

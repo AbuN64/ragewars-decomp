@@ -7,7 +7,7 @@
 #include "COMMON/TRIPLE.H"
 
 /* Draw the inset viewport border with black bands and a one-pixel outline. */
-void func_8026D8F8_de(void);
+void Geometry_InvalidateMaterialKeys(void);
 extern Gfx *g_displayListCursor;
 
 void func_80401D74_de(s32 inset) {
@@ -15,7 +15,7 @@ void func_80401D74_de(s32 inset) {
     f32 top;
     f32 width;
     f32 height;
-    func_8026D8F8_de();
+    Geometry_InvalidateMaterialKeys();
     left = 0.0f;
     top = (f32)inset;
     gDPPipeSync(g_displayListCursor++);

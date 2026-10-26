@@ -2,7 +2,7 @@
 
 #if defined(VERSION_EU_X)
 #ifdef NON_MATCHING
-#define func_8041CEB0_us_rev1 Frontend_OpenLocalizedFourSlotSelection
+#define Frontend_CreateSlotSelectionMenu Frontend_OpenLocalizedFourSlotSelection
 /* Builds the player-selection menu block at 0x800E3590 for one menu tree: it allocates the block
  * with a 528-byte window request, remembers the tree and the pool func_8041B610_de returns for it,
  * arms the tree's four option groups with id 513, hands the pool back to SmpOverlay_SetObjectValue, and
@@ -25,7 +25,7 @@
 
 /* The pool and style helpers take a word, while this unit and the window lookups carry the menu
  * tree as a pointer; the cast carries that pointer through unchanged. */
-s32 func_8041CEB0_us_rev1(void *owner) {
+s32 Frontend_CreateSlotSelectionMenu(void *owner) {
     func_8041F2A0_Item *item;
     s32 shift;
     s32 adjust;

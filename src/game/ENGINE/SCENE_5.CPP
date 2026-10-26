@@ -452,7 +452,7 @@ extern u8 *D_800D3A9C;
 #endif
 extern void func_804037D4_de(void), func_804030E0_de(s32);
 extern s32 func_802934F8_de(void);
-extern void func_80286AA8_de(void *, s32, s32);
+extern void Scene_LoadLevelResources(void *, s32, s32);
 extern struct CCameraText_t *Sky_PostScaledScreenMessage(void *, void *, u8 *, f32);
 static inline s32 transitionId(Shared_World *scene) {
     if (scene->selectionFlags != 0) return scene->selectionSpawn.kind;
@@ -475,7 +475,7 @@ void Scene_UpdateSelectionTransition(Shared_World *scene)
             else scene->selectionFlags = OvlScene_FindPlacedObjectsByKey(scene, -1, scene->selectionValues[1], &scene->selectionSpawn, 1);
             scene->selectionValues[0] = scene->selectionValues[1];
             id = transitionId(scene);
-            func_80286AA8_de(scene, id, scene->selectionFlags);
+            Scene_LoadLevelResources(scene, id, scene->selectionFlags);
             settings = &D_80145088.settings;
             if (scene->previewStart != settings->optionFlags && func_802934F8_de()) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

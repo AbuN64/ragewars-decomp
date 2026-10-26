@@ -176,7 +176,7 @@ void Menu_UpdateGameOptionsTransitions(void) {
         "lui        $a0, %hi(g_world)\n"
         "addiu      $a0, $a0, %lo(g_world)\n"
         "addu       $a1, $zero, $zero\n"
-        "jal        func_80286AA8_de\n"
+        "jal        Scene_LoadLevelResources\n"
         "addu      $a2, $a1, $zero\n"
         "jal        func_8025477C_de\n"
         "nop\n"

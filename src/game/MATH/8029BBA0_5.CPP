@@ -6,7 +6,7 @@
 #include "MATH/8029BBA0_5.H"
 #include "RSP/8026E1F8_5.H"
 
-/* Rounds a double up to the next integer by the 2^52 add-and-subtract trick, handling negative values through an inlined round-down that recurses back into this function. Adapted from func_8029D964_de with the rounding direction reversed, the negative case routed through an inline copy of the round-down and the constants changed. */
+/* Rounds a double up to the next integer by the 2^52 add-and-subtract trick, handling negative values through an inlined round-down that recurses back into this function. Adapted from XMath_FloorDouble with the rounding direction reversed, the negative case routed through an inline copy of the round-down and the constants changed. */
 
 
 
@@ -81,17 +81,17 @@ void XMath_InitializeMath(void) {
 void XMath_ShutdownMath(void) {
 }
 
-f32 func_8029D8B0_de(f32 arg0) {
+f32 XMath_SquareFloat(f32 arg0) {
     return arg0 * arg0;
 }
 
-void func_8029D8BC_de(f32 arg0) {
+void XMath_EvaluatePositiveSquareRoot(f32 arg0) {
     if (!(arg0 <= 0.0f)) {
         Math_Sqrtf(arg0);
     }
 }
 
-f32 func_8029D8E8_de(f32 arg0) {
+f32 XMath_EvaluateReciprocalSquareRoot(f32 arg0) {
     f32 var_f0;
 
     if (arg0 <= 0.0f) {
@@ -102,7 +102,7 @@ f32 func_8029D8E8_de(f32 arg0) {
     return D_800C5B0C_de / var_f0;
 }
 
-f32 func_8029D924_de(f32 arg0, f32 arg1) {
+f32 XMath_OffsetFloatRemainder(f32 arg0, f32 arg1) {
     f32 result;
     result = (f32) FloatModulo((f64) arg0, (f64) arg1);
     if (result < arg1) {
@@ -111,7 +111,7 @@ f32 func_8029D924_de(f32 arg0, f32 arg1) {
     return result;
 }
 
-f64 func_8029D964_de(f64 arg0) {
+f64 XMath_FloorDouble(f64 arg0) {
     f64 temp;
     f64 integral;
     f64 limit;
@@ -183,7 +183,7 @@ f64 XMath_SplitDoubleFraction(f64 arg0, f64 *whole) {
     return arg0 - integral;
 }
 
-f32 func_8029DB34_de(f32 arg0) {
+f32 XMath_AbsoluteFloat(f32 arg0) {
     if (arg0 >= 0.0f) {
         return arg0;
     }
@@ -206,7 +206,7 @@ f64 Log10Double(f64 value) {
     return NaturalLogDouble(value) * D_800C5B60_de;
 }
 
-f64 func_8029DB9C_de(f64 x) {
+f64 XMath_EvaluateExponentialDouble(f64 x) {
     f64 r;
     f64 t;
     f64 p;
@@ -232,7 +232,7 @@ f64 func_8029DB9C_de(f64 x) {
     return ScaleDoubleExponent(p / (q - p) + D_800C5B88_de, k + 1);
 }
 
-f64 func_8029DCB0_de(f64 arg0, s32 *arg1) {
+f64 XMath_SplitDoubleExponent(f64 arg0, s32 *arg1) {
     DoubleBits_8029ECB0 u;
     f64 special;
 
@@ -264,7 +264,7 @@ f32 XMath_EvaluateTangent(f32 arg0) {
     return r1 / r2;
 }
 
-f32 func_8029DD78_de(f32 arg0) {
+f32 XMath_EvaluateArcTangent(f32 arg0) {
     f32 temp_f2;
     f32 temp_f3;
     f32 result;
@@ -317,7 +317,7 @@ f32 XMath_EvaluateArcSine(f32 x) {
     return result;
 }
 
-f32 func_8029DF48_de(f32 x) {
+f32 XMath_EvaluateArcCosine(f32 x) {
     s32 negative;
     f32 poly;
     f32 root;

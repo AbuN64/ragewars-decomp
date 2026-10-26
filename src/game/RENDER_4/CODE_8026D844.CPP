@@ -58,17 +58,17 @@ extern ObjRecAtCV2 D_801157D8[];
 
 extern void Cache_LockResource(s32, s32);
 
-extern void func_8026C484_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 arg5);
+extern void Geometry_QueueModelById(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 arg5);
 
 extern void Geometry_SetModePreset(s32 mode);
 
 
 extern void **func_80295EAC_de(void *arg0, s32 arg1);
 
-void func_8026D844_de(void) {
+void Geometry_InitializeModelRenderState(void) {
     char local[64];
 
-    func_8026D8F8_de();
+    Geometry_InvalidateMaterialKeys();
     func_80272CB0_de(local, D_800C46AC_de, D_800C46AC_de, D_800C46AC_de);
     func_8026FC9C_de(local, &D_8010C520);
 }
@@ -86,13 +86,13 @@ void Geometry_SelectEffectModes(void) {
 }
 
 /** Reset two global indices to minus one. */
-void func_8026D8F8_de(void) {
+void Geometry_InvalidateMaterialKeys(void) {
     D_800CC364 = -1;
     D_800CC360 = -1;
 }
 
-void Geometry_SetColorDither(s32 arg0) {
-    if (D_80110620 == 0) gDPSetColorDither(g_displayListCursor++, arg0) else gDPSetColorDither(g_displayListCursor++, G_CD_NOISE);
+void Geometry_SetColorDither(s32 ditherMode) {
+    if (D_80110620 == 0) gDPSetColorDither(g_displayListCursor++, ditherMode) else gDPSetColorDither(g_displayListCursor++, G_CD_NOISE);
 }
 
 void Geometry_BeginModelBatch(void) {
@@ -108,23 +108,23 @@ void Geometry_BeginModelBatch(void) {
 }
 
 void Geometry_FlushModelBatch(void) {
-    s32 temp_s0;
+    s32 resourceHandle;
     s32 i;
 
-    func_8026BC60_de();
+    Geometry_GroupModelInstances();
     i = 0;
-    func_8026C020_de();
+    Geometry_DrawMaterialGroups();
     if (D_80111310 > 0) {
         do {
-            temp_s0 = D_80111318[i];
-            Cache_MarkResourceInUse(0, temp_s0);
-            Cache_UnlockResource(0, temp_s0);
+            resourceHandle = D_80111318[i];
+            Cache_MarkResourceInUse(0, resourceHandle);
+            Cache_UnlockResource(0, resourceHandle);
             i += 1;
         } while (i < D_80111310);
     }
 }
 
-void func_8026DA4C_de(void **resource, void *matrix, s32 segment, void *lights, void *textures, s32 pass) {
+void Geometry_DrawModelResource(void **resource, void *matrix, s32 segment, void *lights, void *textures, s32 pass) {
     void *header;
     void *base;
     void **parts;
@@ -163,21 +163,21 @@ void func_8026DA4C_de(void **resource, void *matrix, s32 segment, void *lights, 
 }
 
 void Geometry_QueueModelInstance(void **a, void *b, s32 c, void *d, void *e, s32 f) {
-    s32 temp_v0;
-    void *var_s0;
-    ObjRecAtCV2 *temp_v1_2;
-    void *temp_a0;
+    s32 instanceCount;
+    void *vertexBase;
+    ObjRecAtCV2 *queuedInstance;
+    void *modelHeader;
     s32 *countp;
     s32 count;
     s32 *queue_countp;
 
-    temp_a0 = *a;
-    var_s0 = e;
-    if (var_s0 == 0) {
-        var_s0 = SetN64_GetPackSection(temp_a0, 0);
+    modelHeader = *a;
+    vertexBase = e;
+    if (vertexBase == 0) {
+        vertexBase = SetN64_GetPackSection(modelHeader, 0);
     }
     if ((D_8011064C != (s32)a) || (D_8010C564 != f) || (D_80110640 == 0x20)) {
-        func_8026BC60_de();
+        Geometry_GroupModelInstances();
         if (D_80111310 != 0x100) {
             Cache_LockResource(0, (s32)a);
             countp = &D_80111310;
@@ -191,14 +191,14 @@ block_7:
         D_8011064C = (s32)a;
         D_8010C564 = f;
         queue_countp = &D_80110640;
-        temp_v0 = *queue_countp;
-        temp_v1_2 = &D_801157D8[temp_v0];
-        temp_v0 += 1;
-        *queue_countp = temp_v0;
-        temp_v1_2->unk0 = b;
-        temp_v1_2->unkC = c;
-        temp_v1_2->unk4 = d;
-        temp_v1_2->unk8 = var_s0;
+        instanceCount = *queue_countp;
+        queuedInstance = &D_801157D8[instanceCount];
+        instanceCount += 1;
+        *queue_countp = instanceCount;
+        queuedInstance->unk0 = b;
+        queuedInstance->unkC = c;
+        queuedInstance->unk4 = d;
+        queuedInstance->unk8 = vertexBase;
     }
 }
 
@@ -240,12 +240,12 @@ void func_8026DD50_de(void **resource, s32 unused, s32 matrix, s32 segment, s32 
     }
 }
 
-void func_8026DF30_de(s32 model, void *arg1, void *arg2, s32 arg3, s32 arg4) {
-    func_8026C484_de(model, arg1, arg2, arg3, arg4, 1);
+void Geometry_QueueDirectModel(s32 model, void *arg1, void *arg2, s32 arg3, s32 arg4) {
+    Geometry_QueueModelById(model, arg1, arg2, arg3, arg4, 1);
 }
 
 void func_8026DF58_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4) {
-    func_8026C484_de(arg0, arg1, arg2, arg3, arg4, 0);
+    Geometry_QueueModelById(arg0, arg1, arg2, arg3, arg4, 0);
 }
 
 void func_8026DF7C_de(void *shared, s32 mode, void **resource, s32 matrix, s32 segment, s32 lights, void *textures, s32 pass) {
@@ -292,7 +292,7 @@ void func_8026DF7C_de(void *shared, s32 mode, void **resource, s32 matrix, s32 s
     }
 }
 
-void func_8026E158_de(void **arg0) {
+void Geometry_UnlockMaterialResources(void **arg0) {
     void *temp_v0;
     s32 count;
     s32 i;

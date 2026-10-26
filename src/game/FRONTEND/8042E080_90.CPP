@@ -19,7 +19,7 @@ extern void func_8043C2A4_de(void *);
 extern void MarkMenuEventHandled(void);
 extern void Items_ResetActorPools(void *, s32);
 extern void func_804499B0_de(void *, s32, s32);
-extern void func_80286AA8_de(void *, s32, s32);
+extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(s32);
 extern void func_8025E384_de(void);
@@ -44,7 +44,7 @@ s32 func_804362A8_de(s32 unused0, s32 unused1, s32 event) {
         *pause = 0;
         Items_ResetActorPools((char *)pause - 0x180C, 0);
         func_804499B0_de((char *)pause - 0x1854, 0, 0);
-        func_80286AA8_de(&g_world, 0x24, 0);
+        Scene_LoadLevelResources(&g_world, 0x24, 0);
         if (func_8025477C_de() == 0) {
             func_8025476C_de(1);
         }

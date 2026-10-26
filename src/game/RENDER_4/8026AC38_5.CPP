@@ -101,22 +101,22 @@ void func_8026D4F0_de(void **resource, void *unused, void *matrix, s32 segment, 
     D_800D15E0 = 0;
 }
 
-extern void func_8026AD8C_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+extern void Geometry_ExpandModelCommands(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 
 void func_8026D7D4_de(s32 arg0, s32 arg1) {
-    func_8026AD8C_de(arg0, arg1, 0, 0);
+    Geometry_ExpandModelCommands(arg0, arg1, 0, 0);
 }
 
-extern void func_8026AD8C_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+extern void Geometry_ExpandModelCommands(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 
 void func_8026D7F4_de(s32 arg0, s32 arg1) {
-    func_8026AD8C_de(arg0, arg1, 0, 1);
+    Geometry_ExpandModelCommands(arg0, arg1, 0, 1);
 }
 
-extern void func_8026AD8C_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+extern void Geometry_ExpandModelCommands(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 
 void func_8026D814_de(s32 arg0, s32 arg1) {
-    func_8026AD8C_de(arg0, arg1, 1, 0);
+    Geometry_ExpandModelCommands(arg0, arg1, 1, 0);
 }
 
 void func_8026D834_de(void) {

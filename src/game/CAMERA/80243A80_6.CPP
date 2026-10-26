@@ -15,7 +15,7 @@ extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Starts the round once: unless already started, optionally resets the lead player (func_8022E290_de and its
  * three counters) and the player group, then when a new target id is pending selects it through
- * func_8044D3E8_de and func_80286AA8_de, records the start time from func_8040332C_de, marks the round started with
+ * func_8044D3E8_de and Scene_LoadLevelResources, records the start time from func_8040332C_de, marks the round started with
  * no pending target and copies the viewport rectangle into the active camera as floats. */
 
 
@@ -52,7 +52,7 @@ extern void Rumble_FreeAllPoolNodes(void *);
 
 extern s32 OvlScene_FindNearestPlacedObject(void *, Vec3Words *, s32, void *);
 
-extern void func_80286AA8_de(void *, s32, s32);
+extern void Scene_LoadLevelResources(void *, s32, s32);
 
 extern s32 func_8040332C_de(void);
 
@@ -114,7 +114,7 @@ void func_80244E58_de(void) {
             found = OvlScene_FindNearestPlacedObject(table, &origin, target, &D_801371E8);
             D_8013B2BC.field_0 = found;
             D_801371E4.field_0 = found != 0;
-            func_80286AA8_de(table, target, found != 0);
+            Scene_LoadLevelResources(table, target, found != 0);
         }
     }
     D_800E2830->unknown5C = func_8040332C_de();

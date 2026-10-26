@@ -1,12 +1,12 @@
 #ifndef FRONTEND_8041BEA8_6_H
 #define FRONTEND_8041BEA8_6_H
 #include "COMMON/LABEL.H"
-extern void func_8041CDDC_de(ObjRecAt48C *arg0, CVector3 v);
+extern void Frontend_SetPreviewFacing(ObjRecAt48C *arg0, CVector3 v);
 struct Obj8041CAD8;
 extern void Frontend_SelectPreviewModel(struct Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected);
 extern void Frontend_SelectMatchingPreviewModel(struct Obj8041CAD8 *preview, s32 id, s32 extra, s32 expected);
-extern void func_8041CE08_de(ObjRecAt498 *arg0, s32 arg1);
-extern void func_8041CDB0_de(ObjRecAt480 *arg0, CVector3 v);
+extern void Frontend_SetPreviewAngle(ObjRecAt498 *arg0, s32 arg1);
+extern void Frontend_SetPreviewPosition(ObjRecAt480 *arg0, CVector3 v);
 typedef struct Ret8028CFA0 {
     s32 unk0;
     s32 unk4;

@@ -17,7 +17,7 @@ extern s32 D_800D2978;
 
 extern void *StaticInstance_AcquireGeometry(ResourceOwner *owner,s32 index);
 
-extern void func_8026E158_de(void **arg0);
+extern void Geometry_UnlockMaterialResources(void **arg0);
 
 extern void Cache_UnlockResource(s32 arg0, s32 arg1);
 
@@ -59,7 +59,7 @@ void StaticInstance_RegisterGeometryResources(void *owner) {
     if (!(o->status & 0x40)) {
         temp_v0 = StaticInstance_AcquireGeometry(owner, o->variant);
         if (temp_v0 != 0) {
-            func_8026E158_de((void **) temp_v0);
+            Geometry_UnlockMaterialResources((void **) temp_v0);
             ret2 = func_80251F6C_de(0, o->registrationFlags | D_800CD3F0, temp_v0, (CachedResource *)o->resource, 8, owner, &D_00250C2C, D_800C3E40_de, 0);
             if (ret2 != 0) {
                 Cache_UnlockResource(0, (s32)ret2);
@@ -166,7 +166,7 @@ void StaticInstance_DrawGeometryVariant(OwnerStaticInstanceDrawGeometryVariant *
             data = (char *)&header[2];
         }
         if (D_800D15E0 != 0) {
-            func_8026DA4C_de(instance, owner->transform, 0, 0, data, remaining);
+            Geometry_DrawModelResource(instance, owner->transform, 0, 0, data, remaining);
         } else {
             Geometry_QueueModelInstance(instance, owner->transform, 0, 0, data, remaining);
         }

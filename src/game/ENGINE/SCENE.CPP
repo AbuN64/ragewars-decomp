@@ -68,7 +68,7 @@ extern void **func_80254408_de(s32 arg0, void *handle, s32 arg2, s32 tempv0, voi
 extern void func_8025476C_de();
 extern s32 func_80255228_de();
 extern void func_8025C8D8_de();
-extern void func_80286950_de();
+extern void Scene_CollectLevelSwitches();
 extern void Scene_ShowResultsGoal();
 extern s32 func_8028B25C_de();
 extern void func_8028D380_de();
@@ -161,7 +161,7 @@ extern struct Shared_SceneActorTables D_800F3CD0; /* const */
 /* const */
 
 /* Initializes scene resources, actors, and game mode state. */
-void func_80286AA8_de(void *table, s32 target, s32 arg2) {
+void Scene_LoadLevelResources(void *table, s32 target, s32 arg2) {
     s32 *temp_a0;
     struct Shape_typemap_165 *temp_v0_4;
     s32 temp_s4; 
@@ -489,7 +489,7 @@ scene_size_done:
     (((struct SharedRecAt1B92C *)(table))->unk138) = 0;
     (((struct SharedRecAt1B92C *)(table))->unk140) = 0;
     (((struct SharedRecAt1B92C *)(table))->unkD0) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 3, resourceKey, table, &D_0044C7B8, &s_animatedInstancesText);
-    func_80286950_de(table);
+    Scene_CollectLevelSwitches(table);
     
     i = 0;
     var_v1 = 0xF;

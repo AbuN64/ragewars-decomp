@@ -131,7 +131,7 @@ enum { ITEM0 = 621, ITEM1 = 620, ITEM2 = 619, ITEM3 = 618 };
    calls MarkMenuEventHandled, clears D_80146918 and D_801468F4 and leaves for screen 0xF when option
    D_801462D5 is set, otherwise through func_8042DEA0_de when func_8042AF28_de and func_8042ACD8_de both
    agree or for screen 0x14; choice 1 calls func_8040C428_de(0), shows the window, stops the objects
-   at D_80145088 and 0x48 before it, releases D_8011FE88 through func_80286AA8_de and sets the word at
+   at D_80145088 and 0x48 before it, releases D_8011FE88 through Scene_LoadLevelResources and sets the word at
    0x17F0 of D_80145088 to 8. Returns zero. */
 
 
@@ -153,7 +153,7 @@ extern void Items_ResetActorPools(void *, s32);
 
 extern void func_804499B0_de(void *, s32, s32);
 
-extern void func_80286AA8_de(void *, s32, s32);
+extern void Scene_LoadLevelResources(void *, s32, s32);
 
 extern void MarkMenuEventHandled();
 
@@ -438,7 +438,7 @@ s32 func_8042D4FC_de(void *window, void *unused1, s32 event) {
             object = &D_80145088;
             Items_ResetActorPools(object, 0);
             func_804499B0_de(object - 0x48, 0, 0);
-            func_80286AA8_de(&g_world, 0, 0);
+            Scene_LoadLevelResources(&g_world, 0, 0);
             ((MatchMenuObjects *)(object))->transition = 8;
         } else {
             Frontend_SetWidgetFlag08(window, 0);

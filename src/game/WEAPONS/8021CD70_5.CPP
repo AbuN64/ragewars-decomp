@@ -158,7 +158,7 @@ extern f32 D_800C25C0_de;
 #define PLAYER_MODE_LIGHT_PATTERN D_auto_800CE420
 #endif
 extern char PLAYER_EFFECT_LIGHT_PATTERN[], D_800C91C8_de[], PLAYER_MODE_LIGHT_PATTERN[], D_800C91D8_de[];
-extern void *func_80268C1C_de(void *, void *);
+extern void *DynLight_AllocateLightNode(void *, void *);
 extern void func_8024BC94_de(CVector3 *, void *, CVector3);
 extern s32 GraphU64_NextRandom(void);
 extern f32 GameObject_GetActorHeight(void *);
@@ -191,7 +191,7 @@ void Player_UpdatePlayerEffectLights(struct Player *player) {
     if (player->rangeTimer != 0.0f) {
         light = (struct PlayerEffectLight *)player->rangeNodes[0];
         if (light == 0) {
-            light = func_80268C1C_de(&D_8013B1A8, PLAYER_EFFECT_LIGHT_PATTERN);
+            light = DynLight_AllocateLightNode(&D_8013B1A8, PLAYER_EFFECT_LIGHT_PATTERN);
         }
         if (light != 0) {
             player->rangeNodes[0] = (struct RangeNode *)light;
@@ -199,7 +199,7 @@ void Player_UpdatePlayerEffectLights(struct Player *player) {
         }
         light = (struct PlayerEffectLight *)player->rangeNodes[1];
         if (light == 0) {
-            light = func_80268C1C_de(&D_8013B1A8, D_800C91C8_de);
+            light = DynLight_AllocateLightNode(&D_8013B1A8, D_800C91C8_de);
         }
         if (light != 0) {
             player->rangeNodes[1] = (struct RangeNode *)light;
@@ -234,7 +234,7 @@ void Player_UpdatePlayerEffectLights(struct Player *player) {
     if (D_801462C8.flags & 0x4000) {
         light = (struct PlayerEffectLight *)player->rangeNodes[2];
         if (light == 0) {
-            light = func_80268C1C_de(&D_8013B1A8, PLAYER_MODE_LIGHT_PATTERN);
+            light = DynLight_AllocateLightNode(&D_8013B1A8, PLAYER_MODE_LIGHT_PATTERN);
         }
         if (light != 0) {
             player->rangeNodes[2] = (struct RangeNode *)light;

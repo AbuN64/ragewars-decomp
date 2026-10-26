@@ -9,7 +9,7 @@
 extern char *D_800E25D4[];
 extern char *D_800E25C4[];
 
-s32 func_804097F8_de(char *code, char *name) {
+s32 Pak_MatchesGameIdentity(char *code, char *name) {
     Shared_Game *settings;
     if (func_802A0238_de((u8 *)name) == 4 && func_802A0238_de((u8 *)code) == 2) {
         settings = &D_801462C8;
@@ -29,7 +29,7 @@ extern char *D_800D36E0;
 
 extern s32 func_802A0238_de(u8 *);
 
-s32 func_804097F8_de(char *code, char *name) {
+s32 Pak_MatchesGameIdentity(char *code, char *name) {
     if (func_802A0238_de((u8 *)name) == 4 && func_802A0238_de((u8 *)code) == 2 &&
         XPlus_CompareStrings(name, D_800D36E0) == 0 && XPlus_CompareStrings(code, D_800D36DC) == 0) {
         return 1;

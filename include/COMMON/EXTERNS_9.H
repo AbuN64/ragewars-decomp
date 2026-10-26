@@ -35,7 +35,7 @@ struct CPlayerPool_t;
 extern void func_8022A170_de(struct CPlayerPool_t *);
 extern void func_8028D61C_de(void *);
 extern void func_802A5680_de(void *);
-extern void func_80286284_de(void *);
+extern void Scene_UpdateActorsAndRoundState(void *);
 extern void func_8028C60C_de(void *);
 extern void Particle_UpdateSystem(void *);
 extern void Camera_DrawActiveViews(void *, void *);

@@ -34,7 +34,7 @@ struct Menu_func_804066BC_de {
     PakMenuSlot *slot;
     struct Dialog *prompt; /* 0x24: dialog resource */
 };
-struct Menu_func_80408C4C_de {
+struct MenuPakConfirmProfileOrDeleteNote {
     char pad0[0x1C];
     SharedPlayer *player;
     PakMenuSlot *slot;

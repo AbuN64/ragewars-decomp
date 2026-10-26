@@ -43,7 +43,7 @@ void Weapon_DrawWeaponLookupModel(void *arg0, Dest *arg1, Lookup *lookup) {
     if ((state == 0xE) || (state == one) || (state == 0)) {
         result = ((Shared_ActorView *)actor)->unk_0x11F8;
     }
-    func_8026DA4C_de(lookup->value,
+    Geometry_DrawModelResource(lookup->value,
                   ((LevelActor *)arg0)->fieldB4, 1,
                   (char *)arg0 + (D_800D297C * 0x18 + 0x140), 0, result);
 }

@@ -84,7 +84,7 @@ block_11:
                 (((Shared_OptionsScreen *)(D_800E4518))->page) = 3;
                 Items_ResetActorPools(&D_80145040.object, 0);
                 func_804499B0_de(&D_80145040, 0, 0);
-                func_80286AA8_de(&g_world, 0, 0);
+                Scene_LoadLevelResources(&g_world, 0, 0);
                 if (func_8025477C_de() == 0) {
                     func_8025476C_de(1U);
                 }

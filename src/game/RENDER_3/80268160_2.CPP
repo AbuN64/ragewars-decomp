@@ -11,7 +11,7 @@
 
 /* Spawns an effect of the given kind for an object through AnimPool_SpawnAnimationObject at the object's position with its velocity (none when the object is inactive) and a uniform scale; kind 0x40C instead starts at the camera with no velocity and, once spawned, follows the camera's target through func_802833D0_de, and kinds 0x474 to 0x477 attach to the host's partner effect for active flagged hosts, otherwise the effect is started through AnimPool_ReleaseSceneEffect. */
 
-extern Camera_func_8026851C_de *D_80103FCC;
+extern CameraEventsSpawnAttachedEffect *D_80103FCC;
 
 extern s32 func_802833D0_de(void *host);
 
@@ -29,12 +29,12 @@ extern s32 AnimPool_ReleaseSceneEffect(void *effect);
 
 extern s32 func_8028FFD0_de(s32, s32, s32, Triple, Triple, s32, f32);
 
-void func_8026851C_de(SourceRecAt1C *source, Shared_ParticleOwner *host, s32 unused, Spawn spawn) {
+void Events_SpawnAttachedEffect(SourceRecAt1C *source, Shared_ParticleOwner *host, s32 unused, Spawn spawn) {
     Vec3f scale;
     Vec3f velocity;
-    Effect_func_8026851C_de *effect;
+    EffectEventsSpawnAttachedEffect *effect;
     void *storage;
-    Effect_func_8026851C_de *partner;
+    EffectEventsSpawnAttachedEffect *partner;
 
 #if defined(VERSION_DE)
     if (spawn.kind == 0x321) {
@@ -81,7 +81,7 @@ void func_8026851C_de(SourceRecAt1C *source, Shared_ParticleOwner *host, s32 unu
     }
 }
 
-s32 func_802686EC_de(s32 unused0, Input80216D3C *arg1, s32 unused2, Triple unused3, Extra arg6) {
+s32 Events_SpawnPositionedEffect(s32 unused0, Input80216D3C *arg1, s32 unused2, Triple unused3, Extra arg6) {
     CVector3 scale;
     Triple zero;
 

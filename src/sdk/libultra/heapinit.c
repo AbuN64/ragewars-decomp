@@ -4,17 +4,17 @@
 #include "TYPES.H"
 
 #if !(defined(VERSION_EU))
-void alHeapInit(void *arg0, u8 *base, s32 arg2) {
-    s32 temp_v1;
-    temp_v1 = 0x10 - ((s32) base & 0xF);
-    if (temp_v1 != 0x10) {
-        (((struct Shape_typemap_6 *) ((s8 *) arg0))->field_0) = (s32) (base + temp_v1);
+void alHeapInit(void *heap, u8 *base, s32 byteLength) {
+    s32 alignmentOffset;
+    alignmentOffset = 0x10 - ((s32) base & 0xF);
+    if (alignmentOffset != 0x10) {
+        (((struct Shape_typemap_6 *) ((s8 *) heap))->field_0) = (s32) (base + alignmentOffset);
     } else {
-        (((struct Shape_typemap_6 *) ((s8 *) arg0))->field_0) = (s32) base;
+        (((struct Shape_typemap_6 *) ((s8 *) heap))->field_0) = (s32) base;
     }
-    (((struct Shape_typemap_6 *) ((s8 *) arg0))->field_8) = arg2;
-    (((struct Shape_typemap_6 *) ((s8 *) arg0))->field_C) = 0;
-    (((struct Shape_typemap_6 *) ((s8 *) arg0))->field_4) = (s32) (((struct Shape_typemap_6 *) ((s8 *) arg0))->field_0);
+    (((struct Shape_typemap_6 *) ((s8 *) heap))->field_8) = byteLength;
+    (((struct Shape_typemap_6 *) ((s8 *) heap))->field_C) = 0;
+    (((struct Shape_typemap_6 *) ((s8 *) heap))->field_4) = (s32) (((struct Shape_typemap_6 *) ((s8 *) heap))->field_0);
 }
 #endif
 

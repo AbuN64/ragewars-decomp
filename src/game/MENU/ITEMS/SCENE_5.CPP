@@ -56,7 +56,7 @@ extern void *StaticInstance_AcquireGeometry(ResourceOwner *owner,s32 index);
 
 extern void Cache_UnlockResource(s32, void *);
 
-extern void func_8026E158_de(void *handle);
+extern void Geometry_UnlockMaterialResources(void *handle);
 
 
 extern s32 SetN64_LocatePackSection(s32, s32, s32, s32 *);
@@ -279,7 +279,7 @@ void OvlScene_LoadGridCells(Level_func_8044CD8C_de *level) {
                     StaticInstance_RegisterGeometryResources(a, 0);
                     handle = StaticInstance_AcquireGeometry(a, a->type);
                     if (handle != 0) {
-                        func_8026E158_de(handle);
+                        Geometry_UnlockMaterialResources(handle);
                         Cache_UnlockResource(0, handle);
                     }
                 }
@@ -292,7 +292,7 @@ void OvlScene_LoadGridCells(Level_func_8044CD8C_de *level) {
                     SimpleInstance_RegisterModelVariantResources(b, 0);
                     handle = func_8024F6EC_de(b, b->type);
                     if (handle != 0) {
-                        func_8026E158_de(handle);
+                        Geometry_UnlockMaterialResources(handle);
                         Cache_UnlockResource(0, handle);
                     }
                 }

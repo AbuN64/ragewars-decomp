@@ -6,7 +6,7 @@
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-#define func_8040A83C_us func_8040AB70_eu
+#define func_8040A83C_us Menu_FormatLocalizedPakName
 #endif
 /* Select the status text and right-align its nonblank characters. */
 #include "TYPES.H"

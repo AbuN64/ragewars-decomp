@@ -17,7 +17,7 @@ typedef struct FloorPolygonTable {
     Node75 polygons[1];
 } FloorPolygonTable;
 /* A placed prop instance (0xE8 bytes), stored inline in a scene cell resource's section 0. */
-struct Object_func_80288EA8_de {
+struct ObjectSceneDrawCachedOpaqueGeometry {
     char pad0[0x20];
     DraftStreamHandle *resource;
     char pad24[4];
@@ -51,7 +51,7 @@ struct ObjectLinks74 {
 };
 typedef struct DraftStreamTable {
     s32 stride, count;
-    union { f32 coordinates[1]; DraftStreamCell cells[1]; struct Object_func_80288EA8_de objects[1]; u8 bytes[1]; } data;
+    union { f32 coordinates[1]; DraftStreamCell cells[1]; struct ObjectSceneDrawCachedOpaqueGeometry objects[1]; u8 bytes[1]; } data;
 } DraftStreamTable;
 typedef struct DraftStreamWorld {
     char pad0[0x30]; s32 key;
@@ -67,5 +67,5 @@ typedef struct DraftStreamWorld {
     f32 originX, originZ, cellX, cellZ;
     char pad1B920[8]; s32 specialPresent, specialEnabled;
 } DraftStreamWorld;
-extern void func_80286080_de(void *arg0);
+extern void Scene_UpdateAndDrawWorld(void *arg0);
 #endif

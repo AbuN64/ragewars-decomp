@@ -142,15 +142,15 @@ void Events_FireWithinHeightRange(char *arg0, s32 arg1, s32 arg2, TripleEventsFi
     }
 }
 
-void Events_SetActorEventBit(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 unused4, s32 unused5, s32 unused6) {
-    u8 temp = *(u8 *)arg0;
+void Events_SetActorEventBit(void *sourceActor, s32 unused1, s32 unused2, s32 eventPositionBase, s32 unused4, s32 unused5, s32 unused6) {
+    u8 temp = *(u8 *)sourceActor;
     if (temp == 1) {
-        s32 *p = &arg3;
-        ((Field_s32_2E0 *)(arg0))->value = ((Field_s32_2E0 *)(arg0))->value | (temp << p[3]);
+        s32 *p = &eventPositionBase;
+        ((Field_s32_2E0 *)(sourceActor))->value = ((Field_s32_2E0 *)(sourceActor))->value | (temp << p[3]);
     }
 }
 
-void func_802684E8_de(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 unused4, s32 unused5, s32 unused6) {
+void Events_ClearActorEventBit(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 unused4, s32 unused5, s32 unused6) {
     u8 temp = *(u8 *)arg0;
     if (temp == 1) {
         s32 *p = &arg3;

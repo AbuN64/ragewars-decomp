@@ -27,7 +27,7 @@ extern char D_8011D8D0;
 
 extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 extern void func_8026DD50_de(void **value, s32 arg1, s32 arg2, s32 arg3, BlockRecAt0 *block, s32 arg5, s32 arg6);
-extern s32 func_8026E340_de(void);
+extern s32 Geometry_GetViewEffect(void);
 extern f32 GameObject_GetActorHeight(Actor_func_8024A3B0_de *actor);
 #include "particle/8027A0F4_8.H"
 extern EffectRecAt154 *func_802830B8_de(void *system);
@@ -52,7 +52,7 @@ void func_8024A5A8_de(Actor_func_8024A3B0_de *actor, s32 drawView, s32 animation
     }
     if (params->unk0 != 0) {
         func_8026DD50_de(params->value, drawView, actor->fieldB4, 1, &actor->blocks[D_800D297C], 0, actor->field3);
-        if (func_8026E340_de() != 0) {
+        if (Geometry_GetViewEffect() != 0) {
             node = SetN64_GetPackSection(*params->value, 2);
             if ((*node != 0) &&
                 (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {

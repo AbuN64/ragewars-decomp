@@ -36,7 +36,7 @@ extern void PitchMatrixLocal(Matrix *,f32); extern void YawMatrixLocal(Matrix *,
 extern void ScaleMatrixLocal(Matrix *,f32,f32,f32); extern void SwapMatrixUpForward(Matrix *);
 extern s32 func_802A1934_de(void); extern void GraphU64_ConvertMatrixToFixed(Matrix *,void *);
 extern s32 func_8028C198_de(void *,s32);
-extern void func_8026DF30_de(s32,void *,void *,s32,s32);
+extern void Geometry_QueueDirectModel(s32,void *,void *,s32,s32);
 void func_804399D0(MenuModelItem *item) {
  Matrix matrix;
  CVector3 position, transformed, scale;
@@ -50,7 +50,7 @@ void func_804399D0(MenuModelItem *item) {
   gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
   gDPSetTexturePersp(g_displayListCursor++, G_TP_PERSP);
   gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
-  func_8026D844_de();
+  Geometry_InitializeModelRenderState();
   {Gfx *g=g_displayListCursor++; char *address=(char *)(u32)(D_800D297C<<6); address+=0x380; address+=(u32)D_80141008; gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);}
   position=item->position;
   GraphU64_TransformPoint(&D_80141008[0].camera,&position,&transformed);
@@ -79,7 +79,7 @@ void func_804399D0(MenuModelItem *item) {
   ScaleMatrixLocal(&matrix,scale.x,scale.y,scale.z);SwapMatrixUpForward(&matrix);
   GraphU64_ConvertMatrixToFixed(&matrix,(char *)item+((D_800D297C<<6)+0x38));
   model=func_8028C198_de(&g_world,item->model);Geometry_BeginModelBatch();
-  func_8026DF30_de(model,(char *)item+((D_800D297C<<6)+0x38),&D_800D0EF8,0,item->flags);
+  Geometry_QueueDirectModel(model,(char *)item+((D_800D297C<<6)+0x38),&D_800D0EF8,0,item->flags);
   Geometry_FlushModelBatch();
  }
  D_800CC380=saved;

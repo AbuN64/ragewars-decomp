@@ -57,7 +57,7 @@ void func_8024C454_de(Actor_func_8024A1D0_de *actor, LookupRecAtC *lookup) {
     f32 scale;
     s32 *node;
 
-    if (func_8026E340_de() != 0) {
+    if (Geometry_GetViewEffect() != 0) {
         node = SetN64_GetPackSection(*lookup->value, 2);
         if ((*node != 0) &&
             (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(node, 0), 0)) & 0x8000)) {

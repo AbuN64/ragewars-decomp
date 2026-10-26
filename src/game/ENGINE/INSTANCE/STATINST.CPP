@@ -192,7 +192,7 @@ void StaticInstance_DrawDistanceFadedModel(OwnerStaticInstanceDrawDistanceFadedM
                 data = (char *)(header + 2);
             }
             if (D_800D15E0 != 0) {
-                func_8026DA4C_de(instance, owner->transform, 0, 0, data, remaining);
+                Geometry_DrawModelResource(instance, owner->transform, 0, 0, data, remaining);
             } else {
                 Geometry_QueueModelInstance(instance, owner->transform, 0, 0, data, remaining);
             }
@@ -237,7 +237,7 @@ void StaticInstance_DrawModel(ModelOwner *owner) {
             data = (char *)&header[2];
         }
         if (D_800D15E0 != 0) {
-            func_8026DA4C_de(instance, owner->transform, 0, 0, data, remaining);
+            Geometry_DrawModelResource(instance, owner->transform, 0, 0, data, remaining);
         } else {
             Geometry_QueueModelInstance(instance, owner->transform, 0, 0, data, remaining);
         }

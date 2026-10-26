@@ -12,7 +12,7 @@
 /* Draws an object's cast shadow: objects without shadow flag 0x10000000 get the blob shadow of
  * GameObject_DrawBlobShadow; otherwise, once per frame the shadow model from func_802799C0_de is built for an object above
  * the ground: the light of the current view (direction from its signed bytes, strength from its colour)
- * is sampled at the object through func_80268A40_de, the shadow alpha is 128 plus 56 per unit of light (faded
+ * is sampled at the object through DynLight_AccumulateLightDirections, the shadow alpha is 128 plus 56 per unit of light (faded
  * by D_800D15F0 during a fade), the light direction is kept at least 0.15 from horizontal, and the shadow
  * is projected along it onto a plane just below the object (0.9 of its height up to 512), grown by 0.003
  * per unit of height, turned by the object's orientation and placed on the ground; the shadow is then
@@ -21,7 +21,7 @@ extern s32 InstHdr_CanActorCastShadow(void *);
 extern f32 InstHdr_GetActorGroundHeight(char *, s32);
 extern void *func_802799C0_de(void *, s32);
 extern f32 Math_Sqrtf(f32);
-extern void func_80268A40_de(void *, CVector3, CVector3 *, f32 *);
+extern void DynLight_AccumulateLightDirections(void *, CVector3, CVector3 *, f32 *);
 extern void func_8027310C_de(f32 *, CVector3 *, f32);
 extern void TranslateMatrix(void *, f32, f32, f32);
 extern void func_802735A8_de(f32 *, f32, f32, f32);
@@ -65,7 +65,7 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
                                          (f32)((struct Shared_ParticleLighting *)(light))->diffuse[1] * (f32)((struct Shared_ParticleLighting *)(light))->diffuse[1] +
                                          (f32)((struct Shared_ParticleLighting *)(light))->diffuse[1] * (f32)((struct Shared_ParticleLighting *)(light))->diffuse[1]) *
                        -0.00090497744f;
-            func_80268A40_de(&D_8013B1A8, ((Player *)(obj))->pos, &dir, &strength);
+            DynLight_AccumulateLightDirections(&D_8013B1A8, ((Player *)(obj))->pos, &dir, &strength);
             if (strength < -1.0f) {
                 strength = -1.0f;
             }
@@ -113,7 +113,7 @@ s32 GraphU64_LimitVectorLength(f32 *arg0, f32 arg1);
 void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
 void GraphU64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst);
-void func_8026992C_de(void *matrix, s32 pass, u32 alpha);
+void Geometry_DrawIntensityMask(void *matrix, s32 pass, u32 alpha);
 void GameObject_DrawBlobShadow(struct LevelActor *actor, CVector3 *offset, s32 raised) {
     f32 matrix[16];
     CVector3 position;
@@ -177,6 +177,6 @@ void GameObject_DrawBlobShadow(struct LevelActor *actor, CVector3 *offset, s32 r
         }
         actor->shadowAlpha = (u8)(actor->shadowAlpha +
             ((s32)targetAlpha - actor->shadowAlpha) * 0.5f);
-        func_8026992C_de(packed, raised == 0, actor->shadowAlpha);
+        Geometry_DrawIntensityMask(packed, raised == 0, actor->shadowAlpha);
     }
 }

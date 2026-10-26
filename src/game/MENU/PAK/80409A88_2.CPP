@@ -17,7 +17,7 @@
 
 
 
-void func_80409A5C_de(struct OwnerRecAt5D8V1 *owner) {
+void Pak_ApplyStagedPlayerProfile(struct OwnerRecAt5D8V1 *owner) {
     struct ProfileRecAt84 *settings = owner->settings;
     s32 i;
 
@@ -42,7 +42,7 @@ typedef struct RestorePlayer { char pad0[0x5E0]; SavedPlayer saved; } RestorePla
 extern SavedState *D_800E28BC;
 extern s32 D_8013B2D4[]; /* an array: its store may alias the loads through D_800E28BC, so it stays after them */
 extern u8 D_80146848, D_800F91F0[];
-void func_80409AC0_de(RestorePlayer *player) {
+void Pak_RestoreSavedSession(RestorePlayer *player) {
     Shared_World *world = &g_world;
     s32 i;
     u8 *from, *to;

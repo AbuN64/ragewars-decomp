@@ -13,8 +13,8 @@ extern s32 func_802BD170_de(s32);
             /* alUnlink */
 
 
-void func_802AFFC0_de(void *arg0, void *arg1, s32 arg2) {
-    ALEventQueue *queue = arg0;
+void func_802AFFC0_de(void *eventQueue, void *eventStorage, s32 eventCapacity) {
+    ALEventQueue *queue = eventQueue;
     s32 i;
     char *p;
 
@@ -24,30 +24,30 @@ void func_802AFFC0_de(void *arg0, void *arg1, s32 arg2) {
     queue->allocList.prev = 0;
     queue->freeList.next = 0;
     queue->freeList.prev = 0;
-    if (arg2 > 0) {
-        p = (char *)arg1;
+    if (eventCapacity > 0) {
+        p = (char *)eventStorage;
         do {
-            func_802B2480_de(p, arg0);
+            func_802B2480_de(p, eventQueue);
             i += 1;
             p += 0x1C;
-        } while (i < arg2);
+        } while (i < eventCapacity);
     }
 }
 
-s32 func_802B003C_de(void *arg0, s16 *arg1) {
+s32 func_802B003C_de(void *eventQueue, s16 *outputEvent) {
     void *node;
     s32 saved;
     s32 result;
 
     saved = func_802BD170_de(1);
-    node = ((ALEventQueue *)arg0)->allocList.next;
+    node = ((ALEventQueue *)eventQueue)->allocList.next;
     if (node != 0) {
         func_802B2450_de(node);
-        ((void (*)(void *, void *, s32))alCopy)(&((ALEventListItem *)node)->evt, arg1, 0x10);
-        func_802B2480_de(node, arg0);
+        ((void (*)(void *, void *, s32))alCopy)(&((ALEventListItem *)node)->evt, outputEvent, 0x10);
+        func_802B2480_de(node, eventQueue);
         result = ((ALEventListItem *)node)->delta;
     } else {
-        *arg1 = -1;
+        *outputEvent = -1;
         result = 0;
     }
     func_802BD170_de(saved);

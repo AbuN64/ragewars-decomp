@@ -11,7 +11,7 @@ extern char *D_800E2814_eu[], *D_800E2824_eu[], *D_800E2834[], *D_800E2844_eu[],
 extern s32 Pak_CountLineChars();
 /* Pak size line: picks the 11-character text for the value range D_8014D48C falls in (the bands end at 0x32, 0x96, 0x12C, 0x1F4,
    0x320, 0x514, 0x7D0, 0xBB8, 0x1194, 0x1964, 0x270F) in the current language and copies it onto the entry's line. */
-s32 func_80408CB0_eu(PakRangeTextEu *entry) {
+s32 Menu_FormatLocalizedPakSizeRange(PakRangeTextEu *entry) {
     u32 v = D_8014D48C;
     char *src = 0;
     char *dst;
@@ -39,6 +39,6 @@ s32 func_80408CB0_eu(PakRangeTextEu *entry) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80408CB0_eu);
+INCLUDE_ASM("ovl_80400000", Menu_FormatLocalizedPakSizeRange);
 #endif
 #endif

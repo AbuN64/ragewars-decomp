@@ -15,7 +15,7 @@
    0x8 (the game clock) into D_801468A0, D_801427E4, D_801427E8 and D_801427EC, the word at D_8011FE88+0x44 as a byte
    count for the block at 0x60C copied into D_800F91F0 - then shows the D_0044EAE0 prompt through
    Pak_OpenDialog; otherwise it retries Pak_DeleteNote on note D_8014D4FC and shows the
-   D_0044EB70/D_0044EBDC result. func_80409144_de's state 4 flow with the load path added; returns 1. */
+   D_0044EB70/D_0044EBDC result. Pak_ConfirmPendingOperation's state 4 flow with the load path added; returns 1. */
 
 /* The persistent options block: the first 0x584 bytes of Shared_Game (D_801462C8). */
 typedef struct PakSavedOptions {

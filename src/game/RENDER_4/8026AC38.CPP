@@ -47,7 +47,7 @@ extern char *Player_GetFirstPlayer(void *players);
 extern void GraphU64_SubtractVectors(CVector3 *out, void *a, CVector3 *b);
 
 
-void func_8026AC38_de(void) {
+void Geometry_SetupIntensityPass(void) {
     Gfx *cmd;
 
     TextLoad_ResetTextureCache();
@@ -77,7 +77,7 @@ void func_8026AC38_de(void) {
 }
 
 /* Expand packed geometry commands into display lists while rebuilding resource offsets. */
-void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32 sentinel) {
+void Geometry_ExpandModelCommands(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32 sentinel) {
     s32 len0, len1, len3, len4, len5;
     struct Shape_typemap_165 *allocation;
     struct Pack *old;

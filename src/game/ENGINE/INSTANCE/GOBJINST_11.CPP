@@ -191,7 +191,7 @@ void func_8024B8EC_de(void *actor, void *unusedShadowContext, void *renderSettin
         }
         if (*(s32 *)renderSettings != 0) {
             one = 1;
-            func_8026DA4C_de(((struct ActorRenderSettings *)(renderSettings))->view,
+            Geometry_DrawModelResource(((struct ActorRenderSettings *)(renderSettings))->view,
                           ((struct LevelActor *)(actor))->fieldB4, one,
                           (char *)actor
                               + ((((D_800D297C << one) + D_800D297C) << 3)
@@ -219,7 +219,7 @@ void func_8024B990_de(void *actor, void *unusedShadowContext, void *renderSettin
         }
         if (*(s32 *)renderSettings != 0) {
             one = 1;
-            func_8026DA4C_de(((struct ActorRenderSettings *)(renderSettings))->view,
+            Geometry_DrawModelResource(((struct ActorRenderSettings *)(renderSettings))->view,
                           ((struct LevelActor *)(actor))->fieldB4, one,
                           (char *)actor
                               + ((((D_800D297C << one) + D_800D297C) << 3)

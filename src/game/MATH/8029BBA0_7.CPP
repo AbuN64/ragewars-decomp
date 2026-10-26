@@ -84,56 +84,56 @@ static inline f32 safe_sqrt(f32 x) {
     return Math_Sqrtf(x);
 }
 
-f32 func_8029E1D4_de(f32 a, f32 b) { return centered(a - b); }
+f32 XMath_SubtractAnglesCentered(f32 a, f32 b) { return centered(a - b); }
 
 /** Clear a three-component floating-point vector. */
 void Vector3Zero(float *vector) {
     vector[0] = vector[1] = vector[2] = 0.0f;
 }
 
-void Vector3Set(void *arg0, float arg1, float arg2, float arg3) {
-    CVector3 *vector = arg0;
-    vector->x = arg1;
-    vector->y = arg2;
-    vector->z = arg3;
+void Vector3Set(void *destination, float xValue, float yValue, float zValue) {
+    CVector3 *vector = destination;
+    vector->x = xValue;
+    vector->y = yValue;
+    vector->z = zValue;
 }
 
 /** Split a three-float vector into three destinations. */
-void Vector3Unpack(float *arg0, float *arg1, float *arg2, float *arg3) {
-    *arg1 = arg0[0];
-    *arg2 = arg0[1];
-    *arg3 = arg0[2];
+void Vector3Unpack(float *source, float *xOut, float *yOut, float *zOut) {
+    *xOut = source[0];
+    *yOut = source[1];
+    *zOut = source[2];
 }
 
-void Vector3Copy(Triple *arg0, Triple *arg1) {
-    *arg0 = *arg1;
+void Vector3Copy(Triple *destination, Triple *source) {
+    *destination = *source;
 }
 
-void Vector3Add(void *arg0, void *arg1, void *arg2) {
-    (((struct CVector3_t *) ((s8 *) arg0))->x) = (f32) ((((struct CVector3_t *) ((s8 *) arg1))->x) + (((struct CVector3_t *) ((s8 *) arg2))->x));
-    (((struct CVector3_t *) ((s8 *) arg0))->y) = (f32) ((((struct CVector3_t *) ((s8 *) arg1))->y) + (((struct CVector3_t *) ((s8 *) arg2))->y));
-    (((struct CVector3_t *) ((s8 *) arg0))->z) = (f32) ((((struct CVector3_t *) ((s8 *) arg1))->z) + (((struct CVector3_t *) ((s8 *) arg2))->z));
+void Vector3Add(void *destination, void *leftVector, void *rightVector) {
+    (((struct CVector3_t *) ((s8 *) destination))->x) = (f32) ((((struct CVector3_t *) ((s8 *) leftVector))->x) + (((struct CVector3_t *) ((s8 *) rightVector))->x));
+    (((struct CVector3_t *) ((s8 *) destination))->y) = (f32) ((((struct CVector3_t *) ((s8 *) leftVector))->y) + (((struct CVector3_t *) ((s8 *) rightVector))->y));
+    (((struct CVector3_t *) ((s8 *) destination))->z) = (f32) ((((struct CVector3_t *) ((s8 *) leftVector))->z) + (((struct CVector3_t *) ((s8 *) rightVector))->z));
 }
 
-void Vector3Subtract(void *arg0, void *arg1, void *arg2) {
-    (((struct CVector3_t *) ((s8 *) arg0))->x) = (f32) ((((struct CVector3_t *) ((s8 *) arg1))->x) - (((struct CVector3_t *) ((s8 *) arg2))->x));
-    (((struct CVector3_t *) ((s8 *) arg0))->y) = (f32) ((((struct CVector3_t *) ((s8 *) arg1))->y) - (((struct CVector3_t *) ((s8 *) arg2))->y));
-    (((struct CVector3_t *) ((s8 *) arg0))->z) = (f32) ((((struct CVector3_t *) ((s8 *) arg1))->z) - (((struct CVector3_t *) ((s8 *) arg2))->z));
+void Vector3Subtract(void *destination, void *leftVector, void *rightVector) {
+    (((struct CVector3_t *) ((s8 *) destination))->x) = (f32) ((((struct CVector3_t *) ((s8 *) leftVector))->x) - (((struct CVector3_t *) ((s8 *) rightVector))->x));
+    (((struct CVector3_t *) ((s8 *) destination))->y) = (f32) ((((struct CVector3_t *) ((s8 *) leftVector))->y) - (((struct CVector3_t *) ((s8 *) rightVector))->y));
+    (((struct CVector3_t *) ((s8 *) destination))->z) = (f32) ((((struct CVector3_t *) ((s8 *) leftVector))->z) - (((struct CVector3_t *) ((s8 *) rightVector))->z));
 }
 
 /** Scale a 3-vector (arg1) by a scalar (arg2), store into arg0. */
-void Vector3Scale(void *arg0, void *arg1, f32 arg2) {
-    CVector3 *arg1_record = arg1;
-    CVector3 *arg0_record = arg0;
-    arg0_record->x = arg1_record->x * arg2;
-    arg0_record->y = arg1_record->y * arg2;
-    arg0_record->z = arg1_record->z * arg2;
+void Vector3Scale(void *destination, void *source, f32 scaleFactor) {
+    CVector3 *arg1_record = source;
+    CVector3 *arg0_record = destination;
+    arg0_record->x = arg1_record->x * scaleFactor;
+    arg0_record->y = arg1_record->y * scaleFactor;
+    arg0_record->z = arg1_record->z * scaleFactor;
 }
 
-void Vector3Negate(void *arg0, void *arg1) {
-    (((struct CVector3_t *) ((s8 *) arg0))->x) = (f32) -(((struct CVector3_t *) ((s8 *) arg1))->x);
-    (((struct CVector3_t *) ((s8 *) arg0))->y) = (f32) -(((struct CVector3_t *) ((s8 *) arg1))->y);
-    (((struct CVector3_t *) ((s8 *) arg0))->z) = (f32) -(((struct CVector3_t *) ((s8 *) arg1))->z);
+void Vector3Negate(void *destination, void *source) {
+    (((struct CVector3_t *) ((s8 *) destination))->x) = (f32) -(((struct CVector3_t *) ((s8 *) source))->x);
+    (((struct CVector3_t *) ((s8 *) destination))->y) = (f32) -(((struct CVector3_t *) ((s8 *) source))->y);
+    (((struct CVector3_t *) ((s8 *) destination))->z) = (f32) -(((struct CVector3_t *) ((s8 *) source))->z);
 }
 
 void Vector3Distance(f32 *a, f32 *b) {
@@ -163,7 +163,7 @@ void Vector3Cross(CVector3 *out, CVector3 *a, CVector3 *b) {
     *out = tmp;
 }
 
-void func_8029E4DC_de(CVector3 *arg0)
+void XMath_EvaluateVectorLength(CVector3 *arg0)
 {
   f32 sum;
   sum = ((arg0->x * arg0->x) + (arg0->y * arg0->y)) + (arg0->z * arg0->z);
@@ -174,61 +174,61 @@ void func_8029E4DC_de(CVector3 *arg0)
   }
 }
 
-void Vector3Normalize(f32 *arg0) {
+void Vector3Normalize(f32 *vector) {
     f32 mag;
     f32 scale;
 
-    mag = safe_sqrt((arg0[0] * arg0[0]) + (arg0[1] * arg0[1]) + (arg0[2] * arg0[2]));
+    mag = safe_sqrt((vector[0] * vector[0]) + (vector[1] * vector[1]) + (vector[2] * vector[2]));
     scale = D_800C5CA4_de / mag;
-    arg0[0] = arg0[0] * scale;
-    arg0[1] = arg0[1] * scale;
-    arg0[2] = arg0[2] * scale;
+    vector[0] = vector[0] * scale;
+    vector[1] = vector[1] * scale;
+    vector[2] = vector[2] * scale;
 }
 
-void Vector3RotatePitch(CVector3 *arg0, CVector3 *arg1, f32 arg2) {
+void Vector3RotatePitch(CVector3 *destination, CVector3 *source, f32 arg2) {
     CVector3 tmp;
     f32 sp20;
     f32 sp24;
 
     XMath_EvaluateSineCosine(arg2, &sp20, &sp24);
-    tmp.x = arg1->x;
-    tmp.y = (sp24 * arg1->y) - (sp20 * arg1->z);
-    tmp.z = (sp24 * arg1->z) + (sp20 * arg1->y);
-    *arg0 = tmp;
+    tmp.x = source->x;
+    tmp.y = (sp24 * source->y) - (sp20 * source->z);
+    tmp.z = (sp24 * source->z) + (sp20 * source->y);
+    *destination = tmp;
 }
 
-void Vector3RotateYaw(CVector3 *arg0, CVector3 *arg1, f32 arg2) {
+void Vector3RotateYaw(CVector3 *destination, CVector3 *source, f32 arg2) {
     CVector3 tmp;
     f32 sp20;
     f32 sp24;
 
     XMath_EvaluateSineCosine(arg2, &sp20, &sp24);
-    tmp.x = (sp24 * arg1->x) + (sp20 * arg1->z);
-    tmp.y = arg1->y;
-    tmp.z = (sp24 * arg1->z) - (sp20 * arg1->x);
-    *arg0 = tmp;
+    tmp.x = (sp24 * source->x) + (sp20 * source->z);
+    tmp.y = source->y;
+    tmp.z = (sp24 * source->z) - (sp20 * source->x);
+    *destination = tmp;
 }
 
-void Vector3RotateRoll(CVector3 *arg0, CVector3 *arg1, f32 arg2) {
+void Vector3RotateRoll(CVector3 *destination, CVector3 *source, f32 arg2) {
     CVector3 tmp;
     f32 sp20;
     f32 sp24;
 
     XMath_EvaluateSineCosine(arg2, &sp20, &sp24);
-    tmp.x = (sp24 * arg1->x) - (sp20 * arg1->y);
-    tmp.y = (sp24 * arg1->y) + (sp20 * arg1->x);
-    tmp.z = arg1->z;
-    *arg0 = tmp;
+    tmp.x = (sp24 * source->x) - (sp20 * source->y);
+    tmp.y = (sp24 * source->y) + (sp20 * source->x);
+    tmp.z = source->z;
+    *destination = tmp;
 }
 
-void Vector3Angles(f32 *arg0, f32 *arg1, f32 *arg2) {
+void Vector3Angles(f32 *vector, f32 *pitchOut, f32 *yawOut) {
     f32 magnitude_squared;
     f32 magnitude;
     f32 x;
     f32 z;
 
-    x = arg0[0];
-    z = arg0[2];
+    x = vector[0];
+    z = vector[2];
     x *= x;
     z *= z;
     x += z;
@@ -238,18 +238,18 @@ void Vector3Angles(f32 *arg0, f32 *arg1, f32 *arg2) {
     } else {
         magnitude = Math_Sqrtf(magnitude_squared);
     }
-    *arg2 = XMath_EvaluateArcTangentTwo(arg0[0], arg0[2]);
-    *arg1 = -XMath_EvaluateArcTangentTwo(arg0[1], magnitude);
+    *yawOut = XMath_EvaluateArcTangentTwo(vector[0], vector[2]);
+    *pitchOut = -XMath_EvaluateArcTangentTwo(vector[1], magnitude);
 }
 
-void Vector3AnglesInverse(f32 *arg0, f32 *arg1, f32 *arg2) {
+void Vector3AnglesInverse(f32 *vector, f32 *pitchOut, f32 *yawOut) {
     f32 magnitude_squared;
     f32 magnitude;
     f32 x;
     f32 z;
 
-    x = arg0[0];
-    z = arg0[2];
+    x = vector[0];
+    z = vector[2];
     x *= x;
     z *= z;
     x += z;
@@ -259,9 +259,9 @@ void Vector3AnglesInverse(f32 *arg0, f32 *arg1, f32 *arg2) {
     } else {
         magnitude = Math_Sqrtf(magnitude_squared);
     }
-    *arg2 = XMath_EvaluateArcTangentTwo(arg0[0], arg0[2]);
-    *arg1 = XMath_EvaluateArcTangentTwo(arg0[1], magnitude);
-    *arg2 = -*arg2;
+    *yawOut = XMath_EvaluateArcTangentTwo(vector[0], vector[2]);
+    *pitchOut = XMath_EvaluateArcTangentTwo(vector[1], magnitude);
+    *yawOut = -*yawOut;
 }
 
 /* Projects n vectors onto the screen plane: each one with depth above 0.01 becomes (ox + sx * x / z, oy + sy * y / z, z), and any other becomes zero. */
@@ -284,26 +284,26 @@ void Vector3ProjectArray(CVector3 *out, CVector3 *in, s32 n, f32 ox, f32 sx, f32
     }
 }
 
-void Vector3IntersectPlane(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6) {
+void Vector3IntersectPlane(CVector3 *intersectionOut, CVector3 *lineStart, CVector3 *lineEnd, f32 normalX, f32 normalY, f32 normalZ, f32 planeOffset) {
     CVector3 delta;
     f32 numerator;
     f32 denominator;
     f32 fraction;
 
-    delta.x = arg2->x - arg1->x;
-    delta.y = arg2->y - arg1->y;
-    delta.z = arg2->z - arg1->z;
-    numerator = -((arg3 * arg1->x) + (arg4 * arg1->y) + (arg5 * arg1->z) + arg6);
-    denominator = (arg3 * delta.x) + (arg4 * delta.y) + (arg5 * delta.z);
+    delta.x = lineEnd->x - lineStart->x;
+    delta.y = lineEnd->y - lineStart->y;
+    delta.z = lineEnd->z - lineStart->z;
+    numerator = -((normalX * lineStart->x) + (normalY * lineStart->y) + (normalZ * lineStart->z) + planeOffset);
+    denominator = (normalX * delta.x) + (normalY * delta.y) + (normalZ * delta.z);
     if (!(denominator < D_800C5CAC_de) || (fraction = D_800C5CB4_de, !(D_800C5CB0_de < denominator))) {
         fraction = numerator / denominator;
     }
-    arg0->x = arg1->x + (fraction * delta.x);
-    arg0->y = arg1->y + (fraction * delta.y);
-    arg0->z = arg1->z + (fraction * delta.z);
+    intersectionOut->x = lineStart->x + (fraction * delta.x);
+    intersectionOut->y = lineStart->y + (fraction * delta.y);
+    intersectionOut->z = lineStart->z + (fraction * delta.z);
 }
 
-void func_8029EA44_de(void *arg0, void *arg1) {
+void XMath_CopyMatrix(void *arg0, void *arg1) {
     char *dst = (char *)arg0;
     char *src = (char *)arg1;
     char *end = src + 0x40;

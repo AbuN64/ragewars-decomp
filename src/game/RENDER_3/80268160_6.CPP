@@ -14,9 +14,9 @@ extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 extern void *func_8028B00C_de(struct Shared_World *object, int index);
 
-void *func_80268C1C_de(void *intrusiveList, void *arg1);
+void *DynLight_AllocateLightNode(void *intrusiveList, void *arg1);
 
-void func_80268A40_de(RangeNode **arg0, u32 arg1, u32 arg2, u32 arg3,
+void DynLight_AccumulateLightDirections(RangeNode **arg0, u32 arg1, u32 arg2, u32 arg3,
                    CVector3 *arg4, f32 *arg5) {
     CVector3 delta;
     f32 temp_f0;
@@ -69,11 +69,11 @@ void func_80268A40_de(RangeNode **arg0, u32 arg1, u32 arg2, u32 arg3,
     }
 }
 
-void *func_80268BE0_de(s32 arg0, s32 index) {
-    return func_80268C1C_de(arg0, func_8028B00C_de(&g_world, index));
+void *DynLight_AllocateWorldLight(s32 arg0, s32 index) {
+    return DynLight_AllocateLightNode(arg0, func_8028B00C_de(&g_world, index));
 }
 
-void *func_80268C1C_de(void *intrusiveList, void *arg1) {
+void *DynLight_AllocateLightNode(void *intrusiveList, void *arg1) {
     void *temp_s0;
 
     temp_s0 = ((IntrusiveList *)intrusiveList)[1].head;
@@ -92,12 +92,12 @@ void DynLight_ReleaseLight(void *a, s32 b) {
     func_80255CB8_de(a + 0x14, b);
 }
 
-int func_80268CBC_de(void *intrusiveList) {
+int DynLight_GetFirstLight(void *intrusiveList) {
     IntrusiveList *list = intrusiveList;
     return (int)list->head;
 }
 
-int func_80268CC8_de(void *unused0, void *rangeNode) {
+int DynLight_GetNextLight(void *unused0, void *rangeNode) {
     RangeNode *node = rangeNode;
     return (int)node->next;
 }

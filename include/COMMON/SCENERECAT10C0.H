@@ -19,8 +19,8 @@ struct Shared_World;
 struct Entity;
 typedef struct Entity Entity;
 
-struct Scene_func_80288EA8_de;
-struct Scene_func_80288EA8_de {
+struct SceneSceneDrawCachedOpaqueGeometry;
+struct SceneSceneDrawCachedOpaqueGeometry {
     char pad0[0x88];
     void *model;
     char pad8C[0xF8 - 0x8C];
@@ -37,7 +37,7 @@ typedef struct ObjectLinks74 ObjectLinks74;
 struct BankRecAt94;
 typedef struct BankRecAt94 BankRecAt94;
 
-struct Object_func_80288EA8_de;
+struct ObjectSceneDrawCachedOpaqueGeometry;
 
 struct DescriptorRecAt20;
 typedef struct DescriptorRecAt20 DescriptorRecAt20;
@@ -82,8 +82,8 @@ struct Entity;
 
 struct GlobalMode;
 
-struct Object_func_80288EA8_de;
-typedef struct Object_func_80288EA8_de Object_func_80288EA8_de;
+struct ObjectSceneDrawCachedOpaqueGeometry;
+typedef struct ObjectSceneDrawCachedOpaqueGeometry ObjectSceneDrawCachedOpaqueGeometry;
 
 struct ObjectLinks74;
 
@@ -123,8 +123,8 @@ typedef struct GlobalMode GlobalMode;
 struct Object_func_8028B274_de;
 #include "COMMON/MODEL_INSTANCE.H"
 
-struct Scene_func_80288EA8_de;
-typedef struct Scene_func_80288EA8_de Scene_func_80288EA8_de;
+struct SceneSceneDrawCachedOpaqueGeometry;
+typedef struct SceneSceneDrawCachedOpaqueGeometry SceneSceneDrawCachedOpaqueGeometry;
 
 
 struct Object_func_8028B274_de;

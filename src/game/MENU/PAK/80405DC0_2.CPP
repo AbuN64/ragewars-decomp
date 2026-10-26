@@ -68,7 +68,7 @@ extern s32 D_800E28C0;
 
 /* Dialog resources are opaque ROM addresses. The list-builder ABI carries
  * player, slot, and optional formatting data as three raw 32-bit words. */
-s32 func_80409448_de(void *unused, Menu_func_804066BC_de *menu) {
+s32 Pak_CancelPendingOperation(void *unused, Menu_func_804066BC_de *menu) {
     s32 channel;
     void *prompt;
     void *owner;
@@ -99,7 +99,7 @@ s32 func_80409448_de(void *unused, Menu_func_804066BC_de *menu) {
 }
 
  /* extern */
-void func_80409744_de(void) {
+void Pak_SelectAvailableChannel(void) {
     s32 channel;
     s32 attempts;
     s32 unavailable;
@@ -127,7 +127,7 @@ loop_2:
 }
 
 /* Returns whether D_800E28C8 holds anything other than -1. */
-s32 func_804097D4_de(void) {
+s32 Pak_HasSelectedChannel(void) {
     return D_800E28C8 != -1;
 }
 

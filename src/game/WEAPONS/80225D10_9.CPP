@@ -27,7 +27,7 @@ extern Gfx *g_displayListCursor;
 
 extern s32 func_802A23B4_de(void);
 
-extern void func_8026D8F8_de(void);
+extern void Geometry_InvalidateMaterialKeys(void);
 
 extern void Geometry_SetModePreset(s32);
 
@@ -233,7 +233,7 @@ void func_80229D28_de(Player16C0 *player) {
             gSPMatrix(g_displayListCursor++, (u32) &player->markers[D_800D297C], G_MTX_LOAD);
         }
         gDPPipeSync(g_displayListCursor++);
-        func_8026D8F8_de();
+        Geometry_InvalidateMaterialKeys();
         Geometry_SetModePreset(0xE);
         Geometry_SetCombineMode(0x1C);
         green = 200;

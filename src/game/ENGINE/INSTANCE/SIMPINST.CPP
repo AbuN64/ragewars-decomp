@@ -15,7 +15,7 @@ extern CachedResource *func_80251F6C_de(s32, s32, CachedResource *, CachedResour
 extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 extern s32 SetN64_LocatePackSection(void *, s32, s32, s32 *);
 extern void Cache_UnlockResource(void *, Node80253610 *);
-extern void func_8026E158_de(void **);
+extern void Geometry_UnlockMaterialResources(void **);
 void SimpleInstance_RegisterModelVariantResources(struct ObjB *object, s32 unused) {
     void *memory = object;
     ResourceObject23 *obj = memory;
@@ -47,7 +47,7 @@ void SimpleInstance_RegisterModelVariantResources(struct ObjB *object, s32 unuse
         resource = 0;
     }
     if (resource != 0) {
-        func_8026E158_de(resource);
+        Geometry_UnlockMaterialResources(resource);
         block = func_80251F6C_de(0, D_800CD3F0, (void *)resource, obj->blockNode, 8, obj, &D_0024F8DC, &s_litVerticesText, 0);
         if (block != 0) {
             Cache_UnlockResource(0, (void *)block);

@@ -65,17 +65,17 @@ struct ResourceSource {
 };
 
 struct ItemRecAt1C;
-struct Node_func_8026BC60_de;
+struct NodeGeometryGroupModelInstances;
 struct ResourceSource;
-struct Node_func_8026BC60_de {
+struct NodeGeometryGroupModelInstances {
     u32 key;
     struct ResourceSource *source;
     struct ItemRecAt1C *head;
     struct ItemRecAt1C *tail;
-    struct Node_func_8026BC60_de *prev;
-    struct Node_func_8026BC60_de *next;
-    struct Node_func_8026BC60_de *left;
-    struct Node_func_8026BC60_de *right;
+    struct NodeGeometryGroupModelInstances *prev;
+    struct NodeGeometryGroupModelInstances *next;
+    struct NodeGeometryGroupModelInstances *left;
+    struct NodeGeometryGroupModelInstances *right;
 };
 
 extern void Geometry_BeginModelBatch();
@@ -83,7 +83,7 @@ extern void Geometry_BeginModelBatch();
 struct Material;
 typedef struct Material Material;
 
-extern void func_8026D8F8_de();
+extern void Geometry_InvalidateMaterialKeys();
 
 struct ItemRecAt1C;
 typedef struct ItemRecAt1C ItemRecAt1C;
@@ -105,8 +105,8 @@ extern int D_80137288;
 
 
 
-struct Node_func_8026BC60_de;
-typedef struct Node_func_8026BC60_de Node_func_8026BC60_de;
+struct NodeGeometryGroupModelInstances;
+typedef struct NodeGeometryGroupModelInstances NodeGeometryGroupModelInstances;
 
 struct Material;
 
@@ -118,7 +118,7 @@ typedef struct Group18 Group18;
 
 extern void func_8026D83C_de(void);
 
-extern void func_8026D844_de();
+extern void Geometry_InitializeModelRenderState();
 
 extern void Geometry_FlushModelBatch();
 

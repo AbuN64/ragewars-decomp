@@ -81,7 +81,7 @@ void func_80293EB8_de(void *arg0) {
     p1[0x1D] = 0;
     p1[0x1E] = 1;
     func_80293334_de(arg0, 0, 0);
-    func_80286AA8_de(&g_world, 0, 0);
+    Scene_LoadLevelResources(&g_world, 0, 0);
     p2 = ((s8 *)(&D_801468A0)) - 0x1818;
     Items_ResetActorPools(p2, 1);
     ((IntegerState164 *)(p2))->unk_160 = 0;

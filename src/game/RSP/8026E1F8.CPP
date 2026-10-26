@@ -69,7 +69,7 @@ void Geometry_SetViewEffect(int arg0) {
 /** Return the global word at D_80110620. */
 extern int D_80110620;
 
-int func_8026E340_de(void) {
+int Geometry_GetViewEffect(void) {
     return D_80110620;
 }
 

@@ -22,7 +22,7 @@
 
 /* The pool and style helpers take a word, while this unit and the window lookups carry the menu
  * tree as a pointer; the cast carries that pointer through unchanged. */
-s32 func_8041CEB0_us_rev1(void *arg0) {
+s32 Frontend_CreateSlotSelectionMenu(void *arg0) {
     func_8041F2A0_Item *item;
     s32 shift;
     s32 adjust;

@@ -9,12 +9,12 @@
 #include "COMMON/TRIPLE.H"
 #include "MATH/8029BBA0_4.H"
 
-/* The values func_8029C984_de loads by address:
+/* The values XMath_BuildYxzRotationMatrix loads by address:
  * 0x800CAC34 = 1.0 (float, D_800CAC34 in this cartridge's tables)
  */
 
 /* Build a rotation matrix from the three Euler angles in arg1. */
-void func_8029C984_de(ObjRecAt3CV2 *arg0, CVector3 *arg1) {
+void XMath_BuildYxzRotationMatrix(ObjRecAt3CV2 *arg0, CVector3 *arg1) {
     f32 sp10;
     f32 sp14;
     f32 sp18;
@@ -70,7 +70,7 @@ void func_8029C984_de(ObjRecAt3CV2 *arg0, CVector3 *arg1) {
 }
 
 
-void func_8029CAB4_de(InputRecAt28 *arg0, CVector3 *arg1) {
+void XMath_ExtractYxzAngles(InputRecAt28 *arg0, CVector3 *arg1) {
     f32 clamped;
     f32 magnitude;
     f32 polynomial;
@@ -126,10 +126,10 @@ void func_8029CAB4_de(InputRecAt28 *arg0, CVector3 *arg1) {
     arg1->y = polynomial;
     arg1->z = out2;
 }
-/* Computes an arcsine-style angle from a clamped matrix element by polynomial approximation, then derives the other two Euler angles with atan2-style calls and writes the triple. Adapted from func_8029CAB4_de, with the source element, the zero test, the branch operands, and the stored order changed. */
+/* Computes an arcsine-style angle from a clamped matrix element by polynomial approximation, then derives the other two Euler angles with atan2-style calls and writes the triple. Adapted from XMath_ExtractYxzAngles, with the source element, the zero test, the branch operands, and the stored order changed. */
 
 
-void func_8029CC70_de(InputRecAt28 *arg0, CVector3 *arg1) {
+void XMath_ExtractZyxAngles(InputRecAt28 *arg0, CVector3 *arg1) {
     f32 clamped;
     f32 magnitude;
     f32 polynomial;
@@ -273,7 +273,7 @@ static inline CVector3 cross(CVector3 *a, CVector3 *b) {
     return r;
 }
 
-void func_8029D000_de(PlaneEquation *m) {
+void XMath_OrthogonalizeMatrixBasis(PlaneEquation *m) {
     CVector3 x;
     CVector3 y;
     CVector3 z;
@@ -303,7 +303,7 @@ void func_8029D000_de(PlaneEquation *m) {
     m[2].normal.z = z.z;
 }
 
-s32 func_8029D248_de(f32 *out, f32 *input)
+s32 XMath_InvertAffineMatrix(f32 *out, f32 *input)
 {
   struct Shape_typemap_165 copy[4];
   f32 *m;

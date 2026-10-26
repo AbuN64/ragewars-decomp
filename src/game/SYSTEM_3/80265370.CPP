@@ -51,9 +51,9 @@ extern UnitLight D_8010C0A0[];
 
 extern char D_8013B1A8;
 
-extern LightNode *func_80268CBC_de(void *);
+extern LightNode *DynLight_GetFirstLight(void *);
 
-extern LightNode *func_80268CC8_de(void *, LightNode *);
+extern LightNode *DynLight_GetNextLight(void *, LightNode *);
 
 
 u32 Defs_GetMemorySize(void) {
@@ -389,7 +389,7 @@ void Defs_SetupPointLights(char *view) {
     s32 i;
     s32 x;
 
-    node = func_80268CBC_de(&D_8013B1A8);
+    node = DynLight_GetFirstLight(&D_8013B1A8);
     if (node == 0) {
         Gfx *g = g_displayListCursor++;
         gSPGeometryMode(g, 0x80, 0);
@@ -419,7 +419,7 @@ void Defs_SetupPointLights(char *view) {
             D_8010C0A0[i + D_8010C4A0].falloff = -0x8000;
         }
         if (node != 0) {
-            node = func_80268CC8_de(&D_8013B1A8, node);
+            node = DynLight_GetNextLight(&D_8013B1A8, node);
         }
         {
             Gfx *g = g_displayListCursor++;

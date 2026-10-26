@@ -26,7 +26,7 @@ extern s32 func_8028B21C_de(struct Shared_World *arg0, s32 arg1);
 
 extern s32 func_8028C198_de(void *arg0, s32 arg1);
 
-extern void func_8026DF30_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern void Geometry_QueueDirectModel(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 void *func_8022B304_de(ForcePlayerList *forcePlayerList, void *position) {
     CVector3 markerDelta;
@@ -84,7 +84,7 @@ void func_8022B484_de(char *player) {
         index = func_8028B21C_de(&g_world, 0xC85);
     }
     if (index != -1) {
-        func_8026DF30_de(func_8028C198_de(&g_world, index),
+        Geometry_QueueDirectModel(func_8028C198_de(&g_world, index),
                       (s32)((Shared_ActorView *)player)->transform1600, (s32)&D_800D0EF8, 0, -1);
     }
 }

@@ -90,7 +90,7 @@ void func_802AA7A4_de(void *arg0) {
 
     if (func_802A23B4_de() == 1) {
         func_802A2090_de();
-        func_8026D8F8_de();
+        Geometry_InvalidateMaterialKeys();
         TextLoad_ResetTextureCache();
     }
     func_802A84F8_de();

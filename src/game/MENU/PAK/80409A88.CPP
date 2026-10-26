@@ -152,7 +152,7 @@ extern void Pak_OpenDialog(char *, char *, int, int, int);
 
 
 
-/* Latches D_80153768 to one when the record's team value is not -1 and both func_802645D0_de and Pak_CheckStatusPrompt accept it, then returns D_80153768. Adapted from func_80409C0C_de with the latch D_80153784 changed to D_80153768. */
+/* Latches D_80153768 to one when the record's team value is not -1 and both func_802645D0_de and Pak_CheckStatusPrompt accept it, then returns D_80153768. Adapted from Pak_CheckMenuPakChange with the latch D_80153784 changed to D_80153768. */
 
 
 
@@ -162,7 +162,7 @@ extern s32 D_8015375C;
 
 extern s32 Pak_CheckStatusPrompt(struct Shared_PakMenu *, s32, s32);
 
-static inline s32 func_80409BDC_de(struct Shared_PakMenu *record) {
+static inline s32 Pak_GetMenuChannel(struct Shared_PakMenu *record) {
     if (D_8015375C != 0) {
         return D_800E28C8;
     }
@@ -725,9 +725,9 @@ done:
 
 s32 func_8040B2C8_de(struct Shared_PakMenu *record) {
     if (D_80153768 == 0) {
-        if (func_80409BDC_de(record) != -1) {
-            if (Control_PeekPakChange(func_80409BDC_de(record)) != 0) {
-                if (Pak_CheckStatusPrompt(record, func_80409BDC_de(record), 0) != 0) {
+        if (Pak_GetMenuChannel(record) != -1) {
+            if (Control_PeekPakChange(Pak_GetMenuChannel(record)) != 0) {
+                if (Pak_CheckStatusPrompt(record, Pak_GetMenuChannel(record), 0) != 0) {
                     D_80153768 = 1;
                 }
             }

@@ -56,7 +56,7 @@ extern void GraphU64_BuildTranslationMatrix(void *, f32, f32, f32);
 extern void YawMatrixLocal(void *, f32);
 extern void SwapMatrixUpForward(void *);
 extern void GraphU64_ConvertMatrixToFixed(void *, void *);
-extern void func_8026DF30_de(s32, void *, void *, s32, s32);
+extern void Geometry_QueueDirectModel(s32, void *, void *, s32, s32);
 #undef LOAD_SETUP
 #if defined(VERSION_EU)
 #define LOAD_SETUP func_80290BA0_eu
@@ -86,7 +86,7 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
         GraphU64_ConvertMatrixToFixed(matrix, VIEW_MATRICES + D_800D297C * 64);
         h2 = func_8028C198_de(&g_world, handle);
         Geometry_BeginModelBatch();
-        func_8026DF30_de(h2, VIEW_MATRICES + D_800D297C * 64, &D_800D0EF8, 0, -1);
+        Geometry_QueueDirectModel(h2, VIEW_MATRICES + D_800D297C * 64, &D_800D0EF8, 0, -1);
         Geometry_FlushModelBatch();
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         SetN64_DrawTextLines(state, 0, (void *)((s32 **)&D_800CA4B8)[g_languageIndex], D_800E28D0 / 2, 0xBE, 0xA, D_auto_800C5678[0], D_auto_800C5678[1]);

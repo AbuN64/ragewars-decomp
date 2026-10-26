@@ -4,7 +4,7 @@
 #include "COMMON/SELECTIONSCREENSTATE.H"
 
 #if (!(defined(VERSION_US) || defined(VERSION_US_REV1))) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_80400000", func_80437304_de);
+INCLUDE_ASM("ovl_80400000", Menu_CreateUnlockGatedListScreen);
 #endif
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(NON_MATCHING)
@@ -18,7 +18,7 @@ extern s32 Defs_TestBit(char *, s32);
 extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 extern s32 func_80419E54_de(s32, s32);
 
-s32 func_80437304_de(void *arg0) {
+s32 Menu_CreateUnlockGatedListScreen(void *arg0) {
     void *obj;
 
     D_800E5780 = (Shared_MenuWidgetState *)Cache_AllocateMemory(0x18);

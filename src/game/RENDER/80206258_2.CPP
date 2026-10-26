@@ -97,7 +97,7 @@ void func_8020694C_de(char *actor, void *renderContext, Rec *info) {
             info->a = child;
             info->b = child;
             func_8024AA18_de(actor, renderContext, info);
-            func_8026DA4C_de(child, ((LevelActor *)actor)->fieldB4, 1, &((LevelActor *)actor)->lighting[D_800D297C], 0, ((LevelActor *)actor)->field3);
+            Geometry_DrawModelResource(child, ((LevelActor *)actor)->fieldB4, 1, &((LevelActor *)actor)->lighting[D_800D297C], 0, ((LevelActor *)actor)->field3);
         }
     }
 }

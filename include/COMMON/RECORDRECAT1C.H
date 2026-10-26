@@ -43,7 +43,7 @@ struct Menu_func_804066BC_de;
 struct Owner_func_804066BC_de;
 
 
-struct Menu_func_80408C4C_de;
+struct MenuPakConfirmProfileOrDeleteNote;
 
 struct RecordRecAt1C;
 
@@ -65,8 +65,8 @@ struct PakRecord {
 };
 
 
-struct Menu_func_80408C4C_de;
-typedef struct Menu_func_80408C4C_de Menu_func_80408C4C_de;
+struct MenuPakConfirmProfileOrDeleteNote;
+typedef struct MenuPakConfirmProfileOrDeleteNote MenuPakConfirmProfileOrDeleteNote;
 
 struct PakRecord;
 typedef struct PakRecord PakRecord;

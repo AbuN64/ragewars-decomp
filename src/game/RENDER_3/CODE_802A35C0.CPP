@@ -54,7 +54,7 @@ extern f32 Math_Sqrtf(f32);
    that is still inside the track; every vertex is then the first frame's position carried that far
    toward the second's, its two texture coordinates are the mesh's own scales times the caller's
    scale and times a fade that steps once a vertex, and its shade is the blend of the vertex's two
-   shades. While func_8026E340_de holds, the shade is instead greyed: red and green are cleared and
+   shades. While Geometry_GetViewEffect holds, the shade is instead greyed: red and green are cleared and
    blue carries the blended sum of the three channels over three, as an unsigned divide. Written
    from the assembly: the second frame's key is taken before the first frame's sample is read so
    that it lives across that call, and the first shade is reached through its own pointer, which is
@@ -182,7 +182,7 @@ void func_802A274C_de(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, Morph *
         out->y = (s16) (a[1] + t * (b[1] - a[1]));
         out->z = (s16) (a[2] + t * (b[2] - a[2]));
         from = &blend->from;
-        if (func_8026E340_de() != 0) {
+        if (Geometry_GetViewEffect() != 0) {
             blue = blend->from.b;
             green = blend->from.g;
             red = blend->from.r;
@@ -236,7 +236,7 @@ void func_802A2B58_de(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, f32 sca
         out->s = (s16) (morph->textureScaleS * scale);
         out->t = (s16) (morph->textureScaleT * fade);
         from = &blend->from;
-        if (func_8026E340_de() != 0) {
+        if (Geometry_GetViewEffect() != 0) {
             blue = blend->from.b;
             green = blend->from.g;
             red = blend->from.r;

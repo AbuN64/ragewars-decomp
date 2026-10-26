@@ -265,7 +265,7 @@ extern Gfx *g_displayListCursor;
 extern Gfx D_800CC018_de[], D_800CC0A0[];
 extern void TextLoad_ResetTextureCache(void);
 /* Emits a 16 by 16 intensity texture, white tint, matrix and the selected pass list. */
-void func_8026992C_de(void *matrix, s32 pass, u32 alpha) {
+void Geometry_DrawIntensityMask(void *matrix, s32 pass, u32 alpha) {
     Gfx *list;
     gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 1, D_800D14B0);
     gDPSetTile(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);

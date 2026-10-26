@@ -51,7 +51,7 @@ extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void GraphU64_IdentityMatrix(void *);
 extern void GraphU64_MatrixFromEulerXYZ(void *, f32, f32, f32);
 extern void GraphU64_TransformPoint(void *, CVector3 *, CVector3 *);
-extern void func_80288470_de(void *);
+extern void Scene_RequestVisibleGridSections(void *);
 extern s32 Unicol_MoveActorWithCollision(SharedTrackObject *, f32, f32, f32, void *);
 extern void func_8028D888_de(void *);
 extern f32 GraphU64_GetHorizontalAngle(CVector3 *);
@@ -118,7 +118,7 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
         if (actor != 0) {
             saved = actor->prefix;
             actor->prefix.position = target;
-            func_80288470_de(&g_world);
+            Scene_RequestVisibleGridSections(&g_world);
             collisionHit = Unicol_MoveActorWithCollision(actor, eye.x, eye.y, eye.z, D_80100030);
             func_8028D888_de(&g_world);
             actor->prefix = saved;

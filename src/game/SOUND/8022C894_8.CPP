@@ -19,7 +19,7 @@
 
 extern f32 D_800C7F08[];
 
-extern Marker *func_80268C1C_de(char *, s32);
+extern Marker *DynLight_AllocateLightNode(char *, s32);
 
 extern void func_8024BC94_de(CVector3 *, void *, CVector3);
 
@@ -53,7 +53,7 @@ void Player_UpdateOffsetMarker(Player *actor, Marker **slot, s32 kind, f32 dista
 
     marker = *slot;
     if (marker == 0) {
-        marker = func_80268C1C_de(&D_8013B1A8, kind);
+        marker = DynLight_AllocateLightNode(&D_8013B1A8, kind);
         if (marker == 0) {
             return;
         }

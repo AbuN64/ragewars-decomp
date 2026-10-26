@@ -17,7 +17,7 @@ extern Gfx *g_displayListCursor;
 
 extern s32 Geometry_SetupMaterial(Material18 *,s8);
 
-extern void Geometry_ApplyMaterialLighting(u32,u32,Material18 *),func_8026AC38_de(void);
+extern void Geometry_ApplyMaterialLighting(u32,u32,Material18 *),Geometry_SetupIntensityPass(void);
 
 void Cache_LockResource(void *, void *);
 
@@ -25,7 +25,7 @@ void Cache_UnlockResource(void *, void *);
 
 void **func_802540F4_de(s32, void **, s32, void *, s32);
 
-void func_8026BC60_de(void);
+void Geometry_GroupModelInstances(void);
 
 
 int SetN64_GetDirectoryEntry(int *, int, int);
@@ -47,7 +47,7 @@ extern s32 s_simpModelsIndexText;
                           /* unable to generate initializer: unknown type */
 extern s32 s_simpModelText;
 
-void func_8026C020_de(void) {
+void Geometry_DrawMaterialGroups(void) {
  Group18 *group=D_8010C56C,*deferred=0;
  Mesh *mesh;u16 scaleS,scaleT;u32 cmd;
  if(group)do {
@@ -74,7 +74,7 @@ void func_8026C020_de(void) {
   } else group=group->next;
  }while(group);
  if(deferred) {
-  group=deferred;func_8026AC38_de();
+  group=deferred;Geometry_SetupIntensityPass();
   do {
    mesh=group->meshes;
    if(mesh) {
@@ -115,7 +115,7 @@ void func_8026C020_de(void) {
 }
 
                           
-void func_8026C484_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 direct) {
+void Geometry_QueueModelById(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 direct) {
         s32 *sp28;
         s32 sp2C;
         s32 **temp_v0;
@@ -140,7 +140,7 @@ void func_8026C484_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 
                         if (resource != 0) {
                                 temp_s1_2 = SetN64_GetPackSection(*resource, 0);
                                 if (D_8011064C != resource || D_8010C564 != arg4 || D_80110640 == 0x20) {
-                                        func_8026BC60_de();
+                                        Geometry_GroupModelInstances();
                                         if (D_80111310 != 0x100) {
                                                 Cache_LockResource(0, resource);
                                                 D_80111318[D_80111310] = resource;

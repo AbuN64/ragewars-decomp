@@ -9,7 +9,7 @@ extern char *D_800D3D14[], *D_800D3D18[], *D_800D3D1C[], *D_800D3D20[], *D_800D3
 /* Picks the label of option row 2..9 from its on/off flag (the eu-x twin of func_8043EA40, without the language table). */
 typedef struct { s32 id; u8 pad4[0x10]; char **text; } OptionRowEux;
 typedef struct { u8 pad0[0xC]; OptionRowEux *row; } OptionHolderEux;
-s32 func_8043EB6C_eu_x(void *unused, OptionHolderEux *holder) {
+s32 Menu_UpdateOptionToggleLabel(void *unused, OptionHolderEux *holder) {
     OptionRowEux *row = holder->row;
     switch (row->id) {
     case 2: row->text = D_801462C8.menuToggles[0] ? D_800D3D14 : D_800D3D18; break;
@@ -24,6 +24,6 @@ s32 func_8043EB6C_eu_x(void *unused, OptionHolderEux *holder) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8043EB6C_eu_x);
+INCLUDE_ASM("ovl_80400000", Menu_UpdateOptionToggleLabel);
 #endif
 #endif

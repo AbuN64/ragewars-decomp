@@ -20,7 +20,7 @@
 #include "WEAPONS/80225D10_5.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-void func_80286080_de(void *arg0) {
+void Scene_UpdateAndDrawWorld(void *arg0) {
     Shared_World *state;
     Shared_Game *input;
     s32 old_flags;
@@ -55,12 +55,12 @@ void func_80286080_de(void *arg0) {
         func_802A56FC_de(manager);
         func_8022A170_de(&D_80145040);
         Scene_UpdateActorVisibility(state);
-        func_80288470_de(state);
+        Scene_RequestVisibleGridSections(state);
         func_8028D61C_de(state);
 
         if ((state->frozen == 0) && (D_80145088.status[7] == 0)) {
             func_802A5680_de(manager);
-            func_80286284_de(state);
+            Scene_UpdateActorsAndRoundState(state);
             func_80290238_de(&state->system11778);
             state->elapsed += D_800D2988 * D_800C50E4_de;
             func_8028C60C_de(state);
@@ -101,7 +101,7 @@ extern void func_8025CB88_de(void *arg0);
 
 
 
-void func_80286284_de(void *arg0) {
+void Scene_UpdateActorsAndRoundState(void *arg0) {
     s32 count;
     s32 total;
     u32 skip_mask;

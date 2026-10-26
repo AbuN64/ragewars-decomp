@@ -5,25 +5,25 @@
 
 extern s32 func_802B00D4_de(void *, s16 *, s32);
 
-void func_802AFEB0_de(s32 arg0, s32 arg1) {
-    Buf16 sp10;
+void func_802AFEB0_de(s32 player, s32 bank) {
+    Buf16 bankEvent;
 
-    sp10.value = arg1;
-    sp10.count = 0xE;
-    func_802B00D4_de(arg0 + 0x48, &sp10, 0);
+    bankEvent.value = bank;
+    bankEvent.count = 0xE;
+    func_802B00D4_de(player + 0x48, &bankEvent, 0);
 }
 
 extern s32 func_802B00D4_de(void *, s16 *, s32);
 
-void func_802AFEE0_de(s32 arg0, s32 arg1, s8 arg2) {
-    Buf16c sp10;
+void func_802AFEE0_de(s32 player, s32 channel, s8 effectMix) {
+    Buf16c controlEvent;
 
-    sp10.count = 2;
-    sp10.f8 = (s8)(arg1 | 0xB0);
-    sp10.fA = arg2;
-    sp10.zero = 0;
-    sp10.f9 = 0x5B;
-    func_802B00D4_de(arg0 + 0x48, &sp10, 0);
+    controlEvent.count = 2;
+    controlEvent.f8 = (s8)(channel | 0xB0);
+    controlEvent.fA = effectMix;
+    controlEvent.zero = 0;
+    controlEvent.f9 = 0x5B;
+    func_802B00D4_de(player + 0x48, &controlEvent, 0);
 }
 
 #if defined(VERSION_US)

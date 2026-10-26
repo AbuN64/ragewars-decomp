@@ -46,7 +46,7 @@ extern float D_800C5C28_de;
 
 extern double D_800C5B88_de;
 
-extern f32 func_8029DD78_de(f32 arg0);
+extern f32 XMath_EvaluateArcTangent(f32 arg0);
 
 extern float D_800C5BD0_de;
 
@@ -54,14 +54,14 @@ extern float D_800C5BD0_de;
 extern float D_800C5BF8_de;
 
 
-extern f32 func_8029DF48_de(f32 x);
+extern f32 XMath_EvaluateArcCosine(f32 x);
 
 extern float D_800C5C40_de;
 
 
 extern float D_800C5BF0_de;
 
-extern f64 func_8029DB9C_de(f64 x);
+extern f64 XMath_EvaluateExponentialDouble(f64 x);
 
 extern double D_800C5B98_de;
 
@@ -87,7 +87,7 @@ extern double D_800C5B70_de;
 
 extern float D_800C5CAC_de;
 
-extern f64 func_8029DCB0_de(f64 arg0, s32 *arg1);
+extern f64 XMath_SplitDoubleExponent(f64 arg0, s32 *arg1);
 
 extern float D_800C5BD8_de;
 

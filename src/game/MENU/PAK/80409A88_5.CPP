@@ -15,7 +15,7 @@
 #include "MENU/PAK/80409A88_5.H"
 #include "SYSTEM_3/80265370.H"
 
-/* Latches D_80153784 to one when the record's team value is not -1 and both func_802645D0_de and Pak_CheckStatusPrompt accept it, then returns D_80153784. Adapted from func_80409C0C_de with nothing changed (identical code). */
+/* Latches D_80153784 to one when the record's team value is not -1 and both func_802645D0_de and Pak_CheckStatusPrompt accept it, then returns D_80153784. Adapted from Pak_CheckMenuPakChange with nothing changed (identical code). */
 
 
 
@@ -26,7 +26,7 @@ extern s32 D_8015375C;
 
 
 
-static inline s32 func_80409BDC_de(struct Shared_PakMenu *record) {
+static inline s32 Pak_GetMenuChannel(struct Shared_PakMenu *record) {
     if (D_8015375C != 0) {
         return D_800E28C8;
     }
@@ -82,11 +82,11 @@ extern void Pak_GetNoteGameName(s32,s32,s32 *),func_80405648_de(s32,void *,s32);
 
  /* extern */
 
-s32 func_80409CEC_de(struct Shared_PakMenu *record) {
+s32 Pak_CheckChangedMenuChannel(struct Shared_PakMenu *record) {
     if (D_80153784 == 0) {
-        if (func_80409BDC_de(record) != -1) {
-            if (Control_PeekPakChange(func_80409BDC_de(record)) != 0) {
-                if (Pak_CheckStatusPrompt(record, func_80409BDC_de(record), 0) != 0) {
+        if (Pak_GetMenuChannel(record) != -1) {
+            if (Control_PeekPakChange(Pak_GetMenuChannel(record)) != 0) {
+                if (Pak_CheckStatusPrompt(record, Pak_GetMenuChannel(record), 0) != 0) {
                     D_80153784 = 1;
                 }
             }
@@ -95,7 +95,7 @@ s32 func_80409CEC_de(struct Shared_PakMenu *record) {
     return D_80153784;
 }
 
-s32 func_80409DCC_de(struct RecordRecAt20V1 *record) {
+s32 Pak_LatchControllerRequest(struct RecordRecAt20V1 *record) {
     if ((record->inner->unkB0 & 0x1000) && D_800E28CC == 0) {
         D_80146D60 = 1;
         D_800E28CC = 1;
@@ -103,7 +103,7 @@ s32 func_80409DCC_de(struct RecordRecAt20V1 *record) {
     return D_80146D60;
 }
 
-s32 func_80409E10_de(void *menu) {
+s32 Pak_UpdateManagerStatus(void *menu) {
     if (D_80146D60 == 0) {
         func_80293268_de(&D_8011FAC0);
         Control_TrackControllerPakChanges();
@@ -124,7 +124,7 @@ s32 func_80409E10_de(void *menu) {
     return D_80153784;
 }
 
-s32 func_80409EF4_de(struct RecordRecAt20V2 *record, s32 *out) {
+s32 Pak_GetChannelAndResult(struct RecordRecAt20V2 *record, s32 *out) {
     s32 value;
     s32 result;
 
@@ -139,7 +139,7 @@ s32 func_80409EF4_de(struct RecordRecAt20V2 *record, s32 *out) {
     return result;
 }
 
-void func_80409F2C_de(struct Shared_PakMenu *record) {
+void Pak_ProbeMenuChannel(struct Shared_PakMenu *record) {
     s32 value;
 
     if (D_8015375C != 0) {
@@ -150,7 +150,7 @@ void func_80409F2C_de(struct Shared_PakMenu *record) {
     Pak_ProbeStatus(value);
 }
 
-void func_80409F6C_de(void *unused, void *object) {
+void Pak_ReturnToWorldMenu(void *unused, void *object) {
     Control_DisableControllerPak(object);
     OvlScene_SetSelection(&g_world, g_world.selectionValues[3], 2);
 }

@@ -12,7 +12,7 @@
 
 
 
-void func_80286950_de(WorldRecAt1B660 *world) {
+void Scene_CollectLevelSwitches(WorldRecAt1B660 *world) {
     ObjectRecAt18 *object;
     DescriptorRecAt20 *descriptor;
     s32 found;

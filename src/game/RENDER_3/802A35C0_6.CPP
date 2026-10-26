@@ -26,7 +26,7 @@ extern f32 Math_Sqrtf(f32);
 
 extern void GraphU64_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
-/* Draws the scene's ten particle lists unless the free list holds exactly 100 particles: sets the render state and the shared particle texture D_800D14B0 (a 16x16 texture drawn in grey at alpha 200 through D_800D2E60), then for every particle inside the view box ending at D_801031F8 + 4 loads its matrix and draws the shared quad g_particleQuadVertices, while particles outside it are unlinked (func_80255ED8_de) and returned to the free list (func_80255D14_de); finally restores the render state through func_8026D8F8_de and TextLoad_ResetTextureCache. */
+/* Draws the scene's ten particle lists unless the free list holds exactly 100 particles: sets the render state and the shared particle texture D_800D14B0 (a 16x16 texture drawn in grey at alpha 200 through D_800D2E60), then for every particle inside the view box ending at D_801031F8 + 4 loads its matrix and draws the shared quad g_particleQuadVertices, while particles outside it are unlinked (func_80255ED8_de) and returned to the free list (func_80255D14_de); finally restores the render state through Geometry_InvalidateMaterialKeys and TextLoad_ResetTextureCache. */
 
 
 
@@ -155,7 +155,7 @@ void func_802A5180_de(SceneRecAt95A8 *scene) {
             particle = next;
         }
     }
-    func_8026D8F8_de();
+    Geometry_InvalidateMaterialKeys();
     TextLoad_ResetTextureCache();
 }
 
@@ -199,7 +199,7 @@ void func_802A5498_de(u32 arg0) {
     cmd = g_displayListCursor++;
     gSP2Triangles(cmd, 0, 1, 2, 0, 2, 3, 0, 0);
 
-    func_8026D8F8_de();
+    Geometry_InvalidateMaterialKeys();
     TextLoad_ResetTextureCache();
 }
 

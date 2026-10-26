@@ -6,12 +6,12 @@
 #include "RENDER_3/RANGENODE.H"
 #include "TYPES.H"
 
-/* Calls func_802172D0_de on an object, its block at offset 0x170 and a stack argument when the pause word is clear, the object exists and its first byte is one. Adapted from func_802688AC_de with the pause-word test, the callee and the extra stack argument changed, and the call wrapped in do-while(0) so the stack argument loads at entry. */
+/* Calls func_802172D0_de on an object, its block at offset 0x170 and a stack argument when the pause word is clear, the object exists and its first byte is one. Adapted from Events_StopActorLoopingSound with the pause-word test, the callee and the extra stack argument changed, and the call wrapped in do-while(0) so the stack argument loads at entry. */
 
 
 extern void Barrel_SetLoopingSound(u8 *, u8 *, s32);
 
-void func_80268864_de(void *unused, u8 *object, s32 third, struct IntPair pair, s32 fifth, s32 sixth) {
+void Events_SetActorLoopingSound(void *unused, u8 *object, s32 third, struct IntPair pair, s32 fifth, s32 sixth) {
     if (D_8011FAC0.clockPaused == 0 && object != 0 && object[0] == 1) {
         do {
             Barrel_SetLoopingSound(object, object + 0x170, sixth);
@@ -26,7 +26,7 @@ void func_80268864_de(void *unused, u8 *object, s32 third, struct IntPair pair, 
 
 extern void Barrel_StopActorLoopingSound(u8 *, u8 *);
 
-void func_802688AC_de(void *unused, u8 *object, s32 third, struct IntPair pair) {
+void Events_StopActorLoopingSound(void *unused, u8 *object, s32 third, struct IntPair pair) {
     if (object != 0 && object[0] == 1) {
         Barrel_StopActorLoopingSound(object, object + 0x170);
     }
@@ -50,7 +50,7 @@ void func_802688AC_de(void *unused, u8 *object, s32 third, struct IntPair pair) 
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern void func_8022B11C_de(OwnerRecAt16D4 *, s32);
 
-void func_802688E4_de(ActorRecAt1D8V3 *arg0, Player *player, s32 arg2, Blast blast) {
+void Events_IncrementNearbyPlayerCounter(ActorRecAt1D8V3 *arg0, Player *player, s32 arg2, Blast blast) {
     CVector3 delta;
     OwnerRecAt16D4 *owner;
     f32 range;
@@ -71,7 +71,7 @@ void func_802688E4_de(ActorRecAt1D8V3 *arg0, Player *player, s32 arg2, Blast bla
     }
 }
 
-void func_802689BC_de(LevelActor *actor, int arg1, int arg2, Blast blast) {
+void Events_SetActorEffectMode(LevelActor *actor, int arg1, int arg2, Blast blast) {
     actor->effectMode = (u8)blast.radius;
 }
 
@@ -84,7 +84,7 @@ extern void AnimPool_ReleaseSceneEffect(void *arg0);
 
 
 
-void func_802689CC_de(u8 *object, s32 second, s32 third, struct IntPair pair) {
+void Events_DeactivateActor(u8 *object, s32 second, s32 third, struct IntPair pair) {
     Barrel_StopActorLoopingSound(object, (char *)object + 0x170);
     ((LevelActor *)object)->behaviorFlags |= 0x20;
     ((LevelActor *)object)->flags &= 0xFFFEFFFF;

@@ -4,6 +4,6 @@
 #ifdef NON_MATCHING
 /* Drafted from the other version's body in its unit. */
 #else
-INCLUDE_ASM("ovl_80400000", func_80406A90_eu);
+INCLUDE_ASM("ovl_80400000", Pak_CheckEuropeanSaveAvailability);
 #endif
 #endif

@@ -46,7 +46,7 @@ inline static f32 wrap(f32 arg0)
   return value;
 }
 
-f32 func_8029E04C_de(f32 arg0)
+f32 XMath_WrapAnglePositive(f32 arg0)
 {
   f32 new_var3;
   f32 value;
@@ -88,7 +88,7 @@ f32 func_8029E04C_de(f32 arg0)
   return value;
 }
 
-f32 func_8029E104_de(f32 x)
+f32 XMath_WrapAngleCentered(f32 x)
 {
   f32 new_var;
   float new_var3;

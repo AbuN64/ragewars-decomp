@@ -17,7 +17,7 @@ void SmpFlicker_StartFlicker(void *, int);
 s32 func_8043C308_de(Shared_OptionsScreen *);
 void func_804499B0_de(void *, s32, s32);
 void Items_ResetActorPools(void *, s32);
-void func_80286AA8_de(void *, s32, s32);
+void Scene_LoadLevelResources(void *, s32, s32);
 void func_80298368_de(s32);
 
 extern Shared_MenuReply D_80154020;

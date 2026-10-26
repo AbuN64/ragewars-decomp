@@ -2264,8 +2264,8 @@ struct ActorBarrelIsTargetInViewCone {
     f32 eye;
 };
 
-struct World_func_8028787C_de;
-typedef struct World_func_8028787C_de World_func_8028787C_de;
+struct WorldSceneDispatchEnabledEntityTrigger;
+typedef struct WorldSceneDispatchEnabledEntityTrigger WorldSceneDispatchEnabledEntityTrigger;
 
 struct ObjectState1E;
 typedef struct ObjectState1E ObjectState1E;
@@ -2317,8 +2317,8 @@ struct func_8020478C_S1 {
     unsigned short unkA;
 };
 
-struct World_func_8028787C_de;
-struct World_func_8028787C_de {
+struct WorldSceneDispatchEnabledEntityTrigger;
+struct WorldSceneDispatchEnabledEntityTrigger {
     u8 padding000[0x80];
     void *levels; /* 0x80 */
     void *secondaryLevels; /* 0x84 */

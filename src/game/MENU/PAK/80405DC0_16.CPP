@@ -42,24 +42,24 @@ extern s32 D_800E28BC;
 
 extern struct Saved D_80153738;
 
-char *func_80409884_de(s32 block) {
+char *Pak_GetSaveBlockByteCount(s32 block) {
     if (block == 0) {
         return D_8011FECC + 0x610;
     }
     return (char *) (block << 8);
 }
 
-void func_804098A4_de(s32 offset, s32 value) {
+void Pak_SetSaveTrailerValue(s32 offset, s32 value) {
     ((struct IntegerState610 *) (D_8011FECC + offset))->unk_60C = value;
 }
 
 /* Returns the last word of a self-sized block: the first word holds the block's byte length and
    the result is the word just before that many bytes from the start. */
-s32 func_804098B8_de(s32 *block) {
+s32 Pak_GetSaveTrailerValue(s32 *block) {
     return ((struct Shape_typemap_3 *) (block[0] + (s32) block))[-1].field_0;
 }
 
-void func_804098CC_de(void ***handle, void **data, s32 units) {
+void Pak_AllocateSaveBlock(void ***handle, void **data, s32 units) {
     void **block;
     void *first;
 
@@ -79,7 +79,7 @@ void func_804098CC_de(void ***handle, void **data, s32 units) {
     XPlus_FillMemory(first, 0, units);
 }
 
-void func_80409964_de(void) {
+void Pak_ReleaseSaveBlocks(void) {
     if ((D_800DE860_de != 0) || (D_800DE864_de != 0)) {
         func_80253908_de(0);
     }
@@ -95,7 +95,7 @@ void func_80409964_de(void) {
     D_800E28BC = 0;
 }
 
-void func_804099EC_de(struct OwnerRecAt5D8V1 *owner) {
+void Pak_CapturePlayerProfile(struct OwnerRecAt5D8V1 *owner) {
     struct ProfileRecAt84 *settings = owner->settings;
     s32 i;
 

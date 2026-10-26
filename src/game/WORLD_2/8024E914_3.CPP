@@ -104,7 +104,7 @@ void World_InitSimpleInstance(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 
     inst->f1C4 = 0;
 }
 
-/* Draws a static object through its cached display list, building the cache on first use: emits a branch placeholder, loads the object's model, builds its rotation (the shared D_8013B190 angle for type 8), scale and position raised by its height offset into the current matrix slot, draws the model with its material through func_8026DA4C_de and SimpleInstance_SpawnModelEffect unless the type is 12, ends the list, patches the placeholder to skip past it and calls the cached list. The display list writes match only as block-scoped initialisers taking D_80110634++. */
+/* Draws a static object through its cached display list, building the cache on first use: emits a branch placeholder, loads the object's model, builds its rotation (the shared D_8013B190 angle for type 8), scale and position raised by its height offset into the current matrix slot, draws the model with its material through Geometry_DrawModelResource and SimpleInstance_SpawnModelEffect unless the type is 12, ends the list, patches the placeholder to skip past it and calls the cached list. The display list writes match only as block-scoped initialisers taking D_80110634++. */
 
 
 
@@ -131,7 +131,7 @@ void func_8024EB90_de(StaticObject *obj) {
     void **resource;
     Gfx *branch;
 
-    func_8026D8F8_de();
+    Geometry_InvalidateMaterialKeys();
     TextLoad_ResetTextureCache();
     if (obj->cached != 0) {
         gSPDisplayList(g_displayListCursor++, (unsigned int)obj->cached);
@@ -154,7 +154,7 @@ void func_8024EB90_de(StaticObject *obj) {
     SwapMatrixUpForward(&matrix);
     GraphU64_ConvertMatrixToFixed(&matrix, obj->matrices[D_800D297C]);
     if (*obj->type != 12) {
-        func_8026DA4C_de(resource, obj->matrices[D_800D297C], 0, obj->lights, 0, obj->material);
+        Geometry_DrawModelResource(resource, obj->matrices[D_800D297C], 0, obj->lights, 0, obj->material);
         SimpleInstance_SpawnModelEffect(obj, resource);
     }
     gSPEndDisplayList(g_displayListCursor++);

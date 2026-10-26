@@ -70,8 +70,8 @@ typedef struct ObjRecAt498 ObjRecAt498;
 
 
 
-struct Node_func_8041D134_de;
-typedef struct Node_func_8041D134_de Node_func_8041D134_de;
+struct NodeFrontendAnimateSlotSelectionMenu;
+typedef struct NodeFrontendAnimateSlotSelectionMenu NodeFrontendAnimateSlotSelectionMenu;
 
 struct MenuRecAt8;
 struct MenuRecAt8 {
@@ -93,8 +93,8 @@ struct ProfileStatisticsScreen {
 
 
 
-struct Node_func_8041D134_de;
-struct Node_func_8041D134_de {
+struct NodeFrontendAnimateSlotSelectionMenu;
+struct NodeFrontendAnimateSlotSelectionMenu {
     char pad0[0x10];
     u8 style;
     char pad11[0x14 - 0x11];
@@ -130,28 +130,28 @@ struct ListRecAt4C {
 
 
 struct MenuRecAt108;
-struct Node_func_8041D134_de;
+struct NodeFrontendAnimateSlotSelectionMenu;
 struct MenuRecAt108 {
     char pad0[4];
     void *handle;
     char pad8[0xC8 - 8];
-    struct Node_func_8041D134_de *left;
+    struct NodeFrontendAnimateSlotSelectionMenu *left;
     char padCC[2];
     u16 leftStep;
-    struct Node_func_8041D134_de *right;
+    struct NodeFrontendAnimateSlotSelectionMenu *right;
     char padD4[2];
     u16 rightStep;
     s32 state;
     s32 timer;
     s32 fade;
-    struct Node_func_8041D134_de *groupA;
-    struct Node_func_8041D134_de *cursor;
-    struct Node_func_8041D134_de *focus;
+    struct NodeFrontendAnimateSlotSelectionMenu *groupA;
+    struct NodeFrontendAnimateSlotSelectionMenu *cursor;
+    struct NodeFrontendAnimateSlotSelectionMenu *focus;
     char padF0[4];
-    struct Node_func_8041D134_de *groupB;
+    struct NodeFrontendAnimateSlotSelectionMenu *groupB;
     s32 styleStep;
     s32 styleValue;
-    struct Node_func_8041D134_de *groupC;
+    struct NodeFrontendAnimateSlotSelectionMenu *groupC;
     char pad104[3];
     u8 alphaStep;
     s32 clock;

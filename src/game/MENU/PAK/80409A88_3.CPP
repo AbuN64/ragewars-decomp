@@ -11,7 +11,7 @@
 
 extern s32 D_8015375C;
 
-s32 func_80409BDC_de(struct Shared_PakMenu *record) {
+s32 Pak_GetMenuChannel(struct Shared_PakMenu *record) {
     if (D_8015375C != 0) {
         return D_800E28C8;
     }

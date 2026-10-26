@@ -21,12 +21,12 @@ extern void func_802998A8_de(void);
 extern void func_80419F24_de(s32 fade);
 extern s32 func_80419F38_de(s32 fade);
 extern void SmpFlicker_StartFlicker(s32 fade, s32 speed);
-extern Node_func_8041D134_de *SmpOverlay_GetSlotValue(void *handle, s32 arg1);
+extern NodeFrontendAnimateSlotSelectionMenu *SmpOverlay_GetSlotValue(void *handle, s32 arg1);
 
 /* Frontend_ShowUnlockedEntries is declared by span code_8041BEA8.h; no local extern needed. */
 
-s32 func_8041D134_de(s32 unused0, s32 unused1, s32 arg2) {
-    Node_func_8041D134_de *node;
+s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 arg2) {
+    NodeFrontendAnimateSlotSelectionMenu *node;
 
     switch (((MenuRecAt108 *) D_800E3590)->state) {
     case 1:
@@ -34,7 +34,7 @@ s32 func_8041D134_de(s32 unused0, s32 unused1, s32 arg2) {
         ((MenuRecAt108 *) D_800E3590)->right->x -= ((MenuRecAt108 *) D_800E3590)->rightStep;
         if (--((MenuRecAt108 *) D_800E3590)->timer <= 0) {
             SoundElement_PlayFlatSound(0xE79);
-            /* Node_func_8041D134_de is the hub Item view's twin (style at 0x10, x/y at 0x14/0x16);
+            /* NodeFrontendAnimateSlotSelectionMenu is the hub Item view's twin (style at 0x10, x/y at 0x14/0x16);
                E8D8 speaks Item, so the node slots cast to it here. */
             Frontend_SetWidgetFlag08((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupA, 1);
             SmpFlicker_StartFlicker(((MenuRecAt108 *) D_800E3590)->fade, 4);

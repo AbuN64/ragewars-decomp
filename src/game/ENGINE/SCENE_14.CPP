@@ -164,7 +164,7 @@ void *func_8028D474_de(void *world, s32 record) {
 }
 
 void func_8028D59C_de(void *arg0) {
-    Scene_func_80288EA8_de *object = arg0;
+    SceneSceneDrawCachedOpaqueGeometry *object = arg0;
     s32 *list;
     s32 val;
 

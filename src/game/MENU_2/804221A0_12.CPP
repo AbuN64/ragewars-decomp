@@ -35,7 +35,7 @@ extern s32 GraphU64_NextRandom(void);
 extern void func_802A230C_de(void);
 extern void Items_ResetActorPools(void *, s32);
 extern void func_804499B0_de(void *, s32, s32);
-extern void func_80286AA8_de(void *, s32, s32);
+extern void Scene_LoadLevelResources(void *, s32, s32);
 extern void func_8042DEA0_de(void);
 
 
@@ -98,7 +98,7 @@ s32 func_80422960_de(void *item, s32 unused1, s32 event) {
             }
             Items_ResetActorPools((u8 *)pause - 0x180C, 0);
             func_804499B0_de((u8 *)pause - 0x1854, 0, 0);
-            func_80286AA8_de(&g_world, 0, 0);
+            Scene_LoadLevelResources(&g_world, 0, 0);
             func_8042DEA0_de();
         }
     }

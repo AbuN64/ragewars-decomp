@@ -311,7 +311,7 @@ void func_802A4598_de(EffectWorld *world, FxActor *actor, s32 resourceId) {
 INCLUDE_ASM("span_1000", func_802A4598_de);
 #endif
 
-extern void func_8026D8F8_de(void);
+extern void Geometry_InvalidateMaterialKeys(void);
 extern void TextLoad_ResetTextureCache(void);
 extern void Smp_UpdateLinkedNodeTransforms(RibbonActor *ribbon);
 extern void func_802A339C_de(RibbonActor *ribbon, GameplayCamera *camera);
@@ -344,7 +344,7 @@ static inline void Render_DrawLinkedRibbon(VertexArena *pool, RibbonActor *ribbo
  * those with a negative layer first and positive layers second. */
 void Fx_DrawLinkedGeometry(VertexArena *pool, GameplayCamera *camera) {
     RibbonActor *ribbon;
-    func_8026D8F8_de();
+    Geometry_InvalidateMaterialKeys();
     TextLoad_ResetTextureCache();
     if (pool->displayList != 0) {
         gSPDisplayList(g_displayListCursor++, pool->displayList);

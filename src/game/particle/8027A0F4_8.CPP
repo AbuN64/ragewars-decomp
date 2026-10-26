@@ -51,7 +51,7 @@ extern f32 func_802B2350(s32);
 
 extern void func_8022B040_de(s32, ParticleEffect *);
 extern void func_802A4598_de(void *, ParticleEffect *, s32);
-extern s32 func_80268BE0_de(void *, s32);
+extern s32 DynLight_AllocateWorldLight(void *, s32);
 extern void func_802843B8_de(ParticleEffect *, s32);
 extern void SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 extern void func_802765B0_de(s8, u8, u8, u8, u8 *, u8 *, u8 *);
@@ -584,7 +584,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     func_802A4598_de(&D_801379C0, effect, entry->unk6);
                 }
                 if (entry->unk7 != -1) {
-                    effect->unk138 = func_80268BE0_de(&D_8013B1A8, entry->unk7);
+                    effect->unk138 = DynLight_AllocateWorldLight(&D_8013B1A8, entry->unk7);
                 } else {
                     effect->unk138 = 0;
                 }

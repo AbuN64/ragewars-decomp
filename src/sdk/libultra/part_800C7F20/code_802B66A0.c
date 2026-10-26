@@ -7,7 +7,7 @@
 
 
 
-s32 func_802B15D0_de(void *arg0, s32 arg1, s32 arg2) {
+s32 func_802B15D0_de(void *arg0, s32 arg1, s32 releaseDeadline) {
     s32 amount;
     s32 total;
     s32 result;
@@ -23,7 +23,7 @@ s32 func_802B15D0_de(void *arg0, s32 arg1, s32 arg2) {
             next = ((ALEventListItem *)cur)->node.next;
             total += amount;
             if (((ALEventListItem *)cur)->evt.type == 5 && (s32)((ALEvent *)&((ALEventListItem *)cur)->evt)->msg.note.voice == arg1) {
-                if (arg2 < total) {
+                if (releaseDeadline < total) {
                     if (next != 0) {
                         ((ALEventListItem *)next)->delta = ((ALEventListItem *)next)->delta + amount;
                     }

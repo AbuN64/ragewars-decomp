@@ -3,7 +3,7 @@
 
 #if defined(VERSION_EU_X)
 #ifdef NON_MATCHING
-#define func_8043C500_us_rev1 func_8043D324_eu_x
+#define func_8043C500_us_rev1 Menu_GetLocalizedEncodedResource
 #include "TYPES.H"
 #include "MENU/EXTERNS_2.H"
 
@@ -79,7 +79,7 @@ void *func_8043C500_us_rev1(s32 id) {
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8043D324_eu_x);
+INCLUDE_ASM("ovl_80400000", Menu_GetLocalizedEncodedResource);
 #endif
 #endif
 
@@ -153,7 +153,7 @@ static inline s32 firstUnlocked(void) {
     return -1;
 }
 
-void func_8043D55C_eu_x(LevelSelectOwner *owner) {
+void Menu_EnableUnlockedLevelSelection(LevelSelectOwner *owner) {
     s32 level = firstUnlocked();
     D_80154034 = level;
     if (level != -1) {
@@ -166,6 +166,6 @@ void func_8043D55C_eu_x(LevelSelectOwner *owner) {
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8043D55C_eu_x);
+INCLUDE_ASM("ovl_80400000", Menu_EnableUnlockedLevelSelection);
 #endif
 #endif
