@@ -60,7 +60,7 @@ f32 Rumble_GetSpatialEffectLevel(func_80285D00_S1 *pool, CVector3 position) {
     return limit < value ? limit : value;
 }
 #else
-INCLUDE_ASM("span_1000", Rumble_AccumulateSpatialEffectLevel);
+INCLUDE_ASM("span_1000", Rumble_GetSpatialEffectLevel);
 #endif
 
 #include "sdk/os.h"

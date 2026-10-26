@@ -155,7 +155,7 @@ void InstCol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelAc
 }
 #endif
 #if defined(VERSION_EU)
-INCLUDE_ASM("span_1000", func_8023EF14);
+INCLUDE_ASM("span_1000", InstCol_TestEntityContact);
 #endif
 
 typedef struct Query Query;

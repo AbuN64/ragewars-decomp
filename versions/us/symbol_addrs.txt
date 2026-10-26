@@ -11343,7 +11343,6 @@ rodata_unresolved_8026E55C = 0x8026E55C; // rom:0x6F15C
 rodata_unresolved_8027659C = 0x8027659C; // rom:0x7719C
 rodata_unresolved_802799E4 = 0x802799E4; // rom:0x7A5E4
 rodata_unresolved_80285208 = 0x80285208; // rom:0x85E08
-Rumble_AccumulateSpatialEffectLevel = 0x80285634; // type:func rom:0x86234
 rodata_unresolved_802908F4 = 0x802908F4; // rom:0x914F4
 rodata_unresolved_80290908 = 0x80290908; // rom:0x91508
 func_80294C8C_de_padding_959A8 = 0x80294BC8; // rom:0x957C8
