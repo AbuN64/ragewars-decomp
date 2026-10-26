@@ -1,9 +1,9 @@
+#include "COMMON/SCREEN.H"
 #include "COMMON/NAME.H"
 #include "FRONTEND/PAKMENU.H"
 #include "TYPES.H"
 #include "FRONTEND/8042E080_34.H"
 
-extern void MarkMenuEventHandled(void);
 extern void PAKInterface_RefreshPlayerPanel(s32 player);
 
 /* Dispatch player-slot events using the current shared menu controller and

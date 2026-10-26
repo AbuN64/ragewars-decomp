@@ -1,3 +1,4 @@
+#include "COMMON/SCREEN.H"
 #include "include_asm.h"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -11,8 +12,6 @@
    D_801462D5 through jtbl_800DDEF0 (10, 15 or 10, and 20 for any other setting) and shows the
    screen through Frontend_StartMenuImageTransition. Returns zero. */
 extern MenuRules *D_800E5554;
-extern void MarkMenuEventHandled(void);
-extern s32 Smos_GetFocusedElementId(void);
 extern void SmXlate_SwitchScreen(s32);
 
 extern void Tsmos_DeactivateControllerState(void);

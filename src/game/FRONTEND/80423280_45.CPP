@@ -1,3 +1,4 @@
+#include "COMMON/SCREEN.H"
 #include "COMMON/WORLD.H"
 #include "include_asm.h"
 #include "FRONTEND/OPTIONS.H"
@@ -18,8 +19,6 @@
    Smos_ReturnToPreviousScreen. Returns zero. */
 #include "MENU/PAK_LOAD.H"
 
-extern void MarkMenuEventHandled(void);
-extern s32 Smos_GetFocusedElementId(void);
 extern void Items_ResetActorPools(void *, s32);
 extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
@@ -81,7 +80,6 @@ s32 Frontend_HandleMatchMenuMessage(void) {
 
 /* Calls MarkMenuEventHandled, then passes 0xB to Frontend_SetMenuChoiceResult when Smos_GetPreviousScreenOwner reports 0xB for zero
    and -1 otherwise, then calls Smos_ReturnToPreviousScreen. Returns zero. */
-extern void MarkMenuEventHandled();
 
 s32 Frontend_CloseMatchMenu(void) {
     MarkMenuEventHandled();

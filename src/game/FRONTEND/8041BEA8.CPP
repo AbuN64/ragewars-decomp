@@ -1,3 +1,4 @@
+#include "COMMON/SCREEN.H"
 #include "include_asm.h"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/LABEL.H"
@@ -15,7 +16,6 @@
 /* The hub spells D_800E3590 as the padded menu block; this unit's view of it is the published
    MenuRecAt108 struct, so each member use casts D_800E3590 to that view. */
 
-extern void MarkMenuEventHandled(void);
 extern void Smos_ReturnToPreviousScreen(void);
 
 extern void SmpFlicker_RestoreFlickerValue(s32 fade);

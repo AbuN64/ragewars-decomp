@@ -1,3 +1,4 @@
+#include "COMMON/SCREEN.H"
 #include "COMMON/S1_5.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/S1_6.H"
@@ -13,8 +14,6 @@ enum { START_MATCH = 0x40, RETURN_MENU = 0x3C, WAIT_SHORT = 0x41, WAIT_LONG = 0x
 /* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled: 0x40 clears D_80146894 and
    calls Tsmos_RequestFrontendShutdown and func_8025E384_de; 0x3C clears D_80146894 and calls Menu_RequestOptionsScreen22; 0x41 and
    0x3E wait 0x1F and 0x20 through SmXlate_SwitchScreen. Returns zero. */
-extern void MarkMenuEventHandled(void);
-extern s32 Smos_GetFocusedElementId(void);
 extern void Tsmos_RequestFrontendShutdown(void);
 extern void func_8025E384_de(void);
 

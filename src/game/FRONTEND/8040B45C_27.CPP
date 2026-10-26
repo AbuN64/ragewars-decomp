@@ -1,3 +1,4 @@
+#include "COMMON/SCREEN.H"
 #include "COMMON/WIDGETRECAT1A.H"
 #include "FRONTEND/8040B45C_29.H"
 #include "MATH/80299ECC.H"
@@ -11,7 +12,6 @@
 
 
 
-extern void MarkMenuEventHandled(void);
 
 s32 Frontend_HandleSliderMessage(Slider *slider, s32 msg, s32 arg2, s32 arg3) {
     s32 result;

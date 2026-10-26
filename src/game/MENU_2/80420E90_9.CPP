@@ -1,3 +1,4 @@
+#include "COMMON/SCREEN.H"
 #include "COMMON/NUMBERPADSCREEN.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/PAKQUEUESTATE.H"
@@ -6,7 +7,6 @@
 #include "MENU_2/80420E90.H"
 #include "MENU_2/80420E90_9.H"
 #include "SCENE/802508E0_13.H"
-extern NumberPadScreen *D_800E4400;
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 
 /* Calls func_8040E8D8_de with zero on the object at offset 0x20 of the structure D_800E4400 points
@@ -40,7 +40,6 @@ void Menu_AdvanceTextRows(void *, void *);
 
 extern s32 SmpSlider_GetTransitionMode(s32);
 
-extern void MarkMenuEventHandled(void);
 
 extern void SmXlate_SwitchScreen(s32);
 

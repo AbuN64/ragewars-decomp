@@ -1,3 +1,4 @@
+#include "COMMON/SCREEN.H"
 #include "include_asm.h"
 #include "COMMON/RECRECAT4.H"
 #include "COMMON/VECTOR4F.H"
@@ -24,16 +25,13 @@ extern void Tsmos_ActivateControllerState();
 /* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled: 0x1C3, 0x1BD, 0x1C2 and
    0x1C4 send codes -1, 13, 12 and 14 to Frontend_SetMenuChoiceResult; a handled message then runs Menu_CommitCompactOptionsPage
    and Smos_ReturnToPreviousScreen. Returns zero. */
-extern void MarkMenuEventHandled(void);
 
-extern s32 Smos_GetFocusedElementId(void);
 
 extern void Frontend_SetMenuChoiceResult(s32);
 
 extern void Smos_ReturnToPreviousScreen(void);
 
 /* Calls MarkMenuEventHandled, Frontend_SetMenuChoiceResult with -1, Menu_CommitCompactOptionsPage and Smos_ReturnToPreviousScreen, and returns zero. */
-extern void MarkMenuEventHandled();
 
 extern void Smos_ReturnToPreviousScreen();
 

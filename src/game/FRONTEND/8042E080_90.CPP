@@ -1,3 +1,4 @@
+#include "COMMON/SCREEN.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/LONE/D_800E5558.H"
 #include "COMMON/WORLD.H"
@@ -16,7 +17,6 @@
 extern s32 Frontend_GetMenuImageState(void *);
 extern void Frontend_DrawMenuImage(void *);
 extern void Frontend_AdvanceMenuImageTransition(void *);
-extern void MarkMenuEventHandled(void);
 extern void Items_ResetActorPools(void *, s32);
 extern void Ovlgame_InitializePlayerPool(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);

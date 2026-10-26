@@ -1,3 +1,4 @@
+#include "COMMON/SCREEN.H"
 #include "include_asm.h"
 #include "COMMON/VIDEO_DIMENSIONS.H"
 #include "COMMON/LONE/D_800E28D4.H"
@@ -31,7 +32,6 @@ extern void SmpFlicker_RestoreFlickerValue(void *);
 extern void SmpFlicker_StartFlicker(void *, int);
 extern void SmXlate_SwitchScreen(s32);
 extern void Tsmos_ActivateControllerState(void);
-extern void MarkMenuEventHandled(void);
 
 /* Construct the four-player results/loadout menu and animate its panels into view. */
 s32 Frontend_CreateFourPlayerResults(void *window) {

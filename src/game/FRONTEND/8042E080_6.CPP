@@ -1,3 +1,4 @@
+#include "COMMON/SCREEN.H"
 #include "include_asm.h"
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/NAME.H"
@@ -11,7 +12,6 @@
 /* Animates the two menu panels through open, close and countdown states and updates the active team menu. */
 
 extern void SmXlate_SwitchScreen(s32);
-extern void MarkMenuEventHandled(void);
 extern void Tsmos_ActivateControllerState(void);
 extern void SmpFlicker_RestoreFlickerValue(void *);
 extern void SmpFlicker_StartFlicker(void *, s32);

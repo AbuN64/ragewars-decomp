@@ -1,3 +1,4 @@
+#include "COMMON/SCREEN.H"
 #include "include_asm.h"
 #include "COMMON/LONE/D_80152789.H"
 #include "COMMON/LABEL.H"
@@ -49,7 +50,6 @@ extern void SmXlate_SwitchScreen(s32);
 
 extern void Smos_SetFocusedElement(s32);
 
-extern void MarkMenuEventHandled(void);
 
 extern void Tsmos_ActivateControllerState(void);
 
@@ -95,7 +95,6 @@ extern s32 D_800E3514;
 
 extern void Tsmos_DeactivateControllerState();
 
-extern void MarkMenuEventHandled();
 
 /* Refreshes each of the four ports through Pak_ProbeStatus and sets field 0x1C of D_800E3518 as soon as one reports status 0, -1, -3 or -4 through Pak_GetStatus, clearing it otherwise. */
 
@@ -157,7 +156,6 @@ extern s32 D_800DE174;
 #else
 #endif
 
-extern s32 Smos_GetFocusedElementId(void);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E351C, an actor kind at D_800E3520 and a handler at D_800E3524: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 

@@ -1,3 +1,4 @@
+#include "COMMON/SCREEN.H"
 #include "COMMON/ANIMATION.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/OWNERRECAT8V1.H"
@@ -10,7 +11,6 @@
 
 
 
-extern void MarkMenuEventHandled();
 
 extern void SmpOverlay_ShowSlotNode(struct sm_dlmultiuser_t *, s32, void *);
 
@@ -21,7 +21,6 @@ extern void SmpOverlay_ShowSlotNode(struct sm_dlmultiuser_t *, s32, void *);
 
 
 
-extern void MarkMenuEventHandled(void);
 
 
 /* Calls Cache_FreeMemory with the arguments it was given and returns zero. */

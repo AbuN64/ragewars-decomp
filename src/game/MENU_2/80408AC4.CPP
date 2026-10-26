@@ -1,3 +1,4 @@
+#include "COMMON/SCREEN.H"
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
@@ -27,8 +28,6 @@ s32 Frontend_ClearGermanLoadingHints(void) {
    and sends Frontend_SetMenuChoiceResult 20, 10, 15 or 10 by the controller mode (3 for any other mode); otherwise
    it sends 3. 0x1D6 sends 11 when Smos_GetPreviousScreenOwner(0) reports 11 and -1 otherwise. Either then calls
    Smos_ReturnToPreviousScreen. Returns zero. */
-extern void MarkMenuEventHandled(void);
-extern s32 Smos_GetFocusedElementId(void);
 extern s32 Smos_GetPreviousScreenOwner(s32);
 extern void Items_ResetActorPools(void *, s32);
 extern void Ovlgame_InitializePlayerPool(void *, s32, s32);

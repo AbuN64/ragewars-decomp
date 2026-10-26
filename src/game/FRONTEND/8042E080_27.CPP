@@ -1,3 +1,4 @@
+#include "COMMON/SCREEN.H"
 #include "include_asm.h"
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -153,7 +154,6 @@ block_24:
 
 /* Handles Controller Pak menu confirmations and returns focus to an enabled widget for the active channel. */
 extern s32 Smos_GetControlRepeatLimit(void);
-extern void MarkMenuEventHandled(void);
 extern s32 Frontend_ListHasFlag100(void *);
 extern void SmpOverlay_ShowSlotNode(s32, s32, void *);
 extern void PAKInterface_RelabelSlotRows(s32);

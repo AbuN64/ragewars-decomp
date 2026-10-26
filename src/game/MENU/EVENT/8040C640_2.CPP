@@ -1,3 +1,4 @@
+#include "COMMON/SCREEN.H"
 #include "include_asm.h"
 
 #if defined(VERSION_US)
@@ -5,7 +6,6 @@
 #include "FRONTEND/8040B45C_29.H"
 #include "MATH/80299ECC.H"
 extern s32 GetMenuScreenOwner(void);
-extern void MarkMenuEventHandled(void);
 
 /* Clamp the slider and handle range, value, step and parent notifications. */
 s32 Event_HandleSliderMessage(Slider *slider, s32 msg, s32 arg2, s32 arg3) {

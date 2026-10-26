@@ -1,3 +1,4 @@
+#include "COMMON/SCREEN.H"
 #include "include_asm.h"
 #include "COMMON/WIDGETRECAT1A.H"
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -17,8 +18,6 @@ int Frontend_WrapNodePairExtended(void) { SmpButton_WrapButtonWidget(0x3DE); Smp
    SmXlate_SwitchScreen for a time chosen by setting D_801462D5 through jtbl_800DDF70 (20, 15 or 10, and
    3 for any other setting); 0x3DB sends code -1 to Frontend_SetMenuChoiceResult and calls Smos_ReturnToPreviousScreen.
    Returns zero. */
-extern void MarkMenuEventHandled(void);
-extern s32 Smos_GetFocusedElementId(void);
 extern void SmXlate_SwitchScreen(s32);
 extern void Frontend_SetMenuChoiceResult(s32);
 extern void Smos_ReturnToPreviousScreen(void);
@@ -64,7 +63,6 @@ s32 Frontend_UpdateTimedTransition(void) {
 }
 
 /* Calls MarkMenuEventHandled, then Frontend_SetMenuChoiceResult with -1, then Smos_ReturnToPreviousScreen, and returns zero. */
-extern void MarkMenuEventHandled();
 
 s32 Frontend_CancelNodePairMenu(void) {
     MarkMenuEventHandled();

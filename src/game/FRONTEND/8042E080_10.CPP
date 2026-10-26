@@ -1,3 +1,4 @@
+#include "COMMON/SCREEN.H"
 #include "COMMON/NAME.H"
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/RESOURCELOADSTATE.H"
@@ -24,7 +25,6 @@
 extern u8 D_80102B00[];
 extern u8 g_playerSettings[];
 
-extern void MarkMenuEventHandled(void);
 extern s32 SmpOverlay_GetSlotNodeId(s32, s32);
 extern void SmpOverlay_SetSlotValue(s32, s32, s32);
 extern void PAKInterface_RefreshPlayerPanel(s32);
