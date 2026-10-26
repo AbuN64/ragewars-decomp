@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/EXTERNS_2.H"
 #include "COMMON/ALAUXBUS_S.H"
-#include "AUDIO_3/802B8840.H"
+#include "sdk/libultra/audio/synthesizer.h"
 #include "COMMON/ALDELAY28.H"
 #include "TYPES.H"
 

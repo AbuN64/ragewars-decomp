@@ -1,8 +1,9 @@
-#ifndef AUDIO_3_802B8840_H
-#define AUDIO_3_802B8840_H
+#ifndef SDK_LIBULTRA_AUDIO_SYNTHESIZER_H
+#define SDK_LIBULTRA_AUDIO_SYNTHESIZER_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ALAUXBUS_S.H"
+
 struct ALEnvMixer4C {
     char pad[0x4C];
 };

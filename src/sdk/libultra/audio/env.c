@@ -10,7 +10,7 @@
 #include "sdk/al_globals.h"
 #include "sdk/OBJECTSTATE10_5.H"
 #include "COMMON/ALAUXBUS_S.H"
-#include "AUDIO_3/802B8840.H"
+#include "sdk/libultra/audio/synthesizer.h"
 
 /* libultra audio/env.c, built with -fforce-addr (config.toml): the eqpower base stays in a register. */
 extern s16 D_800D4210[128]; /* eqpower */

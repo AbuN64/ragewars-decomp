@@ -109,12 +109,12 @@ $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libgcc/%.o): CFLAGS := -G0 -mips3 -O2
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/%.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/%.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/%.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/MATH/802BC380.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/MATH/802BC380.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/sdk/MATH/802BC380.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math -fno-delayed-branch
 $(foreach v,$(VERSIONS),build/$(v)/src/game/MATH/80299368.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/game/MATH/80299368.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/game/MATH/80299368.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fno-thread-jumps -fno-rerun-cse-after-loop
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/gu/sqrtf.c.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/gu/sqrtf.c.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/gu/sqrtf.c.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math -fno-delayed-branch
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/80200568_3.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/80200568_3.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libsn/80200568_3.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
@@ -217,12 +217,12 @@ $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libgcc/%.o): CFLAGS := -G0 -mip
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/%.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/%.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/%.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/MATH/802BC380.CPP.o): TC := gcc_2_8_1_sn64
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/MATH/802BC380.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
-$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/MATH/802BC380.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math -fno-delayed-branch
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/MATH/80299368.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/MATH/80299368.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/MATH/80299368.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fno-thread-jumps -fno-rerun-cse-after-loop
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/gu/sqrtf.c.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/gu/sqrtf.c.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/gu/sqrtf.c.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math -fno-delayed-branch
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200568_3.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200568_3.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200568_3.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300

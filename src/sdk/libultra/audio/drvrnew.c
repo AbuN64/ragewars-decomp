@@ -7,6 +7,9 @@
 #include "COMMON/ALLOADFILTER48_2.H"
 #include "COMMON/TRIPLE.H"
 #include "sdk/libgultra_inferred/802B975C_5.H"
+#include "COMMON/OSPIHANDLE_S.H"
+#include "COMMON/ITEMRECAT20V1.H"
+#include "include_asm.h"
 
 /* alFxNew, drafted from ultralib src/audio/drvrnew.c: initialise the effect filter, pick the
    parameter table for the configured effect type, allocate the delay line and its sections, and
@@ -182,3 +185,120 @@ void alLoadNew(void *arg0, FuncPtr arg1, s32 arg2) {
     ((ALLoadFilter48_2 *)arg0)->first = 1;
     ((ALLoadFilter48_2 *)arg0)->memin = 0;
 }
+
+void alMainBusNew(void *arg0, s32 arg1, s32 arg2) {
+    alFilterNew(arg0, (s32) &D_002B5400, (s32) &D_002B5540, 7);
+    (((struct TextLayerRect *) ((s8 *) arg0))->x) = 0;
+    (((struct TextLayerRect *) ((s8 *) arg0))->right) = arg2;
+    (((struct TextLayerRect *) ((s8 *) arg0))->y) = arg1;
+}
+
+void alAuxBusNew(void *arg0, s32 arg1, s32 arg2) {
+    alFilterNew(arg0, (s32) &D_002B3E00, (s32) &D_002B3EDC, 6);
+    (((struct TextLayerRect *) ((s8 *) arg0))->x) = 0;
+    (((struct TextLayerRect *) ((s8 *) arg0))->right) = arg2;
+    (((struct TextLayerRect *) ((s8 *) arg0))->y) = arg1;
+}
+
+s32 func_802B0340_de(s32 a, s32 b, void *c, s32 d, s32 e);
+
+void func_802B450C_de(ALResampler_s *arg0, s32 arg1) {
+    s32 result;
+    f32 k;
+
+    alFilterNew(arg0, &D_002B5570, &D_002B5730, 1);
+    result = func_802B0340_de(0, 0, arg1, 1, 0x20);
+    k = D_800C75E0_de;
+    arg0->state = (void *)result;
+    arg0->delta = 0;
+    arg0->first = 1;
+    arg0->motion = 0;
+    arg0->upitch = 0;
+    arg0->ctrlList = 0;
+    arg0->ctrlTail = 0;
+    arg0->ratio = k;
+}
+
+void alSaveNew(ALSave *arg0) {
+    alFilterNew(arg0, (s32) &D_002B6380, (s32) &D_002B6480, 3);
+    arg0->dramout = 0;
+    arg0->first = 1;
+}
+
+extern char D_002B4730, D_002B51B8;
+
+void func_802B45DC_de(ALEnvMixer *arg0, ALHeap *arg1) {
+    s32 result;
+    ALEnvMixer *mixer = arg0;
+
+    alFilterNew(arg0, &D_002B4730, &D_002B51B8, 4);
+    result = func_802B0340_de(0, 0, arg1, 1, 0x50);
+    mixer->state = (void *)result;
+    mixer->first = 1;
+    mixer->motion = 0;
+    mixer->volume = 1;
+    mixer->ltgt = 1;
+    mixer->rtgt = 1;
+    mixer->cvolL = 1;
+    mixer->cvolR = 1;
+    mixer->dryamt = 0;
+    mixer->wetamt = 0;
+    mixer->lratm = 1;
+    mixer->lratl = 0;
+    mixer->lratm = 1;
+    mixer->lratl = 0;
+    mixer->delta = 0;
+    mixer->segEnd = 0;
+    mixer->pan = 0;
+    mixer->ctrlList = 0;
+    mixer->ctrlTail = 0;
+    mixer->sources = 0;
+}
+
+/* _init_lpfilter, drafted from ultralib src/audio/drvrnew.c: derive the low-pass filter's gain and
+   its sixteen coefficients from the configured cutoff. This object carries its own copies of the
+   1/16384 and 16384.0 double constants, at D_800CC838 and D_800CC840, distinct from the copies the
+   inlined body in alFxNew uses. */
+
+
+void func_802B468C_de(AudioLowPassFilter *lp)
+{
+    s32 i, temp;
+    s16 fc;
+    f64 ffc, fcoef;
+
+    temp = lp->cutoff * 16384;
+    fc = temp >> 15;
+    lp->gain = 16384 - fc;
+
+    lp->first = 1;
+    for (i = 0; i < 8; i++)
+        lp->coefficients.taps[i] = 0;
+
+    lp->coefficients.taps[i++] = fc;
+    fcoef = ffc = (f64)fc * D_800CC838;
+
+    for (; i < 16; i++) {
+        fcoef *= ffc;
+        lp->coefficients.taps[i] = (s16)(fcoef * D_800CC840);
+    }
+}
+
+#if defined(VERSION_EU)
+unsigned int func_802B49C8_eu_padding_B55C8[2] = {
+    0x02803021, 0x00408821,
+};
+#endif
+
+#if defined(VERSION_DE)
+unsigned int func_802B4728_de_padding_B5328[2] = {
+    0x8FB30058, 0xAFB60038,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: rodata/unresolved/800CC814 */
+unsigned int D_blob_b2806becfa4191cf25ef[1] = {
+    0x00000000,
+};
+#endif

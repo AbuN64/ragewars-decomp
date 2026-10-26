@@ -116,7 +116,7 @@ origin = "Rob Northen compression"
 origin = "SN Systems libsn"
 toolchain = "gcc-2.7.2-sn64"
 
-[file."src/sdk/MATH/802BC380.CPP"]
+[file."src/sdk/libultra/gu/sqrtf.c"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math", "-fno-delayed-branch"]
 omit = []

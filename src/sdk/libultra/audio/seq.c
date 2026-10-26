@@ -6,6 +6,8 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "sdk/libgultra/part_800C7F20/code_802B6F50.h"
+#include "include_asm.h"
+#include "COMMON/EXTERNS_2.H"
 
 /* alSeqNextEvent, drafted from ultralib src/audio/seq.c: read the next MIDI file event into an
    ALEvent, decoding tempo and end-of-track meta events and applying running status to channel
@@ -31,7 +33,7 @@ extern s16 func_802B23C4_de(MidiState802B70B8 *state);
 /* alSeqNewMarker, drafted from ultralib src/audio/seq.c: fill a marker with the sequence position
    of the first event at or after the given tick count (the track start for zero), stepping a
    scratch pass with alSeqNextEvent and restoring the sequence's own position afterwards. */
-extern void func_802B1E80_de(ALSeq_s *, ALEvent *);
+void func_802B1E80_de(ALSeq_s *seq, ALEvent *event);
 
 
  /* read8 */
@@ -234,3 +236,41 @@ s32 func_802B235C_de(struct ALSeq_s *arg0) {
     }
     return val;
 }
+
+#if !(defined(VERSION_US_REV1))
+const unsigned int D_802B1FE8_CD330[1] = {
+    0x3F800000,
+};
+#endif
+
+#if defined(VERSION_US)
+unsigned int rodata_unresolved_800C7404[1] = {
+    0x00000000,
+};
+#endif
+
+#if defined(VERSION_EU_X)
+unsigned int rodata_unresolved_800C8AA4[1] = {
+    0x00000000,
+};
+#endif
+
+#if defined(VERSION_EU)
+unsigned int rodata_unresolved_800C80D4[1] = {
+    0x00000000,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/rw_pool_802B1FE8_CD330_us_rev1.c */
+const unsigned int D_blob_049096e9a996bdbf5044[1] = {
+    0x3F800000,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: rodata/unresolved/800CC734 */
+unsigned int D_blob_3f960f62303991451f11[1] = {
+    0x00000000,
+};
+#endif

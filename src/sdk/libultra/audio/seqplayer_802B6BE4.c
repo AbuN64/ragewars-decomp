@@ -6,8 +6,6 @@
 #include "sdk/libgultra/part_800C7F20/seqplayer_802B6BE4.h"
 #include "sdk/libgultra/part_800C7F20/code_802B7520.h"
 
-
-
 extern void func_802B3470_de(void *arg0, void *arg1, s16 arg2);
 
 extern void func_802B3480_de(void *arg0, void *arg1, s16 arg2, s32 arg3);
@@ -133,5 +131,17 @@ void func_802B1D24_de(void *arg0) {
         sp10.type = 0;
         func_802B00D4_de(&((ObjectLinks88 *)(arg0))->unk_48, &sp10,
                       sp20 * ((ObjectLinks88 *)(arg0))->unk_24);
+    }
+}
+
+extern void func_802B1E50_de(void *arg0, f32 arg1);
+
+void func_802B1DEC_de(void *arg0, void *arg1) {
+    u8 *p = (u8 *)arg1;
+    int pad[4];
+
+    (void)pad;
+    if (p[8] == 0xFF && p[9] == 0x51) {
+        func_802B1E50_de(arg0, (f32)((p[0xB] << 0x10) | (p[0xC] << 8) | p[0xD]));
     }
 }

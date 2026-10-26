@@ -2,7 +2,6 @@
 #include "TYPES.H"
 #include "COMMON/OSTHREAD_S.H"
 #include "COMMON/EXTERNS_16.H"
-#include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "sdk/libgultra/ai.h"
 #include "sdk/OSINT/802C0CB0.H"
@@ -43,4 +42,8 @@ int func_802B772C_eu(int arg0, int *arg1) {
 #else
 INCLUDE_ASM("span_1000", func_802B772C_eu);
 #endif
+#endif
+
+#if defined(VERSION_DE)
+void func_802B748C_de(void) {}
 #endif
