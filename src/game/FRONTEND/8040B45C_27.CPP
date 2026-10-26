@@ -2,10 +2,7 @@
 #include "FRONTEND/8040B45C_29.H"
 #include "MATH/80299ECC.H"
 
-#if defined(VERSION_EU_X) || defined(VERSION_US_REV1) || (defined(NON_MATCHING) && defined(VERSION_EU))
-#if defined(VERSION_EU)
-#define Frontend_HandleSliderMessage Frontend_HandleBoundedValueEvent
-#endif
+#if defined(VERSION_EU_X) || defined(VERSION_US_REV1) || defined(VERSION_DE) || defined(VERSION_EU)
 /* Slider widget message handler: clamps the current value into range, then dispatches on the
    message to get/set the value, range, step or user word, adjusts by one step, or posts the new
    value to the parent. */

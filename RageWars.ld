@@ -27427,7 +27427,7 @@ SECTIONS
         src/game/FRONTEND/8040B45C_14.CPP.o(.data);
         src/game/MENU_2/80408CB0_13.CPP.o(.text);
         src/game/MENU_2/80408AC4_14.CPP.o(.data);
-        src/game/MENU_2/80408AC4_15.CPP.o(.text);
+        src/game/FRONTEND/8040B45C_27.CPP.o(.text);
         src/game/FRONTEND/8040B45C_28.CPP.o(.text);
         src/game/FRONTEND/8040B45C_29.CPP.o(.text);
         src/game/FRONTEND/8040B45C_29.CPP.o(.data);
@@ -27902,7 +27902,7 @@ SECTIONS
         src/game/MENU_2/80408CB0_12.CPP.o(.data);
         src/game/MENU_2/80408CB0_13.CPP.o(.text);
         src/game/MENU_2/80408AC4_18.CPP.o(.data);
-        src/game/MENU_2/80408AC4_15.CPP.o(.text);
+        src/game/FRONTEND/8040B45C_27.CPP.o(.text);
         src/game/FRONTEND/8040B45C_28.CPP.o(.text);
         src/game/FRONTEND/8040B45C_29.CPP.o(.text);
         src/game/MENU_2/80408CB0_14.CPP.o(.data);
@@ -29780,7 +29780,7 @@ SECTIONS
         src/game/FRONTEND/8040B45C_14.CPP.o(.bss .sbss COMMON);
         src/game/MENU_2/80408CB0_13.CPP.o(.bss .sbss COMMON);
         src/game/MENU_2/80408AC4_14.CPP.o(.bss .sbss COMMON);
-        src/game/MENU_2/80408AC4_15.CPP.o(.bss .sbss COMMON);
+        src/game/FRONTEND/8040B45C_27.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/8040B45C_28.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/8040B45C_29.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/8040B45C_31.CPP.o(.bss .sbss COMMON);
@@ -30235,7 +30235,7 @@ SECTIONS
         src/game/MENU_2/80408CB0_12.CPP.o(.bss .sbss COMMON);
         src/game/MENU_2/80408CB0_13.CPP.o(.bss .sbss COMMON);
         src/game/MENU_2/80408AC4_18.CPP.o(.bss .sbss COMMON);
-        src/game/MENU_2/80408AC4_15.CPP.o(.bss .sbss COMMON);
+        src/game/FRONTEND/8040B45C_27.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/8040B45C_28.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/8040B45C_29.CPP.o(.bss .sbss COMMON);
         src/game/MENU_2/80408CB0_14.CPP.o(.bss .sbss COMMON);
