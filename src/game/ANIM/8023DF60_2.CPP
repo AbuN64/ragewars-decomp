@@ -20,7 +20,6 @@
 
 extern f32 D_800C3690_de[];
 
-extern s32 func_802412D0_de(Polygon_func_8023E178_de *, CVector3 *, CVector3 *, f32 *);
 
 extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 

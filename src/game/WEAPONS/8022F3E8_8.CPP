@@ -29,7 +29,6 @@ extern char D_80145040[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "WEAPONS/8022F3E8_8.H"
 
-extern s16 Weapon_FindNextUsableWeapon(void *);
 extern s32 Player_GetProfileAchievementFlag(void *, s16);
 extern s32 Player_GetPlayerIndex(void *, void *);
 extern void Sky_PostTargetedScreenMessage(void *, void *, s32, s32, f32);

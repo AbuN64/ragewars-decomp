@@ -79,7 +79,6 @@ void Menu_SelectPlayerSettingsEntry(s32 entryIndex) {
 /* Reads five settings from the objects D_800E5690 holds through SmpButton_GetListSelection and SmpSlider_GetSliderItem into slot arg0 of the D_80102C89 table and copies them into the matching bytes of the arg0 entry of D_80146398. */
 
 
-extern struct StateMenuSelectPlayerSettingsEntry *D_800E5690;
 extern u8 g_playerSettings[];
 extern s32 SmpButton_GetListSelection(void *);
 extern s32 SmpSlider_GetSliderItem(void *);

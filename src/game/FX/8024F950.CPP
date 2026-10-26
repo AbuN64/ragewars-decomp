@@ -7,6 +7,5 @@
 #include "COMMON/MTX.H"
 #include "TYPES.H"
 #include "COMMON.H"
-extern s32 D_800D2978;
 
 

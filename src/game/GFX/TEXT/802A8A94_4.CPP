@@ -36,9 +36,7 @@ s32 OnScreen_StartMoverScript(void *, s32 *);
 
 extern void OnScreen_DrawStatusBar(void *arg0, int arg1);
 
-extern f32 D_800CB3A8;
 
-extern f32 D_800CB3B0;
 
 
 
