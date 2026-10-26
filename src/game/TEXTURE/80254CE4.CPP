@@ -38,7 +38,7 @@ static inline func_8022BC04_S3 *take(s32 active) {
 
 
 
-void func_80254D44_de(s32 arg0, s32 arg1)
+void func_80254D44_de(s32 arg0, s32 resourceSlot)
 {
   s32 mask;
   u32 count;
@@ -47,7 +47,7 @@ void func_80254D44_de(s32 arg0, s32 arg1)
   s32 offset;
   u32 limit;
   mask = -0x201;
-  if (arg1 != 0)
+  if (resourceSlot != 0)
   {
     mask = -0x401;
   }
@@ -65,14 +65,14 @@ void func_80254D44_de(s32 arg0, s32 arg1)
     }
     while (count < new_var2);
   }
-  D_80101134[arg1] = 0;
+  D_80101134[resourceSlot] = 0;
 }
 
-void func_80254DA4_de(void *unused0, void *arg1) {
-    func_8022BC04_S3 *arg1_record = arg1;
+void func_80254DA4_de(void *unused0, void *resource) {
+    func_8022BC04_S3 *arg1_record = resource;
     s32 *p = D_80105180;
     arg1_record->unk10 = *p;
-    func_80255FB8_de((char *)p - 0xC10, (s32)arg1);
+    func_80255FB8_de((char *)p - 0xC10, (s32)resource);
 }
 
 void func_80254DD0_de(void *unused0, void *resourceCacheEntry) {

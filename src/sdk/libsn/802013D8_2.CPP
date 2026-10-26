@@ -115,7 +115,7 @@ void Libsn_RunHostRequestThread(void) {
     }
 }
 /* Issue the monitor command with interrupts disabled, then restore them. */
-s32 func_80201A80_de(void)
+s32 Libsn_InitializePollingHost(void)
 {
     s32 previous;
     s32 result;
@@ -125,7 +125,7 @@ s32 func_80201A80_de(void)
     Libsn_RestoreInterruptEnable(previous);
     return result;
 }
-void *func_80201AD0_de(void) {
+void *Libsn_InitializeQueuedHost(void) {
     ControllerRequest request;
     ControllerResponse response;
     D_800C8144_de = 2;
@@ -140,7 +140,7 @@ void *func_80201AD0_de(void) {
     osRecvMesg(&D_800F3110, &response.message, 1);
     return response.message;
 }
-u32 func_80201B50_de(u8 *buffer, s32 argument) {
+u32 Libsn_SendHostStringRequest(u8 *buffer, s32 argument) {
     ControllerRequest request;
     ControllerResponse response;
     s32 length;
@@ -172,7 +172,7 @@ u32 func_80201B50_de(u8 *buffer, s32 argument) {
     }
     return response.status;
 }
-s32 func_80201C80_de(u8 *name, u32 flags) {
+s32 Libsn_SendHostNameFlags(u8 *name, u32 flags) {
     ControllerRequest request;
     ControllerResponse response;
     s32 length;
@@ -204,7 +204,7 @@ s32 func_80201C80_de(u8 *name, u32 flags) {
     }
     return response.status;
 }
-s32 func_80201DB0_de(s32 arg0) {
+s32 Libsn_SendHostScalarRequest(s32 arg0) {
     ControllerRequest request;
     ControllerResponse response;
     s32 saved;
@@ -230,7 +230,7 @@ s32 func_80201DB0_de(s32 arg0) {
     }
     return response.status;
 }
-s32 func_80201E94_de(s32 channel, u8 *destination, u32 remaining) {
+s32 Libsn_ReadHostChannel(s32 channel, u8 *destination, u32 remaining) {
     ControllerRequest request;
     ControllerResponse response;
     s32 total = 0;
@@ -279,7 +279,7 @@ s32 func_80201E94_de(s32 channel, u8 *destination, u32 remaining) {
     }
     return total;
 }
-s32 func_80202018_de(s32 channel, u8 *source, u32 remaining) {
+s32 Libsn_WriteHostChannel(s32 channel, u8 *source, u32 remaining) {
     ControllerRequest request;
     ControllerResponse response;
     s32 total = 0;
@@ -320,7 +320,7 @@ s32 func_80202018_de(s32 channel, u8 *source, u32 remaining) {
     }
     return total;
 }
-s32 func_80202198_de(s32 arg0, u32 arg1, s32 arg2) {
+s32 Libsn_SendHostTripleRequest(s32 arg0, u32 arg1, s32 arg2) {
     ControllerRequest request;
     ControllerResponse response;
     s32 saved;

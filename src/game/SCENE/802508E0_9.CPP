@@ -74,47 +74,47 @@ struct Shape_typemap_165 *Scene_AllocateResource(s32 arg0, s32 byteCount, u32 al
     return resource;
 }
 
-struct Shape_typemap_165 *Scene_AllocateResourceAt(void *arg0, void *arg1, s32 arg2, char *name) {
+struct Shape_typemap_165 *Scene_AllocateResourceAt(void *arg0, void *requestedAddress, s32 byteCount, char *name) {
     extern OSMesgQueue D_80101140;
-    struct Shape_typemap_165 *var_s0;
-    s32 temp_v0;
-    s32 temp_v1;
-    s32 temp_v1_2;
+    struct Shape_typemap_165 *allocatedResource;
+    s32 allocatedAddress;
+    s32 lockClaimCount;
+    s32 lockReleaseCount;
     u32 mask;
-    u32 temp_v0_2;
+    u32 releaseInterruptMask;
 
     mask = __osDisableInt();
-    temp_v1 = D_8010515C + 1;
-    D_8010515C = temp_v1;
-    if (temp_v1 != 1) {
+    lockClaimCount = D_8010515C + 1;
+    D_8010515C = lockClaimCount;
+    if (lockClaimCount != 1) {
         __osRestoreInt(mask);
         osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
-    var_s0 = func_802514A8_de(0, 0U);
-    if (var_s0 != 0) {
-        temp_v0 = func_80255630_de(&D_801051A0, arg1, arg2);
-        var_s0->field_0 = temp_v0;
-        if (temp_v0 != 0) {
-            var_s0->field_4 = arg2;
-            var_s0->field_C |= 3;
-            func_80254C70_de(0, var_s0);
+    allocatedResource = func_802514A8_de(0, 0U);
+    if (allocatedResource != 0) {
+        allocatedAddress = func_80255630_de(&D_801051A0, requestedAddress, byteCount);
+        allocatedResource->field_0 = allocatedAddress;
+        if (allocatedAddress != 0) {
+            allocatedResource->field_4 = byteCount;
+            allocatedResource->field_C |= 3;
+            func_80254C70_de(0, allocatedResource);
         } else {
-            func_80254AD0_de(0, var_s0);
-            var_s0 = 0;
+            func_80254AD0_de(0, allocatedResource);
+            allocatedResource = 0;
         }
     }
-    temp_v0_2 = __osDisableInt();
-    temp_v1_2 = D_8010515C - 1;
-    D_8010515C = temp_v1_2;
-    if (temp_v1_2 != 0) {
-        __osRestoreInt(temp_v0_2);
+    releaseInterruptMask = __osDisableInt();
+    lockReleaseCount = D_8010515C - 1;
+    D_8010515C = lockReleaseCount;
+    if (lockReleaseCount != 0) {
+        __osRestoreInt(releaseInterruptMask);
         osSendMesg(&D_80101140, 0, 1);
     } else {
-        __osRestoreInt(temp_v0_2);
+        __osRestoreInt(releaseInterruptMask);
     }
-    return var_s0;
+    return allocatedResource;
 }
 
 void Scene_LockResource(void *arg0, Node80253610 *resource) {
@@ -241,48 +241,48 @@ void func_80253908_de(s32 unusedHeap) {
     __osRestoreInt(unlockInterruptMask);
 }
 
-void func_802539EC_de(s32 unused, s32 arg1) {
-    s32 temp_v1;
-    s32 temp_v1_2;
+void func_802539EC_de(s32 unused, s32 resourceSlot) {
+    s32 lockClaimCount;
+    s32 lockReleaseCount;
     ResourceLockState *base;
     u32 mask;
-    u32 temp_v0;
+    u32 releaseInterruptMask;
 
     mask = __osDisableInt();
-    temp_v1 = D_8010515C + 1;
-    D_8010515C = temp_v1;
-    if (temp_v1 != 1) {
+    lockClaimCount = D_8010515C + 1;
+    D_8010515C = lockClaimCount;
+    if (lockClaimCount != 1) {
         __osRestoreInt(mask);
         osRecvMesg(&((ResourceLockState *)&D_801005A8)->waitQueue, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
     base = (ResourceLockState *)&D_801005A8;
-    base->slot = arg1;
-    D_80100598[arg1] = 1;
-    temp_v0 = __osDisableInt();
-    temp_v1_2 = D_8010515C - 1;
-    D_8010515C = temp_v1_2;
-    if (temp_v1_2 != 0) {
-        __osRestoreInt(temp_v0);
+    base->slot = resourceSlot;
+    D_80100598[resourceSlot] = 1;
+    releaseInterruptMask = __osDisableInt();
+    lockReleaseCount = D_8010515C - 1;
+    D_8010515C = lockReleaseCount;
+    if (lockReleaseCount != 0) {
+        __osRestoreInt(releaseInterruptMask);
         osSendMesg(&base->waitQueue, 0, 1);
         return;
     }
-    __osRestoreInt(temp_v0);
+    __osRestoreInt(releaseInterruptMask);
 }
 
 s32 func_80253AD4_de(void) {
-    s32 temp_v1;
-    s32 temp_v1_2;
+    s32 lockClaimCount;
+    s32 lockReleaseCount;
     s32 *base;
     u32 mask;
-    u32 temp_v0;
+    u32 releaseInterruptMask;
     s32 result;
 
     mask = __osDisableInt();
-    temp_v1 = D_8010515C + 1;
-    D_8010515C = temp_v1;
-    if (temp_v1 != 1) {
+    lockClaimCount = D_8010515C + 1;
+    D_8010515C = lockClaimCount;
+    if (lockClaimCount != 1) {
         __osRestoreInt(mask);
         osRecvMesg(((char *)&D_801005A8 + 0xB98), 0, 1);
     } else {
@@ -291,14 +291,14 @@ s32 func_80253AD4_de(void) {
     base = &D_801005A8;
     result = *(s32 *)((char *)D_80100598 + (*base << 2));
     *base = -1;
-    temp_v0 = __osDisableInt();
-    temp_v1_2 = D_8010515C - 1;
-    D_8010515C = temp_v1_2;
-    if (temp_v1_2 != 0) {
-        __osRestoreInt(temp_v0);
+    releaseInterruptMask = __osDisableInt();
+    lockReleaseCount = D_8010515C - 1;
+    D_8010515C = lockReleaseCount;
+    if (lockReleaseCount != 0) {
+        __osRestoreInt(releaseInterruptMask);
         osSendMesg((char *)base + 0xB98, 0, 1);
     } else {
-        __osRestoreInt(temp_v0);
+        __osRestoreInt(releaseInterruptMask);
     }
     return result;
 }

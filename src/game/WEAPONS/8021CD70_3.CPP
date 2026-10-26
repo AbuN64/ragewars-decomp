@@ -55,7 +55,7 @@ void func_8021D774_de(AimPlayer *player) {
     CQuatern probeHigh;
     CVector3 direction;
     AimActor *lockedTarget, *probeTarget;
-    CVector3 *var_a0, *temp_s2, *temp_s2_2, *var_a1, *temp_s0_2, *temp_s1;
+    CVector3 *aimOffsetOutput, *temp_s2, *temp_s2_2, *var_a1, *temp_s0_2, *temp_s1;
     f32 temp_fs0, temp_fs1f, temp_fs2, temp_fv0, temp_fv0_2, var_fs0f, var_fs1;
     s16 temp_v1, temp_v1_2;
     s32 var_s4;
@@ -253,9 +253,9 @@ reset_position:
     default:
         break;
     }
-    var_a0 = &smoothOffset;
+    aimOffsetOutput = &smoothOffset;
     temp_s2_2 = &player->out;
-    Particle_SubtractVectors(var_a0, &aimResult.xyz, temp_s2_2);
+    Particle_SubtractVectors(aimOffsetOutput, &aimResult.xyz, temp_s2_2);
     Particle_ScaleVector(&smoothOffset, &smoothOffset, temp_fs1f);
     temp_s1 = &player->velocity;
     Particle_AddVec3(temp_s1, temp_s1, &smoothOffset);

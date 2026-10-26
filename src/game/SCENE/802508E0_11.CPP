@@ -92,69 +92,69 @@ void Scene_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, s
     __osRestoreInt(token2);
 }
 
-void func_80253E64_de(s32 arg0, NodePair80253E04 *arg1, Node80253610 *arg2) {
+void func_80253E64_de(s32 arg0, NodePair80253E04 *resourcePair, Node80253610 *replacementResource) {
     extern OSMesgQueue D_80101140;
-    s32 temp_v1;
-    s32 temp_v1_2;
+    s32 lockClaimCount;
+    s32 lockReleaseCount;
     u32 mask;
-    u32 temp_v0;
-    NodePair80253E04 *temp_s0;
-    Node80253610 *temp_s1;
+    u32 releaseInterruptMask;
+    NodePair80253E04 *pairToUpdate;
+    Node80253610 *newFirstResource;
     Node80253610 *node;
 
-    temp_s0 = arg1;
-    temp_s1 = arg2;
+    pairToUpdate = resourcePair;
+    newFirstResource = replacementResource;
     mask = __osDisableInt();
-    temp_v1 = D_8010515C + 1;
-    D_8010515C = temp_v1;
-    if (temp_v1 != 1) {
+    lockClaimCount = D_8010515C + 1;
+    D_8010515C = lockClaimCount;
+    if (lockClaimCount != 1) {
         __osRestoreInt(mask);
         osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
 
-    node = temp_s0->first;
+    node = pairToUpdate->first;
     if (node != 0) {
         node->references -= 1;
         if (node->references == 0) {
             node->flags &= ~0x100;
         }
     }
-    node = temp_s0->second;
+    node = pairToUpdate->second;
     if (node != 0) {
         node->references -= 1;
         if (node->references == 0) {
             node->flags &= ~0x100;
         }
     }
-    temp_s0->first = temp_s1;
+    pairToUpdate->first = newFirstResource;
 
-    temp_v0 = __osDisableInt();
-    temp_v1_2 = D_8010515C - 1;
-    D_8010515C = temp_v1_2;
-    if (temp_v1_2 != 0) {
-        __osRestoreInt(temp_v0);
+    releaseInterruptMask = __osDisableInt();
+    lockReleaseCount = D_8010515C - 1;
+    D_8010515C = lockReleaseCount;
+    if (lockReleaseCount != 0) {
+        __osRestoreInt(releaseInterruptMask);
         osSendMesg(&D_80101140, 0, 1);
         return;
     }
-    __osRestoreInt(temp_v0);
+    __osRestoreInt(releaseInterruptMask);
 }
 
-void func_80253F8C_de(s32 arg0, s32 arg1) {
+void func_80253F8C_de(s32 arg0, s32 resourceKey) {
     extern OSMesgQueue D_80101140;
-    s32 temp_v1;
-    s32 temp_v1_2;
+    s32 lockClaimCount;
+    s32 lockReleaseCount;
     u32 mask;
-    u32 temp_v0;
+    u32 releaseInterruptMask;
     HashNode *node;
     void *value;
     void **out;
 
     mask = __osDisableInt();
-    temp_v1 = D_8010515C + 1;
-    D_8010515C = temp_v1;
-    if (temp_v1 != 1) {
+    lockClaimCount = D_8010515C + 1;
+    D_8010515C = lockClaimCount;
+    if (lockClaimCount != 1) {
         __osRestoreInt(mask);
         osRecvMesg(&D_80101140, 0, 1);
     } else {
@@ -163,9 +163,9 @@ void func_80253F8C_de(s32 arg0, s32 arg1) {
 
     out = &value;
     node = (HashNode *)((s32)D_80101194 +
-        ((((arg1 << 5) ^ ((u32)arg1 >> 1) ^ ((u32)arg1 >> 9) ^
-           ((u32)arg1 >> 17)) & D_80101190) * 0x10));
-    if (node->key != arg1) {
+        ((((resourceKey << 5) ^ ((u32)resourceKey >> 1) ^ ((u32)resourceKey >> 9) ^
+           ((u32)resourceKey >> 17)) & D_80101190) * 0x10));
+    if (node->key != resourceKey) {
         goto not_initial;
     }
     value = node->value;
@@ -179,7 +179,7 @@ not_initial:
         goto found;
     }
 loop:
-    if (node->key == arg1) {
+    if (node->key == resourceKey) {
         goto loop_found;
     }
     node = node->next;
@@ -194,15 +194,15 @@ found:
         func_80255FB8_de(&D_80100570, object);
     }
 
-    temp_v0 = __osDisableInt();
-    temp_v1_2 = D_8010515C - 1;
-    D_8010515C = temp_v1_2;
-    if (temp_v1_2 != 0) {
-        __osRestoreInt(temp_v0);
+    releaseInterruptMask = __osDisableInt();
+    lockReleaseCount = D_8010515C - 1;
+    D_8010515C = lockReleaseCount;
+    if (lockReleaseCount != 0) {
+        __osRestoreInt(releaseInterruptMask);
         osSendMesg(&D_80101140, 0, 1);
         return;
     }
-    __osRestoreInt(temp_v0);
+    __osRestoreInt(releaseInterruptMask);
 }
 
 void **func_802540F4_de(s32 arg0, void **arg1, s32 resourceKey, void *loadTag, s32 direct) {

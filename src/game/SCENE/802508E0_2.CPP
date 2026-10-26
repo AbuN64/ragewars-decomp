@@ -239,36 +239,36 @@ extern struct Shape_func_8021A2D4_de_2 D_80101190;
 extern void func_80255FB8_de(void *, s32);
 
 void func_802511AC_de(void) {
-    s32 temp_v1;
-    s32 temp_v1_2;
-    s32 var_s0;
+    s32 lockReleaseCount;
+    s32 lockClaimCount;
+    s32 slotCursor;
     s32 i;
-    s32 var_s1;
-    u32 temp_a0;
+    s32 pendingReleaseCount;
+    u32 reacquireInterruptMask;
     u32 mask;
 
-    var_s1 = 0;
-    var_s0 = 0;
+    pendingReleaseCount = 0;
+    slotCursor = 0;
     do {
-        if (D_80101134[var_s0] != 0) {
-            if (D_801005A8 != var_s0) {
-                var_s1 += 1;
-                D_801005A0[var_s0] = 1;
+        if (D_80101134[slotCursor] != 0) {
+            if (D_801005A8 != slotCursor) {
+                pendingReleaseCount += 1;
+                D_801005A0[slotCursor] = 1;
                 goto block_7;
             }
-            D_80100598[var_s0] = 0;
-            func_80254D44_de(0, var_s0);
-            var_s0 += 1;
+            D_80100598[slotCursor] = 0;
+            func_80254D44_de(0, slotCursor);
+            slotCursor += 1;
         } else {
 block_7:
-            var_s0 += 1;
+            slotCursor += 1;
         }
-    } while (var_s0 < 2);
-    if (var_s1 != 0) {
+    } while (slotCursor < 2);
+    if (pendingReleaseCount != 0) {
         mask = __osDisableInt();
-        temp_v1 = D_8010515C - 1;
-        D_8010515C = temp_v1;
-        if (temp_v1 != 0) {
+        lockReleaseCount = D_8010515C - 1;
+        D_8010515C = lockReleaseCount;
+        if (lockReleaseCount != 0) {
             __osRestoreInt(mask);
             osSendMesg(&D_80101140, 0, 1);
             i = 0;
@@ -276,21 +276,21 @@ block_7:
             __osRestoreInt(mask);
             i = 0;
         }
-        if (var_s1 > 0) {
+        if (pendingReleaseCount > 0) {
             do {
                 osRecvMesg(&D_80101160, 0, 1);
                 i += 1;
-            } while (i < var_s1);
+            } while (i < pendingReleaseCount);
         }
-        temp_a0 = __osDisableInt();
-        temp_v1_2 = D_8010515C + 1;
-        D_8010515C = temp_v1_2;
-        if (temp_v1_2 != 1) {
-            __osRestoreInt(temp_a0);
+        reacquireInterruptMask = __osDisableInt();
+        lockClaimCount = D_8010515C + 1;
+        D_8010515C = lockClaimCount;
+        if (lockClaimCount != 1) {
+            __osRestoreInt(reacquireInterruptMask);
             osRecvMesg(&D_80101140, 0, 1);
             return;
         }
-        __osRestoreInt(temp_a0);
+        __osRestoreInt(reacquireInterruptMask);
     }
 }
 
@@ -340,7 +340,7 @@ void *func_802514A8_de(s32 unused0, s32 flags) {
     return node;
 }
 
-void func_802515F0_de(s32 unused, s32 arg1) {
+void func_802515F0_de(s32 unused, s32 compactAll) {
     IntrusiveList queue;
     Node80254C10 *node;
     Node80254C10 *next;
@@ -351,7 +351,7 @@ void func_802515F0_de(s32 unused, s32 arg1) {
     s32 *pool;
 
     func_80255CA0_de(&queue, 0x20, 0x24);
-    if (arg1 != 0 || ((s32 *)&D_80100568)[0] == 0) {
+    if (compactAll != 0 || ((s32 *)&D_80100568)[0] == 0) {
         ((s32 *)&D_80100568)[0] = ((s32 *)&D_80100568)[7];
         if (((s32 *)&D_80100568)[7] == 0) {
             goto drain;
@@ -373,7 +373,7 @@ void func_802515F0_de(s32 unused, s32 arg1) {
                 func_80255ED8_de(&pool[7], node);
                 func_80255D14_de(&queue, node);
             }
-            if (arg1 == 0) {
+            if (compactAll == 0) {
                 break;
             }
         }
@@ -400,20 +400,20 @@ drain:
     }
 }
 
-void *func_802517B4_de(s32 arg0, s32 arg1) {
-    s32 temp_v1;
-    s32 temp_v1_2;
+void *func_802517B4_de(s32 arg0, s32 resourceKey) {
+    s32 lockClaimCount;
+    s32 lockReleaseCount;
     u32 mask;
-    u32 temp_v0;
+    u32 releaseInterruptMask;
     HashNode *node;
     void *value;
     void **out;
     struct IntrusiveList *object;
 
     mask = __osDisableInt();
-    temp_v1 = D_8010515C + 1;
-    D_8010515C = temp_v1;
-    if (temp_v1 != 1) {
+    lockClaimCount = D_8010515C + 1;
+    D_8010515C = lockClaimCount;
+    if (lockClaimCount != 1) {
         __osRestoreInt(mask);
         osRecvMesg(&D_80101140, 0, 1);
     } else {
@@ -422,9 +422,9 @@ void *func_802517B4_de(s32 arg0, s32 arg1) {
 
     out = &value;
     node = (HashNode *)((s32)D_80101194 +
-        ((((arg1 << 5) ^ ((u32)arg1 >> 1) ^ ((u32)arg1 >> 9) ^
-           ((u32)arg1 >> 17)) & D_80101190.field_0) * 0x10));
-    if (node->key != arg1) {
+        ((((resourceKey << 5) ^ ((u32)resourceKey >> 1) ^ ((u32)resourceKey >> 9) ^
+           ((u32)resourceKey >> 17)) & D_80101190.field_0) * 0x10));
+    if (node->key != resourceKey) {
         goto not_initial;
     }
     value = node->value;
@@ -438,7 +438,7 @@ not_initial:
         goto found;
     }
 loop:
-    if (node->key == arg1) {
+    if (node->key == resourceKey) {
         goto loop_found;
     }
     node = node->next;
@@ -456,14 +456,14 @@ found:
         func_80255FB8_de(&D_80100570, object);
     }
 
-    temp_v0 = __osDisableInt();
-    temp_v1_2 = D_8010515C - 1;
-    D_8010515C = temp_v1_2;
-    if (temp_v1_2 != 0) {
-        __osRestoreInt(temp_v0);
+    releaseInterruptMask = __osDisableInt();
+    lockReleaseCount = D_8010515C - 1;
+    D_8010515C = lockReleaseCount;
+    if (lockReleaseCount != 0) {
+        __osRestoreInt(releaseInterruptMask);
         osSendMesg(&D_80101140, 0, 1);
     } else {
-        __osRestoreInt(temp_v0);
+        __osRestoreInt(releaseInterruptMask);
     }
     return object;
 }

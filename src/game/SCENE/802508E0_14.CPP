@@ -86,12 +86,12 @@ void func_80254AD0_de(s32 unused0, s32 arg1) {
     *(&D_80100570 + 0x2F3) += 1;
 }
 
-int func_80254B58_de(int unused, int arg1, int arg2) {
-    int var_v0 = arg1;
-    if (arg2 & 0x10) {
-        var_v0 = 0;
+int func_80254B58_de(int unused, int keepRecent, int allocationFlags) {
+    int effectiveKeepRecent = keepRecent;
+    if (allocationFlags & 0x10) {
+        effectiveKeepRecent = 0;
     }
-    return func_80251328_de(0, 2, var_v0);
+    return func_80251328_de(0, 2, effectiveKeepRecent);
 }
 
 void *func_80254B8C_de(s32 arg0, u32 byteCount, s32 allocatorSelection, u32 evictionFlags)

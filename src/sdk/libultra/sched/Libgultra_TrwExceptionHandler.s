@@ -22,13 +22,13 @@ Libgultra_TrwExceptionHandler:
     ld $at, 0x328($k0)
     ld $v0, 0x330($k0)
 .if VERSION_DE
-    bgez $zero, func_80202198_de+0xEC
+    bgez $zero, Libsn_SendHostTripleRequest+0xEC
 .elseif VERSION_EU
-    bgez $zero, func_80202268_eu+0x1C
+    bgez $zero, Libultra_DispatchEuropeanExceptionVectors+0x1C
 .elseif VERSION_US
     bgez $zero, Libgultra_TrwExceptionVectors+0x1C
 .else
-    bgez $zero, func_80202268_eu_x+0x1C
+    bgez $zero, Libultra_DispatchExceptionVectors+0x1C
 .endif
     nop
 .LLibgultra_TrwExceptionHandler_044:

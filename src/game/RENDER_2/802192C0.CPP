@@ -72,11 +72,11 @@ void func_802192C0_de(Cursor *cursor) {
 extern s16 func_8028D28C_de(char *arg0);
 
 
-void func_802193C8_de(Struct802193C8 *arg0, s8 arg1) {
-    arg0->field0 = 1;
-    arg0->field1 = arg1;
-    arg0->field2 = func_8028D28C_de(&g_world);
-    arg0->field4 = 0;
+void func_802193C8_de(Struct802193C8 *cursorState, s8 initialState) {
+    cursorState->field0 = 1;
+    cursorState->field1 = initialState;
+    cursorState->field2 = func_8028D28C_de(&g_world);
+    cursorState->field4 = 0;
 }
 
 extern void *Engine_GetPlatformRoutePoint(char *a, unsigned char b, short c);

@@ -6,8 +6,8 @@
 .endif
 .section .text
 .if VERSION_EU
-.globl func_80202268_eu
-func_80202268_eu:
+.globl Libultra_DispatchEuropeanExceptionVectors
+Libultra_DispatchEuropeanExceptionVectors:
     xori $v0, $v1, 0x2561
     swr $a1, 0x7728($t1)
 .elseif VERSION_US
@@ -16,8 +16,8 @@ Libgultra_TrwExceptionVectors:
     bltz $t0, .LLibgultra_TrwExceptionVectors_024
     sll $zero, $a0, 0
 .else
-.globl func_80202268_eu_x
-func_80202268_eu_x:
+.globl Libultra_DispatchExceptionVectors
+Libultra_DispatchExceptionVectors:
     ldc1 $f21, 0xA0($sp)
     ldc1 $f20, 0x98($sp)
 .endif

@@ -18,8 +18,8 @@
 #include "FX/802631D0.H"
 
 extern char D_8010F328[];
-void func_8021A78C_de(void *arg0) {
-    char *object = arg0;
+void func_8021A78C_de(void *playerObject) {
+    char *object = playerObject;
     void *attributes;
     void *state = object + 0x688;
     f32 zero;

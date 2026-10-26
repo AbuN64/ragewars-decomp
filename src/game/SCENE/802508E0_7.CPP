@@ -111,8 +111,8 @@ Record *Scene_AllocateMemory(s32 size) {
     return 0;
 }
 
-int func_802532F4_de(void *arg0) {
-    return ((Node80253610 *)arg0)->flags & 0x100;
+int func_802532F4_de(void *resource) {
+    return ((Node80253610 *)resource)->flags & 0x100;
 }
 
 void func_80253300_de(Node80253610 *arg0) {

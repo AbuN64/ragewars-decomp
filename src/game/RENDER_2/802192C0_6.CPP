@@ -80,7 +80,7 @@ void func_8021C9D8_de(void *player, void *camera) {
     }
 }
 
-void func_8021CBD0_de(void *arg0, WeaponMenuView *camera) {
+void func_8021CBD0_de(void *player, WeaponMenuView *camera) {
     WeaponInfo *entry;
     f32 *rect;
     f32 x;
@@ -90,13 +90,13 @@ void func_8021CBD0_de(void *arg0, WeaponMenuView *camera) {
     f32 top;
     f32 bottom;
 
-    if ((((Shared_ActorView *)arg0)->selectedAction != -1) &&
-        (((Shared_ActorView *)arg0)->lives != 0)) {
+    if ((((Shared_ActorView *)player)->selectedAction != -1) &&
+        (((Shared_ActorView *)player)->lives != 0)) {
         gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP);
         gDPSetTexturePersp(g_displayListCursor++, G_TP_PERSP);
         func_8026D8F8_de();
 
-        entry = D_800D052C[((Shared_ActorView *)arg0)->selectedAction];
+        entry = D_800D052C[((Shared_ActorView *)player)->selectedAction];
         rect = camera->viewport;
         x = rect[0];
         y = rect[1];
@@ -113,7 +113,7 @@ void func_8021CBD0_de(void *arg0, WeaponMenuView *camera) {
         gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 20, 0xFFFF);
         gSPMoveWord(g_displayListCursor++, G_MW_CLIP, 28, 0xFFFF);
         Render_BeginModelBatch();
-        func_80249E28_de(&((Shared_ActorView *)arg0)->weapon, camera);
+        func_80249E28_de(&((Shared_ActorView *)player)->weapon, camera);
         Render_FlushModelBatch();
     }
 }

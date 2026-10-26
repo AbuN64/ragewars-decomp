@@ -73,7 +73,7 @@ struct Shape_typemap_165 *Scene_AllocResourceBlock(s32 arg0, void *handle, s32 t
     return node;
 }
 
-struct Shape_typemap_165 *func_80254600_de(s32 unused0, s32 unused1, s32 arg2) {
+struct Shape_typemap_165 *func_80254600_de(s32 unused0, s32 unused1, s32 byteCount) {
     struct Shape_typemap_165 *node;
     s32 result;
     s32 counter;
@@ -94,10 +94,10 @@ struct Shape_typemap_165 *func_80254600_de(s32 unused0, s32 unused1, s32 arg2) {
     if (node != 0) {
         node->field_8++;
         node->field_C |= 0x100;
-        result = ((s32 (*)(s32, s32, s32, u32))func_80254B8C_de)(0, arg2, 1, 0x22U);
+        result = ((s32 (*)(s32, s32, s32, u32))func_80254B8C_de)(0, byteCount, 1, 0x22U);
         node->field_0 = result;
         if (result != 0) {
-            node->field_4 = arg2;
+            node->field_4 = byteCount;
             node->field_C |= 0x22;
             func_80254C70_de(0, node);
         } else {
