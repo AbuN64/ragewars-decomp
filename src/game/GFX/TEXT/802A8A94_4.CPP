@@ -348,7 +348,7 @@ void OnScreen_LoadFontTexture(void) {
     s32 remainder;
     void *result;
     void *base;
-    D_800D2F90 = 0;
+    g_onScreenFontTexture = 0;
     handle = Scene_StartWorldEffect(&g_world, 2, 0, 1);
     if (handle != 0) {
         table = *handle;
@@ -366,14 +366,14 @@ void OnScreen_LoadFontTexture(void) {
         }
         func_802BD3A0_de(D_801470C0_de, view.data, 0x90);
         Cache_UnlockResource(0, handle);
-        D_800D2F90 = D_801470C0_de;
+        g_onScreenFontTexture = D_801470C0_de;
     }
 }
 
-/** Return the global word at D_800D2F90. */
+/** Return the global word at g_onScreenFontTexture. */
 
 u8 *OnScreen_GetFontTexture(void) {
-    return D_800D2F90;
+    return g_onScreenFontTexture;
 }
 
 /* Draws a grid of 16-bit image tiles with a 4-bit mask: the header holds the column and row counts,

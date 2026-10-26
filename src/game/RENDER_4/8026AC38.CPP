@@ -32,7 +32,7 @@ void Cache_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **arg1, str
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
-extern s32 D_80110620;
+extern s32 g_geometryViewEffect;
 
 extern signed char D_800D1610[3];
 
@@ -305,7 +305,7 @@ s32 Geometry_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *mat
     CVector3 position;
     f32 matrix[4][4];
 
-    if (D_80110620 != 0 && (material->flagWord & 0x8000)) {
+    if (g_geometryViewEffect != 0 && (material->flagWord & 0x8000)) {
         GraphU64_UnpackFixedMatrix((f32 *)matrix, model);
         GraphU64_GetMatrixTranslation((f32 *)matrix, &position);
         GraphU64_SubtractVectors(&direction, Player_GetFirstPlayer(&D_80145040) + 0x6E8, &position);

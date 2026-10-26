@@ -334,14 +334,14 @@ s32 Geometry_SetupMaterial(struct Shared_GfxMaterial *mat, s32 pass) {
     u32 mode;
 
     flags = mat->flags;
-    if (D_80110620 != 0 && (flags & 0x8040) != 0x8000) {
+    if (g_geometryViewEffect != 0 && (flags & 0x8040) != 0x8000) {
         flags |= 2;
     }
     if ((flags & 0x100) && mat->unk13 == 0) {
         return 0;
     }
     tailEnum = -1;
-    if (mat->unk8 != 0 && !(D_801462C8.flags & 0x400) && !(D_80110620 != 0 && (flags & 0x8000))) {
+    if (mat->unk8 != 0 && !(D_801462C8.flags & 0x400) && !(g_geometryViewEffect != 0 && (flags & 0x8000))) {
         node = TextLoad_RequestTextureVariation(&mat->unk8, pass);
         if (node == 0) {
             return 0;
@@ -404,14 +404,14 @@ a = GraphU64_NextRandom() % info.count;
         if (flags & 0x2000) {
             gDPSetTextureLOD(g_displayListCursor++, G_TL_LOD);
         }
-        if (D_80110620 != 0) {
+        if (g_geometryViewEffect != 0) {
             u32 avg = (u32)(mat->unk10 + mat->unk11 + mat->unk12) / 3;
             gDPSetPrimColor(g_displayListCursor++, info.frame->unk4, 0, 0, 0, avg, mat->unk13);
         } else {
             gDPSetPrimColor(g_displayListCursor++, info.frame->unk4, 0, mat->unk10, mat->unk11, mat->unk12, mat->unk13);
         }
         if (flags & 0x400) {
-            if (D_80110620 != 0) {
+            if (g_geometryViewEffect != 0) {
                 u32 avg = (u32)(mat->unk14 + mat->unk15 + mat->unk16) / 3;
                 gDPSetEnvColor(g_displayListCursor++, 0, 0, avg, D_800D15E0 == 0 ? mat->unk13 : D_800D15E4[3]);
             } else {

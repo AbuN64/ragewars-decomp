@@ -69,29 +69,29 @@ void Pak_ProbeStatus(s32 kind)
     }
 
     if (ready != 0) {
-        D_801534F0[kind] = 2;
+        g_controllerPakChannelStates[kind] = 2;
     } else if (Pak_UpdateStatus(kind) != 0) {
-        D_801534F0[kind] = 3;
+        g_controllerPakChannelStates[kind] = 3;
     } else {
-        D_801534F0[kind] = 1;
+        g_controllerPakChannelStates[kind] = 1;
     }
     Control_ReleasePakLock();
 }
 
-/* Returns entry i of D_80153500 when entry i of the state table D_801534F0 is 3, otherwise -2. */
+/* Returns entry i of g_controllerPakChannelStatuses when entry i of the state table g_controllerPakChannelStates is 3, otherwise -2. */
 
 
 
 s32 Pak_GetStatus(s32 index) {
-    if (D_801534F0[index] != 3) {
+    if (g_controllerPakChannelStates[index] != 3) {
         return -2;
     }
-    return D_80153500[index];
+    return g_controllerPakChannelStatuses[index];
 }
 
-/* Returns whether entry i of the word table D_801534F0 equals 2. */
+/* Returns whether entry i of the word table g_controllerPakChannelStates equals 2. */
 
 
 s32 Pak_IsChannelReady(s32 index) {
-    return D_801534F0[index] == 2;
+    return g_controllerPakChannelStates[index] == 2;
 }

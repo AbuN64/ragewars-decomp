@@ -10,7 +10,7 @@
 #include "TYPES.H"
 #include "FX_2/80271B18.H"
 #include "sdk/lib_802BB630/802BBC50.H"
-extern u32 D_80111D28;
+extern u32 g_secondaryRandomSeed;
 extern f32 D_800C4960_de[2];
 
 
@@ -78,23 +78,23 @@ void GraphU64_ReturnWithoutWork(void) {
 
 /** Store a fill pattern into two paired global words. */
 void GraphU64_ResetRandomSeeds(void) {
-    D_80111D24 = 0xE3F635E3;
-    D_80111D28 = 0xE3F635E3;
+    g_primaryRandomSeed = 0xE3F635E3;
+    g_secondaryRandomSeed = 0xE3F635E3;
 }
 
 s32 GraphU64_NextRandom(void) {
     u32 seed;
 
-    seed = (D_80111D24 * 0xA84A5B53) + 0x58348C2D;
-    D_80111D24 = seed;
+    seed = (g_primaryRandomSeed * 0xA84A5B53) + 0x58348C2D;
+    g_primaryRandomSeed = seed;
     return ((seed << 0x10) | (seed >> 0x10)) & 0x7FFFFFFF;
 }
 
 s32 GraphU64_NextRandomValue(void) {
     u32 seed;
 
-    seed = (D_80111D28 * 0xA84A5B53) + 0x58348C2D;
-    D_80111D28 = seed;
+    seed = (g_secondaryRandomSeed * 0xA84A5B53) + 0x58348C2D;
+    g_secondaryRandomSeed = seed;
     return ((seed << 0x10) | (seed >> 0x10)) & 0x7FFFFFFF;
 }
 
@@ -104,10 +104,10 @@ f32 GraphU64_RandomFloat(f32 range) {
     s32 randomBits;
     u32 seed;
 
-    seed = (D_80111D24 * 0xA84A5B53) + 0x58348C2D;
+    seed = (g_primaryRandomSeed * 0xA84A5B53) + 0x58348C2D;
     randomBits = (s32)((seed >> 0x10) & 0x7FFF);
     value = (f64)randomBits;
-    D_80111D24 = seed;
+    g_primaryRandomSeed = seed;
     if (randomBits < 0) {
         value = value + D_800C4940_de;
     }
@@ -319,11 +319,11 @@ f32 GraphU64_RandomBetween(f32 shakeMin, f32 shakeMax) {
     u32 seed;
     s32 randomValue;
 
-    seed = (D_80111D24 * 0xA84A5B53) + 0x58348C2D;
+    seed = (g_primaryRandomSeed * 0xA84A5B53) + 0x58348C2D;
     randomValue = ((seed << 0x10) | (seed >> 0x10)) & 0x7FFFFFFF;
     randomValue = randomValue % 10000;
     blend = (f32)randomValue * D_800C4998_de;
-    D_80111D24 = seed;
+    g_primaryRandomSeed = seed;
     return (blend * shakeMin) + ((D_800C499C_de - blend) * shakeMax);
 }
 

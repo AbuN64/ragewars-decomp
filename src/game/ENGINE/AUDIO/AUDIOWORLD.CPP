@@ -187,7 +187,7 @@ void func_8025966C_de(void *sentinel, s32 owner) {
     Audio_InitializeVoiceRecord(sentinel + 8, owner, -1);
 }
 
-void *func_80259694_de(LinkPair *channelNode) {
+void *AudioWorld_UnlinkChannelNode(LinkPair *channelNode) {
     channelNode->first[1] = (void *) channelNode->second;
     channelNode->second[0] = (void *) channelNode->first;
     return channelNode;

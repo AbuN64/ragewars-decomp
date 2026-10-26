@@ -5584,7 +5584,7 @@ segments:
       - [0xD3B18, data, data_800C/D_blob_1362d2391d0554e33e1b]
       - [0xD3B78, data, data_800C/g_evementSexysteveText]
       - [0xD3B8C, data, data_800C/D_blob_995b4d26d2fe6ec15ffa]
-      - [0xD3B90, data, data_800C/D_blob_d051f974dc36aeb884a1]
+      - [0xD3B90, data, data_800C/g_onScreenFontTexture]
       - [0xD3B94, data, data_800C/D_auto_src_ragewars_font_character_map_primary_us_rev1]
       - [0xD3C80, data, data_800C/D_auto_src_ragewars_font_character_map_secondary_us_rev1]
       - [0xD3D6C, data, data_800C/D_auto_src_ragewars_menu_motion_scripts_us_rev1]

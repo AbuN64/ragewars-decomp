@@ -367,7 +367,7 @@ extern s32 D_800E2AB4_de;
 
 extern D801041F8_Layout D_801001F8;
 
-extern int D_80110620;
+extern int g_geometryViewEffect;
 
 extern u32 g_sourceAlphaMask;
 

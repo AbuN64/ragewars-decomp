@@ -1019,7 +1019,7 @@ struct ObjRecAt2V2 {
     u16 unk2;
 };
 
-extern int D_80111D24;
+extern int g_primaryRandomSeed;
 
 
 
@@ -1979,7 +1979,7 @@ struct Field_f32_10 {
 
 
 
-extern int D_801534F0[];
+extern int g_controllerPakChannelStates[];
 
 struct HashNode;
 typedef struct HashNode HashNode;
@@ -2369,7 +2369,7 @@ typedef struct Work56EC8 Work56EC8;
 struct Table;
 typedef struct Table Table;
 
-extern int D_80153500[];
+extern int g_controllerPakChannelStatuses[];
 
 
 struct RecordRecAt14;

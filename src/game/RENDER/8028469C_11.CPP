@@ -53,10 +53,10 @@ f32 Rumble_SamplePackedFloatRange(s32 arg0) {
         return *(f32 *) &sp0;
     }
     sp4 = (s32) (((struct ObjRecAt2V2 *) ((u16 *) (&arg0)))->unk2) << 16;
-    seed = (D_80111D24 * (s32) 0xA84A5B53) + (s32) 0x58348C2D;
+    seed = (g_primaryRandomSeed * (s32) 0xA84A5B53) + (s32) 0x58348C2D;
     idx = (s32) ((seed >> 16) & 0x7FFF);
     var_f2 = (f64) idx;
-    D_80111D24 = seed;
+    g_primaryRandomSeed = seed;
     if (idx < 0) {
         var_f2 += D_800C4EB0_de;
     }

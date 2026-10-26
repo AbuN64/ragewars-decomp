@@ -27,7 +27,7 @@ s32 Pak_FindFreeNoteExtension(s32 ch, u8 *ext) {
     s32 i;
 
     used = 0;
-    if (D_801534F0[ch] != 3) {
+    if (g_controllerPakChannelStates[ch] != 3) {
         return -2;
     }
     for (i = 0; i < 16; i++) {
@@ -51,16 +51,16 @@ s32 Pak_FindFreeNoteExtension(s32 ch, u8 *ext) {
     return 0;
 }
 
-/* Returns whether entry i of D_80153500 is -4 when entry i of the state table D_801534F0 is 3,
+/* Returns whether entry i of g_controllerPakChannelStatuses is -4 when entry i of the state table g_controllerPakChannelStates is 3,
    otherwise zero. */
 
 
 
 s32 Pak_NeedsIdRepair(s32 index) {
-    if (D_801534F0[index] != 3) {
+    if (g_controllerPakChannelStates[index] != 3) {
         return 0;
     }
-    return D_80153500[index] == -4;
+    return g_controllerPakChannelStatuses[index] == -4;
 }
 
 /* Marks the given controller port's 0x70-byte pak record in D_80153330 present when the port's D_8010FBE3 status byte is clear and func_802B7FD8_de initialises the pak block at offset 8 of the record through D_8010FC00 without error, clearing the mark otherwise, and returns the mark.

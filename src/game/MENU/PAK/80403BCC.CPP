@@ -106,7 +106,7 @@ s32 Pak_UpdateStatus(s32 ch) {
     void *pfs;
     OSPfs *base;
     if(D_8010FBE3[ch*4] != 0) {
-        D_80153500[ch]=-2;
+        g_controllerPakChannelStatuses[ch]=-2;
         return 0;
     }
     tries=0;
@@ -115,29 +115,29 @@ s32 Pak_UpdateStatus(s32 ch) {
         result=osPfsInitPak(D_8010FC00,pfs,ch);
         switch(result) {
         case 0: case 2:
-            D_80153500[ch]=-5;
+            g_controllerPakChannelStatuses[ch]=-5;
             break;
         case 1:
-            D_80153500[ch]=-2;
+            g_controllerPakChannelStatuses[ch]=-2;
             break;
         case 4: case 11:
-            D_80153500[ch]=-3;
+            g_controllerPakChannelStatuses[ch]=-3;
             break;
         case 10:
-            D_80153500[ch]=-4;
+            g_controllerPakChannelStatuses[ch]=-4;
             break;
         }
-        if(D_80153500[ch]==-5) goto ready;
-        if(D_80153500[ch]==-2) break;
+        if(g_controllerPakChannelStatuses[ch]==-5) goto ready;
+        if(g_controllerPakChannelStatuses[ch]==-2) break;
         tries++;
     } while(tries<4);
     goto finish;
 ready:
-    D_801534F0[ch]=3;
-    if(Pak_RefreshNotes(ch)!=0) D_80153500[ch]=-4;
-    else D_80153500[ch]=0;
+    g_controllerPakChannelStates[ch]=3;
+    if(Pak_RefreshNotes(ch)!=0) g_controllerPakChannelStatuses[ch]=-4;
+    else g_controllerPakChannelStatuses[ch]=0;
 finish:
-    return D_80153500[ch]==0 || D_80153500[ch]==-4;
+    return g_controllerPakChannelStatuses[ch]==0 || g_controllerPakChannelStatuses[ch]==-4;
 }
 
 void Pak_ProbeAllChannels(void) {
@@ -156,9 +156,9 @@ void Pak_ProbeAllChannels(void) {
             record->present = func_802B7FD8_de(D_8010FC00, record->pak, channel) == 0;
             present = record->present;
         }
-        if (present) D_801534F0[channel] = 2;
-        else if (Pak_UpdateStatus(channel) != 0) D_801534F0[channel] = 3;
-        else D_801534F0[channel] = 1;
+        if (present) g_controllerPakChannelStates[channel] = 2;
+        else if (Pak_UpdateStatus(channel) != 0) g_controllerPakChannelStates[channel] = 3;
+        else g_controllerPakChannelStates[channel] = 1;
     }
     Control_ReleasePakLock();
 }
@@ -177,12 +177,12 @@ s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *fil
     OSPfs *pfs;
     s32 offset;
 
-    if (D_801534F0[ch] != 3) {
+    if (g_controllerPakChannelStates[ch] != 3) {
         return -2;
     }
     ((void (*)(s32))Control_AcquireControllerLock)(1);
     Control_ReadControllerStates();
-    result = D_80153500[ch];
+    result = g_controllerPakChannelStatuses[ch];
     D_8010BBB8 = 2;
     if (result == 0) {
         func_804042F0_encode(ext, ext_name, 4);

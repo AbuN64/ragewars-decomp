@@ -13,7 +13,7 @@ void func_8023B8F8_de(s32 sceneAddress, s32 effectNode) {
 }
 
 /** Swap the two words pointed to by arg0 and arg1. */
-void func_8023B938_de(int *leftEntry, int *rightEntry) {
+void Sky_SwapEntries(int *leftEntry, int *rightEntry) {
     int temp;
 
     temp = *leftEntry;
@@ -37,7 +37,7 @@ s32 func_8023B94C_de(void **arg0, void **arg1)
 }
 
 /** Compare two records by the float at nested offset 0x210. */
-int func_8023B978_de(void *first, void *second) {
+int Sky_CompareRotorSpeeds(void *first, void *second) {
     Rotor *left = *(void **)first;
     Rotor *right = *(void **)second;
     int result = 1;

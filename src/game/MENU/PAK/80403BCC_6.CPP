@@ -106,7 +106,7 @@ static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
     void *buf;
 
     blocks = (size + 0xFF) & ~0xFF;
-    if (D_801534F0[ch] != 3) {
+    if (g_controllerPakChannelStates[ch] != 3) {
         return -2;
     }
     if (func_8025477C_de() == 0) {
@@ -116,7 +116,7 @@ static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
     buf = *handle;
     ((void (*)(s32))Control_AcquireControllerLock)(1);
     Control_ReadControllerStates();
-    result = D_80153500[ch];
+    result = g_controllerPakChannelStatuses[ch];
     D_8010BBB8 = 2;
     if (result == 0) {
         if ((result = Pfs_ReadWriteFile(&D_8014D280[ch], file_no, 0, 0, blocks, buf)) != 0) {
@@ -142,7 +142,7 @@ extern s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s
    extension decoded from pak font codes with trailing blanks trimmed. */
 s32 Pak_ReadNoteInfo(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *size, u8 *company,
                   u8 *code) {
-    if (D_801534F0[ch] != 3) {
+    if (g_controllerPakChannelStates[ch] != 3) {
         return -2;
     }
     if (D_800E2854[ch].notes[index].file_size == 0) {
@@ -165,12 +165,12 @@ s32 Pak_DeleteNote(s32 ch, s32 index) {
     extern void Pak_UpdateStatus(s32 ch);
     s32 result;
 
-    if (D_801534F0[ch] != 3) {
+    if (g_controllerPakChannelStates[ch] != 3) {
         return -2;
     }
     ((void (*)(s32))Control_AcquireControllerLock)(1);
     Control_ReadControllerStates();
-    result = D_80153500[ch];
+    result = g_controllerPakChannelStatuses[ch];
     D_8010BBB8 = 2;
     if (result == 0) {
         result = osPfsDeleteFile(&D_8014D280[ch], D_800E2854[ch].notes[index].company_code,
@@ -195,7 +195,7 @@ s32 Pak_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
     s32 tries;
 
     blocks = (size + 0xFF) & ~0xFF;
-    if (D_801534F0[ch] != 3) {
+    if (g_controllerPakChannelStates[ch] != 3) {
         return -2;
     }
     handle = Cache_AllocateResource(0, blocks, 0x23, g_pakWriteScratchNoteName);
@@ -224,7 +224,7 @@ s32 Pak_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
    directory of channel's pak and returns 0, or returns -2 (leaving *gameName untouched) unless that
    pak is ready. */
 static inline s32 Pak_PeekNoteGameName(s32 channel, s32 note, u8 **gameName) {
-    if (D_801534F0[channel] != 3) {
+    if (g_controllerPakChannelStates[channel] != 3) {
         return -2;
     }
     *gameName = D_800E2854[channel].notes[note].game_name;

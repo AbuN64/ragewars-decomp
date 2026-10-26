@@ -74,7 +74,7 @@ void Geometry_InitializeModelRenderState(void) {
 }
 
 void Geometry_SelectEffectModes(void) {
-    if (D_800CC380 != 0 || D_80110620 != 0) {
+    if (D_800CC380 != 0 || g_geometryViewEffect != 0) {
         D_800CC384 = 0x10000;
         D_800CC388 = 0xC4000000;
         D_800CC38C = 0xC8000000;
@@ -92,7 +92,7 @@ void Geometry_InvalidateMaterialKeys(void) {
 }
 
 void Geometry_SetColorDither(s32 ditherMode) {
-    if (D_80110620 == 0) gDPSetColorDither(g_displayListCursor++, ditherMode) else gDPSetColorDither(g_displayListCursor++, G_CD_NOISE);
+    if (g_geometryViewEffect == 0) gDPSetColorDither(g_displayListCursor++, ditherMode) else gDPSetColorDither(g_displayListCursor++, G_CD_NOISE);
 }
 
 void Geometry_BeginModelBatch(void) {

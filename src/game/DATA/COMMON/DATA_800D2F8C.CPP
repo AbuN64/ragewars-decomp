@@ -9,5 +9,5 @@ unsigned int D_blob_995b4d26d2fe6ec15ffa[1] = {
 #include "TYPES.H"
 
 /* Packed intensity pixels loaded by the text renderer. */
-u8 *D_blob_d051f974dc36aeb884a1 = 0;
+u8 *g_onScreenFontTexture = 0;
 #endif

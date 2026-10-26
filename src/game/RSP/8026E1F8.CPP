@@ -61,16 +61,16 @@ s32 *Geometry_CollectMaterialResources(void **arg0, s32 variation, s32 *arg2) {
     return out;
 }
 
-extern int D_80110620;
+extern int g_geometryViewEffect;
 void Geometry_SetViewEffect(int viewEffect) {
-    D_80110620 = viewEffect;
+    g_geometryViewEffect = viewEffect;
 }
 
-/** Return the global word at D_80110620. */
-extern int D_80110620;
+/** Return the global word at g_geometryViewEffect. */
+extern int g_geometryViewEffect;
 
 int Geometry_GetViewEffect(void) {
-    return D_80110620;
+    return g_geometryViewEffect;
 }
 
 /** Store four bytes in the global color-like value. */
