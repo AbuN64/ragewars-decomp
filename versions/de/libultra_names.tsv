@@ -5,6 +5,7 @@ vram	name	basis
 0x802B7E14	osMotorStart	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/io/motor.c; reviewed source identity and discriminating SDK operations (func_802B7E14_de)
 0x802B03D0	alCSPNew	machine code
 0x802B3E00	alAuxBusPull	machine code
+0x802B8DD0	osCreatePiManager	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/io/pimgr.c; exact body twin of reviewed PI manager (func_802B8DC8_de)
 0x802B43A4	alLoadNew	machine code
 0x802B4454	alMainBusNew	machine code
 0x802B44B0	alAuxBusNew	machine code
