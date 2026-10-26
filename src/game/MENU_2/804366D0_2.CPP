@@ -80,7 +80,6 @@ void Menu_SelectPlayerSettingsEntry(s32 entryIndex) {
 
 
 extern struct StateMenuSelectPlayerSettingsEntry *D_800E5690;
-extern s8 D_80102C89[];
 extern u8 D_800FEC8A[];
 extern u8 D_800FEC8B[];
 extern u8 D_800FEC8C[];
