@@ -790,6 +790,7 @@ SECTIONS
         src/sdk/libultra/audio/reverb.c.o(.text);
         src/game/AUDIO_3/802BAC64_2.CPP.o(.text);
         src/game/AUDIO_3/802BAC64_2.CPP.o(.data);
+        src/sdk/libultra/audio/save.c.o(.text);
         src/sdk/libultra/audio/save_2.c.o(.text);
         src/game/DATA/AUDIO/802B63E4_3.CPP.o(.data);
         src/game/AUDIO_3/802BB590.CPP.o(.text);
@@ -5771,6 +5772,7 @@ SECTIONS
         src/sdk/libultra/audio/mainbus.c.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/reverb.c.o(.bss .sbss COMMON);
         src/game/AUDIO_3/802BAC64_2.CPP.o(.bss .sbss COMMON);
+        src/sdk/libultra/audio/save.c.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/save_2.c.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/802B63E4_3.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO_3/802BB590.CPP.o(.bss .sbss COMMON);
@@ -10921,7 +10923,6 @@ SECTIONS
         src/game/DATA/OVL1_C/800CC694_25.CPP.o(.rodata .rdata);
         src/game/DATA/OVL1_C/800CC694_25.CPP.o(.data);
         src/game/AUDIO_3/800CC694_26.CPP.o(.rodata .rdata);
-        src/game/AUDIO_3/800CC694_26.CPP.o(.data);
         src/game/AUDIO_3/800CC694_27.CPP.o(.rodata .rdata);
         src/game/DATA/OVLTBL/800C7804.CPP.o(.data);
         src/sdk/MATH/802BB630_3.CPP.o(.rodata .rdata);
@@ -12629,7 +12630,6 @@ SECTIONS
         src/game/DATA/OVL1_C/800CC694_25.CPP.o(.rodata .rdata);
         src/game/DATA/OVLTBL/800C83D4.CPP.o(.data);
         src/game/AUDIO_3/800CC694_26.CPP.o(.rodata .rdata);
-        src/game/AUDIO_3/800CC694_26.CPP.o(.data);
         src/game/AUDIO_3/800CC694_27.CPP.o(.rodata .rdata);
         src/game/DATA/OVLTBL/800C83F4.CPP.o(.data);
         src/sdk/MATH/802BB630_4.CPP.o(.rodata .rdata);
@@ -14298,7 +14298,6 @@ SECTIONS
         src/game/DATA/OVL1_C/800CC694_25.CPP.o(.rodata .rdata);
         src/game/DATA/OVLDAT2/800C8DA4.CPP.o(.data);
         src/game/AUDIO_3/800CC694_26.CPP.o(.rodata .rdata);
-        src/game/AUDIO_3/800CC694_26.CPP.o(.data);
         src/game/AUDIO_3/800CC694_27.CPP.o(.rodata .rdata);
         src/game/DATA/OVLDAT2/000C99C4.CPP.o(.data);
         src/sdk/MATH/802BB630_5.CPP.o(.rodata .rdata);
@@ -17721,7 +17720,6 @@ SECTIONS
         src/game/DATA/OVL1_C/800CC694_25.CPP.o(.rodata .rdata);
         src/game/DATA/OVL1_C/DATA_800CCA34.CPP.o(.data);
         src/game/AUDIO_3/800CC694_26.CPP.o(.rodata .rdata);
-        src/game/AUDIO_3/800CC694_26.CPP.o(.data);
         src/game/AUDIO_3/800CC694_27.CPP.o(.rodata .rdata);
         src/game/DATA/OVL1_C/DATA_800CCA54.CPP.o(.data);
         src/game/AUDIO_3/800CC694_28.CPP.o(.rodata .rdata);

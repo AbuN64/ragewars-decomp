@@ -4229,7 +4229,6 @@ segments:
       - [0xC8FB0, rodata, data_800C/D_802B5B94_CD610]
       - [0xC8FD4, data, data_800C/D_d1_57a81820031ac38e]
       - [0xC8FE0, rodata, data_800C/D_blob_3e9a18b4da19e6114370]
-      - [0xC8FE3, data, data_800C/rodata_unresolved_800C83E3]
       - [0xC8FE4, rodata, data_800C/g_audioSaveText]
       - [0xC8FF4, data, data_800C/D_auto_data_unresolved_800C83F4]
       - [0xC9008, rodata, data_800C/D_auto_rodata_func_802B6560_de_800C8408]

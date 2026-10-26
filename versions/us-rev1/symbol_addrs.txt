@@ -12590,7 +12590,6 @@ rodata_unresolved_800CC7AE = 0x800CC7AE; // rom:0xCD3AE
 rodata_unresolved_800CC7C3 = 0x800CC7C3; // rom:0xCD3C3
 rodata_unresolved_800CC853 = 0x800CC853; // rom:0xCD453
 rodata_unresolved_800CC9D3 = 0x800CC9D3; // rom:0xCD5D3
-rodata_unresolved_800CCA43 = 0x800CCA43; // rom:0xCD643
 rodata_unresolved_800CCA51 = 0x800CCA51; // rom:0xCD651
 rodata_unresolved_800CCBA3 = 0x800CCBA3; // rom:0xCD7A3
 rodata_unresolved_800CCBC3 = 0x800CCBC3; // rom:0xCD7C3

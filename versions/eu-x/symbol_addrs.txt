@@ -11523,7 +11523,6 @@ rodata_unresolved_800C8D43 = 0x800C8D43; // rom:0xC9943
 rodata_unresolved_800C8D53 = 0x800C8D53; // rom:0xC9953
 data_unresolved_800C8D54 = 0x800C8D54; // rom:0xC9954
 rodata_unresolved_800C8D7C = 0x800C8D7C; // rom:0xC997C
-rodata_unresolved_800C8DB3 = 0x800C8DB3; // rom:0xC99B3
 rodata_unresolved_800C8DC1 = 0x800C8DC1; // rom:0xC99C1
 rodata_unresolved_800C8E14 = 0x800C8E14; // rom:0xC9A14
 rodata_unresolved_800C8E54 = 0x800C8E54; // rom:0xC9A54

@@ -1189,7 +1189,6 @@ build/us-rev1/src/game/ANIM/800C8710_21.CPP.o: NOALIGN := 1
 build/us-rev1/src/game/ANIM/800C8710_27.CPP.o: NOALIGN := 1
 build/us-rev1/src/game/ANIM/800C8710_28.CPP.o: NOALIGN := 1
 build/us-rev1/src/game/AUDIO_3/800CC694_22.CPP.o: NOALIGN := 1
-build/us-rev1/src/game/AUDIO_3/800CC694_26.CPP.o: NOALIGN := 1
 build/us-rev1/src/game/AUDIO_3/800CC694_36.CPP.o: NOALIGN := 1
 build/us-rev1/src/game/AUDIO_3/800CCC00.CPP.o: NOALIGN := 1
 build/us-rev1/src/game/DATA/AMMO/800E2320.CPP.o: NOALIGN := 1

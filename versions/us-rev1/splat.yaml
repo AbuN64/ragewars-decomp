@@ -4382,7 +4382,6 @@ segments:
       - [0xCD628, rodata, data_800C/D_blob_fe9cdb16e830c8daa646]
       - [0xCD634, data, data_800C/D_blob_0d5f5221a2a1530a4a93]
       - [0xCD640, rodata, data_800C/D_blob_3e9a18b4da19e6114370]
-      - [0xCD643, data, data_800C/rodata_unresolved_800CCA43]
       - [0xCD644, rodata, data_800C/g_audioSaveText]
       - [0xCD654, data, data_800C/D_auto_data_unresolved_800CCA54]
       - [0xCD668, rodata, data_800C/D_auto_src_rw_constants_802B6560_CD668_us_rev1]
