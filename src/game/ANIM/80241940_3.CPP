@@ -21,7 +21,7 @@ extern f32 InstHdr_GetActorBaseOffset(void *);
 
 extern f32 func_80241728_de(SurfaceHit *, f32, f32);
 
-extern s32 Unicol_SweepActorMotion(Input_func_802426CC_de *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
+extern s32 Unicol_SweepActorMotion(Input_func_802426CC_de *, CVector3, CVector3, struct CCollisionInfo2_t *, f32, f32, f32, f32);
 
 
 extern char D_801000F0;
@@ -61,7 +61,7 @@ void func_80242550_de(Actor_func_80242550_de *actor, SourceBarrelUpdateActorCont
     }
 }
 
-struct MotionSurface;
+struct CCollisionInfo2_t;
 
 void func_802426CC_de(ActorRecAtB0 *actor, void *owner, Input_func_802426CC_de *input, SurfaceHit *query) {
     u8 collision[0x108];

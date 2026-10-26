@@ -92,8 +92,8 @@ void func_80243920_de(ActorB0 *actor) {
             height = query.result.y;
             if ((0.10000000149011612f) < height) {
                 query.word0 = 5;
-                query.word4 = ((MotionSurface *)flags)->materialResponse;
-                query.word8 = ((MotionSurface *)flags)->materialKind;
+                query.word4 = ((CCollisionInfo2_t *)flags)->WaterFriction;
+                query.word8 = ((CCollisionInfo2_t *)flags)->GroundBehavior;
                 query.input = 0;
                 query.index = -1;
                 query.word10 = 0;

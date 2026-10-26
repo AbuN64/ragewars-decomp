@@ -48,7 +48,7 @@ struct Work80244494;
 
 
 
-struct MotionSurface;
+struct CCollisionInfo2_t;
 
 extern s32 func_802457E0_de(void);
 

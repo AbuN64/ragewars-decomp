@@ -12,12 +12,12 @@
  * scaled by 1/sqrt 2, components tested against the zeroed y), or the full ray length on a miss. */
 extern CVector3 D_800C88A0_de[8];
 extern SweepHit *D_80103FCC;
-extern MotionSurface D_80103FD0;
+extern CCollisionInfo2_t D_80103FD0;
 extern f32 InstHdr_GetActorReach(Player *);
 extern f32 GameObject_GetActorRadius(Player *);
 extern f32 GameObject_GetActorHeight(Player *);
 extern f32 InstHdr_GetActorBaseOffset(Player *);
-extern s32 Unicol_SweepActorMotion(Player *, CVector3, CVector3, MotionSurface *, f32, f32, f32, f32);
+extern s32 Unicol_SweepActorMotion(Player *, CVector3, CVector3, CCollisionInfo2_t *, f32, f32, f32, f32);
 void Nav_MeasureWheelReach(Player *player, s32 wheel) {
     CVector3 from;
     CVector3 to;
@@ -68,7 +68,7 @@ void Nav_MeasureWheelClearance(Player *player, s32 wheel) {
     CVector3 position;
     CVector3 below;
     CVector3 step;
-    MotionSurface surface;
+    CCollisionInfo2_t surface;
     f32 reach;
     f32 length;
     f32 radius;
@@ -91,15 +91,15 @@ void Nav_MeasureWheelClearance(Player *player, s32 wheel) {
     height = GameObject_GetActorHeight(player);
     base = InstHdr_GetActorBaseOffset(player);
     position = player->pos;
-    surface.flags = 0xC008;
-    surface.enabled = 1;
-    surface.slopeKind = 1;
-    surface.materialKind = 1;
-    surface.gravity = 0.0f;
-    surface.response = 0.0f;
-    surface.friction = 0.0f;
-    surface.drag = 0.0f;
-    surface.materialResponse = 0.0f;
+    surface.dwFlags = 0xC008;
+    surface.InstanceBehavior = 1;
+    surface.WallBehavior = 1;
+    surface.GroundBehavior = 1;
+    surface.GravityAcceleration = 0.0f;
+    surface.BounceReturnEnergy = 0.0f;
+    surface.GroundFriction = 0.0f;
+    surface.AirFriction = 0.0f;
+    surface.WaterFriction = 0.0f;
     position.y += 2.5f * 61.44f;
     for (; i < steps; i++) {
         position.x += step.x;

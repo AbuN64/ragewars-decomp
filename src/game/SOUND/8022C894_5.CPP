@@ -30,8 +30,8 @@ extern f32 InstHdr_GetActorReach(void *arg0);
 
 
 
-struct MotionSurface;
-extern s32 Unicol_SweepActorMotion(void *arg0, CVector3 arg1, CVector3 arg2, struct MotionSurface *arg3,
+struct CCollisionInfo2_t;
+extern s32 Unicol_SweepActorMotion(void *arg0, CVector3 arg1, CVector3 arg2, struct CCollisionInfo2_t *arg3,
                          f32 arg4, f32 arg5, f32 arg6, f32 arg7);
 
 extern char D_80103FCC[];

@@ -96,7 +96,7 @@ struct Polygon;
 typedef struct Polygon Polygon_func_8023E8D4_de;
 
 struct CapsuleSweep;
-struct MotionSurface;
+struct CCollisionInfo2_t;
 struct CapsuleSweep {
     char pad0[0x08];
     f32 radius; /* 0x08 */
@@ -105,7 +105,7 @@ struct CapsuleSweep {
     f32 height; /* 0x1C */
     char pad20[0x1C];
     u32 flags; /* 0x3C */
-    struct MotionSurface *surface; /* 0x40 */
+    struct CCollisionInfo2_t *surface; /* 0x40 */
     CVector3 start;
     CVector3 end;
     char pad5C[0x24];

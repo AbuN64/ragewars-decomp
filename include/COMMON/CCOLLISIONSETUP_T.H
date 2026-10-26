@@ -8,7 +8,7 @@
  * and bytes in CCollisionInfo2_t. A row whose m_pCollInfo is 0 ends the table. */
 typedef struct CCollisionSetup_t {
     struct CCollisionInfo2_t *m_pCollInfo;
-    unsigned long m_dwFlags;
+    u32 m_dwFlags;
     int m_InstanceBehavior;
     int m_WallBehavior;
     int m_GroundBehavior;

@@ -8,7 +8,7 @@
 #include "COMMON/OUTPUT.H"
 #include "COMMON/FIELD_VEC_B0.H"
 struct Ray180;
-struct MotionSurface;
+struct CCollisionInfo2_t;
 struct Ray180 {
     char pad0[0x8];
     f32 spacing;
@@ -19,7 +19,7 @@ struct Ray180 {
     f32 height; /* 0x1C */
     char pad20[0x1C];
     u32 flags; /* 0x3C */
-    struct MotionSurface *surface; /* 0x40 */
+    struct CCollisionInfo2_t *surface; /* 0x40 */
     CVector3 start;
     CVector3 end;
     char pad5C[0x24];

@@ -32,7 +32,7 @@ static inline s8 Anim_GetSurfaceKind(LevelActor *entity) {
 
 void InstCol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelActor *entity) {
     LevelActor *owner;
-    MotionSurface *surface;
+    CCollisionInfo2_t *surface;
     f32 bounds[4];
     CVector3 point;
     CVector3 normal;
@@ -121,8 +121,8 @@ void InstCol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelAc
                     deltaX = entityX - point.x;
                     deltaZ = entityZ - point.z;
                     if (deltaX * deltaX + deltaZ * deltaZ < radius * radius) {
-                        if (surface->enabled == 1) {
-                            contact.kind = surface->enabled;
+                        if (surface->InstanceBehavior == 1) {
+                            contact.kind = surface->InstanceBehavior;
                         } else {
                             contact.kind = Anim_GetSurfaceKind(entity);
                         }
@@ -136,7 +136,7 @@ void InstCol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelAc
             }
         }
     }
-    contact.kind = special != 0 ? 7 : surface->enabled;
+    contact.kind = special != 0 ? 7 : surface->InstanceBehavior;
     func_8023E178_de(motion, &entity->position0, radius,
                     top - sweep->bottom, bottom - sweep->top, 1, &contact, 1);
     if (special != 0 && *(LevelActor **)((u8 *)motion + 0x104) != entity &&
@@ -181,7 +181,7 @@ extern void InstCol_TestEntityContact(ActorMotion *, Query *, LevelActor *);
 void func_8023F43C_de(char *obj) {
     Query query;
     Query *q;
-    MotionSurface *shape;
+    CCollisionInfo2_t *shape;
     void *self;
     s32 count;
     s32 i;
@@ -191,7 +191,7 @@ void func_8023F43C_de(char *obj) {
     f32 bound;
 
     shape = ((ActorMotion *)obj)->surface;
-    if (shape->enabled == 0 || shape == (void *)&D_80100170) {
+    if (shape->InstanceBehavior == 0 || shape == (void *)&D_80100170) {
         return;
     }
     table = &g_world;
@@ -200,7 +200,7 @@ void func_8023F43C_de(char *obj) {
     self = ((ActorMotion *)obj)->actor;
     q->radius = radius;
     count = table->interactiveCount;
-    q->flag = shape->flags & 0x400;
+    q->flag = shape->dwFlags & 0x400;
     q->bottom = ((ActorMotion *)obj)->bottom;
     q->top = q->bottom + ((ActorMotion *)obj)->height;
     q->bottom1 = ((ActorMotion *)obj)->start.y + q->bottom;
@@ -236,12 +236,12 @@ void func_8023F43C_de(char *obj) {
         case 2:
             break;
         case 1:
-            if ((shape->flags & 1) && ((LevelActor *)entity)->active == 0) {
+            if ((shape->dwFlags & 1) && ((LevelActor *)entity)->active == 0) {
                 continue;
             }
             break;
         case 3:
-            if (!(shape->flags & 0x20)) {
+            if (!(shape->dwFlags & 0x20)) {
                 continue;
             }
             break;
@@ -255,9 +255,9 @@ void func_8023F644_de(ActorMotion *motion, f32 *queryStorage)
   f32 *new_var;
   f32 temp;
   f32 value;
-  s32 *new_var2;
+  u32 *new_var2;
   f32 bound;
-  new_var2 = &motion->surface->flags;
+  new_var2 = &motion->surface->dwFlags;
   ((Query *)queryStorage)->radius = motion->radius;
   ((Query *)queryStorage)->flag = (*new_var2) & 0x400;
   temp = motion->bottom;

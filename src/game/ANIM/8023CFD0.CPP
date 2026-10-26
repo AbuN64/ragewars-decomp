@@ -23,7 +23,7 @@ extern void func_80243920_de(void *arg0);
 
 
 s32 func_8023D158_de(ActorMotion *object) {
-    s32 *flags = &object->surface->flags;
+    u32 *flags = &object->surface->dwFlags;
     f32 magnitude;
     f32 minimumX;
     f32 maximumX;

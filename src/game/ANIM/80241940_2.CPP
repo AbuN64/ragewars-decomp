@@ -15,8 +15,8 @@ extern f32 InstHdr_GetActorBaseOffset(CollisionProbe *);
 
 extern f32 func_80241728_de(SurfaceHit *, f32, f32);
 
-struct MotionSurface;
-extern s32 Unicol_SweepActorMotion(CollisionProbe *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
+struct CCollisionInfo2_t;
+extern s32 Unicol_SweepActorMotion(CollisionProbe *, CVector3, CVector3, struct CCollisionInfo2_t *, f32, f32, f32, f32);
 
 extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 

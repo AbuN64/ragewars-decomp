@@ -1,9 +1,9 @@
 #ifndef COMMON_MOTION_STEP_H
 #define COMMON_MOTION_STEP_H
 #include "TYPES.H"
+#include "COMMON/CCOLLISIONINFO2_T.H"
 #include "COMMON/SHAREDPLAYER.H"
 /* Contact positions and interpolation outputs used by the movement solver. */
-typedef struct MotionSurface { s32 flags; s8 enabled; s8 slopeKind; s8 materialKind; u8 reserved7; f32 gravity; f32 response; f32 friction; f32 drag; f32 materialResponse; } MotionSurface;
 /* Contact result beginning at ActorMotion.collisionState; also passed separately
  * by the actor collision resolver to the contact flag helpers. */
 typedef struct MotionContactResult {
@@ -30,7 +30,7 @@ typedef struct ActorMotion {
     s32 verticalTicks;
     s32 transitionActive;
     u32 flags;
-    MotionSurface *surface;
+    CCollisionInfo2_t *surface;
     CVector3 start;
     CVector3 end;
     CVector3 velocity;

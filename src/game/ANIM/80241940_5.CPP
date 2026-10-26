@@ -25,7 +25,7 @@ void PolyCol_TraceMeshTriangle(ContextB0 *mesh,CollisionVertex **points) {
     CVector3 edgeB;
     Polygon polygon;
     CVector3 offset;
-    MotionSurface *surface;
+    CCollisionInfo2_t *surface;
     CapsuleSweep *ray;
     s32 i;
     s32 byteOffset;
@@ -65,14 +65,14 @@ void PolyCol_TraceMeshTriangle(ContextB0 *mesh,CollisionVertex **points) {
     polygon.flags=mesh->flags;
     switch(mesh->kind) {
     case 1: case 7: case 8: {
-        if(!(surface->flags&8)) return;
-        if(surface->flags&0x80000) return;
+        if(!(surface->dwFlags&8)) return;
+        if(surface->dwFlags&0x80000) return;
         polygon.type=6;
-        polygon.response=surface->materialResponse;
+        polygon.response=surface->WaterFriction;
         polygon.kind=7;
         func_8023E8D4_de(ray,&polygon,1);
         polygon.type=5;
-        polygon.kind=(surface->flags&0x100000)?7:surface->materialKind;
+        polygon.kind=(surface->dwFlags&0x100000)?7:surface->GroundBehavior;
         if(polygon.normal.y!=0.0f) shift=ray->height;
         else shift=0.0f;
         i=0;
@@ -89,14 +89,14 @@ void PolyCol_TraceMeshTriangle(ContextB0 *mesh,CollisionVertex **points) {
 flatFace:
             polygon.type=((ray->flags&0x1000) || !(mesh->flags&0x10000000)) ? 3 : 4;
             polygon.response=0.0f;
-            polygon.kind=surface->slopeKind;
+            polygon.kind=surface->WallBehavior;
             goto dispatch;
         }
         sideType=2;
         if(!(polygon.normal.y<0.0f)) sideType=1;
         polygon.type=sideType;
-        polygon.response=surface->friction;
-        polygon.kind=surface->materialKind;
+        polygon.response=surface->GroundFriction;
+        polygon.kind=surface->GroundBehavior;
         break;
     }
     }

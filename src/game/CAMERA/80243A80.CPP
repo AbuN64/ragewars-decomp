@@ -404,7 +404,7 @@ s32 func_802444A4_de(char *actorStorage, CVector3 startPosition, CVector3 desire
     ((struct ActorMotion *)(out))->candidateIndex = 0;
     ((struct ActorMotion *)(out))->orientationActive = 0;
     ((struct ActorMotion *)(out))->iteration = 0;
-    ((struct ActorMotion *)(out))->surface = (MotionSurface *)motionSettings;
+    ((struct ActorMotion *)(out))->surface = (CCollisionInfo2_t *)motionSettings;
     ((struct ActorMotion *)(out))->queryFlags = 0;
     ((struct ActorMotion *)(out))->horizontalTicks = 0;
     ((struct ActorMotion *)(out))->verticalTicks = 0;
@@ -430,7 +430,7 @@ s32 func_802444A4_de(char *actorStorage, CVector3 startPosition, CVector3 desire
     return count;
 }
 
-s32 func_802446E0_de(char *actorStorage, CVector3 startPosition, CVector3 endPosition, MotionSurface *sweepSurfaceSettings,
+s32 func_802446E0_de(char *actorStorage, CVector3 startPosition, CVector3 endPosition, CCollisionInfo2_t *sweepSurfaceSettings,
                    f32 sweepExtent) {
     extern s32 func_8023D380_de(void *actorStorage);
     Work80244494 work;
@@ -509,7 +509,7 @@ s32 func_802446E0_de(char *actorStorage, CVector3 startPosition, CVector3 endPos
     return count;
 }
 
-s32 Unicol_SweepActorMotion(char *actorStorage, CVector3 startPosition, CVector3 endPosition, MotionSurface *motionSettings,
+s32 Unicol_SweepActorMotion(char *actorStorage, CVector3 startPosition, CVector3 endPosition, CCollisionInfo2_t *motionSettings,
                   CVector3 motionExtents, f32 baseOffset) {
     extern s32 func_8023D380_de(void *actorStorage);
     Work80244494 work;

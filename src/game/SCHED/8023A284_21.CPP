@@ -12,13 +12,13 @@ void func_8023CFE0_de(ActorMotion *motion) {
     f32 gravity;
     f32 dt;
     f32 halfDt;
-    MotionSurface *surface;
+    CCollisionInfo2_t *surface;
 
     if (motion->orientationActive != 0) {
         dt = D_800D2988 * D_800C3620_de;
         surface = motion->surface;
         if (dt != 0.0f) {
-            drag = surface->drag;
+            drag = surface->AirFriction;
             drag *= D_800C3624_de;
             limit = D_800C3628_de / dt;
             if (!(drag <= limit)) {
@@ -26,7 +26,7 @@ void func_8023CFE0_de(ActorMotion *motion) {
             }
             gravity = 0.0f;
             if (motion->candidateIndex != 0) {
-                gravity = surface->gravity;
+                gravity = surface->GravityAcceleration;
             }
             if (drag == 0.0f) {
                 acceleration.x = 0.0f;

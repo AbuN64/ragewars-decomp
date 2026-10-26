@@ -24,7 +24,7 @@ s32 func_8023D380_de(ActorMotion *a) {
     CVector3 projected;
     CVector3 gravity;
     CVector3 rotation;
-    MotionSurface *settings;
+    CCollisionInfo2_t *settings;
     CVector3 *delta;
     f32 step, highest, d, scale, damping, fraction;
     s32 i, active, type, timer;
@@ -56,7 +56,7 @@ s32 func_8023D380_de(ActorMotion *a) {
     type=a->mode;
     if(type==6) { if(a->grounded==0)a->mode=3;else a->mode=2; }
     type=a->mode;
-    if(type==3 && settings->response<D_800C3640_de && a->distance<D_800C3644_de) {
+    if(type==3 && settings->BounceReturnEnergy<D_800C3640_de && a->distance<D_800C3644_de) {
         s32 response=1;
         if(!(a->velocity.x*a->velocity.x+a->velocity.z*a->velocity.z<D_800C3648_de))response=2;
         a->mode=response;
@@ -94,7 +94,7 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
     case 3: {
         f32 remainingFraction;
         if(a->orientationActive!=0) {
-            GraphU64_ReflectVector(&rotation,&a->orientation,&a->normal,settings->response);
+            GraphU64_ReflectVector(&rotation,&a->orientation,&a->normal,settings->BounceReturnEnergy);
             a->projectedOrientation=rotation;
             damping=a->damping;
             GraphU64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3670_de-damping);
@@ -105,7 +105,7 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
         remainingFraction=scale-remainingFraction;
         GraphU64_ScaleVector(&remaining,&a->velocity,remainingFraction);
         delta=&slide;
-        GraphU64_ReflectVector(delta,&remaining,&a->normal,settings->response);
+        GraphU64_ReflectVector(delta,&remaining,&a->normal,settings->BounceReturnEnergy);
         GraphU64_ScaleVector(delta,delta,scale-a->damping);
         GraphU64_AddVec3(&a->position,&a->interpolated,delta);
         return 1;
