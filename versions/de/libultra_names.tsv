@@ -102,6 +102,18 @@ vram	name	basis
 0x802B5400	alMainBusPull	machine code
 0x802BA310	osViGetCurrentFramebuffer	machine code
 0x802BA6B0	osViSetMode	machine code
+0x802AE030	__alCSeqGetTrackEvent	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/cseq.c; reviewed source correspondence (func_802AE030_de)
+0x802B3F10	alFxNew	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/drvrNew.c; reviewed source correspondence (func_802B3F10_de)
+0x802B57F0	alFxPull	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/reverb.c; reviewed source correspondence (func_802B57F0_de)
+0x802B5570	alResamplePull	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/resample.c; reviewed source correspondence (func_802B5570_de)
+0x802B4F68	_getRate	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/env.c; reviewed source correspondence (func_802B4F68_de)
+0x802B51B8	alEnvmixerParam	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/env.c; reviewed source correspondence (func_802B51B8_de)
+0x802B53B4	_ldexpf	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/env.c; reviewed source correspondence (func_802B53B4_de)
+0x802B3770	alSynNew	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/synthesizer.c; reviewed source correspondence (func_802B3770_de)
+0x802B3A44	alAudioFrame	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/synthesizer.c; reviewed source correspondence (func_802B3A44_de)
+0x802BE0D0	alAdpcmPull	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/load.c; reviewed source correspondence (func_802BE0D0_de)
+0x802BEAA4	alLoadParam	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/load.c; reviewed source correspondence (func_802BEAA4_de)
+0x802BEC34	_decodeChunk	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/audio/load.c; reviewed source correspondence (func_802BEC34_de)
 0x802BD378	proutSprintf	machine code
 0x802BE030	lldiv	machine code
 0x802BB2A0	osRecvMesg	machine code
