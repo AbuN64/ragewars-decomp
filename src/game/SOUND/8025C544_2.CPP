@@ -17,7 +17,6 @@ static inline short slot_id(Slots *slots, int index) {
 
 extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
-extern s32 func_8025E0F4_de(s32 arg0);
 
 int func_8025C824_de(RecordRecAt4V4 *pool, short index) {
     SlotRecAtB4V2 *entry;

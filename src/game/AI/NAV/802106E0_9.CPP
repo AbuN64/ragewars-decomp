@@ -1345,7 +1345,6 @@ INCLUDE_ASM("span_1000", Nav_UpdateVisiblePursuitDe);
 
 #if defined(VERSION_DE)
 #include "COMMON/SELF.H"
-extern void Nav_ResetBehaviorState(void *);
 extern s32 GraphU64_NextRandom(void);
 
 void Nav_InitPursuitStrafeDe(CloseAttackActor *actor) {

@@ -26,7 +26,6 @@ extern f32 D_800C2CE0_de[2];
 /** Start the round-end sequence once no menu or transition is active and any player is flagged. */
 extern int Cinema_IsSequenceInWindow(void);
 
-extern int Cinema_IsSequenceActive(void);
 
 extern struct Shape_func_8021A2D4_de_2 D_801427FC;
 

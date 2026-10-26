@@ -222,8 +222,6 @@ extern void Player_LoadActorModel(void *actor);
 extern void func_8022BB80_de(void *);
 extern void Achieve_ApplyProfileWeaponUnlocks(void *);
 extern void func_802AA6D0_de(void *, s32, s32);
-extern void func_8021A78C_de(void *);
-extern s32 Cinema_IsSequenceActive(void);
 extern void func_802458D8_de(void);
 extern void func_802458C4_de(void);
 extern void Link_DispatchObjectLinks(void *, s32, void *);

@@ -22,7 +22,6 @@
 
 
 extern struct Record_func_804347CC_de D_80102B00[];
-extern s32 func_804351E4_de();
 extern void PAKInterface_RelabelSlotRows(s32);
 
 s32 func_8043497C_de(s32 player) {

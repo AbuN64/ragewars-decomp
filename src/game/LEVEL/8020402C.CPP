@@ -48,7 +48,6 @@ INCLUDE_ASM("span_1000", func_80204030_de);
 #define LV_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 extern s32 D_auto_800D70DC;
 extern u8 *Player_FindTransientPlayer(u8 *);
-extern f32 Math_Sqrtf(f32);
 extern void func_8022E17C_de(void *, void *, s32);
 extern void Camera_PostScreenMessage(u8 *, void *, s32);
 /* 182/182 words in us-rev1 and de (local j targets aside); not exact on the ROM path only because the switch jump table (D_auto_rodata_func_8020402C_us_rev1_800C6B48) still lives in a separate rodata file; us/eu/eu-x differ in prologue size */

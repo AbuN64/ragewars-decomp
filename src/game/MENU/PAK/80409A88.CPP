@@ -778,7 +778,6 @@ s32 func_8040B410_de(struct FieldRecAt14 *field) {
     return 0;
 }
 
-extern void Defs_FormatIntegerValue(char *buffer, const char *format, s32 value);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/PAK_MENU.H"

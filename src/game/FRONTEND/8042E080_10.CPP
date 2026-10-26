@@ -28,13 +28,8 @@ extern void MarkMenuEventHandled(void);
 extern s32 SmpOverlay_GetSlotNodeId(s32, s32);
 extern void SmpOverlay_SetSlotValue(s32, s32, s32);
 extern void PAKInterface_RefreshPlayerPanel(s32);
-extern void func_80434D70_de(s32);
 extern s32 func_80435384_de(s32, s32 *);
 extern s32 PAKInterface_SavePlayerRecords(s32);
-extern s32 func_80435128_de(s32);
-extern void func_8043599C_de(s32, s32, s32);
-extern void func_804356BC_de(s32);
-extern void func_8043577C_de(s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 
 extern s32 Pak_DeleteNote(s32, s32);

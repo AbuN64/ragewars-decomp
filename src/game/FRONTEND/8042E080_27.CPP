@@ -153,7 +153,6 @@ block_24:
 
 /* Handles Controller Pak menu confirmations and returns focus to an enabled widget for the active channel. */
 extern s32 func_80299B4C_de(void);
-extern s32 XMath_AbsoluteInteger(s32);
 extern void MarkMenuEventHandled(void);
 extern s32 Frontend_ListHasFlag100(void *);
 extern void SmpOverlay_ShowSlotNode(s32, s32, void *);

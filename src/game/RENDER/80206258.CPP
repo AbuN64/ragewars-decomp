@@ -54,7 +54,6 @@ extern void *func_8022A8F0_de(struct Context *arg0);
 
 extern void func_8024B6A0_de(void *a, s32 c, s32 flag);
 
-extern void func_802472F0_de(void *arg0);
 
 extern s32 Cinema_GetSequenceRequest(void);
 

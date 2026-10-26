@@ -56,15 +56,11 @@ extern void func_8043C2A4_de(struct MenuRules *);
 
 extern void Frontend_SetWidgetFlag08(void *, s32);
 
-extern void Items_ResetActorPools(void *, s32);
 
-extern void func_804499B0_de(void *, s32, s32);
 
-extern void Scene_LoadLevelResources(void *, s32, s32);
 
 extern void MarkMenuEventHandled();
 
-extern void func_80298368_de(s32);
 
 /* Runs the screen D_800E5830 each frame until stage 1 of D_800E28E0: on its first frame it marks
    the word at 0x90, passes 0x272 to func_802991D4_de, or 0x273 when func_8040EBD0_de
@@ -79,7 +75,6 @@ extern void *Frontend_FindWidgetByResourceId(void *, s32);
 
 extern s32 Frontend_ListHasFlag100(void *);
 
-extern void func_802991D4_de(s32);
 
 extern void Tsmos_ActivateControllerState();
 
@@ -211,8 +206,6 @@ enum { MSG_BACK = 0x273, MSG_HIDE = 0x272, MSG_LEAVE = 0x277 };
 enum { MSG_BACK = 0x278, MSG_HIDE = 0x277, MSG_LEAVE = 0x27C };
 #endif
 extern void func_80434FB4_de(s32);
-extern void func_8042E988_de(s32);
-extern s32 func_80299A08_de(void);
 extern void func_8043C278_de(void *);
 
 s32 func_80438D94_de(void) {

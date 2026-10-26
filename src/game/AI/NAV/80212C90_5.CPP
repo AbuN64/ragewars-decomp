@@ -9,7 +9,6 @@
 
 #if defined(VERSION_DE)
 #include "COMMON/SELF.H"
-extern void Nav_ResetBehaviorState(void *);
 
 void Nav_ResetTargetFollowStateDe(void *object) {
     CloseAttackActor *actor = object;

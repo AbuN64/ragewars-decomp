@@ -57,7 +57,6 @@ s32 GraphU64_NextRandom(void);
 
 extern MenuResourceWidget *Cache_AllocateMemory(int);
 
-extern int GetMenuScreenOwner(void);
 
 
 

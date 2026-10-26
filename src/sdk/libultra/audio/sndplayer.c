@@ -61,7 +61,6 @@ extern s32 func_802B003C_de(ALEventQueue *, ALEvent *);
 
                 /* alEvtqNextEvent */
 /* _sndpVoiceHandler (func_802B2BBC_de); the cartridge stores the handler by its 0x002B7C8C address. */
-extern s32 D_002B2BBC(void *);
 
 
 extern s32 func_802B3000_de(ALSynth_func_802B3000_de *, ALVoice_s *, ALVoiceConfig_s *);

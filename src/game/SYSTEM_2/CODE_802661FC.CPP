@@ -223,11 +223,9 @@ extern const f32 D_800C43E0_de[16];
 /* Forwards the actor, event value and three-component input with a zero final flag. */
 extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 extern f32 func_8024BEDC_de(void *);
-extern f32 GameObject_GetActorHeight(void *);
 extern s32 func_8024B06C_de(void *, CVector3, Shield *);
 extern f32 GraphU64_GetPointDistance(CVector3 *, CVector3 *);
 extern f32 Events_GetActorSizeScale(u8 *);
-extern f32 Math_Sqrtf(f32);
 extern void Barrel_FillDamagePacket(CDamageInfo *, void *, s32, f32, s32, Shield *);
 extern s32 Player_GetMaxHealth(void *);
 struct CallbackState114;
@@ -523,7 +521,6 @@ extern f32 func_8024BEDC_de(void *arg0);
 
 
 
-extern f32 GameObject_GetActorHeight(void *arg0);
 
 /* Decides whether one actor may affect another: always when the override D_801462E5 is set; never for actors of the same kind or a target lacking flags 0x310000, nor, while D_8013B290 is set, when neither actor carries 0x300000; otherwise only when the target is in state 1, 4, 7 or 11. */
 
@@ -664,8 +661,6 @@ s32 Events_CanAffectActor(char *actor, char *target)
 
 #include "TYPES.H"
 #include "COMMON/AIPROFILE.H"
-extern f32 Math_Sqrtf(f32);
-extern void GraphU64_SubtractVectors(void *, void *, void *);
 typedef struct PushStrength { u16 value; u16 pad; } PushStrength;
 typedef struct PushScale { s8 value; u8 pad[3]; } PushScale;
 extern f32 D_800C4434_de;

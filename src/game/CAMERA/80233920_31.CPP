@@ -29,7 +29,6 @@ extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 extern void *Scene_GetModelRecordByIndexPointer(Shared_World *, u16 *);
 
-extern s32 Cinema_IsSequenceInWindow(void);
 
 extern f32 Region_GetPolygonHeight(s32 arg0, f32 arg1, f32 arg2);
 

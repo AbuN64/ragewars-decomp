@@ -30,7 +30,6 @@ void Libsn_InitializeHostMemoryAccess(void) {
 
 extern int Libgultra_TrwGetSr(void);
 extern void Libgultra_TrwSetSr(int);
-extern s32 Libsn_ReadPortWord(s32);
 extern void Libsn_SpinDelay(s32);
 extern void Libsn_TransferHostMemoryRanges(u32);
 extern void Libsn_CopyHostBlockToCart(void);

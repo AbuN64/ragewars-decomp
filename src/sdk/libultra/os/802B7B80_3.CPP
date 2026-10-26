@@ -11,7 +11,6 @@
 #if defined(VERSION_US)
 
 
-extern u32 func_802B8C88_de(void *arg0);
 
 
 u32 func_802B7D44_us(Triple *motorContext) {

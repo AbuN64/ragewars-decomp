@@ -7,7 +7,6 @@
 
 #include "COMMON/MATH_HELPERS.H"
 extern f32 Math_Sqrtf(f32);
-extern f32 GraphU64_ArcCos(f32);
 /** Heading of a direction in the XZ plane: acos of the dominant axis, clamped to [-1, 1]. */
 f32 GraphU64_GetHorizontalAngle(CVector3 *direction) {
     f32 x = direction->x;

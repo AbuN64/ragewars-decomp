@@ -32,7 +32,6 @@ extern void OvlScene_SetSelection(void *arg0, s32 arg1, s32 arg2);
 
 extern s32 D_800CD730;
 
-extern s32 Control_IsSnapshotActive(void);
 extern void Control_RestoreActorSnapshot(void);
 extern void func_80293334_de(void *session, s32 count, s32 force_active);
 

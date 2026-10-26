@@ -51,7 +51,6 @@ extern void Nav_UpdatePlayerSteering(void *arg0);
 extern void Nav_SelectPlayerState(void *arg0);
 
 
-extern void *Player_FindPlayerWithMarker(char *);
 
 extern f32 Nav_DistanceToNode(s32 *, s32);
 

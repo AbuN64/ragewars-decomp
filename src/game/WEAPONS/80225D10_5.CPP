@@ -55,7 +55,6 @@ extern int Player_GetPlayerIndex(Root *,ObjRecAt16E0V1 *);
 
 
 
-extern s32 Cinema_IsSequenceInWindow(void);
 
 extern s32 Pak_CountLiveNodes(GameSession *);
 

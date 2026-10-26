@@ -13,8 +13,6 @@
 extern s32 Pak_GetStatus(s32);
 extern s32 Pak_FindNoteByName(void *, s32, s32 *);
 extern s32 func_80434638_de(s32, s32);
-extern s32 func_80435128_de(s32);
-extern s32 func_80435184_de(s32);
 extern s32 GraphU64_NextRandom(void);
 extern void PAKInterface_RefreshPlayerPanel(s32);
 void func_80433610_de(s32 player)

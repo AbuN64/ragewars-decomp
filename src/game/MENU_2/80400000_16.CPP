@@ -43,18 +43,15 @@ f32 Menu_EvaluateTrackScalar(f32 t) {
 #include "COMMON/WORLD.H"
 extern f32 D_800DCB40[];
 extern u8 D_80100030[];
-extern s32 Cinema_IsSequenceInWindow(void);
 extern void func_802453D4_de(void);
 extern CVector3 Menu_GetTrackEyePosition(f32);
 extern CVector3 Menu_GetTrackTargetPosition(f32);
-extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void GraphU64_IdentityMatrix(void *);
 extern void GraphU64_MatrixFromEulerXYZ(void *, f32, f32, f32);
 extern void GraphU64_TransformPoint(void *, CVector3 *, CVector3 *);
 extern void Scene_RequestVisibleGridSections(void *);
 extern s32 Unicol_MoveActorWithCollision(SharedTrackObject *, f32, f32, f32, void *);
 extern void Scene_UnlockActiveSectionResources(void *);
-extern f32 GraphU64_GetHorizontalAngle(CVector3 *);
 extern f32 GraphU64_GetVerticalAngle(CVector3 *);
 /* Follow the keyframe camera and keep the collision result across world cleanup. */
 void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {

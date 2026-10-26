@@ -24,7 +24,6 @@ extern void func_80402BA0_de(void);
 
 /* Reports whether Cinema_IsSequenceInWindow accepts the globally selected record and bit 2 of its word at 0x74
    is set. */
-extern int Cinema_IsSequenceInWindow(void);
 
 /* Returns the globally selected record's word at 0xAC while its word at 0x38 is non-zero, and 0
    otherwise. */

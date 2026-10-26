@@ -19,7 +19,6 @@ extern void func_80449E18_de(CPlayerPool *);
 extern void func_80253908_de(s32 unusedHeap);
 extern s32 func_80254284_de(s32,void **,s32,void *);
 extern void **func_80254408_de(s32,s32,s32,s32,s32,s32,void *);
-extern void Scene_LoadLevelResources(void *,s32,s32);
 extern int SetN64_GetDirectoryEntry(int *,int,int);
 extern s32 SetN64_LocatePackSection(s32,s32,s32,s32 *);
 extern s32 D_00285160;
