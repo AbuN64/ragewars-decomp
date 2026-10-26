@@ -1,4 +1,5 @@
 #include "COMMON/VIEWFLAGS.H"
+#include "COMMON/EXTERNS_8.H"
 #include "COMMON/LONE/D_800C32DC_de.H"
 #include "COMMON/LONE/D_800CD8D0.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -11,7 +12,6 @@
 #include "TYPES.H"
 #include "CAMERA/80233920_31.H"
 #include "RESMGR/802A0888.H"
-extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Produces a random shake offset for an object: looks up the object's model entry in D_8011FE88 and
  * zeroes the offset when there is none; otherwise eases the horizontal and vertical shake amplitudes

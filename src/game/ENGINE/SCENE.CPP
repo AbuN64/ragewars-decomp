@@ -1,4 +1,5 @@
 #include "TYPES.H"
+#include "COMMON/EXTERNS_8.H"
 #include "COMMON/INTEGERSTATEB0.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/UNUSED.H"
@@ -46,7 +47,6 @@
 #include "AI/NAV/80208000_8.H"
 #include "OVLGAME/8044E2B8.H"
 #include "SCHED/8023A284_29.H"
-extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Unknown data types are explicit unresolved contracts, never guessed s32. */
 
