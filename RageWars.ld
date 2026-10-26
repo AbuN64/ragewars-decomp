@@ -27804,7 +27804,6 @@ SECTIONS
         src/game/MENU/ITEMS/8043D1DC_21.CPP.o(.text);
         src/sdk/libultra/pfs/80447BB0_21.CPP.o(.text);
         src/sdk/libultra/pfs/80447BB0_8.CPP.o(.data);
-        src/game/MENU/ITEMS/8043D1DC_22.CPP.o(.text);
         src/game/OVLGAME/80447BB0_23.CPP.o(.text);
         src/game/OVLGAME/80447BB0_24.CPP.o(.text);
         src/game/OVLGAME/80447BB0_25.CPP.o(.text);
@@ -28281,7 +28280,6 @@ SECTIONS
         src/sdk/libultra/pfs/80447BB0_20.CPP.o(.text);
         src/sdk/libultra/pfs/80447BB0_21.CPP.o(.text);
         src/game/DATA/MAINCODE/80447BB0_28.CPP.o(.data);
-        src/game/MENU/ITEMS/8042FBEC_31.CPP.o(.text);
         src/game/OVLGAME/80447BB0_23.CPP.o(.text);
         src/game/OVLGAME/80447BB0_24.CPP.o(.text);
         src/game/OVLGAME/80447BB0_25.CPP.o(.text);
@@ -28760,7 +28758,6 @@ SECTIONS
         src/sdk/libultra/pfs/80447BB0_20.CPP.o(.text);
         src/sdk/libultra/pfs/80447BB0_21.CPP.o(.text);
         src/game/OVLGAME/80447BB0_3.CPP.o(.data);
-        src/game/MENU_2/80406A88_27.CPP.o(.text);
         src/game/OVLGAME/80447BB0_23.CPP.o(.text);
         src/game/OVLGAME/80447BB0_24.CPP.o(.text);
         src/game/OVLGAME/80447BB0_25.CPP.o(.text);
@@ -29209,7 +29206,6 @@ SECTIONS
         src/sdk/libultra/pfs/80447BB0_21.CPP.o(.text);
         src/game/MENU/EVENT/8040C640_15.CPP.o(.text);
         src/game/MENU/EVENT/8040C640_15.CPP.o(.data);
-        src/game/MENU/EVENT/8040C640_16.CPP.o(.text);
         src/game/OVLGAME/80447BB0_23.CPP.o(.text);
         src/game/OVLGAME/80447BB0_24.CPP.o(.text);
         src/game/OVLGAME/80447BB0_25.CPP.o(.text);
@@ -30138,7 +30134,6 @@ SECTIONS
         src/game/MENU/ITEMS/8043D1DC_21.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/pfs/80447BB0_21.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/pfs/80447BB0_8.CPP.o(.bss .sbss COMMON);
-        src/game/MENU/ITEMS/8043D1DC_22.CPP.o(.bss .sbss COMMON);
         src/game/OVLGAME/80447BB0_23.CPP.o(.bss .sbss COMMON);
         src/game/OVLGAME/80447BB0_24.CPP.o(.bss .sbss COMMON);
         src/game/OVLGAME/80447BB0_25.CPP.o(.bss .sbss COMMON);
@@ -30599,7 +30594,6 @@ SECTIONS
         src/sdk/libultra/pfs/80447BB0_20.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/pfs/80447BB0_21.CPP.o(.bss .sbss COMMON);
         src/game/DATA/MAINCODE/80447BB0_28.CPP.o(.bss .sbss COMMON);
-        src/game/MENU/ITEMS/8042FBEC_31.CPP.o(.bss .sbss COMMON);
         src/game/OVLGAME/80447BB0_23.CPP.o(.bss .sbss COMMON);
         src/game/OVLGAME/80447BB0_24.CPP.o(.bss .sbss COMMON);
         src/game/OVLGAME/80447BB0_25.CPP.o(.bss .sbss COMMON);
@@ -31064,7 +31058,6 @@ SECTIONS
         src/sdk/libultra/pfs/80447BB0_20.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/pfs/80447BB0_21.CPP.o(.bss .sbss COMMON);
         src/game/OVLGAME/80447BB0_3.CPP.o(.bss .sbss COMMON);
-        src/game/MENU_2/80406A88_27.CPP.o(.bss .sbss COMMON);
         src/game/OVLGAME/80447BB0_23.CPP.o(.bss .sbss COMMON);
         src/game/OVLGAME/80447BB0_24.CPP.o(.bss .sbss COMMON);
         src/game/OVLGAME/80447BB0_25.CPP.o(.bss .sbss COMMON);
@@ -31485,7 +31478,6 @@ SECTIONS
         src/sdk/libultra/pfs/80447BB0_20.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/pfs/80447BB0_21.CPP.o(.bss .sbss COMMON);
         src/game/MENU/EVENT/8040C640_15.CPP.o(.bss .sbss COMMON);
-        src/game/MENU/EVENT/8040C640_16.CPP.o(.bss .sbss COMMON);
         src/game/OVLGAME/80447BB0_23.CPP.o(.bss .sbss COMMON);
         src/game/OVLGAME/80447BB0_24.CPP.o(.bss .sbss COMMON);
         src/game/OVLGAME/80447BB0_25.CPP.o(.bss .sbss COMMON);

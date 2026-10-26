@@ -6,10 +6,74 @@
 #include "COMMON/TRIPLE.H"
 #include "RENDER_2/802192C0_3.H"
 
-#if defined(VERSION_US_REV1)
 extern f32 D_800C73E4;
-extern u8 D_0024B52C_us_rev1[], D_0022E0A0_us_rev1[], D_00219A40_us_rev1[], D_0022E250_us_rev1[];
-extern u8 D_0021A2D4_us_rev1[], D_0022F5D0_us_rev1[];
+/* ROM offsets of the actor part tables: each version names its own copies. */
+#if defined(VERSION_US_REV1)
+extern u8 D_0024B52C_us_rev1[];
+#define ACTORPART_T28C D_0024B52C_us_rev1
+extern u8 D_0022E0A0_us_rev1[];
+#define ACTORPART_T290 D_0022E0A0_us_rev1
+extern u8 D_00219A40_us_rev1[];
+#define ACTORPART_T280 D_00219A40_us_rev1
+extern u8 D_0022E250_us_rev1[];
+#define ACTORPART_T288 D_0022E250_us_rev1
+extern u8 D_0021A2D4_us_rev1[];
+#define ACTORPART_ACTION D_0021A2D4_us_rev1
+extern u8 D_0022F5D0_us_rev1[];
+#define ACTORPART_PART1_T28C D_0022F5D0_us_rev1
+#elif defined(VERSION_US)
+extern u8 D_0024B51C_us[];
+#define ACTORPART_T28C D_0024B51C_us
+extern u8 D_0022E084_us[];
+#define ACTORPART_T290 D_0022E084_us
+extern u8 D_00219A40_us[];
+#define ACTORPART_T280 D_00219A40_us
+extern u8 D_0022E234_us[];
+#define ACTORPART_T288 D_0022E234_us
+extern u8 D_0021A2D4_us[];
+#define ACTORPART_ACTION D_0021A2D4_us
+extern u8 D_0022F5C0_us[];
+#define ACTORPART_PART1_T28C D_0022F5C0_us
+#elif defined(VERSION_DE)
+extern u8 D_0024B53C_de[];
+#define ACTORPART_T28C D_0024B53C_de
+extern u8 D_0022E0B0_de[];
+#define ACTORPART_T290 D_0022E0B0_de
+extern u8 D_00219A40_de[];
+#define ACTORPART_T280 D_00219A40_de
+extern u8 D_0022E260_de[];
+#define ACTORPART_T288 D_0022E260_de
+extern u8 D_0021A2D4_de[];
+#define ACTORPART_ACTION D_0021A2D4_de
+extern u8 D_0022F5E0_de[];
+#define ACTORPART_PART1_T28C D_0022F5E0_de
+#elif defined(VERSION_EU)
+extern u8 D_0024B54C_eu[];
+#define ACTORPART_T28C D_0024B54C_eu
+extern u8 D_0022E1A8_eu[];
+#define ACTORPART_T290 D_0022E1A8_eu
+extern u8 D_00219AD8_eu[];
+#define ACTORPART_T280 D_00219AD8_eu
+extern u8 D_0022E358_eu[];
+#define ACTORPART_T288 D_0022E358_eu
+extern u8 D_0021A36C_eu[];
+#define ACTORPART_ACTION D_0021A36C_eu
+extern u8 D_0022F6E0_eu[];
+#define ACTORPART_PART1_T28C D_0022F6E0_eu
+#elif defined(VERSION_EU_X)
+extern u8 D_0024B57C_eu_x[];
+#define ACTORPART_T28C D_0024B57C_eu_x
+extern u8 D_0022E1D4_eu_x[];
+#define ACTORPART_T290 D_0022E1D4_eu_x
+extern u8 D_00219AD8_eu_x[];
+#define ACTORPART_T280 D_00219AD8_eu_x
+extern u8 D_0022E384_eu_x[];
+#define ACTORPART_T288 D_0022E384_eu_x
+extern u8 D_0021A36C_eu_x[];
+#define ACTORPART_ACTION D_0021A36C_eu_x
+extern u8 D_0022F710_eu_x[];
+#define ACTORPART_PART1_T28C D_0022F710_eu_x
+#endif
 extern void func_8024B3A8_de(void *, void *, void *, s32);
 extern void Nav_RequestActorState(void *, void *, s32);
 extern void Weapon_ApplyWeaponSwitch(void *, void *);
@@ -50,24 +114,24 @@ void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s
     if (D_80145088.settings.local == 0) {
         record->part[0].flags = flags | 0x10000000;
     }
-    record->part[0].table28C = D_0024B52C_us_rev1;
-    record->part[0].table290 = D_0022E0A0_us_rev1;
-    record->part[0].table280 = D_00219A40_us_rev1;
-    record->part[0].table288 = D_0022E250_us_rev1;
+    record->part[0].table28C = ACTORPART_T28C;
+    record->part[0].table290 = ACTORPART_T290;
+    record->part[0].table280 = ACTORPART_T280;
+    record->part[0].table288 = ACTORPART_T288;
     if (D_80145088.settings.local != 0) {
-        record->part[0].action = D_0021A2D4_us_rev1;
+        record->part[0].action = ACTORPART_ACTION;
     }
     record->part[1].owner = actor;
     func_8024B3A8_de((actor + 0x2E8), rec, (void *)mode, 0);
-    record->part[1].table28C = D_0022F5D0_us_rev1;
+    record->part[1].table28C = ACTORPART_PART1_T28C;
     record->part[1].marker = -1;
     record->part[1].flags |= 0x200000;
     record->part[1].x = D_800C73E4;
     record->part[1].y = D_800C73E4;
     record->part[1].z = D_800C73E4;
     record->part[1].owner = actor;
-    record->part[1].table280 = D_00219A40_us_rev1;
-    record->part[1].table288 = D_0022E250_us_rev1;
+    record->part[1].table280 = ACTORPART_T280;
+    record->part[1].table288 = ACTORPART_T288;
     record->selection = -1;
     record->part[1].flags &= 0xFFFEFFFF;
     Nav_RequestActorState((actor + 0x2E8), (actor + 0x458), 0);
@@ -82,7 +146,6 @@ void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s
     view = record->part[0].view;
     view->flags &= ~4;
 }
-#endif
 
 #if defined(NON_MATCHING) || defined(VERSION_US_REV1) || defined(VERSION_US) || defined(VERSION_DE)
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
