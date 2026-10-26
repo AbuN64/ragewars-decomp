@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU)
-#define func_802B6658_eu_x func_802B661C_eu
+#define alSavePull func_802B661C_eu
 #include "COMMON/EXTERNS_2.H"
 #include "abi.h"
 #include "COMMON/AUDIO_CALLBACKS.H"
@@ -10,7 +10,7 @@
 #include "sdk/libultra/audio/save.H"
 #include "TYPES.H"
 #include "AUDIO_3/802BFD40.H"
-Acmd *func_802B6658_eu_x(ALSave_u1 *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
+Acmd *alSavePull(ALSave_u1 *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
     ALFilter_u1 *source = filter->filter.source;

@@ -10,7 +10,7 @@
 #include "AUDIO_3/802BFD40.H"
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1) || defined(VERSION_DE)
-Acmd *func_802B6658_eu_x(ALSave_u1 *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
+Acmd *alSavePull(ALSave_u1 *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
     ALFilter_u1 *source = filter->filter.source;
