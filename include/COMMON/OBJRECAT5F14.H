@@ -1,6 +1,6 @@
 #ifndef COMMON_OBJRECAT5F14_H
 #define COMMON_OBJRECAT5F14_H
-struct SceneEffectPool;
+struct CAnimPool;
 #ifndef SPAN_1000_CODE_802624A0_H
 #define SPAN_1000_CODE_802624A0_H
 #include "TYPES.H"
@@ -35,7 +35,7 @@ struct EffectDesc {
     u16 variant;
 };
 
-extern SceneEffect *AnimPool_SpawnDescribedSceneEffect(struct SceneEffectPool *scene, EffectDesc *desc);
+extern SceneEffect *AnimPool_SpawnDescribedSceneEffect(struct CAnimPool *scene, EffectDesc *desc);
 
 extern void *AnimPool_AcquireSceneEffect(s32 arg0, s32 *arg1);
 
@@ -169,7 +169,7 @@ typedef struct Six Six;
 
 
 /* Shared object layout established by effect-pool consumers. */
-struct SceneEffectPool {
+struct CAnimPool {
     SceneEffect DynAnims[0x20]; /* 0x0000 */
     IntrusiveList FreeList; /* 0x5F00 */
     IntrusiveList UsedList; /* 0x5F14 */

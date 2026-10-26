@@ -266,7 +266,7 @@ extern s32 func_8024E1B4_de(void *actor);
 extern void func_8024B8C4_de(void *actor);
 extern f32 Sky_GetDistanceTo(void *camera, CVector3 *position);
 extern s32 VisData_TestBoxAgainstFrustum(void *planes, void *bounds);
-extern void AnimPool_UpdateSceneEffects(struct SceneEffectPool *scene, void *world);
+extern void AnimPool_UpdateSceneEffects(struct CAnimPool *scene, void *world);
 
 typedef struct SceneVisibilitySettings {
     u32 mask;
@@ -402,7 +402,7 @@ void Scene_UpdateActorVisibility(Shared_World *world) {
             actor->flags &= ~0x200;
         }
     }
-    AnimPool_UpdateSceneEffects((struct SceneEffectPool *)world->effectPool, world);
+    AnimPool_UpdateSceneEffects((struct CAnimPool *)world->effectPool, world);
     world->kind1Cursor++;
     if (world->kind1Cursor >= world->kind1Count) {
         world->kind1Cursor = 0;

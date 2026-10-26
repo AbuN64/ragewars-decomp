@@ -52,7 +52,7 @@ void func_80254990_de(void *unused, struct IntrusiveList *resource) {
 
 void *func_80254A28_de(s32 unused0, s32 requestFlags) {
     extern void **D_80100564;
-    struct ResourceCacheEntry *cacheEntry;
+    struct CMemEntry *cacheEntry;
     struct Pool *pool = (struct Pool *)&D_8010513C;
 
     if (pool->count == 0) {

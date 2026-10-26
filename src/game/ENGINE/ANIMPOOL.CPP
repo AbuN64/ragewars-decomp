@@ -22,7 +22,7 @@ extern s32 Scene_FindModelIdIndex(struct Shared_World *, s32);
 extern s32 Scene_GetModelIdAtIndex(void *, s32);
 extern void func_802466A0_de(SceneEffect *, s32, s32, s32, s32, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
 extern void func_8024B2D0_de(SceneEffect *);
-static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref) {
+static inline SceneEffect *take_effect(struct CAnimPool *scene, s32 *ref) {
     SceneEffect *effect;
     if (g_world.visibilityEnabled == 0 && (unsigned int)scene->UsedList.count >= 3) {
         return 0;
@@ -38,7 +38,7 @@ static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref) 
     }
     return effect;
 }
-static inline SceneEffect *spawn_effect(struct SceneEffectPool *scene, s32 id, s32 variant, s32 count, s32 owner, CVector3 position,
+static inline SceneEffect *spawn_effect(struct CAnimPool *scene, s32 id, s32 variant, s32 count, s32 owner, CVector3 position,
                                    f32 scale, CVector3 direction, CVector3 color, s32 *ref) {
     SceneEffect *effect;
     if (D_800CD764_de == 0) {
@@ -64,7 +64,7 @@ static inline SceneEffect *spawn_effect(struct SceneEffectPool *scene, s32 id, s
     func_8024B2D0_de(effect);
     return effect;
 }
-SceneEffect *AnimPool_SpawnAnimationObject(struct SceneEffectPool *scene, s32 variant, s32 owner, CVector3 position, f32 scale, CVector3 direction,
+SceneEffect *AnimPool_SpawnAnimationObject(struct CAnimPool *scene, s32 variant, s32 owner, CVector3 position, f32 scale, CVector3 direction,
                       CVector3 color, s32 *ref) {
     SceneEffect *effect;
     s32 id;

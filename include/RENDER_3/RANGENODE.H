@@ -1,6 +1,6 @@
 #ifndef RENDER_3_RANGENODE_H
 #define RENDER_3_RANGENODE_H
-struct SceneEffectPool;
+struct CAnimPool;
 #ifndef SPAN_1000_CODE_80268160_H
 #define SPAN_1000_CODE_80268160_H
 #include "TYPES.H"
@@ -152,7 +152,7 @@ extern void Events_ClearActorEventBit(void *arg0, s32 arg1, s32 arg2, s32 arg3, 
 extern void Events_SetActorEffectMode(LevelActor *arg0, int arg1, int arg2, Blast blast);
 
 typedef CVector3 Vec3f;
-extern struct SceneEffect *AnimPool_SpawnAnimationObject(struct SceneEffectPool *scene, s32 variant, s32 owner, CVector3 position, f32 scale, CVector3 direction,
+extern struct SceneEffect *AnimPool_SpawnAnimationObject(struct CAnimPool *scene, s32 variant, s32 owner, CVector3 position, f32 scale, CVector3 direction,
                       CVector3 color, s32 *ref);
 
 #endif

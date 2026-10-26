@@ -21,11 +21,11 @@
  * conflicting types, which only the MIPS compiler accepted. */
 extern struct Shape_func_8021A2D4_de_2 D_80105180;
 extern OSMesgQueue D_80101140;
-extern ResourceCacheEntry **D_80100564;
+extern CMemEntry **D_80100564;
 extern s32 func_80255B2C_de(void *, s32);
 extern s32 D_801051A0[3];
 extern char D_80100570;
-extern ResourceCacheEntry *D_80100568;
+extern CMemEntry *D_80100568;
 #include "COMMON/EXTERNS_11.H"
 
 #include "COMMON/ENTRYRECAT18V3.H"
@@ -45,8 +45,8 @@ struct ResLink {
     s32 unk28;
 };
 struct ResMgr {
-    struct ResourceCacheEntry *nodes;
-    struct ResourceCacheEntry **slots;
+    struct CMemEntry *nodes;
+    struct CMemEntry **slots;
     s32 unk8;
     struct ResLink *links;
     IntrusiveList entries;
@@ -100,8 +100,8 @@ void Cache_InitializeResourceCache(s32 unused, s32 count) {
     if (Defs_GetMemorySize() > 0x400000) {
         D_800CB6E0 *= 2;
     }
-    D_80100560.nodes = (struct ResourceCacheEntry *)func_80255920_de(&D_801051A0, D_800CB6E0 * sizeof(struct ResourceCacheEntry));
-    D_80100560.slots = (struct ResourceCacheEntry **)func_80255920_de(&D_801051A0, D_800CB6E0 * sizeof(void *));
+    D_80100560.nodes = (struct CMemEntry *)func_80255920_de(&D_801051A0, D_800CB6E0 * sizeof(struct CMemEntry));
+    D_80100560.slots = (struct CMemEntry **)func_80255920_de(&D_801051A0, D_800CB6E0 * sizeof(void *));
     D_80100560.links = (struct ResLink *)func_80255920_de(&D_801051A0, D_800CB6E0 * 0x2C);
     osCreateMesgQueue(&D_80100560.lock, D_80100560.lockSlot, 1);
     D_80100560.unk44 = 0;
@@ -110,7 +110,7 @@ void Cache_InitializeResourceCache(s32 unused, s32 count) {
     func_80255CA0_de(&D_80100560.recent, 0x20, 0x24);
     D_80100560.count = 0;
     for (i = 0; i < D_800CB6E0; i++) {
-        struct ResourceCacheEntry *node = &D_80100560.nodes[i];
+        struct CMemEntry *node = &D_80100560.nodes[i];
         node->flags = 0;
         D_80100560.slots[i] = node;
         D_80100560.count += 1;
@@ -164,10 +164,10 @@ void Cache_InitializeResourceCache(s32 unused, s32 count) {
 
 
 
-extern void func_80254DD0_de(void *, ResourceCacheEntry *);
+extern void func_80254DD0_de(void *, CMemEntry *);
 
-static inline ResourceCacheEntry *find_stale(ResourceCacheEntry **recent) {
-    ResourceCacheEntry *node;
+static inline CMemEntry *find_stale(CMemEntry **recent) {
+    CMemEntry *node;
 
     for (node = D_80104574; node != 0; node = node->next) {
         if (!(node->flags & 0x702)) {
@@ -197,7 +197,7 @@ static inline ResourceCacheEntry *find_stale(ResourceCacheEntry **recent) {
 
 
 static inline void *pool_alloc(s32 arg1) {
-    struct ResourceCacheEntry *cacheEntry;
+    struct CMemEntry *cacheEntry;
 
     if (((struct Pool *)&D_8010513C)->count == 0) {
         return 0;
@@ -292,8 +292,8 @@ block_7:
 }
 
 s32 func_80251328_de(s32 unused0, s32 unused1, s32 keep_recent) {
-    ResourceCacheEntry *recent;
-    ResourceCacheEntry *node;
+    CMemEntry *recent;
+    CMemEntry *node;
     s32 result;
 
     recent = 0;
@@ -316,7 +316,7 @@ s32 func_80251328_de(s32 unused0, s32 unused1, s32 keep_recent) {
         } else {
             node->flags = 0;
         }
-        *(ResourceCacheEntry **)(D_8010513C * 4 + (char *)D_80100564) = node;
+        *(CMemEntry **)(D_8010513C * 4 + (char *)D_80100564) = node;
         D_8010513C++;
         return result;
     }

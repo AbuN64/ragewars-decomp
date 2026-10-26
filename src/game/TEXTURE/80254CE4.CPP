@@ -79,10 +79,10 @@ void func_80254DD0_de(void *unused0, void *resourceCacheEntry) {
     void *ownerRequest;
     void *requestToRecycle;
 
-    ownerRequest = ((ResourceCacheEntry *)resourceCacheEntry)->owner;
+    ownerRequest = ((CMemEntry *)resourceCacheEntry)->owner;
     if (ownerRequest != 0) {
         func_80255488_de(((ResourceLoadRequest *)ownerRequest)->key);
-        requestToRecycle = ((ResourceCacheEntry *)resourceCacheEntry)->owner;
+        requestToRecycle = ((CMemEntry *)resourceCacheEntry)->owner;
         func_80255ED8_de(&D_8010110C, requestToRecycle);
         ((ResourceLoadRequest *)requestToRecycle)->flags = 0;
         func_80255CB8_de(&D_801010F8, requestToRecycle);

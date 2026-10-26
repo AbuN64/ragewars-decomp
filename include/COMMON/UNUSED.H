@@ -1590,7 +1590,7 @@ extern s32 D_80101134[];
 extern s32 D_800CBC1C;
 
 
-extern ResourceCacheEntry *D_80104574;
+extern CMemEntry *D_80104574;
 
 extern char g_pakSingleSaveBlockName[];
 

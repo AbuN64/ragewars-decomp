@@ -32,7 +32,7 @@ extern void func_802466A0_de(SceneEffect *, s32, s32, s32, s32, s32, s32, f32, C
 
 extern void func_8024B2D0_de(SceneEffect *);
 
-static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref) {
+static inline SceneEffect *take_effect(struct CAnimPool *scene, s32 *ref) {
     SceneEffect *effect;
 
     if (g_world.visibilityEnabled == 0 && (unsigned int)scene->UsedList.count >= 3) {
@@ -50,7 +50,7 @@ static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref) 
     return effect;
 }
 
-static inline SceneEffect *spawn_effect(struct SceneEffectPool *scene, s32 id, s32 variant, s32 count, s32 owner, CVector3 position,
+static inline SceneEffect *spawn_effect(struct CAnimPool *scene, s32 id, s32 variant, s32 count, s32 owner, CVector3 position,
                                    f32 scale, CVector3 direction, CVector3 color, s32 *ref) {
     SceneEffect *effect;
 
@@ -78,7 +78,7 @@ static inline SceneEffect *spawn_effect(struct SceneEffectPool *scene, s32 id, s
     return effect;
 }
 
-SceneEffect *AnimPool_SpawnDescribedSceneEffect(struct SceneEffectPool *scene, EffectDesc *desc) {
+SceneEffect *AnimPool_SpawnDescribedSceneEffect(struct CAnimPool *scene, EffectDesc *desc) {
     return spawn_effect(scene, desc->id, desc->variant, desc->count, desc->owner, desc->position, desc->scale,
                         desc->direction, desc->color, 0);
 }

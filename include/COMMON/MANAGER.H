@@ -22,15 +22,15 @@ typedef struct ObjectState13 ObjectState13;
 
 
 
-struct ResourceCacheEntry;
-struct ResourceCacheEntry {
+struct CMemEntry;
+struct CMemEntry {
     s32 resource;
     s32 size;
     s32 references;
     s32 flags;
     s32 lastUsed;
     s32 owner;
-    struct ResourceCacheEntry *next;
+    struct CMemEntry *next;
     s32 key;
     s32 pending;
     s32 callback;
@@ -102,8 +102,8 @@ struct Request_func_802524B0_de {
 
 struct OwnerStaticInstanceDrawGeometryVariant;
 
-struct ResourceCacheEntry;
-typedef struct ResourceCacheEntry ResourceCacheEntry;
+struct CMemEntry;
+typedef struct CMemEntry CMemEntry;
 
 
 struct CachedResource;
