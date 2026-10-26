@@ -58,10 +58,6 @@ INCLUDE_ASM("ovl_80400000", Menu_InitPlayerSettingsScreen);
 
 extern struct StateMenuSelectPlayerSettingsEntry *D_800E5690;
 extern s8 D_80102C89[];
-extern u8 D_800FEC8A[];
-extern u8 D_800FEC8B[];
-extern u8 D_800FEC8C[];
-extern u8 D_800FEC8D[];
 extern void SmpButton_SelectListEntry(void *, s32);
 extern void SmpSlider_SetSliderItem(void *, s32);
 

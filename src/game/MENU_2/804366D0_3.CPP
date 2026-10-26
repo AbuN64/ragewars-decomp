@@ -17,13 +17,9 @@ extern struct MenuStepState *D_800E5690;
 extern struct StateMenuSelectAlternatePlayerSettingsEntry *D_800E5694;
 
 
-extern u8 D_800FEC8A[];
 
-extern u8 D_800FEC8B[];
 
-extern u8 D_800FEC8C[];
 
-extern u8 D_800FEC8D[];
 
 
 extern void SmpButton_SelectListEntry(void *, s32);
