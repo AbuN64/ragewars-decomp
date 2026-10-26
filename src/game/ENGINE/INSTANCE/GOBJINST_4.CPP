@@ -1,4 +1,5 @@
 #include "COMMON/WORLD.H"
+#include "RSP/8026E1F8_5.H"
 #include "COMMON/OBJECTLINKS180_2.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
@@ -68,7 +69,6 @@ extern void Events_DeliverContactEffect(char *, char *, u16, s32, CVector3, stru
 
 
 
-extern f32 D_80115DEC;
 
 extern void MultiplyQuaternions(CQuatern *, CQuatern *, CQuatern *);
 
@@ -99,7 +99,6 @@ extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern f32 Math_Sqrtf(f32);
 
 extern s32 *func_8024BFD4_de(char *arg0, s8 arg1);
 

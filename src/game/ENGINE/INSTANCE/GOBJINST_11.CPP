@@ -1,4 +1,5 @@
 #include "COMMON/MODEL_RENDER.H"
+#include "RSP/8026E1F8_5.H"
 #include "COMMON/LISTHEADER.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/VECTOR4F.H"
@@ -21,7 +22,6 @@ extern s32 GraphU64_LimitVectorLength(f32 *arg0, f32 arg1);
 extern void TranslateMatrix(char *, f32, f32, f32);
 extern void SwapMatrixUpForward(void *);
 
-extern f32 D_80115DEC;
 
 void func_8024B53C_de(void *levelActor) {
     CQuatern trig;
@@ -201,7 +201,6 @@ void func_8024B8EC_de(void *actor, void *unusedShadowContext, void *renderSettin
     }
 }
 
-extern s32 D_800D297C;
 extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 extern void func_8024C454_de(void *arg0, void *arg1);
 
