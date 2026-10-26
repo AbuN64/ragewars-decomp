@@ -136,7 +136,7 @@ ALMicroTime func_802AEC20_de(ALSeqPlayer *node)
             vs = (ALVoiceState *)voice->clientPrivate;
             if (vs->flags)
                 func_802B1C34_de(seqp, vs);
-            func_802B156C_de((List802B663C *)seqp, voice);
+            Audio_ReleaseSequenceVoice((List802B663C *)seqp, voice);
             break;
         case 6: /* AL_SEQP_ENV_EVT */
             voice = seqp->nextEvent.msg.vol.voice;
@@ -203,7 +203,7 @@ ALMicroTime func_802AEC20_de(ALSeqPlayer *node)
                     alSynFreeVoice(seqp->drvr, &vs->voice);
                     if (vs->flags)
                         func_802B1C34_de(seqp, vs);
-                    func_802B156C_de((List802B663C *)seqp, &vs->voice);
+                    Audio_ReleaseSequenceVoice((List802B663C *)seqp, &vs->voice);
                 }
                 seqp->state = 0;
             }

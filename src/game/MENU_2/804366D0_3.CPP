@@ -14,7 +14,7 @@ extern struct MenuStepState *D_800E5690;
 /* Stores arg0 into its own D_80146417 entry and pushes the five settings of slot arg0 of the D_80102C89 table into the objects D_800E5694 holds through func_8041AD10_de and SmpSlider_SetSliderItem. Adapted from func_804366B8_de with D_800E5690 changed to D_800E5694 and the object fields moved down by eight bytes. */
 
 
-extern struct State_func_804368F8_de *D_800E5694;
+extern struct StateMenuSelectAlternatePlayerSettingsEntry *D_800E5694;
 
 
 extern u8 D_800FEC8A[];
@@ -41,8 +41,8 @@ extern s32 SmpSlider_GetSliderItem(void *);
 
 
 /* Acts on the mode of the menu held first in the block D_800E5690 points to: in mode 4 it calls
-   MarkMenuEventHandled and then either func_80298368_de with the block's word at 0x20, when that is not -1,
-   or func_802998A8_de. Returns zero. */
+   MarkMenuEventHandled and then either SmXlate_SwitchScreen with the block's word at 0x20, when that is not -1,
+   or Smos_ReturnToPreviousScreen. Returns zero. */
 
 
 
@@ -52,13 +52,13 @@ extern s32 SmpSlider_GetTransitionMode(void *);
 
 
 
-/* Calls MarkMenuEventHandled; when func_80299A08_de reports 0x60, passes the word at offset 0x28 of the object
-   D_800E5690 points to to func_804367A8_de, then sets its word at 0x20 to -1 and calls SmpSlider_SetTransitionMode
+/* Calls MarkMenuEventHandled; when Smos_GetFocusedElementId reports 0x60, passes the word at offset 0x28 of the object
+   D_800E5690 points to to Menu_StorePlayerSettingsEntry, then sets its word at 0x20 to -1 and calls SmpSlider_SetTransitionMode
    on its first word with 2. Returns zero. */
 
 
 
-void func_804368F8_de(s32 entryIndex) {
+void Menu_SelectAlternatePlayerSettingsEntry(s32 entryIndex) {
     u8 *slot = &D_801462C8.playerSettings[entryIndex].slot;
 
     *slot = entryIndex;
@@ -69,7 +69,7 @@ void func_804368F8_de(s32 entryIndex) {
     SmpButton_SelectListEntry(D_800E5694->e, D_800FEC8D[entryIndex * 0x190]);
 }
 
-void func_804369E8_de(s32 arg0) {
+void Menu_StoreAlternatePlayerSettingsEntry(s32 arg0) {
     u8 *config;
 
     config = g_playerSettings + arg0 * 0x96;
@@ -87,7 +87,7 @@ void func_804369E8_de(s32 arg0) {
     config[0x82] = D_800FEC8D[arg0 * 0x190];
 }
 
-s32 func_80436B38_de(void) {
+s32 Menu_FreePlayerSettingsScreen(void) {
     Cache_FreeMemory(D_800E5690);
     D_800E5690 = 0;
     return 0;
@@ -99,16 +99,16 @@ s32 func_80436B68_de(void) {
     return 0;
 }
 
-s32 func_80436B70_de(void) {
+s32 Menu_UpdatePlayerSettingsExit(void) {
     switch (SmpSlider_GetTransitionMode(D_800E5690->menu)) {
     case 3:
         break;
     case 4:
         MarkMenuEventHandled();
         if (D_800E5690->value != -1) {
-            func_80298368_de(D_800E5690->value);
+            SmXlate_SwitchScreen(D_800E5690->value);
         } else {
-            func_802998A8_de();
+            Smos_ReturnToPreviousScreen();
         }
         break;
     }
@@ -121,17 +121,17 @@ s32 func_80436BEC_de(void) {
     return 0;
 }
 
-s32 func_80436BF4_de(void) {
+s32 Menu_ConfirmPlayerSettingsEntry(void) {
     struct MenuStepState *state;
     MarkMenuEventHandled();
 #if defined(VERSION_DE)
-    if (func_80299A08_de() == 0x5E) {
+    if (Smos_GetFocusedElementId() == 0x5E) {
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    if (func_80299A08_de() == 0x60) {
+    if (Smos_GetFocusedElementId() == 0x60) {
 #elif defined(VERSION_EU_X)
-    if (func_80299A08_de() == 0x64) {
+    if (Smos_GetFocusedElementId() == 0x64) {
 #endif
-        func_804367A8_de(D_800E5690->item);
+        Menu_StorePlayerSettingsEntry(D_800E5690->item);
         state = D_800E5690;
         state->value = -1;
         SmpSlider_SetTransitionMode(state->menu, 2);

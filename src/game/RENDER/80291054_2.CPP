@@ -95,7 +95,7 @@ extern s32 D_80142C30;
 #if defined(VERSION_US_REV1)
 extern char D_002953FC_us_rev1[];
 extern char D_801053E8_us_rev1[];
-extern void func_802B155C_us_rev1(void *segment);
+extern void Libultra_SetDebugLinkCallback(void *segment);
 #endif
 extern void osViBlack(s32 active);
 extern void Items_ResetPlayers(void *players);
@@ -160,7 +160,7 @@ void SetN64_RunGameLoop(GameSession *session) {
     D_80142C30 = 0;
     SetN64_InitFrameRing((RenderState *)session);
 #if defined(VERSION_US_REV1)
-    func_802B155C_us_rev1(D_002953FC_us_rev1);
+    Libultra_SetDebugLinkCallback(D_002953FC_us_rev1);
     osSendMesg((OSMesgQueue *)D_801053E8_us_rev1, (OSMesg)0xBEEFDEAD, 0);
 #endif
     for (i = 0; i < D_800DE850; i++) {
@@ -179,7 +179,7 @@ void SetN64_RunGameLoop(GameSession *session) {
     Ovlgame_ResetHudCharTables(&session->hud);
     Pak_AllocateScratchBuffer();
     Tsmos_InitFrontendOnce();
-    func_80298368_de(2);
+    SmXlate_SwitchScreen(2);
     D_801428D8 = 3;
     D_8014AD94 = 0;
     D_8014ADA0 = 0;

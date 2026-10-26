@@ -19,15 +19,15 @@ struct EntryRecAt8V4 {
     s32 index;
 };
 
-struct Record_func_80403458_de;
-typedef struct Record_func_80403458_de Record_func_80403458_de;
+struct RecordMenuProcessTrackItemEvents;
+typedef struct RecordMenuProcessTrackItemEvents RecordMenuProcessTrackItemEvents;
 
 
 struct EntryRecAt4V2;
 typedef struct EntryRecAt4V2 EntryRecAt4V2;
 
 
-extern void func_80402BA0_de();
+extern void Menu_DrawTrackOverlay();
 
 struct ItemRecAt12;
 typedef struct ItemRecAt12 ItemRecAt12;
@@ -62,14 +62,14 @@ struct EntryRecAt18V5 {
     char name[0x34];
 };
 
-extern void func_80403B2C_de(u8 *bits, s32 n, s32 set);
+extern void Menu_AssignBit(u8 *bits, s32 n, s32 set);
 
 extern float D_800DCC7C_de;
 
 struct Tables;
 typedef struct Tables Tables;
 
-extern u32 func_80403B0C_de(u8 *bits, s32 index);
+extern u32 Menu_TestBit(u8 *bits, s32 index);
 
 
 struct Spline;
@@ -99,7 +99,7 @@ struct Spline {
     SplineNode nodes[1];
 };
 
-extern f32 func_804039C4_de(void);
+extern f32 Menu_GetTrackDuration(void);
 
 struct EntryRecAt8V4;
 typedef struct EntryRecAt8V4 EntryRecAt8V4;
@@ -121,10 +121,10 @@ extern void *func_80403B04_de(void *value);
 
 
 
-extern void *func_80403ADC_de(void);
+extern void *Menu_GetTrackCues(void);
 
-struct Record_func_80403458_de;
-struct Record_func_80403458_de {
+struct RecordMenuProcessTrackItemEvents;
+struct RecordMenuProcessTrackItemEvents {
     char pad0[4];
     s32 resource;
     char pad8[0x14];
@@ -137,7 +137,7 @@ struct Record_func_80403458_de {
     s32 pending;
 };
 
-extern s32 func_80403A64_de();
+extern s32 Menu_GetTrackClipCount();
 
 
 
@@ -156,5 +156,5 @@ typedef union SplineSourceCursor { SplineSource *header; CVector3 *points; f32 *
 
 extern char D_0040067C[];
 extern char s_cinemaText[];
-extern void *func_80403A90_de(s32);
+extern void *Menu_GetTrackClip(s32);
 #endif

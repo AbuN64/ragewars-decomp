@@ -8,7 +8,7 @@
 
 
 
-extern void func_802998A8_de();
+extern void Smos_ReturnToPreviousScreen();
 
 
 typedef s32 (*MenuElementHandler)(void *element, s32 event, s32 arg2, s32 arg3, s32 arg4);
@@ -40,7 +40,7 @@ typedef struct Element Element;
 
 
 
-extern void func_80298ECC_de();
+extern void Smos_PopScreen();
 
 /* Draw providers use several existing aggregate declarations. Registration
  * stores these functions; this type does not prescribe a call signature. */
@@ -55,7 +55,7 @@ struct MenuHandlerEntry {
 };
 
 
-extern void func_80299778_de(s32 id, s32 mode, MenuElementHandler handler);
+extern void Smos_SetKindEventHandler(s32 id, s32 mode, MenuElementHandler handler);
 
 
 extern int D_80146E18;
@@ -68,7 +68,7 @@ struct Entry_func_80298170_de {
 };
 struct Entry_func_80298170_de;
 
-extern void func_80299468_de();
+extern void Smos_DestroyScreenManager();
 
 struct Widget;
 struct Widget {
@@ -108,15 +108,15 @@ struct ScreenManager;
 
 struct ScreenManager;
 
-extern s32 func_802998E0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 Smos_InvokeKindEventHandler(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
-extern unsigned int func_802999E0_de(void);
+extern unsigned int Smos_GetScreenStackDepth(void);
 
 extern int D_80146E0C;
 
 
 
-extern void func_8029958C_de(s32 arg0);
+extern void Smos_SetPagingEnabled(s32 arg0);
 
 struct ScreenManager;
 
@@ -136,25 +136,25 @@ extern int s_smackFormat;
 
 
 struct Element;
-struct Entry_func_802991D4_de;
-struct Entry_func_802991D4_de {
+struct EntrySmosSetFocusedElement;
+struct EntrySmosSetFocusedElement {
     struct Element *primary;
     s32 owner;
     struct Element *focus;
     StreamBuffer data;
 };
-typedef struct Entry_func_802991D4_de ScreenEntry;
-struct Entry_func_802991D4_de;
+typedef struct EntrySmosSetFocusedElement ScreenEntry;
+struct EntrySmosSetFocusedElement;
 struct ScreenManager;
 
 
 
 extern int D_8014D09C;
 
-extern void func_80299874_de(s32 arg0, s32 arg1);
+extern void Smos_SetKindHandlerFlags(s32 arg0, s32 arg1);
 
 
-extern void func_80298FE8_de();
+extern void Smos_DrawScreenStack();
 
 struct ScreenManager;
 struct ScreenManager {

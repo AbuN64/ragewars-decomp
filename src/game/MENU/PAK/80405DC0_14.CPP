@@ -145,7 +145,7 @@ extern u16 D_8014D48C;
 
 extern s32 Pak_CountLineChars(void);
 
-s32 func_80408AC4_us(PakNoteTextEntry *item) {
+s32 Pak_UpdateScoreTitle(PakNoteTextEntry *item) {
     char *title;
     u8 *dest;
     s32 i;

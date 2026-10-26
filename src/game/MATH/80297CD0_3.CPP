@@ -32,7 +32,7 @@
  /* extern */
 
  /* extern */
-int func_80299CC4_de();
+int Smos_DrainResourceWork();
 
  /* extern */
 
@@ -58,7 +58,7 @@ extern void *Cache_AllocateMemory(s32 size);
 
 
 
-void func_80297DBC_de(void) {
+void SmSmngr_InitializeCurrentScreen(void) {
     s32 (*temp_v0)(s32);
     s32 current;
     s32 value, param;
@@ -76,14 +76,14 @@ void func_80297DBC_de(void) {
     StreamBufferFree(&D_8014D080->screens[current].data);
 }
 
-int func_80297EA4_de(int arg0) {
+int SmSmngr_DeactivateCurrentScreen(int arg0) {
  int index,event,result; ObjRecAtCV1 *item; int (*callback)(int,int,int,int);
  index=D_8014D080->current;
  if(index>=0 && D_8014D080->field530) {
  item=(ObjRecAtCV1 *)D_8014D080->screens[index].focus;
- if(item) func_802995D4_de(item->unkC,0x10,0,0,0);
+ if(item) Smos_RouteElementEvent(item->unkC,0x10,0,0,0);
  event=arg0;
- func_80299CC4_de();
+ Smos_DrainResourceWork();
  if(D_8014D080->current != -1) {
  callback=D_8014D080->callback;
  if(callback) {
@@ -102,7 +102,7 @@ int func_80297EA4_de(int arg0) {
  return 1;
 }
 
-void func_80297FA0_de(s32 screenCount, s32 value) {
+void SmSmngr_InitializeScreenManager(s32 screenCount, s32 value) {
     s32 i;
     f64 frames;
 
@@ -140,8 +140,8 @@ void func_80297FA0_de(s32 screenCount, s32 value) {
     D_8014D080->field534 = 0;
     D_8014D080->field538 = 0;
     D_8014D080->paging = 1;
-    func_802982C4_de(9, D_0040C5C0, D_0040C5C8, 1);
-    func_802982C4_de(11, D_004125A4, D_00412634, 1);
+    SmSmngr_RegisterElementHandlers(9, D_0040C5C0, D_0040C5C8, 1);
+    SmSmngr_RegisterElementHandlers(11, D_004125A4, D_00412634, 1);
 }
 
 Element *FindMenuElement(s32 id) {
@@ -171,7 +171,7 @@ Element *FindMenuElement(s32 id) {
 }
 
 /* Registers a widget handler under an identifier, reusing its slot or the first free one, or clears that slot when no handler is given. */
-void func_802982C4_de(s32 id, MenuElementHandler arg1, MenuDrawHandler draw_handler, s32 arg3) {
+void SmSmngr_RegisterElementHandlers(s32 id, MenuElementHandler arg1, MenuDrawHandler draw_handler, s32 arg3) {
     s32 slot = -1;
     s32 i;
 

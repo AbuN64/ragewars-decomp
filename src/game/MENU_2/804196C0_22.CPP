@@ -15,11 +15,11 @@
 
 
 /* Marks a menu's state word at offset 0x54 as 2 when XMath_AbsoluteInteger's value for the fifth argument
-   is below func_80299B4C_de's; then, when the fourth argument is one, stores the fourth argument as the state and scrolls down through SmpSlider_IncrementSliderItem. Returns zero. */
+   is below Smos_GetControlRepeatLimit's; then, when the fourth argument is one, stores the fourth argument as the state and scrolls down through SmpSlider_IncrementSliderItem. Returns zero. */
 
 
 
-extern s32 func_80299B4C_de();
+extern s32 Smos_GetControlRepeatLimit();
 
 extern void SmpSlider_IncrementSliderItem(struct func_8022FD9C_Record *);
 
@@ -54,7 +54,7 @@ s32 SmpList_ResetEntryCommands(struct CommandListMenu *commandListMenu) {
 }
 
 s32 SmpList_HandleIncrementInput(struct func_8022FD9C_Record *menu, void *second, void *third, s32 active, s32 fifth) {
-    if (XMath_AbsoluteInteger(fifth) < func_80299B4C_de()) {
+    if (XMath_AbsoluteInteger(fifth) < Smos_GetControlRepeatLimit()) {
         menu->activeState = 2;
     }
     if (active == 1) {
@@ -66,7 +66,7 @@ s32 SmpList_HandleIncrementInput(struct func_8022FD9C_Record *menu, void *second
 }
 
 s32 SmpList_HandleDecrementInput(struct func_8022FD9C_Record *menu, void *second, void *third, s32 active, s32 fifth) {
-    if (XMath_AbsoluteInteger(fifth) < func_80299B4C_de()) {
+    if (XMath_AbsoluteInteger(fifth) < Smos_GetControlRepeatLimit()) {
         menu->activeState = 2;
     }
     if (active == 1) {
@@ -111,5 +111,5 @@ s32 SmpList_DestroyController(void *arg0) {
 }
 
 void SmpList_RegisterListClass(void) {
-    func_802982C4_de(0xB64, D_0041AD7C, D_0041AE0C, 3);
+    SmSmngr_RegisterElementHandlers(0xB64, D_0041AD7C, D_0041AE0C, 3);
 }

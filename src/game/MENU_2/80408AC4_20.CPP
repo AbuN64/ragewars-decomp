@@ -7,7 +7,7 @@ extern void *Cache_AllocateMemory(s32);
 extern void *SmpOverlay_CreateOverlayNode(s32, s32);
 extern void SmpOverlay_ShowSlotById(s32, s32, s32);
 extern u8 *Frontend_FindWidgetByResourceId(s32, s32);
-extern s32 func_802999A0_de(s32);
+extern s32 Smos_GetPreviousScreenOwner(s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void *Frontend_CountUsedSlots(void);
 extern void Tsmos_ActivateControllerState(void);
@@ -25,7 +25,7 @@ s32 Menu_CreateGermanCourseOptions(s32 owner) {
     SmpOverlay_ShowSlotById(owner, 3, 0x383);
     widget = Frontend_FindWidgetByResourceId(owner, 0x385);
     widget[0x10] = 0x8C;
-    if (func_802999A0_de(0) == 0x16) {
+    if (Smos_GetPreviousScreenOwner(0) == 0x16) {
         Frontend_SetWidgetFlag08(widget, 0);
     }
     D_800E39C0->sel = 0;

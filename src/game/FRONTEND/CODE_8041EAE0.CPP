@@ -47,14 +47,14 @@ extern struct IntPair D_800E381C[][17];
 /* Advances the join screen's pulse timer by delta and sets byte 0x10 of node 0x392 under the edited request's root to 150 plus 100 times the sine of the timer over 300; returns zero. */
 
 
-/* Calls MarkMenuEventHandled, then passes -1 to Frontend_SetMenuChoiceResult when func_802999A0_de reports 0x16 for zero
-   and 0x15 otherwise, then calls func_802998A8_de. Returns zero. */
+/* Calls MarkMenuEventHandled, then passes -1 to Frontend_SetMenuChoiceResult when Smos_GetPreviousScreenOwner reports 0x16 for zero
+   and 0x15 otherwise, then calls Smos_ReturnToPreviousScreen. Returns zero. */
 extern void MarkMenuEventHandled();
 
 
 extern void Frontend_SetMenuChoiceResult(s32);
 
-extern void func_802998A8_de();
+extern void Smos_ReturnToPreviousScreen();
 
 /* Steps the selected menu item backwards and updates its display state. */
 
@@ -209,15 +209,15 @@ s32 Frontend_PulseJoinSelectionHighlight(void *unused0, void *unused1, s32 delta
 
 s32 Frontend_RequestJoinOptionsExit(void) {
     MarkMenuEventHandled();
-    Frontend_SetMenuChoiceResult(func_802999A0_de(0) == 0x16 ? -1 : 0x15);
-    func_802998A8_de();
+    Frontend_SetMenuChoiceResult(Smos_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0x15);
+    Smos_ReturnToPreviousScreen();
     return 0;
 }
 
 s32 Frontend_RequestJoinOptionsExitAlternate(void) {
     MarkMenuEventHandled();
-    Frontend_SetMenuChoiceResult(func_802999A0_de(0) == 0x16 ? -1 : 0x15);
-    func_802998A8_de();
+    Frontend_SetMenuChoiceResult(Smos_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0x15);
+    Smos_ReturnToPreviousScreen();
     return 0;
 }
 
@@ -297,7 +297,7 @@ s32 Frontend_CycleJoinRequestRank(s32 unused0, s32 unused1, u32 arg2, s32 arg3) 
         temp_a1 = D_800E39C0->selection * 0x1C;
         *(s32 *)((char *)D_8014DCF8 + temp_a1) = (*(s32 *)((char *)D_8014DCF8 + temp_a1) + 1) % 5;
         Frontend_UpdateJoinRequestDisplay(D_800E39C0->selection);
-        if (func_802999A0_de(0) == 0x16) {
+        if (Smos_GetPreviousScreenOwner(0) == 0x16) {
             selectedRow = D_800E39C0->selection;
             D_801462C8.playerSettings[7 - selectedRow].rank = *(D_8014DCFB + (selectedRow * 0x1C));
         }

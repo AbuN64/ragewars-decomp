@@ -24,8 +24,8 @@ s32 Pak_GetStatus(s32);
 s32 Pak_CountFreeNotes(s32, s32 *);
 int Pak_GetFreePages(int, int *);
 s32 Pak_GetNoteGameName(s32, s32, char **);
-s32 func_80405598_de(s32);
-void func_80405648_de(u8 *, u8 *, s32);
+s32 Pak_NeedsIdRepair(s32);
+void Pak_DecodeNoteText(u8 *, u8 *, s32);
 u32 Pak_BytesToPakPages(u32);
 s32 Pak_EvaluateSaveChannel(void *, s32, s32 *, s32 *);
 void * Pak_OpenDialog(void *, void *, s32, s32, s32);
@@ -88,7 +88,7 @@ static inline s32 Pak_HasNamedNote(char *name, s32 channel) {
     s32 index;
     for (index = 0; index < 16; index++) {
         Pak_GetNoteGameName(channel, index, &note);
-        func_80405648_de((u8 *)note, text, 16);
+        Pak_DecodeNoteText((u8 *)note, text, 16);
         if (XPlus_CompareStrings(text, name) == 0) {
             return 1;
         }
@@ -146,7 +146,7 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
             return;
         }
     }
-    error = func_80405598_de(D_800E28C8);
+    error = Pak_NeedsIdRepair(D_800E28C8);
     if (error == 0) {
         SetN64_CommitSessionInputs((s32) &D_8011FAC0);
         if ((menu->slot->unkB0 & 0x1000) && (D_800E28CC == 0)) {
@@ -272,7 +272,7 @@ extern char D_0044EA08[];
 extern void Pak_ProbeStatus(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
 extern s32 Pak_IsChannelReady(s32 ch);
-extern s32 func_80405598_de(s32 ch);
+extern s32 Pak_NeedsIdRepair(s32 ch);
 extern void Pak_CreateSaveSnapshot(ObjRecAt5DC *);
 extern u32 Pak_Crc32(void *data, u32 size, u32 seed);
 void *Pak_OpenDialog(void *, void *, s32, s32, s32);
@@ -323,7 +323,7 @@ void Pak_BeginSnapshotSave(Shared_PakMenu *menu) {
     D_80153784 = 1;
     if (Pak_IsChannelReady(channel)) {
         Pak_OpenDialog(player->unk5DC + 0x554, D_0044EA08, (s32)player, (s32)player->controller, 1);
-    } else if (func_80405598_de(channel)) {
+    } else if (Pak_NeedsIdRepair(channel)) {
         Pak_OpenDialog(&D_8014561C, &D_0044ED44, (s32)player, (s32)player->controller, (s32)D_0044E4D4);
     }
 }

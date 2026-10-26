@@ -40,7 +40,7 @@ extern void PAKInterface_ResolvePlayerPakState(s32);
 extern void PAKInterface_RelabelSlotRows(s32);
 
 
-extern s32 func_80405290_de(s32);
+extern s32 Pak_RepairId(s32);
 
 s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 arg2) {
     s32 answer;
@@ -993,7 +993,7 @@ s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 arg2) {
             break;
         case 0x2E0:
 #endif
-            if (func_80405290_de(p) != 0) {
+            if (Pak_RepairId(p) != 0) {
                 D_800E54A4->players[p].state = 0x1D;
                 PAKInterface_RefreshPlayerPanel(p);
             } else {

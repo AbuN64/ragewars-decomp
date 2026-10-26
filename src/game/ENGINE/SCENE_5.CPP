@@ -450,7 +450,7 @@ extern u8 *D_800D3A9C[];
 #else
 extern u8 *D_800D3A9C;
 #endif
-extern void func_804037D4_de(void), func_804030E0_de(s32);
+extern void func_804037D4_de(void), Menu_RequestTrackByKey(s32);
 extern s32 SetN64_IsModeThirteen(void);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern struct CCameraText_t *Sky_PostScaledScreenMessage(void *, void *, u8 *, f32);
@@ -468,7 +468,7 @@ void Scene_UpdateSelectionTransition(Shared_World *scene)
         break;
     case 1:
         if (scene->selectionTimer == entry->value) {
-            if (scene->selectionValues[1] == 999) { func_804037D4_de(); func_804030E0_de(400); }
+            if (scene->selectionValues[1] == 999) { func_804037D4_de(); Menu_RequestTrackByKey(400); }
             if (scene->selectionState == 0) scene->frozen = 0;
             else scene->frozen = 2;
             if (scene->selectionValues[1] < 0) { scene->selectionValues[1] = ~scene->selectionValues[1]; scene->selectionFlags = 0; }

@@ -71,7 +71,7 @@ static inline void func_804042F0_encode(u8 *dst, u8 *src, s32 n) {
     }
 }
 
-extern s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
+extern s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
                          u8 *company, u8 *code);
 
 s32 Pak_RefreshNotes(s32 ch) {
@@ -141,7 +141,7 @@ finish:
     return D_80153500[ch]==0 || D_80153500[ch]==-4;
 }
 
-void func_804041F0_de(void) {
+void Pak_ProbeAllChannels(void) {
     s32 channel;
     s32 present;
     PakRecord *record;
@@ -164,9 +164,9 @@ void func_804041F0_de(void) {
     Control_ReleasePakLock();
 }
 
-s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name, u8 *company, u8 *code);
+s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name, u8 *company, u8 *code);
 
-s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
+s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
                   u8 *company, u8 *code) {
     extern s32 func_80446580_de(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name);
     extern s32 Pak_UpdateStatus(s32 ch);

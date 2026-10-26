@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_EU))
-float func_802B2350(int floatHighBits) {
+float Menu_ExpandFloatHighWord(int floatHighBits) {
     int tmp = floatHighBits << 16;
     return *(float *)&tmp;
 }

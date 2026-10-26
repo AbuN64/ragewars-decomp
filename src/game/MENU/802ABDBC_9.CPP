@@ -248,7 +248,7 @@ void Player_IncrementLevelProgress(void *, int);
 
 
 s32 XPlus_NextRandomInteger(void);
-s32 func_804030E0_de(s32);
+s32 Menu_RequestTrackByKey(s32);
 typedef CPersistentPlayerData PlayerMenuData;
 extern PlayerMenuData D_80102B00[];
 typedef Shared_MenuBonusColumn MenuBonusColumn;
@@ -636,35 +636,35 @@ case_1398:
                 var_s4 = 1;
                 D_80102B14[arg0->unk5D4].value += 0xA;
                 arg0->unk5F8 = (u16) (arg0->unk5F8 + 0xA);
-                func_804030E0_de(0x1F5);
+                Menu_RequestTrackByKey(0x1F5);
                 goto command_done;
 case_13A0:
             temp_v0_4 = arg0->unk5D4 * 0x190;
             var_s4 = 1;
             D_800FEB15[arg0->unk5D4].value += 0x32;
             arg0->unk5F4 = (u16) (arg0->unk5F4 + 0x32);
-            func_804030E0_de(0x1F7);
+            Menu_RequestTrackByKey(0x1F7);
             goto command_done;
 case_139F:
             var_s4 = 1;
             temp_v0_3 = arg0->unk5D4 * 0x190;
             D_800FEB16[arg0->unk5D4].value += 0x32;
             arg0->unk5F6 = (u16) (arg0->unk5F6 + 0x32);
-            func_804030E0_de(0x1F6);
+            Menu_RequestTrackByKey(0x1F6);
             goto command_done;
 case_13C1:
             var_s4 = 1;
             temp_v0_5 = arg0->unk5D4 * 0x190;
             D_800FEB10[arg0->unk5D4].value += 0x500;
             arg0->unk5E4 = (s32) (arg0->unk5E4 + 0x500);
-            func_804030E0_de(0x1F8);
+            Menu_RequestTrackByKey(0x1F8);
             goto command_done;
 case_1389:
                 Player_IncrementLevelProgress(&D_80102B00[arg0->unk5D4], (s32) arg0->unk18->unkC);
 block_126:
                 var_s4 = 1;
                 Player_IncrementLevelProgress(&D_80102B00[arg0->unk5D4], (s32) arg0->unk18->unkC);
-                func_804030E0_de(0x1F4);
+                Menu_RequestTrackByKey(0x1F4);
                 goto command_done;
 case_13BD:
             temp_v1_4 = arg0->unk5D4 * 0x190;

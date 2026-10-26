@@ -21,7 +21,7 @@ extern s32 D_800E4680;
 
 extern void MarkMenuEventHandled(void);
 
-extern s32 func_80299A08_de(void);
+extern s32 Smos_GetFocusedElementId(void);
 
 extern void Player_InitializeProfile(char *);
 
@@ -63,7 +63,7 @@ extern s32 Control_IsControllerConnected(s32);
 extern void *SmpFade_CreateFadeWidget(s32, s32);
 extern void SmpSlider_DisableTransition(void *);
 extern MenuWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
-extern u32 func_802999F4_de(void);
+extern u32 Smos_GetBlockedScreenOwner(void);
 extern void Frontend_RequestScreenMode(s32);
 #if !defined(VERSION_EU_X)
 /* Builds the options screen: clears the per-player settings, retires bots that are no longer wanted, allocates
@@ -169,7 +169,7 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     D_800E4600->title = Frontend_FindWidgetByResourceId(menu, 0x43);
     D_800E4600->title->alpha = 0xF;
     D_800E4600->prompt = SmpFlicker_CreateFlickerWidget(0x44, 0x6E);
-    if (func_802999F4_de() == 2) {
+    if (Smos_GetBlockedScreenOwner() == 2) {
         D_800E4600->mode = 9;
     } else {
         D_800E4600->mode = 1;
@@ -187,7 +187,7 @@ s32 Frontend_ApplyModeChoice(void) {
     s32 i;
 
     MarkMenuEventHandled();
-    switch (func_80299A08_de()) {
+    switch (Smos_GetFocusedElementId()) {
     #if defined(VERSION_EU_X)
     case 0x47:
 #else

@@ -15,31 +15,31 @@ s32 func_80253908_de(s32);
 s32 func_80255228_de(s32 *);
 
 
-void StreamBufferRead(StreamBuffer *arg0, void *arg1, s32 arg2)
+void StreamBufferRead(StreamBuffer *readStream, void *destination, s32 byteCount)
 {
   const u8 *new_var;
   const u8 *new_var2;
-  new_var2 = arg0->data;
-  new_var2 = new_var2 + arg0->readPosition;
+  new_var2 = readStream->data;
+  new_var2 = new_var2 + readStream->readPosition;
   new_var = new_var2;
-  XPlus_CopyBytes(arg1, new_var, arg2);
-  arg0->readPosition = arg0->readPosition + arg2;
+  XPlus_CopyBytes(destination, new_var, byteCount);
+  readStream->readPosition = readStream->readPosition + byteCount;
 }
 
-void StreamBufferAllocate(StreamBuffer *streamBuffer, s32 arg1) {
+void StreamBufferAllocate(StreamBuffer *streamBuffer, s32 capacityBytes) {
     if (streamBuffer->data == 0) {
-        void *allocation = Cache_AllocateMemory(arg1);
+        void *allocation = Cache_AllocateMemory(capacityBytes);
         streamBuffer->data = allocation;
         streamBuffer->writePosition = 0;
-        streamBuffer->capacity = arg1;
+        streamBuffer->capacity = capacityBytes;
     }
 }
 
 void StreamBufferFree(StreamBuffer *streamBuffer) {
-    void *temp_a0;
-    temp_a0 = streamBuffer->data;
-    if (temp_a0 != 0) {
-        Cache_FreeMemory(temp_a0);
+    void *bufferData;
+    bufferData = streamBuffer->data;
+    if (bufferData != 0) {
+        Cache_FreeMemory(bufferData);
         streamBuffer->data = 0;
     }
     streamBuffer->writePosition = 0;
@@ -47,7 +47,7 @@ void StreamBufferFree(StreamBuffer *streamBuffer) {
     streamBuffer->capacity = 0;
 }
 
-void func_80299CC4_de(void) {
+void Smos_DrainResourceWork(void) {
     func_80255228_de(&D_80106248);
     func_80253908_de(0);
 }

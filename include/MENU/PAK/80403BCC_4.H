@@ -3,7 +3,7 @@
 #include "COMMON/ENTRYRECAT0V3.H"
 extern int Menu_RequestTrackBundle();
 extern f32 Menu_BlendCubic(f32 from, f32 to, f32 t);
-extern s32 func_80403BCC_de(void);
+extern s32 Menu_GetCinemaSequenceCount(void);
 extern void func_80403DE8_de(void);
 extern f32 Menu_BlendLinear(f32 from, f32 to, f32 weight);
 #endif

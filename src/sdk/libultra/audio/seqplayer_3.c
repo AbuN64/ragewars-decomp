@@ -71,7 +71,7 @@ extern void __setInstChanState(ALSeqPlayer *, ALInstrument *, s32);
 
  /* __setInstChanState */
 
-void func_802B0A90_de(struct ALSequencePlayer *seqp)
+void Audio_AdvanceSequenceEvent(struct ALSequencePlayer *seqp)
 {
     ALEvent evt;
 
@@ -82,7 +82,7 @@ void func_802B0A90_de(struct ALSequencePlayer *seqp)
 
     switch (evt.type) {
     case 1:     /* AL_SEQ_MIDI_EVT */
-        func_802B0C94_de(&seqp->base, &evt);
+        Audio_HandleSequenceMidiEvent(&seqp->base, &evt);
         postNextSeqEvent(seqp);
         break;
 
@@ -103,7 +103,7 @@ void func_802B0A90_de(struct ALSequencePlayer *seqp)
 }
 
  /* __assert */
-void func_802B0C94_de(ALSeqPlayer *seqp, ALEvent *event)
+void Audio_HandleSequenceMidiEvent(ALSeqPlayer *seqp, ALEvent *event)
 {
     ALVoice_s *voice;
     ALVoiceState *vs;

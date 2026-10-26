@@ -4,7 +4,7 @@
 /* Calls MarkMenuEventHandled with the arguments it was given and returns zero. */
 extern void MarkMenuEventHandled();
 
-s32 func_8043639C_de(void) {
+s32 Frontend_AcknowledgePage67Event(void) {
     MarkMenuEventHandled();
     return 0;
 }

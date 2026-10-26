@@ -2747,8 +2747,8 @@ typedef struct Ent Ent;
 struct Entry_func_80298170_de;
 typedef struct Entry_func_80298170_de Entry_func_80298170_de;
 
-struct Entry_func_802991D4_de;
-typedef struct Entry_func_802991D4_de Entry_func_802991D4_de;
+struct EntrySmosSetFocusedElement;
+typedef struct EntrySmosSetFocusedElement EntrySmosSetFocusedElement;
 
 struct EntryCode8040B45C;
 typedef struct EntryCode8040B45C EntryCode8040B45C;
@@ -4810,7 +4810,7 @@ struct WeaponMenuView {
 struct WeaponMenuPlayer;
 struct t_dldc;
 typedef signed int ( *WidgetCallback)(void *, struct t_dldc);
-struct Entry_func_802991D4_de;
+struct EntrySmosSetFocusedElement;
 struct Slider;
 struct World24;
 typedef unsigned int size_t;
@@ -4898,8 +4898,8 @@ struct ObjMenuUpdateSixChoiceMenu;
 typedef struct ObjMenuUpdateSixChoiceMenu ObjMenuUpdateSixChoiceMenu;
 struct Other8043E458;
 typedef struct Other8043E458 Other8043E458;
-struct Owner_func_804066BC_de;
-typedef struct Owner_func_804066BC_de Owner_func_804066BC_de;
+struct OwnerPakBeginProfileLoad;
+typedef struct OwnerPakBeginProfileLoad OwnerPakBeginProfileLoad;
 struct Owner_func_8043E494_de;
 typedef struct Owner_func_8043E494_de Owner_func_8043E494_de;
 struct PlayerCode80225D1080229FA0;

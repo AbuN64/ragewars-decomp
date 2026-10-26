@@ -8,9 +8,9 @@ int Frontend_ClearEuxLoadingHints(void) { SmpButton_WrapButtonWidget(0x1DD); Smp
 
 #if defined(VERSION_EU_X)
 #ifdef NON_MATCHING
-extern int func_80299A08_de(void), func_802999A0_de(s32);
+extern int Smos_GetFocusedElementId(void), Smos_GetPreviousScreenOwner(s32);
 extern void MarkMenuEventHandled(void), Items_ResetActorPools(void *, s32), func_804499B0_de(void *, s32, s32);
-extern void Scene_LoadLevelResources(void *, s32, s32), func_8025476C_de(s32), Frontend_SetMenuChoiceResult(s32), func_802998A8_de(void);
+extern void Scene_LoadLevelResources(void *, s32, s32), func_8025476C_de(s32), Frontend_SetMenuChoiceResult(s32), Smos_ReturnToPreviousScreen(void);
 extern int func_8025477C_de(void);
 extern u8 D_80145088[], g_world[];
 /* Result handler of the main-menu pop-up: for event 0x1DD with answer 0x16 resets the session record D_80145088 and picks a
@@ -19,9 +19,9 @@ s32 Frontend_HandleMainMenuPopupResult(void) {
     s32 next;
 
     MarkMenuEventHandled();
-    switch (func_80299A08_de()) {
+    switch (Smos_GetFocusedElementId()) {
     case 0x1DD:
-        if (func_802999A0_de(0) == 0x16) {
+        if (Smos_GetPreviousScreenOwner(0) == 0x16) {
             Items_ResetActorPools(D_80145088, 0);
             func_804499B0_de(D_80145088 - 0x48, 0, 0);
             Scene_LoadLevelResources(g_world, 0, 0);
@@ -41,13 +41,13 @@ s32 Frontend_HandleMainMenuPopupResult(void) {
         }
         break;
     case 0x1DE:
-        next = func_802999A0_de(0) == 0xB ? 0xB : -1;
+        next = Smos_GetPreviousScreenOwner(0) == 0xB ? 0xB : -1;
         break;
     default:
         return 0;
     }
     Frontend_SetMenuChoiceResult(next);
-    func_802998A8_de();
+    Smos_ReturnToPreviousScreen();
     return 0;
 }
 #else

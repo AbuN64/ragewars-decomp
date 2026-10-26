@@ -16,7 +16,7 @@
    MenuRecAt108 struct, so each member use casts D_800E3590 to that view. */
 
 extern void MarkMenuEventHandled(void);
-extern void func_802998A8_de(void);
+extern void Smos_ReturnToPreviousScreen(void);
 
 extern void SmpFlicker_RestoreFlickerValue(s32 fade);
 extern s32 SmpFlicker_IsFlickerIdle(s32 fade);
@@ -48,7 +48,7 @@ s32 Frontend_AnimateSlotSelectionMenu(s32 unused0, s32 unused1, s32 arg2) {
         if (--((MenuRecAt108 *) D_800E3590)->timer <= 0) {
             ((MenuRecAt108 *) D_800E3590)->state = 3;
             MarkMenuEventHandled();
-            func_802998A8_de();
+            Smos_ReturnToPreviousScreen();
             return 0;
         }
         break;

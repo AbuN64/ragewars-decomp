@@ -13,7 +13,7 @@
    message is pending (D_800E28C0), shows the player's message at 0x554 through Pak_OpenDialog;
    otherwise probes the Controller Pak on the selected channel, falls back to Pak_MarkSaveNotes when
    Pak_GetStatus reports none, and shows the D_44F67C, D_44F994 or D_44F610 prompt according to
-   func_80404F3C_de and func_80405598_de. */
+   func_80404F3C_de and Pak_NeedsIdRepair. */
 
 
 
@@ -36,10 +36,10 @@ extern char D_8014561C[];
 extern void Pak_ProbeStatus(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
 extern s32 Pak_IsChannelReady(s32 ch);
-extern s32 func_80405598_de(s32 ch);
+extern s32 Pak_NeedsIdRepair(s32 ch);
 extern void Pak_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
 
-void func_804066BC_de(Shared_PakMenu *menu) {
+void Pak_BeginProfileLoad(Shared_PakMenu *menu) {
     s32 ch;
 
     D_8014D4C0_de = 0;
@@ -64,7 +64,7 @@ void func_804066BC_de(Shared_PakMenu *menu) {
     D_80153784 = 1;
     if (Pak_IsChannelReady(ch) != 0) {
         Pak_OpenDialog(D_8014561C, D_0044EA2C, menu->player, menu->slot, D_0044FB50);
-    } else if (func_80405598_de(ch) != 0) {
+    } else if (Pak_NeedsIdRepair(ch) != 0) {
         Pak_OpenDialog(D_8014561C, D_0044ED44, menu->player, menu->slot, D_0044E468);
     } else {
         Pak_OpenDialog(D_8014561C, D_0044E9C0, menu->player, menu->slot, D_0044FB50);
@@ -95,7 +95,7 @@ extern char *D_800E25B4[];
 extern s32 D_8011FECC;
 
 extern s32 Pak_GetNoteGameName(s32 ch, s32 index, u8 **state);
-extern void func_80405648_de(u8 *state, u8 *name, s32 size);
+extern void Pak_DecodeNoteText(u8 *state, u8 *name, s32 size);
 extern s32 Pak_GetFreePages(s32 ch, s32 *freeSpace);
 extern s32 Pak_CountFreeNotes(s32 ch, s32 *noteCount);
 extern u32 Pak_BytesToPakPages(u32 size);
@@ -120,7 +120,7 @@ s32 Pak_EvaluateSaveChannel(void *unused, s32 ch, s32 *bestCh, s32 *bestScore) {
 #endif
     for (i = 0; i < 16; i++) {
         Pak_GetNoteGameName(ch, i, &state0);
-        func_80405648_de(state0, name, 16);
+        Pak_DecodeNoteText(state0, name, 16);
         if (XPlus_CompareStrings(name, wanted) == 0) {
             found0 = 1;
             goto search1;
@@ -135,7 +135,7 @@ search1:
 #endif
     for (i = 0; i < 16; i++) {
         Pak_GetNoteGameName(ch, i, &state1);
-        func_80405648_de(state1, name, 16);
+        Pak_DecodeNoteText(state1, name, 16);
         if (XPlus_CompareStrings(name, wanted) == 0) {
             found1 = 1;
             goto check;

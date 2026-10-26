@@ -8,7 +8,7 @@
 #include "MATH/math_controller_events.H"
 
 #if defined(VERSION_DE)
-INCLUDE_ASM("span_1000", func_80299E84);
+INCLUDE_ASM("span_1000", Smos_TranslateControlButtonEvent);
 #endif
 #if (defined(VERSION_US) || defined(VERSION_EU)) && !defined(NON_MATCHING)
 /* US and EU keep their asm: their jump table sits inside D_auto_rodata_unresolved_800C55BC / _800C592C, which
@@ -16,7 +16,7 @@ INCLUDE_ASM("span_1000", func_80299E84);
 INCLUDE_ASM("span_1000", DispatchControllerButtonEvent);
 #endif
 
-extern s32 func_80299B4C_de(void);
+extern s32 Smos_GetControlRepeatLimit(void);
 extern s32 GetMenuScreenOwner(void);
 
 #if !defined(VERSION_DE) && (!(defined(VERSION_US) || defined(VERSION_EU)) || defined(NON_MATCHING))
@@ -55,43 +55,43 @@ void DispatchControllerButtonEvent(ControllerEvent *event) {
     }
     switch (control) {
     case 11:
-        if (pressed && !ControllerButtonIsHeld((u16)event->device, control)) func_802995D4_de(manager, 1, source, control, 0);
+        if (pressed && !ControllerButtonIsHeld((u16)event->device, control)) Smos_RouteElementEvent(manager, 1, source, control, 0);
         break;
     case 12:
-        if (pressed && !ControllerButtonIsHeld((u16)event->device, control)) func_802995D4_de(manager, 2, source, control, 0);
+        if (pressed && !ControllerButtonIsHeld((u16)event->device, control)) Smos_RouteElementEvent(manager, 2, source, control, 0);
         break;
     case 4:
         if (pressed) {
-            if (!ControllerButtonIsHeld((u16)event->device, control)) func_802995D4_de(manager, 5, source, 1, 10000);
-            func_802995D4_de(manager, 5, source, 0, 10000);
+            if (!ControllerButtonIsHeld((u16)event->device, control)) Smos_RouteElementEvent(manager, 5, source, 1, 10000);
+            Smos_RouteElementEvent(manager, 5, source, 0, 10000);
         }
         break;
     case 5:
         if (pressed) {
-            if (!ControllerButtonIsHeld((u16)event->device, control)) func_802995D4_de(manager, 6, source, 1, 10000);
-            func_802995D4_de(manager, 6, source, 0, 10000);
+            if (!ControllerButtonIsHeld((u16)event->device, control)) Smos_RouteElementEvent(manager, 6, source, 1, 10000);
+            Smos_RouteElementEvent(manager, 6, source, 0, 10000);
         }
         break;
     case 6:
         if (pressed) {
-            if (!ControllerButtonIsHeld((u16)event->device, control)) func_802995D4_de(manager, 7, source, 1, 10000);
-            func_802995D4_de(manager, 7, source, 0, 10000);
+            if (!ControllerButtonIsHeld((u16)event->device, control)) Smos_RouteElementEvent(manager, 7, source, 1, 10000);
+            Smos_RouteElementEvent(manager, 7, source, 0, 10000);
         }
         break;
     case 7:
         if (pressed) {
-            if (!ControllerButtonIsHeld((u16)event->device, control)) func_802995D4_de(manager, 8, source, 1, 10000);
-            func_802995D4_de(manager, 8, source, 0, 10000);
+            if (!ControllerButtonIsHeld((u16)event->device, control)) Smos_RouteElementEvent(manager, 8, source, 1, 10000);
+            Smos_RouteElementEvent(manager, 8, source, 0, 10000);
         }
         break;
     }
     if (pressed == 1) {
         if (!ControllerButtonIsHeld((u16)event->device, control)) {
-            func_802995D4_de(manager, 10, source, control, 0);
+            Smos_RouteElementEvent(manager, 10, source, control, 0);
         }
-        func_802995D4_de(manager, 9, source, control, 0);
+        Smos_RouteElementEvent(manager, 9, source, control, 0);
     } else {
-        func_802995D4_de(manager, 11, source, control, 0);
+        Smos_RouteElementEvent(manager, 11, source, control, 0);
     }
     ControllerButtonSetHeld((u16)event->device, control, pressed);
 }
@@ -113,7 +113,7 @@ void DispatchControllerAxisEvents(ControllerEvent *event) {
     device = event->device;
     dimensions = (u16)event->kind;
     id = ((u32)sourceId << 16) | (u16)device;
-    threshold = func_80299B4C_de();
+    threshold = Smos_GetControlRepeatLimit();
     yValue = 0;
     xValue = 0;
     range = (u16)(dimensions - 3);
@@ -140,8 +140,8 @@ void DispatchControllerAxisEvents(ControllerEvent *event) {
         if (-threshold < state->oldX && state->x < -threshold) xCross = 1;
         xCode = 7; xValue = state->x;
     }
-    if (yCode != 0) func_802995D4_de(GetMenuScreenOwner(), yCode, id, yCross, yValue);
-    if (xCode != 0) func_802995D4_de(GetMenuScreenOwner(), xCode, id, xCross, xValue);
+    if (yCode != 0) Smos_RouteElementEvent(GetMenuScreenOwner(), yCode, id, yCross, yValue);
+    if (xCode != 0) Smos_RouteElementEvent(GetMenuScreenOwner(), xCode, id, xCross, xValue);
     state->oldX = state->x;
     state->oldY = state->y;
 }
@@ -164,7 +164,7 @@ void Smos_DispatchControllerEvent(ControllerEvent *event) {
     switch (event->kind) {
     case 0:
         source = ((u16)event->source << 16) | (u16)event->device;
-        func_802995D4_de(GetMenuScreenOwner(), 0x11, source, event->pressed, event->control);
+        Smos_RouteElementEvent(GetMenuScreenOwner(), 0x11, source, event->pressed, event->control);
         break;
     case 1:
         if (event->source == 4) {

@@ -151,7 +151,7 @@ top:
         return definition->value18;
     default:
         if (object->kind == 2) {
-            return func_802B2350(object->model->resource->packedValue);
+            return Menu_ExpandFloatHighWord(object->model->resource->packedValue);
         }
         return 0.0f;
     }

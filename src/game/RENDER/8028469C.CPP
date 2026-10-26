@@ -212,7 +212,7 @@ void Particle_UpdateForcesAndMotion(ParticleEffect *effect)
     CVector3 *velocity;
 
     Player_ApplyPlayerForces(&D_80145040, effect);
-    acceleration = func_802B2350(effect->entry->motion->acceleration);
+    acceleration = Menu_ExpandFloatHighWord(effect->entry->motion->acceleration);
     if (acceleration != 0.0f) {
         direction = effect->direction;
         GraphU64_ScaleVector(&delta, &direction, acceleration);
@@ -222,7 +222,7 @@ void Particle_UpdateForcesAndMotion(ParticleEffect *effect)
         y = effect->velocity.y;
         z = effect->velocity.z;
         speed = Math_Sqrtf(x * x + y * y + z * z);
-        limit = func_802B2350(effect->entry->motion->speedLimit);
+        limit = Menu_ExpandFloatHighWord(effect->entry->motion->speedLimit);
         if (acceleration > 0.0f) {
             if (!(limit < speed)) goto finished;
         } else {

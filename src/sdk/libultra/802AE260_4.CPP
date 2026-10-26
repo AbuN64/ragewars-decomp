@@ -10,7 +10,7 @@
 
 
 
-s32 func_802AE380_us_rev1(u8 *receivedByte) {
+s32 Libultra_ReadDebugLinkByte(u8 *receivedByte) {
     s32 timeout;
     s32 retries;
     s32 expected;

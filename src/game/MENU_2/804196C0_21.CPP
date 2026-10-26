@@ -156,7 +156,7 @@ s32 SmpSlider_DestroyController(void *arg0) {
 }
 
 void SmpSlider_RegisterSliderClass(void) {
-    func_802982C4_de(0xB63, D_0041A724, D_0041A7B4, 3);
+    SmSmngr_RegisterElementHandlers(0xB63, D_0041A724, D_0041A7B4, 3);
 }
 
 MenuSliderWidget *SmpSlider_CreateSliderWidget(s32 arg0, s32 arg1, s32 arg2) {

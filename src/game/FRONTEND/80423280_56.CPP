@@ -24,13 +24,13 @@ extern void MarkMenuEventHandled();
 
 extern s32 func_8043C308_de(void *);
 
-extern s32 func_80299A08_de();
+extern s32 Smos_GetFocusedElementId();
 
 extern void func_8043C278_de(void *);
 
 
 
-extern void func_80298368_de(s32);
+extern void SmXlate_SwitchScreen(s32);
 
 /* When the fourth argument is one, calls MarkMenuEventHandled and, while the counter at offset 0xE8 of
    the object D_800E53C0 points to is positive, decrements it and calls ScenarioSetup_FillResultRows. Returns zero. */
@@ -64,7 +64,7 @@ s32 Frontend_ActivateResultsAction(void) {
     }
     paused = &D_80146894;
     *paused = 0;
-    switch (func_80299A08_de()) {
+    switch (Smos_GetFocusedElementId()) {
 #if defined(VERSION_DE)
     case 0x235 - 2:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -78,7 +78,7 @@ s32 Frontend_ActivateResultsAction(void) {
         } else {
             D_80146918 = 0;
             D_801468F4 = 0;
-            func_80298368_de(0xF);
+            SmXlate_SwitchScreen(0xF);
         }
         break;
 #if defined(VERSION_DE)
@@ -89,7 +89,7 @@ s32 Frontend_ActivateResultsAction(void) {
     case 0x23E - 1:
 #endif
         PAKInterface_SetScreenPhase(5);
-        func_80298368_de(0x13);
+        SmXlate_SwitchScreen(0x13);
         break;
 #if defined(VERSION_DE)
     case 0x235 + 3:
@@ -103,9 +103,9 @@ s32 Frontend_ActivateResultsAction(void) {
             return 0;
         }
         if (((u8 *)paused)[-0x5BF] == 0) {
-            func_80298368_de(0x14);
+            SmXlate_SwitchScreen(0x14);
         } else {
-            func_80298368_de(0xF);
+            SmXlate_SwitchScreen(0xF);
         }
         break;
     default:

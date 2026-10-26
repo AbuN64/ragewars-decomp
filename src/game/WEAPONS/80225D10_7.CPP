@@ -31,7 +31,7 @@ extern s32 D_800D297C;
 extern void Geometry_SetCombineMode(s32);
 extern void func_8024A3B0_de(LevelActor *, PlayerCode80225D10 *, s32, Draw *);
 
-void Player_DrawTintedPlayer(LevelActor *actor, s32 arg1, Draw *draw) {
+void Player_DrawTintedPlayer(LevelActor *actor, s32 animationContext, Draw *draw) {
     PlayerCode80225D10 *player;
     Gfx *gfx;
 
@@ -54,7 +54,7 @@ void Player_DrawTintedPlayer(LevelActor *actor, s32 arg1, Draw *draw) {
                 colour->y = ((255.0f - player->tintTime * 17.0f) < 0.0f ? 0.0f : (255.0f - player->tintTime * 17.0f));
                 colour->z = 0.0f;
                 colour->w = ((255.0f - player->tintTime * 8.533334f) < 0.0f ? 0.0f : (255.0f - player->tintTime * 8.533334f));
-                func_8024A3B0_de(actor, player, arg1, draw);
+                func_8024A3B0_de(actor, player, animationContext, draw);
                 colour->w = ((255.0f - colour->w * 2.0f) < 0.0f ? 0.0f : (255.0f - colour->w * 2.0f));
                 Geometry_DrawOwnerFilteredPass(draw->model, player, actor->fieldB4, 1,
                               &actor->lighting[D_800D297C], 0, -1);
@@ -72,7 +72,7 @@ void Player_DrawTintedPlayer(LevelActor *actor, s32 arg1, Draw *draw) {
             } else if (player->tintMode == 3) {
                 D_800D15E0 = 1;
                 D_800D15E4[3] = ((player->tintTime * 0.425f) < 0.0f ? 0.0f : (player->tintTime * 0.425f));
-                func_8024A3B0_de(actor, player, arg1, draw);
+                func_8024A3B0_de(actor, player, animationContext, draw);
             }
             D_800D15E0 = 0;
         }

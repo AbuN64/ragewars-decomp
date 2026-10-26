@@ -35,7 +35,7 @@ void Smos_DispatchDescendantScreenEvent(NodeRecAt12 *node, s32 arg1, s32 arg2, s
                 }
                 if (valid != 0) {
                     GetMenuScreenOwner();
-                    func_802995D4_de(node->value, arg1, arg2, arg3, arg4);
+                    Smos_RouteElementEvent(node->value, arg1, arg2, arg3, arg4);
                 }
             }
         }

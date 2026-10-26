@@ -71,9 +71,9 @@ void *func_8025DB80_de(Track *state, s32 index) {
         command = SetN64_GetPackSection(state->unk0->unk2B50, selection);
         state->unk24 = command->unk0;
         #if defined(VERSION_EU)
-        duration = func_802AD520_eu(command->unk4);
+        duration = Menu_ExpandFloatHighWord(command->unk4);
 #else
-        duration = func_802B2350(command->unk4);
+        duration = Menu_ExpandFloatHighWord(command->unk4);
 #endif
         state->unk30 = duration;
         if (duration <= 0.0f) state->unk30 = D_800C401C_de;

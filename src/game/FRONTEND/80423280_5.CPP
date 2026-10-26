@@ -64,7 +64,7 @@ extern struct ScreenFrontendAnimateResultsOptionsScreen *D_800E4690;
 
 extern s32 D_80154020[];
 
-extern void func_80298368_de(s32);
+extern void SmXlate_SwitchScreen(s32);
 
 
 extern void SmpFlicker_StartFlicker(void *, s32);
@@ -83,7 +83,7 @@ s32 Frontend_AnimateResultsOptionsScreen(void *unused0, void *unused1, s32 delta
         if (D_80154020[0] != -1) {
             D_800E4690->banner->alpha = 0x5A;
             MarkMenuEventHandled();
-            func_80298368_de(D_80154020[0]);
+            SmXlate_SwitchScreen(D_80154020[0]);
             return 0;
         }
         D_800E4690->banner->alpha = 0xFF;
@@ -111,9 +111,9 @@ s32 Frontend_AnimateResultsOptionsScreen(void *unused0, void *unused1, s32 delta
         D_800E4690->state = 3;
         MarkMenuEventHandled();
         if (D_801462C8.controllerMode == 4) {
-            func_80298368_de(3);
+            SmXlate_SwitchScreen(3);
         } else {
-            func_80298368_de(7);
+            SmXlate_SwitchScreen(7);
         }
         return 0;
     case 3:

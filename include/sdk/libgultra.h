@@ -2,23 +2,23 @@
 #define SDK_LIBGULTRA_H
 
 #include "TYPES.H"
-extern int func_802AEF84_us_rev1(void);
+extern int Libultra_SendDebugLinkIdentification(void);
 
-extern s32 func_802AF544_us_rev1(void);
+extern s32 Libultra_ReceiveDebugLinkMemory(void);
 
-extern s32 func_802AF6A0_us_rev1(void);
+extern s32 Libultra_SendDebugLinkMemory(void);
 
-extern void func_802AF990_us_rev1();
+extern void Libultra_RunDebugLinkCommands();
 
-extern u32 func_802AFCE4_us_rev1(u8 *arg0, u8 *arg1);
+extern u32 Libultra_ExchangeDebugLinkStrings(u8 *arg0, u8 *arg1);
 
-extern int func_802B05C8_us_rev1(void * arg0, int arg1, int arg2, int arg3);
+extern int Libultra_SubmitDebugLinkBlock(void * arg0, int arg1, int arg2, int arg3);
 
-extern u32 func_802B091C_us_rev1(u32 arg0, u32 arg1, u32 arg2);
+extern u32 Libultra_ExchangeDebugLinkWords(u32 arg0, u32 arg1, u32 arg2);
 
-extern u32 func_802B0D3C_us_rev1(u32 arg0);
+extern u32 Libultra_ExchangeDebugLinkWord(u32 arg0);
 
-extern s32 func_802B1820_us_rev1(u8 *arg0);
+extern s32 Libultra_SendDebugLinkString(u8 *arg0);
 
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJRECAT18V1.H"

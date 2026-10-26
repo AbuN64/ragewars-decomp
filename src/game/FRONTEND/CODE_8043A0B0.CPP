@@ -29,7 +29,7 @@ extern struct StateFlags D_800E5A06[][19];
 extern s32 SmpFlicker_IsFlickerIdle(void *);
 extern void SmpFlicker_RestoreFlickerValue(void *);
 extern void SmpFlicker_StartFlicker(void *, int);
-extern void func_80298368_de(s32);
+extern void SmXlate_SwitchScreen(s32);
 extern void Tsmos_ActivateControllerState(void);
 extern void MarkMenuEventHandled(void);
 
@@ -241,7 +241,7 @@ s32 Frontend_UpdateFourPlayerResults(void) {
         if (D_800E59E0->timer <= 0) {
             D_800E59E0->state = 3;
             MarkMenuEventHandled();
-            func_80298368_de(D_800E59E0->next);
+            SmXlate_SwitchScreen(D_800E59E0->next);
             return 0;
         }
         break;

@@ -15,14 +15,14 @@ extern s32 func_802B00D4_de(void *, s16 *, s32);
 
 
 
-void func_802B2F10_de(ALSndPlayer *soundPlayer, s16 arg1) {
+void func_802B2F10_de(ALSndPlayer *soundPlayer, s16 eventVolume) {
     ParamsRecAt8V1 p;
     s32 acc;
 
     acc = (s32)soundPlayer->sndState;
     p.f0 = 3;
     acc += soundPlayer->target * 0x30;
-    p.f8 = arg1;
+    p.f8 = eventVolume;
     p.f4 = acc;
     func_802B00D4_de(&soundPlayer->evtq, (s16 *)&p, 0);
 }

@@ -7,13 +7,13 @@
 #include "sdk/OSINT/802BDEA0_2.H"
 
 #if defined(VERSION_US_REV1)
-/* Reads count bytes from the cartridge-domain port D_B2000021 into a buffer, waiting for bit 0x40 of D_B2000015 before each byte with D_800D3650 retries, accumulating a rotate-and-add checksum stored through the third argument and returning 1 on success. Adapted from func_802AE380_us_rev1 with the single-byte read changed to a counted loop with a checksum and the strobe registers D_B2000004 and D_B2000008 raised and lowered around it. */
+/* Reads count bytes from the cartridge-domain port D_B2000021 into a buffer, waiting for bit 0x40 of D_B2000015 before each byte with D_800D3650 retries, accumulating a rotate-and-add checksum stored through the third argument and returning 1 on success. Adapted from Libultra_ReadDebugLinkByte with the single-byte read changed to a counted loop with a checksum and the strobe registers D_B2000004 and D_B2000008 raised and lowered around it. */
 
 
 
 
 
-s32 func_802AE834_us_rev1(u8 *dst, s32 count, u32 *checksum) {
+s32 Libultra_ReadDebugLinkBlock(u8 *dst, s32 count, u32 *checksum) {
     s32 timeout;
     s32 retries;
     s32 expected;
@@ -118,7 +118,7 @@ static inline void waitPort(u8 *port, u8 mask, u8 expected)
     D_8014D3E8 = 1;
 }
 
-s32 func_802AEAB4_us_rev1(u8 *stream, s32 count)
+s32 Libultra_WriteDebugLinkBlock(u8 *stream, s32 count)
 {
     s32 result = 0;
     u8 control;

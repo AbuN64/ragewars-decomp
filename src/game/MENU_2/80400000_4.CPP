@@ -20,7 +20,7 @@
 
 extern struct Shape_typemap_165 *Cache_AllocResourceBlock(s32,void *,s32);
 
-extern void func_804002D8_de(s32,CVector3 *,f32 *,Spline *);
+extern void Menu_BuildWeightedSpline(s32,CVector3 *,f32 *,Spline *);
 
 extern void Cache_ReplaceResourceBlock(s32,struct Shape_typemap_165 **,struct Shape_typemap_165 *);
 
@@ -49,7 +49,7 @@ static inline void setTimes(f32 *a,f32 *b,f32 *c,f32 *t) {
     *c=*t;
 }
 
-void func_8040067C_de(s32 unused, struct Shape_typemap_165 **handle) {
+void Menu_BuildTrackResourceSplines(s32 unused, struct Shape_typemap_165 **handle) {
     struct Shape_typemap_165 *output;
     void *source, *a, *b, *c, *part, *extra;
     Pack *pack, *dest;
@@ -115,13 +115,13 @@ void func_8040067C_de(s32 unused, struct Shape_typemap_165 **handle) {
         r.points = r.header->points;
         s.weights = s.header->weights;
         packAppend(dest, extra, 8);
-        func_804002D8_de(np, p.points, q.weights, dp);
-        func_804002D8_de(nr, r.points, s.weights, dr);
+        Menu_BuildWeightedSpline(np, p.points, q.weights, dp);
+        Menu_BuildWeightedSpline(nr, r.points, s.weights, dr);
     }
     Cache_ReplaceResourceBlock(0, handle, output);
 }
 
-s32 func_804009F4_de(s32 index) {
+s32 Menu_LoadTrackSequence(s32 index) {
     s32 size,size2,i,count,previous,pending,loaded;
     SharedTrackObject *captured;
     Shared_World *resources;
@@ -145,12 +145,12 @@ s32 func_804009F4_de(s32 index) {
         if(owner==0)goto failed;
         D_800E2830->owner=owner;
         D_800E2830->resource=*owner;
-        cues=func_80403ADC_de();
+        cues=Menu_GetTrackCues();
         cue=cues->cues;
         count=cues->count;
         total=0.0f;
-        for(i=0;i<func_80403A64_de();i++) {
-            clip=func_80403A90_de(i);
+        for(i=0;i<Menu_GetTrackClipCount();i++) {
+            clip=Menu_GetTrackClip(i);
              {
                 s32 n=clip->count;
                 KeyRecAt1C *base=clip->keys;
@@ -234,7 +234,7 @@ s32 func_804009F4_de(s32 index) {
     }
 }
 
-/* Evaluates a spline built by func_804002D8_de at weight w, returning the position: zero for no nodes, the first or last node's position outside the weight range, and otherwise locates the weight segment, eases the arc length across it with a cubic blend of the neighbouring arc-length spacings, locates the arc-length segment and interpolates the position with the stored second derivatives. */
+/* Evaluates a spline built by Menu_BuildWeightedSpline at weight w, returning the position: zero for no nodes, the first or last node's position outside the weight range, and otherwise locates the weight segment, eases the arc length across it with a cubic blend of the neighbouring arc-length spacings, locates the arc-length segment and interpolates the position with the stored second derivatives. */
 
 
 

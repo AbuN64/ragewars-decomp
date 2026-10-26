@@ -54,7 +54,7 @@ typedef s32 (*Handler80436FE4)(void *, s32, s32, s32, s32);
 
 extern Handler80436FE4 D_800E56A0;
 
-s32 func_80436C58_de(void) {
+s32 Menu_CancelPlayerSettingsEntry(void) {
     struct MenuStepState *state;
 
     MarkMenuEventHandled();
@@ -64,12 +64,12 @@ s32 func_80436C58_de(void) {
     return 0;
 }
 
-s32 Menu_SelectNextPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
+s32 Menu_SelectNextPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 buttonState) {
     s32 nextItem;
 
     MarkMenuEventHandled();
-    if (arg3 == 1) {
-        func_804367A8_de(D_800E5690->item);
+    if (buttonState == 1) {
+        Menu_StorePlayerSettingsEntry(D_800E5690->item);
         nextItem = D_800E5690->item + 1;
         D_800E5690->item = nextItem;
         if (nextItem >= 4) {
@@ -84,12 +84,12 @@ s32 Menu_SelectNextPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s3
     return 0;
 }
 
-s32 Menu_SelectPreviousPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
+s32 Menu_SelectPreviousPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2, s32 buttonState) {
     s32 previousItem;
 
     MarkMenuEventHandled();
-    if (arg3 == 1) {
-        func_804367A8_de(D_800E5690->item);
+    if (buttonState == 1) {
+        Menu_StorePlayerSettingsEntry(D_800E5690->item);
         previousItem = D_800E5690->item - 1;
         D_800E5690->item = previousItem;
         if (previousItem < 0) {
@@ -104,7 +104,7 @@ s32 Menu_SelectPreviousPlayerSettingsEntry(s32 unused0, s32 unused1, s32 unused2
     return 0;
 }
 
-s32 func_80436E04_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchPlayerSettingsEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler80436FE4 *entry;
     s32 index;
     s32 wildcard;

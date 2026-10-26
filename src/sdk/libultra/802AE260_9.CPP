@@ -14,14 +14,14 @@
 #include "sdk/libgultra_inferred/802AE260_9.H"
 
 #if defined(VERSION_US_REV1)
-s32 func_802B1820_us_rev1(u8 *arg0) {
+s32 Libultra_SendDebugLinkString(u8 *arg0) {
     s32 result;
     u8 value;
 
     result = 0;
     while (1) {
         value = *arg0++;
-        func_802AE5AC_us_rev1(value);
+        Libultra_WriteDebugLinkByte(value);
         if (D_8014D3E8 != 0) {
             break;
         }
@@ -34,25 +34,25 @@ s32 func_802B1820_us_rev1(u8 *arg0) {
     return result;
 }
 
-u8 func_802B1888_us_rev1(void *arg0) {
+u8 Libultra_ReadPortStatusByte(void *arg0) {
     do {
     } while (func_802BDEA0_us_rev1() & 3);
     return (((struct ObjectState2 *) ((s8 *) arg0))->unk_1);
 }
 
-void func_802B18C0_us_rev1(s16 *arg0, s32 arg1) {
+void Libultra_WritePortByteValue(s16 *arg0, s32 arg1) {
     do {
     } while (func_802BDEA0_us_rev1() & 3);
     *arg0 = arg1 & 0xFF;
 }
 
-/* Waits for the masked byte at offset 1 of a status block to equal a given value, polling only while the low two status bits func_802BDEA0_us_rev1 reports are clear, returning 1 on a match and, after D_800D3650 retries of the given poll count each, setting D_8014D3E8 and returning 0. Adapted from func_802B1A68_us_rev1 with the status address, mask, expected value and timeout reload taken from the arguments. */
+/* Waits for the masked byte at offset 1 of a status block to equal a given value, polling only while the low two status bits func_802BDEA0_us_rev1 reports are clear, returning 1 on a match and, after D_800D3650 retries of the given poll count each, setting D_8014D3E8 and returning 0. Adapted from Libultra_CheckDebugLinkAcknowledgement with the status address, mask, expected value and timeout reload taken from the arguments. */
 
 
 
 
 
-s32 func_802B1904_us_rev1(u8 *status, u8 mask, u32 arg2, s32 reload) {
+s32 Libultra_WaitPortStatus(u8 *status, u8 mask, u32 arg2, s32 reload) {
     s32 retries;
     s32 result;
     s32 timeout;
@@ -84,7 +84,7 @@ done:
 
 
 
-s32 func_802B19C0_us_rev1(u32 arg0) {
+s32 Libultra_WaitDebugLinkAcknowledgement(u32 arg0) {
     s32 retries;
     s32 result;
     s32 timeout;
@@ -115,13 +115,13 @@ done:
     return result;
 }
 
-/* Waits for bit 0 of the cartridge-domain status byte D_B2000015 to equal arg0, polling only while the low two status bits func_802BDEA0_us_rev1 reports are clear, returning 1 on a match and, after D_800D3650 retries of two polls each, setting D_8014D3E8 and returning 0. Adapted from func_802B19C0_us_rev1 with the timeout reload 0x4E20 changed to 1 and the mask held as a byte. */
+/* Waits for bit 0 of the cartridge-domain status byte D_B2000015 to equal arg0, polling only while the low two status bits func_802BDEA0_us_rev1 reports are clear, returning 1 on a match and, after D_800D3650 retries of two polls each, setting D_8014D3E8 and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the timeout reload 0x4E20 changed to 1 and the mask held as a byte. */
 
 
 
 
 
-s32 func_802B1A68_us_rev1(u32 arg0) {
+s32 Libultra_CheckDebugLinkAcknowledgement(u32 arg0) {
     s32 retries;
     s32 result;
     s32 timeout;
@@ -152,13 +152,13 @@ done:
     return result;
 }
 
-/* Waits for bit 6 of the cartridge-domain status byte D_B2000015 to equal arg0, polling only while the low two status bits func_802BDEA0_us_rev1 reports are clear, returning 1 on a match and, after D_800D3650 retries of 0x4E21 polls each, setting D_8014D3E8 and returning 0. Adapted from func_802B19C0_us_rev1 with the mask bit 6 and the expected value held as a byte. */
+/* Waits for bit 6 of the cartridge-domain status byte D_B2000015 to equal arg0, polling only while the low two status bits func_802BDEA0_us_rev1 reports are clear, returning 1 on a match and, after D_800D3650 retries of 0x4E21 polls each, setting D_8014D3E8 and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the mask bit 6 and the expected value held as a byte. */
 
 
 
 
 
-s32 func_802B1B10_us_rev1(u32 arg0) {
+s32 Libultra_WaitDebugLinkReceiveReady(u32 arg0) {
     s32 retries;
     s32 result;
     s32 timeout;
@@ -189,13 +189,13 @@ done:
     return result;
 }
 
-/* Waits for bit 6 of the cartridge-domain status byte D_B2000011 to equal arg0, polling only while the low two status bits func_802BDEA0_us_rev1 reports are clear, returning 1 on a match and, after D_800D3650 retries of 0x4E21 polls each, setting D_8014D3E8 and returning 0. Adapted from func_802B19C0_us_rev1 with the mask bit 6 and the expected value held as a byte. */
+/* Waits for bit 6 of the cartridge-domain status byte D_B2000011 to equal arg0, polling only while the low two status bits func_802BDEA0_us_rev1 reports are clear, returning 1 on a match and, after D_800D3650 retries of 0x4E21 polls each, setting D_8014D3E8 and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the mask bit 6 and the expected value held as a byte. */
 
 
 
 
 
-s32 func_802B1BBC_us_rev1(u32 arg0) {
+s32 Libultra_WaitDebugLinkTransmitReady(u32 arg0) {
     s32 retries;
     s32 result;
     s32 timeout;
@@ -226,13 +226,13 @@ done:
     return result;
 }
 
-/* Waits for bit 1 of the cartridge-domain status byte D_B2000015 to equal arg0, polling only while the low two status bits func_802BDEA0_us_rev1 reports are clear, returning 1 on a match and, after D_800D3650 retries of 0x4E21 polls each, setting D_8014D3E8 and returning 0. Adapted from func_802B19C0_us_rev1 with the mask bit 1 and the expected value held as a byte. */
+/* Waits for bit 1 of the cartridge-domain status byte D_B2000015 to equal arg0, polling only while the low two status bits func_802BDEA0_us_rev1 reports are clear, returning 1 on a match and, after D_800D3650 retries of 0x4E21 polls each, setting D_8014D3E8 and returning 0. Adapted from Libultra_WaitDebugLinkAcknowledgement with the mask bit 1 and the expected value held as a byte. */
 
 
 
 
 
-s32 func_802B1C68_us_rev1(u32 arg0) {
+s32 Libultra_WaitDebugLinkRequestAcknowledgement(u32 arg0) {
     s32 retries;
     s32 result;
     s32 timeout;
@@ -265,7 +265,7 @@ done:
 
 
 
-void func_802B1D14_us_rev1(s32 arg0) {
+void Libultra_SetDebugLinkEnable(s32 arg0) {
     u8 temp_v0;
 
     temp_v0 = (D_8014D3E2 & 0xBF) | (arg0 << 6);
@@ -275,7 +275,7 @@ void func_802B1D14_us_rev1(s32 arg0) {
     D_B2000008 = temp_v0 & 0xFF;
 }
 
-void func_802B1D6C_us_rev1(s32 arg0) {
+void Libultra_SetDebugLinkMode(s32 arg0) {
     u8 temp_a0;
     temp_a0 = arg0 | (D_8014D3E3 & 0xF8);
     D_8014D3E3 = temp_a0;
@@ -286,7 +286,7 @@ void func_802B1D6C_us_rev1(s32 arg0) {
 
 
 
-void func_802B1DC0_us_rev1(s32 arg0) {
+void Libultra_SetDebugLinkByteRequest(s32 arg0) {
     u8 temp_v0;
 
     temp_v0 = (D_8014D3E3 & 0xF7) | (arg0 << 3);
@@ -298,7 +298,7 @@ void func_802B1DC0_us_rev1(s32 arg0) {
 
 
 
-void func_802B1E18_us_rev1(s32 arg0) {
+void Libultra_SetDebugLinkReceiveEnable(s32 arg0) {
     u8 temp_v0;
 
     temp_v0 = (D_8014D3E1 & 0xF7) | (arg0 << 3);
@@ -310,7 +310,7 @@ void func_802B1E18_us_rev1(s32 arg0) {
 
 
 
-void func_802B1E70_us_rev1(s32 arg0) {
+void Libultra_SetDebugLinkHostRequest(s32 arg0) {
     u8 temp_v0;
 
     temp_v0 = (D_8014D3E1 & 0xFB) | (arg0 << 2);
@@ -322,7 +322,7 @@ void func_802B1E70_us_rev1(s32 arg0) {
 
 
 
-void func_802B1EC8_us_rev1(s32 arg0) {
+void Libultra_SetDebugLinkHandshakeBit(s32 arg0) {
     u8 temp_v0;
 
     temp_v0 = (D_8014D3E1 & 0xFD) | (arg0 << 1);
@@ -332,7 +332,7 @@ void func_802B1EC8_us_rev1(s32 arg0) {
     D_B2000004 = temp_v0 & 0xFF;
 }
 
-void func_802B1F20_us_rev1(s32 arg0) {
+void Libultra_SetDebugLinkTransmitStrobe(s32 arg0) {
     u8 temp_a0;
     temp_a0 = arg0 | (D_8014D3E1 & 0xFE);
     D_8014D3E1 = temp_a0;
@@ -343,7 +343,7 @@ void func_802B1F20_us_rev1(s32 arg0) {
 
 
 
-void func_802B1F74_us_rev1(s32 arg0) {
+void Libultra_SetDebugLinkBlockTransfer(s32 arg0) {
     u8 temp_v0;
 
     temp_v0 = (D_8014D3E2 & 0xFD) | (arg0 << 1);
@@ -354,14 +354,14 @@ void func_802B1F74_us_rev1(s32 arg0) {
 }
 
 extern s8 D_8014D3E0;
-void func_802B1FCC_us_rev1(s8 arg0) {
+void Libultra_WriteDebugLinkDataPort(s8 arg0) {
     D_8014D3E0 = arg0;
     do {
     } while (func_802BDEA0_us_rev1() & 3);
     D_B2000000 = arg0 & 0xFF;
 }
 
-s32 func_802B2010_us_rev1(void) {
+s32 Libultra_GetDebugLinkRequestAcknowledgement(void) {
     do {
     } while (func_802BDEA0_us_rev1() & 3);
     return ((u8) D_B2000015 >> 1) & 1;
@@ -372,30 +372,30 @@ int func_802B2048_us_rev1(void) {
     return 1;
 }
 
-extern s32 func_802AE380_us_rev1(u8 *);
+extern s32 Libultra_ReadDebugLinkByte(u8 *);
 
 
 extern void func_802BD010_de(u32, u32);
 
 
 
-s32 func_802B2050_us_rev1(void) {
+s32 Libultra_ExecuteDebugLinkAddress(void) {
     ReadWord first;
     s32 word;
     s32 result;
 
-    func_802AE380_us_rev1(&first.byte);
+    Libultra_ReadDebugLinkByte(&first.byte);
     result = 0;
     if (D_8014D3E8 == 0) {
         word = first.byte << 8;
-        func_802AE380_us_rev1(&first.byte);
+        Libultra_ReadDebugLinkByte(&first.byte);
         if (D_8014D3E8 == 0) {
             word |= first.byte;
-            func_802AE380_us_rev1(&first.byte);
+            Libultra_ReadDebugLinkByte(&first.byte);
             word <<= 8;
             if (D_8014D3E8 == 0) {
                 word |= first.byte;
-                func_802AE380_us_rev1(&first.byte);
+                Libultra_ReadDebugLinkByte(&first.byte);
                 word <<= 8;
                 if (D_8014D3E8 == 0) {
                     word |= first.byte;
@@ -414,32 +414,32 @@ s32 func_802B2050_us_rev1(void) {
     return result;
 }
 
-extern s32 func_802AE380_us_rev1(u8 *);
+extern s32 Libultra_ReadDebugLinkByte(u8 *);
 
 
 
-s32 func_802B2134_us_rev1(void) {
+s32 Libultra_WriteDebugLinkMemoryByte(void) {
     ReadWordByte first;
     s32 word;
     s32 result;
 
-    func_802AE380_us_rev1(&first.byte);
+    Libultra_ReadDebugLinkByte(&first.byte);
     result = 0;
     if (D_8014D3E8 == 0) {
         word = first.byte << 8;
-        func_802AE380_us_rev1(&first.byte);
+        Libultra_ReadDebugLinkByte(&first.byte);
         if (D_8014D3E8 == 0) {
             word |= first.byte;
-            func_802AE380_us_rev1(&first.byte);
+            Libultra_ReadDebugLinkByte(&first.byte);
             word <<= 8;
             if (D_8014D3E8 == 0) {
                 word |= first.byte;
-                func_802AE380_us_rev1(&first.byte);
+                Libultra_ReadDebugLinkByte(&first.byte);
                 word <<= 8;
                 if (D_8014D3E8 == 0) {
                     word |= first.byte;
                     first.word = word;
-                    func_802AE380_us_rev1(&first.value);
+                    Libultra_ReadDebugLinkByte(&first.value);
                     if (D_8014D3E8 == 0) {
                         result = 1;
                         *(u8 *)first.word = first.value;
@@ -451,32 +451,32 @@ s32 func_802B2134_us_rev1(void) {
     return result;
 }
 
-extern s32 func_802AE380_us_rev1(u8 *);
+extern s32 Libultra_ReadDebugLinkByte(u8 *);
 
 
 
-s32 func_802B2214_us_rev1(void) {
+s32 Libultra_ReadDebugLinkMemoryByte(void) {
     ReadWord first;
     s32 word;
     s32 result;
 
-    func_802AE380_us_rev1(&first.byte);
+    Libultra_ReadDebugLinkByte(&first.byte);
     result = 0;
     if (D_8014D3E8 == 0) {
         word = first.byte << 8;
-        func_802AE380_us_rev1(&first.byte);
+        Libultra_ReadDebugLinkByte(&first.byte);
         if (D_8014D3E8 == 0) {
             word |= first.byte;
-            func_802AE380_us_rev1(&first.byte);
+            Libultra_ReadDebugLinkByte(&first.byte);
             word <<= 8;
             if (D_8014D3E8 == 0) {
                 word |= first.byte;
-                func_802AE380_us_rev1(&first.byte);
+                Libultra_ReadDebugLinkByte(&first.byte);
                 word <<= 8;
                 if (D_8014D3E8 == 0) {
                     word |= first.byte;
                     first.word = word;
-                    func_802AE5AC_us_rev1(*(u8 *)first.word);
+                    Libultra_WriteDebugLinkByte(*(u8 *)first.word);
                     result = D_8014D3E8 == 0;
                 }
             }
@@ -485,16 +485,16 @@ s32 func_802B2214_us_rev1(void) {
     return result;
 }
 
-extern s32 func_802AE380_us_rev1(u8 *);
+extern s32 Libultra_ReadDebugLinkByte(u8 *);
 
-s32 func_802B22E4_us_rev1(void) {
+s32 Libultra_HandshakeDebugLink(void) {
     u8 sp10;
     s32 result;
 
-    func_802AE5AC_us_rev1(0x10);
+    Libultra_WriteDebugLinkByte(0x10);
     result = 0;
     if (D_8014D3E8 == 0) {
-        func_802AE380_us_rev1(&sp10);
+        Libultra_ReadDebugLinkByte(&sp10);
         if (D_8014D3E8 == 0) {
             result = sp10 == 0x11;
         }

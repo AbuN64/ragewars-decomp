@@ -12,7 +12,7 @@ u32 func_802BFE3C_de(void) {
 
 /* Fills the first N words of an index table with 0..N-1, then applies the bit-reversal
    permutation of an FFT of length N to it, swapping entries in place. */
-void func_802BFE68_de(s32 *arg0, s32 arg1) {
+void func_802BFE68_de(s32 *permutation, s32 elementCount) {
     s32 *ptr;
     s32 i;
     s32 j;
@@ -21,14 +21,14 @@ void func_802BFE68_de(s32 *arg0, s32 arg1) {
     s32 n2;
 
     i = 0;
-    n2 = arg1 * 2;
-    if (arg1 > 0) {
-        ptr = arg0;
+    n2 = elementCount * 2;
+    if (elementCount > 0) {
+        ptr = permutation;
         do {
             *ptr = i;
             i++;
             ptr++;
-        } while (i < arg1);
+        } while (i < elementCount);
     }
 
     j = 1;
@@ -36,11 +36,11 @@ void func_802BFE68_de(s32 *arg0, s32 arg1) {
     if (n2 > 0) {
         do {
             if (j > i) {
-                tmp = arg0[(j - 1) / 2];
-                arg0[(j - 1) / 2] = arg0[(i - 1) / 2];
-                arg0[(i - 1) / 2] = tmp;
+                tmp = permutation[(j - 1) / 2];
+                permutation[(j - 1) / 2] = permutation[(i - 1) / 2];
+                permutation[(i - 1) / 2] = tmp;
             }
-            k = arg1;
+            k = elementCount;
             while (k >= 2 && j > k) {
                 j -= k;
                 k >>= 1;
@@ -52,26 +52,26 @@ void func_802BFE68_de(s32 *arg0, s32 arg1) {
 }
 
 /** Interleave the first and mirrored halves of 128 float pairs. */
-void func_802BFF30_de(float *arg0, float *arg1) {
+void func_802BFF30_de(float *output, float *input) {
     short i = 0;
     do {
-        arg0[i * 2] = arg1[i * 2];
-        arg0[i * 2 + 1] = arg1[(255 - i * 2)];
+        output[i * 2] = input[i * 2];
+        output[i * 2 + 1] = input[(255 - i * 2)];
         i++;
     } while (i < 128);
 }
 
 /** Complex-multiply 128 (re,im) pairs in-place by per-element (a,b) factors. */
-void func_802BFF90_de(float *arg0, float *arg1, float *arg2) {
+void func_802BFF90_de(float *samples, float *rotationReal, float *rotationImaginary) {
     short i = 0;
     do {
-        float re = arg0[i * 2];
-        float im = arg0[i * 2 + 1];
-        float a = arg1[i];
-        float b = arg2[i];
+        float re = samples[i * 2];
+        float im = samples[i * 2 + 1];
+        float a = rotationReal[i];
+        float b = rotationImaginary[i];
 
-        arg0[i * 2] = re * a - im * b;
-        arg0[i * 2 + 1] = re * b + im * a;
+        samples[i * 2] = re * a - im * b;
+        samples[i * 2 + 1] = re * b + im * a;
         i++;
     } while (i < 0x80);
 }
@@ -81,18 +81,18 @@ void Audio_TransformFft(f32 *data, FftTables *tables, s32 sign) {
     Audio_ComplexFft(data, tables->size, sign, tables->sines, tables->cosines, tables->order);
 }
 
-s16 func_802C0044_de(f32 arg0) {
+s16 func_802C0044_de(f32 sample) {
     f32 f0;
     f32 f12;
 
-    if (arg0 >= 0.0f) {
-        f12 = arg0 + D_800C7CE8_de;
+    if (sample >= 0.0f) {
+        f12 = sample + D_800C7CE8_de;
         f0 = D_800C7CEC_de;
         if (f0 < f12) {
             f12 = f0;
         }
     } else {
-        f12 = arg0 - D_800C7CF0_de;
+        f12 = sample - D_800C7CF0_de;
         f0 = D_800C7CF4_de;
         if (f12 < f0) {
             f12 = f0;

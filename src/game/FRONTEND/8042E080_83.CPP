@@ -4,7 +4,7 @@
 #include "COMMON/S1_6.H"
 #include "TYPES.H"
 
-/* Event callback for screen D_800E5554: on event 1 while func_8043C308_de reports the screen in state 1 it advances the screen through Frontend_DrawMenuImage and func_8043C2A4_de, and when that leaves it in state 2 it calls func_8040C428_de(0) and MarkMenuEventHandled, clears the pause word D_80146894 (0x180C past the match objects at D_80145088), stops those objects and the ones 0x48 bytes before them, releases resource 0x24 of D_8011FE88, restarts func_8025476C_de when func_8025477C_de reports it idle, stores 8 at 0x17F0 past the match objects, passes the screen's word at 0x1C to func_80298368_de and calls func_8025E384_de, returning zero. Adapted from func_804362A8_de with the screen D_800E5558 changed to D_800E5554, a func_8040C428_de(0) call added, and the trailing Frontend_StartConfiguredMatch call replaced by the store of 8 and the func_80298368_de call before func_8025E384_de. */
+/* Event callback for screen D_800E5554: on event 1 while func_8043C308_de reports the screen in state 1 it advances the screen through Frontend_DrawMenuImage and func_8043C2A4_de, and when that leaves it in state 2 it calls func_8040C428_de(0) and MarkMenuEventHandled, clears the pause word D_80146894 (0x180C past the match objects at D_80145088), stops those objects and the ones 0x48 bytes before them, releases resource 0x24 of D_8011FE88, restarts func_8025476C_de when func_8025477C_de reports it idle, stores 8 at 0x17F0 past the match objects, passes the screen's word at 0x1C to SmXlate_SwitchScreen and calls func_8025E384_de, returning zero. Adapted from Frontend_UpdatePage67Exit with the screen D_800E5558 changed to D_800E5554, a func_8040C428_de(0) call added, and the trailing Frontend_StartConfiguredMatch call replaced by the store of 8 and the SmXlate_SwitchScreen call before func_8025E384_de. */
 
 extern MenuRules *D_800E5554;
 
@@ -19,7 +19,7 @@ extern void func_804499B0_de(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(s32);
-extern void func_80298368_de(void *);
+extern void SmXlate_SwitchScreen(void *);
 extern void func_8025E384_de(void);
 
 s32 Frontend_FinishPauseConfirmationTransition(s32 unused0, s32 unused1, s32 event) {
@@ -44,7 +44,7 @@ s32 Frontend_FinishPauseConfirmationTransition(s32 unused0, s32 unused1, s32 eve
             func_8025476C_de(1);
         }
         pause[-7] = 8;
-        func_80298368_de((void *)D_800E5554->locked);
+        SmXlate_SwitchScreen((void *)D_800E5554->locked);
         func_8025E384_de();
     }
     return 0;

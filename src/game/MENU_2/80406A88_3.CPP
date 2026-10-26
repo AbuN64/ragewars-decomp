@@ -10,7 +10,7 @@ extern s32 SmpOverlay_CreateOverlayNode(void *, s32);
 extern void SmpOverlay_ShowSlotById(void *, s32, s32);
 extern void *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
-extern s32 func_802999A0_de(s32);
+extern s32 Smos_GetPreviousScreenOwner(s32);
 extern s32 Frontend_CountUsedSlots(void);
 extern void Frontend_UpdateJoinRequestDisplay(s32);
 extern void Tsmos_ActivateControllerState(void);
@@ -32,7 +32,7 @@ s32 Menu_CreateEuxJoinOptions(void *window) {
     SmpOverlay_ShowSlotById(window, 3, 0x38D);
     item = Frontend_FindWidgetByResourceId(window, 0x38F);
     item->alpha = 0x8C;
-    if (func_802999A0_de(0) == 0x16) {
+    if (Smos_GetPreviousScreenOwner(0) == 0x16) {
         Frontend_SetWidgetFlag08(item, 0);
     }
     D_800E39C0->unk18 = 0;

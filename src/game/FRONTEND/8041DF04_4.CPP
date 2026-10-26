@@ -23,7 +23,7 @@ s32 Frontend_CreateCourseOptionsMenu(void *root) {
 
     item = Frontend_FindWidgetByResourceId(root, 0x38B);
     item->alpha = 0x8C;
-    if (func_802999A0_de(0) == 22) {
+    if (Smos_GetPreviousScreenOwner(0) == 22) {
         Frontend_SetWidgetFlag08(item, 0);
     }
 

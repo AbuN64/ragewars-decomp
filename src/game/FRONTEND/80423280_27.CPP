@@ -4,8 +4,8 @@
 #include "TYPES.H"
 
 /* Acts on the mode of the menu held first in the block g_optionsPage points to: in mode 4 it calls
-   MarkMenuEventHandled and then either func_80298368_de with the block's word at 0x20, when that is not -1,
-   or func_802998A8_de. Returns zero. */
+   MarkMenuEventHandled and then either SmXlate_SwitchScreen with the block's word at 0x20, when that is not -1,
+   or Smos_ReturnToPreviousScreen. Returns zero. */
 
 
 
@@ -16,9 +16,9 @@ extern s32 SmpSlider_GetTransitionMode(void *);
 
 extern void MarkMenuEventHandled();
 
-extern void func_80298368_de(s32);
+extern void SmXlate_SwitchScreen(s32);
 
-extern void func_802998A8_de();
+extern void Smos_ReturnToPreviousScreen();
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
 enum { SHORTCUT_RESET = 0x50, SHORTCUT_SIX = 0x57, SHORTCUT_FIVE = 0x58 };
@@ -31,7 +31,7 @@ enum { SHORTCUT_RESET = 0x5C, SHORTCUT_SIX = 0x52, SHORTCUT_FIVE = 0x55 };
 
 extern void MarkMenuEventHandled(void),Menu_CommitOptionsPage(void),SmpSlider_SetTransitionMode(void *,s32);
 
-extern s32 func_80299A08_de(void);
+extern s32 Smos_GetFocusedElementId(void);
 
 s32 Frontend_UpdateOptionsPageExit(void) {
     switch (SmpSlider_GetTransitionMode(g_optionsPage->menu)) {
@@ -40,9 +40,9 @@ s32 Frontend_UpdateOptionsPageExit(void) {
     case 4:
         MarkMenuEventHandled();
         if (g_optionsPage->value != -1) {
-            func_80298368_de(g_optionsPage->value);
+            SmXlate_SwitchScreen(g_optionsPage->value);
         } else {
-            func_802998A8_de();
+            Smos_ReturnToPreviousScreen();
         }
         break;
     }
@@ -54,7 +54,7 @@ s32 Frontend_HandleOptionsPageShortcut(void) {
     s32 var_s0;
     MarkMenuEventHandled();
     var_s0 = 1;
-    temp_v0 = func_80299A08_de();
+    temp_v0 = Smos_GetFocusedElementId();
     switch(temp_v0) {
     case SHORTCUT_RESET:g_optionsPage->value=-1;break;
     case SHORTCUT_SIX:g_optionsPage->value=6;break;

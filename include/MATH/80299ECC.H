@@ -14,5 +14,5 @@ struct ArgsCode80296014 {
     s32 word20;
     s32 word24;
 };
-extern s32 func_802995D4_de(s32 value, s32 event, s32 source, s32 active, s32 amount);
+extern s32 Smos_RouteElementEvent(s32 value, s32 event, s32 source, s32 active, s32 amount);
 #endif

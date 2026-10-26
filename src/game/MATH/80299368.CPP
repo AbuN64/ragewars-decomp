@@ -19,10 +19,10 @@ struct Shared_MenuDefinition {
     s32 unk40;
     Shared_MenuDefinition *unk44;
 };
-void func_80297DBC_de(void);
-void func_80298ECC_de(void);
+void SmSmngr_InitializeCurrentScreen(void);
+void Smos_PopScreen(void);
 void StreamBufferFree(StreamBuffer *);
-void func_80299CC4_de(void);
+void Smos_DrainResourceWork(void);
 void Frontend_AcquireArchiveEntry(s32);
 void Frontend_ReleaseReferencedBuffer(s32);
 
@@ -31,7 +31,7 @@ void Frontend_ReleaseReferencedBuffer(s32);
 
 extern Shared_MenuDefinition *D_80146E10;
 
-void func_80298368_de(s32 index) {
+void SmXlate_SwitchScreen(s32 index) {
     s32 (*temp_v0_10)(s32, s32, s32, s32);
     s32 (*temp_v0_11)(s32, s32, s32, s32);
     s32 (*temp_v0_14)(s32, s32, s32, s32);
@@ -100,7 +100,7 @@ void func_80298368_de(s32 index) {
     ScreenEntry *var_v1;
     ScreenEntry *var_v1_2;
 
-    func_80299CC4_de();
+    Smos_DrainResourceWork();
     var_s2 = 0;
     var_s5 = 1;
     if (D_8014D080->current >= 0) {
@@ -144,7 +144,7 @@ block_search_check:
         if (((ScreenEntry *)screens)[temp_a0->current].owner != index) {
             do {
                 temp_a0->field530 = 1;
-                func_80298ECC_de();
+                Smos_PopScreen();
                 
                 temp_a0 = D_8014D080;
             } while (((ScreenEntry *)screens)[D_8014D080->current].owner != index);
@@ -160,7 +160,7 @@ block_search_check:
             temp_a0_2->focus = temp_v0->unk44;
             D_80146E10 = temp_v0->unk44;
             var_s1 = temp_v0;
-            func_80297DBC_de();
+            SmSmngr_InitializeCurrentScreen();
             if (((u16) var_s1->unk12 >> 0xC) & 1) {
                 
                 load_flag = 1;
@@ -181,7 +181,7 @@ loop_18:
                     D_80146E10 = temp_v0_3->unk44;
                     D_8014D080->cacheCount = 0;
                     var_s1 = temp_v0_3;
-                    func_80297DBC_de();
+                    SmSmngr_InitializeCurrentScreen();
                     goto loop_18;
                 }
                 D_8014D080->current = current;
@@ -235,7 +235,7 @@ block_not_found:
                 D_8014D080->handled = temp_s0_4;
             }
             if (temp_s1 == (((Shared_MenuDefinition *)(D_8014D080->screens[D_8014D080->current].primary))->unkC)) {
-                func_80297A34_de(0x10, 0, 0, 0);
+                SmSmngr_DispatchPrimaryScreenEvent(0x10, 0, 0, 0);
             } else {
                 DispatchElementEvent(temp_s1, 0x10, 0, 0, 0);
             }
@@ -302,10 +302,10 @@ after_e06:
             }
             D_8014D080->handled = temp_s0_7;
         }
-        func_80297A34_de(0xE01, 0, 0, 0);
+        SmSmngr_DispatchPrimaryScreenEvent(0xE01, 0, 0, 0);
     }
 after_e01:
-    func_80299CC4_de();
+    Smos_DrainResourceWork();
     e03_arg_copy = index;
     if (D_8014D080->current != -1) {
         temp_v0_11 = D_8014D080->callback;
@@ -320,7 +320,7 @@ after_e01:
             }
             D_8014D080->handled = temp_s0_8;
         }
-        func_80297A34_de(0xE03, e03_arg_copy, 0, 0);
+        SmSmngr_DispatchPrimaryScreenEvent(0xE03, e03_arg_copy, 0, 0);
     }
 after_e03:
     temp_v1_2 = D_8014D080;
@@ -429,7 +429,7 @@ block_78:
             D_8014D080->handled = temp_s0_11;
         }
         if (temp_s1_2 == (((Shared_MenuDefinition *)(D_8014D080->screens[D_8014D080->current].primary))->unkC)) {
-            func_80297A34_de(0xF, 0, 0, 0);
+            SmSmngr_DispatchPrimaryScreenEvent(0xF, 0, 0, 0);
         } else {
             DispatchElementEvent(temp_s1_2, 0xF, 0, 0, 0);
         }

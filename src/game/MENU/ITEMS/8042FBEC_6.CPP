@@ -10,7 +10,7 @@ extern char *D_800E1CE4[], *D_800E1D14[], *D_800E1C14[], *D_800E1C24[], *D_800E1
 extern void *Cache_AllocateMemory(s32);
 extern void SmpButton_WrapButtonWidget(s32), SmpButton_AppendListText(void *, char *);
 extern void *SmpButton_CreateListWidget(s32, s32), *SmpSlider_CreateSliderWidget(s32, s32, s32), *Frontend_FindWidgetByResourceId(void *, s32);
-extern void func_804368F8_de(s32);
+extern void Menu_SelectAlternatePlayerSettingsEntry(s32);
 /* Builds the 0x50-byte confirm popup: its three button rows (ids 0x1C9, 0x1D1, 0x1CB) get the labels of the current language,
    the two fade windows 0x1CF/0x1CD are created, and item 0x1C7 is kept as the cursor. Returns 0. */
 s32 func_80437690_eu(void *window) {
@@ -34,7 +34,7 @@ s32 func_80437690_eu(void *window) {
     SmpButton_WrapButtonWidget(0x1C8);
     D_800E5694->a18 = Frontend_FindWidgetByResourceId(window, 0x1C7);
     D_800E5694->a14 = 0;
-    func_804368F8_de(0);
+    Menu_SelectAlternatePlayerSettingsEntry(0);
     return 0;
 }
 #else

@@ -156,7 +156,7 @@ extern void func_8022CE78_de(s32 arg0, s32 arg1);
 
 extern void Ovlgame_UpdateRunEndPlayer(void *);
 struct ObjectLinks854;
-extern void func_80225B98_de(struct ObjectLinks854 *a, void *b, int c);
+extern void Player_TryStartPlayerSequence(struct ObjectLinks854 *a, void *b, int c);
 
 s32 func_8021C45C_de(s32, void *, s32, s32);
 

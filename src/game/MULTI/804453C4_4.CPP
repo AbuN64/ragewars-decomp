@@ -8,7 +8,7 @@
 extern s32 D_801462C8;
 
 /* Toggles bit 0 of the settings flag word D_801462C8 and returns 0. */
-s32 func_8043D25C_de(void) {
+s32 Pak_ToggleTextChoice(void) {
     D_801462C8 ^= 1;
     return 0;
 }
@@ -16,7 +16,7 @@ s32 func_8043D25C_de(void) {
 
 #if defined(VERSION_US_REV1)
 
-s32 func_8043D25C_de(void) {
+s32 Pak_ToggleTextChoice(void) {
     D_800E63AC ^= 1;
     return 0;
 }
@@ -31,7 +31,7 @@ s32 func_8043D25C_de(void) {
 extern char D_800E62DC[];
 extern char D_800E62F0[];
 
-s32 func_804453E0_us_rev1(struct FieldRecAt14 *field) {
+s32 Pak_UpdateChoiceText(struct FieldRecAt14 *field) {
     if (D_800E63AC != 0) {
         field->text = D_800E62DC;
     } else {
@@ -40,7 +40,7 @@ s32 func_804453E0_us_rev1(struct FieldRecAt14 *field) {
     return 0;
 }
 
-/* Keeps an option field and the remembered byte D_800CBC90[index] in step, giving a field still at -1 the remembered value and otherwise remembering the field low byte, then mirrors it into D_800CBC94[index] and formats it into the field text with D_800E27D8 three bytes before the length Pak_CountLineChars reports, returning zero. Adapted from func_80445824_us_rev1 with the fixed byte slots replaced by the tables D_800CBC90 and D_800CBC94 indexed by the second argument. */
+/* Keeps an option field and the remembered byte D_800CBC90[index] in step, giving a field still at -1 the remembered value and otherwise remembering the field low byte, then mirrors it into D_800CBC94[index] and formats it into the field text with D_800E27D8 three bytes before the length Pak_CountLineChars reports, returning zero. Adapted from Pak_SyncSecondaryByteOptionTwo with the fixed byte slots replaced by the tables D_800CBC90 and D_800CBC94 indexed by the second argument. */
 
 
 
@@ -49,7 +49,7 @@ extern u8 D_800CBC94[];
 extern char D_800E27D8[];
 extern s32 Pak_CountLineChars(struct Field *);
 
-s32 func_80445414_us_rev1(struct Field *field, s32 index) {
+s32 Pak_SyncPrimaryByteOption(struct Field *field, s32 index) {
     char *text = *field->text;
 
     if (field->value == -1) {
@@ -73,7 +73,7 @@ extern u8 D_800CBC94[];
 extern char D_800E27D8[];
 extern s32 Pak_CountLineChars(struct Field *);
 
-s32 func_804454B4_us_rev1(struct Field *field) {
+s32 Pak_SyncPrimaryByteOptionZero(struct Field *field) {
     char *text = *field->text;
 
     if (field->value == -1) {
@@ -97,7 +97,7 @@ extern u8 D_800CBC94[];
 extern char D_800E27D8[];
 extern s32 Pak_CountLineChars(struct Field *);
 
-s32 func_80445544_us_rev1(struct Field *field) {
+s32 Pak_SyncPrimaryByteOptionOne(struct Field *field) {
     char *text = *field->text;
 
     if (field->value == -1) {
@@ -121,7 +121,7 @@ extern u8 D_800CBC94[];
 extern char D_800E27D8[];
 extern s32 Pak_CountLineChars(struct Field *);
 
-s32 func_804455D4_us_rev1(struct Field *field) {
+s32 Pak_SyncPrimaryByteOptionTwo(struct Field *field) {
     char *text = *field->text;
 
     if (field->value == -1) {
@@ -134,7 +134,7 @@ s32 func_804455D4_us_rev1(struct Field *field) {
     return 0;
 }
 
-/* Keeps an option field and the remembered byte D_800D0EE8[index] in step, giving a field still at -1 the remembered value and otherwise remembering the field low byte, then mirrors it into D_800CBC9C[index] and formats it into the field text with D_800E27D8 three bytes before the length Pak_CountLineChars reports, returning zero. Adapted from func_80445824_us_rev1 with the fixed byte slots replaced by the tables D_800D0EE8 and D_800CBC9C indexed by the second argument. */
+/* Keeps an option field and the remembered byte D_800D0EE8[index] in step, giving a field still at -1 the remembered value and otherwise remembering the field low byte, then mirrors it into D_800CBC9C[index] and formats it into the field text with D_800E27D8 three bytes before the length Pak_CountLineChars reports, returning zero. Adapted from Pak_SyncSecondaryByteOptionTwo with the fixed byte slots replaced by the tables D_800D0EE8 and D_800CBC9C indexed by the second argument. */
 
 
 
@@ -143,7 +143,7 @@ extern u8 D_800CBC9C[];
 extern char D_800E27D8[];
 extern s32 Pak_CountLineChars(struct Field *);
 
-s32 func_80445664_us_rev1(struct Field *field, s32 index) {
+s32 Pak_SyncSecondaryByteOption(struct Field *field, s32 index) {
     char *text = *field->text;
 
     if (field->value == -1) {
@@ -167,7 +167,7 @@ extern u8 D_800CBC9C[];
 extern char D_800E27D8[];
 extern s32 Pak_CountLineChars(struct Field *);
 
-s32 func_80445704_us_rev1(struct Field *field) {
+s32 Pak_SyncSecondaryByteOptionZero(struct Field *field) {
     char *text = *field->text;
 
     if (field->value == -1) {
@@ -191,7 +191,7 @@ extern u8 D_800CBC9C[];
 extern char D_800E27D8[];
 extern s32 Pak_CountLineChars(struct Field *);
 
-s32 func_80445794_us_rev1(struct Field *field) {
+s32 Pak_SyncSecondaryByteOptionOne(struct Field *field) {
     char *text = *field->text;
 
     if (field->value == -1) {
@@ -204,7 +204,7 @@ s32 func_80445794_us_rev1(struct Field *field) {
     return 0;
 }
 
-/* Keeps an option field and the remembered byte D_800D0EEA[0] in step, giving a field still at -1 the remembered value and otherwise remembering the field's low byte, then mirrors it into D_800D0EEE[0] and formats it into the field's text with D_800E27D8 three bytes before the length Pak_CountLineChars reports, returning zero. Adapted from func_804454B4_us_rev1. */
+/* Keeps an option field and the remembered byte D_800D0EEA[0] in step, giving a field still at -1 the remembered value and otherwise remembering the field's low byte, then mirrors it into D_800D0EEE[0] and formats it into the field's text with D_800E27D8 three bytes before the length Pak_CountLineChars reports, returning zero. Adapted from Pak_SyncPrimaryByteOptionZero. */
 
 
 
@@ -213,7 +213,7 @@ extern u8 D_800D0EEE[];
 extern char D_800E27D8[];
 extern s32 Pak_CountLineChars(struct Field *);
 
-s32 func_80445824_us_rev1(struct Field *field) {
+s32 Pak_SyncSecondaryByteOptionTwo(struct Field *field) {
     char *text = *field->text;
 
     if (field->value == -1) {

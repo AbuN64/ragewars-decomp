@@ -127,7 +127,7 @@ extern void SmpOverlay_SetSlotValue(void *, int, int);
 
 extern void Frontend_SetPreviewTransformUpdate(void *, int);
 
-extern void func_80298368_de(int);
+extern void SmXlate_SwitchScreen(int);
 
 /* Chooses a different enabled random character, updates its preview and selects an available costume. */
 
@@ -348,7 +348,7 @@ void Menu_ApplySlotValueGfx(int player, int choice) {
             slot[i].variant = (u8)D_800E42D0->players[i].choice;
         }
     }
-    func_80298368_de(D_801462C8->trialKind == 1 ? 10 : 8);
+    SmXlate_SwitchScreen(D_801462C8->trialKind == 1 ? 10 : 8);
 }
 
 void Menu_RandomizeCharacterPreview(s32 player) {

@@ -13,7 +13,7 @@ extern s32 func_80255228_de(s32 *);
 extern void func_80253908_de(s32);
 extern void Gfx_InitializeFrontendServices(void);
 extern void ESmem_InitializeFrameHeaps(s32);
-extern void func_80297FA0_de(s32, s32);
+extern void SmSmngr_InitializeScreenManager(s32, s32);
 extern void Frontend_OpenResourceArchive(char *);
 extern void SmpOverlay_RegisterOverlayClass(void);
 extern void SmpFrameAnim_RegisterFrameAnimClass(void);
@@ -32,7 +32,7 @@ void InitFrontendMenus(void) {
     func_80253908_de(0);
     Gfx_InitializeFrontendServices();
     ESmem_InitializeFrameHeaps(0x3000);
-    func_80297FA0_de(0x23, (s32)D_0043C500);
+    SmSmngr_InitializeScreenManager(0x23, (s32)D_0043C500);
     Frontend_OpenResourceArchive(D_800C6080_eu_x);
     SmpOverlay_RegisterOverlayClass();
     SmpFrameAnim_RegisterFrameAnimClass();

@@ -522,15 +522,15 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 render->unk6 = entry->unkB;
                 render->unk8 = Rumble_SamplePackedFloatRange(entry->motion->unk0);
 #if defined(VERSION_EU)
-                render->unkC = func_802AD520_eu(entry->motion->unk8);
-                render->unk10 = func_802AD520_eu(entry->motion->unkA);
-                render->unk14 = func_802AD520_eu(entry->motion->unkC);
-                render->unk18 = func_802AD520_eu(entry->motion->unkE);
+                render->unkC = Menu_ExpandFloatHighWord(entry->motion->unk8);
+                render->unk10 = Menu_ExpandFloatHighWord(entry->motion->unkA);
+                render->unk14 = Menu_ExpandFloatHighWord(entry->motion->unkC);
+                render->unk18 = Menu_ExpandFloatHighWord(entry->motion->unkE);
 #else
-                render->unkC = func_802B2350(entry->motion->unk8);
-                render->unk10 = func_802B2350(entry->motion->unkA);
-                render->unk14 = func_802B2350(entry->motion->unkC);
-                render->unk18 = func_802B2350(entry->motion->unkE);
+                render->unkC = Menu_ExpandFloatHighWord(entry->motion->unk8);
+                render->unk10 = Menu_ExpandFloatHighWord(entry->motion->unkA);
+                render->unk14 = Menu_ExpandFloatHighWord(entry->motion->unkC);
+                render->unk18 = Menu_ExpandFloatHighWord(entry->motion->unkE);
 #endif
                 if (render->unk5 == 8 || render->unk6 == 8 || render->unk4 == 8) {
                     if (effect->owner != 0 && effect->owner->type == 1 && (effect->owner->unk100 & 0x300000)) {

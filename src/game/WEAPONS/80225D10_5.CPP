@@ -437,7 +437,7 @@ void func_80228958_de(ObjRecAt20V2 *game, s32 view) {
     Geometry_FlushModelBatch();
 }
 
-void func_80228AF4_de(void *arg0, ViewState *viewState) {
+void Player_DrawMatchCountdown(void *arg0, ViewState *viewState) {
     f32 x;
     f32 y;
     f32 center_x;

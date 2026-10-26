@@ -17,7 +17,7 @@ extern s32 func_802B3CD0_de(void *arg0, s32 arg3);
 
 
 
-void func_802B3480_de(void *synth, void *voice, s16 arg2, s32 rampTime) {
+void func_802B3480_de(void *synth, void *voice, s16 targetVolume, s32 rampTime) {
     s32 new_var;
     void *Shared_func_802B3480_de_v0;
     void *voiceFilter;
@@ -28,7 +28,7 @@ void func_802B3480_de(void *synth, void *voice, s16 arg2, s32 rampTime) {
         if (Shared_func_802B3480_de_v0 != 0) {
             new_var = (((struct Shape_typemap_71 *)(synth))->field_1C) + (((struct IntegerStateDC_2 *) ((ObjectStateC_2 *) voice)->unk_8.v1)->state);
             ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_8 = 0xB;
-            ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_C = (s32) arg2;
+            ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_C = (s32) targetVolume;
             ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_4 = new_var;
             ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_10 = func_802B3CD0_de(synth, rampTime);
             ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_0 = 0;

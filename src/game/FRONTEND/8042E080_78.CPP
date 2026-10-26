@@ -10,21 +10,21 @@ enum { START_MATCH = 0x40, RETURN_MENU = 0x3C, WAIT_SHORT = 0x41, WAIT_LONG = 0x
 #include "TYPES.H"
 #include "MENU_2/804221A0_13.H"
 
-/* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled: 0x40 clears D_80146894 and
+/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled: 0x40 clears D_80146894 and
    calls Tsmos_RequestFrontendShutdown and func_8025E384_de; 0x3C clears D_80146894 and calls Menu_RequestOptionsScreen22; 0x41 and
-   0x3E wait 0x1F and 0x20 through func_80298368_de. Returns zero. */
+   0x3E wait 0x1F and 0x20 through SmXlate_SwitchScreen. Returns zero. */
 extern void MarkMenuEventHandled(void);
-extern s32 func_80299A08_de(void);
+extern s32 Smos_GetFocusedElementId(void);
 extern void Tsmos_RequestFrontendShutdown(void);
 extern void func_8025E384_de(void);
 
-extern void func_80298368_de(s32);
+extern void SmXlate_SwitchScreen(s32);
 
 s32 Frontend_ActivatePauseMenuAction(void) {
     s32 time;
 
     MarkMenuEventHandled();
-    switch (func_80299A08_de()) {
+    switch (Smos_GetFocusedElementId()) {
     case START_MATCH:
         D_8011FAC0.clockPaused = 0;
         Tsmos_RequestFrontendShutdown();
@@ -40,7 +40,7 @@ s32 Frontend_ActivatePauseMenuAction(void) {
     case WAIT_LONG:
         time = 0x20;
     wait:
-        func_80298368_de(time);
+        SmXlate_SwitchScreen(time);
         return 0;
     }
     return 0;

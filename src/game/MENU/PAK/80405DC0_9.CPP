@@ -6,7 +6,7 @@
 #include "COMMON/MENURECAT24.H"
 #include "TYPES.H"
 
-/* Enters pak menu mode 2: sets the mode flags, shows the D_0044FFA4 prompt when a message is pending (D_800E28C0), and otherwise clears the owner's 0x01000000 flag, probes the Controller Pak on the selected channel, falls back to Pak_MarkSaveNotes when Pak_GetStatus reports none, and shows the D_0044EA2C, D_0044ED44 or D_0044E9C0 prompt according to func_80404F3C_de and func_80405598_de. */
+/* Enters pak menu mode 2: sets the mode flags, shows the D_0044FFA4 prompt when a message is pending (D_800E28C0), and otherwise clears the owner's 0x01000000 flag, probes the Controller Pak on the selected channel, falls back to Pak_MarkSaveNotes when Pak_GetStatus reports none, and shows the D_0044EA2C, D_0044ED44 or D_0044E9C0 prompt according to func_80404F3C_de and Pak_NeedsIdRepair. */
 
 
 
@@ -28,9 +28,9 @@ extern char D_0044E9C0[];
 extern void Pak_ProbeStatus(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
 extern s32 Pak_IsChannelReady(s32 ch);
-extern s32 func_80405598_de(s32 ch);
+extern s32 Pak_NeedsIdRepair(s32 ch);
 extern void Pak_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
-void func_804070F4_de(Shared_PakMenu *menu)
+void Pak_BeginBlockLoad(Shared_PakMenu *menu)
 {
   Shared_PakMenu *new_var3;
   int new_var;
@@ -68,7 +68,7 @@ void func_804070F4_de(Shared_PakMenu *menu)
   else
   {
     new_var3 = menu;
-    if (func_80405598_de(ch) != 0)
+    if (Pak_NeedsIdRepair(ch) != 0)
     {
       Pak_OpenDialog(D_8014561C, D_0044ED44, new_var3->player, menu->slot, D_0044E4B0);
     }

@@ -14,10 +14,10 @@
 #include "MENU_2/80400000_16.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
-/* Calls func_80402BA0_de when the globally selected record's word at 0x38 is non-zero. */
+/* Calls Menu_DrawTrackOverlay when the globally selected record's word at 0x38 is non-zero. */
 
 
-extern void func_80402BA0_de(void);
+extern void Menu_DrawTrackOverlay(void);
 
 /** Clear the global word at VRAM 0x800E2838. */
 
@@ -75,7 +75,7 @@ void Cinema_UpdateSequenceTrack(void *camera) {
 void func_80245894_de(void) {
     Shared_MenuContext *record = D_800E2830;
     if (record->active != 0) {
-        func_80402BA0_de();
+        Menu_DrawTrackOverlay();
     }
 }
 

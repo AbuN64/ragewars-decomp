@@ -10,7 +10,7 @@
 
 /* Animates the two menu panels through open, close and countdown states and updates the active team menu. */
 
-extern void func_80298368_de(s32);
+extern void SmXlate_SwitchScreen(s32);
 extern void MarkMenuEventHandled(void);
 extern void Tsmos_ActivateControllerState(void);
 extern void SmpFlicker_RestoreFlickerValue(void *);
@@ -58,7 +58,7 @@ s32 Frontend_UpdatePakScreenPanels(s32 unused0, s32 unused1, s32 arg2) {
             if (closeFramesLeft <= 0) {
                 D_800E54A4->ready = 3;
                 MarkMenuEventHandled();
-                func_80298368_de(D_800E54A4->focus);
+                SmXlate_SwitchScreen(D_800E54A4->focus);
                 return 0;
             }
             break;

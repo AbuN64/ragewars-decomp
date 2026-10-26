@@ -8,7 +8,7 @@
 extern char D_80106248[], D_800C6080_eu_x[], D_0043D330_eu_x[];
 extern s32 D_800D2C90, D_800D2C98;
 extern void func_80255228_de(void *), func_80253908_de(s32), Gfx_InitializeFrontendServices(void), ESmem_InitializeFrameHeaps(s32);
-extern void func_80297FA0_de(s32, void *), Frontend_OpenResourceArchive(void *), SmpOverlay_RegisterOverlayClass(void), SmpFrameAnim_RegisterFrameAnimClass(void);
+extern void SmSmngr_InitializeScreenManager(s32, void *), Frontend_OpenResourceArchive(void *), SmpOverlay_RegisterOverlayClass(void), SmpFrameAnim_RegisterFrameAnimClass(void);
 extern void SmpFade_RegisterFadeClass(void), SmpButton_RegisterButtonClass(void), SmpFlicker_RegisterFlickerClass(void), SmpSlider_RegisterSliderClass(void);
 extern void SmpList_RegisterListClass(void), N64Eng_RegisterNumericWidgetClass(void), Tsmos_SetIdleTimer(f32), Tsmos_SetTimerState(s32);
 extern void Tsmos_ActivateControllerState(void), Tsmos_SetModeOneFlag(s32), Frontend_LoadLanguageStringsIfAny(s32);
@@ -18,7 +18,7 @@ void func_802A2374_eu_x(void) {
     func_80253908_de(0);
     Gfx_InitializeFrontendServices();
     ESmem_InitializeFrameHeaps(0x3000);
-    func_80297FA0_de(0x23, D_0043D330_eu_x);
+    SmSmngr_InitializeScreenManager(0x23, D_0043D330_eu_x);
     Frontend_OpenResourceArchive(D_800C6080_eu_x);
     SmpOverlay_RegisterOverlayClass();
     SmpFrameAnim_RegisterFrameAnimClass();

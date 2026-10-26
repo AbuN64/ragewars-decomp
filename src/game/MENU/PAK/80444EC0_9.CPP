@@ -11,7 +11,7 @@
 #include "SYSTEM_3/80265370.H"
 
 #if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_80400000", func_80445AB8);
+INCLUDE_ASM("ovl_80400000", Pak_UpdateThirdVolumeLabel);
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1) || ((defined(VERSION_EU) || defined(VERSION_EU_X)) && defined(NON_MATCHING))
@@ -29,7 +29,7 @@ INCLUDE_ASM("ovl_80400000", func_80445AB8);
 
 extern s32 Pak_CountLineChars(LayeredText *);
 
-s32 func_80445AB8(LayeredText *field) {
+s32 Pak_UpdateThirdVolumeLabel(LayeredText *field) {
     s32 step = (VOLUME_BYTE - 0x80) / 8;
     char *text;
 

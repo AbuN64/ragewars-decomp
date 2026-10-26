@@ -113,7 +113,7 @@ extern char D_0044EB94[];
 
 extern char D_0044ED20[];
 
-extern s32 func_804051D4_de(s32 ch);
+extern s32 Pak_RepairIdIfNeeded(s32 ch);
 
 extern s32 Pak_SaveSnapshotAndClose(void *owner, MenuRecAt24 *menu, void *arg);
 
@@ -278,7 +278,7 @@ s32 Pak_ConfirmPendingOperation(void *owner, MenuRecAt24 *menu, void *arg) {
                 break;
             }
             Pak_ProbeStatus(ch);
-            if (func_804051D4_de(ch) == 0) {
+            if (Pak_RepairIdIfNeeded(ch) == 0) {
                 Pak_OpenDialog(D_8014561C, D_0044EB94, menu->player, menu->slot, menu->prompt);
             } else {
                 Pak_OpenDialog(D_8014561C, D_0044ED20, menu->player, menu->slot, menu->prompt);

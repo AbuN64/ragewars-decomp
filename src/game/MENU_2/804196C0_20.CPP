@@ -61,5 +61,5 @@ MenuFadeWidget *SmpFade_CreateFadeWidget(s32 frameId, s32 itemId) {
 
 
 void SmpFade_RegisterFadeClass(void) {
-    func_802982C4_de(0xB60, D_0041A490, D_0041A520, 3);
+    SmSmngr_RegisterElementHandlers(0xB60, D_0041A490, D_0041A520, 3);
 }

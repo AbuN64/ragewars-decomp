@@ -5,7 +5,7 @@
 #include "FRONTEND/8040B45C_32.H"
 #include "COMMON/UNUSED.H"
 
-/* Moves the focus of the current screen's selected widget in a direction (5 to 8 following its first, second, third or fourth link) past linked widgets flagged 0x100, and selects the first unflagged one through func_802991D4_de. */
+/* Moves the focus of the current screen's selected widget in a direction (5 to 8 following its first, second, third or fourth link) past linked widgets flagged 0x100, and selects the first unflagged one through Smos_SetFocusedElement. */
 
 
 
@@ -13,7 +13,7 @@
 
 
 
-extern void func_802991D4_de(s32 id, Widget **links, s32 direction);
+extern void Smos_SetFocusedElement(s32 id, Widget **links, s32 direction);
 
 void MoveMenuFocus(s32 direction) {
     Widget *widget;
@@ -68,14 +68,14 @@ void MoveMenuFocus(s32 direction) {
         break;
     }
     if (id >= 0) {
-        func_802991D4_de(id, links, direction);
+        Smos_SetFocusedElement(id, links, direction);
     }
 }
 
 extern void *Frontend_GetScreenData(s32 index);
 extern Element *FindMenuElement(s32);
 extern void MarkMenuEventHandled(void);
-extern void func_80298368_de(s32);
+extern void SmXlate_SwitchScreen(s32);
 
 static inline s32 eventCategory(u32 event) {
     if (event < 0xE00) return 0;
@@ -100,11 +100,11 @@ static inline s32 defaultElementEvent(Element *element, s32 event, s32 argument)
         case 1:
             if ((element->flags & 0x10) && element->linked_id) {
                 MarkMenuEventHandled();
-                func_80298368_de(element->linked_id);
+                SmXlate_SwitchScreen(element->linked_id);
             }
             break;
         case 2:
-            if (D_8014D080->current > 0) func_802998A8_de();
+            if (D_8014D080->current > 0) Smos_ReturnToPreviousScreen();
             break;
         case 15:
             result = 0;
@@ -161,11 +161,11 @@ s32 DispatchElementEvent(s32 id, s32 event, s32 value, s32 argument, s32 context
                 case 1:
                     if ((element->flags & 0x10) && element->linked_id) {
                         MarkMenuEventHandled();
-                        func_80298368_de(element->linked_id);
+                        SmXlate_SwitchScreen(element->linked_id);
                     }
                     break;
                 case 2:
-                    if (D_8014D080->current > 0) func_802998A8_de();
+                    if (D_8014D080->current > 0) Smos_ReturnToPreviousScreen();
                     break;
                 case 15:
                     Frontend_SetWidgetFlag40(element, 1);
@@ -216,7 +216,7 @@ s32 DispatchElementEvent(s32 id, s32 event, s32 value, s32 argument, s32 context
 #include "COMMON/UNUSED.H"
 extern void Smos_DispatchDescendantScreenEvent(NodeRecAt12 *, s32, s32, s32, s32, s32);
 extern void MarkMenuEventHandled(void);
-extern void func_80298368_de(s32);
+extern void SmXlate_SwitchScreen(s32);
 static inline s32 Menu_GetDispatchCategory(u32 code) {
     if (code < 0xE00) return 0;
     if (code - 0x1000 < 0x1000) return 1;
@@ -236,11 +236,11 @@ static inline s32 Menu_DispatchDefaultEvent(Element *element, s32 event, s32 arg
         case 1:
             if ((element->flags & 0x10) && element->linked_id != 0) {
                 MarkMenuEventHandled();
-                func_80298368_de(element->linked_id);
+                SmXlate_SwitchScreen(element->linked_id);
             }
             break;
         case 2:
-            if (D_8014D080->current > 0) func_802998A8_de();
+            if (D_8014D080->current > 0) Smos_ReturnToPreviousScreen();
             break;
         case 15: result = 0; Frontend_SetWidgetFlag40(element, 1); break;
         case 16: result = 0; Frontend_SetWidgetFlag40(element, 0); break;

@@ -18,7 +18,7 @@ extern Handler80436634 D_800E5630;
 
 
 
-s32 func_80436454_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchResidentActorEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler80436634 *entry;
     s32 index;
     s32 wildcard;

@@ -9,7 +9,7 @@ s32 Menu_HandleEuxExtraOptionsChoice(void) {
     if (D_800E4400->open == 0) {
         Menu_ShowExtraOptionsPanel();
     } else {
-        message = func_80299A08_de();
+        message = Smos_GetFocusedElementId();
         switch (message) {
         case 0x3BA:
             SmpSlider_SetTransitionMode(D_800E4400->dialog, 2);

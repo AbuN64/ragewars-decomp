@@ -28,7 +28,7 @@ extern void Frontend_StartConfiguredMatch(void);
 
 
 
-s32 func_804362A8_de(s32 unused0, s32 unused1, s32 event) {
+s32 Frontend_UpdatePage67Exit(s32 unused0, s32 unused1, s32 event) {
     s32 *pause;
     if (event == 1) {
         if (func_8043C308_de(D_800E5558) != 1) {

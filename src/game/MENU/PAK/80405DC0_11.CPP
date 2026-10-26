@@ -13,7 +13,7 @@
 #ifdef NON_MATCHING
 /* Drafted below with the other versions' body. */
 #else
-INCLUDE_ASM("ovl_80400000", func_80407F6C_de);
+INCLUDE_ASM("ovl_80400000", Pak_UpdateNoteLabel);
 #endif
 #endif
 
@@ -21,7 +21,7 @@ INCLUDE_ASM("ovl_80400000", func_80407F6C_de);
 #ifdef NON_MATCHING
 /* Drafted below with the other versions' body. */
 #else
-INCLUDE_ASM("ovl_80400000", func_80408118_de);
+INCLUDE_ASM("ovl_80400000", Pak_UpdateSpaceLabel);
 #endif
 #endif
 
@@ -29,7 +29,7 @@ INCLUDE_ASM("ovl_80400000", func_80408118_de);
 #ifdef NON_MATCHING
 /* Drafted below with the other versions' body. */
 #else
-INCLUDE_ASM("ovl_80400000", func_804082FC_de);
+INCLUDE_ASM("ovl_80400000", Pak_HandleMenuAction);
 #endif
 #endif
 
@@ -56,7 +56,7 @@ extern char *D_800D375C;
 extern s32 Pak_ReadNoteInfo(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *size,
                          char *companyCode, char *gameCode);
 
-extern s32 func_804057BC_de(u8 *name, s32 size);
+extern s32 Pak_ContainsInvalidNameByte(u8 *name, s32 size);
 
 extern void XPlus_CopyString(u8 *dst, char *src);
 
@@ -102,7 +102,7 @@ extern void Pak_SaveSnapshotAndClose(s32 arg0, Shared_PakMenu *menu, s32 arg2);
 
 extern void Pak_GetNoteGameName(s32 ch, s32 note, s32 *state);
 
-extern void func_80405648_de(s32 state, char *name, s32 size);
+extern void Pak_DecodeNoteText(s32 state, char *name, s32 size);
 
 
 extern void Pak_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
@@ -134,7 +134,7 @@ static inline s32 findNote(s32 ch, s32 *found)
     D_8014D4FC = -1;
     for (i = 0; i < 16; i++) {
         Pak_GetNoteGameName(ch, i, &state);
-        func_80405648_de(state, name, 16);
+        Pak_DecodeNoteText(state, name, 16);
         if (XPlus_CompareStrings(name, game) == 0) {
             if (found != 0) {
                 *found = i;
@@ -145,7 +145,7 @@ static inline s32 findNote(s32 ch, s32 *found)
     return 0;
 }
 
-s32 func_80407F6C_de(PakNoteTextEntry *entry, PakNotesMenu *menu) {
+s32 Pak_UpdateNoteLabel(PakNoteTextEntry *entry, PakNotesMenu *menu) {
     u8 name[16];
     u8 ext[8];
     char companyCode[8];
@@ -173,7 +173,7 @@ s32 func_80407F6C_de(PakNoteTextEntry *entry, PakNotesMenu *menu) {
     }
     result = Pak_ReadNoteInfo(ch, index, &exists, name, ext, &size, companyCode, gameCode);
     if (exists != 0 && result == 0) {
-        if (func_804057BC_de(name, 16) != 0) {
+        if (Pak_ContainsInvalidNameByte(name, 16) != 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
             XPlus_CopyString(name, D_800E27B4[g_languageIndex]);
 #else
@@ -221,7 +221,7 @@ s32 func_80407F6C_de(PakNoteTextEntry *entry, PakNotesMenu *menu) {
     return 0;
 }
 
-s32 func_80408118_de(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
+s32 Pak_UpdateSpaceLabel(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
     Digits digits;
     s32 freeSpace;
     s32 ch;
@@ -284,7 +284,7 @@ s32 func_80408118_de(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
     return 0;
 }
 
-s32 func_804082FC_de(s32 arg0, Shared_PakMenu *menu, s32 arg2)
+s32 Pak_HandleMenuAction(s32 arg0, Shared_PakMenu *menu, s32 arg2)
 {
     s32 ch = 0;
     s32 use;

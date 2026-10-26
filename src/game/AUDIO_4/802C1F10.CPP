@@ -11,12 +11,12 @@ extern Func802C1F10Node *D_800D526C;
 extern void *D_800D5270;
 extern void func_802BB870_de(void *arg0, Func802C1F10Node *arg1);
 
-void func_802BCE20_de(Func802C1F10Node *arg0) {
+void func_802BCE20_de(Func802C1F10Node *thread) {
     Func802C1F10Node *node;
     Func802C1F10Node *cur;
     Func802C1F10Node **head;
     s32 token;
-    node = arg0;
+    node = thread;
     token = __osDisableInt();
     if (node == 0) {
         node = D_800D5270;

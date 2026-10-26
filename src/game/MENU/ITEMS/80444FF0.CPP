@@ -4,7 +4,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 extern u8 *D_800E3B84[];
 
-void func_80444FF0_eu(Shared_PlayerSettingsRecord *record, s32 i, Shared_Game *game) {
+void Items_CopyLocalizedPlayerNameSuffix(Shared_PlayerSettingsRecord *record, s32 i, Shared_Game *game) {
     do {
         record->name[i] = D_800E3B84[game->language][i];
         i++;

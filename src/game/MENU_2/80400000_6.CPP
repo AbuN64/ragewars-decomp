@@ -10,7 +10,7 @@
 void Geometry_InvalidateMaterialKeys(void);
 extern Gfx *g_displayListCursor;
 
-void func_80401D74_de(s32 inset) {
+void Menu_DrawLetterboxBorder(s32 inset) {
     f32 left;
     f32 top;
     f32 width;
@@ -77,7 +77,7 @@ void Menu_DrawLetterboxBands(void) {
     gDPSetPrimColor(g_displayListCursor++, 255, 255, 0, 0, 0, 255);
     gDPFillRectangle(g_displayListCursor++, 0, 0, MENU_CLAMP_PIXEL(D_800E28D0), MENU_CLAMP_PIXEL((s32)height));
     gDPFillRectangle(g_displayListCursor++, 0, (u32)MENU_CLAMP_HEIGHT((f32)D_800E28D4 - height), MENU_CLAMP_PIXEL(D_800E28D0), MENU_CLAMP_PIXEL(D_800E28D4));
-    func_80401D74_de((s32)height);
+    Menu_DrawLetterboxBorder((s32)height);
 }
 
 #undef MENU_CLAMP_PIXEL

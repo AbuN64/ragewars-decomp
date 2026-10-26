@@ -26,7 +26,7 @@ s32 Frontend_CreateUsJoinOptionsMenu(void *arg0) {
 
     item = Frontend_FindWidgetByResourceId(arg0, 0x38B);
     item->alpha = 0x8C;
-    if (func_802999A0_de(0) == 22) {
+    if (Smos_GetPreviousScreenOwner(0) == 22) {
         Frontend_SetWidgetFlag08(item, 0);
     }
 
@@ -58,7 +58,7 @@ s32 Frontend_CreateUsJoinOptionsMenu(void *arg0) {
 #include "COMMON/ITEMRECAT20V1.H"
 extern struct TextEntry D_800E381C[][17];
 extern void MarkMenuEventHandled(void);
-extern s32 func_802999A0_de(s32);
+extern s32 Smos_GetPreviousScreenOwner(s32);
 extern s32 Frontend_FindJoinModelIndex(s32, s32);
 extern void XPlus_CopyString(char *, char *);
 extern void Frontend_UpdateJoinRequestDisplay(s32);
@@ -70,7 +70,7 @@ s32 Frontend_SelectPreviousUsJoinModel(void *sender, void *context, void *argume
 
     if (event != 1) return 0;
     MarkMenuEventHandled();
-    if (func_802999A0_de(0) == 0x16) return 0;
+    if (Smos_GetPreviousScreenOwner(0) == 0x16) return 0;
     variant = D_80153F80[D_800E39C0->selection].variant;
     model = Frontend_FindJoinModelIndex(variant, D_80153F80[D_800E39C0->selection].id);
     do {
@@ -107,7 +107,7 @@ void func_8041E2F0_us(void) {
         "sw        $s0, 0x10($sp)\n"
         "jal        MarkMenuEventHandled\n"
         "nop\n"
-        "jal        func_802999A0_de\n"
+        "jal        Smos_GetPreviousScreenOwner\n"
         "addu      $a0, $zero, $zero\n"
         "addiu      $v1, $zero, 0x16\n"
         "beq        $v0, $v1, .Lauto_8041E468\n"

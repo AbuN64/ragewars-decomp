@@ -23,7 +23,7 @@ struct ALSequenceLoopEvent {
 
 
 extern void func_802B1E80_de(struct ALSeq_s *, ALEvent *);                 /* alSeqNextEvent */
-extern void func_802B0C94_de(ALSeqPlayer *, ALEvent *);           /* __handleMIDIMsg */
+extern void Audio_HandleSequenceMidiEvent(ALSeqPlayer *, ALEvent *);           /* __handleMIDIMsg */
 extern void func_802B1DEC_de(ALSeqPlayer *, ALEvent *);           /* __handleMetaMsg */
 extern u8 func_802B22F4_de(struct ALSeq_s *, s32 *);                       /* __alSeqNextDelta (char; unsigned in this build) */
 extern int func_802B20C8_de(struct ALSeq_s *arg0);                             /* alSeqGetTicks */

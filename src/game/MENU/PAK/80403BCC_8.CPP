@@ -88,7 +88,7 @@ extern PakDirectory *D_800E2854;
 
 extern Device D_8014D280[];
 
-s32 Pak_ReadNoteData(s32 slot, s32 arg1, s32 arg2, s32 length)
+s32 Pak_ReadNoteData(s32 slot, s32 noteIndex, s32 destination, s32 length)
 {
   s32 size;
   s32 *buf;
@@ -115,14 +115,14 @@ s32 Pak_ReadNoteData(s32 slot, s32 arg1, s32 arg2, s32 length)
   D_8010BBB8 = 2;
   if (result == 0)
   {
-    result = func_80447AF0_de(&D_8014D280[slot], arg1, zero, zero, size, addr);
+    result = func_80447AF0_de(&D_8014D280[slot], noteIndex, zero, zero, size, addr);
     if (result != zero)
     {
       result = -1;
     }
     if (result == 0)
     {
-      func_802BD3A0_de(arg2, addr, length);
+      func_802BD3A0_de(destination, addr, length);
     }
   }
   Control_ReleasePakLock();
@@ -164,7 +164,7 @@ int Pak_GetFreePages(int slot, int *score) {
     return D_80153500[slot];
 }
 
-s32 func_804051D4_de(s32 channel) {
+s32 Pak_RepairIdIfNeeded(s32 channel) {
     s32 channelOffset;
     s32 result;
     channelOffset = channel * 4;
@@ -186,7 +186,7 @@ s32 func_804051D4_de(s32 channel) {
     return result;
 }
 
-s32 func_80405290_de(s32 channel) {
+s32 Pak_RepairId(s32 channel) {
     s32 result;
     if (D_801534F0[channel] != 3) {
         return -2;
@@ -211,7 +211,7 @@ s32 Pak_GetNoteGameName(s32 index, s32 entry, char **out) {
     return 0;
 }
 
-s32 func_8040538C_de(s32 index, s32 entry, char **out) {
+s32 Pak_GetNoteExtension(s32 index, s32 entry, char **out) {
     if (D_801534F0[index] != 3) {
         return -2;
     }
@@ -219,7 +219,7 @@ s32 func_8040538C_de(s32 index, s32 entry, char **out) {
     return 0;
 }
 
-s32 func_804053E0_de(s32 index, s32 entry, s32 *out) {
+s32 Pak_GetNotePageCount(s32 index, s32 entry, s32 *out) {
     if (D_801534F0[index] != 3) {
         return -2;
     }

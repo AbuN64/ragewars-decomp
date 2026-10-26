@@ -20,7 +20,7 @@ extern void SmpSlider_SetTransitionMode(void *, s32);
    otherwise it calls Tsmos_ActivateControllerState and, while its menu reports 3, counts the delay at 0xC down and
    on expiry scrolls the list at 0x8 back one row, wrapping to the menu's own row count, and
    restarts the delay at 3; when the menu reports 4 it calls MarkMenuEventHandled and leaves through
-   func_80298368_de with the stored target or func_802998A8_de when that is -1. Returns zero. Written
+   SmXlate_SwitchScreen with the stored target or Smos_ReturnToPreviousScreen when that is -1. Returns zero. Written
    from the assembly as a switch on the menu result, matching on the first trial. */
 
 
@@ -38,7 +38,7 @@ extern s32 SmpSlider_GetTransitionMode(struct MenuFrontendUpdatePlayModeMenu *);
 
 extern void MarkMenuEventHandled();
 
-extern void func_80298368_de(s32);
+extern void SmXlate_SwitchScreen(s32);
 
 
 /* Activates the requested player slots and creates any missing players when entering the screen. */
@@ -116,10 +116,10 @@ s32 Frontend_UpdatePlayerCountScreen(void) {
     case 4:
         MarkMenuEventHandled();
         if (D_800E5430->head.target != -1) {
-            func_80298368_de(D_800E5430->head.target);
+            SmXlate_SwitchScreen(D_800E5430->head.target);
             return 0;
         }
-        func_802998A8_de();
+        Smos_ReturnToPreviousScreen();
         break;
     default:
         return 0;

@@ -10,7 +10,7 @@
 #include "COMMON/MENUSELECTIONMESSAGE.H"
 #include "ACHIEVE/80437C30_2.H"
 
-/* Calls InitFrontendMenus and Tsmos_DeactivateControllerState, then func_80298368_de with 0x12. */
+/* Calls InitFrontendMenus and Tsmos_DeactivateControllerState, then SmXlate_SwitchScreen with 0x12. */
 #if defined(VERSION_EU)
 extern void Tsmos_InitializeEuropeanFrontend();
 #elif defined(VERSION_EU_X)
@@ -36,7 +36,7 @@ func_802A2224_de
 #endif
 ();
     Tsmos_DeactivateControllerState();
-    func_80298368_de(0x12);
+    SmXlate_SwitchScreen(0x12);
 }
 
 void func_804389F0_de(void) {
@@ -62,5 +62,5 @@ void func_804389F0_de(void) {
     } else {
         next = 10;
     }
-    func_80298368_de(next);
+    SmXlate_SwitchScreen(next);
 }

@@ -380,7 +380,7 @@ typedef struct DraftWidget {
 
 extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 extern void Frontend_DrawVisibleSiblings(void *, sm_dldc);
-extern s32 func_80299838_de(s32);
+extern s32 Smos_GetElementHandlerFlags(s32);
 extern void N64Eng_ResetRenderState(void);
 extern void N64Eng_RenderNoop(void);
 
@@ -464,12 +464,12 @@ void Frontend_DrawWidget(DraftWidget *widget, sm_dldc args) {
         break;
     default: {
         s32 flags;
-        flags = func_80299838_de(widget->type);
+        flags = Smos_GetElementHandlerFlags(widget->type);
         if (!(flags & 1)) {
             N64Eng_ResetRenderState();
             D_800E2AB8 = 0;
         }
-        if (func_80299A80_de((void *)widget, args) && !(flags & 1)) {
+        if (Smos_InvokeWidgetCallback((void *)widget, args) && !(flags & 1)) {
             N64Eng_RenderNoop();
             D_800E2AB8 = 0;
         }

@@ -10,33 +10,33 @@
 #include "FRONTEND/MATCH_MENU_MESSAGE_IDS.H"
 #include "TYPES.H"
 
-/* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled. 0x1D9: when
-   func_802999A0_de(0) reports 0x16 it stops the menu object and the menu data D_80145040, releases
+/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled. 0x1D9: when
+   Smos_GetPreviousScreenOwner(0) reports 0x16 it stops the menu object and the menu data D_80145040, releases
    D_8011FE88, restarts func_8025476C_de when func_8025477C_de reports it idle, sets the menu stage to 8
    and sends Frontend_SetMenuChoiceResult 20, 10, 15 or 10 by the controller mode (3 for any other mode); otherwise
-   it sends 3. 0x1DA sends 11 when func_802999A0_de(0) reports 11 and -1 otherwise. Either then calls
-   func_802998A8_de. Returns zero. */
+   it sends 3. 0x1DA sends 11 when Smos_GetPreviousScreenOwner(0) reports 11 and -1 otherwise. Either then calls
+   Smos_ReturnToPreviousScreen. Returns zero. */
 #include "MENU/PAK_LOAD.H"
 
 extern void MarkMenuEventHandled(void);
-extern s32 func_80299A08_de(void);
+extern s32 Smos_GetFocusedElementId(void);
 extern void Items_ResetActorPools(void *, s32);
 extern void func_804499B0_de(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(s32);
-extern void func_802998A8_de(void);
+extern void Smos_ReturnToPreviousScreen(void);
 
 
 
 
 s32 Frontend_HandleMatchMenuMessage(void) {
     MarkMenuEventHandled();
-    switch (func_80299A08_de()) {
+    switch (Smos_GetFocusedElementId()) {
     default:
         return 0;
     case MENU_804291A8_473:
-        if (func_802999A0_de(0) == 0x16) {
+        if (Smos_GetPreviousScreenOwner(0) == 0x16) {
             Items_ResetActorPools(&D_80145040.object, 0);
             func_804499B0_de(&D_80145040, 0, 0);
             Scene_LoadLevelResources(&g_world, 0, 0);
@@ -67,25 +67,25 @@ s32 Frontend_HandleMatchMenuMessage(void) {
         }
         break;
     case MENU_804291A8_474:
-        if (func_802999A0_de(0) == 11) {
+        if (Smos_GetPreviousScreenOwner(0) == 11) {
             Frontend_SetMenuChoiceResult(11);
         } else {
             Frontend_SetMenuChoiceResult(-1);
         }
         break;
     }
-    func_802998A8_de();
+    Smos_ReturnToPreviousScreen();
     return 0;
 }
 #endif
 
-/* Calls MarkMenuEventHandled, then passes 0xB to Frontend_SetMenuChoiceResult when func_802999A0_de reports 0xB for zero
-   and -1 otherwise, then calls func_802998A8_de. Returns zero. */
+/* Calls MarkMenuEventHandled, then passes 0xB to Frontend_SetMenuChoiceResult when Smos_GetPreviousScreenOwner reports 0xB for zero
+   and -1 otherwise, then calls Smos_ReturnToPreviousScreen. Returns zero. */
 extern void MarkMenuEventHandled();
 
 s32 Frontend_CloseMatchMenu(void) {
     MarkMenuEventHandled();
-    Frontend_SetMenuChoiceResult(func_802999A0_de(0) == 0xB ? 0xB : -1);
-    func_802998A8_de();
+    Frontend_SetMenuChoiceResult(Smos_GetPreviousScreenOwner(0) == 0xB ? 0xB : -1);
+    Smos_ReturnToPreviousScreen();
     return 0;
 }

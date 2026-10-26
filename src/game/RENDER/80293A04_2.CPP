@@ -52,7 +52,7 @@ void SetN64_InitializeFrontendScreenState(GameSession *gameSession) {
     D_800E28CC = 1;
     D_8014AD94 = 0;
     gameSession->timer = D_800C54C0_de;
-    func_80298368_de(0x1D);
+    SmXlate_SwitchScreen(0x1D);
 }
 
 void SetN64_ExitSessionAndDisablePaks(void *arg0) {

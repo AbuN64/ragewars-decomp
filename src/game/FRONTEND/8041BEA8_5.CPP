@@ -45,9 +45,9 @@ enum { SLOT_RESOURCE_962 = 962, SLOT_RESOURCE_966 = 966, SLOT_RESOURCE_968 = 968
 
 extern s32 Control_IsControllerConnected(s32);
 
-extern void func_80298368_de(s32);
+extern void SmXlate_SwitchScreen(s32);
 
-extern void func_802991D4_de(s32);
+extern void Smos_SetFocusedElement(s32);
 
 extern void MarkMenuEventHandled(void);
 
@@ -90,7 +90,7 @@ extern s32 D_800E3514;
 
 #endif
 
-/* Calls Tsmos_DeactivateControllerState and MarkMenuEventHandled, then func_80298368_de with 2, sets D_8014ADA0 and returns
+/* Calls Tsmos_DeactivateControllerState and MarkMenuEventHandled, then SmXlate_SwitchScreen with 2, sets D_8014ADA0 and returns
    one. */
 
 extern void Tsmos_DeactivateControllerState();
@@ -157,7 +157,7 @@ extern s32 D_800DE174;
 #else
 #endif
 
-extern s32 func_80299A08_de(void);
+extern s32 Smos_GetFocusedElementId(void);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E351C, an actor kind at D_800E3520 and a handler at D_800E3524: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from N64Eng_DispatchNumericWidgetEvent. */
 
@@ -185,7 +185,7 @@ void SmpOverlay_RefreshPakDialog(void) {
     s32 var_s2;
     Label *temp_s0;
 
-    func_802991D4_de(SLOT_RESOURCE_962);
+    Smos_SetFocusedElement(SLOT_RESOURCE_962);
     Frontend_SetWidgetFlag08(D_800E3518->absent, 0);
     var_s2 = 0;
     Frontend_SetWidgetFlag08(D_800E3518->unavailable, 0);
@@ -261,7 +261,7 @@ void SmpOverlay_RefreshPakDialog(void) {
 #endif
         }
         PAKInterface_SetScreenPhase(6);
-        func_80298368_de(0x13);
+        SmXlate_SwitchScreen(0x13);
         return;
     }
     if (var_s1 == 1) {
@@ -281,7 +281,7 @@ void SmpOverlay_RefreshPakDialog(void) {
     Frontend_SetWidgetFlag08(D_800E3518->prompt, 1);
     var_a0 = SLOT_RESOURCE_966;
 block_24:
-    func_802991D4_de(var_a0);
+    Smos_SetFocusedElement(var_a0);
 block_25:
     Tsmos_ActivateControllerState();
 }
@@ -289,7 +289,7 @@ block_25:
 s32 SmpOverlay_FinishPakDialog(void) {
     Tsmos_DeactivateControllerState();
     MarkMenuEventHandled();
-    func_80298368_de(2);
+    SmXlate_SwitchScreen(2);
     D_8014ADA0 = 1;
     return 1;
 }
@@ -318,7 +318,7 @@ void SmpOverlay_AdvancePakDialogPort(void) {
     if (D_800DF4C0 >= 4) {
         Tsmos_DeactivateControllerState();
         MarkMenuEventHandled();
-        func_80298368_de(2);
+        SmXlate_SwitchScreen(2);
         D_8014ADA0 = 1;
     } else {
         SmpOverlay_RefreshPakDialog();
@@ -410,12 +410,12 @@ s32 SmpOverlay_ConsumePakDialogEvent(void) {
     return 0;
 }
 
-/* The dialog-event codes func_80299A08_de reports differ per cartridge family: the European
+/* The dialog-event codes Smos_GetFocusedElementId reports differ per cartridge family: the European
    eu-x cart numbers them 0x3C9..0x3CF, the de cart 0x3C1..0x3C5, and eu/us/us-rev1 0x3C6..0x3CB.
    Each case below carries the same work in every family, only its label changes. */
 s32 SmpOverlay_HandlePakDialogChoice(void) {
     MarkMenuEventHandled();
-    switch (func_80299A08_de()) {
+    switch (Smos_GetFocusedElementId()) {
 #if defined(VERSION_EU_X)
     case 0x3CF:
 #elif defined(VERSION_DE)
@@ -466,7 +466,7 @@ s32 SmpOverlay_HandlePakDialogChoice(void) {
         D_800E3514 = 1;
 #endif
         PAKInterface_SetScreenPhase(6);
-        func_80298368_de(0x13);
+        SmXlate_SwitchScreen(0x13);
         break;
     }
     return 0;

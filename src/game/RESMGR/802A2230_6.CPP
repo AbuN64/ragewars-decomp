@@ -27,8 +27,8 @@ void Tsmos_UpdateFrontend(void) {
     if (D_800D2C98 == 1) {
         ESmem_SwapFrameHeap();
         mode = GetMenuScreenOwner();
-        func_802995D4_de(mode, 0xE08, 0, 0, 0);
-        func_80298FE8_de();
+        Smos_RouteElementEvent(mode, 0xE08, 0, 0, 0);
+        Smos_DrawScreenStack();
         Frontend_EvictExpiredImages();
         N64Eng_AdvanceFrameCounter();
         mode = GetMenuScreenOwner();

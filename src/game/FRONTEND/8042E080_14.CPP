@@ -17,7 +17,7 @@ extern char g_noteInfoIntFormat[];
 
 #endif
 extern s32 Pak_ReadNoteInfo(s32, s32, s32 *, char *, u8 *, s32 *, char *, char *);
-extern s32 func_804057BC_de(char *, s32);
+extern s32 Pak_ContainsInvalidNameByte(char *, s32);
 extern void XPlus_CopyString(char *, char *);
 extern void XStdio_FormatBuffer(char *, char *, ...);
 extern s32 Pak_GetFreePages(s32, s32 *);
@@ -78,7 +78,7 @@ void PAKInterface_LoadNoteList(s32 player)
 #endif
         if (note_status == 0) {
             if (status == 1) {
-                if (func_804057BC_de(name, 16) == 1) {
+                if (Pak_ContainsInvalidNameByte(name, 16) == 1) {
 #if defined(VERSION_EU)
                     XPlus_CopyString(name, ((D_800E27B4)[settings->language]));
 #elif defined(VERSION_EU_X)

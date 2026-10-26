@@ -34,7 +34,7 @@ extern void SetN64_ResetSessionPlayerPools(void *session, s32 count, s32 force_a
 
 extern void Scene_LoadLevelResources(void *, void *, void *);
 
-extern void func_80298368_de(s32 arg0);
+extern void SmXlate_SwitchScreen(s32 arg0);
 
 
 /* func_80245A00_de: types.abi.declared: reuse existing C; propagated semantic conflicts remain named */
@@ -108,7 +108,7 @@ void SetN64_InitializeMode8Scene(void *arg0) {
     SetN64_ResetSessionPlayerPools(arg0, 0, 0);
     Scene_LoadLevelResources(&g_world, 0, 0);
     D_801462C8.counters.transitionActive = 0;
-    func_80298368_de(0x18);
+    SmXlate_SwitchScreen(0x18);
     func_8025E2D4_de(0x34);
 }
 

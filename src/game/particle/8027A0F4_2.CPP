@@ -68,7 +68,7 @@ void Particle_UpdateTargetedAcceleration(AccelSteeringObj *particle) {
         Particle_SteerToward(particle, &particle->target->point);
         return;
     }
-    accel = func_802B2350(particle->link->params->accel);
+    accel = Menu_ExpandFloatHighWord(particle->link->params->accel);
     if (accel != 0.0f) {
         do {
             direction = particle->direction;
@@ -77,7 +77,7 @@ void Particle_UpdateTargetedAcceleration(AccelSteeringObj *particle) {
             GraphU64_AddVec3(velocity, velocity, &delta);
         } while (0);
         length = Math_Sqrtf(particle->velocity.x * particle->velocity.x + particle->velocity.y * particle->velocity.y + particle->velocity.z * particle->velocity.z);
-        limit = func_802B2350(particle->link->params->limit);
+        limit = Menu_ExpandFloatHighWord(particle->link->params->limit);
         if (accel > 0.0f) {
             if (!(limit < length)) goto done;
         } else {
@@ -248,9 +248,9 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
   temp_s0_2 = (void *) (&arg0->inst.velocity.x);
   GraphU64_AddVec3(temp_s0_2, temp_s0_2, &sp10);
 #if defined(VERSION_EU)
-  GraphU64_ClampMotionLength(temp_s0_2, func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12));
+  GraphU64_ClampMotionLength(temp_s0_2, Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12));
 #else
-  GraphU64_ClampMotionLength(temp_s0_2, func_802B2350((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12));
+  GraphU64_ClampMotionLength(temp_s0_2, Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12));
 #endif
   return;
   block_24:
@@ -265,9 +265,9 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
   Player_ApplyPlayerForces(&D_80145040, arg0);
 
 #if defined(VERSION_EU)
-  temp_f0_3 = func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk10);
+  temp_f0_3 = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk10);
 #else
-  temp_f0_3 = func_802B2350((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk10);
+  temp_f0_3 = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk10);
 #endif
   if (temp_f0_3 != 0.0f)
   {
@@ -281,9 +281,9 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
     temp_f12 = arg0->inst.velocity.z;
     specialSpeed = Math_Sqrtf(((temp_f1 * temp_f1) + (temp_f0_4 * temp_f0_4)) + (temp_f12 * temp_f12));
 #if defined(VERSION_EU)
-    temp_f0_5 = func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
+    temp_f0_5 = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
 #else
-    temp_f0_5 = func_802B2350((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
+    temp_f0_5 = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
 #endif
     if (temp_f0_3 > 0.0f)
     {
@@ -345,9 +345,9 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
   if (!(arg0->flags & 0x70000))
   {
 #if defined(VERSION_EU)
-    temp_f0_9 = func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk10);
+    temp_f0_9 = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk10);
 #else
-    temp_f0_9 = func_802B2350((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk10);
+    temp_f0_9 = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk10);
 #endif
     if (temp_f0_9 != 0.0f)
     {
@@ -361,9 +361,9 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
       temp_f12_3 = arg0->inst.velocity.z;
       acceleratedSpeed = Math_Sqrtf(((temp_f1_5 * temp_f1_5) + (temp_f0_10 * temp_f0_10)) + (temp_f12_3 * temp_f12_3));
 #if defined(VERSION_EU)
-      temp_f0_11 = func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
+      temp_f0_11 = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
 #else
-      temp_f0_11 = func_802B2350((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
+      temp_f0_11 = Menu_ExpandFloatHighWord((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
 #endif
       if (temp_f0_9 > 0.0f)
       {

@@ -64,7 +64,7 @@ s32 PAKInterface_MoveNameCursorBackward(s32 unused0, s32 unused1, s32 arg2, s32 
 
 /* Handles Controller Pak menu confirmations for the active channel, clearing its status on a confirmed state-12 prompt and returning focus to an enabled widget in the list states. */
 #include "COMMON/NAME.H"
-s32 func_80299B4C_de();                                /* extern */
+s32 Smos_GetControlRepeatLimit();                                /* extern */
 s32 Frontend_ListHasFlag100(void *);                          /* extern */
 void SmpOverlay_ShowSlotNode(s32, s32, void *);                  /* extern */
 void PAKInterface_RelabelSlotRows(s32);                               /* extern */
@@ -86,7 +86,7 @@ s32 PAKInterface_HandleNextPanelSelection(s32 arg0, s32 arg1, s32 arg2, s32 arg3
     switch (playerState) {
     case 12:
         temp_s0 = XMath_AbsoluteInteger(arg4);
-        if (temp_s0 < func_80299B4C_de()) {
+        if (temp_s0 < Smos_GetControlRepeatLimit()) {
             D_800E54A4->players[player].nameTimer = 0;
             D_800E54A4->players[player].namePhase = 2;
         }
@@ -152,7 +152,7 @@ block_24:
 }
 
 /* Handles Controller Pak menu confirmations and returns focus to an enabled widget for the active channel. */
-extern s32 func_80299B4C_de(void);
+extern s32 Smos_GetControlRepeatLimit(void);
 extern void MarkMenuEventHandled(void);
 extern s32 Frontend_ListHasFlag100(void *);
 extern void SmpOverlay_ShowSlotNode(s32, s32, void *);
@@ -167,7 +167,7 @@ s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 packedPlayer
     player = packedPlayerEvent & 0xFFFF;
     switch (D_800E54A4->players[player].state) {
     case 12:
-        if (XMath_AbsoluteInteger(arg4) < func_80299B4C_de()) {
+        if (XMath_AbsoluteInteger(arg4) < Smos_GetControlRepeatLimit()) {
             D_800E54A4->players[player].nameTimer = 0;
             D_800E54A4->players[player].namePhase = 2;
         }

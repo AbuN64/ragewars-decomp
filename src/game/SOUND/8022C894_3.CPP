@@ -169,4 +169,4 @@ void func_8022D57C_de(void *player) {
     }
 }
 
-void func_8022D5F0_de(void *a, void *b) { func_80225B98_de(a, b, 0xA); }
+void func_8022D5F0_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0xA); }

@@ -19,7 +19,7 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
         if (D_80154020.value != -1) {
             D_800E4F60->unk44C->alpha = 0x5A;
             MarkMenuEventHandled();
-            func_80298368_de(D_80154020.value);
+            SmXlate_SwitchScreen(D_80154020.value);
             return 0;
         }
         D_800E4F60->unk44C->alpha = 0xFF;
@@ -50,7 +50,7 @@ s32 ScenarioSetup_UpdateSetupTransitionDe(void *root, s32 unused, s32 delta) {
         if (--D_800E4F60->unk3E0 <= 0) {
             D_800E4F60->unk3DC = 3;
             MarkMenuEventHandled();
-            func_80298368_de(8);
+            SmXlate_SwitchScreen(8);
             return 0;
         }
         break;

@@ -26,21 +26,21 @@ struct StateInfo;
 struct TeamInfo;
 struct View;
 
-struct Menu_func_804066BC_de;
-typedef struct Menu_func_804066BC_de Menu_func_804066BC_de;
+struct MenuPakBeginProfileLoad;
+typedef struct MenuPakBeginProfileLoad MenuPakBeginProfileLoad;
 
 
 struct Shape_typemap_110;
 struct RecordRecAt1C;
 
 
-struct Owner_func_804066BC_de;
-struct Owner_func_804066BC_de {
+struct OwnerPakBeginProfileLoad;
+struct OwnerPakBeginProfileLoad {
     char pad0[0x328];
     s32 flags;
 };
-struct Menu_func_804066BC_de;
-struct Owner_func_804066BC_de;
+struct MenuPakBeginProfileLoad;
+struct OwnerPakBeginProfileLoad;
 
 
 struct MenuPakConfirmProfileOrDeleteNote;

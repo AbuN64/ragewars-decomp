@@ -9,7 +9,7 @@
    calls SmpSlider_EnableTransition on its menu when it expires; after that, while the menu reports 3, it counts
    the scroll delay at 0x14 down and on expiry scrolls the list at 0x8 back one row, wrapping to
    the menu's own row count, and restarts the delay at 3, and when the menu reports 4 it calls
-   MarkMenuEventHandled and leaves through func_80298368_de with the target at 0x18. Returns zero. Adapted
+   MarkMenuEventHandled and leaves through SmXlate_SwitchScreen with the target at 0x18. Returns zero. Adapted
    from Frontend_UpdatePlayerCountScreen with the opening delay added, the scroll delay and target moved and the -1
    target test removed. */
 
@@ -53,7 +53,7 @@ s32 Frontend_UpdatePlayModeMenu(void) {
         break;
     case 4:
         MarkMenuEventHandled();
-        func_80298368_de(D_800E4600->target);
+        SmXlate_SwitchScreen(D_800E4600->target);
         break;
     default:
         return 0;

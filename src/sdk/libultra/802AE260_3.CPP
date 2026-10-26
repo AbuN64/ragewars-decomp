@@ -9,7 +9,7 @@ extern s8 D_8014D3E0;
 
 
 
-s32 func_802AE260_us_rev1(void) {
+s32 Libultra_InitDebugLink(void) {
     u8 enabledControl;
 
     D_8014D3E0 = 0;

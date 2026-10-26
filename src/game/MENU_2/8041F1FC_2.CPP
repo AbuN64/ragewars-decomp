@@ -64,7 +64,7 @@ s32 Menu_UpdateCharacterPreview(s32 unusedFirst,s32 unusedSecond,s32 elapsedTick
         if (exitTicksRemaining <= 0) {
             D_800E42D0->phase = 3;
             MarkMenuEventHandled();
-            func_80298368_de(D_800E42D0->result);
+            SmXlate_SwitchScreen(D_800E42D0->result);
             return 0;
         }
         break;

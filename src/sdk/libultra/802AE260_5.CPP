@@ -6,14 +6,14 @@
 #include "sdk/OSINT/802BDEA0_2.H"
 
 #if defined(VERSION_US_REV1)
-/* Writes one byte through the cartridge-domain port at D_B2000000 with the control register D_B200000C and strobe register D_B2000004, waiting for the ready bit of D_B2000015 to set and then clear with D_800D3650 retries each, setting D_8014D3E8 on a timeout and returning 1 on success. Adapted from func_802AE380_us_rev1 with the read of D_B2000001 changed to a write of the argument through D_B2000000 and the strobe at D_B2000004 raised and lowered around the handshake, and the argument copied into a second local for the port write. */
+/* Writes one byte through the cartridge-domain port at D_B2000000 with the control register D_B200000C and strobe register D_B2000004, waiting for the ready bit of D_B2000015 to set and then clear with D_800D3650 retries each, setting D_8014D3E8 on a timeout and returning 1 on success. Adapted from Libultra_ReadDebugLinkByte with the read of D_B2000001 changed to a write of the argument through D_B2000000 and the strobe at D_B2000004 raised and lowered around the handshake, and the argument copied into a second local for the port write. */
 
 
 extern u8 D_8014D3E0;
 
 
 
-s32 func_802AE5AC_us_rev1(s32 outputByte) {
+s32 Libultra_WriteDebugLinkByte(s32 outputByte) {
     s32 timeout;
     s32 data;
     s32 retries;

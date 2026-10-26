@@ -141,15 +141,15 @@ void Channel_UpdateVoiceVolume(AudioVolumeVoice *voice) {
             if (voice->envelopeStep < 0.0f) {
                 increasing = 1;
             }
-            if (increasing ? voice->envelopeValue < func_802B2350(envelope[2]) :
-                             func_802B2350(envelope[2]) < voice->envelopeValue) {
+            if (increasing ? voice->envelopeValue < Menu_ExpandFloatHighWord(envelope[2]) :
+                             Menu_ExpandFloatHighWord(envelope[2]) < voice->envelopeValue) {
                 voice->envelopeValue -= voice->envelopeStep;
                 if (increasing) {
-                    if (func_802B2350(envelope[2]) < voice->envelopeValue) {
-                        voice->envelopeValue = func_802B2350(envelope[2]);
+                    if (Menu_ExpandFloatHighWord(envelope[2]) < voice->envelopeValue) {
+                        voice->envelopeValue = Menu_ExpandFloatHighWord(envelope[2]);
                     }
-                } else if (voice->envelopeValue < func_802B2350(envelope[2])) {
-                    voice->envelopeValue = func_802B2350(envelope[2]);
+                } else if (voice->envelopeValue < Menu_ExpandFloatHighWord(envelope[2])) {
+                    voice->envelopeValue = Menu_ExpandFloatHighWord(envelope[2]);
                     if (voice->envelopeValue == 0.0f) {
                         ALSndPlayer *stoppedSound;
                         ContextRecAt2BC0 *stopContext;
@@ -169,7 +169,7 @@ void Channel_UpdateVoiceVolume(AudioVolumeVoice *voice) {
                 }
             }
         }
-        value = (s32)(func_802B2350(voice->control.levels[0]) * voice->envelopeValue);
+        value = (s32)(Menu_ExpandFloatHighWord(voice->control.levels[0]) * voice->envelopeValue);
         mix->left = value;
         apply_volume(voice, (f32)value * mix->attenuation * masterGain);
     } else {

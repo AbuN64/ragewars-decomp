@@ -58,7 +58,7 @@ s16 func_80259B10_de(CVector3 *position, GameplayCamera *listener) {
 
 /* Updates a view's heading from its controller: clears its turn rates, takes the base angles from the controller's preset (or the heading from its default yaw), adds the stick turn derived from GraphU64_RandomBetween of the two stick axes, nudges it up for flag 0x40 and down for flag 0x80, caps it at the limit, optionally records the heading and the pitch step over the step count and the current pitch, and finally maps the heading through the 60-entry curve table D_800CB8EC with linear interpolation. The turn is truncated to 16 bits into an int, and the next table index is its own s16. */
 extern struct Bytes12 *Audio_GetMetadataSectionFourEntry(ContextRecAt2BC0 *, s32);
-extern s16 func_802AD270_de(f32);
+extern s16 Menu_GetFloatHighWord(f32);
 
 extern s32 func_8025E584_de(ControllerCode802591C0 *);
 extern s32 func_8025E590_de(ControllerCode802591C0 *);
@@ -85,22 +85,22 @@ void func_80259C5C_de(ViewRecAtB0 *view, ControllerCode802591C0 *controller, s32
     if (controller->preset != -1) {
         *(struct Bytes12 *)angles = *Audio_GetMetadataSectionFourEntry(view->presets, controller->preset);
     } else {
-        angles->heading = func_802AD270_de(controller->yaw);
+        angles->heading = Menu_GetFloatHighWord(controller->yaw);
     }
     x = func_8025E584_de(controller);
     y = func_8025E590_de(controller);
     fy = y;
     fx = x;
     turn = (s16)(s32)(fx + ((GraphU64_RandomBetween(fy, fx)) < 0.0f ? -(GraphU64_RandomBetween(fy, fx)) : (GraphU64_RandomBetween(fy, fx))));
-    angles->heading = func_802AD270_de(RW_BITS_TO_FLOAT(angles->heading) + turn);
+    angles->heading = Menu_GetFloatHighWord(RW_BITS_TO_FLOAT(angles->heading) + turn);
     if (flags & 0x40) {
-        angles->heading = func_802AD270_de(RW_BITS_TO_FLOAT(angles->heading) + D_800C3F0C_de);
+        angles->heading = Menu_GetFloatHighWord(RW_BITS_TO_FLOAT(angles->heading) + D_800C3F0C_de);
     }
     if (flags & 0x80) {
-        angles->heading = func_802AD270_de(RW_BITS_TO_FLOAT(angles->heading) - D_800C3F10_de);
+        angles->heading = Menu_GetFloatHighWord(RW_BITS_TO_FLOAT(angles->heading) - D_800C3F10_de);
     }
     if (RW_BITS_TO_FLOAT(angles->heading) >= D_800C3F14_de) {
-        angles->heading = func_802AD270_de(D_800C3F14_de);
+        angles->heading = Menu_GetFloatHighWord(D_800C3F14_de);
     }
     if (controller->flags & 2) {
         motion->heading = RW_BITS_TO_FLOAT(angles->heading);
@@ -123,7 +123,7 @@ void func_80259C5C_de(ViewRecAtB0 *view, ControllerCode802591C0 *controller, s32
         result = D_800CB8EC[index];
     }
     motion->heading = result;
-    angles->heading = func_802AD270_de(result);
+    angles->heading = Menu_GetFloatHighWord(result);
 }
 
 /* Starts or retunes a voice's pan: seeds the gain from the sound table (the id compared with each entry of the
@@ -186,7 +186,7 @@ void Channel_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s
         preset = Audio_GetMetadataSectionThreeEntry(voice->context, control->field8);
         *(SoundEnvelope *)voice->envelope = *preset;
     } else {
-        envelope->flags = func_802AD270_de((f32)control->fieldF);
+        envelope->flags = Menu_GetFloatHighWord((f32)control->fieldF);
     }
     if (!(control->flags & 0x800) && voice->fieldC0 != 1 && voice->context->field2B98 != 0) {
         minimumGain = (f32)gainRange[0] * D_800C3F28_de;
@@ -224,22 +224,22 @@ void Channel_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s
         mix->baseAttenuation = gain;
     }
     if (control->flags & 4) {
-        mix->left = (s32)func_802B2350(envelope->flags);
-        panDelta = func_802B2350(envelope->initial);
-        panDelta -= func_802B2350(envelope->target);
+        mix->left = (s32)Menu_ExpandFloatHighWord(envelope->flags);
+        panDelta = Menu_ExpandFloatHighWord(envelope->initial);
+        panDelta -= Menu_ExpandFloatHighWord(envelope->target);
         if (envelope->frames == 0) {
             voice->envelopeStep = 0.0f;
         } else {
             voice->envelopeStep = panDelta / envelope->frames;
         }
-        voice->envelopeValue = func_802B2350(envelope->initial);
-        panAngle = (s32)func_802B2350(envelope->flags);
+        voice->envelopeValue = Menu_ExpandFloatHighWord(envelope->initial);
+        panAngle = (s32)Menu_ExpandFloatHighWord(envelope->flags);
         scaledPan = (s32)((f32)lookupPanValue(panAngle) * voice->envelopeValue);
         mix->left = (s32)((f32)scaledPan * gain);
-        envelope->flags = func_802AD270_de((f32)lookupPanValue(panAngle) * gain);
-        mix->right = (s32)func_802B2350(envelope->flags);
+        envelope->flags = Menu_GetFloatHighWord((f32)lookupPanValue(panAngle) * gain);
+        mix->right = (s32)Menu_ExpandFloatHighWord(envelope->flags);
     } else {
-        panAngle = (s32)func_802B2350(envelope->flags);
+        panAngle = (s32)Menu_ExpandFloatHighWord(envelope->flags);
         mix->left = (s32)((f32)lookupPanValue(panAngle) * gain);
         mix->right = mix->left;
     }

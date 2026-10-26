@@ -1,14 +1,14 @@
 #include "include_asm.h"
 #include "sdk/OBJECTSTATE2.H"
 
-unsigned short func_802AD270_de(float value) {
+unsigned short Menu_GetFloatHighWord(float value) {
     return *(unsigned short *)&value;
 }
 
 #if defined(VERSION_EU)
 #include "TYPES.H"
 
-f32 func_802AD520_eu(u32 value) {
+f32 Menu_ExpandFloatHighWord(u32 value) {
     u32 bits = value << 16;
     return *(f32 *)&bits;
 }

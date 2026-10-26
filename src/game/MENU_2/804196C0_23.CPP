@@ -282,7 +282,7 @@ s32 SmpButton_DestroyListController(void *arg0) {
 }
 
 void SmpButton_RegisterButtonClass(void) {
-    func_802982C4_de(0xB61, D_0041B340, D_0041B3D0, 3);
+    SmSmngr_RegisterElementHandlers(0xB61, D_0041B340, D_0041B3D0, 3);
 }
 
 void SmpButton_WrapButtonWidget(s32 arg0) {

@@ -43,12 +43,12 @@ s32 Menu_AnimateTabOptionsMenu(void) {
                 Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->pakIcon), 0);
                 Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->header), 0);
                 MarkMenuEventHandled();
-                func_80298368_de(D_80154020.value);
+                SmXlate_SwitchScreen(D_80154020.value);
                 return 0;
             }
             Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->pakIcon), 1);
             Frontend_SetWidgetFlag08((((Shared_OptionsScreen *)(D_800E4518))->header), 1);
-            func_802991D4_de(0x37D);
+            Smos_SetFocusedElement(0x37D);
             goto block_11;
         }
 block_11:
@@ -90,7 +90,7 @@ block_11:
                 }
                 D_80145040.stage = 8;
                 MarkMenuEventHandled();
-                func_80298368_de((((Shared_OptionsScreen *)(D_800E4518))->selection));
+                SmXlate_SwitchScreen((((Shared_OptionsScreen *)(D_800E4518))->selection));
                 return 0;
             }
             break;

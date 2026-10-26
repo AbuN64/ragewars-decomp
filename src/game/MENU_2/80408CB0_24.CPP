@@ -22,7 +22,7 @@ s32 Menu_CreateEuJoinOptions(void *handle) {
     SmpOverlay_ShowSlotById(handle, 3, 0x389);
     widget = Frontend_FindWidgetByResourceId(handle, 0x38B);
     widget->alpha = 0x8C;
-    if (func_802999A0_de(0) == 0x16) {
+    if (Smos_GetPreviousScreenOwner(0) == 0x16) {
         Frontend_SetWidgetFlag08(widget, 0);
     }
     D_800E39C0->timer = 0;

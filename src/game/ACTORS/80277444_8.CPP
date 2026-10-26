@@ -28,7 +28,7 @@ extern void *D_800CD730;
 extern s32 D_801371D4;
 
 extern void Sky_PostTargetedScreenMessage(void *, void *, s32, void *, f32);
-extern s32 func_804030E0_de(s32);
+extern s32 Menu_RequestTrackByKey(s32);
 void Link_DispatchTrigger(Trigger *trigger) {
     NavCallbackPair *table;
     void *fallback;
@@ -49,7 +49,7 @@ void Link_DispatchTrigger(Trigger *trigger) {
                 callback = gameplaySoundHook(trigger->sound);
                 if (callback != 0) func_8025E11C_de(callback);
             }
-            if (trigger->action >= 2) func_804030E0_de(trigger->action);
+            if (trigger->action >= 2) Menu_RequestTrackByKey(trigger->action);
         }
         table += trigger->entry;
         if (trigger->owner == D_801371D4) {

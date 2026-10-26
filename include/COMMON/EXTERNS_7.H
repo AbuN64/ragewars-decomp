@@ -12,5 +12,5 @@ struct SharedTrackObject;
 
 
 
-extern s32 func_804030E0_de(s32);
+extern s32 Menu_RequestTrackByKey(s32);
 #endif

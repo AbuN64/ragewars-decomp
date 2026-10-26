@@ -41,7 +41,7 @@ void Player_AllocPlayerList(PlayerList *list, int count) {
    through func_8024570C_de for a paused player or one whose controller at 0x698 asks while a menu is
    possible, or otherwise starts the in-game menu for a live player with a view not already showing
    one (unless the match forbids it), before the match end check func_802283B8_de and the world updates
-   func_80227038_de and Player_ReleaseWaitingPlayer run and the frame time is restored. */
+   Player_UpdateFragTagSelection and Player_ReleaseWaitingPlayer run and the frame time is restored. */
 
 
 
@@ -74,7 +74,7 @@ extern void func_8025E3A8_de(void);
 extern void func_80218464_de(char *);
 
 extern void func_802283B8_de(WorldWeaponsUpdateWorldPlayers *);
-extern void func_80227038_de(WorldWeaponsUpdateWorldPlayers *);
+extern void Player_UpdateFragTagSelection(WorldWeaponsUpdateWorldPlayers *);
 extern void Player_ReleaseWaitingPlayer(WorldWeaponsUpdateWorldPlayers *);
 
 void Player_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
@@ -120,7 +120,7 @@ void Player_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
             }
         }
         func_802283B8_de(world);
-        func_80227038_de(world);
+        Player_UpdateFragTagSelection(world);
         Player_ReleaseWaitingPlayer(world);
         D_800D2988 = frameTime;
     }

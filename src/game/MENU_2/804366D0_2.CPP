@@ -89,7 +89,7 @@ extern u8 g_playerSettings[];
 extern s32 SmpButton_GetListSelection(void *);
 extern s32 SmpSlider_GetSliderItem(void *);
 
-void func_804367A8_de(s32 arg0) {
+void Menu_StorePlayerSettingsEntry(s32 arg0) {
     u8 *config;
 
     config = g_playerSettings + arg0 * 0x96;

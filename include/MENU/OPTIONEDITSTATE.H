@@ -42,17 +42,17 @@ typedef struct OptionEditState OptionEditState;
 
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
-s32 func_804451D0_de(struct LayeredText *field);
+s32 Pak_UpdateFirstVolumeLabel(struct LayeredText *field);
 #endif
 
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
-s32 func_80445ECC(struct LayeredText *field);
+s32 Pak_FormatMusicPreview(struct LayeredText *field);
 #endif
 
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
-s32 func_80445AB8(struct LayeredText *field);
+s32 Pak_UpdateThirdVolumeLabel(struct LayeredText *field);
 #endif
 
 extern u8 *D_800D3D8C;

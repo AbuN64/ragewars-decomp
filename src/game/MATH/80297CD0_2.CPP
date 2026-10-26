@@ -18,7 +18,7 @@ static inline s32 menuCategory(s32 event) {
     else category=0;
     return category;
 }
-s32 func_80297A34_de(s32 event,s32 value,s32 amount,s32 context) {
+s32 SmSmngr_DispatchPrimaryScreenEvent(s32 event,s32 value,s32 amount,s32 context) {
     s32 *handled;
     Element *element;
     Element *focus;
@@ -74,13 +74,13 @@ s32 func_80297A34_de(s32 event,s32 value,s32 amount,s32 context) {
                     if(element->flags & 0x10) {
                         if(element->linked_id) {
                             MarkMenuEventHandled();
-                            func_80298368_de(element->linked_id);
+                            SmXlate_SwitchScreen(element->linked_id);
                         }
                     }
                     break;
                 case 2:
                     result=value;
-                    if(D_8014D080->current>0) func_802998A8_de();
+                    if(D_8014D080->current>0) Smos_ReturnToPreviousScreen();
                     break;
                 case 15:
                     value=0;

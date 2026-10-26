@@ -10,7 +10,7 @@
 #include "sdk/libgultra_inferred/802B3B80_7.H"
 #include "RENDER_4/8028FD2C_6.H"
 extern s32 Defs_FindSortedValue(s32,s32,s32);
-extern f32 func_802B2350(u16);
+extern f32 Menu_ExpandFloatHighWord(u16);
 extern void func_802AE5B8_de(s32, void *);
 static inline f32 fade_rate(Track *track,f32 time,f32 rate) {track->unk30=time;return (f32)track->unk20/(time*rate);}
 void Audio_UpdateMusicPlayback(Track *queue) {
@@ -71,7 +71,7 @@ void Audio_UpdateMusicPlayback(Track *queue) {
                 temp_s0_2 = SetN64_GetPackSection(queue->unk0->unk2B50, temp_s0 | 1);
                 temp_v0_4 = SetN64_GetPackSection(queue->unk0->unk2B50, temp_s0);
                 queue->unk24 = (s32) temp_v0_4->unk0;
-                temp_f0 = func_802B2350(temp_v0_4->unk4);
+                temp_f0 = Menu_ExpandFloatHighWord(temp_v0_4->unk4);
                 queue->unk30 = temp_f0;
                 if (temp_f0 <= 0.0f) {
                     queue->unk30 = D_800C3FD0_de;

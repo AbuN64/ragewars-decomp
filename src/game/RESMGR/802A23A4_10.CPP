@@ -19,5 +19,5 @@ void N64Eng_AdvanceFrameCounter(void) {
 }
 
 void N64Eng_RegisterNumericWidgetClass(void) {
-    func_802982C4_de(0xB65, D_002A1B50, D_002A1BE0, 3);
+    SmSmngr_RegisterElementHandlers(0xB65, D_002A1B50, D_002A1BE0, 3);
 }

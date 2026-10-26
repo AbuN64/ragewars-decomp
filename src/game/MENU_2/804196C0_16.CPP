@@ -89,7 +89,7 @@ void SmpFlicker_InitFlicker(func_80419D04_S1 *flicker, s32 sampleCount) {
 }
 
 void SmpFlicker_RegisterFlickerClass(void) {
-    func_802982C4_de(0xB62, D_00419F9C, D_0041A02C, 3);
+    SmSmngr_RegisterElementHandlers(0xB62, D_00419F9C, D_0041A02C, 3);
 }
 
 MenuResourceWidget *SmpFlicker_CreateFlickerWidget(int arg0, int arg1)

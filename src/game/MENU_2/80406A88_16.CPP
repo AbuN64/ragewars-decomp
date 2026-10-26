@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 extern ResidentEventHandlerEntry D_800F1DA8[];
 
-s32 func_804385F0_eu_x(MenuWidget *pThis, s32 event, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchSettingsTableEvent(MenuWidget *pThis, s32 event, s32 arg2, s32 arg3, s32 arg4) {
     s32 i;
     for (i = 0; D_800F1DA8[i].handler != 0; i++) {
         if (D_800F1DA8[i].event == event &&

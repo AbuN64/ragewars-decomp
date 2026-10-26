@@ -119,7 +119,7 @@ extern void *Scene_FindActorDefinition(Shared_World *arg0, s32 arg1, s32 arg2);
 
 
 
-void func_80225B98_de(ObjectLinks854 *playerActor, void *arg1, s32 sequenceType)
+void Player_TryStartPlayerSequence(ObjectLinks854 *playerActor, void *arg1, s32 sequenceType)
 {
     s32 enabled;
     u32 resource_flags;

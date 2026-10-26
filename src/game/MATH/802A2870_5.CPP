@@ -10,7 +10,7 @@
 
 extern void N64Eng_SetNumericWidgetValue(void *arg0, s32 arg1);
 
-extern unsigned int func_80299B4C_de(void);
+extern unsigned int Smos_GetControlRepeatLimit(void);
 
 extern void N64Eng_IncrementNumericWidget(void *arg0);
 
@@ -97,7 +97,7 @@ s32 N64Eng_HandleNumericIncrement(void *arg0, s32 unused1, s32 unused2, s32 arg3
     s32 temp_s0;
 
     temp_s0 = XMath_AbsoluteInteger(arg4);
-    if (temp_s0 < (s32)func_80299B4C_de()) {
+    if (temp_s0 < (s32)Smos_GetControlRepeatLimit()) {
         object->field_5C = 2;
         object->field_48 = 0;
     }
@@ -115,7 +115,7 @@ s32 N64Eng_HandleNumericDecrement(void *arg0, s32 unused1, s32 unused2, s32 arg3
     s32 temp_s0;
 
     temp_s0 = XMath_AbsoluteInteger(arg4);
-    if (temp_s0 < (s32)func_80299B4C_de()) {
+    if (temp_s0 < (s32)Smos_GetControlRepeatLimit()) {
         object->field_5C = 2;
         object->field_48 = 0;
     }

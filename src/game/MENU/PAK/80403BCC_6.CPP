@@ -40,7 +40,7 @@ extern s32 func_80445F80_de(OSPfs *pfs, u16 company_code, u32 game_code, u8 *gam
 
 extern s32 func_80447AF0_de(OSPfs *pfs, s32 file_no, s32 flag, s32 offset, s32 size, void *data);
 
-/* Inline copy of func_80405648_de: decodes the n pak font codes at src into dst as text (codes from
+/* Inline copy of Pak_DecodeNoteText: decodes the n pak font codes at src into dst as text (codes from
    0x42 up become '~', leading zero codes blanks), trims trailing blanks and terminates dst. */
 static inline void Pak_DecodeNoteName(u8 *src, u8 *dst, s32 n) {
     s32 i;
@@ -73,7 +73,7 @@ static inline void Pak_DecodeNoteName(u8 *src, u8 *dst, s32 n) {
 }
 
 /* Saves data as a Controller Pak note on channel ch and verifies it: refuses with -2 unless the pak
-   is ready, then up to four times writes the note through func_804042F0_de with the D_800D36DC
+   is ready, then up to four times writes the note through Pak_CreateAndWriteNote with the D_800D36DC
    company code, reads it back into a temporary buffer through an inlined note read, and stops when
    the bytes compare equal or deletes the note through Pak_DeleteNote and retries, returning the
    write result. */
@@ -94,7 +94,7 @@ extern void func_8025476C_de(s32);
 
 extern s32 Defs_CompareMemory(void *a, void *b, s32 size);
 
-extern s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
+extern s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
                          u8 *company, u8 *code);
 
 extern s32 Pak_DeleteNote(s32 ch, s32 index);
@@ -134,7 +134,7 @@ static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
     return result;
 }
 
-extern s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name, u8 *company, u8 *code);
+extern s32 Pak_CreateAndWriteNote(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name, u8 *company, u8 *code);
 
 /* Reports note index of the Controller Pak on channel ch from the cached directory: refuses with -2
    unless the pak is ready, clears the exists flag for an empty slot, and otherwise returns its size
@@ -201,7 +201,7 @@ s32 Pak_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
     handle = Cache_AllocateResource(0, blocks, 0x23, g_pakWriteScratchNoteName);
     buf = *handle;
     for (tries = 0; tries < 4; tries++) {
-        result = func_804042F0_de(ch, size, data, name, &file_no, ext, RW_LOCALIZED_TEXT(D_800D36DC, D_800E25C4, D_800E25C4, g_languageIndex), code);
+        result = Pak_CreateAndWriteNote(ch, size, data, name, &file_no, ext, RW_LOCALIZED_TEXT(D_800D36DC, D_800E25C4, D_800E25C4, g_languageIndex), code);
         if (result != 0) {
             break;
         }

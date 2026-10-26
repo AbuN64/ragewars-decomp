@@ -13,15 +13,15 @@ extern void SmpButton_WrapButtonWidget(int id);
 int func_8043AD30_eu_x(void) { SmpButton_WrapButtonWidget(0x3DE); SmpButton_WrapButtonWidget(0x3DF); return 0; }
 #endif
 
-/* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled: 0x3DA waits through
-   func_80298368_de for a time chosen by setting D_801462D5 through jtbl_800DDF70 (20, 15 or 10, and
-   3 for any other setting); 0x3DB sends code -1 to Frontend_SetMenuChoiceResult and calls func_802998A8_de.
+/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled: 0x3DA waits through
+   SmXlate_SwitchScreen for a time chosen by setting D_801462D5 through jtbl_800DDF70 (20, 15 or 10, and
+   3 for any other setting); 0x3DB sends code -1 to Frontend_SetMenuChoiceResult and calls Smos_ReturnToPreviousScreen.
    Returns zero. */
 extern void MarkMenuEventHandled(void);
-extern s32 func_80299A08_de(void);
-extern void func_80298368_de(s32);
+extern s32 Smos_GetFocusedElementId(void);
+extern void SmXlate_SwitchScreen(s32);
 extern void Frontend_SetMenuChoiceResult(s32);
-extern void func_802998A8_de(void);
+extern void Smos_ReturnToPreviousScreen(void);
 
 #if defined(VERSION_DE)
 enum { MENU_80439F38_986 = 980, MENU_80439F38_987 = 981 };
@@ -35,7 +35,7 @@ s32 Frontend_UpdateTimedTransition(void) {
     s32 time;
 
     MarkMenuEventHandled();
-    switch (func_80299A08_de()) {
+    switch (Smos_GetFocusedElementId()) {
     case MENU_80439F38_986:
         switch (D_801462C8.controllerMode) {
         case 0:
@@ -53,23 +53,23 @@ s32 Frontend_UpdateTimedTransition(void) {
             time = 3;
             break;
         }
-        func_80298368_de(time);
+        SmXlate_SwitchScreen(time);
         return 0;
     case MENU_80439F38_987:
         Frontend_SetMenuChoiceResult(-1);
-        func_802998A8_de();
+        Smos_ReturnToPreviousScreen();
         return 0;
     }
     return 0;
 }
 
-/* Calls MarkMenuEventHandled, then Frontend_SetMenuChoiceResult with -1, then func_802998A8_de, and returns zero. */
+/* Calls MarkMenuEventHandled, then Frontend_SetMenuChoiceResult with -1, then Smos_ReturnToPreviousScreen, and returns zero. */
 extern void MarkMenuEventHandled();
 
 s32 func_80439E04_de(void) {
     MarkMenuEventHandled();
     Frontend_SetMenuChoiceResult(-1);
-    func_802998A8_de();
+    Smos_ReturnToPreviousScreen();
     return 0;
 }
 

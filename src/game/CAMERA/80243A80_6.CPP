@@ -15,7 +15,7 @@ extern void Cache_ReleaseResource(void *arg0, void *arg1);
 
 /* Starts the round once: unless already started, optionally resets the lead player (func_8022E290_de and its
  * three counters) and the player group, then when a new target id is pending selects it through
- * func_8044D3E8_de and Scene_LoadLevelResources, records the start time from func_8040332C_de, marks the round started with
+ * func_8044D3E8_de and Scene_LoadLevelResources, records the start time from Menu_HasNoTrackRequestItems, marks the round started with
  * no pending target and copies the viewport rectangle into the active camera as floats. */
 
 
@@ -54,7 +54,7 @@ extern s32 OvlScene_FindNearestPlacedObject(void *, Vec3Words *, s32, void *);
 
 extern void Scene_LoadLevelResources(void *, s32, s32);
 
-extern s32 func_8040332C_de(void);
+extern s32 Menu_HasNoTrackRequestItems(void);
 
 
 extern u32 func_80245850_de(void);
@@ -63,7 +63,7 @@ extern f32 D_800D2988;
 
 /* Advances the current audio cue once per new frame: when func_80244FB4_de has no resource to release, the
  * cue's position steps by the frame time (as func_80245C38_de, stopping the round via func_80244E58_de past its
- * threshold and looping or holding at its length) and func_80403458_de runs; a fading cue loses twice the
+ * threshold and looping or holding at its length) and Menu_ProcessTrackItemEvents runs; a fading cue loses twice the
  * frame's fade step and, once below -0.5, stops fading and, if playing, runs its start and stop callbacks
  * (func_80245B74_de, func_80245BC0_de) and releases its sound; otherwise a playing, unpaused, non-looping cue with
  * no pending game event fires its cue callback past its cue point and, past its length, releases its sound
@@ -116,7 +116,7 @@ void func_80244E58_de(void) {
             Scene_LoadLevelResources(table, target, found != 0);
         }
     }
-    D_800E2830->unknown5C = func_8040332C_de();
+    D_800E2830->unknown5C = Menu_HasNoTrackRequestItems();
     D_800E2830->field50 = 1;
     D_800E2830->targetD8 = -1;
     D_800E2830->unknown40 = 1;
@@ -139,7 +139,7 @@ s32 func_80244FB4_de(void) {
     if (D_800E2830->resourceDC == none) {
         return 0;
     }
-    func_804009F4_de(D_800E2830->resourceDC);
+    Menu_LoadTrackSequence(D_800E2830->resourceDC);
     D_800E2830->resourceDC = none;
     if (Cinema_IsSequenceActive() != 0) {
         if (func_80245850_de() != 0) {
@@ -166,7 +166,7 @@ s32 func_80244FB4_de(void) {
             }
         }
     }
-    func_80403458_de();
+    Menu_ProcessTrackItemEvents();
     return 1;
 }
 
@@ -205,7 +205,7 @@ void func_802450CC_de(void) {
                 }
             }
         }
-        func_80403458_de();
+        Menu_ProcessTrackItemEvents();
     }
     func_80244FB4_de();
     if (D_800E2830->unknown60 != 0 && (D_800E2830->fade -= 2.0f * (D_800D2988 * 0.06666667f)) < -0.5f) {

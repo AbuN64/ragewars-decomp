@@ -94,7 +94,7 @@ extern void *Audio_GetMetadataSectionFiveEntry(struct ContextRecAt2BC0 *arg0, s3
 extern s32 Audio_GetSpatialPanMode(void *arg0);
 struct GameplayCamera;
 extern s16 func_80259B10_de(void *arg0, struct GameplayCamera *arg1);
-extern f32 func_802B2350(s32 arg0);
+extern f32 Menu_ExpandFloatHighWord(s32 arg0);
 
 typedef struct func_8025C6F4_S1 func_8025C6F4_S1;
 typedef struct func_8025C6F4_S2 func_8025C6F4_S2;
@@ -150,14 +150,14 @@ void Audio_InitVoiceVolume(func_8025C6F4_S1 *voiceRecord, func_8025C6F4_S2 *soun
     if (index != -1) {
         record = Audio_GetMetadataSectionFiveEntry(voiceRecord->unkB0, index);
         voiceRecord->unk8C = *record;
-        first = func_802B2350(voiceRecord->unk8C.start);
+        first = Menu_ExpandFloatHighWord(voiceRecord->unk8C.start);
         voiceRecord->unk9C =
-            (first - func_802B2350(voiceRecord->unk8C.end)) /
+            (first - Menu_ExpandFloatHighWord(voiceRecord->unk8C.end)) /
             voiceRecord->unk8C.duration;
         voiceRecord->unk98 =
-            func_802B2350(voiceRecord->unk8C.start);
+            Menu_ExpandFloatHighWord(voiceRecord->unk8C.start);
         voiceRecord->unk28 =
-            (s16)(s32)func_802B2350(voiceRecord->unk8C.start);
+            (s16)(s32)Menu_ExpandFloatHighWord(voiceRecord->unk8C.start);
         voiceRecord->unk88 = 1;
         return;
     }

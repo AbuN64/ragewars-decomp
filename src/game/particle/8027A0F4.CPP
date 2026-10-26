@@ -118,7 +118,7 @@ block_7:
             goto block_21;
         }
 block_21:
-        scale = func_802B2350((s32) arg0->descriptor->motion->acceleration);
+        scale = Menu_ExpandFloatHighWord((s32) arg0->descriptor->motion->acceleration);
         if (scale != 0.0f) {
             spC8 = arg0->direction;
             makeImpulse(&spC8,scale,&spB8);
@@ -128,7 +128,7 @@ block_21:
             temp_fv0_4 = arg0->velocity.y;
             temp_fa0_2 = arg0->velocity.z;
             temp_fs0 = Math_Sqrtf((temp_fv0f_3 * temp_fv0f_3) + (temp_fv0_4 * temp_fv0_4) + (temp_fa0_2 * temp_fa0_2));
-            temp_fv0_5 = func_802B2350((s32) arg0->descriptor->motion->speed);
+            temp_fv0_5 = Menu_ExpandFloatHighWord((s32) arg0->descriptor->motion->speed);
             if (scale > 0.0f) {if (!(temp_fv0_5 < temp_fs0)) goto after_clamp;} else {if (!(temp_fs0 < temp_fv0_5)) goto after_clamp;}
             GraphU64_ScaleVector(temp_s0_3, &spC8, temp_fv0_5);
             after_clamp:;
@@ -243,14 +243,14 @@ create_sound:
         FIELD(s8, homingParticle, 0x1B9) = 0;
         FIELD(s8, homingParticle, 0x1BA) = 0;
     }
-    accel = func_802B2350((s32)homingParticle->descriptor->motion->acceleration);
+    accel = Menu_ExpandFloatHighWord((s32)homingParticle->descriptor->motion->acceleration);
     if (accel != 0.0f) {
         vF8 = homingParticle->direction;
         makeImpulse(&vF8, accel, &vE8);
         addImpulse(velocity, &vE8);
         speed2 = Math_Sqrtf(homingParticle->velocity.x * homingParticle->velocity.x + homingParticle->velocity.y * homingParticle->velocity.y +
                                   homingParticle->velocity.z * homingParticle->velocity.z);
-        limit = func_802B2350((s32)homingParticle->descriptor->motion->speed);
+        limit = Menu_ExpandFloatHighWord((s32)homingParticle->descriptor->motion->speed);
         if (accel > 0.0f) {
             if (!(limit < speed2)) goto after_clamp;
         } else {
@@ -311,14 +311,14 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
     forward.z = 1.0f;
     GraphU64_TransformPoint(rotation, &forward, &particle->direction);
     GraphU64_ScaleVector(&particle->velocity, &particle->direction, speed);
-    acceleration = func_802B2350(particle->link->params->accel);
+    acceleration = Menu_ExpandFloatHighWord(particle->link->params->accel);
     vel = &particle->velocity;
     if (acceleration != 0.0f) {
         heading = particle->direction;
         makeImpulse(&heading, acceleration, &impulse);
         addImpulse(vel, &impulse);
         newSpeed = Math_Sqrtf((particle->velocity.x * particle->velocity.x) + (particle->velocity.y * particle->velocity.y) + (particle->velocity.z * particle->velocity.z));
-        limit = func_802B2350(particle->link->params->limit);
+        limit = Menu_ExpandFloatHighWord(particle->link->params->limit);
         if (acceleration > 0.0f) {
             if (!(limit < newSpeed)) goto skip;
         } else if (!(newSpeed < limit)) goto skip;

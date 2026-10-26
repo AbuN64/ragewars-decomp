@@ -23,10 +23,10 @@ struct PakNoteTextEntry {
     char pad4[0x10];
     u8 **text;
 };
-struct Menu_func_804066BC_de {
+struct MenuPakBeginProfileLoad {
     s16 state;
     char pad2[0xA];
-    struct Owner_func_804066BC_de *owner;
+    struct OwnerPakBeginProfileLoad *owner;
     char pad10[4];
     char *dialogData; /* 0x14 */
     char pad18[4];

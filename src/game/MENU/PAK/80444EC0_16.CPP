@@ -9,7 +9,7 @@
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 
-s32 func_80445504_de(void *first, void *second, void *third) {
+s32 Pak_OpenMusicPreviewMenu(void *first, void *second, void *third) {
     func_8025E3A8_de();
     D_800E63B0 = func_8025E2C4_de();
     func_8025E2D4_de(D_800E63B8);
@@ -29,7 +29,7 @@ s32 func_80445504_de(void *first, void *second, void *third) {
    Returns one. */
 
 
-s32 func_80445504_de(void *first, void *second, void *third) {
+s32 Pak_OpenMusicPreviewMenu(void *first, void *second, void *third) {
     func_8025E3A8_de();
     D_800E63B0 = func_8025E2C4_de();
     func_8025E2D4_de(D_800E63B8);

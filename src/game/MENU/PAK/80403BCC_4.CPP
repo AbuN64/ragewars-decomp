@@ -32,7 +32,7 @@ extern void *SetN64_LocatePackSection(int, int, int, int *);
 
 extern struct Field_void_4 *D_800E2830;
 
-s32 func_80403BCC_de(void) {
+s32 Menu_GetCinemaSequenceCount(void) {
     return *D_8011FEFC - 1;
 }
 
@@ -62,15 +62,15 @@ void *Menu_GetPackEntry(s32 key) {
     return SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->value, 0), key);
 }
 
-s32 func_80403CFC_de(s32 key) {
+s32 Menu_GetTrackEyeHoldFlag(s32 key) {
     return ((s32 *) SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->value, 0), key), 2))[0];
 }
 
-s32 func_80403D4C_de(s32 key) {
+s32 Menu_GetTrackTargetHoldFlag(s32 key) {
     return ((s32 *) SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->value, 0), key), 2))[1];
 }
 
-void *func_80403D9C_de(s32 key) {
+void *Menu_GetTrackTargetClip(s32 key) {
     return SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->value, 0), key), 1);
 }
 
@@ -82,7 +82,7 @@ void func_80403DE8_de(void) {
    kind 9 and 3 for kind 10; other kinds give 0. */
 
 
-int func_80403E10_de(RecordRecAt12 *rec) {
+int Menu_IsTrackRequestItem(RecordRecAt12 *rec) {
     int result = 0;
 
     switch (rec->kind) {

@@ -57,7 +57,7 @@ extern void Control_DisableControllerPak(void *);
 
 
 /* Searches the sixteen controller-pak notes for the requested name and returns the matching index when requested. */
-extern void Pak_GetNoteGameName(s32,s32,s32 *),func_80405648_de(s32,void *,s32);
+extern void Pak_GetNoteGameName(s32,s32,s32 *),Pak_DecodeNoteText(s32,void *,s32);
 
 
 /* Returns the data table for a kind: kinds 1, 2 and 3 have their own, kind 0 and anything else use the
@@ -161,7 +161,7 @@ s32 Pak_FindNoteByGameName(void *unused, void *arg1, s32 arg2, s32 *arg3) {
     s32 note_index;
     for(note_index=0;note_index<16;note_index++) {
         Pak_GetNoteGameName(arg2,note_index,&game_ref);
-        func_80405648_de(game_ref,&game_name,16);
+        Pak_DecodeNoteText(game_ref,&game_name,16);
         if(XPlus_CompareStrings(&game_name,arg1)==0) {
             if(arg3) *arg3=note_index;
             return 1;

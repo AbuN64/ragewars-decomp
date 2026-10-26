@@ -108,9 +108,9 @@ s32 Player_CheckTeamPointWin(Round *arg0);
 
 
 
-extern u8 D_801462D5; /* MIXED func_80227038_de */
-extern u8 D_801462DE; /* MIXED func_80227038_de */
-void func_80227038_de(s8 *world) {
+extern u8 D_801462D5; /* MIXED Player_UpdateFragTagSelection */
+extern u8 D_801462DE; /* MIXED Player_UpdateFragTagSelection */
+void Player_UpdateFragTagSelection(s8 *world) {
     CGameStatus *initial_rules; 
     CGameStatus *select_rules; 
     CGameStatus *case2_rules; 

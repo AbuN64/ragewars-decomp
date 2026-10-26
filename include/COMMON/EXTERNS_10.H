@@ -12,9 +12,9 @@ extern void Link_DispatchTrigger(struct Trigger *);
 #endif
 static inline f32 recordValue(s32 id) {
 #if defined(VERSION_EU)
-    return func_802AD520_eu(id);
+    return Menu_ExpandFloatHighWord(id);
 #else
-    return func_802B2350(id);
+    return Menu_ExpandFloatHighWord(id);
 #endif
 }
 

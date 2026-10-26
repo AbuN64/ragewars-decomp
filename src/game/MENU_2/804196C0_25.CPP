@@ -14,7 +14,7 @@ extern void MarkMenuEventHandled();
 
 extern void SmpOverlay_ShowSlotNode(struct sm_dlmultiuser_t *, s32, void *);
 
-/* After MarkMenuEventHandled, forwards an event for a channel to func_802995D4_de with the channel's handler id
+/* After MarkMenuEventHandled, forwards an event for a channel to Smos_RouteElementEvent with the channel's handler id
    (short at 0xC of the handler at 0x4C) when the channel is not muted (word at 0x5C) and has a handler;
    returns 0. */
 
@@ -133,7 +133,7 @@ int SmpOverlay_ForwardSlotEvent(Mixer *mixer, int unused, int channel, int value
     if (h == 0) {
         return 0;
     }
-    func_802995D4_de(h->unkC, 1, channel, value, extra);
+    Smos_RouteElementEvent(h->unkC, 1, channel, value, extra);
     return 0;
 }
 

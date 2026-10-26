@@ -50,6 +50,6 @@ struct CourseOptionsScreen {
     s32 timer;           /* +0x18 */
     s32 step;            /* +0x1C */
 };
-extern s32 func_802999A0_de(s32);
+extern s32 Smos_GetPreviousScreenOwner(s32);
 extern void Frontend_UpdateJoinRequestDisplay(s32);
 #endif

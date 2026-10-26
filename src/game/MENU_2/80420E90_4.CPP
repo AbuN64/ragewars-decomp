@@ -36,7 +36,7 @@ void Menu_SetOptionsSceneSelection(int key) {
  int selection;
  o->fovY = width; o->aspect = height;
  o->viewWidth = state->a; o->viewHeight = state->b; o->viewLeft = state->c; o->viewTop = state->d;
- selection = func_804030E0_de(key);
+ selection = Menu_RequestTrackByKey(key);
  if (!func_8025477C_de()) func_8025476C_de(1);
  OvlScene_SetSelection(&g_world, ~selection, 0);
  g->width = width; width = height; g->height = width;

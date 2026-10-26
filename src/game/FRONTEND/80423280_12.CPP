@@ -24,7 +24,7 @@ extern Shared_Rec3 g_playerSettings[8];
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 
-/* Calls InitFrontendMenus and Tsmos_DeactivateControllerState, then func_80298368_de with 0x11. */
+/* Calls InitFrontendMenus and Tsmos_DeactivateControllerState, then SmXlate_SwitchScreen with 0x11. */
 #if defined(VERSION_EU)
 extern void Tsmos_InitializeEuropeanFrontend();
 #elif defined(VERSION_EU_X)
@@ -37,9 +37,9 @@ extern void func_802A2224_de();
 
 extern void Tsmos_DeactivateControllerState();
 
-extern void func_80298368_de(s32);
+extern void SmXlate_SwitchScreen(s32);
 
-/* Clears the words at offsets 0x78 and 0x54 of D_801468A0, then calls func_80298368_de with 0x14
+/* Clears the words at offsets 0x78 and 0x54 of D_801468A0, then calls SmXlate_SwitchScreen with 0x14
    unless func_8042AF28_de and ScenarioSetup_StartRandomCupStage both report something, in which case it calls
    Frontend_StartConfiguredMatch. */
 
@@ -158,11 +158,11 @@ extern void Scene_LoadLevelResources(void *, s32, s32);
 extern void MarkMenuEventHandled();
 
 /* Runs one frame of the screen D_800E53C0's confirmation prompt while D_800E28E0 is not positive:
-   on the first frame it marks the prompt open at 0x320 and asks func_802991D4_de for message 0x238,
+   on the first frame it marks the prompt open at 0x320 and asks Smos_SetFocusedElement for message 0x238,
    or 0x237 when func_8040EBD0_de rejects the object loaded for 0x238, then calls Tsmos_ActivateControllerState. Once
    the choice word D_80154020[1] reads one it clears it and either enables the prompt's object at
    0xE4 and records the choice at 0x328, when the pending action D_80154020[0] is -1, or disables
-   the object, clears 0x328 and hands the pending action to func_80298368_de through MarkMenuEventHandled.
+   the object, clears 0x328 and hands the pending action to SmXlate_SwitchScreen through MarkMenuEventHandled.
    Returns zero. On eu-x both message ids are renumbered 5 higher. */
 
 
@@ -174,7 +174,7 @@ extern s32 D_80154020[];
 
 extern s32 Frontend_ListHasFlag100(void *);
 
-extern void func_802991D4_de(s32);
+extern void Smos_SetFocusedElement(s32);
 
 extern void Tsmos_ActivateControllerState();
 
@@ -199,7 +199,7 @@ func_802A2224_de
 #endif
 ();
     Tsmos_DeactivateControllerState();
-    func_80298368_de(0x11);
+    SmXlate_SwitchScreen(0x11);
 }
 
 void Frontend_ContinueCupOrOpenResults(void) {
@@ -208,7 +208,7 @@ void Frontend_ContinueCupOrOpenResults(void) {
     state->m_bCTFOn = 0;
     state->m_bFragTagOn = 0;
     if (ScenarioSetup_IsCupSelected() == 0 || ScenarioSetup_StartRandomCupStage() == 0) {
-        func_80298368_de(0x14);
+        SmXlate_SwitchScreen(0x14);
     } else {
         Frontend_StartConfiguredMatch();
     }
@@ -219,7 +219,7 @@ void Frontend_OpenControllerModeResults(void) {
 
     state->m_bCTFOn = 0;
     state->m_bFragTagOn = 0;
-    func_80298368_de(0xF);
+    SmXlate_SwitchScreen(0xF);
 }
 
 s32 Frontend_GetMatchEndReason(void) {
@@ -456,7 +456,7 @@ s32 Frontend_UpdateMatchResultsTransition(void *window, void *unused1, s32 event
                 D_801468F4 = 0;
                 next = 0xF;
             }
-            func_80298368_de(next);
+            SmXlate_SwitchScreen(next);
             return 0;
         }
     } else {
@@ -478,7 +478,7 @@ s32 Frontend_HandleResultsConfirmation(s32 context) {
             } else {
                 message = FALLBACK_MESSAGE;
             }
-            func_802991D4_de(message);
+            Smos_SetFocusedElement(message);
             Tsmos_ActivateControllerState();
         }
         choice = &D_80154020[1];
@@ -489,7 +489,7 @@ s32 Frontend_HandleResultsConfirmation(s32 context) {
                 Frontend_SetWidgetFlag08(D_800E53C0->buttonAddress, 0);
                 D_800E53C0->dirty = 0;
                 MarkMenuEventHandled();
-                func_80298368_de(choice[-1]);
+                SmXlate_SwitchScreen(choice[-1]);
                 return 0;
             }
             Frontend_SetWidgetFlag08(D_800E53C0->buttonAddress, 1);

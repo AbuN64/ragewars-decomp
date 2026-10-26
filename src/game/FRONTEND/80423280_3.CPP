@@ -21,21 +21,21 @@ extern void Tsmos_ActivateControllerState();
 
 
 
-/* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled: 0x1C3, 0x1BD, 0x1C2 and
+/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled: 0x1C3, 0x1BD, 0x1C2 and
    0x1C4 send codes -1, 13, 12 and 14 to Frontend_SetMenuChoiceResult; a handled message then runs Menu_CommitCompactOptionsPage
-   and func_802998A8_de. Returns zero. */
+   and Smos_ReturnToPreviousScreen. Returns zero. */
 extern void MarkMenuEventHandled(void);
 
-extern s32 func_80299A08_de(void);
+extern s32 Smos_GetFocusedElementId(void);
 
 extern void Frontend_SetMenuChoiceResult(s32);
 
-extern void func_802998A8_de(void);
+extern void Smos_ReturnToPreviousScreen(void);
 
-/* Calls MarkMenuEventHandled, Frontend_SetMenuChoiceResult with -1, Menu_CommitCompactOptionsPage and func_802998A8_de, and returns zero. */
+/* Calls MarkMenuEventHandled, Frontend_SetMenuChoiceResult with -1, Menu_CommitCompactOptionsPage and Smos_ReturnToPreviousScreen, and returns zero. */
 extern void MarkMenuEventHandled();
 
-extern void func_802998A8_de();
+extern void Smos_ReturnToPreviousScreen();
 
 typedef s32 (*Handler80423930)(void *, s32, s32, s32, s32);
 
@@ -51,7 +51,7 @@ extern Handler80423930 D_800E456C;
 
 extern void Cinema_ReleaseSequenceContext();
 
-/* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled, for its MESSAGE_COUNT messages from
+/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled, for its MESSAGE_COUNT messages from
    FIRST_MESSAGE (0x377 to 0x380 on us) through jtbl_800E1668: one reopens screen D_800E4518 (marking it shown with timer -1 and
    refreshing its two windows at 0x44 and 0x4C) and calls func_80245B28_de; one tries ScenarioSetup_StartRandomCupStage
    and on failure sets the screen's modes 5 and 4 with timer 20, else reopens it with timer 0; the
@@ -105,7 +105,7 @@ s32 Frontend_HandleCompactOptionsShortcut(void) {
     s32 handled;
     MarkMenuEventHandled();
     handled = 1;
-    switch (func_80299A08_de()) {
+    switch (Smos_GetFocusedElementId()) {
 #if defined(VERSION_DE)
     case 0x1BF:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -148,7 +148,7 @@ s32 Frontend_HandleCompactOptionsShortcut(void) {
     }
     if (handled == 1) {
         Menu_CommitCompactOptionsPage();
-        func_802998A8_de();
+        Smos_ReturnToPreviousScreen();
     }
     return 0;
 }
@@ -157,7 +157,7 @@ s32 Frontend_CloseCompactOptionsPage(void) {
     MarkMenuEventHandled();
     Frontend_SetMenuChoiceResult(-1);
     Menu_CommitCompactOptionsPage();
-    func_802998A8_de();
+    Smos_ReturnToPreviousScreen();
     return 0;
 }
 
@@ -202,7 +202,7 @@ s32 Frontend_HandleTabOptionsShortcut(void) {
     u32 message;
     MarkMenuEventHandled();
     handled = 1;
-    message = func_80299A08_de() -
+    message = Smos_GetFocusedElementId() -
 #if defined(VERSION_DE)
         0x373;
 #elif defined(VERSION_EU_X)

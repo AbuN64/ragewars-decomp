@@ -19,7 +19,7 @@ s32 Pak_ReadNoteInfo(s32, s32, s32 *, u8 *, u8 *, s32 *, u8 *, u8 *);
 s32 XPlus_StringLength(u8 *);
 s32 Pak_ReadNoteData(s32, s32, s32, s32);
 u32 Pak_Crc32(u8 *, u32, u32);
-s32 func_804057BC_de(u8 *, s32);
+s32 Pak_ContainsInvalidNameByte(u8 *, s32);
 u8 *XPlus_CopyString(u8 *, u8 *);
 void *Pak_OpenDialog(struct func_8025E5B0_S1 *, struct Dialog *, s32, s32, s32);
 s32 Pak_CheckStatusPrompt(void *, s32, s32);
@@ -27,7 +27,7 @@ static __inline__ s32 pak_note_has_game_id(u8 *company, u8 *code) { if ((XPlus_S
 static __inline__ s32 pak_block_has_size(u8 *data,s32 expected) { return *(s32 *)data==expected; }
 /* Load a Controller Pak note, validate its profile or save-block
  * checksum, and open the corresponding selection or error dialog. */
-s32 func_80407748_de(s32 *selection, Shared_PakMenu *menu) {
+s32 Pak_SelectNote(s32 *selection, Shared_PakMenu *menu) {
     u8 extension[8];
     u8 company[8];
     u8 code[8];
@@ -133,7 +133,7 @@ profile_failed:
                     current = 0;
                     text = rw_pak_note_text(settings);
                     D_8014D4FC = noteIndex;
-                    if (func_804057BC_de(name, 0x10) != 0) {
+                    if (Pak_ContainsInvalidNameByte(name, 0x10) != 0) {
                         XPlus_CopyString(name, (u8 *)rw_pak_invalid_name(settings));
                     }
                     copying = 1;

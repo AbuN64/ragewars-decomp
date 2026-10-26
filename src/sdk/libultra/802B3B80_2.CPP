@@ -11,7 +11,7 @@ extern void func_802B1990_de(void *);
 extern void func_802AFFC0_de(void *, void *, s32);
 extern void alSynAddPlayer(void *, void *);
 
-void func_802B0670_eu(struct ALSequencePlayer *seqp, InitParams *c) {
+void Libultra_CreateSequencePlayer(struct ALSequencePlayer *seqp, InitParams *c) {
     void *heap = c->context;
     void *drvr = D_800D4070;
     ALVoiceState *vs;

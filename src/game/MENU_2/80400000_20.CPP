@@ -72,7 +72,7 @@ extern int D_800DE7E8;
 
 extern unsigned char *D_80145060;
 
-extern void func_804030E0_de(int);
+extern void Menu_RequestTrackByKey(int);
 
 static inline int test_bit(unsigned char *bits, int index) {
     int offset = index >> 3;
@@ -141,7 +141,7 @@ void Menu_TriggerTrackEvent(int event) {
             if (test_bit(bits + 0x638, index)) return;
             set_bit(bits + 0x638, index);
         }
-        func_804030E0_de(event);
+        Menu_RequestTrackByKey(event);
     }
 }
 
@@ -175,35 +175,35 @@ CVector3 Menu_GetTrackStartTarget(void) {
     return splinePoint;
 }
 
-f32 func_804039C4_de(void) {
-    f32 temp_f0;
+f32 Menu_GetTrackDuration(void) {
+    f32 clipDuration;
     f32 result;
-    s32 *temp_v0;
+    s32 *finalKey;
     s32 index;
 
     result = 0.0f;
     index = 0;
 loop_1:
     if (index < *((s32 *)SetN64_GetPackSection(D_800E2830->resource, 0))) {
-        temp_v0 = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), index), 0);
-        temp_v0 = (s32 *)((char *)temp_v0 + temp_v0[1] * 0x24);
-        temp_f0 = *(f32 *)temp_v0;
+        finalKey = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), index), 0);
+        finalKey = (s32 *)((char *)finalKey + finalKey[1] * 0x24);
+        clipDuration = *(f32 *)finalKey;
         index += 1;
-        result += temp_f0;
+        result += clipDuration;
         goto loop_1;
     }
     return result;
 }
 
-s32 func_80403A64_de(void) {
+s32 Menu_GetTrackClipCount(void) {
     return *((s32 *)SetN64_GetPackSection(D_800E2830->resource, 0));
 }
 
-void *func_80403A90_de(s32 key) {
+void *Menu_GetTrackClip(s32 key) {
     return SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(D_800E2830->resource, 0), key), 0);
 }
 
-void *func_80403ADC_de(void) {
+void *Menu_GetTrackCues(void) {
     return SetN64_GetPackSection(D_800E2830->resource, 1);
 }
 
@@ -214,7 +214,7 @@ void *func_80403B04_de(void *value) {
 }
 
 /** Return the selected bit from a packed byte array. */
-u32 func_80403B0C_de(u8 *bits, s32 index)
+u32 Menu_TestBit(u8 *bits, s32 index)
 {
     s32 byte = index >> 3;
     u32 mask;
@@ -226,7 +226,7 @@ u32 func_80403B0C_de(u8 *bits, s32 index)
 }
 
 /* Sets or clears bit n of a bitmap according to the third argument. */
-void func_80403B2C_de(u8 *bits, s32 n, s32 set) {
+void Menu_AssignBit(u8 *bits, s32 n, s32 set) {
     s32 index = n >> 3;
     s32 mask = 1 << (n & 7);
 
@@ -237,7 +237,7 @@ void func_80403B2C_de(u8 *bits, s32 n, s32 set) {
     }
 }
 
-s32 func_80403B70_de(void *object) {
+s32 Menu_GetTrackSplineStorageSize(void *object) {
     struct IntPair *first = SetN64_GetPackSection(object, 0);
     struct IntPair *second = SetN64_GetPackSection(object, 2);
     s32 size = first->field_4 * 36;

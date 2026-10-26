@@ -20,7 +20,7 @@ extern void SmpSlider_SetTransitionMode(void *, s32);
 
 
 
-void func_80298368_de(s32);
+void SmXlate_SwitchScreen(s32);
 
                                /* extern */
 void MarkMenuEventHandled();
@@ -39,7 +39,7 @@ s32 SmpSlider_GetTransitionMode(void *);
                           
 
 
-/* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled, for messages 0x3A2 to 0x3A7
+/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled, for messages 0x3A2 to 0x3A7
    through jtbl_800E1610: five pick option 0, 1, 3, 4 or 2, pass it to PAKInterface_SetScreenPhase and set the
    result word at offset 0x10 of the screen D_800E4450 to 0x13; the sixth sets it to -1. Both then
    close the screen's first word through SmpSlider_SetTransitionMode with 2. Returns zero. */
@@ -47,7 +47,7 @@ s32 SmpSlider_GetTransitionMode(void *);
 
 extern void MarkMenuEventHandled(void);
 
-extern s32 func_80299A08_de(void);
+extern s32 Smos_GetFocusedElementId(void);
 
 /* Calls MarkMenuEventHandled, then sets the word at offset 0x10 of the object D_800E4450 points to to -1 and
    calls SmpSlider_SetTransitionMode on the object's first word with 2, returning zero. */
@@ -126,7 +126,7 @@ block_12:
         if (var_a0 == -1) {
             var_a0 = 3;
         }
-        func_80298368_de(var_a0);
+        SmXlate_SwitchScreen(var_a0);
         goto block_12;
     default:
         return 0;
@@ -138,11 +138,11 @@ s32 Menu_ChooseSixChoiceOption(void) {
     u32 message;
     MarkMenuEventHandled();
 #if defined(VERSION_DE)
-    message = func_80299A08_de() - 0x39C;
+    message = Smos_GetFocusedElementId() - 0x39C;
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    message = func_80299A08_de() - 0x3A2;
+    message = Smos_GetFocusedElementId() - 0x3A2;
 #elif defined(VERSION_EU_X)
-    message = func_80299A08_de() - 0x3A6;
+    message = Smos_GetFocusedElementId() - 0x3A6;
 #endif
     if (message >= 6) {
         return 0;

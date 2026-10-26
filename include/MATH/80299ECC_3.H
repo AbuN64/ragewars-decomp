@@ -4,5 +4,5 @@
 struct Shared_WidgetIdE;
 struct t_dldc;
 
-extern s32 func_80299A80_de(struct Shared_WidgetIdE *widget, struct t_dldc event);
+extern s32 Smos_InvokeWidgetCallback(struct Shared_WidgetIdE *widget, struct t_dldc event);
 #endif

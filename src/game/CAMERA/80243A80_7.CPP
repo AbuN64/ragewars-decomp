@@ -73,7 +73,7 @@ void func_802453D4_de(void)
 s32 func_80245618_de(s32 requestId, ContextCallback requestContextCallback, VoidCallback completionCallback) {
     s32 result;
 
-    result = func_804030E0_de(requestId);
+    result = Menu_RequestTrackByKey(requestId);
     if (D_800E2830->requestE0 == requestId) {
         D_800E2830->callbackE4 = requestContextCallback;
         D_800E2830->callbackE8 = completionCallback;

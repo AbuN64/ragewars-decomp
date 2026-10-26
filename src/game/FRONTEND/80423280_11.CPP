@@ -41,7 +41,7 @@ s32 SmpFlicker_IsFlickerIdle(void *);
 
 void SmpFlicker_StartFlicker(void *, int);
 
-void func_80298368_de(s32);
+void SmXlate_SwitchScreen(s32);
 
 extern MenuTransitionSignal D_80154020;
 
@@ -72,7 +72,7 @@ s32 ScenarioSetup_UpdateSetupTransition(void *root, s32 arg1, s32 arg2) {
         if (D_80154020.selection != -1) {
             D_800E4F60->unk_44C->alpha = 0x5A;
             MarkMenuEventHandled();
-            func_80298368_de(D_80154020.selection);
+            SmXlate_SwitchScreen(D_80154020.selection);
             return 0;
         }
         D_800E4F60->unk_44C->alpha = 0xFF;
@@ -116,7 +116,7 @@ block_7:
         if (temp_v0_3 <= 0) {
             D_800E4F60->unk_3DC = 3;
             MarkMenuEventHandled();
-            func_80298368_de(8);
+            SmXlate_SwitchScreen(8);
             return 0;
         }
         break;

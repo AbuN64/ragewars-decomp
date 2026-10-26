@@ -6,13 +6,13 @@ extern StateCode80420E90 *D_800E5784;
 #include "RESMGR/802A0888.H"
 
 /* Advances a menu selection on its countdown and dispatches the exit action. */
-void func_80298368_de(s32);
+void SmXlate_SwitchScreen(s32);
 
  /* extern */
 void MarkMenuEventHandled();
 
  /* extern */
-void func_802998A8_de(void);
+void Smos_ReturnToPreviousScreen(void);
 
  /* extern */
 s32 SmpSlider_GetTransitionMode(void *);
@@ -30,7 +30,7 @@ extern void MarkMenuEventHandled();
 
 extern void SmpSlider_SetTransitionMode(void *, s32);
 
-/* Calls MarkMenuEventHandled; when func_80299A08_de reports 0x3D0 it sets the word at 0x10 of the menu block
+/* Calls MarkMenuEventHandled; when Smos_GetFocusedElementId reports 0x3D0 it sets the word at 0x10 of the menu block
    D_800E5784 points to to 7 and clears five bytes at D_80102B7E through XPlus_FillMemory, for 0x3D1 it
    sets that word to -1; then it calls SmpSlider_SetTransitionMode on the block's first word with 2. Returns
    zero. */
@@ -38,7 +38,7 @@ extern void SmpSlider_SetTransitionMode(void *, s32);
 
 extern char D_80102B7E[];
 
-extern s32 func_80299A08_de();
+extern s32 Smos_GetFocusedElementId();
 
 
 #if defined(VERSION_DE)
@@ -76,10 +76,10 @@ block_10:
         MarkMenuEventHandled();
         temp_a0_2 = D_800E5784->unk10;
         if (temp_a0_2 == -1) {
-            func_802998A8_de();
+            Smos_ReturnToPreviousScreen();
             return 0;
         }
-        func_80298368_de(temp_a0_2);
+        SmXlate_SwitchScreen(temp_a0_2);
         goto block_10;
     default:
         return 0;
@@ -100,7 +100,7 @@ s32 func_80437930_de(void) {
     s32 choice;
 
     MarkMenuEventHandled();
-    choice = func_80299A08_de();
+    choice = Smos_GetFocusedElementId();
     switch (choice) {
     case MENU_80437B10_977:
         D_800E5784->unk10 = -1;

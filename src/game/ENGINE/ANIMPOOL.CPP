@@ -86,7 +86,7 @@ SceneEffect *AnimPool_SpawnAnimationObject(struct SceneEffectPool *scene, s32 va
             if (resource != 0) {
                 record = SetN64_GetPackSection(*resource, 0);
                 count = Scene_GetActorDefinition(&g_world, record->count);
-                GraphU64_ScaleVector(&color, &color, func_802B2350(record->angle));
+                GraphU64_ScaleVector(&color, &color, Menu_ExpandFloatHighWord(record->angle));
                 effect = spawn_effect(scene, id, variant, count, owner, position, scale, direction, color, ref);
                 Cache_UnlockResource(0, resource);
             }

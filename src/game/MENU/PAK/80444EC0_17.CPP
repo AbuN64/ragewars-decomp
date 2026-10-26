@@ -10,7 +10,7 @@
 
 
 
-s32 func_80445FC8_us_rev1(void *unused, struct Holder *holder) {
+s32 Pak_ToggleOwnerMode(void *unused, struct Holder *holder) {
     struct OwnerRecAt5D0 *owner = holder->owner;
 
     if (owner == 0) {
@@ -34,7 +34,7 @@ s32 func_80445FC8_us_rev1(void *unused, struct Holder *holder) {
 
 
 
-s32 func_80446000_us_rev1(struct FieldRecAt14 *field, struct Holder *holder) {
+s32 Pak_UpdateOwnerModeText(struct FieldRecAt14 *field, struct Holder *holder) {
     if (holder->owner == 0) {
         return 0;
     }
@@ -50,7 +50,7 @@ s32 func_80446000_us_rev1(struct FieldRecAt14 *field, struct Holder *holder) {
    and returns zero. */
 extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
 
-s32 func_80446048_us_rev1(void *first, void *second) {
+s32 Pak_AdjustOwnerNotificationOption(void *first, void *second) {
     D_800D0EBC = Pak_AdjustValue(second, D_800D0EBC, 1, 0, 1, 1);
     return 0;
 }

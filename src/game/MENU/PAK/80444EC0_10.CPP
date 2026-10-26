@@ -9,7 +9,7 @@ extern s32 Pak_AdjustValue(void *,s32,s32,s32,s32,s32);
 #if !(defined(VERSION_US))
 /* Adjusts the volume in steps of eight and starts a sound preview when no preview is playing. */
 
-s32 func_80445160_de(void *unused, void *arg1) {
+s32 Pak_AdjustVolumeSlotZero(void *unused, void *arg1) {
     s32 var_a1;
     var_a1 = D_801462C8.volume[0];
     var_a1 = Pak_AdjustValue(arg1, var_a1, 8, 0, 0xFF, 0);

@@ -7,7 +7,7 @@
    and returns zero. */
 
 
-s32 func_80436250_de(void) {
+s32 Frontend_FreePage67Screen(void) {
     Cache_FreeMemory(D_800E5558);
     D_800E5558 = 0;
     Tsmos_SetModeOneFlag(2);

@@ -26,60 +26,60 @@ extern void func_80225F44_de(void *, void *);
 
 void func_8022D60C_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D628_de(void *a, void *b) { func_80225B98_de(a, b, 0x32); }
+void func_8022D628_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0x32); }
 
 void func_8022D644_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D660_de(void *a, void *b) { func_80225B98_de(a, b, 0x1E); }
+void func_8022D660_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0x1E); }
 
 void func_8022D67C_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D698_de(void *a, void *b) { func_80225B98_de(a, b, 0x28); }
+void func_8022D698_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0x28); }
 
 void func_8022D6B4_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D6D0_de(void *a, void *b) { func_80225B98_de(a, b, 0xB); }
+void func_8022D6D0_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0xB); }
 
 void func_8022D6EC_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D708_de(void *a, void *b) { func_80225B98_de(a, b, 0xC); }
+void func_8022D708_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0xC); }
 
 void func_8022D724_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D740_de(void *a, void *b) { func_80225B98_de(a, b, 0xD); }
+void func_8022D740_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0xD); }
 
 void func_8022D75C_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D778_de(void *a, void *b) { func_80225B98_de(a, b, 0xE); }
+void func_8022D778_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0xE); }
 
 void func_8022D794_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D7B0_de(void *a, void *b) { func_80225B98_de(a, b, 0xF); }
+void func_8022D7B0_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0xF); }
 
 void func_8022D7CC_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D7E8_de(void *a, void *b) { func_80225B98_de(a, b, 0x14); }
+void func_8022D7E8_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0x14); }
 
 void func_8022D804_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void func_8022D820_de(void *a, void *b) { func_80225B98_de(a, b, 0x46); }
+void func_8022D820_de(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0x46); }
 
 void func_8022D83C_de(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void Player_StartPlayerSequence60(void *a, void *b) { func_80225B98_de(a, b, 0x3C); }
+void Player_StartPlayerSequence60(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0x3C); }
 
 void Player_UpdateSequence60RunEndPose(void *sequencePlayer) { func_8022D57C_de(sequencePlayer); }
 
-void Player_StartPlayerSequence71(void *a, void *b) { func_80225B98_de(a, b, 0x47); }
+void Player_StartPlayerSequence71(void *a, void *b) { Player_TryStartPlayerSequence(a, b, 0x47); }
 
 /** Thin wrapper around func_8022D57C_de. */
 void Player_UpdateSequence71RunEndPose(void *sequencePlayer) {
     func_8022D57C_de(sequencePlayer);
 }
 
-/** Thin wrapper around func_80225B98_de with a fixed third argument. */
+/** Thin wrapper around Player_TryStartPlayerSequence with a fixed third argument. */
 void Player_StartPlayerSequence72(void *a, void *b) {
-    func_80225B98_de(a, b, 0x48);
+    Player_TryStartPlayerSequence(a, b, 0x48);
 }
 
 /** Thin wrapper around func_8022D57C_de. */
@@ -87,9 +87,9 @@ void Player_UpdateSequence72RunEndPose(void *sequencePlayer) {
     func_8022D57C_de(sequencePlayer);
 }
 
-/** Thin wrapper around func_80225B98_de with a fixed third argument. */
+/** Thin wrapper around Player_TryStartPlayerSequence with a fixed third argument. */
 void Player_StartPlayerSequence73(void *a, void *b) {
-    func_80225B98_de(a, b, 0x49);
+    Player_TryStartPlayerSequence(a, b, 0x49);
 }
 
 /** Thin wrapper around func_8022D57C_de. */
@@ -97,9 +97,9 @@ void Player_UpdateSequence73RunEndPose(void *sequencePlayer) {
     func_8022D57C_de(sequencePlayer);
 }
 
-/** Thin wrapper around func_80225B98_de with a fixed third argument. */
+/** Thin wrapper around Player_TryStartPlayerSequence with a fixed third argument. */
 void Player_StartPlayerSequence74(void *a, void *b) {
-    func_80225B98_de(a, b, 0x4A);
+    Player_TryStartPlayerSequence(a, b, 0x4A);
 }
 
 /** Thin wrapper around func_8022D57C_de. */

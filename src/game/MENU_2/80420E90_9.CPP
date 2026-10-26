@@ -32,7 +32,7 @@ void Menu_AdvanceTextRows(void *, void *);
 /* Polls the dialog of screen D_800E4400 through SmpSlider_GetTransitionMode: state 3 opens the screen through
    Menu_ScrollOptionsKeypad while its word at 0x34 is zero, and otherwise, when D_8010B0E0.buttons is 0x433, marks the
    screen confirmed at 0x38 and calls Menu_RefreshExtraOptionLocks; state 4 calls MarkMenuEventHandled and waits 3
-   through func_80298368_de. Returns zero. */
+   through SmXlate_SwitchScreen. Returns zero. */
 
 
 
@@ -42,7 +42,7 @@ extern s32 SmpSlider_GetTransitionMode(s32);
 
 extern void MarkMenuEventHandled(void);
 
-extern void func_80298368_de(s32);
+extern void SmXlate_SwitchScreen(s32);
 
 void Menu_ShowExtraOptionsPanel(void) {
     Frontend_SetWidgetFlag08(D_800E4400->pad, 0);
@@ -103,7 +103,7 @@ s32 Menu_UpdateExtraOptionsMenu(void) {
         return 0;
     case 4:
         MarkMenuEventHandled();
-        func_80298368_de(3);
+        SmXlate_SwitchScreen(3);
         return 0;
     }
     return 0;

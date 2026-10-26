@@ -30,7 +30,7 @@
 /* Handles event 1 on the screen D_800E5830: unless func_8043C308_de reports its menu in state 1 it
    calls func_80438828_de; otherwise it advances the menu with Frontend_DrawMenuImage and func_8043C2A4_de and,
    once func_8043C308_de reports 2, acts on the choice at 0x1C: choice 0 calls MarkMenuEventHandled, clears
-   D_80146918 and D_801468F4 and leaves through func_80298368_de for screen 0xA unless D_80146948 is 1
+   D_80146918 and D_801468F4 and leaves through SmXlate_SwitchScreen for screen 0xA unless D_80146948 is 1
    and D_8015402C is at least 35, in which case it leaves for screen 7 when option D_801462D5 is 1
    and screen 3 otherwise; choice 1 calls func_8040C428_de(0), shows the window argument, stops the
    objects at D_80145088 and 0x48 before it, releases D_8011FE88 through Scene_LoadLevelResources and sets the
@@ -63,10 +63,10 @@ extern void MarkMenuEventHandled();
 
 
 /* Runs the screen D_800E5830 each frame until stage 1 of D_800E28E0: on its first frame it marks
-   the word at 0x90, passes 0x272 to func_802991D4_de, or 0x273 when func_8040EBD0_de
+   the word at 0x90, passes 0x272 to Smos_SetFocusedElement, or 0x273 when func_8040EBD0_de
    reports zero for item 0x273 of the window argument, also 0x272 when D_80146948 is clear, and calls Tsmos_ActivateControllerState; then, once the
    reply pair ending at D_80154024 is marked, it clears the mark and either hides the item at 0x24,
-   clears the word at 0x1C0, calls MarkMenuEventHandled and leaves through func_80298368_de with the reply,
+   clears the word at 0x1C0, calls MarkMenuEventHandled and leaves through SmXlate_SwitchScreen with the reply,
    or for a reply of -1 shows the item again and sets 0x1C0 to one. Returns zero. Written from the
    assembly; the conditional tests the zero case first. */
 
@@ -146,7 +146,7 @@ s32 func_80438ADC_de(void *window, void *unused1, s32 event) {
             } else {
                 next = 0xA;
             }
-            func_80298368_de(next);
+            SmXlate_SwitchScreen(next);
             return 0;
         }
     } else {
@@ -164,19 +164,19 @@ s32 func_80438C84_de(void *window) {
     if (D_800E5830->started == 0) {
         D_800E5830->started = 1;
 #if defined(VERSION_DE)
-        func_802991D4_de(Frontend_ListHasFlag100(Frontend_FindWidgetByResourceId(window, 0x26F)) == 0 ? 0x26F : 0x26E);
+        Smos_SetFocusedElement(Frontend_ListHasFlag100(Frontend_FindWidgetByResourceId(window, 0x26F)) == 0 ? 0x26F : 0x26E);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        func_802991D4_de(Frontend_ListHasFlag100(Frontend_FindWidgetByResourceId(window, 0x273)) == 0 ? 0x273 : 0x272);
+        Smos_SetFocusedElement(Frontend_ListHasFlag100(Frontend_FindWidgetByResourceId(window, 0x273)) == 0 ? 0x273 : 0x272);
 #elif defined(VERSION_EU_X)
-        func_802991D4_de(Frontend_ListHasFlag100(Frontend_FindWidgetByResourceId(window, 0x278)) == 0 ? 0x278 : 0x277);
+        Smos_SetFocusedElement(Frontend_ListHasFlag100(Frontend_FindWidgetByResourceId(window, 0x278)) == 0 ? 0x278 : 0x277);
 #endif
         if (D_801462C8.counters.humanWon == 0) {
 #if defined(VERSION_DE)
-            func_802991D4_de(0x26E);
+            Smos_SetFocusedElement(0x26E);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-            func_802991D4_de(0x272);
+            Smos_SetFocusedElement(0x272);
 #elif defined(VERSION_EU_X)
-            func_802991D4_de(0x277);
+            Smos_SetFocusedElement(0x277);
 #endif
         }
         Tsmos_ActivateControllerState();
@@ -189,7 +189,7 @@ s32 func_80438C84_de(void *window) {
             Frontend_SetWidgetFlag08(D_800E5830->item, 0);
             D_800E5830->busy = 0;
             MarkMenuEventHandled();
-            func_80298368_de(pair[-1]);
+            SmXlate_SwitchScreen(pair[-1]);
             return 0;
         }
         Frontend_SetWidgetFlag08(D_800E5830->item, 1);
@@ -212,14 +212,14 @@ s32 func_80438D94_de(void) {
     MarkMenuEventHandled();
     if (func_8043C308_de((Shared_OptionsScreen *)&D_800E5830->rules) != 1) {
         D_80145088.status[7] = 0;
-        switch (func_80299A08_de()) {
+        switch (Smos_GetFocusedElementId()) {
         case MSG_HIDE:
             func_8043C278_de(D_800E5830);
             D_800E5830->rules.locked = 0;
             break;
         case MSG_BACK:
             PAKInterface_SetScreenPhase(5);
-            func_80298368_de(0x13);
+            SmXlate_SwitchScreen(0x13);
             return 0;
         case MSG_LEAVE:
             Frontend_SetMenuChoiceResult(0x21);

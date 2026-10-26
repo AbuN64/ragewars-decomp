@@ -44,14 +44,14 @@ unsigned char *func_802BD3C8_de(unsigned char *string, unsigned char value) {
 }
 
 s32 func_802BD400_de(u8 *arg0) {
-    u8 *var_v1;
-    var_v1 = arg0;
+    u8 *terminator;
+    terminator = arg0;
     if (*arg0 != 0) {
         do {
-            var_v1 += 1;
-        } while (*var_v1 != 0);
+            terminator += 1;
+        } while (*terminator != 0);
     }
-    return var_v1 - arg0;
+    return terminator - arg0;
 }
 
 #if defined(VERSION_US)

@@ -69,16 +69,16 @@ extern StyleNextState *D_800E5694;
 
 
 
-/* Calls MarkMenuEventHandled; when func_80299A08_de reports 0x1C8, passes the word at offset 0x14 of the
-   object D_800E5694 points to to func_804369E8_de, then passes -1 to Frontend_SetMenuChoiceResult if func_802999A0_de
-   reports 0x16 for zero and 0xB otherwise, and calls func_802998A8_de. Returns zero. */
+/* Calls MarkMenuEventHandled; when Smos_GetFocusedElementId reports 0x1C8, passes the word at offset 0x14 of the
+   object D_800E5694 points to to Menu_StoreAlternatePlayerSettingsEntry, then passes -1 to Frontend_SetMenuChoiceResult if Smos_GetPreviousScreenOwner
+   reports 0x16 for zero and 0xB otherwise, and calls Smos_ReturnToPreviousScreen. Returns zero. */
 
 
 
 
 
-/* Calls MarkMenuEventHandled, then passes -1 to Frontend_SetMenuChoiceResult when func_802999A0_de reports 0x16 for zero
-   and 0xB otherwise, then calls func_802998A8_de. Returns zero. */
+/* Calls MarkMenuEventHandled, then passes -1 to Frontend_SetMenuChoiceResult when Smos_GetPreviousScreenOwner reports 0x16 for zero
+   and 0xB otherwise, then calls Smos_ReturnToPreviousScreen. Returns zero. */
 
 
 void MarkMenuEventHandled();
@@ -104,7 +104,7 @@ typedef s32 (*Handler80437454)(void *, s32, s32, s32, s32);
 
 extern Handler80437454 D_800E5718;
 
-s32 func_8043701C_de(void) {
+s32 Menu_FreeAlternatePlayerSettingsScreen(void) {
     Cache_FreeMemory(D_800E5694);
     D_800E5694 = 0;
     return 0;
@@ -122,26 +122,26 @@ s32 func_80437054_de(void) {
     return 0;
 }
 
-s32 func_8043705C_de(void) {
+s32 Menu_ConfirmAlternatePlayerSettingsEntry(void) {
     MarkMenuEventHandled();
 #if defined(VERSION_DE)
-    if (func_80299A08_de() == 0x1C4) {
+    if (Smos_GetFocusedElementId() == 0x1C4) {
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    if (func_80299A08_de() == 0x1C8) {
+    if (Smos_GetFocusedElementId() == 0x1C8) {
 #elif defined(VERSION_EU_X)
-    if (func_80299A08_de() == 0x1CC) {
+    if (Smos_GetFocusedElementId() == 0x1CC) {
 #endif
-        func_804369E8_de(D_800E5694->item);
-        Frontend_SetMenuChoiceResult(func_802999A0_de(0) == 0x16 ? -1 : 0xB);
-        func_802998A8_de();
+        Menu_StoreAlternatePlayerSettingsEntry(D_800E5694->item);
+        Frontend_SetMenuChoiceResult(Smos_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0xB);
+        Smos_ReturnToPreviousScreen();
     }
     return 0;
 }
 
-s32 func_804370CC_de(void) {
+s32 Menu_CancelAlternatePlayerSettingsEntry(void) {
     MarkMenuEventHandled();
-    Frontend_SetMenuChoiceResult(func_802999A0_de(0) == 0x16 ? -1 : 0xB);
-    func_802998A8_de();
+    Frontend_SetMenuChoiceResult(Smos_GetPreviousScreenOwner(0) == 0x16 ? -1 : 0xB);
+    Smos_ReturnToPreviousScreen();
     return 0;
 }
 
@@ -150,13 +150,13 @@ s32 func_80437114_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
 
     MarkMenuEventHandled();
     if (arg3 == 1) {
-        func_804369E8_de(D_800E5694->item);
+        Menu_StoreAlternatePlayerSettingsEntry(D_800E5694->item);
         temp_v0 = D_800E5694->item + 1;
         D_800E5694->item = temp_v0;
         if (temp_v0 >= 4) {
             D_800E5694->item = 0;
         }
-        func_804368F8_de(D_800E5694->item);
+        Menu_SelectAlternatePlayerSettingsEntry(D_800E5694->item);
         XStdio_FormatBuffer(D_800E5694->text, RW_LOCALIZED_TEXT(D_800D34C0_de, D_800E1D54, D_800E1D54, g_languageIndex), D_800E5694->item + 1);
         D_800E5694->label->text = (void *) (D_800E5694->text);
         return 0;
@@ -169,13 +169,13 @@ s32 func_804371C4_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
 
     MarkMenuEventHandled();
     if (arg3 == 1) {
-        func_804369E8_de(D_800E5694->item);
+        Menu_StoreAlternatePlayerSettingsEntry(D_800E5694->item);
         temp_v0 = D_800E5694->item - 1;
         D_800E5694->item = temp_v0;
         if (temp_v0 < 0) {
             D_800E5694->item = 3;
         }
-        func_804368F8_de(D_800E5694->item);
+        Menu_SelectAlternatePlayerSettingsEntry(D_800E5694->item);
         XStdio_FormatBuffer(D_800E5694->text, RW_LOCALIZED_TEXT(D_800D34C0_de, D_800E1D54, D_800E1D54, g_languageIndex), D_800E5694->item + 1);
         D_800E5694->label->text = (void *) (D_800E5694->text);
         return 0;

@@ -5,15 +5,15 @@
 #include "TYPES.H"
 #include "SYSTEM_2/8025E280.H"
 
-/* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled: 0x3D5 waits 1 through
-   func_80298368_de; 0x3D3 plays cue 0x34 through func_8025E2D4_de when func_8025E2C4_de reports sound on,
+/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled: 0x3D5 waits 1 through
+   SmXlate_SwitchScreen; 0x3D3 plays cue 0x34 through func_8025E2D4_de when func_8025E2C4_de reports sound on,
    resets through Tsmos_DeactivateControllerState, sets the timer at 0x1C of screen D_800E5554 by setting
    D_801462D5 through jtbl_800DDEF0 (10, 15 or 10, and 20 for any other setting) and shows the
    screen through func_8043C278_de. Returns zero. */
 extern MenuRules *D_800E5554;
 extern void MarkMenuEventHandled(void);
-extern s32 func_80299A08_de(void);
-extern void func_80298368_de(s32);
+extern s32 Smos_GetFocusedElementId(void);
+extern void SmXlate_SwitchScreen(s32);
 
 extern void Tsmos_DeactivateControllerState(void);
 extern void func_8043C278_de(MenuRules *);
@@ -28,9 +28,9 @@ enum { MENU_80436224_979 = 979, MENU_80436224_981 = 981 };
 
 s32 Frontend_UpdateTimedScreen(void) {
     MarkMenuEventHandled();
-    switch (func_80299A08_de()) {
+    switch (Smos_GetFocusedElementId()) {
     case MENU_80436224_981:
-        func_80298368_de(1);
+        SmXlate_SwitchScreen(1);
         return 0;
     case MENU_80436224_979:
         if (func_8025E2C4_de() != 0) {

@@ -9,7 +9,7 @@
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/PAK_MENU.H"
 
-s32 func_804453F0_de(s32 arg0, Shared_PakMenu *pThis) {
+s32 Pak_SelectMusicPreview(s32 arg0, Shared_PakMenu *pThis) {
     s32 selection = D_800E63B8;
     if (pThis->owner->unkB0 & 0x20202) {
         selection--;
@@ -36,7 +36,7 @@ s32 func_804453F0_de(s32 arg0, Shared_PakMenu *pThis) {
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
 /* Cycles a menu selection from directional input while skipping reserved entries. */
  /* extern */
-s32 func_804453F0_de(s32 arg0, struct RecordRecAt20V1 *arg1) {
+s32 Pak_SelectMusicPreview(s32 arg0, struct RecordRecAt20V1 *arg1) {
     s32 var_a0;
     var_a0 = D_800E63B8;
     if (arg1->inner->unkB0 & 0x20202) {

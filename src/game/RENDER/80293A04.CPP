@@ -58,7 +58,7 @@ extern void func_802A2374_eu_x(void);
 extern void InitFrontendMenus(void);
 #else
 #endif
-extern void func_80298368_de(s32 arg0);
+extern void SmXlate_SwitchScreen(s32 arg0);
 extern void SetN64_BeginModeTransition(GameSession *arg0, s32 arg1);
 extern void func_802394B4_de(void *arg0);
 extern void SetN64_DrawSessionFade(struct GameSession *arg0);
@@ -88,7 +88,7 @@ InitFrontendMenus
 func_802A2224_de
 #endif
 ();
-                func_80298368_de(2);
+                SmXlate_SwitchScreen(2);
                 Frontend_RequestScreenMode(0);
                 SetN64_BeginModeTransition(state, 1);
                 state->transitionTime = 0;
@@ -105,7 +105,7 @@ InitFrontendMenus
 func_802A2224_de
 #endif
 ();
-                func_80298368_de(2);
+                SmXlate_SwitchScreen(2);
                 SetN64_BeginModeTransition(state, 8);
                 state->transitionTime = 0;
             }
@@ -159,7 +159,7 @@ void SetN64_AdvanceGameClock(GameSession *world) {
 #include "COMMON/SESSIONHANDLERROW.H"
 extern f32 D_800C54B8_de, D_800C54BC_de;
 extern void func_802394B4_de(void *);
-extern void func_80298368_de(s32);
+extern void SmXlate_SwitchScreen(s32);
 extern void SetN64_BeginModeTransition(GameSession *, s32);
 extern void SetN64_DrawSessionFade(GameSession *);
 
@@ -172,14 +172,14 @@ void SetN64_DrawSessionWithRoundTimeout(GameSession *session) {
             if (D_800C54BC_de < time) {
                 counters->transitionActive = 0;
                 stopRoundPlatform();
-                func_80298368_de(2);
+                SmXlate_SwitchScreen(2);
                 Frontend_RequestScreenMode(0);
                 SetN64_BeginModeTransition(session, 1);
                 session->transitionTime = 0;
             } else if (D_8010B0E0.buttons != 0) {
                 counters->transitionActive = 0;
                 stopRoundPlatform();
-                func_80298368_de(2);
+                SmXlate_SwitchScreen(2);
                 SetN64_BeginModeTransition(session, 8);
                 session->transitionTime = 0;
             }

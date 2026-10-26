@@ -10,7 +10,7 @@
 #endif
 
 /* Steps the model of the join request the screen D_800E39C0 edits (index at 0x14) back on event 1
-   unless func_802999A0_de reports 0x16: calls MarkMenuEventHandled, finds the request's place in the 3 by 17
+   unless Smos_GetPreviousScreenOwner reports 0x16: calls MarkMenuEventHandled, finds the request's place in the 3 by 17
    model table D_800E381C through Frontend_FindJoinModelIndex, walks back through its variants and, before the
    first, to the last variant of the previous model (wrapping to the last), skipping entries whose
    id is -1, then stores the variant at 0x4 and 0xC and the id at 0x0 of the 28-byte request in
@@ -37,7 +37,7 @@ s32 Frontend_SelectPreviousJoinModel(void *unused0, void *unused1, void *unused2
         return 0;
     }
     MarkMenuEventHandled();
-    if (func_802999A0_de(0) == 0x16) {
+    if (Smos_GetPreviousScreenOwner(0) == 0x16) {
         return 0;
     }
     variant = D_80153F80[D_800E39C0->unk14].variant;
@@ -72,7 +72,7 @@ s32 Frontend_SelectPreviousJoinModel(void *unused0, void *unused1, void *unused2
 #endif
 
 /* Steps the model of the join request the screen D_800E39C0 edits (index at 0x14) forward on event 1
-   unless func_802999A0_de reports 0x16: calls MarkMenuEventHandled, finds the request's place in the 3 by 17
+   unless Smos_GetPreviousScreenOwner reports 0x16: calls MarkMenuEventHandled, finds the request's place in the 3 by 17
    model table D_800E381C through Frontend_FindJoinModelIndex, walks forward through its variants and, past the
    last, to the first variant of the next model (wrapping to the first), skipping entries whose
    id is -1, then stores the variant at 0x4 and 0xC and the id at 0x0 of the 28-byte request in
@@ -99,7 +99,7 @@ s32 Frontend_SelectNextJoinModel(void *unused0, void *unused1, void *unused2, s3
         return 0;
     }
     MarkMenuEventHandled();
-    if (func_802999A0_de(0) == 0x16) {
+    if (Smos_GetPreviousScreenOwner(0) == 0x16) {
         return 0;
     }
     variant = D_80153F80[D_800E39C0->unk14].variant;

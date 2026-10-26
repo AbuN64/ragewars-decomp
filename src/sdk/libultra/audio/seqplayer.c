@@ -32,7 +32,7 @@ void *__mapVoice(void *sequencePlayer, s8 noteKey, s8 noteVelocity, s8 midiChann
     return node;
 }
 
-void func_802B156C_de(List802B663C *voicePool, void *voice) {
+void Audio_ReleaseSequenceVoice(List802B663C *voicePool, void *voice) {
     Node_func_80239AF4_de *node;
     Node_func_80239AF4_de *prev;
 

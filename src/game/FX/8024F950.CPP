@@ -308,7 +308,7 @@ INCLUDE_ASM("span_1000", StaticInstance_InitializePlacedProp);
 #endif
 
 #if defined(VERSION_DE)
-/* Initialises a placed prop from its record: resets its state and owner, loads its model and caches the squared model radius, builds its rotation from the record's packed quaternion, scale and position into a matrix copied into the object, sets its bounding box either as a fixed cube for flag 0x40 or from the record's six extents through func_802B2350 with a half-unit margin, copies the position, links its path segment and takes the next colour key and colour frame. The fixed cube is written through do-while(0) vector macros, which the stores' order needs, and 102.4 is the cartridge's rounded 0x42CCCCCC. */
+/* Initialises a placed prop from its record: resets its state and owner, loads its model and caches the squared model radius, builds its rotation from the record's packed quaternion, scale and position into a matrix copied into the object, sets its bounding box either as a fixed cube for flag 0x40 or from the record's six extents through Menu_ExpandFloatHighWord with a half-unit margin, copies the position, links its path segment and takes the next colour key and colour frame. The fixed cube is written through do-while(0) vector macros, which the stores' order needs, and 102.4 is the cartridge's rounded 0x42CCCCCC. */
 #if defined(VERSION_DE)
 extern s32 InstHdr_GetActorType(PlacedProp *);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -363,12 +363,12 @@ void StaticInstance_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s
         do { (prop->max).x = (record->position).x + (102.399994f); (prop->max).y = (record->position).y + (102.399994f); (prop->max).z = (record->position).z + (102.399994f); } while (0);
         prop->fieldD4 = D_800CD8D0;
     } else {
-        prop->min.x = func_802B2350(record->extents[0]) + record->position.x - 0.5f;
-        prop->min.y = func_802B2350(record->extents[1]) + record->position.y - 0.5f;
-        prop->min.z = func_802B2350(record->extents[2]) + record->position.z - 0.5f;
-        prop->max.x = func_802B2350(record->extents[3]) + record->position.x + 0.5f;
-        prop->max.y = func_802B2350(record->extents[4]) + record->position.y + 0.5f;
-        prop->max.z = func_802B2350(record->extents[5]) + record->position.z + 0.5f;
+        prop->min.x = Menu_ExpandFloatHighWord(record->extents[0]) + record->position.x - 0.5f;
+        prop->min.y = Menu_ExpandFloatHighWord(record->extents[1]) + record->position.y - 0.5f;
+        prop->min.z = Menu_ExpandFloatHighWord(record->extents[2]) + record->position.z - 0.5f;
+        prop->max.x = Menu_ExpandFloatHighWord(record->extents[3]) + record->position.x + 0.5f;
+        prop->max.y = Menu_ExpandFloatHighWord(record->extents[4]) + record->position.y + 0.5f;
+        prop->max.z = Menu_ExpandFloatHighWord(record->extents[5]) + record->position.z + 0.5f;
         prop->fieldD4 = record->value;
     }
     CopyMatrix(prop->matrix, matrix);

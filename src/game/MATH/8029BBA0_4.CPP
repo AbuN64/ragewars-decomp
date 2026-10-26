@@ -15,12 +15,12 @@
 
 /* Build a rotation matrix from the three Euler angles in arg1. */
 void XMath_BuildYxzRotationMatrix(ObjRecAt3CV2 *arg0, CVector3 *arg1) {
-    f32 sp10;
-    f32 sp14;
-    f32 sp18;
-    f32 sp1C;
-    f32 sp20;
-    f32 sp24;
+    f32 sinX;
+    f32 cosX;
+    f32 sinY;
+    f32 cosY;
+    f32 sinZ;
+    f32 cosZ;
     f32 p0;
     f32 p1;
     f32 p2;
@@ -37,26 +37,26 @@ void XMath_BuildYxzRotationMatrix(ObjRecAt3CV2 *arg0, CVector3 *arg1) {
     float temp_2;
     f32 p12;
     f32 p13;
-    XMath_EvaluateSineCosine(arg1->x, &sp10, &sp14);
-    XMath_EvaluateSineCosine(arg1->y, &sp18, &sp1C);
-    XMath_EvaluateSineCosine(arg1->z, &sp20, &sp24);
-    p0 = sp10 * sp20;
-    p1 = sp10 * sp24;
-    temp_2 = sp18 * p0;
-    p2 = sp1C * sp24;
-    p3 = sp20 * sp1C;
-    p4 = sp14 * sp18;
-    temp = sp18 * p1;
-    p5 = sp14 * sp20;
-    p6 = sp14 * sp24;
-    p7 = sp18 * sp24;
-    p8 = sp14 * sp1C;
+    XMath_EvaluateSineCosine(arg1->x, &sinX, &cosX);
+    XMath_EvaluateSineCosine(arg1->y, &sinY, &cosY);
+    XMath_EvaluateSineCosine(arg1->z, &sinZ, &cosZ);
+    p0 = sinX * sinZ;
+    p1 = sinX * cosZ;
+    temp_2 = sinY * p0;
+    p2 = cosY * cosZ;
+    p3 = sinZ * cosY;
+    p4 = cosX * sinY;
+    temp = sinY * p1;
+    p5 = cosX * sinZ;
+    p6 = cosX * cosZ;
+    p7 = sinY * cosZ;
+    p8 = cosX * cosY;
     p9 = temp_2;
     p10 = temp;
-    p11 = sp1C * p0;
-    p12 = sp18 * sp20;
-    p13 = sp1C * sp20;
-    arg0->unk24 = -sp10;
+    p11 = cosY * p0;
+    p12 = sinY * sinZ;
+    p13 = cosY * sinZ;
+    arg0->unk24 = -sinX;
     arg0->unk20 = p4;
     arg0->unk4 = p5;
     arg0->unk14 = p6;
@@ -66,7 +66,7 @@ void XMath_BuildYxzRotationMatrix(ObjRecAt3CV2 *arg0, CVector3 *arg1) {
     arg0->unk0 = p2 + p9;
     arg0->unk10 = p10 - p3;
     arg0->unk8 = p11 - p7;
-    arg0->unk18 = p12 + p1 * sp1C;
+    arg0->unk18 = p12 + p1 * cosY;
 }
 
 

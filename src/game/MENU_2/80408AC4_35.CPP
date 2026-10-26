@@ -4,7 +4,7 @@
 
 #if defined(VERSION_DE)
 /* Calls SmpButton_WrapButtonWidget with 0x3D0 and then 0x3D1, and returns zero. */
-s32 func_804377E8_de(void) {
+s32 Menu_WrapSettingsNodePair(void) {
 #if defined(VERSION_DE)
     SmpButton_WrapButtonWidget(0x3CA);
     SmpButton_WrapButtonWidget(0x3CB);

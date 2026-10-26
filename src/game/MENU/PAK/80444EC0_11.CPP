@@ -11,7 +11,7 @@
 #include "SYSTEM_3/80265370.H"
 
 #if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_80400000", func_804451D0_de);
+INCLUDE_ASM("ovl_80400000", Pak_UpdateFirstVolumeLabel);
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1) || ((defined(VERSION_EU) || defined(VERSION_EU_X)) && defined(NON_MATCHING))
@@ -24,13 +24,13 @@ INCLUDE_ASM("ovl_80400000", func_804451D0_de);
 /* Selects a localized volume label and formats an intermediate value.
  * DE/US-rev1 source and proofs remain preserved separately. */
 
-/* Points a field's text at one of D_800D3D94, D_800D3D90 or D_800D3D8C when the option byte D_801462E0 measured from 0x80 in steps of eight is zero, fifteen or minus sixteen, and otherwise at D_800D3D98 with the step formatted into it, returning zero. Adapted from func_80445AB8 with D_801462E2 changed to D_801462E0 and the text slots D_800D7DD8..D_800D7DE4 changed to D_800D3D8C..D_800D3D98. */
+/* Points a field's text at one of D_800D3D94, D_800D3D90 or D_800D3D8C when the option byte D_801462E0 measured from 0x80 in steps of eight is zero, fifteen or minus sixteen, and otherwise at D_800D3D98 with the step formatted into it, returning zero. Adapted from Pak_UpdateThirdVolumeLabel with D_801462E2 changed to D_801462E0 and the text slots D_800D7DD8..D_800D7DE4 changed to D_800D3D8C..D_800D3D98. */
 
 
 
 extern s32 Pak_CountLineChars(LayeredText *);
 
-s32 func_804451D0_de(LayeredText *field) {
+s32 Pak_UpdateFirstVolumeLabel(LayeredText *field) {
     s32 step = (VOLUME_BYTE - 0x80) / 8;
     char *text;
 

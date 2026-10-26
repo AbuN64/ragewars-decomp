@@ -35,10 +35,10 @@ void XMath_ClearMatrix(s32 arg0) {
     XPlus_FillBytes(arg0, 0, 0x40);
 }
 
-void XMath_SetIdentityMatrix(s32 arg0)
+void XMath_SetIdentityMatrix(s32 matrixAddress)
 {
-  XPlus_FillBytes(arg0, 0, 0x40);
-  ((Matrix *)(arg0))->m[15] = (((Matrix *)(arg0))->m[10] = (((Matrix *)(arg0))->m[5] = (((Matrix *)(arg0))->m[0] = (f32) D_800C5CB8_de)));
+  XPlus_FillBytes(matrixAddress, 0, 0x40);
+  ((Matrix *)(matrixAddress))->m[15] = (((Matrix *)(matrixAddress))->m[10] = (((Matrix *)(matrixAddress))->m[5] = (((Matrix *)(matrixAddress))->m[0] = (f32) D_800C5CB8_de)));
 }
 
 void XMath_TransposeMatrix(f32 *arg0) {
@@ -160,20 +160,20 @@ void XMath_PremultiplyPitchRotation(s32 arg0, f32 arg1) {
     }
 }
 
-void XMath_PremultiplyYawRotation(s32 arg0, f32 arg1) {
+void XMath_PremultiplyYawRotation(s32 matrixAddress, f32 radians) {
     Matrix matrix;
-    f32 sp50;
-    f32 sp54;
+    f32 sinAngle;
+    f32 cosAngle;
     Matrix *p;
 
-    if (arg1 != 0.0f) {
-        XMath_EvaluateSineCosine(arg1, &sp50, &sp54);
+    if (radians != 0.0f) {
+        XMath_EvaluateSineCosine(radians, &sinAngle, &cosAngle);
         p = &matrix;
         XPlus_FillBytes(p, 0, 0x40);
         ((Matrix *)(p))->m[0] = D_800C5CC4_de;
         {
-            f32 t54 = sp54;
-            f32 t50 = sp50;
+            f32 t54 = cosAngle;
+            f32 t50 = sinAngle;
             f32 t50n;
             ((Matrix *)(p))->m[5] = D_800C5CC4_de;
             ((Matrix *)(p))->m[10] = D_800C5CC4_de;
@@ -184,24 +184,24 @@ void XMath_PremultiplyYawRotation(s32 arg0, f32 arg1) {
             matrix.m[2] = t50n;
             matrix.m[10] = t54;
         }
-        XMath_MultiplyMatrices(arg0, (s32) p, arg0);
+        XMath_MultiplyMatrices(matrixAddress, (s32) p, matrixAddress);
     }
 }
 
-void XMath_PremultiplyRollRotation(s32 arg0, f32 arg1) {
+void XMath_PremultiplyRollRotation(s32 matrixAddress, f32 radians) {
     Matrix matrix;
-    f32 sp50;
-    f32 sp54;
+    f32 sinAngle;
+    f32 cosAngle;
     Matrix *p;
 
-    if (arg1 != 0.0f) {
-        XMath_EvaluateSineCosine(arg1, &sp50, &sp54);
+    if (radians != 0.0f) {
+        XMath_EvaluateSineCosine(radians, &sinAngle, &cosAngle);
         p = &matrix;
         XPlus_FillBytes(p, 0, 0x40);
         ((Matrix *)(p))->m[0] = D_800C5CC8_de;
         {
-            f32 t54 = sp54;
-            f32 t50 = sp50;
+            f32 t54 = cosAngle;
+            f32 t50 = sinAngle;
             f32 t50n;
             ((Matrix *)(p))->m[5] = D_800C5CC8_de;
             ((Matrix *)(p))->m[10] = D_800C5CC8_de;
@@ -212,7 +212,7 @@ void XMath_PremultiplyRollRotation(s32 arg0, f32 arg1) {
             matrix.m[1] = t50;
             matrix.m[5] = t54;
         }
-        XMath_MultiplyMatrices(arg0, (s32) p, arg0);
+        XMath_MultiplyMatrices(matrixAddress, (s32) p, matrixAddress);
     }
 }
 
@@ -296,12 +296,12 @@ void XMath_GetMatrixColumns(float *arg0, float *arg1, float *arg2, float *arg3) 
 }
 
 /** Thin wrapper forwarding arg0 twice (as first and third args) to XMath_MultiplyMatrices. */
-void XMath_PremultiplyMatrix(int arg0, int arg1) {
-    XMath_MultiplyMatrices(arg0, arg1, arg0);
+void XMath_PremultiplyMatrix(int destinationMatrix, int leftMatrix) {
+    XMath_MultiplyMatrices(destinationMatrix, leftMatrix, destinationMatrix);
 }
 
-void XMath_PostmultiplyMatrix(s32 arg0, s32 arg1) {
-    XMath_MultiplyMatrices(arg0, arg0, arg1);
+void XMath_PostmultiplyMatrix(s32 destinationMatrix, s32 arg1) {
+    XMath_MultiplyMatrices(destinationMatrix, destinationMatrix, arg1);
 }
 
 void XMath_TransformPointArray(void *arg0, void *arg1, void *arg2, s32 arg3) {
@@ -326,7 +326,7 @@ void XMath_TransformPointArray(void *arg0, void *arg1, void *arg2, s32 arg3) {
     }
 }
 
-void XMath_BuildAxisAngleMatrix(struct MatrixF *matrixF, CVector3 *arg1, f32 arg2) {
+void XMath_BuildAxisAngleMatrix(struct MatrixF *matrixF, CVector3 *arg1, f32 radians) {
     f32 sine;
     f32 cosine;
     f32 cosine_value;
@@ -346,7 +346,7 @@ void XMath_BuildAxisAngleMatrix(struct MatrixF *matrixF, CVector3 *arg1, f32 arg
     f32 sz;
     f32 zero;
 
-    XMath_EvaluateSineCosine(arg2, &sine, &cosine);
+    XMath_EvaluateSineCosine(radians, &sine, &cosine);
     cosine_value = cosine;
     one = D_800C5CCC_de;
     one_minus_cosine = one - cosine_value;

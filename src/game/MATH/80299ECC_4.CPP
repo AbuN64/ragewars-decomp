@@ -5,11 +5,11 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/CALLBACK.H"
 
-void func_80299B3C_de(int arg0) {
+void Smos_SetAxisThreshold(int arg0) {
     D_8014D080->limit = arg0;
 }
 
 /** Return the word at offset 0x14 of the current global object. */
-unsigned int func_80299B4C_de(void) {
+unsigned int Smos_GetControlRepeatLimit(void) {
     return D_8014D080->limit;
 }

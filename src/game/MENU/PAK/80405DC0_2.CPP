@@ -13,11 +13,11 @@
 
 extern s32 D_8015375C;
 
-extern s32 Pak_CheckStatusPrompt(Menu_func_804066BC_de *, s32, s32);
+extern s32 Pak_CheckStatusPrompt(MenuPakBeginProfileLoad *, s32, s32);
 
 extern void *Pak_OpenDialog(struct func_8025E5B0_S1 *, struct Dialog *, s32, s32, s32);
 
-static __inline__ void pakShow(Menu_func_804066BC_de *menu) {
+static __inline__ void pakShow(MenuPakBeginProfileLoad *menu) {
     s32 channel;
     if (D_8015375C) channel = D_800E28C8;
     else channel = menu->slot->unk4;
@@ -41,7 +41,7 @@ static __inline__ void *pakPrompt(s32 *channel) {
     return result;
 }
 
-static __inline__ void *menuPrompt(Menu_func_804066BC_de *menu) {
+static __inline__ void *menuPrompt(MenuPakBeginProfileLoad *menu) {
     s32 channel;
     void *prompt;
         prompt = 0;
@@ -68,7 +68,7 @@ extern s32 D_800E28C0;
 
 /* Dialog resources are opaque ROM addresses. The list-builder ABI carries
  * player, slot, and optional formatting data as three raw 32-bit words. */
-s32 Pak_CancelPendingOperation(void *unused, Menu_func_804066BC_de *menu) {
+s32 Pak_CancelPendingOperation(void *unused, MenuPakBeginProfileLoad *menu) {
     s32 channel;
     void *prompt;
     void *owner;

@@ -51,8 +51,8 @@ struct MenuListScreen {
     void *window;
 };
 
-struct State_func_804368F8_de;
-struct State_func_804368F8_de {
+struct StateMenuSelectAlternatePlayerSettingsEntry;
+struct StateMenuSelectAlternatePlayerSettingsEntry {
     void *c;
     void *d;
     void *b;

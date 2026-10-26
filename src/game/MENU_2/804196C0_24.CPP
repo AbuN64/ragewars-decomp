@@ -74,7 +74,7 @@ extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape
 extern void Frontend_DrawVisibleSiblings(void *, Args);
 
 void SmpOverlay_RegisterOverlayClass(void) {
-    func_802982C4_de(0x7D5, D_0041B970, D_0041BA00, 3);
+    SmSmngr_RegisterElementHandlers(0x7D5, D_0041B970, D_0041BA00, 3);
 }
 
 NodeMenuCreateOverlayNode *SmpOverlay_CreateOverlayNode(OwnerRecAt44 *owner, s32 value) {
@@ -101,10 +101,10 @@ void SmpOverlay_ShowSlotById(OwnerRecAt8V1 *owner, s32 index, s32 id) {
     context = owner->context;
     if (context->locked[index] == 0) {
         if (context->shown[index] != 0) {
-            func_802995D4_de(context->shown[index]->id, 0x10, 0, 0, 0);
+            Smos_RouteElementEvent(context->shown[index]->id, 0x10, 0, 0, 0);
         }
         node = Frontend_FindWidgetByResourceId(context->root, id & 0xFFFF);
-        func_802995D4_de(node->id, 0xF, 0, 0, 0);
+        Smos_RouteElementEvent(node->id, 0xF, 0, 0, 0);
         if (context->shared == 0) {
             context->shown[index] = node;
         } else {
@@ -164,10 +164,10 @@ void SmpOverlay_ShowSlotNodeById(sm_dlmultiuser *context, s32 index, s32 id) {
 
     if (context->locked[index] == 0) {
         if (context->shown[index] != 0) {
-            func_802995D4_de(context->shown[index]->id, 0x10, 0, 0, 0);
+            Smos_RouteElementEvent(context->shown[index]->id, 0x10, 0, 0, 0);
         }
         node = Frontend_FindWidgetByResourceId(context->root, id & 0xFFFF);
-        func_802995D4_de(node->id, 0xF, 0, 0, 0);
+        Smos_RouteElementEvent(node->id, 0xF, 0, 0, 0);
         if (context->shared == 0) {
             context->shown[index] = node;
         } else {

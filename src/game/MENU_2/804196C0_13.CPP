@@ -32,7 +32,7 @@ extern void SmpFrameAnim_SetLoopCount(Animation *anim, s32 value);
 extern void Frontend_InsertWidgetBefore(s32 widget, Animation *anim);
 
 void SmpFrameAnim_RegisterFrameAnimClass(void) {
-    func_802982C4_de(0xB5F, D_00419A4C, D_00419ADC, 3);
+    SmSmngr_RegisterElementHandlers(0xB5F, D_00419A4C, D_00419ADC, 3);
 }
 
 Animation *SmpFrameAnim_CreateFrameSequence(s32 id, s32 *frames) {

@@ -63,21 +63,21 @@ extern void Frontend_ResetJoinRequestEntries(void);
 
 
 
-/* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled unless func_8043C308_de reports
+/* Handles the menu message Smos_GetFocusedElementId reports after MarkMenuEventHandled unless func_8043C308_de reports
    screen D_800E4EF0 busy: 0x36B closes the menu through Frontend_StoreMatchOptionWidgets, sends code -1 to
-   Frontend_SetMenuChoiceResult and calls func_802998A8_de; 0x369 does the same with page reset Frontend_SyncMatchJoinSlots(0)
+   Frontend_SetMenuChoiceResult and calls Smos_ReturnToPreviousScreen; 0x369 does the same with page reset Frontend_SyncMatchJoinSlots(0)
    and code 0x17 when N64Eng_GetNumericWidgetValue reports the screen's list at 0x34 non-empty; 0x36A always does
    it with Frontend_SeatJoinRequests and code 0x19, then calls Tsmos_DeactivateControllerState. Returns zero. */
 
 
 
 
-extern void func_802998A8_de(void);
+extern void Smos_ReturnToPreviousScreen(void);
 
 
 
 /* Calls MarkMenuEventHandled and, unless func_8043C308_de reports one for the object D_800E4EF0 holds, calls
-   Frontend_StoreMatchOptionWidgets, Frontend_SetMenuChoiceResult with -1 and func_802998A8_de. Returns zero. */
+   Frontend_StoreMatchOptionWidgets, Frontend_SetMenuChoiceResult with -1 and Smos_ReturnToPreviousScreen. Returns zero. */
 
 
 extern void MarkMenuEventHandled();
@@ -163,7 +163,7 @@ s32 Frontend_ResetMatchOptionOnEvent(s32 unused0, s32 unused1, u32 arg2, s32 arg
     kind = arg2 >> 0x10;
     if ((kind == 3) && (arg3 == 2)) {
         MarkMenuEventHandled();
-        switch (func_80299A08_de()) {
+        switch (Smos_GetFocusedElementId()) {
 #if defined(VERSION_DE)
         case 0x35F:
 #elif defined(VERSION_EU_X)
@@ -229,7 +229,7 @@ s32 Frontend_ActivateMatchOptionAction(void) {
     if (func_8043C308_de(D_800E4EF0) == 1) {
         return 0;
     }
-    switch (func_80299A08_de()) {
+    switch (Smos_GetFocusedElementId()) {
 #if defined(VERSION_DE)
     case 0x367:
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -239,7 +239,7 @@ s32 Frontend_ActivateMatchOptionAction(void) {
 #endif
         Frontend_StoreMatchOptionWidgets();
         Frontend_SetMenuChoiceResult(-1);
-        func_802998A8_de();
+        Smos_ReturnToPreviousScreen();
         break;
 #if defined(VERSION_DE)
     case 0x365:
@@ -252,7 +252,7 @@ s32 Frontend_ActivateMatchOptionAction(void) {
             Frontend_StoreMatchOptionWidgets();
             Frontend_SyncMatchJoinSlots(0);
             Frontend_SetMenuChoiceResult(0x17);
-            func_802998A8_de();
+            Smos_ReturnToPreviousScreen();
         }
         break;
 #if defined(VERSION_DE)
@@ -266,7 +266,7 @@ s32 Frontend_ActivateMatchOptionAction(void) {
         Frontend_SyncMatchJoinSlots(0);
         Frontend_SeatJoinRequests();
         Frontend_SetMenuChoiceResult(0x19);
-        func_802998A8_de();
+        Smos_ReturnToPreviousScreen();
         Tsmos_DeactivateControllerState();
         break;
     }
@@ -280,7 +280,7 @@ s32 Frontend_ExitMatchOptions(void) {
     }
     Frontend_StoreMatchOptionWidgets();
     Frontend_SetMenuChoiceResult(-1);
-    func_802998A8_de();
+    Smos_ReturnToPreviousScreen();
     return 0;
 }
 

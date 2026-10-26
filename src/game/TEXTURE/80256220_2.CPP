@@ -8,7 +8,7 @@
 #include "COMMON/CARTRIDGEREADWORKER.H"
 #include "sdk/os.h"
 /* Cartridge read thread loop: waits on the manager's request queue; a 0xBEEFDEAD message arms a
- * periodic timer that posts 0xDEADBEEF, a 0xDEADBEEF tick runs func_802AF990_us_rev1 when TextLoad_IsArtsendTexturePreviewEnabled
+ * periodic timer that posts 0xDEADBEEF, a 0xDEADBEEF tick runs Libultra_RunDebugLinkCommands when TextLoad_IsArtsendTexturePreviewEnabled
  * reports work, and any other message is a read request whose buffer is invalidated, read from the
  * device through func_802B9A40_de, awaited on the completion queue, flushed, acknowledged to its reply
  * queue when one is given and finally retired through func_80256688_de. */
@@ -19,7 +19,7 @@
 
 extern void func_802BB6C0_de(void *, u64, u64, void *, void *);
 extern int TextLoad_IsArtsendTexturePreviewEnabled(void);
-extern void func_802AF990_us_rev1(void);
+extern void Libultra_RunDebugLinkCommands(void);
 extern void func_802BD280_de(void *, s32);
 extern s32 func_802B9A40_de(s32, u32, void *, u32);
 extern void func_802BCF70_de(void *, s32);
@@ -38,7 +38,7 @@ void func_8025651C_us_rev1(s32 cartridgeReadWorker) {
             func_802BB6C0_de(&timer, 0, 0x393870, &((struct CartridgeReadWorker *)(cartridgeReadWorker))->requestQueueStorage, (void *)0xDEADBEEF);
         } else if (request == (struct CartridgeReadRequest *)0xDEADBEEF) {
             if (TextLoad_IsArtsendTexturePreviewEnabled() != 0) {
-                func_802AF990_us_rev1();
+                Libultra_RunDebugLinkCommands();
             }
         } else {
             func_802BD280_de(request->buffer, request->size);

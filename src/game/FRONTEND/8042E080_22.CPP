@@ -31,7 +31,7 @@ extern struct Stage *D_800E4680;
 extern s32 D_8015402C;
 
 extern void MarkMenuEventHandled(void);
-extern void func_80298368_de(s32);
+extern void SmXlate_SwitchScreen(s32);
 extern void Tsmos_RequestFrontendShutdown(void);
 
 
@@ -53,7 +53,7 @@ void Frontend_StartConfiguredMatch(void) {
     CGameStatus *match;
 
     MarkMenuEventHandled();
-    func_80298368_de(2);
+    SmXlate_SwitchScreen(2);
     Tsmos_RequestFrontendShutdown();
     humans = 0;
     settings = (u8 *)&D_801462C8;

@@ -13,10 +13,10 @@
 
 extern void Tsmos_ActivateControllerState(void);
 
-/* On event 3 with value 0xD, calls MarkMenuEventHandled and func_80298368_de with 3. Returns zero. */
+/* On event 3 with value 0xD, calls MarkMenuEventHandled and SmXlate_SwitchScreen with 3. Returns zero. */
 extern void MarkMenuEventHandled();
 
-extern void func_80298368_de(s32);
+extern void SmXlate_SwitchScreen(s32);
 
 s32 func_804395F8_de(void) {
     extern Pulse *D_800E5950;
@@ -43,7 +43,7 @@ s32 func_804396F0_de(void *first, void *second, u32 event, s32 value) {
             return 0;
         }
         MarkMenuEventHandled();
-        func_80298368_de(3);
+        SmXlate_SwitchScreen(3);
     }
     return 0;
 }

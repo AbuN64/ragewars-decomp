@@ -23,7 +23,7 @@ extern char D_800EEE20[];
 #define VALUE_FORMAT D_800DE7B0_de
 #endif
 
-s32 func_80445ECC(LayeredText *field) {
+s32 Pak_FormatMusicPreview(LayeredText *field) {
     char *text;
     if (D_800E63B8 == 0) {
         field->text = &D_800D3DBC;

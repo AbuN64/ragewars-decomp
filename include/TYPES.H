@@ -176,7 +176,7 @@ extern void SetN64_InitializeFrontendScreenState(struct GameSession *arg0);
 
 extern s32 DispatchElementEvent(s32 id, s32 event, s32, s32, s32);
 
-extern s32 func_80297A34_de(s32 event, s32, s32, s32);
+extern s32 SmSmngr_DispatchPrimaryScreenEvent(s32 event, s32, s32, s32);
 
 extern f32 XMath_EvaluateSine(f32 arg0);
 

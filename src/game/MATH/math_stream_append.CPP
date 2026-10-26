@@ -9,17 +9,17 @@ struct Record;
 extern struct Record *Cache_AllocateMemory(s32 arg0);
 
 
-void StreamBufferAppend(StreamBuffer *streamBuffer, const void *arg1, s32 arg2) {
+void StreamBufferAppend(StreamBuffer *streamBuffer, const void *sourceData, s32 byteCount) {
     if ((streamBuffer->data) == 0) {
-        void *allocation = Cache_AllocateMemory(arg2);
+        void *allocation = Cache_AllocateMemory(byteCount);
         streamBuffer->data = allocation;
         streamBuffer->writePosition = 0;
-        streamBuffer->capacity = arg2;
+        streamBuffer->capacity = byteCount;
     }
     {
         s32 t_c = streamBuffer->writePosition;
         u8 *t_0 = streamBuffer->data;
-        XPlus_CopyBytes(t_0 + t_c, arg1, arg2);
+        XPlus_CopyBytes(t_0 + t_c, sourceData, byteCount);
     }
-    streamBuffer->writePosition = (streamBuffer->writePosition) + arg2;
+    streamBuffer->writePosition = (streamBuffer->writePosition) + byteCount;
 }

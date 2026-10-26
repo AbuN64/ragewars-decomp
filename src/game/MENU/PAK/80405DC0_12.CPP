@@ -42,7 +42,7 @@ static inline void get_channel(MenuRecAt20V3 *menu, s32 *channel) {
     }
 }
 
-s32 func_804085E0_de(void *unused, MenuRecAt20V3 *menu) {
+s32 Pak_CloseNoteBrowser(void *unused, MenuRecAt20V3 *menu) {
     s32 channel;
     char *label;
     s8 port;

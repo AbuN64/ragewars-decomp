@@ -56,7 +56,7 @@ s32 Pak_FindFreeNoteExtension(s32 ch, u8 *ext) {
 
 
 
-s32 func_80405598_de(s32 index) {
+s32 Pak_NeedsIdRepair(s32 index) {
     if (D_801534F0[index] != 3) {
         return 0;
     }
@@ -72,7 +72,7 @@ extern char D_8010FC00[];
 extern PakRecord D_80153330[];
 extern s32 func_802B7FD8_de(void *queue, void *pak, s32 channel);
 
-s32 func_804055D4_de(s32 channel) {
+s32 Pak_ProbeAccessoryPresence(s32 channel) {
     PakRecord *record = &D_80153330[channel];
     s32 result;
 
@@ -89,7 +89,7 @@ s32 func_804055D4_de(s32 channel) {
 extern u8 D_800DE80C[];
 
 /* Converts a controller-pak filename through its character table, blanking leading nulls, then trims trailing spaces. */
-void func_80405648_de(u8 *arg0, u8 *noteText, s32 arg2) {
+void Pak_DecodeNoteText(u8 *arg0, u8 *noteText, s32 arg2) {
     s32 i;
     s32 started;
 
@@ -124,7 +124,7 @@ extern u8 XPlus_UppercaseCharacter(u8);
 extern u8 D_800DE80C[0x42];
 
 /* Maps input bytes through a lookup table and stores results. */
-void func_8040570C_de(u8 *arg0, s8 *arg1, s32 arg2) {
+void Pak_EncodeNoteText(u8 *arg0, s8 *arg1, s32 arg2) {
     s32 i;
     s8 *var_s1;
     s32 j;
@@ -155,7 +155,7 @@ void func_8040570C_de(u8 *arg0, s8 *arg1, s32 arg2) {
 }
 
 /* Returns one when a tilde appears among the first n + 1 bytes of a string, otherwise zero. */
-s32 func_804057BC_de(u8 *text, s32 count) {
+s32 Pak_ContainsInvalidNameByte(u8 *text, s32 count) {
     do {
         if (*text++ == '~') {
             return 1;
@@ -172,7 +172,7 @@ u32 Pak_BytesToPakPages(u32 bytes) {
 
 /* Computes the CRC-32 with polynomial 0xEDB88320 of arg1 bytes at arg0, continuing from the running value arg2, from a 256-entry table built on the stack. Adapted from XPlus_UpdateCrc32. */
 
-u32 Pak_Crc32(u8 *arg0, u32 arg1, u32 arg2) {
+u32 Pak_Crc32(u8 *data, u32 byteCount, u32 initialCrc) {
     u32 table[256];
     u32 i;
     u32 j;
@@ -192,17 +192,17 @@ u32 Pak_Crc32(u8 *arg0, u32 arg1, u32 arg2) {
         table[i] = value;
     }
 
-    end = arg0 + arg1;
-    arg2 = ~arg2;
-    while (arg0 < end) {
-        arg2 = table[(arg2 ^ *arg0++) & 0xFF] ^ ((arg2 >> 8) & 0xFFFFFF);
+    end = data + byteCount;
+    initialCrc = ~initialCrc;
+    while (data < end) {
+        initialCrc = table[(initialCrc ^ *data++) & 0xFF] ^ ((initialCrc >> 8) & 0xFFFFFF);
     }
-    return ~arg2;
+    return ~initialCrc;
 }
 
 /* Returns the word held in D_800E2850. */
 
-s32 func_804058A0_de(void) {
+s32 Pak_HasScratchBuffer(void) {
     return D_800E2850;
 }
 
