@@ -1,7 +1,7 @@
 #include "COMMON/EXTERNS_21.H"
 #include "TYPES.H"
 #include "COMMON/AUDIO_CALLBACKS.H"
-#include "MENU/MEASURED.H"
+#include "COMMON/MEASURED_STORAGE.H"
 #include "COMMON/UNUSED.H"
 
 #if defined(VERSION_EU)

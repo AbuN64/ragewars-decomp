@@ -1,13 +1,14 @@
 #ifndef COMMON_MEASUREDRECAT14V2_H
 #define COMMON_MEASUREDRECAT14V2_H
+#include "COMMON/MEASURED_STORAGE.H"
 /* Measured 4-byte access at 0x14; storage view, complete object unknown. */
-struct MeasuredRecAt14V2 { unsigned char padding[20]; s32 value; };
+
 /* Measured 4-byte access at 0x18; storage view, complete object unknown. */
 struct MeasuredCode8028B64C { unsigned char padding[24]; s32 value; };
 /* Measured 4-byte access at 0xC; storage view, complete object unknown. */
-struct MeasuredRecAtCV3 { unsigned char padding[12]; s32 value; };
+
 /* Measured 4-byte access at 0x10; storage view, complete object unknown. */
-struct MeasuredRecAt10V2 { unsigned char padding[16]; s32 value; };
+
 /* Measured 4-byte access at 0x14; storage view, complete object unknown. */
-struct MeasuredRecAt14V6 { unsigned char padding[20]; void * * value; };
+
 #endif

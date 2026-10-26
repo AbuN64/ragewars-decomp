@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/OBJECTLINKS1458.H"
-#include "COMMON/MEASUREDRECAT62EV1.H"
+#include "COMMON/MEASURED_STORAGE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/UNUSED.H"

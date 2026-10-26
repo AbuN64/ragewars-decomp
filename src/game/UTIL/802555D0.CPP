@@ -36,15 +36,15 @@ s32 func_80255630_de(s8 *arena, void *requestedAddress, s32 requestedBytes) {
             }
             containingBlock = (void *) candidateNextAddress;
         }
-        freeSpanStart = containingBlock + ((struct MeasuredRecAt10V3 *)(containingBlock))->value;
-        freeSpanEnd = freeSpanStart + ((struct MeasuredRecAt14V3 *)(containingBlock))->value;
+        freeSpanStart = containingBlock + ((struct MeasuredRecAt10V2 *)(containingBlock))->value;
+        freeSpanEnd = freeSpanStart + ((struct MeasuredRecAt14V2 *)(containingBlock))->value;
         allocationHeader = requestedAddress - 0x20;
         allocationEnd = allocationHeader + alignedBlockBytes;
         if ((u32) allocationHeader >= (u32) freeSpanStart) {
             if ((u32) freeSpanEnd >= (u32) allocationEnd) {
                 s32 trailingFreeBytes = freeSpanEnd - allocationEnd;
-                ((struct MeasuredRecAt10V3 *)(allocationHeader))->value = alignedBlockBytes;
-                ((struct MeasuredRecAt14V3 *)(allocationHeader))->value = trailingFreeBytes;
+                ((struct MeasuredRecAt10V2 *)(allocationHeader))->value = alignedBlockBytes;
+                ((struct MeasuredRecAt14V2 *)(allocationHeader))->value = trailingFreeBytes;
                 if (trailingFreeBytes != 0) {
                     ((struct MeasuredRecAt4V3 *)(requestedAddress))[-1].value = containingBlock;
                     followingFreeAddress = ((struct MeasuredRecAt4V4 *)(containingBlock))->value;
@@ -60,8 +60,8 @@ s32 func_80255630_de(s8 *arena, void *requestedAddress, s32 requestedBytes) {
                     ((struct MeasuredRecAt4V3 *)(requestedAddress))[-1].value = NULL;
                     ((struct MeasuredRecAt4V4 *)(allocationHeader))->value = 0U;
                 }
-                leadingFreeBytes = allocationHeader - (containingBlock + ((struct MeasuredRecAt10V3 *)(containingBlock))->value);
-                ((struct MeasuredRecAt14V3 *)(containingBlock))->value = leadingFreeBytes;
+                leadingFreeBytes = allocationHeader - (containingBlock + ((struct MeasuredRecAt10V2 *)(containingBlock))->value);
+                ((struct MeasuredRecAt14V2 *)(containingBlock))->value = leadingFreeBytes;
                 if (leadingFreeBytes == 0) {
                     previousFreeBlock = ((struct MeasuredRecAt0V2 *)(containingBlock))->value;
                     if (previousFreeBlock != NULL) {

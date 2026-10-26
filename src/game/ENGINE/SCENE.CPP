@@ -30,8 +30,6 @@
 #include "SCENE/SHAREDRECAT1B664V1.H"
 #include "SCENE/SHAREDRECATE4V1.H"
 #include "SCENE/SHAREDRECAT28V1.H"
-#include "SCENE/SHAREDRECATE4V2.H"
-#include "SCENE/SHAREDRECAT28V2.H"
 #include "SCENE/SHAREDRECAT16E0V3.H"
 #include "SCENE/SHARED_S21.H"
 #include "COMMON/OUTPUT.H"
@@ -240,7 +238,7 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 arg2) {
     struct SharedRecAt14 *temp_v1_5;
     void *temp_v1_6;
     struct SharedRecAt28V1 *temp_v1_7;
-    struct SharedRecAt28V2 *temp_v1_9;
+    struct SharedRecAt28V1 *temp_v1_9;
     void *var_a0;
     void *var_a1;
     struct Shared_SceneActorKind *var_a1_2;
@@ -619,7 +617,7 @@ block_109:
         second_kind_bd6 = 0xBD6;
         second_type10 = 0xA;
         second_kind_64e = 0x64E;
-        var_a1_2 = &((struct SharedRecAtE4V2 *)var_a2_2)->kind;
+        var_a1_2 = &((struct SharedRecAtE4V1 *)var_a2_2)->kind;
 loop_114:
         temp_v1_9 = ((struct Shared_SceneActorPrefix *)var_a1_2)[-1].definition;
         temp_v0_21 = temp_v1_9->unk0;

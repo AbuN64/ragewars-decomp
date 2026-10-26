@@ -1,6 +1,6 @@
 #include "TYPES.H"
 #include "ANIM/MEASUREDRECAT8V3.H"
-#include "ANIM/MEASUREDRECAT8V4.H"
+#include "COMMON/MEASURED_STORAGE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OUTPUT.H"
@@ -48,18 +48,18 @@ s32 func_802413C8_de(void *contactPlane, void *segmentStart, void *segmentEnd, v
     f32 normalDotDirection;
     s32 intersectsPlane;
 
-    if (((struct MeasuredRecAt8V4 *)(contactPlane))->value == 0) {
+    if (((struct MeasuredRecAt8V3 *)(contactPlane))->value == 0) {
         intersectsPlane = 0;
     } else {
         GraphU64_SubtractVectors(segmentDirection, segmentEnd, segmentStart);
-        normalDotDirection = (((struct MeasuredRecAt48V2 *)(contactPlane))->value * segmentDirection[0]) + (((struct Measured *)(contactPlane))->value * segmentDirection[1]) + (((struct Measured_func_802413C8_de_48a8d17d95e2 *)(contactPlane))->value * segmentDirection[2]);
+        normalDotDirection = (((struct MeasuredRecAt48V1 *)(contactPlane))->value * segmentDirection[0]) + (((struct Measured *)(contactPlane))->value * segmentDirection[1]) + (((struct Measured_func_802412D0_de_48a8d17d95e2 *)(contactPlane))->value * segmentDirection[2]);
         intersectsPlane = 0;
         if (normalDotDirection >= (f32)0) {
             hitFraction = D_800C3744_de;
         } else {
             GraphU64_SubtractVectors(planeToStart, segmentStart, contactPlane + 0x18);
             intersectsPlane = 1;
-            hitFraction = -((((struct MeasuredRecAt48V2 *)(contactPlane))->value * planeToStart[0]) + (((struct Measured *)(contactPlane))->value * planeToStart[1]) + (((struct Measured_func_802413C8_de_48a8d17d95e2 *)(contactPlane))->value * planeToStart[2])) / normalDotDirection;
+            hitFraction = -((((struct MeasuredRecAt48V1 *)(contactPlane))->value * planeToStart[0]) + (((struct Measured *)(contactPlane))->value * planeToStart[1]) + (((struct Measured_func_802412D0_de_48a8d17d95e2 *)(contactPlane))->value * planeToStart[2])) / normalDotDirection;
         }
     }
     if (intersectsPlane != 0) {

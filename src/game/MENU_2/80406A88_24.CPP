@@ -1,7 +1,7 @@
 #include "MENU_2/EXTERNS_2.H"
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "TYPES.H"
-#include "MENU_2/MEASURED.H"
+#include "COMMON/MEASURED_STORAGE.H"
 #include "COMMON/UNUSED.H"
 
 #if defined(VERSION_EU_X)
@@ -9,7 +9,7 @@
 
  /* opaque address transport */
 
-s32 func_804460E4_eu_x(struct MeasuredCode8042FBEC *arg0) {
+s32 func_804460E4_eu_x(struct Measured_func_80445FB4_eu_5a0991979bf8 *arg0) {
     arg0->value = &D_800DDCB8; /* types.abi.opaque_pointer: field carries an address only */
     return 0;
 }

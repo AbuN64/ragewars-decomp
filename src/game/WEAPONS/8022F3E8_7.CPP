@@ -159,17 +159,17 @@ void Weapon_UpdateSpinAndAlternateFire(Shared_Actor *actor, WeaponFireState *fir
     }
 }
 
-void Weapon_SelectReleasedFireState(struct MeasuredRecAt1D8V1 *arg0, void *arg1) {
+void Weapon_SelectReleasedFireState(struct MeasuredRecAt1D8V2 *arg0, void *arg1) {
     s16 temp_a1;
     s32 temp_v1;
     void *value;
 
     value = arg0->value;
     if (!(((struct MeasuredRecAt6AC *)(value))->value & 0x2000)) {
-        temp_a1 = ((struct MeasuredRecAt62EV2 *)(value))->value;
+        temp_a1 = ((struct MeasuredRecAt62EV1 *)(value))->value;
         if (temp_a1 != 0) {
             if (temp_a1 == 2) {
-                temp_v1 = ((struct MeasuredRecAt13CV2 *)(arg1))->value;
+                temp_v1 = ((struct MeasuredRecAt13CV1 *)(arg1))->value;
                 if (temp_v1 == 1) {
                     Nav_RequestActorState(arg0, arg1, 5);
                 } else if (temp_v1 == temp_a1) {

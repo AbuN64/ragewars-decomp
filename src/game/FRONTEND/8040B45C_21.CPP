@@ -78,13 +78,26 @@ extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 extern void osViSetMode(void *);
 /* VI start registers (hStart, vStart) hold the first pixel/line in the high half and the last in the low half. The
    ROM reads the halves through a stack copy, so a little-endian host keeps the low half at the first address. */
+typedef union VideoInterval {
+    u32 packed;
+    struct {
 #if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
-typedef union VideoInterval { u32 packed; struct { u16 last, first; } half; } VideoInterval;
-typedef union VideoHorizontal { u32 packed; struct { u32 last : 16; s32 first : 16; } edge; } VideoHorizontal;
+        u16 last, first;
 #else
-typedef union VideoInterval { u32 packed; struct { u16 first, last; } half; } VideoInterval;
-typedef union VideoHorizontal { u32 packed; struct { s32 first : 16; u32 last : 16; } edge; } VideoHorizontal;
+        u16 first, last;
 #endif
+    } half;
+} VideoInterval;
+typedef union VideoHorizontal {
+    u32 packed;
+    struct {
+#if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+        u32 last : 16; s32 first : 16;
+#else
+        s32 first : 16; u32 last : 16;
+#endif
+    } edge;
+} VideoHorizontal;
 /* Resizes the selected VI mode (table D_800D4530[D_8014D500], copied to D_8014D508) to width x height around its
  * horizontal and field centres moved by (x, y), shrinks the active area by the borders, rescales X and Y, clamps the
  * last pixel and lines to the original mode and applies it. */

@@ -107,11 +107,13 @@ typedef int word_type __attribute__ ((mode (__word__)));
 /* DIstructs are pairs of SItype values in the order determined by
    LIBGCC2_WORDS_BIG_ENDIAN.  */
 
+struct DIstruct {
 #if LIBGCC2_WORDS_BIG_ENDIAN
-  struct DIstruct {SItype high, low;};
+  SItype high, low;
 #else
-  struct DIstruct {SItype low, high;};
+  SItype low, high;
 #endif
+};
 
 /* We need this union to unpack/pack DImode values, since we don't have
    any arithmetic yet.  Incoming DImode parameters are stored into the
