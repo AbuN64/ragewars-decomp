@@ -13,7 +13,6 @@
 
 s32 GetMenuScreenOwner();
 
-extern void Smos_ClearControllerFlags(s32 *arg0);
 
 void Tsmos_RequestFrontendShutdown(void) {
     extern int D_800D2C90;
