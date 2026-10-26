@@ -10,6 +10,6 @@ extern void func_8025E468_de();
 extern void func_8025E3A8_de();
 extern void func_8025E48C_de();
 extern void func_8025E3CC_de();
-extern int func_8025E2C4_de();
+extern int func_8025E2C4_de(void);
 extern void func_8025E29C_de(s32 arg0);
 #endif
