@@ -10,17 +10,8 @@
 #include "sdk/libgultra/part_800C7F20/seqplayer_802B6BE4.h"
 #include "AUDIO_3/802BFD40.H"
 
-struct ALSequencePlayer {
-    ALSeqPlayer base;
-    ALSeqMarker *loopStart;
-    ALSeqMarker *loopEnd;
-    s32 loopCount;
-};
-struct ALSequenceLoopEvent {
-    ALSeqMarker *start;
-    ALSeqMarker *end;
-    s32 count;
-};
+#include "COMMON/ALSEQUENCEPLAYER.H"
+
 
  /* 2147483648.0f */
 

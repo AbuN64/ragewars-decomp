@@ -14,17 +14,8 @@ void func_802A9EE8_de(void *pTexture, f32 XPos, f32 YPos, int TextureWidth, int 
 void func_802A9CD0_de(void *pTexture, int XPos, int YPos, int TextureWidth, int TextureHeight);
 void Text_DrawScaledMaskedImage(void *pTexture, void *pOpacity, float XPos, float YPos, int TextureWidth, int TextureHeight, float ScaleX, float ScaleY);
 void func_802A9364_de(void *pTexture, void *pOpacity, int XPos, int YPos, int TextureWidth, int TextureHeight);
-typedef struct TextureTileBlock {
-    u32 width;
-    u32 height;
-    u8 pixels[0]; /* Tile pixels follow the eight-byte width/height header. */
-} TextureTileBlock;
-typedef struct TextureTileGrid {
-    u16 columns;
-    u16 rows;
-    u32 reserved;
-    u8 blocks[1];
-} TextureTileGrid;
+#include "GFX/TEXTURE_TILE_TYPES.H"
+
 
 
 void Text_DrawTileGrid(void *handle, s32 index, s32 initialX, s16 initialY, f32 scaleX, f32 scaleY, s32 scaled) {
