@@ -6,9 +6,6 @@
 #include "COMMON/PLAYERPROFILES.H"
 #include "RESMGR/802A0888.H"
 
-#if defined(VERSION_EU_X)
-INCLUDE_ASM("ovl_80400000", Frontend_InitPlayModeMenu);
-#endif
 
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -65,7 +62,31 @@ extern void SmpSlider_DisableTransition(void *);
 extern MenuWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern u32 Smos_GetBlockedScreenOwner(void);
 extern void Frontend_RequestScreenMode(s32);
-#if !defined(VERSION_EU_X)
+#if defined(VERSION_EU_X)
+#define WID_42 0x44
+#define WID_43 0x45
+#define WID_44 0x46
+#define WID_45 0x47
+#define WID_46 0x48
+#define WID_47 0x4b
+#define WID_48 0x4d
+#define WID_4A 0x4e
+#define WID_4B 0x49
+#define WID_4C 0x4a
+#define WID_49 0x4c
+#else
+#define WID_4A 0x4A
+#define WID_4B 0x4B
+#define WID_4C 0x4C
+#define WID_42 0x42
+#define WID_43 0x43
+#define WID_44 0x44
+#define WID_45 0x45
+#define WID_46 0x46
+#define WID_47 0x47
+#define WID_48 0x48
+#define WID_49 0x49
+#endif
 /* Builds the options screen: clears the per-player settings, retires bots that are no longer wanted, allocates
  * the screen record in D_800E4600 and picks the button layout. The layout is 3 when any human is on a pad
  * that Defs_TestBit reports in group 0 (or the game flag 0x20000000 is set), 2 for group 1, else the
@@ -122,27 +143,27 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     } else if (groupB == 1) {
         layout = 2;
     }
-    title = Frontend_FindWidgetByResourceId(menu, 0x42);
+    title = Frontend_FindWidgetByResourceId(menu, WID_42);
     switch (layout) {
     case 2:
-        SmpButton_WrapButtonWidget(0x48);
-        widget = Frontend_FindWidgetByResourceId(menu, 0x4A);
+        SmpButton_WrapButtonWidget(WID_48);
+        widget = Frontend_FindWidgetByResourceId(menu, WID_4A);
         Frontend_SetWidgetFlag100(widget, 1);
         Frontend_SetWidgetFlag08(widget, 0);
         title->y = 0x33;
         title->height = 0x78;
         break;
     case 3:
-        SmpButton_WrapButtonWidget(0x4A);
-        SmpButton_WrapButtonWidget(0x48);
+        SmpButton_WrapButtonWidget(WID_4A);
+        SmpButton_WrapButtonWidget(WID_48);
         title->y = 0x2A;
         title->height = 0x88;
         break;
     default:
-        widget = Frontend_FindWidgetByResourceId(menu, 0x48);
+        widget = Frontend_FindWidgetByResourceId(menu, WID_48);
         Frontend_SetWidgetFlag100(widget, 1);
         Frontend_SetWidgetFlag08(widget, 0);
-        widget = Frontend_FindWidgetByResourceId(menu, 0x4A);
+        widget = Frontend_FindWidgetByResourceId(menu, WID_4A);
         Frontend_SetWidgetFlag100(widget, 1);
         Frontend_SetWidgetFlag08(widget, 0);
         title->y = 0x3C;
@@ -152,23 +173,23 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     i = -1;
     Frontend_AdvanceActiveSlot(&i);
     if (i < 0) {
-        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, 0x4C), 1);
+        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, WID_4C), 1);
     }
     mode = Control_IsControllerConnected(0);
     if (mode != 1 || Control_IsControllerConnected(1) != mode) {
-        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, 0x49), 1);
+        Frontend_SetWidgetFlag100(Frontend_FindWidgetByResourceId(menu, WID_49), 1);
     }
-    D_800E4600->music = SmpFade_CreateFadeWidget(0x42, 0x24);
+    D_800E4600->music = SmpFade_CreateFadeWidget(WID_42, 0x24);
     SmpSlider_DisableTransition(D_800E4600->music);
-    SmpButton_WrapButtonWidget(0x45);
-    SmpButton_WrapButtonWidget(0x46);
-    SmpButton_WrapButtonWidget(0x49);
-    SmpButton_WrapButtonWidget(0x4B);
-    SmpButton_WrapButtonWidget(0x4C);
-    SmpButton_WrapButtonWidget(0x47);
-    D_800E4600->title = Frontend_FindWidgetByResourceId(menu, 0x43);
+    SmpButton_WrapButtonWidget(WID_45);
+    SmpButton_WrapButtonWidget(WID_46);
+    SmpButton_WrapButtonWidget(WID_49);
+    SmpButton_WrapButtonWidget(WID_4B);
+    SmpButton_WrapButtonWidget(WID_4C);
+    SmpButton_WrapButtonWidget(WID_47);
+    D_800E4600->title = Frontend_FindWidgetByResourceId(menu, WID_43);
     D_800E4600->title->alpha = 0xF;
-    D_800E4600->prompt = SmpFlicker_CreateFlickerWidget(0x44, 0x6E);
+    D_800E4600->prompt = SmpFlicker_CreateFlickerWidget(WID_44, 0x6E);
     if (Smos_GetBlockedScreenOwner() == 2) {
         D_800E4600->mode = 9;
     } else {
@@ -178,7 +199,6 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     Frontend_RequestScreenMode(0);
     return 0;
 }
-#endif
 
 s32 Frontend_ApplyModeChoice(void) {
     Shared_PlayerSettingsRecord *status;
