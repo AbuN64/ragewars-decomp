@@ -10,31 +10,6 @@
 #include "SYSTEM_3/80265370.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-#ifdef NON_MATCHING
-/* Drafted below with the other versions' body. */
-#else
-INCLUDE_ASM("ovl_80400000", Pak_UpdateNoteLabel);
-#endif
-#endif
-
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-#ifdef NON_MATCHING
-/* Drafted below with the other versions' body. */
-#else
-INCLUDE_ASM("ovl_80400000", Pak_UpdateSpaceLabel);
-#endif
-#endif
-
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-#ifdef NON_MATCHING
-/* Drafted below with the other versions' body. */
-#else
-INCLUDE_ASM("ovl_80400000", Pak_HandleMenuAction);
-#endif
-#endif
-
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/SHARED_GAMESLOT.H"
 extern char *D_800E27B4[];
 extern char *D_800E27C4_eu[];
@@ -160,6 +135,9 @@ s32 Pak_UpdateNoteLabel(PakNoteTextEntry *entry, PakNotesMenu *menu) {
     u8 c;
     s32 index;
     char **placeholder;
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+    Shared_Game *game;
+#endif
 
     c = ' ';
     index = entry->id - 3;
@@ -182,8 +160,9 @@ s32 Pak_UpdateNoteLabel(PakNoteTextEntry *entry, PakNotesMenu *menu) {
         }
     } else {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        XPlus_CopyString(name, D_800E27C4_eu[D_801462C8.language]);
-        XPlus_CopyString(ext, D_800E27C4_eu[D_801462C8.language]);
+        game = &D_801462C8;
+        XPlus_CopyString(name, D_800E27C4_eu[game->language]);
+        XPlus_CopyString(ext, D_800E27C4_eu[game->language]);
 #else
         placeholder = &D_800D375C;
         XPlus_CopyString(name, *placeholder);
@@ -284,6 +263,9 @@ s32 Pak_UpdateSpaceLabel(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
     return 0;
 }
 
+#if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
+INCLUDE_ASM("ovl_80400000", Pak_HandleMenuAction);
+#else
 s32 Pak_HandleMenuAction(s32 arg0, Shared_PakMenu *menu, s32 arg2)
 {
     s32 ch = 0;
