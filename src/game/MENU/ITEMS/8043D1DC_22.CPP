@@ -13,7 +13,7 @@ extern void Weapons_RequestActorState(void *, void *, s32);
 extern void Weapons_ApplyWeaponSwitch(void *, void *);
 extern void Weapons_UpdatePlayerCamera(void *, void *);
 extern void Camera_UpdateSequenceTrack(void *);
-typedef struct InitView { char pad0[4]; u32 flags; char pad8[0xF4]; f32 x, y, z; } InitView;
+#include "MENU/INITVIEW.H"
 /* Initialises an actor and its embedded part at 0x2E8: sets the shared table pointers and flag bits (one flag
  * depends on D_80145088.settings.local), runs the part setup calls, then copies the view's position into the actor. */
 void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s32 index) {

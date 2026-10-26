@@ -187,14 +187,8 @@ INCLUDE_ASM("ovl_80400000", func_8043C324_de);
 
 /* Minimal callback views established by ROM8043C810..C85C: the owner at+12
    supplies the descriptor whose option flags are at+728. */
-typedef struct LevelSelectDescriptor {
-    u8 unknown00[0x2D8];
-    u32 flags;
-} LevelSelectDescriptor;
-typedef struct LevelSelectOwner {
-    u32 unknown00[3];
-    LevelSelectDescriptor *descriptor;
-} LevelSelectOwner;
+#include "MENU/LEVELSELECT_TYPES.H"
+
 extern s32 D_80154034;
 
 static inline s32 levelBit(s32 level) {
@@ -505,19 +499,9 @@ INCLUDE_ASM("ovl_80400000", func_8043C688_de);
 #endif
 
 #if !(defined(VERSION_DE))
-typedef struct Shared_MenuSelection {
-    u32 unknown0;
-    s8 index;
-} Shared_MenuSelection;
-typedef struct Shared_MenuHandle {
-    u8 unknown0[0x1C];
-    struct SharedPlayer *owner;
-    Shared_MenuSelection *selection;
-} Shared_MenuHandle;
-typedef struct Shared_MenuInput {
-    u32 unknown0[8];
-    s32 buttons;
-} Shared_MenuInput;
+#include "COMMON/SHARED_MENUSELECTION.H"
+
+
 
 #include "COMMON/SHARED_GAMESLOT.H"
 

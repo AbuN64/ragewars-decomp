@@ -14,17 +14,7 @@ struct Shared_Model {
 #include "COMMON/LEVEL_PLACEMENT.H"
 
 
-typedef struct Shared_Scratch Shared_Scratch;
-struct Shared_Scratch {
-    union {
-        struct {
-            s32 damage[5]; /* +0x0: src/func_80220EB0.c */
-        } view0_0;
-        struct {
-            CVector3 to; /* +0x0: src/func_80220EB0.c */
-        } view0_1;
-    } views0;
-};
+#include "COMMON/SHARED_SCRATCH.H"
 
 
 typedef struct Shared_StateInfo Shared_StateInfo;
@@ -100,7 +90,9 @@ typedef struct Shared_Profile Shared_Profile;
 struct Shared_Profile {
     char pad0[0x81];
     u8 team; /* +0x81: src/func_80220EB0.c */
-    char pad82[0xD];
+    u8 controllerFlag; /* 0x82 */
+    u8 quantity; /* 0x83: menu player quantity */
+    char pad84[0xB];
     u8 remote; /* +0x8F: src/func_80220EB0.c */
     char pad90[0x4];
     u8 counts; /* +0x94: src/func_80220EB0.c */
