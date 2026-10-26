@@ -88,23 +88,8 @@ void func_8022FF04_de(void *arg0, WeaponFireState *fireState) {
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 #include "TYPES.H"
-typedef struct WeaponRecord8F { u8 pad0[0x8F]; u8 flag8F; } WeaponRecord8F;
-typedef struct WeaponPlayer {
-    u8 pad0[0x5D8];
-    WeaponRecord8F *record;
-    u8 pad5DC[0x5F6 - 0x5DC];
-    s16 ammo;
-    u8 pad5F8[0x62E - 0x5F8];
-    s16 mode;
-    u8 pad630[0x6AC - 0x630];
-    s32 flags6AC;
-    u8 pad6B0[0x788 - 0x6B0];
-    s32 state788;
-    u8 pad78C[0x11B4 - 0x78C];
-    s32 busy;
-    u8 pad11B8[0x11D8 - 0x11B8];
-    f32 recoil;
-} WeaponPlayer;
+#include "WEAPONS/PLAYER_INVENTORY.H"
+
 typedef struct WeaponOwner { u8 pad0[0x1D8]; WeaponPlayer *player; } WeaponOwner;
 typedef struct WeaponSlot {
     u8 pad0[0x130];
@@ -122,7 +107,7 @@ s32 func_80230058_de(void *owner, void *slot) {
     WeaponSlot *weaponSlot = (WeaponSlot *)slot;
     WeaponPlayer *player = weaponOwner->player;
     if (weaponSlot->delay > 0.0f || !Weapons_HasAmmoForMode(player, player->mode)) return 0;
-    if ((player->record->flag8F == 1 && D_801462C8.counters.m_bFragTagOn != 0) || player->recoil > 0.0f || player->busy != 0) return 0;
+    if ((player->status->flag8F == 1 && D_801462C8.counters.m_bFragTagOn != 0) || player->recoil > 0.0f || player->busy != 0) return 0;
     switch ((s16)(player->mode - 1)) {
     case 10:
         if (player->flags6AC & 0x4000) return 0;

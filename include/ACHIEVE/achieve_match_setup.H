@@ -25,11 +25,6 @@ struct PlayerRecAt602 {
         unsigned char value;
     } options[22];
 };
-typedef struct WeaponPlayer {
-    u8 pad[0x5D8];
-    WeaponStatus *status;
-    u8 pad5DC[0x26];
-    u8 weapons[22][2];
-} WeaponPlayer;
+#include "WEAPONS/PLAYER_INVENTORY.H"
 extern s32 Achieve_MatchQualifies(void);
 #endif

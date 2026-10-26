@@ -60,10 +60,5 @@ struct PlayerRecAt602;
 typedef struct PlayerRecAt602 PlayerRecAt602;
 
 
-typedef struct WeaponStatus {
-    u8 pad[0x78];
-    u8 active;
-    u8 pad79[0x18];
-    u8 out;
-} WeaponStatus;
+#include "WEAPONS/PLAYER_INVENTORY.H"
 #endif
