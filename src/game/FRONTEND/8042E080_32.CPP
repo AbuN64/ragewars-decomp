@@ -61,7 +61,6 @@ void func_80434250_de(s32 player, s32 direction) {
 extern s32 Pak_DeleteNote(s32, s32);
 extern s32 Pak_GetFreePages(s32, s32 *);
 extern s32 Pak_CountFreeNotes(s32, s32 *);
-extern s32 PAKInterface_GetRecordsNoteSize(void);
 extern s32 Pak_BytesToPakPages(s32);
 extern s32 Pak_FindFreeNoteExtension(s32, char *);
 extern u32 Pak_Crc32(void *, u32, u32);

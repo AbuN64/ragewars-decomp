@@ -130,7 +130,6 @@ extern char *D_800D213C[];
 extern s32 D_80154020[2];
 
 
-extern void func_8025E384_de(void);
 
 extern void Frontend_SetWidgetFlag100(MenuWidget *, s32);
 extern void SmpButton_WrapButtonWidget(s32);

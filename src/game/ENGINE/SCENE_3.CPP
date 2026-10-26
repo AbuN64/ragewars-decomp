@@ -117,7 +117,6 @@ finished:
 /* One geometry vertex of a prop's collision mesh (stride from its section header). */
 typedef struct ScenePoint { s16 x, y, z; } ScenePoint;
 extern Gfx *g_displayListCursor;
-extern void Geometry_BeginModelBatch(void), Geometry_FlushModelBatch(void);
 extern struct Shape_typemap_165 *Cache_AllocateResource(s32, s32, u32, void *);
 extern s32 StaticInstance_GetPropModelIndex(ObjectSceneDrawCachedOpaqueGeometry *object);
 extern s32 StaticInstance_GetPropGeometryIndex(ObjectSceneDrawCachedOpaqueGeometry *object);

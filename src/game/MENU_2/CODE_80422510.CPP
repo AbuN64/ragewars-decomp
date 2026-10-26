@@ -109,7 +109,6 @@ extern Shared_MenuReply D_80154020;
 extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern void Frontend_SetWidgetFlag100(void *, s32);
-extern void func_8025E384_de(void);
 extern s32 ScenarioSetup_IsCupSelected(void);
 extern void Menu_ConfigureOptionsCamera(void);
 extern void Tsmos_DeactivateControllerState(void);

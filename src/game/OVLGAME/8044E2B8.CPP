@@ -15,9 +15,7 @@
 
 
 
-extern void func_802458D8_de(void);
 
-extern void func_802458C4_de(void);
 
 extern void Scene_DispatchEnabledEntityTrigger(Level *, Item_func_8044D668_de *);
 

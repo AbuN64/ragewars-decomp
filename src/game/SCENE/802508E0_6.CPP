@@ -107,7 +107,6 @@ ResourceLoadRequest *func_80252774_de(s32 unused, ResourceLoadRequest *request, 
 extern Gfx *g_displayListCursor;
 extern struct Shape_func_8021A2D4_de_2 D_80105180;
 extern Manager D_801047E0;
-extern u32 __osDisableInt(void);
 extern void Geometry_SetCombineMode(s32);
 extern void Geometry_SetModePreset(s32);
 

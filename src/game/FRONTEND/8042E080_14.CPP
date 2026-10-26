@@ -21,7 +21,6 @@ extern s32 func_804057BC_de(char *, s32);
 extern void XPlus_CopyString(char *, char *);
 extern void XStdio_FormatBuffer(char *, char *, ...);
 extern s32 Pak_GetFreePages(s32, s32 *);
-extern s32 PAKInterface_GetRecordsNoteSize(void);
 extern s32 Pak_BytesToPakPages(s32);
 extern void PAKInterface_RefreshPlayerPanel(s32, s32);
 extern void func_80434250_de(s32, s32);

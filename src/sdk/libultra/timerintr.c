@@ -8,7 +8,6 @@
 
 
 extern OSTimer *D_800D5280;
-extern u32 __osDisableInt(void);
 
 u64 __osInsertTimer(OSTimer *t)
 {

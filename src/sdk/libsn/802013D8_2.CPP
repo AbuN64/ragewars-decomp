@@ -38,7 +38,6 @@ extern OSMesgQueue D_800F3110;
 void osCreateThread(OSThread_s *thread, s32 id, void (*entry)(void *), void *arg, void *stackTop, s32 priority); /* osCreateThread */
 void osSetEventMesg(s32 event, OSMesgQueue *queue, void *message); /* osSetEventMesg */
 void osStartThread(OSThread_s *thread); /* osStartThread */
-extern s32 Libsn_DisableInterrupts(void);
 extern s32 Libsn_SendHostCommand(s32, s32, s32, s32);
 extern void Libsn_ReadPortBuffer(u32, void *, s32);
 extern void Libsn_WritePortBuffer(u32, const void *, u32);

@@ -311,7 +311,6 @@ void Fx_AttachActorRibbon(EffectWorld *world, FxActor *actor, s32 resourceId) {
 INCLUDE_ASM("span_1000", Fx_AttachActorRibbon);
 #endif
 
-extern void Geometry_InvalidateMaterialKeys(void);
 extern void TextLoad_ResetTextureCache(void);
 extern void Smp_UpdateLinkedNodeTransforms(RibbonActor *ribbon);
 extern void Smp_UpdateRibbonMatrices(RibbonActor *ribbon, GameplayCamera *camera);

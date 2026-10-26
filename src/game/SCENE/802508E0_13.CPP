@@ -9,7 +9,6 @@
 
 extern OSMesgQueue D_80101140;
 
-extern u32 __osDisableInt(void);
 
 
 extern void func_80254990_de(void *, void *);

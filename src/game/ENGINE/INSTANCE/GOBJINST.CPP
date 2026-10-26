@@ -88,7 +88,6 @@ extern void func_802193C8_de(char *, s32, char *);
 
 extern void GameObject_LoadModel(char *, s32, s32, s32);
 
-extern s32 StaticInstance_AdvanceResourceKey(void);
 
 static inline void *body_setup(char *obj) {
     u32 kind;

@@ -5,7 +5,6 @@
 #include "sdk/os.h"
 
 #if !(defined(VERSION_DE))
-extern u32 __osDisableInt(void);
 
 
 void func_802BB850_eu(s32 arg0) {

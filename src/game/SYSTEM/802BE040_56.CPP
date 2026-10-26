@@ -8,7 +8,6 @@
 
 #if !(defined(VERSION_US))
 extern OSPiHandle_s *D_800D437C;
-extern u32 __osDisableInt(void);
 
 OSPiHandle_s *func_802B8F48_de(void)
 {

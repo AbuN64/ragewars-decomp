@@ -7,7 +7,6 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
 
-extern u32 __osDisableInt(void);
 
 
 
@@ -30,7 +29,6 @@ void *func_8025661C_de(CartridgeReadWorker *cartridgeReadWorker) {
     return head;
 }
 
-extern u32 __osDisableInt(void);
 
 
 

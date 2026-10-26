@@ -10,7 +10,6 @@
 #include "sdk/OSINT/802C0CB0.H"
 #include "AUDIO_3/802BFD40.H"
 
-extern int func_802B9D70_de(void);
 extern void func_802BD280_de(void *addr, s32 size);
 extern void func_802BCF70_de(void *addr, s32 size);
 

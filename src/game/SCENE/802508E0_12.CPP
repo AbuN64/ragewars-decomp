@@ -8,7 +8,6 @@
 
 extern OSMesgQueue D_80101140;
 
-extern u32 __osDisableInt(void);
 
 
 extern struct Shape_typemap_165 *func_802514A8_de(s32, u32);

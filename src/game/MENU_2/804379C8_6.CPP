@@ -28,7 +28,6 @@ extern s32 SmpSlider_GetTransitionMode(void *);
 
 extern s32 SmpSlider_GetSliderItem(void *);
 
-extern void MarkMenuEventHandled();
 
 extern void func_80298368_de(s32);
 

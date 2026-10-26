@@ -27,7 +27,6 @@ extern Gfx *g_displayListCursor;
 
 extern s32 Tsmos_IsFrontendActive(void);
 
-extern void Geometry_InvalidateMaterialKeys(void);
 
 extern void Geometry_SetModePreset(s32);
 
@@ -48,7 +47,6 @@ extern void func_8024B8C4_de(void *arg0);
 
 extern s32 func_8024D160_de(void *arg0);
 
-extern s32 func_80245908_de(void);
 
 
 

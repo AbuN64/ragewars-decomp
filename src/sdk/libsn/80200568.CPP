@@ -5,7 +5,6 @@
 #include "IO/80200568.H"
 
 /* Libgultra_TrwGetSr: types.declaration: solved callee prototype */
-extern int Libgultra_TrwGetSr(void);
 
 /* Libgultra_TrwSetSr: types.declaration: solved callee prototype */
 

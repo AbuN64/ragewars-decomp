@@ -17,7 +17,6 @@ INCLUDE_ASM("span_1000", func_802BB5E0_de);
 
 extern OSThread_s *D_800D5268_de;
 extern OSThread_s *D_800D5270;
-extern u32 __osDisableInt(void);
 extern void func_802BB870_de(OSThread_s **queue, OSThread_s *t);
 extern void __osEnqueueThread(OSThread_s **queue, OSThread_s *t);
 extern void func_802BC36C_de(OSThread_s **queue);

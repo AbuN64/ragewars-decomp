@@ -71,7 +71,6 @@
 
 /* Calls MarkMenuEventHandled, then passes -1 to func_8042E988_de when func_802999A0_de reports 0x16 for zero
    and 0xB otherwise, then calls func_802998A8_de. Returns zero. */
-extern void MarkMenuEventHandled();
 
 
 s32 func_804393A8_de(void) {

@@ -20,7 +20,6 @@ extern struct ControllerProfile D_8010F328[4];
 
 extern s32 Control_IsAButtonPressed(struct ControllerProfile *);
 
-extern void func_8025E384_de(void);
 
 extern void Ovlgame_StartMatchTransition(GameSession *, s32);
 

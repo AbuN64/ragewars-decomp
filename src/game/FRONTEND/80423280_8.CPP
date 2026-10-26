@@ -50,7 +50,6 @@ extern void Tsmos_ActivateControllerState();
 
 
 
-extern void MarkMenuEventHandled();
 
 
 /* Moves the menu cursor on event 1: when the current slot's successor in the 28-byte slot table

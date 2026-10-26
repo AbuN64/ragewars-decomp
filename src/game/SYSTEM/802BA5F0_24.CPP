@@ -12,7 +12,6 @@ void *func_802BA640_de(void) {
 }
 
 extern void *D_800D4414;
-extern u32 __osDisableInt(void);
 
 void func_802BA650_de(s32 arg0, s32 arg1, s16 arg2) {
     u32 temp_v0;

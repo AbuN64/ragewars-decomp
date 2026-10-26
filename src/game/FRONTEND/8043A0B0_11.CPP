@@ -76,7 +76,6 @@ extern void Tsmos_ActivateControllerState();
 
 
 
-extern void MarkMenuEventHandled();
 
 
 /* Calls MarkMenuEventHandled and, when the fourth argument is one and the 0x4D0-byte entry of D_800E59E0 the third argument selects has a nonzero word at 0x4D4 (four bytes past the entry) with its word at 0x4B0 equal to one, plays sound 0xE7B through SoundElement_PlayFlatSound and calls func_8043ACF0_de with the entry index and 1, returning zero. */

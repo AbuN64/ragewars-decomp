@@ -36,7 +36,6 @@ extern s32 D_8013B2BC;
 
 extern ObjectState1E_2 D_801462C8;
 
-extern s32 SetN64_IsModeThirteen(void);
 
 extern void *Player_GetFirstPlayer(void *);
 

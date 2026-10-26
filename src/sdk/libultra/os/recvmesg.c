@@ -4,7 +4,6 @@
 #include "sdk/os.h"
 
 extern OSThread_s *D_800D5270;
-extern u32 __osDisableInt(void);
 extern void func_802BC36C_de(void *);
 extern void *__osPopThread(void *);
 extern void osStartThread(void *);

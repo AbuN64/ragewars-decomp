@@ -11,7 +11,6 @@
 #include "MATH/802A2870.H"
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-extern f64 Gfx_GetConvertedCounterRatio(void);
 #else
 extern f64 Gfx_GetNormalizedCounter(void);
 #endif

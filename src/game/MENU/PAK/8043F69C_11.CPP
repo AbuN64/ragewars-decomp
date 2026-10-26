@@ -135,9 +135,7 @@ extern void func_8025476C_de(s32);
 extern void Scene_ChangeInstanceModel(void *, u8 *, s32, s32);
 extern void func_8024B8C4_de(u8 *);
 extern void func_80246E44_de(u8 *);
-extern void Geometry_BeginModelBatch(void);
 extern void func_80249E28_de(void *object, void *camera);
-extern void Geometry_FlushModelBatch(void);
 static inline PreviewWidget *pakLoadModel(PakModelEntry *entry, s32 id, s32 variant) {
     StateRecAt47C *owner = entry->state;
     PreviewWidget *source = (PreviewWidget *)Scene_FindActorDefinition(&g_world, id, variant);

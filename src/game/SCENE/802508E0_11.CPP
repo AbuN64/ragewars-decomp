@@ -9,7 +9,6 @@
 #include "sdk/os.h"
 #include "SCENE/802508E0_4.H"
 
-extern u32 __osDisableInt(void);
 
 
 extern void func_80254DD0_de(void *arg0, void *arg1);

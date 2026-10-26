@@ -25,7 +25,6 @@ OSTask *func_802B9D90_de(OSTask *intp);
 
 extern void func_802BD280_de(OSTask *, s32);
 
-extern s32 __osSpDeviceBusy(void);
 
 
 OSTask *func_802B9D90_de(OSTask *intp)

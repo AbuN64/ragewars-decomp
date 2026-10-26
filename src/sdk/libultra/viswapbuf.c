@@ -5,7 +5,6 @@
 #include "sdk/os.h"
 
 extern State_func_802BA700_de *D_800D4414;
-extern u32 __osDisableInt(void);
 
 void osViSwapBuffer(s32 arg0) {
     u32 savedMask;

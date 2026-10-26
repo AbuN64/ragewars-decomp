@@ -43,7 +43,6 @@ extern s32 D_80101190;
 
 extern s32 D_80101194;
 
-extern u32 __osDisableInt(void);
 
 
 

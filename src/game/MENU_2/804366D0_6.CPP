@@ -79,7 +79,6 @@ extern StyleNextState *D_800E5694;
 
 /* Calls MarkMenuEventHandled, then passes -1 to func_8042E988_de when func_802999A0_de reports 0x16 for zero
    and 0xB otherwise, then calls func_802998A8_de. Returns zero. */
-extern void MarkMenuEventHandled();
 
 
 void MarkMenuEventHandled();
