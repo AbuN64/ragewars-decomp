@@ -8,10 +8,10 @@ extern s32 Lists_Append(void *list, void *node);
 extern void func_80255CA0_de(void *list, s32 nextOffset, s32 prevOffset);
 extern void func_80255D14_de(void *list, void *node);
 extern void Fx_UpdateEffectLists(void *world);
-extern void func_802AAD14_de(void);
-extern void func_802AB35C_de(int unused, unsigned char *pairs, int count, unsigned char *table);
-extern void func_802AA6D0_de(void *mover, s16 x, s16 y);
-extern s32 func_802AA70C_de(void *mover, s32 *frames);
+extern void OnScreen_LoadFontTexture(void);
+extern void Pickup_BuildByteLookup(int unused, unsigned char *pairs, int count, unsigned char *table);
+extern void OnScreen_InitMover(void *mover, s16 x, s16 y);
+extern s32 OnScreen_StartMoverScript(void *mover, s32 *frames);
 extern unsigned char D_800D3080[];
 extern unsigned char D_800D2F94[];
 extern s32 D_800CDE94;
@@ -74,7 +74,7 @@ void func_8044DF60_de(ActorWorld *world) {
     Fx_UpdateEffectLists(world);
 }
 
-/* Resets the hud: clears the four words at 0x90, runs func_8044E0CC_de and func_802AAD14_de, then fills the two
+/* Resets the hud: clears the four words at 0x90, runs func_8044E0CC_de and OnScreen_LoadFontTexture, then fills the two
  * 0x100-byte tables at 0xC8 and 0x1C8 from the pair lists D_800D3080 and D_800D2F94 (0x75 pairs each, 0x5C in de). */
 void Ovlgame_ResetHudCharTables(HudTables *hud) {
 #if defined(VERSION_DE)
@@ -87,20 +87,20 @@ void Ovlgame_ResetHudCharTables(HudTables *hud) {
     hud->words[2] = 0;
     hud->words[3] = 0;
     func_8044E0CC_de();
-    func_802AAD14_de();
-    func_802AB35C_de((int)hud, D_800D3080, pairs, hud->tableA);
-    func_802AB35C_de((int)hud, D_800D2F94, pairs, hud->tableB);
+    OnScreen_LoadFontTexture();
+    Pickup_BuildByteLookup((int)hud, D_800D3080, pairs, hud->tableA);
+    Pickup_BuildByteLookup((int)hud, D_800D2F94, pairs, hud->tableB);
 }
 
 void func_8044E0CC_de(void) {
 }
 /* Starts the panel's two movers: each is reset to (0, -0x28) and (0, -0x14) with its target word cleared, and
- * given its frame table (D_800CDE94, D_800CDEA4) through func_802AA70C_de. */
+ * given its frame table (D_800CDE94, D_800CDEA4) through OnScreen_StartMoverScript. */
 void Ovlgame_StartPanelMovers(PanelMovers *panel) {
     panel->firstTarget = 0;
-    func_802AA6D0_de(panel->first, 0, -0x28);
-    func_802AA70C_de(panel->first, &D_800CDE94);
+    OnScreen_InitMover(panel->first, 0, -0x28);
+    OnScreen_StartMoverScript(panel->first, &D_800CDE94);
     panel->secondTarget = 0;
-    func_802AA6D0_de(panel->second, 0, -0x14);
-    func_802AA70C_de(panel->second, &D_800CDEA4);
+    OnScreen_InitMover(panel->second, 0, -0x14);
+    OnScreen_StartMoverScript(panel->second, &D_800CDEA4);
 }

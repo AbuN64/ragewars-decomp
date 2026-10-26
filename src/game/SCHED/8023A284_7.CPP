@@ -28,7 +28,7 @@ extern void PpDecom_QuickSortRecords(char *, u32, u32, void *, void *);
 
 extern void func_8023A4E0_de(ObjectRecAt220 *, ClipView *);
 
-extern void func_80295E84_de(s32 *arg0, s32 arg1);
+extern void TextLoad_LocateTextureResource(s32 *arg0, s32 arg1);
 
 /* Updates a rotor: while the control mask bit is held its throttle at 0x208 rises by the descriptor rate up
  * to D_800C86E0, otherwise it falls to zero (returning 1 once idle); the value phase advances, the two wrap
@@ -93,7 +93,7 @@ void func_8023B694_de(Effect *effect, s16 *definition, s16 mask, f32 scale,
                    f32 offset0, f32 offset1, f32 offset2) {
     effect->definition = definition;
     effect->mask = mask;
-    func_80295E84_de(&effect->resource, *definition);
+    TextLoad_LocateTextureResource(&effect->resource, *definition);
     effect->angle0 = 0;
     effect->angle1 = 0;
     effect->timer = 0;

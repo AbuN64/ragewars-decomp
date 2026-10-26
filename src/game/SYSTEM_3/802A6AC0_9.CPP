@@ -24,7 +24,7 @@ extern s32 Cinema_IsSequenceInWindow(void);
 extern s32 SetN64_IsModeThirteen(void);
 
 extern void OnScreen_UpdateMoverScript(void *mover);
-extern void func_802AAA54_de(s32 x0, s32 y0, s32 x1, s32 y1, s32 red, s32 green, s32 blue, u8 alpha);
+extern void OnScreen_FillRectangle(s32 x0, s32 y0, s32 x1, s32 y1, s32 red, s32 green, s32 blue, u8 alpha);
 
 
 
@@ -100,23 +100,23 @@ void OnScreen_DrawStatusBar(Hud *hud, s32 which) {
     inset = x - 0x70;
     right = inset + D_800E28D0;
     fade = &D_801462C8.hudFade;
-    func_802AAA54_de(left, (s32) ((f32) y + scale * 9.0f),
+    OnScreen_FillRectangle(left, (s32) ((f32) y + scale * 9.0f),
                   left + ((right - left) * bar->fill) / 100,
                   (s32) ((f32) y + scale * 15.0f), red, green, blue,
                   (u8) (*fade * 180 / 255));
     OnScreen_SetupSpriteMode(*fade);
     if (which == 1) {
         shift = scale * 27.0f;
-        func_802AAC28_de(0x202, 0, (s16) (x + 0x46), (s16) (s32) (bar->y + shift), 1.0f, scale * 1.5f, which);
-        func_802AAC28_de(0x203, 0, (s16) (D_800E28D0 + x - 0x6D), (s16) (s32) (bar->y + shift), 1.0f, scale * 1.5f, which);
+        OnScreen_DrawSpriteResource(0x202, 0, (s16) (x + 0x46), (s16) (s32) (bar->y + shift), 1.0f, scale * 1.5f, which);
+        OnScreen_DrawSpriteResource(0x203, 0, (s16) (D_800E28D0 + x - 0x6D), (s16) (s32) (bar->y + shift), 1.0f, scale * 1.5f, which);
         OnScreen_SetupTextRendering();
-        func_802AAB68_de(0.4f, scale * 0.4f);
-        func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
-        func_802A8F28_de(hud->bars[0].label, left, y - 2, *fade, 0, 0, 1.0f, 1.0f);
+        OnScreen_SetTextScale(0.4f, scale * 0.4f);
+        OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
+        OnScreen_DrawText(hud->bars[0].label, left, y - 2, *fade, 0, 0, 1.0f, 1.0f);
     } else {
         OnScreen_SetupTextRendering();
-        func_802AAB68_de(0.4f, scale * 0.4f);
-        func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
-        func_802A8F28_de(hud->bars[1].label, left, y - 2, *fade, 0, 0, 1.0f, 1.0f);
+        OnScreen_SetTextScale(0.4f, scale * 0.4f);
+        OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
+        OnScreen_DrawText(hud->bars[1].label, left, y - 2, *fade, 0, 0, 1.0f, 1.0f);
     }
 }

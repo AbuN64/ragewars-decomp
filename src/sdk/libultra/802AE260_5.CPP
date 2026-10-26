@@ -13,7 +13,7 @@ extern u8 D_8014D3E0;
 
 
 
-s32 func_802AE5AC_us_rev1(s32 arg0) {
+s32 func_802AE5AC_us_rev1(s32 outputByte) {
     s32 timeout;
     s32 data;
     s32 retries;
@@ -32,8 +32,8 @@ s32 func_802AE5AC_us_rev1(s32 arg0) {
     do {
     } while (func_802BDEA0_us_rev1() & 3);
     D_B200000C = initial_control;
-    D_8014D3E0 = arg0;
-    data = arg0;
+    D_8014D3E0 = outputByte;
+    data = outputByte;
     do {
     } while (func_802BDEA0_us_rev1() & 3);
     D_B2000000 = (u8)data;

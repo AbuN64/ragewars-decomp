@@ -6,11 +6,11 @@
 
 extern State_func_802BA700_de *D_800D4414;
 
-void osViSwapBuffer(s32 arg0) {
+void osViSwapBuffer(s32 framebuffer) {
     u32 savedMask;
 
     savedMask = __osDisableInt();
-    D_800D4414->word4 = arg0;
+    D_800D4414->word4 = framebuffer;
     D_800D4414->status |= 0x10;
     __osRestoreInt(savedMask);
 }

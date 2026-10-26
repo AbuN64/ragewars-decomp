@@ -4,7 +4,7 @@
 #include "include_asm.h"
 #include "RENDER/8028469C_11.H"
 
-extern void func_80295E84_de(s32 *arg0, s32 arg1);
+extern void TextLoad_LocateTextureResource(s32 *arg0, s32 arg1);
 
 
 
@@ -38,7 +38,7 @@ void Rumble_ExpandMeshMaterial(MeshMaterial *dstData, PackedMeshMaterial *arg1) 
         dstData->texture = 0;
         return;
     }
-    func_80295E84_de(&dstData->texture, reference);
+    TextLoad_LocateTextureResource(&dstData->texture, reference);
 }
 
 f32 Rumble_SamplePackedFloatRange(s32 arg0) {

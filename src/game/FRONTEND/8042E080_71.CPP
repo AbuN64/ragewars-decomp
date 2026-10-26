@@ -16,7 +16,7 @@ enum { MENU_80435D14_62 = 62 };
 #elif defined(VERSION_EU_X)
 enum { MENU_80435D14_62 = 64 };
 #endif
-s32 func_80435B34_de(MenuWidget *root) {
+s32 Frontend_CreatePauseMenu(MenuWidget *root) {
     s32 *temp_v0;
     temp_v0 = Cache_AllocateMemory(0x14);
     D_800E5550 = temp_v0;

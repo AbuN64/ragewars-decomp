@@ -72,5 +72,5 @@ extern s32 D_800CD77C;
 extern s32 D_800CC380;
 
 extern s32 Control_IsSnapshotActive(void);
-extern void func_802AA7A4_de(void *arg0);
+extern void OnScreen_DrawStatusBars(void *arg0);
 #endif

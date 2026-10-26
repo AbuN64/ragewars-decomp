@@ -22,7 +22,7 @@ extern void func_80282E98_de(void *arg0, void *arg1);
 
 
 
-void func_80284B20_de(Shared_Particle *particle) {
+void Particle_CheckNearbyPlayerContacts(Shared_Particle *particle) {
     CVector3 point;
     void *node;
     void *point_ptr;
@@ -81,7 +81,7 @@ extern CollisionInfo D_80100030;
 extern Instance8020CD74 *Sky_FindScreenMessage(Arg1 *arg0);
 extern s32 Unicol_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo *);
 
-s32 func_80284C48_de(Instance8020CD74 *arg0, Arg1 *arg1) {
+s32 Particle_HasClearMotionPath(Instance8020CD74 *arg0, Arg1 *arg1) {
     Instance8020CD74 saved;
     Instance8020CD74 *instance;
     s32 collisions;
@@ -103,8 +103,8 @@ s32 func_80284C48_de(Instance8020CD74 *arg0, Arg1 *arg1) {
 /* Marks nearby objects other than type 87 as active. */
 
 extern void GraphU64_SubtractVectors(f32 *, f32 *, f32 *);
-void func_80284DC4_de(s32 unused, Obj_func_80284DC4_de *center, Obj_func_80284DC4_de **objects, s32 count) {
- f32 d[3]; s32 i; Obj_func_80284DC4_de *o;
+void Particle_MarkNearbyObjects(s32 unused, ObjParticleMarkNearbyObjects *center, ObjParticleMarkNearbyObjects **objects, s32 count) {
+ f32 d[3]; s32 i; ObjParticleMarkNearbyObjects *o;
  for(i=0;i<count;i++) {
   o=objects[i];
   if(o->unk4 != 0x57) {
@@ -117,8 +117,8 @@ void func_80284DC4_de(s32 unused, Obj_func_80284DC4_de *center, Obj_func_80284DC
 /* Checks object proximity through type-specific handlers and marks nearby objects active. */
 
 extern void GraphU64_SubtractVectors(f32 *, f32 *, f32 *);
-static inline void nearby(s32 unused, Obj_func_80284DC4_de *center, Obj_func_80284DC4_de **objects, s32 count) {
- f32 d[3]; s32 i; Obj_func_80284DC4_de *o;
+static inline void nearby(s32 unused, ObjParticleMarkNearbyObjects *center, ObjParticleMarkNearbyObjects **objects, s32 count) {
+ f32 d[3]; s32 i; ObjParticleMarkNearbyObjects *o;
  for(i=0;i<count;i++) {
   o=objects[i];
   if(o->unk4 != 0x57) {
@@ -127,9 +127,9 @@ static inline void nearby(s32 unused, Obj_func_80284DC4_de *center, Obj_func_802
   }
  }
 }
-extern void func_80281A9C_de(int,Obj_func_80284DC4_de *,Obj_func_80284DC4_de **,int);
-void func_80284E9C_de(int context,Obj_func_80284DC4_de **objects,int count) {
- int i; Obj_func_80284DC4_de *obj;
+extern void func_80281A9C_de(int,ObjParticleMarkNearbyObjects *,ObjParticleMarkNearbyObjects **,int);
+void Particle_UpdateNearbyObjectFlags(int context,ObjParticleMarkNearbyObjects **objects,int count) {
+ int i; ObjParticleMarkNearbyObjects *obj;
  for(i=0;i<count;i++) {
   obj=objects[i];
   switch(obj->unk4) {

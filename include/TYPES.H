@@ -198,23 +198,23 @@ extern void N64Eng_GetScreenSize(int *arg0, int *arg1);
 
 extern void Tsmos_SetModeOneFlag(s32 arg0);
 
-extern void func_802A88F0_de(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow, s32 alpha, s32 language);
+extern void OnScreen_DrawTextGlyphs(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow, s32 alpha, s32 language);
 
-extern void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3);
+extern void OnScreen_GetImageDimensions(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3);
 
-extern void func_802AAB3C_de(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5);
+extern void OnScreen_SetTextColors(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5);
 
-extern void func_802AAB68_de(float arg0, float arg1);
+extern void OnScreen_SetTextScale(float arg0, float arg1);
 
-extern s32 func_802ACB18_de(void *arg0, void *arg1);
+extern s32 Pickup_ApplyAmmo(void *arg0, void *arg1);
 
-extern s32 func_802ACD28_de(void *arg0, void *arg1);
+extern s32 Pickup_ApplyLifePoints(void *arg0, void *arg1);
 
-struct Actor_func_802AB400_de;
+struct ActorPickupCanCollect;
 
 struct MultiChannelItemEffect;
 
-extern s32 func_802ACFB0_de(struct Actor_func_802AB400_de *arg0, struct MultiChannelItemEffect *arg1);
+extern s32 Pickup_ApplyAmmoBundle(struct ActorPickupCanCollect *arg0, struct MultiChannelItemEffect *arg1);
 
 extern void osUnmapTLB(int arg0);
 

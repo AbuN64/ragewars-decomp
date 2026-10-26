@@ -532,10 +532,10 @@ void Smp_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
 
 extern float D_800C5DF8_de, D_800C5DFC, D_800C5E00_de, D_800C5E04_de;
 
-void *func_80295F14_de(s32 *, s32);
-void func_80295F78_de(void *, struct Shared_AnimInfo *);
+void *TextLoad_RequestTextureVariation(s32 *, s32);
+void TextLoad_ReadTextureAnimationInfo(void *, struct Shared_AnimInfo *);
 #if defined(VERSION_US_REV1)
-void func_80295FB4_us_rev1(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
+void TextLoad_LoadTextureFrameTiles(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #else
 void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
@@ -566,9 +566,9 @@ void Smp_DrawTexturedRibbon(VertexArena *pool, RibbonActor *actor, GameplayCamer
             offset += node->length;
         }
     }
-    model = func_80295F14_de(&actor->model, -1);
+    model = TextLoad_RequestTextureVariation(&actor->model, -1);
     if (model == 0) return;
-    func_80295F78_de(model, &info);
+    TextLoad_ReadTextureAnimationInfo(model, &info);
     anim = &info;
     storage.blends = actor->track->blends;
     storage.count = actor->track->count;
@@ -609,7 +609,7 @@ void Smp_DrawTexturedRibbon(VertexArena *pool, RibbonActor *actor, GameplayCamer
     next = clock->next;
     frame = Fx_SelectAnimationFrame((AnimationFrameState *)actor, (AnimationFrameDefinition *)track, &info.count);
 #if defined(VERSION_US_REV1)
-    func_80295FB4_us_rev1(&actor->model, model, frame, 0, 0xFFFF, 0xFFFF, 0, 0, 0);
+    TextLoad_LoadTextureFrameTiles(&actor->model, model, frame, 0, 0xFFFF, 0xFFFF, 0, 0, 0);
 #else
     func_802950B4_de(&actor->model, model, frame, 0, 0xFFFF, 0xFFFF, 0, 0, 0);
 #endif

@@ -45,7 +45,7 @@ void func_802453D4_de(void)
       messageScaleY *= resolutionScale;
     }
     new_var = 0;
-    func_802AAB68_de(messageScaleX, messageScaleY);
+    OnScreen_SetTextScale(messageScaleX, messageScaleY);
     sequenceContext = D_800E2830;
     D_801376F8.shadowX = 1;
     D_801376F8.shadowY = 1;
@@ -57,12 +57,12 @@ void func_802453D4_de(void)
       followingMessageScale = D_800C37CC_de;
       do
       {
-        func_802A8F28_de(((Shared_MenuContext *)sequenceContext)->messages[messageIndex], messageCenterX, messageY, 0xFF, 1, 1, messageDrawScale, messageDrawScale);
+        OnScreen_DrawText(((Shared_MenuContext *)sequenceContext)->messages[messageIndex], messageCenterX, messageY, 0xFF, 1, 1, messageDrawScale, messageDrawScale);
         messageLineAdvance = ((f32) messageLineHeight) * messageScaleY;
         screenScaleX = (f32) (D_800E28D0 / 284);
         messageScaleY = ((f32) (D_800E28D4 / 222)) * followingMessageScale;
         messageY = (s32) (((f32) messageY) + messageLineAdvance);
-        func_802AAB68_de(screenScaleX * followingMessageScale, messageScaleY);
+        OnScreen_SetTextScale(screenScaleX * followingMessageScale, messageScaleY);
         messageIndex += 1;
       }
       while (messageIndex < ((Shared_MenuContext *)(sequenceContext = D_800E2830))->messageCount);

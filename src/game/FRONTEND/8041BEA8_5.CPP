@@ -325,7 +325,7 @@ void SmpOverlay_AdvancePakDialogPort(void) {
     }
 }
 
-s32 func_8041C2AC_de(void *parent) {
+s32 SmpOverlay_CreatePakDialog(void *parent) {
     void *window;
     char *resources;
     D_800E3518 = Cache_AllocateMemory(0x2C);
@@ -379,7 +379,7 @@ s32 func_8041C2AC_de(void *parent) {
     return 0;
 }
 
-s32 func_8041C3DC_de(void) {
+s32 SmpOverlay_DestroyPakDialog(void) {
     Cache_FreeMemory(D_800E3518);
     D_800E3518 = 0;
     return 0;

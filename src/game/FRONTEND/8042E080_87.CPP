@@ -13,7 +13,7 @@ extern void Tsmos_ActivateControllerState(void);
 extern void func_8043C210_de(void *, s32, s32, s32, s32);
 extern s32 Frontend_GetScreenMode(void);
 
-s32 func_804361BC_de(struct Pair14 *window) {
+s32 Frontend_CreateTimedMenu(struct Pair14 *window) {
     D_800E5558 = Cache_AllocateMemory(0x1C);
     Tsmos_ActivateControllerState();
     func_8043C210_de(D_800E5558, 0x67, 0, 0, 0);

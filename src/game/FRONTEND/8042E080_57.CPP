@@ -5,11 +5,11 @@
 #include "FRONTEND/8042E080_57.H"
 
 /* Counts how many of the four 2920-byte entries D_800E54A4 points to have a word at offset 0x58 that is neither zero nor 0x11.
-   Adapted from func_804355B4_de with the extra 0x11 exclusion changed. */
+   Adapted from PAKInterface_CountActivePlayerPanels with the extra 0x11 exclusion changed. */
 
 
 
-s32 func_80435574_de(void) {
+s32 PAKInterface_CountUnfinishedPlayerPanels(void) {
     s32 count = 0;
     s32 i;
 

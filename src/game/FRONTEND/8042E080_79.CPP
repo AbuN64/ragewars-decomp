@@ -16,7 +16,7 @@ extern Handler80435F70 D_800E5564;
 
 
 
-s32 func_80435D90_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchPauseMenuEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler80435F70 *entry;
     s32 index;
     s32 wildcard;

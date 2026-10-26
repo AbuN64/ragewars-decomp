@@ -2833,8 +2833,8 @@ typedef struct KeyRecAt10 KeyRecAt10;
 struct LevelCode8044ACCC;
 typedef struct LevelCode8044ACCC LevelCode8044ACCC;
 
-struct Link_func_80283A80_de;
-typedef struct Link_func_80283A80_de Link_func_80283A80_de;
+struct LinkParticleApplyDirectionalAcceleration;
+typedef struct LinkParticleApplyDirectionalAcceleration LinkParticleApplyDirectionalAcceleration;
 
 
 struct ListScreenItem;
@@ -2997,8 +2997,8 @@ typedef struct PakStatusPakSaveMenu PakStatusPakSaveMenu;
 struct ParamsRecAt18;
 typedef struct ParamsRecAt18 ParamsRecAt18;
 
-struct Params_func_80283A80_de;
-typedef struct Params_func_80283A80_de Params_func_80283A80_de;
+struct ParamsParticleApplyDirectionalAcceleration;
+typedef struct ParamsParticleApplyDirectionalAcceleration ParamsParticleApplyDirectionalAcceleration;
 
 struct PatrolActor;
 typedef struct PatrolActor PatrolActor;
@@ -4041,17 +4041,17 @@ struct KeyRecAt10 {
     f32 time;
 };
 struct LevelCode8044ACCC;
-struct Params_func_80283A80_de;
-struct Params_func_80283A80_de {
+struct ParamsParticleApplyDirectionalAcceleration;
+struct ParamsParticleApplyDirectionalAcceleration {
     char pad[16];
     u16 accel;
     u16 limit;
 };
-struct Link_func_80283A80_de;
-struct Params_func_80283A80_de;
-struct Link_func_80283A80_de {
+struct LinkParticleApplyDirectionalAcceleration;
+struct ParamsParticleApplyDirectionalAcceleration;
+struct LinkParticleApplyDirectionalAcceleration {
     char pad[48];
-    struct Params_func_80283A80_de *params;
+    struct ParamsParticleApplyDirectionalAcceleration *params;
 };
 struct ListScreenItem;
 struct ListScreenItem {
@@ -4203,13 +4203,13 @@ struct OSIoMesg {
 };
 struct OSTimer_s;
 
-struct Link_func_80283A80_de;
+struct LinkParticleApplyDirectionalAcceleration;
 struct ObjRecAt174;
 struct ObjRecAt174 {
     char pad[28];
     CVector3 velocity;
     char gap[0x118-40];
-    struct Link_func_80283A80_de *link;
+    struct LinkParticleApplyDirectionalAcceleration *link;
     char gap2[0x174-0x11c];
     CVector3 direction;
 };

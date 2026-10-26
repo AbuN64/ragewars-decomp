@@ -25,7 +25,7 @@ extern void SetN64_CommitSessionInputs(void *arg0);
 
 extern void func_8023EE00_de(void);
 
-extern void func_802954E0_us_rev1(void);
+extern void TextLoad_ResetArtsendTextureState(void);
 
 extern void OvlScene_SetSelection(void *arg0, s32 arg1, s32 arg2);
 
@@ -75,7 +75,7 @@ void SetN64_ResumeSelectedSession(GameSession *arg0) {
     SetN64_CommitSessionInputs(arg0);
     func_8023EE00_de();
 #if defined(VERSION_US_REV1)
-    func_802954E0_us_rev1();
+    TextLoad_ResetArtsendTextureState();
 #endif
     dst = &g_world;
 #if defined(VERSION_US_REV1)

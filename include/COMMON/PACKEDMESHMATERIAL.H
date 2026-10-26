@@ -28,7 +28,7 @@ typedef struct MeshMaterial {
     u16 height;
 } MeshMaterial;
 
-struct Obj_func_80284DC4_de;
+struct ObjParticleMarkNearbyObjects;
 
 
 struct ParticleEffect;
@@ -50,7 +50,7 @@ typedef struct ObjRecAt4V2 ObjRecAt4V2;
 struct Arg1;
 typedef struct Arg1 Arg1;
 
-struct Obj_func_80284DC4_de;
+struct ObjParticleMarkNearbyObjects;
 
 extern float D_800C4EB8_de;
 
@@ -78,8 +78,8 @@ struct Arg1;
 
 
 
-struct Obj_func_80284DC4_de;
-typedef struct Obj_func_80284DC4_de Obj_func_80284DC4_de;
+struct ObjParticleMarkNearbyObjects;
+typedef struct ObjParticleMarkNearbyObjects ObjParticleMarkNearbyObjects;
 
 
 

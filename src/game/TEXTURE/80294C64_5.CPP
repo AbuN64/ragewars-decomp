@@ -13,7 +13,7 @@ extern s32 D_8014AED0;
 extern s32 D_8014AED4;
 
 
-void func_802954E0_us_rev1(void) {
+void TextLoad_ResetArtsendTextureState(void) {
     s32 *base = &D_8014AEB8;
 
     D_8014AEB0.alternateTitle = 0;

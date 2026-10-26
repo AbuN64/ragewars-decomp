@@ -16,7 +16,7 @@
 
 
 
-extern s32 func_80296B74_de(void *arg0, void *arg1);
+extern s32 VisData_TestBoxAgainstFrustum(void *arg0, void *arg1);
 
 extern void func_8024EB90_de(void *arg0);
 
@@ -78,7 +78,7 @@ void SetN64_DrawVisibleEffects(char *effectPool, char *view) {
                 (camera->clipBounds[0].z < entry->maxZ) &&
                 (camera->clipBounds[1].y > entry->minY) &&
                 (camera->clipBounds[0].y < entry->maxY) &&
-                (func_80296B74_de(camera->clipPlanes, &entry->minX) != 0)) {
+                (VisData_TestBoxAgainstFrustum(camera->clipPlanes, &entry->minX) != 0)) {
                 value = entry->lifetime;
                 D_800D15E0 = 0;
                 if ((value > zero) && (value <= upper)) {

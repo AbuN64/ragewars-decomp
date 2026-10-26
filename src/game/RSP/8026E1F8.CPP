@@ -30,7 +30,7 @@ void Geometry_RefreshMaterialResources(void **resource) {
     }
 }
 
-extern void **func_80295EAC_de(void *arg0, s32 arg1);
+extern void **TextLoad_RequestTextureVariationSync(void *arg0, s32 arg1);
 
 
 
@@ -52,7 +52,7 @@ s32 *Geometry_CollectMaterialResources(void **arg0, s32 variation, s32 *arg2) {
         if (((struct ResourceSectionReference *)(rec))->resource == 0) {
             continue;
         }
-        result = func_80295EAC_de(&((struct ResourceSectionReference *)(rec))->resource, variation);
+        result = TextLoad_RequestTextureVariationSync(&((struct ResourceSectionReference *)(rec))->resource, variation);
         if (result != 0) {
             *out = result;
             out += 1;

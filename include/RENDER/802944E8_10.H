@@ -4,7 +4,7 @@
 #include "RENDER/802944E8.H"
 #include "COMMON/RESIDENTSTATE.H"
 
-extern s32 func_80294B9C_de(ObjRecAt26DD4 *arg0);
+extern s32 SimpPool_CheckSequencePromptRequest(ObjRecAt26DD4 *arg0);
 
 struct ResidentSlot {
     s32 unk0;
@@ -16,7 +16,7 @@ struct ResidentEntry {
     char pad4[0x2010 - 0x4];
     s32 unk2010;
 };
-struct Selection_func_802955EC_us_rev1 {
+struct SelectionTextLoadApplyArtsendTextureOverride {
     s32 value;
     char pad4[12];
     s32 alternative; /* 0x10 */
@@ -29,8 +29,8 @@ typedef struct FrontendInputSelector {
     u8 secondaryButton;
 } FrontendInputSelector;
 struct Node80253610;
-/* The us-rev1 resident texture menu state (D_8014AEB0, 0x21BC bytes): func_802954E0_us_rev1 clears it,
-   TEngine_LoadSelectedTexture loads the selected entry and func_80294F1C_us_rev1 steps the selection. */
+/* The us-rev1 resident texture menu state (D_8014AEB0, 0x21BC bytes): TextLoad_ResetArtsendTextureState clears it,
+   TEngine_LoadSelectedTexture loads the selected entry and TEngine_UpdateArtsendTexturePreview steps the selection. */
 struct MenuGlobalRecAt21B8 {
     u8 alternateTitle; /* +0x0 */
     u8 state; /* +0x1 */
@@ -59,6 +59,6 @@ struct SelectionRecAt8 {
     s32 value; /* +0x4 */
     s32 changed; /* +0x8: == D_8014AEC4 */
 };
-extern void func_80294C50_de(void);
+extern void SimpPool_ResetEffectsAndControllers(void);
 extern void func_80294C84_de(void);
 #endif

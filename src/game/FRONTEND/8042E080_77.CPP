@@ -4,7 +4,7 @@
 /* Calls MarkMenuEventHandled with the arguments it was given and returns zero. */
 extern void MarkMenuEventHandled();
 
-s32 func_80435CB8_de(void) {
+s32 Frontend_ConsumePauseMenuEvent(void) {
     MarkMenuEventHandled();
     return 0;
 }

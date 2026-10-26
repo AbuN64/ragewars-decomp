@@ -241,7 +241,7 @@ typedef struct EffectWorld { char pad00[0x751C]; EffectPool pool; } EffectWorld;
 typedef struct EffectInstance { char pad00[0xB0]; FxActor *actor; } EffectInstance;
 extern EffectResource *Scene_GetLinkedResourceSection(void *, s32);
 extern void Lists_ClearHeader(void *);
-extern void func_80295E84_de(void *, s32);
+extern void TextLoad_LocateTextureResource(void *, s32);
 extern void Particle_EncodeRenderLayer(void *, void *);
 extern void GraphU64_IdentityMatrix(void *);
 
@@ -293,7 +293,7 @@ void Fx_AttachActorRibbon(EffectWorld *world, FxActor *actor, s32 resourceId) {
         node->field30 = 0;
         node->handle = -1;
         if (node->attachment != -1) {
-            func_80295E84_de(node->coordinates, node->attachment);
+            TextLoad_LocateTextureResource(node->coordinates, node->attachment);
             if (actor) Particle_EncodeRenderLayer(actor, node->coordinates);
         }
         }

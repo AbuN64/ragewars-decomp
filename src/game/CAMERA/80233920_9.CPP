@@ -248,7 +248,7 @@ CCameraText *Camera_PostScreenMessage(struct ScreenMessageOwner *owner, struct S
 
 extern void OnScreen_SetupTextRendering(void);
 extern void OnScreen_LoadTextTileModeTwo(void);
-extern void func_802A8F28_de(void *text, s32 x, s32 y, s32 alpha, s32 arg4, s32 arg5, f32 scaleX, f32 scaleY);
+extern void OnScreen_DrawText(void *text, s32 x, s32 y, s32 alpha, s32 arg4, s32 arg5, f32 scaleX, f32 scaleY);
 void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool) {
     f32 spacing;
     f32 fade;
@@ -269,7 +269,7 @@ void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct Screen
             }
         }
         for (msg = pool->freeMessages.tail; msg != 0; msg = msg->prev) {
-            func_802A8F28_de(msg->text, (s32)msg->x, (s32)msg->y, msg->m_nAlpha, 1, 1, 1.0f, 1.0f);
+            OnScreen_DrawText(msg->text, (s32)msg->x, (s32)msg->y, msg->m_nAlpha, 1, 1, 1.0f, 1.0f);
         }
         for (msg = pool->freeMessages.tail; msg != 0; msg = msg->prev) {
             fade = D_800D2988 * 0.06666667f;
@@ -325,7 +325,7 @@ extern const f32 D_800C3434_de, D_800C3438_de, D_800C343C_de, D_800C3440_de;
 extern const f32 D_800C3444_de, D_800C3448_de;
 extern s32 D_800E28D8;
 extern void OnScreen_SetupTextRendering(void);
-extern void func_802A8F28_de(void *, s32, s32, s32, s32, s32, f32, f32);
+extern void OnScreen_DrawText(void *, s32, s32, s32, s32, s32, f32, f32);
 
 /* Draws and advances the screen messages of one view, retiring finished ones. */
 void Camera_DrawAndAdvanceMessages(Race *race, Racer *racer) {
@@ -377,7 +377,7 @@ void Camera_DrawAndAdvanceMessages(Race *race, Racer *racer) {
                 scale = D_800C3430_de;
                 centered = 1;
             }
-            func_802A8F28_de(message->text, (s32)offsetXf, (s32)offsetY, message->m_nAlpha, centered, centered,
+            OnScreen_DrawText(message->text, (s32)offsetXf, (s32)offsetY, message->m_nAlpha, centered, centered,
                              message->alpha * scaleX * scale, message->alpha * scaleY * scale);
             switch (message->kind) {
             case 2:

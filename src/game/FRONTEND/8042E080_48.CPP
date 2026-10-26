@@ -8,7 +8,7 @@
 
 
 
-int func_80435224_de(int id, int value) {
+int PAKInterface_FindPlayerProfileLink(int id, int value) {
     int result;
     int i;
 

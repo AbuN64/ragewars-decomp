@@ -3,7 +3,7 @@
 #include "TYPES.H"
 
 /* Handles the menu message func_80299A08_de reports after MarkMenuEventHandled: 0x3D8 clears D_80146894, calls Tsmos_DeactivateControllerState, then calls func_8043C278_de on D_800E5558 when ScenarioSetup_StartRandomCupStage reports non-zero or else func_8040C428_de with zero and func_80298368_de with 0x14; 0x3D9 calls func_80298368_de with one. Returns zero.
-   Adapted from func_80435CD8_de with the message numbers and the arms changed. */
+   Adapted from Frontend_ActivatePauseMenuAction with the message numbers and the arms changed. */
 extern s32 D_800E5558;
 extern void MarkMenuEventHandled(void);
 extern s32 func_80299A08_de(void);

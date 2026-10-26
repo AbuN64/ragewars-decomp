@@ -16,10 +16,10 @@
 
 
 
-extern struct Record_func_804347CC_de D_80102B00[];
-extern void Player_InitializeProfile(struct Record_func_804347CC_de *);
+extern struct RecordPAKInterfaceReassignLocalProfiles D_80102B00[];
+extern void Player_InitializeProfile(struct RecordPAKInterfaceReassignLocalProfiles *);
 
-void func_804347CC_de(void) {
+void PAKInterface_ReassignLocalProfiles(void) {
     s32 used[4];
     s32 size;
     s32 chosen;

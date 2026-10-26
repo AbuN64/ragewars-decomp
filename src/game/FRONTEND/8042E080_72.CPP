@@ -8,7 +8,7 @@ extern void *D_800E5550;
 
 extern void Control_RestoreControllerSetup();
 
-s32 func_80435C00_de(void) {
+s32 Frontend_DestroyPauseMenu(void) {
     Cache_FreeMemory(D_800E5550);
     D_800E5550 = 0;
     Tsmos_SetModeOneFlag(2);

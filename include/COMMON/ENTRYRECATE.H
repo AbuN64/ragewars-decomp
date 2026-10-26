@@ -26,8 +26,8 @@ struct Shared_ActorView;
 
 
 
-struct Actor_func_802AB400_de;
-struct Actor_func_802AB400_de {
+struct ActorPickupCanCollect;
+struct ActorPickupCanCollect {
     u8 type;
     u8 pad1[7];
     CVector3 position; /* 0x08: provider func_8025DE54_de takes CVector3 */
@@ -85,8 +85,8 @@ struct EntryRecAtE {
 
 
 
-struct Actor_func_802AB400_de;
-typedef struct Actor_func_802AB400_de Actor_func_802AB400_de;
+struct ActorPickupCanCollect;
+typedef struct ActorPickupCanCollect ActorPickupCanCollect;
 
 
 

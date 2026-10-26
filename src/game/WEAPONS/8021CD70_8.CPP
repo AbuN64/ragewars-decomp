@@ -77,7 +77,7 @@ extern void Link_DispatchObjectLinks(struct Shared_Model *, s32, void *);
 
 
 extern void ItemMenu_UpdateToggleMenu(void *, void *);
-extern void func_802ACA54_de(void *, void *);
+extern void Pickup_TryCollectActor(void *, void *);
 #include "COMMON/LEVEL_TRACK.H"
 void func_80220ED4_de(SharedPlayer *player)
 {
@@ -529,7 +529,7 @@ void func_80220ED4_de(SharedPlayer *player)
     }
     if ((D_801041F0 != 0) && ((*D_801041F0) == 3))
     {
-      func_802ACA54_de(player, D_801041F0);
+      Pickup_TryCollectActor(player, D_801041F0);
     }
     if ((before != 0) && (after != 0))
     {

@@ -3,7 +3,7 @@
 #include "MENU/CODE_802AE254.H"
 
 /** Return the one status used by callers. */
-int func_802AD264_de(void) {
+int Pickup_HandleItemUpdate(void) {
     return 1;
 }
 

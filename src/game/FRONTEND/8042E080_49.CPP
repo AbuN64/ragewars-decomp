@@ -8,7 +8,7 @@
 
 
 
-int func_80435270_de(int id, int value) {
+int PAKInterface_RemovePlayerProfileLink(int id, int value) {
     int found;
     int i;
 

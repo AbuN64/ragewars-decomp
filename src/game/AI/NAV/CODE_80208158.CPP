@@ -11,7 +11,7 @@
 #include "COMMON/REC.H"
 #include "AI/NAV/CODE_80208158.H"
 
-/* Updates a computer player's brain for the frame: fixes its route start, runs its planner through Nav_UpdateTargetPitch and its state callback, counts down its cooldown at 0x324, and for a displayed player sets the health meter from its health over the character's maximum (400 for kinds 11 and 12, 300 for 13 and 14, otherwise func_8022AC00_de), as a percentage, rescaled for kind 14 by the difficulty D_8014693C; in the tutorial (D_801468A0) kind 11 also shows the timer and refills its ammunition, then the meter is drawn through func_802AA794_de or func_802AA79C_de; finally it restarts a stalled player (state 0x12) through Nav_HandlePlayerTimeout. */
+/* Updates a computer player's brain for the frame: fixes its route start, runs its planner through Nav_UpdateTargetPitch and its state callback, counts down its cooldown at 0x324, and for a displayed player sets the health meter from its health over the character's maximum (400 for kinds 11 and 12, 300 for 13 and 14, otherwise func_8022AC00_de), as a percentage, rescaled for kind 14 by the difficulty D_8014693C; in the tutorial (D_801468A0) kind 11 also shows the timer and refills its ammunition, then the meter is drawn through OnScreen_SetFirstBarTarget or OnScreen_SetSecondBarTarget; finally it restarts a stalled player (state 0x12) through Nav_HandlePlayerTimeout. */
 
 
 
@@ -26,7 +26,7 @@ extern char D_801376F8[];
 
 extern void Nav_UpdateTargetPitch(Brain *);
 extern s32 Player_GetMaxHealth(SharedPlayer *);
-extern void func_802AA79C_de(char *, s32);
+extern void OnScreen_SetSecondBarTarget(char *, s32);
 extern void ContPad_ClearControllerInput(char *);
 extern void Nav_HandlePlayerTimeout(Brain *, SharedPlayer *);
 
@@ -80,7 +80,7 @@ void Nav_UpdateComputerPlayerStatus(Brain *brain) {
         tutorial = &D_801462C8.counters;
         if (tutorial->enabled != 0) {
             if (brain->player->views5D8.view5D8_1.record->unk80 == 11) {
-                func_802AA794_de(D_801376F8, (f32)tutorial->m_nBastilleShield);
+                OnScreen_SetFirstBarTarget(D_801376F8, (f32)tutorial->m_nBastilleShield);
                 if (tutorial->m_nBastilleTimer > 0) {
                     tutorial->m_nBastilleTimer--;
                     ContPad_ClearControllerInput((char *)brain->player + 0x688);
@@ -94,9 +94,9 @@ void Nav_UpdateComputerPlayerStatus(Brain *brain) {
                 }
             }
             if (brain->player->views5D8.view5D8_1.record->display == 1) {
-                func_802AA794_de(D_801376F8, meter);
+                OnScreen_SetFirstBarTarget(D_801376F8, meter);
             } else {
-                func_802AA79C_de(D_801376F8, meter);
+                OnScreen_SetSecondBarTarget(D_801376F8, meter);
             }
         }
     }

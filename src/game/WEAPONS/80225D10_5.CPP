@@ -489,7 +489,7 @@ void func_80228AF4_de(void *arg0, ViewState *viewState) {
     OnScreen_DrawSpriteNumber((s32)position, center_x + (2.0f * scale_x),
                    center_y, scale_x, scale_y, 1, 0, 2);
     OnScreen_SetupTextRendering();
-    func_802A8F28_de(&D_800C2BD8_de,
+    OnScreen_DrawText(&D_800C2BD8_de,
                   (s32)(center_x - (scale_x * ((D_800C7470_Pair *)&D_800C2C08_de)->second)),
                   (s32)(center_y - (scale_y * D_800C2C10_de[0])),
                   0xFF, 0, 0, scale_x, scale_y);

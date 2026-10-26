@@ -20,7 +20,7 @@ extern s32 D_800E28D0;
 
 extern void OnScreen_SetupTextRendering(void);
 
-extern void func_802A8F28_de(void *, s32, s32, s32, s32, s32, f32, f32);
+extern void OnScreen_DrawText(void *, s32, s32, s32, s32, s32, f32, f32);
 
 void func_802185D0_de(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 count, WeaponMenuPlayer *player) {
     s32 width;
@@ -53,7 +53,7 @@ void func_802185D0_de(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 count, We
         y = viewport[3] + viewport[1] * 0.5f + item->position.y * 0.5f * viewport[1];
         alpha = item->width;
         if (item->icon != 0) {
-            func_802AA950_de(item->icon, 0, &width, &height);
+            OnScreen_GetImageDimensions(item->icon, 0, &width, &height);
             if (menu->cursor == item->slot) {
                 red = Math_Cosf(menu->spin) * 63.0f + 192.0f;
                 alpha = 1.0f;
@@ -66,7 +66,7 @@ void func_802185D0_de(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 count, We
                 alpha *= 0.75f;
             }
             gDPSetEnvColor(g_displayListCursor++, red, green, blue, alpha * fade);
-            func_802AAC28_de(item->icon, 0, x - width * item->height * scaleX * 0.5f,
+            OnScreen_DrawSpriteResource(item->icon, 0, x - width * item->height * scaleX * 0.5f,
                           y - height * item->height * scaleY * 0.5f,
                           scaleX * item->height, scaleY * item->height, 1);
         }
@@ -75,11 +75,11 @@ void func_802185D0_de(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 count, We
     scaleY = titleView->viewport[1] / D_800E28D4;
     scaleX = titleView->viewport[0] / D_800E28D0;
     OnScreen_SetupTextRendering();
-    func_802AAB68_de(0.6f, 0.6f);
-    func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
+    OnScreen_SetTextScale(0.6f, 0.6f);
+    OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
     x = viewport[2] + viewport[0] * 0.5f;
     y = viewport[3] + viewport[1] * 0.5f;
-    func_802A8F28_de(s_selectTeamText, x, y, 0xC8, 1, 1, scaleX, scaleY);
+    OnScreen_DrawText(s_selectTeamText, x, y, 0xC8, 1, 1, scaleX, scaleY);
 }
 
 /* Returns the cardinal team-menu slot, or -1 inside the deadzone/diagonals. */

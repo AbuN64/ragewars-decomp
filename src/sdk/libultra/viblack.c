@@ -7,13 +7,13 @@
 
 extern void *D_800D4414;
 
-void osViBlack(s32 arg0) {
-    u32 temp_a0;
+void osViBlack(s32 blackEnabled) {
+    u32 savedInterruptMask;
     u16 *ptr;
     u16 v;
 
-    temp_a0 = __osDisableInt();
-    if (arg0 & 0xFF) {
+    savedInterruptMask = __osDisableInt();
+    if (blackEnabled & 0xFF) {
         ptr = (u16 *)D_800D4414;
         v = *ptr | 0x20;
     } else {
@@ -21,7 +21,7 @@ void osViBlack(s32 arg0) {
         v = *ptr & 0xFFDF;
     }
     *ptr = v;
-    __osRestoreInt(temp_a0);
+    __osRestoreInt(savedInterruptMask);
 }
 
 #if defined(VERSION_US)

@@ -14,26 +14,26 @@ extern void osStartThread(s32 arg0);
 
 extern OSThread_s *D_800D5270;
 
-s32 func_802BB160_de(OSMesgQueue *arg0, void *arg1, s32 arg2) {
+s32 func_802BB160_de(OSMesgQueue *messageQueue, void *message, s32 waitMode) {
     u32 saved;
     s32 index;
 
     saved = __osDisableInt();
-    while (arg0->validCount >= arg0->msgCount) {
-        if (arg2 != 1) {
+    while (messageQueue->validCount >= messageQueue->msgCount) {
+        if (waitMode != 1) {
             __osRestoreInt(saved);
             return -1;
         }
         D_800D5270->state = 8;
-        func_802BC36C_de(&arg0->fullqueue);
+        func_802BC36C_de(&messageQueue->fullqueue);
     }
 
-    index = (arg0->first + arg0->msgCount - 1) % arg0->msgCount;
-    arg0->first = index;
-    arg0->msg[index] = arg1;
-    arg0->validCount++;
-    if (*arg0->mtqueue != 0) {
-        osStartThread(__osPopThread(arg0));
+    index = (messageQueue->first + messageQueue->msgCount - 1) % messageQueue->msgCount;
+    messageQueue->first = index;
+    messageQueue->msg[index] = message;
+    messageQueue->validCount++;
+    if (*messageQueue->mtqueue != 0) {
+        osStartThread(__osPopThread(messageQueue));
     }
     __osRestoreInt(saved);
     return 0;

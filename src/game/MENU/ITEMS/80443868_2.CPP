@@ -88,7 +88,7 @@ void func_80443734_de(ObjRecAt1CV1 *arg0, CaptionEntry *arg1, s32 arg2, MenuStyl
     }
     sx = arg1->scaleX;
     scale = *(&D_800DE740 + 1);
-    func_802AAC28_de(arg0->unk14, 0, arg1->x - (half * 8), arg1->y + drop,
+    OnScreen_DrawSpriteResource(arg0->unk14, 0, arg1->x - (half * 8), arg1->y + drop,
                   sx * scale, arg1->scaleY * scale, 1);
 }
 

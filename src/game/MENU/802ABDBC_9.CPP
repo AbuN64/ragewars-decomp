@@ -16,7 +16,7 @@
 #ifdef NON_MATCHING
 /* Drafted below with the other versions' body. */
 #else
-INCLUDE_ASM("span_1000", func_802ACBCC);
+INCLUDE_ASM("span_1000", Pickup_ApplySpecialPickup);
 #endif
 #endif
 
@@ -48,29 +48,29 @@ extern u8 *D_800D31B8[];
 
 typedef struct CPersistentPlayerData_t CPersistentPlayerData;
 struct CPersistentPlayerData_t {
-    u8 pad0[16]; /* +0x0: src/func_802ACBCC.c */
-    s32 m_PowerOfViper; /* +0x10: src/func_802ACBCC.c */
-    s8 m_PowerOfBear; /* +0x14: src/func_802ACBCC.c */
-    s8 m_SpiritOfCoyote; /* +0x15: src/func_802ACBCC.c */
-    s8 m_SpiritOfCougar; /* +0x16: src/func_802ACBCC.c */
-    s8 m_FragFestTimeTrialIcons; /* +0x17: src/func_802ACBCC.c */
-    u8 pad18[376]; /* +0x18: src/func_802ACBCC.c */
+    u8 pad0[16]; /* +0x0: src/Pickup_ApplySpecialPickup.c */
+    s32 m_PowerOfViper; /* +0x10: src/Pickup_ApplySpecialPickup.c */
+    s8 m_PowerOfBear; /* +0x14: src/Pickup_ApplySpecialPickup.c */
+    s8 m_SpiritOfCoyote; /* +0x15: src/Pickup_ApplySpecialPickup.c */
+    s8 m_SpiritOfCougar; /* +0x16: src/Pickup_ApplySpecialPickup.c */
+    s8 m_FragFestTimeTrialIcons; /* +0x17: src/Pickup_ApplySpecialPickup.c */
+    u8 pad18[376]; /* +0x18: src/Pickup_ApplySpecialPickup.c */
 };
 
 
 
 typedef struct Shared_MenuBonusColumn Shared_MenuBonusColumn;
 struct Shared_MenuBonusColumn {
-    u8 value; /* +0x0: src/func_802ACBCC.c */
-    u8 rest[399]; /* +0x1: src/func_802ACBCC.c */
+    u8 value; /* +0x0: src/Pickup_ApplySpecialPickup.c */
+    u8 rest[399]; /* +0x1: src/Pickup_ApplySpecialPickup.c */
 };
 
 
 
 typedef struct Shared_MenuAmountColumn Shared_MenuAmountColumn;
 struct Shared_MenuAmountColumn {
-    s32 value; /* +0x0: src/func_802ACBCC.c */
-    u8 rest[396]; /* +0x4: src/func_802ACBCC.c */
+    s32 value; /* +0x0: src/Pickup_ApplySpecialPickup.c */
+    u8 rest[396]; /* +0x4: src/Pickup_ApplySpecialPickup.c */
 };
 
 
@@ -80,42 +80,42 @@ struct SharedRecAt13E0 {
     char pad0[0x8];
     CVector3 position; /* +0x8: passed by value to SoundElement_PlaySoundAtPosition */
     char pad14[0x4];
-    struct SharedRecAtC * unk18; /* +0x18: src/func_802ACBCC.c */
+    struct SharedRecAtC * unk18; /* +0x18: src/Pickup_ApplySpecialPickup.c */
     char pad1C[0x5B8];
-    s32 unk5D4; /* +0x5D4: src/func_802ACBCC.c */
-    struct SharedRecAt92V1 * unk5D8; /* +0x5D8: src/func_802ACBCC.c */
-    void * unk5DC; /* +0x5DC: src/func_802ACBCC.c */
+    s32 unk5D4; /* +0x5D4: src/Pickup_ApplySpecialPickup.c */
+    struct SharedRecAt92V1 * unk5D8; /* +0x5D8: src/Pickup_ApplySpecialPickup.c */
+    void * unk5DC; /* +0x5DC: src/Pickup_ApplySpecialPickup.c */
     char pad5E0[0x4];
-    s32 unk5E4; /* +0x5E4: src/func_802ACBCC.c */
+    s32 unk5E4; /* +0x5E4: src/Pickup_ApplySpecialPickup.c */
     char pad5E8[0xC];
-    u16 unk5F4; /* +0x5F4: src/func_802ACBCC.c */
-    u16 unk5F6; /* +0x5F6: src/func_802ACBCC.c */
-    u16 unk5F8; /* +0x5F8: src/func_802ACBCC.c */
+    u16 unk5F4; /* +0x5F4: src/Pickup_ApplySpecialPickup.c */
+    u16 unk5F6; /* +0x5F6: src/Pickup_ApplySpecialPickup.c */
+    u16 unk5F8; /* +0x5F8: src/Pickup_ApplySpecialPickup.c */
     char pad5FA[0xBEA];
-    f32 unk11E4; /* +0x11E4: src/func_802ACBCC.c */
+    f32 unk11E4; /* +0x11E4: src/Pickup_ApplySpecialPickup.c */
     char pad11E8[0x44];
-    s32 unk122C; /* +0x122C: src/func_802ACBCC.c */
-    f32 unk1230; /* +0x1230: src/func_802ACBCC.c */
+    s32 unk122C; /* +0x122C: src/Pickup_ApplySpecialPickup.c */
+    f32 unk1230; /* +0x1230: src/Pickup_ApplySpecialPickup.c */
     char pad1234[0x4];
-    s32 unk1238; /* +0x1238: src/func_802ACBCC.c */
-    u8 unk123C; /* +0x123C: src/func_802ACBCC.c */
-    u8 unk123D; /* +0x123D: src/func_802ACBCC.c */
-    u8 unk123E; /* +0x123E: src/func_802ACBCC.c */
+    s32 unk1238; /* +0x1238: src/Pickup_ApplySpecialPickup.c */
+    u8 unk123C; /* +0x123C: src/Pickup_ApplySpecialPickup.c */
+    u8 unk123D; /* +0x123D: src/Pickup_ApplySpecialPickup.c */
+    u8 unk123E; /* +0x123E: src/Pickup_ApplySpecialPickup.c */
     char pad123F[0x1];
-    f32 unk1240; /* +0x1240: src/func_802ACBCC.c */
-    f32 rightAxisValue; /* +0x1244: src/func_802ACBCC.c */
+    f32 unk1240; /* +0x1240: src/Pickup_ApplySpecialPickup.c */
+    f32 rightAxisValue; /* +0x1244: src/Pickup_ApplySpecialPickup.c */
     char pad1248[0x198];
-    s32 unk13E0; /* +0x13E0: src/func_802ACBCC.c */
+    s32 unk13E0; /* +0x13E0: src/Pickup_ApplySpecialPickup.c */
 };
 
 
 
 typedef struct SharedRecAt8V2 SharedRecAt8V2;
 struct SharedRecAt8V2 {
-    u8 ** unk0; /* +0x0: src/func_802ACBCC.c */
-    s16 unk4; /* +0x4: src/func_802ACBCC.c */
-    s16 unk6; /* +0x6: src/func_802ACBCC.c */
-    s16 unk8; /* +0x8: src/func_802ACBCC.c */
+    u8 ** unk0; /* +0x0: src/Pickup_ApplySpecialPickup.c */
+    s16 unk4; /* +0x4: src/Pickup_ApplySpecialPickup.c */
+    s16 unk6; /* +0x6: src/Pickup_ApplySpecialPickup.c */
+    s16 unk8; /* +0x8: src/Pickup_ApplySpecialPickup.c */
     char padA[0x2];
 };
 
@@ -124,7 +124,7 @@ struct SharedRecAt8V2 {
 typedef struct SharedRecAtC SharedRecAtC;
 struct SharedRecAtC {
     char pad0[0xC];
-    s16 unkC; /* +0xC: src/func_802ACBCC.c */
+    s16 unkC; /* +0xC: src/Pickup_ApplySpecialPickup.c */
 };
 
 
@@ -132,7 +132,7 @@ struct SharedRecAtC {
 typedef struct SharedRecV1 SharedRecV1;
 struct SharedRecV1 {
     char pad0[0x8F];
-    u8 unk8F; /* +0x8F: src/func_802ACBCC.c */
+    u8 unk8F; /* +0x8F: src/Pickup_ApplySpecialPickup.c */
 };
 
 
@@ -140,14 +140,14 @@ struct SharedRecV1 {
 typedef struct SharedRecAt84 SharedRecAt84;
 struct SharedRecAt84 {
     char pad0[0x24];
-    s32 unk24; /* +0x24: src/func_802ACBCC.c */
+    s32 unk24; /* +0x24: src/Pickup_ApplySpecialPickup.c */
     char pad28[0x2C];
-    s32 unk54; /* +0x54: src/func_802ACBCC.c */
+    s32 unk54; /* +0x54: src/Pickup_ApplySpecialPickup.c */
     char pad58[0x1C];
-    s32 unk74; /* +0x74: src/func_802ACBCC.c */
+    s32 unk74; /* +0x74: src/Pickup_ApplySpecialPickup.c */
     char pad78[0x8];
-    s32 unk80; /* +0x80: src/func_802ACBCC.c */
-    s32 unk84; /* +0x84: src/func_802ACBCC.c */
+    s32 unk80; /* +0x80: src/Pickup_ApplySpecialPickup.c */
+    s32 unk84; /* +0x84: src/Pickup_ApplySpecialPickup.c */
 };
 
 
@@ -155,10 +155,10 @@ struct SharedRecAt84 {
 typedef struct SharedRecAt92V1 SharedRecAt92V1;
 struct SharedRecAt92V1 {
     char pad0[0x8F];
-    u8 unk8F; /* +0x8F: src/func_802ACBCC.c */
-    u8 unk90; /* +0x90: src/func_802ACBCC.c */
+    u8 unk8F; /* +0x8F: src/Pickup_ApplySpecialPickup.c */
+    u8 unk90; /* +0x90: src/Pickup_ApplySpecialPickup.c */
     char pad91[0x1];
-    u8 unk92; /* +0x92: src/func_802ACBCC.c */
+    u8 unk92; /* +0x92: src/Pickup_ApplySpecialPickup.c */
 };
 
 
@@ -166,9 +166,9 @@ struct SharedRecAt92V1 {
 typedef struct SharedRecV2 SharedRecV2;
 struct SharedRecV2 {
     char pad0[0x5DC];
-    void * unk5DC; /* +0x5DC: src/func_802ACBCC.c */
+    void * unk5DC; /* +0x5DC: src/Pickup_ApplySpecialPickup.c */
     char pad5E0[0x1100];
-    void * unk16E0; /* +0x16E0: src/func_802ACBCC.c */
+    void * unk16E0; /* +0x16E0: src/Pickup_ApplySpecialPickup.c */
 };
 
 
@@ -176,14 +176,14 @@ struct SharedRecV2 {
 typedef struct SharedRecAt16E0V1 SharedRecAt16E0V1;
 struct SharedRecAt16E0V1 {
     char pad0[0x5D8];
-    struct SharedRecAt92V2 * unk5D8; /* +0x5D8: src/func_802ACBCC.c */
-    void * unk5DC; /* +0x5DC: src/func_802ACBCC.c */
+    struct SharedRecAt92V2 * unk5D8; /* +0x5D8: src/Pickup_ApplySpecialPickup.c */
+    void * unk5DC; /* +0x5DC: src/Pickup_ApplySpecialPickup.c */
     char pad5E0[0xBFC];
-    f32 unk11DC; /* +0x11DC: src/func_802ACBCC.c */
+    f32 unk11DC; /* +0x11DC: src/Pickup_ApplySpecialPickup.c */
     char pad11E0[0x4C];
-    s32 unk122C; /* +0x122C: src/func_802ACBCC.c */
+    s32 unk122C; /* +0x122C: src/Pickup_ApplySpecialPickup.c */
     char pad1230[0x4B0];
-    struct SharedRecAt16E0V1 * unk16E0; /* +0x16E0: src/func_802ACBCC.c */
+    struct SharedRecAt16E0V1 * unk16E0; /* +0x16E0: src/Pickup_ApplySpecialPickup.c */
     char pad16E4[0x4];
 };
 
@@ -192,36 +192,36 @@ struct SharedRecAt16E0V1 {
 typedef struct SharedRecAt92V2 SharedRecAt92V2;
 struct SharedRecAt92V2 {
     char pad0[0x92];
-    u8 unk92; /* +0x92: src/func_802ACBCC.c */
+    u8 unk92; /* +0x92: src/Pickup_ApplySpecialPickup.c */
 };
 
 
 
 typedef struct Shared_PlayerListMenuGlobals Shared_PlayerListMenuGlobals;
 struct Shared_PlayerListMenuGlobals {
-    void * players; /* +0x0: src/func_802ACBCC.c */
-    u8 padToMenu[6204]; /* +0x4: src/func_802ACBCC.c */
-    SharedRecAt84 menu; /* +0x1840: src/func_802ACBCC.c */
+    void * players; /* +0x0: src/Pickup_ApplySpecialPickup.c */
+    u8 padToMenu[6204]; /* +0x4: src/Pickup_ApplySpecialPickup.c */
+    SharedRecAt84 menu; /* +0x1840: src/Pickup_ApplySpecialPickup.c */
 };
 
 
 
 typedef struct Shared_PlayerMenuGlobals Shared_PlayerMenuGlobals;
 struct Shared_PlayerMenuGlobals {
-    s32 count; /* +0x0: src/func_802ACBCC.c */
-    u8 padToPlayers[20]; /* +0x4: src/func_802ACBCC.c */
-    Shared_PlayerListMenuGlobals list; /* +0x18: src/func_802ACBCC.c */
+    s32 count; /* +0x0: src/Pickup_ApplySpecialPickup.c */
+    u8 padToPlayers[20]; /* +0x4: src/Pickup_ApplySpecialPickup.c */
+    Shared_PlayerListMenuGlobals list; /* +0x18: src/Pickup_ApplySpecialPickup.c */
 };
 
 
 
 typedef struct Shared_FullPlayerMenuGlobals Shared_FullPlayerMenuGlobals;
 struct Shared_FullPlayerMenuGlobals {
-    struct SharedRecAt16E0V1 * entries; /* +0x0: src/func_802ACBCC.c */
-    Shared_PlayerMenuGlobals tail; /* +0x4: src/func_802ACBCC.c */
+    struct SharedRecAt16E0V1 * entries; /* +0x0: src/Pickup_ApplySpecialPickup.c */
+    Shared_PlayerMenuGlobals tail; /* +0x4: src/Pickup_ApplySpecialPickup.c */
 };
 
-/* The values func_802ACBCC loads by address:
+/* The values Pickup_ApplySpecialPickup loads by address:
  * 0x800CB3F0 = 105.0 (float, D_800C6260 in this cartridge's tables)
  * 0x800CB3F4 = 195.0 (float, D_800C6264 in this cartridge's tables)
  * 0x800CB3F8 = 300.0 (float, D_800CB3F8 in this cartridge's tables)
@@ -315,7 +315,7 @@ typedef Shared_FullPlayerMenuGlobals FullPlayerMenuGlobals;
 
 /* Handles player menu commands and updates selection and game mode state. */
 
-s32 func_802ACBCC(ObjRecV4 *arg0, ObjRecV9 *arg1) {
+s32 Pickup_ApplySpecialPickup(ObjRecV4 *arg0, ObjRecV9 *arg1) {
     f32 temp_f20;
     f32 loopBonus; 
     f32 old_unk11E4;
@@ -703,7 +703,7 @@ command_done:
    the action slot the powerup fills, the ammunition it grants and its pickup handler. */
 typedef struct PowerupEntry {
     u8 **text; /* 0x0: pickup message, one per language */
-    s16 id; /* 0x4: item id looked up by func_802AB6EC_de */
+    s16 id; /* 0x4: item id looked up by Pickup_DispatchHandler */
     s16 sound; /* 0x6 */
     s16 event; /* 0x8 */
     s16 reservedA; /* 0xA */
@@ -712,7 +712,7 @@ typedef struct PowerupEntry {
     s16 ammoCount; /* 0x10 */
     s32 (*handle)(struct Player *player, struct PowerupEntry *entry); /* 0x14 */
 } PowerupEntry;
-/* Team ids that may always pick up items (func_802AB400_de reads the same pair). */
+/* Team ids that may always pick up items (Pickup_CanCollect reads the same pair). */
 extern s32 D_800CE474[2];
 extern void Player_AddAmmo(void *, s16, s16);
 /* Pickup feedback: flash the player's view, post the entry's message in the current language,
@@ -769,7 +769,7 @@ s32 Pickup_HandlePowerWeaponPickup(struct Player *player, PowerupEntry *entry)
 extern f32 rodata_func_802ACB58_eu_800C6578, D_auto_800C657C;
 extern char D_002AD44C_eu[], D_002AD4FC_eu[];
 extern void ItemMenu_SetEntry();
-s32 func_802ACB98_eu_x(struct Player *player, PowerupEntry *pickup, void *obj) {
+s32 Pickup_ApplyEuropeanExtendedPowerup(struct Player *player, PowerupEntry *pickup, void *obj) {
     u8 **text = pickup->text;
     s16 sound = pickup->sound;
     s16 event = pickup->event;
@@ -790,7 +790,7 @@ s32 func_802ACB98_eu_x(struct Player *player, PowerupEntry *pickup, void *obj) {
     return 1;
 }
 #else
-INCLUDE_ASM("span_1000", func_802ACB98_eu_x);
+INCLUDE_ASM("span_1000", Pickup_ApplyEuropeanExtendedPowerup);
 #endif
 #endif
 
@@ -802,7 +802,7 @@ INCLUDE_ASM("span_1000", func_802ACB98_eu_x);
 extern f32 rodata_func_802ACB58_eu_800C6578, D_auto_800C657C;
 extern char D_002AD44C_eu[], D_002AD4FC_eu[];
 extern void ItemMenu_SetEntry();
-s32 func_802ACB58_eu(struct Player *player, PowerupEntry *pickup, void *obj) {
+s32 Pickup_ApplyEuropeanPowerup(struct Player *player, PowerupEntry *pickup, void *obj) {
     u8 **text = pickup->text;
     s16 sound = pickup->sound;
     s16 event = pickup->event;
@@ -823,6 +823,6 @@ s32 func_802ACB58_eu(struct Player *player, PowerupEntry *pickup, void *obj) {
     return 1;
 }
 #else
-INCLUDE_ASM("span_1000", func_802ACB58_eu);
+INCLUDE_ASM("span_1000", Pickup_ApplyEuropeanPowerup);
 #endif
 #endif

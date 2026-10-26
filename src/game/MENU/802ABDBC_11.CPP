@@ -10,7 +10,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 
-void *func_802AC91C_de(s32 arg0) {
+void *Pickup_FindPowerupEntry(s32 arg0) {
     char *v1;
     s32 i;
 
@@ -31,7 +31,7 @@ void *func_802AC91C_de(s32 arg0) {
 
 
 
-void *func_802AC950_de(s32 arg0) {
+void *Pickup_FindAmmoEntry(s32 arg0) {
     char *v1;
     s32 i;
 
@@ -52,7 +52,7 @@ void *func_802AC950_de(s32 arg0) {
 
 
 
-void *func_802AC984_de(s32 arg0) {
+void *Pickup_FindHealthEntry(s32 arg0) {
     char *v1;
     s32 i;
 
@@ -73,7 +73,7 @@ void *func_802AC984_de(s32 arg0) {
 
 
 
-void *func_802AC9B8_de(s32 arg0) {
+void *Pickup_FindSingleEntry(s32 arg0) {
     char *v1;
     s32 i;
 
@@ -94,7 +94,7 @@ void *func_802AC9B8_de(s32 arg0) {
 
 
 
-void *func_802AC9EC_de(s32 arg0) {
+void *Pickup_FindTargetedEntry(s32 arg0) {
     char *v1;
     s32 i;
 
@@ -115,7 +115,7 @@ void *func_802AC9EC_de(s32 arg0) {
 
 
 
-void *func_802ACA20_de(s32 arg0) {
+void *Pickup_FindSpecialEntry(s32 arg0) {
     char *v1;
     s32 i;
 
@@ -133,7 +133,7 @@ void *func_802ACA20_de(s32 arg0) {
 }
 
 extern int InstHdr_GetActorType(void *arg0);
-extern s32 func_802AB6EC_de(void *arg0, void *arg1, s32 arg2);
+extern s32 Pickup_DispatchHandler(void *arg0, void *arg1, s32 arg2);
 extern void SetN64_RecycleGlobalEffectNode(void *arg0);
 extern void Scene_SetLevelRecordStateBit(void *arg0, void *arg1, s32 arg2);
 extern void Link_DispatchObjectLinks(s32 arg0, s32 arg1, void *arg2);
@@ -142,7 +142,7 @@ extern void Link_DispatchObjectLinks(s32 arg0, s32 arg1, void *arg2);
 
 
 
-void func_802ACA54_de(void *arg0, void *arg1) {
+void Pickup_TryCollectActor(void *arg0, void *arg1) {
     u16 temp_v0;
     u16 temp_v1;
 
@@ -153,7 +153,7 @@ void func_802ACA54_de(void *arg0, void *arg1) {
         }
     } else if (!(temp_v1 & 1)) {
 block_4:
-        if (func_802AB6EC_de(arg0, arg1, InstHdr_GetActorType(arg1)) != 0) {
+        if (Pickup_DispatchHandler(arg0, arg1, InstHdr_GetActorType(arg1)) != 0) {
             temp_v0 = ((struct Shared_ProjectileView *)(arg1))->flags | 1;
             ((struct Shared_ProjectileView *)(arg1))->flags = temp_v0;
             if (temp_v0 & 8) {
@@ -174,7 +174,7 @@ extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg
 
 
 /** Apply an effect descriptor's optional setup, resource, sound, and callback. */
-s32 func_802ACB18_de(void *arg0, void *arg1) {
+s32 Pickup_ApplyAmmo(void *arg0, void *arg1) {
     void *resource;
     s32 sound;
     s32 callback;
@@ -186,12 +186,12 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
     resource = ((EntryRecAtE *)arg1)->resource;
     sound = ((struct EntryRecAtE *)(arg1))->sound;
     callback = ((struct EntryRecAtE *)(arg1))->callback;
-    if (((struct Actor_func_802AB400_de *)(arg0))->owner != 0) {
-        Sky_StartFade(((struct Actor_func_802AB400_de *)(arg0))->owner,
+    if (((struct ActorPickupCanCollect *)(arg0))->owner != 0) {
+        Sky_StartFade(((struct ActorPickupCanCollect *)(arg0))->owner,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&D_80145088,
-                          ((struct Actor_func_802AB400_de *)(arg0))->owner,
+                          ((struct ActorPickupCanCollect *)(arg0))->owner,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
                           ((void **)resource)[g_languageIndex]);
 #else
@@ -201,7 +201,7 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
     }
     if (sound != 0) {
         SoundElement_PlaySoundAtPosition(sound,
-                      ((Actor_func_802AB400_de *)arg0)->position, 0, -1);
+                      ((ActorPickupCanCollect *)arg0)->position, 0, -1);
     }
     if (callback != 0) {
         func_8025E11C_de(callback);
@@ -216,37 +216,37 @@ extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg
 
 
 /** Advance a timed effect and apply its optional resource, sound, and callback. */
-s32 func_802ACC04_de(void *arg0, void *arg1) {
+s32 Pickup_ApplyHealth(void *arg0, void *arg1) {
     s32 result;
     void *resource;
     s32 sound;
     s32 callback;
 
     result = 0;
-    if (((struct Actor_func_802AB400_de *)(arg0))->count > 0) {
+    if (((struct ActorPickupCanCollect *)(arg0))->count > 0) {
         s32 limit;
 
-        ((struct Actor_func_802AB400_de *)(arg0))->count +=
+        ((struct ActorPickupCanCollect *)(arg0))->count +=
             ((struct TimedItemEffect *)(arg1))->amount << 8;
         limit = Player_GetMaxHealth(arg0);
-        if (((struct Actor_func_802AB400_de *)(arg0))->count < limit) {
-            limit = ((struct Actor_func_802AB400_de *)(arg0))->count;
+        if (((struct ActorPickupCanCollect *)(arg0))->count < limit) {
+            limit = ((struct ActorPickupCanCollect *)(arg0))->count;
         }
         result = 1;
-        ((struct Actor_func_802AB400_de *)(arg0))->count = limit;
-        ((struct Actor_func_802AB400_de *)(arg0))->active = limit;
+        ((struct ActorPickupCanCollect *)(arg0))->count = limit;
+        ((struct ActorPickupCanCollect *)(arg0))->active = limit;
     }
 
     if (result != 0) {
         resource = ((EntryRecAtE *)arg1)->resource;
         sound = ((struct TimedItemEffect *)(arg1))->sound;
         callback = ((struct TimedItemEffect *)(arg1))->callback;
-        if (((struct Actor_func_802AB400_de *)(arg0))->owner != 0) {
-            Sky_StartFade(((struct Actor_func_802AB400_de *)(arg0))->owner,
+        if (((struct ActorPickupCanCollect *)(arg0))->owner != 0) {
+            Sky_StartFade(((struct ActorPickupCanCollect *)(arg0))->owner,
                           0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
             if (resource != 0) {
                 Camera_PostScreenMessage(&D_80145088,
-                              ((struct Actor_func_802AB400_de *)(arg0))->owner,
+                              ((struct ActorPickupCanCollect *)(arg0))->owner,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
                           ((void **)resource)[g_languageIndex]);
 #else
@@ -256,7 +256,7 @@ s32 func_802ACC04_de(void *arg0, void *arg1) {
         }
         if (sound != 0) {
             SoundElement_PlaySoundAtPosition(sound,
-                          ((Actor_func_802AB400_de *)arg0)->position, 0, -1);
+                          ((ActorPickupCanCollect *)arg0)->position, 0, -1);
         }
         if (callback != 0) {
             func_8025E11C_de(callback);
@@ -273,32 +273,32 @@ extern s32 SoundElement_PlaySoundAtPosition(s16 arg0, CVector3 position, s32 arg
 
 
 /** Apply an accumulating effect descriptor and its optional payloads. */
-s32 func_802ACD28_de(void *arg0, void *arg1) {
+s32 Pickup_ApplyLifePoints(void *arg0, void *arg1) {
     void *resource;
     s32 sound;
     s32 callback;
     s32 amount;
 
-    amount = ((struct Actor_func_802AB400_de *)(arg0))->fraction +
+    amount = ((struct ActorPickupCanCollect *)(arg0))->fraction +
              (u16)((struct EntryRecAtE *)(arg1))->index;
-    ((struct Actor_func_802AB400_de *)(arg0))->fraction = amount;
+    ((struct ActorPickupCanCollect *)(arg0))->fraction = amount;
     if ((s16)amount >= 100) {
-        ((struct Actor_func_802AB400_de *)(arg0))->fraction = amount - 100;
-        if (((struct Actor_func_802AB400_de *)(arg0))->lives < 9) {
-            ((struct Actor_func_802AB400_de *)(arg0))->lives =
-                (u16)((struct Actor_func_802AB400_de *)(arg0))->lives + 1;
+        ((struct ActorPickupCanCollect *)(arg0))->fraction = amount - 100;
+        if (((struct ActorPickupCanCollect *)(arg0))->lives < 9) {
+            ((struct ActorPickupCanCollect *)(arg0))->lives =
+                (u16)((struct ActorPickupCanCollect *)(arg0))->lives + 1;
         }
     }
 
     resource = ((EntryRecAtE *)arg1)->resource;
     sound = ((struct EntryRecAtE *)(arg1))->sound;
     callback = ((struct EntryRecAtE *)(arg1))->callback;
-    if (((struct Actor_func_802AB400_de *)(arg0))->owner != 0) {
-        Sky_StartFade(((struct Actor_func_802AB400_de *)(arg0))->owner,
+    if (((struct ActorPickupCanCollect *)(arg0))->owner != 0) {
+        Sky_StartFade(((struct ActorPickupCanCollect *)(arg0))->owner,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&D_80145088,
-                          ((struct Actor_func_802AB400_de *)(arg0))->owner,
+                          ((struct ActorPickupCanCollect *)(arg0))->owner,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
                           ((void **)resource)[g_languageIndex]);
 #else
@@ -308,7 +308,7 @@ s32 func_802ACD28_de(void *arg0, void *arg1) {
     }
     if (sound != 0) {
         SoundElement_PlaySoundAtPosition(sound,
-                      ((Actor_func_802AB400_de *)arg0)->position, 0, -1);
+                      ((ActorPickupCanCollect *)arg0)->position, 0, -1);
     }
     if (callback != 0) {
         func_8025E11C_de(callback);
@@ -368,7 +368,7 @@ struct RecCode80213ED480216BF4 {
 };
 
 /** Apply a scripted effect command and its optional sound callbacks. */
-s32 func_802ACE38_de(ActivationActor *arg0, ActivationSlot *arg1, func_802ADE28_S1 *arg2) {
+s32 Pickup_ApplyPowerup(ActivationActor *arg0, ActivationSlot *arg1, func_802ADE28_S1 *arg2) {
     void **resource;
     EffectAmount *state_value;
     s32 sound;

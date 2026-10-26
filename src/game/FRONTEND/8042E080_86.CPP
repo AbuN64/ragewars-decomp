@@ -16,7 +16,7 @@ extern Handler8043630C D_800E55D0;
 
 
 
-s32 func_8043612C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchConfirmationEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler8043630C *entry;
     s32 index;
     s32 wildcard;

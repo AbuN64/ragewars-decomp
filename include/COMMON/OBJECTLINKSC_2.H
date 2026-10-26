@@ -15,7 +15,7 @@ extern s32 D_80147150;
 
 
 
-extern f32 func_802AA864_de();
+extern f32 OnScreen_GetGlyphWidth();
 
 
 struct IntegerState48;

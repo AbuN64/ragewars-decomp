@@ -2,13 +2,13 @@
 #define COMMON_ROUND_STATE_VARIANTS_H
 #include "TYPES.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-extern void func_802954E0_us_rev1(void), func_80294F1C_us_rev1(void);
+extern void TextLoad_ResetArtsendTextureState(void), TEngine_UpdateArtsendTexturePreview(void);
 extern s32 D_800D2970;
 extern f32 D_800CA5C4, D_800C54D8_de;
 extern void func_802A2224_de(void), Tsmos_InitializeEuropeanFrontend(void), func_802A2374_eu_x(void), InitFrontendMenus(void);
 static inline void resetRoundExtra(void) {
 #if defined(VERSION_US_REV1)
-func_802954E0_us_rev1();
+TextLoad_ResetArtsendTextureState();
 #endif
 }
 static inline void clearRoundExtra(void) {

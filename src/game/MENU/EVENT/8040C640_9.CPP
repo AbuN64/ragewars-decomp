@@ -5,7 +5,7 @@
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 extern ResidentEventHandlerEntry D_800E54A8[];
 
-s32 func_80435C60_us(ActorDefinitionHeader *actor, s32 event, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchPakProfileEventUs(ActorDefinitionHeader *actor, s32 event, s32 arg2, s32 arg3, s32 arg4) {
     s32 index;
     index = 0;
     if (D_800E54A8[index].handler != 0) {

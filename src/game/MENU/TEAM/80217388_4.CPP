@@ -43,7 +43,7 @@ void TeamSelect_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *p
         y = viewport[3] + viewport[1] * 0.5f + item->position.y * 0.5f * viewport[1];
         alpha = item->width;
         if (item->icon != 0) {
-            func_802AA950_de(item->icon, 0, &width, &height);
+            OnScreen_GetImageDimensions(item->icon, 0, &width, &height);
             if (menu->m_Selected == item->slot) {
                 blue = red = Math_Cosf(menu->m_Glow) * 63.0f + 192.0f;
                 alpha = 1.0f;
@@ -55,7 +55,7 @@ void TeamSelect_DrawWeaponIcons(CBarrel *menu, Item *items, s32 count, Player *p
                 blue = red;
             }
             gDPSetEnvColor(g_displayListCursor++, red, green, blue, (u32)(alpha * fade));
-            func_802AAC28_de(item->icon, 0, x - width * item->height * scaleX * 0.5f,
+            OnScreen_DrawSpriteResource(item->icon, 0, x - width * item->height * scaleX * 0.5f,
                              y - height * item->height * scaleY * 0.5f,
                              scaleX * item->height, scaleY * item->height, 1);
         }

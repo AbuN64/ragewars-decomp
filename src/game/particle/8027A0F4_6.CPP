@@ -31,10 +31,10 @@ extern s32 D_801462C8;
 
 extern char D_8011AF78;
 
-void *func_80295F14_de(s32 *, s32);
-void func_80295F78_de(void *, struct Shared_AnimInfo *);
+void *TextLoad_RequestTextureVariation(s32 *, s32);
+void TextLoad_ReadTextureAnimationInfo(void *, struct Shared_AnimInfo *);
 #if defined(VERSION_US_REV1)
-void func_80295FB4_us_rev1(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
+void TextLoad_LoadTextureFrameTiles(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #else
 void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
@@ -119,7 +119,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
     if (particle->time < 0.0f) {
         return;
     }
-    model = func_80295F14_de(&particle->model, -1);
+    model = TextLoad_RequestTextureVariation(&particle->model, -1);
     if (model == 0) {
         return;
     }
@@ -171,7 +171,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
     }
 
     mode = func_8027ED6C_de_mode(particle);
-    func_80295F78_de(model, &info);
+    TextLoad_ReadTextureAnimationInfo(model, &info);
     frame = particle->frame;
     time = particle->time;
     switch (desc->playback) {
@@ -249,7 +249,7 @@ void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view) {
     shiftS = 1 << (((desc->flags & 0x100) ? 7 : 6) + info.frame->shiftS);
     shiftT = 1 << (((desc->flags & 0x200) ? 7 : 6) + info.frame->shiftT);
 #if defined(VERSION_US_REV1)
-    func_80295FB4_us_rev1(&particle->model, model, frame, 0, shiftS, shiftT, 1, 1, 0);
+    TextLoad_LoadTextureFrameTiles(&particle->model, model, frame, 0, shiftS, shiftT, 1, 1, 0);
 #else
     func_802950B4_de(&particle->model, model, frame, 0, shiftS, shiftT, 1, 1, 0);
 #endif

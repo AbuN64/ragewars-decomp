@@ -7,7 +7,7 @@
 extern void Tsmos_RequestFrontendShutdown();
 extern void func_8025E384_de();
 
-s32 func_80435C70_de(void *first, void *second, u32 event, s32 value) {
+s32 Frontend_ResumeMatchOnInput(void *first, void *second, u32 event, s32 value) {
     if ((event >> 16) == 3) {
         if (value != 0xD) {
             return 0;

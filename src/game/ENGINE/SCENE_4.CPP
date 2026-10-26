@@ -151,8 +151,8 @@ extern s32 D_800CD730;
 extern Shared_func_80234FDC_S1 *Sky_FindScreenMessage(GameplayCamera *camera);
 extern void Cache_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
 extern void Cache_UnlockResource(void *heap, struct Node80253610 *resource);
-extern s32 func_80296390_de(void *grid, s32 x, s32 z, s32 index);
-extern s32 func_80296B74_de(void *planes, void *bounds);
+extern s32 VisData_TestVisibilityGridBit(void *grid, s32 x, s32 z, s32 index);
+extern s32 VisData_TestBoxAgainstFrustum(void *planes, void *bounds);
 extern void StaticInstance_RegisterGeometryResources(CGameStaticInstance_t *prop, GameplayCamera *camera);
 extern s32 StaticInstance_UpdateDistanceFade(CGameStaticInstance_t *prop, GameplayCamera *camera);
 extern void StaticInstance_DrawDistanceFadedModel(CGameStaticInstance_t *prop, GameplayCamera *camera);
@@ -260,13 +260,13 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
                 }
             }
             if (scene->m_bVisibilityValid != 0 &&
-                func_80296390_de(scene->m_VisData, sector->gridSectionX, sector->gridSectionZ, i) == 0) {
+                VisData_TestVisibilityGridBit(scene->m_VisData, sector->gridSectionX, sector->gridSectionZ, i) == 0) {
                 continue;
             }
             if (camera->clipBounds[1].x > prop->m_Bounds.min.x && camera->clipBounds[0].x < prop->m_Bounds.max.x &&
                 camera->clipBounds[1].z > prop->m_Bounds.min.z && camera->clipBounds[0].z < prop->m_Bounds.max.z &&
                 camera->clipBounds[1].y > prop->m_Bounds.min.y && camera->clipBounds[0].y < prop->m_Bounds.max.y &&
-                func_80296B74_de(camera->clipPlanes, &prop->m_Bounds)) {
+                VisData_TestBoxAgainstFrustum(camera->clipPlanes, &prop->m_Bounds)) {
                 if ((prop->m_wFlags & 8) && !queued && (prop->m_nObjType != shipModel || showShip)) {
                     if (scene->m_nStaticEventsInstances != 64) {
                         scene->m_pStaticEventsInstances[scene->m_nStaticEventsInstances++] = prop;
@@ -298,7 +298,7 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
                 camera->clipBounds[1].x > statics[i].m_Bounds.min.x && camera->clipBounds[0].x < statics[i].m_Bounds.max.x &&
                 camera->clipBounds[1].z > statics[i].m_Bounds.min.z && camera->clipBounds[0].z < statics[i].m_Bounds.max.z &&
                 camera->clipBounds[1].y > statics[i].m_Bounds.min.y && camera->clipBounds[0].y < statics[i].m_Bounds.max.y &&
-                (statics[i].m_wFlags & 2) && func_80296B74_de(camera->clipPlanes, &statics[i].m_Bounds)) {
+                (statics[i].m_wFlags & 2) && VisData_TestBoxAgainstFrustum(camera->clipPlanes, &statics[i].m_Bounds)) {
                 if (statics[i].m_wFlags & 0x20) {
                     if (scene->m_nTransparentInstances != 64) {
                         scene->m_pTransparentInstances[scene->m_nTransparentInstances++] = &statics[i];

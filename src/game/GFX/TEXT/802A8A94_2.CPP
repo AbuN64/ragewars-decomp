@@ -30,7 +30,7 @@ static inline f32 fontGlyphWidth(void)
     return result;
 }
 
-void func_802A88F0_de(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow, s32 alpha, s32 language)
+void OnScreen_DrawTextGlyphs(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow, s32 alpha, s32 language)
 {
     FontStyle *style = &D_801376F8;
     Node80253610 *font;

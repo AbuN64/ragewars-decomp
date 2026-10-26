@@ -9,7 +9,7 @@
 
 
 
-int func_80435184_de(int player) {
+int PAKInterface_AreProfileSlotsEmpty(int player) {
     int result;
     int i;
 

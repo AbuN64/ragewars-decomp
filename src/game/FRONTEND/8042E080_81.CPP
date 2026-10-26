@@ -7,7 +7,7 @@
 extern void *D_800E5554;
 
 
-s32 func_80435EBC_de(void) {
+s32 Frontend_DestroyPauseConfirmation(void) {
     Cache_FreeMemory(D_800E5554);
     D_800E5554 = 0;
     Tsmos_SetModeOneFlag(2);

@@ -8,17 +8,17 @@
 
 
 
-s32 func_802B9B20_de(s32 arg0, s32 *arg1) {
+s32 func_802B9B20_de(s32 deviceOffset, s32 *outputWord) {
     u32 status;
 
-    if (arg1 == 0) {
+    if (outputWord == 0) {
         Audio_Assert(&D_800C7970_de, &s_pirawreadText, 0x3D);
     }
     status = *(volatile u32 *)0xA4600010;
     while (status & 3) {
         status = *(volatile u32 *)0xA4600010;
     }
-    *arg1 = *(s32 *)(D_80000308 | arg0 | 0xA0000000);
+    *outputWord = *(s32 *)(D_80000308 | deviceOffset | 0xA0000000);
     return 0;
 }
 

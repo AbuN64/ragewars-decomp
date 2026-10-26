@@ -112,7 +112,7 @@ static inline s32 func_80297AD4_anyInside(CVector3 *points, s32 count, f32 *plan
 }
 
 /* Reports what occupies the board cell at the given coordinates, or nothing when it is out of reach. */
-s32 func_802962A8_de(ResourceBitGrid *arg0, s32 arg1, s32 arg2) {
+s32 VisData_GetVisibilityCellState(ResourceBitGrid *arg0, s32 arg1, s32 arg2) {
     s32 col;
     s32 row;
     s16 cell;
@@ -137,10 +137,10 @@ s32 func_802962A8_de(ResourceBitGrid *arg0, s32 arg1, s32 arg2) {
     return 2;
 }
 
-int func_80296390_de(ResourceBitGrid *g,int x,int y,int z){
+int VisData_TestVisibilityGridBit(ResourceBitGrid *g,int x,int y,int z){
     int v; unsigned int adjusted;if(!(RW_ABS(x-g->originX)<9 && RW_ABS(y-g->originY)<9))return 0;v=g->cells[(x-g->originX)+8+((y-g->originY)+8)*17];if(v==-2)return 1;if(v==-3)return 0;adjusted=z+9;g->reader.bitPos=v+adjusted;return func_80263154_de(&g->reader,1)!=0;}
 
-void func_80296474_de(ResourceBitGrid *arg0, s32 x, s32 y)
+void VisData_SelectVisibilityCell(ResourceBitGrid *arg0, s32 x, s32 y)
 {
     if (RW_ABS(x - arg0->originX) >= 9) {
         return;
@@ -173,7 +173,7 @@ void func_80296474_de(ResourceBitGrid *arg0, s32 x, s32 y)
     }
 }
 
-s32 func_80296578_de(ResourceBitGrid *arg0) {
+s32 VisData_ReadNextVisibilityBit(ResourceBitGrid *arg0) {
     s32 field;
     field = arg0->cellState;
     if (field != 2) {
@@ -182,7 +182,7 @@ s32 func_80296578_de(ResourceBitGrid *arg0) {
     return func_80263154_de(&arg0->reader, 1) != 0;
 }
 
-void func_802965B0_de(PlaneEquation *planes, CVector3 *eye, CVector3 *c0, CVector3 *c1, CVector3 *c2, CVector3 *c3) {
+void VisData_BuildFrustumPlanes(PlaneEquation *planes, CVector3 *eye, CVector3 *c0, CVector3 *c1, CVector3 *c2, CVector3 *c3) {
     make_plane(&planes[2], c0, c1, c3, c0);
     make_plane(&planes[0], eye, c0, c2, eye);
     make_plane(&planes[1], eye, c3, c1, eye);
@@ -194,7 +194,7 @@ void func_802965B0_de(PlaneEquation *planes, CVector3 *eye, CVector3 *c0, CVecto
     planes[5].distance = planes[5].normal.x * eye->x + planes[5].normal.y * eye->y + planes[5].normal.z * eye->z;
 }
 
-void func_80296878_de(void *planeEquation, void *arg1, void *arg2, void *arg3) {
+void VisData_BuildPlaneFromPoints(void *planeEquation, void *arg1, void *arg2, void *arg3) {
     PlaneEquation *plane = planeEquation;
     CVector3 *point = arg1;
     CVector3 sp10;
@@ -208,7 +208,7 @@ void func_80296878_de(void *planeEquation, void *arg1, void *arg2, void *arg3) {
                                   + (plane->normal.z * point->z);
 }
 
-f32 func_80296930_de(f32 *arg0, f32 *arg1, f32 *arg2) {
+f32 VisData_GetPlaneSegmentFraction(f32 *arg0, f32 *arg1, f32 *arg2) {
     f32 x;
     f32 y;
     f32 z;
@@ -226,12 +226,12 @@ f32 func_80296930_de(f32 *arg0, f32 *arg1, f32 *arg2) {
     return (arg0[3] - dot1) / (dot2 - dot1);
 }
 
-f32 func_802969B0_de(f32 *a, f32 *b) {
+f32 VisData_EvaluatePlaneAtPoint(f32 *a, f32 *b) {
     return (a[0] * b[0] + a[1] * b[1] + a[2] * b[2]) - a[3];
 }
 
-/* Returns whether a point lies on the inner side of all six planes of a frustum, each stored as a normal and a distance. Adapted from func_80296B74_de with the per-axis box minimum replaced by the point's dot product with each plane normal, tested directly in the loop. */
-s32 func_802969E8_de(f32 (*planes)[4], f32 *point) {
+/* Returns whether a point lies on the inner side of all six planes of a frustum, each stored as a normal and a distance. Adapted from VisData_TestBoxAgainstFrustum with the per-axis box minimum replaced by the point's dot product with each plane normal, tested directly in the loop. */
+s32 VisData_ContainsPoint(f32 (*planes)[4], f32 *point) {
     s32 i;
     f32 *plane;
 
@@ -250,7 +250,7 @@ s32 func_802969E8_de(f32 (*planes)[4], f32 *point) {
 
 
 
-s32 func_80296A48_de(CQuatern *planes, s32 n, CVector3 *points) {
+s32 VisData_TestPointsAgainstFrustum(CQuatern *planes, s32 n, CVector3 *points) {
     s32 i;
     s32 j;
     s32 inside;
@@ -271,7 +271,7 @@ s32 func_80296A48_de(CQuatern *planes, s32 n, CVector3 *points) {
 }
 
 /* Returns 1 when every frustum plane except plane two has at least one of the points on its inner side. */
-s32 func_80296AD4_de(Frustum *frustum, s32 count, CVector3 *points) {
+s32 VisData_TestPointsAgainstFivePlanes(Frustum *frustum, s32 count, CVector3 *points) {
     s32 p;
     f32 *plane;
 
@@ -287,9 +287,9 @@ s32 func_80296AD4_de(Frustum *frustum, s32 count, CVector3 *points) {
     return 1;
 }
 
-/* Tests a box against six planes, returning 1 when for every plane the sum of the per-axis minimum products does not exceed the plane distance, else 0. Adapted from func_80296C30_de, with its body inlined into a loop over six four-float planes and the loop-invariant product computed first. */
+/* Tests a box against six planes, returning 1 when for every plane the sum of the per-axis minimum products does not exceed the plane distance, else 0. Adapted from VisData_TestBoxAgainstPlane, with its body inlined into a loop over six four-float planes and the loop-invariant product computed first. */
 
-s32 func_80296B74_de(f32 (*arg0)[4], f32 *arg1) {
+s32 VisData_TestBoxAgainstFrustum(f32 (*arg0)[4], f32 *arg1) {
     s32 i;
     s32 inside;
     f32 *plane;
@@ -335,7 +335,7 @@ s32 func_80296B74_de(f32 (*arg0)[4], f32 *arg1) {
     return 1;
 }
 
-s32 func_80296C30_de(f32 *arg0, f32 *arg1) {
+s32 VisData_TestBoxAgainstPlane(f32 *arg0, f32 *arg1) {
     f32 temp_f0;
     f32 temp_f0_2;
     f32 temp_f0_3;

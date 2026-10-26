@@ -27,19 +27,19 @@ typedef struct ResidentEntry ResidentEntry;
 
 
 
-struct Selection_func_802955EC_us_rev1;
+struct SelectionTextLoadApplyArtsendTextureOverride;
 
 
 
-extern void func_80294F1C_us_rev1();
+extern void TEngine_UpdateArtsendTexturePreview();
 
 
 extern ResidentState D_8014AEB8;
 
 
 
-struct Selection_func_802955EC_us_rev1;
-typedef struct Selection_func_802955EC_us_rev1 Selection_func_802955EC_us_rev1;
+struct SelectionTextLoadApplyArtsendTextureOverride;
+typedef struct SelectionTextLoadApplyArtsendTextureOverride SelectionTextLoadApplyArtsendTextureOverride;
 
 
 struct AnimationInfo;
@@ -53,7 +53,7 @@ struct AnimationInfo;
 
 
 struct ResourceData80295B84;
-extern void func_80294C8C_de(s32 index, struct ResourceData80295B84 *resource);
+extern void TextLoad_PrepareTextureVariation(s32 index, struct ResourceData80295B84 *resource);
 
 extern s32 D_auto_800D2AE8;
 
@@ -75,8 +75,8 @@ extern s32 D_auto_800D2AFC;
 
 
 
-extern void func_802955EC_us_rev1(s32 resource, s32 **data);
-extern void func_802956AC_us_rev1(s32 resource, s32 **data);
+extern void TextLoad_ApplyArtsendTextureOverride(s32 resource, s32 **data);
+extern void TextLoad_ApplyArtsendPaletteOverride(s32 resource, s32 **data);
 extern s32 D_8014D070;
 extern s32 D_8014D074;
 extern s32 D_8014D078;

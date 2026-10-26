@@ -18,7 +18,7 @@ typedef struct {
 } Resource;
 
 /* Recolours the RGBA5551 frames of a resource by the global or per-resource colour mode, then rebuilds it as a three-part block holding the header, one selected entry of list 1 and one of list 2. */
-void func_80294C8C_de(s32 arg0, Resource *handle) {
+void TextLoad_PrepareTextureVariation(s32 arg0, Resource *handle) {
     u32 size;
     s32 rem1;
     s32 rem2;

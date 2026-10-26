@@ -13,7 +13,7 @@ extern s32 Pak_Crc32(void *, s32, s32);
 
 
 
-void func_8043542C_de(s32 index) {
+void PAKInterface_BuildSavePacket(s32 index) {
     s32 offset = index * 2920;
     char *recordTemplate = (char *)&D_800E54A4->packet;
 

@@ -42,7 +42,7 @@ extern void PAKInterface_RelabelSlotRows(s32);
 
 extern s32 func_80405290_de(s32);
 
-s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
+s32 PAKInterface_ActivatePlayerPanelAction(s32 unused0, s32 unused1, s32 arg2) {
     s32 answer;
     s32 i;
     s32 j;
@@ -236,8 +236,8 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                     }
                     break;
                 case 7:
-                    func_8043599C_de(p, 0, 0);
-                    func_804356BC_de(0);
+                    Frontend_SetPlayerProfileLink(p, 0, 0);
+                    PAKInterface_LoadLinkedPlayerProfile(0);
                     MarkMenuEventHandled();
                     PAKInterface_BeginScreenExit(9);
                     return 0;
@@ -641,7 +641,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             break;
         case 3:
             if (D_800E54A4->players[p].used[i] == 1) {
-                func_8043599C_de(p, i, 0);
+                Frontend_SetPlayerProfileLink(p, i, 0);
                 D_800E54A4->players[p].choice = i;
                 D_800E54A4->players[p].state = 0x1B;
                 PAKInterface_RefreshPlayerPanel(p);
@@ -658,8 +658,8 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 break;
             case 7:
                 if (D_800E54A4->players[p].used[i] == 1) {
-                    func_8043599C_de(p, i, 0);
-                    func_804356BC_de(0);
+                    Frontend_SetPlayerProfileLink(p, i, 0);
+                    PAKInterface_LoadLinkedPlayerProfile(0);
                     MarkMenuEventHandled();
                     PAKInterface_BeginScreenExit(9);
                     return 0;
@@ -730,8 +730,8 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             PAKInterface_BeginScreenExit(3);
             return 0;
         }
-        func_8043599C_de(p, D_800E54A4->players[p].choice, i);
-        func_804356BC_de(i);
+        Frontend_SetPlayerProfileLink(p, D_800E54A4->players[p].choice, i);
+        PAKInterface_LoadLinkedPlayerProfile(i);
 #if defined(VERSION_DE)
         Frontend_SetWidgetFlag08(Frontend_FindWidgetByResourceId((void*)D_800E54A4->players[p].notes[D_800E54A4->players[p].choice], 0x2C9), 1);
 #elif defined(VERSION_EU_X)

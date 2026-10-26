@@ -16,7 +16,7 @@ extern s32 Smp_UpdateRibbonLifetime(s32 arg0, State802A6DF8 *state);
 
 extern f32 D_800D2988;
 
-extern void func_80295E84_de(s32 *arg0, s32 arg1);
+extern void TextLoad_LocateTextureResource(s32 *arg0, s32 arg1);
 
 extern void Particle_EncodeRenderLayer(void *arg0, s32 *arg1);
 
@@ -154,7 +154,7 @@ void Fx_ResolveEntryResource(void *unused, void *arg1, void *arg2) {
     field34 = entry->unk34;
     if (field34 != -1) {
         p = &entry->unk14;
-        func_80295E84_de(p, field34);
+        TextLoad_LocateTextureResource(p, field34);
         if (arg2 != 0) {
             Particle_EncodeRenderLayer(arg2, p);
         }

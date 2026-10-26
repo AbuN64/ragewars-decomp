@@ -137,15 +137,15 @@ struct Char {
 struct Char;
 
 
-struct Record_func_804347CC_de;
-struct Record_func_804347CC_de {
+struct RecordPAKInterfaceReassignLocalProfiles;
+struct RecordPAKInterfaceReassignLocalProfiles {
     char pad0[0xD];
     s8 owner;
     char padE[400 - 0xE];
 };
 
 
-struct Record_func_804347CC_de;
+struct RecordPAKInterfaceReassignLocalProfiles;
 
 extern char *D_800E25A4[];
 

@@ -1,8 +1,8 @@
 #include "include_asm.h"
 #include "sdk/OBJECTSTATE2.H"
 
-unsigned short func_802AD270_de(float arg0) {
-    return *(unsigned short *)&arg0;
+unsigned short func_802AD270_de(float value) {
+    return *(unsigned short *)&value;
 }
 
 #if defined(VERSION_EU)

@@ -149,7 +149,7 @@ void ItemMenu_DrawEntries(ToggleMenu *panel, Input_func_802A65E0_de *player) {
             magnitude = -magnitude;
         }
         if (slot->active && (slot->on || magnitude != 0)) {
-            func_802AA950_de(slot->image, slot->imageFrame, &width, &height);
+            OnScreen_GetImageDimensions(slot->image, slot->imageFrame, &width, &height);
             if (width != 0) {
                 opacity = (magnitude != slot->bounce ? (f32)magnitude : (f32)(5-magnitude)) * fadeStep;
                 row = n;
@@ -160,7 +160,7 @@ void ItemMenu_DrawEntries(ToggleMenu *panel, Input_func_802A65E0_de *player) {
                 x = view[2] + view[0]*unit + ((origin - (f32)(n-row*4)*grid)+spacing)*unit*view[0];
                 y = view[3] + view[1]*unit + (origin - (f32)(row))*unit*view[1];
                 gDPSetEnvColor(g_displayListCursor++, r, g, b, opacity*colorScale);
-                func_802AAC28_de(slot->image, slot->imageFrame,
+                OnScreen_DrawSpriteResource(slot->image, slot->imageFrame,
                 (s16)(s32)(x-(f32)width*sx*unit),
                 (s16)(s32)(y-(f32)height*sy*unit), sx, sy, 1);
                 if (magnitude != slot->bounce && opacity < grid) {
@@ -181,7 +181,7 @@ void ItemMenu_DrawEntries(ToggleMenu *panel, Input_func_802A65E0_de *player) {
         for (i = 0; i < 4; i++) {
             slot = &panel->items[i];
             if (slot->active) {
-                func_802AA950_de(slot->image, slot->imageFrame, &width, &height);
+                OnScreen_GetImageDimensions(slot->image, slot->imageFrame, &width, &height);
                 if (width != 0) {
                     row = n;
                     if (n < 0) {
@@ -205,7 +205,7 @@ void ItemMenu_DrawEntries(ToggleMenu *panel, Input_func_802A65E0_de *player) {
                     }
                     gDPSetEnvColor(g_displayListCursor++, r, g, b, opacity*colorScale);
                     n++;
-                    func_802AAC28_de(slot->image, slot->imageFrame,
+                    OnScreen_DrawSpriteResource(slot->image, slot->imageFrame,
                     (s16)(s32)(x-(f32)width*sx*unit),
                     (s16)(s32)(y-(f32)height*sy*unit), sx, sy, 1);
                 }

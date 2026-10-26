@@ -254,7 +254,7 @@ void func_80227038_de(s8 *world) {
                                     scaled5y = allPlayersViewHeight * banner_half;
                                     allPlayersScaleX = allPlayersViewWidth / (f32) D_800E28D0;
                                     allPlayersScaleY = allPlayersViewHeight / (f32) D_800E28D4;
-                                    func_802AAC28_de(0x1FB, 0, (s16) (s32) ((allPlayersView->unk2A4 + scaled5x) - (allPlayersScaleX * banner_size)), (s16) (s32) ((allPlayersView->unk2A8 + scaled5y) - (allPlayersScaleY * banner_size)), allPlayersScaleX, allPlayersScaleY, 1);
+                                    OnScreen_DrawSpriteResource(0x1FB, 0, (s16) (s32) ((allPlayersView->unk2A4 + scaled5x) - (allPlayersScaleX * banner_size)), (s16) (s32) ((allPlayersView->unk2A8 + scaled5y) - (allPlayersScaleY * banner_size)), allPlayersScaleX, allPlayersScaleY, 1);
                                 }
                                 player->unk5D8->unk8F = 1;
                                 switch (D_80142850) {
@@ -322,7 +322,7 @@ void func_80227038_de(s8 *world) {
                     scaled_x = rotatingViewWidth * D_800C2BA8_de;
                     scaled_y = rotatingViewHeight * D_800C2BA8_de;
                     rotatingScaleY = rotatingViewHeight / (f32) D_800E28D4;
-                    func_802AAC28_de(0x1FB, 0, (s16) (s32) ((rotatingView->unk2A4 + scaled_x) - ((rotatingViewWidth / (f32) D_800E28D0) * D_800C2BAC_de)), (s16) (s32) ((rotatingView->unk2A8 + scaled_y) - (rotatingScaleY * D_800C2BAC_de)), (rotatingViewWidth / (f32) D_800E28D0), rotatingScaleY, 1);
+                    OnScreen_DrawSpriteResource(0x1FB, 0, (s16) (s32) ((rotatingView->unk2A4 + scaled_x) - ((rotatingViewWidth / (f32) D_800E28D0) * D_800C2BAC_de)), (s16) (s32) ((rotatingView->unk2A8 + scaled_y) - (rotatingScaleY * D_800C2BAC_de)), (rotatingViewWidth / (f32) D_800E28D0), rotatingScaleY, 1);
                 }
                 rules = &D_801462C8.counters;
                 nextRotatingPosition = rules->m_FragTagPlayerPos + 1;
@@ -403,7 +403,7 @@ void func_80227038_de(s8 *world) {
                     scaled_x4 = chosenViewWidth * D_800C2BB0_de;
                     scaled_y4 = chosenViewHeight * D_800C2BB0_de;
                     chosenScaleY = chosenViewHeight / (f32) D_800E28D4;
-                    func_802AAC28_de(0x1FB, 0, (s16) (s32) ((chosenView->unk2A4 + scaled_x4) - ((chosenViewWidth / (f32) D_800E28D0) * D_800C2BB4_de)), (s16) (s32) ((chosenView->unk2A8 + scaled_y4) - (chosenScaleY * D_800C2BB4_de)), (chosenViewWidth / (f32) D_800E28D0), chosenScaleY, 1);
+                    OnScreen_DrawSpriteResource(0x1FB, 0, (s16) (s32) ((chosenView->unk2A4 + scaled_x4) - ((chosenViewWidth / (f32) D_800E28D0) * D_800C2BB4_de)), (s16) (s32) ((chosenView->unk2A8 + scaled_y4) - (chosenScaleY * D_800C2BB4_de)), (chosenViewWidth / (f32) D_800E28D0), chosenScaleY, 1);
                 }
                 rules = &D_801462C8.counters;
                 nextChosenPosition = rules->m_FragTagPlayerPos + 1;
@@ -492,7 +492,7 @@ void func_80227038_de(s8 *world) {
                                     scaled6y = flippedViewHeight * banner_half;
                                     flippedScaleX = flippedViewWidth / (f32) D_800E28D0;
                                     flippedScaleY = flippedViewHeight / (f32) D_800E28D4;
-                                    func_802AAC28_de(0x1FB, 0, (s16) (s32) ((flippedView->unk2A4 + scaled6x) - (flippedScaleX * banner_size)), (s16) (s32) ((flippedView->unk2A8 + scaled6y) - (flippedScaleY * banner_size)), flippedScaleX, flippedScaleY, 1);
+                                    OnScreen_DrawSpriteResource(0x1FB, 0, (s16) (s32) ((flippedView->unk2A4 + scaled6x) - (flippedScaleX * banner_size)), (s16) (s32) ((flippedView->unk2A8 + scaled6y) - (flippedScaleY * banner_size)), flippedScaleX, flippedScaleY, 1);
                                 }
                                 flippedPlayer->unk5D8->unk8F = 1U;
                                 switch (D_80142850) {

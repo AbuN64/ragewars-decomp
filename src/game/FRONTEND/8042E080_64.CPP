@@ -10,7 +10,7 @@
 
 
 
-void func_8043599C_de(s32 first, s32 second, s32 index) {
+void Frontend_SetPlayerProfileLink(s32 first, s32 second, s32 index) {
     D_800E54A4->links[index].player = first;
     D_800E54A4->links[index].entry = second;
     D_800E54A4->links[index].state = 1;

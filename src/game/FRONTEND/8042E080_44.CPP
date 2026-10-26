@@ -9,7 +9,7 @@
 
 
 
-void func_804350CC_de(s32 index) {
+void PAKInterface_EnablePlayerPanel(s32 index) {
     struct EntryRecAt6C *entry;
 
     D_801462C8.playerSettings[index].enabled = 1;

@@ -13,7 +13,7 @@ extern f32 InstHdr_GetActorBaseOffset(void *);
 extern f32 GameObject_GetActorHeight(void *);
 extern void func_80242550_de(void *, void *);
 extern void func_80242288_de(void *, void *);
-extern s32 func_802AB400_de(void *, void *);
+extern s32 Pickup_CanCollect(void *, void *);
 extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 extern s32 func_8023E8D4_de(void *, void *, s32);
 extern s32 func_8023E178_de(void *, CVector3 *, f32, f32, f32, s32, void *, s32);
@@ -76,7 +76,7 @@ void InstCol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelAc
         return;
     }
     if (entity->kind == 3) {
-        if (func_802AB400_de(entity, owner) == 0) {
+        if (Pickup_CanCollect(entity, owner) == 0) {
             return;
         }
         special = 1;

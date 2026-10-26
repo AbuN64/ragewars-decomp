@@ -13,16 +13,16 @@ void *func_802BA640_de(void) {
 
 extern void *D_800D4414;
 
-void func_802BA650_de(s32 arg0, s32 arg1, s16 arg2) {
-    u32 temp_v0;
+void func_802BA650_de(s32 messageQueue, s32 retraceMessage, s16 retraceInterval) {
+    u32 savedInterruptMask;
     RecCode802BA23C *rec;
 
-    temp_v0 = __osDisableInt();
+    savedInterruptMask = __osDisableInt();
     rec = D_800D4414;
-    rec->f10 = arg0;
-    rec->f14 = arg1;
-    rec->f2 = arg2;
-    __osRestoreInt(temp_v0);
+    rec->f10 = messageQueue;
+    rec->f14 = retraceMessage;
+    rec->f2 = retraceInterval;
+    __osRestoreInt(savedInterruptMask);
 }
 
 #if defined(VERSION_US)

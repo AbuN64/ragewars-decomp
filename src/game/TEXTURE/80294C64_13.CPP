@@ -14,7 +14,7 @@ extern void Cache_MarkResourceInUse(s32 heap, void **resource);
 extern Gfx D_800D0FA0[], D_800D1020[], D_800D10A0[], D_800D1138[], D_800D11D0[];
 
 
-void func_80295FB4_us_rev1(s32 *output, void **resource, s32 frame, s32 secondary, s32 scaleS, s32 scaleT, s32 wrapS, s32 wrapT, s32 mode) {
+void TextLoad_LoadTextureFrameTiles(s32 *output, void **resource, s32 frame, s32 secondary, s32 scaleS, s32 scaleT, s32 wrapS, s32 wrapT, s32 mode) {
     s32 *texture;
     s32 *palette;
     void *header;
@@ -59,8 +59,8 @@ void func_80295FB4_us_rev1(s32 *output, void **resource, s32 frame, s32 secondar
         if (!(wrapT & G_TX_CLAMP)) {
             maskT = info[3];
         }
-        func_802955EC_us_rev1((s32)resource, &texture);
-        func_802956AC_us_rev1((s32)resource, &palette);
+        TextLoad_ApplyArtsendTextureOverride((s32)resource, &texture);
+        TextLoad_ApplyArtsendPaletteOverride((s32)resource, &palette);
         switch (info[0]) {
         case 0:
             if (changed) {

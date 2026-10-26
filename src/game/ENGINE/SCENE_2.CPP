@@ -270,7 +270,7 @@ extern s32 func_8024D160_de(void *actor);
 extern s32 func_8024E1B4_de(void *actor);
 extern void func_8024B8C4_de(void *actor);
 extern f32 Sky_GetDistanceTo(void *camera, CVector3 *position);
-extern s32 func_80296B74_de(void *planes, void *bounds);
+extern s32 VisData_TestBoxAgainstFrustum(void *planes, void *bounds);
 extern void AnimPool_UpdateSceneEffects(struct SceneEffectPool *scene, void *world);
 
 typedef struct SceneVisibilitySettings {
@@ -340,7 +340,7 @@ void Scene_UpdateActorVisibility(Shared_World *world) {
                 if (!func_8024D160_de(actor)) {
                     if (ACTOR_OVERLAPS(actor, clipBox)) {
                         if (camera != 0) {
-                            visible = func_80296B74_de(camera->clipPlanes, &actor->bounds);
+                            visible = VisData_TestBoxAgainstFrustum(camera->clipPlanes, &actor->bounds);
                         } else {
                             visible = 1;
                         }

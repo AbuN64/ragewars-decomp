@@ -6,9 +6,9 @@
 #include "TYPES.H"
 #include "sdk/libgultra/part_800C7F20/seqplayer.h"
 
-void *__mapVoice(void *arg0, s8 arg1, s8 arg2, s8 arg3) {
+void *__mapVoice(void *sequencePlayer, s8 noteKey, s8 noteVelocity, s8 midiChannel) {
     ALVoiceState *node;
-    ALSeqPlayer88 *player = arg0;
+    ALSeqPlayer88 *player = sequencePlayer;
     ALVoiceState *next;
     ALVoiceState *tail;
 
@@ -24,32 +24,32 @@ void *__mapVoice(void *arg0, s8 arg1, s8 arg2, s8 arg3) {
             tail->next = node;
         }
         player->vAllocTail = node;
-        node->channel = arg3;
-        node->key = arg1;
-        node->velocity = arg2;
+        node->channel = midiChannel;
+        node->key = noteKey;
+        node->velocity = noteVelocity;
         node->voice.clientPrivate = node;
     }
     return node;
 }
 
-void func_802B156C_de(List802B663C *arg0, void *arg1) {
+void func_802B156C_de(List802B663C *voicePool, void *voice) {
     Node_func_80239AF4_de *node;
     Node_func_80239AF4_de *prev;
 
     prev = 0;
-    node = arg0->head;
+    node = voicePool->head;
     while (node != 0) {
-        if ((void *)(node + 1) == arg1) {
+        if ((void *)(node + 1) == voice) {
             if (prev != 0) {
                 prev->next = node->next;
             } else {
-                arg0->head = node->next;
+                voicePool->head = node->next;
             }
-            if (node == arg0->tail) {
-                arg0->tail = prev;
+            if (node == voicePool->tail) {
+                voicePool->tail = prev;
             }
-            node->next = arg0->free;
-            arg0->free = node;
+            node->next = voicePool->free;
+            voicePool->free = node;
             return;
         }
         prev = node;

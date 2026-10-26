@@ -745,7 +745,7 @@ typedef struct PowerHudPlayer {
 } PowerHudPlayer;
 extern s32 Frontend_GetScreenMode(void);
 extern s32 func_8022AB9C_de(void *);
-extern s32 func_802AA70C_de(void *,s32 *);
+extern s32 OnScreen_StartMoverScript(void *,s32 *);
 extern void OnScreen_DrawSpriteNumber(s32,f32,f32,f32,f32,s32,s32,s32);
 extern s32 D_800C9288_de[];
 extern s32 D_800C9328_de[];

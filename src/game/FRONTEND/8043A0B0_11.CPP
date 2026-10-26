@@ -346,7 +346,7 @@ void Frontend_DrawMenuImage(MenuImage *menu) {
         }
         gDPSetEnvColor(g_displayListCursor++, (u8)menu->red, (u8)menu->green, (u8)menu->blue, 0xFF);
         gDPSetPrimColor(g_displayListCursor++, 0, 0, 0xE0, 0, 0, 0xFF);
-        func_802AAC28_de(menu->image, frame, (s16)(s32)screen[0xA9], (s16)(s32)screen[0xAA],
+        OnScreen_DrawSpriteResource(menu->image, frame, (s16)(s32)screen[0xA9], (s16)(s32)screen[0xAA],
                          a * 9.0f, b * 4.0f, 1);
     }
 }

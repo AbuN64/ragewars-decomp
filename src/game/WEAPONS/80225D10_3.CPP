@@ -115,7 +115,7 @@ void Player_UpdateWorldPlayers(WorldWeaponsUpdateWorldPlayers *world) {
                     func_80218464_de(player->views5E8.view938_130.strokes);
                     player->views5E8.viewF54_132.selection = -1;
                     player->views5E8.viewF90_134.choice = -1;
-                    func_80435B10_de();
+                    Frontend_OpenGameplayFrontend();
                 }
             }
         }

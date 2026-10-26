@@ -63,7 +63,7 @@ extern void Geometry_QueueModelById(s32 arg0, void *arg1, void *arg2, s32 arg3, 
 extern void Geometry_SetModePreset(s32 mode);
 
 
-extern void **func_80295EAC_de(void *arg0, s32 arg1);
+extern void **TextLoad_RequestTextureVariationSync(void *arg0, s32 arg1);
 
 void Geometry_InitializeModelRenderState(void) {
     char local[64];
@@ -306,7 +306,7 @@ void Geometry_UnlockMaterialResources(void **arg0) {
         if (((ResourceSectionReference *)rec)->resource == 0) {
             continue;
         }
-        result = func_80295EAC_de(&((ResourceSectionReference *)rec)->resource, -1);
+        result = TextLoad_RequestTextureVariationSync(&((ResourceSectionReference *)rec)->resource, -1);
         if (result == 0) {
             continue;
         }

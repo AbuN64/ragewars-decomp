@@ -55,14 +55,14 @@ void func_802AF990_us_rev1(void) {
     u8 *callback;
     u8 *output;
     u32 word;
-    u8 temp_v0;
+    u8 enabledControl;
 
     func_802AE260_us_rev1();
-    temp_v0 = D_8014D3E2 | 0x40;
-    D_8014D3E2 = temp_v0;
+    enabledControl = D_8014D3E2 | 0x40;
+    D_8014D3E2 = enabledControl;
     while (func_802BDEA0_us_rev1() & 3) {
     }
-    D_B2000008 = temp_v0;
+    D_B2000008 = enabledControl;
 
     command = &state.command;
     address = &state.address.byte;

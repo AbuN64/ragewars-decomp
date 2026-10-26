@@ -2,8 +2,8 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "TYPES.H"
 
-extern s32 func_802969E8_de(s32 arg0, Triple *arg1);
+extern s32 VisData_ContainsPoint(s32 arg0, Triple *arg1);
 
 s32 func_802393AC_de(s32 cameraAddress, Triple testPoint) {
-    return func_802969E8_de(cameraAddress + 0x2F0, &testPoint);
+    return VisData_ContainsPoint(cameraAddress + 0x2F0, &testPoint);
 }

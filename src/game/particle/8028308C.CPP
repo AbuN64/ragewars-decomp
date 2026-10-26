@@ -193,12 +193,12 @@ void Particle_ReleaseOwnerListTwoEffects(struct EffectSystem *effectSystem, s32 
 }
 
 int Particle_GetEffectResource(void *arg0) {
-    Obj_func_80283920_de *actor = arg0;
+    ObjParticleInitializeAttachmentsAndSound *actor = arg0;
     return (int)actor->effectResource;
 }
 
 s32 Particle_GetRenderLayer(void *arg0) {
-    Obj_func_80283920_de *object = arg0;
+    ObjParticleInitializeAttachmentsAndSound *object = arg0;
     s32 result;
 
     result = 0;
@@ -229,7 +229,7 @@ void Particle_ReleaseObjectAndSound(void *object) {
 extern CQuatern GraphU64_BuildDirectionQuaternion(CVector3 *);
 extern Triple D_801002A8;
 extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
-void Particle_SpawnAtSharedContactPoint(Obj_func_80283920_de *source, s32 kind) {
+void Particle_SpawnAtSharedContactPoint(ObjParticleInitializeAttachmentsAndSound *source, s32 kind) {
     CQuatern q;
     CVector3 pos;
 
@@ -247,7 +247,7 @@ void Particle_SpawnAtSharedContactPoint(Obj_func_80283920_de *source, s32 kind) 
                   (source->unk5C & 0x200006) | 1);
 }
 
-void Particle_SpawnWithModeMinusThree(Obj_func_80283920_de *source, s32 kind) {
+void Particle_SpawnWithModeMinusThree(ObjParticleInitializeAttachmentsAndSound *source, s32 kind) {
     CQuatern rotation;
     CVector3 position;
 
@@ -265,7 +265,7 @@ void Particle_SpawnWithModeMinusThree(Obj_func_80283920_de *source, s32 kind) {
                   (source->unk5C & 0x200006) | 1);
 }
 
-void Particle_SpawnWithModeMinusTwo(Obj_func_80283920_de *source, s32 kind) {
+void Particle_SpawnWithModeMinusTwo(ObjParticleInitializeAttachmentsAndSound *source, s32 kind) {
     CQuatern rotation;
     CVector3 position;
 
@@ -283,7 +283,7 @@ void Particle_SpawnWithModeMinusTwo(Obj_func_80283920_de *source, s32 kind) {
                   (source->unk5C & 0x200006) | 1);
 }
 
-void Particle_SpawnWithModeMinusFive(Obj_func_80283920_de *source, s32 kind) {
+void Particle_SpawnWithModeMinusFive(ObjParticleInitializeAttachmentsAndSound *source, s32 kind) {
     CQuatern rotation;
     CVector3 position;
 
@@ -301,7 +301,7 @@ void Particle_SpawnWithModeMinusFive(Obj_func_80283920_de *source, s32 kind) {
                   (source->unk5C & 0x200006) | 1);
 }
 
-void func_80283920_de(Obj_func_80283920_de *actor, Params_func_80283920_de *arg1) {
+void Particle_InitializeAttachmentsAndSound(ObjParticleInitializeAttachmentsAndSound *actor, ParamsParticleInitializeAttachmentsAndSound *arg1) {
     s32 temp_t0;
     s8 temp_a1;
     s8 resourceId;
@@ -323,21 +323,21 @@ void func_80283920_de(Obj_func_80283920_de *actor, Params_func_80283920_de *arg1
     }
 }
 
-void func_80283A1C_de(void *arg0) {
+void Particle_ReleaseAttachments(void *arg0) {
     s32 temp;
 
-    if (((Obj_func_80283920_de *)arg0)->active1D9 != 0) {
+    if (((ObjParticleInitializeAttachmentsAndSound *)arg0)->active1D9 != 0) {
         Particle_UpdateMatrix(arg0);
         Fx_DetachParticleSwooshes(&D_801379C0, arg0);
     }
-    temp = ((Obj_func_80283920_de *)arg0)->unk138;
+    temp = ((ObjParticleInitializeAttachmentsAndSound *)arg0)->unk138;
     if (temp != 0) {
         DynLight_ReleaseLight(&D_8013B1A8, temp);
-        ((Obj_func_80283920_de *)arg0)->unk138 = 0;
+        ((ObjParticleInitializeAttachmentsAndSound *)arg0)->unk138 = 0;
     }
 }
 
-void func_80283A80_de(ObjRecAt174 *arg0) {
+void Particle_ApplyDirectionalAcceleration(ObjRecAt174 *arg0) {
  CVector3 delta, direction;
  CVector3 *velocity, *dir;
  int condition;
@@ -355,19 +355,19 @@ void func_80283A80_de(ObjRecAt174 *arg0) {
  }
 }
 
-void func_80283BA0_de(void *arg0, s32 arg1) {
+void Particle_FlagKind86ModeTwo(void *arg0, s32 arg1) {
     if (((((struct ObjectState60 *) ((s8 *) arg0))->unk_4) == 0x56) && (arg1 == 2)) {
         (((struct ObjectState60 *) ((s8 *) arg0))->unk_5C) = (s32) ((((struct ObjectState60 *) ((s8 *) arg0))->unk_5C) | 0x04000000);
     }
 }
 
-void func_80283BCC_de(void *arg0) {
-    ((Obj_func_80283920_de *)arg0)->unk5C |= 0x20000;
+void Particle_CaptureSharedTrailState(void *arg0) {
+    ((ObjParticleInitializeAttachmentsAndSound *)arg0)->unk5C |= 0x20000;
     ((TrailActor *)arg0)->origin = D_801001F8.first;
     ((TrailActor *)arg0)->position = D_801001F8.second;
 }
 
-void func_80283C1C_de(void *arg0, f32 *arg1, s32 arg2) {
+void Particle_AttachToCurrentTarget(void *arg0, f32 *arg1, s32 arg2) {
     f32 source[16];
     f32 matrix[16];
     CVector3 direction;
@@ -404,7 +404,7 @@ void func_80283C1C_de(void *arg0, f32 *arg1, s32 arg2) {
 }
 
 /** Return arg0, but treat the sentinel value 0xA as 0. */
-s32 func_80283D38_de(s32 arg0) {
+s32 Particle_MapEventTenToZero(s32 arg0) {
     if (arg0 == 0xA) {
         return 0;
     }
@@ -534,7 +534,7 @@ int Particle_HasSurfaceFlag(void *particle) {
     return ((u32)((Shared_Particle *)particle)->flags >> 2) & 1;
 }
 
-int func_80284080_de(void) {
+int Particle_ReturnZero(void) {
     char pad[0x10];
     return 0;
 }

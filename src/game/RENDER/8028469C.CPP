@@ -9,7 +9,7 @@
 #include "RENDER/8028469C.H"
 #include "SYSTEM/80255C40_3.H"
 
-void *func_802846C8_de(EffectSystem *effectSystem, s32 arg1, EffectEntry *effectEntry) {
+void *Particle_FindOwnerEntry(EffectSystem *effectSystem, s32 arg1, EffectEntry *effectEntry) {
     void *record;
 
     record = effectEntry->params->listIndex[effectSystem->lists].head;
@@ -37,7 +37,7 @@ void *func_802846C8_de(EffectSystem *effectSystem, s32 arg1, EffectEntry *effect
 
 extern void func_80255D70_de(void *, s32, s32);
 
-void func_80284758_de(EffectSystem *arg0, ParticleEffect *arg1)
+void Particle_InsertEntryGroup(EffectSystem *arg0, ParticleEffect *arg1)
 {
     void *current;
     s32 key;
@@ -66,7 +66,7 @@ loop:
 }
 
 
-s32 func_8028480C_de(s32 arg0) {
+s32 Particle_RandomInclusiveCount(s32 arg0) {
     if (arg0 != 0) {
         return GraphU64_NextRandom() % (arg0 + 1);
     }
@@ -74,14 +74,14 @@ s32 func_8028480C_de(s32 arg0) {
 }
 
 
-void func_80284870_de(f32 arg0) {
+void Particle_AdvanceRandomWhenNonzero(f32 arg0) {
     if (arg0 != 0.0f) {
         ((s32 (*)())GraphU64_RandomFloat)();
     }
 }
 
 /** Return offset 0x180 only when the nested state word is zero. */
-float func_8028489C_de(ParticleEffect *effect) {
+float Particle_GetConditionalFirstValue(ParticleEffect *effect) {
     void *inner = effect->entry;
     if (((EffectEntry *)inner)->unk14 != 0) {
         return 0.0f;
@@ -89,7 +89,7 @@ float func_8028489C_de(ParticleEffect *effect) {
     return effect->unk180[0];
 }
 
-f32 func_802848BC_de(ParticleEffect *effect) {
+f32 Particle_GetConditionalSecondValue(ParticleEffect *effect) {
     f32 result;
     result = 0.0f;
     if ((effect->entry->unk14) == 0) {
@@ -98,7 +98,7 @@ f32 func_802848BC_de(ParticleEffect *effect) {
     return result;
 }
 
-s32 func_802848DC_de(ParticleEffect *effect) {
+s32 Particle_IsKind2Or86Or273Or294(ParticleEffect *effect) {
     u16 kind;
     s32 val;
 
@@ -127,7 +127,7 @@ ret0:
     return 0;
 }
 
-s32 func_80284928_de(ParticleEffect *effect) {
+s32 Particle_IsKind5To7Or9Or17Or19Or26Or257Or272(ParticleEffect *effect) {
     u16 kind;
     s32 val;
 
@@ -173,7 +173,7 @@ ret0:
     return 0;
 }
 
-s32 func_802849AC_de(ParticleEffect *effect) {
+s32 Particle_IsKind8Or13Or18(ParticleEffect *effect) {
     u16 kind;
     s32 val;
 
@@ -201,7 +201,7 @@ ret0:
 
 #include "COMMON/BALLISTICPARAMS.H"
 
-void func_802849F0_de(ParticleEffect *effect)
+void Particle_UpdateForcesAndMotion(ParticleEffect *effect)
 {
     CVector3 delta;
     CVector3 direction;

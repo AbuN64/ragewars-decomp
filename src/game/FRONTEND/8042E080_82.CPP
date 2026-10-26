@@ -4,7 +4,7 @@
 /* Calls Tsmos_SetModeOneFlag with 2 and returns zero. */
 
 
-s32 func_80435EF4_de(void) {
+s32 Frontend_SetConfirmationInputMode(void) {
     Tsmos_SetModeOneFlag(2);
     return 0;
 }

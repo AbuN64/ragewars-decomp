@@ -5,5 +5,5 @@
 /* Plays the pak menu entry for a channel; quiet suppresses the prompt. */
 extern s32 Pak_CheckStatusPrompt(MenuRecAt24 *menu, s32 channel, s32 quiet);
 extern int Pak_ConfirmPendingOperation(void * owner, struct MenuRecAt24 * menu, void * arg);
-extern s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu);
+extern s32 Pak_ClosePromptByKind(void *owner, MenuRecAt24 *menu);
 #endif

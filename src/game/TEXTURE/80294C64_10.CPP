@@ -13,7 +13,7 @@ extern void Cache_UnlockResource(void *heap, struct Node80253610 *resource);
 
 
 
-void func_802957EC_us_rev1(void) {
+void TextLoad_SelectPreviousArtsendTexture(void) {
     s32 temp_a0;
     s32 temp_v0;
     s32 var_v1;
@@ -37,7 +37,7 @@ void func_802957EC_us_rev1(void) {
     }
 }
 
-void func_80295890_us_rev1(void) {
+void TextLoad_ReleaseArtsendTextureResource(void) {
     if (D_8014AEB0.resource != 0) {
         Cache_UnlockResource(0, D_8014AEB0.resource);
     }
@@ -48,7 +48,7 @@ void func_80295890_us_rev1(void) {
 }
 
 /** Reset the record's fields, marking slot 1 active. */
-void func_802958D8_us_rev1(void) {
+void TextLoad_InitializeArtsendPreviewState(void) {
     struct MenuGlobalRecAt21B8 *object = &D_8014AEB0;
 
     object->alternateTitle = 0;
@@ -68,7 +68,7 @@ void func_802958D8_us_rev1(void) {
     object->frameCount = 0;
 }
 
-void func_80295924_us_rev1(void) {
+void TextLoad_DecreaseArtsendSelectionValue(void) {
     s32 *ptr;
     s32 old;
     s32 count;
@@ -83,7 +83,7 @@ void func_80295924_us_rev1(void) {
     }
 }
 
-void func_80295970_us_rev1(void) {
+void TextLoad_IncreaseArtsendSelectionValue(void) {
     s32 *ptr;
     s32 old;
     s32 count;
@@ -98,7 +98,7 @@ void func_80295970_us_rev1(void) {
     }
 }
 
-void func_802959BC_us_rev1(void) {
+void TextLoad_SelectPreviousArtsendPage(void) {
     s32 temp_a0;
     s32 temp_v0;
     s32 var_v1;

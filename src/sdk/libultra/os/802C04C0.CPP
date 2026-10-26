@@ -8,12 +8,12 @@
 #include "sdk/os.h"
 
 
-void func_802BB3D0_de(s32 arg0) {
-    u32 temp_v0;
+void func_802BB3D0_de(s32 interruptMask) {
+    u32 savedInterruptMask;
     s32 *p;
 
-    temp_v0 = __osDisableInt();
+    savedInterruptMask = __osDisableInt();
     p = &D_800D5258;
-    *p &= ~arg0 | 0x401;
-    __osRestoreInt(temp_v0);
+    *p &= ~interruptMask | 0x401;
+    __osRestoreInt(savedInterruptMask);
 }

@@ -21,11 +21,11 @@
 
 
 
-extern struct Record_func_804347CC_de D_80102B00[];
+extern struct RecordPAKInterfaceReassignLocalProfiles D_80102B00[];
 extern void PAKInterface_RelabelSlotRows(s32);
 
-s32 func_8043497C_de(s32 player) {
-    struct Record_func_804347CC_de *record;
+s32 PAKInterface_JoinChosenProfile(s32 player) {
+    struct RecordPAKInterfaceReassignLocalProfiles *record;
     s32 chosen;
     s32 place;
     s32 found;

@@ -3,5 +3,5 @@
 #include "TYPES.H"
 /* Packed intensity font pixels installed by the resource loader. */
 extern u8 *D_800D2F90;
-extern u8 *func_802AADBC_de(void);
+extern u8 *OnScreen_GetFontTexture(void);
 #endif

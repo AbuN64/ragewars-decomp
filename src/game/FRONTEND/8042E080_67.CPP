@@ -7,7 +7,7 @@
 
 
 
-int func_80435A10_de(int unused0, int unused1, unsigned int message, int arg) {
+int Frontend_ResetNameRepeatOnEvent(int unused0, int unused1, unsigned int message, int arg) {
     PlayerRecAtBA4 *p = (PlayerRecAtBA4 *)((char *)D_800E54A4 + (message & 0xFFFF) * 0xB68);
 
     if (p->state == 12 && (message >> 16) == 3 && arg < 6 && arg >= 4) {

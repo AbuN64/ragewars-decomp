@@ -18,7 +18,7 @@ static inline void rectangle(s32 x0,s32 y0,s32 x1,s32 y1,s32 r,s32 g,s32 b,s32 a
     gDPFillRectangle(g_displayListCursor++, x0>0?x0:0,y0>0?y0:0,x1>0?x1:0,y1>0?y1:0);
 }
 
-/* Draws a signed integer of up to four digits with the font sprite set from Scene_StartWorldEffect: splits the magnitude into thousands, hundreds, tens and ones, draws a leading minus sign through func_802AAC28_de when negative, then draws at least minDigits digits through Text_DrawTileGrid, advancing 13 units per digit (0.7 of that for a one) scaled by the size, laid out right to left when rightAlign is set, and releases the sprite set. */
+/* Draws a signed integer of up to four digits with the font sprite set from Scene_StartWorldEffect: splits the magnitude into thousands, hundreds, tens and ones, draws a leading minus sign through OnScreen_DrawSpriteResource when negative, then draws at least minDigits digits through Text_DrawTileGrid, advancing 13 units per digit (0.7 of that for a one) scaled by the size, laid out right to left when rightAlign is set, and releases the sprite set. */
 
 
 
@@ -193,7 +193,7 @@ void OnScreen_DrawSpriteNumber(s32 value, f32 x, f32 y, f32 size, f32 scaleY, s3
         last = minDigits - 1;
     }
     if (negative) {
-        func_802AAC28_de(4, 10, x, y, size, scaleY, arg5);
+        OnScreen_DrawSpriteResource(4, 10, x, y, size, scaleY, arg5);
         x += size * 13.0f;
     }
     for (i = last; i >= 0; i--) {
@@ -238,7 +238,7 @@ release:
 void OnScreen_SetupTextRendering(void) {
     u8 *texture;
 
-    texture = func_802AADBC_de();
+    texture = OnScreen_GetFontTexture();
     if (texture != 0) {
 
         {
@@ -283,8 +283,8 @@ void OnScreen_SetupTextRendering(void) {
         gDPSetTileSize(cmd, 1, 0, 0, 60, 60);
         }
 
-        func_802AAB3C_de(0x8C, 0x8C, 0x8C, 0x8C, 0x8C, 0x8C);
-        func_802AAB68_de(D_800C5FB0_de, D_800C5FB0_de);
+        OnScreen_SetTextColors(0x8C, 0x8C, 0x8C, 0x8C, 0x8C, 0x8C);
+        OnScreen_SetTextScale(D_800C5FB0_de, D_800C5FB0_de);
         D_801376F8.shadowX = 2;
         D_801376F8.shadowY = 2;
     }
@@ -294,7 +294,7 @@ void OnScreen_LoadTextTileModeOne(void) {
     Gfx *cmd;
     u8 *v0;
 
-    v0 = func_802AADBC_de();
+    v0 = OnScreen_GetFontTexture();
     if (v0 != 0) {
         D_80147150 = 1;
         cmd = g_displayListCursor++;
@@ -318,7 +318,7 @@ void OnScreen_LoadTextTileModeTwo(void) {
     Gfx *cmd;
     u8 *v0;
 
-    v0 = func_802AADBC_de();
+    v0 = OnScreen_GetFontTexture();
     if (v0 != 0) {
         D_80147150 = 2;
         cmd = g_displayListCursor++;

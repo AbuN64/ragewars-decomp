@@ -68,7 +68,7 @@ s32 func_802AEF84_us_rev1(void) {
     ReadWordRecAt4 first;
     u32 word;
     s32 result;
-    u32 var_s0;
+    u32 transferLength;
     u8 *data;
 
     result = 0;
@@ -89,18 +89,18 @@ s32 func_802AEF84_us_rev1(void) {
                     word |= first.byte;
                     first.word = word;
                     if (first.word >= (u32)func_802BD400_de(data)) {
-                        var_s0 = func_802BD400_de(data);
+                        transferLength = func_802BD400_de(data);
                     } else {
-                        var_s0 = first.word;
+                        transferLength = first.word;
                     }
-                    first.word = var_s0;
-                    func_802AE5AC_us_rev1(var_s0 >> 24);
+                    first.word = transferLength;
+                    func_802AE5AC_us_rev1(transferLength >> 24);
                     if (D_8014D3E8 == 0) {
-                        func_802AE5AC_us_rev1((var_s0 >> 16) & 0xFF);
+                        func_802AE5AC_us_rev1((transferLength >> 16) & 0xFF);
                         if (D_8014D3E8 == 0) {
-                            func_802AE5AC_us_rev1((var_s0 >> 8) & 0xFF);
+                            func_802AE5AC_us_rev1((transferLength >> 8) & 0xFF);
                             if (D_8014D3E8 == 0) {
-                                func_802AE5AC_us_rev1(var_s0 & 0xFF);
+                                func_802AE5AC_us_rev1(transferLength & 0xFF);
                             }
                         }
                     }
@@ -289,11 +289,11 @@ s32 func_802AF544_us_rev1(void) {
     ReadWord first;
     ReadWord second;
     s32 word;
-    s32 var_s2;
+    s32 succeeded;
     s32 output;
 
     func_802AE380_us_rev1(&first.byte);
-    var_s2 = 0;
+    succeeded = 0;
     if (D_8014D3E8 == 0) {
         word = first.byte << 8;
         func_802AE380_us_rev1(&first.byte);
@@ -324,7 +324,7 @@ s32 func_802AF544_us_rev1(void) {
                                     word |= second.byte;
                                     second.word = word;
                                     func_802AE834_us_rev1(first.word, word, &output);
-                                    var_s2 = D_8014D3E8 == 0;
+                                    succeeded = D_8014D3E8 == 0;
                                 }
                             }
                             goto block_9;
@@ -338,17 +338,17 @@ block_9:
             ;
         }
     }
-    return var_s2;
+    return succeeded;
 }
 
 s32 func_802AF6A0_us_rev1(void) {
     ReadWord first;
     ReadWord second;
     s32 word;
-    s32 var_s2;
+    s32 succeeded;
 
     func_802AE380_us_rev1(&first.byte);
-    var_s2 = 0;
+    succeeded = 0;
     if (D_8014D3E8 == 0) {
         word = first.byte << 8;
         func_802AE380_us_rev1(&first.byte);
@@ -379,7 +379,7 @@ s32 func_802AF6A0_us_rev1(void) {
                                     word |= second.byte;
                                     second.word = word;
                                     func_802AEAB4_us_rev1(first.word, word);
-                                    var_s2 = D_8014D3E8 == 0;
+                                    succeeded = D_8014D3E8 == 0;
                                 }
                             }
                             goto block_9;
@@ -393,19 +393,19 @@ block_9:
             ;
         }
     }
-    return var_s2;
+    return succeeded;
 }
 
 s32 func_802AF7F8_us_rev1(void) {
     ReadWord first;
     ReadWord second;
     s32 word;
-    s32 var_s2;
+    s32 succeeded;
     s32 output;
     s32 addr;
 
     func_802AE380_us_rev1(&first.byte);
-    var_s2 = 0;
+    succeeded = 0;
     if (D_8014D3E8 == 0) {
         word = first.byte << 8;
         func_802AE380_us_rev1(&first.byte);
@@ -439,7 +439,7 @@ s32 func_802AF7F8_us_rev1(void) {
                                     func_802AE834_us_rev1(addr, first.word, &output);
                                     if (D_8014D3E8 == 0 && second.word == output) {
                                         D_800D3640 = 1;
-                                        var_s2 = 1;
+                                        succeeded = 1;
                                         D_800D3644 = 0x80100000;
                                         D_800D3648 = first.word;
                                     }
@@ -456,6 +456,6 @@ block_9:
             ;
         }
     }
-    return var_s2;
+    return succeeded;
 }
 #endif

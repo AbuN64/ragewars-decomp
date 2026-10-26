@@ -16,7 +16,7 @@ extern void *SmpOverlay_GetSlotValue(s32, s32);
 
 
 
-s32 func_8042FF40_de(s32 unusedA, s32 unusedB, s32 index, s32 mode)
+s32 PAKInterface_MoveNameCursorForward(s32 unusedA, s32 unusedB, s32 index, s32 mode)
 {
   s32 slot = index & 0xFFFF;
   s32 offset = slot * 0xB68;

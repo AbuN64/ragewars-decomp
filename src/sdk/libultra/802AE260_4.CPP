@@ -10,7 +10,7 @@
 
 
 
-s32 func_802AE380_us_rev1(u8 *arg0) {
+s32 func_802AE380_us_rev1(u8 *receivedByte) {
     s32 timeout;
     s32 retries;
     s32 expected;
@@ -55,7 +55,7 @@ first_done:
     if (D_8014D3E8 == 0) {
         do {
         } while (func_802BDEA0_us_rev1() & 3);
-        *arg0 = D_B2000001;
+        *receivedByte = D_B2000001;
         control = D_8014D3E3 & 0xF7;
         D_8014D3E3 = control;
         do {

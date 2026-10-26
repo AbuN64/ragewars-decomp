@@ -20,7 +20,7 @@ s32 Pak_CountLiveNodes(void *);
 
 extern func_80294BB0_S1 D_8014561C;
 
-s32 func_80294B9C_de(ObjRecAt26DD4 *arg0) {
+s32 SimpPool_CheckSequencePromptRequest(ObjRecAt26DD4 *arg0) {
     s32 var_v0;
     Prompt *prompt;
 
@@ -49,7 +49,7 @@ struct Context;
 s32 Player_ResetPlayerControllers(struct Context *);
 s32 Rumble_FreeAllPoolNodes(s32 *);
 extern char D_80145040;
-void func_80294C50_de(void) {
+void SimpPool_ResetEffectsAndControllers(void) {
     Rumble_FreeAllPoolNodes(&D_8010EC90);
     Player_ResetPlayerControllers(&D_80145040);
 }

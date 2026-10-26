@@ -113,11 +113,11 @@ func_802A2224_de
     }
     Scene_UpdateAndDrawWorld(&state->world);
     func_802394B4_de(state->players);
-    func_802AA7A4_de(&state->hud);
+    OnScreen_DrawStatusBars(&state->hud);
     /* Only us-rev1 makes this call: us, eu, eu-x and de go straight on to SetN64_DrawSessionFade, two
        instructions shorter, as each cartridge's own bytes show. */
 #ifdef VERSION_US_REV1
-    func_80294F1C_us_rev1();
+    TEngine_UpdateArtsendTexturePreview();
 #endif
     SetN64_DrawSessionFade(state);
 }
@@ -187,9 +187,9 @@ void SetN64_DrawSessionWithRoundTimeout(GameSession *session) {
     }
     Scene_UpdateAndDrawWorld(&session->world);
     func_802394B4_de(session->players);
-    func_802AA7A4_de(&session->hud);
+    OnScreen_DrawStatusBars(&session->hud);
 #ifdef VERSION_US_REV1
-    func_80294F1C_us_rev1();
+    TEngine_UpdateArtsendTexturePreview();
 #endif
     SetN64_DrawSessionFade(session);
 }

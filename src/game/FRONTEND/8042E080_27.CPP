@@ -22,7 +22,7 @@
 
 extern void *SmpOverlay_GetSlotValue(s32 root, s32 player);
 
-s32 func_80430028_de(s32 unused0, s32 unused1, s32 arg2, s32 arg3) {
+s32 PAKInterface_MoveNameCursorBackward(s32 unused0, s32 unused1, s32 arg2, s32 arg3) {
     struct ResourceSmpFlickerCreateFlickerWidget *sound;
     struct RowRecAtBA4 *row;
     char *base;
@@ -73,7 +73,7 @@ void PAKInterface_ScrollNoteList(s32, s32);                            /* extern
 void PAKInterface_DecrementNameCharacter(s32);                               /* extern */
 extern PakMenuController *D_800E54A4;                    
 
-s32 func_80430118_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 PAKInterface_HandleNextPanelSelection(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 temp_s0;
     s32 player;
     s32 playerState;
@@ -160,26 +160,26 @@ extern void PAKInterface_RelabelSlotRows(s32);
 extern void PAKInterface_UpdatePlayerControlRows(s32);
 extern void PAKInterface_ScrollNoteList(s32, s32);
 extern void PAKInterface_IncrementNameCharacter(s32);
-s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, s32 arg4) {
+s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 packedPlayerEvent, s32 pressState, s32 arg4) {
     NodeRecAt44 *node;
     s32 player;
 
-    player = arg2 & 0xFFFF;
+    player = packedPlayerEvent & 0xFFFF;
     switch (D_800E54A4->players[player].state) {
     case 12:
         if (XMath_AbsoluteInteger(arg4) < func_80299B4C_de()) {
             D_800E54A4->players[player].nameTimer = 0;
             D_800E54A4->players[player].namePhase = 2;
         }
-        if (arg3 == 1) {
+        if (pressState == 1) {
             MarkMenuEventHandled();
-            D_800E54A4->players[player].namePhase = arg3;
+            D_800E54A4->players[player].namePhase = pressState;
             PAKInterface_IncrementNameCharacter(player);
             SoundElement_PlayFlatSound(0xE81);
         }
         return 0;
     case 4:
-        if (arg3 == 1) {
+        if (pressState == 1) {
             MarkMenuEventHandled();
             PAKInterface_ScrollNoteList(player, 0);
             D_800E54A4->selected[player] = 0;
@@ -187,7 +187,7 @@ s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 ar
         }
         return 0;
     case 13:
-        if (D_800E54A4->players[player].sub == 6 && arg3 == 1) {
+        if (D_800E54A4->players[player].sub == 6 && pressState == 1) {
             MarkMenuEventHandled();
             node = SmpOverlay_GetSlotValue(D_800E54A4->root, player);
             node = node->ref2C;
@@ -199,7 +199,7 @@ s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 ar
         }
         return 0;
     case 22:
-        if (arg3 == 1) {
+        if (pressState == 1) {
             node = SmpOverlay_GetSlotValue(D_800E54A4->root, player);
             node = node->ref2C;
             while (Frontend_ListHasFlag100(node) != 0) {
@@ -211,7 +211,7 @@ s32 PAKInterface_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 ar
         MarkMenuEventHandled();
         break;
     case 27:
-        if (arg3 == 1) {
+        if (pressState == 1) {
             node = SmpOverlay_GetSlotValue(D_800E54A4->root, player);
             node = node->ref2C;
             while (Frontend_ListHasFlag100(node) != 0) {

@@ -2,8 +2,8 @@
 #define COMMON_OBJECTLINKS1E8_H
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-struct Obj_func_80283920_de;
-struct Obj_func_80283920_de {
+struct ObjParticleInitializeAttachmentsAndSound;
+struct ObjParticleInitializeAttachmentsAndSound {
     char pad0[4];
     u16 unk4;
     char pad6[2];
@@ -56,8 +56,8 @@ typedef struct TrailActor TrailActor;
 
 
 
-struct Params_func_80283920_de;
-struct Params_func_80283920_de {
+struct ParamsParticleInitializeAttachmentsAndSound;
+struct ParamsParticleInitializeAttachmentsAndSound {
     char pad0[6];
     s8 unk6;
     s8 unk7;
@@ -75,8 +75,8 @@ struct ObjectState60 {
     s32 unk_5C;
 };
 
-struct Obj_func_80283920_de;
-typedef struct Obj_func_80283920_de Obj_func_80283920_de;
+struct ObjParticleInitializeAttachmentsAndSound;
+typedef struct ObjParticleInitializeAttachmentsAndSound ObjParticleInitializeAttachmentsAndSound;
 
 
 
@@ -93,8 +93,8 @@ typedef struct ObjectLinks1E8 ObjectLinks1E8;
 
 
 
-struct Params_func_80283920_de;
-typedef struct Params_func_80283920_de Params_func_80283920_de;
+struct ParamsParticleInitializeAttachmentsAndSound;
+typedef struct ParamsParticleInitializeAttachmentsAndSound ParamsParticleInitializeAttachmentsAndSound;
 
 struct TrailState;
 struct TrailState {

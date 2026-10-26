@@ -6,7 +6,7 @@
 
 extern void Particle_Release(char *obj, void *handle);
 
-void func_8028466C_de(char *obj, unsigned char count) {
+void Particle_ReleaseFirstHandle(char *obj, unsigned char count) {
     int i;
 
     for (i = 0; i <= count; i++) {

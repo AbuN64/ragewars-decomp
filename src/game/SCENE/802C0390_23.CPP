@@ -7,13 +7,13 @@
 #if !(defined(VERSION_DE))
 
 
-void func_802BB850_eu(s32 arg0) {
+void func_802BB850_eu(s32 interruptMask) {
     u32 mask;
     s32 *p;
 
     mask = __osDisableInt();
     p = &D_800D5258;
-    *p |= arg0;
+    *p |= interruptMask;
     __osRestoreInt(mask);
 }
 #endif

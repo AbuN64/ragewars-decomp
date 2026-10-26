@@ -4,7 +4,7 @@
 /* Calls MarkMenuEventHandled with the arguments it was given and returns zero. */
 extern void MarkMenuEventHandled();
 
-s32 func_80436024_de(void) {
+s32 Frontend_ConsumeConfirmationEvent(void) {
     MarkMenuEventHandled();
     return 0;
 }

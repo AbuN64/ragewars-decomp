@@ -28,7 +28,7 @@
 s32 OnScreen_UpdateMoverScript(void *);
 
 
-s32 func_802AA70C_de(void *, s32 *);
+s32 OnScreen_StartMoverScript(void *, s32 *);
 
 
 extern int Tsmos_IsFrontendActive(void);
@@ -44,7 +44,7 @@ extern f32 D_800CB3B0;
 
 
 
-void func_802AA6D0_de(void *arg0, s16 arg1, s16 arg2)
+void OnScreen_InitMover(void *arg0, s16 arg1, s16 arg2)
 {
   Mover *mover = arg0;
   mover->handle = -1;
@@ -54,37 +54,37 @@ void func_802AA6D0_de(void *arg0, s16 arg1, s16 arg2)
   mover->y = (f32) arg2;
 }
 
-s32 func_802AA70C_de(void *widget, s32 *arg1) {
+s32 OnScreen_StartMoverScript(void *widget, s32 *arg1) {
     (((struct ObjectLinksC_2 *) ((s8 *) widget))->unk_4) = arg1;
     (((struct ObjectLinksC_2 *) ((s8 *) widget))->unk_8) = 2;
     return OnScreen_UpdateMoverScript(widget);
 }
 
-s32 func_802AA730_de(void *arg0, s32 arg1, s32 arg2) {
+s32 OnScreen_StartFirstStatusBar(void *arg0, s32 arg1, s32 arg2) {
     (((struct IntegerState48 *) ((s8 *) arg0))->unk_40) = arg1;
     (((struct IntegerState48 *) ((s8 *) arg0))->unk_3C) = arg2;
     (((struct IntegerState48 *) ((s8 *) arg0))->unk_44) = 0x64;
-    return func_802AA70C_de(arg0, &D_800CDEB4);
+    return OnScreen_StartMoverScript(arg0, &D_800CDEB4);
 }
 
-void func_802AA760_de(void *arg0, s32 arg1, s32 arg2) {
+void OnScreen_StartSecondStatusBar(void *arg0, s32 arg1, s32 arg2) {
     (((struct IntegerState90 *) ((s8 *) arg0))->unk_88) = arg1;
     (((struct IntegerState90 *) ((s8 *) arg0))->unk_84) = arg2;
     (((struct IntegerState90 *) ((s8 *) arg0))->unk_8C) = 0x64;
-    func_802AA70C_de(arg0 + 0x48, &D_800CDEC8);
+    OnScreen_StartMoverScript(arg0 + 0x48, &D_800CDEC8);
 }
 
-void func_802AA794_de(char *object, int value) {
+void OnScreen_SetFirstBarTarget(char *object, int value) {
     Hud *hud = (void *)object;
     hud->bars[0].target = value;
 }
 
-void func_802AA79C_de(void *object, int value) {
+void OnScreen_SetSecondBarTarget(void *object, int value) {
     Hud *hud = (void *)object;
     hud->bars[1].target = value;
 }
 
-void func_802AA7A4_de(void *arg0) {
+void OnScreen_DrawStatusBars(void *arg0) {
     char pad[256];
     (void)pad;
 
@@ -95,8 +95,8 @@ void func_802AA7A4_de(void *arg0) {
     }
     OnScreen_SetupTextRendering();
     OnScreen_LoadTextTileModeOne();
-    func_802AAB68_de(D_800C61F0_de, D_800C61F0_de);
-    func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
+    OnScreen_SetTextScale(D_800C61F0_de, D_800C61F0_de);
+    OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
     OnScreen_SetupSpriteMode(D_801462C8.hudFade);
     if (((Hud *)arg0)->bars[0].enabled != 0) {
         OnScreen_DrawStatusBar(arg0, 1);
@@ -107,7 +107,7 @@ void func_802AA7A4_de(void *arg0) {
 }
 
 /** Return the floating parameter selected by the current global mode. */
-f32 func_802AA864_de(void) {
+f32 OnScreen_GetGlyphWidth(void) {
     {
         s32 sw_mode_value = D_80147150;
         if ((unsigned int)sw_mode_value > 6) {
@@ -142,7 +142,7 @@ f32 func_802AA864_de(void) {
     } while (0);
 }
 
-void func_802AA8EC_de(Table802AB8DC **handle, s32 index, void **out, u8 *tag) {
+void OnScreen_GetImageEntry(Table802AB8DC **handle, s32 index, void **out, u8 *tag) {
     Table802AB8DC *table;
     Entry802AB8DC *entry;
     void *result;
@@ -172,7 +172,7 @@ extern void Geometry_SetModePreset(u32);
 extern void Geometry_SetCombineMode(u32);
 
 #if defined(VERSION_EU_X)
-void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
+void OnScreen_GetImageDimensions(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
 {
   void *sp10;
   s32 sp14;
@@ -183,7 +183,7 @@ void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
     temp_v0 = Scene_StartWorldEffect(&g_world, arg0, 0, 1);
     if (temp_v0 != 0)
     {
-      func_802AA8EC_de(temp_v0, arg1, &sp10, &sp14);
+      OnScreen_GetImageEntry(temp_v0, arg1, &sp10, &sp14);
       imageData = sp10;
       *arg2 = ((ImageSet *)sp10)->width;
       *arg3 = ((ImageSet *)imageData)->height;
@@ -208,7 +208,7 @@ void OnScreen_SetupFillMode(void) {
 #endif
 
 #if defined(VERSION_EU_X)
-void func_802AAA54_de(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
+void OnScreen_FillRectangle(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
 
  gDPPipeSync(g_displayListCursor++);
  gDPSetPrimColor(g_displayListCursor++, 255, 255, r, g, b, a);
@@ -220,7 +220,7 @@ void func_802AAA54_de(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
 extern s32 Scene_StartWorldEffect(void *,s32,s32,s32);
 extern void Cache_UnlockResource(s32,s32);
 
-void func_802AAB3C_de(int arg0, int arg1, int arg2, int alpha, int arg4, int arg5) {
+void OnScreen_SetTextColors(int arg0, int arg1, int arg2, int alpha, int arg4, int arg5) {
     D_801376F8.envR = arg0;
     D_801376F8.envG = arg1;
     D_801376F8.envB = arg2;
@@ -231,24 +231,24 @@ void func_802AAB3C_de(int arg0, int arg1, int arg2, int alpha, int arg4, int arg
 #endif
 
 #if defined(VERSION_EU_X)
-void func_802AAB68_de(float arg0, float arg1) {
+void OnScreen_SetTextScale(float arg0, float arg1) {
     D_801376F8.width = arg0;
     D_801376F8.height = arg1;
 }
 #endif
 
 #if defined(VERSION_EU_X)
-void func_802AAB7C_de(u8 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 alpha, s32 arg7) {
+void OnScreen_DrawTextWithShadow(u8 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 alpha, s32 arg7) {
     if (arg5 != 0) {
-        func_802A88F0_de(arg0, arg1, arg2, arg3, arg4, 1, alpha, arg7);
+        OnScreen_DrawTextGlyphs(arg0, arg1, arg2, arg3, arg4, 1, alpha, arg7);
     }
-    func_802A88F0_de(arg0, arg1, arg2, arg3, arg4, 0, alpha, arg7);
+    OnScreen_DrawTextGlyphs(arg0, arg1, arg2, arg3, arg4, 0, alpha, arg7);
 }
 #endif
 
 #if defined(VERSION_EU_X)
 #ifdef NON_MATCHING
-s32 func_802AAC28_de(s32 icon, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 which) {
+s32 OnScreen_DrawSpriteResource(s32 icon, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 which) {
 
     s32 temp_v0;
 
@@ -262,7 +262,7 @@ s32 func_802AAC28_de(s32 icon, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5,
     return 1;
 }
 #else
-INCLUDE_ASM("span_1000", func_802AAC28_de);
+INCLUDE_ASM("span_1000", OnScreen_DrawSpriteResource);
 #endif
 #endif
 
@@ -275,7 +275,7 @@ INCLUDE_ASM("span_1000", func_802AAC28_de);
 
 extern void Text_DrawTileGrid(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
 
-void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
+void OnScreen_GetImageDimensions(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
 {
   void *sp10;
   s32 sp14;
@@ -286,7 +286,7 @@ void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
     temp_v0 = Scene_StartWorldEffect(&g_world, arg0, 0, 1);
     if (temp_v0 != 0)
     {
-      func_802AA8EC_de(temp_v0, arg1, &sp10, &sp14);
+      OnScreen_GetImageEntry(temp_v0, arg1, &sp10, &sp14);
       new_var = sp10;
       *arg2 = ((ImageSet *)sp10)->width;
       *arg3 = ((ImageSet *)new_var)->height;
@@ -307,7 +307,7 @@ void OnScreen_SetupFillMode(void) {
     Geometry_SetCombineMode(0x19);
 }
 
-void func_802AAA54_de(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
+void OnScreen_FillRectangle(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
 
  gDPPipeSync(g_displayListCursor++);
  gDPSetPrimColor(g_displayListCursor++, 255, 255, r, g, b, a);
@@ -315,7 +315,7 @@ void func_802AAA54_de(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
 }
 
 /** Store six words into the global record. */
-void func_802AAB3C_de(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+void OnScreen_SetTextColors(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
     D_801376F8.envR = arg0;
     D_801376F8.envG = arg1;
     D_801376F8.envB = arg2;
@@ -324,19 +324,19 @@ void func_802AAB3C_de(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5
     D_801376F8.primB = arg5;
 }
 
-void func_802AAB68_de(float arg0, float arg1) {
+void OnScreen_SetTextScale(float arg0, float arg1) {
     D_801376F8.width = arg0;
     D_801376F8.height = arg1;
 }
 
-void func_802AAB7C_de(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 arg6, s32 arg7) {
+void OnScreen_DrawTextWithShadow(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 arg6, s32 arg7) {
     if (arg5 != 0) {
-        func_802A88F0_de(arg0, arg1, arg2, arg3, arg4, 1, arg6, arg7);
+        OnScreen_DrawTextGlyphs(arg0, arg1, arg2, arg3, arg4, 1, arg6, arg7);
     }
-    func_802A88F0_de(arg0, arg1, arg2, arg3, arg4, 0, arg6, arg7);
+    OnScreen_DrawTextGlyphs(arg0, arg1, arg2, arg3, arg4, 0, arg6, arg7);
 }
 
-s32 func_802AAC28_de(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6) {
+s32 OnScreen_DrawSpriteResource(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6) {
 
     s32 temp_v0;
 
@@ -357,7 +357,7 @@ typedef struct ResourceView {
     u8 *data;
     u8 type;
 } ResourceView;
-void func_802AAD14_de(void) {
+void OnScreen_LoadFontTexture(void) {
     Table802AB8DC **handle;
     Table802AB8DC *table;
     Entry802AB8DC *entry;
@@ -390,18 +390,18 @@ void func_802AAD14_de(void) {
 
 /** Return the global word at D_800D2F90. */
 
-u8 *func_802AADBC_de(void) {
+u8 *OnScreen_GetFontTexture(void) {
     return D_800D2F90;
 }
 
 /* Draws a grid of 16-bit image tiles with a 4-bit mask: the header holds the column and row counts,
    each tile holds its width, height, two bytes per pixel and then half a byte per pixel of mask,
-   and every tile goes to func_802A9364_de at the running position, advancing x by the tile width and
-   y by the last tile height per row. Adapted from func_802AB0B0_de with the mask pointer added. */
+   and every tile goes to OnScreen_DrawTextureWithOpacity at the running position, advancing x by the tile width and
+   y by the last tile height per row. Adapted from Pickup_DrawIntensityTileGrid with the mask pointer added. */
 
-extern void func_802A9364_de(s32 *pixels, char *mask, s32 x, s16 y, s32 w, s32 h);
+extern void OnScreen_DrawTextureWithOpacity(s32 *pixels, char *mask, s32 x, s16 y, s32 w, s32 h);
 
-void func_802AADCC_de(u16 *grid, s16 x0, s32 y) {
+void OnScreen_DrawMaskedTileGrid(u16 *grid, s16 x0, s32 y) {
     s32 *tile;
     s32 rows;
     s32 cols;
@@ -420,7 +420,7 @@ void func_802AADCC_de(u16 *grid, s16 x0, s32 y) {
             w = tile[0];
             h = tile[1];
             area = w * h;
-            func_802A9364_de(tile + 2, (char *)tile + (area * 2 + 8), x, y, w, h);
+            OnScreen_DrawTextureWithOpacity(tile + 2, (char *)tile + (area * 2 + 8), x, y, w, h);
             x += w;
             tile = (s32 *)((char *)tile + (area * 2 + (area >> 1)));
             tile += 2;
@@ -433,7 +433,7 @@ void func_802AADCC_de(u16 *grid, s16 x0, s32 y) {
    and row counts, each tile holds its width, height, two bytes per pixel and then half a byte per pixel
    of mask, and every tile goes to OnScreen_DrawScaledMaskedImage at the running float position, advancing x by the
    scaled tile width and y by the scaled last tile height per row. Scaled counterpart of
-   func_802AADCC_de; the float counters count down with `rows-- != 0.0f` as in func_802AB1B0_de. */
+   OnScreen_DrawMaskedTileGrid; the float counters count down with `rows-- != 0.0f` as in Pickup_DrawScaledIntensityTileGrid. */
 extern void OnScreen_DrawScaledMaskedImage(void *pTexture, void *pOpacity, float XPos, float YPos, int TextureWidth, int TextureHeight, float ScaleX, float ScaleY);
 void OnScreen_DrawScaledMaskedTileGrid(u16 *grid, f32 x0, f32 y, f32 sx, f32 sy) {
     u32 *tile;

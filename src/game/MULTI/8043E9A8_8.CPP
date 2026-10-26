@@ -51,6 +51,6 @@ void func_8043EE5C_de(struct ItemRecAt18V2 *item, MenuOptionBox *box, s32 unused
     } else {
         gDPSetEnvColor(g_displayListCursor++, 50, 50, 50, (s32)(context->fade * (context->alpha * D_800E23A8)));
     }
-    func_802AAC28_de(item->resource, 0, box->left, box->top, box->scaleX, box->scaleY, 1);
+    OnScreen_DrawSpriteResource(item->resource, 0, box->left, box->top, box->scaleX, box->scaleY, 1);
 }
 #endif

@@ -271,7 +271,7 @@ INCLUDE_ASM("ovl_80400000", Menu_SelectFirstUnlockedLevel);
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 /* Fuzzy draft: inline-asm carrier of the original instructions (no C written yet). */
-void func_8043C688_de(void) {
+void Menu_HandleUnlockedLevelSelection(void) {
     __asm__ volatile (
         ".set noreorder\n"
         ".set noat\n"
@@ -494,7 +494,7 @@ void func_8043C688_de(void) {
     );
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8043C688_de);
+INCLUDE_ASM("ovl_80400000", Menu_HandleUnlockedLevelSelection);
 #endif
 #endif
 
@@ -581,7 +581,7 @@ static inline s32 findUnlocked(s32 level, s32 step) {
     return -1;
 }
 
-s32 func_8043C688_de(s32 arg0, Shared_MenuInput *pad) {
+s32 Menu_HandleUnlockedLevelSelection(s32 arg0, Shared_MenuInput *pad) {
     s32 target;
     Shared_Game *rules;
 

@@ -10,7 +10,7 @@
 extern ResidentSlot D_8014AEC8;
 extern ResidentEntry D_8014AECC;
 
-void func_802956AC_us_rev1(s32 resource, s32 **palette) {
+void TextLoad_ApplyArtsendPaletteOverride(s32 resource, s32 **palette) {
     s32 var_v1;
     s32 var_v1_2;
 
@@ -37,7 +37,7 @@ void func_802956AC_us_rev1(s32 resource, s32 **palette) {
     }
 }
 
-void func_8029576C_us_rev1(void) {
+void TextLoad_SelectNextArtsendTexture(void) {
     s32 temp_v1;
 
     if (D_auto_800D2AE8++ >= 3) {

@@ -9,7 +9,7 @@
 
 
 
-extern void func_802AAB7C_de(char *, f32, f32, f32, f32, s32, s32, s32);
+extern void OnScreen_DrawTextWithShadow(char *, f32, f32, f32, f32, s32, s32, s32);
 
 
 
@@ -26,7 +26,7 @@ void SetN64_DrawCreditsLines(void) {
     y = D_80146CB8;
     OnScreen_SetupTextRendering();
     OnScreen_LoadTextTileModeTwo();
-    func_802AAB68_de(1.0f, 1.0f);
+    OnScreen_SetTextScale(1.0f, 1.0f);
     do {
         #if defined(VERSION_EU) || defined(VERSION_EU_X)
         text = D_800D3E14_de[D_801462C8.language][line];
@@ -48,9 +48,9 @@ void SetN64_DrawCreditsLines(void) {
                 fade = 255.0f;
             }
             alpha = fade;
-            func_802AAB3C_de(0xFF, 0xFF, 0xFF, alpha, alpha, alpha);
+            OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, alpha, alpha, alpha);
             if (y >= top) {
-                func_802AAB7C_de(text, (f32)(D_800E28D0 * 14 / 284), (f32)(s32)y,
+                OnScreen_DrawTextWithShadow(text, (f32)(D_800E28D0 * 14 / 284), (f32)(s32)y,
                               D_800E28D0 * 0.0028169013f, D_800E28D4 * 0.0045045046f, 1, alpha,
                               D_80147150);
             }

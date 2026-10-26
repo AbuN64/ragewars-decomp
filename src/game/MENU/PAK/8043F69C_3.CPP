@@ -113,7 +113,7 @@ void Pak_MeasureMenuText(TextBoundsText *text, CItemInfo *metrics) {
             metrics->width = 284;
             metrics->height = 222;
         } else {
-            func_802AA950_de((s32)text->text, 0, &metrics->width, &metrics->height);
+            OnScreen_GetImageDimensions((s32)text->text, 0, &metrics->width, &metrics->height);
         }
         if ((text->flags & 0x10000000) && (boxW = metrics->width) != 0.0f && (boxH = metrics->height) != 0.0f) {
             sx = data->unk_29C / boxW;

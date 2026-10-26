@@ -150,7 +150,7 @@ void func_8022C1E8_de(char *player, char *view) {
     screenX = t1 + bx;
     screenY = t2 + by;
 
-    func_802AAC28_de(0x1FC, (s32) w, (s16) (s32) screenX, (s16) (s32) screenY, sx, sy, 1);
+    OnScreen_DrawSpriteResource(0x1FC, (s32) w, (s16) (s32) screenX, (s16) (s32) screenY, sx, sy, 1);
 }
 
 void func_8022C2B4_de(void *arg0, struct ScreenRectangle *viewport)
@@ -176,7 +176,7 @@ void func_8022C2B4_de(void *arg0, struct ScreenRectangle *viewport)
   by = sy * D_800C2D34_de;
   screenX = ((viewport->width) + ax) - bx;
   screenY = ((viewport->height) + ay) - by;
-  func_802AAC28_de(0x1FB, 0, (s16) ((s32) (((viewport->width) + ax) - bx)), (s16) ((s32) screenY), sx, sy, 1);
+  OnScreen_DrawSpriteResource(0x1FB, 0, (s16) ((s32) (((viewport->width) + ax) - bx)), (s16) ((s32) screenY), sx, sy, 1);
 }
 
 void func_8022C37C_de(char *player, char *view) {
@@ -206,7 +206,7 @@ void func_8022C37C_de(char *player, char *view) {
     screenX = t1 + bx;
     screenY = t2 + by;
 
-    func_802AAC28_de(0x201, (s32) w, (s16) (s32) screenX, (s16) (s32) screenY, sx, cz, 1);
+    OnScreen_DrawSpriteResource(0x201, (s32) w, (s16) (s32) screenX, (s16) (s32) screenY, sx, cz, 1);
 }
 
 void *func_8022C454_de(void *actorObject) {

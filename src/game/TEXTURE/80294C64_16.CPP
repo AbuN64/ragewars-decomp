@@ -6,7 +6,7 @@
 
 
 
-void func_80295F78_de(s32 **arg0, Shared_AnimInfo *animInfo) {
+void TextLoad_ReadTextureAnimationInfo(s32 **arg0, Shared_AnimInfo *animInfo) {
     s32 *temp_s0;
     s32 *tmp;
 

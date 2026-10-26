@@ -6,11 +6,11 @@
 #include "TEXTURE/80294C64_14.H"
 
 /** Store two words into a two-word value. */
-void func_80295E78_de(int *value, int first, int second) {
+void TextLoad_SetResourceLocation(int *value, int first, int second) {
     value[0] = first;
     value[1] = second;
 }
 
-void func_80295E84_de(s32 *arg0, s32 arg1) {
+void TextLoad_LocateTextureResource(s32 *arg0, s32 arg1) {
     Scene_LocateTextureResource(&g_world, arg1, arg0, arg0 + 1);
 }

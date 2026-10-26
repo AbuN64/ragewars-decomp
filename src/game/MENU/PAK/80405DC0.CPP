@@ -157,7 +157,7 @@ s32 Pak_ConfirmProfileOrDeleteNote(void *unused, MenuPakConfirmProfileOrDeleteNo
     return 1;
 }
 
-s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu) {
+s32 Pak_ClosePromptByKind(void *owner, MenuRecAt24 *menu) {
 
     s32 ch;
     s32 status;

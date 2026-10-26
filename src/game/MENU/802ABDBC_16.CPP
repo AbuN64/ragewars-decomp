@@ -20,7 +20,7 @@ extern void Player_AddAmmo(void *, s16, s16);
 
 
 /** Apply a three-channel effect descriptor and its optional payloads. */
-s32 func_802ACFB0_de(Actor_func_802AB400_de *arg0, MultiChannelItemEffect *arg1) {
+s32 Pickup_ApplyAmmoBundle(ActorPickupCanCollect *arg0, MultiChannelItemEffect *arg1) {
     void *resource;
     s32 sound;
     s32 callback;
@@ -55,7 +55,7 @@ s32 func_802ACFB0_de(Actor_func_802AB400_de *arg0, MultiChannelItemEffect *arg1)
     return 1;
 }
 
-void *func_802AD0B0_de(s32 arg0) {
+void *Pickup_FindBonusEntry(s32 arg0) {
     char *v1;
     s32 i;
     Shared_struct_D_800D34C0_0x18 *record;
@@ -75,7 +75,7 @@ void *func_802AD0B0_de(s32 arg0) {
 }
 
 /** Apply optional resource, sound, and callback effects for an actor. */
-void func_802AD0E4_de(void *arg0, void *resource, s32 sound, s32 callback) {
+void Pickup_ShowFeedback(void *arg0, void *resource, s32 sound, s32 callback) {
     if (((Shared_ActorView *)arg0)->message != 0) {
         Sky_StartFade(((Shared_ActorView *)arg0)->message,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
@@ -98,7 +98,7 @@ void func_802AD0E4_de(void *arg0, void *resource, s32 sound, s32 callback) {
     }
 }
 
-s32 func_802AD1B4_de(Shared_ActorView *arg0) {
+s32 Pickup_ToggleEffectAndFlash(Shared_ActorView *arg0) {
     f32 value;
     f32 input;
     f32 threshold;

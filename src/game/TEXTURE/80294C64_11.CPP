@@ -14,7 +14,7 @@
  * the index is set. Ported verbatim from the legacy branch source (byte-exact in that build). */
 
 
-void func_80295A60_us_rev1(void) {
+void TextLoad_SelectNextArtsendPage(void) {
     s32 temp_a0;
     s32 temp_v0;
     s32 var_v1;
@@ -34,26 +34,26 @@ void func_80295A60_us_rev1(void) {
     }
 }
 
-int func_80295AE0_us_rev1(void) {
+int TextLoad_GetArtsendTextureOverride(void) {
     return (int)D_8014AEB0.textureOverride;
 }
 
-int func_80295AF0_us_rev1(void) {
+int TextLoad_GetArtsendPaletteOverride(void) {
     return (int)D_8014AEB0.paletteOverride;
 }
 
 /** Compute a bit mask from the byte at offset 2 of the global record. */
-int func_80295B00_us_rev1(void) {
+int TextLoad_GetArtsendPrimaryButtonMask(void) {
     return 1 << D_8014AEB0.selector->primaryButton;
 }
 
-int func_80295B18_us_rev1(void) {
+int TextLoad_GetArtsendSecondaryButtonMask(void) {
     unsigned char shift = D_8014AEB0.selector->secondaryButton;
     return 1 << shift;
 }
 
 /** Return the mode mask selected by the global record's leading byte. */
-int func_80295B30_us_rev1(void) {
+int TextLoad_GetArtsendModeMask(void) {
     {
         int sw_mode_value = D_8014AEB0.selector->mode;
         if ((unsigned int)sw_mode_value > 5) {

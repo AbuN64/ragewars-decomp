@@ -8,8 +8,8 @@ extern void *D_800D5270;
 
 
 /** Return field 0x4 of arg0, falling back to a global record when arg0 is null. */
-int func_802BADA0_de(void *arg0) {
-    OSThread_s *p = arg0;
+int func_802BADA0_de(void *thread) {
+    OSThread_s *p = thread;
     if (p == 0) {
         p = D_800D5270;
     }

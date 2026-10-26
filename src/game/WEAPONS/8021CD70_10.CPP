@@ -24,7 +24,7 @@
 
 
 
-extern void *func_802AC950_de(s32);
+extern void *Pickup_FindAmmoEntry(s32);
 
 
 
@@ -79,7 +79,7 @@ s32 Player_AddAmmo(void *player, s32 slot, s32 amount) {
 }
 
 /* Returns whether a player can take more ammunition for a pickup: looks up the pickup's weapon slot
-   through func_802AC950_de, takes the cap as zero for no slot, the character's cap at 0x108 when option
+   through Pickup_FindAmmoEntry, takes the cap as zero for no slot, the character's cap at 0x108 when option
    D_801462D5 is not 1, or otherwise D_800CE3E8's cap raised, unless the flag at 0x1450 is set, by the
    player profile's bonus byte for slots 0, 1 and 2 in D_80102B00, and compares the slot's count at
    0x5F4 against it. */
@@ -88,7 +88,7 @@ s32 Player_AddAmmo(void *player, s32 slot, s32 amount) {
 
 
 
-extern void *func_802AC950_de(s32);
+extern void *Pickup_FindAmmoEntry(s32);
 
 
 
@@ -102,7 +102,7 @@ s32 func_80222D64_de(void *context, s32 pickupType) {
     s32 cap;
     s32 base;
 
-    pickup = func_802AC950_de(pickupType);
+    pickup = Pickup_FindAmmoEntry(pickupType);
     if (pickup == 0) {
         return 0;
     }

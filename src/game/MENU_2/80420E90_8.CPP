@@ -4,7 +4,7 @@
 #include "TYPES.H"
 
 #if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_80400000", func_80420E20_de);
+INCLUDE_ASM("ovl_80400000", Menu_OpenRuleToggleScreen);
 #endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
@@ -30,7 +30,7 @@ extern void Menu_RefreshExtraOptionLocks(void);
 #define ID(n) (n)
 #define COLOR 0x88
 #endif
-s32 func_80420E20_de(void *window) {
+s32 Menu_OpenRuleToggleScreen(void *window) {
     struct OptionsOpenScreen *screen;
     void *button;
 

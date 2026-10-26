@@ -184,7 +184,7 @@ typedef struct AiController {
     s32 unk32C; /* 0x32C */
 } AiController;
 
-extern void func_802AA794_de(char *, s32);
+extern void OnScreen_SetFirstBarTarget(char *, s32);
 
 
 extern void *Player_FindPlayerWithMarker(char *);

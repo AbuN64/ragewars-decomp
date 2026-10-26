@@ -11,7 +11,7 @@
 
 
 /** Decode a frontend input selector into its current button mask. */
-s32 func_802953FC_us_rev1(s32 arg0) {
+s32 TEngine_QueryArtsendOverride(s32 arg0) {
     if (D_800D2AE0 == 0) {
         goto zero;
     }

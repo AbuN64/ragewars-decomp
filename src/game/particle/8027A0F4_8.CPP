@@ -39,7 +39,7 @@ extern void TranslateMatrix(MatrixF *, f32, f32, f32);
 extern s32 GraphU64_NextRandom(void);
 extern void Particle_Release(EffectSystem *, ParticleEffect *);
 extern void func_80255D70_de(IntrusiveList *, ParticleEffect *, ParticleEffect *);
-extern void func_80295E84_de(u32 *, s32);
+extern void TextLoad_LocateTextureResource(u32 *, s32);
 extern void GameObject_ResetActorMotion(ParticleEffect *);
 extern f32 Rumble_SamplePackedFloatRange(CharacterScreenCell);
 
@@ -355,7 +355,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     break;
                 }
                 count++;
-                func_80295E84_de(&effect->unk11C, entry->unk4);
+                TextLoad_LocateTextureResource(&effect->unk11C, entry->unk4);
                 GameObject_ResetActorMotion(effect);
                 effect->unk110 = 0;
                 effect->unk114 = 0;

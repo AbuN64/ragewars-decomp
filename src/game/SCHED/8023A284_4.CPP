@@ -41,9 +41,9 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
     f32 maxS, minS, maxT, minT, shiftS, shiftT, factor;
     UnitVtx *vertex;
 
-    resource = func_80295F14_de(object->texture, -1);
+    resource = TextLoad_RequestTextureVariation(object->texture, -1);
     if (resource != 0) {
-        func_80295F78_de(resource, &animation);
+        TextLoad_ReadTextureAnimationInfo(resource, &animation);
         if (animation.unk0 != 0) {
             descriptor = object->descriptor;
             frame = animation.unk8;
@@ -54,7 +54,7 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
             gDPPipeSync(g_displayListCursor++);
             frameIndex = (s32)phase % animation.unk0;
 #if defined(VERSION_US_REV1)
-            func_80295FB4_us_rev1(object->texture, resource,
+            TextLoad_LoadTextureFrameTiles(object->texture, resource,
 #else
             func_802950B4_de(object->texture, resource,
 #endif
@@ -105,7 +105,7 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
                 alpha[i] = i == 0 ? fade : 0.0f;
             }
             for (i = 1; i < 5; i++) {
-                t = func_80296930_de(view->clipPlane, &points[0].x, &points[i].x);
+                t = VisData_GetPlaneSegmentFraction(view->clipPlane, &points[0].x, &points[i].x);
                 if (t >= 0.0f && t < 1.0f) {
                     points[i].x = points[0].x + t * (points[i].x - points[0].x);
                     points[i].z = points[0].z + t * (points[i].z - points[0].z);
@@ -206,7 +206,7 @@ extern f32 D_800D2988;
 extern Shared_ReactionFlags *Scene_GetModelRecordByIndexPointer(void *, void *);
 extern f32 Region_GetPolygonHeight(void *, s32, s32);
 extern void Sky_GetObjectPositionAt260(CVector3 *, void *);
-extern void func_80295E84_de(s32 *, s32);
+extern void TextLoad_LocateTextureResource(s32 *, s32);
 extern void func_80255ED8_de(void *, void *);
 extern void func_80255D14_de(void *, void *);
 extern void func_80255CB8_de(void *, void *);
@@ -320,7 +320,7 @@ void Sky_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
             if (object != 0) {
                 object->descriptor = descriptor;
                 object->mask = bit;
-                func_80295E84_de(object->texture, descriptor->texture);
+                TextLoad_LocateTextureResource(object->texture, descriptor->texture);
                 object->offsetS = 0.0f;
                 object->offsetT = 0.0f;
                 object->throttle = 0.0f;

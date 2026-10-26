@@ -157,16 +157,16 @@ block_5:
     if (temp_f3_4 < 0x100) {
         var_a3 = temp_f3_4;
     }
-    func_802AAB3C_de(var_a0_2, var_a1, var_a2, var_a3,
+    OnScreen_SetTextColors(var_a0_2, var_a1, var_a2, var_a3,
         (s32)((f32)temp_s1->unk19 * var_f1) > 0xFF ? 0xFF : (s32)((f32)temp_s1->unk19 * var_f1),
         (s32)((f32)temp_s1->unk1A * var_f1) > 0xFF ? 0xFF : (s32)((f32)temp_s1->unk1A * var_f1));
     D_801376F8.shadowX = (s32) temp_s1->unk14;
     D_801376F8.shadowY = (s32) temp_s1->unk14;
-    func_802AAB68_de(temp_s1->unkC * (f32) (D_800E28D0) * 0.0035211267f, temp_s1->unk10 * (f32) (D_800E28D4) * 0.0045045046f);
+    OnScreen_SetTextScale(temp_s1->unkC * (f32) (D_800E28D0) * 0.0035211267f, temp_s1->unk10 * (f32) (D_800E28D4) * 0.0045045046f);
     if (var_s5 != 0) {
         var_s5 = temp_s1->unk14;
     }
-    func_802A8F28_de(arg4, entry->unk14, entry->unk1C, (s32) (arg3->alpha * (arg3->fade * 255.0f)), 0, (s32) var_s5, 1.0f, 1.0f);
+    OnScreen_DrawText(arg4, entry->unk14, entry->unk1C, (s32) (arg3->alpha * (arg3->fade * 255.0f)), 0, (s32) var_s5, 1.0f, 1.0f);
 }
 
 void func_804402DC_de(MenuOption *arg0, MenuOptionBox *box, s32 dir, MenuOptionFade *arg3) {
@@ -208,5 +208,5 @@ void func_804402DC_de(MenuOption *arg0, MenuOptionBox *box, s32 dir, MenuOptionF
         D_800E1E20 = 3;
         OnScreen_SetupSpriteMode((s32) (arg3->fade * (arg3->alpha * D_800DE47C_de)));
     }
-    func_802AAC28_de(arg0->resource, 0, (s16)box->left, (s16)box->top, box->scaleX, box->scaleY, 1);
+    OnScreen_DrawSpriteResource(arg0->resource, 0, (s16)box->left, (s16)box->top, box->scaleX, box->scaleY, 1);
 }

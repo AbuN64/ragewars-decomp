@@ -64,8 +64,8 @@ void SetN64_ClearDepthRect(void *unused, s32 ulx, s32 lrx, s32 uly, s32 lry, s32
     gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
 }
 
-extern void func_802AAB3C_de(s32, s32, s32, s32, s32, s32);
-extern void func_802AAB68_de(f32, f32);
+extern void OnScreen_SetTextColors(s32, s32, s32, s32, s32, s32);
+extern void OnScreen_SetTextScale(f32, f32);
 
 /* Draw a null-terminated list of scaled strings, with an optional full-screen backdrop. */
 void SetN64_DrawTextLines(void *state, s32 drawBackdrop, char **lines, s32 x, s32 y, s32 lineStep, f32 scaleX, f32 scaleY) {
@@ -85,17 +85,17 @@ void SetN64_DrawTextLines(void *state, s32 drawBackdrop, char **lines, s32 x, s3
         gDPFillRectangle(g_displayListCursor++, 0, 0, D_800E28D0, D_800E28D4);
     }
     OnScreen_SetupTextRendering();
-    func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
+    OnScreen_SetTextColors(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
     scaleX = scaleX * D_800E28D0 * (1.0f / 284.0f);
     scaleY = scaleY * D_800E28D4 * (1.0f / 222.0f);
     scaleX *= (D_800E28D4 >= 0xDF) ? 0.8f : 0.85f;
     scaleY *= 0.5f;
-    func_802AAB68_de(scaleX, scaleY);
+    OnScreen_SetTextScale(scaleX, scaleY);
     D_801376F8.shadowX = 1;
     D_801376F8.shadowY = 1;
     for (i = 0; lines[i] != 0; i++) {
         text = lines[i];
-        func_802A8F28_de(text, x, y, 0xFF, 1, 1, 1.0f, 1.0f);
+        OnScreen_DrawText(text, x, y, 0xFF, 1, 1, 1.0f, 1.0f);
         y = y + lineStep * scaleY;
     }
 }

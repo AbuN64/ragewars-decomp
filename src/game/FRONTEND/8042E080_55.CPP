@@ -13,7 +13,7 @@
 
 
 
-void func_804354C0_de(s32 index) {
+void PAKInterface_RestoreSavePacket(s32 index) {
     s32 offset = index * 2920;
 
     XPlus_CopyBytes(&((ObjectState71 *)((offset + (s32) D_800E54A4)))->unk_70, &D_800E54A4->packet, 0x640);

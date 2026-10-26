@@ -301,7 +301,7 @@ extern GlobalsMenuSetOptionsSceneSelection D_80140FE8_de;
 extern s32 D_80140FF8, D_800D297C;
 extern float D_800C4E54_de;
 extern void Geometry_SetColorDither(s32 arg0);
-extern s32 func_80296B74_de(CQuatern *planes, Box *box);
+extern s32 VisData_TestBoxAgainstFrustum(CQuatern *planes, Box *box);
 extern void Particle_DrawSprite(Shared_Particle *particle, GameplayCamera *view);
 extern void Fx_AddParticleRibbonSamples(ObjRecAt7528 *arg0, Shared_Particle *arg1, PackedMatrixWords *matrix);
 void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
@@ -348,7 +348,7 @@ void Particle_DrawRenderList(ParticleDrawWorld *world, GameplayCamera *view) {
                     if (minX < view->clipBounds[1].x && view->clipBounds[0].x < maxX &&
                         minZ < view->clipBounds[1].z && view->clipBounds[0].z < maxZ &&
                         minY < view->clipBounds[1].y && view->clipBounds[0].y < maxY &&
-                        func_80296B74_de(view->clipPlanes, &box)) {
+                        VisData_TestBoxAgainstFrustum(view->clipPlanes, &box)) {
                         visible = 1;
                     }
                 } else visible = 1;

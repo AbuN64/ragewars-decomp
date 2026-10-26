@@ -620,7 +620,7 @@ struct SceneObject {
     void (*update)(SceneObject *, void *); /* 0x28C */
 };
 extern void *func_8024BFD4_de(SceneObject *, s32);
-extern s32 func_80296B74_de(void *, void *);
+extern s32 VisData_TestBoxAgainstFrustum(void *, void *);
 extern void Geometry_InvalidateMaterialKeys(void);
 extern void TextLoad_ResetTextureCache(void);
 /* Draws one scene object: loads its model, culls its bounding box against the camera's clip box and plane test,
@@ -661,7 +661,7 @@ void func_80249E28_de(SceneObject *object, struct Racer *camera) {
             if (camera->clipBounds[1].x > object->bounds.min.x && camera->clipBounds[0].x < object->bounds.max.x &&
                 camera->clipBounds[1].z > object->bounds.min.z && camera->clipBounds[0].z < object->bounds.max.z &&
                 camera->clipBounds[1].y > object->bounds.min.y && camera->clipBounds[0].y < object->bounds.max.y &&
-                func_80296B74_de((char *)camera + 0x2F0, &object->bounds) != 0) {
+                VisData_TestBoxAgainstFrustum((char *)camera + 0x2F0, &object->bounds) != 0) {
                 visible = 1;
                 if (object->model != 0) {
                     goto sync;

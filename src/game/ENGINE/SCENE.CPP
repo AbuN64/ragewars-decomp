@@ -74,8 +74,8 @@ extern void Scene_ResetTransitionViewport();
 extern void Scene_ReleaseCachedLevelData();
 extern int SetN64_GetDirectoryEntry();
 extern s32 XPlus_NextRandomInteger();
-extern s32 func_802AA730_de();
-extern void func_802AA760_de();
+extern s32 OnScreen_StartFirstStatusBar();
+extern void OnScreen_StartSecondStatusBar();
 extern void Menu_TriggerTrackEvent();
 extern void func_80449E18_de();
 extern void Items_InitGroupPools();
@@ -293,12 +293,12 @@ void Scene_LoadLevelResources(void *table, s32 target, s32 arg2) {
                 temp_v0_3 = (((struct SharedRecAt94 *)(temp_a2))->unk94);
                 if (temp_v0_3 != 0) {
                     if (temp_v0_3 == 1) {
-                        func_802AA730_de(&D_801376F8, var_s1_4, &((struct SharedRecAt94 *)temp_a2)->address84);
+                        OnScreen_StartFirstStatusBar(&D_801376F8, var_s1_4, &((struct SharedRecAt94 *)temp_a2)->address84);
                     } else if (temp_v0_3 == 2) {
-                        func_802AA760_de(&D_801376F8, var_s1_4, &((struct SharedRecAt94 *)temp_a2)->address84);
+                        OnScreen_StartSecondStatusBar(&D_801376F8, var_s1_4, &((struct SharedRecAt94 *)temp_a2)->address84);
                     }
                     if (var_s1_4->unk5D8->unk80 == 0xB) {
-                        func_802AA730_de(&D_801376F8, var_s1_4, D_800D3164);
+                        OnScreen_StartFirstStatusBar(&D_801376F8, var_s1_4, D_800D3164);
                     }
                 }
             }

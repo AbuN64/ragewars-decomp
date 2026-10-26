@@ -20,7 +20,7 @@ extern void func_8025E384_de(void);
 
 extern void func_80298368_de(s32);
 
-s32 func_80435CD8_de(void) {
+s32 Frontend_ActivatePauseMenuAction(void) {
     s32 time;
 
     MarkMenuEventHandled();

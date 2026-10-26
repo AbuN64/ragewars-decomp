@@ -664,7 +664,7 @@ s32 Events_CanAffectActor(char *actor, char *target)
 typedef struct PushStrength { u16 value; u16 pad; } PushStrength;
 typedef struct PushScale { s8 value; u8 pad[3]; } PushScale;
 extern f32 D_800C4434_de;
-void func_802675C8_de(struct Player *actor, u8 *other, PushStrength strength, PushScale scale, CVector3 *out) {
+void Events_ComputeRadialImpulse(struct Player *actor, u8 *other, PushStrength strength, PushScale scale, CVector3 *out) {
     char frame[0x10];
     CVector3 offset;
     char scratch[0x50];

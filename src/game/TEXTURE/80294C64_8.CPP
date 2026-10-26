@@ -7,12 +7,12 @@
 #if defined(VERSION_US_REV1)
 extern char D_8014AEC8[];
 
-extern Selection_func_802955EC_us_rev1 D_8014AECC;
+extern SelectionTextLoadApplyArtsendTextureOverride D_8014AECC;
 
 
 
 
-void func_802955EC_us_rev1(s32 resource, s32 **texture) {
+void TextLoad_ApplyArtsendTextureOverride(s32 resource, s32 **texture) {
     s32 enabled;
     s32 choose;
 

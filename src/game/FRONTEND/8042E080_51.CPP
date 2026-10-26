@@ -8,7 +8,7 @@
 
 
 
-int func_80435340_de(void) {
+int PAKInterface_ArePlayerLinksEmpty(void) {
     int result;
     int i;
 

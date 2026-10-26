@@ -138,5 +138,5 @@ typedef struct ObjectState71 ObjectState71;
 
 
 
-extern void func_804355E8_de(void);
+extern void PAKInterface_LoadAllLinkedProfiles(void);
 #endif

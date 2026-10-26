@@ -344,17 +344,17 @@ u8 func_802AE500_de(ALCSeq_s *seq, u32 track);
 
 s32 __readVarLen(s32 seq, s32 track) {
     s32 temp_v0;
-    s32 var_s0;
+    s32 decodedValue;
 
-    var_s0 = (u8) func_802AE500_de(seq, track);
-    if (var_s0 & 0x80) {
-        var_s0 &= 0x7F;
+    decodedValue = (u8) func_802AE500_de(seq, track);
+    if (decodedValue & 0x80) {
+        decodedValue &= 0x7F;
         do {
             temp_v0 = (u8) func_802AE500_de(seq, track);
-            var_s0 = (var_s0 << 7) + (temp_v0 & 0x7F);
+            decodedValue = (decodedValue << 7) + (temp_v0 & 0x7F);
         } while (temp_v0 & 0x80);
     }
-    return var_s0;
+    return decodedValue;
 }
 
 /** Read the object word at offset 0x2C. */

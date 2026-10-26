@@ -19,20 +19,20 @@ void func_8021EA54_de(PowerHudPlayer *player, Shared_HudView *view) {
     }
     halfWidth=sx*D_800C25D4_de;
     if(player->first!=player->a.last || player->refreshA) {
-        if(Frontend_GetScreenMode()==0) func_802AA70C_de(&player->a,D_800C9288_de);
-        else func_802AA70C_de(&player->a,D_800C9288_de+12);
+        if(Frontend_GetScreenMode()==0) OnScreen_StartMoverScript(&player->a,D_800C9288_de);
+        else OnScreen_StartMoverScript(&player->a,D_800C9288_de+12);
         player->refreshA=0;
         player->a.last=player->first;
     }
     if(player->second!=player->b.last || player->refreshB) {
-        if(Frontend_GetScreenMode()==0) func_802AA70C_de(&player->b,D_800C9328_de-12);
-        else func_802AA70C_de(&player->b,D_800C9328_de);
+        if(Frontend_GetScreenMode()==0) OnScreen_StartMoverScript(&player->b,D_800C9328_de-12);
+        else OnScreen_StartMoverScript(&player->b,D_800C9328_de);
         player->refreshB=0;
         player->b.last=player->second;
     }
     if(player->third!=player->c.last || player->refreshC) {
-        if(Frontend_GetScreenMode()==0) func_802AA70C_de(&player->c,D_800C9368);
-        else func_802AA70C_de(&player->c,D_800C9398_de);
+        if(Frontend_GetScreenMode()==0) OnScreen_StartMoverScript(&player->c,D_800C9368);
+        else OnScreen_StartMoverScript(&player->c,D_800C9398_de);
         player->refreshC=0;
         player->c.last=player->third;
     }
@@ -41,7 +41,7 @@ void func_8021EA54_de(PowerHudPlayer *player, Shared_HudView *view) {
             x=player->a.x*sx+view->x;
             y=player->a.y*sy+view->y+view->height;
             x+=offset;
-            func_802AAC28_de(0xBEA,0,(s16)(x-halfWidth),(s16)(y-sy*D_800C25D8_de),sx,sy,1);
+            OnScreen_DrawSpriteResource(0xBEA,0,(s16)(x-halfWidth),(s16)(y-sy*D_800C25D8_de),sx,sy,1);
             x-=sx*D_800C25DC_de;
             y-=sy*D_800C25E0_de;
             OnScreen_DrawSpriteNumber(player->first,x,y,sx*numberScale,sy,1,0,0);
@@ -50,7 +50,7 @@ void func_8021EA54_de(PowerHudPlayer *player, Shared_HudView *view) {
             x=player->b.x*sx+view->x;
             y=player->b.y*sy+view->y+view->height;
             x+=offset;
-            func_802AAC28_de(0xBEB,0,(s16)(x-halfWidth),(s16)(y-sy*D_800C25E4_de),sx,sy,1);
+            OnScreen_DrawSpriteResource(0xBEB,0,(s16)(x-halfWidth),(s16)(y-sy*D_800C25E4_de),sx,sy,1);
             x-=sx*D_800C25E8_de;
             y-=sy*D_800C25EC_de;
             OnScreen_DrawSpriteNumber(player->second,x,y,sx*numberScale,sy,1,0,0);
@@ -59,7 +59,7 @@ void func_8021EA54_de(PowerHudPlayer *player, Shared_HudView *view) {
             x=player->c.x*sx+view->x;
             y=player->c.y*sy+view->y+view->height;
             x+=offset;
-            func_802AAC28_de(0xBEC,0,(s16)(x-halfWidth),(s16)(y-sy*D_800C25F0_de),sx,sy,1);
+            OnScreen_DrawSpriteResource(0xBEC,0,(s16)(x-halfWidth),(s16)(y-sy*D_800C25F0_de),sx,sy,1);
             x-=sx*D_800C25F4_de;
             y-=sy*D_800C25F8_de;
             OnScreen_DrawSpriteNumber(player->third,x,y,sx*numberScale,sy,1,0,0);

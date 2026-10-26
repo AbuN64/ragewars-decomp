@@ -19,7 +19,7 @@ extern char D_80102B00[];
 
 
 
-void func_804356BC_de(s32 linkIndex) {
+void PAKInterface_LoadLinkedPlayerProfile(s32 linkIndex) {
     char *record;
     s32 place;
     s32 owner;

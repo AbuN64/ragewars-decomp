@@ -13,7 +13,7 @@ extern void func_802A2224_de();
 #endif
 extern void func_80298368_de(int);
 
-void func_80435B10_de(void) {
+void Frontend_OpenGameplayFrontend(void) {
     
 #if defined(VERSION_EU)
 Tsmos_InitializeEuropeanFrontend

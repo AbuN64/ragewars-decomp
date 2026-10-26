@@ -59,14 +59,14 @@ void PAKInterface_ResolvePlayerPakState(s32 player)
               break;
 
             case 7:
-              if (func_80435184_de(player) == one)
+              if (PAKInterface_AreProfileSlotsEmpty(player) == one)
             {
               D_800E54A4->players[player].state = 15;
             }
               break;
 
             case 2:
-              if (func_80435184_de(player) == one)
+              if (PAKInterface_AreProfileSlotsEmpty(player) == one)
             {
               D_800E54A4->players[player].state = 25;
             }
@@ -78,7 +78,7 @@ void PAKInterface_ResolvePlayerPakState(s32 player)
               break;
 
             case 5:
-              if (func_8043590C_de(player) == 0)
+              if (Frontend_CheckOwnedProfileIds(player) == 0)
             {
               D_800E54A4->players[player].state = 21;
             }

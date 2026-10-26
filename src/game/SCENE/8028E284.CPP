@@ -41,7 +41,7 @@ void Scene_CollectSecondarySpecialActors(SceneRecAt140 *scene) {
 
 
 
-extern void func_802AA8EC_de(void *table, s32 index, void **out, u8 *tag);
+extern void OnScreen_GetImageEntry(void *table, s32 index, void **out, u8 *tag);
 
 void Scene_RemapFourBitImagePixels(void *unused0, void *table, u8 *remap) {
     s32 i;
@@ -63,7 +63,7 @@ void Scene_RemapFourBitImagePixels(void *unused0, void *table, u8 *remap) {
     end = -1;
     for (; i < 256; i++) {
         end = -1;
-        func_802AA8EC_de(table, i, &data, &tag);
+        OnScreen_GetImageEntry(table, i, &data, &tag);
         rows = data == 0;
         if (rows) {
             continue;
@@ -135,7 +135,7 @@ void Scene_UnpackImagesWithLowBoost(void *unused0, void **resource) {
     do {
         for (i = 0; i < 256; i++) {
             end = -1;
-            func_802AA8EC_de(table, i, &data, &tag);
+            OnScreen_GetImageEntry(table, i, &data, &tag);
             if (data == 0) {
                 continue;
             }
@@ -206,7 +206,7 @@ void Scene_UnpackImagesWithHighBoost(void *unused0, void **resource) {
     do {
         for (i = 0; i < 256; i++) {
             end = -1;
-            func_802AA8EC_de(table, i, &data, &tag);
+            OnScreen_GetImageEntry(table, i, &data, &tag);
             if (data == 0) {
                 continue;
             }

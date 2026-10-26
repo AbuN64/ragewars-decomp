@@ -41,5 +41,5 @@ void func_8021E08C_de(View *view, CVector3 *point, s32 icon, f32 frame, f32 scal
         }
     }
     offset = scale * size - 1.0f;
-    func_802AAC28_de(icon, frame, x - offset, y - offset, size, size, 1);
+    OnScreen_DrawSpriteResource(icon, frame, x - offset, y - offset, size, size, 1);
 }

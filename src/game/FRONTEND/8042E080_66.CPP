@@ -8,7 +8,7 @@
 extern void Tsmos_ActivateControllerState();
 extern void Tsmos_SetTimerState(s32);
 
-s32 func_804359D0_de(void) {
+s32 Frontend_DestroyPakProfileScreen(void) {
     Cache_FreeMemory(D_800E54A4);
     D_800E54A4 = 0;
     Tsmos_ActivateControllerState();
