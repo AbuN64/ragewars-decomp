@@ -4,7 +4,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 /* Section zero of packed and expanded mesh resources. */
-typedef struct PackedMeshMaterial {
+typedef struct CROMSection {
     s32 textureId;
     s32 flags;
     u16 renderMode;
@@ -14,7 +14,7 @@ typedef struct PackedMeshMaterial {
     u8 secondaryColor[4];
     u16 width;
     u16 height;
-} PackedMeshMaterial;
+} CROMSection;
 typedef struct MeshMaterial {
     s32 flags;
     s16 renderMode;

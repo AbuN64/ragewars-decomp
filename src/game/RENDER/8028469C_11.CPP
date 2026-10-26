@@ -11,7 +11,7 @@ extern void TextLoad_LocateTextureResource(s32 *arg0, s32 arg1);
 
 
 
-void Rumble_ExpandMeshMaterial(MeshMaterial *dstData, PackedMeshMaterial *arg1) {
+void Rumble_ExpandMeshMaterial(MeshMaterial *dstData, CROMSection *arg1) {
     s16 value;
     s32 reference;
 

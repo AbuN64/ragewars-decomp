@@ -66,7 +66,7 @@ static __inline__ f64 unsignedDouble(u32 value,const f64 *bias) {
     return result;
 }
 
-static __inline__ f32 wrapAngle(AnimChannel *anim,f32 time) {
+static __inline__ f32 wrapAngle(CGameAnimateState_t *anim,f32 time) {
     s16 *keys;
     s32 first,next,last;
     keys=((AngleKeys *)SetN64_GetPackSection(func_8026049C_de(anim),0))->keys;
@@ -116,7 +116,7 @@ void func_80261670_de(Anim *anim, s32 table, s32 key, s32 blend, s32 *switched, 
     load(anim, table, key, current);
 }
 
-void func_8026193C_de(AnimChannel *animationChannel, CVector3 *translationDeltaOut, f32 *angleDeltaOut, RootActor *rootMotionActor) {
+void func_8026193C_de(CGameAnimateState_t *animationChannel, CVector3 *translationDeltaOut, f32 *angleDeltaOut, RootActor *rootMotionActor) {
     CVector3 startRootPosition;
     CVector3 endRootPosition;
     f32 angleSample;

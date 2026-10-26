@@ -11,7 +11,7 @@ typedef struct ResourceBlock { s32 count; s32 offset[1]; } ResourceBlock;
 
 typedef struct ResourceHandle { ResourceBlock *block; s32 bytes; } ResourceHandle;
 
-typedef struct MotionHeader {
+typedef struct CAnimCompInfo {
     s32 channels;
     s32 frames;
     s32 flags;
@@ -20,7 +20,7 @@ typedef struct MotionHeader {
     s32 translations;
     f32 frameCount;
     f32 frameStep;
-} MotionHeader;
+} CAnimCompInfo;
 
 extern s32 PpDecom_UnpackResource(void **, s32);
 
@@ -102,11 +102,11 @@ void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
     s32 rotationBytes, translationBytes;
     void *section6;
     ResourceBlock *motion;
-    MotionHeader *header;
+    CAnimCompInfo *header;
     ResourceHandle *output;
     ResourceBlock *result;
     ResourceBlock *newMotion;
-    MotionHeader *newHeader;
+    CAnimCompInfo *newHeader;
     void *rotations, *translations, *newRotations, *newTranslations;
     s32 sourceBytes;
     s32 sourceFrames;
@@ -123,7 +123,7 @@ void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
         section3 = (void *)SetN64_GetSizedPackSection((s32)source, 3, &bytes3);
         section4 = (void *)SetN64_GetSizedPackSection((s32)source, 4, &bytes4);
         motion = (ResourceBlock *)SetN64_GetSizedPackSection((s32)source, 5, &bytes5);
-        header = (MotionHeader *)SetN64_GetPackSection((s32 *)motion, 0);
+        header = (CAnimCompInfo *)SetN64_GetPackSection((s32 *)motion, 0);
         SetN64_GetSizedPackSection((s32)motion, 1, &fetchedRotationBytes);
         SetN64_GetSizedPackSection((s32)motion, 2, &fetchedTranslationBytes);
         section6 = (void *)SetN64_GetSizedPackSection((s32)source, 6, &bytes6);
@@ -155,7 +155,7 @@ void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
             resource_reserve(newMotion, rotationBytes);
             resource_reserve(newMotion, translationBytes);
             resource_copy(result, section6, bytes6);
-            newHeader = (MotionHeader *)SetN64_GetPackSection((s32 *)motion, 0);
+            newHeader = (CAnimCompInfo *)SetN64_GetPackSection((s32 *)motion, 0);
             rotations = SetN64_GetPackSection((s32 *)motion, 1);
             translations = SetN64_GetPackSection((s32 *)motion, 2);
             newRotations = SetN64_GetPackSection((s32 *)newMotion, 1);

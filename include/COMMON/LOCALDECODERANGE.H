@@ -98,12 +98,12 @@ typedef struct Track_func_80261180_de Track_func_80261180_de;
 struct ObjRecAt4V4;
 
 
-typedef struct AnimChannel {
+typedef struct CGameAnimateState_t {
     f32 time;
     s16 current,next,frames;
     u8 active,blending;
     char padc[4]; void *resource;
-} AnimChannel;
+} CGameAnimateState_t;
 extern f32 GraphU64_InterpolateWrappedValue(f32,f32,f32);
 extern s32 func_802625C4_de(void *);
 #endif

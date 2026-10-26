@@ -2,7 +2,7 @@
 #define MATH_8029AE80_H
 #include "TYPES.H"
 /* Shared button/axis event produced by 8029AAD8 and 8029AB24. */
-typedef struct ControllerEvent {
+typedef struct input_event {
     s16 source;
     s16 device;
     s16 kind;
@@ -12,5 +12,5 @@ typedef struct ControllerEvent {
     s16 x;
     s16 y;
     s16 z;
-} ControllerEvent;
+} input_event;
 #endif

@@ -29,9 +29,9 @@ extern void Events_DeliverContactEffect(char *, char *, u16, s32, CVector3, stru
 
 
 extern void Cache_UnlockResource(s32 arg0, s32 arg1);
-extern void PolyTrak_SampleVectorTrack(AnimChannel *, s32, f32, f32 *);
+extern void PolyTrak_SampleVectorTrack(CGameAnimateState_t *, s32, f32, f32 *);
 
-void *func_8024C104_de(Triple *outOffset, void *actor, AnimChannel *anim) {
+void *func_8024C104_de(Triple *outOffset, void *actor, CGameAnimateState_t *anim) {
     char *o1 = (char *) actor;
     char mtx[0x40];
     f32 spVec[3];
@@ -91,7 +91,7 @@ int func_8024C344_de(void) {
     return 0;
 }
 
-void func_8024C34C_de(LevelActor *actor, AnimChannel *animation) {
+void func_8024C34C_de(LevelActor *actor, CGameAnimateState_t *animation) {
     Scratch scratch;
     f32 zero;
 

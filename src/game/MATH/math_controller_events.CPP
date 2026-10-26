@@ -39,7 +39,7 @@ static inline void ControllerButtonSetHeld(s16 device, s16 control, s16 pressed)
     }
 }
 
-void DispatchControllerButtonEvent(ControllerEvent *event) {
+void DispatchControllerButtonEvent(input_event *event) {
     s32 manager;
     s32 source;
     s32 control;
@@ -100,7 +100,7 @@ static inline ControllerAxisState *Controller_FindAxisState(s32 device, s16 cont
     return &D_8014D0B0->axes[device][control];
 }
 
-void DispatchControllerAxisEvents(ControllerEvent *event) {
+void DispatchControllerAxisEvents(input_event *event) {
     s32 id, threshold, yValue, xValue, yCode, xCode, yCross, xCross;
     s16 dimensions;
     s32 device;
@@ -151,7 +151,7 @@ void DispatchControllerAxisEvents(ControllerEvent *event) {
 
 
 
-void Smos_DispatchControllerEvent(ControllerEvent *event) {
+void Smos_DispatchControllerEvent(input_event *event) {
 
     s32 source;
 
@@ -274,7 +274,7 @@ void Smos_FreeControllerContext(void) {
 }
 
 void Smos_SendControllerButtonEvent(s16 arg0, s16 arg1, s32 arg2) {
-    ControllerEvent m;
+    input_event m;
 
     m.source = 4;
     m.device = arg0;
@@ -289,7 +289,7 @@ void Smos_SendControllerButtonEvent(s16 arg0, s16 arg1, s32 arg2) {
 }
 
 void Smos_SendControllerStickEvent(s16 arg0, s32 arg1, s32 arg2) {
-    ControllerEvent m;
+    input_event m;
 
     m.source = 4;
     m.kind = 3;

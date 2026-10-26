@@ -130,5 +130,5 @@ struct BankRecAt94;
 struct ObjectSceneChangeInstanceModel;
 
 struct MeshMaterial;
-struct PackedMeshMaterial;
+struct CROMSection;
 #endif
