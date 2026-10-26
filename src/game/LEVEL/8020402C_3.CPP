@@ -12,6 +12,7 @@
 #include "COMMON/EFFECTCONTRIBUTION.H"
 #include "LEVEL/8020402C_3.H"
 #include "WEAPONS/80213ED4.H"
+#include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 
 extern void Render_SetActorStateBit(Shared_World *, void *, s32);
 extern void func_80267198_de(void *, void *, s32, CVector3, ResourceManagerState);
@@ -90,14 +91,12 @@ void Level_UpdateBreakableHit(BreakableHitContext *ctx, BreakableContactState *h
 
 
 
-extern void func_80267198_de(void *, void *, s32, CVector3, ResourceManagerState);
 
-extern void Render_SetActorStateBit(Shared_World *, void *, s32);
 
 extern s32 Render_TestActorStateBit(void *, void *);
 
 
-extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
+extern void func_80278D78_de(struct Shared_Actor *arg0, s32 arg1, void *arg2);
 
 extern void Render_SetActorStateBit(Shared_World *arg0, void *arg1, s32 arg2);
 
@@ -211,3 +210,78 @@ void func_80204E2C_de(void *a, void *b) {
 void func_80204E48_de(Trigger *trigger) {
     func_8028B670_de(&g_world, trigger->owner, trigger->actor, 0);
 }
+
+extern s32 Render_TestActorStateBit(void *, void *);
+
+
+
+int func_80204E78_de(int actor) {
+    return Render_TestActorStateBit(&g_world, actor) == 1;
+}
+
+/** Submit an object's three-word record, then attach it in mode one. */
+void func_80204EA8_de(LevelActor *actor) {
+    ResourceManagerState pair;
+
+    pair.active = 0;
+    func_80267198_de(actor, actor, 6, actor->position0, pair);
+    Render_SetActorStateBit(&g_world, actor, 1);
+}
+
+/** Submit an object's three-word record, then attach it to the global owner. */
+void func_80204F10_de(LevelActor *actor) {
+    ResourceManagerState pair;
+
+    pair.active = 0;
+    func_80267198_de(actor, actor, 7, actor->position0, pair);
+    Render_SetActorStateBit(&g_world, actor, 0);
+}
+
+/** Update the floating state at offsets 0x40 and 0x64 under its range rules. */
+void func_80204F78_de(void *unused, char *object, float value) {
+    ActorMotionState *state = (void *)object;
+    if (value == 0.0f || state->speed < value) {
+        if (state->speed == 0.0f) {
+            state->timer = 0.0f;
+        }
+        state->speed = value;
+    }
+}
+
+/** Report whether the actor on the given cell is within the scaled trigger distance. */
+
+
+
+
+int func_80204FC4_de(ActorRecAt134 *actor, Cell *cell, float scale) {
+    if (actor->always == 1) {
+        return 1;
+    }
+    if (actor->x == (signed char)cell->pos && actor->y == (signed char)cell->pos) {
+        if (cell->open != 0 && !(actor->flags & 0x400)) {
+            return 1;
+        }
+        if (actor->level < 3 && (actor->flags & 0x400)) {
+            if (actor->altLevel * scale <= actor->altRange) {
+                return 1;
+            }
+            return 0;
+        }
+        if (actor->level * scale <= actor->range) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+#if defined(VERSION_EU_X)
+unsigned int func_802050B4_eu_x_padding_5CB4[3] = {
+    0xC44C000C, 0xC44E0010, 0x0C09D2BC,
+};
+#endif
+
+#if defined(VERSION_DE)
+unsigned int func_80205094_de_padding_5C94[3] = {
+    0x39000000, 0x04000000, 0x10000000,
+};
+#endif
