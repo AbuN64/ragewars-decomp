@@ -1,20 +1,6 @@
 #ifndef OVLGAME_80447BB0_H
 #define OVLGAME_80447BB0_H
 #include "TYPES.H"
-struct ObjectState96 {
-    char pad0[0x78];
-    u8 m_Active;
-    char pad78[0x7F - 0x78 - sizeof(u8)];
-    s8 m_nController;
-    char pad7F[0x80 - 0x7F - sizeof(s8)];
-    s8 m_nCharacter;
-    char pad80[0x81 - 0x80 - sizeof(s8)];
-    u8 m_nCharacterSkin;
-    char pad81[0x91 - 0x81 - sizeof(u8)];
-    u8 m_IsBot;
-    char pad91[0x95 - 0x91 - sizeof(u8)];
-    u8 m_TalsetPosse;
-};
 struct IntegerState88 {
     char pad0[0x74];
     s32 unk_74;

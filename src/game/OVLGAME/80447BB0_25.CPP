@@ -1,3 +1,4 @@
+#include "MENU/ITEMS/80444030_4.H"
 #include "COMMON/OBJECTSTATE96.H"
 #include "COMMON/GAME_SESSION.H"
 #include "OVLGAME/80447BB0.H"
@@ -106,8 +107,8 @@ void Ovlgame_InitializePlayerPool(CPlayerPool *pool, s32 count, s32 force_active
 
     for (i = 0; i < pool->count; i++) {
         entry = global + 0xD0 + i * 0x96;
-        if (((ObjectState96 *)(entry))->m_TalsetPosse != 0) {
-            ((ObjectState96 *)(entry))->m_Active = 0;
+        if (((CPlayerOptions *)(entry))->talsetPosse != 0) {
+            ((CPlayerOptions *)(entry))->active = 0;
         }
     }
 
@@ -124,18 +125,18 @@ void Ovlgame_InitializePlayerPool(CPlayerPool *pool, s32 count, s32 force_active
 initialize_object:
             entry = global + entry_offset;
             object = pool->m_Players + object_offset;
-            ((struct Shared_ActorView *)(object))->remote = ((ObjectState96 *)(entry))->m_IsBot;
+            ((struct Shared_ActorView *)(object))->remote = ((CPlayerOptions *)(entry))->isBot;
             ((struct Shared_ActorView *)(object))->actorState = 0;
             if (((struct Shared_ActorView *)(object))->remote != 0) {
                 ContPad_InitControllerInput(object + 0x688, D_8010EEB8);
-                ((struct Shared_ActorView *)(object))->mode = ((ObjectState96 *)(entry))->m_nController;
+                ((struct Shared_ActorView *)(object))->mode = ((CPlayerOptions *)(entry))->controller;
             } else {
                 ContPad_InitControllerInput(object + 0x688, D_8010F328 + attribute_offset);
                 ((struct Shared_ActorView *)(object))->mode = i;
             }
             owner = ((struct Shared_ActorView *)(object))->owner;
             ((struct Shared_ActorView *)(object))->controls = (Shared_ControlView *)entry;
-            object_id = ((ObjectState96 *)(entry))->m_nCharacterSkin;
+            object_id = ((CPlayerOptions *)(entry))->characterSkin;
             ((struct Shared_ActorView *)(object))->field11BC = 0;
             ((struct Shared_ActorView *)(object))->field11C0 = 0;
             ((struct Shared_ActorView *)(object))->spawn = 0;
@@ -165,8 +166,8 @@ initialize_object:
             ((struct Shared_ActorView *)(object))->field16D4 = 0;
             ((struct Shared_ActorView *)(object))->field16D8 = 0;
             ItemMenu_ResetEntries(&((Shared_ActorView *)object)->record);
-            if (((ObjectState96 *)(entry))->m_Active != 0) {
-                Ovlgame_ResetPlayerForRound(object, ((ObjectState96 *)(entry))->m_nCharacter, 1);
+            if (((CPlayerOptions *)(entry))->active != 0) {
+                Ovlgame_ResetPlayerForRound(object, ((CPlayerOptions *)(entry))->character, 1);
                 func_80255ED8_de(&pool->m_FreeList, object);
                 func_80255CB8_de(&pool->m_ActiveList, object);
             }
@@ -179,19 +180,19 @@ initialize_object:
             }
     } else {
         object = pool->m_Players;
-        roster_index = ((ObjectState96 *)(entry))->m_nController;
-        ((struct Shared_ActorView *)(object))->remote = ((ObjectState96 *)(entry))->m_IsBot;
+        roster_index = ((CPlayerOptions *)(entry))->controller;
+        ((struct Shared_ActorView *)(object))->remote = ((CPlayerOptions *)(entry))->isBot;
         ((struct Shared_ActorView *)(object))->actorState = 0;
         if (((struct Shared_ActorView *)(object))->remote != 0) {
             ContPad_InitControllerInput(object + 0x688, D_8010EEB8);
-            ((struct Shared_ActorView *)(object))->mode = ((ObjectState96 *)(entry))->m_nController;
+            ((struct Shared_ActorView *)(object))->mode = ((CPlayerOptions *)(entry))->controller;
         } else {
             ContPad_InitControllerInput(object + 0x688, D_8010F328 + roster_index * 0x224);
             ((struct Shared_ActorView *)(object))->mode = roster_index;
         }
         owner = ((struct Shared_ActorView *)(object))->owner;
         ((struct Shared_ActorView *)(object))->controls = (Shared_ControlView *)entry;
-        object_id = ((ObjectState96 *)(entry))->m_nCharacterSkin;
+        object_id = ((CPlayerOptions *)(entry))->characterSkin;
         ((struct Shared_ActorView *)(object))->field11BC = 0;
         ((struct Shared_ActorView *)(object))->field11C0 = 0;
         ((struct Shared_ActorView *)(object))->spawn = 0;
@@ -221,7 +222,7 @@ initialize_object:
         ((struct Shared_ActorView *)(object))->field16D4 = 0;
         ((struct Shared_ActorView *)(object))->field16D8 = 0;
         ItemMenu_ResetEntries(&((Shared_ActorView *)object)->record);
-        Ovlgame_ResetPlayerForRound(object, ((ObjectState96 *)(entry))->m_nCharacter, force_active);
+        Ovlgame_ResetPlayerForRound(object, ((CPlayerOptions *)(entry))->character, force_active);
         func_80255ED8_de(&pool->m_FreeList, object);
         func_80255CB8_de(&pool->m_ActiveList, object);
     }

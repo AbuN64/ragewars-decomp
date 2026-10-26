@@ -4,7 +4,6 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
-struct ObjectState96;
 
 struct __OSInodeCache;
 struct __OSInodeCache {
@@ -129,8 +128,6 @@ struct Part;
 
 
 
-struct ObjectState96;
-typedef struct ObjectState96 ObjectState96;
 
 struct RecordCode80447BB0;
 
