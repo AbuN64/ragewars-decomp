@@ -24,5 +24,4 @@
 #define INCLUDE_DATA(SEG, NAME)
 #define INCLUDE_BSS(SEG, NAME, SIZE)
 #endif
-extern void func_80289970_de(ObjectRecAtBC **volumes, s32 count, CVector3 *position, Shared_ParticleLighting *lighting);
 #endif
