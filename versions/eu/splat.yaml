@@ -4049,7 +4049,7 @@ segments:
       - [0xC6388, rodata, data_800C/D_802948C0_CB1C8]
       - [0xC638C, rodata, data_800C/literals_SetN64_SelectSpawnAfterCredits]
       - [0xC6390, rodata, data_800C/rodata_shared_800C54F0]
-      - [0xC6398, rodata, data_800C/D_auto_rodata_func_802950B4_de_800C54F8]
+      - [0xC6398, rodata, data_800C/literals_func_802950B4_de]
       - [0xC63B0, rodata, data_800C/D_80296930_CB2A0]
       - [0xC63B4, rodata, data_800C/D_auto_rodata_unresolved_800C57B4]
       - [0xC63C0, rodata, data_800C/literals_DispatchElementEvent]

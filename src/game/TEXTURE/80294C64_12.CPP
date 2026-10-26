@@ -131,99 +131,181 @@ void TextLoad_PrepareTextureVariation(s32 arg0, Resource *handle) {
 }
 
 #if !(defined(VERSION_US_REV1))
-#ifdef NON_MATCHING
-extern s32 D_800CD890, D_80146DF0, D_80146DF4, D_80146DF8, D_80146DFC;
-extern u32 *g_displayListCursor;
-extern void Cache_MarkResourceInUse(s32);
-extern u8 D_800CBD50_de[];
-#define DLW(a, b) do { g_displayListCursor[0] = (u32)(a); g_displayListCursor[1] = (u32)(b); g_displayListCursor += 2; } while (0)
-/* Texture state setter (the gDP texture-load sequence of a texture-header object): looks up the header, bitmap and palette
-   tables of the object's resource, skips the load when the same texture and tile parameters are already set, otherwise
-   emits SetTextureImage / SetTile / LoadBlock-or-LoadTLUT for the texture's format (header byte 0: 0 and 1 are 16-bit and 32-bit
-   texels, 2 and 3 are the 4/8-bit palette formats, 4 and 5 are intensity/alpha), then the tile sync and the final
-   SetTileSize-style command built from the shift/clamp arguments. */
-void func_802950B4_de(s32 unused, void **obj, s32 frame, s32 tile, u32 wrap, u32 maskS, u32 maskT, u32 shift, s32 extra) {
-    u8 *hdr;
-    u8 *bits;
-    u32 *palette;
-    s32 changed = 0;
-    s32 needLoad;
-    u8 fmt, size, lines;
-    s32 words;
-    u32 t3 = 0, t0 = 0;
+#include "COMMON/GFX.H"
+#include "gbi.h"
+#include "sdk/mbi.h"
 
-    Cache_MarkResourceInUse(0);
-    hdr = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(obj[0], 0), 1), frame);
-    bits = SetN64_GetPackSection(obj[0], 2);
-    palette = 0;
-    if (*(s32 *)bits != 0) {
-        palette = SetN64_GetPackSection(bits, tile);
+extern void Cache_MarkResourceInUse(s32 heap, void **resource);
+extern Gfx *g_displayListCursor;
+extern int D_800CD890;
+extern s32 D_80146DF0;
+extern s32 D_80146DF4;
+extern s32 D_80146DF8;
+extern s32 D_80146DFC;
+extern Gfx D_800CBD50_de[16], D_800CBDD0[16], D_800CBE50[19], D_800CBEE8[19], D_800CBF80[19];
+
+/* Non-rev1 copy of func_80295FB4_us_rev1 (the texture state setter): the same gDP texture/TLUT load per header
+   format, without rev1's two resource relocation calls before the switch. */
+void func_802950B4_de(s32 *output, void **resource, s32 frame, s32 secondary, s32 scaleS, s32 scaleT, s32 wrapS, s32 wrapT, s32 mode) {
+    s32 *texture;
+    s32 *palette;
+    void *header;
+    void *entries;
+    u8 *info;
+    s32 changed;
+    s32 paletteChanged;
+    u8 maskS;
+    u8 maskT;
+    s32 level;
+    s32 tile;
+    Gfx *list;
+
+    Cache_MarkResourceInUse(0, resource);
+    header = *resource;
+    info = SetN64_GetPackSection(header, 0);
+    texture = SetN64_GetPackSection(SetN64_GetPackSection(header, 1), frame);
+    entries = SetN64_GetPackSection(header, 2);
+    if (*(s32 *)entries != 0) {
+        palette = SetN64_GetPackSection(entries, secondary);
+        paletteChanged = 0;
+        if (D_800CD890 != (s32)resource || D_80146DF4 != secondary) paletteChanged = 1;
+    } else {
+        paletteChanged = 0;
+        palette = 0;
     }
-    needLoad = (D_800CD890 != (s32)obj || D_80146DF0 != frame || D_80146DF8 != (s32)wrap || D_80146DFC != (s32)maskS ||
-                D_80146DF4 != tile);
-    if (needLoad == 0) {
-        goto done;
+    changed = 0;
+    if (D_800CD890 != (s32)resource || D_80146DF0 != frame || D_80146DF8 != wrapS || D_80146DFC != wrapT) {
+        changed = 1;
     }
-    D_800CD890 = (s32)obj;
-    D_80146DF0 = frame;
-    D_80146DF4 = tile;
-    D_80146DF8 = wrap;
-    D_80146DFC = maskS;
-    if ((wrap & 2) == 0) {
-        t3 = hdr[2];
+    if (changed || paletteChanged) {
+        D_800CD890 = (s32)resource;
+        D_80146DF0 = frame;
+        D_80146DF4 = secondary;
+        D_80146DF8 = wrapS;
+        D_80146DFC = wrapT;
+        maskS = 0;
+        if (!(wrapS & G_TX_CLAMP)) {
+            maskS = info[2];
+        }
+        maskT = 0;
+        if (!(wrapT & G_TX_CLAMP)) {
+            maskT = info[3];
+        }
+        switch (info[0]) {
+        case 0:
+            if (changed) {
+                gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, texture);
+                gDPSetTile(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, wrapT, maskT, mode, wrapS, maskS, mode);
+                gDPLoadSync(g_displayListCursor++);
+                gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, (((((1 << info[2]) * (1 << info[3]) + (1)) >> (1)) - 1) < 2047 ? ((((1 << info[2]) * (1 << info[3]) + (1)) >> (1)) - 1) : 2047), (((1 << G_TX_DXT_FRAC) + (1 > ((1) == 0 ? ((1 << info[2]) / 16) : (((1 << info[2]) * (1)) / 8)) ? 1 : ((1) == 0 ? ((1 << info[2]) / 16) : (((1 << info[2]) * (1)) / 8))) - 1) / (1 > ((1) == 0 ? ((1 << info[2]) / 16) : (((1 << info[2]) * (1)) / 8)) ? 1 : ((1) == 0 ? ((1 << info[2]) / 16) : (((1 << info[2]) * (1)) / 8)))));
+                gDPPipeSync(g_displayListCursor++);
+                gDPSetTile(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_8b, ((1 << info[2]) + 7) >> 3, 0, G_TX_RENDERTILE, 0, wrapT, maskT, mode, wrapS, maskS, mode);
+                gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, ((1 << info[2]) - 1) << 2, ((1 << info[3]) - 1) << 2);
+                gDPSetTextureLUT(g_displayListCursor++, G_TT_RGBA16);
+            }
+            if (paletteChanged) {
+                gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, palette);
+                gDPTileSync(g_displayListCursor++);
+                gDPSetTile(g_displayListCursor++, 0, 0, 0, 256, G_TX_LOADTILE, 0, 0, 0, 0, 0, 0, 0);
+                gDPLoadSync(g_displayListCursor++);
+                gDPLoadTLUTCmd(g_displayListCursor++, G_TX_LOADTILE, 255);
+                gDPPipeSync(g_displayListCursor++);
+            }
+            break;
+        case 1:
+            if (changed) {
+                gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, texture);
+                gDPSetTile(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, wrapT, maskT, mode, wrapS, maskS, mode);
+                gDPLoadSync(g_displayListCursor++);
+                gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, (((((1 << info[2]) * (1 << info[3]) + (3)) >> (2)) - 1) < 2047 ? ((((1 << info[2]) * (1 << info[3]) + (3)) >> (2)) - 1) : 2047), (((1 << G_TX_DXT_FRAC) + (1 > ((0) == 0 ? ((1 << info[2]) / 16) : (((1 << info[2]) * (0)) / 8)) ? 1 : ((0) == 0 ? ((1 << info[2]) / 16) : (((1 << info[2]) * (0)) / 8))) - 1) / (1 > ((0) == 0 ? ((1 << info[2]) / 16) : (((1 << info[2]) * (0)) / 8)) ? 1 : ((0) == 0 ? ((1 << info[2]) / 16) : (((1 << info[2]) * (0)) / 8)))));
+                gDPPipeSync(g_displayListCursor++);
+                gDPSetTile(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_4b, (((1 << info[2]) >> 1) + 7) >> 3, 0, G_TX_RENDERTILE, 0, wrapT, maskT, mode, wrapS, maskS, mode);
+                gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, ((1 << info[2]) - 1) << 2, ((1 << info[3]) - 1) << 2);
+                gDPSetTextureLUT(g_displayListCursor++, G_TT_RGBA16);
+            }
+            if (paletteChanged) {
+                gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, palette);
+                gDPTileSync(g_displayListCursor++);
+                gDPSetTile(g_displayListCursor++, 0, 0, 0, 256, G_TX_LOADTILE, 0, 0, 0, 0, 0, 0, 0);
+                gDPLoadSync(g_displayListCursor++);
+                gDPLoadTLUTCmd(g_displayListCursor++, G_TX_LOADTILE, 15);
+                gDPPipeSync(g_displayListCursor++);
+            }
+            break;
+        case 3:
+            if (changed) {
+                gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, texture);
+                gDPSetTile(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, wrapT, maskT, mode, wrapS, maskS, mode);
+                gDPLoadSync(g_displayListCursor++);
+                gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, (((((1 << info[2]) * (1 << info[3]) + (3)) >> (2)) - 1) < 2047 ? ((((1 << info[2]) * (1 << info[3]) + (3)) >> (2)) - 1) : 2047), (((1 << G_TX_DXT_FRAC) + (1 > ((0) == 0 ? ((1 << info[2]) / 16) : (((1 << info[2]) * (0)) / 8)) ? 1 : ((0) == 0 ? ((1 << info[2]) / 16) : (((1 << info[2]) * (0)) / 8))) - 1) / (1 > ((0) == 0 ? ((1 << info[2]) / 16) : (((1 << info[2]) * (0)) / 8)) ? 1 : ((0) == 0 ? ((1 << info[2]) / 16) : (((1 << info[2]) * (0)) / 8)))));
+                gDPPipeSync(g_displayListCursor++);
+                gDPSetTile(g_displayListCursor++, G_IM_FMT_CI, G_IM_SIZ_4b, (((1 << info[2]) >> 1) + 7) >> 3, 0, G_TX_RENDERTILE, 0, wrapT, maskT, mode, wrapS, maskS, mode);
+                gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, ((1 << info[2]) - 1) << 2, ((1 << info[3]) - 1) << 2);
+                gDPSetTextureLUT(g_displayListCursor++, G_TT_IA16);
+            }
+            if (paletteChanged) {
+                gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, palette);
+                gDPTileSync(g_displayListCursor++);
+                gDPSetTile(g_displayListCursor++, 0, 0, 0, 256, G_TX_LOADTILE, 0, 0, 0, 0, 0, 0, 0);
+                gDPLoadSync(g_displayListCursor++);
+                gDPLoadTLUTCmd(g_displayListCursor++, G_TX_LOADTILE, 15);
+                gDPPipeSync(g_displayListCursor++);
+            }
+            break;
+        case 2:
+            if (changed) {
+                gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_32b, 1, texture);
+                gDPSetTile(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_32b, 0, 0, G_TX_LOADTILE, 0, wrapT, maskT, mode, wrapS, maskS, mode);
+                gDPLoadSync(g_displayListCursor++);
+                gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, (((((1 << info[2]) * (1 << info[3]) + (0)) >> (0)) - 1) < 2047 ? ((((1 << info[2]) * (1 << info[3]) + (0)) >> (0)) - 1) : 2047), (((1 << G_TX_DXT_FRAC) + (1 > ((4) == 0 ? ((1 << info[2]) / 16) : (((1 << info[2]) * (4)) / 8)) ? 1 : ((4) == 0 ? ((1 << info[2]) / 16) : (((1 << info[2]) * (4)) / 8))) - 1) / (1 > ((4) == 0 ? ((1 << info[2]) / 16) : (((1 << info[2]) * (4)) / 8)) ? 1 : ((4) == 0 ? ((1 << info[2]) / 16) : (((1 << info[2]) * (4)) / 8)))));
+                gDPPipeSync(g_displayListCursor++);
+                gDPSetTile(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_32b, ((2 << info[2]) + 7) >> 3, 0, G_TX_RENDERTILE, 0, wrapT, maskT, mode, wrapS, maskS, mode);
+                gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, ((1 << info[2]) - 1) << 2, ((1 << info[3]) - 1) << 2);
+                gDPSetTextureLUT(g_displayListCursor++, G_TT_NONE);
+            }
+            break;
+        case 4:
+            if (changed) {
+                gDPPipeSync(g_displayListCursor++);
+                gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, texture);
+                switch (info[5]) {
+                case 2:
+                default:
+                    list = D_800CBE50;
+                    break;
+                case 3:
+                    list = D_800CBEE8;
+                    break;
+                case 1:
+                    gDPSetTextureDetail(g_displayListCursor++, G_TD_SHARPEN);
+                    list = D_800CBD50_de;
+                    if (wrapS & 1) list = D_800CBDD0;
+                    break;
+                case 0:
+                    gDPSetTextureDetail(g_displayListCursor++, G_TD_CLAMP);
+                    list = D_800CBD50_de;
+                    if (wrapS & 1) list = D_800CBDD0;
+                    break;
+                }
+                gSPDisplayList(g_displayListCursor++, list);
+            }
+            break;
+        case 5:
+            if (changed) {
+                gDPPipeSync(g_displayListCursor++);
+                gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 1, texture);
+                gSPDisplayList(g_displayListCursor++, D_800CBF80);
+            }
+            break;
+        }
+    } else {
+        gDPPipeSync(g_displayListCursor++);
     }
-    if ((maskS & 2) == 0) {
-        t0 = hdr[3];
+    switch (info[0]) {
+    case 4: level = 5; tile = 0; break;
+    case 5: level = 6; tile = 0; break;
+    default: level = 0; tile = 0; break;
     }
-    fmt = hdr[0];
-    size = hdr[2];
-    lines = hdr[3];
-    switch (fmt) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-        DLW(0xFD500000, bits);
-        DLW(0xF5500000 | (maskS & 3) << 18 | (t0 & 0xF) << 14 | (maskT & 0xF) << 10 | (wrap & 3) << 8 | (t3 & 0xF) << 4 | (maskT & 0xF), 0x07000000);
-        DLW(0xE6000000, 0);
-        DLW(0xF3000000, 0);
-        words = (1 << size);
-        DLW(0x07000000 | ((words + 7) / 8 + 0x7FF & 0xFFF) << 12 | (((1 << size) << lines) >> 1) & 0xFFF, 0xE3001001);
-        DLW(0xE7000000, 0);
-        DLW(0xF5480000 | (((1 << size) + 7) >> 3 & 0x1FF) << 9, ((1 << size) - 1) << 14 | ((1 << lines) - 1) << 2);
-        DLW(0xF2000000, 0x8000);
-        break;
-    case 4:
-    case 5:
-        DLW(0xFD180000, bits);
-        DLW(0xF5180000 | (maskS & 3) << 18 | (t0 & 0xF) << 14 | (maskT & 0xF) << 10 | (wrap & 3) << 8 | (t3 & 0xF) << 4 | (maskT & 0xF), 0x07000000);
-        DLW(0xF3000000, 0);
-        DLW(0xE3001001, 0xC000);
-        break;
-    default:
-        goto done;
-    }
-    if (palette != 0) {
-        DLW(0xFD100000, palette);
-        DLW(0xE8000000, 0);
-        DLW(0xF5000100, 0x07000000);
-        DLW(0xE6000000, 0);
-        DLW(0xF0000000, 0x073FC000);
-        DLW(0xE7000000, 0);
-    }
-done:
-    switch (hdr[5]) {
-    case 0: DLW(0xE3000D01, 0x20000); break;
-    case 1: DLW(0xE3000D01, 0); break;
-    case 2: DLW(0xE3000D01, 0); break;
-    case 3: DLW(0xE3000D01, 0); break;
-    default: break;
-    }
-    DLW(0xDE000000, D_800CBD50_de);
-    DLW(0xE7000000, 0);
-    DLW(0xD7000002 | ((hdr[0] == 4 ? 5 : hdr[0] == 5 ? 6 : 0) << 11), (u32)(extra) << 16 | (extra & 0xFFFF));
+    gSPTexture(g_displayListCursor++, scaleS, scaleT, level, tile, G_ON);
 }
-#else
-INCLUDE_ASM("span_1000", func_802950B4_de);
-#endif
 #endif
