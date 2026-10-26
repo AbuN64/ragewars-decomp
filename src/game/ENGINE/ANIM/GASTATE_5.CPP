@@ -2,7 +2,7 @@
 #include "COMMON/OBJRECAT5F14.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/STREAM.H"
-#include "SYSTEM/8025E5B0.H"
+#include "GAME_2/8025E520.H"
 #include "COMMON/RESULTS.H"
 #include "TYPES.H"
 #include "SCENE/802508E0_4.H"

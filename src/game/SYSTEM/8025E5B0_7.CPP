@@ -1,6 +1,6 @@
 #include "COMMON/STREAM.H"
 #include "COMMON/LONE/D_8010AC80.H"
-#include "SYSTEM/8025E5B0.H"
+#include "GAME_2/8025E520.H"
 #include "TYPES.H"
 #include "SYSTEM/8025E5B0_9.H"
 #include "RENDER_4/8028FD2C_6.H"

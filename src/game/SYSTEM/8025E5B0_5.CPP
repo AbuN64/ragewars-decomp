@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/LONE/D_8010AC80.H"
 #include "COMMON/STREAM.H"
-#include "SYSTEM/8025E5B0.H"
+#include "GAME_2/8025E520.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/EXTERNS_14.H"

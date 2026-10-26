@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/STREAM.H"
-#include "SYSTEM/8025E5B0.H"
+#include "GAME_2/8025E520.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "SYSTEM/8025E5B0_9.H"
