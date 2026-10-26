@@ -41,7 +41,7 @@ extern void alSndpSetPan(char *, s32);
 
 extern void func_802B2D80_de(char *);
 
-void func_8025CC90_de(PlayerRecAt24 *player) {
+void Audio_UpdateDialogPlayer(PlayerRecAt24 *player) {
     extern void func_802B2F00_de(char *, s32);
     extern func_80203E78_S1 *D_800D0D78;
     s32 rate;

@@ -9,7 +9,7 @@
 
 extern s32 Nav_GetRouteRelation(void *arg0, s32 arg1, s32 arg2);
 
-extern s32 func_8020BC50_de(void *arg0, s32 arg1, s32 arg2, void *arg3);
+extern s32 Nav_SearchRelatedGoalPath(void *arg0, s32 arg1, s32 arg2, void *arg3);
 
 /** Reset the float field of each occupied player slot's table entry to the default value. */
 
@@ -31,7 +31,7 @@ s32 func_8020ED50_de(Func8020ED50Arg *owner) {
             return 1;
         }
         if (Nav_GetRouteRelation(base, owner->field4, owner->field10) == 0) {
-            owner->fieldC = func_8020BC50_de(base, owner->field4, owner->field10, owner);
+            owner->fieldC = Nav_SearchRelatedGoalPath(base, owner->field4, owner->field10, owner);
         }
     }
     return 1;
@@ -188,9 +188,9 @@ void func_8020EF64_us(void) {
         "lw         $v0, 0x10($sp)\n"
         "beqz       $v0, .Lauto_8020F12C\n"
         "addiu     $v0, $zero, -0x1\n"
-        "jal        func_8020D014_de\n"
+        "jal        Nav_ResetSearchState\n"
         "addu      $a0, $s2, $zero\n"
-        "jal        func_8020D1FC_de\n"
+        "jal        Nav_ClearGoalList\n"
         "addu      $a0, $s2, $zero\n"
         "jal        func_8020F150_de\n"
         "addiu     $a0, $sp, 0x10\n"
@@ -204,7 +204,7 @@ void func_8020EF64_us(void) {
         ".Lauto_8020F0D8:\n"
         "sw         $s0, 0x18($s2)\n"
         "lw         $a1, 0x4($s1)\n"
-        "jal        func_8020D0CC_de\n"
+        "jal        Nav_SearchPathByKey\n"
         "addu      $a0, $s2, $zero\n"
         "lw         $a1, 0x18($s2)\n"
         "beql       $a1, $s0, .Lauto_8020F124\n"
@@ -217,7 +217,7 @@ void func_8020EF64_us(void) {
         "sw         $v1, 0xC($s1)\n"
         "lw         $v0, 0x34($v0)\n"
         "addiu      $a2, $zero, 0x4\n"
-        "jal        func_8020D114_de\n"
+        "jal        Nav_ReconstructSearchPath\n"
         "sw        $v0, 0x68($s1)\n"
         "j          .Lauto_8020F138\n"
         "addiu     $v0, $zero, 0x1\n"

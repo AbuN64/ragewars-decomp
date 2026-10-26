@@ -11,7 +11,7 @@
 
 
 
-static inline Node *find_node(Obj_func_8020D220_de *obj, int id) {
+static inline Node *find_node(ObjNavAddGoalNode *obj, int id) {
     Node *node;
 
     for (node = obj->list; node != 0; node = node->next) {
@@ -22,7 +22,7 @@ static inline Node *find_node(Obj_func_8020D220_de *obj, int id) {
     return 0;
 }
 
-void func_8020D220_de(Obj_func_8020D220_de *obj, int id) {
+void Nav_AddGoalNode(ObjNavAddGoalNode *obj, int id) {
     int i;
 
     for (i = 0; i < 64; i++) {

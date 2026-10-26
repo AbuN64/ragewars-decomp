@@ -15,21 +15,21 @@
 
 extern s32 D_8013B364;
 
-extern void func_8020D014_de(void *arg0);
+extern void Nav_ResetSearchState(void *arg0);
 
-extern void func_8020D1FC_de(s32);
+extern void Nav_ClearGoalList(s32);
 
 extern s32 func_8020F150_de(void *arg0);
 
-extern void func_8020D0CC_de(void *arg0, s32 arg1);
+extern void Nav_SearchPathByKey(void *arg0, s32 arg1);
 
 extern void *Nav_FindSearchNode(char *, s32);
 
-extern void func_8020D114_de(void *arg0, void *arg1, s32 arg2);
+extern void Nav_ReconstructSearchPath(void *arg0, void *arg1, s32 arg2);
 
 extern void *Nav_GetGraphPoint(void *, s32);
 
-extern void func_8020D220_de(void *, s32);
+extern void Nav_AddGoalNode(void *, s32);
 
 extern s32 Weapons_GetWeaponClassId(Player *, s32);
 
@@ -43,8 +43,8 @@ s32 func_8020F2A8_de(CloseAttackBrain *closeAttackBrain) {
     NavigationSearchNode *entry;
 
     global = (CNavData *)&D_8013B364;
-    func_8020D014_de(global);
-    func_8020D1FC_de((s32)global);
+    Nav_ResetSearchState(global);
+    Nav_ClearGoalList((s32)global);
     count = 29;
     cursor = &data[29];
     do {
@@ -60,13 +60,13 @@ s32 func_8020F2A8_de(CloseAttackBrain *closeAttackBrain) {
     }
     value = -1;
     global->result = value;
-    func_8020D0CC_de(global, closeAttackBrain->route);
+    Nav_SearchPathByKey(global, closeAttackBrain->route);
     current = global->result;
     if (current != value) {
         entry = Nav_FindSearchNode(global, current);
         closeAttackBrain->destination = global->result;
         closeAttackBrain->routeObject = entry->object;
-        func_8020D114_de(global, &closeAttackBrain->routeNodes[0], 4);
+        Nav_ReconstructSearchPath(global, &closeAttackBrain->routeNodes[0], 4);
     } else {
         closeAttackBrain->routeObject = 0;
         closeAttackBrain->routeState = current;
@@ -83,8 +83,8 @@ s32 func_8020F388_de(void *arg0) {
     s32 current;
 
     global = &D_8013B364;
-    func_8020D014_de(global);
-    func_8020D1FC_de((s32)global);
+    Nav_ResetSearchState(global);
+    Nav_ClearGoalList((s32)global);
     count = 29;
     cursor = &data[29];
     do {
@@ -100,11 +100,11 @@ s32 func_8020F388_de(void *arg0) {
     }
     value = -1;
     ((CNavData *)global)->result = value;
-    func_8020D0CC_de(global, ((RouteChaseBot *)arg0)->node);
+    Nav_SearchPathByKey(global, ((RouteChaseBot *)arg0)->node);
     current = ((CNavData *)global)->result;
     if (current != value) {
         ((RouteChaseBot *)arg0)->goal = current;
-        func_8020D114_de(global, &((AiController *)arg0)->queue[0], 4);
+        Nav_ReconstructSearchPath(global, &((AiController *)arg0)->queue[0], 4);
     }
     return 1;
 }
@@ -120,8 +120,8 @@ s32 func_8020F444_de(AiController *controller) {
     s32 current;
 
     global = (CNavData *)&D_8013B364;
-    func_8020D014_de(global);
-    func_8020D1FC_de((s32)global);
+    Nav_ResetSearchState(global);
+    Nav_ClearGoalList((s32)global);
     count = 0;
     node = D_801372C8;
     scanbase = global;
@@ -132,7 +132,7 @@ s32 func_8020F444_de(AiController *controller) {
             if ((navigation_point_flags(result) & 1) &&
                 navigation_point_object_id(result) == type &&
                 ((ActorMotionState *)node->object->motion)->mode == 0) {
-                func_8020D220_de(scanbase, node->key);
+                Nav_AddGoalNode(scanbase, node->key);
                 count += 1;
             }
             node = node->next;
@@ -145,11 +145,11 @@ s32 func_8020F444_de(AiController *controller) {
     }
     value = -1;
     global->result = value;
-    func_8020D0CC_de(global, controller->current);
+    Nav_SearchPathByKey(global, controller->current);
     current = global->result;
     if (current != value) {
         controller->mode = current;
-        func_8020D114_de(global, &controller->queue, 4);
+        Nav_ReconstructSearchPath(global, &controller->queue, 4);
     }
     return 1;
 }
@@ -212,7 +212,7 @@ s32 func_8020F614_de(void) {
             if ((navigation_point_flags((NavigationPoint *)result) & 1) &&
                 navigation_point_object_id((NavigationPoint *)result) == 0x64E &&
                 (s8)((LevelActor *)node->object)->pad1A4 == 0) {
-                func_8020D220_de(base, node->key);
+                Nav_AddGoalNode(base, node->key);
                 count += 1;
             }
             node = node->next;

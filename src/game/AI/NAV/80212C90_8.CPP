@@ -144,7 +144,7 @@ INCLUDE_ASM("span_1000", func_80212FBC_de);
    switches to mode 2 and without an object it only updates; farther than D_800C2380_eu from its goal
    node it heads there through Nav_SteerAlongRoute, otherwise it takes mode 8 once arrived or copies the
    object's position to 0x2C; then, within D_800C2384_eu of the object and not yet arrived, it marks
-   arrival at 0x238 and plans a new route through func_8020B95C_de to pick the next goal node. */
+   arrival at 0x238 and plans a new route through Nav_CollectDirectedNeighbors to pick the next goal node. */
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 
@@ -170,8 +170,8 @@ extern f32 Nav_DistanceToNode(RouteChaseBot *bot, s32 node);
 extern void Nav_SteerAlongRoute(RouteChaseBot *bot);
 extern void Nav_UpdateTargetSteering(RouteChaseBot *bot);
 extern f32 Particle_GetPointDistance(CVector3 *a, CVector3 *b);
-extern s32 func_8020B95C_de(RouteChaseGraph *graph, s32 from, s32 to, s32 *path, s32 flags);
-extern void func_80209804_de(RouteChaseBot *bot);
+extern s32 Nav_CollectDirectedNeighbors(RouteChaseGraph *graph, s32 from, s32 to, s32 *path, s32 flags);
+extern void Nav_ClearNodeQueue(RouteChaseBot *bot);
 
 void func_80212FBC_de(RouteChaseActor *actor)
 {
@@ -209,14 +209,14 @@ void func_80212FBC_de(RouteChaseActor *actor)
             for (i = 63; i >= 0; i--) {
                 path[i] = none;
             }
-            func_8020B95C_de(graph, bot->goal, bot->goal, path, 0);
+            Nav_CollectDirectedNeighbors(graph, bot->goal, bot->goal, path, 0);
             start = path[0];
             none = -1;
             for (i = 63; i >= 0; i--) {
                 path[i] = none;
             }
-            len = func_8020B95C_de(graph, start, bot->goal, path, 0);
-            func_80209804_de(bot);
+            len = Nav_CollectDirectedNeighbors(graph, start, bot->goal, path, 0);
+            Nav_ClearNodeQueue(bot);
             bot->goal = path[len - 1];
         }
     }

@@ -693,7 +693,7 @@ block_122:
     
     count = (char *)&((struct SharedRecAt1B92C *)table)->navPointSet - (char *)table;
     temp_v0_2 = (char *)table + count;
-    func_8020AA40_de(temp_v0_2);
+    Nav_LinkNavigationObjects(temp_v0_2);
     Nav_AssignPlatformEndpoints(temp_v0_2);
     (((struct SharedRecAt1B92C *)(table))->unk0) = 4;
     func_80449E18_de(&D_80145040);

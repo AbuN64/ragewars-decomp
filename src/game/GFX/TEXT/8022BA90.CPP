@@ -81,72 +81,72 @@ void Text_LoadActorModel(void *actor) {
 }
 
 void func_8022BB80_de(void *actor) {
-    s32 var_a2;
+    s32 modelKind;
     Shared_Game *base;
 
     base = &D_801462C8;
     if (base->local == 0) {
-        var_a2 = 0x66;
+        modelKind = 0x66;
     } else if (base->unk62C != 0 && ((Shared_ActorView *)actor)->controls->transientFlag != 0) {
-        var_a2 = D_800CE47C;
+        modelKind = D_800CE47C;
     } else {
-        var_a2 = D_800CE430[((LevelActor *)actor)->definition->character];
+        modelKind = D_800CE430[((LevelActor *)actor)->definition->character];
         ((Shared_ActorView *)actor)->id = ((Shared_ActorView *)actor)->controls->playerId;
     }
-    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&g_world, actor, var_a2, ((Shared_ActorView *)actor)->effectId);
+    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&g_world, actor, modelKind, ((Shared_ActorView *)actor)->effectId);
 }
 
 void func_8022BC14_de(Player *actor) {
-    s32 var_t0;
+    s32 modelOffset;
 
     if (actor->computer != 0) {
         if (D_801462C8.counters.transitionActive == 0) {
-            var_t0 = 0x17;
+            modelOffset = 0x17;
             goto after;
         }
     }
-    var_t0 = (D_80140FF8 == 1) ? 0 : 0x17;
+    modelOffset = (D_80140FF8 == 1) ? 0 : 0x17;
 after:
     ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&g_world, &actor->weaponModel,
-        ((WeaponInfo *)D_800D052C[actor->selectedAction])->model + var_t0,
+        ((WeaponInfo *)D_800D052C[actor->selectedAction])->model + modelOffset,
         actor->weaponAnimationTable->defaultAnimation);
 }
 
-void func_8022BC94_de(void *actorIn, s32 arg1) {
-    CVector3 sp28;
-    void *temp_s1;
+void func_8022BC94_de(void *actorIn, s32 shadowMode) {
+    CVector3 viewOffset;
+    void *animationResource;
     Shared_ActorView *actor;
     SharedRecAt564V1 *message;
     ObjectLinks1DC_3 *object = actorIn;
 
     if (object->unk_100 & 0x40000) {
-        temp_s1 = Scene_RequestResource(0, object->resource, object->resource, object->resourceFlags, 4, 0, 0, D_800C2BC0_de, 1);
-        if (temp_s1 != 0) {
+        animationResource = Scene_RequestResource(0, object->resource, object->resource, object->resourceFlags, 4, 0, 0, D_800C2BC0_de, 1);
+        if (animationResource != 0) {
             actor = object->unk_1D8;
-            func_8024B4F4_de(actorIn, (s32)Render_GetPackSection(*(void **)temp_s1, 0));
-            if (arg1 != 0) {
+            func_8024B4F4_de(actorIn, (s32)Render_GetPackSection(*(void **)animationResource, 0));
+            if (shadowMode != 0) {
                 message = actor->message;
                 if (message != 0) {
-                    sp28.x = message->position.x - object->unk_8.x;
-                    sp28.y = 0.0f;
-                    sp28.z = ((SharedRecAt564V1 *)actor->message)->position.z - object->unk_8.z;
-                    Instance_DrawBlobShadow(actorIn, &sp28, arg1);
+                    viewOffset.x = message->position.x - object->unk_8.x;
+                    viewOffset.y = 0.0f;
+                    viewOffset.z = ((SharedRecAt564V1 *)actor->message)->position.z - object->unk_8.z;
+                    Instance_DrawBlobShadow(actorIn, &viewOffset, shadowMode);
                 }
             }
-            Scene_UnlockResource(0, temp_s1);
+            Scene_UnlockResource(0, animationResource);
         }
     }
 }
 
-void func_8022BD94_de(void *arg0, void *source, s32 arg2) {
-    func_8022BD84_S2 *object = arg0;
+void func_8022BD94_de(void *player, void *source, s32 enabled) {
+    func_8022BD84_S2 *object = player;
     func_8020D1FC_S1 *argument = source;
     s32 flags;
     s32 flag_1000;
     s32 flag_8000;
     s32 flag_10000;
 
-    if (arg2 != 0) {
+    if (enabled != 0) {
         flags = argument->unk38;
         flag_1000 = flags & 0x1000;
         flag_8000 = flags & 0x8000;
@@ -154,13 +154,13 @@ void func_8022BD94_de(void *arg0, void *source, s32 arg2) {
         if (flag_1000 == 0) {
             object->unk840 = 0;
         } else {
-            Text_ApplyDamageOverTime(arg0, source);
+            Text_ApplyDamageOverTime(player, source);
         }
         if (flag_8000) {
-            func_8022BEFC_de(arg0, source);
+            func_8022BEFC_de(player, source);
         }
         if (flag_10000) {
-            func_8022C060_de(arg0, source);
+            func_8022C060_de(player, source);
         }
     }
 }

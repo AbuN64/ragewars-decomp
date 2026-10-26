@@ -281,8 +281,8 @@ void Audio_SetVoicePositionTracking(void *arg0, void *arg1, int arg2) {
     ((struct View_func_8025AE1C_de *)(arg0))->tracked = (Triple *)arg2;
 }
 
-void Audio_SetVoiceTrackId(void *arg0, int arg1) {
-    ((struct View_func_8025AE1C_de *)(arg0))->trackId = arg1;
+void Audio_SetVoiceTrackId(void *arg0, int newTrackId) {
+    ((struct View_func_8025AE1C_de *)(arg0))->trackId = newTrackId;
 }
 
 void Audio_InitializeVoiceParameters(void *arg0, void *desc, s32 extra) {
@@ -392,7 +392,7 @@ void Audio_StopVoicesByKey(RecordRecAt4V6 *record, s32 value) {
     }
 }
 
-void func_8025BF08_de(RecordRecAt4V5 *record, s32 value) {
+void Audio_StopVoicesBySecondaryValue(RecordRecAt4V5 *record, s32 value) {
     s32 i;
     SlotRecAtB4V1 *slot = record->slots;
 
@@ -415,7 +415,7 @@ void func_8025BF08_de(RecordRecAt4V5 *record, s32 value) {
     }
 }
 
-void func_8025C008_de(RecordRecAt4V4 *record, s32 value) {
+void Audio_StopVoicesByFlags(RecordRecAt4V4 *record, s32 value) {
     s32 i;
     SlotRecAtB4V2 *slot = record->slots;
 
@@ -438,7 +438,7 @@ void func_8025C008_de(RecordRecAt4V4 *record, s32 value) {
     }
 }
 
-f32 func_8025C10C_de(f32 *a, f32 *b) {
+f32 Audio_ComputeDistanceAttenuation(f32 *a, f32 *b) {
     f32 dx = a[0] - b[0];
     f32 dy = a[1] - b[1];
     f32 dz = a[2] - b[2];
@@ -457,7 +457,7 @@ f32 func_8025C10C_de(f32 *a, f32 *b) {
 
 
 
-s32 func_8025C17C_de(RecordRecAt4V3 *record, s32 value) {
+s32 Audio_HasVoiceOrReservedSlotWithKey(RecordRecAt4V3 *record, s32 value) {
     s32 i;
     SlotRecAtA8 *slot = record->slots;
 
@@ -469,7 +469,7 @@ s32 func_8025C17C_de(RecordRecAt4V3 *record, s32 value) {
     return 0;
 }
 
-f32 func_8025C1CC_de(f32 arg0)
+f32 Audio_InterpolatePitchTable(f32 arg0)
 {
   f32 temp_f0;
   f32 temp_f1;
@@ -490,7 +490,7 @@ f32 func_8025C1CC_de(f32 arg0)
   return (&D_800CB8E8)[1 + temp_s16];
 }
 
-s16 func_8025C25C_de(s16 arg0, s16 arg1) {
+s16 Audio_RandomizeSignedRange(s16 arg0, s16 arg1) {
     f32 temp_f20;
     f32 temp_f21;
     temp_f21 = (f32)arg1;
@@ -500,7 +500,7 @@ s16 func_8025C25C_de(s16 arg0, s16 arg1) {
                           : temp_f20 + Nav_RandomBetween(temp_f21, temp_f20));
 }
 
-f32 func_8025C2EC_de(u8 arg0, u8 arg1) {
+f32 Audio_RandomizeScaledByteRange(u8 arg0, u8 arg1) {
     f32 first;
     f32 second;
 
@@ -515,7 +515,7 @@ f32 func_8025C2EC_de(u8 arg0, u8 arg1) {
     return first + Nav_RandomFloat(second - first);
 }
 
-f32 func_8025C368_de(char *source, char *listener)
+f32 Audio_ComputeSpatialAttenuationCurve(char *source, char *listener)
 {
     SoundSpatialSource *sound = (SoundSpatialSource *)source;
     GameplayCamera *camera = (GameplayCamera *)listener;
@@ -551,7 +551,7 @@ f32 func_8025C368_de(char *source, char *listener)
     }
 }
 
-void func_8025C438_de(void *arg0, s32 arg1) {
+void Audio_SetScaledVoiceVolume(void *arg0, s32 arg1) {
     RecordCode8025A3EC *slot = arg0;
     OwnerCode8025A3EC8025B5F0 *owner;
     s32 temp_s0;
@@ -564,7 +564,7 @@ void func_8025C438_de(void *arg0, s32 arg1) {
     func_802B2F10_de(sound, (s16)(s32)((f32) arg1 * (slot->fC8)));
 }
 
-void func_8025C4B4_de(void *arg0, f32 arg1) {
+void Audio_SetScaledVoicePitch(void *arg0, f32 arg1) {
     RecordCode8025A3EC *slot = arg0;
     OwnerCode8025A3EC8025B5F0 *owner;
     s32 temp_s0;

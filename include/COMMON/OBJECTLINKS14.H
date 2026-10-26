@@ -55,8 +55,8 @@ struct Node8020BC50;
 typedef struct Node8020BC50 Node8020BC50;
 
 
-struct Obj_func_8020D220_de;
-typedef struct Obj_func_8020D220_de Obj_func_8020D220_de;
+struct ObjNavAddGoalNode;
+typedef struct ObjNavAddGoalNode ObjNavAddGoalNode;
 
 struct Table8020BC50;
 typedef struct Table8020BC50 Table8020BC50;
@@ -119,8 +119,8 @@ struct ObjectState10 {
 };
 
 struct Node;
-struct Obj_func_8020D220_de;
-struct Obj_func_8020D220_de {
+struct ObjNavAddGoalNode;
+struct ObjNavAddGoalNode {
     char pad[0x24];
     struct Node *list;
     char pad28[0x10];

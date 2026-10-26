@@ -26,10 +26,10 @@ extern u32 __osDisableInt(void);
 
 extern void Audio_StopVoicesByKey(void *arg0, s32 arg1);
 
-extern void func_8025BF08_de(void *, s32);
+extern void Audio_StopVoicesBySecondaryValue(void *, s32);
 
 
-extern void func_8025C008_de(void *arg0, s32 arg1);
+extern void Audio_StopVoicesByFlags(void *arg0, s32 arg1);
 
 extern void func_80259A50_de(void *arg0, s32 arg1);
 
@@ -43,11 +43,11 @@ extern void Audio_StopVoicesExceptKey(void *arg0, s32 arg1);
 
 extern void func_80259918_de(void *arg0, s32 arg1);
 
-extern void func_8025DACC_de(int a);
+extern void Audio_FadeOutMusic(int a);
 
-extern void func_8025DB34_de(Track *a);
+extern void Audio_EnableMusicGainOverride(Track *a);
 
-extern void func_8025DB44_de(Track *a);
+extern void Audio_DisableMusicGainOverride(Track *a);
 
 extern void Audio_ClearVoiceFlags(int a);
 
@@ -55,12 +55,12 @@ extern void Audio_ClearVoiceFlags(int a);
  * the scene has no table or no range, the single entry when the range has one; otherwise each entry weighs
  * ten times its table value, a random draw selects one, and when avoidance is requested and it equals the
  * scene's last pick at 0x130 it steps to the next entry (or back from the last). Adapted from
- * func_8025D238_de with the table weights and the stored last pick. */
+ * Audio_ChooseSequenceVariant with the table weights and the stored last pick. */
 
 
 
 
-void func_80258800_de(ContextRecAt2BC0 *context, s32 matchValue) {
+void Audio_StopAudioByKey(ContextRecAt2BC0 *context, s32 matchValue) {
     {
         s32 *contextLock;
         s32 lockClaimCount;
@@ -99,7 +99,7 @@ void func_80258800_de(ContextRecAt2BC0 *context, s32 matchValue) {
 
 struct OwnerRecAtD8;
 
-void func_802588D4_de(ContextRecAt2BC0 *context, s32 matchValue) {
+void Audio_StopAudioBySecondaryValue(ContextRecAt2BC0 *context, s32 matchValue) {
     void *contextLock;
     void *record;
     s32 lockClaimCount;
@@ -118,7 +118,7 @@ void func_802588D4_de(ContextRecAt2BC0 *context, s32 matchValue) {
         __osRestoreInt(mask);
         record = &context->menu[0];
     }
-    func_8025BF08_de(record, matchValue);
+    Audio_StopVoicesBySecondaryValue(record, matchValue);
     func_802599EC_de(&context->view[0], matchValue);
     contextLock = &context->lock;
     releaseInterruptMask = __osDisableInt();
@@ -151,7 +151,7 @@ void Audio_StopAudioByMask(ContextRecAt2BC0 *context, s32 matchMask) {
         __osRestoreInt(mask);
         record = &context->menu[0];
     }
-    func_8025C008_de(record, matchMask);
+    Audio_StopVoicesByFlags(record, matchMask);
     func_80259A50_de(&context->view[0], matchMask);
     contextLock = &context->lock;
     releaseInterruptMask = __osDisableInt();
@@ -226,7 +226,7 @@ void *Audio_GetMetadataSectionFiveEntry(ContextRecAt2BC0 *arg0, int arg1) {
     return (char *)arg0->table2B78 + arg1 * 12;
 }
 
-void func_80258C0C_de(void *context, s32 matchValue) {
+void Audio_StopAudioExceptKey(void *context, s32 matchValue) {
     {
         s32 *contextLock;
         s32 lockClaimCount;
@@ -265,9 +265,9 @@ void func_80258C0C_de(void *context, s32 matchValue) {
     Audio_StopDialogPlayer((char *)context + 0x2BC0);
 }
 
-/** Thin wrapper forwarding an offset argument to func_8025DACC_de. */
-void func_80258CEC_de(int contextAddress) {
-    func_8025DACC_de(contextAddress + 0x1D64);
+/** Thin wrapper forwarding an offset argument to Audio_FadeOutMusic. */
+void Audio_FadeOutContextMusic(int contextAddress) {
+    Audio_FadeOutMusic(contextAddress + 0x1D64);
 }
 
 /** Store the second argument at offset 0x2BAC. */
@@ -304,7 +304,7 @@ void *Audio_GetSoundPlayer(void *arg0) {
 }
 
 /** Store a word in the object field at offset 0x2BB8. */
-void func_80258D48_de(ContextRecAt2BC0 *object, int value) {
+void Audio_SetMusicGainScalingEnabled(ContextRecAt2BC0 *object, int value) {
     object->field2BB8 = value;
 }
 
@@ -354,9 +354,9 @@ s32 Audio_CountSoundVoices(char *obj, s32 owner)
     return count;
 }
 
-/** Thin wrapper forwarding an offset argument to func_8025DB58_de. */
-void func_80258E40_de(int contextAddress) {
-    func_8025DB58_de(contextAddress + 0x1D64);
+/** Thin wrapper forwarding an offset argument to Audio_StopMusic. */
+void Audio_StopContextMusic(int contextAddress) {
+    Audio_StopMusic(contextAddress + 0x1D64);
 }
 
 /* Clamps a level to between zero and D_800C8FE0, scales it by D_800C8FE4 and stores it as an integer
@@ -380,18 +380,18 @@ void Audio_SetClampedAudioLevel(ObjRecAt2B9C *obj, float value) {
     obj->level = v * D_800C8FE4;
 }
 
-/** Thin wrapper forwarding an offset argument to func_8025DB34_de. */
-void func_80258EBC_de(int contextAddress) {
-    func_8025DB34_de(contextAddress + 0x1D64);
+/** Thin wrapper forwarding an offset argument to Audio_EnableMusicGainOverride. */
+void Audio_EnableContextMusicGainOverride(int contextAddress) {
+    Audio_EnableMusicGainOverride(contextAddress + 0x1D64);
 }
 
-/** Thin wrapper forwarding an offset argument to func_8025DB44_de. */
-void func_80258ED8_de(int contextAddress) {
-    func_8025DB44_de(contextAddress + 0x1D64);
+/** Thin wrapper forwarding an offset argument to Audio_DisableMusicGainOverride. */
+void Audio_DisableContextMusicGainOverride(int contextAddress) {
+    Audio_DisableMusicGainOverride(contextAddress + 0x1D64);
 }
 
 /** Thin wrapper forwarding an offset argument to Audio_ClearVoiceFlags. */
-void func_80258EF4_de(int contextAddress) {
+void Audio_ClearContextVoiceFlags(int contextAddress) {
     Audio_ClearVoiceFlags(contextAddress + 0x1DB8);
 }
 
@@ -401,11 +401,11 @@ int Audio_PlayDialogGroup(ContextRecAt2BC0 *arg0, int group) {
     if (!(scale < blue)) {
         scale = blue;
     }
-    return func_8025CED0_de(&arg0->dialog[0], group, scale, 0x40);
+    return Audio_StartDialogGroup(&arg0->dialog[0], group, scale, 0x40);
 }
 
 /** Thin wrapper forwarding an offset argument to Audio_StopDialogPlayer. */
-void func_80258F50_de(int contextAddress) {
+void Audio_StopContextDialog(int contextAddress) {
     Audio_StopDialogPlayer(contextAddress + 0x2BC0);
 }
 

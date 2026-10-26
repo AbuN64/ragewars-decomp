@@ -6,7 +6,7 @@
 void func_80212D80_eu(AiTarget *pThis) {
     AiController *controller = pThis->player->controller;
     controller->handlerIndex = 0;
-    func_80209988_de(controller);
+    Nav_ResetBehaviorState(controller);
     controller->unk2FC = 0;
 }
 #endif

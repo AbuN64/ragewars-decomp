@@ -11,7 +11,7 @@ void func_80212C90_de(AiTarget *aiTarget) {
     AiController *controller;
     controller = aiTarget->player->controller;
     ((CloseAttackBrain *)controller)->state = 0;
-    func_80209988_de(controller);
+    Nav_ResetBehaviorState(controller);
     controller->unk2FC = 0;
 }
 

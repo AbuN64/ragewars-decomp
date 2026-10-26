@@ -64,15 +64,15 @@ int Camera_IsSequenceActive(void) {
 int Camera_IsSequenceInWindow(void) {
     Shared_MenuContext *record = D_800E2830;
     float time;
-    int var_a0 = 0;
+    int inSequenceWindow = 0;
 
     if (record->active != 0) {
         time = record->time;
         if (record->start <= time && time <= record->end) {
-            var_a0 = 1;
+            inSequenceWindow = 1;
         }
     }
-    return var_a0;
+    return inSequenceWindow;
 }
 
 s32 func_802457E0_de(void) {

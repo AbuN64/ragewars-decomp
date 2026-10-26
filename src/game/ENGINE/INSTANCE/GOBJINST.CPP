@@ -264,7 +264,7 @@ Nav_InitSpawnedActor
     }
 }
 
-s32 func_80246A08_de(LevelActor *owner, s32 arg1, s32 arg2) {
+s32 func_80246A08_de(LevelActor *owner, s32 animationKind, s32 excludedEntry) {
     WeightedTable table;
     void **resource;
     s32 *entries;
@@ -285,24 +285,24 @@ s32 func_80246A08_de(LevelActor *owner, s32 arg1, s32 arg2) {
     data = Render_GetPackSection(*resource, 1);
     entries = &((struct func_80254D70_S2 *)(data))->unk8;
     total = ((struct func_80203E78_S1 *)(data))->unk4;
-    count = func_802654E8_de(entries, ((struct Access_s8_E6 *)(owner))->field, arg1);
+    count = func_802654E8_de(entries, ((struct Access_s8_E6 *)(owner))->field, animationKind);
     if (count != -1) {
         original = count;
         while (count > 0) {
-            if (entries[count - 1] != arg1) {
+            if (entries[count - 1] != animationKind) {
                 break;
             }
             count--;
         }
 
         func_8027985C_de(&table);
-        if (arg2 == -1) {
-            while (count < total && entries[count] == arg1) {
+        if (excludedEntry == -1) {
+            while (count < total && entries[count] == animationKind) {
                 func_80279864_de(&table, count++, 10);
             }
         } else {
-            while (count < total && entries[count] == arg1) {
-                if (arg2 != count) {
+            while (count < total && entries[count] == animationKind) {
+                if (excludedEntry != count) {
                     func_80279864_de(&table, count, 10);
                 }
                 count++;

@@ -17,8 +17,8 @@ extern f32 Weapons_GetSignedAngleToPoint(Player *, CVector3);
    the whole wait) and either flags waiting at 0x23C while fewer than the wait or starts pursuit with
    the countdown at -1 and a wait from the config's 0x24 and 0x28 (scale D_800C6E04); during pursuit
    the wait runs down, ends early once the player is within D_800C6E08 of its target on the target's
-   height, and when it reaches zero flags 0x240 and acts through func_8020A95C_de. Written in the style of
-   func_8020A458_de with the random scale loaded into a local first. */
+   height, and when it reaches zero flags 0x240 and acts through Nav_InitializeRandomActionSettings. Written in the style of
+   Nav_UpdateMeterGatedActionBurst with the random scale loaded into a local first. */
 
 
 
@@ -42,7 +42,7 @@ extern f32 Nav_GetEngagementDistance(void *arg0);
 
 extern f32 Weapons_GetSignedAngleToPoint(Player *arg0, CVector3 point);
 
-void func_80209E80_de(void *arg0)
+void Nav_DispatchActorBehavior(void *arg0)
 {
     /* Dispatch the current actor mode through its per-type behavior table. */
     void *state;
@@ -80,22 +80,22 @@ void func_80209E80_de(void *arg0)
         }
     }
 case_0:
-        func_8020A6D8_de(state, &D_800F3D20 + type * 0x38 + mode * 0x1C);
+        Nav_UpdateTimedActionBurst(state, &D_800F3D20 + type * 0x38 + mode * 0x1C);
         goto dispatched;
 case_1:
-        func_8020A7B0_de(state, &D_800F3D20 + type * 0x38 + mode * 0x1C);
+        Nav_UpdateHeldActionBurst(state, &D_800F3D20 + type * 0x38 + mode * 0x1C);
         goto dispatched;
 case_2:
         ((ObjectLinks2EC *)state)->unk_240 = 1;
         goto dispatched;
 case_3:
-        func_8020A028_de(state, &D_800F3D20 + type * 0x38);
+        Nav_UpdateAlternatingActionBursts(state, &D_800F3D20 + type * 0x38);
         goto dispatched;
 case_4:
-        func_8020A2D4_de(state, &D_800F3D20 + type * 0x38);
+        Nav_UpdateCountedEffectAction(state, &D_800F3D20 + type * 0x38);
         goto dispatched;
 case_5:
-        func_8020A458_de(state, &D_800F3D20 + type * 0x38);
+        Nav_UpdateMeterGatedActionBurst(state, &D_800F3D20 + type * 0x38);
 case_6:
 case_7:
 case_8:
@@ -108,7 +108,7 @@ dispatched:
     }
 }
 
-void func_8020A028_de(AiController *arg0, AiConfig *arg1)
+void Nav_UpdateAlternatingActionBursts(AiController *arg0, AiConfig *arg1)
 {
     s32 v0;
     f32 f20;
@@ -185,7 +185,7 @@ void func_8020A028_de(AiController *arg0, AiConfig *arg1)
     }
 }
 
-void func_8020A2D4_de(ObjectLinks2EC *arg0, IntegerState2C *config) {
+void Nav_UpdateCountedEffectAction(ObjectLinks2EC *arg0, IntegerState2C *config) {
     s32 count;
     char *target;
     CVector3 pos;
@@ -228,11 +228,11 @@ void func_8020A2D4_de(ObjectLinks2EC *arg0, IntegerState2C *config) {
     }
     if (arg0->unk_2E8 == 0) {
         arg0->unk_240 = 1;
-        func_8020A95C_de(arg0, config);
+        Nav_InitializeRandomActionSettings(arg0, config);
     }
 }
 
-void func_8020A458_de(void *object, void *settings) {
+void Nav_UpdateMeterGatedActionBurst(void *object, void *settings) {
     AiController *controller = object;
     AiConfig *arg1 = settings;
     s32 timer;
@@ -289,11 +289,11 @@ void func_8020A458_de(void *object, void *settings) {
     }
     if (controller->unk2E8 == 0) {
         controller->unk23C = 0;
-        func_8020A95C_de(controller, arg1);
+        Nav_InitializeRandomActionSettings(controller, arg1);
     }
 }
 
-void Nav_LoadCollisionTable(void *arg0) {
+void Nav_LoadCollisionTable(void *resourcePack) {
     s32 s0;
     s32 s1;
     s32 s2;
@@ -311,7 +311,7 @@ void Nav_LoadCollisionTable(void *arg0) {
         base2 = s2 * 2;
         s1 = s4;
         do {
-            src = Render_GetPackSection(arg0, base2 + s0);
+            src = Render_GetPackSection(resourcePack, base2 + s0);
             dst = (char *)(s1 + (s32)tbl);
             *(CollisionInfo8020CD74 *)dst = *src;
             s0 += 1;
@@ -322,7 +322,7 @@ void Nav_LoadCollisionTable(void *arg0) {
     } while (s2 < 0x16);
 }
 
-void func_8020A6D8_de(void *controller, void *settings) {
+void Nav_UpdateTimedActionBurst(void *controller, void *settings) {
     s32 timer;
     s32 minus_one;
     Player *record;
@@ -331,7 +331,7 @@ void func_8020A6D8_de(void *controller, void *settings) {
     if (controller == 0) {
         return;
     }
-    func_8020A884_de(controller, settings);
+    Nav_UpdateRandomActionPulse(controller, settings);
     timer = ((AiController *)controller)->unk2E4;
     if (timer > 0) {
         ((AiController *)controller)->unk2E4 = timer - 1;
@@ -352,11 +352,11 @@ void func_8020A6D8_de(void *controller, void *settings) {
     }
     if (((AiController *)controller)->unk2E8 == 0) {
         ((AiController *)controller)->unk23C = 0;
-        func_8020A95C_de(controller, settings);
+        Nav_InitializeRandomActionSettings(controller, settings);
     }
 }
 
-void func_8020A7B0_de(void *controller, void *settings) {
+void Nav_UpdateHeldActionBurst(void *controller, void *settings) {
     AiController *brain = controller;
     s32 timer;
     Player *record;
@@ -365,7 +365,7 @@ void func_8020A7B0_de(void *controller, void *settings) {
     if (controller == 0) {
         return;
     }
-    func_8020A884_de(controller, settings);
+    Nav_UpdateRandomActionPulse(controller, settings);
     timer = brain->unk2E4;
     if (timer > 0) {
         brain->unk2E4 = timer - 1;
@@ -386,10 +386,10 @@ void func_8020A7B0_de(void *controller, void *settings) {
         return;
     }
     brain->unk23C = 0;
-    func_8020A95C_de(controller, settings);
+    Nav_InitializeRandomActionSettings(controller, settings);
 }
 
-void func_8020A884_de(void *arg0, void *settings) {
+void Nav_UpdateRandomActionPulse(void *arg0, void *settings) {
     AiController *o = arg0;
     AiConfig *i = settings;
     s32 timer = o->unk2EC;
@@ -401,7 +401,7 @@ void func_8020A884_de(void *arg0, void *settings) {
 
             if ((f32) i->unk18 < threshold) {
                 o->unk240 = 1;
-                func_8020A95C_de(arg0, settings);
+                Nav_InitializeRandomActionSettings(arg0, settings);
             }
             o->unk2EC = i->unk10;
             o->unk2EC =
@@ -413,7 +413,7 @@ void func_8020A884_de(void *arg0, void *settings) {
     }
 }
 
-void func_8020A95C_de(void *object, void *settings) {
+void Nav_InitializeRandomActionSettings(void *object, void *settings) {
     AiController *controller = object;
     AiConfig *aiConfig = settings;
     f32 k = D_800C6E20;

@@ -9,13 +9,13 @@
 
 #if defined(VERSION_DE)
 #include "COMMON/SELF.H"
-extern void func_80209988_de(void *);
+extern void Nav_ResetBehaviorState(void *);
 
 void func_80212D60_de(void *object) {
     CloseAttackActor *actor = object;
     CloseAttackBrain *brain = actor->self->brain;
     brain->state = 0;
-    func_80209988_de(brain);
+    Nav_ResetBehaviorState(brain);
     brain->reset2FC = 0;
 }
 #endif

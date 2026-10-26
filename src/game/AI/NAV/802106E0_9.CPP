@@ -64,7 +64,7 @@ void func_80211120_de(void) {
         "j          .Lauto_8021144C\n"
         "addiu     $a1, $zero, 0x7\n"
         ".Lauto_802111F8:\n"
-        "jal        func_80209BE0_de\n"
+        "jal        Nav_ScaleCharacterSettingByDifficulty\n"
         "addu      $a0, $s0, $zero\n"
         "lw         $v0, 0x2D8($s0)\n"
         "lui        $at, %hi(D_auto_800C2010 + 0x4)\n"
@@ -101,7 +101,7 @@ void func_80211120_de(void) {
         "addiu     $v0, $zero, 0x2\n"
         "sw         $v0, 0x2DC($s0)\n"
         ".Lauto_80211284:\n"
-        "jal        func_80209DAC_de\n"
+        "jal        Nav_UpdateDifficultyAimJitter\n"
         "addu      $a0, $s0, $zero\n"
         "addu       $a0, $s0, $zero\n"
         "lui        $a2, (0x40000000 >> 16)\n"
@@ -202,7 +202,7 @@ void func_80211120_de(void) {
         ".Lauto_802113F4:\n"
         "addiu      $v0, $zero, -0x1\n"
         "sw         $v0, 0x14($s0)\n"
-        "jal        func_80209E80_de\n"
+        "jal        Nav_DispatchActorBehavior\n"
         "addu      $a0, $s0, $zero\n"
         "j          .Lauto_80211420\n"
         "nop\n"
@@ -309,7 +309,7 @@ void func_80211470_de(void) {
         "lw         $v0, 0x31C($s1)\n"
         "beql       $v0, $zero, .Lauto_80211A18\n"
         "sw        $s2, 0xC($s1)\n"
-        "jal        func_80209BE0_de\n"
+        "jal        Nav_ScaleCharacterSettingByDifficulty\n"
         "addu      $a0, $s1, $zero\n"
         "mov.s      $f21, $f0\n"
         "lw         $v0, 0x2D8($s1)\n"
@@ -358,7 +358,7 @@ void func_80211470_de(void) {
         "addu       $v0, $v0, $a2\n"
         "sw         $v0, 0x2E0($s1)\n"
         ".Lauto_80211610:\n"
-        "jal        func_80209DAC_de\n"
+        "jal        Nav_UpdateDifficultyAimJitter\n"
         "addu      $a0, $s1, $zero\n"
         "addu       $a0, $s1, $zero\n"
         "addiu      $s0, $s0, 0x8\n"
@@ -630,7 +630,7 @@ void func_80211470_de(void) {
         "subu       $v1, $v1, $v0\n"
         "sw         $v1, 0x320($s1)\n"
         ".Lauto_80211A08:\n"
-        "jal        func_80209E80_de\n"
+        "jal        Nav_DispatchActorBehavior\n"
         "addu      $a0, $s1, $zero\n"
         "j          .Lauto_80211A28\n"
         "nop\n"
@@ -737,7 +737,7 @@ void func_80211A7C_de(void) {
         "lw         $v0, 0x31C($s1)\n"
         "beql       $v0, $zero, .Lauto_80212024\n"
         "sw        $s2, 0xC($s1)\n"
-        "jal        func_80209BE0_de\n"
+        "jal        Nav_ScaleCharacterSettingByDifficulty\n"
         "addu      $a0, $s1, $zero\n"
         "mov.s      $f21, $f0\n"
         "lw         $v0, 0x2D8($s1)\n"
@@ -783,7 +783,7 @@ void func_80211A7C_de(void) {
         "addiu      $v0, $v0, 0x2710\n"
         "sw         $v0, 0x2E0($s1)\n"
         ".Lauto_80211C10:\n"
-        "jal        func_80209DAC_de\n"
+        "jal        Nav_UpdateDifficultyAimJitter\n"
         "addu      $a0, $s1, $zero\n"
         "addu       $a0, $s1, $zero\n"
         "addiu      $s0, $s0, 0x8\n"
@@ -1059,7 +1059,7 @@ void func_80211A7C_de(void) {
         "addiu      $v0, $zero, 0x1E\n"
         "sw         $v0, 0x320($s1)\n"
         ".Lauto_80212014:\n"
-        "jal        func_80209E80_de\n"
+        "jal        Nav_DispatchActorBehavior\n"
         "addu      $a0, $s1, $zero\n"
         "j          .Lauto_80212034\n"
         "nop\n"
@@ -1163,7 +1163,7 @@ void func_80212088_de(void) {
         "j          .Lauto_802123B8\n"
         "addiu     $a1, $zero, 0x7\n"
         ".Lauto_80212160:\n"
-        "jal        func_80209BE0_de\n"
+        "jal        Nav_ScaleCharacterSettingByDifficulty\n"
         "addu      $a0, $s0, $zero\n"
         "lw         $v0, 0x2D8($s0)\n"
         "lui        $at, %hi(D_auto_800C20A0 + 0x4)\n"
@@ -1200,7 +1200,7 @@ void func_80212088_de(void) {
         "addiu     $v0, $zero, 0x2\n"
         "sw         $v0, 0x2DC($s0)\n"
         ".Lauto_802121EC:\n"
-        "jal        func_80209DAC_de\n"
+        "jal        Nav_UpdateDifficultyAimJitter\n"
         "addu      $a0, $s0, $zero\n"
         "addu       $a0, $s0, $zero\n"
         "lui        $a2, (0x40000000 >> 16)\n"
@@ -1301,7 +1301,7 @@ void func_80212088_de(void) {
         ".Lauto_8021235C:\n"
         "addiu      $v0, $zero, -0x1\n"
         "sw         $v0, 0x14($s0)\n"
-        "jal        func_80209E80_de\n"
+        "jal        Nav_DispatchActorBehavior\n"
         "addu      $a0, $s0, $zero\n"
         "j          .Lauto_80212384\n"
         "nop\n"
@@ -1345,13 +1345,13 @@ INCLUDE_ASM("span_1000", func_80212088_de);
 
 #if defined(VERSION_DE)
 #include "COMMON/SELF.H"
-extern void func_80209988_de(void *);
+extern void Nav_ResetBehaviorState(void *);
 extern s32 Nav_NextRandom(void);
 
 void func_802123DC_de(CloseAttackActor *actor) {
     CloseAttackBrain *brain = actor->self->brain;
     brain->state = 0;
-    func_80209988_de(brain);
+    Nav_ResetBehaviorState(brain);
     brain->timer = Nav_NextRandom() % 4 + 12;
     brain->pattern = Nav_NextRandom() % 2;
 }
@@ -1361,7 +1361,7 @@ void func_802123DC_de(CloseAttackActor *actor) {
 void func_80212450_de(CloseAttackActor *actor) {
     CloseAttackBrain *brain = actor->self->brain;
     brain->state = 0;
-    func_80209988_de(brain);
+    Nav_ResetBehaviorState(brain);
     brain->timer = Nav_NextRandom() % 4 + 12;
     brain->pattern = Nav_NextRandom() % 2;
     brain->distance = Nav_NextRandom() % 250000 + 360000;
@@ -1378,7 +1378,7 @@ void func_80212524_de(CloseAttackActor *actor) {
     brain->timer = Nav_NextRandom() % 4 + 2;
     brain->pattern = Nav_NextRandom() % 2;
     brain->distance = Nav_NextRandom() % 32400 + 10000;
-    func_80209988_de(brain);
+    Nav_ResetBehaviorState(brain);
     brain->frames = 0;
     brain->visible = 0;
     brain->fireTimer = -1;
@@ -1389,7 +1389,7 @@ void func_80212524_de(CloseAttackActor *actor) {
 void func_802125F0_de(CloseAttackActor *actor) {
     CloseAttackBrain *brain = actor->self->brain;
     brain->state = 0;
-    func_80209988_de(brain);
+    Nav_ResetBehaviorState(brain);
     brain->timer = Nav_NextRandom() % 4 + 12;
     brain->pattern = Nav_NextRandom() % 2;
 }

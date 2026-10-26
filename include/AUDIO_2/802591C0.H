@@ -10,9 +10,9 @@ extern void Audio_SetVoiceMixValue(struct ContextRecAt2BC0 *arg0, s32 arg1);
 extern s32 Audio_CountSoundVoices(char *obj, s32 owner);
 extern void * Audio_GetSoundPlayer(void *arg0);
 extern s32 Audio_PlayDialogGroup(struct ContextRecAt2BC0 *arg0, s32 arg1);
-extern void func_80258F50_de(s32 arg0);
-extern void func_80258800_de(struct ContextRecAt2BC0 *arg0, s32 arg1);
-extern void func_802588D4_de(struct ContextRecAt2BC0 *arg0, s32 arg1);
+extern void Audio_StopContextDialog(s32 arg0);
+extern void Audio_StopAudioByKey(struct ContextRecAt2BC0 *arg0, s32 arg1);
+extern void Audio_StopAudioBySecondaryValue(struct ContextRecAt2BC0 *arg0, s32 arg1);
 extern void Audio_StopAudioByMask(struct ContextRecAt2BC0 *arg0, s32 arg1);
-extern void func_80258C0C_de(void *arg0, s32 arg1);
+extern void Audio_StopAudioExceptKey(void *arg0, s32 arg1);
 #endif

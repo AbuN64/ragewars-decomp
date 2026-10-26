@@ -12,7 +12,7 @@ void func_80212470_eu(CloseAttackActor *arg0) {
     s32 r1, r2, r3;
 
     inner->state = 0;
-    func_80209988_de(inner);
+    Nav_ResetBehaviorState(inner);
 
     r1 = Nav_NextRandom();
     inner->timer = r1 % 4 + 0xC;
@@ -45,7 +45,7 @@ void func_80212544_eu(CloseAttackActor *arg0) {
     r3 = Nav_NextRandom();
     inner->distance = r3 % 32400 + 0x2710;
 
-    func_80209988_de(inner);
+    Nav_ResetBehaviorState(inner);
 
     inner->frames = 0;
     inner->visible = 0;
@@ -58,7 +58,7 @@ void func_80212610_eu(CloseAttackActor *arg0) {
     s32 r1, r2;
 
     inner->state = 0;
-    func_80209988_de(inner);
+    Nav_ResetBehaviorState(inner);
 
     r1 = Nav_NextRandom();
     inner->timer = r1 % 4 + 0xC;

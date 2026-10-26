@@ -154,16 +154,16 @@ f32 func_802459A0_de(void) {
     return response;
 }
 
-void Camera_SetResponse(float arg0) {
-    D_800E2830->response = arg0;
+void Camera_SetResponse(float responseValue) {
+    D_800E2830->response = responseValue;
 }
 
 void Camera_ClearResponse(void) {
     D_800E2830->response = 0.0f;
 }
 
-void func_80245A20_de(int arg0) {
-    D_800E2830->unknown104[0] = arg0;
+void func_80245A20_de(int loopMode) {
+    D_800E2830->unknown104[0] = loopMode;
 }
 
 /** Copy a two-word record into the global record and clear two trailing fields. */
@@ -178,12 +178,12 @@ void func_80245A30_de(void) {
 }
 
 /** Store four incoming words into the global record's tail fields. */
-void func_80245A5C_de(int arg0, int arg1, int arg2, int arg3) {
+void func_80245A5C_de(int viewportWidth, int viewportHeight, int viewportLeft, int viewportTop) {
     Shared_MenuContext *record = D_800E2830;
-    record->unknown104[2] = arg1;
-    record->unknown104[1] = arg0;
-    record->unknown104[3] = arg2;
-    record->unknown104[4] = arg3;
+    record->unknown104[2] = viewportHeight;
+    record->unknown104[1] = viewportWidth;
+    record->unknown104[3] = viewportLeft;
+    record->unknown104[4] = viewportTop;
 }
 
 void Camera_AddMessage(int goal) {

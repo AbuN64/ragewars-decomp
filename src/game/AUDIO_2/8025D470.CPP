@@ -13,7 +13,7 @@ extern s32 func_802654E8_de(s32,s32,s32);
 extern f32 func_802B2350(u16);
 extern void func_802AE5B8_de(s32, void *);
 static inline f32 fade_rate(Track *track,f32 time,f32 rate) {track->unk30=time;return (f32)track->unk20/(time*rate);}
-void func_8025D450_de(Track *queue) {
+void Audio_UpdateMusicPlayback(Track *queue) {
     f32 temp_f0;
     f32 temp_f20;
     f32 var_f20;

@@ -9,9 +9,9 @@
 #include "AI/NAV/80208000_6.H"
 #include "COMMON/WORLD.H"
 
-/** Returns the difference between the constant after D_800C6E20 and func_80209AE8_de's result, scaled by D_800C6E28. */
+/** Returns the difference between the constant after D_800C6E20 and Nav_GetDifficultyEngagementAdjustment's result, scaled by D_800C6E28. */
 
-extern f32 func_80209AE8_de(AiController *controller);
+extern f32 Nav_GetDifficultyEngagementAdjustment(AiController *controller);
 
 extern f32 D_800C1D34_de;
 
@@ -25,10 +25,10 @@ s32 func_8028B25C_de(void *arg0, s16 arg1);
 
 /* Preserve the owning controller passed in a0 by the original MIPS. */
 f32 Nav_GetEngagementDistance(AiController *controller) {
-    return (D_800C1D34_de - func_80209AE8_de(controller)) * D_800C6E28;
+    return (D_800C1D34_de - Nav_GetDifficultyEngagementAdjustment(controller)) * D_800C6E28;
 }
 
-void func_8020AA40_de(Shared_Arg0 *arg0)
+void Nav_LinkNavigationObjects(Shared_Arg0 *arg0)
 {
   f32 temp_f0;
   f32 var_f20;
@@ -271,7 +271,7 @@ static __inline__ s32 navigationNeighbours(CNavData *graph, s32 current, s32 *ta
 }
 /* Picks the controller's next point: follows a queued point when the actor may take it, otherwise the nearest reachable neighbour
  * (special portals and drops first while within the starting height). */
-void func_8020AF9C_de(CNavData *graph, Player *actor) {
+void Nav_UpdateActorCurrentNode(CNavData *graph, Player *actor) {
     s32 targets[64];
     s32 portalIds[64];
     CVector3 delta;

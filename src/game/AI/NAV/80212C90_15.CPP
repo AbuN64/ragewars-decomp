@@ -161,7 +161,7 @@ store_c:
             ((Brain_func_80212D78_eu_x *)(actor))->nextNode = candidate;
         }
     }
-    func_80209988_de(actor);
+    Nav_ResetBehaviorState(actor);
     ((Brain_func_80212D78_eu_x *)(actor))->jumpTimer = -1;
 }
 

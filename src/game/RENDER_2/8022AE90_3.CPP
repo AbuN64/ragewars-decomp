@@ -28,8 +28,8 @@ extern s32 func_8028C198_de(void *arg0, s32 arg1);
 
 extern void func_8026DF30_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
-void *func_8022B304_de(ForcePlayerList *forcePlayerList, void *arg1) {
-    CVector3 sp10;
+void *func_8022B304_de(ForcePlayerList *forcePlayerList, void *position) {
+    CVector3 markerDelta;
     Shared_ActorView *node;
     void *bestNode;
     f32 bestDist;
@@ -42,8 +42,8 @@ void *func_8022B304_de(ForcePlayerList *forcePlayerList, void *arg1) {
         do {
             if (node->actorState != 0 &&
                 node->marker.time != 0.0f) {
-                Particle_SubtractVectors(&sp10, arg1, &node->targetPosition);
-                distSq = sp10.x * sp10.x + sp10.y * sp10.y + sp10.z * sp10.z;
+                Particle_SubtractVectors(&markerDelta, position, &node->targetPosition);
+                distSq = markerDelta.x * markerDelta.x + markerDelta.y * markerDelta.y + markerDelta.z * markerDelta.z;
                 if (bestNode == 0 || distSq < bestDist) {
                     bestNode = node;
                     bestDist = distSq;
@@ -55,13 +55,13 @@ void *func_8022B304_de(ForcePlayerList *forcePlayerList, void *arg1) {
     return bestNode;
 }
 
-void Render_BuildForceMarkerTransform(char *actorView, s32 unused1, CVector3 *arg2) {
+void Render_BuildForceMarkerTransform(char *actorView, s32 unused1, CVector3 *direction) {
     Shared_ActorView *actor = (Shared_ActorView *)actorView;
     Matrix matrix;
     CVector3 offset;
 
-    BuildDirectionMatrix(&matrix, arg2);
-    Particle_ScaleVector(&offset, arg2, 5.12f);
+    BuildDirectionMatrix(&matrix, direction);
+    Particle_ScaleVector(&offset, direction, 5.12f);
     Particle_AddVec3(&offset, &offset, &actor->targetPosition);
     TranslateMatrix(&matrix, offset.x, offset.y, offset.z);
     SwapMatrixUpForward(&matrix);
@@ -74,8 +74,8 @@ int func_8022B460_de(char *object) {
     return actor->marker.time > 0.0f;
 }
 
-void func_8022B484_de(char *arg0) {
-    ObjRecAt120C *object = arg0;
+void func_8022B484_de(char *player) {
+    ObjRecAt120C *object = player;
     s32 index;
 
     if (object->unk120C != 0) {
@@ -85,32 +85,32 @@ void func_8022B484_de(char *arg0) {
     }
     if (index != -1) {
         func_8026DF30_de(func_8028C198_de(&g_world, index),
-                      (s32)((Shared_ActorView *)arg0)->transform1600, (s32)&D_800D0EF8, 0, -1);
+                      (s32)((Shared_ActorView *)player)->transform1600, (s32)&D_800D0EF8, 0, -1);
     }
 }
 
 void func_8022B510_de(s32 player) {
-    s32 var_v0;
-    void *var_a0;
-    var_v0 = 4;
-    var_a0 = player + 0x60;
+    s32 effectIndex;
+    void *effectBase;
+    effectIndex = 4;
+    effectBase = player + 0x60;
     do {
-        (((struct IntegerState1250 *) ((s8 *) var_a0))->unk_124C) = 0;
-        var_v0 -= 1;
-        var_a0 -= 0x18;
-    } while (var_v0 >= 0);
+        (((struct IntegerState1250 *) ((s8 *) effectBase))->unk_124C) = 0;
+        effectIndex -= 1;
+        effectBase -= 0x18;
+    } while (effectIndex >= 0);
 }
 
-void func_8022B530_de(s32 arg0) {
-    s32 var_v0;
-    void *var_a0;
-    var_v0 = 4;
-    var_a0 = arg0 + 0x60;
+void func_8022B530_de(s32 playerAddress) {
+    s32 effectIndex;
+    void *effectBase;
+    effectIndex = 4;
+    effectBase = playerAddress + 0x60;
     do {
-        (((struct IntegerState1250 *) ((s8 *) var_a0))->unk_124C) = 0;
-        var_v0 -= 1;
-        var_a0 -= 0x18;
-    } while (var_v0 >= 0);
+        (((struct IntegerState1250 *) ((s8 *) effectBase))->unk_124C) = 0;
+        effectIndex -= 1;
+        effectBase -= 0x18;
+    } while (effectIndex >= 0);
 }
 
 /* Starts a timer in the first of the object's five 24-byte slots at 0x1248 whose remaining time is not

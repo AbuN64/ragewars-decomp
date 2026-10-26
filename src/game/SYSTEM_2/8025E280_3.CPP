@@ -15,8 +15,8 @@ void func_8025E4B0_de(void) {
 
 struct ContextRecAt2BC0;
 
-s32 func_8025E4D4_de(s32 arg0) {
-    return func_802585F4_de(&D_8010C080, arg0);
+s32 func_8025E4D4_de(s32 wantedKey) {
+    return func_802585F4_de(&D_8010C080, wantedKey);
 }
 
 #if defined(VERSION_US)

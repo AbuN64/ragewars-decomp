@@ -12,7 +12,7 @@ void func_802123FC_eu(void *closeAttackActor) {
     s32 r1, r2;
 
     inner->state = 0;
-    func_80209988_de(inner);
+    Nav_ResetBehaviorState(inner);
 
     r1 = Nav_NextRandom();
     inner->timer = r1 % 4 + 0xC;

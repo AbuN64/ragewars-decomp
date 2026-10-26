@@ -6,7 +6,7 @@ struct SongHeader {
     u16 volume;
 };
 struct PlayerRecAt1E {
-    struct Bank_func_8025CED0_de *bank;
+    struct BankAudioStartDialogGroup *bank;
     s32 request;
     s32 state;
     s32 group;

@@ -5,15 +5,15 @@
 
 /* Resets a player controller: marks the active, requested and committed selections empty, sets the
    request kind to 0xB, clears the four link words at 0x14 to -1, resets the stage counters at 0x1BC
-   and 0x1C8 and the target list, installs the default table D_800CE040 through func_8020986C_de and mode
+   and 0x1C8 and the target list, installs the default table D_800CE040 through Nav_SetBehaviorTable and mode
    2 through func_80209874_de, zeroes the tracking values from 0x23C to 0x260, runs the resets
-   func_802110C4_de, func_80209988_de and func_8020999C_de, and clears the remaining state words. */
+   func_802110C4_de, Nav_ResetBehaviorState and Nav_ClearAuxiliaryBehaviorState, and clears the remaining state words. */
 
-extern void func_8020986C_de(void *, char *, s32);
+extern void Nav_SetBehaviorTable(void *, char *, s32);
 extern void Nav_SetBehaviourState(void *, s32);
 extern void func_802110C4_de(void *);
 
-extern void func_8020999C_de(void *);
+extern void Nav_ClearAuxiliaryBehaviorState(void *);
 
 void World_ResetPlayerState(s32 *state) {
     s32 i;
@@ -48,7 +48,7 @@ void World_ResetPlayerState(s32 *state) {
         state[37 + i] = 0;
     }
     state[0x238 / 4] = 0;
-    func_8020986C_de(state, &D_800CE040, none);
+    Nav_SetBehaviorTable(state, &D_800CE040, none);
     Nav_SetBehaviourState(state, 2);
     ((f32 *) state)[0x244 / 4] = 0.0f;
     state[0x23C / 4] = 0;
@@ -57,8 +57,8 @@ void World_ResetPlayerState(s32 *state) {
         ((f32 *) state)[0x24C / 4] = ((f32 *) state)[0x258 / 4] = ((f32 *) state)[0x25C / 4] =
         ((f32 *) state)[0x260 / 4] = ((f32 *) state)[0x244 / 4];
     func_802110C4_de(state);
-    func_80209988_de(state);
-    func_8020999C_de(state);
+    Nav_ResetBehaviorState(state);
+    Nav_ClearAuxiliaryBehaviorState(state);
     state[0x318 / 4] = 0;
     state[0x31C / 4] = 0;
     state[0x320 / 4] = -1;

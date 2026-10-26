@@ -51,18 +51,18 @@ void func_8025C8C0_de(void *cLoopingSoundData) {
 void func_8025C8D0_de(void) {
 }
 
-void func_8025C8D8_de(void *soundVoicePool, CLoopingSoundData *arg1, s32 arg2) {
+void func_8025C8D8_de(void *soundVoicePool, CLoopingSoundData *availableNodes, s32 nodeCount) {
     s32 i;
 
     func_80255CA0_de(soundVoicePool, 0, 4);
     func_80255CA0_de(&((SoundVoicePool *)soundVoicePool)->playing, 0, 4);
     i = 0;
-    if (arg2 > 0) {
+    if (nodeCount > 0) {
         do {
-            func_80255D14_de(soundVoicePool, arg1);
+            func_80255D14_de(soundVoicePool, availableNodes);
             i += 1;
-            arg1 = arg1 + 1;
-        } while (i < arg2);
+            availableNodes = availableNodes + 1;
+        } while (i < nodeCount);
     }
     ((SoundVoicePool *)soundVoicePool)->state = 0;
 }
@@ -111,19 +111,19 @@ s32 func_8025CA24_de(void *work, void *wantedNode) {
     return 0;
 }
 
-void func_8025CAB0_de(void *arg0) {
+void func_8025CAB0_de(void *voicePool) {
     s32 value;
-    SoundVoicePool *pool = arg0;
-    CLoopingSoundData *var_s0;
+    SoundVoicePool *pool = voicePool;
+    CLoopingSoundData *playingNode;
 
-    var_s0 = pool->playing.head;
-    if (var_s0 != 0) {
+    playingNode = pool->playing.head;
+    if (playingNode != 0) {
         do {
-            func_8025E174_de(var_s0->value);
-            value = var_s0->value;
-            var_s0 = var_s0->next;
+            func_8025E174_de(playingNode->value);
+            value = playingNode->value;
+            playingNode = playingNode->next;
             D_800CBB18 = value;
-        } while (var_s0 != 0);
+        } while (playingNode != 0);
     }
     pool->state = 1;
 }
@@ -149,18 +149,18 @@ void func_8025CB0C_de(SoundVoicePool *soundVoicePool) {
 
 void func_8025CB88_de(void *soundVoicePool) {
     SoundVoicePool *pool = soundVoicePool;
-    CLoopingSoundData *var_s0;
+    CLoopingSoundData *playingNode;
 
     if (pool->state == 0) {
-        var_s0 = pool->playing.head;
-        if (var_s0 != 0) {
+        playingNode = pool->playing.head;
+        if (playingNode != 0) {
             do {
-                if (func_8025E0F4_de(var_s0->value) == 0) {
-                    var_s0->state = -1;
-                    var_s0->value = -1;
+                if (func_8025E0F4_de(playingNode->value) == 0) {
+                    playingNode->state = -1;
+                    playingNode->value = -1;
                 }
-                var_s0 = var_s0->next;
-            } while (var_s0 != 0);
+                playingNode = playingNode->next;
+            } while (playingNode != 0);
         }
     }
 }

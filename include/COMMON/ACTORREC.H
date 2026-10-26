@@ -9,8 +9,8 @@ typedef struct ActorRec ActorRec;
 
 extern float D_800C1DB8_de;
 
-struct Obj_func_8020D9C0_de;
-struct Obj_func_8020D9C0_de {
+struct ObjNavComputeScaledPointCentroid;
+struct ObjNavComputeScaledPointCentroid {
     char pad0[0x38];
     s32 count;
     char pad3C[0x138-0x3C];
@@ -32,8 +32,8 @@ struct Stage {
 struct Stage;
 typedef struct Stage Stage;
 
-struct Selection_func_8020D4AC_de;
-struct Selection_func_8020D4AC_de {
+struct SelectionNavAppendDirectionalRouteStage;
+struct SelectionNavAppendDirectionalRouteStage {
     char pad0[0xC];
     s32 node;
     char pad10[4];
@@ -82,8 +82,8 @@ struct ActorRec {
 };
 
 
-struct Selection_func_8020D4AC_de;
-typedef struct Selection_func_8020D4AC_de Selection_func_8020D4AC_de;
+struct SelectionNavAppendDirectionalRouteStage;
+typedef struct SelectionNavAppendDirectionalRouteStage SelectionNavAppendDirectionalRouteStage;
 
 extern float D_800C1E48_de;
 
@@ -96,8 +96,8 @@ extern float D_800C1E58_de;
 
 extern float D_800C1E44_de;
 
-struct Obj_func_8020DB14_de;
-struct Obj_func_8020DB14_de {
+struct ObjNavFindSpecialLinkedCandidate;
+struct ObjNavFindSpecialLinkedCandidate {
     char pad0[0x14];
     int nodes[4];
     char pad24[0x1BC - 0x24];
@@ -109,11 +109,11 @@ struct Obj_func_8020DB14_de {
 
 struct func_8020DCA0_S1;
 
-struct Obj_func_8020DB14_de;
-typedef struct Obj_func_8020DB14_de Obj_func_8020DB14_de;
+struct ObjNavFindSpecialLinkedCandidate;
+typedef struct ObjNavFindSpecialLinkedCandidate ObjNavFindSpecialLinkedCandidate;
 
-struct Obj_func_8020D9C0_de;
-typedef struct Obj_func_8020D9C0_de Obj_func_8020D9C0_de;
+struct ObjNavComputeScaledPointCentroid;
+typedef struct ObjNavComputeScaledPointCentroid ObjNavComputeScaledPointCentroid;
 
 extern float D_800C1E50_de;
 

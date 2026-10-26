@@ -16,24 +16,24 @@ extern void func_80219A40_de(void *arg0, void *arg1, void *arg2);
 
 
 
-void func_8022B69C_de(void *actor, f32 arg1, void *arg2) {
+void func_8022B69C_de(void *actor, f32 amount, void *damageSource) {
     Slot damage;
-    f32 temp_f0;
-    f32 temp_f1;
+    f32 reserveValue;
+    f32 clampedReserve;
 
-    temp_f0 = ((Shared_ActorView *)actor)->reserve - arg1;
-    temp_f1 = D_800C9190_de[1];
-    if (!(temp_f0 <= temp_f1)) {
+    reserveValue = ((Shared_ActorView *)actor)->reserve - amount;
+    clampedReserve = D_800C9190_de[1];
+    if (!(reserveValue <= clampedReserve)) {
         if (actor != 0) {
-            temp_f1 = temp_f0;
+            clampedReserve = reserveValue;
         } else {
-            temp_f1 = temp_f0;
+            clampedReserve = reserveValue;
         }
     }
-    temp_f0 = D_800C9190_de[1];
-    ((Shared_ActorView *)actor)->reserve = temp_f1;
-    if (temp_f1 <= temp_f0) {
-        Weapons_FillDamagePacket(&damage, arg2, ((LevelActor *)actor)->active + 0x1900, 25.599998f, 0x80, 0);
+    reserveValue = D_800C9190_de[1];
+    ((Shared_ActorView *)actor)->reserve = clampedReserve;
+    if (clampedReserve <= reserveValue) {
+        Weapons_FillDamagePacket(&damage, damageSource, ((LevelActor *)actor)->active + 0x1900, 25.599998f, 0x80, 0);
         func_80219A40_de(actor, &((LevelActor *)actor)->behaviorFlags, &damage);
     }
 }
@@ -45,7 +45,7 @@ void func_8022B69C_de(void *actor, f32 arg1, void *arg2) {
 
 
 
-void func_8022B730_de(void *actorView, f32 arg1) {
-    ((Shared_ActorView *)actorView)->impulse = ((Shared_ActorView *)actorView)->impulse + arg1 * D_800C7E08;
+void func_8022B730_de(void *actorView, f32 amount) {
+    ((Shared_ActorView *)actorView)->impulse = ((Shared_ActorView *)actorView)->impulse + amount * D_800C7E08;
     ((Shared_ActorView *)actorView)->field122C = ((Shared_ActorView *)actorView)->field122C | 0x2000;
 }

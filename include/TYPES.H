@@ -40,7 +40,7 @@ struct IntrusiveList;
 
 extern s32 Libsn_ReadPortWord(s32 arg0);
 
-extern void func_80209988_de(void *arg0);
+extern void Nav_ResetBehaviorState(void *arg0);
 
 struct CloseAttackBrain;
 

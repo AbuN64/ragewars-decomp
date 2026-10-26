@@ -11,7 +11,7 @@
 #include "COMMON/REC.H"
 #include "AI/NAV/CODE_80208158.H"
 
-/* Updates a computer player's brain for the frame: fixes its route start, runs its planner through func_802095F8_de and its state callback, counts down its cooldown at 0x324, and for a displayed player sets the health meter from its health over the character's maximum (400 for kinds 11 and 12, 300 for 13 and 14, otherwise func_8022AC00_de), as a percentage, rescaled for kind 14 by the difficulty D_8014693C; in the tutorial (D_801468A0) kind 11 also shows the timer and refills its ammunition, then the meter is drawn through func_802AA794_de or func_802AA79C_de; finally it restarts a stalled player (state 0x12) through func_80209CD8_de. */
+/* Updates a computer player's brain for the frame: fixes its route start, runs its planner through Nav_UpdateTargetPitch and its state callback, counts down its cooldown at 0x324, and for a displayed player sets the health meter from its health over the character's maximum (400 for kinds 11 and 12, 300 for 13 and 14, otherwise func_8022AC00_de), as a percentage, rescaled for kind 14 by the difficulty D_8014693C; in the tutorial (D_801468A0) kind 11 also shows the timer and refills its ammunition, then the meter is drawn through func_802AA794_de or func_802AA79C_de; finally it restarts a stalled player (state 0x12) through Nav_HandlePlayerTimeout. */
 
 
 
@@ -24,13 +24,13 @@
 extern char D_801376F8[];
 
 
-extern void func_802095F8_de(Brain *);
+extern void Nav_UpdateTargetPitch(Brain *);
 extern s32 Weapons_GetMaxHealth(SharedPlayer *);
 extern void func_802AA79C_de(char *, s32);
 extern void Fx_ClearControllerInput(char *);
-extern void func_80209CD8_de(Brain *, SharedPlayer *);
+extern void Nav_HandlePlayerTimeout(Brain *, SharedPlayer *);
 
-void func_80208158_de(Brain *brain) {
+void Nav_UpdateComputerPlayerStatus(Brain *brain) {
     s32 health;
     s32 maximum;
     f32 meter;
@@ -44,7 +44,7 @@ void func_80208158_de(Brain *brain) {
     if (brain->route == -1) {
         brain->route = brain->start;
     }
-    func_802095F8_de(brain);
+    Nav_UpdateTargetPitch(brain);
     if (brain->behaviour->update != 0) {
         brain->behaviour->update(brain->player, 0);
     }
@@ -103,7 +103,7 @@ void func_80208158_de(Brain *brain) {
     player = brain->player;
     if (player->views5E8.view650_16.state == 0x12) {
         player->views1340.view1340_1.stalls++;
-        func_80209CD8_de(brain, player);
+        Nav_HandlePlayerTimeout(brain, player);
     }
 }
 
@@ -112,13 +112,13 @@ float Particle_GetPointDistance(void *, void *);
 void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 float Nav_SteerTowardPoint(AiController *, CVector3 *,float,float);
 void Nav_SetPitchFromAngle(AiController *,float,s32);
-void func_80209E80_de(AiController *);
+void Nav_DispatchActorBehavior(AiController *);
 float Math_Sqrtf(float);
 NavigationPoint *Nav_GetGraphPoint(CNavData *,s32);
-NavigationPortal *func_8020C9B0_de(CNavData *,s32);
+NavigationPortal *Nav_GetStridedTableEntry(CNavData *,s32);
 NavigationSearchNode *Nav_FindSearchNode(CNavData *,s32);
 s32 Nav_FindLinkIndex(CNavData *,s32,s32);
-s32 func_80209828_de(AiController *);
+s32 Nav_AdvanceNodeQueue(AiController *);
 typedef struct GroundObject { char pad[0x18]; ActorMotionResource *resource; } GroundObject;
 GroundObject *func_8024E6A0_de(Player *);
 extern f32 D_800C1BB8_de;
@@ -169,7 +169,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                     link = Nav_FindLinkIndex(graph, controller->current, controller->queue[0]);
                 }
                 if (link > 0) {
-                    portal = func_8020C9B0_de(graph, link);
+                    portal = Nav_GetStridedTableEntry(graph, link);
                     if (portal->kind == 4) {
                         controller->unk30C = 1;
                     }
@@ -302,7 +302,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                     }
                 }
                 if (distance < reach && controller->current == controller->queue[0]) {
-                    if (func_80209828_de(controller) == 0) {
+                    if (Nav_AdvanceNodeQueue(controller) == 0) {
                         return;
                     }
                 }
@@ -438,13 +438,13 @@ float Particle_GetPointDistance(void *, void *);
 void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 float Nav_SteerTowardPoint(AiController *, CVector3 *,float,float);
 void Nav_SetPitchFromAngle(AiController *,float,s32);
-void func_80209E80_de(AiController *);
+void Nav_DispatchActorBehavior(AiController *);
 float Math_Sqrtf(float);
 NavigationPoint *Nav_GetGraphPoint(CNavData *,s32);
-NavigationPortal *func_8020C9B0_de(CNavData *,s32);
+NavigationPortal *Nav_GetStridedTableEntry(CNavData *,s32);
 NavigationSearchNode *Nav_FindSearchNode(CNavData *,s32);
 s32 Nav_FindLinkIndex(CNavData *,s32,s32);
-s32 func_80209828_de(AiController *);
+s32 Nav_AdvanceNodeQueue(AiController *);
 
 extern f32 D_800C1C00;
 extern f32 D_800C1C04;
@@ -479,7 +479,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
         Nav_SteerTowardPoint(controller, &controller->destination, 2.0f, 0.0f);
     } else {
         Nav_SteerTowardPoint(controller, &target->player->pos, 2.0f, 0.0f);
-        func_80209E80_de(controller);
+        Nav_DispatchActorBehavior(controller);
     }
     if (controller->unk300 == 0) {
         destination = &controller->destination;

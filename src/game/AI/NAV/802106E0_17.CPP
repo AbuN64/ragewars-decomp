@@ -8,7 +8,7 @@
 #include "TYPES.H"
 #include "AI/SHARED_PICKUPGOALNODE.H"
 
-void *func_8020C9B0_de(struct EntryList8020CCE8 *object, int index);
+void *Nav_GetStridedTableEntry(struct EntryList8020CCE8 *object, int index);
 extern void *Nav_GetGraphPoint(void *, s32);
 #include "AI/ROUTE_RELATION_GRID.H"
 extern f32 func_802726BC_de(f32 *, f32 *);
@@ -41,10 +41,10 @@ void Nav_SelectFarthestReachableNeighbor(AiController *object)
     }
     linkCursor = links;
     farthest = D_800C20C0_de[0];
-    count = func_8020CCE8_de(graph, object->current, neighbors, linkCursor);
+    count = Nav_CollectIncidentLinks(graph, object->current, neighbors, linkCursor);
     best = -1;
     for (i = 0; i < count; i++) {
-        link = func_8020C9B0_de(graph, links[i]);
+        link = Nav_GetStridedTableEntry(graph, links[i]);
         if ((link->type >= 1 && link->type <= 2) || link->type == 7) {
             point = Nav_GetGraphPoint(graph, neighbors[i]);
             if (Nav_GetRouteRelation(graph, actor_node, neighbors[i])) {

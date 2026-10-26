@@ -8,9 +8,9 @@
 
 f32 Nav_ApproachValue(f32, f32, s32);
 
-void func_8022B5C0_de(void *arg0) {
-    if ((((struct ObjectState12C4 *) ((s8 *) arg0))->unk_5E4) != 0) {
-        (((struct ObjectState12C4 *) ((s8 *) arg0))->unk_12C0) = Nav_ApproachValue((((struct ObjectState12C4 *) ((s8 *) arg0))->unk_12C0), D_800C2D14_de, D_800C9FF0);
+void func_8022B5C0_de(void *player) {
+    if ((((struct ObjectState12C4 *) ((s8 *) player))->unk_5E4) != 0) {
+        (((struct ObjectState12C4 *) ((s8 *) player))->unk_12C0) = Nav_ApproachValue((((struct ObjectState12C4 *) ((s8 *) player))->unk_12C0), D_800C2D14_de, D_800C9FF0);
     }
 }
 

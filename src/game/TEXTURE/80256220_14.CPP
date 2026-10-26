@@ -180,10 +180,10 @@ extern void __osRestoreInt(u32);
 extern void Texture_InitializeAudioWorker(ALSynConfig *, s32, AudioInitializeTiming *);
 extern void func_802B2650_de(void *, void *);
 extern void func_8025768C_de(ContextRecAt2BC0 *);
-extern void func_8025D844_de(void *, void *);
+extern void Audio_InitializeMusicPlayer(void *, void *);
 extern void func_802596B4_de(void *, void *);
 extern void Audio_InitializeVoicePool(void *, void *);
-extern void func_8025D158_de(void *, void *);
+extern void Audio_InitializeDialogPlayer(void *, void *);
 extern s32 D_800CD8C0_de;
 extern s32 D_800CB724;
 s32 func_80265964_de(s32 arg0);
@@ -242,7 +242,7 @@ void func_80257360_de(ContextRecAt2BC0 *ctx) {
     ctx->resource = loaded->bankFile;
     ctx->font = ctx->resource->bankArray[0];
     func_8025768C_de(ctx);
-    func_8025D844_de(ctx->panel, ctx);
+    Audio_InitializeMusicPlayer(ctx->panel, ctx);
     instrument = ctx->font->instArray[0];
     for (i = 0; i < instrument->soundCount; i++) {
         for (j = i + 1; j < instrument->soundCount; j++) {
@@ -282,7 +282,7 @@ void func_80257360_de(ContextRecAt2BC0 *ctx) {
     ctx->field2BB0 = D_801462C8.unknown17;
     ctx->field2BB4 = 1;
     ctx->alpha = D_800C3ED4;
-    func_8025D158_de(ctx->dialog, ctx);
+    Audio_InitializeDialogPlayer(ctx->dialog, ctx);
     D_800CB720 = 1;
     LockLeave(&ctx->lock);
 }

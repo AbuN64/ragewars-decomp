@@ -8,7 +8,7 @@
 #include "TYPES.H"
 #include "stddef.h"
 s32 Nav_SetBehaviourState(void *, s32);
-s32 func_80209A94_de(void *);
+s32 Nav_MatchesBehaviorStateFilter(void *);
 s32 func_80209AD8_de(void *);
 f32 Nav_GetScaledAggression(void *);
 s32 func_8020EA10_de(void *);
@@ -100,7 +100,7 @@ s32 Nav_SelectPlayerState(AiController *controller) {
         Nav_SetBehaviourState(controller, nextState);
         return 1;
     }
-    if (func_80209A94_de(controller) != 0 && controller->target == 0) {
+    if (Nav_MatchesBehaviorStateFilter(controller) != 0 && controller->target == 0) {
         nextState = 2;
         Nav_SetBehaviourState(controller, nextState);
         return 1;
@@ -115,7 +115,7 @@ s32 Nav_SelectPlayerState(AiController *controller) {
         nextState = 2;
         Nav_SetBehaviourState(controller, nextState);
         return 1;
-    } else if (func_80209A94_de(controller) == 0 && func_80209AD8_de(controller) == 0 && controller->target != 0) {
+    } else if (Nav_MatchesBehaviorStateFilter(controller) == 0 && func_80209AD8_de(controller) == 0 && controller->target != 0) {
         if (controller->player->profile->enabled != 0) {
             if (controller->player->profile->character == 12) {
                 Nav_SetBehaviourState(controller, 13);

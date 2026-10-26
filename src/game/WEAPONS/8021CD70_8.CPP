@@ -32,7 +32,7 @@ extern struct Shared_CharInfo *D_800D052C[];
 
 extern struct Shared_StateInfo D_800CED30[];
 extern struct Shared_StateInfo D_800C9684[];
-extern void func_8020AF9C_de(void *, void *);
+extern void Nav_UpdateActorCurrentNode(void *, void *);
 extern void func_80213CF8_de(void *, void *);
 extern void Weapons_FillDamagePacket(void *, s32, s32, s32, s32, s32);
 extern void Team_UpdateDraftPanel(void *, void *, void *);
@@ -168,10 +168,10 @@ void func_80220ED4_de(SharedPlayer *player)
   {
     human = 1;
   }
-  func_8020AF9C_de(&D_8013B364, player);
+  Nav_UpdateActorCurrentNode(&D_8013B364, player);
   if (player->views1450.view1450_0.unk1450 != 0)
   {
-    func_80208158_de((struct Brain *)player->views1454.view1454_0.unk1454);
+    Nav_UpdateComputerPlayerStatus((struct Brain *)player->views1454.view1454_0.unk1454);
   }
   if (game->local != 0)
   {

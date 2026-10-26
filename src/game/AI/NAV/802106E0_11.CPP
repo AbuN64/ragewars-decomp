@@ -20,12 +20,12 @@ extern void func_80211020_de(CloseAttackBrain *);
 extern s32 Nav_HasLineOfSight(CloseAttackBrain *, CloseAttackActor *);
 extern void Nav_SetBehaviourState(CloseAttackBrain *, s32);
 extern f32 func_802726BC_de(CVector3 *, CVector3 *);
-extern f32 func_80209BE0_de(CloseAttackBrain *);
-extern f32 func_80209DAC_de(CloseAttackBrain *);
+extern f32 Nav_ScaleCharacterSettingByDifficulty(CloseAttackBrain *);
+extern f32 Nav_UpdateDifficultyAimJitter(CloseAttackBrain *);
 extern f32 Nav_SteerTowardPoint(CloseAttackBrain *, CVector3 *, f32, f32);
 extern s32 func_80210EFC_de(f32);
 extern void Nav_MeasureWheelClearance(CloseAttackActor *, s32);
-extern void func_80209E80_de(CloseAttackBrain *);
+extern void Nav_DispatchActorBehavior(CloseAttackBrain *);
 extern s32 Nav_GetRouteRelation(char *, s32, s32);
 
 
@@ -78,7 +78,7 @@ void func_80211490_eu(CloseAttackActor *actor) {
             return;
         }
         if (brain->visible != 0) {
-            temp_f21 = func_80209BE0_de(brain);
+            temp_f21 = Nav_ScaleCharacterSettingByDifficulty(brain);
             temp_v0 = brain->timer - 1;
             temp_f20 = temp_f21 * 0.6f;
             brain->timer = temp_v0;
@@ -88,7 +88,7 @@ void func_80211490_eu(CloseAttackActor *actor) {
                 brain->distance = (Nav_NextRandom() % 250000) + 0x57E40;
             }
             temp_s0_2 = &temp_s0->pos;
-            Nav_SteerTowardPoint(brain, temp_s0_2, 2.0f, func_80209DAC_de(brain));
+            Nav_SteerTowardPoint(brain, temp_s0_2, 2.0f, Nav_UpdateDifficultyAimJitter(brain));
             temp_f0 = func_802726BC_de(temp_s0_2, &brain->player->pos);
             temp_f1 = temp_f0 + 10000.0f;
             distance = (f32) brain->distance;
@@ -175,7 +175,7 @@ block_41:
             if (brain->fireTimer < 0) {
                 brain->fireTimer = ((Nav_NextRandom() % 2) + 2) * 0xF;
             }
-            func_80209E80_de(brain);
+            Nav_DispatchActorBehavior(brain);
         } else {
             brain->destination = route;
             Nav_SteerAlongRoute(brain);

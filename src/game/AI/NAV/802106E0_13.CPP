@@ -4,7 +4,7 @@
 #include "AI/NAV/802106E0_13.H"
 
 #if !(defined(VERSION_DE))
-/* Runs a computer player's chase state: refreshes its view through func_80211020_de and, without a target, returns to roaming (state 2); otherwise re-checks the target's visibility every fourth frame through func_802099B4_de, backs off (state 12) when only it is on the upper layer, switches to close combat (state 7, sub-state 13) within 600 units, re-rolls its strafe pattern through func_802744D4_de when its timer runs out, steers at the target through func_80209308_de and strafes left or right at 0.4 of its speed while Nav_MeasureWheelClearance reports room to walk, stopping otherwise, then drives through func_80209E80_de; losing sight of the target or failing to re-route to the target's new node through Nav_GetRouteRelation also returns it to roaming. */
+/* Runs a computer player's chase state: refreshes its view through func_80211020_de and, without a target, returns to roaming (state 2); otherwise re-checks the target's visibility every fourth frame through func_802099B4_de, backs off (state 12) when only it is on the upper layer, switches to close combat (state 7, sub-state 13) within 600 units, re-rolls its strafe pattern through func_802744D4_de when its timer runs out, steers at the target through func_80209308_de and strafes left or right at 0.4 of its speed while Nav_MeasureWheelClearance reports room to walk, stopping otherwise, then drives through Nav_DispatchActorBehavior; losing sight of the target or failing to re-route to the target's new node through Nav_GetRouteRelation also returns it to roaming. */
 
 
 
@@ -20,12 +20,12 @@ extern void func_80211020_de(Brain_func_802120A8_eu *);
 extern s32 Nav_HasLineOfSight(Brain_func_802120A8_eu *, Self *);
 extern void Nav_SetBehaviourState(Brain_func_802120A8_eu *, s32);
 extern f32 func_802726BC_de(CVector3 *, CVector3 *);
-extern f32 func_80209BE0_de(Brain_func_802120A8_eu *);
-extern f32 func_80209DAC_de(Brain_func_802120A8_eu *);
+extern f32 Nav_ScaleCharacterSettingByDifficulty(Brain_func_802120A8_eu *);
+extern f32 Nav_UpdateDifficultyAimJitter(Brain_func_802120A8_eu *);
 extern f32 Nav_SteerTowardPoint(Brain_func_802120A8_eu *, CVector3 *, f32, f32);
 extern s32 func_80210EFC_de(f32);
 extern void Nav_MeasureWheelClearance(Self *, s32);
-extern void func_80209E80_de(Brain_func_802120A8_eu *);
+extern void Nav_DispatchActorBehavior(Brain_func_802120A8_eu *);
 extern s32 Nav_GetRouteRelation(char *, s32, s32);
 
 void func_802120A8_eu(Self *actor) {
@@ -63,7 +63,7 @@ void func_802120A8_eu(Self *actor) {
             Nav_SetBehaviourState(brain, 7);
             return;
         }
-        speed = func_80209BE0_de(brain) * 0.4f;
+        speed = Nav_ScaleCharacterSettingByDifficulty(brain) * 0.4f;
         if (--brain->timer <= 0) {
             brain->timer = Nav_NextRandom() % 4 + 12;
             brain->pattern = Nav_NextRandom() % 2;
@@ -72,7 +72,7 @@ void func_802120A8_eu(Self *actor) {
                 brain->pattern = 2;
             }
         }
-        Nav_SteerTowardPoint(brain, &target->pos, 2.0f, func_80209DAC_de(brain));
+        Nav_SteerTowardPoint(brain, &target->pos, 2.0f, Nav_UpdateDifficultyAimJitter(brain));
         if (brain->pattern == 0) {
             dir = func_80210EFC_de(brain->player->yaw - 3.1415927f - 1.5707964f);
             if (brain->player->slot % 2 == D_800D297C) {
@@ -98,7 +98,7 @@ void func_802120A8_eu(Self *actor) {
             brain->player->strafe = 0.0f;
         }
         brain->routeNodes[0] = -1;
-        func_80209E80_de(brain);
+        Nav_DispatchActorBehavior(brain);
     } else {
         brain->target = 0;
         Nav_SetBehaviourState(brain, 2);

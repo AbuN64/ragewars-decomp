@@ -6,5 +6,5 @@
 #include "COMMON/LISTNODE.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/VECTOR4F.H"
-extern void func_8025D928_de(void *arg0);
+extern void Audio_UpdateMusicFade(void *arg0);
 #endif

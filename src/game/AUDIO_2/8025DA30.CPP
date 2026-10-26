@@ -24,7 +24,7 @@ extern f32 func_802B2350(s32);
 extern f32 func_802AD520_eu(s32);
 extern f32 D_800C4008_de;
 
-s32 func_8025DA10_de(Track *state, s32 index) {
+s32 Audio_LoadMusicSequence(Track *state, s32 index) {
     s32 selection;
 
     void *result;
@@ -54,7 +54,7 @@ s32 func_8025DA10_de(Track *state, s32 index) {
 
 /* Sets the sound fade state and derives its step from the clamped duration. */
 
-void func_8025DACC_de(StateRecAt34 *arg0) {
+void Audio_FadeOutMusic(StateRecAt34 *arg0) {
     f32 var_f2;
 
     var_f2 = arg0->unk30;
@@ -69,19 +69,19 @@ void func_8025DACC_de(StateRecAt34 *arg0) {
     arg0->unk34 = (f32) ((f32) arg0->unk20 / (var_f2 * 60.0f));
 }
 
-void func_8025DB34_de(Track *track) {
+void Audio_EnableMusicGainOverride(Track *track) {
     track->unk38 = 1;
     track->unk40 = 0;
 }
 
 /** Clear offset 0x38 and initialize offset 0x40 from D_800C9108. */
-void func_8025DB44_de(Track *track) {
+void Audio_DisableMusicGainOverride(Track *track) {
     track->unk40 = D_800C9108;
     track->unk38 = 0;
 }
 
 s32 func_802AFF90_de(s32);
-void func_8025DB58_de(s32 a) {
+void Audio_StopMusic(s32 a) {
     (((struct IntegerState2C_2 *) ((s8 *) a))->unk_28) = -1;
     func_802AFF90_de((((struct IntegerState2C_2 *) ((s8 *) a))->unk_14));
 }

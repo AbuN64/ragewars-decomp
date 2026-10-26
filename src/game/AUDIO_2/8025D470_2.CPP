@@ -16,7 +16,7 @@ void func_802AEAB0_de(void *arg0, InitParams *arg1);
 
 extern void func_802AFF90_de(s32 arg0);
 
-void func_8025D844_de(struct AudioStateD844 *state, struct AudioRootD844 *root) {
+void Audio_InitializeMusicPlayer(struct AudioStateD844 *state, struct AudioRootD844 *root) {
     struct AudioParamsD844 params;
     void *player;
     state->root = root;
@@ -42,7 +42,7 @@ void func_8025D844_de(struct AudioStateD844 *state, struct AudioRootD844 *root) 
     state->fourth = D_800C3FF8_de;
 }
 
-void func_8025D928_de(void *queue) {
+void Audio_UpdateMusicFade(void *queue) {
     ObjectState40 *o = queue;
     f32 temp_f1;
     f32 targetGain;

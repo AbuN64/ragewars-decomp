@@ -25,7 +25,7 @@
 
 
 
-static inline s32 pick(Bank_func_8025CED0_de *bank, s32 group) {
+static inline s32 pick(BankAudioStartDialogGroup *bank, s32 group) {
     s32 first;
     s32 last;
     s32 i;
@@ -72,7 +72,7 @@ static inline void restart(PlayerRecAt1E *player) {
 
 extern s16 func_802B2510_de(void *, void *);
 
-s32 func_8025CED0_de(PlayerRecAt1E *player, s32 group, f32 scale, int unused3) {
+s32 Audio_StartDialogGroup(PlayerRecAt1E *player, s32 group, f32 scale, int unused3) {
     s32 song;
     s32 request;
 
@@ -97,7 +97,7 @@ s32 func_8025CED0_de(PlayerRecAt1E *player, s32 group, f32 scale, int unused3) {
     return request;
 }
 
-void func_8025D158_de(struct Shape_typemap_110 *record, s32 resource) {
+void Audio_InitializeDialogPlayer(struct Shape_typemap_110 *record, s32 resource) {
     extern char D_800D0D78[];
     record->field_0 = resource;
     record->field_4 = -1;
@@ -125,7 +125,7 @@ void Audio_StopDialogPlayer(void *arg0) {
     func_802587A4_de((s32 *)player->bank);
 }
 
-s32 func_8025D238_de(void **arg0, s16 id, s16 avoid) {
+s32 Audio_ChooseSequenceVariant(void **arg0, s16 id, s16 avoid) {
     s32 first;
     s32 last;
     s32 total;
@@ -164,7 +164,7 @@ s32 func_8025D238_de(void **arg0, s16 id, s16 avoid) {
     return result;
 }
 
-void func_8025D350_de(void *arg0, s32 songIndex) {
+void Audio_LoadDialogMetadata(void *arg0, s32 songIndex) {
     PlayerRecAt24 *player = arg0;
     f64 tempoValue;
     s32 tempo;
@@ -181,7 +181,7 @@ void func_8025D350_de(void *arg0, s32 songIndex) {
     Render_GetPackSection(player->bank->songs, (songIndex * 2) | 1);
 }
 
-void func_8025D3E4_de(void *arg0) {
+void Audio_StopDialogPlayerUnlocked(void *arg0) {
 
     PlayerRecAt1E *player = arg0;
     void *soundPlayer;

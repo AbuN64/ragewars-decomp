@@ -48,9 +48,9 @@ extern f32 D_800C2D1C_de;
 
 
 
-void func_8022B7F8_de(void *actor, void *arg1) {
+void func_8022B7F8_de(void *actor, void *effectSource) {
     Shared_ActorView *state = actor;
-    Shared_ActorView *source = arg1;
+    Shared_ActorView *source = effectSource;
     void *owner;
     void *payload;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

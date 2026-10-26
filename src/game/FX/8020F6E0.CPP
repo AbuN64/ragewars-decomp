@@ -6,7 +6,7 @@
 #include "stddef.h"
 
 extern CVector3 *Nav_GetControllerPosition(AiController *controller);
-extern s32 func_80209A94_de(AiController *controller);
+extern s32 Nav_MatchesBehaviorStateFilter(AiController *controller);
 extern f32 Particle_GetPointDistance(f32 *a, f32 *b);
 
 static inline AiTarget *setSelectedTarget(AiController *controller, AiTarget *target) {
@@ -58,7 +58,7 @@ s32 Fx_UpdateTargetSelection(void *object) {
         alternate = NULL;
         alternateDistance = 0.0f;
     }
-    if (func_80209A94_de(controller) == 0 || linked == NULL) {
+    if (Nav_MatchesBehaviorStateFilter(controller) == 0 || linked == NULL) {
         if (func_8020F93C_de(controller) == 0) {
             controller->target = NULL;
             return 1;

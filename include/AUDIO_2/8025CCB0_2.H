@@ -5,8 +5,8 @@
 #include "TYPES.H"
 
 extern void Audio_StopDialogPlayer(void *arg0);
-extern s32 func_8025D238_de(void **arg0, s16 id, s16 avoid);
-extern void func_8025D350_de(void *arg0, s32 arg1);
-extern void func_8025D3E4_de(void *arg0);
-extern s32 func_8025CED0_de(PlayerRecAt1E *player, s32 group, f32 scale, int arg3);
+extern s32 Audio_ChooseSequenceVariant(void **arg0, s16 id, s16 avoid);
+extern void Audio_LoadDialogMetadata(void *arg0, s32 arg1);
+extern void Audio_StopDialogPlayerUnlocked(void *arg0);
+extern s32 Audio_StartDialogGroup(PlayerRecAt1E *player, s32 group, f32 scale, int arg3);
 #endif

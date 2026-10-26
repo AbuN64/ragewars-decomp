@@ -9,14 +9,14 @@
 
 f32 func_802726BC_de(void *a, void *b);
 
-extern void func_8020D1FC_de(void *);
+extern void Nav_ClearGoalList(void *);
 
 
-extern void func_8020D220_de(void *, s32);
+extern void Nav_AddGoalNode(void *, s32);
 
 extern void Nav_SearchPath(CNavData *, NavigationSearchNode *);
 
-s32 func_8020B95C_de(CNavData *graph, s32 arg1, s32 arg2, s32 *arg3, s32 arg4) {
+s32 Nav_CollectDirectedNeighbors(CNavData *graph, s32 arg1, s32 arg2, s32 *arg3, s32 arg4) {
     NavigationPoint *point;
     NavigationBuffer *points;
     NavigationBuffer *temp_v1_2;
@@ -143,7 +143,7 @@ block_32:
     return var_s4;
 }
 
-s32 func_8020BC50_de(Obj8020BC50 *obj, s32 key, s32 requested, void *owner) {
+s32 Nav_SearchRelatedGoalPath(Obj8020BC50 *obj, s32 key, s32 requested, void *owner) {
     Node8020BC50 *node;
     s32 found;
 
@@ -167,10 +167,10 @@ s32 func_8020BC50_de(Obj8020BC50 *obj, s32 key, s32 requested, void *owner) {
 
     obj->selected = -1;
     obj->value = D_800C1D6C_de;
-    func_8020D1FC_de(obj);
+    Nav_ClearGoalList(obj);
     found = 0;
     Nav_SetPickupGoalWeights(owner);
-    func_8020D220_de(obj, requested);
+    Nav_AddGoalNode(obj, requested);
 
     {
         s32 i;
@@ -191,7 +191,7 @@ s32 func_8020BC50_de(Obj8020BC50 *obj, s32 key, s32 requested, void *owner) {
                     record = (char *)obj->records +
                              (i * obj->records->stride + 8);
                     if (record != 0 && (((ObjectState10 *)(record))->unk_C.v0 & mask) == 0) {
-                        func_8020D220_de(obj, i);
+                        Nav_AddGoalNode(obj, i);
                         found++;
                     }
                 }
@@ -212,7 +212,7 @@ s32 func_8020BC50_de(Obj8020BC50 *obj, s32 key, s32 requested, void *owner) {
                         record = (char *)obj->records +
                                  (i * obj->records->stride + 8);
                         if (record != 0 && (((ObjectState10 *)(record))->unk_C.v1 & 0x400) == 0) {
-                            func_8020D220_de(obj, i);
+                            Nav_AddGoalNode(obj, i);
                         }
                     }
                 }
@@ -341,7 +341,7 @@ extern f32 D_800C1D78_de;
 extern const f32 D_800C1D7C_de;
 extern f32 Particle_GetPointDistance(f32 *, f32 *);
 
-f32 func_8020C2E8_de(CNavData *graph, NavigationSearchNode *node)
+f32 Nav_EstimateGoalDistance(CNavData *graph, NavigationSearchNode *node)
 {
     s32 neighbors[64];
     s32 portalIds[64];
@@ -458,7 +458,7 @@ f32 func_8020C2E8_de(CNavData *graph, NavigationSearchNode *node)
 
 extern const f32 D_800C1D80_de;
 extern f32 D_800C1D84_de, D_800C1D88_de;
-extern f32 func_8020C2E8_de(CNavData *, NavigationSearchNode *);
+extern f32 Nav_EstimateGoalDistance(CNavData *, NavigationSearchNode *);
 extern f32 Particle_GetPointDistance(f32 *, f32 *);
 
 static inline s32 navHasOpenNode(CNavData *graph, s32 status) {
@@ -504,7 +504,7 @@ void Nav_SearchPath(CNavData *graph, NavigationSearchNode *start) {
     NavigationSearchNode *next;
 
     start->cost = 0.0f;
-    initialEstimate = func_8020C2E8_de(graph, start);
+    initialEstimate = Nav_EstimateGoalDistance(graph, start);
     start->estimate = initialEstimate;
     start->parent = 0;
     start->open = open;
@@ -579,7 +579,7 @@ void Nav_SearchPath(CNavData *graph, NavigationSearchNode *start) {
 update_neighbor:
                 next->parent = current;
                 next->cost = cost;
-                estimate = func_8020C2E8_de(graph, next);
+                estimate = Nav_EstimateGoalDistance(graph, next);
                 next->estimate = estimate;
                 next->total = next->cost + estimate;
                 if ((next->open ^ 2) == 0) {

@@ -41,7 +41,7 @@ void func_8022C67C_de(void *arg0) {
     obj->unkA0 = f4;
 }
 
-s32 func_8022C6E4_de(void *player, void *arg1) {
+s32 func_8022C6E4_de(void *player, void *bodyActor) {
     s16 state = ((Shared_ActorView *)player)->action;
     s32 blocked;
 
@@ -51,7 +51,7 @@ s32 func_8022C6E4_de(void *player, void *arg1) {
         blocked = 0;
     }
     if (blocked == 0) {
-        if ((((LevelActor *)arg1)->motionState & 0x20000) == 0) {
+        if ((((LevelActor *)bodyActor)->motionState & 0x20000) == 0) {
             return 0;
         }
         if (((Shared_ActorView *)player)->action == 0xD) {
@@ -60,13 +60,13 @@ s32 func_8022C6E4_de(void *player, void *arg1) {
         if (((Shared_ActorView *)player)->action == 0xE) {
             return 0;
         }
-        Weapons_SetPlayerState(player, arg1, 0xD);
+        Weapons_SetPlayerState(player, bodyActor, 0xD);
         return 1;
     }
     return 0;
 }
 
-s32 func_8022C760_de(void *player, void *arg1) {
+s32 func_8022C760_de(void *player, void *bodyActor) {
     s16 state = ((Shared_ActorView *)player)->action;
     s32 blocked;
     s32 flags;
@@ -77,14 +77,14 @@ s32 func_8022C760_de(void *player, void *arg1) {
         blocked = 0;
     }
     if (blocked == 0) {
-        if (((MovementDescriptor *)((LevelActor *)arg1)->definition)->body.header.flags & 1) {
+        if (((MovementDescriptor *)((LevelActor *)bodyActor)->definition)->body.header.flags & 1) {
             if (((Shared_ActorView *)player)->action == 0x26) {
                 return 0;
             }
             if (((Shared_ActorView *)player)->unk_0x0664 & 0x8000) {
                 return 0;
             }
-            flags = ((LevelActor *)arg1)->motionState;
+            flags = ((LevelActor *)bodyActor)->motionState;
             if (flags & 0x80) {
                 goto fire;
             }
@@ -93,8 +93,8 @@ s32 func_8022C760_de(void *player, void *arg1) {
     }
     return 0;
 fire:
-    ((LevelActor *)arg1)->motionState = flags | 0x100;
-    Weapons_SetPlayerState(player, arg1, 0xF);
+    ((LevelActor *)bodyActor)->motionState = flags | 0x100;
+    Weapons_SetPlayerState(player, bodyActor, 0xF);
     return 1;
 }
 

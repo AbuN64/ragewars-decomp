@@ -5,25 +5,25 @@
 #include "COMMON/OBJECTLINKS14.H"
 #include "TYPES.H"
 
-extern void func_8020D014_de(void *arg0);
+extern void Nav_ResetSearchState(void *arg0);
 
-extern void func_8020D1FC_de(s32);
+extern void Nav_ClearGoalList(s32);
 
-extern void func_8020D220_de(void *, s32);
+extern void Nav_AddGoalNode(void *, s32);
 
-extern void func_8020D0CC_de(void *arg0, s32 arg1);
+extern void Nav_SearchPathByKey(void *arg0, s32 arg1);
 
 extern void Nav_SearchPath(void *arg0, void *node);
 
 void func_8020D070_de(void *graph, s32 arg1, s32 arg2) {
-    func_8020D014_de(graph);
-    func_8020D1FC_de((s32) graph);
-    func_8020D220_de(graph, arg2);
-    func_8020D0CC_de(graph, arg1);
+    Nav_ResetSearchState(graph);
+    Nav_ClearGoalList((s32) graph);
+    Nav_AddGoalNode(graph, arg2);
+    Nav_SearchPathByKey(graph, arg1);
 }
 
 /** Find a keyed node in the object's list and pass it to Nav_SearchPath. */
-void func_8020D0CC_de(void *graph, s32 key) {
+void Nav_SearchPathByKey(void *graph, s32 key) {
     NavigationSearchNode *node = ((CNavData *)graph)->nodes;
 
     if (node == 0) {
@@ -43,7 +43,7 @@ found:
     Nav_SearchPath(graph, node);
 }
 
-void func_8020D114_de(char *owner, s32 *output, s32 count) {
+void Nav_ReconstructSearchPath(char *owner, s32 *output, s32 count) {
     s32 i;
     s32 done;
     s32 value;
@@ -86,14 +86,14 @@ found:
     }
 }
 
-s32 Nav_GetRouteRelation(void *arg0, s32 arg1, s32 arg2) {
-    ObjectLinks14 *table = arg0;
+s32 Nav_GetRouteRelation(void *relationTable, s32 sourceNode, s32 destinationNode) {
+    ObjectLinks14 *table = relationTable;
     RouteRelationBytes *bytes = (RouteRelationBytes *)table->unk_10;
-    s32 index = (arg1 * table->unk_4 + arg2) * bytes->stride;
+    s32 index = (sourceNode * table->unk_4 + destinationNode) * bytes->stride;
     return *(index + bytes->entries);
 }
 
-void func_8020D1FC_de(s32 cNavData) {
+void Nav_ClearGoalList(s32 cNavData) {
     CNavData *graph = (CNavData *)cNavData;
     s32 i;
     s32 value = -1;

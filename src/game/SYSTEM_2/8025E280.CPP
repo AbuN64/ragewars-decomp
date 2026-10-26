@@ -8,13 +8,13 @@
 #include "COMMON/AUDIO_CONTEXT.H"
 extern void Audio_SetVoiceMixValue(ContextRecAt2BC0 *arg0, int arg1);
 extern void Audio_SetListenerCamera(ContextRecAt2BC0 *object, int value);
-extern void func_80258D48_de(ContextRecAt2BC0 *object, int value);
-extern void func_80258CEC_de(int arg0);
+extern void Audio_SetMusicGainScalingEnabled(ContextRecAt2BC0 *object, int value);
+extern void Audio_FadeOutContextMusic(int arg0);
 extern void Audio_SetPeriodicSoundEnabled(char *object, int value);
-extern void func_80258E40_de(int arg0);
-extern void func_80258EBC_de(int arg0);
-extern void func_80258ED8_de(int arg0);
-extern void func_80258EF4_de(int arg0);
+extern void Audio_StopContextMusic(int arg0);
+extern void Audio_EnableContextMusicGainOverride(int arg0);
+extern void Audio_DisableContextMusicGainOverride(int arg0);
+extern void Audio_ClearContextVoiceFlags(int arg0);
 
 
 /** Read the global word at VRAM 0x8010DE0C. */
@@ -23,11 +23,11 @@ extern void func_80258EF4_de(int arg0);
 s32 Audio_SetClampedAudioLevel(s32 *, f32);
 
 
-void func_8025E260_de(int arg0)
+void func_8025E260_de(int trackId)
 {
   int new_var;
-  new_var = arg0 != 0;
-  D_8010C080.track = (s32) arg0;
+  new_var = trackId != 0;
+  D_8010C080.track = (s32) trackId;
   if (new_var)
   {
     if (1)
@@ -39,8 +39,8 @@ void func_8025E260_de(int arg0)
   func_8025E3A8_de();
 }
 
-void func_8025E29C_de(s32 arg0) {
-    Audio_SetVoiceMixValue(&D_8010C080, arg0);
+void func_8025E29C_de(s32 mixValue) {
+    Audio_SetVoiceMixValue(&D_8010C080, mixValue);
 }
 
 int func_8025E2C4_de(void) {
@@ -60,19 +60,19 @@ void func_8025E2D4_de(s32 a) {
 }
 
 void func_8025E318_de(void) {
-    func_80258CEC_de((s32) &D_8010C080);
+    Audio_FadeOutContextMusic((s32) &D_8010C080);
 }
 
 void func_8025E33C_de(void) {
-    func_80258E40_de((s32) &D_8010C080);
+    Audio_StopContextMusic((s32) &D_8010C080);
 }
 
 void func_8025E360_de(void) {
-    func_80258EBC_de((s32) &D_8010C080);
+    Audio_EnableContextMusicGainOverride((s32) &D_8010C080);
 }
 
 void func_8025E384_de(void) {
-    func_80258ED8_de((s32) &D_8010C080);
+    Audio_DisableContextMusicGainOverride((s32) &D_8010C080);
 }
 
 void func_8025E3A8_de(void) {
@@ -87,8 +87,8 @@ void func_8025E3F0_de(s32 arg0) {
     Audio_SetListenerCamera(&D_8010C080, arg0);
 }
 
-void func_8025E418_de(s32 arg0) {
-    func_80258D48_de(&D_8010C080, arg0);
+void func_8025E418_de(s32 enabled) {
+    Audio_SetMusicGainScalingEnabled(&D_8010C080, enabled);
 }
 
 void func_8025E440_de(f32 arg0) {
@@ -96,7 +96,7 @@ void func_8025E440_de(f32 arg0) {
 }
 
 void func_8025E468_de(void) {
-    func_80258EF4_de((s32) &D_8010C080);
+    Audio_ClearContextVoiceFlags((s32) &D_8010C080);
 }
 
 void func_8025E48C_de(void) {

@@ -75,32 +75,32 @@ extern void func_8023E838_de(void *arg0);
 
 extern void func_8023E45C_de(void *arg0);
 
-s32 Camera_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos, u32 *arg4) {
+s32 Camera_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos, u32 *motionSettings) {
     s32 func_8023D380_de();
     Func80243A80Frame frame;
-    f32 temp_f0;
-    f32 temp_f0_2;
+    f32 headingCosine;
+    f32 surfaceCeilingHeight;
     f32 high;
     f32 count;
-    f32 temp_f22;
-    f32 temp_f22_2;
-    f32 var_f2;
-    s32 temp_v0;
+    f32 actorReach;
+    f32 headingSine;
+    f32 groundSeparation;
+    s32 collisionFound;
     s32 flags;
-    s32 var_a1; 
-    s32 var_a1_3;
-    s32 var_s0;
-    s32 var_s3;
+    s32 motionContinuation; 
+    s32 repeatFloorProbe;
+    s32 remainingIterations;
+    s32 collisionCount;
     s32 var_v0;
-    s32 var_v1;
-    s32 var_v1_2;
-    s32 var_v1_3;
-    s32 var_v1_4;
+    s32 groundFollowEnabled;
+    s32 peakMoveCount;
+    s32 horizontalResponseTicks;
+    s32 verticalResponseTicks;
     u16 *surface;
-    u32 temp_a0;
-    u32 temp_v1;
-    u32 temp_v1_2;
-    u32 var_v0_2;
+    u32 preProbeFlags;
+    u32 settingsFlags;
+    u32 floorProbeBaseFlags;
+    u32 attachmentFlags;
     u32 loopMask; 
     f32 dropDistance; 
     Func80243A80Actor *attachedActor; 
@@ -113,31 +113,31 @@ s32 Camera_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
     __builtin_memcpy(&D_80103FCC->x, &actor->room, 12);
     actor->flags = (u32) (actor->flags & ~0x18);
     frame.sp18 = actor;
-    var_a1 = 0;
+    motionContinuation = 0;
     if (actor->type == 1) {
-        var_a1 = (u32) var_a1 < (actor->status & 0x300000);
+        motionContinuation = (u32) motionContinuation < (actor->status & 0x300000);
     }
-    frame.sp1C = var_a1;
-    temp_f22 = Sound_GetActorReach(actor);
+    frame.sp1C = motionContinuation;
+    actorReach = Sound_GetActorReach(actor);
     count = Particle_GetActorRadius(actor);
     high = Particle_GetActorHeight(actor);
-    func_8023E690_de(&frame.sp18, temp_f22, count, high, Sound_GetActorBaseOffset(actor));
+    func_8023E690_de(&frame.sp18, actorReach, count, high, Sound_GetActorBaseOffset(actor));
     *(Func80243A80Vec3 *)&frame.sp5C = *(Func80243A80Vec3 *)&actor->x;
     __builtin_memcpy(&frame.sp68, &pos, 12);
     __builtin_memcpy(&frame.sp8C, &actor->room, 12);
     frame.spC4 = actor->collision;
-    var_v1 = 0;
-    if ((*arg4 & 0x200) && (actor->velY <= 0.0f)) {
-        var_v1 = 1;
+    groundFollowEnabled = 0;
+    if ((*motionSettings & 0x200) && (actor->velY <= 0.0f)) {
+        groundFollowEnabled = 1;
     }
-    frame.sp3C = var_v1;
-    frame.sp38 = ((u32) *arg4 >> 1) & 1;
+    frame.sp3C = groundFollowEnabled;
+    frame.sp38 = ((u32) *motionSettings >> 1) & 1;
     frame.sp40 = (((u32) actor->flags >> 2) ^ 1) & 1;
     frame.sp44 = 1;
     frame.sp54 = actor->flags;
     frame.sp34 = frame.sp28 * D_800C3790_de;
-    frame.sp50 = ((u32) *arg4 >> 0x13) & 1;
-    frame.sp58 = arg4;
+    frame.sp50 = ((u32) *motionSettings >> 0x13) & 1;
+    frame.sp58 = motionSettings;
     func_8023CFE0_de(&frame.sp18);
     if ((frame.sp3C != 0) && (frame.sp54 & 7) && !(frame.sp54 & 0x2000)) {
         __builtin_memcpy(&frame.sp210, &actor->contactX, 12);
@@ -147,12 +147,12 @@ s32 Camera_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
         func_8023E6EC_de(&frame.sp18, &frame.sp1C8);
     }
     if ((frame.sp1C != 0) || (frame.sp5C != frame.sp68) || (frame.sp60 != frame.sp6C) || (var_v0 = 0, (frame.sp64 != frame.sp70))) {
-        var_v1_2 = ++D_800CB410_de;
-        if (var_v1_2 < D_800CB414_de) {
-            var_v1_2 = D_800CB414_de;
+        peakMoveCount = ++D_800CB410_de;
+        if (peakMoveCount < D_800CB414_de) {
+            peakMoveCount = D_800CB414_de;
         }
-        D_800CB414_de = var_v1_2;
-        if ((arg4 != &D_80100338) && (arg4 != &D_801001D0) && (arg4 != &D_80103FD0) && (arg4 != &D_80100170)) {
+        D_800CB414_de = peakMoveCount;
+        if ((motionSettings != &D_80100338) && (motionSettings != &D_801001D0) && (motionSettings != &D_80103FD0) && (motionSettings != &D_80100170)) {
             actor->attached = 0;
             frame.sp54 &= ~0x7B;
         }
@@ -162,42 +162,42 @@ s32 Camera_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos
         } else {
             frame.sp2C8 = 0.0f;
         }
-        temp_f22_2 = Math_Sinf(frame.sp2C8);
-        temp_f0 = Math_Cosf(frame.sp2C8);
+        headingSine = Math_Sinf(frame.sp2C8);
+        headingCosine = Math_Cosf(frame.sp2C8);
         frame.sp54 &= ~0x2000;
-        temp_v1 = *arg4;
-        if (temp_v1 & 4) {
-            var_s0 = 1;
-        } else if (temp_v1 & 0x800) {
-            var_s0 = 3;
+        settingsFlags = *motionSettings;
+        if (settingsFlags & 4) {
+            remainingIterations = 1;
+        } else if (settingsFlags & 0x800) {
+            remainingIterations = 3;
         } else {
-            if (actor->type == 1) var_s0 = 4;
-            else var_s0 = 1;
+            if (actor->type == 1) remainingIterations = 4;
+            else remainingIterations = 1;
         }
-        var_v1_3 = var_s0;
-        if (var_s0 >= 3) {
-            var_v1_3 = 2;
+        horizontalResponseTicks = remainingIterations;
+        if (remainingIterations >= 3) {
+            horizontalResponseTicks = 2;
         }
-        frame.sp48 = var_v1_3;
-        var_v1_4 = var_s0 + 1;
-        if (var_v1_4 >= 4) {
-            var_v1_4 = 3;
+        frame.sp48 = horizontalResponseTicks;
+        verticalResponseTicks = remainingIterations + 1;
+        if (verticalResponseTicks >= 4) {
+            verticalResponseTicks = 3;
         }
-        frame.sp4C = var_v1_4;
+        frame.sp4C = verticalResponseTicks;
         func_8023E838_de(&frame.sp18);
-        var_s3 = 0;
+        collisionCount = 0;
         loopMask = 0x80000;
         collisionOne = 1;
 loop_34:
-        if (*arg4 & loopMask) {
+        if (*motionSettings & loopMask) {
             frame.spC4 = func_8028C050_de(frame.spC4, &frame.sp68);
         }
-        temp_v0 = func_8023D158_de((s8 *) &frame.sp18);
-        var_a1 = 0;
-        if (temp_v0 != 0) {
+        collisionFound = func_8023D158_de((s8 *) &frame.sp18);
+        motionContinuation = 0;
+        if (collisionFound != 0) {
             if (frame.spC8 != collisionOne) {
                 if (frame.spC8 == 4) {
-                    if (((frame.sp110 * -temp_f22_2) + (frame.sp118 * -temp_f0)) < D_800C3794_de) {
+                    if (((frame.sp110 * -headingSine) + (frame.sp118 * -headingCosine)) < D_800C3794_de) {
                         frame.sp54 |= 0x80;
                         func_8023EBFC_de(&frame.sp18, &frame.spC8);
                     }
@@ -210,23 +210,23 @@ block_42:
                 frame.sp54 &= ~0x80;
             }
             func_8023E45C_de(&frame.sp18);
-            var_s3 += 1;
-            var_a1 = func_8023D380_de(&frame.sp18);
+            collisionCount += 1;
+            motionContinuation = func_8023D380_de(&frame.sp18);
             __builtin_memcpy(&frame.sp5C, &frame.sp198, 12);
             __builtin_memcpy(&frame.sp68, &frame.sp1B0, 12);
             __builtin_memcpy(&frame.sp8C, &frame.sp1BC, 12);
         } else {
             __builtin_memcpy(&frame.sp5C, &frame.sp68, 12);
         }
-        var_s0 -= 1;
-        if (var_a1 == 0) {
-        } else if (var_s0 != 0) {
+        remainingIterations -= 1;
+        if (motionContinuation == 0) {
+        } else if (remainingIterations != 0) {
             goto loop_34;
         }
         __builtin_memcpy(&actor->x, &frame.sp5C, 12);
         __builtin_memcpy(&actor->room, &frame.sp8C, 12);
         frame.sp54 &= ~4;
-        if (*arg4 & 0x40000) {
+        if (*motionSettings & 0x40000) {
             __builtin_memcpy(&frame.sp68, &frame.sp5C, 12);
             frame.sp44 = 0;
             frame.sp48 = 0;
@@ -236,9 +236,9 @@ block_42:
             frame.sp6C = savedY - dropDistance;
             __builtin_memcpy(&frame.sp2A8, &D_801000F0, sizeof(D_801000F0));
             frame.sp58 = &frame.sp2A8;
-            temp_v1_2 = frame.sp2A8 & 0xFFE7FFF7;
-            frame.sp2A8 = temp_v1_2;
-            frame.sp2A8 = temp_v1_2 | (*arg4 & 0x180008);
+            floorProbeBaseFlags = frame.sp2A8 & 0xFFE7FFF7;
+            frame.sp2A8 = floorProbeBaseFlags;
+            frame.sp2A8 = floorProbeBaseFlags | (*motionSettings & 0x180008);
             frame.sp50 = 0;
             func_8023E838_de(&frame.sp18);
             actor->contactX = 0.0f;
@@ -251,23 +251,23 @@ loop_49:
                     frame.sp3C = 0;
                 }
                 func_8023D380_de(&frame.sp18);
-                var_a1_3 = 0;
+                repeatFloorProbe = 0;
                 actor->groundY = frame.sp19C;
                 __builtin_memcpy(&actor->contactX, &frame.sp110, 12);
                 actorY = actor->y;
                 hitY = frame.sp19C;
-                var_f2 = actorY - hitY;
-                if ((frame.sp3C != 0) && (var_f2 < D_800C37A0_de)) {
+                groundSeparation = actorY - hitY;
+                if ((frame.sp3C != 0) && (groundSeparation < D_800C37A0_de)) {
                     frame.sp3C = 0;
                     actor->velY = 0.0f;
-                    var_f2 = actor->velY;
+                    groundSeparation = actor->velY;
                     actor->y = hitY;
                 }
-                if ((actor->velY <= 0.0f) && (var_f2 < D_800C37A4_de)) {
+                if ((actor->velY <= 0.0f) && (groundSeparation < D_800C37A4_de)) {
                     if (frame.spC8 == 5) {
                         frame.sp54 |= 0x2004;
                         func_8023EC54_de(&frame.sp18, &frame.spC8);
-                        var_a1_3 = 1;
+                        repeatFloorProbe = 1;
                         *frame.sp58 &= ~8;
                     } else {
                         if (frame.spC8 < 5) goto no_attach;
@@ -281,39 +281,39 @@ loop_49:
                         if (frame.sp1C != 0) {
                             attachedActor->flags = (s32) (flags | 0x60);
                         }
-                        var_v0_2 = (frame.sp54 & ~3) | 2;
+                        attachmentFlags = (frame.sp54 & ~3) | 2;
                         goto attach_done;
 no_attach:
-                        var_v0_2 = frame.sp54 | 4;
+                        attachmentFlags = frame.sp54 | 4;
 attach_done:
-                        frame.sp54 = var_v0_2;
+                        frame.sp54 = attachmentFlags;
                     }
                 }
-                if (var_a1_3 != 0) {
+                if (repeatFloorProbe != 0) {
                     __builtin_memcpy(&frame.sp5C, &frame.sp198, 12);
                     goto block_71;
                 }
             } else {
-                var_a1_3 = 0;
+                repeatFloorProbe = 0;
 block_71:
-                if (var_a1_3 == 0) {
+                if (repeatFloorProbe == 0) {
 
                 } else {
                     goto loop_49;
                 }
             }
         }
-        temp_a0 = frame.sp54;
-        frame.sp54 = temp_a0 & ~0x100;
-        if ((frame.sp38 != 0) || (temp_a0 & 0x80)) {
+        preProbeFlags = frame.sp54;
+        frame.sp54 = preProbeFlags & ~0x100;
+        if ((frame.sp38 != 0) || (preProbeFlags & 0x80)) {
             __builtin_memcpy(&frame.sp5C, &actor->x, 12);
             __builtin_memcpy(&frame.sp68, &actor->x, 12);
             frame.sp44 = 0;
             frame.sp48 = 0;
             frame.sp4C = 0;
             frame.sp58 = &D_801000F0.flags;
-            frame.sp68 -= temp_f22_2 * D_800C37A8_de;
-            frame.sp70 -= temp_f0 * D_800C37A8_de;
+            frame.sp68 -= headingSine * D_800C37A8_de;
+            frame.sp70 -= headingCosine * D_800C37A8_de;
             func_8023E838_de(&frame.sp18);
             if ((func_8023D158_de((s8 *) &frame.sp18) != 0) && (frame.spC8 == 4)) {
                 if (frame.sp38 != 0) {
@@ -331,16 +331,16 @@ block_71:
                 frame.sp54 &= ~0x80;
             }
         }
-        if (*arg4 & 0x80000) {
+        if (*motionSettings & 0x80000) {
             surface = func_8028C050_de(frame.spC4, &actor->x);
             frame.sp54 &= ~0x5000;
             if ((surface != 0) && ((((Func80243A80Collision *)surface)->flags & 0x41) == 0x41) && (Anim_GetPolygonHeight(surface, actor->x, actor->z) <= actor->y)) {
-                temp_f0_2 = Nav_GetTrianglePlaneHeight(surface, actor->x, actor->z);
-                if (actor->y <= temp_f0_2) {
+                surfaceCeilingHeight = Nav_GetTrianglePlaneHeight(surface, actor->x, actor->z);
+                if (actor->y <= surfaceCeilingHeight) {
                     frame.sp54 |= 0x4000;
                 }
-                temp_f0_2 += frame.sp34;
-                if (actor->y <= temp_f0_2) {
+                surfaceCeilingHeight += frame.sp34;
+                if (actor->y <= surfaceCeilingHeight) {
                     frame.sp54 |= 0x1000;
                 }
                 func_8023ECBC_de(&frame.sp18, surface);
@@ -348,16 +348,16 @@ block_71:
             actor->collision = surface;
         }
         actor->flags = frame.sp54;
-        return var_s3;
+        return collisionCount;
     }
     return 0;
 }
 
-s32 func_802444A4_de(char *arg0, CVector3 arg1, CVector3 desired, s32 arg3) {
-    extern s32 func_8023D380_de(void *arg0);
+s32 func_802444A4_de(char *actorStorage, CVector3 startPosition, CVector3 desired, s32 motionSettings) {
+    extern s32 func_8023D380_de(void *actorStorage);
     Work80244494 work;
     VectorPair vectors;
-    char *object = arg0;
+    char *object = actorStorage;
     char *out;
     s32 count;
     s32 active;
@@ -368,7 +368,7 @@ s32 func_802444A4_de(char *arg0, CVector3 arg1, CVector3 desired, s32 arg3) {
 
     func_8023E6D0_de(work.data, 0.0f);
     out = work.data;
-    vectors.first = arg1;
+    vectors.first = startPosition;
     vectors.second = desired;
     func_8023EBD4_de(out);
     if (vectors.first.x == vectors.second.x &&
@@ -405,7 +405,7 @@ s32 func_802444A4_de(char *arg0, CVector3 arg1, CVector3 desired, s32 arg3) {
     ((struct ActorMotion *)(out))->candidateIndex = 0;
     ((struct ActorMotion *)(out))->orientationActive = 0;
     ((struct ActorMotion *)(out))->iteration = 0;
-    ((struct ActorMotion *)(out))->surface = (MotionSurface *)arg3;
+    ((struct ActorMotion *)(out))->surface = (MotionSurface *)motionSettings;
     ((struct ActorMotion *)(out))->queryFlags = 0;
     ((struct ActorMotion *)(out))->horizontalTicks = 0;
     ((struct ActorMotion *)(out))->verticalTicks = 0;
@@ -510,12 +510,12 @@ s32 func_802446E0_de(char *arg0, CVector3 arg1, CVector3 arg2, MotionSurface *ar
     return count;
 }
 
-s32 Camera_SweepActorMotion(char *arg0, CVector3 arg1, CVector3 arg2, MotionSurface *arg3,
-                  CVector3 arg4, f32 arg5) {
-    extern s32 func_8023D380_de(void *arg0);
+s32 Camera_SweepActorMotion(char *actorStorage, CVector3 startPosition, CVector3 endPosition, MotionSurface *motionSettings,
+                  CVector3 motionExtents, f32 baseOffset) {
+    extern s32 func_8023D380_de(void *actorStorage);
     Work80244494 work;
     VectorPair vectors;
-    char *object = arg0;
+    char *object = actorStorage;
     char *out;
     s32 count;
     s32 active;
@@ -524,10 +524,10 @@ s32 Camera_SweepActorMotion(char *arg0, CVector3 arg1, CVector3 arg2, MotionSurf
     s32 maximum;
     s32 flags;
 
-    func_8023E690_de(work.data, arg4.x, arg4.y, arg4.z, arg5);
+    func_8023E690_de(work.data, motionExtents.x, motionExtents.y, motionExtents.z, baseOffset);
     out = work.data;
-    vectors.first = arg1;
-    vectors.second = arg2;
+    vectors.first = startPosition;
+    vectors.second = endPosition;
     func_8023EBD4_de(out);
     if (vectors.first.x == vectors.second.x &&
         vectors.first.y == vectors.second.y &&
@@ -563,7 +563,7 @@ s32 Camera_SweepActorMotion(char *arg0, CVector3 arg1, CVector3 arg2, MotionSurf
     ((struct ActorMotion *)(out))->candidateIndex = 0;
     ((struct ActorMotion *)(out))->orientationActive = 0;
     ((struct ActorMotion *)(out))->iteration = 0;
-    ((struct ActorMotion *)(out))->surface = arg3;
+    ((struct ActorMotion *)(out))->surface = motionSettings;
     ((struct ActorMotion *)(out))->queryFlags = 0;
     ((struct ActorMotion *)(out))->horizontalTicks = 0;
     ((struct ActorMotion *)(out))->verticalTicks = 0;

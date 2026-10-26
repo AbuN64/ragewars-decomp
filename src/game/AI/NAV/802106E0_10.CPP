@@ -56,13 +56,13 @@ extern void func_80211020_de(Brain *arg0);
 extern s32 Nav_HasLineOfSight(Brain *, Actor *);
 extern void Nav_SetBehaviourState(Brain *, s32);
 extern f32 func_802726BC_de(CVector3 *, CVector3 *);
-extern f32 func_80209BE0_de(Brain *arg0);
+extern f32 Nav_ScaleCharacterSettingByDifficulty(Brain *arg0);
 extern s32 Nav_NextRandom(void);
-extern f32 func_80209DAC_de(Brain *arg0);
+extern f32 Nav_UpdateDifficultyAimJitter(Brain *arg0);
 extern f32 Nav_SteerTowardPoint(Brain *, CVector3 *, f32, f32);
 extern s32 func_80210EFC_de(f32);
 extern void Nav_MeasureWheelClearance(Actor *, s32);
-extern void func_80209E80_de(Brain *arg0);
+extern void Nav_DispatchActorBehavior(Brain *arg0);
 extern s32 Nav_GetRouteRelation(char *, s32, s32);
 
 
@@ -97,7 +97,7 @@ void func_8021113C_eu(Actor *actor) {
                 Nav_SetBehaviourState(brain, 7);
                 return;
             }
-            speed = func_80209BE0_de(brain) * 0.4f;
+            speed = Nav_ScaleCharacterSettingByDifficulty(brain) * 0.4f;
             if (--brain->timer <= 0) {
                 brain->timer = Nav_NextRandom() % 4 + 12;
                 brain->pattern = Nav_NextRandom() % 2;
@@ -105,7 +105,7 @@ void func_8021113C_eu(Actor *actor) {
                     brain->pattern = 2;
                 }
             }
-            Nav_SteerTowardPoint(brain, &target->pos, 2.0f, func_80209DAC_de(brain));
+            Nav_SteerTowardPoint(brain, &target->pos, 2.0f, Nav_UpdateDifficultyAimJitter(brain));
             pattern = brain->pattern;
             if (pattern == 0) {
                 dir = func_80210EFC_de((brain->player->yaw - 3.1415927f) - 1.5707964f);
@@ -135,7 +135,7 @@ halt:
                 brain->player->strafe = 0.0f;
             }
             brain->w14 = -1;
-            func_80209E80_de(brain);
+            Nav_DispatchActorBehavior(brain);
         } else {
             brain->destination = route;
             Nav_SteerAlongRoute(brain);

@@ -6,7 +6,7 @@
 #include "COMMON/OBJECTLINKS14.H"
 
 /* Selects the nodes of D_8013B364's list whose flagged record matches one of thirty ids: every match
-   whose owner at 0x34 is active at 0x294 is selected through func_8020D220_de, and when none was, every
+   whose owner at 0x34 is active at 0x294 is selected through Nav_AddGoalNode, and when none was, every
    matching node is selected regardless of owner. Returns the number of selections. Written from its
    own assembly in the style of func_8020EEA4_de. */
 
@@ -14,7 +14,7 @@
 
 extern s32 D_8013B364;
 extern void *Nav_GetGraphPoint(s32 *, s32);
-extern void func_8020D220_de(s32 *, s32);
+extern void Nav_AddGoalNode(s32 *, s32);
 
 
 
@@ -37,7 +37,7 @@ s32 func_8020F150_de(s32 *ids) {
             for (i = 0; i < 30; i++) {
                 if (navigation_point_object_id((NavigationPoint *)record) == ids[i] && node->owner != 0
                     && ((Owner8020F150 *)node->owner)->active != 0) {
-                    func_8020D220_de(base, node->key);
+                    Nav_AddGoalNode(base, node->key);
                     count++;
                 }
             }
@@ -49,7 +49,7 @@ s32 func_8020F150_de(s32 *ids) {
             if (navigation_point_flags((NavigationPoint *)record) & 1) {
                 for (i = 0; i < 30; i++) {
                     if (navigation_point_object_id((NavigationPoint *)record) == ids[i]) {
-                        func_8020D220_de(base, node->key);
+                        Nav_AddGoalNode(base, node->key);
                         count++;
                     }
                 }

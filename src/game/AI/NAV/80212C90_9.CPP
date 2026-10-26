@@ -11,7 +11,7 @@ void func_802131AC_de(void *actor) {
     (((struct IntegerState23C *) ((s8 *) brain))->unk_68) = 0;
     (((struct IntegerState23C *) ((s8 *) brain))->unk_238) = 0;
     (((struct IntegerState23C *) ((s8 *) brain))->unk_220) = 0;
-    func_80209988_de(brain);
+    Nav_ResetBehaviorState(brain);
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

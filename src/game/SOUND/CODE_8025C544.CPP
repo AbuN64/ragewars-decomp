@@ -10,74 +10,74 @@ extern void alSndpSetPan(struct ObjRecAt40V2 *player, u8 pan);
 extern s32 func_802B2620_de(void *arg0);
 extern void func_802B2F00_de(void *arg0, s16 arg1);
 
-void func_8025C524_de(SlotRecAtB4V2 *arg0, s32 arg1)
+void func_8025C524_de(SlotRecAtB4V2 *voiceRecord, s32 panValue)
 {
   s32 *new_var;
   int new_var2;
-  s32 temp_s0;
-  void *temp_s0_2;
-  temp_s0 = (s32)arg0->owner;
-  temp_s0_2 = temp_s0 + 0x84;
+  s32 ownerAddress;
+  void *soundPlayer;
+  ownerAddress = (s32)voiceRecord->owner;
+  soundPlayer = ownerAddress + 0x84;
   new_var2 = 2;
-  new_var = &arg0->index;
-  func_802B2F00_de(temp_s0_2, ((OwnerCode8025A3EC8025B5F0 *)temp_s0)->samples[*new_var]);
-  alSndpSetPan(temp_s0_2, arg1 & 0xFF);
+  new_var = &voiceRecord->index;
+  func_802B2F00_de(soundPlayer, ((OwnerCode8025A3EC8025B5F0 *)ownerAddress)->samples[*new_var]);
+  alSndpSetPan(soundPlayer, panValue & 0xFF);
 }
 
-void func_8025C578_de(SlotRecAtB4V2 *arg0)
+void func_8025C578_de(SlotRecAtB4V2 *voiceRecord)
 {
   s16 *new_var;
-  s32 temp_v1;
-  void *temp_s0;
-  temp_v1 = (s32)arg0->owner;
-  temp_s0 = temp_v1 + 0x84;
-  func_802B2F00_de(temp_s0, ((OwnerCode8025A3EC8025B5F0 *)temp_v1)->samples[arg0->index]);
-  func_802B2620_de(temp_s0);
+  s32 ownerAddress;
+  void *soundPlayer;
+  ownerAddress = (s32)voiceRecord->owner;
+  soundPlayer = ownerAddress + 0x84;
+  func_802B2F00_de(soundPlayer, ((OwnerCode8025A3EC8025B5F0 *)ownerAddress)->samples[voiceRecord->index]);
+  func_802B2620_de(soundPlayer);
 }
 
-void func_8025C5BC_de(SlotRecAtB4V2 *arg0) {
-    func_802B2D80_de(arg0->owner->sound);
+void func_8025C5BC_de(SlotRecAtB4V2 *voiceRecord) {
+    func_802B2D80_de(voiceRecord->owner->sound);
 }
 
 extern void func_802B2F00_de(void *arg0, s16 arg1);
 extern s32 func_802B2620_de(void *arg0);
 extern void alSndpStop(void *arg0);
 
-void func_8025C5DC_de(SlotRecAtB4V2 *arg0) {
+void func_8025C5DC_de(SlotRecAtB4V2 *voiceRecord) {
     s32 a0;
     void *s1;
 
-    a0 = arg0->owner;
-    arg0->active = 1;
-    arg0->flag = 0;
+    a0 = voiceRecord->owner;
+    voiceRecord->active = 1;
+    voiceRecord->flag = 0;
     s1 = (void *)(a0 + 0x84);
-    if (arg0->key != ((OwnerCode8025A3EC8025B5F0 *)a0)->key) {
-        s32 idx = arg0->index;
+    if (voiceRecord->key != ((OwnerCode8025A3EC8025B5F0 *)a0)->key) {
+        s32 idx = voiceRecord->index;
         s32 addr = a0 + idx * 2;
         func_802B2F00_de(s1, ((OwnerCode8025A3EC8025B5F0 *)a0)->samples[idx]);
         if (func_802B2620_de(s1) != 0) {
             alSndpStop(s1);
         }
-        arg0->state = -1;
+        voiceRecord->state = -1;
     }
 }
 
 void func_802B25D0_de(void *a, short b);
 
-void func_8025C65C_de(SlotRecAtB4V2 *arg0) {
+void func_8025C65C_de(SlotRecAtB4V2 *voiceRecord) {
     void *base;
     Slots *arrayBase;
     short *slot;
-    base = arg0->owner;
+    base = voiceRecord->owner;
     arrayBase = &((ContextCode8025A3EC *)base)->slots;
-    func_802B25D0_de(((OwnerCode8025A3EC8025B5F0 *)base)->sound, arrayBase->ids[arg0->index]);
-    arrayBase->ids[arg0->index] = -1;
-    arg0->priority = 0;
-    arg0->fieldC = -1;
-    arg0->used = -1;
-    arg0->value = -1;
-    arg0->channel = -1;
-    arg0->fieldB4 = -1;
+    func_802B25D0_de(((OwnerCode8025A3EC8025B5F0 *)base)->sound, arrayBase->ids[voiceRecord->index]);
+    arrayBase->ids[voiceRecord->index] = -1;
+    voiceRecord->priority = 0;
+    voiceRecord->fieldC = -1;
+    voiceRecord->used = -1;
+    voiceRecord->value = -1;
+    voiceRecord->channel = -1;
+    voiceRecord->fieldB4 = -1;
 }
 
 
@@ -139,41 +139,41 @@ struct func_8025C6F4_S4 {
     s32 unk2B98;
 };
 
-void Sound_InitVoiceVolume(func_8025C6F4_S1 *arg0, func_8025C6F4_S2 *arg1) {
+void Sound_InitVoiceVolume(func_8025C6F4_S1 *voiceRecord, func_8025C6F4_S2 *soundDescriptor) {
     f32 first;
     s16 index;
     s16 value;
     Block12 *record;
 
-    arg0->unk28 = 0x40;
-    index = arg1->unkC;
+    voiceRecord->unk28 = 0x40;
+    index = soundDescriptor->unkC;
     if (index != -1) {
-        record = Audio_GetMetadataSectionFiveEntry(arg0->unkB0, index);
-        arg0->unk8C = *record;
-        first = func_802B2350(arg0->unk8C.start);
-        arg0->unk9C =
-            (first - func_802B2350(arg0->unk8C.end)) /
-            arg0->unk8C.duration;
-        arg0->unk98 =
-            func_802B2350(arg0->unk8C.start);
-        arg0->unk28 =
-            (s16)(s32)func_802B2350(arg0->unk8C.start);
-        arg0->unk88 = 1;
+        record = Audio_GetMetadataSectionFiveEntry(voiceRecord->unkB0, index);
+        voiceRecord->unk8C = *record;
+        first = func_802B2350(voiceRecord->unk8C.start);
+        voiceRecord->unk9C =
+            (first - func_802B2350(voiceRecord->unk8C.end)) /
+            voiceRecord->unk8C.duration;
+        voiceRecord->unk98 =
+            func_802B2350(voiceRecord->unk8C.start);
+        voiceRecord->unk28 =
+            (s16)(s32)func_802B2350(voiceRecord->unk8C.start);
+        voiceRecord->unk88 = 1;
         return;
     }
 
-    arg0->unk88 = 0;
-    if (arg0->unkA8 < 0x100) {
-        if (arg0->unkC0 == 0 &&
-            Audio_GetSpatialPanMode(arg0->unkB0) != 0) {
-            value = arg0->unkB0->unk2B94;
+    voiceRecord->unk88 = 0;
+    if (voiceRecord->unkA8 < 0x100) {
+        if (voiceRecord->unkC0 == 0 &&
+            Audio_GetSpatialPanMode(voiceRecord->unkB0) != 0) {
+            value = voiceRecord->unkB0->unk2B94;
             goto store_value;
         }
-    } else if (arg0->unkC0 == 0 &&
-               Audio_GetSpatialPanMode(arg0->unkB0) != 0) {
-        value = func_80259B10_de(&arg0->unk44,
-            arg0->unkB0->unk2B98);
+    } else if (voiceRecord->unkC0 == 0 &&
+               Audio_GetSpatialPanMode(voiceRecord->unkB0) != 0) {
+        value = func_80259B10_de(&voiceRecord->unk44,
+            voiceRecord->unkB0->unk2B98);
 store_value:
-        arg0->unk28 = value;
+        voiceRecord->unk28 = value;
     }
 }

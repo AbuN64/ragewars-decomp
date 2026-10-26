@@ -74,16 +74,16 @@ static inline float getYaw(void) {
 
 extern void Weapons_InitializePlayerHealth(void *arg0);
 
-void func_8022C060_de(s32 arg0, s32 arg1) {
-    func_8022BF04_de(arg0, arg1, 5, 0x1B);
+void func_8022C060_de(s32 player, s32 arg1) {
+    func_8022BF04_de(player, arg1, 5, 0x1B);
 }
 
-void func_8022C080_de(void *actorView, void *arg1) {
+void func_8022C080_de(void *actorView, void *bodyActor) {
     void *result;
     f32 t0;
     f32 t1;
 
-    result = (void *)Sound_FindActorModelEntry(arg1);
+    result = (void *)Sound_FindActorModelEntry(bodyActor);
     if (result != 0) {
         t0 = ((ModelBlend *)result)->blend;
         t1 = ((Shared_ActorView *)actorView)->modelBlend;
@@ -216,8 +216,8 @@ void *func_8022C454_de(void *arg0) {
     return p;
 }
 
-s32 func_8022C460_de(void *arg0) {
-    Shared_ActorView *player = arg0;
+s32 func_8022C460_de(void *actorObject) {
+    Shared_ActorView *player = actorObject;
     s16 action;
     action = player->action;
     if ((action == 0x15) || (action == 0x13) || (action == 0x14)) {
@@ -237,22 +237,22 @@ void func_8022C490_de(Player1680 *player) {
     Rsp_ConvertMatrixToFixed(&mtx, &player->views[D_800D297C]);
 }
 
-void *func_8022C55C_de(void *arg0, u32 arg1) {
-    struct World24 *world = arg0;
+void *func_8022C55C_de(void *playerWorld, u32 eligiblePlayerIndex) {
+    struct World24 *world = playerWorld;
     Shared_ActorView *actor;
-    s32 var_a2;
+    s32 eligibleOrdinal;
 
     actor = 0;
-    var_a2 = 0;
-    if (arg1 < 8U) {
+    eligibleOrdinal = 0;
+    if (eligiblePlayerIndex < 8U) {
         actor = (void *)world->players;
         if (actor != 0) {
             do {
                 if ((u8)actor->controls->resetFlag == 0) {
-                    if (var_a2 == (s32) arg1) {
+                    if (eligibleOrdinal == (s32) eligiblePlayerIndex) {
                         return actor;
                     }
-                    var_a2 += 1;
+                    eligibleOrdinal += 1;
                 }
                 actor = actor->next;
             } while (actor != 0);

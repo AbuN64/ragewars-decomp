@@ -21,11 +21,11 @@
 
 
 
-extern Link *func_8020C9B0_de(PickupGoalNodeList *, s32);
+extern Link *Nav_GetStridedTableEntry(PickupGoalNodeList *, s32);
 extern CVector3 *Nav_GetGraphPoint(PickupGoalNodeList *, s32);
 extern f32 func_802726BC_de(CVector3 *, CVector3 *);
 
-s32 func_8020D4AC_de(Selection_func_8020D4AC_de *sel) {
+s32 Nav_AppendDirectionalRouteStage(SelectionNavAppendDirectionalRouteStage *sel) {
     CVector3 facing;
     CVector3 *node;
     s32 i;
@@ -40,7 +40,7 @@ s32 func_8020D4AC_de(Selection_func_8020D4AC_de *sel) {
     stage = 0;
     route = &D_8013B364;
     for (; i < route->count; i++) {
-        link = func_8020C9B0_de(route, i);
+        link = Nav_GetStridedTableEntry(route, i);
         if (link->from == sel->id && link->type == 6) {
             node = Nav_GetGraphPoint(route, link->to);
             sel->stages[stage].from = link->from;
@@ -75,7 +75,7 @@ s32 func_8020D4AC_de(Selection_func_8020D4AC_de *sel) {
 }
 
 extern s32 Nav_FindLinkIndex(PickupGoalNodeList *list, s32 from, s32 to);
-s32 Nav_InsertPickupRouteNode(Selection_func_8020D4AC_de *sel) {
+s32 Nav_InsertPickupRouteNode(SelectionNavAppendDirectionalRouteStage *sel) {
     CVector3 avg;
     Shared_PickupGoalNode *info;
     CVector3 *node;

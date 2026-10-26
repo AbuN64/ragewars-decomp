@@ -17,7 +17,7 @@ extern void func_802598B4_de(ChannelSet *arg0, s32 arg1);
  * func_802598B4_de about the id, then for each of the 17 voice records whose sound matches it counts the voice
  * and either resets the spare record 16 or clears the voice's pending flag and stops its channel through
  * Audio_StopVoiceSlot when it has a handle; returns the number of voices found (0 for id -1). Lock handling
- * adapted from func_802588D4_de; the voice records are addressed by offset from the manager.
+ * adapted from Audio_StopAudioBySecondaryValue; the voice records are addressed by offset from the manager.
  */
 
 
@@ -99,7 +99,7 @@ s32 func_80257A14_de(void *context, s32 id) {
 
 extern void *Camera_FindNearestCamera(MenuMatchGlobals *, CVector3 *);
 extern s32 Audio_HasVoiceWithKey(void *, s32);
-extern f32 func_8025C10C_de(CVector3 *, void *);
+extern f32 Audio_ComputeDistanceAttenuation(CVector3 *, void *);
 extern s32 Audio_FindVoiceByKeyPair(void *, s32, s32);
 extern s32 func_80259260_de(void *, Item57BD4 *, CVector3 *, s32, s32);
 
@@ -118,7 +118,7 @@ extern u32 __osDisableInt(void);
 
 
 s32 Texture_StartSoundRecord(void *context, Item57BD4 *soundRecord, CVector3 *position, s32 playbackValue,
-                  s32 voiceUserData, s32 arg5, s32 arg6) {
+                  s32 voiceUserData, s32 arg5, s32 trackedPosition) {
     void *node;
 
     ((ContextRecAt2BC0 *)(context))->field2B98 = Camera_FindNearestCamera(&D_80145088, position);
@@ -126,7 +126,7 @@ s32 Texture_StartSoundRecord(void *context, Item57BD4 *soundRecord, CVector3 *po
         if (Audio_HasVoiceWithKey(&((ContextRecAt2BC0 *)(context))->menu[0], ((ContextRecAt2BC0 *)(context))->selectedSound) != 0) {
             return -1;
         }
-        if (func_8025C10C_de(position, (char *)((ContextRecAt2BC0 *)(context))->field2B98 + 0x128) == 0.0f) {
+        if (Audio_ComputeDistanceAttenuation(position, (char *)((ContextRecAt2BC0 *)(context))->field2B98 + 0x128) == 0.0f) {
             return -1;
         }
     }
@@ -146,7 +146,7 @@ s32 Texture_StartSoundRecord(void *context, Item57BD4 *soundRecord, CVector3 *po
     if (node == 0) {
         return -1;
     }
-    Audio_SetVoicePositionTracking(node, position, arg6);
+    Audio_SetVoicePositionTracking(node, position, trackedPosition);
     Audio_SetVoiceTrackId(node, ((ContextRecAt2BC0 *)(context))->selectedSound);
     Audio_InitializeVoiceParameters(node, soundRecord, arg5);
 

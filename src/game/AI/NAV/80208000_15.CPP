@@ -20,10 +20,10 @@ extern void *Nav_GetGraphPoint(void *, s32);
 
 
 
-extern Link *func_8020C9B0_de(CNavData *, int);
+extern Link *Nav_GetStridedTableEntry(CNavData *, int);
 extern CNavData D_8013B364;
 
-s32 func_8020D9C0_de(Obj_func_8020D9C0_de *obj) {
+s32 Nav_ComputeScaledPointCentroid(ObjNavComputeScaledPointCentroid *obj) {
     CVector3 sum;
     s32 i;
     f32 scale;
@@ -56,7 +56,7 @@ s32 func_8020D9C0_de(Obj_func_8020D9C0_de *obj) {
     return 1;
 }
 
-int func_8020DB14_de(Obj_func_8020DB14_de *obj) {
+int Nav_FindSpecialLinkedCandidate(ObjNavFindSpecialLinkedCandidate *obj) {
     int j;
     int i;
     Link *link;
@@ -66,7 +66,7 @@ int func_8020DB14_de(Obj_func_8020DB14_de *obj) {
     obj->pending = 0;
     for (j = 0; j < 4; j++) {
         for (i = 0; i < graph->m_nNavLinks; i++) {
-            link = func_8020C9B0_de(graph, i);
+            link = Nav_GetStridedTableEntry(graph, i);
             if (link->from == obj->nodes[j] && link->type == 6) {
                 obj->hits++;
                 obj->node = obj->nodes[j];

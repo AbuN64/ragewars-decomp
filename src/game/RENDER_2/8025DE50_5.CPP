@@ -29,23 +29,23 @@ void func_8025DE30_de(void) {
     func_80257360_de(&D_8010C080);
 }
 
-s32 Render_PlaySoundAtPosition(s16 track, CVector3 arg1, s32 position, s32 arg5) {
+s32 Render_PlaySoundAtPosition(s16 track, CVector3 soundPosition, s32 position, s32 ownerId) {
     if (D_8011FAC0.transitionBlocked != 0) {
         return -1;
     }
-    return Texture_PlaySoundAtPosition(&D_8010C080, track, arg1, position, arg5);
+    return Texture_PlaySoundAtPosition(&D_8010C080, track, soundPosition, position, ownerId);
 }
 
-s32 func_8025DEC0_de(s32 arg0, CVector3 arg1, s32 arg4, s32 arg5, f32 arg6) {
+s32 func_8025DEC0_de(s32 trackId, CVector3 soundPosition, s32 spatialMode, s32 ownerId, f32 playbackScale) {
     if (D_8011FAC0.transitionBlocked != 0) {
         return -1;
     }
-    return Audio_PlayPositionedSoundWithScale(&D_8010C080, (s16)arg0, arg1, arg4, arg5, arg6);
+    return Audio_PlayPositionedSoundWithScale(&D_8010C080, (s16)trackId, soundPosition, spatialMode, ownerId, playbackScale);
 }
 
 s32 Render_PlayFlatSound(s32 track) {
-    s32 temp_s0;
-    s32 temp_s1;
+    s32 playbackResult;
+    s32 previousMixValue;
 
     if (D_8011FAC0.transitionBlocked != 0) {
         return -1;
@@ -57,24 +57,24 @@ s32 Render_PlayFlatSound(s32 track) {
         vec.z = zero;
         vec.y = zero;
         vec.x = zero;
-        temp_s1 = Audio_GetVoiceMixValue(&D_8010C080);
+        previousMixValue = Audio_GetVoiceMixValue(&D_8010C080);
         Audio_SetVoiceMixValue(&D_8010C080, 1);
-        temp_s0 = Texture_PlaySoundAtPosition(&D_8010C080, (s16)track, vec, 0, -1);
-        Audio_SetVoiceMixValue(&D_8010C080, temp_s1);
+        playbackResult = Texture_PlaySoundAtPosition(&D_8010C080, (s16)track, vec, 0, -1);
+        Audio_SetVoiceMixValue(&D_8010C080, previousMixValue);
     }
-    return temp_s0;
+    return playbackResult;
 }
 
-s32 func_8025DFE8_de(s32 index, CVector3 position, s32 arg2) {
+s32 func_8025DFE8_de(s32 index, CVector3 position, s32 voiceParameter) {
     if (D_8011FAC0.transitionBlocked != 0) {
         return -1;
     }
-    return Texture_PlayInstrumentAtPosition(&D_8010C080, index, position, arg2);
+    return Texture_PlayInstrumentAtPosition(&D_8010C080, index, position, voiceParameter);
 }
 
 int func_8025E04C_de(int index) {
-    int temp_s0;
-    int temp_s1;
+    int playbackResult;
+    int previousMixValue;
 
     if (D_8011FAC0.transitionBlocked != 0) {
         return -1;
@@ -86,10 +86,10 @@ int func_8025E04C_de(int index) {
         vec.z = zero;
         vec.y = zero;
         vec.x = zero;
-        temp_s1 = Audio_GetVoiceMixValue(&D_8010C080);
+        previousMixValue = Audio_GetVoiceMixValue(&D_8010C080);
         Audio_SetVoiceMixValue(&D_8010C080, 1);
-        temp_s0 = Texture_PlayInstrumentAtPosition(&D_8010C080, index, vec, 0);
-        Audio_SetVoiceMixValue(&D_8010C080, temp_s1);
+        playbackResult = Texture_PlayInstrumentAtPosition(&D_8010C080, index, vec, 0);
+        Audio_SetVoiceMixValue(&D_8010C080, previousMixValue);
     }
-    return temp_s0;
+    return playbackResult;
 }

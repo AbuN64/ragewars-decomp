@@ -13,21 +13,21 @@ extern s32 D_801462C8;
 
 
 
-void func_8022B8E0_de(void *arg0) {
+void func_8022B8E0_de(void *player) {
     Slot damage;
-    f32 temp_f0;
-    f32 temp_f1;
+    f32 remainingDelay;
+    f32 previousDelay;
 
-    temp_f1 = ((ObjectState13E4 *)(arg0))->unk_11E4;
-    if (temp_f1 > 0.0f) {
-        temp_f0 = temp_f1 - D_800D2988;
-        ((ObjectState13E4 *)(arg0))->unk_11E4 = temp_f0;
-        if ((temp_f0 <= 0.0f) && !(D_801462C8 & 1)) {
+    previousDelay = ((ObjectState13E4 *)(player))->unk_11E4;
+    if (previousDelay > 0.0f) {
+        remainingDelay = previousDelay - D_800D2988;
+        ((ObjectState13E4 *)(player))->unk_11E4 = remainingDelay;
+        if ((remainingDelay <= 0.0f) && !(D_801462C8 & 1)) {
             Weapons_FillDamagePacket(&damage,
-                          ((ObjectState13E4 *)(arg0))->unk_13E0,
-                          ((ObjectState13E4 *)(arg0))->unk_174 + 0x1900,
+                          ((ObjectState13E4 *)(player))->unk_13E0,
+                          ((ObjectState13E4 *)(player))->unk_174 + 0x1900,
                           25.599998f, 0x4000, 0);
-            func_80219A40_de(arg0, &((ObjectState13E4 *)(arg0))->unk_170, &damage);
+            func_80219A40_de(player, &((ObjectState13E4 *)(player))->unk_170, &damage);
         }
     }
 }

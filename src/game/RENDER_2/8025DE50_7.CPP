@@ -14,27 +14,27 @@ void func_8025E11C_de(s32 callback) {
 }
 
 void func_8025E150_de(void) {
-    func_80258F50_de((s32) &D_8010C080);
+    Audio_StopContextDialog((s32) &D_8010C080);
 }
 
-void func_8025E174_de(s32 arg0) {
-    func_80257A14_de(&D_8010C080, arg0);
+void func_8025E174_de(s32 soundId) {
+    func_80257A14_de(&D_8010C080, soundId);
 }
 
-void func_8025E19C_de(s32 arg0) {
-    func_80258800_de(&D_8010C080, arg0);
+void func_8025E19C_de(s32 matchingKey) {
+    Audio_StopAudioByKey(&D_8010C080, matchingKey);
 }
 
-void func_8025E1C4_de(s32 arg0) {
-    func_802588D4_de(&D_8010C080, arg0);
+void func_8025E1C4_de(s32 matchingValue) {
+    Audio_StopAudioBySecondaryValue(&D_8010C080, matchingValue);
 }
 
-void func_8025E1EC_de(s32 arg0) {
-    Audio_StopAudioByMask(&D_8010C080, arg0);
+void func_8025E1EC_de(s32 matchingFlags) {
+    Audio_StopAudioByMask(&D_8010C080, matchingFlags);
 }
 
-void func_8025E214_de(s32 arg0) {
-    func_80258C0C_de(&D_8010C080, arg0);
+void func_8025E214_de(s32 retainedKey) {
+    Audio_StopAudioExceptKey(&D_8010C080, retainedKey);
 }
 
 void func_8025E23C_de(void) {

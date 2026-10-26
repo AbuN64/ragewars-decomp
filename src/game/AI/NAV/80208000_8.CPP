@@ -57,7 +57,7 @@ void *Nav_GetGraphPoint(void *table, int index) {
 }
 
 /** Return an indexed record from the table at object offset 0x8. */
-void *func_8020C9B0_de(struct EntryList8020CCE8 *object, int index) {
+void *Nav_GetStridedTableEntry(struct EntryList8020CCE8 *object, int index) {
     char *base = (char *)object->table;
     int stride = *(int *)base;
     return base + (index * stride + 8);
@@ -89,20 +89,20 @@ ret0:
     return 0;
 }
 
-void Nav_InitSearchNode(void *arg0, s32 arg1)
+void Nav_InitSearchNode(void *searchNode, s32 nodeKey)
 {
   NavigationPoint *entry;
-  NavigationSearchNode *node = arg0;
+  NavigationSearchNode *node = searchNode;
   u16 flags;
   char *new_var;
   s32 *base;
   node->value = D_800C1D8C_de;
-  node->key = arg1;
+  node->key = nodeKey;
   node->state = -1;
   node->flags = 0;
   node->next = 0;
   base = D_8013B364.unk0;
-  new_var = (char *)base + ((arg1 * (*base)) + 8);
+  new_var = (char *)base + ((nodeKey * (*base)) + 8);
   entry = (NavigationPoint *)new_var;
   flags = navigation_point_flags(entry);
   if (flags & 2)
@@ -175,7 +175,7 @@ int Nav_FindLinkIndex(Graph *graph, int from, int to) {
     return -1;
 }
 
-s32 func_8020CCE8_de(EntryList8020CCE8 *list, s32 value, s32 *partners, s32 *indices) {
+s32 Nav_CollectIncidentLinks(EntryList8020CCE8 *list, s32 value, s32 *partners, s32 *indices) {
     s32 i;
     s32 found;
 
@@ -262,7 +262,7 @@ void *Nav_FindSearchNode(char *object, s32 current) {
     return 0;
 }
 
-void func_8020D014_de(struct Obj8020BC50 *graph) {
+void Nav_ResetSearchState(struct Obj8020BC50 *graph) {
     struct Node8020BC50 *node;
     f32 k;
 

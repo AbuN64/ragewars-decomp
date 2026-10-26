@@ -19,12 +19,12 @@ extern char D_8011D8D0;
 
 extern void Particle_ReleaseOwnerEmitters(void *arg0, s32 arg1);
 
-void Render_SetPlayerResetPosition(void *arg0, CVector3 *arg1)
+void Render_SetPlayerResetPosition(void *actorObject, CVector3 *newResetPosition)
 {
-  Shared_ActorView *player = arg0;
+  Shared_ActorView *player = actorObject;
   void *new_var;
-  player->resetPosition = *arg1;
-  new_var = arg0;
+  player->resetPosition = *newResetPosition;
+  new_var = actorObject;
   Weapons_SetPlayerState(new_var, new_var, 0x11);
 }
 

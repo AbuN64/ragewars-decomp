@@ -43,7 +43,7 @@ extern s32 func_802444A4_de(void *arg0, CVector3 arg1, CVector3 arg2, void *arg3
 
 extern void func_8044972C_de(SharedPlayer *);
 
-void func_802095F8_de(Brain *object) {
+void Nav_UpdateTargetPitch(Brain *object) {
     void *memory = object;
     PitchBrain *brain = memory;
     CVector3 origin, delta;
@@ -85,7 +85,7 @@ void Nav_InitPlayerState(int *state, int player) {
     World_ResetPlayerState(state);
 }
 
-void func_80209804_de(AiController *arg0)
+void Nav_ClearNodeQueue(AiController *arg0)
 {
     s32 i;
     s32 empty;
@@ -100,7 +100,7 @@ void func_80209804_de(AiController *arg0)
 /* Pops the front of a four-entry queue at offset 0x14 of a record: shifts the entries down one,
    marks the last empty with -1 and returns whether an entry remains at the front. */
 
-s32 func_80209828_de(AiController *queue) {
+s32 Nav_AdvanceNodeQueue(AiController *queue) {
     s32 i;
 
     for (i = 1; i < 4; i++) {
@@ -111,7 +111,7 @@ s32 func_80209828_de(AiController *queue) {
 }
 
 /** Store the second argument at byte offset 0x214 in the first argument. */
-void func_8020986C_de(AiController *object, AiBehaviourTable *value) {
+void Nav_SetBehaviorTable(AiController *object, AiBehaviourTable *value) {
     object->table = value;
 }
 
@@ -156,12 +156,12 @@ CVector3 *Nav_GetControllerPosition(AiController *controller) {
     return &controller->player->pos;
 }
 
-f32 Nav_DistanceToNode(AiController *controller, s32 arg1) {
-    return Particle_GetPointDistance(&controller->player->pos.x, Nav_GetGraphPoint(&D_8013B364, arg1));
+f32 Nav_DistanceToNode(AiController *controller, s32 nodeId) {
+    return Particle_GetPointDistance(&controller->player->pos.x, Nav_GetGraphPoint(&D_8013B364, nodeId));
 }
 
 /** Reset three state words and set the final state to one. */
-void func_80209988_de(void *object) {
+void Nav_ResetBehaviorState(void *object) {
     AiController *controller = object;
     controller->unk2F4 = 0;
     controller->unk2F8 = 0;
@@ -169,7 +169,7 @@ void func_80209988_de(void *object) {
 }
 
 /** Clear five consecutive object words beginning at offset 0x300. */
-void func_8020999C_de(AiController *controller) {
+void Nav_ClearAuxiliaryBehaviorState(AiController *controller) {
     controller->unk300 = 0;
     controller->unk304 = 0;
     controller->unk308 = 0;
@@ -195,7 +195,7 @@ s32 Nav_HasLineOfSight(Player **fromRef, Player *target) {
     return 1;
 }
 
-s32 func_80209A94_de(AiController *controller) {
+s32 Nav_MatchesBehaviorStateFilter(AiController *controller) {
     s32 state;
 
     state = controller->state;
@@ -224,7 +224,7 @@ int func_80209AD8_de(AiController *object) {
     return object->state == 8;
 }
 
-f32 func_80209AE8_de(AiController *arg0)
+f32 Nav_GetDifficultyEngagementAdjustment(AiController *arg0)
 {
   Player *object;
     AiCharacterDefinition *definition;
@@ -286,7 +286,7 @@ f32 Nav_GetScaledAggression(AiController *controller) {
     return value;
 }
 
-f32 func_80209BE0_de(AiController *controller) {
+f32 Nav_ScaleCharacterSettingByDifficulty(AiController *controller) {
     f32 difficultyScale;
     f32 value;
     u8 difficulty;
@@ -344,7 +344,7 @@ multiply:
     return value;
 }
 
-void func_80209CD8_de(SharedPlayer **brain) {
+void Nav_HandlePlayerTimeout(SharedPlayer **brain) {
     s32 limit;
     Controls *controls;
     CGameStatus *session;
@@ -383,7 +383,7 @@ void func_80209CD8_de(SharedPlayer **brain) {
     }
 }
 
-f32 func_80209DAC_de(void *aiController) {
+f32 Nav_UpdateDifficultyAimJitter(void *aiController) {
     AiController *brain = aiController;
     f32 aim;
     f32 aimLimit;

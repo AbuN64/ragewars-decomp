@@ -61,8 +61,8 @@ s32 func_8020EF80_eu_x(PickupGoalObj8020EF60 *arg0) {
         }
 
         if (buffer[0] != 0) {
-            func_8020D014_de(base);
-            func_8020D1FC_de(base);
+            Nav_ResetSearchState(base);
+            Nav_ClearGoalList(base);
 
             key = &arg0->unk_4;
             if (func_8020F150_de(buffer) == 0) {
@@ -72,14 +72,14 @@ s32 func_8020EF80_eu_x(PickupGoalObj8020EF60 *arg0) {
             }
 
             base->selected = -1U;
-            func_8020D0CC_de(base, *key);
+            Nav_SearchPathByKey(base, *key);
 
             sel = base->selected;
             if (sel != -1U) {
                 record = Nav_FindSearchNode(base, sel);
                 arg0->unk_C = base->selected;
                 arg0->unk_68 = record->goal;
-                func_8020D114_de(base, arg0->history, 4);
+                Nav_ReconstructSearchPath(base, arg0->history, 4);
                 return 1;
             }
             arg0->unk_68 = 0;

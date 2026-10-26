@@ -32,17 +32,17 @@ extern f32 func_802726BC_de(f32 *arg0, f32 *arg1);
 
 extern f32 D_800C20CC_de;
 
-extern void func_8020D014_de(void *arg0);
+extern void Nav_ResetSearchState(void *arg0);
 
-extern void func_8020D1FC_de(s32);
+extern void Nav_ClearGoalList(s32);
 
 extern void *Nav_GetGraphPoint(void *arg0, s32 arg1);
 
-extern void func_8020D220_de(void *, s32);
+extern void Nav_AddGoalNode(void *, s32);
 
-extern void func_8020D0CC_de(void *arg0, s32 arg1);
+extern void Nav_SearchPathByKey(void *arg0, s32 arg1);
 
-extern void func_8020D114_de(void *arg0, void *arg1, s32 arg2);
+extern void Nav_ReconstructSearchPath(void *arg0, void *arg1, s32 arg2);
 
 extern void func_80211020_de(void *arg0);
 
@@ -60,7 +60,7 @@ void func_802127F4_de(void *actor) {
     void *brain;
     brain = (((struct ObjRecAt1454V2 *) ((s8 *) ((struct ObjRecAt1D8V1 *) ((s8 *) actor))->unk1D8))->unk1454);
     (((struct Brain_func_80212D78_eu_x *) ((s8 *) brain))->unk220) = 0;
-    func_80209988_de(brain);
+    Nav_ResetBehaviorState(brain);
     (((struct Brain_func_80212D78_eu_x *) ((s8 *) brain))->unk2FC) = 0;
 }
 
@@ -101,12 +101,12 @@ void func_80212828_de(CloseAttackActor *arg0)
     }
 }
 
-/** Reset the inner record via func_80209988_de, then override two of its fields. */
+/** Reset the inner record via Nav_ResetBehaviorState, then override two of its fields. */
 void func_8021290C_de(LevelActor *actor) {
     Shared_ActorView *level1 = actor->controller;
     CloseAttackBrain *inner = level1->owner;
     inner->state = 0;
-    func_80209988_de(inner);
+    Nav_ResetBehaviorState(inner);
     inner->reset2FC = 0;
     inner->destination = -1;
 }
@@ -148,13 +148,13 @@ void Nav_UpdateRetreatMovement(void *actorObject)
     }
 }
 
-/** Reset the inner record's flag fields, then clear its state via func_80209988_de. */
+/** Reset the inner record's flag fields, then clear its state via Nav_ResetBehaviorState. */
 void func_80212A40_de(LevelActor *actor) {
     Shared_ActorView *level1 = actor->controller;
     CloseAttackBrain *inner = level1->owner;
     inner->state = 0;
     inner->destination = -1;
-    func_80209988_de(inner);
+    Nav_ResetBehaviorState(inner);
     inner->reset2FC = 0;
 }
 
@@ -171,8 +171,8 @@ void func_80212A7C_de(Shared_Actor *arg0)
     state = ((Player *)arg0->entity)->controller;
     table = &D_8013B364;
     if (state->mode == -1) {
-        func_8020D014_de(table);
-        func_8020D1FC_de((s32)table);
+        Nav_ResetSearchState(table);
+        Nav_ClearGoalList((s32)table);
         threshold = D_800C20CC_de;
         index = 0;
         if (table->m_nNavNodes > 0) {
@@ -180,13 +180,13 @@ void func_80212A7C_de(Shared_Actor *arg0)
                 entry = Nav_GetGraphPoint(table, index);
                 if (func_802726BC_de(&state->player->pos.x, entry) < threshold &&
                     !(navigation_attributes(entry) & 0x04300000)) {
-                    func_8020D220_de(table, index);
+                    Nav_AddGoalNode(table, index);
                 }
                 index++;
             } while (index < table->m_nNavNodes);
         }
-        func_8020D0CC_de(table, state->current);
-        func_8020D114_de(table, &state->queue, 4);
+        Nav_SearchPathByKey(table, state->current);
+        Nav_ReconstructSearchPath(table, &state->queue, 4);
         value = table->result;
         state->mode = value;
         state->routeGoal = value;
@@ -205,7 +205,7 @@ void func_80212BD0_de(void *actor) {
     void *brain;
     brain = (((struct ObjRecAt1454V2 *) ((s8 *) ((struct ObjRecAt1D8V1 *) ((s8 *) actor))->unk1D8))->unk1454);
     (((struct Brain_func_80212D78_eu_x *) ((s8 *) brain))->unk220) = 0;
-    func_80209988_de(brain);
+    Nav_ResetBehaviorState(brain);
     (((struct Brain_func_80212D78_eu_x *) ((s8 *) brain))->unk2FC) = 0;
 }
 

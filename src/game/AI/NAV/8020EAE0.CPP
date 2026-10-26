@@ -14,14 +14,14 @@
 
 extern s32 D_8013B364;
 extern s32 Nav_FindLinkIndex(s32 *, s32, s32);
-extern void func_8020D014_de(s32 *);
+extern void Nav_ResetSearchState(s32 *);
 extern void func_8020EDCC_de(void *);
 extern void func_8020EE50_de(void *);
 extern void func_8020EEA4_de(void *);
-extern void func_8020D1FC_de(s32 *);
-extern void func_8020D220_de(s32 *, s32);
-extern void func_8020D0CC_de(s32 *, s32);
-extern void func_8020D114_de(s32 *, s32 *, s32);
+extern void Nav_ClearGoalList(s32 *);
+extern void Nav_AddGoalNode(s32 *, s32);
+extern void Nav_SearchPathByKey(s32 *, s32);
+extern void Nav_ReconstructSearchPath(s32 *, s32 *, s32);
 
 
 
@@ -55,7 +55,7 @@ s32 func_8020EAE0_de(void *arg0) {
             }
         }
     }
-    func_8020D014_de(base);
+    Nav_ResetSearchState(base);
     if (((Func8020ED50Arg *)arg0)->releaseFlags[0] != 0) {
         func_8020EDCC_de(arg0);
     }
@@ -66,11 +66,11 @@ s32 func_8020EAE0_de(void *arg0) {
         func_8020EEA4_de(arg0);
     }
     Nav_SetPickupGoalWeights(arg0);
-    func_8020D1FC_de(base);
-    func_8020D220_de(base, ((Func8020ED50Arg *)arg0)->fieldC);
+    Nav_ClearGoalList(base);
+    Nav_AddGoalNode(base, ((Func8020ED50Arg *)arg0)->fieldC);
     base[6] = -1;
-    func_8020D0CC_de(base, ((Func8020ED50Arg *)arg0)->field4);
-    func_8020D114_de(base, &((Func8020ED50Arg *)arg0)->links[0], 4);
+    Nav_SearchPathByKey(base, ((Func8020ED50Arg *)arg0)->field4);
+    Nav_ReconstructSearchPath(base, &((Func8020ED50Arg *)arg0)->links[0], 4);
     ((Func8020ED50Arg *)arg0)->linkState = 0;
     ((Func8020ED50Arg *)arg0)->selection = -1;
     ((Func8020ED50Arg *)arg0)->committed = ((Func8020ED50Arg *)arg0)->fieldC;

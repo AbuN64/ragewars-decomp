@@ -158,23 +158,23 @@ void *Weapons_GetPlayerByIndex(void *world, u32 playerIndex) {
     return actor;
 }
 
-void *func_8022A634_de(struct Context *context, u32 arg1) {
+void *func_8022A634_de(struct Context *context, u32 viewPlayerIndex) {
     void *result;
-    void *temp_v0;
-    s32 var_a2;
+    void *playerView;
+    s32 currentViewIndex;
 
     result = 0;
-    var_a2 = 0;
-    if (arg1 < 8U) {
+    currentViewIndex = 0;
+    if (viewPlayerIndex < 8U) {
         result = context->head;
         if (result != 0) {
             do {
-                temp_v0 = ((Shared_ActorView *)result)->message;
-                if (temp_v0 != 0 && ((GameplayCamera *)temp_v0)->messageList.flag == 0) {
-                    if (var_a2 == (s32) arg1) {
+                playerView = ((Shared_ActorView *)result)->message;
+                if (playerView != 0 && ((GameplayCamera *)playerView)->messageList.flag == 0) {
+                    if (currentViewIndex == (s32) viewPlayerIndex) {
                         return result;
                     }
-                    var_a2 += 1;
+                    currentViewIndex += 1;
                 }
                 result = ((Shared_ActorView *)result)->next;
             } while (result != 0);
@@ -299,11 +299,11 @@ s32 func_8022A8F0_de(struct Context *context) {
     return count;
 }
 
-void func_8022A928_de(ObjRecAtB4 *arg0, int arg1) {
-    if (arg0->unk4 == arg1) {
-        arg0->unkB4 = 1;
+void func_8022A928_de(ObjRecAtB4 *record, int newValue) {
+    if (record->unk4 == newValue) {
+        record->unkB4 = 1;
     }
-    arg0->unk4 = arg1;
+    record->unk4 = newValue;
 }
 
 void func_8022A940_de(Shared_Effect *effect) {
@@ -313,38 +313,38 @@ void func_8022A940_de(Shared_Effect *effect) {
     }
 }
 
-void func_8022A95C_de(void *arg0) {
+void func_8022A95C_de(void *player) {
     LevelActor *base;
     s32 old_value;
     s32 new_value;
     f32 saved_value;
 
-    base = &((Shared_ActorView *)arg0)->weapon;
-    old_value = ((Shared_ActorView *)arg0)->effectId;
+    base = &((Shared_ActorView *)player)->weapon;
+    old_value = ((Shared_ActorView *)player)->effectId;
     saved_value = D_800D2988;
     base->renderFlags = 0x10;
     base->flags &= 0xFFFDFFFF;
     func_8024BE3C_de(base);
-    if (((Shared_ActorView *)arg0)->stun <= 0.0f) {
+    if (((Shared_ActorView *)player)->stun <= 0.0f) {
         func_80246E44_de(base);
     }
-    new_value = ((Shared_ActorView *)arg0)->effectId;
+    new_value = ((Shared_ActorView *)player)->effectId;
     D_800D2988 = saved_value;
     if (old_value != new_value) {
-        ((LevelActor *)arg0)->animationPending = 0;
+        ((LevelActor *)player)->animationPending = 0;
     }
-    ((Shared_ActorView *)arg0)->weapon.position0 = ((LevelActor *)arg0)->position0;
-    ((Shared_ActorView *)arg0)->weapon.yaw = ((LevelActor *)arg0)->yaw;
-    ((Shared_ActorView *)arg0)->weapon.model = ((LevelActor *)arg0)->model;
-    ((Shared_ActorView *)arg0)->weapon.rotation = ((LevelActor *)arg0)->rotation;
+    ((Shared_ActorView *)player)->weapon.position0 = ((LevelActor *)player)->position0;
+    ((Shared_ActorView *)player)->weapon.yaw = ((LevelActor *)player)->yaw;
+    ((Shared_ActorView *)player)->weapon.model = ((LevelActor *)player)->model;
+    ((Shared_ActorView *)player)->weapon.rotation = ((LevelActor *)player)->rotation;
 }
 
-f32 func_8022AA44_de(SharedRecAt848 *arg0) {
+f32 func_8022AA44_de(SharedRecAt848 *rampState) {
     f32 value;
     f32 scaled;
     f32 initial;
-    initial = arg0->value - 285.0f;
-    if (arg0->override != 0) {
+    initial = rampState->value - 285.0f;
+    if (rampState->override != 0) {
         value = 1.0f;
     } else {
         scaled = initial * 0.06666667f;
@@ -502,14 +502,14 @@ f32 func_8022ADF0_de(LevelActor *actor) {
     }
 }
 
-int func_8022AE28_de(void *arg0, void *arg1) {
+int func_8022AE28_de(void *player, void *newPosition) {
     int flag;
     CVector3 *src;
-    src = arg1;
+    src = newPosition;
     flag = ((int (*)(void *))Scene_FindFloorPolygon)(&g_world);
-    ((LevelActor *)arg0)->position0 = *src;
-    ((LevelActor *)arg0)->model = flag;
-    ((Shared_ActorView *)arg0)->weapon.position0 = *src;
-    ((Shared_ActorView *)arg0)->weapon.model = flag;
+    ((LevelActor *)player)->position0 = *src;
+    ((LevelActor *)player)->model = flag;
+    ((Shared_ActorView *)player)->weapon.position0 = *src;
+    ((Shared_ActorView *)player)->weapon.model = flag;
     return flag != 0;
 }

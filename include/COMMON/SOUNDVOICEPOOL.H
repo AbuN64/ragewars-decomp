@@ -57,14 +57,14 @@ struct Resource;
 typedef struct Resource Resource;
 
 
-struct Bank_func_8025CED0_de;
-struct Bank_func_8025CED0_de {
+struct BankAudioStartDialogGroup;
+struct BankAudioStartDialogGroup {
     char pad0[0x2B60];
     s32 table;
     s32 count;
 };
 
-struct Bank_func_8025CED0_de;
+struct BankAudioStartDialogGroup;
 struct PlayerRecAt1E;
 
 
@@ -135,8 +135,8 @@ struct QueueRec {
     s32 tail;
 };
 
-struct Bank_func_8025CED0_de;
-typedef struct Bank_func_8025CED0_de Bank_func_8025CED0_de;
+struct BankAudioStartDialogGroup;
+typedef struct BankAudioStartDialogGroup BankAudioStartDialogGroup;
 
 
 

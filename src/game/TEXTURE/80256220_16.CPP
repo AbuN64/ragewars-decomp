@@ -22,9 +22,9 @@ extern f32 D_800C3EE0_de;
 extern u32 __osDisableInt(void);
 
 extern void func_80259440_de(void *arg0);
-extern void func_8025CC90_de(void *arg0);
+extern void Audio_UpdateDialogPlayer(void *arg0);
 
-extern void func_8025D450_de(void *arg0);
+extern void Audio_UpdateMusicPlayback(void *arg0);
 extern s32 func_802934F8_de(void);
 extern void *Camera_FindNearestCamera(MenuMatchGlobals *arg0, CVector3 *arg1);
 
@@ -75,10 +75,10 @@ s32 func_8025842C_de(void *context) {
     }
 
     func_80259440_de((char *)object + 0x138);
-    func_8025CC90_de((char *)object + 0x2BC0);
+    Audio_UpdateDialogPlayer((char *)object + 0x2BC0);
     queue = object + 0x1D64;
-    func_8025D928_de(queue);
-    func_8025D450_de(queue);
+    Audio_UpdateMusicFade(queue);
+    Audio_UpdateMusicPlayback(queue);
 
     if (D_800CB720 != 0 &&
         ((struct ContextRecAt2BC0 *)(object))->field2BB4 != 0 &&
@@ -101,7 +101,7 @@ s32 func_8025842C_de(void *context) {
 }
 
 extern u32 __osDisableInt(void);
-extern s32 func_8025C17C_de(void *arg0, s32 arg1);
+extern s32 Audio_HasVoiceOrReservedSlotWithKey(void *arg0, s32 arg1);
 extern s32 func_80259AB8_de(void *arg0, s32 arg1);
 
 
@@ -126,7 +126,7 @@ s32 func_802585F4_de(struct ContextRecAt2BC0 *context, s32 queryValue) {
             __osRestoreInt(mask);
         }
     }
-    if (func_8025C17C_de(&context->menu[0], queryValue) != 0) {
+    if (Audio_HasVoiceOrReservedSlotWithKey(&context->menu[0], queryValue) != 0) {
         MenuRules *contextLock;
         s32 lockClaimCount;
         u32 releaseInterruptMask;
