@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_804058B0_E196C[14] = "display lists";
+const char s_displayListsText[14] = "display lists";
 #endif
 
 #if defined(VERSION_US)

@@ -7,5 +7,5 @@ extern s32 Libc_FormatToCallback(void *(*)(void *, const char *, s32), void *, c
    zero; clamps the result to 0x7FFFFFFF when the quotient would overflow a signed 32-bit int. */
 
 extern char D_800C7548[];
-extern char D_800C754C[];
+extern char s_audioSndplayerText[];
 #endif

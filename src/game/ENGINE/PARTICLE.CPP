@@ -50,7 +50,7 @@ extern char D_800C4D38_de;
 
 extern char D_800C4D50_de;
 
-extern char D_800C4D68_de;
+extern char s_simpPartModelText;
 
 extern char D_0026D7F4;
 
@@ -198,7 +198,7 @@ void Particle_DrawModel(Shared_Particle *particle, GameplayCamera *view) {
 
     resource = Scene_RequestResource(0, particle->resource,
                             particle->resource, particle->resourceSize,
-                            0, 0, &D_0026D7F4, &D_800C4D68_de, 1);
+                            0, 0, &D_0026D7F4, &s_simpPartModelText, 1);
     if (resource != 0) {
         Render_QueueModelInstance(resource, matrix, 0,
                       (char *)particle + (((D_800D297C * 3) << 3) + 0xE0), 0, -1);

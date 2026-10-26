@@ -199,6 +199,6 @@ extern CVector3 *Nav_GetNodeEdgeCross(CVector3 *out, Node75 *node);
 
 extern char D_800C3AE8_de;
 extern char D_0026D814;
-extern char D_800C3B28;
-extern char D_800C3B3C;
+extern char s_animModelIndexText;
+extern char s_animatedModelText;
 #endif

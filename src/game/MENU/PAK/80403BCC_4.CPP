@@ -13,11 +13,11 @@ extern s32 *D_8011FEFC;
 
 /* Looks up the current menu resource through Render_LocatePackSection from the fields at 0x74 and 0x34 of
    D_8011FE88 and, when found, opens it through Scene_RequestResource as widget 0x33 with the handler table
-   D_800E0B2C; returns the result, or 0 when there is no resource. Matched through a local pointer to the menu. */
+   g_cinemaDirectoryText; returns the result, or 0 when there is no resource. Matched through a local pointer to the menu. */
 
 
 
-extern char D_800E0B2C[];
+extern char g_cinemaDirectoryText[];
 
 extern void *Render_LocatePackSection(int, int, int, int *);
 
@@ -46,7 +46,7 @@ int Pak_RequestTrackBundle(void) {
     if (res == 0) {
         return 0;
     }
-    return Scene_RequestResource(0, res, res, size, 0x33, 0, 0, D_800E0B2C, 1);
+    return Scene_RequestResource(0, res, res, size, 0x33, 0, 0, g_cinemaDirectoryText, 1);
 }
 
 f32 Pak_BlendCubic(f32 from, f32 to, f32 t) {

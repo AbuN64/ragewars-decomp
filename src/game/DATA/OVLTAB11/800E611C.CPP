@@ -6,5 +6,5 @@ unsigned int D_blob_c03922e994fbb61f889f[1] = {
 };
 
 /* ROM-grounded data: src/ragewars_resident_strings_E6D20_us_rev1.c */
-char D_blob_fbdcc86b059d5f165bd3[12] = "edit fog";
+char s_editFogText[12] = "edit fog";
 #endif

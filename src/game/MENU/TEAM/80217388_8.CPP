@@ -79,7 +79,7 @@ void func_802185D0_de(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 count, We
     func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
     x = viewport[2] + viewport[0] * 0.5f;
     y = viewport[3] + viewport[1] * 0.5f;
-    func_802A8F28_de(D_800C2260_de, x, y, 0xC8, 1, 1, scaleX, scaleY);
+    func_802A8F28_de(s_selectTeamText, x, y, 0xC8, 1, 1, scaleX, scaleY);
 }
 
 /* Returns the cardinal team-menu slot, or -1 inside the deadzone/diagonals. */

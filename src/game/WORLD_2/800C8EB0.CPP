@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-const char D_auto_rodata_shared_800C8EB0[18] = "simp models index";
+const char g_simpModelsIndexText[18] = "simp models index";
 
 #if defined(VERSION_US)
 unsigned short rodata_unresolved_800C3D02[1] = {

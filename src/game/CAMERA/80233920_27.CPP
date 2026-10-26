@@ -9,9 +9,9 @@ extern f32 Math_Sqrtf(float arg0);
 
 
 
-f32 Camera_GetDistanceTo(void *gameplayCamera, CVector3 *arg1) {
+f32 Camera_GetDistanceTo(void *gameplayCamera, CVector3 *targetPosition) {
     CVector3 delta;
     GameplayCamera *camera = gameplayCamera;
-    Particle_SubtractVectors(&delta, &camera->position, arg1);
+    Particle_SubtractVectors(&delta, &camera->position, targetPosition);
     return Math_Sqrtf((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
 }

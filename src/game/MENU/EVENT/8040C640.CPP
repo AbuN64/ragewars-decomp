@@ -48,7 +48,7 @@ void func_8040C648_us(void *arg0, Args args) {
 #endif
 
 #if defined(VERSION_US)
-unsigned int func_8040C77C_us_padding_17077C[1] = {
+unsigned int s_prefText[1] = {
     0x50726566,
 };
 #endif

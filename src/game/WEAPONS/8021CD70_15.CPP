@@ -10,7 +10,7 @@
 
 extern f32 D_800D2988;
 
-extern char D_800C2950_de;
+extern char s_flyModeOffText;
 
 extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
 
@@ -154,7 +154,7 @@ void func_8022409C_de(void *player, void *arg1) {
         Weapons_SetPlayerState(player, arg1, 2);
         data = ((func_80224078_Arg0 *)player)->unk5DC;
         if (data != 0) {
-            Camera_PostScreenMessage(&D_80145088, data, &D_800C2950_de);
+            Camera_PostScreenMessage(&D_80145088, data, &s_flyModeOffText);
         }
     }
 }

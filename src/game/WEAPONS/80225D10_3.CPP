@@ -20,7 +20,7 @@ void Weapons_AllocPlayerList(PlayerList *list, int count) {
     void **handle;
     int i;
 
-    handle = Scene_AllocateResource(0, playerSize + stateSize, 0x23, D_800C2B68_de);
+    handle = Scene_AllocateResource(0, playerSize + stateSize, 0x23, s_playersText);
     list->handle = handle;
     list->count = count;
     list->players = *handle;

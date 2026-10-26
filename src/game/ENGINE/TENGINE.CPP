@@ -138,10 +138,10 @@ void func_80294F1C_us_rev1(void) {
         if (D_8010F328[0].buttons & 0x10) {
             if (D_auto_800D2AFC == 0) {
                 if (D_8014AEB0.alternateTitle == 0) {
-                    Camera_PostScreenMessage(&D_80145088, (u8 *)&D_80145088 + 0x40, D_800CA60C);
+                    Camera_PostScreenMessage(&D_80145088, (u8 *)&D_80145088 + 0x40, s_artsendActivatedText);
                     D_8014AEB0.titleWasShown = 1;
                 } else {
-                    Camera_PostScreenMessage(&D_80145088, (u8 *)&D_80145088 + 0x40, D_auto_800CA620);
+                    Camera_PostScreenMessage(&D_80145088, (u8 *)&D_80145088 + 0x40, s_artsendDeactivatedText);
                 }
                 D_auto_800D2AFC = 1;
                 D_8014AEB0.alternateTitle = (u8) ((u8) D_8014AEB0.alternateTitle < 1U);

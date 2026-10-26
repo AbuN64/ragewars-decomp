@@ -46,6 +46,6 @@ extern int __osDpDeviceBusy();
 extern void osViSetYScale(f32 arg0);
 
 extern s32 D_800C7990_de;
-extern s32 D_800C7994_de;
+extern s32 s_sirawdmaText;
 
 #endif

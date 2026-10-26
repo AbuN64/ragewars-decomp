@@ -92,7 +92,7 @@ extern void RollMatrix(Matrix *, f32);
 
 
 
-void func_80217928_de(CBarrel *menu, s32 arg1, s32 arg2) {
+void func_80217928_de(CBarrel *menu, s32 arg1, s32 viewPlayer) {
     Matrix matrix;
     CVector3 position;
     Item items[36];
@@ -148,7 +148,7 @@ void func_80217928_de(CBarrel *menu, s32 arg1, s32 arg2) {
                 item->icon = item->width = 0;
             }
         }
-        Team_DrawWeaponIcons(menu, items, count, (Player *)arg2);
+        Team_DrawWeaponIcons(menu, items, count, (Player *)viewPlayer);
     }
 }
 

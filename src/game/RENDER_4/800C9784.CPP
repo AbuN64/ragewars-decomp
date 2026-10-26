@@ -31,7 +31,7 @@ unsigned char rodata_unresolved_800C469F[1] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_8026C484_CA384_us_rev1.c */
-const unsigned char D_blob_9f0b8fc89642bed2ab4e[11] = {
+const unsigned char s_simpModelText[11] = {
     0x73, 0x69, 0x6D, 0x70, 0x20, 0x6D, 0x6F, 0x64, 0x65, 0x6C, 0x00,
 };
 #endif

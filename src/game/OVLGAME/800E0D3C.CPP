@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_804058B0_E193C[15] = "Display Buffer";
+const char s_displayBufferText[15] = "Display Buffer";
 #endif
 
 #if defined(VERSION_US)
@@ -30,7 +30,7 @@ unsigned char rodata_unresolved_800DCD1B[1] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_804058B0_E193C_us_rev1.c */
-const char D_blob_ef98aa1baca74b3c10f7[15] = "Display Buffer";
+const char g_displayBufferText[15] = "Display Buffer";
 #endif
 
 #if defined(VERSION_US_REV1)

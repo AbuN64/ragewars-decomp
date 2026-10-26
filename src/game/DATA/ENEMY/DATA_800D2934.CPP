@@ -34,7 +34,7 @@ struct {
     unsigned int w4;
     unsigned char b5[4];
     unsigned int w6;
-} D_blob_38f6b7b96c512dcc6c7e = {
+} g_emacText = {
     0x00000000,
     {
         0x00, 0x00, 0x00, 0x00,

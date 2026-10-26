@@ -1,7 +1,7 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_resident_strings_E6E6C_us_rev1.c */
-unsigned char D_blob_b1dd0fae67af4b292a3e[16] = {
+unsigned char s_ambGreenText[16] = {
     0x61, 0x6D, 0x62, 0x20, 0x67, 0x72, 0x65, 0x65, 0x6E, 0x20, 0x30, 0x30, 0x30, 0x00, 0x00, 0x00,
 };
 #endif

@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const unsigned char D_804009F4_E1740[7] = {
+const unsigned char s_cinemaText[7] = {
     0x43, 0x69, 0x6E, 0x65, 0x6D, 0x61, 0x00,
 };
 #endif

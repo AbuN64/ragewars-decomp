@@ -138,10 +138,10 @@ func_802BD200_eu_x
 
 int func_802BB060_de(u32 deviceAddress, u32 *data) {
     if (deviceAddress & 3) {
-        Audio_Assert(D_800CCC30, &D_800C79E4_de, 0x33);
+        Audio_Assert(D_800CCC30, &s_sirawreadText, 0x33);
     }
     if (data == 0) {
-        Audio_Assert(D_800CCC30, &D_800C79E4_de, 0x34);
+        Audio_Assert(D_800CCC30, &s_sirawreadText, 0x34);
     }
     if (func_802B9D70_de() != 0) {
         return -1;

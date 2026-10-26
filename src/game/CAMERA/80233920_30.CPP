@@ -125,47 +125,47 @@ void func_80239AF4_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool
     }
 }
 
-void func_80239B64_de(s32 arg0) {
+void func_80239B64_de(s32 messageOwner) {
     Node_func_80239AF4_de *next;
-    Node_func_80239AF4_de *temp_s0_2;
-    Node_func_80239AF4_de *var_s1;
-    Node_func_80239AF4_de *var_s1_2;
-    void *temp_s2;
-    void *var_s2;
+    Node_func_80239AF4_de *nextPooledMessage;
+    Node_func_80239AF4_de *embeddedMessage;
+    Node_func_80239AF4_de *pooledMessage;
+    void *embeddedPool;
+    void *poolCursor;
 
-    temp_s2 = (void *)(arg0 + 0x40);
-    if (temp_s2 != 0) {
-        var_s1 = ((struct ScreenMessagePool *)temp_s2)->freeMessages.tail;
-        if (var_s1 != 0) {
+    embeddedPool = (void *)(messageOwner + 0x40);
+    if (embeddedPool != 0) {
+        embeddedMessage = ((struct ScreenMessagePool *)embeddedPool)->freeMessages.tail;
+        if (embeddedMessage != 0) {
             do {
-                next = var_s1->next;
-                func_80255ED8_de(&((struct ScreenMessagePool *)temp_s2)->freeMessages, var_s1);
-                func_80255CB8_de(&((struct ScreenMessageOwner *)arg0)->activeMessages, var_s1);
-                var_s1 = next;
-            } while (var_s1 != 0);
+                next = embeddedMessage->next;
+                func_80255ED8_de(&((struct ScreenMessagePool *)embeddedPool)->freeMessages, embeddedMessage);
+                func_80255CB8_de(&((struct ScreenMessageOwner *)messageOwner)->activeMessages, embeddedMessage);
+                embeddedMessage = next;
+            } while (embeddedMessage != 0);
         }
     }
 
-    var_s2 = D_80140FE8_de;
-    if (var_s2 != 0) {
+    poolCursor = D_80140FE8_de;
+    if (poolCursor != 0) {
         do {
-            var_s1_2 = ((struct ScreenMessagePool *)var_s2)->freeMessages.tail;
-            if (var_s1_2 != 0) {
+            pooledMessage = ((struct ScreenMessagePool *)poolCursor)->freeMessages.tail;
+            if (pooledMessage != 0) {
                 do {
-                    temp_s0_2 = var_s1_2->next;
-                    func_80255ED8_de(&((struct ScreenMessagePool *)var_s2)->freeMessages, var_s1_2);
-                    func_80255CB8_de(&((struct ScreenMessageOwner *)arg0)->activeMessages, var_s1_2);
-                    var_s1_2 = temp_s0_2;
-                } while (var_s1_2 != 0);
+                    nextPooledMessage = pooledMessage->next;
+                    func_80255ED8_de(&((struct ScreenMessagePool *)poolCursor)->freeMessages, pooledMessage);
+                    func_80255CB8_de(&((struct ScreenMessageOwner *)messageOwner)->activeMessages, pooledMessage);
+                    pooledMessage = nextPooledMessage;
+                } while (pooledMessage != 0);
             }
-            var_s2 = ((struct ScreenMessagePool *)var_s2)->next;
-        } while (var_s2 != 0);
+            poolCursor = ((struct ScreenMessagePool *)poolCursor)->next;
+        } while (poolCursor != 0);
     }
 }
 
 /** Thin wrapper forwarding an offset argument to func_8044A7D0_de. */
-void func_80239C20_de(int arg0) {
-    Items_InitEntryPool(arg0 + 0x570);
+void func_80239C20_de(int viewAddress) {
+    Items_InitEntryPool(viewAddress + 0x570);
 }
 
 void *func_80239C3C_de(void *screenMessageOwner, struct ScreenMessagePool *screenMessagePool) {
@@ -182,9 +182,9 @@ void *func_80239C3C_de(void *screenMessageOwner, struct ScreenMessagePool *scree
     return message;
 }
 
-void func_80239C9C_de(s32 arg0, s32 arg1, s32 arg2) {
-    func_80255ED8_de(arg1 + 0xE40, arg2);
-    func_80255CB8_de(arg0 + 0xF24, arg2);
+void func_80239C9C_de(s32 destinationOwner, s32 sourcePool, s32 messageNode) {
+    func_80255ED8_de(sourcePool + 0xE40, messageNode);
+    func_80255CB8_de(destinationOwner + 0xF24, messageNode);
 }
 
 void func_80239CE0_de(void *arg0) {
@@ -194,8 +194,8 @@ void func_80239CE0_de(void *arg0) {
 }
 
 /** Clear four consecutive object words beginning at offset 4. */
-void func_80239CEC_de(void *arg0) {
-    struct Channel *channel = arg0;
+void func_80239CEC_de(void *channelStorage) {
+    struct Channel *channel = channelStorage;
     channel->level = 0.0f;
     channel->state[0] = 0;
     channel->state[1] = 0;
@@ -207,9 +207,9 @@ void func_80239CEC_de(void *arg0) {
 
 
 
-void func_80239D00_de(struct Channel *channel, float arg1, int arg2) {
-    channel->level = arg1 * (D_800C8658);
-    channel->mode = arg2;
+void func_80239D00_de(struct Channel *channel, float inputLevel, int waveMode) {
+    channel->level = inputLevel * (D_800C8658);
+    channel->mode = waveMode;
 }
 
 /* Evaluates a wave: kind 1 returns func_802B7130_de of the phase at 0x10 scaled by D_800C865C, times
@@ -232,8 +232,8 @@ f32 func_80239D1C_de(struct Wave *wave) {
 }
 
 /** Zero the object's vector fields and reset the scale field to the default. */
-void func_80239D90_de(void *arg0) {
-    struct RecordRecAt18 *o = arg0;
+void func_80239D90_de(void *channelRecord) {
+    struct RecordRecAt18 *o = channelRecord;
     struct Channel *channel0;
     struct Channel *channel1;
     struct Channel *channel2;
@@ -284,18 +284,18 @@ void func_80239DE8_de(struct RecordRecAt18 *record, f32 first, f32 second, f32 t
     record->channels[2].level = third * D_800C8664;
 }
 
-s32 func_80239E48_de(s32 arg0) {
+s32 func_80239E48_de(s32 waveRecord) {
     s32 result;
-    u32 temp_s0;
-    u32 temp_s1;
-    u32 temp_v0;
+    u32 secondChannelDone;
+    u32 firstChannelDone;
+    u32 thirdChannelDone;
 
-    temp_s1 = func_802337D0_de(arg0 + 0x18);
-    temp_s0 = func_802337D0_de(arg0 + 0x2C);
-    temp_v0 = func_802337D0_de(arg0 + 0x40);
+    firstChannelDone = func_802337D0_de(waveRecord + 0x18);
+    secondChannelDone = func_802337D0_de(waveRecord + 0x2C);
+    thirdChannelDone = func_802337D0_de(waveRecord + 0x40);
     result = 0;
-    if ((temp_s1 != 0) && (temp_s0 != 0)) {
-        result = temp_v0 > 0U;
+    if ((firstChannelDone != 0) && (secondChannelDone != 0)) {
+        result = thirdChannelDone > 0U;
     }
     return result;
 }

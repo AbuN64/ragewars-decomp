@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_8024BFD4_C982C[15] =
+const char s_animatedModelText[15] =
     "animated model\000";
 #endif
 

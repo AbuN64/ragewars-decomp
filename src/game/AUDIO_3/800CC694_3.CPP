@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-const char D_auto_rodata_shared_800CC694[18] = "audio/seqplayer.c";
+const char g_audioSeqplayerText[18] = "audio/seqplayer.c";
 
 #if defined(VERSION_US)
 unsigned short rodata_unresolved_800C7376[1] = {

@@ -56,7 +56,7 @@ s32 func_80438E7C_de(ActorDefinitionHeader *actor, s32 event, s32 arg2, s32 arg3
 }
 
 #if defined(VERSION_US)
-unsigned int func_80438F0C_de_padding_19D0EC[1] = {
+unsigned int s_nterText[1] = {
     0x6E746572,
 };
 #endif

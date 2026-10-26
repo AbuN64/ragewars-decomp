@@ -114,7 +114,7 @@ void func_8028D380_de(Shared_World *world, s32 type, void *levelName, s32 arg3) 
     s32 count;
 
     tempv0 = Render_GetDirectoryEntry(world->resourceDirectory, world->resourceBank, type);
-    temps2 = func_80254284_de(0, &specialTable, tempv0, D_800C5110_de);
+    temps2 = func_80254284_de(0, &specialTable, tempv0, g_levelIndexText);
     node = func_80254408_de(0, specialTable, 8, tempv0, (s32)world, 0, &D_800C5280_de + 4);
     count = node->unk04;
     if (arg3 < count) {

@@ -39,14 +39,14 @@ void *func_8028BE08_de(Shared_World *world, s32 arg1, s32 mode, s32 direct) {
         return 0;
     }
     result = Render_LocatePackSection(world->lookupDirectory, world->lookupBank, idx, &sp28);
-    return Scene_RequestResource(0, result, result, sp28, mode, 0, &D_00285160, &D_800C51D8, direct);
+    return Scene_RequestResource(0, result, result, sp28, mode, 0, &D_00285160, &s_binaryBlockText, direct);
 }
 
 /* Starts a sound effect from the world's sound table: looks the id up (0 or unknown returns 0),
  * picks the effect's behaviour table (ids 5 and 7 have their own, everything else the default), sets
  * the loop/priority bits 0x4 or 0x18 from the id's range, and queues it through Scene_RequestResource. */
 extern s32 D_00285160, D_0028E4A4, D_0028E5D0;
-extern s32 D_800C51E8;
+extern s32 s_graphicsetText;
 s32 Render_StartWorldEffect(Shared_World *world, s32 id, s32 flags, s32 extra) {
     s32 index;
     s32 *behaviour;
@@ -91,5 +91,5 @@ s32 Render_StartWorldEffect(Shared_World *world, s32 id, s32 flags, s32 extra) {
         break;
     }
     handle = Render_LocatePackSection(world->resourceKindDirectory, world->resourceKindBank, index, &out);
-    return Scene_RequestResource(0, handle, handle, out, flags, world, behaviour, &D_800C51E8, extra);
+    return Scene_RequestResource(0, handle, handle, out, flags, world, behaviour, &s_graphicsetText, extra);
 }

@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 /* ROM-grounded data: rodata/shared/800C92A0 */
-const char D_blob_phase2_657588bf56f559525478[10] = "animation";
+const char g_animationText[10] = "animation";
 
 #if defined(VERSION_US)
 unsigned short rodata_unresolved_800C40EA[1] = {

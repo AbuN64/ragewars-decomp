@@ -29,15 +29,15 @@ extern void *func_80255920_de(void *, s32);
 extern void func_80255D70_de(void *, s32, s32);
 
 void func_80254990_de(void *unused, struct IntrusiveList *resource) {
-    s32 temp_v0;
+    s32 remainingReferences;
 
     resource->nextOffset = resource->nextOffset & ~2;
     if (resource->prevOffset != 0) {
     loop_1:
         do {
-            temp_v0 = resource->prevOffset - 1;
-            resource->prevOffset = temp_v0;
-            if (temp_v0 != 0) {
+            remainingReferences = resource->prevOffset - 1;
+            resource->prevOffset = remainingReferences;
+            if (remainingReferences != 0) {
                 goto loop_1;
             }
             resource->nextOffset = resource->nextOffset & ~0x100;
@@ -94,40 +94,40 @@ int func_80254B58_de(int unused, int arg1, int arg2) {
     return func_80251328_de(0, 2, var_v0);
 }
 
-void *func_80254B8C_de(s32 arg0, u32 arg1, s32 arg2, u32 arg3)
+void *func_80254B8C_de(s32 arg0, u32 byteCount, s32 allocatorSelection, u32 evictionFlags)
 {
   void *result;
   s32 value;
-  if (arg2 != 0)
+  if (allocatorSelection != 0)
   {
-    result = func_80255A34_de(&D_801051A0, arg1);
+    result = func_80255A34_de(&D_801051A0, byteCount);
   }
   else
     if (value)
   {
-    result = func_80255920_de(&D_801051A0, arg1);
+    result = func_80255920_de(&D_801051A0, byteCount);
   }
   else
   {
-    result = func_80255920_de(&D_801051A0, arg1);
+    result = func_80255920_de(&D_801051A0, byteCount);
   }
   if (result == 0)
   {
-    arg3 &= 0x10;
+    evictionFlags &= 0x10;
     do
     {
-      value = func_80251328_de(0, 2, arg3 == 0);
+      value = func_80251328_de(0, 2, evictionFlags == 0);
     }
-    while ((value != 0) && (value < arg1));
-    if (value >= arg1)
+    while ((value != 0) && (value < byteCount));
+    if (value >= byteCount)
     {
-      if (arg2 != 0)
+      if (allocatorSelection != 0)
       {
-        result = func_80255A34_de(&D_801051A0, arg1);
+        result = func_80255A34_de(&D_801051A0, byteCount);
       }
       else
       {
-        result = func_80255920_de(&D_801051A0, arg1);
+        result = func_80255920_de(&D_801051A0, byteCount);
       }
     }
   }

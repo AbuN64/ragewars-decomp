@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_8044B7C0_CAC84[14] =
+const char s_objectsIndexText[14] =
     "objects index\000";
 #endif
 

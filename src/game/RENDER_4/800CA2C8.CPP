@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_8028BE08_CAEC8[13] =
+const char s_binaryBlockText[13] =
     "binary block\000";
 #endif
 

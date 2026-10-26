@@ -32,7 +32,7 @@ extern void func_80255FB8_de(void *, s32);
 
 extern void func_80254990_de(void *, void *);
 
-extern char D_800C3EA0_de;
+extern char s_headerText;
 
 /* Allocates a four-byte probe from Scene_RequestResource to read a count, frees it under the D_8010515C lock, then allocates count*4+15 rounded to eight bytes and stores its first word through arg1, returning the allocation. Adapted from func_802540F4_de with the null checks removed, tag 0x1B and flag 1 passed as the fifth and ninth arguments, and the constant 1 held in a local changed. */
 
@@ -42,7 +42,7 @@ extern char D_800C3EA0_de;
 
 extern s32 Render_LocatePackSection(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
 
-void Scene_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *arg2) {
+void Scene_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *replacement) {
     extern OSMesgQueue D_80101140;
     s32 counter;
     s32 counter2;
@@ -79,7 +79,7 @@ void Scene_ReplaceResourceBlock(s32 unused, struct Shape_typemap_165 **handle, s
         func_80255B2C_de(&D_801051A0, node->field_0);
         func_80254AD0_de(0, node);
     }
-    *handle = arg2;
+    *handle = replacement;
 
     token2 = __osDisableInt();
     counter2 = D_8010515C - 1;
@@ -205,7 +205,7 @@ found:
     __osRestoreInt(temp_v0);
 }
 
-void **func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 direct) {
+void **func_802540F4_de(s32 arg0, void **arg1, s32 resourceKey, void *loadTag, s32 direct) {
     extern OSMesgQueue D_80101140;
     void **resource;
     s32 size;
@@ -214,7 +214,7 @@ void **func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 direct)
     u32 token;
     u32 token2;
 
-    resource = Scene_RequestResource(0, arg2, arg2, 4, 0, 0, 0, &D_800C3EA0_de, direct);
+    resource = Scene_RequestResource(0, resourceKey, resourceKey, 4, 0, 0, 0, &s_headerText, direct);
     if (resource != 0) {
         size = **(s32 **)resource;
         token = __osDisableInt();
@@ -236,8 +236,8 @@ void **func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 direct)
         } else {
             __osRestoreInt(token2);
         }
-        resource = Scene_RequestResource(0, arg2, arg2, ((size * 4) + 0xF) & ~7,
-                                 0, 0, 0, arg3, direct);
+        resource = Scene_RequestResource(0, resourceKey, resourceKey, ((size * 4) + 0xF) & ~7,
+                                 0, 0, 0, loadTag, direct);
         if (resource != 0) {
             *arg1 = *resource;
             return resource;
@@ -246,7 +246,7 @@ void **func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 direct)
     return 0;
 }
 
-s32 func_80254284_de(s32 arg0, void **handle, s32 tempv0, void *arg3) {
+s32 func_80254284_de(s32 arg0, void **handle, s32 tempv0, void *loadTag) {
     extern OSMesgQueue D_80101140;
     void **resource;
     s32 size;
@@ -256,7 +256,7 @@ s32 func_80254284_de(s32 arg0, void **handle, s32 tempv0, void *arg3) {
     u32 token2;
     s32 one = 1;
 
-    resource = Scene_RequestResource(0, tempv0, tempv0, 4, 0x1B, 0, 0, &D_800C3EA0_de, one);
+    resource = Scene_RequestResource(0, tempv0, tempv0, 4, 0x1B, 0, 0, &s_headerText, one);
     size = **(s32 **)resource;
     token = __osDisableInt();
     counter = D_8010515C + one;
@@ -277,15 +277,15 @@ s32 func_80254284_de(s32 arg0, void **handle, s32 tempv0, void *arg3) {
     } else {
         __osRestoreInt(token2);
     }
-    resource = Scene_RequestResource(0, tempv0, tempv0, ((size * 4) + 0xF) & ~7, 0x1B, 0, 0, arg3, 1);
+    resource = Scene_RequestResource(0, tempv0, tempv0, ((size * 4) + 0xF) & ~7, 0x1B, 0, 0, loadTag, 1);
     *handle = *resource;
     return (s32)resource;
 }
 
-void **func_80254408_de(s32 arg0, void *handle, s32 arg2, s32 tempv0, void *world, void *arg5, void *arg6) {
-    s32 sp28;
-    s32 temp_v0;
+void **func_80254408_de(s32 arg0, void *handle, s32 sectionSelector, s32 tempv0, void *world, void *resourceTag, void *loadTag) {
+    s32 sectionByteCount;
+    s32 sectionSource;
 
-    temp_v0 = Render_LocatePackSection(handle, tempv0, arg2, &sp28);
-    return (void **)Scene_RequestResource(0, temp_v0, temp_v0, sp28, 0x1B, world, arg5, arg6, 1);
+    sectionSource = Render_LocatePackSection(handle, tempv0, sectionSelector, &sectionByteCount);
+    return (void **)Scene_RequestResource(0, sectionSource, sectionSource, sectionByteCount, 0x1B, world, resourceTag, loadTag, 1);
 }

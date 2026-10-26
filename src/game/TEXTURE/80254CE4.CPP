@@ -76,16 +76,16 @@ void func_80254DA4_de(void *unused0, void *arg1) {
 }
 
 void func_80254DD0_de(void *unused0, void *resourceCacheEntry) {
-    void *temp_v0;
-    void *temp_s0;
+    void *ownerRequest;
+    void *requestToRecycle;
 
-    temp_v0 = ((ResourceCacheEntry *)resourceCacheEntry)->owner;
-    if (temp_v0 != 0) {
-        func_80255488_de(((ResourceLoadRequest *)temp_v0)->key);
-        temp_s0 = ((ResourceCacheEntry *)resourceCacheEntry)->owner;
-        func_80255ED8_de(&D_8010110C, temp_s0);
-        ((ResourceLoadRequest *)temp_s0)->flags = 0;
-        func_80255CB8_de(&D_801010F8, temp_s0);
+    ownerRequest = ((ResourceCacheEntry *)resourceCacheEntry)->owner;
+    if (ownerRequest != 0) {
+        func_80255488_de(((ResourceLoadRequest *)ownerRequest)->key);
+        requestToRecycle = ((ResourceCacheEntry *)resourceCacheEntry)->owner;
+        func_80255ED8_de(&D_8010110C, requestToRecycle);
+        ((ResourceLoadRequest *)requestToRecycle)->flags = 0;
+        func_80255CB8_de(&D_801010F8, requestToRecycle);
     }
 }
 
@@ -100,10 +100,10 @@ void *func_80254E30_de(void) {
     return head;
 }
 
-void func_80254E88_de(s32 unused0, void *arg1) {
-    func_80255ED8_de(&D_8010110C, arg1);
-    ((Request_func_802524B0_de *)arg1)->flags = 0;
-    func_80255CB8_de((char *)&D_8010110C - 0x14, arg1);
+void func_80254E88_de(s32 unused0, void *request) {
+    func_80255ED8_de(&D_8010110C, request);
+    ((Request_func_802524B0_de *)request)->flags = 0;
+    func_80255CB8_de((char *)&D_8010110C - 0x14, request);
 }
 
 void *func_80254ED0_de(s32 unused,s32 flags) {

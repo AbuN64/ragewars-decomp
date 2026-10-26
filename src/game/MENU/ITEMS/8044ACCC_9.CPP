@@ -138,7 +138,7 @@ typedef struct DraftOwnerA370 {
     s32 empty;
 } DraftOwnerA370;
 extern f32 D_800C32EC_de;
-extern char D_800C32D4_de[], D_800C32DC_de[];
+extern char g_camerasText[], D_800C32DC_de[];
 extern void func_8025E3F0_de(void *);
 extern void func_80253908_de(s32), Scene_ReleaseResource(s32, void *);
 extern void *Scene_AllocateResource(s32, s32, s32, char *);
@@ -191,7 +191,7 @@ void Items_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
     }
     if (actorCount) {
         owner->count = actorCount;
-        owner->handle = Scene_AllocateResource(0, actorCount * 0xED8, 0x23, D_800C32D4_de);
+        owner->handle = Scene_AllocateResource(0, actorCount * 0xED8, 0x23, g_camerasText);
         owner->actors = *owner->handle;
         Resmgr_FillMemory(owner->actors, 0, actorCount * 0xED8);
         for (i = 0; i < owner->count; i++) {

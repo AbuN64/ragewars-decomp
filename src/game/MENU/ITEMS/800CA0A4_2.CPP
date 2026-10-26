@@ -2,11 +2,11 @@
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-const char D_8044B7C0_CACA4[20] =
+const char s_particleEffectsText[20] =
     "particle effects\000\000\000\000";
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-const char D_8044B7C0_CACA4[17] =
+const char s_particleEffectsText[17] =
     "particle effects\000";
 #endif
 #endif

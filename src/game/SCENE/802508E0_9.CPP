@@ -38,40 +38,40 @@ extern void func_802515F0_de(s32, s32);
 
 extern s32 D_80101134[];
 
-struct Shape_typemap_165 *Scene_AllocateResource(s32 arg0, s32 arg1, u32 arg2, void *arg3) {
+struct Shape_typemap_165 *Scene_AllocateResource(s32 arg0, s32 byteCount, u32 allocationFlags, void *arg3) {
     extern OSMesgQueue D_80101140;
-    struct Shape_typemap_165 *var_s0;
-    s32 temp_v1;
-    s32 temp_v1_2;
+    struct Shape_typemap_165 *resource;
+    s32 lockUsers;
+    s32 remainingLockUsers;
     u32 mask;
-    u32 temp_v0;
-    s32 temp_s0;
-    u32 temp_s1;
+    u32 unlockInterruptMask;
+    s32 requestedBytes;
+    u32 requestedFlags;
     void *temp_s2;
 
-    temp_s0 = arg1;
-    temp_s1 = arg2;
+    requestedBytes = byteCount;
+    requestedFlags = allocationFlags;
     temp_s2 = arg3;
     mask = __osDisableInt();
-    temp_v1 = D_8010515C + 1;
-    D_8010515C = temp_v1;
-    if (temp_v1 != 1) {
+    lockUsers = D_8010515C + 1;
+    D_8010515C = lockUsers;
+    if (lockUsers != 1) {
         __osRestoreInt(mask);
         osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
-    var_s0 = func_802548B8_de(0, temp_s0, temp_s1, temp_s2);
-    temp_v0 = __osDisableInt();
-    temp_v1_2 = D_8010515C - 1;
-    D_8010515C = temp_v1_2;
-    if (temp_v1_2 != 0) {
-        __osRestoreInt(temp_v0);
+    resource = func_802548B8_de(0, requestedBytes, requestedFlags, temp_s2);
+    unlockInterruptMask = __osDisableInt();
+    remainingLockUsers = D_8010515C - 1;
+    D_8010515C = remainingLockUsers;
+    if (remainingLockUsers != 0) {
+        __osRestoreInt(unlockInterruptMask);
         osSendMesg(&D_80101140, 0, 1);
     } else {
-        __osRestoreInt(temp_v0);
+        __osRestoreInt(unlockInterruptMask);
     }
-    return var_s0;
+    return resource;
 }
 
 struct Shape_typemap_165 *Scene_AllocateResourceAt(void *arg0, void *arg1, s32 arg2, char *name) {
@@ -119,108 +119,108 @@ struct Shape_typemap_165 *Scene_AllocateResourceAt(void *arg0, void *arg1, s32 a
 
 void Scene_LockResource(void *arg0, Node80253610 *resource) {
     extern OSMesgQueue D_80101140;
-    s32 temp_v1;
-    s32 temp_v1_2;
+    s32 lockUsers;
+    s32 remainingLockUsers;
     u32 mask;
-    u32 temp_v0;
-    Node80253610 *temp_s0;
+    u32 unlockInterruptMask;
+    Node80253610 *resourceNode;
 
-    temp_s0 = resource;
+    resourceNode = resource;
     mask = __osDisableInt();
-    temp_v1 = D_8010515C + 1;
-    D_8010515C = temp_v1;
-    if (temp_v1 != 1) {
+    lockUsers = D_8010515C + 1;
+    D_8010515C = lockUsers;
+    if (lockUsers != 1) {
         __osRestoreInt(mask);
         osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
-    func_80254DA4_de(0, temp_s0);
-    temp_s0->references += 1;
-    temp_s0->flags |= 0x100;
-    temp_v0 = __osDisableInt();
-    temp_v1_2 = D_8010515C - 1;
-    D_8010515C = temp_v1_2;
-    if (temp_v1_2 != 0) {
-        __osRestoreInt(temp_v0);
+    func_80254DA4_de(0, resourceNode);
+    resourceNode->references += 1;
+    resourceNode->flags |= 0x100;
+    unlockInterruptMask = __osDisableInt();
+    remainingLockUsers = D_8010515C - 1;
+    D_8010515C = remainingLockUsers;
+    if (remainingLockUsers != 0) {
+        __osRestoreInt(unlockInterruptMask);
         osSendMesg(&D_80101140, 0, 1);
         return;
     }
-    __osRestoreInt(temp_v0);
+    __osRestoreInt(unlockInterruptMask);
 }
 
-void Scene_UnlockResource(void *arg0, Node80253610 *arg1) {
+void Scene_UnlockResource(void *arg0, Node80253610 *resource) {
     extern OSMesgQueue D_80101140;
-    s32 temp_v1;
-    s32 temp_v1_2;
+    s32 lockUsers;
+    s32 remainingLockUsers;
     u32 mask;
-    u32 temp_v0;
-    Node80253610 *temp_s0;
+    u32 unlockInterruptMask;
+    Node80253610 *resourceNode;
 
-    temp_s0 = arg1;
+    resourceNode = resource;
     mask = __osDisableInt();
-    temp_v1 = D_8010515C + 1;
-    D_8010515C = temp_v1;
-    if (temp_v1 != 1) {
+    lockUsers = D_8010515C + 1;
+    D_8010515C = lockUsers;
+    if (lockUsers != 1) {
         __osRestoreInt(mask);
         osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
-    temp_s0->references -= 1;
-    if (temp_s0->references == 0) {
-        temp_s0->flags &= ~0x100;
+    resourceNode->references -= 1;
+    if (resourceNode->references == 0) {
+        resourceNode->flags &= ~0x100;
     }
-    temp_v0 = __osDisableInt();
-    temp_v1_2 = D_8010515C - 1;
-    D_8010515C = temp_v1_2;
-    if (temp_v1_2 != 0) {
-        __osRestoreInt(temp_v0);
+    unlockInterruptMask = __osDisableInt();
+    remainingLockUsers = D_8010515C - 1;
+    D_8010515C = remainingLockUsers;
+    if (remainingLockUsers != 0) {
+        __osRestoreInt(unlockInterruptMask);
         osSendMesg(&D_80101140, 0, 1);
         return;
     }
-    __osRestoreInt(temp_v0);
+    __osRestoreInt(unlockInterruptMask);
 }
 
-void Scene_ReleaseResource(void *arg0, void *arg1) {
+void Scene_ReleaseResource(void *arg0, void *resource) {
     extern OSMesgQueue D_80101140;
-    s32 temp_v1;
-    s32 temp_v1_2;
+    s32 lockUsers;
+    s32 remainingLockUsers;
     u32 mask;
-    u32 temp_v0;
+    u32 unlockInterruptMask;
 
     mask = __osDisableInt();
-    temp_v1 = D_8010515C + 1;
-    D_8010515C = temp_v1;
-    if (temp_v1 != 1) {
+    lockUsers = D_8010515C + 1;
+    D_8010515C = lockUsers;
+    if (lockUsers != 1) {
         __osRestoreInt(mask);
         osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
-    func_80254990_de(0, arg1);
-    temp_v0 = __osDisableInt();
-    temp_v1_2 = D_8010515C - 1;
-    D_8010515C = temp_v1_2;
-    if (temp_v1_2 != 0) {
-        __osRestoreInt(temp_v0);
+    func_80254990_de(0, resource);
+    unlockInterruptMask = __osDisableInt();
+    remainingLockUsers = D_8010515C - 1;
+    D_8010515C = remainingLockUsers;
+    if (remainingLockUsers != 0) {
+        __osRestoreInt(unlockInterruptMask);
         osSendMesg(&D_80101140, 0, 1);
         return;
     }
-    __osRestoreInt(temp_v0);
+    __osRestoreInt(unlockInterruptMask);
 }
 
 void func_80253908_de(s32 unusedHeap) {
     extern OSMesgQueue D_80101140;
-    s32 temp_v1;
-    s32 temp_v1_2;
+    s32 lockUsers;
+    s32 remainingLockUsers;
     u32 mask;
-    u32 temp_v0;
+    u32 unlockInterruptMask;
 
     mask = __osDisableInt();
-    temp_v1 = D_8010515C + 1;
-    D_8010515C = temp_v1;
-    if (temp_v1 != 1) {
+    lockUsers = D_8010515C + 1;
+    D_8010515C = lockUsers;
+    if (lockUsers != 1) {
         __osRestoreInt(mask);
         osRecvMesg(&D_80101140, 0, 1);
     } else {
@@ -230,15 +230,15 @@ void func_80253908_de(s32 unusedHeap) {
     while (func_80254B58_de(0, 0, 0) != 0) {
     }
     func_802515F0_de(0, 1);
-    temp_v0 = __osDisableInt();
-    temp_v1_2 = D_8010515C - 1;
-    D_8010515C = temp_v1_2;
-    if (temp_v1_2 != 0) {
-        __osRestoreInt(temp_v0);
+    unlockInterruptMask = __osDisableInt();
+    remainingLockUsers = D_8010515C - 1;
+    D_8010515C = remainingLockUsers;
+    if (remainingLockUsers != 0) {
+        __osRestoreInt(unlockInterruptMask);
         osSendMesg(&D_80101140, 0, 1);
         return;
     }
-    __osRestoreInt(temp_v0);
+    __osRestoreInt(unlockInterruptMask);
 }
 
 void func_802539EC_de(s32 unused, s32 arg1) {
@@ -303,7 +303,7 @@ s32 func_80253AD4_de(void) {
     return result;
 }
 
-void Scene_MarkResourceInUse(s32 unused0, Node80253610 *arg1) {
+void Scene_MarkResourceInUse(s32 unused0, Node80253610 *resource) {
     extern OSMesgQueue D_80101140;
     s32 index;
     s32 mask;
@@ -331,9 +331,9 @@ void Scene_MarkResourceInUse(s32 unused0, Node80253610 *arg1) {
         if (index != 0) {
             mask = 0x400;
         }
-        flags = arg1->flags;
+        flags = resource->flags;
         if (!(flags & mask)) {
-            arg1->flags = flags | mask;
+            resource->flags = flags | mask;
             D_80101134[index]++;
         }
     }

@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_802507AC_C9B70[18] =
+const char s_statModelsIndexText[18] =
     "stat models index\000";
 #endif
 

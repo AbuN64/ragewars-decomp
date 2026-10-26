@@ -23,9 +23,9 @@ extern f32 Anim_GetPolygonHeight(s32 arg0, f32 arg1, f32 arg2);
 
 
 
-void func_80238F24_de(GameplayCamera *arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6,
-                   f32 arg7, f32 arg8, f32 arg9, Shared_Quad arg10, s32 arg11, f32 arg12,
-                   f32 arg13) {
+void func_80238F24_de(GameplayCamera *camera, s32 bobSuppression, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 floorSampleX,
+                   f32 floorSampleY, f32 floorSampleZ, f32 floorHeightOffset, Shared_Quad arg10, s32 floorPolygon, f32 requestedZoomBlend,
+                   f32 requestedZoomFov) {
     s32 object;
     f32 value;
     f32 x;
@@ -33,38 +33,38 @@ void func_80238F24_de(GameplayCamera *arg0, s32 arg1, f32 arg2, f32 arg3, f32 ar
     f32 z;
     f32 w;
 
-    arg0->unk24 = arg1;
-    arg0->unk28 = arg2;
-    arg0->unk2C = arg3;
-    arg0->unk30 = arg4;
-    arg0->unk34 = arg5;
-    arg0->unk38 = arg6;
-    arg0->unk3C = arg7;
-    arg0->unk40 = arg8;
-    arg0->unk44 = arg9;
-    arg0->unk48 = arg10;
-    arg0->floorPoly = (void *)arg11;
-    arg0->zoomBlend = arg12;
-    arg0->zoomFov = arg13;
+    camera->unk24 = bobSuppression;
+    camera->unk28 = arg2;
+    camera->unk2C = arg3;
+    camera->unk30 = arg4;
+    camera->unk34 = arg5;
+    camera->unk38 = floorSampleX;
+    camera->unk3C = floorSampleY;
+    camera->unk40 = floorSampleZ;
+    camera->unk44 = floorHeightOffset;
+    camera->unk48 = arg10;
+    camera->floorPoly = (void *)floorPolygon;
+    camera->zoomBlend = requestedZoomBlend;
+    camera->zoomFov = requestedZoomFov;
     if (Camera_IsSequenceInWindow() != 0) {
-        arg0->floorPoly = (void *)Scene_FindFloorPolygon(&g_world, &arg0->unk38);
+        camera->floorPoly = (void *)Scene_FindFloorPolygon(&g_world, &camera->unk38);
     }
-    object = (s32)arg0->floorPoly;
-    x = arg0->unk38;
-    y = arg0->unk3C;
-    z = arg0->unk40;
-    w = arg0->unk44;
-    arg0->floorSurface = D_800CD8D0;
+    object = (s32)camera->floorPoly;
+    x = camera->unk38;
+    y = camera->unk3C;
+    z = camera->unk40;
+    w = camera->unk44;
+    camera->floorSurface = D_800CD8D0;
     if (object != 0 && Camera_IsSequenceInWindow() == 0) {
         value = ((y + w) - Anim_GetPolygonHeight(object, x, z)) * D_800C8610;
         if (value < D_800C3524_de && D_800C3528_de < value) {
-            arg0->floorSurface = ((MenuRules *)(object))->locked;
+            camera->floorSurface = ((MenuRules *)(object))->locked;
         }
     }
     if (Camera_IsSequenceInWindow() != 0) {
-        arg0->floorSurface = D_800CD8D0;
+        camera->floorSurface = D_800CD8D0;
     }
-    if (arg0->zoomBlend > 0.0f) {
-        arg0->floorSurface = D_800CD8D0;
+    if (camera->zoomBlend > 0.0f) {
+        camera->floorSurface = D_800CD8D0;
     }
 }

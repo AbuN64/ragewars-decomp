@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_804058B0_E197C[5] = "fifo";
+const char s_fifoText[5] = "fifo";
 #endif
 
 #if defined(VERSION_US)

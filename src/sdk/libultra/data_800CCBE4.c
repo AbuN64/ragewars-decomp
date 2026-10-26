@@ -44,5 +44,5 @@ char rodata_unresolved_800C79A2[14] =
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_802B9CB0_CD7E4_us_rev1.c */
-const char D_blob_b48b1aa8b4f284adad97[14] = "io/sirawdma.c";
+const char s_sirawdmaText[14] = "io/sirawdma.c";
 #endif

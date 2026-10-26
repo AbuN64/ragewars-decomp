@@ -49,7 +49,7 @@ void **func_8024BFD4_de(MenuPanelRoot *actor, s32 arg1) {
     if (arg1 != actor->selected) {
         resource = Scene_RequestResource(0, actor->resource,
                                  actor->resource, actor->resourceSize,
-                                 0, 0, 0, &D_800C3B28, 1);
+                                 0, 0, 0, &s_animModelIndexText, 1);
         if (resource != 0) {
             actor->selectedResource = Render_LocatePackSection((s32)*resource,
                                                 actor->resource,
@@ -62,7 +62,7 @@ void **func_8024BFD4_de(MenuPanelRoot *actor, s32 arg1) {
     if (actor->selectedResource != 0) {
         return Scene_RequestResource(0, actor->selectedResource,
                              actor->selectedResource, actor->window,
-                             0, 0, &D_0026D814, &D_800C3B3C, 0);
+                             0, 0, &D_0026D814, &s_animatedModelText, 0);
     }
     return 0;
 }

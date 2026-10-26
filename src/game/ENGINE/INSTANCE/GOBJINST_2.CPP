@@ -37,7 +37,7 @@ void Instance_LoadModel(void *arg0, s32 *arg1, s32 arg2, s32 extra) {
     if (resource1 != 0) {
         entry = *resource1;
         ((LevelActor *)arg0)->animationKey = Render_GetDirectoryEntry(entry, key, 1);
-        found = func_802540F4_de(0, &sp28, ((LevelActor *)arg0)->animationKey, &D_800C38B0_de, 1);
+        found = func_802540F4_de(0, &sp28, ((LevelActor *)arg0)->animationKey, &s_animModelsIndexText, 1);
         if (found != 0) {
             ((LevelActor *)arg0)->stateE7 = (u8)*sp28;
             ((LevelActor *)arg0)->resourceAlignment = ((*sp28 * 4) + 0xF) & ~7;

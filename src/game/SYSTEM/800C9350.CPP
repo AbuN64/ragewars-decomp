@@ -30,7 +30,7 @@ unsigned short rodata_unresolved_800C4272[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-const char D_auto_src_rw_text_802627A0_C9F50_us_rev1[18] = "anim object index";
+const char s_animObjectIndexText[18] = "anim object index";
 #endif
 
 #if defined(VERSION_US_REV1)

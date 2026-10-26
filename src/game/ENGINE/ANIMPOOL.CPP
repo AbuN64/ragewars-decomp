@@ -79,10 +79,10 @@ SceneEffect *func_802627A0_de(struct SceneEffectPool *scene, s32 variant, s32 ow
     id = func_8028B21C_de(&g_world, variant);
     if (id != -1) {
         key = Render_GetDirectoryEntry((s32)g_world.indexedDirectory, g_world.indexedBank, id);
-        descriptor = Scene_RequestResource(0, key, key, 0x18, 0, 0, 0, &D_800C4260_de, 1);
+        descriptor = Scene_RequestResource(0, key, key, 0x18, 0, 0, 0, &s_animObjectIndexText, 1);
         if (descriptor != 0) {
             clip = Render_LocatePackSection(*descriptor, key, 0, &size);
-            resource = Scene_RequestResource(0, clip, clip, size, 0, 0, 0, &D_800C4274_de, 1);
+            resource = Scene_RequestResource(0, clip, clip, size, 0, 0, 0, &s_animObjectInfoText, 1);
             if (resource != 0) {
                 record = Render_GetPackSection(*resource, 0);
                 count = Engine_GetActorDefinition(&g_world, record->count);

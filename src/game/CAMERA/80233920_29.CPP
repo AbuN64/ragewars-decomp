@@ -157,21 +157,21 @@ void *Camera_FindNearestCamera(MenuMatchGlobals *menuMatchGlobals, CVector3 *zer
     return bestNode;
 }
 
-f32 func_80239678_de(Race *arg0, void *arg1) {
+f32 func_80239678_de(Race *viewOwner, void *targetPosition) {
     CVector3 position;
     f32 sum;
     Racer *node;
     f64 divisor;
     s32 count;
 
-    if (arg0->header.views.count == 0) {
+    if (viewOwner->header.views.count == 0) {
         return 0.0f;
     }
-    node = arg0->header.views.head;
+    node = viewOwner->header.views.head;
     sum = 0.0f;
     if (node != 0) {
         do {
-            Particle_SubtractVectors(&position, &((GameplayCamera *)node)->position, arg1);
+            Particle_SubtractVectors(&position, &((GameplayCamera *)node)->position, targetPosition);
             sum += Math_Sqrtf(
                 (position.x * position.x) +
                 (position.y * position.y) +
@@ -179,7 +179,7 @@ f32 func_80239678_de(Race *arg0, void *arg1) {
             node = node->next;
         } while (node != 0);
     }
-    count = arg0->header.views.count;
+    count = viewOwner->header.views.count;
     divisor = (f64)count;
     if (count < 0) {
         divisor += D_800C3550_de;

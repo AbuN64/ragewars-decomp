@@ -11,7 +11,7 @@ extern int Libgultra_TrwGetSr(void);
 
                                                   /* size = 0x18 */
 
-s32 func_80200500_de(void) {
+s32 Libsn_DisableInterrupts(void) {
     s32 temp_v0;
 
     temp_v0 = Libgultra_TrwGetSr();
@@ -21,7 +21,7 @@ s32 func_80200500_de(void) {
 
                                                   /* size = 0x18 */
 
-void func_80200538_de(s32 arg0) {
+void Libsn_RestoreInterruptEnable(s32 arg0) {
     Libgultra_TrwSetSr(Libgultra_TrwGetSr() | arg0);
 }
 

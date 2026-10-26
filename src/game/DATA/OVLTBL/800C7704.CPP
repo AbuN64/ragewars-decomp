@@ -4,7 +4,7 @@ struct {
     unsigned int w0[4];
     unsigned char b1[16];
     unsigned int w2[5];
-} D_auto_rodata_unresolved_800C7704 = {
+} s_audioSaveText = {
     {
         0x0000000F, 0x5649445F, 0x4D4F4445, 0x45580000,
     },

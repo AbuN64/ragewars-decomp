@@ -607,7 +607,7 @@ extern char D_800C95D0;
 extern SharedMovement D_800C9510_de[2];
 extern CVector3 D_800C94D0_de;
 
-extern char D_800C2B68_de[];
+extern char s_playersText[];
 
 void func_8022C5AC_de(char *);
 void func_8022C5DC_de(void *);

@@ -36,7 +36,7 @@ extern char D_0026882C[];
 extern char D_00268864[];
 extern char D_0026893C[];
 extern char D_0026894C[];
-unsigned int D_auto_rodata_unresolved_800CBBC0_0CCBB0_0CCC38[78] = {
+unsigned int s_hammerText[78] = {
     0x5F48414D, 0x4D45525F, (unsigned int)D_002672A4, 0x00000000, (unsigned int)D_002673A4, 0x00000000, (unsigned int)D_00267AF8, 0x00000004,
     (unsigned int)D_00267B58, 0x00000006, (unsigned int)D_00267BB0, 0x00000006, (unsigned int)D_00267C08, 0x0000000A, (unsigned int)D_00267C10, 0x00000010,
     (unsigned int)D_00267C44, 0x00000010, (unsigned int)D_002673A4, 0x00000000, (unsigned int)D_00267C74, 0x00000000, (unsigned int)D_00267CF8, 0x00000000,

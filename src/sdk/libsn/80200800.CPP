@@ -2,7 +2,7 @@
 #include "COMMON/EXTERNS_15.H"
 #include "IO/80200800.H"
 
-int func_80200800_de(int arg0) {
+int Libsn_ReadPortByte(int arg0) {
     u32 shift = (~arg0 & 3) << 3;
     u32 word = Libsn_ReadPortWord(arg0 & ~3);
 
@@ -12,16 +12,16 @@ int func_80200800_de(int arg0) {
 /* Signature follows the published cartridge word reader implementation. */
 
 
-int func_80200840_de(int arg0) {
+int Libsn_ReadTransferPortByte(int arg0) {
     int shift = (~arg0 & 3) << 3;
     return ((u32)Libsn_ReadPortWord(arg0 & -4) >> shift) & 0xFF;
 }
 
 
 
-void func_80200880_de(s32 source, u8 *destination, u32 count) {
+void Libsn_ReadPortBuffer(s32 source, u8 *destination, u32 count) {
     while (count != 0 && (source & 3) != 0) {
-        *destination++ = func_80200800_de(source++);
+        *destination++ = Libsn_ReadPortByte(source++);
         count--;
     }
     while (count >= 4) {
@@ -34,7 +34,7 @@ void func_80200880_de(s32 source, u8 *destination, u32 count) {
         count -= 4;
     }
     while (count != 0) {
-        *destination++ = func_80200800_de(source++);
+        *destination++ = Libsn_ReadPortByte(source++);
         count--;
     }
 }

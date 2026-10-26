@@ -39,13 +39,13 @@ extern s32 **D_8011064C;
 
 extern ObjRecAtCV2 D_801157D8[];
 
-extern s32 D_800C466C_de;
+extern s32 s_simpObjectIndexText;
 
                           /* unable to generate initializer: unknown type */
-extern s32 D_800C4680_de;
+extern s32 s_simpModelsIndexText;
 
                           /* unable to generate initializer: unknown type */
-extern s32 D_800C4694_de;
+extern s32 s_simpModelText;
 
 void func_8026C020_de(void) {
  Group18 *group=D_8010C56C,*deferred=0;
@@ -127,16 +127,16 @@ void func_8026C484_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 
         s32 temp_v1;
         s8 *temp_s1_2;
         ObjRecAtCV2 *temp_v1_2;
-        temp_v0 = Scene_RequestResource(0, arg0, arg0, 0x18, 0, 0, 0, &D_800C466C_de, 1);
+        temp_v0 = Scene_RequestResource(0, arg0, arg0, 0x18, 0, 0, 0, &s_simpObjectIndexText, 1);
         if (temp_v0 != 0) {
                 temp_s1 = Render_GetDirectoryEntry(*temp_v0, arg0, 1);
                 Scene_UnlockResource(0, temp_v0);
-                temp_v0_2 = func_802540F4_de(0, (void **) &sp28, temp_s1, &D_800C4680_de, 1);
+                temp_v0_2 = func_802540F4_de(0, (void **) &sp28, temp_s1, &s_simpModelsIndexText, 1);
                 if (temp_v0_2 != 0) {
                         temp_v0_3 = *sp28;
                         temp_s0 = Render_LocatePackSection((s32) sp28, temp_s1, arg3 % temp_v0_3, &sp2C);
                         Scene_UnlockResource(0, (void *) temp_v0_2);
-                        resource = Scene_RequestResource(0, temp_s0, temp_s0, sp2C, 0, 0, &D_0026D7F4, &D_800C4694_de, direct);
+                        resource = Scene_RequestResource(0, temp_s0, temp_s0, sp2C, 0, 0, &D_0026D7F4, &s_simpModelText, direct);
                         if (resource != 0) {
                                 temp_s1_2 = Render_GetPackSection(*resource, 0);
                                 if (D_8011064C != resource || D_8010C564 != arg4 || D_80110640 == 0x20) {

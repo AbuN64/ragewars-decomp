@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-const char D_auto_rodata_shared_800C8F4C[] = "stat object index"
+const char g_statObjectIndexText[] = "stat object index"
 #if defined(VERSION_EU_X)
     "\000\000"
 #endif

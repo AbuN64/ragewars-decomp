@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_804058B0_E1984[11] = "audio heap";
+const char s_audioHeapText[11] = "audio heap";
 #endif
 
 #if defined(VERSION_US)

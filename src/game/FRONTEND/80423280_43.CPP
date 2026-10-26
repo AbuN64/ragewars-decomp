@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-char func_80429178_us_rev1_padding_197178[8] =
+char s_evadeText[8] =
     "R_EVADE_";
 #endif
 

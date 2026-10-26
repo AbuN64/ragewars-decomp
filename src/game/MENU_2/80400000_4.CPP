@@ -29,7 +29,7 @@ static inline char *packAppend(Pack *pack,void *prepare,s32 size) { return func_
 
 static inline s32 splineRecordSize(s32 left,s32 right) { s32 a=left*9,b=right*9; return (b+a)*4+48; }
 
-extern char D_800E0B2C[];
+extern char g_cinemaDirectoryText[];
 
 extern s32 Render_LocatePackSection(void *,s32,s32,s32 *);
 
@@ -141,7 +141,7 @@ s32 func_804009F4_de(s32 index) {
     else {
         if(D_800E2830->active!=0)Camera_ReleaseSequenceContext();
         loaded=Render_LocatePackSection(resources->trackBundle,resources->trackLookup,index+1,&size);
-        owner=Scene_RequestResource(0,loaded,loaded,size,0x33,0,D_0040067C,D_800DCB10,1);
+        owner=Scene_RequestResource(0,loaded,loaded,size,0x33,0,D_0040067C,s_cinemaText,1);
         if(owner==0)goto failed;
         D_800E2830->owner=owner;
         D_800E2830->resource=*owner;
@@ -178,7 +178,7 @@ s32 func_804009F4_de(s32 index) {
         previous=D_800E2830->spec.id8;
         loaded=Render_LocatePackSection(D_8011FEFC,D_8011BDFC,0,&size2);
         if(loaded==0)table=0;
-        else table=Scene_RequestResource(0,loaded,loaded,size2,0x33,0,0,D_800E0B2C,1);
+        else table=Scene_RequestResource(0,loaded,loaded,size2,0x33,0,0,g_cinemaDirectoryText,1);
          {
             Shared_TrackTable *entries=*table;
             EntryRecAt48 *base=entries->entries;

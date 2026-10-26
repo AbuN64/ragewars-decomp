@@ -120,5 +120,5 @@ typedef struct ALFilter_u1 {
     s32 type;
 } ALFilter_u1;
 extern char D_800C8DB0_eu_x[];
-extern char D_800C8DB4_eu_x[];
+extern char g_audioSaveText[];
 #endif

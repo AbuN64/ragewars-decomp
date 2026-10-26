@@ -195,7 +195,7 @@ void func_8028D108_de(Shared_World *world) {
         return;
     }
     {
-        entry = &D_800CD6E4_de[world->selectionState];
+        entry = &g_emacText[world->selectionState];
         if (entry->value != 0.0f) {
             color[0] = entry->red;
             color[1] = entry->green;

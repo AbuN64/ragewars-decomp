@@ -146,11 +146,11 @@ void func_80298FE8_de(void) {
     args.word24 = D_80146E0C - 1;
 
     now = (s32)(func_802A18CC_de() * D_800C5680_de);
-    if (D_800CD8E0 == 0) {
-        D_800CD8E0 = now;
+    if (s_smackFormat == 0) {
+        s_smackFormat = now;
     }
-    delta = now - D_800CD8E0;
-    D_800CD8E0 = now;
+    delta = now - s_smackFormat;
+    s_smackFormat = now;
     DispatchScreenRangeEvent(0, 0xE0A, 0, &args, delta);
 
     index = D_8014D080->lowIndex;

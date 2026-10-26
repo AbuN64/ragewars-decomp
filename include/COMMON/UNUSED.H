@@ -100,7 +100,7 @@ extern char D_C0DA8;
 
 extern char D_800D3B28[];
 
-extern Marker_func_802A71C0_de D_800C5F10_de;
+extern Marker_func_802A71C0_de s_systembootdoneText;
 
 
 extern char D_0044EA2C[];
@@ -678,7 +678,7 @@ extern char D_800D7970[];
 
 extern const f64 D_800C5B58_de;
 
-extern char D_800C38B0_de;
+extern char s_animModelsIndexText;
 
 extern char D_0028E930;
 
@@ -714,7 +714,7 @@ extern char D_800D39C8[];
 
 extern char D_800D3860[];
 
-extern char D_800C3EA0_de;
+extern char s_headerText;
 
 extern char D_800D38E0[];
 
@@ -747,7 +747,7 @@ extern struct Shape_typemap_165 *D_800DE864_de;
 
 extern char D_800E62DC[];
 
-extern char D_800C5110_de[];
+extern char g_levelIndexText[];
 
 extern void func_804397F0_auto(char *);
 
@@ -759,7 +759,7 @@ extern char *D_800E1F54_eu[];
 
 extern void *D_801536E8;
 
-extern char D_800C4260_de;
+extern char s_animObjectIndexText;
 
 extern char *D_800E1E54[];
 
@@ -834,7 +834,7 @@ extern char D_00450F74[];
 
 extern Texture *D_800DF254;
 
-extern char D_800C3DC0_de[];
+extern char g_simpModelsIndexText[];
 
 extern char D_800D76C8;
 
@@ -842,7 +842,7 @@ extern FieldRow D_800E4EF4[];
 
 extern f32 D_800C3758_de[];
 
-extern s32 D_800C3600_de;
+extern s32 s_virtualRegionText;
 
 extern char *D_800D34F8;
 
@@ -952,7 +952,7 @@ extern f32 D_800C6214_de;
 
 extern char D_800E6090[];
 
-extern char D_800C2950_de;
+extern char s_flyModeOffText;
 
 
 extern char D_00205628;
@@ -1096,7 +1096,7 @@ extern f32 D_800C20C0_de[];
 
 extern TextEntry D_800DF544[];
 
-extern s32 D_800C3EA8_de;
+extern s32 s_allocText;
 
 extern char g_pakFormatInt3[];
 
@@ -1268,9 +1268,9 @@ extern s32 D_800E0658[];
 
 extern char D_801371E8;
 
-extern char D_800C7354_de[];
+extern char g_audioCsplayerText[];
 
-extern ColorEntry D_800CD6E4_de[];
+extern ColorEntry g_emacText[];
 
 extern char D_800D39C0[];
 
@@ -1381,7 +1381,7 @@ extern char D_8010110C;
 
 extern int D_800D37A8;
 
-extern char D_800C4D68_de;
+extern char s_simpPartModelText;
 
 extern f32 D_800C1D40[];
 
@@ -1548,7 +1548,7 @@ extern char *D_800E1DE4[];
 
 extern FieldRow D_800E4568[];
 
-extern char D_800C3DD4_de[];
+extern char g_simpModelText[];
 
 extern void D_002BA4C0(void *arg);
 
@@ -2010,7 +2010,7 @@ extern char D_800D77EC[];
 union ObjectState1000;
 extern union ObjectState1000 D_800FFB5B;
 
-extern char D_800C4274_de;
+extern char s_animObjectInfoText;
 
 extern Handler802A2B50 D_800E372C;
 
@@ -2289,7 +2289,7 @@ extern int D_800CC364;
 
 extern int D_80146E14;
 
-extern s32 D_800E2AD0;
+extern s32 s_typeText;
 
 extern Tuning D_800CE850;
 
@@ -2414,7 +2414,7 @@ extern char D_800D3828[];
 
 extern s32 D_0044F994_de;
 
-extern s32 D_800C51D8;
+extern s32 s_binaryBlockText;
 
 extern char D_800FEB8D[];
 

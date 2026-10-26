@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_8024F294_C9AD0[13] =
+const char s_litVerticesText[13] =
     "lit vertices\000";
 #endif
 

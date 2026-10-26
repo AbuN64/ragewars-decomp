@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_8044B7C0_CACC8[18] =
+const char s_particleSwooshesText[18] =
     "particle swooshes\000";
 #endif
 

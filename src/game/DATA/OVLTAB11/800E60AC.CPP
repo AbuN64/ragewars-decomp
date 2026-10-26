@@ -5,5 +5,5 @@ unsigned int D_blob_4a010c35b9829eb0f66d[1] = {
     0x800E6094,
 };
 
-char D_auto_src_ragewars_resident_strings_E6CB0_us_rev1[24] = "weapon        :hidden";
+char s_weaponHiddenText[24] = "weapon        :hidden";
 #endif

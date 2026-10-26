@@ -159,7 +159,7 @@ void func_80442544_de(void *object) {
 
 /* Allocates a block sized for the entries of a list through Scene_AllocateResource, builds it with Pak_InitializeMenu from a zero and three arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_AllocateMenu with the list and three values passed as arguments and a zero as the first value changed. */
 
-extern char D_800DE4EC_de[];
+extern char g_menuText[];
 extern void **Scene_AllocateResource(s32, s32, s32, char *);
 
 void *Pak_OpenDialog(void *parent, struct Dialog *list, s32 player, s32 controller, s32 d) {
@@ -176,7 +176,7 @@ void *Pak_OpenDialog(void *parent, struct Dialog *list, s32 player, s32 controll
         }
         size += extra;
     }
-    block = Scene_AllocateResource(0, size, 0x3B, D_800DE4EC_de);
+    block = Scene_AllocateResource(0, size, 0x3B, g_menuText);
     if (block == 0) {
         return 0;
     }
@@ -194,7 +194,7 @@ void *Pak_OpenDialog(void *parent, struct Dialog *list, s32 player, s32 controll
 }
 
 /* Allocates a block sized for the entries of a list (forty bytes each plus 0x480 for every entry of type three, over a 0x1D8 header) through Scene_AllocateResource, builds it with Pak_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. */
-extern char D_800DE4EC_de[];
+extern char g_menuText[];
 extern void **Scene_AllocateResource(s32, s32, s32, char *);
 
 void *func_80442690_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *params, struct Dialog *list) {
@@ -214,7 +214,7 @@ void *func_80442690_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *p
         }
         size += extra;
     }
-    block = Scene_AllocateResource(0, size, 0x3B, D_800DE4EC_de);
+    block = Scene_AllocateResource(0, size, 0x3B, g_menuText);
     if (block == 0) {
         return 0;
     }
@@ -231,7 +231,7 @@ void *func_80442690_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *p
 }
 
 /* Allocates a block sized for the entries of a list through Scene_AllocateResource, builds it with Pak_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_80442690_de with the first parameter read from offset 0x14 instead of 0x18. */
-extern char D_800DE4EC_de[];
+extern char g_menuText[];
 extern void **Scene_AllocateResource(s32, s32, s32, char *);
 
 void *Pak_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateMenu *params, struct Dialog *list) {
@@ -251,7 +251,7 @@ void *Pak_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateM
         }
         size += extra;
     }
-    block = Scene_AllocateResource(0, size, 0x3B, D_800DE4EC_de);
+    block = Scene_AllocateResource(0, size, 0x3B, g_menuText);
     if (block == 0) {
         return 0;
     }

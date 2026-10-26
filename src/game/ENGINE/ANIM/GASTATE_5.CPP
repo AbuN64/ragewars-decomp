@@ -17,7 +17,7 @@ extern s32 Render_LocatePackSection(s32 arg0, s32 arg1, s32 arg2, s32 *arg3);
 
 extern s32 func_802624D8_de(void *arg0);
 
-extern ResourceEntry D_800C41B0_de[];
+extern ResourceEntry g_animationText[];
 
 void func_802625F0_de(AnimRef *arg0, f32 arg1) {
     s16 *base;
@@ -56,7 +56,7 @@ s32 func_8026269C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
 
     key = Render_LocatePackSection(arg1, arg2, arg3, &sp28);
     resource = Scene_RequestResource(0, key, key, sp28, 4, arg0,
-                            &D_0025F56C, D_800C41B0_de, 0);
+                            &D_0025F56C, g_animationText, 0);
     out->data = resource;
     if (!func_802624D8_de(arg0)) {
         return 0;

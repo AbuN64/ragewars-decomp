@@ -142,11 +142,11 @@ extern void func_80411AF0_de(s32 i);
 
 typedef struct List List;
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E2AD0, an actor kind at D_800E2AD4 and a handler at D_800E2AD8: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at s_typeText, an actor kind at D_800E2AD4 and a handler at D_800E2AD8: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
 
 
 
-extern s32 D_800E2AD0;
+extern s32 s_typeText;
 
 extern s32 D_800E2AD4;
 
@@ -548,7 +548,7 @@ s32 func_804125A4_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         entry = (char *)&D_800E2AD8;
         offset = 0;
         do {
-            if (((struct Shape_typemap_3 *) (((char *) (&D_800E2AD0)) + offset))->field_0 == arg1) {
+            if (((struct Shape_typemap_3 *) (((char *) (&s_typeText)) + offset))->field_0 == arg1) {
                 actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
                 table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E2AD4)) + offset))->field_0;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {

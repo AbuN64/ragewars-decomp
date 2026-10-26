@@ -26,17 +26,17 @@ extern char D_800CBCC0;
 extern char D_800CBCF0_de;
 extern void Scene_MarkResourceInUse(s32, s32);
 extern void Camera_SetupViewportAndFog(Racer *);
-extern void func_802362E8_de(Racer *, s32);
+extern void Camera_DrawWorldViewLayers(Racer *, s32);
 extern void func_80239FD4_de(Racer *, s32);
-extern void func_80233C88_de(Racer *);
-extern void func_80238314_de(Race *, Racer *);
+extern void Camera_DrawViewportOverlays(Racer *);
+extern void Camera_DrawAndAdvanceMessages(Race *, Racer *);
 extern void func_804429D4_de(void *);
-extern void func_802372D4_de(Racer *);
+extern void Camera_DrawViewportBorder(Racer *);
 extern s32 Camera_IsSequenceActive(void);
 extern s32 Camera_IsSequenceInWindow(void);
-extern void func_8022A3F8_de(World_func_80236F1C_de *, Racer *);
+extern void func_8022A3F8_de(WorldCameraDrawActiveViews *, Racer *);
 /* Per-frame race update: clears three per-frame flags of the race's own racer, passes the race's first word to Scene_MarkResourceInUse, runs the 30-frame flash timer (restarted while D_80146894 is set or in mode 3) and while it runs clears the screen with a full-screen viewport, scissor and fill before func_8026D8F8_de, then updates every racer in the list until it ends or Camera_IsSequenceActive or Camera_IsSequenceInWindow reports, updates the race's own racer, hands the list to func_8022A3F8_de when the replay flag of D_80145040 is set, and passes the own racer's block at 0x554 to func_804429D4_de. */
-void func_80236F1C_de(Race *race, s32 arg1)
+void Camera_DrawActiveViews(Race *race, s32 world)
 {
     Racer *racer;
     race->self.hit = 0;
@@ -77,14 +77,14 @@ void func_80236F1C_de(Race *race, s32 arg1)
     }
     for (racer = race->header.views.head; racer != 0;) {
         Camera_SetupViewportAndFog(racer);
-        func_802362E8_de(racer, arg1);
+        Camera_DrawWorldViewLayers(racer, world);
         if (racer->effect != 0) {
             func_80239FD4_de(racer, racer->effectArg);
         }
-        func_80233C88_de(racer);
-        func_80238314_de(race, racer);
+        Camera_DrawViewportOverlays(racer);
+        Camera_DrawAndAdvanceMessages(race, racer);
         func_804429D4_de(racer->sound);
-        func_802372D4_de(racer);
+        Camera_DrawViewportBorder(racer);
         if (Camera_IsSequenceActive() != 0 || Camera_IsSequenceInWindow() != 0) {
             racer = 0;
         } else {
@@ -93,9 +93,9 @@ void func_80236F1C_de(Race *race, s32 arg1)
     }
     Camera_SetupViewportAndFog(&race->self);
     if (race->header.views.count == 0) {
-        func_80233C88_de(&race->self);
+        Camera_DrawViewportOverlays(&race->self);
     }
-    func_80238314_de(race, &race->self);
+    Camera_DrawAndAdvanceMessages(race, &race->self);
     if (D_80145040.replay != 0) {
         racer = race->header.views.head;
         if (racer != 0) {
@@ -106,7 +106,7 @@ void func_80236F1C_de(Race *race, s32 arg1)
 }
 
 
-void func_802372D4_de(Racer *racer) {
+void Camera_DrawViewportBorder(Racer *racer) {
     View *entity = (View *)racer;
     f32 x;
     f32 y;
@@ -331,7 +331,7 @@ extern void func_802A8F28_de(void *, s32, s32, s32, s32, s32, f32, f32);
 extern float Math_Sinf(float x);
 
 /* Draws and advances the screen messages of one view, retiring finished ones. */
-void func_80238314_de(Race *race, Racer *racer) {
+void Camera_DrawAndAdvanceMessages(Race *race, Racer *racer) {
     f32 scale;
     f32 width, height, x, y;
     f32 scaleY;

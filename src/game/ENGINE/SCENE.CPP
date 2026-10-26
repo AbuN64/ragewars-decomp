@@ -55,7 +55,7 @@ extern void World_ResetPlayerState();
 extern void Nav_AssignPlatformEndpoints();
 extern s32 Nav_FindNearestPointIndex();
 extern void * Weapons_GetPlayerByIndex();
-extern void func_80236874_de();
+extern void Camera_UpdateViewportLayoutAndBounds();
 extern int Camera_IsSequenceActive();
 extern void func_80246E44_de();
 extern void func_8024B2D0_de();
@@ -115,22 +115,22 @@ extern unsigned char D_801468A0[];
 
 
 
-extern unsigned char D_800C5104_de[];                          /* unable to generate initializer: unknown type; const */
+extern unsigned char s_matricesText[];                          /* unable to generate initializer: unknown type; const */
 
                           /* unable to generate initializer: unknown type; const */
-extern unsigned char D_800C511C_de[];                          /* unable to generate initializer: unknown type; const */
+extern unsigned char s_collisionText[];                          /* unable to generate initializer: unknown type; const */
 extern unsigned char D_800C5128_de[];                          /* unable to generate initializer: unknown type; const */
 extern unsigned char D_800C5134_de[];                          /* unable to generate initializer: unknown type; const */
-extern unsigned char D_800C5148_de[];                          /* unable to generate initializer: unknown type; const */
+extern unsigned char s_visibilityText[];                          /* unable to generate initializer: unknown type; const */
 extern unsigned char D_800C5154_de[];                          /* unable to generate initializer: unknown type; const */
-extern unsigned char D_800C5160_de[];                          /* unable to generate initializer: unknown type; const */
-extern unsigned char D_800C5168_de[];                          /* unable to generate initializer: unknown type; const */
-extern unsigned char D_800C5174_de[];                          /* unable to generate initializer: unknown type; const */
+extern unsigned char s_linksText[];                          /* unable to generate initializer: unknown type; const */
+extern unsigned char s_levelPathsText[];                          /* unable to generate initializer: unknown type; const */
+extern unsigned char s_levelInfoText[];                          /* unable to generate initializer: unknown type; const */
 extern unsigned char D_800C5180_de[];                          /* unable to generate initializer: unknown type; const */
 extern unsigned char D_800C5190_de[];                          /* unable to generate initializer: unknown type; const */
-extern unsigned char D_800C51A0_de[];                          /* unable to generate initializer: unknown type; const */
-extern unsigned char D_800C51B4_de[];                          /* unable to generate initializer: unknown type; const */
-extern unsigned char D_800C51C0_de[];                          /* unable to generate initializer: unknown type; const */
+extern unsigned char s_levelNavVisionText[];                          /* unable to generate initializer: unknown type; const */
+extern unsigned char s_skyLayersText[];                          /* unable to generate initializer: unknown type; const */
+extern unsigned char s_animatedInstancesText[];                          /* unable to generate initializer: unknown type; const */
 extern s32 D_800CC380;                          /* const */
 extern s32 D_800CD730;                          /* const */
 
@@ -409,12 +409,12 @@ scene_size_done:
         count += 0x200;
     }
     func_80253908_de(0);
-    temp_v0_4 = Scene_AllocateResource(0, count << 6, 3, &D_800C5104_de);
+    temp_v0_4 = Scene_AllocateResource(0, count << 6, 3, &s_matricesText);
     (((struct SharedRecAt1B92C *)(table))->unkE8) = (void *)temp_v0_4;
     Items_InitEntryBatch(&((struct SharedRecAt1B92C *)table)->address128, temp_v0_4->field_0, count);
     resourceKey = Render_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->unk4C), (((struct SharedRecAt1B92C *)(table))->unk1C), var_s6);
-    (((struct SharedRecAt1B92C *)(table))->unkB8) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->sceneResources, resourceKey, D_800C5110_de);
-    temp_v0_6 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 1, resourceKey, table, &D_0044C3D4, &D_800C511C_de);
+    (((struct SharedRecAt1B92C *)(table))->unkB8) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->sceneResources, resourceKey, g_levelIndexText);
+    temp_v0_6 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 1, resourceKey, table, &D_0044C3D4, &s_collisionText);
     (((struct SharedRecAt1B92C *)(table))->unkBC) = temp_v0_6;
     (((struct SharedRecAt1B92C *)(table))->unk6C) = (void *) *temp_v0_6;
     temp_v0_7 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 4, resourceKey, table, &D_00285160, &D_800C5128_de);
@@ -426,7 +426,7 @@ scene_size_done:
     if (*(((struct SharedRecAt1B92C *)(table))->sceneResources) >= 0xD) {
         temp_v0_9 = Render_GetDirectoryEntry((((struct SharedRecAt1B92C *)(table))->sceneResources), resourceKey, 0xC);
         (((struct SharedRecAt1B92C *)(table))->unk40) = temp_v0_9;
-        (((struct SharedRecAt1B92C *)(table))->unk100) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->unk8C, temp_v0_9, &D_800C5148_de);
+        (((struct SharedRecAt1B92C *)(table))->unk100) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->unk8C, temp_v0_9, &s_visibilityText);
         temp_v0_10 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk8C), 0, (((struct SharedRecAt1B92C *)(table))->unk40), table, 0, &D_800C5154_de);
         temp_v1_5 = *temp_v0_10;
         *(struct SharedRecAt14 *)&((struct SharedRecAt1B92C *)table)->unk1B910 = *temp_v1_5;
@@ -439,9 +439,9 @@ scene_size_done:
     } else {
         (((struct SharedRecAt1B92C *)(table))->unk1B92C) = 0;
     }
-    (((struct SharedRecAt1B92C *)(table))->unkD4) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 7, resourceKey, table, &D_0044C108, &D_800C5160_de);
-    (((struct SharedRecAt1B92C *)(table))->unkEC) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 2, resourceKey, table, &D_0044DA54, &D_800C5168_de);
-    temp_v0_11 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 0, resourceKey, table, 0, &D_800C5174_de);
+    (((struct SharedRecAt1B92C *)(table))->unkD4) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 7, resourceKey, table, &D_0044C108, &s_linksText);
+    (((struct SharedRecAt1B92C *)(table))->unkEC) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 2, resourceKey, table, &D_0044DA54, &s_levelPathsText);
+    temp_v0_11 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 0, resourceKey, table, 0, &s_levelInfoText);
     (((struct SharedRecAt1B92C *)(table))->unkC8) = temp_v0_11;
     (((struct SharedRecAt1B92C *)(table))->unk1B2B0) = (void *) *temp_v0_11;
     Items_LoadSceneLight(table);
@@ -474,13 +474,13 @@ scene_size_done:
         }
     }
     if (*(((struct SharedRecAt1B92C *)(table))->sceneResources) >= 0xC) {
-        temp_v0_17 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 0xB, resourceKey, table, &D_00285160, &D_800C51A0_de);
+        temp_v0_17 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 0xB, resourceKey, table, &D_00285160, &s_levelNavVisionText);
         (((struct SharedRecAt1B92C *)(table))->unkFC) = temp_v0_17;
         temp_v0_18 = *temp_v0_17;
         (((struct SharedRecAt1B92C *)(table))->unk1B4EC) = temp_v0_18;
         (((struct SharedRecAt1B92C *)(table))->unk1B4F0) = (s32) temp_v0_18->unk4;
     }
-    temp_v0_19 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 6, resourceKey, table, &D_00285160, &D_800C51B4_de);
+    temp_v0_19 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 6, resourceKey, table, &D_00285160, &s_skyLayersText);
     (((struct SharedRecAt1B92C *)(table))->unkCC) = temp_v0_19;
     temp_v1_6 = *temp_v0_19;
     (((struct SharedRecAt1B92C *)(table))->unk1B300) = (void *) (&((struct SharedRecAt8V1 *)temp_v1_6)->address8);
@@ -488,7 +488,7 @@ scene_size_done:
     (((struct SharedRecAt1B92C *)(table))->unk0) = 1;
     (((struct SharedRecAt1B92C *)(table))->unk138) = 0;
     (((struct SharedRecAt1B92C *)(table))->unk140) = 0;
-    (((struct SharedRecAt1B92C *)(table))->unkD0) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 3, resourceKey, table, &D_0044C7B8, &D_800C51C0_de);
+    (((struct SharedRecAt1B92C *)(table))->unkD0) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->sceneResources), 3, resourceKey, table, &D_0044C7B8, &s_animatedInstancesText);
     func_80286950_de(table);
     
     i = 0;
@@ -699,7 +699,7 @@ block_122:
     func_80449E18_de(&D_80145040);
     group = &D_80145040.object;
     Items_InitGroupPools(group);
-    func_80236874_de(group);
+    Camera_UpdateViewportLayoutAndBounds(group);
 }
 
 /* Native resident constant storage; absolute access symbols retain their addresses. */

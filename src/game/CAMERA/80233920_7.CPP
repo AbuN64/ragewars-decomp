@@ -44,7 +44,7 @@ extern void Render_SetModePreset(s32);
 
 
 
-void func_802362E8_de(char *view, char *world) {
+void Camera_DrawWorldViewLayers(char *view, char *world) {
     f32 right;
 
     func_802909F0_de();

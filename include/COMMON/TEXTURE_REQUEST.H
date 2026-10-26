@@ -6,7 +6,7 @@
 #if defined(VERSION_US_REV1)
 extern s32 D_800D2AE0;
 extern char D_auto_00295B90;
-extern char D_auto_800CA680[];
+extern char s_textureText[];
 #else
 extern char D_00294C90;
 extern char D_800C54F0_de[];
@@ -18,10 +18,10 @@ static __inline__ void *rw_request_texture(s32 *resource, s32 variation, s32 wai
     if (D_800D2AE0 == 0) {
         return Scene_RequestResource(0, resource[0] + variation + D_800CD894_de * 128,
                               resource[0], resource[1], 0, variation,
-                              &D_auto_00295B90, D_auto_800CA680, wait);
+                              &D_auto_00295B90, s_textureText, wait);
     }
     return Scene_RequestResource(0, resource[0] - 1, resource[0], resource[1],
-                          0, -1, &D_auto_00295B90, D_auto_800CA680, wait);
+                          0, -1, &D_auto_00295B90, s_textureText, wait);
 #else
     return Scene_RequestResource(0, resource[0] + variation + D_800CD894_de * 128,
                           resource[0], resource[1], 0, variation,
@@ -36,10 +36,10 @@ static __inline__ void **rw_request_texture_sync(s32 *resource, s32 variation)
     if (D_800D2AE0 == 0) {
         return Scene_RequestResource(0, resource[0] + variation + D_800CD894_de * 128,
                               resource[0], resource[1], 0, variation,
-                              &D_auto_00295B90, D_auto_800CA680, 1);
+                              &D_auto_00295B90, s_textureText, 1);
     }
     return Scene_RequestResource(0, resource[0] - 1, resource[0], resource[1],
-                          0, -1, &D_auto_00295B90, D_auto_800CA680, 1);
+                          0, -1, &D_auto_00295B90, s_textureText, 1);
 #else
     return Scene_RequestResource(0, resource[0] + variation + D_800CD894_de * 128,
                           resource[0], resource[1], 0, variation,

@@ -7,27 +7,27 @@
 
 
 extern s32 D_800CD8D0[];
-void func_80238EB8_de(State44 *arg0) {
-    f32 temp_f0;
-    CVector3 *temp_v0;
+void func_80238EB8_de(State44 *effectState) {
+    f32 zeroValue;
+    CVector3 *vectorDefaults;
 
-    arg0->unk_20.i = 0;
-    temp_f0 = arg0->unk_20.f;
-    arg0->unk_0 = 1;
-    temp_v0 = &arg0->v;
-    arg0->unk_4 = 0;
-    arg0->unk_8 = 0;
-    arg0->unk_C = 0;
-    arg0->unk_10 = 0;
-    arg0->unk_14 = 0;
-    arg0->unk_18 = 0;
-    arg0->unk_1C = 0;
-    temp_v0->z = temp_f0;
-    temp_v0->y = temp_f0;
-    arg0->v.x = temp_f0;
-    arg0->unk_30 = 1.0f;
-    arg0->unk_34 = 0;
-    arg0->unk_38 = temp_f0;
-    arg0->unk_3C = 0.174532949924469f;
-    arg0->unk_40 = (s32) *D_800CD8D0;
+    effectState->unk_20.i = 0;
+    zeroValue = effectState->unk_20.f;
+    effectState->unk_0 = 1;
+    vectorDefaults = &effectState->v;
+    effectState->unk_4 = 0;
+    effectState->unk_8 = 0;
+    effectState->unk_C = 0;
+    effectState->unk_10 = 0;
+    effectState->unk_14 = 0;
+    effectState->unk_18 = 0;
+    effectState->unk_1C = 0;
+    vectorDefaults->z = zeroValue;
+    vectorDefaults->y = zeroValue;
+    effectState->v.x = zeroValue;
+    effectState->unk_30 = 1.0f;
+    effectState->unk_34 = 0;
+    effectState->unk_38 = zeroValue;
+    effectState->unk_3C = 0.174532949924469f;
+    effectState->unk_40 = (s32) *D_800CD8D0;
 }

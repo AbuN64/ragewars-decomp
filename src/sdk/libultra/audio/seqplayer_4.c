@@ -5,7 +5,7 @@
 #include "AUDIO_3/802BFD40.H"
 
 extern char D_800C7440;
-extern char D_800C7444;
+extern char g_audioSeqplayerText;
 
 
 
@@ -28,7 +28,7 @@ void *func_802B16E0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     high = table->soundCount;
     low = 1;
     if (table == 0) {
-        Audio_Assert(&D_800C7440, &D_800C7444, 0x376);
+        Audio_Assert(&D_800C7440, &g_audioSeqplayerText, 0x376);
     }
 
     if (high > 0) {

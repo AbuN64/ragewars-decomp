@@ -51,7 +51,7 @@ static inline int select_key(DescriptorRecAt24 *descriptor, u32 timer) {
  * only type 8 when all is clear) transforms its offset by the object's matrix at 0x68 and starts the
  * attachment's effect at that point through func_80265E10_de, releasing both resources afterwards. */
 
-extern char D_800C3E5C_de;
+extern char g_statObjectIndexText;
 
 #if defined(VERSION_DE)
 #elif defined(VERSION_EU)
@@ -260,7 +260,7 @@ void func_80250624_de(void *object, s32 all) {
     s32 i;
 
     model = Scene_RequestResource(0, ((PlacedProp *)object)->owner, ((PlacedProp *)object)->owner, 0x18, 4, 0, 0,
-                          &D_800C3E5C_de, 0);
+                          &g_statObjectIndexText, 0);
     if (model == 0) {
         return;
     }

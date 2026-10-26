@@ -32,5 +32,5 @@ unsigned short rodata_unresolved_800C3EAE[1] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_8025305C_C9B98_us_rev1.c */
-const char D_blob_66a6a2bbfb831a34114b[6] = "alloc";
+const char s_allocText[6] = "alloc";
 #endif

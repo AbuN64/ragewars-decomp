@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-char func_80423A40_de_padding_191C18[8] =
+char s_athNormText[8] =
     "ATH_NORM";
 #endif
 

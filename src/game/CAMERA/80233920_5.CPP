@@ -28,7 +28,7 @@ extern void Nav_ComputePointBounds(void *, s32, CVector3 *);
 
 
 
-void func_80234DE0_de(GameplayCamera *camera) {
+void Camera_UpdateFrustumBounds(GameplayCamera *camera) {
     CVector3 pts[5];
     CVector3 *out;
     f32 radius;

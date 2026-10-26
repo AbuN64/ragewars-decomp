@@ -6,7 +6,7 @@
 #include "IO/80200568.H"
 #include "sdk/os.h"
 
-void func_80200CA0_de(s32 arg0, unsigned char arg1)
+void Libsn_WriteTransferPortByte(s32 arg0, unsigned char arg1)
 {
   int new_var;
   s32 temp_s2;
@@ -19,16 +19,16 @@ void func_80200CA0_de(s32 arg0, unsigned char arg1)
 #include "COMMON/EXTERNS_15.H"
 #include "TYPES.H"
 
-extern void func_80200C28_de(s32 address, s32 value);
+extern void Libsn_WritePortByte(s32 address, s32 value);
 extern void Libsn_WritePortWord(s32 address, s32 value);
 
 /* Copy an arbitrary byte buffer to a PI range, packing big-endian words. */
-void func_80200D18_de(s32 address, const u8 *source, u32 length)
+void Libsn_WritePortBuffer(s32 address, const u8 *source, u32 length)
 {
   u32 word;
   while ((length != 0) && ((address & 3) != 0))
   {
-    func_80200C28_de(address++, *(source++));
+    Libsn_WritePortByte(address++, *(source++));
  do { } while (0);
     length--;
   }
@@ -47,7 +47,7 @@ void func_80200D18_de(s32 address, const u8 *source, u32 length)
   }
   while (length != 0)
   {
-    func_80200C28_de(address++, *(source++));
+    Libsn_WritePortByte(address++, *(source++));
     length--;
   }
 
@@ -59,15 +59,15 @@ extern s32 D_800C8140_de;
 struct OSIoMesg;
 extern struct OSIoMesg D_800F2CE0;
 extern OSMesgQueue D_800F2CC0;
-extern void func_80200CA0_de(s32, u8);
+extern void Libsn_WriteTransferPortByte(s32, u8);
 extern s32 func_802B8CF0_de(struct OSIoMesg *, s32, s32, u32, void *, u32, OSMesgQueue *);
 
 /* Write an arbitrary byte stream to the device, using DMA when aligned
  * and falling back to byte/word writes if the DMA request is unavailable. */
-void func_80200E04_de(u32 address, u8 *source, u32 remaining) {
+void Libsn_WritePortBufferWithDma(u32 address, u8 *source, u32 remaining) {
     s32 dmaResult = -(D_800C8140_de == 0);
     while (remaining != 0 && (address & 3) != 0) {
-        func_80200CA0_de(address++, *source++);
+        Libsn_WriteTransferPortByte(address++, *source++);
         remaining--;
     }
     while (remaining >= 4) {
@@ -87,7 +87,7 @@ void func_80200E04_de(u32 address, u8 *source, u32 remaining) {
         }
     }
     while (remaining != 0) {
-        func_80200CA0_de(address++, *source++);
+        Libsn_WriteTransferPortByte(address++, *source++);
         remaining--;
     }
 }

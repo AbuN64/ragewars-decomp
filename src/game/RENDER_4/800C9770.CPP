@@ -30,7 +30,7 @@ unsigned short rodata_unresolved_800C4692[1] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-const char D_auto_src_rw_text_8026C484_CA370_us_rev1[18] = "simp models index";
+const char s_simpModelsIndexText[18] = "simp models index";
 #endif
 
 #if defined(VERSION_US_REV1)

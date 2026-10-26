@@ -7,5 +7,5 @@
 #include "COMMON/OSPIHANDLE_S.H"
 
 extern s32 D_800C7950_de;
-extern s32 D_800C7954_de;
+extern s32 s_epirawreadText;
 #endif

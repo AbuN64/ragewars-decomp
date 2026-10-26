@@ -5,5 +5,5 @@ unsigned int D_blob_1c741b377115af689634[1] = {
     0x800E6178,
 };
 
-char D_auto_src_ragewars_resident_strings_E6D94_us_rev1[24] = "fancy lighting:   off";
+char s_fancyLightingOffText[24] = "fancy lighting:   off";
 #endif

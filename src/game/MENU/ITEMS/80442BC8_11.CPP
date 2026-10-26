@@ -37,7 +37,7 @@ void func_804431E4_de(struct ObjectRecAt20 *object) {
 
 
 extern void **Scene_AllocateResource(s32, s32, s32, char *);
-extern char D_800DE4EC_de[];
+extern char g_menuText[];
 
 void *Items_CreateMenu(struct func_8025E5B0_S1 *owner, struct Dialog *list, s32 a, s32 b, s32 c, s32 d) {
     s32 size = list->count * 40 + 0x1D8;
@@ -52,7 +52,7 @@ void *Items_CreateMenu(struct func_8025E5B0_S1 *owner, struct Dialog *list, s32 
         }
         size += extra;
     }
-    block = Scene_AllocateResource(0, size, 0x3B, D_800DE4EC_de);
+    block = Scene_AllocateResource(0, size, 0x3B, g_menuText);
     if (block == 0) {
         return 0;
     }

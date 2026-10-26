@@ -32,7 +32,7 @@ unsigned short rodata_unresolved_800C5166[1] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_80286AA8_CAE50_us_rev1.c */
-const char D_blob_7b20c7c5cce5d400fe67[6] = "links";
+const char s_linksText[6] = "links";
 #endif
 
 #if defined(VERSION_US_REV1)

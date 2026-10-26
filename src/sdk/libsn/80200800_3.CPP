@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "IO/80200568.H"
 
-void func_80200C28_de(s32 arg0, unsigned char arg1)
+void Libsn_WritePortByte(s32 arg0, unsigned char arg1)
 {
   s32 temp_s0;
   s32 temp_s2;

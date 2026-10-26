@@ -90,7 +90,7 @@ s32 func_802B2CF0_de(s32 val, f32 div) {
     s32 result;
 
     if (div == 0.0f) {
-        Audio_Assert(D_800C7548, D_800C754C, 0x11D);
+        Audio_Assert(D_800C7548, s_audioSndplayerText, 0x11D);
     }
 
     result = 0x7FFFFFFF;

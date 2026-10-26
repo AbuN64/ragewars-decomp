@@ -554,9 +554,9 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
    along the body heading with the player's angles and sway and the aim zoom at 0x7EC, and mode 2 orbits the player at the angle
    D_800C9FA0_de and distance D_800CAB88_eu, which input bits 0x200 and 0x100 turn and 0x800 and 0x400 pull
    in and push out; the camera is set through func_80238F24_de and the view refreshed through
-   func_80234FEC_de before the player is updated through func_8021D774_de. */
+   Camera_UpdateViewProjectionAndEffects before the player is updated through func_8021D774_de. */
 extern void func_80238F24_de(void *, s32, f32, f32, f32, f32, f32, f32, f32, f32, Shared_Quad, s32, f32, f32);
-extern void func_80234FEC_de(void *);
+extern void Camera_UpdateViewProjectionAndEffects(void *);
 extern void func_8021D774_de(PlayerWeaponsUpdatePlayerCamera *);
 
 
@@ -588,7 +588,7 @@ void Weapons_UpdatePlayerCamera(PlayerWeaponsUpdatePlayerCamera *player, BodyWea
                           body->z + D_800CAB88_eu * Math_Cosf(angle), 0.0f, body->rotation, body->room,
                           0.0f, 3.0f);
         }
-        func_80234FEC_de(view);
+        Camera_UpdateViewProjectionAndEffects(view);
     }
     func_8021D774_de(player);
 }

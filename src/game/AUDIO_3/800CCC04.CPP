@@ -36,5 +36,5 @@ unsigned short rodata_unresolved_800C79C2[7] = {
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_802B9FD0_CD804_us_rev1.c */
-const char D_blob_f285d2215453b80d0441[14] = "io/sprawdma.c";
+const char s_sprawdmaText[14] = "io/sprawdma.c";
 #endif

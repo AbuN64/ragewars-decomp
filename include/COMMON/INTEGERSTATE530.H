@@ -132,7 +132,7 @@ extern MenuElementHandler FindKindHandler(s32 kind);
 
 struct ArgsCode80296014;
 
-extern int D_800CD8E0;
+extern int s_smackFormat;
 
 
 struct Element;

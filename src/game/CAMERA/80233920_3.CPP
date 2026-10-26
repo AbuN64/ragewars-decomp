@@ -11,7 +11,7 @@
 extern s32 D_800CD730;
 extern void *func_8028B2F8_de(Shared_World *, u16 *);
 
-void func_802343C8_de(View *self) {
+void Camera_BlendEnvironmentColors(View *self) {
     u8 target[4];
     ColorBlendRecord *rec;
     SharedPlayer *node;

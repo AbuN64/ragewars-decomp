@@ -72,7 +72,7 @@ void func_80286080_de(void *arg0) {
         func_802285E8_de(&D_80145040);
     }
 
-    func_80236F1C_de(&D_80145088, state);
+    Camera_DrawActiveViews(&D_80145088, state);
     if ((state->frozen == 0) && (D_80145088.status[7] == 0)) {
         func_8028D67C_de(state);
     }

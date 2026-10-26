@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-char func_80212E24_eu_x_padding_13A04[12] =
+char s_firePodReaText[12] =
     "FIRE_POD_REA";
 #endif
 

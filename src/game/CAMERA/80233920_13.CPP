@@ -9,10 +9,10 @@ extern FuncPtr D_800CB380_de[][2];
 
 
 
-void func_802390F4_de(void *gameplayCamera, s16 arg1) {
+void func_802390F4_de(void *gameplayCamera, s16 requestedMode) {
     FuncPtr fn;
 
-    ((GameplayCamera *)gameplayCamera)->mode = arg1;
+    ((GameplayCamera *)gameplayCamera)->mode = requestedMode;
     ((GameplayCamera *)gameplayCamera)->elapsed = 0;
     ((GameplayCamera *)gameplayCamera)->state = 0;
     ((GameplayCamera *)gameplayCamera)->stateCounter = 0;

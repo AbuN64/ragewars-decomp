@@ -5,7 +5,7 @@
 /* gcc-2.8.1 libgcc2 __umoddi3 compiled in place: the remainder libcall of u64 '%'. */
 #define L_umoddi3
 #if defined(VERSION_US)
-#define LIBGCC2_EXTERNAL_CLZ D_auto_rodata_unresolved_800C7C18_0C8A20_0C8B20
+#define LIBGCC2_EXTERNAL_CLZ s_ambiencText
 #else
 #define LIBGCC2_EXTERNAL_CLZ D_auto_src_rw_u64_remainder_normalization_width_us_rev1
 #endif

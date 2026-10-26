@@ -185,12 +185,12 @@ typedef struct Owner_func_80250274_de Owner_func_80250274_de;
 
 
 extern char D_0024F8DC;
-extern char D_800C3DAC_de[];
-extern char D_800C8ED0;
+extern char g_simpObjectIndexText[];
+extern char s_litVerticesText;
 
 typedef struct ResourceOwner { u8 pad0[0x1c]; s32 key; u8 pad20[0x88]; s32 index; s32 selected; s32 size; void *resource; } ResourceOwner;
-extern char D_800C8F70[];
-extern char D_800C3E94_de[];
+extern char s_statModelsIndexText[];
+extern char s_statModelText[];
 extern char D_0026D7D4_de[];
 
 extern char D_800C3E70[];

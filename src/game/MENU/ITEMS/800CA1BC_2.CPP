@@ -2,11 +2,11 @@
 
 #if !(defined(VERSION_US_REV1))
 #if defined(VERSION_DE)
-const char D_8044D0F0_CADBC[24] =
+const char s_gamePersistentDataText[24] =
     "game persistent data\000\000\000\000";
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
-const char D_8044D0F0_CADBC[21] =
+const char s_gamePersistentDataText[21] =
     "game persistent data\000";
 #endif
 #endif

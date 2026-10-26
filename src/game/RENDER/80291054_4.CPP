@@ -31,7 +31,7 @@
 #include "SYSTEM/80296FF8_6.H"
 #include "SYSTEM_3/80265370_3.H"
 #include "sdk/os.h"
-extern void func_80236874_de(RaceViewportState *);
+extern void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *);
 extern void func_8029311C_de(void *, u8 *, s32,s32,s32,s32);
 extern void Render_ClearDepthRect(void *, s32,s32,s32,s32,s32);
 extern void Render_SubmitFrameTasks(TimingWorld *,Frame *);
@@ -67,7 +67,7 @@ void func_80292308_de(TimingWorld *world) {
     Render_BeginFrameDisplayList(world);
     func_80265DD0_de();
     func_80263C24_de();
-    func_80236874_de(&world->viewport);
+    Camera_UpdateViewportLayoutAndBounds(&world->viewport);
     func_80293268_de(world);
     draw = D_800CD790[world->unk26DB8].draw;
     if (draw != 0) {

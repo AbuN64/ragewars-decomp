@@ -40,80 +40,80 @@ typedef struct TransformWorld {
     CShake *effects;
 } TransformWorld;
 
-void func_802349C0_de(void *arg0) {
-    TransformActor *actor=arg0;
+void Camera_BuildShakenViewTransform(void *cameraTransform) {
+    TransformActor *actor=cameraTransform;
     Rotation q18,q28,q38,q48,q58;
     f32 m68[16],mA8[16],mE8[16],m128[16],m168[16],m1A8[16];
-    CVector3 sp1E8,result,transformed;
+    CVector3 viewMotionOffsets,result,transformed;
     f32 zero,cosineInput;
     CShake *effect;
-    f32 *temp_s3;
+    f32 *baseQuaternion;
     f32 *matrix;
-    f32 temp_fs0;
-    f32 temp_fs0_2;
-    f32 temp_fs0_3;
-    f32 temp_fs0f;
-    f32 temp_fv0;
-    f32 temp_fv0_2;
-    f32 temp_fv0_3;
-    f32 temp_fv0_4;
-    f32 temp_fv0_5;
-    f32 temp_fv0_6;
-    f32 var_fs1;
-    f32 var_fs1f;
-    void *temp_s0;
+    f32 rollHalfAngle;
+    f32 pitchHalfAngle;
+    f32 sequenceAngleScale;
+    f32 gameplayAngleScale;
+    f32 rollHalfSine;
+    f32 pitchHalfSine;
+    f32 yawHalfSine;
+    f32 sequenceRollHalfSine;
+    f32 sequencePitchHalfSine;
+    f32 sequenceYawHalfSine;
+    f32 adjustedPitch;
+    f32 adjustedRoll;
+    void *combinedQuaternion;
 
     if (actor->enabled != 0) {
-        var_fs1 = actor->pitch;
-        var_fs1f = actor->roll;
+        adjustedPitch = actor->pitch;
+        adjustedRoll = actor->roll;
         if (Camera_IsSequenceInWindow() == 0) {
-            func_80239EA4_de(arg0, &sp1E8);
-            var_fs1f += sp1E8.z;
-            temp_fs0f = D_800C31F8_de;
-            temp_fs0 = var_fs1f * temp_fs0f;
-            var_fs1 += sp1E8.x;
-            temp_fv0 = Math_Sinf(temp_fs0);
-            temp_fs0_2 = var_fs1 * temp_fs0f;
-            D_80115DEC = temp_fv0;
+            func_80239EA4_de(cameraTransform, &viewMotionOffsets);
+            adjustedRoll += viewMotionOffsets.z;
+            gameplayAngleScale = D_800C31F8_de;
+            rollHalfAngle = adjustedRoll * gameplayAngleScale;
+            adjustedPitch += viewMotionOffsets.x;
+            rollHalfSine = Math_Sinf(rollHalfAngle);
+            pitchHalfAngle = adjustedPitch * gameplayAngleScale;
+            D_80115DEC = rollHalfSine;
             q38.word[0] = 0;
             q38.word[1] = 0;
-            q38.f[2] = temp_fv0;
-            q38.f[3] = Math_Cosf(temp_fs0);
-            temp_fv0_2 = Math_Sinf(temp_fs0_2);
-            D_80115DEC = temp_fv0_2;
-            q18.f[0] = temp_fv0_2;
+            q38.f[2] = rollHalfSine;
+            q38.f[3] = Math_Cosf(rollHalfAngle);
+            pitchHalfSine = Math_Sinf(pitchHalfAngle);
+            D_80115DEC = pitchHalfSine;
+            q18.f[0] = pitchHalfSine;
             q18.word[1] = 0;
             q18.word[2] = 0;
-            q18.f[3] = Math_Cosf(temp_fs0_2);
-            temp_s0 = actor->combined.f;
-            temp_fv0_3 = Math_Sinf((actor->yaw + actor->extraYaw) * temp_fs0f);
+            q18.f[3] = Math_Cosf(pitchHalfAngle);
+            combinedQuaternion = actor->combined.f;
+            yawHalfSine = Math_Sinf((actor->yaw + actor->extraYaw) * gameplayAngleScale);
             q28.word[0] = 0;
-            q28.f[1] = temp_fv0_3;
+            q28.f[1] = yawHalfSine;
             q28.word[2] = 0;
-            cosineInput = ((actor->yaw + actor->extraYaw) * temp_fs0f);
-            D_80115DEC = temp_fv0_3;
-            temp_s3 = actor->base.f;
+            cosineInput = ((actor->yaw + actor->extraYaw) * gameplayAngleScale);
+            D_80115DEC = yawHalfSine;
+            baseQuaternion = actor->base.f;
             q28.f[3] = Math_Cosf(cosineInput);
             MultiplyQuaternions(q48.f, q18.f, q28.f);
-            MultiplyQuaternions(temp_s0, q48.f, temp_s3);
-            MultiplyQuaternions(actor->rotation.f, q38.f, temp_s0);
+            MultiplyQuaternions(combinedQuaternion, q48.f, baseQuaternion);
+            MultiplyQuaternions(actor->rotation.f, q38.f, combinedQuaternion);
             MultiplyQuaternions(q58.f, q38.f, q48.f);
             MatrixFromQuaternion(q58.f, m68);
             zero=0.0f;
             Particle_BuildTranslationMatrix(mA8, zero, actor->height, zero);
-            MatrixFromQuaternion(temp_s3, mE8);
+            MatrixFromQuaternion(baseQuaternion, mE8);
             result.x = zero;
             result.y = zero;
             result.z = zero;
-            func_80233930_de(&actor->effect, actor->effect.m_vPos, &result);
+            Camera_AccumulateDistanceScaledShake(&actor->effect, actor->effect.m_vPos, &result);
             func_802337D0_de(&actor->effect.x);
             func_802337D0_de(&actor->effect.y);
             func_802337D0_de(&actor->effect.z);
-            if (arg0 != &D_80141008) {
+            if (cameraTransform != &D_80141008) {
                 effect = ((TransformWorld*)(void*)&D_80141008)->effects;
                 if (effect != 0) {
                     do {
-                        func_80233930_de(effect, actor->position.value, &result);
+                        Camera_AccumulateDistanceScaledShake(effect, actor->position.value, &result);
                         effect = effect->next;
                     } while (effect != 0);
                 }
@@ -125,32 +125,32 @@ void func_802349C0_de(void *arg0) {
             Rsp_MultiplyAffineMatrices(matrix, m168, mE8);
             Particle_BuildTranslationMatrix(m128,
                 actor->position.value.x + transformed.x,
-                actor->position.value.y + sp1E8.y + transformed.y,
+                actor->position.value.y + viewMotionOffsets.y + transformed.y,
                 actor->position.value.z + transformed.z);
             Rsp_MultiplyAffineMatrices(actor->matrix, matrix, m128);
         } else {
             cosineInput = actor->roll;
-            temp_fs0_3 = D_800C31FC_de;
-            temp_fv0_4 = Math_Sinf(cosineInput * temp_fs0_3);
+            sequenceAngleScale = D_800C31FC_de;
+            sequenceRollHalfSine = Math_Sinf(cosineInput * sequenceAngleScale);
             q38.word[0] = 0;
             q38.word[1] = 0;
-            q38.f[2] = temp_fv0_4;
-            cosineInput = (actor->roll * temp_fs0_3);
-            D_80115DEC = temp_fv0_4;
+            q38.f[2] = sequenceRollHalfSine;
+            cosineInput = (actor->roll * sequenceAngleScale);
+            D_80115DEC = sequenceRollHalfSine;
             q38.f[3] = Math_Cosf(cosineInput);
-            temp_fv0_5 = Math_Sinf(actor->pitch * temp_fs0_3);
-            q18.f[0] = temp_fv0_5;
+            sequencePitchHalfSine = Math_Sinf(actor->pitch * sequenceAngleScale);
+            q18.f[0] = sequencePitchHalfSine;
             q18.word[1] = 0;
             q18.word[2] = 0;
-            cosineInput = (actor->pitch * temp_fs0_3);
-            D_80115DEC = temp_fv0_5;
+            cosineInput = (actor->pitch * sequenceAngleScale);
+            D_80115DEC = sequencePitchHalfSine;
             q18.f[3] = Math_Cosf(cosineInput);
-            temp_fv0_6 = Math_Sinf((actor->yaw + actor->extraYaw) * temp_fs0_3);
+            sequenceYawHalfSine = Math_Sinf((actor->yaw + actor->extraYaw) * sequenceAngleScale);
             q28.word[0] = 0;
-            q28.f[1] = temp_fv0_6;
+            q28.f[1] = sequenceYawHalfSine;
             q28.word[2] = 0;
-            cosineInput = ((actor->yaw + actor->extraYaw) * temp_fs0_3);
-            D_80115DEC = temp_fv0_6;
+            cosineInput = ((actor->yaw + actor->extraYaw) * sequenceAngleScale);
+            D_80115DEC = sequenceYawHalfSine;
             q28.f[3] = Math_Cosf(cosineInput);
             MultiplyQuaternions(q48.f, q18.f, q28.f);
             actor->combined=q48;
@@ -160,8 +160,8 @@ void func_802349C0_de(void *arg0) {
             Rsp_MultiplyAffineMatrices(actor->matrix, m68, m128);
         }
 
-        actor->cached.x = var_fs1;
-        actor->cached.z = var_fs1f;
+        actor->cached.x = adjustedPitch;
+        actor->cached.z = adjustedRoll;
         actor->cached.y = (f32) actor->yaw;
     }
 }

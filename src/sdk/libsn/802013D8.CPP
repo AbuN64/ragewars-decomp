@@ -5,14 +5,14 @@
 
 #include "IO/DEBUG_MEMORY.H"
 extern u8 D_800F3452;
-extern s32 func_80200500_de(void);
+extern s32 Libsn_DisableInterrupts(void);
 extern void func_802022E0_de(void);
 extern void Libsn_WritePortWord(s32, s32);
 
-void func_802013E0_de(void) {
+void Libsn_InitializeHostMemoryAccess(void) {
     s32 saved;
     u32 size;
-    saved = func_80200500_de();
+    saved = Libsn_DisableInterrupts();
     func_802022E0_de();
     Libsn_WritePortWord(0xB1FFFFF0, 0);
     Libsn_WritePortWord(0xB1FFFFFC, 0);
@@ -26,14 +26,14 @@ void func_802013E0_de(void) {
             D_800CB3A0[3].last = size + 0xA0000000;
         }
     }
-    func_80200538_de(saved);
+    Libsn_RestoreInterruptEnable(saved);
 }
 
 extern int Libgultra_TrwGetSr(void);
 extern void Libgultra_TrwSetSr(int);
 extern s32 Libsn_ReadPortWord(s32);
 extern void Libsn_SpinDelay(s32);
-extern void func_802010D8_de(u32);
+extern void Libsn_TransferHostMemoryRanges(u32);
 extern void Io_CopyHostBlockToCart(void);
 extern u32 D_800F32A8;
 
@@ -85,10 +85,10 @@ void Libsn_ServiceHostCommands(void) {
             Libsn_WritePortWord(0xB1FE0000, (D_800F3452 << 24) | ((u8)D_800F3450 << 16));
             break;
         case 0x17:
-            func_802010D8_de(2);
+            Libsn_TransferHostMemoryRanges(2);
             break;
         case 0x18:
-            func_802010D8_de(1);
+            Libsn_TransferHostMemoryRanges(1);
             break;
         case 0x19:
             Io_CopyHostBlockToCart();

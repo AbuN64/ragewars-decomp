@@ -76,8 +76,8 @@ struct UnitVp {
 
 
 
-struct World_func_80236F1C_de;
-typedef struct World_func_80236F1C_de World_func_80236F1C_de;
+struct WorldCameraDrawActiveViews;
+typedef struct WorldCameraDrawActiveViews WorldCameraDrawActiveViews;
 
 
 
@@ -128,8 +128,8 @@ struct Racer {
     IntrusiveList activeMessages; /* 0xE40 */
 };
 
-struct World_func_80236F1C_de;
-struct World_func_80236F1C_de {
+struct WorldCameraDrawActiveViews;
+struct WorldCameraDrawActiveViews {
     char pad0[0x12A5];
     u8 replay;
 };

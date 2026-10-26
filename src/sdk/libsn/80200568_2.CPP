@@ -5,7 +5,7 @@
 
 extern volatile s32 D_800F1C80_de;
 
-void Libsn_SpinDelay(s32 arg0) {
-    for (D_800F1C80_de = 0; D_800F1C80_de < arg0; D_800F1C80_de++) {
+void Libsn_SpinDelay(s32 iterationCount) {
+    for (D_800F1C80_de = 0; D_800F1C80_de < iterationCount; D_800F1C80_de++) {
     }
 }

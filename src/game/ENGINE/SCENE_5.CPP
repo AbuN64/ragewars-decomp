@@ -460,7 +460,7 @@ static inline s32 transitionId(Shared_World *scene) {
 }
 void Scene_UpdateSelectionTransition(Shared_World *scene)
 {
-    ColorEntry *entry = &D_800CD6E4_de[scene->selectionState];
+    ColorEntry *entry = &g_emacText[scene->selectionState];
     s32 id;
     MenuSettings *settings;
     switch (scene->frozen) {
@@ -527,7 +527,7 @@ typedef struct LevelChallenge {
 } LevelChallenge;
 extern ResultsCourse *D_800E4680;
 extern ResultsHeadingCharacter D_800DFA6C[];
-extern char D_800C5284_de[], D_800C52E4_de[], D_00285160[];
+extern char g_levelNameText[], D_800C52E4_de[], D_00285160[];
 extern char *D_800D3304, *D_800D3334, *D_800D3338, *D_800D333C, *D_800D3340, *D_800D334C_de, *D_800D3350,
     *D_800D3354, *D_800D3358, *D_800D335C, *D_800D3360, *D_800D3364, *D_800D3368_de, *D_800D336C,
     *D_800D3370, *D_800D3374, *D_800D3378, *D_800D337C, *D_800D3380, *D_800D3384, *D_800D3388,
@@ -552,8 +552,8 @@ static inline void copyLevelName(Shared_World *world, s32 level, char *out, s32 
     s32 length;
 
     entry = Render_GetDirectoryEntry(world->resourceDirectory, world->resourceBank, level);
-    bank = func_80254284_de(0, &handle, entry, D_800C5110_de);
-    name = func_80254408_de(0, handle, 8, entry, world, 0, D_800C5284_de);
+    bank = func_80254284_de(0, &handle, entry, g_levelIndexText);
+    name = func_80254408_de(0, handle, 8, entry, world, 0, g_levelNameText);
     length = name->length;
     if (limit < length) {
         length = limit;

@@ -17,7 +17,7 @@ extern void func_802BCF70_de(void *addr, s32 size);
 
 s32 __osSiRawStartDma(s32 direction, void *dramAddr) {
     if ((u32)dramAddr & 3) {
-        Audio_Assert(&D_800C7990_de, &D_800C7994_de, 0x37);
+        Audio_Assert(&D_800C7990_de, &s_sirawdmaText, 0x37);
     }
     if (func_802B9D70_de() != 0) {
         return -1;

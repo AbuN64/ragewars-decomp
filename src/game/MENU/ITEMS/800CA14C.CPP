@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-const char D_8044B7C0_CAD4C[17] =
+const char s_linkGroupTypesText[17] =
     "link group types\000";
 #endif
 

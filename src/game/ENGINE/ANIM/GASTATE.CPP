@@ -19,7 +19,7 @@
 
 
 
-extern char D_800C41B0_de;
+extern char g_animationText;
 
 extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
 
@@ -37,7 +37,7 @@ static inline s32 load(Anim *anim, s32 table, s32 key, s32 id) {
         return 0;
     }
     clip = Render_LocatePackSection(table, key, id, &size);
-    anim->resource = Scene_RequestResource(0, clip, clip, size, 4, anim, &D_0025F56C, &D_800C41B0_de, 0);
+    anim->resource = Scene_RequestResource(0, clip, clip, size, 4, anim, &D_0025F56C, &g_animationText, 0);
     if (func_802624D8_de(anim) == 0) {
         return 0;
     }

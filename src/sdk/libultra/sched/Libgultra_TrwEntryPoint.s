@@ -2,20 +2,20 @@
 .set noat
 .section .text
 .if VERSION_EU
-.globl func_80200400_eu
-func_80200400_eu:
+.globl Sched_BootEuropeanRom
+Sched_BootEuropeanRom:
 .elseif VERSION_EU_X
-.globl func_80200400_eu_x
-func_80200400_eu_x:
+.globl Sched_BootEuropeanAlternateRom
+Sched_BootEuropeanAlternateRom:
 .elseif VERSION_US
 .globl Libgultra_TrwEntryPoint
 Libgultra_TrwEntryPoint:
 .elseif VERSION_US_REV1
-.globl func_80200400_us_rev1
-func_80200400_us_rev1:
+.globl Sched_BootUsRevisionOneRom
+Sched_BootUsRevisionOneRom:
 .else
-.globl func_80200400_de
-func_80200400_de:
+.globl Sched_BootGermanRom
+Sched_BootGermanRom:
 .endif
     lui $sp, 0x803F
     ori $sp, $sp, 0xFFC0

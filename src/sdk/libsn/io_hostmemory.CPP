@@ -6,7 +6,7 @@
 #include "IO/80200800.H"
 #include "IO/io_hostmemory.H"
 
-void func_80200F98_de(s32 address, s32 value, u32 count)
+void Libsn_FillPortBytes(s32 address, s32 value, u32 count)
 {
   u32 new_var;
   u32 byte;
@@ -15,7 +15,7 @@ void func_80200F98_de(s32 address, s32 value, u32 count)
   new_var2 = value & 0xFF;
   while ((count != 0) && ((address & 3) != 0))
   {
-    func_80200C28_de(address++, new_var2);
+    Libsn_WritePortByte(address++, new_var2);
     count--;
   }
 
@@ -34,20 +34,20 @@ void func_80200F98_de(s32 address, s32 value, u32 count)
   }
   while (count)
   {
-    func_80200C28_de(address++, new_var2);
+    Libsn_WritePortByte(address++, new_var2);
     count--;
   }
 
 }
 
-void func_80201064_de(s32 address, s32 port, s32 count) {
+void Libsn_CopyPortBytes(s32 address, s32 port, s32 count) {
     s32 remaining, source, value;
     source = port;
     remaining = count - 1;
     if (count != 0) {
         do {
-            value = func_80200800_de(source++);
-            func_80200C28_de(address++, value & 0xFF);
+            value = Libsn_ReadPortByte(source++);
+            Libsn_WritePortByte(address++, value & 0xFF);
             remaining--;
         } while (remaining != -1);
     }
@@ -56,14 +56,14 @@ void func_80201064_de(s32 address, s32 port, s32 count) {
 #include "IO/DEBUG_MEMORY.H"
 extern void Libsn_EnumerateMemoryRanges(void);
 extern u8 D_8F0F3130[];
-extern void func_80200F98_de(s32, s32, u32);
-extern void func_80201064_de(s32, s32, s32);
-extern void func_80200D18_de(u32, u32, u32);
-extern void func_80200880_de(u32, u32, u32);
-extern void func_80200B14_de(u32, u32, u32);
+extern void Libsn_FillPortBytes(s32, s32, u32);
+extern void Libsn_CopyPortBytes(s32, s32, s32);
+extern void Libsn_WritePortBuffer(u32, u32, u32);
+extern void Libsn_ReadPortBuffer(u32, u32, u32);
+extern void Libsn_CopyPortToWordMemory(u32, u32, u32);
 
 /* Split the debugger's memory transfer at permission boundaries. */
-void func_802010D8_de(u32 mode) {
+void Libsn_TransferHostMemoryRanges(u32 mode) {
     u32 address, remaining, chunk, flags, port;
     u32 i;
     Libsn_EnumerateMemoryRanges();
@@ -83,16 +83,16 @@ void func_802010D8_de(u32 mode) {
         }
         if (remaining < chunk) chunk = remaining;
         if ((flags & mode) == 0) {
-            if (mode == 1) func_80200F98_de(port, 0, chunk);
+            if (mode == 1) Libsn_FillPortBytes(port, 0, chunk);
         } else if (flags & 4) {
-            if (mode == 1) func_80201064_de(port, address, chunk);
-            else func_80201064_de(address, port, chunk);
+            if (mode == 1) Libsn_CopyPortBytes(port, address, chunk);
+            else Libsn_CopyPortBytes(address, port, chunk);
         } else if (mode == 1) {
-            func_80200D18_de(port, address, chunk);
+            Libsn_WritePortBuffer(port, address, chunk);
         } else if (flags & 8) {
-            func_80200B14_de(port, address, chunk);
+            Libsn_CopyPortToWordMemory(port, address, chunk);
         } else {
-            func_80200880_de(port, address, chunk);
+            Libsn_ReadPortBuffer(port, address, chunk);
         }
         port += chunk;
         address += chunk;

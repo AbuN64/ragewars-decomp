@@ -2,7 +2,7 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/func_80286AA8_de/800CA258_unclaimed_CAE64 */
-const unsigned char D_blob_phase2_bbc15d1b8d4b8653d95e[11] = {
+const unsigned char s_levelInfoText[11] = {
     0x6C, 0x65, 0x76, 0x65, 0x6C, 0x20, 0x69, 0x6E, 0x66, 0x6F, 0x00,
 };
 #endif

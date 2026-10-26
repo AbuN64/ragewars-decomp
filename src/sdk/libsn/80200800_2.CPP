@@ -4,7 +4,7 @@
 
 /* Updates the selected byte in the aligned word addressed by arg0. */
 
-void func_80200AD8_de(s32 arg0, s32 arg1) {
+void Libsn_WriteMemoryByte(s32 arg0, s32 arg1) {
     int temp_ff;
     s32 word_2;
     struct Shape_func_8021A2D4_de_2 *word_3;

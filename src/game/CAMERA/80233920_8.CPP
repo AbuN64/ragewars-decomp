@@ -21,9 +21,9 @@
 
 extern ViewFlags D_80103220;
 extern u32 func_802337D0_de(CShakeAxis *);
-extern void func_80234FEC_de(GameplayCamera *camera);
+extern void Camera_UpdateViewProjectionAndEffects(GameplayCamera *camera);
 /* Update split-screen rectangles, advance transient effects, and merge visible bounds. */
-void func_80236874_de(RaceViewportState *state) {
+void Camera_UpdateViewportLayoutAndBounds(RaceViewportState *state) {
     f32 halfWidth;
     f32 halfHeight;
     f32 width;
@@ -31,18 +31,18 @@ void func_80236874_de(RaceViewportState *state) {
     f32 top;
     f32 left;
     f32 splitY;
-    f32 var_fv0_10;
-    f32 var_fv0_11;
-    f32 var_fv0_12;
-    f32 var_fv0_13;
-    f32 var_fv0_2;
-    f32 var_fv0_3;
-    f32 var_fv0_4;
-    f32 var_fv0_5;
-    f32 var_fv0_6;
-    f32 var_fv0_7;
-    f32 var_fv0_8;
-    f32 var_fv0_9;
+    f32 volumeMinZ;
+    f32 volumeMaxX;
+    f32 volumeMaxY;
+    f32 volumeMaxZ;
+    f32 clipMinX;
+    f32 clipMinY;
+    f32 clipMinZ;
+    f32 clipMaxX;
+    f32 clipMaxY;
+    f32 clipMaxZ;
+    f32 volumeMinX;
+    f32 volumeMinY;
     f32 right;
     f32 splitX;
     f32 bottom;
@@ -216,14 +216,14 @@ void func_80236874_de(RaceViewportState *state) {
     memcpy(&D_800FF208, state->self.clipBounds, sizeof(D_800FF208));
     memcpy(&D_801031F0, state->self.volumeBounds, sizeof(D_801031F0));
     D_80103220.flags = D_800CD8D0;
-    func_80234FEC_de(&state->self);
+    Camera_UpdateViewProjectionAndEffects(&state->self);
     view = state->header.views.head;
     if (view != 0) {
         if ((D_80145088.status[7] != 0) || (func_80245850_de() != 0)) {
-            func_80234FEC_de(view);
+            Camera_UpdateViewProjectionAndEffects(view);
         }
         if ((Camera_IsSequenceInWindow() != 0) || (Camera_IsSequenceActive() != 0)) {
-            func_80234FEC_de(view);
+            Camera_UpdateViewProjectionAndEffects(view);
         }
         memcpy(&D_800FF208, view->clipBounds, sizeof(D_800FF208));
         memcpy(&D_801031F0, view->volumeBounds, sizeof(D_801031F0));
@@ -236,68 +236,68 @@ void func_80236874_de(RaceViewportState *state) {
             flags = &D_80103220;
             do {
                 if ((D_80145088.status[7] != 0) || (func_80245850_de() != 0)) {
-                    func_80234FEC_de(view);
+                    Camera_UpdateViewProjectionAndEffects(view);
                 }
-                var_fv0_2 = view->clipBounds[0].x;
-                if (!(var_fv0_2 <= clip->min.x)) {
-                    var_fv0_2 = clip->min.x;
+                clipMinX = view->clipBounds[0].x;
+                if (!(clipMinX <= clip->min.x)) {
+                    clipMinX = clip->min.x;
                 }
-                clip->min.x = var_fv0_2;
-                var_fv0_3 = view->clipBounds[0].y;
-                if (!(var_fv0_3 <= clip->min.y)) {
-                    var_fv0_3 = clip->min.y;
+                clip->min.x = clipMinX;
+                clipMinY = view->clipBounds[0].y;
+                if (!(clipMinY <= clip->min.y)) {
+                    clipMinY = clip->min.y;
                 }
-                clip->min.y = var_fv0_3;
-                var_fv0_4 = view->clipBounds[0].z;
-                if (!(var_fv0_4 <= clip->min.z)) {
-                    var_fv0_4 = clip->min.z;
+                clip->min.y = clipMinY;
+                clipMinZ = view->clipBounds[0].z;
+                if (!(clipMinZ <= clip->min.z)) {
+                    clipMinZ = clip->min.z;
                 }
-                clip->min.z = var_fv0_4;
-                var_fv0_5 = view->clipBounds[1].x;
-                if (!(clip->max.x <= var_fv0_5)) {
-                    var_fv0_5 = clip->max.x;
+                clip->min.z = clipMinZ;
+                clipMaxX = view->clipBounds[1].x;
+                if (!(clip->max.x <= clipMaxX)) {
+                    clipMaxX = clip->max.x;
                 }
-                clip->max.x = var_fv0_5;
-                var_fv0_6 = view->clipBounds[1].y;
-                if (!(clip->max.y <= var_fv0_6)) {
-                    var_fv0_6 = clip->max.y;
+                clip->max.x = clipMaxX;
+                clipMaxY = view->clipBounds[1].y;
+                if (!(clip->max.y <= clipMaxY)) {
+                    clipMaxY = clip->max.y;
                 }
-                clip->max.y = var_fv0_6;
-                var_fv0_7 = view->clipBounds[1].z;
-                if (!(clip->max.z <= var_fv0_7)) {
-                    var_fv0_7 = clip->max.z;
+                clip->max.y = clipMaxY;
+                clipMaxZ = view->clipBounds[1].z;
+                if (!(clip->max.z <= clipMaxZ)) {
+                    clipMaxZ = clip->max.z;
                 }
-                clip->max.z = var_fv0_7;
-                var_fv0_8 = view->volumeBounds[0].x;
-                if (!(var_fv0_8 <= bounds->min.x)) {
-                    var_fv0_8 = bounds->min.x;
+                clip->max.z = clipMaxZ;
+                volumeMinX = view->volumeBounds[0].x;
+                if (!(volumeMinX <= bounds->min.x)) {
+                    volumeMinX = bounds->min.x;
                 }
-                bounds->min.x = var_fv0_8;
-                var_fv0_9 = view->volumeBounds[0].y;
-                if (!(var_fv0_9 <= bounds->min.y)) {
-                    var_fv0_9 = bounds->min.y;
+                bounds->min.x = volumeMinX;
+                volumeMinY = view->volumeBounds[0].y;
+                if (!(volumeMinY <= bounds->min.y)) {
+                    volumeMinY = bounds->min.y;
                 }
-                bounds->min.y = var_fv0_9;
-                var_fv0_10 = view->volumeBounds[0].z;
-                if (!(var_fv0_10 <= bounds->min.z)) {
-                    var_fv0_10 = bounds->min.z;
+                bounds->min.y = volumeMinY;
+                volumeMinZ = view->volumeBounds[0].z;
+                if (!(volumeMinZ <= bounds->min.z)) {
+                    volumeMinZ = bounds->min.z;
                 }
-                bounds->min.z = var_fv0_10;
-                var_fv0_11 = view->volumeBounds[1].x;
-                if (!(bounds->max.x <= var_fv0_11)) {
-                    var_fv0_11 = bounds->max.x;
+                bounds->min.z = volumeMinZ;
+                volumeMaxX = view->volumeBounds[1].x;
+                if (!(bounds->max.x <= volumeMaxX)) {
+                    volumeMaxX = bounds->max.x;
                 }
-                bounds->max.x = var_fv0_11;
-                var_fv0_12 = view->volumeBounds[1].y;
-                if (!(bounds->max.y <= var_fv0_12)) {
-                    var_fv0_12 = bounds->max.y;
+                bounds->max.x = volumeMaxX;
+                volumeMaxY = view->volumeBounds[1].y;
+                if (!(bounds->max.y <= volumeMaxY)) {
+                    volumeMaxY = bounds->max.y;
                 }
-                bounds->max.y = var_fv0_12;
-                var_fv0_13 = view->volumeBounds[1].z;
-                if (!(bounds->max.z <= var_fv0_13)) {
-                    var_fv0_13 = bounds->max.z;
+                bounds->max.y = volumeMaxY;
+                volumeMaxZ = view->volumeBounds[1].z;
+                if (!(bounds->max.z <= volumeMaxZ)) {
+                    volumeMaxZ = bounds->max.z;
                 }
-                bounds->max.z = var_fv0_13;
+                bounds->max.z = volumeMaxZ;
                 flags->flags |= view->floorSurface;
                 view = view->next;
             } while (view != 0);

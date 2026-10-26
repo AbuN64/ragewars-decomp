@@ -5,7 +5,7 @@
 #include "sdk/os.h"
 
 /** Return strlen(arg0) + 1 (byte count including the terminating NUL). */
-s32 func_802016DC_de(u8 *arg0) {
+s32 Libsn_MeasureTerminatedString(u8 *arg0) {
     u8 *var_v1;
     u8 temp;
 
@@ -38,12 +38,12 @@ extern OSMesgQueue D_800F3110;
 void osCreateThread(OSThread_s *thread, s32 id, void (*entry)(void *), void *arg, void *stackTop, s32 priority); /* osCreateThread */
 void osSetEventMesg(s32 event, OSMesgQueue *queue, void *message); /* osSetEventMesg */
 void osStartThread(OSThread_s *thread); /* osStartThread */
-extern s32 func_80200500_de(void);
+extern s32 Libsn_DisableInterrupts(void);
 extern s32 Libsn_SendHostCommand(s32, s32, s32, s32);
-extern void func_80200880_de(u32, void *, s32);
-extern void func_80200D18_de(u32, const void *, u32);
-extern void func_80200E04_de(u32, u8 *, u32);
-extern void func_8020095C_de(u32, u8 *, u32);
+extern void Libsn_ReadPortBuffer(u32, void *, s32);
+extern void Libsn_WritePortBuffer(u32, const void *, u32);
+extern void Libsn_WritePortBufferWithDma(u32, u8 *, u32);
+extern void Libsn_ReadPortBufferWithDma(u32, u8 *, u32);
 /* Create the host request queues and start the request thread once (thread id FS). */
 void Libsn_InitializeHostRequestThread(s32 threadPriority) {
     if (D_800C8140_de == 0) {
@@ -77,7 +77,7 @@ s32 Libsn_SendHostCommand(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     } while (Libsn_ReadPortWord(0xB1FFFFE0) != 0);
     return Libsn_ReadPortWord(0xB1FFFFDC);
 }
-void func_802018A0_de(void) {
+void Libsn_RunHostRequestThread(void) {
     ControllerRequest *request;
     for (;;) {
         osRecvMesg(&D_800F2F40, (OSMesg *)&request, 1);
@@ -85,7 +85,7 @@ void func_802018A0_de(void) {
             if (request->command & 0x80000000) {
                 D_800C8140_de = 0;
             }
-            func_80200E04_de(0xB1FF0000, (u8 *)request->header, request->status);
+            Libsn_WritePortBufferWithDma(0xB1FF0000, (u8 *)request->header, request->status);
             if (request->command & 0x80000000) {
                 D_800C8140_de = 1;
             }
@@ -103,7 +103,7 @@ void func_802018A0_de(void) {
                 if (request->command & 0x80000000) {
                     D_800C8140_de = 0;
                 }
-                func_8020095C_de(0xB1FF0000, (u8 *)request->header, length);
+                Libsn_ReadPortBufferWithDma(0xB1FF0000, (u8 *)request->header, length);
                 if (request->command & 0x80000000) {
                     D_800C8140_de = 1;
                 }
@@ -119,10 +119,10 @@ s32 func_80201A80_de(void)
 {
     s32 previous;
     s32 result;
-    previous = func_80200500_de();
+    previous = Libsn_DisableInterrupts();
     D_800C8144_de = 1;
     result = Libsn_SendHostCommand(0x101, 0, 0, 0);
-    func_80200538_de(previous);
+    Libsn_RestoreInterruptEnable(previous);
     return result;
 }
 void *func_80201AD0_de(void) {
@@ -145,7 +145,7 @@ u32 func_80201B50_de(u8 *buffer, s32 argument) {
     ControllerResponse response;
     s32 length;
     s32 saved;
-    length = func_802016DC_de(buffer);
+    length = Libsn_MeasureTerminatedString(buffer);
     if (D_800C8144_de == 2) {
         request.status = length;
         request.argument0 = length;
@@ -161,14 +161,14 @@ u32 func_80201B50_de(u8 *buffer, s32 argument) {
             response.status |= 0xFFFF0000;
         }
     } else {
-        saved = func_80200500_de();
-        length = func_802016DC_de(buffer);
-        func_80200D18_de(0xB1FF0000, buffer, length);
+        saved = Libsn_DisableInterrupts();
+        length = Libsn_MeasureTerminatedString(buffer);
+        Libsn_WritePortBuffer(0xB1FF0000, buffer, length);
         response.status = Libsn_SendHostCommand(0x202, length, argument, 0);
         if (response.status & 0x8000) {
             response.status |= 0xFFFF0000;
         }
-        func_80200538_de(saved);
+        Libsn_RestoreInterruptEnable(saved);
     }
     return response.status;
 }
@@ -177,7 +177,7 @@ s32 func_80201C80_de(u8 *name, u32 flags) {
     ControllerResponse response;
     s32 length;
     s32 saved;
-    length = func_802016DC_de(name);
+    length = Libsn_MeasureTerminatedString(name);
     if (D_800C8144_de == 2) {
         request.status = length;
         request.argument0 = length;
@@ -193,14 +193,14 @@ s32 func_80201C80_de(u8 *name, u32 flags) {
             response.status |= 0xFFFF0000;
         }
     } else {
-        saved = func_80200500_de();
-        length = func_802016DC_de(name);
-        func_80200D18_de(0xB1FF0000, name, length);
+        saved = Libsn_DisableInterrupts();
+        length = Libsn_MeasureTerminatedString(name);
+        Libsn_WritePortBuffer(0xB1FF0000, name, length);
         response.status = Libsn_SendHostCommand(0x303, length, flags, 0);
         if (response.status & 0x8000) {
             response.status |= 0xFFFF0000;
         }
-        func_80200538_de(saved);
+        Libsn_RestoreInterruptEnable(saved);
     }
     return response.status;
 }
@@ -221,12 +221,12 @@ s32 func_80201DB0_de(s32 arg0) {
             response.status |= 0xFFFF0000;
         }
     } else {
-        saved = func_80200500_de();
+        saved = Libsn_DisableInterrupts();
         response.status = Libsn_SendHostCommand(0x404, arg0, 0, 0);
         if (response.status & 0x8000) {
             response.status |= 0xFFFF0000;
         }
-        func_80200538_de(saved);
+        Libsn_RestoreInterruptEnable(saved);
     }
     return response.status;
 }
@@ -260,7 +260,7 @@ s32 func_80201E94_de(s32 channel, u8 *destination, u32 remaining) {
             remaining -= response.status;
         }
     } else {
-        saved = func_80200500_de();
+        saved = Libsn_DisableInterrupts();
         while (remaining != 0) {
             chunk = remaining;
             if (chunk > 0x8000) {
@@ -270,12 +270,12 @@ s32 func_80201E94_de(s32 channel, u8 *destination, u32 remaining) {
             if (response.status == 0) {
                 break;
             }
-            func_80200880_de(0xB1FF0000, destination, response.status);
+            Libsn_ReadPortBuffer(0xB1FF0000, destination, response.status);
             destination += response.status;
             total += response.status;
             remaining -= response.status;
         }
-        func_80200538_de(saved);
+        Libsn_RestoreInterruptEnable(saved);
     }
     return total;
 }
@@ -305,18 +305,18 @@ s32 func_80202018_de(s32 channel, u8 *source, u32 remaining) {
             remaining -= response.status;
         }
     } else {
-        saved = func_80200500_de();
+        saved = Libsn_DisableInterrupts();
         while (remaining != 0) {
             chunk = remaining;
             if (chunk > 0x8000) chunk = 0x8000;
-            func_80200D18_de(0xB1FF0000, source, chunk);
+            Libsn_WritePortBuffer(0xB1FF0000, source, chunk);
             response.status = Libsn_SendHostCommand(0x606, channel, chunk, 0);
             if (response.status == 0) break;
             source += response.status;
             total += response.status;
             remaining -= response.status;
         }
-        func_80200538_de(saved);
+        Libsn_RestoreInterruptEnable(saved);
     }
     return total;
 }
@@ -334,9 +334,9 @@ s32 func_80202198_de(s32 arg0, u32 arg1, s32 arg2) {
         osSendMesg(&D_800F2F40, &request, 1);
         osRecvMesg(&D_800F3110, &response.message, 1);
     } else {
-        saved = func_80200500_de();
+        saved = Libsn_DisableInterrupts();
         response.status = Libsn_SendHostCommand(0x707, arg0, arg1, arg2);
-        func_80200538_de(saved);
+        Libsn_RestoreInterruptEnable(saved);
     }
     return response.status;
 }

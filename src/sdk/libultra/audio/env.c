@@ -15,14 +15,14 @@
 /* libultra audio/env.c, built with -fforce-addr (config.toml): the eqpower base stays in a register. */
 extern s16 D_800D4210[128]; /* eqpower */
 extern char D_800CC850[]; /* Resident "EX" assertion expression. */
-extern char D_800C7604[]; /* "audio/env.c" */
+extern char s_audioEnvText[]; /* "audio/env.c" */
 #define eqpower D_800D4210
 #define EQPOWER_LENGTH 128
 #define AL_RESAMPLER_OUT 0
 #define AL_MAX_RSP_SAMPLES 160
 
 /* The SDK's traditional-cpp assert: the expression string is the literal "EX". */
-#define assert_at(EX, line) ((EX) ? ((void)0) : Audio_Assert(D_800CC850, D_800C7604, line))
+#define assert_at(EX, line) ((EX) ? ((void)0) : Audio_Assert(D_800CC850, s_audioEnvText, line))
 
 extern void _freePVoice(ALSynth4C *drvr, PVoice_s *pvoice);
 extern void Audio_FreeParam(void *param);
@@ -190,7 +190,7 @@ Acmd *Libultra_PullEnvelope(void *filter, s16 *outp, s32 outCount, s32 sampleOff
 
 /* _pullSubFrame, drafted from ultralib src/audio/env.c: when the envelope mixer is playing, pull
    its source and append the buffer, volume and envelope-mixer commands for one subframe,
-extern char D_800C7604[]; /* "audio/env.c" */
+extern char s_audioEnvText[]; /* "audio/env.c" */
 
  /* __assert */
   /* _getRate */
@@ -204,7 +204,7 @@ Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount
     if (e->motion != 1 || !outCount)
         return ptr;
 
-    ((source) ? ((void)0) : Audio_Assert(D_800CC850, D_800C7604, 366));
+    ((source) ? ((void)0) : Audio_Assert(D_800CC850, s_audioEnvText, 366));
 
     ptr = (*source->handler)(source, inp, outCount, sampleOffset, p);
 

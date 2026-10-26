@@ -12,19 +12,19 @@ extern f32 Math_Sqrtf(f32);
 
 
 
-void func_80233930_de(CShake *arg0, CVector3 position, CVector3 *out) {
+void Camera_AccumulateDistanceScaledShake(CShake *shake, CVector3 position, CVector3 *out) {
     f32 distance;
     f32 value;
     AxisWave *wave;
 
-    Particle_SubtractVectors(&position, &position, &arg0->m_vPos);
+    Particle_SubtractVectors(&position, &position, &shake->m_vPos);
     distance = Math_Sqrtf((position.x * position.x) +
                              (position.y * position.y) +
                              (position.z * position.z));
-    if (distance < arg0->m_Radius) {
-        distance = System_CosineEase(D_800C3090_de - (distance / arg0->m_Radius));
+    if (distance < shake->m_Radius) {
+        distance = System_CosineEase(D_800C3090_de - (distance / shake->m_Radius));
 
-        wave = &arg0->x;
+        wave = &shake->x;
         if (wave->mode == 0) goto x_sine;
         if (wave->mode != 1) goto x_zero;
         value = Math_Sinf(wave->m_Angle * D_800C3094_de) * wave->m_Amp;
@@ -37,7 +37,7 @@ x_zero:
 x_done:
         out->x += value * distance;
 
-        wave = &arg0->y;
+        wave = &shake->y;
         if (wave->mode == 0) goto y_sine;
         if (wave->mode != 1) goto y_zero;
         value = Math_Sinf(wave->m_Angle * D_800C3098_de) * wave->m_Amp;
@@ -50,7 +50,7 @@ y_zero:
 y_done:
         out->y += value * distance;
 
-        wave = &arg0->z;
+        wave = &shake->z;
         if (wave->mode == 0) goto z_sine;
         if (wave->mode != 1) goto z_zero;
         value = Math_Sinf(wave->m_Angle * D_800C309C_de) * wave->m_Amp;
@@ -74,7 +74,7 @@ z_done:
 
 extern f32 D_800D2988;
 
-void func_80233B14_de(Overlay *overlay) {
+void Camera_AdvanceOverlayFade(Overlay *overlay) {
     switch (overlay->state) {
     case 1:
         if (overlay->fadeIn <= overlay->timer) {
@@ -140,7 +140,7 @@ static inline SharedPlayer *find_owner(View *entity) {
     return 0;
 }
 
-void func_80233C88_de(View *entity) {
+void Camera_DrawViewportOverlays(View *entity) {
     SharedPlayer *owner;
     u8 color[4];
     s32 i;

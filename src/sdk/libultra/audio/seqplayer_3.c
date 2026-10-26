@@ -98,7 +98,7 @@ void func_802B0A90_de(struct ALSequencePlayer *seqp)
         break;
 
     default:
-        Audio_Assert(D_800C7440, D_800C7444, 412);
+        Audio_Assert(D_800C7440, g_audioSeqplayerText, 412);
     }
 }
 
@@ -120,7 +120,7 @@ void func_802B0C94_de(ALSeqPlayer *seqp, ALEvent *event)
     ALVoiceState *vstate;
     u8 pan;
     if (!(event->type == 1 || event->type == 2)) /* AL_SEQ_MIDI_EVT, AL_SEQP_MIDI_EVT */
-        Audio_Assert(D_800C7440, D_800C7444, 436);
+        Audio_Assert(D_800C7440, g_audioSeqplayerText, 436);
     status = event->msg.midi.status & 0xF0;
     chan = event->msg.midi.status & 0x0F;
     byte1 = key = event->msg.midi.byte1;
@@ -305,7 +305,7 @@ void func_802B0C94_de(ALSeqPlayer *seqp, ALEvent *event)
         break;
     case 0xC0: /* AL_MIDI_ProgramChange */
         if (seqp->bank == 0)
-            Audio_Assert(D_800C7440, D_800C7444, 714);
+            Audio_Assert(D_800C7440, g_audioSeqplayerText, 714);
         if (key < seqp->bank->instCount) {
             ALInstrument *inst = seqp->bank->instArray[key];
             __setInstChanState(seqp, inst, chan);

@@ -217,12 +217,12 @@ typedef struct Shape_typemap_165 Handle;
 extern void Scene_ReleaseResource(void *heap, Handle *handle);
 extern u32 System_GetMemorySize(void);
 extern Handle *Scene_AllocateResourceAt(void *heap, u32 address, u32 size, char *name);
-extern char D_800DCD00_de[9];  /* "Z-Buffer" */
-extern char D_800DCD0C[15];    /* "Display Buffer" */
+extern char s_bufferText[9];  /* "Z-Buffer" */
+extern char s_displayBufferText[15];    /* "Display Buffer" */
 extern char D_800DCD1C[31];    /* "color frame buffers + z buffer" */
-extern char D_800DCD3C[14];    /* "display lists" */
-extern char D_800DCD4C[5];     /* "fifo" */
-extern char D_800DCD54[11];    /* "audio heap" */
+extern char s_displayListsText[14];    /* "display lists" */
+extern char s_fifoText[5];     /* "fifo" */
+extern char s_audioHeapText[11];    /* "audio heap" */
 /* Rebuilds the render buffers held by the record: releases every handle it holds and clears it, then
    claims the frame buffers at the top of RDRAM (three 0x54600-byte buffers below the 1 MB z-buffer when
    the expansion pak gives 6 MB or more; otherwise the count in D_800DE850 plus one 0x1ECC0-byte buffer,
@@ -269,9 +269,9 @@ int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
         bufferBytes = 0x54600;
         memoryEnd = System_GetMemorySize() | 0x80000000;
         D_800DE850 = 3;
-        zBuffer = Scene_AllocateResourceAt(NULL, memoryEnd - megabyte, 0x54600, D_800DCD00_de);
+        zBuffer = Scene_AllocateResourceAt(NULL, memoryEnd - megabyte, 0x54600, s_bufferText);
         frameBuffers = Scene_AllocateResourceAt(NULL, memoryEnd - 2 * megabyte, D_800DE850 * bufferBytes,
-                                                D_800DCD0C);
+                                                s_displayBufferText);
         Resmgr_FillMemory(frameBuffers->data, 0, 0xFD200);
         Resmgr_FillMemory(zBuffer->data, 0, 0x54600);
         record->zBuffer = zBuffer;
@@ -296,9 +296,9 @@ int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
     }
     Resmgr_FillMemory(D_801536E8, 0, bufferBytes);
 
-    record->displayLists = Scene_AllocateResource(0, (D_800E28A4 + D_800DE858) * 2 * sizeof(Gfx), 0x23, D_800DCD3C);
-    record->fifo = Scene_AllocateResource(0, 0x8000, 0x23, D_800DCD4C);
-    record->audioHeap = Scene_AllocateResource(0, 0x22000, 0x23, D_800DCD54);
+    record->displayLists = Scene_AllocateResource(0, (D_800E28A4 + D_800DE858) * 2 * sizeof(Gfx), 0x23, s_displayListsText);
+    record->fifo = Scene_AllocateResource(0, 0x8000, 0x23, s_fifoText);
+    record->audioHeap = Scene_AllocateResource(0, 0x22000, 0x23, s_audioHeapText);
     D_8014D424 = 0x8000;
     D_8014D45C = 0x22000;
     D_8014D460 = record->displayLists->data;

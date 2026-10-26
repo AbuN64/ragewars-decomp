@@ -14,7 +14,7 @@ Acmd *func_802B6658_eu_x(ALSave_u1 *filter, s16 *outp, s32 outCount, s32 sampleO
     ALFilter_u1 *source = filter->filter.source;
 
     if (!source) {
-        Audio_Assert(D_800C8DB0_eu_x, D_800C8DB4_eu_x, 0x22);
+        Audio_Assert(D_800C8DB0_eu_x, g_audioSaveText, 0x22);
     }
     ptr = source->handler(source, outp, outCount, sampleOffset, ptr);
     aSetBuffer(ptr++, 0, 0, 0, outCount << 1);

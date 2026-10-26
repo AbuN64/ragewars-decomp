@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-const char D_auto_rodata_shared_800C8E9C[18] = "simp object index";
+const char g_simpObjectIndexText[18] = "simp object index";
 
 #if defined(VERSION_US)
 unsigned short rodata_unresolved_800C3CEE[1] = {

@@ -89,7 +89,7 @@ extern s32 *D_8011FEFC;
 
 extern s32 D_8011BDFC;
 
-extern char D_800E0B2C[];
+extern char g_cinemaDirectoryText[];
 
 extern s32 Render_LocatePackSection(s32 *, s32, s32, s32 *);
 
@@ -130,7 +130,7 @@ void Menu_RequestTrackByIds(struct SharedTrackObject *owner, func_8020478C_S1 *o
         if (key == 0) {
             table = 0;
         } else {
-            table = Scene_RequestResource(0, key, key, size, 0x33, 0, 0, D_800E0B2C, 1);
+            table = Scene_RequestResource(0, key, key, size, 0x33, 0, 0, g_cinemaDirectoryText, 1);
         }
         n = *D_8011FEFC - 1;
         entry = (EntryRecAt4V2 *)(*table + 2);
@@ -164,7 +164,7 @@ s32 func_804030E0_de(s32 key) {
     if (loaded == 0) {
         table = 0;
     } else {
-        table = Scene_RequestResource(0, loaded, loaded, size, 0x33, 0, 0, D_800E0B2C, 1);
+        table = Scene_RequestResource(0, loaded, loaded, size, 0x33, 0, 0, g_cinemaDirectoryText, 1);
     }
     i = 0;
     entries = (EntryRecAt48 *)(*table + 2);
@@ -199,7 +199,7 @@ void func_80403200_de(char *name) {
         if (loaded == 0) {
             table = 0;
         } else {
-            table = Scene_RequestResource(0, loaded, loaded, size, 0x33, 0, 0, D_800E0B2C, 1);
+            table = Scene_RequestResource(0, loaded, loaded, size, 0x33, 0, 0, g_cinemaDirectoryText, 1);
         }
         i = 0;
         entries = (EntryRecAt18V5 *)(*table + 2);

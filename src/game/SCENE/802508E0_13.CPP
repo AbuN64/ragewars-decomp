@@ -22,33 +22,33 @@ extern void func_80254C70_de(s32 unused, void *object);
 extern void func_80254AD0_de(s32 arg0, s32 arg1);
 
 /* Frees a block from Scene_AllocateMemory: releases the heap node stored 16 bytes before it under the heap lock. */
-void Scene_FreeMemory(void *arg0) {
-    s32 temp_v1;
-    s32 temp_v1_2;
+void Scene_FreeMemory(void *allocation) {
+    s32 lockUsers;
+    s32 remainingLockUsers;
     u32 mask;
-    u32 temp_v0;
-    void *temp_s0;
+    u32 unlockInterruptMask;
+    void *resource;
 
-    temp_s0 = ((void **)arg0)[-4];
+    resource = ((void **)allocation)[-4];
     mask = __osDisableInt();
-    temp_v1 = D_8010515C + 1;
-    D_8010515C = temp_v1;
-    if (temp_v1 != 1) {
+    lockUsers = D_8010515C + 1;
+    D_8010515C = lockUsers;
+    if (lockUsers != 1) {
         __osRestoreInt(mask);
         osRecvMesg(&D_80101140, 0, 1);
     } else {
         __osRestoreInt(mask);
     }
-    func_80254990_de(0, temp_s0);
-    temp_v0 = __osDisableInt();
-    temp_v1_2 = D_8010515C - 1;
-    D_8010515C = temp_v1_2;
-    if (temp_v1_2 != 0) {
-        __osRestoreInt(temp_v0);
+    func_80254990_de(0, resource);
+    unlockInterruptMask = __osDisableInt();
+    remainingLockUsers = D_8010515C - 1;
+    D_8010515C = remainingLockUsers;
+    if (remainingLockUsers != 0) {
+        __osRestoreInt(unlockInterruptMask);
         osSendMesg(&D_80101140, 0, 1);
         return;
     }
-    __osRestoreInt(temp_v0);
+    __osRestoreInt(unlockInterruptMask);
 }
 
 struct Shape_typemap_165 *func_802548B8_de(s32 arg0_unused, s32 arg1, u32 arg2) {

@@ -10,7 +10,7 @@
 #include "sdk/os.h"
 
 extern OSMesgQueue D_80101140;
-extern s32 D_800C3EA8_de;
+extern s32 s_allocText;
 
 extern u32 __osDisableInt(void);
 extern struct Shape_func_802BC570_de *func_802548B8_de(s32, s32, u32, s32 *);
@@ -45,7 +45,7 @@ Record *Scene_AllocateMemory(s32 size) {
     } else {
         __osRestoreInt(token);
     }
-    node = func_802548B8_de(0, allocation_size, 0x33U, &D_800C3EA8_de);
+    node = func_802548B8_de(0, allocation_size, 0x33U, &s_allocText);
     token2 = __osDisableInt();
     counter2 = D_8010515C - 1;
     D_8010515C = counter2;
@@ -89,7 +89,7 @@ Record *Scene_AllocateMemory(s32 size) {
         } else {
             __osRestoreInt(token3);
         }
-        node = func_802548B8_de(0, allocation_size, 0x33U, &D_800C3EA8_de);
+        node = func_802548B8_de(0, allocation_size, 0x33U, &s_allocText);
         token2 = __osDisableInt();
         counter2 = D_8010515C - 1;
         D_8010515C = counter2;

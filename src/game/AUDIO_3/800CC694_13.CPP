@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/EXTERNS_2.H"
 
-const char D_auto_src_ragewars_resident_strings_CD3C4_us_rev1[20] = "audio/synthesizer.c";
+const char s_audioSynthesizerText[20] = "audio/synthesizer.c";
 
 /* ROM-grounded data: src/rw_pool_802B3CD0_CD3D8_us_rev1.c */
 const unsigned int D_blob_ba6b872948b26bb298a2[2] = {
