@@ -8,6 +8,7 @@
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "TYPES.H"
+#include "COMMON/SESSION_STATE.H"
 struct Opaque_OSMesgQueue;
 typedef struct Opaque_OSMesgQueue Opaque_OSMesgQueue;
 typedef struct OSIoMesgHdr OSIoMesgHdr;
@@ -3094,8 +3095,6 @@ typedef struct Root802131E0 Root802131E0;
 
 
 
-struct RosterEntry;
-typedef struct RosterEntry RosterEntry;
 
 
 
@@ -3122,8 +3121,6 @@ typedef struct Selection Selection;
 
 
 
-struct Settings580;
-typedef struct Settings580 Settings580;
 
 
 
@@ -3936,23 +3933,8 @@ struct SlotRecAt0V2 {
     char pad4[0x34];
 };
 struct FrameCode8044E2B8;
-struct RosterEntry;
-struct RosterEntry {
-    char pad0[0x78];
-    u8 active;
-    char pad79[0x92 - 0x79];
-    u8 team;
-    char pad93[0x96 - 0x93];
-};
-struct Settings580;
-struct Settings580 {
-    char pad0[0xD];
-    u8 trialKind;
-    char padE[0x1D - 0xE];
-    u8 allowed;
-    char pad1E[0xD0 - 0x1E];
-    RosterEntry roster[8];
-};
+
+
 struct GameLocalizationState;
 struct GameLocalizationState {
     u8 reserved[0x581];
@@ -4443,7 +4425,6 @@ struct Selection {
     u8 pad1C4[4];
     s32 matches;
 };
-struct Settings580;
 struct ObjRecAt8F;
 struct Body;
 struct Character;

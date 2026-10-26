@@ -1,6 +1,7 @@
 #ifndef COMMON_TEXTLAYERMETRICS_H
 #define COMMON_TEXTLAYERMETRICS_H
 #include "TYPES.H"
+#include "COMMON/SESSION_STATE.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern char D_800EED80[];
@@ -66,10 +67,7 @@ struct StateRecAtBCV1 {
     s32 field_BC;
 };
 
-struct MessageList;
-typedef struct MessageList MessageList;
 
-struct MessageList;
 struct CMenu_t;
 struct StateRecAtBCV1;
 struct TablePakUpdateDialogList;
@@ -86,12 +84,7 @@ struct CMenu_t {
     struct CMenu_t *next;
 };
 
-struct MessageList {
-    struct CMenu_t *head;
-    char pad04[0x10 - 0x4];
-    s32 flag;
-    s16 rotation; /* 0x14 */
-};
+
 
 struct TablePakUpdateDialogList {
     char pad00[0xC];

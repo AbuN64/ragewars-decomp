@@ -1,8 +1,7 @@
 #ifndef WEAPONS_GAME_SESSION_H
 #define WEAPONS_GAME_SESSION_H
 #include "TYPES.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/TEXTLAYERMETRICS.H"
+#include "COMMON/SESSION_STATE.H"
 /* The match rules block at D_801468A0, which is also GameSession.rules at 0x1284 of D_8014561C. */
 struct GameRules;
 typedef struct GameRules GameRules;
