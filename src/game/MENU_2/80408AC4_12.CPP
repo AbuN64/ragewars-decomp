@@ -1,7 +1,7 @@
 #include "include_asm.h"
+#include "COMMON/EXTERNS_20.H"
 
 #if defined(VERSION_DE)
-extern u32 D_80153778;
 extern char D_800D7A0C[];
 extern char D_800DE7BC[];
 typedef struct { char pad0[0x14]; char *text; } Func_8040BB40_Obj;

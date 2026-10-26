@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/EXTERNS_20.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
@@ -7,7 +8,6 @@
    jtbl_800E1068 for states 0 to 4, and D_800D79A8 for any other state. Returns zero. */
 
 
-extern u32 D_80153778;
 
 extern char D_800D79A8[];
 
