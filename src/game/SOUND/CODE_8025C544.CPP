@@ -90,8 +90,8 @@ typedef struct {
 } Block12;
 
 struct ContextRecAt2BC0;
-extern void *func_80258BF4_de(struct ContextRecAt2BC0 *arg0, s32 arg1);
-extern s32 func_80258D2C_de(void *arg0);
+extern void *Audio_GetMetadataSectionFiveEntry(struct ContextRecAt2BC0 *arg0, s32 arg1);
+extern s32 Audio_GetSpatialPanMode(void *arg0);
 struct GameplayCamera;
 extern s16 func_80259B10_de(void *arg0, struct GameplayCamera *arg1);
 extern f32 func_802B2350(s32 arg0);
@@ -148,7 +148,7 @@ void Sound_InitVoiceVolume(func_8025C6F4_S1 *arg0, func_8025C6F4_S2 *arg1) {
     arg0->unk28 = 0x40;
     index = arg1->unkC;
     if (index != -1) {
-        record = func_80258BF4_de(arg0->unkB0, index);
+        record = Audio_GetMetadataSectionFiveEntry(arg0->unkB0, index);
         arg0->unk8C = *record;
         first = func_802B2350(arg0->unk8C.start);
         arg0->unk9C =
@@ -165,12 +165,12 @@ void Sound_InitVoiceVolume(func_8025C6F4_S1 *arg0, func_8025C6F4_S2 *arg1) {
     arg0->unk88 = 0;
     if (arg0->unkA8 < 0x100) {
         if (arg0->unkC0 == 0 &&
-            func_80258D2C_de(arg0->unkB0) != 0) {
+            Audio_GetSpatialPanMode(arg0->unkB0) != 0) {
             value = arg0->unkB0->unk2B94;
             goto store_value;
         }
     } else if (arg0->unkC0 == 0 &&
-               func_80258D2C_de(arg0->unkB0) != 0) {
+               Audio_GetSpatialPanMode(arg0->unkB0) != 0) {
         value = func_80259B10_de(&arg0->unk44,
             arg0->unkB0->unk2B98);
 store_value:

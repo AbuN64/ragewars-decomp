@@ -38,9 +38,9 @@ extern void alSndpStop(void *arg0);
 
 extern void func_80259C5C_de(void *arg0, void *arg1, s32 arg2);
 
-extern void *func_80258BF4_de(ContextRecAt2BC0 *arg0, s32 arg1);
+extern void *Audio_GetMetadataSectionFiveEntry(ContextRecAt2BC0 *arg0, s32 arg1);
 
-extern s32 func_80258D2C_de(void *arg0);
+extern s32 Audio_GetSpatialPanMode(void *arg0);
 
 extern s16 func_80259B10_de(void *arg0, GameplayCamera *arg1);
 
@@ -296,7 +296,7 @@ void func_8025BB84_de(void *arg0, void *desc, s32 extra) {
     ((struct View_func_8025AE1C_de *)(arg0))->priority = 0x40;
     index = ((struct Shared_Body *)(desc))->kind;
     if (index != -1) {
-        record = func_80258BF4_de(((struct View_func_8025AE1C_de *)(arg0))->context, index);
+        record = Audio_GetMetadataSectionFiveEntry(((struct View_func_8025AE1C_de *)(arg0))->context, index);
         ((struct View_func_8025AE1C_de *)(arg0))->envelope = *(SoundEnvelope *)record;
         first = RW_BITS_TO_FLOAT(((struct View_func_8025AE1C_de *)(arg0))->envelope.initial);
         ((struct View_func_8025AE1C_de *)(arg0))->step =
@@ -313,12 +313,12 @@ void func_8025BB84_de(void *arg0, void *desc, s32 extra) {
     ((struct View_func_8025AE1C_de *)(arg0))->sweeping = 0;
     if (((struct View_func_8025AE1C_de *)(arg0))->trackId < 0x100) {
         if (((struct View_func_8025AE1C_de *)(arg0))->fixed == 0 &&
-            func_80258D2C_de(((struct View_func_8025AE1C_de *)(arg0))->context) != 0) {
+            Audio_GetSpatialPanMode(((struct View_func_8025AE1C_de *)(arg0))->context) != 0) {
             value = (s8)((ContextRecAt2BC0 *)((struct View_func_8025AE1C_de *)arg0)->context)->randomPan;
             goto store_value;
         }
     } else if (((struct View_func_8025AE1C_de *)(arg0))->fixed == 0 &&
-               func_80258D2C_de(((struct View_func_8025AE1C_de *)(arg0))->context) != 0) {
+               Audio_GetSpatialPanMode(((struct View_func_8025AE1C_de *)(arg0))->context) != 0) {
         value = func_80259B10_de(&((struct View_func_8025AE1C_de *)(arg0))->position,
             ((struct View_func_8025AE1C_de *)arg0)->context->result);
 store_value:

@@ -92,9 +92,9 @@ s32 func_8023E178_de(Ray_func_8023E178_de *ray, CVector3 *center, f32 radius, f3
     return 0;
 }
 
-void func_8023E45C_de(Input *arg0) {
+void func_8023E45C_de(Input *contactInput) {
     {
-        s32 type = arg0->type;
+        s32 type = contactInput->type;
         s32 sw_type_value = type - 1;
         if ((unsigned int)sw_type_value > 8) {
             goto sw_type_default;
@@ -113,41 +113,41 @@ void func_8023E45C_de(Input *arg0) {
     }
     do {
     sw_type_1:
-        D_80103FCC->instance0 = arg0->instance104;
-        if (arg0->instance104 != 0) {
-            D_80103FCC->instanceValue4 = arg0->instance104->field14;
+        D_80103FCC->instance0 = contactInput->instance104;
+        if (contactInput->instance104 != 0) {
+            D_80103FCC->instanceValue4 = contactInput->instance104->field14;
         } else {
             D_80103FCC->instanceValue4 = 0;
         }
-        D_80103FCC->vec8 = arg0->vec180;
+        D_80103FCC->vec8 = contactInput->vec180;
         D_80103FCC->field14 = -1;
         break;
     sw_type_2:
-        if (arg0->instance104 != 0) {
-            D_80103FCC->fieldC4 = arg0->instance104->field14;
+        if (contactInput->instance104 != 0) {
+            D_80103FCC->fieldC4 = contactInput->instance104->field14;
         } else {
             D_80103FCC->fieldC4 = 0;
         }
-        D_80103FCC->vecC8 = arg0->vec180;
-        D_80103FCC->fieldD4 = arg0->fieldBC;
+        D_80103FCC->vecC8 = contactInput->vec180;
+        D_80103FCC->fieldD4 = contactInput->fieldBC;
         break;
     sw_type_3:
-        D_80103FCC->instance0 = arg0->instance104;
-        D_80103FCC->instanceValue4 = arg0->instance104->field14;
-        D_80103FCC->vec8 = arg0->vec180;
+        D_80103FCC->instance0 = contactInput->instance104;
+        D_80103FCC->instanceValue4 = contactInput->instance104->field14;
+        D_80103FCC->vec8 = contactInput->vec180;
         D_80103FCC->field14 = -1;
         break;
     sw_type_4:
-        D_80103FCC->instance0 = arg0->instance104;
-        D_80103FCC->instanceValue4 = arg0->instance104->field14;
-        D_80103FCC->vec8 = arg0->vec180;
-        D_80103FCC->field14 = arg0->field108;
-        D_80103FCC->block18 = arg0->block10C;
+        D_80103FCC->instance0 = contactInput->instance104;
+        D_80103FCC->instanceValue4 = contactInput->instance104->field14;
+        D_80103FCC->vec8 = contactInput->vec180;
+        D_80103FCC->field14 = contactInput->field108;
+        D_80103FCC->block18 = contactInput->block10C;
         break;
     sw_type_5:
-        D_80103FCC->instance88 = arg0->instance104;
-        D_80103FCC->instanceValue8C = arg0->instance104->field14;
-        D_80103FCC->vec90 = arg0->vec180;
+        D_80103FCC->instance88 = contactInput->instance104;
+        D_80103FCC->instanceValue8C = contactInput->instance104->field14;
+        D_80103FCC->vec90 = contactInput->vec180;
         break;
     sw_type_6:
     sw_type_7:
@@ -157,10 +157,10 @@ void func_8023E45C_de(Input *arg0) {
     
     sw_type_default:;
     } while (0);
-    D_80103FCC->vecF0 = arg0->vecF8;
-    D_80103FCC->vecE4 = arg0->vec180;
-    D_80103FCC->typeFC = arg0->type;
-    D_80103FCC->field100 = arg0->fieldC0;
+    D_80103FCC->vecF0 = contactInput->vecF8;
+    D_80103FCC->vecE4 = contactInput->vec180;
+    D_80103FCC->typeFC = contactInput->type;
+    D_80103FCC->field100 = contactInput->fieldC0;
 }
 
 /* Stores a range and its parameters in a record: the low bound at 8, a count at 0xC, the high
@@ -184,11 +184,11 @@ void func_8023E690_de(struct Range *range, f32 low, s32 count, f32 high, f32 ext
     range->limit = larger + D_800C87B4;
 }
 
-void func_8023E6D0_de(void *actorMotion, float arg1) {
+void func_8023E6D0_de(void *actorMotion, float extent) {
     ActorMotion *motion = actorMotion;
     motion->bottom = 0.0f;
-    motion->field08 = arg1;
-    motion->radius = arg1;
-    motion->height = arg1;
-    motion->field18 = arg1;
+    motion->field08 = extent;
+    motion->radius = extent;
+    motion->height = extent;
+    motion->field18 = extent;
 }

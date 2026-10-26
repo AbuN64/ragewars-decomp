@@ -18,6 +18,6 @@ INCLUDE_ASM("span_1000", func_8025E110_de);
 /* Return the existing owner-count result to callers that test it. */
 s32 func_8025E0F4_de(s32 owner)
 {
-    return func_80258D50_de((char *)&D_8010C080, owner);
+    return Audio_CountSoundVoices((char *)&D_8010C080, owner);
 }
 #endif

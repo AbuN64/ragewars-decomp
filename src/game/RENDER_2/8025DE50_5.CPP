@@ -16,7 +16,7 @@
 
 
 struct ContextRecAt2BC0;
-extern s32 func_80258A7C_de(struct ContextRecAt2BC0 *arg0, s32 arg1, CVector3 arg2,
+extern s32 Audio_PlayPositionedSoundWithScale(struct ContextRecAt2BC0 *arg0, s32 arg1, CVector3 arg2,
                          s32 arg3, s32 arg4, f32 arg5);
 
 
@@ -40,7 +40,7 @@ s32 func_8025DEC0_de(s32 arg0, CVector3 arg1, s32 arg4, s32 arg5, f32 arg6) {
     if (D_8011FAC0.transitionBlocked != 0) {
         return -1;
     }
-    return func_80258A7C_de(&D_8010C080, (s16)arg0, arg1, arg4, arg5, arg6);
+    return Audio_PlayPositionedSoundWithScale(&D_8010C080, (s16)arg0, arg1, arg4, arg5, arg6);
 }
 
 s32 Render_PlayFlatSound(s32 track) {
@@ -57,10 +57,10 @@ s32 Render_PlayFlatSound(s32 track) {
         vec.z = zero;
         vec.y = zero;
         vec.x = zero;
-        temp_s1 = func_80258D10_de(&D_8010C080);
-        func_80258D08_de(&D_8010C080, 1);
+        temp_s1 = Audio_GetVoiceMixValue(&D_8010C080);
+        Audio_SetVoiceMixValue(&D_8010C080, 1);
         temp_s0 = Texture_PlaySoundAtPosition(&D_8010C080, (s16)track, vec, 0, -1);
-        func_80258D08_de(&D_8010C080, temp_s1);
+        Audio_SetVoiceMixValue(&D_8010C080, temp_s1);
     }
     return temp_s0;
 }
@@ -86,10 +86,10 @@ int func_8025E04C_de(int index) {
         vec.z = zero;
         vec.y = zero;
         vec.x = zero;
-        temp_s1 = func_80258D10_de(&D_8010C080);
-        func_80258D08_de(&D_8010C080, 1);
+        temp_s1 = Audio_GetVoiceMixValue(&D_8010C080);
+        Audio_SetVoiceMixValue(&D_8010C080, 1);
         temp_s0 = Texture_PlayInstrumentAtPosition(&D_8010C080, index, vec, 0);
-        func_80258D08_de(&D_8010C080, temp_s1);
+        Audio_SetVoiceMixValue(&D_8010C080, temp_s1);
     }
     return temp_s0;
 }

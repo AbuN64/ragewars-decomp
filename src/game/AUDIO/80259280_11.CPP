@@ -57,7 +57,7 @@ s16 func_80259B10_de(CVector3 *position, GameplayCamera *listener) {
 }
 
 /* Updates a view's heading from its controller: clears its turn rates, takes the base angles from the controller's preset (or the heading from its default yaw), adds the stick turn derived from Nav_RandomBetween of the two stick axes, nudges it up for flag 0x40 and down for flag 0x80, caps it at the limit, optionally records the heading and the pitch step over the step count and the current pitch, and finally maps the heading through the 60-entry curve table D_800CB8EC with linear interpolation. The turn is truncated to 16 bits into an int, and the next table index is its own s16. */
-extern struct Bytes12 *func_80258BDC_de(ContextRecAt2BC0 *, s32);
+extern struct Bytes12 *Audio_GetMetadataSectionFourEntry(ContextRecAt2BC0 *, s32);
 extern s16 func_802AD270_de(f32);
 
 extern s32 func_8025E584_de(ControllerCode802591C0 *);
@@ -83,7 +83,7 @@ void func_80259C5C_de(ViewRecAtB0 *view, ControllerCode802591C0 *controller, s32
     angles = &view->angles;
     motion->rate1 = motion->rate2 = 0.0f;
     if (controller->preset != -1) {
-        *(struct Bytes12 *)angles = *func_80258BDC_de(view->presets, controller->preset);
+        *(struct Bytes12 *)angles = *Audio_GetMetadataSectionFourEntry(view->presets, controller->preset);
     } else {
         angles->heading = func_802AD270_de(controller->yaw);
     }
@@ -154,7 +154,7 @@ typedef struct SoundMixParameters {
 typedef struct VoiceScaleEntry { f32 soundId, scale; } VoiceScaleEntry;
 extern VoiceScaleEntry D_800CB7F0[];
 extern float D_800C3F34_de;
-extern SoundEnvelope *func_80258BC4_de(ContextRecAt2BC0 *context, int index);
+extern SoundEnvelope *Audio_GetMetadataSectionThreeEntry(ContextRecAt2BC0 *context, int index);
 static inline s32 lookupPanValue(s32 panAngle) {
     if ((f32)panAngle < 0.0f) return D_80107FA0[-panAngle];
     return D_80107FA0[panAngle];
@@ -194,7 +194,7 @@ void Audio_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s32
     }
     envelope = (SoundEnvelopeControl *)voice->envelope;
     if (control->field8 != -1) {
-        preset = func_80258BC4_de(voice->context, control->field8);
+        preset = Audio_GetMetadataSectionThreeEntry(voice->context, control->field8);
         *(SoundEnvelope *)voice->envelope = *preset;
     } else {
         envelope->flags = func_802AD270_de((f32)control->fieldF);

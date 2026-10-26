@@ -60,118 +60,118 @@ extern void func_8025BB3C_de(int a);
 
 
 
-void func_80258800_de(ContextRecAt2BC0 *arg0, s32 arg1) {
+void func_80258800_de(ContextRecAt2BC0 *context, s32 matchValue) {
     {
-        s32 *temp_s0;
-        s32 temp_v1;
+        s32 *contextLock;
+        s32 lockClaimCount;
         u32 mask;
 
-        temp_s0 = &arg0->lock;
+        contextLock = &context->lock;
         mask = __osDisableInt();
-        temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
-        ((MenuRules *)(temp_s0))->locked = temp_v1;
-        if (temp_v1 != 1) {
+        lockClaimCount = ((MenuRules *)(contextLock))->locked + 1;
+        ((MenuRules *)(contextLock))->locked = lockClaimCount;
+        if (lockClaimCount != 1) {
             __osRestoreInt(mask);
-            osRecvMesg(temp_s0, 0, 1);
+            osRecvMesg(contextLock, 0, 1);
         } else {
             __osRestoreInt(mask);
         }
     }
-    func_8025BE08_de(&arg0->menu[0], arg1);
-    func_80259988_de(&arg0->view[0], arg1);
+    func_8025BE08_de(&context->menu[0], matchValue);
+    func_80259988_de(&context->view[0], matchValue);
     {
-        s32 *temp_s0;
-        s32 temp_v1;
-        u32 temp_v0;
+        s32 *contextLock;
+        s32 lockClaimCount;
+        u32 releaseInterruptMask;
 
-        temp_s0 = &arg0->lock;
-        temp_v0 = __osDisableInt();
-        temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
-        ((MenuRules *)(temp_s0))->locked = temp_v1;
-        if (temp_v1 != 0) {
-            __osRestoreInt(temp_v0);
-            osSendMesg(temp_s0, 0, 1);
+        contextLock = &context->lock;
+        releaseInterruptMask = __osDisableInt();
+        lockClaimCount = ((MenuRules *)(contextLock))->locked - 1;
+        ((MenuRules *)(contextLock))->locked = lockClaimCount;
+        if (lockClaimCount != 0) {
+            __osRestoreInt(releaseInterruptMask);
+            osSendMesg(contextLock, 0, 1);
         } else {
-            __osRestoreInt(temp_v0);
+            __osRestoreInt(releaseInterruptMask);
         }
     }
 }
 
 struct OwnerRecAtD8;
 
-void func_802588D4_de(ContextRecAt2BC0 *arg0, s32 arg1) {
-    void *temp_s0;
+void func_802588D4_de(ContextRecAt2BC0 *context, s32 matchValue) {
+    void *contextLock;
     void *record;
-    s32 temp_v1;
+    s32 lockClaimCount;
     u32 mask;
-    u32 temp_v0;
+    u32 releaseInterruptMask;
 
-    temp_s0 = &arg0->lock;
+    contextLock = &context->lock;
     mask = __osDisableInt();
-    temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
-    ((MenuRules *)(temp_s0))->locked = temp_v1;
-    if (temp_v1 != 1) {
+    lockClaimCount = ((MenuRules *)(contextLock))->locked + 1;
+    ((MenuRules *)(contextLock))->locked = lockClaimCount;
+    if (lockClaimCount != 1) {
         __osRestoreInt(mask);
-        osRecvMesg(temp_s0, 0, 1);
-        record = &arg0->menu[0];
+        osRecvMesg(contextLock, 0, 1);
+        record = &context->menu[0];
     } else {
         __osRestoreInt(mask);
-        record = &arg0->menu[0];
+        record = &context->menu[0];
     }
-    func_8025BF08_de(record, arg1);
-    func_802599EC_de(&arg0->view[0], arg1);
-    temp_s0 = &arg0->lock;
-    temp_v0 = __osDisableInt();
-    temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
-    ((MenuRules *)(temp_s0))->locked = temp_v1;
-    if (temp_v1 != 0) {
-        __osRestoreInt(temp_v0);
-        osSendMesg(temp_s0, 0, 1);
+    func_8025BF08_de(record, matchValue);
+    func_802599EC_de(&context->view[0], matchValue);
+    contextLock = &context->lock;
+    releaseInterruptMask = __osDisableInt();
+    lockClaimCount = ((MenuRules *)(contextLock))->locked - 1;
+    ((MenuRules *)(contextLock))->locked = lockClaimCount;
+    if (lockClaimCount != 0) {
+        __osRestoreInt(releaseInterruptMask);
+        osSendMesg(contextLock, 0, 1);
         return;
     }
-    __osRestoreInt(temp_v0);
+    __osRestoreInt(releaseInterruptMask);
 }
 
-void func_802589A8_de(ContextRecAt2BC0 *arg0, s32 arg1) {
-    void *temp_s0;
+void Audio_StopAudioByMask(ContextRecAt2BC0 *context, s32 matchMask) {
+    void *contextLock;
     void *record;
-    s32 temp_v1;
+    s32 lockClaimCount;
     u32 mask;
-    u32 temp_v0;
+    u32 releaseInterruptMask;
 
-    temp_s0 = &arg0->lock;
+    contextLock = &context->lock;
     mask = __osDisableInt();
-    temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
-    ((MenuRules *)(temp_s0))->locked = temp_v1;
-    if (temp_v1 != 1) {
+    lockClaimCount = ((MenuRules *)(contextLock))->locked + 1;
+    ((MenuRules *)(contextLock))->locked = lockClaimCount;
+    if (lockClaimCount != 1) {
         __osRestoreInt(mask);
-        osRecvMesg(temp_s0, 0, 1);
-        record = &arg0->menu[0];
+        osRecvMesg(contextLock, 0, 1);
+        record = &context->menu[0];
     } else {
         __osRestoreInt(mask);
-        record = &arg0->menu[0];
+        record = &context->menu[0];
     }
-    func_8025C008_de(record, arg1);
-    func_80259A50_de(&arg0->view[0], arg1);
-    temp_s0 = &arg0->lock;
-    temp_v0 = __osDisableInt();
-    temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
-    ((MenuRules *)(temp_s0))->locked = temp_v1;
-    if (temp_v1 != 0) {
-        __osRestoreInt(temp_v0);
-        osSendMesg(temp_s0, 0, 1);
+    func_8025C008_de(record, matchMask);
+    func_80259A50_de(&context->view[0], matchMask);
+    contextLock = &context->lock;
+    releaseInterruptMask = __osDisableInt();
+    lockClaimCount = ((MenuRules *)(contextLock))->locked - 1;
+    ((MenuRules *)(contextLock))->locked = lockClaimCount;
+    if (lockClaimCount != 0) {
+        __osRestoreInt(releaseInterruptMask);
+        osSendMesg(contextLock, 0, 1);
         return;
     }
-    __osRestoreInt(temp_v0);
+    __osRestoreInt(releaseInterruptMask);
 }
 
-void func_80258A7C_de(ContextRecAt2BC0 *arg0, s32 track, CVector3 arg2, s32 arg3, s32 arg4, f32 arg5) {
+void Audio_PlayPositionedSoundWithScale(ContextRecAt2BC0 *arg0, s32 track, CVector3 arg2, s32 arg3, s32 arg4, f32 arg5) {
     arg0->alpha = arg5;
     Texture_PlaySoundAtPosition(arg0, track, arg2, arg3, arg4);
     arg0->alpha = D_800C3EE0_de[1];
 }
 
-void func_80258AE0_de(ContextRecAt2BC0 *arg0) {
+void Audio_PlayPeriodicTrackSound(ContextRecAt2BC0 *arg0) {
     CVector3 zero;
     void *result;
     CVector3 *vec;
@@ -213,84 +213,84 @@ void func_80258BBC_de(ContextRecAt2BC0 *object, float value) {
 }
 
 /** Return the indexed twelve-byte record from the table at offset 0x2B70. */
-char *func_80258BC4_de(char *object, int index) {
+char *Audio_GetMetadataSectionThreeEntry(char *object, int index) {
     return ((ContextRecAt2BC0 *)(object))->table2B70 + index * 12;
 }
 
-void *func_80258BDC_de(ContextRecAt2BC0 *arg0, int arg1) {
+void *Audio_GetMetadataSectionFourEntry(ContextRecAt2BC0 *arg0, int arg1) {
     return (char *)arg0->table2B74 + arg1 * 12;
 }
 
 /** Return the indexed 12-byte entry under object offset 0x2B78. */
-void *func_80258BF4_de(ContextRecAt2BC0 *arg0, int arg1) {
+void *Audio_GetMetadataSectionFiveEntry(ContextRecAt2BC0 *arg0, int arg1) {
     return (char *)arg0->table2B78 + arg1 * 12;
 }
 
-void func_80258C0C_de(void *arg0, s32 arg1) {
+void func_80258C0C_de(void *context, s32 matchValue) {
     {
-        s32 *temp_s0;
-        s32 temp_v1;
+        s32 *contextLock;
+        s32 lockClaimCount;
         u32 mask;
 
-        temp_s0 = &((ContextRecAt2BC0 *)(arg0))->lock;
+        contextLock = &((ContextRecAt2BC0 *)(context))->lock;
         mask = __osDisableInt();
-        temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
-        ((MenuRules *)(temp_s0))->locked = temp_v1;
-        if (temp_v1 != 1) {
+        lockClaimCount = ((MenuRules *)(contextLock))->locked + 1;
+        ((MenuRules *)(contextLock))->locked = lockClaimCount;
+        if (lockClaimCount != 1) {
             __osRestoreInt(mask);
-            osRecvMesg(temp_s0, 0, 1);
+            osRecvMesg(contextLock, 0, 1);
         } else {
             __osRestoreInt(mask);
         }
     }
-    func_8025B5F0_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], arg1);
-    func_80259918_de(&((ContextRecAt2BC0 *)(arg0))->view[0], arg1);
+    func_8025B5F0_de(&((ContextRecAt2BC0 *)(context))->menu[0], matchValue);
+    func_80259918_de(&((ContextRecAt2BC0 *)(context))->view[0], matchValue);
     {
-        s32 *temp_s0;
-        s32 temp_v1;
-        u32 temp_v0;
+        s32 *contextLock;
+        s32 lockClaimCount;
+        u32 releaseInterruptMask;
 
-        temp_s0 = &((ContextRecAt2BC0 *)(arg0))->lock;
-        ((ContextRecAt2BC0 *)(arg0))->field2B9C = 0;
-        temp_v0 = __osDisableInt();
-        temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
-        ((MenuRules *)(temp_s0))->locked = temp_v1;
-        if (temp_v1 != 0) {
-            __osRestoreInt(temp_v0);
-            osSendMesg(temp_s0, 0, 1);
+        contextLock = &((ContextRecAt2BC0 *)(context))->lock;
+        ((ContextRecAt2BC0 *)(context))->field2B9C = 0;
+        releaseInterruptMask = __osDisableInt();
+        lockClaimCount = ((MenuRules *)(contextLock))->locked - 1;
+        ((MenuRules *)(contextLock))->locked = lockClaimCount;
+        if (lockClaimCount != 0) {
+            __osRestoreInt(releaseInterruptMask);
+            osSendMesg(contextLock, 0, 1);
         } else {
-            __osRestoreInt(temp_v0);
+            __osRestoreInt(releaseInterruptMask);
         }
     }
-    func_8025D1BC_de((char *)arg0 + 0x2BC0);
+    func_8025D1BC_de((char *)context + 0x2BC0);
 }
 
 /** Thin wrapper forwarding an offset argument to func_8025DACC_de. */
-void func_80258CEC_de(int arg0) {
-    func_8025DACC_de(arg0 + 0x1D64);
+void func_80258CEC_de(int contextAddress) {
+    func_8025DACC_de(contextAddress + 0x1D64);
 }
 
 /** Store the second argument at offset 0x2BAC. */
-void func_80258D08_de(ContextRecAt2BC0 *arg0, int arg1) {
-    arg0->field2BAC = arg1;
+void Audio_SetVoiceMixValue(ContextRecAt2BC0 *context, int arg1) {
+    context->field2BAC = arg1;
 }
 
-int func_80258D10_de(ContextRecAt2BC0 *arg0) {
-    return arg0->field2BAC;
+int Audio_GetVoiceMixValue(ContextRecAt2BC0 *context) {
+    return context->field2BAC;
 }
 
 /** Store a value in the field at offset 0x2BB4. */
-void func_80258D1C_de(char *object, int value) {
+void Audio_SetPeriodicSoundEnabled(char *object, int value) {
     ((ContextRecAt2BC0 *)(object))->field2BB4 = value;
 }
 
 /** Store a value in the field at offset 0x2B98. */
-void func_80258D24_de(ContextRecAt2BC0 *object, int value) {
+void Audio_SetListenerCamera(ContextRecAt2BC0 *object, int value) {
     object->field2B98 = value;
 }
 
 /** Read the object word at offset 0x2BB0. */
-int func_80258D2C_de(void *object) {
+int Audio_GetSpatialPanMode(void *object) {
     return ((ContextRecAt2BC0 *)(object))->field2BB0;
 }
 
@@ -299,7 +299,7 @@ void func_80258D38_de(ContextRecAt2BC0 *arg0, int arg1) {
     arg0->field2BB0 = arg1;
 }
 
-void *func_80258D40_de(void *arg0) {
+void *Audio_GetSoundPlayer(void *arg0) {
     return &((ContextRecAt2BC0 *)(arg0))->list[0];
 }
 
@@ -308,7 +308,7 @@ void func_80258D48_de(ContextRecAt2BC0 *object, int value) {
     object->field2BB8 = value;
 }
 
-s32 func_80258D50_de(char *obj, s32 owner)
+s32 Audio_CountSoundVoices(char *obj, s32 owner)
 {
     s32 count;
     s32 i;
@@ -355,8 +355,8 @@ s32 func_80258D50_de(char *obj, s32 owner)
 }
 
 /** Thin wrapper forwarding an offset argument to func_8025DB58_de. */
-void func_80258E40_de(int arg0) {
-    func_8025DB58_de(arg0 + 0x1D64);
+void func_80258E40_de(int contextAddress) {
+    func_8025DB58_de(contextAddress + 0x1D64);
 }
 
 /* Clamps a level to between zero and D_800C8FE0, scales it by D_800C8FE4 and stores it as an integer
@@ -366,7 +366,7 @@ void func_80258E40_de(int arg0) {
 
 
 
-void func_80258E5C_de(ObjRecAt2B9C *obj, float value) {
+void Audio_SetClampedAudioLevel(ObjRecAt2B9C *obj, float value) {
     float v;
     float max = D_800C8FE0;
     if (value > max || !(value < 0.0f)) {
@@ -381,21 +381,21 @@ void func_80258E5C_de(ObjRecAt2B9C *obj, float value) {
 }
 
 /** Thin wrapper forwarding an offset argument to func_8025DB34_de. */
-void func_80258EBC_de(int arg0) {
-    func_8025DB34_de(arg0 + 0x1D64);
+void func_80258EBC_de(int contextAddress) {
+    func_8025DB34_de(contextAddress + 0x1D64);
 }
 
 /** Thin wrapper forwarding an offset argument to func_8025DB44_de. */
-void func_80258ED8_de(int arg0) {
-    func_8025DB44_de(arg0 + 0x1D64);
+void func_80258ED8_de(int contextAddress) {
+    func_8025DB44_de(contextAddress + 0x1D64);
 }
 
 /** Thin wrapper forwarding an offset argument to func_8025BB3C_de. */
-void func_80258EF4_de(int arg0) {
-    func_8025BB3C_de(arg0 + 0x1DB8);
+void func_80258EF4_de(int contextAddress) {
+    func_8025BB3C_de(contextAddress + 0x1DB8);
 }
 
-int func_80258F10_de(ContextRecAt2BC0 *arg0, int group) {
+int Audio_PlayDialogGroup(ContextRecAt2BC0 *arg0, int group) {
     float scale = (1.0f);
     float blue = arg0->blue;
     if (!(scale < blue)) {
@@ -405,8 +405,8 @@ int func_80258F10_de(ContextRecAt2BC0 *arg0, int group) {
 }
 
 /** Thin wrapper forwarding an offset argument to func_8025D1BC_de. */
-void func_80258F50_de(int arg0) {
-    func_8025D1BC_de(arg0 + 0x2BC0);
+void func_80258F50_de(int contextAddress) {
+    func_8025D1BC_de(contextAddress + 0x2BC0);
 }
 
 /** Sort the table's word entries into ascending unsigned order. */

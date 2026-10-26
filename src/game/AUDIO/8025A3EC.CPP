@@ -197,7 +197,7 @@ void Audio_UpdateVoiceVolume(AudioVolumeVoice *voice) {
 
 /* Updates a voice pan from its sweep, position or centered fallback and applies it to the owner sound. */
 
-extern s32 func_80258D2C_de(OwnerCode8025A3EC *);
+extern s32 Audio_GetSpatialPanMode(OwnerCode8025A3EC *);
 extern s16 func_80259B10_de(void *, GameplayCamera *);
 
 extern void func_802B2F00_de(void *, s16);
@@ -216,7 +216,7 @@ void func_8025A844_de(Voice_func_8025A844_de *voice) {
     ParamsRecAt18 *params;
 
     params = &voice->params;
-    if (func_80258D2C_de(voice->owner) == 0) {
+    if (Audio_GetSpatialPanMode(voice->owner) == 0) {
         apply_pan(voice, 0x40);
         return;
     }

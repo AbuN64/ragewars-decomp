@@ -56,33 +56,33 @@ extern void func_80246E44_de(char *);
 extern f32 Particle_GetActorHeight(void);
 
 
-void *Weapons_FindNearestPlayer(void *arg0, s32 point, s32 arg2, s32 arg3) {
-    f32 var_f3;
-    func_8022A470_S2 *var_v1;
+void *Weapons_FindNearestPlayer(void *world, s32 point, s32 pointYBits, s32 pointZBits) {
+    f32 nearestDistanceSquared;
+    func_8022A470_S2 *candidatePlayer;
     void *result;
     f32 dx, dy, dz, distSq;
 
     func_80228774_S1 *object;
 
-    var_f3 = D_800C2CE0_de[1];
-    object = arg0;
-    var_v1 = object->unk20;
+    nearestDistanceSquared = D_800C2CE0_de[1];
+    object = world;
+    candidatePlayer = object->unk20;
     result = 0;
-    if (var_v1 != 0) {
+    if (candidatePlayer != 0) {
         do {
-            dx = var_v1->unk8 - *(f32 *)&point;
+            dx = candidatePlayer->unk8 - *(f32 *)&point;
             dx = dx * dx;
-            dy = var_v1->unkC - *(f32 *)&arg2;
+            dy = candidatePlayer->unkC - *(f32 *)&pointYBits;
             dy = dy * dy;
-            dz = var_v1->unk10 - *(f32 *)&arg3;
+            dz = candidatePlayer->unk10 - *(f32 *)&pointZBits;
             dz = dz * dz;
             distSq = (dx + dy) + dz;
-            if (distSq < var_f3) {
-                var_f3 = distSq;
-                result = var_v1;
+            if (distSq < nearestDistanceSquared) {
+                nearestDistanceSquared = distSq;
+                result = candidatePlayer;
             }
-            var_v1 = var_v1->unk16E0;
-        } while (var_v1 != 0);
+            candidatePlayer = candidatePlayer->unk16E0;
+        } while (candidatePlayer != 0);
     }
     return result;
 }
@@ -117,18 +117,18 @@ void *Weapons_FindNearestLivePlayer(struct Context *context, CVector3 position, 
     return var_a1;
 }
 
-s32 Weapons_GetPlayerIndex(void *arg0, unsigned int arg1)
+s32 Weapons_GetPlayerIndex(void *world, unsigned int playerAddress)
 {
-    func_80203E78_S1 *arg0_record = arg0;
-  return (arg1 - (arg0_record->unk4)) / 5864;
+    func_80203E78_S1 *arg0_record = world;
+  return (playerAddress - (arg0_record->unk4)) / 5864;
 }
 
-void *Weapons_FindPlayerByController(char *object, s32 arg1) {
+void *Weapons_FindPlayerByController(char *object, s32 controllerAddress) {
     Round *round = (Round *)object;
     Shared_ActorView *record = (Shared_ActorView *)round->players;
     if (record != 0) {
         do {
-            if ((s32)record->controller == arg1) {
+            if ((s32)record->controller == controllerAddress) {
                 return record;
             }
             record = record->next;
@@ -137,21 +137,21 @@ void *Weapons_FindPlayerByController(char *object, s32 arg1) {
     return 0;
 }
 
-void *Weapons_GetPlayerByIndex(void *world, u32 arg1) {
+void *Weapons_GetPlayerByIndex(void *world, u32 playerIndex) {
     Shared_ActorView *actor;
-    s32 var_a2;
+    s32 currentPlayerIndex;
 
     actor = 0;
-    var_a2 = 0;
-    if (arg1 < 8U) {
+    currentPlayerIndex = 0;
+    if (playerIndex < 8U) {
         actor = ((struct Context *)world)->head;
         if (actor != 0) {
             do {
-                if (var_a2 == (s32)arg1) {
+                if (currentPlayerIndex == (s32)playerIndex) {
                     return actor;
                 }
                 actor = actor->next;
-                var_a2 += 1;
+                currentPlayerIndex += 1;
             } while (actor != 0);
         }
     }
@@ -211,9 +211,9 @@ int Weapons_BeginRoundEnd(char *forcePlayerList) {
     return 1;
 }
 
-void Weapons_EndRound(void *arg0) {
+void Weapons_EndRound(void *roundContext) {
     CGameStatus *state;
-    Round *round = arg0;
+    Round *round = roundContext;
     Node_Weapons_EndRound *node;
 
     state = &D_801462C8.counters;
@@ -365,43 +365,43 @@ s32 func_8022AA9C_de(AimPlayer *aimPlayer, s32 arg1) {
     return ((GlobalState *)p)->field24;
 }
 
-s16 Weapons_GetWeaponClassId(Player *player, s32 arg1) {
-    s16 *var_v0;
-    WeaponInfo *temp_a0;
+s16 Weapons_GetWeaponClassId(Player *player, s32 weaponId) {
+    s16 *selectedClassEntry;
+    WeaponInfo *weaponDefinition;
 
-    temp_a0 = D_800D052C[arg1];
+    weaponDefinition = D_800D052C[weaponId];
     if (player->gear == 1) {
-        var_v0 = temp_a0->weaponClass;
+        selectedClassEntry = weaponDefinition->weaponClass;
     } else {
-        var_v0 = temp_a0->alternateClass;
+        selectedClassEntry = weaponDefinition->alternateClass;
     }
-    if (var_v0 != 0) {
-        return *var_v0;
+    if (selectedClassEntry != 0) {
+        return *selectedClassEntry;
     }
     return -1;
 }
 
-s16 Weapons_GetWeaponAmmo(void *actor, s32 arg1) {
-    s16 *var_v0;
-    s32 temp_v1;
+s16 Weapons_GetWeaponAmmo(void *actor, s32 weaponId) {
+    s16 *selectedClassEntry;
+    s32 ammoSlot;
     WeaponInfo *weapon;
 
-    if ((arg1 == 1) && (((Shared_ActorView *)actor)->actions[1].kind != 0)) {
+    if ((weaponId == 1) && (((Shared_ActorView *)actor)->actions[1].kind != 0)) {
         return -1;
     }
-    weapon = D_800D052C[arg1];
+    weapon = D_800D052C[weaponId];
     if (((Player *)actor)->gear == 1) {
-        var_v0 = weapon->weaponClass;
+        selectedClassEntry = weapon->weaponClass;
     } else {
-        var_v0 = weapon->alternateClass;
+        selectedClassEntry = weapon->alternateClass;
     }
-    if (var_v0 != 0) {
-        temp_v1 = *var_v0;
+    if (selectedClassEntry != 0) {
+        ammoSlot = *selectedClassEntry;
     } else {
-        temp_v1 = -1;
+        ammoSlot = -1;
     }
-    if (temp_v1 != -1) {
-        return ((Shared_ActorView *)actor)->ammo[temp_v1];
+    if (ammoSlot != -1) {
+        return ((Shared_ActorView *)actor)->ammo[ammoSlot];
     }
     return -1;
 }
@@ -428,8 +428,8 @@ s32 func_8022AB9C_de(void *player) {
     return -1;
 }
 
-s32 Weapons_GetMaxHealth(void *arg0) {
-    char *o = (char *)arg0;
+s32 Weapons_GetMaxHealth(void *player) {
+    char *o = (char *)player;
     s32 value;
     s8 type;
 
@@ -483,8 +483,8 @@ int func_8022ADB0_de(struct SharedPlayer *object, s32 unused1) {
     return object->views5E4.view5E4_0.unk5E4 < 0x6400;
 }
 
-f32 Weapons_GetObjectOwnerHeight(void *arg0) {
-    struct Object *object = arg0;
+f32 Weapons_GetObjectOwnerHeight(void *actorObject) {
+    struct Object *object = actorObject;
     struct ModelBlend *owner;
 
     owner = object->owner;

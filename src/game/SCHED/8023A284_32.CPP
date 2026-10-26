@@ -7,9 +7,9 @@
 /* Fills every collision info named by a collision setup table from its row, resetting the
  * active collision state D_80103FCC before each one; the table ends at a row without info. */
 extern Reusable *D_80103FCC;
-void func_8023EE60_de(CCollisionSetup_t *arg0)
+void func_8023EE60_de(CCollisionSetup_t *setupTable)
 {
-    CCollisionSetup_t *setup = arg0;
+    CCollisionSetup_t *setup = setupTable;
     s32 counter = -1;
 
     if (setup->m_pCollInfo != 0) {

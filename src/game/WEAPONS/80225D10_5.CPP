@@ -273,13 +273,13 @@ void func_802283B8_de(World_func_802283B8_de *world) {
     }
 }
 
-void func_802285E8_de(char *arg0) {
+void func_802285E8_de(char *game) {
     char *actor;
 
     if (D_8014687C == 11 || D_8014687C == 8) {
         return;
     }
-    actor = ((ObjRecAt20V2 *)(arg0))->unk20;
+    actor = ((ObjRecAt20V2 *)(game))->unk20;
     while (actor != 0) {
         if (Camera_IsSequenceInWindow() != 0 || ((ObjRecV5 *)(actor))->unk5EA == 0) {
             void *work;
@@ -331,10 +331,10 @@ void func_802285E8_de(char *arg0) {
     }
 }
 
-void func_80228798_de(void *arg0, void *view) {
+void func_80228798_de(void *game, void *view) {
     void *node;
 
-    node = ((func_80228774_S1 *)(arg0))->unk20;
+    node = ((func_80228774_S1 *)(game))->unk20;
     if (node != 0) {
         do {
             void *owner;

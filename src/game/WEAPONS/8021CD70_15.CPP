@@ -55,7 +55,7 @@ static inline s32 try_jump(SharedPlayer *player, Body_func_80224408_de *body) {
     return 0;
 }
 
-void func_8022409C_de(void *player, void *arg1) {
+void func_8022409C_de(void *player, void *bodyActor) {
     CVector3 direction;
     f32 held;
     f32 value;
@@ -70,8 +70,8 @@ void func_8022409C_de(void *player, void *arg1) {
     ((func_80224078_Arg0 *)player)->unk72C = 0;
 
     held = (&D_800C2960_de)[1];
-    Nav_EaseValueToward(&((func_80224078_Arg1 *)(arg1))->unk6C,
-                  ((func_80224078_Arg1 *)arg1)->unk6C +
+    Nav_EaseValueToward(&((func_80224078_Arg1 *)(bodyActor))->unk6C,
+                  ((func_80224078_Arg1 *)bodyActor)->unk6C +
                       (f32)((ControllerRecAtC7 *)((func_80224078_Arg0 *)player)->unk698)->x * D_800C2960_de,
                   held);
     Nav_EaseValueToward(&((func_80224078_Arg0 *)(player))->unk724,
@@ -115,43 +115,43 @@ void func_8022409C_de(void *player, void *arg1) {
 
     flags = ((func_80224078_Arg0 *)player)->unk6AC;
     if (flags & 0x10) {
-        ((func_80224078_Arg1 *)arg1)->unk20 =
-            func_802746A0_de(((func_80224078_Arg1 *)arg1)->unk20, D_800C298C_de, 71.68f);
+        ((func_80224078_Arg1 *)bodyActor)->unk20 =
+            func_802746A0_de(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C298C_de, 71.68f);
     } else if (flags & 0x2020) {
-        ((func_80224078_Arg1 *)arg1)->unk20 =
-            func_802746A0_de(((func_80224078_Arg1 *)arg1)->unk20, D_800C2990_de, 71.68f);
+        ((func_80224078_Arg1 *)bodyActor)->unk20 =
+            func_802746A0_de(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C2990_de, 71.68f);
     } else {
-        ((func_80224078_Arg1 *)arg1)->unk20 =
-            Nav_DecayToZero(((func_80224078_Arg1 *)arg1)->unk20, D_800C2994_de);
+        ((func_80224078_Arg1 *)bodyActor)->unk20 =
+            Nav_DecayToZero(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C2994_de);
     }
 
     {
         f32 angle;
-        angle = ((func_80224078_Arg1 *)arg1)->unk6C;
+        angle = ((func_80224078_Arg1 *)bodyActor)->unk6C;
         angle += (held = D_800C2998_de);
         direction.x = ((func_80224078_Arg0 *)player)->unk6C0 * Math_Sinf(angle);
     }
-    direction.y = ((func_80224078_Arg1 *)arg1)->unk20;
+    direction.y = ((func_80224078_Arg1 *)bodyActor)->unk20;
     direction.z = ((func_80224078_Arg0 *)player)->unk6C0 *
-                  Math_Cosf(((func_80224078_Arg1 *)arg1)->unk6C + held);
+                  Math_Cosf(((func_80224078_Arg1 *)bodyActor)->unk6C + held);
     held = D_800C299C_de;
     direction.x += ((func_80224078_Arg0 *)player)->unk6C4 *
-                   Math_Sinf(((func_80224078_Arg1 *)arg1)->unk6C - held);
+                   Math_Sinf(((func_80224078_Arg1 *)bodyActor)->unk6C - held);
     direction.z += ((func_80224078_Arg0 *)player)->unk6C4 *
-                   Math_Cosf(((func_80224078_Arg1 *)arg1)->unk6C - held);
+                   Math_Cosf(((func_80224078_Arg1 *)bodyActor)->unk6C - held);
 
     Particle_ScaleVector(&direction, &direction, D_800D2988);
     Particle_AddVec3(&((func_80224078_Arg0 *)(player))->unk6E8,
                   &((func_80224078_Arg0 *)(player))->unk6E8, &direction);
-    result = Scene_FindFloorPolygon(&g_world, &((func_80224078_Arg1 *)arg1)->unk8);
+    result = Scene_FindFloorPolygon(&g_world, &((func_80224078_Arg1 *)bodyActor)->unk8);
     if (result != 0) {
-        ((func_80224078_Arg1 *)arg1)->unk14 = result;
+        ((func_80224078_Arg1 *)bodyActor)->unk14 = result;
     }
 
     if (((func_80224078_Arg0 *)player)->unk650 == 1 &&
         (((func_80224078_Arg0 *)player)->unk6AC & 0xE000) == 0xE000 &&
         (((func_80224078_Arg0 *)player)->unk6B0 & 0xE000)) {
-        Weapons_SetPlayerState(player, arg1, 2);
+        Weapons_SetPlayerState(player, bodyActor, 2);
         data = ((func_80224078_Arg0 *)player)->unk5DC;
         if (data != 0) {
             Camera_PostScreenMessage(&D_80145088, data, &s_flyModeOffText);

@@ -94,22 +94,22 @@ extern f32 Particle_GetHorizontalAngle(CVector3 *);
 
 
 
-void func_80226548_de(void *arg0, void *body) {
+void func_80226548_de(void *player, void *body) {
     Shared_Quad aimRotation;
     Shared_Quad aimWords;
     CVector3 toTarget;
     void *aimTarget;
     f32 targetAngle;
     f32 *position;
-    f32 temp_f1;
+    f32 comparisonAngle;
 
-    Weapons_UpdateViewAngles(arg0, body, &D_800CE7E4);
-    if (((Shared_ActorView *)arg0)->targeting != 0) {
-        aimRotation = Weapons_ComputeAimRotation(arg0, &aimTarget, &aimWords);
+    Weapons_UpdateViewAngles(player, body, &D_800CE7E4);
+    if (((Shared_ActorView *)player)->targeting != 0) {
+        aimRotation = Weapons_ComputeAimRotation(player, &aimTarget, &aimWords);
         if (aimTarget != 0) {
-            position = &((Shared_ActorView *)arg0)->position.vector.x;
+            position = &((Shared_ActorView *)player)->position.vector.x;
             if (!(D_800C2B48_de[1] < Particle_GetPointDistance(position, &((Shared_ActorView *)aimTarget)->position.vector.x))) {
-                if (func_802444A4_de(arg0, ((Shared_ActorView *)arg0)->position.vector,
+                if (func_802444A4_de(player, ((Shared_ActorView *)player)->position.vector,
                                      ((Shared_ActorView *)aimTarget)->position.vector,
                                      &D_80103FD0) == 0 ||
                     *D_80103FCC == aimTarget) {
@@ -117,8 +117,8 @@ void func_80226548_de(void *arg0, void *body) {
                     targetAngle = Particle_GetHorizontalAngle(&toTarget);
                     func_80274020_de(&targetAngle);
                     func_80274020_de(&((LevelActor *)body)->yaw);
-                    temp_f1 = ((LevelActor *)body)->yaw;
-                    if (D_800C2B50_de < temp_f1) {
+                    comparisonAngle = ((LevelActor *)body)->yaw;
+                    if (D_800C2B50_de < comparisonAngle) {
                         if (targetAngle < D_800C2B54_de) {
                             targetAngle += D_800C2B58_de;
                         } else {
@@ -126,8 +126,8 @@ void func_80226548_de(void *arg0, void *body) {
                         }
                     } else {
 positive:
-                        temp_f1 = targetAngle;
-                        if (D_800C2B5C_de < temp_f1 &&
+                        comparisonAngle = targetAngle;
+                        if (D_800C2B5C_de < comparisonAngle &&
                             ((LevelActor *)body)->yaw < D_800C2B60_de) {
                             ((LevelActor *)body)->yaw =
                                 ((LevelActor *)body)->yaw + D_800C2B64_de;

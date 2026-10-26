@@ -51,7 +51,7 @@ void func_8025CC90_de(PlayerRecAt24 *player) {
     void *sequence;
 
     func_80258740_de(player->bank);
-    channel = func_80258D40_de(player->bank);
+    channel = Audio_GetSoundPlayer(player->bank);
     switch (player->state) {
         case 0:
             break;

@@ -99,59 +99,59 @@ void func_8023EBFC_de(ActorMotion *motion, MotionContactResult *contact) {
 
 void func_8023EC54_de(ActorMotion *motion, MotionContactResult *contact) {
     s32 material;
-    s32 temp_v0;
+    s32 currentMotionFlags;
     s32 flags;
-    s32 temp_v1_2;
+    s32 baseMotionFlags;
 
     flags = motion->flags;
     if (flags & 0x1000) {
         motion->flags = flags & ~0x2000;
     }
-    temp_v0 = motion->flags;
-    temp_v1_2 = temp_v0 & 0xFFFC7FFF;
-    motion->flags = temp_v1_2;
-    if (temp_v0 & 0x7000) {
+    currentMotionFlags = motion->flags;
+    baseMotionFlags = currentMotionFlags & 0xFFFC7FFF;
+    motion->flags = baseMotionFlags;
+    if (currentMotionFlags & 0x7000) {
         material = contact->material;
         switch (material) {
         case 8:
-            motion->flags = temp_v1_2 | 0x10000;
+            motion->flags = baseMotionFlags | 0x10000;
             return;
         case 7:
-            motion->flags = temp_v1_2 | 0x8000;
+            motion->flags = baseMotionFlags | 0x8000;
             break;
         }
     }
 }
 
-void func_8023ECBC_de(void *arg0, u16 *arg1)
+void func_8023ECBC_de(void *motionStorage, u16 *surfaceKey)
 {
-  char *o = (char *) arg0;
-  s32 temp_v1;
-  s32 temp_v1_2;
-  s32 var_v0;
-  void *temp_v0;
-  temp_v1 = ((Shared_Func80243A80Frame *)o)->sp54;
-  if (temp_v1 & 0x1000)
+  char *o = (char *) motionStorage;
+  s32 initialMotionFlags;
+  s32 currentMotionFlags;
+  s32 updatedMotionFlags;
+  void *surfaceRecord;
+  initialMotionFlags = ((Shared_Func80243A80Frame *)o)->sp54;
+  if (initialMotionFlags & 0x1000)
   {
-    ((Shared_Func80243A80Frame *)o)->sp54 = temp_v1 & (~0x2000);
+    ((Shared_Func80243A80Frame *)o)->sp54 = initialMotionFlags & (~0x2000);
   }
-  temp_v1_2 = ((Shared_Func80243A80Frame *)o)->sp54;
-  ((Shared_Func80243A80Frame *)o)->sp54 = temp_v1_2 & 0xFFFC7FFF;
-  if (temp_v1_2 & 0x7000)
+  currentMotionFlags = ((Shared_Func80243A80Frame *)o)->sp54;
+  ((Shared_Func80243A80Frame *)o)->sp54 = currentMotionFlags & 0xFFFC7FFF;
+  if (currentMotionFlags & 0x7000)
   {
-    temp_v0 = func_8028B2F8_de(&g_world, arg1);
-    if (temp_v0 != 0)
+    surfaceRecord = func_8028B2F8_de(&g_world, surfaceKey);
+    if (surfaceRecord != 0)
     {
-      if ((((ModelBlend *)temp_v0)->collisionFlags) & 0x400000)
+      if ((((ModelBlend *)surfaceRecord)->collisionFlags) & 0x400000)
       {
         ;
         ((Shared_Func80243A80Frame *)o)->sp54 = (((Shared_Func80243A80Frame *)o)->sp54) | 0x8000;
       }
       else
-        if ((((ModelBlend *)temp_v0)->materialFlags) & 0x80)
+        if ((((ModelBlend *)surfaceRecord)->materialFlags) & 0x80)
       {
-        var_v0 = (((Shared_Func80243A80Frame *)o)->sp54) | 0x10000;
-        ((Shared_Func80243A80Frame *)o)->sp54 = var_v0;
+        updatedMotionFlags = (((Shared_Func80243A80Frame *)o)->sp54) | 0x10000;
+        ((Shared_Func80243A80Frame *)o)->sp54 = updatedMotionFlags;
       }
     }
   }

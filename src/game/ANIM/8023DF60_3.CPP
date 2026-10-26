@@ -60,7 +60,7 @@ static inline s32 accepts(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly) {
 
 struct Query;
 
-void func_8023E6EC_de(SegmentCode8023A284 *arg0, struct Query *query) {
+void func_8023E6EC_de(SegmentCode8023A284 *segment, struct Query *query) {
     f32 start;
     f32 span;
     f32 flat;
@@ -74,23 +74,23 @@ void func_8023E6EC_de(SegmentCode8023A284 *arg0, struct Query *query) {
     f32 fade;
     void *node;
 
-    start = func_80241728_de(query, arg0->x0, arg0->y0);
-    span = (func_80241728_de(query, arg0->x1, arg0->y1) + (D_800D0640[1] * 10.24f)) - start;
-    dx = arg0->x1 - arg0->x0;
-    dy = arg0->y1 - arg0->y0;
+    start = func_80241728_de(query, segment->x0, segment->y0);
+    span = (func_80241728_de(query, segment->x1, segment->y1) + (D_800D0640[1] * 10.24f)) - start;
+    dx = segment->x1 - segment->x0;
+    dy = segment->y1 - segment->y0;
     flat = (dx * dx) + (dy * dy);
     total = flat + (span * span);
     if (total == 0.0f) {
-        arg0->height = start;
+        segment->height = start;
         return;
     }
     share = Math_Sqrtf(flat / total);
-    node = arg0->node;
-    nx = arg0->x0 + (share * (arg0->x1 - arg0->x0));
-    arg0->height = start + (share * span);
-    arg0->x1 = nx;
-    arg0->y1 = arg0->y0 + (share * (arg0->y1 - arg0->y0));
-    limit = arg0->limits->value;
+    node = segment->node;
+    nx = segment->x0 + (share * (segment->x1 - segment->x0));
+    segment->height = start + (share * span);
+    segment->x1 = nx;
+    segment->y1 = segment->y0 + (share * (segment->y1 - segment->y0));
+    limit = segment->limits->value;
     target = node;
     if (1.0f < limit) {
         fade = 0.0f;
@@ -101,12 +101,12 @@ void func_8023E6EC_de(SegmentCode8023A284 *arg0, struct Query *query) {
 }
 
 /** Thin wrapper around func_8023E854_de. */
-void func_8023E838_de(void *arg0) {
-    func_8023E854_de(arg0);
+void func_8023E838_de(void *contactInput) {
+    func_8023E854_de(contactInput);
 }
 
-void func_8023E854_de(void *arg0) {
-    struct Input *input = arg0;
+void func_8023E854_de(void *contactStorage) {
+    struct Input *input = contactStorage;
     input->contactNormal.x = 0.0f;
     input->contactNormal.y = 0.0f;
     input->contactNormal.z = 0.0f;
@@ -125,9 +125,9 @@ s32 func_8023E864_de(struct Input *input, Polygon_func_8023E8D4_de *polygon) {
 }
 
 /** Copy three words from offsets 0x48..0x50 to offsets 0x18C..0x194. */
-void func_8023E8B4_de(void *arg0, void *arg1) {
-    ObjRecAt48 *arg1_record = arg1;
-    ObjRecAt18C *arg0_record = arg0;
+void func_8023E8B4_de(void *contactStorage, void *polygonStorage) {
+    ObjRecAt48 *arg1_record = polygonStorage;
+    ObjRecAt18C *arg0_record = contactStorage;
     arg0_record->unk18C = arg1_record->unk48;
 }
 

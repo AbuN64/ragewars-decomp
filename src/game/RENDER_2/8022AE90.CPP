@@ -13,19 +13,19 @@ extern void *func_8025C95C_de(void *, s32, CVector3 *, void *, s32);
 extern s32 *func_8025CC6C_de(void);
 extern s32 func_8025CA24_de(void *, void *);
 
-void func_8022AEA0_de(Shared_ActorView *actor, s32 arg1) {
+void func_8022AEA0_de(Shared_ActorView *actor, s32 soundId) {
     s32 field5DC;
-    void *var_s1;
+    void *soundPosition;
 
     field5DC = (s32) actor->message;
     if (field5DC != 0) {
-        var_s1 = (void *)(field5DC + 0x128);
+        soundPosition = (void *)(field5DC + 0x128);
     } else {
-        var_s1 = &actor->position;
+        soundPosition = &actor->position;
     }
     if (g_world.frozen == 0 && D_8011FAC0.clockPaused == 0) {
         func_8025CA24_de(func_8025CC6C_de(), (void *)actor->field11BC);
-        actor->field11BC = (s32)func_8025C95C_de((void *)func_8025CC6C_de(), arg1, var_s1, var_s1, (s32)actor);
+        actor->field11BC = (s32)func_8025C95C_de((void *)func_8025CC6C_de(), soundId, soundPosition, soundPosition, (s32)actor);
     }
 }
 
@@ -34,19 +34,19 @@ void func_8022AF40_de(void *player) {
     (((struct IntegerState11C0 *) ((s8 *) player))->unk_11BC) = 0;
 }
 
-void func_8022AF74_de(Shared_ActorView *actor, s32 arg1) {
+void func_8022AF74_de(Shared_ActorView *actor, s32 soundId) {
     s32 field5DC;
-    void *var_s1;
+    void *soundPosition;
 
     if (g_world.frozen == 0 && D_8011FAC0.clockPaused == 0) {
         field5DC = (s32) actor->message;
         if (field5DC != 0) {
-            var_s1 = (void *)(field5DC + 0x128);
+            soundPosition = (void *)(field5DC + 0x128);
         } else {
-            var_s1 = &actor->position;
+            soundPosition = &actor->position;
         }
         func_8025CA24_de(func_8025CC6C_de(), (void *)actor->field11C0);
-        actor->field11C0 = (s32)func_8025C95C_de((void *)func_8025CC6C_de(), arg1, var_s1, var_s1, (s32)actor);
+        actor->field11C0 = (s32)func_8025C95C_de((void *)func_8025CC6C_de(), soundId, soundPosition, soundPosition, (s32)actor);
     }
 }
 

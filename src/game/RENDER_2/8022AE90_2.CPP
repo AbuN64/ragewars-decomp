@@ -29,16 +29,16 @@ void Render_SetPlayerResetPosition(void *arg0, CVector3 *arg1)
 }
 
 extern void Weapons_BuildPlayerViewTransform(void *, MatrixF *);
-void func_8022B09C_de(void *arg0, CVector3 *arg1) {
+void func_8022B09C_de(void *player, CVector3 *point) {
     CVector3 input;
     MatrixF matrix;
     CVector3 *input_ptr;
     MatrixF *matrix_ptr;
 
-    func_8022B08C_S1 *object = arg0;
+    func_8022B08C_S1 *object = player;
     func_8022B08C_S2 *owner;
 
-    input = *arg1;
+    input = *point;
     input_ptr = &input;
     matrix_ptr = object->unk5DC;
 
@@ -46,10 +46,10 @@ void func_8022B09C_de(void *arg0, CVector3 *arg1) {
         owner = (void *)matrix_ptr;
         matrix_ptr = &owner->unk160;
     } else {
-        Weapons_BuildPlayerViewTransform(arg0, &matrix);
+        Weapons_BuildPlayerViewTransform(player, &matrix);
         matrix_ptr = &matrix;
     }
-    Particle_TransformPoint(matrix_ptr, input_ptr, arg1);
+    Particle_TransformPoint(matrix_ptr, input_ptr, point);
 }
 
 void func_8022B11C_de(void *arg0, s32 arg1) {
@@ -64,10 +64,10 @@ void func_8022B11C_de(void *arg0, s32 arg1) {
     (((struct ObjectState16DA *) ((s8 *) arg0))->unk_16D8) = var_v1;
 }
 
-void func_8022B144_de(void *arg0, f32 *origin) {
-    MatrixF sp10;
-    Weapons_BuildPlayerViewTransform(arg0, &sp10);
-    func_802732D0_de((char *)&sp10, origin);
+void func_8022B144_de(void *player, f32 *origin) {
+    MatrixF viewTransform;
+    Weapons_BuildPlayerViewTransform(player, &viewTransform);
+    func_802732D0_de((char *)&viewTransform, origin);
 }
 
 /** Report whether the word at offset 0x5E4 is zero. */

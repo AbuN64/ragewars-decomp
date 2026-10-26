@@ -27,12 +27,12 @@ extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 extern void func_802472F0_de(void *);
 extern void Menu_RequestTrackByIds(s32, void *);
 
-void func_8020676C_de(void *arg0, void *arg1, Trigger *trigger) {
+void func_8020676C_de(void *actor, void *motionState, Trigger *trigger) {
     extern void Render_SetActorStateBit(Shared_World *a, void *b, int c);
-    func_802065C0_de(arg0, arg1, trigger->unk6);
-    ((LevelActor *)arg0)->flags = ((LevelActor *)arg0)->flags | 0x2100;
-    func_802472F0_de(arg0);
-    Render_SetActorStateBit(&g_world, arg0, 0);
+    func_802065C0_de(actor, motionState, trigger->unk6);
+    ((LevelActor *)actor)->flags = ((LevelActor *)actor)->flags | 0x2100;
+    func_802472F0_de(actor);
+    Render_SetActorStateBit(&g_world, actor, 0);
 }
 
 void func_802067BC_de(Shared_Actor *actor) {
@@ -48,11 +48,11 @@ void func_802067FC_de(Trigger *trigger) {
     func_8028B670_de(&g_world, trigger->owner, trigger->actor, 1);
 }
 
-void func_8020682C_de(Shared_Actor *actor, s32 *arg1) {
+void func_8020682C_de(Shared_Actor *actor, s32 *sequenceFlags) {
     extern void Render_SetActorStateBit(Shared_World *, void *, s32);
     actor->weaponFlags |= 0x2100;
     if (Camera_IsSequenceInWindow() != 0) {
-        *arg1 |= 0x200;
+        *sequenceFlags |= 0x200;
     }
     func_802472F0_de(actor);
     Render_SetActorStateBit(&g_world, actor, 0);
@@ -62,38 +62,38 @@ void func_80206898_de(Trigger *trigger) {
     func_8028B670_de(&g_world, trigger->owner, trigger->actor, 0);
 }
 
-void func_802068C8_de(struct Shared_Actor *actor, s32 arg1, s32 arg2) {
+void func_802068C8_de(struct Shared_Actor *actor, s32 arg1, s32 trackRequest) {
     extern void Render_SetActorStateBit(Shared_World *, void *, s32);
-    Menu_RequestTrackByIds((s32)actor, (void *)arg2);
+    Menu_RequestTrackByIds((s32)actor, (void *)trackRequest);
     actor->weaponFlags |= 0x2100;
     Render_SetActorStateBit(&g_world, actor, 0);
 }
 
-void func_80206910_de(s32 arg0) {
-    Menu_RequestTrackByIds(0, (void *)arg0);
+void func_80206910_de(s32 trackRequest) {
+    Menu_RequestTrackByIds(0, (void *)trackRequest);
 }
 
 /** Copy the source byte at offset 7 into two fields under object offset 0x18. */
-void func_80206930_de(LevelActor *actor, int arg1, Trigger *arg2) {
+void func_80206930_de(LevelActor *actor, int arg1, Trigger *triggerRecord) {
     void *inner = actor->definition;
-    ((ActorDefinitionHeader *)inner)->first = (s8)arg2->unk6;
+    ((ActorDefinitionHeader *)inner)->first = (s8)triggerRecord->unk6;
     inner = actor->definition;
-    ((ActorDefinitionHeader *)inner)->second = (s8)arg2->unk6;
+    ((ActorDefinitionHeader *)inner)->second = (s8)triggerRecord->unk6;
 }
 
-void func_8020694C_de(char *arg0, void *arg1, Rec *info) {
+void func_8020694C_de(char *actor, void *renderContext, Rec *info) {
     int i;
     int n;
     void *child;
 
-    n = (s8)((LevelActor *)arg0)->stateE7;
+    n = (s8)((LevelActor *)actor)->stateE7;
     for (i = 0; i < n; i++) {
-        child = func_8024BFD4_de(arg0, i);
+        child = func_8024BFD4_de(actor, i);
         if (child != 0) {
             info->a = child;
             info->b = child;
-            func_8024AA18_de(arg0, arg1, info);
-            func_8026DA4C_de(child, ((LevelActor *)arg0)->fieldB4, 1, &((LevelActor *)arg0)->lighting[D_800D297C], 0, ((LevelActor *)arg0)->field3);
+            func_8024AA18_de(actor, renderContext, info);
+            func_8026DA4C_de(child, ((LevelActor *)actor)->fieldB4, 1, &((LevelActor *)actor)->lighting[D_800D297C], 0, ((LevelActor *)actor)->field3);
         }
     }
 }

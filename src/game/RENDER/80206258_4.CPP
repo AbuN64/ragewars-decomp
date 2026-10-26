@@ -33,14 +33,14 @@ void func_80206DD4_de(Actor_func_80206DD4_de *, RiderCode80206258 *);
 void Render_BuildPlayerMatrix(void *object, void *state) {
     Player *player = object;
     ActorMotionState *motionState = state;
-    f32 sp10[16];
+    f32 orientationMatrix[16];
     f32 *matrix;
 
-    BuildRollMatrix(sp10, motionState->pitch);
-    PitchMatrix(sp10, motionState->yaw);
-    YawMatrix(sp10, player->heading);
+    BuildRollMatrix(orientationMatrix, motionState->pitch);
+    PitchMatrix(orientationMatrix, motionState->yaw);
+    YawMatrix(orientationMatrix, player->heading);
     matrix = player->matrix;
-    CopyMatrix(matrix, sp10);
+    CopyMatrix(matrix, orientationMatrix);
     ScaleMatrixLocal(matrix, player->scale.x, player->scale.y, player->scale.z);
     Particle_LimitVectorLength(&player->pos.x, 20000.0f);
     TranslateMatrix(matrix, player->pos.x, player->pos.y, player->pos.z);
@@ -67,8 +67,8 @@ void func_802079B0_de(Player *mover, ActorMotionState *rider) {
     }
 }
 
-void func_80207A90_de(void *arg0, s32 *arg1) {
-    if (!((((struct func_8020D1FC_S1 *) ((s8 *) ((struct ObjRecAt18V5 *) ((s8 *) arg0))->unk18))->unk38) & 0x40)) {
-        *arg1 &= 0xFFFEFFFF;
+void func_80207A90_de(void *actor, s32 *stateFlags) {
+    if (!((((struct func_8020D1FC_S1 *) ((s8 *) ((struct ObjRecAt18V5 *) ((s8 *) actor))->unk18))->unk38) & 0x40)) {
+        *stateFlags &= 0xFFFEFFFF;
     }
 }

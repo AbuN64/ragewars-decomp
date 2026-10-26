@@ -119,7 +119,7 @@ extern void *func_8028CFA0_de(Shared_World *arg0, s32 arg1, s32 arg2);
 
 
 
-void func_80225B98_de(ObjectLinks854 *arg0, void *arg1, s32 arg2)
+void func_80225B98_de(ObjectLinks854 *playerActor, void *arg1, s32 sequenceType)
 {
     s32 enabled;
     u32 resource_flags;
@@ -129,8 +129,8 @@ void func_80225B98_de(ObjectLinks854 *arg0, void *arg1, s32 arg2)
     enabled = 1;
     resource_flags = 0;
 
-    if (arg0->unk_14 != 0) {
-        resource = func_8028B2F8_de(&g_world, arg0->unk_14);
+    if (playerActor->unk_14 != 0) {
+        resource = func_8028B2F8_de(&g_world, playerActor->unk_14);
         if (resource != 0) {
             resource_flags = ((ObjectState108 *)(resource))->resourceFlagBits;
         }
@@ -139,7 +139,7 @@ void func_80225B98_de(ObjectLinks854 *arg0, void *arg1, s32 arg2)
     if (g_world.visibilityEnabled != 0) {
         enabled = 0;
     }
-    if (arg0->unk_664 & 0x8000) {
+    if (playerActor->unk_664 & 0x8000) {
         enabled = 0;
     }
     if (g_world.visibilityEnabled != 0) {
@@ -148,42 +148,42 @@ void func_80225B98_de(ObjectLinks854 *arg0, void *arg1, s32 arg2)
     if (D_80145048 >= 2) {
         enabled = 0;
     }
-    if (arg2 == 12) {
+    if (sequenceType == 12) {
         enabled = 0;
     }
-    if (arg0->unk_664 & 0x8000) {
+    if (playerActor->unk_664 & 0x8000) {
         enabled = 0;
     }
     if (resource_flags & 0x1000000) {
         enabled = 0;
     }
     if ((resource_flags & 0x80000) &&
-        (arg2 != 20) && (arg2 != 40) && (arg2 != 30)) {
+        (sequenceType != 20) && (sequenceType != 40) && (sequenceType != 30)) {
         enabled = 0;
     }
 
-    arg0->unk_850 = enabled;
+    playerActor->unk_850 = enabled;
     if (enabled != 0) {
-        if (arg2 == 50) {
+        if (sequenceType == 50) {
             void *data;
 
-            data = arg0->unk_5DC;
+            data = playerActor->unk_5DC;
             D_800C9FE4 = 1;
             if (data != 0) {
                 for (i = 0; i < 4; i++) {
-                    D_800FEAD8[i] = ((struct ObjectState521 *) (((u8 *) arg0->unk_5DC) + i))->unk_520;
+                    D_800FEAD8[i] = ((struct ObjectState521 *) (((u8 *) playerActor->unk_5DC) + i))->unk_520;
                 }
             }
         }
         D_800CD6E0_de = 0;
-        D_800FE9F0 = arg0;
-        func_80245618_de(arg2, 0, (VoidCallback)&D_0022ECCC);
+        D_800FE9F0 = playerActor;
+        func_80245618_de(sequenceType, 0, (VoidCallback)&D_0022ECCC);
     }
 
     resource = func_8028CFA0_de(&g_world, -1, 0xC45);
     if (resource != 0) {
-        arg0->unk_50 = ((ObjectState108 *)(resource))->unk_FC;
-        arg0->unk_54 = ((ObjectState108 *)(resource))->unk_100;
-        arg0->unk_58 = ((ObjectState108 *)(resource))->unk_104;
+        playerActor->unk_50 = ((ObjectState108 *)(resource))->unk_FC;
+        playerActor->unk_54 = ((ObjectState108 *)(resource))->unk_100;
+        playerActor->unk_58 = ((ObjectState108 *)(resource))->unk_104;
     }
 }

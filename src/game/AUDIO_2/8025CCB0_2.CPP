@@ -59,13 +59,13 @@ static inline void restart(PlayerRecAt1E *player) {
 
     if (player->state != 2 && player->state != 0) {
         player->state = 2;
-        channel = func_80258D40_de(player->bank);
+        channel = Audio_GetSoundPlayer(player->bank);
         func_802B2F00_de(channel, player->id);
         alSndpStop(channel);
     }
 }
 
-/* Initialises a resource record with the resource, -1 at 4 and 0xC, zero at 8 and 0x14, 0x40 at 0x18, and at 0x1C the halfword func_802B2510_de returns for func_80258D40_de's result on the stored resource and D_800D0D78. Adapted from func_80205694_de with the two calls replaced by field stores and a nested call pair whose first argument is read back from the record. */
+/* Initialises a resource record with the resource, -1 at 4 and 0xC, zero at 8 and 0x14, 0x40 at 0x18, and at 0x1C the halfword func_802B2510_de returns for Audio_GetSoundPlayer's result on the stored resource and D_800D0D78. Adapted from func_80205694_de with the two calls replaced by field stores and a nested call pair whose first argument is read back from the record. */
 
 
 
@@ -80,7 +80,7 @@ s32 func_8025CED0_de(PlayerRecAt1E *player, s32 group, f32 scale, int unused3) {
     if (song == -1) {
         return -1;
     }
-    func_80258D40_de(player->bank);
+    Audio_GetSoundPlayer(player->bank);
     func_80258740_de(player->bank);
     player->group = group;
     player->song = song;
@@ -105,7 +105,7 @@ void func_8025D158_de(struct Shape_typemap_110 *record, s32 resource) {
     record->field_8 = 0;
     record->field_14 = 0;
     record->field_18 = 0x40;
-    record->field_1C = func_802B2510_de(func_80258D40_de(record->field_0), D_800D0D78);
+    record->field_1C = func_802B2510_de(Audio_GetSoundPlayer(record->field_0), D_800D0D78);
 }
 
 void func_8025D1BC_de(void *arg0) {
@@ -118,7 +118,7 @@ void func_8025D1BC_de(void *arg0) {
     state = player->state;
     if (state != 2 && state != 0) {
         player->state = 2;
-        soundPlayer = func_80258D40_de(player->bank);
+        soundPlayer = Audio_GetSoundPlayer(player->bank);
         func_802B2F00_de(soundPlayer, player->id);
         alSndpStop(soundPlayer);
     }
@@ -190,7 +190,7 @@ void func_8025D3E4_de(void *arg0) {
     state = player->state;
     if (state != 2 && state != 0) {
         player->state = 2;
-        soundPlayer = func_80258D40_de(player->bank);
+        soundPlayer = Audio_GetSoundPlayer(player->bank);
         func_802B2F00_de(soundPlayer, player->id);
         alSndpStop(soundPlayer);
     }

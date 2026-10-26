@@ -150,164 +150,164 @@ struct Cursor;
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x40, 0x44, 0x48, 0x4c, 0x50, 0x54, 0x58, 0x68, 0x6c], gap at: 0x5c. */
 /* Steers an actor along path nodes, blending direction, speed and orientation as it advances waypoints. */
-void func_802070D0_de(func_802070D0_S3 *arg0, func_802070D0_S1 *arg1) {
+void func_802070D0_de(func_802070D0_S3 *actor, func_802070D0_S1 *pathState) {
     Triple initial;
     CVector3 vec0;
     CVector3 vec1;
-    f32 temp_f0;
-    f32 temp_f0_2;
-    f32 temp_f1;
+    f32 advancedBlend;
+    f32 remainingPause;
+    f32 previousBlend;
     f32 temp_f1_2;
-    f32 temp_f1_3;
-    f32 temp_f1_4;
-    f32 temp_f1_5;
-    f32 temp_f1_6;
-    f32 temp_f1_7;
-    f32 temp_f1_8;
-    f32 temp_f20;
-    f32 temp_f2;
+    f32 previousDirectionY;
+    f32 previousDirectionZ;
+    f32 pauseOrDirectionZ;
+    f32 currentHeading;
+    f32 currentSecondaryAngle;
+    f32 currentTertiaryAngle;
+    f32 blendRate;
+    f32 targetDistance;
     f32 temp_f2_2;
-    f32 temp_f2_3;
-    f32 temp_f2_4;
+    f32 segmentDirectionY;
+    f32 segmentDirectionZ;
     f32 arg0_2;
-    f32 temp_f2_5;
-    f32 temp_f2_6;
-    f32 temp_f2_7;
-    f32 var_f1;
-    f32 var_f3;
+    f32 initialHeading;
+    f32 initialSecondaryAngle;
+    f32 initialTertiaryAngle;
+    f32 arrivalRadius;
+    f32 movementSpeed;
     u16 half;
-    func_802070D0_S2 *temp_s2;
-    void *temp_s3;
-    func_802070D0_S2 *temp_v0;
-    temp_s3 = (void *) &arg1->unk94;
-    temp_v0 = func_80219408_de(temp_s3);
-    initial = temp_v0->pos;
-    Particle_SubtractVectors(&vec0, &initial, &arg0->unk8);
-    temp_s2 = func_80219434_de(temp_s3);
-    temp_f2 = Math_Sqrtf(vec0.x * vec0.x + vec0.y * vec0.y + vec0.z * vec0.z);
-    var_f1 = temp_v0->unk1C;
-    temp_f20 = temp_s2->unk20;
-    if (var_f1 < 3.0f) {
-        var_f1 = 3.0f;
+    func_802070D0_S2 *segmentNode;
+    void *pathCursor;
+    func_802070D0_S2 *targetNode;
+    pathCursor = (void *) &pathState->unk94;
+    targetNode = func_80219408_de(pathCursor);
+    initial = targetNode->pos;
+    Particle_SubtractVectors(&vec0, &initial, &actor->unk8);
+    segmentNode = func_80219434_de(pathCursor);
+    targetDistance = Math_Sqrtf(vec0.x * vec0.x + vec0.y * vec0.y + vec0.z * vec0.z);
+    arrivalRadius = targetNode->unk1C;
+    blendRate = segmentNode->unk20;
+    if (arrivalRadius < 3.0f) {
+        arrivalRadius = 3.0f;
     }
-    if (temp_f2 <= var_f1 * 10.24f) {
-        arg1->unk14C = 0.0f;
-        temp_s2->unk14.half = (u16) (temp_s2->unk14.half & 0x7FFF);
-        func_802192C0_de(temp_s3);
-        arg1->unk140 = (f32) arg1->unk150;
-        arg1->unk144 = (f32) arg1->unk154;
-        arg1->unk148 = (f32) arg1->unk158;
-        arg1->unk15C = (f32) arg1->unk134;
-        arg0_2 = arg0->unk6C;
-        arg1->unk164 = (f32) arg1->unk138;
-        arg1->unk160 = (f32) arg0_2;
+    if (targetDistance <= arrivalRadius * 10.24f) {
+        pathState->unk14C = 0.0f;
+        segmentNode->unk14.half = (u16) (segmentNode->unk14.half & 0x7FFF);
+        func_802192C0_de(pathCursor);
+        pathState->unk140 = (f32) pathState->unk150;
+        pathState->unk144 = (f32) pathState->unk154;
+        pathState->unk148 = (f32) pathState->unk158;
+        pathState->unk15C = (f32) pathState->unk134;
+        arg0_2 = actor->unk6C;
+        pathState->unk164 = (f32) pathState->unk138;
+        pathState->unk160 = (f32) arg0_2;
         return;
     }
-    if (temp_s2->unk14.half & 2) {
-        temp_f1 = arg1->unk14C;
-        if (temp_f1 <= 0.0f) {
-            arg1->unk14C = temp_f20;
+    if (segmentNode->unk14.half & 2) {
+        previousBlend = pathState->unk14C;
+        if (previousBlend <= 0.0f) {
+            pathState->unk14C = blendRate;
         } else {
-            temp_f0 = temp_f1 + temp_f20;
-            arg1->unk14C = temp_f0;
-            if (temp_f0 > 1.0f) {
-                arg1->unk14C = 1.0f;
+            advancedBlend = previousBlend + blendRate;
+            pathState->unk14C = advancedBlend;
+            if (advancedBlend > 1.0f) {
+                pathState->unk14C = 1.0f;
             }
         }
-        if (temp_s2 == temp_v0) {
-            Particle_SubtractVectors(&vec1, temp_s2, &arg0->unk8);
+        if (segmentNode == targetNode) {
+            Particle_SubtractVectors(&vec1, segmentNode, &actor->unk8);
         } else {
-            Particle_SubtractVectors(&vec1, temp_v0, temp_s2);
+            Particle_SubtractVectors(&vec1, targetNode, segmentNode);
         }
         Particle_NormalizeVec3(&vec1);
         ;
-        vec1.x = arg1->unk140 + arg1->unk14C * (vec1.x - arg1->unk140);
-        temp_f2_3 = arg1->unk144;
-        vec1.y = temp_f2_3 + arg1->unk14C * (vec1.y - temp_f2_3);
-        temp_f2_4 = arg1->unk148;
-        vec1.z = temp_f2_4 + arg1->unk14C * (vec1.z - temp_f2_4);
+        vec1.x = pathState->unk140 + pathState->unk14C * (vec1.x - pathState->unk140);
+        segmentDirectionY = pathState->unk144;
+        vec1.y = segmentDirectionY + pathState->unk14C * (vec1.y - segmentDirectionY);
+        segmentDirectionZ = pathState->unk148;
+        vec1.z = segmentDirectionZ + pathState->unk14C * (vec1.z - segmentDirectionZ);
         Particle_NormalizeVec3(&vec1);
-        if (arg1->unk14C >= 1.0f) {
+        if (pathState->unk14C >= 1.0f) {
             goto block_17;
         }
     } else {
         Particle_NormalizeVec3(&vec0);
         ;
-        vec1.x = arg1->unk140 + temp_f20 * (vec0.x - arg1->unk140);
-        temp_f1_3 = arg1->unk144;
-        vec1.y = temp_f1_3 + temp_f20 * (vec0.y - temp_f1_3);
-        temp_f1_4 = arg1->unk148;
-        vec1.z = temp_f1_4 + temp_f20 * (vec0.z - temp_f1_4);
+        vec1.x = pathState->unk140 + blendRate * (vec0.x - pathState->unk140);
+        previousDirectionY = pathState->unk144;
+        vec1.y = previousDirectionY + blendRate * (vec0.y - previousDirectionY);
+        previousDirectionZ = pathState->unk148;
+        vec1.z = previousDirectionZ + blendRate * (vec0.z - previousDirectionZ);
         Particle_NormalizeVec3(&vec1);
         block_17:
-        arg1->unk140 = vec1.x;
-        arg1->unk144 = vec1.y;
-        arg1->unk148 = vec1.z;
+        pathState->unk140 = vec1.x;
+        pathState->unk144 = vec1.y;
+        pathState->unk148 = vec1.z;
     }
-    arg1->unk150 = vec1.x;
-    arg1->unk154 = vec1.y;
-    arg1->unk158 = vec1.z;
-    half = temp_s2->unk14.half;
+    pathState->unk150 = vec1.x;
+    pathState->unk154 = vec1.y;
+    pathState->unk158 = vec1.z;
+    half = segmentNode->unk14.half;
     if (half & 1) {
-        if (arg1->unk168 > 0.0f && !(half & 0x8000)) {
-            var_f3 = arg1->unk168 + (Math_Cosf((1.0f - temp_s2->unk30) * 3.1415927f) + 1.0f) * (-arg1->unk168 * 0.5f);
-            if (var_f3 <= 0.3f) {
-                arg1->unk16C = (f32) (temp_s2->unk34 * 15.0f);
-                var_f3 = 0.0f;
-                temp_s2->unk14.half = (u16) (temp_s2->unk14.half | 0x8000);
+        if (pathState->unk168 > 0.0f && !(half & 0x8000)) {
+            movementSpeed = pathState->unk168 + (Math_Cosf((1.0f - segmentNode->unk30) * 3.1415927f) + 1.0f) * (-pathState->unk168 * 0.5f);
+            if (movementSpeed <= 0.3f) {
+                pathState->unk16C = (f32) (segmentNode->unk34 * 15.0f);
+                movementSpeed = 0.0f;
+                segmentNode->unk14.half = (u16) (segmentNode->unk14.half | 0x8000);
             }
         } else {
-            temp_f1_5 = arg1->unk16C;
-            var_f3 = 0.0f;
-            if (temp_f1_5 > 0.0f) {
-                temp_f0_2 = temp_f1_5 - D_800D2988;
-                arg1->unk16C = temp_f0_2;
-                if (temp_f0_2 <= 0.0f) {
-                    arg1->unk16C = 0.0f;
+            pauseOrDirectionZ = pathState->unk16C;
+            movementSpeed = 0.0f;
+            if (pauseOrDirectionZ > 0.0f) {
+                remainingPause = pauseOrDirectionZ - D_800D2988;
+                pathState->unk16C = remainingPause;
+                if (remainingPause <= 0.0f) {
+                    pathState->unk16C = 0.0f;
                 }
-            } else if (temp_f1_5 == 0.0f) {
-                var_f3 = arg1->unk168 + (Math_Cosf((1.0f - temp_s2->unk30) * 3.1415927f) + 1.0f) * ((temp_s2->unk24 - arg1->unk168) * 0.5f);
+            } else if (pauseOrDirectionZ == 0.0f) {
+                movementSpeed = pathState->unk168 + (Math_Cosf((1.0f - segmentNode->unk30) * 3.1415927f) + 1.0f) * ((segmentNode->unk24 - pathState->unk168) * 0.5f);
             }
         }
     } else {
-        var_f3 = arg1->unk168 + (Math_Cosf(2.670354f) + 1.0f) * ((temp_s2->unk24 - arg1->unk168) * 0.5f);
+        movementSpeed = pathState->unk168 + (Math_Cosf(2.670354f) + 1.0f) * ((segmentNode->unk24 - pathState->unk168) * 0.5f);
     }
-    if (arg0->unk38 & 8) {
-        var_f3 = 0.0f;
+    if (actor->unk38 & 8) {
+        movementSpeed = 0.0f;
     }
-    arg1->unk168 = var_f3;
-    arg1->unk54 = (f32) (arg0->unk8.v1 + vec1.x * var_f3 * D_800D2988);
-    arg1->unk58 = (f32) (arg0->unkC + vec1.y * var_f3 * D_800D2988);
-    temp_f1_5 = vec1.z;
-    arg1->unk5C = (f32) (arg0->unk10 + temp_f1_5 * var_f3 * D_800D2988);
-    if (temp_s2->unk14.half & 8) {
-        if ((temp_s2->unk14.word & 0x420000) == 0x420000) {
-            temp_f2_5 = arg1->unk160;
-            arg0->unk6C = (f32) (temp_f2_5 + arg1->unk14C * (temp_s2->unk10 * 0.017453294f - temp_f2_5));
+    pathState->unk168 = movementSpeed;
+    pathState->unk54 = (f32) (actor->unk8.v1 + vec1.x * movementSpeed * D_800D2988);
+    pathState->unk58 = (f32) (actor->unkC + vec1.y * movementSpeed * D_800D2988);
+    pauseOrDirectionZ = vec1.z;
+    pathState->unk5C = (f32) (actor->unk10 + pauseOrDirectionZ * movementSpeed * D_800D2988);
+    if (segmentNode->unk14.half & 8) {
+        if ((segmentNode->unk14.word & 0x420000) == 0x420000) {
+            initialHeading = pathState->unk160;
+            actor->unk6C = (f32) (initialHeading + pathState->unk14C * (segmentNode->unk10 * 0.017453294f - initialHeading));
         } else {
-            temp_f1_6 = arg0->unk6C;
-            arg0->unk6C = (f32) (temp_f1_6 + (temp_s2->unk10 * 0.017453294f - temp_f1_6) * 0.1f);
+            currentHeading = actor->unk6C;
+            actor->unk6C = (f32) (currentHeading + (segmentNode->unk10 * 0.017453294f - currentHeading) * 0.1f);
         }
     } else {
-        Weapons_ApplyClampedTurn(arg0, (s32) arg1, 10.0f, Weapons_GetSignedAngleToPoint(arg0, *(CVector3 *) &arg1->unk54));
+        Weapons_ApplyClampedTurn(actor, (s32) pathState, 10.0f, Weapons_GetSignedAngleToPoint(actor, *(CVector3 *) &pathState->unk54));
     }
-    if (temp_s2->unk14.half & 4) {
-        if ((temp_s2->unk14.word & 0x220000) == 0x220000) {
-            temp_f2_6 = arg1->unk15C;
-            arg1->unk134 = (f32) (temp_f2_6 + arg1->unk14C * (temp_s2->unk28 * 0.017453294f - temp_f2_6));
+    if (segmentNode->unk14.half & 4) {
+        if ((segmentNode->unk14.word & 0x220000) == 0x220000) {
+            initialSecondaryAngle = pathState->unk15C;
+            pathState->unk134 = (f32) (initialSecondaryAngle + pathState->unk14C * (segmentNode->unk28 * 0.017453294f - initialSecondaryAngle));
         } else {
-            temp_f1_7 = arg1->unk134;
-            arg1->unk134 = (f32) (temp_f1_7 + (temp_s2->unk28 * 0.017453294f - temp_f1_7) * 0.1f);
+            currentSecondaryAngle = pathState->unk134;
+            pathState->unk134 = (f32) (currentSecondaryAngle + (segmentNode->unk28 * 0.017453294f - currentSecondaryAngle) * 0.1f);
         }
     }
-    if (temp_s2->unk14.half & 0x10) {
-        if ((temp_s2->unk14.word & 0x820000) == 0x820000) {
-            temp_f2_7 = arg1->unk164;
-            arg1->unk138 = (f32) (temp_f2_7 + arg1->unk14C * (temp_s2->unk2C * 0.017453294f - temp_f2_7));
+    if (segmentNode->unk14.half & 0x10) {
+        if ((segmentNode->unk14.word & 0x820000) == 0x820000) {
+            initialTertiaryAngle = pathState->unk164;
+            pathState->unk138 = (f32) (initialTertiaryAngle + pathState->unk14C * (segmentNode->unk2C * 0.017453294f - initialTertiaryAngle));
             return;
         }
-        temp_f1_8 = (*arg1).unk138;
-        arg1->unk138 = (f32) (temp_f1_8 + (temp_s2->unk2C * 0.017453294f - temp_f1_8) * 0.1f);
+        currentTertiaryAngle = (*pathState).unk138;
+        pathState->unk138 = (f32) (currentTertiaryAngle + (segmentNode->unk2C * 0.017453294f - currentTertiaryAngle) * 0.1f);
     }
 }
 
@@ -343,45 +343,45 @@ s32 func_80207738_de(void *context, struct InputRecAt37 *option) {
 }
 
 extern s32 Render_TestActorStateBit(void *, void *);
-void func_802077CC_de(int arg0) {
-    Render_TestActorStateBit(&g_world, (void *)arg0);
+void func_802077CC_de(int actorHandle) {
+    Render_TestActorStateBit(&g_world, (void *)actorHandle);
 }
 
 void func_802077F4_de(void *object, void *state)
 {
-    Player *arg0 = object;
-    ActorMotionState *arg1 = state;
+    Player *actor = object;
+    ActorMotionState *motionState = state;
     f32 k;
     f32 value;
     f32 scaled;
-    ActorMotionResource *temp_v1;
-    ActorMotionDefinition *temp_v0;
+    ActorMotionResource *motionResource;
+    ActorMotionDefinition *motionDefinition;
 
-    temp_v1 = arg0->definition;
+    motionResource = actor->definition;
     k = D_800C1B9C_de;
-    arg1->table = &D_800C86A0_de;
-    arg1->update = &D_002079B0;
-    arg1->transform = &D_00207910;
-    arg1->yaw = 0;
-    arg1->pitch = 0;
-    temp_v0 = &temp_v1->motion;
-    value = temp_v0->speed;
-    arg1->unk124 = 0;
-    arg1->unk128 = 0;
-    arg1->unk12C = 0;
-    arg1->unk130 = 0;
-    arg1->speed = value;
-    scaled = temp_v0->speed;
-    arg1->unk140 = 0;
-    arg1->unk144 = 0;
+    motionState->table = &D_800C86A0_de;
+    motionState->update = &D_002079B0;
+    motionState->transform = &D_00207910;
+    motionState->yaw = 0;
+    motionState->pitch = 0;
+    motionDefinition = &motionResource->motion;
+    value = motionDefinition->speed;
+    motionState->unk124 = 0;
+    motionState->unk128 = 0;
+    motionState->unk12C = 0;
+    motionState->unk130 = 0;
+    motionState->speed = value;
+    scaled = motionDefinition->speed;
+    motionState->unk140 = 0;
+    motionState->unk144 = 0;
     scaled = scaled * k;
-    arg1->unk148 = 0;
-    arg1->unk14C = 0;
-    arg1->unk168 = 0;
-    arg1->unk16C = 0;
-    arg1->progress = scaled;
-    if (temp_v1->motion.flags & 4) {
-        arg0->weaponFlags = arg0->weaponFlags & ~0x2000;
+    motionState->unk148 = 0;
+    motionState->unk14C = 0;
+    motionState->unk168 = 0;
+    motionState->unk16C = 0;
+    motionState->progress = scaled;
+    if (motionResource->motion.flags & 4) {
+        actor->weaponFlags = actor->weaponFlags & ~0x2000;
     }
 }
 

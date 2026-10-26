@@ -351,15 +351,15 @@ void func_80205F18_de(Actor_func_80205F18_de *actor, Action *action) {
     actor->flags &= ~0x100;
 }
 
-void func_80206018_de(void *arg0, EventRecAt30 *arg1) {
+void func_80206018_de(void *actor, EventRecAt30 *callbackRecord) {
     CallbackHolder *holder;
     s32 different;
 
-    different = Render_TestActorStateBit(&g_world, arg0) != 1;
+    different = Render_TestActorStateBit(&g_world, actor) != 1;
     if (different == 0) {
-        holder = arg1->holder;
+        holder = callbackRecord->holder;
         if ((holder != 0) && (holder->callback != 0)) {
-            holder->callback(arg0, arg1);
+            holder->callback(actor, callbackRecord);
         }
     }
 }

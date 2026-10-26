@@ -9,7 +9,7 @@ struct SortTable;
 typedef struct SortTable SortTable;
 
 struct ContextRecAt2BC0;
-extern void *func_80258BF4_de(struct ContextRecAt2BC0 *arg0, int arg1);
+extern void *Audio_GetMetadataSectionFiveEntry(struct ContextRecAt2BC0 *arg0, int arg1);
 
 struct SceneRecAt2B5C;
 struct SceneRecAt2B5C {
@@ -41,7 +41,7 @@ extern void func_80258B94_de(struct ContextRecAt2BC0 *arg0, int arg1);
 
 extern void func_80258BBC_de(struct ContextRecAt2BC0 *object, float value);
 
-extern int func_80258D2C_de(void *object);
+extern int Audio_GetSpatialPanMode(void *object);
 
 struct ObjRecAt2B9C;
 struct ObjRecAt2B9C {
@@ -49,13 +49,13 @@ struct ObjRecAt2B9C {
     int level;
 };
 
-extern char *func_80258BC4_de(char *object, int index);
+extern char *Audio_GetMetadataSectionThreeEntry(char *object, int index);
 
 extern void func_80258D38_de(struct ContextRecAt2BC0 *arg0, int arg1);
 
 extern int func_80258FF4_de(char *arg0, int id);
 
-extern void *func_80258BDC_de(struct ContextRecAt2BC0 *arg0, int arg1);
+extern void *Audio_GetMetadataSectionFourEntry(struct ContextRecAt2BC0 *arg0, int arg1);
 
 extern double D_800C3EE8_de;
 

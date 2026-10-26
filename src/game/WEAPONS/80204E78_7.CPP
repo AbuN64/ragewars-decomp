@@ -23,8 +23,8 @@ void func_80206080_de(void *levelActor, void *actorMotionState) {
     char *ctx;
     f32 result;
     s32 count;
-    s32 temp_v1;
-    f64 var_f1;
+    s32 delayPercent;
+    f64 unsignedDelayPercent;
     f32 scaled;
 
     resource = (void *)actor->definition;
@@ -37,46 +37,46 @@ void func_80206080_de(void *levelActor, void *actorMotionState) {
         if ((u32) count >= 3) {
             count -= 2;
             scaled = result * D_800C1AD0_de;
-            temp_v1 = 0x64 - count * 25;
-            var_f1 = (f64) temp_v1;
-            if (temp_v1 < 0) {
-                var_f1 += (4294967296.0);
+            delayPercent = 0x64 - count * 25;
+            unsignedDelayPercent = (f64) delayPercent;
+            if (delayPercent < 0) {
+                unsignedDelayPercent += (4294967296.0);
             }
-            motion->speed = scaled * (f32) var_f1;
+            motion->speed = scaled * (f32) unsignedDelayPercent;
         }
     }
 }
 
 void func_8020612C_de(LevelActor *actor, ActorMotionState *motionState) {
     AnimationTriggerResource *definition;
-    AnimationTriggerDefinition *temp_a2;
+    AnimationTriggerDefinition *triggerDefinition;
     s32 flags;
-    s32 var_v0;
+    s32 interactionGuard;
 
     definition = (void *)actor->definition;
-    temp_a2 = &definition->trigger;
-    if (temp_a2->enabled == 0) {
-        if (temp_a2->firstAnimation == -1) {
+    triggerDefinition = &definition->trigger;
+    if (triggerDefinition->enabled == 0) {
+        if (triggerDefinition->firstAnimation == -1) {
             motionState->timer = 0.0f;
             return;
         }
-        if (temp_a2->secondAnimation == -1) {
+        if (triggerDefinition->secondAnimation == -1) {
             motionState->timer = 0.0f;
             return;
         }
     }
-    if (motionState->unk124 == temp_a2->animation) {
+    if (motionState->unk124 == triggerDefinition->animation) {
         motionState->timer = 0.0f;
         return;
     }
-    flags = temp_a2->flags;
+    flags = triggerDefinition->flags;
     if (!(flags & 1)) {
         if (motionState->unk128 <= 0) {
             return;
         }
     }
-    var_v0 = flags & 2;
-    if (var_v0 != 0) {
+    interactionGuard = flags & 2;
+    if (interactionGuard != 0) {
         if (actor->flags & 0x200) {
             motionState->timer = 0.0f;
             return;
@@ -93,10 +93,10 @@ void func_802061D8_de(void *a, struct WeaponEventSource *b) {
     }
 }
 
-int func_80206200_de(int arg0) {
-    return Render_TestActorStateBit(&g_world, arg0) == 1;
+int func_80206200_de(int actor) {
+    return Render_TestActorStateBit(&g_world, actor) == 1;
 }
 
-void func_80206230_de(void *arg0) {
-    Render_SetActorStateBit(&g_world, arg0, 1);
+void func_80206230_de(void *actor) {
+    Render_SetActorStateBit(&g_world, actor, 1);
 }

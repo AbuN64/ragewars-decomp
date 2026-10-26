@@ -122,7 +122,7 @@ void func_80227038_de(s8 *world) {
     CGameStatus *case6_active_rules; 
     CGameStatus *rules;
     u32 state;
-    s32 var_a0;
+    s32 restoredHealth;
     s32 var_a0_3;
     s32 var_a0_5;
     s32 var_a0_7;
@@ -136,55 +136,55 @@ void func_80227038_de(s8 *world) {
     f32 scaled_y;
     f32 banner_half;
     f32 banner_size;
-    f32 temp_f2;
-    f32 temp_f2_2;
-    f32 temp_f2_3;
-    f32 temp_f2_4;
-    f32 temp_f2_5;
-    f32 temp_f2_6;
-    f32 temp_f2_7;
-    f32 temp_f2_8;
-    f32 temp_f3;
-    f32 temp_f3_2;
-    f32 temp_f3_3;
-    f32 temp_f3_4;
-    f32 temp_f3_5;
-    f32 temp_f3_6;
-    s32 temp_a0;
-    s32 temp_a0_2;
-    s32 temp_s1;
-    s32 temp_v0;
-    s32 temp_v0_10;
-    s32 temp_v0_2; /* Reused for each initialized rule and actor-kind result in the health loops. */
-    s32 temp_v0_3;
-    s32 temp_v0_4;
-    s32 var_v1;
+    f32 allPlayersViewWidth;
+    f32 allPlayersScaleX;
+    f32 rotatingViewHeight;
+    f32 rotatingScaleY;
+    f32 chosenViewHeight;
+    f32 chosenScaleY;
+    f32 flippedViewWidth;
+    f32 flippedScaleX;
+    f32 allPlayersViewHeight;
+    f32 allPlayersScaleY;
+    f32 rotatingViewWidth;
+    f32 chosenViewWidth;
+    f32 flippedViewHeight;
+    f32 flippedScaleY;
+    s32 nextRotatingPosition;
+    s32 nextChosenPosition;
+    s32 selectionMode;
+    s32 eligiblePlayerCount;
+    s32 remainingFlipTicks;
+    s32 ruleOrRandomValue; /* Reused for each initialized rule and actor-kind result in the health loops. */
+    s32 randomPlayerQuotient;
+    s32 nextChosenIndex;
+    s32 selectedPlayerIndex;
     s8 temp_v0_7;
     s8 temp_v0_9;
-    s8 temp_v1_2;
-    s8 temp_v1_5;
-    s32 var_s2;
-    func_80227014_S11 *temp_a1;
-    func_80227014_S16 *temp_a1_2;
-    SharedRecAt564V1 *temp_s1_2;
-    SharedRecAt564V3 *temp_s1_3;
-    SharedRecAt564V2 *temp_s1_4;
-    SharedRecAt564V4 *temp_s1_5;
-    func_80227014_S18 *temp_v0_11;
+    s8 initialCharacter;
+    s8 flippedCharacter;
+    s32 playerIndex;
+    func_80227014_S11 *rotatingPlayerProfile;
+    func_80227014_S16 *chosenPlayerProfile;
+    SharedRecAt564V1 *allPlayersView;
+    SharedRecAt564V3 *rotatingView;
+    SharedRecAt564V2 *chosenView;
+    SharedRecAt564V4 *flippedView;
+    func_80227014_S18 *flippedPlayer;
     func_80227014_S2 *player;
-    func_80227014_S8 *temp_v0_6;
-    func_80227014_S13 *temp_v0_8;
-    func_80227014_S3 *temp_v1;
-    func_80227014_S19 *temp_v1_3;
-    func_80227014_S22 *temp_v1_4;
+    func_80227014_S8 *rotatingPlayer;
+    func_80227014_S13 *chosenPlayer;
+    func_80227014_S3 *playerProfile;
+    func_80227014_S19 *priorFlipProfile;
+    func_80227014_S22 *flippedProfile;
 
     if ((Camera_IsSequenceActive() == 0) && (Camera_IsSequenceInWindow() == 0) && ((initial_rules = &D_801462C8.counters)->m_bFragTagOn != 0)) {
         if ((Weapons_CheckTotalScoreWin(world) != 0) && (initial_rules->elapsed == 0)) {
             Weapons_EndRound(world);
             return;
         }
-        temp_v0 = func_8022C620_de(world);
-        if (temp_v0 > 0) {
+        eligiblePlayerCount = func_8022C620_de(world);
+        if (eligiblePlayerCount > 0) {
             state = D_80146914;
             switch (state) {
             case 0:
@@ -195,40 +195,40 @@ void func_80227038_de(s8 *world) {
                 return;
             case 1:
                 func_8022C5DC_de(world);
-                if (temp_v0 > 0) {
-                    temp_s1 = (select_rules = &D_801462C8.counters)->m_FragTagSelectionType;
-                    if (temp_s1 == 3) {
-                        temp_v0_2 = Nav_NextRandom();
-                        temp_v0_3 = temp_v0_2 / temp_v0;
-                        if (temp_v0 == 0) {
+                if (eligiblePlayerCount > 0) {
+                    selectionMode = (select_rules = &D_801462C8.counters)->m_FragTagSelectionType;
+                    if (selectionMode == 3) {
+                        ruleOrRandomValue = Nav_NextRandom();
+                        randomPlayerQuotient = ruleOrRandomValue / eligiblePlayerCount;
+                        if (eligiblePlayerCount == 0) {
 
                         }
-                        if ((temp_v0 == -1) && (temp_v0_3 == 0x80000000)) {
+                        if ((eligiblePlayerCount == -1) && (randomPlayerQuotient == 0x80000000)) {
 
                         }
-                        var_v1 = temp_v0_2 % temp_v0;
-                        select_rules->m_FragTagMode = temp_s1;
-                        select_rules->m_FragTagPlayerChosen = var_v1;
-                        select_rules->m_FragTagPlayerPos = var_v1;
+                        selectedPlayerIndex = ruleOrRandomValue % eligiblePlayerCount;
+                        select_rules->m_FragTagMode = selectionMode;
+                        select_rules->m_FragTagPlayerChosen = selectedPlayerIndex;
+                        select_rules->m_FragTagPlayerPos = selectedPlayerIndex;
                         return;
                     } else {
-                        temp_v0_4 = select_rules->m_FragTagPlayerChosen + 1;
-                        if (temp_v0 == 0) {
+                        nextChosenIndex = select_rules->m_FragTagPlayerChosen + 1;
+                        if (eligiblePlayerCount == 0) {
 
                         }
-                        if ((temp_v0 == -1) && ((temp_v0_4 / temp_v0) == 0x80000000)) {
+                        if ((eligiblePlayerCount == -1) && ((nextChosenIndex / eligiblePlayerCount) == 0x80000000)) {
 
                         }
-                        var_v1 = temp_v0_4 % temp_v0;
+                        selectedPlayerIndex = nextChosenIndex % eligiblePlayerCount;
                         select_rules->m_FragTagMode = 4;
-                        select_rules->m_FragTagPlayerChosen = var_v1;
-                        select_rules->m_FragTagPlayerPos = var_v1;
+                        select_rules->m_FragTagPlayerChosen = selectedPlayerIndex;
+                        select_rules->m_FragTagPlayerPos = selectedPlayerIndex;
                         return;
                     }
                 }
                 goto state_end;
             case 2:
-                if (temp_v0 > 0) {
+                if (eligiblePlayerCount > 0) {
                     (case2_rules = &D_801462C8.counters)->m_FragTagMode = 5;
                     case2_rules->m_FragTagFlipTimer = 0xE1;
                     case2_rules->m_FragTagPlayerPos = (s32) case2_rules->m_FragTagPlayerChosen;
@@ -236,25 +236,25 @@ void func_80227038_de(s8 *world) {
                 func_8022C5DC_de(world);
                 return;
             case 5:                                 /* switch 1 */
-                var_s2 = 0;
-                if (temp_v0 >= 0) {
+                playerIndex = 0;
+                if (eligiblePlayerCount >= 0) {
                     banner_half = D_800C2BA0_de;
                     banner_size = D_800C2BA4_de;
                     do {
-                        player = Weapons_GetPlayerByIndex(world, var_s2);
+                        player = Weapons_GetPlayerByIndex(world, playerIndex);
                         if (player != 0) {
-                            temp_v1 = player->unk5D8;
-                            if (temp_v1->unk90 == 0) {
-                                temp_s1_2 = player->unk5DC;
-                                if ((temp_s1_2 != 0) && (temp_s1_2->unk564 == 0)) {
+                            playerProfile = player->unk5D8;
+                            if (playerProfile->unk90 == 0) {
+                                allPlayersView = player->unk5DC;
+                                if ((allPlayersView != 0) && (allPlayersView->unk564 == 0)) {
                                     Text_SetupSpriteMode((s32) D_801462DE);
-                                    temp_f2 = temp_s1_2->unk29C;
-                                    temp_f3 = temp_s1_2->unk2A0;
-                                    scaled5x = temp_f2 * banner_half;
-                                    scaled5y = temp_f3 * banner_half;
-                                    temp_f2_2 = temp_f2 / (f32) D_800E28D0;
-                                    temp_f3_2 = temp_f3 / (f32) D_800E28D4;
-                                    func_802AAC28_de(0x1FB, 0, (s16) (s32) ((temp_s1_2->unk2A4 + scaled5x) - (temp_f2_2 * banner_size)), (s16) (s32) ((temp_s1_2->unk2A8 + scaled5y) - (temp_f3_2 * banner_size)), temp_f2_2, temp_f3_2, 1);
+                                    allPlayersViewWidth = allPlayersView->unk29C;
+                                    allPlayersViewHeight = allPlayersView->unk2A0;
+                                    scaled5x = allPlayersViewWidth * banner_half;
+                                    scaled5y = allPlayersViewHeight * banner_half;
+                                    allPlayersScaleX = allPlayersViewWidth / (f32) D_800E28D0;
+                                    allPlayersScaleY = allPlayersViewHeight / (f32) D_800E28D4;
+                                    func_802AAC28_de(0x1FB, 0, (s16) (s32) ((allPlayersView->unk2A4 + scaled5x) - (allPlayersScaleX * banner_size)), (s16) (s32) ((allPlayersView->unk2A8 + scaled5y) - (allPlayersScaleY * banner_size)), allPlayersScaleX, allPlayersScaleY, 1);
                                 }
                                 player->unk5D8->unk8F = 1;
                                 switch (D_80142850) {
@@ -275,278 +275,278 @@ void func_80227038_de(s8 *world) {
                                 Weapons_InitializePlayerHealth(player);
                                 player->unk5E4 = (s32) D_8014284C;
                             } else {
-                                if ((D_80146938 != 0) && (temp_v1->unk94 != 0)) {
-                                    temp_v1_2 = temp_v1->unk80;
-                                    if (temp_v1_2 == 11) {
-                                    var_a0 = 0x19000;
-                                    } else if (temp_v1_2 == 12) {
-                                    var_a0 = 0x19000;
-                                    } else if (temp_v1_2 == 14) {
-                                    var_a0 = 0x12C00;
-                                    } else if (temp_v1_2 == 13) {
-                                    var_a0 = 0x12C00;
+                                if ((D_80146938 != 0) && (playerProfile->unk94 != 0)) {
+                                    initialCharacter = playerProfile->unk80;
+                                    if (initialCharacter == 11) {
+                                    restoredHealth = 0x19000;
+                                    } else if (initialCharacter == 12) {
+                                    restoredHealth = 0x19000;
+                                    } else if (initialCharacter == 14) {
+                                    restoredHealth = 0x12C00;
+                                    } else if (initialCharacter == 13) {
+                                    restoredHealth = 0x12C00;
                                     } else {
-                                        var_a0 = player->unk18->unk18 << 8;
+                                        restoredHealth = player->unk18->unk18 << 8;
                                     }
                                 } else {
-                                    var_a0 = player->unk18->unk18 << 8;
+                                    restoredHealth = player->unk18->unk18 << 8;
                                 }
                                 if ((D_801462D5 == 1) && (player->unk1450 == 0)) {
-                                    var_a0 += D_800FEB10[player->unk5D4].value;
+                                    restoredHealth += D_800FEB10[player->unk5D4].value;
                                 }
-                                player->unk5E4 = var_a0;
-                                player->unk174 = var_a0;
+                                player->unk5E4 = restoredHealth;
+                                player->unk174 = restoredHealth;
                             }
                         }
-                        var_s2 += 1;
-                    } while (temp_v0 >= (s32) var_s2);
+                        playerIndex += 1;
+                    } while (eligiblePlayerCount >= (s32) playerIndex);
                 }
                 func_8022C5AC_de(world);
                 D_80146914 = 6;
                 return;
             case 3:
                 case3_entry = &D_801462C8.counters;
-                if (temp_v0 == 0) {
+                if (eligiblePlayerCount == 0) {
 
                 }
-                if ((temp_v0 == -1) && (((s32) case3_entry->m_FragTagPlayerPos / temp_v0) == 0x80000000)) {
+                if ((eligiblePlayerCount == -1) && (((s32) case3_entry->m_FragTagPlayerPos / eligiblePlayerCount) == 0x80000000)) {
 
                 }
                 case3_entry->m_FragTagFlipTimer = 0;
-                temp_v0_6 = func_8022C55C_de(world, (u32) ((s32) case3_entry->m_FragTagPlayerPos % temp_v0));
-                temp_s1_3 = temp_v0_6->unk5DC;
-                if ((temp_s1_3 != 0) && (temp_s1_3->unk564 == 0)) {
+                rotatingPlayer = func_8022C55C_de(world, (u32) ((s32) case3_entry->m_FragTagPlayerPos % eligiblePlayerCount));
+                rotatingView = rotatingPlayer->unk5DC;
+                if ((rotatingView != 0) && (rotatingView->unk564 == 0)) {
                     Text_SetupSpriteMode((s32) D_801462DE);
-                    temp_f3_3 = temp_s1_3->unk29C;
-                    temp_f2_3 = temp_s1_3->unk2A0;
-                    scaled_x = temp_f3_3 * D_800C2BA8_de;
-                    scaled_y = temp_f2_3 * D_800C2BA8_de;
-                    temp_f2_4 = temp_f2_3 / (f32) D_800E28D4;
-                    func_802AAC28_de(0x1FB, 0, (s16) (s32) ((temp_s1_3->unk2A4 + scaled_x) - ((temp_f3_3 / (f32) D_800E28D0) * D_800C2BAC_de)), (s16) (s32) ((temp_s1_3->unk2A8 + scaled_y) - (temp_f2_4 * D_800C2BAC_de)), (temp_f3_3 / (f32) D_800E28D0), temp_f2_4, 1);
+                    rotatingViewWidth = rotatingView->unk29C;
+                    rotatingViewHeight = rotatingView->unk2A0;
+                    scaled_x = rotatingViewWidth * D_800C2BA8_de;
+                    scaled_y = rotatingViewHeight * D_800C2BA8_de;
+                    rotatingScaleY = rotatingViewHeight / (f32) D_800E28D4;
+                    func_802AAC28_de(0x1FB, 0, (s16) (s32) ((rotatingView->unk2A4 + scaled_x) - ((rotatingViewWidth / (f32) D_800E28D0) * D_800C2BAC_de)), (s16) (s32) ((rotatingView->unk2A8 + scaled_y) - (rotatingScaleY * D_800C2BAC_de)), (rotatingViewWidth / (f32) D_800E28D0), rotatingScaleY, 1);
                 }
                 rules = &D_801462C8.counters;
-                temp_a0 = rules->m_FragTagPlayerPos + 1;
-                rules->m_FragTagPlayerPos = temp_a0;
-                if (temp_a0 >= (((5 - temp_v0) * 0x14) - rules->m_FragTagPlayerChosen)) {
+                nextRotatingPosition = rules->m_FragTagPlayerPos + 1;
+                rules->m_FragTagPlayerPos = nextRotatingPosition;
+                if (nextRotatingPosition >= (((5 - eligiblePlayerCount) * 0x14) - rules->m_FragTagPlayerChosen)) {
                     func_8022C5AC_de(world);
                     rules->m_FragTagMode = 7;
-                    temp_v0_6->unk5D8->unk8F = 1U;
+                    rotatingPlayer->unk5D8->unk8F = 1U;
                     switch (D_80142850) {
                     case 0:
-                        Render_PlaySoundAtPosition(0x18A1, temp_v0_6->position, (s32)&temp_v0_6->position, -1);
+                        Render_PlaySoundAtPosition(0x18A1, rotatingPlayer->position, (s32)&rotatingPlayer->position, -1);
                         break;
                     case 1:
-                        Render_PlaySoundAtPosition(0x1969, temp_v0_6->position, (s32)&temp_v0_6->position, -1);
+                        Render_PlaySoundAtPosition(0x1969, rotatingPlayer->position, (s32)&rotatingPlayer->position, -1);
                         break;
                     case 2:
-                        Render_PlaySoundAtPosition(0x1905, temp_v0_6->position, (s32)&temp_v0_6->position, -1);
+                        Render_PlaySoundAtPosition(0x1905, rotatingPlayer->position, (s32)&rotatingPlayer->position, -1);
                         break;
                     }
-                    func_80218464_de(&temp_v0_6->unk938);
-                    temp_v0_6->unk11B4 = 0;
-                    Weapons_RequestActorState(&temp_v0_6->unk2E8, &temp_v0_6->unk458, 1);
-                    Render_PlacePlayerAtSpawnPoint(temp_v0_6, temp_v0_6->unk5EC, 0, 1);
-                    Weapons_InitializePlayerHealth(temp_v0_6);
+                    func_80218464_de(&rotatingPlayer->unk938);
+                    rotatingPlayer->unk11B4 = 0;
+                    Weapons_RequestActorState(&rotatingPlayer->unk2E8, &rotatingPlayer->unk458, 1);
+                    Render_PlacePlayerAtSpawnPoint(rotatingPlayer, rotatingPlayer->unk5EC, 0, 1);
+                    Weapons_InitializePlayerHealth(rotatingPlayer);
                 }
-                var_s2 = 0;
-                if (temp_v0 >= 0) {
-                    temp_a1 = temp_v0_6->unk5D8;
+                playerIndex = 0;
+                if (eligiblePlayerCount >= 0) {
+                    rotatingPlayerProfile = rotatingPlayer->unk5D8;
                     case3_loop = &D_801462C8.counters;
                     do {
-                        if (temp_a1->unk8F != 0) {
-                            temp_v0_6->unk5E4 = (s32) case3_loop->mask;
+                        if (rotatingPlayerProfile->unk8F != 0) {
+                            rotatingPlayer->unk5E4 = (s32) case3_loop->mask;
                         } else {
-                            temp_v0_2 = D_80146938;
-                            if ((temp_v0_2 != 0) && (temp_a1->unk94 != 0)) {
-                                temp_v0_2 = temp_a1->unk80;
-                                if (temp_v0_2 == 11) {
-                                    var_a0 = 0x19000;
-                                    } else if (temp_v0_2 == 12) {
-                                    var_a0 = 0x19000;
-                                    } else if (temp_v0_2 == 14) {
-                                    var_a0 = 0x12C00;
-                                    } else if (temp_v0_2 == 13) {
-                                    var_a0 = 0x12C00;
+                            ruleOrRandomValue = D_80146938;
+                            if ((ruleOrRandomValue != 0) && (rotatingPlayerProfile->unk94 != 0)) {
+                                ruleOrRandomValue = rotatingPlayerProfile->unk80;
+                                if (ruleOrRandomValue == 11) {
+                                    restoredHealth = 0x19000;
+                                    } else if (ruleOrRandomValue == 12) {
+                                    restoredHealth = 0x19000;
+                                    } else if (ruleOrRandomValue == 14) {
+                                    restoredHealth = 0x12C00;
+                                    } else if (ruleOrRandomValue == 13) {
+                                    restoredHealth = 0x12C00;
                                     } else {
-                                        var_a0 = temp_v0_6->unk18->unk18 << 8;
+                                        restoredHealth = rotatingPlayer->unk18->unk18 << 8;
                                     }
                             } else {
-                                var_a0 = temp_v0_6->unk18->unk18 << 8;
+                                restoredHealth = rotatingPlayer->unk18->unk18 << 8;
                             }
-                            temp_v0_2 = D_801462D5;
-                            if ((temp_v0_2 == 1) && (temp_v0_6->unk1450 == 0)) {
-                                var_a0 += D_800FEB10[temp_v0_6->unk5D4].value;
+                            ruleOrRandomValue = D_801462D5;
+                            if ((ruleOrRandomValue == 1) && (rotatingPlayer->unk1450 == 0)) {
+                                restoredHealth += D_800FEB10[rotatingPlayer->unk5D4].value;
                             }
-                            temp_v0_6->unk5E4 = var_a0;
-                            temp_v0_6->unk174 = var_a0;
+                            rotatingPlayer->unk5E4 = restoredHealth;
+                            rotatingPlayer->unk174 = restoredHealth;
                         }
-                        var_s2 += 1;
-                    } while (temp_v0 >= var_s2);
+                        playerIndex += 1;
+                    } while (eligiblePlayerCount >= playerIndex);
                     return;
                 }
                 goto state_end;
             case 4:
                 case4_entry = &D_801462C8.counters;
-                if (temp_v0 == 0) {
+                if (eligiblePlayerCount == 0) {
 
                 }
-                if ((temp_v0 == -1) && (((s32) case4_entry->m_FragTagPlayerPos / temp_v0) == 0x80000000)) {
+                if ((eligiblePlayerCount == -1) && (((s32) case4_entry->m_FragTagPlayerPos / eligiblePlayerCount) == 0x80000000)) {
 
                 }
                 case4_entry->m_FragTagFlipTimer = 0;
-                temp_v0_8 = func_8022C55C_de(world, (u32) ((s32) case4_entry->m_FragTagPlayerPos % temp_v0));
-                temp_s1_4 = temp_v0_8->unk5DC;
-                if ((temp_s1_4 != 0) && (temp_s1_4->unk564 == 0)) {
+                chosenPlayer = func_8022C55C_de(world, (u32) ((s32) case4_entry->m_FragTagPlayerPos % eligiblePlayerCount));
+                chosenView = chosenPlayer->unk5DC;
+                if ((chosenView != 0) && (chosenView->unk564 == 0)) {
                     Text_SetupSpriteMode((s32) D_801462DE);
-                    temp_f3_4 = temp_s1_4->unk29C;
-                    temp_f2_5 = temp_s1_4->unk2A0;
-                    scaled_x4 = temp_f3_4 * D_800C2BB0_de;
-                    scaled_y4 = temp_f2_5 * D_800C2BB0_de;
-                    temp_f2_6 = temp_f2_5 / (f32) D_800E28D4;
-                    func_802AAC28_de(0x1FB, 0, (s16) (s32) ((temp_s1_4->unk2A4 + scaled_x4) - ((temp_f3_4 / (f32) D_800E28D0) * D_800C2BB4_de)), (s16) (s32) ((temp_s1_4->unk2A8 + scaled_y4) - (temp_f2_6 * D_800C2BB4_de)), (temp_f3_4 / (f32) D_800E28D0), temp_f2_6, 1);
+                    chosenViewWidth = chosenView->unk29C;
+                    chosenViewHeight = chosenView->unk2A0;
+                    scaled_x4 = chosenViewWidth * D_800C2BB0_de;
+                    scaled_y4 = chosenViewHeight * D_800C2BB0_de;
+                    chosenScaleY = chosenViewHeight / (f32) D_800E28D4;
+                    func_802AAC28_de(0x1FB, 0, (s16) (s32) ((chosenView->unk2A4 + scaled_x4) - ((chosenViewWidth / (f32) D_800E28D0) * D_800C2BB4_de)), (s16) (s32) ((chosenView->unk2A8 + scaled_y4) - (chosenScaleY * D_800C2BB4_de)), (chosenViewWidth / (f32) D_800E28D0), chosenScaleY, 1);
                 }
                 rules = &D_801462C8.counters;
-                temp_a0_2 = rules->m_FragTagPlayerPos + 1;
-                rules->m_FragTagPlayerPos = temp_a0_2;
-                if (temp_a0_2 >= (((5 - temp_v0) * 0x14) - rules->m_FragTagPlayerChosen)) {
+                nextChosenPosition = rules->m_FragTagPlayerPos + 1;
+                rules->m_FragTagPlayerPos = nextChosenPosition;
+                if (nextChosenPosition >= (((5 - eligiblePlayerCount) * 0x14) - rules->m_FragTagPlayerChosen)) {
                     func_8022C5AC_de(world);
                     rules->m_FragTagMode = 7;
-                    temp_v0_8->unk5D8->unk8F = 1U;
+                    chosenPlayer->unk5D8->unk8F = 1U;
                     switch (D_80142850) {
                     case 0:
-                        Render_PlaySoundAtPosition(0x18A1, temp_v0_8->position, (s32)&temp_v0_8->position, -1);
+                        Render_PlaySoundAtPosition(0x18A1, chosenPlayer->position, (s32)&chosenPlayer->position, -1);
                         break;
                     case 1:
-                        Render_PlaySoundAtPosition(0x1969, temp_v0_8->position, (s32)&temp_v0_8->position, -1);
+                        Render_PlaySoundAtPosition(0x1969, chosenPlayer->position, (s32)&chosenPlayer->position, -1);
                         break;
                     case 2:
-                        Render_PlaySoundAtPosition(0x1905, temp_v0_8->position, (s32)&temp_v0_8->position, -1);
+                        Render_PlaySoundAtPosition(0x1905, chosenPlayer->position, (s32)&chosenPlayer->position, -1);
                         break;
                     }
-                    func_80218464_de(&temp_v0_8->unk938);
-                    temp_v0_8->unk11B4 = 0;
-                    Weapons_RequestActorState(&temp_v0_8->unk2E8, &temp_v0_8->unk458, 1);
-                    Render_PlacePlayerAtSpawnPoint(temp_v0_8, temp_v0_8->unk5EC, 0, 1);
-                    Weapons_InitializePlayerHealth(temp_v0_8);
+                    func_80218464_de(&chosenPlayer->unk938);
+                    chosenPlayer->unk11B4 = 0;
+                    Weapons_RequestActorState(&chosenPlayer->unk2E8, &chosenPlayer->unk458, 1);
+                    Render_PlacePlayerAtSpawnPoint(chosenPlayer, chosenPlayer->unk5EC, 0, 1);
+                    Weapons_InitializePlayerHealth(chosenPlayer);
                 }
-                var_s2 = 0;
-                if (temp_v0 >= 0) {
-                    temp_a1_2 = temp_v0_8->unk5D8;
+                playerIndex = 0;
+                if (eligiblePlayerCount >= 0) {
+                    chosenPlayerProfile = chosenPlayer->unk5D8;
                     case4_loop = &D_801462C8.counters;
                     do {
-                        if (temp_a1_2->unk8F != 0) {
-                            temp_v0_8->unk5E4 = (s32) case4_loop->mask;
+                        if (chosenPlayerProfile->unk8F != 0) {
+                            chosenPlayer->unk5E4 = (s32) case4_loop->mask;
                         } else {
-                            temp_v0_2 = D_80146938;
-                            if ((temp_v0_2 != 0) && (temp_a1_2->unk94 != 0)) {
-                                temp_v0_2 = temp_a1_2->unk80;
-                                if (temp_v0_2 == 11) {
-                                    var_a0 = 0x19000;
-                                    } else if (temp_v0_2 == 12) {
-                                    var_a0 = 0x19000;
-                                    } else if (temp_v0_2 == 14) {
-                                    var_a0 = 0x12C00;
-                                    } else if (temp_v0_2 == 13) {
-                                    var_a0 = 0x12C00;
+                            ruleOrRandomValue = D_80146938;
+                            if ((ruleOrRandomValue != 0) && (chosenPlayerProfile->unk94 != 0)) {
+                                ruleOrRandomValue = chosenPlayerProfile->unk80;
+                                if (ruleOrRandomValue == 11) {
+                                    restoredHealth = 0x19000;
+                                    } else if (ruleOrRandomValue == 12) {
+                                    restoredHealth = 0x19000;
+                                    } else if (ruleOrRandomValue == 14) {
+                                    restoredHealth = 0x12C00;
+                                    } else if (ruleOrRandomValue == 13) {
+                                    restoredHealth = 0x12C00;
                                     } else {
-                                        var_a0 = temp_v0_8->unk18->unk18 << 8;
+                                        restoredHealth = chosenPlayer->unk18->unk18 << 8;
                                     }
                             } else {
-                                var_a0 = temp_v0_8->unk18->unk18 << 8;
+                                restoredHealth = chosenPlayer->unk18->unk18 << 8;
                             }
-                            temp_v0_2 = D_801462D5;
-                            if ((temp_v0_2 == 1) && (temp_v0_8->unk1450 == 0)) {
-                                var_a0 += D_800FEB10[temp_v0_8->unk5D4].value;
+                            ruleOrRandomValue = D_801462D5;
+                            if ((ruleOrRandomValue == 1) && (chosenPlayer->unk1450 == 0)) {
+                                restoredHealth += D_800FEB10[chosenPlayer->unk5D4].value;
                             }
-                            temp_v0_8->unk5E4 = var_a0;
-                            temp_v0_8->unk174 = var_a0;
+                            chosenPlayer->unk5E4 = restoredHealth;
+                            chosenPlayer->unk174 = restoredHealth;
                         }
-                        var_s2 += 1;
-                    } while (temp_v0 >= var_s2);
+                        playerIndex += 1;
+                    } while (eligiblePlayerCount >= playerIndex);
                     return;
                 }
                 goto state_end;
             case 6:
                 case6_entry = &D_801462C8.counters;
-                temp_v0_10 = case6_entry->m_FragTagFlipTimer - 1;
-                case6_entry->m_FragTagFlipTimer = temp_v0_10;
-                if (temp_v0_10 <= 0) {
+                remainingFlipTicks = case6_entry->m_FragTagFlipTimer - 1;
+                case6_entry->m_FragTagFlipTimer = remainingFlipTicks;
+                if (remainingFlipTicks <= 0) {
                     case6_entry->m_FragTagFlipTimer = 0;
                     if (D_800C91B8_de != 0) {
                         func_8025E2D4_de(D_800C91B8_de);
                     }
-                    var_s2 = 0;
+                    playerIndex = 0;
                     banner_half = D_800C2BB8_de;
                     banner_size = D_800C2BBC_de;
                     do {
-                        temp_v0_11 = Weapons_GetPlayerByIndex(world, var_s2);
-                        if (temp_v0_11 != 0) {
-                            temp_v1_3 = temp_v0_11->unk5D8;
-                            if (temp_v1_3->unk8F == 0) {
-                                temp_s1_5 = temp_v0_11->unk5DC;
-                                if ((temp_s1_5 != 0) && (temp_s1_5->unk564 == 0)) {
+                        flippedPlayer = Weapons_GetPlayerByIndex(world, playerIndex);
+                        if (flippedPlayer != 0) {
+                            priorFlipProfile = flippedPlayer->unk5D8;
+                            if (priorFlipProfile->unk8F == 0) {
+                                flippedView = flippedPlayer->unk5DC;
+                                if ((flippedView != 0) && (flippedView->unk564 == 0)) {
                                     Text_SetupSpriteMode((s32) D_801462DE);
-                                    temp_f2_7 = temp_s1_5->unk29C;
-                                    temp_f3_5 = temp_s1_5->unk2A0;
-                                    scaled6x = temp_f2_7 * banner_half;
-                                    scaled6y = temp_f3_5 * banner_half;
-                                    temp_f2_8 = temp_f2_7 / (f32) D_800E28D0;
-                                    temp_f3_6 = temp_f3_5 / (f32) D_800E28D4;
-                                    func_802AAC28_de(0x1FB, 0, (s16) (s32) ((temp_s1_5->unk2A4 + scaled6x) - (temp_f2_8 * banner_size)), (s16) (s32) ((temp_s1_5->unk2A8 + scaled6y) - (temp_f3_6 * banner_size)), temp_f2_8, temp_f3_6, 1);
+                                    flippedViewWidth = flippedView->unk29C;
+                                    flippedViewHeight = flippedView->unk2A0;
+                                    scaled6x = flippedViewWidth * banner_half;
+                                    scaled6y = flippedViewHeight * banner_half;
+                                    flippedScaleX = flippedViewWidth / (f32) D_800E28D0;
+                                    flippedScaleY = flippedViewHeight / (f32) D_800E28D4;
+                                    func_802AAC28_de(0x1FB, 0, (s16) (s32) ((flippedView->unk2A4 + scaled6x) - (flippedScaleX * banner_size)), (s16) (s32) ((flippedView->unk2A8 + scaled6y) - (flippedScaleY * banner_size)), flippedScaleX, flippedScaleY, 1);
                                 }
-                                temp_v0_11->unk5D8->unk8F = 1U;
+                                flippedPlayer->unk5D8->unk8F = 1U;
                                 switch (D_80142850) {
                                 case 0:
-                                    Render_PlaySoundAtPosition(0x18A1, temp_v0_11->position, (s32)&temp_v0_11->position, -1);
+                                    Render_PlaySoundAtPosition(0x18A1, flippedPlayer->position, (s32)&flippedPlayer->position, -1);
                                     break;
                                 case 1:
-                                    Render_PlaySoundAtPosition(0x1969, temp_v0_11->position, (s32)&temp_v0_11->position, -1);
+                                    Render_PlaySoundAtPosition(0x1969, flippedPlayer->position, (s32)&flippedPlayer->position, -1);
                                     break;
                                 case 2:
-                                    Render_PlaySoundAtPosition(0x1905, temp_v0_11->position, (s32)&temp_v0_11->position, -1);
+                                    Render_PlaySoundAtPosition(0x1905, flippedPlayer->position, (s32)&flippedPlayer->position, -1);
                                     break;
                                 }
-                                func_80218464_de(&temp_v0_11->unk938);
-                                temp_v0_11->unk11B4 = 0;
-                                Weapons_RequestActorState(&temp_v0_11->unk2E8, &temp_v0_11->unk458, 1);
-                                Render_PlacePlayerAtSpawnPoint(temp_v0_11, temp_v0_11->unk5EC, 0, 1);
-                                Weapons_InitializePlayerHealth(temp_v0_11);
+                                func_80218464_de(&flippedPlayer->unk938);
+                                flippedPlayer->unk11B4 = 0;
+                                Weapons_RequestActorState(&flippedPlayer->unk2E8, &flippedPlayer->unk458, 1);
+                                Render_PlacePlayerAtSpawnPoint(flippedPlayer, flippedPlayer->unk5EC, 0, 1);
+                                Weapons_InitializePlayerHealth(flippedPlayer);
                             } else {
-                                temp_v1_3->unk90 = 0;
-                                temp_v0_11->unk5D8->unk8F = 0U;
-                                Render_PlacePlayerAtSpawnPoint(temp_v0_11, temp_v0_11->unk5EC, 0, 1);
+                                priorFlipProfile->unk90 = 0;
+                                flippedPlayer->unk5D8->unk8F = 0U;
+                                Render_PlacePlayerAtSpawnPoint(flippedPlayer, flippedPlayer->unk5EC, 0, 1);
                             }
-                            temp_v1_4 = temp_v0_11->unk5D8;
-                            if (temp_v1_4->unk8F != 0) {
+                            flippedProfile = flippedPlayer->unk5D8;
+                            if (flippedProfile->unk8F != 0) {
                                 case6_active_rules = &D_801462C8.counters;
-                                temp_v0_11->unk5E4 = (s32) case6_active_rules->mask;
-                                temp_v0_11->unk174 = (s32) case6_active_rules->mask;
+                                flippedPlayer->unk5E4 = (s32) case6_active_rules->mask;
+                                flippedPlayer->unk174 = (s32) case6_active_rules->mask;
                             } else {
-                                if ((D_80146938 != 0) && (temp_v1_4->unk94 != 0)) {
-                                    temp_v1_5 = temp_v1_4->unk80;
-                                    if (temp_v1_5 == 11) {
-                                    var_a0 = 0x19000;
-                                    } else if (temp_v1_5 == 12) {
-                                    var_a0 = 0x19000;
-                                    } else if (temp_v1_5 == 14) {
-                                    var_a0 = 0x12C00;
-                                    } else if (temp_v1_5 == 13) {
-                                    var_a0 = 0x12C00;
+                                if ((D_80146938 != 0) && (flippedProfile->unk94 != 0)) {
+                                    flippedCharacter = flippedProfile->unk80;
+                                    if (flippedCharacter == 11) {
+                                    restoredHealth = 0x19000;
+                                    } else if (flippedCharacter == 12) {
+                                    restoredHealth = 0x19000;
+                                    } else if (flippedCharacter == 14) {
+                                    restoredHealth = 0x12C00;
+                                    } else if (flippedCharacter == 13) {
+                                    restoredHealth = 0x12C00;
                                     } else {
-                                        var_a0 = temp_v0_11->unk18->unk18 << 8;
+                                        restoredHealth = flippedPlayer->unk18->unk18 << 8;
                                     }
                                 } else {
-                                    var_a0 = temp_v0_11->unk18->unk18 << 8;
+                                    restoredHealth = flippedPlayer->unk18->unk18 << 8;
                                 }
-                                if ((D_801462D5 == 1) && (temp_v0_11->unk1450 == 0)) {
-                                    var_a0 += D_800FEB10[temp_v0_11->unk5D4].value;
+                                if ((D_801462D5 == 1) && (flippedPlayer->unk1450 == 0)) {
+                                    restoredHealth += D_800FEB10[flippedPlayer->unk5D4].value;
                                 }
-                                temp_v0_11->unk5E4 = var_a0;
-                                temp_v0_11->unk174 = var_a0;
+                                flippedPlayer->unk5E4 = restoredHealth;
+                                flippedPlayer->unk174 = restoredHealth;
                             }
                         }
-                        var_s2 += 1;
-                    } while ((s32) var_s2 < 8);
+                        playerIndex += 1;
+                    } while ((s32) playerIndex < 8);
                     D_80146914 = 7;
                     return;
                 }

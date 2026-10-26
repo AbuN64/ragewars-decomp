@@ -9,7 +9,7 @@
 
 void func_8025E11C_de(s32 callback) {
     if (D_8011FAC0.transitionBlocked == 0) {
-        func_80258F10_de(&D_8010C080, callback);
+        Audio_PlayDialogGroup(&D_8010C080, callback);
     }
 }
 
@@ -30,7 +30,7 @@ void func_8025E1C4_de(s32 arg0) {
 }
 
 void func_8025E1EC_de(s32 arg0) {
-    func_802589A8_de(&D_8010C080, arg0);
+    Audio_StopAudioByMask(&D_8010C080, arg0);
 }
 
 void func_8025E214_de(s32 arg0) {

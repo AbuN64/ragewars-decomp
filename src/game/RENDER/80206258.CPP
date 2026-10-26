@@ -70,8 +70,8 @@ void func_80206258_de(Trigger *trigger) {
     func_8028B670_de(&g_world, trigger->owner, trigger->actor, 1);
 }
 
-void func_80206288_de(void *arg0) {
-    Render_SetActorStateBit(&g_world, arg0, 0);
+void func_80206288_de(void *actor) {
+    Render_SetActorStateBit(&g_world, actor, 0);
 }
 
 void func_802062B0_de(Trigger *trigger) {
@@ -103,33 +103,33 @@ void func_802062E0_de(LevelActor *actor, ActorMotionState *owner, Params params,
     }
 }
 
-void func_802063EC_de(LevelActor *arg0, ActorMotionState *arg1, Triple arg2, Triple arg3,
-                   s32 arg4, s32 arg5, s32 arg6) {
-    if (func_80262CE0_de(&D_80131150, arg5, 0, arg6,
-                      arg4, arg2,
-                      arg0->yaw,
-                      arg0->position1, arg3,
-                      &arg1->unk124) != 0) {
-        arg1->unk128 -= 1;
+void func_802063EC_de(LevelActor *actor, ActorMotionState *spawnState, Triple spawnPosition, Triple spawnColor,
+                   s32 spawnOwner, s32 spawnId, s32 spawnCount) {
+    if (func_80262CE0_de(&D_80131150, spawnId, 0, spawnCount,
+                      spawnOwner, spawnPosition,
+                      actor->yaw,
+                      actor->position1, spawnColor,
+                      &spawnState->unk124) != 0) {
+        spawnState->unk128 -= 1;
     }
 }
 
-void func_802064A0_de(void *arg0, ActorMotionState *arg1, Triple arg2,
-                   s32 unused5, s32 arg6) {
+void func_802064A0_de(void *actor, ActorMotionState *spawnState, Triple effectPosition,
+                   s32 unused5, s32 effectKind) {
     s32 result;
 
-    result = func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0, (struct EffectActor *)arg0,
-                           (s32 *)&arg1->unk124, 0, arg6,
-                           ((LevelActor *)arg0)->position1,
-                           ((LevelActor *)arg0)->rotation,
-                           *(CVector3 *)&arg2, 0, -1, 0);
-    arg1->unk128 -= result;
+    result = func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor,
+                           (s32 *)&spawnState->unk124, 0, effectKind,
+                           ((LevelActor *)actor)->position1,
+                           ((LevelActor *)actor)->rotation,
+                           *(CVector3 *)&effectPosition, 0, -1, 0);
+    spawnState->unk128 -= result;
 }
 
-s32 func_8020655C_de(s32 arg0) {
+s32 func_8020655C_de(s32 actorKind) {
     SpawnDispatchActor *node;
 
-    if (arg0 == 0x84F) {
+    if (actorKind == 0x84F) {
         node = D_80137064.head;
         while (node != 0) {
             if (*node->definition == 4) {
@@ -169,29 +169,29 @@ void func_80206604_de(LevelActor *actor, ActorMotionState *motionState) {
     }
 }
 
-void func_802066A4_de(LevelActor *actor, Dest *arg1) {
-    arg1->field124 = ((ActorHealthDefinition *)actor->definition)->health;
-    Weapons_RequestActorState(actor, arg1, 0);
-    arg1->charge = D_800C1AE0_de;
-    arg1->field12C = D_800C1AE0_de;
+void func_802066A4_de(LevelActor *actor, Dest *deviceState) {
+    deviceState->field124 = ((ActorHealthDefinition *)actor->definition)->health;
+    Weapons_RequestActorState(actor, deviceState, 0);
+    deviceState->charge = D_800C1AE0_de;
+    deviceState->field12C = D_800C1AE0_de;
     if (Render_TestActorStateBit(&g_world, actor) == 1) {
         actor->flags &= ~0x2000;
         actor->flags &= ~0x100;
     }
 }
 
-void func_80206724_de(void *arg0, Shared_CallbackOwner *callbackOwner) {
+void func_80206724_de(void *callbackContext, Shared_CallbackOwner *callbackOwner) {
     Shared_CallbackHook *obj = callbackOwner->hook;
     if (obj != 0) {
         Shared_VoidCallback fn = obj->callback;
         if (fn != 0) {
-            ((void (*)(void *, Shared_CallbackOwner *))fn)(arg0, callbackOwner);
+            ((void (*)(void *, Shared_CallbackOwner *))fn)(callbackContext, callbackOwner);
         }
     }
 }
 
-int func_80206758_de(void *unused0, Dest *arg1) {
-    return arg1->field124;
+int func_80206758_de(void *unused0, Dest *deviceState) {
+    return deviceState->field124;
 }
 
 void func_80206764_de(void) {

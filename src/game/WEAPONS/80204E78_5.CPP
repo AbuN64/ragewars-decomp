@@ -24,7 +24,7 @@ extern void Render_QueueModelInstance(void **, void *, s32, void *, void *, s32)
 
 extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
 
-void func_802054E0_de(Obj54E0 *arg0, void *arg1) {
+void func_802054E0_de(Obj54E0 *arg0, void *responseContext) {
     Rec54E0 *rec;
 
     rec = &arg0->holder->r;
@@ -41,15 +41,15 @@ void func_802054E0_de(Obj54E0 *arg0, void *arg1) {
         if (rec->unk30 != -1) {
             Weapons_SpawnActorEffect(arg0, rec->unk30, arg0->pos.t, 0);
         }
-        Weapons_SpawnFlaggedEffects(arg0, arg1, 8, rec->unk38, rec->unk3C);
+        Weapons_SpawnFlaggedEffects(arg0, responseContext, 8, rec->unk38, rec->unk3C);
     }
 }
 
 /** Clear two flags when the controlling byte and nested flag are set. */
-void func_802055EC_de(void *levelActor, void *arg1) {
+void func_802055EC_de(void *levelActor, void *hitState) {
     LevelActor *object = levelActor;
     BreakableDefinition *nested = (void *)object->definition;
-    ObjectStateCC *state = arg1;
+    ObjectStateCC *state = hitState;
     if (state->unk_CB != 0 &&
         (nested->flags & 0x20) != 0) {
         unsigned int flags = object->flags;
@@ -61,10 +61,10 @@ void func_802055EC_de(void *levelActor, void *arg1) {
 
 /* Draw callback installed by func_8020520C_de; the animation lookup is
  * the same third callback argument consumed by func_8024A1D0_de. */
-void func_80205628_de(void *levelActor, void *spawnDispatchOwner, void *arg2) {
+void func_80205628_de(void *levelActor, void *spawnDispatchOwner, void *modelLookup) {
     LevelActor *actor = levelActor;
     SpawnDispatchOwner *owner = spawnDispatchOwner;
-    Lookup *lookup = arg2;
+    Lookup *lookup = modelLookup;
 
     actor->mask = 1 << owner->spawn;
     if (lookup->unk0 != 0) {
@@ -73,9 +73,9 @@ void func_80205628_de(void *levelActor, void *spawnDispatchOwner, void *arg2) {
     }
 }
 
-void func_80205694_de(void *arg0, void *arg1) {
-    Weapons_RequestActorState(arg0, arg1, 1);
-    Render_SetActorStateBit(&g_world, arg0, 1);
+void func_80205694_de(void *actor, void *requestContext) {
+    Weapons_RequestActorState(actor, requestContext, 1);
+    Render_SetActorStateBit(&g_world, actor, 1);
 }
 
 void func_802056D0_de(Trigger *trigger) {
@@ -88,6 +88,6 @@ unsigned int func_80205700_de(void *object) {
     return hit->flags & 0x200;
 }
 
-int func_8020570C_de(Hit *arg0) {
-    return ((arg0->flags >> 9) ^ 1) & 1;
+int func_8020570C_de(Hit *hitRecord) {
+    return ((hitRecord->flags >> 9) ^ 1) & 1;
 }

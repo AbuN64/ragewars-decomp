@@ -139,7 +139,7 @@ s32 func_80229A80_de(struct CPlayerPool_t *game) {
 }
 
 /** Return the animation-table offset selected by the actor state. */
-s32 func_80229C0C_de(struct Shared_ActorView *player, s32 arg1) {
+s32 func_80229C0C_de(struct Shared_ActorView *player, s32 baseSoundId) {
     s32 *types = &D_800CE47C;
     u16 type = player->kind;
     char *state;
@@ -219,7 +219,7 @@ s32 func_80229C0C_de(struct Shared_ActorView *player, s32 arg1) {
             break;
         }
     }
-    return arg1 + offset;
+    return baseSoundId + offset;
 }
 
 void func_80229D28_de(Player16C0 *player) {
@@ -504,8 +504,8 @@ void func_8022A398_de(void *arg0, void *entity) {
 
 void func_8022A3F8_de(void *arg0, void *viewState) { func_80228AF4_de(arg0, viewState); }
 
-int Weapons_GetFirstPlayer(void *arg0) {
-    Context *context = arg0;
+int Weapons_GetFirstPlayer(void *world) {
+    Context *context = world;
     return (int)context->head;
 }
 

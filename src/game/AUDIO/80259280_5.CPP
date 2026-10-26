@@ -99,7 +99,7 @@ void Audio_StartSpatialVoice(ManagerRecAtD8V2 *manager, s32 index, s32 owner, CV
     manager->scene->selection = -1;
 }
 
-void func_802598B4_de(ChannelSet *channelSet, s32 arg1) {
+void func_802598B4_de(ChannelSet *channelSet, s32 soundId) {
     Node_func_802598B4_de *node;
     Node_func_802598B4_de *next;
     Node_func_802598B4_de *end;
@@ -113,7 +113,7 @@ void func_802598B4_de(ChannelSet *channelSet, s32 arg1) {
         end = initial_end;
         do {
             next = node->next;
-            if (node->value == arg1) {
+            if (node->value == soundId) {
                 node->prev->next = next;
                 node->next->prev = node->prev;
                 node->prev = (Node_func_802598B4_de *)channelSet->active.next;
@@ -129,25 +129,25 @@ void func_802598B4_de(ChannelSet *channelSet, s32 arg1) {
 /* Moves nodes whose key differs from arg1 (or every node when arg1 is -1) from the active list to the tail of the list rooted at offset 0xD8. Adapted from func_80259988_de, with the match test inverted, a -1 wildcard added, and the tail insertion written as a do-while(0) list macro. */
 
 
-void func_80259918_de(OwnerRecAtD8 *arg0, s32 arg1) {
+void func_80259918_de(OwnerRecAtD8 *channelOwner, s32 retainedKey) {
     Node_func_80259918_de *node;
     Node_func_80259918_de *next;
-    node = arg0->activeNext;
-    while (node != (Node_func_80259918_de *) &arg0->activePrev) {
+    node = channelOwner->activeNext;
+    while (node != (Node_func_80259918_de *) &channelOwner->activePrev) {
         next = node->next;
-        if (arg1 == -1 || node->key != arg1) {
+        if (retainedKey == -1 || node->key != retainedKey) {
             node->prev->next = next;
             node->next->prev = node->prev;
-            do { Node_func_80259918_de *tail_ = (arg0)->otherPrev; (node)->next = (Node_func_80259918_de *) &(arg0)->otherPrev; (node)->prev = tail_; (arg0)->otherPrev->next = (node); (arg0)->otherPrev = (node); } while (0);
+            do { Node_func_80259918_de *tail_ = (channelOwner)->otherPrev; (node)->next = (Node_func_80259918_de *) &(channelOwner)->otherPrev; (node)->prev = tail_; (channelOwner)->otherPrev->next = (node); (channelOwner)->otherPrev = (node); } while (0);
         }
         node = next;
     }
 }
 
 /* Move nodes with the requested key from the active list to the other list. */
-void func_80259988_de(void *arg0, s32 arg1)
+void func_80259988_de(void *channelOwner, s32 matchingKey)
 {
-    OwnerRecAtD8 *owner = arg0;
+    OwnerRecAtD8 *owner = channelOwner;
     Node_func_80259918_de *node = owner->activeNext;
     Node_func_80259918_de *head = (Node_func_80259918_de *)&owner->activePrev;
     Node_func_80259918_de *other = (Node_func_80259918_de *)&owner->otherPrev;
@@ -156,7 +156,7 @@ void func_80259988_de(void *arg0, s32 arg1)
         Node_func_80259918_de *sentinel = head;
         do {
             Node_func_80259918_de *next = node->next;
-            if (node->key == arg1) {
+            if (node->key == matchingKey) {
                 Node_func_80259918_de *tail;
                 node->prev->next = next;
                 node->next->prev = node->prev;
@@ -171,7 +171,7 @@ void func_80259988_de(void *arg0, s32 arg1)
     }
 }
 
-void func_802599EC_de(OwnerRecAtD8 *listNode, s32 arg1) {
+void func_802599EC_de(OwnerRecAtD8 *listNode, s32 matchingValue) {
     ListNode *node;
     ListNode *next;
     ListNode *sentinel;
@@ -186,7 +186,7 @@ void func_802599EC_de(OwnerRecAtD8 *listNode, s32 arg1) {
         loop_sentinel = sentinel;
         do {
             next = node->next;
-            if (node->valueBC == arg1) {
+            if (node->valueBC == matchingValue) {
                 node->prev->next = next;
                 node->next->prev = node->prev;
                 tail = (ListNode *)listNode->otherPrev;
@@ -200,32 +200,32 @@ void func_802599EC_de(OwnerRecAtD8 *listNode, s32 arg1) {
     }
 }
 
-void func_80259A50_de(Lists *lists, s32 arg1) {
-    NodeRecAtAC *var_a2;
+void func_80259A50_de(Lists *lists, s32 matchingFlags) {
+    NodeRecAtAC *channelCursor;
     NodeRecAtAC *next;
-    NodeRecAtAC *temp_v0;
-    NodeRecAtAC *temp_t0;
-    NodeRecAtAC *temp_t1;
+    NodeRecAtAC *sourceSentinel;
+    NodeRecAtAC *iterationSentinel;
+    NodeRecAtAC *destinationSentinel;
 
-    var_a2 = lists->first.next;
-    temp_v0 = &lists->first;
-    if (var_a2 != temp_v0) {
-        temp_t1 = &lists->second;
-        temp_t0 = temp_v0;
+    channelCursor = lists->first.next;
+    sourceSentinel = &lists->first;
+    if (channelCursor != sourceSentinel) {
+        destinationSentinel = &lists->second;
+        iterationSentinel = sourceSentinel;
         do {
-            next = var_a2->next;
-            if ((var_a2->flags & arg1) != 0) {
+            next = channelCursor->next;
+            if ((channelCursor->flags & matchingFlags) != 0) {
                 NodeRecAtAC *prev;
 
-                var_a2->prev->next = next;
-                var_a2->next->prev = var_a2->prev;
+                channelCursor->prev->next = next;
+                channelCursor->next->prev = channelCursor->prev;
                 prev = lists->second.prev;
-                var_a2->next = temp_t1;
-                var_a2->prev = prev;
-                lists->second.prev->next = var_a2;
-                lists->second.prev = var_a2;
+                channelCursor->next = destinationSentinel;
+                channelCursor->prev = prev;
+                lists->second.prev->next = channelCursor;
+                lists->second.prev = channelCursor;
             }
-            var_a2 = next;
-        } while (var_a2 != temp_t0);
+            channelCursor = next;
+        } while (channelCursor != iterationSentinel);
     }
 }

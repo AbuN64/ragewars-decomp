@@ -27,24 +27,24 @@ void func_80207ABC_de(void *object, void *state) {
     s32 transitionFlags;
     ActorMotionResource *resource;
     ActorMotionDefinition *motionDefinition;
-    s32 var_v1;
-    s32 temp_v0;
+    s32 transitionAllowed;
+    s32 requiredStateFlag;
 
     resource = player->definition;
     motionDefinition = &resource->motion;
     transitionFlags = motionDefinition->transitionFlags;
-    var_v1 = 1;
+    transitionAllowed = 1;
     if (transitionFlags & 0x10) {
-        temp_v0 = motionState->flags & 0x10000;
-        var_v1 = (u32)0 < (u32)temp_v0;
+        requiredStateFlag = motionState->flags & 0x10000;
+        transitionAllowed = (u32)0 < (u32)requiredStateFlag;
     }
     if ((transitionFlags & 0x100) && !(player->movementFlags & 0x40)) {
-        var_v1 = 0;
+        transitionAllowed = 0;
     }
     if ((motionDefinition->transitionFlags & 0x400) && (player->movementFlags & 0x40)) {
-        var_v1 = 0;
+        transitionAllowed = 0;
     }
-    if (var_v1 != 0) {
+    if (transitionAllowed != 0) {
         if (motionState->timer >= motionDefinition->openThreshold) {
             Weapons_RequestActorState(player, motionState, 1);
         }
