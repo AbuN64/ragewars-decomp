@@ -17,7 +17,7 @@
 
 extern func_80203E78_S1 *D_800E2830;
 
-extern CVector3 Menu_EvaluateCameraSpline(KeyRecAt1C *keys, s32 count, f32 t);
+extern CVector3 Menu_EvaluateCameraSpline(SplineNode *keys, s32 count, f32 t);
 
 CVector3 Menu_GetTrackEyePosition(f32 t) {
     s32 i;
@@ -55,5 +55,5 @@ CVector3 Menu_GetTrackEyePosition(f32 t) {
     if (*((s32 *)SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection((s32 *)D_800E2830->unk4, 0), idx), 2)) != 0) {
         t = start;
     }
-    return Menu_EvaluateCameraSpline(keys, count, t - start);
+    return Menu_EvaluateCameraSpline((SplineNode *)keys, count, t - start);
 }
