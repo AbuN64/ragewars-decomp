@@ -38,10 +38,8 @@ extern s32 Frontend_FindKeyIndex(s32);
 extern void XStdio_FormatBuffer(char *, char *, ...);
 extern void XPlus_CopyString(char *, char *);
 extern void Frontend_SetWidgetFlag100(MenuWidget *, s32);
-extern void SmpButton_WrapButtonWidget(s32);
 extern void Scene_CopyLevelName(Shared_World *, s32, char *, s32);
 extern char *XPlus_UppercaseString(char *);
-extern void Tsmos_DeactivateControllerState(void);
 extern void Achieve_UpdatePlayerPreviewStats(void);
 extern void Achieve_ConfigureResultModelPreview(void);
 /* Opens the level results screen: allocates the preview state, records the finished level for the winning

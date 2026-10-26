@@ -15,7 +15,6 @@
 
 
 extern Gfx *g_displayListCursor;
-extern void func_80253908_de(s32 heap);
 extern void Scene_BuildCachedGeometry(SceneSceneDrawCachedOpaqueGeometry *scene);
 
 

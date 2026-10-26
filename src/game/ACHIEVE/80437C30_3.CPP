@@ -59,7 +59,6 @@ extern void Frontend_SetWidgetFlag08(void *, s32);
 
 
 
-extern void MarkMenuEventHandled();
 
 
 /* Runs the screen D_800E5830 each frame until stage 1 of D_800E28E0: on its first frame it marks

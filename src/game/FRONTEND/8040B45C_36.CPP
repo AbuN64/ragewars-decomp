@@ -59,7 +59,6 @@ extern void Frontend_ReleaseUnprotectedBuffers(s32), Frontend_UpdateImageRelease
 
 
 
-extern s32 N64Eng_GetFrameCounter(void);
 
 
 /* Returns a texture's resource id, first loading its pixel and 16-bit palette data, detecting a transparent palette entry and creating the texture resource when it is not yet loaded, and in both cases updates the texture's usage record for the requested mode (1 stamps the next expiry time, 2 pins it, 3 counts a reference); the opened file handle is stored through the header symbol as in the paletted texture loader, and the resource id is held in two locals (the second passed to Smp_CopyAndSwizzleImage), which reproduces the cartridge's three stack slots. */

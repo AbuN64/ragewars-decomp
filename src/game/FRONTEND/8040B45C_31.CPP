@@ -380,8 +380,6 @@ typedef struct DraftWidget {
 
 extern void Frontend_DrawVisibleSiblings(void *, sm_dldc);
 extern s32 Smos_GetElementHandlerFlags(s32);
-extern void N64Eng_ResetRenderState(void);
-extern void N64Eng_RenderNoop(void);
 
 void Frontend_DrawWidget(DraftWidget *, sm_dldc);
 static inline void drawWidgetChoice(DraftWidget *widget, sm_dldc args) {
