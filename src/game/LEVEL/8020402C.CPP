@@ -28,16 +28,10 @@ INCLUDE_ASM("span_1000", func_80204030_eu_x);
 INCLUDE_ASM("span_1000", func_80204030_eu);
 #endif
 
-#if defined(VERSION_DE) && !defined(NON_MATCHING)
-INCLUDE_ASM("span_1000", func_80204030_de);
-#endif
-
-#if defined(VERSION_US_REV1) || ((defined(VERSION_US) || defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X)) && defined(NON_MATCHING))
+#if defined(VERSION_US_REV1) || defined(VERSION_DE)
 /* Fuzzy draft for us and de: the us-rev1 body under each version's own name. */
 #if defined(VERSION_US)
 #define LV_FN func_8020402C_us
-#elif defined(VERSION_DE)
-#define LV_FN func_80204030_de
 #elif defined(VERSION_EU)
 #define LV_FN func_80204030_eu
 #elif defined(VERSION_EU_X)

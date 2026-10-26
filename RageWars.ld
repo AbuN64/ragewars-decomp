@@ -9910,9 +9910,8 @@ SECTIONS
         src/game/GAME/800C6B34.CPP.o(.rodata .rdata);
         src/game/GAME/800C6B38.CPP.o(.rodata .rdata);
         src/game/AI/ENEMIES/TURRETAI_5.CPP.o(.rodata .rdata);
-        src/game/LEVEL/800C6B40.CPP.o(.rodata .rdata);
-        src/game/LEVEL/800C6B40.CPP.o(.data);
-        src/game/DATA/OVLDAT1/800C1A58.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/LEVEL/8020402C.CPP.o */;
+        src/game/LEVEL/8020402C.CPP.o(.rodata .rdata);
         src/game/LEVEL/800C6B5C.CPP.o(.rodata .rdata);
         src/game/LEVEL/800C6B60.CPP.o(.rodata .rdata);
         src/game/DATA/OVL1_A/800C6B64_3.CPP.o(.rodata .rdata);
@@ -18961,8 +18960,7 @@ SECTIONS
         src/game/GAME/800C6B34.CPP.o(.bss .sbss COMMON);
         src/game/GAME/800C6B38.CPP.o(.bss .sbss COMMON);
         src/game/AI/ENEMIES/TURRETAI_5.CPP.o(.bss .sbss COMMON);
-        src/game/LEVEL/800C6B40.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/OVLDAT1/800C1A58.CPP.o(.bss .sbss COMMON);
+        src/game/LEVEL/8020402C.CPP.o(.bss .sbss COMMON);
         src/game/LEVEL/800C6B5C.CPP.o(.bss .sbss COMMON);
         src/game/LEVEL/800C6B60.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_A/800C6B64_3.CPP.o(.bss .sbss COMMON);
