@@ -67,7 +67,6 @@ void Geometry_SetViewEffect(int viewEffect) {
 }
 
 /** Return the global word at g_geometryViewEffect. */
-extern int g_geometryViewEffect;
 
 int Geometry_GetViewEffect(void) {
     return g_geometryViewEffect;
@@ -115,11 +114,8 @@ void Geometry_LoadRenderMicrocode(void) {
     gSPDisplayList(cmd, (u32) &D_800CBCF0_de);
 }
 
-extern Gfx *g_displayListCursor;
 extern char D_E0050;
 extern char D_DCD10;
-extern char D_800CBCC0;
-extern char D_800CBCF0_de;
 
 void Geometry_SwitchRenderMicrocode(void) {
     Gfx *cmd;

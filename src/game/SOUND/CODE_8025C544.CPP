@@ -39,8 +39,6 @@ void func_8025C5BC_de(SlotRecAtB4V2 *voiceRecord) {
     func_802B2D80_de(voiceRecord->owner->sound);
 }
 
-extern void func_802B2F00_de(void *arg0, s16 arg1);
-extern s32 func_802B2620_de(void *arg0);
 extern void alSndpStop(void *arg0);
 
 void func_8025C5DC_de(SlotRecAtB4V2 *voiceRecord) {

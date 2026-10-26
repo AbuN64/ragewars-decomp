@@ -116,7 +116,6 @@ void Particle_MarkNearbyObjects(s32 unused, ObjParticleMarkNearbyObjects *center
 
 /* Checks object proximity through type-specific handlers and marks nearby objects active. */
 
-extern void GraphU64_SubtractVectors(f32 *, f32 *, f32 *);
 static inline void nearby(s32 unused, ObjParticleMarkNearbyObjects *center, ObjParticleMarkNearbyObjects **objects, s32 count) {
  f32 d[3]; s32 i; ObjParticleMarkNearbyObjects *o;
  for(i=0;i<count;i++) {

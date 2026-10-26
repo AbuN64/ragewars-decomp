@@ -65,7 +65,6 @@ void Geometry_SetCombineMode(u32 mode) {
 
 
 
-extern Gfx *g_displayListCursor;
 
 s32 Geometry_SetModePreset(s32 tailEnum) {
 
@@ -261,7 +260,6 @@ sw_mode_default:
     return 1;
 }
 
-extern Gfx *g_displayListCursor;
 extern Gfx D_800CC018_de[], D_800CC0A0[];
 extern void TextLoad_ResetTextureCache(void);
 /* Emits a 16 by 16 intensity texture, white tint, matrix and the selected pass list. */
@@ -304,7 +302,6 @@ struct Shared_GfxMaterial {
     u16 unk1A;
 };
 
-extern Gfx *g_displayListCursor;
 extern u32 D_800CD730;
 
 void *TextLoad_RequestTextureVariation(s32 *, s32);

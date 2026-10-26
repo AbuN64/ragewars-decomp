@@ -89,7 +89,6 @@ void *func_80219408_de(Cursor *cursor) {
     return Scene_GetPlatformRoutePoint(&g_world, cursor->clip, cursor->frame);
 }
 
-extern void *Scene_GetPlatformRoutePoint(char *a, unsigned char b, short c);
 
 
 
