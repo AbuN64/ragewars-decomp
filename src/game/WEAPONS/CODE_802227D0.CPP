@@ -53,8 +53,6 @@ s32 Weapons_SetPlayerState(SharedPlayer *player, void *arg1, s32 state) {
    of D_801462C8 when enabled at 0x1D, and by the ground's factor at 0x30 when state bits 3 at 0x38 are
    clear, there is ground, and func_8024E62C_de reports true or the ground is flagged 0x800. */
 
-extern f32 D_800C2848_de[];
-extern f32 D_800C2850_de[];
 extern f32 D_800C7948;
 
 extern s32 func_8024E62C_de(void *);

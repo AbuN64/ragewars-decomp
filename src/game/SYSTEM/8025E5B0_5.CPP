@@ -233,7 +233,6 @@ void func_8025EF34_de(u32 *stream, Output8025EF54 *out, s32 count) {
 #define func_8025F074_us func_8025F0C4_eu_x
 #endif
 #ifdef NON_MATCHING
-extern s32 D_8010AC88, D_8010AC84;
 extern f32 D_800C91F8;
 extern char D_00261180_de[], D_0025EF34_de[], D_00261238_de[];
 /* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through func_802741A4_de. */
@@ -325,7 +324,6 @@ INCLUDE_ASM("span_1000", func_8025F094_eu);
 
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
-extern s32 D_8010AC88, D_8010AC84;
 extern f32 D_800C91F8;
 extern char D_00261180_de[], D_0025EF34_de[], D_00261238_de[];
 /* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through func_802741A4_de. */
@@ -408,7 +406,6 @@ extern f32 D_800C91F8;
 
 /* Expand each encoded track, optionally smooth its four channels in place,
  * then normalize quaternion samples. */
-extern s32 D_8010AC88, D_8010AC84;
 extern char D_002611A0_us_rev1[], D_0025EF54_us_rev1[], D_00261258_us_rev1[];
 typedef struct {
     s32 count;

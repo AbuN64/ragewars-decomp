@@ -43,7 +43,6 @@ extern char *D_800DDC28;
 
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char D_800EEDE0[];
 #else
 #endif
 

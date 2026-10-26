@@ -171,7 +171,6 @@ typedef struct Query Query;
 
 
 
-extern Shape D_80100170;
 extern void Anim_TestEntityContact(ActorMotion *, Query *, LevelActor *);
 
 

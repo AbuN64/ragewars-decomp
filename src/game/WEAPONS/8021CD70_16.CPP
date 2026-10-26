@@ -5,7 +5,7 @@
 
 extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
 extern void Weapons_UpdateViewAngles(SharedPlayer *,func_802165F8_S1 *,char *);
-extern char D_800CE7E4,D_800CE7FC,D_800CED30;
+extern char D_800CED30;
 extern f32 D_800D2988;
 extern f32 D_800C29C0_de,D_800C29C4_de,D_800C29C8_de,D_800C29CC_de,D_800C29D0_de,D_800C29D4_de,D_800C29D8_de,D_800C29DC_de,D_800C29E0_de,D_800C29E4_de,D_800C29E8_de,D_800C29EC_de,D_800C29F0_de,D_800C29F4_de,D_800C29F8_de,D_800C29FC_de;
 /* State callbacks receive an opaque actor context. */

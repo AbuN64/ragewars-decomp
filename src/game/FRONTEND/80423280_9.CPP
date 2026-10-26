@@ -13,7 +13,6 @@
 #include "FRONTEND/80423280_9.H"
 #include "SCENE/802508E0_13.H"
 #include "COMMON/SHARED_GAMESLOT.H"
-extern Shared_Game D_801462C8;
 extern struct MatchOptionsScreen *D_800E4EF0;
 extern s32 func_8041AD04_de(void *);
 extern s32 func_802A1B18_de(void *);

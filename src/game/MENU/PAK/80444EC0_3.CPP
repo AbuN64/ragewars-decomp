@@ -11,7 +11,6 @@ extern void func_802658E4_de(char *buffer, const char *format, s32 value);
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "SYSTEM_3/80265370.H"
 extern u8 *D_800E22E4_eu[], *D_800E22F4[];
-extern char D_800DE758_de[];
 
 s32 func_80444D9C_de(LayeredText *item) {
     u32 code;

@@ -524,7 +524,6 @@ typedef struct Shared_MenuInput {
 #include "COMMON/UNUSED.H"
 
 
-extern Shared_Game D_801462C8;
 
 extern s32 D_80154034;
 #include "COMMON/GAME_SESSION.H"

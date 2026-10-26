@@ -120,7 +120,6 @@ extern void *Scene_AllocateMemory(s32 size);
 /* The argument is a pointer into 0x8068xxxx whose first byte the debugger read as 0x14, and the
    stride is 52. D_800E2B40, which func_804136D8_de indexes with the same stride and the same
    argument, sits 24 bytes further on, so both are fields of one 52-byte record. */
-extern s32 D_800DEAD8[][13];
 
 /* Returns the word in the 52-byte record D_800E2B2C selected by the first byte of a record. */
 extern s32 D_800E2B2C[];

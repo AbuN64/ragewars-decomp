@@ -61,7 +61,6 @@ s32 func_80438F0C_de(void) {
 
 
 
-extern struct HudCue *D_800E58A0;
 
 
 

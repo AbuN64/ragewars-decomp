@@ -40,7 +40,6 @@ extern CompactOptionsCommitContext *D_800E4514;
 
 
 extern TabOptionsCommitContext *D_800E4518;
-extern Shared_Game D_801462C8;
 
 void func_80422FC0_de(void) {
     Shared_Game *options;

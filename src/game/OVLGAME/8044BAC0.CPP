@@ -62,7 +62,6 @@ s16 func_8044AE70_de(void) {
     return D_8010F320;
 }
 
-extern u8 D_8010FBE3[];
 
 s32 func_8044B008_de(ControllerProfile *profile, s32 port) {
     s32 i;

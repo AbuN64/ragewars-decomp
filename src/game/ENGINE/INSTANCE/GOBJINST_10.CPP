@@ -42,7 +42,6 @@ extern TypeEntry *D_800CB440_de[];
 
 extern char *D_80140F84;
 
-extern f32 D_800C3B48_de[];
 
 extern void *Engine_GetActorDefinition(void *, s32);
 

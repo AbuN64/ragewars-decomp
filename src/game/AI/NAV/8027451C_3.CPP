@@ -15,13 +15,11 @@ extern Triangle *D_800CD3E8;
 
 extern Triangle *D_800CD3EC;
 
-extern CVector3 D_80115E10;
 
 extern f32 D_80111D54;
 
 extern s32 D_80111D58;
 
-extern CVector3 D_80115E20;
 
 extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 

@@ -26,15 +26,7 @@
 
 
 #ifdef VERSION_EU
-extern s32 D_800E0FF4[];
-extern s32 D_800E1004[];
-extern s32 D_800E1014[];
-extern s32 D_800E1024[];
 #elif defined(VERSION_EU_X)
-extern s32 D_800DCE6C[];
-extern s32 D_800DCE78[];
-extern s32 D_800DCE84[];
-extern s32 D_800DCE90[];
 #endif
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/CHANNEL.H"

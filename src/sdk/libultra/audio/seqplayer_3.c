@@ -16,10 +16,8 @@
    the status and data bytes are read through the event rather than the midi pointer, and the
    float to u8 tremolo conversion is written out against the cartridge's 2^31 constant with its
    store address taken first. */
-extern const float D_800C74C0_de;
 
  /* 127.0f, followed by 2^31 */
-extern const float D_800C74C8_de;
 
  /* 1.0f */
 

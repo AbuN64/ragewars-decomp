@@ -14,7 +14,6 @@ typedef struct { char pad0[0x1C]; Func_8043DB50_Rec *rec; struct ControllerProfi
 extern s16 D_auto_800E1DAA[][2];
 extern u8 D_auto_800C9237[][4];
 extern u8 D_auto_800C9233[][4];
-extern char D_0044FA6C[];
 extern s32 Render_IsAButtonPressed(struct ControllerProfile *object);
 extern void Items_StartPlayerAnimation(void *rec, s32 choice);
 extern void Render_PlayFlatSound(s32 id);

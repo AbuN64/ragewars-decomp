@@ -51,7 +51,6 @@ extern char D_800C3930_de;
 
 
 
-extern Entry802AB8DC D_800CC134[];
 
 extern CROMEventEntry *func_80262598_de(void *);
 
@@ -90,7 +89,6 @@ extern void Turret_BuildPlaneRot(CQuatern *, void *, void *);
 
 
 
-extern char *D_8011CA18[];
 
 extern CQuatern func_8024796C_de(char *);
 
@@ -124,7 +122,6 @@ extern void Particle_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
 
 
-extern SineTable D_800D0720;
 
 extern s32 D_800D2978;
 

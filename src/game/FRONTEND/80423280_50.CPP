@@ -48,7 +48,6 @@ extern s32 func_8042B154_de(s32 index);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-extern char *D_800E1DA4[];
 #endif
 
 extern void func_8028D380_de(Shared_World *, s32, char *, s32);

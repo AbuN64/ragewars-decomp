@@ -83,7 +83,7 @@ void func_804070F4_de(Shared_PakMenu *menu)
 #include "COMMON/PAK_SAVE_TEXT.H"
 #include "MENU/PAK/SAVE_SNAPSHOT.H"
 extern void Scene_ReleaseResource(s32, void *);
-extern s32 D_8015375C, D_800E28C8, D_8014D4C0_de;
+extern s32 D_8015375C;
 extern void *D_800DE860_de;
 extern struct Shape_typemap_165 *D_800DE864_de;
 extern s32 D_800E28BC;

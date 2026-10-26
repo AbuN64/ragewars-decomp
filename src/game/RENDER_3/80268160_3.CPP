@@ -47,7 +47,6 @@ void func_802688AC_de(void *unused, u8 *object, s32 third, struct IntPair pair) 
 
 
 
-extern f32 D_800C9570[];
 extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern void func_8022B11C_de(OwnerRecAt16D4 *, s32);
 

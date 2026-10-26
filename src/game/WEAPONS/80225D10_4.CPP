@@ -110,11 +110,6 @@ s32 Weapons_CheckTeamPointWin(Round *arg0);
 
 extern u8 D_801462D5; /* MIXED func_80227038_de */
 extern u8 D_801462DE; /* MIXED func_80227038_de */
-extern int D_80142848; /* MIXED func_80227038_de */
-extern int D_8014284C; /* MIXED func_80227038_de */
-extern s32 D_80142850; /* MIXED func_80227038_de */
-extern s32 D_80146914; /* MIXED func_80227038_de */
-extern s32 D_80146938; /* MIXED func_80227038_de */
 void func_80227038_de(s8 *world) {
     CGameStatus *initial_rules; 
     CGameStatus *select_rules; 

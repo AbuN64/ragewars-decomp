@@ -5,7 +5,6 @@
 #include "sdk/libgultra.h"
 
 #if defined(VERSION_US_REV1)
-extern s32 D_8014D3E8;
 
 extern s32 (*D_800D364C)(s32 arg0);
 

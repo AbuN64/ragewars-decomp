@@ -63,7 +63,6 @@ extern void func_802649FC_de();
 /* Calls Pak_AllocateMenu with the third argument, the second argument and the resource D_450C18,
    and returns one. */
 extern char D_0044FFEC[];
-extern Shared_Game D_801462C8;
 
 void Multi_SelectInitialController(void *unused0, struct ObjRecAt20V2 *menu) {
     Shared_Game *globals;

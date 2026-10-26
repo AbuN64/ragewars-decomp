@@ -56,7 +56,6 @@ extern Handler8042DB38 D_800E53CC;
 
 extern s32 D_80146894; /* MIXED func_8042D788_de */
 extern s32 D_801468F4; /* MIXED func_8042D788_de */
-extern s32 D_80146918; /* MIXED func_8042D788_de */
 s32 func_8042D788_de(void) {
     s32 *paused;
     MarkMenuEventHandled();

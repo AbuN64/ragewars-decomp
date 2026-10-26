@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
 #include "SYSTEM_2/8025E280.H"
 
@@ -35,7 +36,6 @@ extern struct MenuResourceWidget *func_80419E54_de(s32, s32);
    commit state 3, returning zero. */
 
 extern OptionsCommitContext *g_optionsPage;
-extern Shared_Game D_801462C8;
 /* Localized label pointers supplied to each option list. */
 extern u8 *D_800D3470_de[1];
 extern u8 *D_auto_800D74AC[1];

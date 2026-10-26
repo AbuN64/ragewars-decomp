@@ -8,7 +8,6 @@
 #include "SYSTEM_2/8025E280.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern s32 D_800E63B4, D_800E63B0;
 
 s32 func_80444F98_de(void *first, void *second, void *third) { func_8025E214_de(-1); func_8025E29C_de(0); if (D_800E63B4 != 0) { func_8025E360_de(); } func_8025E2D4_de(D_800E63B0); func_80264A0C_de(); return func_80442384_de(first, second, third); }
 

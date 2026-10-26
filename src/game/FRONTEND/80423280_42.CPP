@@ -9,7 +9,6 @@
 #include "FRONTEND/80423280_42.H"
 #include "FRONTEND/80423280_8.H"
 extern ResultsOptionsScreen *D_800E4690;
-extern Shared_Game D_801462C8;
 
 /* Formats the name of entry D_800E4690's word at 0xA44 into a local 0x40-byte buffer through
    func_8028D380_de from D_8011FE88, passes the length func_802A0494_de measures to func_802A025C_de for the

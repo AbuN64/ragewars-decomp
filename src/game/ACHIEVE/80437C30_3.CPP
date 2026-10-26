@@ -103,9 +103,6 @@ s32 func_80438AD4_de(void) {
     return 0;
 }
 
-extern s32 D_801468F4; /* MIXED func_80438ADC_de */
-extern s32 D_80146918; /* MIXED func_80438ADC_de */
-extern s32 D_80146948; /* MIXED func_80438ADC_de */
 s32 func_80438ADC_de(void *window, void *unused1, s32 event) {
     s32 state;
     char *object;

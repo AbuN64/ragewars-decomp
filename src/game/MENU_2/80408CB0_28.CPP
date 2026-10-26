@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "SYSTEM_2/8025E280.H"
@@ -175,7 +176,6 @@ struct Shared_MenuData {
 #include "COMMON/SHARED_GAMESLOT.H"
 
 extern Shared_OptionsScreen *D_800E4518;
-extern Shared_Game D_801462C8;
 
 extern char *D_800D2124;
 extern char *D_800D2128;

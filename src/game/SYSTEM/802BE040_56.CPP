@@ -7,7 +7,6 @@
 #include "RESMGR/802A0888.H"
 
 #if !(defined(VERSION_US))
-extern OSPiHandle_s D_801486C0;
 extern OSPiHandle_s *D_800D437C;
 extern u32 __osDisableInt(void);
 

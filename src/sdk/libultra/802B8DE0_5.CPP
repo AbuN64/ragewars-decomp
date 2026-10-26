@@ -64,9 +64,7 @@ typedef s32 (*FuncPtr)(void *);
 
 extern s32 func_802B0340_de(s32, s32, void *, s32, s32);
 
-extern char D_002BE0D0;
 
-extern char D_002BEAA4;
 
  /* 1 / 173123.404906676 */
 

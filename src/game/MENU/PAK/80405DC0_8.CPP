@@ -266,7 +266,7 @@ finish:
 #endif
 
 #include "TYPES.H"
-extern s32 D_8014D4C0_de, D_8014D4DC, D_80153760, D_8014D4EC_de, D_800DE874, D_80153784, D_8015375C, D_800E28C0;
+extern s32 D_8015375C, D_800E28C0;
 extern s32 D_8014561C, D_0044ED44, D_8011FECC;
 extern char D_0044EA08[];
 extern void Pak_ProbeStatus(s32 ch);

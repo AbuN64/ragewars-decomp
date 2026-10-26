@@ -8,8 +8,6 @@
 #include "SYSTEM_2/8025E280.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern s32 D_800E63B0, D_800E63B4, D_800E63B8;
-extern char D_00451094[];
 extern void func_802649FC_de(void);
 
 s32 func_80445504_de(void *first, void *second, void *third) {
