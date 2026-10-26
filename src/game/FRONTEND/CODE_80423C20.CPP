@@ -5,11 +5,9 @@
 #include "COMMON/PLAYERPROFILES.H"
 #include "RESMGR/802A0888.H"
 
-
-#if !defined(NON_MATCHING) && !defined(VERSION_US_REV1)
+#if defined(VERSION_EU_X)
 INCLUDE_ASM("ovl_80400000", Frontend_InitPlayModeMenu);
 #endif
-
 
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -48,8 +46,6 @@ typedef struct OptionsScreen {
 } OptionsScreen;
 extern OptionsScreen *D_800E4600;
 
-#if defined(NON_MATCHING) || defined(VERSION_US_REV1)
-#if 1
 extern s8 D_800FEB0E[];
 extern u8 D_8010EB7D[];
 extern void ScenarioSetup_SetCupCategory(int);
@@ -69,6 +65,7 @@ extern void func_8041A488_de(void *);
 extern MenuWidget *SmpFlicker_CreateFlickerWidget(s32, s32);
 extern u32 func_802999F4_de(void);
 extern void Frontend_RequestScreenMode(s32);
+#if !defined(VERSION_EU_X)
 /* Builds the options screen: clears the per-player settings, retires bots that are no longer wanted, allocates
  * the screen record in D_800E4600 and picks the button layout. The layout is 3 when any human is on a pad
  * that Defs_TestBit reports in group 0 (or the game flag 0x20000000 is set), 2 for group 1, else the
@@ -181,7 +178,6 @@ s32 Frontend_InitPlayModeMenu(void *menu) {
     Frontend_RequestScreenMode(0);
     return 0;
 }
-#endif
 #endif
 
 s32 Frontend_ApplyModeChoice(void) {
