@@ -155,6 +155,6 @@ extern char *func_802610F0_de(Pack *,s32,s32);
 typedef union SplineSourceCursor { SplineSource *header; CVector3 *points; f32 *weights; } SplineSourceCursor;
 
 extern char D_0040067C[];
-extern char s_cinemaText[];
+extern const char s_cinemaText[];
 extern void *Menu_GetTrackClip(s32);
 #endif

@@ -29,7 +29,7 @@ static inline char *packAppend(Pack *pack,void *prepare,s32 size) { return func_
 
 static inline s32 splineRecordSize(s32 left,s32 right) { s32 a=left*9,b=right*9; return (b+a)*4+48; }
 
-extern char g_cinemaDirectoryText[];
+extern const char g_cinemaDirectoryText[];
 
 extern s32 SetN64_LocatePackSection(void *,s32,s32,s32 *);
 

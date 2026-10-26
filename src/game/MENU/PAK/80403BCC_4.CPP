@@ -17,7 +17,7 @@
 
 
 
-extern char g_cinemaDirectoryText[];
+extern const char g_cinemaDirectoryText[];
 
 extern void *SetN64_LocatePackSection(int, int, int, int *);
 

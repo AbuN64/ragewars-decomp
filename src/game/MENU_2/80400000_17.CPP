@@ -86,7 +86,7 @@ void Menu_DrawTrackOverlay(ScreenRectangle *rectangle) {
 
 
 
-extern char g_cinemaDirectoryText[];
+extern const char g_cinemaDirectoryText[];
 
 extern s32 SetN64_LocatePackSection(s32 *, s32, s32, s32 *);
 
