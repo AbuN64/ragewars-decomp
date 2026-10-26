@@ -9,10 +9,6 @@
 
 #include "COMMON/CONTROL.H"
 extern RecordRecAtCV2 D_800E4F64[];
-extern s32 D_800E51E4[];
-extern s32 D_800E51F8[];
-extern s32 D_800E5214[];
-extern s32 D_800E5240[];
 extern s32 D_800E0F20[];
 s32 ScenarioSetup_ResolveArenaFromSelection(s32 arg0, s32 arg1) {
     s32 result = 0;

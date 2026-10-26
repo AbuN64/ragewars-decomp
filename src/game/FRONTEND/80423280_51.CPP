@@ -18,13 +18,9 @@ extern s32 ScenarioSetup_IsCupComplete(void);
 
 
 
-extern s32 D_800E51E4[];
 
-extern s32 D_800E51F8[];
 
-extern s32 D_800E5214[];
 
-extern s32 D_800E5240[];
 
 extern struct Shape_typemap_165 D_800E4F64[];
 

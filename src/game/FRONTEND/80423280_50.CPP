@@ -13,10 +13,6 @@
 #include "FRONTEND/80423280_53.H"
 extern struct ScreenScenarioSetupRefreshSelectedArenaLabel *D_800E4F60;
 extern struct Icon D_800E4F64[];
-extern s32 D_800E5240[];
-extern s32 D_800E5214[];
-extern s32 D_800E51F8[];
-extern s32 D_800E51E4[];
 extern void Frontend_SetWidgetFlag08(void *, s32);
 extern s32 ScenarioSetup_ResolveArenaFromSelection(s32, s32);
 
