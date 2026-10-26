@@ -260,7 +260,7 @@ struct ALSeqPlayer;
 struct ALSeqPlayer {
     ALPlayer_s node;
     void *drvr;
-    void *target;
+    struct ALCSeq_s *target;
     ALMicroTime curTime;
     ALBank_s *bank;
     s32 uspt;
