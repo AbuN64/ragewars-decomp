@@ -118,28 +118,24 @@ void Pak_AdjustModelByteZero(void *first, void *second, void *third) {
 }
 
 /* Forwards its three arguments to Pak_AdjustModelField with 0, 1, 1, 0xFF and the pooled constant (1.0f). */
-extern s32 Pak_AdjustModelField(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
 
 void Pak_AdjustModelByteOne(void *first, void *second, void *third) {
     Pak_AdjustModelField(first, second, third, 0, 1, 1, 0xFF, (1.0f));
 }
 
 /* Forwards its three arguments to Pak_AdjustModelField with 0, 2, 1, 0xFF and the pooled constant (1.0f). */
-extern s32 Pak_AdjustModelField(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
 
 void Pak_AdjustModelByteTwo(void *first, void *second, void *third) {
     Pak_AdjustModelField(first, second, third, 0, 2, 1, 0xFF, (1.0f));
 }
 
 /* Forwards its three arguments to Pak_AdjustModelField with 1, 8, 0xA, 0x7D0 and the pooled constant (1.0f). */
-extern s32 Pak_AdjustModelField(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
 
 void Pak_AdjustModelWordAt08(void *first, void *second, void *third) {
     Pak_AdjustModelField(first, second, third, 1, 8, 0xA, 0x7D0, (1.0f));
 }
 
 /* Forwards its three arguments to Pak_AdjustModelField with 2, 0x10, 0x66, 0xA000 and the pooled constant (10.239999771118164f). */
-extern s32 Pak_AdjustModelField(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
 
 void Pak_AdjustModelFloatAt10(void *first, void *second, void *third) {
     Pak_AdjustModelField(first, second, third, 2, 0x10, 0x66, 0xA000, (10.239999771118164f));
@@ -147,7 +143,6 @@ void Pak_AdjustModelFloatAt10(void *first, void *second, void *third) {
 
 /* Forwards its three arguments to Pak_AdjustModelField with 2, 0x14, 1, 0xB4 and the pooled constant
    (1.0f). */
-extern s32 Pak_AdjustModelField(OptionEditState *, OptionEditState *, s32, s32, s32, s32, s32, f32);
 
 void Pak_AdjustModelFloatAt14(void *first, void *second, void *third) {
     Pak_AdjustModelField(first, second, third, 2, 0x14, 1, 0xB4, (1.0f));

@@ -103,7 +103,6 @@ void OnScreen_DrawText(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 sh
    colour from the argument with full alpha bits, texture enable and the texture-filter, colour-dither
    and alpha-dither mode words, the alpha dither chosen by D_800E28D8. */
 
-extern Gfx *g_displayListCursor;
 
 extern void Geometry_SetCombineMode(s32 arg0);
 extern void Geometry_SetModePreset(s32 arg0);
@@ -123,7 +122,6 @@ void OnScreen_SetupSpriteMode(s32 color) {
     if (D_800E28D8 == 0) { gDPSetTextureFilter(g_displayListCursor++, G_TF_POINT); } else { gDPSetTextureFilter(g_displayListCursor++, G_TF_BILERP); }
 }
 
-extern Gfx *g_displayListCursor;
 
 void OnScreen_DrawTextureWithOpacity(void *pTexture, void *pOpacity, int XPos, int YPos, int TextureWidth, int TextureHeight) {
     { gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 1, (u32)pOpacity); gDPSetTile(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 256, G_TX_LOADTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPLoadSync(g_displayListCursor++); gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, (u32)((((((TextureWidth*TextureHeight+3)>>2)-1)<2047?(((TextureWidth*TextureHeight+3)>>2)-1):2047))), (u32)((((1<<11)+(1>(TextureWidth/16)?1:(TextureWidth/16))-1)/(1>(TextureWidth/16)?1:(TextureWidth/16))))); gDPPipeSync(g_displayListCursor++); gDPSetTile(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_4b, (u32)(((((TextureWidth>>1)+7)>>3))), 256, G_TX_RENDERTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, (u32)(((TextureWidth-1)<<2)), (u32)(((TextureHeight-1)<<2))); }
@@ -133,7 +131,6 @@ void OnScreen_DrawTextureWithOpacity(void *pTexture, void *pOpacity, int XPos, i
     { Gfx *g=g_displayListCursor++; gDPTexRect(g, XPos<<2, YPos<<2, (XPos+TextureWidth)<<2, (YPos+TextureHeight)<<2, 0); gDPHalf1(g_displayListCursor++, 0); gDPHalf2(g_displayListCursor++, (((u32)((1<<10)) & 0xFFFF) << ((16)))|(((u32)((1<<10)) & 0xFFFF) << ((0)))); }
 }
 
-extern Gfx *g_displayListCursor;
 
 void OnScreen_DrawScaledMaskedImage(void *pTexture, void *pOpacity, float XPos, float YPos, int TextureWidth, int TextureHeight, float ScaleX, float ScaleY) {
  int dsdx=1024,dtdy; int xl,yl,xh,yh;
@@ -158,7 +155,6 @@ void OnScreen_DrawScaledMaskedImage(void *pTexture, void *pOpacity, float XPos, 
 
 /* Appends display-list commands to D_80110634 that load a 4-bit texture block of the given size and draw it as a texture rectangle at the given position. Adapted from OnScreen_DrawTextureWithOpacity with the palette block and the second texture block removed and its first block's image pointer taken from the texture argument. */
 
-extern Gfx *g_displayListCursor;
 
 void OnScreen_DrawIntensityTexture(void *pTexture, int XPos, int YPos, int TextureWidth, int TextureHeight) {
     { gDPSetTextureImage(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 1, (u32)pTexture); gDPSetTile(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 256, G_TX_LOADTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPLoadSync(g_displayListCursor++); gDPLoadBlock(g_displayListCursor++, G_TX_LOADTILE, 0, 0, (u32)((((((TextureWidth*TextureHeight+3)>>2)-1)<2047?(((TextureWidth*TextureHeight+3)>>2)-1):2047))), (u32)((((1<<11)+(1>(TextureWidth/16)?1:(TextureWidth/16))-1)/(1>(TextureWidth/16)?1:(TextureWidth/16))))); gDPPipeSync(g_displayListCursor++); gDPSetTile(g_displayListCursor++, G_IM_FMT_I, G_IM_SIZ_4b, (u32)(((((TextureWidth>>1)+7)>>3))), 256, G_TX_RENDERTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPSetTileSize(g_displayListCursor++, G_TX_RENDERTILE, 0, 0, (u32)(((TextureWidth-1)<<2)), (u32)(((TextureHeight-1)<<2))); }
@@ -167,7 +163,6 @@ void OnScreen_DrawIntensityTexture(void *pTexture, int XPos, int YPos, int Textu
 
 /* Appends display-list commands to D_80110634 that load a 4-bit texture block of the given size and draw it as a texture rectangle at a floating-point position, stretched by the given horizontal and vertical scales with the texture steps divided by them. Adapted from OnScreen_DrawIntensityTexture with the position made floating point, the rectangle corners scaled by D_800C61BC_de and the scale factors applied to the extent and the texture step. */
 
-extern Gfx *g_displayListCursor;
 void OnScreen_DrawScaledIntensityTexture(void *pTexture, f32 XPos, f32 YPos, int TextureWidth, int TextureHeight, f32 ScaleX, f32 ScaleY) {
     int dsdx;
     int dtdy;

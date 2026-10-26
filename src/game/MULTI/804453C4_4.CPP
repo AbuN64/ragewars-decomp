@@ -68,7 +68,6 @@ s32 Pak_SyncPrimaryByteOption(struct Field *field, s32 index) {
    Pak_CountLineChars reports. Returns zero. */
 
 
-extern s32 Pak_CountLineChars(struct Field *);
 
 s32 Pak_SyncPrimaryByteOptionZero(struct Field *field) {
     char *text = *field->text;
@@ -89,7 +88,6 @@ s32 Pak_SyncPrimaryByteOptionZero(struct Field *field) {
    Pak_CountLineChars reports. Returns zero. */
 
 
-extern s32 Pak_CountLineChars(struct Field *);
 
 s32 Pak_SyncPrimaryByteOptionOne(struct Field *field) {
     char *text = *field->text;
@@ -110,7 +108,6 @@ s32 Pak_SyncPrimaryByteOptionOne(struct Field *field) {
    Pak_CountLineChars reports. Returns zero. */
 
 
-extern s32 Pak_CountLineChars(struct Field *);
 
 s32 Pak_SyncPrimaryByteOptionTwo(struct Field *field) {
     char *text = *field->text;
@@ -131,7 +128,6 @@ s32 Pak_SyncPrimaryByteOptionTwo(struct Field *field) {
 
 extern u8 D_800D0EE8[];
 extern u8 D_800CBC9C[];
-extern s32 Pak_CountLineChars(struct Field *);
 
 s32 Pak_SyncSecondaryByteOption(struct Field *field, s32 index) {
     char *text = *field->text;
@@ -152,7 +148,6 @@ s32 Pak_SyncSecondaryByteOption(struct Field *field, s32 index) {
    Pak_CountLineChars reports. Returns zero. */
 
 
-extern s32 Pak_CountLineChars(struct Field *);
 
 s32 Pak_SyncSecondaryByteOptionZero(struct Field *field) {
     char *text = *field->text;
@@ -173,7 +168,6 @@ s32 Pak_SyncSecondaryByteOptionZero(struct Field *field) {
    Pak_CountLineChars reports. Returns zero. */
 
 
-extern s32 Pak_CountLineChars(struct Field *);
 
 s32 Pak_SyncSecondaryByteOptionOne(struct Field *field) {
     char *text = *field->text;
@@ -194,7 +188,6 @@ s32 Pak_SyncSecondaryByteOptionOne(struct Field *field) {
 
 extern u8 D_800D0EEA[];
 extern u8 D_800D0EEE[];
-extern s32 Pak_CountLineChars(struct Field *);
 
 s32 Pak_SyncSecondaryByteOptionTwo(struct Field *field) {
     char *text = *field->text;
