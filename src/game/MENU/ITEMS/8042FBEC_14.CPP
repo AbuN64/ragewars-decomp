@@ -53,3 +53,27 @@ s32 Items_SelectOptionRowLabel(OptionRowEu *row) {
 INCLUDE_ASM("ovl_80400000", Items_SelectOptionRowLabel);
 #endif
 #endif
+
+#if defined(VERSION_US_REV1)
+/* Data separated from executable functions by the legacy split layout. */
+unsigned int func_8043EF1C_us_rev1[12] = { 0x00431023U, 0x3C01800EU, 0xC4202390U, 0x3C018014U, 0xE42068B0U, 0x8C84000CU, 0x3C03FBFFU, 0x8C820030U, 0x3463FFFFU, 0x00431024U, 0x03E00008U, 0xAC820030U };
+#endif
+
+#if defined(VERSION_US)
+unsigned int D_auto_rodata_unresolved_8043EF1C[12] = {
+    0x41444745, 0x3C01800E, 0xC420D010, 0x3C018014, 0xE42007F0, 0x8C84000C, 0x3C03FBFF, 0x8C820030,
+    0x3463FFFF, 0x00431024, 0x03E00008, 0xAC820030,
+};
+#endif
+
+#if defined(VERSION_EU)
+const unsigned int D_auto_rodata_unresolved_800EE934[1] = {
+    0x00000000,
+};
+#endif
+
+#if defined(VERSION_EU_X)
+unsigned char rodata_unresolved_800E9B35[3] = {
+    0x00, 0x00, 0x00,
+};
+#endif

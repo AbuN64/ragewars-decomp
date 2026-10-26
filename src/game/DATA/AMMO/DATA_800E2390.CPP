@@ -18,3 +18,16 @@ unsigned int rodata_unresolved_800EE9E4[3] = {
     0x484A0800, 0x4A05174D, 0xE9171C7C,
 };
 #endif
+
+#if defined(VERSION_DE) || defined(VERSION_US)
+#if defined(VERSION_DE)
+unsigned int rodata_unresolved_800DCFEC[1] = {
+    0x00000000,
+};
+#endif
+#if defined(VERSION_US)
+const unsigned int rodata_unresolved_800DCFEC[1] = {
+    0x00000000,
+};
+#endif
+#endif
