@@ -22,15 +22,15 @@ extern void **func_8024BFD4_de(void *arg0, s32 arg1);
 
 extern void Cache_UnlockResource(void *arg0, void *arg1);
 
-void *func_8024BC94_de(void *outVector, void *actor, struct IntPair localVector) {
+CVector3 *func_8024BC94_de(CVector3 *outVector, void *actor, CVector3 localVector) {
     CQuatern aimOrientation;
     s32 aimMatrix[16];
-    Triple transformedVector;
+    CVector3 transformedVector;
 
     aimOrientation = func_8024796C_de(actor);
     MatrixFromQuaternion(&aimOrientation, aimMatrix);
     GraphU64_TransformPoint(aimMatrix, &localVector, &transformedVector);
-    *(Triple *)outVector = transformedVector;
+    *outVector = transformedVector;
     return outVector;
 }
 

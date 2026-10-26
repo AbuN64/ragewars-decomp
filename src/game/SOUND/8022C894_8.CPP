@@ -21,7 +21,7 @@ extern f32 D_800C7F08[];
 
 extern Marker *DynLight_AllocateLightNode(char *, s32);
 
-extern void func_8024BC94_de(CVector3 *, void *, CVector3);
+#include "ENGINE/INSTANCE/GOBJINST_13.H"
 
 extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 

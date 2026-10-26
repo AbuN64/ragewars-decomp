@@ -80,7 +80,7 @@ s32 Player_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target) {
 }
 
 /* These contiguous globals place the actor-list pointer 0x1285 bytes before the enable flag. */
-extern void *func_8024BC94_de(void *arg0, s32 unused1, struct IntPair arg2);
+#include "ENGINE/INSTANCE/GOBJINST_13.H"
 struct func_8021CD70_S1;
 struct func_8021CD70_S2;
 extern s32 Player_CanLockTarget(func_8021CD70_S1 *, func_8021CD70_S2 *);
@@ -119,8 +119,7 @@ CQuatern Player_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **targ
         unit.x = 0.0f;
         unit.y = 0.0f;
         unit.z = D_800C2390_de;
-        /* The ROM ABI returns a three-float vector and takes a three-float offset. */
-        forward = ((CVector3 (*)(void *, CVector3))func_8024BC94_de)(player, unit);
+        func_8024BC94_de(&forward, player, unit);
         origin = player->position;
         origin.y += Player_GetObjectOwnerHeight(player);
         enable = &D_80145088.settings.local;

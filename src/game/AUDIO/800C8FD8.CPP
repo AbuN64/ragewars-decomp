@@ -188,10 +188,13 @@ void Audio_StopAudioByMask(ContextRecAt2BC0 *context, s32 matchMask) {
     __osRestoreInt(releaseInterruptMask);
 }
 
-void Audio_PlayPositionedSoundWithScale(ContextRecAt2BC0 *arg0, s32 track, CVector3 arg2, s32 arg3, s32 arg4, f32 arg5) {
+s32 Audio_PlayPositionedSoundWithScale(ContextRecAt2BC0 *arg0, s32 track, CVector3 arg2, s32 arg3, s32 arg4, f32 arg5) {
+    s32 handle;
+
     arg0->alpha = arg5;
-    Audio_PlaySoundAtPosition(arg0, track, arg2, arg3, arg4);
+    handle = Audio_PlaySoundAtPosition(arg0, track, arg2, arg3, arg4);
     arg0->alpha = D_800C3EE0_de[1];
+    return handle;
 }
 
 void Audio_PlayPeriodicTrackSound(ContextRecAt2BC0 *arg0) {

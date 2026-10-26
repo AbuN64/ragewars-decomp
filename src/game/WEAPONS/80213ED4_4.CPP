@@ -172,7 +172,7 @@ f32 Barrel_FindClearAimAngle(Actor_u1 *actor, CVector3 point, s32 target, f32 di
 
 #include "COMMON/MATH_HELPERS.H"
 extern void GraphU64_NormalizeVec3(CVector3 *);
-extern void func_8024BC94_de(CVector3 *out, void *actor, CVector3 offset);
+#include "ENGINE/INSTANCE/GOBJINST_13.H"
 extern f32 GameObject_GetActorHeight(void *);
 
 /* Barrel_GetSignedAngleToPoint's body: the signed angle between the actor's facing and the direction to the point. */

@@ -33,7 +33,7 @@ extern void GraphU64_PackFixedMatrix(f32 *, s32);
 
 
 
-extern void func_8024BC94_de(CVector3 *out, void *actor, CVector3 offset);
+#include "ENGINE/INSTANCE/GOBJINST_13.H"
 
 extern void GraphU64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 
