@@ -15,7 +15,7 @@
 /* Tests a ray against a polygon with a radius: intersects the ray from 0x44 to 0x50 with the polygon's plane
  * through func_802412D0_de and accepts a parameter nearer than the ray's nearest hit, also allowing a slightly
  * negative one (above -D_800D0648 * D_800C87C0[1] scaled by the ray's 0x80 factor) except for kind 7 and
- * types 5 and 6; the hit point is then placed with func_80271FC8_de and tested against the polygon with the
+ * types 5 and 6; the hit point is then placed with GraphU64_InterpolateVector and tested against the polygon with the
  * given point and radius through func_80241614_de. On a hit the polygon record is optionally kept as the ray's
  * nearest hit. Adapted from func_8023E8D4_de with the radius test and the slack constant. */
 
@@ -29,7 +29,7 @@
 
 extern s32 func_802412D0_de(Polygon_func_8023E8D4_de *, CVector3 *, CVector3 *, f32 *);
 
-extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
+extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
 extern s32 func_80241614_de(Polygon_func_8023E8D4_de *, CVector3 *, f32, CVector3 *);
 
@@ -62,7 +62,7 @@ s32 func_8023EA44_de(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly, CVector3
     if (accepts(ray, poly) == 0) {
         return 0;
     }
-    func_80271FC8_de(&poly->hit, poly->t, &ray->start, &ray->end);
+    GraphU64_InterpolateVector(&poly->hit, poly->t, &ray->start, &ray->end);
     if (func_80241614_de(poly, point, radius, &poly->hit) == 0) {
         return 0;
     }

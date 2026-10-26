@@ -104,6 +104,6 @@ typedef struct AnimChannel {
     u8 active,blending;
     char padc[4]; void *resource;
 } AnimChannel;
-extern f32 func_80273EE4_de(f32,f32,f32);
+extern f32 GraphU64_InterpolateWrappedValue(f32,f32,f32);
 extern s32 func_802625C4_de(void *);
 #endif

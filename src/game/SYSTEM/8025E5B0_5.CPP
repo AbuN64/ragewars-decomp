@@ -101,7 +101,7 @@ INCLUDE_ASM("span_1000", func_8025E574);
 #endif
 #endif
 
-extern void func_80270AAC_de(CQuatern *out, f32 t, CQuatern *from, CQuatern *to);
+extern void GraphU64_InterpolateQuaternionArc(CQuatern *out, f32 t, CQuatern *from, CQuatern *to);
 
 
 
@@ -175,7 +175,7 @@ void func_8025EA1C_de(AnimRef *anim, s32 index, f32 time, CQuatern *out) {
                 }
             }
         }
-        func_80270AAC_de(out, time - (f32)(time >= 0.0f ? (s32)time : (s32)time - ((f32)(s32)time != time)), frames + first, frames + second);
+        GraphU64_InterpolateQuaternionArc(out, time - (f32)(time >= 0.0f ? (s32)time : (s32)time - ((f32)(s32)time != time)), frames + first, frames + second);
     }
 }
 
@@ -232,7 +232,7 @@ void func_8025EF34_de(u32 *stream, Output8025EF54 *out, s32 count) {
 #endif
 #ifdef NON_MATCHING
 extern char D_00261180_de[], D_0025EF34_de[], D_00261238_de[];
-/* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through func_802741A4_de. */
+/* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through GraphU64_NormalizeQuaternion. */
 void func_8025F074_us(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     void (*callback)(void *, void *, s32) = 0;
     s32 i, j, k, a, slot;
@@ -292,7 +292,7 @@ void func_8025F074_us(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 
         for (i = 0; i < arg2; i++) {
             row = (f32 *)SetN64_GetPackSection(arg1, i);
             for (k = 0; k < D_8010AC88; k++) {
-                func_802741A4_de(row);
+                GraphU64_NormalizeQuaternion(row);
                 row += 4;
             }
         }
@@ -322,7 +322,7 @@ INCLUDE_ASM("span_1000", func_8025F094_eu);
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING
 extern char D_00261180_de[], D_0025EF34_de[], D_00261238_de[];
-/* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through func_802741A4_de. */
+/* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through GraphU64_NormalizeQuaternion. */
 void func_8025F0D4_de(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     void (*callback)(void *, void *, s32) = 0;
     s32 i, j, k, a, slot;
@@ -382,7 +382,7 @@ void func_8025F0D4_de(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 
         for (i = 0; i < arg2; i++) {
             row = (f32 *)SetN64_GetPackSection(arg1, i);
             for (k = 0; k < D_8010AC88; k++) {
-                func_802741A4_de(row);
+                GraphU64_NormalizeQuaternion(row);
                 row += 4;
             }
         }
@@ -481,7 +481,7 @@ s32 PolyTrak_ExpandAnimationTracks(s32 source, AnimationSampleTable *buffer, s32
             if (D_8010AC88 > 0) {
                 out = values;
                 do {
-                    func_802741A4_de(out);
+                    GraphU64_NormalizeQuaternion(out);
                     out += 4;
                 } while (++i < D_8010AC88);
             }

@@ -57,7 +57,7 @@ void Scene_SetLevelActorStateBit(void *arg0, s32 index, s32 arg2, s32 arg3) {
     base2[idx2 >> 3] &= ~mask;
 }
 
-void Scene_SetRecordBitForLevel(Field_void_80 *arg0, s32 index, s32 arg2, s32 arg3) {
+void Scene_SetRecordBitForLevel(Field_void_80 *worldState, s32 index, s32 recordBitIndex, s32 enabled) {
     void *table;
     u8 *base1;
     u8 *base2;
@@ -65,21 +65,21 @@ void Scene_SetRecordBitForLevel(Field_void_80 *arg0, s32 index, s32 arg2, s32 ar
     s32 idx;
     s32 idx2;
 
-    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(arg0->value, 0), index), 1);
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(worldState->value, 0), index), 1);
     SetN64_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
     base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
-    mask = 1 << (arg2 & 7);
-    if (arg3 != 0) {
-        idx = arg2;
-        if (arg2 < 0) {
-            idx = arg2 + 7;
+    mask = 1 << (recordBitIndex & 7);
+    if (enabled != 0) {
+        idx = recordBitIndex;
+        if (recordBitIndex < 0) {
+            idx = recordBitIndex + 7;
         }
         base1[idx >> 3] |= mask;
         return;
     }
-    idx2 = arg2;
+    idx2 = recordBitIndex;
     if (idx2 < 0) {
         idx2 += 7;
     }
@@ -121,29 +121,29 @@ void Scene_SetLevelRecordStateBit(void *arg0, struct LevelBitRecord *levelBitRec
     base2[idx2 >> 3] &= ~mask;
 }
 
-s32 Scene_TestLevelRecordStateBit(void *arg0, struct LevelBitRecord *levelBitRecord) {
+s32 Scene_TestLevelRecordStateBit(void *world, struct LevelBitRecord *levelBitRecord) {
     s32 bitIndex;
     void *field80;
     s32 field1B40C;
     void *table;
-    u8 *temp_a0;
+    u8 *recordBits;
     s32 mask;
 
     bitIndex = levelBitRecord->bitIndex;
-    field80 = ((WorldSceneDispatchEnabledEntityTrigger *)(arg0))->levels;
-    field1B40C = ((WorldSceneDispatchEnabledEntityTrigger *)(arg0))->level;
+    field80 = ((WorldSceneDispatchEnabledEntityTrigger *)(world))->levels;
+    field1B40C = ((WorldSceneDispatchEnabledEntityTrigger *)(world))->level;
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field80, 0), field1B40C), 1);
     SetN64_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    temp_a0 = (u8 *) SetN64_GetPackSection(table, 1);
+    recordBits = (u8 *) SetN64_GetPackSection(table, 1);
     mask = 1 << (bitIndex & 7);
     if (bitIndex < 0) {
         bitIndex += 7;
     }
-    return (temp_a0[bitIndex >> 3] & mask) != 0;
+    return (recordBits[bitIndex >> 3] & mask) != 0;
 }
 
-void Scene_SetTriggerBitForLevel(Field_void_80 *arg0, s32 index, s32 arg2, s32 arg3) {
+void Scene_SetTriggerBitForLevel(Field_void_80 *worldState, s32 index, s32 triggerBitIndex, s32 enabled) {
     void *table;
     u8 *base1;
     u8 *base2;
@@ -151,21 +151,21 @@ void Scene_SetTriggerBitForLevel(Field_void_80 *arg0, s32 index, s32 arg2, s32 a
     s32 idx;
     s32 idx2;
 
-    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(arg0->value, 0), index), 2);
+    table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(worldState->value, 0), index), 2);
     SetN64_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
     base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
-    mask = 1 << (arg2 & 7);
-    if (arg3 != 0) {
-        idx = arg2;
-        if (arg2 < 0) {
-            idx = arg2 + 7;
+    mask = 1 << (triggerBitIndex & 7);
+    if (enabled != 0) {
+        idx = triggerBitIndex;
+        if (triggerBitIndex < 0) {
+            idx = triggerBitIndex + 7;
         }
         base1[idx >> 3] |= mask;
         return;
     }
-    idx2 = arg2;
+    idx2 = triggerBitIndex;
     if (idx2 < 0) {
         idx2 += 7;
     }
@@ -231,16 +231,16 @@ s32 Scene_TestTriggerStateBit(Shared_World *world, void *trigger) {
 }
 
 /* Finds an identifier in the object's list and returns its mapped byte from the resource record, or -1 when absent. */
-s32 Scene_GetTriggerCounterById(ObjectRecAtB0 *arg0, s32 arg1) {
+s32 Scene_GetTriggerCounterById(ObjectRecAtB0 *counterOwner, s32 counterId) {
     s32 i;
     void *record;
-    Table *list = arg0->list;
+    Table *list = counterOwner->list;
     s32 count = list->unk4;
     s32 *ids = list->deltas;
 
     for (i = 0; i < count; i++) {
-        if (ids[i] == arg1) {
-            record = SetN64_GetPackSection(arg0->resource, 1);
+        if (ids[i] == counterId) {
+            record = SetN64_GetPackSection(counterOwner->resource, 1);
             SetN64_GetPackSection(record, 0);
             return ((u8 *)SetN64_GetPackSection(record, 1))[i];
         }

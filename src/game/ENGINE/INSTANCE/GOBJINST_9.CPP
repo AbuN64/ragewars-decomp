@@ -22,9 +22,9 @@ extern f32 InstHdr_GetActorGroundHeight(char *, s32);
 extern void *func_802799C0_de(void *, s32);
 extern f32 Math_Sqrtf(f32);
 extern void DynLight_AccumulateLightDirections(void *, CVector3, CVector3 *, f32 *);
-extern void func_8027310C_de(f32 *, CVector3 *, f32);
+extern void GraphU64_BuildPlaneProjectionMatrix(f32 *, CVector3 *, f32);
 extern void TranslateMatrix(void *, f32, f32, f32);
-extern void func_802735A8_de(f32 *, f32, f32, f32);
+extern void GraphU64_ScaleMatrixWorld(f32 *, f32, f32, f32);
 #ifndef NON_MATCHING
 extern void MatrixFromQuaternion(f32 *, f32 *);
 #endif
@@ -85,10 +85,10 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
                 GraphU64_NormalizeVec3(&dir);
             }
             plane = ground + height * 0.9f;
-            func_8027310C_de(projection, &dir, plane);
+            GraphU64_BuildPlaneProjectionMatrix(projection, &dir, plane);
             TranslateMatrix(projection, -((struct LevelActor *)(obj))->position0.x, -plane, -((struct LevelActor *)(obj))->position0.z);
             scale = height * 0.003f + 1.0f;
-            func_802735A8_de(projection, scale, scale, scale);
+            GraphU64_ScaleMatrixWorld(projection, scale, scale, scale);
             MatrixFromQuaternion((f32 *)(obj + 0x5C), turn);
             GraphU64_MultiplyAffineMatrices(((struct LevelActor *)(obj))->shadow, projection, turn);
             TranslateMatrix(((struct LevelActor *)(obj))->shadow, ((struct LevelActor *)(obj))->position0.x, ground, ((struct LevelActor *)(obj))->position0.z);

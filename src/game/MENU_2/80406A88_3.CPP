@@ -17,7 +17,7 @@ extern void func_802A2360_de(void);
 /* Builds the pak-draw selection screen: allocates its 0x20-byte state, creates the four rows, hides the pointer item
    when the pad answer is 0x16, collects the three root items and hides their cursors, then shows the cursor of the
    current root. Returns 0. */
-s32 func_8041E3A0_eu_x(void *window) {
+s32 Menu_CreateEuxJoinOptions(void *window) {
     EuxDrawScreen *screen;
     EuxDrawItem *item;
     s32 i;

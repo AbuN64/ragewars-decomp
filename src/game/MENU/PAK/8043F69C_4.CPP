@@ -13,7 +13,7 @@
  * 0x800E2490 = 1.25 (float, D_800E2490 in this cartridge's tables)
  * 0x800E2494 = 0.9 (float, unnamed in this cartridge's tables)
  * 0x800E2498 = 0.25 (float, D_800E2498 in this cartridge's tables)
- * 0x800E28D0 = 4.48e-43 (float, D_800E28D0 in this cartridge's tables; not a literal: a variable, its value in the image, since D_800E28D0: `sw` at %lo(D_800E28D0) in func_8040BBB0_de.s)
+ * 0x800E28D0 = 4.48e-43 (float, D_800E28D0 in this cartridge's tables; not a literal: a variable, its value in the image, since D_800E28D0: `sw` at %lo(D_800E28D0) in Frontend_ApplyVideoMode.s)
  * 0x800E28D4 = 3.36e-43 (float, D_800E28D4 in this cartridge's tables)
  * 0x800E249C = 0.0035211267 (float, D_800E249C in this cartridge's tables)
  * 0x800E24A0 = 0.0045045046 (float, D_800E24A0 in this cartridge's tables)

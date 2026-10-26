@@ -34,7 +34,7 @@ extern void func_80285B64_de(s32,void *,Triple,f32,f32,s32);
 extern void func_8029311C_de(void *arg0, s8 *arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);
 
-void func_8028CD68_de(void *arg0) {
+void Scene_SetTypeThreeActorStateBits(void *arg0) {
     Shared_World *object;
     s32 count;
     s32 i;
@@ -64,7 +64,7 @@ void func_8028CD68_de(void *arg0) {
     }
 }
 
-void func_8028CDF0_de(void *arg0) {
+void Scene_ClearTypeThreeActorStateBits(void *arg0) {
     Shared_World *object;
     s32 count;
     s32 i;
@@ -156,7 +156,7 @@ void *Scene_FindActorDefinition(Shared_World *world, s32 selection, s32 modelKin
 }
 
 /* Collects up to max records of arg0 (indices unk13C to unk140) whose unkE4, unk18->unk0 and unk18->unkC match key0, key1 and key2 (each skipped when -1) into out, returning the count. */
-s32 func_8028D050_de(Container *container, s32 key0, s32 key1, s32 key2, RecordRecAtE4 **out, s32 max) {
+s32 Scene_CollectMatchingLevelActors(Container *container, s32 key0, s32 key1, s32 key2, RecordRecAtE4 **out, s32 max) {
     s32 i = container->unk13C;
     s32 end = container->unk140;
     RecordRecAtE4 *base = container->unk138;

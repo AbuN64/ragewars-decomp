@@ -50,7 +50,7 @@ static inline s32 activeCount(void) {
     return count;
 }
 
-s32 func_8041E720_de(void) {
+s32 Frontend_GetJoinRequestRank(void) {
     s32 score;
     s32 i;
     s32 count;

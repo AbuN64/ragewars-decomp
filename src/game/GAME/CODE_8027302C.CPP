@@ -30,7 +30,7 @@ extern f32 Math_Sqrtf(f32);
 
 
 
-/* Expands a 4x4 transform into an affine 4x4 matrix with its second and third columns swapped, a zero last column and the pooled corner D_800C99F8. Adapted from func_80273DA0_de with the row swap replaced by a column swap and the corner taken from D_800C99F8. */
+/* Expands a 4x4 transform into an affine 4x4 matrix with its second and third columns swapped, a zero last column and the pooled corner D_800C99F8. Adapted from GraphU64_CopySwappedMatrixBasis with the row swap replaced by a column swap and the corner taken from D_800C99F8. */
 
 
 
@@ -38,26 +38,26 @@ extern f32 D_800C4928_de;
 
 extern f32 D_800C492C_de;
 
-void CopyMatrix(float *arg0, float *arg1) {
-    arg0[0] = arg1[0];
-    arg0[1] = arg1[1];
-    arg0[2] = arg1[2];
-    arg0[3] = arg1[3];
-    arg0[4] = arg1[4];
-    arg0[5] = arg1[5];
-    arg0[6] = arg1[6];
-    arg0[7] = arg1[7];
-    arg0[8] = arg1[8];
-    arg0[9] = arg1[9];
-    arg0[10] = arg1[10];
-    arg0[11] = arg1[11];
-    arg0[12] = arg1[12];
-    arg0[13] = arg1[13];
-    arg0[14] = arg1[14];
-    arg0[15] = arg1[15];
+void CopyMatrix(float *destinationMatrix, float *sourceMatrix) {
+    destinationMatrix[0] = sourceMatrix[0];
+    destinationMatrix[1] = sourceMatrix[1];
+    destinationMatrix[2] = sourceMatrix[2];
+    destinationMatrix[3] = sourceMatrix[3];
+    destinationMatrix[4] = sourceMatrix[4];
+    destinationMatrix[5] = sourceMatrix[5];
+    destinationMatrix[6] = sourceMatrix[6];
+    destinationMatrix[7] = sourceMatrix[7];
+    destinationMatrix[8] = sourceMatrix[8];
+    destinationMatrix[9] = sourceMatrix[9];
+    destinationMatrix[10] = sourceMatrix[10];
+    destinationMatrix[11] = sourceMatrix[11];
+    destinationMatrix[12] = sourceMatrix[12];
+    destinationMatrix[13] = sourceMatrix[13];
+    destinationMatrix[14] = sourceMatrix[14];
+    destinationMatrix[15] = sourceMatrix[15];
 }
 
-void func_80273040_de(f32 *arg0, f32 *arg1) {
+void GraphU64_TransposeMatrixBasis(f32 *arg0, f32 *arg1) {
     char *a0;
     char *a2;
     char *v1;
@@ -102,7 +102,7 @@ void func_80273040_de(f32 *arg0, f32 *arg1) {
     } while (col < 3);
 }
 
-void func_8027310C_de(void *projection, void *arg1, f32 plane) {
+void GraphU64_BuildPlaneProjectionMatrix(void *projection, void *arg1, f32 plane) {
     CVector3 *direction = arg1;
     Matrix *o = projection;
     f32 zero = 0.0f;
@@ -158,14 +158,14 @@ void BuildDirectionMatrix(Mtx *m, CVector3 *direction) {
 }
 
 /** Copy the three floating components at offset 0x30. */
-void func_802732D0_de(char *object, float *output) {
+void GraphU64_GetMatrixTranslation(char *object, float *output) {
     Matrix *matrix = (void *)object;
     output[0] = matrix->m[12];
     output[1] = matrix->m[13];
     output[2] = matrix->m[14];
 }
 
-void func_802732EC_de(void *matrix, f32 *arg1) {
+void GraphU64_GetMatrixScale(void *matrix, f32 *arg1) {
     Matrix *m = matrix;
     CVector3 tmp;
 
@@ -185,12 +185,12 @@ void func_802732EC_de(void *matrix, f32 *arg1) {
     arg1[2] = Math_Sqrtf((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
 }
 
-void TranslateMatrixLocal(void *matrix, f32 tiltX, f32 lift, f32 arg3) {
+void TranslateMatrixLocal(void *matrix, f32 tiltX, f32 lift, f32 translationZ) {
     Matrix *o = matrix;
 
-    o->m[12] = o->m[12] + (tiltX * o->m[0] + lift * o->m[4] + arg3 * o->m[8]);
-    o->m[13] = o->m[13] + (tiltX * o->m[1] + lift * o->m[5] + arg3 * o->m[9]);
-    o->m[14] = o->m[14] + (tiltX * o->m[2] + lift * o->m[6] + arg3 * o->m[10]);
+    o->m[12] = o->m[12] + (tiltX * o->m[0] + lift * o->m[4] + translationZ * o->m[8]);
+    o->m[13] = o->m[13] + (tiltX * o->m[1] + lift * o->m[5] + translationZ * o->m[9]);
+    o->m[14] = o->m[14] + (tiltX * o->m[2] + lift * o->m[6] + translationZ * o->m[10]);
 }
 
 /** Add three floating arguments to the vector at offset 0x30. */
@@ -216,7 +216,7 @@ void ScaleMatrixLocal(void *matrix, f32 sx, f32 sy, f32 sz) {
     o->m[10] = o->m[10] * sz;
 }
 
-void func_802734F8_de(f32 *arg0, f32 *arg1, f32 sx, f32 sy, f32 sz) {
+void GraphU64_CopyScaledMatrix(f32 *arg0, f32 *arg1, f32 sx, f32 sy, f32 sz) {
     arg0[0] = arg1[0] * sx;
     arg0[1] = arg1[1] * sx;
     arg0[2] = arg1[2] * sx;
@@ -234,7 +234,7 @@ void func_802734F8_de(f32 *arg0, f32 *arg1, f32 sx, f32 sy, f32 sz) {
 }
 
 /** Scale the xyz columns of a 4-row matrix by sx, sy, sz. */
-void func_802735A8_de(void *matrix, f32 sx, f32 sy, f32 sz) {
+void GraphU64_ScaleMatrixWorld(void *matrix, f32 sx, f32 sy, f32 sz) {
     Matrix *o = matrix;
 
     o->m[0] = o->m[0] * sx;
@@ -251,14 +251,14 @@ void func_802735A8_de(void *matrix, f32 sx, f32 sy, f32 sz) {
     o->m[14] = o->m[14] * sz;
 }
 
-void BuildPitchMatrix(void *rest, f32 arg1) {
+void BuildPitchMatrix(void *rest, f32 pitchAngle) {
     struct Mtx *m = rest;
     f32 sin_v;
     f32 cos_v;
     f32 zero;
     f32 identity;
 
-    sin_v = Math_Sinf(arg1);
+    sin_v = Math_Sinf(pitchAngle);
     zero = 0;
     identity = D_800C48F8_de[0];
     m->forward.y = -sin_v;
@@ -275,20 +275,20 @@ void BuildPitchMatrix(void *rest, f32 arg1) {
     m->m03 = zero;
     m->m33 = identity;
     m->right.x = identity;
-    cos_v = Math_Cosf(arg1);
+    cos_v = Math_Cosf(pitchAngle);
     m->forward.z = cos_v;
     m->up.y = cos_v;
 }
 
-void BuildYawMatrix(void *arg0, f32 arg1)
+void BuildYawMatrix(void *matrixStorage, f32 yawAngle)
 {
-  struct Mtx *m = (char *) arg0;
+  struct Mtx *m = (char *) matrixStorage;
   f32 sin_v;
   f32 cos_v;
   f32 zero;
   f32 identity;
   zero = 0;
-  sin_v = Math_Sinf(arg1);
+  sin_v = Math_Sinf(yawAngle);
   identity = D_800C48F8_de[1];
   m->forward.x = sin_v;
   m->right.y = zero;
@@ -304,19 +304,19 @@ void BuildYawMatrix(void *arg0, f32 arg1)
   m->m03 = zero;
   m->m33 = identity;
   m->up.y = identity;
-  cos_v = Math_Cosf(arg1);
+  cos_v = Math_Cosf(yawAngle);
   m->forward.z = cos_v;
   m->right.x = cos_v;
 }
 
-void BuildRollMatrix(void *matrix, f32 arg1) {
+void BuildRollMatrix(void *matrix, f32 rollAngle) {
     struct Mtx *m = matrix;
     f32 sin_v;
     f32 cos_v;
     f32 zero;
     f32 one;
 
-    sin_v = Math_Sinf(arg1);
+    sin_v = Math_Sinf(rollAngle);
     zero = (f32) 0;
     one = D_800C99F0[0];
     m->right.z = zero;
@@ -331,22 +331,22 @@ void BuildRollMatrix(void *matrix, f32 arg1) {
     m->m03 = zero;
     m->forward.z = one;
     m->m33 = one;
-    cos_v = Math_Cosf(arg1);
+    cos_v = Math_Cosf(rollAngle);
     m->up.y = cos_v;
     m->right.x = cos_v;
     m->up.x = -sin_v;
     m->right.y = sin_v;
 }
 
-void PitchMatrixLocal(void *arg0, f32 arg1) {
-    struct Mtx *m = (char *) arg0;
+void PitchMatrixLocal(void *matrixStorage, f32 pitchAngle) {
+    struct Mtx *m = (char *) matrixStorage;
     f32 sin_v;
     f32 cos_v;
     f32 neg_sin;
     f32 a;
 
-    sin_v = Math_Sinf(arg1);
-    cos_v = Math_Cosf(arg1);
+    sin_v = Math_Sinf(pitchAngle);
+    cos_v = Math_Cosf(pitchAngle);
     neg_sin = -sin_v;
 
     a = m->up.x;
@@ -362,15 +362,15 @@ void PitchMatrixLocal(void *arg0, f32 arg1) {
     m->forward.z = (neg_sin * a) + (cos_v * m->forward.z);
 }
 
-void PitchMatrix(void *arg0, f32 arg1) {
-    struct Mtx *m = (char *) arg0;
+void PitchMatrix(void *matrixStorage, f32 pitchAngle) {
+    struct Mtx *m = (char *) matrixStorage;
     f32 sin_v;
     f32 cos_v;
     f32 neg_sin;
     f32 a;
 
-    sin_v = Math_Sinf(arg1);
-    cos_v = Math_Cosf(arg1);
+    sin_v = Math_Sinf(pitchAngle);
+    cos_v = Math_Cosf(pitchAngle);
     neg_sin = -sin_v;
 
     a = m->right.y;
@@ -390,15 +390,15 @@ void PitchMatrix(void *arg0, f32 arg1) {
     m->m32 = (a * sin_v) + (m->m32 * cos_v);
 }
 
-void YawMatrixLocal(void *matrix, f32 arg1) {
+void YawMatrixLocal(void *matrix, f32 yawAngle) {
     struct Mtx *m = (char *) matrix;
     f32 sin_v;
     f32 cos_v;
     f32 neg_sin;
     f32 a;
 
-    sin_v = Math_Sinf(arg1);
-    cos_v = Math_Cosf(arg1);
+    sin_v = Math_Sinf(yawAngle);
+    cos_v = Math_Cosf(yawAngle);
     neg_sin = -sin_v;
 
     a = m->right.x;
@@ -414,15 +414,15 @@ void YawMatrixLocal(void *matrix, f32 arg1) {
     m->forward.z = (sin_v * a) + (cos_v * m->forward.z);
 }
 
-void YawMatrix(void *matrix, f32 arg1) {
+void YawMatrix(void *matrix, f32 yawAngle) {
     struct Mtx *m = (char *) matrix;
     f32 sin_v;
     f32 cos_v;
     f32 neg_sin;
     f32 a;
 
-    sin_v = Math_Sinf(arg1);
-    cos_v = Math_Cosf(arg1);
+    sin_v = Math_Sinf(yawAngle);
+    cos_v = Math_Cosf(yawAngle);
     neg_sin = -sin_v;
 
     a = m->right.x;
@@ -442,15 +442,15 @@ void YawMatrix(void *matrix, f32 arg1) {
     m->m32 = (a * neg_sin) + (m->m32 * cos_v);
 }
 
-void RollMatrixLocal(void *matrix, f32 arg1) {
+void RollMatrixLocal(void *matrix, f32 rollAngle) {
     struct Mtx *m = (char *) matrix;
     f32 sin_v;
     f32 cos_v;
     f32 neg_sin;
     f32 a;
 
-    sin_v = Math_Sinf(arg1);
-    cos_v = Math_Cosf(arg1);
+    sin_v = Math_Sinf(rollAngle);
+    cos_v = Math_Cosf(rollAngle);
     neg_sin = -sin_v;
 
     a = m->right.x;
@@ -466,15 +466,15 @@ void RollMatrixLocal(void *matrix, f32 arg1) {
     m->up.z = (neg_sin * a) + (cos_v * m->up.z);
 }
 
-void RollMatrix(void *arg0, f32 arg1) {
-    struct Mtx *m = (char *) arg0;
+void RollMatrix(void *matrixStorage, f32 rollAngle) {
+    struct Mtx *m = (char *) matrixStorage;
     f32 sin_v;
     f32 cos_v;
     f32 neg_sin;
     f32 a;
 
-    sin_v = Math_Sinf(arg1);
-    cos_v = Math_Cosf(arg1);
+    sin_v = Math_Sinf(rollAngle);
+    cos_v = Math_Cosf(rollAngle);
     neg_sin = -sin_v;
 
     a = m->right.x;
@@ -510,7 +510,7 @@ void SwapMatrixUpForward(struct Mtx *object) {
     object->forward.z = t;
 }
 
-void func_80273DA0_de(f32 *dst, f32 *src) {
+void GraphU64_CopySwappedMatrixBasis(f32 *dst, f32 *src) {
     dst[0] = src[0];
     dst[1] = src[1];
     dst[2] = src[2];
@@ -528,7 +528,7 @@ void func_80273DA0_de(f32 *dst, f32 *src) {
 }
 
 /** Swap the two floats within each of the object's four 0x10-byte records. */
-void func_80273E20_de(struct Mtx *object) {
+void GraphU64_SwapMatrixCoordinates(struct Mtx *object) {
     float t;
     t = object->right.y;
     object->right.y = object->right.z;
@@ -547,7 +547,7 @@ void func_80273E20_de(struct Mtx *object) {
     object->m32 = t;
 }
 
-void func_80273E64_de(f32 *dst, f32 *src) {
+void GraphU64_CopySwappedMatrixCoordinates(f32 *dst, f32 *src) {
     dst[0] = src[0];
     dst[1] = src[2];
     dst[2] = src[1];
@@ -564,12 +564,12 @@ void func_80273E64_de(f32 *dst, f32 *src) {
     dst[15] = D_800C99F8[0];
 }
 
-f32 func_80273EE4_de(f32 fraction, f32 first, f32 second) {
+f32 GraphU64_InterpolateWrappedValue(f32 fraction, f32 first, f32 second) {
     f32 var_f3;
     f32 result;
 
-    func_80274020_de(&first);
-    func_80274020_de(&second);
+    GraphU64_WrapPeriodicValue(&first);
+    GraphU64_WrapPeriodicValue(&second);
     if (first > second) {
         var_f3 = second + D_800C99F8[1];
         if ((var_f3 - first) < (first - second)) {
@@ -582,15 +582,15 @@ f32 func_80273EE4_de(f32 fraction, f32 first, f32 second) {
         }
     }
     result = first + (fraction * (second - first));
-    func_80274020_de(&result);
+    GraphU64_WrapPeriodicValue(&result);
     return result;
 }
 
-f32 func_80273F94_de(f32 arg0, f32 arg1) {
+f32 GraphU64_GetWrappedDifference(f32 arg0, f32 arg1) {
     f32 var_f3;
 
-    func_80274020_de(&arg0);
-    func_80274020_de(&arg1);
+    GraphU64_WrapPeriodicValue(&arg0);
+    GraphU64_WrapPeriodicValue(&arg1);
     if (arg0 > arg1) {
         var_f3 = arg1 + D_800C4914_de;
         if ((var_f3 - arg0) < (arg0 - arg1)) {
@@ -605,7 +605,7 @@ f32 func_80273F94_de(f32 arg0, f32 arg1) {
     return arg0 - arg1;
 }
 
-void func_80274020_de(f32 *value)
+void GraphU64_WrapPeriodicValue(f32 *value)
 {
     {
         f32 val;
@@ -639,10 +639,10 @@ void func_80274020_de(f32 *value)
     }
 }
 
-void MultiplyQuaternions(void *arg0, void *arg1, void *arg2) {
-    f32 *out = (f32 *)arg0;
-    f32 *a = (f32 *)arg1;
-    f32 *b = (f32 *)arg2;
+void MultiplyQuaternions(void *productQuaternion, void *leftQuaternion, void *rightQuaternion) {
+    f32 *out = (f32 *)productQuaternion;
+    f32 *a = (f32 *)leftQuaternion;
+    f32 *b = (f32 *)rightQuaternion;
 
     out[0] = ((b[3] * a[0]) - (b[2] * a[1]))
              + (b[1] * a[2]) + (b[0] * a[3]);
@@ -654,7 +654,7 @@ void MultiplyQuaternions(void *arg0, void *arg1, void *arg2) {
              - (b[2] * a[2]) + (b[3] * a[3]);
 }
 
-void func_802741A4_de(f32 *rotation) {
+void GraphU64_NormalizeQuaternion(f32 *rotation) {
     f32 mag;
     f32 scale;
 
@@ -716,7 +716,7 @@ void MatrixFromQuaternion(f32 *q, f32 *m)
 }
 
 /** Lerp a 4-component vector: out = a + t * (b - a). */
-void func_80274318_de(void *cQuatern, f32 t, void *a, void *b) {
+void GraphU64_InterpolateQuaternionComponents(void *cQuatern, f32 t, void *a, void *b) {
     CQuatern *out = cQuatern;
     CQuatern *left = a;
     CQuatern *right = b;
@@ -727,7 +727,7 @@ void func_80274318_de(void *cQuatern, f32 t, void *a, void *b) {
     out->w = left->w + (t * (right->w - left->w));
 }
 
-void func_80274380_de(CQuatern *rotation, CQuatern *target) {
+void GraphU64_ApproachQuaternion(CQuatern *rotation, CQuatern *target) {
     CQuatern result;
     f32 angle;
     f32 blend;
@@ -744,7 +744,7 @@ void func_80274380_de(CQuatern *rotation, CQuatern *target) {
         } else {
             blend = 0.0f;
         }
-        func_80270CD0_de(&result, blend, rotation, target);
+        GraphU64_InterpolateQuaternionWithLinearFallback(&result, blend, rotation, target);
         *rotation = result;
     }
 }

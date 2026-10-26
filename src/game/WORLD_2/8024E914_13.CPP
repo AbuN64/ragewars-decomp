@@ -56,7 +56,7 @@ void StaticInstance_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s
     rotation[1] = record->rotation[1] * 0.007874016f;
     rotation[2] = record->rotation[2] * 0.007874016f;
     rotation[3] = record->rotation[3] * 0.007874016f;
-    func_802741A4_de(rotation);
+    GraphU64_NormalizeQuaternion(rotation);
     MatrixFromQuaternion(rotation, matrix);
     ScaleMatrixLocal(matrix, record->scale.x, record->scale.y, record->scale.z);
     TranslateMatrix(matrix, record->position.x, record->position.y, record->position.z);

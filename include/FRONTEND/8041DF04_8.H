@@ -5,5 +5,5 @@
 extern s32 D_800E37B8[];
 extern struct IntPair D_800E381C[][17];
 extern struct RequestRecAt10 D_80153F80[3];
-extern void func_8041E81C_de(s32, s32);
+extern void Frontend_RandomizeJoinRequestEntries(s32, s32);
 #endif

@@ -84,7 +84,7 @@ void Barrel_FillAnchorTargetInfo(Actor_func_80214DD4_de *arg0, Tracker *tracker,
                 break;
         }
     }
-    func_80274020_de(&height);
+    GraphU64_WrapPeriodicValue(&height);
     GraphU64_SubtractVectors(&delta, &pos, &arg0->pos);
     arg3->m_DeltaAngle = height;
     arg3->kind = kind;
@@ -161,7 +161,7 @@ f32 Barrel_FindClearAimAngle(Actor_u1 *actor, CVector3 point, s32 target, f32 di
                 probe.z = actor->position.z + sine * (distance * GameObject_GetActorRadius(actor));
                 if (!func_802462E8_de(actor, probe, 0)) {
                     angle += bias;
-                    func_80274020_de(&angle);
+                    GraphU64_WrapPeriodicValue(&angle);
                     return angle;
                 }
             }

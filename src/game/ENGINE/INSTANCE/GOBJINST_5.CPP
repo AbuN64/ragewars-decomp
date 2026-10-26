@@ -86,9 +86,9 @@ extern s32 func_802624D8_de(Shared_AnimState *);
 extern void Ghot_DispatchAttachmentEffects(u8 *, s32, PoseMatrix *, Shared_PoseActor *, void *);
 extern void GraphU64_MultiplyAffineMatrices(PoseMatrix, PoseMatrix, PoseMatrix);
 extern void GraphU64_ConvertMatrixToFloat(PoseMatrix, u8 *);
-extern void func_80270AAC_de(CQuatern *, f32, CQuatern *, CQuatern *);
+extern void GraphU64_InterpolateQuaternionArc(CQuatern *, f32, CQuatern *, CQuatern *);
 extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
-extern void func_80272D00_de(PoseMatrix, f32, f32, f32, f32);
+extern void GraphU64_BuildAxisAngleMatrix(PoseMatrix, f32, f32, f32, f32);
 extern void CopyMatrix(PoseMatrix, PoseMatrix);
 extern void TranslateMatrix(PoseMatrix, f32, f32, f32);
 extern void ScaleMatrixLocal(PoseMatrix, f32, f32, f32);
@@ -126,7 +126,7 @@ static inline void twistPart(Shared_PosePart *part, PoseMatrix cur, s32 n, s32 i
         CopyMatrix(inv, cur);
         GraphU64_ScaleVector(&turn, &turn, -1.0f);
         TranslateMatrix(inv, turn.x, turn.y, turn.z);
-        func_80272D00_de(rotm, angle, axis.x, axis.y, axis.z);
+        GraphU64_BuildAxisAngleMatrix(rotm, angle, axis.x, axis.y, axis.z);
         GraphU64_MultiplyAffineMatrices(cur, inv, rotm);
         GraphU64_ScaleVector(&turn, &turn, -1.0f);
         TranslateMatrix(cur, turn.x, turn.y, turn.z);
@@ -164,7 +164,7 @@ static inline void trackRot(Shared_PoseTrack *t, s32 i, CQuatern *out, s32 slerp
         } else {
             f32 *data = SetN64_GetPackSection(t->rotTable, t->joints[i].rot);
 
-            func_80270AAC_de(out, t->blend, (CQuatern *)&data[t->rotFrame0], (CQuatern *)&data[t->rotFrame1]);
+            GraphU64_InterpolateQuaternionArc(out, t->blend, (CQuatern *)&data[t->rotFrame0], (CQuatern *)&data[t->rotFrame1]);
         }
     } else if (t->joints[i].rot == -1) {
         frame = t->frames;
@@ -428,7 +428,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *modelPack, s32 model) {
                         trans.y = posB.y + t * (posA.y - posB.y);
                         trans.z = posB.z + t * (posA.z - posB.z);
                     }
-                    func_80270AAC_de(&rot, actor->unk_130, &rotB, &rotA);
+                    GraphU64_InterpolateQuaternionArc(&rot, actor->unk_130, &rotB, &rotA);
                 } else {
                     trans = posA;
                     rot = rotA;
@@ -652,7 +652,7 @@ void func_80249E28_de(SceneObject *object, struct Racer *camera) {
     model = SetN64_GetPackSection(*mem, 0);
     if (D_8011FAC0.clockPaused != 0) {
         object->update(object, &object->behaviorFlags);
-        func_8026EE20_de(object->transform, (s32)model, &object->bounds);
+        GraphU64_TransformBoundingBox(object->transform, (s32)model, &object->bounds);
     }
     visible = 1;
     if (!(object->flags & 0x200000)) {

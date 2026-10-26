@@ -118,7 +118,7 @@ block_25:
         } else {
             climbSpeedLimit = climbInput * D_800C2AB8_de;
         }
-        player->views5E8.view6C0_51.unk6C0 = func_802746A0_de(player->views5E8.view6C0_51.unk6C0, climbAcceleration, climbSpeedLimit);
+        player->views5E8.view6C0_51.unk6C0 = GraphU64_IntegrateBoundedValue(player->views5E8.view6C0_51.unk6C0, climbAcceleration, climbSpeedLimit);
     } else {
         player->views5E8.view6C0_51.unk6C0 = GraphU64_DecayToZero(previousClimbSpeed, D_800C2ABC_de);
     }
@@ -130,7 +130,7 @@ block_25:
         } else {
             strafeSpeedLimit = strafeInput * D_800C2AC8_de;
         }
-        player->views5E8.view6C4_54.unk6C4 = func_802746A0_de(player->views5E8.view6C4_54.unk6C4, strafeAcceleration, strafeSpeedLimit);
+        player->views5E8.view6C4_54.unk6C4 = GraphU64_IntegrateBoundedValue(player->views5E8.view6C4_54.unk6C4, strafeAcceleration, strafeSpeedLimit);
     } else {
         player->views5E8.view6C4_54.unk6C4 = GraphU64_DecayToZero(player->views5E8.view6C4_54.unk6C4, D_800C2ACC_de);
     }

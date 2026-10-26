@@ -93,7 +93,7 @@ void func_80292308_de(TimingWorld *world) {
     }
     if (D_800E28E0 != 0) {
         if (D_800E28E0 == 0x14) {
-            func_8040C09C_de();
+            Frontend_AdvanceVideoMode();
         }
         SetN64_ClearDepthRect(world, 0, 0x1E0, 0, 0x168, 0);
         gDPSetScissorFrac(g_displayListCursor++,0,0,0,0x77C,0x59C);

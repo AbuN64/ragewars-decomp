@@ -35,8 +35,8 @@ void func_80225D34_de(TravelPlayer *player, void *body) {
         yaw = player->yaw;
         targetYaw = player->targetYaw;
         if (targetYaw != yaw) {
-            func_80274020_de(&yaw);
-            func_80274020_de(&targetYaw);
+            GraphU64_WrapPeriodicValue(&yaw);
+            GraphU64_WrapPeriodicValue(&targetYaw);
             if (yaw > targetYaw) {
                 alternate = targetYaw + D_800C2AE0_de;
                 if (alternate - yaw < yaw - targetYaw) targetYaw = alternate;
@@ -51,7 +51,7 @@ void func_80225D34_de(TravelPlayer *player, void *body) {
                 yaw -= (yaw - targetYaw) * D_800C2AEC_de;
                 if (yaw < targetYaw) yaw = targetYaw;
             }
-            func_80274020_de(&yaw);
+            GraphU64_WrapPeriodicValue(&yaw);
         }
         player->bodyYaw = yaw;
         player->yaw = yaw;

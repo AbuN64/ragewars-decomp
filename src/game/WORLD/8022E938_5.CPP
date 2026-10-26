@@ -18,7 +18,7 @@ extern u8 g_playerSettings[];
 extern s32 D_800D34E0;
 
 extern void Player_InitializeProfile(void *arg0);
-extern void func_802A0C08_de(void *arg0, s32 arg1, s32 arg2);
+extern void XStdio_FormatBuffer(void *arg0, s32 arg1, s32 arg2);
 
 void Player_InitializeProfileSlot(s32 arg0) {
     s32 offset;
@@ -32,7 +32,7 @@ void Player_InitializeProfileSlot(s32 arg0) {
     D_80102B0D[offset] = arg0;
     D_800FEB0C[offset] = 0;
     D_800FEB0E[offset] = 1;
-    func_802A0C08_de(entry, D_800D34E0, arg0 + 1);
+    XStdio_FormatBuffer(entry, D_800D34E0, arg0 + 1);
     config = g_playerSettings + arg0 * 0x96;
     D_80102C89[offset] = config[0x7B];
     D_800FEC8A[offset] = config[0x7D];

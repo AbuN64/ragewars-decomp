@@ -7,7 +7,7 @@
 #include "ANIM/RAY180.H"
 #include "stddef.h"
 
-s32 func_80271FC8_de(CVector3 *, u32, void *, void *);
+s32 GraphU64_InterpolateVector(CVector3 *, u32, void *, void *);
 
 /* Tests a point against every edge plane of a polygon. */
 
@@ -63,7 +63,7 @@ s32 func_802413C8_de(void *contactPlane, void *segmentStart, void *segmentEnd, v
         }
     }
     if (intersectsPlane != 0) {
-        func_80271FC8_de(outputPoint, *(u32 *)&hitFraction, segmentStart, segmentEnd);
+        GraphU64_InterpolateVector(outputPoint, *(u32 *)&hitFraction, segmentStart, segmentEnd);
         return 1;
     }
     return 0;

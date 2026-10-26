@@ -15,7 +15,7 @@
 extern char D_8011D8D0;
 extern void GraphU64_ScaleVector(void *, void *, f32);
 extern void InstHdr_CopyActorPositionAndModel(void *, Triple, Triple *, s32 *, s32, s32);
-extern struct Shape_typemap_165 func_80271818_de(Triple *);
+extern struct Shape_typemap_165 GraphU64_BuildDirectionQuaternion(Triple *);
 #include "particle/8027A0F4_8.H"
 extern void Events_DeliverContactEffect(void *, void *, s32, s32, Triple, AttachmentEffectArgs);
 
@@ -67,7 +67,7 @@ void Ghot_DispatchAttachmentEffects(func_8026E5E0_S1 *effectAttachments, s32 att
                     actorDefinitionKind = *actor->unk18;
                     if (((actorDefinitionKind == 1) && (actor->unk1A4 == 0x21)) || ((actorDefinitionKind == 0xB) && (actor->unk1D8->unk650 == 0x26))) {
                         InstHdr_CopyActorPositionAndModel(actor, pos, &mapped, &room, 0, 1);
-                        rotation = func_80271818_de(&actor->unk254);
+                        rotation = GraphU64_BuildDirectionQuaternion(&actor->unk254);
                         zero.x = 0;
                         zero.y = 0;
                         zero.z = 0;

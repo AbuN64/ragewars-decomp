@@ -258,7 +258,7 @@ struct Actor_func_8024A3B0_de;
 typedef struct Actor_func_8024A3B0_de Actor_func_8024A3B0_de;
 
 typedef void (*func_8024B4E4_de_FuncPtr)(void *, void *);
-extern void func_8026EE20_de(void *arg0, int arg1, void *arg2);
+extern void GraphU64_TransformBoundingBox(void *arg0, int arg1, void *arg2);
 
 extern void func_802472F0_de(void *);
 extern void Scene_UpdateMovementTriggers(struct Shared_World *, struct LevelActor *, CVector3 *, CVector3 *);

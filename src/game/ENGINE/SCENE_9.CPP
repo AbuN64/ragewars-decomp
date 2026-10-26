@@ -27,19 +27,19 @@ s32 Scene_TestTriggerCounterZero(void *world, s32 arg1) {
     return *result == 0;
 }
 
-void *Scene_RequestBinaryResourceByKey(Shared_World *world, s32 arg1, s32 mode, s32 direct) {
+void *Scene_RequestBinaryResourceByKey(Shared_World *world, s32 resourceId, s32 mode, s32 direct) {
     StridedTable *table;
     s32 idx;
-    s32 sp28;
+    s32 resourceSize;
     s32 result;
 
     table = world->lookupTable;
-    idx = Defs_FindSortedValue(table->data, table->count, arg1);
+    idx = Defs_FindSortedValue(table->data, table->count, resourceId);
     if (idx == -1) {
         return 0;
     }
-    result = SetN64_LocatePackSection(world->lookupDirectory, world->lookupBank, idx, &sp28);
-    return Cache_RequestResource(0, result, result, sp28, mode, 0, &D_00285160, &s_binaryBlockText, direct);
+    result = SetN64_LocatePackSection(world->lookupDirectory, world->lookupBank, idx, &resourceSize);
+    return Cache_RequestResource(0, result, result, resourceSize, mode, 0, &D_00285160, &s_binaryBlockText, direct);
 }
 
 /* Starts a sound effect from the world's sound table: looks the id up (0 or unknown returns 0),

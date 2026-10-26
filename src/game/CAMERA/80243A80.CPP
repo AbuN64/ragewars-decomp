@@ -32,7 +32,7 @@ f32 InstHdr_GetActorBaseOffset(void *);
 
 f32 InstHdr_GetActorReach(void *);
 
-f32 func_80273F94_de(f32, f32);
+f32 GraphU64_GetWrappedDifference(f32, f32);
 
 extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
 
@@ -323,7 +323,7 @@ block_71:
                     frame.sp54 |= 0x100;
                     func_8023EBFC_de(&frame.sp18, &frame.spC8);
                     if (actor->type == 1) {
-                        GraphU64_EaseValueToward(&frame.sp2C8, frame.sp2C8 - func_80273F94_de(frame.sp2C8, func_802417C4_de((f32 *) &frame.spC8)), 0.9f);
+                        GraphU64_EaseValueToward(&frame.sp2C8, frame.sp2C8 - GraphU64_GetWrappedDifference(frame.sp2C8, func_802417C4_de((f32 *) &frame.spC8)), 0.9f);
                         actor->angle = frame.sp2C8;
                     }
                 }

@@ -17,7 +17,7 @@ extern f32 GraphU64_GetHorizontalAngle(CVector3 *);
 
 extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 
- extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
+ extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
 static inline s32 currentEnabled(Actor_func_80245D30_de *actor) {
     if (actor->flags & 0x3000) return 1;
@@ -91,8 +91,8 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
             currentTargetYaw = currentHeading;
             blendedYaw = actorYaw;
             if (currentHeading != actorYaw) {
-                func_80274020_de(&blendedYaw);
-                func_80274020_de(&currentTargetYaw);
+                GraphU64_WrapPeriodicValue(&blendedYaw);
+                GraphU64_WrapPeriodicValue(&currentTargetYaw);
                 if (blendedYaw > currentTargetYaw) {
                     wrappedTargetYaw=currentTargetYaw+6.2831855f;
                     if ((wrappedTargetYaw-blendedYaw)<(blendedYaw-currentTargetYaw)) currentTargetYaw=wrappedTargetYaw;
@@ -108,7 +108,7 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
                     blendedYaw=oldAngle-((f32)material->strength*D_800CB430_de[1]*D_800D2988[0]*0.017453294f);
                     if (blendedYaw<targetAngle) blendedYaw=targetAngle;
                 }
-                func_80274020_de(&blendedYaw);
+                GraphU64_WrapPeriodicValue(&blendedYaw);
             }
             rider->yaw = blendedYaw;
         }
@@ -120,7 +120,7 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
     currentBlend = (f32) material->strength * D_800CB430_de[0] * D_800D2988[0];
     currentBlend = ((currentBlend < 0.0f ? 0.0f : currentBlend) > 1.0f ? 1.0f : (currentBlend < 0.0f ? 0.0f : currentBlend));
     actorCurrent=&actor->current;
-    func_80271FC8_de(actorCurrent, currentBlend, actorCurrent, &v10);
+    GraphU64_InterpolateVector(actorCurrent, currentBlend, actorCurrent, &v10);
     movement->x = (f32) (movement->x + actor->current.x);
     movement->z = (f32) (movement->z + actor->current.z);
     if (material->flags & 0x100) {

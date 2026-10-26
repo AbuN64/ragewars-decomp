@@ -35,7 +35,7 @@ extern void Defs_SetBitValue(u8 *, s32, s32);
 extern s32 func_80425014_de(s32);
 extern s32 func_80425674_de(s32);
 extern s32 Frontend_FindKeyIndex(s32);
-extern void func_802A0C08_de(char *, char *, ...);
+extern void XStdio_FormatBuffer(char *, char *, ...);
 extern void XPlus_CopyString(char *, char *);
 extern void Frontend_SetWidgetFlag100(MenuWidget *, s32);
 extern void func_8041B110_de(s32);
@@ -133,7 +133,7 @@ done:
                 XPlus_FillMemory(D_80102B00[D_800E5830->player].levelFlags[0], 0, 5);
                 character = func_80425674_de(D_800E5830->player);
                 if (character >= 0) {
-                    func_802A0C08_de(D_800E5830->resultText, D_800D3578, *D_800DFA6C[Frontend_FindKeyIndex(character)].name);
+                    XStdio_FormatBuffer(D_800E5830->resultText, D_800D3578, *D_800DFA6C[Frontend_FindKeyIndex(character)].name);
                     item = func_8040EC30_de(D_800E5830->window, 0x27F + PREVIEW_ID_SHIFT);
                     item->alpha = 0xAF;
                     Frontend_SetWidgetFlag08(item, 1);
@@ -233,7 +233,7 @@ done:
 extern char D_800E1F48[];
 
 #if !defined(VERSION_US) && !defined(VERSION_US_REV1)
-extern void func_802A0C08_de(char *, char *, ...);
+extern void XStdio_FormatBuffer(char *, char *, ...);
 #endif
 
 #if defined(VERSION_DE)
@@ -280,12 +280,12 @@ void Achieve_UpdatePlayerPreviewStats(void) {
     item = func_8040EC30_de(D_800E5830->window, (0x278 + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
-    func_802A0C08_de(D_800E5830->killsText, PREVIEW_NUMBER_FORMAT, record->kills);
+    XStdio_FormatBuffer(D_800E5830->killsText, PREVIEW_NUMBER_FORMAT, record->kills);
     item->text = D_800E5830->killsText;
     item = func_8040EC30_de(D_800E5830->window, (0x279 + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
-    func_802A0C08_de(D_800E5830->scoreText, PREVIEW_NUMBER_FORMAT, record->score + record->total);
+    XStdio_FormatBuffer(D_800E5830->scoreText, PREVIEW_NUMBER_FORMAT, record->score + record->total);
     item->text = D_800E5830->scoreText;
     item = func_8040EC30_de(D_800E5830->window, (0x27a + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
@@ -295,16 +295,16 @@ void Achieve_UpdatePlayerPreviewStats(void) {
     if (denominator > 0) {
         percent = (s32) (D_800FEAE0[statIndex] * 0x64) / denominator;
     }
-    func_802A0C08_de(D_800E5830->ratioText, D_800E1F48, percent);
+    XStdio_FormatBuffer(D_800E5830->ratioText, D_800E1F48, percent);
     item->text = D_800E5830->ratioText;
     item = func_8040EC30_de(D_800E5830->window, (0x27b + PREVIEW_ID_SHIFT));
     Frontend_SetWidgetFlag08(item, 1);
     item->alpha = 0xAF;
     lastItem=item;
     switch (D_8014DD98.kind) {
-    case 0: func_802A0C08_de(D_800E5830->otherText, PREVIEW_NUMBER_FORMAT, record->other); break;
-    case 1: func_802A0C08_de(D_800E5830->otherText, PREVIEW_NUMBER_FORMAT, record->selected); break;
-    default: func_802A0C08_de(D_800E5830->otherText, PREVIEW_NUMBER_FORMAT, 0); break;
+    case 0: XStdio_FormatBuffer(D_800E5830->otherText, PREVIEW_NUMBER_FORMAT, record->other); break;
+    case 1: XStdio_FormatBuffer(D_800E5830->otherText, PREVIEW_NUMBER_FORMAT, record->selected); break;
+    default: XStdio_FormatBuffer(D_800E5830->otherText, PREVIEW_NUMBER_FORMAT, 0); break;
     }
     lastItem->text = D_800E5830->otherText;
     if (D_800E5830->badge != -1) {

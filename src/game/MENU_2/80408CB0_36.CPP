@@ -13,7 +13,7 @@ extern void func_8041A47C_de(void *);
 extern void func_8041B110_de(s32);
 extern void *func_8040EC30_de(void *, s32);
 extern void *func_80419E54_de(s32, s32);
-extern void func_802A0C08_de(char *, char *, ...);
+extern void XStdio_FormatBuffer(char *, char *, ...);
 /* Builds a three-row slider popup in its 0x24-byte state D_800E5430: title/list from the ids at 0x398, the numeric
    readout item at 0x39D showing the text at +0x14 formatted with D_800E1B60. Returns 0. */
 s32 func_8042E640_eu(void *window) {
@@ -34,7 +34,7 @@ s32 func_8042E640_eu(void *window) {
     item = func_8040EC30_de(window, 0x39D);
     item->text = D_800E5430->text14;
     D_800E5430->unk20 = 1;
-    func_802A0C08_de(D_800E5430->text14, D_800E1B60, 1);
+    XStdio_FormatBuffer(D_800E5430->text14, D_800E1B60, 1);
     return 0;
 }
 #endif

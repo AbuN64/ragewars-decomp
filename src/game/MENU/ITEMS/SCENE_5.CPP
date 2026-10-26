@@ -165,7 +165,7 @@ void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
                                 spawn = &spawns[spawnIndex];
                             }
                             rec->resource20 = (u16)spawn->pad12;
-                            func_80274020_de(&spawn->unkC);
+                            GraphU64_WrapPeriodicValue(&spawn->unkC);
                             angle = spawn->unkC;
                             if (!(angle > 3.1415927f)) {
                                 if (!(angle < -3.1415927f)) {

@@ -87,7 +87,7 @@ void func_8022409C_de(void *player, void *bodyActor) {
             limit = value * D_800C2974_de;
         }
         ((func_80224078_Arg0 *)player)->unk6C0 =
-            func_802746A0_de(((func_80224078_Arg0 *)player)->unk6C0, step, limit);
+            GraphU64_IntegrateBoundedValue(((func_80224078_Arg0 *)player)->unk6C0, step, limit);
     } else {
         ((func_80224078_Arg0 *)player)->unk6C0 =
             GraphU64_DecayToZero(((func_80224078_Arg0 *)player)->unk6C0, D_800C2978_de);
@@ -104,7 +104,7 @@ void func_8022409C_de(void *player, void *bodyActor) {
             limit = value * D_800C2984_de;
         }
         ((func_80224078_Arg0 *)player)->unk6C4 =
-            func_802746A0_de(((func_80224078_Arg0 *)player)->unk6C4, step, limit);
+            GraphU64_IntegrateBoundedValue(((func_80224078_Arg0 *)player)->unk6C4, step, limit);
     } else {
         ((func_80224078_Arg0 *)player)->unk6C4 =
             GraphU64_DecayToZero(((func_80224078_Arg0 *)player)->unk6C4, D_800C2988_de);
@@ -113,10 +113,10 @@ void func_8022409C_de(void *player, void *bodyActor) {
     flags = ((func_80224078_Arg0 *)player)->unk6AC;
     if (flags & 0x10) {
         ((func_80224078_Arg1 *)bodyActor)->unk20 =
-            func_802746A0_de(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C298C_de, 71.68f);
+            GraphU64_IntegrateBoundedValue(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C298C_de, 71.68f);
     } else if (flags & 0x2020) {
         ((func_80224078_Arg1 *)bodyActor)->unk20 =
-            func_802746A0_de(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C2990_de, 71.68f);
+            GraphU64_IntegrateBoundedValue(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C2990_de, 71.68f);
     } else {
         ((func_80224078_Arg1 *)bodyActor)->unk20 =
             GraphU64_DecayToZero(((func_80224078_Arg1 *)bodyActor)->unk20, D_800C2994_de);

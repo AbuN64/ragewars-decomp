@@ -10,12 +10,12 @@ extern s32 Frontend_ClampRectToClip(Shared_Quad *, Shared_Quad *);
 extern void Frontend_DrawVisibleSiblings(MenuWidget *, sm_dldc);
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-s32 func_8040C9F8_eu_x(void) {
+s32 Frontend_ReturnZeroCallback(void) {
     return 0;
 }
 
 #if defined(VERSION_EU_X)
-void func_8040CA08(MenuWidget *widget, sm_dldc args) {
+void Frontend_DrawEuropeanClippedChildren(MenuWidget *widget, sm_dldc args) {
     Shared_Quad area;
     Shared_Quad basis;
     Shared_Quad saved;
@@ -39,7 +39,7 @@ void func_8040CA08(MenuWidget *widget, sm_dldc args) {
 }
 #endif
 #if defined(VERSION_US_REV1)
-void func_8040C648(MenuWidget *widget, sm_dldc args) {
+void Frontend_DrawChildListWithClip(MenuWidget *widget, sm_dldc args) {
     Shared_Quad area;
     Shared_Quad basis;
     Shared_Quad saved;

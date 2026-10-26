@@ -8,14 +8,14 @@
 #include "sdk/SCHED/world_actorscan.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-s32 func_8028DF90_de(Shared_World *world, s32 arg1) {
+s32 Scene_GetTriggerCounterAddress(Shared_World *world, s32 arg1) {
     void *temp_v0;
     temp_v0 = SetN64_GetPackSection(world->bitSections, 1);
     SetN64_GetPackSection(temp_v0, 0);
     return SetN64_GetPackSection(temp_v0, 1) + arg1;
 }
 
-void func_8028DFE4_de(WorldSortEntry *arg0, WorldSortEntry *arg1) {
+void Scene_SwapDistanceSortEntries(WorldSortEntry *arg0, WorldSortEntry *arg1) {
     WorldSortEntry tmp;
 
     tmp = *arg0;
@@ -23,7 +23,7 @@ void func_8028DFE4_de(WorldSortEntry *arg0, WorldSortEntry *arg1) {
     *arg1 = tmp;
 }
 
-s32 func_8028E020_de(WorldSortEntry *arg0, WorldSortEntry *arg1) {
+s32 Scene_CompareDistanceAscending(WorldSortEntry *arg0, WorldSortEntry *arg1) {
     s32 result;
     result = 1;
     if ((arg0->distance) < (arg1->distance)) {
@@ -32,7 +32,7 @@ s32 func_8028E020_de(WorldSortEntry *arg0, WorldSortEntry *arg1) {
     return result;
 }
 
-s32 func_8028E044_de(WorldSortEntry *arg0, WorldSortEntry *arg1)
+s32 Scene_CompareDistanceDescending(WorldSortEntry *arg0, WorldSortEntry *arg1)
 {
   f32 new_var;
   s32 var_v0;
@@ -45,7 +45,7 @@ s32 func_8028E044_de(WorldSortEntry *arg0, WorldSortEntry *arg1)
   return var_v0;
 }
 
-void func_8028E068_de(Shared_World *world) {
+void Scene_CollectTypeFourteenActors(Shared_World *world) {
     s32 found;
     s32 clear_index;
     LevelActor *record;

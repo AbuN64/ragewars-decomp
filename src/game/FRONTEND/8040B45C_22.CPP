@@ -13,7 +13,7 @@ extern int D_800E28E4;
 extern ModeRecAt8 D_800DE8A8[2][5];
 extern int D_800E28D0;
 extern int Defs_GetMemorySize(void);
-void func_8040C09C_de(void)
+void Frontend_AdvanceVideoMode(void)
 {
   int region = 0;
   int budget;
@@ -63,11 +63,11 @@ void func_8040C09C_de(void)
   }
   D_800E28D4 = h;
 }
-/* Stores its argument in D_800E28D8, which func_8040C474_de returns, and calls func_8040BBB0_de. */
+/* Stores its argument in D_800E28D8, which func_8040C474_de returns, and calls Frontend_ApplyVideoMode. */
 extern s32 D_800E28D8;
 void Frontend_ApplyScreenModeValue(s32 value) {
     D_800E28D8 = value;
-    func_8040BBB0_de();
+    Frontend_ApplyVideoMode();
 }
 /* Gives D_800E28E0 the value 0x14 when it is still zero. */
 extern s32 D_800E28E0;
@@ -93,7 +93,7 @@ void Frontend_UpdateScreenMode(void) {
         D_80146848 = (u8)D_800E28D8;
     }
     if ((D_800E28E0 < 5) && (D_800E28DC != D_800E28D8)) {
-        func_8040BBB0_de();
+        Frontend_ApplyVideoMode();
         D_800E28DC = D_800E28D8;
     }
 }

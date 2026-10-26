@@ -159,7 +159,7 @@ static inline void applyShieldReaction(ReactionActor *target, ReactionPlayer *pl
         localImpulse.x -= player->display->origin.x;
         localImpulse.y -= player->display->origin.y;
         localImpulse.z -= player->display->origin.z;
-        rotation = func_80271818_de(&localImpulse.x);
+        rotation = GraphU64_BuildDirectionQuaternion(&localImpulse.x);
         InstHdr_CopyActorPositionAndModel((Actor_func_80214624_de *)target, position,
                          &effectPosition, hit, 0, 1);
         effectPosition = position;
@@ -221,7 +221,7 @@ void Events_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 abso
 /* Published contiguous pool of damage scaling constants, read by index. */
 extern const f32 D_800C43E0_de[16];
 /* Forwards the actor, event value and three-component input with a zero final flag. */
-extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
+extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 extern f32 func_8024BEDC_de(void *);
 extern f32 GameObject_GetActorHeight(void *);
 extern s32 func_8024B06C_de(void *, CVector3, Shield *);
@@ -271,7 +271,7 @@ static inline s32 adjustHit(Shared_ReactionActor *target, CVector3 *position) {
             if (((void *)target == (void *)&owner->actor2E8) && ((ownerState = owner->unk62E, (ownerState == 0)) || (ownerState == 0x11) || (ownerState == 0x10))) {
                 body = (*position);
                 origin = owner->position;
-                func_80271FC8_de(&(*position), 0.75f, &body, &origin);
+                GraphU64_InterpolateVector(&(*position), 0.75f, &body, &origin);
                 (*position).y += GameObject_GetActorHeight(owner) * D_800C43E0_de[0];
                 adjusted = 1;
             }
@@ -624,7 +624,7 @@ s32 Events_AdjustWeaponHitPosition(void *levelActor, CVector3 *arg1) {
             if ((state == 0) || (state == 0x11) || (state == 0x10)) {
                 first = *arg1;
                 second = ((LevelActor *)actor)->position0;
-                func_80271FC8_de(arg1, 0.75f, &first, &second);
+                GraphU64_InterpolateVector(arg1, 0.75f, &first, &second);
                 arg1->y += GameObject_GetActorHeight(actor) * D_800C4430_de;
                 result = 1;
             }

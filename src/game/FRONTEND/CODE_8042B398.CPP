@@ -550,7 +550,7 @@ extern s32 Frontend_FindKeyIndex(s32);
 extern char *XPlus_UppercaseString(char *);
 extern char *XPlus_CopyString(char *,char *);
 extern char *func_80424DE8_de(s32);
-extern s32 func_802A0C08_de(void *,const char *,...);
+extern s32 XStdio_FormatBuffer(void *,const char *,...);
 extern void func_8042D304_de(s32,s32,u16);
 /* Fill the four visible player rows of the match results screen. */
 void ScenarioSetup_FillResultRows(void) {
@@ -595,13 +595,13 @@ void ScenarioSetup_FillResultRows(void) {
         widget = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[8]);
         widget->alpha = 0xAF;
         Frontend_SetWidgetFlag08(widget, 1);
-        func_802A0C08_de(D_800E53C0->killText[row], resultsNumberFormat(), record->kills);
+        XStdio_FormatBuffer(D_800E53C0->killText[row], resultsNumberFormat(), record->kills);
         widget->text = D_800E53C0->killText[row];
 
         widget = func_8040EC30_de(D_800E53C0->unkE0, D_800E12D2[row].ids[10]);
         widget->alpha = 0xAF;
         Frontend_SetWidgetFlag08(widget, 1);
-        func_802A0C08_de(D_800E53C0->scoreText[row], resultsNumberFormat(), record->score + record->total);
+        XStdio_FormatBuffer(D_800E53C0->scoreText[row], resultsNumberFormat(), record->score + record->total);
         *&widget->text = D_800E53C0->scoreText[row];
 
         if (D_8014DD98.kind == 0) {
@@ -614,7 +614,7 @@ void ScenarioSetup_FillResultRows(void) {
             attempts = D_800FF140_de[player];
             percent = 0;
             if (attempts > 0) percent = D_800FEAE0[player] * 100 / attempts;
-            func_802A0C08_de(D_800E53C0->ratioText[row], resultsPercentFormat(), percent);
+            XStdio_FormatBuffer(D_800E53C0->ratioText[row], resultsPercentFormat(), percent);
             widget->text = D_800E53C0->ratioText[row];
         }
 
@@ -628,13 +628,13 @@ void ScenarioSetup_FillResultRows(void) {
             pending = widget;
             switch (D_8014DD98.kind) {
             case 0:
-                func_802A0C08_de(D_800E53C0->valueText[row], resultsNumberFormat(), record->other);
+                XStdio_FormatBuffer(D_800E53C0->valueText[row], resultsNumberFormat(), record->other);
                 break;
             case 1:
-                func_802A0C08_de(D_800E53C0->valueText[row], resultsNumberFormat(), record->selected);
+                XStdio_FormatBuffer(D_800E53C0->valueText[row], resultsNumberFormat(), record->selected);
                 break;
             default:
-                func_802A0C08_de(D_800E53C0->valueText[row], resultsNumberFormat(), 0);
+                XStdio_FormatBuffer(D_800E53C0->valueText[row], resultsNumberFormat(), 0);
                 break;
             }
             pending->text = D_800E53C0->valueText[row];

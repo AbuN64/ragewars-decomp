@@ -121,7 +121,7 @@ static inline void effect_spawn_aim(ParticleEffect *effect, EffectTarget *aimTar
         targetActor = D_801041F0.actor;
         targetTeam = aimTarget->victimTeam;
         GraphU64_ConvertMatrixToFloat(&targetMtx, &targetActor->u60.link.matrixArray[D_801041F0.matrixIndex]);
-        func_8026EF58_de(targetInv.m[0], targetMtx.m[0]);
+        GraphU64_InvertAffineMatrix(targetInv.m[0], targetMtx.m[0]);
         GraphU64_TransformPoint(&targetInv, &aimTarget->pos, &effect->startPosition);
         up = D_801042C8;
         GraphU64_NormalizeVec3(&up.x);
@@ -329,7 +329,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                         break;
                     case 1:
                         extra = 0x400000;
-                        func_80272CB0_de(&mtx, -1.0f, 1.0f, -1.0f);
+                        GraphU64_BuildScaleMatrix(&mtx, -1.0f, 1.0f, -1.0f);
                         break;
                     default:
                         GraphU64_BuildTranslationMatrix(&mtx, source->pos.x, source->pos.y, source->pos.z);

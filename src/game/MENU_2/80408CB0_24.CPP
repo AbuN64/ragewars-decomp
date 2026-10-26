@@ -10,7 +10,7 @@ extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern void func_802A2360_de(void);
 
-s32 func_8041E3A0_eu(void *handle) {
+s32 Menu_CreateEuJoinOptions(void *handle) {
     MenuWidget *widget;
     s32 i;
     D_800E39C0 = Cache_AllocateMemory(0x20);

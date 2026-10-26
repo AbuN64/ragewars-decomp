@@ -331,7 +331,7 @@ void func_80437A50_de(void) {
         "lui        $a0, %hi(D_800E5830)\n"
         "lw         $a0, %lo(D_800E5830)($a0)\n"
         "lw         $a2, 0x0($v0)\n"
-        "jal        func_802A0C08_de\n"
+        "jal        XStdio_FormatBuffer\n"
         "addiu     $a0, $a0, 0x18C\n"
         "j          .Lauto_804380E0\n"
         "nop\n"

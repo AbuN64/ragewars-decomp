@@ -22,13 +22,13 @@ extern s32 SetN64_GetDirectoryEntry(s32 *arg0, s32 arg1, s32 arg2);
 
 extern void func_80278E7C_de(void *arg0);
 
-void Scene_SpawnUnrotatedEffect(s32 arg0, s32 arg1, Triple position, s32 arg5, f32 arg6) {
+void Scene_SpawnUnrotatedEffect(s32 worldAddress, s32 ownerId, Triple position, s32 modelId, f32 lifetime) {
     Triple zero;
 
     zero.x = 0;
     zero.y = 0;
     zero.z = 0;
-    func_8028FFD0_de(arg0 + 0x11778, 0, arg5, zero, position, arg1, arg6);
+    func_8028FFD0_de(worldAddress + 0x11778, 0, modelId, zero, position, ownerId, lifetime);
 }
 
 void *Scene_ResolveFloorPolygon(void *triangle, CVector3 *arg1) {

@@ -13,7 +13,7 @@
 #include "ANIM/8023DF60_4.H"
 #include "FX_2/80271B18.H"
 
-extern void func_80271FC8_de(CVector3 *,f32,void *,void *);
+extern void GraphU64_InterpolateVector(CVector3 *,f32,void *,void *);
 
 /* Resolve contact response, updating translation and rotation along the contact normal. */
 s32 func_8023D380_de(ActorMotion *a) {
@@ -37,7 +37,7 @@ s32 func_8023D380_de(ActorMotion *a) {
     if (step<=a->distance && a->mode!=7) {
         f32 adjusted=a->blend-step/a->distance;
         a->blend=adjusted;
-        func_80271FC8_de(&a->interpolated,adjusted,&a->start,&a->end);
+        GraphU64_InterpolateVector(&a->interpolated,adjusted,&a->start,&a->end);
     }
     if(a->grounded!=0 && a->collisionState==3) {
         highest=a->contacts[0].y;
@@ -94,7 +94,7 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
     case 3: {
         f32 remainingFraction;
         if(a->orientationActive!=0) {
-            func_80272180_de(&rotation,&a->orientation,&a->normal,settings->response);
+            GraphU64_ReflectVector(&rotation,&a->orientation,&a->normal,settings->response);
             a->projectedOrientation=rotation;
             damping=a->damping;
             GraphU64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3670_de-damping);
@@ -105,7 +105,7 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
         remainingFraction=scale-remainingFraction;
         GraphU64_ScaleVector(&remaining,&a->velocity,remainingFraction);
         delta=&slide;
-        func_80272180_de(delta,&remaining,&a->normal,settings->response);
+        GraphU64_ReflectVector(delta,&remaining,&a->normal,settings->response);
         GraphU64_ScaleVector(delta,delta,scale-a->damping);
         GraphU64_AddVec3(&a->position,&a->interpolated,delta);
         return 1;
@@ -113,7 +113,7 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
     case 2: {
         f32 remainingFraction;
         if(a->orientationActive!=0) {
-            func_80272214_de(&rotation,&a->orientation,&a->normal);
+            GraphU64_ProjectVectorOntoPlane(&rotation,&a->orientation,&a->normal);
             a->projectedOrientation=rotation;
             damping=a->damping;
             GraphU64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3678_de-damping);
@@ -123,7 +123,7 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
         scale=D_800C367C_de;
         remainingFraction=scale-remainingFraction;
         GraphU64_ScaleVector(&remaining,&a->velocity,remainingFraction);
-        func_80272214_de(&bounce,&remaining,&a->normal);
+        GraphU64_ProjectVectorOntoPlane(&bounce,&remaining,&a->normal);
         GraphU64_ScaleVector(&bounce,&bounce,scale-a->damping);
     GraphU64_AddVec3(&a->position,&a->interpolated,&bounce);
     GraphU64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
@@ -132,11 +132,11 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
 
     }
     case 4:
-        if(a->orientationActive!=0) {rotation=func_802723FC_de(&a->orientation,&a->normal);a->projectedOrientation=rotation;}
+        if(a->orientationActive!=0) {rotation=GraphU64_ProjectVectorPreservingLength(&a->orientation,&a->normal);a->projectedOrientation=rotation;}
         if(active==0)return 1;
         fraction=a->blend;
         GraphU64_ScaleVector(&remaining,&a->velocity,D_800C3680_de-fraction);
-        bounce=func_802723FC_de(&remaining,&a->normal);
+        bounce=GraphU64_ProjectVectorPreservingLength(&remaining,&a->normal);
         GraphU64_AddVec3(&a->position,&a->interpolated,&bounce);
     GraphU64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
     GraphU64_AddVec3(&a->position,&a->position,&gravity);
@@ -145,9 +145,9 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
     case 5: {
         f32 remainingFraction;
         if(a->orientationActive!=0) {
-            func_80272214_de(&reflection,&a->orientation,&a->normal);
-            projected=func_802723FC_de(&a->orientation,&a->normal);
-            func_80271FC8_de(&a->projectedOrientation,0.25f,&reflection,&projected);
+            GraphU64_ProjectVectorOntoPlane(&reflection,&a->orientation,&a->normal);
+            projected=GraphU64_ProjectVectorPreservingLength(&a->orientation,&a->normal);
+            GraphU64_InterpolateVector(&a->projectedOrientation,0.25f,&reflection,&projected);
             damping=a->damping;
             GraphU64_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3684_de-damping);
         }
@@ -156,9 +156,9 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
         scale=D_800C3688_de;
         remainingFraction=scale-remainingFraction;
         GraphU64_ScaleVector(&remaining,&a->velocity,remainingFraction);
-        func_80272214_de(&reflection,&remaining,&a->normal);
-        projected=func_802723FC_de(&remaining,&a->normal);
-        func_80271FC8_de(&bounce,0.25f,&reflection,&projected);
+        GraphU64_ProjectVectorOntoPlane(&reflection,&remaining,&a->normal);
+        projected=GraphU64_ProjectVectorPreservingLength(&remaining,&a->normal);
+        GraphU64_InterpolateVector(&bounce,0.25f,&reflection,&projected);
         GraphU64_ScaleVector(&bounce,&bounce,scale-a->damping);
     GraphU64_AddVec3(&a->position,&a->interpolated,&bounce);
     GraphU64_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);

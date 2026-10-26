@@ -8,36 +8,36 @@
 
 
 
-s32 func_802B3130_de(void *arg0, void **arg1, s16 arg2) {
-    s16 var_a2;
-    s32 var_s2;
-    s32 var_v0;
-    void *var_s0;
+s32 func_802B3130_de(void *synth, void **selectedVoice, s16 requestedPriority) {
+    s16 lowestPriority;
+    s32 voiceStolen;
+    s32 stolenResultCopy;
+    void *candidateVoice;
 
-    var_a2 = arg2;
-    var_s0 = ((ALSynth_func_802B3000_de *)arg0)->pLameList.next;
-    var_s2 = 0;
-    if ((var_s0 != 0) || (var_s0 = ((ALSynth_func_802B3000_de *)arg0)->pFreeList.next, (var_s0 != 0))) {
-        *arg1 = var_s0;
-        func_802B2450_de(var_s0);
-        func_802B2480_de(var_s0, &((ALSynth_func_802B3000_de *)arg0)->pAllocList.next);
+    lowestPriority = requestedPriority;
+    candidateVoice = ((ALSynth_func_802B3000_de *)synth)->pLameList.next;
+    voiceStolen = 0;
+    if ((candidateVoice != 0) || (candidateVoice = ((ALSynth_func_802B3000_de *)synth)->pFreeList.next, (candidateVoice != 0))) {
+        *selectedVoice = candidateVoice;
+        func_802B2450_de(candidateVoice);
+        func_802B2480_de(candidateVoice, &((ALSynth_func_802B3000_de *)synth)->pAllocList.next);
     } else {
-        var_s0 = ((ALSynth_func_802B3000_de *)arg0)->pAllocList.next;
-        var_v0 = var_s2;
-        if (var_s0 != 0) {
+        candidateVoice = ((ALSynth_func_802B3000_de *)synth)->pAllocList.next;
+        stolenResultCopy = voiceStolen;
+        if (candidateVoice != 0) {
             do {
-                if ((var_a2 >= ((Node_func_802B3130_de *)var_s0)->limit->limit) &&
-                    (((Node_func_802B3130_de *)var_s0)->flags == 0)) {
-                    *arg1 = var_s0;
-                    var_s2 = 1;
-                    var_a2 = (s16)(u16)((Node_func_802B3130_de *)var_s0)->limit->limit;
+                if ((lowestPriority >= ((Node_func_802B3130_de *)candidateVoice)->limit->limit) &&
+                    (((Node_func_802B3130_de *)candidateVoice)->flags == 0)) {
+                    *selectedVoice = candidateVoice;
+                    voiceStolen = 1;
+                    lowestPriority = (s16)(u16)((Node_func_802B3130_de *)candidateVoice)->limit->limit;
                 }
-                var_s0 = ((Node_func_802B3130_de *)var_s0)->next;
-                var_v0 = var_s2;
-            } while (var_s0 != 0);
+                candidateVoice = ((Node_func_802B3130_de *)candidateVoice)->next;
+                stolenResultCopy = voiceStolen;
+            } while (candidateVoice != 0);
         }
     }
-    return var_s2;
+    return voiceStolen;
 }
 
 #if defined(VERSION_US)

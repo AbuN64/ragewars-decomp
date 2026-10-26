@@ -13,7 +13,7 @@
 
 
 
-s32 func_8040BBC0_us(struct FieldRecAt14 *field) {
+s32 Frontend_SelectPakActionLabel(struct FieldRecAt14 *field) {
     u32 state = D_80153778;
 
     if (state >= 5) {

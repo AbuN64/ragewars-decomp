@@ -1248,8 +1248,8 @@ struct Part {
     u8 active;
 };
 
-struct Player_func_8041EAC4_de;
-struct Player_func_8041EAC4_de {
+struct PlayerFrontendCountOpenPlayerSlots;
+struct PlayerFrontendCountOpenPlayerSlots {
     char pad0[0x78];
     u8 active;
     char pad79[0x96 - 0x79];

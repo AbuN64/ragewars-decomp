@@ -79,7 +79,7 @@ reset_state:
 
 extern char D_8011D8D0;
 extern char D_801041F0;
-extern CQuatern func_80271818_de(CVector3 *);
+extern CQuatern GraphU64_BuildDirectionQuaternion(CVector3 *);
 extern void BuildRollMatrix(f32 *matrix, s32 angle);
 extern void GraphU64_AddVec3(CVector3 *out, CVector3 *a, CVector3 *b);
 #include "particle/8027A0F4_8.H"
@@ -115,7 +115,7 @@ void Particle_SpawnChildEffect(Actor_func_80279B40_de *actor, s32 model, s32 arg
     } else {
         direction = actor->facing;
     }
-    rotation = func_80271818_de(&direction);
+    rotation = GraphU64_BuildDirectionQuaternion(&direction);
     if (offset_x(actor) == 0.0f && offset_y(actor) == 0.0f) {
         point = actor->position;
     } else {

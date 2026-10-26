@@ -37,7 +37,7 @@ extern char D_800DD50C[];
 
 /* EC30 hands back the hub Item view; this unit reads/writes the Label view (text pointer at 0x38)
    through the store-side cast. */
-extern void func_802A0C08_de(char *, char *, s32);
+extern void XStdio_FormatBuffer(char *, char *, s32);
 
 extern char *func_80424DE8_de(s32);
 
@@ -117,24 +117,24 @@ void Frontend_RefreshProfileStatistics(void) {
     ((Label *) item)->text = func_80424DE8_de(((ProfileStatisticsScreen *) D_800E3590)->index);
     item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_509);
     Frontend_SetWidgetFlag08(item, 1);
-    func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->kills, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.kills);
+    XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->kills, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.kills);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->kills;
     item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_500);
     Frontend_SetWidgetFlag08(item, 1);
-    func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->wins, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.wins);
+    XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->wins, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.wins);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->wins;
     item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_502);
     Frontend_SetWidgetFlag08(item, 1);
-    func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->deaths, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.deaths);
+    XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->deaths, g_longAndIntFormats, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.deaths);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->deaths;
     score = func_80426004_de(((ProfileStatisticsScreen *) D_800E3590)->index);
     item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_505);
     Frontend_SetWidgetFlag08(item, 1);
-    func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->score, D_800DD50C, score);
+    XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->score, D_800DD50C, score);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->score;
     item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_506);
     Frontend_SetWidgetFlag08(item, 1);
-    func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->count, D_800DD50C, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].count);
+    XStdio_FormatBuffer(((ProfileStatisticsScreen *) D_800E3590)->count, D_800DD50C, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].count);
     ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->count;
 }
 

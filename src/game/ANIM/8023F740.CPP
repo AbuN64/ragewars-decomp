@@ -24,7 +24,7 @@ void GraphU64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src);
 
 void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
-void func_80272944_de(f32 *m, f32 *in, f32 *out, u32 count);
+void GraphU64_TransformPoints(f32 *m, f32 *in, f32 *out, u32 count);
 
 void Cache_UnlockResource(void *arg0, Node80253610 *arg1);
 
@@ -108,7 +108,7 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
                 if (soft) {
                     ScaleMatrixLocal(matrix, 1.5f, 1.5f, 1.5f);
                 }
-                func_80272944_de(matrix, part->corners, vertices, 8);
+                GraphU64_TransformPoints(matrix, part->corners, vertices, 8);
                 func_8023F750_de(ray, bounds, actor, origin, vertices, part, i);
             }
         }
@@ -142,7 +142,7 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
         corners[7].x = extent[0];
         corners[7].y = extent[4];
         corners[7].z = extent[5];
-        func_80272944_de(actor->transform, corners, vertices, 8);
+        GraphU64_TransformPoints(actor->transform, corners, vertices, 8);
         Cache_UnlockResource(0, shape);
     } else {
         own = &actor->box;

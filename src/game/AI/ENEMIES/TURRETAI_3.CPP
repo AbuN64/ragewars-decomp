@@ -22,7 +22,7 @@
 
 void AI_DynTurretGetTargetInfo(SharedPlayer *player, RiderRecAt130V1 *rider, Result *result);
 
-void func_80272BCC_de(void *arg0, void *arg1, void *arg2);
+void GraphU64_TransformDirectionTranspose(void *arg0, void *arg1, void *arg2);
 
 void Turret_Move(struct Owner *owner, Rider *rider, s32 mode, SharedPlayer *target);
 
@@ -41,7 +41,7 @@ static inline void navRotation(CQuatern *q,CVector3 *aim) {
     ((void (*)(CQuatern *,CVector3 *))CVector3_GetDirectionRotation2)(q,aim); }
 typedef union NavResult { Result result; Output80216D3C output; struct { s32 kind; void *target; f32 projection; char padC[0x88-0xC]; } workspace; } NavResult;
 
-static inline void navProject(f32 *matrix,CVector3 *local,CVector3 *out,CVector3 *to,CVector3 *from) { GraphU64_SubtractVectors(local,to,from); func_80272BCC_de(matrix,local,out); }
+static inline void navProject(f32 *matrix,CVector3 *local,CVector3 *out,CVector3 *to,CVector3 *from) { GraphU64_SubtractVectors(local,to,from); GraphU64_TransformDirectionTranspose(matrix,local,out); }
 
 
 typedef struct NavWork {
@@ -92,7 +92,7 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
     inFireCone = 0;
     turret = &actor->player.views18.navigationTrack->segment;
     work.heading = actor->player.views1C.view6C_4.unk6C - riderState->nav.heading;
-    func_80274020_de(&work.heading);
+    GraphU64_WrapPeriodicValue(&work.heading);
     actorKind = actor->player.views1C.viewE4_6.unkE4;
     switch (actorKind) {                              /* irregular */
     case 0x40B:

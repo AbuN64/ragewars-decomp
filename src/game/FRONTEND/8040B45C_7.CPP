@@ -12,7 +12,7 @@
 
 
 
-s32 func_8040BAD4_de(struct FieldRecAt14 *field) {
+s32 Frontend_SelectPakConfirmationLabel(struct FieldRecAt14 *field) {
     u32 state = D_80153778;
 
     if (state >= 5) {

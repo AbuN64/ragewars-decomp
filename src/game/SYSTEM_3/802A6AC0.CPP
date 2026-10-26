@@ -67,7 +67,7 @@ Particle *Fx_SpawnImpactMark(SceneRecAt95A8 *scene, CVector3 position, CVector3 
     Particle *node;
     IntrusiveList *list;
 
-    rotation = func_80271818_de(&normal.x);
+    rotation = GraphU64_BuildDirectionQuaternion(&normal.x);
     if (D_800CDBE8 != 0) return 0;
     D_800CDBE8 = 1;
     list = &scene->lists[surface];

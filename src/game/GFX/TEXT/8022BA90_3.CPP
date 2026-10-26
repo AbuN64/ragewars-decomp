@@ -49,7 +49,7 @@ extern const struct D_800C7470_Pair D_800C2D40_de;
 
 extern void Player_BuildPlayerViewTransform(Player1680 *, Matrix *);
 
-extern void func_802732D0_de(Matrix *, CVector3 *);
+extern void GraphU64_GetMatrixTranslation(Matrix *, CVector3 *);
 
 extern void GraphU64_IdentityMatrix(Matrix *);
 
@@ -64,7 +64,7 @@ static inline void getEye(Player1680 *player, CVector3 *pos) {
         *pos = player->mount->unk128;
     } else {
         Player_BuildPlayerViewTransform(player, &frame);
-        func_802732D0_de(&frame, pos);
+        GraphU64_GetMatrixTranslation(&frame, pos);
     }
 }
 

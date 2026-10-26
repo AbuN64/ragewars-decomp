@@ -126,15 +126,15 @@ extern void Control_SetControllerMode(s32 a);
 
 extern void DynLight_ReleaseLight(void *a, s32 b);
 
-extern void func_80274020_de(f32 *value);
+extern void GraphU64_WrapPeriodicValue(f32 *value);
 
-extern void func_802741A4_de(f32 *arg0);
+extern void GraphU64_NormalizeQuaternion(f32 *arg0);
 
 extern f32 GraphU64_RandomFloat(f32 arg0);
 
 extern f32 GraphU64_ArcCos(f32 arg0);
 
-extern f32 func_802746A0_de(f32 arg0, f32 arg1, f32 arg2);
+extern f32 GraphU64_IntegrateBoundedValue(f32 arg0, f32 arg1, f32 arg2);
 
 extern f32 GraphU64_DecayToZero(f32 arg0, f32 arg1);
 

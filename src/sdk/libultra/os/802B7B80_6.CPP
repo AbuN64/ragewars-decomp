@@ -10,13 +10,13 @@
 
 #if defined(VERSION_EU)
 extern u8 D_8014D5E0[];
-u32 func_802B7EF0_eu(void *arg0) {
+u32 func_802B7EF0_eu(void *motorContext) {
     Block40 saved;
     u8 *source;
     s32 i;
 
     source = (u8 *)&D_80154110;
-    if (D_800D8380[((func_802B80B4_eu_Arg *)arg0)->index] == 0) {
+    if (D_800D8380[((func_802B80B4_eu_Arg *)motorContext)->index] == 0) {
         return 5;
     } else {
         u32 result;
@@ -24,11 +24,11 @@ u32 func_802B7EF0_eu(void *arg0) {
 
         func_802B9C14_de();
         D_8014D4B0 = 3;
-        __osSiRawStartDma(1, &D_8014D5E0[((func_802B80B4_eu_Arg *)arg0)->index << 6]);
-        osRecvMesg(((func_802B80B4_eu_Arg *)arg0)->field4, 0, 1);
+        __osSiRawStartDma(1, &D_8014D5E0[((func_802B80B4_eu_Arg *)motorContext)->index << 6]);
+        osRecvMesg(((func_802B80B4_eu_Arg *)motorContext)->field4, 0, 1);
         __osSiRawStartDma(0, (u8 *)&D_80154110);
-        osRecvMesg(((func_802B80B4_eu_Arg *)arg0)->field4, 0, 1);
-        count = ((func_802B80B4_eu_Arg *)arg0)->index;
+        osRecvMesg(((func_802B80B4_eu_Arg *)motorContext)->field4, 0, 1);
+        count = ((func_802B80B4_eu_Arg *)motorContext)->index;
         if (count != 0) {
             i = 0;
             if (count > 0) {
@@ -50,13 +50,13 @@ u32 func_802B7EF0_eu(void *arg0) {
 #endif
 
 #if defined(VERSION_EU)
-u32 func_802B80B4_eu(void *arg0) {
+u32 func_802B80B4_eu(void *motorContext) {
     Block40 saved;
     u8 *source;
     s32 i;
 
     source = (u8 *)&D_80154110;
-    if (D_800D8380[((func_802B80B4_eu_Arg *)arg0)->index] == 0) {
+    if (D_800D8380[((func_802B80B4_eu_Arg *)motorContext)->index] == 0) {
         return 5;
     } else {
         u32 result;
@@ -64,11 +64,11 @@ u32 func_802B80B4_eu(void *arg0) {
 
         func_802B9C14_de();
         D_8014D4B0 = 3;
-        __osSiRawStartDma(1, &D_8014D4C0[((func_802B80B4_eu_Arg *)arg0)->index << 6]);
-        osRecvMesg(((func_802B80B4_eu_Arg *)arg0)->field4, 0, 1);
+        __osSiRawStartDma(1, &D_8014D4C0[((func_802B80B4_eu_Arg *)motorContext)->index << 6]);
+        osRecvMesg(((func_802B80B4_eu_Arg *)motorContext)->field4, 0, 1);
         __osSiRawStartDma(0, (u8 *)&D_80154110);
-        osRecvMesg(((func_802B80B4_eu_Arg *)arg0)->field4, 0, 1);
-        count = ((func_802B80B4_eu_Arg *)arg0)->index;
+        osRecvMesg(((func_802B80B4_eu_Arg *)motorContext)->field4, 0, 1);
+        count = ((func_802B80B4_eu_Arg *)motorContext)->index;
         if (count != 0) {
             i = 0;
             if (count > 0) {

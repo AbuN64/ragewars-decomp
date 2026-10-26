@@ -34,7 +34,7 @@ extern void func_8025637C_de(struct CartridgeReadWorker *worker, u32 source, s32
 #include "RESMGR/resmgr_string_memory.H"
 
 /** Return the constant false result used by callers at VRAM 0x802A1F50. */
-int func_802A0F50_de(void) {
+int XStdio_WriteStreamNoop(void) {
     return 0;
 }
 
@@ -48,16 +48,16 @@ s32 XStdio_SeekStream(s32 handle, s32 offset, s32 origin) {
     return D_800CD934_de(handle, offset, origin);
 }
 
-void func_802A0F84_de(void) {
+void XStdio_QueryStreamPosition(void) {
     D_800CD938_de();
 }
 
-void func_802A0FA8_de(void) {
+void XStdio_QueryStreamEnd(void) {
     extern FuncPtr D_800CD93C_de;
     D_800CD93C_de();
 }
 
-s32 func_802A0FCC_de(s32 arg0) {
+s32 XStdio_ReadCharacter(s32 arg0) {
     u8 sp10;
     s32 result;
 
@@ -73,12 +73,12 @@ int func_802A1004_de(void) {
     return 0;
 }
 
-s32 *func_802A100C_de(s32 arg0, s32 arg1) {
+s32 *XStdio_FormatScratchArgumentList(s32 arg0, s32 arg1) {
     D_800CD918 = func_80414CCC_de(&D_8014D0D0, arg0, arg1);
     return &D_8014D0D0;
 }
 
-void func_802A1050_de(ResourceOpenCallback arg0, s32 arg1, ResourceReadCallback arg2, s32 arg3, ResourceSeekCallback arg4, FuncPtr arg5, FuncPtr arg6) {
+void XStdio_SetStreamCallbacks(ResourceOpenCallback arg0, s32 arg1, ResourceReadCallback arg2, s32 arg3, ResourceSeekCallback arg4, FuncPtr arg5, FuncPtr arg6) {
     D_800CD924_de = arg0;
     D_800CD928_de = arg1;
     D_800CD92C_de = arg2;
@@ -133,7 +133,7 @@ s32 XStdio_OpenMemoryStream(const void *name, const void *mode) {
 
 /** Clear the global word at VRAM 0x800D2BBC. */
 
-void func_802A1188_de(void) {
+void XStdio_CloseMemoryStream(void) {
     D_800CD940_de.opened = 0;
 }
 
@@ -145,7 +145,7 @@ s32 XStdio_ReadMemoryStream(s32 handle, void *destination, s32 bytes) {
 }
 
 /** Return the false result used by callers at VRAM 0x802A21EC. */
-int func_802A11EC_de(void) {
+int XStdio_WriteMemoryStreamNoop(void) {
     return 0;
 }
 

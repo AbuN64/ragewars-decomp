@@ -9,9 +9,9 @@
 #include "SYSTEM/8025E5B0_9.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern void func_80271FC8_de(CVector3 *arg0, s32 arg1, void *arg2, void *arg3);
+extern void GraphU64_InterpolateVector(CVector3 *arg0, s32 arg1, void *arg2, void *arg3);
 
-extern void func_80270AAC_de(void *arg0, s32 arg1, void *arg2, void *arg3);
+extern void GraphU64_InterpolateQuaternionArc(void *arg0, s32 arg1, void *arg2, void *arg3);
 
 /** Return the first word of the object referenced at offset 0x10. */
 void *func_8026049C_de(void *object) {
@@ -34,7 +34,7 @@ void func_802604AC_de(void *animationLinks, s32 jointIndex, void *translationOut
         return;
     }
     base = SetN64_GetPackSection(o->unk_8, (s32) idx);
-    func_80271FC8_de(translationOut, o->unk_20,
+    GraphU64_InterpolateVector(translationOut, o->unk_20,
                   (char *)base + (o->unk_18) * 4,
                   (char *)base + (o->unk_1C) * 4);
 }
@@ -59,7 +59,7 @@ void func_80260550_de(void *animationLinks, s32 jointIndex, void *cQuatern) {
         return;
     }
     base = SetN64_GetPackSection(o->unk_C, (s32) idx);
-    func_80270AAC_de(cQuatern, o->unk_20,
+    GraphU64_InterpolateQuaternionArc(cQuatern, o->unk_20,
                   (char *)base + (o->unk_10) * 4,
                   (char *)base + (o->unk_14) * 4);
 }

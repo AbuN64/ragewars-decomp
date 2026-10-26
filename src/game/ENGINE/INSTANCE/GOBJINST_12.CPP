@@ -9,7 +9,7 @@
 #include "particle/80271B18_3.H"
 
 /* Draws an actor's attached model: when the actor has one, allocates a matrix from the pool D_8011FFB0,
- * fills it with the given transform multiplied by the camera matrix (func_8026F898_de, GraphU64_ClampMatrixToFixedRange,
+ * fills it with the given transform multiplied by the camera matrix (GraphU64_MultiplyMatrices, GraphU64_ClampMatrixToFixedRange,
  * func_8026FC9C_de), loads it into the display list, draws the model through Geometry_DrawResourceModel with the
  * actor's per-frame state for the current frame, then reloads the camera's per-frame matrix. */
 
@@ -52,7 +52,7 @@ void func_8024BA7C_de(void *actor, Camera *camera, f32 *transform, u8 layer) {
         mtx = func_802799C0_de(&D_8011FFB0, 1);
         if (mtx != 0) {
             matrices = camera->matrices;
-            func_8026F898_de(mf, transform, (f32 *)(matrices + 0x1E0));
+            GraphU64_MultiplyMatrices(mf, transform, (f32 *)(matrices + 0x1E0));
             GraphU64_ClampMatrixToFixedRange(mf);
             func_8026FC9C_de(mf, mtx);
             gSPMatrix(g_displayListCursor++, mtx, G_MTX_LOAD | G_MTX_PROJECTION);

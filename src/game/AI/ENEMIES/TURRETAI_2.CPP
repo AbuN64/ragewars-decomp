@@ -8,7 +8,7 @@
 
 typedef struct Owner Owner;
 
-/* Moves a rider along its path segment: limits the throttle change by the segment's length over its radius, then either rocks the throttle back and forth between 0 and 1 (mode 1, flipping direction at the ends) or steers it toward a target's projected distance along the segment (mode 2), eases the change through func_80274808_de, clamps the throttle to 0..1 and places the rider at the segment's circle point for that throttle through func_80271FC8_de. */
+/* Moves a rider along its path segment: limits the throttle change by the segment's length over its radius, then either rocks the throttle back and forth between 0 and 1 (mode 1, flipping direction at the ends) or steers it toward a target's projected distance along the segment (mode 2), eases the change through func_80274808_de, clamps the throttle to 0..1 and places the rider at the segment's circle point for that throttle through GraphU64_InterpolateVector. */
 
 
 
@@ -22,9 +22,9 @@ extern f32 Math_Sqrtf(f32);
 extern f32 GraphU64_ApproachValue(f32, f32, f32);
 
 
-extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
+extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
-/* Picks a rider's nearest target: walks the player list D_80145060 for players within the segment's range at 0x54 (squared distance through func_802726BC_de) that are not the rider's own player, are active and, in team play (D_801468C4), are on the other team, keeps those with a clear line of sight between their raised centres through func_802444A4_de (or whose blocker is the player itself), and records the nearest in the rider at 0x80 and in the result with its distance through func_802B72B0_de, clearing both when none qualifies. */
+/* Picks a rider's nearest target: walks the player list D_80145060 for players within the segment's range at 0x54 (squared distance through GraphU64_GetSquaredDistance) that are not the rider's own player, are active and, in team play (D_801468C4), are on the other team, keeps those with a clear line of sight between their raised centres through func_802444A4_de (or whose blocker is the player itself), and records the nearest in the rider at 0x80 and in the result with its distance through func_802B72B0_de, clearing both when none qualifies. */
 
 
 
@@ -40,7 +40,7 @@ extern SharedPlayer **D_80103FCC;
 
 extern char D_80103FD0[];
 
-extern f32 func_802726BC_de(CVector3 *, CVector3 *);
+extern f32 GraphU64_GetSquaredDistance(CVector3 *, CVector3 *);
 
 extern f32 GameObject_GetActorHeight(SharedPlayer *);
 
@@ -116,7 +116,7 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
     position.x += segment->radius * Math_Sinf(segment->angle);
     position.y += segment->rise;
     position.z += segment->radius * Math_Cosf(segment->angle);
-    func_80271FC8_de(rider->frame, throttle, &rider->base, &position);
+    GraphU64_InterpolateVector(rider->frame, throttle, &rider->base, &position);
 }
 
 void AI_DynTurretGetTargetInfo(SharedPlayer *player, RiderRecAt130V1 *rider, Result *result) {
@@ -139,7 +139,7 @@ void AI_DynTurretGetTargetInfo(SharedPlayer *player, RiderRecAt130V1 *rider, Res
     if (other != 0) {
         lift = (0.5f);
         do {
-            distance = func_802726BC_de(&player->views0.view8_3.pos, &other->views0.view8_3.pos);
+            distance = GraphU64_GetSquaredDistance(&player->views0.view8_3.pos, &other->views0.view8_3.pos);
             if (distance < segment->range * segment->range) {
                 enemy = 0;
                 if (player->views1C.view1D8_23.self != other && other->views5E4.view5E4_1.active != 0) {

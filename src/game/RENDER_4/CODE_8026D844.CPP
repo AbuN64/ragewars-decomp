@@ -16,7 +16,7 @@
 #include "RENDER_4/8028FD2C_6.H"
 #include "SCENE/802508E0_9.H"
 
-extern void func_80272CB0_de(void *, float, float, float);
+extern void GraphU64_BuildScaleMatrix(void *, float, float, float);
 
 extern void func_8026FC9C_de(void *, void *);
 
@@ -69,7 +69,7 @@ void Geometry_InitializeModelRenderState(void) {
     char local[64];
 
     Geometry_InvalidateMaterialKeys();
-    func_80272CB0_de(local, D_800C46AC_de, D_800C46AC_de, D_800C46AC_de);
+    GraphU64_BuildScaleMatrix(local, D_800C46AC_de, D_800C46AC_de, D_800C46AC_de);
     func_8026FC9C_de(local, &D_8010C520);
 }
 

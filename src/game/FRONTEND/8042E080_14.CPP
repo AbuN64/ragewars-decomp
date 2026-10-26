@@ -19,7 +19,7 @@ extern char g_noteInfoIntFormat[];
 extern s32 Pak_ReadNoteInfo(s32, s32, s32 *, char *, u8 *, s32 *, char *, char *);
 extern s32 func_804057BC_de(char *, s32);
 extern void XPlus_CopyString(char *, char *);
-extern void func_802A0C08_de(char *, char *, ...);
+extern void XStdio_FormatBuffer(char *, char *, ...);
 extern s32 Pak_GetFreePages(s32, s32 *);
 extern s32 PAKInterface_GetRecordsNoteSize(void);
 extern s32 Pak_BytesToPakPages(s32);
@@ -89,7 +89,7 @@ void func_80433EA0_de(s32 player)
 #endif
                 }
                 XPlus_CopyString(D_800E54A4->players[player].noteTexts[i].name, name);
-                func_802A0C08_de(D_800E54A4->players[player].noteTexts[i].size,
+                XStdio_FormatBuffer(D_800E54A4->players[player].noteTexts[i].size,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800DDEC0,
 #else
@@ -97,7 +97,7 @@ g_noteInfoIntFormat,
 #endif
  size);
                 if (ext[0] != 0) {
-                    func_802A0C08_de(D_800E54A4->players[player].noteTexts[i].label,
+                    XStdio_FormatBuffer(D_800E54A4->players[player].noteTexts[i].label,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800EE534,
 #else
@@ -119,7 +119,7 @@ controller_pak_note_label_format,
 #else
         XPlus_CopyString(D_800E54A4->players[player].noteTexts[i].name, ((char *)D_800D3250[0]));
 #endif
-        func_802A0C08_de(D_800E54A4->players[player].noteTexts[i].size,
+        XStdio_FormatBuffer(D_800E54A4->players[player].noteTexts[i].size,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800DDEC0,
 #else
@@ -127,7 +127,7 @@ g_noteInfoIntFormat,
 #endif
  0);
     numbered:
-        func_802A0C08_de(D_800E54A4->players[player].noteTexts[i].label,
+        XStdio_FormatBuffer(D_800E54A4->players[player].noteTexts[i].label,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800EE540,
 #else
@@ -140,7 +140,7 @@ D_800DDEC0,
         /* the hub EC30 returns the item view; Label is this unit's text-bearing view of it */
         item = (Label *)func_8040EC30_de(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2D8);
         if (Pak_GetFreePages(player, &size) == 0) {
-            func_802A0C08_de(D_800E54A4->players[player].freeText,
+            XStdio_FormatBuffer(D_800E54A4->players[player].freeText,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800DDEC0,
 #else
@@ -150,7 +150,7 @@ g_noteInfoIntFormat,
             item->text = D_800E54A4->players[player].freeText;
             item = (Label *)func_8040EC30_de(D_800E54A4->players[player].menuWidget, PAK_RESOURCE_2D7);
             size = PAKInterface_GetRecordsNoteSize();
-            func_802A0C08_de(D_800E54A4->players[player].usedText,
+            XStdio_FormatBuffer(D_800E54A4->players[player].usedText,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800DDEC0,
 #else

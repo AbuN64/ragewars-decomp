@@ -188,7 +188,7 @@ void Scene_CollectVisibleEffects(s32 arg0) {
 }
 
 /** Clear the object field at offset 0x10BC. */
-void func_8028D644_de(void *object) {
+void Scene_ClearTransparentInstanceCount(void *object) {
     ObjRecAt10BC *record = object;
     record->unk10BC = 0;
 }
@@ -240,7 +240,7 @@ void Scene_UpdateStaticEventInstances(StateSceneUpdateStaticEventInstances *arg0
   }
 }
 
-s32 func_8028D74C_de(void *container, void *arg1) {
+s32 Scene_GetLevelActorIndex(void *container, void *arg1) {
     Container *scene = container;
     LevelActor *actor = arg1;
     void *base;
@@ -256,7 +256,7 @@ s32 func_8028D74C_de(void *container, void *arg1) {
     return -1;
 }
 
-void func_8028D7C4_de(char *world, s32 arg1, s32 arg2, s32 *arg3, s32 *arg4) {
+void Scene_FindSelectedTriggerRange(char *world, s32 arg1, s32 arg2, s32 *arg3, s32 *arg4) {
     s32 sp18;
     s32 sp1C;
     s32 field0;
@@ -319,7 +319,7 @@ void Scene_ResetTransitionViewport(void) {
     func_80245A5C_de(var_a0, var_a1, 0, 0);
 }
 
-void func_8028D964_de(void *world, s32 arg1) {
+void Scene_CacheBlLevelData(void *world, s32 arg1) {
     s32 sp28;
     void **resource;
     s32 key;

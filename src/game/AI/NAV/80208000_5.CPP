@@ -32,7 +32,7 @@ extern s32 func_80283228_de(char *, void *);
 struct EffectSystem;
 extern void func_80284FF4_de(struct EffectSystem *, void *, CVector3 *);
 
-extern f32 func_802726BC_de(CVector3 *, CVector3 *);
+extern f32 GraphU64_GetSquaredDistance(CVector3 *, CVector3 *);
 
 struct LevelActor;
 extern void func_802850C8_de(struct EffectSystem *arg0, struct LevelActor *arg1, f32 *arg2);
@@ -223,7 +223,7 @@ void Nav_UpdateCountedEffectAction(ObjectLinks2EC *arg0, IntegerState2C *config)
     func_80284FF4_de(&D_8011D8D0, *(void **) arg0, &pos);
     range = D_800C6E08;
     pos.y = ((Player *)target)->pos.y;
-    if (func_802726BC_de(&pos, &((Player *)(target))->pos) < range) {
+    if (GraphU64_GetSquaredDistance(&pos, &((Player *)(target))->pos) < range) {
         arg0->unk_2E8 = 0;
     }
     if (arg0->unk_2E8 == 0) {

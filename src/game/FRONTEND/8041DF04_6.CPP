@@ -44,7 +44,7 @@ void func_8041E408_de(s32 index) {
         widgetObject = func_8040EC30_de(window, DRAW_NAME);
         widget = widgetObject;
         widget->alpha = 125;
-        model = func_8041EC44_de(D_80153F80[index].variant, D_80153F80[index].id);
+        model = Frontend_FindJoinModelIndex(D_80153F80[index].variant, D_80153F80[index].id);
     name = D_80153F80[index].name;
         XPlus_CopyString((u8 *)name,
           (u8 *)*D_800E381C[D_80153F80[index].variant][model].text

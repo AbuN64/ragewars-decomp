@@ -17,24 +17,24 @@ extern void *Audio_AllocParam(void);
 
 
 
-void func_802B3540_de(void *arg0, void *arg1, s32 arg2) {
+void func_802B3540_de(void *synth, void *voice, s32 waveTable) {
     s32 new_var;
     void *Shared_func_802B3540_de_v0;
-    void *temp_a0;
+    void *voiceFilter;
     SharedRecV3 fn;
 
-    if ((((ObjectState1C *)(arg1))->unk_8.v0) != 0) {
+    if ((((ObjectState1C *)(voice))->unk_8.v0) != 0) {
         Shared_func_802B3540_de_v0 = Audio_AllocParam();
         if (Shared_func_802B3540_de_v0 != 0) {
-            new_var = (((struct Shape_typemap_71 *)(arg0))->field_1C) + (((struct IntegerStateDC_2 *) ((ObjectState1C *) arg1)->unk_8.v1)->state);
+            new_var = (((struct Shape_typemap_71 *)(synth))->field_1C) + (((struct IntegerStateDC_2 *) ((ObjectState1C *) voice)->unk_8.v1)->state);
             ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_8 = 0xE;
-            ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_C = arg2;
+            ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_C = waveTable;
             ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_0 = 0;
             ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_4 = new_var;
-            ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_A = ((ObjectState1C *)(arg1))->unk_1A;
-            temp_a0 = ((struct Draw *) ((ObjectState1C *) arg1)->unk_8.v1)->model;
-            fn = ((CallbackStateC_4 *)(temp_a0))->callback;
-            fn(temp_a0, 3, Shared_func_802B3540_de_v0);
+            ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_A = ((ObjectState1C *)(voice))->unk_1A;
+            voiceFilter = ((struct Draw *) ((ObjectState1C *) voice)->unk_8.v1)->model;
+            fn = ((CallbackStateC_4 *)(voiceFilter))->callback;
+            fn(voiceFilter, 3, Shared_func_802B3540_de_v0);
         }
     }
 }

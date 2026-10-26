@@ -55,7 +55,7 @@ extern struct ResultsHeadingCharacter D_800DFA6C[];
 
 extern void XPlus_CopyString(char *, char *);
 extern s32 Frontend_FindKeyIndex(s32);
-extern void func_802A0C08_de(char *, char *, ...);
+extern void XStdio_FormatBuffer(char *, char *, ...);
 
 void func_80427B08_de(void) {
     Shared_Game *settings;
@@ -80,10 +80,10 @@ void func_80427B08_de(void) {
         item->text = D_800E4690->time;
         time = D_80102B00[D_800E4690->record].times[D_800E4690->stage];
         if (time > 0) {
-            func_802A0C08_de(buffer, RES_TIMEFMT, time / 60, time % 60);
+            XStdio_FormatBuffer(buffer, RES_TIMEFMT, time / 60, time % 60);
         } else {
             best = ((struct ResultsHeadingStage *) func_80425C70_de(D_800E4690->stage, 3, 0))->time;
-            func_802A0C08_de(buffer, RES_TIMEFMT, (u8)(best / 60), (u8)(best % 60));
+            XStdio_FormatBuffer(buffer, RES_TIMEFMT, (u8)(best / 60), (u8)(best % 60));
         }
         func_8042E9B4_de(D_800E4690->time, RES_TIMEPOST, buffer);
         XPlus_CopyString(D_800E4690->heading, RES_HEAD3);

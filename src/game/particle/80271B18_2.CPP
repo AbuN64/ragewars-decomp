@@ -27,7 +27,7 @@ static inline void projectionScale(CVector3 *out, CVector3 *normal, f32 projecti
     out->z = normal->z * projection;
 }
 
-CVector3 *func_8027229C_de(CVector3 *out, CVector3 *value, CVector3 *a, CVector3 *b) {
+CVector3 *GraphU64_ProjectOntoCrossNormal(CVector3 *out, CVector3 *value, CVector3 *a, CVector3 *b) {
     CVector3 normal;
     CVector3 projected;
     f32 length;

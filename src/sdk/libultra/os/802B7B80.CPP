@@ -15,13 +15,13 @@ extern u8 D_8014D5E0[];
 extern u32 func_802B8C88_de(void *arg0);
 
 
-u32 func_802B7B80_us(Triple *arg0) {
+u32 func_802B7B80_us(Triple *motorContext) {
     Block40 saved;
     u8 *source;
     s32 i;
 
     source = (u8 *)&D_80154110;
-    if (D_800D8380[arg0->z] == 0) {
+    if (D_800D8380[motorContext->z] == 0) {
         return 5;
     } else {
         u32 result;
@@ -29,11 +29,11 @@ u32 func_802B7B80_us(Triple *arg0) {
 
         func_802B9C14_de();
         D_8014D4B0 = 3;
-        __osSiRawStartDma(1, &D_8014D5E0[arg0->z << 6]);
-        osRecvMesg(arg0->y, 0, 1);
+        __osSiRawStartDma(1, &D_8014D5E0[motorContext->z << 6]);
+        osRecvMesg(motorContext->y, 0, 1);
         __osSiRawStartDma(0, (u8 *)&D_80154110);
-        osRecvMesg(arg0->y, 0, 1);
-        count = arg0->z;
+        osRecvMesg(motorContext->y, 0, 1);
+        count = motorContext->z;
         if (count != 0) {
             i = 0;
             if (count > 0) {

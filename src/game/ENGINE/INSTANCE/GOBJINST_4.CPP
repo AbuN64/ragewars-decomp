@@ -25,9 +25,9 @@ extern void func_8026193C_de(void *, CVector3 *, f32 *, void *);
 
 extern void *func_80262564_de(void *);
 
-extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
+extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
-extern f32 func_80273EE4_de(f32, f32, f32);
+extern f32 GraphU64_InterpolateWrappedValue(f32, f32, f32);
 
 
 extern f32 D_800D2988;
@@ -131,7 +131,7 @@ extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 
 extern void TranslateMatrix(f32 *, f32, f32, f32);
 
-extern void func_80272D00_de(f32 *, f32, f32, f32, f32);
+extern void GraphU64_BuildAxisAngleMatrix(f32 *, f32, f32, f32, f32);
 
 extern void GraphU64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
 
@@ -205,8 +205,8 @@ void func_802472F0_de(void *actor) {
                     ((Actor36 *)actor)->blend = (((a + D_800C3948_de + b) * t * t * t) +
                         ((((&D_800C3948_de)[1] - a) - (2.0f * b)) * t * t) + (b * t));
                     func_8026193C_de(&((Actor36 *)(actor))->previousTrack, &second, &second_value, actor);
-                    func_80271FC8_de(&saved, ((Actor36 *)actor)->blend, &second, &first);
-                    value = func_80273EE4_de(((Actor36 *)actor)->blend, second_value, first_value);
+                    GraphU64_InterpolateVector(&saved, ((Actor36 *)actor)->blend, &second, &first);
+                    value = GraphU64_InterpolateWrappedValue(((Actor36 *)actor)->blend, second_value, first_value);
                 }
                 func_802624A8_de(track1);
             } else {
@@ -216,7 +216,7 @@ void func_802472F0_de(void *actor) {
         func_802624A8_de(track0);
         if (((Actor36 *)actor)->flags & 0x20000) {
             ((Actor36 *)actor)->heading -= value;
-            func_80274020_de(&((Actor36 *)(actor))->heading);
+            GraphU64_WrapPeriodicValue(&((Actor36 *)(actor))->heading);
             saved.z = saved.y;
             saved.y = 0.0f;
             BuildYawMatrix(&matrix, ((Actor36 *)actor)->heading);
@@ -225,7 +225,7 @@ void func_802472F0_de(void *actor) {
             ((Actor36 *)actor)->position.z += moved.z * ((Actor36 *)actor)->scaleZ;
         } else if (!(((Actor36 *)actor)->flags & 0x300000) && ((Actor36 *)actor)->ownerId == 0x137) {
             ((Actor36 *)actor)->heading -= value;
-            func_80274020_de(&((Actor36 *)(actor))->heading);
+            GraphU64_WrapPeriodicValue(&((Actor36 *)(actor))->heading);
         }
     }
     Cache_UnlockResource(0, resource);
@@ -545,7 +545,7 @@ void func_802480F0_de(s32 time, s32 flags, f32 *matrix) {
     flip = -1.0f;
     GraphU64_ScaleVector(&origin, &origin, flip);
     TranslateMatrix(inverse, origin.x, origin.y, origin.z);
-    func_80272D00_de(rotation, angle, axis.x, axis.y, axis.z);
+    GraphU64_BuildAxisAngleMatrix(rotation, angle, axis.x, axis.y, axis.z);
     GraphU64_MultiplyAffineMatrices(matrix, inverse, rotation);
     GraphU64_ScaleVector(&origin, &origin, flip);
     TranslateMatrix(matrix, origin.x, origin.y, origin.z);

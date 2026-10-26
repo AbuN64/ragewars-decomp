@@ -74,7 +74,7 @@ static __inline__ f32 wrapAngle(AnimChannel *anim,f32 time) {
     next=first+1;
     last=anim->frames-1;
     if(next<last) last=next;
-    return func_80273EE4_de(time-(f32)first,(f32)keys[first]*D_800C41F0_de,(f32)keys[last]*D_800C41F0_de);
+    return GraphU64_InterpolateWrappedValue(time-(f32)first,(f32)keys[first]*D_800C41F0_de,(f32)keys[last]*D_800C41F0_de);
 }
 
 void func_80261670_de(Anim *anim, s32 table, s32 key, s32 blend, s32 *switched, Anim *previous) {
@@ -176,7 +176,7 @@ void func_8026193C_de(AnimChannel *animationChannel, CVector3 *translationDeltaO
         nextStartAngleFrame = followingAngleFrame;
     }
     angleScale = D_800C41BC_de;
-    startRootAngle = func_80273EE4_de(angleSample - (f32) startAngleFrame, (f32) startAngleKeys[startAngleFrame] * angleScale, (f32) startAngleKeys[nextStartAngleFrame] * angleScale);
+    startRootAngle = GraphU64_InterpolateWrappedValue(angleSample - (f32) startAngleFrame, (f32) startAngleKeys[startAngleFrame] * angleScale, (f32) startAngleKeys[nextStartAngleFrame] * angleScale);
     previousFramePosition = animationChannel->time;
     if (!(rootMotionActor->flags & 0x08000000)) {
         animationChannel->time = (f32) (previousFramePosition + (D_800D2988 * rootMotionClip->rate * D_800C41C0_de));
@@ -193,10 +193,10 @@ void func_8026193C_de(AnimChannel *animationChannel, CVector3 *translationDeltaO
         if (followingEndAngleFrame < nextEndAngleFrame) {
             nextEndAngleFrame = followingEndAngleFrame;
         }
-        angleSample = func_80273EE4_de(lastFramePosition - (f32) endAngleFrame, (f32) endAngleKeys[endAngleFrame] * angleScale, (f32) endAngleKeys[nextEndAngleFrame] * angleScale);
+        angleSample = GraphU64_InterpolateWrappedValue(lastFramePosition - (f32) endAngleFrame, (f32) endAngleKeys[endAngleFrame] * angleScale, (f32) endAngleKeys[nextEndAngleFrame] * angleScale);
         GraphU64_AddVec3(translationDeltaOut, translationDeltaOut, &endRootPosition);
         GraphU64_SubtractVectors(translationDeltaOut, translationDeltaOut, &startRootPosition);
-        *angleDeltaOut += func_80273F94_de(angleSample, startRootAngle);
+        *angleDeltaOut += GraphU64_GetWrappedDifference(angleSample, startRootAngle);
         loopStartFrame = rootMotionClip->loopStart;
         restartFrame = 0;
         if (loopStartFrame != 0xFFFF) {
@@ -228,8 +228,8 @@ void func_8026193C_de(AnimChannel *animationChannel, CVector3 *translationDeltaO
     if (followingCurrentAngleFrame < nextCurrentAngleFrame) {
         nextCurrentAngleFrame = followingCurrentAngleFrame;
     }
-    angleSample = func_80273EE4_de(angleSample - (f32) currentAngleFrame, (f32) currentAngleKeys[currentAngleFrame] * D_800C41F4_de, (f32) currentAngleKeys[nextCurrentAngleFrame] * D_800C41F4_de);
+    angleSample = GraphU64_InterpolateWrappedValue(angleSample - (f32) currentAngleFrame, (f32) currentAngleKeys[currentAngleFrame] * D_800C41F4_de, (f32) currentAngleKeys[nextCurrentAngleFrame] * D_800C41F4_de);
     GraphU64_AddVec3(translationDeltaOut, translationDeltaOut, &endRootPosition);
     GraphU64_SubtractVectors(translationDeltaOut, translationDeltaOut, &startRootPosition);
-    *angleDeltaOut += func_80273F94_de(angleSample, startRootAngle);
+    *angleDeltaOut += GraphU64_GetWrappedDifference(angleSample, startRootAngle);
 }

@@ -30,9 +30,9 @@ extern void ScaleMatrixLocal(void *arg0, f32 sx, f32 sy, f32 sz);
 
 extern void GraphU64_ClampMatrixToFixedRange(f32 *arg0);
 
-extern void func_802732D0_de(char *object, float *output);
+extern void GraphU64_GetMatrixTranslation(char *object, float *output);
 
-extern void func_802732EC_de(void *arg0, f32 *arg1);
+extern void GraphU64_GetMatrixScale(void *arg0, f32 *arg1);
 
 extern void GraphU64_ConvertMatrixToFixed(void *arg0, s32 arg1);
 
@@ -242,9 +242,9 @@ void func_802A6174_de(Node44 *arg0, void *arg1) {
             }
             ScaleMatrixLocal(local, scale, scale, scale);
             GraphU64_ClampMatrixToFixedRange(local);
-            func_802732D0_de((char *)local, &((ChildB4 *)arg1)->pos[0]);
+            GraphU64_GetMatrixTranslation((char *)local, &((ChildB4 *)arg1)->pos[0]);
             if (arg0->unk_3C & 4) {
-                func_802732EC_de(local, &((ChildB4 *)arg1)->rot[0]);
+                GraphU64_GetMatrixScale(local, &((ChildB4 *)arg1)->rot[0]);
             } else {
                 GraphU64_ConvertMatrixToFixed(local, arg1 + ((D_800D297C << 6) + 0x28));
             }

@@ -29,13 +29,13 @@ extern s32 func_802B3130_de(ALSynth_func_802B3000_de *, PVoice_s_func_802B3000_d
  /* _allocatePVoice */
 extern ALParam_s_func_802B3000_de *Audio_AllocParam(void);
 
-void alSynAddPlayer(void *arg0, void *arg1) {
-    s32 temp_v0;
-    temp_v0 = func_802BD170_de(1);
-    (((struct State_func_80421D94_de *) ((s8 *) arg1))->value) = (s32) (((struct State_func_804232AC_de *) ((s8 *) arg0))->value);
-    (((struct State_func_80421D94_de *) ((s8 *) arg1))->first) = (void *) (((struct State_func_804232AC_de *) ((s8 *) arg0))->menu);
-    (((struct State_func_804232AC_de *) ((s8 *) arg0))->menu) = arg1;
-    func_802BD170_de(temp_v0);
+void alSynAddPlayer(void *synth, void *audioPlayer) {
+    s32 savedInterruptMask;
+    savedInterruptMask = func_802BD170_de(1);
+    (((struct State_func_80421D94_de *) ((s8 *) audioPlayer))->value) = (s32) (((struct State_func_804232AC_de *) ((s8 *) synth))->value);
+    (((struct State_func_80421D94_de *) ((s8 *) audioPlayer))->first) = (void *) (((struct State_func_804232AC_de *) ((s8 *) synth))->menu);
+    (((struct State_func_804232AC_de *) ((s8 *) synth))->menu) = audioPlayer;
+    func_802BD170_de(savedInterruptMask);
 }
 
                  /* __allocParam */

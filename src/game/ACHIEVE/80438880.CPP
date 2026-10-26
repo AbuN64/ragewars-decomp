@@ -18,7 +18,7 @@ extern s32 D_8010EB94[], D_80146894;
 extern void *Cache_AllocateMemory(), *func_8040EC30_de(), *func_80425C70_de(), *Achieve_GetResultText();
 extern s32 Defs_TestBit(), func_80425014_de(), func_80425674_de(), Frontend_FindKeyIndex();
 extern void Frontend_SetWidgetFlag08(), Frontend_SetWidgetFlag100(), func_8043C210_de(), func_8043C278_de(), func_80438A88_de(), func_80425D14_de();
-extern void Defs_SetBitValue(), XPlus_FillMemory(), func_804259E0_de(), func_802A0C08_de(), XPlus_CopyString(), Achieve_UpdatePlayerPreviewStats(), func_80438614_de();
+extern void Defs_SetBitValue(), XPlus_FillMemory(), func_804259E0_de(), XStdio_FormatBuffer(), XPlus_CopyString(), Achieve_UpdatePlayerPreviewStats(), func_80438614_de();
 extern void func_8041B110_de(), Scene_CopyLevelName(), func_802A2394_de();
 extern char *XPlus_UppercaseString();
 extern u8 D_800F00DC_raw[];
@@ -94,7 +94,7 @@ s32 func_80438880_eu(void *root) {
                     v = func_80425674_de(SG(g, s32, 0x94));
                     if (v >= 0) {
                         i = Frontend_FindKeyIndex(v);
-                        func_802A0C08_de(g + 0x18C, D_auto_800E2034[lang], ((char **)SG(D_800F00DC_raw, char *, i * 0x70))[lang]);
+                        XStdio_FormatBuffer(g + 0x18C, D_auto_800E2034[lang], ((char **)SG(D_800F00DC_raw, char *, i * 0x70))[lang]);
                     }
                 }
             }

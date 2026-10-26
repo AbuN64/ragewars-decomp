@@ -32,7 +32,7 @@ int *func_802A0AD0_de(int format, ...) {
 #if !(defined(VERSION_US))
 
 
-s32 func_802A0B20_de(s32 arg0, ...) {
+s32 XStdio_PrintText(s32 arg0, ...) {
     char *args;
 
     args = __builtin_next_arg(arg0);
@@ -43,7 +43,7 @@ s32 func_802A0B20_de(s32 arg0, ...) {
     return D_800CD918;
 }
 
-s32 func_802A0B8C_de(s32 arg0, s32 arg1, s32 arg2, ...) {
+s32 XStdio_PrintTextWithArguments(s32 arg0, s32 arg1, s32 arg2, ...) {
     char *args;
 
     args = __builtin_next_arg(arg2);

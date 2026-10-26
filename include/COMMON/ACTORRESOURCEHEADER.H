@@ -192,7 +192,7 @@ struct ActorFrameMetadata {
     u8 renderMode; /* 0x6E */
 };
 
-extern void func_8026F898_de(f32 *, f32 *, f32 *);
+extern void GraphU64_MultiplyMatrices(f32 *, f32 *, f32 *);
 extern void Geometry_DrawResourceModel(s32, s32, void *, s32, void *, s32, s32);
 
 extern CVector3 *Region_GetNodeEdgeCross(CVector3 *out, Node75 *node);

@@ -17,7 +17,7 @@
  * is not held (flag 1) nor in states 1 or 2 computes a tilt toward the floor normal from func_80275C94_de by
  * three eighths of its slope (at most 25 degrees), which the body tilt from GameObject_BuildActorDirectionTilt then replaces,
  * and leans along its heading by three quarters of the ground slope ahead from func_80240A98_de (at most 25),
- * blending lean and tilt halfway through func_80270CD0_de; other players take GameObject_BuildActorDirectionTilt's tilt, and
+ * blending lean and tilt halfway through GraphU64_InterpolateQuaternionWithLinearFallback; other players take GameObject_BuildActorDirectionTilt's tilt, and
  * objects without a floor or held players get the identity. The sine is kept in D_80115DEC. */
 
 
@@ -32,7 +32,7 @@ extern CQuatern GameObject_BuildActorDirectionTilt(char *);
 
 extern f32 func_80240A98_de(Probe *, f32, f32, f32, f32);
 
-extern void func_80270CD0_de(CQuatern *, f32, CQuatern *, CQuatern *);
+extern void GraphU64_InterpolateQuaternionWithLinearFallback(CQuatern *, f32, CQuatern *, CQuatern *);
 
 static inline s32 is_held(char *obj) {
     return (*(u8 *)obj != 1) ? 0 : (((LevelActor *)(obj))->flags & 1);
@@ -118,7 +118,7 @@ CQuatern InstHdr_BuildActorGroundRotation(char *obj) {
                 lean.x = cosine * D_80115DEC;
                 lean.z = -sine * D_80115DEC;
                 lean.w = Math_Cosf(angle);
-                func_80270CD0_de(&result, half, &lean, &tilt);
+                GraphU64_InterpolateQuaternionWithLinearFallback(&result, half, &lean, &tilt);
                 return result;
             }
         }

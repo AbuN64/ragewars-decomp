@@ -13,10 +13,10 @@ extern void GraphU64_IdentityMatrix(void *);
 extern void RollMatrix(void *, f32);
 extern void YawMatrix(void *, f32);
 extern void GraphU64_ProjectPoint(void *, void *, void *);
-extern void func_802735A8_de(void *, f32, f32, f32);
+extern void GraphU64_ScaleMatrixWorld(void *, f32, f32, f32);
 extern void PitchMatrix(void *, f32);
 extern void TranslateMatrix(void *, f32, f32, f32);
-extern void func_8026EF58_de(void *, void *);
+extern void GraphU64_InvertAffineMatrix(void *, void *);
 extern void Region_ComputePointBounds(void *, s32, void *);
 void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
     SkelVec translation;
@@ -89,12 +89,12 @@ void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
     SK_FIELD(self, u8, 0xBA) = SK_FIELD(src, u8, 0x3B);
     SK_FIELD(self, u8, 0xBD) = SK_FIELD(src, u8, 0x4B);
     GraphU64_IdentityMatrix(matrix);
-    func_802735A8_de(matrix, scale.x, scale.y, scale.z);
+    GraphU64_ScaleMatrixWorld(matrix, scale.x, scale.y, scale.z);
     RollMatrix(matrix, rotation.z);
     YawMatrix(matrix, rotation.y);
     PitchMatrix(matrix, rotation.x);
     TranslateMatrix(matrix, translation.x, translation.y, translation.z);
-    func_8026EF58_de(self + 0x20, matrix);
+    GraphU64_InvertAffineMatrix(self + 0x20, matrix);
     for (i = 0; i < 8; i++) {
         x = 1.0f;
         y = 1.0f;

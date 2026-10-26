@@ -41,7 +41,7 @@ typedef struct Obj8043EB20 Obj8043EB20;
 
 struct ObjRecAt20V2;
 
-struct Player_func_8041EAC4_de;
+struct PlayerFrontendCountOpenPlayerSlots;
 
 struct Inner8043E56C;
 typedef struct Inner8043E56C Inner8043E56C;

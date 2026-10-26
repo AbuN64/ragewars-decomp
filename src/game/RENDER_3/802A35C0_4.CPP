@@ -16,7 +16,7 @@
 #include "LISTS/80279520.H"
 
 /* Detaches an entity from linked effects while preserving their transforms and lifetimes; the unsigned offset-to-pointer cast preserves matrix-address scheduling and addition operand order. */
-extern void GraphU64_ConvertMatrixToFixed(void *,void *),GraphU64_ConvertMatrixToFloat(void *,void *),GraphU64_ClampMatrixToFixedRange(void *),func_802732D0_de(void *,void *),func_802732EC_de(void *,void *),ScaleMatrixLocal(void *,f32,f32,f32),func_802A25D0_de(void *,Node44 *,void *);
+extern void GraphU64_ConvertMatrixToFixed(void *,void *),GraphU64_ConvertMatrixToFloat(void *,void *),GraphU64_ClampMatrixToFixedRange(void *),GraphU64_GetMatrixTranslation(void *,void *),GraphU64_GetMatrixScale(void *,void *),ScaleMatrixLocal(void *,f32,f32,f32),func_802A25D0_de(void *,Node44 *,void *);
 
 void func_802A3DD4_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *camera) {
     Morph storage;
@@ -159,9 +159,9 @@ loop_4:
                                 }
                                 ScaleMatrixLocal(&sp10, scale, scale, scale);
                                 GraphU64_ClampMatrixToFixedRange(&sp10);
-                                func_802732D0_de(&sp10, var_s0->pos);
+                                GraphU64_GetMatrixTranslation(&sp10, var_s0->pos);
                                 if (var_s1->unk_3C & 4) {
-                                    func_802732EC_de(&sp10, var_s0->rot);
+                                    GraphU64_GetMatrixScale(&sp10, var_s0->rot);
                                 } else {
                                     GraphU64_ConvertMatrixToFixed(&sp10, (char *)var_s0 + ((D_800D297C << 6) + 0x28));
                                 }

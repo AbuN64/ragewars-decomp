@@ -61,7 +61,7 @@ extern void MarkMenuEventHandled(void);
 
 
 
-/* When the fourth argument is one, calls MarkMenuEventHandled, advances the word at 0x20 of the object D_800E5430 holds while Control_IsControllerConnected reports one for it and it is below func_80264690_de's limit, formats that word into the object's text at 0x14 through func_802A0C08_de with D_800E1B60, and plays sound 0xE81 through SoundElement_PlayFlatSound; returns zero.
+/* When the fourth argument is one, calls MarkMenuEventHandled, advances the word at 0x20 of the object D_800E5430 holds while Control_IsControllerConnected reports one for it and it is below func_80264690_de's limit, formats that word into the object's text at 0x14 through XStdio_FormatBuffer with D_800E1B60, and plays sound 0xE81 through SoundElement_PlayFlatSound; returns zero.
    Adapted from func_80422340_de with the object chain changed to a guarded counter increment, text format and sound call. */
 
 
@@ -71,12 +71,12 @@ extern void MarkMenuEventHandled(void);
 
 
 
-extern void func_802A0C08_de(char *, char *, s32);
+extern void XStdio_FormatBuffer(char *, char *, s32);
 
 
 /* Slider-down handler: when the fourth argument is one, calls MarkMenuEventHandled, lowers the value at
    offset 0x20 of the object D_800E5430 points to by one while it is at least 2, formats it into the
-   text at offset 0x14 with D_800E1B60 through func_802A0C08_de and plays sound 0xE81. Returns zero. */
+   text at offset 0x14 with D_800E1B60 through XStdio_FormatBuffer and plays sound 0xE81. Returns zero. */
 
 
 
@@ -168,7 +168,7 @@ s32 func_8042DD00_de(void *a0, void *a1, void *a2, s32 press) {
             D_800E5430->count++;
         }
     }
-    func_802A0C08_de(D_800E5430->text, D_800E1B60, D_800E5430->count);
+    XStdio_FormatBuffer(D_800E5430->text, D_800E1B60, D_800E5430->count);
     SoundElement_PlayFlatSound(0xE81);
     return 0;
 }
@@ -184,7 +184,7 @@ s32 func_8042DDA8_de(void *first, void *second, void *third, s32 fourth) {
     if (value >= 2) {
         D_800E5430->count = value - 1;
     }
-    func_802A0C08_de(D_800E5430->text, D_800E1B60, D_800E5430->count);
+    XStdio_FormatBuffer(D_800E5430->text, D_800E1B60, D_800E5430->count);
     SoundElement_PlayFlatSound(0xE81);
     return 0;
 }

@@ -8,7 +8,7 @@
 #include "RSP/8026E1F8_5.H"
 
 #if !(defined(VERSION_US_REV1))
-void func_8026EE20_de(f32 m[4][4], BoxRecAtC *box, BoxRecAtC *out) {
+void GraphU64_TransformBoundingBox(f32 m[4][4], BoxRecAtC *box, BoxRecAtC *out) {
     f32 min[3];
     f32 max[3];
     f32 newMin[3];
@@ -47,7 +47,7 @@ void func_8026EE20_de(f32 m[4][4], BoxRecAtC *box, BoxRecAtC *out) {
     out->max[1] = newMax[1];
     out->max[2] = newMax[2];
 }
-void func_8026EF58_de(f32 *out, f32 *m) {
+void GraphU64_InvertAffineMatrix(f32 *out, f32 *m) {
     f32 determinant;
     f32 reciprocalDeterminant;
     f32 m01TimesM22;
@@ -197,7 +197,7 @@ void GraphU64_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right)
     out[3] = out[7] = out[11] = 0.0f;
     out[15] = D_800C46EC_de;
 }
-void func_8026F898_de(f32 *out, f32 *left, f32 *right)
+void GraphU64_MultiplyMatrices(f32 *out, f32 *left, f32 *right)
 {
     out[0] = (left[0] * right[0]) + (left[1] * right[4]) + (left[2] * right[8]) + (left[3] * right[12]);
     out[1] = (left[0] * right[1]) + (left[1] * right[5]) + (left[2] * right[9]) + (left[3] * right[13]);
@@ -295,7 +295,7 @@ void GraphU64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst) {
 #else
 INCLUDE_ASM("span_1000", GraphU64_ConvertMatrixToFixed);
 #endif
-void func_80270700_de(f32 *dst, PackedMatrixWords *src) {
+void GraphU64_UnpackFixedMatrix(f32 *dst, PackedMatrixWords *src) {
     u32 upper;
     u32 lower;
     f32 scale = D_800C47D0_de;
@@ -329,7 +329,7 @@ void GraphU64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src) {
         dst[14] = last;
     }
 }
-void func_80270AAC_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
+void GraphU64_InterpolateQuaternionArc(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
     CQuatern negative;
     CQuatern *other;
     f32 dot;
@@ -374,7 +374,7 @@ void func_80270AAC_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
     out->z = (scaleA * a->z) + (scaleB * other->z);
     out->w = (scaleA * a->w) + (scaleB * other->w);
 }
-void func_80270CD0_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
+void GraphU64_InterpolateQuaternionWithLinearFallback(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
     CQuatern negative;
     CQuatern *other;
     f32 dot;
@@ -438,7 +438,7 @@ void func_80270CD0_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
         out->w = (scaleA * a->w) + (scaleB * other->w);
     }
 }
-CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
+CVector3 GraphU64_BlendRandomDirection(CVector3 *in, f32 amount) {
     CVector3 random;
     CVector3 result;
     CVector3 *randomPtr;
@@ -479,7 +479,7 @@ CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
 }
 extern f32 D_800C47F4_de, D_800C47FC_de, D_800C4804_de, D_800C480C_de, D_800C4814_de, D_800C481C_de;
 
-CVector3 func_80271248_de(CVector3 *in, f32 amount) {
+CVector3 GraphU64_BlendRandomXDirection(CVector3 *in, f32 amount) {
     CVector3 random;
     CVector3 result;
     CVector3 *randomPtr;
@@ -519,7 +519,7 @@ CVector3 func_80271248_de(CVector3 *in, f32 amount) {
     result.z = in->z + amount * (randomPtr->z - in->z);
     return result;
 }
-CVector3 func_80271430_de(CVector3 *in, f32 amount) {
+CVector3 GraphU64_BlendRandomYDirection(CVector3 *in, f32 amount) {
     CVector3 random;
     CVector3 result;
     CVector3 *randomPtr;
@@ -558,7 +558,7 @@ CVector3 func_80271430_de(CVector3 *in, f32 amount) {
     result.z = in->z + amount * (randomPtr->z - in->z);
     return result;
 }
-CVector3 *func_80271624_de(CVector3 *out, CVector3 *in, f32 amount) {
+CVector3 *GraphU64_BlendRandomZDirection(CVector3 *out, CVector3 *in, f32 amount) {
     CVector3 random;
     CVector3 result;
     CVector3 *randomPtr;
@@ -604,7 +604,7 @@ CVector3 *func_80271624_de(CVector3 *out, CVector3 *in, f32 amount) {
     *out = result;
     return out;
 }
-CQuatern func_80271818_de(CVector3 *input) {
+CQuatern GraphU64_BuildDirectionQuaternion(CVector3 *input) {
     CQuatern result;
     CVector3 normalized;
     CVector3 basis;
@@ -701,7 +701,7 @@ const unsigned int rodata_func_8026EE20_de_800C97C0[7] = {
 #if defined(VERSION_US_REV1)
 /* Transforms an axis-aligned box by a matrix: starts the new minimum and maximum at the matrix translation and, for every matrix entry, adds the smaller of its products with the old minimum and maximum to the new minimum and the larger to the new maximum. */
 
-void func_8026EE20_de(f32 m[4][4], BoxRecAtC *box, BoxRecAtC *out) {
+void GraphU64_TransformBoundingBox(f32 m[4][4], BoxRecAtC *box, BoxRecAtC *out) {
     f32 min[3];
     f32 max[3];
     f32 newMin[3];
@@ -760,7 +760,7 @@ void func_8026EE20_de(f32 m[4][4], BoxRecAtC *box, BoxRecAtC *out) {
  * moved from world space into object-local or view space for spatial and
  * rendering calculations.
  */
-void func_8026EF58_de(f32 *out, f32 *m) {
+void GraphU64_InvertAffineMatrix(f32 *out, f32 *m) {
     f32 determinant;
     f32 reciprocalDeterminant;
     f32 m01TimesM22;
@@ -916,7 +916,7 @@ void GraphU64_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right)
     out[15] = D_800C46EC_de;
 }
 /** Multiply two column-addressed 4x4 matrices into the output matrix. */
-void func_8026F898_de(f32 *out, f32 *left, f32 *right)
+void GraphU64_MultiplyMatrices(f32 *out, f32 *left, f32 *right)
 {
     out[(0) * 4 + (0)] = (left[(0) * 4] * right[(0)]) + (left[(0) * 4 + 1] * right[4 + (0)]) + (left[(0) * 4 + 2] * right[8 + (0)]) + (left[(0) * 4 + 3] * right[12 + (0)]);
     out[(0) * 4 + (1)] = (left[(0) * 4] * right[(1)]) + (left[(0) * 4 + 1] * right[4 + (1)]) + (left[(0) * 4 + 2] * right[8 + (1)]) + (left[(0) * 4 + 3] * right[12 + (1)]);
@@ -1009,7 +1009,7 @@ void GraphU64_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst) {
     *lower = a << 16;
 }
 
-void func_80270700_de(f32 *dst, PackedMatrixWords *src) {
+void GraphU64_UnpackFixedMatrix(f32 *dst, PackedMatrixWords *src) {
     u32 upper;
     u32 lower;
     f32 scale = D_800C47D0_de;
@@ -1024,7 +1024,7 @@ void func_80270700_de(f32 *dst, PackedMatrixWords *src) {
     upper = src->upper[7]; lower = src->lower[7]; dst[(7) * 2] = (f32)(s32)((upper & 0xFFFF0000) | (lower >> 16)) * scale; dst[(7) * 2 + 1] = (f32)(s32)((upper << 16) | (lower & 0xFFFF)) * scale;
 }
 
-/* Unpacks a fixed-point 4x4 matrix held as separate integer and fraction halves into floats scaled by D_800C98C4, zeroing the fourth column and setting the last element to D_800C98C8. Adapted from func_80270700_de with the fourth column replaced by zeros and the constant at D_800C98C8, the third-column integer word used unmasked in the first three rows, the scale constant changed, and the last row computed into a local before the corner store. */
+/* Unpacks a fixed-point 4x4 matrix held as separate integer and fraction halves into floats scaled by D_800C98C4, zeroing the fourth column and setting the last element to D_800C98C8. Adapted from GraphU64_UnpackFixedMatrix with the fourth column replaced by zeros and the constant at D_800C98C8, the third-column integer word used unmasked in the first three rows, the scale constant changed, and the last row computed into a local before the corner store. */
 
 void GraphU64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src) {
     u32 upper;
@@ -1050,7 +1050,7 @@ void GraphU64_ConvertMatrixToFloat(f32 *dst, PackedMatrixWords *src) {
 
 
 
-void func_80270AAC_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
+void GraphU64_InterpolateQuaternionArc(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
     CQuatern negative;
     CQuatern *other;
     f32 dot;
@@ -1100,7 +1100,7 @@ void func_80270AAC_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
 
 extern f32 Math_Sqrtf(f32);
 
-void func_80270CD0_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
+void GraphU64_InterpolateQuaternionWithLinearFallback(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
     CQuatern negative;
     CQuatern *other;
     f32 dot;
@@ -1168,7 +1168,7 @@ void func_80270CD0_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
 extern s32 GraphU64_NextRandom(void);
 extern f32 Math_Sqrtf(f32);
 
-CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
+CVector3 GraphU64_BlendRandomDirection(CVector3 *in, f32 amount) {
     CVector3 random;
     CVector3 result;
     CVector3 *randomPtr;
@@ -1211,7 +1211,7 @@ CVector3 func_80270FE8_de(CVector3 *in, f32 amount) {
 extern s32 GraphU64_NextRandom(void);
 extern f32 Math_Sqrtf(f32);
 
-CVector3 func_80271248_de(CVector3 *in, f32 amount) {
+CVector3 GraphU64_BlendRandomXDirection(CVector3 *in, f32 amount) {
     CVector3 random;
     CVector3 result;
     CVector3 *randomPtr;
@@ -1255,7 +1255,7 @@ CVector3 func_80271248_de(CVector3 *in, f32 amount) {
 extern s32 GraphU64_NextRandom(void);
 extern f32 Math_Sqrtf(f32);
 
-CVector3 func_80271430_de(CVector3 *in, f32 amount) {
+CVector3 GraphU64_BlendRandomYDirection(CVector3 *in, f32 amount) {
     CVector3 random;
     CVector3 result;
     CVector3 *randomPtr;
@@ -1298,7 +1298,7 @@ CVector3 func_80271430_de(CVector3 *in, f32 amount) {
 extern s32 GraphU64_NextRandom(void);
 extern f32 Math_Sqrtf(f32);
 
-CVector3 *func_80271624_de(CVector3 *out, CVector3 *in, f32 amount) {
+CVector3 *GraphU64_BlendRandomZDirection(CVector3 *out, CVector3 *in, f32 amount) {
     CVector3 random;
     CVector3 result;
     CVector3 *randomPtr;
@@ -1351,7 +1351,7 @@ extern f32 Math_Sqrtf(f32);
 
 
 
-CQuatern func_80271818_de(CVector3 *input) {
+CQuatern GraphU64_BuildDirectionQuaternion(CVector3 *input) {
     CQuatern result;
     CVector3 normalized;
     CVector3 basis;

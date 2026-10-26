@@ -67,7 +67,7 @@ extern ParticleAttachmentState D_801041F0;
 
 extern void GraphU64_ConvertMatrixToFloat(f32 *out, void *in);
 
-extern void func_8026EF58_de(f32 *out, f32 *m);
+extern void GraphU64_InvertAffineMatrix(f32 *out, f32 *m);
 
 
 
@@ -227,7 +227,7 @@ void func_80283448_de(void *object) {
 }
 
 #include "particle/8027A0F4_8.H"
-extern CQuatern func_80271818_de(CVector3 *);
+extern CQuatern GraphU64_BuildDirectionQuaternion(CVector3 *);
 extern Triple D_801002A8;
 extern s32 SoundElement_PlaySoundAtPosition(s16, CVector3, s32, s32);
 void func_80283480_de(Obj_func_80283920_de *source, s32 kind) {
@@ -239,7 +239,7 @@ void func_80283480_de(Obj_func_80283920_de *source, s32 kind) {
     } else {
         pos = source->rotation;
     }
-    q = func_80271818_de(&pos);
+    q = GraphU64_BuildDirectionQuaternion(&pos);
     func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
                   (struct EffectActor *)source->effectResource,
                   (s32 *)source->effectIndex,
@@ -257,7 +257,7 @@ void func_802835A8_de(Obj_func_80283920_de *source, s32 kind) {
     } else {
         position = source->rotation;
     }
-    rotation = func_80271818_de(&position);
+    rotation = GraphU64_BuildDirectionQuaternion(&position);
     func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
                   (struct EffectActor *)source->effectResource,
                   (s32 *)source->effectIndex,
@@ -275,7 +275,7 @@ void func_802836D0_de(Obj_func_80283920_de *source, s32 kind) {
     } else {
         position = source->rotation;
     }
-    rotation = func_80271818_de(&position);
+    rotation = GraphU64_BuildDirectionQuaternion(&position);
     func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
                   (struct EffectActor *)source->effectResource,
                   (s32 *)source->effectIndex,
@@ -293,7 +293,7 @@ void func_802837F8_de(Obj_func_80283920_de *source, s32 kind) {
     } else {
         position = source->rotation;
     }
-    rotation = func_80271818_de(&position);
+    rotation = GraphU64_BuildDirectionQuaternion(&position);
     func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
                   (struct EffectActor *)source->effectResource,
                   (s32 *)source->effectIndex,
@@ -383,11 +383,11 @@ void func_80283C1C_de(void *arg0, f32 *arg1, s32 arg2) {
     mode = arg2;
     current = D_801041F0.current;
     if (arg1 != 0) {
-        func_8026EF58_de(matrix, arg1);
+        GraphU64_InvertAffineMatrix(matrix, arg1);
     } else {
         GraphU64_ConvertMatrixToFloat(source,
             &current->drawMatrices[D_801041F0.frame]);
-        func_8026EF58_de(matrix, source);
+        GraphU64_InvertAffineMatrix(matrix, source);
     }
     matrix_ptr = matrix;
     scene = &D_801001F8;

@@ -76,10 +76,10 @@ s32 func_802A2374_eu_x();
 #elif defined(VERSION_US) || defined(VERSION_US_REV1)
 s32 InitFrontendMenus();
 #endif
-s32 func_8041EA70_de();
+s32 Frontend_ResetJoinRequestEntries();
 void Tsmos_InitFrontendOnce(void) {
     if (D_800D2C98 == 0) {
-        func_8041EA70_de();
+        Frontend_ResetJoinRequestEntries();
 #if defined(VERSION_DE)
         func_802A2224_de();
 #elif defined(VERSION_EU)

@@ -56,7 +56,7 @@ void func_802238E0_de(SharedPlayer *player, Actor_func_802238E0_de *body, Shared
     if (forwardSpeed<0.0f ? forwardSpeedLimit < -forwardSpeed : forwardSpeedLimit < forwardSpeed) {
         player->views5E8.view6C0_51.unk6C0=GraphU64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8*0.5f);
     } else if(player->views5E8.view6A8_43.unk6A8 != 0.0f) {
-        player->views5E8.view6C0_51.unk6C0=func_802746A0_de(player->views5E8.view6C0_51.unk6C0,player->views5E8.view6A8_43.unk6A8*movementProfile->unk0,(player->views5E8.view6A8_43.unk6A8<0.0f?-player->views5E8.view6A8_43.unk6A8:player->views5E8.view6A8_43.unk6A8)*movementProfile->unk4);
+        player->views5E8.view6C0_51.unk6C0=GraphU64_IntegrateBoundedValue(player->views5E8.view6C0_51.unk6C0,player->views5E8.view6A8_43.unk6A8*movementProfile->unk0,(player->views5E8.view6A8_43.unk6A8<0.0f?-player->views5E8.view6A8_43.unk6A8:player->views5E8.view6A8_43.unk6A8)*movementProfile->unk4);
     } else {
         player->views5E8.view6C0_51.unk6C0=GraphU64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8);
     }
@@ -64,7 +64,7 @@ void func_802238E0_de(SharedPlayer *player, Actor_func_802238E0_de *body, Shared
     if (strafeSpeed<0.0f ? strafeSpeedLimit < -strafeSpeed : strafeSpeedLimit < strafeSpeed) {
         player->views5E8.view6C4_54.unk6C4=GraphU64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk8*0.5f);
     } else if(player->views5E8.view6A4_41.unk6A4 != 0.0f) {
-        player->views5E8.view6C4_54.unk6C4=func_802746A0_de(player->views5E8.view6C4_54.unk6C4,player->views5E8.view6A4_41.unk6A4*movementProfile->unk0,(player->views5E8.view6A4_41.unk6A4<0.0f?-player->views5E8.view6A4_41.unk6A4:player->views5E8.view6A4_41.unk6A4)*movementProfile->unk4*0.75f);
+        player->views5E8.view6C4_54.unk6C4=GraphU64_IntegrateBoundedValue(player->views5E8.view6C4_54.unk6C4,player->views5E8.view6A4_41.unk6A4*movementProfile->unk0,(player->views5E8.view6A4_41.unk6A4<0.0f?-player->views5E8.view6A4_41.unk6A4:player->views5E8.view6A4_41.unk6A4)*movementProfile->unk4*0.75f);
     } else {
         player->views5E8.view6C4_54.unk6C4=GraphU64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk8);
     }
@@ -102,7 +102,7 @@ block_31:
         verticalSpeed = body->unk20;
         upwardSpeedLimit = movementProfile->unk18;
         if (verticalSpeed < upwardSpeedLimit) {
-            body->unk20 = func_802746A0_de(verticalSpeed, movementProfile->unk14, upwardSpeedLimit);
+            body->unk20 = GraphU64_IntegrateBoundedValue(verticalSpeed, movementProfile->unk14, upwardSpeedLimit);
         }
     }
     v18.x = 0.0f;

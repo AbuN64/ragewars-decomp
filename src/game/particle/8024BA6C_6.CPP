@@ -29,7 +29,7 @@ extern void *D_800CB440_de[];
 /* Applies a blast from a source to a body when an owner is given: the strength comes from the falloff table
  * D_800D06C0 indexed by the source's remaining charges, times 0.5 and 0.3 and the kind (-2 for kind 5);
  * the body's reversed velocity is placed in its offset transform, an impulse at the source position is
- * built by func_80272D00_de and applied through GraphU64_MultiplyAffineMatrices, the velocity is restored onto the body, and
+ * built by GraphU64_BuildAxisAngleMatrix and applied through GraphU64_MultiplyAffineMatrices, the velocity is restored onto the body, and
  * the source spends a charge when its owner matches. */
 
 
@@ -45,11 +45,11 @@ extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
 
 extern void TranslateMatrix(void *, f32, f32, f32);
 
-extern void func_80272D00_de(f32 *, f32, f32, f32, f32);
+extern void GraphU64_BuildAxisAngleMatrix(f32 *, f32, f32, f32, f32);
 
 extern void GraphU64_MultiplyAffineMatrices(Body_func_8024C6E8_de *, f32 *, f32 *);
 
-extern void func_80270AAC_de(void *arg0, s32 arg1, void *arg2, void *arg3);
+extern void GraphU64_InterpolateQuaternionArc(void *arg0, s32 arg1, void *arg2, void *arg3);
 
 void func_8024C454_de(Actor_func_8024A1D0_de *actor, LookupRecAtC *lookup) {
     CVector3 position;
@@ -158,7 +158,7 @@ void func_8024C6E8_de(s32 unused, SourceRecAt18 *source, Body_func_8024C6E8_de *
     reverse = -1.0f;
     GraphU64_ScaleVector(&velocity, &velocity, reverse);
     TranslateMatrix(transform, velocity.x, velocity.y, velocity.z);
-    func_80272D00_de(impulse, strength, position.x, position.y, position.z);
+    GraphU64_BuildAxisAngleMatrix(impulse, strength, position.x, position.y, position.z);
     GraphU64_MultiplyAffineMatrices(body, transform, impulse);
     GraphU64_ScaleVector(&velocity, &velocity, reverse);
     TranslateMatrix(body, velocity.x, velocity.y, velocity.z);
@@ -267,7 +267,7 @@ void GameObject_SampleInterpolatedBoneRotation(ObjectLinks24_2 *arg0, s32 arg1, 
         return;
     }
     base = SetN64_GetPackSection(o->unk_C, (s32)idx);
-    func_80270AAC_de(arg2, o->unk_20,
+    GraphU64_InterpolateQuaternionArc(arg2, o->unk_20,
                     (char *)base + o->unk_10 * 4,
                     (char *)base + o->unk_14 * 4);
 }

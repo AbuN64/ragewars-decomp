@@ -9,14 +9,14 @@ extern s32 func_802B00D4_de(void *, s16 *, s32);
 
 
 
-void alSndpSetPan(struct ObjRecAt40V2 *arg0, u8 arg1) {
+void alSndpSetPan(struct ObjRecAt40V2 *soundPlayer, u8 pan) {
     ParamsRecAt8V2 p;
     s32 acc;
 
-    acc = arg0->field40;
+    acc = soundPlayer->field40;
     p.f0 = 2;
-    p.f8 = arg1;
-    acc += arg0->field3C * 0x30;
+    p.f8 = pan;
+    acc += soundPlayer->field3C * 0x30;
     p.f4 = acc;
-    func_802B00D4_de(&arg0->events, (s16 *)&p, 0);
+    func_802B00D4_de(&soundPlayer->events, (s16 *)&p, 0);
 }

@@ -3,10 +3,10 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-extern s32 func_8041EAC4_de();
+extern s32 Frontend_CountOpenPlayerSlots();
 
-struct Player_func_8041EAC4_de;
-typedef struct Player_func_8041EAC4_de Player_func_8041EAC4_de;
+struct PlayerFrontendCountOpenPlayerSlots;
+typedef struct PlayerFrontendCountOpenPlayerSlots PlayerFrontendCountOpenPlayerSlots;
 
 
 extern s32 Frontend_FindKeyIndex(s32 key);
@@ -14,7 +14,7 @@ extern s32 Frontend_FindKeyIndex(s32 key);
 extern void Frontend_SeatJoinRequests(void);
 
 
-extern s32 func_8041EBBC_de(void);
+extern s32 Frontend_ScoreJoinRequestEntries(void);
 
 struct RequestRecAt10;
 struct RequestRecAt10 {
@@ -39,7 +39,7 @@ typedef struct RequestDrawScreen {
     s32 count;
 } RequestDrawScreen;
 typedef struct RequestDrawPair { s32 first, second; } RequestDrawPair;
-extern s32 func_8041EC44_de(s32, s32);
+extern s32 Frontend_FindJoinModelIndex(s32, s32);
 extern RequestDrawPair D_800DF740[];
 
 struct CourseOptionsScreen {

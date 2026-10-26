@@ -7,7 +7,7 @@
 
 /* Tests a ray against a vertical cylinder: projects the center onto the ray's horizontal direction from 0x44,
  * finds the entry parameter from the radius, accepts it under the same rules as func_8023E8D4_de, places the
- * hit with func_80271FC8_de and optionally rejects hits above the top or below the bottom; when kept, the
+ * hit with GraphU64_InterpolateVector and optionally rejects hits above the top or below the bottom; when kept, the
  * polygon record takes the hit as its point with a horizontal normal away from the center and becomes the
  * ray's nearest hit. Adapted from func_8023E8D4_de with its static acceptance helper.
  */
@@ -22,7 +22,7 @@ extern f32 D_800C3690_de[];
 
 extern s32 func_802412D0_de(Polygon_func_8023E178_de *, CVector3 *, CVector3 *, f32 *);
 
-extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
+extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
 
 static inline s32 accepts(Ray_func_8023E178_de *ray, Polygon_func_8023E178_de *poly) {
@@ -75,7 +75,7 @@ s32 func_8023E178_de(Ray_func_8023E178_de *ray, CVector3 *center, f32 radius, f3
     }
     poly->t = (along - Math_Sqrtf(disc)) * inv;
     if (accepts(ray, poly) != 0) {
-        func_80271FC8_de(&poly->hit, poly->t, &ray->start, &ray->end);
+        GraphU64_InterpolateVector(&poly->hit, poly->t, &ray->start, &ray->end);
         if (clip != 0 && (poly->hit.y > top || poly->hit.y < bottom)) {
             return 0;
         }

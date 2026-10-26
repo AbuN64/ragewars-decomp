@@ -68,7 +68,7 @@ block_7:
         target = arg0->target;
         if ((target != 0) && (arg0->time > D_800C4B4C_de)) {
             temp_s2 = &arg0->direction;
-            sp48 = func_80271818_de(temp_s2);
+            sp48 = GraphU64_BuildDirectionQuaternion(temp_s2);
             temp_fv0f = arg0->velocity.x;
             temp_fv0 = arg0->velocity.y;
             temp_fa0 = arg0->velocity.z;
@@ -78,7 +78,7 @@ block_7:
             GraphU64_SubtractVectors(&sp28, &sp18, &arg0->position);
             amount = Math_Sqrtf((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
             if (amount < D_800C4B50_de) {
-                sp68 = func_80271818_de(&sp28);
+                sp68 = GraphU64_BuildDirectionQuaternion(&sp28);
                 MatrixFromQuaternion(&sp68.x, sp78.m);
                 sp38.x = 0;
                 sp38.y = 0;
@@ -93,7 +93,7 @@ block_7:
                 amount = Math_Sqrtf((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
             }
             GraphU64_NormalizeVec3(&sp28.x);
-            sp58 = func_80271818_de(&sp28);
+            sp58 = GraphU64_BuildDirectionQuaternion(&sp28);
             if (amount < D_800C4B5C_de) {
                 temp_fv0f_2 = amount - D_800C4B60_de;
                 if (temp_fv0f_2 < 0.0f) {
@@ -105,9 +105,9 @@ block_7:
             } else {
                 amount = D_800C4B70_de;
             }
-            func_802741A4_de(&sp58.x);
-            func_802741A4_de(&sp48.x);
-            func_80270CD0_de(&sp68, amount, &sp48, &sp58);
+            GraphU64_NormalizeQuaternion(&sp58.x);
+            GraphU64_NormalizeQuaternion(&sp48.x);
+            GraphU64_InterpolateQuaternionWithLinearFallback(&sp68, amount, &sp48, &sp58);
             MatrixFromQuaternion(&sp68.x, sp78.m);
             temp_s0_2 = &arg0->direction;
             sp38.x = 0;
@@ -178,7 +178,7 @@ void Particle_SteerHoming(void *particle) {
     s32 id;
     CVector3 *velocity;
     SteeringSound *sound;
-    q78 = func_80271818_de(&arg0->direction);
+    q78 = GraphU64_BuildDirectionQuaternion(&arg0->direction);
     speed = Math_Sqrtf(arg0->velocity.x * arg0->velocity.x + arg0->velocity.y * arg0->velocity.y +
                              arg0->velocity.z * arg0->velocity.z);
     owner = FIELD(void *, FIELD(void *, arg0, 0x12C), 0x1D8);
@@ -218,9 +218,9 @@ create_sound:
     }
     v28 = v68;
     GraphU64_NormalizeVec3(&v28);
-    q88 = func_80271818_de(&v28);
-    func_802741A4_de(&q88);
-    func_802741A4_de(&q78);
+    q88 = GraphU64_BuildDirectionQuaternion(&v28);
+    GraphU64_NormalizeQuaternion(&q88);
+    GraphU64_NormalizeQuaternion(&q78);
     GraphU64_NormalizeVec3(&v28);
     v38 = arg0->direction;
     GraphU64_NormalizeVec3(&v38);
@@ -232,7 +232,7 @@ create_sound:
             rate = D_800C4B9C_de;
         }
     }
-    func_80270CD0_de(&q98, rate, &q78, &q88);
+    GraphU64_InterpolateQuaternionWithLinearFallback(&q98, rate, &q78, &q88);
     MatrixFromQuaternion(&q98, mA8.m);
     direction = &arg0->direction;
     v48.x = 0;
@@ -292,8 +292,8 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
         return;
     }
     GraphU64_NormalizeVec3(&offset.x);
-    wanted = func_80271818_de(&offset.x);
-    current = func_80271818_de(&particle->direction.x);
+    wanted = GraphU64_BuildDirectionQuaternion(&offset.x);
+    current = GraphU64_BuildDirectionQuaternion(&particle->direction.x);
     speed = Math_Sqrtf((particle->velocity.x * particle->velocity.x) + (particle->velocity.y * particle->velocity.y) + (particle->velocity.z * particle->velocity.z));
     if (distance < 1024.0f) {
         blend = distance - 204.79999f;
@@ -306,7 +306,7 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
     } else {
         blend = 0.04f;
     }
-    func_80270CD0_de(&turned, blend, &current, &wanted);
+    GraphU64_InterpolateQuaternionWithLinearFallback(&turned, blend, &current, &wanted);
     MatrixFromQuaternion(&turned.x, rotation);
     forward.x = 0.0f;
     forward.y = 0.0f;

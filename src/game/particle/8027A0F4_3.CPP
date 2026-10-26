@@ -34,7 +34,7 @@ f32 GameObject_GetActorHeight(SharedPlayer *player);
 void GraphU64_SubtractVectors(CVector3 *normal, CVector3 *pos, void *surface);
 
 
-f32 func_802726BC_de(CVector3 *a, CVector3 *b);
+f32 GraphU64_GetSquaredDistance(CVector3 *a, CVector3 *b);
 
 s32 GraphU64_NextRandom(void);
 
@@ -74,7 +74,7 @@ static inline f32 func_8027B790_distance(Shared_Particle *particle, SharedPlayer
     if (particle->inst.type != 0x40F) {
         pos.y += GameObject_GetActorHeight(player) * 0.5f;
     }
-    return func_802726BC_de(&particle->inst.pos, &pos);
+    return GraphU64_GetSquaredDistance(&particle->inst.pos, &pos);
 }
 
 extern CVector3 D_80100290;
@@ -84,7 +84,7 @@ extern CVector3 D_801042C8;
 extern s32 func_80276088_de(s32);
 
 extern void Events_DeliverContactEffect(void *, void *, u16, s32, CVector3, struct IntPair);
-extern struct Shape_typemap_165 func_80271818_de(CVector3 *);
+extern struct Shape_typemap_165 GraphU64_BuildDirectionQuaternion(CVector3 *);
 
 #include "particle/8027A0F4_8.H"
 
@@ -447,7 +447,7 @@ void func_8027C274_de(Shared_Particle *particle) {
             } else {
                 position = particle->inst.velocity;
             }
-            rotation = func_80271818_de(&position);
+            rotation = GraphU64_BuildDirectionQuaternion(&position);
             func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
                           (struct EffectActor *)particle->owner,
                           (s32 *)particle->ownerId,
@@ -512,7 +512,7 @@ void func_8027C4F0_de(Shared_Particle *particle) {
         } else {
             position = particle->inst.velocity;
         }
-        rotation = func_80271818_de(&position);
+        rotation = GraphU64_BuildDirectionQuaternion(&position);
         func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
                       (struct EffectActor *)particle->owner,
                       (s32 *)particle->ownerId,
@@ -569,7 +569,7 @@ void func_8027C758_de(Shared_Particle *particle) {
         } else {
             position = particle->inst.velocity;
         }
-        rotation = func_80271818_de(&position);
+        rotation = GraphU64_BuildDirectionQuaternion(&position);
         func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
                       (struct EffectActor *)particle->owner,
                       (s32 *)particle->ownerId,
@@ -624,7 +624,7 @@ void func_8027C9CC_de(Shared_Particle *particle) {
         } else {
             position = particle->inst.velocity;
         }
-        rotation = func_80271818_de(&position);
+        rotation = GraphU64_BuildDirectionQuaternion(&position);
         func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
                       (struct EffectActor *)particle->owner,
                       (s32 *)particle->ownerId,
@@ -789,7 +789,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         ".Lauto_8027CE14:\n"
         "lui        $s0, %hi(D_801041F0)\n"
         "lw         $s0, %lo(D_801041F0)($s0)\n"
-        "jal        func_8026EF58_de\n"
+        "jal        GraphU64_InvertAffineMatrix\n"
         "addiu     $a1, $sp, 0x38\n"
         "addiu      $a0, $sp, 0xB8\n"
         "lui        $a1, %hi(D_801001F8)\n"
@@ -1169,7 +1169,7 @@ void func_8027CC20_de(Shared_Particle *particle) {
         "lw         $s1, %lo(D_8012D538_de)($s1)\n"
         "lui        $s0, %hi(D_801041F0)\n"
         "lw         $s0, %lo(D_801041F0)($s0)\n"
-        "jal        func_8026EF58_de\n"
+        "jal        GraphU64_InvertAffineMatrix\n"
         "addiu     $a0, $sp, 0xB8\n"
         "addiu      $a0, $sp, 0xB8\n"
         "lui        $a1, %hi(D_801001F8)\n"
@@ -1262,7 +1262,7 @@ extern u8 D_8011026D;
 s32 func_8024E2C4_de(void *);
 void GraphU64_ConvertMatrixToFloat(f32 *, void *);
 void func_80247F18_de(void *, void *, void *, CVector3, CVector3, s32);
-void func_8026EF58_de(f32 *, f32 *);
+void GraphU64_InvertAffineMatrix(f32 *, f32 *);
 void GraphU64_TransformDirection(f32 *, CVector3 *, CVector3 *);
 s32 func_8024E140_de(void *);
 void PitchMatrixLocal(f32 *, f32);
@@ -1273,10 +1273,10 @@ static __inline__ void attachParticle(Shared_Particle *particle, f32 *transform,
     Shared_ParticleTarget *attached;
     ParticleAttachmentState *scene;
     attached=D_801041F0.current;
-    if (transform) func_8026EF58_de(inverse, transform);
+    if (transform) GraphU64_InvertAffineMatrix(inverse, transform);
     else {
         GraphU64_ConvertMatrixToFloat(localTransform, &attached->drawMatrices[D_801041F0.frame]);
-        func_8026EF58_de(inverse, localTransform);
+        GraphU64_InvertAffineMatrix(inverse, localTransform);
     }
     scene=&D_801041F0;
     GraphU64_TransformPoint(inverse, &scene->origin, &particle->attachmentPosition);

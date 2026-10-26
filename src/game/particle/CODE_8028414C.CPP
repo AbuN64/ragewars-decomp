@@ -52,7 +52,7 @@ void Particle_UpdateMatrix(Shared_Particle *particle) {
 
 extern char D_8011D8D0;
 
-extern struct Shape_typemap_165 func_80271818_de(Triple *);
+extern struct Shape_typemap_165 GraphU64_BuildDirectionQuaternion(Triple *);
 extern void GraphU64_SubtractVectors(Triple *, Triple *, Triple *);
 extern void GraphU64_ScaleVector(Triple *, Triple *, f32);
 extern void GraphU64_AddVec3(Triple *, Triple *, Triple *);
@@ -71,7 +71,7 @@ void func_8028422C_de(TrailActor *actor) {
         count = actor->node->state->count;
         if (count > 0) {
                 position = actor->position;
-                rotation = func_80271818_de(&position);
+                rotation = GraphU64_BuildDirectionQuaternion(&position);
                 GraphU64_SubtractVectors(&delta, &actor->origin, &actor->end);
                 system = &D_8011D8D0;
                 i = 1;

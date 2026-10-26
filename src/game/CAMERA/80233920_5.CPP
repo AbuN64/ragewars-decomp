@@ -17,7 +17,7 @@
 
 
 extern f32 Math_Sqrtf(f32);
-extern void func_80272944_de(void *, CVector3 *, CVector3 *, s32);
+extern void GraphU64_TransformPoints(void *, CVector3 *, CVector3 *, s32);
 extern void func_802965B0_de(void *, CVector3 *, CVector3 *, CVector3 *, CVector3 *, CVector3 *);
 extern void Region_ComputePointBounds(void *, s32, CVector3 *);
 
@@ -73,7 +73,7 @@ void Camera_UpdateFrustumBounds(GameplayCamera *camera) {
         radius = Math_Sqrtf(pts[1].x * pts[1].x + pts[1].y * pts[1].y + pts[1].z * pts[1].z);
     }
     out = &camera->corners[0];
-    func_80272944_de(camera->viewOrient, pts, out, 5);
+    GraphU64_TransformPoints(camera->viewOrient, pts, out, 5);
     func_802965B0_de(camera->clipPlanes, out, out + 1, out + 2, out + 3, out + 4);
     Region_ComputePointBounds(camera->clipBounds, 5, out);
     height = radius * D_800C3208_de;

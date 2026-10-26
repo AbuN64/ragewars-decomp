@@ -16,7 +16,7 @@ extern void GraphU64_ScaleVector(void *, void *, f32);
 /* Tests a ray against a polygon: intersects the ray from 0x44 to 0x50 with the polygon's plane through
  * func_802412D0_de and accepts a parameter nearer than the ray's current nearest hit, also allowing a slightly negative
  * one (above -D_800D0648 * D_800C87C0 scaled by the ray's 0x80 factor) except for kind 7 and types 5 and
- * 6; the hit point is then placed with func_80271FC8_de and must lie inside the polygon (func_802414F4_de). On a
+ * 6; the hit point is then placed with GraphU64_InterpolateVector and must lie inside the polygon (func_802414F4_de). On a
  * hit the polygon record is optionally kept as the ray's nearest hit at 0xB0. */
 
 
@@ -29,7 +29,7 @@ extern void GraphU64_ScaleVector(void *, void *, f32);
 
 extern s32 func_802412D0_de(Polygon_func_8023E8D4_de *, CVector3 *, CVector3 *, f32 *);
 
-extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
+extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
 extern s32 func_802414F4_de(Polygon_func_8023E8D4_de *, CVector3 *);
 
@@ -138,7 +138,7 @@ s32 func_8023E8D4_de(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly, s32 keep
     if (accepts(ray, poly) == 0) {
         return 0;
     }
-    func_80271FC8_de(&poly->hit, poly->t, &ray->start, &ray->end);
+    GraphU64_InterpolateVector(&poly->hit, poly->t, &ray->start, &ray->end);
     if (func_802414F4_de(poly, &poly->hit) == 0) {
         return 0;
     }

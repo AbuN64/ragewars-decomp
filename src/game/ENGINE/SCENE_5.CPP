@@ -538,7 +538,7 @@ extern s32 SetN64_GetDirectoryEntry(s32 *, s32, s32);
 extern void *func_80254284_de(s32, void **, s32, void *);
 extern ResultsText *func_80254408_de(s32, void *, s32, s32, void *, s32, void *);
 extern void func_802BD3A0_de(void *, const void *, s32);
-extern s32 func_802A0C08_de(char *, const char *, ...);
+extern s32 XStdio_FormatBuffer(char *, const char *, ...);
 extern u8 Player_GetLevelProgress(Profile *, s32);
 extern void Scene_ReleaseCachedLevelData(Shared_World *);
 extern void *Cache_RequestResource(s32, u32, u32, u32, u32, s32, void *, const char *, u32);
@@ -618,50 +618,50 @@ void Scene_ShowResultsGoal(void) {
     switch (levelGoal->kind) {
     case 0:
         if (currentGame()->controllerMode == 2) {
-            func_802A0C08_de(goal, RESULTS_TEXT(D_800D3354, D_800E17A4), D_800E4680->rounds);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3354, D_800E17A4), D_800E4680->rounds);
         } else if (D_800E4680->rounds < 2) {
-            func_802A0C08_de(goal, RESULTS_TEXT(D_800D334C_de, D_800E1784), D_800E4680->rounds);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D334C_de, D_800E1784), D_800E4680->rounds);
         } else {
-            func_802A0C08_de(goal, RESULTS_TEXT(D_800D3350, D_800E1794_eu), D_800E4680->rounds);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3350, D_800E1794_eu), D_800E4680->rounds);
         }
         break;
     case 1:
         if (currentGame()->controllerMode == 2) {
-            func_802A0C08_de(goal, RESULTS_TEXT(D_800D3360, D_800E17D4), D_800E4680->laps);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3360, D_800E17D4), D_800E4680->laps);
         } else if (D_800E4680->laps < 2) {
-            func_802A0C08_de(goal, RESULTS_TEXT(D_800D3358, D_800E17B4), D_800E4680->laps);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3358, D_800E17B4), D_800E4680->laps);
         } else {
-            func_802A0C08_de(goal, RESULTS_TEXT(D_800D335C, D_800E17C4), D_800E4680->laps);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D335C, D_800E17C4), D_800E4680->laps);
         }
         break;
     case 2:
         if (D_800E4680->laps < 2) {
-            func_802A0C08_de(goal, RESULTS_TEXT(D_800D3364, D_800E17E4_eu), D_800E4680->laps);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3364, D_800E17E4_eu), D_800E4680->laps);
         } else {
-            func_802A0C08_de(goal, RESULTS_TEXT(D_800D3368_de, D_800E17F4), D_800E4680->laps);
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3368_de, D_800E17F4), D_800E4680->laps);
         }
         break;
     case 3:
         switch (levelGoal->goal) {
         case 4:
-            func_802A0C08_de(goal, RESULTS_TEXT(D_800D3390_de, D_800E1894), RESULTS_TEXT(D_800D3334, D_800E1724));
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3390_de, D_800E1894), RESULTS_TEXT(D_800D3334, D_800E1724));
             break;
         case 9:
-            func_802A0C08_de(goal, RESULTS_TEXT(D_800D3394, D_800E18A4), RESULTS_TEXT(D_800D3338, D_800E1734_eu),
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3394, D_800E18A4), RESULTS_TEXT(D_800D3338, D_800E1734_eu),
                              RESULTS_TEXT(D_800D3304, D_800E1664_eu));
             break;
         case 22:
-            func_802A0C08_de(goal, RESULTS_TEXT(D_800D3390_de, D_800E1894), RESULTS_TEXT(D_800D333C, D_800E1744));
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3390_de, D_800E1894), RESULTS_TEXT(D_800D333C, D_800E1744));
             break;
         case 35:
-            func_802A0C08_de(goal, RESULTS_TEXT(D_800D3390_de, D_800E1894), RESULTS_TEXT(D_800D3340, D_800E1754));
+            XStdio_FormatBuffer(goal, RESULTS_TEXT(D_800D3390_de, D_800E1894), RESULTS_TEXT(D_800D3340, D_800E1754));
             break;
         default:
             if (D_800E4680->targetCount < 2) {
-                func_802A0C08_de(goal, RW_LOCALIZED_TEXT(D_800D336C, D_800E1804, D_800E1804, g_languageIndex),
+                XStdio_FormatBuffer(goal, RW_LOCALIZED_TEXT(D_800D336C, D_800E1804, D_800E1804, g_languageIndex),
                                  D_800E4680->targetCount);
             } else {
-                func_802A0C08_de(goal, RW_LOCALIZED_TEXT(D_800D3370, D_800E1814, D_800E1814, g_languageIndex),
+                XStdio_FormatBuffer(goal, RW_LOCALIZED_TEXT(D_800D3370, D_800E1814, D_800E1814, g_languageIndex),
                                  D_800E4680->targetCount);
             }
             break;
@@ -674,31 +674,31 @@ void Scene_ShowResultsGoal(void) {
         Cinema_AddMessage(goal);
         players = (Player_GetLevelProgress(D_80102B00, D_80102B00[0].slot) >> 1) + 1;
         if (players < 2) {
-            func_802A0C08_de(name, RESULTS_TEXT(D_800D3388, D_800E1874), players);
+            XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D3388, D_800E1874), players);
         } else {
-            func_802A0C08_de(name, RESULTS_TEXT(D_800D338C, D_800E1884), players);
+            XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D338C, D_800E1884), players);
         }
         Cinema_AddMessage(name);
         break;
     case 3:
         Cinema_AddMessage(goal);
         if (D_800E4680->timeLimit <= 60) {
-            func_802A0C08_de(name, RESULTS_TEXT(D_800D3374, D_800E1824), D_800E4680->timeLimit);
+            XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D3374, D_800E1824), D_800E4680->timeLimit);
         } else {
             minutes = D_800E4680->timeLimit / 60;
             if (minutes < 2) {
                 seconds = D_800E4680->timeLimit % 60;
                 if (seconds == 0) {
-                    func_802A0C08_de(name, RESULTS_TEXT(D_800D3380, D_800E1854_eu), minutes);
+                    XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D3380, D_800E1854_eu), minutes);
                 } else {
-                    func_802A0C08_de(name, RESULTS_TEXT(D_800D3378, D_800E1834), minutes, seconds);
+                    XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D3378, D_800E1834), minutes, seconds);
                 }
             } else {
                 seconds = D_800E4680->timeLimit % 60;
                 if (seconds == 0) {
-                    func_802A0C08_de(name, RESULTS_TEXT(D_800D3384, D_800E1864), minutes);
+                    XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D3384, D_800E1864), minutes);
                 } else {
-                    func_802A0C08_de(name, RESULTS_TEXT(D_800D337C, D_800E1844), minutes, seconds);
+                    XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D337C, D_800E1844), minutes, seconds);
                 }
             }
         }
@@ -707,13 +707,13 @@ void Scene_ShowResultsGoal(void) {
     case 4:
         challenge = findLevelChallenge(&g_world, D_8015402C);
         character = &RESULTS_CHARACTERS[Frontend_FindKeyIndex(challenge->character)];
-        func_802A0C08_de(name, RESULTS_NAME_FORMAT, character->name[RESULTS_LANGUAGE].text);
+        XStdio_FormatBuffer(name, RESULTS_NAME_FORMAT, character->name[RESULTS_LANGUAGE].text);
         Cinema_AddMessage(name);
         Cinema_AddMessage(goal);
         if (D_800E4680->lives < 2) {
-            func_802A0C08_de(name, RESULTS_TEXT(D_800D3388, D_800E1874), D_800E4680->lives);
+            XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D3388, D_800E1874), D_800E4680->lives);
         } else {
-            func_802A0C08_de(name, RESULTS_TEXT(D_800D338C, D_800E1884), D_800E4680->lives);
+            XStdio_FormatBuffer(name, RESULTS_TEXT(D_800D338C, D_800E1884), D_800E4680->lives);
         }
         Cinema_AddMessage(name);
         break;

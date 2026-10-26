@@ -62,7 +62,7 @@ extern char D_8011D8D0;
 
 extern void func_8022B09C_de(SharedPlayer *, CVector3 *);
 
-extern struct Shape_typemap_165 func_80271818_de(CVector3 *);
+extern struct Shape_typemap_165 GraphU64_BuildDirectionQuaternion(CVector3 *);
 
 extern void InstHdr_CopyActorPositionAndModel(void *, Triple, void *, s32 *, s32, s32);
 
@@ -173,7 +173,7 @@ void Events_SpawnRiderImpactEffect(SharedPlayer *target, ActorEventsSpawnRiderIm
     v.x -= player->views5DC.view5DC_5.rider->unk128.x;
     v.y -= player->views5DC.view5DC_5.rider->unk128.y;
     v.z -= player->views5DC.view5DC_5.rider->unk128.z;
-    rotation = func_80271818_de(&v);
+    rotation = GraphU64_BuildDirectionQuaternion(&v);
     InstHdr_CopyActorPositionAndModel(actor, position, &point, &unused, 0, 1);
     point = position;
     ((CVector3 *)&point)->y += D_800C9538;

@@ -21,7 +21,7 @@ extern void MatrixFromQuaternion(f32 *, f32 *);
 
 extern void GraphU64_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern void func_80272BCC_de(f32 *, CVector3 *, CVector3 *);
+extern void GraphU64_TransformDirectionTranspose(f32 *, CVector3 *, CVector3 *);
 
 extern void GraphU64_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
@@ -88,7 +88,7 @@ void Turret_MoveTargetIntoTurretSpace(void *unused, struct RotationObject *objec
 
     build_rotation(object, matrix);
     GraphU64_SubtractVectors(&offset, point, pivot);
-    func_80272BCC_de(matrix, &offset, point);
+    GraphU64_TransformDirectionTranspose(matrix, &offset, point);
     GraphU64_AddVec3(point, point, pivot);
 }
 

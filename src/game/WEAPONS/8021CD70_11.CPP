@@ -11,7 +11,7 @@ extern float D_800D2988[];
 
 
 extern s32 Cinema_IsSequenceActive(void);
-extern void SoundElement_PlaySoundAtPosition(s16,CVector3,s32,s32),GraphU64_AddVec3(CVector3 *,CVector3 *,CVector3 *),GraphU64_ScaleVector(CVector3 *,CVector3 *,f32),func_80272748_de(CVector3 *,f32);
+extern void SoundElement_PlaySoundAtPosition(s16,CVector3,s32,s32),GraphU64_AddVec3(CVector3 *,CVector3 *,CVector3 *),GraphU64_ScaleVector(CVector3 *,CVector3 *,f32),GraphU64_ClampMotionLength(CVector3 *,f32);
 
 void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMovement *movementProfile) {
     CVector3 motion;
@@ -53,7 +53,7 @@ void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMoveme
             if (forwardSpeed < 0.0f ? forwardSpeedLimit < -forwardSpeed : forwardSpeedLimit < forwardSpeed) {
                 player->views5E8.view6C0_51.unk6C0=GraphU64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8*0.5f);
             } else if(player->views5E8.view6A8_43.unk6A8 != 0.0f && player->views5E8.view7E8_105.unk7E8 != 2) {
-                player->views5E8.view6C0_51.unk6C0=func_802746A0_de(player->views5E8.view6C0_51.unk6C0,player->views5E8.view6A8_43.unk6A8*movementProfile->unk0,(player->views5E8.view6A8_43.unk6A8<0.0f?-player->views5E8.view6A8_43.unk6A8:player->views5E8.view6A8_43.unk6A8)*movementProfile->unk4);
+                player->views5E8.view6C0_51.unk6C0=GraphU64_IntegrateBoundedValue(player->views5E8.view6C0_51.unk6C0,player->views5E8.view6A8_43.unk6A8*movementProfile->unk0,(player->views5E8.view6A8_43.unk6A8<0.0f?-player->views5E8.view6A8_43.unk6A8:player->views5E8.view6A8_43.unk6A8)*movementProfile->unk4);
             } else {
                 player->views5E8.view6C0_51.unk6C0=GraphU64_DecayToZero(player->views5E8.view6C0_51.unk6C0,movementProfile->unk8);
             }
@@ -65,7 +65,7 @@ void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMoveme
             if (strafeSpeed < 0.0f ? strafeSpeedLimit < -strafeSpeed : strafeSpeedLimit < strafeSpeed) {
                 player->views5E8.view6C4_54.unk6C4=GraphU64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk14*0.5f);
             } else if(player->views5E8.view6A4_41.unk6A4 != 0.0f) {
-                player->views5E8.view6C4_54.unk6C4=func_802746A0_de(player->views5E8.view6C4_54.unk6C4,player->views5E8.view6A4_41.unk6A4*movementProfile->unkC,(player->views5E8.view6A4_41.unk6A4<0.0f?-player->views5E8.view6A4_41.unk6A4:player->views5E8.view6A4_41.unk6A4)*movementProfile->unk10);
+                player->views5E8.view6C4_54.unk6C4=GraphU64_IntegrateBoundedValue(player->views5E8.view6C4_54.unk6C4,player->views5E8.view6A4_41.unk6A4*movementProfile->unkC,(player->views5E8.view6A4_41.unk6A4<0.0f?-player->views5E8.view6A4_41.unk6A4:player->views5E8.view6A4_41.unk6A4)*movementProfile->unk10);
             } else {
                 player->views5E8.view6C4_54.unk6C4=GraphU64_DecayToZero(player->views5E8.view6C4_54.unk6C4,movementProfile->unk14);
             }
@@ -84,10 +84,10 @@ void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMoveme
             }
             if (updatedForwardSpeed < strafeSpeedMagnitude) {
 block_35:
-                func_80272748_de(&motion,movementProfile->unk10);
+                GraphU64_ClampMotionLength(&motion,movementProfile->unk10);
             } else {
 block_36:
-                func_80272748_de(&motion,movementProfile->unk4);
+                GraphU64_ClampMotionLength(&motion,movementProfile->unk4);
             }
             if (boostReady != 0) {
                 boostButtons = player->views5E8.view6B0_46.unk6B0;

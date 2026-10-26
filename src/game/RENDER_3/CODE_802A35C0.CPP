@@ -20,9 +20,9 @@
 
 extern void *func_802A5734_de(void *arg0, s32 arg1);
 
-extern void func_802732D0_de(char *object, f32 *output);
+extern void GraphU64_GetMatrixTranslation(char *object, f32 *output);
 
-extern void func_802732EC_de(void *arg0, f32 *arg1);
+extern void GraphU64_GetMatrixScale(void *arg0, f32 *arg1);
 
 extern void GraphU64_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
 
@@ -93,7 +93,7 @@ extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void GraphU64_IdentityMatrix(void *);
 
-extern void func_80272CB0_de(void *, f32, f32, f32);
+extern void GraphU64_BuildScaleMatrix(void *, f32, f32, f32);
 
 extern void func_802A31E8_de(Node438C *, Node438C *, struct GameplayCamera *, void *);
 extern void GraphU64_ScaleVector(void *, void *, f32);
@@ -114,9 +114,9 @@ void *func_802A25D0_de(void *arg0, void *arg1, void *local) {
         ((ObjectLinks54 *)(arg1))->unk_50 = 0;
         ((ObjectLinksB4 *)(var_s0))->unk_8 = ((struct ObjectState20 *) ((ObjectLinks54 *) arg1)->unk_8)->unk_8;
         ((ObjectLinksB4 *)(var_s0))->unk_B0 = 0;
-        func_802732D0_de(local, &((ObjectLinksB4 *)(var_s0))->unk_10.v0);
+        GraphU64_GetMatrixTranslation(local, &((ObjectLinksB4 *)(var_s0))->unk_10.v0);
         if (((ObjectLinks54 *)(arg1))->unk_3C & 4) {
-            func_802732EC_de(local, &((ObjectLinksB4 *)(var_s0))->unk_1C);
+            GraphU64_GetMatrixScale(local, &((ObjectLinksB4 *)(var_s0))->unk_1C);
         } else {
             GraphU64_ConvertMatrixToFixed(local, &((ObjectLinksB4 *)(var_s0))->unk_28);
             GraphU64_ConvertMatrixToFixed(local, &((ObjectLinksB4 *)(var_s0))->unk_68);
@@ -397,7 +397,7 @@ void func_802A339C_de(void *arg0, void *camera) {
     first = state->vertices;
     next = first->next;
     if (first != 0) {
-        func_80272CB0_de(matrix, first->a, first->b, first->c);
+        GraphU64_BuildScaleMatrix(matrix, first->a, first->b, first->c);
     } else {
         GraphU64_IdentityMatrix(matrix);
     }
@@ -490,9 +490,9 @@ static inline void Render_UpdateLinkedSource(LinkOwner802A *owner, LinkNode802A 
     }
     ScaleMatrixLocal(matrix, scale, scale, scale);
     GraphU64_ClampMatrixToFixedRange(matrix);
-    func_802732D0_de((char *)matrix, &node->pos.x);
+    GraphU64_GetMatrixTranslation((char *)matrix, &node->pos.x);
     if (owner->flags & 4) {
-        func_802732EC_de(matrix, (f32 *)((char *)node + 0x1C));
+        GraphU64_GetMatrixScale(matrix, (f32 *)((char *)node + 0x1C));
     } else {
         GraphU64_ConvertMatrixToFixed(matrix, node->matrices[D_800D297C].m);
     }

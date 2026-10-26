@@ -21,7 +21,7 @@ s32 func_8040C638_us(s32 arg0) {
     return 0;
 }
 
-void func_8040C648_us(void *arg0, Args args) {
+void Event_DrawClippedWidgetChildren(void *arg0, Args args) {
     func_802A2BE0_S1 *record = arg0;
     Quad_func_802A1BE0_de first;
     Quad_func_802A1BE0_de basis;

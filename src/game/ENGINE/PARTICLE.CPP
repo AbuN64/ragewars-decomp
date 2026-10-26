@@ -27,7 +27,7 @@ extern Gfx *g_displayListCursor;
 
 extern s32 Unicol_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, void *);
 
-extern CQuatern func_80271818_de(CVector3 *);
+extern CQuatern GraphU64_BuildDirectionQuaternion(CVector3 *);
 
 extern void MultiplyQuaternions(CQuatern *out, CQuatern *a, CQuatern *b);
 
@@ -104,7 +104,7 @@ void func_8027E784_de(Shared_Particle *actor, GameplayCamera *view) {
         return;
     }
     angle = 0.78539824f;
-    tilt = func_80271818_de(&ground->normal);
+    tilt = GraphU64_BuildDirectionQuaternion(&ground->normal);
     roll.x = D_80115DEC = Math_Sinf(angle);
     roll.y = 0.0f;
     roll.z = 0.0f;

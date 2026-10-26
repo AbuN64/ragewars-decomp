@@ -29,7 +29,7 @@ s32 InstHdr_UsesGroundRotation(void *);
 s32 InstHdr_GetActorMotionState(void *);
 
  /* extern */
-void func_80270CD0_de(void *, f32, void *, f32 *);
+void GraphU64_InterpolateQuaternionWithLinearFallback(void *, f32, void *, f32 *);
 
  /* extern */
 
@@ -74,7 +74,7 @@ void func_80246E44_de(Actor36 *actor) {
     if (resource != 0) {
         box = SetN64_GetPackSection(*resource, 0);
         actor->update(actor, actor->state);
-        func_8026EE20_de(actor->matrix, box, &actor->box);
+        GraphU64_TransformBoundingBox(actor->matrix, box, &actor->box);
         Cache_UnlockResource(0, (void *)resource);
     }
 }
@@ -98,7 +98,7 @@ void func_80247004_de(Obj_func_80247004_de *actor) {
         }
         if (flags) {
             if ((!(actor->unk100 & 0x1000) && (rotationDestination = actor->rotation, (rotationState != 0))) || (rotationDestination = actor->rotation, (resetRotationFlag != 0))) {
-                func_80274380_de(rotationDestination, &vec);
+                GraphU64_ApproachQuaternion(rotationDestination, &vec);
             }
         } else {
             if ((rotationState != 0) && !(actor->unk100 & 0x1000)) {
@@ -111,7 +111,7 @@ void func_80247004_de(Obj_func_80247004_de *actor) {
             if (rotationBlend > D_800C3930_de[0]) {
                 rotationBlend = D_800C3930_de[0];
             }
-            func_80270CD0_de(rotation, rotationBlend, rotation, &vec);
+            GraphU64_InterpolateQuaternionWithLinearFallback(rotation, rotationBlend, rotation, &vec);
         }
     }
 }

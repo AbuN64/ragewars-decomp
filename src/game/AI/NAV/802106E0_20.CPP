@@ -20,7 +20,7 @@ extern void Nav_RunBehaviorHandler(void *);
 
 extern s32 Nav_GetRouteRelation(void *, s32, s32);
 
-extern f32 func_802726BC_de(f32 *, f32 *);
+extern f32 GraphU64_GetSquaredDistance(f32 *, f32 *);
 
 extern void Nav_SteerAlongRoute(void *);
 
@@ -28,7 +28,7 @@ extern f32 D_800C20C8_de;
 
 extern void Nav_SelectFarthestReachableNeighbor(AiController *controller);
 
-extern f32 func_802726BC_de(f32 *arg0, f32 *arg1);
+extern f32 GraphU64_GetSquaredDistance(f32 *arg0, f32 *arg1);
 
 extern f32 D_800C20CC_de;
 
@@ -94,7 +94,7 @@ void Nav_ApproachCombatTargetAlongRoute(CloseAttackActor *arg0)
     Nav_RunBehaviorHandler(state);
     Nav_SteerAlongRoute(state);
     Nav_UpdateTargetSteering(state);
-    if (func_802726BC_de(&peer_actor->pos.x,
+    if (GraphU64_GetSquaredDistance(&peer_actor->pos.x,
                        &state->player->pos.x) < D_800C20C0_de[1] ||
         state->route == state->destination) {
         Nav_SetBehaviourState(state, state->combat);
@@ -133,7 +133,7 @@ void Nav_UpdateRetreatMovement(void *actorObject)
         }
     }
 
-    if (D_800C20C8_de < func_802726BC_de(
+    if (D_800C20C8_de < GraphU64_GetSquaredDistance(
             &brain->target->self->pos.x,
             &brain->player->pos.x)) {
         Nav_SetBehaviourState(brain, brain->combat);
@@ -178,7 +178,7 @@ void Nav_SeekNearbyUnrestrictedGoal(Shared_Actor *arg0)
         if (table->m_nNavNodes > 0) {
             do {
                 entry = Nav_GetGraphPoint(table, index);
-                if (func_802726BC_de(&state->player->pos.x, entry) < threshold &&
+                if (GraphU64_GetSquaredDistance(&state->player->pos.x, entry) < threshold &&
                     !(navigation_attributes(entry) & 0x04300000)) {
                     Nav_AddGoalNode(table, index);
                 }

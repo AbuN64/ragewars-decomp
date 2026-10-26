@@ -51,7 +51,7 @@ void GameObject_LoadModel(void *actorStorage, s32 *modelDirectory, s32 directory
             node = *resource2;
             temp = SetN64_GetPackSection(node, 0);
             ((LevelActor *)actorStorage)->controllerUpdate(actorStorage, (char *)actorStorage + 0x170);
-            func_8026EE20_de(&((LevelActor *)actorStorage)->transform, (s32)temp, (char *)actorStorage + 0xE8);
+            GraphU64_TransformBoundingBox(&((LevelActor *)actorStorage)->transform, (s32)temp, (char *)actorStorage + 0xE8);
             func_80262480_de((char *)actorStorage + 0x104);
             func_80262480_de((char *)actorStorage + 0x118);
             ((LevelActor *)actorStorage)->stateE6 = (u8)((ResourceManagerState *)SetN64_GetPackSection(node, 1))->count;

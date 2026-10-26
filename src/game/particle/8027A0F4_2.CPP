@@ -248,9 +248,9 @@ void func_8027AD4C_de(Shared_Particle *arg0)
   temp_s0_2 = (void *) (&arg0->inst.velocity.x);
   GraphU64_AddVec3(temp_s0_2, temp_s0_2, &sp10);
 #if defined(VERSION_EU)
-  func_80272748_de(temp_s0_2, func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12));
+  GraphU64_ClampMotionLength(temp_s0_2, func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12));
 #else
-  func_80272748_de(temp_s0_2, func_802B2350((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12));
+  GraphU64_ClampMotionLength(temp_s0_2, func_802B2350((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12));
 #endif
   return;
   block_24:
@@ -317,9 +317,9 @@ void func_8027AD4C_de(Shared_Particle *arg0)
     sp20.y += GameObject_GetActorHeight(temp_s0_4) * D_800C4BE8_de;
     GraphU64_SubtractVectors(&sp40, &sp20, &arg0->inst.pos);
     GraphU64_NormalizeVec3(&sp40);
-    sp70 = func_80271818_de(&sp40);
+    sp70 = GraphU64_BuildDirectionQuaternion(&sp40);
     temp_s2_2 = &arg0->direction;
-    sp60 = func_80271818_de(temp_s2_2);
+    sp60 = GraphU64_BuildDirectionQuaternion(temp_s2_2);
     sp30 = arg0->direction;
     GraphU64_NormalizeVec3(&sp30);
     temp_f1_3 = arg0->inst.velocity.x;
@@ -333,7 +333,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
     {
       var_f2 = temp_f1_4 / temp_f0_8;
     }
-    func_80270CD0_de(&sp80, var_f2, &sp60, &sp70);
+    GraphU64_InterpolateQuaternionWithLinearFallback(&sp80, var_f2, &sp60, &sp70);
     MatrixFromQuaternion(&sp80, &sp90);
     sp50.x = 0;
     sp50.y = 0;

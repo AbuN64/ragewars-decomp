@@ -10,7 +10,7 @@
 
 
 
-s32 func_8040BF80_eu(struct FieldRecAt14 *field) {
+s32 Menu_SelectEuropeanPakActionLabel(struct FieldRecAt14 *field) {
     u32 state = D_80153778;
 
     if (state >= 5) {

@@ -12,9 +12,9 @@
 
 extern void GraphU64_ScaleVector(void *, void *, f32);
 
-extern void func_80272CB0_de(void *, f32, f32, f32);
+extern void GraphU64_BuildScaleMatrix(void *, f32, f32, f32);
 
-extern void func_802732D0_de(char *, f32 *);
+extern void GraphU64_GetMatrixTranslation(char *, f32 *);
 
 extern void Player_BuildPlayerViewTransform(char *, Matrix *);
 
@@ -126,16 +126,16 @@ void Player_BuildWeaponHandTransform(char *arg0) {
         handOffset.z = -handOffset.z;
     }
     GraphU64_ScaleVector(&scaledOffset, &((ObjectLinks1DC *)(arg0))->unk_50, 0.1f);
-    func_80272CB0_de(&offsetMatrix, scaledOffset.x, scaledOffset.y, scaledOffset.z);
+    GraphU64_BuildScaleMatrix(&offsetMatrix, scaledOffset.x, scaledOffset.y, scaledOffset.z);
     GraphU64_ScaleVector(&handOffset, &handOffset, -10.24f);
     if (((ObjectState630 *)(object))->unk_5DC.v0 != 0) {
-        func_802732D0_de(((ObjectState630 *)(object))->unk_5DC.v1 + 0x160, &position);
+        GraphU64_GetMatrixTranslation(((ObjectState630 *)(object))->unk_5DC.v1 + 0x160, &position);
         MatrixFromQuaternion((CQuatern *)(((ObjectState630 *)(object))->unk_5DC.v1 + 0x140),
                       &worldMatrix);
     } else {
         Player_BuildPlayerViewTransform(object, &viewMatrix);
         Player_BuildPlayerOrientation(object, &viewOrientation);
-        func_802732D0_de((char *)&viewMatrix, &position);
+        GraphU64_GetMatrixTranslation((char *)&viewMatrix, &position);
         MatrixFromQuaternion(&viewOrientation, &worldMatrix);
     }
     orientation = arg0 + 0x74;

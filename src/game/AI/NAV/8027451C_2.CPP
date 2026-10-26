@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "FX_2/80271B18.H"
 
-/* Returns the rotation quaternion that tilts the up axis onto a polygon's unit normal (recomputed from its edges into D_80115E10 and normalised into D_80115E20 whenever the polygon differs from the last one, straight up for no polygon), recording the half-angle sine in D_80115DEC and giving the identity when the normal is vertical. Adapted from func_80275688_de with the cached polygon normal of func_802757E4_de replacing func_802750B0_de and the default normals written through their separate cells. */
+/* Returns the rotation quaternion that tilts the up axis onto a polygon's unit normal (recomputed from its edges into D_80115E10 and normalised into D_80115E20 whenever the polygon differs from the last one, straight up for no polygon), recording the half-angle sine in D_80115DEC and giving the identity when the normal is vertical. Adapted from func_80275688_de with the cached polygon normal of func_802757E4_de replacing GraphU64_GetCachedSurfaceNormal and the default normals written through their separate cells. */
 
 
 
@@ -45,7 +45,7 @@ static inline void normalize_copy(CVector3 *out, CVector3 *in) {
 
 
 
-extern void func_802750B0_de(CVector3 *);
+extern void GraphU64_GetCachedSurfaceNormal(CVector3 *);
 
 extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
@@ -118,7 +118,7 @@ CQuatern *Region_GetCachedUpQuat(CQuatern *out, Triangle *polygon) {
     float scale;
     float one;
 
-    func_802750B0_de(&a);
+    GraphU64_GetCachedSurfaceNormal(&a);
     one = D_800C49D8_de[1];
     up.x = 0;
     up.y = one;

@@ -14,7 +14,7 @@ extern f32 GameObject_GetActorHeight(void *);
 extern void func_80242550_de(void *, void *);
 extern void func_80242288_de(void *, void *);
 extern s32 func_802AB400_de(void *, void *);
-extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
+extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 extern s32 func_8023E8D4_de(void *, void *, s32);
 extern s32 func_8023E178_de(void *, CVector3 *, f32, f32, f32, s32, void *, s32);
 /* Hand C from us-rev1 8023EEF0..8023F42C.
@@ -101,7 +101,7 @@ void InstCol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelAc
             if (sweep->top1 <= bottom && bottom < sweep->top2) {
                 time = (bottom - sweep->top1) / motion->velocity.y;
                 if (time < motion->blend) {
-                    func_80271FC8_de(&point, time, &owner->position0, &motion->end);
+                    GraphU64_InterpolateVector(&point, time, &owner->position0, &motion->end);
                     deltaX = entityX - point.x;
                     deltaZ = entityZ - point.z;
                     if (deltaX * deltaX + deltaZ * deltaZ < radius * radius) {
@@ -117,7 +117,7 @@ void InstCol_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelAc
             if (top <= sweep->bottom1 && sweep->bottom2 < top) {
                 time = (top - sweep->bottom1) / motion->velocity.y;
                 if (time < motion->blend) {
-                    func_80271FC8_de(&point, time, &owner->position0, &motion->end);
+                    GraphU64_InterpolateVector(&point, time, &owner->position0, &motion->end);
                     deltaX = entityX - point.x;
                     deltaZ = entityZ - point.z;
                     if (deltaX * deltaX + deltaZ * deltaZ < radius * radius) {

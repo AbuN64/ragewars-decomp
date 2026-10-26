@@ -5,7 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 extern ResidentEventHandlerEntry D_800EB1A4[];
 
-s32 func_8041F0B0_de(MenuWidget *pThis, s32 event, s32 arg2, s32 arg3, s32 arg4) {
+s32 Menu_DispatchGermanJoinOptionsEvent(MenuWidget *pThis, s32 event, s32 arg2, s32 arg3, s32 arg4) {
     s32 i;
     for (i = 0; D_800EB1A4[i].handler != 0; i++) {
         if (D_800EB1A4[i].event == event &&

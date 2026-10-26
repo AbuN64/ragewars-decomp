@@ -13,15 +13,15 @@ int Cinema_IsSequenceInWindow(void);
 void Cinema_UpdateSequenceTrack(void *);
 f32 func_802459A0_de(void *);
 float func_80245AD8_de(void);
-void func_8026EF58_de(f32 *, f32 *);
+void GraphU64_InvertAffineMatrix(f32 *, f32 *);
 void GraphU64_MultiplyAffineMatrices(f32 *, f32 *, f32 *);
-void func_8026F898_de(f32 *, f32 *, f32 *);
+void GraphU64_MultiplyMatrices(f32 *, f32 *, f32 *);
 void func_8026FC9C_de(f32 *, void *);
 void GraphU64_IdentityMatrix(void *);
 void GraphU64_ClampMatrixToFixedRange(f32 *);
-void func_80272CB0_de(void *, f32, f32, f32);
+void GraphU64_BuildScaleMatrix(void *, f32, f32, f32);
 void CopyMatrix(float *, float *);
-void func_802732D0_de(char *, float *);
+void GraphU64_GetMatrixTranslation(char *, float *);
 void BuildYawMatrix(void *, f32);
 void PitchMatrix(void *, f32);
 void YawMatrix(void *, f32);
@@ -158,11 +158,11 @@ actor_found:
         Weapon_UpdateShakeAxis(camera->unkE0);
     }
     viewOrientationMatrix = (s8 *)camera->viewOrient;
-    func_802732D0_de(viewOrientationMatrix, &camera->position.x);
-    func_8026EF58_de(camera->inverseViewOrient, (f32 *) viewOrientationMatrix);
+    GraphU64_GetMatrixTranslation(viewOrientationMatrix, &camera->position.x);
+    GraphU64_InvertAffineMatrix(camera->inverseViewOrient, (f32 *) viewOrientationMatrix);
     BuildYawMatrix(halfTurnMatrix, 3.1415927f);
     GraphU64_MultiplyAffineMatrices(composedViewMatrix, halfTurnMatrix, (f32 *) viewOrientationMatrix);
-    func_8026EF58_de(inverseRotatedView, composedViewMatrix);
+    GraphU64_InvertAffineMatrix(inverseRotatedView, composedViewMatrix);
     GraphU64_MultiplyAffineMatrices(worldToViewMatrix, inverseRotatedView, referenceViewMatrix);
     CopyMatrix(camera->worldToView, worldToViewMatrix);
     if ((cameraOwner != 0) && (cameraOwner->unk664 & 0x40) && (camera->unk24 == 0) && (Cinema_IsSequenceInWindow() == 0)) {
@@ -250,10 +250,10 @@ actor_found:
         }
     }
     func_802B6F9C_de(right, &camera->perspNorm, fovy, aspect, 16.0f, camera->farPlane, 1.0f - (temp_f24 * 0.95f));
-    func_80272CB0_de(horizontalFlipMatrix, -1.0f, 1.0f, 1.0f);
-    func_8026F898_de(composedViewMatrix, worldToViewMatrix, (f32 *) right);
+    GraphU64_BuildScaleMatrix(horizontalFlipMatrix, -1.0f, 1.0f, 1.0f);
+    GraphU64_MultiplyMatrices(composedViewMatrix, worldToViewMatrix, (f32 *) right);
     viewProjectionMatrix = (s8 *)camera->viewProjection;
-    func_8026F898_de((f32 *) viewProjectionMatrix, composedViewMatrix, horizontalFlipMatrix);
+    GraphU64_MultiplyMatrices((f32 *) viewProjectionMatrix, composedViewMatrix, horizontalFlipMatrix);
     GraphU64_ClampMatrixToFixedRange((f32 *) viewProjectionMatrix);
     func_8026FC9C_de((f32 *) viewProjectionMatrix, camera->projection[D_800D297C]);
     CopyMatrix(matrix, worldToViewMatrix);
@@ -315,9 +315,9 @@ actor_found:
     if (D_80140FF8.unk8 != 0) {
         func_802B6F9C_de(right, &camera->hudPerspNorm, 47.5f, (f32) ((s32) D_800E28D0 / D_800E28D4), 16.0f, 7168.0f, 1.0f);
         GraphU64_IdentityMatrix(worldToViewMatrix);
-        func_8026F898_de(composedViewMatrix, worldToViewMatrix, (f32 *) right);
-        func_80272CB0_de(horizontalFlipMatrix, -1.0f, 1.0f, 1.0f);
-        func_8026F898_de(hudProjectionMatrix, composedViewMatrix, horizontalFlipMatrix);
+        GraphU64_MultiplyMatrices(composedViewMatrix, worldToViewMatrix, (f32 *) right);
+        GraphU64_BuildScaleMatrix(horizontalFlipMatrix, -1.0f, 1.0f, 1.0f);
+        GraphU64_MultiplyMatrices(hudProjectionMatrix, composedViewMatrix, horizontalFlipMatrix);
         GraphU64_ClampMatrixToFixedRange(hudProjectionMatrix);
         func_8026FC9C_de(hudProjectionMatrix, camera->hudProjection[D_800D297C]);
     }

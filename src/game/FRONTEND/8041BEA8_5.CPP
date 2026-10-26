@@ -53,7 +53,7 @@ extern void MarkMenuEventHandled(void);
 
 extern void func_802A2360_de(void);
 
-extern s32 func_802A0C08_de(void *, const char *, ...);
+extern s32 XStdio_FormatBuffer(void *, const char *, ...);
 
 extern s32 Pak_FindNoteByName(s32, s32, s32 *);
 
@@ -271,9 +271,9 @@ void SmpOverlay_RefreshPakDialog(void) {
     }
     temp_s0 = func_8040EC30_de(D_800E3518->root, SLOT_RESOURCE_968);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    func_802A0C08_de(D_800E3518->text, D_800EDAD0, D_800DF4C0 + 1);
+    XStdio_FormatBuffer(D_800E3518->text, D_800EDAD0, D_800DF4C0 + 1);
 #else
-    func_802A0C08_de(D_800E3518->text, g_noteCountIntFormat, D_800DF4C0 + 1);
+    XStdio_FormatBuffer(D_800E3518->text, g_noteCountIntFormat, D_800DF4C0 + 1);
 #endif
     temp_s0->text = D_800E3518->text;
     D_800E3518->state = 3;

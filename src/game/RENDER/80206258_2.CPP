@@ -214,10 +214,10 @@ void Device_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802062
     }
 }
 
-/* Places a rider along its path for the frame: clamps the throttle to 0..1 (eased through Defs_CosineEase unless the segment is linear), offsets its base by the segment's rise and circle point, moves the rider there through func_80271FC8_de, adds a bob to its height (one wave or a sum of four detuned waves by the segment's bob mode), applies its shake offsets, turns the actor by the segment's yaw mode (interpolated, constant spin unless held, or constant spin) and, for free segments, snaps the actor to the ground through Region_GetPolygonHeight and func_802761EC_de. */
+/* Places a rider along its path for the frame: clamps the throttle to 0..1 (eased through Defs_CosineEase unless the segment is linear), offsets its base by the segment's rise and circle point, moves the rider there through GraphU64_InterpolateVector, adds a bob to its height (one wave or a sum of four detuned waves by the segment's bob mode), applies its shake offsets, turns the actor by the segment's yaw mode (interpolated, constant spin unless held, or constant spin) and, for free segments, snaps the actor to the ground through Region_GetPolygonHeight and func_802761EC_de. */
 
 
-extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
+extern void GraphU64_InterpolateVector(CVector3 *, f32, CVector3 *, CVector3 *);
 
 extern f32 Region_GetPolygonHeight(s32, f32, f32);
 
@@ -312,7 +312,7 @@ void func_80206DD4_de(Actor_func_80206DD4_de *actor, RiderCode80206258 *rider) {
         point.x += segment->radius * Math_Sinf(segment->angle);
         point.z += segment->radius * Math_Cosf(segment->angle);
     }
-    func_80271FC8_de(&rider->pos, t, base, &point);
+    GraphU64_InterpolateVector(&rider->pos, t, base, &point);
     switch (segment->bobMode) {
     case 0:
         rider->pos.y += segment->bob * Math_Sinf(rider->phase);

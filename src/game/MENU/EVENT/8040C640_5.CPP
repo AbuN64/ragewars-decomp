@@ -12,7 +12,7 @@
 #include "RENDER_2/8025DE50_5.H"
 extern struct CourseOptionsScreen *D_800E39C0;
 
-s32 func_8041DFC0_us(void *arg0) {
+s32 Frontend_CreateUsJoinOptionsMenu(void *arg0) {
     MenuWidget *item;
     s32 row;
 
@@ -59,11 +59,11 @@ s32 func_8041DFC0_us(void *arg0) {
 extern struct TextEntry D_800E381C[][17];
 extern void MarkMenuEventHandled(void);
 extern s32 func_802999A0_de(s32);
-extern s32 func_8041EC44_de(s32, s32);
+extern s32 Frontend_FindJoinModelIndex(s32, s32);
 extern void XPlus_CopyString(char *, char *);
 extern void func_8041E408_de(s32);
 
-s32 func_8041E170_us(void *sender, void *context, void *argument, s32 event) {
+s32 Frontend_SelectPreviousUsJoinModel(void *sender, void *context, void *argument, s32 event) {
     s32 variant;
     s32 model;
     s32 id;
@@ -72,7 +72,7 @@ s32 func_8041E170_us(void *sender, void *context, void *argument, s32 event) {
     MarkMenuEventHandled();
     if (func_802999A0_de(0) == 0x16) return 0;
     variant = D_80153F80[D_800E39C0->selection].variant;
-    model = func_8041EC44_de(variant, D_80153F80[D_800E39C0->selection].id);
+    model = Frontend_FindJoinModelIndex(variant, D_80153F80[D_800E39C0->selection].id);
     do {
         variant--;
         if (variant < 0) {
@@ -124,7 +124,7 @@ void func_8041E2F0_us(void) {
         "lui        $at, %hi(D_80153F80)\n"
         "addu       $at, $at, $v0\n"
         "lw         $a1, %lo(D_80153F80)($at)\n"
-        "jal        func_8041EC44_de\n"
+        "jal        Frontend_FindJoinModelIndex\n"
         "addu      $a0, $s0, $zero\n"
         "addu       $a2, $v0, $zero\n"
         "addiu      $t0, $zero, -0x1\n"

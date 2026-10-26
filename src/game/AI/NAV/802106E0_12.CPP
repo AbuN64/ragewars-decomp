@@ -20,7 +20,7 @@ extern char D_8013B364[];
 extern void Nav_RunBehaviorHandler(CloseAttackBrain *);
 extern s32 Nav_HasLineOfSight(CloseAttackBrain *, CloseAttackActor *);
 extern void Nav_SetBehaviourState(CloseAttackBrain *, s32);
-extern f32 func_802726BC_de(CVector3 *, CVector3 *);
+extern f32 GraphU64_GetSquaredDistance(CVector3 *, CVector3 *);
 extern f32 Nav_ScaleCharacterSettingByDifficulty(CloseAttackBrain *);
 extern f32 Nav_UpdateDifficultyAimJitter(CloseAttackBrain *);
 extern f32 Nav_SteerTowardPoint(CloseAttackBrain *, CVector3 *, f32, f32);
@@ -74,7 +74,7 @@ void Nav_UpdateCloseCombat(CloseAttackActor *actor) {
             }
             pos = &target->pos;
             Nav_SteerTowardPoint(brain, pos, 2.0f, Nav_UpdateDifficultyAimJitter(brain));
-            dist = func_802726BC_de(pos, &brain->player->pos);
+            dist = GraphU64_GetSquaredDistance(pos, &brain->player->pos);
             if (dist > 377487.3f) {
                 brain->combat = 5;
                 Nav_SetBehaviourState(brain, 6);

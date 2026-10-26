@@ -8,13 +8,13 @@
 #include "MENU/GFX/80414480_3.H"
 #include "SCENE/802508E0_13.H"
 
-/* Formats its arguments into the shared buffer D_8014D0D0 and writes the text to the stream through func_802A0F50_de in runs, emitting the one-byte D_800CAEF0 before every newline, returning the number of bytes written. */
+/* Formats its arguments into the shared buffer D_8014D0D0 and writes the text to the stream through XStdio_WriteStreamNoop in runs, emitting the one-byte D_800CAEF0 before every newline, returning the number of bytes written. */
 
 extern unsigned char D_8014D0D0;
 
 extern char D_800CAEF0;
 
-extern void func_802A0F50_de(const unsigned char *data, s32 size, s32 count, void *stream);
+extern void XStdio_WriteStreamNoop(const unsigned char *data, s32 size, s32 count, void *stream);
 
 /* Initializes and dispatches the resource on the first guarded call. */
 extern s32 D_800D2B84;
@@ -81,7 +81,7 @@ extern FuncPtr D_800CD928_de;
 extern ResourceReadCallback D_800CD92C_de;
 
 /** Pass the variadic tail address to the formatter and retain its result. */
-s32 func_802A0C08_de(void *goal, s32 arg1, ...) {
+s32 XStdio_FormatBuffer(void *goal, s32 arg1, ...) {
     s32 result;
     char *args;
 
@@ -91,7 +91,7 @@ s32 func_802A0C08_de(void *goal, s32 arg1, ...) {
     return result;
 }
 
-s32 func_802A0C38_de(void *stream, const char *format, ...) {
+s32 XStdio_PrintStream(void *stream, const char *format, ...) {
     unsigned char *run;
     unsigned char *p;
     s32 length;
@@ -105,17 +105,17 @@ s32 func_802A0C38_de(void *stream, const char *format, ...) {
     for (; *p != 0; p++, length++) {
         if (*p == '\n') {
             if (length > 0) {
-                func_802A0F50_de(run, 1, length, stream);
+                XStdio_WriteStreamNoop(run, 1, length, stream);
                 total += length;
                 length = 0;
                 run = p;
             }
-            func_802A0F50_de(&D_800CAEF0, 1, 1, stream);
+            XStdio_WriteStreamNoop(&D_800CAEF0, 1, 1, stream);
             total++;
         }
     }
     if (length > 0) {
-        func_802A0F50_de(run, 1, length, stream);
+        XStdio_WriteStreamNoop(run, 1, length, stream);
         total += length;
     }
     return total;
@@ -144,7 +144,7 @@ void XStdio_InitializeStreams(void) {
         write_resource_word(&D_800CD940_de.opened,0);
         D_800CD940_de.ready = one;
     }
-    func_802A1050_de(D_002A1158, (s32) &D_002A1188, D_002A1198, (s32) &D_002A11EC, D_002A11F4, (s32) &D_002A1220, (s32) &D_002A1230);
+    XStdio_SetStreamCallbacks(D_002A1158, (s32) &D_002A1188, D_002A1198, (s32) &D_002A11EC, D_002A11F4, (s32) &D_002A1220, (s32) &D_002A1230);
 }
 
 void XStdio_ShutdownStreams(void) {

@@ -13,7 +13,7 @@
 
 
 
-extern void func_802732D0_de(char *, f32 *);
+extern void GraphU64_GetMatrixTranslation(char *, f32 *);
 
 extern char D_8011D8D0;
 
@@ -67,7 +67,7 @@ void func_8022B11C_de(void *player, s32 increment) {
 void func_8022B144_de(void *player, f32 *origin) {
     MatrixF viewTransform;
     Player_BuildPlayerViewTransform(player, &viewTransform);
-    func_802732D0_de((char *)&viewTransform, origin);
+    GraphU64_GetMatrixTranslation((char *)&viewTransform, origin);
 }
 
 /** Report whether the word at offset 0x5E4 is zero. */

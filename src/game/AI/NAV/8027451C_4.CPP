@@ -11,7 +11,7 @@ extern s32 D_800CD3E8;
 extern void GraphU64_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 /* Returns the normalised cross product of a path node's two edge vectors, cached in D_80115E20 for the last node seen, with a default up vector for a null node.
-   Adapted from func_802750B0_de with the edge vectors computed through the GraphU64_SubtractVectors subtract helper, the cross product arguments in forward order, and the cache globals changed. */
+   Adapted from GraphU64_GetCachedSurfaceNormal with the edge vectors computed through the GraphU64_SubtractVectors subtract helper, the cross product arguments in forward order, and the cache globals changed. */
 
 
 

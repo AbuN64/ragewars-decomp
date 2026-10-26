@@ -245,5 +245,5 @@ extern f32 D_800C3680_de;
 extern f32 D_800C3684_de;
 extern f32 D_800C3688_de;
 extern f32 D_800C368C_de;
-extern CVector3 func_802723FC_de(CVector3 *,CVector3 *);
+extern CVector3 GraphU64_ProjectVectorPreservingLength(CVector3 *,CVector3 *);
 #endif

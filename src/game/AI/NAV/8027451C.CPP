@@ -75,11 +75,11 @@ static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
 }
 
 /** Perform the no-op callback at VRAM 0x8027451C. */
-void func_802744AC_de(void) {
+void GraphU64_ReturnWithoutWork(void) {
 }
 
 /** Store a fill pattern into two paired global words. */
-void func_802744B4_de(void) {
+void GraphU64_ResetRandomSeeds(void) {
     D_80111D24 = 0xE3F635E3;
     D_80111D28 = 0xE3F635E3;
 }
@@ -92,7 +92,7 @@ s32 GraphU64_NextRandom(void) {
     return ((seed << 0x10) | (seed >> 0x10)) & 0x7FFFFFFF;
 }
 
-s32 func_8027451C_de(void) {
+s32 GraphU64_NextRandomValue(void) {
     u32 seed;
 
     seed = (D_80111D28 * 0xA84A5B53) + 0x58348C2D;
@@ -116,37 +116,37 @@ f32 GraphU64_RandomFloat(f32 range) {
     return (f32)value * range * D_800C9A38;
 }
 
-f32 GraphU64_ArcCos(f32 arg0) {
-    f32 temp_f1;
-    f32 temp_f2;
-    f32 temp_f2_2;
-    s32 temp_f4;
-    s32 var_v1;
+f32 GraphU64_ArcCos(f32 cosineValue) {
+    f32 tableCoordinate;
+    f32 interpolatedAngle;
+    f32 lowerSample;
+    s32 sampleIndex;
+    s32 negativeInput;
 
-    var_v1 = 1;
-    if (arg0 < 0.0f) {
-        temp_f1 = arg0 * D_800C494C_de;
+    negativeInput = 1;
+    if (cosineValue < 0.0f) {
+        tableCoordinate = cosineValue * D_800C494C_de;
     } else {
-        temp_f1 = arg0 * D_800C4950_de;
-        var_v1 = 0;
+        tableCoordinate = cosineValue * D_800C4950_de;
+        negativeInput = 0;
     }
-    temp_f4 = (s32) temp_f1;
-    if ((f32) temp_f4 < D_800C4954_de) {
-        temp_f2_2 = D_800CC3DC[temp_f4];
-        temp_f2 = temp_f2_2 + ((temp_f1 - (f32) temp_f4) * (D_800CC3E0[temp_f4] - temp_f2_2));
-        if (var_v1 != 0) {
-            return D_800C4958_de - temp_f2;
+    sampleIndex = (s32) tableCoordinate;
+    if ((f32) sampleIndex < D_800C4954_de) {
+        lowerSample = D_800CC3DC[sampleIndex];
+        interpolatedAngle = lowerSample + ((tableCoordinate - (f32) sampleIndex) * (D_800CC3E0[sampleIndex] - lowerSample));
+        if (negativeInput != 0) {
+            return D_800C4958_de - interpolatedAngle;
         }
-        return temp_f2;
+        return interpolatedAngle;
     }
-    if (var_v1 != 0) {
-        temp_f1 = D_800CD3D8;
-        return D_800C495C_de - temp_f1;
+    if (negativeInput != 0) {
+        tableCoordinate = D_800CD3D8;
+        return D_800C495C_de - tableCoordinate;
     }
     return D_800CD3D8;
 }
 
-f32 func_802746A0_de(f32 value, f32 velocity, f32 limit) {
+f32 GraphU64_IntegrateBoundedValue(f32 value, f32 velocity, f32 limit) {
     if (velocity < 0.0f) {
         if (value <= -limit) {
             return value;
@@ -229,7 +229,7 @@ void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate) {
     }
 }
 
-s32 func_802748F4_de(s32 arg0, s32 arg1, s32 arg2)
+s32 GraphU64_IntegrateBoundedInteger(s32 arg0, s32 arg1, s32 arg2)
 {
   f32 temp_f1;
   s32 var_a0;
@@ -262,7 +262,7 @@ s32 func_802748F4_de(s32 arg0, s32 arg1, s32 arg2)
   }
 }
 
-f32 func_80274944_de(f32 arg0)
+f32 GraphU64_NegateWrappedValue(f32 arg0)
 {
   unsigned char new_var;
   f32 val;
@@ -287,7 +287,7 @@ f32 func_80274944_de(f32 arg0)
   return -val;
 }
 
-f32 func_802749B4_de(f32 angleA, f32 angleB) {
+f32 GraphU64_GetNegatedWrappedDifference(f32 angleA, f32 angleB) {
     f32 difference;
     f32 wrappedB;
 
@@ -316,7 +316,7 @@ f32 func_802749B4_de(f32 angleA, f32 angleB) {
     return -difference;
 }
 
-f32 GraphU64_RandomBetween(f32 shakeMin, f32 arg1) {
+f32 GraphU64_RandomBetween(f32 shakeMin, f32 shakeMax) {
     f32 blend;
     u32 seed;
     s32 randomValue;
@@ -326,10 +326,10 @@ f32 GraphU64_RandomBetween(f32 shakeMin, f32 arg1) {
     randomValue = randomValue % 10000;
     blend = (f32)randomValue * D_800C4998_de;
     D_80111D24 = seed;
-    return (blend * shakeMin) + ((D_800C499C_de - blend) * arg1);
+    return (blend * shakeMin) + ((D_800C499C_de - blend) * shakeMax);
 }
 
-s32 func_80274B44_de(f32 *arg0)
+s32 GraphU64_UpdateCountdown(f32 *arg0)
 {
   f32 *new_var2;
   float new_var3;
@@ -358,7 +358,7 @@ s32 func_80274B44_de(f32 *arg0)
 }
 
 /** Copy two 3-vectors, then derive an edge vector, its z-component twice, and a negated x. */
-void func_80274B7C_de(void *geometryEdge, void *arg1, void *arg2) {
+void GraphU64_InitializeEdge(void *geometryEdge, void *arg1, void *arg2) {
     GeometryEdge *dst = geometryEdge;
     CVector3 *a = arg1;
     CVector3 *b = arg2;
@@ -375,7 +375,7 @@ void func_80274B7C_de(void *geometryEdge, void *arg1, void *arg2) {
     dst->normal.x = zdiff;
 }
 
-void func_80274BF4_de(void *arg0)
+void GraphU64_NormalizeEdgeHorizontal(void *arg0)
 {
     ObjRecAt2CV1 *o = arg0;
     f32 magSq;
@@ -398,7 +398,7 @@ void func_80274BF4_de(void *arg0)
     o->unk2C = zOut;
 }
 
-void func_80274C7C_de(void *arg0)
+void GraphU64_NormalizeEdgeDirection(void *arg0)
 {
     ObjRecAt2CV1 *o = arg0;
     f32 magSq;
@@ -422,7 +422,7 @@ void func_80274C7C_de(void *arg0)
     o->unk2C = zOut;
 }
 
-s32 func_80274D10_de(f32 *arg0, f32 *arg1, f32 *arg2) {
+s32 GraphU64_GetHorizontalIntersectionParameter(f32 *arg0, f32 *arg1, f32 *arg2) {
     CVector3 delta;
     f32 temp_f3;
     s32 result;
@@ -439,7 +439,7 @@ s32 func_80274D10_de(f32 *arg0, f32 *arg1, f32 *arg2) {
 }
 
 /** Half-plane test: is arg1 on the positive side of arg0's normal (at +0x30)? */
-s32 func_80274D8C_de(void *geometryEdge, void *arg1) {
+s32 GraphU64_IsPointOnPositiveEdgeSide(void *geometryEdge, void *arg1) {
     GeometryEdge *edge = geometryEdge;
     CVector3 *point = arg1;
     CVector3 normal;
@@ -456,7 +456,7 @@ s32 func_80274D8C_de(void *geometryEdge, void *arg1) {
     return result;
 }
 
-void func_80274DFC_de(float mf[4][4], float xEye, float yEye, float zEye,
+void GraphU64_BuildLookAtMatrix(float mf[4][4], float xEye, float yEye, float zEye,
                    float xAt, float yAt, float zAt,
                    float xUp, float yUp, float zUp)
 {
@@ -514,7 +514,7 @@ void func_80274DFC_de(float mf[4][4], float xEye, float yEye, float zEye,
     mf[3][3] = one;
 }
 
-CVector3 *func_802750B0_de(CVector3 *out, Node75 *node) {
+CVector3 *GraphU64_GetCachedSurfaceNormal(CVector3 *out, Node75 *node) {
     if (node == 0) {
         ((CVector3 *)&D_80115E00)->x = 0;
         ((CVector3 *)&D_80115E00)->z = 0;

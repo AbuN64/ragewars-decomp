@@ -125,7 +125,7 @@ extern void SetN64_ClearDepthRect(void *arg0, s32 arg1, s32 arg2, s32 arg3,
 extern void TranslateMatrix(char *object, f32 x, f32 y, f32 z);
 extern void SwapMatrixUpForward(void *object);
 extern void CopyMatrix(f32 *arg0, f32 *arg1);
-extern void func_802735A8_de(void *arg0, s32 arg1, f32 arg2, f32 arg3);
+extern void GraphU64_ScaleMatrixWorld(void *arg0, s32 arg1, f32 arg2, f32 arg3);
 extern void GraphU64_ConvertMatrixToFixed(void *arg0, void *arg1);
 extern void Geometry_QueueDirectModel(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
@@ -166,7 +166,7 @@ void func_80219490_de(char *object, char *camera) {
     w = ((GameplayCamera *)(camera))->viewWidth + x;
     SetN64_ClearDepthRect(&D_8011FAC0, (s32)x, (s32)w, (s32)y, (s32)z, 0);
 
-    func_80272CB0_de(first, ((AnimationSprite *)(object))->scaleX,
+    GraphU64_BuildScaleMatrix(first, ((AnimationSprite *)(object))->scaleX,
                    ((AnimationSprite *)(object))->scaleY, ((AnimationSprite *)(object))->scaleZ);
     YawMatrix(first, ((AnimationSprite *)(object))->yaw);
     PitchMatrix(first, ((AnimationSprite *)(object))->pitch);
@@ -177,7 +177,7 @@ void func_80219490_de(char *object, char *camera) {
     matrix = (char *)second;
     CopyMatrix(second, first);
     if (D_800E28D8 == 2) {
-        func_802735A8_de(matrix, D_800C94E8_de, D_800C22D0_de, D_800C22D0_de);
+        GraphU64_ScaleMatrixWorld(matrix, D_800C94E8_de, D_800C22D0_de, D_800C22D0_de);
     }
     {
         s32 offset = (D_800D297C << 6) + 0x10;

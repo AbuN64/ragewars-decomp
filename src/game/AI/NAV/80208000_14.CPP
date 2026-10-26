@@ -7,7 +7,7 @@
 #include "TYPES.H"
 #include "FX_2/80271B18.H"
 
-/* Records the next stage of a selection: finds the kind-6 link from the selection's node in the route D_8013B364 (stopping at the stage number at 0x1BC), stores its two node ids in that stage's entry, measures the distance from the selection's own node through func_8020C994_de and func_802726BC_de, multiplies the unit directions from each attached object to the stage's node (func_8027207C_de) into a facing term, and stores the distance scaled by that term (made positive for a single object) before advancing the stage count. Returns zero. */
+/* Records the next stage of a selection: finds the kind-6 link from the selection's node in the route D_8013B364 (stopping at the stage number at 0x1BC), stores its two node ids in that stage's entry, measures the distance from the selection's own node through func_8020C994_de and GraphU64_GetSquaredDistance, multiplies the unit directions from each attached object to the stage's node (func_8027207C_de) into a facing term, and stores the distance scaled by that term (made positive for a single object) before advancing the stage count. Returns zero. */
 
 
 
@@ -23,7 +23,7 @@
 
 extern Link *Nav_GetStridedTableEntry(PickupGoalNodeList *, s32);
 extern CVector3 *Nav_GetGraphPoint(PickupGoalNodeList *, s32);
-extern f32 func_802726BC_de(CVector3 *, CVector3 *);
+extern f32 GraphU64_GetSquaredDistance(CVector3 *, CVector3 *);
 
 s32 Nav_AppendDirectionalRouteStage(SelectionNavAppendDirectionalRouteStage *sel) {
     CVector3 facing;
@@ -51,7 +51,7 @@ s32 Nav_AppendDirectionalRouteStage(SelectionNavAppendDirectionalRouteStage *sel
             stage++;
         }
     }
-    distance = func_802726BC_de(node, Nav_GetGraphPoint(route, sel->node));
+    distance = GraphU64_GetSquaredDistance(node, Nav_GetGraphPoint(route, sel->node));
     facing.x = facing.y = facing.z = 1.0f;
     for (i = 0; i < sel->objectCount; i++) {
         if (sel->objects[i] == 0) {

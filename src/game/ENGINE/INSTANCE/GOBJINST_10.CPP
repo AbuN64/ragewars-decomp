@@ -187,5 +187,5 @@ void func_8024B4F4_de(void *actorStorage, int model) {
     Actor36 *actor = actorStorage;
     func_8024B4E4_de_FuncPtr fn = actor->update;
     fn(actorStorage, actor->state);
-    func_8026EE20_de(actor->matrix, model, &actor->box);
+    GraphU64_TransformBoundingBox(actor->matrix, model, &actor->box);
 }

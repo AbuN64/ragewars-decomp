@@ -226,7 +226,7 @@ extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
 
 
-void Scene_SetCurrentSecondaryLevelBit(struct Shared_World *world, s32 arg1, s32 arg2) {
+void Scene_SetCurrentSecondaryLevelBit(struct Shared_World *world, s32 arg1, s32 enabled) {
     void *field84;
     s32 field1B40C;
     void *table;
@@ -244,7 +244,7 @@ void Scene_SetCurrentSecondaryLevelBit(struct Shared_World *world, s32 arg1, s32
     base1 = (u8 *) SetN64_GetPackSection(table, 1);
     base2 = base1;
     mask = 1 << (arg1 & 7);
-    if (arg2 != 0) {
+    if (enabled != 0) {
         idx = arg1;
         if (arg1 < 0) {
             idx = arg1 + 7;
@@ -264,11 +264,11 @@ extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
 
 
-s32 Scene_TestCurrentSecondaryLevelBit(struct Shared_World *world, s32 arg1) {
+s32 Scene_TestCurrentSecondaryLevelBit(struct Shared_World *world, s32 bitIndex) {
     void *field84;
     s32 field1B40C;
     void *table;
-    u8 *temp_a0;
+    u8 *stateBits;
     s32 mask;
     s32 i;
 
@@ -277,11 +277,11 @@ s32 Scene_TestCurrentSecondaryLevelBit(struct Shared_World *world, s32 arg1) {
     table = SetN64_GetPackSection(SetN64_GetPackSection(SetN64_GetPackSection(field84, 0), field1B40C), 0);
     SetN64_GetPackSection(table, 0);
     func_8028FDF8_de((s32) table, 1);
-    temp_a0 = (u8 *) SetN64_GetPackSection(table, 1);
-    mask = 1 << (arg1 & 7);
-    i = arg1;
+    stateBits = (u8 *) SetN64_GetPackSection(table, 1);
+    mask = 1 << (bitIndex & 7);
+    i = bitIndex;
     if (i < 0) {
         i += 7;
     }
-    return (temp_a0[i >> 3] & mask) != 0;
+    return (stateBits[i >> 3] & mask) != 0;
 }

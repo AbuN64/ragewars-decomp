@@ -11,7 +11,7 @@
 void *Nav_GetStridedTableEntry(struct EntryList8020CCE8 *object, int index);
 extern void *Nav_GetGraphPoint(void *, s32);
 #include "AI/ROUTE_RELATION_GRID.H"
-extern f32 func_802726BC_de(f32 *, f32 *);
+extern f32 GraphU64_GetSquaredDistance(f32 *, f32 *);
 
 /* Choose the farthest reachable neighbor linked by kinds 1, 2 or 7
  * from the actor that this state is following. */
@@ -48,7 +48,7 @@ void Nav_SelectFarthestReachableNeighbor(AiController *object)
         if ((link->type >= 1 && link->type <= 2) || link->type == 7) {
             point = Nav_GetGraphPoint(graph, neighbors[i]);
             if (Nav_GetRouteRelation(graph, actor_node, neighbors[i])) {
-                distance = func_802726BC_de(&position.x, point);
+                distance = GraphU64_GetSquaredDistance(&position.x, point);
                 if (farthest < distance) {
                     farthest = distance;
                     best = i;

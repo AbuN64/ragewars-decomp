@@ -17,7 +17,7 @@
 
 
 
-extern Player_func_8041EAC4_de g_playerSettings[];
+extern PlayerFrontendCountOpenPlayerSlots g_playerSettings[];
 
 /* Counts how many of the three 28-byte entries of D_80153F80 hold a non-negative first word. */
 
@@ -91,7 +91,7 @@ extern void MarkMenuEventHandled(void),func_8041E408_de(s32);
 extern struct CourseOptionsScreen *D_800E39C0;
 extern MenuWidget *func_8040EC30_de(void *, s32);
 
-void func_8041EA70_de(void) {
+void Frontend_ResetJoinRequestEntries(void) {
     s32 i;
 
     for (i = 0; i < 3; i++) {
@@ -102,11 +102,11 @@ void func_8041EA70_de(void) {
     }
 }
 
-s32 func_8041EAC4_de(void) {
+s32 Frontend_CountOpenPlayerSlots(void) {
     s32 count;
     s32 i;
     s32 result;
-    Player_func_8041EAC4_de *player;
+    PlayerFrontendCountOpenPlayerSlots *player;
 
     count = 0;
     player = g_playerSettings;
@@ -142,7 +142,7 @@ s32 Frontend_CountUsedSlots(void) {
     return count;
 }
 
-s32 func_8041EB88_de(s32 column, s32 row) {
+s32 Frontend_GetJoinRankThreshold(s32 column, s32 row) {
     s32 previous = column - 1;
 
     if (column <= 0) {
@@ -151,7 +151,7 @@ s32 func_8041EB88_de(s32 column, s32 row) {
     return D_800E37B8[row * 5 + previous];
 }
 
-s32 func_8041EBBC_de(void) {
+s32 Frontend_ScoreJoinRequestEntries(void) {
     s32 score;
     s32 points;
     s32 i;
@@ -177,7 +177,7 @@ s32 func_8041EBBC_de(void) {
     return score;
 }
 
-s32 func_8041EC44_de(s32 row, s32 id) {
+s32 Frontend_FindJoinModelIndex(s32 row, s32 id) {
     s32 i;
 
     for (i = 0; i < 0x11; i++) {
@@ -188,13 +188,13 @@ s32 func_8041EC44_de(s32 row, s32 id) {
     return 0;
 }
 
-s32 func_8041EC84_de(void) {
+s32 Frontend_DestroyJoinOptionsMenu(void) {
     Cache_FreeMemory(D_800E39C0);
     D_800E39C0 = 0;
     return 0;
 }
 
-s32 func_8041ECB4_de(void *unused0, void *unused1, s32 delta) {
+s32 Frontend_PulseJoinSelectionHighlight(void *unused0, void *unused1, s32 delta) {
     MenuWidget *node;
     D_800E39C0->timer += delta;
 #if defined(VERSION_DE)
@@ -208,21 +208,21 @@ s32 func_8041ECB4_de(void *unused0, void *unused1, s32 delta) {
     return 0;
 }
 
-s32 func_8041ED78_de(void) {
+s32 Frontend_RequestJoinOptionsExit(void) {
     MarkMenuEventHandled();
     func_8042E988_de(func_802999A0_de(0) == 0x16 ? -1 : 0x15);
     func_802998A8_de();
     return 0;
 }
 
-s32 func_8041EDC0_de(void) {
+s32 Frontend_RequestJoinOptionsExitAlternate(void) {
     MarkMenuEventHandled();
     func_8042E988_de(func_802999A0_de(0) == 0x16 ? -1 : 0x15);
     func_802998A8_de();
     return 0;
 }
 
-s32 func_8041EE08_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
+s32 Frontend_SelectPreviousJoinRow(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
     s32 prevSelection;
     s32 idx;
     MenuWidget *oldItem;
@@ -261,7 +261,7 @@ s32 func_8041EE08_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
     return 0;
 }
 
-s32 func_8041EED0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 Frontend_SelectNextJoinRow(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 nextSelection;
     s32 temp_v0_2;
     s32 rowCount;
@@ -287,7 +287,7 @@ s32 func_8041EED0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return 0;
 }
 
-s32 func_8041EFAC_de(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
+s32 Frontend_CycleJoinRequestRank(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
     s32 temp_a1;
     s32 selectedRow;
     u32 temp_a2;
@@ -358,7 +358,7 @@ unsigned int rodata_unresolved_800DD544[1] = {
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 extern ResidentEventHandlerEntry D_800EB1A4[];
 
-s32 func_8041F55C_eu_x(MenuWidget *object, s32 event, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_DispatchJoinOptionsEvent(MenuWidget *object, s32 event, s32 arg2, s32 arg3, s32 arg4) {
     s32 i = 0;
     while (D_800EB1A4[i].handler != 0) {
         if (D_800EB1A4[i].event == event &&

@@ -4,7 +4,7 @@
 #include "FRONTEND/8041DF04_8.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 
-void func_8041E81C_de(s32 count, s32 level) {
+void Frontend_RandomizeJoinRequestEntries(s32 count, s32 level) {
     Shared_Game *game;
     char *name;
     s32 points[3];
@@ -93,7 +93,7 @@ extern Reward D_80153F80[];
 extern s32 GraphU64_NextRandom(void);
 extern void XPlus_CopyString(char *dst, char *src);
 
-void func_8041E81C_de(s32 count, s32 level) {
+void Frontend_RandomizeJoinRequestEntries(s32 count, s32 level) {
     s32 points[3];
     s32 *p;
     s32 budget;

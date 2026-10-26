@@ -115,8 +115,8 @@ void func_80226548_de(void *player, void *body) {
                     *D_80103FCC == aimTarget) {
                     GraphU64_SubtractVectors(&toTarget, &((Shared_ActorView *)aimTarget)->position.vector, (CVector3 *)position);
                     targetAngle = GraphU64_GetHorizontalAngle(&toTarget);
-                    func_80274020_de(&targetAngle);
-                    func_80274020_de(&((LevelActor *)body)->yaw);
+                    GraphU64_WrapPeriodicValue(&targetAngle);
+                    GraphU64_WrapPeriodicValue(&((LevelActor *)body)->yaw);
                     comparisonAngle = ((LevelActor *)body)->yaw;
                     if (D_800C2B50_de < comparisonAngle) {
                         if (targetAngle < D_800C2B54_de) {

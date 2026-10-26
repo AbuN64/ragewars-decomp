@@ -10,7 +10,7 @@
 #include "RENDER_4/8028FD2C_6.H"
 
 
-extern f32 func_80273EE4_de(f32, f32, f32);
+extern f32 GraphU64_InterpolateWrappedValue(f32, f32, f32);
 
 extern s32 SetN64_LocatePackSection(s32 arg0, s32 arg1, s32 arg2, s32 *arg3);
 
@@ -38,7 +38,7 @@ void func_802625F0_de(AnimRef *animationState, f32 framePosition) {
     }
     b_term = (f32) base[currentAngleFrame] * D_800C4258_de;
     e_term = (f32) base[nextAngleFrame] * D_800C4258_de;
-    func_80273EE4_de(framePosition - (f32) currentAngleFrame, b_term, e_term);
+    GraphU64_InterpolateWrappedValue(framePosition - (f32) currentAngleFrame, b_term, e_term);
 }
 
 s32 func_8026269C_de(void *animationState, s32 resourceTable, s32 resourceGroup, s32 animationId) {

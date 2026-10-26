@@ -36,7 +36,7 @@ static inline void set_mode(s32 *var_s0) {
         D_800E28D4 = (s32) var_s0[1];
         Frontend_SetVideoModeAndViewports(var_s0[0], var_s0[1], var_s0[2], var_s0[3], var_s0[4], var_s0[5]);
 }
-void func_8040BBB0_de(void) {
+void Frontend_ApplyVideoMode(void) {
     char *var_v0;
     s32 var_a0;
     s32 temp_v0;

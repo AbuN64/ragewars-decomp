@@ -20,7 +20,7 @@ static __inline__ CVector3 project(CVector3 *arg0, CVector3 *arg1) {
 
 extern f32 Math_Sqrtf(f32 arg0);
 
-CVector3 func_802723FC_de(CVector3 *remaining, CVector3 *arg1) {
+CVector3 GraphU64_ProjectVectorPreservingLength(CVector3 *remaining, CVector3 *arg1) {
     CVector3 projected;
     f32 projectedMagnitude;
     f32 magnitudeRatio;
@@ -43,27 +43,27 @@ CVector3 func_802723FC_de(CVector3 *remaining, CVector3 *arg1) {
     return projected;
 }
 
-s32 GraphU64_LimitVectorLength(f32 *arg0, f32 arg1) {
+s32 GraphU64_LimitVectorLength(f32 *vectorComponents, f32 maximumLength) {
     f32 magSq;
     f32 mag;
     f32 scale;
 
-    magSq = (arg0[0] * arg0[0]) + (arg0[1] * arg0[1]) + (arg0[2] * arg0[2]);
-    if ((arg1 * arg1) < magSq) {
+    magSq = (vectorComponents[0] * vectorComponents[0]) + (vectorComponents[1] * vectorComponents[1]) + (vectorComponents[2] * vectorComponents[2]);
+    if ((maximumLength * maximumLength) < magSq) {
         mag = Math_Sqrtf(magSq);
         if (mag == 0.0f) {
             return 0;
         }
-        scale = arg1 / mag;
-        arg0[0] = arg0[0] * scale;
-        arg0[1] = arg0[1] * scale;
-        arg0[2] = arg0[2] * scale;
+        scale = maximumLength / mag;
+        vectorComponents[0] = vectorComponents[0] * scale;
+        vectorComponents[1] = vectorComponents[1] * scale;
+        vectorComponents[2] = vectorComponents[2] * scale;
         return 1;
     }
     return 0;
 }
 
-void func_802725F4_de(void) {
+void GraphU64_NoOperation(void) {
 }
 
 f32 GraphU64_GetVerticalAngle(f32 *delta) {
@@ -98,7 +98,7 @@ return_zero:
     return zero;
 }
 
-f32 func_802726BC_de(f32 *a, f32 *b) {
+f32 GraphU64_GetSquaredDistance(f32 *a, f32 *b) {
     f32 dx = a[0] - b[0];
     f32 dy = a[1] - b[1];
     f32 dz = a[2] - b[2];
@@ -112,7 +112,7 @@ f32 GraphU64_GetPointDistance(f32 *a, f32 *b) {
     return Math_Sqrtf((dx * dx) + (dy * dy) + (dz * dz));
 }
 
-void func_80272748_de(CVector3 *motion, f32 arg1) {
+void GraphU64_ClampMotionLength(CVector3 *motion, f32 arg1) {
     f32 magSq;
     f32 mag;
     f32 scale;
@@ -128,8 +128,8 @@ void func_80272748_de(CVector3 *motion, f32 arg1) {
 }
 
 /** Reset the matrix to identity-diagonal * D_800C99B0, zeroing the rest. */
-void GraphU64_IdentityMatrix(void *arg0) {
-    Matrix *matrix = arg0;
+void GraphU64_IdentityMatrix(void *matrixStorage) {
+    Matrix *matrix = matrixStorage;
     f32 zero = 0.0f;
 
     matrix->m[15] = D_800C99B0;
@@ -150,10 +150,10 @@ void GraphU64_IdentityMatrix(void *arg0) {
     matrix->m[1] = zero;
 }
 
-void GraphU64_ClampMatrixToFixedRange(f32 *arg0) {
-    f32 *var_a0;
-    f32 *var_v1;
-    f32 temp_f0;
+void GraphU64_ClampMatrixToFixedRange(f32 *matrixComponents) {
+    f32 *rowCursor;
+    f32 *elementCursor;
+    f32 elementValue;
     s32 i;
     s32 j;
     f32 maxVal;
@@ -161,30 +161,30 @@ void GraphU64_ClampMatrixToFixedRange(f32 *arg0) {
 
     maxVal = *(&D_800C99B0 + 1);
     minVal = D_800C48C8_de;
-    var_a0 = arg0;
+    rowCursor = matrixComponents;
     j = 0;
     do {
         i = 0;
-        var_v1 = var_a0;
+        elementCursor = rowCursor;
         do {
-            temp_f0 = *var_v1;
-            if (maxVal < temp_f0) {
-                *var_v1 = maxVal;
-            } else if (temp_f0 < minVal) {
-                *var_v1 = minVal;
+            elementValue = *elementCursor;
+            if (maxVal < elementValue) {
+                *elementCursor = maxVal;
+            } else if (elementValue < minVal) {
+                *elementCursor = minVal;
             }
             i += 1;
-            var_v1 += 1;
+            elementCursor += 1;
         } while (i < 4);
         j += 1;
-        var_a0 += 4;
+        rowCursor += 4;
     } while (j < 4);
 }
 
-void GraphU64_TransformPoint(void *matrix, void *arg1, void *arg2) {
+void GraphU64_TransformPoint(void *matrix, void *inputPoint, void *transformedPoint) {
     Matrix *m = matrix;
-    CVector3 *v = arg1;
-    CVector3 *out = arg2;
+    CVector3 *v = inputPoint;
+    CVector3 *out = transformedPoint;
 
     out->x = (m->m[0] * v->x)
            + (m->m[4] * v->y)
@@ -201,7 +201,7 @@ void GraphU64_TransformPoint(void *matrix, void *arg1, void *arg2) {
 }
 
 /* Transforms a count of points by the affine part of a 4x4 matrix, writing each transformed point to an output array. Adapted from XMath_TransformPointArray with the input and output arguments swapped and the indexed loop replaced by a loop counting down an unsigned count while advancing an input and an output pointer. */
-void func_80272944_de(f32 *m, f32 *in, f32 *out, u32 count) {
+void GraphU64_TransformPoints(f32 *m, f32 *in, f32 *out, u32 count) {
     f32 vx, vy, vz;
 
     while (count-- != 0) {
@@ -216,9 +216,9 @@ void func_80272944_de(f32 *m, f32 *in, f32 *out, u32 count) {
     }
 }
 
-void GraphU64_ProjectPoint(void *matrix, void *arg1, CVector3 *localDirection) {
+void GraphU64_ProjectPoint(void *matrix, void *inputPoint, CVector3 *localDirection) {
     Matrix *m = matrix;
-    CVector3 *v = arg1;
+    CVector3 *v = inputPoint;
     f32 w;
     f32 scale;
 
@@ -246,10 +246,10 @@ void GraphU64_ProjectPoint(void *matrix, void *arg1, CVector3 *localDirection) {
     }
 }
 
-void GraphU64_TransformDirection(void *matrix, void *arg1, void *arg2) {
+void GraphU64_TransformDirection(void *matrix, void *inputDirection, void *transformedDirection) {
     Matrix *m = matrix;
-    CVector3 *v = arg1;
-    CVector3 *out = arg2;
+    CVector3 *v = inputDirection;
+    CVector3 *out = transformedDirection;
 
     out->x = (m->m[0] * v->x)
                        + (m->m[4] * v->y)
@@ -262,7 +262,7 @@ void GraphU64_TransformDirection(void *matrix, void *arg1, void *arg2) {
                        + (m->m[10] * v->z);
 }
 
-void func_80272BCC_de(void *matrix, void *arg1, void *arg2) {
+void GraphU64_TransformDirectionTranspose(void *matrix, void *arg1, void *arg2) {
     Matrix *m = matrix;
     CVector3 *v = arg1;
     CVector3 *out = arg2;
@@ -278,14 +278,14 @@ void func_80272BCC_de(void *matrix, void *arg1, void *arg2) {
                        + (m->m[10] * v->z);
 }
 
-void GraphU64_BuildTranslationMatrix(void *matrix, f32 arg1, f32 arg2, f32 arg3) {
+void GraphU64_BuildTranslationMatrix(void *matrix, f32 translationX, f32 translationY, f32 translationZ) {
     Matrix *o = matrix;
     f32 val = D_800C48D0_de;
     f32 zero = 0.0f;
 
-    o->m[12] = arg1;
-    o->m[13] = arg2;
-    o->m[14] = arg3;
+    o->m[12] = translationX;
+    o->m[13] = translationY;
+    o->m[14] = translationZ;
     o->m[15] = val;
     o->m[10] = val;
     o->m[5] = val;
@@ -301,7 +301,7 @@ void GraphU64_BuildTranslationMatrix(void *matrix, f32 arg1, f32 arg2, f32 arg3)
     o->m[1] = zero;
 }
 
-void func_80272CB0_de(void *matrix, f32 arg1, f32 arg2, f32 arg3) {
+void GraphU64_BuildScaleMatrix(void *matrix, f32 arg1, f32 arg2, f32 arg3) {
     Matrix *o = matrix;
     f32 val = *(&D_800C48D0_de + 1);
     f32 zero = 0.0f;
@@ -324,7 +324,7 @@ void func_80272CB0_de(void *matrix, f32 arg1, f32 arg2, f32 arg3) {
     o->m[1] = zero;
 }
 
-void func_80272D00_de(f32 (*mfThis)[4], f32 Theta, f32 X, f32 Y, f32 Z) {
+void GraphU64_BuildAxisAngleMatrix(f32 (*mfThis)[4], f32 Theta, f32 X, f32 Y, f32 Z) {
     f32 sine;
     f32 cosine;
     f32 ab, bc, ca, t, one;
@@ -392,7 +392,7 @@ void GraphU64_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z)
 }
 
 /** Trivial busy-wait delay loop (no side effects). */
-void func_80272FA4_de(void) {
+void GraphU64_RunCountdown(void) {
     s32 count;
 
     count = 3;

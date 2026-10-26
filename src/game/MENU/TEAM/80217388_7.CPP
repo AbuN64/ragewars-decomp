@@ -79,8 +79,8 @@ f32 func_802184C0_de(f32 currentAngle, f32 targetAngle, s32 turnDirection, f32 a
     f32 f2;
     f32 f3;
 
-    func_80274020_de(&currentAngle);
-    func_80274020_de(&targetAngle);
+    GraphU64_WrapPeriodicValue(&currentAngle);
+    GraphU64_WrapPeriodicValue(&targetAngle);
     if (turnDirection > 0) {
         if (targetAngle < currentAngle) {
             targetAngle += D_800C2250_de;

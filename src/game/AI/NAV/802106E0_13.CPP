@@ -19,7 +19,7 @@ extern char D_8013B364[];
 extern void Nav_RunBehaviorHandler(BrainNavUpdateVisiblePursuit *);
 extern s32 Nav_HasLineOfSight(BrainNavUpdateVisiblePursuit *, Self *);
 extern void Nav_SetBehaviourState(BrainNavUpdateVisiblePursuit *, s32);
-extern f32 func_802726BC_de(CVector3 *, CVector3 *);
+extern f32 GraphU64_GetSquaredDistance(CVector3 *, CVector3 *);
 extern f32 Nav_ScaleCharacterSettingByDifficulty(BrainNavUpdateVisiblePursuit *);
 extern f32 Nav_UpdateDifficultyAimJitter(BrainNavUpdateVisiblePursuit *);
 extern f32 Nav_SteerTowardPoint(BrainNavUpdateVisiblePursuit *, CVector3 *, f32, f32);
@@ -58,7 +58,7 @@ void Nav_UpdateVisiblePursuit(Self *actor) {
     }
     node = target->brain->route;
     if (brain->visible != 0) {
-        if (func_802726BC_de(&target->pos, &brain->player->pos) < 360000.0f) {
+        if (GraphU64_GetSquaredDistance(&target->pos, &brain->player->pos) < 360000.0f) {
             brain->combat = 13;
             Nav_SetBehaviourState(brain, 7);
             return;

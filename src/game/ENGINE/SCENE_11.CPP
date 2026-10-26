@@ -415,19 +415,19 @@ ActorRecAt1D8V1 *Scene_ResolveActorLinkGroup(ObjCode8028B64C *obj, int id) {
     return found;
 }
 
-void Scene_ClearActorLinksById(void *arg0, s32 arg1) {
+void Scene_ClearActorLinksById(void *scene, s32 linkId) {
     s32 count;
     s32 i;
     void **arr;
     void *entry;
 
     i = 0;
-    count = ((SceneRecAt10C0 *)((arg0)))->count;
-    arr = &((SceneRecAt10C0 *)((arg0)))->objects[0];
+    count = ((SceneRecAt10C0 *)((scene)))->count;
+    arr = &((SceneRecAt10C0 *)((scene)))->objects[0];
     if (count > 0) {
         do {
             entry = *arr;
-            if (((ActorRecAt1D8V1 *)((entry)))->link == arg1) {
+            if (((ActorRecAt1D8V1 *)((entry)))->link == linkId) {
                 ((ActorRecAt1D8V1 *)((entry)))->link = 0;
             }
             i += 1;

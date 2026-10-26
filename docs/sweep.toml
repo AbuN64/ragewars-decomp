@@ -53,7 +53,7 @@ paths = ["src/**/*.CPP", "src/**/*.c", "src/**/*.C"]
 [[rule]]
 id = "struct-return-spelling"
 kind = "return-spelling"
-why = "A function defined to return a struct by value and called or declared with the result pointer spelled out (or the reverse): MIPS passes the hidden result pointer where a first parameter goes, so the original mixes both, but a native 32-bit host pops the hidden pointer in the callee (ret $4) and every call spelled the other way leaves the stack 4 bytes off; the next call in that function reads garbage arguments (func_80270CD0_de null read, first seen in monkey-wl1-start-pak-prompt)."
+why = "A function defined to return a struct by value and called or declared with the result pointer spelled out (or the reverse): MIPS passes the hidden result pointer where a first parameter goes, so the original mixes both, but a native 32-bit host pops the hidden pointer in the callee (ret $4) and every call spelled the other way leaves the stack 4 bytes off; the next call in that function reads garbage arguments (GraphU64_InterpolateQuaternionWithLinearFallback null read, first seen in monkey-wl1-start-pak-prompt)."
 trees = ["rw"]
 paths = ["src/**/*.CPP", "src/**/*.c", "src/**/*.C", "include/**/*.H", "include/**/*.h"]
 returns = 'C(?:Vector3|Quatern|Matrix\w*)|Triple|Func\w+Result|MenuElementHandler'

@@ -12,7 +12,7 @@
 extern func_80284AF4_G2 D_80145060;
 
 extern f32 GameObject_GetActorHeight(void *arg0);
-extern f32 func_802726BC_de(f32 *arg0, f32 *arg1);
+extern f32 GraphU64_GetSquaredDistance(f32 *arg0, f32 *arg1);
 extern void func_80282E98_de(void *arg0, void *arg1);
 
 
@@ -53,7 +53,7 @@ void func_80284B20_de(Shared_Particle *particle) {
         if (particle->inst.type != actor_id) {
             point.y += GameObject_GetActorHeight(node) * height_scale;
         }
-        if (func_802726BC_de(&particle->inst.pos.x, point_ptr) < radius_sq) {
+        if (GraphU64_GetSquaredDistance(&particle->inst.pos.x, point_ptr) < radius_sq) {
             func_80282E98_de(particle, node);
             if (particle->inst.type == actor_id) {
                 stop = 1;
@@ -173,7 +173,7 @@ void func_80284FF4_de(EffectSystem *effectSystem, s32 arg1, CVector3 *arg2) {
     }
 }
 
-extern f32 func_802726BC_de(f32 *a, f32 *b);
+extern f32 GraphU64_GetSquaredDistance(f32 *a, f32 *b);
 
 
 
@@ -192,7 +192,7 @@ void func_802850C8_de(EffectSystem *arg0, LevelActor *actor, f32 *arg2) {
     if (node != 0) {
         do {
             if (((ParticleEffect *)node)->owner != actor && (((ParticleEffect *)node)->flags & 0x100)) {
-                temp = func_802726BC_de(&((ParticleEffect *)node)->pos.x, &actor->position0.x);
+                temp = GraphU64_GetSquaredDistance(&((ParticleEffect *)node)->pos.x, &actor->position0.x);
                 if (temp < *arg2) {
                     *arg2 = temp;
                 }

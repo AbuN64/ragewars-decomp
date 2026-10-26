@@ -247,7 +247,7 @@ SoundVoice *Channel_StartNoteVoice(SoundPlayer *player, ControllerCode802591C0 *
     }
     func_80258740_de((s32 *)engine);
     if ((s8)func_8025E524_de(note) != 100) {
-        roll = func_8027451C_de();
+        roll = GraphU64_NextRandomValue();
         roll %= 100;
         roll = roll < (s8)func_8025E524_de(note);
         if (!roll) {

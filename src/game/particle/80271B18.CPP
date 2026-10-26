@@ -64,7 +64,7 @@ f32 GraphU64_GetAngleDistance(f32 target, f32 current) {
 }
 
 /** Component-wise multiply two 3-vectors. */
-void func_80271F00_de(CVector3 *result, CVector3 *left, CVector3 *right) {
+void GraphU64_MultiplyVectorComponents(CVector3 *result, CVector3 *left, CVector3 *right) {
     result->x = left->x * right->x;
     result->y = left->y * right->y;
     result->z = left->z * right->z;
@@ -78,21 +78,21 @@ void GraphU64_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right) {
 }
 
 /** Subtract the right vector from the left vector. */
-void GraphU64_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2) {
-    arg0->x = arg1->x - arg2->x;
-    arg0->y = arg1->y - arg2->y;
-    arg0->z = arg1->z - arg2->z;
+void GraphU64_SubtractVectors(CVector3 *difference, CVector3 *leftVector, CVector3 *rightVector) {
+    difference->x = leftVector->x - rightVector->x;
+    difference->y = leftVector->y - rightVector->y;
+    difference->z = leftVector->z - rightVector->z;
 }
 
 /** Scale a 3-vector (arg1) by a scalar (arg2), store into arg0. */
-void GraphU64_ScaleVector(void *arg0, void *arg1, f32 arg2) {
-    ((CVector3 *)(arg0))->x = ((CVector3 *)(arg1))->x * arg2;
-    ((CVector3 *)(arg0))->y = ((CVector3 *)(arg1))->y * arg2;
-    ((CVector3 *)(arg0))->z = ((CVector3 *)(arg1))->z * arg2;
+void GraphU64_ScaleVector(void *scaledVector, void *inputVector, f32 scaleFactor) {
+    ((CVector3 *)(scaledVector))->x = ((CVector3 *)(inputVector))->x * scaleFactor;
+    ((CVector3 *)(scaledVector))->y = ((CVector3 *)(inputVector))->y * scaleFactor;
+    ((CVector3 *)(scaledVector))->z = ((CVector3 *)(inputVector))->z * scaleFactor;
 }
 
 /** Lerp a 3-component vector: out = a + t * (b - a). */
-void func_80271FC8_de(CVector3 *arg0, f32 t, void *a, void *b) {
+void GraphU64_InterpolateVector(CVector3 *arg0, f32 t, void *a, void *b) {
     arg0->x = ((CVector3 *)(a))->x + (t * (((CVector3 *)(b))->x - ((CVector3 *)(a))->x));
     arg0->y = ((CVector3 *)(a))->y + (t * (((CVector3 *)(b))->y - ((CVector3 *)(a))->y));
     arg0->z = ((CVector3 *)(a))->z + (t * (((CVector3 *)(b))->z - ((CVector3 *)(a))->z));
@@ -107,21 +107,21 @@ void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b) {
     out->z = (a->x * b->y) - (a->y * b->x);
 }
 
-void GraphU64_NormalizeVec3(f32 *arg0) {
+void GraphU64_NormalizeVec3(f32 *vectorComponents) {
     f32 mag;
     f32 scale;
 
-    mag = Math_Sqrtf((arg0[0] * arg0[0]) + (arg0[1] * arg0[1]) + (arg0[2] * arg0[2]));
+    mag = Math_Sqrtf((vectorComponents[0] * vectorComponents[0]) + (vectorComponents[1] * vectorComponents[1]) + (vectorComponents[2] * vectorComponents[2]));
     if (mag != 0.0f) {
         scale = D_800C48AC_de / mag;
-        arg0[0] = arg0[0] * scale;
-        arg0[1] = arg0[1] * scale;
-        arg0[2] = arg0[2] * scale;
+        vectorComponents[0] = vectorComponents[0] * scale;
+        vectorComponents[1] = vectorComponents[1] * scale;
+        vectorComponents[2] = vectorComponents[2] * scale;
     }
 }
 
 /** Intersect a line segment with a horizontal plane and write the point. */
-void func_80272104_de(CVector3 *out, CVector3 *a, CVector3 *b, f32 y) {
+void GraphU64_InterpolateAtHeight(CVector3 *out, CVector3 *a, CVector3 *b, f32 y) {
     f32 dy = b->y - a->y;
 
     if (dy == 0.0f) {
@@ -137,7 +137,7 @@ void func_80272104_de(CVector3 *out, CVector3 *a, CVector3 *b, f32 y) {
     }
 }
 
-void *func_80272180_de(CVector3 *arg0, CVector3 *remaining, CVector3 *arg2, f32 arg3) {
+void *GraphU64_ReflectVector(CVector3 *arg0, CVector3 *remaining, CVector3 *arg2, f32 arg3) {
     CVector3 tmp;
     f32 temp_f2;
     f32 temp_f3;
@@ -155,7 +155,7 @@ void *func_80272180_de(CVector3 *arg0, CVector3 *remaining, CVector3 *arg2, f32 
     return arg0;
 }
 
-void *func_80272214_de(CVector3 *arg0, CVector3 *remaining, CVector3 *arg2) {
+void *GraphU64_ProjectVectorOntoPlane(CVector3 *arg0, CVector3 *remaining, CVector3 *arg2) {
     CVector3 tmp;
     f32 temp_f2;
     f32 temp_f4;

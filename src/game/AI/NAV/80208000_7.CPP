@@ -7,7 +7,7 @@
 #include "TYPES.H"
 #include "AI/NAV/8020EAE0.H"
 
-f32 func_802726BC_de(void *a, void *b);
+f32 GraphU64_GetSquaredDistance(void *a, void *b);
 
 extern void Nav_ClearGoalList(void *);
 
@@ -131,8 +131,8 @@ block_32:
                     s32 secondIndex = arg3[i] * table->stride;
                     void *first = table->data + firstIndex;
                     void *other = table->data + secondIndex;
-                    f32 distance = func_802726BC_de(&point->position.x, first);
-                    if (func_802726BC_de(&point->position.x, other) < distance) {
+                    f32 distance = GraphU64_GetSquaredDistance(&point->position.x, first);
+                    if (GraphU64_GetSquaredDistance(&point->position.x, other) < distance) {
                         s32 saved = arg3[j];
                         arg3[j] = arg3[i];
                         arg3[i] = saved;
@@ -281,7 +281,7 @@ s32 Nav_FindPortalRoute(CNavData *graph, s32 startNode, u8 portalKind, s32 maxDe
     origin = navigationRecord(graph->points, startNode);
     neighborCount = navigationNeighbors(graph, startNode, neighborNodes, neighborLinks);
     for (index = 0; index < neighborCount; index++) {
-        distance = func_802726BC_de(origin, navigationRecord(graph->points, neighborNodes[index]));
+        distance = GraphU64_GetSquaredDistance(origin, navigationRecord(graph->points, neighborNodes[index]));
         foundNode = Nav_SearchPortalRoute(graph, startNode, neighborNodes[index], portalKind, maxDepth - 1, &distance, bestDistance);
         if (foundNode != -1) {
             bestDistance = distance;
@@ -319,7 +319,7 @@ s32 Nav_SearchPortalRoute(CNavData *graph, s32 previousNode, s32 currentNode, u8
     for (index = 0; index < neighborCount; index++) {
         f32 *point = navigationRecord(graph->points, neighborNodes[index]);
         if (point != previousPosition) {
-            candidateDistance = *routeDistance + func_802726BC_de(previousPosition, point);
+            candidateDistance = *routeDistance + GraphU64_GetSquaredDistance(previousPosition, point);
             if (candidateDistance < distanceLimit) {
                 portalNode = Nav_SearchPortalRoute(graph, currentNode, neighborNodes[index], portalKind, remainingDepth - 1, &candidateDistance, distanceLimit);
             } else {

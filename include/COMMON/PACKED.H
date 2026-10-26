@@ -36,11 +36,11 @@ extern void Region_DecodePackedRegion(CGameRegion *dst, Packed *src, char *base,
 
 extern float D_800C4980_de;
 
-extern void func_802744B4_de(void);
+extern void GraphU64_ResetRandomSeeds(void);
 
 extern float D_800C9AD8;
 
-extern void func_802744AC_de(void);
+extern void GraphU64_ReturnWithoutWork(void);
 
 
 
@@ -49,7 +49,7 @@ extern void Region_ScaleWordsToFloats(void *arg0);
 
 extern float D_800C4978_de;
 
-extern s32 func_8027451C_de();
+extern s32 GraphU64_NextRandomValue();
 
 extern float D_800C49C0_de;
 
@@ -73,11 +73,11 @@ extern float D_800C9A38;
 
 extern float D_800C49EC_de;
 
-extern void func_80274DFC_de(float mf[4][4], float xEye, float yEye, float zEye, float xAt, float yAt, float zAt, float xUp, float yUp, float zUp);
+extern void GraphU64_BuildLookAtMatrix(float mf[4][4], float xEye, float yEye, float zEye, float xAt, float yAt, float zAt, float xUp, float yUp, float zUp);
 
 extern float D_800C49C4_de;
 
-extern f32 func_802749B4_de(f32 arg0, f32 arg1);
+extern f32 GraphU64_GetNegatedWrappedDifference(f32 arg0, f32 arg1);
 
 struct Triangle;
 struct Triangle {
@@ -86,19 +86,19 @@ struct Triangle {
     CVector3 *vertices[3];
 };
 
-extern s32 func_80274D8C_de(void *arg0, void *arg1);
+extern s32 GraphU64_IsPointOnPositiveEdgeSide(void *arg0, void *arg1);
 
 
 struct Triangle;
 typedef struct Triangle Triangle;
 
-extern void func_80274C7C_de(void *arg0);
+extern void GraphU64_NormalizeEdgeDirection(void *arg0);
 
 
 struct ObjRecAt2CV1;
 typedef struct ObjRecAt2CV1 ObjRecAt2CV1;
 
-extern void func_80274BF4_de(void *arg0);
+extern void GraphU64_NormalizeEdgeHorizontal(void *arg0);
 
 extern float D_800C49C8_de;
 
@@ -107,9 +107,9 @@ extern float D_800C4998_de;
 
 extern double D_800C4940_de;
 
-extern void func_80274B7C_de(void *arg0, void *arg1, void *arg2);
+extern void GraphU64_InitializeEdge(void *arg0, void *arg1, void *arg2);
 
-extern s32 func_802748F4_de(s32 arg0, s32 arg1, s32 arg2);
+extern s32 GraphU64_IntegrateBoundedInteger(s32 arg0, s32 arg1, s32 arg2);
 
 extern float D_800C499C_de;
 
@@ -117,11 +117,11 @@ extern float D_800C4990_de;
 
 extern float D_800C49E0_de;
 
-extern f32 func_80274944_de(f32 arg0);
+extern f32 GraphU64_NegateWrappedValue(f32 arg0);
 
 extern float D_800C4988_de;
 
-extern s32 func_80274D10_de(f32 *arg0, f32 *arg1, f32 *arg2);
+extern s32 GraphU64_GetHorizontalIntersectionParameter(f32 *arg0, f32 *arg1, f32 *arg2);
 
 /* Edge endpoints and the direction/normal derived by the edge helpers. */
 typedef struct GeometryEdge {

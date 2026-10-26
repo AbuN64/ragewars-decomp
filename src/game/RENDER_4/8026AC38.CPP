@@ -38,9 +38,9 @@ extern signed char D_800D1610[3];
 
 extern char D_80145040;
 
-extern void func_80270700_de(f32 *matrix, void *model);
+extern void GraphU64_UnpackFixedMatrix(f32 *matrix, void *model);
 
-extern void func_802732D0_de(f32 *matrix, CVector3 *position);
+extern void GraphU64_GetMatrixTranslation(f32 *matrix, CVector3 *position);
 
 extern char *Player_GetFirstPlayer(void *players);
 
@@ -306,8 +306,8 @@ s32 Geometry_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *mat
     f32 matrix[4][4];
 
     if (D_80110620 != 0 && (material->flagWord & 0x8000)) {
-        func_80270700_de((f32 *)matrix, model);
-        func_802732D0_de((f32 *)matrix, &position);
+        GraphU64_UnpackFixedMatrix((f32 *)matrix, model);
+        GraphU64_GetMatrixTranslation((f32 *)matrix, &position);
         GraphU64_SubtractVectors(&direction, Player_GetFirstPlayer(&D_80145040) + 0x6E8, &position);
         GraphU64_NormalizeVec3(&direction);
         {

@@ -20,8 +20,8 @@ extern void func_8041A47C_de(void *p);
 extern void func_8041B110_de(s32 a);
 extern void *func_8040EC30_de(s32 owner, s32 id);
 extern void *func_80419E54_de(s32 a, s32 b);
-extern void func_802A0C08_de(void *a, void *b, s32 c);
-/* Builds the 0x24-byte state D_800E5430 from the resources 0x392 to 0x397, hooks its list at 0x14 into the part func_8040EC30_de returns for 0x397 and registers it with func_802A0C08_de; returns zero. */
+extern void XStdio_FormatBuffer(void *a, void *b, s32 c);
+/* Builds the 0x24-byte state D_800E5430 from the resources 0x392 to 0x397, hooks its list at 0x14 into the part func_8040EC30_de returns for 0x397 and registers it with XStdio_FormatBuffer; returns zero. */
 s32 func_8042D9F0_de(s32 root) {
     Func_8042D9F0_Part *part;
     D_800E5430 = (Func_8042D9F0_State *)Cache_AllocateMemory(0x24);
@@ -37,7 +37,7 @@ s32 func_8042D9F0_de(s32 root) {
     part = (Func_8042D9F0_Part *)func_8040EC30_de(root, 0x397);
     part->unk38 = D_800E5430->text14;
     D_800E5430->unk20 = 1;
-    func_802A0C08_de(D_800E5430->text14, D_800E1B60, 1);
+    XStdio_FormatBuffer(D_800E5430->text14, D_800E1B60, 1);
     return 0;
 }
 #endif

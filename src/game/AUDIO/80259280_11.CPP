@@ -20,7 +20,7 @@
  * in listener space is compared with the forward axis through GraphU64_ArcCos and func_802B7130_de, given the
  * side's sign, and scaled around the centre by D_800C8FF8. */
 
-extern void func_80272BCC_de(void *, CVector3 *, CVector3 *);
+extern void GraphU64_TransformDirectionTranspose(void *, CVector3 *, CVector3 *);
 
 
 
@@ -37,7 +37,7 @@ s16 func_80259B10_de(CVector3 *position, GameplayCamera *listener) {
     if (offset.x * offset.x + offset.z * offset.z < D_800C3F00_de) {
         return 0x40;
     }
-    func_80272BCC_de(listener->viewOrient, &offset, &local);
+    GraphU64_TransformDirectionTranspose(listener->viewOrient, &offset, &local);
     local.y = 0.0f;
     forward.x = forward.y = local.y;
     forward.z = (&D_800C3F00_de)[1];

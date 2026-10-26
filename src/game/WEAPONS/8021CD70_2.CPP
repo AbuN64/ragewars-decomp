@@ -31,7 +31,7 @@ extern void TranslateMatrix(Matrix *, CVector3);
 extern void ScaleMatrixLocal(Matrix *, f32, f32, f32);
 extern f32 GraphU64_GetPointDistance(CVector3 *, CVector3 *);
 extern void GraphU64_ConvertMatrixToFixed(Matrix *, Matrix *);
-extern CQuatern func_80271818_de(CVector3 *);
+extern CQuatern GraphU64_BuildDirectionQuaternion(CVector3 *);
 extern void MatrixFromQuaternion(CQuatern *, Matrix *);
 extern void PitchMatrixLocal(Matrix *, f32);
 extern void GraphU64_ScaleVector(CVector3 *, CVector3 *, f32);
@@ -90,7 +90,7 @@ void func_8021D408_de(SharedPlayer *player, CVector3 *target, CVector3 *normal) 
 
     if (normal != 0) {
         lift = *normal;
-        turn = func_80271818_de(&lift);
+        turn = GraphU64_BuildDirectionQuaternion(&lift);
         MatrixFromQuaternion(&turn, &matrix);
         PitchMatrixLocal(&matrix, 1.57079649f);
         GraphU64_NormalizeVec3(&lift);
