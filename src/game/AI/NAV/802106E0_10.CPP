@@ -3,11 +3,7 @@
    when its target is out of its layer or too close, re-rolls its strafe pattern and steers toward the target. */
 #include "TYPES.H"
 
-typedef struct {
-    f32 x;
-    f32 y;
-    f32 z;
-} CVector3;
+#include "COMMON/VECTOR3.H"
 
 struct Brain;
 

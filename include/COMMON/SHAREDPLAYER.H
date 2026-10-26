@@ -6,15 +6,7 @@ typedef struct SharedPlayer SharedPlayer;
 struct Box;
 typedef struct Box Box;
 
-struct CVector3_t;
-typedef struct CVector3_t CVector3;
-
-struct CVector3_t;
-struct CVector3_t {
-    f32 x;
-    f32 y;
-    f32 z;
-};
+#include "COMMON/VECTOR3.H"
 
 struct Box;
 struct Box {
