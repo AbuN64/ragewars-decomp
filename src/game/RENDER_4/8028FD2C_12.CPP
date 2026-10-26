@@ -112,7 +112,11 @@ void SetN64_CollectVisibleEffectNodes(ContainerRecAt3C04 *effectPool, Results *r
             func_8024F470_de(node);
             if (((node->flags & mask) == required) &&
                 (func_8024D160_de(node) != 0) &&
+#if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+                !(((u16 *)&node->flags)[1] & 0x100) &&
+#else
                 !(*(u16 *)&node->flags & 0x100) &&
+#endif
                 (bounds[0] > node->x0) &&
                 (bounds[-3] < node->y0) &&
                 (bounds[2] > node->x2) &&

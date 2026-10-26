@@ -48,6 +48,10 @@ f32 Rumble_SamplePackedFloatRange(s32 arg0) {
     s32 idx;
     f64 var_f2;
 
+#if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+    /* The halves are read by address below; a little-endian host holds them swapped. */
+    arg0 = (s32) (((u32) arg0 << 16) | ((u32) arg0 >> 16));
+#endif
     sp0 = (s32) (*(u16 *) &arg0) << 16;
     if (((struct ObjRecAt2V2 *) ((u16 *) (&arg0)))->unk2 == 0) {
         return *(f32 *) &sp0;
