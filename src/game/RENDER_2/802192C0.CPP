@@ -95,8 +95,8 @@ extern void *Scene_GetPlatformRoutePoint(char *a, unsigned char b, short c);
 
 
 
-void func_80219434_de(Cursor *cursor) {
-    Scene_GetPlatformRoutePoint(&g_world, cursor->clip, cursor->previous);
+void *func_80219434_de(Cursor *cursor) {
+    return Scene_GetPlatformRoutePoint(&g_world, cursor->clip, cursor->previous);
 }
 
 /** Initialize the compact state record to its default values. */
