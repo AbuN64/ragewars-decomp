@@ -19,8 +19,6 @@ void Libsn_WriteTransferPortByte(s32 arg0, unsigned char arg1)
 #include "COMMON/EXTERNS_15.H"
 #include "TYPES.H"
 
-extern void Libsn_WritePortByte(s32 address, s32 value);
-extern void Libsn_WritePortWord(s32 address, s32 value);
 
 /* Copy an arbitrary byte buffer to a PI range, packing big-endian words. */
 void Libsn_WritePortBuffer(s32 address, const u8 *source, u32 length)

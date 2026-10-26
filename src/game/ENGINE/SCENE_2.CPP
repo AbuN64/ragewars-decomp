@@ -100,7 +100,6 @@ extern s32 SetN64_GetPackSize(void *table);
 extern s32 SetN64_GetDirectoryEntry(s32 *directory, s32 bank, s32 type);
 extern void *Cache_AllocResourceBlock(s32 pool, void *handle, s32 size);
 extern void Cache_ReplaceResourceBlock(s32 pool, void *handle, void *block);
-extern void SetN64_TransposeRecords(void *src, void *dst, s32 arg2);
 extern void func_802BD3A0_de(void *dst, void *src, s32 size);
 extern void StaticInstance_InitializePlacedProp(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing);
 extern void StaticInstance_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments);

@@ -7,7 +7,6 @@
 extern void Audio_DecodeFrame(void *arg0);
 
 
-extern unsigned short D_800D54C2;
 
 
 

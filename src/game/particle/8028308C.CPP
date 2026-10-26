@@ -67,7 +67,6 @@ extern ParticleAttachmentState D_801041F0;
 
 extern void GraphU64_ConvertMatrixToFloat(f32 *out, void *in);
 
-extern void GraphU64_InvertAffineMatrix(f32 *out, f32 *m);
 
 
 

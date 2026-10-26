@@ -456,7 +456,7 @@ reaction_statistics_done:
 #include "COMMON/ITEMRECAT20V1.H"
 extern Shared_MatchRules D_801468A0[];
 extern s32 D_800D297C;
-extern const f32 D_800C22E4_de, D_800C22E8_de, D_800C22EC_de, D_800C22F0_de;
+extern const f32 D_800C22E4_de, D_800C22E8_de, D_800C22F0_de;
 extern WeaponInfo *D_800D052C[];
 extern void Player_DrawTintedPlayer(LevelActor *, s32, Draw *);
 extern void **func_8024BFD4_de(LevelActor *, s32);

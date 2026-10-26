@@ -43,7 +43,7 @@ static inline void emit(unsigned int w0, unsigned int w1) {
 
 extern int D_800DF250, D_800DF270, D_800DF278, D_800E32CC;
 
-extern int D_800DF284, D_800E32D8, D_800DF28C;
+extern int D_800DF284, D_800E32D8;
 
 static inline void beginFrame(void) {
     Gfx *g;
@@ -127,7 +127,6 @@ void func_80418FF4_de(s32 mode) {
    alpha) commands to the display list D_80110634 points into. */
 
 
-extern Texture *D_800DF254;
 
 void Gfx_SetTextureMode(s32 mode) {
     if (D_80153F60.z == 0) {

@@ -33,7 +33,6 @@ extern void func_804399D0(char *);
 #if defined(VERSION_DE)
 extern void func_804399D0(char *);
 #else
-extern void func_804397F0_auto(char *);
 #endif
 
 extern s32 func_8042B1B8_de(s32, s32);

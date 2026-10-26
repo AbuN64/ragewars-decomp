@@ -120,7 +120,6 @@ typedef struct CParticleSystem_t {
     CParticle_t *m_pLastCreatedParticle;
 } CParticleSystem_t;
 extern const f32 D_800C4E4C_de,D_800C4E50_de;
-extern Box D_801031F0;
 extern void Particle_Update(void *),func_80279A00_de(void *),Particle_UpdateMatrix(void *);
 extern void Fx_DetachParticleSwooshes(void *,void *),DynLight_ReleaseLight(void *,s32);
 extern void Particle_SpawnChildEffect(void *,s32,s32,s32);

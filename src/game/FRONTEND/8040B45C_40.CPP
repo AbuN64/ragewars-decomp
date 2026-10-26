@@ -28,7 +28,6 @@ extern void func_804122CC_de(GridList *list, UnitMtx *cell, u32 column, u32 row)
 
 
 
-extern s32 GetMenuScreenOwner(void);
 
 extern void *Frontend_GetScreenData(s32 index);
 

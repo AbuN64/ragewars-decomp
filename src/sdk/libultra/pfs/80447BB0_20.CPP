@@ -13,7 +13,6 @@
 #include "TYPES.H"
 
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
-extern s32 func_80448CC4_de(OSPfs *pfs);
 
 s32 func_80448BFC_de(OSPfs *pfs)
 {

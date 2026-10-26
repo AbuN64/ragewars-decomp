@@ -40,7 +40,7 @@ extern const f32 D_800C411C_de, D_800C4120_de, D_800C4124_de;
 
 extern const f32 D_800C4128_de, D_800C412C_de;
 
-extern f32 D_8010AC70, D_8010AC7C;
+extern f32 D_8010AC70;
 
 #include "COMMON/STREAM.H"
 extern void Cache_ReleaseResource(void *arg0, void *arg1);

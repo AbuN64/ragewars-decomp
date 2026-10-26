@@ -14,7 +14,6 @@
 
 
 
-extern s32 GetMenuScreenOwner(void);
 
 extern void *Frontend_GetScreenData(s32 index);
 

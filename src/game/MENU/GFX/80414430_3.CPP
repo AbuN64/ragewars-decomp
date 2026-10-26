@@ -121,7 +121,7 @@ void func_80415C90_de(f32 x, f32 y, f32 w, f32 h, u32 col0, u32 col1, u32 col2, 
 }
 
 /* Switches the graphics combiner and emits a pipeline sync once per frame. */
-extern int D_800DF270,D_800E32E4,D_8014DCDC;
+extern int D_800DF270;
 extern Gfx *g_displayListCursor;
 static inline void sync(void){D_800E32E4=1;gDPPipeSync(g_displayListCursor++);}
 

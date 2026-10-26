@@ -32,7 +32,6 @@ extern void Camera_DrawViewportOverlays(Racer *);
 extern void Camera_DrawAndAdvanceMessages(Race *, Racer *);
 extern void func_804429D4_de(void *);
 extern void Camera_DrawViewportBorder(Racer *);
-extern s32 Cinema_IsSequenceActive(void);
 extern s32 Cinema_IsSequenceInWindow(void);
 extern void func_8022A3F8_de(WorldCameraDrawActiveViews *, Racer *);
 /* Per-frame race update: clears three per-frame flags of the race's own racer, passes the race's first word to Cache_MarkResourceInUse, runs the 30-frame flash timer (restarted while D_80146894 is set or in mode 3) and while it runs clears the screen with a full-screen viewport, scissor and fill before Geometry_InvalidateMaterialKeys, then updates every racer in the list until it ends or Cinema_IsSequenceActive or Cinema_IsSequenceInWindow reports, updates the race's own racer, hands the list to func_8022A3F8_de when the replay flag of D_80145040 is set, and passes the own racer's block at 0x554 to func_804429D4_de. */
@@ -159,7 +158,6 @@ extern func_80237E70_G1 D_800D7034;
 
 extern s32 D_800E28D0;
 extern void func_80239CE0_de(void *arg0);
-extern s32 Cinema_IsSequenceActive(void);
 
 
 
@@ -328,7 +326,6 @@ extern const f32 D_800C3444_de, D_800C3448_de;
 extern s32 D_800E28D8;
 extern void func_802A84F8_de(void);
 extern void func_802A8F28_de(void *, s32, s32, s32, s32, s32, f32, f32);
-extern float Math_Sinf(float x);
 
 /* Draws and advances the screen messages of one view, retiring finished ones. */
 void Camera_DrawAndAdvanceMessages(Race *race, Racer *racer) {

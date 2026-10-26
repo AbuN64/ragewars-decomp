@@ -24,8 +24,6 @@
 
 
 
-extern char D_800CE7E4;
-extern Tuning D_800CE82C;
 extern s32 D_80104418[];
 extern void GraphU64_EaseValueToward(f32 *value, f32 target, f32 rate);
 extern void Player_UpdateViewAngles(SharedPlayer *, Body_func_80224C4C_de *, char *);

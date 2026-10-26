@@ -22,7 +22,6 @@ extern void OnScreen_SetupSpriteMode(s32 color);
 
 extern s32 Cinema_IsSequenceInWindow(void);
 extern s32 func_802934F8_de(void);
-extern s32 Frontend_GetScreenMode(void);
 
 extern void func_802A7AA4_de(void *mover);
 extern void func_802AAA54_de(s32 x0, s32 y0, s32 x1, s32 y1, s32 red, s32 green, s32 blue, u8 alpha);

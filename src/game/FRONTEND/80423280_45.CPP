@@ -20,13 +20,11 @@
 
 extern void MarkMenuEventHandled(void);
 extern s32 func_80299A08_de(void);
-extern s32 func_802999A0_de(s32);
 extern void Items_ResetActorPools(void *, s32);
 extern void func_804499B0_de(void *, s32, s32);
 extern void Scene_LoadLevelResources(void *, s32, s32);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(s32);
-extern void func_8042E988_de(s32);
 extern void func_802998A8_de(void);
 
 

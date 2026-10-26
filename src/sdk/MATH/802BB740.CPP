@@ -40,7 +40,6 @@ void func_802B6670_de(void *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az,
     func_802B6CBC_de(matrixPointer, out);
 }
 
-extern f32 Math_Sqrtf(f32);
 
 
 void func_802B6900_de(f32 matrix[4][4], f32 eyeX, f32 eyeY, f32 eyeZ,

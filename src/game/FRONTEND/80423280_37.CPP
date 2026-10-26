@@ -23,7 +23,6 @@
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "TYPES.H"
 #include "RENDER_2/8025DE50_5.H"
-extern MenuWidget *Frontend_FindWidgetByResourceId(void *, s32);
 extern struct EntryRecAt8V3 D_800E4694[];
 void Defs_SetBitValue(u8 *arg0, s32 arg1, s32 arg2);
 void func_80427F10_de(void);

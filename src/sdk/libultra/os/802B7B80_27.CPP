@@ -13,7 +13,6 @@ extern u8 D_8014D4B0;
 extern u8 D_8014D5E0[];
 
 
-extern u32 func_802B8C88_de(void *arg0);
 
 
 u32 func_802B7F30_eu_x(Triple *motorContext) {
@@ -57,7 +56,6 @@ u32 func_802B7F30_eu_x(Triple *motorContext) {
 extern u8 D_8014D4B0;
 
 
-extern u32 func_802B8C88_de(void *arg0);
 
 
 u32 func_802B80F4_eu_x(Triple *motorContext) {

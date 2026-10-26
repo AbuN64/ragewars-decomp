@@ -16,7 +16,6 @@ extern u8 D_8014D5E0[];
 
 
 
-extern u32 func_802B8C88_de(void *arg0);
 
 unsigned char D_auto_func_802B7C48_de_padding_B8848[8] = { 0x00, 0x80, 0x88, 0x21, 0xAF, 0xBF, 0x00, 0x40 };
 

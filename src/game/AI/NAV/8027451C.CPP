@@ -16,7 +16,6 @@ extern f32 D_800D2988;
 
 
 
-extern f32 Math_Sqrtf(f32);
 
 
 

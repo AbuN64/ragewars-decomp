@@ -41,7 +41,6 @@ extern s32 Pak_UpdateStatus(s32);
 
 extern u8 D_800DE80C[];
 
-extern void Control_ReadControllerStates(void);
 
 extern void Control_ReleasePakLock(void);
 

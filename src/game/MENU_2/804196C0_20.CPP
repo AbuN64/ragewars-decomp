@@ -21,7 +21,6 @@
 
 
 
-extern s32 GetMenuScreenOwner(void);
 extern void *Frontend_GetScreenData(s32 index);
 extern MenuFadeWidget *Cache_AllocateMemory(s32);
 extern void func_8041A47C_de(MenuFadeWidget *);

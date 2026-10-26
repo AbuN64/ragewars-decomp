@@ -27,7 +27,7 @@ extern s32 func_802BB5F0_de(s32 *, s32);
 
 extern unsigned int D_800D2978;
 
-extern int D_800CD730,D_800D297C;
+extern int D_800CD730;
 
 
 void func_80292F48_de(void) {

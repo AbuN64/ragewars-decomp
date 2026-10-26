@@ -33,7 +33,6 @@ extern void func_802511AC_de(s32);
 
 extern s32 func_80254B58_de(s32, s32, s32);
 
-extern void func_802515F0_de(s32, s32);
 
 
 extern s32 D_80101134[];

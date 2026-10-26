@@ -56,7 +56,6 @@ extern void Scene_LoadLevelResources(void *, s32, s32);
 
 extern s32 func_8040332C_de(void);
 
-extern s32 Cinema_IsSequenceActive(void);
 
 extern u32 func_80245850_de(void);
 

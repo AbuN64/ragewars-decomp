@@ -10,11 +10,8 @@
 #include "TYPES.H"
 #include "WORLD_2/8024E914_8.H"
 
-extern ListNode80290528 *D_80131140;
 
-extern ListNode80290528 *D_80131144;
 
-extern ListNode80290528 *D_80131148;
 
 
 

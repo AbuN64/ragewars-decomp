@@ -506,7 +506,7 @@ case 7:
 #ifndef FIELD
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 #endif
-extern f32 D_800C22A8_us, D_800C22AC_us, D_800C22B0_us;
+extern f32 D_800C22A8_us, D_800C22AC_us;
 extern s32 D_800D2A90;
 extern char D_801468A0[];
 extern s32 func_8022C460_de(void *);

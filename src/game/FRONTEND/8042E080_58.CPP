@@ -25,7 +25,6 @@ s32 func_804355B4_de(void) {
 
 typedef struct { char pad[12]; s8 unkC, unkD; char rest[0x182]; } MatchProfile58;
 extern MatchProfile58 D_80102B00[];
-extern void *XPlus_CopyBytes(void *destination, const void *source, s32 bytes);
 
 void func_804355E8_de(void) {
     s32 i = 0; s32 none = -1;

@@ -41,7 +41,6 @@ static inline void clear_entry(EntryRecAt34 *e) {
 }
 
 /* Soft-resets the game: checks the "systembootdone" marker (copied from s_systembootdoneText and zero-padded with the memset XPlus_FillMemory) through func_80293440_de (recording the result in D_801470B0 and re-arming it through func_802934C0_de), and on a cold boot copies the resident code and data back from the cartridge word by word after each PI idle wait, then clears the BSS from D_800E4000 to D_80166000, in both passes skipping the marker, its flag and, when not cold booting, the preserved save, settings and pad regions; finally reinitialises through func_802BAE40_de and func_80292F24_de. */
-extern Marker_func_802A71C0_de s_systembootdoneText;
 
 
 

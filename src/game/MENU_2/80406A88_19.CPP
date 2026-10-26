@@ -65,7 +65,6 @@ s32 Frontend_UpdateTimedTransition(void) {
 
 /* Calls MarkMenuEventHandled, then func_8042E988_de with -1, then func_802998A8_de, and returns zero. */
 extern void MarkMenuEventHandled();
-extern void func_802998A8_de();
 
 s32 func_80439E04_de(void) {
     MarkMenuEventHandled();

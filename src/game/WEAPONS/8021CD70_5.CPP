@@ -139,8 +139,7 @@ struct PlayerEffectLight {
 #else
 #define PLAYER_SECOND_LIGHT_RADIUS D_800C76A0
 #endif
-extern f32 D_800C25A8_de, D_800C25AC_de, PLAYER_SECOND_LIGHT_RADIUS;
-extern f32 D_800C25C0_de;
+extern f32 PLAYER_SECOND_LIGHT_RADIUS;
 #if defined(VERSION_DE)
 #define PLAYER_EFFECT_LIGHT_PATTERN D_auto_rodata_unresolved_800C91C0
 #define PLAYER_MODE_LIGHT_PATTERN D_auto_800C91D0

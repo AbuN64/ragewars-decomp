@@ -64,7 +64,6 @@ void SetN64_ClearDepthRect(void *unused, s32 ulx, s32 lrx, s32 uly, s32 lry, s32
     gDPSetCycleType(g_displayListCursor++, G_CYC_2CYCLE);
 }
 
-extern void func_802A84F8_de(void);
 extern void func_802AAB3C_de(s32, s32, s32, s32, s32, s32);
 extern void func_802AAB68_de(f32, f32);
 

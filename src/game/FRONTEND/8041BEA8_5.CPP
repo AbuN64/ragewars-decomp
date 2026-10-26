@@ -125,7 +125,6 @@ extern void SmpOverlay_RefreshPakDialog(void);
 
 extern void Frontend_RequestScreenMode(s32);
 
-extern void Tsmos_DeactivateControllerState(void);
 
 extern void func_80293334_de(void *, s32, s32);
 

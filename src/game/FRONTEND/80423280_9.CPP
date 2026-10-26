@@ -74,7 +74,6 @@ extern void Frontend_ResetJoinRequestEntries(void);
 
 extern void func_802998A8_de(void);
 
-extern void Frontend_SeatJoinRequests(void);
 
 
 /* Calls MarkMenuEventHandled and, unless func_8043C308_de reports one for the object D_800E4EF0 holds, calls

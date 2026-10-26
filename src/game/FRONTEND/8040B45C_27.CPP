@@ -14,7 +14,6 @@
 
 
 
-extern s32 GetMenuScreenOwner(void);
 extern void MarkMenuEventHandled(void);
 
 s32 Frontend_HandleSliderMessage(Slider *slider, s32 msg, s32 arg2, s32 arg3) {

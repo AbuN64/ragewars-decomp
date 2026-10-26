@@ -21,7 +21,6 @@
 
 extern void func_802B2F00_de(void *sound, s16 sample);
 
-extern s32 func_802B2620_de(void *sound);
 
 extern void alSndpStop(void *sound);
 

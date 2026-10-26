@@ -8,7 +8,6 @@
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "TYPES.H"
 
-extern void *func_8025C95C_de(void *, s32, CVector3 *, void *, s32);
 
 extern s32 *func_8025CC6C_de(void);
 extern s32 func_8025CA24_de(void *, void *);

@@ -20,7 +20,6 @@ typedef struct OSThread OSThread;
 extern OSThread D_80148850;
 extern OSMesgQueue D_80149A80;
 extern OSMesg D_80149AA0[5];
-extern void D_002BA4C0(void *arg);
 
 
 extern void osSetEventMesg(s32 event, OSMesgQueue *mq, OSMesg msg);
@@ -29,7 +28,6 @@ extern void func_802BB5F0_de(OSThread *t, s32 pri);
 extern void osCreateThread(OSThread *t, s32 id, void (*entry)(void *), void *arg, void *sp, s32 pri);
 
 extern void osStartThread(OSThread *t);
-extern u32 __osDisableInt(void);
 
 void func_802BA350_de(s32 pri)
 {

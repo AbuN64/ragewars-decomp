@@ -545,7 +545,6 @@ s32 ScenarioSetup_OpenResultsScreen(void *root) {
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 extern func_8042CE54_S1 *D_800E53C0;
 extern ResourceBank D_800E12D2[];
-extern s32 D_800FEAE0[];
 extern s32 Frontend_FindKeyIndex(s32);
 extern char *XPlus_UppercaseString(char *);
 extern char *XPlus_CopyString(char *,char *);

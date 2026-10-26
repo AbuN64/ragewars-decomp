@@ -5,7 +5,6 @@
 #include "COMMON/CALLBACK.H"
 #include "MATH/80299ECC.H"
 
-extern s32 GetMenuScreenOwner(void);
 
 
 void Smos_DispatchDescendantScreenEvent(NodeRecAt12 *node, s32 arg1, s32 arg2, s32 arg3, s32 arg4,

@@ -25,7 +25,6 @@
 
 
 
-extern s32 GetMenuScreenOwner(void);
 
 extern void *Frontend_GetScreenData(s32 index);
 extern void Frontend_ReplaceNodeRefs(NodeRecAt44 *node, void *from, void *to);

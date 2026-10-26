@@ -11,7 +11,6 @@
 extern void Rumble_FreeAllPoolNodes(s32 *);
 
 #if defined(VERSION_EU)
-extern unsigned int func_802B80B4_eu(void *arg0);
 #elif defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 extern unsigned int func_802B80F4_eu_x(void *arg0);
 #elif defined(VERSION_US)

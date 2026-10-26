@@ -51,7 +51,6 @@ extern struct IntPair D_800E381C[][17];
    and 0x15 otherwise, then calls func_802998A8_de. Returns zero. */
 extern void MarkMenuEventHandled();
 
-extern s32 func_802999A0_de(s32);
 
 extern void func_8042E988_de(s32);
 

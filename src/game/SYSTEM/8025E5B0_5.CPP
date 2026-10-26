@@ -23,7 +23,6 @@ static __inline__ f32 unsignedFloat(u32 value,const f64 *bias) {
 
 /* Fills a three-float sample for an animation track: either the stored constant vector or a linear blend
  * of the two keys around the time. */
-extern f64 D_800C4058_de, D_800C4060_de, D_800C4068_de, D_800C4070_de, D_800C4078_de, D_800C4080_de, D_800C4088_de;
 
 
 void PolyTrak_SampleVectorTrack(AnimRef *anim, s32 index, f32 time, CVector3 *out) {

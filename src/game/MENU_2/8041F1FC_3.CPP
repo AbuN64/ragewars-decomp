@@ -87,7 +87,6 @@ extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 
 
 
-extern void Menu_RefreshPlayerCharacterVariants(s32);
 
 /* Resets player p's choice on the screen D_800E42D0: calls func_8040E8D8_de(1) on the three items in
    option cells from 0x18 of p's 36-byte layout row D_800E42D4, dims the item of the current choice at 0x18 of

@@ -14,7 +14,6 @@ extern unsigned int func_80299B4C_de(void);
 
 extern void func_802A1D7C_de(void *arg0);
 
-extern void func_802A1D14_de(void *arg0);
 
 void func_802A1D7C_de(void *arg0)
 {

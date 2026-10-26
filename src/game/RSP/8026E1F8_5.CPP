@@ -1165,7 +1165,6 @@ void GraphU64_InterpolateQuaternionWithLinearFallback(CQuatern *out, f32 amount,
     }
 }
 
-extern s32 GraphU64_NextRandom(void);
 extern f32 Math_Sqrtf(f32);
 
 CVector3 GraphU64_BlendRandomDirection(CVector3 *in, f32 amount) {
@@ -1208,7 +1207,6 @@ CVector3 GraphU64_BlendRandomDirection(CVector3 *in, f32 amount) {
     return result;
 }
 
-extern s32 GraphU64_NextRandom(void);
 extern f32 Math_Sqrtf(f32);
 
 CVector3 GraphU64_BlendRandomXDirection(CVector3 *in, f32 amount) {
@@ -1252,7 +1250,6 @@ CVector3 GraphU64_BlendRandomXDirection(CVector3 *in, f32 amount) {
     return result;
 }
 
-extern s32 GraphU64_NextRandom(void);
 extern f32 Math_Sqrtf(f32);
 
 CVector3 GraphU64_BlendRandomYDirection(CVector3 *in, f32 amount) {
@@ -1295,7 +1292,6 @@ CVector3 GraphU64_BlendRandomYDirection(CVector3 *in, f32 amount) {
     return result;
 }
 
-extern s32 GraphU64_NextRandom(void);
 extern f32 Math_Sqrtf(f32);
 
 CVector3 *GraphU64_BlendRandomZDirection(CVector3 *out, CVector3 *in, f32 amount) {

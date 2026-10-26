@@ -22,7 +22,6 @@ extern CVector3 D_800C46C0_de[2];
 extern void GraphU64_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
-extern f32 Math_Sqrtf(f32);
 
 /* Copies a 4x4 float matrix while scaling its first three rows by three per-row factors, zeroing their fourth column and setting the last element to the canonical unit constant. Adapted from CopyMatrix with the row scaling, the zeroed column and the constant corner changed. */
 
