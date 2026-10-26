@@ -1,4 +1,5 @@
 #include "COMMON/MENURECAT24.H"
+#include "COMMON/UNUSED.H"
 #include "MENU/PAK/SAVE_SNAPSHOT.H"
 #include "MENU/80405DC0.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -12,7 +13,6 @@ extern void Scene_ReleaseResource(void *arg0, void *arg1);
    buffer D_8011FECC points to. */
 extern char *D_8011FECC;
 
-extern char g_pakSingleSaveBlockName[];
 
 extern void func_80253908_de(s32 a);
 

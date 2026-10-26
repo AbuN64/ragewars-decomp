@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -13,7 +14,6 @@
    D_8015402C in D_8011FE88, when the option byte D_801462D5 is one, or D_8015402C itself. */
 
 
-extern s32 D_8015402C;
 
 extern struct StateFlags *func_8028D474_de(void *, s32);
 

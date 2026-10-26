@@ -1,4 +1,5 @@
 #include "COMMON/NODERECAT2A8.H"
+#include "COMMON/UNUSED.H"
 #include "COMMON/LONE/D_800DEA60.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -30,7 +31,6 @@ extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape
 /* Resets the state and copies the two configured values after initialization. */
 
 
-extern int D_800E2AB4_de;
 
 extern struct Shape_typemap_165 D_8014D580;
 extern void Frontend_DrawWidget(Widget *widget, DrawArgs_func_8040E67C_de args);

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/EFFECTRENDER.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
@@ -60,7 +61,6 @@ void func_804261DC_de(WeaponPlayer *player) {
 
 #include "COMMON/CHARACTERSELECTIONROOT.H"
 extern MatchMenuApplySlotValueGfx D_801462C8;
-extern s32 D_800FF140_de[];
 
 s32 Achieve_MatchQualifies(void) {
     MatchMenuApplySlotValueGfx *match;

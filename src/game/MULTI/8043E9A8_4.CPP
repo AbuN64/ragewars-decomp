@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/PLAYERRECAT64E.H"
 #include "MULTI/8043E9A8.H"
 #include "TYPES.H"
@@ -16,7 +17,6 @@ extern struct ControllerProfile D_8010F328[4];
 
 #include "COMMON/GAME_SESSION.H"
 
-extern s32 D_80154048;
 
 extern s32 Render_IsAButtonPressed(struct ControllerProfile *);
 
@@ -30,39 +30,30 @@ extern s32 Render_CountConnectedControllers(void);
    of the eight 150-byte player records at 0x148, then calls Pak_AllocateMenu with the third argument,
    the second and the resource D_0044FEA8, and returns one. */
 
-extern char D_0044FEA8[];
 
 extern void Pak_AllocateMenu(void *, void *, void *);
 
 /* Calls Pak_AllocateMenu with the third argument, the second argument and the resource D_451AF0,
    and returns one. */
-extern char D_00450E9C[];
 
 /* Calls Pak_AllocateMenu with the third argument, the second argument and the resource D_4500F4,
    and returns one. */
-extern char D_0044F4A4[];
 
 /* Calls Pak_AllocateMenu with the third argument, the second argument and the resource D_4503E8,
    and returns one. */
-extern char D_0044F798[];
 
 /* Restarts sound: calls func_8025E214_de with -1, records what func_8025E2C4_de returns in D_800E63B0,
    passes D_800E63B8 to func_8025E2D4_de, calls func_8025E29C_de with 1, clears D_800E63B4, calls
    func_802649FC_de and then Pak_AllocateMenu with the third argument, the second and D_451F58.
    Returns one. */
-extern s32 D_800E63B0;
 
-extern s32 D_800E63B4;
 
-extern s32 D_800E63B8;
 
-extern char D_00451094[];
 
 extern void func_802649FC_de();
 
 /* Calls Pak_AllocateMenu with the third argument, the second argument and the resource D_450C18,
    and returns one. */
-extern char D_0044FFEC[];
 
 void Multi_SelectInitialController(void *unused0, struct ObjRecAt20V2 *menu) {
     Shared_Game *globals;

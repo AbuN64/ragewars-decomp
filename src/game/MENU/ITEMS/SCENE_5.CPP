@@ -1,4 +1,5 @@
 #include "COMMON/OBJB.H"
+#include "COMMON/UNUSED.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -41,7 +42,6 @@ extern s32 Items_FindNearestPlacedObject(World *world, void *data, s32 group, vo
 
 
 
-extern char D_0028798C[];
 
 extern const char D_800C5210_de[];
 

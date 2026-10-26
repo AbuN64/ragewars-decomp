@@ -1,4 +1,5 @@
 #include "MENU/GFX/80414430_24.H"
+#include "COMMON/UNUSED.H"
 #include "MATH/802A2870.H"
 #include "RESMGR/resmgr_stream_callbacks.H"
 #include "COMMON/NODERECAT2A8.H"
@@ -78,7 +79,6 @@ extern FileHeader D_8014D724;
 
 extern s32 *D_80153C14;
 
-extern char D_800DD0B0;
 
 
 

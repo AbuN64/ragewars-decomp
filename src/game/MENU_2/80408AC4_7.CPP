@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/EXTERNS_6.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "COMMON/CHEATCODE.H"
 #include "COMMON/VECTOR4F.H"
@@ -23,7 +24,6 @@ extern void func_8044208C_de(void *, ItemRecAt20V1 *, void *, MenuStyle *);
 
 
 
-extern f32 D_800D2988;
 
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

@@ -1,4 +1,6 @@
 #include "MENU/PLAYERSETTINGS.H"
+#include "COMMON/UNUSED.H"
+#include "COMMON/EXTERNS_6.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/PAKQUEUESTATE.H"
@@ -31,7 +33,6 @@ extern s32 Render_IsAButtonPressed(ControllerProfile *slot);
 
 
 
-extern f32 D_800D2988;
 
 void Weapons_EndRound(void *arg0);
 
@@ -39,13 +40,11 @@ void Weapons_EndRound(void *arg0);
 
 
 
-extern char D_800D76C8;
 
 /* Sets arg0's unk14 field to the address of D_800D76CC and returns 0. */
 
 
 
-extern char D_800D76CC;
 
 /* Clears D_80146914, runs func_80264788_de on the value at 0x4 of the menu's widget and then func_80264248_de and func_802647E8_de(widget, 1) on the widget itself, clears the flag at 0x85C of the owner at 0x1C, and returns 1. */
 

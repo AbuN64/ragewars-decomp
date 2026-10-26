@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/EFFECTRENDER.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 
 #if defined(VERSION_US)
@@ -167,7 +168,6 @@ INCLUDE_ASM("ovl_80400000", func_8043C4F4_us);
    supplies the descriptor whose option flags are at+728. */
 #include "MENU/LEVELSELECT_TYPES.H"
 
-extern s32 D_80154034;
 
 static inline s32 levelBit(s32 level) {
     s32 bit;

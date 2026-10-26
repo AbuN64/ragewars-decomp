@@ -1,4 +1,5 @@
 #include "MENU/PAK/pak_note_search.H"
+#include "COMMON/UNUSED.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "include_asm.h"
@@ -80,9 +81,7 @@ static inline void Pak_DecodeNoteName(u8 *src, u8 *dst, s32 n) {
 extern u8 *D_800E25C4[], *D_800E25C4[];
 #endif
 
-extern char g_pakReadScratchNoteName[];
 
-extern char g_pakWriteScratchNoteName[];
 
 extern void **Scene_AllocateResource(s32, s32, s32, char *);
 

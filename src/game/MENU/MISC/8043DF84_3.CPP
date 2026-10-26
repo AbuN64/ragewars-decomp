@@ -1,4 +1,5 @@
 #include "COMMON/SHARED_GAMESLOT.H"
+#include "COMMON/TRIPLE.H"
 #include "include_asm.h"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
@@ -29,7 +30,7 @@ void func_8043DEF8_de(void *arg0, s32 arg1) {
 }
 
 #include "COMMON/SESSIONHANDLERROW.H"
-extern f32 D_800DE320, D_800DE324_de;
+extern f32 D_800DE324_de;
 
 void func_8043DF34_de(f32 duration, s32 mode, s32 option, s32 teams, s32 last) {
     s32 i;

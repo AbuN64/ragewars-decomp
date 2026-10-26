@@ -1,4 +1,5 @@
 #include "COMMON/WORLD.H"
+#include "COMMON/INTEGERSTATEB0.H"
 #include "include_asm.h"
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -14,7 +15,7 @@
 
 /* Draws a menu model with screen-scaled translation, animated and fixed rotations, restoring the render-state flag afterward; the unsigned offset-to-pointer cast preserves matrix-address scheduling. */
 extern MenuModelScreen D_80141008[]; extern Gfx *g_displayListCursor;
-extern s32 D_800CC380, D_800D297C, D_800E28D0;
+extern s32 D_800D297C, D_800E28D0;
 #if defined(VERSION_DE)
 extern float D_800DDF50_de;
 extern float D_800DDF58;

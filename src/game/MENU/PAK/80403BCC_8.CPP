@@ -1,4 +1,5 @@
 #include "COMMON/ENTRYRECAT0V3.H"
+#include "COMMON/UNUSED.H"
 #include "MENU/80403BCC.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "stddef.h"
@@ -15,7 +16,6 @@ extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 extern s8 D_8010BBB8;
 
-extern char g_pakReadScratchNoteName[];
 
 extern s32 *Scene_AllocateResource(s32, s32, s32, void *);
 

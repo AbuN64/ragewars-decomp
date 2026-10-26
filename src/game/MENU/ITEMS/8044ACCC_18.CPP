@@ -1,4 +1,5 @@
 #include "COMMON/GAMEPLAY_TRANSITION.H"
+#include "COMMON/EXTERNS_6.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/AIPROFILE.H"
@@ -27,7 +28,6 @@ void Items_ReleaseObjectHandles(struct ItemsHandleOwner *object) {
 
 extern void Weapons_InitializePlayerHealth(void *);
 extern void Render_ResetPlayerWeapons(void *);
-extern s32 D_801468F4;
 
 
 

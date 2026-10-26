@@ -1,4 +1,5 @@
 #include "COMMON/GFX.H"
+#include "COMMON/UNUSED.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/TEXTURE.H"
 #include "gbi.h"
@@ -14,7 +15,6 @@
 extern Gfx *g_displayListCursor;
 extern s32 D_800DF250;
 extern s32 D_800E32CC;
-extern s32 D_800E32E4;
 extern Rec_func_8024C92C_de D_80153F60;
 
 

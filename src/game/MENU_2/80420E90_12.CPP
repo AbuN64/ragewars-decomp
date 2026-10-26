@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
@@ -10,8 +11,6 @@
 
 
 
-extern s32 D_800E4404;
-extern s32 D_800E4408;
 extern Handler802A2B50 D_800E440C;
 
 s32 func_80421A58_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {

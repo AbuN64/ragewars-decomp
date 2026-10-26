@@ -1,4 +1,5 @@
 #include "MENU/GFX/80414430_24.H"
+#include "COMMON/UNUSED.H"
 #include "COMMON/LONE/D_800DEA60.H"
 #include "RESMGR/resmgr_stream_callbacks.H"
 #include "include_asm.h"
@@ -85,7 +86,6 @@ extern s32 Frontend_ClampRectToClip(struct Shape_typemap_165 *rect, struct Shape
 
 extern void Frontend_DrawVisibleSiblings(void *, Args);
 
-extern s32 D_800E2AB8;
 
 /* Records the last column and row of a width by height area: stores width - 1 and height - 1 in
    D_800DEA60 and D_800E2AB4_de, and fills the rectangle D_8014D580 with zero to width - 1 and zero
@@ -93,7 +93,6 @@ extern s32 D_800E2AB8;
 
 
 
-extern s32 D_800E2AB4_de;
 
 extern struct Shape_typemap_165 D_8014D580;
 
@@ -534,8 +533,6 @@ void *Scene_AllocateMemory(s32 size);
 u8 *Resmgr_CopyString(u8 *dst, u8 *src);
 void Resmgr_CloseStream(s32 handle);
 void Frontend_LoadLanguageStrings(s32 index);
-extern char D_800DD0B0;
-extern s32 D_800E2AC4;
 void Scene_FreeMemory(void *arg0);
 
 /* Loads the string table of resource archive section index: frees the previous string buffer and

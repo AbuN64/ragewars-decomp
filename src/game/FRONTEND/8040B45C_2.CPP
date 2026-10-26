@@ -1,4 +1,6 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
+#include "COMMON/MENURECAT24.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -8,11 +10,8 @@
 
 extern s32 D_8015375C;
 
-extern s32 D_80153784;
 
-extern s32 D_800E28C8;
 
-extern char D_0044EE88;
 
 extern s32 Pak_CheckStatusPrompt(Shared_PakMenu *action, s32 channel, s32 arg2);
 
@@ -25,19 +24,14 @@ extern s32 Pak_CheckStatusPrompt(Shared_PakMenu *, s32, s32);
  /* extern */
 extern s32 D_800E28C0;
 
-extern s32 D_8014ADA0;
 
-extern s32 D_8014D480;
 
 /* Points a field's text at D_800D7990 when the option D_80153760 is set and at D_800D7994 otherwise, and returns
    zero: the label an option menu shows for that option. */
 
 
-extern s32 D_80153760;
 
-extern char D_800D7990[];
 
-extern char D_800D7994[];
 
 /* Latches D_80153770 to one when the record's team value is not -1 and both func_802645D0_de and Pak_CheckStatusPrompt accept it, then returns D_80153770. Adapted from func_80409C0C_de with the latch D_80153784 changed to D_80153770. */
 
@@ -45,7 +39,6 @@ extern char D_800D7994[];
 
 
 
-extern s32 D_80153770;
 
 extern s32 Render_PeekPakChange(s32);
 
@@ -79,15 +72,10 @@ static inline s32 func_80409BDC_de(struct Shared_PakMenu *record) {
 
 
 
-extern char D_800D7998[];
 
-extern char D_800D3980[];
 
-extern char D_800D3994[];
 
-extern char D_800D39A8[];
 
-extern char D_800D39BC[];
 
 extern void Pak_OpenDialog(void *dst, void *text, void *arg2, void *arg3, void *arg4);
 extern char D_8014561C[];

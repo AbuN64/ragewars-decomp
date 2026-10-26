@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/RECTANGLE_DRAW.H"
 #include "COMMON/TEXTURE.H"
 #include "abi.h"
@@ -12,7 +13,6 @@
 
 
 
-extern s32 D_800E32E4;
 
 extern Gfx *g_displayListCursor;
 

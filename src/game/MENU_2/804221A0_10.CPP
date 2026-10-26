@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/S1_5.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -81,9 +82,7 @@ extern void MarkMenuEventHandled();
 
 
 
-extern s32 D_800E44A4;
 
-extern s32 D_800E44A8;
 
 extern Handler802A2B50 D_800E44AC;
 

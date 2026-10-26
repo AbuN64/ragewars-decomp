@@ -1,4 +1,5 @@
 #include "COMMON/WORLD.H"
+#include "COMMON/UNUSED.H"
 #include "include_asm.h"
 #include "COMMON/ENTRYRECAT0V3.H"
 #include "MENU/80403BCC.H"
@@ -25,7 +26,6 @@ extern void *Render_LocatePackSection(int, int, int, int *);
 /* Blends two values with cubic weights: with u the pooled constant D_800E0CB0[0] less t, from is
    weighted by u cubed less u and to by t cubed less t. The constant lives in a shared literal
    pool outside this object, so it is read by name. */
-extern f32 D_800E0CB0[];
 
 /* Looks up the object at offset 4 of the structure D_800E2830 points to through Render_GetPackSection
    with zero, then looks up the result again with the argument, and returns that. */

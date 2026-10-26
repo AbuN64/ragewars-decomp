@@ -1,4 +1,5 @@
 #include "COMMON/OBJB.H"
+#include "COMMON/INTEGERSTATEB0.H"
 #include "MENU/8044ACCC.H"
 #include "TYPES.H"
 #include "RENDER_2/8025DE50_5.H"
@@ -6,7 +7,6 @@
 /* Sets the resource transition state and sound, while its adjacent helper refreshes the controller-option bit. */
 
 
-extern int D_800CC380;
 extern void Items_LoadSceneLight(void);
 void Items_SetSelection(ItemsSelectionState *state,int selection,int mode) {
  state->active=1;

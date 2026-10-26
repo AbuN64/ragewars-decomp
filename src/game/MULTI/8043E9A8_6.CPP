@@ -1,4 +1,5 @@
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/EXTERNS_6.H"
 #include "COMMON/PLAYERRECAT64E.H"
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
@@ -22,7 +23,6 @@ s32 func_8043EDDC_de(void) {
    zero. */
 
 
-extern f32 D_800D2988;
 
 s32 func_8043EE24_de(void) {
     CGameStatus *state = &D_801462C8.counters;

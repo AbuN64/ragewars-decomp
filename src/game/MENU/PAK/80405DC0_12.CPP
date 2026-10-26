@@ -1,4 +1,5 @@
 #include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/UNUSED.H"
 #include "MENU/PAK/SAVE_SNAPSHOT.H"
 #include "COMMON/LONE/D_0044E4F8.H"
 #include "COMMON/VECTOR4F.H"
@@ -17,18 +18,11 @@ extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 
 extern char D_0044FB2C[];
-extern char D_0044FFA4[];
-extern char D_00450BF0_de[];
-extern char D_00450C14_de[];
-extern char D_00450C38_de[];
-extern char D_00450C5C_de[];
 extern char D_80145040[];
 extern char D_8014561C[];
 
 
 
-extern s32 D_8014ADA0;
-extern s32 D_8014D480;
 
 extern s32 D_8015375C;
 

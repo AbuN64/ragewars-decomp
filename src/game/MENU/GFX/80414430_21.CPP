@@ -1,4 +1,5 @@
 #include "COMMON/TEXTURE.H"
+#include "COMMON/UNUSED.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
 #include "TYPES.H"
@@ -9,7 +10,6 @@
 extern Gfx *g_displayListCursor;
 
 
-extern s32 D_800E32E4;
 
 
 

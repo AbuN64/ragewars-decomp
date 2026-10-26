@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/PLAYERRECAT64E.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -8,7 +9,6 @@
 
 extern void Pak_AllocateMenu(void *arg0, void *arg1, void *arg2);
 
-extern s32 D_0044FDF4;
 
 /* Reads an object's sub-record kind byte and forwards it to two per-kind setup routines. */
 
@@ -44,7 +44,6 @@ extern void Render_DisableControllerPak(s32 arg0);
 
 #include "COMMON/GAME_SESSION.H"
 
-extern s32 D_80154048;
 
 s32 func_8043E830_de(s32 *arg0) {
     Shared_Game *base;

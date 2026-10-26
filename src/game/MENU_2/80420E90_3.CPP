@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/NUMBERPADSCREEN.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -34,7 +35,6 @@ void func_802A2394_de();
 s32 func_8041A470_de(void *);
 
                           /* extern */
-extern s32 D_800E28E0;
 
                           
 
@@ -61,9 +61,7 @@ extern void MarkMenuEventHandled();
 
 
 
-extern s32 D_800E4454;
 
-extern s32 D_800E4458;
 
 extern Handler802A2B50 D_800E445C;
 

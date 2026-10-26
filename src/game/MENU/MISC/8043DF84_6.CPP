@@ -1,4 +1,5 @@
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/UNUSED.H"
 #include "MENU/PLAYERSETTINGS.H"
 #include "TYPES.H"
 #include "RENDER_2/8025DE50_5.H"
@@ -12,7 +13,6 @@
 
 
 extern Clip D_800E5DFA[];
-extern char D_0044FA6C[];
 
 extern s32 Render_IsAButtonPressed(s32);
 extern s8 Pak_StepValue(Menu_func_8043F37C_eu *, s32, s32, s32, s32, s32);

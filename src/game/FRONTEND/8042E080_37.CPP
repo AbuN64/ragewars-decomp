@@ -1,4 +1,5 @@
 #include "RESMGR/resmgr_string_memory.H"
+#include "COMMON/UNUSED.H"
 #include "FRONTEND/PAKMENU.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
@@ -15,7 +16,6 @@
 
 
 extern u8 D_80102B00[];
-extern s8 D_800FEB0C[];
 extern s8 D_80102B0D[];
 extern s8 D_800FEB0E[];
 
