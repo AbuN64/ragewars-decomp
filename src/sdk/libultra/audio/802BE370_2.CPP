@@ -13,7 +13,7 @@
 #if !(defined(VERSION_DE) || defined(VERSION_EU))
 /* Decode ADPCM samples, restarting loops and clearing exhausted input.
  * The decode helper uses the existing table-opaque view of this same filter. */
-Acmd *func_802C31C0(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
+Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
     s16 inp;
@@ -605,7 +605,7 @@ s32 func_802BEAA4_de(void *filter, s32 paramID, struct ALWaveTable_s *param)
     }
 }
 
-/* _decodeChunk, libultra's ADPCM chunk decoder called by alAdpcmPull (func_802C31C0): DMA the next
+/* _decodeChunk, libultra's ADPCM chunk decoder called by alAdpcmPull (alAdpcmPull): DMA the next
    ADPCM bytes into DMEM aligned down to 8 bytes, set the loop state when looping, and queue the ADPCM
    decode of tsam samples. */
 Acmd *func_802BEC34_de(Acmd *ptr, ALLoadFilter48_2 *f, s32 tsam, s32 nbytes, s16 outp, s16 inp, u32 flags)
