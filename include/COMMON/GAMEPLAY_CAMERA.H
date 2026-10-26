@@ -174,12 +174,6 @@ struct GameplayCamera {
 };
 
 
-typedef struct Shared_func_80234FDC_S3 Shared_func_80234FDC_S3;
-struct Shared_func_80234FDC_S3 {
-    char pad0[0x400];
-    Lights unk400[2]; /* +0x400: src/func_80234FDC.c */
-};
-
 
 typedef struct Shared_func_80234FDC_S4 Shared_func_80234FDC_S4;
 struct Shared_func_80234FDC_S4 {
@@ -194,12 +188,6 @@ struct Shared_func_80234FDC_S4 {
     Shared_func_80234FDC_S5 state; /* +0x17C0: src/func_80234FDC.c */
 };
 
-
-typedef struct Shared_func_80234FDC_S7 Shared_func_80234FDC_S7;
-struct Shared_func_80234FDC_S7 {
-    s32 unk0; /* +0x0: src/func_80234FDC.c */
-    s32 unk4; /* +0x4: src/func_80234FDC.c */
-};
 
 
 typedef struct Shared_func_80234FDC_S8 Shared_func_80234FDC_S8;

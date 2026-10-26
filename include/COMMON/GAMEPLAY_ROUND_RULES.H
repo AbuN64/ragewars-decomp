@@ -3,24 +3,6 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"
-/* Complete shared records retained from origin/legacy func_80227014.c and its shared headers. */
-typedef struct Shared_func_80227014_S1 Shared_func_80227014_S1;
-struct Shared_func_80227014_S1 {
-    char pad0[0x1C];
-    s32 unk1C; /* +0x1C: src/func_80227014.c */
-    char pad20[0x34];
-    s32 unk54; /* +0x54: src/func_80227014.c */
-    char pad58[0x4];
-    s32 unk5C; /* +0x5C: src/func_80227014.c */
-    s32 unk60; /* +0x60: src/func_80227014.c */
-    s32 unk64; /* +0x64: src/func_80227014.c */
-    s32 unk68; /* +0x68: src/func_80227014.c */
-    s32 unk6C; /* +0x6C: src/func_80227014.c */
-    char pad70[0x4];
-    s32 unk74; /* +0x74: src/func_80227014.c */
-    char pad78[0x98 - 0x78];
-    s32 unk98; /* +0x98: origin/legacy func_80286A78.c, SharedRecAt98. */
-};
 
 
 typedef struct Shared_func_80227014_S2 Shared_func_80227014_S2;
@@ -79,12 +61,6 @@ struct SharedRecAt564V1 {
     s32 unk564; /* +0x564: src/func_80227014.c */
 };
 
-
-typedef struct Shared_func_80227014_S5 Shared_func_80227014_S5;
-struct Shared_func_80227014_S5 {
-    s32 unk0; /* +0x0: src/func_80227014.c */
-    s32 unk4; /* +0x4: src/func_80227014.c */
-};
 
 
 typedef struct Shared_func_80227014_S6 Shared_func_80227014_S6;
