@@ -4686,7 +4686,7 @@ Nav_FollowMarkerCarrierRoute = 0x80212CC4; // type:func rom:0x138C4
 Nav_ResetTargetFollowStateDe = 0x80212D60; // type:func rom:0x13960
 Nav_UpdateTargetRouteFollow = 0x80212D94; // type:func rom:0x13994
 Nav_UpdatePatrolRoute = 0x80212E10; // type:func rom:0x13A10
-Nav_UpdateObjectArrivalChase = 0x80212FBC; // type:func rom:0x13BBC
+Nav_UpdateObjectArrivalChase = 0x80212FE0; // type:func rom:0x13BE0
 Nav_ResetObjectArrivalChase = 0x802131AC; // type:func rom:0x13DAC
 Nav_InitTimedJumpRoute = 0x802131E0; // type:func rom:0x13DE0
 Nav_UpdateTransientJumpRoute = 0x8021321C; // type:func rom:0x13E1C
@@ -5629,7 +5629,7 @@ func_80256454_de = 0x80256454; // type:func rom:0x57054
 func_8025657C_de = 0x8025657C; // type:func rom:0x5717C
 func_8025661C_de = 0x8025661C; // type:func rom:0x5721C
 func_80256688_de = 0x80256688; // type:func rom:0x57288
-func_802566E8_de = 0x802566E8; // type:func rom:0x572E8
+func_802566E8_de = 0x802566F0; // type:func rom:0x572F0
 func_802567A4_de = 0x802567A4; // type:func rom:0x573A4
 D_auto_func_802567C8_de_padding_573C8 = 0x802567C8; // rom:0x573C8
 AudioMgr_InitHeap = 0x802567D0; // type:func rom:0x573D0
@@ -10989,3 +10989,6 @@ literals_Sky_DrawLensFlare = 0x800C34D8; // rom:0xC40D8 size:0x3C
 
 D_auto_func_8043C730_us_rev1_padding_1A254C = 0x8043C54C; // rom:0x1A254C
 D_auto_func_8044DF54_de_padding_1B3F54 = 0x8044DF54; // rom:0x1B3F54
+
+D_auto_func_802566E8_de_padding_572E8 = 0x802566E8; // rom:0x572E8
+D_auto_Nav_UpdateObjectArrivalChase_padding_13BBC = 0x80212FBC; // rom:0x13BBC

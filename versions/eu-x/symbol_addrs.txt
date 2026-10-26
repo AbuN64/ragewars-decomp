@@ -8501,7 +8501,7 @@ Items_ToggleOptionBit15 = 0x8043EA74; // type:func rom:0x12EA74
 Items_UpdateOptionBit15Item = 0x8043EA90; // type:func rom:0x12EA90
 Menu_ForwardRulesLock = 0x8043EB00; // type:func rom:0x12EB00
 Menu_HandleSessionOptionPage = 0x8043EB24; // type:func rom:0x12EB24
-Menu_UpdateOptionToggleLabel = 0x8043EB6C; // type:func rom:0x12EB6C
+Menu_UpdateOptionToggleLabel = 0x8043EB70; // type:func rom:0x12EB70
 Ovlgame_SelectConfirmingController = 0x8043ED1C; // type:func rom:0x12ED1C
 Ovlgame_SetMenuControllerPakEnabled = 0x8043EDC4; // type:func rom:0x12EDC4
 Ovlgame_InitMatchCounters = 0x8043EE00; // type:func rom:0x12EE00
@@ -12635,3 +12635,4 @@ Level_UpdateBreakableHit_padding_eu_x = 0x8020488C; // rom:0x548C
 
 D_auto_Menu_GetLocalizedEncodedResource_padding_12D324 = 0x8043D324; // rom:0x12D324
 D_auto_func_8043C730_us_rev1_padding_12D55C = 0x8043D55C; // rom:0x12D55C
+D_auto_Menu_UpdateOptionToggleLabel_padding_12EB6C = 0x8043EB6C; // rom:0x12EB6C

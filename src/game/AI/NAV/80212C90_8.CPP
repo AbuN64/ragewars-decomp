@@ -3,11 +3,7 @@
 #include "COMMON/TRIPLE.H"
 
 
-#if (defined(VERSION_DE)) && !defined(NON_MATCHING)
-INCLUDE_ASM("span_1000", Nav_UpdateObjectArrivalChase);
-#endif
-
-#if !(defined(VERSION_DE)) || defined(NON_MATCHING)
+#if !defined(VERSION_DE)
 /* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 /* Runs a computer player's chase step toward the object at 0x68: without a target id at 0xBC it
    switches to mode 2 and without an object it only updates; farther than D_800C2380_eu from its goal

@@ -2613,3 +2613,4 @@ literals_Text_DrawTileGrid = 0x800C6460; // rom:0xC7060 size:0x30
 D_800EE614_eu = 0x800EE614;
 D_800EE624_eu = 0x800EE624;
 literals_Pickup_ApplySpecialPickup = 0x800C6500; // rom:0xC7100 size:0x54
+literals_Nav_CheckCloseAttackRoute = 0x800C21E0; // rom:0xC2DE0 size:0x4

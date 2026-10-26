@@ -1,7 +1,6 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU)
-#ifdef NON_MATCHING
 #define func_802B6658_eu_x func_802B661C_eu
 #include "COMMON/EXTERNS_2.H"
 #include "abi.h"
@@ -26,7 +25,4 @@ Acmd *func_802B6658_eu_x(ALSave_u1 *filter, s16 *outp, s32 outCount, s32 sampleO
     aSaveBuffer(ptr++, filter->dramout);
     return ptr;
 }
-#else
-INCLUDE_ASM("span_1000", func_802B661C_eu);
-#endif
 #endif

@@ -3,11 +3,11 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 
-#if (!(defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU_X))) && !defined(NON_MATCHING)
+#if defined(VERSION_DE) && !defined(NON_MATCHING)
 INCLUDE_ASM("ovl_80400000", Menu_CreateUnlockGatedListScreen);
 #endif
 
-#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU_X)
+#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(VERSION_EU_X) || defined(VERSION_EU)
 typedef struct Shared_MenuWidgetState { s32 list; s32 resourceWidget; void *item; s32 unkC; s32 unk10; s32 unk14; } Shared_MenuWidgetState;
 extern Shared_MenuWidgetState *D_800E5780;
 extern char D_80102B7E[];

@@ -1,13 +1,6 @@
 #include "include_asm.h"
 #include "TYPES.H"
 
-#if defined(VERSION_EU)
-#ifdef NON_MATCHING
-/* Drafted below with the other versions' body. */
-#else
-INCLUDE_ASM("span_1000", Nav_CheckCloseAttackRoute);
-#endif
-#endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #if defined(VERSION_EU)
@@ -22,7 +15,6 @@ unsigned int rodata_unresolved_800C2224[3] = {
 #endif
 #endif
 
-#if !(defined(VERSION_EU)) || (defined(NON_MATCHING) && (defined(VERSION_EU)))
 /* Route-following check for a computer driver's brain: when it has a target at 0x64, it calls UpdateCloseAttack if func_802099B4_de reports the target reached, and again when its route node at 0xC (unless -1) lies closer than 100 to the position Nav_GetControllerPosition gives; always returns one. */
 typedef struct Brain {
     char pad0[0xC];
@@ -57,4 +49,3 @@ s32 Nav_CheckCloseAttackRoute(Brain *brain) {
     }
     return 1;
 }
-#endif

@@ -588,7 +588,9 @@ unsigned int func_802A0AA4_de_padding_A1604[1] = {
 #endif
 
 #if defined(VERSION_EU)
-unsigned int func_802A0AA4_de_padding_A17E4[1] = {
+unsigned int func_802A0AA4_de_padding_A17E4[3] = {
+    0x00000000,
+    0x45000008,
     0x00000000,
 };
 #endif

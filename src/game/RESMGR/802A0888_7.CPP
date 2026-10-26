@@ -5,22 +5,10 @@
 #include "TYPES.H"
 #include "MENU/GFX/80414480_3.H"
 
-#if defined(VERSION_EU)
-#ifdef NON_MATCHING
-/* Drafted below with the DE twin. */
-#else
-INCLUDE_ASM("span_1000", XStdio_FormatEuropeanScratchBuffer);
-#endif
-#endif
-
-#if defined(VERSION_DE) || (defined(NON_MATCHING) && defined(VERSION_EU))
+#if defined(VERSION_DE) || defined(VERSION_EU)
 #include "stdarg.h"
 
-#if defined(VERSION_EU)
-int *XStdio_FormatEuropeanScratchBuffer(int format, ...) {
-#else
 int *XStdio_FormatGermanScratchBuffer(int format, ...) {
-#endif
     va_list args;
     va_start(args, format);
     D_800CD918 = Gfx_FormatArgumentList(&D_8014D0D0, format, (int)args);

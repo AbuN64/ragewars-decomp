@@ -3,15 +3,7 @@
 #include "TYPES.H"
 #include "SYSTEM_3/80265370.H"
 
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-#ifdef NON_MATCHING
-/* Drafted below with the other versions' body. */
-#else
-INCLUDE_ASM("ovl_80400000", func_8043E2D8_de);
-#endif
-#endif
 
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
 #include "COMMON/SHARED_MENUSELECTION.H"
 
 
@@ -30,7 +22,12 @@ extern char *D_800D3650_de[];
 extern char *D_800D3654[];
 extern char *D_800D3658[];
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
+#if defined(VERSION_EU_X)
+extern char *D_auto_800DDD00[];
+#define D_auto_800E2364 D_auto_800DDD00
+#else
 extern char *D_auto_800E2364[];
+#endif
 extern char D_800EE970[];
 #else
 extern char D_800DE2F0[];
@@ -75,4 +72,3 @@ s32 func_8043E2D8_de(struct Field *field, Shared_MenuHandle *holder) {
     }
     return 0;
 }
-#endif
