@@ -31,7 +31,6 @@ extern s16 D_80153C0C, D_80153C20;
 
 extern struct ChunkRecAt48C *D_80153C28;
 
-extern void *D_8014D98C[];
 
 extern void func_80411AF0_de(s32 i);
 
@@ -75,9 +74,7 @@ extern s32 func_802A1934_de(void);
 
 
 
-extern FileHeader D_8014D724;
 
-extern s32 *D_80153C14;
 
 
 

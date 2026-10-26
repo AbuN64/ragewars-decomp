@@ -84,7 +84,6 @@ extern void MarkMenuEventHandled();
 
 
 
-extern Handler802A2B50 D_800E44AC;
 
 s32 func_80422278_de(void) {
     Scene_FreeMemory(D_800E44A0);

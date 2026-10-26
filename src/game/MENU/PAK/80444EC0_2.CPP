@@ -10,7 +10,6 @@
    for the second argument, that word, 0x10, 0, 0x80 and 0, and returns zero. */
 
 
-extern Shared_Game D_801462C8;
 extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 s32 func_80444D50_de(void *first, void *second) {

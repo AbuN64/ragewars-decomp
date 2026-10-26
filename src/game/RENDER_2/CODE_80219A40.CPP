@@ -455,7 +455,7 @@ reaction_statistics_done:
 #include "COMMON/GAMEPLAY_REACTION_RULES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 extern Shared_MatchRules D_801468A0[];
-extern s32 D_800C9228_de, D_800D297C;
+extern s32 D_800D297C;
 extern const f32 D_800C22E4_de, D_800C22E8_de, D_800C22EC_de, D_800C22F0_de;
 extern WeaponInfo *D_800D052C[];
 extern void Weapons_DrawTintedPlayer(LevelActor *, s32, Draw *);

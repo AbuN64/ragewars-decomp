@@ -86,7 +86,6 @@ void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s
 
 #if defined(NON_MATCHING) || defined(VERSION_US_REV1) || defined(VERSION_US) || defined(VERSION_DE)
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
-extern s32 D_800FF140_de[];
 extern char D_80102B00[];
 extern void *D_800E4680;
 extern char D_0044FC04[], D_0044FB2C[], D_0044FF80[];

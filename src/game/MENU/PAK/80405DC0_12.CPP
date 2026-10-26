@@ -28,8 +28,6 @@ extern s32 D_8015375C;
 
 
 
-extern void *D_800DE860_de;
-extern struct Shape_typemap_165 *D_800DE864_de;
 extern s32 D_800E28BC;
 
 extern SharedPlayer *Weapons_FindPlayerByController(void *profiles, PakMenuSlot *slot);

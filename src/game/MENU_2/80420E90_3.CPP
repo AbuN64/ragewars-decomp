@@ -63,7 +63,6 @@ extern void MarkMenuEventHandled();
 
 
 
-extern Handler802A2B50 D_800E445C;
 
 /* Advances a filling or draining bar by the step and writes its level byte at 0x10 of the bar at
    0xC: while rising it scales the amount for the display and, at or above the wrap point, stores

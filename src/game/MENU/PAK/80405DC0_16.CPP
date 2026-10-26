@@ -27,9 +27,7 @@ void Scene_ReleaseResource(void *, void *);
 void func_80253908_de(s32);
 
  /* extern */
-extern void *D_800DE860_de;
 
-extern struct Shape_typemap_165 *D_800DE864_de;
 
 
 extern s32 D_800E28BC;

@@ -124,7 +124,6 @@ extern Pool_func_8040F580_de D_80153C20;
 
 extern s16 D_80153C0C;
 
-extern u16 *D_80153C4C;
 
 extern void *Frontend_GetScreenData(s32 index);
 

@@ -10,7 +10,6 @@
 
 extern f32 D_800D2988;
 
-extern char s_flyModeOffText;
 
 extern void Nav_EaseValueToward(f32 *value, f32 target, f32 rate);
 
@@ -36,9 +35,7 @@ extern void Particle_AddVec3(CVector3 *, CVector3 *, CVector3 *);
 
 
 
-extern char D_800CE7E4;
 
-extern char D_800CE7FC;
 
 extern char D_800CED30;
 

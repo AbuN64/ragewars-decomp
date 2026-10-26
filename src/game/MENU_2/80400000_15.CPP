@@ -25,7 +25,6 @@ struct SharedTrackObject;
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "MENU_2/80400000_15.H"
 
-extern Shared_MenuContext *D_800E2830;
 extern f32 D_800E2848;
 extern struct SharedTrackConstants D_800DCB28;
 

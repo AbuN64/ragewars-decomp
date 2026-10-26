@@ -11,7 +11,6 @@
 
 
 
-extern Handler802A2B50 D_800E440C;
 
 s32 func_80421A58_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;

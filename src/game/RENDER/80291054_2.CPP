@@ -240,13 +240,8 @@ void Render_RunGameLoop(GameSession *session) {
 #include "gbi.h"
 
 #include "COMMON/DISPLAY.H"
-extern Gfx *g_displayListCursor;
-extern char D_800CBCC0;
-extern char D_800CBCF0_de;
-extern void *D_801536E8;
 extern UnitVp D_80142C40[];
 extern s32 D_800D297C;
-extern s32 D_800E28D0;
 
 #include "COMMON/VIDEO_DIMENSIONS.H"
 /* Starts the frame display list in the current ring buffer: segment 0, the two setup lists, the depth image, a

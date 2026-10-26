@@ -10,7 +10,6 @@
 #include "RENDER_4/8028FD2C_6.H"
 
 /* Returns one less than the word D_8011FEFC points to. */
-extern s32 *D_8011FEFC;
 
 /* Looks up the current menu resource through Render_LocatePackSection from the fields at 0x74 and 0x34 of
    D_8011FE88 and, when found, opens it through Scene_RequestResource as widget 0x33 with the handler table

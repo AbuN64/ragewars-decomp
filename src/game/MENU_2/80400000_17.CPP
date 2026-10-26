@@ -83,11 +83,8 @@ void func_80402BA0_de(ScreenRectangle *rectangle) {
 
 
 
-extern s32 D_800DE7E8;
 
-extern s32 *D_8011FEFC;
 
-extern s32 D_8011BDFC;
 
 extern char g_cinemaDirectoryText[];
 

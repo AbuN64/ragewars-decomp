@@ -12,7 +12,6 @@
 
 
 
-extern Clip D_800E5DFA[];
 
 extern s32 Render_IsAButtonPressed(s32);
 extern s8 Pak_StepValue(Menu_func_8043F37C_eu *, s32, s32, s32, s32, s32);
