@@ -17,12 +17,7 @@ extern float D_800C2B64_de;
 
 
 struct Rules;
-struct Rules {
-    char pad0[0x24];
-    s32 teams;
-    char pad28[0x78 - 0x28];
-    s32 teamRule;
-};
+#include "GAME/PLAYER_RULES.H"
 
 struct Scores;
 struct Scores {
@@ -118,7 +113,7 @@ struct Held;
 typedef struct Held Held;
 
 struct Rules;
-typedef struct Rules Rules;
+
 
 struct Round;
 typedef struct Round Round;

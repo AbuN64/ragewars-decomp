@@ -22,10 +22,7 @@ typedef struct Racer {
     s32 stateBits;
 } Racer;
 
-typedef struct Rules {
-    char pad0[0x24];
-    s32 teamsEnabled;
-} Rules;
+#include "GAME/PLAYER_RULES.H"
 
 typedef struct MatchWorld {
     char pad0[0x1860];
@@ -64,7 +61,7 @@ s32 func_80210248_eu(Chaser *self) {
     for (; i < 8; i++) {
         other = Weapons_GetPlayerByIndex(world, i);
         if (other != NULL && other != self->self
-            && (rules->teamsEnabled == 0 || other->team->id != self->self->team->id)
+            && (rules->teams == 0 || other->team->id != self->self->team->id)
             && (other->stateBits >> 8) > 0) {
             self->target[count] = other;
             self->dist[count] = Particle_GetPointDistance(&self->self->pos, &other->pos);
