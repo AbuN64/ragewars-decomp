@@ -106,7 +106,7 @@ struct Shared_func_80227014_S8 {
     char pad0[0x8];
     CVector3 position; /* +0x8: actor position, shared player provider and sound CVector3 argument. */
     char pad14[0x4];
-    struct Shared_func_80227014_S12 * unk18; /* +0x18: src/func_80227014.c */
+    struct Shared_func_80227014_S7 * unk18; /* +0x18: src/func_80227014.c */
     char pad1C[0x158];
     s32 unk174; /* +0x174: src/func_80227014.c */
     char pad178[0x170];
@@ -159,148 +159,11 @@ struct Shared_func_80227014_S11 {
 };
 
 
-typedef struct Shared_func_80227014_S12 Shared_func_80227014_S12;
-struct Shared_func_80227014_S12 {
-    char pad0[0x18];
-    s32 unk18; /* +0x18: src/func_80227014.c */
-};
-
-
-typedef struct Shared_func_80227014_S13 Shared_func_80227014_S13;
-struct Shared_func_80227014_S13 {
-    char pad0[0x8];
-    CVector3 position; /* +0x8: actor position, shared player provider and sound CVector3 argument. */
-    char pad14[0x4];
-    struct Shared_func_80227014_S17 * unk18; /* +0x18: src/func_80227014.c */
-    char pad1C[0x158];
-    s32 unk174; /* +0x174: src/func_80227014.c */
-    char pad178[0x170];
-    s8 unk2E8; /* +0x2E8: src/func_80227014.c */
-    char pad2E9[0x16F];
-    s8 unk458; /* +0x458: src/func_80227014.c */
-    char pad459[0x17B];
-    s32 unk5D4; /* +0x5D4: src/func_80227014.c */
-    struct Shared_func_80227014_S15 * unk5D8; /* +0x5D8: src/func_80227014.c */
-    void * unk5DC; /* +0x5DC: src/func_80227014.c */
-    char pad5E0[0x4];
-    s32 unk5E4; /* +0x5E4: src/func_80227014.c */
-    char pad5E8[0x4];
-    s32 unk5EC; /* +0x5EC: src/func_80227014.c */
-    char pad5F0[0x348];
-    char unk938[2172]; /* +0x938: src/func_80227014.c */
-    s32 unk11B4; /* +0x11B4: src/func_80227014.c */
-    char pad11B8[0x298];
-    s32 unk1450; /* +0x1450: src/func_80227014.c */
-};
-
-
-typedef struct Shared_func_80227014_S14 Shared_func_80227014_S14;
-struct Shared_func_80227014_S14 {
-    char pad0[0x29C];
-    f32 unk29C; /* +0x29C: src/func_80227014.c */
-    f32 unk2A0; /* +0x2A0: src/func_80227014.c */
-    f32 unk2A4; /* +0x2A4: src/func_80227014.c */
-    f32 unk2A8; /* +0x2A8: src/func_80227014.c */
-    char pad2AC[0x2B8];
-    s32 unk564; /* +0x564: src/func_80227014.c */
-};
-
-
-typedef struct Shared_func_80227014_S15 Shared_func_80227014_S15;
-struct Shared_func_80227014_S15 {
-    char pad0[0x8F];
-    u8 unk8F; /* +0x8F: src/func_80227014.c */
-};
-
-
-typedef struct Shared_func_80227014_S16 Shared_func_80227014_S16;
-struct Shared_func_80227014_S16 {
-    char pad0[0x80];
-    s8 unk80; /* +0x80: src/func_80227014.c */
-    char pad81[0xE];
-    u8 unk8F; /* +0x8F: src/func_80227014.c */
-    char pad90[0x4];
-    u8 unk94; /* +0x94: src/func_80227014.c */
-};
-
-
-typedef struct Shared_func_80227014_S17 Shared_func_80227014_S17;
-struct Shared_func_80227014_S17 {
-    char pad0[0x18];
-    s32 unk18; /* +0x18: src/func_80227014.c */
-};
-
-
-typedef struct Shared_func_80227014_S18 Shared_func_80227014_S18;
-struct Shared_func_80227014_S18 {
-    char pad0[0x8];
-    CVector3 position; /* +0x8: actor position, shared player provider and sound CVector3 argument. */
-    char pad14[0x4];
-    struct Shared_func_80227014_S23 * unk18; /* +0x18: src/func_80227014.c */
-    char pad1C[0x158];
-    s32 unk174; /* +0x174: src/func_80227014.c */
-    char pad178[0x170];
-    s8 unk2E8; /* +0x2E8: src/func_80227014.c */
-    char pad2E9[0x16F];
-    s8 unk458; /* +0x458: src/func_80227014.c */
-    char pad459[0x17B];
-    s32 unk5D4; /* +0x5D4: src/func_80227014.c */
-    struct Shared_func_80227014_S21 * unk5D8; /* +0x5D8: src/func_80227014.c */
-    void * unk5DC; /* +0x5DC: src/func_80227014.c */
-    char pad5E0[0x4];
-    s32 unk5E4; /* +0x5E4: src/func_80227014.c */
-    char pad5E8[0x4];
-    s32 unk5EC; /* +0x5EC: src/func_80227014.c */
-    char pad5F0[0x348];
-    char unk938[2172]; /* +0x938: src/func_80227014.c */
-    s32 unk11B4; /* +0x11B4: src/func_80227014.c */
-    char pad11B8[0x298];
-    s32 unk1450; /* +0x1450: src/func_80227014.c */
-};
-
-
 typedef struct Shared_func_80227014_S19 Shared_func_80227014_S19;
 struct Shared_func_80227014_S19 {
     char pad0[0x8F];
     u8 unk8F; /* +0x8F: src/func_80227014.c */
     s8 unk90; /* +0x90: src/func_80227014.c */
-};
-
-
-typedef struct Shared_func_80227014_S20 Shared_func_80227014_S20;
-struct Shared_func_80227014_S20 {
-    char pad0[0x29C];
-    f32 unk29C; /* +0x29C: src/func_80227014.c */
-    f32 unk2A0; /* +0x2A0: src/func_80227014.c */
-    f32 unk2A4; /* +0x2A4: src/func_80227014.c */
-    f32 unk2A8; /* +0x2A8: src/func_80227014.c */
-    char pad2AC[0x2B8];
-    s32 unk564; /* +0x564: src/func_80227014.c */
-};
-
-
-typedef struct Shared_func_80227014_S21 Shared_func_80227014_S21;
-struct Shared_func_80227014_S21 {
-    char pad0[0x8F];
-    u8 unk8F; /* +0x8F: src/func_80227014.c */
-};
-
-
-typedef struct Shared_func_80227014_S22 Shared_func_80227014_S22;
-struct Shared_func_80227014_S22 {
-    char pad0[0x80];
-    s8 unk80; /* +0x80: src/func_80227014.c */
-    char pad81[0xE];
-    u8 unk8F; /* +0x8F: src/func_80227014.c */
-    char pad90[0x4];
-    u8 unk94; /* +0x94: src/func_80227014.c */
-};
-
-
-typedef struct Shared_func_80227014_S23 Shared_func_80227014_S23;
-struct Shared_func_80227014_S23 {
-    char pad0[0x18];
-    s32 unk18; /* +0x18: src/func_80227014.c */
 };
 
 

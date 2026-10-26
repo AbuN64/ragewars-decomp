@@ -41,23 +41,7 @@ typedef struct Shared_func_80227014_S10 func_80227014_S10;
 
 typedef struct Shared_func_80227014_S11 func_80227014_S11;
 
-typedef struct Shared_func_80227014_S13 func_80227014_S13;
-
-typedef struct Shared_func_80227014_S14 SharedRecAt564V2;
-
-typedef struct Shared_func_80227014_S10 func_80227014_S15;
-
-typedef struct Shared_func_80227014_S16 func_80227014_S16;
-
-typedef struct Shared_func_80227014_S18 func_80227014_S18;
-
 typedef struct Shared_func_80227014_S19 func_80227014_S19;
-
-typedef struct Shared_func_80227014_S20 SharedRecAt564V4;
-
-typedef struct Shared_func_80227014_S10 func_80227014_S21;
-
-typedef struct Shared_func_80227014_S22 func_80227014_S22;
 
 
 void func_80218464_de(void *);
@@ -165,18 +149,18 @@ void Player_UpdateFragTagSelection(s8 *world) {
     s8 flippedCharacter;
     s32 playerIndex;
     func_80227014_S11 *rotatingPlayerProfile;
-    func_80227014_S16 *chosenPlayerProfile;
+    func_80227014_S11 *chosenPlayerProfile;
     SharedRecAt564V1 *allPlayersView;
     SharedRecAt564V3 *rotatingView;
-    SharedRecAt564V2 *chosenView;
-    SharedRecAt564V4 *flippedView;
-    func_80227014_S18 *flippedPlayer;
+    SharedRecAt564V3 *chosenView;
+    SharedRecAt564V3 *flippedView;
+    func_80227014_S8 *flippedPlayer;
     func_80227014_S2 *player;
     func_80227014_S8 *rotatingPlayer;
-    func_80227014_S13 *chosenPlayer;
+    func_80227014_S8 *chosenPlayer;
     func_80227014_S3 *playerProfile;
     func_80227014_S19 *priorFlipProfile;
-    func_80227014_S22 *flippedProfile;
+    func_80227014_S11 *flippedProfile;
 
     if ((Cinema_IsSequenceActive() == 0) && (Cinema_IsSequenceInWindow() == 0) && ((initial_rules = &D_801462C8.counters)->m_bFragTagOn != 0)) {
         if ((Player_CheckTotalScoreWin(world) != 0) && (initial_rules->elapsed == 0)) {
