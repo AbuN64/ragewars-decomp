@@ -113,7 +113,7 @@ Acmd *func_802C31C0(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acm
 #endif
 
 #if defined(VERSION_DE)
-Acmd *func_802BE0D0_de(ALLoadFilter48_2 *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
+Acmd *alAdpcmPull(ALLoadFilter48_2 *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
     s16 inp;
@@ -241,7 +241,7 @@ Acmd *func_802BE0D0_de(ALLoadFilter48_2 *filter, s16 *outp, s32 outCount, s32 sa
 #if defined(VERSION_EU)
 #include "sdk/ACMD.H"
 
-Acmd *func_802BE370_eu(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) 
+Acmd *alAdpcmPull(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) 
 {
     Acmd        *ptr = p;
     s16         inp;
