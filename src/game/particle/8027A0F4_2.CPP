@@ -139,7 +139,7 @@ void Particle_UpdateTypedMotion(Shared_Particle *arg0)
   void *particleDescriptor;
   func_8027ADBC_S3 *attractionTarget;
   void *temp_s0_2; 
-  func_8027ADBC_S6 *temp_s0_4;
+  func_8027ADBC_S3 *temp_s0_4;
   void *temp_s0_5;
   void *temp_s2; 
   void *var_a0;

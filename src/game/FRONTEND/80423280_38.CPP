@@ -196,7 +196,6 @@ found4:;
 #include "FRONTEND/8041BEA8_6.H"
 
 typedef struct PreviewSettings { char pad[13]; u8 mode; char padE[0xC2]; struct EntryFrontendRefreshTrialCharacterPreview entries[4]; } PreviewSettings;
-typedef struct PreviewScreen { char pad[0x20]; char preview[0xA24]; s32 record; char padA48[0x14]; s32 player; } PreviewScreen;
 typedef struct PreviewRecord { char pad[4]; u8 kind; } PreviewRecord;
 typedef struct PreviewRow { s32 pad; f32 scale[4],distance[4]; CVector3 position[4]; s32 light[4]; char tail[12]; } PreviewRow;
 extern void Frontend_FillTrialPresetWeaponRows(s32,PreviewSettings *);

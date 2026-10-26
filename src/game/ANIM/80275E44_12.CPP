@@ -7,7 +7,6 @@
 #include "FX_2/80271B18.H"
 
 #define SK_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
-typedef struct SkelVec { f32 x; f32 y; f32 z; } SkelVec;
 extern s32 D_801462C8;
 extern void GraphU64_IdentityMatrix(void *);
 extern void RollMatrix(void *, f32);
@@ -19,13 +18,13 @@ extern void TranslateMatrix(void *, f32, f32, f32);
 extern void GraphU64_InvertAffineMatrix(void *, void *);
 extern void Region_ComputePointBounds(void *, s32, void *);
 void Lighting_DecodeBoxTransform(u8 *self, u8 *src) {
-    SkelVec translation;
-    SkelVec rotation;
-    SkelVec scale;
-    SkelVec corners[8];
-    SkelVec up;
-    SkelVec tilt;
-    SkelVec probe;
+    CVector3 translation;
+    CVector3 rotation;
+    CVector3 scale;
+    CVector3 corners[8];
+    CVector3 up;
+    CVector3 tilt;
+    CVector3 probe;
     u8 *matrix;
     s32 inside;
     s32 i;

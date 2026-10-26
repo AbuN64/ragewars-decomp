@@ -1,3 +1,4 @@
+#include "COMMON/LOCALDECODERANGE.H"
 #include "include_asm.h"
 #include "SCENE/SIMPLE_INSTANCE_RECORD.H"
 #include "COMMON/WORLD.H"
@@ -53,10 +54,6 @@ void Scene_DispatchEnabledEntityTrigger(WorldSceneDispatchEnabledEntityTrigger *
 #include "COMMON/EXTERNS_14.H"
 
 /* A resource's block set: the count of blocks and the byte offset of each from the set's start. */
-typedef struct BlockSet {
-    s32 count;
-    s32 offsets[1];
-} BlockSet;
 
 /* A run of equal-sized records: record size, count, then the records. */
 typedef struct RecordSet {
@@ -125,7 +122,7 @@ static inline s32 Engine_TestInstanceBit(Shared_World *world, SimpleInstance *in
 void Scene_BuildPlacedInstances(Shared_World *world, void ***handle) {
     ObjectRecAtBC *volumeList[128];
     CVector3 position;
-    BlockSet *bitSet;
+    Pack *bitSet;
     RecordSet *efficientSet;
     RecordSet *simpleSet;
     RecordSet *volumeSet;
@@ -141,10 +138,10 @@ void Scene_BuildPlacedInstances(Shared_World *world, void ***handle) {
     SimpleInstance *simples;
     char *segments;
     void **block;
-    BlockSet *source;
+    Pack *source;
     RecordSet *staticSet;
     s32 efficientCount;
-    BlockSet *blocks;
+    Pack *blocks;
     char *dst;
     s32 offset;
     s32 n;
