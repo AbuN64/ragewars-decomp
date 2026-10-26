@@ -12,6 +12,6 @@ struct Player1680 {
 };
 struct World24 {
     char pad0[0x20];
-    SharedPlayer16E4 *players;
+    SharedPlayer *players;
 };
 #endif
