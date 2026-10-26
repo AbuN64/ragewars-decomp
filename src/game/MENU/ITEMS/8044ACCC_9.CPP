@@ -7,6 +7,10 @@
 #include "COMMON/S1.H"
 #include "TYPES.H"
 #include "RESMGR/802A0888.H"
+#include "MENU/8044ACCC.H"
+#include "COMMON/SHAREDPLAYER.H"
+#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/80255C40_7.H"
 
 /* Initializes camera transforms, viewport state, clipping records, and resource lists. */
 
@@ -208,4 +212,75 @@ void Items_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
     for (i = 0; i < owner->smallCount; i++) {
         func_80255D14_de(&owner->smallList, &owner->small[i]);
     }
+}
+
+/* Resets a 0x1208-byte actor: clears it through XPlus_FillMemory, initialises its three lists at 0xC,
+   0x20 and 0xF24 through func_80255CA0_de, sets its words at 0x1200 and 0x38 to 1 and 2, clears those at
+   0 to 8 and 0xF18 to 0xF20, and resets the parts at offset 0x40 through func_8044A170_de and
+   Camera_UpdateViewProjectionAndEffects. */
+
+void func_8044A170_de(GameplayCamera *arg0);
+
+extern void Camera_UpdateViewProjectionAndEffects(void *);
+
+/* Updates each of the group's items (count at 0x8, 0xED8-byte records from the address at 0x4) through
+   the block at 0x570 of each, then the group's own block at 0x5B0, all with func_8044A7D0_de. */
+
+
+extern void Items_InitEntryPool(char *);
+
+void Items_ResetPlayers(func_8044B27C_S1 *actor) {
+    char *parts;
+
+    XPlus_FillMemory(actor, 0, 0x1208);
+    func_80255CA0_de(&actor->unkC, 0, 4);
+    func_80255CA0_de(&actor->unk20, 0, 4);
+    func_80255CA0_de(&actor->unkF24, 0, 4);
+    parts = &actor->unk40;
+    actor->unk1200 = 1;
+    actor->unk0 = 0;
+    actor->unk4 = 0;
+    actor->unk8 = 0;
+    actor->unkF18 = 0;
+    actor->unkF1C = 0;
+    actor->unkF20 = 0;
+    actor->unk38 = 2;
+    func_8044A170_de(parts);
+    Camera_UpdateViewProjectionAndEffects(parts);
+}
+
+void Items_InitGroupPools(Triple *group) {
+    int i;
+
+    for (i = 0; i < group->z; i++) {
+        Items_InitEntryPool((char *)(i * 0xED8 + group->y + 0x570));
+    }
+    Items_InitEntryPool((char *)group + 0x5B0);
+}
+
+/* Detaches the object at offset 0xC of an owner: when there is one, finalises it through
+   func_8044A170_de and removes it from the lists at offsets 0xC and 0x20 through func_80255ED8_de and
+   func_80255D14_de. Returns the object. */
+
+
+
+/* Calls func_80255ED8_de on offset 0x20 of an object and func_80255CB8_de on offset 0xC with the second
+   argument. */
+
+
+
+void *Items_RecycleModel(struct Draw *owner) {
+    void *object = owner->model;
+
+    if (object != 0) {
+        func_8044A170_de(object);
+        func_80255ED8_de(&owner->model, object);
+        func_80255D14_de(&owner->recycled, object);
+    }
+    return object;
+}
+
+void func_8044A790_de(char *object, void *value) {
+    func_80255ED8_de(object + 0x20, value);
+    func_80255CB8_de(object + 0xC, value);
 }
