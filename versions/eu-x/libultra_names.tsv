@@ -132,6 +132,8 @@ vram	name	basis
 0x802BB830	osSetEventMesg	machine code
 0x802BAF70	osCreateThread	machine code
 0x802BBA30	osStartThread	machine code
+0x802BD1F0	__osGetFpcCsr	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/os/getfpccsr.s; reviewed source correspondence (func_802BCF10_de)
+0x802BE3A0	_Ldtob	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/libc/xldtob.c; reviewed source correspondence (func_802BE0C0_de)
 0x80449F8C	__osCheckId	machine code
 0x80448110	__osPfsGetStatus	machine code
 0x804495F0	__osRepairPackId	machine code

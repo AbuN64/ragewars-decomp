@@ -130,6 +130,8 @@ vram	name	basis
 0x802BB420	osSendMesg	machine code
 0x802BCF30	__osDisableInt	machine code
 0x802BB550	osSetEventMesg	machine code
+0x802BCF10	__osGetFpcCsr	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/os/getfpccsr.s; reviewed source correspondence (func_802BCF10_de)
+0x802BE0C0	_Ldtob	libreultra 1aca5c13ca041cef86f8dc194b727361dad9c09b src/libc/xldtob.c; reviewed source correspondence (func_802BE0C0_de)
 0x802BAC90	osCreateThread	machine code
 0x802BB750	osStartThread	machine code
 0x80448BFC	__osCheckId	machine code
