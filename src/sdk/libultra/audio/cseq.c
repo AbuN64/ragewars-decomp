@@ -88,7 +88,7 @@ static inline void alCSeqNextEvent(ALCSeq_s *seq, ALEvent *evt)
     *deltaFlag = 1;
 }
 
-void func_802AE290_de(ALCSeq_s *seq, ALCSeqMarker *m, u32 ticks)
+void alCSeqNewMarker(ALCSeq_s *seq, ALCSeqMarker *m, u32 ticks)
 {
     ALEvent evt;
     ALCSeq_s tempSeq;
