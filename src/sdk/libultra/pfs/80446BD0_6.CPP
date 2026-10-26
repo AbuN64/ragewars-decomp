@@ -37,7 +37,7 @@ s32 osPfsFileState(OSPfs *pfs, s32 file_no, NoteState *state)
 
     if ((pfs->status & 1) == 0)
         return 5;
-    if (func_80448BFC_de(pfs) == 2)
+    if (__osCheckId(pfs) == 2)
         return 2;
     if (pfs->activebank != 0) {
         pfs->activebank = 0;

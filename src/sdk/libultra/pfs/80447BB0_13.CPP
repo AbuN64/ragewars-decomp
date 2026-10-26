@@ -44,7 +44,7 @@ s32 Pfs_ReadWriteFile(OSPfs* pfs, s32 file_no, u8 flag, int offset, int size_in_
         return 5;
     }
     if((pfs->status&1)==0) return 5;
-    if(func_80448BFC_de(pfs)==2) return 2;
+    if(__osCheckId(pfs)==2) return 2;
     if(pfs->activebank!=0) {pfs->activebank=0;ret=Pfs_SelectActiveBank(pfs); if(ret!=0) return ret;} (void)0;
     ret=func_802B84C0_de(pfs->queue, pfs->channel, pfs->dir_table + file_no, (u8*)&dir); if(ret!=0) return ret;
     if (dir.company_code == 0 || dir.game_code == 0) {

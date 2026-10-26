@@ -51,7 +51,7 @@ s32 osPfsAllocateFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name
         return 5;
     }
 
-    if (func_80448BFC_de(pfs) == 2)
+    if (__osCheckId(pfs) == 2)
         return 2;
 
     if (((ret = osPfsFindFile(pfs, company_code, game_code, game_name, ext_name, file_no)) != 0) &&
@@ -272,7 +272,7 @@ s32 osPfsDeleteFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, 
 
     if ((pfs->status & 1) == 0)
         return 5;
-    if (func_80448BFC_de(pfs) == 2)
+    if (__osCheckId(pfs) == 2)
         return 2;
     if (pfs->activebank != 0) {
         pfs->activebank = 0;

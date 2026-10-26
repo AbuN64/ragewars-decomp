@@ -14,7 +14,7 @@
 
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
 
-s32 func_80448BFC_de(OSPfs *pfs)
+s32 __osCheckId(OSPfs *pfs)
 {
     int k;
     u8 temp[32];
@@ -46,14 +46,14 @@ s32 func_80448BFC_de(OSPfs *pfs)
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80448BFC_de);
+INCLUDE_ASM("ovl_80400000", __osCheckId);
 #endif
 #endif
 
 #if !(defined(VERSION_DE))
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
 
-s32 func_80448BFC_de(OSPfs *pfs)
+s32 __osCheckId(OSPfs *pfs)
 {
     int k;
     u8 temp[32];

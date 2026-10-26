@@ -109,7 +109,7 @@ s32 osPfsFindFile(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8
     s32 ret = 0;
     int fail;
 
-    if (func_80448BFC_de(pfs) == 2)
+    if (__osCheckId(pfs) == 2)
         return 2;
 
     for (j = 0; j < pfs->dir_size; j++) {

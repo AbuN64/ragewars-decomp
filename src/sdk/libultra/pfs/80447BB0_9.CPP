@@ -146,7 +146,7 @@ s32 osPfsChecker(OSPfs *pfs)
     s32 cl;
     int offset;
 
-    ret = func_80448BFC_de(pfs);
+    ret = __osCheckId(pfs);
 
     if (ret == 2) {
         ret = __osGetId(pfs);

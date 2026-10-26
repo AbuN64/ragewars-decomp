@@ -28,7 +28,7 @@ s32 osPfsFreeBlocks(OSPfs *pfs, s32 *bytes_not_used)
 
     if ((pfs->status & 1) == 0)
         return 5;
-    if (func_80448BFC_de(pfs) == 2)
+    if (__osCheckId(pfs) == 2)
         return 2;
     for (bank = 0; bank < pfs->banks; bank++) {
         ret = Pfs_ReadWriteInode(pfs, &inode, 0, bank);
